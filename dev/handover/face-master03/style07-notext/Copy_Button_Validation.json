@@ -1,0 +1,32 @@
+{
+  "test": "Local DOM/clipboard handler simulation; not a live Magnific or device test",
+  "jobs": 445,
+  "unique_current_job_ids": 445,
+  "embedded_style_hash_verified": true,
+  "results": [
+    {
+      "mode": "clipboard",
+      "complete_job_prompt_copies": 445,
+      "explicit_failure_passed": false,
+      "passed": true
+    },
+    {
+      "mode": "fallback",
+      "complete_job_prompt_copies": 445,
+      "explicit_failure_passed": false,
+      "passed": true
+    },
+    {
+      "mode": "rejected",
+      "complete_job_prompt_copies": 445,
+      "explicit_failure_passed": false,
+      "passed": true
+    },
+    {
+      "mode": "failure",
+      "complete_job_prompt_copies": 0,
+      "explicit_failure_passed": true,
+      "passed": true
+    }
+  ]
+}

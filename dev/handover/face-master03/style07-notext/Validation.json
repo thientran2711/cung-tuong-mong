@@ -1,0 +1,34 @@
+{
+  "date": "11/25/2026",
+  "families": 6,
+  "ages": [
+    16,
+    26,
+    39,
+    51,
+    63
+  ],
+  "active_identities": 89,
+  "excluded_source_ids": [
+    "m05"
+  ],
+  "jobs": 445,
+  "templates": 30,
+  "jobs_by_family": {
+    "Gentle": 70,
+    "Dignified": 60,
+    "Sharp": 75,
+    "Proud": 75,
+    "Cold": 75,
+    "Alluring": 90
+  },
+  "same_identity_family_age_roster_as_parent": true,
+  "original_identity_hashes_unchanged": true,
+  "fixed_style_sha256": "8fe02d490623e60b3a9dd9afef2837a67ebd4f4627388ceb6cec2278bb51fc59",
+  "successful_S56_painting_block_reused_exactly": true,
+  "generation_payloads_with_cosmetic_directives": 0,
+  "source_validation_only": true,
+  "batch_jobs_rendered_in_this_export": 0,
+  "upright_head_render_validation": "PENDING",
+  "all_family_age_render_validation": "PENDING"
+}

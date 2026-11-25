@@ -1,0 +1,10 @@
+FACE90 / MAGNIFIC — STYLE07 — 11/25/2026
+Open Open_Prompts.html. Choose the family, original identity and age. Copy prompt copies the complete selected job text with one click. Copy family handoff gives the existing Claude slot instructions. The fixed style PNG is embedded in the HTML and included separately at References/Style/Painting_Style_Master_35239.png.
+Current scope: 89 active identities x 5 ages = 445 jobs, from the user's ninety-character collection. M05 remains excluded. There are 30 reusable family/age templates and 445 complete mapped job prompts, with one current prompt per identity/age. All older source variants remain in earlier deliveries, not as competing current recipes here.
+IMAGE 1: Use the exact original PNG already available to Claude. IMAGE 2: Use the included new painting/skin/light reference, not the old Face_Style_Master_No_Text.png. No original identity PNG is packaged again. No intermediate portrait or third image is needed.
+All age and personality rules are inherited from the verified current parent prompts, with cosmetic directives omitted and the adolescent Alluring expression kept age-appropriate. Age 39 has zero wrinkles; Gentle/Dignified age 39 keep their existing visual-age 35–36 scope. The successful S56 painting block is reused exactly. Head-direction instructions are strengthened; upright head compliance remains subject to output review.
+The user asked for Magnific, not Mac mini. This is a prompt-and-job export for the existing Claude/Magnific workflow, not an API script or a claim of completed generations. Only the S56 drawing-style comparison was rendered and user-approved; the 445 mapped age jobs have not been run.
+Read Runner_Instructions.txt and the assigned family instructions before executing. Use a Magnific model/mode that accepts both images and the complete prompt. Keep existing authorized settings; flag unsupported combinations rather than substituting inputs or truncating the prompt.
+Official platform references, checked 11/25/2026:
+https://www.magnific.com/ai/docs/your-first-ai-image
+https://www.magnific.com/ai/docs/image-models-and-modes

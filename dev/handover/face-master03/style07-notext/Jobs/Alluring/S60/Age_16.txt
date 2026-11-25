@@ -1,0 +1,38 @@
+PROMPT ID: FACE90-ALLURING-S60-AGE16-STYLE07-01
+PERSONALITY FAMILY: ALLURING
+TARGET AGE: 16
+INPUT: Attach exactly TWO actual images in the stated order. Do not substitute an earlier portrait rendering for the original identity image.
+IMAGE 1: s60.png, the original existing individual from the user's ninety-character collection. This image supplies individual identity.
+IMAGE 2: Painting_Style_Master_35239.png, the fixed preferred portrait supplied with this package. This image supplies drawing and painting technique, actual skin-color rendering and light.
+
+Create ONE newly painted chest-up portrait of the SAME PARTICULAR individual in IMAGE 1 at age 16, using the visual drawing language of IMAGE 2 throughout the entire portrait. Keep her identity while changing how she is drawn and painted. Do not invent a different character or blend the two women's faces. Resolve identity, target age, personality and painting in this one generation; no intermediate portrait is required.
+
+IDENTITY:
+Keep S60 recognizable through her particular facial outline, eyes, brows, nose, mouth, chin and their relationships. Preserve her individual dark hairstyle character and natural facial asymmetry. The age development below may change soft tissue coherently while she stays the same person. Do not copy IMAGE 2's individual face, age, expression, hairstyle, beauty-mark position or caption. IMAGE 1 is an identity source, not the master for brushwork, skin rendering, head angle or composition.
+
+PHYSICAL AGE — SHARED ACROSS ALL SIX FAMILIES:
+Represent this same individual at SIXTEEN. Use coherent adolescent soft tissue:a relatively compact developing lower face,fresh soft lower cheeks,a short delicately rounded chin and light brow-to-lid modeling. Retain her particular eye design,spacing,nose and mouth identity while showing the earlier teenage stage naturally. Keep individually recognizable human eyes,not giant doll eyes;no infant,chibi or generic child face. She should read as a teenager with hair,jewelry and caption ignored. No settled mature eye sockets,long sculpted lower face,aging lines,gray hair or carved cheek planes. All personality is youthful and age-appropriate. No adult seduction or sexualized expression,clothing or pose.
+
+PERSONALITY AND EXPRESSION — SEPARATE FROM IDENTITY:
+Preserve this particular girl's individual eye design and lip shape. Convey youthful lively charm, playful self-assurance, responsive eyes and a small spontaneous smile. Keep animation rather than a blank stare, a broad reassuring grin or a rigid smirk. Keep this portrayal appropriate for a teenager, without adult seduction, sexualization or mature glamour.
+Painting softness describes the medium, not a shared temperament. Keep the assigned personality in the eyes and subtle expression; do not make every family Gentle or use a head tilt or chin lift to signify personality.
+
+EXCLUSIVE BEAUTY-MARK RULE:
+Keep exactly ONE tiny elegant eye-area beauty mark. If the source already has one near the eye,preserve that exact position. Otherwise add one small mark just below the outer eye corner on the viewer's right. No second mark. No mole near the nose,mouth,central cheek,ear or far lateral temple.
+
+DRAWING AND PAINTING — FOLLOW IMAGE 2 VISUALLY:
+Use IMAGE 2 as the direct visual master for facial linework, eyelid and lash strokes, softly painted irises, treatment of brows and lips, skin-color transitions, shadow shapes, highlights, hair brushwork, fabric rendering, detail density and edge softness. These are rendering instructions, independent of which person's face is being depicted.
+Draw and paint her afresh with that same refined hand-painted 2D guofeng anime finish. Use delicate controlled contours, translucent layered colors, soft readable facial volume and fine illustrated hair strokes. Keep clear expressive eyes and a fresh appealing painted face. Avoid carrying over IMAGE 1's original rendering technique, surface texture, highlight pattern or color grade simply because its identity is being retained. Do not paste a face cutout from IMAGE 1 into a differently painted portrait.
+Match IMAGE 2's actual visible complexion: fair luminous ivory-peach skin, gentle integrated rosy color, clear midtones, delicate highlights and soft colored shadows. Keep that complexion coherent across the face, ears and neck. Match its soft diffuse daylight and balanced exposure. Preserve the adult woman's own facial volume within that painted treatment. Do not borrow an orange or violet cast from IMAGE 1's clothing. Avoid gray or chalky skin, bleached midtones, an overall pink or orange filter, exaggerated cheek circles or a global saturation increase.
+Keep the result entirely illustrated 2D, with no photographic skin texture, CGI, glossy 3D, plastic smoothing, oily shine or heavy black outlines.
+
+MANDATORY HEAD ORIENTATION:
+Reorient the head upright and facing forward, independently of the source's head bearing. The line between the eye centers is horizontal; the forehead center, nose bridge and chin follow a vertical central head axis in the picture. Keep the chin neutral, neck relaxed and shoulders at ease. Preserve natural facial asymmetry without inheriting sideways head roll, a lifted chin, a lowered chin or a strained neck. Head angle is not an identity trait for this portrait. Keep the expression alive and natural.
+
+COMMON IVORY PORTRAIT PRESENTATION:
+Frame one woman from above her complete hairstyle and hair ornament to the upper chest, with a generous readable face, both eyes, chin, natural neck, shoulders and embroidered collar visible. Use IMAGE 2's close portrait scale and illustrated finish. Crop out hands, waist and any fan, lantern, book, brush, flower or scroll.
+Use an ivory Chinese-inspired portrait robe with graceful overlapping lapels and delicate pale-gold floral embroidery following the folds. Use refined light-gold floral hair ornaments, ivory blossoms and restrained pearl-drop earrings around her own hairstyle. Render them with IMAGE 2's painting technique, without copying its specific hairstyle. No imperial crown or rank badge. This neutral face-study ensemble does not assign a game rank or seasonal costume.
+Use a plain warm-ivory background and a softly fading lower portrait edge. Do not retain a transparent or black source background. No full-body sheet, comparison panels, interface, decorative frame or watermark.
+
+NO TEXT:
+The image contains no text at all: no caption, name, family, age, prompt ID, filename, label, signature or watermark.

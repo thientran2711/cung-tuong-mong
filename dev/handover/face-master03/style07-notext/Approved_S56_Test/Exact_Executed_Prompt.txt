@@ -1,0 +1,29 @@
+PROMPT ID: FACE90-ALLURING-S56-DUAL-STYLE-07
+CHARACTER: S56, an existing woman in the user's original 90-character collection.
+PERSONALITY: ALLURING.
+AGE: Preserve the adult life stage apparent in IMAGE 1. This test does not assign a numerical age or turn her into the teenage girl in IMAGE 2.
+
+Attach exactly TWO images in this order:
+IMAGE 1: s56.png, the original woman wearing an orange robe and lavender skirt and holding a small red lantern. This image supplies her individual identity.
+IMAGE 2: the preferred close portrait of the girl with a high dark hairstyle, ivory floral ornaments, fair rosy skin and a softly closed smile. This image supplies the DRAWING AND PAINTING STYLE, SKIN-COLOR TREATMENT AND LIGHT.
+
+Create ONE newly painted chest-up portrait of the SAME adult woman from IMAGE 1, using the visual drawing language of IMAGE 2 throughout the entire portrait. Keep her identity while changing how she is drawn and painted. Do not invent a different character or blend the two women's faces.
+
+IDENTITY:
+Keep S56 recognizable through her particular facial outline, eyes, brows, nose, smiling mouth, chin and their relationships. Preserve her individual dark hairstyle character and her tiny eye-area beauty mark in its original position. Keep her engaging eye contact and lively, lightly knowing smile. Do not copy IMAGE 2's individual face, beauty-mark position, teenage age or hairstyle. Keep exactly one beauty mark.
+
+DRAWING AND PAINTING — FOLLOW IMAGE 2 VISUALLY:
+Use IMAGE 2 as the direct visual master for facial linework, eyelid and lash strokes, softly painted irises, treatment of brows and lips, skin-color transitions, shadow shapes, highlights, hair brushwork, fabric rendering, detail density and edge softness. These are rendering instructions, independent of which person's face is being depicted.
+Draw and paint her afresh with that same refined hand-painted 2D guofeng anime finish. Use delicate controlled contours, translucent layered colors, soft readable facial volume and fine illustrated hair strokes. Keep clear expressive eyes and a fresh appealing painted face. Avoid carrying over IMAGE 1's original rendering technique, surface texture, highlight pattern or color grade simply because its identity is being retained. Do not paste a face cutout from IMAGE 1 into a differently painted portrait.
+Match IMAGE 2's actual visible complexion: fair luminous ivory-peach skin, gentle integrated rosy color, clear midtones, delicate highlights and soft colored shadows. Keep that complexion coherent across the face, ears and neck. Match its soft diffuse daylight and balanced exposure. Preserve the adult woman's own facial volume within that painted treatment. Do not borrow an orange or violet cast from IMAGE 1's clothing. Avoid gray or chalky skin, bleached midtones, an overall pink or orange filter, exaggerated cheek circles or a global saturation increase.
+Keep the result entirely illustrated 2D, with no photographic skin texture, CGI, glossy 3D, plastic smoothing, oily shine or heavy black outlines.
+
+EXPRESSION AND PORTRAIT PRESENTATION:
+Let her adult Alluring personality appear in responsive eyes, expressive mouth corners and composed playful self-assurance. Keep her individual facial response, without replacing it with a generic Gentle expression. Do not communicate personality through a tilted head or raised chin.
+Keep her head upright, eye line level, chin neutral and neck relaxed. Reorient the head naturally while preserving her identity. Frame her from above the complete hairstyle and hair ornament to the upper chest, with a generous readable face, both eyes, chin, neck, shoulders and embroidered collar visible. Use the close portrait scale of IMAGE 2. Crop out the hands, lantern and waist.
+Use an ivory Chinese-inspired portrait robe with graceful overlapping lapels and delicate pale-gold floral embroidery following the folds. Use refined light-gold floral hair ornaments, ivory blossoms and restrained pearl-drop earrings around S56's own hairstyle. Render them with IMAGE 2's painted technique. No imperial crown or rank badge.
+Use a plain warm-ivory background and softly fading lower portrait edge. Do not retain the source cutout's transparent or black background. No full-body sheet, comparison panels, interface, decorative frame or watermark.
+
+Below the portrait print only:
+Alluring | S56 | Style test
+Do not print a numerical age, prompt ID or any other text.

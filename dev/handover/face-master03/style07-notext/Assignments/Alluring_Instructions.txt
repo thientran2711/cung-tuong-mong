@@ -1,0 +1,6 @@
+ASSIGNED SLOT: Alluring
+SOURCE IDS: S16, S17, S18, S33, S34, S35, S36, S37, S38, S43, S44, S45, S56, S57, S58, S59, S61, S60
+AGES: 16, 26, 39, 51, 63
+PLANNED JOBS: 90
+JOB LIST: Assignments/Alluring_Jobs.json
+Use the exact full per-job prompt file and both actual images for each assigned job. IMAGE 1 is the original identity; IMAGE 2 is References/Style/Painting_Style_Master_35239.png. Use the existing authorized Magnific workflow and record actual results. Preserve accepted output files; no generation was executed while preparing this export.

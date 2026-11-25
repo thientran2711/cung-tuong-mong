@@ -1,0 +1,6 @@
+ASSIGNED SLOT: Sharp
+SOURCE IDS: M09, C05, C06, C11, C14, C19, C27, C31, S07, S08, S09, S39, S40, S41, S42
+AGES: 16, 26, 39, 51, 63
+PLANNED JOBS: 75
+JOB LIST: Assignments/Sharp_Jobs.json
+Use the exact full per-job prompt file and both actual images for each assigned job. IMAGE 1 is the original identity; IMAGE 2 is References/Style/Painting_Style_Master_35239.png. Use the existing authorized Magnific workflow and record actual results. Preserve accepted output files; no generation was executed while preparing this export.
