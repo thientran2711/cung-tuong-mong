@@ -1650,7 +1650,7 @@ F flight2 life runners slots 1-6 + co-op pair (realtap harness 58013849) | dev/h
 B co-op RERUN U1 (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U1-* | B | session_01N1tNP2F2Lg3DaJ7NAAGZfq | DONE (LIFE DONE 12:59Z age 30, VALID) | 25/11 06:15Z |
 B co-op RERUN U2 (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U2-* | B | session_01N1tNP4SWCbFDjETsugD3rU | DONE (LIFE DONE 12:59Z age 30, VALID) | 25/11 06:15Z |
 B co-op RERUN U3 (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U3-* | B | session_01N1tNP64GnUphva1hStHgSV | DONE (LIFE DONE 12:59Z age 30, VALID) | 25/11 06:15Z |
-B co-op RERUN U3b (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U3b-* | B | session_01N1tNP6EaANiCTZTgGFPYfd | DONE (LIFE DONE 12:59Z age 30, VALID) | 25/11 06:15Z |
+B co-op RERUN U3b (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U3b-* | B | session_01N1tNP6EaANiCTZTgGFPYfd | DONE+ARCHIVED 25/11 20:53Z (0 VALID / 11 segs; successor U3b-2 2HWuJXKR) | 25/11 06:15Z |
 | MAMA-ONLY-OWN (owner bug 25/11 ~06:55Z) | review/mama-only-own | MAIN 134→135 | session_01V1ZZH4XVMNDnbrc8aMyv9D | DONE (LIFE DONE 12:59Z age 30, VALID) | 25/11 06:45Z |
 selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1uRsuJLYqG34jcUBM (MAIN 135) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T06:50Z
 | E RERUN E-S1 (thd_tho; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S1-* | FOREMAN E (root) | session_01DgYSWpfx9EuQ7nBDWNiLL4 | DONE (LIFE DONE 12:59Z age 30, VALID) | 25/11 06:58Z |
