@@ -1,0 +1,131 @@
+# ES2-R2-greedy-2 (real-tap harness 69e41729, ipad)
+
+| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
+|---|---|---|---|---|---|---|---|---|
+| ES2-R2-greedy-2 | Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi | 25 | 885 | 22888 | 4 | 1 | 116 | — |
+
+## Dead buttons
+
+- .dlg «Tâm trạng · Ta» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795610253674.png
+- .dlg «Tâm trạng · Phi Đậu Ý Hoan» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795610832454.png
+- .dlg «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795622275257.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795622418611.png
+
+## Bugs
+
+- [game] ×1 dialog queue holds 23 copies of «Tâm trạng · Tần Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 24 copies of «Tâm trạng · Tần Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 21 copies of «Tâm trạng · Tần Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 18 copies of «Tâm trạng · Tần Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 15 copies of «Tâm trạng · Tần Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [dead] ×1 close button has no effect: .dlg «Tâm trạng · Ta» «Lui»
+- [stuck] ×66 no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »
+- [game] ×48 softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)
+- [game] ×1 dialog queue holds 9 copies of «Tâm trạng · Phi Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 10 copies of «Tâm trạng · Phi Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Phi Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Phi Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [dead] ×1 close button has no effect: .dlg «Tâm trạng · Phi Đậu Ý Hoan» «Lui»
+- [game] ×1 dialog queue holds 5 copies of «Tâm trạng · Quý nhân Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 6 copies of «Tâm trạng · Quý nhân Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 3 copies of «Tâm trạng · Quý nhân Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=18: Tin chờ người sai đi / Lịch tháng / Chương 1 · Nhập cung, đứng vững / Tin chờ người sai đi / Tin báo / Chương 1 · Nhập cung, đứng vững)
+- [game] ×1 softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Chương 1 · Nhập cung, đứng vững / Tin trong cung buổi này)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Lịch tháng / Chương 2 · Lần đầu được sủng / Lịch tháng / Lịch tháng / Tin báo / Đức)
+- [game] ×1 dialog queue holds 22 copies of «Tâm trạng · Thường tại Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 23 copies of «Tâm trạng · Thường tại Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 20 copies of «Tâm trạng · Thường tại Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 17 copies of «Tâm trạng · Thường tại Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 14 copies of «Tâm trạng · Thường tại Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 11 copies of «Tâm trạng · Thường tại Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Thường tại Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 2 copies of «Tâm trạng · Quý nhân Niên Tịnh Dung» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 29 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 26 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 23 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 20 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 17 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 14 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 11 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Thường tại Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=2: Danh hiệu / Tin trong cung buổi này)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Lịch tháng / Tin báo / Lịch tháng / Chương 2 · Lần đầu được sủng / Lịch tháng / Tin báo)
+- [game] ×1 dialog queue holds 20 copies of «Tâm trạng · Uyển phi Đậu Nguyệt Thiền» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 21 copies of «Tâm trạng · Uyển phi Đậu Nguyệt Thiền» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 18 copies of «Tâm trạng · Uyển phi Đậu Nguyệt Thiền» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 15 copies of «Tâm trạng · Uyển phi Đậu Nguyệt Thiền» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 12 copies of «Tâm trạng · Uyển phi Đậu Nguyệt Thiền» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 9 copies of «Tâm trạng · Uyển phi Đậu Nguyệt Thiền» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 6 copies of «Tâm trạng · Uyển phi Đậu Nguyệt Thiền» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=17: Chương 2 · Lần đầu được sủng / Chương 2 · Lần đầu được sủng / Lịch tháng / Quý tộc kén rể · kén dâu / Tin báo / Tin báo)
+- [game] ×2 softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=23: Chương 3 · Học quy củ trong cung / Chương 3 · Học quy củ trong cung / Chương 3 · Học quy củ trong cung / Tin báo / Chương 3 · Học quy củ trong cung / Chương 3 · Học quy củ trong cung)
+- [game] ×1 dialog queue holds 24 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 25 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 22 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 19 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 16 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 13 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 10 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 6 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 3 copies of «Tâm trạng · Quý nhân Phú Sát Nhạn Hồi» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Xem quan hệ của / Xem quan hệ của / Tin báo / Chương 4 · Học trò của cha / Chương 4 · Học trò của cha / Chương 4 · Học trò của cha)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Công · Nữ công / Công · Nữ công / Chương 4 · Học trò của cha / Chương 4 · Học trò của cha / Tin báo / Tin báo)
+- [stuck] ×10 no-clock loop: 150 taps without a clock step on .mapsc «»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=17: Chương 4 · Học trò của cha / Chương 4 · Học trò của cha / Tin báo / Mục lục / Tin báo / Tin báo)
+- [game] ×1 dialog queue holds 17 copies of «Tâm trạng · Ý quý nhân Phùng Mạn Châu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 11 copies of «Tâm trạng · Ý quý nhân Phùng Mạn Châu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Ý quý nhân Phùng Mạn Châu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Thục tần Mã Nhã Ninh» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Thục tần Mã Nhã Ninh» (each close pops one; looks like a dead ✕)
+- [game] ×2 dialog queue holds 17 copies of «Tâm trạng · Thục tần Mã Nhã Ninh» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 15 copies of «Tâm trạng · Thường tại Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 9 copies of «Tâm trạng · Thường tại Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 9 copies of «Tâm trạng · Thục tần Mã Nhã Ninh» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=21: Đã biết về Phế phi Đậu Nguyệt Thiền / Đã biết về Phế phi Đậu Nguyệt Thiền / Tin báo / Danh hiệu / Lịch tháng / Tin báo)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Chương 4 · Học trò của cha / Chương 4 · Học trò của cha / Chứng cứ về Phế phi Ôn Kiều Nguyệt / Tin báo / Chương 4 · Học trò của cha / Công · Nữ công)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Lịch tháng / Tin báo / Tin báo / Quý tộc kén rể · kén dâu / Lịch tháng)
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Đáp ứng Đậu Ý Hoan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 2 copies of «Tâm trạng · Quý nhân Nghiêm Nguyệt Hoa» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=19: Lịch tháng / Thiên mệnh / Lịch tháng / Kế vị / Tin báo / Lịch tháng)
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Quý nhân Phú Sát Tịch Nhan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Quý nhân Phú Sát Tịch Nhan» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Đã biết về Phế phi Đậu Nguyệt Thiền / Tin báo / Tin báo / Lịch tháng / Tin báo / Tin báo)
+- [stuck] ×1 no progress 15 min on .dlg «Tin báo»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 2 người.»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Tin báo»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=12: Thiên mệnh / Lịch tháng / Lịch tháng / Lịch tháng / Lịch tháng / Lịch tháng)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=22: Chương 5 · Đề thi bị bán / Lịch tháng / Tin báo / Chương 5 · Đề thi bị bán / Chương 5 · Đề thi bị bán / Chương 5 · Đề thi bị bán)
+- [game] ×1 dialog queue holds 19 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 20 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 17 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 14 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 11 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 5 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [dead] ×1 close button has no effect: .dlg «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» «Lui»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=31: Lịch tháng / Tin báo / Chương 5 · Đề thi bị bán / Chương 5 · Đề thi bị bán / Xem quan hệ của / Chương 5 · Đề thi bị bán)
+- [dead] ×1 close button has no effect: .dlg «Tin báo» «Lui»
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Thường tại Yến Mộng Điệp» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Gia thường tại La Uyển Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 2 copies of «Tâm trạng · Hiền hoàng quý phi Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Lịch tháng / Chương 5 · Đề thi bị bán / Tin báo / Tin báo / Tin báo / Đã biết về Phế phi Đậu Nguyệt Thiền)
+- [game] ×1 softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Liễu Nhi)
+- [js] ×1 page error: f.rk.split is not a function
+- [game] ×1 dialog queue holds 17 copies of «Tâm trạng · Thường tại Yến Mộng Điệp» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 14 copies of «Tâm trạng · Thường tại Yến Mộng Điệp» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 10 copies of «Tâm trạng · Thường tại Yến Mộng Điệp» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 10 copies of «Tâm trạng · Hiền hoàng quý phi Mã Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Quý nhân Điền Nhã Như» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 5 copies of «Tâm trạng · Ý đáp ứng Phùng Mạn Châu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 6 copies of «Tâm trạng · Đức đáp ứng Thôi Mạn Ca» (each close pops one; looks like a dead ✕)
+- [stuck] ×3 no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=7: Vũ / Lịch tháng / Tin báo / Chương 5 · Đề thi bị bán / Tin báo / Lịch tháng)
+- [stuck] ×3 no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 3 người.»
+- [game] ×2 softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Có người đến)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=7: Lịch tháng / Lịch tháng / Tin báo / Lịch tháng / Lịch tháng / Lịch tháng)
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Quý nhân Nghiêm Nguyệt Hoa» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Đáp ứng Phú Sát Tịch Nhan» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Đáp ứng Phú Sát Tịch Nhan» (each close pops one; looks like a dead ✕)
+- [js] ×1 page error: Cannot read properties of undefined (reading 'off')
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»
