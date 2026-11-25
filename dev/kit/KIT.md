@@ -550,7 +550,7 @@ Never %, never "Chắc chắn" (bookkeeping / decisions show nothing; a formerly
   plain (Đức +1, thiện cảm +2) and frowns at showy (thiện cảm −2). Card head: "thiếu lễ (…)", "giản dị hợp ý Thái hậu", "y phục quá xa hoa, … không vừa mắt".
 
 ### 11.1 "VÌ SAO <bậc>?" — the odds breakdown (owner 11/15 05:55Z: no luck without cause) — `dev/build/jwhy.js`, KIT READY
-- The kit popover `#kpop` is at most half the screen high (`max-height: calc(50dvh - 16px)`, scrolls inside) so a tip never covers its own dialog; it closes on the next tap anywhere (m-fix-2). A «còn N lần dùng» note of an item (bottles, boxes) comes ONLY from jitd `kitUseNote(E,{unit,pre})`: entries grouped («mỗi lọ còn 6 lần dùng» / «tổng còn … · 5 lọ còn 6 lần dùng · …»), at most `BAL.itd.useGroups` lines — never one line per entry.
+- The kit popover `#kpop` is at most half the screen high (`max-height: calc(50*var(--kvh) - 16px)`, scrolls inside) so a tip never covers its own dialog; it closes on the next tap anywhere (m-fix-2). A «còn N lần dùng» note of an item (bottles, boxes) comes ONLY from jitd `kitUseNote(E,{unit,pre})`: entries grouped («mỗi lọ còn 6 lần dùng» / «tổng còn … · 5 lọ còn 6 lần dùng · …»), at most `BAL.itd.useGroups` lines — never one line per entry.
 - Tapping the odds meter (`.kodm`) on ANY act card, person-card act or option opens the same kit popover (`kpPop`) with:
   title `Vì sao <bậc>?` (`.kpopt`), one line per factor (`.kpopx > .ef.g` raises / `.ef.r` lowers / `.ef.n` neutral), then the
   7-step ladder. A factor reads `<who/what> <value>: dễ hơn|khó hơn [chút | N bậc]` — N = round(points/12), never %.
