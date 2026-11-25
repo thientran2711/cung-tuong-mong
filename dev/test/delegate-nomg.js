@@ -81,6 +81,13 @@ const SH=process.argv[2]||path.join(__dirname,'../../../dnm-shots');try{fs.mkdir
    /* (4) doer ability moves the odds (one core: spyFactors of the doer) */
    const dz=await g.evaluate(()=>{const m=whyMaidInit(S.maid),l0=m.loyal;m.loyal=20;const lo=spyO(S,null,m);m.loyal=95;const hi=spyO(S,null,m);m.loyal=l0;return{lo,hi}});
    ok(dz.hi>dz.lo,'doer ability: a more loyal maid has better «Nghe ngóng chung» odds',dz)
+   /* (6) MAIN 134 / BIG rv n3: «ask someone» acts — the Thái y / the elder / the other consort does it: delegated (E), no game; her own talk stays a game */
+   const az=await g.evaluate(()=>{const rows={};const P=[{kind:"ty",name:"Thái y"},{kind:"th",name:"Thái hậu"},{kind:"hh",name:"Hoàng hậu"}];
+    for(const pp of P){let T=[];try{T=talkOpts(pp)||[]}catch(e){}for(const o of T)if(o&&o.n)rows[pp.kind+":"+o.n]=dfCls(o)}
+    const want={"ty:Xin bắt mạch":"E","ty:Bài thuốc dễ thụ thai":"E"};const bad=Object.keys(want).filter(k=>rows[k]&&rows[k]!==want[k]);
+    const own=["Chào hỏi","Thỉnh an","Hỏi chuyện","Kể tội một phi tần","Mời làm thái y tâm phúc"].map(n=>Object.keys(rows).find(k=>k.endsWith(":"+n))).filter(Boolean).filter(k=>rows[k]==="E");
+    return{rows,bad,own,dlgNames:["Xin bắt mạch","Bài thuốc dễ thụ thai","Xin son phấn","Mượn son phấn","Nhờ giúp đỡ","Xin Thái hậu đỡ lời","Xin Hoàng hậu che chở"].filter(n=>dfDlg({n})).length}});
+   ok(!az.bad.length&&!az.own.length&&az.dlgNames===7&&az.rows["ty:Xin bắt mạch"]==="E",'ask-someone acts are delegated (no game); her own talk keeps its game',az)
    /* (5) scheme «Giao cho người làm» = the DOER's odds (MAIN 133 ruling on OD 25/11 ~04:12Z): the act runs as a SENT act (j9 ACTSEND → actCtx sendPen of the one sent) */
    const gz=await g.evaluate(()=>{const out=[];const v=rivals.find(x=>x&&x.alive&&!x.out);if(!v)return out;const sv=sgDoer();if(!sv)return[{err:"no doer"}];const l0=sv.loyal;
     for(const k of ["spy","rumor","frame"]){if(!SG.K[k])continue;const J=sgJob({j:"act",v:v.id,k});if(!J)continue;

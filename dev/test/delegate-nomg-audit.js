@@ -15,12 +15,12 @@ const {chromium}=require('playwright');const D=require('./lib/device');const fs=
   const keys=["home"].concat((places()||[]).map(x=>x.k));
   for(let pass=0;pass<2;pass++)for(const k of keys){try{go(k)}catch(e){continue}let P=[];try{P=curPeople()||[]}catch(e){}
    P.forEach((pp,i)=>{let G=null;try{G=dfActs(i)}catch(e){}(G||[]).forEach(gr=>gr.acts.forEach(a=>{const n=String(a.n).replace(/\s+/g," ").trim();const key=pp.kind+"|"+n;if(out[key])return;
-    const cls=a.cls;let o=null;try{const T=talkOpts(pp);o=T.find(x=>x&&String(x.n).replace(/<[^>]+>/g,"").trim()===n)}catch(e){}const DL=typeof dfDlg==="function"?dfDlg:(x=>!!(x.pk||(window.ACT_REMOTE&&ACT_REMOTE[x.n])||/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ thái giám|Cài (tai mắt|người hầu))/.test(x.n)));const dl=cls==="E"||DL(o||{n});
+    const cls=a.cls;let o=null;try{const T=talkOpts(pp);o=T.find(x=>x&&String(x.n).replace(/<[^>]+>/g,"").trim()===n)}catch(e){}const DL=typeof dfDlg==="function"?dfDlg:(x=>!!(x.pk||(window.ACT_REMOTE&&ACT_REMOTE[x.n])||/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ |Cài (tai mắt|người hầu)|Xin |Mượn |Bài thuốc )/.test(x.n)));const dl=cls==="E"||DL(o||{n});
     out[key]={kind:pp.kind,act:n,eng:a.eng,cls,dlg:dl,game:!(cls==="D"||cls==="E"),place:k}}))})}
   /* her own maid and every servant of her household, read straight from their pop-up options (they are not always on a stage this buổi) */
   const syn=[{kind:"maid",name:S.maid&&S.maid.name}].concat((S.staff||[]).map(x=>({kind:"serv",ref:x,name:x.name})));
   for(const pp of syn){let T=[];try{T=talkOpts(pp)||[]}catch(e){}for(const o of T){if(!o||!o.n)continue;const n=String(o.n).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();const key=pp.kind+"|"+n;if(out[key])continue;
-   const cls=typeof dfCls==="function"?dfCls(o):"?";const DL=typeof dfDlg==="function"?dfDlg:(x=>!!(x.pk||(window.ACT_REMOTE&&ACT_REMOTE[x.n])||/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ thái giám|Cài (tai mắt|người hầu))/.test(x.n)));
+   const cls=typeof dfCls==="function"?dfCls(o):"?";const DL=typeof dfDlg==="function"?dfDlg:(x=>!!(x.pk||(window.ACT_REMOTE&&ACT_REMOTE[x.n])||/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ |Cài (tai mắt|người hầu)|Xin |Mượn |Bài thuốc )/.test(x.n)));
    out[key]={kind:pp.kind,act:n,eng:typeof dfEng==="function"?dfEng(n):"",cls,dlg:cls==="E"||DL(o),game:!(cls==="D"||cls==="E"),place:"(pop-up)"}}}
   return Object.values(out)});
  rows.sort((x,y)=>(y.dlg-x.dlg)||x.kind.localeCompare(y.kind)||x.act.localeCompare(y.act));

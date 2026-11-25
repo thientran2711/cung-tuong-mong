@@ -16,7 +16,10 @@ const DF={i:null,step:0,cls:{}};window.DF=DF;
    (2) it is an act done from afar / by others for her (jstagehere ACT_REMOTE), or
    (3) its name says she sends someone (Sai …, Nghe ngóng chung, Truyền / Mời thái y …, Nhờ thái giám …, Cài tai mắt / người hầu).
    Scan + before/after table: dev/test/delegate-nomg-audit.js, dev/handover/reports/delegate-nomg.md. */
-const DF_DLG=/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ thái giám|Cài (tai mắt|người hầu))/;
+/* r2 (MAIN 134, BIG rv note n3): «ask someone» acts — she only ASKS, the other person does the work or gives: «Xin bắt mạch» / «Bài thuốc dễ thụ thai» /
+   «Xin thuốc …» (the Thái y examines / prescribes with his own skill), «Xin <elder> đỡ lời / che chở», «Xin / Mượn son phấn» (the other gives), «Nhờ …» (the
+   other helps). Her OWN talk (Chào hỏi, Hỏi chuyện, Tâm sự, Kể tội, Mời làm thái y tâm phúc …) and her own hands (Tặng quà, Biếu, Đút lót, Lục rương …) keep their game. */
+const DF_DLG=/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ |Cài (tai mắt|người hầu)|Xin |Mượn |Bài thuốc )/;
 function dfDlg(a){if(!a)return false;const n=String(a.n||"").replace(/<[^>]+>/g,"").trim();return !!(a.pk||(typeof ACT_REMOTE==="object"&&ACT_REMOTE&&ACT_REMOTE[n])||DF_DLG.test(n))}
 window.dfDlg=dfDlg;
 /* class of a talk option: D = opens its own flow, E = delegated (someone else does it: no game, plain odds), A = rolled, C = sure */
