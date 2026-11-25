@@ -1,0 +1,150 @@
+{
+ "bug": {
+  "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+  "type": "stuck",
+  "msg": "no progress 15 min on .dlg «Tin báo»",
+  "n": 1,
+  "at": 1382,
+  "shot": "/home/user/wt/outRT/shots-flight2-s1d/stuck-1.png",
+  "save": "/home/user/wt/outRT/shots-flight2-s1d/stuck-1-dump.json",
+  "S": {
+   "dead": false,
+   "y": 3,
+   "t": 27,
+   "w": 0,
+   "b": 0,
+   "age": 22,
+   "rank": 0,
+   "name": "Lôi Linh Vận"
+  },
+  "buttons": [
+   "Nghe lệnhTốnkhôngĐượckhôngGhi chúchọn rồi xem kết quả ở bước sau!",
+   "Để sauTốnkhôngĐượckhông"
+  ]
+ },
+ "traceLast30": [
+  [
+   86,
+   ".dlg «Hoàng thượng để ý» «Lui»"
+  ],
+  [
+   87,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Lương tháng3 bạc»"
+  ],
+  [
+   87,
+   ".dlg «Lương tháng ba bạc» «Lui»"
+  ],
+  [
+   88,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   89,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Tư trang»"
+  ],
+  [
+   89,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   89,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Lương tháng3 bạc»"
+  ],
+  [
+   90,
+   ".dlg «Lương tháng ba bạc» «Lui»"
+  ],
+  [
+   91,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Mệnh truyện»"
+  ],
+  [
+   91,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   92,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Bạc166Sức100/100»"
+  ],
+  [
+   92,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   93,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Lương tháng3 bạc»"
+  ],
+  [
+   93,
+   ".dlg «Lương tháng ba bạc» «Lui»"
+  ],
+  [
+   95,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   98,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   99,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   100,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   100,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   100,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   100,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   101,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   102,
+   "#kmrew «Thường»"
+  ],
+  [
+   103,
+   ".dlg «Lui»"
+  ],
+  [
+   103,
+   "#kmrew «Nhận»"
+  ],
+  [
+   104,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   104,
+   ".dlg «Án mất trộm ngự khố» «Lui»"
+  ],
+  [
+   105,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Bạc177Sức100/100»"
+  ],
+  [
+   105,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   107,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Sang buổi»"
+  ]
+ ],
+ "traceLen": 400,
+ "traceAtStuckLast30": [],
+ "note": "traceLast30 = rows at time of extract (after the stuck); traceAtStuckLast30 = from stuck-1-dump.json"
+}
