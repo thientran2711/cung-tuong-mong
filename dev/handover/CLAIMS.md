@@ -1772,7 +1772,7 @@ B FIXER save-unseen-lists r3 (tests gate) | review/save-unseen-lists | B | sessi
 kitHand Bàn bài | review/kit-hand 8e50f709 | session_01V1ZZH24dkpdw8LeZYiyfQf | HANDOVER (rollover; KK31: videos, perf, plaques) | 2026-11-25T15:52Z
 coop-rebirth-stuck | review/coop-rebirth-stuck | session_01D3E3NahMdBiqkSMSUWYn5q | RUNNING | 2026-11-25 16:11Z (Foreman D)
 coop-rebirth-stuck (T3b, successor of T3) | review/coop-rebirth-stuck | session_01D3E3NXhw1QM9BKQKRBbX1C | RUNNING | 2026-11-25 16:33Z (Foreman D)
-coop-rebirth-stuck BIG review (RV-CRS) | review/coop-rebirth-stuck | session_01D3E3NbALbEXx1QFrEeKvCN | RUNNING | 2026-11-25 17:12Z (Foreman D)
+coop-rebirth-stuck BIG review (RV-CRS) | review/coop-rebirth-stuck | session_01D3E3NbALbEXx1QFrEeKvCN | PASS 9fea1332 18:46Z | 2026-11-25 17:12Z (Foreman D)
 net-ghen-2 step 2 (W10b, successor of W10) | review/net-ghen-2 | session_01D3E3NXMSUTQRNCRHy8X7zJ | RUNNING | 2026-11-25 17:19Z (Foreman D)
 coop-presence-reload BIG review (opus) | review/coop-presence-reload | session_01N1tNP2N8xkKLq6Len7PMr9 | RUNNING | 2026-11-25 18:05Z (Foreman B child 4)
 KK31 kitHand + iPad text-first | review/kit-hand | session_01V1ZZH4F57paDBkBCH9PESr | RUNNING | 25/11 17:56Z (MAIN 144; successor of KK30)
