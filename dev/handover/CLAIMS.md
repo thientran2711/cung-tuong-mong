@@ -1788,4 +1788,4 @@ fix-7 r3 (fix7-r2 × SANGBUOI r4 guest ☰ menu empty) | review/robot-coop-fix-7
 B co-op RERUN U3b-2 (successor of U3b 6EaANiCT) | dev/handover/robot/coop-rerun-U3b2-* | B | session_01N1tNP2HWuJXKRafMwdgWGn | RUNNING | 25/11 20:50Z |
 B runner stack u4 (LIVE 351122ba + coop-week-wait-rv 8e654ee0 + coop-presence-reload-rv dad08c51 + fix-3-r5-rv 3e761843) | review/robot-coop-stack-u4 | B | session_01N1tNP655QXzbUJ8NFUBooo (U1c) | RUNNING | 25/11 22:05Z |
 B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d family) | review/coop-page-freeze; reports/coop-page-freeze.md | B | session_01N1tNP4fU4zVDRjW98oN6EC | RUNNING | 25/11 22:09Z |
-| dayq one-rule cleanup (jdayq.js dqNextHeal solo → dqNextSync();return, keep co-op lockNext) | review/dayq-one-rule | FOREMAN D ROOT 2 session_01D3E3NaCjS2HPpbV9vyoqqF (worker id in STATUS) | RUNNING | 2026-11-25T22:14Z |
+| dayq one-rule cleanup (jdayq.js dqNextHeal solo → dqNextSync();return, keep co-op lockNext) | review/dayq-one-rule | FOREMAN D ROOT 2 / worker session_01D3E3NYdQg8YsoRVQyKCAiG | RUNNING | 2026-11-25T22:14Z |
