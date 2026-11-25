@@ -168,22 +168,32 @@ j68.js e68Fits(m): a j68 card (pid e68…) still fits when its template's w(e68C
 
 READY flight-e68-season 6b9a0ce4.
 
-## flight-sid-rebirth (FLIGHT ROOT-CAUSE FIXER, 25/11) — IN PROGRESS, HANDOVER
-PRIORITY #1 CHECK ('sidN' / 'kseq' / 'one j61 key'): reused jcoopworld attach (sidN bump), j61 kOf61 keys, coop-e2e COOP_HOSTDIE; no new mechanism.
-Branch review/flight-sid-rebirth 9d568f1b (based on flight-coop-sync 4cb42b96 — F #5 asks to rebase on review/flight-coop-sync-r 05a4cbc0).
+## flight-sid-rebirth (FLIGHT ROOT-CAUSE FIXER #1 + #2, 25/11) — READY f198beab
+PRIORITY #1 CHECK ('sidN' / 'kseq' / 'one j61 key' / 'kk'): reused jcoopworld attach (sidN bump), j61 kOf61 keys + KREG, k61-coop-probe keyDup, coop-e2e COOP_HOSTDIE; stable ids already in the world (S.men id «m<i>» j22/jmen/j96, S.court office, S.trieu.H CLANS, T.ns, names one per person jname/nmReg); no new mechanism.
+Branch review/flight-sid-rebirth f198beab = review/flight-coop-sync-r 05a4cbc0 + 3e30054d (rebirth part, cherry-pick of 9d568f1b) + 02ae792c (world keys) + f198beab (merge of the old tip 9d568f1b so the push is a fast-forward; build files only).
 
 ### Verdict
-GAME, pre-existing. j61 keys a person «r<id>» (rivals), «s<sid>» (servants), else a lazily issued «x<n>» from the per-seat counter S.kseq (S.kseq is NOT a W key; world men S.men ARE). (a) Rebirth: a new life is built by j52 nlRun (sidN = 0, fresh S.kseq 0) and joins the world in jcoopworld attach(); sidN was bumped only after her new staff had taken s1, s2… and kseq never → s-key and x-key clashes. (b) Reviewer (coop-sync-r 05a4cbc0): x34 = two world men still clash after week 3 / rejoin on BOTH seats — x-keys are issued lazily on EACH seat from its own counter, so two seats can give two different world men the same «x<n>» and the world merge carries both kk fields: a cross-seat race, not only a rebirth.
+GAME, pre-existing. j61 keyed a person «r<id>» (rivals), «s<sid>» (servants), else a lazily issued «x<n>» from the per-seat counter S.kseq (not a W key). (a) Rebirth: j52 nlRun restarts sidN and S.kseq at 0, then the new life joins the old world → s-key and x-key clashes. (b) Cross-seat: world people are shared by both seats, each seat issued «x<n>» from its own counter → two different world men on one «x34» after week 3 / rejoin on both seats.
 
-### Done (9d568f1b)
-attach → lifeRekey(): sidN and S.kseq continue past every id the world holds; her own new people (maid, staff, kids, home family) that collide get fresh ids. coop-e2e COOP_HOSTDIE=1: before 139/143 (4× «one j61 key = one person»), after 143/143 in one run (log «rekey x1»). Fixes (a) only.
+### Fix
+(a) 3e30054d jcoopworld attach → lifeRekey(): sidN and S.kseq continue past every id the world holds; her new own people that collide get fresh ids.
+(b) 02ae792c j61 kOf61 → k61WKey(): world people keyed from their stable world id — palace men «n<id>», court officers «o<office>», house heads «t<CLANS index>», the censor «tns», an NPC consort's child «c<name>». «x<n>» stays only for her own people and passing records (still g/h namespaced in co-op). Old saves / old co-op rooms: the level she knew under the old «x<n>» (e.kk) is copied once to the new key (k61WMig on the first k61S after load, flag S.kwm; lazily in kOf61 for world objects that arrive later from the room). k61PortEnt returns a world person itself (its e.kk is no longer a KREG key).
 
-### Next (for the successor)
-1. Root for (b): stop issuing world-person keys from a per-seat counter. World men already carry a stable id (S.men[i].id: «m<i>» j22, jmen id) → key them from that id (e.g. «n<id>») in kOf61; do the same for every other kk-keyed world person kind (S.court, S.trieu.H, thO …) that has or can get a stable world id; keep «x<n>» only for her own people (namespaced already by k61GuestOwn/k61HostCopy). Old saves: S.known / KREG entries under the old «x<n>» key must be migrated once on load (map by object kk → new key), else known people turn into strangers (law 6b / emo-seal-vanish history in j61 comments).
-2. Scan: k61All() on both seats after each week of coop-e2e (already the «one j61 key = one person» check) + COOP_HOSTDIE=1 + a rejoin; run 3× (intermittent).
-3. Then quickcheck + coop-e2e both seats, report, READY flight-sid-rebirth to F #5.
-Worktrees on this box: /home/user/wt/fsr (task 5), fes (task 4 done), fcg (task 3 done), fcs (task 2 done), fmd (task 1 done), fmd-ho (handover).
-UPDATE (same reviewer, 25/11 ~05:50Z, LIVE moved to 0756a05b): **PASS flight-coop-sync 05a4cbc0 FF 0756a05b** (review/flight-coop-sync-r = 7902247b + merge origin/main 0756a05b, index/sw rebuilt). Gates on 05a4cbc0: coop-e2e plain 142/142; HOSTDIE host-reborn ok, 139/143 = j61 side lead only (this run key x34 = two men after week 3 / rejoin on both seats: x-keys from S.kseq and s-keys from sid both restart at rebirth — one family for the sid-rebirth fixer); quickcheck PASS 660 s, old save ok, render 275/267.
+### Whole group (law 11) — key of each world kind, solo save scan (k61-wkey-oldsave)
+| kind | count (one run) | before | after |
+|---|---|---|---|
+| palace men S.men | 9–10 | x<n> per seat | n<id> |
+| court officers S.court | 4 | x<n> per seat | o<office> |
+| house heads + censor S.trieu | 7 | x<n> per seat | t<i> / tns |
+| NPC consorts' children | 3–6 | x<n> per seat | c<name> |
+| her own people (maid, staff, kids, home family) | — | x<n> (g/h in co-op) | unchanged |
+
+### Gates (on 02ae792c source; f198beab adds build files only)
+- coop-e2e COOP_HOSTDIE=1 (host death + rebirth + B leave/rejoin) ×3: 143/143, 143/143, 143/143 — «one j61 key = one person» ok on both seats at start, weeks 1–3 and after rejoin, every run (before: 139/143 on 4cb42b96; reviewer x34 dupes on 05a4cbc0).
+- coop-e2e plain 142/142; COOP_SWAP=1 142/142.
+- quickcheck PASS (232 s, old save ok, perf median new/live render 252/253 ms, core gates PASS).
+- node dev/test/k61-wkey-oldsave.js (new): old-save state with «x<n>» keys for men, court, heads, censor, NPC child → ser/deser → every level kept, new keys n/o/t/c, no key held by two people: 3/3 PASS.
+Worktrees: /home/user/wt/fsr (branch), /home/user/wt/fsr-ho (handover).
 
 ## REVIEW flight-choose-guard (BIG REVIEWER opus, 25/11)
 PRIORITY #1 CHECK ('chooseM opts[i]' / 'eaLockWhy' / 'deadCardIs'): OD 0 | ledger 0 | main: j3 chooseM, jemoact temper lock, jdeadcard net (flight-modal-deadlock, live) | review/* this branch only | claims: this review. Reused dead-card.js.
