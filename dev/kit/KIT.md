@@ -485,7 +485,7 @@ The scan also opens the less-visited dialogs: outer court (menNtCard), Tranh gh�
   ("Tháng này: …" lines go to the last group, prefix dropped). Never pass a joined string of several facts from new code.
 - `kitName(p)` · `kitTitle(p)` · `kitPersonLine(p,{sub,chips})` · `kitFaceH(p,size)`.
 - `kitChip(label, n)` delta chip (sign + colour by meaning) · `kitChip(text,"ok"|"no"|"g"|"r"|"n")` status chip (✓ / ✗) · `kitChips(list)`.
-- `kitRows([[label, value|[values], cls]])` = the act-card `.kb` grid (labels small caps `--k-lab`) = THE kit table for every label|value list (§51). `kitTiers([...])` ladders (rule panels).
+- `kitRows([[label, value|[values], cls]])` = the act-card `.kb` grid (labels small caps `--k-lab`) = THE kit table for every label|value list (§51). `kitTiers([...],{stack})` ladders (rule panels); a label longer than the 5.2rem label column (e.g. «Bậc 1 · Nhập môn · 10 phần») STACKS the row (`.ktiers.kstk`: label + «đang ở» on line 1, the text on line 2), never drawn over the text (review/tainghe-info; `o.stack` forces true/false).
 - `kitTiles([[label,value]])` small stat tiles, 4 per row (scene panels).
 - Tokens (j79 `:root`): `--k-hair #e6d3ac` hairlines · `--k-lab #8a7350` labels · `--k-card #fffaf0` · `--k-card2 #f6ead6` · `--k-seal #9a2c1c` · `--k-rad 8px`. The act card (j63) uses the same values.
 
@@ -1012,8 +1012,13 @@ ladder words from the real formulas; "có thể gặp người" → real words.
   empty state (`kitEmpty(title,lines,o)` = the big empty card of §37.2). No other head / empty frame.
 - LEFT: the painted picture as `kitSceneArt(src,name,{size:"thumb"})` (§28.19: 64 px square, 56 px on phones). `img` default = `kitSkillArt(kind,k)`
   (`img/art-<k>.webp` / `img/vir-<k>.webp` when in INFO.json have; else act-category art).
-- RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
-  button that opens the levels, e.g. `data-v85tab`), one desc line, tiến bộ bar `kitBar` (`.kskp`) or `kchip g "Đã tinh thông"` (`bar:false` = none),
+- RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; the steps are NEVER a button),
+  **the NAME is the card's ONE info target (review/tainghe-info, owner OD 25/11 ~23:48Z «Bấm vào dung nghi thì không ra gì hết … không biết bấm vô cái gì
+  mở ra cái khung này»): with `info` (old name `stepsAttr`, e.g. `data-v85tab="cam"`) the name is drawn by `kitSkillName(o)` as `button.kskn` = «ⓘ name»
+  with the dotted underline of the kit info link (§kitInfo «ⓘ Cách học» look), min 32 px tall; tap → that skill's rule popup. No hidden tap zone: a
+  popup opens only from a visible labelled target. Test `node dev/test/tainghe-info.js` (real taps, Fold + iPad, every Tài nghệ sub-tab: every
+  card has «ⓘ name», no step button, tap → its popup, no text overlap in the popup, ✕ closes).**
+  one desc line, tiến bộ bar `kitBar` (`.kskp`) or `kchip g "Đã tinh thông"` (`bar:false` = none),
   next unlock `kchip n "<word> n mở"` + what it gives (`next`, else `levels[level]`).
 - BELOW: act cards (`pbtn`) in `.kskacts.pcb`, each in its own `.kpanec` cell (auto-fit grid, min 240 px): narrow cells give the compact act of §43
   (own act picture only). `can:false` dims a card (nothing to do); lists put doable cards first, mastered last.

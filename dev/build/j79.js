@@ -95,7 +95,8 @@ function kitReqSplit(t){t=String(t||"").trim();let m=t.match(/^([^(\d:]+?)(?::\s
  m=t.match(/^([^:(]+?):\s+([\s\S]+)$/);if(m)return [m[1],m[2]];m=t.match(/^([^(]+?)\s*\(([\s\S]+)\)$/);if(m)return [m[1],m[2]];return [t,""]}
 function kitReqRows(list){return kitRows((list||[]).filter(Boolean).map(([ok,t])=>{const [l,v]=kitReqSplit(t);return [l,`${ok?"✓":"✗"} ${v||(ok?"đủ":"chưa đủ")}`,ok?"g":"r"]}))}
 /* tiers / ladders: [{k:"30–59", n:"hại nhỏ", d:"Tung tin đồn, Dò la", on:true, c:"r"}] */
-function kitTiers(list,o){o=o||{};const N=list.length;return `<div class="ktiers">${list.map((t,i)=>`<div class="ktier${t.on?" on":""}" style="--lv:${(i+1)/N}"><span class="ktk">${t.k}</span><span class="ktb"><b class="${t.c||""}">${t.n}</b>${t.d?`<small>${t.d}</small>`:""}</span>${t.on?`<span class="kchip n">${o.here||"đang ở"}</span>`:""}</div>`).join("")}</div>`}
+function kitTiers(list,o){o=o||{};const N=list.length;/* tainghe-info: a label longer than the 5.2rem column («Bậc 1 · Nhập môn · 10 phần») stacks the row: label (+ «đang ở») on line 1, the text under it; never drawn over the text */
+ const stk=o.stack!=null?o.stack:list.some(t=>String(t.k||"").replace(/<[^>]+>/g,"").length>9);return `<div class="ktiers${stk?" kstk":""}">${list.map((t,i)=>`<div class="ktier${t.on?" on":""}" style="--lv:${(i+1)/N}"><span class="ktk">${t.k}</span><span class="ktb"><b class="${t.c||""}">${t.n}</b>${t.d?`<small>${t.d}</small>`:""}</span>${t.on?`<span class="kchip n">${o.here||"đang ở"}</span>`:""}</div>`).join("")}</div>`}
 
 /* ---------- facts: one fact per row (never a run-on paragraph) ---------- */
 /* split an HTML run into sentences, keeping inline tags balanced across the cut */
@@ -479,6 +480,7 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 /* tiers */
 .ktiers{display:flex;flex-direction:column;gap:4px}
 .ktier{display:grid;grid-template-columns:5.2rem minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 8px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:linear-gradient(90deg,rgba(194,59,34,calc(var(--lv)*.16)),transparent 70%),var(--k-card)}
+.ktiers.kstk .ktier{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}.ktiers.kstk .ktk{white-space:normal;grid-column:1;grid-row:1}.ktiers.kstk .ktier>.kchip{grid-column:2;grid-row:1}.ktiers.kstk .ktb{grid-column:1/-1;grid-row:2}
 .ktier.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .ktk{font-weight:700;font-size:.8rem;color:var(--ink);white-space:nowrap}.ktb{display:flex;flex-direction:column;min-width:0}.ktb b{font-size:.86rem}.ktb b.r{color:var(--bad)}.ktb b.g{color:var(--good)}.ktb small{font-size:.74rem;color:var(--dim);overflow-wrap:anywhere}
 /* cards inside panels (evidence, threat) */
@@ -1308,6 +1310,11 @@ function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM
 function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
  return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
 function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
+/* tainghe-info (owner OD 25/11 ~23:48Z «Bấm vào dung nghi thì không ra gì hết … không biết bấm vô cái gì mở ra cái khung này»): the card's info
+   opens from ONE visible labelled target = the NAME, drawn as the kit info link (ⓘ + dotted underline, the §kitInfo look of «ⓘ Cách học»).
+   o.info (or the old o.stepsAttr) = the attribute that opens it (e.g. data-v85tab="cam"). The «Bậc l/max» steps are never a hidden button. */
+function kitSkillName(o){const a=o.info||o.stepsAttr||"";const n=o.name||"";if(!a||!n)return `<b>${n}</b>`;
+ return `<button type="button" class="kskn" ${a} aria-label="Xem luật ${kpPlain?kpPlain(n):n}"><i class="kskni" aria-hidden="true">ⓘ</i><b>${n}</b></button>`}
 function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
@@ -1317,7 +1324,7 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
    title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
  return `<div class="kskill${o.can===false?" kdone":""}${o.big?" kbig":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",o.big?{shape:"tall",cap:false,cls:"kbigart"}:{shape:"tall",size:"thumb",cap:false}):""}`+
-  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh"><b>${o.name||""}</b>${max?kitSteps(l,max,o.stepsAttr,o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
+  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh">${kitSkillName(o)}${max?kitSteps(l,max,"",o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
   `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}${o.body||""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 /* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
@@ -1349,6 +1356,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .kskdo{font-size:.82rem;color:var(--dim);line-height:1.35}.kskx{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.8rem}
 .kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}
 .kskb{height:8px;border-radius:5px;background:#eadfca;overflow:hidden}.kskb u{display:block;height:100%;background:linear-gradient(90deg,#c9a24a,#8f5f0c)}
+.kskn{display:inline-flex;align-items:baseline;gap:.3em;border:0;background:none;padding:2px 0;margin:0;font:inherit;color:var(--gold);cursor:pointer;text-align:left;min-height:32px}.kskn>b{border-bottom:1px dotted currentColor}.kskni{font-style:normal;font-size:.9rem;font-weight:600}
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
