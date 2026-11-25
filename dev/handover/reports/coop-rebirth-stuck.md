@@ -64,3 +64,7 @@ PRIORITY #1 CHECK: OD flight priority 25/11 ~16:00Z (MAIN 142/143) | main LIVE 1
 
 **quickcheck G4 90-button-crawl is a LIVE fault, NOT this branch:** «FAIL fold · Ô lưu [#modal.kptitle] · Lui · close button did not close its layer (something else changed)». button-crawl --fast alone ×2 gives the SAME row on LIVE 17dfa64d's index.html and on the branch, ×2 each. It will FAIL golive's quickcheck for ANY sha until fixed or filed in quickcheck.d/button-crawl-known.txt → D/MAIN decide.
 Shots in reviewer scratch only (none in git, none on the CDN, nothing to wipe).
+
+### REVIEW r7 (final merge, D 19:41Z: LIVE moved to 351122ba) — **PASS feefe4af** (20:08Z)
+review/coop-rebirth-stuck-r7 feefe4af = r6 9fea1332 merged onto LIVE 351122ba (fast-forward from 351122ba). Only index.html / sw.js / CHANGE.txt conflicted; they were rebuilt and the fix's CHANGE line kept. No source overlap: the diff against main is jdayq.js + dayq-ghost.js + scan-next-dead.py + coop-e2e.js.
+ALONE on feefe4af: coop-e2e 143/143 (heal check ok) · dayq-ghost PASS all · dayq-hold-coop 17/17 · quickcheck: old save ok, open 1983 ms, perf new/live render 251/252, tab 630/547, buổi 1345/1578 ms, tasks>200ms 25/25. The only fail is the known pre-existing G4 row «Ô lưu · Lui» (LIVE fault, above).
