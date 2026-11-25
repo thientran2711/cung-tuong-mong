@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4a8c627b+","t":"2026-11-24T01:33Z","c":"SELF-MERGE LAND thin-p2: merge LIVE 2a80712b (index.html/sw.js rebuilt)","b":"ed92b6ba666f","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"0887c5db+","t":"2026-11-25T14:52Z","c":"m-fix-3: delayed-risk roads show the whole-road odds, verdicts read the real Kinh su phong book, sure acts never seal THANH","b":"ba6ca6a872f2","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2687,7 +2687,7 @@ function fpBook(p,w){const r=fpLast(p,w),who=p===S?"ngươi":p.name;return r.n?`
 /* ================= THE MONTH FOR EVERY CONSORT ================= */
 function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
  if(p.fake){const noRec=fpNoRec(p);
-  if(!me&&noRec&&roll(fpX().npcExit*(p.tamco||0)/100)){p.preg=0;p.fake=0;p.hidden=false;ap(p,{sung:-fpX().exitSung});return `${p.name} báo sảy thai. `}/* two-way: her «Báo sảy thai» (j22) */
+  if(!me&&noRec&&roll(fpX().npcExit*(p.tamco||0))){p.preg=0;p.fake=0;p.hidden=false;ap(p,{sung:-fpX().exitSung});return `${p.name} báo sảy thai. `}/* two-way: her «Báo sảy thai» (j22) */
   if(roll(fpCatch(p,noRec))){const why=noRec?`${fpBook(p)}: tháng thai không khớp sổ, giả mang thai bị lật tẩy, tội khi quân`:"Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân";if(me){deathSentence(why);return""}deathSentence(p,why);return `${p.name} giả mang thai bị lật tẩy. `}
   if(p.preg>=10){p.preg=0;p.fake=0;if(roll(fpSwapO(p)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
   return""}
@@ -38159,11 +38159,11 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
      Kính sự phòng book has no night within recWk tuần before the day she announced (and the book was not doctored, khBook);
      swap = [base, ×Tâm cơ, ×tai mắt] odds of the month-10 baby swap; exitO / exitTam / exitDoc = odds of «Báo sảy thai» (base + Tâm cơ/exitTam
      + exitDoc with a Thái y tâm phúc); exitSung = Sủng lost when the "baby" is lost; exitDanh = Danh lost when the false miscarriage is
-     seen through (cấm túc, sev 1 — never death: getting out costs less than being caught); npcExit = % per month (× her Tâm cơ / 100) a
+     seen through (cấm túc, sev 1 — never death: getting out costs less than being caught); npcExit = % per month per point of her Tâm cơ that a
      consort whose book does not match ends her own fake the same way (two-way).
-   wdHide = «Giấu đi, im lặng» (j92, a lost ngự tứ kept secret): % it comes out when it falls due. */
-Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,4],exitO:40,exitTam:3,exitDoc:20,exitSung:3,exitDanh:6,npcExit:30}});
-BAL.eff.j92.wdHideCatch=45;
+   wdHideCatch / wdHideDue = «Giấu đi, im lặng» (j92, a lost ngự tứ kept secret): % it comes out when it falls due; due in [0] + R([1]) tuần. */
+Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,4],exitO:40,exitTam:3,exitDoc:20,exitSung:3,exitDanh:6,npcExit:.3}});
+BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
 /* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
    (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
    Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
@@ -39502,7 +39502,7 @@ PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHel
   {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);apply({sung:BAL.eff.j92.sungGo,danh:BAL.eff.j92.danhGo});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. ${sgStat(BAL.eff.j92.sungGo)}, Danh ${balSg(BAL.eff.j92.danhGo)}.</p>`})}},
   {n:pp.how==="bị mất"?"Sai người lùng tìm":"Sai thợ lén sửa",fx:{bac:BAL.eff.j92.bacFx},p:Math.round(o+(100-o)*(100-BAL.eff.j92.wdHideCatch)/100)/* whole road: found, or not found and never comes out */,j67:`tốn: Bạc ${balSg(BAL.eff.j92.bacFx)} · kèm: không xong thì chuyện còn có thể lộ ra, bị phạt: ${chanceW(Math.round((100-o)*BAL.eff.j92.wdHideCatch/100))}`,go:()=>{if(roll(o)){Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p>${pp.how==="bị mất"?"Tìm lại được":"Thợ sửa khéo, không ai nhận ra"} ${it.n}.</p>`});log(`${it.n} ngự tứ đã ${pp.how==="bị mất"?"tìm lại được":"sửa xong"}.`)}
     else{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+3+R(4)};Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p class="r">${pp.how==="bị mất"?"Lùng khắp nơi không thấy":"Thợ sửa hỏng hẳn"} ${it.n}. Chuyện này còn có thể lộ ra.</p>`})}}},
-  {n:"Giấu đi, im lặng",fx:{},p:100-BAL.eff.j92.wdHideCatch/* law 7 (review/m-fix-3): the word = the whole road, the later coming-out included */,j67:`tốn: không tốn gì · kèm: 2–6 tuần sau chuyện lộ ra thì ${sgStat(BAL.eff.j92.sungWdNtMonth)} và bị phạt (cấm túc ${punishMonths()} tháng, có khi giáng một bậc): ${chanceW(BAL.eff.j92.wdHideCatch)}`,go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+2+R(5)};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
+  {n:"Giấu đi, im lặng",fx:{},p:100-BAL.eff.j92.wdHideCatch/* law 7 (review/m-fix-3): the word = the whole road, the later coming-out included */,j67:`tốn: không tốn gì · kèm: ${BAL.eff.j92.wdHideDue[0]}–${BAL.eff.j92.wdHideDue[0]+BAL.eff.j92.wdHideDue[1]-1} tuần sau chuyện lộ ra thì ${sgStat(BAL.eff.j92.sungWdNtMonth)} và bị phạt (cấm túc ${punishMonths()} tháng, có khi giáng một bậc): ${chanceW(BAL.eff.j92.wdHideCatch)}`,go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+BAL.eff.j92.wdHideDue[0]+R(BAL.eff.j92.wdHideDue[1])};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
 /* ngự tứ cannot be given away or used to frame anyone */
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return g0.apply(this,arguments)}})();
 (function(){const p0=plantItem;plantItem=function(a,t,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return p0.apply(this,arguments)}})();
@@ -95464,7 +95464,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ed92b6ba666f";window.CTM_BUILD=BUILD;
+const BUILD="ba6ca6a872f2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

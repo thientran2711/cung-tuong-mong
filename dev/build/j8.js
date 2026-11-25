@@ -390,7 +390,7 @@ function fpBook(p,w){const r=fpLast(p,w),who=p===S?"ngươi":p.name;return r.n?`
 /* ================= THE MONTH FOR EVERY CONSORT ================= */
 function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
  if(p.fake){const noRec=fpNoRec(p);
-  if(!me&&noRec&&roll(fpX().npcExit*(p.tamco||0)/100)){p.preg=0;p.fake=0;p.hidden=false;ap(p,{sung:-fpX().exitSung});return `${p.name} báo sảy thai. `}/* two-way: her «Báo sảy thai» (j22) */
+  if(!me&&noRec&&roll(fpX().npcExit*(p.tamco||0))){p.preg=0;p.fake=0;p.hidden=false;ap(p,{sung:-fpX().exitSung});return `${p.name} báo sảy thai. `}/* two-way: her «Báo sảy thai» (j22) */
   if(roll(fpCatch(p,noRec))){const why=noRec?`${fpBook(p)}: tháng thai không khớp sổ, giả mang thai bị lật tẩy, tội khi quân`:"Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân";if(me){deathSentence(why);return""}deathSentence(p,why);return `${p.name} giả mang thai bị lật tẩy. `}
   if(p.preg>=10){p.preg=0;p.fake=0;if(roll(fpSwapO(p)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
   return""}

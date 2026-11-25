@@ -2046,8 +2046,8 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
      Kính sự phòng book has no night within recWk tuần before the day she announced (and the book was not doctored, khBook);
      swap = [base, ×Tâm cơ, ×tai mắt] odds of the month-10 baby swap; exitO / exitTam / exitDoc = odds of «Báo sảy thai» (base + Tâm cơ/exitTam
      + exitDoc with a Thái y tâm phúc); exitSung = Sủng lost when the "baby" is lost; exitDanh = Danh lost when the false miscarriage is
-     seen through (cấm túc, sev 1 — never death: getting out costs less than being caught); npcExit = % per month (× her Tâm cơ / 100) a
+     seen through (cấm túc, sev 1 — never death: getting out costs less than being caught); npcExit = % per month per point of her Tâm cơ that a
      consort whose book does not match ends her own fake the same way (two-way).
-   wdHide = «Giấu đi, im lặng» (j92, a lost ngự tứ kept secret): % it comes out when it falls due. */
-Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,4],exitO:40,exitTam:3,exitDoc:20,exitSung:3,exitDanh:6,npcExit:30}});
-BAL.eff.j92.wdHideCatch=45;
+   wdHideCatch / wdHideDue = «Giấu đi, im lặng» (j92, a lost ngự tứ kept secret): % it comes out when it falls due; due in [0] + R([1]) tuần. */
+Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,4],exitO:40,exitTam:3,exitDoc:20,exitSung:3,exitDanh:6,npcExit:.3}});
+BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
