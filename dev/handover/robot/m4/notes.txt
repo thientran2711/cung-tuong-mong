@@ -46,3 +46,8 @@ KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/03/ title=Chọn ng
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/04/ title=Bổng lộc tháng hai bad=3
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/05/ title=Y phục dự Tiết Thanh minh bad=3
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/06/ title=Yến đầy tháng hoàng tử bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/01/ title=Lần đầu gặp mặt bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/02/ title=Yến đầy tháng hoàng tử bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/03/ title=Lời cảnh báo bad=7
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/04/ title=Kỳ nguyệt sự bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/05/ title=Chuyện trong cung bad=1

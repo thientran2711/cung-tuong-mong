@@ -1,14 +1,14 @@
 {
  "buoi": 2,
- "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng hai · trung tuần · năm thứ ba | Buổi tối",
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ hai Tháng tư · thượng tuần · năm thứ ba | Buổi sáng",
  "build": "0756a05b",
- "at": "2026-11-25T12:18:08.282Z",
+ "at": "2026-11-25T12:40:46.799Z",
  "dump": {
-  "title": "Kỳ nguyệt sự",
+  "title": "Lần đầu gặp mặt",
   "bad": 1,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 201px;",
+  "dlgStyle": "--kdpw: 161px;",
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
@@ -30,15 +30,15 @@
    ],
    "opts": [
     342,
-    374,
+    425,
     304,
-    511
+    460
    ],
    "kpopts": [
     342,
-    374,
+    425,
     304,
-    511
+    460
    ],
    "k3right": [
     342,
@@ -61,33 +61,33 @@
   },
   "kpoptsScroll": [
    0,
-   635,
-   511
+   584,
+   460
   ],
   "cards": [
    [
     342,
-    374,
+    425,
     304,
     140
    ],
    [
     342,
-    520,
+    571,
     304,
-    151
+    140
    ],
    [
     342,
-    677,
+    717,
     304,
-    151
+    140
    ],
    [
     342,
-    835,
+    863,
     304,
-    168
+    140
    ]
   ],
   "vp": [

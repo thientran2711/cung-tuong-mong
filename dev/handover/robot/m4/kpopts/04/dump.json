@@ -1,14 +1,14 @@
 {
- "buoi": 7,
- "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng ba · thượng tuần · năm thứ ba | Buổi trưa",
+ "buoi": 9,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ hai Tháng tư · trung tuần · năm thứ ba | Buổi tối",
  "build": "0756a05b",
- "at": "2026-11-25T12:22:06.251Z",
+ "at": "2026-11-25T12:45:35.323Z",
  "dump": {
-  "title": "Bổng lộc tháng hai",
-  "bad": 3,
+  "title": "Kỳ nguyệt sự",
+  "bad": 1,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 178px;",
+  "dlgStyle": "--kdpw: 201px; --kpo-img: url(\"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-ch.webp\"); --kpo: #b8742f;",
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
@@ -30,15 +30,15 @@
    ],
    "opts": [
     342,
-    471,
+    392,
     304,
-    414
+    493
    ],
    "kpopts": [
     342,
-    471,
+    392,
     304,
-    414
+    493
    ],
    "k3right": [
     342,
@@ -61,39 +61,33 @@
   },
   "kpoptsScroll": [
    0,
-   905,
-   414
+   635,
+   493
   ],
   "cards": [
    [
     342,
-    471,
+    392,
     304,
-    166
+    140
    ],
    [
     342,
-    643,
+    538,
     304,
-    149
+    151
    ],
    [
     342,
-    798,
+    696,
     304,
-    198
+    151
    ],
    [
     342,
-    1001,
+    853,
     304,
-    181
-   ],
-   [
-    342,
-    1189,
-    304,
-    181
+    168
    ]
   ],
   "vp": [

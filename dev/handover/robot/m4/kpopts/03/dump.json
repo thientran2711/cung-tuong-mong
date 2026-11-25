@@ -1,26 +1,22 @@
 {
- "buoi": 4,
- "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng hai · hạ tuần · năm thứ ba | Buổi trưa",
+ "buoi": 8,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ hai Tháng tư · trung tuần · năm thứ ba | Buổi tối",
  "build": "0756a05b",
- "at": "2026-11-25T12:19:43.371Z",
+ "at": "2026-11-25T12:44:47.544Z",
  "dump": {
-  "title": "Chọn người theo hầu",
-  "bad": 1,
-  "frameBottom": 898,
-  "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 178px;",
+  "title": "Lời cảnh báo",
+  "bad": 7,
+  "frameBottom": 787,
+  "dlgClass": "dlg kpsc kpanel kesdlg kdscroll kdper kdpbanner kdpall",
+  "dlgStyle": "--kdpw: 201px; --kpo-img: url(\"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-ch.webp\"); --kpo: #b8742f; --dart: none; height: 720px;",
   "modalClass": "modal",
-  "ksz": [
-   "dlg kpsc kpanel kszf ksz3 kszlive",
-   "kszfig",
-   "kszfs"
-  ],
+  "ksz": [],
   "rects": {
    "dlg": [
-    97,
-    102,
-    562,
-    796
+    98,
+    213,
+    560,
+    574
    ],
    "modal": [
     0,
@@ -29,65 +25,73 @@
     1000
    ],
    "opts": [
-    342,
-    440,
-    304,
-    445
+    328,
+    709,
+    315,
+    1181
    ],
    "kpopts": [
-    342,
-    440,
-    304,
-    445
+    328,
+    709,
+    315,
+    1181
    ],
-   "k3right": [
-    342,
-    171,
-    304,
-    714
-   ],
+   "k3right": null,
    "mb": [
-    98,
-    161,
-    560,
-    736
+    99,
+    256,
+    558,
+    531
    ],
-   "body": [
-    98,
-    161,
-    560,
-    736
-   ]
+   "body": null
   },
   "kpoptsScroll": [
    0,
-   595,
-   445
+   1181,
+   1181
   ],
   "cards": [
    [
-    342,
-    440,
-    304,
+    328,
+    709,
+    315,
+    167
+   ],
+   [
+    328,
+    885,
+    315,
+    183
+   ],
+   [
+    328,
+    1076,
+    315,
     140
    ],
    [
-    342,
-    586,
-    304,
-    140
+    328,
+    1224,
+    315,
+    167
    ],
    [
-    342,
-    732,
-    304,
-    140
+    328,
+    1399,
+    315,
+    184
    ],
    [
-    342,
-    878,
-    304,
+    328,
+    1591,
+    315,
     151
+   ],
+   [
+    328,
+    1750,
+    315,
+    140
    ]
   ],
   "vp": [

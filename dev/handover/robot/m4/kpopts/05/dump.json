@@ -1,24 +1,26 @@
 {
- "buoi": 9,
- "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng ba · thượng tuần · năm thứ ba | Buổi tối",
+ "buoi": 10,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ hai Tháng tư · hạ tuần · năm thứ ba | Buổi trưa",
  "build": "0756a05b",
- "at": "2026-11-25T12:23:09.710Z",
+ "at": "2026-11-25T12:46:47.247Z",
  "dump": {
-  "title": "Y phục dự Tiết Thanh minh",
-  "bad": 3,
-  "frameBottom": 787,
-  "dlgClass": "dlg kpsc kpanel kdtx kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 163px;",
+  "title": "Chuyện trong cung",
+  "bad": 1,
+  "frameBottom": 898,
+  "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
+  "dlgStyle": "--kdpw: 169px; --kpo-img: url(\"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-ch.webp\"); --kpo: #b8742f;",
   "modalClass": "modal",
   "ksz": [
-   "dlg kpsc kpanel kdtx kszf ksz3 kszlive"
+   "dlg kpsc kpanel kszf ksz3 kszlive",
+   "kszfig",
+   "kszfs"
   ],
   "rects": {
    "dlg": [
-    143,
-    213,
-    470,
-    574
+    97,
+    102,
+    562,
+    796
    ],
    "modal": [
     0,
@@ -27,70 +29,64 @@
     1000
    ],
    "opts": [
-    288,
-    450,
-    312,
-    734
+    342,
+    396,
+    304,
+    489
    ],
    "kpopts": [
-    288,
-    450,
-    312,
-    734
+    342,
+    396,
+    304,
+    489
    ],
    "k3right": [
-    288,
-    282,
-    312,
-    901
+    342,
+    171,
+    304,
+    714
    ],
    "mb": [
-    144,
-    272,
-    468,
-    514
+    98,
+    161,
+    560,
+    736
    ],
    "body": [
-    144,
-    272,
-    468,
-    923
+    98,
+    161,
+    560,
+    736
    ]
   },
   "kpoptsScroll": [
    0,
-   734,
-   734
+   634,
+   489
   ],
   "cards": [
    [
-    288,
-    450,
-    312,
-    140
+    342,
+    396,
+    304,
+    151
    ],
    [
-    288,
-    596,
-    312,
-    150
+    342,
+    553,
+    304,
+    167
    ],
    [
-    288,
-    751,
-    312,
-    140
+    342,
+    726,
+    304,
+    151
    ],
    [
-    288,
-    897,
-    312,
-    140
-   ],
-   [
-    288,
-    1043,
-    312,
+    342,
+    883,
+    304,
     140
    ]
   ],
