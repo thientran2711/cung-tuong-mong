@@ -188,7 +188,7 @@ button.ka .klead{display:block;font-size:.76rem;color:var(--dim);line-height:1.3
 .krv.klist:is(#kl1#kl2#kl3,.klist){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:1px!important;white-space:normal!important}
 .krv.klist:is(#kl1#kl2#kl3,.klist)>.ksep{display:none!important}
 .krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep){display:block!important;position:relative!important;padding-left:.8em!important;max-width:100%!important;text-align:left!important}
-.krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep):not(.kef1){white-space:normal!important}/* a stat unit («Bạc -94») stays ONE unbreakable unit (.kef1, K-EF-UNIT) */
+.krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep):not(.kef1){white-space:normal!important}/* a stat unit (.kef1, K-EF-UNIT) stays ONE unbreakable unit */
 .krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep)::before{content:"";position:absolute;left:.12em;top:.6em;width:.3em;height:.3em;border-radius:50%;background:currentColor;opacity:.5}
 .krv.klist2:is(#kl1#kl2#kl3,.klist2){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(10.5em,1fr))!important;column-gap:10px!important;row-gap:1px!important}
 button.ka small.kb{display:grid!important;grid-template-columns:3.4rem minmax(0,1fr);column-gap:7px;row-gap:2px;font-size:.76rem!important;line-height:1.35!important;color:var(--ink);margin:0;align-content:start}
