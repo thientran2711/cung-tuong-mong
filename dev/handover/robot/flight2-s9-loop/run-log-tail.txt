@@ -1,0 +1,40 @@
+RESUME flight2-s9 from 2026-11-25T09:57:31.071Z buổi 17
+RESUME flight2-s9 from 2026-11-25T10:12:33.131Z buổi 21
+NOTE harness 6d3a128f + local kpzoom-close patch (realtap.js: after each tap, if #kpzoom visible tap (20,20)), from buổi 21 (resume 10:28Z)
+NOTE harness 27c4d924 + local kpzoom-close patch (same as before), resume 10:30Z
+RESUME flight2-s9 from 2026-11-25T10:28:48.538Z buổi 22
+BUG dead close button has no effect: .dlg «Tâm trạng · Ta» «Lui»
+NOTE harness 93812531, local kpzoom patch DROPPED, resume 10:32Z
+RESUME flight2-s9 from 2026-11-25T10:31:34.596Z buổi 27
+CP buổi 50 year 1 save 196385 chars
+BUG stuck no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»
+CP buổi 100 year 1 save 529950 chars
+BUG stuck no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»
+BUG game dialog queue holds 7 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tin chờ người sai đi»
+BUG stuck no progress 15 min on .dlg «Tin báo»
+BUG stuck no-clock loop: 150 taps without a clock step on .mapsc «»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tin báo»
+CP buổi 150 year 2 save 620371 chars
+BUG js page error: Cannot read properties of undefined (reading 'off')
+NOTE harness 95718760, resume 11:22Z
+RESUME flight2-s9 from 2026-11-25T11:22:01.111Z buổi 181
+CP buổi 181 year null save 650529 chars
+BUG stuck no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.»
+CP buổi 231 year 2 save 726610 chars
+CP buổi 281 year 2 save 842484 chars
+STATUS flight2-s9 · buổi 290 · year 2 · rank 0 · bugs 12 · stuck 3 · dead buttons 2
+NOTE harness 10fbc51c, resume 12:24Z
+RESUME flight2-s9 from 2026-11-25T12:23:47.121Z buổi 290
+CP buổi 290 year null save 851870 chars
+BUG game dialog scrolled to the end has no close / next button: #kmrew «»
+BUG game dialog scrolled to the end has no close / next button: .mapsc «»
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=7: Tin chờ người sai đi / Tin chờ người sai đi / Chương 3 · Học quy củ trong cung / Tin báo / Tin chờ người sai đi / Tin báo)
+BUG game dialog scrolled to the end has no close / next button: .kmov «»
+BUG game dialog scrolled to the end has no close / next button: .kfoc «»
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)
+BUG stuck no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 3 người.»
+BUG game softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Có người đến)
+CP buổi 340 year 2 save 895744 chars
+BUG stuck no-clock loop: 150 taps without a clock step on page «Thái y viện · Ở đây còn 1 người.»

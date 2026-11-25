@@ -1,0 +1,312 @@
+{
+ "traceLen": 400,
+ "firstRow": [
+  1083,
+  "page «Thái y viện · Ở đây còn 1 người.» «Sang ngày mới»"
+ ],
+ "around1700": [],
+ "latest60": [
+  [
+   1533,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1533,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1534,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1534,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1534,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1534,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1536,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1538,
+   ".dlg «Y phục dự Tết Nguyên tiêu» «Cáo lỗi, về cung nghỉRất vữngTốnkhôngĐượcvề cung n»"
+  ],
+  [
+   1538,
+   ".dlg «Điềm báo» «Lui»"
+  ],
+  [
+   1540,
+   ".dlg «Đại phóng cung nhân» «Lui»"
+  ],
+  [
+   1541,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   1542,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   1543,
+   ".dlg «Có người đến» «Đáp trả sắc sảoRất vữngTốnkhôngĐượcthêm thể diệnMấ»"
+  ],
+  [
+   1543,
+   "page «Ngọc Thanh các · Ở đây còn 3 người.» «Dư đồ»"
+  ],
+  [
+   1544,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   1544,
+   ".mapsc «Mệnh truyện»"
+  ],
+  [
+   1545,
+   "page «Ngọc Thanh các · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   1545,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   1545,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1546,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   1548,
+   "DEAD Chuẩn bị thị tẩm"
+  ],
+  [
+   1549,
+   ".dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngHiểmTốnkhôngĐượcdựa vào ân»"
+  ],
+  [
+   1549,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   1551,
+   "DEAD Chuẩn bị thị tẩm"
+  ],
+  [
+   1552,
+   ".dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcđược thị tẩm, g»"
+  ],
+  [
+   1553,
+   ".dlg «Chuẩn bị thị tẩm» «Điểm trang lộng lẫyRất vữngTốnBạc -5Đượcbệ hạ để m»"
+  ],
+  [
+   1557,
+   ".dlg «Đêm thị tẩm» «Bàn chuyện thiên hạKhó lườngTốnkhôngĐượcđêm vui, H»"
+  ],
+  [
+   1558,
+   ".dlg «Đêm thị tẩm» «Im lặng, tựa vai ngàiRất vữngTốnkhôngĐượcthêm tình»"
+  ],
+  [
+   1558,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1558,
+   ".kne «Tiếp tục»"
+  ],
+  [
+   1561,
+   "#kmrew «Thường»"
+  ],
+  [
+   1562,
+   ".dlg «Lui»"
+  ],
+  [
+   1563,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1564,
+   ".dlg «Lui»"
+  ],
+  [
+   1565,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   1566,
+   ".dlg «Lui»"
+  ],
+  [
+   1567,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1567,
+   ".dlg «Lui»"
+  ],
+  [
+   1569,
+   "#kmrew «Thường»"
+  ],
+  [
+   1569,
+   ".dlg «Lui»"
+  ],
+  [
+   1571,
+   "#kmrew «Thường»"
+  ],
+  [
+   1571,
+   ".dlg «Lui»"
+  ],
+  [
+   1572,
+   "#kmrew «Thường»"
+  ],
+  [
+   1573,
+   ".dlg «Lui»"
+  ],
+  [
+   1574,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1575,
+   ".dlg «Lui»"
+  ],
+  [
+   1576,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1578,
+   "DEAD ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện"
+  ],
+  [
+   1578,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1579,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1579,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1579,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1579,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1581,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1583,
+   ".dlg «Tỉnh thân» «Nhận quà nhà gửi vàoTốnkhôngĐượcBạc +18»"
+  ],
+  [
+   1587,
+   ".dlg «Tỉnh thân» «Đứng về phía Gia tần Cố Mộng Dao, chê nhà Ý tần Lâ»"
+  ],
+  [
+   1587,
+   ".dlg «Lỡ hẹn» «Lui»"
+  ],
+  [
+   1589,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   1589,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   1590,
+   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang buổi»"
+  ]
+ ],
+ "unstick": [
+  {
+   "at": 618,
+   "lvl": 1,
+   "layer": "page",
+   "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+  },
+  {
+   "at": 625,
+   "lvl": 1,
+   "layer": "page",
+   "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+  },
+  {
+   "at": 640,
+   "lvl": 3,
+   "layer": "page",
+   "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+  },
+  {
+   "at": 805,
+   "lvl": 3,
+   "layer": "page",
+   "title": "Ngọc Thanh các · Ở đây còn 3 người."
+  },
+  {
+   "at": 1079,
+   "lvl": 1,
+   "layer": "page",
+   "title": "Thái y viện · Ở đây còn 1 người."
+  },
+  {
+   "at": 1086,
+   "lvl": 1,
+   "layer": "page",
+   "title": "Thái y viện · Ở đây còn 1 người."
+  },
+  {
+   "at": 1093,
+   "lvl": 1,
+   "layer": "page",
+   "title": "Thái y viện · Ở đây còn 1 người."
+  },
+  {
+   "at": 1100,
+   "lvl": 1,
+   "layer": "page",
+   "title": "Thái y viện · Ở đây còn 1 người."
+  },
+  {
+   "at": 1106,
+   "lvl": 1,
+   "layer": "page",
+   "title": "Thái y viện · Ở đây còn 1 người."
+  },
+  {
+   "at": 1112,
+   "lvl": 3,
+   "layer": "page",
+   "title": "Thái y viện · Ở đây còn 1 người."
+  }
+ ]
+}
