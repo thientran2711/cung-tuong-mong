@@ -308,7 +308,7 @@ window.eaPick=eaPick;
 /* ======================= (3) OUTBURSTS: what each reaction does ======================= */
 /* returns {h: story lines, past: the real numbers} for her event; NPC: applies and returns a news line */
 /* jtperc (temper perception, seat T2): every outburst passes the ONE onlooker rule (window.tpOut) after it lands */
-function eaDo(p,r){const o=eaDo0(p,r);try{if(o&&typeof window.tpOut==="function")window.tpOut(p,r,o)}catch(e){}return o}
+function eaDo(p,r){const at=typeof window.tpAt==="function"?window.tpAt(p,null):null;/* who stood there when it started */const o=eaDo0(p,r);try{if(o&&typeof window.tpOut==="function")window.tpOut(p,r,o,at)}catch(e){}return o}
 function eaDo0(p,r){const F=BAL.ea.fx[r.k]||{vent:BAL.ea.ventDef},me=p===S,res=[];let h="",target=null;const add=(t)=>res.push(t);
  /* the outburst spends the feeling: her bar moves toward calm (down from joy, up from a low mood) */
  const vent=()=>{if(me){const d=ventMe((S.mood&&S.mood.v>0?-1:1)*F.vent,lc1(r.n));if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,F.vent)};
