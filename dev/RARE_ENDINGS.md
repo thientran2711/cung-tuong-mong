@@ -17,7 +17,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 
 ### Con gái Tể tướng
 
-#### Quân cờ trong tay cha (`tt_co`) — ✦ Người cầm ấn phủ Tể tướng
+#### Quân cờ trong tay cha (`tt_co`) — ✦ Ấn tướng phủ về tay ngọc
 
 - Lựa chọn hiện ở hồi cuối: «Xin cha giao sổ môn sinh vào tay ngươi» · chi phí: Sức -4, Bạc -60
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Nhắc tên người khác»; «mua chuộc nàng»; «Báo cho {v} đề phòng»; «Tự đến xin Hoàng hậu»; «Đưa tin giả cho cha»; «Tự đứng vững»
@@ -26,9 +26,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Đêm ấy {dad} lặng nhìn ngươi rất lâu, rồi tự tay đặt cuốn sổ môn sinh lên bàn: “Cha già rồi. Từ nay phủ Tể tướng nghe con.” Ông dâng sớ cáo lão, về quê được ban ngựa xe vinh hiển; người trong triều ai muốn tiến thân đều phải gõ cửa cung ngươi.
 - Thay đổi: Danh +12, Bạc +150, Tai mắt +2 + hệ quả riêng · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Chủ ấn phủ Tể tướng»
-- Tranh: phụ thân — Người cầm ấn phủ Tể tướng
+- Tranh: phụ thân — Ấn tướng phủ về tay ngọc
 
-#### Phủ Tể tướng mắc oan (`tt_oan`) — ✦ Ngự bút minh oan, cha lên Thái sư
+#### Phủ Tể tướng mắc oan (`tt_oan`) — ✦ Ngự bút rửa oan
 
 - Lựa chọn hiện ở hồi cuối: «Dâng kèm nét chữ thật của kẻ làm sổ giả» · chi phí: Sức -4
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Lặng lẽ cho người dò sổ»; «giữ hắn làm chứng»; «Tự đối chiếu nét chữ»; «Nhờ Hàn lâm viện»; «Gom đủ chứng cứ»
@@ -37,9 +37,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Giữa triều, nét chữ trong sổ giả khớp từng nét với thư tay của viên thị lang Hộ bộ. Hoàng thượng đập án, sai trói hắn tại chỗ. Ba hôm sau, tấm biển ngự bút treo trước phủ, cha ngươi được phong Thái sư. Ngài nói: “Nhà này sinh được một đứa con gái hơn mười đứa con trai.”
 - Thay đổi: Danh +12, Sủng +6, Thái hậu với ngươi +5 + hệ quả riêng · Ngự tứ: Biển ngự bút «Trung hiếu lưỡng toàn» · Danh hiệu: «Hiếu nữ phủ Thái sư»
-- Tranh: Hoàng thượng — Ngự bút minh oan, cha lên Thái sư
+- Tranh: Hoàng thượng — Ngự bút rửa oan
 
-#### Phủ Tể tướng chia đôi (`tt_tranh`) — ✦ Huynh trưởng quỳ trước cửa cung
+#### Phủ Tể tướng chia đôi (`tt_tranh`) — ✦ Cốt nhục đoàn viên
 
 - Lựa chọn hiện ở hồi cuối: «Mời cha và huynh cùng vào cung, ngồi chung một mâm» · chi phí: Sức -3, Bạc -80
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Viết thư hỏi thẳng huynh»; «hai phần lễ ngang nhau»; «Khuyên cha chia cho êm»; «Gửi quà giữ chân»; «Âm thầm trả nợ cho huynh»; «Xin Hoàng thượng thăng»
@@ -48,9 +48,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Mâm cơm trong cung ngươi đêm ấy chỉ có ba người. Đến tuần rượu thứ ba, huynh trưởng đứng dậy, quỳ xuống trước ngươi và cha: “Muội gánh cả nhà, huynh lại đi đặt cược vào người ngoài.” Từ đó cả họ chỉ có một phe, và người cầm cờ là ngươi.
 - Thay đổi: Danh +10, Bạc +120, Đức +3 + hệ quả riêng · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Người giữ lửa họ ngoại»
-- Tranh: phụ thân — Huynh trưởng quỳ trước cửa cung
+- Tranh: phụ thân — Cốt nhục đoàn viên
 
-#### Mật ước với Hoàng hậu (`tt_mat`) — ✦ Hoàng hậu trao ấn phượng
+#### Mật ước với Hoàng hậu (`tt_mat`) — ✦ Phượng ấn trao tay
 
 - Lựa chọn hiện ở hồi cuối: «Đến Càn Ninh cung một mình, nói chuyện như tỷ muội» · chi phí: Sức -4
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Đọc kỹ, chép lại»; «Nhận lễ, lựa lời dò ý»; «Hỏi thẳng cha»; «Chép kinh tận tâm»; «Kéo {v} làm đồng minh»; «Gặp Hoàng hậu nói chuyện»
@@ -59,12 +59,12 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Hoàng hậu đốt tờ mật ước trước mặt ngươi: “Cha muội và bổn cung đều tính thiệt hơn. Chỉ muội là đến đây tay không.” Bà xin Hoàng thượng cho ngươi hiệp lý lục cung, nắm sổ sách Nội vụ phủ cùng bà. Cả hậu cung hiểu: ai muốn qua Trung cung phải qua ngươi.
 - Thay đổi: Hoàng hậu với ngươi +25, Danh +12, Tai mắt +2 · Ngự tứ: Trâm đông châu ngự tứ · Danh hiệu: «Hiệp lý lục cung»
-- Tranh: Hoàng hậu — Hoàng hậu trao ấn phượng
+- Tranh: Hoàng hậu — Phượng ấn trao tay
 
 
 ### Con gái Đại tướng quân
 
-#### Khói lửa Nhạn Môn (`dtq_bien`) — ✦ Bia Nhạn Môn khắc tên ngươi
+#### Khói lửa Nhạn Môn (`dtq_bien`) — ✦ Tên khắc bia Nhạn Môn
 
 - Lựa chọn hiện ở hồi cuối: «Xin ra Phụng Tiên điện quỳ tụng kinh suốt ba đêm trận» · chi phí: Sức -8
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Bán trang sức góp quân lương»; «Tự may áo rét»; «Gửi Thái y giỏi nhất»; «Cầu an cho cha»; «Báo ngay cho cha»; «Tìm chứng cứ Binh bộ»
@@ -73,7 +73,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Tin thắng trận về kinh cùng một tấm bia: tướng sĩ Nhạn Môn khắc tên ngươi bên tên cha, vì những tấm áo rét và thuốc men ngươi gửi ra ải. Hoàng thượng đứng trước bia rất lâu, rồi ban cho ngươi phong hiệu “Trung Liệt”. Từ đó trong quân, nhắc đến ngươi ai cũng đứng thẳng lưng.
 - Thay đổi: Sủng +8, Danh +12 + hệ quả riêng · Ngự tứ: Ngọc bội ngự ban · Danh hiệu: «Phong hiệu Trung Liệt»
-- Tranh: Hoàng thượng — Bia Nhạn Môn khắc tên ngươi
+- Tranh: Hoàng thượng — Tên khắc bia Nhạn Môn
 
 #### Bức thư mưu phản (`dtq_vu`) — ✦ Đan thư thiết khoán
 
@@ -86,7 +86,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Thay đổi: Danh +12, Sủng +5 + hệ quả riêng · Ngự tứ: Biển ngự bút «Trung hiếu lưỡng toàn» · Danh hiệu: «Nhà có đan thư thiết khoán»
 - Tranh: Hoàng thượng — Đan thư thiết khoán
 
-#### Binh phù và long ngai (`dtq_binh`) — ✦ Người giữ nửa binh phù
+#### Binh phù và long ngai (`dtq_binh`) — ✦ Nửa mảnh binh phù
 
 - Lựa chọn hiện ở hồi cuối: «Xin ngài cho cha và vua cùng giữ một nửa binh phù» · chi phí: Sức -4
 - Chuỗi lựa chọn: chọn ít nhất 3 trong: «Đáp: cha chỉ giữ hộ»; «Thưa thật: cha già rồi»; «Dò xem ai khuyên ngài»; «Hồi thư khuyên cha tự lui»; «Kết giao với nhà tướng trẻ»; «Chúc mừng tướng trẻ»; «chia quân»; «Khuyên cha về một mình»; «Đỡ lời cha»
@@ -94,10 +94,10 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Điều kiện thêm: Lợi thế ≥ 2, Sủng từ 45
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Hoàng thượng bẻ đôi binh phù ngay trên ngự án, một nửa đưa cha ngươi, một nửa đặt vào tay ngươi: “Trẫm tin cha nàng, vì trẫm tin nàng.” Từ đó, muốn điều quân phải có đủ hai nửa; và nửa kia nằm trong hộp gấm ở cung ngươi.
-- Thay đổi: Sủng +10, Danh +8 + hệ quả riêng · Ngự tứ: Ngọc bội ngự ban · Danh hiệu: «Người giữ nửa binh phù»
-- Tranh: Hoàng thượng — Người giữ nửa binh phù
+- Thay đổi: Sủng +10, Danh +8 + hệ quả riêng · Ngự tứ: Ngọc bội ngự ban · Danh hiệu: «Nửa mảnh binh phù»
+- Tranh: Hoàng thượng — Nửa mảnh binh phù
 
-#### Người anh nơi đất giặc (`dtq_huynh`) — ✦ Huynh về cùng hòa thư
+#### Người anh nơi đất giặc (`dtq_huynh`) — ✦ Hòa thư đưa huynh về
 
 - Lựa chọn hiện ở hồi cuối: «Gửi cho huynh chiếc trâm của mẹ làm tín vật bỏ trốn» · chi phí: Sức -3, Bạc -80
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Tự gom bạc chuộc»; «Xin gặp riêng sứ giặc»; «Nhờ Lễ bộ dò ý»; «Dâng kế đổi tù binh»; «Lấy thư của huynh»; «Bỏ bạc mua đường cứu»
@@ -106,23 +106,23 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Huynh trưởng trốn về giữa mùa tuyết, trong áo giấu bản đồ doanh trại và một bức hòa thư của chính công chúa nước giặc, người đã mở cửa ngục cho huynh. Hai nước nghị hòa. Huynh được phong Trấn Bắc hầu; ngày nhận ấn, huynh quay về phía cung ngươi mà lạy ba lạy.
 - Thay đổi: Danh +12, Sủng +5 + hệ quả riêng · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Muội muội của Trấn Bắc hầu»
-- Tranh: Hoàng thượng — Huynh về cùng hòa thư
+- Tranh: Hoàng thượng — Hòa thư đưa huynh về
 
 
 ### Con gái nhà buôn muối
 
-#### Mua tước cho cha (`muoi_tuoc`) — ✦ Hoàng gia thương hội
+#### Mua tước cho cha (`muoi_tuoc`) — ✦ Thương hội mang ấn rồng
 
 - Lựa chọn hiện ở hồi cuối: «Xin Thái hậu cho nhà ngươi đứng ra lập thương hội cho triều đình» · chi phí: Sức -4, Bạc -100
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Dâng bạc vào quốc khố»; «Tặng {v} hũ muối»; «Xin nhà ngươi gánh hết»; «Góp một phần»; «Đưa sổ sách sạch»; «Xin chờ tước thật»
 - Phá: «Nhận hư hàm»; «Đưa bạc»
 - Điều kiện thêm: Lợi thế ≥ 2, Thái hậu với ngươi từ 40
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
-- Kết quả: Thái hậu đặt chén trà xuống: “Bạc nhà con, lòng con, ai gia đều thấy.” Thánh chỉ ban xuống: lập Hoàng gia thương hội lo muối, trà, tơ cho nội đình, nhà ngươi đứng tên hội trưởng đời đời. Kẻ từng chê mùi muối nay xếp hàng xin vào hội.
-- Thay đổi: Danh +10, Bạc +200, Thái hậu với ngươi +5 · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Người lập Hoàng gia thương hội»
-- Tranh: Thái hậu — Hoàng gia thương hội
+- Kết quả: Thái hậu đặt chén trà xuống: “Bạc nhà con, lòng con, ai gia đều thấy.” Thánh chỉ ban xuống: lập Thương hội mang ấn rồng lo muối, trà, tơ cho nội đình, nhà ngươi đứng tên hội trưởng đời đời. Kẻ từng chê mùi muối nay xếp hàng xin vào hội.
+- Thay đổi: Danh +10, Bạc +200, Thái hậu với ngươi +5 · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Người lập Thương hội mang ấn rồng»
+- Tranh: Thái hậu — Thương hội mang ấn rồng
 
-#### Thuyền muối đêm (`muoi_lau`) — ✦ Lưới muối lậu của Hộ bộ
+#### Thuyền muối đêm (`muoi_lau`) — ✦ Phá lưới muối lậu
 
 - Lựa chọn hiện ở hồi cuối: «Dâng sổ tay của quản sự gian kèm danh sách thuyền đêm» · chi phí: Sức -4, Bạc -40
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Dò xem cha có thật bị oan»; «Tâu xin minh xét»; «Giữ hắn làm chứng»; «Bắt hắn viết lời khai»; «Cho người kiểm khoang»; «Khéo từ chối, để ý nàng»; «Lật đến cùng»
@@ -131,9 +131,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Sổ tay của quản sự gian lật ra cả một mạng lưới: chính quan Hộ bộ cài muối lậu vào thuyền các nhà buôn để tống tiền. Hoàng thượng chém đầu cả bọn, rồi giao cho cha ngươi chức Diêm vận sứ, coi muối khắp Giang Nam. Cái tên từng bị bôi đen nay sáng nhất bến Giang Khẩu.
 - Thay đổi: Danh +12, Bạc +120 · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Con gái Diêm vận sứ»
-- Tranh: Hoàng thượng — Lưới muối lậu của Hộ bộ
+- Tranh: Hoàng thượng — Phá lưới muối lậu
 
-#### Năm đói ở Giang Nam (`muoi_doi`) — ✦ Sinh từ Giang Nam
+#### Năm đói ở Giang Nam (`muoi_doi`) — ✦ Giang Nam lập sinh từ
 
 - Lựa chọn hiện ở hồi cuối: «Xin được đội nón lá ra lều cháo cùng dân một ngày» · chi phí: Sức -8, Bạc -60
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «mở kho bán giá cũ»; «Lập lều cháo»; «Khuyên Hoàng thượng giảm thuế»; «Tự nguyện dâng thóc»; «Bảo cha bán rẻ»; «Tự ra lều phát thuốc»; «Gửi thuốc men»
@@ -142,9 +142,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Năm sau được mùa, dân Giang Nam góp gạch dựng một sinh từ thờ ngươi khi còn sống. Ngự sử về tâu, Hoàng thượng cười mà phong cho ngươi chữ “Nhân” làm phong hiệu. Mỗi lần ngươi qua cổng, người ta thắp hương mà khấn tên ngươi.
 - Thay đổi: Đức +6, Danh +12, Sủng +4 + hệ quả riêng · Ngự tứ: Biển ngự bút «Trung hiếu lưỡng toàn» · Danh hiệu: «Phong hiệu Nhân»
-- Tranh: Hoàng thượng — Sinh từ Giang Nam
+- Tranh: Hoàng thượng — Giang Nam lập sinh từ
 
-#### Món nợ trong cung (`muoi_no`) — ✦ Kim lan trước Phụng Tiên điện
+#### Món nợ trong cung (`muoi_no`) — ✦ Kim lan Phụng Tiên
 
 - Lựa chọn hiện ở hồi cuối: «Trả sổ nợ cho {v}, rồi xin cùng nàng kết nghĩa» · chi phí: Sức -3, Bạc -50
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Xóa nợ, kết ơn»; «Cho vay không điều kiện»; «Không bán, báo cho {v}»; «Đứng ra nói đó là quà»; «Cho thêm hạn»; «Nhắc khéo {v}»
@@ -153,12 +153,12 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: {v} cầm sổ nợ mà khóc. Trước bàn thờ Phụng Tiên điện, hai người thắp ba nén hương, kết làm tỷ muội kim lan. Từ hôm ấy, mọi lời {v} nói với Hoàng thượng đều có một câu nhắc đến ngươi, và phe nàng thành phe ngươi.
 - Thay đổi: Danh +6, Đức +4 + hệ quả riêng · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Tỷ muội kim lan»
-- Tranh: phi tần trong truyện — Kim lan trước Phụng Tiên điện
+- Tranh: phi tần trong truyện — Kim lan Phụng Tiên
 
 
 ### Cung nữ được sủng hạnh
 
-#### Chủ cũ (`cn_chu`) — ✦ Chủ cũ dâng trà
+#### Chủ cũ (`cn_chu`) — ✦ Chén trà năm xưa
 
 - Lựa chọn hiện ở hồi cuối: «Tự tay pha cho {v} chén trà năm xưa nàng thích» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Quỳ dâng trà, mỉm cười»; «Gửi bạc kết thân»; «Thừa nhận, xin lỗi»; «Đứng ra nói giúp chủ cũ»; «Nói tốt về {v}»; «Gửi lời làm hòa»
@@ -167,9 +167,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Chén trà năm xưa nay ngươi pha, {v} nhận lấy bằng hai tay rồi quỳ xuống: “Thuở ấy ta đối đãi muội chẳng ra gì.” Hoàng thượng biết chuyện, khen ngươi “không quên gốc”, ban cho ngươi một cây trâm. {v} từ đó theo ngươi như người nhà.
 - Thay đổi: Danh +10, Đức +5, Sủng +4 + hệ quả riêng · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Ân chủ của chủ cũ»
-- Tranh: phi tần trong truyện — Chủ cũ dâng trà
+- Tranh: phi tần trong truyện — Chén trà năm xưa
 
-#### Mối tình thuở hầu trà (`cn_tinh`) — ✦ Người cũ cứu giá
+#### Mối tình thuở hầu trà (`cn_tinh`) — ✦ Cố nhân hộ giá
 
 - Lựa chọn hiện ở hồi cuối: «Xin Hoàng thượng cho {n1} theo hộ giá chuyến săn mùa thu» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Gặp hắn một lần, nói rõ»; «Xin Nội vụ phủ đổi hắn»; «Nhờ người hỏi lấy lại thư»; «Cho {n1} xin ra biên»; «Âm thầm cứu hắn»; «Cười nói tự nhiên»; «Chuẩn bị lời giải thích»; «đánh tráo thư»
@@ -178,9 +178,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Trong cuộc săn, mãnh hổ lao vào ngự giá; {n1} chắn trước Hoàng thượng mà đỡ một vết vuốt. Ngài hỏi hắn muốn gì, hắn chỉ xin cưới một cung nữ ở quê. Đêm ấy Hoàng thượng nắm tay ngươi: “Người cũ của nàng cũng là trung thần của trẫm.” Thư cũ từ đó không còn ai dám nhắc.
 - Thay đổi: Sủng +10, Danh +6 · Ngự tứ: Ngọc bội ngự ban · Danh hiệu: «Người Hoàng thượng tin tuyệt đối»
-- Tranh: Hoàng thượng — Người cũ cứu giá
+- Tranh: Hoàng thượng — Cố nhân hộ giá
 
-#### Tri kỷ ở Tân Giả khố (`cn_ban`) — ✦ Tố Nga làm nữ quan
+#### Tri kỷ ở Tân Giả khố (`cn_ban`) — ✦ Tố Nga khoác áo nữ quan
 
 - Lựa chọn hiện ở hồi cuối: «Xin Thái hậu cho Tố Nga vào Thượng cung cục» · chi phí: Sức -3, Bạc -60
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Lén gửi thuốc và bạc»; «Đến Tân Giả khố gặp nàng»; «Biếu chưởng sự»; «Hứa che chở»; «Lén mời thái y»; «Tự bốc thuốc»; «Nhận là bạn cũ»; «Xin Tố Nga về hầu»
@@ -189,7 +189,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Thái hậu nghe xong chuyện cái giếng thì nhắm mắt rất lâu. Tố Nga được minh oan, phong làm chưởng ấn nữ quan Thượng cung cục, coi sổ sách y phục, đồ dùng cả lục cung. Từ nay, cung nào may áo gì, nhận đồ gì, ngươi đều biết trước một ngày.
 - Thay đổi: Danh +8, Tai mắt +3, Thái hậu với ngươi +4 · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Ân nhân của Thượng cung cục»
-- Tranh: cung nữ thân tín — Tố Nga làm nữ quan
+- Tranh: cung nữ thân tín — Tố Nga khoác áo nữ quan
 
 #### Thân thế thật (`cn_than`) — ✦ Huyện chúa họ Thẩm
 
@@ -205,7 +205,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 
 ### Công chúa nước Nam Chiếu hòa thân
 
-#### Mật lệnh cố quốc (`nc_gian`) — ✦ Hòa ước mang tên ngươi
+#### Mật lệnh cố quốc (`nc_gian`) — ✦ Hòa ước khắc danh
 
 - Lựa chọn hiện ở hồi cuối: «Viết một bức thư cho cả hai vua, đóng hai ấn» · chi phí: Sức -4
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Dâng thư lên Hoàng thượng»; «Đổi nàng về phe mình»; «sửa sai đi khi gửi»; «Biếu Tổng quản»; «Gửi một tin nhỏ vô hại»; «Báo cho Hoàng thượng chuẩn bị»; «Gửi tin giả»
@@ -214,7 +214,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Bức thư hai ấn của ngươi đến tay cả phụ vương lẫn Hoàng thượng cùng một ngày. Hai nước dừng binh bên sông Lan Thương, ký hòa ước mười năm, và trong hòa ước có tên ngươi làm người bảo đảm. Từ đó sứ hai nước sang, đều qua cung ngươi trước.
 - Thay đổi: Danh +12, Sủng +6 + hệ quả riêng · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Người bảo đảm hòa ước»
-- Tranh: Hoàng thượng — Hòa ước mang tên ngươi
+- Tranh: Hoàng thượng — Hòa ước khắc danh
 
 #### Sứ đoàn cố quốc (`nc_su`) — ✦ Chợ biên Vĩnh Hòa
 
@@ -274,7 +274,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Thay đổi: Danh +12, Tai mắt +3, Tâm cơ +3 + hệ quả riêng · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Người cầm kim bài tra án»
 - Tranh: Hoàng thượng — Kim bài tra án hậu cung
 
-#### Người em còn sống (`td_song`) — ✦ Em trai thành tướng quân
+#### Người em còn sống (`td_song`) — ✦ Đệ đệ khoác chiến bào
 
 - Lựa chọn hiện ở hồi cuối: «Xin Hoàng thượng cho gặp chàng lính trẻ ấy một lần» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Gửi bạc ra biên»; «Tra xem lái buôn»; «Nói có một người họ xa»; «làm hỏa đầu quân»; «Để em nhận công»; «Khen chàng lính trẻ»; «Chuẩn bị xin ân xá»
@@ -283,9 +283,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Chàng lính trẻ quỳ trước ngự giá, ngẩng lên, và Hoàng thượng nhìn ngươi, rồi nhìn hắn: hai gương mặt giống nhau như hai giọt nước. Ngài không hỏi gì, chỉ ban chiếu: lính phu ấy lập công cứu ải, phong Du kích tướng quân, cho khôi phục họ cũ. Đêm ấy hai chị em khóc trọn một canh.
 - Thay đổi: Danh +10, Sủng +6 + hệ quả riêng · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Tỷ tỷ của tướng quân»
-- Tranh: Hoàng thượng — Em trai thành tướng quân
+- Tranh: Hoàng thượng — Đệ đệ khoác chiến bào
 
-#### Thù hay tha (`td_tha`) — ✦ Cởi oan nghiệt hai nhà
+#### Thù hay tha (`td_tha`) — ✦ Oan gia giải kết
 
 - Lựa chọn hiện ở hồi cuối: «Đưa {foe} đến bàn thờ cha mẹ ngươi» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Lén gửi bài thuốc»; «Bước ra an ủi»; «Ngăn {maid} lại»; «Trả thư cho {foe}»; «Gửi lễ mừng»; «Nói hết nỗi đau»
@@ -294,7 +294,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: {foe} thắp hương trước bài vị cha mẹ ngươi, rồi về khuyên cha tự thú. {foed} dâng sớ nhận tội, xin minh oan cho nhà ngươi trước khi chịu phạt. Hai người con gái của hai nhà thù kết làm tỷ muội. Hoàng thượng nói: “Trẫm chưa thấy ai trả thù đẹp như thế.”
 - Thay đổi: Đức +8, Danh +10, Sủng +4 + hệ quả riêng · Ngự tứ: Biển ngự bút «Trung hiếu lưỡng toàn» · Danh hiệu: «Người cởi oan nghiệt»
-- Tranh: con gái kẻ thù — Cởi oan nghiệt hai nhà
+- Tranh: con gái kẻ thù — Oan gia giải kết
 
 
 ### Cháu gái Thái hậu
@@ -332,7 +332,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Thay đổi: Thái hậu với ngươi +15, Danh +8, Đức +3 + hệ quả riêng · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Song phượng Đức Thọ cung»
 - Tranh: Thái hậu — Song phượng Đức Thọ cung
 
-#### Bí mật năm xưa (`ch_bi`) — ✦ Người phi tần năm xưa còn sống
+#### Bí mật năm xưa (`ch_bi`) — ✦ Cố nhân còn tại thế
 
 - Lựa chọn hiện ở hồi cuối: «Đưa lão cung nữ đến gặp Thái hậu lúc không có ai» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Giữ kỹ, không cho ai biết»; «Tìm gặp lão cung nữ»; «Biếu Tổng quản»; «Dò ngược lại»; «Thưa thật với bà»; «Tìm cách lấy lại»; «Đưa lão cung nữ về bên mình»
@@ -341,7 +341,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Lão cung nữ gỡ khăn: chính là vị phi tần năm xưa được cho là đã chết, sống sót nhờ Thái hậu lén thả đi. Hai bà lão nhìn nhau, khóc như hai thiếu nữ. Bí mật hóa ra là một ân tình. Thái hậu nói với ngươi: “Ai gia nợ con một mạng của tình xưa.”
 - Thay đổi: Thái hậu với ngươi +20, Đức +5, Danh +6 · Ngự tứ: Biển ngự bút «Trung hiếu lưỡng toàn» · Danh hiệu: «Người giữ ân tình Đức Thọ cung»
-- Tranh: Thái hậu — Người phi tần năm xưa còn sống
+- Tranh: Thái hậu — Cố nhân còn tại thế
 
 
 ### Con gái thầy đồ nghèo
@@ -368,7 +368,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Thay đổi: Danh +14, Tài +3, Đức +3 · Ngự tứ: Biển ngự bút «Trung hiếu lưỡng toàn» · Danh hiệu: «Người chú giải sách Thái phó»
 - Tranh: Hoàng thượng — Sách cha vào Quốc Tử Giám
 
-#### Học trò của cha (`thd_tro`) — ✦ Học trò đỗ Trạng nguyên ân khoa
+#### Học trò của cha (`thd_tro`) — ✦ Trò cũ đỗ Trạng nguyên
 
 - Lựa chọn hiện ở hồi cuối: «Xin Hoàng thượng mở một kỳ ân khoa, tự ngài ra đề» · chi phí: Sức -4
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Gửi bạc giúp hắn»; «Dò xem lời hắn có thật»; «Khuyên Hoàng thượng phúc khảo»; «Giữ kín, gom chứng cứ»; «Mua chuộc người giữ kho»; «Nhờ học sĩ Hàn lâm»; «Mời thầy thuốc, giấu hắn»; «Gửi lời động viên»
@@ -377,7 +377,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Kỳ ân khoa do chính Hoàng thượng ra đề. {n1} đỗ Trạng nguyên, cưỡi ngựa dạo phố ba ngày. Ngày vào triều, hắn quỳ hướng về hậu cung mà lạy, và cả triều biết vị Trạng nguyên mới là người của ai. Kẻ mua đề năm trước bị lưu đày.
 - Thay đổi: Danh +12, Tai mắt +2, Sủng +4 · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Ân sư của Trạng nguyên»
-- Tranh: Hoàng thượng — Học trò đỗ Trạng nguyên ân khoa
+- Tranh: Hoàng thượng — Trò cũ đỗ Trạng nguyên
 
 #### Thầy giáo trong cung (`thd_hoc`) — ✦ Nữ sư của Đông cung
 
@@ -393,7 +393,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 
 ### Cung nữ tuyển vào cung
 
-#### Bí mật của chủ nhân (`cnv_chu`) — ✦ Chủ nhân nhận làm nghĩa muội
+#### Bí mật của chủ nhân (`cnv_chu`) — ✦ Chủ tớ thành tỷ muội
 
 - Lựa chọn hiện ở hồi cuối: «Quỳ xin chủ nhân để nô tỳ gánh cùng» · chi phí: Sức -4
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Hỏi chủ có cần giúp»; «Quỳ xuống: nô tỳ không thấy gì»; «Lén lấy một ít đem hỏi»; «Từ chối, báo chủ»; «Lén đổ thuốc đi»; «Quỳ xin chủ đừng làm»; «Thưa khéo cho chủ»; «Một mình nhận hết»
@@ -402,9 +402,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: {mis} ôm lấy ngươi mà khóc: gói thuốc ấy là để tự hại mình, vì một nỗi oan không ai biết. Ngươi ở bên chủ suốt mùa đông, đến khi nàng đứng dậy được. Ngày xuân, nàng nhận ngươi làm nghĩa muội và tự mình tiến cử ngươi lên Hoàng thượng.
 - Thay đổi: Danh +6, Chủ tin +20 + hệ quả riêng · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Nghĩa muội của chủ nhân»
-- Tranh: chủ nhân — Chủ nhân nhận làm nghĩa muội
+- Tranh: chủ nhân — Chủ tớ thành tỷ muội
 
-#### Chị em đồng hương (`cnv_ban`) — ✦ Hai chị em vào Thượng cung cục
+#### Chị em đồng hương (`cnv_ban`) — ✦ Tỷ muội cùng vào Thượng cung
 
 - Lựa chọn hiện ở hồi cuối: «Đưa chiếc khăn có thêu tên Thu Cúc ra trước chưởng sự» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Đến xin cho nàng»; «Lặng lẽ dò xem ai lấy vòng»; «Rình bắt Thu Cúc»; «Nói thẳng với Thu Cúc»; «Lén mang thuốc»; «Bênh bạn»; «Lấy lại khăn»; «Báo trước với chưởng sự»; «Tìm người làm chứng»
@@ -413,7 +413,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Chiếc khăn lật ngược cả phiên xử. Xuân Đào được minh oan, và chưởng sự Thượng cung cục, người ngồi nghe từ đầu, xin cả hai chị em về làm việc dưới trướng bà: một người coi kim chỉ, một người coi sổ sách. Từ cô gái giặt áo, ngươi thành người được cả lục cục kính nể.
 - Thay đổi: Danh +6 + hệ quả riêng · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Nữ quan Thượng cung cục»
-- Tranh: cung nữ thân tín — Hai chị em vào Thượng cung cục
+- Tranh: cung nữ thân tín — Tỷ muội cùng vào Thượng cung
 
 #### Ánh mắt nơi hành lang (`cnv_mat`) — ✦ Phá lệ phong Quý nhân
 
@@ -440,7 +440,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 
 ### Tuyến chung
 
-#### Người thân thất lạc (`s_than`) — ✦ Mẹ còn sống
+#### Người thân thất lạc (`s_than`) — ✦ Từ mẫu chưa khuất
 
 - Lựa chọn hiện ở hồi cuối: «Hỏi hắn câu cuối: mẹ ta có hát ru bài gì» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Hỏi những chuyện chỉ người nhà biết»; «Đề phòng, theo dõi»; «Nhận»; «Phản đòn: hỏi ai đưa hắn vào»; «Đứng ra bảo lãnh»; «Tha thứ, cho hắn làm tai mắt»
@@ -449,9 +449,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Hắn hát được bài ru ấy, và hắn biết thêm một điều không ai biết: mẹ ngươi chưa chết trong trận lụt, bà sống ở một am nhỏ ngoài kinh. Hoàng thượng nghe chuyện, sai kiệu đón bà vào cung một ngày. Ngươi gục đầu vào lòng mẹ mà khóc như năm lên sáu.
 - Thay đổi: Đức +5, Danh +6, Sủng +6 · Ngự tứ: Trâm ngọc như ý ngự tứ · Danh hiệu: «Người đoàn viên»
-- Tranh: Hoàng thượng — Mẹ còn sống
+- Tranh: Hoàng thượng — Từ mẫu chưa khuất
 
-#### Bức mật thư (`s_thu`) — ✦ Thóp của kẻ đứng trên
+#### Bức mật thư (`s_thu`) — ✦ Nắm thóp kẻ bề trên
 
 - Lựa chọn hiện ở hồi cuối: «Đặt cả hai bức thư cạnh một bản sớ cũ của Trung cung» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Giữ thư, dò nét chữ»; «Báo ngay cho {v2}»; «Theo dõi cung nữ ấy»; «Cho người canh thuốc»; «Ngầm cho nàng biết»; «Đề phòng, đổi người hầu»; «Đưa cả hai thư cho Tổng quản»; «Chuẩn bị tố»
@@ -460,7 +460,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Nét chữ trong thư không phải của {v}: nàng chỉ là người chép lại. Bàn tay viết thư thật ở cao hơn nhiều. Ngươi không tố ai cả; ngươi chỉ gửi đến người ấy một bản chép. Từ hôm đó, mọi mưu nhắm vào ngươi trong hậu cung đều lặng lẽ dừng lại.
 - Thay đổi: Tâm cơ +4, Tai mắt +3, Danh +6 + hệ quả riêng · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Người nắm thóp kẻ đứng trên»
-- Tranh: cung nữ thân tín — Thóp của kẻ đứng trên
+- Tranh: cung nữ thân tín — Nắm thóp kẻ bề trên
 
 #### Đêm cháy Tây cung (`s_hoa`) — ✦ Cứu ngự họa tiên đế
 
@@ -473,7 +473,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Thay đổi: Sủng +12, Danh +8 · Ngự tứ: Ngọc bội ngự ban · Danh hiệu: «Người cứu ngự họa»
 - Tranh: Hoàng thượng — Cứu ngự họa tiên đế
 
-#### Sứ thần phương Tây (`s_su`) — ✦ Tên vào sử nước Tây
+#### Sứ thần phương Tây (`s_su`) — ✦ Lưu danh sử nước Tây
 
 - Lựa chọn hiện ở hồi cuối: «Tặng sứ thần một bài thơ và nhờ ông dịch» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Đáp lễ theo lối của họ»; «Dâng lên Thái hậu»; «Vạch ngay giữa yến»; «Lặng lẽ báo Lễ bộ»; «đổi lấy y thuật và lịch pháp»; «Mời sứ thần sửa»; «Đứng ra bảo đảm»
@@ -482,9 +482,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Sứ thần về nước mang theo bài thơ của ngươi và một bức chân dung do họa sĩ trong đoàn vẽ. Mười năm sau, sứ đoàn khác đến, dâng lên Hoàng thượng một cuốn sách in ở phương Tây: trang đầu là chân dung ngươi, chép rằng “Hoàng phi phương Đông, người thông tuệ nhất chúng tôi từng gặp”.
 - Thay đổi: Danh +14, Tài +3 · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Hoàng phi trong sử nước Tây»
-- Tranh: Hoàng thượng — Tên vào sử nước Tây
+- Tranh: Hoàng thượng — Lưu danh sử nước Tây
 
-#### Mùa dịch đậu mùa (`s_dich`) — ✦ Miếu Dược Vương khắc tên
+#### Mùa dịch đậu mùa (`s_dich`) — ✦ Tên khắc miếu Dược Vương
 
 - Lựa chọn hiện ở hồi cuối: «Tự chủng đậu cho mình trước để mọi người tin» · chi phí: Sức -8
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Đóng cửa cung mình»; «Đến Thái y viện xin giúp»; «Dâng phương lên Thái y viện»; «Thử cho người trong cung mình»; «Gửi thuốc và người chăm»; «Mời Thái y khám công khai»; «Xin vào hầu»; «Đứng ra điều phối»; «Góp bạc mua thuốc»
@@ -493,9 +493,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Ngươi sốt ba ngày rồi khỏi, trên tay chỉ còn một vết sẹo nhỏ. Cả kinh thành đổ đi chủng đậu theo phương của ngươi; mùa dịch tắt trước Tết. Hoàng thượng cho dựng miếu Dược Vương, trên bia khắc tên ngươi cạnh các danh y, phong hiệu “Từ Tế”.
 - Thay đổi: Đức +6, Danh +14, Sủng +5 · Ngự tứ: Biển ngự bút «Trung hiếu lưỡng toàn» · Danh hiệu: «Phong hiệu Từ Tế»
-- Tranh: Thái y — Miếu Dược Vương khắc tên
+- Tranh: Thái y — Tên khắc miếu Dược Vương
 
-#### Cám dỗ (`s_tinh`) — ✦ Bài thơ tiễn ra biên
+#### Cám dỗ (`s_tinh`) — ✦ Khúc thơ tiễn biên ải
 
 - Lựa chọn hiện ở hồi cuối: «Viết cho {man} một bài thơ tiễn, nhờ Hoàng thượng chuyển» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 3 trong: «Cảm ơn rồi đi ngay»; «Đốt»; «Từ chối»; «Dồn sức giành lại Hoàng thượng»; «Quát hắn, dọa tố»; «Từ chối, chọn con đường trong cung»; «Xin hắn rời cung»
@@ -504,9 +504,9 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Hoàng thượng đọc bài thơ tiễn trước rồi mới sai người chuyển đi. {man} xin ra biên ải, về sau lập công lớn. Đêm ấy ngài nói: “Nàng có thể giấu trẫm, mà nàng lại đưa cho trẫm đọc.” Từ đó, lời gièm nào về ngươi đến tai ngài cũng bị gạt đi.
 - Thay đổi: Sủng +10, Đức +5, Danh +4 · Ngự tứ: Ngọc bội ngự ban · Danh hiệu: «Người Hoàng thượng không nghi»
-- Tranh: Hoàng thượng — Bài thơ tiễn ra biên
+- Tranh: Hoàng thượng — Khúc thơ tiễn biên ải
 
-#### Lão thái giám (`s_thay`) — ✦ Mạng lưới của lão Tổng quản
+#### Lão thái giám (`s_thay`) — ✦ Tai mắt lão Tổng quản
 
 - Lựa chọn hiện ở hồi cuối: «Ngồi bên giường ông, đọc lại cho ông nghe cuốn sổ» · chi phí: Sức -3
 - Chuỗi lựa chọn: chọn ít nhất 2 trong: «Nghe lời, đi lối khác»; «Hỏi vì sao»; «Giúp»; «Ghi lòng tạc dạ»; «Hỏi phi tần ấy là ai»; «Đứng ra nói giúp»; «Giữ kín»; «Đến thăm, nhận sổ»
@@ -515,7 +515,7 @@ Mã: `dev/build/j97.js` (bọc j67, đứng trước j84 trong assemble.py). Quy
 - Xác suất khi đủ điều kiện: 15 % × 0,9 = 13,5 %
 - Kết quả: Trước lúc nhắm mắt, lão Tổng quản dặn từng người một: các thái giám ở mười hai cung, ba cửa thành, Ngự thiện phòng, Kính sự phòng. “Từ nay các ngươi nghe nàng.” Tai mắt ba đời vua của ông, nay là của ngươi.
 - Thay đổi: Tai mắt +4, Tâm cơ +4, Danh +4 · Ngự tứ: Bộ diêu «Hải đường xuân thụy» ngự tứ · Danh hiệu: «Người kế thừa lão Tổng quản»
-- Tranh: Tổng quản thái giám — Mạng lưới của lão Tổng quản
+- Tranh: Tổng quản thái giám — Tai mắt lão Tổng quản
 
 #### Kẻ thù hóa tri kỷ (`s_ban`) — ✦ Kim lan lật đổ {v2}
 
