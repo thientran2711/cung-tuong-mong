@@ -1,4 +1,35 @@
-# BIG REVIEW review/visitor-fix d60a0ec8 — VERDICT: FAIL (8 items, 2 blocking)
+# BIG REVIEW review/visitor-fix — ROUND 2 VERDICT: BIG PASS f4b8254c (review/visitor-fix-r6 = worker fe9eb3a9 + one reviewer small fix)
+
+PRIORITY #1 CHECK ('visitor-fix'): OD 0 | ledger 0 | claims 1 (VISITOR-FIX session_01V1ZZH3EpiFUfjQmqdR8cmA) | main 0 | review/* review/visitor-fix, review/visitor-fix-r6 | archive 0.
+f4b8254c793d9c108625d5d310fa1a08bf71a805 has origin/main 502c48c9 as ancestor (fast-forwardable).
+
+## Round-1 FAIL items → round 2
+| # | item | result |
+|---|---|---|
+| 1 | silhouette in the encounter scene | FIXED: jdfv showModal makes the visitor known, re-renders the stage and waits (≤4 s) for her real face. Reviewer scene runs (Fold + iPad, high + low): 0 unknown-fig on screen; the focus figure = her painting. The wait never strands the card (the poll always re-calls showModal; scene state w2/df open seen). Card losses seen in reviewer runs come only from the harness clearing Q while another modal was open (same on base). |
+| 2 | voice of non-consorts | FIXED: one table grSelf/grAddr/grVerb: «Vi thần tham kiến Quý nhân tiểu chủ», «Nô tài thỉnh an …»; no «ngươi» inside quotes (visitor-scene test checks it). |
+| 3 | «Tần thiếp» | FIXED (consort→consort «Tần thiếp», to HH/TH/Emperor «Thần thiếp»). |
+| 4 | no personal name / descriptor in speech | FIXED: «Tần thiếp thỉnh an Quý phi nương nương», unnamed: «… thỉnh an nương nương / tiểu chủ». |
+| 5 | arrival for every visitor | FIXED: met visitor card (gmReplyCard) starts with visitArrive + title; j24 AP kinds; j68 visit family (visitArrive / visitArriveK); higher visitor never gets the humble tone pools (gmSay). |
+| 6 | door vs road | FIXED: door lines at home, «Phía trước có tiếng cung nhân xướng …» / «Có người rảo bước tới …» elsewhere; road-only lines removed from GREET_COME_HI. |
+| 7 | repeated name + know-toast | FIXED: __k61noKn suppresses the toast for announced visitors; no second «nói tên mình». |
+| 8 | small wording | FIXED (jtone_c, kitNameList «N vị phi tần»). |
+| R6 | reviewer small fix (f4b8254c) | owner 22:08Z «người đó xưng tên ngay từ ở cửa»: round 2 had «Tần thiếp xin cầu kiến» with NO name → now «Tần thiếp Đáp ứng <tên> xin cầu kiến» (non-consorts «Vi thần/Nô tài <tên> …»); the follow-up line uses «Nàng». |
+
+## Tests on f4b8254c / fe9eb3a9
+quickcheck f4b8254c PASS (open 2091 ms, old save ok, core gates PASS, perf new/live render 223/218, buổi 991/1296) · quickcheck fe9eb3a9 PASS · visitor-scene.js 755x1000 + 1180x820 PASS (f4b8254c) · greet-stranger PASS · tone-pool 87 OK · coop-e2e fe9eb3a9 142/142 PASS (R6 is text-only) · name-mask round 1 PASS 40 s.
+
+## Shots (Fold | iPad), CDN img/_review/visitor-fix/ (round-1 shots wiped)
+r2-pair-df-hi.jpg (high rank, «giá đáo», face + name, card) · r2-pair-df-lo.jpg (low rank encounter scene, real face, «Tần thiếp Tần/Phi <tên> xin cầu kiến») · r2-pair-card-unnamed.jpg (stranger on stage: toast «Ta đã thấy mặt một phi tần áo bậc …; chưa biết tên», result «Tần thiếp thỉnh an nương nương/tiểu chủ»).
+
+## Advisory (not blocking, for the queue)
+- A lower visitor who came to HER door still «chưa biết tên ngươi» (greetName rule) — odd for someone who sought her out; consider making the visitor know her name (two-way).
+- Focus-scene figure (KIT_FOC XL, ~398 px on both devices) is smaller than the stage figures (~430–570 px); owner said the visitor looked too small — kit keeper may check KIT_FOC size vs KIT_FIG.
+- Stranger toast «Ta đã thấy mặt …; chưa biết tên.» is still notice voice (kit know-notice), not story.
+
+---
+## ROUND 1 (d60a0ec8) — FAIL, kept below for the record
+## Round 1 detail: d60a0ec8 — FAIL (8 items, 2 blocking)
 
 PRIORITY #1 CHECK ('visitor-fix'): OD 0 | ledger 0 | claims 1 (VISITOR-FIX session_01V1ZZH3EpiFUfjQmqdR8cmA) | main 0 | review/* review/visitor-fix | archive 0. Spec = OD rows «24/11 ~22:02Z real», «~22:08Z real», «~22:14Z real» (read verbatim) + brief visitor-fix.md (ADD, ADD 2) + worker report.
 Reviewer: BIG REVIEWER session_01V1ZZH1BBdQ7Qp6VjTmSeoC. Base check: origin/main 502c48c9 is an ancestor of d60a0ec8 (OK).
