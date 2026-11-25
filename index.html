@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9080dece+","t":"2026-11-24T23:11Z","c":"flight-ui v10: display-time pass = synchronous hooks (render + book build), no observer/timer/rAF (fixes coop-one-world gate when merged wi…","b":"19e838d2f230","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"9878230b+","t":"2026-11-24T23:13Z","c":"flight-ui v11: name tags / plates keep «???» (OD:L673): kitNoUnk is tag-aware, DOM pass strips only the stored phrase unless the container …","b":"e1a21d09c15c","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -27190,7 +27190,9 @@ function q72Do(u,oi){const q=q72();const x=q.a.find(z=>z.u===u);if(!x)return;con
  if(ok){q72Ap(s.w);if(s.r)q72Rel(X.A,s.r);if(s.rb&&X.B)q72Rel(X.B,s.rb);let e="";if(s.fn)try{e=s.fn(X,x,true)||""}catch(er){console.error(er)}txt=`${nm}: ${q72Txt(s.ok||"được việc",X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);q72Go(x,X,o?o.to:null,txt)}
  else{q72Ap(s.l);if(s.lr)q72Rel(X.A,s.lr);if(s.lrb&&X.B)q72Rel(X.B,s.lrb);let e="";if(s.fn)try{e=s.fn(X,x,false)||""}catch(er){}const fm=o?(o.lto||"fail"):st.f;txt=`${nm}: không thành, ${q72Txt(s.no||(fm==="r"?"phải làm lại":"hỏng việc"),X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);
   q72Go(x,X,fm==="r"?"stay":fm==="e"?"fail":fm==="b"?"bad":fm,txt)}
- resultShow(`${q72Title(X)}: ${nm}`,b,ok);render()}
+ /* owner 24/11 ~21:50Z real (v5): the card's first line is ONE plain sentence of what happened to HER; the title is the job, not a copy of the sentence */
+ window.__kaSenOvr=`${q72Title(X)}: ${nm}`;/* = the title: the cause appears ONCE (owner 24/11 ~21:57Z), the card drops the duplicate sentence */
+ try{resultShow(`${q72Title(X)}: ${nm}`,b,ok)}finally{window.__kaSenOvr=null}render()}
 function q72Drop(u){const q=q72();const x=q.a.find(z=>z.u===u);if(!x||Q.length)return;const b=rsnap();const X=q72X(x);q72End(x,"fail",X);resultShow("Bỏ việc",b,false);render()}
 
 /* ---------- she calls a favour in (two-way: they owe her) ---------- */
@@ -28610,7 +28612,7 @@ function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
 /* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị chưa quen biết" for the rest -
    never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
-function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length)A.push(`${K.length?"thêm ":""}${U.length} vị`);return A.join(", ")||none||""}
+function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length){const T=[...new Set(U.map(v=>{try{return k61MaskT(v)}catch(e){return"phi tần"}}))];const t=T.length===1?T[0]:"người trong cung";A.push(U.length===1?`${K.length?"thêm ":""}một vị ${t}`:`${K.length?"thêm ":""}${U.length} vị ${t}`)}return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
 function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
@@ -29117,33 +29119,30 @@ function kaWhyLead(c,i){const m=c.match(/^([^:]{3,50}):\s/);return m&&!/^Vì sao
 function kaWhyStat(C,nm,d,title,key){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*(?:[+−-]\\s*\\d|\\d+\\s*→)","u");const sg=d>0?"+":"-";
  let c=C.find(x=>re.test(x));let r=c&&kaWhyLead(c);
  if(!r&&key==="bac"){c=C.find(x=>/[+−-]\s*\d+\s*bạc/i.test(x)&&(d>0)===!/[−-]\s*\d+\s*bạc/i.test(x));r=c&&kaWhyLead(c)}
- if(!r&&title&&!/^Trong cung vừa qua$/.test(title))r=title;
- if(!r&&KA_WHYD[key])r=KA_WHYD[key][sg];
- return kaWhyClip(r||KA_WHYM)}
+ /* owner 24/11 ~21:57Z + BIG rv F1: a stat row says only «<stat> ±N»; a cause is printed ONLY when it is a real clause of the log that is NOT the card title (never the title, never a generic filler) */
+ void sg;if(!r)return"";const cl=kaWhyClip(r),tn=kaPlain(String(title||"")).toLowerCase(),cn=cl.toLowerCase();if(!cl||!tn||tn.includes(cn)||cn.includes(tn.split(":")[0].trim()))return"";return cl}
 /* person line: "Vì sao: <name>: <why> → …" first, then the log sentence that names her (strangers: "chưa quen biết …"), then the act title */
 function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?nm:null;
  const vs=subj&&C.find(x=>/^Vì sao:/i.test(x)&&x.includes(subj));if(vs){const m=vs.replace(/^Vì sao:\s*/i,"").replace(subj,"").replace(/^[^:]*?:\s*/,"").replace(/\s*→.*$/,"");if(m.trim().length>3)return kaWhyClip(m)}
- const hit=C.find(x=>!/^Vì sao:/i.test(x)&&!/→/.test(x)&&(subj?x.includes(subj):/chưa quen biết/.test(x)));
- if(hit){let t=hit;if(subj)t=t.replace(new RegExp("^.*?"+subj.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*"),"");else t=t.replace(/^.*?chưa quen biết\s*/,"").replace(/^[Mm]ột vị (Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phi|Tần|phi tần|cung nữ|thái giám|Thị vệ|Thái y)\s*/,"");t=t.replace(/\s*\(.*$/,"");if(t.length>3){const c=kaWhyClip(t);if(c&&!KA_WHYBAD.test(c))return c}}
  }catch(e){}
- return kaWhyClip(title&&!/^Trong cung vừa qua$/.test(title)?title:KA_WHYM)}
+ return ""}
 function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
 function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
- const per=[];const U={g:[],b:[]};/* [who, goodParts, badParts] */
+ const per=[];const U={g:[],b:[],d:new Map()};/* [who, goodParts, badParts] */
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
   let da=a-b.a,lo=b.a,hi=a;if(v===q&&q!==S&&before.hh!=null){const dh=(S.hh||0)-before.hh;if(dh){skip.add("hh");if(!da){da=dh;lo=before.hh;hi=S.hh||0}}}
   /* hotfix 11/15: the real before→after, never the bare word "thiện cảm" */
-  if(da)(da>0?gp:bp).push(`${da>0?"quý ngươi hơn":"ghét ngươi hơn"} (${lo}→${hi}, ${kaN(da)})`);else if(m!==b.m)(m>b.m?gp:bp).push(`ngươi ${m>b.m?"quý nàng hơn":"bớt ưa nàng"} (${b.m}→${m}, ${kaN(m-b.m)})`);
+  if(da)(da>0?gp:bp).push(`thiện cảm ${kaN(da)}`);else if(m!==b.m)(m>b.m?gp:bp).push(`ta quý nàng ${kaN(m-b.m)}`);void lo;void hi;
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t)))U.b.push(v)}}}
- {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),["quý ngươi hơn"],[],kaWhyWho(WC,null,false,title)]);if(U.b.length)per.push([kitNameList(U.b),[],["ghét ngươi hơn"],kaWhyWho(WC,null,false,title)])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m))}}}
+ {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaN(U.d.get(v)||1)}`],[],""]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaN(U.d.get(v)||-1)}`],""])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
-  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
-  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
- if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">Thiện cảm ${S.maid.name} ${before.maid}→${S.maid.loyal} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
+  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
+  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
+ if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;
  return [G,B,K]}
@@ -29151,13 +29150,12 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
-function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);const t=K.ttl;if(t&&!/^Trong cung vừa qua$/.test(t))return kaWhyClip(t);return KA_WHYK[k][up?"+":"-"]}catch(e){return""}}
-function kitKemRow(K){if(!K||!K.length)return"";const grp={};for(const x of K){const key=x.k+(x.d>0?"+":"-");(grp[key]=grp[key]||[]).push(x)}
- const parts=Object.entries(grp).map(([key,L])=>{const up=key.endsWith("+"),k=key.slice(0,-1);const ds=L.map(x=>Math.abs(x.d));const lo=Math.min(...ds),hi=Math.max(...ds);
-  const amt=lo===hi?`${lo}`:`${lo}–${hi}`;const verb=up?`${k} thêm ${amt}`:`bớt ${k} ${amt}`;
-  const names=L.map(x=>`${kaNamed(x.v)?kaWho(x.v):"người chưa quen"} ${up?"+":"−"}${Math.abs(x.d)}`);
-  const wy=kaWhyHtml(kaWhyKem(K,k,up));return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span>${wy}<span class="kkeml">${names.join(" · ")}</span></span>`});
- return `<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${parts.join('<span class="ksep">·</span>')}</span></span>`}
+function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
+function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
+ const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
+  return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaN(d)}</span></span>`});
+ if(K.filter(x=>Math.round(x.d)).length>8)L.push(`<span class="kitem"><span class="ef n">… và ${K.filter(x=>Math.round(x.d)).length-8} người khác</span></span>`);
+ return L.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${L.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
    the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
@@ -29195,7 +29193,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
- const rows=[];if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!rows.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">không đổi chỉ số</span>']});
+ const rows=[];if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!rows.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
  t.className="rtoast karesult "+SL.cls;
@@ -42302,7 +42300,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmStick{0%{opacity:0;transform:translate(-50%,30px) rotate(0)}45%{opacity:1;transform:translate(-50%,-46px) rotate(8deg)}100%{opacity:1;transform:translate(10px,6px) rotate(64deg)}}
 /* 3 result card: seal, floating numbers, bars */
 .rtoast.karesult{overflow:visible}
-.kmseal{position:absolute;right:6px;top:-18px;width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
+.kmseal{position:absolute;right:6px;top:auto;bottom:calc(100% - 2px);/* KIT stamp placement (owner 24/11, MAIN 129): the stamp sits on the card's TOP EDGE, above the text, never on words */width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
 .km-thump{animation:kmThump calc(.35s*var(--pace)) ease calc(.45s*var(--pace)) both!important}
 .kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
 .kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
@@ -43689,7 +43687,7 @@ const KIT_PFO={gap:10,dflt:762,band:{cold:762,"consort-0":749,"consort-1":749,"c
 window.KIT_PFO=KIT_PFO;
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
-(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcKey(pc)}catch(e){console.error("kitPcKey",e)}try{kitPcGrid(pc)}catch(e){}try{KIT_PFO.fit(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
+(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcKey(pc)}catch(e){console.error("kitPcKey",e)}try{kitPcGrid(pc)}catch(e){}try{KIT_PFO.fit(pc)}catch(e){}try{if(typeof kitPcScroll==="function")kitPcScroll(pc)}catch(e){console.error("kitPcScroll",e)}try{kitPcSize()}catch(e){}return r}})();
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
 /* KIT 20a person card key block (left column): sits right under the portrait, before the wear slots and stat chips */
@@ -48492,6 +48490,31 @@ html body .pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1!important;min-width:0}
 html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
 /* explicit «more below» cue (scrollbars are not reliable on phones): a card that scrolls and is not at its end gets a bottom fade (class kpmore, set by kitPcMore) */
 html body .pc.kpwide[data-k2].kpmore::after{content:"";display:block;grid-column:1/-1;position:sticky;bottom:0;height:26px;margin-top:-26px;pointer-events:none;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 85%);z-index:5}
+`;document.head.appendChild(st)})();
+/* KIT §6.4 PERSON PANEL SCROLL (owner 24/11 ~21:50Z real, Fold shots v2–v4; restates OD 21/11 #86 + 23/11 ~20:20Z; one shared kit part = every person panel: Hậu cung/Phi tần/Nam nhân/Cung nhân, Giao tình, Việc nhờ, Mệnh truyện…).
+   The card is a FIXED frame (height = --kpcmax, no scrolling of its own): the portrait column keeps name + rank + portrait still (the face is always seen) and ONLY the text under the portrait (.kplscr: Biết tên / thiện cảm / Oán / tiles / wear) scrolls;
+   the right column keeps the info block (.kpstick: Sở trường / Tính nết / Đã biết / Dạo này + the act-group tabs) still and ONLY the act/step area under it scrolls, each column on its own.
+   The portrait keeps its natural width and only shrinks (kitPcFitPortrait) when the card is too short to leave ~80 px of text under the whole frame (tassel included, kitPcClearTassel). */
+function kitPcScroll(pc){try{if(!pc||!pc.classList.contains("kpwide"))return;const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!pcp)return;
+ let w=L.querySelector(":scope > .kplscr");const tail=[...L.children].filter(c=>c!==w&&c!==pcp&&(pcp.compareDocumentPosition(c)&Node.DOCUMENT_POSITION_FOLLOWING));
+ if(!tail.length&&w)return;if(!w){w=document.createElement("div");w.className="kplscr";pcp.after(w)}tail.forEach(c=>w.appendChild(c))}catch(e){console.error("kitPcScroll",e)}}
+window.kitPcScroll=kitPcScroll;
+function kitPcFitPortrait(pc){try{const max=parseFloat(pc.style.getPropertyValue("--kpcmax"))||0;if(!max||!pc.classList.contains("kpwide"))return;let nat=+pc.dataset.kpcw0||0;if(!nat){nat=Math.round(Math.max(150,Math.min(240,((pc.closest("#panel,#stage,#modal .dlg")||pc).clientWidth||0)*.36)));pc.dataset.kpcw0=nat}
+ /* the portrait keeps its natural kit width (OD 18/11 «never shrink to fit») and is shrunk ONLY when the card is so short that no text row would be left under it: the rows sit up over the frame's pendant (visible share of the frame = vis, measured from its own negative margin), at least KPC_MINTXT px of text must stay under it */
+ const nm=pc.querySelector(":scope > .pcl > .pcname"),pcp=pc.querySelector(":scope > .pcl > .pcp"),head=(nm?nm.offsetHeight:44)+8,mb=pcp?parseFloat(pcp.style.marginBottom)||0:0,vis=1;void mb;/* the text starts BELOW the frame's pendant + tassel (kitPcClearTassel), so the whole frame counts */
+ const w=Math.max(120,Math.min(nat,Math.floor((max-head-80)/vis*550/1037)));pc.style.setProperty("--kpcw",w+"px");kitPcClearTassel(pc);requestAnimationFrame(()=>{kitPcClearTassel(pc);requestAnimationFrame(()=>kitPcClearTassel(pc))})}catch(e){}}
+/* the rows under the frame used to start OVER the pendant + tassel (negative margin of the frame): inside the scrolling text area that overlapped the label («Hoàng thượng → ta», owner-visible, KK23b nit): the text area now starts under the tassel */
+function kitPcClearTassel(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
+window.kitPcClearTassel=kitPcClearTassel;
+window.kitPcFitPortrait=kitPcFitPortrait;
+(function(){const k0=window.kitPcKeyFit;kitPcKeyFit=function(pc){try{k0&&k0.apply(this,arguments)}catch(e){}try{kitPcScroll(pc);kitPcFitPortrait(pc)}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
+ const st=document.createElement("style");st.id="kit-pc-scroll";st.textContent=`
+html body .pc.kpwide[data-k2][style*="--kpcmax"]{height:var(--kpcmax)!important;min-height:0!important;max-height:var(--kpcmax)!important;overflow:hidden!important;grid-template-rows:minmax(0,1fr)!important;align-items:stretch!important;padding-bottom:0!important}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcl{display:flex!important;flex-direction:column;height:100%;min-height:0!important;overflow:hidden!important}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcl>.kplscr{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;position:relative;z-index:2;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent;padding-bottom:6px}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcr{height:100%;min-height:0!important;margin-top:0!important;padding-top:0!important;overflow-y:auto!important;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent;padding-bottom:8px}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcr>*{flex-shrink:0}
+html body .pc.kpwide[data-k2][style*="--kpcmax"] .kpstick{top:0;margin:0 0 6px;padding:7px 0 6px;box-shadow:0 4px 6px -4px #5a3a2033}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
@@ -56303,12 +56326,14 @@ function ktQ72HTML(){const q=q72();const mo=q.mo[S.turn]||0;const D=q72Debtors()
  const calls=D.slice(0,8).map(([a,n,k])=>{const r=q72CallFx(a);const cd=evCooldownLeft("q72call:"+k,Q72CFG.cdCall);const tk=q72Fx(r.fx);if(r.rel)tk.push(q72Tok(a,r.rel));
   return{a,n,k,btn:pbtn(`data-q72c="${k}"`,`Nhờ ${q72Short(a)} trả ân`,`tốn: 1 khắc, ${R72(`nợ ân của ${q72Short(a)} -1`)} · thành: ${r.t}, ${tk.join(", ")}`,S.dead?"đã hết kiếp":Q.length?"đang có việc chờ":cd>0?`vừa nhờ, đợi ${cd} tuần`:!can(1)?"hết khắc":"")}});
  const callH=calls.map(x=>x.btn).join("");
- const list=[{k:"now",label:"Đang làm",doable:ktDoable(ask),total:null,n:`${q.a.length}/${Q72CFG.max}`},{k:"debt",label:"Nợ ân",doable:ktDoable(callH),total:null,n:String(D.length+owe.length)},{k:"news",label:"Trong cung",n:String(q.np.length)}];
+ const list=[{k:"now",label:"Đang làm",doable:q.a.length,total:null,n:`${q.a.length}/${Q72CFG.max}`},{k:"find",label:"Tìm việc",doable:q.a.length?0:ktDoable(ask),total:null,n:""},{k:"debt",label:"Nợ ân",doable:ktDoable(callH),total:null,n:String(D.length+owe.length)},{k:"news",label:"Trong cung",n:String(q.np.length)}];
  const sub=kitSubTabs("q72",list,kitInfo("Việc nhờ"));
  let h=sub.html+`<div class="ktop"><span class="kchip n">Đang làm <b>${q.a.length}/${Q72CFG.max}</b></span> <span class="kchip n">Lời nhờ tháng này <b>${mo}/${Q72CFG.mo}</b></span> <span class="kchip g">Xong <b>${q.n.ok||0}</b></span> <span class="kchip r">Hỏng <b>${(q.n.fail||0)+(q.n.bad||0)}</b></span> <span class="kchip n">Từ chối <b>${q.n.dec||0}</b></span></div>`;
- if(sub.cur==="now"){if(q.a.length||q.h.length)h+=`<div class="pcb ktacts"><div class="kpanec">${ask}</div></div>`;
+ /* owner 24/11 ~21:50Z: the «hỏi han» act opens a NEW job, it is not a job in progress → its own sub-tab «Tìm việc»; «Đang làm» shows only the jobs, person panel first */
+ if(sub.cur==="find")h+=kitEmptyTab("Hỏi han xem ai cần giúp",["Ta đến nơi mình đang ở mà hỏi han: ai có việc sẽ ngỏ lời nhờ, ta nhận hay từ chối tùy ý.","Việc ta nhận sẽ hiện ở «Đang làm»."],{topic:"Việc nhờ"},ask);
+ else if(sub.cur==="now"){
   const items=q.a.map((x,i)=>{const X=q72X(x);return{f:X?X.A.f:{ini:"?",col:"#888"},name:X?q72PgN(X.A):"",sep:i===0?"Đang làm":""}}).concat(q.h.slice(0,8).map((z,i)=>({f:z.f||{ini:"?",col:"#888"},name:z.pn||shortN(z.n||"?"),dim:true,sep:i===0?"Đã qua":""})));
-  h+=items.length?`<div class="pgwrap">`+pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length]))+`</div>`:kitEmptyTab("Chưa ai nhờ ta việc gì",["Người trong cung sẽ tìm đến khi cần.","Ta cũng có thể đến các nơi và hỏi han để nghe ai cần giúp."],{topic:"Việc nhờ"},ask)}
+  h+=items.length?`<div class="pgwrap">`+(items.length===1?(PG.q72=0,q.a.length?q72Card(q.a[0]):q72HCard(q.h[0])):pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length])))+`</div>`:kitEmpty("Chưa ai nhờ ta việc gì",["Người trong cung sẽ tìm đến khi cần.","Muốn nghe ai cần giúp, ta sang «Tìm việc» mà hỏi han."],{topic:"Việc nhờ"})}
  else if(sub.cur==="debt"){
   if(calls.length)h+=`<h4 class="kpst">Họ nợ ngươi</h4><div class="ktpeople">${calls.map(x=>`<div class="ktprow">${ktPerson(x.a,`nợ ngươi ${x.n} ân`)}<div class="pcb kpanec">${x.btn}</div></div>`).join("")}</div>`;
   if(owe.length)h+=`<h4 class="kpst">Ngươi nợ họ</h4><div class="ktpeople">${owe.map(([k,v])=>`<div class="ktprow">${ktPersonK(k,(q.dn&&q.dn[k])||k,`ngươi nợ ${-v} ân · họ có thể nhờ lại`)}</div>`).join("")}</div>`;
@@ -56775,7 +56800,7 @@ KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
- {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
+ {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
  `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});
@@ -79493,6 +79518,9 @@ html body .game .mapv.kpmv.kside.kleather{--kmv-fb:54px}
 html body .game .mapv.kpmv.kside.kleather>.mapsc{background:#e6dabf!important}
 html body .game .mapv.kside.kleather>.mapsc .mapimg{-webkit-mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);mask-composite:intersect}
 .mapw .mspot .mlab,.mapw .mspot .mmeta{zoom:var(--mls,1)}
+/* KIT §85.8 HER MARKER IS ALWAYS THE TOP LAYER (owner 24/11 ~22:00Z real, shot v8: «Ta đang ở đây» hid behind the Vĩnh Hòa plaque; covering a plaque's words is fine): the spot she stands on (.here: its tag «Ta + N bóng · còn K khắc», dot, pin) is above every other spot, plaque and tag, on every map (Dư đồ all zooms, palace detail .kpm-spot, Kinh thành) */
+html body .mapw .mspot.here,html body .mapsc .mspot.here{z-index:60!important}
+html body .mapw .mspot.here .mlab,html body .mapw .mspot.here .mmeta,html body .mapw .mspot.here .mfaces{position:relative;z-index:61}
 /* kit-mapgo: a tag the solver moved slides by --kmx/--kmy (set on the spot by mapFit; zoom of the tag compensated) while its tap box stays on the building; a moved tag stays tappable (it opens the same place) */.mapw .mspot>.mlab,.mapw .mspot>.mmeta{translate:calc(var(--kmx,0px)/var(--mls,1)) calc(var(--kmy,0px)/var(--mls,1))}.mapw .mspot.kmmv>.mlab,.mapw .mspot.kmmv>.mmeta{pointer-events:auto!important}
 .mapw .mspot>.mlead{position:absolute;height:0;border-top:2px solid #ffe7b0;transform-origin:0 50%;pointer-events:none;z-index:0;filter:drop-shadow(0 0 1.5px #3a2a1e) drop-shadow(0 0 1px #3a2a1e)}.mapw .mspot>.mlead::before{content:"";position:absolute;left:-4px;top:-5px;width:7px;height:7px;border-radius:50%;background:#ffe7b0;border:1.5px solid #3a2a1e}
 .mapw .mspot.kmhide .mlab,.mapw .mspot.kmhide .mmeta{display:none!important}
@@ -88509,29 +88537,34 @@ let WHY_NIGHT=null;
   if(W.mood)F.push({k:"mood",t:`Hoàng thượng đang ${W.mood>0?"vui":W.mood===-1?"buồn":"giận"}`,s:W.mood>0?1:-1});
   F.push({k:"talk",t:s>=BAL.nightEnd.warm?"đêm vui":s>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt"});whyT();whyNote("emp","sung",d,F,q0)}}catch(e){}return r}})();
 /* ---------- the one sentence ---------- */
-function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Đêm thị tẩm";try{if(p&&p.queen&&typeof kaWho!=="function")return"Hoàng hậu";if(typeof kaNamed==="function"&&!kaNamed(p))return"người chưa quen";return typeof kaWho==="function"?kaWho(p):p.name||""}catch(e){return p&&p.name||""}}
+/* KIT §7 result "Vì sao" (owner 24/11 ~21:50Z real, Fold shot v5: «người chưa quen: theo tính nết → oán +12» = unreadable): ONE plain line per person = WHO (her name, or «Một vị <cung nữ / phi tần / thái giám / tước>» when the name is not yet known to her (owner 24/11 ~22:14Z) — never «người chưa quen» / «chưa quen biết»)
+   + the REAL cause in plain words (nết/trọng named when she knows them, else «ta chưa rõ tính nết nàng») → what it did to HER («oán ta +12», «thiện cảm với ta +6», «Sủng thêm 5»). One colon after the WHO, no %, no vague «theo tính nết». Identical lines of one result merge («… (2 người)»). */
+function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{if(p&&p.queen&&typeof kaWho!=="function")return"Hoàng hậu";if(typeof kaNamed==="function"&&!kaNamed(p)){try{return`Một vị ${k61MaskT(p)}`}catch(e){return"Một vị phi tần"}}return typeof kaWho==="function"?kaWho(p):p.name||""}catch(e){return p&&p.name||""}}
 function whyPron(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{return typeof netSex==="function"&&netSex(p)==="m"?"người":"nàng"}catch(e){return"nàng"}}
-const WHY_STAT={aff:"thiện cảm",oan:"oán",th:"thiện cảm",hh:"thiện cảm",sung:"Sủng"};
+const WHY_STAT={aff:"thiện cảm với ta",oan:"oán ta",th:"thiện cảm với ta",hh:"thiện cảm với ta",sung:"Sủng"};
 /* her own stats are said in words ("Sủng thêm 5"): the Sổ ghi replay (jlogsync) reads "Sủng +5" as a second change */
 const WHY_OWN=new Set(["sung"]);
+function whyUnnamed(p){try{return p!=="th"&&p!=="emp"&&typeof kaNamed==="function"&&!kaNamed(p)}catch(e){return false}}
 function whyText(e,d){const p=e.who;let kn=[],tk=false;try{kn=p==="th"||p==="emp"?[]:trKnown(p)||[]}catch(x){}try{tk=p!=="emp"&&trongKnown(p)}catch(x){}
  /* a person she has not met (name masked) is never described by her nết or trọng either */
- if(whyWho(p)==="người chưa quen"){kn=[];tk=false}
- const parts=[],U=[];
- for(const f of e.F){if(f.k==="net"){if(kn.includes(f.t)){const s=`tính ${f.t}${f.x?` (${f.x})`:""}`;if(!parts.includes(s))parts.push(s)}else if(!U.includes("tính nết"))U.push("tính nết")}
-  else if(f.k==="trong"){if(tk){const s=`trọng ${f.v}: ${f.s>0?"hợp ý":"trái ý"}`;if(!parts.includes(s))parts.push(s)}else{const s=`điều ${whyPron(p)} trọng`;if(!U.includes(s))U.push(s)}}
+ if(whyUnnamed(p)){kn=[];tk=false}
+ const parts=[];let unkNet=false,unkTr=false;
+ for(const f of e.F){if(f.k==="net"){if(kn.includes(f.t)){const s=`tính ${f.t}${f.x?` (${f.x})`:""}`;if(!parts.includes(s))parts.push(s)}else unkNet=true}
+  else if(f.k==="trong"){if(tk){const s=`trọng ${f.v}, ${f.s>0?"hợp ý":"trái ý"}`;if(!parts.includes(s))parts.push(s)}else unkTr=true}
   else if(f.t&&!parts.includes(f.t))parts.push(f.t)}
  {const Ns=parts.filter(x=>/^tính /.test(x));if(Ns.length>1){const i=parts.indexOf(Ns[0]);for(const x of Ns.slice(1))parts.splice(parts.indexOf(x),1);parts[i]="tính "+Ns.map(x=>x.slice(5)).join(", ")}}
- if(U.length){if(parts.some(x=>/^tính /.test(x)))U[U.indexOf("tính nết")]="nết khác chưa rõ";parts.push("theo "+U.filter(Boolean).join(" và "))}
+ /* «Vì sao» only when it tells her a real cause (owner 24/11 ~21:57Z): a cause she does not know («ta chưa rõ tính nết nàng») explains nothing → no line; the number stays on the Được / Mất / Kèm line */
  if(!parts.length)return"";const n=d!=null?d:e.d;if(!n)return"";
- return `${whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN.has(e.stat)?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
+ return `${p==="emp"?"Đêm thị tẩm":whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN.has(e.stat)?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
+/* identical lines of one result (two strangers of the same bậc) say it once with the count */
+function whyUniq(T){const c=new Map();for(const t of T)c.set(t,(c.get(t)||0)+1);return[...c].map(([t,k])=>k>1?`${t} (${k} người)`:t)}
 /* entries of one act merged per person + stat */
 function whyMerge(L){const M=[];for(const e of L){const m=M.find(x=>whyKey(x.who)===whyKey(e.who)&&x.stat===e.stat);if(m){m.d+=e.d;for(const f of e.F)if(!m.F.some(g=>whyFEq(g,f)))m.F.push(f)}else M.push({who:e.who,stat:e.stat,d:e.d,F:e.F.slice()})}return M}
 /* ---------- Sổ ghi: the line that shows the number carries the why ---------- */
 const WHY_LRX=/\d/;
 /* a line carries the why of a change only when it names that person (her name, or Thái hậu / Hoàng hậu) — never an unrelated line */
 function whyNames(h,e){const t=String(h).replace(/<[^>]+>/g,"");const p=e.who;if(p==="th")return /Thái hậu/.test(t);if(p==="emp")return /Thị tẩm|thị tẩm|Hoàng thượng/.test(t);if(!p||!p.name)return false;return t.includes(p.name)||(!!p.queen&&/Hoàng hậu/.test(t))}
-function whyLogTail(L){const T=whyMerge(L).map(e=>whyText(e)).filter(Boolean);return T.length?` <span class="past kwl">Vì sao: ${T.join("; ")}.</span>`:""}
+function whyLogTail(L){const T=whyUniq(whyMerge(L).map(e=>whyText(e)).filter(Boolean));return T.length?` <span class="past kwl">Vì sao: ${T.join("; ")}.</span>`:""}
 (function(){const l0=log;log=function(h){try{if(S&&typeof h==="string"&&WHY_LRX.test(h.replace(/<[^>]+>/g,""))&&!/class="past kwl"/.test(h)){const L=WHYL.filter(e=>!e.fl&&e.tk===WHYN_T&&whyNames(h,e));if(L.length){const t=whyLogTail(L);if(t){L.forEach(e=>e.fl=true);h=h.replace(/\s*$/,"")+t}}}}catch(e){}return l0.apply(this,arguments)}})();
 /* a change whose line was written AFTER it without a number, or in the same act: the newest line of this act that names the person */
 function whyFlushLate(){if(!S||!Array.isArray(S.logs))return;const L=WHYL.filter(e=>!e.fl);if(!L.length)return;L.forEach(e=>e.fl=true);const seq=S.logSeq||0;
@@ -88540,7 +88573,7 @@ function whyFlushLate(){if(!S||!Array.isArray(S.logs))return;const L=WHYL.filter
 /* ---------- the result card: one more row of the kit grid ---------- */
 (function(){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(o)o.whyAt=WHYN;return o}})();
 function whyRows(before){if(!before)return[];const k=before.whyAt!=null?WHYN-before.whyAt:0;const L=k>0?WHYL.slice(-Math.min(k,WHYL.length)):WHYL.filter(e=>e.tk===WHYN_T);
- return whyMerge(L).map(e=>{let d=e.d;if((e.stat==="th"||e.stat==="hh")&&before[e.stat]!=null){const m=(S[e.stat]||0)-before[e.stat];if(m)d=m}return whyText(e,d)}).filter(Boolean)}
+ return whyUniq(whyMerge(L).map(e=>{let d=e.d;if((e.stat==="th"||e.stat==="hh")&&before[e.stat]!=null){const m=(S[e.stat]||0)-before[e.stat];if(m)d=m}return whyText(e,d)}).filter(Boolean))}
 function kitWhyRowHTML(T){return T&&T.length?`<span class="kr kr-note kr-vi"><span class="krl">Vì sao</span><span class="krv">${T.map(x=>`<span class="kitem"><span class="ef n">${x}</span></span>`).join("")}</span></span>`:""}
 (function(){const s0=resultShow;resultShow=function(title,before){const r=s0.apply(this,arguments);try{const T=whyRows(before);if(!T.length||window.__bot)return r;const t=document.getElementById("rtoast");
  if(t&&t.classList.contains("on")){const kb=t.querySelector(".kb");if(kb&&!kb.querySelector(".kr-vi")){const kem=kb.querySelector(".kr-kem");const tmp=document.createElement("span");tmp.innerHTML=kitWhyRowHTML(T);const row=tmp.firstChild;if(kem)kb.insertBefore(row,kem);else kb.appendChild(row)}}
@@ -95405,7 +95438,7 @@ function kitBareOpts(list,onPick){const d=document.createElement("div");d.classN
    Mất «Khắc −1». Words per VANPHONG (no %, odds/score in words). ok true/false/null → THÀNH / BẠI / KẾT QUẢ. Stays 9 s; tap closes. */
 function kitResultCard(o){o=o||{};let t=document.getElementById("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  const SL=typeof kitResultSeal==="function"?kitResultSeal(o.ok==null?null:!!o.ok):{cls:"sure",t:"KẾT QUẢ"};const rows=(o.rows||[]).filter(r=>r&&r.items&&r.items.length);
- if(!rows.length)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">không đổi chỉ số</span>']});
+ if(!rows.length)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  const row=r=>`<span class="kr kr-${r.k||"note"}"><span class="krl">${r.label||""}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
  t.className="rtoast karesult "+SL.cls;t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${o.title||""}</span></span>${o.sen?`<span class="ksen">${o.sen}</span>`:""}<span class="kb">${rows.map(row).join("")}</span></div>`;
  t.onclick=()=>t.classList.remove("on");void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),o.ms||9000);
@@ -97928,7 +97961,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="19e838d2f230";window.CTM_BUILD=BUILD;
+const BUILD="e1a21d09c15c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
