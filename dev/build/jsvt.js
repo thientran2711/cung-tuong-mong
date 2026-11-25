@@ -28,7 +28,7 @@ function svtNm(a){const A=svtWho(a);return svtIsSv(a)&&A&&A!==a?`${a.name}, ngư
 /* where the act happens: the caller's place (at), else where the actor stands (a servant with her master) */
 function svtPlace(p,at){if(at)return at;try{const kh=j95kh();if(p===S)return knAt("me",kh);const h=svtIsSv(p)?ownerOf(p):p;const id=svtId(h);return id&&typeof knAt==="function"?knAt(id,kh):null}catch(e){return null}}
 function svtNear(a,m,at){try{const x=svtPlace(a,at),y=svtPlace(m);return !!x&&x===y}catch(e){return false}}
-const SVT_COVERT={bribe:1,threat:1,tm:1,plot:1,friend:1};
+const SVT_COVERT={bribe:1,threat:1,tm:1,plot:1,friend:1,len:1};
 /* fix r1 (law 6, the witness rule of newsAdd j28 / npc-purpose G2): the master comes to know ONLY through a real witness — she stands right there, her
    eyes (informants), a talkative servant of her household (nết «talk»), or a witness at the place who chooses to tell her (npcTell). No witness → never. */
 function svtSeen(a,m,kind,at,s){const B=BAL.svt.seen,cv=SVT_COVERT[kind]?B.covert:0;
@@ -55,7 +55,7 @@ function svtEtq(a,m,s,at){if(!svtNear(a,m,at)||svtGreeted(a,m))return"";const B=
  if(a===S)return `${m.name} đứng ngay đó mà ngươi không chào, lại gọi thẳng ${s.name} — ${m.name} cho là ngươi bất kính. `;
  if(m===S)return `${svtNm(a).replace(/,$/,"")} chẳng chào ngươi một tiếng mà gọi thẳng ${s===S?"ngươi":s.name} — thật là bất kính. `;return""}
 /* svTouch: the servant DID engage (talked / took the bạc / took the threat / became eyes): her master may come to know; the servant may let slip */
-const SVT_VERB={friend:"cho người hầu kết thân với",talk:"kéo riêng",chat:"bắt chuyện với",gift:"biếu quà",ask:"dò hỏi chuyện trong cung qua"};
+const SVT_VERB={friend:"cho người hầu kết thân với",talk:"kéo riêng",chat:"bắt chuyện với",gift:"biếu quà",ask:"dò hỏi chuyện trong cung qua",len:"lén kéo riêng"};
 const SVT_NOLEAK={friend:1/* the friend talk carries its own chứng cứ (j10 servMonth / jagstaff chat) */,chat:1,gift:1};
 function svTouch(a,s,kind,at,mv){if(!SVT.on()||!a||!s)return"";const sMv=mv===s;/* d-followups-1 (wording, law 7): mv = who MOVED (came to the other); the after-line names the one who came, never «ngươi tìm gặp X» when X came to her */let m=null;try{m=s===S?(svtSrvMe()?srvM():null)/* law 1: she herself, on the cung-nữ road, is another's servant */:ownerOf(s)}catch(e){}const A=svtWho(a);if(!m||!A||m===A||svtHouse(a)===m)return"";
  try{if(typeof sameHouse==="function"&&sameHouse(svtHouse(a),m))return""}catch(e){}if(svtGuest(A,m))return"";
@@ -68,7 +68,7 @@ function svTouch(a,s,kind,at,mv){if(!SVT.on()||!a||!s)return"";const sMv=mv===s;
   const how=SVT_HOW[W.how](m,W.w);
   if(s===S)r+=sMv?`${how}: ngươi lén tìm gặp ${svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi ngươi. `:`${how}: ${svtNm(a)} lén tìm gặp ngươi; từ đó ${m.name} sinh nghi ngươi. `;
   else if(m===S)r+=sMv?`${how}: ${s.name} lén ${kind==="chat"?"sang bắt chuyện với":"tìm gặp"} ${svtNm(a).replace(/,$/,"")}${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `
-   :`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
+   :`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"||kind==="len"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
   else if(a===S||A===S)r+=sMv?`${how}: ${s.name} tìm gặp ${a===S?"ngươi":svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `
    :`${how}: ${a===S?"ngươi":svtNm(a)} tìm gặp ${s.name}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `}
  return r}
@@ -84,13 +84,28 @@ function svtNpcGreet(a,o,at){if(!a||a===S||!o||!svtNear(a,o,at)||svtGreeted(a,o)
 function svtPeer(a,x,kind,ok,at){if(!SVT.on()||!a||!x||a===x)return"";let o=null;try{o=x===S?(svtSrvMe()?srvM():null):ownerOf(x)}catch(e){}const h=svtHouse(a);if(!o||!h||o===h)return"";
  try{if(typeof sameHouse==="function"&&sameHouse(h,o))return""}catch(e){}if(svtGuest(svtWho(a),o))return"";SVT.stat.peer=(SVT.stat.peer||0)+1;
  svtNpcGreet(a,o,at);let r=svtEtq(a,o,x,at);if(!ok)return r;r+=svTouch(a,x,kind,at,a);if(kind==="chat")r+=svTouch(x,a,kind,at,a)/* she talked back: her own master may hear of it too; a is still the one who came (mv) */;return r}
+/* review talk-others-people B1 (law 16): a named woman of another house (s.eid) keeps the elder talk gain inside the merged talk — the ONE jstaff elderTalkGain */
+function svtElderGain(s){try{if(s&&s.eid&&typeof elderTalkGain==="function")return elderTalkGain(s)+" "}catch(e){}return""}
+/* review talk-others-people N1 (D 25/11: the Thái hậu's household named women ARE others' people, law 11 whole group): the same #26 path for her talk —
+   refusal (svtRefO), the elder gain when she talks, and the Thái hậu's suspicion only through a real witness (law 6a: a talkative woman of that household,
+   or the Thái hậu's own presence for the open talk); seen = Chủ tin of the woman falls (BAL.svt.tin) and the Thái hậu's favour falls (BAL.svt.rel → th) */
+function svtThhIs(s){try{return !!(S&&S.thO&&(S.thO.staff||[]).includes(s))}catch(e){return false}}
+function svtThhTalk(s,len){const B=BAL.svt;SVT.stat.talk++;if(len)SVT.stat.len=(SVT.stat.len||0)+1;SVT.stat.thh=(SVT.stat.thh||0)+1;
+ if(roll(svtRefO(s))){SVT.stat.refuse++;return `${s.name} cúi đầu thưa: phận tôi tớ cung Thái hậu, không dám nói chuyện riêng với người cung khác. `}
+ let r=`${s.name} chịu nói chuyện. `+svtElderGain(s);const kind=len?"len":"talk",cv=SVT_COVERT[kind]?B.seen.covert:0;
+ const w=(S.thO.staff||[]).find(x=>x!==s&&netIs(x,"talk"));if(w&&roll(B.seen.talk-cv)){SVT.stat.seen++;tinAdd(s,-(B.tin[kind]||B.tin.talk));apply({th:-(B.rel[kind]||B.rel.talk)});
+  r+=`${w.name} miệng mồm lanh lẹ, kể lại: ngươi ${kind==="len"?"lén kéo riêng":"kéo riêng"} ${s.name} ra nói chuyện; từ đó Thái hậu sinh nghi cả ngươi lẫn ${s.name}. `}
+ return r}
 /* svTalk: the OPEN talk («Hỏi chuyện» with a servant of another house) — her button and the NPC's monthly deed are this one function */
-function svTalk(a,s){if(!SVT.on()||!a||!s)return"";let m=null;try{m=ownerOf(s)}catch(e){}if(!m||m===a)return"";if(svtGuest(a,m))return"";SVT.stat.talk++;
- svtNpcGreet(a,m);let r=svtEtq(a,m,s);
+/* review/talk-others-people (WORKLIST #26, OD 24/11 ~07:58Z «mình sẽ có cái option là hỏi lén … làm trước mặt và làm sau lưng»): len = the COVERT talk «Hỏi lén»:
+   behind the master's back — no greeting owed, so no bất kính; seen less (SVT_COVERT), but when the master does come to know, Chủ tin and her thiện cảm
+   fall harder (BAL.svt.tin/rel.len) and it takes longer (BAL.svt.kLen). Same gain as the open talk. Same choice for every NPC (svtMonth, law 1). */
+function svTalk(a,s,len){if(!SVT.on()||!a||!s)return"";if(a===S&&svtThhIs(s))return svtThhTalk(s,len);let m=null;try{m=ownerOf(s)}catch(e){}if(!m||m===a)return"";if(svtGuest(a,m))return"";SVT.stat.talk++;if(len)SVT.stat.len=(SVT.stat.len||0)+1;
+ let r="";if(!len){svtNpcGreet(a,m);r=svtEtq(a,m,s)}
  if(roll(svtRefO(s))){SVT.stat.refuse++;/* refused: nothing changes (OD ~08:12Z «nếu như mà họ từ chối thì mình ok, không có gì hết») */
   return r+(a===S?`${s.name} cúi đầu thưa: phận tôi tớ cung ${m.name}, không dám nói chuyện riêng với người cung khác. `:"")}
- if(a===S){let t="";try{t=learnTrait(m,`${s.name} kể`,1)}catch(e){}r+=t?`${s.name} chịu nói chuyện, kể rằng chủ tử ${m.name} là người ${String(t).toLowerCase()}. `:`${s.name} chịu nói chuyện, nhưng chỉ kể những chuyện ai cũng biết. `}
- return r+svTouch(a,s,"talk")}
+ if(a===S){let t="";try{t=learnTrait(m,`${s.name} kể`,1)}catch(e){}r+=t?`${s.name} chịu nói chuyện, kể rằng chủ tử ${m.name} là người ${String(t).toLowerCase()}. `:`${s.name} chịu nói chuyện, nhưng chỉ kể những chuyện ai cũng biết. `;r+=svtElderGain(s)}
+ return r+svTouch(a,s,len?"len":"talk")}
 /* the wrappers: the whole family reaches svTouch only when the servant really engaged (spyFor set by THIS act) */
 function svtWrap(f,kind){return function(a,s){const b=s&&s.spyFor;const r=f.apply(this,arguments);
   try{if(s&&a&&s.spyFor===key(a)&&b!==key(a)){const x=svTouch(a,s,kind);if(x)return (r||"")+x}}catch(e){}return r}}
@@ -104,13 +119,15 @@ function svtMet(a,b){try{if(!a||!b||a===b)return;const G=svtGz(),x=svtId(a),y=sv
 (function(){if(typeof chatMark==="function"){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);svtMet(S,v);return r}}
  if(typeof p3ChatMark==="function"){const p0=p3ChatMark;p3ChatMark=function(p,v){const r=p0.apply(this,arguments);svtMet(p,v);return r}}/* the four talk topics (jagacts3 P3T: her ↔ NPC and NPC ↔ NPC, law 1) */})();
 /* the month: NPC mistresses have someone of another house talked to (law 1: her, the NPCs, NPC ↔ NPC); an NPC master returns the servant she no longer trusts */
+/* the odds an NPC picks «Hỏi lén» over the open talk (her nết: a sharp mind goes behind backs) */
+function svtLenO(p){const B=BAL.svt.npc;return Math.max(0,Math.min(100,B.len+nq(p,"sharp",B.lenSharp)))}
 function svtMonth(){if(!SVT.on())return"";let ev="";const B=BAL.svt;let G=false;try{G=typeof mlGuest==="function"&&mlGuest()}catch(e){}
  for(const p of liveRivals(true)){if(!p||!p.alive||p.out)continue;
   if(roll(B.npc.talk)){const t=pickTarget(p);
    /* fix r1 law 1: on the cung-nữ road SHE is one of her master's servants — the NPC (or a servant the NPC sends, servant ↔ servant) asks HER too */
    if(!G&&svtSrvMe()&&t&&t===srvM()&&t!==p&&!S.dead&&R((t.staff||[]).length+1)===0){const sv=(p.staff||[]).filter(x=>!x.out);const a=sv.length&&roll(B.npc.srvAsk)?pick(sv):null;
-    if(!(typeof Q!=="undefined"&&Q.some(q=>q&&q.pid==="svtAsk"))){try{pushDil(mkP("svtAsk",a?{s:a.sid}:{r:p.id}));SVT.stat.askMe=(SVT.stat.askMe||0)+1}catch(e){}}}
-   else if(t&&t!==p&&(t===S||!G)&&t.staff&&t.staff.length){const s=pick(t.staff);if(s&&s.spyFor!==key(p)){const x=svTalk(p,s);if(t===S&&x)ev+=x}}}
+    if(!(typeof Q!=="undefined"&&Q.some(q=>q&&q.pid==="svtAsk"))){try{pushDil(mkP("svtAsk",Object.assign(a?{s:a.sid}:{r:p.id},roll(svtLenO(p))?{len:1}:{})/* review B2 (law 1): the same «Hỏi lén» choice as svtMonth, by the NPC master's nết */));SVT.stat.askMe=(SVT.stat.askMe||0)+1}catch(e){}}}
+   else if(t&&t!==p&&(t===S||!G)&&t.staff&&t.staff.length){const s=pick(t.staff);if(s&&s.spyFor!==key(p)){const x=svTalk(p,s,roll(svtLenO(p)));if(t===S&&x)ev+=x}}}
   if(G)continue;for(const s of (p.staff||[]).slice()){let t=100;try{t=tinOf(s)}catch(e){}if(t<B.tin.out&&!s.spyFor&&roll(B.tin.outRoll)){try{servDo(p,"doi",s);SVT.stat.out++}catch(e){}}}}
  return ev}
 /* fix r1 (law 1, two-way): «Hỏi chuyện» reaches HER on the cung-nữ road — the same act she does to others' servants. Her choice (no refusal roll for her):
@@ -118,11 +135,12 @@ function svtMonth(){if(!SVT.on())return"";let ev="";const B=BAL.svt;let G=false;
    come only after, through the same svtEtq / svTouch (witness rule). Refuse = nothing changes (OD ~08:12Z). The ONE dilemma card (j3 pushDil, kit). */
 if(typeof PEND==="object")PEND.svtAsk=pp=>{if(!svtSrvMe()||S.dead)return null;const m=srvM();const a=pp.s!=null?servById(pp.s):RV(pp.r);if(!m||!a||(a.alive===false)||svtHouse(a)===m)return null;
  const A=svtWho(a);const who=svtIsSv(a)?`${a.name}, ${srkName(a).toLowerCase()} của ${A.name},`:`${rkName(a)} ${a.name}`;
- return{t:`<p>${who} tìm đến bắt chuyện với ngươi, hỏi han chuyện trong cung ${m.name}.</p>`,who:svtIsSv(a)?pServ(a):pv(a),o:[
+ const L=!!pp.len/* review B2 (law 1): the covert ask — no greeting owed, so no bất kính on her master; her master's suspicion through SVT_COVERT (svTouch "len") */;
+ return{t:`<p>${who} ${L?"lén tìm đến lúc vắng người, kéo ngươi ra nói chuyện riêng":"tìm đến bắt chuyện với ngươi"}, hỏi han chuyện trong cung ${m.name}.</p>`,who:svtIsSv(a)?pServ(a):pv(a),o:[
   {n:"Trò chuyện",fx:{},x:"được: người ấy quý ngươi, biết thêm chuyện cung bên ấy để bẩm chủ",go:()=>{let r="";
-    if(svtIsSv(a)){srvAf(a,SRVA.chat.af);if(!(S.srv.met||[]).includes(a.sid))(S.srv.met=S.srv.met||[]).push(a.sid);r=svtPeer(a,S,"chat",true)}
-    else{affAdd(a,S,SRVA.chat.af);r=svtEtq(a,m,S)+svTouch(a,S,"talk")}
+    if(svtIsSv(a)){srvAf(a,SRVA.chat.af);if(!(S.srv.met||[]).includes(a.sid))(S.srv.met=S.srv.met||[]).push(a.sid);r=L?svTouch(a,S,"len",null,a)+svTouch(S,a,"chat",null,a)/* her master: covert; the asker's own master: the same chat touch as the open road */:svtPeer(a,S,"chat",true)}
+    else{affAdd(a,S,SRVA.chat.af);r=L?svTouch(a,S,"len",null,a):svtEtq(a,m,S)+svTouch(a,S,"talk")}
     S.srv.intel=(S.srv.intel||[]).concat([A.id]);log(`Ngươi trò chuyện cùng ${a.name}, nghe được chuyện trong cung ${A.name}: có tin để bẩm chủ.${r?" "+r:""}`)}},
-  {n:"Cúi đầu từ chối",fx:{},x:"giữ phận",go:()=>{const r=svtEtq(a,m,S);log(`Ngươi cúi đầu thưa: phận tôi tớ cung ${m.name}, không dám nói chuyện riêng.${r?" "+r:""}`)}}]}};
+  {n:"Cúi đầu từ chối",fx:{},x:"giữ phận",go:()=>{const r=L?"":svtEtq(a,m,S);log(`Ngươi cúi đầu thưa: phận tôi tớ cung ${m.name}, không dám nói chuyện riêng.${r?" "+r:""}`)}}]}};
 (function(){if(typeof servMonth!=="function")return;const m0=servMonth;servMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=svtMonth()}catch(e){}return ev}})();
 Object.assign(window,{SVT,svTouch,svTalk,svtPeer,svtGreetDo,svtNpcGreet,svtNpcGreetO,svtSeen,svtHouse,svtWrap,svtRefO,svtSeenO,svtLeakO,svtEtq,svtMonth,svtNear});

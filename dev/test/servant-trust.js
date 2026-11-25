@@ -121,8 +121,36 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
    const asker=(O.staff||[]).find(y=>y!==x)||x;const d=mkP('svtAsk',{s:asker.sid});ok(!!d&&d.o.length===2&&!d.o.some(o=>/[0-9%]/.test(o.n+o.x)),'«Hỏi chuyện» reaches HER: one kit dilemma, two options in words');
    if(d){asker.svtK=null;S.svtK=null;const t1=S.tin,i1=(S.srv.intel||[]).length;force(0,0,1);d.o[0].go();ok(S.tin<t1&&(S.srv.intel||[]).length===i1+1,'she talks: she learns news; her master may come to know → Chủ tin '+t1+'→'+S.tin);
     S.svtK=null;const t2=S.tin;d.o[1].go();ok(S.tin===t2,'she refuses → nothing changes')}
+   /* review talk-others-people B2 (law 1): the covert ask (pp.len, the same svtLenO roll) — card says it is a secret talk; no bất kính on her master; suspicion through svTouch "len" */
+   {const MM=srvM(),rv=liveRivals(true).find(p=>p!==O&&p!==MM&&p.alive!==false);const dl=rv?mkP('svtAsk',{r:rv.id,len:1}):null;ok(!!dl&&/lén/.test(dl.t)&&noNum(dl.t),'B2: covert ask card: '+(dl&&dl.t||'').replace(/<[^>]*>/g,'').slice(0,90));
+    if(dl){S.svtK=null;window.knAt=()=>'p_same';const ob=oan(MM,rv),l0=SVT.stat.touch.len||0,t3=S.tin;force(0,0,1);dl.o[0].go();ok(oan(MM,rv)===ob&&(SVT.stat.touch.len||0)===l0+1&&S.tin<t3,'B2: covert ask talked → no bất kính (oán '+ob+'→'+oan(MM,rv)+'), touch len +1, seen → Chủ tin '+t3+'→'+S.tin);
+     const dn=mkP('svtAsk',{r:rv.id});S.svtK=null;window.svtGz&&(S.svtG=null);const ob2=oan(MM,rv);force(0,0,1);dn.o[0].go();ok(oan(MM,rv)>ob2,'B2 control: the open ask at the same place without greeting → bất kính (oán '+ob2+'→'+oan(MM,rv)+')')}
+    const p0=window.pickTarget,oT2=B.npc.talk,oL2=B.npc.len;B.npc.talk=100;B.npc.len=100;window.pickTarget=()=>MM;Q.length=0;Math.random=()=>0;try{svtMonth()}finally{B.npc.talk=oT2;B.npc.len=oL2;window.pickTarget=p0;Math.random=R0}
+    const qa=Q.find(q=>q&&q.pid==='svtAsk');ok(!qa||!!(qa.pp||qa.p||qa).len||JSON.stringify(qa).includes('"len":1'),'B2: svtMonth queues the covert ask when the NPC picks «Hỏi lén» ('+(qa?JSON.stringify(qa).slice(0,80):'none queued')+')');Q.length=0}
    unforce();Q.length=0;const pt0=window.pickTarget;const oT=B.npc.talk;B.npc.talk=100;window.pickTarget=()=>M;Math.random=()=>0;try{svtMonth()}finally{B.npc.talk=oT;window.pickTarget=pt0;Math.random=R0}
    ok(Q.some(q=>q&&q.pid==='svtAsk'),'svtMonth: an NPC (or her servant) goes for HER on the cung-nữ road ('+Q.length+' queued)');Q.length=0}
+  // talk-others-people (WORKLIST #26, OD ~07:58Z «hỏi lén»): the covert talk — no bất kính, same gain, heavier loss when seen, NPCs choose it too
+  {const W=liveRivals(true).filter(x=>x.staff&&x.staff.length&&!(typeof sameHouse==='function'&&(sameHouse(S,x)||sameHouse(svtHouse(S),x)))&&!svtGuest(S,x)&&svtHouse(S)!==x/* a rival of ANOTHER house: same palace = her own people (svTouch exempt), the flake of r1 */);const wv=W[W.length-1],ws=wv.staff[wv.staff.length-1];
+   ok(B.tin.len>B.tin.talk&&B.rel.len>B.rel.talk&&B.kLen>B.k,'«Hỏi lén» costs more when seen and takes longer (law 2/3: tin '+B.tin.len+'>'+B.tin.talk+', khắc '+B.kLen+'>'+B.k+')');
+   window.knAt=()=>'same';S.svtG=null;ws.svtK=null;const o1=oan(wv,S),a1=aff(wv,S);force(0,0,0);let r1=svTalk(S,ws,1);
+   ok(oan(wv,S)===o1&&aff(wv,S)===a1,'«Hỏi lén» with her master standing there, not greeted: no bất kính, and unseen = no change');ok(/chịu nói chuyện/.test(r1)&&noNum(r1),'«Hỏi lén»: the same gain as the open talk, in words: '+r1.slice(0,90));
+   S.svtG=null;ws.svtK=null;const o2=oan(wv,S);force(0,0,0);svTalk(S,ws);ok(oan(wv,S)>o2,'the open talk in the same spot IS bất kính (oán '+o2+'→'+oan(wv,S)+')');
+   window.knAt=(id)=>id==='me'?'home':'away'+id;ws.svtK=null;const t3=tinOf(ws),a3=aff(wv,S);force(0,0,1);const r3=svTalk(S,ws,1);
+   ok(tinOf(ws)===Math.max(0,t3-B.tin.len)&&Math.round(aff(wv,S))===Math.max(-100,Math.round(a3-B.rel.len)),'«Hỏi lén» seen: Chủ tin −'+B.tin.len+', her thiện cảm −'+B.rel.len+' (heavier than open; r3 «'+String(r3).replace(/<[^>]*>/g,'').slice(0,140)+'» got tin '+t3+'→'+tinOf(ws)+', thiện cảm '+Math.round(a3)+'→'+Math.round(aff(wv,S))+')');ok(noNum(r3),'after-line in words: '+r3.replace(/<[^>]*>/g,'').slice(0,110));
+   ws.svtK=null;const t4=tinOf(ws);force(1,0,1);svTalk(S,ws,1);ok(tinOf(ws)===t4,'«Hỏi lén» refused: nothing changes');
+   const net1=window.netIs;window.netIs=(p,k)=>k==='sharp'?true:net1(p,k);const hi=svtLenO(wv);window.netIs=(p,k)=>k==='sharp'?false:net1(p,k);const lo=svtLenO(wv);window.netIs=net1;
+   ok(hi>=lo&&hi<=100&&lo>=0,'NPC picks «Hỏi lén» by nết (sharp '+hi+' ≥ plain '+lo+')');
+   const ln0=SVT.stat.len||0;const oT=B.npc.talk,oL=B.npc.len;B.npc.talk=100;B.npc.len=100;Math.random=()=>.01;try{svtMonth()}finally{B.npc.talk=oT;B.npc.len=oL;Math.random=R0}
+   ok((SVT.stat.len||0)>ln0,'svtMonth: NPC masters use «Hỏi lén» too (law 1)')}
+  /* review talk-others-people B1 (law 16): a named woman of another house keeps the elder talk gain inside the merged «Hỏi chuyện» / «Hỏi lén» */
+  {const ne=elders().find(e=>e.eid&&ownerOf(e)&&ownerOf(e)!==S&&e.alive!==false);ok(!!ne,'B1: a named woman of another house exists ('+(ne&&ne.name)+')');
+   if(ne){for(const L of [0,1]){force(0,0,0);ne.svtK=null;const a0=(ne.af&&ne.af.me)||0;const r=svTalk(S,ne,L);ok(((ne.af&&ne.af.me)||0)===a0+BAL.eff.jstaff.meAct&&r.includes(ne.call+':'),'B1: '+(L?'«Hỏi lén»':'«Hỏi chuyện»')+' talked → thiện cảm '+a0+'→'+ne.af.me+' + palace news line: '+r.replace(/<[^>]*>/g,'').slice(0,120))}
+    force(1,0,0);ne.svtK=null;const a1=ne.af.me;svTalk(S,ne);ok(ne.af.me===a1,'B1 control: refused → no elder gain');unforce()}}
+  /* review talk-others-people N1 (D 25/11): the Thái hậu's household named women = others' people — the same #26 talk */
+  {const th=(S.thO&&S.thO.staff||[]).find(e=>e&&e.eid);ok(!!th,'N1: a Thái hậu household named woman exists ('+(th&&th.name)+')');
+   if(th){force(1,0,0);const a0=(th.af&&th.af.me)||0,f0=S.th;const r0=svTalk(S,th);ok(/từ chối|không dám/.test(r0)&&((th.af&&th.af.me)||0)===a0&&S.th===f0,'N1: refused → nothing changes: '+r0.slice(0,90));
+    force(0,0,1);window.netIs=(x,k)=>k==='talk'&&x!==th?true:net0(x,k);th.tin=60;const t0=tinOf(th);const r1=svTalk(S,th,1);ok(th.af.me===a0+BAL.eff.jstaff.meAct&&tinOf(th)===t0-B.tin.len&&S.th<f0&&/Thái hậu sinh nghi/.test(r1)&&noNum(r1.replace(/^[^:]*:/,'')),'N1: «Hỏi lén» talked + a talkative woman tells → gain, Chủ tin '+t0+'→'+tinOf(th)+', Thái hậu '+f0+'→'+S.th+': '+r1.slice(0,140));
+    force(0,0,0);const f1=S.th,t1=tinOf(th);svTalk(S,th);ok(S.th===f1&&tinOf(th)===t1,'N1: no witness → the Thái hậu never knows (law 6a)');unforce();}}
   window.knAt=knAt0;unforce();
   return out});
  let f=0;for(const [c,m] of R){if(process.env.V)console.log(c?'ok  ':'FAIL',m);else if(!c){f++;console.log('FAIL',m)}if(!c&&process.env.V)f++}

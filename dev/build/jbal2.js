@@ -2261,10 +2261,11 @@ BAL.kmus={holdMs:6000};
 Object.assign(BAL,{svt:{on:1,
  ref:{base:35,mid:50,loyK:.6,tinK:.2,loyal:20,timid:12,talk:-18,greed:-12,min:5,max:90},
  seen:{near:60,eyeB:10,eye:8,talk:30,tell:100,covert:20},
- tin:{talk:8,bribe:15,threat:12,tm:15,plot:15,friend:6,chat:5,gift:4,ask:8,out:20,outRoll:35},
- rel:{talk:6,bribe:12,threat:10,tm:12,plot:12,friend:3,chat:3,gift:2,ask:6},
+ tin:{talk:8,bribe:15,threat:12,tm:15,plot:15,friend:6,chat:5,gift:4,ask:8,len:13,out:20,outRoll:35},
+ rel:{talk:6,bribe:12,threat:10,tm:12,plot:12,friend:3,chat:3,gift:2,ask:6,len:10},
  leak:{base:5,loyK:.3,talk:20,greed:10,loyal:-20,ev:1},
  greet:{oan:5,aff:4,up:1.4,dn:.5},
  npcGreet:{base:70,talk:-20,loyal:15,timid:10,min:20,max:95},/* d-followups-1: odds an NPC servant greets the other master before an open act with her servant (jsvt svtNpcGreet): base + nết (Nhiều lời −, Trung / Nhát +), clamped */
- npc:{talk:25,srvAsk:50},
- k:2/* khắc the open talk «Hỏi chuyện» takes (her button) */}});
+ npc:{talk:25,srvAsk:50,len:30,lenSharp:25},
+ k:2/* khắc the open talk «Hỏi chuyện» takes (her button) */,
+ kLen:3/* review/talk-others-people: khắc the covert talk «Hỏi lén» takes; len rows of tin / rel = its heavier loss when seen; npc.len + lenSharp × nết «sharp» = the odds an NPC talks covertly */}});
