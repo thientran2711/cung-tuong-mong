@@ -1,0 +1,3841 @@
+{
+ "job": {
+  "id": "ES2-R2-cautious-4-rr",
+  "origin": "thd",
+  "road": "thd_tro",
+  "bot": "cautious",
+  "seed": 3936559208,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "b4b181f8",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "areaTaps": 51,
+  "dlgScroll": 17,
+  "scrolls": 18,
+  "dlgClose": 60,
+  "infoTaps": 102,
+  "nextNoTurn": 7,
+  "taps": 742
+ },
+ "life": {
+  "id": "Bỏ trốn",
+  "type": "death",
+  "fate": "Chết đuối khi bỏ trốn",
+  "death": true,
+  "age": 19,
+  "year": 2,
+  "rank": 0,
+  "text": "Đêm ấy thuyền đi được nửa sông thì đuốc nhà quan đuổi kịp. Người ta vớt được chiếc khăn của nàng ở bến. (Tiểu thư ngoài cung · Tiểu thư nhà thầy đồ)",
+  "card": [
+   "Giữ tín vật, hồi thư hẹn kiếp sau Có cơ TỐN Sức -5 ĐƯỢC lời ",
+   "Đốt thư, gửi trả tín vật Rất vững TỐN không ĐƯỢC được tiếng ",
+   "Đến bến sông Rất vững TỐN Sức -20 ĐƯỢC đi theo chàng, kết: B"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»",
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»",
+   "page «Khuê phòng · Ở đây có 1 người.» «Buổi tối, còn 4 khắc»",
+   ".dlg «tối · còn» «Lui»",
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»",
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang trước»",
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang trước»",
+   ".kbk «Tổng lược» «Lui»",
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétRất vữngTốnSức -10Đượctra ra»",
+   ".dlg «Thuở thanh mai» «Đến bến sôngRất vữngTốnSức -20Đượcđi theo chàng, k»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 315106,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 427993,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 463551,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 193,
+ "steps": 1333,
+ "status": [],
+ "_loopAt": 1795642497661,
+ "_snapAt": 1795642494064,
+ "trace": [
+  [
+   444,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   445,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   445,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   445,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   447,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mệnh truyện»"
+  ],
+  [
+   447,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   449,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   451,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   453,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   454,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Giữ lòng cha mẹTốnkhôngĐượctới Hậu cung › »"
+  ],
+  [
+   456,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   458,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   461,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   463,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   463,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   463,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   463,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   464,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   465,
+   ".dlg «Kế mẫu» «Bỏ bạc đền trâm, chuộc tội cho tỳ nữRất vữngTốnBạc»"
+  ],
+  [
+   468,
+   "page «Khuê phòng · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   468,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   470,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   472,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   473,
+   "page «Khuê phòng · Không gặp ai.» «Tuyển túcòn 15 tháng»"
+  ],
+  [
+   474,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   476,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   478,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   480,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   480,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   481,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   481,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   481,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   483,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mệnh truyện»"
+  ],
+  [
+   483,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   485,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   488,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   490,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tài nghệ»"
+  ],
+  [
+   490,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   492,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   495,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   497,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   497,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   497,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   497,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   499,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   501,
+   "page «Khuê phòng · Không gặp ai.» «Sắc64Tài95Tâm cơ10Đức62Danh19Gia thanh42»"
+  ],
+  [
+   501,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   503,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   504,
+   "page «Khuê phòng · Không gặp ai.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   505,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   508,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   509,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   512,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   514,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   514,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   515,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   515,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   515,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   517,
+   ".dlg «Kế mẫu» «Lặng lẽ đốt bùa, giữ xấp lụaRất vữngTốnSức -5Đượct»"
+  ],
+  [
+   519,
+   "page «Khuê phòng · Ở đây có 1 người.» «Giao tình»"
+  ],
+  [
+   519,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   521,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiChải chuốt, thử y phụcVữngSoi gư»"
+  ],
+  [
+   524,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   526,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tài nghệ»"
+  ],
+  [
+   526,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   528,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   530,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   530,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   531,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   531,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   531,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   533,
+   ".dlg «Đại hàn, tuyết lớn» «Bỏ bạc mua thêm thanTốnBạc -20Đượcqua mùa rét yên »"
+  ],
+  [
+   534,
+   ".dlg «Đại hàn, tuyết lớn» «Góp áo và chăn cùng nàng taTốnBạc -20ĐượcDanh +2»"
+  ],
+  [
+   537,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   539,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   539,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   542,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   544,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   546,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   548,
+   "page «Khuê phòng · Ở đây có 1 người.» «tuyết nhẹ»"
+  ],
+  [
+   551,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   552,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   553,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   553,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   553,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   553,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   555,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Tịch LamRất»"
+  ],
+  [
+   558,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   559,
+   "page «Khuê phòng · Không gặp ai.» «Mệnh truyện»"
+  ],
+  [
+   560,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   562,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   564,
+   "page «Khuê phòng · Không gặp ai.» «Tài nghệ»"
+  ],
+  [
+   565,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   566,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   567,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   567,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   567,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   568,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   569,
+   ".dlg «Kế mẫu» «Kết tình chị em với muội ấyRất vữngTốnkhôngĐượcthê»"
+  ],
+  [
+   570,
+   ".dlg «Đại hàn, tuyết lớn» «Lui»"
+  ],
+  [
+   573,
+   "page «Khuê phòng · Ở đây có 1 người.» «Hoàng tự»"
+  ],
+  [
+   574,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   575,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   578,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   580,
+   "page «Khuê phòng · Ở đây có 1 người.» «Áp lực hôn sự40»"
+  ],
+  [
+   580,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   582,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   585,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   587,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   587,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   587,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   587,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   588,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   589,
+   ".dlg «Tết Thượng nguyên» «Ra phố thắp đèn thiRất vữngTốnSức -15Đượcthắp đèn »"
+  ],
+  [
+   590,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   590,
+   "#kg82 «Gợi ý: bớt một ít phần»"
+  ],
+  [
+   590,
+   "#kg82 «Gợi ý: bớt một ít phần»"
+  ],
+  [
+   590,
+   "#kg82 «Gợi ý: bớt một ít phần»"
+  ],
+  [
+   591,
+   "#kg82 «Gợi ý: bớt một ít phần»"
+  ],
+  [
+   678,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   681,
+   "page «Khuê phòng · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   682,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   684,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   684,
+   ".dlg «Danh hiệu lên bậc» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   686,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   688,
+   "page «Khuê phòng · Không gặp ai.» «trời quang»"
+  ],
+  [
+   691,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   693,
+   "page «Khuê phòng · Không gặp ai.» «Tư trang»"
+  ],
+  [
+   693,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   695,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   695,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   695,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   696,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   696,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   698,
+   ".dlg «Tỉnh thân» «Nhận quà nhà gửi vàoTốnkhôngĐượcBạc +8»"
+  ],
+  [
+   698,
+   ".dlg «Tỉnh thân» «Lấy cớ mẹ cha mệt, đưa họ vềTốnDanh -10·Đức -5Được»"
+  ],
+  [
+   701,
+   "page «Khuê phòng · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   701,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   703,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   705,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   707,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   709,
+   "page «Khuê phòng · Không gặp ai.» «Lịch tháng»"
+  ],
+  [
+   710,
+   ".dlg «Lịch tháng» «mồng 3: Tết Nguyên đán»"
+  ],
+  [
+   712,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   712,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   713,
+   ".dlg «Lịch tháng» «ngày 27: Nguyệt tín»"
+  ],
+  [
+   713,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   714,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   716,
+   "page «Khuê phòng · Không gặp ai.» «Tâm trạngBình thản0»"
+  ],
+  [
+   717,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   718,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   720,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   720,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   721,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   721,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   721,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   723,
+   ".dlg «Kế mẫu» «Nhận phần lỗi, xin tổ mẫu cho yên nhàRất vữngTốnkh»"
+  ],
+  [
+   723,
+   ".dlg «Cha bị hặc tội» «Khuyên cha tự dâng sớ xin giáng chứcRất vữngTốnkhô»"
+  ],
+  [
+   724,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   726,
+   ".dlg «Lũ lớn, mất mùa» «Bớt chi dùng trong cungTốnkhôngĐượcĐức +1»"
+  ],
+  [
+   727,
+   ".dlg «Lũ lớn, mất mùa» «Nói đỡ cả hai, đề nghị cùng bớtTốnSức -8·Danh -3Đư»"
+  ],
+  [
+   728,
+   ".dlg «Kế mẫu» «Lui»"
+  ],
+  [
+   731,
+   "page «Khuê phòng · Không gặp ai.» «Giao tình»"
+  ],
+  [
+   732,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   734,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   736,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   738,
+   "page «Khuê phòng · Không gặp ai.» «Mệnh truyện»"
+  ],
+  [
+   739,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   741,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   743,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   745,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   745,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   746,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   746,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   746,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   748,
+   "page «Khuê phòng · Ở đây có 1 người.» «Chọn chính mình»"
+  ],
+  [
+   748,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   750,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   750,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   752,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   754,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tin báo: 20 tin mới»"
+  ],
+  [
+   755,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   757,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   759,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   762,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   764,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   764,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   764,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   764,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   765,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   766,
+   "page «Khuê phòng · Không gặp ai.» «Tâm trạngBình thản0»"
+  ],
+  [
+   766,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   768,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   770,
+   "page «Khuê phòng · Không gặp ai.» «Tư trang»"
+  ],
+  [
+   770,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   772,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   775,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   777,
+   "page «Khuê phòng · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   777,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   779,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   779,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   779,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   780,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   780,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   781,
+   ".dlg «Thuở thanh mai» «Trả lại, giữ lễRất vữngTốnkhôngĐượcđược tiếng hiền»"
+  ],
+  [
+   782,
+   ".dlg «Lũ lớn, mất mùa» «Lui»"
+  ],
+  [
+   785,
+   "page «Khuê phòng · Không gặp ai.» «Tin báo: 7 tin mới»"
+  ],
+  [
+   786,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   788,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   790,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   793,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   795,
+   "page «Khuê phòng · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   795,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   797,
+   "page «Khuê phòng · Không gặp ai.» «Chọn chính mình»"
+  ],
+  [
+   797,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   799,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   799,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   799,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   800,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   800,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   802,
+   ".dlg «Hội thơ xuân» «Dự hội, làm thơRất vữngTốnSức -15Đượcthơ hay thì n»"
+  ],
+  [
+   802,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   802,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   802,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   803,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   803,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   882,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   886,
+   "page «Khuê phòng · Không gặp ai.» «Tin báo: 9 tin mới»"
+  ],
+  [
+   886,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   889,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   891,
+   "page «Khuê phòng · Không gặp ai.» «Tuyển túcòn 11 tháng»"
+  ],
+  [
+   891,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   893,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   895,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   897,
+   "page «Khuê phòng · Không gặp ai.» «Tâm trạngBình thản+3»"
+  ],
+  [
+   898,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   899,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   901,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   901,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   901,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   902,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   902,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   904,
+   ".dlg «Dịch trong kinh thành» «Đi chùa phát thuốc cho dânRất vữngTốnSức -15·Bạc -»"
+  ],
+  [
+   906,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   908,
+   "page «Khuê phòng · Ở đây có 1 người.» «3Chí tôn»"
+  ],
+  [
+   908,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   910,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   912,
+   "page «Khuê phòng · Ở đây có 1 người.» «chiều âm u»"
+  ],
+  [
+   914,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   916,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mệnh truyện»"
+  ],
+  [
+   917,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   920,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   921,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   923,
+   ".dlg «Hộp phấn lạ» «Cảm tạ rồi cất đi, không dùngRất vữngTốnkhôngĐượcg»"
+  ],
+  [
+   924,
+   ".dlg «Bà mối đến nhà» «Xin cha cho xem mặt trướcRất vữngTốnkhôngĐượcnhà t»"
+  ],
+  [
+   925,
+   ".dlg «Nhà trai thử dung mạo» «Ăn vận giản dị, nói năng chừng mựcRất vữngTốnkhông»"
+  ],
+  [
+   927,
+   "page «Khuê phòng · Không gặp ai.» «Sắc64Tài100Tâm cơ14Đức84Danh12Gia thanh36»"
+  ],
+  [
+   927,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   929,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   931,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   933,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   935,
+   "page «Khuê phòng · Không gặp ai.» «Tâm trạngBình thản-2»"
+  ],
+  [
+   935,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   937,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   939,
+   "page «Khuê phòng · Không gặp ai.» «Mệnh truyện»"
+  ],
+  [
+   939,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   941,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   941,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   942,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   942,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   942,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   944,
+   ".dlg «Lễ Phật đản» «Chép kinh cầu phúcTốnSức -8ĐượcĐức +2·Thái hậu +2»"
+  ],
+  [
+   945,
+   ".dlg «Lễ Phật đản» «Đề nghị chia đôi bát cháoTốnBạc -40·Sức -8ĐượcDanh»"
+  ],
+  [
+   947,
+   "page «Khuê phòng · Không gặp ai.» «trời trong mát»"
+  ],
+  [
+   950,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   951,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   954,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   956,
+   "page «Khuê phòng · Không gặp ai.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   956,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   959,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   961,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   963,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   965,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   965,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   966,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   966,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   966,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   968,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   969,
+   "page «Khuê phòng · Không gặp ai.» «Lịch tháng»"
+  ],
+  [
+   969,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   970,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   970,
+   ".dlg «Lịch tháng» «ngày 24: Nguyệt tín»"
+  ],
+  [
+   970,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   970,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   972,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   974,
+   "page «Khuê phòng · Không gặp ai.» «Tuyển túcòn 10 tháng»"
+  ],
+  [
+   974,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   976,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   979,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   981,
+   "page «Khuê phòng · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   981,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   983,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   983,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   983,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   984,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   984,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   985,
+   ".dlg «Thuở thanh mai» «Cúi đầu vâng lờiRất vữngTốnkhôngĐượccha yên lòngMấ»"
+  ],
+  [
+   988,
+   "page «Khuê phòng · Không gặp ai.» «Giao tình»"
+  ],
+  [
+   988,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   990,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   993,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   995,
+   "page «Khuê phòng · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   995,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   997,
+   "page «Khuê phòng · Không gặp ai.» «Tuyển túcòn 9 tháng»"
+  ],
+  [
+   997,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   999,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   999,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1000,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1000,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1000,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1002,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1003,
+   ".dlg «Vòng ngọc mất tích» «Im lặngRất vữngTốnkhôngĐượctỳ nữ bị đánh, lòng nàn»"
+  ],
+  [
+   1006,
+   "page «Khuê phòng · Không gặp ai.» «Tâm trạngBình thản-2»"
+  ],
+  [
+   1006,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1008,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1009,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   1012,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1014,
+   "page «Khuê phòng · Không gặp ai.» «Tin báo: 20 tin mới»"
+  ],
+  [
+   1015,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   1017,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1019,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   1022,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1023,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1024,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1024,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1024,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1024,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1026,
+   ".dlg «Hội ngắm mẫu đơn» «Đi, chỉ ngắm hoaRất vữngTốnSức -10ĐượcDanh tăng ch»"
+  ],
+  [
+   1028,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1030,
+   "page «Khuê phòng · Không gặp ai.» «Giao tình»"
+  ],
+  [
+   1031,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1033,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   1035,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1037,
+   "page «Khuê phòng · Không gặp ai.» «Giao tình»"
+  ],
+  [
+   1038,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1040,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1040,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1040,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1041,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1041,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1042,
+   ".dlg «Thuở thanh mai» «Nhận hết, xin gả cho chàngRất vữngTốnkhôngĐượclòng»"
+  ],
+  [
+   1045,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1047,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   1049,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1051,
+   "page «Khuê phòng · Không gặp ai.» «Tài nghệ»"
+  ],
+  [
+   1052,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1054,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   1056,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1058,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1058,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1059,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1059,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1059,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1061,
+   ".dlg «Hộp phấn lạ» «Thử một chút lên cổ tayRất vữngTốnSức -10Đượcbiết »"
+  ],
+  [
+   1063,
+   "page «Khuê phòng · Không gặp ai.» «Tin báo: 16 tin mới»"
+  ],
+  [
+   1064,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   1067,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1069,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   1071,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1073,
+   "page «Khuê phòng · Không gặp ai.» «Mệnh truyện»"
+  ],
+  [
+   1073,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1075,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   1078,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1080,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1080,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1080,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1081,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1081,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1083,
+   ".dlg «Cha say rượu» «Lắng nghe, hỏi chuyện các nhà trên triềuRất vữngTố»"
+  ],
+  [
+   1085,
+   "page «Khuê phòng · Ở đây có 1 người.» «giông tố»"
+  ],
+  [
+   1087,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   1089,
+   "page «Khuê phòng · Ở đây có 1 người.» «Hậu cung»"
+  ],
+  [
+   1090,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   1092,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   1094,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   1096,
+   "page «Khuê phòng · Ở đây có 1 người.» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   1096,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   1098,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1100,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1100,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1100,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1101,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1101,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1103,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétRất vữngTốnSức -10Đượctra ra»"
+  ],
+  [
+   1103,
+   ".dlg «Thuở thanh mai» «Đến bến sôngRất vữngTốnSức -20Đượcđi theo chàng, k»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795642485915,
+ "_ckB": 191,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1266,
+   "rendererMB": 548,
+   "heapMB": 111,
+   "dom": 3201,
+   "q": 4,
+   "lsK": 4
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1952,
+   "rendererMB": 1034,
+   "heapMB": 111,
+   "dom": 859,
+   "q": 0,
+   "lsK": 168
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 2059,
+   "rendererMB": 1114,
+   "heapMB": 111,
+   "dom": 1007,
+   "q": 0,
+   "lsK": 207
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2006,
+   "rendererMB": 1134,
+   "heapMB": 111,
+   "dom": 992,
+   "q": 0,
+   "lsK": 275
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2171,
+   "rendererMB": 1265,
+   "heapMB": 111,
+   "dom": 1266,
+   "q": 1,
+   "lsK": 293
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2227,
+   "rendererMB": 1332,
+   "heapMB": 111,
+   "dom": 940,
+   "q": 0,
+   "lsK": 298
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2213,
+   "rendererMB": 1324,
+   "heapMB": 111,
+   "dom": 843,
+   "q": 0,
+   "lsK": 317
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2307,
+   "rendererMB": 1416,
+   "heapMB": 111,
+   "dom": 979,
+   "q": 0,
+   "lsK": 336
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2350,
+   "rendererMB": 1448,
+   "heapMB": 111,
+   "dom": 974,
+   "q": 1,
+   "lsK": 351
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2355,
+   "rendererMB": 1454,
+   "heapMB": 111,
+   "dom": 860,
+   "q": 0,
+   "lsK": 341
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2376,
+   "rendererMB": 1477,
+   "heapMB": 111,
+   "dom": 972,
+   "q": 0,
+   "lsK": 377
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2370,
+   "rendererMB": 1469,
+   "heapMB": 111,
+   "dom": 904,
+   "q": 0,
+   "lsK": 389
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2438,
+   "rendererMB": 1501,
+   "heapMB": 111,
+   "dom": 2595,
+   "q": 2,
+   "lsK": 409
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 2426,
+   "rendererMB": 1508,
+   "heapMB": 111,
+   "dom": 955,
+   "q": 0,
+   "lsK": 393
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "totalMB": 2396,
+   "rendererMB": 1493,
+   "heapMB": 111,
+   "dom": 964,
+   "q": 0,
+   "lsK": 403
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "totalMB": 2376,
+   "rendererMB": 1485,
+   "heapMB": 111,
+   "dom": 875,
+   "q": 0,
+   "lsK": 451
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 2423,
+   "rendererMB": 1500,
+   "heapMB": 111,
+   "dom": 1181,
+   "q": 1,
+   "lsK": 447
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "totalMB": 2367,
+   "rendererMB": 1466,
+   "heapMB": 111,
+   "dom": 938,
+   "q": 0,
+   "lsK": 447
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "totalMB": 2395,
+   "rendererMB": 1494,
+   "heapMB": 111,
+   "dom": 944,
+   "q": 0,
+   "lsK": 467
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "totalMB": 2407,
+   "rendererMB": 1504,
+   "heapMB": 111,
+   "dom": 947,
+   "q": 0,
+   "lsK": 481
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "totalMB": 2451,
+   "rendererMB": 1512,
+   "heapMB": 111,
+   "dom": 1446,
+   "q": 0,
+   "lsK": 485
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "totalMB": 2414,
+   "rendererMB": 1497,
+   "heapMB": 111,
+   "dom": 979,
+   "q": 0,
+   "lsK": 472
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 2428,
+   "rendererMB": 1520,
+   "heapMB": 111,
+   "dom": 974,
+   "q": 0,
+   "lsK": 494
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 2419,
+   "rendererMB": 1511,
+   "heapMB": 111,
+   "dom": 982,
+   "q": 0,
+   "lsK": 516
+  },
+  {
+   "buoi": 121,
+   "y": 2,
+   "totalMB": 2481,
+   "rendererMB": 1540,
+   "heapMB": 111,
+   "dom": 2613,
+   "q": 2,
+   "lsK": 525
+  },
+  {
+   "buoi": 126,
+   "y": 2,
+   "totalMB": 2453,
+   "rendererMB": 1547,
+   "heapMB": 111,
+   "dom": 908,
+   "q": 0,
+   "lsK": 509
+  },
+  {
+   "buoi": 131,
+   "y": 2,
+   "totalMB": 2431,
+   "rendererMB": 1559,
+   "heapMB": 111,
+   "dom": 1018,
+   "q": 0,
+   "lsK": 524
+  },
+  {
+   "buoi": 136,
+   "y": 2,
+   "totalMB": 2449,
+   "rendererMB": 1562,
+   "heapMB": 111,
+   "dom": 927,
+   "q": 0,
+   "lsK": 550
+  },
+  {
+   "buoi": 141,
+   "y": 2,
+   "totalMB": 2480,
+   "rendererMB": 1557,
+   "heapMB": 111,
+   "dom": 1455,
+   "q": 0,
+   "lsK": 544
+  },
+  {
+   "buoi": 146,
+   "y": 2,
+   "totalMB": 2437,
+   "rendererMB": 1548,
+   "heapMB": 111,
+   "dom": 930,
+   "q": 0,
+   "lsK": 547
+  },
+  {
+   "buoi": 151,
+   "y": 2,
+   "totalMB": 2478,
+   "rendererMB": 1587,
+   "heapMB": 111,
+   "dom": 909,
+   "q": 0,
+   "lsK": 558
+  },
+  {
+   "buoi": 156,
+   "y": 2,
+   "totalMB": 2478,
+   "rendererMB": 1573,
+   "heapMB": 111,
+   "dom": 1032,
+   "q": 0,
+   "lsK": 566
+  },
+  {
+   "buoi": 161,
+   "y": 2,
+   "totalMB": 2528,
+   "rendererMB": 1600,
+   "heapMB": 111,
+   "dom": 1122,
+   "q": 2,
+   "lsK": 576
+  },
+  {
+   "buoi": 166,
+   "y": 2,
+   "totalMB": 2468,
+   "rendererMB": 1561,
+   "heapMB": 111,
+   "dom": 967,
+   "q": 0,
+   "lsK": 563
+  },
+  {
+   "buoi": 171,
+   "y": 2,
+   "totalMB": 2516,
+   "rendererMB": 1607,
+   "heapMB": 111,
+   "dom": 967,
+   "q": 0,
+   "lsK": 595
+  },
+  {
+   "buoi": 176,
+   "y": 2,
+   "totalMB": 2535,
+   "rendererMB": 1626,
+   "heapMB": 111,
+   "dom": 957,
+   "q": 0,
+   "lsK": 605
+  },
+  {
+   "buoi": 181,
+   "y": 2,
+   "totalMB": 2595,
+   "rendererMB": 1637,
+   "heapMB": 111,
+   "dom": 2534,
+   "q": 1,
+   "lsK": 627
+  },
+  {
+   "buoi": 186,
+   "y": 2,
+   "totalMB": 2531,
+   "rendererMB": 1618,
+   "heapMB": 111,
+   "dom": 945,
+   "q": 0,
+   "lsK": 607
+  },
+  {
+   "buoi": 191,
+   "y": 2,
+   "totalMB": 2520,
+   "rendererMB": 1609,
+   "heapMB": 111,
+   "dom": 966,
+   "q": 0,
+   "lsK": 624
+  }
+ ],
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  "#modal|Thân phận kiếp này",
+  "#kmrew|",
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  ".dlg|Khuê các",
+  "page|Khuê phòng · Không gặp ai.",
+  "#modal|Tâm trạng · Ta",
+  ".dlg|Tâm trạng · Ta",
+  "page|Khuê phòng · Ở đây có # người.",
+  "#modal|Tin báo",
+  ".dlg|Tin báo",
+  ".kbk|Tổng lược",
+  ".dlg|Sắc",
+  ".dlg|tối · còn",
+  ".dlg|Hộp phấn lạ",
+  ".dlg|Lịch tháng",
+  ".dlg|Lễ Phật đản",
+  "#modal|Lễ Phật đản",
+  ".dlg|Vòng ngọc mất tích",
+  "#modal|Tài nữ kinh thành",
+  ".dlg|Tài nữ kinh thành",
+  ".dlg|Chương # · Chờ kỳ tuyển tú",
+  ".dlg|Danh hiệu mới",
+  ".dlg|trưa · còn",
+  ".dlg|Hội ngắm mẫu đơn",
+  ".dlg|chiều · còn",
+  ".dlg|Bạc",
+  "#modal|Lịch tháng",
+  ".dlg|Ngự giá thân chinh",
+  ".dlg|sáng · còn",
+  ".dlg|Kế mẫu",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Đại hàn, tuyết lớn",
+  ".dlg|Tết Thượng nguyên",
+  "#kg82|",
+  ".dlg|Danh hiệu lên bậc",
+  ".dlg|Tỉnh thân",
+  ".dlg|Cha bị hặc tội",
+  ".dlg|Lũ lớn, mất mùa",
+  "#modal|Lũ lớn, mất mùa",
+  ".dlg|Thuở thanh mai",
+  ".dlg|Hội thơ xuân",
+  ".dlg|Dịch trong kinh thành",
+  ".dlg|Tin trong cung buổi này",
+  ".dlg|Bà mối đến nhà",
+  "#modal|Nhà trai thử dung mạo",
+  ".dlg|Nhà trai thử dung mạo",
+  ".dlg|Cha say rượu",
+  ".dlg|Bài vị đổ",
+  ".kmov|"
+ ],
+ "_momRank": 0,
+ "_unsFail": {
+  "#modal|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+  ".dlg|Tin báo": {},
+  ".dlg|Hộp phấn lạ": {},
+  ".dlg|Vòng ngọc mất tích": {},
+  ".dlg|Chương # · Chờ kỳ tuyển tú": {},
+  ".dlg|Danh hiệu mới": {},
+  ".dlg|Hội ngắm mẫu đơn": {},
+  ".dlg|Tết Thượng nguyên": {},
+  ".dlg|Danh hiệu lên bậc": {},
+  ".dlg|Cha bị hặc tội": {},
+  ".dlg|Thuở thanh mai": {},
+  ".dlg|Hội thơ xuân": {},
+  ".dlg|Dịch trong kinh thành": {},
+  ".dlg|Bà mối đến nhà": {},
+  ".dlg|Nhà trai thử dung mạo": {},
+  ".dlg|Cha say rượu": {},
+  ".dlg|Bài vị đổ": {}
+ },
+ "_scrW": {
+  "#modal|Thân phận kiếp này|594,435": {
+   "left": 226,
+   "n": 1
+  },
+  "#modal|Tin báo|444,454": {
+   "left": 18,
+   "n": 1
+  },
+  ".dlg|Tin báo|444,454": {
+   "left": 482,
+   "n": 1
+  }
+ },
+ "offers": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "rank": 0,
+   "screen": "#modal «Thân phận kiếp này»",
+   "label": "Vào cung ngayTốnkhôngĐượcvào cung ngay·phong Đáp ứng·thêm kh",
+   "picked": false
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "rank": 0,
+   "screen": "#modal «Thân phận kiếp này»",
+   "label": "Ở nhà chờ tuyển túTốnkhôngĐượchai năm học tài nghệ·nâng Tư c",
+   "picked": true
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 2,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 3,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 4,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 5,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 7,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 8,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 9,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 10,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 12,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 23 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 13,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": true
+  },
+  {
+   "buoi": 14,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 15,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 17,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 18,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 19,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 20,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 22,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 23,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 24,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 22 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 25,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 27,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 28,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 29,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": true
+  },
+  {
+   "buoi": 30,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 32,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 33,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 34,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 35,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 21 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 37,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 38,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 39,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 40,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 42,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 43,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 44,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 45,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": true
+  },
+  {
+   "buoi": 47,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 48,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 20 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 49,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 50,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 52,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 53,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 54,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 55,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 57,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 57,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 58,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 58,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 59,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 59,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 60,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 19 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 62,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 62,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 63,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 63,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 65,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 65,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 67,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 68,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 69,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 70,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 72,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 18 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 73,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 73,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 74,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 75,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 77,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 78,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 79,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 80,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 82,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 82,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 83,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 83,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 84,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 17 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 84,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 85,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 87,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 88,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 89,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 90,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 92,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 93,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 94,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 95,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 16 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 97,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 98,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 99,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": true
+  },
+  {
+   "buoi": 100,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 102,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 103,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 104,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 105,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 107,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 108,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 15 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 109,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 110,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 112,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 113,
+   "y": 1,
+   "rank": 0,
+   "screen": ".dlg «Đại hàn, tuyết lớn»",
+   "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+   "picked": false
+  },
+  {
+   "buoi": 113,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 114,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 115,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 117,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 118,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 119,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 120,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 14 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 121,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 122,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 123,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 124,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 125,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 126,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 127,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 128,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 129,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 130,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 131,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 132,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 13 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 133,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 134,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 135,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 136,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 137,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 138,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 139,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 140,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 141,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 142,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 143,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 144,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 12 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 145,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 146,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 147,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 148,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 149,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 150,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": true
+  },
+  {
+   "buoi": 151,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 152,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 153,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 154,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 155,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 156,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 11 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 157,
+   "y": 2,
+   "rank": 0,
+   "screen": ".dlg «Bà mối đến nhà»",
+   "label": "Thưa: con đợi kỳ tuyển túRất vữngTốnkhôngĐượccha có thể đồng",
+   "picked": false
+  },
+  {
+   "buoi": 157,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 158,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 159,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 160,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 161,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 162,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 163,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 164,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 165,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 166,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": true
+  },
+  {
+   "buoi": 167,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 168,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 10 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 169,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 170,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 171,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 172,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": true
+  },
+  {
+   "buoi": 173,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 174,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 175,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 176,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 177,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 178,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 179,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 180,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 9 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 181,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 182,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 183,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 184,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 185,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 186,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 187,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 188,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Không gặp ai.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 189,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 190,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 191,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  },
+  {
+   "buoi": 192,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+   "label": "Tuyển túcòn 8 tháng",
+   "picked": false
+  }
+ ],
+ "t": {
+  "total": 1103647
+ }
+}
