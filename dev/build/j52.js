@@ -79,10 +79,10 @@ if(typeof contestEnd==="function")(function(){const c0=contestEnd;contestEnd=fun
 /* ending bonus and the end-card line */
 (function(){const o0=over;over=function(h,t,fate){if(!S||S.dead)return o0.apply(this,arguments);try{pdCheck()}catch(e){}
  const r=o0.apply(this,arguments);
- try{const m=Q[0];if(m&&m.cls==="end"&&!m.pd){m.pd=1;const hh=((m.h.match(/<h3>([\s\S]*?)<\/h3>/)||[])[1]||h||"").replace(/<[^>]+>/g,"").trim();
-  const b=PD_END[hh]!=null?PD_END[hh]:PD_GOOD.includes(hh)?10:5;pdSet(pdGet()+b);S.pdLife=(S.pdLife||0)+b;log(`<span class="pdl">+${b} Phúc duyên: kết cục ${hh}.</span>`);
-  const line=`<p class="pdend">Kiếp này được <b class="g">+${S.pdLife} Phúc duyên</b> (kết cục ${hh}: +${b}) · Tổng: <b>${pdGet()}</b>. Đổi thân phận kiếp sau cần ${PD_COST}.</p>`;
-  m.h=m.h.replace(/<p class="past">Chết là hết\.[^<]*<\/p>/,`<p class="past">Chết là hết. Kiếp sau bắt đầu lại từ đầu; chỉ còn tên trong Sổ luân hồi và Phúc duyên để đổi thân phận.</p>`)+line;
+ try{const m=Q[0];if(m&&m.cls==="end"&&!m.pd){m.pd=1;const hh=String(m.endH||(m.h.match(/<h3>([\s\S]*?)<\/h3>/)||[])[1]||h||"").replace(/<[^>]+>/g,"").trim();const hn=S.kend||hh;/* key = the engine heading (j32 endH); shown = the poetic name (jend endName) */
+  const b=PD_END[hh]!=null?PD_END[hh]:PD_GOOD.includes(hh)?10:5;pdSet(pdGet()+b);S.pdLife=(S.pdLife||0)+b;log(`<span class="pdl">+${b} Phúc duyên: kết cục «${hn}».</span>`);
+  const line=`<p class="pdend">Kiếp này được <b class="g">+${S.pdLife} Phúc duyên</b> (kết cục «${hn}»: +${b}) · Tổng: <b>${pdGet()}</b>. Đổi thân phận kiếp sau cần ${PD_COST}.</p>`;
+  const NC=window.KIT_END&&KIT_END.names&&KIT_END.names.close;m.h=(NC?m.h.replace(NC.tail,NC.tailPd):m.h)+line;
   if(!$("modal").hidden||Q[0]===m)showModal()}}catch(e){console.error(e)}
  return r}})();
 /* title: the balance under the slots */
