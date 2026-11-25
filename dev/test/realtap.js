@@ -27,7 +27,7 @@ const PROBE = (el) => {
   /* TOUCH ADJUSTMENT (s7/s9 «Kính sự phòng báo tin» loop, 25/11): on a touch screen the browser snaps a tap to the nearest clickable inside the finger
      radius — a tap on the option NAME next to the odds chip «Rất vững» (.kodm role=button) opened the odds legend every time. A person's finger lands
      clear of the small chips: probe points closer than NEAR px to a nested clickable / chip are skipped (fall back to them only if nothing else). */
-  const NEAR = 24, kids = [...el.querySelectorAll('button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,.kodds,.kodm,.kgl,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]')].filter(c => c !== el).map(c => c.getBoundingClientRect()).filter(q => q.width > 0 && q.height > 0);
+  const NEAR = 24, kids = [...el.querySelectorAll('button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,figure.ksart,.ksart,.kodds,.kodm,.kgl,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]')].filter(c => c !== el).map(c => c.getBoundingClientRect()).filter(q => q.width > 0 && q.height > 0);
   const near = (x, y) => kids.some(q => x > q.left - NEAR && x < q.right + NEAR && y > q.top - NEAR && y < q.bottom + NEAR);
   let nearOk = null;
   if (x1 - x0 < 3 || y1 - y0 < 3) return { lab, clip: true, sc, top: r.top, bottom: r.bottom, cover: 'clipped by its scroller / off-screen', off: r.bottom < 0 || r.top > H };
@@ -36,7 +36,7 @@ const PROBE = (el) => {
     if (x < 1 || y < 1 || x > W - 1 || y > H - 1) continue;
     const t = document.elementFromPoint(x, y);
     if (t && (t === el || el.contains(t))) { /* never land on a nested info chip / legend trigger inside the button (it opens its own popup) */
-      const inner = t.closest('button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,.kodds,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]');
+      const inner = t.closest('button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,figure.ksart,.ksart,.kodds,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]');
       if (inner && inner !== el && el.contains(inner)) { chip = true; continue }
       if (near(x, y)) { if (!nearOk) nearOk = { x, y, lab, ok: true, near: true }; continue }
       return { x, y, lab, ok: true } }
