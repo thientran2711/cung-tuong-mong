@@ -19,3 +19,5 @@ Roll at ctx >= ~28 %, ceiling 60 %. Main push only on MAIN 147 GO per item + gat
 - 23:35Z MAIN is now MAIN CHÍNH 148 session_01V1ZZH2sHQhqUaYCB6kPJxt (147 rolled). Report resent. 147 on the ipad-size flag: tap target must stay ≥ 44 px; 148 orders IPAD-SIZE (session_01V1ZZH4uDKAnttReZaR3tgc) to fix → a3 HELD until 148 says.
 - art-slots bdc83200 QC alone PASS 207 s (buổi 1204/2619). Running on a2 head 549098d6: audio-ipad, art-slots, kit-entry-gate, then QC alone.
 - 23:37Z MAIN 148: order unchanged (TAKEOVER_MAIN_148.md); later add MAKEUP-SET r3 review/makeup-set 35f3e92c after 148 LOOK GO.
+- 23:40Z MAIN 148 GO MAKEUP-SET r3 35f3e92c (LOOK PASS; take r4 if sent) → small rv PASS; stacked a4 1cf11859 (review/lc18-a4-makeup) on a3; CHANGE drafted «Gương trang điểm nay chọn được cả bộ đủ 4 màu; bộ thiếu màu hiện mờ kèm lý do, và gương chờ nàng tự điểm trang.» (asked 148 to OK).
+- 23:40Z MAIN 148 on a3 flag: option (b) keep 34–35 px rows on iPad landscape (row width ~126 px = tap target); a3 128ab148 GO as staged. ORDER after her words: q1 → a1 → a2 → a3 → a4 makeup → co-op chain → fix-7 r3 → thin-p8-r2 → SELSCENE-19 → q5 → r3wip.
