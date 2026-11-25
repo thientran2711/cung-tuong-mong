@@ -1,0 +1,6 @@
+# E-S4 R5-lazy-5 (Fold, fold3) — end-of-life review (evidence limited, see moments)
+1. Summary: «quiet» (lazy), pf/pt_hai, Fold, real taps, jsClicks 0, harness 64d62d9b (no resume), game Build 79050fbf5464 (LIVE dbae89eb), 656 buổi, 4 years, age 23, rank 0, ending «Lãnh cung — Phát điên trong lãnh cung» (game-imposed, no exitPick, VALID), 4 617 taps, ≈ 4.1 h wall, 0 stuck, 2 dead (.kmov «?» zero-size), 3 bug rows.
+2. Scores: a first 15 min 7 · b loop/pacing 3 (rank 0 for 4 years, long rest loop) · c buttons 6 (clean run on Fold) · d story 4 · e characters 4 · f choices/fairness 4 (lazy road ends in lãnh cung with no visible cause) · g feedback 6 (ending animation reads, but status chips float over it) · h mini-games n/a · i visuals 7 · j co-op n/a.
+3. Loved: the Fold softlock is gone — a lazy player now gets through the opening. Hated: nothing to do for 600 buổi at rank 0. Replay: yes (other persona).
+4. BUGS: «Sang ngày mới» needs 3 taps when a queued «Tin trong cung buổi này» exists (Q=1); .kmov «?» 0×0 dead target; ending transition shows «Sủng -2 / Sức -10» chips on top. FIX CONFIRMED: choose-guard (Fold «Tắm gội chờ giá»/«Kính sự phòng») on Build 79050fbf5464.
+5. Suggestions (parking lot): a lazy player should still see a way to be noticed (a visitor / a task) so rank 0 for 4 years is not the default.
