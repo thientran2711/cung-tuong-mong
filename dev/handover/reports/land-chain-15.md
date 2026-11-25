@@ -5,3 +5,6 @@ Roll at ctx >= ~31 %, ceiling 60 %. BLOCKER: main push only after sếp writes h
 ## Log
 - 25/11 11:4xZ took over. LIVE = 9f72524b. READY 1–13 up to d3b99724 (LC14 msg: e68 QC PASS 280 s, old save ok). Tools in scratch.
 - 11:5xZ gates for 14 m-fix-2 60a8d42e running (mfix2-resbtn, mfix2-usenote fold+ipad, toil-overlay 755x1000@2/1180x820@2).
+- 11:4xZ MAIN 140 GO: bc-stack-r 5c062a05 replaces realtap b7474dd1. Re-stacked: 15' eaaae7c8 (review/lc15-bcstack-on-mfix2; realtap.js = bc-stack copy; KIT_REQUESTS + quickcheck.d/README both sides) → 16' d374266f temper (review/lc15-temper-on-bcstack; HOLD for temper-outburst-fix). b7474dd1/39549e01 void. bc-stack-r head moved to 893c42f8 after PASS: stacked GO sha only. bc-stack fixes pcPort rk (told MAIN: B's pcport-rk may be duplicate).
+- 14 m-fix-2 60a8d42e: resbtn + usenote fold/ipad PASS; QC PASS 252 s → READY. toil-overlay (60a8d42e's own test) FAIL 1 Fold+iPad «layer shown while her picture is hidden» — baseline on LIVE/d3b99724 running; the step above (eaaae7c8, newer test) is 0 bad.
+- 15' eaaae7c8: toil-overlay 755x1000@2 + 1180x820@2 bad 0; QC PASS 263 s (hooks 11 incl press-keep + button-crawl --fast) → READY.
