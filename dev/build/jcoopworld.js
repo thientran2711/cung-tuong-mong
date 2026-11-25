@@ -255,7 +255,19 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  if(S.foe&&!rivals.some(v=>v.name===S.foe)){const v=pick(liveRivals(false).filter(x=>!isF(x)));if(v)S.foe=v.name}
  if(wasSrv&&typeof srvInit==="function"){S.srv=null;quiet=true;try{withoutFriend(()=>srvInit())}catch(e){console.error(e)}quiet=false}
  S.place="home";S.visit={k:"home",people:homePeople(),talked:false};
- try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
+ try{sidMine()}catch(e){console.error("sidMine",e)}}
+/* SELSCENE-18 (law 11, symptom «s1» = two people): a new life starts its servant counter at 0 (nlRun) and her household / Nội vụ phủ pool
+   got sids 1..k in the throwaway world; attach() puts them into the room's world, whose servants already hold 1..n → one sid, two people
+   (servById, S.known «s<n>», af / lover links). Her own people that clash with a world servant (or with each other) get fresh sids above
+   every sid anyone holds; links between her own people follow. The world's sids never change (host truth). */
+function sidMine(){if(typeof sidN==="undefined"||!S)return;const own=[].concat(S.staff||[]);try{const P=S.npool;if(P)for(const r in P)own.push(...(P[r]||[]))}catch(e){}
+ if(S.maid&&S.maid.sid!=null)own.push(S.maid);const ownS=new Set(own);const W=new Set();try{for(const x of allServ())if(x&&!x.coop&&!ownS.has(x)&&x.sid!=null)W.add(+x.sid)}catch(e){}
+ sidN=Math.max(sidN,sidTop());const map={},seen=new Set();
+ for(const x of own){if(!x||x.coop||x.sid==null)continue;const n=+x.sid;if(W.has(n)||seen.has(n)){const k=++sidN;map[n]=k;x.sid=k;seen.add(k)}else seen.add(n)}
+ if(!Object.keys(map).length)return;CW.sidFix=(CW.sidFix||[]).concat([map]).slice(-6);const M=v=>map[v]!=null?map[v]:v;
+ for(const x of own){if(!x)continue;if(x.af){const a={};for(const k in x.af)a[M(k)]=x.af[k];x.af=a}for(const f of ["lover","bullyBy"])if(x[f]!=null)x[f]=M(x[f])}
+ try{const K=S.known;if(K)for(const o in map)for(const p of ["s","gs"])if((p+o) in K){K[p+map[o]]=K[p+o];delete K[p+o]}}catch(e){}}
+CW.sidMine=sidMine;
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
 CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
