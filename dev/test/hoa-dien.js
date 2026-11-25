@@ -2,11 +2,16 @@
    (drag only — tilt step removed, mg-play2 owner OD 20/11 ~07:55Z; score = distance to the brow-centre spot), NPCs by the same formula (cap BAL.hd.npcCap), xa xỉ inside luxTotal,
    +1 per promotion, the Thử tay kind, old saves. Plays the step with REAL pointer drags (mouse, or touch through CDP with TOUCH=1).
    usage: node dev/test/hoa-dien.js <url of dev/index.html> <WxH@dpr> <shotdir>   (env TOUCH=1: touch drags) */
-const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const RT=require('./realtap.js');
 const [,,URL,VP,DIR]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;const TOUCH=!!process.env.TOUCH;
-fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x):''));if(!c)fail++};
+fs.mkdirSync(DIR,{recursive:true});let fail=0,retaps=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x):''));if(!c)fail++};
+/* WATCHDOG (a hung run must FAIL loudly, never hang the queue): no finish within TEST_BUDGET_MS (default 15 min) → exit 3 */
+setTimeout(()=>{console.error('WATCHDOG hoa-dien: no finish in '+(+process.env.TEST_BUDGET_MS||900000)+' ms');process.exit(3)},+process.env.TEST_BUDGET_MS||900000).unref();
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block',hasTouch:TOUCH,isMobile:false});
  await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();const cdp=TOUCH?await ctx.newCDPSession(p):null;
+ /* owner 25/11: every action is a REAL tap after an elementFromPoint hit-check (realtap.js), never el.click() / DOM clicks */
+ const rt=RT.make(p,{dev:tag,shots:DIR,touch:TOUCH,log:x=>{if(x.k==='DEAD BUTTON')console.log(JSON.stringify(x))}});
+ const T=async(sel,label)=>{await p.waitForSelector(sel,{state:'visible',timeout:30000});const ok=await rt.tap(sel,{screen:'hoa-dien',label:label||sel,wait:4000});if(!ok)throw new Error('DEAD BUTTON '+sel);return ok};
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(180000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true})});
@@ -59,14 +64,14 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  async function sitting(good){await p.evaluate(()=>{Q.length=0;S.buoi=0;used=0;S.suc=90;S.toilette=null;S.toilSeen=null;S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');S.inv.push({k:'hd_dao'},{k:'hd_sen'});
    try{closeModal()}catch(e){}deal();render()});await p.waitForTimeout(500);
   for(let i=0;i<4;i++){try{await require('./lib/roulette').clearMoments(p)}catch(e){}await p.evaluate(()=>document.querySelectorAll('.kfgain').forEach(e=>e.remove()));await p.waitForTimeout(200)}
-  await p.evaluate(()=>{const c=document.querySelector('#k3tt [data-k3="toil"]');if(c)c.click();else toilOpen()});await p.waitForSelector('#toilrdy');await p.click('#toilrdy');await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
-  await p.click('#toilok');await p.waitForTimeout(300);await p.evaluate(()=>{TOIL.clock=.25});await p.click('#toilmk');await p.waitForSelector('#kg82 .kswt');
-  await p.$eval('#toilgo',e=>e.click());await p.waitForFunction(()=>TOIL.geo&&TOIL.geo.ready(),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(500);
-  for(let i=0;i<2;i++){await p.waitForSelector('#toilnx',{timeout:30000});await p.click('#toilnx');await p.waitForTimeout(250)}
+  await T('#k3tt [data-k3="toil"]','chip Điểm trang');await T('#toilrdy','Sẵn sàng');await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
+  await T('#toilok','Mặc bộ này');await p.waitForTimeout(300);await p.evaluate(()=>{TOIL.clock=.25});await T('#toilmk','Điểm trang');await p.waitForSelector('#kg82 .kswt');
+  await T('#toilgo','Vào soi gương');await p.waitForFunction(()=>TOIL.geo&&TOIL.geo.ready(),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(500);
+  for(let i=0;i<2;i++){await p.waitForSelector('#toilnx',{timeout:30000});await T('#toilnx','Tiếp');await p.waitForTimeout(250)}
   await p.waitForSelector('#kg82 [data-hdk]',{timeout:60000});await p.waitForTimeout(400);
   const pick=await p.evaluate(()=>({n:document.querySelectorAll('#kg82 [data-hdk]').length,lbl:[...document.querySelectorAll('#kg82 [data-hdk]')].map(b=>b.textContent)}));
   await p.screenshot({path:`${DIR}/hd-${tag}-1-pick${good?'':'-miss'}.jpg`,quality:70});
-  await p.click('#kg82 [data-hdk="hd_sen"]');await p.waitForFunction(()=>HD.peek&&HD.peek(),null,{timeout:20000});await p.waitForTimeout(300);
+  await T('#kg82 [data-hdk="hd_sen"]','hoa điền hd_sen');await p.waitForFunction(()=>HD.peek&&HD.peek(),null,{timeout:20000});await p.waitForTimeout(300);
   await p.waitForFunction(()=>{const i=kg82Img('chai-bg');const h=HD_IMG.hd_sen;return i.complete&&i.naturalWidth&&h&&h.complete&&h.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(800);
   const pk=await p.evaluate(()=>HD.peek());const tx=good?pk.anchor.x:pk.anchor.x+pk.ed*.5,ty=good?pk.anchor.y:pk.anchor.y-pk.ed*.3;
   /* drag from a point on the board (relative drag: the finger never covers the target) */
@@ -75,13 +80,15 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
   else{await p.mouse.move(sx,sy);await p.mouse.down();await p.mouse.move(ex,ey,{steps:12});await p.mouse.up()}
   ck('no tilt buttons on the board',!(await p.$('#hdl,#hdr')));
   const pk2=await p.evaluate(()=>HD.peek());await p.screenshot({path:`${DIR}/hd-${tag}-2-place${good?'':'-miss'}.jpg`,quality:70});
-  if(TOUCH){const bb=await p.$eval('#hdok',e=>{const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]});await p.touchscreen.tap(bb[0],bb[1])}else await p.click('#hdok');
+  await T('#hdok','Dán');
+  /* a person whose tap did nothing taps again (touch-mode flake seen once in 4 runs; counted, not hidden) */
+  if(!(await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:8000}).then(()=>1,()=>0))){retaps++;console.log('RETAP #hdok (first tap did not register)');if(await p.$('#hdok'))await T('#hdok','Dán (again)')}
   await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:30000});const snap=await p.evaluate(()=>HD.peek());await p.waitForTimeout(1500);
   await p.screenshot({path:`${DIR}/hd-${tag}-3-result${good?'':'-miss'}.jpg`,quality:70});
-    for(let i=0;i<6&&await p.$('.ktrv');i++){if(await p.$('.ktrv-ov>.kmend'))await p.click('.ktrv-ov>.kmend').catch(()=>{});else await p.evaluate(()=>{const o=document.querySelector('.ktrv-ov');o&&o.click()});await p.waitForTimeout(900)}
+    for(let i=0;i<6&&await p.$('.ktrv');i++){if(await p.$('.ktrv-ov>.kmend'))await T('.ktrv-ov>.kmend','scene end');else await T('.ktrv-ov','reveal: tap = skip to zoom');await p.waitForTimeout(900)}
   await p.waitForSelector('#toildone',{timeout:30000}).catch(()=>{});await p.screenshot({path:`${DIR}/hd-${tag}-3b-rows${good?'':'-miss'}.jpg`,quality:70});
   const res=await p.evaluate(()=>({rec:S.toilette,row:[...document.querySelectorAll('#kg82 .kgr td,#kg82 .kgr .krow,#kg82 .kgr')].map(e=>e.textContent).join(' ').includes('Dán hoa điền'),lux:luxParts(S)}));
-  try{await require('./lib/roulette').clearMoments(p)}catch(e){}const d=await p.$('#toildone');if(d)await d.click();await p.waitForTimeout(500);
+  try{await require('./lib/roulette').clearMoments(p)}catch(e){}if(await p.$('#toildone'))await T('#toildone','toildone');await p.waitForTimeout(500);
   /* r2: every view draws it at the anchor (kitFxLayers layer), straight or with the fixed vụng tilt */
   await p.evaluate(()=>{try{render()}catch(e){}});await p.waitForFunction(()=>[...document.querySelectorAll('img[data-hdl]')].some(i=>/^data:image\/png/.test(i.src)),null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(500);
   const lay=await p.evaluate(()=>{const L=[...document.querySelectorAll('img[data-hdl]')];const where=[...new Set(L.map(e=>e.closest('#stage')?'stage':e.closest('header')?'header':e.closest('.kmini')?'avatar':'other'))];
@@ -115,7 +122,7 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  await p.evaluate(()=>{window.__hdEnd=null;kg82Open({title:'Dán hoa điền',how:KG82_KIND.hoadien.how,round:'Thử tay'});KG82.lv=2;kg82Play('hoadien',r=>{window.__hdEnd=r})});
  await p.waitForFunction(()=>HD.peek&&HD.peek()&&document.getElementById('hdok'),null,{timeout:60000});await p.waitForTimeout(300);
  const pk=await p.evaluate(()=>HD.peek());await p.mouse.move(pk.at.x,pk.at.y);await p.mouse.down();await p.mouse.move(pk.anchor.x,pk.anchor.y,{steps:8});await p.mouse.up();
- await p.screenshot({path:`${DIR}/hd-${tag}-4-thutay.jpg`,quality:70});await p.click('#hdok');await p.waitForFunction(()=>window.__hdEnd!=null,null,{timeout:20000}).catch(()=>{});
+ await p.screenshot({path:`${DIR}/hd-${tag}-4-thutay.jpg`,quality:70});await T('#hdok','Dán');await p.waitForFunction(()=>window.__hdEnd!=null,null,{timeout:20000}).catch(()=>{});
  const end=await p.evaluate(()=>window.__hdEnd);ck('Thử tay board ends with a grade',end!=null,end);try{await p.evaluate(()=>kg82Close())}catch(e){}
 
  /* 6. old save (fixture from before hoa-dien) with the old hair-slot hoa điền worn: loads, migrates, renders, NPC looks + totals work */
@@ -126,5 +133,5 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
   ck('old save loads + migrates the worn hoa điền',!o.e0.length&&o.tram!=='hoadien_bac'&&o.back&&o.n>0,o)}
  /* 6. no horizontal overflow, no page errors */
  const ov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ck('no horizontal overflow',!ov);
- ck('no page errors',!errs.length,errs.slice(0,5));
+ console.log('note  retaps (first tap did not register, tapped again) · '+retaps);ck('no page errors',!errs.length,errs.slice(0,5));
  console.log(fail?`FAIL ${fail}`:'ALL OK');await b.close();process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});
