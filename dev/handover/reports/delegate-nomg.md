@@ -134,3 +134,21 @@ Only 2 delegated acts opened a game (maid + servant «Nghe ngóng chung»); afte
 ## r3 — BIG rv item (dfLast)
 - jdfv dfLast fallback now takes only the act's OWN first line of popMsg (split on `<br>` / `<span class="past">` before textContent): the figure bubble no longer glues other news («…về khắc 3.Tần Kiều … sai người s»). It is the only popMsg consumer this branch added.
 - delegate-nomg.js: asserts the react line == the act's own line (both devices) and that dfLast drops news after `<br>`. PASS.
+
+## REVIEW (BIG reviewer session_01V1ZZH22tLFisY7pahB4wKi, opened by MAIN 132; verdict to MAIN 134 + LC13)
+PRIORITY #1 CHECK ('nghe ngóng|giao việc.*mini|sai cung nữ|delegat|servant.*mini|người hầu.*chơi'): OD 14 | ledger 3 | claims 7 | main 15 | review/* 0 | archive 0 — reviewer reused the worker's tests; nothing new built.
+
+**VERDICT: PASS 170e05b3** (FF on LIVE origin/main 0756a05b, which contains LC13 4da55ce8 per lander; no merge needed; build reproduces — rebuilt index.html differs only in the CTM_BI build line). Pushed as review/delegate-nomg-rv (= 170e05b3 + this review note).
+
+History: first pass on 0ef61d8b merged onto LC13 step13-makeup found 1 FAIL — jdfv dfLast took the whole popMsg, so the figure bubble glued other news, cut mid-word (iPad: «… về khắc 3.Tần Kiều Mộng Điệp sai người s»). Worker fixed it in r3 170e05b3 (split on <br> / span.past) + test assert; verified.
+
+Checks (owner OD 25/11 ~04:12Z verbatim: "Khi nào mà tôi là người tự làm thì mới có thể làm mini game cho tôi. Còn cái này là người ta làm mà tại sao lại là mini game của tôi?"):
+1. Whole family: one classifier jdf dfDlg (pk send kind ∪ ACT_REMOTE ∪ send-name regex) → class E, jdfv dfTap runs E with no game; maid/servant pop-ups (jwhy/jhouse), Hành sự cards (jact), parallel-time landing (jptime), scheme «Giao cho người làm» (jsgame runDlg, also the button inside the rules card) — no opener. Audit rerun: 84 focus acts, delegated 4, delegated-with-game 0; her own acts keep their games. PASS.
+2. Law 4/7: «Nghe ngóng chung» card = spyO(S,null,doer) as ladder word; the pop-up/focus run rolls once inside fzRun at the shown odds (talk() a.run → fzRun(a.o) → aRoll → aOdd frozen); no double roll (oddsCapped false: odds < 100). r2 scheme: actSent/ACTSEND + sendPen (j29 sentPen, loyalty/bậc of bestSent) for every runAct scheme act; Nghe lén / Mua chuộc = job odds − doer sendPen; card names the doer. The open item to MAIN (scheme rolled HER odds) is RESOLVED by r2. Law 3: khắc cost, gain on success, a miss loses nothing else (gain-only OK). Result line short (OD 24/11 ~21:57Z): «<tên> đi nghe ngóng, về khắc N.» / miss «… chưa nghe được chuyện gì đáng bẩm.» PASS.
+3. Tests on 170e05b3: delegate-nomg.js PASS (Fold + iPad real tap, 0 openers, react line == own line) · delegate-nomg-audit 0 · coop-e2e 142/142 default + 142/142 COOP_SWAP=1 · coop-one-world PASS · dayq-hold PASS 46 cases (run against root index.html; dev/index.html served by python http.server has no charset → syntax error in this env, harness only) · quickcheck PASS on rerun (first run FAIL only perf longTaskMaxMs 4623 vs limit 4419 while all medians ≈ live; rerun render 299/295, tab 660/678, buổi 1853/1612 → noise).
+4. Real-tap shots LOOKED (CDN img/_review/delegate-nomg-rv/): fold-1-fan / ipad-1-fan (card «Nghe ngóng chung · Có cơ/Vững · Tốn 1 khắc», kit act cards), fold-2-after-tap / ipad-2-after-tap (no LUẬT CHƠI, no game; kit react bubble one short line), fold-3-back / ipad-3-back (maid back, no game; result in Sổ ghi). No overflow, no cut text, 0 page errors.
+
+Notes for MAIN (no change made, law 16):
+- n1: the parallel-time landing rolls spyRoll at landing time (+ lá số lotB), not the odds frozen at the order — same as the existing «Sai đi dò la» landing (family-consistent; pre-existing pattern).
+- n2: the same act sits under «Giao thiệp» on the Hành sự card (jact dom) but «Mưu kế» on the servant pop-up (jhouse); pre-existing, kit-consistency nit.
+- n3: «Xin bắt mạch» / «Bài thuốc dễ thụ thai» at Thái y viện keep a game (she asks in person = self); MAIN may confirm this reading of the owner rule.
