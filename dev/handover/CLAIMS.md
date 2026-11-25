@@ -1695,3 +1695,4 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 | TEMPER G4 robot arms on realtap + review fixes | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NaH1eX32YRAhiQCYnb (T1b) | RUNNING | 2026-11-25T07:56Z |
 BIG rv sideline-dlg r4 (opus; land -3-r1 as one item) | review/sideline-dlg-3-r* | B | session_01N1tNP6Wg2mFj3et8dLjA7c | RUNNING | 25/11 08:00Z |
 | F BIG REVIEWER #2 (successor of session_01UV1SziXSk67Zy3DMXHsCrJ; queue test-path-fix-3 101dc29b → crawl-fix-1-r2 → m-fix-1 → harness) | review/*-r | FOREMAN F #7 | session_01UV1SzhBrzCVc4CVbM2dCsJ | RUNNING | 25/11 08:01Z |
+| TRUNGSINH-STORY lead 2 | review/trungsinh-story | MAIN 136 | session_01V1ZZH2S38RtoBxn9Q5brH4 | RUNNING | 2026-11-25T08:04Z |
