@@ -28,12 +28,18 @@ PRIORITY #1 CHECK: OD 24/11 ~09:10Z–09:35Z (#7 kỳ sắc phong / patrons / ca
 | 5 | review/talk-others-people-lr | e0d05653 | talk-others-people-rv 25a9a9cc | dev/test/realtap.js = LIVE newer shared copy (robot-realtap superset, LC14 rule) |
 | 6 | review/net-ghen-2-lr | 18c26259 | net-ghen-2-r5 9d3b7b7b (+ net-thresholds) | 13 files, 1 hunk each: dfu/law1/talk-others (BAL.btn.*.k, svtGiao, giftHand) vs net-ghen-2 (pvOan/pvQuy) on the same long lines → char-level 3-way, both edits kept, 16 sub-hunks 0 overlaps, node --check clean |
 | 7 | review/temper-perception-lr | 6fccfccd | temper-perception-rv c56c1856 | j2 2 hunks char-level 3-way (tw tags + pvOan); assemble union jtperc after jfeel |
+| 8 | review/temper-perception-lr2 | 2d153814 → **ed7be1ce** | 2 INTEGRATION FIXES found by gates on the top (see §3b) | — |
 No owner wording was hand-resolved (no hunk touched owner text; CHANGE lines written per step).
 
 ## 3. GATES (filled as they finish)
 | step | own tests | coop-e2e | quickcheck | shots / video |
 |---|---|---|---|---|
-| 1 dfu-lr 6459cdc8 | promo-build ✓ · servant-trust ✓ · kit-promo-hook ✓ · net-build ✓ · one-core-khac ✓ · svt-scan 67/0 ✓ · promo-skip 2 FAIL = SAME 2 on bare LIVE 5e013076 with LIVE's own test (pre-existing: «passed grace exam waits for a free seat», «strike-back hits once when due») | 143/143 | running | — |
+| 1 dfu-lr 6459cdc8 **LAND READY 23:50Z** | promo-build ✓ · servant-trust ✓ · kit-promo-hook ✓ · net-build ✓ · one-core-khac ✓ · svt-scan 67/0 ✓ · promo-skip 2 FAIL = SAME 2 on bare LIVE 5e013076 with LIVE's own test (pre-existing: «passed grace exam waits for a free seat», «strike-back hits once when due») | 143/143 | PASS (old save ok; perf buổi 1659/4748 ms new/live; G4 only the known «Ô lưu · Lui» row) | 14 shots looked + dfu-fold.mp4 / dfu-ipad.mp4 on CDN img/_review/d-worklist-land/ (setup-driven promo-build-shots; ky-log shot covered by a «Bộ sưu tập» popup — script artifact) |
+
+### 3b. Integration faults found on the stack top 6fccfccd (none exists on any single branch)
+1. LAW 4 one core (net-build net-scan, 201/203): jtperc.js (temper) gates `oan(O,V)>=30` (foe) and `oan(X,V)>=BAL.tp.pubOan` (40, open feud) were typed / off netTh. Fix 2d153814: both read the holder's own «thù» level netTh(·,"thu") (BAL.net.th comment: «oán of a true enemy», the same gate as j32 kẻ thù / jcmood); BAL.tp.pubOan removed (canon overwrite). net-build 203/203. Numbers move from 30/40 to the per-nết thù level (base 45) — FOREMAN D/temper owner may veto.
+2. LAW 11 shown==applied (ka-know CONTROL FAIL from step 6 net-ghen-2-lr on): two rsnap wrappers wrote the SAME key `kn` — net-ghen-2 (familiarity map S.known) and talk-others KAK (a counter) → after any learn, every later result card listed «<name>: quen biết» for people nothing happened to. Fix ed7be1ce: KAK key renamed `kak`; family scan of every rsnap wrapper key: no other clash; ka-know 6/6. Steps 6 and 7 (18c26259, 6fccfccd) are therefore NOT landable alone; land target = ed7be1ce (or any of steps 1–5).
+Harness note: ka-know needs an absolute html path.
 
 ## 4. SPEC GAPS NOBODY BUILT (for FOREMAN D → MAIN; feature freeze OD:L1402, no new design here)
 1. #8 / #1 wiring: SELSCENE's «Tin sắc phong» close must call window.phanCungEdict({list,then}) (jpromob, comes with dfu-lr); LIVE SELSCENE has no caller (grep main: 0) → the opening phân cung scene does not show until SELSCENE wires it (later promotions show the panel by themselves, jpromob:202).
