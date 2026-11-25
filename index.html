@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"05a4cbc0+","t":"2026-11-25T05:31Z","c":"flight-coop-sync: rebuild index.html/sw.js","b":"bce27d6276c5","h":[{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"}]};
+window.CTM_BI={"s":"3e30054d+","t":"2026-11-25T05:51Z","c":"flight-sid-rebirth: a reborn seat's ids continue past the world's","b":"213ca4e3ac6f","h":[{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28577,14 +28577,25 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
    the stage. Hooks: kitKnown(p) = face revealed (>=1), kitKnownName(p) = name known (>=2); unknown names show "???".
    Old saves: everyone present on load is fully known (3). */
 let K61NEW=false,K61VER=0;const KREG={},K61SRC={};
-function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};S.nkn={};k61All().forEach(e=>{S.known[kOf61(e)]=3});S.kRids=rivals.map(v=>v.id);K61VER++}return S.known}
+function k61S(){if(!S)return null;if(S.known&&!S.kwm){S.kwm=1;k61WMig()}if(!S.known){if(K61NEW)return null;S.known={};S.nkn={};k61All().forEach(e=>{S.known[kOf61(e)]=3});S.kRids=rivals.map(v=>v.id);K61VER++}return S.known}
 /* STAGE/LIST DESCRIPTORS ({kind,name,ini,col,info[,ref,sid]} from curPeople/homePeople, never real entities): resolve to the real person (ref, else her maid), never register the
    descriptor itself (review/emo-seal-vanish: kOf61 gave the maid descriptor a fresh key at level 0, so after one tap on its mood seal it became a "stranger" and its seal vanished).
    undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
- if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
+ if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else if(k=k61WKey(e)){if(typeof e.kk==="string"&&S.known&&S.known[k]==null&&S.known[e.kk]!=null)S.known[k]=S.known[e.kk]/* old save: what she knew under the old «x<n>» key */}else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
  if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
+/* flight-sid-rebirth (b) (law 6b, one j61 key = one person): a WORLD person (shared by both seats of a co-op room) is keyed from a stable
+   world identity, never from the per-seat counter S.kseq: each seat issued «x<n>» lazily from its own counter, so the two seats could give two
+   different world men the same «x34» and the world merge carried both (coop-sync-r review, after week 3 / rejoin, both seats).
+   Palace men «n<id>» (S.men id, j22/jmen/j96), court officers «o<office>» (S.court), the five house heads «t<i>» (S.trieu.H, CLANS order) and
+   the censor «tns» (S.trieu.ns), an NPC consort's child «c<name>» (names are one per person for life, jname/nmReg). «x<n>» stays only for her
+   own people and passing records. Old saves: the level she knew under the old «x<n>» (e.kk) is copied once to the new key (kOf61 + k61WMig). */
+function k61WKey(e){try{if(!e||typeof e!=="object"||!S||e.coop)return"";if(e.id!=null&&(S.men||[]).includes(e))return"n"+e.id;
+  for(const c in (S.court||{}))if(S.court[c]===e)return"o"+c;
+  const T=S.trieu;if(T){if(T.ns===e)return"tns";if(T.H)for(const c in T.H)if(T.H[c]===e){const i=typeof CLANS!=="undefined"?CLANS.indexOf(c):-1;return"t"+(i>=0?i:c)}}
+  if(e.name&&"fond" in e)for(const v of rivals||[])if(v&&!v.coop&&(v.kids||[]).includes(e))return"c"+e.name}catch(x){}return""}
+function k61WMig(){try{if(!S||!S.known)return;for(const e of k61All())if(e&&typeof e.kk==="string")kOf61(e);const T=S.trieu;if(T&&T.ns)kOf61(T.ns)}catch(e){console.error("k61WMig",e)}}
 /* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
    GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
    key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
@@ -28650,7 +28661,7 @@ function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}cat
    never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
 function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length){const T=[...new Set(U.map(v=>{try{return k61MaskT(v)}catch(e){return"phi tần"}}))];const t=T.length===1?T[0]:"người trong cung";A.push(U.length===1?`${K.length?"thêm ":""}một vị ${t}`:`${K.length?"thêm ":""}${U.length} vị ${t}`)}return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
-function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
+function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk){if(k61WKey(p))return p/* a world person itself: her own e.kk is no longer her key */;return k61Ent(p.kk)}if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
 /* what she can see: the dress tells rank and role, nothing more */
 function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consort";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";
@@ -98266,7 +98277,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bce27d6276c5";window.CTM_BUILD=BUILD;
+const BUILD="213ca4e3ac6f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
