@@ -18,7 +18,7 @@
    Data / taps are unchanged: the same #modal, the same buttons, the same choose path (chooseM). Numbers: geometry knobs only (KIT_STAGE). */
 const KIT_STAGE={pad:8,fig:[.98,.98]/* figure height share of the room [fold,ipad] */,feetIn:.30/* share of the hand height the feet may stand behind the cards */,
  faceK:.19/* the face band = top share of the painted figure */,midMin:420/* px between the figures for the speech box beside them (else it goes under the faces) */,
- boxMaxW:[720,760],plateW:560,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,bodyK:.5/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
+ boxMaxW:[720,760],plateW:560,sayW:460/* iPad speech bubble */,sayPer:3/* thẻ gỗ per page (RD5 rec «≤3 thẻ mỗi trang») */,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,bodyK:.5/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
 (function(){try{const st=document.createElement("style");st.id="kit-stage";st.textContent=`
 html body #modal.kstg{background:transparent!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage{position:fixed!important;left:var(--kstL)!important;top:var(--kstT)!important;width:var(--kstW)!important;height:var(--kstH)!important;max-width:none!important;max-height:none!important;min-height:0!important;
@@ -80,7 +80,7 @@ function kstgPlace(dl){try{if(!dl||!dl.classList.contains("kstage"))return;const
  const W=dl.clientWidth,H=dl.clientHeight;if(!W||!H)return;const mb=dl.querySelector(":scope>#mb"),g=mb&&mb.querySelector(".opts.khand");if(!g)return;
  const hd=dl.querySelector(":scope>.kph"),sl=dl.querySelector(":scope>.kseal");const T0=(hd&&hd.getClientRects().length?hd.offsetTop+hd.offsetHeight:K.pad)+6;
  if(sl){sl.style.setProperty("right",K.pad+"px","important");sl.style.setProperty("left","auto","important");sl.style.setProperty("top",K.pad+"px","important")}
- const hH=g.offsetHeight||parseFloat(getComputedStyle(g).getPropertyValue("--khH"))||0,handTop=H-4-hH;
+ const tk=kstgTalkOn(dl,g),hH=tk?0:(g.offsetHeight||parseFloat(getComputedStyle(g).getPropertyValue("--khH"))||0),handTop=H-4-hH;
  const figBot=Math.min(H-4,handTop+Math.round(hH*K.feetIn));let fh=Math.max(120,Math.round((figBot-T0)*K.fig[ip])),fy=figBot-fh;
  const sp=mb.querySelector(":scope>.kstg-sp"),me=mb.querySelector(":scope>.kstg-me");let faceBot=T0,midL=K.pad,midR=W-K.pad;
  const put=(el,side)=>{if(!el)return;const im=el.querySelector("img");const nw=im&&im.naturalWidth||420,nh=im&&im.naturalHeight||1000,ob=kstgOb(im)||{l:.08,r:.92,t:.02,b:1};
@@ -99,7 +99,7 @@ function kstgPlace(dl){try{if(!dl||!dl.classList.contains("kstage"))return;const
   else{/* one page, «foot»: a slim subtitle band just above the hand, over the figures' LOWER half only (faces + upper bodies stay clear); long text scrolls inside */
    bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8);bx=Math.round((W-bw)/2);const lim=Math.round(Math.max(faceBot+6,fy+fh*K.bodyK)),bot=handTop-6,bh=Math.max(90,bot-lim);box(bx,lim,bw,bh);
    const h=Math.min(bh,pm.offsetHeight);box(bx,bot-h,bw,bh);pm.classList.add("kstg-foot")}}}
- dl.__kstFace=faceBot;dl.__kstHandTop=handTop;
+ dl.__kstFace=faceBot;dl.__kstHandTop=handTop;if(tk)kstgTalkPlace(dl,{W,H,ip,T0,faceBot,midL,midR,sp,me});
  if(dl.__kstNew){dl.__kstNew=0;kstgIn(dl)}}catch(e){console.error("kstgPlace",e)}}
 /* entrance: picture settles, speaker in from the left, she from the right, the speech box drops in (cards: kitHand deal) */
 function kstgIn(dl){try{const still=typeof kitHandStill==="function"&&kitHandStill();const mb=dl.querySelector(":scope>#mb");if(!mb)return;
@@ -130,4 +130,57 @@ function kstgOff(dl){try{dl.classList.remove("kstage");["--kstL","--kstT","--kst
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){try{const M=document.getElementById("modal");if(M){if(M.hidden)M.__kstFresh=1;M.classList.remove("kstg");document.body.classList.remove("kscn-on")}}catch(e){}return s0.apply(this,arguments)};window.showModal=showModal;
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>{document.querySelectorAll("#modal .dlg.kstage").forEach(dl=>{kstgOn(dl);const g=dl.querySelector(".opts.khand");if(g){g.__khSig="";kitHandLay(g,true)}})},140)})})();
 (function(){const M=document.getElementById("modal");if(!M||typeof MutationObserver!=="function")return;new MutationObserver(()=>{if(M.hidden){M.classList.remove("kstg");document.body.classList.remove("kscn-on")}}).observe(M,{attributes:true,attributeFilter:["hidden"]})})();
+/* ===== §102.2 DIALOGUE ON THE STAGE (owner 25/11 ~22:00Z «làm luôn cái khung sự kiện đối thoại. Là đối thoại xong rồi có các cái option chọn bằng cái thẻ gỗ»;
+   24/11 ~15:15Z: odds choices = cards (đỏ đen), a talk between people = the conversation look: speaker left, her answers right).
+   ONE rule: a stage frame whose choices carry NO odds (no kit odds meter on any card; Q item talk:1 / talk:0 overrides) is a DIALOGUE:
+   - no panel: the story lines are spoken ONE at a time in a small speech bubble — a line of hers (.kfme) on HER side (tail to the right),
+     every other line on the speaker's side (tail to the left); tap the stage = next line (after the last, a tap starts again: she can re-read);
+   - Fold (one page): the bubble is a slim subtitle at the foot (over the legs, never a face or an upper body); iPad: between the two figures;
+   - after the last line her answers drop as THẺ GỖ TREO (kitPick §98) beside HER, low (waist → feet), at most 3 per page (tabs «Đáp · 1/2/3»);
+     tap = lift + line, green ✓ = choose (the frame's own card is chosen: same chooseM path), ✕ = put back.
+   The hand cards stay in the DOM (hidden) as the data + choose path; nothing else changes. */
+function kstgTalkWants(dl,g){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.talk===0)return false;if(m&&m.talk===1)return true;
+ const bs=typeof kitHandCards==="function"?kitHandCards(g):[];if(!bs.length)return false;if(bs.some(b=>b.querySelector(".kodds")))return false;
+ return !!dl.querySelector(".kpmain .kfacts>.kfact")}catch(e){return false}}
+function kstgTalkOn(dl,g){try{if(!dl.classList.contains("kstage"))return false;const on=kstgTalkWants(dl,g);dl.classList.toggle("kstalk",on);if(!on){if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}return false}
+ if(!dl.__kstT){const T=dl.__kstT={i:0,asked:false,P:null};dl.addEventListener("click",e=>{try{const t=e.target;if(!dl.__kstT||!dl.classList.contains("kstalk"))return;if(t.closest(".kpk,.khconf,.kph,.kseal,button"))return;kstgTalkNext(dl)}catch(x){}})}
+ return true}catch(e){return false}}
+function kstgLines(dl){return[...dl.querySelectorAll(".kpmain .kfacts>.kfact")].filter(x=>(x.textContent||"").trim())}
+function kstgTalkShow(dl){const T=dl.__kstT,L=kstgLines(dl);if(!T||!L.length)return;T.i=Math.min(T.i,L.length-1);L.forEach((x,k)=>x.classList.toggle("kson",k===T.i));
+ const pm=dl.querySelector(".kpmain");if(pm){const me=L[T.i].classList.contains("kfme");pm.classList.toggle("ksay-me",me);pm.classList.toggle("ksay-sp",!me);pm.classList.toggle("ksay-more",T.i<L.length-1||!T.asked)}}
+function kstgTalkNext(dl){const T=dl.__kstT,L=kstgLines(dl);if(!T||!L.length)return;if(T.i<L.length-1)T.i++;else{if(!T.asked){T.asked=true;kstgTalkPlace(dl);return}T.i=0}
+ kstgTalkShow(dl);kstgTalkPlace(dl);const pm=dl.querySelector(".kpmain");if(pm&&!(typeof kitHandStill==="function"&&kitHandStill()))pm.animate([{opacity:.2,transform:"translateY(4px)"},{opacity:1,transform:"none"}],{duration:180,easing:"ease-out"})}
+function kstgTalkPlace(dl,c){try{const T=dl.__kstT;if(!T)return;const pm=dl.querySelector(".kpmain");if(!pm)return;c=c||dl.__kstC;if(!c)return;dl.__kstC=c;const K=KIT_STAGE,{W,H,ip}=c;
+ kstgTalkShow(dl);pm.classList.add("ksay");pm.classList.remove("kstg-foot","kstg-top");
+ /* bubble geometry: Fold = foot subtitle, iPad = between the figures beside the faces */
+ let bw,bx,by;const side=!!(ip&&c.midR-c.midL>=K.midMin);pm.classList.toggle("ksay-side",side);if(side){bw=Math.min(K.sayW,c.midR-c.midL);bx=Math.round(c.midL+(c.midR-c.midL-bw)/2);pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",Math.round(H*.36)+"px");pm.style.setProperty("--bx",bx+"px");by=Math.round(c.faceBot-12);pm.style.setProperty("--by",by+"px")}
+ else{bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8);bx=Math.round((W-bw)/2);pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",Math.round(H*.24)+"px");pm.style.setProperty("--bx",bx+"px");const h=pm.offsetHeight;by=H-10-h;pm.style.setProperty("--by",by+"px")}
+ const tail=pm.classList.contains("ksay-me")?(c.me?.6:.5):.22;pm.style.setProperty("--ktail",Math.round(bw*(pm.classList.contains("ksay-me")?.78:.16))+"px");
+ if(T.asked)kstgTalkAsk(dl,{bx,by,bw,bh:pm.offsetHeight,ip,W,H})}catch(e){console.error("kstgTalkPlace",e)}}
+function kstgTalkAsk(dl,B){try{if(typeof kitPick==="undefined")return;const T=dl.__kstT,g=dl.querySelector(".opts.khand");if(!g)return;const bs=kitHandCards(g);
+ const me=dl.querySelector("#mb>.kstg-me"),im=me&&me.querySelector("img");const D=dl.getBoundingClientRect();let A;
+ if(me){const r=me.getBoundingClientRect(),ob=kstgOb(im)||{l:.1,r:.9,t:.02,b:1};A={x:r.left-D.left+ob.l*r.width,y:r.top-D.top+ob.t*r.height,w:(ob.r-ob.l)*r.width,h:(ob.b-ob.t)*r.height}}else A={x:B.W*.62,y:B.H*.15,w:B.W*.3,h:B.H*.7};
+ if(!B.ip){A.h=Math.max(120,Math.min(A.h,B.by-8-A.y))}/* Fold: the plaques hang above the foot subtitle */
+ const acts=bs.map((b,i)=>{const kan=b.querySelector(".kan");const kc=kan?kan.cloneNode(true):null;if(kc)kc.querySelectorAll(".kodds,.khnx,small,.kb,.kwhy,.md,img,.kitmk").forEach(e=>e.remove());const n=((kc&&kc.textContent)||"").replace(/\s+/g," ").trim()||kitOptPlain(b.textContent);const im2=b.querySelector(".kaart img");const ton=b.querySelector(".kr-ton .krv");const why=b.querySelector(".kwhy");
+  const ow=b.querySelector(".kodds .kow,.kodds b,.kodds");return {id:String(i),n,word:"",pic:im2&&(im2.getAttribute("src")||""),ton:ton&&!/^(không|—|-)?$/i.test(ton.textContent.trim())?ton.textContent.trim():"",off:!!b.disabled,why:why&&why.textContent.trim()||""}});
+ const per=K_SAYPER(),groups=[];for(let i=0;i<acts.length;i+=per)groups.push({k:"p"+(i/per),n:acts.length>per?`Đáp · ${i/per+1}`:"",acts:acts.slice(i,i+per)});
+ const sig=acts.map(a=>a.n).join("|")+"|"+Math.round(A.x)+","+Math.round(A.y)+","+Math.round(A.h);if(T.P&&T.P.open&&T.sig===sig)return;const grp=T.P&&T.P.group;try{T.P&&T.P.destroy()}catch(e){}T.sig=sig;
+ const sp=dl.querySelector("#mb>.kstg-sp");const av=[];if(sp){const r=sp.getBoundingClientRect();av.push({x:r.left-D.left,y:r.top-D.top,w:r.width,h:r.height})}
+ T.P=kitPick.open({host:dl,anchor:A,side:"l",groups,group:grp||groups[0].k,dismiss:false,avoid:av,noLap:false,
+  onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}dl.__kstT=null;b.click()},
+  onOff:(a)=>{}})}catch(e){console.error("kstgTalkAsk",e)}}
+function K_SAYPER(){return KIT_STAGE.sayPer}
+(function(){try{const st=document.createElement("style");st.id="kit-stage-talk";const P="html body #modal#modal#modal#modal#modal.kstg .dlg.kstage.kstalk";st.textContent=`
+${P} .opts.khand{visibility:hidden!important;pointer-events:none!important}
+${P}>.khplate,${P}>.khconf{display:none!important}
+${P} .kpmain.ksay{overflow-y:auto!important;padding:10px 16px 12px!important;border-radius:16px!important;background:#fffaf0f0!important;border:1px solid #b8901f88!important;box-shadow:0 3px 12px rgba(0,0,0,.22)!important;cursor:pointer;overflow:visible!important}
+${P} .kpmain.ksay>.faces{display:none!important}
+${P} .kpmain.ksay .kfacts>.kfact{display:none!important;border:0!important;margin:0!important;padding:0!important}
+${P} .kpmain.ksay .kfacts>.kfact.kson{display:block!important;font-size:1.02rem;line-height:1.45}
+${P} .kpmain.ksay::before{content:"";position:absolute;left:var(--ktail,30px);top:-11px;width:18px;height:18px;background:inherit;border-left:1px solid #b8901f88;border-top:1px solid #b8901f88;transform:rotate(45deg);border-radius:3px 0 0 0}
+${P} .kpmain.ksay.ksay-side::before{top:22px;left:-10px;border-top:0;border-bottom:1px solid #b8901f88}
+${P} .kpmain.ksay.ksay-side.ksay-me::before{left:auto;right:-10px;border-left:0;border-right:1px solid #b8901f88;border-bottom:0;border-top:1px solid #b8901f88}
+${P} .kpmain.ksay.ksay-more::after{content:"▸";position:absolute;right:10px;bottom:2px;font-size:.9rem;color:#9a6a1c;animation:kstg-blink 1.1s ease-in-out infinite alternate}
+@keyframes kstg-blink{from{opacity:.35}to{opacity:1}}
+${P} .kpk{z-index:9}`;document.head.appendChild(st)}catch(e){}})();
 try{window.KIT_STAGE=KIT_STAGE;window.kstgOn=kstgOn;window.kstgPlace=kstgPlace;window.kstgWants=kstgWants}catch(e){}

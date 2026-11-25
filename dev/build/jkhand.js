@@ -94,7 +94,7 @@ window.kitHand=kitHand;window.kitHandWants=kitHandWants;window.kitHandLay=kitHan
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden){kitHand(M);requestAnimationFrame(()=>kitHand(M))}}catch(e){console.error("kitHand",e)}return r}})();
 /* the two-tap gate (capture, before #modal onclick): a REAL tap (detail ≥ 1) on a resting card lifts it; on the lifted card it chooses (with the fly); a tap elsewhere in the frame drops the lifted card */
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;
- const cf=t.closest("#modal .khconf>button");if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(!L)return;
+ const cf=t.closest("#modal .dlg>.khconf>button");/* the hand's own ✓/✕ (a kitPick .kpk-conf inside the stage is its own part) */if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(!L)return;
   if(cf.classList.contains("khok"))kitHandChoose(L);else kitHandDrop(L.parentElement);return}
  const b=t.closest("#modal .opts.khand > button.kopt");
  if(!b){const g=t.closest("#modal .opts.khand");if(g){/* a tap that landed on the list box: a locked card under the finger (browsers that swallow events on disabled buttons) */const hit=kitHandCards(g).find(x=>{const r=x.getBoundingClientRect();return x.disabled&&e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom});if(hit){e.stopPropagation();kitHandLift(hit);return}}
@@ -122,12 +122,13 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled.klift{filter
 html body #modal#modal#modal#modal .opts.khand.khpre>button.kopt{opacity:0}
 html body #modal#modal#modal#modal .dlg:not(.khmeas) .k3right>.opts.khand,html body #modal#modal#modal#modal .dlg:not(.khmeas) #mb>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0)}/* the hand never scrolls out of view: a long story scrolls under it */
 html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!important}
-#modal .dlg>.khconf{position:absolute;z-index:8;display:flex;gap:6px;pointer-events:auto}
-#modal .dlg>.khconf[hidden]{display:none!important}
-#modal .dlg>.khconf>button{width:var(--khcs,44px);height:var(--khcs,44px);min-width:0;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;font-size:calc(var(--khcs,44px)*.5);font-weight:800;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005;border:2px solid #fffaf0}
-#modal .dlg>.khconf>.khok{background:#2f8a3e;color:#fff}
-#modal .dlg>.khconf>.khx{background:#fffaf0;color:#7a2a1c;border-color:var(--k-gold,#c9a24a)}
-#modal .dlg>.khconf>button:active{transform:scale(.92)}
+#modal .dlg>.khconf,.khconf{position:absolute;z-index:8;display:flex;gap:6px;pointer-events:auto}
+.khconf[hidden]{display:none!important}
+#modal .dlg>.khconf>button,.khconf>button{width:var(--khcs,44px);height:var(--khcs,44px);min-width:0;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;font-size:calc(var(--khcs,44px)*.5);font-weight:800;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005;border:2px solid #fffaf0}
+#modal .dlg>.khconf>.khok .kmk,.khconf>.khok .kmk{background:#fff!important;color:#fff!important;width:.95em;height:.95em;margin:0!important;vertical-align:0}
+#modal .dlg>.khconf>.khok,.khconf>.khok{background:#2f8a3e;color:#fff}
+#modal .dlg>.khconf>.khx,.khconf>.khx{background:#fffaf0;color:#7a2a1c;border-color:var(--k-gold,#c9a24a)}
+#modal .dlg>.khconf>button:active,.khconf>button:active{transform:scale(.92)}
 #modal .dlg>.khplate{position:absolute;z-index:6;display:flex;flex-direction:column;gap:4px;overflow:auto;pointer-events:none}
 #modal .dlg>.khplate[hidden]{display:none}
 #modal .dlg>.khplate>button.kopinfo{width:100%;margin:0;box-shadow:0 6px 14px rgba(60,30,10,.28)!important;text-align:left;opacity:1!important;filter:none!important;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;cursor:default}
