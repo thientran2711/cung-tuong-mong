@@ -106,7 +106,7 @@ const CLASS=[/* [file, regex on «enclosing function chain + title», class, rea
  ['jts.js',/tsDangerPanel/,'PANEL','«Nguy hiểm chung» panel she opens'],
  ['j79.js',/kitPanel/,'KIT','kitPanel itself (its callers are counted at their own site)'],
  ['jts.js',/^tsPanel /,'KIT','tsPanel itself (its callers are counted at their own site)'],
- ['jksize.js',/kszLevels3|kitFrameLive3/,'KIT','kit frame internals'],
+ ['jksize.js',/kszLevels3|kitFrameLive3|kszSheet|kszSpecs3/,'KIT','kit frame internals / size-sheet samples'],
  ['jkitpage.js',/kitPopSample/,'KIT','kit sample page'],
  ['jcoopworld.js',/onAct|bribe/,'COOP','the friend\'s act arriving in a co-op room (no slot write)'],
  ['jcoopthin.js',/standIn/,'COOP','co-op thin card stand-in'],
@@ -134,7 +134,10 @@ const CEN={sites:0,reg:0,cls:{},un:[]};
    let top='';{let dd=0;for(let i=0;i<body.length;i++){const c=body[i];if(c==='{'||c==='('||c==='[')dd++;else if(c==='}'||c===')'||c===']')dd--;else if(dd===1)top+=c;if(dd===1&&(c==='{'||c==='('||c==='['))top+=' '}}
    if(/(^|[,{\s])pid\s*:/.test(top))continue;
    const ob=body.slice(body.search(/\bopts\s*[:,}]/));const lit=/^opts\s*:\s*\[/.test(ob);
-   if(lit){const fns=ob.replace(/go\s*:\s*\(\s*\)\s*=>\s*\{\s*\}/g,'').replace(/\$\{[^}]*\}/g,'');if(!/\bgo\s*:|=>|function\s*\(/.test(fns))continue}
+   if(lit){const fns=ob.replace(/go\s*:\s*\(\s*\)\s*=>\s*\{\s*\}/g,'').replace(/\$\{[^}]*\}/g,'');
+    /* elements that are not object literals (opts:[o1,o2], opts:[tsOpt(…)]) are unknown = code (r4: jmood «Có người đến an ủi» hid as opts:[o1,o2]) */
+    const a0=ob.indexOf('['),arr=ob.slice(a0+1,bal(ob,a0));let bare=arr,pr;do{pr=bare;bare=bare.replace(/\{[^{}]*\}/g,'')}while(bare!==pr);
+    if(!/\bgo\s*:|=>|function\s*\(/.test(fns)&&!/[A-Za-z_$]/.test(bare))continue}
    const chain=D.filter(x=>x.a<=k&&k<=x.b).sort((x,y)=>x.a-y.a).map(x=>x.n);const line=s.slice(0,k).split('\n').length;
    const title=(s.slice(k,k+300).match(/\bt(?:itle)?\s*:\s*[`"']([^`"'\n]{0,36})/)||[])[1]||'';CEN.sites++;
    if(chain.some(n=>reg.has(f+':'+n))){CEN.reg++;continue}
