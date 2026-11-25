@@ -128,6 +128,10 @@
 "re": "^label:(Đeo|Tháo|Cài|Mặc|May áo)$"
 },
 {
+"reason": "law1-audit (OD 24/11 ~08:35Z): her wardrobe «Cầm cố» (j92 wdPawn) — an NPC short of silver holds HER two roads in the monthly world pass (j92 wdMonth → npcWhyAll wdPawn → wdNpcPawn: wdPawn by nết BAL.net.n.wdPawn, else wdSell) and redeems with the same wdRedeem (wdNpcRedeem, above BAL.ag.why.wd.poor); expiry wdPawnMonth for everyone. Same functions, same numbers; the NPC side is a monthly pass, not a day-plan provider (as «Chọn làm cung nữ thân cận»). Test dev/test/law1-audit.test.js",
+"label": "Cầm cố"
+},
+{
 "label": "Cúi đầu lui tránh",
 "roles": [
 "maid"
