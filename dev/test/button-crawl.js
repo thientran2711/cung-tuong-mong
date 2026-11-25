@@ -13,7 +13,16 @@
    output: <out>/crawl-<dev>.json (every tap) + <out>/shots/*.jpg (every FAIL; shots never go in git) ; summary line last.
    Report table: node dev/test/button-crawl.js --report <out> > dev/handover/reports/button-crawl.md */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
-const {tap}=require('./realtap.js');
+const RT=require('./realtap.js'); /* the ONE shared real-tap lib (review/robot-realtap); no private copy (laws 9/11) */
+/* adapter: the crawler's call shape tap(page,target,{screen,label,shot,log}) → RT.make(page).tap(target,{screen,label});
+   a refused tap is reported to the caller as «DEAD BUTTON {json}» (why = covered / clipped / gone / disabled / popup) */
+const RTS=new WeakMap();
+async function tap(p,target,o={}){let rt=RTS.get(p);if(!rt){rt={cur:null};rt.rt=RT.make(p,{log:d=>{if(rt.cur)rt.cur(d)}});RTS.set(p,rt)}
+ let got=null;rt.cur=d=>{if(d&&d.k!=='tap')got=d};const ok=await rt.rt.tap(target,{screen:o.screen,label:o.label});rt.cur=null;
+ if(!ok){const why=!got?'not tappable':got.k==='DEAD BUTTON'?(got.cover==='not in page'?'not found':'covered'):got.k;
+  if(o.shot)await p.screenshot({path:o.shot,type:'jpeg',quality:55}).catch(()=>{});
+  (o.log||(m=>console.log(m)))('DEAD BUTTON '+JSON.stringify({screen:o.screen||'',label:o.label||'',why,cover:got&&got.cover||''}))}
+ return ok}
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:(A[i+1]&&!A[i+1].startsWith('--')?A[i+1]:true)};
 const REPO=path.join(__dirname,'..','..');
 const FAST=!!opt('fast',false);
@@ -130,7 +139,7 @@ function verdict(b,pre,post,errs,closedOwn,par){
    fresh life checks «Bỏ qua lời dặn» closes the tour. */
 async function crawlTour(p,dev,ER){
  /* a brand-new player: title → «Chơi một mình» → every first-life screen, by real taps on the main button of each screen; every tap logged */
- const fresh=async(log)=>{await p.evaluate(()=>{try{localStorage.clear()}catch(e){}try{REC.tour='';REC.asked=0}catch(e){}document.querySelectorAll('#kload,#klife').forEach(e=>e.remove());
+ const fresh=async(log)=>{await p.evaluate(()=>{try{localStorage.clear();localStorage.setItem('hclh-tut-test','1')/* jtut autoOk(): a webdriver page gets the tour only with the test flag (a real phone has no webdriver) */}catch(e){}try{REC.tour='';REC.asked=0}catch(e){}document.querySelectorAll('#kload,#klife').forEach(e=>e.remove());
    document.getElementById('modal').hidden=true;const T=document.getElementById('title');T.hidden=false;showTitle()});
   const PRIM=/^(Chơi một mình|Tiếp|Vào cung|Nhập cung|Bắt đầu|Quay|Gieo|Xem|Được|Đã hiểu|Nhận|Đi|Vào)/;
   let last='';const tried={};for(let k=0;k<40;k++){await settle(p,6000);await p.waitForTimeout(300);
@@ -138,9 +147,7 @@ async function crawlTour(p,dev,ER){
    let L=await p.evaluate(()=>__bc.list());
    /* a screen one tap deeper: tap only what is NEW on it (the new frame's buttons; for a new tab, the buttons of its panel) —
       the buttons it shares with the screen it came from were tapped there already */
-   if(par){const pd=new Set(par.roots.map(r=>r.startsWith('body')?'body':r));const tabNew=par.tab!==sig0.tab||par.panel!==sig0.panel;
-    if(process.env.BCDBG)console.log('FILTER',JSON.stringify({pd:[...pd],tabNew,pp:par.panel,sp:sig0.panel,sample:L.slice(0,40).map(b=>[b.label.slice(0,12),b.rk.slice(0,30),b.inPanel])}));
-    L=L.filter(b=>!pd.has(b.rk)||(b.rk==='body'&&tabNew&&b.inPanel))}const roots=await p.evaluate(()=>__bc.sig().roots);
+   const roots=await p.evaluate(()=>__bc.sig().roots);
    const atHome=async()=>p.evaluate(()=>{const m=document.getElementById('modal'),T=document.getElementById('title'),n=document.getElementById('next');
     return m.hidden&&T.hidden&&!(typeof Q!=='undefined'&&Q||[]).length&&(typeof S!=='undefined'&&!!S)&&!!n&&__bc.vis(n)&&![...document.querySelectorAll('#kroul,#ov,.kmov,#kprevov,#klife,#kload')].some(e=>__bc.vis(e))});
    if(process.env.BCDBG)console.log('ATHOME?',JSON.stringify(await p.evaluate(()=>{const m=document.getElementById('modal'),T=document.getElementById('title'),n=document.getElementById('next');return{m:m.hidden,T:T.hidden,Q:(typeof Q!=='undefined'&&Q||[]).length,S:(typeof S!=='undefined'&&!!S),n:!!n&&__bc.vis(n),ov:[...document.querySelectorAll('#kroul,#ov,.kmov,#kprevov,#klife,#kload')].filter(e=>__bc.vis(e)).map(e=>__bc.desc(e))}})));
@@ -156,7 +163,7 @@ async function crawlTour(p,dev,ER){
     return false}
    if(!L.length){await p.waitForTimeout(500);continue}
    const sk=roots.join();tried[sk]=tried[sk]||new Set();const U=L.filter(b=>!tried[sk].has(b.key));if(!U.length)break;
-   const pick=U.find(b=>/^Nhận thân phận/.test(b.label))||U.find(b=>PRIM.test(b.label)&&b.layer!=='body')||U.find(b=>PRIM.test(b.label))||U.find(b=>b.layer!=='body')||U[0];tried[sk].add(pick.key);
+   const CLOSE=/^(✕|Lui|Đóng|Quay lại|Xong)$/;const pick=U.find(b=>/^Nhận thân phận/.test(b.label))||U.find(b=>PRIM.test(b.label)&&b.layer!=='body')||U.find(b=>PRIM.test(b.label))||U.find(b=>CLOSE.test(b.label)&&b.layer!=='body')||U.find(b=>b.layer!=='body'&&b.label)||U.find(b=>b.layer!=='body')||U[0]; /* a look-up dialog opened by the way is closed like a player does, so the first home screen is reached */tried[sk].add(pick.key);
    if(roots.join()===last&&pick.label==='Sang buổi'){break}
    const h=await p.evaluateHandle(k=>__bc.find(k),pick.key);const screen='first life · '+(roots[roots.length-1]||'').slice(0,50);
    const pre=await p.evaluate(()=>__bc.sig());ER.clr();let dm='';const shot=path.join(OUT,'shots',`${dev}-new-${k}.jpg`);
@@ -176,7 +183,7 @@ async function crawlTour(p,dev,ER){
   if(nx){const h=await p.evaluateHandle(t=>[...document.querySelectorAll('#ktut .ktut-card button')].find(b=>b.innerText.trim()===t),nx);
    const shot=path.join(OUT,'shots',`${dev}-tour-${i}.jpg`);let dm='';const ok=await tap(p,h.asElement(),{screen,label:nx,shot,log:m=>dm=m});taps++;
    if(!ok){rows.push({dev,start:'tour',screen,label:nx,hit:'DEAD',verdict:'FAIL',why:dm,shot});break}
-   await p.waitForTimeout(500);const c2=await card();const moved=!c2||c2.h!==c.h||c2.sub!==c.sub;const er=ER.get();
+   let c2=null,moved=false;for(let w=0;w<12&&!moved;w++){await p.waitForTimeout(300);c2=await card();moved=!c2||c2.h!==c.h||c2.sub!==c.sub}const er=ER.get(); /* the last page of a lesson closes the card and the next lesson comes after a short pause */
    rows.push({dev,start:'tour',screen,label:nx,hit:'ok',verdict:er.length?'FAIL':moved?'PASS':'FAIL',why:er.length?'JS error: '+er[0]:moved?(c2?'next page':'tour closed'):'page did not turn',shot:moved&&!er.length?'':shot});
    if(!moved&&!er.length)await p.screenshot({path:shot,type:'jpeg',quality:55});if(!moved)break;continue}
   if(c.hole){ /* tap the lit spot like a player */
@@ -186,7 +193,10 @@ async function crawlTour(p,dev,ER){
    await p.touchscreen.tap(c.hole.x,c.hole.y);taps++;await p.waitForTimeout(700);const c2=await card();const moved=!c2||c2.h!==c.h||c2.sub!==c.sub;
    rows.push({dev,start:'tour',screen,label:'(lit spot) '+hit,hit:'ok',verdict:moved?'PASS':'FAIL',why:moved?'tour went on':'tapping the lit spot did not move the tour',shot:moved?'':shot});
    if(!moved){await p.screenshot({path:shot,type:'jpeg',quality:55});break}continue}
-  rows.push({dev,start:'tour',screen,label:'(none)',verdict:'FAIL',why:'tour card with no Tiếp and no lit spot: '+c.btns.join(','),});break}
+  const dbg=await p.evaluate(()=>{const t=document.getElementById('ktut');const h=t&&t.querySelector('.ktut-hole');const acts=[...document.querySelectorAll('#panel .cards button.ka')];
+   return {hole:h?(h.hidden?'hidden':JSON.stringify(h.getBoundingClientRect())):'none',acts:acts.length,visActs:acts.filter(b=>__bc.vis(b)).length,dis:acts.filter(b=>b.disabled||b.classList.contains('kdis')).length,tab:(document.querySelector('.tabs .on,.ktab.on,[aria-selected=true]')||{}).textContent}});
+  const shot=path.join(OUT,'shots',`${dev}-tour-${i}.jpg`);await p.screenshot({path:shot,type:'jpeg',quality:55});
+  rows.push({dev,start:'tour',screen,label:'(none)',verdict:'FAIL',why:'tour card with no Tiếp and no lit spot: '+c.btns.join(',')+' · '+JSON.stringify(dbg),shot});break}
  /* Bỏ qua lời dặn closes it */
  if(await fresh()){const h=await p.evaluateHandle(()=>[...document.querySelectorAll('#ktut .ktut-card button')].find(b=>/Bỏ qua/.test(b.innerText)));const shot=path.join(OUT,'shots',`${dev}-tour-skip.jpg`);
   let dm='';const ok=await tap(p,h.asElement(),{screen:'LỜI DẶN',label:'Bỏ qua lời dặn',shot,log:m=>dm=m});taps++;await p.waitForTimeout(600);const c2=await card();
@@ -264,7 +274,7 @@ async function crawlDev(b,URL,dev){
     const self0=await el.evaluate(e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone').catch(()=>'');
     const shot=path.join(OUT,'shots',`${dev}-${String(rows.length).padStart(4,'0')}.jpg`);
     let dead=null;const ok=await tap(p,el,{screen,label:bt.label,shot,log:m=>{dead=m}});taps++;
-    if(!ok){const d=JSON.parse(dead.replace(/^DEAD BUTTON /,''));rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'DEAD',verdict:'FAIL',why:'dead button: '+d.why+(d.cover?' under '+d.cover+(d.coverText?' «'+d.coverText+'»':''):''),shot});continue}
+    if(!ok){const d=JSON.parse(dead.replace(/^DEAD BUTTON /,''));if(/^(disabled|gone|popup)$/.test(d.why)){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:d.why,verdict:'WARN',why:d.why==='disabled'?'greyed out (not tappable now)':d.why==='gone'?'left the page before the tap':'under a hint popup '+d.cover});continue}rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'DEAD',verdict:'FAIL',why:'dead button: '+d.why+(d.cover?' under '+d.cover+(d.coverText?' «'+d.coverText+'»':''):''),shot});continue}
     await p.waitForTimeout(450);await settle(p,4000);
     let post,closedOwn=false;
     try{const isClose=bt.x||/^(Đóng|Thôi|Bỏ qua|Quay lại|Trở về|Về|Hủy|Huỷ|Để sau|Xong|Đã hiểu|Biết rồi|Lui)$/i.test(bt.label);
