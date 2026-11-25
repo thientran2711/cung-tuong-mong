@@ -3,7 +3,7 @@
    Set-up (state only) by page.evaluate; every CHOICE is made by a real finger tap on the option row (rt.tap), never .click() / a game call.
    cases:
     hot    — a hot her (Kiêu ngạo), furious: jemoact eaMeOut → kit event frame with 2..BAL.ea.pick.n options, NO «Tiếp tục» / «Nhịn», every row shows
-             its gain and loss (Được / Tốn / Mất / Kèm); tap «Đập đồ» → Bạc −fx.bac, Danh −fx.danh exactly as shown, tâm trạng +pick.vent, the dialog closes.
+             its gain and loss (Được / Tốn / Mất / Kèm); tap «Đập đồ» → Bạc −fx.bac, Danh −fx.danh exactly as shown, tâm trạng +pick.vent (asserted: Δ ≥ vent − 1, real feelings set — review N2), the dialog closes.
     timid  — a timid her (Khiêm nhường): the angry options are the timid set (no Đập đồ / Đánh / Phạm thượng; Nuốt giận chép kinh offered); tap it → Sức −13 Đức +1.
     jfeel  — the LIVE path (jfeel feelActTick, BAL.feel.act): a heavy anger cause (mkAdd) + bar past the line → the same choice frame (eaOut flag); tap the first row.
     npc    — law 1: an NPC consort's outburst (eaPick) is one of HER option list for the same temper / feeling (eaOpts), 40 draws.
@@ -31,15 +31,15 @@ const [,,URL0,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const U
    const opts=[...d.querySelectorAll('.opts > button')].filter(b=>b.offsetParent).map(b=>({t:b.textContent.replace(/\s+/g," ").trim(),rows:[...b.querySelectorAll('.krl')].map(x=>x.textContent.trim())}));
    return{modal:true,title:(d.querySelector('.kph,h3,h2')||{}).textContent||"",hscroll:document.documentElement.scrollWidth>innerWidth+1,over,opts,close:!!d.querySelector('.x,.kx,[aria-label="Đóng"]')}});
   const tapOpt=async(re,screen)=>{const loc=p.locator('#modal .dlg .opts > button').filter({hasText:re}).first();return rt.tap(loc,{screen,label:String(re),wait:6000})};
-  const st=()=>p.evaluate(()=>({bac:S.bac,danh:S.danh,suc:S.suc,duc:S.duc,mood:S.mood&&S.mood.v,log:(S.log||[]).slice(-3).map(x=>String(x.t||x).replace(/<[^>]+>/g,"")).join(" | ")}));
+  const st=()=>p.evaluate(()=>({bac:S.bac,danh:S.danh,suc:S.suc,duc:S.duc,mood:(typeof moodBar==="function"?moodBar(S):S.mood&&S.mood.v),log:(S.log||[]).slice(-3).map(x=>String(x.t||x).replace(/<[^>]+>/g,"")).join(" | ")}));
   const shot=n=>p.screenshot({path:`${OUT}/${wh}-${n}.jpg`,type:'jpeg',quality:60});
   const noHold=o=>!o.some(x=>/^(Tiếp tục|Nhịn|Bỏ qua|Thôi)/.test(x.t));
   /* hot */
-  await fresh("Kiêu ngạo");await p.evaluate(()=>{S.mood.v=-80;S.emo={k:"gian",v:80,why:"thử",w:wk()};window.__bot=0;eaMeOut("gian");showModal()});await p.waitForTimeout(600);
+  await fresh("Kiêu ngạo");await p.evaluate(()=>{/* N2: a REAL bad mood (feelings, as the jfeel case) so the vent is measured, not a bar the next read recomputes */for(const kd of ["t-gian1","t-gian2","t-gian3","t-gian4"])mkAdd(S,{kd,k:"gian",s:95,why:"bị làm nhục"},60);S.emo={k:"gian",v:80,why:"thử",w:wk()};window.__bot=0;eaMeOut("gian");showModal()});await p.waitForTimeout(600);
   {const d=await dlg();await shot('hot');const F=await p.evaluate(()=>({fx:BAL.ea.fx.dapdo,n:BAL.ea.pick.n,v:BAL.ea.pick.vent,temper:eaTemper(S).k}));const s0=await st();
    const rowsOk=d.opts&&d.opts.every(o=>o.rows.some(r=>/Được/.test(r))&&o.rows.some(r=>/Tốn|Mất|Kèm/.test(r)));
    const has=d.opts&&d.opts.some(o=>/^Đập đồ/.test(o.t));const tapped=has&&await tapOpt(/^Đập đồ/,'hot');await p.waitForTimeout(700);const s1=await st();const d1=await dlg();
-   const ok=F.temper==="hot"&&d.modal&&d.opts.length>=2&&d.opts.length<=F.n&&noHold(d.opts)&&rowsOk&&tapped&&s0.bac-s1.bac===F.fx.bac&&s0.danh-s1.danh===F.fx.danh&&s1.mood>s0.mood&&!(d1.modal&&/Lòng không giữ/.test(d1.title));
+   const ok=F.temper==="hot"&&d.modal&&d.opts.length>=2&&d.opts.length<=F.n&&noHold(d.opts)&&rowsOk&&tapped&&s0.bac-s1.bac===F.fx.bac&&s0.danh-s1.danh===F.fx.danh&&s1.mood-s0.mood>=F.v-1&&!(d1.modal&&/Lòng không giữ/.test(d1.title));
    res.hot={ok,opts:d.opts&&d.opts.map(o=>o.t.slice(0,90)),rows:d.opts&&d.opts.map(o=>o.rows.join("/")),s0,s1,hscroll:d.hscroll,over:d.over};if(!ok||d.hscroll||d.over.length)bad++}
   /* timid */
   await fresh("Khiêm nhường");await p.evaluate(()=>{S.mood.v=-80;S.emo={k:"gian",v:80,why:"thử",w:wk()};window.__bot=0;eaMeOut("gian");showModal()});await p.waitForTimeout(600);

@@ -103,7 +103,7 @@ Object.assign(BAL,{feel:{
   /* TEMPER-OUTBURST (OD 25/11 ~05:45Z (1), laws 2 + 3): re-tuned to EQUAL VALUE with the jemoact reactions — net ≈ BAL.ea.pick.net bạc (BAL.pm.val),
      dev/measure/temper-equal.js; ngoithu now costs Sức, sangtac Sức, treo also Danh when no rival is near (the staff laugh: Lòng +) */
   fx:{tron:{vent:12,danh:2},caobenh:{vent:12,danh:2},bodo:{vent:10,tai:2},bove:{vent:12,rel:5,sung:2},moi:{vent:8,sung:2,ghen:6,oan:2},
-   caugat:{vent:10,loy:5},ngoithu:{vent:8,suc:10},noimoc:{use:"cham"},khoetai:{vent:8,danh:1,ghen:5,oan:1},treo:{vent:10,rel:8,loy:1,danh:3},
+   caugat:{vent:10,loy:4},ngoithu:{vent:8,suc:10},noimoc:{use:"cham"},khoetai:{vent:8,danh:1,ghen:5,oan:1},treo:{vent:10,rel:8,loy:1,danh:3},
    mach:{vent:8,tai:1,suc:15},quengio:{vent:8,tai:2,suc:20},sangtac:{vent:8,tai:1,danh:1,suc:20}}}}});
 const FEEL_KEY_CHANH="ghen";/* MOOD-MEM keeps the feeling key "ghen", named EMO_GHEN ("Chạnh lòng", jemo); the score v.ghen stays "Ghen" */
 /* VANPHONG names (player words): light / middle name, heavy-level name, level words */

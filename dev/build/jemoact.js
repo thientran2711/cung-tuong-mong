@@ -49,7 +49,7 @@ Object.assign(BAL,{ea:{
     in bạc (BAL.pm.val rates; dev/measure/temper-equal.js keeps each within BAL.pm.eqTol); the gain of each is the vent (BAL.ea.pick.vent, the same for all)
     plus its own line. New rows: nuot (Nuốt giận chép kinh: Sức −, Đức +), huong (Thắp hương tụng kinh: bạc −, Đức +), trang (Trang điểm chờ ngự giá:
     bạc −, Sủng +), kexau (Kể xấu tình địch: the rival's Danh −rd, her Oán +oan, Danh −). pham: cấm túc only on a roll of pick.phamP (no longer sure). */
- fx:{dapdo:{vent:20,bac:6,danh:1},mang:{vent:15,loy:5},danh:{vent:20,loy:4,duc:1,danh:0},khac:{vent:15,oan:10,hiOan:20,punRk:2},pham:{vent:20,rel:2,danh:1},
+ fx:{dapdo:{vent:20,bac:6,danh:1},mang:{vent:15,loy:4},danh:{vent:20,loy:5,duc:0,danh:1},khac:{vent:15,oan:10,hiOan:15,punRk:2},pham:{vent:20,rel:2,danh:1},
   khoc:{vent:12,suc:10},boan:{vent:10,suc:12},thu:{vent:15,bac:10},matngu:{vent:8,suc:10},soat:{vent:12,loy:1},cau:{vent:15,bac:10},
   cham:{vent:12,rel:3,oan:3,danh:0},tui:{vent:10,suc:10},thuong:{vent:10,bac:20,loy:1},khoe:{vent:10,danh:2,ghen:6},tiec:{vent:10,bac:25,aff:4,n:2},hat:{vent:8,suc:15,tai:1},
   nuot:{vent:12,suc:13,duc:1},huong:{vent:12,bac:13,duc:1},trang:{vent:10,bac:14,sung:1},tho:{vent:8,suc:15,danh:1},theu:{vent:8,suc:14,sung:1},kexau:{vent:12,rd:1,oan:10,danh:1},
@@ -61,7 +61,7 @@ Object.assign(BAL,{ea:{
  /* hỏi tội: hitLoy = Lòng her maid loses when another consort scolds her; (a higher-rank mistress whose maid she scolded / beat): bac = the amends, danh = bowing her head, loy = her maid blamed, try =
     odds base of arguing back (+ (her rank − theirs) × rk + Danh / dn), win / lose Danh, oan = their Oán on a lost argument;
     her own maid beaten by a lower-rank consort: go = Danh + and maid Lòng +, their Oán +; let = Đức +, maid Lòng −. */
- hoi:{hitLoy:2,bac:20,danh:1,aff:3,loy:10,try:40,rk:8,dn:4,win:1,lose:3,oan:10,go:{danh:1,loy:5,oan:10},let:{duc:1,loy:5}},
+ hoi:{hitLoy:2,bac:16,danh:1,aff:3,loy:10,try:40,rk:8,dn:4,win:1,lose:3,oan:10,go:{danh:1,loy:5,oan:10},let:{duc:1,loy:5}},
  /* (4) EVERY OTHER KIND OF PERSON (review r1 FAIL #1: men, officials, children, the Emperor, Thái hậu — gain AND loss on that person + a
     line she can see). Each kind pays in its OWN real stat:
     m = men (thị vệ, thái y, vương gia, nhạc sư, sứ thần, họa sư): loy = Lòng (standing in his post), tinh = his regard for her (shown on his
@@ -338,20 +338,21 @@ function eaS2c(p){const o=p===S?eaS():p;o.eaC=o.eaC&&typeof o.eaC==="object"?o.e
 const PV=()=>BAL.pm.val;
 function eaPx(p,r){const K=r.k,F=(BAL.feel&&BAL.feel.act&&BAL.feel.act.fx&&BAL.feel.act.fx[K]&&!BAL.feel.act.fx[K].use?BAL.feel.act.fx[K]:BAL.ea.fx[(BAL.feel&&BAL.feel.act&&BAL.feel.act.fx&&BAL.feel.act.fx[K]&&BAL.feel.act.fx[K].use)||K])||{};const V=PV(),pk=BAL.ea.pick,G=[],L=[];
  const me=p===S,ref=pk.refN;let nSt=ref,nG=F.n||0;try{if(p&&S)nSt=staffOf(p).length}catch(e){}
- const g=(lb,n,u,st)=>{if(n)G.push([lb,n,n*u,st])},l=(lb,n,u,st)=>{if(n)L.push([lb,n,n*u,st])};
+ const g=(lb,n,u,st)=>{if(n)G.push([lb,n,n*u,st])},l=(lb,n,u,st)=>{if(n)L.push([lb,n,n*u,st])},lu=(lb,n,u)=>{if(n)L.push([lb,n,n*u,"",0,1])};/* lu = a loss that RAISES someone else's Oán / ghen: shown «+n» (TEMPER F1) */
  const riv=()=>{try{return eaRival(p)}catch(e){return null}},nmx=x=>x?(x===S?"ngươi":nm(x)):"tình địch";
  switch(K){
   case"dapdo":l("Bạc",F.bac,1,"bac");l("Danh",F.danh,V.danhBac,"danh");break;
   case"mang":l("thiện cảm cung nữ",F.loy,V.loyBac);break;
   case"danh":l("thiện cảm cung nữ",F.loy,V.loyBac);l("Đức",F.duc,V.ducBac,"duc");l("Danh",F.danh,V.danhBac,"danh");break;
-  case"khac":{const o=p&&S?eaOtherMaid(p):null;l(`${nmx(o&&o.who)} oán ngươi`,F.oan,V.oanBac);break}
+  case"khac":{const o=p&&S?eaOtherMaid(p):null;/* TEMPER F2: priced by the same branch eaDo takes — the other outranks: her → that consort comes to hỏi tội (bill = the Tạ lỗi answer of eaHoi); an NPC → Oán hiOan */
+  const hi=o&&o.who!==S&&rkOf(o.who)>rkOf(p);if(hi&&me){const H=E().hoi;L.push([`${nmx(o.who)} sẽ đến hỏi tội`,0,H.bac+H.danh*V.danhBac-H.aff*V.affBac,"",0,0,`${nmx(o.who)} sẽ đến hỏi tội (đền Bạc ${H.bac}, Danh −${H.danh})`])}else lu(`${nmx(o&&o.who)} oán ngươi`,hi?F.hiOan:F.oan,V.oanBac);break}
   case"pham":{const t=p&&S?eaSuperior(p):null;l(`${t&&t.queen?"Hoàng hậu":nmx(t)} thiện cảm`,F.rel,t&&t.queen?V.hhBac:V.affBac,t&&t.queen?"hh":"");l("Danh",F.danh,V.danhBac,"danh");L.push(["cấm túc",0,pk.phamP/100*pk.camBac,"",pk.phamP]);break}
   case"khoc":case"tui":case"boan":case"matngu":case"ngoithu":l("Sức",F.suc,V.sucBac);break;
   case"thu":case"cau":l("Bạc",F.bac,1);break;
   case"soat":l("thiện cảm mỗi cung nhân",F.loy*nSt,V.loyBac);break;
-  case"cham":case"noimoc":{const t=riv();l(`${nmx(t)} thiện cảm`,F.rel,V.affBac);l(`${nmx(t)} oán ngươi`,F.oan,V.oanBac);l("Danh",F.danh,V.danhBac,"danh");break}
+  case"cham":case"noimoc":{const t=riv();l(`${nmx(t)} thiện cảm`,F.rel,V.affBac);lu(`${nmx(t)} oán ngươi`,F.oan,V.oanBac);l("Danh",F.danh,V.danhBac,"danh");break}
   case"thuong":l("Bạc",F.bac,1);g("thiện cảm mỗi cung nhân",F.loy*nSt,V.loyBac);break;
-  case"khoe":g("Danh",F.danh,V.danhBac);l("kẻ ganh ghen",F.ghen,V.ghenBac);break;
+  case"khoe":g("Danh",F.danh,V.danhBac);lu("kẻ ganh ghen",F.ghen,V.ghenBac);break;
   case"tiec":l("Bạc",F.bac,1);g(`thiện cảm ${nG} vị tỷ muội`,F.aff*nG,V.affBac);break;
   case"hat":l("Sức",F.suc,V.sucBac);g("Tài",F.tai,V.taiBac);break;
   case"nuot":l("Sức",F.suc,V.sucBac);g("Đức",F.duc,V.ducBac);break;
@@ -359,23 +360,24 @@ function eaPx(p,r){const K=r.k,F=(BAL.feel&&BAL.feel.act&&BAL.feel.act.fx&&BAL.f
   case"trang":l("Bạc",F.bac,1);g("Sủng",F.sung,V.sungBac);break;
   case"tho":g("Danh",F.danh,V.danhBac);l("Sức",F.suc,V.sucBac);break;
   case"theu":g("Sủng",F.sung,V.sungBac);l("Sức",F.suc,V.sucBac);break;
-  case"kexau":{const t=riv();g(`nàng ${t&&t!==S?nm(t):"tình địch"} Danh −`,F.rd,V.danhBac);l(`${nmx(t)} oán ngươi`,F.oan,V.oanBac);l("Danh",F.danh,V.danhBac,"danh");break}
+  case"kexau":{const t=riv();g(`nàng ${t&&t!==S?nm(t):"tình địch"} Danh −`,F.rd,V.danhBac);lu(`${nmx(t)} oán ngươi`,F.oan,V.oanBac);l("Danh",F.danh,V.danhBac,"danh");break}
   /* jfeel acts (BAL.feel.act.fx) */
   case"tron":case"caobenh":l("Danh",F.danh,V.danhBac,"danh");break;
   case"bodo":l("Tài",F.tai,V.taiBac);break;
   case"bove":l("thiện cảm người kia",F.rel,V.affBac);break;
-  case"moi":g("Sủng",F.sung,V.sungBac);l("kẻ ganh ghen",F.ghen,V.ghenBac);break;
+  case"moi":g("Sủng",F.sung,V.sungBac);lu("kẻ ganh ghen",F.ghen,V.ghenBac);break;
   case"caugat":l("thiện cảm cung nhân",F.loy,V.loyBac);break;
-  case"khoetai":g("Danh",F.danh,V.danhBac);l("kẻ ganh ghen",F.ghen,V.ghenBac);break;
+  case"khoetai":g("Danh",F.danh,V.danhBac);lu("kẻ ganh ghen",F.ghen,V.ghenBac);break;
   case"treo":{const t=riv();g("thiện cảm mỗi cung nhân",F.loy*nSt,V.loyBac);if(t)l(`${nmx(t)} thiện cảm`,F.rel,V.affBac);else l("Danh",F.danh,V.danhBac,"danh");break}
   case"mach":case"quengio":g("Tài",F.tai,V.taiBac);l("Sức",F.suc,V.sucBac);break;
   case"sangtac":g("Tài",F.tai,V.taiBac);g("Danh",F.danh,V.danhBac);l("Sức",F.suc,V.sucBac);break}
  const sum=a=>a.reduce((t,x)=>t+x[2],0);return{G,L,net:+(sum(L)-sum(G)).toFixed(1)}}
 /* G1 + G2: the option drops out once its stat would pass the yearly cap, or Phạm thượng inside phamCd */
 function eaCapOk(p,r){try{const C=eaS2c(p),pk=BAL.ea.pick;if(r.k==="pham"&&C.pham!=null&&W()-C.pham<pk.phamCd)return false;for(const x of eaPx(p,r).L){const st=x[3];if(st&&pk.cap[st]!=null&&(C[st]||0)+x[1]>pk.cap[st])return false}return true}catch(e){return true}}
+function eaKhacOk(p,r){if(r.k!=="khac"||p===S)return true;try{const o=eaOtherMaid(p);if(!o||o.who===S)return true;const F=BAL.ea.fx.khac;return !(rkOf(o.who)>rkOf(p)&&(o.who.queen||rkOf(o.who)>=rkOf(p)+F.punRk))}catch(e){return true}}
 function eaCapAdd(p,r){try{const C=eaS2c(p);for(const x of eaPx(p,r).L){const st=x[3];if(st&&BAL.ea.pick.cap[st]!=null)C[st]=(C[st]||0)+x[1]}}catch(e){}}
 function eaOpts(p,fk,g,T0){/* T0: a temper given by the measure (dev/measure/temper-equal.js); else the person's own */let T=T0;if(!T)try{T=eaTemper(p)}catch(e){T={k:"even",tr:[]}}if(eaKind(p)!=="c")return[];const A=BAL.feel&&BAL.feel.act,pk=BAL.ea.pick;const mk=fk&&A&&A.main?A.main[fk]:null;if(!g)g=fk&&A&&A.g?A.g[fk]:fk;
- const L=[],seen={};const push=(r,w)=>{if(!r||seen[r.k])return;let ok=false;try{ok=!!r.ok(p,T)}catch(e){}if(!ok||!eaCapOk(p,r))return;seen[r.k]=1;L.push({r,w})};
+ const L=[],seen={};const push=(r,w)=>{if(!r||seen[r.k])return;let ok=false;try{ok=!!r.ok(p,T)}catch(e){}if(!ok||!eaCapOk(p,r)||!eaKhacOk(p,r))return;seen[r.k]=1;L.push({r,w})};
  if(mk)push(R_.find(x=>x.k===mk&&x.who==="c"&&x.g===g)||R_.find(x=>x.k===mk&&x.who==="c"),pk.mainW);
  for(const r of R_)if(r.who==="c"&&r.g===g){let w=0;try{w=Math.max(0,r.w(T))}catch(e){}push(r,w)}
  L.sort((a,b)=>b.w-a.w);return L.slice(0,pk.n).map(x=>Object.assign({},x.r,{pv:1,w0:x.w}))}
@@ -387,7 +389,7 @@ function eaOptFx(p,r){const P=eaPx(p,r),o={};for(const x of P.G)if(EA_OWN[x[0]]&
  if(o.bac&&o.bac<0)o.bac=-Math.min(-o.bac,Math.max(0,S.bac||0));return o}
 function eaOptX(p,r){const P=eaPx(p,r),vv=BAL.ea.pick.vent;const up=!(S.mood&&S.mood.v>0);
  const gs=(up?["giải tỏa tâm trạng"]:[]).concat(P.G.filter(x=>!EA_OWN[x[0]]).map(x=>/−$/.test(x[0])?`${x[0]}${x[1]}`:`${x[0]} +${x[1]}`));
- const ls=(up?[]:["lòng vui lắng xuống"]).concat(P.L.filter(x=>x[1]&&!EA_OWN[x[0]]).map(x=>`${x[0]} −${x[1]}`));const pm=P.L.find(x=>x[0]==="cấm túc");if(pm)ls.push(`có thể bị cấm túc (${word(pm[4])})`);
+ const ls=(up?[]:["lòng vui lắng xuống"]).concat(P.L.filter(x=>(x[1]||x[6])&&!EA_OWN[x[0]]).map(x=>x[6]||`${x[0]} ${x[5]?"+":"−"}${x[1]}`));const pm=P.L.find(x=>x[0]==="cấm túc");if(pm)ls.push(`có thể bị cấm túc (${word(pm[4])})`);
  return[gs.length?`thành: ${gs.join(", ")}`:"",ls.length?`kèm: ${ls.join(", ")}`:""].filter(Boolean).join(" · ")}
 window.eaOpts=eaOpts;window.eaPx=eaPx;window.eaOptX=eaOptX;window.eaOptFx=eaOptFx;window.eaCapAdd=eaCapAdd;
 function eaPick(p,g){const T=eaTemper(p),kd=eaKind(p);/* TEMPER-OUTBURST law 1: a consort picks from the SAME option list as hers (temper weight, near-best) */if(kd==="c"){const O=eaOpts(p,null,g);if(!O.length)return null;const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});return i==null?null:{r:O[i],T}}
@@ -407,7 +409,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:BAL.ea.ventDef},me=p===S,res=[]
  case"khac":{const o=eaOtherMaid(p);if(!o)return null;target=o.who;const hi=rkOf(o.who)>rkOf(p);try{emoEv(o.m,"punished",`bị ${nm(p)} mắng`)}catch(e){}
   if(o.who===S){eaHitMine(p,o.m);h=`${Nm(p)} mắng cung nữ ${o.m.name} của cung ngươi.`;break}
   if(hi){if(me){eaS().hoi.push({id:o.who.id,m:o.m.name,w:W()});add(`${nm(o.who)} sẽ đến hỏi tội`)}else{oanAdd(o.who,p,F.hiOan);if(o.who.queen||rkOf(o.who)>=rkOf(p)+F.punRk)punish(p,`mắng cung nữ của ${o.who.name}`,1)}}
-  else{oanAdd(o.who,p,F.oan);if(me)add(`${nm(o.who)} oán ngươi`)}
+  else{oanAdd(o.who,p,F.oan);if(me)add(`${nm(o.who)} oán ngươi +${F.oan}`)}
   h=me?`Gặp một cung nữ của ${nm(o.who)} ở hành lang, ngươi trút cơn giận lên nàng, mắng một trận nặng lời.${hi?` Chủ nhân nàng phẩm vị cao hơn ngươi: “đánh chó phải nhìn mặt chủ”.`:""}`:`${Nm(p)} mắng cung nữ ${o.m.name} của ${o.who.name}.`;break}
  case"pham":{const t=eaSuperior(p);if(!t)return null;target=t;relAdd(p,t,-F.rel);pay({danh:-F.danh});eaS2c(p).pham=W();/* TEMPER-OUTBURST: cấm túc on a roll of BAL.ea.pick.phamP (its word on the option), no longer sure */if(roll(BAL.ea.pick.phamP)){punish(p,`phạm thượng với ${t.queen?"Hoàng hậu":t.name}`,1);if(me)add("bị cấm túc")}if(me)add(`${t.queen?"Hoàng hậu":nm(t)} thiện cảm −${F.rel}`);
   h=me?`Lúc thỉnh an, ${t.queen?"Hoàng hậu":nm(t)} nói một câu, ngươi không nhịn nổi mà cãi lại trước mặt mọi người. Cả điện lặng ngắt.`:`${Nm(p)} cãi lại ${t.queen?"Hoàng hậu":t.name} trước mặt mọi người.`;break}
