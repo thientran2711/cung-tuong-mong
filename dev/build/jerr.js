@@ -65,13 +65,15 @@ function errRead(t){try{t.read=1;if(errOn()&&Array.isArray(S.away)){const a=S.aw
 function errOrders(){try{return window.PTIME&&typeof PTIME.orders==="function"?(PTIME.orders()||[]):[]}catch(e){return[]}}
 function errOrdIs(o){return !!o&&(o.pid==="cnvOrd"||o.pid==="err")}
 function errOrdWhen(o){try{return PTIME.ordWhen(o)}catch(e){return o&&o.due!=null?"trả lời trước "+errWhen(o.due):""}}
+/* E90: ONE sentence per news item — the composer lives in jptime (PTIME.repFacts); fallback = the old head + lines */
+function ptRepFx(r,nm){try{if(window.PTIME&&PTIME.repFacts)return PTIME.repFacts(r,nm)}catch(e){}return{h:r.t||`${nm} đã về.`,L:r.L||[],k:""}}
 function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],sec=[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${errOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"} · ${errOrdWhen(o)} (quá hạn: coi như từ chối).`);
  for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
-  facts.push(r.t||`${t.nm} đã về.`);
+  const f=ptRepFx(r,t.nm);if(f.h)facts.push(f.h);
   /* gain / loss chips right under the title line (kit chips, visible without scrolling); the lines below are only what she learned */
   if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});
-  (r.L||[]).forEach(l=>facts.push(l));errRead(t)}
+  f.L.forEach(l=>facts.push(l));if(f.k)facts.push(f.k);errRead(t)}
  for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push(`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  const opts=OQ.map(o=>({n:errOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · ${errOrdWhen(o)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>{try{PTIME.answer(o.id)}catch(e){console.error(e)}},0)}}));

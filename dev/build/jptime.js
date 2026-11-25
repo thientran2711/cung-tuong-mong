@@ -56,6 +56,20 @@ function ptTick(){if(ptBusyTick||!S||S.dead)return;try{ptOrdTick()}catch(e){ptEr
   /* unread reports of hers are capped (reviewer note): the newest BAL.ptime.repMax stay, older ones count as read and leave after a day */
   const U=S.away.filter(a=>a.back&&a.by==="me"&&!a.read);const cap=BAL.ptime.repMax;if(U.length>cap){const old=U.sort((x,y)=>x.due-y.due).slice(0,U.length-cap);for(const a of old)a.read=1;S.away=S.away.filter(a=>!old.includes(a)||now2-a.due<day)}}catch(e){}
  try{ptLedger()}catch(e){ptErr("ledger",e)}ptIcon()}
+/* ONE SENTENCE PER NEWS ITEM (E90, owner bug «Tịch Nguyệt nghe ngóng trở về · thành. Tịch Nguyệt nghe ngóng trở về: …»): the ONE composer of a report
+   (jptime panel + notice, jerr errPanel). Returns {h: head sentence or "", L: body sentences, k: result sentence or ""}.
+   - the head (rep.t, «<who> <verb> trở về») is dropped when the first body line already starts with the same person (it says who did what);
+   - «<who> … trở về: <who> …» inside one line collapses to its second half; lines are trimmed, de-duplicated, each ends with a full stop;
+   - the result is its OWN last sentence («Việc thành.» / «Việc hỏng.»), never «· thành.» glued after a sentence. */
+function ptRepFacts(rep,nm){const r=rep||{};nm=String(nm||"");const cl=x=>String(x==null?"":x).replace(/\s+/g," ").trim();const dot=x=>x&&!/[.!?…»”]\)?$/.test(x)?x+".":x;
+ let L=(Array.isArray(r.L)?r.L:[]).map(cl).filter(Boolean).map(l=>{const m=l.match(/^(.+?) [^:]*?trở về: (.+)$/);return m&&m[2].indexOf(m[1])===0?m[2]:l});
+ L=L.filter((l,i)=>L.indexOf(l)===i);
+ let h=cl(r.t).replace(/(trở về)(\s+trở về)+/g,"$1");
+ if(h&&L.length&&nm&&L[0].indexOf(nm)===0)h="";
+ if(h&&L.some(l=>l===h||l===h+"."))h="";
+ if(!h&&!L.length)h=`${nm||"Người được sai"} đã về`;
+ return{h:dot(h),L:L.map(dot),k:r.ok===true?"Việc thành.":r.ok===false?"Việc hỏng.":""}}
+function ptRepText(rep,nm){const f=ptRepFacts(rep,nm);return[f.h].concat(f.L,[f.k]).filter(Boolean).join(" ")}
 function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&&a.a.run?PT.run[a.a.run]:PT.run[a.kind];/* a.run: the button's own runner when it shares a BAL row (kind) with others */if(!fn){a.rep={t:a.lbl||"Đã về",ok:null,L:[`${a.nm} đã về.`],d:[]};return}
  const me=a.by==="me";const b=me&&typeof rsnap==="function"?rsnap():null;const s0=S.logSeq||0;let r=null;
  try{r=a.fz!=null&&typeof fzRun==="function"?fzRun(a.fz,null,()=>fn(a)):fn(a)}catch(e){ptErr("run "+a.kind,e)}
@@ -65,7 +79,7 @@ function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&
  const ok=r&&typeof r==="object"&&"ok" in r?r.ok:(r===false?false:r===true?true:window.__lastOk!=null?!!window.__lastOk:null);
  a.rep={t:(r&&r.t)||a.lbl||"Tin báo",ok,L:L.length?L:[(r&&r.txt)||`${a.nm} đã về.`],d};
  try{if(typeof window.kitNoticeDrop==="function")window.kitNoticeDrop("pt:go:"+a.id)}catch(e){}
- ptNote({id:"pt:back:"+a.id,line:`${a.nm} đã về: có tin báo.`,text:`${a.rep.t}${ok===true?" · thành":ok===false?" · hỏng":""}. ${a.rep.L.join(" ")}`.trim(),go:ptOpenTin,goLabel:"Xem tin"})}
+ ptNote({id:"pt:back:"+a.id,line:`${a.nm} đã về: có tin báo.`,text:ptRepText(a.rep,a.nm),go:ptOpenTin,goLabel:"Xem tin"})}
 /* the jump of «Đợi tin»: to the next return khắc of HER sends (this day only; past the night = "Sang ngày mới" as always) */
 function ptNext(){let m=null;for(const a of ptZ())if(!a.back&&a.by==="me"&&(m==null||a.due<m))m=a.due;return m}
 function ptWaitOk(){const K=ptNext();if(K==null||!S||S.dead||(typeof Q!=="undefined"&&Q.length)||S.mg)return false;let B4=3;try{B4=B4N}catch(e){}
@@ -88,8 +102,8 @@ function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
 function ptErrOwn(){try{return typeof errIcon==="function"||!!(window.ERR&&typeof window.ERR==="object")||(!ptIconSet&&typeof kitStatusIcon!=="undefined"&&typeof kitStatusIcon.has==="function"&&kitStatusIcon.has("tin"))}catch(e){return false}}
 function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}${o.title&&!/^Lệnh của /.test(o.title)?": "+o.title:""}, trả lời trước ${ptWhen(o.due)}; quá hạn coi như từ chối.`);
- for(const a of N){const r=a.rep||{};if(!subj)subj=ptPerson(a.a||{});facts.push(`${r.t||a.nm+" đã về"}${r.ok===true?" · thành":r.ok===false?" · hỏng":""}.`);
-  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});(r.L||[]).forEach(l=>facts.push(l));a.read=1}
+ for(const a of N){const r=a.rep||{};if(!subj)subj=ptPerson(a.a||{});const f=ptRepFacts(r,a.nm);if(f.h)facts.push(f.h);
+  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});f.L.forEach(l=>facts.push(l));if(f.k)facts.push(f.k);a.read=1}
  for(const a of W){if(!subj)subj=ptPerson(a.a||{});facts.push(`${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  if(!subj&&OQ.length)try{subj=typeof isSrv==="function"&&isSrv()?srvM():null}catch(e){}
@@ -123,7 +137,7 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
  if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){ptTick();ptLedger()}}catch(e){ptErr("buoi",e)}return r}}
  if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
 }catch(e){ptErr("wire",e)}})();
-window.PTIME={on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
+window.PTIME={repFacts:ptRepFacts,repText:ptRepText,on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
  /* receiver side (OD 18/11 ~21:15Z): orders to her waiting as notices — for the ONE «tin» panel (MAIN errand-scene r2 lists them; no second panel):
     orders() = [{id, pid, byNm, title, due}], ordWhen(o) = "trả lời trước …", answer(id) = open its answer card (4 answers; Việc chủ sai 3) */
  orders:()=>(S&&Array.isArray(S.ordQ)?S.ordQ.map(o=>({id:o.id,pid:o.pid,byNm:o.byNm,title:o.title,due:o.due})):[]),ordWhen:o=>`trả lời trước ${ptWhen(o.due)}`,
@@ -155,7 +169,7 @@ ptReg("spy",a=>{const t=RV(a.a.v);const m=ptPerson(a.a);if(!m)return{txt:`Ngư�
 /* ---- 2. Nghe ngóng chung ---- */
 function ptListen(m){if(!ptOn()||PT.landing)return spyListen(m);const a=ptSend({who:ptPid(m),nm:m.name,kind:"listen",paid:ptRow("listen").o,place:"cnh",a:{sid:m.sid!=null?m.sid:null},lbl:"đi nghe ngóng"});
  return a?`${m.name} đi nghe ngóng, về ${ptWhen(a.due)}.`:spyListen(m)}
-ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyListen(m);if(r)log(`${m.name} nghe ngóng trở về: ${r}`);return{ok:!!spyListen.ok,t:`${m.name} nghe ngóng trở về`}});
+ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyListen(m);if(r)log(r);return{ok:!!spyListen.ok,t:`${m.name} nghe ngóng trở về`}});
 /* the two options on her maid's / a servant's pop-up (talkOpts kinds maid / serv): order khắc, "chờ N khắc", busy lock */
 (function(){try{const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!ptOn()||!p||!Array.isArray(A)||(p.kind!=="maid"&&p.kind!=="serv"))return A;
   const m=p.kind==="serv"?p.ref:S.maid;if(!m)return A;const why=ptLockWhy(ptPid(m));
