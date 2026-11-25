@@ -57,6 +57,15 @@ function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["
  const L=SK.filter(s=>s.g===sub.cur).map(s=>Object.assign(s,{can:s.acts.some(a=>!/\sdisabled[\s>]/.test(a.slice(0,a.indexOf(">")+1)))}));
  L.sort((a,b)=>(b.can-a.can)||((a.level>=5)-(b.level>=5)));
  return h+`<div class="kskills ktn-grid">${L.map(s=>ktTnTile(s,sub.cur)).join("")}</div>`}
+/* KIT §21e.5 ONE tile size (MAIN 127 ruling 24/11 21:02Z): every overview tile of Tài nghệ, in EVERY sub-tab (Tứ đức, Cầm kỳ thi họa, Vũ · Y · Nữ công, Tác phẩm), has the SAME height = the tallest tile of ANY sub-tab at the current grid width. Measured once per grid width on a hidden copy of ALL tiles, set as --ktnh on the grid (grid-auto-rows:var(--ktnh)); no per-sub-tab size. */
+const KTN={w:0,h:0,n:0};
+function ktTnUnify(){try{const g=document.querySelector("#panel .ktn-grid");if(!g)return;const w=Math.round(g.getBoundingClientRect().width);if(!w)return;
+ let all=[];try{ktArtSkills().forEach(s=>all.push([s.g,s]))}catch(e){}try{ktWorksList().forEach(s=>all.push(["wk",s]))}catch(e){}
+ if(KTN.w!==w||KTN.n!==all.length){const h=document.createElement("div");h.className="kskills ktn-grid";h.setAttribute("aria-hidden","true");h.style.cssText=`position:absolute;visibility:hidden;left:-9999px;top:0;width:${w}px;grid-auto-rows:auto;align-items:start`;h.innerHTML=all.map(([k,s])=>ktTnTile(Object.assign({},s,{can:undefined}),k)).join("");g.parentNode.appendChild(h);
+  let m=0;h.querySelectorAll(".ktn-tile").forEach(t=>{m=Math.max(m,Math.ceil(t.getBoundingClientRect().height))});h.remove();KTN.w=w;KTN.n=all.length;KTN.h=m}
+ if(KTN.h)document.querySelectorAll("#panel .ktn-grid").forEach(e=>e.style.setProperty("--ktnh",KTN.h+"px"))}catch(e){console.error("ktTnUnify",e)}}
+window.ktTnUnify=ktTnUnify;
+(function(){try{const P=document.getElementById("panel");if(!P)return;let r=0;new MutationObserver(()=>{if(r)return;r=requestAnimationFrame(()=>{r=0;if(P.querySelector(".ktn-grid:not([style*='--ktnh'])")||KTN.w!==Math.round((P.querySelector(".ktn-grid")||{getBoundingClientRect:()=>({width:0})}).getBoundingClientRect().width))ktTnUnify()})}).observe(P,{childList:true,subtree:true});addEventListener("resize",()=>{KTN.w=0;ktTnUnify()})}catch(e){}})();
 function ktTnTile(s,g){return kitSkillTile(s,`${g}:${s.kind}:${s.k}`)}/* the tile = KIT §21e kitSkillTile (j79) */
 function ktTnFind(key){const [g,kind,k]=String(key).split(":");if(g==="wk")return ktWorksList().find(s=>s.k===k);return ktArtSkills().find(s=>s.kind===kind&&s.k===k)}
 function ktTnPop(key){const s=ktTnFind(key);if(!s)return;s.can=undefined;
@@ -72,9 +81,10 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
    "Tự học, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
 function ktWorksList(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return[];const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
-  const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
+  /* KIT §21e.6 a môn below the top bậc is NOT an empty pop-up: the same act card, disabled, with the kit «why» saying what opens it (the môn reaching BAL.art.nm[5]) */
+  const acts=[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,l>=5?why:`môn đạt bậc ${BAL.art.nm[5]} mới làm được (nay: ${artNm(l)})`)];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
-  return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:[artPts(S,a.k),100],bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,can:!!(acts.length&&!why)}}).filter(Boolean);
+  return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:[artPts(S,a.k),100],bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,can:!!(l>=5&&!why)}}).filter(Boolean);
  L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L}
 function ktWorksHTML(){return ktWorksList().map(kitSkillCard).join("")}
 KIT_GLOSS["Tác phẩm"]="Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đạt "+BAL.art.nm[5]+" thì tự học là ra tác phẩm ngay.";

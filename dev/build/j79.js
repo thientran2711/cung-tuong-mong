@@ -1348,7 +1348,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 /* KIT §21e: every act card of ONE list (.kskacts: Tài nghệ pop-up, Tác phẩm, Mệnh truyện heads) is ONE height = the tallest of the list, the card fills its row (no short card with a gap under it) */
 .kskacts>.kpanec{display:flex;min-width:0}.kskacts>.kpanec>button.ka{flex:1 1 auto;height:auto;align-self:stretch}
 /* the overview tile (kitSkillTile): 2 equal columns, picture left of the text; under 330 px the picture stacks over the text and the one-line desc hides (container query) */
-.kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:10px;align-items:stretch}
+.kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:var(--ktnh,1fr);gap:10px;align-items:stretch}
 .ktn-tile .kskdo,.ktn-tile .kskx{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}/* the tile shows ALL its info on every device (chips + line + bar + next); only the picture stacks when narrow */
 /* the pop-up head repeats the tile: no picture, no next-step line, so the acts fit (iPad: without scrolling) */
 .ktn-pop .kskh2>.ksart,.ktn-pop .kskx,.ktn-pop .kskk,.ktn-pop .kskh>b{display:none}.ktn-pop .kskh{justify-content:flex-start}/* the dialog header already names the môn */.ktn-pop .kskh2{grid-template-columns:minmax(0,1fr)!important}
