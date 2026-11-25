@@ -249,7 +249,7 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsxp");
 (function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsBoxOn()&&tsSrv()&&tsSrvNext()){const miss=tsSrvRows().filter(x=>!x[0]).length;
   el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}else if(el&&tsOn()&&!S.out&&S.rank<7){const L=promoReqP(S);if(L.length){const miss=L.filter(x=>!x[0]).length;
   el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}}}catch(e){}return r}})();
-document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsPromoPanel(false)},true);
+document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();const md=document.getElementById("modal");if(md&&!md.hidden)return;/* KIT §56.26: a card QUEUED but not shown no longer swallows the tap: the panel opens in front, the queued card follows */tsPromoPanel(false)},true);
 /* festivals (j3/j8 festival): the two judged banquets say beforehand what is judged and where she stands */
 const TS_FEST={1:["Yến tiệc đầu xuân","sac","Sắc và điệu múa"],7:["Thi tài ngày Thất tịch","tai","Tiếng đàn, lời thơ"]};
 function tsFestScore(p,k){return k==="sac"?effSac(p)+artOE(p,"vu"):p.tai+(artOE(p,"cam")+artOE(p,"thi"))/2}
