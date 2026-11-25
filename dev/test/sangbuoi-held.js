@@ -113,7 +113,9 @@ const VP=[[755,1000,2],[1180,820,2]];
      const s1=await waitCard(5000);const sw=await p.evaluate(()=>{const w=!!window.__swallowed;window.__restoreHid();return w});await shot('E1-card');
      if(!sw)return 'setup: no paint was swallowed';if(!s1.modal)return 'activity closed + swallowed paint: NO card painted (one-shot painter) '+JSON.stringify({Q:s1.Q,mt:await p.evaluate(()=>DQ.mt)});
      await drain();{const b1=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(b1))?'':'cards closed but «Sang buổi» did not advance'}},
-   F:async()=>{const r0=await p.evaluate(()=>{used=0;advLock=false;render();S.nfX={d:(typeof wk==='function'?wk():(S.turn*3+(S.tuan||0))),st:'open',at:Date.now()};window.__cf0=window.cfBusy;window.__cfQ=1;window.cfBusy=()=>window.__cfQ===1;
+   F:async()=>{/* the night choice exists only in a life where jnf is on (not a servant / khoa cử road, not parked): else a fresh life */
+     for(let i=0;i<4&&!(await p.evaluate(()=>typeof nfOn==='function'&&nfOn()));i++){await newLife();await ensureQuiet()}
+     const r0=await p.evaluate(()=>{used=0;advLock=false;render();S.nfX={d:(typeof wk==='function'?wk():(S.turn*3+(S.tuan||0))),st:'open',at:Date.now()};window.__cf0=window.cfBusy;window.__cfQ=1;window.cfBusy=()=>window.__cfQ===1;
        DQ.newsHold=1;Q.unshift({t:'Tin trong cung buổi này',kind:'news',__sp13:{b0:'x'},h:'<p>Thử: tin trong cung.</p>'});
        kmPush(done=>{const d=document.createElement('div');d.className='kmov kcf';d.id='tstcf';d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35);display:flex;align-items:center;justify-content:center';
          d.innerHTML='<button type="button" class="main" id="tstcfb">Lật thẻ · xong</button>';document.body.appendChild(d);
