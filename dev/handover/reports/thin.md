@@ -1576,3 +1576,57 @@ Not run because of the FAIL (to run on r2): coop-night, coop-e2e iPad host, Work
 ### Laws touched
 1 two-way: FAIL 1 (the host's rename no longer reaches the guest; both seats keep an excluded name). 4 one core: OK (BAL.kh, no new number). 6a: FAIL 2. 11 whole family: suc + hue OK; qPool + S.th fixed at the symptom, not the cause. 2/3/5/7/9/10/12: no choice / text / UI touched.
 Verdict: **FAIL** → fixer (Foreman B routes). No CDN review folder used; no shots taken; no image in git.
+
+### FIXER #8 (session_01N1tNP32N7gv4o7f2kGihLj, opus; START_CTX ≈4 % (own estimate); Foreman B = session_01N1tNP5jh66CjyiKWYRZzmp (was 3HSiyh7F)) — review/robot-coop-fix-3-r4 b34e4bde — NOT SSK (rollover by context; gates on b34e4bde to finish)
+PRIORITY #1 CHECK ('robot-coop-fix-3'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 1 | archive 0
+Branch review/robot-coop-fix-3-r4 **b34e4bde955fe2162dac6c686d5991eaa5cc25eb** = 32121242 (fix-3 r3, already holds LIVE 502c48c9) + r4 a1b6f61b + r4b 85a44f69 + r4c b34e4bde; origin/main at start and at SSK = 502c48c9 (FF). FIXER #7 was archived (send_message refused) → not told; Foreman B told. Scope added by Foreman B 22:37Z: round «b» R[].resHead / R[].resHall (FIXER #7 handover item 1).
+
+#### FAIL rows of «## REVIEW robot-coop-fix-3» → r4
+| # | item | r4 |
+|---|---|---|
+| 1 | rosterFriend + j95planRival wrap + j95sync wrap dead in co-op | **removed** (all three, and rosterFriend's calls in onPos / keepFriendPos). Comments rewritten: ONE cause = her house (palaceOf(her entry) read housing this seat's own palFix had re-housed); j95's roster never runs in co-op (j95on() = !COOPW.on) — stated once in the friendPl comment. |
+| 2 | r2/r3 rows re-diagnosed | = house family: unit P1 reproduces «guest sees host at r2» (her entry evicted / re-halled by the guest's palFix) on the pre-r4 jpal. |
+| 3 | extra whereOf wrap duplicates j9 | **removed**. ONE rule for her place = friendPl (part E → relay this buổi → palaceOf(her entry)); keepFriendPos writes S.where with it; j9 whereOf reads S.where first. |
+| 4 | HOUSE_W duplicates jcoophl HOUSE | **one list**: jcoopworld `HOUSE` exported as `CW.X.HOUSE`; jcoophl `const HOUSE=X.HOUSE`. grep `"resHead","resHall"` in dev/build/j*.js + coop/worker/src → 1 hit (jcoopworld.js:48). |
+| 5 | host palFix identity test | **dev/test/coop-house-unit.js** (32 checks, host + guest + save load): houseIn writes ONLY her entry (NPC housing sig identical), same relay twice = no write; palFix ×3 with nothing changed = NPC housing, her housing and my own houseWire (posKey part) identical; over-cap house / shared side hall / her palace claimed by an NPC head / her head no head on my seat / save load (deser, COOPW off) / keepFriendPos restore / other life. 8 plants, all CAUGHT (table below). |
+| 6 | residual «7.0 guest sees host at r5, host is at r902» | traced to the same family: host lives in the GUEST's house (r902); on the guest's seat her own palFix housed the host's entry like an NPC (over-cap «newest extra» evicted / j95cCap drops the last resident / hallFix re-picks the hall) → resHead 5; houseIn put the relay back only on the host's NEXT pos (sent only when its key changes), so at the new week (keepFriendPos → palaceOf) the guest saw r5. Fixed for the whole family (law 11): **jpal palFix never writes the coop entry** (palace not taken, not evicted, not re-housed, not spread, not logged; S and the friend claim palace + side hall FIRST, an NPC gives way); **j95cCap** drops an NPC, never her; **keepFriendPos** re-applies her last relayed house (same life) after a merged-week rebuild. Solo: no coop entry and S is already first in `all` → identical order (unit: solo palFix identity). |
+| + | round «b» R[].resHead (host 8+8) / R[].resHall (guest 9) | same family: friend + NPC id4 in hall «tay» of head 2 → now the player keeps the hall and the NPC moves (host-authored; on the guest jcoophl keeps the world's housing until the host's op); j95cCap never drops her. A/B: 0 resHead / resHall rows (below). |
+Kept: houseWire / houseIn relay (pos key + message `hs`).
+
+#### Planted regressions (dev/test/coop-house-unit.js, reverted after each)
+| plant | result |
+|---|---|
+| P1 jpal.js = main (no coop handling) | CAUGHT 6 FAIL |
+| P2 houseIn also writes an NPC (palWait) | CAUGHT 2 FAIL |
+| P3 palFix main loop re-houses her | CAUGHT 1 FAIL |
+| P4 keepFriendPos without friendHouse | CAUGHT 2 FAIL |
+| P5 old-life relay applied | CAUGHT 2 FAIL |
+| P6 j95cCap drops her (L.slice) | CAUGHT 4 FAIL |
+| P7 hallFix: NPC keeps the hall | CAUGHT 5 FAIL |
+| P8 an NPC head takes her palace | CAUGHT 1 FAIL |
+(r4's first cut also restored her house inside jcoophl's palFix wrap; once jpal stopped writing her, P3 showed that restore never fired → removed, one writer of her house = her relay.)
+
+#### Gates (BARE = 85a44f69 + local Worker :8791 = coop/worker of this branch (= main); MERGED = scratch 85a44f69 + review/robot-coop-fix-2-r3 71076b61 (conflicts only index.html / sw.js, rebuilt) + its Worker :8792)
+On 85a44f69 (r4b): Worker `npm test` bare + merged rc 0 (merge ok · vault ok 48 · seat/stale/thin ALL OK · merged + range ok) · coop-keymove-unit 12/12 both · coop-house-unit all pass both · coop-range-scan (no args) + `--all` on MERGED: COOP-RANGE PASS 48 fields 0 wider 863 sites · coop-range-identity PASS 3 states 0 rewrites · coop-e2e BARE SWAP=0 141/142 (1 FAIL «same world on both seats» S.fidUsed.49 A=undefined B=consort:c30 = the known fidUsed flake family, robot10-E-fixer.md:307–309) → rerun 142/142; SWAP=1 142/142 · coop-e2e MERGED SWAP=0 142/142, SWAP=1 142/142 · quickcheck ALONE: bare no args PASS (old save skipped) · bare with live build (`quickcheck.js . <main 502c48c9 index.html>`) PASS, old save ok, render 264/255 tab 529/538 buổi 1560/1464 · merged with live build: run 1 FAIL buổi 2917 vs 1303 (single slow run) → `--runs 6` PASS old save ok, render 244/237 tab 498/448 buổi 1481/1943.
+On b34e4bde (r4c, final): coop-house-unit 36/36 bare + merged · keymove 12/12 both · npm test rc 0 both · coop-range-scan + --all PASS · coop-range-identity PASS. coop-e2e ×4 (bare/merged × SWAP 0/1) were RUNNING in this container at rollover (/home/user/wt/f8out/e4-*.log) — successor reruns. quickcheck on b34e4bde NOT run.
+
+#### A/B (harness review/robot10-coop d4b4408d overlay: robot10-coop.js robot10-in.js coop-bot.js coop-bot-x.js coop-lag.js lib/coop-lag-hooks.js; `SWAP=<s> SEED=1<r> FLUSH=4 CAP=2400 PCAP=3000 POSLOG=1 NEGTRAP=1 WORKER=http://127.0.0.1:8791 node dev/measure/robot10-coop.js 1 1 1 <out>`; fix = game 85a44f69, main = game 502c48c9, same local main Worker, sides in parallel, same seed per round)
+On 85a44f69 (r4b; r4c fixes the two fix-side rows of round 3):
+| round | fix rooms (weeks) | fix coop-pos | fix resHead/resHall save rows | main rooms (weeks) | main coop-pos |
+|---|---|---|---|---|---|
+| r1 SWAP=0 | MQXM 23 (stuck) + 3NTX 17 = 40 | **0** | 0 | RKB7 40 | 74 |
+| r2 SWAP=1 (container restart mid-round; flushed partial) | DXU7 8 (stuck) + RWXT 3 = 11 | **0** | 0 | ZGA3 24 | 10 |
+| r3 SWAP=0 | AQ5E 7 + HDD8 3 + TK6F 9 = 19 | 1 | 1 (R[10].resHall dong→tay, host) | Z6KT 3 + 3W73 13 + GN6B 10 + W9QS 24 = 50 | 38 |
+| total | 7 rooms, 70 weeks | **1** | 1 | 6 rooms, 114 weeks | **122** |
+The 2 fix-side rows of r3, both traced and fixed in r4c: (a) coop-pos «buổi 0.2 host sees guest at tn, guest is at tyv» with the host's S.where = tyv (right): jagharm HA.here = tn during an NPC face-to-face harm that landed because agAt(friend) read HER NPC day plan (jagday) → agAt for the friend = whereOf. (b) host save: S (rank 0) and the friend 902 BOTH in hall «dong» of head 4 → each seat kept its own player → load moves her to «tay» → one order on both seats (host's player, guest's player, NPCs) and her hall never written by this seat. Other rows both sides (not this branch): stuck (week-end stuck family, fix-4), number bạc < 0 / out of range (fix-2), save R[].hue / staff.hue (savert), S.suc / S.qPool[].name (FIXER #9), coop-world, coop-stat, lag.
+A/B on b34e4bde NOT run (rollover).
+
+#### Laws
+4 one core: no number added (side cap / halls read BAL.res as before) · 6b real people: her house = hers on both seats, never two people in one side hall · 11 whole family: every jpal / j95cCap writer of a coop entry's housing (5 sites) + hallFix + palace claim order; HOUSE one list · 1/7/9/10/12: no player text / UI touched · identity: unit (solo + co-op).
+
+Plants table above = on b34e4bde: P1–P11 all CAUGHT (P9 two players each seat keeps its own → 1 FAIL; P10 hallFix writes her hall → 1 FAIL; P11 agAt reads her NPC plan → 1 FAIL).
+Laws touched by r4c too: 6b (an NPC deed meets her only where she really is), 1 two-way (the host's and the guest's player get one rule).
+
+### HANDOVER (FIXER #8 → successor; rollover by context: START_CTX ≈4 %, now ≈28 % of 1M)
+- Code DONE on review/robot-coop-fix-3-r4 **b34e4bde** (pushed). Remaining = gates only, on b34e4bde (bare = branch; merged = scratch merge with review/robot-coop-fix-2-r3 71076b61, conflicts only index.html / sw.js → take ours, `python3 dev/build/assemble.py && bash dev/site/build_site.sh`): (1) coop-e2e SWAP 0/1 bare + merged vs local Workers (bare = this branch's coop/worker = main; merged = the merged coop/worker); (2) quickcheck ALONE no args + with the live build (main index.html), bare + merged (`--runs 6` if one slow run); (3) A/B ≥5 rooms per side, harness d4b4408d overlay (6 files listed above), CAP=2400 PCAP=3000, fix game b34e4bde vs main game 502c48c9, same local main Worker, SWAP 0/1/0 — expect fix coop-pos 0 and no R[].resHead / R[].resHall rows; (4) if main moved: merge LIVE, rebuild, redo (1)–(2); then SSK line at END of FOREMAN_B_STATUS.md + «SẴN SÀNG KIỂM review/robot-coop-fix-3-r4 <sha>» + send_message Foreman B session_01N1tNP5jh66CjyiKWYRZzmp.
+- Box tools (this container only): wrangler /home/user/wt/wr; worktrees /home/user/wt/{f8 branch, f8m merged scratch, f8abfix / f8abmain A/B with harness overlay}; A/B script /home/user/wt/f8out/ab.sh <round> <swap>; logs /home/user/wt/f8out. Long jobs = Bash run_in_background only (a container restart killed A/B r2).
