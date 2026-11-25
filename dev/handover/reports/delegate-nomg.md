@@ -121,5 +121,8 @@ Only 2 delegated acts opened a game (maid + servant «Nghe ngóng chung»); afte
 - duodo-focus-data PASS, duodo-focus-games PASS, duodo-focus-view: 4 FAIL (5a–5d NPC-encounter scene) — IDENTICAL on untouched origin/main 49f17d4d (pre-existing, not this branch).
 - Shots (LOOKED): https://ctm-img.victoria-tntt.workers.dev/img/_review/delegate-nomg/ fold-1-fan / fold-2-after-tap / fold-3-back / ipad-1-fan / ipad-2-after-tap / ipad-3-back (.png).
 
-## Open item for MAIN (not changed — law 16)
-The scheme «Giao cho người làm» road rolls HER odds (oSpy / actOdds), not the doer's. The rule says the doer's ability decides delegated acts; switching those rolls to the sent agent (spyFactors-style, bestSent) is a balance change across 15 scheme acts — MAIN/owner call.
+## r2 — scheme «Giao cho người làm» rolls the DOER's odds (MAIN 133 ruling on OD 25/11 ~04:12Z; was the open item)
+- j9: `ACTSEND` + `actSent()` + shared `sendPen(sv,k)`: when she GIVES the act to someone (even standing with the target) the act is a SENT act in actCtx / runAct: the one sent (bestSent, the same pick runAct makes) does it with his own sendPen (j29 sentPen: thiện cảm, nết, bậc; BAL.net.k), earns merit, and if caught confesses — the same road as any act she sends a servant on (law 1/6).
+- jsgame: «Giao cho người làm» (the choice and the skip button inside the game's rules card) runs `J.runDlg` = fzRun(doer odds, sent act). Nghe lén / Mua chuộc: the job odds minus the doer's sendPen. The option reads «giao cho <tên> · <odds word> · …».
+- Before → after (sample, rival not together): Dò la her 63 → giao: disloyal doer 52 / loyal 69; Tung tin đồn 49 → 43/52; Vu oan 10 → 5/13. Before: «Giao» always rolled HER odds.
+- Tests r2 (sha 1785c176 + report): delegate-nomg.js PASS incl. (5) doer loyalty moves the Giao odds, the run's ctx pen = the doer's sendPen, card names the doer · quickcheck PASS · coop-e2e 142/142 both orders · shown-odds-spend 52/52 · schemegames PASS · schemesave ok · duodo-focus-data/games PASS. Pre-existing, identical on untouched main: shown-odds.test 87/90 (plant-here ×3), schemewire crashes (stale locator), duodo-focus-view 5a–5d.
