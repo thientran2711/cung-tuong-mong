@@ -58,3 +58,21 @@ All on 6b931401 (branch already holds origin/main 3a3234ff; 2b68def3 is no longe
 E round 1 U17 wk22 host «Kẻ hầu» stuck is probably the same seed.
 
 READY flight-modal-deadlock 6b931401.
+
+## REVIEW flight-modal-deadlock (BIG REVIEWER opus, 25/11)
+PRIORITY #1 CHECK ('forced choice|bắt buộc chọn|mustChoose|kitCancelIx|«Lui»'): OD 0 direct (OD:L742 "forced dialog" = co-op wait only) | dev/rules 0 | KIT.md 32.10 "FORCED PANELS … NO ✕" + "no Thôi / Lui buttons" (owner 11/15) | main jdeadcard 0 | review/* this branch only.
+Verdict: **PASS** — head **4da55ce8** on review/flight-modal-deadlock-r = 1f0a491a + 6b931401 + merge of origin/main 49f17d4d (index.html/sw.js conflict only: rebuilt) + reviewer test fix. Ancestor = origin/main 49f17d4d (fast-forward ready).
+
+| # | check | result |
+|---|---|---|
+| 1 | Law 2/3 j68c-sea-023 «Thời tiết» | PASS: «Đổ nước tắt hết, mặc rét» loss bạc 1 → suc 2 + tamco 1 (Σloss 3 = tier l, gain duc/an/danh); wording fits (cold night costs Sức). Other 3 roads keep bạc; none cost-only. |
+| 1 | Law 2/3 j68c-serv-022 «Kẻ hầu» | PASS: «Cầm tay nàng cảm tạ, thưởng bằng lời» loss bạc → tamco (Σ3); the words "thưởng bằng lời" no longer cost bạc (was a wording/effect mismatch). |
+| 2 | Law 11 family | PASS: validator ERR on any all-bạc comp (0 err now, 2 ERR on old seeds); dead-card.js scan builds 330/717 PEND (550 E68 incl. 460 j68c, 33 EV) at bạc 0 ranks 0/3/6 → 0 dead. ~387 PEND builders need own params = unscanned; the runtime net wraps the outermost global showModal, so it covers them (checked also through the new jdayq hold → release path). |
+| 3 | Net jdeadcard (6b931401) — law 9 / VANPHONG | PASS: it writes «Lui» into #mclose; the kit (32.10) hides that close word and turns it into the ONE kit ✕ + tap-out + Esc (Fold ✕ at 612,114; iPad 973,135; «Lui» display:none). No private CSS / part, no visible «Lui» button. Shows only when every option is greyed AND kitCancelIx −1; not on normal cards (fixed card 1/4 open → no ✕, __deadCards 0). Pressing ✕ = no effect, Q empties. |
+| 3 | RULING: no-effect ✕ on a forced card vs law 2/3 + KIT 32.10 forced-panel rule | NOT a breach. The forced rule stops her dodging a choice; with every option greyed there is no choice to dodge — the old result was a soft-lock (no rule wanted that). Law 2/3 judge options of one choice; ✕ is not an option and appears only when no option can be taken. Exploit (drain bạc to skip costly cards) is closed at the source: validator + scan forbid all-bạc cards, so the net fires only on a future data bug, and it is logged (window.__deadCards) for the robots. Foreman may tell the owner in one line; no rule changed. |
+| 4 | Law 4 | PASS: no typed numbers in game code (net reads c.fx.bac / S.bac; −60 only in the synthetic test card). Bạc step size from BAL (−30/−60 by rank). |
+| 5 | Gates on merged head | quickcheck 4da55ce8 PASS (core gates incl. 85-dead-card DEAD-CARD PASS, time-spill, old save ok, perf new/live render 326/303, tab 717/757, buổi 1664/2612 ms) · coop-e2e both seats on 9425b1a2 (same game code) 142/142 · dead-card.js PASS (0 dead, seeds 1/4 at bạc 2, net closes) · j68seeds_validate 0 err/0 warn · repro save yr97b6 (bạc 2) loads, card rebuilt from its P (e68c:j68c-sea-023 {a0:5,vi:3,nd:32}) shows 1/4 open, Fold 755x1000 + iPad 1180x820, 0 page errors. |
+| 6 | Screenshots looked at | fixed card Fold + iPad (1/4 open, «Đổ nước tắt hết, mặc rét» Tốn Sức −24, no bạc); net card iPad (all 4 greyed, kit ✕ top-right of header). Scratch only, deleted. |
+
+Reviewer fix (4da55ce8, test only): after merging main 49f17d4d (jdayq day-queue) the hook 85 FAILED 3 — the test's own card on a fresh life was HELD by the day-queue (dawn/activity) and never painted (0/0). dead-card.js parts 2/3 now open the card as a player tap (DQ.user). Game code unchanged.
+Side note (not this branch, pre-existing): the repro card mixes a spring opener («Gió xuân lùa qua hành lang…», Tháng hai) with the winter seed sea-023 («Gió bấc… lò sưởi»); sea seeds may need a month gate (law 6 continuity) — for Foreman F to route.
