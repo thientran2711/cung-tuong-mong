@@ -3509,3 +3509,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (12:00Z) M4: year-3 reload lost 1 buổi (0 s reload after flip) → evidence #2 to B SAVE-YEAR-ROLLBACK. M4 skip 10/10 = already fixed m-fix-1-r (BAL.skip.cap).
 - (12:03Z) LC15: 15' eaaae7c8 = bc-stack-r 5c062a05 on m-fix-2 (CHANGE «Nút nào chạm một lần là ăn, không còn trượt; chạm người ở Hậu cung không còn lỗi; ✕ ở bàn trang điểm lui ra đúng chỗ.» OK); 16' temper d374266f HOLD; b7474dd1/39549e01 void. Possible dup: bc-stack pcPort rk vs B PCPORT-RK cc27f8c — LC15 asked.
 - (12:05Z) PCPORT-RK = dup of bc-stack (LC15 confirmed) → B told to drop/re-base.
+- (12:08Z) Selscene rv now FAIL 30d9d044: red wash REAL (kitAlarm .kmalarm on selection-day pids selxD/kc2Sel, branch only) + F3 test fix → SELSCENE-18 01V1ZZH1WL4t told (kit flag or KIT REQUEST → KK28; law 11 scan of non-danger pids). Not GO.
