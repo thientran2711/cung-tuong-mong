@@ -71,8 +71,15 @@ function make(page, opt = {}) {
     }
     return h.evaluate(PROBE).catch(() => ({ gone: true }));
   }
+  /* every handle is DISPOSED after its tap (memory, F #10 11:03Z: s7 renderer grew ~1 GB → 3 GB by buổi 140): an undisposed JSHandle pins its element —
+     and with it the whole detached subtree of every closed dialog / scene — in the renderer for the life of the page (thousands of taps per life).
+     info.keep = true leaves a caller's handle alive (none today). */
   async function tap(target, info = {}) {
-    const h = await handleOf(target);
+    let h = null;
+    try { h = await handleOf(target); return await tap1(h, target, info) }
+    finally { if (!info.keep) { if (h && typeof h.dispose === 'function') await h.dispose().catch(() => {}); if (target && target !== h && typeof target.dispose === 'function') await target.dispose().catch(() => {}) } }
+  }
+  async function tap1(h, target, info) {
     if (!h) { return dead(info, { lab: info.label || String(target), cover: 'not in page' }) }
     let p = await h.evaluate(PROBE).catch(() => ({ gone: true }));
     if (!p.ok) p = await scrollTo(h);
