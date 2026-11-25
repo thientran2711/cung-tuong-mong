@@ -3236,3 +3236,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:47Z) 129 fwd: KK24 KIT READY kit-tntile r4 a31d69bc (supersedes r3 909be531, step 4) → FROM MAIN line to B for KIT OK r4. KK24: K-FITSLICE/K-FITSPEED for SELSCENE-16 still open.
 - (00:50Z) MINIGAME-FIX LAND READY minigame-fix-2 45ebeae1 (rv items fixed; KK24 KIT OK 45ebeae1; clean quickcheck PASS, perf = live) → rv 4xEdReni re-check → LC12 replaces step 8. Art note for C later (not now): all 39 playArt kinds share one banner cat:tai-nghe → per-kind banner cat:<kind>.
 - (00:52Z) rv 4xEdReni PASS 45ebeae1 + KK24 KIT OK 45ebeae1 → MAIN GO: replaces step 8 (0506605b) in Variant C.
+- (00:53Z) KK24 KIT READY kit-focus-fig d500b6db (focus figure 398→542 Fold / ~480 iPad, one place jfocus) → B kit rv requested with real Fold+iPad focus shots (KK24 had none).

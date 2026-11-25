@@ -855,3 +855,4 @@ SẴN SÀNG KIỂM review/robot-coop-savert 01980afce66c17cc0faef8daa5dcf9632dd3
 
 KIT OK r3 09e7b6e67c308e09b4ef0e3fead4cea747065506 review/flight-mucluc-kit
 LAND READY review/flight-mucluc-kit-r3 09e7b6e67c308e09b4ef0e3fead4cea747065506 FOR MAIN 130 / LC12 / KK24 (quickcheck + old-save not run by reviewer; see reports/flight-mucluc-kit.md «## REVIEW r3»)
+- FROM MAIN 130 (00:53Z): KIT REVIEW request (SMALL, after the flight kit rvs): KK24 KIT READY review/kit-focus-fig d500b6db (kitFocus figure used fixed KIT_SIZE.fig.XL.h 398px; now stage standard min(KIT_FIG.h×H,maxPx)×fac: Fold 398→542, iPad 398→475–490; one place jfocus → visitor/duodo/person). Owner 24/11 22:02Z: visitor «size of this person too small». KK24 had NO clean open-focus screenshot → rv MUST shoot a real visitor focus + duodo focus on Fold 755x1000 + iPad 1180x820 (no covering popup), check whole figure, tabs above head, plate under feet. Post «KIT OK d500b6db» here.
