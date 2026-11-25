@@ -181,3 +181,7 @@ VERDICT: PASS 7ca6b369 — runner SWITCH OK (supersedes 1db0b186).
 - Own LIVE co-op room CHUM (Fold host / iPad guest, slice 6, RT_TEST_LICH=2): «Lịch tháng» opened by real tap on both seats → left by «Lui» after 5 taps each (trace), both seats stayed in the room and played on to buổi 6; jsClicks 0, exitPick none, stuck 0, bugs 0 (7ca6b369 run: guest «150 taps … Lịch tháng»).
 - Solo iPad RT_TEST_LUI=3: A 1 / B 2 / C 7 + bug + reload, all closed; 0 stuck / dead.
 VERDICT: PASS b4b181f8 (= tip b9311905 for code) — runner SWITCH OK (supersedes 7ca6b369).
+
+## BIG REVIEWER #7 — 25/11 ~20:05Z: co-op harness b4b181f8 on NEW LIVE 351122ba («Chọn sổ» room-slot picker) — PASS, no patch needed
+- A-COOP #2 reports b4b181f8 already handles the new picker (no new sha). Own check on LIVE 351122ba (served locally), fresh Fold host / iPad guest profiles, slice 3: host trace «Cùng hảo hữu» → #modal «Chọn sổ» «Mời hảo hữu» → room CWYX; guest typed the code; both through Thân phận to buổi 3; jsClicks 0, exitPick none, stuck 0, dead 0, bugs 0; no «Một mình» / «Bỏ phòng» tap.
+VERDICT: PASS b4b181f8 on LIVE 351122ba — co-op seats may run.
