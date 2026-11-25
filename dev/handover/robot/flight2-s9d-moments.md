@@ -1,0 +1,42 @@
+# flight2-s9d moment log (bot cautious, ipad, seed 2026112524, real-tap harness 496b6b66)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s9d/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-flight2-s9d/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcvào | Ở quê chờ lệnh tuyểnTốnkhông | Dung mạo cung nữ 1 | Dung mạo cung nữ 2 | Dung mạo cung nữ 3 | Dung mạo cung nữ 4 | Dung mạo cung nữ 5 | Dung mạo cung nữ 6 · shots-flight2-s9d/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Cung nữ tuyển vào cung · 1/4» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s9d/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s9d/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tuyển chọn» · NEW SCREEN · first time on this screen; buttons: Làm bài khéo tayRất vữngTốnS | Thêu một mảnh khănRất vữngTố | Cúi đầu chờ xétRất vữngTốnSứ · shots-flight2-s9d/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc88Tài44Tâm cơ19Đức30Danh2 | Bạc7Sức77/100 | Buổi sáng, còn 4 khắc | sương sớm | Tâm trạngBình thản0 | Về phòng · shots-flight2-s9d/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quakết quả khá, tự thi gi · shots-flight2-s9d/m-new-1-8.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Nhập cung làm cung nữ» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s9d/m-new-1-9.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kprevov «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s9d/m-new-1-10.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Mệnh truyện kiếp này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-1-11.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Tích Cần viện · Thường tại Nghiêm Vân La đi vắng, » · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc88Tài44Tâm cơ19Đức30Danh2 | Bạc7Sức75/100 | Buổi sáng, còn 4 khắc | sương sớm | Tâm trạngBình thản0 | Về phòng · shots-flight2-s9d/m-new-1-12.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · page «Tích Cần viện · Ở đây còn 6 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc88Tài44Tâm cơ19Đức30Danh2 | Bạc7Sức75/100 | Buổi trưa, còn 4 khắc | hoa đào bay | Tâm trạngBình thản0 | Về phòng · shots-flight2-s9d/m-new-1-13.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Xong việc: Làm một việc hầu hạ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-2-14.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · .dlg «Có người đến» · NEW SCREEN · first time on this screen; buttons: Hỏi han sức khỏeRất vữngTốnk | Khen tài nghệ nàng taRất vữn | Chia sẻ bí mậtRất vữngTốnkhô | Khéo cáo luiRất vữngTốnkhông · shots-flight2-s9d/m-new-2-15.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s9d/m-new-4-16.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s9d/m-new-5-17.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-flight2-s9d/m-new-5-18.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Tiếp ▸ | Lui · shots-flight2-s9d/m-new-5-19.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Kẻ hầu» · NEW SCREEN · first time on this screen; buttons: Thức hầu đến sángRất vữngTốn | Bỏ bạc nhờ bếp làm cho người | Dỗ khéo vài câu rồi luiCó cơ · shots-flight2-s9d/m-new-5-20.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Kỳ ngộ» · NEW SCREEN · first time on this screen; buttons: Xin ma ma cho chép một lốiRấ · shots-flight2-s9d/m-new-6-21.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · #klearnov «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s9d/m-new-6-22.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Có người tìm đến» · NEW SCREEN · first time on this screen; buttons: Tiếp chuyệnTốn1 khắcĐượckhôn | Không tiếpTốnkhôngĐượckhắc c · shots-flight2-s9d/m-new-6-23.png
+- year 1 · turn 0 · tuần 2 · buổi 0 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-9-24.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons: Thường | Thường | ThườngVải bôngMay áo: váy sa | ThườngNước bào hoaChải tóc v | Nhận · shots-flight2-s9d/m-new-13-25.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-17-26.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 11 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s9d/m-look-20.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · .dlg «Xong việc: Học lễ nghi với cô cô» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-20-27.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Ban hôn» · NEW SCREEN · first time on this screen; buttons: Tạ ơn, xuất giáRất vữngTốnkh | Xin ở lạiRất vữngTốnkhôngĐượ · shots-flight2-s9d/m-new-25-28.png
+- year 1 · turn 2 · tuần 1 · buổi 1 · rank 0 · .dlg «Chủ thưởng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-29-29.png
+- year 1 · turn 2 · tuần 1 · buổi 3 · rank 0 · .dlg «Bị vu oan» · NEW SCREEN · first time on this screen; buttons: Thanh minhTùy duyênTốnkhôngĐ | Nhận tội, xin thaRất vữngTốn | Đút bạc cho Tống Quế Chi rút · shots-flight2-s9d/m-new-31-30.png
+- year 1 · turn 3 · tuần 0 · buổi 0 · rank 0 · page «Tích Cần viện · Quý nhân Nghiêm Vân La đi vắng, đa» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc88Tài46Tâm cơ19Đức36Danh1 | Bạc31Sức10/100 | Buổi sáng, còn 4 khắc | trời trong mát | Tâm trạngHờn tủi-37 | Về phòng · shots-flight2-s9d/m-new-37-31.png
+- year 1 · turn 3 · tuần 0 · buổi 0 · rank 0 · .dlg «Thăng bậc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-37-32.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · .dlg «Hoàng thượng» · NEW SCREEN · first time on this screen; buttons: Cúi đầu đúng phépRất vữngTốn | Ngẩng lên, đáp một câu khéoT | Lánh vào trongRất vữngTốnkhô · shots-flight2-s9d/m-new-37-33.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · .dlg «Tin về chủ nhân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-38-34.png
+- year 1 · turn 3 · tuần 0 · buổi 2 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s9d/m-new-38-35.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 11 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s9d/m-look-40.png
+- year 1 · turn 3 · tuần 1 · buổi 3 · rank 0 · .dlg «Quý nhân Nghiêm Vân La quở mắng» · NEW SCREEN · first time on this screen; buttons: Cúi đầu nhận lỗiRất vữngTốnk | Khóc lóc xin thaTùy duyênTốn | Cãi lạiRất vữngTốnkhôngĐượct · shots-flight2-s9d/m-new-43-36.png
+- year 1 · turn 3 · tuần 1 · buổi 3 · rank 0 · ending · EVENT · life over: Hồng nhan bạc mệnh — Quỳ phạt đến kiệt sức mà chết · age 18 · buổi 44 · bugs 0 · stuck 0 · dead buttons 0 · shots-flight2-s9d/end.png

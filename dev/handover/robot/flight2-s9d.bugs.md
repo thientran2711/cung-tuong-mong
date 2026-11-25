@@ -1,0 +1,2 @@
+# flight2-s9d bugs
+Life flight2-s9d (iPad 1180x820, bot=cautious, seed 2026112524, LIVE 5e013076, harness 496b6b66): 0 bugs, 0 dead buttons, 0 stuck. Natural death: "Hong nhan bac menh - Quy phat den kiet suc ma chet", age 18, buoi 44, year 1, 254 real taps, exitPick null (declined exit road «Tạ ơn, xuất giá» at buoi 26 → «Xin ở lại»). Cause: Quy nhan Nghiem Van La scolding dialog at buoi 43-44. Shots not in git (36 MB local).
