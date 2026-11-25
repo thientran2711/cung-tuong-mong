@@ -30,3 +30,6 @@ Head tilt: every prompt keeps the source's head angle ("recognizable head bearin
 
 ## OWNER 25/11 (verbatim, after the head-tilt question): "Khoan vẽ hình nha, để tôi sửa prompt đã."
 → HOLD: no redo gens until the owner delivers her edited prompt(s). Then apply her prompt + this M09 recipe (refs/settings above).
+
+## OWNER 25/11 NEW FACE PROMPT PACKAGE (supersedes the hold): Face_Prompts_Rosy_Skin_Upright.zip — 30 prompts FACE-REUSE-<FAMILY>-AGE<nn>-DUAL-REF-01(-04 for Dignified/Gentle 39)-RESTORED-UPRIGHT-02 (≈6.8k chars, operator sentence kept, fits); IMAGE 2 = Face_Style_Master_No_Text.png (sha 14b67de2… = Magnific UPf76Ptwny); restored rosy-peach skin wording + upright head; prints caption "<Family> | Age <nn>". Owner: "Ok, dùng cái prompt này để tạo một người đi."
+Test (D depth 8): s18 Alluring 16, refs [LwtggCqswO image, UPf76Ptwny image], prompt verbatim, gpt-2-6 2k auto → jUIwiGBLD0. Cheek b*/a* 0.94 (old 1.07, M09 0.66); head upright/forward OK; caption printed as the prompt orders. Package copy: D scratchpad rosy/ (owner upload e9b0dda5). Awaiting owner verdict before any batch.

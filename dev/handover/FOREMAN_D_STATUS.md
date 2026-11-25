@@ -486,3 +486,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - FROM MAIN 132 (03:32Z): LIVE → 7dbfe98a (visitor).
 - FROM MAIN 132 (04:01Z): LIVE → 49f17d4d (day-queue-2).
 - (25/11 04:16Z) ROOT D wake: LIVE 49f17d4d (visitor 7dbfe98a landed = chain end) → remerge seat Na1itJyT told to re-merge d-followups-1-rv / law1-gifts-rv / palace-distance-rv / robot10-nc-fix-4-rv on the new LIVE, LAND READY → LC13 + MAIN 132. Redo still ON HOLD (no owner prompt). Next wake ~05:16Z.
+- (25/11) Owner new face package Face_Prompts_Rosy_Skin_Upright.zip; 1 test s18 A16 jUIwiGBLD0 (b/a 0.94, upright). Logged in m09-redo/RECIPE.md. Spend total 1893 cr.
