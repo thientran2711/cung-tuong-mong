@@ -23,10 +23,35 @@ New player words to pass to CO-NGU-TITLES: the 8 new option names above, the fra
 
 ## G4 — never blocks the Hoàng hậu road
 - **Code guarantee (G1/G2, holds for every temper and every NPC, law 1):** outbursts can cost at most Danh 6, Đức 3, the Hoàng hậu's thiện cảm 8 per 36 tuần (`BAL.ea.pick.cap`) and one Phạm thượng per 36 tuần; Sủng and Thái hậu regard are never an outburst cost (Sủng only a gain: Trang điểm, Thêu túi thơm, Chủ động mời). Against Danh 78 / the th / hh gates this is a small, bounded bill; what differs by temper is WHO likes her (T2's perception), not the road.
-- **Robot arms (temper-hh.js on runb):** BLOCKED by a pre-existing harness fault — `runb.js sens` gives TIMEOUT at turn 0 for every life on **main 9f72524b too** (checked: main build, 2 lives, both TIMEOUT `mg:true`/`Q:2` at start), so no arm data. The arms script is ready (`node dev/measure/temper-hh.js run 12 <dir>` then `sum`); rerun once the runb start flow is fixed (or port intemper.js to the review/robot-realtap harness).
+- **Robot arms (temper-hh.js on runb, round 0):** BLOCKED by a pre-existing harness fault — `runb.js sens` gives TIMEOUT at turn 0 for every life on **main 9f72524b too** (checked: main build, 2 lives, both TIMEOUT `mg:true`/`Q:2` at start), so no arm data. The arms script is ready (`node dev/measure/temper-hh.js run 12 <dir>` then `sum`); rerun once the runb start flow is fixed (or port intemper.js to the review/robot-realtap harness).
 
 ## Regression
 - dev/test/emotion-acts.js @Fold: branch = main (same 4 pre-existing fails on main: gian, vui, scoldlive, hit — not touched here); the `gen` case updated to the choice frame (canon overwrite of «only Tiếp tục»).
 
 ## READY
 review/temper-outburst — commits 15221b8b, 640d85d5, 20499335 + emotion-acts fix. SẴN SÀNG KIỂM (BIG review). Open item: G4 robot arms (harness blocker above).
+
+## ROUND 2 — review FAIL fixes (seat T1b, worker session_01D3E3NaH1eX32YRAhiQCYnb, 25/11) — commit 6b85187e
+PRIORITY #1 CHECK: review-temper-outburst.md (F1–F3, N1–N3) read in full | jemoact eaPx / eaOptX / eaDo khac / eaHoi / BAL.ea.fx + hoi, jfeel caugat | robot-rt.js Seat reused (review/robot-realtap 4523381f) | claims: this seat.
+- **F1 signs (whole family, LAW 11)** — `lu()` rows = losses that RAISE another's Oán / ghen, printed «+n»: khac, cham, noimoc, kexau, khoe, moi, khoetai. Scan `dev/measure/temper-signs.js` (every R_ row + jfeel act, a fixed non-queen rival at her rank, + the outrank case):
+
+| key | label | applied | shown BEFORE (394e6ea6) | shown AFTER |
+|---|---|---|---|---|
+| khac | X oán ngươi | +10 | −10 WRONG | +10 |
+| cham / noimoc | X oán ngươi | +3 | −3 WRONG | +3 |
+| kexau | X oán ngươi | +10 | −10 WRONG | +10 |
+| khoe / moi | kẻ ganh ghen | +6 | −6 WRONG | +6 |
+| khoetai | kẻ ganh ghen | +5 | −5 WRONG | +5 |
+| khac, X outranks her | (branch) | hỏi tội | «X oán ngươi −10» WRONG | «X sẽ đến hỏi tội (đền Bạc 16, Danh −1)» |
+| 10 falling rows (thiện cảm cung nữ / cung nhân / người kia / X / Hoàng hậu) | | −n | −n OK | −n OK |
+Total: before 8 wrong / 17 rows → after 0 / 17. eaDo's own line now «X oán ngươi +10» (was no number).
+- **F2** — eaPx `khac` follows eaDo's `hi` branch: her → hỏi tội, priced = the eaHoi «Tạ lỗi, đền bạc» bill (bạc + Danh − the Hoàng hậu/consort thiện cảm won back) with `BAL.ea.hoi.bac` 20 → 16 so it sits in 10 ± 8 (net 15); NPC → Oán `hiOan` 20 → 15; an NPC never takes the option when eaDo would punish her (queen / rank gap ≥ punRk: `eaKhacOk`), so no option carries a hidden cấm túc.
+- **F3** — Mắng loy 5 → 4 (net 8); Đánh loy 4 → 5, Danh 0 → 1 («mang tiếng ác»), Đức 1 → 0 (net 15); jfeel Cáu gắt loy 5 → 4 (≤ Mắng). Victim order: Cáu gắt 4 ≤ Mắng 4 < Đánh 5 (+ Danh).
+- **N1** own build committed (index.html + sw.js). **N2** hot case sets real feelings, asserts the vent: −92 → −77 (= pick.vent 15) Fold, same iPad. **N3** noted for T2.
+- Gates: temper-equal.js 36 rows fail 0, 330 cells (0 under 3, 0 spread fail), 0 errors · temper-outburst.js Fold 755x1000@2 + iPad 1180x820@2 PASS (0 dead, 0 errors; shots looked at) · emotion-acts.js @Fold FAIL 5 = the reviewer's branch count, all pre-existing (gian, vui, scoldlive, hit…) · quickcheck.sh not finished here (timed out at 10 min: the 4 G4 robot lives hold all 4 CPUs) — reviewer please run it.
+
+## G4 robot arms on the REAL-TAP harness (seat T1b) — commit fca15148
+`dev/measure/temper-hh-rt.js` (run / sum) + `intemper-rt.js`: robot-rt.js `Seat` (review/robot-realtap 4523381f, copied unchanged) plays each life with real taps, bot sens, Fold; the arm (hot / even / timid nết, off = hot with no outburst) is set on page load (pre-life, no tap). Lives run to death / real ending (owner 25/11 ~05:15Z, no cap); ~20 s per buổi here. RUNNING: 4 arms × 3 lives, par 4, out /home/user/wt/tp-g4 (game = build fca15148, i.e. before the round-2 number tweaks). Numbers: added here when the lives end (`node dev/measure/temper-hh-rt.js sum /home/user/wt/tp-g4`). Smoke (slice 6 buổi): temper=hot read back; one «Tâm trạng · <name>» «Lui» ×3 no-effect (known dup person-dialog case of the harness report).
+
+## READY round 2
+review/temper-outburst 6b85187e — SẴN SÀNG KIỂM (round 2, same reviewer).
