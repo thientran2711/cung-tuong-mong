@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"17b66c20","t":"2026-11-25T14:24Z","c":"net-ghen-2 W10: relshow-scan refuses to run without a fresh BAL dump (W9's «RAW 29» = 29 falls read as sign 0 because dev/test/relshow-bal.…","b":"9539ad6c54bd","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"02b218e1","t":"2026-11-25T15:13Z","c":"net-ghen-2 W10 (RV4 N2/N3/N5): jshelf seen luxury + ngự ban raise through j1 ghenUp (one raise rule: her → ghen + Chạnh lòng, NPC → oán × g…","b":"306a411e9af2","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38787,7 +38787,7 @@ BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-1
 BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostMid:.67,hostHi:1.33};
 BAL.net.bandHi=.5;
 BAL.net.heat={ghenK:.45,affK:.6};
-/* review/net-ghen (robot: NPC→her ghen p50 99, 42 % of every rise toward her was CAUSED BY ANOTHER CONSORT — «bị X khiêu khích», «thấy X khoe quà»,
+/* review/net-ghen (robot: NPC→her ghen p50 99, 59 % of every rise toward her was CAUSED BY ANOTHER CONSORT (RV4 robot on 96c2859e: 15168 of 25898 ghenUp gain) — «bị X khiêu khích», «thấy X khoe quà»,
    «bị X giành đêm» — and the fade was a flat −1 a turn): ghenOanK = jealousy caused by another consort becomes oán toward HER × this (j1 ghenUp,
    jshelf seen luxury; was jshelf npcOanK .5) · ghenCool = the one cooling rule (j28 ghenCool, every holder incl. her v.pg): each turn
    (fade[not thân, thân] + ghen × k) ÷ persF ghen, at least 1. */
@@ -86678,12 +86678,12 @@ const AG3={stat:{opt:0,land:0,by:{}}};
 function p3On(){try{return !!(agOn()&&BAL.ag.par3&&BAL.ag.par3.on)}catch(e){return false}}
 function p3Nm(p){return p===S?"ngươi":p&&p.name||""}
 function p3Ap(p,x){if(!x||!Object.keys(x).length)return;if(p===S)apply(x);else ap(p,x)}
-/* every other consort's jealousy rises when someone dances before the whole harem (her card: ghenAll; an NPC dancer: the others, her included in ghen of NPCs only) */
+/* every other consort's jealousy rises when someone dances before the whole harem (her card: ghenAll → their ghen of her; an NPC dancer: j1 ghenUp → the others' oán toward the dancer × BAL.net.ghenOanK, so her card text says ghen and an NPC dancer's says oán (W10, RV4 N3)) */
 function p3GhenAll(p,n,why){if(p===S)return ghenAll(n,why);const d=ghenN(n);liveRivals(true).forEach(v=>{if(v!==p)ghenUp(v,d,why||`thấy ${p.name} nổi bật hơn người`,p)})}
 /* ---------------- the player cards, built once ---------------- */
 const P3C={
  dance:p=>{const X=BAL.ag.par3.dance;return{n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{...X.c},o:odA(p,X.o+(p.sac||0)/X.sacD*(p===S&&has("mesac")?X.mesac:1)+((p.arts&&p.arts.vu)||0)*X.vu),
-  w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance,`${p===S?"ngươi":p.name} múa được Hoàng thượng khen`)}},
+  w:{...X.w},l:{...X.l},x:p===S?`phi tần ghen +${ghenN(BAL.ghen.dance)}`:pvOanAny(ghenN(BAL.ghen.dance)*BAL.net.ghenOanK,"phi tần oán nàng ta"),go:()=>p3GhenAll(p,BAL.ghen.dance,`${p===S?"ngươi":p.name} múa được Hoàng thượng khen`)}},
  /* 2f2: a REAL person (the most willing servant of another palace, tmBest); the roll IS her choice (tmOdds: traits, lòng, what she wants);
     a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
  eyes:p=>{const X=BAL.ag.par3.eyes;const s=typeof tmBest==="function"?tmBest(p):null;
@@ -90908,9 +90908,10 @@ window.shelfLook=shelfLook;window.shelfSeen=shelfSeen;window.shelfNow=shelfNow;
 function shelfReact(obs,t){if(!obs||!t||obs===t||obs===S)return"";const B=BAL.shelf.see;obs.shR=obs.shR||{};const k=wdKey(t);if(obs.shR[k]!=null&&wk()-obs.shR[k]<B.cdW)return"";obs.shR[k]=wk();
  const x=shelfLux(t);if(!x.n)return"";const pl=shelfLvFor(obs,t),ta=shelfTaste(obs);const sup=obs.queen||rkOf(obs)>rkOf(t);let m=1;try{m=tv(LUX_TR,obs)||1}catch(e){}
  /* by HER OWN eye (taste): too lavish → a superior frowns, a peer envies; to her liking → admired, a lover of show admires more */
- if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else{const n=Math.round(B.ghen[pl]*m);if(t===S)obs.ghen=cl((obs.ghen||0)+n,0,100);else oanAdd(obs,t,n*BAL.net.ghenOanK)}}
+ /* W10 (RV4 N2, one raise rule): every jealousy rise goes through j1 ghenUp — t = her → obs.ghen + the Chạnh lòng feeling; t = an NPC → obs's oán toward t × BAL.net.ghenOanK */
+ if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else ghenUp(obs,Math.round(B.ghen[pl]*m),`thấy ${t===S?"ngươi":t.name} bày đồ xa hoa`,t)}
  else if(pl===1)affAdd(obs,t,B.fitAff+Math.round(Math.max(0,ta)*BAL.shelf.taste.likeAff*(x.lv>=2?1:.5)));
- if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th")){if(t===S)obs.ghen=cl((obs.ghen||0)+B.nguGhen,0,100);else oanAdd(obs,t,B.nguGhen*BAL.net.ghenOanK)}
+ if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th"))ghenUp(obs,B.nguGhen,`thấy ${t===S?"ngươi":t.name} bày đồ ngự ban`,t)
  if(x.wither)affAdd(obs,t,B.witherAff);return SHELF_LV[pl]}
 window.shelfReact=shelfReact;
 function shelfSee(obs,t,by){const r=shelfLook(obs,t,by,true);if(r)shelfReact(obs,t);return r}
@@ -98350,7 +98351,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9539ad6c54bd";window.CTM_BUILD=BUILD;
+const BUILD="306a411e9af2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
