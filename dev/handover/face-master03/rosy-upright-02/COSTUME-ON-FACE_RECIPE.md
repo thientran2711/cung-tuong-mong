@@ -11,3 +11,8 @@ refs [image jUIwiGBLD0, style eIyOFEidqL]; line 1 = "GENERATION MODE: Create one
 
 ## Owner prompt FACE-REUSE-ALLURING-AGE16-DUAL-VISUAL-ROSY-06 (25/11, run verbatim) → dtNm4CnXSL
 refs [image jUIwiGBLD0 (= owner's left image, full-res original), image YMSDsAaWeC (owner's right "preferred" portrait, uploaded)]; gpt-2-6 2k auto. Cheek b/a 0.94, a* 12.7 (img1 0.96/11.4, img2 1.09/11.5). Result ≈ image 1 almost unchanged (same hair, pins, pose, framing); only slightly rosier cheeks/lips; image 2's painting look barely transferred.
+
+## NEW STYLE MASTER TEST (owner 25/11: replace M09 / Face_Style_Master with her preferred Alluring-16 portrait, Magnific YMSDsAaWeC, 1024x1536)
+Prompt = Prompts/FACE-REUSE-ALLURING-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02.txt with ONLY "Face_Style_Master_No_Text.png" (2x) → "the preferred style portrait". refs [image <original identity upload>, image YMSDsAaWeC]; gpt-2-6 2k auto.
+s18 LwtggCqswO → 6AKGNfaiJO (a* 13.0, b/a 0.79) · s34 P3HNNsi42C → yiF3OvcPW9 (12.7, 1.02) · s58 vQzCEHRa47 → ksXlKMv16B (13.8, 0.81). Style master itself a* 11.5 b/a 1.09.
+Result: painting/skin/pin of the master transferred strongly (rosy, soft, gold-branch pin), source hairstyle and face kept (s58 bun = her source), head upright, mark kept. Sent to owner; awaiting verdict.
