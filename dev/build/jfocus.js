@@ -134,7 +134,7 @@ function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoS
  (r.deltas||[]).forEach((d,i)=>{const s=document.createElement("span");s.className="kfoc-delta";s.innerHTML=typeof chip==="function"?chip(esc(d.t||d),d.cls||""):esc(d.t||d);const g=F.geo;s.style.left=(g.cx+(i-(r.deltas.length-1)/2)*70)+"px";s.style.top=(g.top+g.ih*.45)+"px";F.el.appendChild(s);
   if(still()||!s.animate){setTimeout(()=>s.remove(),KIT_FOC.reactMs);return}
   const a=s.animate([{opacity:0,transform:"translate(-50%,0)"},{opacity:1,transform:"translate(-50%,-18px)",offset:.2},{opacity:1,transform:"translate(-50%,-46px)",offset:.75},{opacity:0,transform:"translate(-50%,-60px)"}],{duration:KIT_FOC.reactMs,delay:i*120});a.onfinish=()=>s.remove()})}
-function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();/* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
+function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();F.el.classList.add("kfoc-closing");/* robot M1 25/11 (DEAD BUTTON, Hành sự cards covered by .kfoc-veil/.kfoc-fig for ~0.8 s after ✕): the layer is only the closing animation now — taps go through to what is under it at once *//* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
  if(still()){const a=wa(F,F.el,[{opacity:1},{opacity:0}],{duration:K.fadeMs});if(a)a.onfinish=()=>destroy(F,1);else destroy(F,1);return}
  [...F.el.querySelectorAll(".kfoc-b")].forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.85)"}],{duration:K.foldCloseMs}));wa(F,F.tabs,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});wa(F,F.plate,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});
  const d=feetDelta(F);F.img.style.transformOrigin="50% 100%";
@@ -200,6 +200,7 @@ html.kfoc-playing #kfxcv,html.kfoc-playing .kfx-fl,html.kfoc-playing .kfxk,html.
 .kfoc-tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;color:var(--ink,#3a2418);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
 .kfoc-tag .j59n{display:block;line-height:1.2;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
 .kfoc-play{position:absolute;z-index:4}
+.kfoc-closing,.kfoc-closing *{pointer-events:none!important}
 .kfoc-hud{position:absolute;left:56px;right:56px;top:0;display:flex;justify-content:center;gap:10px;padding:6px;z-index:5}
 .kfoc-say{position:absolute;left:12px;right:12px;bottom:10px;margin:0 auto;max-width:760px;min-height:84px;max-height:132px;box-sizing:border-box;padding:18px 14px 10px 76px;border-radius:12px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);z-index:6;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .kfoc-say p{margin:0;font-size:.95rem;line-height:1.35;}
