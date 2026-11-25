@@ -120,9 +120,9 @@ setTimeout(()=>setTimeout(()=>{try{dqInstall()}catch(e){console.error("dayq inst
    nothing on screen shows it), the button SAYS WHY with the one waiting-words table (CTM_WAIT.dqHeld) in the same wrapping look as the co-op wait
    (#next.kcwait, jcoopworld lockNext); the normal label comes back at the next render once the card is shown. Solo only (dqUi), like the hold. */
 function dqNextCue(){try{const n=document.getElementById("next");if(!n)return;const M=document.getElementById("modal");
- const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const t=window.CTM_WAIT&&CTM_WAIT.dqHeld;
+ const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const W=window.CTM_WAIT||{};const t=held&&W.dqRoom&&typeof dqRoomWait==='function'&&dqRoomWait()?W.dqRoom:W.dqHeld;/* button-crawl-fix-6 (A) */
  if(held&&t){if(!n.dataset.dqCue){n.dataset.dqCue="1";if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait")}if(n.textContent!==t)n.textContent=t;n.title=t}
- else if(n.dataset.dqCue){delete n.dataset.dqCue;n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if(n.textContent===t)n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
+ else if(n.dataset.dqCue){delete n.dataset.dqCue;n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if(n.textContent===W.dqHeld||n.textContent===W.dqRoom)n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
 setTimeout(()=>setTimeout(()=>{try{if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);dqNextCue();return r}}
  setInterval(dqNextCue,700)/* the hold releases on a close that may not render */;
  try{const n=document.getElementById("next");if(n)new MutationObserver(()=>dqNextCue()).observe(n,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["disabled"]})}catch(e){}/* an inner render (a wrapper's saved r0) rewrites the label: put the cue back at once, no flicker; idempotent (no write when equal) */}catch(e){console.error("dayq cue",e)}},0),0);
@@ -139,3 +139,26 @@ function dqWake(){try{const M=document.getElementById("modal");const m=Q[0];
 setTimeout(()=>setTimeout(()=>{try{setInterval(dqWake,700)}catch(e){}},0),0);
 window.dqWake=dqWake;
 window.DQ=DQ;
+/* button-crawl-fix-6 (F #12 25/11 12:53Z; BIG REVIEWER #4 bc-stack-review.md @3b8ed32e; robot s4d no-clock loops y8/y11, handover 37cfc029):
+   «Sang buổi / Sang ngày mới» greyed while NOTHING on screen shows what it waits for — two more members of the fix-5 family:
+   (A) a visitor / person scene («Có người đến», jdfv encounter: Q[0].dfSeen, DF.encM === Q[0]) plays only in HER ROOM; a tap on another tab parks it
+       (dfTabLayers hides .kfoc) and the turn waits on it for ever while she is on Dư đồ / a place page (s4d: «Tích Cần viện», 150 taps, Q = 1).
+       → the button says so (CTM_WAIT.dqRoom) and ONE tap on it takes her back to her room, where the scene goes on (same as tapping «Hành sự»).
+   (B) a STALE S.mg (a lesson / mini-game record with no mini-game screen: #ov hidden, no on-figure game) → the button stays greyed with no cue.
+       → the safety net reopens it the way loading a save does (resumeMG; jk4 clears S.mg when no game opens), after BAL.dayq.wake ms, solo only;
+       a tap on the greyed button does the same at once.
+   Paint / navigation only: no random draw, no new S key; co-op rooms untouched (dqUi). */
+function dqRoomWait(){try{const m=Q[0],D=window.DF;return dqUi()&&!!m&&typeof tab!=="undefined"&&tab!=="act"&&!!(m.dfSeen&&D&&D.encM===m&&D.F)}catch(e){return false}}
+function dqMgStale(){try{if(!dqUi()||!S.mg)return false;const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return false;if(window.DF&&DF.play)return false;
+  const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn())return false;
+  for(const sel of [".kmov:not(.km-out)","#kmrew","#kpodov",".kroul-ov","[id^=\"kroul\"]","#title","#kload"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+function dqBring(){try{if(dqRoomWait()){DQ.stat.room=(DQ.stat.room||0)+1;tab="act";render();return true}
+  if(dqMgStale()){DQ.stat.mgStale=(DQ.stat.mgStale||0)+1;const k=S.mg&&S.mg.k;try{resumeMG()}catch(e){console.error("dayq mg",e)}try{const ov=document.getElementById("ov");if(S.mg&&ov&&dqHidden(ov)){console.warn("dayq: stale mini-game record cleared",k);S.mg=null}}catch(e){}render();return true}
+  const M=document.getElementById("modal");if(dqUi()&&Q.length&&M&&dqHidden(M)&&dqFreeScreen()){showModal();return true}}catch(e){console.error("dayq bring",e)}return false}
+/* a disabled button gets no click: the tap is read on pointerup (like jact's grey cards); only when the turn cannot run (greyed, or a card / S.mg left
+   while the button was not re-rendered — robot s4d LIVE: enabled «Sang buổi», Q = 1, 150 taps with no effect) */
+document.addEventListener("pointerup",e=>{try{const n=e.target&&e.target.closest&&e.target.closest("#next");if(!n||!dqUi()||!(n.disabled||Q.length||S.mg))return;dqBring()}catch(x){}},true);
+(function(){const t0=setInterval(()=>{try{if(!DQ.mgw){if(dqMgStale())DQ.mgw={at:Date.now(),k:S.mg};return}if(!dqMgStale()||S.mg!==DQ.mgw.k){DQ.mgw=null;return}
+  if(Date.now()-DQ.mgw.at>=((BAL.dayq&&BAL.dayq.wake)||2000)){DQ.mgw=null;dqBring()}}catch(e){}},700)})();
+/* the cue: (A) says where the waiting person is (CTM_WAIT.dqRoom, in dqNextCue above); the m-fix-1 cue (dqHeld) stays for every other held card */
+window.dqBring=dqBring;
