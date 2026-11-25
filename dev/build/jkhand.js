@@ -16,12 +16,12 @@ function kitHandH(){try{return kitView().h||innerHeight}catch(e){return innerHei
 /* layout: slots per card (x, y, rotation) inside the list box; the box gets the hand height; idempotent per (width, count) */
 function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)return;const K=KIT_HAND,ip=kitHandWide(),W=g.clientWidth;if(!W)return;
  const sig=W+"|"+n+"|"+kitHandH();if(g.__khSig===sig&&g.classList.contains("khand"))return;g.__khSig=sig;
- const gap=K.gap[ip],side=4,fit=Math.max(1,Math.floor((W-2*side+gap)/(K.minW[ip]+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
+ const gap=K.gap[ip],side=Math.round(10+K.maxW[ip]*1.5*.045)/* frame padding + what a turned outer card swings out */,fit=Math.max(1,Math.floor((W-2*side+gap)/(K.minW[ip]+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
  let cw=Math.min(K.maxW[ip],(W-2*side-(per-1)*gap)/per);const fs=cw<100?K.nameFs[0]-.5:K.nameFs[ip];
  const face=h=>Math.round(h-10+fs*1.15*2+22+14);/* picture square (card width − padding) + 2 name lines + the odds meter row + gaps */
  let ch=face(cw);const lift=Math.round(ch*K.liftK);
  /* the hand may take at most ~46 % of the screen height (the story text and the speaker keep the rest; law 10) */
- const cap=Math.round(kitHandH()*(ip?.36:.40));const need=()=>lift+6+rows*ch+(rows-1)*gap+8;
+ const cap=Math.round(kitHandH()*(n>(ip?5:6)?.46:(ip?.36:.40)));const need=()=>lift+6+rows*ch+(rows-1)*gap+8;
  while(need()>cap&&cw>K.minW[ip]*.78){cw-=4;ch=face(cw)}
  g.classList.add("khand");g.dataset.khand=n;g.dataset.khrows=rows;g.style.setProperty("--khw",Math.floor(cw)+"px");g.style.setProperty("--khh",ch+"px");g.style.setProperty("--khfs",fs+"px");g.style.setProperty("--khlift",lift+"px");
  let maxY=0;bs.forEach((b,i)=>{const r=Math.floor(i/per),k=i%per,inRow=r<rows-1?per:n-per*(rows-1),rowW=inRow*cw+(inRow-1)*gap,x=(W-rowW)/2+k*(cw+gap),mid=(inRow-1)/2,d=k-mid;
@@ -34,15 +34,18 @@ function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)retu
 function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let z=dl.querySelector(":scope>.khplate");if(!z){z=document.createElement("div");z.className="khplate";z.setAttribute("role","status");dl.appendChild(z)}
  const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
- ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown");c.classList.add("kopinfo");c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");
+ ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown");c.classList.add("kopinfo");if(b.disabled)c.classList.add("khlock");c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");
  const tip=document.createElement("div");tip.className="khtip";tip.textContent=b.disabled?"":"Chạm lần nữa để chọn";z.innerHTML="";z.appendChild(c);if(tip.textContent)z.appendChild(tip);
  const D=dl.getBoundingClientRect(),G=g.getBoundingClientRect(),fig=dl.querySelector(".kszfig,.spk>.pfwrap,.spk>figure"),hd=dl.querySelector(":scope>.kph");
  let l=Math.max(D.left+8,G.left),r=Math.min(D.right-8,G.right);const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;
  const bottom=Math.min(G.top+lift+2,b.getBoundingClientRect().top-6);/* plate ends above the lifted card */
- if(fig&&fig.getClientRects().length){const F=fig.getBoundingClientRect();if(F.bottom>bottom-40&&F.right<r-200)l=Math.max(l,F.right+8)}/* the speaker's figure is never covered (brief: announcer never covered) */
- const w=Math.min(KIT_HAND.plateW,r-l),top0=(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top)+6;
+let top0=(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top)+6;
+ /* the speaker's figure is never covered (brief: announcer never covered): the plate goes beside it when there is room (>= 260 px), else it stays under the figure's feet and scrolls inside */
+ const F=fig&&fig.getClientRects().length?fig.getBoundingClientRect():null;z.hidden=false;z.style.maxHeight="";z.style.width=Math.min(KIT_HAND.plateW,r-l)+"px";const ph=z.offsetHeight;
+ if(F&&F.bottom>bottom-ph&&F.right>l&&F.left<r){if(r-(F.right+8)>=260)l=Math.max(l,F.right+8);else top0=Math.max(top0,F.bottom+4)}
+ const w=Math.min(KIT_HAND.plateW,r-l);
  const B=b.getBoundingClientRect();let x=Math.round(Math.max(l,Math.min(r-w,B.left+B.width/2-w/2)));
- z.style.left=(x-D.left)+"px";z.style.width=w+"px";z.style.bottom=(D.bottom-bottom)+"px";z.style.maxHeight=Math.max(80,bottom-top0)+"px";z.hidden=false;
+ z.style.left=(x-D.left)+"px";z.style.width=w+"px";z.style.bottom=(D.bottom-bottom)+"px";z.style.maxHeight=Math.max(80,bottom-top0)+"px";
  if(!kitHandStill())z.animate([{transform:"translateY(10px)"},{transform:"none"}],{duration:160,easing:"ease-out"})}catch(e){console.error("kitHandPlate",e)}}
 function kitHandStill(){try{return typeof kfStill==="function"?kfStill():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function kitHandDrop(g){if(!g)return;g.querySelectorAll(":scope>button.klift").forEach(x=>{x.classList.remove("klift");x.removeAttribute("aria-pressed")});const dl=g.closest(".dlg"),z=dl&&dl.querySelector(":scope>.khplate");if(z)z.hidden=true}
@@ -92,5 +95,6 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{position:sticky!importan
 #modal .dlg>.khplate{position:absolute;z-index:6;display:flex;flex-direction:column;gap:4px;overflow:auto;pointer-events:none;filter:drop-shadow(0 6px 14px rgba(60,30,10,.28))}
 #modal .dlg>.khplate[hidden]{display:none}
 #modal .dlg>.khplate>button.kopinfo{width:100%;margin:0;text-align:left;opacity:1!important;filter:none!important;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;cursor:default}
+#modal .dlg>.khplate>button.kopinfo:not(.khlock) .kodds{filter:none!important;opacity:1!important}/* the plate is a disabled COPY: its meter keeps the live colours unless the card is locked */
 #modal .dlg>.khplate>.khtip{align-self:center;font-size:.8rem;padding:2px 12px;border-radius:999px;background:var(--k-card,#fffaf0);color:var(--ink,#2a1a12);box-shadow:0 0 0 1px var(--k-gold,#c9a24a)}
 `;document.head.appendChild(st)})();
