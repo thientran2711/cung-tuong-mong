@@ -33,7 +33,7 @@ const EXIT_IDS = ['Xuất gia', 'Dâng biểu xuất gia', 'Xuất cung về qu�
   'Cao chạy xa bay', 'Xuất giá', 'Được ban hôn', 'Vào vương phủ', 'Thành thân', 'Bỏ trốn']; // 'Bỏ trốn' F #15 25/11 21:55Z (FOREMAN E 21:36Z): elopement = bot-chosen exit even when it ends in death
 // game-imposed: j42:303 «Xuất cung tuổi N» (Nội vụ phủ age-out, no choice), Ma ma, Bị đuổi khỏi cung, Lãnh cung, Thái phi, ...
 // exit-road option labels as the robot-rt harness blacklists them (EXIT_RE in dev/test/robot-rt.js)
-const EXIT_TAP_RE = /xuất gia|xuất cung|về quê|thứ dân|bỏ cuộc|kiếp mới|luân hồi|an nhiên|giả chết|cao chạy|xuất giá|thành thân|vương phủ|ban hôn|bỏ trốn|đi theo chàng|kết:\s*(bỏ trốn|xuất|tự vẫn|tự tận|quyên sinh|cao chạy|rời cung)/i;
+const EXIT_TAP_RE = /xuất gia|xuất cung|về quê|thứ dân|bỏ cuộc|kiếp mới|luân hồi|an nhiên|giả chết|cao chạy|xuất giá|thành thân|vương phủ|ban hôn|^\s*bỏ trốn(?!g)|trốn khỏi cung|đi theo chàng|kết:\s*(bỏ trốn(?!g)|xuất (gia|cung|giá)|tự vẫn|tự tận|quyên sinh|cao chạy|rời cung)/i;
 const NOEND_TYPES = { cap: 'wall cap (no ending)', stuck: 'stuck / timeout (abandoned)', softlock: 'soft-lock (abandoned)',
   crash: 'crash (abandoned)', harness: 'harness error (no life)', '?': 'no ending recorded' };
 const NOEND_IDS = { CAP: 'cap', TIMEOUT: 'stuck', SOFTLOCK: 'softlock', CRASH: 'crash', HARNESS: 'harness' };
