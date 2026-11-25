@@ -73,7 +73,11 @@ async function rx(ev,s){if(s&&ws!==s)return;lastRx=Date.now();let m;
   if(m.ps!=null){try{s.send('{"t":"here"}')}catch(e){}}}
  else if(m.t==="presence"){if(old)return;/* an older view is dropped whole (its buổi / bended too) */
   /* a view that says exactly what this seat already holds (the answer to its own "who" most of the time) changes nothing: no game event */
-  const sig=JSON.stringify([m.seats,m.ended,m.week,m.buoi,m.bended]);if(m.ps!=null&&sig===lastSig){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);return}lastSig=sig;
+  const sig=JSON.stringify([m.seats,m.ended,m.week,m.buoi,m.bended]);if(m.ps!=null&&sig===lastSig){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);return}/* review/coop-presence-reload-rv: the answer to this seat's own "who" (Worker who:1) is a CHECK, not news. When it shows the same seats /
+     ended / week this seat already holds it fires no game event (its buổi / bended would run nCheck / lockNext / the night timer at a random
+     moment base never had: coop-e2e week 3 after rebirth held the host's «Sẵn sàng»); only a real change (the stale «đang vắng» it heals) is told */
+  if(m.who&&JSON.stringify([m.seats,m.ended||st.ended,m.week!=null?m.week:st.week])===JSON.stringify([st.seats,st.ended,st.week])){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);selfCheck(m);return}
+  lastSig=sig;
   set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week})}
  if((m.t==="room"||m.t==="presence")&&!old){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);selfCheck(m)}
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});

@@ -172,7 +172,7 @@ export class Room {
     if (t === "ping") return this.send(ws, { t: "pong" });
     /* review/coop-presence-reload: "who" = this seat asks for the room's presence now (its view says the friend is away); "here" = a seat that
        (re)joined and applied its room reply re-announces itself: everybody gets a fresh presence after it */
-    if (t === "who") return this.send(ws, { t: "presence", ps: this.psNext(), seats: this.seatsView(), ended: this.endedView(), week: m.week, buoi: m.buoi || 0, bended: this.bendedView() });
+    if (t === "who") return this.send(ws, { t: "presence", who: 1, ps: this.psNext(), seats: this.seatsView(), ended: this.endedView(), week: m.week, buoi: m.buoi || 0, bended: this.bendedView() });
     if (t === "here") return this.presence();
     if (t === "bend") {
       if (msg.week !== m.week || msg.buoi !== (m.buoi || 0)) return this.send(ws, { t: "error", code: "badbuoi", msg: "tuần " + m.week + " buổi " + (m.buoi || 0) });

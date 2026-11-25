@@ -27,6 +27,7 @@ await R.presence(); const q1 = pres(A).pop(); assert(q1 && q1.ps > p3, "every pr
 A.got = []; B1.got = []; await msg(A, { t: "who" });
 const w = pres(A).pop(); assert(w && w.seats.b.online && w.seats.a.online && w.ps > q1.ps, "who answers the asker with both seats online and a newer ps");
 assert(!pres(B1).length, "who is answered to the asker only");
+assert(w.who === 1, "the who answer is marked who:1 (a check, not news: the client fires no game event when nothing changed)");
 
 /* 3. here: a seat that applied its room reply re-announces; everybody hears a fresh presence */
 A.got = []; B1.got = []; await msg(B1, { t: "here" }); assert(pres(A).length === 1 && pres(B1).length === 1, "here re-announces to both seats");

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2efac0ed","t":"2026-11-25T17:58Z","c":"report: coop-presence-reload (from 5399c31f)","b":"145ae4a7d8c6","h":[{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"}]};
+window.CTM_BI={"s":"f962c7d2+","t":"2026-11-25T17:58Z","c":"coop-presence-reload-rv: index.html/sw.js rebuilt on LIVE 17dfa64d","b":"6f1bda24cfbd","h":[{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -50314,7 +50314,11 @@ async function rx(ev,s){if(s&&ws!==s)return;lastRx=Date.now();let m;
   if(m.ps!=null){try{s.send('{"t":"here"}')}catch(e){}}}
  else if(m.t==="presence"){if(old)return;/* an older view is dropped whole (its buổi / bended too) */
   /* a view that says exactly what this seat already holds (the answer to its own "who" most of the time) changes nothing: no game event */
-  const sig=JSON.stringify([m.seats,m.ended,m.week,m.buoi,m.bended]);if(m.ps!=null&&sig===lastSig){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);return}lastSig=sig;
+  const sig=JSON.stringify([m.seats,m.ended,m.week,m.buoi,m.bended]);if(m.ps!=null&&sig===lastSig){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);return}/* review/coop-presence-reload-rv: the answer to this seat's own "who" (Worker who:1) is a CHECK, not news. When it shows the same seats /
+     ended / week this seat already holds it fires no game event (its buổi / bended would run nCheck / lockNext / the night timer at a random
+     moment base never had: coop-e2e week 3 after rebirth held the host's «Sẵn sàng»); only a real change (the stale «đang vắng» it heals) is told */
+  if(m.who&&JSON.stringify([m.seats,m.ended||st.ended,m.week!=null?m.week:st.week])===JSON.stringify([st.seats,st.ended,st.week])){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);selfCheck(m);return}
+  lastSig=sig;
   set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week})}
  if((m.t==="room"||m.t==="presence")&&!old){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);selfCheck(m)}
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
@@ -98800,7 +98804,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="145ae4a7d8c6";window.CTM_BUILD=BUILD;
+const BUILD="6f1bda24cfbd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
