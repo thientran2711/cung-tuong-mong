@@ -41,5 +41,20 @@ for name, pat, ok in [
 ]:
     print(f'  {name:22s} {"present" if re.search(pat, s) else "MISSING"} — {ok}')
 old = re.search(r'function busy\(\)\{if\(typeof NLP!=="undefined"&&NLP\)return true;', s)
-print('RESULT:', 'FAIL (busy() still waits on bare NLP)' if old else 'PASS (no gate waits on a bare state flag with nothing on screen)')
-sys.exit(1 if old else 0)
+# review/sangbuoi-held-fix (rv 2yv2CZAt): kmFree wrapper FLAGS are blockers too — a queued scene held on a flag whose card a showModal gate
+# holds for THAT scene is a mutual wait (jdayq newsHold ⇄ jnf night gate, Robot M4 ~80 s). Each flag must wait on something ON SCREEN or
+# carry a breaker.
+print('kmFree wrapper flags (what a queued scene waits on):')
+kf_bad = 0
+for name, pat, safe, why in [
+    ('base: #dawn / podium / roulette / #kmrew', r'function kmFree\(\)\{const d=document\.getElementById\("dawn"\)', None, 'visible overlays'),
+    ('jdayq actKm: #ov / DF.play', r'if\(\(ov&&!dqHidden\(ov\)\)\|\|\(window\.DF&&DF\.play\)\)\{DQ\.stat\.actKm\+\+', None, 'activity on screen'),
+    ('jdayq kmTap: one pump inside a tap', r'DQ\.kmTap=1;setTimeout\(\(\)=>\{DQ\.kmTap=0\},0\)', None, 'cleared next task (bounded)'),
+    ('jdayq newsHold: news card in Q', r'if\(DQ\.newsHold\)\{if\(dqUi\(\)&&Q\.some\(dqIsNews\)\)', r'DQ\.stat\.newsLet\+\+;return true', 'breaker: paints the news card; a swallowed paint lets the scene through (newsLet)'),
+    ('jnf night gate pass for the held news', r'window\.dqNewsPass\(\)', r'function dqNewsPass\(\)', 'the news card jdayq holds the unstarted flip for paints first (dqNewsPass)'),
+]:
+    pres = bool(re.search(pat, s)); ok = pres and (safe is None or re.search(safe, s))
+    if not ok and safe is not None: kf_bad += 1
+    print(f'  {name:42s} {"present" if pres else "MISSING"} — {why if ok else "NO BREAKER: mutual wait possible"}')
+print('RESULT:', 'FAIL (busy() still waits on bare NLP)' if old else ('FAIL (a kmFree flag waits on a card a gate holds for that scene)' if kf_bad else 'PASS (no gate waits on a bare state flag with nothing on screen)'))
+sys.exit(1 if old or kf_bad else 0)
