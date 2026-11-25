@@ -9,10 +9,10 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
  await p.goto('http://localhost:8813/'+PAGE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof selxMapGo==='function',null,{timeout:240000});
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:60000});
  const r=await p.evaluate(()=>{const o={};for(let i=0;i<600;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S.origin.k==="tt")break}S.kcPick="cung";nlAccept();window.__selxNoSc=1;
-  const close=()=>document.querySelectorAll(".kmov,#kprevov,#kg82").forEach(x=>x.remove());let card=null;
+  const close=()=>document.querySelectorAll('.kmov,#kprevov,#kg82,[id^="kroul"],.kroul,.kroul-ov,.kbd,#klife').forEach(x=>x.remove())/* review r19 (F3 family, law 11): the «Luân hồi» roulette's wait layer #kroulw is made on a timer after nlAccept; while it is up jdayq holds every card and #modal never shows «Ra Dư đồ» (TypeError on .click, 2 of 4 runs). Close it like a finished spin, as selx-flow does */;let card=null;
   for(let n=0;n<60&&Q.length;n++){const m=Q[0];const nm=(m.opts||[]).map(x=>x.n);if(nm.includes("Ra Dư đồ")){card=m;break}const c=nm.findIndex(s=>/Cất đồ|Theo|Tập thật kỹ|Quỳ|Nghe/.test(s));if(m.opts)chooseM(c<0?0:c);else closeModal();close()}
   o.found=!!card;o.noSang=card&&!card.opts.some(x=>/^Sang /.test(x.n));const q0=Q.length-1;document.querySelectorAll('#rtoast').forEach(x=>x.remove());
-  showModal();const j=card.opts.findIndex(x=>x.n==="Ra Dư đồ");document.querySelector('#modal button[data-m="'+j+'"]').click();render();
+  close();showModal();const j=card.opts.findIndex(x=>x.n==="Ra Dư đồ");document.querySelector('#modal button[data-m="'+j+'"]').click();render();
   o.tab=tab;o.Q=Q.length;o.kept=Q[0]===card&&!!card.selxMapUp;o.hid=document.getElementById('modal').hidden;o.toast=!!document.getElementById('rtoast');o.kpmv=!!document.querySelector('#panel .kpmv');o.rows=[...document.querySelectorAll('#panel .kpm-row')].map(x=>x.dataset.kpmpart);
   o.sel=(document.querySelector('#panel .kpm-row.sel')||{}).dataset;o.sel=o.sel&&o.sel.kpmpart;o.at=S.selx2.at;o.next=document.getElementById('next').disabled;
   const n=[...document.querySelectorAll('#panel .kpm-row')].reduce((a,x)=>a+(+((x.textContent.match(/(\d+) bóng/)||[])[1]||0)),0);o.count=n;o.all=1+selxAll().length;
