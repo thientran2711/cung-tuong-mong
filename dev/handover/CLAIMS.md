@@ -1816,3 +1816,4 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | #19 coop-thin-g EXPRESS re-merge (r3 PASS on LIVE 5e013076; opus BIG co-op; MAIN 146 22:30Z; briefs/b-coop-thin-g-land-express.md) | review/coop-thin-g-r4 | B ROOT 2 | (opening) | RUNNING | 25/11 22:17Z |
 | #22 THIN P8 EXPRESS land check/re-merge (thin-p8-r1 c69d6ec9; opus; MAIN 146 22:30Z; briefs/b-thin-p8-land-express.md) | review/thin-p8-r2 | B ROOT 2 | (opening) | RUNNING | 25/11 22:17Z |
 | F BIG REVIEW s3e-display-fix 290b3bf6 (opus) | review/s3e-display-fix | FOREMAN F #16 | session_01UV1Szk5Kuc4NRRabmCRSNx | RUNNING | 2026-11-25T22:35Z |
+| REVIEW c3-farshot 49d7de45 | review/c3-farshot | FOREMAN C ROOT 3 | session_01PEhRbvrqFY7tXWkmrnJhCD | DONE PASS 49d7de45 | 25/11 22:40Z |
