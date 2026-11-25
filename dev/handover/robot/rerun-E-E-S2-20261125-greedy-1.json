@@ -1,0 +1,7262 @@
+{
+ "job": {
+  "id": "ES2-R2-greedy-1",
+  "origin": "thd",
+  "road": "thd_tro",
+  "bot": "bold",
+  "seed": 2613534650,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "2aad6849",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 12,
+  "cap": null,
+  "stuck": 5,
+  "unstick": [
+   {
+    "at": 312,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 319,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 326,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 332,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 339,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 346,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 353,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 360,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 366,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 373,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 380,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 387,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 393,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 400,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 407,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 414,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 421,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 428,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 434,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 441,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 448,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 455,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 461,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 468,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 475,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 482,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 489,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 495,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 502,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 509,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 516,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 522,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 529,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 536,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 543,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 550,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 556,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 563,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 570,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 577,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 583,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 590,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 597,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 604,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 611,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 618,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 624,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 631,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 638,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 645,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 652,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 658,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 665,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 672,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 679,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 685,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 692,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 699,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 706,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 713,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 719,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 726,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 733,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 740,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 747,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 753,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 760,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 767,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 774,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 781,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 788,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 794,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 801,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 808,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 815,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 821,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 828,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 835,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 842,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 849,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 855,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 862,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 869,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 876,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 882,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 889,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 896,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 903,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 910,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 916,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 923,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 930,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 937,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 944,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 950,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 957,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 964,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 971,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 977,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 984,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 991,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 998,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1005,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1011,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1018,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1025,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1032,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1039,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1045,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1052,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1059,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1066,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1072,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1079,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1086,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1093,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1100,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1106,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1113,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1120,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1127,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1133,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1140,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1147,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1154,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1160,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1167,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1174,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1181,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1187,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1190,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1359,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1366,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1812,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 2032,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2039,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2046,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2054,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2061,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2068,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2076,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2085,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2092,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2100,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2107,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2387,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2396,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2405,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2413,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2421,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2430,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2567,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2574,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2581,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2587,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2594,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2601,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2608,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2615,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2621,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2628,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2635,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2642,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2648,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2655,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2662,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2669,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2675,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2682,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2689,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2696,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2703,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2709,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2716,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2723,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2730,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2737,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2743,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2750,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2757,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2764,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2770,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2777,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2784,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2791,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2798,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2804,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2811,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2818,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2825,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2831,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2838,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2845,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2852,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2858,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2865,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2872,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2879,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2886,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2892,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2899,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2906,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2913,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2919,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2926,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2933,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2940,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2946,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2953,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2960,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2967,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2973,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2980,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2987,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 2994,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3001,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3007,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3014,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3021,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3028,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3034,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3041,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3048,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3055,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3061,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3068,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3075,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3082,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3089,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3095,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3102,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3109,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3116,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3122,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3129,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3136,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3143,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3149,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3156,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3163,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3170,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3176,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3183,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3190,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3197,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3203,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3210,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3217,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3224,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3230,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3237,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3244,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3251,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3258,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3264,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3271,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3278,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3285,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3291,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3298,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3305,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3312,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3318,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3325,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3332,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3339,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3345,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3352,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3359,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3366,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3372,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3379,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3386,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3393,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3400,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3406,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3413,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3420,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3427,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3433,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3440,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3447,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3454,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3461,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Nói móc đối thủ"
+   },
+   {
+    "at": 3906,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3913,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3920,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3927,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3935,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3942,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3949,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3957,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3979,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 4149,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 4166,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 4191,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 4199,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 4207,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 4216,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 4718,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 4725,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 4994,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 5448,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 5483,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 5497,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 5969,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 6947,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 7882,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 7889,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 7896,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 7904,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 8147,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8154,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8161,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8167,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8174,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8181,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8188,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8195,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8201,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8208,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8215,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8222,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8229,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8235,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8242,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8249,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8256,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8262,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8269,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8276,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8283,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8289,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8296,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8303,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8310,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8317,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8323,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8330,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8337,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8344,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8350,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8357,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8364,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8371,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8378,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8385,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8391,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8398,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8405,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8412,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8419,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8425,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8432,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8439,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8446,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8453,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8460,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8466,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8473,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8480,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8487,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8494,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8500,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8507,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8514,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8521,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8527,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8534,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8541,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8548,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8555,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8561,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8568,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8575,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8582,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8589,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8595,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8602,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8609,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8616,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8623,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8629,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8636,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8643,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8650,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8656,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8663,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8670,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8677,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8684,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8690,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8697,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8704,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8711,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8717,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8724,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8731,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8738,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8745,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8751,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8758,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8765,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8772,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8779,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8785,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8792,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8799,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8806,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8813,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8819,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8826,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8833,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8840,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8847,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8853,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8860,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8867,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8874,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8880,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8887,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8894,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8901,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8908,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8914,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8921,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8928,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8935,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8941,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8948,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8955,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8962,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8969,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8975,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8982,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8989,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 8996,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 9003,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 9009,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 9012,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 9071,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 9235,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 9242,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 9249,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 9256,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 9405,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9411,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9418,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9425,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9432,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9439,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9445,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9452,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9459,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9466,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9472,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9479,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9486,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9493,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9499,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9506,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9513,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9520,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9527,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9533,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9540,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9547,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9554,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9560,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9567,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9574,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9581,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9587,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9594,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9601,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9608,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9615,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9621,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9628,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9635,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9642,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9649,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9655,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9662,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9669,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9676,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9682,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9689,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9696,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9703,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9709,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9716,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9723,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9730,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9737,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9743,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9750,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9757,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9764,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9771,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9777,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9784,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9791,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9798,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9804,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9811,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9818,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9825,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9832,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9838,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9845,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9852,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9859,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9865,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9872,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9879,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9886,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9892,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9899,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9906,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9913,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9919,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9926,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9933,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9940,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9947,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9953,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9960,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9967,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9974,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9981,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9987,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 9994,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10001,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10008,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10015,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10021,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10028,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10035,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10042,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10048,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10055,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10062,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10069,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10075,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10082,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10089,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10096,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10102,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10109,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10116,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10123,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10130,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10136,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10143,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10150,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10157,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10163,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10170,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10177,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10184,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10190,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10197,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10204,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10211,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10217,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10224,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10231,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10238,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10245,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10251,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10258,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10265,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10272,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10278,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10285,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10292,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10298,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Khóc suốt đêm"
+   },
+   {
+    "at": 10433,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 10440,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 10448,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 10456,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 10523,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 10939,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 10947,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 10954,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 10961,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 10968,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 10977,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 10984,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 11221,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 11793,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 11864,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 85,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 99,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 109,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 269,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 275,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 282,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 289,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 296,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 301,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 380,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 511,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 604,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 777,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 783,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 790,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 797,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 804,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 809,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 960,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 967,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 975,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 981,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 989,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 994,
+    "lvl": 2,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 996,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1003,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1010,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1017,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1024,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1025,
+    "lvl": 2,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1032,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1145,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1151,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1158,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1165,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1172,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1177,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1272,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1288,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1302,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1307,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1354,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1361,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1368,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1375,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1381,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1387,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1445,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1457,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1581,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1588,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1595,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1601,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1608,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1614,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1730,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1737,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1744,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1750,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1757,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1764,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1807,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1814,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1821,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1827,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1834,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1839,
+    "lvl": 2,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1841,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1848,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1855,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1862,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1869,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1869,
+    "lvl": 2,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1876,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 1993,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 2150,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 2157,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 2164,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 2170,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 2177,
+    "lvl": 1,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 2183,
+    "lvl": 2,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 2219,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 2257,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 2274,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 2289,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   }
+  ],
+  "slice": null,
+  "areaTaps": 2175,
+  "scrolls": 6,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T11:54:00.657Z",
+    "buoi": 317,
+    "from": "2026-11-25T11:51:23.173Z"
+   }
+  ],
+  "dlgClose": 196,
+  "infoTaps": 108,
+  "loops": 20,
+  "dlgScroll": 2,
+  "taps": 4541
+ },
+ "life": {
+  "id": "Lãnh cung",
+  "type": "end",
+  "fate": "Phát điên trong lãnh cung",
+  "death": false,
+  "age": 21,
+  "year": 4,
+  "rank": 0
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Quý nhân Lưu Lệ Hoa» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Quý nhân Lưu Lệ Hoa» «Lui»",
+   "n": 1,
+   "at": 110,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795595698954.png"
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Kính sự phòng báo tin»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Kính sự phòng báo tin»",
+   "n": 2,
+   "at": 1190,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-1.png",
+   "save": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   },
+   "buttons": [
+    "",
+    "Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩmGợi ýchuẩn bị thị tẩm!"
+   ]
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Nói móc đối thủ»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Nói móc đối thủ»",
+   "n": 1,
+   "at": 3461,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-2.png",
+   "save": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 2,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   },
+   "buttons": [
+    "Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ýkhông đổi gì thêm!"
+   ]
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tin báo» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin báo» «Lui»",
+   "n": 1,
+   "at": 3705,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795599293481.png"
+  },
+  {
+   "k": "js|page error: f.rk.split is not a function",
+   "type": "js",
+   "msg": "page error: f.rk.split is not a function",
+   "n": 8,
+   "at": 4688
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 1,
+   "at": 6947,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-3.png",
+   "save": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-3-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 15,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   },
+   "buttons": [
+    "Xem lời nhờTốnkhôngĐượckhôngGhi chúchọn rồi xem kết quả ở bước sau!",
+    "Để sauTốnkhôngĐượckhông"
+   ]
+  },
+  {
+   "k": "js|page error: Cannot read properties of undefined (reading 'off')",
+   "type": "js",
+   "msg": "page error: Cannot read properties of undefined (reading 'off')",
+   "n": 1,
+   "at": 9162
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Khóc suốt đêm»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Khóc suốt đêm»",
+   "n": 1,
+   "at": 10298,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-5.png",
+   "save": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-5-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 19,
+    "w": 2,
+    "b": 1,
+    "age": 19,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   },
+   "buttons": [
+    "Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ýkhông đổi gì thêm!"
+   ]
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Nội vụ phủ trả đồ» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Nội vụ phủ trả đồ» «Lui»",
+   "n": 1,
+   "at": 10425,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795606014033.png"
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "n": 15,
+   "at": 109,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-1.png",
+   "dump": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 25,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc78Tài75Tâm cơ26Đức8Danh1Sủng0",
+    "Bạc8Sức100/100",
+    "Buổi tối, còn 4 khắc",
+    "Lãnh cung",
+    "đêm gió lớn",
+    "Quẻ Thượng (Con cái)",
+    "Tâm trạngBình thản-5",
+    "Tin báo: 10 tin mới",
+    "Phế phi · lãnh cungChu Vãn Tình",
+    "Chọn chính mình"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+   ],
+   "next": {
+    "dis": false,
+    "q": 1,
+    "mg": false,
+    "qt": [
+     "Tin trong cung buổi này"
+    ],
+    "t": "Sang ngày mới"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)",
+   "n": 9,
+   "at": 109,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-1.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 25,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 17 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 17 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 173,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 26,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 14 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 14 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 178,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 26,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 11 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 11 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 183,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 26,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 8 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 8 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 188,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 26,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 5 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 5 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 193,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 26,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Tin báo / Tin báo / Tin báo / Tin báo / Tin báo)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Tin báo / Tin báo / Tin báo / Tin báo / Tin báo)",
+   "n": 1,
+   "at": 380,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-3.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 391,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Lịch tháng / Chương 4 · Học trò của cha / Lịch tháng / Lịch tháng / Cầm / Lịch tháng)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Lịch tháng / Chương 4 · Học trò của cha / Lịch tháng / Lịch tháng / Cầm / Lịch tháng)",
+   "n": 1,
+   "at": 511,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-4.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 27,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 2 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 2 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 522,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 27,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Nhờ thái giám tìm thú nuôi / Tin báo / Tin báo / Chương 4 · Học trò của cha / Quý tộc kén rể · kén dâu)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Nhờ thái giám tìm thú nuôi / Tin báo / Tin báo / Chương 4 · Học trò của cha / Quý tộc kén rể · kén dâu)",
+   "n": 1,
+   "at": 604,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-5.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 28,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này)",
+   "n": 1,
+   "at": 809,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-6.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Tần Thạch Thanh Ca» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Tần Thạch Thanh Ca» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 873,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 30,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .mapsc «»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .mapsc «»",
+   "n": 5,
+   "at": 994,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-7.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 30,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc78Tài75Tâm cơ26Đức8Danh2Sủng0",
+    "Bạc7Sức98/98",
+    "Buổi tối, còn 4 khắc",
+    "Lãnh cung",
+    "trăng thu",
+    "Quẻ Hạ (Danh)",
+    "Tâm trạngBình thản-10",
+    "Tin báo: 4 tin mới",
+    "Thu · còn 4 khắc · đi gần 1 khắc, xa 2 · bóng: người khác đang ở đó, không tính ta−+ⓘ Ra v",
+    "Thu nhỏ"
+   ],
+   "trace": [
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»",
+    ".mapsc «Sang ngày mới»"
+   ],
+   "next": {
+    "dis": false,
+    "q": 1,
+    "mg": false,
+    "qt": [
+     "Tin trong cung buổi này"
+    ],
+    "t": "Sang ngày mới"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»",
+   "n": 1,
+   "at": 1244,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795608884577.png"
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Quý nhân Mã Vân Yên» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Mã Vân Yên» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 1534,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 32,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Quý nhân Liêu Thục Ý» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Liêu Thục Ý» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 1549,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 32,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=8: Công · Nữ công / Tin báo / Tin báo / Tin báo / Chứng cứ về Trinh phi Ôn Vân Thường / Tin báo)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=8: Công · Nữ công / Tin báo / Tin báo / Tin báo / Chứng cứ về Trinh phi Ôn Vân Thường / Tin báo)",
+   "n": 1,
+   "at": 1993,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-17.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 35,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=9: Cầm / Hoàng tự trong cung / Tin báo / Tin báo / Tin báo / Tin báo)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=9: Cầm / Hoàng tự trong cung / Tin báo / Tin báo / Tin báo / Tin báo)",
+   "n": 1,
+   "at": 2219,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-19.png",
+   "S": {
+    "dead": false,
+    "y": 4,
+    "t": 36,
+    "w": 0,
+    "b": 3,
+    "age": 21,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  }
+ ],
+ "dead": [
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Quý nhân Lưu Lệ Hoa»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795595698954.png",
+   "at": 110,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chó nhỏ lông xù",
+   "cover": "span.kitb in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795597408005.png",
+   "dev": "fold",
+   "at": 1819,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Thỏ ngọc",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795597414319.png",
+   "dev": "fold",
+   "at": 1825,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Mèo mướp",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795597420637.png",
+   "dev": "fold",
+   "at": 1832,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795599293481.png",
+   "at": 3705,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chim họa mi",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795599552499.png",
+   "dev": "fold",
+   "at": 3964,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Cá vàng chậu sứ",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795600058050.png",
+   "dev": "fold",
+   "at": 4469,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Nội vụ phủ trả đồ»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795606014033.png",
+   "at": 10425,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 18,
+    "w": 2,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Mèo mướp",
+   "cover": "span.kitb in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795608847917.png",
+   "dev": "fold",
+   "at": 1207,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 31,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chó nhỏ lông xù",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795608854249.png",
+   "dev": "fold",
+   "at": 1214,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 31,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chim họa mi",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/dead-fold-1795608860586.png",
+   "dev": "fold",
+   "at": 1220,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 31,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/noeffect-1795608884577.png",
+   "at": 1244,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 31,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Quân Dao"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 320183,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 472368,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 567155,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 200,
+   "year": 2,
+   "chars": 614254,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 250,
+   "year": 2,
+   "chars": 657030,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 300,
+   "year": 2,
+   "chars": 728003,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 317,
+   "year": null,
+   "chars": 786220,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 367,
+   "year": 3,
+   "chars": 911660,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 417,
+   "year": 3,
+   "chars": 991672,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 462,
+ "steps": 40983,
+ "status": [
+  "STATUS ES2-R2-greedy-1 · buổi 84 · year 1 · rank 0 · bugs 3 · stuck 2 · dead buttons 4",
+  "STATUS ES2-R2-greedy-1 · buổi 202 · year 2 · rank 0 · bugs 6 · stuck 3 · dead buttons 7",
+  "STATUS ES2-R2-greedy-1 · buổi 262 · year 2 · rank 0 · bugs 9 · stuck 5 · dead buttons 8"
+ ],
+ "_snapAt": 1795610015775,
+ "trace": [
+  [
+   2175,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2176,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2176,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2176,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2176,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2177,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2177,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2178,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2178,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2178,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2178,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2179,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2179,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2179,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2179,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2180,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2180,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2180,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2180,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2181,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2181,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2181,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2181,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2182,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2182,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2182,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2182,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2183,
+   ".mapsc «unstick Hoàng tự»"
+  ],
+  [
+   2183,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   2184,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Con của ta»"
+  ],
+  [
+   2184,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   2184,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người lạ»"
+  ],
+  [
+   2185,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người lạ»"
+  ],
+  [
+   2185,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2185,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   2186,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   2186,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc78Tài75Tâm cơ27Đức8Danh1Sủng0»"
+  ],
+  [
+   2186,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-15»"
+  ],
+  [
+   2187,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   2187,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2187,
+   ".mapsc «Tâm trạngBình thản-15»"
+  ],
+  [
+   2188,
+   ".mapsc «Tâm bệnh · nặng»"
+  ],
+  [
+   2188,
+   ".mapsc «Bạc21Sức82/98»"
+  ],
+  [
+   2188,
+   ".mapsc «Lãnh cung»"
+  ],
+  [
+   2188,
+   ".mapsc «Mục tiêu chương»"
+  ],
+  [
+   2189,
+   ".mapsc «Hành sự»"
+  ],
+  [
+   2189,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 17 tin mới»"
+  ],
+  [
+   2189,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc78Tài75Tâm cơ27Đức8Danh1Sủng0»"
+  ],
+  [
+   2190,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   2190,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»"
+  ],
+  [
+   2190,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   2191,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc78Tài75Tâm cơ27Đức8Danh1Sủng0»"
+  ],
+  [
+   2191,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   2191,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người sau»"
+  ],
+  [
+   2192,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Con của ta»"
+  ],
+  [
+   2192,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Kế vị»"
+  ],
+  [
+   2192,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự trong cung»"
+  ],
+  [
+   2193,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người trước»"
+  ],
+  [
+   2193,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-15»"
+  ],
+  [
+   2194,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Kế vị»"
+  ],
+  [
+   2194,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hôn sự»"
+  ],
+  [
+   2194,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc21Sức82/98»"
+  ],
+  [
+   2195,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»"
+  ],
+  [
+   2195,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm bệnh · nặng»"
+  ],
+  [
+   2195,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự trong cung»"
+  ],
+  [
+   2196,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc21Sức82/98»"
+  ],
+  [
+   2196,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   2197,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-15»"
+  ],
+  [
+   2197,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơi 2/2»"
+  ],
+  [
+   2197,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiTĩnh dưỡngHiểmĐóng cửa nằm nghỉ »"
+  ],
+  [
+   2197,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiTĩnh dưỡngHiểmĐóng cửa nằm nghỉ »"
+  ],
+  [
+   2198,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiTĩnh dưỡngHiểmĐóng cửa nằm nghỉ »"
+  ],
+  [
+   2198,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc78Tài75Tâm cơ27Đức8Danh1Sủng0»"
+  ],
+  [
+   2198,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-15»"
+  ],
+  [
+   2198,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dược 0/1»"
+  ],
+  [
+   2199,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2199,
+   ".mapsc «Hậu cung»"
+  ],
+  [
+   2199,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   2199,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «hoa đào bay dưới trăng»"
+  ],
+  [
+   2200,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệTự họcⓘTốn2 kh»"
+  ],
+  [
+   2200,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   2201,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   2201,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2201,
+   ".mapsc «Chí tôn · chạm để mở danh sách»"
+  ],
+  [
+   2202,
+   ".mapsc «Tâm trạngBình thản-15»"
+  ],
+  [
+   2202,
+   ".mapsc «Tết Nguyên đánXuân · còn 4 khắc · đi gần 1 khắc, x»"
+  ],
+  [
+   2202,
+   ".mapsc «Tết Nguyên đánXuân · còn 4 khắc · đi gần 1 khắc, x»"
+  ],
+  [
+   2202,
+   ".mapsc «Giao tình»"
+  ],
+  [
+   2203,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   2203,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»"
+  ],
+  [
+   2203,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   2204,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+  ],
+  [
+   2204,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   2204,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungVân Thần Hi»"
+  ],
+  [
+   2204,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   2205,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đeo tay»"
+  ],
+  [
+   2205,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   2205,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Khăn che mặt»"
+  ],
+  [
+   2205,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   2206,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   2206,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   2206,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đổi chỗ hai người»"
+  ],
+  [
+   2207,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   2207,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   2207,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   2207,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   2208,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   2208,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»"
+  ],
+  [
+   2208,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2209,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Công chúa hòa thân · Cao Ly 0/16»"
+  ],
+  [
+   2209,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   2209,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Việc nhờ»"
+  ],
+  [
+   2210,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   2210,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người sau»"
+  ],
+  [
+   2211,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   2211,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Xem thêm»"
+  ],
+  [
+   2212,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Kế vị»"
+  ],
+  [
+   2212,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   2212,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   2213,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   2213,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2213,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sổ ghi»"
+  ],
+  [
+   2214,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2214,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungVân Thần Hi»"
+  ],
+  [
+   2214,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đeo tay»"
+  ],
+  [
+   2215,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2215,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «hoa đào bay dưới trăng»"
+  ],
+  [
+   2216,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2216,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   2216,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «hoa đào bay dưới trăng»"
+  ],
+  [
+   2217,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   2217,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+  ],
+  [
+   2217,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   2218,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   2218,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bậc 0 trên 5»"
+  ],
+  [
+   2218,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   2219,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   2219,
+   "page «unstick Tâm bệnh · nặng»"
+  ],
+  [
+   2221,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   2223,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   2225,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2229,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2230,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2231,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2232,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2232,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2233,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2234,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2236,
+   ".dlg «Bổng lộc tháng chạp» «Lui»"
+  ],
+  [
+   2238,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2239,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   2239,
+   ".mapsc «Danh sách»"
+  ],
+  [
+   2240,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc78Tài75Tâm cơ27Đức8Danh1Sủng0»"
+  ],
+  [
+   2240,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   2242,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2242,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   2243,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2244,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2244,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2245,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   2245,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 5 tin mới»"
+  ],
+  [
+   2246,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2247,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc78Tài75Tâm cơ27Đức8Danh1Sủng0»"
+  ],
+  [
+   2248,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   2249,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2249,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2250,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2250,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2251,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2251,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2251,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2252,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2252,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2253,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2253,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2253,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2253,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2254,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2254,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2254,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2254,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2255,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2255,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2255,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2255,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2256,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2256,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2256,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2256,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2257,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2257,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2258,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2258,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2258,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2258,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2259,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2259,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2259,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2260,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2260,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2260,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2260,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2261,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2261,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2261,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2261,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2262,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2262,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2262,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2262,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2263,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2263,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2263,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2263,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2264,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2264,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2264,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2264,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2265,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2265,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2265,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2265,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2266,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2266,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2266,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2266,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2267,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2267,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2267,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2268,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2268,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2268,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2268,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2269,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2269,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2269,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2269,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2270,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2270,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2270,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2270,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2271,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2271,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2271,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2271,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2272,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2272,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2272,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2272,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2273,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2273,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2273,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2273,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2274,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2274,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2275,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2275,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2275,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2275,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2276,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2276,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2276,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2277,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2277,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2277,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2277,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2278,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2278,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2278,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2278,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2279,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2279,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2279,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2279,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2280,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2280,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2280,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2280,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2281,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2281,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2281,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2281,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2282,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2282,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2282,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2282,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2283,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2283,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2283,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2283,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2284,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2284,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2284,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2284,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2285,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2285,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2285,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2285,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2286,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2286,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2286,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2286,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2287,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2287,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2287,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2287,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2288,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2288,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2288,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2289,
+   "page «unstick Bạc21Sức98/98»"
+  ],
+  [
+   2290,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   2292,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   2294,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2295,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2297,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2300,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2301,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2301,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2302,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2303,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2303,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2305,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2306,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   2308,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «2Chí tôn»"
+  ],
+  [
+   2308,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2308,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   2309,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2309,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2310,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   2310,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm bệnh · nặng»"
+  ],
+  [
+   2310,
+   ".dlg «Tâm bệnh · nặng» «Lui»"
+  ],
+  [
+   2312,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2312,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   2313,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   2313,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2314,
+   ".kmov «»"
+  ],
+  [
+   2314,
+   ".kmov «»"
+  ],
+  [
+   2315,
+   ".kmov «»"
+  ],
+  [
+   2315,
+   ".kmov «»"
+  ],
+  [
+   2315,
+   ".kmov «»"
+  ],
+  [
+   2316,
+   ".kmov «»"
+  ],
+  [
+   2316,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2318,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   2319,
+   ".dlg «Tâm trạng · Quý nhân Liêu Thục Ý» «Lui»"
+  ],
+  [
+   2320,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   2322,
+   ".dlg «Tâm trạng · Thục quý phi Khâu Ngọc Dao» «Lui»"
+  ],
+  [
+   2324,
+   ".dlg «Tâm trạng · Thường tại Chu Vãn Tình» «Lui»"
+  ],
+  [
+   2325,
+   ".dlg «Tâm trạng · Quý nhân Thạch Thanh Ca» «Lui»"
+  ],
+  [
+   2330,
+   "#kmrew «Thường»"
+  ],
+  [
+   2331,
+   ".dlg «Lui»"
+  ],
+  [
+   2332,
+   "#kmrew «Thường»"
+  ],
+  [
+   2332,
+   ".dlg «Lui»"
+  ],
+  [
+   2334,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   2334,
+   ".dlg «Lui»"
+  ],
+  [
+   2336,
+   "#kmrew «Thường»"
+  ],
+  [
+   2336,
+   ".dlg «Lui»"
+  ],
+  [
+   2337,
+   "#kmrew «Thường»"
+  ],
+  [
+   2338,
+   ".dlg «Lui»"
+  ],
+  [
+   2339,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   2339,
+   ".dlg «Lui»"
+  ],
+  [
+   2341,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   2341,
+   ".dlg «Lui»"
+  ],
+  [
+   2343,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   2343,
+   ".dlg «Lui»"
+  ],
+  [
+   2344,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   2344,
+   ".dlg «Lui»"
+  ],
+  [
+   2346,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2348,
+   "DEAD ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ"
+  ],
+  [
+   2349,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2350,
+   ".dlg «Rời lãnh cung» «Tạ ơn»"
+  ],
+  [
+   2351,
+   ".dlg «Lãnh cung» «Bước vào»"
+  ],
+  [
+   2351,
+   ".mapsc «Trường Môn viện5 bóng · đang ở lãnh cung»"
+  ],
+  [
+   2352,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   2353,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2354,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   2354,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   2355,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   2355,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2355,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2356,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2356,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   2358,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm bệnh · nặng»"
+  ],
+  [
+   2358,
+   ".dlg «Tâm bệnh · nặng» «Lui»"
+  ],
+  [
+   2360,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2361,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2362,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2363,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   2363,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2364,
+   ".kmov «»"
+  ],
+  [
+   2365,
+   ".kmov «»"
+  ],
+  [
+   2365,
+   ".kmov «»"
+  ],
+  [
+   2366,
+   ".kmov «»"
+  ],
+  [
+   2366,
+   ".kmov «»"
+  ],
+  [
+   2366,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2369,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   2369,
+   ".dlg «Tâm trạng · Trinh phi Ôn Vân Thường» «Lui»"
+  ],
+  [
+   2371,
+   ".dlg «Tâm trạng · Tần Chu Dao Quang» «Lui»"
+  ],
+  [
+   2372,
+   ".dlg «Tâm trạng · Gia hoàng quý phi Yến Tuyết Nhạn» «Lui»"
+  ],
+  [
+   2374,
+   ".dlg «Tâm trạng · Quý nhân Sử Lạc Tuyết» «Lui»"
+  ],
+  [
+   2375,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ]
+ ],
+ "_ckAt": 1795609967621,
+ "_ckB": 459,
+ "dumps": [
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-1-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-2-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-3-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-4-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/stuck-5-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-1-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-2-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-3-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-4-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-greedy-1/loop-5-dump.json"
+ ],
+ "_loopAt": 1795610017330,
+ "_started": true,
+ "_momSeen": [
+  "#klife|",
+  "page|Trường Môn viện · Gió lùa qua song cửa m",
+  ".dlg|Quẻ Hạ hạ · Sức khỏe",
+  ".kmov|",
+  ".dlg|Tin trong cung buổi này",
+  ".kne|",
+  "#dawn|",
+  ".kbk|Tổng lược",
+  ".dlg|Bổng lộc tháng giêng",
+  ".dlg|Tuyển tú",
+  ".dlg|Tỉnh thân",
+  ".dlg|Quẻ Trung · Con cái",
+  ".dlg|Lãnh cung",
+  ".dlg|Bạc",
+  ".dlg|Tâm trạng · Ta",
+  ".dlg|Quẻ Thượng · Con cái",
+  ".dlg|Lịch tháng",
+  ".mapsc|",
+  "#kmrew|",
+  ".dlg|",
+  ".dlg|Bổng lộc tháng hai",
+  ".dlg|Ngự giá tuần du",
+  ".dlg|Hôn sự",
+  ".dlg|tối · còn",
+  ".dlg|Tâm trạng · Thục phi Khâu Ngọc Dao",
+  ".dlg|Tâm trạng · Trinh tần Ôn Vân Thường",
+  ".dlg|Tâm trạng · Tần Thạch Thanh Ca",
+  ".dlg|Tâm trạng · Quý nhân Lưu Lệ Hoa",
+  ".dlg|Tâm trạng · Quý nhân Sử Lạc Tuyết",
+  ".dlg|Tâm trạng · Gia hoàng quý phi Yến Tuyết ",
+  ".dlg|Quẻ Hạ · Mưu kế",
+  ".dlg|Gieo lại quẻ",
+  ".kfoc|",
+  ".dlg|Sắc",
+  ".dlg|Tin báo",
+  ".dlg|Dung · Dung nghi",
+  ".dlg|Hoàng tự trong cung",
+  ".dlg|Công · Nữ công",
+  ".dlg|Đức",
+  ".dlg|Bổng lộc tháng ba",
+  ".dlg|Lời nhận xét",
+  ".dlg|Quẻ Thượng thượng · Giao thiệp",
+  ".dlg|Lễ Phật đản",
+  ".dlg|Chương # · Học trò của cha",
+  ".dlg|Quý tộc kén rể · kén dâu",
+  ".dlg|Cầm: các lối",
+  ".dlg|Bổng lộc tháng tư",
+  ".dlg|Quốc tang",
+  ".dlg|Quẻ Hạ hạ · Hung",
+  ".dlg|Ra vào cung cấm",
+  ".dlg|Bổng lộc tháng năm",
+  ".dlg|Bổng lộc tháng sáu",
+  ".dlg|Quẻ Thượng · Giao thiệp",
+  ".dlg|chiều · còn",
+  ".dlg|Tâm trạng · Quý nhân Liêu Thục Ý",
+  ".dlg|Tâm trạng · Trinh phi Ôn Vân Thường",
+  ".dlg|Tâm trạng · Tần Vân Thần Hi",
+  ".dlg|Tâm trạng · Quý nhân Mã Vân Yên",
+  ".dlg|Tâm trạng · Hiền quý nhân Lưu Lệ Hoa",
+  ".dlg|Tâm trạng · Quý nhân Mạnh Tịch Nguyệt",
+  ".dlg|sáng · còn",
+  ".dlg|Quẻ Hạ · Danh",
+  "#modal|Chương # · Học trò của cha",
+  ".dlg|Danh hiệu",
+  ".dlg|Bổng lộc tháng bảy",
+  ".dlg|Đeo «Trăng soi rèm ngọc»",
+  "#modal|Danh hiệu",
+  ".dlg|Nhờ thái giám tìm thú nuôi",
+  ".kshdc|",
+  ".dlg|Cầm",
+  ".dlg|Bổng lộc tháng tám",
+  ".dlg|Thu săn",
+  ".dlg|Tâm trạng · Quý nhân Vân Thần Hi",
+  ".dlg|trưa · còn",
+  ".dlg|Quẻ Thượng · Mưu kế",
+  "#modal|Tin trong cung buổi này",
+  ".dlg|Yến đầy tháng hoàng tử",
+  ".dlg|Sứ đoàn vào triều",
+  ".dlg|Bổng lộc tháng chín",
+  ".dlg|Bổng lộc tháng mười",
+  ".dlg|Quẻ Thượng · Tài nghệ",
+  ".dlg|Đại lễ tế Giao",
+  ".dlg|Đại hàn, tuyết lớn",
+  ".dlg|Tâm bệnh · nhẹ",
+  ".dlg|Quẻ Thượng · Sức khỏe",
+  ".dlg|Chứng cứ về Trinh phi Ôn Vân Thường",
+  ".dlg|Bổng lộc tháng mười một",
+  ".dlg|Tâm trạng · Quý nhân Liễu Linh Tê",
+  ".dlg|Tâm trạng · Thường tại Chu Vãn Tình",
+  ".dlg|Bổng lộc tháng chạp",
+  ".dlg|Tâm bệnh · nặng",
+  ".dlg|Tâm trạng · Thục quý phi Khâu Ngọc Dao",
+  ".dlg|Tâm trạng · Quý nhân Thạch Thanh Ca",
+  ".dlg|Rời lãnh cung",
+  "#kxcatch|",
+  ".dlg|Tâm trạng · Tần Chu Dao Quang"
+ ],
+ "_momRank": 0,
+ "rss": [
+  {
+   "buoi": 319,
+   "y": 3,
+   "totalMB": 1699,
+   "rendererMB": 992,
+   "heapMB": 150,
+   "dom": 1953,
+   "q": 4,
+   "lsK": 920
+  },
+  {
+   "buoi": 324,
+   "y": 3,
+   "totalMB": 1761,
+   "rendererMB": 1090,
+   "heapMB": 150,
+   "dom": 1260,
+   "q": 0,
+   "lsK": 922
+  },
+  {
+   "buoi": 329,
+   "y": 3,
+   "totalMB": 1676,
+   "rendererMB": 987,
+   "heapMB": 150,
+   "dom": 757,
+   "q": 0,
+   "lsK": 995
+  },
+  {
+   "buoi": 334,
+   "y": 3,
+   "totalMB": 1827,
+   "rendererMB": 1137,
+   "heapMB": 150,
+   "dom": 1492,
+   "q": 0,
+   "lsK": 1010
+  },
+  {
+   "buoi": 339,
+   "y": 3,
+   "totalMB": 2163,
+   "rendererMB": 1454,
+   "heapMB": 150,
+   "dom": 1387,
+   "q": 2,
+   "lsK": 1045
+  },
+  {
+   "buoi": 344,
+   "y": 3,
+   "totalMB": 2016,
+   "rendererMB": 1335,
+   "heapMB": 150,
+   "dom": 2098,
+   "q": 0,
+   "lsK": 1014
+  },
+  {
+   "buoi": 349,
+   "y": 3,
+   "totalMB": 2085,
+   "rendererMB": 1404,
+   "heapMB": 150,
+   "dom": 1252,
+   "q": 0,
+   "lsK": 1025
+  },
+  {
+   "buoi": 354,
+   "y": 3,
+   "totalMB": 2047,
+   "rendererMB": 1330,
+   "heapMB": 150,
+   "dom": 1229,
+   "q": 0,
+   "lsK": 1064
+  },
+  {
+   "buoi": 359,
+   "y": 3,
+   "totalMB": 2067,
+   "rendererMB": 1385,
+   "heapMB": 150,
+   "dom": 4160,
+   "q": 2,
+   "lsK": 1047
+  },
+  {
+   "buoi": 364,
+   "y": 3,
+   "totalMB": 1900,
+   "rendererMB": 1172,
+   "heapMB": 150,
+   "dom": 1508,
+   "q": 0,
+   "lsK": 1079
+  },
+  {
+   "buoi": 369,
+   "y": 3,
+   "totalMB": 1991,
+   "rendererMB": 1318,
+   "heapMB": 150,
+   "dom": 1317,
+   "q": 0,
+   "lsK": 1073
+  },
+  {
+   "buoi": 374,
+   "y": 3,
+   "totalMB": 2200,
+   "rendererMB": 1524,
+   "heapMB": 150,
+   "dom": 1370,
+   "q": 0,
+   "lsK": 1065
+  },
+  {
+   "buoi": 379,
+   "y": 3,
+   "totalMB": 2256,
+   "rendererMB": 1522,
+   "heapMB": 150,
+   "dom": 927,
+   "q": 1,
+   "lsK": 1090
+  },
+  {
+   "buoi": 384,
+   "y": 3,
+   "totalMB": 2396,
+   "rendererMB": 1676,
+   "heapMB": 150,
+   "dom": 880,
+   "q": 0,
+   "lsK": 1071
+  },
+  {
+   "buoi": 389,
+   "y": 3,
+   "totalMB": 2263,
+   "rendererMB": 1543,
+   "heapMB": 150,
+   "dom": 882,
+   "q": 0,
+   "lsK": 1096
+  },
+  {
+   "buoi": 394,
+   "y": 3,
+   "totalMB": 1891,
+   "rendererMB": 1171,
+   "heapMB": 150,
+   "dom": 5285,
+   "q": 0,
+   "lsK": 1113
+  },
+  {
+   "buoi": 399,
+   "y": 3,
+   "totalMB": 1993,
+   "rendererMB": 1292,
+   "heapMB": 242,
+   "dom": 1345,
+   "q": 2,
+   "lsK": 1166
+  },
+  {
+   "buoi": 404,
+   "y": 3,
+   "totalMB": 2198,
+   "rendererMB": 1429,
+   "heapMB": 242,
+   "dom": 1231,
+   "q": 0,
+   "lsK": 1137
+  },
+  {
+   "buoi": 409,
+   "y": 3,
+   "totalMB": 2088,
+   "rendererMB": 1364,
+   "heapMB": 242,
+   "dom": 975,
+   "q": 0,
+   "lsK": 1142
+  },
+  {
+   "buoi": 414,
+   "y": 3,
+   "totalMB": 2241,
+   "rendererMB": 1527,
+   "heapMB": 242,
+   "dom": 1357,
+   "q": 0,
+   "lsK": 1184
+  },
+  {
+   "buoi": 419,
+   "y": 3,
+   "totalMB": 2197,
+   "rendererMB": 1475,
+   "heapMB": 242,
+   "dom": 828,
+   "q": 5,
+   "lsK": 1169
+  },
+  {
+   "buoi": 424,
+   "y": 3,
+   "totalMB": 2228,
+   "rendererMB": 1514,
+   "heapMB": 242,
+   "dom": 1329,
+   "q": 0,
+   "lsK": 1172
+  },
+  {
+   "buoi": 429,
+   "y": 3,
+   "totalMB": 2225,
+   "rendererMB": 1511,
+   "heapMB": 242,
+   "dom": 1010,
+   "q": 0,
+   "lsK": 1165
+  },
+  {
+   "buoi": 434,
+   "y": 3,
+   "totalMB": 2304,
+   "rendererMB": 1603,
+   "heapMB": 242,
+   "dom": 1240,
+   "q": 0,
+   "lsK": 1171
+  },
+  {
+   "buoi": 439,
+   "y": 3,
+   "totalMB": 2313,
+   "rendererMB": 1596,
+   "heapMB": 242,
+   "dom": 1362,
+   "q": 3,
+   "lsK": 1195
+  },
+  {
+   "buoi": 444,
+   "y": 3,
+   "totalMB": 2211,
+   "rendererMB": 1503,
+   "heapMB": 242,
+   "dom": 1360,
+   "q": 0,
+   "lsK": 1169
+  },
+  {
+   "buoi": 449,
+   "y": 4,
+   "totalMB": 1838,
+   "rendererMB": 1129,
+   "heapMB": 242,
+   "dom": 1449,
+   "q": 0,
+   "lsK": 1222
+  },
+  {
+   "buoi": 454,
+   "y": 4,
+   "totalMB": 2253,
+   "rendererMB": 1520,
+   "heapMB": 242,
+   "dom": 1016,
+   "q": 0,
+   "lsK": 1233
+  },
+  {
+   "buoi": 459,
+   "y": 4,
+   "totalMB": 2274,
+   "rendererMB": 1511,
+   "heapMB": 242,
+   "dom": 990,
+   "q": 3,
+   "lsK": 1229
+  }
+ ],
+ "offers": [
+  {
+   "buoi": 350,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 350,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 354,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 354,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 360,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 360,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 375,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 376,
+   "y": 3,
+   "rank": 0,
+   "screen": ".mapsc «»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 377,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 378,
+   "y": 3,
+   "rank": 0,
+   "screen": ".mapsc «»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 385,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 385,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 388,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 388,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 393,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 394,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 397,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 398,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 402,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 402,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 407,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 407,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 407,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 408,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 408,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 409,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 409,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 410,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 410,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 418,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 418,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 437,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 437,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 438,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 438,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  }
+ ],
+ "t": {
+  "total": 2376769
+ }
+}

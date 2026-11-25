@@ -1,0 +1,138 @@
+# ES2-R2-greedy-1 moment log (bot bold, fold, seed 2613534650, real-tap harness 69e41729)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 3 · turn 25 · tuần 0 · buổi 3 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-greedy-1/m-new-318-1.png
+- year 3 · turn 25 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc78Tài75Tâm cơ26Đức8Danh1S | Bạc8Sức94/100 | Buổi tối, còn 4 khắc | Lãnh cung | mưa rào | Quẻ Hạ hạ (Sức khỏe) · shots-ES2-R2-greedy-1/m-new-318-2.png
+- year 3 · turn 25 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Hạ hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-318-3.png
+- year 3 · turn 25 · tuần 0 · buổi 3 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Ta biết rồi · shots-ES2-R2-greedy-1/m-new-318-4.png
+- year 3 · turn 25 · tuần 0 · buổi 3 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-318-5.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-greedy-1/m-new-318-6.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-ES2-R2-greedy-1/m-new-319-7.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-greedy-1/m-new-319-8.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng giêng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-319-9.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Tuyển tú» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-319-10.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-319-11.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-319-12.png
+- year 3 · turn 25 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-320.png
+- year 3 · turn 25 · tuần 1 · buổi 2 · rank 0 · .dlg «Lãnh cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-321-13.png
+- year 3 · turn 25 · tuần 1 · buổi 3 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-322-14.png
+- year 3 · turn 25 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-322-15.png
+- year 3 · turn 25 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-323-16.png
+- year 3 · turn 25 · tuần 2 · buổi 1 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc (lãnh | mồng 2 | mồng 3 | mồng 4 | mồng 5 · shots-ES2-R2-greedy-1/m-new-324-17.png
+- year 3 · turn 25 · tuần 2 · buổi 3 · rank 0 · .mapsc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc78Tài75Tâm cơ26Đức8Danh1S | Bạc8Sức100/100 | Buổi tối, còn 4 khắc | Lãnh cung | đêm gió lớn | Quẻ Thượng (Con cái) · shots-ES2-R2-greedy-1/m-new-326-18.png
+- year 3 · turn 25 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · shots-ES2-R2-greedy-1/loop-1.png
+- year 3 · turn 25 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này) · shots-ES2-R2-greedy-1/loop-1.png
+- year 3 · turn 26 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-greedy-1/m-new-327-19.png
+- year 3 · turn 26 · tuần 0 · buổi 0 · rank 0 · .dlg «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-327-20.png
+- year 3 · turn 26 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng hai» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-327-21.png
+- year 3 · turn 26 · tuần 0 · buổi 0 · rank 0 · .dlg «Ngự giá tuần du» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-327-22.png
+- year 3 · turn 26 · tuần 0 · buổi 1 · rank 0 · .dlg «Hôn sự» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-328-23.png
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-330-24.png
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thục phi Khâu Ngọc Dao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-330-25.png
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 17 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 14 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 11 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 8 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 5 copies of «Tâm trạng · Thục phi Khâu Ngọc Dao» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Trinh tần Ôn Vân Thường» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-330-26.png
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Thạch Thanh Ca» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-330-27.png
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Lưu Lệ Hoa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-330-28.png
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Sử Lạc Tuyết» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-330-29.png
+- year 3 · turn 26 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Gia hoàng quý phi Yến Tuyết Nhạn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-330-30.png
+- year 3 · turn 26 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Hạ · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-ES2-R2-greedy-1/m-new-331-31.png
+- year 3 · turn 26 · tuần 1 · buổi 0 · rank 0 · .dlg «Gieo lại quẻ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-331-32.png
+- year 3 · turn 26 · tuần 1 · buổi 1 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Đưa cơm áo · Rất vững · Tốn | Hỏi chuyện cũ · Có cơ · Tốn | Lui · shots-ES2-R2-greedy-1/m-new-332-33.png
+- year 3 · turn 26 · tuần 1 · buổi 3 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-334-34.png
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Tin báo / Tin báo / Tin báo / Tin báo / Tin báo) · shots-ES2-R2-greedy-1/loop-3.png
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-338-35.png
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · .dlg «Dung · Dung nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-338-36.png
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · .dlg «Hoàng tự trong cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-338-37.png
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · .dlg «Công · Nữ công» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-338-38.png
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · .dlg «Đức» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-338-39.png
+- year 3 · turn 27 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng ba» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-339-40.png
+- year 3 · turn 27 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-340.png
+- year 3 · turn 27 · tuần 1 · buổi 0 · rank 0 · .dlg «Lời nhận xét» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-343-41.png
+- year 3 · turn 27 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-343-42.png
+- year 3 · turn 27 · tuần 2 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-347-43.png
+- year 3 · turn 27 · tuần 2 · buổi 2 · rank 0 · .dlg «Chương 4 · Học trò của cha» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-ES2-R2-greedy-1/m-new-349-44.png
+- year 3 · turn 27 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Lịch tháng / Chương 4 · Học trò của cha / Lịch tháng / Lịch tháng / Cầm / Lịch tháng) · shots-ES2-R2-greedy-1/loop-4.png
+- year 3 · turn 27 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 2 copies of «Tin báo» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 28 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Nhờ thái giám tìm thú nuôi / Tin báo / Tin báo / Chương 4 · Học trò của cha / Quý tộc kén rể · kén dâu) · shots-ES2-R2-greedy-1/loop-5.png
+- year 3 · turn 28 · tuần 0 · buổi 3 · rank 0 · .dlg «Quý tộc kén rể · kén dâu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-354-45.png
+- year 3 · turn 28 · tuần 0 · buổi 3 · rank 0 · .dlg «Cầm: các lối» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-354-46.png
+- year 3 · turn 28 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tư» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-355-47.png
+- year 3 · turn 28 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-360.png
+- year 3 · turn 29 · tuần 0 · buổi 0 · rank 0 · .dlg «Quốc tang» · NEW SCREEN · first time on this screen; buttons: Quỳ túc trực, tụng kinhTốnSứ | Thắp nén hương rồi luiTốnkhô · shots-ES2-R2-greedy-1/m-new-363-48.png
+- year 3 · turn 29 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Hạ hạ · Hung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-367-49.png
+- year 3 · turn 29 · tuần 1 · buổi 2 · rank 0 · .dlg «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-369-50.png
+- year 3 · turn 29 · tuần 2 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng năm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-371-51.png
+- year 3 · turn 29 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này) · shots-ES2-R2-greedy-1/loop-6.png
+- year 3 · turn 30 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng sáu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-375-52.png
+- year 3 · turn 30 · tuần 0 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-377-53.png
+- year 3 · turn 30 · tuần 0 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-377-54.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Liêu Thục Ý» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-378-55.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Tần Thạch Thanh Ca» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Trinh phi Ôn Vân Thường» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-378-56.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Vân Thần Hi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-378-57.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Mã Vân Yên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-378-58.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Hiền quý nhân Lưu Lệ Hoa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-378-59.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Mạnh Tịch Nguyệt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-378-60.png
+- year 3 · turn 30 · tuần 1 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-379-61.png
+- year 3 · turn 30 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-380.png
+- year 3 · turn 30 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Hạ · Danh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-380-62.png
+- year 3 · turn 30 · tuần 1 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .mapsc «» · shots-ES2-R2-greedy-1/loop-7.png
+- year 3 · turn 30 · tuần 1 · buổi 3 · rank 0 · #modal «Chương 4 · Học trò của cha» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-greedy-1/m-new-382-63.png
+- year 3 · turn 30 · tuần 2 · buổi 0 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đeo «Trăng soi rèm ngọc»Tốnk · shots-ES2-R2-greedy-1/m-new-383-64.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-387-65.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · .dlg «Đeo «Trăng soi rèm ngọc»» · NEW SCREEN · first time on this screen; buttons: Thêm SủngTốnkhôngĐượcSủng +1 | Sủng dễ lênTốnkhôngĐượcSủng | Quay lạiTốnkhôngĐượckhôngGhi · shots-ES2-R2-greedy-1/m-new-395-66.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · #modal «Danh hiệu» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-greedy-1/m-new-395-67.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · NEW SCREEN · first time on this screen; buttons: Lui | Xem Mèo mướp | Xem Chó nhỏ lông xù | Xem Chim họa mi | Xem Thỏ ngọc | Xem Cá vàng chậu sứ | Xem Mèo tuyết | Xem Sáo nói · shots-ES2-R2-greedy-1/m-new-395-68.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · FRUSTRATED · dead button «Xem Mèo mướp» covered by span.kitb in #mb · shots-ES2-R2-greedy-1/dead-fold-1795608847917.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · FRUSTRATED · dead button «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · shots-ES2-R2-greedy-1/dead-fold-1795608854249.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · FRUSTRATED · dead button «Xem Chim họa mi» covered by b.kidn in #mb · shots-ES2-R2-greedy-1/dead-fold-1795608860586.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · .kshdc «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-395-69.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · - · FRUSTRATED · [dead] close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui» · shots-ES2-R2-greedy-1/noeffect-1795608884577.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · .dlg «Cầm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-398-70.png
+- year 3 · turn 32 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-400.png
+- year 3 · turn 32 · tuần 2 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tám» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-407-71.png
+- year 3 · turn 32 · tuần 2 · buổi 0 · rank 0 · .dlg «Thu săn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-407-72.png
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Quý nhân Mã Vân Yên» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Vân Thần Hi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-410-73.png
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Quý nhân Liêu Thục Ý» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 33 · tuần 0 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-412-74.png
+- year 3 · turn 33 · tuần 0 · buổi 1 · rank 0 · .dlg «Quẻ Thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-412-75.png
+- year 3 · turn 33 · tuần 0 · buổi 3 · rank 0 · #modal «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-greedy-1/m-new-414-76.png
+- year 3 · turn 33 · tuần 1 · buổi 0 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-415-77.png
+- year 3 · turn 33 · tuần 1 · buổi 0 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-415-78.png
+- year 3 · turn 33 · tuần 2 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chín» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-419-79.png
+- year 3 · turn 33 · tuần 2 · buổi 1 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-420.png
+- year 3 · turn 34 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-423-80.png
+- year 3 · turn 34 · tuần 0 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-425-81.png
+- year 3 · turn 34 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại lễ tế Giao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-427-82.png
+- year 3 · turn 34 · tuần 2 · buổi 0 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-431-83.png
+- year 3 · turn 34 · tuần 2 · buổi 2 · rank 0 · .dlg «Tâm bệnh · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-433-84.png
+- year 3 · turn 34 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-433-85.png
+- year 3 · turn 35 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=8: Công · Nữ công / Tin báo / Tin báo / Tin báo / Chứng cứ về Trinh phi Ôn Vân Thường / Tin báo) · shots-ES2-R2-greedy-1/loop-17.png
+- year 3 · turn 35 · tuần 0 · buổi 3 · rank 0 · .dlg «Chứng cứ về Trinh phi Ôn Vân Thường» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-438-86.png
+- year 3 · turn 35 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười một» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-439-87.png
+- year 3 · turn 35 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-440.png
+- year 3 · turn 35 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Liễu Linh Tê» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-442-88.png
+- year 3 · turn 35 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Chu Vãn Tình» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-442-89.png
+- year 4 · turn 36 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=9: Cầm / Hoàng tự trong cung / Tin báo / Tin báo / Tin báo / Tin báo) · shots-ES2-R2-greedy-1/loop-19.png
+- year 4 · turn 36 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chạp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-451-90.png
+- year 4 · turn 36 · tuần 2 · buổi 2 · rank 0 · .dlg «Tâm bệnh · nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-457-91.png
+- year 4 · turn 36 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thục quý phi Khâu Ngọc Dao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-458-92.png
+- year 4 · turn 36 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Thạch Thanh Ca» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-458-93.png
+- year 4 · turn 37 · tuần 2 · buổi 0 · rank 0 · .dlg «Rời lãnh cung» · NEW SCREEN · first time on this screen; buttons: Tạ ơn · shots-ES2-R2-greedy-1/m-new-459-94.png
+- year 4 · turn 37 · tuần 2 · buổi 0 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc78Tài75Tâm cơ27Đức8Danh1S | Bạc28Sức82/96 | Buổi sáng, còn 4 khắc | Tâm bệnh · nặng | Lãnh cung | trời quang · shots-ES2-R2-greedy-1/m-new-459-95.png
+- year 4 · turn 37 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-greedy-1/m-look-460.png
+- year 4 · turn 37 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Chu Dao Quang» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-greedy-1/m-new-462-96.png
+- year 4 · turn 38 · tuần 2 · buổi 0 · rank 0 · ending · EVENT · life over: Lãnh cung — Phát điên trong lãnh cung · age 21 · buổi 462 · bugs 29 · stuck 5 · dead buttons 12 · shots-ES2-R2-greedy-1/end.png
+
+## Runner notes (player feelings, from the shots)
+- year 4 · ending · ODD · the final screen (shots end.png) shows the «Kiếp này» summary BEHIND a «Bổng lộc tháng giêng» reward dialog (3 items + Bạc +5, button «Nhận»): a monthly allowance offered on the very page where my life just ended in Lãnh cung — the ending card is hidden under a reward.
+- all years · rank 0 · BORED/FRUSTRATED · rank never moved from 0 in 462 buổi (3 years + a bit); Sắc78 Tài75 but Danh stayed 1; the loop was only bổng lộc / Tin báo / Tâm trạng dialogs.
+- year 3 · Nhờ thái giám tìm thú nuôi · FRUSTRATED · «Xem Mèo mướp / Thỏ ngọc / Chó nhỏ…» buttons are covered by b.kidn / span.kitb (dead on Fold), and «Lui» did not close it (3 taps).
+- year 3 turn 26 · Tâm trạng · Thục phi Khâu Ngọc Dao · FRUSTRATED · 17 identical dialogs queued, each close pops one (known F bug, button-crawl-fix-2 family).
+- year 3 turn 25 · Kính sự phòng / Sang ngày mới · FRUSTRATED · «Sang ngày mới» tapped, the buổi does not turn while a «Tin trong cung buổi này» dialog is queued (softlock; 150 taps without a clock step).
