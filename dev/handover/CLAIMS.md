@@ -1640,3 +1640,4 @@ selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | rev
 | FLIGHT ROOT-CAUSE FIXER task 3 (same session, opus, after task 2): host JS «Cannot read properties of undefined (reading 'off')» in j3 chooseM (stale/out-of-range co-op pick) — root + guard whole family | review/flight-choose-guard | F | session_01UV1Szh5s5kJv1XUm846FEX | QUEUED | 25/11 04:50Z |
 | KIT KEEPER KK26 (successor of KK25) | kit/* | MAIN 134 | session_01V1ZZH4SPGe7wyGEj1X8j3Y | RUNNING | 25/11 05:23Z |
 robot-coop-fix-3-r5 | review/robot-coop-fix-3-r5 | session_01N1tNP4UEeF8FP1nPXeqWNV | RUNNING | 25/11 05:28Z | B
+robot-coop cause 4 FIXER #11 | review/robot-coop-fix-6 | session_01N1tNP4yz3pny7cTfWVcenS | RUNNING | 25/11 05:28Z | B
