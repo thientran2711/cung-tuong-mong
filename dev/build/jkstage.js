@@ -108,7 +108,7 @@ function kstgIn(dl){try{const still=typeof kitHandStill==="function"&&kitHandSti
 /* the details plate on the stage: above the lifted card, never over a face */
 function kstgPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg.kstage");if(!dl)return;const z=dl.querySelector(":scope>.khplate");if(!z||z.hidden)return;
  const W=dl.clientWidth,D=dl.getBoundingClientRect(),B=b.getBoundingClientRect(),G=g.getBoundingClientRect();const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;
- const bottom=Math.min(G.top+lift+2,B.top-6)-D.top;const top0=(dl.__kstFace||0)+4;const w=Math.min(KIT_STAGE.plateW,W-16);let x=Math.round(Math.max(8,Math.min(W-8-w,B.left-D.left+B.width/2-w/2)));
+ const bottom=Math.min(G.top+lift+2,B.top-6)-D.top-(b.disabled?0:Math.round(((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*.6));const top0=(dl.__kstFace||0)+4;const w=Math.min(KIT_STAGE.plateW,W-16);let x=Math.round(Math.max(8,Math.min(W-8-w,B.left-D.left+B.width/2-w/2)));
  z.style.left=x+"px";z.style.width=w+"px";z.style.bottom=Math.round(D.height-bottom)+"px";z.style.maxHeight=Math.max(80,Math.round(bottom-top0))+"px";z.style.top="auto"}catch(e){console.error("kstgPlate",e)}}
 (function(){if(typeof kitHandLay!=="function")return;const L0=kitHandLay;
  kitHandLay=function(g,quiet){let dl=null;try{dl=g&&g.closest&&g.closest(".dlg");if(dl&&kitHandWants(g))kstgOn(dl,g)}catch(e){}
