@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9f72524b+","t":"2026-11-25T06:29Z","c":"STACK LAND visitor-fix-r10: merge acc5a965 onto LIVE ee37ab5f (index.html/sw.js rebuilt)","b":"efa1bb80bfa6","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"4406fe66+","t":"2026-11-25T07:46Z","c":"co-ngu-seals: cổ ngữ frame seal words (KP_SEAL, one table): LUẬT→CUNG QUY, TIN→PHONG THANH, ĐÊM→CANH KHUYA, CẢNH GIÁC→HIỂM HỌA, CHỨNG CỨ→VẬ…","b":"80e46728f598","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -8321,7 +8321,7 @@ function nlCardHTML(){const o=S.origin,pts=pdGet(),ok=pts>=PD_COST,srv=typeof is
  const pos=srv?"Cung nữ":o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;
  return `<p><b>${S.name}</b>, ${S.age} tuổi, ${o.n}. ${o.t}</p>
  ${kitRows([nlStat("Xuất thân",o.n),nlStat("Vào cung",pos),nlStat("Tuổi",S.age),nlStat("Tài",S.tai),nlStat("Sắc",S.sac),nlStat("Tâm cơ",S.tamco),nlStat("Đức",S.duc),nlStat("Danh",S.danh),nlStat("Thái hậu ưa",S.th),nlStat("Bạc",S.bac),nlStat("Hoàng thượng",`${S.emp.era}, ${S.emp.age} tuổi${S.ps?", mới đăng cơ":""}`)])}
- <p class="past">Thân phận này đã định sẵn: tải lại trang, chọn ô khác hay bấm Kiếp mới vẫn ra đúng thân phận này. Phúc duyên đang có: <b>${pts}</b>.</p>
+ <p class="past">Thân phận này đã định sẵn: tải lại trang, chọn ô khác hay chạm «Kiếp mới» vẫn ra đúng thân phận này. Phúc duyên đang có: <b>${pts}</b>.</p>
  <div class="opts nlopts"><button class="opt" data-nl="ok">Nhận thân phận<small>tốn: không · thành: bắt đầu kiếp này</small></button>
  <button class="opt" data-nl="re" ${ok?"":"disabled"}>Đổi thân phận (−${PD_COST} Phúc duyên)${ok?`<small>tốn: Phúc duyên -${PD_COST} · thành: thân phận mới (cũng định sẵn)</small>`:`<small data-kp="1">Cần ${PD_COST} Phúc duyên, đang có ${pts}</small>`}</button></div>`}
 function nlCard(){Q=Q.filter(m=>!m.nl);Q.unshift({nl:1,t:"Thân phận kiếp này",cls:"nlcard",faces:[[pMe(),S.name]],h:nlCardHTML(),opts:[],onClose:()=>nlAccept(true)});showModal();
@@ -33045,7 +33045,7 @@ window.j70cObj=function(pid){try{const z=j70();return (z.ob||[]).find(o=>o.pl===
 const KG82_KIND={
  dan:{e:"rhythm",n:"Đàn",t:"Tấu khúc",how:"Hoa mai rơi theo bốn dây Cung, Thương, Giốc, Chủy. Chạm vào dây khi hoa chạm vạch son."},
  hat:{e:"rhythm",n:"Hát",t:"Hát theo phách",how:"Phách rơi theo bốn cung giọng. Chạm vào cột khi phách chạm vạch son."},
- co:{e:"go",n:"Cờ",t:"Ăn quân",how:"Mỗi thế cờ có một nhóm quân trắng chỉ còn một chỗ trống bên cạnh (một khí). Chạm vào chỗ trống ấy, đặt quân đen để ăn nhóm. Bậc thấp có vòng vàng khoanh nhóm quân trắng; chưa thấy chỗ thì chạm Gợi ý. Ăn nhanh thì được trọn phần."},
+ co:{e:"go",n:"Cờ",t:"Ăn quân",how:"Mỗi thế cờ có một nhóm quân trắng chỉ còn một chỗ trống bên cạnh (một khí). Chạm vào chỗ trống ấy, đặt quân đen để ăn nhóm. Bậc thấp có vòng vàng khoanh nhóm quân trắng; chưa thấy chỗ thì chạm «Gợi ý». Ăn nhanh thì được trọn phần."},
  dauho:{e:"aim",n:"Đầu hồ",t:"Ném tên vào bình",how:"Mũi tên đưa qua đưa lại trên miệng bình. Chạm khi mũi tên ở ngay giữa miệng bình. 6 lần ném."},
  ban:{e:"aim",n:"Bắn cung",t:"Bắn hồng tâm",how:"Ngắm đưa qua đưa lại trên bia. Chạm khi ngắm ở giữa hồng tâm. 6 phát tên."},
  tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
@@ -33622,7 +33622,7 @@ function kgBang(html,title){return html?`${title||"Thông tin"}${kitNoteBang(htm
 function kgBangRows(head,all,shown,extra){return `<h4 class="kpst">${kgBang(kg82Rows(all)+(extra||""),head)}</h4>`+(shown&&shown.length?kg82Rows(shown):"")}
 window.kgBang=kgBang;window.kgBangRows=kgBangRows;
 /* owner 24/11 ~22:02Z item 6 (+ 21/11 rule: extras behind «!»): the TWO essential rows every «Luật chơi» shows OPEN: «Chạm» (what to tap / do) and «Được» (what a good play gives). Text, no typed numbers; the mark word comes from BAL (mgWord). */
-const KG82_TAP={dan:"Chạm vào dây khi hoa mai chạm vạch son.",hat:"Giữ ngón tay để lên giọng, buông để xuống giọng; giữ hoa trong dải vàng.",co:"Chạm vào chỗ trống duy nhất của nhóm quân trắng để ăn nhóm.",dauho:"Kéo ngược về sau rồi buông để ném tên vào bình.",ban:"Chạm khi ngắm ở giữa hồng tâm.",tho:"Kéo bút theo nét mờ, từng nét theo số thứ tự.",doi:"Kéo nét trong khay vào ô phải, lật gương nét bên trái.",doden:"Chạm đèn giống mẫu đang hiện sẵn.",ve:"Kéo núi, nước, thuyền, tùng đặt lên lụa đúng chỗ như mẫu.",hoa:"Chạm đúng hoa của mùa, cắt cành cho dài đúng so với bình.",theu:"Chạm lại đúng những ô có mũi thêu vừa hiện.",kim:"Kéo hình kéo cắt lên tờ gấp rồi chạm ✓ để mở giấy.",mua:"Xem các bước sáng lên rồi chạm lại đúng thứ tự.",banh:"Giữ Quạt lửa cho lửa vào vùng xanh, kéo nguyên liệu vào nồi đúng thứ tự.",huong:"Kéo ba thanh trượt cho khói giống hương mẫu rồi chạm Dâng hương.",td_cong:"Chạm cuộn chỉ cùng sắc với dải sáng, rồi chạm khung khi kim chúc xuống.",td_dung:"Bát nghiêng bên nào, giữ nửa khung bên kia để đỡ.",td_ngon:"Vòng xanh sáng thì giữ Thưa, buông khi tiếng vào dải xanh.",td_hanh:"Chạm + hoặc − chia phần cho đủ số chấm của mỗi người, rồi chạm ✓.",chai:"Chạm khi kim vào dải xanh.",le:"Kéo từng vật đến đúng chỗ như bàn lễ mẫu.",tc:"Kéo từng món vào kho có hàng mẫu cùng loại.",xa:"Chạm người có áo và vật mang theo khớp vật chứng.",thq:"Kéo từng người vào ghế: phẩm cao ngồi gần Thái hậu.",hoadien:"Kéo hoa điền vào giữa hai đầu mày rồi bấm Dán.",duho:"Chạm đóa sen khi nó trôi vào khoảng vàng sát mạn thuyền.",den:"Kéo ngón tay để đèn đi giữa dòng sáng, tránh hoa sen.",tat:"Chạm khi kim lướt qua giữa vùng đỏ.",ne:"Chạm khi kim vào vùng xanh.",kinh:"Đưa bút theo nét mờ của bản kinh, từng nét theo số thứ tự.",may:"Đưa kim theo đường may mờ, từng đường theo số thứ tự.",nghe:"Chạm Nép giữ bóng trong dải xanh, rồi chạm câu có từ cần nghe.",truyen:"Chạm từng người từ «Ngươi» tới «Cung nàng».",mac:"Kéo thanh giá, chạm Ngỏ giá; lời đáp cho biết xa hay gần.",thoico:"Chạm Ra tay lúc người canh chú ý thấp nhất.",thu_tam:"Vuốt dọc lông thú năm lần cho đều tay.",thu_choi:"Chạm đúng ô đang sáng.",tuoi:"Chạm Dừng tưới khi nước vừa đủ.",co7:"Lần lượt đặt quân; năm quân liền một hàng trước thì thắng."};
+const KG82_TAP={dan:"Chạm vào dây khi hoa mai chạm vạch son.",hat:"Giữ ngón tay để lên giọng, buông để xuống giọng; giữ hoa trong dải vàng.",co:"Chạm vào chỗ trống duy nhất của nhóm quân trắng để ăn nhóm.",dauho:"Kéo ngược về sau rồi buông để ném tên vào bình.",ban:"Chạm khi ngắm ở giữa hồng tâm.",tho:"Kéo bút theo nét mờ, từng nét theo số thứ tự.",doi:"Kéo nét trong khay vào ô phải, lật gương nét bên trái.",doden:"Chạm đèn giống mẫu đang hiện sẵn.",ve:"Kéo núi, nước, thuyền, tùng đặt lên lụa đúng chỗ như mẫu.",hoa:"Chạm đúng hoa của mùa, cắt cành cho dài đúng so với bình.",theu:"Chạm lại đúng những ô có mũi thêu vừa hiện.",kim:"Kéo hình kéo cắt lên tờ gấp rồi chạm ✓ để mở giấy.",mua:"Xem các bước sáng lên rồi chạm lại đúng thứ tự.",banh:"Giữ Quạt lửa cho lửa vào vùng xanh, kéo nguyên liệu vào nồi đúng thứ tự.",huong:"Kéo ba thanh trượt cho khói giống hương mẫu rồi chạm «Dâng hương».",td_cong:"Chạm cuộn chỉ cùng sắc với dải sáng, rồi chạm khung khi kim chúc xuống.",td_dung:"Bát nghiêng bên nào, giữ nửa khung bên kia để đỡ.",td_ngon:"Vòng xanh sáng thì giữ Thưa, buông khi tiếng vào dải xanh.",td_hanh:"Chạm + hoặc − chia phần cho đủ số chấm của mỗi người, rồi chạm ✓.",chai:"Chạm khi kim vào dải xanh.",le:"Kéo từng vật đến đúng chỗ như bàn lễ mẫu.",tc:"Kéo từng món vào kho có hàng mẫu cùng loại.",xa:"Chạm người có áo và vật mang theo khớp vật chứng.",thq:"Kéo từng người vào ghế: phẩm cao ngồi gần Thái hậu.",hoadien:"Kéo hoa điền vào giữa hai đầu mày rồi chạm «Dán».",duho:"Chạm đóa sen khi nó trôi vào khoảng vàng sát mạn thuyền.",den:"Kéo ngón tay để đèn đi giữa dòng sáng, tránh hoa sen.",tat:"Chạm khi kim lướt qua giữa vùng đỏ.",ne:"Chạm khi kim vào vùng xanh.",kinh:"Đưa bút theo nét mờ của bản kinh, từng nét theo số thứ tự.",may:"Đưa kim theo đường may mờ, từng đường theo số thứ tự.",nghe:"Chạm Nép giữ bóng trong dải xanh, rồi chạm câu có từ cần nghe.",truyen:"Chạm từng người từ «Ngươi» tới «Cung nàng».",mac:"Kéo thanh giá, chạm «Ngỏ giá»; lời đáp cho biết xa hay gần.",thoico:"Chạm Ra tay lúc người canh chú ý thấp nhất.",thu_tam:"Vuốt dọc lông thú năm lần cho đều tay.",thu_choi:"Chạm đúng ô đang sáng.",tuoi:"Chạm Dừng tưới khi nước vừa đủ.",co7:"Lần lượt đặt quân; năm quân liền một hàng trước thì thắng."};
 function kgTapRow(s){let t=s.tap||(s.kind&&KG82_TAP[s.kind])||"";if(!t&&s.how){const m=String(s.how).replace(/<[^>]+>/g,"").match(/^[^.!?]*[.!?]/);t=m?m[0]:String(s.how).slice(0,90)}return t}
 const KG82_WIN={thi:"Phần chơi càng cao, thứ hạng càng cao.",hoc:"",toil:"Kẻ mày, đánh phấn, chấm son càng khớp, dung nhan càng đẹp."};
 function kgWinRow(s){if(s.win){if(s.win==="hoc"){let w5="";try{w5=String(mgWord(5)).toLowerCase()}catch(e){}return w5?`Đạt mức «${w5}» trở lên thì môn này tiến bộ.`:"Chơi khá thì môn này tiến bộ."}return KG82_WIN[s.win]||s.win}
@@ -34100,7 +34100,7 @@ Object.assign(KG82_KIND,{
  ve:{e:"trace",n:"Vẽ",t:"Đồ nét bút",how:"Đặt ngón tay ở chấm xanh rồi đưa theo nét mờ cho kín và đều tay. 4 bức."},
  hoa:{e:"arrange",n:"Cắm hoa",t:"Cắm thế thiên – nhân – địa",how:"Kéo từng cành vào bình, đặt đóa hoa vào vòng của nó: cành dài nhất là Thiên, cành vừa là Nhân, cành ngắn là Địa. Giữ thế hoa cân. 3 bình."},
  banh:{e:"cook",n:"Nấu ăn",t:"Canh lửa nấu món",how:"Giữ nút Quạt lửa cho lửa nằm trong vùng xanh của từng bước, kéo nguyên liệu vào nồi đúng thứ tự công thức và chờ ninh xong. Lửa lên xuống chậm sau tay quạt, lại có gió lùa: buông tay sớm một chút."},
- huong:{e:"blend",n:"Điều hương",t:"Pha hương theo mẫu",how:"Kéo ba thanh trượt để pha ba vị hương cho màu khói giống hương mẫu, rồi chạm Dâng hương. 3 lư hương."}});
+ huong:{e:"blend",n:"Điều hương",t:"Pha hương theo mẫu",how:"Kéo ba thanh trượt để pha ba vị hương cho màu khói giống hương mẫu, rồi chạm «Dâng hương». 3 lư hương."}});
 KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi.";
 /* lessons (Tài nghệ tab): every art plays its own contest game (cam→đàn, ky→cờ, thi→thơ, hoa→vẽ, vu→múa, y→điều hương, theu→thêu, nau→nấu ăn) */
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
@@ -34809,7 +34809,7 @@ function nwCalli(box,env){NWU.length=0;const C=kg82Canvas(box,1,460),{g,W,H}=C;c
  const sample=P=>{const out=[];let pr=null;for(let k=0;k<=400;k++){const p=toC(bez(P,k/400));if(!pr||k91Dist(p[0],p[1],pr[0],pr[1])>=4||k===400){out.push(p);pr=p}}return out};
  const hb=nwHintBtn(box);
  const dm=k91DemoCard(box,"nwcalli",{title:"CÁCH CHƠI: ĐỒ NÉT THƯ PHÁP",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
-  lines:["Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay.","Làm lần lượt nét 1, nét 2, nét 3… như người viết chữ. Giữ bút trong vệt mờ thì nét đẹp và đều.","Chưa thấy nét nào thì chạm Gợi ý, chỉ tốn một ít phần."],
+  lines:["Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay.","Làm lần lượt nét 1, nét 2, nét 3… như người viết chữ. Giữ bút trong vệt mờ thì nét đẹp và đều.","Chưa thấy nét nào thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const x0=W/2-70,y0=82,x1=W/2+70,y1=82;g.save();g.lineCap="round";g.strokeStyle="#8a735040";g.lineWidth=18;g.beginPath();g.moveTo(x0,y0);g.quadraticCurveTo(W/2,y0-18,x1,y1);g.stroke();
    g.setLineDash([3,5]);g.strokeStyle="#8a7350aa";g.lineWidth=1.2;g.stroke();g.setLineDash([]);const k=(now%2600)/2600,u=k<.15?0:k>.85?1:(k-.15)/.7;const px=x0+(x1-x0)*u,py=y0-18*2*u*(1-u);
    g.strokeStyle="#1e140e";g.lineWidth=7;g.beginPath();g.moveTo(x0,y0);for(let s=1;s<=20;s++){const q=u*s/20;g.lineTo(x0+(x1-x0)*q,y0-36*q*(1-q))}g.stroke();
@@ -34865,7 +34865,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
  const DOU=[];let r=-1,pts=0,tot=0,okT=0,msT=0,P=null,phase="",t0=0,drag=null,sel=null,done=false,tAct=0,tip=null;const pops=[];
  const hb=nwHintBtn(box);
  const dm=k91DemoCard(box,"nwdoi",{title:"CÁCH CHƠI: ĐỐI NÉT BÚT",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
-  lines:["Hai bức liễn treo đối nhau: bức trái có nét bút, bức phải phải là hình lật gương của nét ấy, cùng hàng.","Kéo nét trong khay vào ô bên phải (hoặc chạm nét rồi chạm ô). Nét lật gương đúng thì ở lại, sai thì tự quay về.","Chưa thấy nét nào thì chạm Gợi ý, chỉ tốn một ít phần."],
+  lines:["Hai bức liễn treo đối nhau: bức trái có nét bút, bức phải phải là hình lật gương của nét ấy, cùng hàng.","Kéo nét trong khay vào ô bên phải (hoặc chạm nét rồi chạm ô). Nét lật gương đúng thì ở lại, sai thì tự quay về.","Chưa thấy nét nào thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2,y=84,s=13;g.save();g.strokeStyle=K91C.hair;g.setLineDash([4,4]);g.beginPath();g.moveTo(cx,y-30);g.lineTo(cx,y+30);g.stroke();g.setLineDash([]);
    k91Tile(g,cx-86,y-24,48,48,"","n",14,"tho-slip");nwMark(g,"phay",cx-62,y,s,false,NWC.ink);k91Tile(g,cx+38,y-24,48,48,"","blank",14,"tho-slip");
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,sx=cx-20,sy=y+50,tx=sx+(cx+62-sx)*e,ty=sy+(y-sy)*e;nwMark(g,"phay",tx,ty,s,true,e>=1?K91C.good():NWC.ink);return y+78}});
@@ -40205,7 +40205,7 @@ const NWQ_LE=["huong-censer","hoa-vase","nghiem-bowl","doden-lantern","mua-fan",
 const LEU=[];/* altar ids shown in this game */
 const NWQ_LAY={3:[[.5,.28],[.24,.72],[.76,.72]],4:[[.24,.28],[.76,.28],[.24,.72],[.76,.72]],5:[[.17,.28],[.5,.22],[.83,.28],[.33,.74],[.67,.74]]};
 function nwqLay(box,env){return nwqPlace(box,env,{ratio:1.25,hMax:560,veil:.18,ay:.85,hintSub:"chỉ chỗ đúng, bớt một ít phần",wrongT:"Chưa đúng chỗ, xem tờ mẫu.",hintT:"Vật sáng đặt vào chỗ sáng.",perfect:"Bàn lễ đúng mẫu!",fine:"Bàn lễ xong!",
- demo:{title:"CÁCH CHƠI: BÀY LỄ",lines:["Tờ mẫu ở trên cho thấy mỗi vật đặt ở đâu trên bàn lễ.","Kéo từng vật ở khay dưới đến đúng chỗ của nó trên bàn.","Đặt sai thì vật tự quay về khay. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
+ demo:{title:"CÁCH CHƠI: BÀY LỄ",lines:["Tờ mẫu ở trên cho thấy mỗi vật đặt ở đâu trên bàn lễ.","Kéo từng vật ở khay dưới đến đúng chỗ của nó trên bàn.","Đặt sai thì vật tự quay về khay. Chưa rõ thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-92,42,184,58,"MẪU",10);const m=[[cx-48,74],[cx+48,74]],nm=["huong-censer","hoa-vase"];m.forEach(([x,y],i)=>nwqFit(g,nm[i],x,y,34));
    nwqPanel(g,cx-92,110,184,58,"BÀN LỄ",10);const sx=[cx-48,cx+48],sy=142;sx.forEach(x=>{nwqSlotRing(g,{x,y:sy,w:40,h:40},"n")});
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx,hy=196,tx=hx+(sx[1]-hx)*e,ty=hy+(sy-hy)*e;nwqFit(g,"hoa-vase",tx,ty,36);nwqFit(g,"huong-censer",sx[0],sy,34,{alpha:.9});return 236}},
@@ -40231,7 +40231,7 @@ const NWQ_CAT={luong:{n:"Kho lương",s:["banh-gao","banh-botgao","banh-muoi","b
  tuoi:{n:"Kho thịt cá rau",s:["banh-ga","banh-suon","banh-xuong","banh-caque","banh-cachua","banh-hanh"]}};
 const NWQ_SPLIT={5:[2,2,1],6:[2,2,2],7:[3,2,2],8:[3,3,2]};
 function nwqSort(box,env){return nwqPlace(box,env,{ratio:1.12,hMax:540,veil:.2,ay:.9,hintSub:"chỉ kho đúng, bớt một ít phần",wrongT:"Chưa đúng loại, xem hàng mẫu.",hintT:"Món sáng cất vào kho sáng.",perfect:"Vào kho đủ cả!",fine:"Vào kho xong!",
- demo:{title:"CÁCH CHƠI: PHÂN KHO",lines:["Mỗi cửa kho có hàng mẫu và tên kho. Hàng cùng loại với mẫu thì cất vào kho ấy.","Kéo từng món ở dưới vào cửa kho đúng loại.","Cất sai thì món tự quay về. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
+ demo:{title:"CÁCH CHƠI: PHÂN KHO",lines:["Mỗi cửa kho có hàng mẫu và tên kho. Hàng cùng loại với mẫu thì cất vào kho ấy.","Kéo từng món ở dưới vào cửa kho đúng loại.","Cất sai thì món tự quay về. Chưa rõ thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-100,42,96,76,"Kho lương",10);nwqPanel(g,cx+4,42,96,76,"Kho hương",10);nwqFit(g,"banh-gao",cx-52,86,40);nwqFit(g,"huong-tram",cx+52,86,40);
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx-52,hy=170,tx=hx+(cx-52-hx)*e,ty=hy+(98-hy)*e;nwqFit(g,"banh-muoi",tx,ty,34);return 196}},
  build(r,tier,W,H){const B=BAL.nwq,N=B.n.tc[tier],keys=kg82Shuf(Object.keys(NWQ_CAT)).slice(0,3),cnt=kg82Shuf((NWQ_SPLIT[N]||NWQ_SPLIT[6]).slice());
@@ -40249,7 +40249,7 @@ function nwqPins(g,x,y,w,h,n,st){const per=n>4?Math.ceil(n/2):n,rows=n>4?2:1,pr=
  for(let i=0;i<n;i++){const row=Math.floor(i/per),inRow=Math.min(per,n-row*per),col=i%per;const cx=x+w/2+(col-(inRow-1)/2)*pr*2.5,cy=y+h*(rows>1?.3+row*.24:.38);
   g.save();g.fillStyle=st==="bad"?"#b0463a":"#c9a03a";g.strokeStyle="#6e4d0e";g.lineWidth=1.2;g.beginPath();g.arc(cx,cy,pr,0,Math.PI*2);g.fill();g.stroke();g.fillStyle="#fff3c2";g.beginPath();g.arc(cx-pr*.28,cy-pr*.28,pr*.3,0,Math.PI*2);g.fill();g.restore()}}
 function nwqSeat(box,env){return nwqPlace(box,env,{ratio:1.0,hMax:480,veil:.2,ay:.8,hintSub:"chỉ ghế đúng, bớt một ít phần",wrongT:"Chưa hợp phẩm: nhiều ngọc ghim ngồi gần hơn.",hintT:"Người sáng ngồi ghế sáng.",perfect:"Xếp chỗ đúng lễ!",fine:"Xếp chỗ xong!",
- demo:{title:"CÁCH CHƠI: XẾP CHỖ NGỒI YẾN",lines:["Thái hậu ngồi bên trái. Người nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu nhất.","Kéo từng người ở dưới vào ghế. Hai người ngang phẩm thì người phong trước (năm nhỏ hơn) ngồi trước.","Xếp sai thì người tự quay về. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
+ demo:{title:"CÁCH CHƠI: XẾP CHỖ NGỒI YẾN",lines:["Thái hậu ngồi bên trái. Người nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu nhất.","Kéo từng người ở dưới vào ghế. Hai người ngang phẩm thì người phong trước (năm nhỏ hơn) ngồi trước.","Xếp sai thì người tự quay về. Chưa rõ thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2,tw=50,th=42;nwqPanel(g,cx-118,40,236,70,null);g.fillStyle="#5a3a0c";g.font=k91F(700,10,1);g.textAlign="left";g.fillText("Thái hậu",cx-110,56);
    [[cx-40,3],[cx+22,1]].forEach(([x,n])=>{k91Tile(g,x,60,tw,th,"","n",12,"tho-slip");nwqPins(g,x,60,tw,th,n,"n")});
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx-tw/2,hy=140,tx=hx+(cx-40-hx)*e,ty=hy+(60-hy)*e;k91Tile(g,tx,ty,tw,th,"","on",12,"tho-slip");nwqPins(g,tx,ty,tw,th,3,"n");return 196}},
@@ -40283,7 +40283,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
  const XAU=[];let r=-1,pts=0,P=null,phase="",t0=0,tAct=0,done=false;const pops=[];
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=NWB.btn("nwqhint","hint",{cls:"kgbtn",label:"Gợi ý: gạch một người không khớp"});box.appendChild(hb);
  const dm=k91DemoCard(box,nwqKey("xa"),{title:"CÁCH CHƠI: KHÁM VẬT CHỨNG",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
-  lines:["Vụ án có vật chứng bày ở trên: mảnh áo, đồ rơi lại. Mỗi người bị nghi mặc áo nào, mang theo thứ gì thì hiện ở dưới.","Chạm vào người có áo và vật mang theo khớp cả hai vật chứng.","Chọn sai thì người ấy bị gạch, mất một ít phần. Chưa rõ thì chạm Gợi ý."],
+  lines:["Vụ án có vật chứng bày ở trên: mảnh áo, đồ rơi lại. Mỗi người bị nghi mặc áo nào, mang theo thứ gì thì hiện ở dưới.","Chạm vào người có áo và vật mang theo khớp cả hai vật chứng.","Chọn sai thì người ấy bị gạch, mất một ít phần. Chưa rõ thì chạm «Gợi ý»."],
   art:(g,W,H,now)=>{const cx=W/2;nwqScrap(g,cx-46,76,44,NWQ_COL[0][1]);nwqFit(g,"ve-brush",cx+46,76,44);const on=Math.floor(now/900)%2;
    [[cx-60,0],[cx+60,1]].forEach(([x,j])=>{nwqRobe(g,x-30,112,60,66,NWQ_COL[j===0?0:1][1]);nwqFit(g,j===0?"ve-brush":"mua-fan",x+22,150,28)});
    if(on){g.save();g.strokeStyle=K91C.good();g.lineWidth=3;k91RR(g,cx-92,106,64,76,8);g.stroke();g.restore()}return 204}});
@@ -40407,7 +40407,7 @@ function lmShuf(a){return kg82Shuf(a.slice())}
 function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lantern.short.h?BAL.lantern.short.min:0),{g,W,H}=C;const tier=lmTier(env),B=BAL.lantern,LIM=B.lim[tier],IDLE=B.idle[tier];
  const LDU=[];let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","?","","Gợi ý: bớt một ít phần"]]);
  const dm=k91DemoCard(box,"doden2",{title:"CÁCH CHƠI: THẮP ĐÈN",done:()=>{hb.hidden=false;t0=tAct=performance.now();setTimeout(fit,50)},
-  lines:["Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn trên màn.","Hồi 1: chạm mọi chiếc đèn giống đèn mẫu (cùng dáng, cùng màu). Hồi 2: chạm để thắp đèn cho giống hình mẫu. Hồi 3: chạm đèn theo đúng thứ tự dải mẫu.","Chạm nhầm thì đèn tối đi, chạm lại. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."]});
+  lines:["Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn trên màn.","Hồi 1: chạm mọi chiếc đèn giống đèn mẫu (cùng dáng, cùng màu). Hồi 2: chạm để thắp đèn cho giống hình mẫu. Hồi 3: chạm đèn theo đúng thứ tự dải mẫu.","Chạm nhầm thì đèn tối đi, chạm lại. Chưa rõ thì chạm «Gợi ý», chỉ tốn một ít phần."]});
  if(dm)hb.hidden=true;
  const TZ=()=>Math.round(H*.3);
  function cells(n,cols,y0,h0){const rows=Math.ceil(n/cols),cw=(W-16)/cols,ch=h0/rows;return Array.from({length:n},(_,i)=>{const c=i%cols,r=Math.floor(i/cols);return{x:8+c*cw,y:y0+r*ch,w:cw,h:ch}})}
@@ -56554,10 +56554,10 @@ document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)ret
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
- tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
- xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
- thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."}};
+ le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm «Gợi ý». Làm nhanh thì được trọn phần."},
+ tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm «Gợi ý». Làm nhanh thì được trọn phần."},
+ xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm «Gợi ý». Làm nhanh thì được trọn phần."},
+ thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm «Gợi ý». Làm nhanh thì được trọn phần."}};
 /* family C (owner 16/11 07:20Z, no word games): the exam games are skill games of jnwq (lay / sort / clue / seat); no question banks remain.
    The kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
 (function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k]})();
@@ -57402,7 +57402,7 @@ function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)
  if(o.btn)L.push(`<button type="button" class="kchip n" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button>`);
  return `<span class="kchips kctm">${L.join("")}</span>`}
 /* the panel over both screens while the game is held (kit panel markup, as the freeze panel #coopfz) */
-function kitCoopHold(mine){css();const t=mine?["Đang tạm dừng","Hậu cung dừng lại cho cả hai. Ngươi trở lại thì bấm Tiếp tục."]:["Hảo hữu xin tạm dừng","Hảo hữu xin tạm lui chốc lát. Hậu cung dừng lại cho đến khi hảo hữu trở lại."];
+function kitCoopHold(mine){css();const t=mine?["Đang tạm dừng","Hậu cung dừng lại cho cả hai. Ngươi trở lại thì chạm «Tiếp tục»."]:["Hảo hữu xin tạm dừng","Hảo hữu xin tạm lui chốc lát. Hậu cung dừng lại cho đến khi hảo hữu trở lại."];
  const rows=typeof kitRows==="function"?kitRows([["Hảo hữu",mine?"đang đợi ngươi":"đang tạm lui",mine?"n":"r"],["Đồng hồ buổi","đứng yên","n"]]):"";
  return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",t[0],t[1]):`<b>${t[0]}</b>`}<div class="body" id="kctmhb">${rows}</div><div class="row" id="kctmhr">${mine?`<button class="kbtn" data-ctm="go">Tiếp tục</button>`:`<button class="kbtn alt" data-cfz="leave">Về màn đầu</button>`}</div></div>`}
 /* the host's pick in the lobby (jcooplobby "wait" screen): Mỗi buổi tối đa 3 / 5 / 8 phút, kit chip buttons in one kitRows row */
@@ -57437,14 +57437,14 @@ function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const n
  const rows=[["Hảo hữu",`${s[1]} ${fw}`,s[0]],["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${fmtT(o.left)}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"],
   ["Ngươi",o.meRd?"đã sẵn sàng":`còn ${o.myKh||0} khắc`,o.meRd?"g":"n"]];
  const note=o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
-  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì bấm Sẵn sàng (hay hết khắc) là sang buổi cho cả hai.":
-  "Cứ làm việc của ngươi. Hết khắc hay bấm Sẵn sàng là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang.";
+  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì chạm «Sẵn sàng» (hay hết khắc) là sang buổi cho cả hai.":
+  "Cứ làm việc của ngươi. Hết khắc hay chạm «Sẵn sàng» là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang.";
  return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",nm,"Hảo hữu cùng chơi").replace(/<\/div>$/,(typeof kitXHTML==="function"?kitXHTML('data-ctm="frx"',"Đóng"):"")+"</div>"):`<b>${esc(nm)}</b>`}<div class="body" id="kctmpb">${typeof kitRows==="function"?kitRows(rows):""}<p class="kpnote">${note}</p></div>${o.canHold?`<div class="row" id="kctmpr"><button class="kbtn alt" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button></div>`:""}</div>`}
 /* §69.3 kitCoopSteps(o) (owner 16/11 "Rồi sao nữa", review/coop-invite-ux): the 1-2-3 guide of the invite screen as ONE kitRows table.
    o = {sent:bool (she has sent / copied the invite), joined:bool (the friend is in the room), wait:"0:42" (live elapsed, optional), you:"a"|"b"}.
    Row tones: g done (✓) · w now (…) · n next. Row 2's value is `<span class="ef w" data-kcw="t">` so the lobby can tick the time in place. */
 function kitCoopSteps(o){o=o||{};const guest=o.you==="b";
- const r1=guest?["1 · Nhận lời mời","✓ đã nhận","g"]:o.sent||o.joined?["1 · Gửi lời mời","✓ đã gửi cho hảo hữu","g"]:["1 · Gửi lời mời","… chạm Gửi đường dẫn bên dưới","w"];
+ const r1=guest?["1 · Nhận lời mời","✓ đã nhận","g"]:o.sent||o.joined?["1 · Gửi lời mời","✓ đã gửi cho hảo hữu","g"]:["1 · Gửi lời mời","… chạm «Gửi đường dẫn» bên dưới","w"];
  const r2=o.joined?["2 · Hảo hữu vào phòng","✓ đã vào phòng","g"]:["2 · Hảo hữu vào phòng",`<span class="ef w" data-kcw="t">… đang đợi${o.wait?" · "+o.wait:""}</span>`,"w"];
  const r3=o.joined?["3 · Cùng chơi","… đang vào cuộc","w"]:["3 · Cùng chơi","tự bắt đầu khi hảo hữu vào, không phải chạm gì","n"];
  return kitRows([r1,r2,r3])}
@@ -61279,7 +61279,7 @@ function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style
   paint(g);raf=requestAnimationFrame(wait)}
  raf=requestAnimationFrame(wait);C.cv.addEventListener("pointerdown",()=>{moved=1});
  return()=>{stop=true;cancelAnimationFrame(raf);if(run)run.stop()}}
-try{KG82_ENG.hoadien=kgHoaDien;KG82_KIND.hoadien={e:"hoadien",n:"Dán hoa điền",t:"Điểm trang trước gương",how:"Kéo hoa điền đặt vào giữa hai đầu mày rồi bấm Dán. Không có dấu chỉ chỗ: nhìn đôi mày mà đặt. Không tính giờ: đặt càng khớp càng được phần."};
+try{KG82_ENG.hoadien=kgHoaDien;KG82_KIND.hoadien={e:"hoadien",n:"Dán hoa điền",t:"Điểm trang trước gương",how:"Kéo hoa điền đặt vào giữa hai đầu mày rồi chạm «Dán». Không có dấu chỉ chỗ: nhìn đôi mày mà đặt. Không tính giờ: đặt càng khớp càng được phần."};
  KG82_SPR.hoadien=["chai-bg"]}catch(e){console.error("hd kind",e)}
 
 /* ---------- getting one: shop, NPC hands (→ their gifts), found, +1 per promotion ---------- */
@@ -67275,7 +67275,7 @@ const STEPS=[
   html:()=>say(`<p>Mỗi buổi có ${BAL.time.khac} khắc, chấm tròn đầy là số khắc buổi này còn. Việc nào cũng tốn khắc. Làm được hay không là tính theo tổng số khắc còn lại trong ngày: việc dài hơn số khắc còn trong buổi thì kéo sang buổi sau; riêng buổi tối không kéo qua đêm.</p><p>Đầu mỗi tuần rút một quẻ: quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gặp quẻ Hung thì nên giữ mình. Bên cạnh là thời tiết hôm nay.</p>`)},
  {id:"the",title:"Đọc một thẻ việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
-  html:()=>say(`<p>Mỗi việc là một thẻ. Chữ bên phải là cơ may: ${KIT_ODDS.join(", ")}; việc chắc thì không ghi.</p>${kitRows([R("Cần","điều kiện: ✓ đã đủ, ✗ còn thiếu"),R("Tốn","khắc và thứ phải bỏ ra"),R("Được","lợi khi thành, chữ xanh","g"),R("Mất","thiệt khi hỏng, chữ đỏ","r"),R("Kèm","hệ lụy có thể đến dù thành","r")])}<p>Dòng Quẻ dưới cơ may cho biết quẻ tuần làm việc ấy dễ hay khó hơn; "có thai: khả năng thấp" trong Được là khả năng riêng của điều kèm ấy.</p>`)},
+  html:()=>say(`<p>Mỗi việc là một thẻ. Chữ bên phải là cơ may: ${KIT_ODDS.join(", ")}; việc chắc thì không ghi.</p>${kitRows([R("Cần","điều kiện: ✓ đã đủ, ✗ còn thiếu"),R("Tốn","khắc và thứ phải bỏ ra"),R("Được","lợi khi thành, chữ xanh","g"),R("Mất","thiệt khi hỏng, chữ đỏ","r"),R("Kèm","hệ lụy có thể đến dù thành","r")])}<p>Dòng Quẻ dưới cơ may cho biết quẻ tuần làm việc ấy dễ hay khó hơn; "có thai: khả năng thấp" trong dòng «Được» là khả năng riêng của điều kèm ấy.</p>`)},
  {id:"thu",title:"Làm thử một việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,interact:true,noNext:true,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
   html:()=>say(`<p class="ktut-do">{X} chạm vào thẻ đang sáng để làm thử một việc thật.</p><p>Làm xong sẽ có thẻ kết quả.</p>`)},
@@ -67327,7 +67327,7 @@ window.kitTour=function(){tourStart()};
 
 /* ---------- LỜI DẶN LẦN ĐẦU (contextual tips) ---------- */
 const TIPS={
- "tab-act":{t:"Hành sự",h:"Mỗi thẻ là một việc: Cần, Tốn, Được, Mất, Kèm ghi rõ cái giá và cái lợi; chữ bên phải là cơ may. Hàng mục trên cùng lọc việc theo loại."},
+ "tab-act":{t:"Hành sự",h:"Mỗi thẻ là một việc: «Cần», «Tốn», «Được», «Mất», «Kèm» ghi rõ cái giá và cái lợi; chữ bên phải là cơ may. Hàng mục trên cùng lọc việc theo loại."},
  "tab-go":{t:"Dư đồ",h:"Nhãn mỗi nơi ghi số bóng người và đường đi tốn mấy khắc. Nơi có dấu khóa phải xin yết kiến, hoặc lẻn vào và chịu hiểm."},
  "tab-rv":{t:"Phi tần",h:"Chạm mặt một người để xem thẻ: thiện cảm, ghen, oán với {x}, và những việc làm được với nàng. Điều chưa biết ghi dấu hỏi."},
  "tab-rel":{t:"Giao tình",h:"Giao tình cho thấy ai thương, ai ghen, ai oán. Người oán {x} nhiều sẽ tìm dịp trả thù; nên kết thân trước khi bị cô lập."},
@@ -67342,7 +67342,7 @@ const TIPS={
  "tab-log":{t:"Sổ ghi",h:"Mọi việc đã qua đều chép ở đây: việc {x} làm, việc người khác làm với {x}, tin trong cung."},
  "que":{t:"Quẻ đầu tuần",h:"Mỗi đầu tuần rút một quẻ. Quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gieo lại tốn "+(BAL.lot.bac)+" bạc và "+(BAL.lot.k)+" khắc."},
  "minigame":{t:"Trò nhỏ",h:"Trong trò nhỏ, chơi khéo thì được nhiều phần. Phần chơi cộng với bậc tài nghệ và tư chất thành kết quả cuối."},
- "muuke":{t:"Mưu kế",h:"Việc mưu kế, hại người được nhiều nhưng dòng Kèm ghi rõ hiểm họa. Lộ ra thì mất Đức, người bị hại sinh oán; Tâm cơ cao và chứng cứ giúp {x} đứng vững."},
+ "muuke":{t:"Mưu kế",h:"Việc mưu kế, hại người được nhiều, nhưng hiểm họa ghi rõ ở dòng «Kèm». Lộ ra thì mất Đức, người bị hại sinh oán; Tâm cơ cao và chứng cứ giúp {x} đứng vững."},
  "thitam":{t:"Thị tẩm",h:"Mỗi tối Hoàng thượng lật thẻ bài chọn người hầu đêm; Sủng cao thì hay được chọn. Đêm hầu khéo thì Sủng, Ân tình tăng và có thể có thai."},
  "thai":{t:"Có thai",h:"{X} có tin vui. Giữ Sức, mời thái y an thai; kẻ ghen có thể ra tay hại thai, và lúc sinh nở cũng có hiểm nguy."},
  "tuyentu":{t:"Tuyển tú",h:"Ba năm một lần cung đón thêm tú nữ mới. Người mới được sủng thì người cũ dễ bị lãng quên; kết thân sớm hay đề phòng là tùy {x}."},
@@ -68024,8 +68024,8 @@ function nowRows(e){const R=[];let o=null;try{o=typeof CW.frInfo==="function"?CW
 /* the one line of what to do meanwhile (the old chip panel's note, same words) */
 function nowNote(){let o=null;try{o=typeof CW.frInfo==="function"?CW.frInfo():null}catch(x){}if(!o)return"";
  return o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
-  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì bấm Sẵn sàng (hay hết khắc) là sang buổi cho cả hai.":
-  "Cứ làm việc của ngươi. Hết khắc hay bấm Sẵn sàng là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang."}
+  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì chạm «Sẵn sàng» (hay hết khắc) là sang buổi cho cả hai.":
+  "Cứ làm việc của ngươi. Hết khắc hay chạm «Sẵn sàng» là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang."}
 function nowSec(e){const n=nowNote();return {h:"Lúc này",rows:nowRows(e),html:n?`<p class="kpnote">${n}</p>`:""}}
 /* the figure on the panel: met = her own entry (full body, kit stage); unmet = the kit stranger figure as a stage pseudo person ({__fig,__cap}, the kitShop seller form, jinv),
    never her entry: the stage would resolve her real art and name from it */
@@ -98260,7 +98260,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="efa1bb80bfa6";window.CTM_BUILD=BUILD;
+const BUILD="80e46728f598";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

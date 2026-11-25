@@ -54,7 +54,7 @@ function nwCalli(box,env){NWU.length=0;const C=kg82Canvas(box,1,460),{g,W,H}=C;c
  const sample=P=>{const out=[];let pr=null;for(let k=0;k<=400;k++){const p=toC(bez(P,k/400));if(!pr||k91Dist(p[0],p[1],pr[0],pr[1])>=4||k===400){out.push(p);pr=p}}return out};
  const hb=nwHintBtn(box);
  const dm=k91DemoCard(box,"nwcalli",{title:"CÁCH CHƠI: ĐỒ NÉT THƯ PHÁP",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
-  lines:["Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay.","Làm lần lượt nét 1, nét 2, nét 3… như người viết chữ. Giữ bút trong vệt mờ thì nét đẹp và đều.","Chưa thấy nét nào thì chạm Gợi ý, chỉ tốn một ít phần."],
+  lines:["Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay.","Làm lần lượt nét 1, nét 2, nét 3… như người viết chữ. Giữ bút trong vệt mờ thì nét đẹp và đều.","Chưa thấy nét nào thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const x0=W/2-70,y0=82,x1=W/2+70,y1=82;g.save();g.lineCap="round";g.strokeStyle="#8a735040";g.lineWidth=18;g.beginPath();g.moveTo(x0,y0);g.quadraticCurveTo(W/2,y0-18,x1,y1);g.stroke();
    g.setLineDash([3,5]);g.strokeStyle="#8a7350aa";g.lineWidth=1.2;g.stroke();g.setLineDash([]);const k=(now%2600)/2600,u=k<.15?0:k>.85?1:(k-.15)/.7;const px=x0+(x1-x0)*u,py=y0-18*2*u*(1-u);
    g.strokeStyle="#1e140e";g.lineWidth=7;g.beginPath();g.moveTo(x0,y0);for(let s=1;s<=20;s++){const q=u*s/20;g.lineTo(x0+(x1-x0)*q,y0-36*q*(1-q))}g.stroke();
@@ -110,7 +110,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
  const DOU=[];let r=-1,pts=0,tot=0,okT=0,msT=0,P=null,phase="",t0=0,drag=null,sel=null,done=false,tAct=0,tip=null;const pops=[];
  const hb=nwHintBtn(box);
  const dm=k91DemoCard(box,"nwdoi",{title:"CÁCH CHƠI: ĐỐI NÉT BÚT",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
-  lines:["Hai bức liễn treo đối nhau: bức trái có nét bút, bức phải phải là hình lật gương của nét ấy, cùng hàng.","Kéo nét trong khay vào ô bên phải (hoặc chạm nét rồi chạm ô). Nét lật gương đúng thì ở lại, sai thì tự quay về.","Chưa thấy nét nào thì chạm Gợi ý, chỉ tốn một ít phần."],
+  lines:["Hai bức liễn treo đối nhau: bức trái có nét bút, bức phải phải là hình lật gương của nét ấy, cùng hàng.","Kéo nét trong khay vào ô bên phải (hoặc chạm nét rồi chạm ô). Nét lật gương đúng thì ở lại, sai thì tự quay về.","Chưa thấy nét nào thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2,y=84,s=13;g.save();g.strokeStyle=K91C.hair;g.setLineDash([4,4]);g.beginPath();g.moveTo(cx,y-30);g.lineTo(cx,y+30);g.stroke();g.setLineDash([]);
    k91Tile(g,cx-86,y-24,48,48,"","n",14,"tho-slip");nwMark(g,"phay",cx-62,y,s,false,NWC.ink);k91Tile(g,cx+38,y-24,48,48,"","blank",14,"tho-slip");
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,sx=cx-20,sy=y+50,tx=sx+(cx+62-sx)*e,ty=sy+(y-sy)*e;nwMark(g,"phay",tx,ty,s,true,e>=1?K91C.good():NWC.ink);return y+78}});

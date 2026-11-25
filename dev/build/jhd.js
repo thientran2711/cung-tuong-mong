@@ -234,7 +234,7 @@ function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style
   paint(g);raf=requestAnimationFrame(wait)}
  raf=requestAnimationFrame(wait);C.cv.addEventListener("pointerdown",()=>{moved=1});
  return()=>{stop=true;cancelAnimationFrame(raf);if(run)run.stop()}}
-try{KG82_ENG.hoadien=kgHoaDien;KG82_KIND.hoadien={e:"hoadien",n:"Dán hoa điền",t:"Điểm trang trước gương",how:"Kéo hoa điền đặt vào giữa hai đầu mày rồi bấm Dán. Không có dấu chỉ chỗ: nhìn đôi mày mà đặt. Không tính giờ: đặt càng khớp càng được phần."};
+try{KG82_ENG.hoadien=kgHoaDien;KG82_KIND.hoadien={e:"hoadien",n:"Dán hoa điền",t:"Điểm trang trước gương",how:"Kéo hoa điền đặt vào giữa hai đầu mày rồi chạm «Dán». Không có dấu chỉ chỗ: nhìn đôi mày mà đặt. Không tính giờ: đặt càng khớp càng được phần."};
  KG82_SPR.hoadien=["chai-bg"]}catch(e){console.error("hd kind",e)}
 
 /* ---------- getting one: shop, NPC hands (→ their gifts), found, +1 per promotion ---------- */

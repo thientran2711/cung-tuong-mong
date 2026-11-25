@@ -255,7 +255,7 @@ const STEPS=[
   html:()=>say(`<p>Mỗi buổi có ${BAL.time.khac} khắc, chấm tròn đầy là số khắc buổi này còn. Việc nào cũng tốn khắc. Làm được hay không là tính theo tổng số khắc còn lại trong ngày: việc dài hơn số khắc còn trong buổi thì kéo sang buổi sau; riêng buổi tối không kéo qua đêm.</p><p>Đầu mỗi tuần rút một quẻ: quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gặp quẻ Hung thì nên giữ mình. Bên cạnh là thời tiết hôm nay.</p>`)},
  {id:"the",title:"Đọc một thẻ việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
-  html:()=>say(`<p>Mỗi việc là một thẻ. Chữ bên phải là cơ may: ${KIT_ODDS.join(", ")}; việc chắc thì không ghi.</p>${kitRows([R("Cần","điều kiện: ✓ đã đủ, ✗ còn thiếu"),R("Tốn","khắc và thứ phải bỏ ra"),R("Được","lợi khi thành, chữ xanh","g"),R("Mất","thiệt khi hỏng, chữ đỏ","r"),R("Kèm","hệ lụy có thể đến dù thành","r")])}<p>Dòng Quẻ dưới cơ may cho biết quẻ tuần làm việc ấy dễ hay khó hơn; "có thai: khả năng thấp" trong Được là khả năng riêng của điều kèm ấy.</p>`)},
+  html:()=>say(`<p>Mỗi việc là một thẻ. Chữ bên phải là cơ may: ${KIT_ODDS.join(", ")}; việc chắc thì không ghi.</p>${kitRows([R("Cần","điều kiện: ✓ đã đủ, ✗ còn thiếu"),R("Tốn","khắc và thứ phải bỏ ra"),R("Được","lợi khi thành, chữ xanh","g"),R("Mất","thiệt khi hỏng, chữ đỏ","r"),R("Kèm","hệ lụy có thể đến dù thành","r")])}<p>Dòng Quẻ dưới cơ may cho biết quẻ tuần làm việc ấy dễ hay khó hơn; "có thai: khả năng thấp" trong dòng «Được» là khả năng riêng của điều kèm ấy.</p>`)},
  {id:"thu",title:"Làm thử một việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,interact:true,noNext:true,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
   html:()=>say(`<p class="ktut-do">{X} chạm vào thẻ đang sáng để làm thử một việc thật.</p><p>Làm xong sẽ có thẻ kết quả.</p>`)},
@@ -307,7 +307,7 @@ window.kitTour=function(){tourStart()};
 
 /* ---------- LỜI DẶN LẦN ĐẦU (contextual tips) ---------- */
 const TIPS={
- "tab-act":{t:"Hành sự",h:"Mỗi thẻ là một việc: Cần, Tốn, Được, Mất, Kèm ghi rõ cái giá và cái lợi; chữ bên phải là cơ may. Hàng mục trên cùng lọc việc theo loại."},
+ "tab-act":{t:"Hành sự",h:"Mỗi thẻ là một việc: «Cần», «Tốn», «Được», «Mất», «Kèm» ghi rõ cái giá và cái lợi; chữ bên phải là cơ may. Hàng mục trên cùng lọc việc theo loại."},
  "tab-go":{t:"Dư đồ",h:"Nhãn mỗi nơi ghi số bóng người và đường đi tốn mấy khắc. Nơi có dấu khóa phải xin yết kiến, hoặc lẻn vào và chịu hiểm."},
  "tab-rv":{t:"Phi tần",h:"Chạm mặt một người để xem thẻ: thiện cảm, ghen, oán với {x}, và những việc làm được với nàng. Điều chưa biết ghi dấu hỏi."},
  "tab-rel":{t:"Giao tình",h:"Giao tình cho thấy ai thương, ai ghen, ai oán. Người oán {x} nhiều sẽ tìm dịp trả thù; nên kết thân trước khi bị cô lập."},
@@ -322,7 +322,7 @@ const TIPS={
  "tab-log":{t:"Sổ ghi",h:"Mọi việc đã qua đều chép ở đây: việc {x} làm, việc người khác làm với {x}, tin trong cung."},
  "que":{t:"Quẻ đầu tuần",h:"Mỗi đầu tuần rút một quẻ. Quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gieo lại tốn "+(BAL.lot.bac)+" bạc và "+(BAL.lot.k)+" khắc."},
  "minigame":{t:"Trò nhỏ",h:"Trong trò nhỏ, chơi khéo thì được nhiều phần. Phần chơi cộng với bậc tài nghệ và tư chất thành kết quả cuối."},
- "muuke":{t:"Mưu kế",h:"Việc mưu kế, hại người được nhiều nhưng dòng Kèm ghi rõ hiểm họa. Lộ ra thì mất Đức, người bị hại sinh oán; Tâm cơ cao và chứng cứ giúp {x} đứng vững."},
+ "muuke":{t:"Mưu kế",h:"Việc mưu kế, hại người được nhiều, nhưng hiểm họa ghi rõ ở dòng «Kèm». Lộ ra thì mất Đức, người bị hại sinh oán; Tâm cơ cao và chứng cứ giúp {x} đứng vững."},
  "thitam":{t:"Thị tẩm",h:"Mỗi tối Hoàng thượng lật thẻ bài chọn người hầu đêm; Sủng cao thì hay được chọn. Đêm hầu khéo thì Sủng, Ân tình tăng và có thể có thai."},
  "thai":{t:"Có thai",h:"{X} có tin vui. Giữ Sức, mời thái y an thai; kẻ ghen có thể ra tay hại thai, và lúc sinh nở cũng có hiểm nguy."},
  "tuyentu":{t:"Tuyển tú",h:"Ba năm một lần cung đón thêm tú nữ mới. Người mới được sủng thì người cũ dễ bị lãng quên; kết thân sớm hay đề phòng là tùy {x}."},

@@ -95,7 +95,7 @@ const NWQ_LE=["huong-censer","hoa-vase","nghiem-bowl","doden-lantern","mua-fan",
 const LEU=[];/* altar ids shown in this game */
 const NWQ_LAY={3:[[.5,.28],[.24,.72],[.76,.72]],4:[[.24,.28],[.76,.28],[.24,.72],[.76,.72]],5:[[.17,.28],[.5,.22],[.83,.28],[.33,.74],[.67,.74]]};
 function nwqLay(box,env){return nwqPlace(box,env,{ratio:1.25,hMax:560,veil:.18,ay:.85,hintSub:"chỉ chỗ đúng, bớt một ít phần",wrongT:"Chưa đúng chỗ, xem tờ mẫu.",hintT:"Vật sáng đặt vào chỗ sáng.",perfect:"Bàn lễ đúng mẫu!",fine:"Bàn lễ xong!",
- demo:{title:"CÁCH CHƠI: BÀY LỄ",lines:["Tờ mẫu ở trên cho thấy mỗi vật đặt ở đâu trên bàn lễ.","Kéo từng vật ở khay dưới đến đúng chỗ của nó trên bàn.","Đặt sai thì vật tự quay về khay. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
+ demo:{title:"CÁCH CHƠI: BÀY LỄ",lines:["Tờ mẫu ở trên cho thấy mỗi vật đặt ở đâu trên bàn lễ.","Kéo từng vật ở khay dưới đến đúng chỗ của nó trên bàn.","Đặt sai thì vật tự quay về khay. Chưa rõ thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-92,42,184,58,"MẪU",10);const m=[[cx-48,74],[cx+48,74]],nm=["huong-censer","hoa-vase"];m.forEach(([x,y],i)=>nwqFit(g,nm[i],x,y,34));
    nwqPanel(g,cx-92,110,184,58,"BÀN LỄ",10);const sx=[cx-48,cx+48],sy=142;sx.forEach(x=>{nwqSlotRing(g,{x,y:sy,w:40,h:40},"n")});
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx,hy=196,tx=hx+(sx[1]-hx)*e,ty=hy+(sy-hy)*e;nwqFit(g,"hoa-vase",tx,ty,36);nwqFit(g,"huong-censer",sx[0],sy,34,{alpha:.9});return 236}},
@@ -121,7 +121,7 @@ const NWQ_CAT={luong:{n:"Kho lương",s:["banh-gao","banh-botgao","banh-muoi","b
  tuoi:{n:"Kho thịt cá rau",s:["banh-ga","banh-suon","banh-xuong","banh-caque","banh-cachua","banh-hanh"]}};
 const NWQ_SPLIT={5:[2,2,1],6:[2,2,2],7:[3,2,2],8:[3,3,2]};
 function nwqSort(box,env){return nwqPlace(box,env,{ratio:1.12,hMax:540,veil:.2,ay:.9,hintSub:"chỉ kho đúng, bớt một ít phần",wrongT:"Chưa đúng loại, xem hàng mẫu.",hintT:"Món sáng cất vào kho sáng.",perfect:"Vào kho đủ cả!",fine:"Vào kho xong!",
- demo:{title:"CÁCH CHƠI: PHÂN KHO",lines:["Mỗi cửa kho có hàng mẫu và tên kho. Hàng cùng loại với mẫu thì cất vào kho ấy.","Kéo từng món ở dưới vào cửa kho đúng loại.","Cất sai thì món tự quay về. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
+ demo:{title:"CÁCH CHƠI: PHÂN KHO",lines:["Mỗi cửa kho có hàng mẫu và tên kho. Hàng cùng loại với mẫu thì cất vào kho ấy.","Kéo từng món ở dưới vào cửa kho đúng loại.","Cất sai thì món tự quay về. Chưa rõ thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-100,42,96,76,"Kho lương",10);nwqPanel(g,cx+4,42,96,76,"Kho hương",10);nwqFit(g,"banh-gao",cx-52,86,40);nwqFit(g,"huong-tram",cx+52,86,40);
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx-52,hy=170,tx=hx+(cx-52-hx)*e,ty=hy+(98-hy)*e;nwqFit(g,"banh-muoi",tx,ty,34);return 196}},
  build(r,tier,W,H){const B=BAL.nwq,N=B.n.tc[tier],keys=kg82Shuf(Object.keys(NWQ_CAT)).slice(0,3),cnt=kg82Shuf((NWQ_SPLIT[N]||NWQ_SPLIT[6]).slice());
@@ -139,7 +139,7 @@ function nwqPins(g,x,y,w,h,n,st){const per=n>4?Math.ceil(n/2):n,rows=n>4?2:1,pr=
  for(let i=0;i<n;i++){const row=Math.floor(i/per),inRow=Math.min(per,n-row*per),col=i%per;const cx=x+w/2+(col-(inRow-1)/2)*pr*2.5,cy=y+h*(rows>1?.3+row*.24:.38);
   g.save();g.fillStyle=st==="bad"?"#b0463a":"#c9a03a";g.strokeStyle="#6e4d0e";g.lineWidth=1.2;g.beginPath();g.arc(cx,cy,pr,0,Math.PI*2);g.fill();g.stroke();g.fillStyle="#fff3c2";g.beginPath();g.arc(cx-pr*.28,cy-pr*.28,pr*.3,0,Math.PI*2);g.fill();g.restore()}}
 function nwqSeat(box,env){return nwqPlace(box,env,{ratio:1.0,hMax:480,veil:.2,ay:.8,hintSub:"chỉ ghế đúng, bớt một ít phần",wrongT:"Chưa hợp phẩm: nhiều ngọc ghim ngồi gần hơn.",hintT:"Người sáng ngồi ghế sáng.",perfect:"Xếp chỗ đúng lễ!",fine:"Xếp chỗ xong!",
- demo:{title:"CÁCH CHƠI: XẾP CHỖ NGỒI YẾN",lines:["Thái hậu ngồi bên trái. Người nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu nhất.","Kéo từng người ở dưới vào ghế. Hai người ngang phẩm thì người phong trước (năm nhỏ hơn) ngồi trước.","Xếp sai thì người tự quay về. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
+ demo:{title:"CÁCH CHƠI: XẾP CHỖ NGỒI YẾN",lines:["Thái hậu ngồi bên trái. Người nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu nhất.","Kéo từng người ở dưới vào ghế. Hai người ngang phẩm thì người phong trước (năm nhỏ hơn) ngồi trước.","Xếp sai thì người tự quay về. Chưa rõ thì chạm «Gợi ý», chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2,tw=50,th=42;nwqPanel(g,cx-118,40,236,70,null);g.fillStyle="#5a3a0c";g.font=k91F(700,10,1);g.textAlign="left";g.fillText("Thái hậu",cx-110,56);
    [[cx-40,3],[cx+22,1]].forEach(([x,n])=>{k91Tile(g,x,60,tw,th,"","n",12,"tho-slip");nwqPins(g,x,60,tw,th,n,"n")});
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx-tw/2,hy=140,tx=hx+(cx-40-hx)*e,ty=hy+(60-hy)*e;k91Tile(g,tx,ty,tw,th,"","on",12,"tho-slip");nwqPins(g,tx,ty,tw,th,3,"n");return 196}},
@@ -173,7 +173,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
  const XAU=[];let r=-1,pts=0,P=null,phase="",t0=0,tAct=0,done=false;const pops=[];
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=NWB.btn("nwqhint","hint",{cls:"kgbtn",label:"Gợi ý: gạch một người không khớp"});box.appendChild(hb);
  const dm=k91DemoCard(box,nwqKey("xa"),{title:"CÁCH CHƠI: KHÁM VẬT CHỨNG",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
-  lines:["Vụ án có vật chứng bày ở trên: mảnh áo, đồ rơi lại. Mỗi người bị nghi mặc áo nào, mang theo thứ gì thì hiện ở dưới.","Chạm vào người có áo và vật mang theo khớp cả hai vật chứng.","Chọn sai thì người ấy bị gạch, mất một ít phần. Chưa rõ thì chạm Gợi ý."],
+  lines:["Vụ án có vật chứng bày ở trên: mảnh áo, đồ rơi lại. Mỗi người bị nghi mặc áo nào, mang theo thứ gì thì hiện ở dưới.","Chạm vào người có áo và vật mang theo khớp cả hai vật chứng.","Chọn sai thì người ấy bị gạch, mất một ít phần. Chưa rõ thì chạm «Gợi ý»."],
   art:(g,W,H,now)=>{const cx=W/2;nwqScrap(g,cx-46,76,44,NWQ_COL[0][1]);nwqFit(g,"ve-brush",cx+46,76,44);const on=Math.floor(now/900)%2;
    [[cx-60,0],[cx+60,1]].forEach(([x,j])=>{nwqRobe(g,x-30,112,60,66,NWQ_COL[j===0?0:1][1]);nwqFit(g,j===0?"ve-brush":"mua-fan",x+22,150,28)});
    if(on){g.save();g.strokeStyle=K91C.good();g.lineWidth=3;k91RR(g,cx-92,106,64,76,8);g.stroke();g.restore()}return 204}});

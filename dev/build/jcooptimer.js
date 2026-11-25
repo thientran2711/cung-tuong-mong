@@ -272,7 +272,7 @@ function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)
  if(o.btn)L.push(`<button type="button" class="kchip n" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button>`);
  return `<span class="kchips kctm">${L.join("")}</span>`}
 /* the panel over both screens while the game is held (kit panel markup, as the freeze panel #coopfz) */
-function kitCoopHold(mine){css();const t=mine?["Đang tạm dừng","Hậu cung dừng lại cho cả hai. Ngươi trở lại thì bấm Tiếp tục."]:["Hảo hữu xin tạm dừng","Hảo hữu xin tạm lui chốc lát. Hậu cung dừng lại cho đến khi hảo hữu trở lại."];
+function kitCoopHold(mine){css();const t=mine?["Đang tạm dừng","Hậu cung dừng lại cho cả hai. Ngươi trở lại thì chạm «Tiếp tục»."]:["Hảo hữu xin tạm dừng","Hảo hữu xin tạm lui chốc lát. Hậu cung dừng lại cho đến khi hảo hữu trở lại."];
  const rows=typeof kitRows==="function"?kitRows([["Hảo hữu",mine?"đang đợi ngươi":"đang tạm lui",mine?"n":"r"],["Đồng hồ buổi","đứng yên","n"]]):"";
  return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",t[0],t[1]):`<b>${t[0]}</b>`}<div class="body" id="kctmhb">${rows}</div><div class="row" id="kctmhr">${mine?`<button class="kbtn" data-ctm="go">Tiếp tục</button>`:`<button class="kbtn alt" data-cfz="leave">Về màn đầu</button>`}</div></div>`}
 /* the host's pick in the lobby (jcooplobby "wait" screen): Mỗi buổi tối đa 3 / 5 / 8 phút, kit chip buttons in one kitRows row */
@@ -307,14 +307,14 @@ function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const n
  const rows=[["Hảo hữu",`${s[1]} ${fw}`,s[0]],["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${fmtT(o.left)}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"],
   ["Ngươi",o.meRd?"đã sẵn sàng":`còn ${o.myKh||0} khắc`,o.meRd?"g":"n"]];
  const note=o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
-  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì bấm Sẵn sàng (hay hết khắc) là sang buổi cho cả hai.":
-  "Cứ làm việc của ngươi. Hết khắc hay bấm Sẵn sàng là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang.";
+  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì chạm «Sẵn sàng» (hay hết khắc) là sang buổi cho cả hai.":
+  "Cứ làm việc của ngươi. Hết khắc hay chạm «Sẵn sàng» là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang.";
  return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",nm,"Hảo hữu cùng chơi").replace(/<\/div>$/,(typeof kitXHTML==="function"?kitXHTML('data-ctm="frx"',"Đóng"):"")+"</div>"):`<b>${esc(nm)}</b>`}<div class="body" id="kctmpb">${typeof kitRows==="function"?kitRows(rows):""}<p class="kpnote">${note}</p></div>${o.canHold?`<div class="row" id="kctmpr"><button class="kbtn alt" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button></div>`:""}</div>`}
 /* §69.3 kitCoopSteps(o) (owner 16/11 "Rồi sao nữa", review/coop-invite-ux): the 1-2-3 guide of the invite screen as ONE kitRows table.
    o = {sent:bool (she has sent / copied the invite), joined:bool (the friend is in the room), wait:"0:42" (live elapsed, optional), you:"a"|"b"}.
    Row tones: g done (✓) · w now (…) · n next. Row 2's value is `<span class="ef w" data-kcw="t">` so the lobby can tick the time in place. */
 function kitCoopSteps(o){o=o||{};const guest=o.you==="b";
- const r1=guest?["1 · Nhận lời mời","✓ đã nhận","g"]:o.sent||o.joined?["1 · Gửi lời mời","✓ đã gửi cho hảo hữu","g"]:["1 · Gửi lời mời","… chạm Gửi đường dẫn bên dưới","w"];
+ const r1=guest?["1 · Nhận lời mời","✓ đã nhận","g"]:o.sent||o.joined?["1 · Gửi lời mời","✓ đã gửi cho hảo hữu","g"]:["1 · Gửi lời mời","… chạm «Gửi đường dẫn» bên dưới","w"];
  const r2=o.joined?["2 · Hảo hữu vào phòng","✓ đã vào phòng","g"]:["2 · Hảo hữu vào phòng",`<span class="ef w" data-kcw="t">… đang đợi${o.wait?" · "+o.wait:""}</span>`,"w"];
  const r3=o.joined?["3 · Cùng chơi","… đang vào cuộc","w"]:["3 · Cùng chơi","tự bắt đầu khi hảo hữu vào, không phải chạm gì","n"];
  return kitRows([r1,r2,r3])}

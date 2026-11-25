@@ -45,7 +45,7 @@ function nlCardHTML(){const o=S.origin,pts=pdGet(),ok=pts>=PD_COST,srv=typeof is
  const pos=srv?"Cung nữ":o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;
  return `<p><b>${S.name}</b>, ${S.age} tuổi, ${o.n}. ${o.t}</p>
  ${kitRows([nlStat("Xuất thân",o.n),nlStat("Vào cung",pos),nlStat("Tuổi",S.age),nlStat("Tài",S.tai),nlStat("Sắc",S.sac),nlStat("Tâm cơ",S.tamco),nlStat("Đức",S.duc),nlStat("Danh",S.danh),nlStat("Thái hậu ưa",S.th),nlStat("Bạc",S.bac),nlStat("Hoàng thượng",`${S.emp.era}, ${S.emp.age} tuổi${S.ps?", mới đăng cơ":""}`)])}
- <p class="past">Thân phận này đã định sẵn: tải lại trang, chọn ô khác hay bấm Kiếp mới vẫn ra đúng thân phận này. Phúc duyên đang có: <b>${pts}</b>.</p>
+ <p class="past">Thân phận này đã định sẵn: tải lại trang, chọn ô khác hay chạm «Kiếp mới» vẫn ra đúng thân phận này. Phúc duyên đang có: <b>${pts}</b>.</p>
  <div class="opts nlopts"><button class="opt" data-nl="ok">Nhận thân phận<small>tốn: không · thành: bắt đầu kiếp này</small></button>
  <button class="opt" data-nl="re" ${ok?"":"disabled"}>Đổi thân phận (−${PD_COST} Phúc duyên)${ok?`<small>tốn: Phúc duyên -${PD_COST} · thành: thân phận mới (cũng định sẵn)</small>`:`<small data-kp="1">Cần ${PD_COST} Phúc duyên, đang có ${pts}</small>`}</button></div>`}
 function nlCard(){Q=Q.filter(m=>!m.nl);Q.unshift({nl:1,t:"Thân phận kiếp này",cls:"nlcard",faces:[[pMe(),S.name]],h:nlCardHTML(),opts:[],onClose:()=>nlAccept(true)});showModal();
