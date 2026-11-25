@@ -1716,3 +1716,4 @@ KIT rv kit-close-reach (KIT BUG #3) + kit-opts-realtap r2 + co-ngu-seals r4 | re
 net-ghen (ghen saturation + LAW11 shown==applied deltas) | review/net-ghen | session_01D3E3NYQa21C7i6ghmbEahF | RUNNING | 2026-11-25T10:24Z (Foreman D) (W4; W3 rolled 10:23Z)
 d-lander-support (temper pair shot + nc-fix-4 remerge on LC14 stack) | review/robot10-nc-fix-4-rv2 | session_01D3E3NZwPBzoXUgaTJ8BPLX | RUNNING | 2026-11-25T10:31Z (Foreman D)
 | F HARNESS FIXER #4 (opus; ROLE A successor of HARNESS FIXER #3 session_01UV1Szkrku4AmZLvRzEkhZk; handover end of dev/PROGRESS_robot-realtap.md on review/robot-realtap 93812531; first: perfgate-days verification) | review/robot-realtap | FOREMAN F #8 for F #9 | (opening) | RUNNING | 2026-11-25T10:34Z |
+rv talk-others-people r2 | review/talk-others-people-rv | session_01D3E3NaSsipN1iUZHpNZHje | RUNNING | 2026-11-25T10:37Z (Foreman D)
