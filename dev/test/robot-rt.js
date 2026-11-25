@@ -5,6 +5,7 @@
      dev=fold|ipad (Fold 755x1000 touch · iPad 1180x820 pointer)   origin=<origin key> road=<j67 road id>  (optional, set
      BEFORE the first tap through the game's own dev hooks window.__forceOrigin / a67init pick — no tap is simulated)
      bot=sens|rand|cautious|bold|quiet   seed=<n>   life=<name>   stuckMin=15 (no progress → stuck bug, unstick, SAME life)
+     resume=1 (continue the SAME life from <out>/<life>.ckpt.json after a crash / container restart; written every cp buổi and 10 min)
      slice=<buổi> (self-test only: stop after n buổi; a sliced life is NOT a life)   cp=50 (buổi between save-size checkpoints)
    Every action is a tap through dev/test/realtap.js. page.evaluate is used only to READ the screen / state, plus the
    pre-life setup above and a recording wrapper on over() (it calls the game's own over unchanged).
@@ -36,6 +37,9 @@ const T0 = Date.now(), sec = () => Math.round((Date.now() - T0) / 1e3);
 const R = { job: { id: LIFE, origin: A.origin || null, road: A.road || null, bot: BOT, seed: SEED, dev: DEV, url: URL0 },
   harness: { kind: 'realtap', sha: SHA, realtap: true, jsClicks: 0, deadButtons: 0, cap: null, stuck: 0, unstick: [], slice: SLICE || null },
   life: null, exitPick: null, bugs: [], dead: [], saves: [], buoi: 0, steps: 0, status: [] };
+/* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
+const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
+if (C.resume && fs.existsSync(CKPT)) { try { ck = JSON.parse(fs.readFileSync(CKPT, 'utf8')); Object.assign(R, ck.R); rs = ck.rs >>> 0 || rs; R.harness.taps0 = R.harness.taps || 0; R.harness.resumed = (R.harness.resumed || []).concat([{ at: new Date().toISOString(), buoi: R.buoi, from: ck.at }]); console.log('RESUME', LIFE, 'from', ck.at, 'buổi', R.buoi) } catch (e) { console.log('RESUME failed: ' + e.message); ck = null } }
 const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs.find(x => x.k === k); if (b) { b.n++; return b } const n = { k, type, msg, n: 1, at: sec(), ...extra }; R.bugs.push(n); console.log('BUG', type, msg); return n };
 
 /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
@@ -88,6 +92,7 @@ async function play(p) {
     }, { origin: A.origin, road: A.road });
   };
   await boot();
+  if (ck && ck.ls) { await p.evaluate(ls => { for (const [k, v] of Object.entries(ls)) localStorage.setItem(k, v) }, ck.ls); await p.reload({ waitUntil: 'load' }); await boot(); /* setup only: the save goes back where the game keeps it; the life is then opened by taps (Chơi một mình → Tiếp tục) */ }
 
   await p.evaluate(() => { window.__rtEnd = null }).catch(() => {});
   const actsPerBuoi = { sens: 2, rand: 3, cautious: 1, bold: 3, quiet: 0 }[BOT] ?? 2;
@@ -104,6 +109,7 @@ async function play(p) {
     const key = clockKey(sc.S);
     if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; repeat.clear() } lastKey = key; lastProg = Date.now();
       if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
+    if (started && (Date.now() - (R._ckAt || 0) > 600e3 || R.buoi - (R._ckB || 0) >= CP)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
     if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
     if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
@@ -140,6 +146,7 @@ async function play(p) {
       const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
       /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
       if (started && b.some(x => /^chơi một mình/i.test(x.t))) { const back = b.find(x => /trở lại phòng|vào lại phòng|về phòng/i.test(x.t)); if (back) return back; if (C.pre || C.coop) { R.titleBack = (R.titleBack || 0) + 1; return null } }
+      if (!started && ck) { for (const re of [/^chơi một mình/i, /tiếp tục|chơi tiếp/i, /^bỏ qua$/i, /^tiếp$/i]) { const f = b.find(x => re.test(x.t)); if (f) return f } if (b.some(x => /bắt đầu kiếp mới/i.test(x.t))) return null }
       if (!started && C.pre) { const r = C.pre(sc, b); if (r === 'wait') return null; if (r) return r }
       if (!started) { /* title → solo → new life in slot 1 → skip roulette → accept identity */
         const pref = [/chơi một mình/i, /^bắt đầu kiếp mới$/i, /bỏ qua/i, /nhận thân phận/i, /^(vào cung|bắt đầu|nhập cung)/i];
@@ -183,7 +190,7 @@ async function play(p) {
   else R.life = { id: '?', type: '?' };
   if (R.exitPick && R.life) R.life.exitPick = R.exitPick;
   await p.screenshot({ path: path.join(SHOTS, 'end.png') }).catch(() => {});
-  R.harness.deadButtons = R.dead.length; R.harness.taps = rt.stats().taps; R.t = { total: Date.now() - T0 };
+  R.harness.deadButtons = R.dead.length; R.harness.taps = (R.harness.taps0 || 0) + rt.stats().taps; R.t = { total: Date.now() - T0 };
   save();
   console.log('LIFE DONE ' + LIFE + ' ' + (R.life.id) + ' age ' + (R.life.age ?? '?') + ' · buổi ' + R.buoi + ' · taps ' + R.harness.taps + ' · dead buttons ' + R.dead.length + ' · stuck ' + R.harness.stuck + ' · bugs ' + R.bugs.length);
 }
@@ -217,7 +224,7 @@ const DEV = A.dev || 'fold', VP = DEV === 'ipad' ? { width: 1180, height: 820 } 
 const BOT = A.bot || 'sens', SEED = +A.seed || 1, LIFE = A.life || ['rt', A.origin || 'any', BOT, DEV, SEED].join('-');
 const STUCK_MS = (+A.stuckMin || 15) * 60e3, SLICE = +A.slice || 0, CP = +A.cp || 50;
 const OUT = path.resolve(OUT0), SHOTS = path.join(OUT, 'shots-' + LIFE); fs.mkdirSync(SHOTS, { recursive: true });
-const seat = Seat({ url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, life: A.life, origin: A.origin, road: A.road, stuckMin: A.stuckMin, slice: A.slice, cp: A.cp });
+const seat = Seat({ url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, life: A.life, origin: A.origin, road: A.road, stuckMin: A.stuckMin, slice: A.slice, cp: A.cp, resume: A.resume === "1" });
 (async () => {
   const br = await chromium.launch();
   const ctx = await br.newContext({ viewport: VP, deviceScaleFactor: 1, hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
