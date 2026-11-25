@@ -70,3 +70,18 @@ PASS: kit-close-reach ×2 ok (one NT=1; first-tap retries 0); kit-endcard-ink 4/
 3. kit-opts-realtap iPad on the head: 2 FAIL in 7 runs (run 1 `vlout` «real tap on the last option did not fire it» = known family; run 3 `rg{"b":"c1a"}: last option centre (577,717) is covered by #modal (outside the frame)` = a tap point outside the frame, i.e. the layout was mid-change) vs LIVE 351122ba 0/3 on iPad (seat 4 saw LIVE vlout 1/3) → not conclusive, same instability as 1; fix 1 should remove it.
 ## Answer to Foreman B (U3b VFB6 / WQ55 «Tân quân lập uy», iPad): on the head the 4/6 options of the 7-14-line story frame are reachable by ONE real touch drag on iPad (kit-faces-opts `faces1 lines14 opts4/6` iPad: «dragged», last option fired 5/6 runs; the sixth = lost last tap). Fold: reachable by drag (all runs fired), but see reason 1 for the visual states.
 NOT done: kit-faces-opts under load (a second heavy test in parallel); tag-collide; KIT.md §56.32b read-through; END card shots only taken from the test (post-tap), not looked at 3×. Shots (scratch only, never in git): faces-shot copies in the rv5 scratchpad; nothing sent to the CDN review folder (nothing to wipe).
+
+---
+# kit-text-first-2 166b3000 — KIT REVIEW (kit rv seat 5, sonnet, 11/25/2026 ~23:45Z)
+PRIORITY #1 CHECK ('kit-text-first-2'): OD 0 | ledger 0 | claims 3 | main 0 | review/* 1 | archive 0 (reused my own FAIL list on 708056a9 above). Head 166b3000 = review/kit-text-first-2; origin/main 351122ba ⊂ head (ancestor ok, fast-forward).
+## REVIEW — **KIT OK 166b3000 review/kit-text-first-2**
+My 708056a9 FAIL reasons re-proved gone:
+1. Fold 755x1000 @2 «faces1 lines7 opts4» (5 runs at DSF 2, 1 + 2 more looked): ksz XL every run, picture out ×4 / strip ×1 (both end in the same look), exactly ONE visible `.kscue` («Kéo xuống ▾») 5/5, 7 lines unscrolled, options start below, Hoàng thượng figure column never under the text, no NL wide frame. Shots looked 3× (picture out + strip). 
+2. kit-faces-opts 36/36 on 4 of 4 runs (3 consecutive + 1 UNDER LOAD with opt-frame-scroll-scan running in parallel).
+3. opt-frame-scroll-scan Fold ×3 + iPad ×3: 41 frames, 0 FAIL ×6.
+4. realtap: MUTATE=1 FAILs Fold + iPad (32 «option list box sticks out of the frame» rows); clean iPad A/B head vs LIVE 351122ba: head 1/7 FAIL, LIVE 1/7 FAIL (flake family: vlout «did not fire», rg c1a covered) → pre-existing, not this pack (non-gating, for KK).
+5. kit-close-reach ×2 ok (one NT=1; first-tap retries 0); kit-endcard-ink 4/0 (×2; shots looked: «Tiếp theo» button on top, no reward box over the ending); kit-notice-action 16/0; dialog-fixed all pass (file://).
+6. quickcheck ALONE: open 2149 ms, old save ok, perf new/live render 257/260, tab 583/596, buổi 1618/1708 ms (≈ LIVE); time-spill PASS; only FAIL = G4 `90-button-crawl` «Ô lưu · Lui» = pre-existing on LIVE 351122ba/17dfa64d (fix-7 r3 cures; not this pack).
+Law checks: 9 kit only (kit CSS/JS parts, no private frame), 10 frame→layout→button size (text first, one size per tier), 11 same fix across the whole option-frame family (scan 41 frames both devices), 12 both devices looked. VANPHONG: no new wording.
+Answer for B (U3b VFB6 «Tân quân lập uy», iPad/Fold): on 166b3000 the 7-line text reads unscrolled and the 4/6 options are reachable by one real touch drag (faces-opts «dragged», last option fired 4/4 runs).
+Open, NOT gating: realtap vlout / rg-c1a flake (also LIVE); G4 crawl «Ô lưu · Lui» (fix-7); not done: tag-collide, KIT.md §56.32b read-through; shots in scratch only, no CDN review folder created by me (nothing to wipe).
