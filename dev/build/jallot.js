@@ -112,7 +112,7 @@ function alStaffGive(p,skim){if(!p||!Array.isArray(p.staff)||p.out)return;const 
 (function(){try{if(typeof HX==="object"){const w0=HX.wage;Object.defineProperty(HX,"wage",{get(){try{return alOn()&&S&&S.srv?`${w0} Kèm lệ tháng của bậc ngươi: ${alSrvTxt(S.srv.rk)}. Chủ nhân bị Nội vụ phủ cắt xén thì lệ kẻ hầu cũng bị bớt.`:w0}catch(e){return w0}},configurable:true,enumerable:true})}}catch(e){}})();
 /* ---------- item detail: lượt left of a bottle (kit detail rows' own note line) ---------- */
 (function(){if(typeof kitItemDetailRows!=="function")return;const d0=kitItemDetailRows;kitItemDetailRows=function(ref,o){try{const k=ref&&(typeof ref==="string"?ref:ref.k||(ref.e&&ref.e.k));const r=alOf(k);
-  if(r&&r.kind==="dau"){alFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],E.map(e=>`còn ${e.u} lần dùng`))}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
+  if(r&&r.kind==="dau"){alFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],typeof kitUseNote==="function"?kitUseNote(E,{unit:"lọ"}):[`còn ${E.reduce((a,e)=>a+(e.u|0),0)} lần dùng`])}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
 /* ---------- first sight on load / new life ---------- */
 (function(){const g=window.render;if(typeof g!=="function")return;window.render=function(){try{if(S&&!S.alInit)alInitAll()}catch(e){}return g.apply(this,arguments)}})();
 window.alOf=alOf;window.alLight=alLight;window.alLightNote=alLightNote;window.alSrvMonth=alSrvMonth;window.alStaffGive=alStaffGive;window.alInitAll=alInitAll;window.alHasOil=alHasOil;window.alPrice=alPrice;

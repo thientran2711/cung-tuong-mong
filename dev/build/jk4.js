@@ -902,7 +902,11 @@ function kitOvBtn(){const ov=document.getElementById("ov");if(!ov||ov.hidden)ret
  new MutationObserver(()=>{try{if(ov.hidden)return;if(!live()){ov.hidden=true}}catch(e){}}).observe(ov,{childList:true,attributes:true,attributeFilter:["hidden"],subtree:false});
  if(typeof resumeMG==="function"){const r0=resumeMG;resumeMG=function(){let r;try{r=r0.apply(this,arguments)}catch(e){console.error("resumeMG",e)}try{if(S&&S.mg&&ov.hidden){console.warn("lesson game did not open; S.mg cleared",S.mg);S.mg=null}}catch(e){}return r};window.resumeMG=resumeMG}
  if(typeof kg82Close==="function"){const c0=kg82Close;kg82Close=function(){const r=c0.apply(this,arguments);try{if(!ov.hidden&&!live())ov.hidden=true}catch(e){}return r};window.kg82Close=kg82Close}})();
-function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true;
+/* m-fix-2 (LUẬT SỬA CẢ NHÓM, robot F M-FIX-2 item 1): only a PLAIN close word («Đã hiểu», «Xong») is hidden — owner OD:L1352 «không cần cái chữ
+   đã hiểu» (info frames close with ✕ / tap outside). A result button that says what comes next («Môn kế tiếp», «Xem kết quả», «Thử môn khác»,
+   «Dừng ở đây») is a step, not a close word: it stays on screen (it was hidden too and the only way on was a ✕ «Quay lại» that went forward). */
+function kitOvPlain(b){return /^(Đã hiểu|Xong)$/.test(String(b&&b.textContent||"").replace(/\s+/g," ").trim())}
+function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(kitOvPlain(b)){if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true}
  const pan=b.closest("#kg82, .mg")||b.closest(".kpanel");if(!pan||pan.querySelector(".kit-x[data-kitx=ov],.kit-x[data-kitx=kgback]"))return;/* §13.9: the game frame already has its kit ✕ «Quay lại» (it presses this button on a result screen) */const h=pan.querySelector(".kph");
  const html=kitXHTML('data-kitx="ov"');if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}else{pan.style.position=pan.style.position||"relative";pan.insertAdjacentHTML("afterbegin",html);pan.firstElementChild.classList.add("kxabs")}
  const x=pan.querySelector(".kit-x[data-kitx=ov]");x.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();const c=kitOvBtn();if(c)c.click()})}catch(e){console.error("kitOvSync",e)}}
@@ -1229,6 +1233,31 @@ html body .pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1!important;min-width:0}
 html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
 /* explicit «more below» cue (scrollbars are not reliable on phones): a card that scrolls and is not at its end gets a bottom fade (class kpmore, set by kitPcMore) */
 html body .pc.kpwide[data-k2].kpmore::after{content:"";display:block;grid-column:1/-1;position:sticky;bottom:0;height:26px;margin-top:-26px;pointer-events:none;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 85%);z-index:5}
+`;document.head.appendChild(st)})();
+/* KIT §6.4 PERSON PANEL SCROLL (owner 24/11 ~21:50Z real, Fold shots v2–v4; restates OD 21/11 #86 + 23/11 ~20:20Z; one shared kit part = every person panel: Hậu cung/Phi tần/Nam nhân/Cung nhân, Giao tình, Việc nhờ, Mệnh truyện…).
+   The card is a FIXED frame (height = --kpcmax, no scrolling of its own): the portrait column keeps name + rank + portrait still (the face is always seen) and ONLY the text under the portrait (.kplscr: Biết tên / thiện cảm / Oán / tiles / wear) scrolls;
+   the right column keeps the info block (.kpstick: Sở trường / Tính nết / Đã biết / Dạo này + the act-group tabs) still and ONLY the act/step area under it scrolls, each column on its own.
+   The portrait keeps its natural width and only shrinks (kitPcFitPortrait) when the card is too short to leave ~80 px of text under the whole frame (tassel included, kitPcClearTassel). */
+function kitPcScroll(pc){try{if(!pc||!pc.classList.contains("kpwide"))return;const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!pcp)return;
+ let w=L.querySelector(":scope > .kplscr");const tail=[...L.children].filter(c=>c!==w&&c!==pcp&&(pcp.compareDocumentPosition(c)&Node.DOCUMENT_POSITION_FOLLOWING));
+ if(!tail.length&&w)return;if(!w){w=document.createElement("div");w.className="kplscr";pcp.after(w)}tail.forEach(c=>w.appendChild(c))}catch(e){console.error("kitPcScroll",e)}}
+window.kitPcScroll=kitPcScroll;
+function kitPcFitPortrait(pc){try{const max=parseFloat(pc.style.getPropertyValue("--kpcmax"))||0;if(!max||!pc.classList.contains("kpwide"))return;let nat=+pc.dataset.kpcw0||0;if(!nat){nat=Math.round(Math.max(150,Math.min(240,((pc.closest("#panel,#stage,#modal .dlg")||pc).clientWidth||0)*.36)));pc.dataset.kpcw0=nat}
+ /* the portrait keeps its natural kit width (OD 18/11 «never shrink to fit») and is shrunk ONLY when the card is so short that no text row would be left under it: the rows sit up over the frame's pendant (visible share of the frame = vis, measured from its own negative margin), at least KPC_MINTXT px of text must stay under it */
+ const nm=pc.querySelector(":scope > .pcl > .pcname"),pcp=pc.querySelector(":scope > .pcl > .pcp"),head=(nm?nm.offsetHeight:44)+8,mb=pcp?parseFloat(pcp.style.marginBottom)||0:0,vis=1;void mb;/* the text starts BELOW the frame's pendant + tassel (kitPcClearTassel), so the whole frame counts */
+ const w=Math.max(120,Math.min(nat,Math.floor((max-head-80)/vis*550/1037)));pc.style.setProperty("--kpcw",w+"px");kitPcClearTassel(pc);requestAnimationFrame(()=>{kitPcClearTassel(pc);requestAnimationFrame(()=>kitPcClearTassel(pc))})}catch(e){}}
+/* the rows under the frame used to start OVER the pendant + tassel (negative margin of the frame): inside the scrolling text area that overlapped the label («Hoàng thượng → ta», owner-visible, KK23b nit): the text area now starts under the tassel */
+function kitPcClearTassel(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
+window.kitPcClearTassel=kitPcClearTassel;
+window.kitPcFitPortrait=kitPcFitPortrait;
+(function(){const k0=window.kitPcKeyFit;kitPcKeyFit=function(pc){try{k0&&k0.apply(this,arguments)}catch(e){}try{kitPcScroll(pc);kitPcFitPortrait(pc)}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
+ const st=document.createElement("style");st.id="kit-pc-scroll";st.textContent=`
+html body .pc.kpwide[data-k2][style*="--kpcmax"]{height:var(--kpcmax)!important;min-height:0!important;max-height:var(--kpcmax)!important;overflow:hidden!important;grid-template-rows:minmax(0,1fr)!important;align-items:stretch!important;padding-bottom:0!important}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcl{display:flex!important;flex-direction:column;height:100%;min-height:0!important;overflow:hidden!important}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcl>.kplscr{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;position:relative;z-index:2;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent;padding-bottom:6px}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcr{height:100%;min-height:0!important;margin-top:0!important;padding-top:0!important;overflow-y:auto!important;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent;padding-bottom:8px}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcr>*{flex-shrink:0}
+html body .pc.kpwide[data-k2][style*="--kpcmax"] .kpstick{top:0;margin:0 0 6px;padding:7px 0 6px;box-shadow:0 4px 6px -4px #5a3a2033}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}

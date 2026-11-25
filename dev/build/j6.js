@@ -133,7 +133,8 @@ $("stage").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.o!==undefined&&!b.disabled)talk(+b.dataset.o)};
 $("tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;tab=b.dataset.tab;render()};
 $("modal").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;if(b.id==="mclose")closeModal();else if(b.dataset.m!==undefined)chooseM(+b.dataset.m)};
-$("next").onclick=nextBuoi;$("me").onclick=()=>{if(!S.dead&&!Q.length)showSelf()};$("emp").onclick=()=>{if(!S.dead&&!Q.length)showEmp()};
+/* SANGBUOI-HELD r2: the button calls the GLOBAL nextBuoi at tap time = the outermost wrapped chain (every module's nextBuoi wrapper), the same as the khắc-spent auto-advance; wired here before any wrapper, so a bare reference would skip them all */
+$("next").onclick=()=>nextBuoi();$("me").onclick=()=>{if(!S.dead&&!Q.length)showSelf()};$("emp").onclick=()=>{if(!S.dead&&!Q.length)showEmp()};
 $("menu").onclick=()=>{if(Q.length&&!S.dead)return;save();showTitle()};
 try{const H=window.claude&&window.claude.hot;if(H){if(typeof H.snapshot==="function")H.snapshot(()=>S&&!S.dead?ser():null);if(typeof H.ready==="function")H.ready()}}catch(e){}
 (()=>{let s=1;try{s=+localStorage.getItem("hclh-slot")||1}catch(e){}SLOT=s;showTitle()})();
