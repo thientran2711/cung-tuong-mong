@@ -21,3 +21,7 @@ Review links (?v=1): https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-dt
 Proposed live keys (none existed in origin/main): img/place/duong-tu-<dong|tay|bac|tiensanh>.webp — NOT copied to live; wiring = selection-day worker / KIT REQUEST. Rooms are still _review only.
 Note: bed centres at ~¼ and ¾ width → Fold 755x1000 crop shows one bed per view (left/right swipe).
 No rollover needed (low context).
+
+## WIRED KEYS (Foreman C msg 22:21Z): code reads SELX_ART on review/selection-scene (dev/build/jselxsc.js; IMG_U("img/<name>.webp")), TODO names selx-tiensanh / selx-so-dong / selx-so-tay / selx-so-bac. Uploaded to CDN at exactly those paths (same pictures as the review ones, 2688x1386 ≥ 2360 for iPad @2):
+- img/selx-tiensanh.webp (key sanh) · img/selx-so-dong.webp (dong) · img/selx-so-tay.webp (tay) · img/selx-so-bac.webp (bac). New keys, nothing overwritten. Only SELX_ART table in jselxsc.js needs its 4 values changed (selection-scene worker).
+- OPEN: key `rooms` (selx-rooms = «sân Dưỡng Tú viện, ma ma chia sở», the yard where the 12 girls line up) is NOT painted by me — it is a yard, same family as C3-EVBG's yard; not in my brief (4 pictures). Foreman C to confirm who paints it.
