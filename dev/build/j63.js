@@ -99,7 +99,20 @@ function kaOdds(M){if(!M.odds)return"";/* review/odds-no-unknown: only the 7 lad
 function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.map(x=>kaPlain(x.h).toLowerCase()).join(" ");
  R.note=R.note.filter(x=>{const p=kaPlain(x.h).toLowerCase().replace(/^[(\s]+|[)\s.]+$/g,"");const m=p.match(/^(?:chỉ )?(buổi (?:sáng|trưa|chiều|tối))$/);return !(m&&why.includes(m[1]))})}catch(e){}}
 const KA_BLK=[["duoc","Được"],["mat","Mất"],["kem","Kèm"]];
-function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
+/* KIT §6.6 GAIN LIST (OB-KIEP, owner 25/11 ~22:40Z, iPad «Thân phận kiếp này» ĐƯỢC = ~12 items in one «·» run: "chữ tràn lan đại hải thế này đọc không hiểu gì cả ...
+   nó xuống hàng, hay là nó chia làm 2 cột, 3 cột"; OD 23/11 ~20:30Z line-break law: short pairs never split, text breaks where the meaning breaks).
+   ONE rule for every TỐN / ĐƯỢC / MẤT / KÈM / THÀNH / BẠI row of every option / act card (kaRowH is the only row writer):
+   a short row (few short items, KA_LIST.chars in all) stays ONE line with «·»; a longer row becomes a LIST = one item per line (.klist),
+   or 2–3 columns when every item is short (.klist2, ≤ KA_LIST.col characters; the columns fit the card width by CSS, never measured).
+   Cần (its own chip flow) and Ghi chú are not lists. */
+const KA_LIST={chars:56,long:40,col:22,skip:new Set(["why","note"])};
+function kaListCls(k,L){try{if(KA_LIST.skip.has(k)||!L||L.length<2)return"";const n=L.map(x=>kaPlain(x.h).length),tot=n.reduce((a,b)=>a+b,0)+3*(L.length-1),mx=Math.max(...n);
+ if(tot<=KA_LIST.chars&&mx<=KA_LIST.long)return"";return mx<=KA_LIST.col&&L.length>=3?" klist klist2":" klist"}catch(e){return""}}
+/* kaListFix(krv): the same rule for a value cell assembled from copied chips (jopic kitOptFinal: the Mất row of copies, the Được row merged from Thành + Được) */
+function kaListFix(v){try{if(!v)return;const k=((v.parentElement&&[...v.parentElement.classList].find(c=>/^kr-/.test(c)))||"kr-duoc").slice(3);
+ const L=[...v.children].filter(e=>!e.classList.contains("ksep")).map(e=>({h:e.textContent}));v.classList.remove("klist","klist2");const c=kaListCls(k,L).trim();if(c)c.split(/\s+/).forEach(x=>v.classList.add(x))}catch(e){}}
+window.kaListFix=kaListFix;
+function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv${kaListCls(k,L)}">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
 /* K-EF-UNIT (KIT_REQUESTS 21/11 econ-tamco RE-CHECK #2): a STAT item («Bạc -94», «Tâm cơ -3», «Sủng +2», «2 khắc») is ONE unbreakable unit on every option/act card row — it never splits «Bạc» / «-94» at a line end; items still wrap as wholes. Long word items keep wrapping. */
 /* r3 perf (LAND CHAIN 2 QC): one result per item text, cached — the same items are re-rendered every render()/buổi (5.8k calls ≈ 86 ms at CPU x4 before) */
 function kaUnit(h){const C=kaUnit.c||(kaUnit.c=new Map()),k=String(h);let v=C.get(k);if(v===undefined){if(C.size>3000)C.clear();v=kaUnit0(k);C.set(k,v)}return v}
@@ -171,6 +184,12 @@ button.ka .kodds .oc{margin:0;white-space:nowrap;text-align:center}
 button.ka .kodds .ef{font-size:.68rem;text-align:right}
 button.ka .klead{display:block;font-size:.76rem;color:var(--dim);line-height:1.3}
 .kb{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:7px;row-gap:2px;text-align:left;align-content:start}.kb .kr{display:contents}.kb .krl{font-size:.64rem;font-weight:700;color:#8a7350;text-transform:uppercase;white-space:nowrap;padding-top:.12rem}.kb .krv{min-width:0;overflow-wrap:anywhere}.kb .ef.g{color:var(--good)}.kb .ef.r{color:var(--bad)}.kb .ef.t{color:var(--ink)}.kb .ksep{color:#b9a27a;margin:0 4px}.kb .kr-why .krl,.kb .kwhy{color:var(--bad)}
+/* KIT §6.6 GAIN LIST: one rule wins over every per-card value-flow rule (jopic #modal#modal option cards, jk4 compact cards): the :is() id list only lifts the specificity (as .kef1) */
+.krv.klist:is(#kl1#kl2#kl3,.klist){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:1px!important;white-space:normal!important}
+.krv.klist:is(#kl1#kl2#kl3,.klist)>.ksep{display:none!important}
+.krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep){display:block!important;position:relative!important;padding-left:.8em!important;white-space:normal!important;max-width:100%!important;text-align:left!important}
+.krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep)::before{content:"";position:absolute;left:.12em;top:.6em;width:.3em;height:.3em;border-radius:50%;background:currentColor;opacity:.5}
+.krv.klist2:is(#kl1#kl2#kl3,.klist2){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(10.5em,1fr))!important;column-gap:10px!important;row-gap:1px!important}
 button.ka small.kb{display:grid!important;grid-template-columns:3.4rem minmax(0,1fr);column-gap:7px;row-gap:2px;font-size:.76rem!important;line-height:1.35!important;color:var(--ink);margin:0;align-content:start}
 button.ka .kr{display:contents}
 button.ka .krl{font-size:.64rem;font-weight:700;letter-spacing:.02em;color:#8a7350;text-transform:uppercase;padding-top:.12rem;white-space:nowrap}
