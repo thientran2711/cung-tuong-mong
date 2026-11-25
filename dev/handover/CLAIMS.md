@@ -1724,3 +1724,4 @@ SAVE-YEAR-ROLLBACK (whole family: every time-advance path persists the save) | r
 rv temper-perception r2 | review/temper-perception-rv | session_01D3E3NaXCgiiLt5mmGzecJp | RUNNING | 2026-11-25T10:46Z (Foreman D)
 | F ROLE B BUTTON CRAWLER #4 (opus; successor of ROLE B #3 session_01UV1Szis6w42ZQrVFshkBo8; handover dev/handover/reports/button-crawl.md «HANDOVER ROLE B #3» @d37ac22d + FAIL family #9) | review/button-crawl-fix-N | FOREMAN F #8 for F #10 | session_01UV1SziRSpt6UJHzZkSfGnp | RUNNING | 2026-11-25T10:57Z |
 HARDLOCK-CHOICE-R3 (unify hardlock-choice with LIVE jdeadcard, one rule) | review/hardlock-choice-r3 | session_01N1tNP4cyVoeLHp6YVozQ5r (FOREMAN B) | RUNNING | 2026-11-25T11:05Z
+d-robot-bugs (robot-found game bugs ×5) | review/d-robot-bugs | session_01D3E3NZRWbpM7zyLv8pxisZ | RUNNING | 2026-11-25T11:06Z (Foreman D)
