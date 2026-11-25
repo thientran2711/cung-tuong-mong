@@ -70,3 +70,17 @@ The slow metric changes from run to run and flips sign (buổi then tab, each fa
 - Rest BẠI on «Rất vững»: true soft fail by the 95 cap (OD 17/11). If she wants rest-type acts exempt (oddsSure), that is her call.
 - «Giả bệnh» M4 note «giáng phẩm (giả bệnh khi quân)»: the punishment itself is cấm túc (sev 1); the «giáng phẩm» label comes from jdh2
   dhConfiscate (hiệu taken after a punishment) — not touched here.
+
+## HANDOVER (M-FIX-3 session_01UV1SzkDurA75A3P5i3ns2w, 11/25/2026 ~16:15Z, context 39 % > roll point START 3 % + 25 %) — for the M-FIX-4 successor
+State: m-fix-3 PASSED (BIG REVIEWER #6, m-fix-3-r6 1168cf38, LAND READY cb038906). Nothing open on this branch.
+Next order from F #13 (not started): M4 bug #8 — «Nghỉ ngơi · Giả bệnh (Cáo bệnh)» led to «giáng phẩm (giả bệnh khi quân)» (Quý nhân → Thường tại)
+with no warning on the card; the card must state the demotion risk; whole family = every card whose result can demote. Branch review/m-fix-4 from LIVE.
+Leads already found (verify first, GATE ZERO):
+- j13.js:31 fake-ill catch → punish(p,"giả bệnh khi quân",1) = sev 1 = cấm túc only (j8.js:90 punish: demotion only for sev ≥ 2 via punishDemoP).
+- The M4 save shows S.dhConf {kind:"giang", why:"bị giáng phẩm (giả bệnh khi quân)"} → the demotion/“giáng” label comes from jdh2 / jdemo
+  (dhCheck → window.dhConfiscate «every route caught: demote, fall, cold, inline»; BAL.ag.why dhConf, BAL.dh.conf.p[kind]). Find which path
+  dropped the seat after a sev-1 punishment, then make every card whose result can reach it say so (jaudit.js:262 aaPunishTxt(sev) already
+  prints «cấm túc N tháng, giáng một bậc: <chanceW>» for sev 2 — reuse it; j13 Giả bệnh Kèm today says only «cấm túc»).
+- Family scan idea: static list of punish(…,2) / demote( / seatDown( / dhConfiscate reachable from a player card's go/fail (dev/tools/delayed-risk-scan.py
+  shows how: card regex + later-punisher search), then a runtime check like dev/test/delayed-risk.js.
+Rules for the successor (copy verbatim from the takeover prompt): ROLLOVER = CONTEXT, NEVER 30 TURNS; LINEAGE; source_url + clone_depth 30.
