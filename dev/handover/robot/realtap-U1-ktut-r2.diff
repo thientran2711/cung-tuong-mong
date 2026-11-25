@@ -1,0 +1,21 @@
+--- a/dev/test/robot-rt.js	2026-11-25 09:47:45.511040160 +0000
++++ b/dev/test/robot-rt.js	2026-11-25 09:47:45.511113650 +0000
+@@ -40,7 +40,7 @@
+ /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
+ const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
+ if (C.resume && fs.existsSync(CKPT)) { try { ck = JSON.parse(fs.readFileSync(CKPT, 'utf8')); Object.assign(R, ck.R); rs = ck.rs >>> 0 || rs; R.harness.taps0 = R.harness.taps || 0; R.harness.resumed = (R.harness.resumed || []).concat([{ at: new Date().toISOString(), buoi: R.buoi, from: ck.at }]); console.log('RESUME', LIFE, 'from', ck.at, 'buổi', R.buoi) } catch (e) { console.log('RESUME failed: ' + e.message); ck = null } }
+-const ktutSeen = new Set();
++const ktutSeen = new Set(), ktutTry = new Map();
+ const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs.find(x => x.k === k); if (b) { b.n++; return b } const n = { k, type, msg, n: 1, at: sec(), ...extra }; R.bugs.push(n); console.log('BUG', type, msg); return n };
+ 
+ /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
+@@ -140,7 +140,8 @@
+     idle = 0;
+     /* U1 ktut patch (Foreman B ruling 25/11): #ktut open and its hole target is not a tappable card (none, or «Hảo hữu của ta…») → DUMP, log a ktut-no-target bug row, then a real tap on the card's own «Đã hiểu». Never reload for it. */
+     if (started && sc.layer === '#ktut') { const hl = sc.b.find(x => x.hole), ok = sc.b.find(x => !x.hole && /^đã hiểu/i.test(x.t));
+-      if (ok && (!hl || /hảo hữu của ta|đang vắng/i.test(hl.t))) {
++      const tk0 = 'try|' + (sc.S ? sc.S.b + '/' + sc.S.t : '') + '|' + (hl ? hl.t : ''); const tries = ok ? (ktutTry.get(tk0) || 0) : 0; if (ok) ktutTry.set(tk0, tries + 1); /* hole tapped twice and the card is still up = the target is not a real card → «Đã hiểu» */
++      if (ok && (!hl || /hảo hữu của ta|đang vắng/i.test(hl.t) || tries >= 2)) {
+         const tk = 'ktut|' + (sc.S ? sc.S.b + '/' + sc.S.t : '') + '|' + (hl ? hl.t : '');
+         if (!ktutSeen.has(tk)) { ktutSeen.add(tk); const n = ktutSeen.size; const shot = path.join(SHOTS, 'ktut-' + n + '.png'); await p.screenshot({ path: shot }).catch(() => {});
+           const dm = await p.evaluate(() => { const o = { g: {} }; const t = (n, f) => { try { o.g[n] = f() } catch (e) { o.g[n] = 'ERR ' + e.message } };
