@@ -18,6 +18,9 @@
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
 const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
+ /* 1a. the roulette's picture wait (jk2b kitRoulette: ≤ 8 s cover #kroulw «Tranh luân hồi đang trải…», no button on it): a player waits — 'x' keeps
+    the bot's clear() polling, so the roulette's «Bỏ qua» is tapped the moment it shows (coop-title-leave guest ☰ race, SANGBUOI r4 25/11) */
+ if(document.getElementById('kroulw'))return'x';
  /* 1b. a podium on screen (j90 kitPodiumShow: her contest's «Hội phối đồ» / mini-game dais): its «Tiếp» (.kpod-next), as a player does —
     since review/day-queue-2 (owner 24/11 ~22:02Z) the cards of the room wait while she is on the dais, so a bot that never taps it holds the room night for ever */
  const kp=document.querySelector('#kpodov .kpod-next');if(kp&&kp.offsetParent!==null&&!kp.disabled){kp.click();return'x'}
