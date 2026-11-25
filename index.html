@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)","b":"48bf476bece3","h":[{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"}]};
+window.CTM_BI={"s":"b5411d36","t":"2026-11-25T12:16Z","c":"save-boundary-reload: per-moment sổ = screen check, +1 bạc probe while unseen code cards wait, robot M2 Year-3 sổ case, fixed URLs","b":"5989629cda4e","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4301,7 +4301,7 @@ function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot
   const s=d.S;return `<div class="slot"><b>Ô ${n}: ${s.name}</b><span class="past">${RANKS[s.rank].n} · năm ${s.year}, tháng ${s.month}, ${TUAN[s.tuan]}</span><div class="srow"><button class="main" data-load="${n}">Tiếp tục kiếp này</button><button class="btn" data-new="${n}" data-ask="1">Kiếp mới</button></div></div>`}).join("");
  $("slots").innerHTML=L;T.hidden=false;const f=T.querySelector("button");if(f)f.focus({preventScroll:true})}
 $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
- if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;try{if(typeof kmReset==="function")kmReset()}catch(e){}quiet=true;d.tab="act";/* owner 16/11: entering the game always opens her room (Hành sự), never the last tab */deser(d);quiet=false;$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
+ if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;try{if(typeof kmReset==="function")kmReset()}catch(e){}quiet=true;d.tab="act";/* owner 16/11: entering the game always opens her room (Hành sự), never the last tab */try{deser(d)}finally{quiet=false}/* save-year-rollback: a throw in a load step never leaves quiet on (no save would be written for the rest of the life) */$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
  if(b.dataset.new){if(b.dataset.ask==="1"){b.dataset.ask="2";b.innerHTML="Chắc chắn?<small>Kiếp đang chơi sẽ mất</small>";return}SLOT=+b.dataset.new;$("title").hidden=true;start()}};
 
 /* wiring */
@@ -7664,7 +7664,7 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
    ["Đường lên","được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả","t"],["Đường xuống","bị phạt, đày Tân Giả khố, chết trong mưu của người khác","t"]])}
   <p class="past">Mỗi buổi ${BAL.time.khac} khắc. Mục Hành sự: việc nặng và việc chủ sai. Dư đồ: chỉ nơi cung nữ được đến. Hậu cung › Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
  log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`)}
-(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;srvInit();quiet=false;deal();showModal();render()}}catch(e){console.error(e)}return r}})();
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;try{srvInit()}finally{quiet=false}deal();showModal();render()}}catch(e){console.error(e)}return r}})();
 
 /* ---------- she is not a consort while she serves ---------- */
 (function(){const c0=consorts;consorts=function(){const L=c0.apply(this,arguments);return isSrv()?L.filter(p=>p!==S):L}})();
@@ -8299,7 +8299,7 @@ let NLP=null,NLR=null;
 (function(){const wrap=f=>function(){if(!NLR)return f.apply(this,arguments);const pr=Math.random;Math.random=NLR.face;try{return f.apply(this,arguments)}finally{Math.random=pr}};
  if(typeof drawF==="function")drawF=wrap(drawF);if(typeof figPick==="function")figPick=wrap(figPick);if(typeof faceFor==="function")faceFor=wrap(faceFor)})();
 /* nothing is written to a slot while the identity card is open */
-(function(){const s0=save;save=function(){if(NLP)return;return s0.apply(this,arguments)}})();
+(function(){const s0=save;save=function(){if(NLP&&Array.isArray(Q)&&Q.some(m=>m&&m.nl))return;/* save-year-rollback: hold only while the card is really in the queue (a card dropped from Q some other way never stops every save of the life) */return s0.apply(this,arguments)}})();
 const NL_FK=["fc","fk","fid","face","hue","fv"];
 function nlHolders(){if(!S)return[];const H=[S,S.maid,S.emp,S.thO];const C=S.court||{};Object.keys(C).sort().forEach(k=>H.push(C[k]));(rivals||[]).forEach(v=>H.push(v));
  try{if(typeof allServ==="function")allServ().forEach(x=>H.push(x))}catch(e){}(S.men||[]).forEach(m=>H.push(m));(S.kids||[]).forEach(k=>H.push(k));(rivals||[]).forEach(v=>(v.kids||[]).forEach(k=>H.push(k)));
@@ -75102,8 +75102,8 @@ function jqSaveable(m){return !m||!!m.pid||!m.opts||!!jqData(m)}
      oldest first. No card is ever dropped: after BAL.spread.maxWait buổi it is shown even if the buổi is full.
    - Never moved: must / ending / forced cards, the buổi's own news card, warnings and plots (time matters), festival-day flows, j68 cards it already held.
    - Saving: waiting cards made of data (pid cards, notices, data-only choices — the same rule as jqsave) are written into S.sp13.q and come back on
-     load. A card whose options run code cannot be written down: it may wait at most BAL.spread.codeWait (2) buổi, and while it waits the autosave is
-     held (as jqsave does for an open code card), so a reload lands before it, never after a lost card.
+     load. A card whose options run code cannot be written down: it may wait at most BAL.spread.codeWait (2) buổi; the autosave goes on while it
+     waits (save-year-rollback: holding it lost the buổi / year step on a reload), so a reload in that window does not bring that unseen card back.
    - People in a card are placed at the buổi it is SHOWN: the D29 ledger (j95b) records actors and places when the card is on screen. Before a waiting
      card is shown, its actor is checked in the ledger (S.roster via j95 API): a consort no longer alive / no longer in the record makes the card
      void (its text goes to the log as a line, counted in SP13.stat.void).
@@ -75204,9 +75204,14 @@ function sp13Tick(){/* inside / right after a buổi change: this buổi's own u
  try{const M=$("modal"),hd=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden");if(M&&hd&&hd.get)Object.defineProperty(M,"hidden",{configurable:true,
   get(){return SP13.vo?false:hd.get.call(this)},set(v){hd.set.call(this,v)}})}catch(e){console.error("spread",e)}
  const sm0=showModal;showModal=function(){if(SP13.nb&&S&&!S.dead&&!SP13.off()&&(SP13.vo||$("modal").hidden)){sp13Pre();return}return sm0.apply(this,arguments)};
- /* save: data cards written into S.sp13.q; a waiting code card holds the autosave (jqsave rule) */
+ /* save: data cards written into S.sp13.q. save-year-rollback (LAW 11, robot M2 25/11): a waiting CODE card (not on screen yet) no longer holds
+    the autosave. It held every save from the buổi change that planned it until it was shown (up to codeWait buổi, chained when new code cards
+    kept arriving: Tết / stipend month), while the screen showed the new buổi / tháng / năm with no card open — a reload then went back to
+    before that step (robot: Year 4 → Year 3, weeks lost). Now the step is always written; a code card still waiting (unseen) cannot be written
+    down and is not in the save (SP13.stat.unsaved counts saves made while one waited). A code card ON SCREEN still holds (jqsave, bounded by
+    the card: time cannot move while Q has a card). */
  const sv0=save;save=function(){if(!S||quiet||S.dead||SP13.off())return sv0.apply(this,arguments);
-  if(SP13.L.some(x=>x.code)){SP13.held=1;SP13.stat.held++;return}SP13.held=0;
+  SP13.held=0;if(SP13.L.some(x=>x.code))SP13.stat.unsaved=(SP13.stat.unsaved||0)+1;
   sp13Sync();return sv0.apply(this,arguments)};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(SP13.held&&S&&!S.dead&&!quiet&&!SP13.L.some(x=>x.code)){SP13.held=0;SP13.stat.flushed++;save()}}catch(e){}return r};
  /* load: rebuild the waiting list from the save (old saves: none) */
@@ -98259,7 +98264,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="48bf476bece3";window.CTM_BUILD=BUILD;
+const BUILD="5989629cda4e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
