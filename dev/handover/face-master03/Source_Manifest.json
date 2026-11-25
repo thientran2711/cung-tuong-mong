@@ -888,5 +888,15 @@
     "classification": "historical website grouping; not a new classification approval",
     "classification_note": "",
     "image_location": "existing original face collection supplied separately by Victoria"
+  },
+  {
+    "source_id": "n01",
+    "family": "Alluring",
+    "file": "n01.png",
+    "original_url": "https://ctm-img.victoria-tntt.workers.dev/img/share/face90/n01.png",
+    "sha256": "0988616257e77d5e38178039b05fa1f78f7e32a54cc8d9a8d82ecdabab4ac0e3",
+    "classification": "OWNER ADD 25/11 (replaces excluded M05 slot): owner's preferred Alluring age-16 portrait; already a finished chest-up painting, not a full-body source",
+    "classification_note": "Magnific upload YMSDsAaWeC",
+    "image_location": "CDN img/share/face90/n01.png"
   }
 ]

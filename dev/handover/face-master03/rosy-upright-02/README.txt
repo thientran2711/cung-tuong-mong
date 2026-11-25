@@ -10,3 +10,8 @@ The actual source before the no-makeup request is restored, including its origin
 Each portrait requires TWO actual input images in the stated order: IMAGE1 is the selected original identity image from Victoria's existing collection; IMAGE2 is References/Style/Face_Style_Master_No_Text.png, the unchanged painting-style reference. Original identity photos are external and are not duplicated here. Do not copy the style woman's facial identity.
 
 This compact package removes old image/history bulk from the delivery; it does not rewrite a single prompt. The full original archive remains preserved separately in Library. Source: Dual_Reference_30_Face_Prompts_11-24-2026.zip, libfile_5174d07ebed48191847b72b733776064, version14, file_00000000c9fc81f691d1a6703aeca50f. Full archive SHA256:794b2b3fbd4fc721954ce21fe8f8a4f7cec61161817c865fcc064792af3b52a7.
+
+OWNER ADDS (25/11, verbatim: "Add cả hai người vào luôn đi, bởi vì có khả năng là tôi sẽ bỏ 1-2 người khác ra đó." / "Đưa hai cô vào luôn."):
+- n01 (Alluring) = owner's preferred Alluring-16 portrait (high bun, ivory flowers), CDN img/share/face90/n01.png, sha256 0988616257e77d5e…, Magnific YMSDsAaWeC. 5 jobs added (ages 16/26/39/51/63). NOTE: also used as the style master in tests — if it stays the style master, its own jobs are near-copies.
+- n02 (Alluring) = second portrait (half-up hair with loose locks, white flower pin) — PENDING: owner image not yet received as a file; add the same way when it arrives.
+Roster now 90 identities (89 + n01) / 450 jobs; 91 / 455 after n02.
