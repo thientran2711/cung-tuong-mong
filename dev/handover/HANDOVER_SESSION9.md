@@ -3277,3 +3277,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (02:55Z) MAKEUP-FIT DONE: data LIVE on CDN (backup img/_backup/mk-fit-2511/), 16656 re-fit, bad 0; review/makeup-fit e4d2d3e3 SẴN SÀNG KIỂM (repo copies + jhd HD_ANCHOR) → needs SMALL/BIG reviewer. MAIN LOOKED looks-ba + game-faces-ba: before lips on chin/blush off, after on lips/cheeks. Sent sếp. Art note for C: c16 t2-a18 grey cheek blotches. LIVE step 1 5d4f722f.
 - (02:58Z) RV makeup-fit = session_01V1ZZH1G7YFaJDCpfprT58z (sonnet). Note to C (art, later): c16 t2-a18 base painting grey cheek blotches.
 - (03:05Z) KK25 KIT READY kit-map-marker 92b35e3d (.mspot.here z-index 30; test FAIL main/PASS branch) → B kit rv with real painting + area map.
+- (03:10Z) DAYQ-4 LAND READY BIG day-queue-2 38290f61; MAIN LOOKED dq4 pair (mini-game intro alone, visitor after) OK → BIG rv session_01V1ZZH2EFxJ9XyhsiDsFATZ (opus).

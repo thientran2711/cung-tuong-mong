@@ -1604,3 +1604,4 @@ KK25 kit batch SEAT 1 (fitfast-r3, ring5/woodskin) | review/kit-fitfast-r3, revi
 KK25 kit batch SEAT 2 (optinfo-r2, mg-intro-r2) | review/kit-optinfo-r2, review/kit-mg-intro-r2 | session_01N1tNP2uMgHHxyaNrXA1VZC | RUNNING | 25/11 01:42Z (FOREMAN B child7)
 | REVIEW makeup-fit e4d2d3e3 (sonnet) | review/makeup-fit | MAIN 131 | session_01V1ZZH1G7YFaJDCpfprT58z | RUNNING | 25/11 02:58Z |
 hardlock-choice BIG review | review/hardlock-choice | session_01N1tNP3inDSatM7LPmx51yi | RUNNING | 25/11 02:03Z (FOREMAN B child7)
+| BIG REVIEW day-queue-2 38290f61 (opus) | review/day-queue-2 | MAIN 131 | session_01V1ZZH2EFxJ9XyhsiDsFATZ | RUNNING | 25/11 03:10Z |
