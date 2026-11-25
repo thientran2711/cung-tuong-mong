@@ -3369,3 +3369,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:35Z) GO D ×4 (dfu cc4fed89, law1-gifts 99faeb2b, palace 9849ca5f, nc-fix-4 5f23c140) to LC13 after delegate. KK26 told KIT FAIL kit-mg-realtap fix (.kmbox-o).
 ## MAIN CHÍNH 134 → MAIN CHÍNH 135 HANDOVER (25/11 ~06:36Z): dev/handover/TAKEOVER_MAIN_135.md (ctx 31 % at roll).
 - (06:37Z) MAIN CHÍNH 135 = session_01V1ZZH2rRpLZa4GLFofPRky opened (child of 134, depth 1). 134 DISABLED its three scheduled tasks. 134 forwards anything late, then stops.
+## MAIN CHÍNH 135 (child of 134, took over 25/11 ~06:37Z)
+- HANDOVER: MAIN CHÍNH 135 = session_01V1ZZH2rRpLZa4GLFofPRky; depth 1 (limit 8); window 1M; START_CTX ~5 % (get_session reads 0; estimate) → roll line 30 %, ceiling 60 %. Worktree /home/user/wt/h135, push /home/user/wt/hpush135.sh. Next main = MAIN CHÍNH 136 (child).
+- LOAD (06:40Z start): main running ~16 (LC13 lander; KK26; MAKEUP-NOBOOST wait pick; DELEGATE-NOMG + rv 22tLFisY; TAINGHE + rv 2yv2CZAt (chased); VISITOR-FIX + rv 1W8A4mF7 (archive after LIVE); SELSCENE-18; M1–M5; RD5/MD5 idle) | B ROOT reruns 147 | C silent | D ROOT 4 LAND READY at LC13 | E ROOT temper-design READY | F harness + flight2 + test-path fixer | moved: none.
+- (06:37Z) Scheduled tasks into 135: hourly trig_01JrebkHUoV7fjdkTMPVaNp1 (min 32); progress 07:52 trig_01WTbnhFGsUJZnmpu3FQrk5U + 19:52 trig_01Uvo9JffpQo87j6ptkhLyko (America/New_York). 134's three disabled.
+- (06:40Z) «main is now 135» sent to LC13, KK26, MAKEUP-NOBOOST, DELEGATE-NOMG + rv 22tLFisY, rv 2yv2CZAt (verdict chased), SELSCENE-18, M1–M5 (M4: confirm «Bỏ qua» 10/10 free), VISITOR-FIX + rv 1W8A4mF7. GO LC13 sansang-test-harden 6a438eb5 (SMALL test-only). ARCHIVED: SANSANG-MUSIC-FIX 1Z5G4aTp, rv makeup-fit 1G7YFaJD.

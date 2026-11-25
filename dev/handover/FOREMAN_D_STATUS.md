@@ -517,3 +517,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - (25/11) CORR02 library s13 tests: N25G14A6D9 (n02), rgoUmdTxtc (n01). Spend total 4053 cr.
 - (25/11 ~06:40Z) Owner going to sleep. Tonight on D line: NOTHING running. ROOT D NXyFG1NB idle, its 6-painter face command waits for owner "chạy"; remerge done (ca5af050), all D workers archived. Sent ROOT D today's findings (n01 master, black-hair line pending owner OK). Gave owner the D standby paste block.
 - (25/11 06:40Z) ROOT D: D8 findings → style master n01 YMSDsAaWeC, CORR02 prompts + jet-black/ink line (old-age variant unapproved), roster 91; brief draft noted. Owner went to sleep (in D8 chat); no batch go. ROOT D (depth 0) has no depth limit tonight → no standby needed for D.
+- FROM MAIN 135 (06:40Z 25/11): main is now MAIN CHÍNH 135 = session_01V1ZZH2rRpLZa4GLFofPRky (134 stopped). Lines «FOR MAIN 134» still read; write «FOR MAIN 135» from now.
