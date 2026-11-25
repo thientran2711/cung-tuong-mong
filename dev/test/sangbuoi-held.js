@@ -18,9 +18,11 @@
       does) or with no call at all (G2) → «Sang buổi» comes back by itself (G1 ≤ 600 ms, G2 ≤ 1500 ms: the 700 ms safety-net tick dqWake), then a real tap advances.
    H  (r3, Q>0 member) 7 cards hidden in Q, «Sang buổi» greyed, nothing on screen → H1 the first card shows by itself (dqWake) · H2 a real tap on
       the greyed button shows it at once (dqBring); she taps through all 7, then «Sang buổi» advances.
+   I  (r3, robot E-S1) a scene left in the page but NOT on screen (I1 zero-size, I2 hidden layer) + 7 kit info panels queued → the first panel shows
+      by itself; I3 control: a scene ON screen holds them (none painted over it for 3 s), they show once it closes; then «Sang buổi» advances.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
-const VP=[[755,1000,2],[1180,820,2]];
+const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.split(',').includes(v[0]+'x'+v[1]));/* VP=1180x820: one device */
 (async()=>{const b=await chromium.launch();let fails=0;const rows=[];
  for(const [W,H,DS] of VP){
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:OUT?DS:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
@@ -144,6 +146,27 @@ const VP=[[755,1000,2],[1180,820,2]];
       rows.push(`${W}x${H} ${k} card shown after ${ms} ms`);console.log(rows[rows.length-1]);await shot(k+'-card');await drain();
       const left=await p.evaluate(()=>Q.filter(m=>/^Thử: thẻ chờ/.test(m.t||'')).length);if(left)return k+' '+left+' test cards left after tapping through'}
      const b0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(b0))?'':'cards closed but «Sang buổi» did not advance'},
+   I:async()=>{/* r3 robot E-S1 (LIVE dbae89eb, Tài nghệ tab, Q = 7 info panels hidden, «Có tin đang chờ» greyed, NOTHING on screen): a scene left in the page
+       but NOT on screen held every card for ever (jdayq dqActEl took any .kmov in the DOM as an open activity). I1 zero-size .kmov · I2 .kmov on a hidden
+       layer → the first kit panel shows by itself (safety net) · I3 control: a scene ON screen still holds them, and they show once it closes */
+     const W8=await p.evaluate(()=>(BAL.dayq&&BAL.dayq.wake)||2000);const lim=W8+2*700+900;
+     const T=['Công · Nữ công: các lối','Cầm','Xem quan hệ của','Xem quan hệ của','Cầm: các lối','Lịch tháng','Thử bảy'];
+     for(const k of ['I1','I2','I3']){
+      await p.evaluate(([k,T])=>{const d=document.createElement('div');d.className='kmov km-gate';d.id='tstki';
+        if(k==='I1')d.style.cssText='position:fixed;left:0;top:0;width:0;height:0;overflow:hidden';
+        else if(k==='I2'){const w=document.createElement('div');w.id='tstkw';w.hidden=true;document.body.appendChild(w);w.appendChild(d)}
+        else d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35)';
+        if(k!=='I2')document.body.appendChild(d);
+        for(const t of T)kitModal({t,h:'<p>Thử: bảng thông tin.</p>'});const M=document.getElementById('modal');M.hidden=true;render();M.hidden=true;window.__t0=Date.now()},[k,T]);
+      if(k==='I3'){await sleep(3000);const s0=await st();if(s0.modal){await p.evaluate(()=>{['tstki','tstkw'].forEach(i=>{const e=document.getElementById(i);e&&e.remove()})});return 'I3 a panel was painted OVER a scene on screen'}
+        await p.evaluate(()=>{document.getElementById('tstki').remove();window.__t0=Date.now()})}
+      const s1=await waitCard(lim+1500);const ms=await p.evaluate(()=>Date.now()-window.__t0);
+      await p.evaluate(()=>{['tstki','tstkw'].forEach(i=>{const e=document.getElementById(i);e&&e.remove()})});
+      if(!s1.modal)return k+' 7 panels hidden, nothing on screen: NO panel painted in '+(lim+1500)+' ms '+JSON.stringify({Q:s1.Q.length,d:await diag()});
+      if(ms>lim)return k+' panel painted too late: '+ms+' ms (limit '+lim+')';
+      rows.push(`${W}x${H} ${k} first panel shown after ${ms} ms`);console.log(rows[rows.length-1]);await shot(k+'-panel');await drain();
+      const left=await p.evaluate(T=>Q.filter(m=>T.includes(m.t)).length,T);if(left)return k+' '+left+' panels left after tapping through'}
+     const b0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(b0))?'':'panels closed but «Sang buổi» did not advance'},
    F:async()=>{/* the night choice exists only in a life where jnf is on (not a servant / khoa cử road, not parked): else a fresh life */
      for(let i=0;i<4&&!(await p.evaluate(()=>typeof nfOn==='function'&&nfOn()));i++){await newLife();await ensureQuiet()}
      const r0=await p.evaluate(()=>{used=0;advLock=false;render();S.nfX={d:(typeof wk==='function'?wk():(S.turn*3+(S.tuan||0))),st:'open',at:Date.now()};window.__cf0=window.cfBusy;window.__cfQ=1;window.cfBusy=()=>window.__cfQ===1;
@@ -167,7 +190,7 @@ const VP=[[755,1000,2],[1180,820,2]];
   };
   console.log(`${W}x${H} life ready`,JSON.stringify(await st()));
   const order=Object.keys(CASES).filter(k=>!process.env.CASES||process.env.CASES.includes(k));const REP=+process.env.REPEAT||1;/* REPEAT=10: each case N times (stability gate) */
-  for(const k of [].concat(...Array(REP).fill(order))){const s=await ensureQuiet();let r;try{r=await CASES[k]()}catch(e){r='threw '+e.message.slice(0,120)}
+  for(const k of [].concat(...Array(REP).fill(order))){const s=await ensureQuiet();let r;try{/* r3 watchdog: a case that never ends is a FAIL with what was on screen, not a silent stall */r=await Promise.race([CASES[k](),sleep(180000).then(async()=>'case did not finish in 180 s '+JSON.stringify({s:await st().catch(()=>null),d:await diag().catch(()=>null)}))])}catch(e){r='threw '+e.message.slice(0,120)}
    rows.push(`${W}x${H} ${k}: ${r?'FAIL '+r:'PASS'}`);console.log(rows[rows.length-1]);if(r)fails++;await drain()}
   if(errs.length){fails++;rows.push(`${W}x${H} page errors: ${errs.slice(0,3).join(' | ')}`)}
   await ctx.close()}

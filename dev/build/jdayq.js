@@ -40,7 +40,7 @@ function dqHidden(el){try{return DQ_HID&&DQ_HID.get?DQ_HID.get.call(el):el.hidde
 function dqOldPending(){try{
   /* a scene being prepared (kitNightEnd preloads its picture before kmStage) counts too; a busy flag with no scene in the page for longer than
      BAL.dayq.stale ms is stale (never blocks the day) */
-  if(typeof kmBusy!=="undefined"&&kmBusy){if(document.querySelector(".kmov:not(.km-out),#kmrew")){DQ.bz=0;return true}const n=Date.now();if(!DQ.bz)DQ.bz=n;if(n-DQ.bz<((BAL.dayq&&BAL.dayq.stale)||10000))return true}else DQ.bz=0;
+  if(typeof kmBusy!=="undefined"&&kmBusy){if([...document.querySelectorAll(".kmov:not(.km-out),#kmrew")].some(dqShown)){DQ.bz=0;return true}/* r3: only a scene ON SCREEN; a hidden / zero-size one falls to the stale timer */const n=Date.now();if(!DQ.bz)DQ.bz=n;if(n-DQ.bz<((BAL.dayq&&BAL.dayq.stale)||10000))return true}else DQ.bz=0;
   if(typeof KMQ!=="undefined"&&KMQ.length)return true;
   /* the other old-buổi screens of the family: a mini-game screen / its result (#ov), the podium (j90), the roulette */
   const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return true;
@@ -61,7 +61,10 @@ function dqPoll(){return BAL.dayq.poll}
    activity yet), podium, roulette, the jdfv person view she opened herself or its on-figure game (an encounter scene opened by a card is the card) */
 function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return ov;
   /* the podium a card opens for ITSELF (j90 wiring 2, «podium first, then the panel»: Q[0].__podDone) is part of that card, not an activity over it */
-  const own=Q[0]&&Q[0].__podDone;const k=document.querySelector(own?".kmov:not(.km-out),#kmrew,[id^=\"kroul\"],.kroul-ov":".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov");if(k)return k;
+  const own=Q[0]&&Q[0].__podDone;/* SANGBUOI-HELD r3 (robot E-S1 LIVE dbae89eb, Q = 7 panels hidden, «Có tin đang chờ» greyed, NOTHING on screen): a scene / reward / roulette
+     holds the cards only while it is ON SCREEN (dqShown), the rule fix-5 set for the person view — a .kmov left in the page at zero size or on a
+     hidden layer (button-crawl «zero-size .kmov cover») used to hold every card for ever (dqFreeScreen calls this first, so the net was blind too) */
+  for(const k of document.querySelectorAll(own?".kmov:not(.km-out),#kmrew,[id^=\"kroul\"],.kroul-ov":".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov"))if(dqShown(k))return k;
   /* button-crawl-fix-5 (F #10 25/11 11:01Z, robot s6d: «Sang ngày mới» greyed, Q = 12 cards, NOTHING on screen): the person view is an activity
      only while it is ON SCREEN. A tap on another tab parks it (jdfv dfTabLayers: .kfoc hidden, DF.F kept) — she is no longer inside it, so the
      waiting card shows on the tab she is on; a view whose layer is gone (no .kfoc) holds nothing either (it used to return document.body = held for ever) */
