@@ -14,6 +14,7 @@ const EXT=String.raw`
  for(const st of L){if(!st)continue;const k="srv."+(st.sid||st.name);o[k+".af|"+nm(st)]=(st.af&&st.af.me)||0;if(typeof st.loyal==="number")o[k+".loyal|"+nm(st)]=st.loyal}
  for(const k in (S.court||{})){const c=S.court[k];if(c&&c.af)o["court."+k+".af|"+c.name]=c.af.me||0}
  try{const K=S.known||{};for(const k in K)o["kn."+k]=+K[k]||0}catch(e){}
+ /* W9: evidence held AGAINST her by each consort (evG(v,S)) */ try{for(const v of rivals)o["rv."+v.name+".evon"]=evG(v,S)}catch(e){}
  const I={};for(const it of (S.inv||[])){const id=typeof it==="string"?it:(it&&(it.id||it.k||it.n))||"?";I[id]=(I[id]||0)+1}for(const id in I)o["inv."+id]=I[id];
  return o}})();
 AA.extra=()=>{const L=[];try{for(const st of elders())for(const a of ["bieu","hoi"])L.push({kind:"elder",a,id:st.eid,name:st.call})}catch(e){}

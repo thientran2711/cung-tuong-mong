@@ -256,13 +256,26 @@ window.__kaLearnN=window.__kaLearnN||0;window.__kaLearn=window.__kaLearn||[];
 function kaLearn(t){if(!t)return;window.__kaLearnN++;window.__kaLearn.push({n:window.__kaLearnN,t:String(t)});if(window.__kaLearn.length>12)window.__kaLearn.shift()}
 window.kaLearn=kaLearn;
 (function(){const rs=rsnap;rsnap=function(){const b=rs.apply(this,arguments);if(b&&S)try{const o={};for(const st of kaSrvList())o[st.sid]=kaSrvV(st);b.srv=o;
- const c={};for(const k in (S.court||{})){const x=S.court[k];if(x&&x.af)c[k]=x.af.me||0}b.court=c;b.kn=Object.assign({},S.known||{});b.learn=window.__kaLearnN}catch(e){}return b}})();
+ const c={};for(const k in (S.court||{})){const x=S.court[k];if(x&&x.af)c[k]=x.af.me||0}b.court=c;b.kn=Object.assign({},S.known||{});b.learn=window.__kaLearnN;/* W9: evidence held AGAINST her (evG(holder,S), j8 evm) by every consort / servant */const ev={};for(const h of kaEvHolders())ev[kaEvKey(h)]=evG(h,S);b.evOn=ev}catch(e){}return b}})();
+/* W9 (LAW 11, real tap: Tung tin đồn failed → «nàng ta nắm 1 chứng cứ» applied, card silent): a person who now holds MORE / less evidence
+   against her (evG(h,S)) is a real change of the tap → «<tên>: nắm chứng cứ về ta ±N» (Mất when it rises). Plain numbers by key only. */
+function kaEvHolders(){const L=[].concat(typeof rivals!=="undefined"?rivals:[]);for(const x of kaSrvList())if(!L.includes(x))L.push(x);return L.filter(h=>h&&h!==S)}
+function kaEvKey(h){return rivals.includes(h)?"r"+h.id:"s"+h.sid}
 function kaMorePeople(before,per,G){const per0=per;per={push(e){const x=per0.find(y=>y[0]===e[0]);if(x){x[1]=x[1].concat(e[1]);x[2]=x[2].concat(e[2])}else per0.push(e)}};/* one row per person */
  if(before.srv){for(const st of kaSrvList()){const b=before.srv[st.sid];if(b==null)continue;const d=Math.round(kaSrvV(st)-b);if(!d)continue;
   const named=kaNamed(st);const who=named?(st.call||st.name):"một cung nhân";per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}}
  if(before.court)for(const k in (S.court||{})){const x=S.court[k],b=before.court[k];if(!x||!x.af||b==null)continue;const d=Math.round((x.af.me||0)-b);if(d)per.push([x.name,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}
- if(before.kn&&S.known&&typeof kOf61==="function"&&typeof K61STN!=="undefined"){const P=[].concat(typeof rivals!=="undefined"?rivals:[],kaSrvList());const seen=new Set();
-  for(const p of P){let k="";try{k=kOf61(p)}catch(e){}if(!k||seen.has(k))continue;seen.add(k);const a=+before.kn[k]||0,n=+S.known[k]||0;if(n>a&&K61STN[n]){const rv=rivals.includes(p),nd=kaNamed(p);const who=nd?(rv?kaWho(p):(p.call||p.name)):rv?String(typeof whyWho==="function"?whyWho(p):"Một vị phi tần").replace(/^M/,"m"):"một cung nhân";per.push([who,[K61STN[n].toLowerCase()],[],""])}}}
+ /* W9 (LAW 11): EVERY person whose familiarity step rose (S.known key → the person, KREG of j61): consorts, servants, and also the men,
+    the Thái y, the court officials (rc-scan: Thái y viện / Biếu quà, gửi thư were not named). Same who-words as the rows above so one person = one row. */
+ if(before.kn&&S.known&&typeof K61STN!=="undefined"&&typeof KREG!=="undefined"){const SV=kaSrvList();
+  for(const k in S.known){const a=+before.kn[k]||0,n=+S.known[k]||0;if(!(n>a)||!K61STN[n]||k==="me")continue;const p=KREG[k];if(!p||p===S)continue;
+   const rv=rivals.includes(p),nd=kaNamed(p);let who;
+   if(SV.includes(p))who=nd?(p.call||p.name):"một cung nhân";
+   else if(rv)who=nd?kaWho(p):String(typeof whyWho==="function"?whyWho(p):"Một vị phi tần").replace(/^M/,"m");
+   else{try{who=nd&&typeof k61Title==="function"?k61Title(p):typeof k61Desc==="function"?k61Desc(p):""}catch(e){who=""}if(!who)who=nd?(p.name||"người ấy"):"một người lạ"}
+   per.push([who,[K61STN[n].toLowerCase()],[],""])}}
+ if(before.evOn){for(const h of kaEvHolders()){const b=before.evOn[kaEvKey(h)];if(b==null)continue;const d=Math.round(evG(h,S)-b);if(!d)continue;const rv=rivals.includes(h),nd=kaNamed(h);
+  const who=rv?(nd?kaWho(h):String(typeof whyWho==="function"?whyWho(h):"Một vị phi tần").replace(/^M/,"m")):(nd?(h.call||h.name):"một cung nhân");const t=`nắm chứng cứ về ta ${kaN(d)}`;per.push([who,d<0?[t]:[],d>0?[t]:[],""])}}
  if(before.learn!=null)for(const x of (window.__kaLearn||[]))if(x.n>before.learn)G.push(`<span class="ef g">${x.t}</span>`)}
 function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
