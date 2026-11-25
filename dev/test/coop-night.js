@@ -76,7 +76,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
  async function toNight(tag){if(process.env.ONLY&&!process.env.ONLY.split(',').includes(tag))return false;/* debug: ONLY=4,5 runs just those cases */for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.b>=LAST&&c.b>=LAST&&a.w===c.w)return true;
    const k=await A.p.evaluate(()=>COOPW.tm.myKey());await setTm(A,{buoiMs:120000});await reset(A);await clear(A);await clear(B);await press(A);await press(B);
    await bothPast(A,B,k,30000);for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}}
-  const a=await D(A),c=await D(B);return ok(a.b>=LAST&&c.b>=LAST,tag+': both at buổi tối',[a,c])||(a.b>=LAST&&c.b>=LAST)}
+  const a=await D(A),c=await D(B);if(!(a.b>=LAST&&c.b>=LAST))console.log('DUMP toNight '+tag,JSON.stringify([await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),await A.p.evaluate(()=>window.DQ&&DQ.stat).catch(()=>null),await B.p.evaluate(()=>window.DQ&&DQ.stat).catch(()=>null)]));return ok(a.b>=LAST&&c.b>=LAST,tag+': both at buổi tối',[a,c])||(a.b>=LAST&&c.b>=LAST)}
  /* wait for the merged week on both, then compare */
  async function merged(tag,w0,ms=60000){const t0=Date.now();while(Date.now()-t0<ms){await clear(A);await clear(B);
    const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)break;await sleep(400)}
