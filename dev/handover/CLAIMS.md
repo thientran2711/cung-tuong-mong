@@ -1737,3 +1737,4 @@ net-ghen wave 2 (LAW11 thiện cảm/oán rest + NB2 cards + NB-a/NB-b) | review
 rv temper-perception r3 | review/temper-perception-rv | session_01D3E3NYPeSt6UMJaxqBPTqC (RV3b, successor of RV3 session_01D3E3NaXCgiiLt5mmGzecJp) | RUNNING | 2026-11-25T12:15Z (Foreman D depth 2)
 KIT-OPTS-PACK-4 (KIT BUG #4/#5/#6 rest, selection kitAlarm flag, jdfv BAL) | review/kit-opts-pack-4 | session_01V1ZZH27qVBbztWBnjkybU3 | RUNNING | 2026-11-25T12:14Z (MAIN 140)
 temper-perception fixer on call + G4 robot arms (successor of T1c session_01D3E3NZWzjwimRSPrEyRAM8) | review/temper-perception-rv + review/temper-g4 | session_01D3E3NXumQR7Z39e1j3Djxm (T1d) | RUNNING | 2026-11-25T12:28Z (Foreman D depth 2)
+FIX-7 RE-MERGE (one title guard) + PCPORT-RK extras on LC stack | review/robot-coop-fix-7-r2 + review/pcport-rk-r2 | session_01N1tNP6y9kB42WChcgr4i6o (FOREMAN B) | RUNNING | 2026-11-25T12:30Z
