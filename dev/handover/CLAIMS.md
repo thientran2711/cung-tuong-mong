@@ -1592,3 +1592,4 @@ robot-coop-savert BIG review | review/robot-coop-savert | session_01N1tNP4ZyfP6D
 robot-coop-fix-5 (stuck cause 3, FIXER #10) | review/robot-coop-fix-5 | session_01N1tNP5P5MetjLKWvphzukd | RUNNING | 25/11 00:45Z (FOREMAN B child7)
 hardlock-choice (no takeable choice, whole family) | review/hardlock-choice | session_01N1tNP3HWwA785d24xRGQTm | RUNNING | 25/11 00:45Z (FOREMAN B child7)
 KIT KEEPER KK25 (successor of KK24) | kit/* | session_01V1ZZH1g2TqJvVcJiKLux8Z | RUNNING | 2026-11-25T01:05Z (MAIN 130)
+kit-woodskin r5 + kit-focus-fig review | review/kit-woodskin, review/kit-focus-fig | session_01N1tNP5TBv4tS6ndrkzL8zu | RUNNING | 25/11 01:09Z (FOREMAN B child7)
