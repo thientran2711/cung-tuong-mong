@@ -2146,7 +2146,7 @@ BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-1
 BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostMid:.67,hostHi:1.33};
 BAL.net.bandHi=.5;
 BAL.net.heat={ghenK:.45,affK:.6};
-/* review/net-ghen (robot: NPC→her ghen p50 99, 42 % of every rise toward her was CAUSED BY ANOTHER CONSORT — «bị X khiêu khích», «thấy X khoe quà»,
+/* review/net-ghen (robot: NPC→her ghen p50 99, 59 % of every rise toward her was CAUSED BY ANOTHER CONSORT (RV4 robot on 96c2859e: 15168 of 25898 ghenUp gain) — «bị X khiêu khích», «thấy X khoe quà»,
    «bị X giành đêm» — and the fade was a flat −1 a turn): ghenOanK = jealousy caused by another consort becomes oán toward HER × this (j1 ghenUp,
    jshelf seen luxury; was jshelf npcOanK .5) · ghenCool = the one cooling rule (j28 ghenCool, every holder incl. her v.pg): each turn
    (fade[not thân, thân] + ghen × k) ÷ persF ghen, at least 1. */

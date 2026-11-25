@@ -236,9 +236,10 @@ window.shelfLook=shelfLook;window.shelfSeen=shelfSeen;window.shelfNow=shelfNow;
 function shelfReact(obs,t){if(!obs||!t||obs===t||obs===S)return"";const B=BAL.shelf.see;obs.shR=obs.shR||{};const k=wdKey(t);if(obs.shR[k]!=null&&wk()-obs.shR[k]<B.cdW)return"";obs.shR[k]=wk();
  const x=shelfLux(t);if(!x.n)return"";const pl=shelfLvFor(obs,t),ta=shelfTaste(obs);const sup=obs.queen||rkOf(obs)>rkOf(t);let m=1;try{m=tv(LUX_TR,obs)||1}catch(e){}
  /* by HER OWN eye (taste): too lavish → a superior frowns, a peer envies; to her liking → admired, a lover of show admires more */
- if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else{const n=Math.round(B.ghen[pl]*m);if(t===S)obs.ghen=cl((obs.ghen||0)+n,0,100);else oanAdd(obs,t,n*BAL.net.ghenOanK)}}
+ /* W10 (RV4 N2, one raise rule): every jealousy rise goes through j1 ghenUp — t = her → obs.ghen + the Chạnh lòng feeling; t = an NPC → obs's oán toward t × BAL.net.ghenOanK */
+ if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else ghenUp(obs,Math.round(B.ghen[pl]*m),`thấy ${t===S?"ngươi":t.name} bày đồ xa hoa`,t)}
  else if(pl===1)affAdd(obs,t,B.fitAff+Math.round(Math.max(0,ta)*BAL.shelf.taste.likeAff*(x.lv>=2?1:.5)));
- if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th")){if(t===S)obs.ghen=cl((obs.ghen||0)+B.nguGhen,0,100);else oanAdd(obs,t,B.nguGhen*BAL.net.ghenOanK)}
+ if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th"))ghenUp(obs,B.nguGhen,`thấy ${t===S?"ngươi":t.name} bày đồ ngự ban`,t)
  if(x.wither)affAdd(obs,t,B.witherAff);return SHELF_LV[pl]}
 window.shelfReact=shelfReact;
 function shelfSee(obs,t,by){const r=shelfLook(obs,t,by,true);if(r)shelfReact(obs,t);return r}
