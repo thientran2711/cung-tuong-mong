@@ -61,3 +61,30 @@ Perf: the outer wrapper is two short loops per draw/pick; quickcheck buổi 1487
 3. nit — jnolock header says «at the j68c step rate × the rank price factor»; there is no rank factor in the code. After fix 2 the comment must say what the code does.
 4. not blocking (content, law 2/6): j68c-serv-022 / j68c-sea-023 still have no non-bạc stance; j72c-craft-007/029/057 + social-013 «pick» steps all-bạc (panel has «Bỏ việc», so no lock). Writer pass to give each a non-bạc stance of equal steps — Foreman B to queue.
 Law check: 1 OK (both seats) · 2 FAIL (item 2) · 3 FAIL (item 1) · 4 FAIL (item 2: second rate) · 6 content note (item 4) · 7 OK («Thôi», « (thiếu bạc, lấy công sức bù)», no digits) · 9 OK (kit ✕ / kit option card, no new part) · 11 OK (scan walks PEND + 550 j68 + MF7/FV7/FX7/WORLD/TSA + 40 turns + static seeds + plant; only Q-path cards — panels outside Q, e.g. Việc nhờ, rely on their own leave road; accepted) · 13 FAIL (item 2: altCost not reused).
+
+## FIXER r2 (SEAT F, b-coop-0045; session_01N1tNP5Yc6auMDK1Fws7jFB) — SẴN SÀNG KIỂM review/hardlock-choice b7ea3141414110da26a426c6051b4bab7cf4ee20
+START_CTX ≈3 % (used_tokens read 0 → estimate) · roll at ≈28 %, ceiling 60 %.
+PRIORITY #1 CHECK ('altCost|bacTuan|altK|nolock'): reused the reviewer's hits — jstory.js:43–45 altCost / BAL.bacTuan / BAL.altK (already used by altOf67, jstory alt72, jeitem eitAlt); review/* hardlock-choice only; claims Seat F only. Nothing new built.
+Base: r1 ea9cfd51 + merge newest origin/main d6b6fd6f (LIVE; only built index.html / sw.js conflicted → took main's, site rebuilt).
+
+### What changed (r1 FAIL items)
+1. **BLOCKING fixed — the swap never stacks past her floor.** `kitBacSub(c,short)`: room in k = `S[k] − BAL.nolock.keep[k] − the road's OWN cost in k`; new `kitFloorOk(fx)`: a swapped road whose WHOLE fx would take Sức below 1 (Sức 0 = death, j3) or Danh below 0 is never offered → stays closed → «Thôi» if nothing else. Reviewer probe 2×{bac:-60,suc:-12}, purse 0, Sức 13, Danh 0: r1 both roads open «Sức -24» → Sức 0; r2 both closed, only «Thôi», Sức stays 13.
+2. **One core (law 2 OD:L582 / 4 / 13).** BAL.nolock.per (flat 5 bạc/Sức) REMOVED. The short bạc is priced by the game's one rule `altCost(short, S.rank, BAL.nolock.floor, 0).suc` (BAL.bacTuan + BAL.altK, capped at altK.sucMax 20; floor 1 Sức so a tiny short is never free; altCost's pen = an odds cut, card roads have no roll). Sức she cannot spare is taken as Danh at `BAL.nolock.of.danh` = j68c step ratio 3 Danh : 8 Sức (a Sức→Danh step equivalence from BAL.j68c, not a bạc worth). All bạc-held roads go through the same function → still equal (law 2).
+   | short bạc | r1 (flat) | r2 altCost Sức, rank 0/1/2/3/4/5/6/7 |
+   |---|---|---|
+   | 14 | Sức −3 | 16/13/11/7/6/5/4/4 |
+   | 74 (serv-022 at 46) | Sức −15 | 20 at every rank (cap) |
+   | 240 | Sức −48 (no cap) | 20 at every rank (cap) |
+3. nit fixed: jnolock header + BAL.nolock comment now say exactly what the code does (altCost at her rank, Danh via the step ratio, floor check). No «rank price factor» text left.
+4. Content note for writers (not mine, Foreman B to queue): j68c-serv-022 «Kẻ hầu» and j68c-sea-023 «Thời tiết» need a real non-bạc stance of equal steps; j72c-craft-007/029/057 + j72c-social-013 «pick» steps are all-bạc (panel has «Bỏ việc», no lock).
+
+### Gates (commands + outputs)
+| gate | LIVE d6b6fd6f | r1 ea9cfd51 | head r2 |
+|---|---|---|---|
+| `node dev/test/hardlock-choice.js` (Fold + iPad; now 36 checks incl. new (g)(h)(i)) | `HARDLOCK-CHOICE FAIL (18)` exit 1 | `HARDLOCK-CHOICE FAIL (8)` exit 1 — (g) «Sức stays 0 … Đường A (thiếu bạc, lấy công sức bù) \| Đường B …», (h)/(i) «Sức 0 ≥ 1», (b) «Sức -15 = own 0 + altCost -20» | `HARDLOCK-CHOICE ALL PASS` exit 0 |
+| `node dev/tools/hardlock-scan.js --turns 40 --md` (plant always on) | `HARDLOCK-SCAN FAIL · 906 · HARD LOCKS 1 · PLANT LOCKED` (sea-023 not drawn this run — season) | – | `HARDLOCK-SCAN PASS · 906 · HARD LOCKS 0 · plant not locked (guarded) · page errors 0` |
+| `node dev/test/one-core-guard.js` | | | `PASS: one core (no second value, no typed core text, no new inline rule number)` |
+| `node dev/test/undef-scan.js` | | | `PASS: no unguarded undefined identifier (304 names checked)` |
+| `node dev/test/coop-e2e.js` (Fold host) / `COOP_SWAP=1` (iPad host) | | | `142/142 passed` / `142/142 passed` |
+| `bash dev/tools/quickcheck.sh` ALONE | | | `QUICKCHECK PASS · 231 s · open 1937 ms · old save ok · perf (median of 3, new/live): render 262/263 ms, tab 488/549 ms, buổi 1656/1488 ms, tasks>200ms 23/26 · core gates PASS · total 627 s` |
+Head test lines (Fold, iPad same): «(b) the rest (74 bạc) paid as Sức -20 = own 0 + altCost -20» · «(g) … no swapped road open, only «Thôi»; Sức stays 13» · «(h) Sức 40 → road open, Sức -32 = own -12 + altCost -20; she keeps Sức 8 ≥ 1» · «(i) Sức 14, Danh 30 → the rest in Danh ({"suc":-13,"danh":-8}); Sức 1 ≥ 1, Danh 22» · 0 page errors.
