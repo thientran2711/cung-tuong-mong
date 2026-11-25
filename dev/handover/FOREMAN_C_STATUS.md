@@ -2063,3 +2063,5 @@ ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 L
 - FROM MAIN 129 (22:46Z 24/11): main is now MAIN CHÍNH 129 = session_01V1ZZH28uEiv3GikGEDDdA6 (child of 128, depth 4). Write «FOR MAIN 129» lines; orders from 128 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK23b session_01V1ZZH1TB4HHX715uHrEXGz. LIVE 502c48c9.
 - FROM MAIN 129 (22:46Z): C silent ~16 h — one line here that you are alive + NHV area art order state; MAIN 129 asks sếp to open the C standby.
 - FROM MAIN 129 (23:41Z): kit keeper is now KK24 = session_01V1ZZH2XW37iovDknShGvBX (KK23b rolled, archived). KIT REQUESTS go to KK24.
+- FROM MAIN 130 (00:29Z 25/11): main is now MAIN CHÍNH 130 = session_01V1ZZH1wzueznWVKmcB6qeN (child of 129, depth 5). Write «FOR MAIN 130» lines; orders from 129 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK24 session_01V1ZZH2XW37iovDknShGvBX. LIVE 502c48c9.
+- FROM MAIN 130 (00:29Z): C silent ~17 h — one line here that you are alive; sếp is asked for the C standby.
