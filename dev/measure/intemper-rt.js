@@ -11,4 +11,5 @@
   if(T.y0==null)T.y0=B.y0!=null?B.y0:S.year;T.year=S.year;T.rank=S.rank;T.danh=S.danh;T.sung=S.sung;T.coldPalace=!!S.out;T.maxRank=Math.max(B.maxRank,T.maxRank,S.rank||0);try{T.temper=eaTemper(S).k}catch(e){}
   const N=window.EA_N||{};T.choice=B.choice+(N.choice||0);const o=Object.assign({},B.out);for(const[k,v]of Object.entries(N.out||{}))o[k]=(o[k]||0)+v;T.out=o;
   S.__tp={choice:T.choice,out:T.out,maxRank:T.maxRank,y0:T.y0}}catch(e){}};
+ window.__tpSet=setNet;
  const e0=endTurn;endTurn=function(){setNet();try{return e0.apply(this,arguments)}finally{setNet()}};})();
