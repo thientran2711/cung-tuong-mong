@@ -3400,3 +3400,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:56Z) OWNER: stop new features until after her vacation; focus on current work → OD row; parking #13–15 frozen; CO-NGU-TITLES + TRUNGSINH research continue (existing text / study only). 135 told.
 - (08:00Z) OWNER sleeping: robots keep playing; morning report = one combined robot report (trungsinh + ours). Standby blocks not needed: main 135 depth 1, B/D/E ROOT. 135 told.
 - (08:06Z) OWNER «Bộc phát theo tính cách là phải làm» → exception to freeze; Option A decided from her words; ORDER D build (temper-design.md). 135 told.
+- (07:03Z) LIVE 9f72524b (visitor-fix-r10: khách thăm hiện đúng) 07:00Z; ROLLBACK ee37ab5f. LC13 rolled → LC14 session_01V1ZZH445aM6qMekWv3GK8Y (needs sếp golive permission in its chat; queue sent: makeup-noboost 8325d13f first, delegate-nomg-2 71e150b4, hardlock, save-growth, D×4, sansang-test). ARCHIVED VISITOR-FIX + rv 1W8A4mF7. CDN wiped visitor-fix-r9/-r10 (others empty).
