@@ -26,6 +26,9 @@ if [ ! -f "$GB" ]; then FAILS+=("G1 no frozen list dev/test/one-core-baseline.js
   # review/one-core-jkc r1: a help / gloss / tip / card text may not type a threshold no rule uses, nor a new typed copy of a rule cut
   if [ -f "$KIT/dev/test/one-core-text-rule.js" ] && ! OC_BUILD=$WT/dev/build node "$KIT/dev/test/one-core-text-rule.js" > "$OUT/g1-textrule.txt" 2>&1; then
     head -14 "$OUT/g1-textrule.txt"; FAILS+=("G1 one-core-text-rule ($OUT/g1-textrule.txt)"); fi
+  # review/typed-stat-bal (law 3, MAIN 111 21:33Z): no c6 event card whose cost and win of the same stat cancel (a pure cost)
+  if [ -f "$KIT/dev/test/c6-cancel-scan.js" ] && ! node "$KIT/dev/test/c6-cancel-scan.js" "$WT/dev/build" > "$OUT/g1-c6cancel.txt" 2>&1; then
+    head -14 "$OUT/g1-c6cancel.txt"; FAILS+=("G1 c6-cancel-scan ($OUT/g1-c6cancel.txt)"); fi
   if [ -n "$LIVE" ] && git -C "$WT" cat-file -e "$LIVE:dev/test/one-core-baseline.json" 2>/dev/null; then
     LT=$(git -C "$WT" show "$LIVE:dev/test/one-core-baseline.json" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).total))')
     # compare only the kinds the live list already counts (a kind added to the guard later, review/one-core-dup amt/sw/sc/k/ladder, is a

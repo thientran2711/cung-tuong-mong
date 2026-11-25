@@ -70,7 +70,7 @@ function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);c
  try{const W=S.where||{};if(maid&&mlAgeOk(s)&&W.emp&&W.emp!=="dtd"&&W.emp!=="home")X({k:"maid:empTea",sk:"empTea",g:"maid",p:odA(s,amTeaO(s,0)),c:{},w:{sung:amTeaG(s)*qv(BAL.mline.seekTr,s,1)},l:{tin:-BAL.ag.maid.tea.fail},at:()=>W.emp,pl:W.emp,tag:"staff",run:p=>asEmpTea(p||s)})}catch(e){}
  /* consorts (srvTalk "rv" / "hh") */
  const hh=typeof queenP==="function"?queenP():null;
- if((s.sec||0)>0){const foe=liveRivals(true).find(v=>v!==m&&(v===hh||hostility(v,m)>=20));if(foe)X(asOpt(s,"betray",100,{t:foe,at:palaceOf(foe)}));
+ if((s.sec||0)>0){const foe=liveRivals(true).find(v=>v!==m&&(v===hh||hostility(v,m)>=netThK(v,"host","hostLo")));if(foe)X(asOpt(s,"betray",100,{t:foe,at:palaceOf(foe)}));
   if(hh&&hh!==m&&hh!==S&&(s.sec||0)>=SRVA.accuse.sec)X(asOpt(s,"accuse",SRVA.accuse.o(s,m),{t:hh,at:"kn"}))}
  {const v=asBig(m);if(v)X(asOpt(s,"greet",100,{t:v,at:palaceOf(v)}))}
  /* Đồng liêu (srvStaffAct) */

@@ -51,6 +51,11 @@ async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.
  await B.p.waitForFunction(()=>__co2().seat==='b'&&!__co2().frozen,null,{timeout:60000});
  {const t0=Date.now();while(Date.now()-t0<90000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co2().world)&&await B.p.evaluate(()=>__co2().world))break;await sleep(500)}}
  L('both in the world');for(const o of [A,B]){await o.cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});await o.p.evaluate(PP.RESET);await o.p.evaluate(()=>{window.__wsl.length=0})}
+ /* --trace (robot-coop-fix-1): a per-page timeline of the measured window (frames up/down with the message type BEFORE gzip, room events, long tasks) → R.trace, to split a slow turn into client / server time */
+ if(opt('trace',false))for(const o of [A,B])await o.p.evaluate(()=>{const L=window.__tr=[];const sd=COOP.send;COOP.send=function(t,f){try{const x=typeof t==='string'?t:t&&t.t;L.push([Date.now(),'up',x])}catch(e){}return sd.apply(this,arguments)};
+  for(const t of ['week','buoi','bended','presence','room','end','state','snap','delta','seatok','error','thin','me','init','where','pos'])COOP.on(t,()=>L.push([Date.now(),'ev',t]));
+  {const r0=window.render;window.render=function(){const t=performance.now();try{return r0.apply(this,arguments)}finally{const d=performance.now()-t;if(d>=50)L.push([Date.now(),'render',Math.round(d)+'ms '+(new Error().stack.split('\n').slice(2,5).map(x=>x.trim().replace(/^at /,'').replace(/ \(.*:(\d+):\d+\)$/,':$1')).join(' < '))])}}}
+  window.__kcw=window.__kcw||[];setInterval(()=>{try{const k=__co2().key;if(window.__kcl!==k){window.__kcl=k;L.push([Date.now(),'key',k])}}catch(e){}},50)});
  if(FXLITE)for(const o of [A,B])await o.p.evaluate(()=>{try{OPT.fxon=false;OPT.fxpick=true;saveOpt()}catch(e){}});
  if(AS){const [fm,n]=ANIM.split(':');for(const o of [A,B]){await AS.inject(o.p,{format:fm,n:+n||6,seed:o===A?7:11});await sleep(3000);await o.p.evaluate(()=>{window.__r10fps.t.length=0;window.__r10fps.lt.length=0;window.__r10fps.on=true})}L('anim',ANIM,'on both clients')}
  const tPlay=Date.now();
@@ -58,15 +63,23 @@ async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.
  for(let i=0;i<NB;i++){const k0=await A.p.evaluate(()=>__co2().key);
   for(const o of [A,B]){await clear(o);await o.p.evaluate(()=>{const c=[...document.querySelectorAll('button.card.ka:not(:disabled):not(.kdis)')].filter(x=>x.offsetParent!==null);if(!c.length){const t=document.querySelector('#tabs [data-tab="act"]');if(t)t.click();return}c[Math.floor(Math.random()*c.length)].click()}).catch(()=>{});await sleep(700);await clear(o)}
   if(process.env.CL_DBG)L('pre-press',k0,JSON.stringify(await A.p.evaluate(()=>({co:__co2(),Q:Q.length,mg:!!(S&&S.mg),next:(document.getElementById('next')||{}).disabled,modal:!document.getElementById('modal').hidden,mt:(document.querySelector('#modal .dlg')||{}).textContent?.slice(0,80)}))));
+  /* --prof <k0> (robot-coop-fix-1): CPU profile of that one turn on both clients → R.prof (top self-time functions) */
+  const PROF=opt('prof',null)===k0;if(PROF)for(const o of [A,B]){await o.cdp.send('Profiler.enable');await o.cdp.send('Profiler.setSamplingInterval',{interval:1000});await o.cdp.send('Profiler.start')}
   const ta=await press(A,k0),tb=await press(B,k0);if(process.env.CL_DBG)L('pressed',ta,tb);const t2=Math.max(ta,tb);let done=false;
   for(let t=0;t<200&&!done;t++){const a=await A.p.evaluate(()=>__co2()),c=await B.p.evaluate(()=>__co2());if(a.key!==k0&&c.key!==k0&&(a.key===c.key||a.waiting||c.waiting))done=true;else{await clear(A);await clear(B);await sleep(150)}}
   const ka=await A.p.evaluate(()=>__co2().key),kb=await B.p.evaluate(()=>__co2().key);
   const ca=await A.p.evaluate(k=>window.__kch[k]||0,ka),cb=await B.p.evaluate(k=>window.__kch[k]||0,kb);
-  const ms=done&&t2&&ca&&cb?Math.max(ca,cb)-t2:-1;R.turns.push({k0,to:[ka,kb],ms});L('buổi',k0,'->',ka,kb,'turn',ms,'ms')}
+  const ms=done&&t2&&ca&&cb?Math.max(ca,cb)-t2:-1;R.turns.push({k0,to:[ka,kb],ms});
+  if(PROF){R.prof=R.prof||{};for(const o of [A,B]){const {profile:P}=await o.cdp.send('Profiler.stop');const dt={};const N=new Map(P.nodes.map(n=>[n.id,n]));const par={};for(const n of P.nodes)for(const c of n.children||[])par[c]=n.id;
+   for(let i=0;i<P.samples.length;i++)dt[P.samples[i]]=(dt[P.samples[i]]||0)+(P.timeDeltas[i]||0);const self={},tot={};
+   for(const [id,us] of Object.entries(dt)){const n=N.get(+id);const f=n.callFrame;const k=(f.functionName||'(anon)')+' '+(f.url||'').split('/').pop()+':'+(f.lineNumber+1);self[k]=(self[k]||0)+us;
+    const seen=new Set();let x=+id;while(x!=null){const m=N.get(x);const g=m.callFrame;const kk=(g.functionName||'(anon)')+' '+(g.url||'').split('/').pop()+':'+(g.lineNumber+1);if(!seen.has(kk)){seen.add(kk);tot[kk]=(tot[kk]||0)+us}x=par[x]}}
+   const top=o=>Object.entries(o).sort((a,b)=>b[1]-a[1]).slice(0,250).map(([k,v])=>[k,Math.round(v/1000)]);R.prof[o.name]={self:top(self),total:top(tot)}}}L('buổi',k0,'->',ka,kb,'turn',ms,'ms')}
  const playMin=(Date.now()-tPlay)/60000;
  if(AS){R.anim={spec:ANIM};for(const o of [A,B]){const f=await o.p.evaluate(()=>{window.__r10fps.on=false;return{t:window.__r10fps.t.slice(),lt:window.__r10fps.lt.slice()}});const st=AS.fpsStats(f.t);R.anim[o.name]={fps5:st.p5,fps50:st.p50,fpsMean:Math.round(st.mean*10)/10,longTasks:f.lt.length,longTaskMax:Math.max(0,...f.lt),stat:await o.p.evaluate(()=>window.__r10anim.stat())}}console.log('ANIM '+JSON.stringify(R.anim))}
  /* metrics: lib/coop-lag-hooks.js collect() reads the socket logs + long tasks of the measured window (before the rejoin test reloads a client) */
  const C=await collect(A.p,B.p,{turns:R.turns,nbTurns:NB,playMin});const turnMs=R.turns.map(x=>x.ms).filter(x=>x>=0);
+ if(opt('trace',false)){R.trace={};for(const o of [A,B])R.trace[o.name]=await o.p.evaluate(()=>({tr:window.__tr||[],lt:(window.__pp&&window.__pp.lt||[]).map(x=>[Math.round(performance.timeOrigin+x.t),x.d])})).catch(e=>({err:e.message}))}
  /* rejoin: the guest reloads mid-week */
  if(!NOREJ){const t0=Date.now();await B.p.reload(DCL);await B.p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await sleep(2000);await tapText(B,/^Vào phòng/,4000);let ok=false;
   for(let t=0;!ok&&Date.now()-t0<120000;t++){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co2()).catch(()=>({})),c=await B.p.evaluate(()=>__co2()).catch(()=>({}));if(a.on&&c.on&&!a.frozen&&!c.frozen&&c.world&&a.key===c.key)ok=true;else await sleep(250)}

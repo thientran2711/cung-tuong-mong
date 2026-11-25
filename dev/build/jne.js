@@ -194,7 +194,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§62",title:"kitNi
    S.neMorn = {d: the night's day (wk), tier} is set by the night card for a mặn nồng (warm) or lạnh nhạt (cold) night. When the day has
    moved on (endTurn: the next tuần = the next day of play), ONE morning beat:
    warm → Kính sự phòng's chief eunuch records the night in the book, the maids gossip: Danh +BAL.nightEnd.after.warmDanh.
-   cold → the other consorts already know: one of them mocks her (a consort she knows is named, else "một vị phi tần ngươi chưa quen",
+   cold → the other consorts already know: one of them mocks her (a consort she knows is named, else "một vị phi tần",
    stranger rule), Danh BAL.nightEnd.after.coldDanh; she answers with the reaction buttons of the toilette reactions (jtoil):
    Nhẫn nhịn (Đức +1, Danh −1: seen as weak) · Cười trừ (nothing) · Đáp lại (Sức −2; BAL.toil.replyWin % Danh +BAL.toil.replyDanh, else she is resented more).
    Bots / no UI: the Danh change only (sims = game). Old saves: no field → nothing. */

@@ -1,6 +1,9 @@
 /* map-portrait: Dư đồ portrait layout (KIT §85.8, owner 17/11 ~13:12Z, review/map-portrait).
-   kv1 (portrait): the 4 people cards = ONE ROW above the map (same size), Ân sủng + Nguy hiểm chung = ONE ROW below (same height), nothing of them over the map; the map spans the full page width
-   and is zoomed to the free height; her place (+ every visible "!" place when they fit) is inside the view at open; the sky (data-sky) is set per weather; 0 label overlaps.
+   kv1 (portrait): NO people cards / group bars above the map (owner OD 18/11 ~21:40Z OD:L1921, canon overwrite of the 17/11 «4 cards one row above»: «Cung nhân» /
+   «Chí tôn» = TWO small kit rail buttons in the left icon rail, the list drops down under them, jk3 kgfRail/kgfDrop); Ân sủng + Nguy hiểm chung = ONE ROW below (same height),
+   nothing of them over the map; the map spans the full page width and is zoomed to the free height (its bottom = 6 px above that row); her place (+ every visible "!" place
+   when they fit) is inside the view at open — her place = the .here spot = mapHereK (jres: housed in a chủ vị's phối điện = that palace; map-fix-2); the sky (data-sky) is set
+   per weather; 0 label overlaps.
    kv2 (iPad landscape): UNCHANGED - the side column is still a narrow column (#kshR not a grid), map margins 56 / column+8.
    usage: node dev/test/map-portrait.js <page URL> <shotdir|-> [WxH,..] */
 const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
@@ -25,16 +28,17 @@ const WX=[['rain',{n:'mưa phùn',k:'rain',f:1},0],['sun',{n:'nắng vàng',k:'s
    const B=[...document.querySelectorAll('.mapw .mspot:not(.kmhide)')].map(s=>{const P=[...s.querySelectorAll('.mlab,.mmeta')].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0);return P.length?{L:Math.min(...P.map(r=>r.left)),R:Math.max(...P.map(r=>r.right)),T:Math.min(...P.map(r=>r.top)),Bt:Math.max(...P.map(r=>r.bottom))}:null}).filter(Boolean);
    let ov=0;for(let i=0;i<B.length;i++)for(let j=i+1;j<B.length;j++){const a=B[i],c=B[j];if(Math.min(a.R,c.R)-Math.max(a.L,c.L)>0&&Math.min(a.Bt,c.Bt)-Math.max(a.T,c.T)>0)ov++}
    const o={one,sc,w,ov,vis:B.length,tot:document.querySelectorAll('.mapw .mspot').length,sky:document.querySelector('.mapv').dataset.sky,z:window.__mapFit,mls:window.__mapMls,grid:kR&&getComputedStyle(kR).display==='grid',kRw:kR&&kR.getBoundingClientRect().width,mw:w.w};
-   if(one){const mt=w.t,mb=w.b;o.cards=cards.length;o.cardsAbove=cards.every(c=>c.bottom<=mt+2);o.cardsSame=cards.length===4&&cards.every(c=>Math.abs(c.width-cards[0].width)<1.5&&Math.abs(c.height-cards[0].height)<1.5);
-    o.bottomBelow=!!ra&&!!rp&&ra.top>=mb-2&&rp.top>=mb-2;o.bottomSame=!!ra&&!!rp&&Math.abs(ra.height-rp.height)<1.5;o.fullW=w.w>=sc.w-1;o.fitH=Math.abs(w.h-(ra.top-6-(cards.length?Math.max(...cards.map(c=>c.bottom))+6:0)))<4;
-    o.hereIn=!!hr&&hr.left>=sc.l&&hr.right<=sc.r;o.hint=null}
+   if(one){const mb=w.b;o.cards=cards.length;o.bars=document.querySelectorAll('#kshR .kgf').length;/* OD:L1921: no cards row, no full-width group bars on the phone/Fold map */
+    o.rail=[...document.querySelectorAll('#krail [data-rail^="kgf-"]')].filter(e=>e.offsetParent).map(e=>e.dataset.rail);o.railNeed=typeof kitStageRail==='object'?kitStageRail.items().filter(x=>/^kgf-/.test(x.id)&&x.when&&x.when()).length:-1;
+    o.bottomBelow=!!ra&&!!rp&&ra.top>=mb-2&&rp.top>=mb-2;o.bottomSame=!!ra&&!!rp&&Math.abs(ra.height-rp.height)<1.5;o.fullW=w.w>=sc.w-1;o.fitH=!!ra&&Math.abs(w.b-(ra.top-6))<4&&w.t>=sc.t-1;
+    o.here=here?here.dataset.go:null;o.hereK=typeof mapHereK==='function'?mapHereK():S.place;o.hr=hr?[Math.round(hr.left),Math.round(hr.right)]:null;o.scl=document.querySelector(".game.maptab .mapsc").scrollLeft;o.hereIn=!!hr&&hr.left>=sc.l&&hr.right<=sc.r;o.hint=null}
    else{o.colNarrow=kR&&kR.getBoundingClientRect().width<200;o.mapLeft=Math.round(w.l-sc.l)}
    return o});
   const wxs=[['',null,null],...WX];
   for(const [n,wx,bu] of wxs){await p.evaluate(([wx,bu])=>{Q.length=0;document.getElementById('modal').hidden=true;window.__mapZ=0;window.__mapKey2=null;if(wx){S.wx=wx;S.buoi=bu}tab='go';render()},[wx,bu]);await sleep(2200);
    const r=await scan();res[n||'def']=r;if(!n&&DIR!=='-')await p.screenshot({path:`${DIR}/portrait-${sz}.png`})}
   const d=res.def;let ok=!d.nomap&&d.ov===0&&errs.length===0;
-  if(d.one){ok=ok&&d.cards===4&&d.cardsAbove&&d.cardsSame&&d.bottomBelow&&d.bottomSame&&d.fullW&&d.fitH&&d.hereIn&&d.grid;
+  if(d.one){ok=ok&&d.cards===0&&d.bars===0&&d.rail.length===d.railNeed&&d.here===d.hereK&&d.bottomBelow&&d.bottomSame&&d.fullW&&d.fitH&&d.hereIn&&d.grid;
    for(const k of Object.keys(res)){if(k==='def')continue;ok=ok&&res[k].sky&&res[k].sky.indexOf(k.split(' ')[0])>=0&&(k.indexOf('night')<0||/night/.test(res[k].sky))&&res[k].ov===0}}
   else ok=ok&&!d.grid&&d.colNarrow&&Math.abs(d.mapLeft-56)<=2&&d.w.l!=null;
   console.log(sz,ok?'PASS':'FAIL',JSON.stringify(d),errs.join('|'));if(!ok)bad++;await ctx.close()}

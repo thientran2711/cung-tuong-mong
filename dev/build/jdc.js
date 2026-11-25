@@ -109,7 +109,7 @@ function dcBuyFit(p,fams){try{const P=Math.min(8,wdPOf(p));let best=null;for(let
 function dcBuy(p,b){if(!b)return false;const bac=p===S?S.bac:(p.bac||0);if(bac<b.pr)return false;const e={k:b.k,from:"buy"};
  if(p===S)apply({bac:-b.pr});else ap(p,{bac:-b.pr});const w=wdOf(p);if(w.tram)dcInv(p).push(w.tram);w.tram=e;return true}
 function dcLenders(to,fams){const D=BAL.dc.bor;const L=[];if(typeof rivals==="undefined"||!(to===S?dcLend():dcWorld()))return L;
- for(const v of rivals){if(!v||v===to||!v.alive||v.out||v.confined||v.coop)continue;if(aff(v,to)<D.fav)continue;
+ for(const v of rivals){if(!v||v===to||!v.alive||v.out||v.confined||v.coop)continue;if(aff(v,to)<netTh(v,"than"))continue;
   for(const sl of D.sl){const c=dcOwnFit(v,fams,sl);if(c.length){L.push({v,...c[0]});break}}if(L.length>=D.max)break}return L}
 /* THE ONE LOAN RULE (r4b, F1: the Hội phối đồ «Mượn» and the «Cho mượn» visit go through here too). o (optional): due = the last tuần of the loan
    (default this tuần → back the next one; the Hội phối đồ: the contest tuần), why = what it is for ("ts" Hội phối đồ, "ev" a visit), chest = never
@@ -261,7 +261,7 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
    try{log(`Mặc áo trái mùa: ${Object.entries(fx).map(([k,v])=>statTxt(k,v)).join(", ")}.`)}catch(e){}}}
  /* two-way borrow: a consort who lacks a colour asks to borrow her trâm (her seat; the piece moves for real) */
  const f=dcFestNow();if(f&&dcHerOn()&&dcLend()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
-  for(const v of R){if(!v||!v.alive||v.out||v.coop||aff(v,S)<BAL.dc.bor.fav)continue;const st=dcStat(v,f.k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)continue;
+  for(const v of R){if(!v||!v.alive||v.out||v.coop||aff(v,S)<netTh(v,"than"))continue;const st=dcStat(v,f.k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)continue;
    const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;
    Q.push({t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
     opts:[{n:`Cho mượn ${c.w.n}`,fx:{},x:`tốn: ${c.w.n} rời rương đến tuần sau · thành: ${dcRelW(v,BAL.dc.bor.thanks)}`,go:()=>{if(dcBorrow(v,S,c.e)){try{log(`Cho ${dcName(v)} mượn ${c.w.n} dự ${f.name}.`)}catch(e){}}else try{log(`${c.w.n} không còn trong rương, không cho ${dcName(v)} mượn được.`)}catch(e){}}},

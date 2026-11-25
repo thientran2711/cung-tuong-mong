@@ -1,7 +1,7 @@
 /* ================= j68e: common event content, part 1 (đời thường, khách đến, Hoàng thượng) =================
    Every option: a real gain and a real cost or risk; odds by the ladder; outcomes and reports are true (NPCs may believe wrong things, the game never lies). */
 const T6=(v,t)=>tr6(v).includes(t);
-const fr6=v=>aff(v,S)>=10,fo6=v=>{try{return bandOf(danger(v,S))>=1}catch(e){return aff(v,S)<-10}};
+const fr6=v=>aff(v,S)>=netTh(v,"quen"),fo6=v=>{try{return bandVT(v,S)>=1}catch(e){return aff(v,S)<netTh(v,"ky")}};
 const sea6=s=>SEASON[S.month-1]===s;
 const hasStaff6=n=>(S.staff||[]).length>=(n||1);
 
@@ -11,7 +11,7 @@ EV6("gossipTea","day",{a:["rv"],pp:()=>{const a=rv6(fr6,v=>5+aff(v,S)/5);return 
  o:X=>[c6("Nghe và giữ kín",{c:{suc:-3},r:[[X.A,6]],k:[R6("mất nửa buổi chiều")]}),
   c6("Gợi chuyện để dò tin",{p:od(BAL.odb.j68e.odP+S.tamco/3),w:{mat:BAL.eff.j68e.matW},r:[[X.A,2]],lr:[[X.A,-6]],lt:[R6("nàng thấy ngươi tò mò quá")],ok:()=>`${X.A.n} buột miệng kể vài chuyện có ích. ${statTxt("mat",BAL.eff.j68e.matW)}.`}),
   c6("Khéo cáo mệt",{w:{suc:4},r:[[X.A,-3]]})]});
-EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a==null?null:{a0:a}},w:C=>1.6,
+EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>netTh(v,"ky"));return a==null?null:{a0:a}},w:C=>1.6,
  v:["Cung nữ của {A} mang sang một hộp gỗ đàn hương, trong có hai lọ hương liệu, nói là quà đáp lễ.","{A} sai người gửi tặng một xấp lụa Hàng Châu, kèm lời nhắn 'chút lòng thành'.","Một hộp điểm tâm hoa quế đề tên {A} được đưa tới, còn ấm.","{A} gửi sang một chậu lan quý, nói hoa nở đúng lúc nhớ đến ngươi."],
  o:X=>[c6("Nhận, đáp lễ hậu hĩnh",{c:{bac:-20},r:[[X.A,8]],w:{danh:1}}),
   c6("Nhận, cho người thử trước",{c:{suc:-2},w:{tamco:1},r:[[X.A,2]],k:[R6(`nếu ${X.A.n} biết, có thể phật ý`)],ok:()=>`Đồ của ${X.A.n} sạch sẽ, không có gì lạ.`}),
