@@ -1780,3 +1780,4 @@ net-ghen-2 BIG review (RV5) | review/net-ghen-2 80d217ed | session_01D3E3NXw8WVA
 coop-night-live BIG review (opus, pre-opened) | review/coop-night-live | session_01N1tNP5h1rt4Z5947oiDeqt | RUNNING | 2026-11-25 18:24Z (Foreman B child 4)
 coop-week-wait (6ZG9 calendar divergence + #coopfz stuck) | review/coop-week-wait | session_01N1tNP5Jp8P2taMCSxWvUFo | RUNNING | 2026-11-25 18:27Z (Foreman B child 4)
 coop-week-wait BIG review (opus, pre-opened) | review/coop-week-wait | session_01N1tNP4hMB3ucUiaZYuWHBr | RUNNING | 2026-11-25 19:14Z (Foreman B child 4)
+save-unseen-lists BIG review (opus) | review/save-unseen-lists | session_01N1tNP2NAx6v2HeVEvroSiE | RUNNING | 2026-11-25 19:26Z (Foreman B child 4)
