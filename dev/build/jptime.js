@@ -65,7 +65,13 @@ function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&
  const ok=r&&typeof r==="object"&&"ok" in r?r.ok:(r===false?false:r===true?true:window.__lastOk!=null?!!window.__lastOk:null);
  a.rep={t:(r&&r.t)||a.lbl||"Tin báo",ok,L:L.length?L:[(r&&r.txt)||`${a.nm} đã về.`],d};
  try{if(typeof window.kitNoticeDrop==="function")window.kitNoticeDrop("pt:go:"+a.id)}catch(e){}
- ptNote({id:"pt:back:"+a.id,line:`${a.nm} đã về: có tin báo.`,text:`${a.rep.t}${ok===true?" · thành":ok===false?" · hỏng":""}. ${a.rep.L.join(" ")}`.trim(),go:ptOpenTin,goLabel:"Xem tin"})}
+ ptNote({id:"pt:back:"+a.id,line:`${a.nm} đã về, có tin báo.`,text:ptRepText(a).join(" "),go:ptOpenTin,goLabel:"Xem tin"})}
+/* tinbao-words (owner OD 25/11 ~23:36Z «tùm lum chữ lặp tới lặp lui»): ONE report = plain sentences, the doer named once. The head «<người> … trở về»
+   says the outcome in words («, việc đã thành.» / «, việc không thành.»), never the « · thành» glue; when the report's own first line already starts
+   with the doer («Xạ Nguyệt nghe ngóng được chuyện về …») the head is dropped (it would say the same thing twice). Returns the sentences (rows). */
+function ptRepText(a){const r=(a&&a.rep)||{},nm=String((a&&a.nm)||"").trim();const L=(r.L||[]).map(x=>String(x==null?"":x).trim()).filter(Boolean);
+ const t=String(r.t||(nm?nm+" đã về":"")).trim().replace(/[.:]\s*$/,"");const head=t?`${t}${r.ok===true?", việc đã thành":r.ok===false?", việc không thành":""}.`:"";
+ if(L.length&&nm&&L[0].indexOf(nm)===0)return L;if(L.length===1&&t&&L[0].replace(/[.:]\s*$/,"")===t)return[head];return head?[head,...L]:L}
 /* the jump of «Đợi tin»: to the next return khắc of HER sends (this day only; past the night = "Sang ngày mới" as always) */
 function ptNext(){let m=null;for(const a of ptZ())if(!a.back&&a.by==="me"&&(m==null||a.due<m))m=a.due;return m}
 function ptWaitOk(){const K=ptNext();if(K==null||!S||S.dead||(typeof Q!=="undefined"&&Q.length)||S.mg)return false;let B4=3;try{B4=B4N}catch(e){}
@@ -88,8 +94,8 @@ function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
 function ptErrOwn(){try{return typeof errIcon==="function"||!!(window.ERR&&typeof window.ERR==="object")||(!ptIconSet&&typeof kitStatusIcon!=="undefined"&&typeof kitStatusIcon.has==="function"&&kitStatusIcon.has("tin"))}catch(e){return false}}
 function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}${o.title&&!/^Lệnh của /.test(o.title)?": "+o.title:""}, trả lời trước ${ptWhen(o.due)}; quá hạn coi như từ chối.`);
- for(const a of N){const r=a.rep||{};if(!subj)subj=ptPerson(a.a||{});facts.push(`${r.t||a.nm+" đã về"}${r.ok===true?" · thành":r.ok===false?" · hỏng":""}.`);
-  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});(r.L||[]).forEach(l=>facts.push(l));a.read=1}
+ for(const a of N){const r=a.rep||{};if(!subj)subj=ptPerson(a.a||{});const RT=ptRepText(a);facts.push(RT[0]||`${a.nm} đã về.`);
+  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});RT.slice(1).forEach(l=>facts.push(l));a.read=1}
  for(const a of W){if(!subj)subj=ptPerson(a.a||{});facts.push(`${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  if(!subj&&OQ.length)try{subj=typeof isSrv==="function"&&isSrv()?srvM():null}catch(e){}
@@ -155,7 +161,7 @@ ptReg("spy",a=>{const t=RV(a.a.v);const m=ptPerson(a.a);if(!m)return{txt:`Ngư�
 /* ---- 2. Nghe ngóng chung ---- */
 function ptListen(m){if(!ptOn()||PT.landing)return spyListen(m);const a=ptSend({who:ptPid(m),nm:m.name,kind:"listen",paid:ptRow("listen").o,place:"cnh",a:{sid:m.sid!=null?m.sid:null},lbl:"đi nghe ngóng"});
  return a?`${m.name} đi nghe ngóng, về ${ptWhen(a.due)}.`:spyListen(m)}
-ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyListen(m);if(r)log(`${m.name} nghe ngóng trở về: ${r}`);return{ok:!!spyListen.ok,t:`${m.name} nghe ngóng trở về`}});
+ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyListen(m);if(r)log(r.indexOf(m.name)===0?r:`${m.name} nghe ngóng trở về: ${r}`)/* tinbao-words: the report names the doer once */;return{ok:!!spyListen.ok,t:`${m.name} nghe ngóng trở về`}});
 /* the two options on her maid's / a servant's pop-up (talkOpts kinds maid / serv): order khắc, "chờ N khắc", busy lock */
 (function(){try{const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!ptOn()||!p||!Array.isArray(A)||(p.kind!=="maid"&&p.kind!=="serv"))return A;
   const m=p.kind==="serv"?p.ref:S.maid;if(!m)return A;const why=ptLockWhy(ptPid(m));
