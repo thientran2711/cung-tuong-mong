@@ -1,3 +1,13 @@
+# REVIEW r9 (SMALL reviewer, 25/11 ~02:40Z): PASS e0594561 (review/visitor-fix-r9-rv = r9 98a29b65 merged onto LC13 head 7dbfe98a + 1 reviewer fix)
+
+PRIORITY #1 CHECK: OD 24/11 ~22:14Z + ~21:58Z read; r9 diff vs 42af6315 = j61 k61Desc/K61SENT, jhc/jne hint, know-notice + name-sentence tests, KIT_REQUESTS KK25.
+Merge: r9 merges clean onto 7dbfe98a (only generated index.html/sw.js conflict → rebuilt with assemble.py + build_site.sh). origin/main moved to d6b6fd6f; LC13 head = 7dbfe98a (newest lc13 ref).
+Found on shots: r9b fixed only the log() path. Sổ ghi rows stored with the raw name at world-gen (before S.known) were still chipped by j65 kitNames as «Quý phi ??? tâu xin Dục Khôn cung…» (Fold + iPad). Reviewer fix (j65:226): k61Scrub before kitNames → «một vị Quý phi tâu xin …».
+Tests (e0594561 tree): know-notice Fold + iPad bad 0 · name-sentence PASS · greet-stranger PASS · name-mask-scan PASS 0 hits, page errors 0 · quickcheck started (see MAIN message for result).
+Shots CDN img/_review/visitor-fix-r9/: r9-pair-unnamed.jpg (Fold | iPad: toast «Ta gặp một vị Thường tại.» on iPad; Fold shows the chip «Ta biết thêm 2 điều»), r9-pair-log.jpg (Fold | iPad Sổ ghi, no «???» in sentences).
+Advisory (not blocking): (1) the scrubbed Sổ ghi row with a portrait icon starts lowercase «một vị Phi tâu xin …» (capitalisation attempt did not take; cosmetic); (2) iPad icon-row orphan word «cung.» = KK25 (KIT request filed by r9); (3) the named chip rows keep «Quý phi <tên>» (known people) — correct.
+Pending wipes after LIVE: img/_review/visitor-fix, visitor-fix-r8, visitor-fix-r9.
+
 # BIG REVIEW visitor-fix — MERGE r8: BIG PASS 42af6315 (review/visitor-fix-r8-rv = worker merge 814d272f + reviewer merge fix)
 
 814d272f = review/viecnho-fix-r2 518aef86 + visitor-fix-2 0b4e1e65 (on BIG-PASSED a6f7715a). Ancestors OK: origin/main 502c48c9, 518aef86, a6f7715a.
