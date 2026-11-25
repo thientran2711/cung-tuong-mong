@@ -1742,3 +1742,4 @@ CO-OP RERUN runner U1b (successor of U1) | stack review/robot-coop-stack-u3 512c
 SAVE-YEAR-ROLLBACK r2 FIXER (successor) | review/save-year-rollback 876415e3 | session_01N1tNP3KgfZcq6zobMQRpTF (FOREMAN B) | RUNNING | 2026-11-25T12:37Z
 HARDLOCK-CHOICE-R4 FIXER (port choose-guard into jnolock) | review/hardlock-choice-r4 | session_01N1tNP5EhLGrd9fRXSh5UKk (FOREMAN B) | RUNNING | 2026-11-25T12:43Z
 net-ghen wave 2 cont. (NB-b relAdd order, NB-a, NB2 cards, gates) | review/net-ghen-2 | session_01D3E3NXwfFkmq6kwyzgW5S5 (W7, successor of W6 session_01D3E3NYpxDHwQEUeCUDPFsN) | RUNNING | 2026-11-25T12:50Z (Foreman D depth 2)
+B co-op RERUN U3c (successor of U3, seeds 44+, stack 512cfee6) | dev/handover/robot/coop-rerun-U3c-* | B | session_01N1tNP6q6oiuzPjWAgcdy8j | RUNNING | 25/11 12:56Z |
