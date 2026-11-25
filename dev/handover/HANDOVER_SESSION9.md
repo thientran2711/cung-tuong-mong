@@ -3398,3 +3398,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:36Z) OWNER: their lives die fast (childbirth ~50-50) → lead + players record death causes/minutes; early count after ~8 lives to 135 → sếp.
 - (07:42Z) OWNER: game names dull, no cổ ngữ → CO-NGU-TITLES = session_01V1ZZH4mHp8bC9LZg8ZFKx6 (opus, child of 134, reports to 135).
 - (07:56Z) OWNER: stop new features until after her vacation; focus on current work → OD row; parking #13–15 frozen; CO-NGU-TITLES + TRUNGSINH research continue (existing text / study only). 135 told.
+- (08:00Z) OWNER sleeping: robots keep playing; morning report = one combined robot report (trungsinh + ours). Standby blocks not needed: main 135 depth 1, B/D/E ROOT. 135 told.
