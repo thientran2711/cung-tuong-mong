@@ -15,3 +15,8 @@ Overlap: fix-3 (j59/jrail), fix-4 (jfx/jopic/jlag2/j57/jseal), fix-1-r2 (j15/jto
 toil-overlay Fold+iPad rc 0 (33 checks, 0 bad, 0 DEAD / 27 taps) · toilette Fold+iPad rc 0 · hoa-dien Fold+iPad rc 0 · care-oldsave (LIVE save → stack) ok, 0/0 errors · robot-rt slices Fold 37 taps / iPad 26 taps, 0 dead, 0 stuck, 0 bugs.
 Laws: kit (no new parts; K-KDTX-BAND requested from the kit keeper), wording unchanged, no numbers, whole family checked per fix. Shots: scratch only, deleted; none in git.
 Supersedes for landing: fix-3 6b401cfc and robot-realtap-r2 5e504d79 are both inside 5c062a05 (land 5c062a05 alone).
+
+## UPDATE 25/11 ~11:50Z — harness 93812531..95718760 merged: NEW LAND SHA review/bc-stack-r 893c42f8 (FF on LIVE 9f72524b; test files only, no rebuild)
+PRIORITY #1 CHECK ('robot-realtap 95718760|mgGiveUp|moment log|softlock'): F #10 order 11:22Z | review/robot-realtap 95718760 | dev/PROGRESS_robot-realtap.md (HARNESS FIXER #4 batch).
+VERDICT: PASS. Code read: mini-game back ✕ never a move outside the result phase, «Bỏ cuộc?» → «Chơi tiếp», give-up only after 6 min (logged as harness bug, never exitPick); moment log; softlock detector (#next disabled with Q/S.mg, no dialog) → game bug + same-save reload; co-op lobby never leaves the room, both seats rejoin; still 0 .click(/dispatchEvent in play (only page.mouse.click / touchscreen.tap at hit-checked points). robot-rt-coop.js node --check OK.
+Self-test on the stack (real taps, slice 6 buổi): Fold 53 taps · iPad 73 taps — 0 dead, 0 stuck, 0 bugs, jsClicks 0, cap none, exitPick none; one mini-game screen per run, no «Bỏ cuộc»; moment logs written. Land 893c42f8 alone (supersedes 5c062a05).
