@@ -29,7 +29,7 @@ const flush = () => { fs.writeFileSync(path.join(OUT, 'coop-rt-' + TAG + '.json'
 
 /* pre-start choices (title → room) per seat; return a button, 'wait', or null (= the seat player's own start prefs) */
 function hostPre(st) { return (sc, b) => {
-  if (!code) { const m = b.map(x => x.t).join(' | ').match(/Chép mã\s*([A-Z0-9]{4})(?![A-Za-z0-9])/); const c = sc.code || (m && m[1]); if (c) { code = c; console.log('ROOM CODE', code) } }
+  if (!code) { const m = sc.b.map(x => x.t).join(' | ').match(/Chép mã\s*([A-Z0-9]{4})(?![A-Za-z0-9])/); const c = sc.code || (m && m[1]); if (c) { code = c; console.log('ROOM CODE', code) } }
   const f = re => b.find(x => re.test(x.t));
   if (!st.made) { const m = f(/^mời hảo hữu/i); if (m) { st.made = true; return m } const c = f(/^cùng hảo hữu/i); if (c) return c; const t = b.find(x => /^hảo hữu|cùng hảo hữu/i.test(x.t)); return t || 'wait' }
   /* room made: only the thân phận flow may be tapped (never «Chơi một mình», never a second room) */
