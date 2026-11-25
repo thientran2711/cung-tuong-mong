@@ -40,3 +40,8 @@ PRIORITY #1 CHECK: OD 24/11 ~18:15Z + ~18:19Z | main: none of ktChapToc/kitTocOp
 KIT OK r3 09e7b6e67c308e09b4ef0e3fead4cea747065506 review/flight-mucluc-kit
 
 ~90% done / ~75% playable
+
+### REVIEW r3 addendum (Foreman B request: quickcheck + old save + merged)
+- origin/main is still 502c48c9 = merge-base, so BARE head == MERGED head (ktop-sticky + mucluc-flight above ran on it).
+- `bash dev/tools/quickcheck.sh --runs 3` ALONE on 09e7b6e6: run 1 FAILED on time-spill-guard runtime «court th tap at sáng 1 left» (flake under load: `node dev/test/time-spill-guard.js` alone passes 2/2 on r3 and 2/2 on origin/main). Run 2: QUICKCHECK PASS · 218 s · open 2134 ms · old save ok (loads, plays a buổi, 0 errors) · perf new/live render 253/254, tab 449/471, buổi 1185/1338, tasks>200ms 24/23 · core gates PASS.
+KIT OK r3 confirmed (quickcheck PASS, merged PASS)
