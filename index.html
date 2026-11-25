@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d16c5300+","t":"2026-11-25T07:29Z","c":"robot-coop-fix-6: cause 5 = the two seats' buoi split (look-up panels held the room's step); test self-contained","b":"e2f71e3cd86d","h":[{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"}]};
+window.CTM_BI={"s":"ff31fee1+","t":"2026-11-25T12:07Z","c":"robot-coop-fix-6: coop-cal-rebirth preconditions = a live week (no pending week end), long buoi clock in cases 5/6, room-step asserts (test…","b":"f13c7a4ed3ab","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -50725,27 +50725,42 @@ function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapP
  let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
 function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);return}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
-/* robot-coop-fix-6 (CAUSE 5, the two seats' buổi split, Foreman B rooms QH9Y / U5HB / BGMQ, LIVE): a look-up panel she opened herself (kit
-   look: «Tâm trạng · X», «Đã biết về X», «Chứng cứ về X» — it only SHOWS what she has, jevb / j79) held the room's buổi step on her seat
-   (pendBuoi waits for an empty Q) while the friend had already stepped: host «Buổi sáng ✓», guest «Buổi trưa», both waiting. With the person-
-   dialog queue that had no dedupe (F's button-crawl-fix-2) the host's Q held 25 copies (BGMQ dump «onBuoi 0.1 me 0.0 Q25»), so no close ever
-   emptied it. A look-up panel never holds the room: at the step it is closed (one tap opens it again), as the merged week already drops
-   every non-card panel (fromCanon keepQ). Real choices, news and mini games still hold the step (pendBuoi) as before. */
+/* robot-coop-fix-6 (CAUSE 5, the two seats' buổi split, Foreman B rooms QH9Y / U5HB / BGMQ / 6ZB2, LIVE): a panel open on one seat (a
+   look-up panel «Tâm trạng · X» / «Đã biết về X» / «Chứng cứ về X», a «Tin báo» notice) held the room's buổi step on that seat (pendBuoi
+   waited for an empty Q) while the friend had already stepped: host «Buổi sáng ✓», guest «Buổi trưa», both waiting (BGMQ «onBuoi 0.1 me 0.0
+   Q25» = 25 queued copies of one look-up panel; 6ZB2 «onBuoi 3.2 me 3.1 Q1» = one notice). The rule is ONE classifier + ONE carry routine
+   below; the merged week keeps its own rule (fromCanon keepQ: cards carried, the rest dropped with the old world). */
 const isLook=x=>!!(x&&x.kit&&x.kit.look);CW.isLook=isLook;
-function dropLook(why){const n0=Q.length;if(!n0||!Q.some(isLook))return !n0;for(let i=Q.length-1;i>=0;i--)if(isLook(Q[i]))Q.splice(i,1);const n=n0-Q.length;try{const M=$("modal");if(M&&!Q.length)M.hidden=true;else if(n0!==Q.length&&typeof showModal==="function")showModal()}catch(e){}T("drop look "+n+" "+why);CW.lookDrop=(CW.lookDrop||0)+n;return !Q.length}
-CW.dropLook=dropLook;
-/* a queued panel with nothing to choose: no options (old opts or kit opts), no card pid (a choice card), not an ending */
-const passive=x=>!!x&&!isLook(x)&&!x.pid&&!(Array.isArray(x.opts)&&x.opts.length)&&!(x.kit&&Array.isArray(x.kit.opts)&&x.kit.opts.length)&&x.cls!=="end";CW.passiveQ=passive;
+/* robot-coop-fix-6 r2 (BIG rv FAIL on f670d1d8, law 11 + law 14: ONE rule, not drop / carry / hold on three paths): ONE classifier of a
+   queued panel at a room step + ONE carry routine (stepQ) used by every Q-gated step of a seat: the room's buổi step (onBuoi), the kept
+   step after her dialogs (tryEnd: pendBuoi + her kept «Sẵn sàng» press), the clock's forced end (CW.nightEnd).
+   qKind(x): "look" = a look-up panel she opened herself (kit look) · "tell" = a panel with NOTHING to press but its close (a notice
+   «Tin báo», news, a result, a plain kit info) · "hold" = everything else. «Has a choice» is read POSITIVELY from what the panel carries,
+   never from an empty opts: a card (pid / rk / ev event card), any opts array (even [] — the life card nlCard keeps its choice in the body), the life
+   card (nl), an ending (cls end), a title screen (kptitle), a kit shop / pick / mini-game stage, any function in the kit spec but its
+   onClose, and any button in its body (h / kit html / sections). Unknown shapes fall in "hold" (today's safe behaviour).
+   stepQ: hold if a mini game is up or any queued panel is "hold"; else every queued panel is taken off (identical look-up copies kept
+   once), the step runs, and they go back on top and are shown again — nothing she opened or was reading is lost (law 6c spirit). */
+const QFN=new Set(["onClose"]);
+function qBtn(v,d){if(d>3||v==null)return false;if(typeof v==="function")return true;if(typeof v==="string")return /<button\b|\bonclick\s*=|class="[^"]*\b(?:opt|kbtn|pbtn)\b/.test(v);
+ if(Array.isArray(v))return v.some(y=>qBtn(y,d+1));if(typeof v==="object"){for(const k in v){if(k==="subject"||k==="headArt"||k==="who"||(d===0&&QFN.has(k)))continue;if(qBtn(v[k],d+1))return true}}return false}
+function qKind(x){if(!x||typeof x!=="object")return"hold";if(isLook(x))return"look";
+ const K=x.kit||null;if(x.pid||x.rk||x.nl||x.ev||Array.isArray(x.opts)||x.cls==="end"||/\bkptitle\b/.test(x.cls||"")||x.mg||x.game)return"hold";
+ if(K&&(K.shop||K.pick||K.stage||K.game||K.timed||Array.isArray(K.opts)||K.kind==="choice"||K.kind==="end"))return"hold";
+ if(qBtn(x.h||"",1)||(K&&qBtn(K,0)))return"hold";return"tell"}
+CW.qKind=qKind;
+const passive=x=>qKind(x)!=="hold";CW.passiveQ=passive;
+const lookKey=x=>{try{const k=x.kit;const sj=k.subject;return (k.kind||"")+"|"+(k.title||x.t||"")+"|"+(sj&&(sj.id!=null?sj.id:sj.name)||"")}catch(e){return null}};
+/* ONE carry routine: true = the step ran (fn), false = held (a real choice / a mini game / an unknown panel is open) */
+function stepQ(why,fn){if(!S||S.mg)return false;if(!Q.length){fn();return true}if(!Q.every(passive))return false;
+ const seen=new Set();const carry=Q.splice(0).filter(x=>{if(!isLook(x))return true;const k=lookKey(x);if(k==null)return true;if(seen.has(k)){CW.lookDup=(CW.lookDup||0)+1;return false}seen.add(k);return true});
+ try{const M=$("modal");if(M)M.hidden=true}catch(e){}T("carry "+carry.length+" "+why);
+ try{fn()}finally{if(carry.length){Q.unshift(...carry);CW.carried=(CW.carried||0)+carry.length}try{if(Q.length&&!(S&&S.dead))showModal()}catch(e){console.error(e)}}return true}
+CW.stepQ=stepQ;
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
- if(!S.mg&&m.week===wk()&&(S.buoi||0)===m.buoi-1)dropLook("buoi");
- /* CAUSE 5 r2 (U3b room 6ZB2 on d16c5300: both seats had «Tin báo» open, host «onBuoi 3.2 me 3.1 Q1» parked for ever): a panel that only
-    TELLS (no choice to make: no options, no card pid — a notice, news, a result) is carried over the step: it stays on her screen, the
-    step runs under it. Only a real choice (or a mini game) holds the room's step (pendBuoi), as before. */
- let carry=null;if(!S.mg&&Q.length&&m.week===wk()&&(S.buoi||0)===m.buoi-1&&Q.every(passive)){carry=Q.splice(0);try{const M=$("modal");if(M)M.hidden=true}catch(e){}T("carry "+carry.length)}
- /* the room moved on: if a dialog is still open, step as soon as it is closed */
- if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();return}CW.pendBuoi=null;
- if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
- if(carry&&carry.length){Q.unshift(...carry);CW.carried=(CW.carried||0)+carry.length;try{showModal()}catch(e){console.error(e)}}
+ /* the room moved on: step now, carrying every panel with nothing to choose (stepQ); a real choice / mini game holds it until closed */
+ if(m.week===wk()&&(S.buoi||0)===m.buoi-1){const run=()=>{CW.pendBuoi=null;if(!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}};
+  if(!stepQ("buoi",run)){CW.pendBuoi=m;lockNext();return}}else CW.pendBuoi=null;
  /* the room is further on (came back after both steps, or a pendBuoi older than the room): next step at once */
  if(!S.dead&&typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0)&&(S.buoi||0)===m.buoi)setTimeout(()=>{if(CW.on&&S&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0))onBuoi({week:wk(),buoi:(S.buoi||0)+1})},0);
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
@@ -50766,9 +50781,9 @@ COOP.on("thin",()=>setTimeout(()=>{try{lockNext();if(!CW.on||!CW.bend||!eW())ret
    CW.nightEnd() ends THIS seat's current buổi once: nothing while her buổi is already ended (bend sent, week pending / sent), while
    the room is frozen, while a dialog or a room step is pending, or while her buổi is not the room's buổi (never ahead of the friend).
    Returns the buổi key it ended ("week:buổi") or "" (nothing done: jnight asks again on the next render). */
-CW.nightEnd=function(){drainAg();if(!CW.on||!S||S.dead||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||needWhere())return"";if(Q.length&&!dropLook("clock"))return"";/* CAUSE 5 family: the clock's step is never held by a look-up panel either */
+CW.nightEnd=function(){drainAg();if(!CW.on||!S||S.dead||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||needWhere())return"";/* CAUSE 5 r2: the clock's forced end follows the ONE carry rule (stepQ), like the room step */
  const b=S.buoi||0;if(typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi!==b)return"";
- const k=bkey();used=BAL.time.khac;nextBuoi();return (CW.bend||nReady()||CW.pend||(S.buoi||0)!==b||(eW()&&CW.eAsked&&CW.eAsked()))?k:""};/* thin E: her ready (or his) is the end of this buổi */
+ const k=bkey();if(!stepQ("clock",()=>{used=BAL.time.khac;nextBuoi()}))return"";return (CW.bend||nReady()||CW.pend||(S.buoi||0)!==b||(eW()&&CW.eAsked&&CW.eAsked()))?k:""};/* thin E: her ready (or his) is the end of this buổi */
 CW.bkey=bkey;
 COOP.on("buoi",onBuoi);
 /* the room's current buổi (for a reborn life that joins mid-week) */
@@ -51145,8 +51160,8 @@ COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
 /* my acts on her not yet acknowledged (10 s at most: she may have dropped; the freeze covers that) */
 function resWait(){const n=Date.now();for(const id in CW.rpend)if(n-CW.rpend[id]>10000)delete CW.rpend[id];return Object.keys(CW.rpend).length>0}
-let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!S.mg&&(!Q.length||dropLook("pend")||Q.every(passive))){onBuoi(CW.pendBuoi);return}
- if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!Q.length&&!S.mg&&!needWhere()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;nextBuoi();return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
+let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!S.mg&&Q.every(passive)){onBuoi(CW.pendBuoi);return}
+ if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!S.mg&&Q.every(passive)&&!needWhere()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;stepQ("want",nextBuoi);return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
 function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi||CW.wantB||CW.ngoW===wk()||CW.nrdy===wk())&&!tryT)tryT=setTimeout(tryEnd,0)}
 
 /* ---------- receiving ---------- */
@@ -97965,7 +97980,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e2f71e3cd86d";window.CTM_BUILD=BUILD;
+const BUILD="f13c7a4ed3ab";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
