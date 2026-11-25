@@ -1,0 +1,379 @@
+j10.js
+@@
+c.af[id]=(c.af[id]||0)+af;
+@@
+c.af[id]=(c.af[id]||0)+BAL.eff.j10.meCourtAct;
+####
+j10.js
+@@
+lượng: người ấy quý ngươi ${balSg(af)}.`
+@@
+lượng: người ấy quý ngươi ${balSg(BAL.eff.j10.meCourtAct)}.`
+####
+j15.js
+@@
+" · người ấy quý ngươi +10"
+@@
+" · người ấy quý ngươi "+balSg(BAL.eff.j10.meCourtAct)
+####
+j42.js
+@@
+giữ hòa khí với ${v.name}, thiện cảm ${balSg(BAL.coopBribe.grudge)}`
+@@
+giữ hòa khí với ${v.name}, ${pvQuy(v,BAL.coopBribe.grudge,"thiện cảm")}`
+####
+jmen.js
+@@
+ · nàng quý ngươi ${balSg(BAL.eff.jmen.menHide)}`
+@@
+ · nàng ${pvQuy(v,BAL.eff.jmen.menHide,"quý ngươi")}`
+####
+j83.js
+@@
+function wkGainTxt(ev){
+@@
+function wkGainTxt(ev,r){
+####
+j83.js
+@@
+if(ev.rel)F.push(`thiện cảm nàng +${ev.rel}`)
+@@
+if(ev.rel)F.push(pvQuy(r&&typeof r==="object"?r:null,ev.rel,"thiện cảm nàng"))
+####
+j83.js
+@@
+x:wkGainTxt(ev),go:
+@@
+x:wkGainTxt(ev,r),go:
+####
+jgift.js
+@@
+wkGainTxt(ev):""
+@@
+wkGainTxt(ev,t):""
+####
+j83.js
+@@
+${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: thiện cảm +${ev.rel}. `}
+@@
+${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: ${pvQuy(r,ev.rel,"thiện cảm")}. `}
+####
+j8.js
+@@
+return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
+@@
+return `${NMc(a)} tặng ${it.n} cho ${r.name}: ${pvQuy(r,g+3,"thiện cảm")}. `}
+####
+j78.js
+@@
+${b?j78who(b):"người mua"} thiện cảm ${balSg(BAL.eff.j78.f_6)} ·
+@@
+${b?j78who(b):"người mua"} ${pvQuy(b||null,BAL.eff.j78.f_6,"thiện cảm")} ·
+####
+j78.js
+@@
+return[`${W} quý ngươi +${j78thAff(n)} ·
+@@
+return[`${W} ${pvQuy(t,j78thAff(n),"quý ngươi")} ·
+####
+j78.js
+@@
+[`${j78who(b)} thiện cảm ${balSg(BAL.eff.j78.f_6)}`,
+@@
+[`${j78who(b)} ${pvQuy(b,BAL.eff.j78.f_6,"thiện cảm")}`,
+####
+j78.js
+@@
+gain:[`${W} quý ngươi +${j78thAff(n)}`,
+@@
+gain:[`${W} ${pvQuy(p,j78thAff(n),"quý ngươi")}`,
+####
+j68.js
+@@
+return n>0?G6(`${nm} thiện cảm +${n}`)
+@@
+return n>0?G6(`${nm} ${pvQuy(a.o,n,"thiện cảm")}`)
+####
+j71.js
+@@
+G7(`${v.name} thiện cảm ${balSg(BAL.eff.j71.go_5)}`)
+@@
+G7(`${v.name} ${pvQuy(v,BAL.eff.j71.go_5,"thiện cảm")}`)
+####
+j54.js
+@@
+`các phi tần phe ${s.house} thiện cảm +${H54.clanRel}`
+@@
+`các phi tần phe ${s.house} ${pvQuy(null,H54.clanRel,"thiện cảm")}`
+####
+j6.js
+@@
+Bạc ${BAL.tw.reward.bac} · thiện cảm +20</small>
+@@
+Bạc ${BAL.tw.reward.bac} · ${pvQuy(v,BAL.tw.g.reward[0],"thiện cảm")}</small>
+####
+j55.js
+@@
+const n=W.kind==="tinh"?12:25;h.af[key(p)]=cl((h.af[key(p)]||0)+n,-100,100);
+@@
+const n=BAL.tdCourt.wedAf[W.kind==="tinh"?0:1];h.af[key(p)]=cl((h.af[key(p)]||0)+n,-100,100);
+####
+jky.js
+@@
+if(G.danh)W.push(`Danh +${G.danh}`);if(G.sung)W.push(sgStat(G.sung));if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(`thiện cảm +${G.rel}`);
+@@
+/* review/net-ghen-2 (law 11): the same numbers runOpt applies — Danh and thiện cảm × the place grade gm(c), thiện cảm of a consort through the nết preview */const gq=gm(c);if(G.danh)W.push(`Danh +${Math.round(G.danh*gq)}`);if(G.sung)W.push(sgStat(G.sung));if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(jkyRelW(c,Math.round(G.rel*gq)));
+####
+jky.js
+@@
+ if(G.rel&&c.W&&c.W.kind!=="th"&&c.W.kind!=="emp")out.push(`${wName(c.W)||"người ấy"} thiện cảm +${Math.round(G.rel*g)}`);
+@@
+ if(G.rel&&c.W&&c.W.kind!=="th"&&c.W.kind!=="emp")out.push(`${wName(c.W)||"người ấy"} ${jkyRelW(c,Math.round(G.rel*g))}`);
+####
+jky.js
+@@
+function relTo(F,W,n){
+@@
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
+function relTo(F,W,n){
+####
+j15.js
+@@
+khắc · người ấy quý ngươi +1`,t2)
+@@
+khắc · người ấy quý ngươi ${balSg(BAL.eff.j10.meCourtAct_2)}`,t2)
+####
+j22.js
+@@
+x:`hắn quý ngươi +${BAL.relMS.hail}`,go:()=>{relAdd(p,m,BAL.relMS.hail)
+@@
+x:`hắn ${pvQuy(m,BAL.relMS.hail,"quý ngươi")}`,go:()=>{relAdd(p,m,BAL.relMS.hail)
+####
+j95.js
+@@
+· nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} ·
+@@
+· nàng ${pvQuy(v,BAL.eff.j95.j95bribeTake,"quý ngươi")} ·
+####
+j95.js
+@@
+thành: nàng quý ngươi ${balSg(BAL.eff.j95.j95silent_2)} · nàng bớt oán ngươi 10 ·
+@@
+thành: nàng ${pvQuy(v,BAL.eff.j95.j95silent_2,"quý ngươi")} · nàng bớt oán ngươi ${balAb(BAL.eff.j95.j95silent_3)} ·
+####
+jgift.js
+@@
+thành: nàng quý ngươi +${g+3}${
+@@
+thành: nàng ${pvQuy(t,g+3,"quý ngươi")}${
+####
+jht.js
+@@
+các phi tần phe ${q.house} thiện cảm +${HT.clanRel}`
+@@
+các phi tần phe ${q.house} ${pvQuy(null,HT.clanRel,"thiện cảm")}`
+####
+jmood.js
+@@
+${nm} thiện cảm +${C.affUp} ·
+@@
+${nm} ${v?pvQuy(v,C.affUp,"thiện cảm"):`thiện cảm +${C.affUp}`} ·
+####
+jpetcare.js
+@@
+x:`thiện cảm của nàng +${BAL.pet.helpRel} · thú của nàng khỏe hơn`,
+@@
+/* review/net-ghen-2 (law 11): relAdd(t,a,…) → her nết factor; x is read without a target → the any-person range (getter: pvQuy is ready) */get x(){return `${pvQuy(null,BAL.pet.helpRel,"thiện cảm của nàng")} · thú của nàng khỏe hơn`},
+####
+jpetcare.js
+@@
+ AOUT.petcare=[`thiện cảm +${BAL.pet.helpRel}`,""];
+@@
+ /* review/net-ghen-2 (law 11): the card's target (jaudit AOUT getters, J78.cardV) → her range; none → any-person range */try{Object.defineProperty(AOUT,"petcare",{configurable:true,enumerable:true,get(){const t=typeof J78==="object"&&J78.cardV||null;return[pvQuy(t,BAL.pet.helpRel,"thiện cảm"),""]},set(v){}})}catch(e){}
+####
+jpma.js
+@@
+x:`được: ${nm(p)} quý ngươi +${pmYieldAff(p,t)},
+@@
+x:`được: ${nm(p)} ${pvQuy(p,pmYieldAff(p,t),"quý ngươi")},
+####
+jpma.js
+@@
+x:`được: ${nm(p)} quý ${me?"ngươi":t.name} +${pmYieldAff(p,t,x)},
+@@
+x:`được: ${nm(p)} ${pvQuy(p,pmYieldAff(p,t,x),"quý "+(me?"ngươi":t.name))},
+####
+jshelf.js
+@@
+x:`nàng quý ngươi +${BAL.tw.g.call} · hai bên
+@@
+x:`nàng ${pvQuy(v,BAL.tw.g.call,"quý ngươi")} · hai bên
+####
+jtwoway.js
+@@
+a.x=`nàng quý ngươi +${G().help} · oán -${G().helpOan}`
+@@
+a.x=`nàng ${pvQuy(v,G().help,"quý ngươi")} · oán -${G().helpOan}`
+####
+jtwoway.js
+@@
+add("visit",`nàng quý ngươi +${g.visit[0]} · Sức
+@@
+add("visit",`nàng ${pvQuy(v,g.visit[0],"quý ngươi")} · Sức
+####
+jtwoway.js
+@@
+add("follow",`nàng quý ngươi +${g.follow}`);
+@@
+add("follow",`nàng ${pvQuy(v,g.follow,"quý ngươi")}`);
+####
+jstip.js
+@@
+d:`Pha mời phi tần đến chơi: thiện cảm +3 · uống:
+@@
+d:`Pha mời phi tần đến chơi: {host} · uống:
+####
+jstip.js
+@@
+d:`Trà thượng hạng: mời khách thiện cảm +5 · uống:
+@@
+d:`Trà thượng hạng: mời khách {host} · uống:
+####
+jstip.js
+@@
+d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống:
+@@
+d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê ({host}) · uống:
+####
+jstip.js
+@@
+ for(const k in N){if(!IT[k])IT[k]=N[k]}
+@@
+ /* review/net-ghen-2 (law 4 + 11): a tea's hosting line prints ITS host value (one number), through the nết preview of an unknown guest (jstip:178 relDo → relAdd) */
+ for(const k in N)if(N[k].d&&N[k].d.includes("{host}")){const it=N[k];let dT=it.d;Object.defineProperty(it,"d",{configurable:true,enumerable:true,get(){try{return dT.replace("{host}",pvQuy(null,it.host||0,"thiện cảm"))}catch(e){return dT.replace("{host}","thiện cảm "+balSg(it.host||0))}},set(v){dT=v}})}
+ for(const k in N){if(!IT[k])IT[k]=N[k]}
+####
+jstip.js
+@@
+x:n>=0?`thành: ${A.A.n||"nàng"} thiện cảm +${n} · kèm:
+@@
+x:n>=0?`thành: ${A.A.n||"nàng"} ${pvQuy(A.A.k==="rv"?A.A.o:null,n,"thiện cảm")} · kèm:
+####
+jtoil.js
+@@
+`nàng ta chuộng giản dị: quý ta +${aff}`
+@@
+`nàng ta chuộng giản dị: ${pvQuy(v,aff,"quý ta")}`
+####
+jts.js
+@@
+"khách: thiện cảm +4"
+@@
+`khách: ${pvQuy(null,4,"thiện cảm")}`
+####
+jts.js
+@@
+"khách: thiện cảm +2"
+@@
+`khách: ${pvQuy(null,2,"thiện cảm")}`
+####
+jts.js
+@@
+duoc:["thiện cảm +5",
+@@
+duoc:[pvQuy(p,5,"thiện cảm"),
+####
+jts.js
+@@
+duoc:["thiện cảm +6"],go:()=>{tsAff(p,6);
+@@
+duoc:[pvQuy(p,6,"thiện cảm")],go:()=>{tsAff(p,6);
+####
+j55.js
+@@
+function tdLeak(a,t){
+@@
+/* review/net-ghen-2 (law 11): a traced leak = oanAdd(t,a,tdLeak_2) + relAdd(a,t,tdLeak_3) (its own oán, j9 relOan) → ONE total for the card and the result */
+function tdLeakOan(){const n3=BAL.eff.j55.tdLeak_3,k=BAL.relOan;return BAL.eff.j55.tdLeak_2+(n3<0?-n3*k.hurt:-n3*k.mend)}
+function tdLeakSay(t,lab){return `${pvOan(t,tdLeakOan(),lab)}, ${pvQuy(t,BAL.eff.j55.tdLeak_3,"thiện cảm")}`}
+function tdLeak(a,t){
+####
+j55.js
+@@
+if(h)h.af[key(a)]=cl((h.af[key(a)]||0)-30,-100,100)
+@@
+if(h)h.af[key(a)]=cl((h.af[key(a)]||0)+BAL.tdCourt.leakHead,-100,100)
+####
+j55.js
+@@
+${pvOan(t,BAL.eff.j55.tdLeak_2,`${t===S?"ngươi":t.name} oán`)}, ${h?`${TDOFF[h.c]} ${h.name} quý ngươi -30`:""}
+@@
+${tdLeakSay(t,`${t===S?"ngươi":t.name} oán`)}${h?`, ${TDOFF[h.c]} ${h.name} quý ngươi ${balSg(BAL.tdCourt.leakHead)}`:""}
+####
+j55.js
+@@
+kèm: tra ra ngươi thì nàng oán ${balSg(BAL.eff.j55.tdLeak_2)} ·
+@@
+kèm: tra ra ngươi thì ${tdLeakSay(null,"nàng oán")}, đầu nhà nàng quý ngươi ${balSg(BAL.tdCourt.leakHead)} ·
+####
+j55.js
+@@
+kèm: tra ra ngươi: nàng oán ${balSg(BAL.eff.j55.tdLeak_2)} ·
+@@
+kèm: tra ra ngươi: ${tdLeakSay(v,"nàng oán")}, đầu nhà nàng quý ngươi ${balSg(BAL.tdCourt.leakHead)} ·
+####
+jaudit.js
+@@
+function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*.3)}`}
+@@
+/* relAdd's own oán (j9: a fall → oán ×BAL.relOan.hurt, a rise → bớt ×mend) — law 4: the BAL keys, never typed .6 / .3 */
+function pvRel(t,n){const k=BAL.relOan;return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*k.hurt)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*k.mend)}`}
+####
+j10.js
+@@
+Bán đứng<small>Danh ${balSg(SB.danh)} · cả phe oán ${balSg(SB.oan)}</small>
+@@
+Bán đứng<small>Danh ${balSg(SB.danh)} · cả phe ${pvOan(null,SB.oan,"oán")}</small>
+####
+j10.js
+@@
+Gạch tên ${x.name}<small>Danh ${balSg(BAL.rcv.prop.danh)} · nàng oán ${balSg(DB.oan)}</small>
+@@
+Gạch tên ${x.name}<small>Danh ${balSg(BAL.rcv.prop.danh)} · nàng ${pvOan(x,DB.oan,"oán")}</small>
+####
+j14.js
+@@
+· cả phe oán ${balSg(F.sell.oan)}`
+@@
+· cả phe ${pvOan(null,F.sell.oan,"oán")}`
+####
+j2.js
+@@
+oán ngươi +${o}${M.hh?
+@@
+${pvOan(v,rel*h,"oán ngươi")}${M.hh?
+####
+j25.js
+@@
+a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi ${balSg(BAL.talk.gossip.tellOan)}:
+@@
+a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} ${pvOan(null,BAL.talk.gossip.tellOan,"oán ngươi")}:
+####
+j95b.js
+@@
+hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} ·
+@@
+hỏng: ${y.name} chưa tin, ${pvOan(y,BAL.eff.j95b.j95bClear_3,"oán ngươi")} ·
+####
+jration.js
+@@
+Đức ${ST.duc}, nàng oán ${balSg(ST.oan)},
+@@
+Đức ${ST.duc}, nàng ${pvOan(v,ST.oan,"oán")},
+####
+jtsb.js
+@@
+AOUT.batnat=[`nàng nộp bạc hoặc một món quý; nàng oán ngươi ${balSg(BAL.eff.jtsb.tsbBulNpc_2)}`,`nàng không nộp, kể khắp nơi: Danh ${balSg(BAL.eff.jtsb.danhBulRefuse)}, nàng oán ${balSg(BAL.eff.jtsb.tsbBulNpc_4)}, nàng nắm ${balAb(BAL.eff.jtsb.evTsbBulNpc_2)} chứng cứ`];
+@@
+/* review/net-ghen-2 (law 11): oanAdd(t,a,…) → her nết factor; the card's target (jaudit AOUT getters, J78.cardV), none → any-person range */try{Object.defineProperty(AOUT,"batnat",{configurable:true,enumerable:true,get(){const t=typeof J78==="object"&&J78.cardV||null;return[`nàng nộp bạc hoặc một món quý; nàng ${pvOan(t,BAL.eff.jtsb.tsbBulNpc_2,"oán ngươi")}`,`nàng không nộp, kể khắp nơi: Danh ${balSg(BAL.eff.jtsb.danhBulRefuse)}, nàng ${pvOan(t,BAL.eff.jtsb.tsbBulNpc_4,"oán")}, nàng nắm ${balAb(BAL.eff.jtsb.evTsbBulNpc_2)} chứng cứ`]},set(v){}})}catch(e){}
