@@ -14,7 +14,7 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 10 | Gifts / likes / dislikes two-way incl. her | D | ordered |
 | 11 | Whole-game law-1 (two-way) audit + fixes | B | ordered |
 | 12 | Leave-palace endings (own choice = end, no confirm) + forced-removal severity ladder | E | ordered |
-| 13 | Music groups (events, festivals, contests, banquets, thị tẩm, endings, kỳ ngộ) + wiring | F → KK | ordered |
+| 13 | Music groups (events, festivals, contests, banquets, thị tẩm, endings, kỳ ngộ) + wiring | F → KK | ~~LIVE 351122ba 25/11 19:34Z~~ |
 | 14 | Emotion seals, all groups animated like Thái hậu | C | drawing |
 | 15 | Event backgrounds (hương nang / ban hoa, major events) + Dưỡng Tú viện 3 sở + Tiền sảnh | C | drawing |
 | 16 | Old far-shot illustration redraws (option B) | C | drawing |
