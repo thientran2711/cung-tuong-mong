@@ -186,10 +186,10 @@ window.dqWake=dqWake;
    only j6 render() and jcoopworld lockNext() write #next.disabled, and both run on events. A disabled #next whose reason is gone (the card closed,
    the mini-game ended, a co-op lock cleared) with no render / lockNext after it stayed dead for ever. HEAL: every BAL.dayq.wake ms, a disabled
    #next while nothing holds it (alive, Q empty, no mini-game) is looked at again by its OWN rule — co-op: lockNext() (keeps every room lock and its
-   words); solo: render()'s rule (no co-op wait on it). Never enables a button a real reason holds. Paint only: no S key, no draw, no message. */
+   words); solo: dqNextSync() (r4 net: calls render() itself; no co-op wait on it). Never enables a button a real reason holds. Paint only: no S key, no draw, no message. */
 function dqNextHeal(){try{const n=document.getElementById("next");if(!n||!n.disabled||typeof S==="undefined"||!S||S.dead||Q.length||S.mg)return;
  const c=window.COOPW;if(c&&c.on){if(typeof c.lockNext==="function"){c.lockNext();if(!n.disabled)DQ.stat.healed=(DQ.stat.healed||0)+1}return}
- if(n.dataset.coopWait)return;n.disabled=false;DQ.stat.healed=(DQ.stat.healed||0)+1;dqNextCue()}catch(e){console.error("dayq heal",e)}}
+ if(n.dataset.coopWait)return;/* ONE RULE (law 13, one net): solo goes through r4's render-based net dqNextSync = render()'s own rule; no second writer */dqNextSync();if(!n.disabled)DQ.stat.healed=(DQ.stat.healed||0)+1;return}catch(e){console.error("dayq heal",e)}}
 setTimeout(()=>setTimeout(()=>{try{setInterval(dqNextHeal,(BAL.dayq&&BAL.dayq.wake)||2000)}catch(e){}},0),0);
 window.dqNextHeal=dqNextHeal;
 window.DQ=DQ;
