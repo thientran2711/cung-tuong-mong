@@ -105,3 +105,43 @@ Branch **review/save-year-rollback 6d2f5a03410ed22c44e824878c2ead2ea5066f85** = 
 | quickcheck ALONE | — | QUICKCHECK PASS · old save ok · core gates PASS (perf new/live median: render 258/246 ms, buổi 1317/1480 ms) |
 Reload-at-once (0 s) and after-delay both covered: *-0s cases reload the instant the date flips; day / month / year / robot-y3 reload after every card is closed (seconds later).
 Open for the reviewer (unchanged): the trade in «Fix» (a reload inside the ≤ 2-buổi wait loses one unseen / just-opened code card instead of the whole step). save-growth e573b9b8: source merges clean; whichever lands second rebuilds index/sw.
+
+## REVIEW r2 — B BIG REVIEWER (opus) session_01N1tNP4Qh4SYJR9NA4SX26m → FOREMAN B child 3 (5G9e73in)
+PRIORITY #1 CHECK ('save-year-rollback'): OD 0 | ledger 0 | claims = fixer rows 37vyD6Uh / 3KgfZcq6 + this rv | main 0 | review/* = review/save-year-rollback only (+ review/save-unseen-lists builds on it) | archive 0.
+depth 4 · START_CTX ≈ 3 % (used_tokens read 0; estimate). Head 6d2f5a03410ed22c44e824878c2ead2ea5066f85; LIVE 9f72524b ⊂ head; LC15 top 23e5b84f.
+**VERDICT: FAIL on CHECK (2) (law 6c / MAIN ~13:10Z «anything the player has not seen yet must survive save/load»). Checks (1), (3), (4) and every save-boundary case PASS.**
+
+### Merge onto LC15 top → review/save-year-rollback-rv 509fd6c95b2d0e6c834da089bfd7fafb517d9dc9 (pushed)
+REAL source conflict in dev/build/jqsave.js (not only index/sw): LC15 (button-crawl-fix-2) rewrote serQ/deserQ; this branch rewrote the save gate. Resolved = LC15 serQ/deserQ + this branch's jqKey + buổi-key gate (diff vs LC15 = only the gate + header comment). Rebuilt (assemble.py + build_site.sh). Scan on the rv: PASS. The next round must start from this merge (or redo the same resolution).
+
+### Results (commands run in /home/user/wt/syr = bare head)
+| check | result |
+|---|---|
+| `node dev/measure/time-advance-save-scan.js` head / LIVE / rv | PASS (10 paths, 8 gates) / FAIL 5 / PASS |
+| (1) every save hold: grep `save=function`, quiet=true, debounce/throttle/setTimeout(save) over dev/build | ONE rule holds: only jqsave (same buổi, card on screen), j52 (nl card in Q), jcloud/jcoopworld/jslots (by design); no debounce/throttle on save. Pre-existing, NOT in the scan, for save-unseen-lists (B, evidence #4): j2.js start sets quiet=true at L6 and false at L24 with no try/finally (a throw inside start = no save for the whole life). |
+| save-boundary-reload head Fold `index.html bare.html fold 1,2` | **PASS 12/12** (incl. day/month/year-0s, robot-y3, newlife, oldsave) |
+| save-boundary-reload head iPad 1180x820 | **PASS 12/12** |
+| (2) REVIEW probe /home/user/wt/out/cardloss.js (not in git): month + year flip, seeds 1,2, Fold; the cards of the new buổi left OPEN 3 s (what a player who reloads has), then true reload → «Tiếp tục» | **FAIL — head drops every waiting CODE card for good** (table below). LIVE keeps them (it loses the step instead). |
+| (3) save size | no new field in the diff (jspread/jqsave only stop/allow writes); size budget unchanged by construction (fixer measured 1,212,989 chars both builds) — OK |
+| (4) co-op | jcoopworld / jslots / jcoopthin save paths untouched by the diff; the jqsave gate keys on S (seat swaps change S → write at once, never a stale hold). coop-e2e / save-rt-coop / spread-e2e / quickcheck NOT re-run (stopped at the FAIL; fixer's 142/142 ×2 stand for 876415e3 code). |
+MUTATE runs not repeated (the fixer's MUTATE A/B rows stand; the FAIL is not about the gates).
+
+### CHECK (2) evidence — cards waiting/open at the flip vs after a true reload ~3 s later (head index.html, Fold)
+| case | waiting CODE cards at the flip (jspread W / Q) | after reload |
+|---|---|---|
+| month s1 | «Bổng lộc tháng ba», «Bổng lộc tháng ba · Lễ nghĩa», Q «Có người đến» | all GONE (only «Thỉnh bình an mạch», «Phụ tuyến…» data cards survive) |
+| month s2 | «Bổng lộc tháng ba», «… · Lễ nghĩa», «Danh hiệu mới» | all GONE |
+| year s1 | «Bổng lộc tháng chạp», «Tết Nguyên đán · Chuyện bên lề», Q «Có người đến» | all GONE; also data cards «Tết Nguyên đán · Yến tiệc», «Tết Nguyên tiêu · Lời mời: Thi», «Nổi mẩn» GONE; Danh 14 on screen → 13 after reload |
+| year s2 | «Bổng lộc tháng chạp», «Y phục dự Tết Nguyên đán», «Tết Nguyên đán · Chuyện bên lề», «Danh hiệu mới» | all GONE |
+LIVE same probe: month s2 / year s2 reload → every code card still waits (Bổng lộc, Danh hiệu mới, Y phục dự Tết…); year s1 LIVE loses the step (Y2 → Y1, the known bug).
+Why it matters (laws): «Bổng lộc · Lễ nghĩa» is a COST card (Chu toàn lễ nghĩa: Bạc −(lễ nghĩa+ban thưởng) / Bớt lễ nghĩa: Danh −) → a reload skips it free every month = gain-only road (LAW 2/3 exploit, robots will find it); the Nội vụ phủ skim answers (Đòi lại phần bị cắt xén…) vanish → the skimmed goods can never be claimed (LAW 6c traceability); «Danh hiệu mới», «Y phục dự Tết», Tết side story = unseen story/objects gone (LAW 6c; MAIN ~13:10Z). Not rare: the window is the first ≤2 buổi of EVERY month (stipend) and every Tết; a reload there is exactly what robots/players do. Severity: medium (silent loss + a free monthly exploit). Detect: SP13.stat.unsaved / JQ.stat.stepNow > 0.
+The step fix itself is right and proven (time is never lost again); the trade «lose the unseen card instead of the step» is what fails check (2).
+
+### FIX LIST (for the next round — fits the save-unseen-lists fixer 6vieKxfA, already built on this head and owning «pending queue Q / moved cards»)
+1. Make every CODE card that can be open or waiting right after a step re-creatable from the save: store a builder key + plain args (e.g. stipend card: month + SK/G/d/bt numbers; Lễ nghĩa follow; Danh hiệu mới; Y phục dự Tết; Tết side stories; «Có người đến» visits) and rebuild its options on load — or move those options to data form (fx + a registered handler id) so jqData can write them. Law-11 scan: list every Q.push/SP13 card whose opts carry functions, count them, before/after.
+2. Keep this head's step-at-once gates unchanged; add to save-boundary-reload a case «cards left OPEN at the month/year flip, reload» asserting every card (data AND code) returns, Fold + iPad; LIVE (step lost) and this head (cards lost) must both FAIL, the fix PASS.
+3. Year s1 Danh drift (14 → 13): a value applied by an open code card's preamble while the same-buổi hold is on — verify the card's effect is only applied on answer or is in the save (evidence #4 family).
+4. j2.js start: quiet=true … quiet=false without try/finally (add to the scan's gate list).
+5. Start from review/save-year-rollback-rv 509fd6c9 (LC15 jqsave conflict resolved) or redo that resolution.
+Alternative only by MAIN's word: accept the trade (land head now, cards lost on reload) as a known gap until save-unseen-lists lands — reviewer does not grant that (LAW 6c / MAIN 13:10Z rule).
+Worktrees /home/user/wt/syr, syrlc removed after this report; no shots taken (no UI change; the by-hand year-flip check is the probe above, logic only).
