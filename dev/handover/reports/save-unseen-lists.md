@@ -144,3 +144,47 @@ Not a test of this branch: LIVE spread-e2e run hung to its 40-min timeout (EXIT 
 
 ### Gain vs risk
 GAIN — every card she has not answered (data AND code: stipend + Lễ nghĩa cost card, Nội vụ phủ skim, Danh hiệu mới, Y phục dự Tết, Tết side stories, Nghe đồn, Kẻ hầu ăn bớt, morning card, world events, Có người đến, Có người bán tin) survives a true reload at the month/year flip; unread «Tin báo», held events and the identity card survive; a new life is in its slot at once; remaking a card never pays, takes or writes anything twice. RISKS: (1) a card generator added later that carries a keyless person → rcpEnc refuses it (stays an unsaved code card, counted by the scan census) — possible, small, visible in the flip test line «code cards with no generator»; (2) kLine during a remake returns the last line of its key — if two cards of the same key wait at once the second may show the first's wording after a reload — rare, cosmetic, no number; (3) co-op SWAP=1 week-end stuck 1/3 runs = pre-existing family, not this diff (rows unrelated to save; 2 clean reruns). → **Được lớn hơn.**
+
+## REVIEW (BIG rv, opus, session_01N1tNP2NAx6v2HeVEvroSiE, depth 5, START_CTX ≈ 3 %) — **FAIL** (one blocking family; everything else PASS)
+PRIORITY #1 CHECK ('save-unseen-lists'): OD 0 | ledger 0 | claims 8 | main 0 | review/* review/save-unseen-lists 7e01f0f5 (+ save-year-rollback 6d2f5a03, rv base 509fd6c9) | archive 0 → reused reports/save-unseen-lists.md r3 + save-year-rollback «## REVIEW».
+Judged: head 7e01f0f5 bare AND merged onto LIVE 08e7d79f = **review/save-unseen-lists-rv 9037e5a9d4689ac2feb8c9486e69d2e8bd9bf528** (40285628 merge: index/sw/CHANGE conflicts only, CHANGE = LIVE line, rebuilt · 94ae9827 rv fix (below) · 9037e5a9 + dev/test/save-residue-probe.js).
+
+### RV FIX made (landing hygiene)
+The head carried **kit pack-4 7603d689 (kszTextFirst3, §56.32b)** in via LC16 772d05f2 — B KIT FAIL 18:31Z, MAIN shipped 8e591b3a WITHOUT it. Landing the head would have shipped a KIT-FAILed UI change (law 9). 94ae9827 puts jksize.js / jopic.js / KIT.md / kit-faces-opts.js back to LIVE 08e7d79f; now `git diff origin/main` = only the 26 save files (j2 j3 j42 j52 j6 j68 j71c j95b jdc jdh jecon jeitem jne jnotice jptime jqsave jspread jvoice jworld jworldc + 2 scans + 4 tests). Any re-stack must start from -rv, not from the bare head.
+
+### BLOCKING (law 11 + law 6c, brief check (2), rv r2 FIX item 1 «every CODE card open/waiting right after a step must be re-creatable»)
+Code cards with no generator are still LEFT OUT of a real slot write at ORDINARY buổi steps (not only flips), so a true reload in that window loses them for good (before: the save was held = time rolled back; now: the card vanishes). Proof (`node dev/test/save-residue-probe.js index.html fold 1 36`, rv build, 36 buổi, 936 real writes; the probe hooks save() outermost and lists every unseen card present when SAVE_N moved that serM / sp13Sync / evSer1 cannot write):
+| family | where | source | times in 36 buổi |
+|---|---|---|---|
+| «Hội phối đồ: báo đề» | SP13.L | jts.js:406 tsPanel | 1 |
+| «Hội phối đồ · <đề>» (the contest itself) | SP13.L | jts.js:432 tsPanel | 1 |
+| «Lời cảnh báo» | SP13.L | jts.js:236 tsPanel (j70 / j24 maidWarn are data) | 2 |
+| «Lễ tấn phong <tên>» | Q | jts.js:283 tsPanel | 1 |
+| «Bị châm chọc» | Q | jemoact.js:509 (5 literal pushes) | 3 |
+Seeds 2/3 timed out under CPU load (4 browsers on 4 cores) — seed 1 alone shows 5 families / 8 cards. **Scan gap**: unseen-lists-scan census counts only literal `Q.push({…go:})`, so jts **tsPanel (8 cards, pushes a variable m)** is invisible to it; the «24 literal pushes = ACCEPT residue, not seen at flips» was never measured at ordinary steps.
+FIX LIST (fixer):
+1. jts tsPanel callers (8: Lời cảnh báo, Lễ tấn phong · <bậc>, Lễ tấn phong <tên>, Hội phối đồ: báo đề, Hội phối đồ · <đề>, the rest of tsPanel) → rcpReg builders (effects before the card, as jecon / jne), and jemoact «Bị châm chọc» family (5) + the other census files (j34 3, jty 3, j29 2, j27 j55 j71 j77 j95 jdc jfeel jgift jkiep jshelf jthaiy 1 each) — whole family (law 11), or a ONE rule that never lets a generator-less code card cross a step (e.g. jspread never moves one; the step write waits only for it, bounded) — fixer's choice with the gain/risk table.
+2. Scan: count every card pushed with function opts (variable pushes / tsPanel / kitPanel wrappers too), not only literals; the census residue must be 0 or each row an explicit ACCEPT with proof it cannot cross a step.
+3. Test: save-residue-probe (committed on -rv) as a gate: Fold + iPad, seeds 1,2,3 × 40 buổi → no LOST-AT-WRITE line; LIVE 08e7d79f not comparable (it holds instead); MUTATE (drop one rcpReg) must show a LOST line.
+4. Also check while there: jts «Hội phối đồ · <đề>» — a lost contest card must not leave a loan / theme state half-done (law 6c: dcBorrow loans).
+
+### Tests run (rv 94ae9827 = 9037e5a9 code; commands in /home/user/wt/sul; bare.html = LIVE 08e7d79f index, syr.html = 6d2f5a03, head.html = 7e01f0f5)
+| check | command | result |
+|---|---|---|
+| flip set Fold | `SUL_ONLY=flip SUL_FCS=1,2 node dev/test/save-unseen-lists.js index.html fold 1` | **PASS 8/8** |
+| flip set iPad | same `ipadAir` | **PASS 8/8** |
+| rows Fold / iPad | `SUL_ONLY=tinbao,held,nl-0s,nl-card,nl-death,nl-4s,drift …` | **PASS 7/7 · 7/7** |
+| save-boundary-reload Fold / iPad (incl. 0-s) | `node dev/test/save-boundary-reload.js index.html bare.html fold 1,2` / `ipadAir` | **PASS 12/12 · 12/12** |
+| sbr bare head 7e01f0f5 Fold | `… head.html bare.html fold 1,2` | PASS 9/9 so far (still running at verdict) |
+| flip LIVE 08e7d79f / 6d2f5a03 | `SUL_FCS=2 SUL_FCW=3000 … bare.html` / `syr.html` | FAIL 2/2 (LOST 3/6 + DRIFT) / FAIL 2/2 (LOST 5/6) ✔ must FAIL |
+| MUTATE rk / rk2 / nt | | FAIL 2/2 (not remade) / FAIL 2/2 (stipCard moved bac + DRIFT) / FAIL 1/1 ✔ |
+| MUTATE evh / nl, rows LIVE, flip head iPad, sbr LIVE | | running at verdict (CPU) |
+| scans | unseen-lists-scan · time-advance-save-scan | PASS (33 lists) · PASS (10 paths, 9 gates) — but see scan gap above |
+| law 11 gate grep | every `save=function` wrapper (jcloud STALE/title, jcoop*, jqsave in-buổi only, jspread no hold, jslots) + every `quiet=true` (17; j2/j6/j42 now finally) | ONE rule holds: no hold across a step ✔ |
+| true reload by hand-script at the year flip, code cards pending (8 rk / 6 rk cards), both devices, shots looked 3× | `SUL_ONLY=flip SUL_FC=year SUL_FCW=3000 SUL_FCS=1 node rv-flipshot.js index.html fold,ipadAir 1` (scratch copy of the flip case + screenshots) | PASS both: 14 cards back, same date (tháng giêng năm thứ hai), same numbers (Fold Danh 13 Sủng 9 Bạc 95; iPad Danh 13 Sủng 4 Bạc 120), same top card «Tin trong cung buổi này» before/after; no overflow / cut text |
+| save size (seed 1, 6 buổi over the year flip, ser() chars) | rv-size (scratch) | LIVE 214,140 → rv 222,858 (+8,718 = nt 7,365 for 19 notices + evh 1,418); bounded (noticeMax 20, E68S.hold, ra ≤ 4,000/card), ≈ 0.2–0.9 % of a year-3…15 sổ vs the 5.2 M site limit ✔ |
+| code review | diff vs LIVE, 20 game files | rk builders build only (stipEvent deterministic; jdh no log on RCPRE; jvoice no vmem on RCPRE); j52 nl mark solo only; nt/evh top-level, not in room blob ✔ |
+NOT run (verdict FAIL first, CPU): coop-e2e SWAP0/1, save-rt-coop vs LIVE, spread-e2e, quickcheck ALONE — successor/fixer run them on the fixed head (local Worker: `cd coop/worker && npm install && npx wrangler dev --local --port 8799`).
+
+### Gain vs risk of landing AS IS (for MAIN, flight)
+GAIN: LIVE today rolls time back / drifts numbers / loses Tin báo, held cards and the stipend + Lễ nghĩa cards on a true reload (all FAIL on LIVE above) — -rv fixes all of that. RISK: the 5+ families above vanish on a reload in their window (before: time rolled back instead) — có thể xảy ra (≈ 8 cards in 36 buổi sit in such a window; she must reload exactly then), vừa (a contest / ceremony / taunt she never sees; no number lost), not detectable by her → fix list 1–3. Verdict stays FAIL (law 11 + 6c, brief check 2); if MAIN wants the flight stop-gap, land **-rv 9037e5a9** (never the bare head: it carries the KIT-FAILed 7603d689).
