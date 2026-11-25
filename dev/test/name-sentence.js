@@ -1,0 +1,11 @@
+/* name-sentence (owner 24/11 ~21:58Z + MAIN 131): an unmet person who is the SUBJECT of a sentence reads «Một vị <phẩm> …» (kitNoUnk wording), never «Phi ??? tâu xin …»;
+   the «???» tag stays on a name tag / chip, and a name followed by a stat («thiện cảm +3») stays a tag. usage: NODE_PATH=$(npm root -g) node dev/test/name-sentence.js [dev/index.html]   exit 1 on FAIL */
+const {chromium}=require('playwright');const path=require('path');const [,,U0]=process.argv;const URL=/^(https?|file):/.test(U0||'')?U0:'file://'+path.resolve(U0||'dev/index.html');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:120000});await p.waitForTimeout(1500);
+ const R=await p.evaluate(async()=>{localStorage.clear();document.getElementById('title').hidden=true;window.__nlInner=1;for(let k=0;k<400;k++){start();if(!(typeof isSrv==="function"&&isSrv())&&!S.out)break}
+  const v=liveRivals(true).filter(x=>!x.queen&&k61St(x)<1&&(S.met||{})[x.id]==null)[0];const t=RANKS[v.rank].n+" "+v.name;
+  const d=document.createElement('div');d.innerHTML=`<p>${t} tâu xin Trường Xuân cung.</p><p>${t}</p><p>${t} thiện cảm +3</p>`;document.body.appendChild(d);await new Promise(r=>setTimeout(r,700));
+  return{rank:RANKS[v.rank].n,rows:[...d.querySelectorAll('p')].map(x=>x.textContent)}});
+ const [a,tag,stat]=R.rows;const f=[];if(!new RegExp('^Một vị '+R.rank+' tâu xin').test(a))f.push('sentence subject: '+a);if(/\?\?\?/.test(a))f.push('??? inside a sentence');if(!/\?\?\?/.test(tag))f.push('tag lost its ???: '+tag);if(!/\?\?\?/.test(stat))f.push('stat row lost its tag: '+stat);
+ console.log(R.rows.join(' | '));if(errs.length)f.push('page errors '+errs[0]);console.log(f.length?'FAIL '+f.join('; '):'PASS');await b.close();process.exit(f.length?1:0)})();
