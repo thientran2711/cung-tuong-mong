@@ -156,3 +156,10 @@ PRIORITY #1 CHECK ('bareTap|kfoc|overflow-x|clipped by its scroller'): F #14 ord
 - Sanity on LIVE dbae89eb, bot rand, slice 12: Fold 103 taps / 51 area taps / 1 unstick, iPad 95 / 57; both 0 stuck, 0 dead, 0 bugs, exitPick none, jsClicks 0. .kfoc cap static-only (no .kfoc in either slice) — confirm on the next s9 trace (harness.kfocVisits).
 - Nit carried (FIXER #7): ≥20 s no-hit rule vs a slow scene (one false [game] row + reload).
 VERDICT: PASS d417d3bb — runners may switch.
+
+## BIG REVIEWER #7 — 25/11 ~17:25Z: HARNESS review/robot-realtap 247c7132 (HARNESS FIXER #7: robot-lint start-up gate + RT_TEST_UNSTICK) — PASS
+- Diff d417d3bb..247c7132: new dev/test/robot-lint.js (node --check + eslint scope analysis: any identifier with no declaration outside page-run functions = FAIL); robot-rt.js / robot-rt-coop.js run it at start-up (FAIL → exit 2, no life; lint=0 skips); env-gated RT_TEST_UNSTICK hook (self-test only). Play paths unchanged.
+- Lint: this tree LINT OK 0 findings (5 files, 0.5 s); the 80e7163c robot-rt.js → FAIL robot-rt.js:371 «bareTap» (the real s2d bug is caught).
+- LIVE dbae89eb, bot sens, slice 10, RT_TEST_UNSTICK=3: Fold + iPad both {layer #rtTestLayer, hit 0, areaTaps 1, err null}; 0 stuck / dead / bugs, exitPick none, jsClicks 0.
+- Nit (not blocking): eslint is resolved from /opt/node-tools (this image); in a container without it require('eslint') throws at start-up (loud crash, not silent) — a try/catch that skips the scope part with a WARN would be kinder. FIXER #8 / later.
+VERDICT: PASS 247c7132 — runners may switch (supersedes d417d3bb).
