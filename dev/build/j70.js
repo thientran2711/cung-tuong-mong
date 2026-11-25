@@ -207,7 +207,7 @@ function exec70(p,opp){const a=pa70(p),t=pt70(p),M=pm70(p);const O=OPP70[opp]||O
  if(!okAct70(a,t,M.k)&&M.k!=="joint"){p.end="miss";try{mindLog(a,"_abandon")}catch(e){}if(p.kn&&a!==S)log(`${a.name} bày mưu ${M.n.toLowerCase()} nhưng thời cơ đã qua, đành thôi.`);return ""}
  let r="";const bonus=J70CFG.prep+O.b+(p.bonus||0);const err=(p.err||0)+p.g-bonus;
  if(p.foil){/* cut at the root earlier *//*evok: plot deed (newPlot70)*/evA(t===S?S:t,a,BAL.eff.j70.evExec70);r=`${a===S?"Ngươi":a.name} định ra tay (${M.n.toLowerCase()}) ${O.n}, nhưng đường dây đã bị cắt từ trước. ${t===S?`Ngươi nắm thêm ${balAb(BAL.eff.j70.evExec70)} chứng cứ về ${a.name}.`:""}`;try{if(a!==S){a.fails=a.fails||{};a.fails[M.k]=(a.fails[M.k]||0)+1}}catch(e){}}
- else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(a,S,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ ${balSg(BAL.eff.j70.evExec70_2)}.`}
+ else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(S,a,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ ${balSg(BAL.eff.j70.evExec70_2)}.`}
  else{window.__j70exec=1;if(a)a.__won=0;try{
    if(M.k==="joint"){const f=facOf(a);r=f&&jointScheme0?jointScheme0(f,t):""}
    else if(a===S){S.__err=err;try{r=runAct(S,t,M.k)}finally{S.__err=0}}

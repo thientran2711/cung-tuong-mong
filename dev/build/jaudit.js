@@ -86,6 +86,10 @@ const KIT_REL={aff:"thiện cảm",affThem:"Nàng → ta: thiện cảm",affMe:"
 function pvQuy(t,n,lab){if(!t&&n>0)return pvQuyAny(n,lab);return aaSay(lab||KIT_REL.aff,aaNum(n,t,"trust"))}
 function pvOan(t,n,lab){if(n<0)return lab?`${lab} ${balSg(Math.round(n))}`:`bớt oán ta ${Math.round(-n)}`;if(!t)return pvOanAny(n,lab);const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(lab||KIT_REL.oan,r)}
 /* relAdd's own oán (j9: a fall → oán ×BAL.relOan.hurt, a rise → bớt ×mend) — law 4: the BAL keys, never typed .6 / .3 */
+/* NB-b: oán over several cases (tiers / win-or-caught): L = [[chunk, chunk…] per case] — each chunk is one oanAdd (× nết slight, rounded), no target → every nết */
+function pvOanSet(t,L,lab){const [a,b]=t&&t!==S?aaMulRange(t,"slight"):aaAnyRange("slight");const s=(c,f)=>c.reduce((z,n)=>z+(n>0?Math.round(n*f):0),0);const lo=Math.max(1,Math.min(...L.map(c=>s(c,a)))),hi=Math.max(lo,...L.map(c=>s(c,b)));return aaSay(lab||KIT_REL.oan,{a:lo,b:hi})}
+/* Tát (jface): thiện cảm both ways B.rel[sev], her oán = relAdd ×hurt + B.oan[sev]; tier 1..3 is chosen in the slap game → the range over the tiers */
+function tatRelTxt(t){const B=BAL.slap,k=BAL.relOan.hurt,S3=[1,2,3];const R=S3.map(s=>B.rel[s]);return `${aaSay(KIT_REL.aff,{a:Math.max(...R),b:Math.min(...R)})}, ${pvOanSet(t,S3.map(s=>[-B.rel[s]*k,B.oan[s]||0]),"nàng oán ngươi")}`}
 function pvRel(t,n){const k=BAL.relOan;return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*k.hurt)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*k.mend)}`}
 
 /* caught by the target's people (j8 caught): evA 2 + relAdd(−10) */

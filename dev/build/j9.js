@@ -139,7 +139,7 @@ function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
  act("spy","Dò la");act("rumor","Tung tin đồn");
  if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
  if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:`Đức ${balSg(BAL.eff.j9.ducPushPond)} · lộ: bị phạt`,run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
- H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,x:v.preg&&!v.hidden?"nàng đang có thai":"nàng bẽ mặt",run:()=>trip(S,v)});
+ H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,/* NB-b: trip() applies — win: Danh nàng danhTrip, relAdd(a,t,trip); seen: relAdd(a,t,trip_2) + chứng cứ evTrip */x:`${v.preg&&!v.hidden?"nàng đang có thai":"nàng bẽ mặt"}: Danh nàng ${balSg(BAL.eff.j9.danhTrip)}, ${pvRel(v,BAL.eff.j9.trip)} · bị thấy: ${pvRel(v,BAL.eff.j9.trip_2)}, nàng nắm ${balAb(BAL.eff.j9.evTrip)} chứng cứ`,run:()=>trip(S,v)});
  act("frame","Vu oan");act("vp","Tố vượt phẩm");act("xx","Tố xa xỉ");
  return H}
 function pushPond(a,t){ap(a,{duc:BAL.eff.j9.ducPushPond});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;

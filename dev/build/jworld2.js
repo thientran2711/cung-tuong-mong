@@ -28,7 +28,7 @@ function giftRound(b,who,mother,tag){/* NPCs give by their own silver and grudge
  const G=[],C=[],K=[];for(const v of liveR()){if(v===mother||v.out||v.confined)continue;const g=Math.round((v.bac||0)*b.npcGift);
   const cold=(v.ghen||0)>=b.coldGhen||(mother&&mother!==S&&typeof oan==="function"&&oan(v,mother)>=netTh(v,"act"));
   const k=npcPick(v,[["give",mW(v,"social")*(g>=b.mid?b.npcW.give[0]:b.npcW.give[1])],["cold",mW(v,"harm")*(cold?b.npcW.cold[0]:b.npcW.cold[1])],["skip",b.npcW.skip]]);
-  if(k==="give"&&g>0){ap(v,{bac:-g});if(mother)affAdd(mother,v,g>=b.big?b.bigAff:b.midAff);G.push(v)}else if(k==="cold"){if(mother&&mother!==S)relAdd(mother,v,-b.skipOan);C.push(v)}else K.push(v)}
+  if(k==="give"&&g>0){ap(v,{bac:-g});if(mother)affAdd(mother,v,g>=b.big?b.bigAff:b.midAff);G.push(v)}else if(k==="cold"){if(mother&&mother!==S)relAdd(v,mother,-b.skipOan);C.push(v)}else K.push(v)}
  return{G,C,K}}
 /* ---------- 1 YẾN ĐẦY THÁNG (row 1): a real living child, one month after the birth (j8 birth / mkKid). Mother: Danh, Sủng; Kho lúa.
    NPCs gift by their own silver; jealous ones send a cold gift or stay away (the mother's grudge). */
@@ -44,7 +44,7 @@ EVD.day={nm:w=>w.x.sex==="m"?"Yến đầy tháng hoàng tử":"Yến đầy th�
   if(!m)return info(w);
   return Object.assign(info(w),{who:pv(m),opts:[{n:"Dâng quà quý",fx:{bac:-b.big},x:`thành: ${m.name} ${pvQuy(m,b.bigAff,"quý ngươi")}`,go:()=>affAdd(m,S,b.bigAff)},
    {n:"Quà vừa phải",fx:{bac:-b.mid},x:`thành: ${m.name} ${pvQuy(m,b.midAff,"quý ngươi")}`,go:()=>affAdd(m,S,b.midAff)},
-   {n:"Cáo bệnh không tới",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${m.name} để bụng`,go:()=>relAdd(m,S,-b.skipOan)}]})},
+   {n:"Cáo bệnh không tới",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${m.name} để bụng`,go:()=>relAdd(S,m,-b.skipOan)}]})},
  night(){return false}};
 /* ---------- 2 ĐẠI LỄ SẮC LẬP THÁI TỬ (row 2): S.heir set (j3 heirMonth / j51 kế vị / setHeir). The mother's house gains power (j55
    tdPowAdd); mothers of other sons scheme more (act); no night on the rite tuần; may bring a small amnesty. */

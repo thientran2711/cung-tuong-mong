@@ -48,12 +48,12 @@ PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rshOf(S);const o=
 /* son phấn: the rash at the sitting lives in jration (lxAllergy → rashGive): the old "Son phấn Dương Châu" useItem hook is retired with the item (folded into the lx boxes) */
 /* the hostile act: slip an irritating powder / strange incense into her cosmetics (band Hại nhỏ, motive-gated) */
 function oRash(a){return odA(a,45+(a.tamco||0)/5+eyes(a)*3)}
-A("rash","Bỏ phấn lạ",{c:{bac:-RASH.actBac,duc:RASH.actDuc},ok:(a,t)=>(a.bac||0)>=RASH.actBac&&!t.rash,o:a=>oRash(a),x:"nàng nổi mẩn mặt, Sắc giảm vài tuần",f:(a,t)=>{
+A("rash","Bỏ phấn lạ",{c:{bac:-RASH.actBac,duc:RASH.actDuc},ok:(a,t)=>(a.bac||0)>=RASH.actBac&&!t.rash,o:a=>oRash(a),get x(){return `nàng nổi mẩn mặt, Sắc giảm vài tuần · bị lộ: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ, ${pvRel(null,BAL.eff.j8.caught)}`},f:(a,t)=>{
  ap(a,{bac:-RASH.actBac});if(typeof ducAdd==="function")ducAdd(a,RASH.actDuc,"bỏ phấn lạ");else ap(a,{duc:RASH.actDuc});a.schemes=(a.schemes||0)+1;
  const c=caught(a,t,true,"trộn phấn lạ vào hộp phấn của "+NM(t));if(c)return c;
  if(!aRoll(oRash(a),a)){if(roll(40))evA(t,a,BAL.eff.jrash.evF);return `${NMc(a)} sai người trộn phấn lạ vào hộp phấn của ${NM(t)}, nhưng ${t===S?"ngươi":"nàng"} không dùng tới. `}
  const sev=rashPick(RASH.sevW);rashGive(t,sev,"phấn lạ",a);return `<span class="${t===S?"r":"g"}">${NMc(t)} thoa phải phấn lạ, mặt nổi mẩn (${RASH_N[sev]}): Sắc -${RASH.d[sev]} tới khi khỏi.</span> `}});
-try{AOUT.rash=["nàng nổi mẩn mặt, Sắc giảm 5–16 trong 1–4 tuần","bị lộ: nàng nắm chứng cứ, oán ngươi"]}catch(e){}
+try{Object.defineProperty(AOUT,"rash",{configurable:true,enumerable:true,get(){const cv=typeof J78==="object"&&J78.cardV||null;return[`nàng nổi mẩn mặt, Sắc giảm ${RASH.d[1]}–${RASH.d[3]} trong ${RASH.wk[1]}–${RASH.wk[3]+1} tuần`,`bị lộ: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ, ${pvRel(cv,BAL.eff.j8.caught)}`]},set(v){}})}catch(e){}
 try{LACK.rash=t=>S.bac<RASH.actBac?`cần Bạc ${RASH.actBac}`:t&&t.rash?"mặt nàng đang nổi mẩn":""}catch(e){}
 try{ACTDOM.rash="Mưu kế";J78VERB.rash="trộn phấn lạ vào hộp phấn của {t}";HARMK["Bỏ phấn lạ"]="rash"}catch(e){}
 try{if(!BANDS[1][2].includes("rash"))BANDS[1][2].push("rash");const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes("rash"))g[1].push("rash")}catch(e){}

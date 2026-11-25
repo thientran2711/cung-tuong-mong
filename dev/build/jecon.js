@@ -35,7 +35,7 @@ function econBanTo(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false
 function econNoOpt(p){if(p.out)return"Đang ở lãnh cung: không lễ nghĩa, không ai cắt xén thêm, tháng này không có việc gì để chọn.";if(p.confined)return"Đang cấm túc: không phải lo lễ nghĩa tháng này, Nội vụ phủ phát đủ phần, không có việc gì để chọn.";return"Tháng này không có việc gì để chọn."}
 /* pre = her month card already applied the option's fx (chooseM: bạc −(d+b) and Danh ±): only the rest happens here (review/balance-2: it was paid twice) */
 function econDoDuty(p,pay,pre){const d=econDuty(p),b=econBan(p);const r=Math.min(7,rkOf(p));
- if(pay&&(pre||(p.bac||0)>=d+b)){const dg=d?BAL.dutyDanh[r]||0:0;if(!pre){if(d)ap(p,{bac:-d});if(dg)ap(p,{danh:dg})}if(b){if(!pre)ap(p,{bac:-b});const T=econBanTo(p);T.forEach(v=>{ap(v,{bac:Math.floor(b/T.length)});try{relAdd(v,p,BAL.eff.jecon.econDoDuty)}catch(e){}})}return{paid:1,d,b,dg}}
+ if(pay&&(pre||(p.bac||0)>=d+b)){const dg=d?BAL.dutyDanh[r]||0:0;if(!pre){if(d)ap(p,{bac:-d});if(dg)ap(p,{danh:dg})}if(b){if(!pre)ap(p,{bac:-b});const T=econBanTo(p);T.forEach(v=>{ap(v,{bac:Math.floor(b/T.length)});try{relAdd(p,v,BAL.eff.jecon.econDoDuty)}catch(e){}})}return{paid:1,d,b,dg}}
  const dn=BAL.dutySkip.danh+Math.floor(r/2),du=BAL.dutySkip.duc;if(d||b){if(!pre)ap(p,{danh:-dn});if(du){if(typeof ducAdd==="function")ducAdd(p,-du,"bớt lễ nghĩa");else ap(p,{duc:-du})}}return{paid:0,d,b,dn,du}}
 /* nhà mẹ đẻ (by origin, every BAL.homeEvery months), patron errands */
 function econHome(p){try{if(p!==S||!S.origin||S.out||(S.month%BAL.homeEvery)!==1)return 0;return S.homeCut?0:(BAL.home[S.origin.k]||0)}catch(e){return 0}}
@@ -184,7 +184,7 @@ A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMai
  if(mc==="quiet")return `${mn} không mặn mà với ${m.name}, cũng không nói với ai. `;
  return `${mn} nhận ra ${m.name} đến dò, báo cho chủ: ${NM(t)} nắm ${balAb(BAL.ag.ev.one)} chứng cứ. `}});
 /* the plot of «Nhờ ơn người quen» once the acquaintance v agrees (jrcv RCVK.blockf: pen = the «làm qua loa» odds minus) */
-function rcvBlockGo(p,v,t,pen){relAdd(v,p,-BAL.favorCost);const c=caught(p,t,false,"nhờ người rút thẻ bài của "+NM(t));if(c)return c;
+function rcvBlockGo(p,v,t,pen){relAdd(p,v,-BAL.favorCost);const c=caught(p,t,false,"nhờ người rút thẻ bài của "+NM(t));if(c)return c;
  if(aRoll(oddsCl(oBlock(p)-pen),p)){t.block=2;return `${v===S?"Ngươi":v.name} nhờ người ở Kính sự phòng rút thẻ bài của ${NM(t)} giúp ${NM(p)}: 2 tuần nàng không được lật thẻ`}return `Kính sự phòng không dám rút thẻ bài của ${NM(t)}`}
 A("blockf","Nhờ ơn người quen rút thẻ bài",{c:{},ok:(a,t)=>!!econFavor(a)&&!t.block,o:a=>oBlock(a),xw:(a,t)=>{const v=econFavor(a);return v&&typeof rcvWord==="function"?`${v===S?"ngươi":v.name}: ${rcvWord(v,a)}`:""},x:`không tốn bạc · người quen của ngươi trả ơn: thiện cảm -${BAL.favorCost} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách · thành: 2 tuần nàng không được lật thẻ`,f:(a,t)=>{
  /* RECEIVER CHOICE (jrcv RCVK.blockf, OD 18/11 ~21:15Z): the acquaintance answers (her: a card) */const v=econFavor(a);if(!v)return"";return rcvAsk("blockf",a,v,key(t))}});

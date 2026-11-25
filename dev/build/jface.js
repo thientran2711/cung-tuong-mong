@@ -174,16 +174,17 @@ function slapEvidence(a,t,sev){try{const B=BAL.slap;let r="";if(a!==S&&a.alive==
  if(B.evT[sev]&&roll(B.evT[sev])&&t!==a){evA(t,a,BAL.eff.jface.evSlapEvidence);r+=`${NMc(t)} ghi nhớ cái tát này (chứng cứ về ${NM(a)} ${balSg(BAL.eff.jface.evSlapEvidence)}). `}
  const W=(typeof liveRivals==="function"?liveRivals(true):[]).filter(x=>x!==a&&x!==t);
  if(B.evW[sev]&&W.length&&roll(B.evW[sev])){const w=W[Math.floor(Math.random()*W.length)];evA(w,a,BAL.eff.jface.evSlapEvidence_2);if(a===S)r+="Có kẻ trông thấy, ghi lại chuyện này. "}return r}catch(e){return""}}
-A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"đánh nhẹ, vừa hay nặng tùy tay: nàng in dấu tay trên má, Sắc giảm vài tuần · Đức ngươi giảm theo độ nặng · nàng oán ngươi",f:(a,t)=>{
+A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,/* NB-b: the relation numbers relAdd(a,t,B.rel[sev]) + oanAdd(t,a,B.oan[sev]) apply */get x(){return `đánh nhẹ, vừa hay nặng tùy tay: nàng in dấu tay trên má, Sắc giảm vài tuần · Đức ngươi giảm theo độ nặng · ${tatRelTxt(null)}`},f:(a,t)=>{
  const B=BAL.slap;let sev=cl(SLAP.next|0||B.def,1,3);SLAP.next=0;const dc=B.duc[sev];
- if(typeof ducAdd==="function")ducAdd(a,dc,"tát người");else ap(a,{duc:dc});relAdd(t,a,B.rel[sev]);if(B.oan[sev])oanAdd(t,a,B.oan[sev]);slapGive(t,a,"",sev);let r=`${NMc(a)} giáng một cái tát ${B.nm[sev]} lên má ${NM(t)}. `;
+ if(typeof ducAdd==="function")ducAdd(a,dc,"tát người");else ap(a,{duc:dc});relAdd(a,t,B.rel[sev]);if(B.oan[sev])oanAdd(t,a,B.oan[sev]);slapGive(t,a,"",sev);let r=`${NMc(a)} giáng một cái tát ${B.nm[sev]} lên má ${NM(t)}. `;
  if(sev>=3&&roll(B.thau)){ap(a,{danh:B.thauDanh});r+=`Thái hậu nghe chuyện, quở trách nặng lời (Danh ${a===S?"ngươi":NM(a)} ${B.thauDanh}). `}
  if((t.sung||0)>=B.hoangMin&&roll(B.hoang[sev])){ap(a,{sung:B.sung[sev]});r+=`Hoàng thượng nghe chuyện, không vui (${sgOf(a,B.sung[sev],a===S?"Sủng ngươi":`Sủng ${NM(a)}`)}). `}
  r+=slapEvidence(a,t,sev);return `<span class="${t===S?"r":"g"}">${r}</span>`}});
-A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:`nàng quỳ nửa ngày ngoài sân: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần · nàng oán ngươi`,f:(a,t)=>{
- if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(t,a,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
+A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,get x(){return `nàng quỳ nửa ngày ngoài sân: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần · ${KIT_REL.aff} ${balSg(FXF.phatRel)}, ${pvOan(null,-FXF.phatRel*BAL.relOan.hurt,"nàng oán ngươi")}`},f:(a,t)=>{
+ if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(a,t,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
  if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FXF.penQuy}, gối đau, đi lại chậm.</span> `}});
-try{AOUT.tat=["nàng in dấu tay trên má, Sắc giảm vài tuần; nàng oán ngươi",""];AOUT.phatquy=[`nàng quỳ phạt: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần; nàng oán ngươi`,""]}catch(e){}
+try{const cv=()=>typeof J78==="object"&&J78.cardV||null;Object.defineProperty(AOUT,"tat",{configurable:true,enumerable:true,get(){return[`nàng in dấu tay trên má, Sắc giảm vài tuần; ${tatRelTxt(cv())}`,""]},set(v){}});
+ Object.defineProperty(AOUT,"phatquy",{configurable:true,enumerable:true,get(){return[`nàng quỳ phạt: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần; ${KIT_REL.aff} ${balSg(FXF.phatRel)}, ${pvOan(cv(),-FXF.phatRel*BAL.relOan.hurt,"nàng oán ngươi")}`,""]},set(v){}})}catch(e){}
 try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
  LACK.phatquy=t=>!fxAuth(S,t)?"ngươi là Hoàng hậu, hoặc trên nàng ba phẩm":t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
 try{ACTDOM.tat="Mưu kế";ACTDOM.phatquy="Mưu kế";J78VERB.tat="tát {t}";J78VERB.phatquy="phạt {t} quỳ";HARMK["Tát"]="tat";HARMK["Phạt quỳ"]="phatquy"}catch(e){}
