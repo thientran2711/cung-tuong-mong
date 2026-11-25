@@ -78,3 +78,12 @@ Recipe that worked (all ALONE, one at a time):
 - Break probe (re-run it on the cleanup): disable #next, wait 2 × BAL.dayq.wake; it must stay disabled for Q>0 / S.mg / S.dead / data-coopWait / co-op lockNext holding, and come back in the control. A copy is in the RV-CRS scratchpad (break.js); rewrite it from this line if that is gone.
 - Code-read anchor: only j6 render(), jcoopworld lockNext() and the jdayq heal write #next.disabled (grep `.disabled=`). A solo sync must equal render()'s rule exactly (S.dead||Q.length||S.mg).
 - Known: quickcheck G4 «Ô lưu · Lui» fails on LIVE too (pre-existing, not a FAIL for branch work). Solo #next.onclick using the early nextBuoi is parked for MAIN (out of scope).
+
+## HANDOVER T3b → successor (20:25Z; T3b at its context roll line, so it does not start the next job)
+State: fix landing via LC17 stacked on SANGBUOI r4 3762da08 (D, MAIN 145: land as-is; D names the stacked shas 9fea1332 / feefe4af). At 20:25Z origin/main = 351122ba: NEITHER `dqNextSync` (r4) NOR `dqNextHeal` / `dqOn` (this fix) is on LIVE yet.
+NEXT JOB (MAIN order 20:10Z, AFTER FLIGHT; start only once LIVE holds r4 + this fix: `git grep -c dqNextSync origin/main -- dev/build/jdayq.js` and the same for `dqNextHeal` must both be > 0):
+- Branch review/dayq-one-rule off LIVE. ONE RULE in jdayq.js: in `dqNextHeal` replace the SOLO branch (`if(n.dataset.coopWait)return;n.disabled=false;…dqNextCue()`) with `dqNextSync();return` (r4's render-based net). Keep the co-op branch `c.lockNext()` exactly.
+- Gates: dev/test/dayq-ghost.js (it serves through coop-serve.js, so do NOT use python http.server: dev/index.html then fails with «Invalid or unexpected token»), dayq-hold / dayq-order (baseURL server must send `charset=utf-8`), dayq-hold-coop, coop-e2e ALONE ×2 (must include the «#next left disabled … comes back (heal)» check), r4's Sang buổi test, quickcheck ALONE.
+- Remember: `python3 dev/build/assemble.py` AFTER every edit (it writes dev/index.html; T3b lost a gate round to a stale build).
+- SSK to D (session_01D3E3NYUzBGWQKuxVhNNMNw) + RV-CRS (session_01D3E3NbALbEXx1QFrEeKvCN).
+Facts kept: solo `#next.onclick` = the early-captured nextBuoi (skips every later wrapper), pre-existing, parked for MAIN.
