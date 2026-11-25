@@ -14,6 +14,8 @@
 'use strict';
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path'), { execSync } = require('child_process');
+/* RSS (MB) of this runner's process tree (node + its Chromium) and of the biggest child (the renderer) — read from ps, never from the page */
+function rssTree() { try { const rows = execSync('ps -eo pid=,ppid=,rss=', { encoding: 'utf8', timeout: 5000 }).trim().split('\n').map(l => l.trim().split(/\s+/).map(Number)); const kids = new Map(); for (const [pid, pp] of rows) { if (!kids.has(pp)) kids.set(pp, []); kids.get(pp).push(pid) } const rss = new Map(rows.map(r => [r[0], r[2]])); const all = []; const st = [process.pid]; while (st.length) { const x = st.pop(); all.push(x); for (const k of kids.get(x) || []) st.push(k) } const mb = all.map(x => (rss.get(x) || 0) / 1024); return { totalMB: Math.round(mb.reduce((a, b) => a + b, 0)), maxMB: Math.round(Math.max(0, ...mb.slice(1))), pids: all } } catch (e) { return null } }
 const RT = require('./realtap.js');
 
 let SHA = ''; try { SHA = execSync('git -C ' + JSON.stringify(__dirname) + ' rev-parse --short=8 HEAD').toString().trim() } catch (e) {}
@@ -108,7 +110,7 @@ async function play(p) {
       if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), text: String(t || '').replace(/<[^>]+>/g, '').slice(0, 200), alive: !!alive, age: S.age, year: S.year, rank: S.rank, turn: S.turn } } catch (e) {} return o0.apply(this, arguments) } }
     }, { origin: A.origin, road: A.road });
   };
-  await boot();
+  R._loopAt = Date.now(); await boot();
   if (ck && ck.ls) { await p.evaluate(ls => { for (const [k, v] of Object.entries(ls)) localStorage.setItem(k, v) }, ck.ls); await p.reload({ waitUntil: 'load' }); await boot(); /* setup only: the save goes back where the game keeps it; the life is then opened by taps (Chơi một mình → Tiếp tục) */ }
 
   await p.evaluate(() => { window.__rtEnd = null }).catch(() => {});
@@ -118,7 +120,7 @@ async function play(p) {
   const clockKey = s => s ? [s.y, s.t, s.w, s.b].join('.') : 'none';
 
   for (;;) {
-    R.steps++;
+    R.steps++; R._loopAt = Date.now();
     let sc; try { sc = await p.evaluate(SCAN) } catch (e) { await p.waitForTimeout(1000); continue }
     lastS = sc.S;
     if (sc.end || sc.S && sc.S.dead && started) { break }
@@ -133,8 +135,9 @@ async function play(p) {
     const key = clockKey(sc.S);
     if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; tapsB = 0; repeat.clear(); dlgActs.clear() } lastKey = key; lastProg = Date.now();
       if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
-    if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
+    if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; { const m = rssTree(); if (m) { (R.rss = R.rss || []).push({ buoi: R.buoi, y: sc.S && sc.S.y, totalMB: m.totalMB, rendererMB: m.maxMB }); if (R.rss.length > 400) R.rss.splice(0, R.rss.length - 400) } } const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
+    if (process.env.RT_TEST_FREEZE && R.buoi >= +process.env.RT_TEST_FREEZE && !(R.harness.resumed || []).length) { /* self-test of the watchdog only */ await p.evaluate(() => { for (;;) {} }) }
     if (process.env.RT_TEST_CRASH && R.buoi >= +process.env.RT_TEST_CRASH && !(R.harness.resumed || []).length) { /* self-test of the crash path only */ await p.goto('chrome://crash').catch(() => {}) }
     if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
     if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
@@ -273,6 +276,13 @@ const seat = Seat({ url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, li
   const ctx = await chromium.launchPersistentContext(path.join(path.resolve(OUT0), 'profile-' + LIFE), { viewport: VP, deviceScaleFactor: 1, hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
   const br = { close: () => ctx.close() };
   const p = ctx.pages()[0] || await ctx.newPage();
+  /* WATCHDOG outside the page (s6d froze 40 min: renderer 11 GB, page.evaluate hung, the in-loop stuck timer never ran): no loop step for WD min → record the freeze + RSS in the ckpt (its save = last good one), kill this runner's Chromium, exit 3 → the until-loop resumes the SAME life */
+  const WD = (+A.wdMin || 10) * 60e3;
+  setInterval(() => { const at = seat.R._loopAt; if (!at || Date.now() - at < WD) return; const m = rssTree(); const b = { type: 'freeze', msg: 'page froze: no harness step for ' + Math.round((Date.now() - at) / 60e3) + ' min (page.evaluate hung) at buổi ' + seat.R.buoi, n: 1, at: new Date().toISOString(), rss: m && { totalMB: m.totalMB, rendererMB: m.maxMB } };
+    seat.R.bugs.push(b); seat.R.harness.freezes = (seat.R.harness.freezes || 0) + 1;
+    const CK = path.join(OUT, LIFE + '.ckpt.json'); try { const ck = JSON.parse(fs.readFileSync(CK, 'utf8')); ck.R = ck.R || {}; ck.R.harness = ck.R.harness || {}; ck.R.harness.freezes = (ck.R.harness.freezes || 0) + 1; ck.R.bugs = (ck.R.bugs || []).concat([b]); fs.writeFileSync(CK + '.tmp', JSON.stringify(ck)); fs.renameSync(CK + '.tmp', CK) } catch (x) { console.error('freeze: no checkpoint yet — the life restarts fresh') }
+    try { seat.save() } catch (x) {} console.error('PAGE FROZE ' + LIFE + ' at buổi ' + seat.R.buoi + (m ? ' (tree ' + m.totalMB + ' MB, renderer ' + m.maxMB + ' MB)' : '') + ' → exit 3, rerun with resume=1');
+    if (m) for (const pid of m.pids.slice(1).reverse()) { try { process.kill(pid, 'SIGKILL') } catch (x) {} } process.exit(3) }, 30e3).unref();
   try { await seat.play(p) } catch (e) { if (seat.R._crashed) { /* a crashed tab cannot be reused (Playwright: every call → «Page crashed»): like a person, reopen the game — keep the life OPEN, put the crash into the checkpoint, exit 3 → the runner loop (until … resume=1) reopens the SAME life from its last ckpt */
       const CK = path.join(OUT, LIFE + '.ckpt.json'); try { const ck = JSON.parse(fs.readFileSync(CK, 'utf8')); ck.R = ck.R || {}; ck.R.harness = ck.R.harness || {}; ck.R.harness.crashes = seat.R.harness.crashes; ck.R.bugs = (ck.R.bugs || []).concat(seat.R.bugs.filter(b => b.type === 'crash').slice(-1)); fs.writeFileSync(CK + '.tmp', JSON.stringify(ck)); fs.renameSync(CK + '.tmp', CK) } catch (x) { console.error('crash: no checkpoint yet — the life restarts fresh') }
       delete seat.R._crashed; seat.save(); console.error('PAGE CRASHED ' + LIFE + ' at buổi ' + seat.R.buoi + ' → exit 3, rerun with resume=1'); process.exitCode = 3 } else {
