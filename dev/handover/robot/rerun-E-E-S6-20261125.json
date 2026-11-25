@@ -3234,5 +3234,1850 @@
   "row": "R6·lazy·3:3145388129 (rerun on LIVE)",
   "game": "github.io Build 4763d410aa0d (= LIVE 08e7d79f), harness b4b181f8",
   "audit": "VALID (death by assassin, real taps, LIVE build) — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-greedy-5",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 495740957,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "64d62d9b",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 4,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 34,
+   "slice": null,
+   "areaTaps": 3829,
+   "dlgScroll": 247,
+   "scrolls": 419,
+   "infoTaps": 838,
+   "dlgClose": 403,
+   "nextNoTurn": 83,
+   "deadEndUnstick": 1,
+   "nocloseRetract": 153,
+   "loops": 23,
+   "bareBlocked": 2,
+   "taps0": 0,
+   "resumed": [
+    {
+     "at": "2026-11-25T20:18:17.009Z",
+     "buoi": 367,
+     "from": "2026-11-25T19:17:17.063Z"
+    }
+   ],
+   "kfocVisits": 33,
+   "closeSpent": 1,
+   "taps": 5553
+  },
+  "life": {
+   "id": "Thái phi",
+   "type": "end",
+   "fate": "Thành Thái phi",
+   "death": false,
+   "age": 23,
+   "year": 6,
+   "rank": 0,
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Lui»",
+    ".dlg «Đồ thất lạc» «Lui»",
+    ".dlg «Mất đồ» «Lui»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»",
+    ".dlg «Bị thu hiệu ban» «Lui»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng (Mưu kế)»",
+    ".dlg «Quẻ Thượng · Mưu kế» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»",
+    ".dlg «Gieo lại quẻ» «Lui»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    ".kmov «Ta biết rồi»",
+    ".kmov «Ta biết rồi»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [
+   {
+    "k": "game|dialog scrolled to the end has no close / next button: .dlg «Tết Nguyên tiêu · Đặt cược»",
+    "type": "game",
+    "msg": "dialog scrolled to the end has no close / next button: .dlg «Tết Nguyên tiêu · Đặt cược»",
+    "n": 1,
+    "at": 1659,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/noclose-1795632437022.png",
+    "buttons": [
+     "Cược đội Tiền PhongKhó lườngTốnBạc -20Đượccó thêm bạc; dễ hỏng; hỏng thì mất tiền cượcGợi ",
+     "Cược đội Cấm VệMong manhTốnBạc -20Đượccó thêm bạc (nhiều); dễ hỏng; hỏng thì mất tiền cược",
+     "Không cược, chỉ xemRất vữngTốnkhôngĐượckhôngGợi ýkhông được mất gì!"
+    ]
+   },
+   {
+    "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»",
+    "type": "stuck",
+    "msg": "no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»",
+    "n": 2,
+    "at": 2305,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/loop-1.png",
+    "dump": "/home/user/wt/out/run/shots-R6-greedy-5/loop-1-dump.json",
+    "S": {
+     "dead": false,
+     "y": 3,
+     "t": 24,
+     "w": 0,
+     "b": 3,
+     "age": 20,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    },
+    "buttons": [
+     "Lui",
+     "Tháng trước",
+     "Tháng sau",
+     "mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ",
+     "mồng 2",
+     "mồng 3",
+     "mồng 4",
+     "mồng 5: Tiết Thanh minh",
+     "mồng 6",
+     "mồng 7",
+     "mồng 8",
+     "mồng 9"
+    ],
+    "trace": [
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Sắc100Tài85Tâm cơ43Đức48Danh78Sủng74»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Mệnh truyệnViệc nhờSổ ghiĐang làm 0/4Tìm việc Nợ â»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Giao tình»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Dư đồ»",
+     ".mapsc «Lịch tháng»",
+     ".mapsc «Bổng lộcsau 3 tuần»",
+     ".mapsc «Danh sách»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Lẻn vào Vững3 khắc · bắt: Danh -12»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Lẻn vào Vững3 khắc · bắt: Danh -12»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Lẻn vào Vững3 khắc · bắt: Danh -12»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Lẻn vào Vững3 khắc · bắt: Danh -12»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Hành sự»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Hậu cung»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Chí tôn»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Phi tần»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Buổi tối, còn 3 khắc»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Người sau»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Nhược Lan»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Dư đồ»",
+     ".dlg «Kính sự phòng» «Lui»"
+    ],
+    "next": {
+     "dis": true,
+     "q": 3,
+     "mg": false,
+     "qt": [
+      "Lịch tháng",
+      "Tin báo",
+      "Tin trong cung buổi này"
+     ],
+     "t": "Sang ngày mới"
+    }
+   },
+   {
+    "k": "game|softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+    "type": "game",
+    "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+    "n": 16,
+    "at": 2405,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/noturn-2.png",
+    "dump": "/home/user/wt/out/run/shots-R6-greedy-5/noturn-2-dump.json",
+    "S": {
+     "dead": false,
+     "y": 3,
+     "t": 24,
+     "w": 2,
+     "b": 3,
+     "age": 20,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    },
+    "trace": [
+     "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang buổi»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Sang buổi»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Tâm trạngBình thản+4»",
+     ".dlg «Tâm trạng · Ta» «Lui»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Mục tiêu chương»",
+     ".dlg «Danh hiệu» «Đeo «Thư hương»TốnkhôngĐượckhôngGhi chúchọn một: T»",
+     ".dlg «Đeo «Thư hương»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»",
+     ".dlg «Danh hiệu» «Đổi phần thưởng «Gót sen lăng ba»TốnkhôngĐượckhông»",
+     ".dlg «Đeo «Gót sen lăng ba»» «Thêm Sắc · đang lấyTốnkhôngĐượcSắc +1»",
+     ".dlg «Danh hiệu» «Danh hiệu 3/35»",
+     ".dlg «Danh hiệu» «Danh hiệu 3/35»",
+     ".dlg «Danh hiệu» «Lui»",
+     "page «Ngọc Thanh các · Ở đây còn 2 người.» «Sang buổi»",
+     "page «Ngọc Thanh các · Ở đây còn 1 người.» «Tư trang»",
+     "page «Ngọc Thanh các · Ở đây còn 1 người.» «Buôn bánBuôn bánChợ đen ở cửa Thần VũCó cơTốn2 khắ»",
+     ".dlg «Chợ đen ở cửa Thần Vũ» «Bột ngứa: ngứa, mất thể diện, Danh -5Có cơTốnBạc -»",
+     ".dlg «Quà tặng» «NhậnRất vữngTốnkhôngĐượccất vào rươngGợi ýcất vào »",
+     "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang ngày mới»",
+     "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang ngày mới»",
+     "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang ngày mới»"
+    ]
+   },
+   {
+    "k": "harness|area tap would have landed on a button (it appeared under the point) — blocked: «Bàn chuyện thiên hạ Có cơ TỐN không ĐƯỢC đêm vui, »",
+    "type": "harness",
+    "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Bàn chuyện thiên hạ Có cơ TỐN không ĐƯỢC đêm vui, »",
+    "n": 1,
+    "at": 3146
+   },
+   {
+    "k": "game|softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Xét phẩm cuối tháng · Tần / Tin trong cung buổi này)",
+    "type": "game",
+    "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Xét phẩm cuối tháng · Tần / Tin trong cung buổi này)",
+    "n": 1,
+    "at": 748,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/noturn-9.png",
+    "dump": null,
+    "S": {
+     "dead": false,
+     "y": 3,
+     "t": 30,
+     "w": 0,
+     "b": 3,
+     "age": 20,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    },
+    "trace": [
+     ".dlg «Chọn người theo hầu» «Cung nữ thân tín tam đẳngLinh ChiTốnkhôngĐượckhông»",
+     ".dlg «Chọn người theo hầu» «Cung nữ thân tín tam đẳngLinh ChiTốnkhôngĐượckhông»",
+     ".dlg «Chọn người theo hầu» «Cung nữ thân tín tam đẳngLinh ChiTốnkhôngĐượckhông»",
+     ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »",
+     ".dlg «Kỳ ngộ» «Chỉ dặn nàng ta giữ gìn sức khỏeRất vữngTốn1 khắcĐ»",
+     ".dlg «Kỳ ngộ» «Lui»",
+     ".dlg «Việc khó xử» «Mách Hoàng hậuRất vữngTốnkhôngĐượcHoàng hậu hài lò»",
+     ".dlg «Bổng lộc tháng tám» «Chu toàn lễ nghĩaRất vữngTốnBạc -10Đượcthêm thể di»",
+     ".dlg «Lễ tấn phong Phi Mộ Dung Ngân Chúc» «Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6»",
+     "page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Sắc100Tài85Tâm cơ45Đức50Danh81Sủng63»",
+     ".dlg «Sắc» «Lui»",
+     "page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Mệnh truyện»",
+     "page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Sang buổi»",
+     ".dlg «Thái y viện» «Lẻn vàoVữngTốn3 khắcĐượcvào được buổi nàyBạiDanh -»",
+     ".dlg «Bị giật y phục giữa đường» «Sai Cung nữ thân tín tam đẳng Linh Chi đến Nội vụ »",
+     "page «Thái y viện · Ở đây còn 1 người.» «Sang ngày mới»",
+     "page «Thái y viện · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»",
+     "page «Thái y viện · Ở đây còn 1 người.» «Bạc196Sức91/99»",
+     "page «Thái y viện · Ở đây còn 1 người.» «Sang ngày mới»",
+     "page «Thái y viện · Ở đây còn 1 người.» «Sang ngày mới»"
+    ]
+   },
+   {
+    "k": "stuck|no-clock loop: 150 taps without a clock step on page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "type": "stuck",
+    "msg": "no-clock loop: 150 taps without a clock step on page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "n": 1,
+    "at": 1678,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/loop-11.png",
+    "dump": null,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 34,
+     "w": 0,
+     "b": 3,
+     "age": 21,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    },
+    "buttons": [
+     "Ô lưu",
+     "Xem bản thân",
+     "Sắc100Tài85Tâm cơ48Đức41Danh64Sủng48",
+     "Bạc286Sức100/100",
+     "Buổi tối, còn 1 khắc",
+     "Có thai:tháng chín",
+     "Hiểm sinh nởVừa",
+     "Hôm nay mặt mộc",
+     "hoa đào bay dưới trăng",
+     "Quẻ Thượng (Mưu kế)",
+     "Tâm trạngBình thản+3",
+     "Tin báo"
+    ],
+    "trace": [
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Lối riêngLối riêngTâu xin nghiệm thân Công chúa Hò»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Lối riêngLối riêngĐể ý một vị thị vệRất vữngThị vệ»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Lối riêngLối riêngĐể ý một vị thị vệRất vữngThị vệ»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Lối riêngLối riêngTâu xin nghiệm thân Công chúa Hò»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Lối riêngLối riêngĐể ý một vị vương giaRất vữngVươ»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Hoàng tự»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Bạc286Sức100/100»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Hoàng tử4. Khải»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Bạc286Sức100/100»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Kế vị»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Tư trang»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Tư trang»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Hành sự»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Buôn bán 1/1»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Về phòng»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Xét phẩm: thiếu 2»"
+    ],
+    "next": {
+     "dis": true,
+     "q": 11,
+     "mg": false,
+     "qt": [
+      "Xét phẩm cuối tháng · Tần",
+      "Xét phẩm cuối tháng · Tần",
+      "Kế vị",
+      "Chứng cứ về Thường tại Phú Sát Như Họa",
+      "Tin báo",
+      "Lịch tháng"
+     ],
+     "t": "Có tin đang chờ · xo"
+    }
+   },
+   {
+    "k": "game|softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Xét phẩm cuối tháng · Tần / Xét phẩm cuối tháng · Tần / Kế vị / Chứng cứ về Thường tại Phú Sát Như Họa / Tin báo / Lịch tháng)",
+    "type": "game",
+    "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Xét phẩm cuối tháng · Tần / Xét phẩm cuối tháng · Tần / Kế vị / Chứng cứ về Thường tại Phú Sát Như Họa / Tin báo / Lịch tháng)",
+    "n": 1,
+    "at": 1678,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/loop-11.png",
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 34,
+     "w": 0,
+     "b": 3,
+     "age": 21,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    }
+   },
+   {
+    "k": "game|softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Xét phẩm cuối tháng · Tần / Chương 3 · Học lễ nghi cung cấm / Tin trong cung buổi này)",
+    "type": "game",
+    "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Xét phẩm cuối tháng · Tần / Chương 3 · Học lễ nghi cung cấm / Tin trong cung buổi này)",
+    "n": 1,
+    "at": 1985,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/noturn-14.png",
+    "dump": null,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 34,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    },
+    "trace": [
+     "#dawn «Tiếp theo»",
+     ".kbk «Tổng lược» «Trang sau»",
+     ".kbk «Tổng lược» «Trang sau»",
+     ".kbk «Tổng lược» «Trang sau»",
+     ".kbk «Tổng lược» «Trang sau»",
+     ".kbk «Tổng lược» «Lui»",
+     ".dlg «Tin trong cung buổi này» «Lui»",
+     ".dlg «Phụ tuyến · Thư cô: xin lời khuyên về chuyện chồng» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»",
+     ".dlg «Tỉnh thân» «Nhận quà nhà gửi vàoTốnkhôngĐượcBạc +13»",
+     ".dlg «Áo trái mùa» «Lui»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Không gặp ai.» «Sang buổi»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang buổi»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Bạc224Sức100/100»",
+     ".dlg «Bạc» «Lui»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang buổi»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang ngày mới»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Mục tiêu chương»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Xét phẩm: thiếu 2»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang ngày mới»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang ngày mới»"
+    ]
+   },
+   {
+    "k": "stuck|no-clock loop: 150 taps without a clock step on page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "type": "stuck",
+    "msg": "no-clock loop: 150 taps without a clock step on page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "n": 1,
+    "at": 2515,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/loop-17.png",
+    "dump": null,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 36,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    },
+    "buttons": [
+     "Ô lưu",
+     "Xem bản thân",
+     "Sắc100Tài85Tâm cơ52Đức45Danh88Sủng53",
+     "Bạc141Sức88/90",
+     "Buổi tối, còn 1 khắc",
+     "Thủy đậu · nặng",
+     "Cấm túc2 tháng",
+     "Hôm nay mặt mộc",
+     "mưa phùn",
+     "Quẻ Hạ hạ (Danh)",
+     "Tâm trạngBình thản-14",
+     "Về phòng"
+    ],
+    "trace": [
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Hôm nay mặt mộc»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Buổi tối, còn 1 khắc»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Chứng cứ 3 ›»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Chí tônPhi tầnNam nhânCung nhân‹Càn Ninh cungLạc Y»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Về phòng»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Có thaiRất thấp»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Chọn chính mình»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Hoàng tự»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Con của ta»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Cấm túc2 tháng»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Về phòng»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Dư đồ»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Hành sự»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Cấm túc2 tháng»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Buổi tối, còn 1 khắc»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Thủy đậu · nặng»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Mệnh truyện»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Việc nhờ»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Buổi tối, còn 1 khắc»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư» «Sắc100Tài85Tâm cơ52Đức45Danh88Sủng53»"
+    ],
+    "next": {
+     "dis": true,
+     "q": 6,
+     "mg": false,
+     "qt": [
+      "Chứng cứ về Thường tại Hách Nhược Lan",
+      "Đức",
+      "Xét phẩm cuối tháng · Tần",
+      "Tin báo",
+      "Xét phẩm cuối tháng · Tần",
+      "Tin trong cung buổi này"
+     ],
+     "t": "Có tin đang chờ · xo"
+    }
+   },
+   {
+    "k": "game|softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chứng cứ về Thường tại Hách Nhược Lan / Đức / Xét phẩm cuối tháng · Tần / Tin báo / Xét phẩm cuối tháng · Tần / Tin trong cung buổi này)",
+    "type": "game",
+    "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chứng cứ về Thường tại Hách Nhược Lan / Đức / Xét phẩm cuối tháng · Tần / Tin báo / Xét phẩm cuối tháng · Tần / Tin trong cung buổi này)",
+    "n": 1,
+    "at": 2515,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/loop-17.png",
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 36,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 2,
+     "name": "Tăng Lăng Ba"
+    }
+   },
+   {
+    "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+    "type": "stuck",
+    "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+    "n": 1,
+    "at": 4285,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/loop-21.png",
+    "dump": null,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 41,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 1,
+     "name": "Tăng Lăng Ba"
+    },
+    "buttons": [
+     "Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết quả ở bước sau!",
+     "Để sau"
+    ],
+    "trace": [
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Sắc100Tài85Tâm cơ53Đức43Danh67Sủng34»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Hoàng thượng»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Hậu cung»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Bổng lộcsau 1 tuần»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Giao tình»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Triều đình»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Sắc100Tài85Tâm cơ53Đức43Danh67Sủng34»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhQuốc sựBi»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Triều đình»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Quẻ Hạ hạ (Hung)»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Dư đồ»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Sắc100Tài85Tâm cơ53Đức43Danh67Sủng34»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Tư trang»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Thư nhà»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «gió heo may»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Thư nhà»",
+     "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư» «Tâm trạngBình thản+12»",
+     ".dlg «Kính sự phòng» «Lui»",
+     ".dlg «Tâm trạng · Ta» «Lui»",
+     ".dlg «Nhờ thái giám tìm thú nuôi» «Lui»"
+    ],
+    "next": {
+     "dis": true,
+     "q": 6,
+     "mg": false,
+     "qt": [
+      "Tin báo",
+      "Xét phẩm cuối tháng · Quý nhân",
+      "Nhờ thái giám tìm thú nuôi",
+      "Tin chờ người sai đi",
+      "Tin trong cung buổi này",
+      "Kính sự phòng báo tin"
+     ],
+     "t": "Sang ngày mới"
+    }
+   },
+   {
+    "k": "dead|close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+    "type": "dead",
+    "msg": "close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+    "n": 1,
+    "at": 6857,
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/noeffect-1795644753969.png"
+   },
+   {
+    "k": "game|every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui)",
+    "type": "game",
+    "msg": "every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui)",
+    "n": 1,
+    "at": 6893,
+    "screen": ".dlg"
+   }
+  ],
+  "dead": [
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+    "label": "Xem Mèo mướp",
+    "cover": "span.kitb in #mb",
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/dead-fold-1795642196061.png",
+    "dev": "fold",
+    "at": 4299,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 41,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 1,
+     "name": "Tăng Lăng Ba"
+    }
+   },
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+    "label": "Xem Chó nhỏ lông xù",
+    "cover": "b.kidn in #mb",
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/dead-fold-1795642202406.png",
+    "dev": "fold",
+    "at": 4305,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 41,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 1,
+     "name": "Tăng Lăng Ba"
+    }
+   },
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+    "label": "Xem Chim họa mi",
+    "cover": "b.kidn in #mb",
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/dead-fold-1795642208738.png",
+    "dev": "fold",
+    "at": 4312,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 41,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 1,
+     "name": "Tăng Lăng Ba"
+    }
+   },
+   {
+    "k": "NO EFFECT",
+    "screen": ".dlg «Tin trong cung buổi này»",
+    "label": "Lui",
+    "cover": "tapped 3× for real, dialog stays",
+    "shot": "/home/user/wt/out/run/shots-R6-greedy-5/noeffect-1795644753969.png",
+    "at": 6857,
+    "S": {
+     "dead": false,
+     "y": 5,
+     "t": 58,
+     "w": 0,
+     "b": 3,
+     "age": 22,
+     "rank": 0,
+     "name": "Tăng Lăng Ba"
+    }
+   }
+  ],
+  "buoi": 986,
+  "steps": 14189,
+  "status": [
+   "STATUS R6-greedy-5 · buổi 618 · year 4 · rank 1 · bugs 10 · stuck 0 · dead buttons 0",
+   "STATUS R6-greedy-5 · buổi 875 · year 6 · rank 0 · bugs 13 · stuck 0 · dead buttons 4"
+  ],
+  "offers": [
+   {
+    "buoi": 57,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 58,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 59,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 62,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 63,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 64,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 65,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 66,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 73,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 82,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 83,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 84,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 113,
+    "y": 1,
+    "rank": 0,
+    "screen": ".dlg «Đại hàn, tuyết lớn»",
+    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+    "picked": true
+   },
+   {
+    "buoi": 196,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 197,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 198,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 207,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 212,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 213,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 217,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 218,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 268,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Tết Nguyên tiêu · Đặt cược»",
+    "label": "Cược đội Tiền PhongKhó lườngTốnBạc -20Đượccó thêm bạc; dễ hỏ",
+    "picked": true
+   },
+   {
+    "buoi": 275,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": false
+   },
+   {
+    "buoi": 287,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": false
+   },
+   {
+    "buoi": 291,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Ngọc Thanh các · Ở đây còn 2 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 291,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Ngọc Thanh các · Ở đây còn 2 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 295,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": false
+   },
+   {
+    "buoi": 299,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": false
+   },
+   {
+    "buoi": 305,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong: Nguyệt tín",
+    "picked": false
+   },
+   {
+    "buoi": 324,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": false
+   },
+   {
+    "buoi": 341,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": false
+   },
+   {
+    "buoi": 345,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": true
+   },
+   {
+    "buoi": 354,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 355,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 356,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 357,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 372,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": false
+   },
+   {
+    "buoi": 380,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "mồng 1: Lại được xét khảo hạch: Thái y đến bắt mạch: Lĩnh bổ",
+    "picked": false
+   },
+   {
+    "buoi": 389,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng San Hô hầu thayRất vữngTốn",
+    "picked": true
+   },
+   {
+    "buoi": 399,
+    "y": 3,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 400,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 401,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 402,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 5 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 404,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": true
+   },
+   {
+    "buoi": 416,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Kính sự phòng · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 417,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 418,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 421,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 422,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 423,
+    "y": 3,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 424,
+    "y": 3,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 425,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 426,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thái y viện · Ở đây còn 1 người.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 427,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 428,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 429,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 430,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 431,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": true
+   },
+   {
+    "buoi": 431,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 432,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 433,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 434,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 435,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 436,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 437,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 438,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 439,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 440,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 441,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 442,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 443,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": true
+   },
+   {
+    "buoi": 444,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 445,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 446,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nặng",
+    "picked": false
+   },
+   {
+    "buoi": 455,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Đại hàn, tuyết lớn»",
+    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+    "picked": false
+   },
+   {
+    "buoi": 464,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 486,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 511,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 511,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 521,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Tết Nguyên đán · Chuyện bên lề hội»",
+    "label": "Nói rằng ta chỉ đứng về lẽ phảiTốnĐức -5ĐượcDanh +10·Hoàng h",
+    "picked": false
+   },
+   {
+    "buoi": 524,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 527,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 527,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 528,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 528,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 543,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 565,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 565,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 579,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Lương Lạc",
+    "picked": false
+   },
+   {
+    "buoi": 590,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Lương Lạc",
+    "picked": false
+   },
+   {
+    "buoi": 593,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Lương Lạc",
+    "picked": true
+   },
+   {
+    "buoi": 593,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 594,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Lương Lạc",
+    "picked": true
+   },
+   {
+    "buoi": 597,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 605,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 607,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 609,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 609,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 615,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 4 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 616,
+    "y": 4,
+    "rank": 1,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 617,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": true
+   },
+   {
+    "buoi": 618,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 4 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 619,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 620,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 623,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 4 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 625,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Niên Lục Liễu hầu thayRất ",
+    "picked": false
+   },
+   {
+    "buoi": 634,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 634,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 634,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 638,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 640,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 641,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 643,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 644,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 645,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 646,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Lương Lạc",
+    "picked": true
+   },
+   {
+    "buoi": 646,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 648,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 650,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Lương Lạc",
+    "picked": false
+   },
+   {
+    "buoi": 654,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 654,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Sắc phong",
+    "picked": true
+   },
+   {
+    "buoi": 654,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": true
+   },
+   {
+    "buoi": 655,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 656,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 657,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 658,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 659,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 666,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 678,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 690,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 718,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 726,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 730,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 733,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 734,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Linh Chi hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 782,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 783,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 784,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 785,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 6 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 786,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 788,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 789,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 791,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 799,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 800,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 801,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 4 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 864,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "mồng 1: Tuyển tú: tú nữ mới vào cung: Lĩnh bổng lộc (lãnh cu",
+    "picked": false
+   },
+   {
+    "buoi": 927,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 943,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 944,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 952,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Ngọc Thanh các · Ở đây còn 2 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 953,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Ngọc Thanh các · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 954,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Ngọc Thanh các · Ở đây còn 2 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   }
+  ],
+  "t": {
+   "total": 8460501
+  },
+  "unit": "E-S6",
+  "row": "R6·greedy·5:495740957 (rerun on LIVE github.io)",
+  "game": "github.io LIVE, MIXED builds (life ran ~18:19-22:2xZ across Build 9434d88366cc → 4763d410aa0d → 0dc642a71578 → 13f84c70f2a3; resumed once at buổi 367 after a bareTap crash on 64d62d9b)",
+  "audit": "VALID (Thái phi age 23, real taps, github.io); mixed builds noted — COUNTED unless Foreman E rules otherwise"
  }
 ]
