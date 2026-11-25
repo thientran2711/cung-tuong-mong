@@ -44,9 +44,13 @@ def summ(L):
   o['npcArtMeanEnd']=med(npcArt);o['horizon']=med(horizon)
   acts={}
   for x in L:
-    for k,v in (x.get('acts') or {}).items():acts[k]=acts.get(k,0)+v
+    for k,v in (x.get('acts') or {}).items():
+      if isinstance(v,dict):
+        for kk,vv in v.items():acts['g_'+kk]=acts.get('g_'+kk,0)+vv
+      else:acts[k]=acts.get(k,0)+v
   mo=sum(horizon) or 1
   o['studyKhacPerMonth']=round(2*(acts.get('selfStudy',0)+acts.get('virStudy',0)+acts.get('lesson',0))/mo,1)
+  o['lessonsDonePerMonth']=round((acts.get('g_an',0)+acts.get('g_vn',0))/mo,1);o['ptsPerLesson']=round((acts.get('g_a',0)+acts.get('g_v',0))/max(1,acts.get('g_an',0)+acts.get('g_vn',0)),2)
   o['ends']={e:sum(1 for x in L if x['end']==e) for e in set(x['end'] for x in L)}
   return o
 for a in sys.argv[1:]:

@@ -23,7 +23,10 @@ function crsPush(lv,pt,k,g,up){if(!(g>0))return 0;const T=BAL.art.tier,G=BAL.art
 function lesG(mode,pts){const L=BAL.art.les,gs=Math.max(L.min,Math.round((pts||0)*L.self));return mode==="self"?gs:mode==="teacher"?Math.max(pts||0,gs+(BAL.tchMin||1)):(pts||0)}
 /* the progress shown on a course card, in PHẦN (lesson points, the unit every «tiến bộ … phần» text uses): phần inside the bậc / phần that bậc needs
    (BAL.art.tier width ÷ BAL.art.gain of the bậc). Was points / 100, read by sếp as «100 to one bậc» (OD 25/11). */
-function crsProg(lv,pt,k){const T=BAL.art.tier,l=Math.min((lv||{})[k]||0,T.length-1),G=BAL.art.gain[Math.min(l,BAL.art.gain.length-1)];return [Math.floor(((pt||{})[k]||0)/G+1e-6),Math.ceil(artNeed(l)/G-1e-6)]}
+function crsG(l){const G=BAL.art.gain;return G[Math.max(0,Math.min(l|0,G.length-1))]}
+/* phần a course needs from bậc l to bậc l+1 (rule cards «Năm bậc», the bar) */
+function crsNeedP(l){return Math.ceil(artNeed(l)/crsG(l)-1e-6)}
+function crsProg(lv,pt,k){const T=BAL.art.tier,l=Math.min((lv||{})[k]||0,T.length-1);return [Math.floor(((pt||{})[k]||0)/crsG(l)+1e-6),crsNeedP(l)]}
 /* the phần one play of mode gives (game points 1..3 through lesG / tdPts), as words («một đến ba phần»): every lesson button reads this, never a typed range */
 function crsGainW(mode,l,vir){const f=pts=>Math.max(1,vir?tdPts(mode,pts):lesG(mode,pts));const a=f(1),b=f(3);return typeof kStepW==="function"?kStepW(a,b):`${a}–${b} phần`}
 /* a Tứ đức lesson's points by game points 0..3 (BAL.td.pts; jtd tdPoints reads it through the raw bands BAL.mgTier.lessonPts) */
