@@ -1642,3 +1642,4 @@ selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | rev
 robot-coop-fix-3-r5 | review/robot-coop-fix-3-r5 | session_01N1tNP4UEeF8FP1nPXeqWNV | RUNNING | 25/11 05:28Z | B
 robot-coop cause 4 FIXER #11 | review/robot-coop-fix-6 | session_01N1tNP4yz3pny7cTfWVcenS | RUNNING | 25/11 05:28Z | B
 robot-audit-B | reports/robot-audit-B.md | session_01N1tNP6LeHufTpecYEKWFN3 | RUNNING | 25/11 05:28Z | B
+kit reviewer B (kit-mg-realtap 45c9a58b, tntile r5) | review/kit-mg-realtap, review/kit-tntile | B | session_01N1tNP55mYsEDU11uxM1JTQ | RUNNING | 25/11 05:44Z |
