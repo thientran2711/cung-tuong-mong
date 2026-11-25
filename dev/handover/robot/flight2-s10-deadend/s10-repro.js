@@ -1,0 +1,45 @@
+/* ROLE B #5 s10 dead-end repro (real taps). usage (from a game worktree): S10_SAVE=<ckpt-save.json unzipped> node s10-repro.js <index.html> ipad|fold 0 → prints FRAME {B: option tops, [cov] = not on screen} + a shot in $OUT */
+/* probe helpers (ROLE B #5): serve a build, load a robot save, real taps only via dev/test/realtap.js */
+const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const RT=require(process.env.REALTAP||require('path').resolve('dev/test/realtap.js'));
+const DEVS={fold:[755,1000],ipad:[1180,820]};
+function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basename(file);const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};
+ return new Promise(res=>{const sv=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u==='/')u='/'+idx;const f=path.join(root,u);if(!f.startsWith(root)){r.writeHead(403);return r.end()}fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);return r.end()}r.writeHead(200,{'content-type':T[path.extname(f)]||'application/octet-stream'});r.end(d)})});sv.listen(0,'127.0.0.1',()=>{sv.unref();res('http://127.0.0.1:'+sv.address().port+'/'+idx)})})}
+async function open(game,dev,ls,{noimg=false}={}){const URL=/^https?:/.test(game)?game:await serve(game);const b=await chromium.launch();const [w,h]=DEVS[dev];
+ const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});
+ if(ls)await ctx.addInitScript(ls=>{if(sessionStorage.getItem('p5ls'))return;sessionStorage.setItem('p5ls','1');localStorage.clear();for(const k in ls)localStorage.setItem(k,ls[k])},ls);
+ const p=await ctx.newPage();await p.route(noimg?/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm|wav)(\?|$)/i:/\.(mp3|ogg|m4a|mp4|webm|wav)(\?|$)/i,r=>r.abort());
+ const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ await p.goto(URL,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await p.waitForTimeout(2500);
+ const rt=RT.make(p,{dev,log:x=>{if(x.k!=='tap')console.log('  realtap',JSON.stringify(x).slice(0,300))}});
+ const vis=()=>p.evaluate(()=>[...document.querySelectorAll('button,[role=button],.kbtn,.tok')].filter(e=>{const r=e.getBoundingClientRect();if(r.width<3||r.height<3)return false;const cs=getComputedStyle(e);return cs.visibility!=='hidden'&&cs.display!=='none'&&r.bottom>0&&r.top<innerHeight}).map(e=>{const r=e.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;const t=document.elementFromPoint(x,y);return (e.textContent||e.getAttribute('aria-label')||'').trim().replace(/\s+/g,' ').slice(0,40)+(t&&(t===e||e.contains(t))?'':' [COV '+(t?t.tagName+'#'+t.id+'.'+String(t.className).slice(0,30):'-')+']')}));
+ const byText=(re,root='body')=>p.evaluateHandle(([re,root])=>{const R=new RegExp(re);return [...document.querySelectorAll(root+' button,'+root+' [role=button],'+root+' .kbtn')].filter(e=>{const r=e.getBoundingClientRect();return r.width>3&&R.test((e.textContent||e.getAttribute('aria-label')||'').trim())}).pop()||null},[re,root]);
+ const tapT=async(re,root)=>{const ok=await rt.tap(await byText(re,root),{label:re,screen:'probe'});console.log('tap',re,ok);await p.waitForTimeout(1500);return ok};
+ const st=()=>p.evaluate(()=>({q:Q.length,qt:Q.map(m=>m.t).slice(0,6),modal:!document.getElementById('modal').hidden,mt:(document.querySelector('#modal:not([hidden]) h2,#modal:not([hidden]) .kit-title')||{}).textContent,dawn:!!document.getElementById('dawn'),dawnc:(document.getElementById('dawn')||{}).className,next:(document.getElementById('next')||{}).disabled,nextT:(document.getElementById('next')||{}).textContent,buoi:typeof S!=='undefined'&&S&&(S.buoi||S.t||S.day),mg:typeof S!=='undefined'&&S&&!!S.mg}));
+ let n=0;const shot=async(nm)=>{const f=`${process.env.OUT||require('os').tmpdir()}/${dev}-${String(++n).padStart(2,'0')}-${nm}.png`;await p.screenshot({path:f});console.log('shot',f)};
+ return {b,p,rt,vis,byText,tapT,st,shot,errs};}
+
+/* title → the saved life, real taps; the first-visit #kload card («Vào cung ngay») may come up at any time */
+async function enter(X){const {p}=X;for(let i=0;i<25;i++){const s=await p.evaluate(()=>{const k=document.getElementById('kload');const t=document.getElementById('title');const kv=k&&!k.hidden&&getComputedStyle(k).display!=='none'&&k.getBoundingClientRect().height>10;return{k:!!kv,kb:kv?[...k.querySelectorAll('button')].map(b=>b.textContent.trim()).join('|'):'',t:!!(t&&!t.hidden)}});
+ if(s.k&&/Vào cung ngay/.test(s.kb)){await X.tapT('^Vào cung ngay','#kload');continue}
+ if(s.t&&!s.k){const tk=await p.evaluate(()=>[...document.querySelectorAll('#modal button')].some(b=>/^Tiếp tục kiếp này/.test(b.textContent.trim())));if(tk){await X.tapT('^Tiếp tục kiếp này','#modal');await p.waitForTimeout(4000);continue}const solo=await p.evaluate(()=>[...document.querySelectorAll('#modal button')].some(b=>/^Chơi một mình/.test(b.textContent.trim())));if(solo){await X.tapT('^Chơi một mình','#modal');await p.waitForTimeout(2500);continue}}
+ if(!s.t&&!s.k)return true;await p.waitForTimeout(1000)}return false}
+
+
+(async()=>{const [game,dev,pick]=[process.argv[2],process.argv[3]||'ipad',+(process.argv[4]||0)];const d=JSON.parse(fs.readFileSync(process.env.S10_SAVE||'ckpt-save.json','utf8'));
+ const X=await open(game,dev,d.ls);const {p,rt}=X;console.log('enter',await enter(X));await p.waitForTimeout(4000);
+ const info=()=>p.evaluate(()=>{const M=$('modal');const B=[...document.querySelectorAll('#modal button,#dawn button,.kmov button')].filter(b=>b.getBoundingClientRect().width>3).map(b=>{const r=b.getBoundingClientRect();const t=document.elementFromPoint(Math.min(innerWidth-1,r.left+r.width/2),Math.min(innerHeight-1,Math.max(0,r.top+r.height/2)));return b.textContent.trim().replace(/\s+/g,' ').slice(0,26)+'@'+Math.round(r.top)+(t&&(t===b||b.contains(t))?'':'[cov]')});
+  const sc=[...M.querySelectorAll('*')].filter(e=>e.scrollHeight>e.clientHeight+4&&/(auto|scroll)/.test(getComputedStyle(e).overflowY)).map(e=>String(e.className).slice(0,18)+':'+e.scrollTop+'/'+(e.scrollHeight-e.clientHeight));
+  return{q:Q.map(m=>m.t).slice(0,4),q0opts:Q[0]&&Q[0].opts&&Q[0].opts.map(o=>o.n),modal:!M.hidden,dawn:!!document.getElementById('dawn'),B,sc,next:$('next').disabled,turn:S.turn,buoi:S.buoi}});
+ console.log('0',JSON.stringify(await info()));
+ const step=async(lbl)=>{console.log(lbl,JSON.stringify(await info()))};
+ for(let i=0;i<45;i++){const s=await info();const top=s.q[0]||'';
+  if(/Phụ tuyến · Tân quân lập uy/.test(top)&&s.modal){await step('FRAME');await X.shot('frame');break}
+  let h;
+  if(/Bổng lộc tháng/.test(top)&&s.modal){h=await p.evaluateHandle(k=>{const O=[...document.querySelectorAll('#modal .opt,#modal .kopt')].filter(b=>b.getBoundingClientRect().width>3);return O[k]||null},pick);console.log('pick',pick)}
+  else h=await p.evaluateHandle(()=>{const V=e=>{const r=e.getBoundingClientRect();if(r.width<3)return false;const t=document.elementFromPoint(Math.min(innerWidth-1,r.left+r.width/2),Math.min(innerHeight-1,Math.max(0,r.top+r.height/2)));return t&&(t===e||e.contains(t))&&!e.disabled};
+   const B=[...document.querySelectorAll('.kmov button,#dawn button,#modal button,#next')].filter(V);return B.find(b=>/kbtn|kmend/.test(b.className)&&b.closest('.kmov,#dawn'))||B.find(b=>/^(Tiếp theo|Tiếp|Đã rõ|Nhận)/.test(b.textContent.trim()))||B.find(b=>/kit-x/.test(b.className))||[...document.querySelectorAll('#modal .opt,#modal .kopt')].filter(V)[0]||B.find(b=>b.id==='next')||null});
+  const lab=await h.evaluate(e=>e&&(e.textContent||e.id).trim().replace(/\s+/g,' ').slice(0,40));console.log(i,'tap',lab,JSON.stringify(s).slice(0,300));
+  if(!lab){if(i==30)console.log('  DOM',await p.evaluate(()=>{const d=document.getElementById('kmrew')||document.getElementById('dawn');const L=[...d.querySelectorAll('*')].filter(e=>e.getBoundingClientRect().width>3).map(e=>e.tagName+'.'+String(e.className).slice(0,30)+(e.childElementCount?'':':'+e.textContent.trim().slice(0,30)));return d.className+' || '+L.slice(0,60).join(' ; ')+' || kmov:'+[...document.querySelectorAll('.kmov,#kmrew')].map(e=>e.id+'.'+String(e.className).slice(0,40)).join(',')}));console.log('  dawn',await p.evaluate(()=>{const d=document.getElementById('dawn');return d?d.className+' | '+d.textContent.trim().replace(/\s+/g,' ').slice(0,200):''}));const hint=await p.evaluateHandle(()=>{const e=[...document.querySelectorAll('body *')].find(e=>e.childElementCount===0&&/^Chạm để/.test(e.textContent.trim())&&e.getBoundingClientRect().width>3&&getComputedStyle(e).visibility!=='hidden');if(!e)return null;const r=e.getBoundingClientRect();return document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)});if(await hint.evaluate(e=>!!e))await rt.tap(hint,{label:'hint',screen:'s10'});else await p.waitForTimeout(3000);await p.waitForTimeout(1500);continue}
+  await rt.tap(h,{label:lab,screen:'s10'});await p.waitForTimeout(2500)}
+ console.log('errs',X.errs.slice(0,4));await X.b.close()})();
