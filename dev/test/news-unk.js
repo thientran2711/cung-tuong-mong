@@ -32,17 +32,17 @@ const HELP=`(function(){
   for(const [s,sel] of [["#modal","#modal"],["#panel","#panel"],["#kntchip","#kntchip"],["#kntbox","#kntbox"],["#log","#log"],["#book","#kbook,#kbk,.kbook"],["toast",".ktbt,.ktoast"]])document.querySelectorAll(sel).forEach(r=>__nuDom(s,r))}catch(x){}};
 })();`;
 const prep=async g=>{await g.evaluate(HELP)};
-const boot=async(g,seed)=>{await g.evaluate(s=>{let a=s;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
-  window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;document.getElementById('modal').hidden=true;
-  const st=document.createElement('style');st.textContent='#kroul,#kload,#klife,.kmov,.kmfls,#kpodov,#dawn,.krbox{display:none!important}';document.head.appendChild(st)},seed)};
 const DEVS=['fold','ipadAir'];
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch();
  for(const dev of DEVS){
   /* ---- T: real taps, HOST mode ---- */
   {const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(120000);
-   await p.addInitScript(()=>{window.__toastKeep=1});
+   await p.addInitScript(()=>{window.__toastKeep=1;let a=3596068797;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}});
    const g=await D.openHost(p,srv.url);await g.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(1500);
-   await boot(g,3596068797);await sleep(3500);await prep(g);const clr=async()=>{for(let i=0;i<5;i++){await g.evaluate(()=>{try{Q.length=0;const m=document.getElementById('modal');m.hidden=true;document.body.classList.remove('kdlg-on','kbk-open')}catch(e){}});await sleep(400)}};await clr();
+   await g.addScriptTag({content:fs.readFileSync(path.join(ROOT,'dev/measure/inpage4.js'),'utf8')});
+   await g.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;start()});await sleep(1500);
+   await g.evaluate(()=>window.__bot.step('sens',60));await sleep(800);/* past the intro: a court of strangers in play */
+   await g.evaluate(()=>{const st=document.createElement('style');st.textContent='#kroul,#kload,#klife,.kmov,.kmfls,#kpodov,#dawn,.krbox{display:none!important}';document.head.appendChild(st)});await prep(g);const clr=async()=>{for(let i=0;i<5;i++){await g.evaluate(()=>{try{Q.length=0;const m=document.getElementById('modal');m.hidden=true;document.body.classList.remove('kdlg-on','kbk-open')}catch(e){}});await sleep(400)}};await clr();
    const info=await g.evaluate(()=>{const st=rivals.filter(v=>v.alive&&!v.out&&!v.queen&&k61St(v)<1&&(S.met||{})[v.id]==null);const [a,c]=st;const s=(S.staff||[])[0]||S.maid;
     const ka=kitName(a),kc=kitName(c);const nm=h=>String(h).replace(/<[^>]+>/g,"");
     /* the three E-S7 lines, through the real paths */
@@ -63,7 +63,7 @@ const DEVS=['fold','ipadAir'];
    if(!box)rep('T-FAIL',`${dev} no «!» box`);
    else{const fr=await p.evaluate(()=>{const f=document.getElementById('krotf');if(!f)return null;const r=f.getBoundingClientRect();return{l:r.left,t:r.top,w:r.width,h:r.height,iw:f.contentWindow.innerWidth}});
     /* box coords are inside the frame (host mode): map through the frame scale */
-    const sc=fr?fr.w/fr.iw:1;const X=(fr?fr.l:0)+box.x*sc,Y=(fr?fr.t:0)+box.y*sc;await p.touchscreen.tap(X,Y);await sleep(1800);
+    const sc=fr&&fr.iw?fr.w/fr.iw:1;const X=(fr?fr.l:0)+box.x*sc,Y=(fr?fr.t:0)+box.y*sc;await p.touchscreen.tap(X,Y);await sleep(1800);
     const panel=await g.evaluate(()=>{const m=document.getElementById('modal');const li=[...document.querySelectorAll('#modal .kntl li')].map(x=>x.textContent.trim());return{open:!!(m&&!m.hidden),title:(document.querySelector('#modal .kptitle,#modal h2,#modal .kpt')||{}).textContent||'',li,txt:m?m.innerText:''}});
     if(!panel.open||!panel.li.length)rep('T-FAIL',`${dev} the tap on «!» did not open the «Tin báo» dialog (${JSON.stringify(panel).slice(0,120)})`);
     else{await g.evaluate(()=>__nuAll());const hh=await g.evaluate(()=>__nu.hits.slice());hh.forEach(h=>{if(!pre.some(x=>x.surf===h.surf&&x.txt===h.txt))rep('T-???',`${dev} ${h.surf} :: ${h.txt}`)});
