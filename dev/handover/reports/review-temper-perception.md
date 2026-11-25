@@ -135,3 +135,19 @@ T2c interim 3 reported robot-rt «close button has no effect» on the rv html (o
 One earlier rv run saw no button on «Kính sự phòng báo tin» with a 1.2 s wait; with 2.5 s waits all 3 rv runs match main → timing, not code. Verdict: the stall / dead-close pattern is identical on main from the same state → pre-existing (harness taps seals while a dialog is up, so look-up panels pile up in Q), not caused by temper-perception / temper-outburst-fix. The 0 on main lives = different life paths (Tâm trạng mentions in the last 400 steps: off-1 40 vs 4 each elsewhere). Logged as N7 (pre-existing, for D to route: stale «Tâm trạng» panels left in Q while the modal is hidden; robot-rt seal taps during dialogs).
 Page error «Cannot read properties of undefined (reading 'off')» (on-1 step 701, once): the branch's only new `.off` reads are jtperc tpTrK `BAL.trong.off` (static, jtrong.js:15) → cannot be undefined; source is one of the older `.off` sites (j54/jspread/jht/jgrey/…). N8: T2c to say whether it also appears on main lives.
 Status unchanged: everything green except B2 (final table pending).
+
+### ROUND 3 — VERDICT: PASS c56c1856 (RV3b, 25/11 ~19:40Z)
+**PASS c56c1856** = 97d6ba10 + merge of origin/main 17dfa64d (main is its ancestor → fast-forward). Merge conflicts: assemble.py (took main's module list, which dropped jdeadcard → jnolock, + `jtperc.js` after `jfeel.js`), index.html / sw.js rebuilt by build_site.sh.
+Gates rerun on c56c1856 (own build):
+| Gate | Result |
+|---|---|
+| B1-R hand probe (6 doer kinds) | all resolve (main's new person keys xt0 / xotq / xc<name> resolve too), eye +3, onlookers' aff 0 → −1; roster 40 khắc lands (maid 80/80, servant 20/18, man 40/40, minister 40/40, child 20/20) |
+| temper-judged / moodsrc / equal / signs / one-core | not judged 0, no effect 0 / wrong 0 / fail 0 / wrong 0 / PASS |
+| temper-perception.js real taps | Fold 7/7 (seed 7); iPad seed 7: gateYes card OPEN and tapped, roll «bại» (Rất vững can fail; the merge shifted the seeded stream) → iPad seeds 11 + 23: 7/7 each; dead 0, errors 0; shots looked at |
+| temper-outburst.js Fold + iPad | PASS, dead 0, errs 0 |
+| coop-e2e | 142/142 |
+| quickcheck ALONE | open 1906 ms · old save ok · perf new/live render 234/259, tab 539/552, buổi 1149/1763, tasks>200 24/26 · core gates: ALL PASS except **G4 90-button-crawl: 1 fault «Ô lưu [title] · Lui · close did not close its layer»** — **pre-existing on main 17dfa64d** (button-crawl --fast, 2 runs main + 2 runs c56c1856 alternated: identical FAIL row on both, 4/4) → not this branch; filed N10 for D / MAIN (it is on LIVE main) |
+B2 accepted on T2c interim 4 (2 lives/arm excl. stalled seeds, ~720–840 buổi, 4–5 game years each; lives not finished): same-life counterfactual = 0.7 % of NPC hostile passes owed to the mood term (75/10728), only provoke 64 / rumor 11, **0 on frame/bribe/spy/plant**; executed NPC harm acts/yr «on» ≤ «off» for every kind (frame 1.0 vs 1.8, accuse 1.25 vs 1.4, trip .75 vs 1.8, spy .75 vs 1.0, rumor .25 vs 1.6); no poison executed in any arm; four interims agree. Deviation from my bar (finished lives) noted: **T2c appends the final table; if it shows NPC harm/yr up on «on», this review reopens** (N11).
+Closed: B1-R ✓ · B2 ✓ (above) · N5 ✓ · N6 ✓ · N7 (dead closes on robot lives) pre-existing, same on main/LIVE from the stuck save · N8/N9 page errors pre-existing (D: seen on main/LIVE, fast lanes F2/F3) · N10 G4 «Ô lưu → Lui» pre-existing on main 17dfa64d. Still open, not blocking: N1 wording row #6 (CO-NGU), N2 her harm acts vs reason gate (D/MAIN), N11.
+Laws: 1 ✓ · 2/3 ✓ · 4 ✓ · 5 n/a · 6 ✓ · 7 ✓ · 9 ✓ (no new UI) · 11 ✓ · 13 ✓ (PRIORITY #1 line above).
+Shots: scratch only, deleted; no CDN review folder used.
