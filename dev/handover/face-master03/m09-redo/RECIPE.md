@@ -27,3 +27,6 @@ Not chosen (for the record): owner style ref FACE-GENTLE-AGE16-STYLE-REF-01 uplo
 
 ## Open owner question (asked 25/11, unanswered at push time)
 Head tilt: every prompt keeps the source's head angle ("recognizable head bearing", "natural head bearing from IMAGE 1", "Preserve her natural head/shoulder angle"; Alluring all ages also "natural head tilt"). D proposed: 1 = replace only those lines with "head upright and facing forward, level eyes, straight shoulders" (recommended) / 2 = keep. Do NOT start the redo before her answer.
+
+## OWNER 25/11 (verbatim, after the head-tilt question): "Khoan vẽ hình nha, để tôi sửa prompt đã."
+→ HOLD: no redo gens until the owner delivers her edited prompt(s). Then apply her prompt + this M09 recipe (refs/settings above).
