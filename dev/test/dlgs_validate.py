@@ -11,7 +11,7 @@ B=open(R+'/build/jbal2.js',encoding='utf8').read()
 m=re.search(r'BAL\.dlgs=\{on:\w+,min:(\d+),max:(\d+),maxCh:(\d+)',B);MIN,MAX,MAXCH=map(int,m.groups())
 ODDS=['Mong manh','Hiểm','Khó lường','Tùy duyên','Có cơ','Rất vững','Liều','Năm ăn năm thua','Khá chắc','Rất chắc','Nắm chắc','Chắc chắn']
 TYPED=['nương nương','tiểu chủ','tỷ tỷ','muội muội','bổn cung','thần thiếp','tần thiếp','chủ tử']   # address words: the speaker's rank decides them → {goi}/{xung} (jvoice), never typed
-MODERN=['tôi','anh ấy','chị ấy','em ấy','vâng ạ']   # modern words (VANPHONG cổ trang)
+MODERN=['tôi','anh ấy','chị ấy','em ấy','vâng ạ','bạn']   # modern words (VANPHONG cổ trang; «bạn» → người quen / tri kỷ, review r3)
 GEN={'goi','Goi','xung','Xung','S','E','M'}   # every family: address words (speaker → listener), season, Hoàng thượng, her cung nữ
 def sd(f,const):
     rows=[]
@@ -136,7 +136,8 @@ def pron_err(u,d):
         if w=='nar' or not typed(x.get('text','')):continue
         ls=R if w==L else L;sc,lc=cat(w),cat(ls)
         why=None
-        if w in tok:why='the same speaker uses {xung}/{goi} in this scene'
+        if u.get('fam')=='nr':why='NRASK road asks: xưng hô only through {xung}/{goi} (jnrask header; review r3)'
+        elif w in tok:why='the same speaker uses {xung}/{goi} in this scene'
         elif sc=='high' or lc=='high':why='Hoàng thượng / Thái hậu / Hoàng hậu in the pair'
         elif sc=='low':why='a servant / child / official speaks up'
         elif lc!='low':why='consort to consort (rank decides)'
