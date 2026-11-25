@@ -1650,3 +1650,32 @@ Commits: ec88ddc3 (fix) + 71c538df (merge LAND READY robot-coop-fix-4-r1 aad22c9
 | `bash dev/tools/quickcheck.sh` ALONE | — | — | QUICKCHECK PASS · old save ok · render 323/257 · tab 612/635 · buổi 1913/2968 ms · core gates PASS |
 | hue-dead / undef-scan | — | — | PASS / PASS (302 names) |
 Not run: A/B rooms (not in the SEAT D gate list). Laws: 1 (host rename reaches guest again: e2e hl force (b) both orders), 4 (no new number; queue has no cap, bounded by dkeys 60), 6a (reaction kept, same as play-on), 11 (one predicate + one reaction hook). No UI/text/choice touched. No shots, no CDN folder, no image in git.
+
+### FIX-3-r4 FINISHER (sonnet, session_01N1tNP… successor of FIXER #8; Foreman B now = session_01N1tNP3GRCYRmsy6VNQKEXQ) — review/robot-coop-fix-3-r4 b34e4bde955fe2162dac6c686d5991eaa5cc25eb — **FAIL (A/B), not SSK**
+PRIORITY #1 CHECK: OD 0 | main 502c48c9 (= branch base, FF) | review/* robot-coop-fix-3-r4 | claims Foreman B brief. No game code changed.
+Merged-onto-newest-main = bare: origin/main is still 502c48c9 and b34e4bde is a fast-forward of it → merged tree == bare tree; one run per SWAP covers both (the old «merged» with review/robot-coop-fix-2-r3 is not main).
+Setup: worktree /home/user/wt/f8 = b34e4bde, assemble.py + build_site.sh; local Worker `wrangler dev --local --port 8791` of coop/worker (= main); A/B worktrees abfix (b34e4bde) / abmain (502c48c9) + harness overlay from origin/review/robot10-coop 918bfa84 (robot10-coop.js robot10-in.js coop-bot.js coop-bot-x.js coop-lag.js lib/coop-lag-hooks.js lib/playperf.js).
+| gate | command | result |
+|---|---|---|
+| house unit | `node dev/test/coop-house-unit.js` | **36/36 passed** rc 0 |
+| coop-e2e SWAP 0 (Fold host, iPad guest) | `node dev/test/coop-e2e.js <out> http://127.0.0.1:8791` | **142/142 passed**, 0 FAIL |
+| coop-e2e SWAP 1 (iPad host, Fold guest) | `COOP_SWAP=1 node dev/test/coop-e2e.js <out> http://127.0.0.1:8791` | **142/142 passed**, 0 FAIL |
+| quickcheck ALONE | `bash dev/tools/quickcheck.sh` (old save) | **PASS** 225 s · open 2117 ms · old save ok (load ok, buổi ok, 0 errors) · render 264/269 tab 487/470 buổi 1564/1259 tasks>200ms 25/24 · core gates PASS · TIME-SPILL PASS · total 649 s |
+| A/B | `SWAP=<s> SEED=1<r> FLUSH=4 CAP=2400 PCAP=3000 POSLOG=1 NEGTRAP=1 WORKER=http://127.0.0.1:8791 node dev/measure/robot10-coop.js 1 1 1 <out>` fix and main in parallel | **FAIL: fix side still has 1 coop-pos + resHall rows (expected 0)**; only 3 fix rooms completed (needs ≥5) — round 3 killed by me on the FAIL |
+
+#### A/B rows (rounds r1 SWAP=0, r2 SWAP=1; logs /home/user/wt/f8out/ab-{fix,main}-r{1,2}* — this container only)
+| side | rooms (weeks) | coop-pos | R[].resHead/resHall |
+|---|---|---|---|
+| fix b34e4bde | XFQT 41 ok; AQM6 16 stuck + 5FDA 24 ok = 3 rooms, 81 weeks | **1** | **1 row (hits 6)** |
+| main 502c48c9 | 4X6U 6, KYSD 2, H4ZD 7, C3GR 11 (r1, all stuck) + 86WF 5, 85JA 8, 4TB6 9, DFF8 5 (r2, all stuck) = 8 rooms, 53 weeks | 1 (r1: hits 10) | 2 rows |
+Main stuck every room; fix stuck 1 of 3 (better), but the expected «0 coop-pos / 0 resHall» did NOT hold.
+
+#### FAIL 1 — coop-pos on the fix side (r2, SWAP=1, room AQM6, pair coop-p01s-S12, bug file ab-fix-r2/coop-20261125-0241-p1-1-s.md row 4, hits 1)
+`buổi 10.3 host sees guest at r4, guest is at P:b` — dump: host {fpos "10.3 home life1 Diêu Sơ Ảnh", me "10.3 home", life 0, f "902 Diêu Sơ Ảnh pal r4 where r4"}; guest {fpos "10.3 home life0 Diệp Hàm Hương", me "10.3 home", life 1, f "901 Diệp Hàm Hương pal r3 where r3"}. (iPad hosts, Fold guest.) Repro saves: ab-fix-r2/saves/coop-20261125-0241-p1-1-s-310db3.json, …-yr97b6.json. Note host f.pal = r4 while the guest's own where = P:b — the host's palace of her entry (r4) is not what her seat sends as where (P:b = her place inside a day-plan buổi? new variant, not the r3 rows already fixed).
+
+#### FAIL 2 — save→load→save changes R[].resHall (host) (r1, SWAP=0, room XFQT, ab-fix-r1/coop-20261125-0153-p1-1.md row 3, hits 6)
+`save.R.4.resHall … «…tay» → «…dong»` (R[4] on the host save). Same family as FIXER #8's r3 row (R[10].resHall dong→tay) which r4c claimed to fix with «one order on both seats»; this is the reverse direction now (tay → dong) on R[4]. Repro save: ab-fix-r1/saves/coop-20261125-0153-p1-1-1gyu4ox.json. Also seen on fix r1 (not this branch's family, listed for completeness): coop-world consorts differ, S.suc (FIXER #9), number bac<0 (fix-2), coop-stat, lag.
+Main control rows: r1 R[10].resHead 5→2 (guest), 10 coop-pos hits, r2 0 — i.e. main shows the same families, so the fix reduces them but does not reach zero.
+
+#### State for the opus fixer
+Code unchanged on b34e4bde. Not done: A/B ≥5 fix rooms (3 completed), merged-with-newer-main rebuild (main did not move). Box tools lost on restart: wrangler /home/user/wt/wr; Worker :8791; worktrees /home/user/wt/{f8,abfix,abmain}; scripts /home/user/wt/f8out/{ab.sh,aball.sh,e2e.sh}. Long jobs = Bash run_in_background.
