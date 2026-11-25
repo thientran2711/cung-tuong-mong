@@ -16,13 +16,13 @@ function esc(snap,c,mem,n){ {const ek=JSON.stringify(snap.S)+snap.modal.slice(0,
 module.exports.decide=async(snap,mem,api)=>{api0=api;
  const fs=require('fs');if(fs.existsSync(__dirname+'/next.json')){const a=JSON.parse(fs.readFileSync(__dirname+'/next.json','utf8'));fs.unlinkSync(__dirname+'/next.json');return a}
  const c=snap.c.filter(x=>(x.hit||/kxcatch/.test(x.cover||''))&&!x.off&&!x.dis);
- const tap=(x,why)=>{if(/kopt/.test(x.cls)&&x.w>60)return {type:'tap',x:Math.round(x.x+x.w*0.1),y:Math.round(x.y+x.h*0.3),why:why+' (opt offset) | '+x.txt.slice(0,50)};return {type:'tap',x:x.x,y:x.y,why:why+' | '+x.txt.slice(0,50)}};
+ const tap=(x,why)=>{if(x.sp&&/kopt/.test(x.cls))return {type:'tap',x:x.sp[0],y:x.sp[1],why:why+' (safe point) | '+x.txt.slice(0,50)};if(/kopt/.test(x.cls)&&x.w>60)return {type:'tap',x:Math.round(x.x+x.w*0.1),y:Math.round(x.y+x.h*0.3),why:why+' (opt offset) | '+x.txt.slice(0,50)};return {type:'tap',x:x.x,y:x.y,why:why+' | '+x.txt.slice(0,50)}};
  let lg=false;try{lg=await api.p.evaluate(()=>{const L=[...document.querySelectorAll('div,section,aside')].filter(e=>/^Thang cơ duyên/.test((e.innerText||'').trim())&&getComputedStyle(e).visibility!=='hidden');if(!L.length)return null;let best=null,ba=1e9;L.forEach(e=>{const r=e.getBoundingClientRect();const a=r.width*r.height;if(a>0&&a<ba){ba=a;best=r}});if(!best)return null;return [best.x+best.width/2,best.y+14]})}catch(e){}
  if(lg){mem.lg=(mem.lg||0)+1;return {type:'tap',x:Math.round(mem.lg%3===0?30:lg[0]),y:Math.round(mem.lg%3===0?700:lg[1]),why:'close odds legend popover'}}else mem.lg=0;
  mem.n++;
  if(snap.S&&snap.S.over){if(!mem.fin){mem.fin=1;let ex={};try{ex=await api.p.evaluate(()=>({fate:S.fate,rank:S.rank,maxRank:S.maxRank,year:S.year,age:S.age,name:S.name,origin:S.origin&&S.origin.n}))}catch(e){}fsx.writeFileSync(__dirname+'/final.json',JSON.stringify({t:new Date().toISOString(),sangN:mem.sangN,taps:mem.taps,reloads:mem.reloads,ex,start:mem.t0},null,1));api.log('FINAL LIFE OVER',JSON.stringify(ex));await api.shot('final')}return {type:'wait',ms:5000}}
  if(!mem.t0)mem.t0=new Date().toISOString();
- if(snap.S&&snap.S.year!=null){if(mem.yr==null)mem.yr=snap.S.year;if(snap.S.year!==mem.yr&&!snap.modal&&!c.some(x=>/kgr|kit-x/.test(x.cls))){mem.yr=snap.S.year;mem.reloads=(mem.reloads||0)+1;api.log('YEAR',snap.S.year,'age',snap.S.age,'TRUE RELOAD #'+mem.reloads);return {type:'boot'}}}
+ if(snap.S&&snap.S.year!=null){if(snap.S.month>=6&&mem.rlYear!==snap.S.year&&!snap.modal&&!c.some(x=>/kgr|kit-x/.test(x.cls))&&snap.S.buoi===3){mem.rlYear=snap.S.year;mem.reloads=(mem.reloads||0)+1;api.log('YEAR',snap.S.year,'age',snap.S.age,'TRUE RELOAD (mid-year, after save) #'+mem.reloads);return {type:'boot'}}}
  const sig=c.map(x=>x.txt.slice(0,20)).join('|')+snap.modal.slice(0,80);
  if(sig===mem.last)mem.same++;else{mem.same=0;mem.last=sig}
  if(mem.same>12&&!snap.c.some(x=>/Chơi một mình/.test(x.txt)&&!x.hit)){const n=mem.same;mem.same=8;return esc(snap,c,mem,n)}
@@ -45,7 +45,7 @@ module.exports.decide=async(snap,mem,api)=>{api0=api;
  if(b=c.find(x=>(/mclose|kbtn/.test(x.cls)||x.tag==='BUTTON')&&CONT.test(x.txt)&&!EXIT.test(x.txt)))return tap(b,'continue');
  if(snap.c.some(x=>/Chơi một mình/.test(x.txt)&&!x.hit)&&mem.same<40){return {type:'wait',ms:3000}}
  const opts=c.filter(x=>x.tag==='BUTTON'&&/\bopt\b/.test(x.cls)&&!EXIT.test(x.txt));
- if(opts.length){const sc=o=>{let v=0;ODDS.forEach((w,i)=>{if(o.txt.includes(w+' ')||o.txt.includes(w))v=Math.max(v,i+1)});v*=2;const m=o.txt.match(/ĐƯỢC(.*)/);return v+Math.random()*.5};opts.sort((a,z)=>sc(z)-sc(a));{const o=opts[0];mem.of=mem.of||{};const k=o.txt.slice(0,40);mem.of[k]=(mem.of[k]||0)+1;if(mem.of[k]===3){api.addBug('UX-OPTION-CENTRE','tap at the centre of option "'+k+'" hits the odds chip (opens Thang cơ duyên legend) instead of choosing',snap.modalCls)}if(mem.of[k]>=3&&mem.of[k]<8&&o.w>60){return {type:'tap',x:Math.round(o.x+o.w*0.1),y:Math.round(o.y+o.h*0.3),why:'option (offset from odds chip) | '+o.txt.slice(0,40)}}if(mem.of[k]>=8)mem.of[k]=0;return tap(o,'option')}}
+ if(opts.length){const sc=o=>{let v=0;ODDS.forEach((w,i)=>{if(o.txt.includes(w+' ')||o.txt.includes(w))v=Math.max(v,i+1)});v*=2;const m=o.txt.match(/ĐƯỢC(.*)/);return v+Math.random()*.5};opts.sort((a,z)=>sc(z)-sc(a));{const o=opts[0];mem.of=mem.of||{};const k=o.txt.slice(0,40);mem.of[k]=(mem.of[k]||0)+1;if(mem.of[k]===3){api.addBug('UX-OPTION-CENTRE','tap at the centre of option "'+k+'" hits the odds chip (opens Thang cơ duyên legend) instead of choosing',snap.modalCls)}if(!o.sp&&mem.of[k]>=3&&mem.of[k]<8&&o.w>60){return {type:'tap',x:Math.round(o.x+o.w*0.1),y:Math.round(o.y+o.h*0.3),why:'option (offset from odds chip) | '+o.txt.slice(0,40)}}if(mem.of[k]>=8)mem.of[k]=0;return tap(o,'option')}}
   if(b=c.find(x=>x.tag==='BUTTON'&&/kbtn|kmtake|mclose/.test(x.cls)&&!/\balt\b/.test(x.cls)&&!EXIT.test(x.txt)))return tap(b,'primary');
  if(b=c.find(x=>x.cls==='kit-x'||/\bkit-x\b/.test(x.cls)))return tap(b,'close x');
  if(snap.c.some(x=>/kxcatch/.test(x.cover||''))){return {type:'tap',x:378,y:420,why:'dismiss result toast (tap catcher)'}}
@@ -57,13 +57,14 @@ module.exports.decide=async(snap,mem,api)=>{api0=api;
  if(offOpt&&snap.modalCls&&(mem.dscr||0)<4&&!c.some(x=>/\bkcard\b/.test(x.cls)&&/Chọn|Để/.test('')) ){mem.dscr=(mem.dscr||0)+1;mem.same=0;return {type:'scroll',x:378,y:500,dy:650}}
  else if(!offOpt)mem.dscr=0;
  // held news: Sang buổi dimmed with a red '!' badge → tap the badge
- {const sd=snap.c.find(x=>x.tag==='BUTTON'&&/\bmain\b/.test(x.cls)&&/^Sang /.test(x.txt));const bg=c.find(x=>/kntb/.test(x.cls));const key2=JSON.stringify(snap.S);if(sd&&sd.dis&&bg&&mem.bgKey!==key2){mem.bgKey=key2;return tap(bg,'held news badge')}}
+ {const sd=snap.c.find(x=>x.tag==='BUTTON'&&/\bmain\b/.test(x.cls)&&/^Sang /.test(x.txt));const bg=c.find(x=>/kntb/.test(x.cls));const key2=JSON.stringify(snap.S);if(sd&&sd.dis&&bg){if(mem.bgKey!==key2){mem.bgKey=key2;mem.bgN=0;mem.bgT=0}if(mem.bgN<5&&Date.now()-mem.bgT>4000){mem.bgN++;mem.bgT=Date.now();return tap(bg,'held news badge #'+mem.bgN)}}}
  // ---- MAIN SCREEN (no overlay): act cards in the Hành sự tab, then Sang buổi
  const sang=c.find(x=>x.tag==='BUTTON'&&/\bmain\b/.test(x.cls)&&/^Sang /.test(x.txt));
  if(sang){
   const key=JSON.stringify(snap.S)+snap.head;
   if(mem.bkey!==key){mem.bkey=key;mem.scr=0;mem.fail={};mem.bact=mem.bact||0}
   const bk2=JSON.stringify([snap.S&&snap.S.year,snap.S&&snap.S.month,snap.S&&snap.S.tuan,snap.S&&snap.S.buoi]);if(mem.bk2!==bk2){mem.bk2=bk2;mem.bact=0}
+  {const nb=c.find(x=>/kntb/.test(x.cls)&&/kbadge/.test(x.cls));if(nb&&mem.nbKey!==bk2){mem.nbKey=bk2;return tap(nb,'open news early (keep list short)')}}
   const cards=c.filter(x=>/\bkcard\b/.test(x.cls)&&!EXIT.test(x.txt));
   if(!cards.length){const ht=c.find(x=>x.tag==='BUTTON'&&/^Hành sự$/.test(x.txt));if(ht&&mem.hsKey!==key){mem.hsKey=key;return tap(ht,'open Hành sự tab')}}
   const suc=+(((snap.head||'').match(/Sức\s*(\d+)/)||[])[1]||80);
@@ -74,7 +75,7 @@ module.exports.decide=async(snap,mem,api)=>{api0=api;
    ODDS.forEach((w,i)=>{if(t.includes(w))v+=i*.3});v-=(mem.fail[t.slice(0,40)]||0)*5;return v+Math.random()*2};
   const ok=cards.filter(x=>!x.dis&&!(/Điểm trang/.test(x.txt)&&(snap.S.tuan%3)));
   if(ok.length&&mem.bact<(suc<60?2:1)){mem.bact++;ok.sort((a,z)=>score(z)-score(a));mem.fail[ok[0].txt.slice(0,40)]=(mem.fail[ok[0].txt.slice(0,40)]||0)+1;return tap(ok[0],'act card')}
-  if((mem.scr||0)<6&&snap.c.some(x=>/\bkcard\b/.test(x.cls)&&x.off&&!x.dis)){mem.scr=(mem.scr||0)+1;return {type:'scroll',x:378,y:600,dy:420}}
+  if((mem.scr||0)<3&&snap.c.some(x=>/\bkcard\b/.test(x.cls)&&x.off&&!x.dis)){mem.scr=(mem.scr||0)+1;return {type:'scroll',x:378,y:600,dy:420}}
   mem.sangN=(mem.sangN||0)+1;if(mem.sangN%20===1){api.shot('m_'+mem.sangN);fsx.writeFileSync(__dirname+'/status.json',JSON.stringify({t:new Date().toISOString(),sangN:mem.sangN,S:snap.S,taps:mem.taps,reloads:mem.reloads}))}return tap(sang,'Sang buổi/ngày mới');
  }
  if(mem.same<10)return {type:'wait',ms:1500};

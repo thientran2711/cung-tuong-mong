@@ -4,3 +4,4 @@ Save to resume: logs/save_dump_latest.json (localStorage hclh-save-v2-*, slot 2 
 
 ## Hourly progress
 - 08:55Z Y3 T1 age 22 (life real-time 3h45m). 2 true reloads (Y2, Y3) ok; bugs: SOFTLOCK Tin báo clipped options (4 reload escapes), LAYOUT Phụ tuyến clipped, UX odds-chip swallows centre tap. See logs/bugs.jsonl, logs/moments.md
+- 11:25Z Y4 T11 age 23 (≈6h15m real). Throughput fixed (opt safe points, early news, mid-year reload). Bugs so far: 4 softlock/clip, save rollback at year rollover (handed to FOREMAN B), UX odds-chip tap. Resume: harness/RESUME.md
