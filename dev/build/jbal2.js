@@ -2149,7 +2149,7 @@ BAL.net.heat={ghenK:.45,affK:.6};
 /* review/net-thresholds (WORKLIST #9 (c), net-build §4: NPC→NPC oán saturated, p90 98, band-3 share 43 %): oán COOLS each month by
    (BAL.oanFade + oán × oanCool) × the holder's persF forgive — a deep grudge cools faster in absolute terms, a Thù dai one still keeps it;
    the SAME rule for her own oán (S.ro) by her nết (law 1; before: her oán faded flat). */
-BAL.net.oanCool=.05;
+BAL.net.oanCool=.10;/* robot 25/11 (nt-run sens, 3 slots alone, 736 weeks): .05 → npcAct band-3 37.2 %, proud÷gentle 3.13; .10 → band-3 16.5 % (≤ 30 %), proud÷gentle 2.13 (≥ 2); NPC→her band-3 stays ghen-driven (top ghen 83 %) */
 /* per-nết offsets (report §3.3; every row keeps a gain and a cost, laws 2/3 — the gain/cost words are the row's own gain/cost in BAL.net.T) */
 (function(){const O={
  "Ân cần":{quen:-5,than:-10,ghet:-15,act:15,nguoi:10},

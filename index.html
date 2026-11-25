@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)","b":"48bf476bece3","h":[{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"}]};
+window.CTM_BI={"s":"9d214d54+","t":"2026-11-25T07:42Z","c":"net-thresholds: nết intent sign on scheme tells (BAL.net.th.sign, j40 mindTell) + one oán cooling rule for every holder incl. her (BAL.net.…","b":"12dfbf150615","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5684,9 +5684,11 @@ function npcAct(v,t){const b=bandVT(v,t);if(!b)return"";const allow=BANDS.slice(
 /* reactions: Oán from a slight scales with the victim's traits; forgiveness (monthly fade) too; trust gains from her too */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)n*=persF(x,"slight",1);return o0.call(this,x,y,n)}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){/* AG-ALL-2 G12 (one rule both ways): her trust trait slows how fast she warms to ANYONE, the player or an NPC */if(n>0&&x&&x!==S&&y&&y!==x)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
-function oanMonth(){for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade);
+/* review/net-thresholds: ONE cooling rule for every holder (her included, law 1): (oanFade + oán × BAL.net.oanCool) × her/his nết forgive */
+function oanCool(h,x){return x>0?Math.max(0,x-Math.round((BAL.oanFade+x*BAL.net.oanCool)*persF(h,"forgive",1))):x}
+function oanMonth(){for(const v of rivals){v.oan=oanCool(v,v.oan||0);for(const k in v.ro)v.ro[k]=oanCool(v,v.ro[k])}for(const k in S.ro)S.ro[k]=oanCool(S,S.ro[k]);
  /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
- for(const h of relMSAll()){const f=Math.round(BAL.oanFade*persF(h,"forgive",1));if(h.oan)h.oan=Math.max(0,h.oan-f);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=Math.max(0,h.ro[k]-f)}}
+ for(const h of relMSAll()){if(h.oan)h.oan=oanCool(h,h.oan);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=oanCool(h,h.ro[k])}}
 /* gifts land by trait: Kiêu ngạo shrugs at small ones, Tham vọng warms to a rising giver, Tham tiền to anything */
 (function(){const g0=giftVal;giftVal=function(it,r){let v=g0.apply(this,arguments);if(r&&typeof r==="object"&&r!==S){let m=persF(r,"gift",1);const lav=persF(r,"lavish",0);if(lav&&(it.pr||0)>=lav)m=Math.max(m,1.5);{const rg=Math.max(1,...traitsOf(r).map(t=>(PERS[t]&&PERS[t].riseGift)||1));if(rg>1&&(S.rank>=r.rank||S.sung>=r.sung))m*=rg}v=Math.max(1,Math.round(v*m))}return v}})();
 /* SOCIAL MENU: once a week each consort may do one non-harm deed, by her traits; the same menu toward her and toward anyone */
@@ -6340,7 +6342,7 @@ npcAct=function(v,t){try{if(!v||!t||v.coop/* E44j (c) T9 family (law 1 + 6c): a 
   /* a big scheme is prepared first: it leaves a tell her people may catch */
   if(BIG.includes(k)&&!v.plan){const pat=tc>=BAL.wit.hi?2:tc>=BAL.wit.mid?1:0;v.plan={k,t:key(t),due:bq()+1+R(2)+pat,err};mindTell(v,t,k);return""}
   return mindRun(v,t,k,err)}catch(e){return""}};
-function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+eyes(S)*7+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0);
+function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+eyes(S)*7+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0)+netTh(v,"sign");
  if(!roll(oddsCl(Math.min(c,80))))return;mindLog(v,"_tellSeen");const txt=`Người của ${v.name} ${TELLS[k]||"có động tĩnh lạ"}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
  try{newsAdd(v,k,txt,true)}catch(e){}noteAdd(v.id,`Tai mắt báo: ${TELLS[k]||"có động tĩnh lạ"}${t===S?" (có lẽ nhắm vào ngươi)":` (có lẽ nhắm vào ${NM(t)})`}`);
  if(t===S){S.onGuard=S.onGuard||{};S.onGuard[v.id]=k;if(!S.dead)Q.push({t:"Tai mắt báo tin",h:`<p>${txt}.</p><p>Có lẽ nàng đang nhắm vào ngươi. Ngươi đã đề phòng: vài buổi tới mưu của nàng khó thành hơn; dò la hoặc tố giác nàng thì càng chắc.</p>`,who:{w:["r",v.id]}})}
@@ -38728,40 +38730,46 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    sooner, murder still needs deep hate); T[t].th.act3 overrides that for band 3 (Xảo quyệt waits, then strikes hard).
    HEAT (step 0, §2.1 robot: NPC→her danger p50 112 because ghen sat at 99 for everyone; 88 % of npcAct at band 3): heat.ghenK / heat.affK = the share of
    ghen / dislike (−thiện cảm) that counts as danger (oán counts whole). hostility already halves both. */
-BAL.net.th={quen:10,than:30,than2:50,ky:-10,ghet:-30,oan:15,act:30,thu:45,host:45,tell:40,nguoi:30,repay:1};
+/* review/net-thresholds (WORKLIST #9, net-thresholds.md §3.4 row 2): sign = how readily a person's scheme shows a TELL to watchers (j40 mindTell chance + sign;
+   open nết show their hand early, hidden ones late — the open ones gain elsewhere: they act and forgive sooner; the hidden ones befriend later). */
+BAL.net.th={quen:10,than:30,than2:50,ky:-10,ghet:-30,oan:15,act:30,thu:45,host:45,tell:40,nguoi:30,repay:1,sign:0};
 BAL.net.thFrom={than2:["than",1],ky:["ghet",.5],oan:["act",.5],thu:["act",1],host:["act",1]};
-BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-10],oan:[5,30],act:[10,60],thu:[25,75],host:[25,75],tell:[15,70],nguoi:[10,60],repay:[1,3]};
+BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-10],oan:[5,30],act:[10,60],thu:[25,75],host:[25,75],tell:[15,70],nguoi:[10,60],repay:[1,3],sign:[-20,20]};
 BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostMid:.67,hostHi:1.33};
 BAL.net.bandHi=.5;
 BAL.net.heat={ghenK:.45,affK:.6};
+/* review/net-thresholds (WORKLIST #9 (c), net-build §4: NPC→NPC oán saturated, p90 98, band-3 share 43 %): oán COOLS each month by
+   (BAL.oanFade + oán × oanCool) × the holder's persF forgive — a deep grudge cools faster in absolute terms, a Thù dai one still keeps it;
+   the SAME rule for her own oán (S.ro) by her nết (law 1; before: her oán faded flat). */
+BAL.net.oanCool=.10;/* robot 25/11 (nt-run sens, 3 slots alone, 736 weeks): .05 → npcAct band-3 37.2 %, proud÷gentle 3.13; .10 → band-3 16.5 % (≤ 30 %), proud÷gentle 2.13 (≥ 2); NPC→her band-3 stays ghen-driven (top ghen 83 %) */
 /* per-nết offsets (report §3.3; every row keeps a gain and a cost, laws 2/3 — the gain/cost words are the row's own gain/cost in BAL.net.T) */
 (function(){const O={
  "Ân cần":{quen:-5,than:-10,ghet:-15,act:15,nguoi:10},
- "Lạnh lùng":{quen:10,than:12,act:5,tell:15},
- "Nóng nảy":{ghet:10,act:-10,tell:-5,nguoi:10},
- "Điềm tĩnh":{than:3,ghet:-5,act:8,tell:5},
- "Nhiều chuyện":{quen:-5,than:-5,tell:-20},
- "Kín đáo":{quen:5,than:8,tell:25},
- "Kiêu ngạo":{quen:5,than:15,ghet:10,act:-12,nguoi:-15,repay:1},
+ "Lạnh lùng":{quen:10,than:12,act:5,tell:15,sign:-5},
+ "Nóng nảy":{ghet:10,act:-10,tell:-5,nguoi:10,sign:15},
+ "Điềm tĩnh":{than:3,ghet:-5,act:8,tell:5,sign:-8},
+ "Nhiều chuyện":{quen:-5,than:-5,tell:-20,sign:5},
+ "Kín đáo":{quen:5,than:8,tell:25,sign:-12},
+ "Kiêu ngạo":{quen:5,than:15,ghet:10,act:-12,nguoi:-15,repay:1,sign:10},
  "Khiêm nhường":{quen:-5,than:-5,ghet:-10,act:12,tell:5,nguoi:10},
- "Cương trực":{than:5,ghet:5,act:-5},
+ "Cương trực":{than:5,ghet:5,act:-5,sign:10},
  "Xu nịnh":{quen:-8,than:-8,act:5,tell:-5,nguoi:5,repay:1},
- "Thật thà":{quen:-3,act:5,tell:5,nguoi:5},
- "Xảo quyệt":{quen:-5,than:10,act:8,act3:-8,tell:-5,nguoi:-10,repay:1},
+ "Thật thà":{quen:-3,act:5,tell:5,nguoi:5,sign:8},
+ "Xảo quyệt":{quen:-5,than:10,act:8,act3:-8,tell:-5,nguoi:-10,repay:1,sign:-15},
  "Thanh liêm":{act:5,tell:5},
  "Ham lợi":{quen:-5,than:5,tell:-10,repay:1},
  "Rộng lượng":{quen:-5,than:-3,ghet:-15,act:12,tell:5,nguoi:20,repay:1},
  "Thù dai":{quen:5,than:5,ghet:10,act:-8,nguoi:-20,repay:-1},
  "Trọng nghĩa":{than:-3,act:5,tell:10,nguoi:5,repay:-1},
- "Thực dụng":{quen:-5,than:5,tell:-5,repay:1},
- "Tham vọng":{than:5,ghet:5,act:-5,nguoi:-5,repay:1},
+ "Thực dụng":{quen:-5,than:5,tell:-5,repay:1,sign:-3},
+ "Tham vọng":{than:5,ghet:5,act:-5,nguoi:-5,repay:1,sign:3},
  "An phận":{ghet:-5,act:10,nguoi:5},
  "Ham học":{quen:5,than:3,act:3,tell:5},
- "Ham vui":{quen:-8,than:-5,tell:-8,nguoi:5},
+ "Ham vui":{quen:-8,than:-5,tell:-8,nguoi:5,sign:5},
  "Mê tín":{},
  "Thực tế":{quen:5,than:5,tell:5},
  "Vì gia tộc":{act:5},
- "Vì mình":{quen:3,than:8,act:-3,tell:-5,repay:1}};
+ "Vì mình":{quen:3,than:8,act:-3,tell:-5,repay:1,sign:-3}};
  for(const t in BAL.net.T)BAL.net.T[t].th=O[t]||{}})();
 /* j68sd: ORDER THIN P4 composed j68 seeds (DATA ONLY). Built by dev/build/j68sd_build.py from dev/handover/content/thin/j68seeds*.md;
    schema dev/handover/reports/thin.md «## API P4»; validator dev/test/j68seeds_validate.py; engine j68c.js. Do not hand-edit. */
@@ -98259,7 +98267,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="48bf476bece3";window.CTM_BUILD=BUILD;
+const BUILD="12dfbf150615";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
