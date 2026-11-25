@@ -184,7 +184,10 @@ A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&
  if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(a,t,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
  if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FXF.penQuy}, gối đau, đi lại chậm.</span> `}});
 try{const cv=()=>typeof J78==="object"&&J78.cardV||null;Object.defineProperty(AOUT,"tat",{configurable:true,enumerable:true,get(){return[`nàng in dấu tay trên má, Sắc giảm vài tuần; ${tatRelTxt(cv())}`,""]},set(v){}});
- Object.defineProperty(AOUT,"phatquy",{configurable:true,enumerable:true,get(){return[`nàng quỳ phạt: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần; ${KIT_REL.aff} ${balSg(FXF.phatRel)}, ${pvOan(cv(),-FXF.phatRel*BAL.relOan.hurt,"nàng oán ngươi")}`,""]},set(v){}})}catch(e){}
+ Object.defineProperty(AOUT,"phatquy",{configurable:true,enumerable:true,get(){return[`nàng quỳ phạt: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần; ${KIT_REL.aff} ${balSg(FXF.phatRel)}, ${pvOan(cv(),-FXF.phatRel*BAL.relOan.hurt,"nàng oán ngươi")}`,""]},set(v){}});
+ /* RV5 (LAW 11 whole family + LAW 4): the Ngáng chân act card (j25 AOUT.trip: typed «Danh nàng -3», «nàng oán ngươi» with no number) prints what trip() (j9) applies —
+    win: Danh nàng BAL.eff.j9.danhTrip + relAdd(a,t,trip); seen: relAdd(a,t,trip_2) + chứng cứ evTrip; same getter as tat / phatquy above */
+ Object.defineProperty(AOUT,"trip",{configurable:true,enumerable:true,get(){const E=BAL.eff.j9;return[`nàng vấp ngã: Danh nàng ${balSg(E.danhTrip)} (có thai: có thể động thai), ${pvRel(cv(),E.trip)}`,`bị thấy: nàng nắm ${balAb(E.evTrip)} chứng cứ, ${pvRel(cv(),E.trip_2)}`]},set(v){}});}catch(e){}
 try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
  LACK.phatquy=t=>!fxAuth(S,t)?"ngươi là Hoàng hậu, hoặc trên nàng ba phẩm":t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
 try{ACTDOM.tat="Mưu kế";ACTDOM.phatquy="Mưu kế";J78VERB.tat="tát {t}";J78VERB.phatquy="phạt {t} quỳ";HARMK["Tát"]="tat";HARMK["Phạt quỳ"]="phatquy"}catch(e){}

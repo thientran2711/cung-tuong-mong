@@ -23,7 +23,11 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');const LIB=fs.
    try{moved=actMove(k);actKn(kn0,n)}catch(e){out.push({n,k,F,M,err:e.message});continue}
    const rose=Object.keys(S.known||{}).filter(x=>x!=="me"&&(+S.known[x]||0)>(+kn0[x]||0)&&K61STN[+S.known[x]]&&KREG[x]&&KREG[x]!==S);const kd=rose.map(x=>`${x} ${kn0[x]==null?"None":kn0[x]}→${S.known[x]}`).join(", ");
    const shown=duocN()-c0;const knBad=rose.length>shown;
-   K.forEach(x=>{const y=val[x];delete S[x];S[x]=y});const d=K.filter(x=>S[x]!==s0[x]).map(x=>`${x} ${s0[x]}→${S[x]}`);const quest=by.length>0&&by.every(t=>/ note/.test(t)||/^bac note/.test(t));
+   K.forEach(x=>{const y=val[x];delete S[x];S[x]=y});const d=K.filter(x=>S[x]!==s0[x]).map(x=>`${x} ${s0[x]}→${S[x]}`);/* RV5: a Kỳ ngộ on arrival (jky kyArrive → fireMe, Math.random, not a forced roll) pushes its OWN «Kỳ ngộ» card with the gain words (runOpt «Danh +2»):
+      own card when every stat it moved is printed with that delta on a Q ky card (was the 1-in-16 «hidden» hit of W10b) */
+   const KYN={danh:"Danh",sung:"Sủng",duc:"Đức",tamco:"Tâm cơ",suc:"Sức",bac:"Bạc"},kyQ=Q.filter(q=>q&&q.ky).map(q=>pl(q.h||"")).join(" ");
+   const kyOk=x=>{const dd=S[x]-s0[x];return KYN[x]&&kyQ.includes(`${KYN[x]} ${dd>0?"+":"−"}${Math.abs(dd)}`)||kyQ.includes(`${KYN[x]} ${dd>0?"+":"-"}${Math.abs(dd)}`)};
+   const quest=by.length>0&&by.every(t=>/ note/.test(t)||/^bac note/.test(t)||(/kyArrive/.test(t)&&kyOk(t.split(" ")[0])));
    out.push({n,k,F,M,moved,d:d.join(", "),quest,by:[...new Set(by)].join("; "),kd,rose:rose.length,shown,knBad});K.forEach(x=>S[x]=s0[x]);for(const x in S.known)if(!(x in kn0))delete S.known[x];Object.assign(S.known,kn0);Q.length=0}
   AA.force=null;return out});
  const R2=[];await p.evaluate(()=>{window.__awF={};for(const sc of ["hau","dau"]){AA.scen(sc);for(let i=0;i<80;i++){try{deal()}catch(e){}for(const a of deck||[])if(a&&ACT_PLACE[a.n]&&!window.__awF[a.n])window.__awF[a.n]=a}}});
@@ -46,6 +50,6 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');const LIB=fs.
  console.log(`part 2: acts dealt ${new Set(R2.map(r=>r.sc+r.n)).size} · taps ${R2.length} · with familiarity risen ${R2.filter(r=>r.rose).length} · NOT on a card ${kbad2.length}`);
  const bad=rows.filter(r=>r.d&&!r.quest&&r.M==="merge"),kbad=rows.filter(r=>r.knBad);/* stats: one count per act × rolls (the stat walk is the same in both card paths) */
  console.log('| act | place | rolls | card | moved | stat change on the walk | cause (call site) | familiarity risen | named on a card |\n|---|---|---|---|---|---|---|---|---|');
- for(const r of rows)if(r.d||r.err||r.kd)console.log(`| ${r.n} | ${r.k} | ${r.F?'pass':'fail'} | ${r.M} | ${r.moved} | ${r.err||r.d||''}${r.quest?' (ma ma quest reward, own card)':''} | ${r.by||''} | ${r.kd||''} | ${r.rose?`${r.shown}/${r.rose}${r.knBad?' ✗':' ✓'}`:''} |`);
+ for(const r of rows)if(r.d||r.err||r.kd)console.log(`| ${r.n} | ${r.k} | ${r.F?'pass':'fail'} | ${r.M} | ${r.moved} | ${r.err||r.d||''}${r.quest?(/kyArrive/.test(r.by)?' (quest reward / Kỳ ngộ, own card)':' (ma ma quest reward, own card)'):''} | ${r.by||''} | ${r.kd||''} | ${r.rose?`${r.shown}/${r.rose}${r.knBad?' ✗':' ✓'}`:''} |`);
  console.log(`acts ${rows.length/4} · walks ${rows.length/2} (×2 card paths) · walks that change a stat (not a quest reward): ${bad.length} · walks with familiarity risen: ${rows.filter(r=>r.rose).length} · familiarity NOT on a card: ${kbad.length} · page errors ${errs.length}`);
  await b.close();process.exit(bad.length||kbad.length||kbad2.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
