@@ -1606,7 +1606,7 @@ KK25 kit batch SEAT 2 (optinfo-r2, mg-intro-r2) | review/kit-optinfo-r2, review/
 hardlock-choice BIG review | review/hardlock-choice | session_01N1tNP3inDSatM7LPmx51yi | RUNNING | 25/11 02:03Z (FOREMAN B child7)
 | BIG REVIEW day-queue-2 38290f61 (opus) | review/day-queue-2 | MAIN 131 | session_01V1ZZH2EFxJ9XyhsiDsFATZ | RUNNING | 25/11 03:10Z |
 | SMALL REVIEW visitor-fix-r9 98a29b65 (sonnet; successor of rv 1BBdQ7Qp) | review/visitor-fix-r9 | MAIN 131 | session_01V1ZZH1W8A4mF78b6Hg87vU | RUNNING | 25/11 03:18Z |
-| FLIGHT ROBOT A-SOLO (sonnet; briefs/F-flight-robot.md; arm A 4232709a) | dev/handover/robot/flight-A-solo-*; reports/flight-robot.md | F | (opening) | RUNNING | 25/11 02:22Z |
-| FLIGHT ROBOT A-COOP (sonnet; briefs/F-flight-robot.md; arm A 4232709a) | dev/handover/robot/flight-A-coop-* | F | (opening) | RUNNING | 25/11 02:22Z |
-| FLIGHT ROBOT B-SOLO (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-solo-* | F | (opening) | RUNNING | 25/11 02:22Z |
-| FLIGHT ROBOT B-COOP (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-coop-* | F | (opening) | RUNNING | 25/11 02:22Z |
+| FLIGHT ROBOT A-SOLO (sonnet; briefs/F-flight-robot.md; arm A 4232709a) | dev/handover/robot/flight-A-solo-*; reports/flight-robot.md | F | session_01UV1SziCUE23TBF3kKE65D9 | RUNNING | 25/11 02:22Z |
+| FLIGHT ROBOT A-COOP (sonnet; briefs/F-flight-robot.md; arm A 4232709a) | dev/handover/robot/flight-A-coop-* | F | session_01UV1Szhju4ofdVDmJdWCiJk | RUNNING | 25/11 02:22Z |
+| FLIGHT ROBOT B-SOLO (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-solo-* | F | session_01UV1SzgnDgNf3WgdTT5AduB | RUNNING | 25/11 02:22Z |
+| FLIGHT ROBOT B-COOP (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-coop-* | F | session_01UV1Szjbv9YVvjSXYXixW5Y | RUNNING | 25/11 02:22Z |
