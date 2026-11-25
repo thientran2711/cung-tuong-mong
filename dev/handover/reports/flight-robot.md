@@ -12,3 +12,49 @@ Baselines: thd R2 14ba8768 (10 lives, 8 bugs; soft-lock-after-load 5/10) · pf r
 | B-COOP | 1 kiếp | — | none | — | resHall RT drift guest | — | turn/action p95, syncKB, buổi stall | 10 known families; ~35 min/kiếp; bạc out of range, coop-pos 19, coop-stat 4 |
 
 Verdict so far: NO new arm-A blocker in solo; the only stuck shape (co-op all-bạc card) is a pre-existing game bug with its own fix branch. Final table when runners finish (~09:00Z).
+
+## flight-modal-deadlock (FLIGHT ROOT-CAUSE FIXER, 25/11)
+PRIORITY #1 CHECK ('Thời tiết' / 'modal over ov'): OD 0 | ledger 0 | claims 1 | main 15 | review/* 0 | archive 0 → related E U20 W6PF stuck (queued Thời tiết) and E FIXER #5 night-picture verdict; reused jgrey kitOff/j3 poor rule, j68seeds validator, quickcheck.d hooks; no second mechanism.
+Branch: review/flight-modal-deadlock (from 4232709a). Commits: 1f0a491a (data + validator gate), 6b931401 (net + test + hook).
+
+### Verdict
+1. GAME bug, not harness. Repro save (flight-A-coop-repro yr97b6): host S.bac = 2. The card is composed j68 seed **j68c-sea-023** «Thời tiết» (tier l): all 4 stances had `loss.bac` → each option Bạc −60 → j3 showModal `poor` greys every option. The card has opts, so no «Đã rõ»; kitCancelIx −1 (forced choice: no ✕, no Esc, no tap-out, no timer) → nothing to press. Only accidental escape: full page reload (pending P restored, evGate drops it as already seen).
+2. SOLO: yes. Probe 4232709a Fold 755x1000 solo, card injected: bạc 2 → 4/4 greyed, Esc no effect; bạc 500 → 4/4 open. Same code on LIVE origin/main 2b68def3 and robot-fix-cnv-2 fe3cb80c.
+3. The open TÀI NGHỆ #ov under it is incidental (#modal z42 above #ov z32 is the kit layer rule; after the card closes the overlay is back). Not changed (kit territory, law 9). Co-op lock not involved: the guest only waits for the host.
+Root cause = law 2 break: an event whose every road costs bạc, with no bạc-free road.
+
+### Family (law 11) — every #modal option card that can have all options greyed with no way out
+Scan: dev/test/dead-card.js — builds every buildable card (550 E68 templates incl. 460 composed j68c via their pp, 33 j7 EV via pp, other PEND builders with {}) at bạc 0, ranks 0/3/6; greyed = c.off | bạc short | lock | lk(). Static seed scan (all *sd.js comps with stances): j68sd 460, j71sd 80, j7sd 80, jwsd 91.
+
+| card | before (4232709a) | after (6b931401) |
+|---|---|---|
+| e68c:j68c-sea-023 (Thời tiết, lò sưởi) | dead at bạc < 60, ranks 0/3/6 | 1/4 open at bạc 2 («Đổ nước tắt hết, mặc rét»: loss suc 2 + tamco 1) |
+| e68c:j68c-serv-022 (Kẻ hầu, cứu chủ lúc bệnh) | dead at bạc < 60 | 1/4 open at bạc 2 («Cầm tay nàng cảm tạ, thưởng bằng lời»: loss danh + suc + tamco; it said "thưởng bằng lời" yet cost bạc) |
+| every other buildable card (325) | 0 dead | 0 dead |
+| static comps j71sd/j7sd/jwsd | 0 all-bạc | 0 |
+Equal value kept: one BAL.j68c.fx step swapped for one step of another key (Σloss = 3 = tier l), validator passes (0 errors).
+Coverage gap: ~390 PEND builders cannot be built without their own params → covered by the runtime net below.
+
+### Fix
+- Data: the 2 seeds in dev/handover/content/thin/j68seeds_b/_c.md, j68sd.js rebuilt by j68sd_build.py.
+- Gate: dev/test/j68seeds_validate.py ERR when every stance of a comp loses bạc (law 2). Proof: old seeds → 2 ERR.
+- Net: dev/build/jdeadcard.js (last module): a card whose every option is greyed and with no cancel road gets the kit close button «Lui» (#mr .main, word from KIT_CLOSE_W, no new kit part) and passes with no effect; logged in window.__deadCards (robots can read it). In co-op, jcooptimer auto-presses a single live button, so the room cannot hang either. OWNER/F ruling point: this net lets her skip such a card; it is in its own commit (6b931401) and can be dropped if the forced-choice rule must win.
+- Test: dev/test/dead-card.js (scan 2→0 dead, seeds 1/4 open at bạc 2, net closes a synthetic dead card) + quickcheck hook dev/tools/quickcheck.d/85-dead-card.sh.
+
+### Tests
+All on 6b931401 (branch already holds origin/main 3a3234ff; 2b68def3 is no longer on main):
+- dev/tools/quickcheck.sh HEAD: QUICKCHECK PASS 642 s · core gates PASS, hooks 8 incl. 85-dead-card (DEAD-CARD PASS) · old save ok · perf new/live render 232/237, tab 453/449, buổi 1086/1631 ms.
+- dev/test/coop-e2e.js (host Fold + guest iPad, both seats): 142/142 ok.
+- dev/test/dead-card.js: before (4232709a) 2 dead cards → after 0; seeds 1/4 open at bạc 2; net «Lui» closes a synthetic dead card.
+- dev/test/j68seeds_validate.py: 0 errors; on the old seeds the new gate gives 2 ERR.
+- Solo probe of the repro save (Fold 755x1000): with S.mg set + #ov open, bạc 500 → 4/4 open, so the open tài nghệ overlay does NOT grey options; only the j3 `poor` rule does.
+
+### Arm A co-op stuck rooms explained
+| room | card | proof | status |
+|---|---|---|---|
+| 9B2G wk35 | j68c-sea-023 «Thời tiết» | repro save S.bac 2, pid in P | fixed |
+| 93UG wk6 | j68c-serv-022 «Kẻ hầu» (Phẩm Nhi) | host modal text = seed text, 4 options = its 4 stances | fixed |
+| JXAR wk24 | «Kẻ hầu» (Thải Bình) | trace not pushed yet; test: modal text «… sốt li bì đêm qua, … thức bên giường» | likely the same |
+E round 1 U17 wk22 host «Kẻ hầu» stuck is probably the same seed.
+
+READY flight-modal-deadlock 6b931401.
