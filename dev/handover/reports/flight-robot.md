@@ -277,3 +277,13 @@ PRIORITY #1 CHECK: OD 0 (test-only) | main 9f72524b dev/test/mk-e2e.js (no prese
 Code: every required step goes through T() = rt.tap; a tap that does not land or a DEAD BUTTON pushes a FAIL; exit code = fail count > 0. Setup puts the Đào hoa boxes in her bag by state (allowed: setup, not a play step). Shots looked at (colour palette with Đào hoa row lit; reveal close card). Laws 4/7/9: not touched (test only).
 Still open, NOT in this item: test-path-fix FAIL item 1 (toil-overlay Fold G1 covered tokens / G2 #mefig layer) — ordered to ROLE B fix-3; landing cb67ffba does not make it worse.
 Observation for a game worker (not this item): on the reveal the face shows scattered red dots on both cheeks + forehead (powder/son stroke rendering?) at 1180x820 — check vs intended look.
+
+## REVIEW test-path-fix-3 (big reviewer session_01UV1SziXSk67Zy3DMXHsCrJ, 11/25/2026) — PASS bfc6ebb6 FF 9f72524b (review/test-path-fix-3-r = 101dc29b merged onto LIVE, test files only, no conflict)
+| check | result |
+|---|---|
+| mk-e2e Fold 755x1000@2 / iPad 1180x820@2 | MK-E2E PASS rc 0 / rc 0, 0 DEAD; card «KIỂU \| Đào hoa» on both |
+| MUTANT (preset boxes not put in her bag = the old silent fallback) | rc 1, 3 FAIL (not offered / not picked / card «màu tự chọn») → the header assertion bites |
+| real taps | no el.click()/evaluate-click left in mk-e2e (only p.mouse.click on the lip ring); every required tap goes through T() and a tap that cannot land is a FAIL |
+| quickcheck bfc6ebb6 vs live 9f72524b | PASS 992 s · core gates PASS · old save ok · perf render 490/418, tab 1065/1068, buổi 2976/2665 |
+| laws 4 / 7 / 9 | no number, no player text, no UI |
+Carries test-path-fix (incl. 003ac0b0 hoa-dien retap = FAIL). OPEN, not blocking this land (says Foreman F #7: it comes from ROLE B #2): toil-overlay Fold hollow green (G1 covered token) + G2 (#mefig layer shown on her hidden figure after a token tap). It is no worse than main's overlay test (red on a false positive).
