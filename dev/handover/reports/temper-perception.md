@@ -75,3 +75,42 @@ main byKind [calls,pass,mood] {"provoke":[390,73,0],"frame":[187,39,0],"bribe":[
 off byKind [calls,pass,mood] {"provoke":[766,184,0],"frame":[534,72,0],"bribe":[441,14,0],"rumor":[277,234,0],"spy":[1,0,0],"plant":[2,1,0]}
 on byKind [calls,pass,mood] {"provoke":[362,92,13],"spy":[18,0,0],"frame":[175,26,8],"bribe":[144,5,3],"rumor":[134,114,2],"plant":[4,4,0]}
 Reading so far: the mood term accounts for 26 of 241 NPC hostile passes (10.8 %, mostly provoke 13/92 and frame 8/26); pass % on vs off differs by +3.8 pp but the lives differ in length and course (n=1), so no rate verdict yet. main shows no mood term by construction.
+
+## ROUND 3 — RV3 FAIL fixes (seat T1c, worker session_01D3E3NZWzjwimRSPrEyRAM8, 25/11 ~12:40Z) — review/temper-perception-rv 97d6ba10
+PRIORITY #1 CHECK: reports/review-temper-perception.md «ROUND 2» (B1-R, B2, N5, N6) + D orders 11:12Z | jhc.js relMSOf (closure), j9 relKey/relMS, j61 kOf61 (shared person key), jagknow knwSee ids | review/temper-outburst-fix 39561518 (PASS) merged (d0ae8c7d) | claims Foreman D seat T1; T2c measures B2.
+- **B1-R** — jhc.js exports `window.relMSOf`; jtperc tpP reads it. Family scan: every helper jtperc calls by name is probed in the page (temper-judged.js, 32 names) → missing BEFORE relMSOf, AFTER none; no other jhc closure helper is called from another module (sbar elsewhere = jtin's own global).
+- **temper-judged.js** now counts what LANDS: tpJudge runs (TP.stat eye/up/hear Δ), numbers landed (runs − TP.stat.zero Δ), fraction carried (S.tp.r Δ: a ±1 deed × multipliers < 1 is kept for the next deed, tpLand's design); a row passes only with an effect.
+
+BEFORE (ab5d65ee build):
+| doer kind | judged rows | tpJudge ran | numbers landed | rows with no effect (nothing landed, nothing carried) |
+|---|---|---|---|---|
+| c | 18 | 68 | 46 | 0 |
+| e | 4 | 12 | 8 | 0 |
+| t | 2 | 7 | 5 | 0 |
+| s | 2 | 0 | 0 | 2 |
+| m | 3 | 0 | 0 | 3 |
+| o | 4 | 0 | 0 | 4 |
+| q | 3 | 0 | 0 | 3 |
+| k | 3 | 0 | 0 | 3 |
+helpers jtperc calls missing from the page: relMSOf
+rows 66 · self 26 · judged-kind rows 40 · not judged 1 · judged but no effect live 15 · page errors 0
+helpers missing: relMSOf · rows with no effect 15 · not judged 1 (cau)
+
+AFTER (97d6ba10):
+| doer kind | judged rows | tpJudge ran | numbers landed | rows with no effect (nothing landed, nothing carried) |
+|---|---|---|---|---|
+| c | 19 | 77 | 44 | 0 |
+| e | 4 | 12 | 8 | 0 |
+| t | 2 | 8 | 6 | 0 |
+| s | 2 | 10 | 5 | 0 |
+| m | 3 | 13 | 9 | 0 |
+| o | 4 | 20 | 11 | 0 |
+| q | 3 | 11 | 6 | 0 |
+| k | 3 | 15 | 8 | 0 |
+helpers missing: none · rows with no effect 0 · not judged 0 · page errors 0
+- **B2 (D decision)** — `BAL.tp.moodK` = provoke / vent / humil / gossip / rumor; `tpMoodM(a,kind)` is 0 for every other kind; j95 motiveOK passes its kind (her = NPC, law 1). Table in temper-judged.js: BEFORE mood term 10 on all 7 kinds probed (frame/poison/bribe/harm/plot wrong, ×2 her+NPC); AFTER 10 on provoke/rumor, 0 on frame/poison/bribe/harm/plot, her = NPC. Final rate table: T2c on 97d6ba10.
+- **N5** — cau {Kiệm −1} added to DEED, `BAL.tp.base.cau` 1 (a kind deed like thuong / tiec, which also carry Kiệm −); removed from the scan's self list.
+- **N6** — knowledge-record doer key = `tpAb`: me / v<id> / emp / th / s<sid>, else the j61 key (kOf61). Probe: BEFORE «vemp», «vxx1» (maid), «vxm0» (man) → AFTER «emp», «x1», «x20»; consort «v1» unchanged.
+- Gates on 97d6ba10 (own build committed): temper-perception.js REAL TAPS Fold 755x1000@2 + iPad 1180x820@2 8/8 both, 0 errors (shots looked at, kit only) · temper-outburst.js Fold + iPad PASS (hot/stale/timid/jfeel/npc/cap/old, dead 0) · temper-equal 36 rows fail 0, 330 cells ok · temper-signs 17/0 · temper-moodsrc 11/0 · temper-judged exit 0 · one-core guard/text/bind PASS · coop-e2e 142/142 · quickcheck ALONE PASS (open 2113 ms, old save ok, buổi 1777/1456, core gates PASS).
+
+## SẴN SÀNG KIỂM review/temper-perception-rv 97d6ba10 (round 3)

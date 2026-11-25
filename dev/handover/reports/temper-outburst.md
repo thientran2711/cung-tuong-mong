@@ -75,3 +75,15 @@ PRIORITY #1 CHECK: handover T1b above (recipe) | review/temper-outburst c02602fb
 - Fresh container ⇒ lives restarted from scratch. Branch **review/temper-g4 3d86af86** = review/temper-outburst c02602fb + the newest harness copied unchanged (no game code change; build = 6b85187e game, assemble.py output identical to the committed index.html).
 - Running as a TRACKED background job in T1c's container: `node dev/measure/temper-hh-rt.js run /home/user/wt/tp-g4c/game.html /home/user/wt/tp-g4c 3 hot,even,timid,off 4 resume=1` (2 h cap → relaunch the same command; it resumes from ckpt). Real taps, Fold 755x1000, bot sens, no cap, life to death / real ending.
 - First read 10:45Z (5 min in): even 16 buổi rank 1 (max 2) · hot 12 buổi rank 0 · off 16 buổi rank 0 · timid 19 buổi rank 1 (max 2); 0 outburst frames yet. Harness already logs the known «Tâm trạng · <name>» duplicate-queue / «Lui» no-effect bugs (F's report).
+
+## temper-outburst-fix + G4 interim 2 (seat T1c, 25/11 ~12:40Z)
+- review/temper-outburst-fix 39561518 (one mood source for outburst row text + vent; scan temper-moodsrc 10/11 → 0/11) — PASS by RV3 (LAND READY); merged into temper-perception-rv.
+- G4 interim (build 6b85187e, 12:13Z):
+
+| life | buổi | year | rank (max) | Danh | Sủng | lãnh cung | outburst frames |
+|---|---|---|---|---|---|---|---|
+| even | 133 | 2 | 1 (2) | 38 | 0 | no | 0 |
+| hot | 154 | 2 | 0 (0) | 3 | 0 | yes (turn 3) | 2 (khac ×2) |
+| off | 134 | 2 | 0 (0) | 37 | 0 | no | – |
+| timid | 103 | 1 | 1 (2) | 15 | 8 | no | 0 |
+- hot life «Bị bỏ quên, đưa vào lãnh cung» at turn 3: a REAL rule, not a code bug — j3 monthTick: `!S.out && S.sung<=0 && S.danh<=BAL.danhG.forget (5) && S.rank<=1` → cold(). The bot life had Danh 7 / Sủng 6 by buổi 12 (before any outburst frame: 0 then), then Sủng 0 and Danh ≤ 5 at month 3. BALANCE CANDIDATE (for D / MAIN, not touched): the rule has no grace period for a newcomer, so a life can end up in lãnh cung in its 3rd month; G4 must count this life for the hot arm but the cause is not the outburst.
