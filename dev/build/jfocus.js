@@ -53,7 +53,7 @@ function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig
  F.close=()=>close(F);F.destroy=()=>destroy(F);F.figRect=()=>F.img.getBoundingClientRect();F.skipOpen=()=>{F.opening=false;[...F.anims].forEach(a=>{try{a.finish()}catch(e){}})};
  animateOpen(F);return F}
 function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:.05},Z=typeof KIT_SIZE==="object"?KIT_SIZE.fig.XL:{h:398,cw:220};
- const H=Z.h*fac(F),ih=H/Math.max(.2,(v.b-v.t)),iw=ih*(v.ar||.42),cx=A.w/2,floor=A.h-K.floorPad[m];let top=floor-v.b*ih;
+ /* KIT rule 33 (MAIN 130 KIT CHECK, owner 22:02Z «size of this person too small»): the focus figure stands at the STAGE standard body = min(KIT_FIG.h × layer height, KIT_FIG.maxPx) × fac, the same as every stage / book figure (it was the fixed XL dialog size 398 px = 0.71 of the Fold stage figure) */const std=typeof KIT_FIG==='object'?Math.min(KIT_FIG.h*A.h,KIT_FIG.maxPx):Z.h,H=std*fac(F),ih=H/Math.max(.2,(v.b-v.t)),iw=ih*(v.ar||.42),cx=A.w/2,floor=A.h-K.floorPad[m];let top=floor-v.b*ih;
  const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;head=need}
  F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H};
  const s=F.img.style;s.left=(cx-iw/2)+"px";s.top=top+"px";s.width=iw+"px";s.height=ih+"px";

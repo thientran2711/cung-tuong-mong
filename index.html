@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình","b":"a4752a658e2c","h":[{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"}]};
+window.CTM_BI={"s":"24883e24+","t":"2026-11-24T02:44Z","c":"SELF-MERGE LAND thin-p1: merge LIVE 14ba8768 (jbal2.js: kept both independent BAL blocks mgp/mgpc/mgpb + j7c; index.html/sw.js rebuilt)","b":"96a2fa00970b","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -92860,7 +92860,7 @@ function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig
  F.close=()=>close(F);F.destroy=()=>destroy(F);F.figRect=()=>F.img.getBoundingClientRect();F.skipOpen=()=>{F.opening=false;[...F.anims].forEach(a=>{try{a.finish()}catch(e){}})};
  animateOpen(F);return F}
 function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:.05},Z=typeof KIT_SIZE==="object"?KIT_SIZE.fig.XL:{h:398,cw:220};
- const H=Z.h*fac(F),ih=H/Math.max(.2,(v.b-v.t)),iw=ih*(v.ar||.42),cx=A.w/2,floor=A.h-K.floorPad[m];let top=floor-v.b*ih;
+ /* KIT rule 33 (MAIN 130 KIT CHECK, owner 22:02Z «size of this person too small»): the focus figure stands at the STAGE standard body = min(KIT_FIG.h × layer height, KIT_FIG.maxPx) × fac, the same as every stage / book figure (it was the fixed XL dialog size 398 px = 0.71 of the Fold stage figure) */const std=typeof KIT_FIG==='object'?Math.min(KIT_FIG.h*A.h,KIT_FIG.maxPx):Z.h,H=std*fac(F),ih=H/Math.max(.2,(v.b-v.t)),iw=ih*(v.ar||.42),cx=A.w/2,floor=A.h-K.floorPad[m];let top=floor-v.b*ih;
  const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;head=need}
  F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H};
  const s=F.img.style;s.left=(cx-iw/2)+"px";s.top=top+"px";s.width=iw+"px";s.height=ih+"px";
@@ -95627,7 +95627,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a4752a658e2c";window.CTM_BUILD=BUILD;
+const BUILD="96a2fa00970b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
