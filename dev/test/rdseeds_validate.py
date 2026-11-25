@@ -114,6 +114,11 @@ def check_hoi(v, rid, o, h, clim, titles):
         g = steps(v, rid, f'{lab} gain', op.get('gain'), ok, True)
         l = steps(v, rid, f'{lab} loss', op.get('loss'), oks, False)
         if g != ST or l != ST: v.e(rid, f'{lab}: Σgain {g} / Σloss {l} must both be {ST} (laws 2/3)')
+        # thin-p8 r2: an option about Thái hậu (only) must not GAIN Hoàng hậu's liking, and the reverse (a loss may be a snub of the other one)
+        ot = ' '.join([op.get('n') or '', op.get('rt') or '', op.get('rf') or ''])
+        TH = 'Thái hậu' in ot; HH = 'Hoàng hậu' in ot or '{hh}' in ot; G = op.get('gain') or {}
+        if TH and not HH and 'hh' in G: v.e(rid, f'{lab}: the option is about Thái hậu but gains «hh» (Hoàng hậu)')
+        if HH and not TH and 'th' in G: v.e(rid, f'{lab}: the option is about Hoàng hậu but gains «th» (Thái hậu)')
         for k in set(op.get('gain') or {}) & set(op.get('loss') or {}):
             v.e(rid, f'{lab}: «{k}» is both gained and lost')
     if clim:
