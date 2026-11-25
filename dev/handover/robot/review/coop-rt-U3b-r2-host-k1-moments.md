@@ -1,0 +1,4 @@
+# Moments — co-op room U3b-r2 (code U5HB) · host (Fold) k1 · cn/cn_chu · seed 2 · casual newcomer
+- Y1 Tháng tư thượng tuần · Hành sự · ODD · result card again «Sai Tiểu Hoàn dò la Hoàng hậu Diêu Hoán Khê … ta không được gì, cũng không mất gì» — a spy errand that yields nothing, same «no gain no loss» line as the Tư trang card; feels like the game ignoring me. shot: shots-coop-rt-U3b-r2-host-k1/now.png (06:55Z)
+- Y1 Tháng tư · header · DELIGHTED (small) · toast «Tiểu Hoàn đã đi dò la Diêu Hoán Khê, về khắc 3» shows servants as living people.
+- Y1 Tháng tư trung tuần · both seats · FRUSTRATED · ROOM U5HB STUCK again, same picture as QH9Y: host «Buổi sáng» ✓ Hết buổi «Đợi hảo hữu» (a 56-item «Tin báo» dialog open), guest «Buổi trưa» Hết buổi «Chờ hảo hữu…». 15 min no step. Aborted (lives not real). Also BORED/ODD: «Tin báo» 56 tin mới in one scroll is a wall of text for a newcomer. shots: shots-coop-rt-U3b-r2-{host,guest}-k1/

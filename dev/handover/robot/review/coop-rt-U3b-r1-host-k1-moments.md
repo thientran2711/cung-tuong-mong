@@ -1,0 +1,10 @@
+# Moments — co-op room U3b-r1 · host (Fold 755x1000) · life k1 · cn/cn_chu · persona: casual newcomer (bot=sens, seed 1)
+Game: LIVE github.io (origin/main 225c5c08 at start). Format: game date · screen · feeling · what happened · shot.
+
+- Y1 Tháng ba thượng tuần · title (cold load) · CONFUSED/FRUSTRATED · first load of the site shows only the art, no buttons for 10–60 s (asset card «thỉnh tranh vẽ» sits at the bottom); a newcomer would think the page is dead. Shots not kept (harness).
+- Y1 Tháng ba thượng tuần · Mời hảo hữu dialog · ODD · code shown as «ÁM HIỆU YSK8» (CSS uppercase) — harness regex missed it (harness bug, patched locally, reported to Foreman B).
+- Y1 Tháng ba thượng tuần · Tư trang · ODD · «Tự chọn đồ» result card: «ta không được gì, cũng không mất gì» (cost 0 khắc) — a choice that gives nothing feels pointless to a newcomer. shot: shots-coop-rt-U3b-r1-host-k1/now.png (06:26Z)
+- Y1 Tháng ba thượng tuần · Tư trang · CONFUSED · bottom-right pink button «Chờ hảo hữu…» is the only sign that I'm waiting on my friend; not clear what I may do meanwhile (everything else still tappable).
+- Y1 Tháng ba thượng tuần · Tư trang · DELIGHTED (small) · item card «Ô cài tóc — Tinh phẩm … Đã biết: Đúng phẩm» is clear and pretty; lists what it gives (Sắc +3).
+- Y1 Tháng ba trung tuần · Diên Khánh điện map + «Tâm trạng · Ta» dialog · FRUSTRATED · 15 min with no game-clock step: robot kept tapping the map «Diên Khánh điện · 1 bóng người» and reopening the mood dialog (Tâm trạng · Ta shows «bị Tể Hương Ngưng làm nhục · còn 4 khắc», Buồn nhẹ); the dialog has two ✕ (inner + outer book page) and a «Kéo xuống» hint. Bug row: stuck 15 min (harness unstick ✕ fired). shot: shots-coop-rt-U3b-r1-host-k1/stuck-1.png
+- Y1 Tháng ba trung tuần · both seats · FRUSTRATED/ODD · ROOM QH9Y STUCK (2 × 15 min incl. harness unstick ✕ + reload-rejoin): host at «Buổi sáng» (Hết buổi pressed, green ✓, «Đợi hảo hữu»), guest at «Buổi trưa» (Hết buổi, «Chờ hảo hữu…») = calendar desync between seats (cause 4 family). Neither seat can move; both just wait. Room aborted by runner (lives not real, not counted). shots: shots-coop-rt-U3b-r1-{host,guest}-k1/stuck-1.png
