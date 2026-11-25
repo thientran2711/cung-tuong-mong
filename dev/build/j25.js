@@ -33,7 +33,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=R
  t.className="rtoast "+(seal==="BẠI"?"bad":seal==="XONG"?"sure":"ok");t.innerHTML=`<b class="seal">${seal}</b><div class="rt"><b>${title}</b><div class="rd">${d.map(([k,v,now,inv])=>`<span class="ef ${(inv?-v:v)>0?(inv?"r":"g"):(inv?"g":"r")}">${k} ${now-(inv?-v:v)} → ${now}</span>`).join('<span class="ksep">·</span>')||'<span class="ef n">không đổi chỉ số</span>'}</div>${why?`<small>${why}</small>`:""}<small class="past">Chạm để đóng · đầy đủ ở Nhật ký</small></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),7000)};
 /* verdicts: deck cards by their roll, sure acts 'XONG', scheme acts by their own outcome words */
-(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100)&&oddsSure(a))?"sure":r;return r}})();
+(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100)&&oddsSure(a)&&a.oin==null)?"sure":r;/* a staged act (a.oin) shows its first step's THÀNH / BẠI */return r}})();
 (function(){const f=window.doAct;window.doAct=function(i,k){window.__actK=k;return f.apply(this,arguments)}})();
 /* stop the buổi from turning over under the result: wait a little longer */
 (function(){const r0=render;render=function(){const L=advLock;if(!S||S.dead||Q.length||S.mg||used<BAL.time.khac||L)return r0.apply(this,arguments);advLock=true;const ret=(function(){const a=advLock;advLock=true;return r0.apply(this,arguments)}).apply(this,arguments);setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&S&&!S.dead&&!S.mg)nextBuoi()},2600);return ret}})();

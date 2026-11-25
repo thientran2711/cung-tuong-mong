@@ -44,7 +44,7 @@ function illCards(){const A=[];const i=illOf(S);
  if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,inner:1,oi:treatO(S,"ty"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"ty"))});
   if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,inner:1,oi:treatO(S,"self"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"self"))} (Y thuật bậc ${S.arts.y})`,go:()=>log(treat(S,"self"))});
   A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,inner:1,oi:treatO(S,"rest"),k:4,w:{suc:15},x:`khỏi bệnh: ${chanceW(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"rest"))})}
- else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,inner:1,k:1,w:{sung:BAL.tw.g.ill},x:`${BAL.tw.g.illWk} tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra (Danh -${BAL.tw.g.illDanh}, cấm túc ${punishMonths()} tháng): ${chanceW(fakeIllRisk())}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
+ else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,inner:1,oi:100-fakeIllRisk()/* law 7 (review/m-fix-3): the corner word = the whole road, the months of being found out included */,k:1,w:{sung:BAL.tw.g.ill},x:`${BAL.tw.g.illWk} tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra (Danh -${BAL.tw.g.illDanh}, cấm túc ${punishMonths()} tháng): ${chanceW(fakeIllRisk())}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
  return A}
 
 /* ================= THE TUẦN'S FORTUNE: xin xăm ================= */

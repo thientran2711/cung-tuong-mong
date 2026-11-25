@@ -52,7 +52,11 @@ function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;
   {n:"Đọc binh thư, sử sách",t:"Học mưu kế người xưa, xem lòng người.",c:{...BAL.ag.cx.book.c},o:BAL.ag.cx.book.o,w:{...BAL.ag.cx.book.w},cx:"book",x:typeof alLightNote==="function"?alLightNote("book"):""},
   {n:"Tụng kinh, làm việc thiện",t:"Thắp hương ở Bảo Hoa điện, bố thí kẻ nghèo.",c:{...BAL.ag.cx.sutra.c},o:BAL.ag.cx.sutra.o,w:{...BAL.ag.cx.sutra.w}},
   {n:"Thưởng cung nữ",t:`Ban cho ${S.maid.name} vòng bạc, giữ lòng nàng.`,c:{...BAL.ag.cx.maidR.c},o:BAL.ag.cx.maidR.o,w:{...BAL.ag.cx.maidR.w}}];
- if(!S.preg&&S.tamco>=50)A.push({n:"Giả mang thai",t:"Mua chuộc thái y, độn bụng, chờ tháng thứ chín tráo con.",c:BAL.tw.fakePreg,o:od(S.tamco),w:{sung:BAL.tw.g.preg[0],th:BAL.tw.g.preg[1]},l:{danh:BAL.tw.g.preg[2]},x:"có 'thai'; tháng 9 phải tráo con, lộ là bị ban chết",go:()=>{S.preg=1;S.fake=1;S.hidden=false;S.pregWk=wk()}});
+ /* Giả mang thai = a STAGED road (review/m-fix-3, law 7): the corner word is the WHOLE road (oi = j8 fpRoad: the first step × no exposure in
+    9 months × the month-10 swap), the first step rolls at oin (runOpt), the book is read for real (fpLast) and the later danger is a Kèm. */
+ if(!S.preg&&S.tamco>=50){const o1=od(S.tamco),nr=fpNoRec(S,wk()),rd=fpRoad(S,o1,1,nr),bk=fpLast(S,wk());
+  A.push({n:"Giả mang thai",t:"Mua chuộc thái y, độn bụng, chờ tháng thứ chín tráo con.",c:BAL.tw.fakePreg,o:100,inner:1,oin:o1,oi:rd,w:{sung:BAL.tw.g.preg[0],th:BAL.tw.g.preg[1]},l:{danh:BAL.tw.g.preg[2]},
+   x:`có 'thai'; tháng 9 phải tráo con · kèm: sổ Kính sự phòng ${bk.n?`ghi đêm cuối ${bk.gap} tuần trước (${nr?"không khớp":"khớp"} tháng thai)`:"chưa ghi đêm nào (không khớp tháng thai)"} · lộ hay tráo hỏng thì bị ban chết (tội khi quân): ${chanceW(100-Math.round(rd*100/Math.max(1,o1)))}`,go:()=>{S.preg=1;S.fake=1;S.hidden=false;S.pregWk=wk();S.khBook=0}})}
  return A}
 function artActs(){const A=[],r=S.arts;
  const D=BAL.deck;/* one table + one odds formula with the NPC's same act (BAL.deck, j75 deckOdds) */
@@ -100,10 +104,11 @@ function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAM
 function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
 function runOpt(a){if(!canPay(a))return null;window.__oddsSoft="";const capd=oddsCapped(a);if(capd&&!roll(BAL.odds.hi)){oddsSoft(a.n,a.c);return false}/* ODDS CAP: a formerly-sure act fails softly (j63 oddsSoft) */
   const o0=a.o==null?100:a.o,raw=(o0>=100?o0:oddsOf(a))+lotB(S,a.dom),/* oddsOf(a) = the odds the card shows (review/shown-odds-one-path optOdds) */o=o0>=100?(capd?BAL.odds.hi:100):oddsCl(raw);/* 2f3: one rule with NPC cards (jagacts3 p3Run): + lotB, cap BAL.odds */
-  const ok=o0>=100||agTry(raw);if(!ok&&agSoft(raw)){oddsSoft(a.n,a.c);return false}/* raw odds at the cap = a sure act: the ONE soft fail (j63 oddsSoft, OD 17/11 ~17:35Z) */
+  const st=a.inner&&a.oin!=null;/* a STAGED act (review/m-fix-3): its corner word is the whole road (a.oi); its FIRST step rolls here at a.oin */
+  const ok=st?roll(oddsCl(+a.oin+lotB(S,a.dom))):(o0>=100||agTry(raw));if(!ok&&!st&&agSoft(raw)){oddsSoft(a.n,a.c);return false}/* raw odds at the cap = a sure act: the ONE soft fail (j63 oddsSoft, OD 17/11 ~17:35Z) */
   const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);
   apply(ok?(a.w||{}):(a.l||{}));
-  {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
+  {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100||st?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
   if(ok){if(a.go)a.go()}else if(a.fail)a.fail();
   return ok}
 function cardCost(a){return a.k||(a.c&&a.c.suc<=-20?4:a.c&&(a.c.suc||a.c.bac||a.c.duc)?2:1)}

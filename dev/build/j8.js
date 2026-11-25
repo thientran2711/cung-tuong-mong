@@ -374,11 +374,25 @@ function sendMaid(a){const m=a.maid;const rise=roll(BAL.rk.maidRise);a.maid=a===
 function ntP(){try{return typeof ntPace==="function"?ntPace()||1:1}catch(e){return 1}}
 function anMonth(p){const F=BAL.anFade;const recent=(p.nightLog||[]).filter(w=>wk()-w<=F.wk).length/ntP();p.an=cl((p.an||0)-Math.max(F.min,F.base-recent*F.night),0,100)}
 
+/* FAKE PREGNANCY ROAD (review/m-fix-3, laws 2/3/4/6a/7, robot M4): ONE set of numbers (BAL.tw.g.fakeX) for the card's whole-road word (j2
+   fpRoad), the monthly exposure below and the counter-plays (j22 «Hối lộ Kính sự phòng sửa sổ», «Báo sảy thai»). The book is read for real:
+   fpNoRec = no night in nightLog within fakeX.recWk tuần before the day she announced (pregWk) and the book not doctored (khBook); the
+   verdict cites the real record (fpBook: how many nights the book holds and how far the last one lies from the announcement). */
+function fpX(){return BAL.tw.g.fakeX}
+function fpNoRec(p,w){if(!p||p.khBook)return false;const W=w==null?(p.pregWk||0):w;return !(p.nightLog||[]).some(x=>W-x>=0&&W-x<=fpX().recWk)}
+function fpCatch(p,nr){const X=fpX();return (p.doctor?X.catchDoc:X.catch)+(nr?X.noRec:0)}
+function fpSwapO(p){const X=fpX();return odA(p,X.swap[0]+(p.tamco||0)*X.swap[1]+eyes(p)*X.swap[2])}
+/* % the whole road ends well from month pg on: first step o1 (100 when already done) × no exposure in the months left × the month-10 swap */
+function fpRoad(p,o1,pg,nr){const q=fpCatch(p,nr)/100,m=Math.max(0,10-(pg||1));return Math.round((o1==null?100:o1)*Math.pow(1-q,m)*fpSwapO(p)/100)}
+function fpLast(p,w){const W=w==null?(p.pregWk||0):w;const L=(p.nightLog||[]).filter(x=>x<=W);return {n:L.length,gap:L.length?W-Math.max(...L):null}}
+function fpBook(p,w){const r=fpLast(p,w),who=p===S?"ngươi":p.name;return r.n?`Sổ Kính sự phòng ghi ${r.n} đêm thị tẩm của ${who}, đêm cuối cách ngày báo có thai ${r.gap} tuần`:`Sổ Kính sự phòng chưa ghi đêm thị tẩm nào của ${who}`}
+
 /* ================= THE MONTH FOR EVERY CONSORT ================= */
 function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
- if(p.fake){const noRec=!(p.nightLog||[]).some(w=>(p.pregWk||0)-w>=0&&(p.pregWk||0)-w<=6);
-  if(roll((p.doctor?1.5:3)+(noRec?4:0))){const why=noRec?"Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân":"Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân";if(me){deathSentence(why);return""}deathSentence(p,why);return `${p.name} giả mang thai bị lật tẩy. `}
-  if(p.preg>=10){p.preg=0;p.fake=0;if(roll(odA(p,30+p.tamco/2+eyes(p)*4)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
+ if(p.fake){const noRec=fpNoRec(p);
+  if(!me&&noRec&&roll(fpX().npcExit*(p.tamco||0)/100)){p.preg=0;p.fake=0;p.hidden=false;ap(p,{sung:-fpX().exitSung});return `${p.name} báo sảy thai. `}/* two-way: her «Báo sảy thai» (j22) */
+  if(roll(fpCatch(p,noRec))){const why=noRec?`${fpBook(p)}: tháng thai không khớp sổ, giả mang thai bị lật tẩy, tội khi quân`:"Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân";if(me){deathSentence(why);return""}deathSentence(p,why);return `${p.name} giả mang thai bị lật tẩy. `}
+  if(p.preg>=10){p.preg=0;p.fake=0;if(roll(fpSwapO(p)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
   return""}
  let ev="";if(p.preg===4&&p.hidden){p.hidden=false;if(me)ghenAll(BAL.ghen.preg,"ngươi mang long thai");ev+=me?"Bụng đã lộ, cả cung biết ngươi có thai. ":`${p.name} có thai đã lộ. `}
  if(p.preg<10){let risk=(p.preg<=3||p.preg>=7?6:2)*(typeof BAL==="object"&&BAL.mort&&BAL.mort.on?BAL.mort.birth.misX:1)+(p.suc<BAL.pgRisk.lowSucAt?BAL.pgRisk.lowSuc:0);if(p.anthai)risk/=2;

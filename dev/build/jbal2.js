@@ -2038,3 +2038,16 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
+
+/* DELAYED-RISK ROADS (review/m-fix-3, laws 2/3/4/6a/7, robot M4): the numbers of every road whose danger comes LATER, read by the card's
+   whole-road word, the later roll and the counter-plays alike.
+   fakeX = Giả mang thai (j2 card, j8 pregMonthP, j22 counter-plays; her and every consort the same):
+     catch / catchDoc = monthly % another physician finds the fake out (catchDoc while she has a Thái y tâm phúc); noRec = + that % while the
+     Kính sự phòng book has no night within recWk tuần before the day she announced (and the book was not doctored, khBook);
+     swap = [base, ×Tâm cơ, ×tai mắt] odds of the month-10 baby swap; exitO / exitTam / exitDoc = odds of «Báo sảy thai» (base + Tâm cơ/exitTam
+     + exitDoc with a Thái y tâm phúc); exitSung = Sủng lost when the "baby" is lost; exitDanh = Danh lost when the false miscarriage is
+     seen through (cấm túc, sev 1 — never death: getting out costs less than being caught); npcExit = % per month (× her Tâm cơ / 100) a
+     consort whose book does not match ends her own fake the same way (two-way).
+   wdHide = «Giấu đi, im lặng» (j92, a lost ngự tứ kept secret): % it comes out when it falls due. */
+Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,4],exitO:40,exitTam:3,exitDoc:20,exitSung:3,exitDanh:6,npcExit:30}});
+BAL.eff.j92.wdHideCatch=45;
