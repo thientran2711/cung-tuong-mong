@@ -51,8 +51,24 @@ function leaveRoom(){try{if(CW.on){if(CW.base)mark();record()}}catch(e){}try{if(
 /* solo sổ picked on the title (Tiếp tục kiếp này / Kiếp mới / the home "Chơi một mình" that clicks it): leave the room first */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots button[data-load],#slots button[data-new]");if(!b)return;
  if(b.dataset.ask==="1")return;leaveRoom()},true);
-/* the in-game title button while in a room: leave it (kept in the list, "Trở lại phòng" rejoins) */
-(function(){const m=$("menu");if(!m)return;const m0=m.onclick;m.onclick=function(){if(CW.on&&!(Q.length&&S&&!S.dead))leaveRoom();return m0&&m0.apply(this,arguments)}})();
+/* the in-game title button (☰ «Ô lưu») while in a room: review/robot-coop-fix-7 — it NO LONGER leaves the room. It used to: the menu's ✕ then
+   left the bare #title cover with 0 buttons and the friend waited «Đợi hảo hữu trở lại» for ever (rooms HCEP, EEWJ, PDXY, K6TA, NB8G, V8UE, AZ9J).
+   Now ☰ opens the co-op life's own menu (below): «Trở lại cuộc chơi» / the kit ✕ go back to the running game; the room is left ONLY by
+   «Rời phòng», confirmed, and the friend is told. (The old reason to leave here — a solo sổ loaded from the title rebuilt into the co-op life —
+   is kept by the capture above: a solo sổ loaded or started from the title still leaves the room first.) */
+/* the friend is told: a "say" relay line (Worker t:"say" → t:"said" to the other seat), read by jcooplobby's freeze panel («Hảo hữu đã rời phòng») */
+const BYE="ctm:roi-phong";window.CTM_ROOM_BYE=BYE;
+function leaveTold(){try{if(COOP.state.status==="open")COOP.send("say",{text:BYE})}catch(e){}
+ /* the say goes out through COOP's ordered send queue: close the socket after it */
+ return new Promise(r=>setTimeout(()=>{leaveRoom();r()},350))}
+function lifeMenu(){const c=room();const fr=friendTxt();
+ return `<div class="kpmenu n4" data-coop-life="1"><button class="kbtn k1" data-tgo="game">Trở lại cuộc chơi<small>Phòng ${esc(c)}${fr?" · Hảo hữu: "+esc(fr):""}</small></button>`+
+  `<button class="kbtn alt" data-tgo="leave">Rời phòng<small>Báo hảo hữu, giữ phòng để trở lại</small></button><button class="kbtn alt" data-tgo="past">Sổ luân hồi</button><button class="kbtn alt" data-tgo="opt">Thiết lập</button></div>`}
+let ASK=false;
+function askLeave(after,no){if(ASK)return;ASK=true;
+ try{kitConfirm({title:"Rời phòng?",lines:["Hảo hữu được báo ngươi đã rời phòng; hậu cung dừng lại chờ ngươi.","Phòng vẫn giữ trong sổ: Cùng hảo hữu, Trở lại phòng là chơi tiếp đúng chỗ cũ."],yes:"Rời phòng",
+  onYes:()=>{ASK=false;leaveTold().then(()=>{try{if(typeof after==="function")after();else showTitle()}catch(e){console.error(e)}})},onNo:()=>{ASK=false;try{if(typeof no==="function")no()}catch(e){}}})}catch(e){ASK=false;console.error(e)}}
+window.CTM_ROOM_LIFE={menu:lifeMenu,ask:()=>askLeave(),askThen:askLeave,leave:leaveTold};
 /* menu list (kit: .kslot section = h4.kpst + kitRows + .kslot-a .kbtn, the same parts as the solo sổ in j74) */
 const NO=["một","hai","ba"];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

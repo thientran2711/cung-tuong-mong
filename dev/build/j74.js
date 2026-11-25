@@ -98,7 +98,15 @@ try{drawSlots()}catch(e){}
 function xioReset(){try{XIO.m="";XIO.msg="";XIO.imp=null;XIO.to=0;XIO.ask=0;XIO.code=""}catch(e){}}
 function numVi(n){try{return window.VP&&VP.num?VP.num(n):String(n)}catch(e){return String(n)}}
 function lastSlot(){const F=[1,2,3].filter(n=>loadSlot(n));if(!F.length)return 0;return F.includes(SLOT)?SLOT:F[0]}
-function homeMenu(){const n=lastSlot();let info="";
+/* review/robot-coop-fix-7 (co-op «bare #title» family): a LIFE BEHIND the menu = the life ☰ was opened from and can go on: a solo life,
+   or a co-op life whose room is still open on this seat. Its menu then has a way back to it (the kit ✕ / «Trở lại cuộc chơi»), and a
+   co-op life's menu offers only ways that keep the room (leaving = «Rời phòng», confirmed, the friend is told — jslots CTM_ROOM_LIFE). */
+function lifeBehind(){try{if(typeof S==="undefined"||!S||typeof S!=="object"||S.dead)return false;if(!S.coopRoom)return true;
+ return !!(window.COOPW&&COOPW.on&&window.COOP&&COOP.state&&COOP.state.room===S.coopRoom&&COOP.state.status!=="off")}catch(e){return false}}
+function coopLife(){return lifeBehind()&&!!S.coopRoom}
+window.CTM_LIFE_BEHIND=lifeBehind;
+function homeMenu(){if(coopLife()&&window.CTM_ROOM_LIFE)try{return CTM_ROOM_LIFE.menu()}catch(e){console.error(e)}
+ const n=lastSlot();let info="";
  if(n){const d=loadSlot(n);if(d&&d.S)info=[`${slotWho(d.S)} ${d.S.name}`,slotDate(d.S)].filter(Boolean).join(" · ")}
  const B=n?`<button class="kbtn k1" data-tgo="slots" data-cstab="solo">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots" data-cstab="solo">Kiếp mới</button>`
           :`<button class="kbtn k1" data-tgo="slots">Bắt đầu<small>chọn sổ, xem Phúc duyên</small></button>`;
@@ -119,18 +127,30 @@ function mount(){const M=$("modal");if(!SM||Q[0]!==SM||M.hidden)return;const box
  noSeal(M);const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-tgo="${PG==="notes"?"opt":"home"}">‹ Lui</button>`}
 function dropAll(){const M=$("modal");park();[HM,SM].forEach(m=>{if(!m)return;const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)});HM=SM=null;
  if(M&&M.classList.contains("kptitle")){M.classList.remove("kptitle","kpthome","kpscene");if(T.hidden&&Q.length)showModal();else M.hidden=true}}
-function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"))}
+function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"));homeMr()}
+/* the home card's own close (kit ✕ / tap outside / Esc, KIT 32.10 reads #mr): back to the life behind; no life behind (first open, after a
+   death, a room left) = no ✕ at all — closing it used to leave the bare #title cover with no button on it (co-op rooms HCEP, EEWJ, PDXY, K6TA) */
+function homeMr(){const M=$("modal");if(!HM||Q[0]!==HM||!M||M.hidden)return;const mr=$("mr");if(!mr)return;
+ const h=lifeBehind()?`<button class="kbtn alt" data-tgo="game">‹ Lui</button>`:"";if(mr.innerHTML!==h)mr.innerHTML=h}
+/* back to the life behind the menu: the title and its cards go, the game's own cards come back, nothing reloads (a co-op seat stays in its room) */
+function backToGame(){if(!lifeBehind())return false;PG="home";T.dataset.pg="home";T.hidden=true;dropAll();
+ /* a game card that arrived while the menu was up (co-op room) was put on the title layer (j79 KP18): it is the game's again */
+ try{Q.forEach(m=>{if(m&&/\bkptitle\b/.test(m.cls||"")&&!/\b(kcloud|kcoop)\b/.test(m.cls||""))m.cls=m.cls.replace(/\s*\bkptitle\b/g,"").trim()})}catch(e){}
+ const M=$("modal");if(M)M.classList.remove("kptitle","kpthome","kpscene");if(Q.length)showModal();try{render()}catch(e){console.error(e)}return true}
+window.CTM_BACK_TO_GAME=backToGame;
 function subOpen(pg){dropAll();if(pg==="opt"){xioReset();try{wireOpt();wireXio()}catch(e){}try{if(window.CTM_CLOUD)CTM_CLOUD.wire()}catch(e){}try{if(window.CTM_OFFLINE)CTM_OFFLINE.wire()}catch(e){}}
  if(pg==="slots")drawSlots();
  SM=kitModal({scene:true,kind:"notice",title:HEAD[pg]||"",sub:(pg==="slots"&&csGet()==="coop"?SUBH.slotsco:SUBH[pg])||"",html:`<div class="kpt-mount" data-pg="${pg}"></div>`,cls:"kptitle"});mount()}
 function pastBody(){let h="";try{h=pastHTML()||""}catch(e){}h=h.replace(/^<h3>Sổ luân hồi<\/h3>/,"");
  if(!/pcrow|Kiếp \d/.test(h))h=`<p class="past">Chưa có kiếp nào được ghi.</p>`+h;return h}
-function go(pg,focus){if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg;if(T.hidden){dropAll();return}
+function go(pg,focus){if(pg==="game"){if(backToGame())return;pg="home"}
+ if(pg==="leave"){try{if(window.CTM_ROOM_LIFE)CTM_ROOM_LIFE.ask()}catch(e){console.error(e)}return}
+ if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg;if(T.hidden){dropAll();return}
  if(pg==="home")homeOpen();else subOpen(pg);
  const M=$("modal");if(M)M.scrollTop=0;
  if(focus!==false){const f=pg==="home"?document.querySelector("#modal.kptitle .kpmenu .kbtn"):document.querySelector("#modal.kptitle #mr .kbtn");if(f)f.focus({preventScroll:true})}}
 /* ONE close-then-open path for every ☰ entry that goes back to the game (Tiếp tục, Xem lại lời dặn on the home page AND inside Thiết lập): close the menu cards, load the sổ, nothing of the menu is left behind. window.kitMenuResume() */
-function resumeGame(){const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(!lb)return false;PG="home";dropAll();lb.click();return true}
+function resumeGame(){if(coopLife())return backToGame();const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(!lb)return false;PG="home";dropAll();lb.click();return true}
 window.kitMenuResume=resumeGame;
 $("modal").addEventListener("click",e=>{const M=$("modal");if(!M.classList.contains("kptitle"))return;const b=e.target.closest("button[data-tgo]");if(!b)return;e.stopPropagation();const g=b.dataset.tgo;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
  if(b.dataset.cstab){csSet(b.dataset.cstab);if(g==="slots")try{drawSlots()}catch(x){}}
@@ -143,12 +163,17 @@ const t0=showTitle;showTitle=function(){const was=T.hidden;park();const r=t0.app
 window.showTitle=showTitle;
 const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";return m0&&m0.apply(this,arguments)}}
 new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
+/* LAW 11 guard (robot-coop-fix-7): #title is never shown without its menu. Any path that closes the last title-layer card while #title stays up
+   (the home card's ✕ before this fix, jcloud / jcooplobby drop() after a pull, a lobby ‹ Lui) ends here: back to the life behind, else the home menu. */
+let bareT=0;function bareCheck(){bareT=0;const M=$("modal");if(T.hidden||!M||!M.hidden)return;if([...document.querySelectorAll("#coopfz,.kmov,#kroul")].some(x=>x.getClientRects().length>0&&getComputedStyle(x).visibility!=="hidden"))return;/* fixed layers: offsetParent is null */
+ window.__ctmBare=(window.__ctmBare||0)+1;if(!backToGame())go("home",false)}
+new MutationObserver(()=>{if(!bareT)bareT=setTimeout(bareCheck,250)}).observe($("modal"),{attributes:true,attributeFilter:["hidden"]});
 /* after every module has loaded (the kit panel, j79, wraps showModal later in the bundle): wrap outermost, then first paint */
 setTimeout(()=>{try{
  ["wireOpt","wireXio","pdTitle"].forEach(wrapPark);
  const s0=showModal;showModal=function(){if(T.hidden&&(HM||SM)){const a=HM,b=SM;park();HM=SM=null;[a,b].forEach(x=>{const i=x?Q.indexOf(x):-1;if(i>=0)Q.splice(i,1)});const M=$("modal");if(M)M.classList.remove("kptitle","kpthome","kpscene")}
   else park();
-  const r=s0.apply(this,arguments);try{const M=$("modal");if(!M.hidden&&Q[0]&&(Q[0]===HM||Q[0]===SM)){noSeal(M);if(Q[0]===SM)mount()}}catch(e){console.error(e)}return r};
+  const r=s0.apply(this,arguments);try{const M=$("modal");if(!M.hidden&&Q[0]&&(Q[0]===HM||Q[0]===SM)){noSeal(M);if(Q[0]===SM)mount();else homeMr()}}catch(e){console.error(e)}return r};
  window.showModal=showModal;
  T.dataset.pg="home";if(!T.hidden&&PG==="home"&&!HM)go("home",false)}catch(e){console.error(e)}},0);
 }catch(e){console.error(e)}})();
