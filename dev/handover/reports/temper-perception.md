@@ -33,3 +33,12 @@ T1 archived; T1b (session_01D3E3NaH1eX32YRAhiQCYnb) told: motiveMe unchanged; je
 
 ## Open for the reviewer / next
 (a) NPC-rate check of the mood term (J95.stat.gate before/after) — not run (handover step 4). (b) wording answers → TP_LAB + VANPHONG rows. (c) merge T1 when it passes.
+
+## HANDOVER T2b → T2c (rollover at ~32 % context, 25/11 ~09:40Z)
+READY sha for review stays **3119cf02** (game code). Branch head **fa9d8925** adds ONLY two WIP measure files (no game change).
+Open task from ROOT D (09:15Z): **NPC mood-term rate check** (law 1: NPC gây sự rates with BAL.tp.moodM 10 vs 0) → add the numbers here.
+What was tried (all on a fixed seed, both arms):
+1. `dev/measure/temper-perc-mood.js` page driver: `nextBuoi`/`endTurn` loop does NOT advance the calendar — `endTurn` is held by the night flow (jnf: waits for her night choice, `S.nfX.st="wait"`) and by `S.mg` mini-games; `window.nfOn=()=>false` let one arm advance one tuần only. Driving `rivalsBuoi`/`rivalsTurn` directly gives 0 motiveOK calls (the hostile gate is called from the khắc agent sim `j95sync`, run by the `spend` wrapper in j95.js ~L518 and by goTo / endTurn wrappers).
+2. `dev/measure/runb.js` (bot life runner) + INP2 module `dev/measure/intpmood.js` (counters ready: calls / pass / block / byMood / deeds / byKind; arm off = `XJS='BAL.tp.moodM=0'`): the bot life TIMEOUTs at turns 0 with `S.mg:true` (stuck in a mini-game) — same "robot runner stuck on main" T1 reported.
+Next (successor): either (a) use the real-tap robot (review/robot-realtap `dev/test/robot-rt.js`, as T1's `temper-hh-rt.js` / `intemper-rt.js` on review/temper-outburst do) with `intpmood.js` evaluated after boot, a few lives per arm; or (b) fix the page driver: per step `spend(1)` ×4 (j95sync runs) + resolve the night (set the jnf night done) + clear `S.mg`, then `endTurn`; check the calendar moves (`when()`) in BOTH arms before counting. Early sample (one arm, ~1 tuần): 275 NPC hostile-gate calls, 11 pass, 1 owed to mood — too short to conclude.
+Also still open: wording answers from CO-NGU (routed by ROOT D via FOR MAIN 136 → FOREMAN_D_STATUS.md) → TP_LAB + VANPHONG rows; merge review/temper-outburst when it passes (keep the jemoact eaDo `tpAt` snapshot).
