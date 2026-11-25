@@ -3693,3 +3693,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? | D free
 - ~23:24Z ART-SLOTS 7f22c202 LOOKED: painted gates ✓ (232/232 slots); fix: iPad stage too small → re-video, then queue to LC18 (code + CDN files land together).
 - ~23:31Z ART-SLOTS bdc83200 LOOK PASS → queued LC18 after q1. MAKEUP-SET r2 0b5e7339 (start sets ✓) — r3 pending (white face box, duplicate note).
 - ~23:35Z LOOK PASS: AUDIO-IPAD 01f258e4 (sound -22.8 dB offline video; root CORS-silent CDN music + not in offline cache) → LC18 first after q1; IPAD-SIZE 7eb0154b (rightcol 0.731→0.597, Fold 0.587) → LC18; map line → OB-PHU. TINBAO-WORDS 2ce7c2f6 sent back (Sổ ghi sentence, k20 proof, stray underline). Open Q for sếp: sound default ON for home-screen app (SND_DEFAULT=false).
+- ~23:36Z ROLL: context 33 % ≥ 29 % → TAKEOVER_MAIN_148.md written; opening MAIN CHÍNH 148; disabling 147's 4 scheduled tasks.
