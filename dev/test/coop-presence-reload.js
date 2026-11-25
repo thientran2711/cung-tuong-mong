@@ -18,7 +18,7 @@ const WURL=process.argv[2]||'http://127.0.0.1:8788';
 const ONLINE_S=+process.env.ONLINE_S||20,IDLE_S=+process.env.IDLE_S||70,LATE_S=+process.env.LATE_S||8;
 const ONLY=(process.env.ROWS||'').split(',').filter(Boolean);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);
-const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined&&!c?' '+JSON.stringify(x).slice(0,1500):''))};
+const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined&&!c?' '+JSON.stringify(x).slice(0,+process.env.DUMP||1500):''))};
 const DCL={waitUntil:'domcontentloaded'};
 const CO=()=>{const c=window.COOP;if(!c||!c.state)return{};const s=c.state;return{st:s.status,seat:s.you,peer:!!s.peerOnline,both:!!s.bothIn,week:s.week,
   key:(s.week||0)+':'+((typeof S!=='undefined'&&S&&S.buoi)||0),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base),bend:!!(window.COOPW&&(COOPW.bend||COOPW.pend))}};
@@ -54,11 +54,16 @@ async function bothOnline(A,B,ms){const t0=Date.now();while(Date.now()-t0<ms){co
 /* one buổi for both: each presses, the room key moves on both */
 async function advance(A,B,ms=90000){const k0=(await co(A)).key;await press(A);await press(B);const t0=Date.now();
  while(Date.now()-t0<ms){const a=await co(A),c=await co(B);if(a.key!==k0&&c.key!==k0&&a.key===c.key)return true;await clear(A);await clear(B);await press(A);await press(B);await sleep(300)}return false}
-/* rejoin after a reload, like a player: the title's «Cùng hảo hữu» › «Trở lại phòng» (or «Vào phòng» on a ?room= link) */
-async function rejoin(o){await o.p.waitForFunction(()=>typeof start==='function'&&window.__ctmBuilt===1,null,{timeout:180000}).catch(()=>{});await sleep(1500);
- for(let i=0;i<3;i++){if((await co(o)).st==='open')break;if(await tapText(o.p,/^Vào phòng$/,1500))break;await tapText(o.p,/^(Chơi cùng bạn|Cùng hảo hữu)/,3000);if(await tapText(o.p,/^Trở lại phòng$/,4000))break}
- const t0=Date.now();while(Date.now()-t0<90000){await clear(o);const c=await co(o);if(c.st==='open'&&c.world)return true;await sleep(400)}return false}
-async function reload(o){await o.p.reload(DCL);return rejoin(o)}
+/* rejoin after a reload, like a player: the title's «Cùng hảo hữu», then «Trở lại phòng» of THIS room (data-room = the code; never another
+   room, never «Mời hảo hữu»). The page is loaded WITHOUT ?room= (that link joins by itself and a second tap would make a twin). */
+async function rejoin(o,code){await o.p.waitForFunction(()=>typeof start==='function'&&window.__ctmBuilt===1,null,{timeout:180000}).catch(()=>{});await sleep(1500);
+ const t0=Date.now();let tapped=0;
+ while(Date.now()-t0<120000){const c=await co(o);if(c.st==='open'&&c.world)return true;
+  if(c.st!=='open'&&c.st!=='connecting'&&c.st!=='retry'&&Date.now()-tapped>15000){
+   const r=await o.p.evaluate(code=>{const vis=b=>b&&b.offsetParent!==null&&!b.disabled;const rb=document.querySelector('button[data-coop="resume"][data-room="'+code+'"]');if(vis(rb)){rb.click();return'resume'}
+    const t=[...document.querySelectorAll('button')].find(b=>vis(b)&&/^(Chơi cùng bạn|Cùng hảo hữu)/.test(b.textContent.trim()));if(t){t.click();return'co'}return''},code).catch(()=>'');if(r&&process.env.RJDBG)L('rejoin tap',r,code,JSON.stringify(c));if(r==='resume')tapped=Date.now()}
+  if(c.st==='open')await clear(o);/* only once in the room: before that #modal is the room list, whose last button is «Mời hảo hữu» (a NEW room) */await sleep(500)}return false}
+async function reload(o){const code=await o.p.evaluate(()=>COOP.code);await o.p.goto(BASE,DCL);return rejoin(o,code)}
 async function idle(A,B,s){/* nobody touches anything for s seconds (each page keeps only its own socket keep-alive), sampling presence */
  let bad=null;const t0=Date.now();while(Date.now()-t0<s*1000){const a=await co(A),c=await co(B);if(!(a.st==='open'&&c.st==='open'&&a.peer&&c.peer)&&!bad)bad={at:Math.round((Date.now()-t0)/1000),a,c};await sleep(2000)}return bad}
 async function row(id,name,A,B,fn){if(ONLY.length&&!ONLY.includes(id))return;L(id,name);
@@ -79,9 +84,9 @@ async function row(id,name,A,B,fn){if(ONLY.length&&!ONLY.includes(id))return;L(i
  ok(await advance(A,B),'set-up: the room advances one buổi before any reload');
  await row('R1','guest reload',A,B,async()=>{ok(await reload(B),'R1 guest rejoined after reload');if(process.env.WSDBG)console.log(JSON.stringify(await B.p.evaluate(()=>window.__wsLog),null,0))});
  await row('R2','host reload',A,B,async()=>{ok(await reload(A),'R2 host rejoined after reload')});
- await row('R3','both reload together',A,B,async()=>{await Promise.all([A.p.reload(DCL),B.p.reload(DCL)]);const [x,y]=await Promise.all([rejoin(A),rejoin(B)]);ok(x&&y,'R3 both rejoined after reload')});
+ await row('R3','both reload together',A,B,async()=>{const code=await A.p.evaluate(()=>COOP.code);await Promise.all([A.p.goto(BASE,DCL),B.p.goto(BASE,DCL)]);const [x,y]=await Promise.all([rejoin(A,code),rejoin(B,code)]);ok(x&&y,'R3 both rejoined after reload')});
  await row('R4','guest reload while the host already ended her buổi',A,B,async()=>{await press(A);await sleep(800);ok(await reload(B),'R4 guest rejoined after reload')});
- await row('R5','old socket closed late (new tab first, old tab closes later)',A,B,async()=>{const old=B.p;B.p=await B.page();await B.p.goto(BASE,DCL);const r=await rejoin(B);
+ await row('R5','old socket closed late (new tab first, old tab closes later)',A,B,async()=>{const code=await B.p.evaluate(()=>COOP.code);const old=B.p;B.p=await B.page();await B.p.goto(BASE,DCL);const r=await rejoin(B,code);
    await sleep(LATE_S*1000);await old.close().catch(()=>{});ok(r,'R5 seat rejoined from the new tab')});
  await row('R6','host idle while the guest waits ready',A,B,async()=>{await press(B);await sleep(1000)});
  await row('R7','stale view: the host loses the «guest is back» presence',A,B,async()=>{await A.p.evaluate(()=>{window.__lostBack=true});ok(await reload(B),'R7 guest rejoined after reload');
