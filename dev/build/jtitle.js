@@ -22,7 +22,7 @@ function kitTitleWorn(p){try{if(!p)return null;const w=p===S?S.titleWorn:(p.titl
 function kitHieuJoin(r,p){try{const h=p===S?S.hieu:p&&p.hieu;if(!h||!r||/^Hoàng hậu/.test(r)||/Phế|lãnh/i.test(r))return r;return h+" "+String(r).toLowerCase()}catch(e){return r}}
 window.kitHieuJoin=kitHieuJoin;
 const KDH_ART={};
-function kdhArt(t){if(KDH_ART[t]===undefined){KDH_ART[t]=false;const im=new Image();im.onload=()=>{KDH_ART[t]=true};im.onerror=()=>{};im.src="img/kit/title-plate-"+t+".webp"}return KDH_ART[t]===true}
+function kdhArt(t){if(KDH_ART[t]===undefined){/* offline-fast: a plate the offline set does not list is never asked for (404 online, hole offline); manifest not read yet → ask later */const hv=typeof kitAssetHas==="function"?kitAssetHas("img/kit/title-plate-"+t+".webp"):true;if(hv===null)return false;KDH_ART[t]=false;if(hv===false)return false;const im=new Image();im.onload=()=>{KDH_ART[t]=true};im.onerror=()=>{};im.src="img/kit/title-plate-"+t+".webp"}return KDH_ART[t]===true}
 /* K-GE-2 (review/kit-ge): the «Thiên mệnh» plate (tier 8) in TWO tones, same shape: sh "t" = thiện (gold-white), "a" = ác (gold-crimson). The tone comes from o.sh, the title's .sh,
    or the grand-ending key suffix (id "ge_<branch>_<n>t|a"); a title without a tone draws the plain tier plate. */
 function kdhTone(t,o){const s=(o&&o.sh)||t.sh||([t.key,String(t.id||"").replace(/^dh-/,"").split("@")[0]].map(k=>(/^ge_.+_\d+([ta])$/.exec(String(k||""))||[])[1]).find(Boolean));return s==="t"||s==="a"?s:""}
