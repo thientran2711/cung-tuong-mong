@@ -28,7 +28,7 @@ function accAskO(k,a){a=a||S;if(k==="dtd"||k==="thu"){let o=45+(rkOf(a)-4)*8+mm(
 function accName(k){try{return k==="home"?palName("home"):(typeof palName==="function"&&(PLNAME[k]||k[0]==="r")?palName(k):placeOf(k).n)}catch(e){return placeOf(k).n}}
 /* the full state of a map place for her right now: grey reason (access first, then khắc / confinement) */
 function accState(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
- if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
+ if(S.out||S.confined)return{why:mapSelfWhy(),self:1};/* map-self-why: one reason, shown on her own spot only */
  const a=accessOf(S,k);const tc=k===S.place?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+2);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(1)&&!st.empAway;return st}
  if(!walkOk(tc))return{why:walkWhy(tc)}; /* the road home is a walk like any other (OD L1976) */
@@ -113,7 +113,7 @@ const ACC_LOCK=`<svg class="mlock" viewBox="0 0 12 14" width="10" height="12" ar
 (function(){const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);
  try{h=h.replace(/<button class="mtile" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,k,attrs,inner)=>{const st=accState(k);if(st.here)return all.replace('class="mtile"','class="mtile ahere"');if(!st.why)return all;
    if(accSpillOk(k,st))return all.replace(/<span class="mchip">[^<]*<\/span>/g,"").replace(/\sdisabled(?=[\s>])/,""); /* the walk spills: a plain open tile (day-khắc audit) */
-   inner=inner.replace(/<span class="mchip">[^<]*<\/span>/g,"");inner=inner.replace('<span class="mband">',`<span class="mband"><span class="mchip agw">${st.why}</span>`);
+   inner=inner.replace(/<span class="mchip">[^<]*<\/span>/g,"");if(!st.self)inner=inner.replace('<span class="mband">',`<span class="mband"><span class="mchip agw">${st.why}</span>`);
    const acts=st.kind?`<span class="tacts">${accMini(k,st,1).replace(/<\/?span class="macts">/g,"")}</span>`:"";
    return `<div class="mtile ${st.walk?"awalk":"agrey"}" data-ak="${k}"${attrs.replace(/\sdisabled/g,"")}>${inner}${acts}</div>`}); /* awalk: open, only farther than the khắc left (walk spill) — not greyed as locked (review/dudo-lock) */
   h=h.replace('<div class="pmap">',`<div class="ph"><button class="btn" data-acinfo="1">ⓘ Ra vào cung cấm<small>ai được vào đâu, lúc nào</small></button></div><div class="pmap">`)}catch(e){}

@@ -30,7 +30,7 @@ function j77Bound(n){return dayWhy(n)||`hết khắc trong ngày (cần ${n} kh�
 function j77In(k){if(!S||S.dead||S.place===k)return;let tc=1;try{tc=travel(S.place,k)}catch(e){}if(walkOk(tc)){goTo(k);return}const P=walkSpill(k,{pass:1});if(P&&P.ok)walkSpillGo(k,{pass:1})}
 /* the map state of a place (same shape as j41's; prices: walk tc, ask 1+tc, sneak 1+tc) */
 accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
- if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
+ if(S.out||S.confined)return{why:mapSelfWhy(),self:1};/* map-self-why (s3e-display-fix): one reason, shown on her own spot only (j27) */
  const a=accessOf(S,k);const tc=k===S.place?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=dayFit(tc+1);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=dayFit(tc+1)&&!st.empAway;return st}
  if(!j77Kh(tc)){const P=typeof walkSpill==="function"?walkSpill(k):null;return{why:j77WalkWhy(tc,k),tc,walk:1,spill:!!(P&&P.ok)}} /* home too (OD L1976): a long road home spills like every walk; spill: the walk only runs on into the next buổi = OPEN (day-khắc r2); every reader asks accSpillOk(k,st), never !st.why alone */
