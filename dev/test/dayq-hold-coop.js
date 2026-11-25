@@ -82,6 +82,9 @@ async function runCase(o,A,Sx){const p=o.p;const r={seat:o.name,A,S:Sx,bad:[]};c
     closed: her week end never went, the partner sat on «Chờ hảo hữu…». Then the room still turns one week. */
  for(const X of [Ho,G]){const tag=X.name+' R (no-clock board)';for(let i=0;i<3;i++){await clear(Ho);await clear(G)}
   await Ho.p.evaluate(()=>{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()});await sleep(800);
+  /* her buổi must be OPEN for the first check (week() may leave a seat on Sẵn sàng): finish that buổi for both first */
+  const free=o=>o.p.evaluate(()=>!COOPW.bend&&!COOPW.pend&&!COOPW.pendBuoi&&!(COOPW.nReady&&COOPW.nReady())&&!(COOPW.tm.od&&COOPW.tm.od()));
+  for(let t0=Date.now();Date.now()-t0<60000&&!(await free(X)&&await free(X===Ho?G:Ho));){await press(Ho,3000);await press(G,3000);for(let i=0;i<3;i++){await clear(Ho);await clear(G);await sleep(400)}}
   const op=await X.p.evaluate(()=>{window.__dz=0;try{tsDressGame(Object.keys(TS_THEME)[0],()=>{window.__dz=1})}catch(e){return e.message}return __T.ovOpen()});
   if(op!==true){console.log('skip '+tag+' board n/a',op);continue}
   await X.p.evaluate(()=>__T.src('S4'));await sleep(1500);
