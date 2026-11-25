@@ -27,9 +27,15 @@
 Object.assign(BAL,{tp:{on:1,
  /* base Δ thiện cảm of one onlooker per deed (− harsh, + kind); a deed not listed is not judged */
  base:{dapdo:-1,mang:-2,danh:-5,khac:-3,gaysu:-3,pham:-3,cham:-2,ke:-2,khoe:-1,khoc:1,tui:1,thuong:1,tiec:1,
-  provoke:-3,humil:-4,vent:-3,gossip:-1,help:1,apol:1,mediate:1},
+  provoke:-3,humil:-4,vent:-3,gossip:-1,help:1,apol:1,mediate:1,
+  soat:-2,bove:-1,treo:-1,noi:-2,nghi:-2,quo:-2,cai:-1,okho:-2,qgian:-1,qhac:-1,khon:-1,vuive:1},
+ /* REVIEW B1 (LAW 11): every outburst reaction of every kind of person → the deed it is judged as (jemoact R_ + jfeel BAL.feel.act; keys of
+    base judge themselves). A reaction not here and not in base hurts or helps nobody in front of others (her own fast, prayer, letter home,
+    a sleepless night, work …): «self» in dev/measure/temper-judged.js. */
+ map:{kexau:"ke",ohoi:"ke",caugat:"mang",noimoc:"cham",khoetai:"khoe",mhoi:"cham",ban:"thuong",eyen:"tiec",mvui:"tiec",qvui:"tiec",
+  sk:"khoc",okhoc:"khoc",mcai:"cai",kquay:"dapdo",ovui:"vuive",kvui:"vuive"},
  /* the deeds that count as an outburst / as a harm for the labels */
- harm:["danh","khac","humil","ke","gaysu"],
+ harm:["danh","khac","humil","ke","gaysu","soat","noi","nghi","quo","okho"],
  hear:.5,friend:1.5,foe:.5,approve:1,kindWk:24,forgive:.5,forgiveV:.7,forgiveTr:["Nhân","Nghĩa"],
  tagN:3,goodK:.5,goodKind:1.2,evilK:1.5,evilOan:3,reason:.6,noReason:1.3,pubOan:40,
  tellUp:30,tellHost:30,empK:.5,hiCap:2,cap:{th:6,hh:8,sung:4},capWk:36,max:12,days:3,keep:40,
@@ -38,13 +44,15 @@ Object.assign(BAL,{tp:{on:1,
 /* the deeds' virtue tags (jtrong DEED: +1 honours, −1 offends), design table (c) */
 Object.assign(DEED,{dapdo:{"Kiệm":-1,"Lễ":-1},mang:{"Nhân":-1},danh:{"Nhân":-1,"Lễ":-1},khac:{"Nhân":-1,"Lễ":-1},gaysu:{"Lễ":-1,"Khiêm":-1},
  pham:{"Lễ":-1,"Đễ":-1,"Tín":1,"Trung":1},cham:{"Khiêm":-1,"Nhân":-1},ke:{"Tín":-1},khoe:{"Khiêm":-1},khoc:{"Nhân":1},tui:{"Nhân":1},
- thuong:{"Nhân":1,"Kiệm":-1},tiec:{"Nghĩa":1,"Kiệm":-1},humil:DEED.humiliate,vent:DEED.provoke,apol:DEED.apologise});
+ thuong:{"Nhân":1,"Kiệm":-1},tiec:{"Nghĩa":1,"Kiệm":-1},
+ soat:{"Nhân":-1,"Tín":-1},bove:{"Lễ":-1},treo:{"Lễ":-1,"Nhân":-1},noi:{"Nhân":-1},nghi:{"Tín":-1,"Nhân":-1},quo:{"Nhân":-1,"Lễ":1},
+ cai:{"Lễ":-1},okho:{"Nhân":-1,"Nghĩa":-1},qgian:{"Lễ":-1},qhac:{"Khiêm":-1,"Trung":1},khon:{"Đễ":-1},vuive:{"Nghĩa":1},humil:DEED.humiliate,vent:DEED.provoke,apol:DEED.apologise});
 const TP={stat:{deed:0,eye:0,hear:0,up:0,zero:0,lab:{good:0,evil:0},gate:{ok:0,no:0}},fd:0,tw:0,pk:null};
 function tpOn(){try{return !!(typeof S!=="undefined"&&S&&BAL.tp&&BAL.tp.on&&!window.__tpOff&&!S.dead)}catch(e){return false}}
 function tpS(){S.tp=S.tp||{q:[],m:{},r:{},c:{},n:0};const T=S.tp;T.q=T.q||[];T.m=T.m||{};T.r=T.r||{};T.c=T.c||{};return T}
 /* keys: "me" her, "emp", "th", a consort id (jmem's memKey: one key style) */
-function tpK(p){try{if(p==="th")return"th";return typeof memKey==="function"?memKey(p):p===S?"me":p&&p.id!=null?String(p.id):null}catch(e){return null}}
-function tpP(k){if(k==="me")return S;if(k==="emp")return S.emp||null;if(k==="th")return"th";try{const v=RV(+k);return v&&v.alive&&!v.out?v:null}catch(e){return null}}
+function tpK(p){try{if(p==="th"||(S.thO&&p===S.thO))return"th";if(S.emp&&p===S.emp)return"emp";if(p&&p!==S&&typeof relMS==="function"&&relMS(p)){const k=relKey(p);return k?"x"+k:null}return typeof memKey==="function"?memKey(p):p===S?"me":p&&p.id!=null?String(p.id):null}catch(e){return null}}
+function tpP(k){if(k==="me")return S;if(k==="emp")return S.emp||null;if(k==="th")return"th";if(/^x/.test(k)){try{return relMSOf(k.slice(1))}catch(e){return null}}try{const v=RV(+k);return v&&v.alive&&!v.out?v:null}catch(e){return null}}
 function tpRid(k){return k==="me"||k==="emp"||k==="th"?k:"v"+k}
 function tpCons(p){return !!p&&p!=="th"&&p!==S.emp&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p)))}
 function tpName(p){try{return p===S?"ngươi":p==="th"?"Thái hậu":p===S.emp?"Hoàng thượng":p.queen?"Hoàng hậu":p.name||""}catch(e){return""}}
@@ -56,8 +64,14 @@ function tpMoodM(a){try{const B=BAL.tp;if(!B||!B.on||window.__tpOff||typeof emoG
 /* her motive toward t: the SAME gate the NPCs pass (law 1, design (d) Option A) */
 function motiveMe(t,kind){try{return motiveOK(S,t,kind||"provoke",1)}catch(e){return{ok:true,why:""}}}
 /* ---------- where the deed happens + who stands there ---------- */
-function tpWhere(X){try{const w=typeof j95whereId==="function"?j95whereId(j95id(X)||(X===S.emp?"emp":"")):null;if(w&&w.place)return w.place}catch(e){}
+function tpWhere(X){try{const w=typeof j95whereId==="function"?j95whereId(j95id(X)||(X===S.emp?"emp":(S.thO&&X===S.thO)||X==="th"?"th":"")):null;if(w&&w.place)return w.place}catch(e){}
+ const a=tpAnchor(X);if(a)return tpWhere(a);
  try{return X===S?(S.place||"home"):X===S.emp?null:whereOf(X)}catch(e){return null}}
+/* a doer outside the ONE record stands where the person he serves stands: a servant by the mistress (relOwner), a child by its mother,
+   a nữ quan by the Hoàng hậu who runs the six palaces, a minister / an official man before Hoàng thượng at court */
+function tpAnchor(X){try{if(!X||X===S||X===S.emp||X==="th"||X===S.thO||tpCons(X))return null;const k=typeof eaKind==="function"?eaKind(X):"";
+ if(k==="s")return (typeof relOwner==="function"&&relOwner(X))||S;if(k==="k"){const a=allKids().find(z=>z[0]===X);return a?(a[1]||S):S}
+ if(k==="o"){const q=(rivals||[]).find(v=>v.queen&&v.alive&&!v.out);return q||S}if(k==="q"||k==="m")return S.emp||null}catch(e){}return null}
 function tpEye(pl,kh,X,V){const out=[];if(!pl)return out;const R=typeof agRec==="function"?agRec():null;
  if(R&&R.P){for(const id in R.P){const x=R.P[id][kh];if(!x||!(typeof j95at==="function"?j95at(x[0],pl):x[0]===pl))continue;
    const O=id==="me"?S:id==="emp"?S.emp:id==="th"?(S.thDead?null:"th"):/^v\d+$/.test(id)?RV(+id.slice(1)):null;
@@ -80,8 +94,9 @@ function tpLab(O,X){const T=tpS(),M=T.m[tpK(O)+"|"+tpK(X)];if(!M)return"";const 
  const lab=M.o.length>=P.tagN&&kind>=P.tagN?"good":M.o.length>=P.tagN&&M.h.length>=P.tagN&&kind<P.tagN?"evil":"";
  if(lab&&lab!==M.lab)TP.stat.lab[lab]++;M.lab=lab;return lab}
 /* who it lands on: the number applied (rounded per pair, fractions carried), capped for the gate stats */
-function tpLand(O,X,d){if(!d)return 0;const T=tpS(),P=BAL.tp,pk=tpK(O)+">"+tpK(X);let f=null,mul=1;
- if(O===S.emp){f="sung";mul=P.empK}else if(O==="th")f="th";else if(O.queen&&X===S)f="hh";
+function tpLand(O,X,d){if(!d)return 0;const T=tpS(),P=BAL.tp,pk=tpK(O)+">"+tpK(X);let f=null,mul=1;if(X==="th"){X=S.thO;if(!X)return 0}
+ if(O==="th"&&!tpCons(X)){O=S.thO;if(!O)return 0}
+ if(O===S.emp&&tpCons(X)){f="sung";mul=P.empK}else if(O==="th")f="th";else if(O.queen&&X===S)f="hh";
  let v=(T.r[pk]||0)+d*mul;let n=v<0?Math.ceil(v):Math.floor(v);T.r[pk]=+(v-n).toFixed(3);if(!T.r[pk])delete T.r[pk];if(!n)return 0;
  if(f){n=Math.max(-P.hiCap,Math.min(P.hiCap,n));if(n<0){const ck=tpK(X)+":"+f,y=Math.floor(wk()/P.capWk);const C=T.c[ck]&&T.c[ck].y===y?T.c[ck]:(T.c[ck]={y,u:0});
    const room=Math.max(0,P.cap[f]-C.u);n=-Math.min(-n,room);C.u+=-n;if(!n)return 0}
@@ -112,8 +127,14 @@ function tpDeed(X,d,V,o){if(!tpOn()||!X||!BAL.tp.base[d])return null;o=o||{};if(
   tpUp(it);
   T.q.push(it);if(T.q.length>BAL.tp.keep)T.q.splice(0,T.q.length-BAL.tp.keep);
   /* she stood there: what the onlookers made of it, in the Sổ (the number shown = the number applied) */
-  if(X===S&&seen.length)try{log(`<span class="past">Người chứng kiến: ${seen.map(([O,g])=>`${tpName(O)} ${g>0?"+":""}${g}`).join(" · ")}.</span>`)}catch(e){}
+  if(X===S&&seen.length)tpWit(`Người chứng kiến: ${seen.map(([O,g])=>`${tpName(O)} ${g>0?"+":""}${g}`).join(" · ")}.`,at&&at.seq,o.line);
   return it}catch(e){console.error("tpDeed",e);return null}}
+/* REVIEW N3: the onlookers' line goes on the deed's OWN Sổ line — the next log() of this same step (the card / outburst writes its line right
+   after the deed is judged); a deed that writes no line gets it as its own line at the next khắc (j95sync) */
+function tpWit(s,seq,line){/* her card: the chooser wrote the card's own line («Khiêu khích: thành …») just before go — attach there */try{if(line&&S.logs){for(let i=0;i<Math.min(4,S.logs.length);i++)if(S.logs[i].includes(line)){S.logs[i]+=` <span class="past">${s}</span>`;return}}}catch(e){}
+ /* the deed already wrote its line during this step (logSeq moved since the deed started): append to it */try{if(seq!=null&&(S.logSeq||0)>seq&&S.logs&&S.logs.length){S.logs[0]+=` <span class="past">${s}</span>`;return}}catch(e){}
+ tpWitFlush();TP.wit=s}
+function tpWitFlush(){if(TP.wit){const s=TP.wit;TP.wit=null;try{log(`<span class="past">${s}</span>`)}catch(e){}}}
 /* someone who knows tells Hoàng thượng / Thái hậu (a teller who dislikes the doer or loves the victim; odds hashed per deed) */
 function tpUp(it){if(it.up)return;const P=BAL.tp,X=tpP(it.x),V=it.v!=null?tpP(it.v):null;if(!X)return;
  for(const k in it.j){const t=tpP(k==="me"||k==="emp"||k==="th"?k:k.slice(1));if(!t||!tpCons(t)||t===X)continue;
@@ -130,27 +151,32 @@ const TP_LAB={good:["Khẩu xà tâm Phật","Nàng biết ngươi nóng nảy m
 function tpLabOf(O){try{const P=O==="th"||O===S.emp?O:O;const M=S.tp&&S.tp.m[tpK(P)+"|me"];return M?tpLab(P,S):""}catch(e){return""}}
 /* ---------- hooks ---------- */
 /* WHEN and WHERE a deed happens = the moment it starts: a deed that costs a khắc (her cards) or moves people must be judged by who stood there THEN, not by who stands there after the khắc has turned (one rule for every hook) */
-function tpAt(X,V,pk){try{if(!tpOn()||!X)return null;const pl=pk?pk.pl:tpWhere(X);let kh=0;try{kh=pk?pk.kh:j95kh()}catch(e){}return {pl,kh,eyes:tpEye(pl,kh,X,V)}}catch(e){return null}}window.tpAt=tpAt;
+/* the deed a reaction is judged as: its own key, else BAL.tp.map, else its jfeel twin (BAL.feel.act.fx use); null = a self-only reaction */
+function tpDeedOf(k){const B=BAL.tp;if(B.base[k])return k;if(B.map[k]&&B.base[B.map[k]])return B.map[k];try{const u=((BAL.feel.act||{}).fx||{})[k];if(u&&u.use)return tpDeedOf(u.use)}catch(e){}return null}
+window.tpDeedOf=tpDeedOf;
+function tpAt(X,V,pk){try{if(!tpOn()||!X)return null;const pl=pk?pk.pl:tpWhere(X);let kh=0;try{kh=pk?pk.kh:j95kh()}catch(e){}return {pl,kh,eyes:tpEye(pl,kh,X,V),seq:S.logSeq||0}}catch(e){return null}}window.tpAt=tpAt;
 (function(){
+ if(typeof log==="function"){const l0=log;log=function(h){if(TP.wit&&h!=null){h=`${h} <span class="past">${TP.wit}</span>`;TP.wit=null}return l0.apply(this,[h].concat([].slice.call(arguments,1)))}}
  /* outbursts of every kind of person: jemoact's ONE eaDo (window.eaDo = eaDo0 + this hook, internal calls go through it too) and jfeel's feelDo */
- window.tpOut=function(p,r,o,at,feel){try{if((TP.fd&&!feel)||!o||!r||!r.k)return;const d=r.k;if(!BAL.tp.base[d])return;
+ window.tpOut=function(p,r,o,at,feel){try{if((TP.fd&&!feel)||!o||!r||!r.k)return;const d=tpDeedOf(r.k);if(!d)return;
   const V=o.target||null;if(at&&V)at.eyes=at.eyes.filter(O=>O!==V);tpDeed(p,d,V,{out:1,at,what:`${p===S?S.name:tpName(p)} ${String(r.n||"").toLowerCase()}`})}catch(e){console.error("tpOut",e)}};
  if(typeof feelDo==="function"){const f0=feelDo;feelDo=function(p,r){const at=tpAt(p,null);TP.fd++;let o;try{o=f0.apply(this,arguments)}finally{TP.fd--}
-  try{if(o&&r){const F=(fB().act.fx||{})[r.k];window.tpOut(p,{k:F&&F.use||r.k,n:r.n},o,at,1)}}catch(e){}return o};window.feelDo=feelDo}
+  try{if(o&&r){const F=(fB().act.fx||{})[r.k];window.tpOut(p,{k:r.k,n:r.n},o,at,1)}}catch(e){}return o};window.feelDo=feelDo}
  /* the shared social deeds (both sides: NPC agent deeds land through twDo, her talk options call it with paid) */
  if(typeof twDo==="function"){const t0=twDo;twDo=function(a,t,k){const at=BAL.tp.base[k]&&k!=="visit"?tpAt(a,t||null,a===S?TP.pk:null):null;TP.tw++;let r;try{r=t0.apply(this,arguments)}finally{TP.tw--}
   try{if(r&&a&&BAL.tp.base[k]&&k!=="visit")tpDeed(a,k,t||null,{at,what:String(r).replace(/<[^>]+>/g,"")})}catch(e){}return r}}
  /* NPC vents outside twDo (Trút giận cx2, pillow talk, a greeting taunt): the same rule */
  if(typeof agVent==="function"){const v0=agVent;agVent=function(v,t,k){const at=!TP.tw&&v&&t&&(k==="provoke"||k==="vent")?tpAt(v,t):null;const r=v0.apply(this,arguments);try{if(!TP.tw&&v&&t&&(k==="provoke"||k==="vent"))tpDeed(v,"vent",t,{at,what:`${v.name} trút giận lên ${tpName(t)}`})}catch(e){}return r}}
- if(typeof j95sync==="function"){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{tpTick()}catch(e){console.error("tpTick",e)}return r}}
+ if(typeof j95sync==="function"){const s0=j95sync;j95sync=function(){tpWitFlush();const r=s0.apply(this,arguments);try{tpTick()}catch(e){console.error("tpTick",e)}return r}}
  /* HER gây sự cards: the reason gate (Option A) + the deed's onlookers */
- const HOST={"Khiêu khích":"provoke","Trút giận":"vent","Hạ nhục":"humil"};
- const gate=(A,v)=>{if(!Array.isArray(A)||!v||!tpOn())return A;return A.map(a=>{const d=a&&HOST[a.n];if(!d||a.__tp)return a;const g=motiveMe(v,"provoke");
+ /* REVIEW N4: keyed by the card's deed id (tw: j2 talk cards + jtwoway twOpts), never by its name */
+ const HOST={provoke:"provoke",vent:"vent",humil:"humil"};
+ const gate=(A,v)=>{if(!Array.isArray(A)||!v||!tpOn())return A;return A.map(a=>{const d=a&&HOST[a.tw];if(!d||a.__tp)return a;const g=motiveMe(v,"provoke");
    TP.stat.gate[g.ok?"ok":"no"]++;if(!g.ok)return Object.assign({},a,{__tp:1,lock:true,t:"chưa có cớ"});
    const why=String(g.why||"").replace(/,\s*/g," · ");/* the khắc and place she chooses it in (the card is built in that khắc; its cost turns the khắc before go runs) */let pk=null;try{pk={pl:tpWhere(S),kh:j95kh()}}catch(e){}const b=Object.assign({},a,{__tp:1,x:[a.x,why?`cớ: ${why}`:""].filter(Boolean).join(" · ")});
    /* Hạ nhục runs twDo (hooked above); Khiêu khích / Trút giận change the relation directly → the deed is told here */
-   if(d!=="humil"){if(a.go){const g0=a.go;b.go=function(){const at=tpAt(S,v,pk);const r=g0.apply(this,arguments);try{tpDeed(S,d,v,{at,what:`${S.name} ${a.n.toLowerCase()} ${tpName(v)}`})}catch(e){}return r}}
-    else if(a.run){const r0=a.run;b.run=function(){const at=tpAt(S,v,pk);const r=r0.apply(this,arguments);try{tpDeed(S,d,v,{at,what:`${S.name} ${a.n.toLowerCase()} ${tpName(v)}`})}catch(e){}return r}}}
+   if(d!=="humil"){if(a.go){const g0=a.go;b.go=function(){const at=tpAt(S,v,pk);const r=g0.apply(this,arguments);try{tpDeed(S,d,v,{at,line:a.n,what:`${S.name} ${a.n.toLowerCase()} ${tpName(v)}`})}catch(e){}return r}}
+    else if(a.run){const r0=a.run;b.run=function(){const at=tpAt(S,v,pk);const r=r0.apply(this,arguments);try{tpDeed(S,d,v,{at,line:a.n,what:`${S.name} ${a.n.toLowerCase()} ${tpName(v)}`})}catch(e){}return r}}}
    else{/* Hạ nhục: twDo tells it; it uses the khắc she chose it in */const k0=a.go?"go":a.run?"run":null;if(k0){const f0=a[k0];b[k0]=function(){const o=TP.pk;TP.pk=pk;try{return f0.apply(this,arguments)}finally{TP.pk=o}}}}
    return b})};
  if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&(p.kind==="hh"?p.ref||queenP():p.kind==="rival"?(p.ref||p.v||null):null);
