@@ -6,7 +6,7 @@
   "jsClicks": 0
  },
  "segments_valid": 0,
- "segments_closed": 10,
+ "segments_closed": 11,
  "lives_finished": 0,
  "segments": [
   {
@@ -62,7 +62,7 @@
   {
    "seg": "seg11",
    "room": "7HVJ",
-   "result": "running"
+   "result": "stuck"
   }
  ]
 }

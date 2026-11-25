@@ -20,7 +20,7 @@ Context at handover: 43 % (434k / 1M), START_CTX ~3 %.
 | seg8 | 7UGM | 512cfee6 | B#9 | iPad pf/pt_tang / Fold thd/thd_sach | 11 | ~1 h | STUCK buổi split + «Tin báo»+«Để sau» (wheel on wrong scroller) |
 | seg9 | WQ55 | 512cfee6 | B#9 | Fold muoi/muoi_lau / iPad nc/nc_gian | 12 | ~50 min | STUCK story scene «Phụ tuyến · Tân quân lập uy» choices unreachable; guest saw host absent |
 | seg10 | VFB6 | 512cfee6 | B#10 | iPad bd/bd_soi / Fold dtq/dtq_huynh | 13 | ~50 min | STUCK same story scene (host in scene, guest «Đợi hảo hữu trở lại») |
-| seg11 | 7HVJ | 512cfee6 | B#11 (b49a5dd8, e7a53d76) | Fold cn/cn_than / iPad pf/pt_su | 14 | RUNNING at handover | — |
+| seg11 | 7HVJ | 512cfee6 | B#11 (b49a5dd8, e7a53d76) | Fold cn/cn_than / iPad pf/pt_su | 14 | ~25 min (week 3, buổi 15) | STUCK «Tin báo» (39 tin) + undreachable decision card «Để sau» (rect y 2046, k3btns sh 214/ch 112) on Fold even with #11; guest 1 buổi ahead. Dump u3br/seg11-7HVJ/ |
 All dumps: review/robot10-coop-saves u3br/<room>/ (latest push 331ce950). Moments logs: dev/handover/robot/review/coop-rt-U3b-*-moments.md. Bugs reported to Foreman B by message at the time (BUG FAST LANE).
 
 ## Recurring findings (for the digest)
@@ -36,3 +36,5 @@ All dumps: review/robot10-coop-saves u3br/<room>/ (latest push 331ce950). Moment
 - Room command: `SEG_MIN=120 RELOAD_AT=30 COOP_URL=http://127.0.0.1:8788 node dev/test/robot-rt-coop.js http://127.0.0.1:8081/index.html <out> host=<fold|ipad> guest=<ipad|fold> kiep=1 seed=<n> tag=<name> hostOrigin= hostRoad= guestOrigin= guestRoad=`. One room per container. Alternate device order each segment (U3b: iPad host first).
 - Stuck rule (Foreman B): on stuck dump BOTH seats (harness writes shots-<life>/stuck-N-dump.json), push to review/robot10-coop-saves u3br/<seg>-<room>/ + README, send_message Foreman B, then start next segment.
 - RERUN LIST rows for U3b are NOT done: host k1,2,5–10 and guest k1–24 still need real-ending lives; segments are the new unit (≈20 across B).
+
+## FINAL (20:55Z): seg11 closed STUCK. Tally 0 VALID / 11 closed segments, 0 lives finished. Runner stops here; successor U3b-2 session_01N1tNP2HWuJXKRafMwdgWGn (seeds 15+).
