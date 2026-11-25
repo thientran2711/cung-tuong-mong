@@ -11,19 +11,20 @@ const [,,URL,N0,Y0,P0]=process.argv;const N=+(N0||4),YRS=+(Y0||7),POL=(P0||'work
  for(const pol of POL)for(let li=0;li<N;li++){const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block',reducedMotion:'reduce'});
   await ctx.addInitScript(()=>{window.__nlInner=1;window.__exAuto=1;window.__bot=1});const p=await ctx.newPage();
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1000);
-  const r=await p.evaluate(async([pol,YRS])=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
+  await p.evaluate(([pol])=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
    window.__forceOrigin="cnv";for(let i=0;i<20;i++){start();if(isSrv())break}Q.length=0;render=()=>{};/* headless: no drawing */
-   const EX=/xuất cung|về quê|kết thúc|xuất giá|thành thân|vương phủ|tự vẫn|bỏ trốn|cao chạy/i;const y0=S.year;const Y=[];let lauM=0,lauN=0,inLau=0,err="",promos=[];
+   window.W={};const EX=/xuất cung|về quê|kết thúc|xuất giá|thành thân|vương phủ|tự vẫn|bỏ trốn|cao chạy/i;window.W={y0:S.year,Y:[],lauM:0,lauN:0,inLau:0,err:'',promos:[],lastRk:S.srv.rk};
    const pick=m=>{const ok=m.opts.map((o,k)=>[o,k]).filter(([o])=>!o.off&&!EX.test((o.n||'')+' '+(o.x||''))&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));const safe=ok.filter(([o])=>!(o.fx&&o.fx.tin<0));return (safe[0]||ok[0]||[null,0])[1]};
    const good=a=>a&&!a.done&&!a.off&&/công lao|Chủ tin \+|Chủ tin<\/b> \+/i.test(String(a.x||'')+' '+String(a.t||''))&&!/hỏng|bị phạt|Tân Giả/i.test(String(a.x||''));
-   let g=0,lastRk=S.srv.rk;
-   while(!S.dead&&!S.over&&S.year-y0<YRS&&g<40000){g++;
+window.W.pick=pick;window.W.good=good;window.W.EX=EX},[pol]);
+  let r;for(let yy=0;yy<YRS;yy++){const t0=Date.now();const st=await Promise.race([new Promise(r=>setTimeout(()=>r({err:'HANG: one year > 240 s in page'}),240000)),p.evaluate(([pol])=>{const W=window.W,pick=W.pick,good=W.good;   const yEnd=S.year+1;let g=0;while(!S.dead&&!S.over&&S.year<yEnd&&g<6000){g++;
     if(Q.length){const m=Q[0];try{if(m.opts)chooseM(pick(m));else closeModal()}catch(e){Q.shift()}continue}
     if(pol==='work'){let n=0;for(let i=0;i<deck.length&&n<3;i++){const a=deck[i];if(!a||a.done)continue;if(a.exam===2||good(a)){try{act(i)}catch(e){}n++;if(Q.length)break}}if(Q.length)continue}
-    const t=S.turn;try{S.mg=null;nextBuoi()}catch(e){err=err||e.message;break}
-    if(S.turn!==t){if(S.srv.lau>0){lauM++;if(!inLau){lauN++;inLau=1}}else inLau=0;
-     if(S.srv.rk!==lastRk){promos.push((S.srv.rk>lastRk?'+':'-')+S.srv.rk+'@y'+(S.year-y0+1)+'m'+S.month);lastRk=S.srv.rk}
-     if(S.month===1)Y.push({y:S.year-y0,rk:S.srv.rk,tin:S.tin|0,mp:Math.floor(S.srv.mp),need:srvMpNeed(S.srv.rk),max:srvMax(),danh:S.danh|0,lau:S.srv.lau})}}
-   const X=window.__exN||{};return{g,turn:S.turn,buoi:S.buoi,mg:!!S.mg,Q0:Q[0]&&Q[0].t,pol,end:S.dead?'dead':S.over?'over':'alive',age:S.age,rk:S.srv.rk,title:SRK.maid[S.srv.rk],tin:S.tin|0,danh:S.danh|0,lauN,lauM,exSit:X.srvSit||0,exPass:X.srvPass||0,promos,Y,err}},[pol,YRS]).catch(e=>({pol,err:e.message.slice(0,200)}));
-  out.push(r);console.log(JSON.stringify(r));await ctx.close()}
+    const t=S.turn;try{S.mg=null;nextBuoi()}catch(e){W.err=W.err||e.message;break}
+    if(S.turn!==t){if(S.srv.lau>0){W.lauM++;if(!W.inLau){W.lauN++;W.inLau=1}}else W.inLau=0;
+     if(S.srv.rk!==W.lastRk){W.promos.push((S.srv.rk>W.lastRk?'+':'-')+S.srv.rk+'@y'+(S.year-W.y0+1)+'m'+S.month);W.lastRk=S.srv.rk}
+     if(S.month===1)W.Y.push({y:S.year-W.y0,rk:S.srv.rk,tin:S.tin|0,mp:Math.floor(S.srv.mp),need:srvMpNeed(S.srv.rk),max:srvMax(),danh:S.danh|0,lau:S.srv.lau})}}
+return{g,y:S.year-W.y0,age:S.age,rk:S.srv.rk,end:S.dead||S.over}},[pol]).catch(e=>({err:e.message.slice(0,150)}))]);console.error('  ',pol,li,'year',yy+1,JSON.stringify(st),Math.round((Date.now()-t0)/1000)+'s');if(String(st.err).startsWith('HANG')){r={pol,err:st.err,hangYear:yy+1};break}if(st.err||st.end)break}
+  if(!r)r=await p.evaluate(()=>{const W=window.W;const X=window.__exN||{};return{end:S.dead?'dead':S.over?'over':'alive',age:S.age,rk:S.srv.rk,title:SRK.maid[S.srv.rk],tin:S.tin|0,danh:S.danh|0,lauN:W.lauN,lauM:W.lauM,exSit:X.srvSit||0,exPass:X.srvPass||0,promos:W.promos,Y:W.Y,err:W.err}}).catch(e=>({err:e.message.slice(0,200)}));r.pol=pol;
+  out.push(r);console.log(JSON.stringify(r));await ctx.close().catch(()=>{})}
  await b.close()})();
