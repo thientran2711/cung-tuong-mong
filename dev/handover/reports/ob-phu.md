@@ -45,7 +45,12 @@ Answer to her question (for MAIN, Vietnamese): giai đoạn ngoài cung là đ�
 
 ## Tests
 - dev/test/outside/route.js gained the §9 checks (same maid before/after entry, src home/land, no cmPick queued, consort from home has her→them relation).
-- Results: see bottom (filled after the runs).
+- quickcheck (alone) 53bb193c vs LIVE 5e013076: build ok · time-spill PASS · open/old save ok · perf PASS on the solo re-run (render 243/234, tab 549/471, buổi 1782/2331 ms; the first run's buổi 3768 was load noise from parallel runs) · CORE GATES: only G4 button-crawl «Ô lưu · Lui» FAIL — the SAME fail on LIVE 5e013076 (crawl run on the live build) = pre-existing, not this branch.
+- coop-e2e alone: 143/143 passed.
+- outside route.js: tt iPad 1180x820 PASS incl. new §9 checks (maid same/src home, sister consort her→them rel present). thd Fold: «did not enter the palace» + 3 follow-ons — the SAME fails on LIVE (plus LIVE fails the new check «home maid labelled palace», fixed here) = pre-existing thd jump issue in the test path, reported to MAIN.
+
+## Deliverables (CDN img/_review/ob-phu/, looked at)
+ipad-BEFORE-home-map-half.jpg · ipad-home-map-phu.jpg · fold-home-map-phu.jpg · ipad-home-map-kinh.jpg · fold-home-map-kinh.jpg · ipad-palace-entry-carry.jpg · fold-palace-entry-carry.jpg · ipad-home-tyno-card.jpg · ipad-home-thumuoi-card.jpg
 
 ## Notes for MAIN (not in this brief, seen while testing)
 - At home the bottom tab bar still reads palace names (Hành sự / Hậu cung / Giao tình / Hoàng tự) — KCTABS (Khuê phòng / Gia tộc / Giao du / Thư từ) are not applied on LIVE.
