@@ -664,12 +664,12 @@ function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of[
  /* KIT §98.7 (review/kit-fitfast): «fits and does not want wide» only gets truer as the frame grows (a bigger frame never fits less), so the FIRST qualifying size can be found from a HINT (the size this dialog / this dialog kind + viewport got last time)
    without trying every smaller size: lay the size just BELOW the hint — it must NOT qualify — then walk up from the hint. If it does qualify (the inputs changed: a picture came in) the full loop from S runs exactly as before. Same size, fewer forced layouts. */
  const ORD=["S","M","L","XL"],ok=K=>{kszLiveLay3(dlg,K);return kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))};
- const hk=dlg.dataset.kind+"|"+innerWidth+"x"+innerHeight+"|"+document.documentElement.className;let hi=ORD.indexOf(dlg.__kszP||KSZ_PHINT[hk]);let from=0;
- /* KIT §98.14 (fitfast r2, K-SAMEFRAME): the SAME frame shown again (same kind, title, speaker, option texts, viewport: the day-card menu after a talk) keeps the size it was picked at: only that size is laid out and checked, no lower-size probe */
- const sk=kszSameKey3(dlg),sp=sk&&KSZ_SAME.get(sk);let P=null;
- if(sp&&ok(sp))P=sp;
- else{if(hi>0&&!ok(ORD[hi-1]))from=hi;
- P="XL";for(let i=from;i<4;i++){const K=ORD[i];if(ok(K)){P=K;break}}}
+ /* KIT §98.14 (fitfast r2, K-SAMEFRAME): the SAME frame shown again (same kind, title, speaker, option texts, viewport: the day-card menu after a talk) gives the best hint: the size it was picked at.
+    SELSCENE-19 merge (one pick rule, EQUIV): it is a HINT like the others — the size below it is still probed, so a memo can never give a different size than the full loop. */
+ const hk=dlg.dataset.kind+"|"+innerWidth+"x"+innerHeight+"|"+document.documentElement.className,sk=kszSameKey3(dlg);
+ const hi=ORD.indexOf((sk&&KSZ_SAME.get(sk))||dlg.__kszP||KSZ_PHINT[hk]);let from=0,P="XL";
+ if(hi>0&&!ok(ORD[hi-1]))from=hi;
+ for(let i=from;i<4;i++){const K=ORD[i];if(ok(K)){P=K;break}}
  if(sk){if(KSZ_SAME.size>=60)KSZ_SAME.delete(KSZ_SAME.keys().next().value);KSZ_SAME.set(sk,P)}
  dlg.__kszP=P;KSZ_PHINT[hk]=P;/* hint + same-frame memo hold the BASE pick (first qualifying S..XL, as the plain loop gives); the pack-4 post-steps below always run on top of it (SELSCENE-19 merge, one pick rule) */
  /* KIT BUG #2c (MAIN 136 25/11, PEND:vulan M frame: #mb scrolled 16 px while the option list scrolled nothing): a frame below XL whose BODY (#mb) still scrolls after the pick goes up one size at a time; XL keeps the list as the one scroller. */
