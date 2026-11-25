@@ -25,6 +25,8 @@ const {chromium}=require('playwright');const [,,URL,WH,N,NB]=process.argv;
   const drain=async()=>{for(let i=0;i<160;i++){const d=await p.evaluate(()=>{const M=document.getElementById('modal');
     const dw=document.getElementById('dawn');if(dw&&!dw.hidden&&dw.classList.contains('on')){const bt=[...dw.querySelectorAll('button')].find(b=>b.offsetParent);if(bt){bt.click();return 'dawn'}}
     const vc=[...document.querySelectorAll('button')].find(b=>/Vào cung ngay/.test(b.textContent)&&b.offsetParent);if(vc){vc.click();return 'vc'}
+    const ov=document.getElementById('ov');if(ov&&!ov.hidden&&ov.getClientRects().length&&getComputedStyle(ov).display!=='none'){const x=[...ov.querySelectorAll('button')].find(b=>/✕|Đóng|Bỏ cuộc|Thôi/.test(b.textContent)&&b.getClientRects().length);if(x){x.click();return 'ov-x'}}
+    const kr=[...document.querySelectorAll('.kroul button')].find(b=>/Bỏ qua/.test(b.textContent)&&b.getClientRects().length&&!b.disabled);if(kr){kr.click();return 'roul-skip'}
     const kc=[...document.querySelectorAll('.kmov:not(.km-out) button,#kpodov button,#kmrew button')].find(b=>b.getClientRects().length&&!b.disabled);if(kc){kc.click();return 'scene-btn'}
     const ko=document.querySelector('.kmov:not(.km-out)');if(ko&&ko.getClientRects().length){ko.click();return 'scene-tap'}
     if(M&&!M.hidden){const o=[...M.querySelectorAll('.opt:not([disabled])')];const th=o.find(b=>/^Thôi/.test(b.textContent.trim()));if(th){th.click();return 'thoi'}if(o.length){o[0].click();return 'opt'}
