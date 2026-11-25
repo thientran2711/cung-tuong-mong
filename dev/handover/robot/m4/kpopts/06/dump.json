@@ -1,17 +1,17 @@
 {
- "buoi": 21,
- "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng tư · thượng tuần · năm thứ ba | Buổi tối",
+ "buoi": 12,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ hai Tháng tư · hạ tuần · năm thứ ba | Buổi tối",
  "build": "0756a05b",
- "at": "2026-11-25T12:29:53.367Z",
+ "at": "2026-11-25T13:02:53.251Z",
  "dump": {
-  "title": "Yến đầy tháng hoàng tử",
+  "title": "Tết Đoan ngọ · Lời mời: Thi tết dây ngũ sắc",
   "bad": 1,
   "frameBottom": 898,
-  "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 175px; --kpo-img: url(\"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-ch.webp\"); --kpo: #b8742f;",
+  "dlgClass": "dlg kpsc kpanel kdtx kszf ksz3 kszlive",
+  "dlgStyle": "--kdpw: 165px; --kpo-img: url(\"https://ctm-img.victoria-tntt.workers.dev/img/kit/kpo-ch.webp\"); --kpo: #b8742f;",
   "modalClass": "modal",
   "ksz": [
-   "dlg kpsc kpanel kszf ksz3 kszlive",
+   "dlg kpsc kpanel kdtx kszf ksz3 kszlive",
    "kszfig",
    "kszfs"
   ],
@@ -30,15 +30,15 @@
    ],
    "opts": [
     342,
-    402,
+    568,
     304,
-    483
+    317
    ],
    "kpopts": [
     342,
-    402,
+    568,
     304,
-    483
+    317
    ],
    "k3right": [
     342,
@@ -61,31 +61,25 @@
   },
   "kpoptsScroll": [
    0,
-   584,
-   483
+   559,
+   317
   ],
   "cards": [
    [
     342,
-    402,
+    568,
     304,
-    140
+    200
    ],
    [
     342,
-    548,
+    775,
     304,
-    140
+    200
    ],
    [
     342,
-    694,
-    304,
-    140
-   ],
-   [
-    342,
-    840,
+    981,
     304,
     140
    ]

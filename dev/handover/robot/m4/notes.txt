@@ -51,3 +51,6 @@ KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/02/ title=Yến đ�
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/03/ title=Lời cảnh báo bad=7
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/04/ title=Kỳ nguyệt sự bad=1
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/05/ title=Chuyện trong cung bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/06/ title=Tết Đoan ngọ · Lời mời: Thi tết dây ngũ sắc bad=1
+HELD-DUMP2 before={"kmHeld":6,"cfdbg":"[\"push 75\",\"run\",\"play 15\",\"push 76\",\"run\",\"play 15\",\"push 77\"]","nfx":"open"} after2s={"kmHeld":14,"cfdbg":"[\"push 75\",\"run\",\"play 15\",\"push 76\",\"run\",\"play 15\",\"push 77\"]","nfx":"open","cfBusy":true}
+HELD-DUMP 2026-11-25T13:03:22.065Z {"when":"Buổi tối","Q":["Tin trong cung buổi này"],"DQ":{"want":null,"t":0,"mt":0,"newsHold":1,"stat":{"held":0,"ran":0,"dropped":0,"modalHeld":59,"newsFirst":0,"kmHeld":6,"actHeld":6,"pulled":2,"actKm":3},"bz":0},"nfX":{"d":77,"st":"open","at":1795611798348,"t":10,"fr":null,"role":null,"npc":[],"nk":true},"NLP":"null","cfBusy":true,"dawn":false,"ov":false,"kmov":false,"kpodov":false,"kroul":false,"modal":false}
