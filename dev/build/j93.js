@@ -216,7 +216,10 @@ const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest"
    of it one by one into the spotlight (KIT §54.1 kitRevealHTML: the kit graded frame kitItem "xl", name, grade chip), stays ~1.3 s glowing in its
    grade colour, and settles on the shelf under the box; the silver comes last; then the list (grade chip · name · note) + Nhận.
    Tap during the reveal = skip to the end. Timings BAL.reveal (jbal2). Items arrive lowest grade first, the best one last. */
-function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
+/* KK29 (MAIN 141, E-S5 «reward popup over the ending screen»): while the ENDING card (#modal.end / .kes) is on screen, nothing opens over it: a reward box is not shown (the item is already in her chest, the log keeps the line). ONE rule: kitEndUp(). */
+function kitEndUp(){try{const M=document.getElementById("modal");return !!(M&&!M.hidden&&(M.classList.contains("end")||M.classList.contains("kes")))}catch(e){return false}}
+window.kitEndUp=kitEndUp;
+function kitReward(o){if(kitEndUp())return null;o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
  const seq=items.map(x=>({n:x.n,d:x.d,img:x.img,g:gOf(x.tier),gn:x.gn||"",k:x.k&&typeof kitItemRef==="function"&&kitItemRef({k:x.k})?x.k:""}));
@@ -312,7 +315,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:(S&&S.kend)||h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
-   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(q.pid)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
+   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!kitNoDanger(q)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
  /* the promotion visuals replace j11's stamp (sound and haptics stay) */
  W("feedback",o=>function(k,x){if(k==="promote"&&!kmReduced()){try{if(SFXN[k])sfx(SFXN[k]);vib(k)}catch(e){}return}return o.apply(this,arguments)});
  /* render: state diff + weather chip */
@@ -481,6 +484,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmPet{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(0) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(calc(var(--v) * -1)) rotate(120deg) scale(1)}}
 .km-inkov{background:transparent}
 .kmink{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+/* KIT BUG #4 (KK29, robot B1 d-robot-bugs report; MAIN 139): the death-ink banner («Hồng nhan bạc mệnh · Mở Sổ luân hồi») is a full-screen scene drawn ABOVE the ending card, so its words sat on the card rows (text on text). The ending card (#modal.end / .kes, every ending host) is held back while the ink scene plays and shows the moment it goes: ONE rule for every mourning ending. */
+body:has(.kmov.km-inkov:not(.km-out)) :is(#modal.end,#modal.kes){visibility:hidden}
 .kmblot{position:absolute;left:50%;top:46%;width:60vmax;height:auto;transform:translate(-50%,-50%) scale(.05);opacity:0;animation:kmInk calc(1.6s*var(--pace)) cubic-bezier(.3,.6,.3,1) both}
 .kmblot.b2{left:38%;top:58%;animation-delay:.25s;width:50vmax}
 .kmicap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;animation:kmFade calc(.6s*var(--pace)) ease calc(1.1s*var(--pace)) both}
