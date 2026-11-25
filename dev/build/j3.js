@@ -15,7 +15,7 @@ function eunBand(age){return Math.min(3,ageBandIx(age))}
 function pMe(){const g=rkOfFace("consort",S);return{rk:S.out?"cold":g[0],rw:S.out?"Lãnh cung":g[1],w:["me"],src:fsrc(S.fc,srcW(S)),hue:0,ini:S.name.split(" ").pop()[0],col:RCOL[S.rank]}}
 function pMsg(){const t=S&&S.court&&S.court.tq;return{src:t?courtSrc("tq",t):"img/face-eunuch-4.webp",hue:0,ini:"Hoạn",col:"#8a8aa0"}}
 function pDoc(){return{rk:"off",rw:"Thái y",w:["d"],src:fsrc(S&&S.court&&S.court.ty&&S.court.ty.fc,"img/face-physician.webp"),hue:0,ini:"Y",col:"#8fc38a"}}
-function mdH(p,cls){return `<span class="md ${cls||""}${p.rk?" rk-"+String(p.rk).split(" ").join(" rk-"):""}" style="--c:${p.col}">${p.src?`<img src="${p.src}" alt="" data-i="${p.ini}" onerror="kitImgErr(this,{text:1})">`:p.ini}</span>`}
+function mdH(p,cls){return `<span class="md ${cls||""}${kitRkCls(p)}" style="--c:${p.col}">${p.src?`<img src="${p.src}" alt="" data-i="${p.ini}" onerror="kitImgErr(this,{text:1})">`:p.ini}</span>`}
 function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */

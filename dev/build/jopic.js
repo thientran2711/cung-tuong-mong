@@ -1,7 +1,7 @@
 /* ================= jopic: OPTION CARD = COMPACT ACT CARD WITH ITS PICTURE LEFT — KIT §6.2 (owner 15/11, review/opt-pics) =================
    Owner (verbatim, repeated): "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."
    Markup dev/handover/refs/owner-option-picture-left.jpg (docs branch). Coordinator: ONE act-card form = the COMPACT card of Hậu cung (KIT §43):
-   small picture left (~1/4), title + Cần/Tốn/Được/Mất/Gợi ý rows right, height = content; tap the picture = enlarge.
+   small picture left (~1/4), title + Cần/Tốn/Được/Mất/Gợi ý rows right, height = content; tap the picture = choose (like the rest of the card).
    Owner ruling: one picture per MEANING GROUP (all "nhận lỗi / cúi đầu" share one, all "dâng lễ vật" share one …), reused everywhere.
    ONE place: every dialog option (`#modal .opts` button.ka, kit choice panel `.kpscopts`), after the j63 frame (kaNorm1) built it:
      kpOptArt(b) → `.kaart` slot (kitArtFrame, the act-card picture frame) + `.kabody` (the rows) + classes `kart kopt` → compact CSS (jk4 KIT §43,
@@ -13,7 +13,7 @@
      4. a picture the option already carries (a person's portrait .md img, an item picture) — pickers of people / items;
      5. the KIT §59 act placeholder (light / dark by kitPhTone), recorded once in CTM_MISSING_PICS as kind "opt".
    A key whose file is not on the CDN (img/_index.json) is skipped (next rule).
-   Tap / click on the picture = kitPicZoom(src) (does not choose the option). ============================================================ */
+   A tap on the picture CHOOSES the option like any other tap on the card (KK29, KIT BUG #6); kitPicZoom(src) is only for a separate control. ============================================================ */
 /* stand-ins (title → an existing act picture) shown with the 'tạm' chip: Giữ chân Hoàng thượng (night-final flip choice, main s26 23:39Z; ART REQUEST by main) */
 const KIT_OPT_TAM=[[/^Giữ chân Hoàng thượng/,"thap-den-hau-ruou-h"]];
 const KIT_OPT_RULES=[
@@ -170,7 +170,7 @@ window.kitOptStackTitle=kitOptStackTitle;
 function kitOptAvatar(b,f,who,src){try{if(!b||!f||typeof mdH!=="function")return false;const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");
  let art=b.querySelector(":scope > .kaart");if(!art){let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
   art=document.createElement("span");art.className="kaart";b.prepend(art)}
- art.innerHTML=mdH(f,"big");art.classList.add("kaav");art.dataset.kzoom=src||f.src||"";art.title="Chạm để xem tranh";
+ art.innerHTML=mdH(f,"big");art.classList.add("kaav");
  b.querySelectorAll(":scope > .md").forEach(x=>x.remove());if(kan)kan.querySelectorAll(":scope > .md, :scope > img").forEach(x=>x.remove());
  if(kan&&who&&typeof who==="object"&&typeof kitRankName==="function"&&!kan.querySelector(".knr")){const tx=String(kan.textContent||"").replace(/\s+/g," ").trim();const ix=tx.indexOf(" · ");const head=(ix>=0?tx.slice(0,ix):tx).replace(/\s*\([^)]*\)\s*$/,"").trim();
   let rn=["",who.name||""];try{if(typeof kszRankName==="function")rn=kszRankName(who)}catch(e){}
@@ -196,10 +196,10 @@ function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.ko
  /* the name chip beside the title IS already a kit avatar (mdH): it moves into the picture slot, grown to the kit "big" size — never re-cut into a loose crop */
  if(p.face&&p.chip&&p.chip.classList.contains("md")){const c=p.chip.cloneNode(true);c.classList.remove("xs","sm");c.classList.add("big");
   let ar=b.querySelector(":scope > .kaart");if(!ar){ar=document.createElement("span");ar.className="kaart";b.prepend(ar)}
-  ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");ar.dataset.kzoom=p.src;ar.title="Chạm để xem tranh";try{kitOptStackTitle(kan)}catch(e){}
+  ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");try{kitOptStackTitle(kan)}catch(e){}
   b.dataset.kopt="1";b.dataset.kopic="face:chip";b.classList.add("kart","kopt","kopav");return}
  if(p.face)try{kitOptStackTitle(kan)}catch(e){}
- art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");art.dataset.kzoom=p.src;art.title="Chạm để xem tranh";
+ art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");
  if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
 window.kitOptPic=kitOptPic;window.kpOptArt=kpOptArt;window.KIT_OPT_RULES=KIT_OPT_RULES;window.KIT_OPT_TAM=KIT_OPT_TAM;
 (function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.matches&&b.classList.contains("ka")&&b.matches(KIT_OPT_SEL))kpOptArt(b)}catch(e){}return r}})();
@@ -210,15 +210,12 @@ function kitPicZoom(src){try{if(!src)return;let z=document.getElementById("kpzoo
   z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
  z.innerHTML=`<div class="kpzf">${kitSceneArt(src,"",{shape:"tall"})}</div>`;z.hidden=false}catch(e){}}
 window.kitPicZoom=kitPicZoom;
-/* capture phase: a tap on an option's picture enlarges it and does NOT choose the option */
-document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kaart[data-kzoom]");if(!a)return;
- e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitPicZoom(a.dataset.kzoom)}catch(x){}},true);
+/* KK29 (MAIN 136 25/11, robot M3, KIT BUG #6): a tap ANYWHERE on an option card chooses it, its picture included (iPad 1180x820: the picture tap opened this lightbox and the option was never chosen). The picture is no zoom trigger any more; kitPicZoom(src) stays for a SEPARATE control (nothing in the option card calls it). */
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
 button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-weight:400;white-space:nowrap}
 #kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
-button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
 html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}
 html body button.ka.kopt.kopav>.kaart.kaav>span.md.kmini.kmini{width:100%!important;max-width:100%}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
@@ -322,7 +319,7 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
  band(pick[1]);
  /* KIT §6.2c (owner 24/11, MAIN GO): the picture is a SQUARE of the tier (pw = ph), never stretched to the card height (the #49c fill rule is gone) */
- g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function")kszEvLaw10(dl)}catch(e){}
+ g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function"){kszEvLaw10(dl);if(typeof kszTextFirst3==="function")kszTextFirst3(dl)/* law 10 text first stays after every option re-layout */}}catch(e){}
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
  if(!g.__kotRO&&typeof ResizeObserver==="function"){g.__kotRO=new ResizeObserver(()=>{if(g.__kotBusy||!g.isConnected)return;const T0=KIT_OPT.tiers[g.dataset.kot],c=kitOptCards(g);const bad=c.some(b=>b.getBoundingClientRect().height>T0.h+1||kitOptCut(b));const w=Math.round(g.clientWidth);if(bad||w!==g.__kotW){g.__kotW=w;clearTimeout(g.__kotT);g.__kotT=setTimeout(()=>kitOptTier(g),50)}});g.__kotRO.observe(g);bs.forEach(b=>g.__kotRO.observe(b))}

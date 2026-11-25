@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"51a726ba+","t":"2026-11-25T15:33Z","c":"Không còn việc nào mà mọi lựa chọn đều mờ, không lối ra.","b":"c68d9edf8ef9","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"5842f7c3+","t":"2026-11-25T16:30Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại.","b":"97a11844a48c","h":[{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -72,6 +72,8 @@ window.CTM_WAIT=window.CTM_WAIT||{
  coopAway:"đang vắng hay đứt đường xa · hảo hữu mở lại là tự vào lại",
  /* m-fix-1 (robot M4 25/11): «Sang buổi / Sang ngày mới» held because a card waits behind what she has open (jdayq gate (c): a person view, a mini-game …) */
  dqHeld:"Có tin đang chờ · xong việc đang làm đã",
+ /* button-crawl-fix-6: the card waiting is a person in her room (a visitor scene left when she changed tab): one tap on the button takes her back */
+ dqRoom:"Có người đang đợi · về phòng",
  coopWaitPeer:"Chờ hảo hữu…",
  coopWaitPeer2:"Đợi hảo hữu",
  coopWaitBuild:"Đợi cùng bản mới",
@@ -847,6 +849,8 @@ window.CTM_WAIT=window.CTM_WAIT||{
  coopAway:"đang vắng hay đứt đường xa · hảo hữu mở lại là tự vào lại",
  /* m-fix-1 (robot M4 25/11): «Sang buổi / Sang ngày mới» held because a card waits behind what she has open (jdayq gate (c): a person view, a mini-game …) */
  dqHeld:"Có tin đang chờ · xong việc đang làm đã",
+ /* button-crawl-fix-6: the card waiting is a person in her room (a visitor scene left when she changed tab): one tap on the button takes her back */
+ dqRoom:"Có người đang đợi · về phòng",
  coopWaitPeer:"Chờ hảo hữu…",
  coopWaitPeer2:"Đợi hảo hữu",
  coopWaitBuild:"Đợi cùng bản mới",
@@ -1428,7 +1432,11 @@ function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;
   {n:"Đọc binh thư, sử sách",t:"Học mưu kế người xưa, xem lòng người.",c:{...BAL.ag.cx.book.c},o:BAL.ag.cx.book.o,w:{...BAL.ag.cx.book.w},cx:"book",x:typeof alLightNote==="function"?alLightNote("book"):""},
   {n:"Tụng kinh, làm việc thiện",t:"Thắp hương ở Bảo Hoa điện, bố thí kẻ nghèo.",c:{...BAL.ag.cx.sutra.c},o:BAL.ag.cx.sutra.o,w:{...BAL.ag.cx.sutra.w}},
   {n:"Thưởng cung nữ",t:`Ban cho ${S.maid.name} vòng bạc, giữ lòng nàng.`,c:{...BAL.ag.cx.maidR.c},o:BAL.ag.cx.maidR.o,w:{...BAL.ag.cx.maidR.w}}];
- if(!S.preg&&S.tamco>=50)A.push({n:"Giả mang thai",t:"Mua chuộc thái y, độn bụng, chờ tháng thứ chín tráo con.",c:BAL.tw.fakePreg,o:od(S.tamco),w:{sung:BAL.tw.g.preg[0],th:BAL.tw.g.preg[1]},l:{danh:BAL.tw.g.preg[2]},x:"có 'thai'; tháng 9 phải tráo con, lộ là bị ban chết",go:()=>{S.preg=1;S.fake=1;S.hidden=false;S.pregWk=wk()}});
+ /* Giả mang thai = a STAGED road (review/m-fix-3, law 7): the corner word is the WHOLE road (oi = j8 fpRoad: the first step × no exposure in
+    9 months × the month-10 swap), the first step rolls at oin (runOpt), the book is read for real (fpLast) and the later danger is a Kèm. */
+ if(!S.preg&&S.tamco>=50){const o1=od(S.tamco),nr=fpNoRec(S,wk()),rd=fpRoad(S,o1,1,nr),bk=fpLast(S,wk());
+  A.push({n:"Giả mang thai",t:"Mua chuộc thái y, độn bụng, chờ tháng thứ chín tráo con.",c:BAL.tw.fakePreg,o:100,inner:1,oin:o1,oi:rd,w:{sung:BAL.tw.g.preg[0],th:BAL.tw.g.preg[1]},l:{danh:BAL.tw.g.preg[2]},
+   x:`có 'thai'; tháng 9 phải tráo con · kèm: sổ Kính sự phòng ${bk.n?`ghi đêm cuối ${bk.gap} tuần trước (${nr?"không khớp":"khớp"} tháng thai)`:"chưa ghi đêm nào (không khớp tháng thai)"} · lộ hay tráo hỏng thì bị ban chết (tội khi quân): ${chanceW(100-Math.round(rd*100/Math.max(1,o1)))}`,go:()=>{S.preg=1;S.fake=1;S.hidden=false;S.pregWk=wk();S.khBook=0}})}
  return A}
 function artActs(){const A=[],r=S.arts;
  const D=BAL.deck;/* one table + one odds formula with the NPC's same act (BAL.deck, j75 deckOdds) */
@@ -1476,10 +1484,11 @@ function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAM
 function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
 function runOpt(a){if(!canPay(a))return null;window.__oddsSoft="";const capd=oddsCapped(a);if(capd&&!roll(BAL.odds.hi)){oddsSoft(a.n,a.c);return false}/* ODDS CAP: a formerly-sure act fails softly (j63 oddsSoft) */
   const o0=a.o==null?100:a.o,raw=(o0>=100?o0:oddsOf(a))+lotB(S,a.dom),/* oddsOf(a) = the odds the card shows (review/shown-odds-one-path optOdds) */o=o0>=100?(capd?BAL.odds.hi:100):oddsCl(raw);/* 2f3: one rule with NPC cards (jagacts3 p3Run): + lotB, cap BAL.odds */
-  const ok=o0>=100||agTry(raw);if(!ok&&agSoft(raw)){oddsSoft(a.n,a.c);return false}/* raw odds at the cap = a sure act: the ONE soft fail (j63 oddsSoft, OD 17/11 ~17:35Z) */
+  const st=a.inner&&a.oin!=null;/* a STAGED act (review/m-fix-3): its corner word is the whole road (a.oi); its FIRST step rolls here at a.oin */
+  const ok=st?roll(oddsCl(+a.oin+lotB(S,a.dom))):(o0>=100||agTry(raw));if(!ok&&!st&&agSoft(raw)){oddsSoft(a.n,a.c);return false}/* raw odds at the cap = a sure act: the ONE soft fail (j63 oddsSoft, OD 17/11 ~17:35Z) */
   const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);
   apply(ok?(a.w||{}):(a.l||{}));
-  {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
+  {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100||st?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
   if(ok){if(a.go)a.go()}else if(a.fail)a.fail();
   return ok}
 function cardCost(a){return a.k||(a.c&&a.c.suc<=-20?4:a.c&&(a.c.suc||a.c.bac||a.c.duc)?2:1)}
@@ -1606,7 +1615,7 @@ function eunBand(age){return Math.min(3,ageBandIx(age))}
 function pMe(){const g=rkOfFace("consort",S);return{rk:S.out?"cold":g[0],rw:S.out?"Lãnh cung":g[1],w:["me"],src:fsrc(S.fc,srcW(S)),hue:0,ini:S.name.split(" ").pop()[0],col:RCOL[S.rank]}}
 function pMsg(){const t=S&&S.court&&S.court.tq;return{src:t?courtSrc("tq",t):"https://ctm-img.victoria-tntt.workers.dev/img/face-eunuch-4.webp",hue:0,ini:"Hoạn",col:"#8a8aa0"}}
 function pDoc(){return{rk:"off",rw:"Thái y",w:["d"],src:fsrc(S&&S.court&&S.court.ty&&S.court.ty.fc,"https://ctm-img.victoria-tntt.workers.dev/img/face-physician.webp"),hue:0,ini:"Y",col:"#8fc38a"}}
-function mdH(p,cls){return `<span class="md ${cls||""}${p.rk?" rk-"+String(p.rk).split(" ").join(" rk-"):""}" style="--c:${p.col}">${p.src?`<img src="${p.src}" alt="" data-i="${p.ini}" onerror="kitImgErr(this,{text:1})">`:p.ini}</span>`}
+function mdH(p,cls){return `<span class="md ${cls||""}${kitRkCls(p)}" style="--c:${p.col}">${p.src?`<img src="${p.src}" alt="" data-i="${p.ini}" onerror="kitImgErr(this,{text:1})">`:p.ini}</span>`}
 function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
@@ -2708,11 +2717,25 @@ function sendMaid(a){const m=a.maid;const rise=roll(BAL.rk.maidRise);a.maid=a===
 function ntP(){try{return typeof ntPace==="function"?ntPace()||1:1}catch(e){return 1}}
 function anMonth(p){const F=BAL.anFade;const recent=(p.nightLog||[]).filter(w=>wk()-w<=F.wk).length/ntP();p.an=cl((p.an||0)-Math.max(F.min,F.base-recent*F.night),0,100)}
 
+/* FAKE PREGNANCY ROAD (review/m-fix-3, laws 2/3/4/6a/7, robot M4): ONE set of numbers (BAL.tw.g.fakeX) for the card's whole-road word (j2
+   fpRoad), the monthly exposure below and the counter-plays (j22 «Hối lộ Kính sự phòng sửa sổ», «Báo sảy thai»). The book is read for real:
+   fpNoRec = no night in nightLog within fakeX.recWk tuần before the day she announced (pregWk) and the book not doctored (khBook); the
+   verdict cites the real record (fpBook: how many nights the book holds and how far the last one lies from the announcement). */
+function fpX(){return BAL.tw.g.fakeX}
+function fpNoRec(p,w){if(!p||p.khBook)return false;const W=w==null?(p.pregWk||0):w;return !(p.nightLog||[]).some(x=>W-x>=0&&W-x<=fpX().recWk)}
+function fpCatch(p,nr){const X=fpX();return (p.doctor?X.catchDoc:X.catch)+(nr?X.noRec:0)}
+function fpSwapO(p){const X=fpX();return odA(p,X.swap[0]+(p.tamco||0)*X.swap[1]+eyes(p)*X.swap[2])}
+/* % the whole road ends well from month pg on: first step o1 (100 when already done) × no exposure in the months left × the month-10 swap */
+function fpRoad(p,o1,pg,nr){const q=fpCatch(p,nr)/100,m=Math.max(0,10-(pg||1));return Math.round((o1==null?100:o1)*Math.pow(1-q,m)*fpSwapO(p)/100)}
+function fpLast(p,w){const W=w==null?(p.pregWk||0):w;const L=(p.nightLog||[]).filter(x=>x<=W);return {n:L.length,gap:L.length?W-Math.max(...L):null}}
+function fpBook(p,w){const r=fpLast(p,w),who=p===S?"ngươi":p.name;return r.n?`Sổ Kính sự phòng ghi ${r.n} đêm thị tẩm của ${who}, đêm cuối cách ngày báo có thai ${r.gap} tuần`:`Sổ Kính sự phòng chưa ghi đêm thị tẩm nào của ${who}`}
+
 /* ================= THE MONTH FOR EVERY CONSORT ================= */
 function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
- if(p.fake){const noRec=!(p.nightLog||[]).some(w=>(p.pregWk||0)-w>=0&&(p.pregWk||0)-w<=6);
-  if(roll((p.doctor?1.5:3)+(noRec?4:0))){const why=noRec?"Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân":"Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân";if(me){deathSentence(why);return""}deathSentence(p,why);return `${p.name} giả mang thai bị lật tẩy. `}
-  if(p.preg>=10){p.preg=0;p.fake=0;if(roll(odA(p,30+p.tamco/2+eyes(p)*4)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
+ if(p.fake){const noRec=fpNoRec(p);
+  if(!me&&noRec&&roll(fpX().npcExit*(p.tamco||0))){p.preg=0;p.fake=0;p.hidden=false;ap(p,{sung:-fpX().exitSung});return `${p.name} báo sảy thai. `}/* two-way: her «Báo sảy thai» (j22) */
+  if(roll(fpCatch(p,noRec))){const why=noRec?`${fpBook(p)}: tháng thai không khớp sổ, giả mang thai bị lật tẩy, tội khi quân`:"Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân";if(me){deathSentence(why);return""}deathSentence(p,why);return `${p.name} giả mang thai bị lật tẩy. `}
+  if(p.preg>=10){p.preg=0;p.fake=0;if(roll(fpSwapO(p)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
   return""}
  let ev="";if(p.preg===4&&p.hidden){p.hidden=false;if(me)ghenAll(BAL.ghen.preg,"ngươi mang long thai");ev+=me?"Bụng đã lộ, cả cung biết ngươi có thai. ":`${p.name} có thai đã lộ. `}
  if(p.preg<10){let risk=(p.preg<=3||p.preg>=7?6:2)*(typeof BAL==="object"&&BAL.mort&&BAL.mort.on?BAL.mort.birth.misX:1)+(p.suc<BAL.pgRisk.lowSucAt?BAL.pgRisk.lowSuc:0);if(p.anthai)risk/=2;
@@ -4394,7 +4417,11 @@ function setMusic(n){if(AU.curName===n&&AU.cur&&!AU.cur.dead)return;if((!AU.cur|
 function heartLoop(on){try{if(on&&auOk()){if(!AU.hb){AU.hb=mkAudio("sfx-heartbeat",true,true)}if(AU.hb&&AU.hb.paused){AU.hb.volume=OPT.sfx*.6;const p=AU.hb.play();if(p&&p.catch)p.catch(()=>{})}}else if(AU.hb&&!AU.hb.paused)AU.hb.pause()}catch(e){}}
 function sfx(n){if(!auOk())return;try{let a=AU.cache[n];if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return;const b=a.cloneNode();b.volume=OPT.sfx;const p=b.play();if(p&&p.catch)p.catch(()=>{});
  AU.duck=.45;if(AU.cur)AU.cur.volume=musVol();clearTimeout(AU.dt);AU.dt=setTimeout(()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol()},650)}catch(e){}}
-function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.place==="lc")return"bgm-cold";const m=Q[0];if(m&&(m.pid&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="night1"&&m.pid!=="night2"&&m.pid!=="shop"))return"bgm-tension";
+/* KIT §93.x «not a danger» (KK29, SELSCENE-18 request, MAIN 140): the red whole-screen wash (kitAlarm), the heartbeat and the tension music mean DANGER. A card is NOT a danger when it has a pid and any of: (1) `nodanger:1` on the card (m.nodanger, or kit panel spec.nodanger) — the per-card flag any scene sets; (2) its pid is an act picker she opened herself (KIT_ACT_PIDS, jk2b); (3) its pid starts with a KIT_NODANGER_PRE prefix (selection day: selx*, kc2Sel); (4) it is on the routine / story / invitation list KIT_NODANGER_PIDS (ksp prep night1 night2 shop nfch nfsum kyngo j71i j67 …). The older internal «already alarmed» mark q.__kmA keeps working (kitAlarm fires once per card). ONE function for the alarm (j93), the heartbeat (here) and the music (here); no other place keeps its own skip list. */
+const KIT_NODANGER_PRE=["selx","kc2Sel"];const KIT_NODANGER_PIDS=["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv","nfch","nfsum","kyngo","j71i","j67"];/* nfch / nfsum = Kính sự phòng night report + flip choice (as ksp), kyngo = a kỳ ngộ (happy encounter), j71i = Hoàng thượng's invitation (Lời mời), j67 = a story chapter she is walking (Chính tuyến / Phụ tuyến): none is a sudden threat (SELSCENE-18 list, MAIN 140) */
+function kitNoDanger(m){try{if(!m||!m.pid)return true;if(m.nodanger||m.kit&&m.kit.nodanger)return true;const p=String(m.pid);if(KIT_NODANGER_PIDS.includes(p))return true;if(typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(p))return true;return KIT_NODANGER_PRE.some(x=>p.indexOf(x)===0)}catch(e){return false}}
+window.kitNoDanger=kitNoDanger;
+function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.place==="lc")return"bgm-cold";const m=Q[0];if(m&&(m.pid&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="night1"&&m.pid!=="night2"&&m.pid!=="shop"&&!m.nodanger&&!(m.kit&&m.kit.nodanger)&&!KIT_NODANGER_PRE.some(x=>String(m.pid).indexOf(x)===0)))return"bgm-tension";
  if(m&&(m.pid==="night1"||m.pid==="night2"||m.cls==="night"))return"bgm-night";if((S.month===1||S.month===7)&&S.tuan===0)return"bgm-festival";return (S.buoi||0)===B4L?"bgm-night":"bgm-day"}
 function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&musicCtx()==="bgm-tension"))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
 /* music watchdog (review/sansang-music-fix): render() → auTick() is the only other place that wakes the music, and a mini-game / focus view
@@ -4454,7 +4481,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
  W("goTo",o=>function(k){const r=o.apply(this,arguments);if(S&&S.place===k&&k!=="home")feedback("step");if(k==="lc")feedback("ash");return r});
  W("over",o=>function(){const r=o.apply(this,arguments);auTick();return r});
- W("showModal",o=>function(){const r=o.apply(this,arguments);const m=Q[0];if(m){if(m.pid&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(m.pid)){feedback("heart");heartLoop(true)}else sfx("sfx-open");if(m.cls==="night"||m.pid==="night1"||m.pid==="night2")nightFade()}auTick();return r});
+ W("showModal",o=>function(){const r=o.apply(this,arguments);const m=Q[0];if(m){if(m.pid&&!kitNoDanger(m)){feedback("heart");heartLoop(true)}else sfx("sfx-open");if(m.cls==="night"||m.pid==="night1"||m.pid==="night2")nightFade()}auTick();return r});
  W("apply",o=>function(fx){const b=S&&S.bac;const r=o.apply(this,arguments);if(S&&!quiet&&S.bac>b)feedback("coin",{n:S.bac-b});return r});
  W("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,g=>{feedback(g>=2?"good":"bad");cb(g)})});
  const P=ACT.poison.f;ACT.poison.f=function(a,t){const r=P.apply(this,arguments);if(t===S||a===S)feedback(t===S?"poison":"ink");return r};
@@ -4610,7 +4637,7 @@ function illCards(){const A=[];const i=illOf(S);
  if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,inner:1,oi:treatO(S,"ty"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"ty"))});
   if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,inner:1,oi:treatO(S,"self"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"self"))} (Y thuật bậc ${S.arts.y})`,go:()=>log(treat(S,"self"))});
   A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,inner:1,oi:treatO(S,"rest"),k:4,w:{suc:15},x:`khỏi bệnh: ${chanceW(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"rest"))})}
- else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,inner:1,k:1,w:{sung:BAL.tw.g.ill},x:`${BAL.tw.g.illWk} tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra (Danh -${BAL.tw.g.illDanh}, cấm túc ${punishMonths()} tháng): ${chanceW(fakeIllRisk())}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
+ else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,inner:1,oi:100-fakeIllRisk()/* law 7 (review/m-fix-3): the corner word = the whole road, the months of being found out included */,k:1,w:{sung:BAL.tw.g.ill},x:`${BAL.tw.g.illWk} tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra (Danh -${BAL.tw.g.illDanh}, cấm túc ${punishMonths()} tháng): ${chanceW(fakeIllRisk())}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
  return A}
 
 /* ================= THE TUẦN'S FORTUNE: xin xăm ================= */
@@ -4725,9 +4752,10 @@ const PG={};
 function pFaceOf(p){if(!p)return{src:"",ini:"?",col:KIT_ROLE.slate};if(p.kind==="emp")return pEmp();if(p.kind==="th")return pTH();if(p.kind==="maid")return pMaid();if(p.kind==="ty")return pDoc();
  if(p.kind==="ksp")return{src:courtSrc("ksp",S.court&&S.court.ksp),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="peddler")return{src:courtSrc("ped",S.court&&S.court.ped),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="kid"&&p.ref)return kidFace(p.ref);
  if(p.kind==="hh"&&p.ref){const f=pv(p.ref);return f}if(p.ref&&p.kind!=="kid"&&p.kind!=="chest")return pv(p.ref);return{src:"",ini:p.ini,col:p.col}}
-/* button-crawl 25/11: f.rk may come as a number (the jk2b small-frame wrap hands mdH's person face in, and mdH already reads String(p.rk)) — read it as text
-   the same way, so a tap on a Hậu cung person no longer throws «f.rk.split is not a function» */
-function pcPort(f,col,status){const fr=f.rk==null?"":String(f.rk);const rb=/^c\d/.test(fr)&&RIMG[+fr.slice(1)]?`<img class="pcb2" src="https://ctm-img.victoria-tntt.workers.dev/img/${RIMG[+fr.slice(1)]}.webp" alt="" onerror="this.remove()">`:"";return `<div class="pcp${f.src?"":" noimg"}${fr?" rk-"+fr.split(" ").join(" rk-"):""}" style="--c:${col||f.col||"var(--gold)"}">${f.src?`<img src="${f.src}" alt="" data-i="${f.ini||""}" onerror="kitImgErr(this,{cls:'noimg',swap:1})">`:(f.ini||"")}${rb}${status?`<em class="pcs">${status}</em>`:""}</div>`}
+/* ONE source for the rank-ground class of a face (robot D 25/11: a person's face carried a number/object as .rk and the old string call crashed). A face's .rk is a CLASS STRING (c0..c7, th, emp, sv0-4 ...); anything else (NPC rank number, object) means "no ground". Every .rk string use goes through kitRk / kitRkCls. */
+function kitRk(f){const r=f&&f.rk;return typeof r==="string"?r:""}
+function kitRkCls(f){const r=kitRk(f).trim();return r?" rk-"+r.split(/\s+/).join(" rk-"):""}
+function pcPort(f,col,status){f=f||{};const rk=kitRk(f);const rb=/^c\d/.test(rk)&&RIMG[+rk.slice(1)]?`<img class="pcb2" src="https://ctm-img.victoria-tntt.workers.dev/img/${RIMG[+rk.slice(1)]}.webp" alt="" onerror="this.remove()">`:"";return `<div class="pcp${f.src?"":" noimg"}${kitRkCls(f)}" style="--c:${col||f.col||"var(--gold)"}">${f.src?`<img src="${f.src}" alt="" data-i="${f.ini||""}" onerror="kitImgErr(this,{cls:'noimg',swap:1})">`:(f.ini||"")}${rb}${status?`<em class="pcs">${status}</em>`:""}</div>`}
 function ghenBar(n){return `<div class="pgh"><span>Ghen <b>${n}</b></span><div class="mini"><u style="width:${cl(n,0,100)}%"></u></div></div>`}
 /* o: {f, col, name, rank (html), status, out, ghen, lines[], chips[], note, groups:[[header,[button html]]], empty, close} */
 /* KIT 48.7 (kit-rank-name): the person card header is the STACKED form — rank line over the bare name line, the rank printed ONCE (the name drops a rank it starts with;
@@ -5067,7 +5095,7 @@ function resultShow(title,before,okHint){if(!S||!before||S.dead)return;const d=R
  t.className="rtoast "+(ok?"ok":"bad");t.innerHTML=`<b class="seal">${ok?"THÀNH":"BẠI"}</b><div class="rt"><b>${title}</b><div class="rd">${d.map(([k,v])=>{const key=(RKEYS.find(x=>x[1]===k)||[])[0];const now=key?(S[key]||0):null;return `<span class="ef ${v>0?"g":"r"}">${k} ${now!=null?`${now-v} → ${now}`:(v>0?"+":"")+v}</span>`}).join('<span class="ksep">·</span>')||'<span class="ef n">không đổi chỉ số</span>'}</div>${why?`<small>${why.length>140?why.slice(0,138)+"…":why}</small>`:""}</div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),3200)}
 function wrapR(name,titleOf,okOf){const f=window[name];if(typeof f!=="function")return;window[name]=function(){const b=rsnap(),ttl=titleOf?titleOf.apply(null,arguments):"";let r;r=f.apply(this,arguments);try{if(b&&(S.logSeq||0)!==b.seq||(b&&RKEYS.some(([k])=>(S[k]||0)!==b[k])))resultShow(ttl,b,okOf?okOf(r,arguments):null)}catch(e){}return r}}
-wrapR("act",i=>deck[i]?deck[i].n:"",()=>window.__lastOk==null?null:!!window.__lastOk);
+wrapR("act",i=>deck[i]?deck[i].n:"",()=>window.__lastOk==null?null:window.__lastOk==="sure"?"sure"/* review/m-fix-3: a sure / inner act seals XONG, never a THÀNH its inner roll did not earn */:!!window.__lastOk);
 wrapR("doAct",(i,k)=>ACT[k]?ACT[k].n:"");
 wrapR("talk",oi=>{try{return talkOpts(curPeople()[popIdx])[oi].n}catch(e){return""}});
 wrapR("servAct",a=>({thuong:"Thưởng",phat:"Phạt",hoi:"Hỏi chuyện",doi:"Đổi người",che:"Che chở",mua:"Mua chuộc",doa:"Dọa tố"})[a]||"");
@@ -5268,9 +5296,22 @@ function trystNpc(m,risk,v){if(roll(risk)){m.alive=false;v.affair=null;log(`<spa
  m.trysts++;mTinhAdd(m,v,10);v.affair=m.id;v.lastTryst=wk();ap(v,{suc:BAL.eff.j22.sucTryst});
  if(!v.preg&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;const ok=(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1);v.pregMismatch=!ok}
  return `${v.name} lén gặp riêng ${m.name}`}
+/* ONE «Hối lộ Kính sự phòng sửa sổ» card (the affair pregnancy below and the fake one, review/m-fix-3): Tổng quản writes in one night */
+function kspFixCard(go){return {n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{},o:od(BAL.odb.j22.odO_3+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{bac:-80},l:{danh:-5}/* bạc only when Tổng quản takes it (canPay keeps the lock) */,x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go,fail:()=>{S.ksKnows=1}}}
+/* FAKE PREGNANCY COUNTER-PLAYS (review/m-fix-3, laws 2/3/7: the later exposure has a real way out, each with its own odds and cost):
+   - the book does not match (j8 fpNoRec) → the same «Hối lộ Kính sự phòng sửa sổ» (khBook: the monthly check drops to the physician one);
+   - «Báo sảy thai» any month: the fake ends (Sủng −exitSung); seen through → Danh −exitDanh and cấm túc (never death: getting out costs
+     less than being caught). Its Kèm shows what keeping the fake to the end still risks (j8 fpRoad from this month). NPCs: j8 npcExit. */
+(function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.fake||S.out||S.dead)return;const X=BAL.tw.g.fakeX;
+ if(fpNoRec(S))deck.unshift(kspFixCard(()=>{S.khBook=1}));
+ const keep=fpRoad(S,100,S.preg,fpNoRec(S));
+ deck.unshift({n:"Báo sảy thai",t:"Kêu đau bụng giữa đêm, nhờ thái y báo đứa bé không giữ được.",c:{},o:od(X.exitO+(S.tamco||0)/X.exitTam+(S.doctor?X.exitDoc:0)),w:{sung:-X.exitSung},l:{danh:-X.exitDanh},
+  x:`thoát khỏi thai giả (từ nay yên lòng) · kèm: giữ thai giả đến cùng thì bị ban chết: ${chanceW(100-keep)} · hỏng: bị nhìn thấu thì cấm túc ${punishMonths()} tháng`,dom:"Mưu kế",
+  go:()=>{S.preg=0;S.fake=0;S.hidden=false;S.pregWk=null;log("Ngươi báo sảy thai; cả cung tưởng ngươi mất đứa bé.")},
+  fail:()=>{S.preg=0;S.fake=0;S.hidden=false;S.pregWk=null;punish("giả sảy thai, khi quân",1)}})}})();
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
- deck.unshift({n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{},o:od(BAL.odb.j22.odO_3+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{bac:-80},l:{danh:-5}/* bạc only when Tổng quản takes it (canPay keeps the lock) */,x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false;S.khBook=1},fail:()=>{S.ksKnows=1}});
+ deck.unshift(kspFixCard(()=>{S.pregMismatch=false;S.khBook=1}));
  deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(BAL.odb.j22.odO_4+careY(S)),w:{},l:{suc:BAL.eff.j22.sucL},x:`mất đứa bé, Sức ${balSg(BAL.eff.j22.sucGo)} · hỏng: băng huyết — có thể băng huyết mà chết: ${chanceW(BAL.rk.abortDie)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:BAL.eff.j22.sucGo})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(BAL.rk.abortDie))die("Uống thuốc phá thai, băng huyết mà chết")}});
  const CF=BAL.confess;deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:oddsCl(Math.round(CF.base+(S.sung||0)/CF.sungDiv+(S.th||0)/CF.thDiv)),w:{},l:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm · hỏng: Hoàng thượng không tha — có thể bị ban chết",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")},fail:()=>{const m=manById(S.trueFather);if(m)m.alive=false;S.pregMismatch=false;deathSentence("Thú tội tư thông, Hoàng thượng không tha")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */
@@ -5491,7 +5532,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=R
  t.className="rtoast "+(seal==="BẠI"?"bad":seal==="XONG"?"sure":"ok");t.innerHTML=`<b class="seal">${seal}</b><div class="rt"><b>${title}</b><div class="rd">${d.map(([k,v,now,inv])=>`<span class="ef ${(inv?-v:v)>0?(inv?"r":"g"):(inv?"g":"r")}">${k} ${now-(inv?-v:v)} → ${now}</span>`).join('<span class="ksep">·</span>')||'<span class="ef n">không đổi chỉ số</span>'}</div>${why?`<small>${why}</small>`:""}<small class="past">Chạm để đóng · đầy đủ ở Nhật ký</small></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),7000)};
 /* verdicts: deck cards by their roll, sure acts 'XONG', scheme acts by their own outcome words */
-(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100)&&oddsSure(a))?"sure":r;return r}})();
+(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100)&&oddsSure(a)&&a.oin==null)?"sure":r;/* a staged act (a.oin) shows its first step's THÀNH / BẠI */return r}})();
 (function(){const f=window.doAct;window.doAct=function(i,k){window.__actK=k;return f.apply(this,arguments)}})();
 /* stop the buổi from turning over under the result: wait a little longer */
 (function(){const r0=render;render=function(){const L=advLock;if(!S||S.dead||Q.length||S.mg||used<BAL.time.khac||L)return r0.apply(this,arguments);advLock=true;const ret=(function(){const a=advLock;advLock=true;return r0.apply(this,arguments)}).apply(this,arguments);setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&S&&!S.dead&&!S.mg)nextBuoi()},2600);return ret}})();
@@ -9535,7 +9576,19 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  st.dataset.j59slots=centres.map(c=>(c+st.clientLeft).toFixed(1)).join(",");st.dataset.j59n=String(N);
  j59petPut(st,usedPets,H,fo,pVH);
  j59chips(st,R,pages>1?{pg,pages,before,after,xl:FS?0:G.xl,xr:FS?0:G.rr,floor:st.clientHeight-fo-4}:null);j59swipe(st);
+ kitTagCollide(st);
  st.__j59here=persons}
+/* KIT 33.10 STAGE NAME-LABEL COLLISION RULE (KK28, FOREMAN D kit request «iPad Hành sự stage: two figure name labels overlap at the left edge», every stage): two name labels never overlap.
+   After the figures are placed (kitSlotIn may push a wide figure away from the stage edge, so neighbouring bodies stand closer than a slot), the visible labels are sorted left to right; a label that overlaps the one
+   before it (same line band) slides RIGHT by the overlap + 4 px while it stays inside the stage, the rest slides the one before it LEFT (never past the stage edge); when even that is not enough the later label goes
+   down onto the second name row (the same stagger the crowded stage already uses). The shift is the CSS variable --j59tdx on the label (margin-left), recomputed from zero on every layout. */
+function kitTagCollide(st){try{const R=e=>e.getBoundingClientRect(),sr=R(st),gap=4;const all=[...st.querySelectorAll("#tokens .tok .tag,#j59metag .tag")];all.forEach(g=>{g.style.removeProperty("--j59tdx");g.style.removeProperty("--j59tdy")});
+ const L=all.filter(g=>g.offsetParent&&R(g).width>2&&R(g).height>2&&R(g).right>sr.left&&R(g).left<sr.right).sort((a,b)=>R(a).left-R(b).left);const lo=sr.left+gap,hi=sr.right-gap;
+ for(let i=1;i<L.length;i++){const a=R(L[i-1]),b=R(L[i]);if(Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)<=1)continue;const ov=a.right+gap-b.left;if(ov<=0)continue;
+  const db=Math.max(0,Math.min(ov,hi-b.right));let da=ov-db;if(da>0)da=Math.max(0,Math.min(da,a.left-lo));
+  if(db)L[i].style.setProperty("--j59tdx",db.toFixed(1)+"px");if(da)L[i-1].style.setProperty("--j59tdx",((parseFloat(L[i-1].style.getPropertyValue("--j59tdx"))||0)-da).toFixed(1)+"px");
+  if(db+da<ov-.5)L[i].style.setProperty("--j59tdy","26px")}}catch(e){console.error("kitTagCollide",e)}}
+window.kitTagCollide=kitTagCollide;
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
 const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
@@ -9560,6 +9613,7 @@ html body .stage #sc-t h2 .rt1{display:inline-block!important;padding:1px 10px;b
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
 .stage.j59 .tok.fig .tag{margin-top:3px!important}
+html body #stage.j59 #tokens>.tok .tag,html body #stage.j59 #j59metag .tag{margin-left:var(--j59tdx,0px)!important}html body #stage.j59 #tokens>.tok .tag[style*="--j59tdy"],html body #stage.j59 #j59metag .tag[style*="--j59tdy"]{margin-top:calc(3px + var(--j59tdy))!important}
 .stage.j59 .tokens.j59st .tok.fig:nth-child(even) .tag{margin-top:var(--j59m1,26px)!important}
 .stage.j59.j59c .tok .tag{font-size:.72rem;line-height:1.2;max-width:8em;padding:1px 6px;background:color-mix(in srgb,var(--tc,#5a6878) 20%,#fffaf0)!important;border-color:color-mix(in srgb,var(--tc,#5a6878) 70%,#fff)!important;color:var(--ink)}
 .stage.j59.j59c .tok .tag .j59t{display:none}
@@ -27761,7 +27815,7 @@ const ns0=nightScene;nightScene=function(){const n=ntTaken();if(n){log(`${ntReas
 /* the tablet card and the late visit close their 'night' option with the reason when the night is gone */
 function lockFirst(id,re){const p0=PEND[id];if(!p0)return;PEND[id]=function(){const d=p0.apply(this,arguments);try{if(d&&d.o){const o=d.o.find(o=>re.test(o.n||""));if(o)o.lk=()=>ntReason(S)}}catch(e){}return d}}
 lockFirst("ksp",/^Tắm gội chờ giá/);lockFirst("empnight",/^Thắp đèn hầu rượu/);
-const sm0=showModal;showModal=function(){const r=sm0.apply(this,arguments);try{const m=Q[0];const M=$("modal");if(m&&m.opts&&M&&!M.hidden)m.opts.forEach((o,i)=>{if(typeof o.lk!=="function")return;const w=o.lk();const b=M.querySelector(`.opt[data-m="${i}"]`);if(!b)return;if(w){b.disabled=true;const s=b.querySelector("small");if(s)s.innerHTML=`<span class="ef r">${w}</span>`}})}catch(e){}return r};
+const sm0=showModal;showModal=function(){const r=sm0.apply(this,arguments);try{const m=Q[0];const M=$("modal");if(m&&m.opts&&M&&!M.hidden)m.opts.forEach((o,i)=>{if(typeof o.lk!=="function")return;const w=o.lk();const b=M.querySelector(`.opt[data-m="${i}"]`);if(!b)return;if(w){b.disabled=true;const s=b.querySelector("small");if(s)s.innerHTML=`<span class="ef r">${w}</span>`;else if(!b.querySelector(".kwhy"))b.insertAdjacentHTML("beforeend",`<span class="kwhy">${w}</span>`);/* KK28: the kit card (j63 .ka) has no <small>, so the lock reason was never shown and a tap on the locked card did nothing; the reason is now a kit «why» row + data-why for the lock pop (jfx kfLocked) */b.dataset.why=w;b.title=w}})}catch(e){}return r};
 const cm0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts[i];if(o&&typeof o.lk==="function"&&o.lk())return}catch(e){}
  window.__ntDone=0;const r=cm0.apply(this,arguments);
  try{if(window.__ntDone&&window.__nsnap&&S&&!S.dead){const b=window.__nsnap;b.seq=window.__ntSeq!=null?window.__ntSeq:b.seq;window.__nsnap=null;window.__ntDone=0;resultShow("Đêm thị tẩm",b,"sure")}}catch(e){}return r};
@@ -28957,10 +29011,18 @@ function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=Strin
 /* name-mask (LUẬT SỬA CẢ NHÓM): EVERY log line (= Nhật ký, result sentences, toasts) passes the one kit mask once: a person she has not met by name
    never prints as a raw name ("Hà Thục Lan sang cung ngươi thăm hỏi" -> "Một vị Tần chưa quen biết sang cung ngươi thăm hỏi"); announcements first */
 (function(){const l0=log;log=function(h){try{k61Announce(h);if(typeof h==="string"&&S&&S.known)h=k61Scrub(h,true,"",h,true)}catch(e){}return l0.call(this,h)}})();
+let K61PL=null;function k61Places(){if(K61PL)return K61PL;const L=new Set();const add=n=>{if(typeof n==="string"&&/ (?:cung|điện|viện|hiên|các|phủ|uyển)$/i.test(n))L.add(n.toLowerCase())};
+ try{Object.keys(((typeof BAL!=="undefined"&&BAL.banCung)||{}).danh||{}).forEach(add)}catch(e){}try{if(typeof PLNAME!=="undefined")Object.values(PLNAME).forEach(v=>add(v&&v[0]))}catch(e){}
+ try{if(typeof PALN!=="undefined")PALN.forEach(add)}catch(e){}try{if(typeof HOMEN!=="undefined")add(HOMEN)}catch(e){}try{if(typeof places==="function")places().forEach(x=>add(x&&x.n))}catch(e){}
+ return K61PL=[...L]}/* fix-7 r2 (BIG REVIEWER #5): the words are kept ONLY inside a REAL place name of the game (banCung + PLNAME + map), never before any place word («… các cung nữ», «… phủ đầu», «… điện hạ» stay masked) */
+function k61InPlace(str,off,len){const s=String(str).toLowerCase();for(const P of k61Places()){let i=s.indexOf(P);while(i>=0){if(i<=off&&off+len<=i+P.length)return true;i=s.indexOf(P,i+1)}}return false}
 const K61SENT=/^\s+(?!thiện cảm|oán|ghen|Ân|quý |→|·|[-+−\d])[a-zà-ỹ]{2,}/;/* a lowercase word follows the name = the name is a sentence subject */
 function k61Scrub(s,lead,prev,ann,plain,post){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
+  /* button-crawl-fix-7 (robot s10 «Hà cô cô ở Tổng quản thái giám ??? cung»): words that are a PLACE (a palace / hall named like an unknown person,
+     «Vĩnh Thọ cung» vs a servant «… Vĩnh Thọ») are never masked — same rule as the map labels (K61SKIP), now for prose too */
+  if(k61InPlace(str+(post||""),off,m.length))return m;
   const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain||K61SENT.test(str.slice(off+m.length)||post||""));/* owner 24/11 ~21:58Z: «???» never as the SUBJECT of a sentence — «Một vị Phi tâu xin …»; the «???» tag stays on a name tag / chip (nothing but a stat or a separator follows) */
   /* idempotent (review/coop-main-faults): a mask that holds the name itself (a friend named "Hảo hữu" → "Hảo hữu của ta") is already
      in place when the text around the name reads the mask; masking it again grew the line forever and hung the page (the two DOM observers, this one
@@ -29876,7 +29938,7 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
  let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
-document.addEventListener("click",e=>{const p=document.getElementById("kpop");const od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");
+document.addEventListener("click",e=>{const p=document.getElementById("kpop");let od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");/* OWNER-ish rule (MAIN 136 25/11, robot M2/M3 + KIT BUG #2a): a tap ANYWHERE on an option card chooses it — the odds meter / a glossary word inside the card must not steal the tap; the explanation stays on the kit help («!» / legend) */if((od||gl)&&e.target.closest("button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button")&&!e.target.closest(".kopinfo")){od=null;gl=null}/* inside the «!» card overlay (.kopinfo, disabled copy) the meter still opens the ladder: that is where the explanation lives */
  if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else if(gl.dataset.kfx!=null)kpPop(gl,kitFactTipHtml(gl));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
  if(p&&!p.hidden)p.hidden=true},true);
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
@@ -29905,7 +29967,9 @@ function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(
    if(e.parentElement===par)prev=e}})}
 /* KP18 (review/kit-modal-spin): a kit dialog opened while the title screen (#title) is up sits on the TITLE layer (class kptitle = .modal.kptitle z 55, j74) — one rule here, so kitConfirm / notice / pick work from any title sub-panel
    and no caller patches it (the jcloud dropAsk patch is gone). Nothing else changes: kptitle is the existing "a screen of the title, not an event" mark (isMenuCard, saves). */
-function kitModal(spec){const m=kitPanel(spec,true);try{const t0=document.getElementById("title");if(t0&&!t0.hidden&&!/\bkptitle\b/.test(m.cls||""))m.cls=((m.cls||"")+" kptitle").trim()}catch(e){}showModal();return m}
+/* KIT BUG #5 (KK29, robot M5): a layer opened on top of a modal whose render throws (a half-built frame: no button, no ✕) must never be the end of the screen — the failed layer leaves the queue and the layer under it is shown again (kitModalSafe) */
+function kitModalSafe(m){try{showModal()}catch(e){console.error("kitModal render",e);try{const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)}catch(x){}try{showModal()}catch(x){console.error("kitModal restore",x);try{Q.length=0;document.getElementById("modal").hidden=true}catch(y){}}}}
+function kitModal(spec){const m=kitPanel(spec,true);try{const t0=document.getElementById("title");if(t0&&!t0.hidden&&!/\bkptitle\b/.test(m.cls||""))m.cls=((m.cls||"")+" kptitle").trim()}catch(e){}kitModalSafe(m);return m}
 /* ================= KIT 83.9 · DANGER BUTTON + kitConfirm (kit request cloud-del / Foreman D, s18) =================
    `.kbtn.kdanger` = the button for an IRREVERSIBLE action: same size and shape as `.kbtn`, but charcoal with a cinnabar rim (never the lacquer red of `.kbtn`).
    `kitConfirm({title, lines:[…], yes, no, type?, onYes, onNo})` = a centre pop-up on kitModal: the lines, optional "type <code> to confirm" field (kitInput; the danger button stays
@@ -30480,11 +30544,11 @@ if(typeof j78when==="function"){j78when=function(){return kitDate(S.month,S.year
 function kitEvidencePanel(v){if(!v||typeof evidenceOf!=="function")return;const E=evidenceOf(v);if(!E)return;
  const items=E.items.length?E.items.map(e=>kitEvidence({what:e.proves,how:e.how,when:e.when})).join(""):`<div class="kpnote">Ngươi chưa giữ chứng cứ nào về nàng.</div>`;
  const acts=(E.acts||[]).map(a=>`<button class="opt" data-kev="${v.id}" data-kevact="${a.k}"${a.why?" disabled":""}>${a.n||(ACT[a.k]?ACT[a.k].n:a.k)}<small>${a.why?`<span class="kwhy">${a.why}</span> `:""}${kitParse(a.line||"")}</small></button>`).join("");
- const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},E.rumours?{h:`Tin đồn (${E.rumours})`,html:`<div class="kevs">${kitEvidence({what:`${E.rumours} tin đồn chưa ai chứng thực`,proves:"Không có việc thật nào đứng sau: không dùng để tố được",how:"Nghe từ trước khi sổ chứng cứ đối chiếu việc thật"})}</div>`}:null,acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
+ const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},E.rumours?{h:`Tin đồn (${E.rumours})`,html:`<div class="kevs">${kitEvidence({what:`${E.rumours} tin đồn chưa ai chứng thực`,proves:"Không có việc thật nào đứng sau: không dùng để tố được",how:"Nghe từ trước khi sổ chứng cứ đối chiếu việc thật"})}</div>`}:null,acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;kitModalSafe(m)}
 function kitIntelPanel(v){if(!v)return;const L=typeof intelOf==="function"?intelOf(v):[];const old=(S.notes&&S.notes[v.id])||[];
  const list=L.map(x=>({about:null,fact:x.fact+(x.current===false?` <span class="kchip n">nay đã khác</span>`:""),src:x.by?(typeof x.by==="object"?x.by:String(x.by)):"tai mắt",week:[x.how,x.when].filter(Boolean).join(" · ")}));
  old.forEach(t=>{if(!L.some(x=>kpPlain(x.fact).includes(kpPlain(t))))list.push({fact:t,src:"nghe được",week:""})});
- const m=kitPanel({kind:"intel",look:1,title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
+ const m=kitPanel({kind:"intel",look:1,title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);kitModalSafe(m)}
 /* person card: the evidence chip and the "Đã biết" line open the kit panels */
 (function(){if(typeof rvCard!=="function")return;const r0=rvCard;rvCard=function(v,i){let h=r0.apply(this,arguments);try{
   h=h.replace(/<span class="chip hot">((?:<img[^>]*>)?Chứng cứ \d+)<\/span>/,`<button class="chip hot kchipb" data-kev="${v.id}" title="Xem chứng cứ">$1 ›</button>`);
@@ -30803,7 +30867,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 #hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
 #hud2 .khc{display:flex;flex-direction:column;gap:2px;min-width:0;padding:4px 6px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
 #hud2 .khc .hc[data-hx="date"]{display:none!important}
-#hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:0!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}
+#hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:var(--k3rowh,44px)!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}/* KIT 56.28: same kit row height as .ksh .k3r */
 #hud2 .khc .hc+.hc{border-top:1px dotted var(--k-hair)!important}
 #hud2 .khc .hc>b,#hud2 .khc .hc>.kodm{grid-column:3;justify-self:end;text-align:right;white-space:normal}
 .stop .scene-t,.stop .scene-t *{white-space:normal!important;overflow-wrap:anywhere}#hud2 .khc .hc>img{grid-column:1}
@@ -38869,6 +38933,19 @@ BAL.net.heat={ghenK:.45,affK:.6};
  "Vì gia tộc":{act:5},
  "Vì mình":{quen:3,than:8,act:-3,tell:-5,repay:1}};
  for(const t in BAL.net.T)BAL.net.T[t].th=O[t]||{}})();
+
+/* DELAYED-RISK ROADS (review/m-fix-3, laws 2/3/4/6a/7, robot M4): the numbers of every road whose danger comes LATER, read by the card's
+   whole-road word, the later roll and the counter-plays alike.
+   fakeX = Giả mang thai (j2 card, j8 pregMonthP, j22 counter-plays; her and every consort the same):
+     catch / catchDoc = monthly % another physician finds the fake out (catchDoc while she has a Thái y tâm phúc); noRec = + that % while the
+     Kính sự phòng book has no night within recWk tuần before the day she announced (and the book was not doctored, khBook);
+     swap = [base, ×Tâm cơ, ×tai mắt] odds of the month-10 baby swap; exitO / exitTam / exitDoc = odds of «Báo sảy thai» (base + Tâm cơ/exitTam
+     + exitDoc with a Thái y tâm phúc); exitSung = Sủng lost when the "baby" is lost; exitDanh = Danh lost when the false miscarriage is
+     seen through (cấm túc, sev 1 — never death: getting out costs less than being caught); npcExit = % per month per point of her Tâm cơ that a
+     consort whose book does not match ends her own fake the same way (two-way).
+   wdHideCatch / wdHideDue = «Giấu đi, im lặng» (j92, a lost ngự tứ kept secret): % it comes out when it falls due; due in [0] + R([1]) tuần. */
+Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,4],exitO:40,exitTam:3,exitDoc:20,exitSung:3,exitDanh:6,npcExit:.3}});
+BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
 /* j68sd: ORDER THIN P4 composed j68 seeds (DATA ONLY). Built by dev/build/j68sd_build.py from dev/handover/content/thin/j68seeds*.md;
    schema dev/handover/reports/thin.md «## API P4»; validator dev/test/j68seeds_validate.py; engine j68c.js. Do not hand-edit. */
 const J68SEEDS=[
@@ -41258,7 +41335,7 @@ function wdNtHeld(p){const L=[];const w=wdOf(p);for(const sl of ["tram","y"])if(
 function wdNtRemove(p,e,how){const w=wdOf(p);let done=false;for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;const k=wdDefault(p,sl);if(k)w[sl]={k,from:"base"};done=true;break}if(!done){const i=(p.inv||[]).indexOf(e);if(i>=0)p.inv.splice(i,1)}
  /* item conservation (jil): never gone for good */if(typeof ilGone==="function")ilGone(p,e,how==="bị mất"?"lost":"fix",{cause:"srv"})}
 function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.maid].concat(p.staff||[]).find(s=>s&&(netIs(s,"timid")||netIs(s,"greed")));
- if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(45)){apply({sung:BAL.eff.j92.sungWdNtMonth});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. ${sgStat(BAL.eff.j92.sungWdNtMonth)}, bị phạt.</p>`})}}
+ if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(BAL.eff.j92.wdHideCatch)){apply({sung:BAL.eff.j92.sungWdNtMonth});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. ${sgStat(BAL.eff.j92.sungWdNtMonth)}, bị phạt.</p>`})}}
  if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&netIs(clumsy,"greed")?"bị mất":"bị làm vỡ";
  if(p===S){pushDil(mkP("wdnt",{k:x.e.k,how,by:clumsy?clumsy.name:""}),"Đồ ngự tứ");return""}
  wdNtRemove(p,x.e,how);const tl=npcTell(p,{from:npwIn(p),to:S.emp||S});/* npc-purpose: only one who sees inside her house knows it is gone */if(tl){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}; ${npwNm(tl.who)} tâu lên, mang tội bất kính.`)}catch(e){}}return""}
@@ -41266,9 +41343,9 @@ PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHel
  const o=oddsCl(50+eyes(S)*5);
  return{t:`<p><b>${it.n}</b>${/ngự tứ/.test(it.n)?"":" (ngự tứ)"} ${pp.how}${pp.by?`; ${pp.by} run rẩy quỳ xin tội`:""}.</p><p class="past">Làm mất hay làm hỏng đồ ngự tứ là tội bất kính.</p>`,who:pMe(),o:[
   {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);apply({sung:BAL.eff.j92.sungGo,danh:BAL.eff.j92.danhGo});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. ${sgStat(BAL.eff.j92.sungGo)}, Danh ${balSg(BAL.eff.j92.danhGo)}.</p>`})}},
-  {n:pp.how==="bị mất"?"Sai người lùng tìm":"Sai thợ lén sửa",fx:{bac:BAL.eff.j92.bacFx},p:o,j67:`tốn: Bạc ${balSg(BAL.eff.j92.bacFx)}`,go:()=>{if(roll(o)){Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p>${pp.how==="bị mất"?"Tìm lại được":"Thợ sửa khéo, không ai nhận ra"} ${it.n}.</p>`});log(`${it.n} ngự tứ đã ${pp.how==="bị mất"?"tìm lại được":"sửa xong"}.`)}
+  {n:pp.how==="bị mất"?"Sai người lùng tìm":"Sai thợ lén sửa",fx:{bac:BAL.eff.j92.bacFx},p:Math.round(o+(100-o)*(100-BAL.eff.j92.wdHideCatch)/100)/* whole road: found, or not found and never comes out */,j67:`tốn: Bạc ${balSg(BAL.eff.j92.bacFx)} · kèm: không xong thì chuyện còn có thể lộ ra, bị phạt: ${chanceW(Math.round((100-o)*BAL.eff.j92.wdHideCatch/100))}`,go:()=>{if(roll(o)){Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p>${pp.how==="bị mất"?"Tìm lại được":"Thợ sửa khéo, không ai nhận ra"} ${it.n}.</p>`});log(`${it.n} ngự tứ đã ${pp.how==="bị mất"?"tìm lại được":"sửa xong"}.`)}
     else{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+3+R(4)};Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p class="r">${pp.how==="bị mất"?"Lùng khắp nơi không thấy":"Thợ sửa hỏng hẳn"} ${it.n}. Chuyện này còn có thể lộ ra.</p>`})}}},
-  {n:"Giấu đi, im lặng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+2+R(5)};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
+  {n:"Giấu đi, im lặng",fx:{},p:100-BAL.eff.j92.wdHideCatch/* law 7 (review/m-fix-3): the word = the whole road, the later coming-out included */,j67:`tốn: không tốn gì · kèm: ${BAL.eff.j92.wdHideDue[0]}–${BAL.eff.j92.wdHideDue[0]+BAL.eff.j92.wdHideDue[1]-1} tuần sau chuyện lộ ra thì ${sgStat(BAL.eff.j92.sungWdNtMonth)} và bị phạt (cấm túc ${punishMonths()} tháng, có khi giáng một bậc): ${chanceW(BAL.eff.j92.wdHideCatch)}`,go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+BAL.eff.j92.wdHideDue[0]+R(BAL.eff.j92.wdHideDue[1])};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
 /* ngự tứ cannot be given away or used to frame anyone */
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return g0.apply(this,arguments)}})();
 (function(){const p0=plantItem;plantItem=function(a,t,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return p0.apply(this,arguments)}})();
@@ -42280,7 +42357,10 @@ const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest"
    of it one by one into the spotlight (KIT §54.1 kitRevealHTML: the kit graded frame kitItem "xl", name, grade chip), stays ~1.3 s glowing in its
    grade colour, and settles on the shelf under the box; the silver comes last; then the list (grade chip · name · note) + Nhận.
    Tap during the reveal = skip to the end. Timings BAL.reveal (jbal2). Items arrive lowest grade first, the best one last. */
-function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
+/* KK29 (MAIN 141, E-S5 «reward popup over the ending screen»): while the ENDING card (#modal.end / .kes) is on screen, nothing opens over it: a reward box is not shown (the item is already in her chest, the log keeps the line). ONE rule: kitEndUp(). */
+function kitEndUp(){try{const M=document.getElementById("modal");return !!(M&&!M.hidden&&(M.classList.contains("end")||M.classList.contains("kes")))}catch(e){return false}}
+window.kitEndUp=kitEndUp;
+function kitReward(o){if(kitEndUp())return null;o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
  const seq=items.map(x=>({n:x.n,d:x.d,img:x.img,g:gOf(x.tier),gn:x.gn||"",k:x.k&&typeof kitItemRef==="function"&&kitItemRef({k:x.k})?x.k:""}));
@@ -42376,7 +42456,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:(S&&S.kend)||h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
-   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(q.pid)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
+   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!kitNoDanger(q)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
  /* the promotion visuals replace j11's stamp (sound and haptics stay) */
  W("feedback",o=>function(k,x){if(k==="promote"&&!kmReduced()){try{if(SFXN[k])sfx(SFXN[k]);vib(k)}catch(e){}return}return o.apply(this,arguments)});
  /* render: state diff + weather chip */
@@ -42545,6 +42625,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmPet{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(0) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(calc(var(--v) * -1)) rotate(120deg) scale(1)}}
 .km-inkov{background:transparent}
 .kmink{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+/* KIT BUG #4 (KK29, robot B1 d-robot-bugs report; MAIN 139): the death-ink banner («Hồng nhan bạc mệnh · Mở Sổ luân hồi») is a full-screen scene drawn ABOVE the ending card, so its words sat on the card rows (text on text). The ending card (#modal.end / .kes, every ending host) is held back while the ink scene plays and shows the moment it goes: ONE rule for every mourning ending. */
+body:has(.kmov.km-inkov:not(.km-out)) :is(#modal.end,#modal.kes){visibility:hidden}
 .kmblot{position:absolute;left:50%;top:46%;width:60vmax;height:auto;transform:translate(-50%,-50%) scale(.05);opacity:0;animation:kmInk calc(1.6s*var(--pace)) cubic-bezier(.3,.6,.3,1) both}
 .kmblot.b2{left:38%;top:58%;animation-delay:.25s;width:50vmax}
 .kmicap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;animation:kmFade calc(.6s*var(--pace)) ease calc(1.1s*var(--pace)) both}
@@ -45634,7 +45716,8 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
-.ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:0;width:100%}
+.ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:var(--k3rowh,44px);width:100%}/* KIT 56.28 (KK28): the whole row is the tap target, kit row >= 44 px (was min-height:0 = 17 px rows, adjacent, no hit-area trick possible) */
+.ksh .k3r+.k3r{border-top:1px dotted var(--k-hair,#e6d3ac)}
 .ksh .k3r .k3l{flex:1 1 auto;min-width:0;white-space:normal}
 .ksh .k3r>b{font-weight:700;white-space:nowrap;margin-left:auto}
 .ksh .k3r img.ic{width:14px;height:14px;flex:0 0 auto}
@@ -55135,7 +55218,7 @@ function kitWhyHtml(b,lv){const W=whyOfBtn(b);if(!W)return"";const q=lotB(S,W.do
  if(!F.length&&!q)h+=row(W.deck?"Cơ may của việc này không đổi theo tư chất: chỉ Quẻ tuần và Sức mới làm khác đi":"Không có yếu tố nào làm dễ hay khó hơn",0);
  return h}
 function word_(o){return word(oddsCl(Math.round(o)))}
-document.addEventListener("click",e=>{const od=e.target.closest(".kodm");if(!od)return;const b=od.closest("button");if(!b)return;const lv=+od.dataset.kodds;
+document.addEventListener("click",e=>{const od=e.target.closest(".kodm");if(!od)return;const b=od.closest("button");if(!b)return;if(b.matches("button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button")&&!od.closest(".kopinfo"))return;/* MAIN 136 25/11: a tap anywhere on an option card chooses it; the «Vì sao» pop opens from the «!» overlay copy (.kopinfo) */const lv=+od.dataset.kodds;
  const h=kitWhyHtml(b,lv);if(!h)return;e.stopPropagation();e.preventDefault();setTimeout(()=>kpPop(od,h+`<div class="kpwl">${kitOddsLadder(lv)}</div>`),0)},true);
 /* act-audit fix: the odds word on a consort-act card left out the penalty of sending a servant (runAct: ACTX.pen = sentPen − rank×3),
    so the card read easier than the roll. Her cards now show the odds the roll will use (spy has it inside its own formula). */
@@ -65161,7 +65244,7 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsxp");
 (function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsBoxOn()&&tsSrv()&&tsSrvNext()){const miss=tsSrvRows().filter(x=>!x[0]).length;
   el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}else if(el&&tsOn()&&!S.out&&S.rank<7){const L=promoReqP(S);if(L.length){const miss=L.filter(x=>!x[0]).length;
   el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}}}catch(e){}return r}})();
-document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsPromoPanel(false)},true);
+document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();const md=document.getElementById("modal");if(md&&!md.hidden)return;/* KIT §56.26: a card QUEUED but not shown no longer swallows the tap: the panel opens in front, the queued card follows */tsPromoPanel(false)},true);
 /* festivals (j3/j8 festival): the two judged banquets say beforehand what is judged and where she stands */
 const TS_FEST={1:["Yến tiệc đầu xuân","sac","Sắc và điệu múa"],7:["Thi tài ngày Thất tịch","tai","Tiếng đàn, lời thơ"]};
 function tsFestScore(p,k){return k==="sac"?effSac(p)+artOE(p,"vu"):p.tai+(artOE(p,"cam")+artOE(p,"thi"))/2}
@@ -68867,7 +68950,11 @@ window.kitPhWaitMark=kitPhWaitMark;
    kitSpin({s:true}) = 18 px for a button / chip, default 28 px; o.label = the spoken label (CTM_WAIT.spin). The dialog wait of the life gate (#modal.klifewait, jload.js) draws the SAME ring with a pseudo-element: one look. */
 function kitSpin(o){o=o||{};let st=false;try{st=typeof kfStill==="function"&&kfStill()}catch(e){}const lab=String(o.label||(window.CTM_WAIT&&CTM_WAIT.spin)||"Đang chờ…").replace(/"/g,"&quot;");return `<i class="kspin${o.s?" kspin-s":""}${st?" kspin-still":""}${o.cls?" "+o.cls:""}" role="status" aria-label="${lab}"></i>`}
 window.kitSpin=kitSpin;
+/* KK29 (KIT §59.3) kitWaitCue(label) = the ONE wait cue for a scene that holds the screen while a picture loads (the encounter scene waiting for the visitor's face, jdfv): a small pill (kitSpin + CTM_WAIT.picWait) on the stage, returns the function that removes it. Never a silent frozen screen. */
+function kitWaitCue(label){try{document.querySelectorAll(".kwcue").forEach(e=>e.remove());const d=document.createElement("div");d.className="kwcue";d.setAttribute("role","status");d.innerHTML=kitSpin({s:true,label:label||(window.CTM_WAIT&&CTM_WAIT.picWait)})+`<span>${label||(window.CTM_WAIT&&CTM_WAIT.picWait)||"Đang chờ…"}</span>`;document.body.appendChild(d);return()=>{try{d.remove()}catch(e){}}}catch(e){return()=>{}}}
+window.kitWaitCue=kitWaitCue;
 (function(){const st=document.createElement("style");st.id="kit-spin";st.textContent=`
+.kwcue{position:fixed;left:50%;top:42%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--k-card,#fffaf0);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 4px 14px rgba(60,30,10,.25);font:600 .82rem var(--k-font,inherit);color:var(--k-ink,#5a3a1a);pointer-events:none}
 .kspin{display:inline-block;flex:none;width:28px;height:28px;box-sizing:border-box;border-radius:50%;border:3px solid var(--k-hair,#e6d3ac);border-top-color:var(--gold,#8f5f0c);animation:kspin calc(.9s*var(--pace,1)) linear infinite;vertical-align:middle}
 .kspin.kspin-s{width:18px;height:18px;border-width:2px}
 @keyframes kspin{to{transform:rotate(360deg)}}
@@ -68890,7 +68977,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tra
 /* ================= jopic: OPTION CARD = COMPACT ACT CARD WITH ITS PICTURE LEFT — KIT §6.2 (owner 15/11, review/opt-pics) =================
    Owner (verbatim, repeated): "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."
    Markup dev/handover/refs/owner-option-picture-left.jpg (docs branch). Coordinator: ONE act-card form = the COMPACT card of Hậu cung (KIT §43):
-   small picture left (~1/4), title + Cần/Tốn/Được/Mất/Gợi ý rows right, height = content; tap the picture = enlarge.
+   small picture left (~1/4), title + Cần/Tốn/Được/Mất/Gợi ý rows right, height = content; tap the picture = choose (like the rest of the card).
    Owner ruling: one picture per MEANING GROUP (all "nhận lỗi / cúi đầu" share one, all "dâng lễ vật" share one …), reused everywhere.
    ONE place: every dialog option (`#modal .opts` button.ka, kit choice panel `.kpscopts`), after the j63 frame (kaNorm1) built it:
      kpOptArt(b) → `.kaart` slot (kitArtFrame, the act-card picture frame) + `.kabody` (the rows) + classes `kart kopt` → compact CSS (jk4 KIT §43,
@@ -68902,7 +68989,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tra
      4. a picture the option already carries (a person's portrait .md img, an item picture) — pickers of people / items;
      5. the KIT §59 act placeholder (light / dark by kitPhTone), recorded once in CTM_MISSING_PICS as kind "opt".
    A key whose file is not on the CDN (https://ctm-img.victoria-tntt.workers.dev/img/_index.json) is skipped (next rule).
-   Tap / click on the picture = kitPicZoom(src) (does not choose the option). ============================================================ */
+   A tap on the picture CHOOSES the option like any other tap on the card (KK29, KIT BUG #6); kitPicZoom(src) is only for a separate control. ============================================================ */
 /* stand-ins (title → an existing act picture) shown with the 'tạm' chip: Giữ chân Hoàng thượng (night-final flip choice, main s26 23:39Z; ART REQUEST by main) */
 const KIT_OPT_TAM=[[/^Giữ chân Hoàng thượng/,"thap-den-hau-ruou-h"]];
 const KIT_OPT_RULES=[
@@ -69059,7 +69146,7 @@ window.kitOptStackTitle=kitOptStackTitle;
 function kitOptAvatar(b,f,who,src){try{if(!b||!f||typeof mdH!=="function")return false;const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");
  let art=b.querySelector(":scope > .kaart");if(!art){let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
   art=document.createElement("span");art.className="kaart";b.prepend(art)}
- art.innerHTML=mdH(f,"big");art.classList.add("kaav");art.dataset.kzoom=src||f.src||"";art.title="Chạm để xem tranh";
+ art.innerHTML=mdH(f,"big");art.classList.add("kaav");
  b.querySelectorAll(":scope > .md").forEach(x=>x.remove());if(kan)kan.querySelectorAll(":scope > .md, :scope > img").forEach(x=>x.remove());
  if(kan&&who&&typeof who==="object"&&typeof kitRankName==="function"&&!kan.querySelector(".knr")){const tx=String(kan.textContent||"").replace(/\s+/g," ").trim();const ix=tx.indexOf(" · ");const head=(ix>=0?tx.slice(0,ix):tx).replace(/\s*\([^)]*\)\s*$/,"").trim();
   let rn=["",who.name||""];try{if(typeof kszRankName==="function")rn=kszRankName(who)}catch(e){}
@@ -69085,10 +69172,10 @@ function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.ko
  /* the name chip beside the title IS already a kit avatar (mdH): it moves into the picture slot, grown to the kit "big" size — never re-cut into a loose crop */
  if(p.face&&p.chip&&p.chip.classList.contains("md")){const c=p.chip.cloneNode(true);c.classList.remove("xs","sm");c.classList.add("big");
   let ar=b.querySelector(":scope > .kaart");if(!ar){ar=document.createElement("span");ar.className="kaart";b.prepend(ar)}
-  ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");ar.dataset.kzoom=p.src;ar.title="Chạm để xem tranh";try{kitOptStackTitle(kan)}catch(e){}
+  ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");try{kitOptStackTitle(kan)}catch(e){}
   b.dataset.kopt="1";b.dataset.kopic="face:chip";b.classList.add("kart","kopt","kopav");return}
  if(p.face)try{kitOptStackTitle(kan)}catch(e){}
- art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");art.dataset.kzoom=p.src;art.title="Chạm để xem tranh";
+ art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");
  if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
 window.kitOptPic=kitOptPic;window.kpOptArt=kpOptArt;window.KIT_OPT_RULES=KIT_OPT_RULES;window.KIT_OPT_TAM=KIT_OPT_TAM;
 (function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.matches&&b.classList.contains("ka")&&b.matches(KIT_OPT_SEL))kpOptArt(b)}catch(e){}return r}})();
@@ -69099,15 +69186,12 @@ function kitPicZoom(src){try{if(!src)return;let z=document.getElementById("kpzoo
   z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
  z.innerHTML=`<div class="kpzf">${kitSceneArt(src,"",{shape:"tall"})}</div>`;z.hidden=false}catch(e){}}
 window.kitPicZoom=kitPicZoom;
-/* capture phase: a tap on an option's picture enlarges it and does NOT choose the option */
-document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kaart[data-kzoom]");if(!a)return;
- e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitPicZoom(a.dataset.kzoom)}catch(x){}},true);
+/* KK29 (MAIN 136 25/11, robot M3, KIT BUG #6): a tap ANYWHERE on an option card chooses it, its picture included (iPad 1180x820: the picture tap opened this lightbox and the option was never chosen). The picture is no zoom trigger any more; kitPicZoom(src) stays for a SEPARATE control (nothing in the option card calls it). */
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
 button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-weight:400;white-space:nowrap}
 #kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
-button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
 html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}
 html body button.ka.kopt.kopav>.kaart.kaav>span.md.kmini.kmini{width:100%!important;max-width:100%}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
@@ -69211,7 +69295,7 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
  band(pick[1]);
  /* KIT §6.2c (owner 24/11, MAIN GO): the picture is a SQUARE of the tier (pw = ph), never stretched to the card height (the #49c fill rule is gone) */
- g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function")kszEvLaw10(dl)}catch(e){}
+ g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function"){kszEvLaw10(dl);if(typeof kszTextFirst3==="function")kszTextFirst3(dl)/* law 10 text first stays after every option re-layout */}}catch(e){}
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
  if(!g.__kotRO&&typeof ResizeObserver==="function"){g.__kotRO=new ResizeObserver(()=>{if(g.__kotBusy||!g.isConnected)return;const T0=KIT_OPT.tiers[g.dataset.kot],c=kitOptCards(g);const bad=c.some(b=>b.getBoundingClientRect().height>T0.h+1||kitOptCut(b));const w=Math.round(g.clientWidth);if(bad||w!==g.__kotW){g.__kotW=w;clearTimeout(g.__kotT);g.__kotT=setTimeout(()=>kitOptTier(g),50)}});g.__kotRO.observe(g);bs.forEach(b=>g.__kotRO.observe(b))}
@@ -80493,7 +80577,7 @@ Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3
    NOT converted (pages, not event frames): identity card .kpid, person card (pcm), scene panels without a kind, and bodies holding a page part
    (KSZ_LIVE_SKIP: calendars, pickers, inventories, shops, relation tables, stat grids, tables, exam / card-flip pages). */
 const KSZ_LIVE_SKIP=".kpt-mount,.kpid,.kmc,.kpick,.kpicks,.kinv,.kshg,.kshop,.kreltab,.krelt,.kstgrid,.kip,table,.kexam,.kflip,.kpl,.kmlist,.kslot,.kpets,.kgift,.kpkgrid";
-KIT_SIZE.v3.live={maxOpts:7,maxSecs:4};/* kit-rank-name (OD:L1351): the tag's rank line is the RANK (Thái giám), never the office (Kính sự phòng) — the old office override is deleted */
+KIT_SIZE.v3.live={maxOpts:7,maxSecs:4,stepOpts:4,step:1,grow:1};/* step: 1 = the NL/NM/NS step-down of a still-scrolling XL option list on Fold (KIT BUG #2b, ON since KK28 56.27: the stacked frame gets the full screen height + the strip step; 0 = off) *//* kit-rank-name (OD:L1351): the tag's rank line is the RANK (Thái giám), never the office (Kính sự phòng) — the old office override is deleted */
 /* owner 21/11 (mood-seal): the picture of a look-up frame (Tâm trạng · X) carries the mood seal in its corner (kitSceneArt o.mark, KIT 28.19b); the live frame rebuilds its picture, so it takes the seal along (from the dialog's own band, else the headArt) */
 function kszLiveMark3(m,mb){let mark="",alt="";try{const i=mb.querySelector(":scope > .kdlgart .ksart-mark");if(i){const u=i.tagName==="IMG"?[0,i.getAttribute("src")]:/url\(["']?([^"')]+)/.exec(i.style.backgroundImage||"");if(u)mark=u[1];alt=i.getAttribute("aria-label")||""}}catch(e){}
  if(!mark){const h=m&&m.headArt;if(h&&typeof h!=="string"&&h.mark){mark=h.mark;alt=h.markAlt||""}}
@@ -80552,12 +80636,25 @@ function kitFrameApplyLive3(dlg){try{kszFootUp(dlg)}catch(e){}try{kszFeetFit(dlg
  const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   {const kb=dlg.querySelector(".k3body");R.style.maxHeight=Math.max(L.offsetHeight,kb?kb.clientHeight:0)+"px"}/* tall phone frame (kit §6.2c): the info column may use the whole grown body, not only the figure height */R.style.overflow="auto"}}
- kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);kszEvLaw10(dlg);clearTimeout(dlg.__evT);dlg.__evT=setTimeout(()=>{if(dlg.isConnected){try{kszEvLaw10(dlg)}catch(e){}}},350);return dlg.dataset.ksz}
+ kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);kszEvLaw10(dlg);kszTextFirst3(dlg);kszBodyFit3(dlg);clearTimeout(dlg.__evT);dlg.__evT=setTimeout(()=>{if(dlg.isConnected){try{kszEvLaw10(dlg);kszTextFirst3(dlg);kszBodyFit3(dlg)}catch(e){}}},350);return dlg.dataset.ksz}
+/* LAW 10 TEXT FIRST (KK29, MAIN 141 25/11, «Tân quân lập uy»: iPad showed the scene picture + the faction row while the 7 story lines sat in a 120 px scroll window nobody sees): the STORY TEXT (.kpmain: faces row + lines) is the content, so when it does not fit its window the room goes to it FIRST, by measurement, no typed numbers:
+   (1) the scene picture steps down to THE STRIP (kszEvStrip3, the same step as 56.6; the picture is never dropped), (2) the text takes its natural height (data-tf="1": .kpmain flex none, no scroll) and the option list keeps the rest, never less than its floor (the kit's 112 px, CSS min-height of .opts), and scrolls inside itself. When even that cannot hold the text (very long story) nothing changes: the text keeps its scroll window and the options stay reachable (56.22b). */
+function kszTextFirst3(dlg){try{{const R0=dlg.querySelector(".k3right"),pm0=R0&&R0.querySelector(":scope>.kpmain"),o0=R0&&R0.querySelector(":scope>.opts");/* idempotent: a text-first layout that still holds is kept (the layout passes run several times; resetting here made the frame flip back and forth) */if(dlg.dataset.tf==="1"&&pm0&&o0&&pm0.scrollHeight<=pm0.clientHeight+1&&R0.scrollHeight<=R0.clientHeight+2&&o0.clientHeight>=112)return}delete dlg.dataset.tf;{const e=dlg.querySelector(".k3right>.k3ev");if(e&&e.style.display==="none")e.style.display=""}if(dlg.dataset.picc==="out")delete dlg.dataset.picc;const R=dlg.querySelector(".k3right");if(!R||!R.getClientRects().length)return;const pm=R.querySelector(":scope>.kpmain"),o=R.querySelector(":scope>.opts")||dlg.querySelector(":scope>#mb>.opts");if(!pm||!o||o.parentElement!==R)return;
+ if(pm.scrollHeight<=pm.clientHeight+1)return;const ev=R.querySelector(":scope>.k3ev");const e0=ev&&{f:ev.style.flex,h:ev.style.height,m:ev.style.minHeight,ps:ev.dataset.pstep,ef:dlg.dataset.evfit,pc:dlg.dataset.picc};
+ const hs=ev?[kszEvStrip3(ev),kszEvMin3(ev)].filter((h,i,A)=>A.indexOf(h)===i).sort((x,y)=>y-x):[null];let ok=false;/* strip first, then the smallest picture the kit allows (never none) */
+ const outTry=()=>{if(!ev)return false;ev.style.display="none";dlg.dataset.evfit="x";dlg.dataset.picc="out";dlg.dataset.tf="1";return pm.scrollHeight<=pm.clientHeight+1&&R.scrollHeight<=R.clientHeight+2&&o.clientHeight>=112};
+ for(const h of hs){if(ev&&h!=null&&ev.offsetHeight>h+1){dlg.dataset.evfit="s";ev.dataset.pstep="1";ev.style.flex="none";ev.style.minHeight="0px";ev.style.height=h+"px";dlg.dataset.picc=h===hs[0]?"strip":"min"}
+  dlg.dataset.tf="1";ok=pm.scrollHeight<=pm.clientHeight+1&&R.scrollHeight<=R.clientHeight+2&&o.clientHeight>=112;if(ok)break}
+ if(!ok)ok=outTry();/* the picture steps OUT only when the text cannot be read unscrolled even with the smallest picture (law 10, MAIN 141 25/11; it comes back when the frame is laid out again) */
+ if(!ok){delete dlg.dataset.tf;if(ev)ev.style.display="";if(ev&&e0){ev.style.flex=e0.f;ev.style.height=e0.h;ev.style.minHeight=e0.m;if(e0.ps==null)delete ev.dataset.pstep;else ev.dataset.pstep=e0.ps;if(e0.ef==null)delete dlg.dataset.evfit;else dlg.dataset.evfit=e0.ef;if(e0.pc==null)delete dlg.dataset.picc;else dlg.dataset.picc=e0.pc}}
+ else{const im=ev&&ev.querySelector("img");if(im&&im.naturalWidth)kitPicFocus(ev,im)}}catch(e){console.error("kszTextFirst3",e)}}
+window.kszTextFirst3=kszTextFirst3;
+function kszBodyFit3(dlg){try{const R=dlg.querySelector(".k3right");dlg.classList.remove("kszbs");if(R&&R.getClientRects().length&&R.scrollHeight>R.clientHeight+2)dlg.classList.add("kszbs")}catch(e){}}
 /* LAW 10 (START_CORE, owner 18/11 ~16:05Z) + KIT 56.6 (owner 19/11 ~04:15Z "Hình minh họa của cái sự kiện này đâu?"): a BIG scene picture only when the content fits without scrolling;
    when the option list still scrolls the picture becomes THE STRIP (kszEvStrip3: the standard narrow strip NM 300x84 at the column width, at most NL) and stays there.
    The picture is NEVER dropped: every event frame shows its own scene picture (whole group, every live option frame, every tier, Fold + iPad). */
 function kszEvStrip3(c){const w=c.clientWidth||KIT_SIZE.pic.NM.w,NM=KIT_SIZE.pic.NM;return Math.max(KIT_SIZE.v3.evMin.fig,Math.min(kszPicH3("NL"),Math.ceil(w*NM.h/NM.w)))}
-function kszEvLaw10(dlg){const R=dlg.querySelector(".k3right"),ev=R&&R.querySelector(":scope>.k3ev");if(!ev)return;const o=R.querySelector(":scope>.opts"),sc=()=>o&&o.scrollHeight>o.clientHeight+1;
+function kszEvLaw10(dlg){const R=dlg.querySelector(".k3right"),ev=R&&R.querySelector(":scope>.k3ev");if(!ev)return;const o=R.querySelector(":scope>.opts")||dlg.querySelector(":scope>#mb>.opts"),sc=()=>o&&o.scrollHeight>o.clientHeight+1;/* 56.27: a stacked frame keeps its options under the portrait row (sibling of .k3body), the strip step reads that list too */
  delete dlg.dataset.evfit;if(!sc())return;const h=kszEvStrip3(ev);if(ev.dataset.pstep&&ev.offsetHeight<=h+1)return;/* the 56.6 step already made it the strip or smaller */
  dlg.dataset.evfit="s";ev.dataset.pstep="1";ev.style.flex="none";ev.style.minHeight="0px";ev.style.height=h+"px";dlg.dataset.picc="strip";const im=ev.querySelector("img");if(im&&im.naturalWidth)kitPicFocus(ev,im)}
 window.kszEvStrip3=kszEvStrip3;
@@ -80613,6 +80710,12 @@ function kszLivePick3(dlg){const SNAP=kszStaleSnap3(dlg);const SC=[];try{const m
  const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});kszStaleMark3(dlg,SNAP);return P}
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
  let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
+ /* KIT BUG #2c (MAIN 136 25/11, PEND:vulan M frame: #mb scrolled 16 px while the option list scrolled nothing): a frame below XL whose BODY (#mb) still scrolls after the pick goes up one size at a time; XL keeps the list as the one scroller. */
+ if(P!=="XL"){try{const mb=document.getElementById("mb"),sc=()=>mb&&mb.scrollHeight>mb.clientHeight+2;if(sc()){const ord=["S","M","L","XL"];for(const K of ord.slice(ord.indexOf(P)+1)){kszLiveLay3(dlg,K);P=K;if(!sc())break}}}catch(e){console.error("kszBodyUp",e)}}
+ /* KIT BUG #2b (MAIN 136 25/11, law 10 «a big scene picture only when the content fits without scrolling»): the frame is XL and the option list (>= 4 options) still scrolls: step the picture down (stacked NL > NM > NS: small portrait on top, option cards FULL width below) when that shows more of the list; keep XL when it does not help. */
+ if(P==="XL"&&KIT_SIZE.v3.live.step&&kitSzMode()==="kv1"){try{const o=dlg.querySelector(".opts"),n=o?o.querySelectorAll(":scope>button").length:0,ov=()=>o?o.scrollHeight-o.clientHeight:0;if(n>=KIT_SIZE.v3.live.stepOpts&&ov()>2){let best=null,bo=ov();dlg.dataset.kgrow="1";/* 56.27: a stacked frame is measured at the FULL screen height (the 70 % cap of a plain frame is what hid the third row) */const mb=document.getElementById("mb"),inMb=()=>{const r=o.getBoundingClientRect(),q=mb.getBoundingClientRect();return r.bottom<=q.bottom+1&&mb.scrollHeight<=mb.clientHeight+2&&o.clientHeight>=112};for(const K of ["NL","NM","NS"]){kszLiveLay3(dlg,K);const v=ov();if(!inMb())continue;/* a stacked pick counts only when its option list lies inside the frame body and nothing else scrolls */if(v<bo-8){bo=v;best=K}if(v<=2){best=K;break}}if(!best)delete dlg.dataset.kgrow;kszLiveLay3(dlg,best||"XL");if(best)P=best;try{if(typeof kitScrollCues==="function")setTimeout(()=>{try{kitScrollCues()}catch(e){}},0)}catch(e){}}}catch(e){console.error("kszStepDown",e)}}
+ /* KIT §56.25 (MAIN 138 25/11, TODO (b) iPad 5-6 options: option 5 cut below the XL frame with «Kéo xuống», frame only 70 % of the screen): iPad (kv2) L / XL frame whose option list (>= stepOpts options) STILL scrolls grows to the full screen height (the room the 70 % cap left unused) when that makes the list fit; kept only if it helps, else back to the normal height. Fold (kv1) frames are already full height. */
+ try{if(!(dlg.dataset.narrow==="1"&&kitSzMode()==="kv1"))delete dlg.dataset.kgrow;/* 56.27: the stacked Fold frame keeps the full height its step-down measured */if(KIT_SIZE.v3.live.grow&&kitSzMode()==="kv2"&&(P==="XL"||P==="L")){const o=dlg.querySelector(".opts"),n=o?o.querySelectorAll(":scope>button").length:0,ov=()=>o?o.scrollHeight-o.clientHeight:0;kitFrameApplyLive3(dlg);if(n>=KIT_SIZE.v3.live.stepOpts&&ov()>6){const o0=ov();dlg.dataset.kgrow="1";kszLiveLay3(dlg,P);kitFrameApplyLive3(dlg);if(ov()>=o0-6){delete dlg.dataset.kgrow;kszLiveLay3(dlg,P)}}}}catch(e){console.error("kszGrow",e)}
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 /* KIT §56.20 (ksz-lost-tap, owner LIVE fault 21/11): a re-pick (late picture, resize) moves the figure and the option block (kszLiveLay3 detaches + re-appends the same nodes), so a tap whose finger
    is DOWN on an option card when the re-pick runs loses its click (the node is detached between touch-down and touch-up). The re-pick therefore never runs while a pointer is down inside the modal:
@@ -80656,6 +80759,8 @@ html body #modal .dlg.kszlive:is([data-ksz="L"],[data-ksz="XL"])>#mb>.k3body{fle
 /* VARIANT B (review/opt-card-short-b, ROOT-56): the frame height follows its CONTENT (the class whose content fits), no screen-ratio rectangle; the three rules of 16:05Z are removed here.
    (was) KIT §8.4 TALL DIALOG ON THE PHONE (owner 18/11 ~16:05Z CANON, replaces 09:20Z "every frame"): ONLY the TALL centre frames (frame class L and XL) grow at the top and the bottom into a rectangle with the SAME aspect ratio as the page
    (KIT_FRAME.page = the full screen's shape), never taller than the screen. S / M (short, small frames) and plain modals stay exactly as they are. html.kv1 only (iPad / spread unchanged). One rule for the whole L/XL group. */
+html.kv2 body #modal .dlg.kszlive[data-kgrow="1"]:is([data-ksz="L"],[data-ksz="XL"]){--kph:min(calc(100*var(--kvh,1vh) - 24px),780px)}
+html.kv1 body #modal .dlg.kszlive[data-kgrow="1"][data-narrow="1"]{--kph:calc(100*var(--kvh,1vh) - 24px)}/* 56.27: Fold stacked frame (NL/NM/NS) whose option list needed the room: full screen height like L / XL */
 html body #modal .dlg.kszlive .k3right{overflow:hidden!important;overflow:clip!important}
 html body #modal .dlg.kszlive .k3right>:not(.opts){flex:none!important}
 /* narrow / stacked frame (the options are a sibling of .k3body inside #mb): same rule — #mb never scrolls, .k3body (portrait + info) stands still, only .opts scrolls */
@@ -80667,6 +80772,16 @@ html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns{display:grid!imp
 #modal .dlg.kszlive>#mb>.opts.k3btns{padding:0 12px 12px;box-sizing:border-box}
 html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns>button{grid-column:span var(--k3s,1)!important;order:0!important;width:auto;min-width:0;max-width:none;margin:0}
 #modal .dlg.kszlive .opts.k3meas>button{grid-column:auto}
+/* KIT BUG #3 (FOREMAN E 25/11 «Tin báo» 33 tin, KK26): a frame whose BODY is the long scroller (M / S frames: #mb scrolls, the option row stands at the END of it) never loses its way out — the option row is pinned to the bottom of the visible body (sticky, opaque), only the text scrolls. A panel with options has no header ✕, so without this the only closer sat below the scroll. */
+html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns{position:sticky!important;bottom:0;z-index:4;background:var(--k-card,#fffaf0)!important;box-shadow:0 -8px 10px -8px rgba(60,30,10,.35)}
+html body #modal .dlg.kszlive #mb .k3right>.opts.opts.opts.k3btns.k3btns{padding-top:8px}
+/* KIT BUG #3 r2 (M2 soft-lock 25/11: Tin báo 24 items, XL frame, .k3right overflow:clip 1977/714, option row at y 2036 outside the clip, nothing scrolls): in the right pane the text blocks give way to the option row — they shrink and scroll inside the pane (the picture block .k3ev keeps its size), the option row keeps its natural height (it is itself the list scroller when it is long). One rule for every L/XL frame: a long body never pushes its buttons out of the pane. Only when the pane STILL overflows after the option list has given what it can (class .kszbs set by kszBodyFit3 at the end of kitFrameApplyLive3), so every normal event frame keeps its behaviour (the list is the one scroller, KIT 56.18). */
+html body #modal .dlg.kszlive.kszbs .k3right>:not(.opts):not(.k3ev):not(.kscue){flex:0 1 auto!important;min-height:min(120px,40%)!important;overflow-y:auto!important;overscroll-behavior:contain}
+html body #modal .dlg.kszlive.kszbs .k3right>.opts.opts.opts{flex:0 0 auto!important;max-height:62%!important}
+/* KK29 text first (kszTextFirst3): the story text takes its natural height, the option list keeps the rest (floor 112 px) and scrolls inside itself */
+html body #modal .dlg.kszlive[data-tf="1"] .k3right>.kpmain.kpmain.kpmain{flex:0 0 auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+html body #modal .dlg.kszlive[data-tf="1"] .k3right>.kscue{position:absolute!important;margin:0!important;min-height:0!important}/* the «Kéo xuống» pill floats on the option list edge instead of taking a row */
+html body #modal .dlg.kszlive[data-tf="1"] .k3right>.opts.opts.opts.opts{flex:1 1 auto!important;max-height:none!important;min-height:112px!important;overflow-y:auto!important}
 html body #modal .dlg.kszlive #mb .opts.k3btns>button .kabody{min-width:6.5em}html body #modal .dlg.kszlive #mb .opts.k3btns>button :is(.kan,.kat){word-break:normal;overflow-wrap:normal;hyphens:none}`;document.head.appendChild(st)})();
 /* the #modal .dlg element is reused by every pop-up: the live frame is undone before the next render */
 function kszLiveReset3(){const d=document.querySelector("#modal .dlg");if(!d||!d.__ksz3)return;d.__ksz3=null;d.classList.remove("kszf","ksz3","kszlive");["ksz","pres","focus","lay","narrow"].forEach(k=>delete d.dataset[k]);d.style.removeProperty("--kszfh");d.style.removeProperty("--kszcw")}
@@ -95807,7 +95922,7 @@ function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoS
  (r.deltas||[]).forEach((d,i)=>{const s=document.createElement("span");s.className="kfoc-delta";s.innerHTML=typeof chip==="function"?chip(esc(d.t||d),d.cls||""):esc(d.t||d);const g=F.geo;s.style.left=(g.cx+(i-(r.deltas.length-1)/2)*70)+"px";s.style.top=(g.top+g.ih*.45)+"px";F.el.appendChild(s);
   if(still()||!s.animate){setTimeout(()=>s.remove(),KIT_FOC.reactMs);return}
   const a=s.animate([{opacity:0,transform:"translate(-50%,0)"},{opacity:1,transform:"translate(-50%,-18px)",offset:.2},{opacity:1,transform:"translate(-50%,-46px)",offset:.75},{opacity:0,transform:"translate(-50%,-60px)"}],{duration:KIT_FOC.reactMs,delay:i*120});a.onfinish=()=>s.remove()})}
-function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();/* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
+function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();F.el.classList.add("kfoc-closing");/* robot M1 25/11 (DEAD BUTTON, Hành sự cards covered by .kfoc-veil/.kfoc-fig for ~0.8 s after ✕): the layer is only the closing animation now — taps go through to what is under it at once *//* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
  if(still()){const a=wa(F,F.el,[{opacity:1},{opacity:0}],{duration:K.fadeMs});if(a)a.onfinish=()=>destroy(F,1);else destroy(F,1);return}
  [...F.el.querySelectorAll(".kfoc-b")].forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.85)"}],{duration:K.foldCloseMs}));wa(F,F.tabs,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});wa(F,F.plate,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});
  const d=feetDelta(F);F.img.style.transformOrigin="50% 100%";
@@ -95873,6 +95988,7 @@ html.kfoc-playing #kfxcv,html.kfoc-playing .kfx-fl,html.kfoc-playing .kfxk,html.
 .kfoc-tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;color:var(--ink,#3a2418);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
 .kfoc-tag .j59n{display:block;line-height:1.2;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
 .kfoc-play{position:absolute;z-index:4}
+.kfoc-closing,.kfoc-closing *{pointer-events:none!important}
 .kfoc-hud{position:absolute;left:56px;right:56px;top:0;display:flex;justify-content:center;gap:10px;padding:6px;z-index:5}
 .kfoc-say{position:absolute;left:12px;right:12px;bottom:10px;margin:0 auto;max-width:760px;min-height:84px;max-height:132px;box-sizing:border-box;padding:18px 14px 10px 76px;border-radius:12px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);z-index:6;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .kfoc-say p{margin:0;font-size:.95rem;line-height:1.35;}
@@ -96110,6 +96226,8 @@ function walkNpcPass(R,kh,fresh,first){if(!walkNpcOn()||!R||!R.P)return 0;let n=
    Difficulty (law 5) = jmgt mgTier(kind,{occ:"df"}): stake = BAL.mgTier.occ.df [base, perRank] by HER rank (the attacker's rank for a dodge), ease per kind = BAL.mgTier.kAdj.
    Source of each block: plan dev/handover/reports/duodo-focus.md §PLAN 2 (act table) — first values, calibrated with dev/measure/df-bots.js. */
 Object.assign(BAL,{df:{
+  /* KK29 (law 4): how long the encounter scene waits for the visitor's real face before it opens anyway (was a typed 4000 in jdfv) */
+  faceWaitMs:4000,
  on:1,                 /* 0 = the stage tap opens the old person pop-up (rollback / tests) */
  npc:1,                /* 0 = NPC-initiated cards keep the centre card (row 15 off) */
  inPerson:["tat","phatquy","nuoc","tea","ink"],/* Hậu cung acts that need her THERE, offered in the focus view too (ONE act, same lock: doAct) */
@@ -96393,7 +96511,7 @@ function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab=
 (function(){const s0=showModal;showModal=function(){const m=Q[0];/* a visitor is known BEFORE the encounter scene opens (rv-visitor-fix 1): her stage token is refreshed and the scene waits (≤ 4 s) until her real face has loaded, so the focus figure is HER, never the grey silhouette / loading stand-in */
 if(m&&m.__dfWait===1)return undefined;
 try{const w=m&&m.t==="Có người đến"&&m.who&&m.who.w;if(w&&w[0]==="r"&&typeof visitSeen==="function"&&m.__dfWait==null){const v=RV(w[1]);if(v){visitSeen(v);const bad=f=>!f||f.tagName!=="IMG"||!f.complete||!(f.currentSrc||f.getAttribute("src"))||f.classList.contains("j59sil")||/unknown-fig/.test(f.currentSrc||f.src||"");
- const i0=dfWhoIdx(m);if(i0>=0&&dfEncOn()&&bad(dfFig(i0))){try{renderStage()}catch(e){}m.__dfWait=1;const t0=Date.now();const poll=()=>{const i2=dfWhoIdx(m);if(!bad(i2>=0?dfFig(i2):null)||Date.now()-t0>4000){m.__dfWait=2;try{showModal()}catch(e){}}else setTimeout(poll,150)};setTimeout(poll,150);return undefined}}}}catch(e){}/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
+ const i0=dfWhoIdx(m);if(i0>=0&&dfEncOn()&&bad(dfFig(i0))){try{renderStage()}catch(e){}m.__dfWait=1;const t0=Date.now();const cue=typeof kitWaitCue==="function"?kitWaitCue():null;/* KK29: the wait shows the kit wait cue (a small «Đang thỉnh tranh…» pill), never a silent frozen screen */const poll=()=>{const i2=dfWhoIdx(m);if(!bad(i2>=0?dfFig(i2):null)||Date.now()-t0>BAL.df.faceWaitMs){m.__dfWait=2;try{cue&&cue()}catch(e){}try{showModal()}catch(e){}}else setTimeout(poll,150)};setTimeout(poll,150);return undefined}}}}catch(e){}/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
  if(m&&m.dfSeen&&DF.encM===m&&DF.F){try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}return undefined}const i=m&&!m.dfSeen&&m.opts&&m.opts.length&&dfEncOn()?dfWhoIdx(m):-1;if(i<0||!dfHasFig(i))return s0.apply(this,arguments);
  m.dfSeen=1;DF.encM=m;const p=curPeople()[i],fig=dfFig(i);try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}
  if(DF.F&&!dfSame(DF.p,p)){const o=DF.F;DF.F=null;DF.tk=null;try{o.destroy()}catch(e){}}DF.p=p;DF.i=i;popIdx=i;let F=DF.F;if(!F){const tk={};DF.tk=tk;F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(id),onClose:()=>dfClosed(tk)})}DF.F=F;
@@ -96806,9 +96924,9 @@ setTimeout(()=>setTimeout(()=>{try{dqInstall()}catch(e){console.error("dayq inst
    nothing on screen shows it), the button SAYS WHY with the one waiting-words table (CTM_WAIT.dqHeld) in the same wrapping look as the co-op wait
    (#next.kcwait, jcoopworld lockNext); the normal label comes back at the next render once the card is shown. Solo only (dqUi), like the hold. */
 function dqNextCue(){try{const n=document.getElementById("next");if(!n)return;const M=document.getElementById("modal");
- const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const t=window.CTM_WAIT&&CTM_WAIT.dqHeld;
+ const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const W=window.CTM_WAIT||{};const t=held&&W.dqRoom&&typeof dqRoomWait==='function'&&dqRoomWait()?W.dqRoom:W.dqHeld;/* button-crawl-fix-6 (A) */
  if(held&&t){if(!n.dataset.dqCue){n.dataset.dqCue="1";if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait")}if(n.textContent!==t)n.textContent=t;n.title=t}
- else if(n.dataset.dqCue){delete n.dataset.dqCue;n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if(n.textContent===t)n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
+ else if(n.dataset.dqCue){delete n.dataset.dqCue;n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if(n.textContent===W.dqHeld||n.textContent===W.dqRoom)n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
 setTimeout(()=>setTimeout(()=>{try{if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);dqNextCue();return r}}
  setInterval(dqNextCue,700)/* the hold releases on a close that may not render */;
  try{const n=document.getElementById("next");if(n)new MutationObserver(()=>dqNextCue()).observe(n,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["disabled"]})}catch(e){}/* an inner render (a wrapper's saved r0) rewrites the label: put the cue back at once, no flicker; idempotent (no write when equal) */}catch(e){console.error("dayq cue",e)}},0),0);
@@ -96825,6 +96943,29 @@ function dqWake(){try{const M=document.getElementById("modal");const m=Q[0];
 setTimeout(()=>setTimeout(()=>{try{setInterval(dqWake,700)}catch(e){}},0),0);
 window.dqWake=dqWake;
 window.DQ=DQ;
+/* button-crawl-fix-6 (F #12 25/11 12:53Z; BIG REVIEWER #4 bc-stack-review.md @3b8ed32e; robot s4d no-clock loops y8/y11, handover 37cfc029):
+   «Sang buổi / Sang ngày mới» greyed while NOTHING on screen shows what it waits for — two more members of the fix-5 family:
+   (A) a visitor / person scene («Có người đến», jdfv encounter: Q[0].dfSeen, DF.encM === Q[0]) plays only in HER ROOM; a tap on another tab parks it
+       (dfTabLayers hides .kfoc) and the turn waits on it for ever while she is on Dư đồ / a place page (s4d: «Tích Cần viện», 150 taps, Q = 1).
+       → the button says so (CTM_WAIT.dqRoom) and ONE tap on it takes her back to her room, where the scene goes on (same as tapping «Hành sự»).
+   (B) a STALE S.mg (a lesson / mini-game record with no mini-game screen: #ov hidden, no on-figure game) → the button stays greyed with no cue.
+       → the safety net reopens it the way loading a save does (resumeMG; jk4 clears S.mg when no game opens), after BAL.dayq.wake ms, solo only;
+       a tap on the greyed button does the same at once.
+   Paint / navigation only: no random draw, no new S key; co-op rooms untouched (dqUi). */
+function dqRoomWait(){try{const m=Q[0],D=window.DF;return dqUi()&&!!m&&typeof tab!=="undefined"&&tab!=="act"&&!!(m.dfSeen&&D&&D.encM===m&&D.F)}catch(e){return false}}
+function dqMgStale(){try{if(!dqUi()||!S.mg)return false;const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return false;if(window.DF&&DF.play)return false;
+  const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn())return false;
+  for(const sel of [".kmov:not(.km-out)","#kmrew","#kpodov",".kroul-ov","[id^=\"kroul\"]","#title","#kload"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+function dqBring(){try{if(dqRoomWait()){DQ.stat.room=(DQ.stat.room||0)+1;tab="act";render();return true}
+  if(dqMgStale()){DQ.stat.mgStale=(DQ.stat.mgStale||0)+1;const k=S.mg&&S.mg.k;try{resumeMG()}catch(e){console.error("dayq mg",e)}try{const ov=document.getElementById("ov");if(S.mg&&ov&&dqHidden(ov)){console.warn("dayq: stale mini-game record cleared",k);S.mg=null}}catch(e){}render();return true}
+  const M=document.getElementById("modal");if(dqUi()&&Q.length&&M&&dqHidden(M)&&dqFreeScreen()){showModal();return true}}catch(e){console.error("dayq bring",e)}return false}
+/* a disabled button gets no click: the tap is read on pointerup (like jact's grey cards); only when the turn cannot run (greyed, or a card / S.mg left
+   while the button was not re-rendered — robot s4d LIVE: enabled «Sang buổi», Q = 1, 150 taps with no effect) */
+document.addEventListener("pointerup",e=>{try{const n=e.target&&e.target.closest&&e.target.closest("#next");if(!n||!dqUi()||!(n.disabled||Q.length||S.mg))return;dqBring()}catch(x){}},true);
+(function(){const t0=setInterval(()=>{try{if(!DQ.mgw){if(dqMgStale())DQ.mgw={at:Date.now(),k:S.mg};return}if(!dqMgStale()||S.mg!==DQ.mgw.k){DQ.mgw=null;return}
+  if(Date.now()-DQ.mgw.at>=((BAL.dayq&&BAL.dayq.wake)||2000)){DQ.mgw=null;dqBring()}}catch(e){}},700)})();
+/* the cue: (A) says where the waiting person is (CTM_WAIT.dqRoom, in dqNextCue above); the m-fix-1 cue (dqHeld) stays for every other held card */
+window.dqBring=dqBring;
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -98803,7 +98944,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c68d9edf8ef9";window.CTM_BUILD=BUILD;
+const BUILD="97a11844a48c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
