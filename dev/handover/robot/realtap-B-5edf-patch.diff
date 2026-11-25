@@ -1,41 +1,14 @@
-diff --git a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
-index ea1fe815..a541c906 100644
---- a/dev/test/robot-rt-coop.js
-+++ b/dev/test/robot-rt-coop.js
-@@ -51,6 +51,11 @@ function guestPre(st) { return (sc, b) => {
- 
- async function seatLoop(ctx, who, dev, other) {
-   const p = await ctx.newPage(); const st = {}; let k = 0;
-+  const T0 = Date.now(), ts = () => Math.round((Date.now() - T0) / 1000) + 's';
-+  p.on('framenavigated', f => { if (f === p.mainFrame()) console.log('NAV', who, ts(), f.url().slice(0, 100)) });
-+  p.on('pageerror', e => console.log('PAGEERR', who, ts(), String(e.message).slice(0, 160)));
-+  p.on('console', m => { if (/reload|build|swreg|controller|Trở lại|rejoin|leave|COOP|429/i.test(m.text()) || m.type() === 'error') console.log('CONSOLE', who, ts(), m.type(), m.text().slice(0, 160)) });
-+  p.on('crash', () => console.log('CRASH', who, ts())); p.on('close', () => console.log('PAGECLOSE', who, ts()));
-   for (;;) {
-     k++; const extra = k > KIEP;
-     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
-@@ -69,7 +74,7 @@ async function seatLoop(ctx, who, dev, other) {
- (async () => {
-   /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
-   const ctxs = [];
--  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' }); ctxs.push(c); return c };
-+  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block', args: process.env.COOP_URL ? ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] : [] }); if (process.env.COOP_URL) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL); ctxs.push(c); return c };
-   const br = { close: () => Promise.all(ctxs.map(c => c.close())) };
-   const H = { done: false }, G = { done: false };
-   const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
-diff --git a/dev/test/robot-rt.js b/dev/test/robot-rt.js
-index ca3839c8..e6fac33a 100644
---- a/dev/test/robot-rt.js
-+++ b/dev/test/robot-rt.js
-@@ -40,6 +40,7 @@ const R = { job: { id: LIFE, origin: A.origin || null, road: A.road || null, bot
+--- a/dev/test/robot-rt.js	2026-11-25 11:31:05.009402145 +0000
++++ b/dev/test/robot-rt.js	2026-11-25 11:31:04.971511655 +0000
+@@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
  if (C.resume && fs.existsSync(CKPT)) { try { ck = JSON.parse(fs.readFileSync(CKPT, 'utf8')); Object.assign(R, ck.R); rs = ck.rs >>> 0 || rs; R.harness.taps0 = R.harness.taps || 0; R.harness.resumed = (R.harness.resumed || []).concat([{ at: new Date().toISOString(), buoi: R.buoi, from: ck.at }]); console.log('RESUME', LIFE, 'from', ck.at, 'buổi', R.buoi) } catch (e) { console.log('RESUME failed: ' + e.message); ck = null } }
-+const ktutSeen = new Set();
++const ktutSeen = new Set(), ktutTry = new Map();
  const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs.find(x => x.k === k); if (b) { b.n++; return b } const n = { k, type, msg, n: 1, at: sec(), ...extra }; R.bugs.push(n); console.log('BUG', type, msg); return n };
  
  /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
-@@ -127,14 +128,31 @@ async function play(p) {
+@@ -127,14 +128,36 @@
      /* stuck: no clock progress for STUCK_MS → bug + shot + save, unstick, SAME life continues */
      if (started && Date.now() - lastProg > STUCK_MS) { R.harness.stuck++; const shot = path.join(SHOTS, 'stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {});
        const svf = await dumpStuck('stuck-' + R.harness.stuck); const sv = !!svf; /* evidence FIRST, then the unstick ladder */
@@ -49,9 +22,14 @@ index ca3839c8..e6fac33a 100644
      if (!sc.b.some(x => x.hit) && sc.b.length && idle === 40) { const h = await p.evaluateHandle(() => window.__rtBtns[0]); await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: sc.b[0].t.slice(0, 50) }) }
      if (!sc.b.some(x => x.hit)) { idle++; if (idle > 4) { /* scene gate / mini-game board without buttons: tap inside it like a person */ const r = sc.lr; for (let k = 0; k < 6; k++) { const x = r.x + r.w * (0.15 + 0.7 * rnd()), y = r.y + r.h * (0.2 + 0.65 * rnd()); /* never land on a button (an exit road could sit there): only bare board / scene area */ const bare = await p.evaluate(([x, y]) => { const t = document.elementFromPoint(x, y); return !!t && !t.closest('button,[role=button],a,input,select,textarea,[data-tab]') }, [x, y]).catch(() => false); if (!bare) continue; if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y); R.harness.areaTaps = (R.harness.areaTaps || 0) + 1; break } } await p.waitForTimeout(idle > 4 ? 250 : 500); continue }
      idle = 0;
++    /* U1 segment patch (MAIN 139): ≥1 save+reload mid-year (RELOAD_AT, B patch) and once after each year rollover (this trigger): a player closes the tab and reopens the game; harness = the unstick reload path (title → Cùng hảo hữu → back into the room), the state before/after is recorded in harness.midReload */
++    if (started && sc.layer === 'page' && sc.S && !sc.S.dead && (sc.S.y > 1 && R._mrY !== sc.S.y)) { R._mrY = sc.S.y; const before = sc.S;
++      await p.waitForTimeout(3000); await unstick(p, rt, sc, 3); await p.waitForTimeout(8000); const s5 = await p.evaluate(SCAN).catch(() => null);
++      (R.harness.midReload = R.harness.midReload || []).push({ at: sec(), buoi: R.buoi, before: { y: before.y, t: before.t, w: before.w, b: before.b, age: before.age }, after: s5 && s5.S ? { y: s5.S.y, t: s5.S.t, w: s5.S.w, b: s5.S.b, age: s5.S.age } : null }); lastProg = Date.now(); continue }
 +    /* U1 ktut patch (Foreman B ruling 25/11): #ktut open and its hole target is not a tappable card (none, or «Hảo hữu của ta…») → DUMP, log a ktut-no-target bug row, then a real tap on the card's own «Đã hiểu». Never reload for it. */
-+    if (started && sc.layer === '#ktut') { const hl = sc.b.find(x => x.hole), ok = sc.b.find(x => !x.hole && /^đã hiểu/i.test(x.t));
-+      if (ok && (!hl || /hảo hữu của ta|đang vắng/i.test(hl.t))) {
++    if (started && sc.layer === '#ktut') { const hl = sc.b.find(x => x.hole), ok0 = sc.b.find(x => !x.hole && /^đã hiểu/i.test(x.t)), okRaw = await p.evaluate(() => { const b = [...document.querySelectorAll('#ktut button, #ktut .kbtn')].find(e => /^đã hiểu/i.test((e.textContent || '').trim())); if (!b) return -1; window.__rtKtutOk = b; const r = b.getBoundingClientRect(); return r.width > 0 && r.height > 0 ? 1 : 0 }).catch(() => -1), ok = ok0 || (okRaw === 1 ? { i: -1, t: 'Đã hiểu', raw: true } : null); /* «Đã hiểu» may not be in the hit list (probe) but is visible: tap it from the DOM by a real touch/pointer tap */
++      const tk0 = 'try|' + (sc.S ? sc.S.b + '/' + sc.S.t : '') + '|' + (hl ? hl.t : ''); const tries = ok ? (ktutTry.get(tk0) || 0) : 0; if (ok) ktutTry.set(tk0, tries + 1); /* hole tapped twice and the card is still up = the target is not a real card → «Đã hiểu» */
++      if (ok && (!hl || /hảo hữu của ta|đang vắng/i.test(hl.t) || tries >= 2)) {
 +        const tk = 'ktut|' + (sc.S ? sc.S.b + '/' + sc.S.t : '') + '|' + (hl ? hl.t : '');
 +        if (!ktutSeen.has(tk)) { ktutSeen.add(tk); const n = ktutSeen.size; const shot = path.join(SHOTS, 'ktut-' + n + '.png'); await p.screenshot({ path: shot }).catch(() => {});
 +          const dm = await p.evaluate(() => { const o = { g: {} }; const t = (n, f) => { try { o.g[n] = f() } catch (e) { o.g[n] = 'ERR ' + e.message } };
@@ -59,7 +37,7 @@ index ca3839c8..e6fac33a 100644
 +            t('card', () => (document.getElementById('ktut').innerText || '').slice(0, 400)); try { o.ls = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); o.ls[k] = localStorage.getItem(k) } } catch (e) {} return JSON.stringify(o) }).catch(() => null);
 +          if (dm) fs.writeFileSync(path.join(SHOTS, 'ktut-' + n + '-dump.json'), dm);
 +          bug('ktut-no-target', 'tutorial open with no tappable target card; tapped its own «Đã hiểu»', { shot, S: sc.S, hole: hl ? hl.t : null, card: sc.title, buttons: sc.b.map(b => b.t).slice(0, 8) }) }
-+        const hh = await p.evaluateHandle(i => window.__rtBtns[i], ok.i); await rt.tap(hh, { screen: '#ktut', label: ok.t.slice(0, 50) }); await p.waitForTimeout(800); continue } }
++        const hh = ok.raw ? await p.evaluateHandle(() => window.__rtKtutOk) : await p.evaluateHandle(i => window.__rtBtns[i], ok.i); R._kn = R._kb === R.buoi ? (R._kn || 0) + 1 : 1; R._kb = R.buoi; await rt.tap(hh, { screen: '#ktut', label: ok.t.slice(0, 50) }); await p.waitForTimeout(800); continue } }
      /* a button of the top layer, fully on screen, covered by ANOTHER layer → real tap on it → DEAD BUTTON if the cover stays */
      for (const d of started ? sc.b.filter(x => x.deadSuspect) : []) { const ds = sc.layer + '|' + sc.title + '|' + d.t; if (deadSeen.has(ds)) continue; deadSeen.add(ds); await p.waitForTimeout(3000); const s2 = await p.evaluate(SCAN).catch(() => null); const d2 = s2 && s2.b.find(x => x.t === d.t && x.deadSuspect); if (d2) { const h = await p.evaluateHandle(i => window.__rtBtns[i], d2.i); await rt.tap(h, { screen: s2.layer + (s2.title ? ' «' + s2.title + '»' : ''), label: d.t.slice(0, 50) }) } }
 +    /* B segment rule (MAIN 139): ONE scheduled save + reload mid-year (env RELOAD_AT = buổi); the seat rejoins its room through the title like a person reopening the app */
@@ -67,7 +45,7 @@ index ca3839c8..e6fac33a 100644
      /* same screen many steps → light unstick (Escape / ✕) — logged, not a stuck bug */
      const sig = sc.layer + '|' + sc.title + '|' + sc.b.map(b => b.t).join('/') + '|' + key;
      if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
-@@ -154,7 +172,7 @@ async function play(p) {
+@@ -154,7 +177,7 @@
      await p.waitForTimeout(ok ? 220 : 400);
  
      function choose(sc, started) {
@@ -76,7 +54,16 @@ index ca3839c8..e6fac33a 100644
        if (!b.length) b = hb;
        const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
        /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
-@@ -214,8 +232,8 @@ async function play(p) {
+@@ -169,7 +192,7 @@
+       const hole = b.find(x => x.hole && !EXIT_RE.test(x.t)); if (hole) return hole; /* tutorial: tap what it points at */
+       const nav = x => NAV_RE.test(x.t);
+       const close = x => x.x || CLOSE_RE.test(x.t);
+-      const opts = b.filter(x => !nav(x) && !close(x) && !x.inp);
++      const opts = b.filter(x => !nav(x) && !close(x) && !x.inp && !(R._kb === R.buoi && R._kn >= 3 && /^đi làm/i.test(x.t))); /* U1 ktut r3: the coach was dismissed ≥3× this buổi → stop re-opening it with «Đi làm» */
+       const nonExit = opts.filter(x => !isExit(x));
+       const exits = opts.filter(isExit);
+       const isPage = sc.layer === 'page' || sc.b.some(x => x.id === 'next');
+@@ -214,8 +237,8 @@
  /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
  async function unstick(p, rt, sc, lvl) {
    R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
@@ -87,3 +74,26 @@ index ca3839c8..e6fac33a 100644
    if (lvl >= 3) {
      await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
      await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
+--- a/dev/test/robot-rt-coop.js	2026-11-25 11:31:05.011364065 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-25 11:30:51.499504574 +0000
+@@ -51,6 +51,11 @@
+ 
+ async function seatLoop(ctx, who, dev, other) {
+   const p = await ctx.newPage(); const st = {}; let k = 0;
++  const T0 = Date.now(), ts = () => Math.round((Date.now() - T0) / 1000) + 's';
++  p.on('framenavigated', f => { if (f === p.mainFrame()) console.log('NAV', who, ts(), f.url().slice(0, 100)) });
++  p.on('pageerror', e => console.log('PAGEERR', who, ts(), String(e.message).slice(0, 160)));
++  p.on('console', m => { if (/reload|build|swreg|controller|Trở lại|rejoin|leave|COOP|429/i.test(m.text()) || m.type() === 'error') console.log('CONSOLE', who, ts(), m.type(), m.text().slice(0, 160)) });
++  p.on('crash', () => console.log('CRASH', who, ts())); p.on('close', () => console.log('PAGECLOSE', who, ts()));
+   for (;;) {
+     k++; const extra = k > KIEP;
+     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
+@@ -69,7 +74,7 @@
+ (async () => {
+   /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
+   const ctxs = [];
+-  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' }); ctxs.push(c); return c };
++  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block', args: process.env.COOP_URL ? ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] : [] }); if (process.env.COOP_URL) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL); ctxs.push(c); return c };
+   const br = { close: () => Promise.all(ctxs.map(c => c.close())) };
+   const H = { done: false }, G = { done: false };
+   const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
