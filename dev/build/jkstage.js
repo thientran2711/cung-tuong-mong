@@ -156,7 +156,9 @@ function kstgTalkWants(dl,g){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.ta
  const bs=typeof kitHandCards==="function"?kitHandCards(g):[];if(!bs.length)return false;if(bs.some(b=>b.querySelector(".kodds")))return false;
  return !!dl.querySelector(".kpmain .kfacts>.kfact")}catch(e){return false}}
 function kstgTalkOn(dl,g){try{if(!dl.classList.contains("kstage"))return false;const on=kstgTalkWants(dl,g);dl.classList.toggle("kstalk",on);if(!on){if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}return false}
- if(!dl.__kstT){const T=dl.__kstT={i:0,asked:false,P:null};dl.addEventListener("click",e=>{try{const t=e.target;if(!dl.__kstT||!dl.classList.contains("kstalk"))return;if(t.closest(".kpk,.khconf,.kph,.kseal,button"))return;kstgTalkNext(dl)}catch(x){}})}
+ /* the talk state lives on the Q item (a re-render of the frame makes a new .dlg: the line she reached and the open plaques stay) */
+ const m=typeof Q!=="undefined"&&Q[0]||null;if(m){if(!m.__kstT)m.__kstT={i:0,asked:false,P:null};if(dl.__kstT!==m.__kstT){const o=dl.__kstT;dl.__kstT=m.__kstT;if(o&&o.P&&o!==m.__kstT)try{o.P.destroy()}catch(e){}if(dl.__kstT.P&&dl.__kstT.P.host!==dl){try{dl.__kstT.P.destroy()}catch(e){}dl.__kstT.P=null;dl.__kstT.sig=""}}}else if(!dl.__kstT)dl.__kstT={i:0,asked:false,P:null};
+ if(!dl.__kstL){dl.__kstL=1;dl.addEventListener("click",e=>{try{const t=e.target;if(!dl.__kstT||!dl.classList.contains("kstalk"))return;if(t.closest(".kpk,.khconf,.kph,.kseal,button"))return;kstgTalkNext(dl)}catch(x){}})}
  return true}catch(e){return false}}
 function kstgLines(dl){return[...dl.querySelectorAll(".kpmain .kfacts>.kfact")].filter(x=>(x.textContent||"").trim())}
 function kstgTalkShow(dl){const T=dl.__kstT,L=kstgLines(dl);if(!T||!L.length)return;T.i=Math.min(T.i,L.length-1);L.forEach((x,k)=>x.classList.toggle("kson",k===T.i));
@@ -180,7 +182,7 @@ function kstgTalkAsk(dl,B){try{if(typeof kitPick==="undefined")return;const T=dl
  const sig=acts.map(a=>a.n).join("|")+"|"+Math.round(A.x)+","+Math.round(A.y)+","+Math.round(A.h);if(T.P&&T.P.open&&T.sig===sig)return;const grp=T.P&&T.P.group;try{T.P&&T.P.destroy()}catch(e){}T.sig=sig;
  const sp=dl.querySelector("#mb>.kstg-sp");const av=[];if(sp){const r=sp.getBoundingClientRect();av.push({x:r.left-D.left,y:r.top-D.top,w:r.width,h:r.height})}
  T.P=kitPick.open({host:dl,anchor:A,side:"l",groups,group:grp||groups[0].k,dismiss:false,avoid:av,noLap:false,
-  onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}dl.__kstT=null;b.click()},
+  onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}b.click()},
   onOff:(a)=>{}})}catch(e){console.error("kstgTalkAsk",e)}}
 function K_SAYPER(){return KIT_STAGE.sayPer}
 (function(){try{const st=document.createElement("style");st.id="kit-stage-talk";const P="html body #modal#modal#modal#modal#modal.kstg .dlg.kstage.kstalk";st.textContent=`

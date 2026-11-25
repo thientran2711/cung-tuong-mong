@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"86ccd0c0+","t":"2026-11-25T22:58Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"4f9a9bdfd63c","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
+window.CTM_BI={"s":"73444d0b+","t":"2026-11-25T23:04Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"45a59accb709","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -96090,7 +96090,7 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
  if(!c){c=document.createElement("div");c.className="khconf kpk-conf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;
   c.addEventListener("click",e=>{e.stopPropagation();const k=e.target.closest("button");if(!k||!P.up)return;const u=P.up,aa=(P.G.acts||[]).find(x=>String(x.id)===u.dataset.id);if(k.classList.contains("khok")){if(aa)pick(P,aa,u.querySelector(".kpk-b"))}else drop(P)});P.el.appendChild(c)}
  const s=(typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44,gap=6,w=2*s+gap,G=P.G,x0=parseFloat(n.style.left)||n.__x,wd=n.offsetWidth||G.cw,y0=n.offsetTop;
- let x=G.side==="l"?x0-w*.35:x0+wd-w*.65;x=Math.max(2,Math.min(G.W-w-2,x));const y=Math.max(2,y0-s*.62);
+ /* beside the plaque on its outer side, centred on it (never over its name); no room → on its outer top corner */let x,y;const out=G.side==="l"?x0-w-6:x0+wd+6;if(out>=2&&out+w<=G.W-2){x=out;y=y0+((n.offsetHeight||G.h)-s)/2}else{x=G.side==="l"?x0-w*.35:x0+wd-w*.65;y=y0-s*.62}x=Math.max(2,Math.min(G.W-w-2,x));y=Math.max(2,y);
  c.hidden=false;c.style.left=Math.round(x)+"px";c.style.top=Math.round(y)+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitPick conf",e)}}
 function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
@@ -97453,7 +97453,9 @@ function kstgTalkWants(dl,g){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.ta
  const bs=typeof kitHandCards==="function"?kitHandCards(g):[];if(!bs.length)return false;if(bs.some(b=>b.querySelector(".kodds")))return false;
  return !!dl.querySelector(".kpmain .kfacts>.kfact")}catch(e){return false}}
 function kstgTalkOn(dl,g){try{if(!dl.classList.contains("kstage"))return false;const on=kstgTalkWants(dl,g);dl.classList.toggle("kstalk",on);if(!on){if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}return false}
- if(!dl.__kstT){const T=dl.__kstT={i:0,asked:false,P:null};dl.addEventListener("click",e=>{try{const t=e.target;if(!dl.__kstT||!dl.classList.contains("kstalk"))return;if(t.closest(".kpk,.khconf,.kph,.kseal,button"))return;kstgTalkNext(dl)}catch(x){}})}
+ /* the talk state lives on the Q item (a re-render of the frame makes a new .dlg: the line she reached and the open plaques stay) */
+ const m=typeof Q!=="undefined"&&Q[0]||null;if(m){if(!m.__kstT)m.__kstT={i:0,asked:false,P:null};if(dl.__kstT!==m.__kstT){const o=dl.__kstT;dl.__kstT=m.__kstT;if(o&&o.P&&o!==m.__kstT)try{o.P.destroy()}catch(e){}if(dl.__kstT.P&&dl.__kstT.P.host!==dl){try{dl.__kstT.P.destroy()}catch(e){}dl.__kstT.P=null;dl.__kstT.sig=""}}}else if(!dl.__kstT)dl.__kstT={i:0,asked:false,P:null};
+ if(!dl.__kstL){dl.__kstL=1;dl.addEventListener("click",e=>{try{const t=e.target;if(!dl.__kstT||!dl.classList.contains("kstalk"))return;if(t.closest(".kpk,.khconf,.kph,.kseal,button"))return;kstgTalkNext(dl)}catch(x){}})}
  return true}catch(e){return false}}
 function kstgLines(dl){return[...dl.querySelectorAll(".kpmain .kfacts>.kfact")].filter(x=>(x.textContent||"").trim())}
 function kstgTalkShow(dl){const T=dl.__kstT,L=kstgLines(dl);if(!T||!L.length)return;T.i=Math.min(T.i,L.length-1);L.forEach((x,k)=>x.classList.toggle("kson",k===T.i));
@@ -97477,7 +97479,7 @@ function kstgTalkAsk(dl,B){try{if(typeof kitPick==="undefined")return;const T=dl
  const sig=acts.map(a=>a.n).join("|")+"|"+Math.round(A.x)+","+Math.round(A.y)+","+Math.round(A.h);if(T.P&&T.P.open&&T.sig===sig)return;const grp=T.P&&T.P.group;try{T.P&&T.P.destroy()}catch(e){}T.sig=sig;
  const sp=dl.querySelector("#mb>.kstg-sp");const av=[];if(sp){const r=sp.getBoundingClientRect();av.push({x:r.left-D.left,y:r.top-D.top,w:r.width,h:r.height})}
  T.P=kitPick.open({host:dl,anchor:A,side:"l",groups,group:grp||groups[0].k,dismiss:false,avoid:av,noLap:false,
-  onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}dl.__kstT=null;b.click()},
+  onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}b.click()},
   onOff:(a)=>{}})}catch(e){console.error("kstgTalkAsk",e)}}
 function K_SAYPER(){return KIT_STAGE.sayPer}
 (function(){try{const st=document.createElement("style");st.id="kit-stage-talk";const P="html body #modal#modal#modal#modal#modal.kstg .dlg.kstage.kstalk";st.textContent=`
@@ -99472,7 +99474,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4f9a9bdfd63c";window.CTM_BUILD=BUILD;
+const BUILD="45a59accb709";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
