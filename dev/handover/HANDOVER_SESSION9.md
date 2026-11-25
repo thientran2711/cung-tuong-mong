@@ -3545,3 +3545,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (14:38Z) M5 at roll line (depth 8, cannot open) → MAIN opened M5b session_01V1ZZH4A8DX4KnzNQeiYqJb (sonnet; same life SEED 105 from dev/handover/robot/flight-M5/). M5 keeps bot until «M5b up», then archive.
 - (14:40Z) LC15 16 = 423d672e hardlock-r4 (CHANGE «Không còn việc nào mà mọi lựa chọn đều mờ, không lối ra.» OK); gates running. Kit GO held.
 - (14:42Z) M5b up (Fold, SEED 105, on old build 0756a05b < LIVE 9f72524b → told: tag findings by sha, recheck on LIVE). M5 told to final-dump + stop → archive on next wake.
+- (14:44Z) M5 stopped (final save 6d0cf39b) → ARCHIVED; M5b told to resume from 6d0cf39b if its save is older.
