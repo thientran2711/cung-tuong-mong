@@ -18,7 +18,16 @@ const RT=require('./realtap.js'); /* the ONE shared real-tap lib (review/robot-r
    a refused tap is reported to the caller as «DEAD BUTTON {json}» (why = covered / clipped / gone / disabled / popup) */
 const RTS=new WeakMap();
 async function tap(p,target,o={}){let rt=RTS.get(p);if(!rt){rt={cur:null};rt.rt=RT.make(p,{log:d=>{if(rt.cur)rt.cur(d)}});RTS.set(p,rt)}
- let got=null;rt.cur=d=>{if(d&&d.k!=='tap')got=d};const ok=await rt.rt.tap(target,{screen:o.screen,label:o.label});rt.cur=null;
+ try{const el0=target&&target.asElement?target.asElement():null;if(el0)await el0.evaluate(e=>{window.__bcLast=e})}catch(e){}
+ let got=null;rt.cur=d=>{if(d&&d.k!=='tap')got=d};let ok=await rt.rt.tap(target,{screen:o.screen,label:o.label});
+ /* a button clipped by a HORIZONTAL kit tab row (Tư trang sub-tabs, Sổ ghi origin rows): a person swipes the row with a finger until it shows — real touch gesture (CDP), up to 6 swipes, then tap again */
+ for(let sw=0;!ok&&got&&got.k==='clipped'&&sw<6;sw++){
+  const info=await p.evaluate(()=>{const e=window.__bcLast;if(!e||!e.isConnected)return null;const r=e.getBoundingClientRect();for(let s=e.parentElement;s&&s!==document.body;s=s.parentElement){const cs=getComputedStyle(s);if(/(auto|scroll)/.test(cs.overflowX)&&s.scrollWidth>s.clientWidth+2){const q=s.getBoundingClientRect();if(q.height<1||q.top>innerHeight||q.bottom<0)return null;const left=r.left<q.left+4;return{x:Math.max(1,Math.min(innerWidth-1,q.left+q.width/2)),y:Math.max(1,Math.min(innerHeight-1,q.top+Math.min(q.height,innerHeight-q.top)/2)),dx:left?-Math.min(q.width*.6,Math.abs(r.left-q.left)+40):Math.min(q.width*.6,r.right-q.right+40)}}}return null}).catch(()=>null);
+  if(process.env.BCDBG)console.log('SWIPE?',o.label,JSON.stringify(info),JSON.stringify(await p.evaluate(()=>{const e=window.__bcLast;const o=[];for(let s=e&&e.parentElement;s&&s!==document.body;s=s.parentElement){const cs=getComputedStyle(s),q=s.getBoundingClientRect();o.push(s.tagName+'.'+String(s.className).slice(0,30)+' ox='+cs.overflowX+' oy='+cs.overflowY+' sw='+s.scrollWidth+'/'+s.clientWidth+' sh='+s.scrollHeight+'/'+s.clientHeight+' top='+Math.round(q.top)+' bot='+Math.round(q.bottom))}const r=e.getBoundingClientRect();return{r:[r.left,r.top,r.right,r.bottom].map(Math.round),o:o.slice(0,6)}}).catch(er=>String(er).slice(0,200))));
+  if(!info)break;
+  try{const cdp=await p.context().newCDPSession(p);await cdp.send('Input.synthesizeScrollGesture',{x:info.x,y:info.y,xDistance:-info.dx,gestureSourceType:'touch',speed:700});await cdp.detach()}catch(e){break}
+  await p.waitForTimeout(350);got=null;ok=await rt.rt.tap(target,{screen:o.screen,label:o.label})}
+ rt.cur=null;
  if(!ok){const why=!got?'not tappable':got.k==='DEAD BUTTON'?(got.cover==='not in page'?'not found':'covered'):got.k;
   if(o.shot)await p.screenshot({path:o.shot,type:'jpeg',quality:55}).catch(()=>{});
   (o.log||(m=>console.log(m)))('DEAD BUTTON '+JSON.stringify({screen:o.screen||'',label:o.label||'',why,cover:got&&got.cover||''}))}
