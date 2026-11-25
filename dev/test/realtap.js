@@ -59,6 +59,8 @@ function make(page, opt = {}) {
     if (!h) { return dead(info, { lab: info.label || String(target), cover: 'not in page' }) }
     let p = await h.evaluate(PROBE).catch(() => ({ gone: true }));
     if (!p.ok) p = await scrollTo(h);
+    /* half hidden under a fixed bar (tabs, header): a person scrolls it toward the middle first */
+    if (!p.ok && !p.gone && !p.disabled && !p.zero && p.top != null) { const vh = (page.viewportSize() || { height: 800 }).height; const dy = (p.top + p.bottom) / 2 - vh / 2; if (Math.abs(dy) > 20) { const vw = (page.viewportSize() || { width: 800 }).width; await page.mouse.move(vw / 2, vh / 2); await page.mouse.wheel(0, dy); await page.waitForTimeout(350); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } }
     if (!p.ok && info.wait) { const t0 = Date.now(); while (!p.ok && Date.now() - t0 < info.wait) { await page.waitForTimeout(400); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } }
     if (p.disabled) { log({ k: 'disabled', screen: info.screen, label: info.label }); return false }
     if (p.gone) { log({ k: 'gone', screen: info.screen, label: info.label }); return false }

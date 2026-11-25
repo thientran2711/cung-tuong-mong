@@ -14,3 +14,12 @@ PRIORITY #1 CHECK: 'real tap|realtap|elementFromPoint|robot-audit' → OD 25/11 
 - co-op: `node dev/test/robot-rt-coop.js <LIVE url> <out> host=fold guest=ipad kiep=1 seed=<n> tag=<name> [hostOrigin= hostRoad= guestOrigin= guestRoad=]`.
 - outputs: <out>/<life>.json + .md (+ shots-<life>/ for dead buttons / stuck; shots NEVER in git). STATUS line every hour on stdout; final line «LIFE DONE …» / «ROOM DONE …».
 - audit: `node dev/measure/robot-audit.js <out>` (from the handover branch).
+
+## Self-test 25/11 (LIVE github.io, slices — a slice is not a life)
+| device | buổi | real taps | dead buttons | stuck | bugs | JS clicks |
+|---|---|---|---|---|---|---|
+| Fold 755x1000 | 4 | 34 | 0 | 0 | 0 | 0 |
+| iPad 1180x820 | 4 | 43 | 1 (act card half under the fixed #tabs bar → fixed in harness: scroll it to the middle first, then tap) | 0 | 0 | 0 |
+| co-op host Fold + guest iPad | room VRDG made + joined by taps (guest typed the code), both seats in the palace playing | — | — | — | — | 0 |
+- grep: no `.click(` / `dispatchEvent` in dev/test/realtap.js, robot-rt.js, robot-rt-coop.js (only page.mouse.click / touchscreen.tap at hit-checked points).
+- Not dead buttons by design: hint popups (#kpop), tap-out catcher (#kxcatch), pointer-events:none / disabled options, element gone between scan and tap.
