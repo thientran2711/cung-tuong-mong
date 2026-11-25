@@ -114,3 +114,36 @@ Verdict: **PASS — review/flight-coop-sync-r 7902247b** (= 4cb42b96 + merge of 
 | laws 4 / 7 / 9 | no number, no player text, no UI touched |
 NOTE (harness, not this branch): coop-e2e's Fold viewport is 686x880@2.2, not 755x1000 — pre-existing in the harness.
 SIDE LEAD (law 6b, NOT a FAIL — F routes it): after a host rebirth «one j61 key = one person» FAILs ×4 on the host seat, key s1 = ["Tố Trân","San Hô"] (j61 key "s"+sid: the new life's staff sid restarts at 1 while the old life's servant sid 1 still lives in the world). Intermittent (0/10 on 4cb42b96, 4/10 on 7902247b). Not caused by this fix (it only opens the night gate; no staff code touched); unreachable on LIVE because LIVE stalls at that very rebirth — the fix unmasks it. Family to route: rebirth staff-id reuse (host and guest seats), j61 key / KREG.
+
+## flight-choose-guard (FLIGHT ROOT-CAUSE FIXER, 25/11)
+PRIORITY #1 CHECK ('chooseM opts[i]' / 'eaLock'): reused j3 chooseM, jemoact temper lock, jdeadcard net, dev/test/dead-card.js; no new mechanism.
+Branch review/flight-choose-guard from LIVE 4da55ce8: d716e6ea.
+
+### Verdict (arm B co-op H77P wk131)
+1. Host JS error «Cannot read properties of undefined (reading 'off')» = j3 chooseM reads `m.opts[i].off` with no guard; every one of the 23 chooseM wrappers guards `m.opts[i]`, only the base did not. A caller that passes an index not on the card in front reaches it: jnf night-choice timer `chooseM(findIndex(«Thôi»))` gives −1 when the card has no «Thôi»; a stale DOM / relayed / scripted index does the same. Stack was not captured (B-COOP), so the exact caller of that one hit is unknown; the guard now logs it (window.__badPick with the caller) for the next robot round.
+2. Guest «Kẻ hầu» (serv-022) all 4 greyed at bạc 117: not bạc alone (solo at 117 → 4/4 open). jemoact's temper lock (eaLockWhy) only greys an answer while «another usable answer» stays open, but «usable» checked bạc only: a temper lock could grey the last road she could really take when the others are closed by any other rule. Same family as the dead card.
+
+### Fix
+- j3 chooseM: `if(!c){chooseBad(i,m);return}` — card stays, logged with caller.
+- jnf timer: never chooseM(−1); no «Thôi» → treated as her «no» path.
+- jemoact: eaFree(o) = open by EVERY greying rule (bạc, kitOff, lock, tsDis, unmet need, lk()); used by the lock rule, the eaLock branch and the bot fallback pick.
+- jdeadcard: the screen is the truth — every visible option button disabled (DOM-only greying wrappers) is a dead card too → kit «Lui».
+
+### Family scan (opts[i] lookups that can see an index off the card)
+| place | before | after |
+|---|---|---|
+| j3 chooseM (base) | unguarded → «reading 'off'» | guarded + logged |
+| 23 chooseM wrappers (j41 j75 j78 j85 j87 j95b j99succ jaudit jcoopthin jcoopthinf jemoact jevb jgpick jkh jkiep jlooks jmem jne jnf jnight jsmg jts jtsb jweather jitev j19) | guarded (`m&&m.opts&&m.opts[i]` / try) | unchanged |
+| direct callers: jnf timer findIndex | −1 possible | fixed |
+| jcoopthin 445, jcooptimer 205, jk4 843, jdfv 78, jkiep 48, jts 43, jtsb 30 | guarded / own index | unchanged |
+
+### Tests
+| test | before (4da55ce8) | after (d716e6ea) |
+|---|---|---|
+| dead-card.js part 4: chooseM(99 / −1 / undefined) | 3× «reading 'off'» | refused, card stays, 3 logged |
+| dead-card.js part 5: bạc road she cannot pay + temper-locked road | 0/2 open, no net = dead | 1/2 open |
+| dead-card.js parts 1–3 | PASS | PASS |
+| coop-e2e both seats | — | 142/142 |
+| quickcheck | — | PASS 633 s (1st run FAIL on perf longTaskMax 3894 vs 2281 = noise; rerun PASS, render 268/268) |
+
+READY flight-choose-guard d716e6ea.
