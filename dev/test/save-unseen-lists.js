@@ -13,7 +13,7 @@
      nl-4s      after «Nhận thân phận» she answers what comes for 4 s → reload → every top-bar number + date exactly as on screen.
      drift      a seeded life, taps over the new year with one act after each: after every moment the sổ equals the screen (Danh, Sủng, Bạc, Đức, Tài, Sắc,
                 Tâm cơ, Sức, Thái hậu, date); reload 0 s and 4 s after the last tap → the same numbers.
-   env SUL_ONLY=tinbao,nl-0s · SUL_MUTATE=nt (the sổ loses the notice list) | evh (loses the held cards) | nl (the life-start write is delayed: none while
+   env SUL_ONLY=tinbao,nl-0s · SUL_MUTATE=rk2 (a remade card pays again) | nt (the sổ loses the notice list) | evh (loses the held cards) | nl (the life-start write is delayed: none while
    the identity card is open, none at once at «Nhận thân phận») — a MUTATE run must FAIL.
    usage: node dev/test/save-unseen-lists.js [page=index.html] [devices=fold,ipadAir] [seed=1]   (serves the repo root = the BUILT site)
    exit 0 = every case PASS. */
@@ -29,6 +29,8 @@ const HUD=`(()=>[...document.querySelectorAll('#kstrow .kst')].map(e=>e.dataset.
 /* page-side mutations (applied after every page load) */
 const MUTJS={nt:`(()=>{const s0=ser;ser=function(){const d=s0.apply(this,arguments);if(d)delete d.nt;return d}})()`,
  rk:`(()=>{rcpMk=function(){return null}})()`,
+ /* rk2: a remade card pays again (a generator with a side effect) — the remake ×2 check must FAIL */
+ rk2:`(()=>{for(const k in QRC){const f=QRC[k];QRC[k]=function(){if(RCPRE)S.bac+=1;return f.apply(this,arguments)}}})()`,
  evh:`(()=>{const s0=ser;ser=function(){const d=s0.apply(this,arguments);if(d)delete d.evh;return d}})()`,
  /* nl: the life-start write is delayed — nothing written while the identity card is open (yet the buổi marked as written), no at-once write at «Nhận thân phận» */
  nl:`(()=>{window.jqSaveNow=function(){};const s0=save;save=function(){if(typeof NLP!=='undefined'&&NLP&&S&&!S.dead){JQ.k=[S.year,S.month,S.tuan,S.buoi||0,S.name].join('.');JQ.s=S;return}return s0.apply(this,arguments)}})()`};
@@ -131,7 +133,10 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
    if(__sbr.dawn()){const d=document.getElementById('dawn');const bt=[...d.querySelectorAll('button')].filter(x=>__sbr.vis(x));if(bt.length)bt[bt.length-1].click();else{d.classList.remove('on');d.hidden=true}}
    const sc=document.querySelector('.kmov:not(.km-out) button,#kmrew button');if(sc)sc.click();await sl(100)}
   await sl(wait);const L=eval(uns);const all=Q.concat(typeof SP13!=='undefined'?SP13.L.map(x=>x.m):[],typeof EVHOLD!=='undefined'?EVHOLD.map(h=>h.m):[]);
-  const code=all.filter(m=>m&&m.opts&&m.opts.length&&typeof jqSaveable==='function'&&!jqSaveable(m)).map(m=>String(m.t||'').slice(0,40)+(m.__rkLen?' ra '+m.__rkLen:''));return{sv:__sbr.saved(),dd:window.__dd||null,code,k0,key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L,stat:{sp:typeof SP13!=='undefined'?SP13.stat.unsaved||0:0,jq:typeof JQ!=='undefined'?JQ.stat:{}}}},[FCAL[flip],wait,VEC,HUD,UNSEEN]);
+  const code=all.filter(m=>m&&m.opts&&m.opts.length&&typeof jqSaveable==='function'&&!jqSaveable(m)).map(m=>String(m.t||'').slice(0,40)+(m.__rkLen?' ra '+m.__rkLen:''));
+  /* r3: a card made again from the sổ only BUILDS — every rk card waiting at the flip is remade twice; S (Bạc, Danh, goods, log …), the notice box and Q must not move */
+  const fpS=()=>[JSON.stringify(S),typeof NT!=='undefined'?NT.list.length:0,Q.length],rk2=[];{const f0=fpS();for(const m of all.filter(m=>m&&m.rk)){const e={rk:m.rk,ra:JSON.parse(JSON.stringify(m.ra||[]))};const x=rcpMk(e),y=rcpMk(e);if(!x||!y)rk2.push(m.rk+' not remade');const f1=fpS();if(f1.join('\n')!==f0.join('\n')){const A=JSON.parse(f0[0]),B=JSON.parse(f1[0]);rk2.push(m.rk+' moved '+(Object.keys(B).filter(k=>JSON.stringify(A[k])!==JSON.stringify(B[k])).slice(0,6).join(',')||('NT/Q '+f0.slice(1)+' → '+f1.slice(1))));break}}}
+  return{rk2,rkN:all.filter(m=>m&&m.rk).length,sv:__sbr.saved(),dd:window.__dd||null,code,k0,key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L,stat:{sp:typeof SP13!=='undefined'?SP13.stat.unsaved||0:0,jq:typeof JQ!=='undefined'?JQ.stat:{}}}},[FCAL[flip],wait,VEC,HUD,UNSEEN]);
  if(DBGD)console.log((r.dd||[]).slice(-8).map(x=>[x[0],x[1],x[2],x[3]%100000,String(x[4]).split(' < ').filter(y=>!/index.html\?khost=0:(4453|66782):/.test(y)).slice(0,3).join(' < ')].join(' ')).join('\n'));
  const t=await reloadTitle(p,open);let a=null,duty=null;
  if(t.cont){await cont(p);a=await p.evaluate(([vec,hud,uns])=>({key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L:eval(uns),fail:(window.__rcpFail||[]).map(x=>x.slice(0,2).join(':'))}),[VEC,HUD,UNSEEN]);
@@ -142,9 +147,9 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
  const miss=[];if(a){const A=a.L.slice();for(const x of r.L){const i=A.indexOf(x);if(i<0)miss.push(x);else A.splice(i,1)}}
  const dutyOk=!duty||(duty.db===duty.fx.bac||duty.dd<0);
  if(DBGD)console.log('at capture: screen '+r.v.slice(0,40)+' | sổ '+r.sv);
- const pass=t.cont&&a&&a.key===r.key&&a.v===r.v&&a.hud===r.hud&&!miss.length&&dutyOk&&!pe.length;
+ const pass=t.cont&&a&&a.key===r.key&&a.v===r.v&&a.hud===r.hud&&!miss.length&&dutyOk&&!pe.length&&!r.rk2.length;
  return{pass,line:`${flip} ${wait} ms · ${r.k0} → ${r.key} · open/waiting ${r.L.length} (${r.L.filter(x=>x.endsWith('*')).length} with choices): ${r.L.join(' | ')}
-    after reload ${a?a.key:'NO «Tiếp tục»'} · ${a?(miss.length?'LOST '+miss.length+': '+miss.join(' | '):'every card back ('+a.L.length+')'):''}${a&&a.v!==r.v?' · DRIFT '+a.v+' (was '+r.v+')':a?' · same numbers':''}${a&&a.hud!==r.hud?' · HUD '+a.hud:''}${duty?` · Lễ nghĩa after reload: Bạc ${duty.db} (card ${duty.fx.bac})${dutyOk?'':' WRONG'}`:' · no Lễ nghĩa card'}${r.code.length?' · code cards with no generator at the flip: '+r.code.join(' | '):''}${a&&a.fail.length?' · rcpFail '+a.fail.join(','):''}${pe.length?' · pageerror '+pe[0]:''}`}})}
+    after reload ${a?a.key:'NO «Tiếp tục»'} · ${a?(miss.length?'LOST '+miss.length+': '+miss.join(' | '):'every card back ('+a.L.length+')'):''}${a&&a.v!==r.v?' · DRIFT '+a.v+' (was '+r.v+')':a?' · same numbers':''}${a&&a.hud!==r.hud?' · HUD '+a.hud+' (was '+r.hud+')':''}${duty?` · Lễ nghĩa after reload: Bạc ${duty.db} (card ${duty.fx.bac})${dutyOk?'':' WRONG'}`:' · no Lễ nghĩa card'}${' · remake ×2 of '+r.rkN+' rk cards: '+(r.rk2.length?'SIDE EFFECT '+r.rk2.join(' | '):'no side effect')}${r.code.length?' · code cards with no generator at the flip: '+r.code.join(' | '):''}${a&&a.fail.length?' · rcpFail '+a.fail.join(','):''}${pe.length?' · pageerror '+pe[0]:''}`}})}
 
 /* ---------- drift ---------- */
 async function drift(b,dev,url,seed){const one=wait=>play(b,dev,url,seed,async(p,open,pe)=>{await open();
