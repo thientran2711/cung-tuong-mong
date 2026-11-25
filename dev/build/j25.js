@@ -4,7 +4,7 @@ const HARMK={"Dò la":"spy","Tung tin đồn":"rumor","Bỏ độc vào trà nà
 AOUT.trip=["nàng vấp ngã: Danh nàng -3 (có thai: có thể động thai)","bị thấy: nàng oán ngươi"];AOUT.pushp=["nàng rơi xuống hồ sen, Sức nàng giảm mạnh","bị lộ: bị phạt, nàng oán"];
 const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|phật ý|bị khám|tội|ban chết|sẽ)/;
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);const v=p&&p.ref;return A.map(a=>{a=Object.assign({},a);if(HARMK[a.n])a.k=HARMK[a.n];
-  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<30){a.lock=true;a.t=`cần nàng quý ngươi 30 (đang ${aff(v,S)})`}
+  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<netTh(v,"than")){a.lock=true;a.t=`cần nàng quý ngươi 30 (đang ${aff(v,S)})`}
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
   if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x=`nàng quý ngươi ${balSg(-BAL.talk.gossip.miss)}`;a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi ${balSg(BAL.talk.gossip.tellOan)}: ${chanceW(BAL.talk.gossip.tell)}`}
@@ -33,7 +33,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=R
  t.className="rtoast "+(seal==="BẠI"?"bad":seal==="XONG"?"sure":"ok");t.innerHTML=`<b class="seal">${seal}</b><div class="rt"><b>${title}</b><div class="rd">${d.map(([k,v,now,inv])=>`<span class="ef ${(inv?-v:v)>0?(inv?"r":"g"):(inv?"g":"r")}">${k} ${now-(inv?-v:v)} → ${now}</span>`).join('<span class="ksep">·</span>')||'<span class="ef n">không đổi chỉ số</span>'}</div>${why?`<small>${why}</small>`:""}<small class="past">Chạm để đóng · đầy đủ ở Nhật ký</small></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),7000)};
 /* verdicts: deck cards by their roll, sure acts 'XONG', scheme acts by their own outcome words */
-(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100)&&oddsSure(a))?"sure":r;return r}})();
+(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100)&&oddsSure(a)&&a.oin==null)?"sure":r;/* a staged act (a.oin) shows its first step's THÀNH / BẠI */return r}})();
 (function(){const f=window.doAct;window.doAct=function(i,k){window.__actK=k;return f.apply(this,arguments)}})();
 /* stop the buổi from turning over under the result: wait a little longer */
 (function(){const r0=render;render=function(){const L=advLock;if(!S||S.dead||Q.length||S.mg||used<BAL.time.khac||L)return r0.apply(this,arguments);advLock=true;const ret=(function(){const a=advLock;advLock=true;return r0.apply(this,arguments)}).apply(this,arguments);setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&S&&!S.dead&&!S.mg)nextBuoi()},2600);return ret}})();
@@ -76,7 +76,7 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
 (function(){const kp=kitParse;kitParse=function(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1").replace(/\bngay: /g,"được ngay: ");return kp(str)}})();
 (function(){const k0=kcls;kcls=function(t){const s=String(t).replace(/<[^>]+>/g,"");if(/thiện cảm\s*-|quý ngươi\s*-|lòng\s*-|Sủng\s*-|Danh\s*-|Đức\s*-|oán ngươi \+|ghen \+/i.test(s)&&!/\bnàng\b.*-/.test(s.replace(/oán ngươi.*/,"")))return"r";return k0(t)}})();
 /* dialog options: a face beside every named person */
-(function(){const s0=showModal;showModal=function(){s0.apply(this,arguments);const M=$("modal");if(M.hidden)return;M.querySelectorAll(".opt").forEach(b=>{if(b.querySelector(".md"))return;const tx=b.firstChild&&b.firstChild.textContent||"";const v=rivals.find(r=>tx.includes(r.name));const f=v?pv(v):/Hoàng thượng/.test(tx)?pEmp():/Thái hậu/.test(tx)?pTH():null;if(f)b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))})}})();
+(function(){const s0=showModal;showModal=function(){s0.apply(this,arguments);const M=$("modal");if(M.hidden)return;M.querySelectorAll(".opt").forEach(b=>{if(b.querySelector(".md"))return;const tx=b.firstChild&&b.firstChild.textContent||"";if(typeof S==="undefined"||!S||!Array.isArray(rivals))return;/* title / no life yet (fresh profile, after a death + reload): nobody to put a face on (robot M1 #1) */const v=rivals.find(r=>tx.includes(r.name));const f=v?pv(v):/Hoàng thượng/.test(tx)?pEmp():/Thái hậu/.test(tx)?pTH():null;if(f)b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))})}})();
 /* the ghen of a rival is hidden until she knows her */
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc.apply(this,arguments);if(!knows(v))h=h.replace(/<div class="pgh">[\s\S]*?<\/div><\/div>/,`<div class="pgh"><span>Ghen: <span class="ef n">chưa rõ</span></span></div>`);return h}})();
 /* her portrait in the death dialog is labelled by her name and rank */

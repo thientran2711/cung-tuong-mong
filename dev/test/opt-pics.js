@@ -7,7 +7,7 @@
       (evpick), an item picker (giftpick), the toilette Kính sự phòng (ksp), Thái hậu's birthday — FAIL when an option has no picture slot,
       the slot is not 84x112 (3:4) or not LEFT of the text, a card is wider than its box, the page overflows, an option keeps a tiny portrait in its
       title, or there is a page error. Screenshot per dialog kind (<outdir>/optpic-<kind>-<WxH>.jpg).
-   3. ZOOM: a tap on the picture opens #kpzoom and does NOT choose the option (the dialog stays). */
+   3. PICTURE TAP: a tap on the picture of an option card does NOT open #kpzoom (it chooses, KK29). */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const args=process.argv.slice(2);const ti=args.indexOf('--titles');const TITLES=ti>=0?args.splice(ti,2)[1].split(','):[];
 const [PAGE,OUT,...SZ]=args;fs.mkdirSync(OUT,{recursive:true});const SIZES=SZ.length?SZ:['1180x820','755x1000'];
@@ -59,10 +59,10 @@ async function boot(b,W,H){const ctx=await b.newContext({viewport:{width:W,heigh
   const FK=await p.evaluate(()=>Object.keys(FESTEV));for(const k of FK.slice(0,SIZES.length>2?3:FK.length))await audit("fest "+k,`Object.assign({who:pEmp(),ev:"fest"},FESTEV["${k}"]())`);
   for(const [k,pp] of [["evpick","{ix:S.inv.findIndex(e=>e&&!e.h)}"],["giftpick","{v:liveRivals(true)[0].id,ix:S.inv.findIndex(e=>e&&!e.h)}"],["ksp","{}"],["thbirthday","{}"],["vlget","{}"]])
    await audit("pend "+k,`(()=>{const d=mkP("${k}",${pp});if(!d||!d.o)return null;pushDil(d,"${k}");return Q[Q.length-1]})()`);
-  /* ---- 3. zoom: opens, does not choose ---- */
-  const z=await p.evaluate(async()=>{const a=document.querySelector('#modal button.ka.kopt > .kaart');if(!a)return{none:1};const q0=Q[0];a.click();await new Promise(r=>setTimeout(r,300));const zz=document.getElementById('kpzoom');
-   const open=!!zz&&!zz.hidden;const kept=Q[0]===q0&&!document.getElementById('modal').hidden;if(zz)zz.click();await new Promise(r=>setTimeout(r,200));return{open,kept,closed:!zz||zz.hidden}});
-  if(!z.open||!z.kept||!z.closed)R.fails.push([sz,"zoom",JSON.stringify(z)]);R.zoom=z;
+  /* ---- 3. KK29 (KIT BUG #6, robot M3): a tap on the PICTURE of an option card chooses it (no lightbox, no #kpzoom) ---- */
+  const z=await p.evaluate(async()=>{const a=document.querySelector('#modal button.ka.kopt > .kaart');if(!a)return{none:1};window.__ch=0;const b=a.closest('button.ka');const o=Q[0]&&Q[0].opts;if(!o)return{none:1};const i=[...b.parentElement.children].indexOf(b);const c=o[i];if(c){const g=c.go;c.go=function(){window.__ch=1;return g&&g.apply(this,arguments)}}
+   a.click();await new Promise(r=>setTimeout(r,300));const zz=document.getElementById('kpzoom');const open=!!zz&&!zz.hidden;return{open,chosen:!!window.__ch||!b.isConnected||Q[0]!==Q.__q0}});
+  if(z.open)R.fails.push([sz,"zoom",JSON.stringify(z)]);R.zoom=z;
   if(errs.length)R.fails.push([sz,"page errors",errs.slice(0,3).join(" | ")]);R.layout[sz]=out;await p.context().close()}
  fs.writeFileSync(path.join(OUT,'opt-pics.json'),JSON.stringify(R,null,1));
  console.log(JSON.stringify({fails:R.fails.length,first:R.fails.slice(0,12),zoom:R.zoom,dialogs:Object.fromEntries(Object.entries(R.layout).map(([k,v])=>[k,v.length]))},null,1));

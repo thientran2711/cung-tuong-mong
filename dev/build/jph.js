@@ -43,7 +43,7 @@ function kitPhEvReady(){return typeof EVART!=="undefined"&&!!EVART}
 var KPHAR_SRC=null,KPHAR_V=false;
 function kitPhActReady(){try{if(typeof KIT_ACTS==="undefined"||!KIT_ACTS)return false;if(KPHAR_SRC!==KIT_ACTS||KPHAR_SRC.acts!==KPHAR_A){KPHAR_SRC=KIT_ACTS;KPHAR_A=KIT_ACTS.acts;KPHAR_V=!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}return KPHAR_V}catch(e){return false}}
 var KPHAR_A=null;
-const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)return true;return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
+const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE){/* offline-fast: CDN index not read yet → the offline set (assets.json) decides when known */const h=typeof kitAssetHas==="function"?kitAssetHas(String(src).replace(/^.*?(?=img\/)/,"")):null;return h===null?true:h}return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
 /* ---- events ---- */
 function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
 function kitPhEvTone(m){let fam="";try{const pid=String(m.pid||"");if(/^e68[A-Za-z]/.test(pid)&&typeof E68I!=="undefined"&&E68I[pid.slice(3)])fam=E68I[pid.slice(3)].fam||""}catch(e){}
@@ -145,7 +145,11 @@ window.kitPhWaitMark=kitPhWaitMark;
    kitSpin({s:true}) = 18 px for a button / chip, default 28 px; o.label = the spoken label (CTM_WAIT.spin). The dialog wait of the life gate (#modal.klifewait, jload.js) draws the SAME ring with a pseudo-element: one look. */
 function kitSpin(o){o=o||{};let st=false;try{st=typeof kfStill==="function"&&kfStill()}catch(e){}const lab=String(o.label||(window.CTM_WAIT&&CTM_WAIT.spin)||"Đang chờ…").replace(/"/g,"&quot;");return `<i class="kspin${o.s?" kspin-s":""}${st?" kspin-still":""}${o.cls?" "+o.cls:""}" role="status" aria-label="${lab}"></i>`}
 window.kitSpin=kitSpin;
+/* KK29 (KIT §59.3) kitWaitCue(label) = the ONE wait cue for a scene that holds the screen while a picture loads (the encounter scene waiting for the visitor's face, jdfv): a small pill (kitSpin + CTM_WAIT.picWait) on the stage, returns the function that removes it. Never a silent frozen screen. */
+function kitWaitCue(label){try{document.querySelectorAll(".kwcue").forEach(e=>e.remove());const d=document.createElement("div");d.className="kwcue";d.setAttribute("role","status");d.innerHTML=kitSpin({s:true,label:label||(window.CTM_WAIT&&CTM_WAIT.picWait)})+`<span>${label||(window.CTM_WAIT&&CTM_WAIT.picWait)||"Đang chờ…"}</span>`;document.body.appendChild(d);return()=>{try{d.remove()}catch(e){}}}catch(e){return()=>{}}}
+window.kitWaitCue=kitWaitCue;
 (function(){const st=document.createElement("style");st.id="kit-spin";st.textContent=`
+.kwcue{position:fixed;left:50%;top:42%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--k-card,#fffaf0);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 4px 14px rgba(60,30,10,.25);font:600 .82rem var(--k-font,inherit);color:var(--k-ink,#5a3a1a);pointer-events:none}
 .kspin{display:inline-block;flex:none;width:28px;height:28px;box-sizing:border-box;border-radius:50%;border:3px solid var(--k-hair,#e6d3ac);border-top-color:var(--gold,#8f5f0c);animation:kspin calc(.9s*var(--pace,1)) linear infinite;vertical-align:middle}
 .kspin.kspin-s{width:18px;height:18px;border-width:2px}
 @keyframes kspin{to{transform:rotate(360deg)}}

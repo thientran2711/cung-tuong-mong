@@ -22,7 +22,7 @@ function j72cNeed(nd,a,X){if(!nd)return true;const N=BAL.j72c.need,o=a&&a.o;try{
  if(nd==="ill")return !!(o&&typeof o==="object"&&illOf(o)&&(o===S.emp||!o.ill||o.ill.known!==false));
  if(nd==="preg")return !!(o&&o.preg);
  if(nd==="friend")return !!a&&q72RelV(a)>=N.friend;
- if(nd==="feud"){const A=X&&X.A&&X.A.o,B=X&&X.B&&X.B.o;return !!(A&&B&&A.id!=null&&B.id!=null&&(aff(A,B)<=N.feud||aff(B,A)<=N.feud))}
+ if(nd==="feud"){const A=X&&X.A&&X.A.o,B=X&&X.B&&X.B.o;return !!(A&&B&&A.id!=null&&B.id!=null&&(aff(A,B)<=netTh(A,"ky")||aff(B,A)<=netTh(B,"ky")))}
  if(nd==="thIll")return !S.thDead&&!!S.thIll;
  if(nd==="empIll")return !!illOf(S.emp);
  if(nd==="bienLo"||nd==="khoLo"){if(typeof trS!=="function")return false;const T=trS();return !!T&&T[nd==="bienLo"?"bien":"kho"]<N.lo}

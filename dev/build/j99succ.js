@@ -30,7 +30,7 @@ function succSup(){const r={houses:[],pow:0,mil:false,milArmy:false,milGuard:fal
   const vg=(S.men||[]).find(m=>m.alive&&m.role==="Vương gia");if(vg){r.vg=vg;r.vgAlly=(vg.tinh||0)>=60||S.vgAlly===vg.id}}catch(e){}
  r.mil=r.milArmy||r.milGuard;
  try{const set=new Set();const f=typeof facOf==="function"?facOf(S):null;if(f&&typeof facMembers==="function")facMembers(f).forEach(x=>{if(x!==S&&x.alive&&!x.out)set.add(x)});
-  liveRivals(true).forEach(v=>{if((v.rel||0)>=40)set.add(v)});r.allies=set.size}catch(e){}
+  liveRivals(true).forEach(v=>{if(aff(v,S)>=netTh(v,"than"))set.add(v)});r.allies=set.size}catch(e){}
  r.thOK=!!S.thDead||(S.th||0)>=BAL.succN.cTh;r.thB=!!S.thDead||(S.th||0)>=BAL.succN.thB;r.thOpp=!S.thDead&&(S.th||0)<BAL.succN.thOpp;return r}
 function succOdds(p,son,U){U=U||succSup();if(p==="b"){let o=35+U.pow/5+((S.danh||0)-BAL.succN.bDanh)/2+((S.tamco||0)-BAL.succN.bTam)/3+U.allies*3+(U.thB?8:U.thOpp?-10:0)+(U.vgAlly?5:U.vg?-8:0);return Math.round(cl(o,SUCC.b.min,SUCC.b.max))}
  let o=20+U.pow/6+((S.danh||0)-BAL.succN.cDanh)/2+((S.tamco||0)-BAL.succN.cTam)/2+U.allies*2+(U.milArmy&&U.milGuard?8:0)+(U.vgAlly?8:U.vg?-12:0)-((son&&son.age>=BAL.succN.bAge)?10:0);return Math.round(cl(o,SUCC.c.min,SUCC.c.max))}
