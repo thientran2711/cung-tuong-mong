@@ -22,3 +22,21 @@ Fix list for KK22: (a) row 4, (b) make ktop-sticky.js non-vacuous (row 5), (c) a
 KIT FAIL flight-mucluc-kit → KK22
 
 ~85% done / ~70% playable
+
+## REVIEW r3 — KIT OK (09e7b6e67c308e09b4ef0e3fead4cea747065506; origin/main 502c48c9 = merge-base, so BARE head == MERGED head)
+
+PRIORITY #1 CHECK: OD 24/11 ~18:15Z + ~18:19Z | main: none of ktChapToc/kitTocOpen | review/* flight-mucluc-kit | claims: brief b-kit-r2-tntile-fitfast.
+
+| # | Check | Result |
+|---|-------|--------|
+| 1 | r2 FAIL «index.html not rebuilt» | PASS. `bash dev/site/build_site.sh` on the head: only the build-stamp line of index.html differs (CTM_BI s/t/c); sw.js identical; code identical to the committed build. |
+| 2 | ktop-sticky non-vacuous | PASS. r1 b021e429 + r3 test (served 8802): FAIL at 755, 755, 1180, 412 («chips not pinned under the bar (254 vs 281)» etc.). r3 head (8801): `KTOP-STICKY PASS`, 755/755/1180/412 all after = barBottom−1 (280 vs 281; 350 vs 351). |
+| 3 | Row 1 (frame, number+name, state) and row 4 (chips pinned) of r1 | PASS (pinned: see 2; frame: row 5). |
+| 4 | cnv Mục lục = new kit use | PASS. Only kit parts: kchip n button data-ktoc → kitTocOpen → kitModal info + kitStepList (KIT §99.3 registered). Real arc titles, no typed names. |
+| 5 | mucluc-flight.js | PASS: no args (tt,cnv,tdn) 0 issues; all 9 origins tt,dtq,muoi,cn,nc,td,ch,thd,cnv × Fold 755x1000 + iPad 1180x820: 14 rows, frame h 555, 0 issues. Law 11: all 9 roads have Mục lục. |
+| 6 | Shots looked 3× (cnv Fold + iPad) | Frame full, names + state right, no cut text/overflow. |
+| 7 | NOT RUN | quickcheck (no script found on the branch) and old-save load; cnv Mục lục in-page chip row on Fold seen only in shot background. Non-blocking, small change. |
+
+KIT OK r3 09e7b6e67c308e09b4ef0e3fead4cea747065506 review/flight-mucluc-kit
+
+~90% done / ~75% playable
