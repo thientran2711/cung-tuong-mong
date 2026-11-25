@@ -1,4 +1,9 @@
-# BIG REVIEW review/visitor-fix — ROUND 2 VERDICT: BIG PASS f4b8254c (review/visitor-fix-r6 = worker fe9eb3a9 + one reviewer small fix)
+# BIG REVIEW review/visitor-fix — FINAL VERDICT: BIG PASS a6f7715a (review/visitor-fix-r6 = worker fe9eb3a9 + reviewer small fixes R6 f4b8254c + R7 a6f7715a)
+
+R7 (a6f7715a, asked by MAIN 129): a visitor who comes to HER door to ask for an audience knows whose palace it is — npcLearn(v,S) on the door arrival; grLine drops «nàng chưa biết tên ngươi» when G.arr; the «Xưng danh đáp lễ / Khẽ gật đầu» name-reply options are not offered after a door arrival. Now: «Tần thiếp Quý nhân <tên> xin cầu kiến.» … «Ngươi khẽ nâng tay: “Miễn lễ.”»; equals «Hai bên chào nhau theo lễ.»
+Tests on a6f7715a: quickcheck PASS (old save ok, core gates PASS, buổi 1201/3622 ms) · coop-e2e 142/142 · visitor-scene.js Fold + iPad PASS · greet-stranger PASS. Shot: img/_review/visitor-fix/r7-pair-lo.jpg (Fold | iPad, low-rank door visit, face + name, no «chưa biết tên»). The round-2 «advisory 1» is closed by R7.
+
+## Round 2 (f4b8254c)
 
 PRIORITY #1 CHECK ('visitor-fix'): OD 0 | ledger 0 | claims 1 (VISITOR-FIX session_01V1ZZH3EpiFUfjQmqdR8cmA) | main 0 | review/* review/visitor-fix, review/visitor-fix-r6 | archive 0.
 f4b8254c793d9c108625d5d310fa1a08bf71a805 has origin/main 502c48c9 as ancestor (fast-forwardable).
