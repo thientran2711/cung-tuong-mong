@@ -167,3 +167,19 @@ j68.js e68Fits(m): a j68 card (pid e68…) still fits when its template's w(e68C
 | quickcheck | — | PASS 653 s, render 259/261 ms |
 
 READY flight-e68-season 6b9a0ce4.
+
+## flight-sid-rebirth (FLIGHT ROOT-CAUSE FIXER, 25/11) — IN PROGRESS, HANDOVER
+PRIORITY #1 CHECK ('sidN' / 'kseq' / 'one j61 key'): reused jcoopworld attach (sidN bump), j61 kOf61 keys, coop-e2e COOP_HOSTDIE; no new mechanism.
+Branch review/flight-sid-rebirth 9d568f1b (based on flight-coop-sync 4cb42b96 — F #5 asks to rebase on review/flight-coop-sync-r 05a4cbc0).
+
+### Verdict
+GAME, pre-existing. j61 keys a person «r<id>» (rivals), «s<sid>» (servants), else a lazily issued «x<n>» from the per-seat counter S.kseq (S.kseq is NOT a W key; world men S.men ARE). (a) Rebirth: a new life is built by j52 nlRun (sidN = 0, fresh S.kseq 0) and joins the world in jcoopworld attach(); sidN was bumped only after her new staff had taken s1, s2… and kseq never → s-key and x-key clashes. (b) Reviewer (coop-sync-r 05a4cbc0): x34 = two world men still clash after week 3 / rejoin on BOTH seats — x-keys are issued lazily on EACH seat from its own counter, so two seats can give two different world men the same «x<n>» and the world merge carries both kk fields: a cross-seat race, not only a rebirth.
+
+### Done (9d568f1b)
+attach → lifeRekey(): sidN and S.kseq continue past every id the world holds; her own new people (maid, staff, kids, home family) that collide get fresh ids. coop-e2e COOP_HOSTDIE=1: before 139/143 (4× «one j61 key = one person»), after 143/143 in one run (log «rekey x1»). Fixes (a) only.
+
+### Next (for the successor)
+1. Root for (b): stop issuing world-person keys from a per-seat counter. World men already carry a stable id (S.men[i].id: «m<i>» j22, jmen id) → key them from that id (e.g. «n<id>») in kOf61; do the same for every other kk-keyed world person kind (S.court, S.trieu.H, thO …) that has or can get a stable world id; keep «x<n>» only for her own people (namespaced already by k61GuestOwn/k61HostCopy). Old saves: S.known / KREG entries under the old «x<n>» key must be migrated once on load (map by object kk → new key), else known people turn into strangers (law 6b / emo-seal-vanish history in j61 comments).
+2. Scan: k61All() on both seats after each week of coop-e2e (already the «one j61 key = one person» check) + COOP_HOSTDIE=1 + a rejoin; run 3× (intermittent).
+3. Then quickcheck + coop-e2e both seats, report, READY flight-sid-rebirth to F #5.
+Worktrees on this box: /home/user/wt/fsr (task 5), fes (task 4 done), fcg (task 3 done), fcs (task 2 done), fmd (task 1 done), fmd-ho (handover).
