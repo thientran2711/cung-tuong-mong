@@ -481,6 +481,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmPet{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(0) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(calc(var(--v) * -1)) rotate(120deg) scale(1)}}
 .km-inkov{background:transparent}
 .kmink{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+/* robot D 25/11 (ending card): the ink banner («Hồng nhan bạc mệnh · Mở Sổ luân hồi») is drawn ABOVE the ending card, so its words sat on the card rows (text on text). The ending card (#modal.end) is held back while the ink scene plays and shows the moment it goes (tap / button): ONE rule for every mourning ending banner. */
+body:has(.kmov.km-inkov:not(.km-out)) #modal.end{visibility:hidden}
 .kmblot{position:absolute;left:50%;top:46%;width:60vmax;height:auto;transform:translate(-50%,-50%) scale(.05);opacity:0;animation:kmInk calc(1.6s*var(--pace)) cubic-bezier(.3,.6,.3,1) both}
 .kmblot.b2{left:38%;top:58%;animation-delay:.25s;width:50vmax}
 .kmicap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;animation:kmFade calc(.6s*var(--pace)) ease calc(1.1s*var(--pace)) both}
