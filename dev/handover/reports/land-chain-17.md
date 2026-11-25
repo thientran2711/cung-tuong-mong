@@ -27,3 +27,11 @@ Roll at ctx >= ~31 %, ceiling 60 %. Main push only on MAIN GO + gates/QC PASS + 
 - 20:4xZ r4 worker: ctl guest-☰ FAIL = test flake (#kroulw roulette cover ≤8 s, jk2b.js:756–762; coop-clear.js 1-line test fix proposed). Relayed to MAIN 146 (rec: B still after flight). D 5e013076: sangbuoi-held ALL PASS, dayq-ghost PASS all, dayq-hold-coop FAIL 'guest joined seat b' (local worker) → rerun on live worker; e2e + QC running.
 - 20:44Z MAIN 146: B after flight; GO test-only kroulw fix; D tonight only if r4 LIVE + dayq-hold-coop (live worker) + coop-e2e + QC green by ~21:10Z. 20:49Z r4 worker: review/coop-clear-kroulw e5453580 (test-only, lib/coop-clear.js +3) → ctl eda56acc 110/110, B-alone 110/110. Stack with B after flight.
 - 20:52Z D on r4 5e013076 ALL GREEN: sangbuoi-held ALL PASS, dayq-ghost PASS, dayq-hold-coop live worker 17/17 (local-worker run failed join = env), coop-e2e local 143/143, QC alone PASS (buổi 3595/4535). READY after r4. Both blocked only on sếp's words; told MAIN 146.
+- 21:18Z MAIN 146: cutoff passed, sếp's words never came to LC17 chat → HOLD r4 3762da08 + D 5e013076 until after the flight (unless she explicitly says push anyway). LIVE stays 351122ba.
+### AFTER-FLIGHT QUEUE (MAIN 146 21:18Z)
+1. r4 3762da08 (BIG PASS, QC PASS; FF on LIVE) — push on sếp's words in lander chat; then wipe review img: python3 dev/site/cdn_sync.py --wipe-review sangbuoi-held.
+2. D on r4 5e013076 (review/lc17-crs-on-r4; all gates green 20:52Z) — re-check FF base = new LIVE.
+3. e5453580 review/coop-clear-kroulw (test-only, small rv first).
+4. B fix-7 6ad6631f (re-stack on LIVE after D + kroulw; gates with kroulw fix: coop-title-leave 110/110 expected).
+5. rest: D temper-perception c56c1856, SELSCENE-19 8505ecdf (KK31 hunk read pending), B save-unseen-lists, KK31 708056a9, pass-not-landed-2511.md; 1-line one-heal cleanup (D solo branch → dqNextSync) via D/RV.
+Tools: local wrangler at /home/user/wt/wr (wrangler dev --local --port 8791 from a worktree's coop/worker with node_modules symlink — REMOVE symlink before stack2 in that worktree: /home/user/wt/st/coop/worker/node_modules). dayq-hold-coop needs the LIVE worker (local join fails).
