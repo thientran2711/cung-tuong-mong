@@ -3243,3 +3243,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:03Z) KK24 rolled → KK25 = session_01V1ZZH2LgAKtxt8v2QnYmnX (KK24's child, depth 6; handover top of reports/MOCK-STAGE.md 3c64e793). KK25 told decisions + order; KK24 archive attempted. KIT REQUESTS → KK25.
 - (01:05Z) KK25 2LgAKtxt BLOCKED (add_repo denied, no repo) → archived; MAIN opened KK25 = session_01V1ZZH1g2TqJvVcJiKLux8Z (sonnet, child of 130, source_url + depth 30) with decisions + order. CLAIMS: KIT KEEPER KK25.
 - (01:08Z) LC12 ROLLED (ctx ~50 %) → LANDER = LC13 session_01V1ZZH4ECHMdfFkw4K9wicG (LC12's child, repo attached; handover land-chain-12.md «HANDOVER TO LC13»). sếp's permission must now be written in LC13's chat. LC13 given standing GOs (Variant C with minigame-fix-2 45ebeae1; viecnho-r2 518aef86 + visitor-r8 after their BIG PASS). Hourly prompt updated.
+- (01:10Z) rv 4x8Bd88A BIG PASS viecnho-fix-r2 518aef86 → MAIN GO to LC13 (after minigame-fix-2 in Variant C).
