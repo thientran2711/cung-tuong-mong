@@ -13,5 +13,5 @@ This compact package removes old image/history bulk from the delivery; it does n
 
 OWNER ADDS (25/11, verbatim: "Add cả hai người vào luôn đi, bởi vì có khả năng là tôi sẽ bỏ 1-2 người khác ra đó." / "Đưa hai cô vào luôn."):
 - n01 (Alluring) = owner's preferred Alluring-16 portrait (high bun, ivory flowers), CDN img/share/face90/n01.png, sha256 0988616257e77d5e…, Magnific YMSDsAaWeC. 5 jobs added (ages 16/26/39/51/63). NOTE: also used as the style master in tests — if it stays the style master, its own jobs are near-copies.
-- n02 (Alluring) = second portrait (half-up hair with loose locks, white flower pin) — PENDING: owner image not yet received as a file; add the same way when it arrives.
+- n02 (Alluring) = second portrait (half-up hair, white flower pin) = STYLE07 style master; CDN img/share/face90/n02.png, sha256 8fe02d49…, Magnific lJhyz3Fgv9. In Source_Manifest; STYLE07 job prompts for n01/n02 not yet written (package has 89 identities).
 Roster now 90 identities (89 + n01) / 450 jobs; 91 / 455 after n02.

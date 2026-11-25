@@ -898,5 +898,15 @@
     "classification": "OWNER ADD 25/11 (replaces excluded M05 slot): owner's preferred Alluring age-16 portrait; already a finished chest-up painting, not a full-body source",
     "classification_note": "Magnific upload YMSDsAaWeC",
     "image_location": "CDN img/share/face90/n01.png"
+  },
+  {
+    "source_id": "n02",
+    "family": "Alluring",
+    "file": "n02.png",
+    "original_url": "https://ctm-img.victoria-tntt.workers.dev/img/share/face90/n02.png",
+    "sha256": "8fe02d490623e60b3a9dd9afef2837a67ebd4f4627388ceb6cec2278bb51fc59",
+    "classification": "OWNER ADD 25/11: owner's 2nd preferred Alluring-16 portrait (half-up hair, white flower pin) = STYLE07 Painting_Style_Master_35239.png",
+    "classification_note": "Magnific upload lJhyz3Fgv9",
+    "image_location": "CDN img/share/face90/n02.png"
   }
 ]
