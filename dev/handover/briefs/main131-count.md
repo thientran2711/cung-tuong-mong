@@ -1,0 +1,10 @@
+# COUNT-1 (MAIN CHÍNH 131, 25/11) — owner asks: count every job, done vs not done; robot status
+PRIORITY #1 CHECK ('worklist|gap_list|count|robot'): reuse dev/handover/WORKLIST_OPEN.md (26 rows + owner-bug items 24/11 evening in OWNER_DECISIONS rows from «(24/11 ~21:50Z real» to the end + 25/11 makeup row), dev/handover/GAP_LIST*.md, reports/land-chain-12.md + land-chain-13.md, FOREMAN_B–F_STATUS, CLAIMS.md.
+OWNER (verbatim, 25/11): "Báo cáo tình hình hiện tại đã có bao nhiêu việc xong, cho thợ đếm từng việc nào đã xong, từng việc nào chưa xong. Và ngày mai là tôi cần phải lên chơi gấp rồi. Tình hình đã làm tới đâu? Robot đã chạy các kiếp chưa hay như thế nào đó, báo cáo đi."
+READ: dev/rules/START_CORE.md + START_WORKER.md (handover branch claude/cung-tuong-mong-handover-hj0h8w). Fetch --depth=30 only, sparse worktree.
+TASK (read-only, no code):
+1. ONE table of EVERY open job (WORKLIST_OPEN rows + each owner-bug item of 24/11 evening and 25/11 makeup): # | job (short Vietnamese name for sếp) | state = LIVE (sha on origin/main) / XONG CHỜ LÊN GAME (reviewer PASS / LAND READY sha, in LC13 queue) / ĐANG LÀM (who, branch) / CHƯA BẮT ĐẦU / CHỜ SẾP CHỌN. Verify each state with git (git branch -r / ls-remote review/*, merge-base --is-ancestor against origin/main) — do not trust status text alone.
+2. Counts: total, LIVE, done-waiting-landing, in progress, not started, waiting on sếp.
+3. ROBOT: which robot runs (robot lives / kiếp, coop-e2e, one-world SEED, true-reload drift) ran on what build, when, results, and what still fails (F robot-fix-cnv-2 fe3cb80c, B robot-coop-fix-4-r1 aad22c92 / savert r2 / fix-5, E/D robot10 branches). Has any full-life robot run been made on the flight batch (Variant C head)? If not, say so plainly.
+4. FLIGHT READINESS: what she gets tomorrow if LC13 lands the flight batch now vs if nothing lands.
+OUTPUT: dev/handover/reports/count-1.md on the handover branch (table + counts + robot + readiness) and send_message the summary (≤40 lines) to MAIN CHÍNH 131 session_01V1ZZH312W9Th6rhS9pTzUW. Fast: target ≤45 min. Never push main.
