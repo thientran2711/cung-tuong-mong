@@ -15,6 +15,9 @@ html .game .kleather>.maptools .mz{min-height:28px;padding:0 9px;font-size:.72re
 .kleather:not(.kpmv)>.mapsc{flex:1;height:auto!important}
 .kleather>.mapsc{border-radius:0!important;box-shadow:none!important;outline:1px solid #b79a5bcc;outline-offset:-1px}
 .kleather:not(.kpmv)>.mapsc{-webkit-mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);mask-composite:intersect}
+/* §85.6b SUB-TAB MAPS (ob-phu, owner 25/11 ~22:52Z «dư đồ phải là full cái screen»): a full-screen map that carries a kit sub-tab row (kitPane .kpbar: home «Trong phủ / Kinh thành», any future map with levels) = the row on top, the map takes ALL the rest of the page area (never pushed under the tab bar) */
+html body .game.maptab #panel:has(>.kpbar+.mapv){display:flex!important;flex-direction:column}
+html body .game.maptab #panel>.kpbar+.mapv{flex:1 1 0;min-height:0;height:auto!important}
 /* §85.6 FULL SCREEN (owner 17/11 03:52Z, OD:L133/L1410/L1433): the map fills the whole page area edge to edge; the tools row, the left rail and the right column are OVERLAYS on it (same columns as her room stage), nothing shrinks the map */
 html body .mapv.kside>:not(#kshR):not(#krail):not(.kl-tone){margin-left:0!important;margin-right:0!important}
 html body .mapv.kside>#kshR{top:6px;right:6px}html body .mapv.kside>#krail{left:6px!important;top:6px!important}

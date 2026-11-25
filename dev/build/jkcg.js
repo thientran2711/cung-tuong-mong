@@ -40,8 +40,13 @@ function kcgMapLoad(w){if(KCMAPH[w]!==undefined)return;KCMAPH[w]=null;try{fetch(
   const why=kcGoWhy(k);const here=S.place===k;const ppl=kcHere(k).filter(m=>!/^ban/.test(m.r)||k==="kc_hau");const tm=S.kc.at.ftm===k&&kcTmMan();
   const fs=ppl.slice(0,3).map(m=>`<span class="mres">${mdH(kcFace(m),"xs")}</span>`).join("")+(tm?`<span class="mres">${mdH(pMan(tm),"xs")}</span>`:"")+(ppl.length>3?`<span class="mres more">+${ppl.length-3}</span>`:"");
   const who=ppl.map(m=>m.t.toLowerCase()).concat(tm?["người ấy"]:[]);
-  const meta=here?"đang ở đây":why&&why!=="Đang ở đây"?`<em>${why}</em>`:kcCity(k)||kcCity(S.place)?`<em class="ok">${BAL.kc2.kcGoWhy_k} khắc</em>`:"";
-  return `<button class="mspot sm${why&&!here?" off":""}${here?" here":""}" data-kcgo="${k}" ${why&&!here?"disabled":""} title="${Q2[0]}: ${Q2[3].replace(/"/g,"")}${who.length?" · ở: "+who.join(", "):""}" style="${pos}"><span class="mlab">${here&&typeof kitMeMapMark==="function"?kitMeMapMark():""}${Q2[0]}</span>${meta?`<span class="mmeta">${meta}</span>`:""}${fs?`<span class="mfaces">${fs}</span>`:""}</button>`};
+  /* ob-phu (owner 25/11 ~22:52Z «dư đồ ở phủ không có thấy bóng người»): the SAME info row as the palace Dư đồ (j27 mapHTML, KIT §34.1d / §85.7(5)):
+     her place «Ta + N bóng · còn K khắc» / «Chỉ có ta · còn K khắc»; other places «N bóng · K khắc» or the reason. N = the real people of the
+     one home ledger at that place this buổi (S.kc.at: family, teachers, nhũ mẫu, bà mối, khuê hữu, người ấy; law 6b), never invented. */
+  const n=ppl.length+(tm?1:0);
+  const bits=here?[n?`Ta + ${n} bóng`:"Chỉ có ta",`<em class="ok">còn ${Math.max(0,BAL.time.khac-used)} khắc</em>`]:[n?`${n} bóng`:"",why&&why!=="Đang ở đây"?`<em>${why}</em>`:kcCity(k)||kcCity(S.place)?`<em class="ok">${BAL.kc2.kcGoWhy_k} khắc</em>`:""].filter(Boolean);
+  const meta=bits.join(" · ");
+  return `<button class="mspot sm${why&&!here?" off":""}${here?" here":""}" data-kcgo="${k}" ${why&&!here?"disabled":""} title="${Q2[0]}: ${Q2[3].replace(/"/g,"")}${n?` · ${n} bóng`:""}${who.length?" · ở: "+who.join(", "):""}" style="${pos}"><span class="mlab">${here&&typeof kitMeMapMark==="function"?kitMeMapMark():""}${Q2[0]}</span>${meta?`<span class="mmeta">${meta}</span>`:""}${fs?`<span class="mfaces">${fs}</span>`:""}</button>`};
  return T.html+`<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${BAL.time.khac-used} khắc</span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>`+
   `<div class="mapsc"><div class="mapw" style="width:${z*100}%"><img class="mapimg" src="${KCMAP[w].img}" alt="${KCMAP[w].alt}">`+Object.keys(H).map(k=>spot(k,H[k])).join("")+`</div></div></div>`}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcmap]");if(!b||!isKc())return;e.stopPropagation();e.preventDefault();const v=b.dataset.kcmap;

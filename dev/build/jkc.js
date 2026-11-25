@@ -618,7 +618,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function kcSel(id){const L=kcFamList("nha");const i=L.findIndex(m=>m.id===id);if(i>=0){PG.kcfam=i;KTSUB.kcfam="nha"}else{const F=kcFamList("ban");const j=F.findIndex(m=>m.id===id);if(j>=0){PG.kcban=j;KTSUB.kcfam="ban"}}}
 (function(){const p0=renderPanel0;renderPanel0=function(){if(!isKc())return p0.apply(this,arguments);const el=$("panel");const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");
  let h="";if(tab==="art"||tab==="inv"){p0.apply(this,arguments);if(tab==="art")el.insertAdjacentHTML("beforeend",kcArtHTML());return}
- if(tab==="go")h=kcMapHTML();else if(tab==="story")h=kcStoryHTML();else if(tab==="rv")h=kcFamHTML();else if(tab==="staff")h=kcSocHTML();else if(tab==="kid")h=kcMailHTML();else h=kcGroupHTML(KCG[tab]||"khue");
+ if(tab==="go"){h=kcMapHTML();/* ob-phu (owner 25/11 ~22:52Z «dư đồ phải là full cái screen»): every home map (Trong phủ, Kinh thành, the other home roads' maps) takes the SAME full-screen map mode as the palace Dư đồ (KIT §85.1/§85.6, j38 maptab), never the right half beside Khuê phòng; the plain list (Danh sách, a road without a painted map) stays beside the stage */
+  if(gm&&!window.__mapList&&/class="mapv/.test(h))gm.classList.add("maptab")}else if(tab==="story")h=kcStoryHTML();else if(tab==="rv")h=kcFamHTML();else if(tab==="staff")h=kcSocHTML();else if(tab==="kid")h=kcMailHTML();else h=kcGroupHTML(KCG[tab]||"khue");
  const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg="";try{kitFix(el)}catch(e){}panelScrollKeep(el,keep);if(!keep)requestAnimationFrame(()=>{el.scrollTop=0})/* the pane bar (kitPane) moves the sub-tab row after this render */}})();
 function kcDoable(a){return !a.done&&!a.lock&&can(cardCost(a))&&canPay(a)}
 function kcCardsH(L){return L.length?`<div class="cards">${L.map(([a,i])=>cardH(a,i)).join("")}</div>`:""}
