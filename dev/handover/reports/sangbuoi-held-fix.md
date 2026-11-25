@@ -247,3 +247,22 @@ Notes for MAIN (not blocking): (n1) modal-open-buoi calls nextBuoi() programmati
 **VERDICT: BIG PASS 3762da08** (review/sangbuoi-held-fix; ancestor LIVE 351122ba = current main at verdict). r1 FAIL list 1–4 closed. Shots: CDN img/_review/sangbuoi-held/pair.jpg (wipe after land: python3 dev/site/cdn_sync.py --wipe-review sangbuoi-held).
 ### r4.4 Side job (MAIN 145/146, 20:28–20:49Z): «r4×B» coop-title-leave guest ☰ fail = test race, not r4
 LC17 saw coop-title-leave 107/110 on r4+B eda56acc (guest iPad ☰ → menu []). Probe at fail time: the guest's ☰ was covered by #kroul (new-life roulette), with Q = new-life cards held by LIVE's jdayq activity hold. Root: jk2b kitRoulette waits ≤ 8 s for origin pictures under #kroulw (no button); lib/coop-clear.js TAP only knew «#kroul .krskip» → clear() returned, the 8 s ☰ tap timed out behind it. B-alone 6ad6631f failed too (80/82) → timing, not r4. Fix review/coop-clear-kroulw = e5453580 (on LIVE 351122ba, test only, +3 lines: visible #kroulw = 'x' keep polling). With it: eda56acc 110/110 full (+82/82 solo-off), B-alone 110/110 full.
+### r4.5 JOB 2 — r3wip finished: review/sangbuoi-held-fix-r3wip = 4cf5e9c2 (on r4 3762da08 = LIVE 351122ba + r4). Game code (jdayq) → BIG rv after the flight, then LC17 after r4 (MAIN 146)
+| sha | what |
+|---|---|
+| 12bda70f | r3wip 3abb8fda merged onto r4 3762da08; index.html/sw.js rebuilt |
+| 4cf5e9c2 | Case I1 root = TEST: its «zero-size» .kmov got a real box from .kmov's own CSS (inset / padding / min size) → dqShown true → correctly held. I1 now zeroes padding/min/max sizes. LAW 11 family in jdayq: dqFreeScreen / dqMgStale (querySelector per selector = FIRST match only), dqNewsPass (any .kmov in the DOM), dqActEl's .kfoc check (first only) → every match, only an ON-SCREEN one (dqShown) holds. New case I4: zero-size scene FIRST + a real one on screen → nothing painted over it; panel 28–48 ms after it closes. |
+Gates on 4cf5e9c2:
+| gate | result |
+|---|---|
+| case I (before/after) | LIVE 351122ba FAIL I1 Fold + iPad; branch I1–I4 PASS both |
+| sangbuoi-held A–I Fold | ALL PASS |
+| sangbuoi-held A–I iPad | A B D E G H I PASS in the full run (beside the Fold run); C FAIL «Sang buổi did not advance after news + scene» + F stalled (no watchdog line in 30 min) under the parallel load → re-run ALONE: C PASS ×2, F PASS. RV: re-run iPad C + F once alone |
+| dayq-hold | PASS 46 |
+| flip-newlife Fold / iPad | ALL OK / ALL OK |
+| coop-e2e non-swap alone | 142/142 |
+| quickcheck | quickcheck.js pass (open 1675 ms, old save ok, perf in budget); core: only G4 «Ô lưu · Lui» = known LIVE fault. NOTE perf buổi median 2806 (new) / 1664 (live) this run vs 1708/4533 on r4's run — the cards drawn vary; rv to re-measure (--runs 5) |
+Not done: night PAIR jpg (deferred by MAIN 145; make it from the head that lands, NEW file name, img/_review/sangbuoi-held/).
+### r4.6 HANDOVER (r4 stopped by MAIN 146 order 21:03Z)
+Open: (1) BIG rv of 4cf5e9c2 after the flight; (2) night PAIR jpg (tool = r3wip dev/test/sangbuoi-night.js; serve with a utf-8 server); (3) coop-clear-kroulw e5453580 queued by LC17 (small rv).
+Worktrees: /home/user/wt/sbh (r4), /home/user/wt/r3w (r3wip), /home/user/wt/r4b (eda56acc), /home/user/wt/balone (B 6ad6631f), /home/user/wt/live (ccr = coop-clear-kroulw), /home/user/wt/hov (sparse handover).
