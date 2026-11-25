@@ -169,3 +169,9 @@ VERDICT: PASS 247c7132 — runners may switch (supersedes d417d3bb).
 - LIVE dbae89eb, bot rand, slice 10, RT_TEST_LUI=3, Fold + iPad identical: A (Lui dead) 1 call closed · B (✕ dead) 2 calls closed · C (both dead) 7 calls + [game] «every close … tapped 3×» + reload, closed; 0 stuck / dead, exitPick none, jsClicks 0 (the one bug = the test's own).
 - Nit (not blocking): the memory is cleared only when a tap closes that dialog — after a reload the spent closes of that title stay spent for the rest of the life (fallback still picks list[0] in choose; unstick goes to a safe button). Consider clearing it on level-3 reload.
 VERDICT: PASS 1db0b186 — runners may switch (supersedes 247c7132).
+
+## BIG REVIEWER #7 — 25/11 ~18:15Z: HARNESS review/robot-realtap 7ca6b369 (runner SWITCH candidate: 1db0b186 + A-COOP #2 co-op resume b8900828 + lint WARN) — PASS
+- Diff 1db0b186..7ca6b369: robot-lint skips the scope check with WARN when eslint is absent (verified: NODE_PATH= → ok true + warn, node --check still runs); robot-rt-coop resume=1 room=<CODE> (both seats «Cùng hảo hữu → Trở lại phòng», never «Chơi một mình»); COOP_BAN keeps «Cùng hảo hữu» for the title-back rejoin; solo resume path unchanged. No .click()/dispatchEvent; lint OK 0 findings.
+- Own real co-op room on LIVE dbae89eb (Fold host / iPad guest): fresh room X9ZE slice 3 → resume=1 room=X9ZE slice 6: both seats RESUMED into the same room to buổi 6, jsClicks 0, exitPick none, stuck 0, dead 0. One [stuck] row on the guest «no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»» (existing loop rule, unstuck in the same life; same family as FOREMAN E 16:10Z «150 taps» reports — guest waits on the shared clock; not from this diff).
+- Solo Fold resume=1 (rt-any-rand-fold-920216 from buổi 6 → 14): resumed, 0 stuck / dead, jsClicks 0.
+VERDICT: PASS 7ca6b369 — runner SWITCH OK (supersedes 1db0b186).
