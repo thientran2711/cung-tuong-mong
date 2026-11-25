@@ -188,3 +188,17 @@ Stuck point (2): save + harness records at on-1 buổi 126 → `dev/handover/rep
 | off-1 | buổi 5385 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
 | off-1 | buổi 6826 | .dlg «Tâm trạng · Đáp ứng Phú Sát Hạnh Nhi» | «Lui» | tapped 3× for real, dialog stays |
 | off-1 | buổi 43 | .dlg «Tâm trạng · Quý nhân Tô Vãn Tình» | «Lui» | tapped 3× for real, dialog stays |
+
+## T2c — FINAL B2 table, 25/11 20:36Z (97d6ba10; RV3b accepted B2 on interim 4, round 3 PASS c56c1856)
+n = 2 lives per arm (lives are hundreds of buổi and never end on their own; same-life counterfactual over ≥2 full lives). on-1 and main-2 excluded as stalled.
+| arm | buổi | NPC hostile gate calls | pass % | passes owed to mood | gây sự deeds / buổi |
+|---|---|---|---|---|---|
+| main | 720 | 13980 | 87.3 | – | 0 |
+| off (moodM=0) | 1160 | 33210 | 81.7 | 0 | 0.903 |
+| on | 1149 | 22641 | 86.0 | 114 (0.6 % of 19464 passes; provoke 103, rumor 11; none on frame/bribe/spy/plant) | 0.475 |
+
+Executed NPC harm acts per game year (7 yrs off/on, 5 main), by kind:
+- off: trip 1.29, rumor 1.14, frame 1.57, spy 0.71, accuse 2.0, bribe 0.29, block 0.71
+- on: trip 0.71, rumor 0.14, frame 1.0, spy 0.71, accuse 1.29, bribe 0.14, block 0.57, plant 0.14
+- main: frame 0.4, block 0.8, rumor 0.2, accuse 1.2, trip 0.6, spy 0.4
+No poison executed in any arm. "on" is not above "off" for any kind except plant (1 act, 0.14/yr vs 0). Pass-% gaps between arms are life-to-life variation; the same-life counterfactual (0.6 %) is the reliable figure. Verdict: mood term does not raise NPC harm.
