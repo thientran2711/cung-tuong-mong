@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)","b":"6639300a95b9","h":[{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"}]};
+window.CTM_BI={"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)","b":"eb1ee4c03344","h":[{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -95311,15 +95311,23 @@ function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig
  F.setGroup=k=>setGroup(F,k);F.setGroups=G=>setGroups(F,G);F.say=(L,oo)=>say(F,L,oo||{});F.choices=(L,cb)=>choices(F,L,cb);F.play=oo=>playOn(F,oo||{});F.intro=oo=>intro(F,oo||{});F.endPlay=()=>playOff(F);F.hud=(mk,ck)=>hud(F,mk,ck);F.react=r=>react(F,r);
  F.close=()=>close(F);F.destroy=()=>destroy(F);F.figRect=()=>F.img.getBoundingClientRect();F.skipOpen=()=>{F.opening=false;[...F.anims].forEach(a=>{try{a.finish()}catch(e){}})};
  animateOpen(F);return F}
+function stageRect(F){/* the figure's rect on the stage she stands on (live token if still in the DOM, else the rect passed at open) */
+ try{const e=F.o.fig;if(e&&e.getBoundingClientRect&&e.isConnected){const r=e.getBoundingClientRect();if(r.width>20&&r.height>40)return r}}catch(x){}
+ const f=F.o.from;return f&&f.width>20&&f.height>40?f:null}
 function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:.05},Z=typeof KIT_SIZE==="object"?KIT_SIZE.fig.XL:{h:398,cw:220};
- const H=Z.h*fac(F),ih=H/Math.max(.2,(v.b-v.t)),iw=ih*(v.ar||.42),cx=A.w/2,floor=A.h-K.floorPad[m];let top=floor-v.b*ih;
- const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;head=need}
- F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H};
+ /* OWNER 25/11 ~07:00Z: the focus figure is the STAGE figure copied 1:1 — same px size, same feet line, same spot on the painting (never a smaller figure). Only when no stage rect exists (no token) the old standard body applies. */
+ let sr=stageRect(F);if(sr&&(sr.bottom>A.top+A.h+2||sr.top<A.top-2||sr.right<A.left||sr.left>A.left+A.w))sr=null;/* token scrolled out of the focus area: stage standard body instead */let ih,iw,cx,top,floor;
+ if(sr){ih=sr.height;iw=sr.width;cx=sr.left+sr.width/2-A.left;top=sr.top-A.top;floor=top+v.b*ih;F.copy=true}
+ else{const std=typeof KIT_FIG==='object'?Math.min(KIT_FIG.h*A.h,KIT_FIG.maxPx):Z.h,H=std*fac(F);ih=H/Math.max(.2,(v.b-v.t));iw=ih*(v.ar||.42);cx=A.w/2;floor=A.h-K.floorPad[m];top=floor-v.b*ih;F.copy=false}
+ const half=Math.max(Z.cw,iw*Math.max(.3,(v.r||1)-(v.l||0)))/2,minRoom=200;/* both button columns need room: the spot only moves when a column would drop under minRoom (edge person) */
+ if(cx-half-K.colGap-4<minRoom)cx=minRoom+half+K.colGap+4;if(A.w-cx-half-K.colGap-4<minRoom)cx=A.w-minRoom-half-K.colGap-4;
+ const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;floor+=need-head;head=need}
+ F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H:ih*(v.b-v.t)};
  const s=F.img.style;s.left=(cx-iw/2)+"px";s.top=top+"px";s.width=iw+"px";s.height=ih+"px";
  const tb=F.tabs.style;tb.left="0";tb.right="0";tb.bottom=(A.h-(head-K.headGap))+"px";
- const cw=Math.min(K.col[m],Math.max(90,cx-(Z.cw/2+K.colGap)-4)),ctop=head-K.headGap+K.colGap-K.headGap;
- for(const [side,c] of [["l",F.cl],["r",F.cr]]){const cs=c.style;cs.width=cw+"px";cs.top=Math.max(0,head+4)+"px";cs.height=Math.max(60,floor-head-4)+"px";
-  if(side==="l")cs.left=(cx-(Z.cw/2+K.colGap)-cw)+"px";else cs.left=(cx+(Z.cw/2+K.colGap))+"px"}
+ const availL=cx-half-K.colGap-4,availR=A.w-cx-half-K.colGap-4;
+ for(const [side,c] of [["l",F.cl],["r",F.cr]]){const cw=Math.min(K.col[m],Math.max(90,side==="l"?availL:availR)),cs=c.style;cs.width=cw+"px";cs.top=Math.max(0,head+4)+"px";cs.height=Math.max(60,floor-head-4)+"px";
+  if(side==="l")cs.left=(cx-half-K.colGap-cw)+"px";else cs.left=(cx+half+K.colGap)+"px"}
  F.plate.style.top=(floor+6)+"px";F.plate.style.left=cx+"px";
  const pl=F.q(".kfoc-play").style;pl.left=Math.max(0,cx-iw/2-40)+"px";pl.width=(iw+80)+"px";pl.top=top+"px";pl.height=ih+"px";
  el_btn(F);if(F.cur)clampMark(F)}
@@ -98252,7 +98260,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6639300a95b9";window.CTM_BUILD=BUILD;
+const BUILD="eb1ee4c03344";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
