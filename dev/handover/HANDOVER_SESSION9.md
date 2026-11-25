@@ -3353,3 +3353,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - LOAD (05:33Z wake): main running 18 (LC13; KK26 idle wait B; SANSANG-2; MAKEUP-NOBOOST good-looks follow-up; DELEGATE-NOMG + rv; TAINGHE + rv; VISITOR-FIX + rv; SELSCENE-18; M1–M5; RD5/MD5/rv makeup-fit idle) | B ROOT 4w3SL22V (audit 161 → rerun 147) | C silent | D ROOT audit | E ROOT 01DgYSWo (audit 822 → rerun 489, waits F shared harness review/robot-realtap) | F harness+audit + coop-sync PASS 7902247b re-merge | moved: none. ctx ~9 % (est.).
 - (05:36Z) OWNER «đưa lên live luôn» (makeup) → LC13 told land 008aa59b + 74068c07 asap; good-looks follow-up goes straight to LC13 after MAIN LOOK (no new sếp look needed).
 - (05:38Z) DELEGATE-NOMG LAND READY 9b38be2c BIG (FF on 0756a05b) → BIG rv 22tLFisY told to review now.
+- (05:50Z) OWNER IDEA OD ~05:45Z temper-driven play (forced outburst choice + mood×personality×relations design) → OD row + PARKING_LOT #13 + ORDER Foreman E design proposal (opus, expert first, no code).
