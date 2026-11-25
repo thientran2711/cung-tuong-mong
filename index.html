@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"72bc7d94+","t":"2026-11-25T22:29Z","c":"nhv-areas r1: jnhv.js — Ngự hoa viên second Dư đồ level (kitPalaceMap slot p:vuon, 5 areas from the j95 record + BAL.area), area scene (gro…","b":"6fe5a126fb04","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"a8157e6e+","t":"2026-11-25T23:34Z","c":"nhv-areas r2: ART-NHV pictures wired (garden map 16 states, 5 area scenes with fallback + kit tạm), hotspots from ART-NHV, followers step b…","b":"4f6157ba6770","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -97247,7 +97247,7 @@ function sceneGroups(a){const ppl=curPeople(),E=entries(),used=new Set();const p
  return out}
 function mkFig(m,master){const e=document.createElement("div");e.className="nhv-f";const F=figSrc(m.p);m.sil=F.sil;
  let tag="",tc="";try{tag=j59tagHTML(m.p,m.p.name);tc=j59col(m.p)}catch(x){}
- /* a name she has not learnt is never «???» on her screen: the kit §59.1 word «Người lạ» (MAIN 127 FAIL 4) */if(/\?\?\?/.test(tag))tag=tag.replace(/>\s*\?\?\?\s*</g,">Người lạ<");
+ /* a name she has not learnt is never «???» on her screen: the kit §59.1 word «Người lạ» (MAIN 127 FAIL 4) */if(/\?\?\?/.test(tag))tag=tag.replace(/\?\?\?/g,"Người lạ");
  e.innerHTML=`<img class="nhv-i${F.sil?" ksil":""}" alt="" draggable="false" src="${esc(F.src)}">${master?`<span class="nhv-tag kscn-tag" style="--tc:${tc}">${tag}</span>`:""}`;
  m.el=e;m.img=e.querySelector("img");m.tg=e.querySelector(".nhv-tag");m.asp=.32;
  const fixA=()=>{if(m.img.naturalWidth&&m.img.naturalHeight){m.asp=m.img.naturalWidth/m.img.naturalHeight}};m.img.addEventListener("load",()=>{const a0=m.asp;fixA();if(Math.abs(a0-m.asp)>.01&&CUR)layout(true)});fixA();
@@ -97322,7 +97322,8 @@ async function stepOut(m){const g=m.g;if(SEL!==g)pickGroup(g);if(SELM&&SELM!==m)
 /* THẺ GỖ TREO = kit §98.1 kitPick, fed by the real act list of this person (jdfv dfData) */
 function closePk(now){const k=KP;KP=null;if(!k)return;try{now?k.destroy():k.close()}catch(e){}}
 function openPk(m){closePk(true);if(!CUR||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
- G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n)})).filter(g=>g.acts.length);if(!G.length)return;
+ /* names she has not learnt (the kit shows them as «???» on a button): those acts are not offered by that name */let unk=[];try{unk=(rivals||[]).filter(v=>typeof k61Named==="function"&&!k61Named(v)).map(v=>v.name).filter(Boolean)}catch(e){}
+ G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n&&!/\?\?\?/.test(a.n+" "+(a.word||""))&&!unk.some(n=>String(a.n).includes(n)))})).filter(g=>g.acts.length);/* an act naming someone she has not learnt is not offered by that name (MAIN 127 FAIL 4, ring4 rule) */if(!G.length)return;
  const others=[...L.querySelectorAll(".nhv-f")].filter(e=>e!==m.el&&e.offsetParent!==null).map(e=>kitPick.rect(e,L));
  KP=kitPick.open({host:L,anchor:kitPick.rect(m.el,L),avoid:others,side:"r",groups:G,dismiss:false,
   onPick:id=>runAct(m,id),onOff:a=>{try{if(a&&a.why&&typeof kitMoodSay==="function"){const b=kitMoodSay(m.img,a.why,{hold:2600});if(b&&b.classList)b.classList.add("nhv-say")}}catch(e){}}})}
@@ -99321,7 +99322,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6fe5a126fb04";window.CTM_BUILD=BUILD;
+const BUILD="4f6157ba6770";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

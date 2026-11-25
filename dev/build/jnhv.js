@@ -139,7 +139,7 @@ function sceneGroups(a){const ppl=curPeople(),E=entries(),used=new Set();const p
  return out}
 function mkFig(m,master){const e=document.createElement("div");e.className="nhv-f";const F=figSrc(m.p);m.sil=F.sil;
  let tag="",tc="";try{tag=j59tagHTML(m.p,m.p.name);tc=j59col(m.p)}catch(x){}
- /* a name she has not learnt is never «???» on her screen: the kit §59.1 word «Người lạ» (MAIN 127 FAIL 4) */if(/\?\?\?/.test(tag))tag=tag.replace(/>\s*\?\?\?\s*</g,">Người lạ<");
+ /* a name she has not learnt is never «???» on her screen: the kit §59.1 word «Người lạ» (MAIN 127 FAIL 4) */if(/\?\?\?/.test(tag))tag=tag.replace(/\?\?\?/g,"Người lạ");
  e.innerHTML=`<img class="nhv-i${F.sil?" ksil":""}" alt="" draggable="false" src="${esc(F.src)}">${master?`<span class="nhv-tag kscn-tag" style="--tc:${tc}">${tag}</span>`:""}`;
  m.el=e;m.img=e.querySelector("img");m.tg=e.querySelector(".nhv-tag");m.asp=.32;
  const fixA=()=>{if(m.img.naturalWidth&&m.img.naturalHeight){m.asp=m.img.naturalWidth/m.img.naturalHeight}};m.img.addEventListener("load",()=>{const a0=m.asp;fixA();if(Math.abs(a0-m.asp)>.01&&CUR)layout(true)});fixA();
@@ -214,7 +214,8 @@ async function stepOut(m){const g=m.g;if(SEL!==g)pickGroup(g);if(SELM&&SELM!==m)
 /* THẺ GỖ TREO = kit §98.1 kitPick, fed by the real act list of this person (jdfv dfData) */
 function closePk(now){const k=KP;KP=null;if(!k)return;try{now?k.destroy():k.close()}catch(e){}}
 function openPk(m){closePk(true);if(!CUR||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
- G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n)})).filter(g=>g.acts.length);if(!G.length)return;
+ /* names she has not learnt (the kit shows them as «???» on a button): those acts are not offered by that name */let unk=[];try{unk=(rivals||[]).filter(v=>typeof k61Named==="function"&&!k61Named(v)).map(v=>v.name).filter(Boolean)}catch(e){}
+ G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n&&!/\?\?\?/.test(a.n+" "+(a.word||""))&&!unk.some(n=>String(a.n).includes(n)))})).filter(g=>g.acts.length);/* an act naming someone she has not learnt is not offered by that name (MAIN 127 FAIL 4, ring4 rule) */if(!G.length)return;
  const others=[...L.querySelectorAll(".nhv-f")].filter(e=>e!==m.el&&e.offsetParent!==null).map(e=>kitPick.rect(e,L));
  KP=kitPick.open({host:L,anchor:kitPick.rect(m.el,L),avoid:others,side:"r",groups:G,dismiss:false,
   onPick:id=>runAct(m,id),onOff:a=>{try{if(a&&a.why&&typeof kitMoodSay==="function"){const b=kitMoodSay(m.img,a.why,{hold:2600});if(b&&b.classList)b.classList.add("nhv-say")}}catch(e){}}})}

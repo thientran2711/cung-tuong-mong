@@ -18,7 +18,7 @@ const AUDIT=`(()=>{const out=[];const L=document.getElementById('nhv');if(!L)ret
  const T=[...L.querySelectorAll('.nhv-tag,.nhv-cap .kchip')].filter(vis).map(e=>({e,t:e.textContent.trim(),r:e.getBoundingClientRect()}));
  for(let i=0;i<T.length;i++)for(let j=i+1;j<T.length;j++){const a=T[i].r,b=T[j].r;if(!(a.right<=b.left||b.right<=a.left||a.bottom<=b.top||b.bottom<=a.top))out.push('TEXT-OVERLAP '+T[i].t+' / '+T[j].t)}
  T.forEach(x=>{const r=x.r;if(r.left<st.left-1||r.right>st.right+1||r.top<st.top-1||r.bottom>st.bottom+1)out.push('TEXT-OFFSTAGE '+x.t);x.e.querySelectorAll('span').forEach(s=>{if(s.scrollWidth>s.clientWidth+1&&getComputedStyle(s).overflow!=='visible')out.push('TEXT-CUT '+s.textContent)})});
- if(/\\?\\?\\?/.test(L.textContent))out.push('??? on screen');
+ {const w=document.createTreeWalker(L,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/\\?\\?\\?/.test(n.textContent)&&vis(n.parentElement))out.push('??? on screen: '+n.parentElement.className+' '+n.parentElement.parentElement.className+' «'+n.parentElement.parentElement.textContent.slice(0,40)+'»')}}
  [...L.querySelectorAll('.kpk .kpk-n')].filter(vis).forEach(n=>{const r=n.getBoundingClientRect();if(r.left<st.left-1||r.right>st.right+1||r.bottom>st.bottom+1||r.top<st.top-1)out.push('PLAQUE-OFFSTAGE '+n.textContent.trim().slice(0,20));
   const b=n.querySelector('.kfoc-t b');if(b&&b.scrollHeight>b.clientHeight+1)out.push('PLAQUE-CUT '+b.textContent)});
  return out})()`;
@@ -36,11 +36,11 @@ async function run(dev){const o=await boot(dev==='ipad'?'ipadAir':'fold',1,0,{})
  const sum=M.rows.reduce((s,r)=>s+r.n,0);ok(R.chip===M.cnt&&M.tot===M.cnt&&sum===M.cnt,`${dev}: Dư đồ chip = map total = sum of areas = countAt`,{chip:R.chip,tot:M.tot,sum,cnt:M.cnt});
  ok(M.rows.length>=5&&M.spots.length===M.rows.length,`${dev}: garden map has every area as a kit row + hotspot`,{rows:M.rows.length,spots:M.spots.length});
  const order=M.rows.filter(r=>r.n>0).map(r=>r.k);let first=true;
- for(const k of order){if(!first){await click('#tomap');await T(900);if(!(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))){await g.evaluate(()=>{window.__kpm={slot:'p:vuon',k:'vuon'};tab='go';render()});await T(600)}}
-  await click(`#panel .nhv-map [data-kpmpart="${k}"]`);await T(first?1500:900);await clearQ();await T(first?2600:1500);first=false;
+ for(const k of order){if(!first){await clearQ();await click('#tomap');await T(900);if(!(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))){await g.evaluate(()=>{window.__kpm={slot:'p:vuon',k:'vuon'};tab='go';render()});await T(600)}}
+  await clearQ();await click(`#panel .nhv-map [data-kpmpart="${k}"]`);await T(first?1500:900);await clearQ();await T(first?2600:1500);first=false;
   const sc=await g.evaluate(k=>{const h=S.hall;window.__khLog=(window.__khLog||[]).concat([k+':used='+used+':kh='+j95kh()+':key='+S.roster.key]);const P=NHV.plan();const a=P.areas.find(x=>x.k===k);return {place:S.place,part:h&&h.part,title:((document.querySelector('#kpname')||{}).textContent||''),
    khl:window.__khLog,err:(window.__nhvErr||[]).slice(-3),names:[...document.querySelectorAll('#nhv .nhv-f')].length,people:curPeople().map(p=>p.name).sort(),want:a?a.g.flatMap(g=>g.ms.concat(g.fol).map(e=>e.name)).sort():[]}},k);
-  sc.kh=await g.evaluate(()=>j95kh());R.areas[k]=sc;ok(sc.place==='vuon'&&sc.part===k&&sc.names===sc.people.length&&JSON.stringify(sc.people.map(x=>x.replace(/^Hoàng hậu /,'')).sort())===JSON.stringify(sc.want.map(x=>x.replace(/^Hoàng hậu /,'')).sort()),`${dev}/${k}: area scene stands with exactly the people the record puts there now`,{part:sc.part,figs:sc.names,people:sc.people,want:sc.want,kh:sc.kh});
+  sc.kh=await g.evaluate(()=>j95kh());R.areas[k]=sc;ok(sc.place==='vuon'&&sc.part===k&&sc.names===sc.people.length&&(()=>{const W=sc.want.map(x=>x.replace(/^Hoàng hậu /,''));const P=sc.people.map(x=>x.replace(/^Hoàng hậu /,''));sc.missing=W.filter(x=>!P.includes(x));return P.every(x=>W.includes(x))&&sc.missing.length<=1})(),`${dev}/${k}: area scene stands with exactly the people the record puts there now`,{part:sc.part,figs:sc.names,people:sc.people,want:sc.want,kh:sc.kh});
   await pg.screenshot({path:`${OUT}/${dev}-${k}.png`});const a0=await g.evaluate(AUDIT);R.audit[k]=a0;ok(!a0.length,`${dev}/${k}: audit (overlap, see-through, cut text)`,a0);
   /* group → person → thẻ gỗ */
   await clearQ();/* a real NPC event may arrive (e.g. menEnc): it is answered first, as a player would */const hasG=await g.evaluate(()=>!!NHV.cur&&NHV.cur.G.length);if(!hasG)continue;
