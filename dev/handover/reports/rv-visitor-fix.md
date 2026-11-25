@@ -1,3 +1,6 @@
+# REVIEW r9 UPDATE (SMALL reviewer, 25/11 ~04:40Z): PASS e0594561 RETRACTED → FAIL / HOLD
+LC13 reported dev/test/visitor-scene.js FAIL «grey silhouette on screen» (lower-rank «Đáp ứng» case only) on e0594561 2/2 and on its r9 merge 1/5. Reviewer re-run: base 7dbfe98a 0/10 FAIL; r9 tree (e0594561) 1/10 + 1/6 FAIL. Variants (each 14-16 runs of visitor-scene): A = K61SENT removed from k61Scrub 0/14; B = old k61Desc wording but K61SENT kept 3/14; C = K61SENT skipped inside #modal/focus 1/14; D = K61SENT only for the Sổ ghi hook 1/16. So r9b's K61SENT (j61 k61Scrub, also the j65 hook) is the suspect (race: the generic DOM scrub masks the visitor name before showModal makes her known → no face); the k61Desc wording alone is not. I did not isolate it fully; I missed it because I ran visitor-scene only after the PASS verdict was sent. Needs the worker: make the sentence rule not touch the visitor card/focus path, run visitor-scene ≥15× on both devices; my j65 Sổ ghi fix is still wanted.
+
 # REVIEW r9 (SMALL reviewer, 25/11 ~02:40Z): PASS e0594561 (review/visitor-fix-r9-rv = r9 98a29b65 merged onto LC13 head 7dbfe98a + 1 reviewer fix)
 
 PRIORITY #1 CHECK: OD 24/11 ~22:14Z + ~21:58Z read; r9 diff vs 42af6315 = j61 k61Desc/K61SENT, jhc/jne hint, know-notice + name-sentence tests, KIT_REQUESTS KK25.
