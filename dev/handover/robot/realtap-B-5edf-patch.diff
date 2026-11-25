@@ -1,5 +1,16 @@
---- a/dev/test/robot-rt.js	2026-11-25 11:31:05.009402145 +0000
-+++ b/dev/test/robot-rt.js	2026-11-25 11:31:04.971511655 +0000
+--- a/dev/test/realtap.js
++++ b/dev/test/realtap.js
+@@ -22,7 +22,7 @@
+   let x0 = Math.max(0, r.left), y0 = Math.max(0, r.top), x1 = Math.min(W, r.right), y1 = Math.min(H, r.bottom), sc = null;
+   for (let s = el.parentElement; s && s !== document.body; s = s.parentElement) { const cs = getComputedStyle(s); if (/(auto|scroll|hidden|clip)/.test(cs.overflow + cs.overflowX + cs.overflowY)) { const q = s.getBoundingClientRect(); x0 = Math.max(x0, q.left); y0 = Math.max(y0, q.top); x1 = Math.min(x1, q.right); y1 = Math.min(y1, q.bottom); if (!sc && /(auto|scroll)/.test(cs.overflowY) && s.scrollHeight > s.clientHeight) sc = { l: q.left, t: q.top, r: q.right, b: q.bottom } } }
+   /* label side first (odds chip «Rất vững» / «!» / legend triggers usually sit on the right or centre) */
+-  const pts = [[.14, .5], [.5, .5], [.3, .5], [.86, .5], [.5, .3], [.5, .7], [.7, .5], [.5, .12], [.5, .88]];
++  const pts = [[.5, .2], [.14, .5], [.5, .5], [.3, .5], [.86, .5], [.5, .3], [.5, .7], [.7, .5], [.5, .12], [.5, .88]];
+   let cover = null, anc = false, chip = false;
+   if (x1 - x0 < 3 || y1 - y0 < 3) return { lab, clip: true, sc, top: r.top, bottom: r.bottom, cover: 'clipped by its scroller / off-screen', off: r.bottom < 0 || r.top > H };
+   for (const [fx, fy] of pts) {
+--- a/dev/test/robot-rt.js
++++ b/dev/test/robot-rt.js
 @@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
@@ -8,7 +19,16 @@
  const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs.find(x => x.k === k); if (b) { b.n++; return b } const n = { k, type, msg, n: 1, at: sec(), ...extra }; R.bugs.push(n); console.log('BUG', type, msg); return n };
  
  /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
-@@ -127,14 +128,36 @@
+@@ -120,6 +121,8 @@
+       if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
+     if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
+     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
++    /* U3 SEGMENT close (MAIN 139): SEG_MIN=<minutes> / SEG_YEAR=<year> end the run as life id SEGMENT (coop loop stops on it) */
++    if (started && (process.env.SEG_MIN && Date.now() - T0 > +process.env.SEG_MIN * 60e3 || process.env.SEG_YEAR && sc.S && sc.S.y >= +process.env.SEG_YEAR)) { R.sliced = true; R.segment = { why: process.env.SEG_YEAR && sc.S && sc.S.y >= +process.env.SEG_YEAR ? 'year' : 'time', min: Math.round((Date.now() - T0) / 60e3), buoi: R.buoi, year: sc.S && sc.S.y }; break }
+     if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
+     if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
+     /* not in the life yet (title / resume splash / loading) for 5 min = stuck too: bug, reload, go again (a resume re-opens its save) */
+@@ -127,18 +130,43 @@
      /* stuck: no clock progress for STUCK_MS → bug + shot + save, unstick, SAME life continues */
      if (started && Date.now() - lastProg > STUCK_MS) { R.harness.stuck++; const shot = path.join(SHOTS, 'stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {});
        const svf = await dumpStuck('stuck-' + R.harness.stuck); const sv = !!svf; /* evidence FIRST, then the unstick ladder */
@@ -44,17 +64,26 @@
 +    if (C.coop && process.env.RELOAD_AT && started && !R.harness.reloadDone && R.buoi >= +process.env.RELOAD_AT) { R.harness.reloadDone = R.buoi; console.log('SCHEDULED RELOAD', LIFE, 'buổi', R.buoi); await unstick(p, rt, sc, 3); lastProg = Date.now(); continue }
      /* same screen many steps → light unstick (Escape / ✕) — logged, not a stuck bug */
      const sig = sc.layer + '|' + sc.title + '|' + sc.b.map(b => b.t).join('/') + '|' + key;
-     if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
-@@ -154,7 +177,7 @@
+-    if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
+-    if (sameScr > 25) { await unstick(p, rt, sc, sameScr > 60 ? 2 : 1); sameScr = 0; continue }
++    if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig; R._un = 0 }
++    if (sameScr > 25) { R._un = (R._un || 0) + 1; await unstick(p, rt, sc, R._un >= 3 ? 2 : 1); sameScr = 0; continue } /* U3: escalate to ✕ after 3 light unsticks (sameScr reset made lvl 2 unreachable) */
++    /* F's «Thang cơ duyên» fix: an open hint popup (#kpop) covers the option card → a real tap OUTSIDE it first (the tap-out catcher closes it), then the card */
++    if (started) { const po = await p.evaluate(() => { const k = document.getElementById('kpop'), c = document.getElementById('kxcatch'); if (!k || k.hidden || !c || c.hidden || getComputedStyle(k).display === 'none') return null; const r = k.getBoundingClientRect(); if (r.width < 2) return null; const W = innerWidth, H = innerHeight; for (const [x, y] of [[12, 12], [W - 12, 12], [12, H - 12], [W - 12, H - 12], [W / 2, 12], [W / 2, H - 12]]) { if (x > r.left && x < r.right && y > r.top && y < r.bottom) continue; const t = document.elementFromPoint(x, y); if (t === c || (t && c.contains(t))) return { x, y } } return null }).catch(() => null);
++      if (po) { if (DEV === 'ipad') await p.mouse.click(po.x, po.y); else await p.touchscreen.tap(po.x, po.y); R.harness.popClose = (R.harness.popClose || 0) + 1; await p.waitForTimeout(400); continue } }
+     const ch = choose(sc, started);
+     if (!ch) { await p.waitForTimeout(400); continue }
+     if (ch.scroll) { await p.mouse.move(ch.scroll.x, ch.scroll.y); await p.mouse.wheel(0, Math.min(400, ch.scroll.left + 20)); await p.waitForTimeout(400); R.harness.scrolls = (R.harness.scrolls || 0) + 1; continue }
+@@ -154,7 +182,7 @@
      await p.waitForTimeout(ok ? 220 : 400);
  
      function choose(sc, started) {
 -      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && /^(cfz|coop)$/.test(x.d))); let b = started ? hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4) : hb; /* before the life opens: keep retrying the start / continue button */
-+      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && C.coop && /ô lưu/i.test(x.t) && (R.harness.oluSkip = (R.harness.oluSkip || 0) + 1, true)) && !(started && /^(cfz|coop)$/.test(x.d))); let b = started ? hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4) : hb; /* before the life opens: keep retrying the start / continue button */
++      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && C.coop && /^Ô lưu$/i.test(x.t)) /* U3: ☰ menu leaves the co-op room (HCEP) */ && !(started && C.coop && /ô lưu/i.test(x.t) && (R.harness.oluSkip = (R.harness.oluSkip || 0) + 1, true)) && !(started && /^(cfz|coop)$/.test(x.d))); let b = started ? hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4) : hb; /* before the life opens: keep retrying the start / continue button */
        if (!b.length) b = hb;
        const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
        /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
-@@ -169,7 +192,7 @@
+@@ -169,7 +197,7 @@
        const hole = b.find(x => x.hole && !EXIT_RE.test(x.t)); if (hole) return hole; /* tutorial: tap what it points at */
        const nav = x => NAV_RE.test(x.t);
        const close = x => x.x || CLOSE_RE.test(x.t);
@@ -63,7 +92,15 @@
        const nonExit = opts.filter(x => !isExit(x));
        const exits = opts.filter(isExit);
        const isPage = sc.layer === 'page' || sc.b.some(x => x.id === 'next');
-@@ -214,8 +237,8 @@
+@@ -202,6 +230,7 @@
+   /* life over → read the ending (the game's own over() args) */
+   const end = await p.evaluate(() => window.__rtEnd || null).catch(() => null);
+   if (end) { const death = !end.alive; R.life = { id: end.id, type: death ? 'death' : 'end', fate: end.fate, death, age: end.age, year: end.year, rank: end.rank, text: end.text } }
++  else if (R.segment) R.life = { id: 'SEGMENT', type: 'segment', fate: 'segment closed: ' + JSON.stringify(R.segment) };
+   else if (R.sliced) R.life = { id: 'SLICE', type: 'slice', fate: 'self-test slice of ' + SLICE + ' buổi (not a life)' };
+   else R.life = { id: '?', type: '?' };
+   if (R.exitPick && R.life) R.life.exitPick = R.exitPick;
+@@ -214,8 +243,8 @@
  /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
  async function unstick(p, rt, sc, lvl) {
    R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
@@ -74,8 +111,8 @@
    if (lvl >= 3) {
      await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
      await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
---- a/dev/test/robot-rt-coop.js	2026-11-25 11:31:05.011364065 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-25 11:30:51.499504574 +0000
+--- a/dev/test/robot-rt-coop.js
++++ b/dev/test/robot-rt-coop.js
 @@ -51,6 +51,11 @@
  
  async function seatLoop(ctx, who, dev, other) {
@@ -88,6 +125,15 @@
    for (;;) {
      k++; const extra = k > KIEP;
      const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
+@@ -58,7 +63,7 @@
+     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
+     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
+     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
+-    if (s.R.life && /HARNESS|SLICE/.test(s.R.life.id)) break;
++    if (s.R.life && /HARNESS|SLICE|SEGMENT/.test(s.R.life.id)) break;
+     if (k >= KIEP && other.done) break;
+     if (k >= KIEP && !extra && other.done) break;
+     if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
 @@ -69,7 +74,7 @@
  (async () => {
    /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
