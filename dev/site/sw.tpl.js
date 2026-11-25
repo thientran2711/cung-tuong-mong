@@ -61,6 +61,10 @@ async function ranged(req,res){const rg=req.headers.get('range');if(!rg||!res||r
 /* entry-blank-r3 (review item 6): ONE download per picture. The life gate (jload lWant) and the <img> on screen ask for the same picture at
    the same time; each used to go to the network (twice the bytes on a slow line, so nothing arrived for long). The second waits for the first
    and is answered from the cache. */
+/* offline-fast: a saved copy of a data file when the line is down — the shells first (small, a few hundred keys), the whole-storage walk
+   (ignoreSearch over every cache incl. 'ctm-assets' with up to ~32 000 keys: seconds on a phone) only if no shell has it (offline boot = her flight) */
+async function anyCopy(u){try{for(const k of (await caches.keys()).filter(k=>k.startsWith('ctm-shell-')).sort((a,b)=>(b===SHELL)-(a===SHELL))){const r=await (await caches.open(k)).match(u,{ignoreSearch:true});if(r)return r}}catch(e){}
+ return caches.match(u,{ignoreSearch:true})}
 const INF=new Map();
 async function asset(e,p,h){const key=new URL(p+'?h='+h,baseOf(p)).href,c=await caches.open(ASSETS);
  const r=await c.match(key);if(r)return ranged(e.request,r);
@@ -93,10 +97,14 @@ self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;c
      EVERY open — on a slow line (or when the browser's own HTTP cache was emptied: no 304) they took the line before any picture of the first screen.
      They are precached in this build's shell at install, so the shell copy answers at once and the network copy refreshes it in the background,
      20 s later (one open behind at most). Same-origin JSON (assets.json, audio) stays network first. */
-  if(cdn){e.respondWith(caches.open(SHELL).then(c=>c.match(jk)).then(hit=>{if(!hit)return net().catch(()=>caches.match(jk,{ignoreSearch:true}));
+  if(cdn){e.respondWith(caches.open(SHELL).then(c=>c.match(jk)).then(hit=>{if(!hit)return net().catch(()=>anyCopy(jk));
     e.waitUntil(new Promise(ok=>setTimeout(ok,20000)).then(()=>net()).catch(()=>{}));return hit}));return}
-  e.respondWith(net().catch(()=>caches.match(jk,{ignoreSearch:true})));return}
+  e.respondWith(net().catch(()=>anyCopy(jk)));return}
  e.respondWith((async()=>{const m=await man(),h=m.get(p);
   if(h){try{return await asset(e,p,h)}catch(err){const c=await caches.open(ASSETS);const any=await c.match(new URL(p,baseOf(p)).href,{ignoreSearch:true});return any?ranged(q,any):Response.error()}}
-  const hit=await caches.match(q,{ignoreSearch:true});if(hit)return ranged(q,hit);
-  return fetch(cdn?new Request(q.url,CORS):q)})())});
+  /* offline-fast (owner 24/11 ~18:00Z): a file NOT in assets.json used to be looked up with caches.match(…,{ignoreSearch:true}) over EVERY cache:
+     ignoreSearch cannot use the key index, so it walked all of 'ctm-assets' (10–30 thousand entries; ~5 s at CPU 4× with 11 000) and every other
+     cache read — the music included — waited behind it. Now: the small shell first (same lookup), then the network; the walk over 'ctm-assets' only
+     when the network fails (offline, a legacy copy is better than nothing). */
+  const sh=await (await caches.open(SHELL)).match(q,{ignoreSearch:true});if(sh)return ranged(q,sh);
+  try{return await fetch(cdn?new Request(q.url,CORS):q)}catch(err){const hit=await caches.match(q,{ignoreSearch:true});if(hit)return ranged(q,hit);throw err}})())});
