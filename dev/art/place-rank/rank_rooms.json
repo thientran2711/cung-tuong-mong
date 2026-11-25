@@ -7,10 +7,10 @@
   "side": "dong",
   "kind": "tiep-khach",
   "label": "Cảnh Phúc cung · Đông phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/canh-phuc-cung-dong-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/canh-phuc-cung-dong-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph02",
@@ -33,10 +33,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Cảnh Phúc cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/canh-phuc-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/canh-phuc-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph04",
@@ -46,10 +46,10 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Cảnh Phúc cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/canh-phuc-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/canh-phuc-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph05",
@@ -59,10 +59,10 @@
   "side": "dong",
   "kind": "tiep-khach",
   "label": "Chung Tú cung · Đông phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/chung-tu-cung-dong-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/chung-tu-cung-dong-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph06",
@@ -85,10 +85,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Chung Tú cung · Phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/chung-tu-cung-phi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/chung-tu-cung-phi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph08",
@@ -98,10 +98,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Chung Tú cung · Phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/chung-tu-cung-phi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/chung-tu-cung-phi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph09",
@@ -111,10 +111,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Chung Tú cung · Quý phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/chung-tu-cung-quyphi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/chung-tu-cung-quyphi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph10",
@@ -124,10 +124,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Chung Tú cung · Quý phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/chung-tu-cung-quyphi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/chung-tu-cung-quyphi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph11",
@@ -137,10 +137,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Chung Tú cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/chung-tu-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/chung-tu-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph12",
@@ -150,10 +150,10 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Chung Tú cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/chung-tu-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/chung-tu-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph13",
@@ -163,10 +163,10 @@
   "side": "dong",
   "kind": "tiep-khach",
   "label": "Diên Huy cung · Đông phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/dien-huy-cung-dong-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/dien-huy-cung-dong-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph14",
@@ -176,10 +176,10 @@
   "side": "dong",
   "kind": "ngu",
   "label": "Diên Huy cung · Đông phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/dien-huy-cung-dong-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/dien-huy-cung-dong-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph15",
@@ -189,10 +189,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Diên Huy cung · Phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/dien-huy-cung-phi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/dien-huy-cung-phi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph16",
@@ -202,10 +202,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Diên Huy cung · Phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/dien-huy-cung-phi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/dien-huy-cung-phi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph17",
@@ -215,10 +215,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Diên Huy cung · Quý phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/dien-huy-cung-quyphi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/dien-huy-cung-quyphi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph18",
@@ -241,10 +241,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Diên Huy cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/dien-huy-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/dien-huy-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "unsure"
+  "drape": "clean"
  },
  {
   "id": "ph20",
@@ -254,10 +254,10 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Diên Huy cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/dien-huy-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/dien-huy-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph21",
@@ -267,10 +267,10 @@
   "side": "dong",
   "kind": "tiep-khach",
   "label": "Hàm Ân cung · Đông phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/ham-an-cung-dong-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/ham-an-cung-dong-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph22",
@@ -280,10 +280,10 @@
   "side": "dong",
   "kind": "ngu",
   "label": "Hàm Ân cung · Đông phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/ham-an-cung-dong-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/ham-an-cung-dong-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph23",
@@ -293,10 +293,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Hàm Ân cung · Phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/ham-an-cung-phi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/ham-an-cung-phi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph24",
@@ -306,10 +306,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Hàm Ân cung · Phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/ham-an-cung-phi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/ham-an-cung-phi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph25",
@@ -319,10 +319,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Hàm Ân cung · Quý phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/ham-an-cung-quyphi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/ham-an-cung-quyphi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph26",
@@ -358,10 +358,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Hàm Ân cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/ham-an-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/ham-an-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph29",
@@ -371,10 +371,10 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Hàm Ân cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/ham-an-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/ham-an-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph30",
@@ -384,10 +384,10 @@
   "side": "dong",
   "kind": "tiep-khach",
   "label": "Khải Tường cung · Đông phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-dong-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-dong-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph31",
@@ -397,10 +397,10 @@
   "side": "dong",
   "kind": "ngu",
   "label": "Khải Tường cung · Đông phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-dong-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-dong-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph32",
@@ -410,10 +410,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Khải Tường cung · Phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-phi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-phi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph33",
@@ -423,10 +423,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Khải Tường cung · Phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-phi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-phi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph34",
@@ -436,10 +436,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Khải Tường cung · Quý phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-quyphi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-quyphi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph35",
@@ -449,10 +449,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Khải Tường cung · Quý phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-quyphi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-quyphi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph36",
@@ -462,10 +462,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Khải Tường cung · Tần · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-tan-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-tan.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph37",
@@ -488,10 +488,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Khải Tường cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph39",
@@ -501,10 +501,10 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Khải Tường cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/khai-tuong-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/khai-tuong-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph40",
@@ -514,10 +514,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Thừa Minh cung · Phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-phi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-phi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph41",
@@ -527,10 +527,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Thừa Minh cung · Phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-phi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-phi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph42",
@@ -540,10 +540,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Thừa Minh cung · Quý phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-quyphi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-quyphi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph43",
@@ -553,10 +553,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Thừa Minh cung · Quý phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-quyphi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-quyphi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph44",
@@ -566,10 +566,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Thừa Minh cung · Tần · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-tan-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-tan.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph45",
@@ -579,10 +579,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Thừa Minh cung · Tần · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-tan-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-tan-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph46",
@@ -592,10 +592,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Thừa Minh cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph47",
@@ -605,10 +605,10 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Thừa Minh cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/thua-minh-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/thua-minh-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph48",
@@ -618,10 +618,10 @@
   "side": "dong",
   "kind": "tiep-khach",
   "label": "Trường Xuân cung · Đông phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-dong-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-dong-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph49",
@@ -631,10 +631,10 @@
   "side": "dong",
   "kind": "ngu",
   "label": "Trường Xuân cung · Đông phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-dong-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-dong-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph50",
@@ -644,10 +644,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Trường Xuân cung · Phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-phi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-phi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph51",
@@ -657,10 +657,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Trường Xuân cung · Phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-phi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-phi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph52",
@@ -670,10 +670,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Trường Xuân cung · Quý phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-quyphi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-quyphi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph53",
@@ -683,10 +683,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Trường Xuân cung · Quý phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-quyphi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-quyphi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph54",
@@ -696,10 +696,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Trường Xuân cung · Tần · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-tan-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-tan.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph55",
@@ -709,10 +709,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Trường Xuân cung · Tần · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-tan-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-tan-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph56",
@@ -722,10 +722,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Trường Xuân cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph57",
@@ -735,10 +735,10 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Trường Xuân cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/truong-xuan-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/truong-xuan-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph58",
@@ -748,10 +748,10 @@
   "side": "dong",
   "kind": "tiep-khach",
   "label": "Vĩnh Hòa cung · Đông phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/vinh-hoa-cung-dong-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/vinh-hoa-cung-dong-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph59",
@@ -774,10 +774,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Vĩnh Hòa cung · Phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/vinh-hoa-cung-phi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/vinh-hoa-cung-phi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph61",
@@ -787,10 +787,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Vĩnh Hòa cung · Phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/vinh-hoa-cung-phi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/vinh-hoa-cung-phi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph62",
@@ -800,10 +800,10 @@
   "side": "chinh",
   "kind": "tiep-khach",
   "label": "Vĩnh Hòa cung · Quý phi · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/vinh-hoa-cung-quyphi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/vinh-hoa-cung-quyphi.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph63",
@@ -813,10 +813,10 @@
   "side": "chinh",
   "kind": "ngu",
   "label": "Vĩnh Hòa cung · Quý phi · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/vinh-hoa-cung-quyphi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/vinh-hoa-cung-quyphi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph64",
@@ -826,10 +826,10 @@
   "side": "tay",
   "kind": "tiep-khach",
   "label": "Vĩnh Hòa cung · Tây phối · tiếp khách",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/vinh-hoa-cung-tay-phoi-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/vinh-hoa-cung-tay-phoi.webp",
   "slot": "live",
-  "drape": "drape"
+  "drape": "clean"
  },
  {
   "id": "ph65",
@@ -839,9 +839,9 @@
   "side": "tay",
   "kind": "ngu",
   "label": "Vĩnh Hòa cung · Tây phối · phòng ngủ",
-  "rev": "r1",
-  "src": "img/_review/place-rank/pr13/vinh-hoa-cung-tay-phoi-ngu-ha-sang.webp",
+  "rev": "nc",
+  "src": "img/_review/rooms-nc/vinh-hoa-cung-tay-phoi-ngu.webp",
   "slot": "new",
-  "drape": "drape"
+  "drape": "clean"
  }
 ]

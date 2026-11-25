@@ -87,15 +87,16 @@ def main():
         write_block([r['base'] for r in new]); print('STAGED locally (no upload):', len(sel), 'files in img/'); return
     if not go: print('DRY RUN: nothing built, nothing uploaded'); return
     os.makedirs('img', exist_ok=True); os.makedirs(STAGE, exist_ok=True); os.makedirs(BK, exist_ok=True)
-    man = {'live': [], 'new': []}; up = []
+    man = {'live': [], 'new': []}; up = []; bks = []
     for r in live:
         out = f'{STAGE}/{r["base"]}.webp'; build_webp(r['src'], out)
         keys = [f'{r["base"]}-{s}-{t}' for s in SEAS for t in TIMES] if all16 else [f'{r["base"]}-ha-sang']
         for k in keys:
             bk = f'{BK}/{k}.webp'
-            try: open(bk, 'wb').write(get(f'{CDN}img/{k}.webp')); subprocess.run([sys.executable, 'dev/site/cdn_sync.py', bk], check=True)
+            try: open(bk, 'wb').write(get(f'{CDN}img/{k}.webp')); bks.append(bk)
             except Exception as e: print('  no old live', k, e); os.remove(bk); continue
             man['live'].append(k); open(f'img/{k}.webp', 'wb').write(open(out, 'rb').read()); up.append(f'img/{k}.webp')
+    if bks: subprocess.run([sys.executable, 'dev/site/cdn_sync.py', *bks], check=True)  # ONE call: every call rebuilds the bucket index (slow)
     for r in new:
         k = f'{r["base"]}-ha-sang'; build_webp(r['src'], f'img/{k}.webp'); man['new'].append(k); up.append(f'img/{k}.webp')
     json.dump(man, open(f'{STAGE}/manifest.json', 'w'), indent=1)
