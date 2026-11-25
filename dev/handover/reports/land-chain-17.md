@@ -47,3 +47,12 @@ Tools: local wrangler at /home/user/wt/wr (wrangler dev --local --port 8791 from
 - 21:49Z site serves build 13f84c70f2a3 (= 5e013076 sw.js). Review imgs sangbuoi-held wiped (13 objects).
 - 22:07Z MAIN 146 adds after-flight: review/sangbuoi-held-fix-r3wip 4cf5e9c2 (on r4) — needs BIG rv first; rv must re-measure perf buổi with --runs 5 (one run 2806 vs LIVE 1664). Ref reports/sangbuoi-held-fix.md §r4.5/r4.6. Will need merge onto LIVE 5e013076 (D jdayq).
 - 22:48Z MAIN is now MAIN CHÍNH 147 session_01V1ZZH4NKh63eG3ZU7sdD59 (146 rolled). MAIN GO from 147; each push = sếp's words in LC17 chat + 147 GO. Queue unchanged.
+- 22:52Z MAIN 147: no GO while sếp flies; pre-stage re-merges on 5e013076 in queue order; GO per item after landing (~03:00Z).
+- 22:5xZ PRE-STAGED on LIVE 5e013076 (no gates run yet):
+  q1 kroulw e5453580 → 7abb60cc (review/lc17-q1-kroulw; test-only; CHANGE unchanged).
+  q2 week-wait 8e654ee0 (report: «landing this branch lands fix-6 too» → fix-6 833cd64f DROPPED from queue) → SOURCE CONFLICT jdayq.js vs r4 (dqArmModal + showModal wrapper: week-wait gates on dqHoldC()=dqUiC()&&!dqRoomOwes(); r4 rewrote both) → back to B / week-wait owner to re-merge on 5e013076 with one rule. (q2 fix-6 alone ab96063a on review/lc17-q2-fix6 exists but is superseded — do not land.)
+  q3 fix-7 6ad6631f on 7abb60cc → cd6452f3 (review/lc17-q3-fix7, clean; CHANGE fix-7 line).
+  q4 SELSCENE-19 bb308363 → SOURCE CONFLICT dev/tools/quickcheck.js (r4 BUOI rewrite vs selscene BANHOA/settleNew + BUOI) + dev/test/coop-e2e.js (#next diag) → back to SELSCENE-19 worker session_01V1ZZH1gwnq8CYeYJgyTQS2 to merge LIVE 5e013076.
+  q5 kit-text-first-2 166b3000 on cd6452f3 → 2feccf7a (review/lc17-q5-kittf2, clean) — CHANGE.txt is the stale music line: write a real kit line before push.
+  q6 sangbuoi r3wip 4cf5e9c2: waits BIG rv (perf --runs 5).
+  Gates still to run per item (QC alone each): q1 coop-title-leave local; q3 tnb + ctl(local, with kroulw) + coop-e2e; q5 kit gates (notice, one-opt, touchdrag, row-tap, faces, close-reach, nested-exit, endcard-ink, scroll-scan Fold vs LIVE) + QC.
