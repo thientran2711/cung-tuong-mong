@@ -21,8 +21,19 @@ function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};
    undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
- if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
+ if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk=k61NewKey();k=e.kk}
  if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
+/* ONE j61 KEY = ONE PERSON (SELSCENE-12, law 11 — the whole «x<n>» family): a person with no id / sid keeps the key she was given on herself (.kk)
+   for life, but the counter that issued it lives on HER (S.kseq): (1) a new life in the same world (rebirth, a life ended at the selection — ban hoa,
+   a new co-op player) starts S.kseq at 0 while every world maid / official / child still holds the old life's keys → x34 given twice (coop-e2e a3:
+   «Bích Đào» maid of #15 and «Vân Nhi» maid of #23); (2) the two co-op seats each run a counter, and the merged world carries the host's keys to
+   the guest → her next key = a key the host already gave. Rule: the first key of a life starts above every key any person still holds; a key a
+   registered person holds is never issued again; the guest seat issues its own namespace («x<n>b»; /^x\d/ readers unchanged). Old saves keep
+   every key they hold; solo and the host issue «x<n>» as before. */
+const K61SQ=new WeakSet();
+function k61NewKey(){let sx="";try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")sx=String(W.seat)}catch(x){}
+ if(!K61SQ.has(S)){K61SQ.add(S);let m=+S.kseq||0;try{for(const p of k61All()){const r=/^x(\d+)/.exec(p&&typeof p.kk==="string"?p.kk:"");if(r)m=Math.max(m,+r[1])}}catch(x){}S.kseq=m}
+ let k;do{S.kseq=(+S.kseq||0)+1;k="x"+S.kseq+sx}while(KREG[k]);return k}
 /* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
    GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
    key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
