@@ -23,7 +23,7 @@ let NLP=null,NLR=null;
 (function(){const wrap=f=>function(){if(!NLR)return f.apply(this,arguments);const pr=Math.random;Math.random=NLR.face;try{return f.apply(this,arguments)}finally{Math.random=pr}};
  if(typeof drawF==="function")drawF=wrap(drawF);if(typeof figPick==="function")figPick=wrap(figPick);if(typeof faceFor==="function")faceFor=wrap(faceFor)})();
 /* nothing is written to a slot while the identity card is open */
-(function(){const s0=save;save=function(){if(NLP)return;return s0.apply(this,arguments)}})();
+(function(){const s0=save;save=function(){if(NLP&&Array.isArray(Q)&&Q.some(m=>m&&m.nl))return;/* save-year-rollback: hold only while the card is really in the queue (a card dropped from Q some other way never stops every save of the life) */return s0.apply(this,arguments)}})();
 const NL_FK=["fc","fk","fid","face","hue","fv"];
 function nlHolders(){if(!S)return[];const H=[S,S.maid,S.emp,S.thO];const C=S.court||{};Object.keys(C).sort().forEach(k=>H.push(C[k]));(rivals||[]).forEach(v=>H.push(v));
  try{if(typeof allServ==="function")allServ().forEach(x=>H.push(x))}catch(e){}(S.men||[]).forEach(m=>H.push(m));(S.kids||[]).forEach(k=>H.push(k));(rivals||[]).forEach(v=>(v.kids||[]).forEach(k=>H.push(k)));

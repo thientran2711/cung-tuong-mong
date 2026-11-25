@@ -81,7 +81,7 @@ function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot
   const s=d.S;return `<div class="slot"><b>Ô ${n}: ${s.name}</b><span class="past">${RANKS[s.rank].n} · năm ${s.year}, tháng ${s.month}, ${TUAN[s.tuan]}</span><div class="srow"><button class="main" data-load="${n}">Tiếp tục kiếp này</button><button class="btn" data-new="${n}" data-ask="1">Kiếp mới</button></div></div>`}).join("");
  $("slots").innerHTML=L;T.hidden=false;const f=T.querySelector("button");if(f)f.focus({preventScroll:true})}
 $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
- if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;try{if(typeof kmReset==="function")kmReset()}catch(e){}quiet=true;d.tab="act";/* owner 16/11: entering the game always opens her room (Hành sự), never the last tab */deser(d);quiet=false;$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
+ if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;try{if(typeof kmReset==="function")kmReset()}catch(e){}quiet=true;d.tab="act";/* owner 16/11: entering the game always opens her room (Hành sự), never the last tab */try{deser(d)}finally{quiet=false}/* save-year-rollback: a throw in a load step never leaves quiet on (no save would be written for the rest of the life) */$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
  if(b.dataset.new){if(b.dataset.ask==="1"){b.dataset.ask="2";b.innerHTML="Chắc chắn?<small>Kiếp đang chơi sẽ mất</small>";return}SLOT=+b.dataset.new;$("title").hidden=true;start()}};
 
 /* wiring */
