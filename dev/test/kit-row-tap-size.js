@@ -1,0 +1,22 @@
+/* kit-row-tap-size.js — KK27 TODO (c): every TAPPABLE row of the status / K3 boxes (#hud2 .hc [data-hx], [data-k3], the right-column boxes «Xét phẩm», «Nguy hiểm chung»…)
+   must be a kit tap target: >= MIN px tall (KIT §A row >= 44 px; the whole row is the tap target). Scan of the live game screen, Fold 755x1000 + iPad 1180x820:
+   per device, per tappable element in the HUD / K3 boxes: label, height, width, FAIL when height < MIN. Also checks the silent-ignore pattern: a tap on a
+   [data-hx="tsxp"] / [data-k3="tsxp"] row while a card is queued (Q non-empty, modal hidden) must OPEN something (modal visible) — never nothing.
+   usage: node dev/test/kit-row-tap-size.js <index.html>   env SZ=[[W,H],..] MIN=44   Exit 1 on a FAIL. */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];const MIN=+process.env.MIN||44;
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];let silent=0;
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  const p=await ctx.newPage();p.on('pageerror',()=>{});await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;document.getElementById('modal').hidden=true});
+  await p.waitForFunction(()=>!/Sửa soạn nhập cung/.test(document.body.innerText),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(3000);
+  await p.evaluate(()=>{document.querySelectorAll('#dawn,.kroul,.kmbox,.kne,.kmrew').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true});await p.waitForTimeout(500);
+  if(process.env.DBG)console.log(await p.evaluate(()=>[document.querySelectorAll('#hud2').length,document.querySelectorAll('[data-hx]').length,document.querySelectorAll('[data-k3]').length,document.querySelectorAll('.khc').length].join(' ')));
+  const rows=await p.evaluate(ALL=>[...document.querySelectorAll('#hud2 [data-hx],#hud2 [data-k3],.khc [data-hx],.khc [data-k3]')].filter(e=>ALL||e.getClientRects().length).map(e=>{const r=e.getBoundingClientRect();return {k:e.dataset.hx||e.dataset.k3,t:(e.textContent||'').replace(/\s+/g,' ').trim().slice(0,28),h:Math.round(r.height),w:Math.round(r.width)}}),!!process.env.ALL);
+  for(const r of rows)R.push(Object.assign({dev:W+'x'+H},r,{FAIL:r.h<MIN}));
+  /* silent ignore: a card queued, modal hidden, tap the Xét phẩm row */
+  const tap=await p.evaluate(()=>{const b=document.querySelector('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b)return {none:1};Q.length=0;Q.push({t:'Một báo',h:'<p>x</p>',btn:'Đã hiểu'});document.getElementById('modal').hidden=true;b.click();const md=document.getElementById('modal');return {open:!md.hidden,q:Q.length,title:(md.innerText||'').slice(0,30)}});
+  if(tap.none)R.push({dev:W+'x'+H,k:'tsxp',t:'(row absent in this life)',h:0,w:0,FAIL:false});else{R.push({dev:W+'x'+H,k:'tsxp-queued-tap',t:tap.open?'opens: '+tap.title.replace(/\s+/g,' '):'SILENT IGNORE',h:0,w:0,FAIL:!tap.open});if(!tap.open)silent++}
+  await ctx.close()}
+ await b.close();console.table(R);const bad=R.filter(r=>r.FAIL);console.log('rows',R.length,'FAIL',bad.length,'silent-ignore',silent);process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

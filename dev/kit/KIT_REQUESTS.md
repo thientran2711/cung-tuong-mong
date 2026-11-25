@@ -258,3 +258,9 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 
 ## KIT REQUEST (VISITOR-FIX, MAIN 131 24/11 ~23:00Z) — Sổ ghi / note row with a portrait icon wraps badly on iPad
 iPad 1180x820, Sổ ghi (journal/notes) rows that carry a small portrait icon: the text wraps with a big gap beside the icon and leaves an orphan last word («… Trường Xuân / cung.»). Wanted: the kit note row (icon + text) wraps text under itself with no gap, no orphan word (text-wrap:pretty / the icon floated or a grid with the text column min-width 0). This is a kit row (LUẬT KIT TRƯỚC): kit keeper KK25 builds / fixes it in KIT.md + the kit sample page; no per-screen CSS. Worker did NOT touch the row.
+
+## KK27 25/11 — still open from the KK26 list (not built)
+- K3 status boxes («Xét phẩm», «Nguy hiểm chung» …, `#hud2 .khc .hc`, j79.js:1229 `min-height:0;padding:1px 0`): the tappable row is ~17 px tall (kit row >= 44 px, §A). Fix = the K3 row gets the kit row height, K3 right column re-measured on Fold + iPad (rows are adjacent, so a hit-area trick is not enough). Scan: dev/test/kit-row-tap-size.js (ALL=1 lists the rows; must be shown on the screen that has the K3 boxes).
+- iPad 1180x820 Hành sự stage: two figure name labels overlap at the left edge (name-label collision, every stage) — needs a stage-label collision rule in the stage kit.
+- One-option card «Tắm gội chờ giá» (E-S1, Kính sự phòng báo tin): add a ONE-option card to kit-opt-meter-tap (tap anywhere chooses except the «!»).
+- «Tin báo / Đã xem hết» long list on iPad: ✕ in view with the real E state (§56.22 header ✕ covers option-less panels; verify with the real list).
