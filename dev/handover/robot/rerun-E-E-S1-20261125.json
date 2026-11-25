@@ -1,0 +1,409 @@
+{
+ "unit": "E-S1",
+ "runner": "session_01DgYSWpfx9EuQ7nBDWNiLL4",
+ "date": "2026-11-25",
+ "harness": {
+  "realtap": true,
+  "jsClicks": 0
+ },
+ "lives": [
+  {
+   "id": "E-S1-R1-lover-1-1915499756",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "lover",
+   "botHarness": "sens",
+   "kiep": 1,
+   "seed": 1915499756,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "b4b181f8 (final), earlier 93812531/69e41729/64d62d9b/d417d3bb",
+    "deadButtons": 1,
+    "stuck": 10
+   },
+   "live": "Build 6a87c26fe0f5 (main ee37ab5f), browser profile kept across resumes",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Lao phổi nguy kịch, không qua khỏi",
+   "death": true,
+   "age": 23,
+   "year": 6,
+   "rank": 1,
+   "buoi": 1119,
+   "steps": 60432,
+   "taps": 1980,
+   "exitPick": null,
+   "bugCounts": {
+    "game": 44,
+    "stuck": 10,
+    "dead": 1,
+    "freeze": 1
+   },
+   "valid": "VALID",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-lover-1-1915499756-moments.md",
+    "review/rerun-E-S1-E-S1-R1-lover-1-1915499756-review.md"
+   ],
+   "bugs": [
+    {
+     "type": "game",
+     "msg": "dialog queue holds 2 copies of «Tâm trạng · Tể tướng Triệu Uyên Minh» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 285
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+     "n": 7,
+     "buoi": 403
+    },
+    {
+     "type": "stuck",
+     "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+     "n": 1,
+     "buoi": 1150
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng»",
+     "n": 12,
+     "buoi": 1451
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)",
+     "n": 18,
+     "buoi": 1451
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+     "n": 1,
+     "buoi": 1516
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Có người đến)",
+     "n": 1,
+     "buoi": 1516
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 13 copies of «Tâm trạng · Thường tại Thôi Nghê Thường» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 1596
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 10 copies of «Tâm trạng · Thường tại Thôi Nghê Thường» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 1601
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 12 copies of «Tâm trạng · Thường tại Tăng Bích Dao» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 1618
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 9 copies of «Tâm trạng · Thường tại Tăng Bích Dao» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 1622
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 6 copies of «Tâm trạng · Phi Liễu Thanh Hoan» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 1647
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 3 copies of «Tâm trạng · Phi Liễu Thanh Hoan» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 1652
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 13 copies of «Tâm trạng · Thường tại Phùng Vân La» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 3654
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 10 copies of «Tâm trạng · Gia tần Thiệu Nhu Tắc» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 3663
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 7 copies of «Tâm trạng · Gia tần Thiệu Nhu Tắc» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 3668
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 3 copies of «Tâm trạng · Thường tại Phùng Vân La» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 3686
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 3 copies of «Tâm trạng · Đức quý phi Uông Tương Quân» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 3722
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng»",
+     "n": 1,
+     "buoi": 4317
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 20 copies of «Tâm trạng · Gia tần Thiệu Nhu Tắc» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 4408
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 17 copies of «Tâm trạng · Gia tần Thiệu Nhu Tắc» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 4413
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 14 copies of «Tâm trạng · Gia tần Thiệu Nhu Tắc» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 4417
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 7 copies of «Tâm trạng · Đức quý phi Uông Tương Quân» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 4430
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Tề Thải Vi» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 4467
+    },
+    {
+     "type": "stuck",
+     "msg": "no progress 15 min on .dlg «Tin báo»",
+     "n": 9,
+     "buoi": 5506
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on .mapsc «»",
+     "n": 4,
+     "buoi": 6545
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 34 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7211
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 35 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7218
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 32 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7224
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 29 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7229
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 26 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7234
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 23 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7239
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 20 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7245
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 16 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7251
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 13 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7256
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 10 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7261
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 7 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7267
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 4 copies of «Tâm trạng · Hoàng hậu Khương Diệu Hoa» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7272
+    },
+    {
+     "type": "dead",
+     "msg": "close button has no effect: .dlg «Tâm trạng · Hoàng hậu Khương Diệu Hoa» «Lui»",
+     "n": 1,
+     "buoi": 7277
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Diên Huy cung · Sùng Nghĩa trai · Ở đây còn 1 ngườ»",
+     "n": 3,
+     "buoi": 7550
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 8 copies of «Tâm trạng · Gia phi Thiệu Nhu Tắc» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7616
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 11 copies of «Tâm trạng · Tần Tề Thải Vi» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 7626
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.»",
+     "n": 3,
+     "buoi": 9784
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 9 copies of «Tâm trạng · Quý nhân Tống Dao Cầm» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 12502
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 3 copies of «Tâm trạng · Đáp ứng Tăng Bích Dao» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 12542
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 4 copies of «Tâm trạng · Đáp ứng Tăng Bích Dao» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 12549
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 5 copies of «Tâm trạng · Đáp ứng Tăng Bích Dao» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 12629
+    },
+    {
+     "type": "game",
+     "msg": "dialog queue holds 2 copies of «Tâm trạng · Đáp ứng Tăng Bích Dao» (each close pops one; looks like a dead ✕)",
+     "n": 1,
+     "buoi": 12633
+    },
+    {
+     "type": "freeze",
+     "msg": "page froze: no harness step for 10 min (page.evaluate hung) at buổi 607",
+     "n": 1,
+     "buoi": "2026-11-25T16:38:55.905Z"
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+     "n": 26,
+     "buoi": 272
+    },
+    {
+     "type": "game",
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Để ta xemTốnkhôngĐượckhô / Để sau",
+     "n": 2,
+     "buoi": 477
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=5: Lịch tháng / Nhờ thái giám tìm thú nuôi / Tin chờ người sai đi / Tin báo / Tin trong cung buổi này)",
+     "n": 1,
+     "buoi": 1329
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 2 người.»",
+     "n": 1,
+     "buoi": 3605
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=12: Tin báo / Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Hôn sự / Chương 5 · Lời thơ vượt tường cung)",
+     "n": 1,
+     "buoi": 3605
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin báo / Tin trong cung buổi này)",
+     "n": 1,
+     "buoi": 4873
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Danh hiệu / Tin trong cung buổi này)",
+     "n": 1,
+     "buoi": 5022
+    }
+   ]
+  }
+ ],
+ "parked": [
+  {
+   "id": "E-S1-R1-skilled-1-795064746",
+   "dev": "fold",
+   "status": "RERUN on LIVE 79050fbf5464 (old build STUCK-gamebug «Kính sự phòng báo tin» not seen again, buổi 486+)"
+  },
+  {
+   "id": "E-S1-R1-greedy-1-372282412",
+   "dev": "fold",
+   "status": "STUCK-gamebug «Tắm gội chờ giá» (old build 6a87c26fe0f5), not yet rerun"
+  },
+  {
+   "id": "E-S1-R1-cautious-1-3360402025",
+   "dev": "ipad",
+   "status": "STUCK-gamebug «Tân quân lập uy Ch.2» (old build), RERUN running on LIVE 4763d410aa0d"
+  }
+ ]
+}
