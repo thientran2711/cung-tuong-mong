@@ -6,13 +6,6 @@
  "dump": {
   "title": "Chọn người theo hầu",
   "bad": 1,
- "buoi": 33,
- "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng mười · thượng tuần · năm thứ nhất | Buổi trưa",
- "build": "0756a05b",
- "at": "2026-11-25T10:45:43.607Z",
- "dump": {
-  "title": "Chọn người theo hầu",
-  "bad": 1,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
   "dlgStyle": "--kdpw: 178px;",
@@ -46,15 +39,6 @@
     440,
     304,
     445
-    471,
-    304,
-    445
-   ],
-   "kpopts": [
-    342,
-    440,
-    304,
-    445
    ],
    "k3right": [
     342,
@@ -79,41 +63,17 @@
    0,
    595,
    445
-   897,
-   414
   ],
   "cards": [
    [
     342,
     440,
-    471,
-    304,
-    166
-   ],
-   [
-    342,
-    643,
     304,
     140
    ],
    [
     342,
     586,
-    304,
-    140
-   ],
-   [
-    342,
-    732,
-    304,
-    140
-   ],
-   [
-    342,
-    878,
-    304,
-    151
-    789,
     304,
     140
    ],

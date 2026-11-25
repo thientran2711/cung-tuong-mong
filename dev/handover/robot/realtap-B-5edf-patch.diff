@@ -25,7 +25,6 @@ index ea1fe815..a541c906 100644
    const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
 diff --git a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 index ca3839c8..e6fac33a 100644
-index ca3839c8..b40432fc 100644
 --- a/dev/test/robot-rt.js
 +++ b/dev/test/robot-rt.js
 @@ -40,6 +40,7 @@ const R = { job: { id: LIFE, origin: A.origin || null, road: A.road || null, bot
@@ -37,7 +36,6 @@ index ca3839c8..b40432fc 100644
  
  /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
 @@ -127,14 +128,31 @@ async function play(p) {
-@@ -127,12 +128,27 @@ async function play(p) {
      /* stuck: no clock progress for STUCK_MS → bug + shot + save, unstick, SAME life continues */
      if (started && Date.now() - lastProg > STUCK_MS) { R.harness.stuck++; const shot = path.join(SHOTS, 'stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {});
        const svf = await dumpStuck('stuck-' + R.harness.stuck); const sv = !!svf; /* evidence FIRST, then the unstick ladder */
@@ -70,10 +68,6 @@ index ca3839c8..b40432fc 100644
      const sig = sc.layer + '|' + sc.title + '|' + sc.b.map(b => b.t).join('/') + '|' + key;
      if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
 @@ -154,7 +172,7 @@ async function play(p) {
-     /* same screen many steps → light unstick (Escape / ✕) — logged, not a stuck bug */
-     const sig = sc.layer + '|' + sc.title + '|' + sc.b.map(b => b.t).join('/') + '|' + key;
-     if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
-@@ -154,7 +172,7 @@ async function play(p) {
      await p.waitForTimeout(ok ? 220 : 400);
  
      function choose(sc, started) {
@@ -83,7 +77,6 @@ index ca3839c8..b40432fc 100644
        const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
        /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
 @@ -214,8 +232,8 @@ async function play(p) {
-@@ -214,8 +230,8 @@ async function play(p) {
  /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
  async function unstick(p, rt, sc, lvl) {
    R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });

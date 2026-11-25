@@ -1725,11 +1725,3 @@ rv temper-perception r2 | review/temper-perception-rv | session_01D3E3NaXCgiiLt5
 | F ROLE B BUTTON CRAWLER #4 (opus; successor of ROLE B #3 session_01UV1Szis6w42ZQrVFshkBo8; handover dev/handover/reports/button-crawl.md «HANDOVER ROLE B #3» @d37ac22d + FAIL family #9) | review/button-crawl-fix-N | FOREMAN F #8 for F #10 | session_01UV1SziRSpt6UJHzZkSfGnp | RUNNING | 2026-11-25T10:57Z |
 HARDLOCK-CHOICE-R3 (unify hardlock-choice with LIVE jdeadcard, one rule) | review/hardlock-choice-r3 | session_01N1tNP4cyVoeLHp6YVozQ5r (FOREMAN B) | RUNNING | 2026-11-25T11:05Z
 d-robot-bugs (robot-found game bugs ×5) | review/d-robot-bugs | session_01D3E3NZRWbpM7zyLv8pxisZ | RUNNING | 2026-11-25T11:06Z (Foreman D)
-d-lander-support (temper pair shot + nc-fix-4 remerge on LC14 stack) | review/robot10-nc-fix-4-rv2 | session_01D3E3NZwPBzoXUgaTJ8BPLX | RUNNING | 2026-11-25T10:31Z (Foreman D)
-| F HARNESS FIXER #4 (opus; ROLE A successor of HARNESS FIXER #3 session_01UV1Szkrku4AmZLvRzEkhZk; handover end of dev/PROGRESS_robot-realtap.md on review/robot-realtap 93812531; first: perfgate-days verification) | review/robot-realtap | FOREMAN F #8 for F #9 | session_01UV1Szi4VkuLRzUgj7f1FQj | RUNNING | 2026-11-25T10:34Z |
-rv talk-others-people r2 | review/talk-others-people-rv | session_01D3E3NaSsipN1iUZHpNZHje | RUNNING | 2026-11-25T10:37Z (Foreman D)
-| F DIFFICULTY-ENDCARD-TEST (sonnet; ORDER FROM MAIN 138 10:35Z; briefs/F-difficulty-endcard-2511.md) | review/difficulty-endcard-test | FOREMAN F #8 for F #10 | session_01UV1Szhr1fBVnZJ918U1DYJ | DONE (BUG, archived) | 2026-11-25T10:45Z |
-BIG rv robot-coop-fix-7 | review/robot-coop-fix-7 4a62e4d9 | session_01N1tNP2DEvrn63HHg5eMcAz (FOREMAN B) | RUNNING | 2026-11-25T10:44Z
-| F BIG REVIEWER #4 (opus; successor of BIG REVIEWER #3 session_01UV1Szk4zpF7PEfrXMmy9L8 — blocked: local http server denied; queue button-crawl-fix-3 6b401cfc → harness bfe29c95..93812531; briefs/F-bigrev4-2511.md) | review/*-r | FOREMAN F #8 for F #10 | session_01UV1Szh4xkQ1qFN3jffTKyr | RUNNING | 2026-11-25T10:45Z |
-SAVE-YEAR-ROLLBACK (whole family: every time-advance path persists the save) | review/save-year-rollback | session_01N1tNP37vyD6UhgHmsLgow9 (FOREMAN B) | RUNNING | 2026-11-25T10:58Z
-rv temper-perception r2 | review/temper-perception-rv | session_01D3E3NaXCgiiLt5mmGzecJp | RUNNING | 2026-11-25T10:46Z (Foreman D)

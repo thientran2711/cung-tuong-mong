@@ -6,13 +6,6 @@
  "dump": {
   "title": "Bổng lộc tháng mười",
   "bad": 3,
- "buoi": 57,
- "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng chạp · thượng tuần · năm thứ nhất | Buổi trưa",
- "build": "0756a05b",
- "at": "2026-11-25T07:45:17.188Z",
- "dump": {
-  "title": "Bổng lộc tháng mười một",
-  "bad": 2,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
   "dlgStyle": "--kdpw: 178px;",
@@ -46,15 +39,6 @@
     511,
     304,
     374
-    469,
-    304,
-    416
-   ],
-   "kpopts": [
-    342,
-    469,
-    304,
-    416
    ],
    "k3right": [
     342,
@@ -79,21 +63,17 @@
    0,
    889,
    374
-   840,
-   416
   ],
   "cards": [
    [
     342,
     511,
-    469,
     304,
     166
    ],
    [
     342,
     683,
-    641,
     304,
     149
    ],
@@ -114,21 +94,6 @@
     1228,
     304,
     165
-    796,
-    304,
-    149
-   ],
-   [
-    342,
-    950,
-    304,
-    165
-   ],
-   [
-    342,
-    1121,
-    304,
-    181
    ]
   ],
   "vp": [

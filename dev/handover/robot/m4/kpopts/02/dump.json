@@ -9,16 +9,6 @@
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
   "dlgStyle": "--kdpw: 175px;",
- "buoi": 40,
- "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng mười · trung tuần · năm thứ nhất | Buổi tối",
- "build": "0756a05b",
- "at": "2026-11-25T10:45:51.606Z",
- "dump": {
-  "title": "Đại xá thiên hạ",
-  "bad": 1,
-  "frameBottom": 898,
-  "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 175px;",
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
@@ -41,15 +31,6 @@
    "opts": [
     342,
     402,
-    304,
-    483
-   ],
-   "kpopts": [
-    342,
-    402,
-    304,
-    483
-    392,
     304,
     483
    ],
@@ -82,35 +63,17 @@
    0,
    584,
    483
-   635,
-   493
   ],
   "cards": [
    [
     342,
     402,
-    392,
     304,
     140
    ],
    [
     342,
     548,
-    304,
-    140
-   ],
-   [
-    342,
-    694,
-    304,
-    140
-   ],
-   [
-    342,
-    840,
-    304,
-    140
-    538,
     304,
     140
    ],
