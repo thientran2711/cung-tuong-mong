@@ -3326,3 +3326,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (04:48Z) DELEGATE-NOMG LAND READY 0ef61d8b BIG; open item scheme «Giao cho người làm» rolls her odds → already ruled (OD ~04:12Z) → fix in same branch, new sha. BIG rv routed to opus rv 2yv2CZAt after tainghe (133 cannot open seats). MAKEUP-NOBOOST ×0.5 built, quickcheck running.
 - (04:49Z) 132 opened BIG rv delegate-nomg = session_01V1ZZH22tLFisY7pahB4wKi (opus, verdict to 133); rv 2yv2CZAt routing cancelled (tainghe only). 132 (depth 7) stays as session opener for 133 until ROOT main.
 - (04:51Z) SANSANG-MUSIC-FIX LAND READY c70cfd17 SMALL (132 LOOKED pair, GO to LC13 TOP); 133 confirmed GO; order = first ready of 4da55ce8 / c70cfd17 lands first. 2nd branch (Lời dặn dead + tèo sfx) owed.
+- (04:52Z) LIVE 4da55ce8 (flight-modal-deadlock-r) 04:50Z; ROLLBACK 49f17d4d. Told sếp. sansang c70cfd17 merging on 4da55ce8 (GO given). SANSANG worker started review/sansang-music-fix-2 (Lời dặn dead ✕/Đã hiểu + tèo sfx + hoa-dien hang).
