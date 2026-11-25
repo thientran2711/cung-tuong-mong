@@ -1,0 +1,6 @@
+# E-S4 R5-speed-5 — end-of-life review (evidence limited, see moments)
+1. Summary: speed (impatient mobile player, harness «bold»), pf/pt_hai, iPad, real taps, harness 594fa1ee (no resume), 803 buổi, 6 years, age 25, rank 1 on entry (max 1), ending «Hồng nhan bạc mệnh — Bị ban rượu độc vì mưu hại Lư Hân Duyệt» (death, VALID), 10 364 taps, ≈ 3.2 h wall, 0 stuck, 1 dead, 29 bug rows. LIVE at start Build 6a87c26fe0f5 (dbae89eb not yet served).
+2. Scores: a first 15 min 8 · b loop/pacing 4 (queue softlocks ×13 stop the speed player) · c buttons 4 · d story 6 (a scheme turns into a poisoned-wine ending: cause→effect visible) · e characters 5 · f choices/fairness 6 (Lễ ra mắt three equal options) · g feedback 7 (ending art strong) · h mini-games n/a · i visuals 8 · j co-op n/a.
+3. Loved: Lễ ra mắt three equal choices; poison ending presentation. Hated: «Sang ngày mới» that does not turn; unlabelled disabled state. Replay: yes.
+4. BUGS: dialog queue not draining → «Sang ngày mới»/«Có tin đang chờ» disabled without a dialog (×13); JS error reading 'off' (fixed in dbae89eb); duplicated «Tâm trạng» entries.
+5. Suggestions (parking lot): disabled «Sang ngày mới» should say why / auto-open the pending dialog.
