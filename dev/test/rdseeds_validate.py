@@ -122,6 +122,18 @@ def check_hoi(v, rid, o, h, clim, titles):
         for i, s in enumerate(S_):
             if s not in XSTATS: v.e(rid, f'opt{i+1}: stat «{s}» not one of {" ".join(XSTATS)}')
         if len(set(S_)) < 3: v.e(rid, f'climax stats {S_}: need ≥3 different')
+        # law 6b / thin-p8 r2 review: the roll may ride on Thái hậu's (th) / Hoàng hậu's (hh) liking only when she is in the option or the scene
+        sc = ' '.join([h.get('h') or '', h.get('t') or ''])
+        for i, op in enumerate(O):
+            ot = ' '.join([op.get('n') or '', op.get('rt') or '', op.get('rf') or '']); s = op.get('stat')
+            if s == 'th' and not ('Thái hậu' in ot or 'Thái hậu' in sc or h.get('w') == 'th'):
+                v.e(rid, f'opt{i+1}: stat «th» but Thái hậu is neither in the option nor in the scene (roll on the stat the act uses)')
+            if s == 'hh' and not any(x in ot or x in sc for x in ('Hoàng hậu', '{hh}')) and h.get('w') != 'hh':
+                v.e(rid, f'opt{i+1}: stat «hh» but Hoàng hậu is neither in the option nor in the scene (roll on the stat the act uses)')
+            if s == 'hh' and 'Thái hậu' in ot and not any(x in ot for x in ('Hoàng hậu', '{hh}')):
+                v.e(rid, f'opt{i+1}: the option asks Thái hậu but rolls on «hh» (Hoàng hậu)')
+            if s == 'th' and any(x in ot for x in ('Hoàng hậu', '{hh}')) and 'Thái hậu' not in ot:
+                v.e(rid, f'opt{i+1}: the option asks Hoàng hậu but rolls on «th» (Thái hậu)')
         for i, op in enumerate(O):
             if not op.get('rf'): v.e(rid, f'opt{i+1}: rf (what happens when it fails) missing')
     return roles
