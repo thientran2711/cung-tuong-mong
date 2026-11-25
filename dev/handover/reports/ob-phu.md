@@ -55,3 +55,11 @@ ipad-BEFORE-home-map-half.jpg · ipad-home-map-phu.jpg · fold-home-map-phu.jpg 
 ## Notes for MAIN (not in this brief, seen while testing)
 - At home the bottom tab bar still reads palace names (Hành sự / Hậu cung / Giao tình / Hoàng tự) — KCTABS (Khuê phòng / Gia tộc / Giao du / Thư từ) are not applied on LIVE.
 - Stage chips «1 Cung nhân · 3 Chí tôn» at home = the ~22:45Z bug (other fixer).
+
+## HANDOVER (rollover, 25/11 ~23:50Z) — parts 4/5 + add-ons NOT started
+Parts 1–3 above are done (cf143155). Queued by MAIN 146/147/148 after the brief, not started (successor picks up, base review/ob-phu):
+- PART 4 (owner 25/11 ~23:00Z, shots k5/k6/k7 in dev/handover/refs/owner-2511-kiep/): ALL person info (portraits, person cards, nết/ghét/đã biết/dạo này, thiện cảm pairs) only in a dedicated PEOPLE tab; action tabs (Giao du/Giao tình, Tài nghệ, Khuê phòng, palace tabs) hold ONLY actions; an act about a person names/links the person (tap → People tab), never embeds the card. Home: jkc kcArtHTML (teacher skill card), kcSocHTML (Áp lực hôn sự + bà mối card in the act stream), kcFamCard groups «Việc» (acts inside person cards). Palace: check existing people tab (Hậu cung) first. Kit part with KK33. Before/after table of every tab.
+- PART 5 (owner ~23:45Z, shot k17): Dư đồ too much text → zone tags for similar non-consort places (OD ~L1898 + ~19:40Z/19:45Z 18/11 rows), tap zone = zoom + fog; one short count per label; status banner owned by PLACE-RULES session_01V1ZZH3XzLLpDVWarrvHjvA. Gate Zero: review/map-zones + map-zones-r6 exist (reuse). Add Dưỡng Tú viện as a real place (MAIN 148).
+- iPad: «Về phòng/Về Khuê phòng» button + top bar never cut on Dư đồ (k17).
+- IPAD-SIZE: call k3RowH(mv) next to k3RW(mv) in k3Stage for the map view (KIT 56.28, review/ipad-size 7eb0154b); check dev/test/ipad-size-ratio.js.
+Tools: my shot driver /home/user/wt/obphu-t/home.js (env ORG, DUMP, EXTRA=[[name,js]]) enters the home road on a local build (python3 -m http.server in the worktree).
