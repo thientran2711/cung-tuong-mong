@@ -1,0 +1,27 @@
+# ART-NHV report — Ngự hoa viên area map + 5 area scenes (owner 25/11 ~22:05Z)
+Worker: ART-NHV session_01V1ZZH4P2cD99JL9Qr4NF5Y (opus, art), child of MAIN CHÍNH 146 session_01V1ZZH1NSJHgk3C1emdgoXE. START_CTX ≈ 0 % (get_session). Brief: dev/AREA_PLAN.md §6 on review/ring-design-3 0cc43436.
+PRIORITY #1 CHECK ('ngu-hoa-vien'): OD 0 | ledger 0 | claims 0 | main 9 | review/* 0 | archive 0. ('art-nhv'): all 0.
+Reuse check: CDN already has `img/pl2/nhat-garden-*` (Phượng Lệnh garden courtyard, 16 seasons×buổi + festivals) — it shows only Khâm An điện + rockery + a pond corner (no chess pavilion, no water pavilion), and has a walking figure → cannot carry the 5 areas. The old stage painting `img/ngu-hoa-vien-*` (1280×720, 3 places) is the mock stand-in. So: NEW map = gpt-2-6 edit-from-reference of nhat-garden + nhat-can-ninh (same pl2 family, OD:L86 / OD:L1415); NEW scenes = gpt-2-6 from reference `ngu-hoa-vien-xuan-sang` (approved stage painting).
+
+## Delivered (CDN, xuân · sáng only)
+| file | size | Magnific creation | notes |
+|---|---|---|---|
+| img/pl2/ngu-hoa-vien-xuan-sang.webp | 1792×1013, 514 KB (pl2 family ~500 KB) | 1lBWnwur4r (alt YMS5qXMWeC) | bird's-eye whole garden, 5 areas apart, top ~12 % plain; one pseudo-signature scribble on a planter (px 676–762 × 1220–1245 of the 2688 master) painted out |
+| img/nhv/ngu-dao-xuan-sang.webp | 1792×1008, 242 KB | LwtV08CswO (alt ov3wS6d829) | Khâm An điện frontal on its marble terrace, two old cypresses framing, censer + crane at the sides | 
+| img/nhv/vuon-hoa-xuan-sang.webp | 1792×1008, 305 KB (pebble mosaic does not compress further) | CqW69cLEEy (alt gOvpMa7SXO) | peony terraces + Giáng Tuyết hiên, bench left; beds behind the floor |
+| img/nhv/thuy-ta-xuan-sang.webp | 1792×1008, 248 KB | 9ZbhtkhNYZ (alt s7mMTa4l8e) | square pavilion over lotus pond, railing at the back of the terrace (railing band 62–73 %, dry terrace 73–100 %, no water at feet .9) |
+| img/nhv/dinh-co-xuan-sang.webp | 1792×1008, 247 KB | WDUKbyKcXe (alt iGkfvL03uK) | round pavilion, stone weiqi table + 4 drum stools at centre |
+| img/nhv/non-bo-xuan-sang.webp | 1792×1008, 255 KB | xS80DQujfW (redo; v1 EbciNe3uuO had the nook outside the Fold window; alt p84sUnQehw) | rockery, stair left of centre, grotto nook at ~52–66 % width (the hidden slot), top pavilion |
+Floor bands (measured by eye on the device sheet): Ngự đạo paving 66–100 %, Vườn hoa 64–100 %, Thủy tạ 73–100 % (railing behind), Đình cờ 70–100 % (pavilion steps 62–70 %), Non bộ 70–100 %. Feet line .9 lies on open floor in all five; nothing tall in the front 10 %; main props inside the central 45 % (Fold window drawn on the sheet).
+Map hotspots (fractions; NOT written to img/pl2/hotspots.json — the build worker owns that edit): ngu-dao {x:.42,y:.36,w:.16,h:.42} · vuon-hoa {x:.14,y:.24,w:.26,h:.26} · dinh-co {x:.09,y:.50,w:.15,h:.30} · thuy-ta {x:.66,y:.46,w:.33,h:.36} · non-bo {x:.67,y:.08,w:.24,h:.37}. Đình cờ and the right half of Thủy tạ sit outside the central 70 % (Fold pans; the kit row list names all five).
+Self-check (looked at every image at 1600 px + crops): no people, no animals, no text, no Japanese items (blossom trees = peach/crabapple as in the approved painting), Chinese palace architecture, bright daylight. Map style matches pl2 ink-watercolour; scenes match the ngu-hoa-vien stage painting.
+Review sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/art-nhv/sheet1/index.html (contact-sheet.jpg = map with hotspots + each scene on iPad 1180×820 whole + Fold 755×1000 central 42 %, floor 62 % / feet .9 lines). Verdict giver wipes: python3 dev/site/cdn_sync.py --wipe-review art-nhv.
+
+## Prompts (all gpt-2-6, folder ba4aecfe…, 16:9, 2k → 2688×1520)
+- MAP (refs nhat-garden-xuan-sang + nhat-can-ninh-xuan-sang uploaded as creations mEAy7ythJQ, ov3wgJT829): "Paint in EXACTLY the same style, line work, watercolor-ink texture, palette and bird's-eye camera angle as the reference courtyard maps … the WHOLE Chinese Imperial Garden of the Forbidden City (Yuhuayuan) … (1) CENTER straight stone imperial path to Qin'an Hall … (2) LEFT-CENTER terraced peony beds + small side hall … (3) RIGHT square open pavilion over a lotus pond … (4) LEFT round-roofed pavilion with stone chess table and four drum stools … (5) UPPER RIGHT rockery hill with stepped path and small top pavilion behind cypresses … top 12 percent plain … no people, no text … no Japanese elements."
+- SCENES (ref ngu-hoa-vien-xuan-sang = creation nVgbF1xYQD): "Paint in EXACTLY the same painterly style, texture, palette and soft light as the reference garden painting … eye-level FRONTAL view, straight-on camera, of <area> … The lower ~36–40 percent of the image is a wide level open <paving> floor, evenly lit, completely clear of objects … nothing tall in the front … central 45 percent … Spring morning, bright clear daylight, normal brightness, not oversaturated, no glossy floor … no people … no Japanese elements." Full text of each is stored in the Magnific creation metadata (ids above).
+- NON BỘ redo (refs EbciNe3uuO + nVgbF1xYQD): same scene, grotto nook moved to 50–65 % width, stair 35–50 %.
+
+## Not done / next
+- Only xuân-sáng. AREA_PLAN §6 wants xuân × 4 buổi first (trưa/chiều/tối), then hạ/thu/đông = 16 per picture. Method for the rest: gpt-2-6 edits of these masters (same composition, change light/season), as pl-night-art / place-seasons did.
+- hotspots.json + wiring = NHV-BUILD.
