@@ -42,5 +42,5 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
     road she cannot pay + one temper-locked road keeps the temper road open (before: both greyed = dead card, arm B H77P shape) */
  const P5=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=2;Q.length=0;Q.push({t:'Thử tính khí',h:'<p>thử</p>',opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Nhịn',fx:{},eaLock:'tính nóng'}]});SM();
   const B=[...document.querySelectorAll('#modal .opts button[data-m]')];const r={open:B.filter(b=>!b.disabled).length+'/'+B.length,lui:!!document.getElementById('mclose')};Q.length=0;SM();return r});
- console.log('part5',JSON.stringify(P5));if(/^0\//.test(P5.open)&&!P5.lui)fail++;
+ console.log('part5',JSON.stringify(P5));/* review: the Lui net alone is not the law-2 fix: a road she can take must stay open */if(/^0\//.test(P5.open))fail++;
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(Object.assign(R,{P2,P3}),null,1));console.log(fail?'DEAD-CARD FAIL '+fail:'DEAD-CARD PASS');await b.close();process.exit(fail?1:0)})();
