@@ -3300,3 +3300,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (02:51Z) BIG rv 2EFxJ9Xy PASS day-queue-2 → 49f17d4d (review/day-queue-2-r6 on 7dbfe98a; shots wiped; 131 LOOKED dq4 pair) → GO to LC13 after 7dbfe98a, then e0594561 merge, then makeup. Archive DAYQ-4 + rv after LIVE.
 - (02:52Z) LIVE 2b68def3 (day-queue) 02:47Z; ROLLBACK 9abd1de2. Next minigame 3a3234ff. Queue set: 4232709a → 7dbfe98a → e0594561 → dayq-2 re-merge → makeup.
 - (02:53Z) LC13 order kept (no SWAP): 3a3234ff → 4232709a → 7dbfe98a → 49f17d4d (dayq-2, exact rv sha, FF) → 10da6f9b (r9 e0594561 merged on 49f17d4d, full gates) → makeup.
+- (03:06Z) 131 late fwd: TAINGHE-OPEN-FIX LAND READY 993725c4 (jnf.js:271 night gate / busy() waits NLP only while nlOpen(); mostly harness path, real player unaffected 4/4). BIG rv opened = session_01V1ZZH2yv2CZAtHKPPbvjSU (opus, child of 132; checks Fold b3 «TÀI NGHỆ · Luật chơi» stacking leftover). SELSCENE-17 told (same family?). B told re kit-tntile.

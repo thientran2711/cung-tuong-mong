@@ -1613,3 +1613,4 @@ hardlock-choice BIG review | review/hardlock-choice | session_01N1tNP3inDSatM7LP
 hardlock-choice r2 fix | review/hardlock-choice | session_01N1tNP5Yc6auMDK1Fws7jFB | RUNNING | 25/11 02:27Z (FOREMAN B child7)
 selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | review/selection-scene | session_01V1ZZH4qYYVaDdyWKcHQCqi | RUNNING | 2026-11-25T03:36Z (MAIN 131)
 | FLIGHT ROOT-CAUSE FIXER (opus; briefs/F-flight-robot.md + this row): co-op deadlock «Thời tiết» card all options disabled (#modal z42) over open TÀI NGHỆ #ov z32 whose ✕ is covered — arm A 4232709a, A-COOP room 9B2G wk35 buổi 3 host Fold | review/flight-modal-deadlock (from 4232709a); reports/flight-robot.md | F | session_01UV1Szh5s5kJv1XUm846FEX | RUNNING | 25/11 02:58Z |
+| BIG REVIEW tainghe-open-fix 993725c4 (opus) | review/tainghe-open-fix | MAIN 132 | session_01V1ZZH2yv2CZAtHKPPbvjSU | RUNNING | 25/11 03:06Z |
