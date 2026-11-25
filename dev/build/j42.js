@@ -169,16 +169,18 @@ function srvGoTo(k){if(!S||S.dead||Q.length)return false;popIdx=null;popMsg="";c
 
 /* ---------- talking to people as a maid ---------- */
 function srvTalk(p){const m=srvM();const A=[];if(!m)return A;
+ /* law 1 (review law1-maid-away r1): her master is ONE person whatever her title — when the master is the Hoàng hậu, the card builders (j42 srvVisitOf rvP,
+    j95 stage ×2) tag her «hh»; she is still the master here, so the talk is the «mis» list (the NPC maid of a Hoàng hậu: asOpts, the same four acts at home) */
+ if(p&&p.sk==="hh"&&p.ref&&RV(p.ref.id)===m)p=Object.assign({},p,{sk:"mis"});
  const T=(n,o,w,l,x,ex,more)=>A.push(Object.assign({n,o,w:w||{},l:l||{},x,run(){const ok=o>=100||roll(o);apply(ok?(w||{}):(l||{}));const r=ex?ex(ok)||"":"";return `${o<100?(ok?'<span class="g">thành</span>. ':'<span class="r">hỏng</span>. '):""}${fmt(ok?w:l)}${r?" "+r:""}`}},more||{}));
- /* law1-audit (OD 24/11 ~08:35Z): «Hầu bên cạnh chủ» sat only in the rv/hh branch with v===m, but her own master's card is sk "mis" (rvP) —
-    so a player maid never had it while an NPC maid serves at her master's side whenever the master is away (jagstaff asOpts: !asMisHome(m)).
-    Same rule now: on her master's card, when the master is away from her palace, the same SRVA.beside row (odds, gain, loss). */
- if(p.sk==="mis"&&typeof asMisHome==="function"&&!asMisHome(m))T("Hầu bên cạnh chủ",od(SRVA.beside.o(S,m)),SRVA.beside.w,SRVA.beside.l,"",null);
- if(p.sk==="mis"){T("Đấm lưng, hầu chuyện",od(SRVA.massage.o(S,m)),SRVA.massage.w,SRVA.massage.l,`công lao +${SRVA.massage.mp}`,ok=>{srvMerit(SRVA.massage.mp);return ok?`${m.name} dịu nét mặt.`:`${m.name} gắt: “Lui ra!”`});
+ if(p.sk==="mis"){/* law 1 (law1-audit row 10): ONE rule with an NPC maid (jagstaff asOpts): the four «to the master» acts only while her master is
+   in her own palace; met anywhere else she may only attend her there («Hầu bên cạnh chủ», SRVA.beside, as an NPC maid does) */
+  const misHome=srvMisHome();/* = jagstaff asMisHome(m), the NPC maid's gate; srvCards tea uses it too */if(!misHome)T("Hầu bên cạnh chủ",od(SRVA.beside.o(S,m)),SRVA.beside.w,SRVA.beside.l,"",null);
+  if(misHome){T("Đấm lưng, hầu chuyện",od(SRVA.massage.o(S,m)),SRVA.massage.w,SRVA.massage.l,`công lao +${SRVA.massage.mp}`,ok=>{srvMerit(SRVA.massage.mp);return ok?`${m.name} dịu nét mặt.`:`${m.name} gắt: “Lui ra!”`});
   T("Xin chủ ban thưởng",od(SRVA.askRew.o(S,m)),srvWa("askRew",S,m),SRVA.askRew.l,"",null,{lock:S.tin<SRVA.askRew.tin,t:`Cần Chủ tin ${SRVA.askRew.tin}`});
   const iv=(S.srv.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];
   T("Bẩm tin dò được",100,SRVA.tellMis.w,{},iv?`chủ nắm ${balAb(BAL.eff.j42.evSrvTalk)} chứng cứ của ${iv.name}`:"",()=>{if(iv){/*evok: servant-mode intel; capped, preview only*/evA(m,iv,BAL.eff.j42.evSrvTalk);S.srv.intel.splice(S.srv.intel.indexOf(iv.id),1)}},{lock:!iv,t:"Chưa dò được tin gì"});
-  T("Xin chủ tiến cử lên Nội vụ phủ",od(SRVA.askRec.o(S,m)),{},SRVA.askRec.l,`công lao +${SRVA.askRec.mpOk}`,ok=>{if(ok)srvMerit(SRVA.askRec.mpOk)},{lock:S.tin<SRVA.askRec.tin||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":`Cần Chủ tin ${SRVA.askRec.tin}`})
+  T("Xin chủ tiến cử lên Nội vụ phủ",od(SRVA.askRec.o(S,m)),{},SRVA.askRec.l,`công lao +${SRVA.askRec.mpOk}`,ok=>{if(ok)srvMerit(SRVA.askRec.mpOk)},{lock:S.tin<SRVA.askRec.tin||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":`Cần Chủ tin ${SRVA.askRec.tin}`})}
   /* AG-ALL-2 G6: what a servant of hers may do (jpromsv spAsk, the same three answers an NPC master picks from / the player consort's card) */
   {const v=typeof spGoTo==="function"?spGoTo(m,{role:"maid",rk:S.srv.rk}):null;const cd=(S.srv.lvCd||0)>S.turn;
    T("Xin chủ cho đi hầu cung khác",SRVA.leave.o(S,m),{},{},`${m.name} chọn: tăng tiền thưởng giữ ngươi lại, giáng một bậc, hoặc cho đi${v?` (bên ${v.name} còn chỗ)`:" (Nội vụ phủ chia về cung khác)"}`,()=>spAsk(m,S),
@@ -188,8 +190,7 @@ function srvTalk(p){const m=srvM();const A=[];if(!m)return A;
  if(p.sk==="rv"||p.sk==="hh"){const v=p.ref&&RV(p.ref.id);if(v&&v!==m){{const gN=typeof trSrvGreet==="function"?trSrvGreet(v):2;T("Hành lễ thỉnh an",100,SRVA.greet.w,{},gN?`${v.name} quý ngươi +${gN}`:`${v.name} không để tâm`,()=>{if(gN)affAdd(v,S,gN)})}
    const hostile=p.sk==="hh"||hostility(v,m)>=netThK(v,"host","hostLo");
    T(`Mật báo chuyện của ${m.name}`,100,SRVA.betray.w,{},`${v.name} nắm ${SRVA.betray.ev} chứng cứ của ${m.name} · kèm: mỗi tháng chủ phát hiện: ${chanceW(nv(m,"betrayFind"))}; khi ấy bị giết: ${chanceW(npwShare(["kill","lau"],k=>srvPunW(m,k),"kill"))}, không thì Tân Giả khố ${BAL.ag.why.srv.pun.betrayWk} tuần`,()=>{/*evok: mistress schemed (sec>0)*/evA(v,m,SRVA.betray.ev);S.srv.sec=Math.max(0,S.srv.sec-1);S.srv.betray={by:v.id};return `${v.name} lặng nghe, dúi vào tay ngươi một túi bạc.`},{lock:!(S.srv.sec>0&&hostile),t:S.srv.sec>0?"Nàng không thù chủ ngươi":"Chưa biết chuyện gì của chủ"});
-   if(p.sk==="hh")T(`Tố cáo ${m.name} trước Hoàng hậu`,od(SRVA.accuse.o(S,m)),SRVA.accuse.w,SRVA.accuse.l,`${m.name} bị xét tội · ngươi về hầu Hoàng hậu`,ok=>{if(ok){S.srv.sec=0;const a0=ACTX.a;ACTX.a=v;try{fall(m,"bị cung nữ tố giác, chứng cứ rành rành")}finally{ACTX.a=a0}srvReassign("Hoàng hậu giữ ngươi lại làm chứng.",v);return `${m.name} bị xét tội.`}S.srv.betray={by:v.id};return "Hoàng hậu không tin lời một cung nữ."},{lock:S.srv.sec<SRVA.accuse.sec,t:`Cần biết ít nhất ${SRVA.accuse.sec} chuyện của chủ`,act:1})}
-  else if(v===m)T("Hầu bên cạnh chủ",od(SRVA.beside.o(S,m)),SRVA.beside.w,SRVA.beside.l,"",null)}
+   if(p.sk==="hh")T(`Tố cáo ${m.name} trước Hoàng hậu`,od(SRVA.accuse.o(S,m)),SRVA.accuse.w,SRVA.accuse.l,`${m.name} bị xét tội · ngươi về hầu Hoàng hậu`,ok=>{if(ok){S.srv.sec=0;const a0=ACTX.a;ACTX.a=v;try{fall(m,"bị cung nữ tố giác, chứng cứ rành rành")}finally{ACTX.a=a0}srvReassign("Hoàng hậu giữ ngươi lại làm chứng.",v);return `${m.name} bị xét tội.`}S.srv.betray={by:v.id};return "Hoàng hậu không tin lời một cung nữ."},{lock:S.srv.sec<SRVA.accuse.sec,t:`Cần biết ít nhất ${SRVA.accuse.sec} chuyện của chủ`,act:1})}}/* her own master (also as Hoàng hậu) never reaches here: srvTalk «mis» above */
  if(p.sk==="sv"){const s=servById(p.sid);if(s){T("Trò chuyện",od(SRVA.chat.o(S)),{},{},`người ấy quý ngươi +${SRVA.chat.af}`,ok=>{srvAf(s,ok?SRVA.chat.af:SRVA.chat.afL);if(roll(SRVA.chat.know))S.srv.know[s.sid]=1;return ok?`${s.name} cười nói vui vẻ.`:`${s.name} lạnh nhạt.`});
    T("Biếu quà nhỏ",100,{},{},`người ấy quý ngươi +${SRVA.gift.af}`,()=>{srvAf(s,SRVA.gift.af)},{c:SRVA.gift.c})}}
  if(p.sk==="ty"){T("Xin thuốc bổ",100,SRVA.tonic.w,{},"",null,{c:SRVA.tonic.c});T("Học lỏm nghề thuốc",od(SRVA.learn.o(S)),SRVA.learn.w,{},"",ok=>{if(ok&&roll(SRVA.learn.art))S.arts.y=Math.min(5,(S.arts.y||0)+1)})}
