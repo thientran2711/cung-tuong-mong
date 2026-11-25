@@ -43,7 +43,10 @@ function selxBuoi(){const Z=S.selx2;return Math.min(B4L,Math.floor((selxDayK()-(
 function selxHead(){const Z=S.selx2;return `<p><small>${selxDayTitle(Z.days)} · ${BUOI[selxBuoi()]} · còn ${selxNumW(Z.kh)} khắc</small></p>`}
 function selxEvening(){return S.selx2.kh<=BAL.time.khac}
 /* ---- a beat = one kit modal card; the option's go pushes the next beat ---- */
-function selxCard(t,h,opts,who){if(S.selx2&&S.selx2.days===2&&typeof selxBare==="function")opts=selxBare(opts);/* RV-SELX13 6: the whole ceremony day (Điện tuyển: dress, sân chờ acts + drama, hall, tests) = KIT §93.7 bare cards */const m={t,h:selxHead()+h,opts,who:who||null,pid:"selxD",pp:{}};Q.unshift(m);return m}
+/* SELSCENE-18 (BIG rv FAIL 1, law 11): the selection days are no danger — their cards (selxD, kc2Sel) carry the flag the kit alarm already honours
+   (j93 kitAlarm runs once per card with a pid unless q.__kmA), so no red danger pulse on a day card. */
+function selxCalm(m){try{if(m&&!m.__kmA)Object.defineProperty(m,"__kmA",{value:1,enumerable:false})}catch(e){}return m}
+function selxCard(t,h,opts,who){if(S.selx2&&S.selx2.days===2&&typeof selxBare==="function")opts=selxBare(opts);/* RV-SELX13 6: the whole ceremony day (Điện tuyển: dress, sân chờ acts + drama, hall, tests) = KIT §93.7 bare cards */const m={t,h:selxHead()+h,opts,who:who||null,pid:"selxD",pp:{}};selxCalm(m);Q.unshift(m);return m}
 /* every selx option snapshots the ma ma's regard (Z.ma) before it runs, so its result card can show that change (law 3: an act whose gain is the ma ma's regard never reads «không đổi chỉ số») */
 let SELX_B=null;
 /* the option hint (kit option card rows): k khắc it costs (kit «N khắc» Tốn item, like every act card) + what it gains (law 3: every option gains something) + what may come with it */
@@ -246,7 +249,7 @@ function selxTest(k,type,then){const Z=S.selx2;const RY=selxRoyals();const ry=RY
 function selxMini(){const d=mkP("kc2Sel",{});if(!d){S.selx2.mk=Object.assign(S.selx2.mk||{},{mini:BAL.selx.mark.mid});return selxTest("H","hanhxu",selxContestRun)}
  /* SELSCENE-8 (RV-SELX FAIL 4): «Cúi đầu chờ xét» (no board, the mark of her own art level) first, as on the dress card */
  const o=(d.o||[]).slice();const c=o.findIndex(x=>/^Cúi đầu chờ xét/.test(x.n||""));if(c>0)o.unshift(o.splice(c,1)[0]);
- Q.unshift({t:"Hoàng thượng",h:selxHead()+d.t,opts:selxBare(o),who:d.who,pid:"kc2Sel",pp:{}})}
+ Q.unshift(selxCalm({t:"Hoàng thượng",h:selxHead()+d.t,opts:selxBare(o),who:d.who,pid:"kc2Sel",pp:{}}))}
 function selxMiniDone(raw){const Z=S.selx2;Z.mk=Object.assign(Z.mk||{},{mini:raw});Z.fav=Z.fav||{};Z.fav.E=(Z.fav.E||0)+selxMiniFav(raw);selxSpend(BAL.selx.beat.test);selxTest("H","hanhxu",selxContestRun)/* SELSCENE-13: no show here — every caller (jkc2 kc2SelPlay fin / chooseM) shows the next card once */}
 /* THE CONTEST on the 3 marks (jselx selxContest, the same formula and the same royal reaction for every girl) */
 function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.find(x=>x.id===(Z.tests&&Z.tests[k]&&Z.tests[k].id));const tok=k=>(selxRoyals().find(x=>x[0]===(Z.tests&&Z.tests[k]&&Z.tests[k].k))||[])[2];
@@ -326,7 +329,7 @@ PEND.selxD=pp=>{try{if(!S||S.dead||!selxDaysOn())return null;const Q0=Q;Q=[];let
 function selxRefill(){if(!selxDaysOn()||window.__selxRf)return;const Z=S.selx2;if(Z.tw||window.__kpm||S.mg||window.__selxMw===selxQK())return;
  if(Q.some(m=>m&&(m.pid==="selxD"||m.pid==="kc2Sel"||m.t==="Tin sắc phong"||m.t==="Ban hương nang")))return;
  try{if(typeof TOIL==="object"&&TOIL&&TOIL.st)return}catch(e){}try{const g=document.getElementById("kg82");if(g&&!g.hidden&&g.getClientRects().length)return}catch(e){}
- window.__selxRf=1;try{const d=mkP("selxD",{});if(d){Q.unshift({t:d.t0||selxDayTitle(Z.days),h:d.t,opts:d.o,who:d.who,cls:d.cls,pid:d.pid==="selxD"&&d.t0==="Hoàng thượng"?"kc2Sel":"selxD",pp:{}});showModal()}}finally{window.__selxRf=0}}
+ window.__selxRf=1;try{const d=mkP("selxD",{});if(d){Q.unshift(selxCalm({t:d.t0||selxDayTitle(Z.days),h:d.t,opts:d.o,who:d.who,cls:d.cls,pid:d.pid==="selxD"&&d.t0==="Hoàng thượng"?"kc2Sel":"selxD",pp:{}}));showModal()}}finally{window.__selxRf=0}}
 /* ================= SELSCENE-8 (RV-SELX FAIL 1): CO-OP = ONE SHARED SELECTION, THE HOST DECIDES =================
    A room has ONE cohort of tú nữ (S.selxRm, a WORLD key in jcoopworld W_KEYS, so it is written on the host and read by both seats):
    - the draw: the first tú nữ life of the room (her accept runs on the host, jcoopthinb withSeat) draws the girls once (selxGirls, the host's ids and
@@ -416,3 +419,5 @@ window.selxClkSync=selxClkSync;
    is its own task (setTimeout 0, the jrbatch flag RB.q still coalesces repeats): same calls, same final screen, one task lighter per card. */
 setTimeout(()=>{try{const rs=window.renderSoon,RB=window.RB;if(typeof rs!=="function"||!RB)return;
  window.renderSoon=function(){if(!selxDaysOn()||selxCo())return rs.apply(this,arguments);if(RB.q)return;RB.q=1;setTimeout(()=>{if(!RB.q)return;RB.q=0;try{render()}catch(e){console.error("renderSoon",e)}},0)}}catch(e){console.error(e)}},0);
+/* SELSCENE-18 (BIG rv FAIL 1): a selection-day card restored from a save (no flag after deser) is calmed too, before the kit alarm reads it */
+if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{const q=typeof Q!=="undefined"&&Q[0];if(q&&(q.pid==="selxD"||q.pid==="kc2Sel"))selxCalm(q)}catch(e){}return s0.apply(this,arguments)}}

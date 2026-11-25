@@ -605,3 +605,18 @@ PRIORITY #1 CHECK: OD co-op rows (L1447, L1641) | main LIVE 0756a05b (merged) | 
 - dayq-hold (LIVE's own test) times out at page wait on this box on LIVE 0756a05b too (env, not the branch).
 - Shots (selx-flow, Fold 755x1000 + iPad 1180x820, 0 page errors, text leaks = kit stage tags «Người lạ ??? / Tú nữ ???» only, OD:L673), looked at: CDN img/_review/selection-scene/s18-fold-11-the-san-cho.webp, s18-fold-06-canh-viecmot-vi-tu-nu-di-doi-giay.webp, s18-ipad-08-the-san-cho.webp, s18-ipad-13-the-thai-hau.webp.
 ### LAND READY (BIG) — review/selection-scene = this commit → MAIN CHÍNH 135.
+
+## SELSCENE-18 — BIG rv FAIL fixes (25/11 ~12:30Z; base 30d9d044 = rv18 merge of LIVE 9f72524b)
+1. RED DANGER PULSE on selection-day cards — fixed with the per-card flag the kit alarm already honours (j93:315 skips a card with `q.__kmA`); no kit change.
+| place | before | after |
+|---|---|---|
+| jselxday selxCard (every «selxD» day card) | kitAlarm once per card | `selxCalm(m)` (non-enumerable __kmA) |
+| jselxday selxMini («kc2Sel», Hoàng thượng's pick) | alarm | selxCalm |
+| jselxday day refill (mkP selxD / kc2Sel) | alarm | selxCalm |
+| jkc2 «Tuyển chọn» kc2Sel card | alarm | selxCalm |
+| a selx card restored from a save (flag lost in deser) | alarm | jselxday showModal wrapper calms Q[0] with pid selxD / kc2Sel |
+   Scan of every pid outside the PEND events (literal pid:"…", 12): selxD, kc2Sel fixed here. Outside this lane (same kind — not a danger — but still alarm; kit part / other lanes, NOT changed, for MAIN → kit keeper): entpick (picker she opened), nfch + nfsum (Kính sự phòng — «ksp» is already in the j93 skip list), kyngo (kỳ ngộ), j71i (invitation), j67 (story chapter). PEND event ids (mkP) = the event-card alarm by design (not changed).
+   Proof: selx-flow counts every `.kmalarm` (MutationObserver): with the fix Fold 0 / iPad 0; with selxCalm disabled Fold **23** → the check bites.
+2. selx-flow.js (F3) showed no choice card since LIVE jdayq — fixed: no CSS hiding of #kroul / .dawn; after nlAccept the roulette layers are removed; the late «Luân hồi» roulette is ended with its «Bỏ qua» (as coop-e2e clear()); a kit motion scene (km-gate) is watched then tapped on; a card with choices that is not visible = FAIL (chooseM fallback removed; exit 1). Run: Fold 30 + iPad 30 shots, 0 page errors, «PASS every choice card was visible and tapped», text leaks = kit stage tags only. Shots looked at: CDN img/_review/selection-scene/s18b-fold-04-the-tien-sanh.webp, s18b-ipad-04-the-tien-sanh.webp.
+### LAND READY (BIG, re-review) — review/selection-scene = this commit → MAIN 139 + BIG reviewer session_01V1ZZH1uRsuJLYqG34jcUBM.
+### ROLLOVER: SELSCENE-18 context ≈ START_CTX 5 % + 25 % → this is my last act; MAIN opens a successor if another round is needed (open: the 6 outside-lane alarm pids above = kit keeper's call).

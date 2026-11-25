@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),cp=require('child_process');
 const WT=process.argv[2],OUT=process.argv[3],SCALE=+(process.argv[4]||1);const ROOT=path.join(WT,'dev');fs.mkdirSync(OUT,{recursive:true});
 const DEV0={fold:{width:755,height:1000},ipad:{width:1180,height:820}};const DEV=Object.fromEntries(Object.entries(DEV0).filter(([k])=>!process.argv[5]||process.argv[5].split(',').includes(k)));
-const TXL=new Set();(async()=>{const b=await chromium.launch();
+const TXL=new Set();let HIDDEN=0;(async()=>{const b=await chromium.launch();
  for(const [dn,vp] of Object.entries(DEV)){const vd=path.join(OUT,'_v_'+dn);fs.mkdirSync(vd,{recursive:true});
   const ctx=await b.newContext({viewport:vp,deviceScaleFactor:SCALE,serviceWorkers:'block',recordVideo:{dir:vd,size:vp}});
   await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));
@@ -14,11 +14,12 @@ const TXL=new Set();(async()=>{const b=await chromium.launch();
    return r.fulfill({status:200,contentType:ct,body:fs.readFileSync(f)})});
   await ctx.route(/^https?:\/\/(?!localhost)/,async r=>{const u=new URL(r.request().url());const m=u.pathname.match(/\/(img\/.*)$/);if(m){const f=path.join(ROOT,m[1]);if(fs.existsSync(f))return r.fulfill({status:200,contentType:'image/webp',body:fs.readFileSync(f)})}return r.continue().catch(()=>{})});
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
-  await p.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const st=document.createElement('style');st.textContent='#kroul,#kroulw,.kroul,#klife,#title,.dawn{display:none!important}';document.head.appendChild(st)})});
+  /* BIG rv FAIL 1: count every red danger pulse (.kmalarm, j93 kitAlarm) shown during the selection days — must be 0 */
+  await p.addInitScript(()=>{window.__alarmN=0;new MutationObserver(L=>{for(const m of L)for(const n of m.addedNodes)if(n.classList&&n.classList.contains('kmalarm'))window.__alarmN++}).observe(document,{childList:true,subtree:true})});
   await p.goto('http://localhost:8813/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof selxDay==='function',null,{timeout:240000});
   await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:60000});
   await p.evaluate(()=>{for(let i=0;i<600;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S&&S.origin&&S.origin.k==="tt")break}S.kcPick="cung";
-   S.sac=S.duc=S.tai=100;nlAccept();document.querySelectorAll('.kbd,#klife,#kroulw,#title,.dawn').forEach(x=>x.remove());try{renderHUD();render()}catch(e){}});
+   S.sac=S.duc=S.tai=100;nlAccept();/* SELSCENE-18 (BIG rv FAIL 2): the start() loop leaves «Luân hồi» roulettes in the DOM; jdayq treats an open roulette as an activity and holds every card. Close them like a finished spin (remove the roulette layers), no CSS hiding. */document.querySelectorAll('[id^="kroul"],.kroul,.kroul-ov,.kbd,#klife').forEach(x=>x.remove());document.getElementById('title').hidden=true;try{renderHUD();render()}catch(e){}});
   await p.waitForTimeout(3500);
   let n=0,last='',lastRes='';const shot=async lab=>{n++;await p.screenshot({path:path.join(OUT,`${dn}-${String(n).padStart(2,'0')}-${lab}.png`)})};
   const slug=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,28).toLowerCase();
@@ -27,6 +28,10 @@ const TXL=new Set();(async()=>{const b=await chromium.launch();
     const res=document.querySelector('#rtoast.on');return{done:!Z||Z.done||S.dead||!S.selx2,days:Z&&Z.days,sc:!!sc,line:box?box.textContent.slice(0,40):'',t:m&&m.t||'',pid:m&&m.pid||'',
      nm:m&&m.opts?m.opts.map(o=>o.n):[],modal:!!document.querySelector('#modal:not([hidden]) button[data-m]'),res:res?res.textContent.slice(0,60):''}});
    if(st.done)break;
+   /* a kit motion scene (km-gate entry, reward) plays before the card: watch it, then tap it on like a player */
+   if(await p.evaluate(()=>!!document.querySelector('.kmov:not(.km-out)'))){await p.waitForTimeout(1500);await p.evaluate(()=>{const k=document.querySelector('.kmov:not(.km-out)');if(!k)return;const bt=[...k.querySelectorAll('button')].find(x=>x.offsetParent!==null);if(bt)bt.click();else k.click()});await p.waitForTimeout(700);continue}
+   /* the «Luân hồi» roulette of the new life opens a moment after start: end it like a player («Bỏ qua» on the roulette, as coop-e2e clear() does), never hide it */
+   if(await p.evaluate(()=>{const r=document.querySelector('[id^="kroul"],.kroul-ov');if(!r)return false;const bt=[...r.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(bt)bt.click();else r.remove();return true})){await p.waitForTimeout(800);continue}
    /* SELSCENE-11 text audit (law 6/7/11): every visible card / scene / stage word before the edict — no future rank of a tú nữ, no «???» name mask, no raw ${…} */
    {const tx=await p.evaluate(()=>{const g=e=>e&&e.offsetParent!==null?e.innerText:'';return [g(document.getElementById('modal')),g(document.querySelector('.kscn')),g(document.getElementById('stage')),g(document.getElementById('panel'))].join(' | ')});
     const RK=/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng)\s+(?=[A-ZĐ])|\?\?\?|\$\{|lạ mặt|ngươi chưa quen/g;/* + owner OD 24/11 ~22:14Z: an unnamed person is «một vị …», never «lạ mặt / chưa quen» */let m;while((m=RK.exec(tx))){const k=m[0]+'|'+tx.slice(Math.max(0,m.index-30),m.index+40).replace(/\s+/g,' ');if(!TXL.has(k)){TXL.add(k);console.log('TEXT',dn,'day',st.days,JSON.stringify(k))}}}
@@ -45,13 +50,14 @@ const TXL=new Set();(async()=>{const b=await chromium.launch();
      const c=nm.findIndex(s=>/chờ tới tối|Theo|Cất đồ|Quỳ|Ngủ|Về|Nghe/.test(s));return c>=0?c:0});
     const key='card:'+st.t+':'+st.days;if(key!==last){last=key;if(!st.modal)await p.evaluate(()=>{try{showModal()}catch(e){}});await p.waitForTimeout(900);await shot('the-'+slug(st.t))}
     const clicked=await p.evaluate(i=>{const bb=document.querySelector('#modal button[data-m="'+i+'"]');if(bb&&!bb.disabled){bb.click();return true}return false},i);
-    if(!clicked)await p.evaluate(i=>{chooseM(i);render()},i);
+    if(!clicked){HIDDEN++;const why=await p.evaluate(()=>{const e=typeof dqActEl==='function'&&dqActEl();const M=document.getElementById('modal');return{act:e?(e.id||String(e.className).slice(0,40)):'none',modalHidden:M?M.hidden:null,btns:M?M.querySelectorAll('button[data-m]').length:0}});console.log('FAIL card with choices not visible',dn,'day',st.days,JSON.stringify(st.t),JSON.stringify(why));break}
     await p.waitForTimeout(500);/* result cards are PARKED while the next card is open (KIT §32.10a), so no «kết quả» frame here */
     await p.evaluate(()=>document.querySelectorAll('.kmov,#kprevov,#kg82').forEach(x=>x.remove()));await p.waitForTimeout(700);continue}
    await p.evaluate(()=>{try{closeModal()}catch(e){}});await p.waitForTimeout(300)}
   await p.waitForTimeout(1200);await shot('sau-chieu');
+  {const an=await p.evaluate(()=>window.__alarmN||0);if(an){HIDDEN++;console.log('FAIL danger pulse on selection-day cards',dn,an)}else console.log('ok no danger pulse',dn)}
   console.log(dn,'shots',n,'errors',errs.length,errs.slice(0,3),'text leaks',TXL.size);const vpath=await p.video().path();await ctx.close();
   const webm=path.join(OUT,dn+'.webm');fs.renameSync(vpath,webm);fs.rmSync(vd,{recursive:true,force:true});
   try{cp.execFileSync('ffmpeg',['-y','-loglevel','error','-i',webm,'-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart',path.join(OUT,dn+'.mp4')]);
    cp.execFileSync('ffmpeg',['-y','-loglevel','error','-i',webm,'-filter:v','setpts=0.5*PTS','-an','-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart',path.join(OUT,dn+'-2x.mp4')]);fs.rmSync(webm)}catch(e){console.log('ffmpeg',e.message.slice(0,200))}}
- await b.close()})();
+ await b.close();console.log(HIDDEN?'FAIL hidden choice cards '+HIDDEN:'PASS every choice card was visible and tapped');process.exit(HIDDEN?1:0)})();
