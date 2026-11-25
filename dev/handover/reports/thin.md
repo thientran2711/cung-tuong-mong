@@ -1723,3 +1723,24 @@ Base = review/robot-coop-fix-5 556c0f57 (no r1 exists). Files: dev/build/jcoopwo
 | fix d16c5300 | PASS | PASS | PASS | PASS | PASS | 35/35 (04a79b8e) · 16/16 (case 5) |
 Robots (bare, harness 918bfa84, `SEED=7 CAP=300 PCAP=1500 node robot10-coop.js 1 5 2`, + local calendar trap): 5 pairs, 0 stuck this time (cause 4 is timing-bound; the test reproduces it deterministically).
 Gates on d16c5300 (bare head + merged with LIVE main 0756a05b, local Worker :8797 = branch Worker; LIVE no-args) — running, results in the next block.
+
+## REVIEW robot-coop-fix-5 r1 — PASS (BIG co-op reviewer, session_01N1tNP3inDSatM7LPmx51yi)
+PRIORITY #1 CHECK ('kmStage reduced / km-red-end'): OD 0 | ledger 0 | claims FIXER #10 only | main j93 kmStage (unfixed) | review/* fix-5 only.
+**LAND READY robot-coop-fix-5-r1 3f672533d27cd3bf7c686919679a6946ecd3a27f FOR MAIN 131 / LC13 (BIG co-op)** — branch review/robot-coop-fix-5-r1 = 556c0f57 + my final merges of LIVE (4da55ce8 → a2159ed5, then 9f72524b → 3f672533; origin/main ⊂ it). **DEPENDENCY: it carries robot-coop-fix-4-r1 aad22c92 (+ fix-2-r3) and its Worker changes (coop/worker range.test etc.) — deploy the branch Worker with it.** Merge note: dev/build/assemble.py conflicted (list: main added jdayq.js + jdeadcard.js, branch added jbalpr.js) → resolved = main's list + jbalpr.js after jbal.js; index.html/sw.js rebuilt.
+### Code (a)
+j93 kmStage finish(): under reduced motion (kmReduced) the 0 ms auto-finish no longer clears T (the scene's own later() beats); tap-skip with motion on unchanged (clears T as before); a red tap after finish = phase 1 → no-op as before. Real cause confirmed: jne kitNightEnd schedules km-done/«Tiếp tục» via st.later(0) AFTER kmStage returned → the red finish (setTimeout 0, queued first) cleared it. Family (law 11): every kmStage caller read — later() users j93 tablet/edict/gloom = kmSpark / kitFxBurst decor (no-op under reduce), jne = the only control beat; kitReward/jlevel/jpromo/jtoil manual scenes with private timers. Fix is in the ONE kit stage. Law 1: kit code, same on both seats.
+### Gates (b) (local Worker = branch coop/worker via wrangler dev :8797; LIVE = default)
+| gate | aad22c92 (pre-fix) | bare 556c0f57 | merged 3f672533 (and a2159ed5) | LIVE main |
+|---|---|---|---|---|
+| km-red-end.js | `FAIL 1` (reduce kitNightEnd) | `PASS` 18/18 | a2159ed5 PASS; 3f672533: 2 of 4 runs PASS, 2 runs FAIL 1 «overlay none» (a DIFFERENT scene each run — kitFlipTablet motion / kitEdict reduce — never opened in 15 s: test-start hold under LIVE's new jdayq; never kitNightEnd) | 9f72524b `FAIL 1` reduce kitNightEnd (2/2 runs) |
+| coop-e2e SWAP 0 / 1, branch Worker | – | – | 142/142 · 142/142 (a2159ed5); 3f672533: 142/142 · 141/144 then 142/142 on rerun | – |
+| coop-e2e SWAP 0 / 1, LIVE Worker | – | – | 142/142 · 142/142 (a2159ed5) | 9f72524b SWAP 1: 141/142 («same world after week 3») |
+| coop-night | – | **126/126** (alone, branch Worker) | 10–12 FAIL from case 2/4 on (as LIVE) | 4da55ce8: 13 FAIL alone (LIVE Worker) |
+| coop-keymove-unit | – | – | 12/12 | – |
+| coop/worker npm test | – | – | merge/vault/seat/stale/thin ALL OK · range ok | – |
+| one-core-guard / undef-scan | – | – | PASS / PASS (304) | – |
+| quickcheck.sh ALONE (old save) | – | – | a2159ed5 + 3f672533: `QUICKCHECK PASS · old save ok · core gates PASS` (render 191/192, tab 503/512, buổi 2547/2273, tasks 25/24) | – |
+### Robots (c) — fixer repro pairs on bare 556c0f57 + harness 918bfa84 overlay (robot10-coop/-in/-agg/robot10.js + coop-bot.js), branch Worker, CAP 1500
+`SEED=7 SWAP=0 … 4 4 3`: room GUZB 68 weeks · 278 buổi · 7 lives · ok — **0 stuck** (pre-fix stuck at w5). `SEED=1 SWAP=0 … 2 2 3`: lives ran to the robot time cap (0.9–1.7 y each), **0 stuck** (pre-fix stuck at w5); my 3500 s timeout cut kiếp 3. 0 cause-3 stucks. Fixer's 5-room A/B (fix 2 cause-4 vs main 4 incl. cause 3) accepted; cause 4 out of scope (FIXER #11).
+### NEW FINDING for Foreman B (not fix-5; LIVE regression, co-op BLOCKING)
+`node dev/test/coop-night.js` on LIVE main fails by itself: 4da55ce8 13 FAIL (case 4 «both in the next week» [3,3,3], 4b/5 «both at buổi tối», 6/8 clocks, guest «Chờ hảo hữu…» stuck); 9f72524b-merged also from case 2. Bare fix-5 on the OLD base (pre-jdayq) = 126/126. Suspect: jdayq gate (c) dqUiC runs in a co-op room (DAYQ-3) and holds cards / scenes → the night/week gate never closes. Needs a co-op fixer + the day-queue owner; dev/test/dayq-hold-coop.js did not catch it.
