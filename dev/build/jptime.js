@@ -326,7 +326,7 @@ function ptRecvGo(k,kind,run,half){const N=ptRecvN(k,kind,half),t0=ptNow();let o
 function ptRecvRow(kind,o,gain,loss,n){return[o!=null&&o<100?word(o):"",`tốn: ${n} khắc (cả đường đi)`,gain?"thành: "+gain:"",loss?"hỏng: "+loss:""].filter(Boolean).join(" · ")}
 /* ---- the notice queue ---- */
 function ptOrdQ(){if(!S)return[];if(!Array.isArray(S.ordQ))S.ordQ=[];return S.ordQ}
-function ptOrdAdd(pid,pp,title,m){if(!S)return null;const Z=ptOrdQ();if(pid==="err"&&Z.some(o=>o.pid==="err"))return null;const now=ptNow();
+function ptOrdAdd(pid,pp,title,m){if(!S)return null;try{if(m&&typeof k61Meet==="function")k61Meet(m,"",2)}catch(e){}/* robot D 25/11 (law 6b): whoever orders / asks her something has said who she is: «Quý phi ??? có lời nhờ» never */const Z=ptOrdQ();if(pid==="err"&&Z.some(o=>o.pid==="err"))return null;const now=ptNow();
  const o={id:++PT.seq+"-o"+now,pid,pp:pp||{},title:title||"",byNm:m&&m.name||"Chủ",t0:now,due:now+BAL.ptime.ansK};Z.push(o);PT.stat.ord=(PT.stat.ord||0)+1;
  ptOrdNote(o);ptIcon();return o}
 function ptOrdNote(o,again){ptNote({id:"pt:ord:"+o.id,line:`${again?"Chưa đi được: ":""}${ptOrdIs(o)?`${o.byNm} cho gọi ngươi: có lệnh`:`${o.byNm} sai người sang: ${o.title||"có lời nhờ"}`}, trả lời trước ${ptWhen(o.due)}.`,go:()=>{const x=ptOrdQ().find(z=>z.id===o.id);if(x)setTimeout(()=>ptOrdOpen(x),0)},goLabel:ptOrdIs(o)?"Nghe lệnh":"Xem lời nhờ"})}

@@ -569,7 +569,7 @@ function kitShopSellItems(){return (kitShopSellList()||[]).map(g=>{const k=g.k,i
   onBuy:(x,q)=>{let got=0,n=0;for(let i=0;i<q;i++){const cur=(kitShopSellList()||[]).find(y=>y.key===g.key);if(!cur||!(cur.n>0))break;const b0=S.bac;
     if(typeof cur.sell==="function")cur.sell();else{const ix=cur.ix[cur.ix.length-1];if(cur.wk&&typeof wkSell==="function"){const r=wkSell(S,ix);if(r)log(r)}else sellItem(S,ix)}got+=S.bac-b0;n++}
    if(!g.crafted)log(`Bán ${nm}${n>1?` ×${n}`:""}. Bạc +${got}`)}}})}
-function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
+function kitShopNvp(){const c=S.court&&S.court.ped;try{if(c&&typeof k61Meet==="function")k61Meet(c,"",2)}catch(e){}/* robot D 25/11 (law 6b): the seller she buys from is face to face with her: his name is known, never «???» under him */let nm=c&&c.name?c.name:"";
  /* j61 naming: a eunuch she has not learnt the name of shows "<role> ???" (not "Thái giám Nội vụ phủ / thái giám ???") */
  try{if(nm&&c&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}
  const items=(S.shop||[]).filter((k,i,a)=>IT[k]&&a.indexOf(k)===i).map(k=>{const it=itm(k);const a=typeof itemArt==="function"?itemArt(k):null;

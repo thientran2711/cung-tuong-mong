@@ -93,7 +93,7 @@ $("stage").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.p!==undefined){popIdx=+b.dataset.p;popMsg="";renderStage();return}
  if(b.dataset.o!==undefined&&!b.disabled)talk(+b.dataset.o)};
 $("tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;tab=b.dataset.tab;render()};
-$("modal").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;if(b.id==="mclose")closeModal();else if(b.dataset.m!==undefined)chooseM(+b.dataset.m)};
+$("modal").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;if(b.id==="mclose"){if(qBind())closeModal()}else if(b.dataset.m!==undefined){if(qBind())chooseM(+b.dataset.m)}};
 $("next").onclick=nextBuoi;$("me").onclick=()=>{if(!S.dead&&!Q.length)showSelf()};$("emp").onclick=()=>{if(!S.dead&&!Q.length)showEmp()};
 $("menu").onclick=()=>{if(Q.length&&!S.dead)return;save();showTitle()};
 try{const H=window.claude&&window.claude.hot;if(H){if(typeof H.snapshot==="function")H.snapshot(()=>S&&!S.dead?ser():null);if(typeof H.ready==="function")H.ready()}}catch(e){}

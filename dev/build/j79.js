@@ -314,7 +314,9 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");co
 /* ---------- the PANEL ---------- */
 /* kitPanel({kind, title, sub, subject:person|face, sections:[{h, html}|{h, facts}|{h, rows}], facts, rows, opts, btn, cls, onClose}) -> pushed to the modal queue.
    kind: rule | info | news | notice | choice | result | night | end | intel | threat | evidence | reward.  Returns the queue item. */
-function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
+/* robot D 25/11 (✕ / Lui «no effect» on «Tâm trạng · X» ×3 and «Tin chờ người sai đi»: the dump had 10 dialogs queued): every tap on a look-up opener (mood seal, servant look, status icon) pushed ANOTHER copy, so ✕ popped one and the same dialog showed again. A look-up / status panel (spec.look or spec.dedupe) is ONE card per title+sub: an older copy still waiting is dropped, the fresh one takes its place (content is current). */
+function kitPanel(spec,front){if(spec&&(spec.look||spec.dedupe)&&typeof Q!=="undefined"){const k=(spec.title||"")+"|"+(spec.sub||"");for(let i=Q.length-1;i>=0;i--){const x=Q[i];if(x&&x.kit&&(x.kit.look||x.kit.dedupe)&&((x.kit.title||"")+"|"+(x.kit.sub||""))===k)Q.splice(i,1)}}
+ const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
  if(front)Q.unshift(m);else Q.push(m);return m}
 /* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
    are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
