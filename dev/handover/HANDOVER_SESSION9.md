@@ -3338,3 +3338,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 ## MAIN CHÍNH 134 (ROOT, took over 25/11 ~05:20Z from 133 by owner paste)
 - HANDOVER: MAIN CHÍNH 134 = session_01V1ZZH27MyRxU8SxKGA7Hjq (ROOT-134 from claude.ai); depth 0 (limit 8); window 1M tokens; START_CTX ~4 % (get_session reads 0; estimate) → roll line 29 %, ceiling 60 %. Worktree /home/user/wt/hr, push /home/user/wt/hpush134.sh. Can open seats again (depth 0). Next main = MAIN CHÍNH 135 (child).
 - LOAD (05:20Z start): main running ~17 (LC13 lander; SANSANG-MUSIC-FIX r2; MAKEUP-NOBOOST (diem/vung tweak OD ~05:30Z); DELEGATE-NOMG + BIG rv 22tLFisY; TAINGHE-OPEN-FIX + BIG rv 2yv2CZAt; VISITOR-FIX + SMALL rv 1W8A4mF7; SELSCENE-18; KK25; ROBOT-LIFE M1–M5; rv makeup-fit/RD5/MD5 idle) | B depth 8 (needs ROOT) | C silent | D ROOT | E depth 8 | F robot round + fixer + crawler | moved: none.
+- (05:50Z) OWNER ORDER OD ~05:50Z robot = player reviewer → template briefs/ROBOT-PLAYER-REVIEW.md; ORDERs B/D/E/F; M1–M5 via 132.
