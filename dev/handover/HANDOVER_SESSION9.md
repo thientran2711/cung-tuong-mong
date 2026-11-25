@@ -3595,3 +3595,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (17:05Z) SANGBUOI r3: new play-stopper root (Sang buổi disabled, nothing on screen, Q 0; LIVE 4/13 nights) fixed 1e2475d8, merged LIVE 47fb23fc, gates running → LAND READY → BIG rv 13YzNeAK → GO LC16 (flight). F #14 told to check fix-8 vs same root.
 - (17:45Z) ctx ~28 % (line 31 %) + flight crunch ahead → ROLL to MAIN CHÍNH 144 now: dev/handover/TAKEOVER_MAIN_144.md. Relays 17:40Z: KK30 got E-S6 no-exit «Tâm trạng» dialog + D F8 reward-over-end-card + B tap-zone notes; SANGBUOI r3 asked to cover E «Có tin đang chờ» Q=7 hidden case.
 ## MAIN CHÍNH 143 → MAIN CHÍNH 144 HANDOVER (25/11 ~17:45Z): dev/handover/TAKEOVER_MAIN_144.md (ctx ~28 % at roll, line 31 %).
+- (17:50Z) MAIN CHÍNH 144 = session_01V1ZZH3PV7kr8kWB89YiVN7 opened (child of 143, depth 1). 143's three scheduled tasks DISABLED. 143 forwards anything late to 144, then stops.
