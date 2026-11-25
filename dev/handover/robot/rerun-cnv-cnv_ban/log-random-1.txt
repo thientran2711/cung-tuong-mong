@@ -1,0 +1,20 @@
+CP buổi 50 year 1 save 338307 chars
+CP buổi 100 year 1 save 418957 chars
+CP buổi 150 year 2 save 446918 chars
+CP buổi 200 year 2 save 514083 chars
+CP buổi 250 year 2 save 537919 chars
+CP buổi 300 year 3 save 633665 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:157:192)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-random-1 from 2026-11-25T15:12:00.817Z buổi 302
+CP buổi 302 year null save 642369 chars
+CP buổi 352 year 3 save 732260 chars
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 402 year 3 save 807267 chars
+CP buổi 452 year 4 save 908485 chars
+STATUS cnv-cnv_ban-random-1 · buổi 471 · year 4 · rank 0 · bugs 1 · stuck 2 · dead buttons 0
+DEAD BUTTON page «Tích Cần viện · Ở đây còn 14 người.» «Hoàng tửHoàng tử Vĩnh Tông» cover zero size
+CP buổi 502 year 4 save 909298 chars

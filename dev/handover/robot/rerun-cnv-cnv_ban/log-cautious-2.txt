@@ -1,0 +1,63 @@
+CP buổi 50 year 1 save 325940 chars
+CP buổi 100 year 1 save 394251 chars
+CP buổi 150 year 2 save 432106 chars
+CP buổi 200 year 2 save 468390 chars
+CP buổi 250 year 2 save 502026 chars
+RESUME cnv-cnv_ban-cautious-2 from 2026-11-25T08:59:36.430Z buổi 251
+CP buổi 251 year null save 509650 chars
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 301 year 3 save 621511 chars
+CP buổi 351 year 3 save 717854 chars
+CP buổi 401 year 3 save 793696 chars
+CP buổi 451 year 4 save 823358 chars
+CP buổi 501 year 4 save 898259 chars
+STATUS cnv-cnv_ban-cautious-2 · buổi 513 · year 4 · rank 0 · bugs 1 · stuck 1 · dead buttons 0
+CP buổi 551 year 4 save 929269 chars
+CP buổi 601 year 5 save 971974 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:150:734)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:272:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-cautious-2 from 2026-11-25T11:11:31.791Z buổi 616
+CP buổi 616 year null save 1002078 chars
+CP buổi 666 year 5 save 1048006 chars
+CP buổi 716 year 6 save 1093227 chars
+STATUS cnv-cnv_ban-cautious-2 · buổi 716 · year 6 · rank 0 · bugs 1 · stuck 6 · dead buttons 0
+CP buổi 766 year 6 save 1256108 chars
+CP buổi 816 year 6 save 1250861 chars
+CP buổi 866 year 7 save 1250861 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:170:13)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:272:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-cautious-2 from 2026-11-25T13:11:48.174Z buổi 900
+CP buổi 900 year null save 1266745 chars
+CP buổi 950 year 6 save 1339911 chars
+CNV EXIT CHOICE buổi 973 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-2/cnvexit-973.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcchủ thêm ti»
+CP buổi 1000 year 7 save 1408263 chars
+STATUS cnv-cnv_ban-cautious-2 · buổi 1002 · year 7 · rank 0 · bugs 1 · stuck 11 · dead buttons 0
+CP buổi 1050 year 7 save 1467861 chars
+CP buổi 1100 year 7 save 1563446 chars
+CP buổi 1150 year 8 save 1590859 chars
+CP buổi 1200 year 8 save 1673100 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:125:69)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-cautious-2 from 2026-11-25T15:11:24.077Z buổi 1229
+CP buổi 1229 year null save 1722348 chars
+CP buổi 1279 year 9 save 1807589 chars
+CP buổi 1329 year 9 save 1885360 chars
+CP buổi 1379 year 9 save 1930895 chars
+CP buổi 1429 year 10 save 1967755 chars
+CP buổi 1479 year 10 save 2077983 chars
+CP buổi 1529 year 10 save 2140069 chars
+CP buổi 1579 year 11 save 2167708 chars
+STATUS cnv-cnv_ban-cautious-2 · buổi 1582 · year 11 · rank 0 · bugs 1 · stuck 14 · dead buttons 0
+CP buổi 1629 year 11 save 2240283 chars
+CP buổi 1679 year 11 save 2270423 chars
+LIFE DONE cnv-cnv_ban-cautious-2 Xuất cung age 30 · buổi 1693 · taps 2609 · dead buttons 0 · stuck 15 · bugs 1

@@ -1,0 +1,68 @@
+CP buổi 50 year 1 save 336505 chars
+CP buổi 100 year 1 save 380647 chars
+CP buổi 150 year 2 save 392744 chars
+CP buổi 200 year 2 save 452796 chars
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 250 year 2 save 482454 chars
+STATUS cnv-cnv_ban-cautious-5 · buổi 289 · year 3 · rank 0 · bugs 1 · stuck 1 · dead buttons 0
+BUG stuck no progress 15 min on #kmrew «»
+CP buổi 300 year 3 save 551162 chars
+RESUME cnv-cnv_ban-cautious-5 from 2026-11-25T08:52:08.783Z buổi 333
+CP buổi 333 year null save 584807 chars
+CP buổi 383 year 3 save 657392 chars
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc» cover b.kidn in #mb
+BUG dead close button has no effect: .dlg «Tin báo» «Lui»
+CP buổi 433 year 4 save 726216 chars
+BUG stuck no progress 15 min on .dlg «Nói móc đối thủ»
+BUG dead close button has no effect: .dlg «Tâm trạng · Hiền quý phi Sử Tịch Nhan» «Lui»
+BUG dead close button has no effect: .dlg «Tâm trạng · Quý nhân Cố Ngưng Sương» «Lui»
+STATUS cnv-cnv_ban-cautious-5 · buổi 470 · year 4 · rank 0 · bugs 6 · stuck 3 · dead buttons 6
+CP buổi 483 year 4 save 753657 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:170:13)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:272:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-cautious-5 from 2026-11-25T11:09:49.895Z buổi 513
+CP buổi 513 year null save 844743 chars
+BUG dead close button has no effect: .dlg «Tin chờ người sai đi» «Lui»
+CP buổi 563 year 4 save 900711 chars
+STATUS cnv-cnv_ban-cautious-5 · buổi 609 · year 4 · rank 0 · bugs 7 · stuck 7 · dead buttons 8
+BUG js page error: f.rk.split is not a function
+CP buổi 613 year 5 save 1030610 chars
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» cover b.kidn in #mb
+BUG dead close button has no effect: .dlg «Danh hiệu» «Lui»
+CP buổi 663 year 5 save 1067036 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:150:734)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:272:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-cautious-5 from 2026-11-25T13:10:36.882Z buổi 671
+CP buổi 671 year null save 1075926 chars
+BUG stuck no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» cover b.kidn in #mb
+CP buổi 721 year 5 save 1142521 chars
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Cầm»
+BUG stuck no-clock loop: 150 taps without a clock step on .mapsc «»
+BUG game dialog queue holds 5 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 2 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»
+CP buổi 771 year 6 save 1199303 chars
+BUG stuck no-clock loop: 150 taps without a clock step on .kshdc «»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tin chờ người sai đi»
+BUG game dialog queue holds 2 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)
+STATUS cnv-cnv_ban-cautious-5 · buổi 806 · year 6 · rank 0 · bugs 18 · stuck 9 · dead buttons 16
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tin báo»
+BUG game dialog queue holds 6 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 3 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+CP buổi 821 year 6 save 1429398 chars
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Kỳ»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Vũ»
+LIFE DONE cnv-cnv_ban-cautious-5 Hồng nhan bạc mệnh age 24 · buổi 850 · taps 5607 · dead buttons 17 · stuck 10 · bugs 23
