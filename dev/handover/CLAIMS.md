@@ -1586,3 +1586,5 @@ kit-tntile-r2 review | review/kit-tntile | session_01N1tNP3DHgsfJvCeghpVJkk | RU
 kit-fitfast-r2 review | review/kit-fitfast-r2 | session_01N1tNP3wmZRB6aT6zuxEmMF | RUNNING | 24/11 23:34Z (FOREMAN B child7)
 KIT KEEPER KK24 (successor of KK23b) | kit/* | session_01V1ZZH2XW37iovDknShGvBX | RUNNING | 2026-11-24T23:40Z (MAIN 129)
 selection-scene r6 (successor of SELSCENE-15; long-task line 68→≤40) | review/selection-scene | session_01V1ZZH1G5Kd2AYQ5BrPhXdN | RUNNING | 2026-11-24T23:52Z (MAIN 129)
+kit mucluc r3 review | review/flight-mucluc-kit | session_01N1tNP2WLLioHUbYHsQkybW | RUNNING | 25/11 00:42Z (FOREMAN B child7)
+kit-scene-fade review | review/kit-scene-fade | session_01N1tNP6KvszkfmUqbjSQVxB | RUNNING | 25/11 00:42Z (FOREMAN B child7)
