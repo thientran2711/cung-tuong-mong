@@ -58,9 +58,9 @@ function grLine(G){/* story text (owner 24/11 ~22:02Z + ~22:08Z): a scene in c�
   const b=hers.y?`${Pc} khẽ nâng tay: “${e===S.emp?"Bình thân":"Miễn lễ"}.”`:(nm?`${Pc} chỉ khẽ gật đầu đáp lễ.`:`${Pc} chỉ khẽ gật đầu, không xưng danh.`);
   return `Ngươi hành lễ: ${grSay(S,e)} ${b}`}
  if(hers.w==="low"){/* the other is the lower: she greets first, her side answers */
-  return `${G.arr?"":`${Ec} hành lễ: ${grSay(e,S)} `}${mine.y?"Ngươi khẽ nâng tay: “Miễn lễ.”":`Ngươi chỉ khẽ gật đầu đáp lễ; ${P} chưa biết tên ngươi.`}`}
+  return `${G.arr?"":`${Ec} hành lễ: ${grSay(e,S)} `}${mine.y||G.arr?"Ngươi khẽ nâng tay: “Miễn lễ.”":`Ngươi chỉ khẽ gật đầu đáp lễ; ${P} chưa biết tên ngươi.`}`}
  /* equals: each greets */
- return `Hai bên chào nhau theo lễ${hers.y||nm?"":`; ${P} không xưng danh`}.${mine.y?"":` ${Pc} chưa biết tên ngươi.`}`}
+ return `Hai bên chào nhau theo lễ${hers.y||nm?"":`; ${P} không xưng danh`}.${mine.y||G.arr?"":` ${Pc} chưa biết tên ngươi.`}`}
 /* the arrival as a stage line (owner 24/11 ~22:08Z): a higher rank is announced, a lower / equal one announces herself; at her residence the door lines, elsewhere road lines (rv-visitor-fix 6) */
 function visitArrive(v){try{const up=grRank(v)>grRank(S),nmd=k61Named(v),T=k61Cap(nmd?k61Title(v):k61Desc(v)),home=S.place==="home";
  if(up)return home?`Ngoài điện có tiếng xướng: “${T} giá đáo!”`:`Phía trước có tiếng cung nhân xướng: “${T} giá đáo!”`;
@@ -122,7 +122,7 @@ function gmSay(k,v,plain,x){let t=plain;try{const P=window.TONE_POOL&&TONE_POOL[
 function gmOpts(v){const A=[],B=BAL.greet.meet;const f=chatF(v),g=n=>Math.max(1,Math.round(n*f));const met=npcKnows(v,S)&&S.known&&k61Named(v);
  const W=tag=>{let w=1;try{for(const t of traitsOf(v)){const R=BAL.net.T[t];if(R&&R.w&&R.w[tag]!=null)w*=R.w[tag]}}catch(e){}return w};
  const fr=Math.max(0,aff(v,S)),sp=Math.max(0,typeof agSpite==="function"?agSpite(v,S):0);
- if(!met){A.push({k:"greet",w:W(B.opt.greet),run:()=>{const hi=grRank(S)>grRank(v)&&!grUniq(S)&&!grHerald(S);const G=greetName(v,S,hi?{me:0}:{});visitSeen(v);G.line=grLine(G);/* rank decides who greets first: a higher visitor stops before her and waits (her side greets, see grLine); only an equal / lower one bows to her */const up=grRank(v)>grRank(S);G.arr=1;G.line=grLine(G);const T=k61Cap(k61Named(v)?k61Title(v):k61Desc(v)),Pn=k61Cap(grPron(v));/* arrival as a stage line (owner 24/11 ~22:08Z): a higher rank is announced at the door, a lower one announces herself; then her walk in HER tone */const tone=(window.TONE_POOL&&kLine(up?"greet:comehi":"greet:come",up?TONE_POOL.greetComeHi:TONE_POOL.greetCome,{about:v}))||(up?"tiến lại, dừng bước trước mặt ngươi":"tiến lại, cúi chào ngươi");return{h:`${visitArrive(v)} ${Pn} ${tone}.`,line:G.line,G}}});return A}
+ if(!met){A.push({k:"greet",w:W(B.opt.greet),run:()=>{const hi=grRank(S)>grRank(v)&&!grUniq(S)&&!grHerald(S);const G=greetName(v,S,hi?{me:0}:{});visitSeen(v);G.line=grLine(G);/* rank decides who greets first: a higher visitor stops before her and waits (her side greets, see grLine); only an equal / lower one bows to her */const up=grRank(v)>grRank(S);G.arr=1;try{npcLearn(v,S)}catch(x){}/* she came to HER door to ask for an audience: she knows whose palace it is (rv-visitor-fix r7) */G.line=grLine(G);const T=k61Cap(k61Named(v)?k61Title(v):k61Desc(v)),Pn=k61Cap(grPron(v));/* arrival as a stage line (owner 24/11 ~22:08Z): a higher rank is announced at the door, a lower one announces herself; then her walk in HER tone */const tone=(window.TONE_POOL&&kLine(up?"greet:comehi":"greet:come",up?TONE_POOL.greetComeHi:TONE_POOL.greetCome,{about:v}))||(up?"tiến lại, dừng bước trước mặt ngươi":"tiến lại, cúi chào ngươi");return{h:`${visitArrive(v)} ${Pn} ${tone}.`,line:G.line,G}}});return A}
  const TK=BAL.talk,third=liveRivals(true).filter(x=>x!==v&&x!==S).sort((a,b)=>aff(v,a)-aff(v,b))[0];
  A.push({k:"health",w:W(B.opt.health)*(1+fr/B.affK),run:()=>{const n=g(TK.health);affAdd(S,v,n);chatMark(v);return{h:`${v.name} ${gmSay("Health",v,"hỏi han sức khỏe ngươi")}.`,line:`Ngươi quý nàng +${n}.`}}});
  {const o=talkPraiseO(v),n=g(nv(S,"praise"));A.push({k:"praise",w:W(B.opt.praise)*(1+fr/B.affK),run:()=>{chatMark(v);if(roll(o)){affAdd(S,v,n);return{h:`${v.name} ${gmSay("Praise",v,"khen tài nghệ của ngươi")}.`,line:`Ngươi quý nàng +${n}.`}}affAdd(S,v,-TK.praiseFail);return{h:`${v.name} ${gmSay("Praise",v,"khen tài nghệ của ngươi")}.`,line:`Ngươi cho là nàng giả lả. Ngươi quý nàng -${TK.praiseFail}.`}}})}
@@ -136,7 +136,7 @@ function gmOpts(v){const A=[],B=BAL.greet.meet;const f=chatF(v),g=n=>Math.max(1,
 function gmReplies(v,G){const T=n=>{try{return topicOpts(v).find(a=>a.n===n)}catch(e){return null}};
  const wrap=a=>a&&{n:a.n,fx:a.c||{},x:oddsCapped(a)?kitCapLine(a.x?"thành: "+a.x:"",a.c):a.x||"",go:()=>{let r="";try{if(a.c)apply(a.c);r=a.run?(oddsCapped(a)&&!roll(BAL.odds.hi)?oddsSoft("",null):a.run()):(runOpt(a)?"thành":"hỏng")}catch(e){}if(r)log(`${a.n}: ${r}`)}};
  /* she is the higher one and nobody heralds her: her answer is HER choice (the rule's trait step is her own) */
- if(G&&G.B&&G.B.w==="me")return[{n:"Xưng danh đáp lễ",fx:{},x:`${grPron(v)} biết tên ngươi`,go:()=>{npcLearn(v,S);log(`Ngươi xưng danh đáp lễ ${v.name}.`)}},
+ if(G&&G.B&&G.B.w==="me"&&!G.arr)return[{n:"Xưng danh đáp lễ",fx:{},x:`${grPron(v)} biết tên ngươi`,go:()=>{npcLearn(v,S);log(`Ngươi xưng danh đáp lễ ${v.name}.`)}},
   {n:"Khẽ gật đầu",fx:{},x:`giữ thể diện · ${grPron(v)} chưa biết tên ngươi`,go:()=>{log(`Ngươi chỉ khẽ gật đầu với ${v.name}.`)}}];
  if(!k61Named(v))return[{n:"Lặng lẽ đáp lễ",fx:{},x:"chưa biết tên người ấy",go:()=>{}}];
  const R=[];for(const n of ["Hỏi han sức khỏe","Khen tài nghệ nàng","Chia sẻ bí mật"]){const a=wrap(T(n));if(a)R.push(a)}
