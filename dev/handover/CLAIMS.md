@@ -1682,3 +1682,4 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 | RERUN E solo cnv_chu (16) | robot/rerun-cnv-cnv_chu | FOREMAN D ROOT | session_01D3E3Nai33jwr5kqmwLTbNq | RUNNING | 2026-11-25T07:23Z |
 | RERUN E solo cnv_ma (17) | robot/rerun-cnv-cnv_ma | FOREMAN D ROOT | session_01D3E3NajqCAuMUwA1Bb7zSK | RUNNING | 2026-11-25T07:23Z |
 | RERUN E solo cnv_mat (20) | robot/rerun-cnv-cnv_mat | FOREMAN D ROOT | session_01D3E3NZu9GBnxeKcN2G3BK1 | RUNNING | 2026-11-25T07:23Z |
+| F ROLE B BUTTON CRAWLER #2 (successor of session_01UV1Szkf6fjnVAUPGXkqZ7j; NEXT a–e + PENDING ORDERS in reports/button-crawl.md) | review/button-crawl-fix-N; reports/button-crawl.md | FOREMAN F #7 | session_01UV1Szgmw4epFn6X13b3DZS | RUNNING | 25/11 07:25Z |
