@@ -969,6 +969,49 @@
    "flags": [
     "kg82 skipped early (harness may have skipped the Tuyển chọn/Phúc tuyển board; ending years later by death/lãnh cung/forced custom → KEEP VALID per Foreman E ruling 26/11 08:43Z)"
    ]
+  },
+  {
+   "id": "E-S1-R1-cautious-3-2928011435",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "cautious",
+   "botHarness": "cautious",
+   "kiep": 3,
+   "seed": 2928011435,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "496b6b66 → 8dc395ba → 4d7a22c6 → d2e03d80 → 89f5b956"
+   },
+   "live": "Build 13f84c70f2a3 → c039fbea2394",
+   "end": "Lãnh cung",
+   "type": "end",
+   "fate": "Phát điên trong lãnh cung",
+   "death": false,
+   "age": 38,
+   "year": 19,
+   "rank": 0,
+   "buoi": 2822,
+   "steps": 33830,
+   "taps": 5921,
+   "exitPick": null,
+   "bugCounts": {
+    "crash": 1
+   },
+   "valid": "VALID",
+   "validWhy": "game-imposed ending (Phát điên trong lãnh cung); flag kg82 skipped early (ending 19 years later → keep valid)",
+   "flags": [
+    "kg82 skipped early (robot-audit: mg quit 1+) — KEEP VALID per Foreman E ruling 26/11 08:43Z"
+   ],
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-cautious-3-2928011435-moments.md",
+    "review/rerun-E-S1-E-S1-R1-cautious-3-2928011435-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
