@@ -1,5 +1,5 @@
 # rerun-nc_tuc — rerun of D's INVALID nc_tuc lives (seat A3)
-Updated 2026-11-26 ~09:20Z. Lives 9/14 finished (scholar-2, lazy-2, speed-1 running; lazy-1, speed-2 queued). Harness: review/robot-realtap 93812531 (segments on 4523381f / 2aad6849 / 1a29f470 earlier). 3 lives run in parallel; checkpoint/resume across page crashes and 2 h job limits.
+Updated 2026-11-26 ~10:35Z. Lives 10/14 finished (scholar-2, lazy-2, speed-2 running; lazy-1 queued). Harness: review/robot-realtap 93812531 (segments on 4523381f / 2aad6849 / 1a29f470 earlier). 3 lives run in parallel; checkpoint/resume across page crashes and 2 h job limits.
 
 | life | bot/dev | end | valid | harness sha | review |
 |---|---|---|---|---|---|
@@ -12,9 +12,11 @@ Updated 2026-11-26 ~09:20Z. Lives 9/14 finished (scholar-2, lazy-2, speed-1 runn
 | lover-1 | sens fold 1379876621 | Xuất gia làm ni cô age 30 y13 b1867 (game-imposed) | VALID | rt2 | robot/review/rerun-nc_tuc-lover-1-review.md (no live moment log) |
 | lover-2 | sens ipad 2367368888 | Hồng nhan bạc mệnh (lao phổi) age 27 y8 b1113 | VALID | rt2 | robot/review/rerun-nc_tuc-lover-2-review.md (no live moment log) |
 | scholar-1 | sens fold 4239854445 | Công chúa ở lại cố quốc age 19 y2 b122 | VALID | rt2 | robot/review/rerun-nc_tuc-scholar-1-review.md (no live moment log) |
+| speed-1 | bold ipad 3376192488 | Hồng nhan bạc mệnh (Cảnh Hòa băng hà, lụa trắng) age 20 y3 b277 | VALID | rt2 | robot/review/rerun-nc_tuc-speed-1-review.md (no live moment log) |
 | others (scholar-2, lazy-1/2, speed-1/2) | — | running / queued | — | — | — |
 
 ## HARNESS-STUCK
+- speed-2 b65 (~09:58Z): renderer hang (kitScrollCues in MutationObserver, RSS 2.2-2.6 GB); watchdog kill + resume from b61. Evidence robot/rerun-nc_tuc/stuck/rerun-nc_tuc-speed-2.hang.json (sent to F10). lover-1 had a 10-min freeze at b65 too.
 - skilled-1 b23 (08:31Z–10:01Z): sole-option card «Tắm gội chờ giá» in «Kính sự phòng báo tin». Evidence robot/rerun-nc_tuc/stuck/. Fixed by 93812531; life resumed from ckpt.
 
 ## Bugs (game/UI), see also FAST LANE messages
