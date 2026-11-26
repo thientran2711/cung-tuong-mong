@@ -1,0 +1,43 @@
+# rr-mat-skilled-2 moment log (bot sens, fold, seed 1068794820, real-tap harness e8b42e4b)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-rr-mat-skilled-2/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcvào | Ở quê chờ lệnh tuyểnTốnkhông | Dung mạo cung nữ 1 | Dung mạo cung nữ 2 | Dung mạo cung nữ 3 | Dung mạo cung nữ 4 | Dung mạo cung nữ 5 | Dung mạo cung nữ 6 · shots-rr-mat-skilled-2/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Cung nữ tuyển vào cung · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-rr-mat-skilled-2/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Cung nữ tuyển vào cung · 3/3» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thôn quê» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-skilled-2/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Nhà tranh · Ở đây có 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc78Tài31Tâm cơ11Đức30Danh2 | Bạc8Sức80/100 | Buổi sáng, còn 4 khắc | Ngày tuyểncòn 22 tháng | sương sớm | Tâm trạngBình thản0 · shots-rr-mat-skilled-2/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · page «Nhà tranh · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc78Tài31Tâm cơ11Đức30Danh2 | Bạc8Sức60/100 | Buổi tối, còn 4 khắc | Ngày tuyểncòn 22 tháng | đêm u ám | Tâm trạngBình thản0 · shots-rr-mat-skilled-2/m-new-3-8.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-skilled-2/m-new-4-9.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-rr-mat-skilled-2/m-new-4-10.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · #modal «Thỉnh tranh nhân vật» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-5-11.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .dlg «Thỉnh tranh nhân vật» · NEW SCREEN · first time on this screen; buttons: Lui | Tạm ngưngTốnkhôngĐượcCho tra · shots-rr-mat-skilled-2/m-new-5-12.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Mẹ trở bệnh» · NEW SCREEN · first time on this screen; buttons: Thức đêm sắc lá, chườm cho m | Mời thầy cúng về nhàRất vững · shots-rr-mat-skilled-2/m-new-5-13.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · #modal «Sắc» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-7-14.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-skilled-2/m-new-7-15.png
+- year 1 · turn 0 · tuần 2 · buổi 0 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-skilled-2/m-new-9-16.png
+- year 1 · turn 0 · tuần 2 · buổi 1 · rank 0 · .dlg «Lái buôn hỏi vải» · NEW SCREEN · first time on this screen; buttons: Nhận lời dệt riêngRất vữngTố | Từ chối, bán ở chợ như cũRất · shots-rr-mat-skilled-2/m-new-9-17.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · #modal «Tin báo» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-13-18.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Để ta xemTốnkhôngĐượckhông | Để sauTốnkhôngĐượckhông · shots-rr-mat-skilled-2/m-new-13-19.png
+- year 1 · turn 1 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 1 · Chờ lệnh tuyển cung nữ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Tập khéo tayTốnkhông | Đi làm: Học lễ nghi với bà T | Đi làm: Lo nợ nhàTốnkhôngĐượ · shots-rr-mat-skilled-2/m-new-15-20.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Chép kinh cầu phúcTốnSức -8Đ | Lễ Phật rồi vềTốnkhôngĐượckh · shots-rr-mat-skilled-2/m-new-17-21.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · page «Nhà tranh · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-skilled-2/m-look-20.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · .dlg «Xuân Đào khóc» · NEW SCREEN · first time on this screen; buttons: Bày cho nàng ta ghi tên đi t | Khuyên nàng ta nghe lời cha  · shots-rr-mat-skilled-2/m-new-21-22.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · #modal «Bạc» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-22-23.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-skilled-2/m-new-22-24.png
+- year 1 · turn 1 · tuần 2 · buổi 3 · rank 0 · #modal «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-24-25.png
+- year 1 · turn 1 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-skilled-2/m-new-24-26.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Con trai lý trưởng» · NEW SCREEN · first time on this screen; buttons: Nghiêm mặt mắng lạiRất vữngT | Cúi đầu đi nhanhRất vữngTốnk | Về kể với chaRất vữngTốnkhôn · shots-rr-mat-skilled-2/m-new-25-27.png
+- year 1 · turn 2 · tuần 0 · buổi 2 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Không muaTốnkhôngĐượckhôngGh · shots-rr-mat-skilled-2/m-new-26-28.png
+- year 1 · turn 2 · tuần 1 · buổi 2 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-rr-mat-skilled-2/m-new-31-29.png
+- year 1 · turn 2 · tuần 2 · buổi 2 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-35-30.png
+- year 1 · turn 2 · tuần 2 · buổi 2 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc · Nội | mồng 2 | mồng 3 | mồng 4 | mồng 5: Tết Đoan ngọ · shots-rr-mat-skilled-2/m-new-35-31.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · page «Nhà tranh · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-skilled-2/m-look-40.png
+- year 1 · turn 3 · tuần 1 · buổi 1 · rank 0 · .dlg «Nước lên» · NEW SCREEN · first time on this screen; buttons: Ra đồng cứu lúa cùng chaRất | Ở nhà kê cao khung cửi, đồ đ | Sang giúp nhà Xuân ĐàoRất vữ · shots-rr-mat-skilled-2/m-new-41-32.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Kéo nhẹ tay áo Đáp ứng Triệu | Che rèm cho nàng ta khỏi bị | Thưa Hoàng hậu cho Đáp ứng T | Ngồi yên xem, không can dựTố · shots-rr-mat-skilled-2/m-new-49-33.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · #modal «Lệnh tuyển cung nữ» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-skilled-2/m-new-50-34.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · .dlg «Lệnh tuyển cung nữ» · NEW SCREEN · first time on this screen; buttons: Để tên trong sổ, mong đổi đờ | Xin cha lo gạch tênRất vữngT · shots-rr-mat-skilled-2/m-new-50-35.png
+- year 1 · turn 4 · tuần 1 · buổi 1 · rank 0 · .dlg «Bà mối nhà phú hộ» · NEW SCREEN · first time on this screen; buttons: Xin cha từ chốiRất vữngTốnkh | Nhận lời làm thiếp, trả nợ c · shots-rr-mat-skilled-2/m-new-53-36.png
+- year 1 · turn 4 · tuần 1 · buổi 1 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-rr-mat-skilled-2/m-new-54-37.png
+- year 1 · turn 4 · tuần 1 · buổi 1 · rank 0 · ending · EVENT · life over: Làm thiếp nhà phú hộ — Làm thiếp nhà phú hộ · age 18 · buổi 54 · bugs 0 · stuck 0 · dead buttons 0 · shots-rr-mat-skilled-2/end.png

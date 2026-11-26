@@ -1,0 +1,36 @@
+CP buổi 50 year 1 save 310730 chars
+CP buổi 100 year 1 save 382017 chars
+CP buổi 150 year 2 save 425596 chars
+CP buổi 200 year 2 save 473121 chars
+CP buổi 250 year 2 save 489145 chars
+CP buổi 300 year 3 save 606355 chars
+CP buổi 350 year 3 save 683149 chars
+CP buổi 400 year 3 save 765750 chars
+CP buổi 450 year 4 save 817668 chars
+STATUS rr-mat-speed-3 · buổi 481 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 500 year 4 save 910334 chars
+CP buổi 550 year 4 save 954530 chars
+CP buổi 600 year 5 save 1041945 chars
+CP buổi 650 year 5 save 1133120 chars
+CP buổi 700 year 6 save 1215900 chars
+CP buổi 750 year 6 save 1329695 chars
+CP buổi 800 year 6 save 1387116 chars
+CP buổi 850 year 7 save 1446731 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:174:44)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:468:9 {
+  log: []
+}
+RESUME rr-mat-speed-3 from 2026-11-26T03:13:33.373Z buổi 851
+CP buổi 851 year null save 1456263 chars
+GAME BUILD {"s":"3762da08+","b":"fa8da73cecdc","t":"2026-11-25T19:34Z"}
+CP buổi 901 year 7 save 1551583 chars
+CP buổi 951 year 7 save 1635692 chars
+CP buổi 1001 year 8 save 1740258 chars
+CNV EXIT CHOICE buổi 1023 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-speed-3/cnvexit-1023.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1051 year 8 save 1755508 chars
+CP buổi 1101 year 8 save 1839838 chars
+CP buổi 1151 year 9 save 1896563 chars
+CP buổi 1201 year 9 save 1947212 chars
+LIFE DONE rr-mat-speed-3 Hồng nhan bạc mệnh age 26 · buổi 1237 · taps 2724 · dead buttons 0 · stuck 0 · bugs 0

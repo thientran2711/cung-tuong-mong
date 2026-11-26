@@ -1,0 +1,65 @@
+CP buổi 50 year 1 save 334116 chars
+CP buổi 100 year 1 save 457392 chars
+CP buổi 150 year 2 save 480831 chars
+CP buổi 200 year 2 save 551455 chars
+CP buổi 250 year 2 save 591851 chars
+CP buổi 300 year 3 save 715625 chars
+CP buổi 350 year 3 save 778653 chars
+STATUS rr-mat-scholar-5 · buổi 393 · year 3 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 400 year 3 save 845416 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:283:13)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-scholar-5 from 2026-11-25T21:12:50.968Z buổi 427
+CP buổi 427 year null save 868670 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «Phúc ấm đầy nhà Hoàng hậu Nhâm Như Ý»
+CP buổi 477 year 4 save 921025 chars
+CP buổi 527 year 4 save 989116 chars
+CP buổi 577 year 5 save 1101922 chars
+CP buổi 627 year 5 save 1105175 chars
+CP buổi 677 year 5 save 1208038 chars
+CP buổi 727 year 6 save 1303474 chars
+CP buổi 777 year 6 save 1424848 chars
+CP buổi 827 year 6 save 1458939 chars
+CNV EXIT CHOICE buổi 842 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-scholar-5/cnvexit-842.json opts ["Xuất cung về quê","Xin chủ giữ lại"]
+CNV EXIT CHOICE picked «Xin chủ giữ lạiRất vữngTốnkhôngĐượcchủ t»
+STATUS rr-mat-scholar-5 · buổi 862 · year 7 · rank 0 · bugs 1 · stuck 0 · dead buttons 0
+CP buổi 877 year 7 save 1507472 chars
+CP buổi 927 year 7 save 1594182 chars
+CP buổi 977 year 7 save 1674600 chars
+CP buổi 1027 year 8 save 1707088 chars
+CP buổi 1077 year 8 save 1808008 chars
+CP buổi 1127 year 8 save 1821732 chars
+CP buổi 1177 year 9 save 1919214 chars
+CP buổi 1227 year 9 save 2002724 chars
+CP buổi 1277 year 10 save 2052857 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:156:69)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-scholar-5 from 2026-11-25T23:13:11.473Z buổi 1286
+page.reload: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for navigation until "load"[22m
+[2m    - navigated to "https://thientran2711.github.io/cung-tuong-mong/"[22m
+
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:143:134)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: [
+    '  - waiting for navigation until "load"',
+    '    - navigated to "https://thientran2711.github.io/cung-tuong-mong/"'
+  ]
+}
+RESUME rr-mat-scholar-5 from 2026-11-25T23:13:11.473Z buổi 1286
+CP buổi 1286 year null save 2058739 chars
+CP buổi 1336 year 10 save 2120856 chars
+CNV EXIT CHOICE buổi 1336 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-scholar-5/cnvexit-1336.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 1386 year 10 save 2236708 chars
+CP buổi 1436 year 11 save 2273996 chars
+CP buổi 1486 year 11 save 2322613 chars
+CP buổi 1536 year 11 save 2406004 chars
+LIFE DONE rr-mat-scholar-5 Xuất cung age 30 · buổi 1562 · taps 1753 · dead buttons 0 · stuck 0 · bugs 1

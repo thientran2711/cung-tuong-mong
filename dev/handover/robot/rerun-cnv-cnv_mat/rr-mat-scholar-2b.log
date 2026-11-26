@@ -1,0 +1,31 @@
+GAME BUILD {"s":"5e013076","b":"fa8da73cecdc","t":"2026-11-25T20:28Z"}
+CP buổi 50 year 1 save 326639 chars
+CP buổi 100 year 1 save 413082 chars
+CP buổi 150 year 2 save 501682 chars
+CP buổi 200 year 2 save 585945 chars
+CP buổi 250 year 2 save 631490 chars
+CP buổi 300 year 3 save 857173 chars
+CP buổi 350 year 3 save 948884 chars
+STATUS rr-mat-scholar-2b · buổi 387 · year 3 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:279:1025)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:554:9 {
+  log: []
+}
+RESUME rr-mat-scholar-2b from 2026-11-26T05:11:57.389Z buổi 387
+CP buổi 387 year null save 1029140 chars
+CP buổi 437 year 4 save 1119869 chars
+CP buổi 487 year 4 save 1070662 chars
+CP buổi 537 year 4 save 1171082 chars
+CP buổi 587 year 5 save 1341664 chars
+CP buổi 637 year 5 save 1577274 chars
+CP buổi 687 year 5 save 1611031 chars
+CP buổi 737 year 6 save 1784577 chars
+STATUS rr-mat-scholar-2b · buổi 766 · year 6 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 787 year 6 save 1913337 chars
+CP buổi 837 year 6 save 2005623 chars
+CP buổi 887 year 7 save 2120787 chars
+CP buổi 937 year 7 save 2208737 chars
+CP buổi 987 year 7 save 2270289 chars
+CP buổi 1037 year 8 save 2357813 chars
+LIFE DONE rr-mat-scholar-2b Hồng nhan bạc mệnh age 27 · buổi 1069 · taps 4729 · dead buttons 0 · stuck 0 · bugs 0

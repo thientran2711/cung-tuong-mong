@@ -1,0 +1,77 @@
+CP buổi 50 year 1 save 316667 chars
+CP buổi 100 year 1 save 395059 chars
+CP buổi 150 year 2 save 419987 chars
+CP buổi 200 year 2 save 479604 chars
+CP buổi 250 year 2 save 508756 chars
+CP buổi 300 year 3 save 644802 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:237:459)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-skilled-1 from 2026-11-25T21:12:32.341Z buổi 310
+CP buổi 310 year null save 647113 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kfxon j59sz»
+CP buổi 360 year 3 save 743212 chars
+CP buổi 410 year 4 save 877078 chars
+CP buổi 460 year 4 save 918982 chars
+CP buổi 510 year 4 save 963597 chars
+CP buổi 560 year 5 save 1035372 chars
+CP buổi 610 year 5 save 1085825 chars
+CP buổi 660 year 5 save 1149678 chars
+CP buổi 710 year 6 save 1264368 chars
+STATUS rr-mat-skilled-1 · buổi 714 · year 6 · rank 0 · bugs 1 · stuck 0 · dead buttons 0
+CP buổi 760 year 6 save 1325014 chars
+CP buổi 810 year 6 save 1400521 chars
+CP buổi 860 year 7 save 1486800 chars
+CP buổi 910 year 7 save 1538954 chars
+CP buổi 960 year 7 save 1596538 chars
+CNV EXIT CHOICE buổi 986 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-1/cnvexit-986.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1010 year 8 save 1648648 chars
+CP buổi 1060 year 8 save 1747870 chars
+CP buổi 1110 year 8 save 1831462 chars
+CP buổi 1160 year 9 save 1893037 chars
+CP buổi 1210 year 9 save 1990246 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:273:324)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-skilled-1 from 2026-11-25T23:12:59.776Z buổi 1212
+page.reload: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for navigation until "load"[22m
+[2m    - navigated to "https://thientran2711.github.io/cung-tuong-mong/"[22m
+
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:143:134)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: [
+    '  - waiting for navigation until "load"',
+    '    - navigated to "https://thientran2711.github.io/cung-tuong-mong/"'
+  ]
+}
+RESUME rr-mat-skilled-1 from 2026-11-25T23:12:59.776Z buổi 1212
+CP buổi 1212 year null save 1980117 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «Trăng soi rèm ngọc Hoàng hậu Phương Mạn Ca»
+CP buổi 1262 year 9 save 2064820 chars
+CP buổi 1312 year 10 save 2103872 chars
+CNV EXIT CHOICE buổi 1336 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-1/cnvexit-1336.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 1362 year 10 save 2190937 chars
+CNV EXIT CHOICE buổi 1409 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-1/cnvexit-1409.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 1412 year 10 save 2236968 chars
+CP buổi 1462 year 11 save 2305358 chars
+CNV EXIT CHOICE buổi 1504 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-1/cnvexit-1504.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 1512 year 11 save 2343825 chars
+CP buổi 1562 year 11 save 2411608 chars
+STATUS rr-mat-skilled-1 · buổi 1582 · year 12 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+CP buổi 1612 year 12 save 2578027 chars
+CNV EXIT CHOICE buổi 1617 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-1/cnvexit-1617.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CNV EXIT CHOICE buổi 1625 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-1/cnvexit-1625.json opts ["Tạ ơn, xuất giá","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượctừ chối khé»
+CP buổi 1662 year 12 save 2605426 chars
+LIFE DONE rr-mat-skilled-1 Xuất cung age 30 · buổi 1706 · taps 3213 · dead buttons 0 · stuck 0 · bugs 2

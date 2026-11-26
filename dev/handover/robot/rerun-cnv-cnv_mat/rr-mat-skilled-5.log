@@ -1,0 +1,26 @@
+CP buổi 50 year 1 save 320234 chars
+CP buổi 100 year 1 save 424078 chars
+CP buổi 150 year 2 save 473714 chars
+CP buổi 200 year 2 save 564354 chars
+CP buổi 250 year 2 save 603198 chars
+CP buổi 300 year 3 save 800845 chars
+CP buổi 350 year 3 save 816275 chars
+STATUS rr-mat-skilled-5 · buổi 399 · year 3 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 400 year 3 save 913325 chars
+CP buổi 450 year 4 save 961262 chars
+CP buổi 500 year 4 save 1029583 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:237:459)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-skilled-5 from 2026-11-26T01:13:26.019Z buổi 524
+CP buổi 524 year null save 1035029 chars
+CP buổi 574 year 5 save 1055322 chars
+CP buổi 624 year 5 save 1089230 chars
+CP buổi 674 year 5 save 1216332 chars
+CP buổi 724 year 6 save 1386383 chars
+CP buổi 774 year 6 save 1424878 chars
+CP buổi 824 year 6 save 1483125 chars
+CP buổi 874 year 7 save 1545326 chars
+LIFE DONE rr-mat-skilled-5 Hồng nhan bạc mệnh age 24 · buổi 888 · taps 2353 · dead buttons 0 · stuck 0 · bugs 0

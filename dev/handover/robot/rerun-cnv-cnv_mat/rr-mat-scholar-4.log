@@ -1,0 +1,34 @@
+CP buổi 50 year 1 save 321146 chars
+CP buổi 100 year 1 save 416375 chars
+CP buổi 150 year 2 save 431825 chars
+CP buổi 200 year 2 save 494108 chars
+CP buổi 250 year 2 save 550753 chars
+CP buổi 300 year 3 save 655959 chars
+CP buổi 350 year 3 save 745535 chars
+CP buổi 400 year 3 save 809393 chars
+STATUS rr-mat-scholar-4 · buổi 409 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 450 year 4 save 858131 chars
+BUG game no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Nghe lệnhTốnkhôngĐượckhô / Để sauTốnkhôngĐượckhông
+CP buổi 500 year 4 save 937628 chars
+CP buổi 550 year 4 save 965286 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:263:45)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:426:9 {
+  log: []
+}
+RESUME rr-mat-scholar-4 from 2026-11-25T19:12:32.254Z buổi 594
+CP buổi 594 year null save 1052899 chars
+BUG game no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Xem lời nhờTốnkhôngĐượck / Để sau
+CP buổi 644 year 5 save 1104666 chars
+CP buổi 694 year 5 save 1161428 chars
+CP buổi 744 year 6 save 1298192 chars
+CP buổi 794 year 6 save 1415929 chars
+CP buổi 844 year 7 save 1457711 chars
+CP buổi 894 year 7 save 1511946 chars
+CP buổi 944 year 7 save 1524382 chars
+CNV EXIT CHOICE buổi 986 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-scholar-4/cnvexit-986.json opts ["Xuất cung về quê","Ở lại làm ma ma"]
+CNV EXIT CHOICE picked «Ở lại làm ma maRất vữngTốnkhôngĐượcthêm »
+STATUS rr-mat-scholar-4 · buổi 993 · year 8 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+CP buổi 994 year 8 save 1596275 chars
+CP buổi 1044 year 8 save 1670708 chars
+LIFE DONE rr-mat-scholar-4 Hồng nhan bạc mệnh age 25 · buổi 1081 · taps 2982 · dead buttons 0 · stuck 0 · bugs 2

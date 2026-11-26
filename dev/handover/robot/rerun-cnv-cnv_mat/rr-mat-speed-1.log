@@ -1,0 +1,15 @@
+CP buổi 50 year 1 save 334939 chars
+CP buổi 100 year 1 save 408019 chars
+CP buổi 150 year 2 save 514827 chars
+CP buổi 200 year 2 save 558006 chars
+BUG game softlock: «Sang buổi» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=0)
+CP buổi 250 year 2 save 594500 chars
+CP buổi 300 year 3 save 682412 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:283:13)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-speed-1 from 2026-11-26T01:13:09.288Z buổi 301
+CP buổi 301 year null save 702392 chars
+LIFE DONE rr-mat-speed-1 Hồng nhan bạc mệnh age 20 · buổi 325 · taps 174 · dead buttons 0 · stuck 0 · bugs 1

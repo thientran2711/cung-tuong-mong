@@ -1,0 +1,59 @@
+CP buổi 50 year 1 save 336873 chars
+CP buổi 100 year 1 save 409758 chars
+CP buổi 150 year 2 save 434377 chars
+STATUS rr-mat-rebel-1 · buổi 173 · year 2 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 200 year 2 save 491014 chars
+BUG stuck no progress 15 min on #kmrew «»
+CP buổi 250 year 2 save 535516 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:143:13)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:234:9 {
+  log: []
+}
+RESUME rr-mat-rebel-1 from 2026-11-25T09:07:32.874Z buổi 249
+CP buổi 249 year null save 549370 chars
+CP buổi 299 year 3 save 620396 chars
+CP buổi 349 year 3 save 697560 chars
+CP buổi 399 year 3 save 764558 chars
+STATUS rr-mat-rebel-1 · buổi 438 · year 4 · rank 0 · bugs 1 · stuck 1 · dead buttons 0
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 449 year 4 save 841044 chars
+CP buổi 499 year 4 save 858358 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:159:24)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:272:9 {
+  log: []
+}
+RESUME rr-mat-rebel-1 from 2026-11-25T11:11:02.539Z buổi 536
+CP buổi 536 year null save 907396 chars
+CP buổi 586 year 5 save 944022 chars
+CP buổi 636 year 5 save 976510 chars
+STATUS rr-mat-rebel-1 · buổi 653 · year 5 · rank 0 · bugs 2 · stuck 4 · dead buttons 0
+BUG stuck no progress 15 min on .dlg «Bị châm chọc»
+BUG stuck no progress 15 min on .dlg «Đập đồ»
+CP buổi 686 year 5 save 1088104 chars
+CP buổi 736 year 6 save 1216966 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:154:192)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:293:9 {
+  log: []
+}
+RESUME rr-mat-rebel-1 from 2026-11-25T13:11:03.182Z buổi 737
+CP buổi 737 year null save 1216966 chars
+BUG stuck no-clock loop: 150 taps without a clock step on page «Vĩnh Thọ cung · Tuyên Hòa hiên · Ở đây còn 1 người»
+BUG game dialog queue holds 10 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tin báo»
+BUG stuck no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Cầm»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Quan hệ với»
+BUG game dialog queue holds 7 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Cầm: các lối»
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo tuyết» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Đôi uyên ương» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Vẹt ngũ sắc» cover b.kidn in #mb
+CP buổi 787 year 6 save 1419571 chars
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Đã biết về Phế phi Tăng Kính Nghi»
+BUG game dialog queue holds 2 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 6 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+LIFE DONE rr-mat-rebel-1 Hồng nhan bạc mệnh age 25 · buổi 811 · taps 3416 · dead buttons 3 · stuck 7 · bugs 16

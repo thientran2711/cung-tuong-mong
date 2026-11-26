@@ -1,0 +1,67 @@
+# rr-mat-cautious-5 moment log (bot cautious, fold, seed 4016969528, real-tap harness 82449d7d)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 10 · turn 107 · tuần 2 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-cautious-5/m-new-1297-1.png
+- year 10 · turn 107 · tuần 2 · buổi 0 · rank 0 · page «Tích Cần viện · Ở đây còn 9 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc55Tài71Tâm cơ42Đức85Danh2 | Bạc501Sức100/100 | Buổi sáng, còn 4 khắc | mưa phùn | Tâm trạngBình thản0 | Thường tạiChu Thái Vi · shots-rr-mat-cautious-5/m-new-1297-2.png
+- year 10 · turn 107 · tuần 2 · buổi 0 · rank 0 · #modal «Xét phẩm cuối tháng · Cung nữ nhị đẳng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1297-3.png
+- year 10 · turn 107 · tuần 2 · buổi 0 · rank 0 · .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1297-4.png
+- year 10 · turn 107 · tuần 2 · buổi 2 · rank 0 · #modal «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-cautious-5/m-new-1299-5.png
+- year 10 · turn 107 · tuần 2 · buổi 2 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui | Xem lời nhờTốnkhôngĐượcCó kh | Nghe lệnhTốnkhôngĐượcLệnh củ | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờT · shots-rr-mat-cautious-5/m-new-1299-6.png
+- year 10 · turn 107 · tuần 2 · buổi 2 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc55Tài71Tâm cơ42Đức85Danh2 | Bạc501Sức100/100 | Buổi chiều, còn 4 khắc | mưa rào | Tâm trạngBình thản0 | Tin báo: 3 tin mới · shots-rr-mat-cautious-5/m-new-1299-7.png
+- year 10 · turn 107 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 14 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1300.png
+- year 10 · turn 107 · tuần 2 · buổi 3 · rank 0 · .dlg «Hoàng thượng để ý» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1300-8.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-cautious-5/m-new-1300-9.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-rr-mat-cautious-5/m-new-1301-10.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-cautious-5/m-new-1301-11.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1301-12.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · .dlg «Chủ thưởng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1301-13.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1301-14.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · .dlg «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1301-15.png
+- year 10 · turn 108 · tuần 0 · buổi 1 · rank 0 · .dlg «Có người đến» · NEW SCREEN · first time on this screen; buttons: Hỏi han sức khỏeRất vữngTốnk | Khen tài nghệ nàng taRất vữn | Chia sẻ bí mậtRất vữngTốnkhô | Khéo cáo luiRất vữngTốnkhông · shots-rr-mat-cautious-5/m-new-1301-16.png
+- year 10 · turn 108 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 12 · Từ kẻ hầu thành tiểu chủ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Làm tròn phận sự hầu | Đi làm: Đi làm quen các nơi | Đi làm: Kết thân một người c · shots-rr-mat-cautious-5/m-new-1302-17.png
+- year 10 · turn 108 · tuần 0 · buổi 1 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-rr-mat-cautious-5/m-new-1302-18.png
+- year 10 · turn 108 · tuần 0 · buổi 2 · rank 0 · .dlg «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1303-19.png
+- year 10 · turn 108 · tuần 1 · buổi 1 · rank 0 · .dlg «Công lao 10/» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1306-20.png
+- year 10 · turn 109 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons: Thường | Thường | ThườngVải thô (hàng kém)Hàng | ThườngNước bào hoaChải tóc v | Nhận · shots-rr-mat-cautious-5/m-new-1313-21.png
+- year 10 · turn 109 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Xem lời nhờTốnkhôngĐượckhông | Để sauTốnkhôngĐượckhông · shots-rr-mat-cautious-5/m-new-1313-22.png
+- year 10 · turn 109 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1317-23.png
+- year 10 · turn 109 · tuần 1 · buổi 0 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1317-24.png
+- year 10 · turn 109 · tuần 1 · buổi 1 · rank 0 · .dlg «mat» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1318-25.png
+- year 10 · turn 109 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 11 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1320.png
+- year 10 · turn 110 · tuần 1 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1330-26.png
+- year 10 · turn 111 · tuần 0 · buổi 2 · rank 0 · .dlg «Lương tháng ba bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1339-27.png
+- year 10 · turn 111 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 13 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1340.png
+- year 10 · turn 111 · tuần 1 · buổi 0 · rank 0 · page «Tích Cần viện · Thường tại Chu Thái Vi đi vắng, đa» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc55Tài71Tâm cơ42Đức85Danh2 | Bạc529Sức100/100 | Buổi sáng, còn 4 khắc | giông tố | Tâm trạngBình thản-3 | Tin báo: 6 tin mới · shots-rr-mat-cautious-5/m-new-1341-28.png
+- year 10 · turn 111 · tuần 2 · buổi 1 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Hội Phượng | mồng 2 | mồng 3 | mồng 4 | mồng 5 · shots-rr-mat-cautious-5/m-new-1346-29.png
+- year 10 · turn 112 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 11 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1360.png
+- year 10 · turn 113 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin về chủ nhân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1361-30.png
+- year 10 · turn 113 · tuần 0 · buổi 0 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1361-31.png
+- year 10 · turn 113 · tuần 2 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1369-32.png
+- year 10 · turn 114 · tuần 0 · buổi 0 · rank 0 · .dlg «Thu săn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1373-33.png
+- year 10 · turn 114 · tuần 0 · buổi 0 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1373-34.png
+- year 10 · turn 114 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 15 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1380.png
+- year 10 · turn 115 · tuần 2 · buổi 2 · rank 0 · #modal «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons:  · shots-rr-mat-cautious-5/m-new-1395-35.png
+- year 10 · turn 115 · tuần 2 · buổi 2 · rank 0 · .dlg «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons: Tiếp đón nồng hậuRất vữngTốn | Tiếp qua loaRất vữngTốnSức - | Từ chốiRất vữngTốnkhôngĐượct | Tiếp rồi đem chuyện đi kể vớ · shots-rr-mat-cautious-5/m-new-1395-36.png
+- year 10 · turn 116 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại án vu cổ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1397-37.png
+- year 10 · turn 116 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 9 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1400.png
+- year 10 · turn 116 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1408-38.png
+- year 10 · turn 117 · tuần 0 · buổi 0 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1409-39.png
+- year 10 · turn 117 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 11 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1420.png
+- year 11 · turn 118 · tuần 1 · buổi 3 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Hầu hạ 1/2 | Ban thưởng 1/1 | Giao thiệp 1/2 | Đấm lưng, hầu chuyện · Có cơ | Xin chủ cho đi hầu cung khác | Lui · shots-rr-mat-cautious-5/m-new-1428-40.png
+- year 11 · turn 118 · tuần 2 · buổi 0 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1429-41.png
+- year 11 · turn 118 · tuần 2 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1431-42.png
+- year 11 · turn 119 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 12 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1440.png
+- year 11 · turn 119 · tuần 2 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1444-43.png
+- year 11 · turn 121 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 13 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1460.png
+- year 11 · turn 122 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 3 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1480.png
+- year 11 · turn 124 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 7 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1500.png
+- year 11 · turn 126 · tuần 0 · buổi 0 · rank 0 · .dlg «Thái hậu bệnh nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1517-44.png
+- year 11 · turn 126 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 3 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1520.png
+- year 11 · turn 127 · tuần 0 · buổi 0 · rank 0 · .dlg «Phiên vương nhập triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1529-45.png
+- year 11 · turn 127 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 3 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1540.png
+- year 11 · turn 128 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-rr-mat-cautious-5/m-new-1545-46.png
+- year 11 · turn 129 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 6 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1560.png
+- year 11 · turn 129 · tuần 0 · buổi 3 · rank 0 · - · ODD · [harness] area tap would have landed on a button (it appeared under the point) — blocked: «kfxon j59sz» · -
+- year 11 · turn 129 · tuần 1 · buổi 2 · rank 0 · page «Tích Cần viện · Ở đây còn 5 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-rr-mat-cautious-5/m-look-1560.png
+- year 12 · turn 130 · tuần 0 · buổi 0 · rank 0 · .dlg «Lồng son mở cửa» · NEW SCREEN · first time on this screen; buttons: Chuyển kiếp · shots-rr-mat-cautious-5/m-new-1565-1.png
+- year 12 · turn 130 · tuần 0 · buổi 0 · rank 0 · ending · EVENT · life over: Xuất cung — Xuất cung tuổi 30 · age 30 · buổi 1565 · bugs 3 · stuck 24 · dead buttons 1 · shots-rr-mat-cautious-5/end.png

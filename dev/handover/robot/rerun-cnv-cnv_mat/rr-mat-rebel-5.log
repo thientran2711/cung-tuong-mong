@@ -1,0 +1,70 @@
+CP buổi 50 year 1 save 327148 chars
+CP buổi 100 year 1 save 399486 chars
+CP buổi 150 year 2 save 413382 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:131:249)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME rr-mat-rebel-5 from 2026-11-25T15:12:12.835Z buổi 166
+CP buổi 166 year null save 431100 chars
+CP buổi 216 year 2 save 473854 chars
+CP buổi 266 year 3 save 537140 chars
+CP buổi 316 year 3 save 649311 chars
+CP buổi 366 year 3 save 699942 chars
+CP buổi 416 year 4 save 756253 chars
+CP buổi 466 year 4 save 800019 chars
+STATUS rr-mat-rebel-5 · buổi 477 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 516 year 4 save 863750 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:187:783)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:379:9 {
+  log: []
+}
+RESUME rr-mat-rebel-5 from 2026-11-25T17:12:22.862Z buổi 557
+CP buổi 557 year null save 926647 chars
+BUG game no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Xem tinTốnkhôngĐượckhông / Để sau
+CP buổi 607 year 5 save 925474 chars
+BUG game no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Xem lời nhờTốnkhôngĐượck / Để sau
+CP buổi 657 year 5 save 974592 chars
+CP buổi 707 year 6 save 1024337 chars
+STATUS rr-mat-rebel-5 · buổi 716 · year 6 · rank 0 · bugs 3 · stuck 3 · dead buttons 0
+CP buổi 757 year 6 save 1148480 chars
+CP buổi 807 year 6 save 1261119 chars
+CP buổi 857 year 7 save 1349908 chars
+CP buổi 907 year 7 save 1367328 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:260:324)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:426:9 {
+  log: []
+}
+RESUME rr-mat-rebel-5 from 2026-11-25T19:12:17.632Z buổi 934
+CP buổi 934 year null save 1374479 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «j59sz»
+CP buổi 984 year 7 save 1401866 chars
+CNV EXIT CHOICE buổi 988 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-rebel-5/cnvexit-988.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1034 year 8 save 1422022 chars
+CP buổi 1084 year 8 save 1459409 chars
+CP buổi 1134 year 9 save 1525788 chars
+STATUS rr-mat-rebel-5 · buổi 1156 · year 9 · rank 0 · bugs 4 · stuck 6 · dead buttons 0
+CP buổi 1184 year 9 save 1647659 chars
+CP buổi 1234 year 9 save 1718901 chars
+CP buổi 1284 year 10 save 1812478 chars
+CP buổi 1334 year 10 save 1878935 chars
+CP buổi 1384 year 10 save 1983238 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:273:324)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-rebel-5 from 2026-11-25T21:12:05.441Z buổi 1384
+CP buổi 1384 year null save 1983238 chars
+CP buổi 1434 year 11 save 2052624 chars
+CP buổi 1484 year 11 save 2113308 chars
+CP buổi 1534 year 11 save 2147746 chars
+CP buổi 1584 year 12 save 2230654 chars
+CP buổi 1634 year 12 save 2299056 chars
+CP buổi 1684 year 12 save 2379482 chars
+LIFE DONE rr-mat-rebel-5 Xuất cung age 30 · buổi 1708 · taps 2304 · dead buttons 0 · stuck 6 · bugs 4

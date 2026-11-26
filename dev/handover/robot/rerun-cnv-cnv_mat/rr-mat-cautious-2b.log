@@ -1,0 +1,41 @@
+CP buổi 50 year 1 save 333835 chars
+CP buổi 100 year 1 save 424133 chars
+CP buổi 150 year 2 save 415960 chars
+CP buổi 200 year 2 save 465462 chars
+CP buổi 250 year 2 save 507724 chars
+CP buổi 300 year 3 save 657132 chars
+CP buổi 350 year 3 save 786537 chars
+CP buổi 400 year 3 save 891576 chars
+CP buổi 450 year 4 save 1029410 chars
+CP buổi 500 year 4 save 1095021 chars
+STATUS rr-mat-cautious-2b · buổi 529 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 550 year 4 save 1104164 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:174:44)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:468:9 {
+  log: []
+}
+RESUME rr-mat-cautious-2b from 2026-11-26T03:13:19.774Z buổi 556
+CP buổi 556 year null save 1141794 chars
+GAME BUILD {"s":"3762da08+","b":"fa8da73cecdc","t":"2026-11-25T19:34Z"}
+CP buổi 606 year 5 save 1178362 chars
+CP buổi 656 year 5 save 1235294 chars
+CNV EXIT CHOICE buổi 700 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-cautious-2b/cnvexit-700.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 706 year 6 save 1339336 chars
+CP buổi 756 year 6 save 1446524 chars
+CP buổi 806 year 6 save 1507706 chars
+CP buổi 856 year 7 save 1553877 chars
+CP buổi 906 year 7 save 1638311 chars
+CP buổi 956 year 7 save 1658262 chars
+CP buổi 1006 year 8 save 1704702 chars
+CP buổi 1056 year 8 save 1759497 chars
+STATUS rr-mat-cautious-2b · buổi 1071 · year 8 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 1106 year 8 save 1835905 chars
+CP buổi 1156 year 9 save 2003960 chars
+CP buổi 1206 year 9 save 2051868 chars
+CP buổi 1256 year 9 save 2130258 chars
+CP buổi 1306 year 10 save 2205500 chars
+CP buổi 1356 year 10 save 2227908 chars
+CP buổi 1406 year 10 save 2339994 chars
+LIFE DONE rr-mat-cautious-2b Xuất cung age 30 · buổi 1417 · taps 4134 · dead buttons 0 · stuck 0 · bugs 0

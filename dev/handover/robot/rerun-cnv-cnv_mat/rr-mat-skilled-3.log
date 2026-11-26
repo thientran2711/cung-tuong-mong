@@ -1,0 +1,73 @@
+CP buổi 50 year 1 save 301466 chars
+CP buổi 100 year 1 save 402774 chars
+CP buổi 150 year 2 save 496986 chars
+CP buổi 200 year 2 save 552910 chars
+CP buổi 250 year 2 save 573502 chars
+CP buổi 300 year 3 save 707822 chars
+CP buổi 350 year 3 save 817508 chars
+CP buổi 400 year 3 save 917964 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:170:44)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-skilled-3 from 2026-11-25T23:12:24.459Z buổi 400
+page.reload: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for navigation until "load"[22m
+[2m    - navigated to "https://thientran2711.github.io/cung-tuong-mong/"[22m
+
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:143:134)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: [
+    '  - waiting for navigation until "load"',
+    '    - navigated to "https://thientran2711.github.io/cung-tuong-mong/"'
+  ]
+}
+RESUME rr-mat-skilled-3 from 2026-11-25T23:12:24.459Z buổi 400
+CP buổi 400 year null save 919809 chars
+CP buổi 450 year 4 save 990069 chars
+CP buổi 500 year 4 save 1047779 chars
+CP buổi 550 year 4 save 1136315 chars
+CP buổi 600 year 5 save 1221936 chars
+CP buổi 650 year 5 save 1306227 chars
+CP buổi 700 year 6 save 1362569 chars
+CP buổi 750 year 6 save 1549148 chars
+CP buổi 800 year 6 save 1641602 chars
+STATUS rr-mat-skilled-3 · buổi 809 · year 6 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 850 year 7 save 1684375 chars
+CP buổi 900 year 7 save 1769607 chars
+CP buổi 950 year 7 save 1853263 chars
+CNV EXIT CHOICE buổi 987 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-3/cnvexit-987.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1000 year 8 save 1867053 chars
+CP buổi 1050 year 8 save 1894539 chars
+CP buổi 1100 year 8 save 2020011 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:283:13)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME rr-mat-skilled-3 from 2026-11-26T01:13:04.473Z buổi 1103
+CP buổi 1103 year null save 2003121 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kfxon j59sz»
+CP buổi 1153 year 9 save 2086674 chars
+CP buổi 1203 year 9 save 2167123 chars
+CNV EXIT CHOICE buổi 1228 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-3/cnvexit-1228.json opts ["Tạ ơn, xuất giá","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượctừ chối khé»
+CP buổi 1253 year 9 save 2205323 chars
+CNV EXIT CHOICE buổi 1264 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-3/cnvexit-1264.json opts ["Tạ ơn, xuất giá","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượctừ chối khé»
+CP buổi 1303 year 10 save 2350592 chars
+CP buổi 1353 year 10 save 2431683 chars
+CP buổi 1403 year 10 save 2473877 chars
+CP buổi 1453 year 11 save 2513690 chars
+CNV EXIT CHOICE buổi 1480 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-3/cnvexit-1480.json opts ["Tạ ơn, xuất giá","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượctừ chối khé»
+STATUS rr-mat-skilled-3 · buổi 1481 · year 11 · rank 0 · bugs 1 · stuck 0 · dead buttons 0
+CP buổi 1503 year 11 save 2582747 chars
+CP buổi 1553 year 11 save 2645739 chars
+CP buổi 1603 year 12 save 2721158 chars
+CP buổi 1653 year 12 save 2781510 chars
+CP buổi 1703 year 12 save 2853470 chars
+LIFE DONE rr-mat-skilled-3 Xuất cung age 30 · buổi 1706 · taps 3834 · dead buttons 0 · stuck 0 · bugs 1

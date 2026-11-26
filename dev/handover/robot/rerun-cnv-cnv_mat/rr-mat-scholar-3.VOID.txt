@@ -1,0 +1,1 @@
+VOID 21:15Z (D ruling): bot chose «Nhận lời làm thiếp» on d_moi «Bà mối nhà phú hộ» while «Xin cha từ chối» was open (moment m-new-104-48). Replay: scholar-3b.

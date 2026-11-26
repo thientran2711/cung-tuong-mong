@@ -1,0 +1,62 @@
+CP buổi 50 year 1 save 346755 chars
+CP buổi 100 year 1 save 424519 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:174:44)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:468:9 {
+  log: []
+}
+RESUME rr-mat-scholar-3b from 2026-11-26T03:13:32.838Z buổi 111
+CP buổi 111 year null save 435668 chars
+GAME BUILD {"s":"3762da08+","b":"fa8da73cecdc","t":"2026-11-25T19:34Z"}
+CP buổi 161 year 2 save 487703 chars
+CP buổi 211 year 2 save 529380 chars
+CP buổi 261 year 2 save 562995 chars
+CP buổi 311 year 3 save 667848 chars
+CP buổi 361 year 3 save 755306 chars
+CP buổi 411 year 4 save 860888 chars
+CP buổi 461 year 4 save 944206 chars
+STATUS rr-mat-scholar-3b · buổi 472 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 511 year 4 save 964118 chars
+CP buổi 561 year 5 save 1000083 chars
+CP buổi 611 year 5 save 1014451 chars
+CP buổi 661 year 5 save 1083624 chars
+CP buổi 711 year 6 save 1172931 chars
+CNV EXIT CHOICE buổi 759 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-scholar-3b/cnvexit-759.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 761 year 6 save 1331895 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:345:13)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:554:9 {
+  log: []
+}
+RESUME rr-mat-scholar-3b from 2026-11-26T05:13:36.921Z buổi 788
+CP buổi 788 year null save 1368736 chars
+CP buổi 838 year 6 save 1456281 chars
+CP buổi 888 year 7 save 1491994 chars
+CP buổi 938 year 7 save 1594029 chars
+CP buổi 988 year 8 save 1642104 chars
+CNV EXIT CHOICE buổi 988 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-scholar-3b/cnvexit-988.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1038 year 8 save 1741185 chars
+CP buổi 1088 year 8 save 1774746 chars
+CP buổi 1138 year 9 save 1833299 chars
+CP buổi 1188 year 9 save 1929205 chars
+STATUS rr-mat-scholar-3b · buổi 1212 · year 9 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 1238 year 9 save 2029134 chars
+CP buổi 1288 year 10 save 2084160 chars
+CP buổi 1338 year 10 save 2177564 chars
+CP buổi 1388 year 10 save 2229910 chars
+CP buổi 1438 year 11 save 2311629 chars
+CP buổi 1488 year 11 save 2351092 chars
+CP buổi 1538 year 11 save 2411891 chars
+CP buổi 1588 year 12 save 2532484 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:296:1025)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:572:9 {
+  log: []
+}
+RESUME rr-mat-scholar-3b from 2026-11-26T07:13:34.402Z buổi 1633
+CP buổi 1633 year null save 2581245 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kfxon j59sz»
+CP buổi 1683 year 12 save 2682465 chars
+LIFE DONE rr-mat-scholar-3b Xuất cung age 30 · buổi 1707 · taps 529 · dead buttons 0 · stuck 0 · bugs 1

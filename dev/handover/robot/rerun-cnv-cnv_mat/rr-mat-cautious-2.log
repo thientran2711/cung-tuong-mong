@@ -1,0 +1,26 @@
+CP buổi 50 year 1 save 296232 chars
+CP buổi 100 year 1 save 373874 chars
+CP buổi 150 year 2 save 406787 chars
+CP buổi 200 year 2 save 466148 chars
+CP buổi 250 year 2 save 473850 chars
+CP buổi 300 year 3 save 591981 chars
+CP buổi 350 year 3 save 698601 chars
+CP buổi 400 year 3 save 781557 chars
+STATUS rr-mat-cautious-2 · buổi 401 · year 3 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+BUG stuck no progress 15 min on .dlg «Tin báo»
+BUG stuck no progress 15 min on #kmrew «»
+CP buổi 450 year 4 save 841882 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:125:734)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:234:9 {
+  log: []
+}
+RESUME rr-mat-cautious-2 from 2026-11-25T09:04:51.729Z buổi 476
+CP buổi 476 year null save 871923 chars
+CP buổi 526 year 4 save 961128 chars
+CP buổi 576 year 5 save 993564 chars
+CP buổi 626 year 5 save 1019720 chars
+CP buổi 676 year 5 save 1082473 chars
+STATUS rr-mat-cautious-2 · buổi 688 · year 5 · rank 0 · bugs 2 · stuck 4 · dead buttons 0
+CP buổi 726 year 6 save 1200703 chars
+LIFE DONE rr-mat-cautious-2 Được ban hôn age 25 · buổi 734 · taps 4057 · dead buttons 0 · stuck 6 · bugs 2

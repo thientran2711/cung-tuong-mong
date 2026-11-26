@@ -1,0 +1,76 @@
+CP buổi 50 year 1 save 328689 chars
+CP buổi 100 year 1 save 438097 chars
+CP buổi 150 year 2 save 449050 chars
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 200 year 2 save 512833 chars
+DEAD BUTTON page «Tích Cần viện · Ở đây còn 7 người.» «Tâm trạngBình thản-3» cover span in #kntchip
+CP buổi 250 year 2 save 568751 chars
+STATUS rr-mat-cautious-5 · buổi 265 · year 3 · rank 0 · bugs 1 · stuck 1 · dead buttons 1
+BUG stuck no progress 15 min on #kmrew «»
+CP buổi 300 year 3 save 647864 chars
+CP buổi 350 year 3 save 710551 chars
+CP buổi 400 year 3 save 791932 chars
+touchscreen.tap: Target page, context or browser has been closed
+    at Object.tap (/home/user/wt/r4/dev/test/realtap.js:78:39)
+    at async Object.play (/home/user/wt/r4/dev/test/robot-rt.js:137:16)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:234:9 {
+  log: []
+}
+RESUME rr-mat-cautious-5 from 2026-11-25T09:02:54.558Z buổi 401
+CP buổi 401 year null save 786324 chars
+CP buổi 451 year 4 save 834629 chars
+STATUS rr-mat-cautious-5 · buổi 483 · year 4 · rank 0 · bugs 2 · stuck 4 · dead buttons 1
+CP buổi 501 year 4 save 883667 chars
+CP buổi 551 year 4 save 949184 chars
+CP buổi 601 year 5 save 998531 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:150:734)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:272:9 {
+  log: []
+}
+RESUME rr-mat-cautious-5 from 2026-11-25T11:10:46.054Z buổi 613
+CP buổi 613 year null save 1002108 chars
+CP buổi 663 year 5 save 1039089 chars
+CP buổi 713 year 6 save 1099876 chars
+CP buổi 763 year 6 save 1251694 chars
+CP buổi 813 year 6 save 1353591 chars
+CP buổi 863 year 7 save 1457254 chars
+STATUS rr-mat-cautious-5 · buổi 893 · year 7 · rank 0 · bugs 2 · stuck 9 · dead buttons 1
+CP buổi 913 year 7 save 1501850 chars
+CP buổi 963 year 7 save 1552112 chars
+CP buổi 1013 year 8 save 1612506 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:124:69)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:293:9 {
+  log: []
+}
+RESUME rr-mat-cautious-5 from 2026-11-25T13:09:13.829Z buổi 1019
+CP buổi 1019 year null save 1622435 chars
+CP buổi 1069 year 8 save 1632145 chars
+STATUS rr-mat-cautious-5 · buổi 1101 · year 8 · rank 0 · bugs 2 · stuck 15 · dead buttons 1
+CP buổi 1119 year 8 save 1673905 chars
+CP buổi 1169 year 9 save 1816748 chars
+CP buổi 1219 year 9 save 1912039 chars
+CP buổi 1269 year 9 save 2001610 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:157:192)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME rr-mat-cautious-5 from 2026-11-25T15:11:51.860Z buổi 1296
+CP buổi 1296 year null save 2033691 chars
+CP buổi 1346 year 10 save 2074347 chars
+STATUS rr-mat-cautious-5 · buổi 1386 · year 10 · rank 0 · bugs 2 · stuck 21 · dead buttons 1
+CP buổi 1396 year 10 save 2194634 chars
+CP buổi 1446 year 11 save 2264666 chars
+CP buổi 1496 year 11 save 2313186 chars
+CP buổi 1546 year 11 save 2317323 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:187:783)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:379:9 {
+  log: []
+}
+RESUME rr-mat-cautious-5 from 2026-11-25T17:10:56.705Z buổi 1556
+CP buổi 1556 year null save 2342167 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kfxon j59sz»
+LIFE DONE rr-mat-cautious-5 Xuất cung age 30 · buổi 1565 · taps 38 · dead buttons 1 · stuck 24 · bugs 3

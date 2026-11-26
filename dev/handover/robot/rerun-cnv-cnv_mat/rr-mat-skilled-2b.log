@@ -1,0 +1,53 @@
+GAME BUILD {"s":"0a4c8010+","b":"d402e37a51ed","t":"2026-11-26T02:21Z"}
+CP buổi 50 year 1 save 353137 chars
+CP buổi 100 year 1 save 470078 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:193:44)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:554:9 {
+  log: []
+}
+RESUME rr-mat-skilled-2b from 2026-11-26T05:13:25.414Z buổi 131
+CP buổi 131 year null save 525983 chars
+CP buổi 181 year 2 save 651496 chars
+CP buổi 231 year 2 save 686794 chars
+CP buổi 281 year 3 save 776364 chars
+CP buổi 331 year 3 save 881943 chars
+CP buổi 381 year 3 save 915807 chars
+CP buổi 431 year 4 save 959381 chars
+CP buổi 481 year 4 save 1089972 chars
+CP buổi 531 year 4 save 1151633 chars
+STATUS rr-mat-skilled-2b · buổi 565 · year 5 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 581 year 5 save 1271415 chars
+CP buổi 631 year 5 save 1328649 chars
+CP buổi 681 year 5 save 1454246 chars
+CP buổi 731 year 6 save 1493105 chars
+CP buổi 781 year 6 save 1564082 chars
+CP buổi 831 year 6 save 1648257 chars
+CP buổi 881 year 7 save 1725503 chars
+CP buổi 931 year 7 save 1790183 chars
+CP buổi 981 year 7 save 1844497 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:352:324)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:572:9 {
+  log: []
+}
+RESUME rr-mat-skilled-2b from 2026-11-26T07:13:41.117Z buổi 986
+CP buổi 986 year null save 1859681 chars
+CP buổi 1036 year 8 save 1920469 chars
+CNV EXIT CHOICE buổi 1036 → /home/user/wt/r4/dev/handover/robot/rerun-cnv-cnv_mat/shots-rr-mat-skilled-2b/cnvexit-1036.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1086 year 8 save 1992603 chars
+CP buổi 1136 year 9 save 2054354 chars
+CP buổi 1186 year 9 save 2152354 chars
+CP buổi 1236 year 9 save 2156704 chars
+CP buổi 1286 year 10 save 2217675 chars
+CP buổi 1336 year 10 save 2272937 chars
+CP buổi 1386 year 10 save 2339367 chars
+STATUS rr-mat-skilled-2b · buổi 1427 · year 11 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 1436 year 11 save 2374347 chars
+CP buổi 1486 year 11 save 2425607 chars
+CP buổi 1536 year 11 save 2467188 chars
+CP buổi 1586 year 12 save 2507800 chars
+CP buổi 1636 year 12 save 2652847 chars
+CP buổi 1686 year 12 save 2752876 chars
+LIFE DONE rr-mat-skilled-2b Xuất cung age 30 · buổi 1706 · taps 4423 · dead buttons 0 · stuck 0 · bugs 0

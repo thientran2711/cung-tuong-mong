@@ -1,0 +1,61 @@
+CP buổi 50 year 1 save 317712 chars
+CP buổi 100 year 1 save 437978 chars
+CP buổi 150 year 2 save 512801 chars
+CP buổi 200 year 2 save 593337 chars
+CP buổi 250 year 2 save 658729 chars
+DEAD BUTTON page «Tích Cần viện · Ở đây còn 11 người.» «4Chí tôn» cover img.kemo.kemo-binh in #game
+CP buổi 300 year 3 save 773391 chars
+BUG stuck no progress 15 min on #kmrew «»
+DEAD BUTTON page «Tích Cần viện · Ở đây còn 12 người.» «3Chí tôn» cover img.kemo.kemo-ghen in #game
+STATUS rr-mat-cautious-4 · buổi 349 · year 3 · rank 0 · bugs 1 · stuck 1 · dead buttons 2
+CP buổi 350 year 3 save 853759 chars
+CP buổi 400 year 3 save 950950 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.tap (/home/user/wt/r4/dev/test/realtap.js:70:112)
+    at async Object.play (/home/user/wt/r4/dev/test/robot-rt.js:137:16)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:234:9 {
+  log: []
+}
+RESUME rr-mat-cautious-4 from 2026-11-25T09:03:50.396Z buổi 409
+CP buổi 409 year null save 970245 chars
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 459 year 4 save 1020805 chars
+CP buổi 509 year 4 save 1134205 chars
+STATUS rr-mat-cautious-4 · buổi 544 · year 4 · rank 0 · bugs 2 · stuck 5 · dead buttons 2
+CP buổi 559 year 5 save 1188303 chars
+CP buổi 609 year 5 save 1271987 chars
+CP buổi 659 year 5 save 1285156 chars
+CP buổi 709 year 6 save 1380253 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:122:69)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:272:9 {
+  log: []
+}
+RESUME rr-mat-cautious-4 from 2026-11-25T11:09:46.634Z buổi 708
+CP buổi 708 year null save 1381289 chars
+CP buổi 758 year 6 save 1506722 chars
+CP buổi 808 year 6 save 1565334 chars
+CP buổi 858 year 7 save 1611241 chars
+CP buổi 908 year 7 save 1654905 chars
+CP buổi 958 year 7 save 1744775 chars
+STATUS rr-mat-cautious-4 · buổi 976 · year 7 · rank 0 · bugs 2 · stuck 10 · dead buttons 2
+CP buổi 1008 year 8 save 1737402 chars
+CP buổi 1058 year 8 save 1773198 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/r4/dev/test/robot-rt.js:154:192)
+    at async /home/user/wt/r4/dev/test/robot-rt.js:293:9 {
+  log: []
+}
+RESUME rr-mat-cautious-4 from 2026-11-25T13:10:28.297Z buổi 1085
+CP buổi 1085 year null save 1828765 chars
+CP buổi 1135 year 9 save 1884129 chars
+CP buổi 1185 year 9 save 1997110 chars
+CP buổi 1235 year 9 save 2105787 chars
+CP buổi 1285 year 10 save 2131499 chars
+CP buổi 1335 year 10 save 2171936 chars
+CP buổi 1385 year 10 save 2278891 chars
+CP buổi 1435 year 11 save 2327135 chars
+STATUS rr-mat-cautious-4 · buổi 1445 · year 11 · rank 0 · bugs 2 · stuck 15 · dead buttons 2
+CP buổi 1485 year 11 save 2352891 chars
+CP buổi 1535 year 11 save 2449657 chars
+LIFE DONE rr-mat-cautious-4 Xuất cung age 30 · buổi 1563 · taps 2529 · dead buttons 2 · stuck 17 · bugs 2
