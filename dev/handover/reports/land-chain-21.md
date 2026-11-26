@@ -18,3 +18,9 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 
 ## 07:25Z — HOME-WAY fixed bc822351 (test-only over 532fbce1) → staged on top of DRESS
 - review/lc21-hw 56636416 = bc822351 onto DRESS 3af7896e (built files only). Gates after DRESS: gates-dr.sh (gates-hw chain + dress tests), QC vs 3af7896e.
+- 07:44Z MAIN: kit-stage-r2 slot → 2fb096a0 (tests only over cfc2bedd); add kit-faces-opts.js Fold+iPad + picker clip to its gates.
+- DRESS makeup-set: Fold «ration: two months give a whole set» FAIL once under load (iPad PASS); rerun alone on DRESS PASS both; LIVE PASS → flake.
+- 07:47Z MAIN/KK38: kit-stage-r2 slot → 22e318d5 (final; on 02f564ae, restack). Kit keeper now KK39 session_01V1ZZH1KkKyKvFCTKrJjfDi. TAINGHE r5 88bd567f also on 02f564ae.
+- 07:50Z coordinator is now MAIN CHÍNH 155 session_01V1ZZH2xEpGEfFdnaf8bfYc (all reports there).
+- TAINGHE r5 staged review/lc21-tn 92629a66 = 88bd567f onto HW 56636416 (CHANGE + built files only). Gates gates-tn.sh (chain + dress + home-way + tainghe-info ×5, pcard-overlap, hit-overlap-lc19; QC vs 56636416).
+- DRESS: info-tap-audit exit 1 in chain (known flake) → rerun alone after chain.
