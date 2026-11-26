@@ -1,0 +1,2542 @@
+{
+ "run": {
+  "tag": "u4s134",
+  "url": "http://127.0.0.1:8080/index.html",
+  "harness": "realtap",
+  "args": {
+   "host": "fold",
+   "guest": "ipad",
+   "kiep": "1",
+   "seed": "134",
+   "tag": "u4s134"
+  },
+  "at": "2026-11-26T04:45:40.881Z"
+ },
+ "pairs": [
+  {
+   "job": {
+    "id": "coop-rt-u4s134",
+    "kiep": 1,
+    "seed": 134
+   },
+   "lives": [
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 1,
+     "extra": false,
+     "room": "Y59K",
+     "life": {
+      "id": "SEGMENT",
+      "type": "segment",
+      "fate": "segment closed: {\"why\":\"year\",\"min\":83,\"buoi\":122,\"year\":2}"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "7959f1b5",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 15,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [
+       {
+        "at": 462,
+        "lvl": 3,
+        "layer": "page",
+        "title": "Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư"
+       },
+       {
+        "at": 728,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 837,
+        "lvl": 3,
+        "layer": ".dlg",
+        "title": "Có người đến"
+       },
+       {
+        "at": 1238,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 1249,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 1621,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 1633,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2113,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 2142,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 2165,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 2192,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 2223,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 2246,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 2331,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2622,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2633,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2809,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 4044,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 4155,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       },
+       {
+        "at": 4294,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4435,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4448,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4459,
+        "lvl": 2,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4470,
+        "lvl": 2,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4480,
+        "lvl": 2,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4493,
+        "lvl": 2,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4624,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4683,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng",
+        "tapped": "Lui",
+        "leftRoom": true
+       }
+      ],
+      "slice": null,
+      "areaTaps": 72,
+      "kpopTrap": 59,
+      "popClose": 68,
+      "chipTrap": 16,
+      "reloads": [
+       8,
+       15
+      ],
+      "reloadDone": 15,
+      "unstickSkipCoopfz": 16,
+      "noFreeSkip": 3,
+      "unstickLeft": 10,
+      "lockedSkip": 10,
+      "taps": 3037,
+      "noFreePoint": 12,
+      "reachFocus": 12,
+      "reachRows": [
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 456,
+        "top0": 456,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 436,
+        "top0": 436,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+        "label": "sương giá",
+        "top": 11,
+        "top0": 11,
+        "vh": 1000,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       }
+      ],
+      "chipCover": [
+       {
+        "screen": ".kmov",
+        "label": "",
+        "chip": "img.kfr",
+        "pct": 78,
+        "vw": 755
+       },
+       {
+        "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+        "label": "Lẻn vào Vững3 khắc · bắt: Danh -12",
+        "chip": "span.kodm.oc",
+        "pct": 16,
+        "vw": 755
+       },
+       {
+        "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+        "label": "Lẻn vào Có cơ3 khắc · bắt: Danh -8",
+        "chip": "span.kodm.oc",
+        "pct": 16,
+        "vw": 755
+       },
+       {
+        "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+        "label": "Tất cả 0/13Nghỉ ngơi 0/1Học tập · Tài ng",
+        "chip": "button.card.kcard.ka",
+        "pct": 31,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Chương 2 · Sơ thừa ân sủng»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 100,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 1/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       },
+       {
+        "screen": ".dlg «Danh hiệu»",
+        "label": "Danh hiệu 2/35",
+        "chip": "img",
+        "pct": 96,
+        "vw": 755
+       }
+      ]
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "game|tap on option «Xét phong danh phận» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Xét phong danh phận» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 1,
+       "at": 38,
+       "screen": "#kg82 «»"
+      },
+      {
+       "k": "game|tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "n": 4,
+       "at": 84,
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+      },
+      {
+       "k": "game|tap on option «hoa đào bay» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «hoa đào bay» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 86,
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+      },
+      {
+       "k": "game|tap on option «Tâm trạng: Bình thản+5 nghỉ ng» opened chip modal «Tâm trạng · Ta» (chip class div.kskdo overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Tâm trạng: Bình thản+5 nghỉ ng» opened chip modal «Tâm trạng · Ta» (chip class div.kskdo overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 4,
+       "at": 169,
+       "screen": ".dlg «»"
+      },
+      {
+       "k": "game|tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 12,
+       "at": 214,
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+      },
+      {
+       "k": "game|tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 1,
+       "at": 281,
+       "screen": "#kg82 «»"
+      },
+      {
+       "k": "game|tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class img overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class img overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 2,
+       "at": 427,
+       "screen": ".dlg «»"
+      },
+      {
+       "k": "game|tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class div.kskdo overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class div.kskdo overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 3,
+       "at": 452,
+       "screen": ".dlg «»"
+      },
+      {
+       "k": "game|tap on option «ve kêu râm ran» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «ve kêu râm ran» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 802,
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+      },
+      {
+       "k": "game|tap on option «Y phục vượt phẩm · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Y phục vượt phẩm · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "n": 2,
+       "at": 977,
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+      },
+      {
+       "k": "game|tap on option «mưa rào» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «mưa rào» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 3,
+       "at": 1021,
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+      },
+      {
+       "k": "game|tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 7,
+       "at": 1221,
+       "screen": ".dlg «Bổng lộc tháng tư»"
+      },
+      {
+       "k": "game|tap on option «nắng gắt» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «nắng gắt» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 1278,
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+      },
+      {
+       "k": "game|tap on option «giông tố» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «giông tố» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 1558,
+       "screen": "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p»"
+      },
+      {
+       "k": "game|tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 7,
+       "at": 2101,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «Buổi sáng, còn 0 khắc» opened chip modal «sáng · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Buổi sáng, còn 0 khắc» opened chip modal «sáng · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 1,
+       "at": 2198,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "dead|close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+       "n": 1,
+       "at": 2607,
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/noeffect-1795670949476.png"
+      },
+      {
+       "k": "game|tap on option «ngày 25: Tiết Vạn thọ: Nguyệt » opened a hint popup (#kpop) — trigger class span.kmc-n sits on the card body",
+       "type": "game",
+       "msg": "tap on option «ngày 25: Tiết Vạn thọ: Nguyệt » opened a hint popup (#kpop) — trigger class span.kmc-n sits on the card body",
+       "n": 2,
+       "at": 2715,
+       "screen": ".dlg «Lịch tháng»"
+      },
+      {
+       "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 3,
+       "at": 2739,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «Bạc5Sức99/99» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Bạc5Sức99/99» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 1,
+       "at": 2829,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «Tâm trạngBình thản-24» opened chip modal «Tâm trạng · Ta» (chip class b.kmd-w.ef.n overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Tâm trạngBình thản-24» opened chip modal «Tâm trạng · Ta» (chip class b.kmd-w.ef.n overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 1,
+       "at": 2836,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 3255,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «sương giá» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «sương giá» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 2,
+       "at": 3547,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 5,
+       "at": 3866,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «ngày 15: Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+       "type": "game",
+       "msg": "tap on option «ngày 15: Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+       "n": 1,
+       "at": 3931,
+       "screen": ".dlg «Lịch tháng»"
+      },
+      {
+       "k": "game|tap on option «Buôn bánBuôn bánSai cung nữ th» opened chip modal «Sai cung nữ thân tín mua lén ngoài cung» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Buôn bánBuôn bánSai cung nữ th» opened chip modal «Sai cung nữ thân tín mua lén ngoài cung» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 2,
+       "at": 3953,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «Y dượcY dượcHối lộ người ở Thá» opened chip modal «Hối lộ người ở Thái y viện» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Y dượcY dượcHối lộ người ở Thá» opened chip modal «Hối lộ người ở Thái y viện» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 2,
+       "at": 3962,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      },
+      {
+       "k": "game|tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 4,
+       "at": 4032,
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+      }
+     ],
+     "dead": [
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669049084.png",
+       "dev": "fold",
+       "at": 707,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669094595.png",
+       "dev": "fold",
+       "at": 752,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669102630.png",
+       "dev": "fold",
+       "at": 760,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+       "label": "Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh",
+       "cover": "zero size",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669352833.png",
+       "dev": "fold",
+       "at": 1010,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 2,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669529806.png",
+       "dev": "fold",
+       "at": 1187,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669547884.png",
+       "dev": "fold",
+       "at": 1205,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669556191.png",
+       "dev": "fold",
+       "at": 1214,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795669928966.png",
+       "dev": "fold",
+       "at": 1587,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 3,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795670323646.png",
+       "dev": "fold",
+       "at": 1981,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 4,
+        "w": 2,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795670340634.png",
+       "dev": "fold",
+       "at": 1998,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 4,
+        "w": 2,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795670348738.png",
+       "dev": "fold",
+       "at": 2006,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 4,
+        "w": 2,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795670943537.png",
+       "dev": "fold",
+       "at": 2601,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 5,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tin trong cung buổi này»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/noeffect-1795670949476.png",
+       "at": 2607,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 5,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+       "label": "sương giá",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795671899598.png",
+       "dev": "fold",
+       "at": 3557,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 0,
+        "b": 0,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+       "label": "Giao thiệpGiao thiệpChép kinh, giữ đứcRất vữngNgày",
+       "cover": "zero size",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-host-k1/dead-fold-1795672093836.png",
+       "dev": "fold",
+       "at": 3751,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 1,
+        "b": 1,
+        "age": 19,
+        "rank": 0,
+        "name": "Liêu Quân Dao"
+       }
+      }
+     ],
+     "buoi": 122,
+     "saves": [
+      {
+       "buoi": 50,
+       "year": 1,
+       "chars": 0,
+       "key": ""
+      },
+      {
+       "buoi": 100,
+       "year": 1,
+       "chars": 0,
+       "key": ""
+      }
+     ]
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 1,
+     "extra": false,
+     "room": "Y59K",
+     "life": {
+      "id": "SEGMENT",
+      "type": "segment",
+      "fate": "segment closed: {\"why\":\"year\",\"min\":83,\"buoi\":121,\"year\":2}"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "7959f1b5",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 37,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [
+       {
+        "at": 231,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "",
+        "tapped": "Lui"
+       },
+       {
+        "at": 390,
+        "lvl": 3,
+        "layer": ".dlg",
+        "title": "Lòng không giữ được"
+       },
+       {
+        "at": 838,
+        "lvl": 3,
+        "layer": ".kfoc",
+        "title": "",
+        "tapped": "Lui"
+       },
+       {
+        "at": 2165,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2191,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2222,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2246,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 2809,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4156,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       },
+       {
+        "at": 4683,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": "",
+        "skipped": "coopfz ✕ = leave room"
+       }
+      ],
+      "slice": null,
+      "areaTaps": 72,
+      "typed": 1,
+      "kpopTrap": 55,
+      "popClose": 56,
+      "reloads": [
+       8,
+       15
+      ],
+      "reloadDone": 15,
+      "noFreeSkip": 10,
+      "lockedSkip": 1,
+      "unstickSkipCoopfz": 7,
+      "chipTrap": 2,
+      "taps": 2623,
+      "noFreePoint": 36,
+      "reachFocus": 37,
+      "reachRows": [
+       {
+        "screen": "#kg82",
+        "label": "Trước khi ra tay",
+        "top": 403,
+        "top0": 403,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": "#kg82",
+        "label": "Trước khi ra tay",
+        "top": 403,
+        "top0": 403,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 408,
+        "top0": 408,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 408,
+        "top0": 408,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 408,
+        "top0": 408,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 366,
+        "top0": 366,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": "#kg82",
+        "label": "Trước khi ra tay",
+        "top": 403,
+        "top0": 403,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": "#kg82",
+        "label": "Trước khi ra tay",
+        "top": 403,
+        "top0": 403,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": "#kg82",
+        "label": "Trước khi ra tay",
+        "top": 403,
+        "top0": 403,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 366,
+        "top0": 366,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 366,
+        "top0": 366,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 366,
+        "top0": 366,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 408,
+        "top0": 408,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 408,
+        "top0": 408,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 408,
+        "top0": 408,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 366,
+        "top0": 366,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": ".dlg",
+        "label": "Ghi chú",
+        "top": 346,
+        "top0": 346,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       },
+       {
+        "screen": "#kg82",
+        "label": "Phần của ta",
+        "top": 308,
+        "top0": 308,
+        "vh": 820,
+        "wheelMoved": false,
+        "clip": false,
+        "sc": null
+       }
+      ],
+      "chipCover": [
+       {
+        "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người»",
+        "label": "Tất cả 18/27Nghỉ ngơi 0/3Giao thiệp 2/3H",
+        "chip": "button.card.kcard.ka",
+        "pct": 39,
+        "vw": 1180
+       }
+      ]
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "game|tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "n": 6,
+       "at": 180,
+       "screen": ".mapsc «»"
+      },
+      {
+       "k": "game|tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 357,
+       "screen": "page «Kính sự phòng · Sang buổi chiều · ta vẫn ở Kính sự»"
+      },
+      {
+       "k": "game|tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 7,
+       "at": 505,
+       "screen": "#kg82 «»"
+      },
+      {
+       "k": "game|tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 20,
+       "at": 698,
+       "screen": ".dlg «»"
+      },
+      {
+       "k": "game|tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 2,
+       "at": 1626,
+       "screen": ".dlg «Bổng lộc tháng năm»"
+      },
+      {
+       "k": "game|tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 2294,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người»"
+      },
+      {
+       "k": "game|tap on option «trời thu trong» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «trời thu trong» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 2357,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người»"
+      },
+      {
+       "k": "game|tap on option «trời thu trong» opened a hint popup (#kpop) — trigger class img sits on the card body",
+       "type": "game",
+       "msg": "tap on option «trời thu trong» opened a hint popup (#kpop) — trigger class img sits on the card body",
+       "n": 1,
+       "at": 2359,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người»"
+      },
+      {
+       "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 2517,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người»"
+      },
+      {
+       "k": "game|tap on option «Số lần ân thưởng1» opened chip modal «Ân thưởng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Số lần ân thưởng1» opened chip modal «Ân thưởng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 1,
+       "at": 2522,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người»"
+      },
+      {
+       "k": "game|tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 3100,
+       "screen": ".mapsc «»"
+      },
+      {
+       "k": "game|tap on option «mồng 9: Tết Trùng cửu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+       "type": "game",
+       "msg": "tap on option «mồng 9: Tết Trùng cửu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+       "n": 1,
+       "at": 3140,
+       "screen": ".dlg «Lịch tháng»"
+      },
+      {
+       "k": "game|tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 2,
+       "at": 3161,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người»"
+      },
+      {
+       "k": "game|tap on option «Y phục vượt phẩm · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Y phục vượt phẩm · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+       "n": 3,
+       "at": 3167,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người»"
+      },
+      {
+       "k": "game|tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 4,
+       "at": 3757,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người»"
+      },
+      {
+       "k": "game|tap on option «Có thaiRất thấp» opened chip modal «Có thai: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "type": "game",
+       "msg": "tap on option «Có thaiRất thấp» opened chip modal «Có thai: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+       "n": 1,
+       "at": 3770,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người»"
+      },
+      {
+       "k": "game|tap on option «Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+       "n": 1,
+       "at": 3799,
+       "screen": ".dlg «Lịch tháng»"
+      },
+      {
+       "k": "game|tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+       "n": 1,
+       "at": 3806,
+       "screen": "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người»"
+      },
+      {
+       "k": "dead|close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+       "n": 1,
+       "at": 4578,
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/noeffect-1795672920626.png"
+      },
+      {
+       "k": "game|tap on option «Đối thủ» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Đối thủ» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 1,
+       "at": 4830,
+       "screen": "#kg82 «»"
+      },
+      {
+       "k": "game|tap on option «Phần của ta» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "type": "game",
+       "msg": "tap on option «Phần của ta» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+       "n": 1,
+       "at": 4832,
+       "screen": "#kg82 «»"
+      }
+     ],
+     "dead": [
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#kg82",
+       "label": "Trước khi ra tay",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795668860350.png",
+       "dev": "ipad",
+       "at": 518,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 3,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669052026.png",
+       "dev": "ipad",
+       "at": 710,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669098829.png",
+       "dev": "ipad",
+       "at": 756,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669106964.png",
+       "dev": "ipad",
+       "at": 764,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#kg82",
+       "label": "Trước khi ra tay",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669400254.png",
+       "dev": "ipad",
+       "at": 1059,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 3,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669536400.png",
+       "dev": "ipad",
+       "at": 1194,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669550727.png",
+       "dev": "ipad",
+       "at": 1208,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669558095.png",
+       "dev": "ipad",
+       "at": 1216,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669924210.png",
+       "dev": "ipad",
+       "at": 1582,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 3,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669939128.png",
+       "dev": "ipad",
+       "at": 1597,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 3,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795669947315.png",
+       "dev": "ipad",
+       "at": 1605,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 3,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795670331216.png",
+       "dev": "ipad",
+       "at": 1989,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 4,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795670345794.png",
+       "dev": "ipad",
+       "at": 2003,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 4,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795670353954.png",
+       "dev": "ipad",
+       "at": 2012,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 4,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#kg82",
+       "label": "Trước khi ra tay",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795670804617.png",
+       "dev": "ipad",
+       "at": 2465,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 4,
+        "w": 1,
+        "b": 3,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795670944187.png",
+       "dev": "ipad",
+       "at": 2602,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 5,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795670959085.png",
+       "dev": "ipad",
+       "at": 2617,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 5,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795670967357.png",
+       "dev": "ipad",
+       "at": 2625,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 5,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#kg82",
+       "label": "Trước khi ra tay",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795671326583.png",
+       "dev": "ipad",
+       "at": 2986,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 5,
+        "w": 2,
+        "b": 3,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795671388059.png",
+       "dev": "ipad",
+       "at": 3046,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 6,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795671407354.png",
+       "dev": "ipad",
+       "at": 3065,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 6,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795671415435.png",
+       "dev": "ipad",
+       "at": 3073,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 6,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795671901117.png",
+       "dev": "ipad",
+       "at": 3559,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795671920489.png",
+       "dev": "ipad",
+       "at": 3578,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795671928751.png",
+       "dev": "ipad",
+       "at": 3586,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#kg82",
+       "label": "Trước khi ra tay",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672028001.png",
+       "dev": "ipad",
+       "at": 3687,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 0,
+        "b": 3,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672202000.png",
+       "dev": "ipad",
+       "at": 3860,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 2,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672216820.png",
+       "dev": "ipad",
+       "at": 3874,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 2,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672225100.png",
+       "dev": "ipad",
+       "at": 3883,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 7,
+        "w": 2,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672403466.png",
+       "dev": "ipad",
+       "at": 4061,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 8,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672410829.png",
+       "dev": "ipad",
+       "at": 4068,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 8,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672418133.png",
+       "dev": "ipad",
+       "at": 4076,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 8,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672776518.png",
+       "dev": "ipad",
+       "at": 4434,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 9,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672792886.png",
+       "dev": "ipad",
+       "at": 4450,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 9,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".dlg",
+       "label": "Ghi chú",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795672801549.png",
+       "dev": "ipad",
+       "at": 4459,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 9,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tin trong cung buổi này»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/noeffect-1795672920626.png",
+       "at": 4578,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 9,
+        "w": 0,
+        "b": 3,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#kg82",
+       "label": "Phần của ta",
+       "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+       "shot": "/home/user/wt/out/u1d/shots-coop-rt-u4s134-guest-k1/dead-ipad-1795673182733.png",
+       "dev": "ipad",
+       "at": 4840,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 9,
+        "w": 2,
+        "b": 0,
+        "age": 18,
+        "rank": 1,
+        "name": "Diệp Lệ Hoa"
+       }
+      }
+     ],
+     "buoi": 121,
+     "saves": [
+      {
+       "buoi": 50,
+       "year": 1,
+       "chars": 0,
+       "key": ""
+      },
+      {
+       "buoi": 100,
+       "year": 1,
+       "chars": 0,
+       "key": ""
+      }
+     ]
+    }
+   ],
+   "partial": false,
+   "bugs": []
+  }
+ ]
+}
