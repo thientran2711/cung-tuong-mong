@@ -44,7 +44,7 @@ function clrE2E(){if(CLR)return CLR;const fs=require('fs'),path=require('path');
  CLR=eval('('+t.slice(i,j).split("require('./lib/coop-clear.js')").join("require('./coop-clear.js')")+')');return CLR}
 const LIFEMS=+process.env.LIFEMS||480000;
 const NM=()=>{try{return typeof S!=='undefined'&&S?String(S.name||'')+(S.dead?'†':''):null}catch(e){return null}};
-async function lives(A,B,clear,ok,o){o=o||{};if(process.env.NOLIVES)return true;const MK=require('./coop-clear.js').MAKING,SCR=require('./coop-clear.js').SCR;clear=clear||clrE2E();
+async function lives(A,B,clear,ok,o){o=o||{};if(process.env.NOLIVES)return true;const MK=require('./coop-clear.js').MAKING,SCR=require('./coop-clear.js').SCR;if(typeof MK!=='function')return true/* a base without the SELSCENE-17 MAKING rule has no selection days either */;clear=clear||clrE2E();
  const nm=x=>x.p.evaluate(NM).catch(()=>null);const n0=[await nm(A),await nm(B)];const t0=Date.now();let mk=[true,true];
  while(Date.now()-t0<LIFEMS){mk=[await A.p.evaluate(MK).catch(()=>true),await B.p.evaluate(MK).catch(()=>true)];if(!mk[0]&&!mk[1])break;await clear(A);await clear(B);await _sl(200)}
  const n1=[await nm(A),await nm(B)];const re=[n0[0]!==n1[0],n0[1]!==n1[1]];const r=!mk[0]&&!mk[1]&&!(o.guard&&(re[0]||re[1]));
@@ -80,4 +80,4 @@ async function nightRec(A,B,d,ms=20000){let a=null,c=null;const t0=Date.now();wh
    #next stayed enabled and the bot never pressed again → the room waited for ever). A player presses again: a seat still on the old buổi,
    #next enabled, no dialog, no buổi / week end out → one more tap (counted in window.__rePress). */
 async function repress(o){try{await o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled&&n.offsetParent!==null&&!(typeof Q!=='undefined'&&Q.length)&&!(window.COOPW&&(COOPW.bend||COOPW.pend))&&!(window.__co&&__co().waiting)){window.__rePress=(window.__rePress||0)+1;n.click()}})}catch(e){}}
-module.exports={lives,MAKING:require('./coop-clear.js').MAKING,repress,origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric,nfBoth,NREC,nightRec};
+module.exports={lives,MAKING:require('./coop-clear.js').MAKING||(()=>false),repress,origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric,nfBoth,NREC,nightRec};
