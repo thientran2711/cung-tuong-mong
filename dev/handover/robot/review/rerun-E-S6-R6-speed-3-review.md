@@ -1,0 +1,5 @@
+# R6-speed-3 (iPad 1180x820, bot=sens, pf/pt_tang) — end-of-life notes — COUNTED (13 taps)
+Ending **«Bị ban hoa, xuất cung»**, age 20, year 1, **buổi 1**, rank 2, 13 real taps, 0 JS clicks, 0 bugs. robot-audit VALID (game-imposed; exitPick none). github.io LIVE, GAME BUILD 6b5d3d05+/b7dcbbd06e03, harness 2df8f5fa (board-play fixed), no resume. From the result JSON (last taps) and the moment log; I did not open its shots: no score table.
+Taps: «Thân phận kiếp này» → «Nhận thân phận» → «Tiền truyện · Công chúa Phù Tang hòa thân» 1/4..4/4 «Vào cung» → one area tap → «Vào điện» → dialog «Lễ ra mắt» → **«Cúi đầu chờ xét»** (Rất vững, Sức -5, «không thi; tính…») → the game closed the life at once. The harness did NOT take the board path, so the E-a / unplayed-trial bug is not involved: it is the plain option, a real game pick.
+## Finding (fairness — see the digest)
+The option «Cúi đầu chờ xét» has now ended **4 of 4** lives that picked it (scholar-2, lover-1, skilled-3, speed-3), always at buổi 1, always labelled «Rất vững»: at tài nghệ bậc 0 it is never survivable (BAL / odds-label check; law 2 equal-value choices: «Dâng Cầm / Dâng Kỳ» vs this one).

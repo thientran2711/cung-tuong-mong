@@ -22215,5 +22215,153 @@
   "row": "R6·greedy·3:523933307 (rerun on LIVE github.io, ipad)",
   "game": "github.io LIVE, ≈ 7 h (11-26 ≈04:25Z → 11:18Z), Builds c039fbea2394 → dcf5cf143550 → 3452251e0042 (page reloads at 3 same-life resumes: buổi 326, 686, 1299); harness 4d7a22c6 → d2e03d80 → 89f5b956 → 2df8f5fa",
   "audit": "VALID (game-imposed Xuất gia làm ni cô at the emperor's death, age 27 year 10: last bot tap «Báo đúng ngày», no exit pick; real taps, github.io) — COUNTED; mixed builds noted"
+ },
+ {
+  "job": {
+   "id": "R6-skilled-3",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2844095027,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 1,
+   "slice": null,
+   "build": {
+    "s": "6b5d3d05+",
+    "b": "b7dcbbd06e03",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 52,
+   "dlgScroll": 9,
+   "scrolls": 12,
+   "taps": 46
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 19,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 14»",
+    ".dlg «Thân phận kiếp này» «Dễ»",
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 23»",
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 14»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 933,238",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 127,
+  "status": [],
+  "t": {
+   "total": 59009
+  },
+  "unit": "E-S6",
+  "row": "R6·skilled·3:2844095027 (rerun on LIVE github.io, ipad)",
+  "game": "github.io LIVE, GAME BUILD {6b5d3d05+, b7dcbbd06e03}; harness 2df8f5fa; ipad; one buổi, no resume",
+  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after picking «Cúi đầu chờ xét» (no exam, rated «Rất vững») at «Lễ ra mắt»; real taps, github.io) — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-speed-3",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2150874768,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "6b5d3d05+",
+    "b": "b7dcbbd06e03",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 47,
+   "dlgScroll": 3,
+   "scrolls": 6,
+   "taps": 13
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 20,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    "#kroul «Tiếp»",
+    "#kroul «Bỏ qua»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 9»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 9»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 316,383",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 81,
+  "status": [],
+  "t": {
+   "total": 43946
+  },
+  "unit": "E-S6",
+  "row": "R6·speed·3:2150874768 (rerun on LIVE github.io, ipad)",
+  "game": "github.io LIVE, GAME BUILD {6b5d3d05+, b7dcbbd06e03}; harness 2df8f5fa; ipad; one buổi, no resume",
+  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after picking «Cúi đầu chờ xét» (no exam, rated «Rất vững») at «Lễ ra mắt»; real taps, github.io) — COUNTED"
  }
 ]
