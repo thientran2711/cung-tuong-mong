@@ -516,3 +516,4 @@ C3-SEALS (all lines above: W1/W1b/W1c/W1d/W1e, W2, W3) | review/c3-seals 4a758f6
 C3-SEALS-RM re-merge main f573dc94 + rebuild + tests | review/c3-seals | (session in STATUS) | RUNNING | 2026-11-26T18:20Z (Foreman C ROOT 3-1-1-1-1)
 C3-SEALS-RM | review/c3-seals | session_01PEhRbuThfqRgsb1V4EPoSx (sonnet) | RUNNING | 2026-11-26T18:22Z (Foreman C; id for the line above)
 coop-afk-l13 OPEN 2 (host reload no replay) | review/coop-afk-l13-r3 | session_01N1tNP5BSs2j6LN9LonrKMG | RUNNING | 26/11 18:30Z (Foreman B child 4)
+FLIGHT2-S9G life (Fold 755x1000 speed, seed 2026112538, LIVE origin/main f573dc94 served locally via rt-serve-build.sh + pin=1 fresh profile, harness review/robot-realtap 8ea10d7e) | dev/handover/robot/flight2-s9g.* | session_01UV1SzkxvEe2akvB9Jcft6u | CLAIMED | 2026-11-26T18:35Z (FOREMAN F #24)
