@@ -51,7 +51,7 @@ const {chromium}=require('playwright');const URL=process.argv[2]||process.env.GA
     const nt0=(typeof kitNoticeList==="function"?kitNoticeList():[]).filter(x=>x.id==="life-redeal").length;window.__nt0=nt0;
     const k0=JSON.stringify([used,S.buoi,S.suc,S.bac,S.sung,S.danh,S.duc]);let thrown=[],tries=0,ran=0;
     if(mode==="gate"){try{render()}catch(e){thrown.push(e.message)}}
-    else for(let i=0;i<30&&wrong().length;i++){const j=deck.indexOf(wrong()[0]);tries++;const lg=(S.logs||[]).length;try{act(j)}catch(e){thrown.push(e.message)}if((S.logs||[]).length>lg)ran++;Q.length=0}
+    else for(let i=0;i<30&&wrong().length;i++){const c=wrong()[0],j=deck.indexOf(c);tries++;try{act(j)}catch(e){thrown.push(e.message)}/* ran = act() went on to the card itself (j2 act sets a.done before it pays and runs); a world log line from the new hand's deal/render (an NPC visit) is not the card */if(c.done)ran++;Q.length=0}
     const nt=(typeof kitNoticeList==="function"?kitNoticeList():[]).filter(x=>x.id==="life-redeal");
     return{w0,wn,left:wrong().length,n:deck.length,tries,ran,thrown,paid:JSON.stringify([used,S.buoi,S.suc,S.bac,S.sung,S.danh,S.duc])!==k0,note:nt.length>0}},[LV[A].sv,LV[B].sv,mode]);
   const tg=`r2 ${label} [${mode}]`;
