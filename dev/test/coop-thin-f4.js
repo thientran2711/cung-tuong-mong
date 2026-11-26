@@ -45,8 +45,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.goto(BASE+'?room='+code);await G.p.waitForTimeout(3000);await tapText(G,/^(Vào phòng|Tiếp tục)/,4000);
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
- await inW();
- for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;/* the staged consort (rank 3, own palace) is past her 3 selection days: end them, else the contest (jselxday selxContestRun) can still send her home («Bị ban hoa») mid-rows → S.dead → every F4 intent runs local (LIVE 3af7896e too, D5 #3 26/11) */if(S.selx2&&S.selx2.days)S.selx2.days=0;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
+ await inW();await require('./lib/coop-real.js').lives(H,G,clear,ok);/* coop-reg9-route: no row on a life still being made (selection days / ban hoa rebirth) */
+ for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
  await REALL.realize(H,G,()=>week(H,G,'setup'),ok);
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
@@ -82,6 +82,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const g0=await G.p.evaluate(()=>__her()),h0=await H.p.evaluate(()=>__her());const run0=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
   const hc0=await H.p.evaluate(()=>{const t=document.getElementById('rtoast');return t?t.innerHTML:''});const c0=await G.p.evaluate(()=>COOPW.thin.F.stat.card|0);
   if(o.pre)await G.p.evaluate(src=>(0,eval)('(function(){'+src+'})')(),o.pre);
+  const mk=await G.p.evaluate(REALL.MAKING).catch(()=>null)/* coop-reg9-route: her life still being made at the tap (selection days / dead / rebirth) = the old local road, never a routing fault */;
   const r=await G.p.evaluate(src=>{const F=COOPW.thin.F;const s0=F.stat.sent,l0=F.stat.local,gt0=F.stat.gate|0,b0=F.stat.busy;const before=JSON.stringify(__sum(S));const t0=performance.now();let err=null;
    try{(0,eval)('(function(){'+src+'})')()}catch(e){err=String(e&&e.stack||e).slice(0,300)}
    try{render()}catch(e){}const ms=Math.round(performance.now()-t0);
@@ -96,12 +97,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}))/* her khắc clock lives on her phone (E / F1); checked per row */;
   const hlog=!same?await H.p.evaluate(()=>COOPW.thin.F.log.slice(-5)):null;
   const gone=ans&&ans.r0&&ans.r0.st==='gone'?{hl:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-4)),msg:await G.p.evaluate(()=>COOPW.thin.F.lastMsg||null),g:await G.p.evaluate(()=>S.inv.filter(e=>e&&e.tg3)),h:await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return (B&&B.S&&B.S.inv||[]).filter(e=>e&&e.tg3)})}:null;
-  const row={hlog,gone,tag,r,got,ran:run1-run0,ms:ans&&ans.id===r.id?ans.ms:null,st:ans&&ans.r0&&ans.r0.st,ar:ans&&ans.r0&&ans.r0.r,g0,g1,h0,h1,same,twin,hostCard:hc1!==hc0,card:c1-c0};table.push(row);
+  const row={mk,hlog,gone,tag,r,got,ran:run1-run0,ms:ans&&ans.id===r.id?ans.ms:null,st:ans&&ans.r0&&ans.r0.st,ar:ans&&ans.r0&&ans.r0.r,g0,g1,h0,h1,same,twin,hostCard:hc1!==hc0,card:c1-c0};table.push(row);
   /* her log: the act's line is the newest on the host's copy; her phone shows it too (the guest-side log writers after a world delta are F6/G) */
   row.logOk=!ans||!ans.r0||!ans.r0.r||String(g1.log).includes(String(ans.r0.r).replace(/\s+/g,' ').trim().slice(0,30))||String(h1.log).includes(String(ans.r0.r).replace(/\s+/g,' ').trim().slice(0,30));
   if(twin&&twin.a){const d=x=>({bac:x.a.bac-x.b.bac,inv:x.a.inv,wd:x.a.wd,vl:x.a.vl,suc:x.a.suc-x.b.suc,sac:(x.a.sac||0)-(x.b.sac||0),danh:(x.a.danh||0)-(x.b.danh||0),used:x.du});
    const real={a:g1,b:g0,du:g1.used-g0.used};row.solo=d(twin);row.real=d(real);row.twinOk=JSON.stringify(row.solo)===JSON.stringify(row.real)&&(!twin.a.log||twin.a.log.slice(0,40)===g1.log.slice(0,40)||twin.a.log.slice(0,40)===h1.log.slice(0,40))}
-  row.good=ON?(!r.err&&r.now.pend&&r.now.next&&(r.now.same||!!o.pre/* a card's own cost (chooseM fx) is paid on her phone and rides in the intent's diff (part D) */)&&r.sent===1&&r.local===0&&got&&row.ran===1&&row.st==='ok'&&same&&!row.hostCard&&(row.twinOk!==false)&&(o.chk?o.chk(row):true))
+  row.good=ON?(!mk&&!r.err&&r.now.pend&&r.now.next&&(r.now.same||!!o.pre/* a card's own cost (chooseM fx) is paid on her phone and rides in the intent's diff (part D) */)&&r.sent===1&&r.local===0&&got&&row.ran===1&&row.st==='ok'&&same&&!row.hostCard&&(row.twinOk!==false)&&(o.chk?o.chk(row):true))
    :(!r.err&&r.sent===0);
   if(o.card!=null&&ON)row.good=row.good&&row.card===o.card;
   ok(row.good,`${tag}${ON?'':' (L'+LVL+' old road: local)'}`,row.good?{ms:row.ms,local_ms:r.ms}:row);return row};
