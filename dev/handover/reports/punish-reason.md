@@ -37,3 +37,31 @@ Alternative B (smaller change): keep pieces 2 for every charge, only the find od
 
 ### Vietnamese summary for sếp
 Đề xuất: bằng chứng chia theo TỘI, không tính tổng nữa. 8 tội: Vượt phẩm (1 chứng, dễ tìm) · Giấu đồ cấm, Ức hiếp, Mua chuộc người hầu (2 chứng, dễ) · Hại dung nhan (2 chứng, Tùy duyên, phạt giáng 1 bậc) · Mưu hại tính mạng, Vu oan (3 chứng, Khó lường, lãnh cung) · Tư thông (3 chứng, Hiểm, nặng nhất). Tội càng nặng chứng càng khó, nhưng mỗi lần tìm hụt lần sau dễ hơn nên chứng nào cũng tìm được. Tố ai thì khung hiện rõ: ai tố, tội gì, từng món chứng. Phi tần tố ta cũng y luật đó (hai chiều). Mỗi hình phạt hạ tối đa 1 bậc.
+
+## D1 — BUILT (review/punish-reason)
+
+### What changed (whole family, `python3 dev/test/punish-scan.py [ref]`)
+| family | origin/main f009e1a6 | branch |
+|---|---|---|
+| two_rank (a 2-rank drop at once: j8 fall her + NPC, j4 father) | 3 | 0 |
+| skip_seat (punishment through seatDown(rank-1): full seat pushes further) | 6 | 0 |
+| npc_free (NPC leaves lãnh cung with no stay gate) | 8 | 0 |
+| npc_floor (NPC released straight to Đáp ứng from any rank) | 7 | 0 |
+| me_note (her punishment function with no reason notice: fall/demote/punish/deathSentence/cold) | 5 | 0 |
+| gloom (j93 «Bị giáng xuống» scene without the reason) | 1 | 0 |
+| me_free (her release calls — all gated inside restore) | 10 | 10 (gated) |
+
+Rules now (jpun.js + BAL.pun in jbal2):
+- ONE PUNISHMENT = lãnh cung OR one rank down, never two ranks; never two rank punishments on one person within BAL.pun.gapDays (1) day — a second becomes cấm túc; lãnh cung after a same-day demotion keeps the pre-demotion rank for phục vị (one rank in all).
+- Seat cap never pushes the punished one further (jseat settle skips her while she holds that rank; the newest other holder moves with the existing «ghế đã đủ người» line, so the cap still holds).
+- LÃNH CUNG STAY BAL.pun.coldMinDays = 3 days (one month) before ANY release (ân xá, đại xá, cầu xin, nhờ người, minh oan, Thái hậu) — hers and every NPC road (law 1). Her early pardon waits («Chờ ngày ra lãnh cung» notice) and comes the first day the stay is served. Phục vị = one rank below the old rank (full when minh oan); NPCs likewise (were always sent back to Đáp ứng).
+- REASON FIRST: every punishment of her shows one kit notice (kitPanel kind notice, fact rows): AI TỐ (name + rank; the edict reveals the name) / VÌ SAO / CHỨNG CỨ (n pieces + the real wrongs behind them from jtruth, + things found in her chest) / HÌNH PHẠT (from → to, cấm túc months, lãnh cung + stay). Lãnh cung notice = same rows + the narrative. Rời lãnh cung: VÌ SAO ĐƯỢC RA (e.g. «Hoàng hậu X ân xá vì nàng quý ngươi (thiện cảm N)») / PHỤC VỊ / VÌ SAO PHẨM NÀY. j93 gloom line carries «Vì …». Story-road cấm túc (jrd_*) stays on its own option card (cause already visible).
+- Law 16 note: NPC release rank (was always Đáp ứng) is now one rank below — follows sếp's «one rank per punishment», two-way.
+
+### Tests
+- `node dev/test/punish-reason.js <url> [W H videoDir]` — real page, notices closed by taps: 18/18 PASS at Fold 755x1000 and iPad 1180x820.
+- `node dev/test/punish-live-vs.js <url> 40` — same steps LIVE vs branch:
+  - LIVE: 40 falls → 22 two-rank drops, 18 lãnh cung, 18/18 early ân xá left AT ONCE, 0 notices with reason rows.
+  - branch: 40 falls → 23 one-rank drops, 0 two-rank, 17 lãnh cung, 0/17 left early, 40/40 notices with Ai tố / Vì sao / Chứng cứ.
+- `node dev/test/cold-faction.js dev/index.html` 20/20 PASS (row 11 + coop-cold-faction + life-place now serve the stay before restore).
+- Videos (CDN): https://ctm-img.victoria-tntt.workers.dev/img/_review/punish-reason/fold-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/punish-reason/ipad-1180x820.webm (+ fold-sheet.png / ipad-sheet.png contact sheets)
