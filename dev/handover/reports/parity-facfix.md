@@ -62,3 +62,15 @@ Reviewer: opus BIG session_01D3E3NYiNpuvC4JKoyQchxo (opened 11:15Z). role-parity
 | quickcheck core G4 80-dialog-fixed | 2 FAIL «(kit-dialog-2 a) no empty Tốn / Được cell» 755 + 1180 | **the same 2 FAIL** |
 | quickcheck button crawl | 1 fault «Ô lưu · Lui · close did not close its layer» (Fold) | **the same fault** |
 → Both quickcheck faults are PRE-EXISTING on LIVE (identical rows), not from this branch (it touches only j10/jagacts3 faction code + tests). Flag for MAIN as a separate kit/save-slot item.
+
+### Merged on new LIVE (12:40Z) — branch tip 53cc671e
+LIVE moved 3af7896e → 1dcb373e (coop-freeze-kmrew-rv2: jinv.js + jksize.js). Merged origin/main 1dcb373e; only built files conflicted (taken from LIVE, site rebuilt). FF from LIVE checked, pushed.
+| gate on 53cc671e | result |
+|---|---|
+| coop-e2e (co-op first) | 143 ok, 0 FAIL |
+| fac-roads-play | ALL PASS (10) |
+| fac-parity-play | ALL PASS (17) |
+| role-parity-drift2-play | ALL PASS (11) |
+| ag-par3 | ALL PASS (36) |
+| role-parity.test | ALL PASS |
+Waiting for reviewer session_01D3E3NYiNpuvC4JKoyQchxo (told to judge 53cc671e).
