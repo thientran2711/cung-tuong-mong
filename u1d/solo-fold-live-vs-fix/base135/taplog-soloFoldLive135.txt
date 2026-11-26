@@ -1,0 +1,1483 @@
+2026-11-26T08:17:04.627Z 15s buoi 0 tap #modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»
+2026-11-26T08:17:05.711Z 16s buoi 0 tap #modal «Chọn sổ» «Bắt đầu kiếp mới»
+2026-11-26T08:17:10.311Z 20s buoi 1 tap #kroul «Tiếp»
+2026-11-26T08:17:11.074Z 21s buoi 1 tap #kroul «Bỏ qua»
+2026-11-26T08:17:12.572Z 23s buoi 1 tap #modal «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcsang Đại Hy ngay·hòa ước »
+2026-11-26T08:17:13.467Z 24s buoi 1 tap #modal «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcsang Đại Hy ngay·hòa ước »
+2026-11-26T08:17:14.403Z 25s buoi 1 tap #modal «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»
+2026-11-26T08:17:15.295Z 25s buoi 1 tap .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»
+2026-11-26T08:17:16.323Z 26s buoi 1 tap .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»
+2026-11-26T08:17:17.230Z 27s buoi 1 tap .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»
+2026-11-26T08:17:18.465Z 29s buoi 1 tap .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»
+2026-11-26T08:17:21.554Z 32s buoi 1 tap .kmov «Vào điện»
+2026-11-26T08:17:22.531Z 33s buoi 1 tap .dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »
+2026-11-26T08:17:23.368Z 33s buoi 1 tap #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+2026-11-26T08:17:24.431Z 35s buoi 1 tap #kg82 «Gợi ý»
+2026-11-26T08:17:25.440Z 36s buoi 1 tap #kg82 «Gợi ý»
+2026-11-26T08:17:26.509Z 37s buoi 1 tap #kg82 «Gợi ý»
+2026-11-26T08:17:27.562Z 38s buoi 1 tap #kg82 «Gợi ý»
+2026-11-26T08:17:28.582Z 39s buoi 1 tap #kg82 «Quay lại»
+2026-11-26T08:17:29.713Z 40s buoi 1 tap #kg82 «Quay lại»
+2026-11-26T08:17:31.090Z 41s buoi 1 tap .dlg «Nhập cung» «Tiếp theo»
+2026-11-26T08:17:32.404Z 43s buoi 1 tap #kprevov «Tạ ơn»
+2026-11-26T08:17:33.397Z 44s buoi 1 tap .dlg «Mệnh truyện kiếp này» «Lui»
+2026-11-26T08:17:34.414Z 45s buoi 1 tap .dlg «Nội vụ phủ điều người» «Lui»
+2026-11-26T08:17:35.421Z 46s buoi 1 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Cung nữ thân tín tam đẳngLiễu Nhi»
+2026-11-26T08:17:36.207Z 46s buoi 1 tap .kfoc «Lui»
+2026-11-26T08:17:37.232Z 47s buoi 1 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Tư trang»
+2026-11-26T08:17:38.373Z 48s buoi 1 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»
+2026-11-26T08:17:39.324Z 49s buoi 2 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lật thẻThấp»
+2026-11-26T08:17:40.372Z 50s buoi 2 tap .dlg «Lật thẻ: Thấp» «Lui»
+2026-11-26T08:17:41.303Z 51s buoi 2 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sắc57Tài77Tâm cơ27Đức30Danh25Sủng0»
+2026-11-26T08:17:42.533Z 53s buoi 2 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:17:51.650Z 62s buoi 3 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hậu cung»
+2026-11-26T08:17:53.052Z 63s buoi 3 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xem thêm»
+2026-11-26T08:17:54.793Z 65s buoi 3 tap .dlg «Hoàng thượng» «Lui»
+2026-11-26T08:17:56.629Z 67s buoi 3 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:17:57.606Z 68s buoi 4 tap .dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»
+2026-11-26T08:18:04.738Z 75s buoi 4 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản0»
+2026-11-26T08:18:05.568Z 76s buoi 4 tap .dlg «Danh» «Lui»
+2026-11-26T08:18:06.604Z 77s buoi 4 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»
+2026-11-26T08:18:07.768Z 78s buoi 4 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:18:08.566Z 79s buoi 4 tap .kmov «Ta biết rồi»
+2026-11-26T08:18:10.250Z 80s buoi 4 tap .dlg «Kính sự phòng» «Tranh sủngTùy duyênTốnkhôngĐượcdựa vào ân sủng; tà»
+2026-11-26T08:18:11.041Z 81s buoi 4 tap #kg82 «Trước khi ra tay»
+2026-11-26T08:18:20.565Z 91s buoi 4 noFreePoint #kg82 «Trước khi ra tay»
+2026-11-26T08:18:20.647Z 91s buoi 4 DEAD BUTTON #kg82 «Trước khi ra tay» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:18:21.091Z 91s buoi 4 tap #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+2026-11-26T08:18:21.963Z 92s buoi 4 tap #kg82 «Quay lại»
+2026-11-26T08:18:23.298Z 93s buoi 4 tap #kg82 «Quay lại»
+2026-11-26T08:18:24.320Z 94s buoi 4 tap .dlg «Có người đến» «Khéo cáo luiRất vữngTốnkhôngĐượckhông thêm lời, gi»
+2026-11-26T08:18:28.451Z 99s buoi 5 tap #dawn «Tiếp theo»
+2026-11-26T08:18:29.251Z 99s buoi 5 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:18:30.101Z 100s buoi 5 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:18:30.885Z 101s buoi 5 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:18:31.685Z 102s buoi 5 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:18:32.449Z 103s buoi 5 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:18:33.239Z 103s buoi 5 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:18:34.034Z 104s buoi 5 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:18:34.818Z 105s buoi 5 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:18:35.600Z 106s buoi 5 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:18:36.402Z 107s buoi 5 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:18:37.188Z 107s buoi 5 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:18:37.967Z 108s buoi 5 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:18:38.747Z 109s buoi 5 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:18:39.752Z 110s buoi 5 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:18:49.116Z 119s buoi 5 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»
+2026-11-26T08:18:50.090Z 120s buoi 5 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+2026-11-26T08:18:59.771Z 130s buoi 5 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:19:00.586Z 131s buoi 6 tap .dlg «Hội phối đồ: báo đề» «Xem thêm»
+2026-11-26T08:19:04.082Z 134s buoi 6 tap .dlg «Hội phối đồ: báo đề» «Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm đồ ở Nội »
+2026-11-26T08:19:04.925Z 135s buoi 6 tap .dlg «Phụ tuyến · Dạy lễ cho các phi tần mới · Lời nhờ (» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+2026-11-26T08:19:14.986Z 145s buoi 6 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo: 12 tin mới»
+2026-11-26T08:19:16.010Z 146s buoi 6 tap .dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»
+2026-11-26T08:19:23.246Z 153s buoi 6 tap .mapsc «Trường Môn viện1 bóng · 2 khắc»
+2026-11-26T08:19:24.855Z 155s buoi 6 tap .dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »
+2026-11-26T08:19:25.987Z 156s buoi 6 tap .dlg «Kỳ ngộ» «Ngồi nói chuyện với bàRất vữngTốnSức -4·2 khắcĐược»
+2026-11-26T08:19:26.916Z 157s buoi 6 tap .dlg «Kỳ ngộ» «Lui»
+2026-11-26T08:19:27.872Z 158s buoi 6 tap .dlg «Xong việc: Đi một nơi trong cung» «Lui»
+2026-11-26T08:19:31.716Z 162s buoi 7 tap .dlg «Hoàng thượng ban thưởng» «Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ý»
+2026-11-26T08:19:39.129Z 169s buoi 7 tap page «Trường Môn viện · Sang buổi chiều · ta vẫn ở Trườn» «Sắc57Tài77Tâm cơ27Đức32Danh23Sủng0»
+2026-11-26T08:19:39.896Z 170s buoi 7 tap page «Trường Môn viện · Sang buổi chiều · ta vẫn ở Trườn» «Sắc57Tài77Tâm cơ27Đức32Danh23Sủng0»
+2026-11-26T08:19:41.224Z 171s buoi 7 tap page «Trường Môn viện · Sang buổi chiều · ta vẫn ở Trườn» «Sang buổi»
+2026-11-26T08:19:42.056Z 172s buoi 8 tap page «Trường Môn viện · Sang buổi tối · ta vẫn ở Trường » «Dư đồ»
+2026-11-26T08:19:43.068Z 173s buoi 8 tap .mapsc «Sang ngày mới»
+2026-11-26T08:19:43.892Z 174s buoi 8 tap .kmov «Chuẩn bị thị tẩm»
+2026-11-26T08:19:45.300Z 175s buoi 8 tap .dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngCó cơTốnkhôngĐượcdựa vào â»
+2026-11-26T08:19:46.711Z 177s buoi 8 tap .kmov «Chuẩn bị thị tẩm»
+2026-11-26T08:19:47.916Z 178s buoi 8 tap .dlg «Việc khó xử» «Góp bạc, giấu cả thẻ nàng taRất vữngTốnBạc -30Được»
+2026-11-26T08:19:48.822Z 179s buoi 8 tap .dlg «Kính sự phòng báo tin» «Cáo bệnhRất vữngTốnkhôngĐượcdưỡng sức, nghỉ trọn m»
+2026-11-26T08:19:53.269Z 183s buoi 9 tap #dawn «Tiếp theo»
+2026-11-26T08:19:54.029Z 184s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:19:54.946Z 185s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:19:55.718Z 186s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:19:56.496Z 187s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:19:57.278Z 187s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:19:58.064Z 188s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:19:58.828Z 189s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:19:59.596Z 190s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:00.361Z 190s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:01.128Z 191s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:01.897Z 192s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:02.661Z 193s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:03.430Z 194s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:04.196Z 194s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:04.964Z 195s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:05.729Z 196s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:06.496Z 197s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:07.245Z 197s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:08.013Z 198s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:08.780Z 199s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:09.563Z 200s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:10.330Z 200s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:11.101Z 201s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:11.879Z 202s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:12.648Z 203s buoi 9 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:20:13.411Z 204s buoi 9 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:20:14.192Z 204s buoi 9 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:20:15.517Z 206s buoi 9 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:20:25.485Z 216s buoi 9 tap .mapsc «Sang buổi»
+2026-11-26T08:20:27.815Z 218s buoi 10 tap .dlg «Có người đến» «Lui»
+2026-11-26T08:20:28.804Z 219s buoi 10 tap .mapsc «Cung nhân · chạm để mở danh sách»
+2026-11-26T08:20:29.706Z 220s buoi 10 tap .mapsc «Dư đồ»
+2026-11-26T08:20:31.085Z 221s buoi 10 tap .mapsc «Sang buổi»
+2026-11-26T08:20:32.435Z 223s buoi 11 tap .dlg «Chuyện trong cung» «Đưa bạc cho xongRất vữngTốnBạc -8Đượcdưỡng sức, đư»
+2026-11-26T08:20:39.628Z 230s buoi 11 tap .mapsc «Tin báo: 10 tin mới»
+2026-11-26T08:20:40.595Z 231s buoi 11 tap .dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»
+2026-11-26T08:20:48.163Z 238s buoi 11 tap .mapsc «Hậu cung»
+2026-11-26T08:20:49.594Z 240s buoi 11 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:20:50.396Z 241s buoi 12 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»
+2026-11-26T08:20:51.158Z 241s buoi 12 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sắc57Tài77Tâm cơ27Đức32Danh23Sủng0»
+2026-11-26T08:20:52.328Z 242s buoi 12 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:20:53.494Z 244s buoi 12 tap .dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»
+2026-11-26T08:20:54.321Z 244s buoi 12 tap .kmov «Chuẩn bị thị tẩm»
+2026-11-26T08:20:55.374Z 245s buoi 12 tap .dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngCó cơTốnkhôngĐượcdựa vào â»
+2026-11-26T08:20:56.167Z 246s buoi 12 tap .dlg «Kính sự phòng» «Lui»
+2026-11-26T08:20:58.883Z 249s buoi 13 tap #kmrew «Thường»
+2026-11-26T08:20:59.745Z 250s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:00.663Z 251s buoi 13 tap #kmrew «Thường»
+2026-11-26T08:21:01.447Z 252s buoi 13 tap .dlg «Ghi chú»
+2026-11-26T08:21:03.078Z 253s buoi 13 tap #kmrew «Thường»
+2026-11-26T08:21:03.903Z 254s buoi 13 tap .dlg «Ghi chú»
+2026-11-26T08:21:05.567Z 256s buoi 13 tap #kmrew «Thường»
+2026-11-26T08:21:06.338Z 256s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:07.210Z 257s buoi 13 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:21:15.826Z 266s buoi 13 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:21:15.947Z 266s buoi 13 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:21:16.407Z 267s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:17.358Z 267s buoi 13 tap #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+2026-11-26T08:21:18.158Z 268s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:19.050Z 269s buoi 13 tap #kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»
+2026-11-26T08:21:19.820Z 270s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:20.704Z 271s buoi 13 tap #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+2026-11-26T08:21:21.461Z 272s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:22.343Z 272s buoi 13 tap #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+2026-11-26T08:21:23.159Z 273s buoi 13 tap .dlg «Ghi chú»
+2026-11-26T08:21:24.797Z 275s buoi 13 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:21:33.281Z 283s buoi 13 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:21:33.431Z 284s buoi 13 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:21:41.539Z 292s buoi 13 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:21:41.654Z 292s buoi 13 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:21:42.087Z 292s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:42.960Z 293s buoi 13 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:21:43.736Z 294s buoi 13 tap .dlg «Lui»
+2026-11-26T08:21:44.605Z 295s buoi 13 tap #kmrew «Nhận»
+2026-11-26T08:21:45.376Z 295s buoi 13 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:21:46.143Z 296s buoi 13 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:21:46.919Z 297s buoi 13 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:21:47.698Z 298s buoi 13 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:21:48.481Z 299s buoi 13 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:21:49.264Z 299s buoi 13 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:21:50.044Z 300s buoi 13 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:21:50.819Z 301s buoi 13 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:21:52.019Z 302s buoi 13 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:21:52.810Z 303s buoi 13 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:21:53.720Z 304s buoi 13 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:22:03.447Z 314s buoi 13 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xét phẩm: thiếu 3»
+2026-11-26T08:22:04.248Z 314s buoi 13 tap .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+2026-11-26T08:22:05.168Z 315s buoi 13 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Quẻ Hạ (Sủng)»
+2026-11-26T08:22:06.008Z 316s buoi 13 tap .dlg «Quẻ Hạ · Sủng» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»
+2026-11-26T08:22:06.819Z 317s buoi 13 tap .dlg «Gieo lại quẻ» «Lui»
+2026-11-26T08:22:08.072Z 318s buoi 13 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:22:09.092Z 319s buoi 14 tap .dlg «Bổng lộc tháng ba» «Bớt lễ nghĩaRất vữngTốnkhôngĐượccó thêm bạcMấtmất »
+2026-11-26T08:22:09.968Z 320s buoi 14 tap .dlg «Lời cảnh báo» «Ghi nhớ, cứ như thườngTốnkhôngĐượcSức +3Kèmkẻ muốn»
+2026-11-26T08:22:17.393Z 328s buoi 14 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «3Chí tôn»
+2026-11-26T08:22:18.208Z 328s buoi 14 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Giao tình»
+2026-11-26T08:22:19.232Z 329s buoi 14 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:22:20.108Z 330s buoi 15 tap .dlg «Danh hiệu mới» «Để sauTốnkhôngĐượckhông»
+2026-11-26T08:22:20.927Z 331s buoi 15 tap .dlg «Thỉnh bình an mạch» «Lui»
+2026-11-26T08:22:30.469Z 341s buoi 15 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:22:31.424Z 342s buoi 16 tap .dlg «Một ánh mắt» «Giữ bài thơ, đáp lạiRất vữngTốnkhôngĐượcngười ấy t»
+2026-11-26T08:22:32.269Z 342s buoi 16 tap .dlg «Bị châm chọc» «Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ý»
+2026-11-26T08:22:39.684Z 350s buoi 16 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bạc182Sức99/99»
+2026-11-26T08:22:40.489Z 351s buoi 16 tap .dlg «Bạc» «Lui»
+2026-11-26T08:22:41.423Z 352s buoi 16 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mệnh truyện»
+2026-11-26T08:22:42.403Z 353s buoi 16 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:22:43.158Z 353s buoi 16 tap .kmov «Ta biết rồi»
+2026-11-26T08:22:46.922Z 357s buoi 17 tap #dawn «Tiếp theo»
+2026-11-26T08:22:47.716Z 358s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:48.558Z 359s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:22:49.321Z 359s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:50.107Z 360s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:22:50.874Z 361s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:51.661Z 362s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:52.456Z 363s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:53.223Z 363s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:53.990Z 364s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:54.757Z 365s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:22:55.622Z 366s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:22:56.392Z 367s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:22:57.176Z 367s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:57.940Z 368s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:58.705Z 369s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:22:59.476Z 370s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:23:00.255Z 370s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:23:01.053Z 371s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:23:01.828Z 372s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:23:02.604Z 373s buoi 17 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:23:03.356Z 373s buoi 17 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:23:04.128Z 374s buoi 17 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:23:05.276Z 375s buoi 17 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:23:06.288Z 376s buoi 17 tap .dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2» «Chỉ lặng lẽ mài mực hầu ngàiRất vữngTốnkhôngĐượcbệ»
+2026-11-26T08:23:07.156Z 377s buoi 17 tap .dlg «Đèn nến trong cung» «Cất đồ quý sang chỗ khácRất vữngTốn1 khắcĐượcđồ qu»
+2026-11-26T08:23:16.620Z 387s buoi 17 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Chọn chính mình»
+2026-11-26T08:23:17.543Z 388s buoi 17 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:23:18.532Z 389s buoi 18 tap .dlg «Hội phối đồ · Phú quý» «Cáo bệnh, không dựRất vữngTốnkhôngĐượcdưỡng sứcMất»
+2026-11-26T08:23:26.010Z 396s buoi 18 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mệnh truyện»
+2026-11-26T08:23:26.851Z 397s buoi 18 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bạc182Sức99/99»
+2026-11-26T08:23:27.662Z 398s buoi 18 tap .dlg «Bạc» «Lui»
+2026-11-26T08:23:28.690Z 399s buoi 18 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:23:30.067Z 400s buoi 19 tap .dlg «Lễ Phật đản» «Lễ Phật rồi vềRất vữngTốnkhôngĐượckhôngGợi ýkhông »
+2026-11-26T08:23:30.889Z 401s buoi 19 tap .dlg «Lễ Phật đản» «Ngồi tụng kinh cùng Quý nhân Vu Thanh DiênTốnSức -»
+2026-11-26T08:23:38.317Z 408s buoi 19 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Quẻ Trung (Sức khỏe)»
+2026-11-26T08:23:39.216Z 409s buoi 19 tap .dlg «Quẻ Trung · Sức khỏe» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»
+2026-11-26T08:23:40.068Z 410s buoi 19 tap .dlg «Gieo lại quẻ» «Lui»
+2026-11-26T08:23:40.990Z 411s buoi 19 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Lịch tháng»
+2026-11-26T08:23:41.802Z 412s buoi 19 tap .dlg «Lịch tháng» «ngày 15»
+2026-11-26T08:23:42.571Z 413s buoi 19 tap .dlg «Lịch tháng» «Ghi vào sổ»
+2026-11-26T08:23:43.348Z 413s buoi 19 tap .dlg «Lịch tháng» «ngày 28»
+2026-11-26T08:23:44.133Z 414s buoi 19 tap .dlg «Lịch tháng» «ngày 30»
+2026-11-26T08:23:44.910Z 415s buoi 19 tap .dlg «Lịch tháng» «ngày 25: Nguyệt tín»
+2026-11-26T08:23:45.679Z 416s buoi 19 tap .dlg «Lịch tháng» «ngày 16»
+2026-11-26T08:23:46.459Z 417s buoi 19 tap .dlg «Lịch tháng» «ngày 22: Nguyệt tín»
+2026-11-26T08:23:47.226Z 417s buoi 19 tap .dlg «Lịch tháng» «ngày 13»
+2026-11-26T08:23:47.990Z 418s buoi 19 tap .dlg «Lịch tháng» «Luyện đàn»
+2026-11-26T08:23:48.764Z 419s buoi 19 tap .dlg «Lịch tháng» «ngày 29»
+2026-11-26T08:23:49.519Z 420s buoi 19 tap .dlg «Lịch tháng» «Dâng quà Thái hậu»
+2026-11-26T08:23:50.302Z 420s buoi 19 tap .dlg «Lịch tháng» «ngày 30»
+2026-11-26T08:23:51.080Z 421s buoi 19 tap .dlg «Lịch tháng» «ngày 25: Nguyệt tín»
+2026-11-26T08:23:51.863Z 422s buoi 19 tap .dlg «Lịch tháng» «ngày 12»
+2026-11-26T08:23:52.642Z 423s buoi 19 tap .dlg «Lịch tháng» «ngày 25: Nguyệt tín»
+2026-11-26T08:23:53.428Z 424s buoi 19 tap .dlg «Lịch tháng» «mồng 4»
+2026-11-26T08:23:54.214Z 424s buoi 19 tap .dlg «Lịch tháng» «ngày 18»
+2026-11-26T08:23:54.989Z 425s buoi 19 tap .dlg «Lịch tháng» «Lễ Phật»
+2026-11-26T08:23:55.836Z 426s buoi 19 tap .dlg «Lịch tháng» «ngày 23: Nguyệt tín»
+2026-11-26T08:23:56.610Z 427s buoi 19 tap .dlg «Lịch tháng» «ngày 22: Nguyệt tín»
+2026-11-26T08:23:57.384Z 428s buoi 19 tap .dlg «Lịch tháng» «Ghi vào sổ»
+2026-11-26T08:23:58.166Z 428s buoi 19 tap .dlg «Lịch tháng» «mồng 4»
+2026-11-26T08:23:58.948Z 429s buoi 19 tap .dlg «Lịch tháng» «ngày 28»
+2026-11-26T08:23:59.734Z 430s buoi 19 tap .dlg «Lịch tháng» «ngày 13»
+2026-11-26T08:24:00.513Z 431s buoi 19 tap .dlg «Lịch tháng» «ngày 24: Nguyệt tín»
+2026-11-26T08:24:01.296Z 431s buoi 19 tap .dlg «Lịch tháng» «ngày 13»
+2026-11-26T08:24:02.078Z 432s buoi 19 tap .dlg «Lịch tháng» «ngày 23: Nguyệt tín»
+2026-11-26T08:24:02.862Z 433s buoi 19 tap .dlg «Lịch tháng» «ngày 11»
+2026-11-26T08:24:03.639Z 434s buoi 19 tap .dlg «Lịch tháng» «Dâng quà Thái hậu»
+2026-11-26T08:24:04.441Z 435s buoi 19 tap .dlg «Lịch tháng» «ngày 21: Nguyệt tín»
+2026-11-26T08:24:05.224Z 435s buoi 19 tap .dlg «Lịch tháng» «Đến thăm Hoàng hậu»
+2026-11-26T08:24:05.998Z 436s buoi 19 tap .dlg «Lịch tháng» «ngày 25: Nguyệt tín»
+2026-11-26T08:24:06.770Z 437s buoi 19 tap .dlg «Lịch tháng» «Đến thăm Hoàng hậu»
+2026-11-26T08:24:07.546Z 438s buoi 19 tap .dlg «Lịch tháng» «ngày 14»
+2026-11-26T08:24:08.332Z 438s buoi 19 tap .dlg «Lịch tháng» «ngày 26: Nguyệt tín»
+2026-11-26T08:24:09.114Z 439s buoi 19 tap .dlg «Lịch tháng» «ngày 17»
+2026-11-26T08:24:09.890Z 440s buoi 19 tap .dlg «Lịch tháng» «ngày 30»
+2026-11-26T08:24:10.665Z 441s buoi 19 tap .dlg «Lịch tháng» «mồng 5»
+2026-11-26T08:24:11.451Z 442s buoi 19 tap .dlg «Lịch tháng» «ngày 20»
+2026-11-26T08:24:12.233Z 442s buoi 19 tap .dlg «Lịch tháng» «ngày 25: Nguyệt tín»
+2026-11-26T08:24:13.012Z 443s buoi 19 tap .dlg «Lịch tháng» «mồng 4»
+2026-11-26T08:24:13.774Z 444s buoi 19 tap .dlg «Lịch tháng» «ngày 29»
+2026-11-26T08:24:14.558Z 445s buoi 19 tap .dlg «Lịch tháng» «ngày 27»
+2026-11-26T08:24:15.354Z 445s buoi 19 tap .dlg «Lịch tháng» «mồng 5»
+2026-11-26T08:24:16.135Z 446s buoi 19 tap .dlg «Lịch tháng» «mồng 6»
+2026-11-26T08:24:16.920Z 447s buoi 19 tap .dlg «Lịch tháng» «ngày 28»
+2026-11-26T08:24:17.713Z 448s buoi 19 tap .dlg «Lịch tháng» «mồng 9»
+2026-11-26T08:24:18.491Z 449s buoi 19 tap .dlg «Lịch tháng» «ngày 26: Nguyệt tín»
+2026-11-26T08:24:19.282Z 449s buoi 19 tap .dlg «Lịch tháng» «ngày 18»
+2026-11-26T08:24:20.066Z 450s buoi 19 tap .dlg «Lịch tháng» «ngày 30»
+2026-11-26T08:24:20.852Z 451s buoi 19 tap .dlg «Lịch tháng» «mồng 6»
+2026-11-26T08:24:21.641Z 452s buoi 19 tap .dlg «Lịch tháng» «ngày 14»
+2026-11-26T08:24:22.408Z 453s buoi 19 tap .dlg «Lịch tháng» «Lễ Phật»
+2026-11-26T08:24:23.192Z 453s buoi 19 tap .dlg «Lịch tháng» «Luyện đàn»
+2026-11-26T08:24:23.956Z 454s buoi 19 tap .dlg «Lịch tháng» «Luyện đàn»
+2026-11-26T08:24:24.731Z 455s buoi 19 tap .dlg «Lịch tháng» «ngày 24: Nguyệt tín»
+2026-11-26T08:24:25.515Z 456s buoi 19 tap .dlg «Lịch tháng» «ngày 27»
+2026-11-26T08:24:26.299Z 456s buoi 19 tap .dlg «Lịch tháng» «mồng 5»
+2026-11-26T08:24:27.076Z 457s buoi 19 tap .dlg «Lịch tháng» «mồng 8»
+2026-11-26T08:24:27.846Z 458s buoi 19 tap .dlg «Lịch tháng» «ngày 18»
+2026-11-26T08:24:28.631Z 459s buoi 19 tap .dlg «Lịch tháng» «ngày 26: Nguyệt tín»
+2026-11-26T08:24:29.416Z 460s buoi 19 tap .dlg «Lịch tháng» «mồng 9»
+2026-11-26T08:24:30.196Z 460s buoi 19 tap .dlg «Lịch tháng» «mồng 8»
+2026-11-26T08:24:30.980Z 461s buoi 19 tap .dlg «Lịch tháng» «ngày 22: Nguyệt tín»
+2026-11-26T08:24:31.766Z 462s buoi 19 tap .dlg «Lịch tháng» «ngày 25: Nguyệt tín»
+2026-11-26T08:24:32.544Z 463s buoi 19 tap .dlg «Lịch tháng» «mồng 9»
+2026-11-26T08:24:33.315Z 463s buoi 19 tap .dlg «Lịch tháng» «mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ»
+2026-11-26T08:24:34.091Z 464s buoi 19 tap .dlg «Lịch tháng» «mồng 2»
+2026-11-26T08:24:34.865Z 465s buoi 19 tap .dlg «Lịch tháng» «ngày 14»
+2026-11-26T08:24:35.643Z 466s buoi 19 tap .dlg «Lịch tháng» «ngày 26: Nguyệt tín»
+2026-11-26T08:24:36.426Z 467s buoi 19 tap .dlg «Lịch tháng» «mồng 7»
+2026-11-26T08:24:37.210Z 467s buoi 19 tap .dlg «Lịch tháng» «ngày 12»
+2026-11-26T08:24:37.977Z 468s buoi 19 tap .dlg «Lịch tháng» «ngày 22: Nguyệt tín»
+2026-11-26T08:24:38.764Z 469s buoi 19 tap .dlg «Lịch tháng» «mồng 7»
+2026-11-26T08:24:39.528Z 470s buoi 19 tap .dlg «Lịch tháng» «ngày 14»
+2026-11-26T08:24:40.317Z 470s buoi 19 tap .dlg «Lịch tháng» «ngày 30»
+2026-11-26T08:24:41.111Z 471s buoi 19 tap .dlg «Lịch tháng» «mồng 10»
+2026-11-26T08:24:41.880Z 472s buoi 19 tap .dlg «Lịch tháng» «ngày 15»
+2026-11-26T08:24:42.664Z 473s buoi 19 tap .dlg «Lịch tháng» «ngày 25: Nguyệt tín»
+2026-11-26T08:24:43.444Z 474s buoi 19 tap .dlg «Lịch tháng» «ngày 24: Nguyệt tín»
+2026-11-26T08:24:44.217Z 474s buoi 19 tap .dlg «Lịch tháng» «Ghi vào sổ»
+2026-11-26T08:24:44.995Z 475s buoi 19 tap .dlg «Lịch tháng» «ngày 13»
+2026-11-26T08:24:45.782Z 476s buoi 19 tap .dlg «Lịch tháng» «ngày 29»
+2026-11-26T08:24:46.564Z 477s buoi 19 tap .dlg «Lịch tháng» «mồng 5»
+2026-11-26T08:24:47.344Z 477s buoi 19 tap .dlg «Lịch tháng» «mồng 10»
+2026-11-26T08:24:48.129Z 478s buoi 19 tap .dlg «Lịch tháng» «ngày 23: Nguyệt tín»
+2026-11-26T08:24:48.910Z 479s buoi 19 tap .dlg «Lịch tháng» «ngày 12»
+2026-11-26T08:24:49.693Z 480s buoi 19 tap .dlg «Lịch tháng» «ngày 28»
+2026-11-26T08:24:50.463Z 481s buoi 19 tap .dlg «Lịch tháng» «ngày 16»
+2026-11-26T08:24:51.220Z 481s buoi 19 tap .dlg «Lịch tháng» «Dâng quà Thái hậu»
+2026-11-26T08:24:51.989Z 482s buoi 19 tap .dlg «Lịch tháng» «Lễ Phật»
+2026-11-26T08:24:52.757Z 483s buoi 19 tap .dlg «Lịch tháng» «ngày 23: Nguyệt tín»
+2026-11-26T08:24:53.530Z 484s buoi 19 tap .dlg «Lịch tháng» «mồng 8»
+2026-11-26T08:24:54.310Z 484s buoi 19 tap .dlg «Lịch tháng» «ngày 16»
+2026-11-26T08:24:55.084Z 485s buoi 19 tap .dlg «Lịch tháng» «Dâng quà Thái hậu»
+2026-11-26T08:24:55.933Z 486s buoi 19 tap .dlg «Lịch tháng» «ngày 29»
+2026-11-26T08:24:56.710Z 487s buoi 19 tap .dlg «Lịch tháng» «mồng 3»
+2026-11-26T08:24:57.494Z 488s buoi 19 tap .dlg «Lịch tháng» «ngày 20»
+2026-11-26T08:24:58.279Z 488s buoi 19 tap .dlg «Lịch tháng» «ngày 22: Nguyệt tín»
+2026-11-26T08:24:59.059Z 489s buoi 19 tap .dlg «Lịch tháng» «ngày 23: Nguyệt tín»
+2026-11-26T08:24:59.827Z 490s buoi 19 tap .dlg «Lịch tháng» «mồng 9»
+2026-11-26T08:25:00.612Z 491s buoi 19 tap .dlg «Lịch tháng» «ngày 11»
+2026-11-26T08:25:01.390Z 492s buoi 19 tap .dlg «Lịch tháng» «ngày 26: Nguyệt tín»
+2026-11-26T08:25:02.167Z 492s buoi 19 tap .dlg «Lịch tháng» «Ghi vào sổ»
+2026-11-26T08:25:02.947Z 493s buoi 19 tap .dlg «Lịch tháng» «ngày 20»
+2026-11-26T08:25:03.720Z 494s buoi 19 tap .dlg «Lịch tháng» «Đến thăm Hoàng hậu»
+2026-11-26T08:25:04.514Z 495s buoi 19 tap .dlg «Lịch tháng» «Ghi vào sổ»
+2026-11-26T08:25:05.282Z 495s buoi 19 tap .dlg «Lịch tháng» «Đến thăm Hoàng hậu»
+2026-11-26T08:25:06.050Z 496s buoi 19 tap .dlg «Lịch tháng» «Luyện đàn»
+2026-11-26T08:25:06.817Z 497s buoi 19 tap .dlg «Lịch tháng» «Luyện đàn»
+2026-11-26T08:25:07.606Z 498s buoi 19 tap .dlg «Lịch tháng» «Bỏ hẹn»
+2026-11-26T08:25:08.369Z 498s buoi 19 tap .dlg «Lịch tháng» «Ghi vào sổ»
+2026-11-26T08:25:09.135Z 499s buoi 19 tap .dlg «Lịch tháng» «Đến thăm Hoàng hậu»
+2026-11-26T08:25:09.944Z 500s buoi 19 tap .dlg «Lịch tháng» «Ghi vào sổ»
+2026-11-26T08:25:10.736Z 501s buoi 19 tap .dlg «Lịch tháng» «Bỏ hẹn»
+2026-11-26T08:25:11.515Z 502s buoi 19 tap .dlg «Lịch tháng» «Lễ Phật»
+2026-11-26T08:25:12.281Z 502s buoi 19 tap .dlg «Lịch tháng» «Luyện đàn»
+2026-11-26T08:25:13.056Z 503s buoi 19 tap .dlg «Lịch tháng» «Dâng quà Thái hậu»
+2026-11-26T08:25:13.816Z 504s buoi 19 tap .dlg «Lịch tháng» «Đến thăm Hoàng hậu»
+2026-11-26T08:25:14.587Z 505s buoi 19 tap .dlg «Lịch tháng» «Đến thăm Hoàng hậu»
+2026-11-26T08:25:15.409Z 506s buoi 19 tap .dlg «Lịch tháng» «Lui»
+2026-11-26T08:25:16.697Z 507s buoi 19 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»
+2026-11-26T08:25:17.798Z 508s buoi 20 tap .dlg «Có người đến» «Nhún nhường tiếp đãiRất vữngTốnBạc -15Đượcđược tiế»
+2026-11-26T08:25:18.627Z 509s buoi 20 tap .dlg «Phụ tuyến · Báo tin buồn nhà cho người trong cung » «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+2026-11-26T08:25:26.058Z 516s buoi 20 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «1Cung nhân»
+2026-11-26T08:25:26.828Z 517s buoi 20 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»
+2026-11-26T08:25:27.699Z 518s buoi 20 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:25:28.511Z 519s buoi 20 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:25:29.367Z 519s buoi 20 tap .kmov «Ta biết rồi»
+2026-11-26T08:25:32.862Z 523s buoi 21 tap #dawn «Tiếp theo»
+2026-11-26T08:25:33.617Z 524s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:34.386Z 525s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:35.153Z 525s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:35.918Z 526s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:36.683Z 527s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:37.454Z 528s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:38.235Z 528s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:39.003Z 529s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:39.767Z 530s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:40.538Z 531s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:41.320Z 531s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:42.086Z 532s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:42.850Z 533s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:43.618Z 534s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:44.389Z 535s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:45.149Z 535s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:45.918Z 536s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:46.683Z 537s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:47.449Z 538s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:48.251Z 538s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:49.024Z 539s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:49.804Z 540s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:50.589Z 541s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:51.373Z 541s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:52.161Z 542s buoi 21 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:25:52.932Z 543s buoi 21 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:25:53.707Z 544s buoi 21 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:25:54.723Z 545s buoi 21 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:26:04.479Z 555s buoi 21 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Quẻ Thượng thượng (Giao thiệp)»
+2026-11-26T08:26:05.392Z 556s buoi 21 tap .dlg «Quẻ Thượng thượng · Giao thiệp» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»
+2026-11-26T08:26:06.343Z 556s buoi 21 tap .dlg «Có người tìm đến» «Tiếp chuyệnTốn1 khắcĐượccùng Quý nhân Vu Thanh Diê»
+2026-11-26T08:26:07.184Z 557s buoi 21 tap .dlg «Gieo lại quẻ» «Lui»
+2026-11-26T08:26:14.432Z 565s buoi 21 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Giao tình»
+2026-11-26T08:26:15.469Z 566s buoi 21 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Sang buổi»
+2026-11-26T08:26:16.269Z 566s buoi 22 tap .dlg «Lễ Phật đản» «Lui»
+2026-11-26T08:26:23.778Z 574s buoi 22 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:26:24.824Z 575s buoi 23 tap .dlg «Chuyện trong cung» «Cho nàng ta về nghỉ, ta tự canh đènRất vữngTốnSức »
+2026-11-26T08:26:32.299Z 582s buoi 23 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»
+2026-11-26T08:26:33.437Z 584s buoi 23 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:26:34.266Z 584s buoi 24 tap .dlg «Việc khó xử» «Đứng ra can ngănRất vữngTốnkhôngĐượcđược tiếng hiề»
+2026-11-26T08:26:41.670Z 592s buoi 24 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Có thaiRất thấp»
+2026-11-26T08:26:42.497Z 593s buoi 24 tap .dlg «Có thai: Rất thấp» «Lui»
+2026-11-26T08:26:43.367Z 593s buoi 24 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «đêm oi nồng»
+2026-11-26T08:26:45.310Z 595s buoi 24 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:26:46.256Z 596s buoi 24 tap .dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»
+2026-11-26T08:26:47.052Z 597s buoi 24 tap .kmov «Ta biết rồi»
+2026-11-26T08:26:50.857Z 601s buoi 25 tap #dawn «Tiếp theo»
+2026-11-26T08:26:52.461Z 603s buoi 25 tap #kmrew «Thường»
+2026-11-26T08:26:53.262Z 603s buoi 25 tap .dlg «Ghi chú»
+2026-11-26T08:26:54.875Z 605s buoi 25 tap #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+2026-11-26T08:26:55.644Z 606s buoi 25 tap .dlg «Lui»
+2026-11-26T08:26:56.646Z 607s buoi 25 tap #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+2026-11-26T08:26:57.418Z 608s buoi 25 tap .dlg «Lui»
+2026-11-26T08:26:58.307Z 608s buoi 25 tap #kmrew «Thường»
+2026-11-26T08:26:59.080Z 609s buoi 25 tap .dlg «Ghi chú»
+2026-11-26T08:27:00.719Z 611s buoi 25 tap #kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »
+2026-11-26T08:27:09.172Z 619s buoi 25 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:27:09.321Z 619s buoi 25 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:27:09.825Z 620s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:10.791Z 621s buoi 25 tap #kmrew «Thường»
+2026-11-26T08:27:11.563Z 622s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:12.450Z 623s buoi 25 tap #kmrew «Thường»
+2026-11-26T08:27:13.274Z 623s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:14.146Z 624s buoi 25 tap #kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »
+2026-11-26T08:27:14.908Z 625s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:15.796Z 626s buoi 25 tap #kmrew «ThườngPhấn gạoHộp phấn mắt dùng khi điểm trang: dù»
+2026-11-26T08:27:24.381Z 634s buoi 25 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:27:24.482Z 635s buoi 25 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:27:32.702Z 643s buoi 25 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:27:32.810Z 643s buoi 25 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:27:33.251Z 643s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:34.132Z 644s buoi 25 tap #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+2026-11-26T08:27:34.904Z 645s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:35.790Z 646s buoi 25 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:27:36.558Z 647s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:37.430Z 648s buoi 25 tap #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+2026-11-26T08:27:38.277Z 648s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:39.177Z 649s buoi 25 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:27:39.953Z 650s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:40.823Z 651s buoi 25 tap #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+2026-11-26T08:27:41.581Z 652s buoi 25 tap .dlg «Lui»
+2026-11-26T08:27:42.459Z 653s buoi 25 tap #kmrew «Nhận»
+2026-11-26T08:27:43.212Z 653s buoi 25 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:27:43.995Z 654s buoi 25 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:27:44.759Z 655s buoi 25 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:27:45.530Z 656s buoi 25 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:27:46.303Z 656s buoi 25 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:27:47.078Z 657s buoi 25 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:27:47.849Z 658s buoi 25 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:27:48.629Z 659s buoi 25 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:27:49.406Z 660s buoi 25 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:27:50.320Z 660s buoi 25 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:28:00.022Z 670s buoi 25 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Tai mắt0»
+2026-11-26T08:28:00.839Z 671s buoi 25 tap .dlg «Tai mắt» «Lui»
+2026-11-26T08:28:01.766Z 672s buoi 25 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Số lần ân thưởng0»
+2026-11-26T08:28:02.575Z 673s buoi 25 tap .dlg «Ân thưởng» «Lui»
+2026-11-26T08:28:03.668Z 674s buoi 25 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:28:04.717Z 675s buoi 26 tap .dlg «Thái hậu ban thưởng» «Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ý»
+2026-11-26T08:28:05.558Z 676s buoi 26 tap .dlg «Bổng lộc tháng tư» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»
+2026-11-26T08:28:15.169Z 685s buoi 26 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»
+2026-11-26T08:28:16.447Z 687s buoi 26 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+2026-11-26T08:28:26.098Z 696s buoi 26 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:28:27.276Z 697s buoi 27 tap .dlg «Y phục dự Tết Đoan ngọ» «Cứ thế vào dựRất vữngTốnkhôngĐượcvào dự lễ như đan»
+2026-11-26T08:28:28.600Z 699s buoi 27 tap .dlg «Tết Đoan ngọ · Chuyện bên lề hội» «Lùi một bước nhường lốiTốnDanh -6ĐượcĐức +3·Sức +8»
+2026-11-26T08:28:29.857Z 700s buoi 27 tap .dlg «Sứ đoàn vào triều» «Xin thử một tiếng đàn lạTốnSức -5ĐượcDanh +2»
+2026-11-26T08:28:37.269Z 707s buoi 27 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:28:38.438Z 709s buoi 28 tap .dlg «Thỉnh bình an mạch» «Lui»
+2026-11-26T08:28:39.451Z 710s buoi 28 tap .dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 2/2» «Cúi đầu vâng dạRất vữngTốnkhôngĐượcThái hậu hài lò»
+2026-11-26T08:28:46.497Z 717s buoi 28 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hôm nay mặt mộc»
+2026-11-26T08:28:48.138Z 718s buoi 28 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lịch tháng»
+2026-11-26T08:28:48.927Z 719s buoi 28 tap .dlg «Lịch tháng» «mồng 7»
+2026-11-26T08:28:49.705Z 720s buoi 28 tap .dlg «Lịch tháng» «ngày 23: Nguyệt tín»
+2026-11-26T08:28:50.475Z 721s buoi 28 tap .dlg «Lịch tháng» «Dâng quà Thái hậu»
+2026-11-26T08:28:51.259Z 721s buoi 28 tap .dlg «Lịch tháng» «ngày 23: Nguyệt tín»
+2026-11-26T08:28:52.037Z 722s buoi 28 tap .dlg «Lịch tháng» «ngày 27»
+2026-11-26T08:28:52.831Z 723s buoi 28 tap .dlg «Lịch tháng» «mồng 5: Tết Đoan ngọ»
+2026-11-26T08:28:54.711Z 725s buoi 28 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:28:55.510Z 726s buoi 28 tap .kmov «Ta biết rồi»
+2026-11-26T08:29:00.084Z 730s buoi 29 tap #dawn «Tiếp theo»
+2026-11-26T08:29:00.861Z 731s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:01.646Z 732s buoi 29 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:29:02.426Z 733s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:03.223Z 733s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:04.001Z 734s buoi 29 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:29:04.775Z 735s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:05.547Z 736s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:06.324Z 736s buoi 29 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:29:07.111Z 737s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:07.875Z 738s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:08.645Z 739s buoi 29 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:29:09.408Z 740s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:10.190Z 740s buoi 29 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:29:10.958Z 741s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:11.725Z 742s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:12.492Z 743s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:13.260Z 743s buoi 29 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:29:14.030Z 744s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:14.796Z 745s buoi 29 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:29:15.567Z 746s buoi 29 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:29:16.337Z 746s buoi 29 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:29:17.471Z 748s buoi 29 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:29:18.668Z 749s buoi 29 tap .dlg «Sứ đoàn vào triều» «Đứng xem rồi vềTốnkhôngĐượckhông»
+2026-11-26T08:29:19.583Z 750s buoi 29 tap .dlg «Tết Đoan ngọ · Yến tiệc» «Tiệc trà nhỏ mời Tần Tiết Tịnh SơRất vữngTốnBạc -1»
+2026-11-26T08:29:29.584Z 760s buoi 29 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:29:30.738Z 761s buoi 30 tap .dlg «Có người đến» «Giữ lễ, không nói nhiềuRất vữngTốnkhôngĐượcđược ti»
+2026-11-26T08:29:31.692Z 762s buoi 30 tap .dlg «Phụ tuyến · Khắc tượng chim yến cho cháu thái giám» «Nhận lờiVữngTốnkhôngĐượcthêm tình nghĩa với bệ hạ »
+2026-11-26T08:29:39.137Z 769s buoi 30 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thủy đậu · nhẹ»
+2026-11-26T08:29:39.982Z 770s buoi 30 tap .dlg «Thủy đậu · nhẹ» «Lui»
+2026-11-26T08:29:40.838Z 771s buoi 30 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sắc57Tài77Tâm cơ27Đức34Danh27Sủng0»
+2026-11-26T08:29:42.024Z 772s buoi 30 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:29:43.740Z 774s buoi 31 tap .dlg «Có người đến» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiền đức, nàng »
+2026-11-26T08:29:44.818Z 775s buoi 31 tap .dlg «Sứ đoàn vào triều» «Lui»
+2026-11-26T08:29:52.013Z 782s buoi 31 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»
+2026-11-26T08:29:52.877Z 783s buoi 31 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mệnh truyện»
+2026-11-26T08:29:53.892Z 784s buoi 31 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:30:03.059Z 793s buoi 32 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Ân tình (đêm)0»
+2026-11-26T08:30:03.869Z 794s buoi 32 tap .dlg «Ân tình (đêm)» «Lui»
+2026-11-26T08:30:04.734Z 795s buoi 32 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Chọn chính mình»
+2026-11-26T08:30:05.587Z 796s buoi 32 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:30:06.341Z 796s buoi 32 tap .kmov «Ta biết rồi»
+2026-11-26T08:30:09.890Z 800s buoi 33 tap #dawn «Tiếp theo»
+2026-11-26T08:30:10.664Z 801s buoi 33 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:30:11.456Z 802s buoi 33 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:30:12.223Z 802s buoi 33 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:30:12.995Z 803s buoi 33 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:30:13.755Z 804s buoi 33 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:30:14.521Z 805s buoi 33 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:30:15.296Z 805s buoi 33 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:30:16.065Z 806s buoi 33 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:30:16.824Z 807s buoi 33 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:30:17.588Z 808s buoi 33 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:30:18.362Z 808s buoi 33 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:30:19.307Z 809s buoi 33 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:30:28.960Z 819s buoi 33 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bổng lộcsau 1 tuần»
+2026-11-26T08:30:29.784Z 820s buoi 33 tap .dlg «Bổng lộc» «Lui»
+2026-11-26T08:30:31.061Z 821s buoi 33 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:30:32.112Z 822s buoi 34 tap .dlg «Chuyện trong cung» «Bảo nàng ta cứ nói, không giậnRất vữngTốnSức -8Đượ»
+2026-11-26T08:30:39.665Z 830s buoi 34 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:30:40.579Z 831s buoi 35 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:30:41.474Z 832s buoi 36 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»
+2026-11-26T08:30:42.300Z 832s buoi 36 tap .dlg «Ân thưởng» «Lui»
+2026-11-26T08:30:43.198Z 833s buoi 36 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Có thaiRất thấp»
+2026-11-26T08:30:44.006Z 834s buoi 36 tap .dlg «Có thai: Rất thấp» «Lui»
+2026-11-26T08:30:45.358Z 835s buoi 36 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:30:46.451Z 837s buoi 36 tap .dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»
+2026-11-26T08:30:47.240Z 837s buoi 36 tap .kmov «Ta biết rồi»
+2026-11-26T08:30:51.469Z 842s buoi 37 tap #dawn «Tiếp theo»
+2026-11-26T08:30:52.320Z 842s buoi 37 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:30:53.149Z 843s buoi 37 tap .dlg «Ghi chú»
+2026-11-26T08:30:54.802Z 845s buoi 37 tap #kmrew «Thường»
+2026-11-26T08:30:55.572Z 846s buoi 37 tap .dlg «Ghi chú»
+2026-11-26T08:30:57.248Z 847s buoi 37 tap #kmrew «Nhận»
+2026-11-26T08:30:58.170Z 848s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:30:58.949Z 849s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:30:59.728Z 850s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:00.509Z 851s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:01.292Z 851s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:02.083Z 852s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:02.864Z 853s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:03.637Z 854s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:04.422Z 855s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:05.235Z 855s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:06.047Z 856s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:06.844Z 857s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:07.636Z 858s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:08.417Z 859s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:09.197Z 859s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:09.975Z 860s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:10.767Z 861s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:11.555Z 862s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:12.355Z 862s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:13.116Z 863s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:13.890Z 864s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:14.663Z 865s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:15.439Z 866s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:16.225Z 866s buoi 37 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:31:17.028Z 867s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:17.797Z 868s buoi 37 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:31:18.594Z 869s buoi 37 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:31:19.511Z 870s buoi 37 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:31:28.729Z 879s buoi 37 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»
+2026-11-26T08:31:29.612Z 880s buoi 37 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo: 20 tin mới»
+2026-11-26T08:31:30.599Z 881s buoi 37 tap .dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»
+2026-11-26T08:31:38.167Z 888s buoi 37 tap .mapsc «Sang buổi»
+2026-11-26T08:31:39.507Z 890s buoi 38 tap .dlg «Bổng lộc tháng năm» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»
+2026-11-26T08:31:40.536Z 891s buoi 38 tap .dlg «Lễ tấn phong Tần Vu Thanh Diên» «Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +»
+2026-11-26T08:31:48.076Z 898s buoi 38 tap .mapsc «Thu nhỏ»
+2026-11-26T08:31:52.478Z 903s buoi 38 tap .mapsc «Thái y viện3 bóng · 2 khắc»
+2026-11-26T08:31:58.056Z 908s buoi 38 moved .mapsc «Sang buổi»
+2026-11-26T08:31:58.721Z 909s buoi 38 tap .dlg «Kỳ ngộ» «Xin thái y chữa dứtRất vữngTốnBạc -20Đượcdứt bệnh »
+2026-11-26T08:31:59.605Z 910s buoi 38 tap .dlg «Kỳ ngộ» «Lui»
+2026-11-26T08:32:06.708Z 917s buoi 38 tap page «Thái y viện · Ở đây còn 2 người.» «1Cung nhân»
+2026-11-26T08:32:07.475Z 918s buoi 38 tap page «Thái y viện · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:32:09.093Z 919s buoi 38 tap page «Thái y viện · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:32:10.141Z 920s buoi 39 tap .dlg «Hội Phượng · Chuyện bên lề hội» «Mời bà ngồi nghỉ cùngTốnSức -5ĐượcĐức +2»
+2026-11-26T08:32:11.038Z 921s buoi 39 tap .dlg «Thỉnh bình an mạch» «Lui»
+2026-11-26T08:32:20.660Z 931s buoi 39 tap page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Ân tình (đêm)0»
+2026-11-26T08:32:21.528Z 932s buoi 39 tap .dlg «Ân tình (đêm)» «Lui»
+2026-11-26T08:32:22.385Z 933s buoi 39 tap page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «chiều lộng gió»
+2026-11-26T08:32:24.896Z 935s buoi 39 tap page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Sang buổi»
+2026-11-26T08:32:26.228Z 936s buoi 40 tap .dlg «Lòng không giữ được» «Khóc suốt đêmRất vữngTốnSức -10Đượcgiải tỏa tâm tr»
+2026-11-26T08:32:27.675Z 938s buoi 40 tap .dlg «Hội Phượng · Đặt cược» «Không cược, chỉ xemRất vữngTốnkhôngĐượckhôngGợi ýk»
+2026-11-26T08:32:28.996Z 939s buoi 40 tap .dlg «Hội Phượng · Lời mời: Thi bắn cung trên lưng ngựa» «Ghi tên, bỏ bạc mời thầy kèm trướcHiểmTốnBạc -20Đư»
+2026-11-26T08:32:29.880Z 940s buoi 40 tap .dlg «Thi tài ngày Thất tịch · Lời mời» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»
+2026-11-26T08:32:37.298Z 947s buoi 40 tap page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» «1Cung nhân»
+2026-11-26T08:32:38.075Z 948s buoi 40 tap page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» «Sang ngày mới»
+2026-11-26T08:32:38.911Z 949s buoi 40 tap page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» «Quẻ Hạ (Sủng)»
+2026-11-26T08:32:39.848Z 950s buoi 40 tap .dlg «Quẻ Hạ · Sủng» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»
+2026-11-26T08:32:40.770Z 951s buoi 40 tap .dlg «Gieo lại quẻ» «Lui»
+2026-11-26T08:32:41.810Z 952s buoi 40 tap page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» «Sang ngày mới»
+2026-11-26T08:32:42.715Z 953s buoi 40 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:32:43.584Z 954s buoi 40 tap .kmov «Chuẩn bị thị tẩm»
+2026-11-26T08:32:45.054Z 955s buoi 40 tap .dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngCó cơTốnkhôngĐượcdựa vào â»
+2026-11-26T08:32:45.815Z 956s buoi 40 tap .kmov «Chuẩn bị thị tẩm»
+2026-11-26T08:32:47.286Z 957s buoi 40 tap .dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcđược thị tẩm, g»
+2026-11-26T08:32:48.817Z 959s buoi 40 tap .dlg «Chuẩn bị thị tẩm» «Điểm trang lộng lẫyRất vữngTốnBạc -5Đượcbệ hạ để m»
+2026-11-26T08:32:50.393Z 961s buoi 40 tap .dlg «Đêm thị tẩm» «Rót rượu, nũng nịuRất vữngTốnkhôngĐượcđêm vui, Hoà»
+2026-11-26T08:32:51.561Z 962s buoi 40 tap .dlg «Đêm thị tẩm» «Im lặng, tựa vai ngàiRất vữngTốnkhôngĐượcthêm tình»
+2026-11-26T08:32:54.817Z 965s buoi 40 tap .kne «Nhận»
+2026-11-26T08:32:55.701Z 966s buoi 40 tap .dlg «Giữ hay không giữ» «Cúi đầu tuân lệnhRất vữngTốnkhôngĐượcThái hậu hài »
+2026-11-26T08:32:56.560Z 967s buoi 40 tap .dlg «Thánh thượng ban thưởng» «Lui»
+2026-11-26T08:32:59.846Z 970s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:00.695Z 971s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:01.485Z 972s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:02.257Z 972s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:03.043Z 973s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:03.821Z 974s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:04.612Z 975s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:05.413Z 976s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:06.190Z 976s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:06.965Z 977s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:07.750Z 978s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:08.532Z 979s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:09.315Z 979s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:10.092Z 980s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:10.871Z 981s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:11.670Z 982s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:12.431Z 983s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:13.208Z 983s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:13.989Z 984s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:14.769Z 985s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:15.535Z 986s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:16.305Z 986s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:17.091Z 987s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:17.865Z 988s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:18.634Z 989s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:19.403Z 990s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:20.185Z 990s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:20.950Z 991s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:21.727Z 992s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:22.503Z 993s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:23.277Z 993s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:24.084Z 994s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:24.863Z 995s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:25.655Z 996s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:26.460Z 997s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:27.240Z 997s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:28.017Z 998s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:28.783Z 999s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:29.551Z 1000s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:30.318Z 1000s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:31.098Z 1001s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:31.874Z 1002s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:32.632Z 1003s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:33.397Z 1004s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:34.186Z 1004s buoi 41 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:33:34.966Z 1005s buoi 41 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:33:35.756Z 1006s buoi 41 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:33:36.806Z 1007s buoi 41 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:33:37.787Z 1008s buoi 41 tap .dlg «Lời nhận xét» «Lui»
+2026-11-26T08:33:47.452Z 1018s buoi 41 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Hậu cung»
+2026-11-26T08:33:48.273Z 1018s buoi 41 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Bạc206Sức92/98»
+2026-11-26T08:33:49.144Z 1019s buoi 41 tap .dlg «Bạc» «Lui»
+2026-11-26T08:33:50.876Z 1021s buoi 41 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:33:51.809Z 1022s buoi 42 tap .dlg «Một ánh mắt» «Giữ bài thơ, đáp lạiRất vữngTốnkhôngĐượcngười ấy t»
+2026-11-26T08:33:52.918Z 1023s buoi 42 tap .dlg «Kính sự phòng ghi sổ» «Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ý»
+2026-11-26T08:33:54.008Z 1024s buoi 42 tap .dlg «Ta bắt gặp» «Thôi, lui về cungTốn0 khắc đi đườngĐượcta lui về c»
+2026-11-26T08:33:55.186Z 1025s buoi 42 tap .dlg «Lần đầu gặp mặt» «Khéo lời hóa giảiCó cơTốnkhôngĐượcnàng ta bớt ghen»
+2026-11-26T08:34:04.776Z 1035s buoi 42 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Lịch tháng»
+2026-11-26T08:34:05.547Z 1036s buoi 42 tap .dlg «Lịch tháng» «Hội Phượng»
+2026-11-26T08:34:07.347Z 1037s buoi 42 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Xét phẩm: thiếu 2»
+2026-11-26T08:34:08.166Z 1038s buoi 42 tap .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+2026-11-26T08:34:09.524Z 1040s buoi 42 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Sang buổi»
+2026-11-26T08:34:10.449Z 1041s buoi 43 tap .dlg «Phụ tuyến · Thư mẫu thân: hỏi thăm về giấc ngủ · L» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+2026-11-26T08:34:11.321Z 1041s buoi 43 tap .dlg «Sắp tới: Thi tài ngày Thất tịch» «Lui»
+2026-11-26T08:34:18.428Z 1049s buoi 43 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «3Chí tôn»
+2026-11-26T08:34:19.208Z 1049s buoi 43 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «3Chí tôn»
+2026-11-26T08:34:20.206Z 1050s buoi 43 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»
+2026-11-26T08:34:29.295Z 1059s buoi 44 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lịch tháng»
+2026-11-26T08:34:30.068Z 1060s buoi 44 tap .dlg «Lịch tháng» «mồng 5»
+2026-11-26T08:34:30.841Z 1061s buoi 44 tap .dlg «Lịch tháng» «ngày 24: Nguyệt tín»
+2026-11-26T08:34:31.625Z 1062s buoi 44 tap .dlg «Lịch tháng» «ngày 21: Hội Phượng: Nguyệt tín»
+2026-11-26T08:34:33.368Z 1063s buoi 44 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»
+2026-11-26T08:34:34.237Z 1064s buoi 44 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:34:35.045Z 1065s buoi 44 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:34:35.892Z 1066s buoi 44 tap .kmov «Ta biết rồi»
+2026-11-26T08:34:36.768Z 1067s buoi 44 tap .dlg «Kính sự phòng» «Chặn ngự giáHiểmTốnkhôngĐượcdựa vào nhan sắc, ân s»
+2026-11-26T08:34:37.530Z 1068s buoi 44 tap #kg82 «Trước khi ra tay»
+2026-11-26T08:34:46.663Z 1077s buoi 44 noFreePoint #kg82 «Trước khi ra tay»
+2026-11-26T08:34:46.746Z 1077s buoi 44 DEAD BUTTON #kg82 «Trước khi ra tay» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:34:47.187Z 1077s buoi 44 tap #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+2026-11-26T08:34:48.012Z 1078s buoi 44 tap #kg82 «Quay lại»
+2026-11-26T08:34:48.924Z 1079s buoi 44 tap #kg82 «Quay lại»
+2026-11-26T08:34:52.517Z 1083s buoi 45 tap #dawn «Tiếp theo»
+2026-11-26T08:34:53.284Z 1083s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:34:54.094Z 1084s buoi 45 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:34:54.871Z 1085s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:34:55.632Z 1086s buoi 45 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:34:56.409Z 1087s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:34:57.179Z 1087s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:34:57.938Z 1088s buoi 45 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:34:58.720Z 1089s buoi 45 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:34:59.611Z 1090s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:35:00.377Z 1090s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:35:01.145Z 1091s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:35:01.912Z 1092s buoi 45 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:35:02.687Z 1093s buoi 45 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:35:03.583Z 1094s buoi 45 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:35:13.166Z 1103s buoi 45 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «1Cung nhân»
+2026-11-26T08:35:13.938Z 1104s buoi 45 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «3Chí tôn»
+2026-11-26T08:35:14.722Z 1105s buoi 45 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:35:15.855Z 1106s buoi 45 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:35:16.910Z 1107s buoi 46 tap .dlg «Việc khó xử» «Báo cho Phi Bạch Uyển ThanhRất vữngTốnkhôngĐượcđượ»
+2026-11-26T08:35:26.508Z 1117s buoi 46 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo: 20 tin mới»
+2026-11-26T08:35:27.514Z 1118s buoi 46 tap .dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»
+2026-11-26T08:35:38.561Z 1129s buoi 46 tap .mapsc «Thái y viện2 bóng · 2 khắc»
+2026-11-26T08:35:40.679Z 1131s buoi 46 gone .mapsc «Quẻ Trung (Sủng)»
+2026-11-26T08:35:41.288Z 1131s buoi 46 tap .dlg «Kỳ ngộ» «Xin ông bắt mạch giùm một lầnRất vữngTốnBạc -20·1 »
+2026-11-26T08:35:42.160Z 1132s buoi 46 tap .dlg «Kỳ ngộ» «Lui»
+2026-11-26T08:35:49.270Z 1139s buoi 46 tap page «Thái y viện · Ở đây còn 4 người.» «Chọn chính mình»
+2026-11-26T08:35:50.668Z 1141s buoi 46 tap page «Thái y viện · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:35:59.978Z 1150s buoi 47 tap page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Mệnh truyện»
+2026-11-26T08:36:00.793Z 1151s buoi 47 tap page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Tâm nguyện»
+2026-11-26T08:36:02.285Z 1152s buoi 47 tap page «Thái y viện · Sang buổi chiều · ta vẫn ở Thái y vi» «Sang buổi»
+2026-11-26T08:36:03.110Z 1153s buoi 48 tap .dlg «Nam nhân nơi cấm địa» «Làm như không thấyRất vữngTốnkhôngĐượckhông dính v»
+2026-11-26T08:36:12.593Z 1163s buoi 48 tap page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» «Xét phẩm: thiếu 2»
+2026-11-26T08:36:13.382Z 1163s buoi 48 tap .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+2026-11-26T08:36:14.368Z 1164s buoi 48 tap page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» «Hành sự»
+2026-11-26T08:36:15.622Z 1166s buoi 48 tap page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» «Sang ngày mới»
+2026-11-26T08:36:16.680Z 1167s buoi 48 tap .dlg «Kỳ nguyệt sự» «Giấu, không báoRất vữngTốnkhôngĐượcthẻ bài vẫn trê»
+2026-11-26T08:36:17.548Z 1168s buoi 48 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:36:18.413Z 1169s buoi 48 tap .kmov «Ta biết rồi»
+2026-11-26T08:36:19.747Z 1170s buoi 48 tap .dlg «Kính sự phòng» «Chặn ngự giáHiểmTốnkhôngĐượcdựa vào nhan sắc, ân s»
+2026-11-26T08:36:20.509Z 1171s buoi 48 tap #kg82 «Trước khi ra tay»
+2026-11-26T08:36:22.117Z 1172s buoi 48 tap #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+2026-11-26T08:36:22.991Z 1173s buoi 48 tap #kg82 «Quay lại»
+2026-11-26T08:36:23.968Z 1174s buoi 48 tap #kg82 «Quay lại»
+2026-11-26T08:36:28.482Z 1179s buoi 49 tap #dawn «Tiếp theo»
+2026-11-26T08:36:30.010Z 1180s buoi 49 tap #kmrew «Thường»
+2026-11-26T08:36:30.836Z 1181s buoi 49 tap .dlg «Ghi chú»
+2026-11-26T08:36:32.561Z 1183s buoi 49 tap #kmrew «Thường»
+2026-11-26T08:36:41.134Z 1191s buoi 49 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:36:41.264Z 1191s buoi 49 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:36:41.726Z 1192s buoi 49 tap .dlg «Lui»
+2026-11-26T08:36:42.646Z 1193s buoi 49 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:36:43.475Z 1194s buoi 49 tap .dlg «Lui»
+2026-11-26T08:36:44.364Z 1194s buoi 49 tap #kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »
+2026-11-26T08:36:45.158Z 1195s buoi 49 tap .dlg «Lui»
+2026-11-26T08:36:46.074Z 1196s buoi 49 tap #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+2026-11-26T08:36:46.868Z 1197s buoi 49 tap .dlg «Lui»
+2026-11-26T08:36:47.761Z 1198s buoi 49 tap #kmrew «Thường»
+2026-11-26T08:36:56.622Z 1207s buoi 49 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:36:56.787Z 1207s buoi 49 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:37:05.147Z 1215s buoi 49 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:37:05.285Z 1215s buoi 49 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:37:05.894Z 1216s buoi 49 tap .dlg «Lui»
+2026-11-26T08:37:06.767Z 1217s buoi 49 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:37:07.581Z 1218s buoi 49 tap .dlg «Lui»
+2026-11-26T08:37:08.509Z 1219s buoi 49 tap #kmrew «Thường»
+2026-11-26T08:37:09.269Z 1219s buoi 49 tap .dlg «Lui»
+2026-11-26T08:37:10.167Z 1220s buoi 49 tap #kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »
+2026-11-26T08:37:10.959Z 1221s buoi 49 tap .dlg «Lui»
+2026-11-26T08:37:11.828Z 1222s buoi 49 tap #kmrew «Nhận»
+2026-11-26T08:37:12.636Z 1223s buoi 49 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:37:13.417Z 1224s buoi 49 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:37:14.234Z 1224s buoi 49 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:37:15.021Z 1225s buoi 49 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:37:15.821Z 1226s buoi 49 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:37:16.596Z 1227s buoi 49 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:37:17.381Z 1227s buoi 49 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:37:18.178Z 1228s buoi 49 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:37:18.959Z 1229s buoi 49 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:37:19.747Z 1230s buoi 49 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:37:20.521Z 1231s buoi 49 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:37:21.324Z 1231s buoi 49 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:37:22.167Z 1232s buoi 49 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:37:22.957Z 1233s buoi 49 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:37:23.748Z 1234s buoi 49 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:37:24.719Z 1235s buoi 49 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:37:34.375Z 1244s buoi 49 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Hoàng tự»
+2026-11-26T08:37:35.256Z 1245s buoi 49 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Hậu cung»
+2026-11-26T08:37:36.997Z 1247s buoi 49 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:37:38.186Z 1248s buoi 50 tap .dlg «Kẻ hầu» «Lập bài vị nhỏ cho nàng ta thắp hươngRất vữngTốnkh»
+2026-11-26T08:37:39.042Z 1249s buoi 50 tap .dlg «Bổng lộc tháng sáu» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»
+2026-11-26T08:37:46.436Z 1257s buoi 50 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tài nghệ»
+2026-11-26T08:37:47.248Z 1257s buoi 50 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «gió heo may»
+2026-11-26T08:37:49.554Z 1260s buoi 50 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:37:50.995Z 1261s buoi 51 tap .dlg «Có người đến» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiền, nàng ta k»
+2026-11-26T08:37:52.442Z 1263s buoi 51 tap .dlg «Tết Thất tịch · Chuyện bên lề hội» «Lấy cớ mệt, hẹn cả hai hôm khácTốnDanh -3ĐượcSức +»
+2026-11-26T08:37:59.784Z 1270s buoi 51 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Hậu cung»
+2026-11-26T08:38:00.567Z 1271s buoi 51 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Về phòng»
+2026-11-26T08:38:01.700Z 1272s buoi 51 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:38:03.103Z 1273s buoi 52 tap .dlg «Thỉnh bình an mạch» «Lui»
+2026-11-26T08:38:04.054Z 1274s buoi 52 tap .dlg «Tết Thất tịch · Dâng lễ» «Không dâng lễRất vữngTốnkhôngĐượcdưỡng sức, giữ tr»
+2026-11-26T08:38:11.583Z 1282s buoi 52 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»
+2026-11-26T08:38:12.542Z 1283s buoi 52 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:38:13.328Z 1283s buoi 52 tap .kmov «Ta biết rồi»
+2026-11-26T08:38:14.959Z 1285s buoi 52 tap .dlg «Kính sự phòng» «Chặn ngự giáHiểmTốnkhôngĐượcdựa vào nhan sắc, ân s»
+2026-11-26T08:38:16.035Z 1286s buoi 52 tap #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+2026-11-26T08:38:16.912Z 1287s buoi 52 tap #kg82 «Quay lại»
+2026-11-26T08:38:17.939Z 1288s buoi 52 tap #kg82 «Quay lại»
+2026-11-26T08:38:21.825Z 1292s buoi 53 tap #dawn «Tiếp theo»
+2026-11-26T08:38:22.636Z 1293s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:23.432Z 1294s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:24.248Z 1294s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:25.040Z 1295s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:25.826Z 1296s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:26.646Z 1297s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:27.479Z 1298s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:28.299Z 1298s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:29.112Z 1299s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:29.928Z 1300s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:30.745Z 1301s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:31.540Z 1302s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:32.345Z 1302s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:33.144Z 1303s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:33.960Z 1304s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:34.769Z 1305s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:35.570Z 1306s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:36.388Z 1307s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:37.200Z 1307s buoi 53 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:38:38.013Z 1308s buoi 53 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:38:38.815Z 1309s buoi 53 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:38:39.929Z 1310s buoi 53 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:38:40.929Z 1311s buoi 53 tap .dlg «Lỡ hẹn» «Lui»
+2026-11-26T08:38:50.401Z 1321s buoi 53 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Buổi sáng, còn 4 khắc»
+2026-11-26T08:38:51.306Z 1321s buoi 53 tap .dlg «sáng · còn» «Lui»
+2026-11-26T08:38:52.324Z 1322s buoi 53 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»
+2026-11-26T08:38:53.494Z 1324s buoi 53 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:38:55.467Z 1326s buoi 54 tap .dlg «Lễ Vu Lan · Chuyện bên lề hội» «Xin quan cho bà một suất riêngRất vữngTốnBạc -60·Đ»
+2026-11-26T08:39:02.911Z 1333s buoi 54 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 7 người.» «Hành sự»
+2026-11-26T08:39:04.468Z 1335s buoi 54 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 7 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+2026-11-26T08:39:14.233Z 1344s buoi 54 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Sang buổi»
+2026-11-26T08:39:15.728Z 1346s buoi 55 tap .dlg «Có người đến» «Lui»
+2026-11-26T08:39:16.797Z 1347s buoi 55 tap .dlg «Có người tìm đến» «Không tiếpTốnkhôngĐượcThường tại Phương Chiêu Hoa »
+2026-11-26T08:39:24.080Z 1354s buoi 55 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Tâm trạngBình thản+8»
+2026-11-26T08:39:25.051Z 1355s buoi 55 tap .dlg «Danh» «Lui»
+2026-11-26T08:39:25.998Z 1356s buoi 55 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Mục tiêu chương (có mới)»
+2026-11-26T08:39:26.895Z 1357s buoi 55 tap .dlg «Chương 1 · Sơ nhập cung môn» «Danh hiệu 1/35»
+2026-11-26T08:39:28.002Z 1358s buoi 55 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:39:29.069Z 1359s buoi 55 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»
+2026-11-26T08:39:30.359Z 1360s buoi 55 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:39:31.431Z 1362s buoi 55 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lên · đang lấyTốnkhôngĐượcSủng được thêm m»
+2026-11-26T08:39:32.556Z 1363s buoi 55 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:39:33.578Z 1364s buoi 55 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»
+2026-11-26T08:39:34.477Z 1365s buoi 55 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:39:35.480Z 1366s buoi 55 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»
+2026-11-26T08:39:36.398Z 1367s buoi 55 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:39:37.526Z 1368s buoi 55 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:39:38.567Z 1369s buoi 55 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:39:39.759Z 1370s buoi 55 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:39:40.779Z 1371s buoi 55 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»
+2026-11-26T08:39:41.780Z 1372s buoi 55 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»
+2026-11-26T08:39:42.861Z 1373s buoi 55 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:39:43.852Z 1374s buoi 55 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:39:44.617Z 1375s buoi 55 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:39:45.416Z 1376s buoi 55 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:39:46.206Z 1376s buoi 55 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:39:47.190Z 1377s buoi 55 tap .dlg «Danh hiệu» «Lui»
+2026-11-26T08:39:55.220Z 1385s buoi 55 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Sang buổi»
+2026-11-26T08:39:56.529Z 1387s buoi 56 tap .dlg «Lễ Vu Lan · Lễ» «Lặng lẽ cầu cho gia đìnhRất vữngTốnkhôngĐượcdưỡng »
+2026-11-26T08:40:03.814Z 1394s buoi 56 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «trăng rằm»
+2026-11-26T08:40:05.682Z 1396s buoi 56 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang ngày mới»
+2026-11-26T08:40:06.536Z 1397s buoi 56 tap .kmov «Ta biết rồi»
+2026-11-26T08:40:08.459Z 1399s buoi 56 tap .dlg «Kính sự phòng» «Tranh sủngTùy duyênTốnkhôngĐượcdựa vào ân sủng; tà»
+2026-11-26T08:40:09.305Z 1399s buoi 56 tap #kg82 «Trước khi ra tay»
+2026-11-26T08:40:10.961Z 1401s buoi 56 tap #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+2026-11-26T08:40:11.949Z 1402s buoi 56 tap #kg82 «Quay lại»
+2026-11-26T08:40:13.527Z 1404s buoi 56 tap #kg82 «Quay lại»
+2026-11-26T08:40:14.943Z 1405s buoi 56 tap .dlg «Chuyện trong cung» «Mang trả tận cửa, giả điếcRất vữngTốnkhôngĐượcngườ»
+2026-11-26T08:40:19.240Z 1409s buoi 57 tap #dawn «Tiếp theo»
+2026-11-26T08:40:20.035Z 1410s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:20.833Z 1411s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:21.629Z 1412s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:22.422Z 1413s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:23.256Z 1413s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:24.110Z 1414s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:24.906Z 1415s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:25.713Z 1416s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:26.502Z 1417s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:27.321Z 1417s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:28.313Z 1418s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:29.128Z 1419s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:29.918Z 1420s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:30.736Z 1421s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:31.530Z 1422s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:32.329Z 1422s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:33.119Z 1423s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:33.927Z 1424s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:34.731Z 1425s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:35.524Z 1426s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:36.341Z 1426s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:37.165Z 1427s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:37.949Z 1428s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:38.745Z 1429s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:39.588Z 1430s buoi 57 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:40:40.394Z 1431s buoi 57 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:40:41.193Z 1431s buoi 57 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:40:42.191Z 1432s buoi 57 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:40:51.691Z 1442s buoi 57 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lật thẻKhông có»
+2026-11-26T08:40:52.634Z 1443s buoi 57 tap .dlg «Lật thẻ: Không có» «Lui»
+2026-11-26T08:40:53.546Z 1444s buoi 57 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «3Chí tôn»
+2026-11-26T08:40:54.355Z 1444s buoi 57 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:40:56.236Z 1446s buoi 57 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:41:00.123Z 1450s buoi 58 tap .dlg «Lời cảnh báo» «Ra lệnh phòng bịRất vữngTốnkhôngĐượcgiữ được mình:»
+2026-11-26T08:41:02.467Z 1453s buoi 58 tap .dlg «Phòng bị» «Giao việc: canh chừng cungRất vữngTốnkhôngĐượcgiữ »
+2026-11-26T08:41:03.931Z 1454s buoi 58 tap .dlg «Phòng bị» «Cung nữ thân tín tam đẳng Liễu Nhi (thiện cảm 71)R»
+2026-11-26T08:41:04.951Z 1455s buoi 58 tap .dlg «Phụ tuyến · Nhuận sắc bài phú mừng biên ải yên ổn » «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+2026-11-26T08:41:12.400Z 1463s buoi 58 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»
+2026-11-26T08:41:13.226Z 1463s buoi 58 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản-5»
+2026-11-26T08:41:14.122Z 1464s buoi 58 tap .dlg «Danh» «Lui»
+2026-11-26T08:41:15.249Z 1465s buoi 58 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:41:16.297Z 1466s buoi 59 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:41:18.490Z 1469s buoi 60 tap .dlg «Có người đến» «Cho mượn, đòi đáp lễRất vữngTốnkhôngĐượccó thêm bạ»
+2026-11-26T08:41:28.004Z 1478s buoi 60 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Dư đồ»
+2026-11-26T08:41:28.874Z 1479s buoi 60 tap .mapsc «Buổi tối, còn 4 khắc»
+2026-11-26T08:41:29.799Z 1480s buoi 60 tap .dlg «tối · còn» «Lui»
+2026-11-26T08:41:31.353Z 1481s buoi 60 tap .mapsc «Sang ngày mới»
+2026-11-26T08:41:32.822Z 1483s buoi 60 tap .dlg «Kỳ nguyệt sự» «Giấu, không báoRất vữngTốnkhôngĐượcthẻ bài vẫn trê»
+2026-11-26T08:41:33.710Z 1484s buoi 60 tap .kmov «Ta biết rồi»
+2026-11-26T08:41:35.828Z 1486s buoi 60 tap .dlg «Kính sự phòng» «Tranh sủngTùy duyênTốnkhôngĐượcdựa vào ân sủng; tà»
+2026-11-26T08:41:36.750Z 1487s buoi 60 tap #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+2026-11-26T08:41:37.587Z 1488s buoi 60 tap #kg82 «Quay lại»
+2026-11-26T08:41:38.876Z 1489s buoi 60 tap #kg82 «Quay lại»
+2026-11-26T08:41:39.865Z 1490s buoi 60 tap .kmov «Chuẩn bị thị tẩm»
+2026-11-26T08:41:41.551Z 1492s buoi 60 tap .dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»
+2026-11-26T08:41:43.768Z 1494s buoi 60 tap .dlg «Chuẩn bị thị tẩm» «Tập trước giọng hátVữngTốnSức -5Đượcbệ hạ để mắt h»
+2026-11-26T08:41:45.477Z 1496s buoi 60 tap .dlg «Đêm thị tẩm» «Rót rượu, nũng nịuRất vữngTốnkhôngĐượcđêm vui, Hoà»
+2026-11-26T08:41:47.376Z 1497s buoi 60 tap .dlg «Đêm thị tẩm» «Xin ân cho gia đìnhVữngTốnkhôngĐượcthêm thể diện, »
+2026-11-26T08:41:51.766Z 1502s buoi 60 tap .kne «Nhận»
+2026-11-26T08:41:58.054Z 1508s buoi 61 tap #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+2026-11-26T08:41:58.964Z 1509s buoi 61 tap .dlg «Ghi chú»
+2026-11-26T08:42:00.689Z 1511s buoi 61 tap #kmrew «Nhận»
+2026-11-26T08:42:01.511Z 1512s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:02.324Z 1512s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:03.135Z 1513s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:03.951Z 1514s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:04.757Z 1515s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:05.610Z 1516s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:06.440Z 1517s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:07.408Z 1518s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:08.271Z 1518s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:09.107Z 1519s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:09.968Z 1520s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:10.805Z 1521s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:11.619Z 1522s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:12.441Z 1523s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:13.268Z 1523s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:14.110Z 1524s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:14.956Z 1525s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:15.792Z 1526s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:16.646Z 1527s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:17.526Z 1528s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:18.372Z 1528s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:19.208Z 1529s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:20.022Z 1530s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:20.855Z 1531s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:21.732Z 1532s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:22.574Z 1533s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:23.405Z 1534s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:24.258Z 1534s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:25.066Z 1535s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:25.917Z 1536s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:26.754Z 1537s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:27.570Z 1538s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:28.408Z 1539s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:29.239Z 1539s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:30.054Z 1540s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:30.891Z 1541s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:31.720Z 1542s buoi 61 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:42:32.540Z 1543s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:33.352Z 1543s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:34.165Z 1544s buoi 61 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:42:35.007Z 1545s buoi 61 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:42:36.039Z 1546s buoi 61 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:42:48.726Z 1559s buoi 61 tap .mapsc «Thái y viện8 bóng · 2 khắc»
+2026-11-26T08:42:54.038Z 1564s buoi 61 moved .mapsc «Sang buổi»
+2026-11-26T08:42:54.821Z 1565s buoi 61 tap .dlg «Chọn người theo hầu» «Cung nữ thân tín tam đẳngLiễu NhiTốnkhôngĐượckhông»
+2026-11-26T08:42:56.406Z 1567s buoi 61 tap .dlg «Chọn người theo hầu» «Lên đườngTốnkhôngĐược1 người theo (Cung nữ thân tí»
+2026-11-26T08:42:58.140Z 1568s buoi 61 tap .dlg «Kỳ ngộ» «Tuyệt phẩmKim thoa song phượng»
+2026-11-26T08:42:58.927Z 1569s buoi 61 tap .dlg «Ghi chú»
+2026-11-26T08:43:00.574Z 1571s buoi 61 tap .dlg «Kỳ ngộ» «Tuyệt phẩmKim thoa song phượng»
+2026-11-26T08:43:08.127Z 1578s buoi 61 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:43:08.225Z 1578s buoi 61 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:43:08.768Z 1579s buoi 61 tap .dlg «Lui»
+2026-11-26T08:43:09.661Z 1580s buoi 61 tap .dlg «Kỳ ngộ» «Tuyệt phẩmKim thoa song phượng»
+2026-11-26T08:43:10.447Z 1581s buoi 61 tap .dlg «Lui»
+2026-11-26T08:43:11.342Z 1581s buoi 61 tap .dlg «Kỳ ngộ» «Tuyệt phẩmKim thoa song phượng»
+2026-11-26T08:43:12.136Z 1582s buoi 61 tap .dlg «Lui»
+2026-11-26T08:43:13.225Z 1583s buoi 61 tap .dlg «Kỳ ngộ» «Lui»
+2026-11-26T08:43:14.206Z 1584s buoi 61 tap page «Thái y viện · Ở đây còn 7 người.» «Giao tình»
+2026-11-26T08:43:15.092Z 1585s buoi 61 tap page «Thái y viện · Ở đây còn 7 người.» «Dư đồ»
+2026-11-26T08:43:20.103Z 1590s buoi 61 tap .mapsc «Tích Cần viện2 bóng · 1 khắc»
+2026-11-26T08:43:21.892Z 1592s buoi 61 tap .mapsc «Sang buổi»
+2026-11-26T08:43:24.397Z 1595s buoi 62 tap .dlg «Bổng lộc tháng bảy» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»
+2026-11-26T08:43:25.442Z 1596s buoi 62 tap .dlg «Lễ tấn phong Phi Lư Mộng Điệp» «Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +»
+2026-11-26T08:43:32.536Z 1603s buoi 62 tap page «Tích Cần viện · Sang buổi trưa · ta vẫn ở Tích Cần» «Ân tình (đêm)14»
+2026-11-26T08:43:33.430Z 1604s buoi 62 tap .dlg «Ân tình (đêm)» «Lui»
+2026-11-26T08:43:34.475Z 1605s buoi 62 tap page «Tích Cần viện · Sang buổi trưa · ta vẫn ở Tích Cần» «Tài nghệ»
+2026-11-26T08:43:36.026Z 1606s buoi 62 tap page «Tích Cần viện · Sang buổi trưa · ta vẫn ở Tích Cần» «Sang buổi»
+2026-11-26T08:43:37.163Z 1607s buoi 63 tap .dlg «Kính sự phòng ghi sổ» «Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ý»
+2026-11-26T08:43:38.438Z 1609s buoi 63 tap .dlg «Lời cảnh báo» «Biếu quà làm lànhTốnkhôngĐượcThường tại Hàn Sương »
+2026-11-26T08:43:40.003Z 1610s buoi 63 tap .dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 20 bạ»
+2026-11-26T08:43:41.367Z 1611s buoi 63 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:43:42.204Z 1612s buoi 63 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:43:43.029Z 1613s buoi 63 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:43:43.886Z 1614s buoi 63 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:43:44.709Z 1615s buoi 63 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:43:45.551Z 1616s buoi 63 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:43:46.384Z 1617s buoi 63 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:43:47.251Z 1617s buoi 63 tap .dlg «Biếu quà làm lành» «Hoa tai ngọc trắng»
+2026-11-26T08:43:48.121Z 1618s buoi 63 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:43:48.963Z 1619s buoi 63 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:43:49.799Z 1620s buoi 63 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:43:50.630Z 1621s buoi 63 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:43:51.461Z 1622s buoi 63 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:43:52.298Z 1622s buoi 63 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:43:53.133Z 1623s buoi 63 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:43:53.966Z 1624s buoi 63 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:43:54.797Z 1625s buoi 63 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:43:55.623Z 1626s buoi 63 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:43:56.458Z 1627s buoi 63 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:43:57.344Z 1627s buoi 63 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:43:58.199Z 1628s buoi 63 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:43:59.041Z 1629s buoi 63 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:43:59.921Z 1630s buoi 63 tap .dlg «Biếu quà làm lành» «Hoa tai ngọc trắng»
+2026-11-26T08:44:00.868Z 1631s buoi 63 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:44:01.714Z 1632s buoi 63 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:44:02.564Z 1633s buoi 63 tap .dlg «Biếu quà làm lành» «Hoa tai ngọc trắng»
+2026-11-26T08:44:03.415Z 1634s buoi 63 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:44:04.272Z 1634s buoi 63 tap .dlg «Biếu quà làm lành» «Hoa tai ngọc trắng»
+2026-11-26T08:44:05.093Z 1635s buoi 63 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:44:05.931Z 1636s buoi 63 tap .dlg «Biếu quà làm lành» «Hoa tai ngọc trắng»
+2026-11-26T08:44:06.749Z 1637s buoi 63 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:44:07.674Z 1638s buoi 63 tap .dlg «Biếu quà làm lành» «Lui»
+2026-11-26T08:44:16.943Z 1647s buoi 63 tap page «Tích Cần viện · Sang buổi chiều · ta vẫn ở Tích Cầ» «Sang buổi»
+2026-11-26T08:44:18.272Z 1648s buoi 64 tap .dlg «Việc khó xử» «Bỏ bạc chuộc ngườiRất vữngTốnBạc -60Đượcđược lòng »
+2026-11-26T08:44:19.241Z 1649s buoi 64 tap .dlg «Thỉnh bình an mạch» «Lui»
+2026-11-26T08:44:20.220Z 1650s buoi 64 tap .dlg «Bị bắt» «Lui»
+2026-11-26T08:44:27.625Z 1658s buoi 64 tap page «Tích Cần viện · Sang buổi tối · ta vẫn ở Tích Cần » «1Cung nhân»
+2026-11-26T08:44:28.454Z 1659s buoi 64 tap page «Tích Cần viện · Sang buổi tối · ta vẫn ở Tích Cần » «Sang ngày mới»
+2026-11-26T08:44:29.274Z 1659s buoi 64 tap page «Tích Cần viện · Sang buổi tối · ta vẫn ở Tích Cần » «Tai mắt0»
+2026-11-26T08:44:30.195Z 1660s buoi 64 tap .dlg «Tai mắt» «Lui»
+2026-11-26T08:44:31.227Z 1661s buoi 64 tap page «Tích Cần viện · Sang buổi tối · ta vẫn ở Tích Cần » «Sang ngày mới»
+2026-11-26T08:44:31.993Z 1662s buoi 64 tap .kmov «Ta biết rồi»
+2026-11-26T08:44:36.313Z 1666s buoi 65 tap #dawn «Tiếp theo»
+2026-11-26T08:44:37.238Z 1667s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:38.136Z 1668s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:39.006Z 1669s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:39.860Z 1670s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:40.681Z 1671s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:41.517Z 1672s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:42.362Z 1672s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:43.207Z 1673s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:44.045Z 1674s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:44.901Z 1675s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:45.727Z 1676s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:46.634Z 1677s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:47.484Z 1678s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:48.342Z 1678s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:49.187Z 1679s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:50.023Z 1680s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:50.852Z 1681s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:51.693Z 1682s buoi 65 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:44:52.529Z 1683s buoi 65 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:44:53.377Z 1683s buoi 65 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:44:55.204Z 1685s buoi 65 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:44:56.490Z 1687s buoi 65 tap .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» «Theo Thái hậuRất vữngTốnkhôngĐượcđược lòng bề trên»
+2026-11-26T08:45:03.682Z 1694s buoi 65 DEAD BUTTON #rtoast «Cung nữ thân tín tam đẳngLiễu Nhi» cover span.kitem in #rtoast
+2026-11-26T08:45:31.546Z 1722s buoi 65 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mệnh truyện»
+2026-11-26T08:45:32.393Z 1723s buoi 65 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q»
+2026-11-26T08:45:33.172Z 1723s buoi 65 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:45:33.935Z 1724s buoi 65 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:45:35.039Z 1725s buoi 65 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:45:36.049Z 1726s buoi 65 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:45:36.822Z 1727s buoi 65 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:45:37.585Z 1728s buoi 65 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:45:38.621Z 1729s buoi 65 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:45:39.560Z 1730s buoi 65 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»
+2026-11-26T08:45:40.595Z 1731s buoi 65 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:45:41.564Z 1732s buoi 65 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»
+2026-11-26T08:45:42.336Z 1732s buoi 65 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:45:43.107Z 1733s buoi 65 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:45:44.040Z 1734s buoi 65 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»
+2026-11-26T08:45:45.106Z 1735s buoi 65 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:45:46.099Z 1736s buoi 65 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»
+2026-11-26T08:45:47.096Z 1737s buoi 65 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»
+2026-11-26T08:45:48.194Z 1738s buoi 65 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:45:49.196Z 1739s buoi 65 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:45:50.062Z 1740s buoi 65 tap .dlg «Danh hiệu» «Lui»
+2026-11-26T08:45:57.598Z 1748s buoi 65 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:45:58.456Z 1749s buoi 66 tap .dlg «Thánh thượng ban thưởng» «Lui»
+2026-11-26T08:45:59.545Z 1750s buoi 66 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»
+2026-11-26T08:46:00.400Z 1751s buoi 67 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»
+2026-11-26T08:46:01.316Z 1751s buoi 67 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo: 20 tin mới»
+2026-11-26T08:46:02.384Z 1753s buoi 67 tap .dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»
+2026-11-26T08:46:10.625Z 1761s buoi 67 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»
+2026-11-26T08:46:12.315Z 1762s buoi 68 tap .dlg «Lập công · Hòa giải» «Bênh Phi Bạch Uyển ThanhRất vữngTốnkhôngĐượcPhi Bạ»
+2026-11-26T08:46:19.628Z 1770s buoi 68 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xét phẩm: thiếu 3»
+2026-11-26T08:46:20.573Z 1771s buoi 68 tap .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+2026-11-26T08:46:21.569Z 1772s buoi 68 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bổng lộcsau 2 tuần»
+2026-11-26T08:46:22.548Z 1773s buoi 68 tap .dlg «Bổng lộc» «Lui»
+2026-11-26T08:46:23.628Z 1774s buoi 68 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»
+2026-11-26T08:46:24.446Z 1775s buoi 68 tap .kmov «Ta biết rồi»
+2026-11-26T08:46:29.964Z 1780s buoi 69 tap #dawn «Tiếp theo»
+2026-11-26T08:46:30.808Z 1781s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:31.741Z 1782s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:32.519Z 1783s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:33.322Z 1783s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:34.120Z 1784s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:34.905Z 1785s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:35.703Z 1786s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:36.525Z 1787s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:37.322Z 1787s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:38.121Z 1788s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:38.920Z 1789s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:39.764Z 1790s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:40.559Z 1791s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:41.353Z 1791s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:42.203Z 1792s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:43.002Z 1793s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:43.811Z 1794s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:44.624Z 1795s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:45.454Z 1796s buoi 69 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:46:46.259Z 1796s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:47.052Z 1797s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:47.859Z 1798s buoi 69 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:46:48.650Z 1799s buoi 69 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:46:49.684Z 1800s buoi 69 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:46:59.027Z 1809s buoi 69 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»
+2026-11-26T08:47:00.257Z 1810s buoi 69 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:47:01.316Z 1811s buoi 70 tap .dlg «Phụ tuyến · Tìm kẻ làm lọt chuyện trong cung ta · » «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+2026-11-26T08:47:08.624Z 1819s buoi 70 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»
+2026-11-26T08:47:10.131Z 1820s buoi 70 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:47:11.248Z 1821s buoi 71 tap .dlg «Hoàng thượng» «Xin ngài tin ta, giữ thư lạiRất vữngTốnkhôngĐượcth»
+2026-11-26T08:47:18.558Z 1829s buoi 71 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Tin báo: 11 tin mới»
+2026-11-26T08:47:19.570Z 1830s buoi 71 tap .dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»
+2026-11-26T08:47:26.808Z 1837s buoi 71 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Chứng mất ngủ · nhẹ»
+2026-11-26T08:47:27.756Z 1838s buoi 71 tap .dlg «Chứng mất ngủ · nhẹ» «Lui»
+2026-11-26T08:47:29.371Z 1839s buoi 71 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Sang buổi»
+2026-11-26T08:47:30.873Z 1841s buoi 72 tap .dlg «Chuyện trong cung» «Viết thư an ủiRất vữngTốnSức -2Đượcđược tiếng hiền»
+2026-11-26T08:47:38.446Z 1849s buoi 72 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tài nghệ»
+2026-11-26T08:47:40.069Z 1850s buoi 72 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»
+2026-11-26T08:47:41.244Z 1851s buoi 72 tap .dlg «Kỳ nguyệt sự» «Báo đúng ngàyRất vữngTốnkhôngĐượcsổ ghi đúng, khôn»
+2026-11-26T08:47:42.144Z 1852s buoi 72 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:47:43.017Z 1853s buoi 72 tap .kmov «Ta biết rồi»
+2026-11-26T08:47:47.660Z 1858s buoi 73 tap #dawn «Tiếp theo»
+2026-11-26T08:47:49.599Z 1860s buoi 73 tap #kmrew «Thường»
+2026-11-26T08:47:50.440Z 1861s buoi 73 tap .dlg «Lui»
+2026-11-26T08:47:51.390Z 1862s buoi 73 tap #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+2026-11-26T08:47:52.309Z 1862s buoi 73 tap .dlg «Ghi chú»
+2026-11-26T08:47:54.024Z 1864s buoi 73 tap #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+2026-11-26T08:47:54.807Z 1865s buoi 73 tap .dlg «Ghi chú»
+2026-11-26T08:47:56.539Z 1867s buoi 73 tap #kmrew «Thường»
+2026-11-26T08:48:05.505Z 1876s buoi 73 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:48:05.716Z 1876s buoi 73 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:48:06.179Z 1876s buoi 73 tap .dlg «Lui»
+2026-11-26T08:48:07.087Z 1877s buoi 73 tap #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+2026-11-26T08:48:07.914Z 1878s buoi 73 tap .dlg «Lui»
+2026-11-26T08:48:08.799Z 1879s buoi 73 tap #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+2026-11-26T08:48:09.696Z 1880s buoi 73 tap .dlg «Lui»
+2026-11-26T08:48:10.582Z 1881s buoi 73 tap #kmrew «Nhận»
+2026-11-26T08:48:11.374Z 1881s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:12.147Z 1882s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:12.957Z 1883s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:13.775Z 1884s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:14.674Z 1885s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:15.487Z 1886s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:16.298Z 1886s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:17.131Z 1887s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:17.950Z 1888s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:18.766Z 1889s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:19.582Z 1890s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:20.381Z 1890s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:21.187Z 1891s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:21.976Z 1892s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:22.769Z 1893s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:23.599Z 1894s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:24.452Z 1895s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:25.271Z 1895s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:26.094Z 1896s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:26.894Z 1897s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:27.694Z 1898s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:28.490Z 1899s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:29.284Z 1899s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:30.054Z 1900s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:30.828Z 1901s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:31.605Z 1902s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:32.556Z 1903s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:33.348Z 1903s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:34.168Z 1904s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:34.964Z 1905s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:35.755Z 1906s buoi 73 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:48:36.558Z 1907s buoi 73 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:48:37.371Z 1907s buoi 73 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:48:38.353Z 1908s buoi 73 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:48:47.865Z 1918s buoi 73 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «3Chí tôn»
+2026-11-26T08:48:48.667Z 1919s buoi 73 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:48:49.558Z 1920s buoi 73 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Cung nữ thân tín tam đẳngLiễu Nhi»
+2026-11-26T08:48:51.010Z 1921s buoi 73 tap .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+2026-11-26T08:48:51.889Z 1922s buoi 73 tap .dlg «Ta bắt gặp» «Thôi, lui về cungTốn0 khắc đi đườngĐượcta lui về c»
+2026-11-26T08:48:59.864Z 1930s buoi 73 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»
+2026-11-26T08:49:02.887Z 1933s buoi 74 tap .dlg «Bổng lộc tháng tám» «Sai Cung nữ thân tín tam đẳng Liễu Nhi đòi lại phầ»
+2026-11-26T08:49:03.810Z 1934s buoi 74 tap .dlg «Có người tìm đến» «Tiếp chuyệnTốn1 khắcĐượccùng Hoàng hậu Phú Sát Hàm»
+2026-11-26T08:49:10.886Z 1941s buoi 74 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Chứng mất ngủ · nhẹ»
+2026-11-26T08:49:11.810Z 1942s buoi 74 tap .dlg «Chứng mất ngủ · nhẹ» «Lui»
+2026-11-26T08:49:12.818Z 1943s buoi 74 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tư trang»
+2026-11-26T08:49:14.229Z 1944s buoi 74 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:49:15.274Z 1945s buoi 75 tap #kmrew «Thường»
+2026-11-26T08:49:16.092Z 1946s buoi 75 tap .dlg «Ghi chú»
+2026-11-26T08:49:17.787Z 1948s buoi 75 tap #kmrew «Thường»
+2026-11-26T08:49:18.552Z 1949s buoi 75 tap .dlg «Ghi chú»
+2026-11-26T08:49:20.189Z 1950s buoi 75 tap #kmrew «Thường»
+2026-11-26T08:49:28.529Z 1959s buoi 75 noFreePoint .dlg «Ghi chú»
+2026-11-26T08:49:28.605Z 1959s buoi 75 DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+2026-11-26T08:49:29.056Z 1959s buoi 75 tap .dlg «Lui»
+2026-11-26T08:49:29.935Z 1960s buoi 75 tap #kmrew «Nhận»
+2026-11-26T08:49:31.247Z 1961s buoi 75 tap .dlg «Thu săn» «Chúc nàng ta đi săn bình anTốnBạc -20ĐượcDanh +2»
+2026-11-26T08:49:32.215Z 1962s buoi 75 tap .dlg «Chương 1 khép lại» «Lui»
+2026-11-26T08:49:39.542Z 1970s buoi 75 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Cấm túc2 tháng»
+2026-11-26T08:49:40.470Z 1971s buoi 75 tap .dlg «Cấm túc 2 tháng» «Lui»
+2026-11-26T08:49:41.520Z 1972s buoi 75 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»
+2026-11-26T08:49:42.701Z 1973s buoi 75 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:49:43.645Z 1974s buoi 76 tap .dlg «Chương 2: Sơ thừa ân sủng» «Lui»
+2026-11-26T08:49:44.692Z 1975s buoi 76 tap .dlg «Thỉnh bình an mạch» «Lui»
+2026-11-26T08:49:45.689Z 1976s buoi 76 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»
+2026-11-26T08:49:46.602Z 1977s buoi 76 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tư trang»
+2026-11-26T08:49:47.562Z 1978s buoi 76 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»
+2026-11-26T08:49:48.330Z 1978s buoi 76 tap .kmov «Ta biết rồi»
+2026-11-26T08:49:52.687Z 1983s buoi 77 tap #dawn «Tiếp theo»
+2026-11-26T08:49:53.461Z 1984s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:49:54.267Z 1984s buoi 77 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:49:55.064Z 1985s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:49:55.867Z 1986s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:49:56.663Z 1987s buoi 77 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:49:57.462Z 1988s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:49:58.267Z 1988s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:49:59.067Z 1989s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:49:59.851Z 1990s buoi 77 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:50:00.628Z 1991s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:50:01.417Z 1992s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:50:02.213Z 1992s buoi 77 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:50:03.016Z 1993s buoi 77 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:50:03.815Z 1994s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:50:04.596Z 1995s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:50:05.418Z 1996s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:50:06.195Z 1996s buoi 77 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:50:06.979Z 1997s buoi 77 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:50:07.770Z 1998s buoi 77 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:50:08.810Z 1999s buoi 77 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:50:09.825Z 2000s buoi 77 tap .dlg «Thu săn» «Lui»
+2026-11-26T08:50:19.289Z 2009s buoi 77 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Tin báo: 13 tin mới»
+2026-11-26T08:50:20.329Z 2010s buoi 77 tap .dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»
+2026-11-26T08:50:21.233Z 2011s buoi 77 tap .dlg «Tin chờ người sai đi» «Lui»
+2026-11-26T08:50:28.612Z 2019s buoi 77 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Hành sự»
+2026-11-26T08:50:29.373Z 2019s buoi 77 tap .kfoc «Lui»
+2026-11-26T08:50:30.871Z 2021s buoi 77 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Sang buổi»
+2026-11-26T08:50:32.524Z 2023s buoi 78 tap .dlg «Ta bắt gặp» «Mặc kệTốnkhôngĐượckhôngGhi chúkhông dính vào chuyệ»
+2026-11-26T08:50:34.022Z 2024s buoi 78 tap .dlg «Hội phối đồ: báo đề» «Xem thêm»
+2026-11-26T08:50:37.371Z 2027s buoi 78 tap .dlg «Hội phối đồ: báo đề» «Hỏi Phi Bạch Uyển Thanh (từng dự hội)Có cơTốnkhông»
+2026-11-26T08:50:44.852Z 2035s buoi 78 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mục tiêu chương (có mới)»
+2026-11-26T08:50:45.627Z 2036s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:50:46.868Z 2037s buoi 78 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:50:47.908Z 2038s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»
+2026-11-26T08:50:49.299Z 2039s buoi 78 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:50:50.596Z 2041s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»
+2026-11-26T08:50:51.626Z 2042s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:50:52.707Z 2043s buoi 78 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»
+2026-11-26T08:50:54.014Z 2044s buoi 78 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:50:55.081Z 2045s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»
+2026-11-26T08:50:56.314Z 2046s buoi 78 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:50:57.344Z 2047s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»
+2026-11-26T08:50:58.289Z 2048s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:50:59.333Z 2049s buoi 78 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»
+2026-11-26T08:51:00.643Z 2051s buoi 78 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:51:01.804Z 2052s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»
+2026-11-26T08:51:03.116Z 2053s buoi 78 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»
+2026-11-26T08:51:04.158Z 2054s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:04.957Z 2055s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:05.725Z 2056s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:06.802Z 2057s buoi 78 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:51:07.852Z 2058s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»
+2026-11-26T08:51:08.858Z 2059s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:09.625Z 2060s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:10.801Z 2061s buoi 78 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:51:11.886Z 2062s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lên · đang lấyTốnkhôngĐượcSủng được thêm m»
+2026-11-26T08:51:12.993Z 2063s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:13.780Z 2064s buoi 78 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:15.000Z 2065s buoi 78 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:51:16.076Z 2066s buoi 78 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:51:17.294Z 2067s buoi 78 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»
+2026-11-26T08:51:18.297Z 2068s buoi 78 tap .dlg «Danh hiệu» «Lui»
+2026-11-26T08:51:25.694Z 2076s buoi 78 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»
+2026-11-26T08:51:27.144Z 2077s buoi 78 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:51:28.156Z 2078s buoi 79 tap .dlg «Việc khó xử» «Mời sư làm lễ trừ tàRất vữngTốnBạc -30Đượcđược tiế»
+2026-11-26T08:51:29.020Z 2079s buoi 79 tap .dlg «Bị tịch thu» «Lui»
+2026-11-26T08:51:36.526Z 2087s buoi 79 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mục tiêu chương»
+2026-11-26T08:51:37.621Z 2088s buoi 79 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:51:38.579Z 2089s buoi 79 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»
+2026-11-26T08:51:39.507Z 2090s buoi 79 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»
+2026-11-26T08:51:40.272Z 2090s buoi 79 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:41.040Z 2091s buoi 79 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:41.805Z 2092s buoi 79 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:42.852Z 2093s buoi 79 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:51:43.807Z 2094s buoi 79 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»
+2026-11-26T08:51:44.972Z 2095s buoi 79 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:51:46.005Z 2096s buoi 79 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:51:46.775Z 2097s buoi 79 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:47.801Z 2098s buoi 79 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:51:48.724Z 2099s buoi 79 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»
+2026-11-26T08:51:49.755Z 2100s buoi 79 tap .dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»
+2026-11-26T08:51:50.715Z 2101s buoi 79 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»
+2026-11-26T08:51:51.490Z 2102s buoi 79 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:52.256Z 2102s buoi 79 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:53.236Z 2103s buoi 79 tap .dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»
+2026-11-26T08:51:54.039Z 2104s buoi 79 tap .dlg «Danh hiệu» «Danh hiệu 1/35»
+2026-11-26T08:51:55.117Z 2105s buoi 79 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:51:56.108Z 2106s buoi 79 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:51:57.130Z 2107s buoi 79 tap .dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»
+2026-11-26T08:51:58.090Z 2108s buoi 79 tap .dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»
+2026-11-26T08:51:58.982Z 2109s buoi 79 tap .dlg «Danh hiệu» «Lui»
+2026-11-26T08:52:06.291Z 2116s buoi 79 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xét phẩm: thiếu 3»
+2026-11-26T08:52:07.123Z 2117s buoi 79 tap .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+2026-11-26T08:52:08.426Z 2119s buoi 79 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:52:09.382Z 2119s buoi 80 tap .dlg «Tin đồn» «Làm như không ngheRất vữngTốnkhôngĐượcđược tiếng h»
+2026-11-26T08:52:18.828Z 2129s buoi 80 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tài nghệ»
+2026-11-26T08:52:19.687Z 2130s buoi 80 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»
+2026-11-26T08:52:20.607Z 2131s buoi 80 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»
+2026-11-26T08:52:21.392Z 2132s buoi 80 tap .kmov «Ta biết rồi»
+2026-11-26T08:52:25.146Z 2135s buoi 81 tap #dawn «Tiếp theo»
+2026-11-26T08:52:25.971Z 2136s buoi 81 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:52:26.760Z 2137s buoi 81 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:52:27.559Z 2138s buoi 81 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:52:28.360Z 2138s buoi 81 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:52:29.148Z 2139s buoi 81 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:52:29.949Z 2140s buoi 81 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:52:30.746Z 2141s buoi 81 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:52:31.551Z 2142s buoi 81 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:52:32.385Z 2143s buoi 81 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:52:33.188Z 2143s buoi 81 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:52:34.125Z 2144s buoi 81 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:52:44.044Z 2154s buoi 81 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Lật thẻKhông có»
+2026-11-26T08:52:44.873Z 2155s buoi 81 tap .dlg «Lật thẻ: Không có» «Lui»
+2026-11-26T08:52:45.846Z 2156s buoi 81 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Dư đồ»
+2026-11-26T08:52:47.278Z 2157s buoi 81 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:52:48.904Z 2159s buoi 82 tap .dlg «Có người đến» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiền, nàng ta k»
+2026-11-26T08:52:56.214Z 2166s buoi 82 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 8 người.» «Giao tình»
+2026-11-26T08:52:57.095Z 2167s buoi 82 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 8 người.» «Mệnh truyện»
+2026-11-26T08:52:58.251Z 2168s buoi 82 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 8 người.» «Sang buổi»
+2026-11-26T08:52:59.397Z 2170s buoi 83 tap .dlg «Lời cảnh báo» «Ra lệnh phòng bịRất vữngTốnkhôngĐượcgiữ được mình:»
+2026-11-26T08:53:00.416Z 2171s buoi 83 tap .dlg «Phòng bị» «Bãi lệnh: Cung nữ thân tín tam đẳng Liễu Nhi: canh»
+2026-11-26T08:53:01.271Z 2171s buoi 83 tap .dlg «Phụ tuyến · Tra ai lấy trộm nhân sâm ở Thái y viện» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+2026-11-26T08:53:10.617Z 2181s buoi 83 tap page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bổng lộcsau 1 tuần»
+2026-11-26T08:53:11.430Z 2182s buoi 83 tap .dlg «Bổng lộc» «Lui»
+2026-11-26T08:53:12.332Z 2182s buoi 83 tap page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Chứng mất ngủ · nhẹ»
+2026-11-26T08:53:13.142Z 2183s buoi 83 tap .dlg «Chứng mất ngủ · nhẹ» «Lui»
+2026-11-26T08:53:14.319Z 2184s buoi 83 tap page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»
+2026-11-26T08:53:15.164Z 2185s buoi 84 tap .dlg «Thu săn» «Lui»
+2026-11-26T08:53:24.699Z 2195s buoi 84 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Chọn chính mình»
+2026-11-26T08:53:25.902Z 2196s buoi 84 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»
+2026-11-26T08:53:27.087Z 2197s buoi 84 tap .dlg «Kỳ nguyệt sự» «Giấu, không báoRất vữngTốnkhôngĐượcthẻ bài vẫn trê»
+2026-11-26T08:53:27.922Z 2198s buoi 84 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:53:28.787Z 2199s buoi 84 tap .kmov «Ta biết rồi»
+2026-11-26T08:53:33.000Z 2203s buoi 85 tap #dawn «Tiếp theo»
+2026-11-26T08:53:33.845Z 2204s buoi 85 tap #kmrew «Nhận»
+2026-11-26T08:53:34.672Z 2205s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:35.664Z 2206s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:36.509Z 2207s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:37.345Z 2207s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:38.176Z 2208s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:39.000Z 2209s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:39.865Z 2210s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:40.678Z 2211s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:41.532Z 2212s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:42.406Z 2213s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:43.251Z 2213s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:44.081Z 2214s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:44.897Z 2215s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:45.703Z 2216s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:46.515Z 2217s buoi 85 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:53:47.347Z 2217s buoi 85 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:53:48.181Z 2218s buoi 85 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:53:49.168Z 2219s buoi 85 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:53:58.692Z 2229s buoi 85 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Quẻ Trung (Sủng)»
+2026-11-26T08:53:59.592Z 2230s buoi 85 tap .dlg «Quẻ Trung · Sủng» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»
+2026-11-26T08:54:00.441Z 2231s buoi 85 tap .dlg «Gieo lại quẻ» «Lui»
+2026-11-26T08:54:01.902Z 2232s buoi 85 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:54:03.044Z 2233s buoi 86 tap .dlg «Bổng lộc tháng chín» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiềnMấtcó thể b»
+2026-11-26T08:54:03.898Z 2234s buoi 86 tap .dlg «Điềm báo» «Lui»
+2026-11-26T08:54:11.263Z 2241s buoi 86 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tư trang»
+2026-11-26T08:54:12.092Z 2242s buoi 86 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Chứng mất ngủ · nhẹ»
+2026-11-26T08:54:13.012Z 2243s buoi 86 tap .dlg «Chứng mất ngủ · nhẹ» «Lui»
+2026-11-26T08:54:14.485Z 2245s buoi 86 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:54:15.609Z 2246s buoi 87 tap .dlg «Lời cảnh báo» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Phú Sát Hàm»
+2026-11-26T08:54:16.714Z 2247s buoi 87 tap .dlg «Thỉnh bình an mạch» «Lui»
+2026-11-26T08:54:18.327Z 2248s buoi 87 tap .dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 120 b»
+2026-11-26T08:54:20.034Z 2250s buoi 87 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:54:20.890Z 2251s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:21.728Z 2252s buoi 87 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:54:22.575Z 2253s buoi 87 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:54:23.433Z 2254s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:24.246Z 2254s buoi 87 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:54:25.061Z 2255s buoi 87 tap .dlg «Biếu quà làm lành» «Trà mốc (hàng kém)»
+2026-11-26T08:54:25.898Z 2256s buoi 87 tap .dlg «Biếu quà làm lành» «Bức thư»
+2026-11-26T08:54:26.737Z 2257s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:27.569Z 2258s buoi 87 tap .dlg «Biếu quà làm lành» «Bức thư»
+2026-11-26T08:54:28.398Z 2259s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:29.228Z 2259s buoi 87 tap .dlg «Biếu quà làm lành» «Bức thư»
+2026-11-26T08:54:30.064Z 2260s buoi 87 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:54:30.920Z 2261s buoi 87 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:54:31.759Z 2262s buoi 87 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:54:32.581Z 2263s buoi 87 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:54:33.412Z 2264s buoi 87 tap .dlg «Biếu quà làm lành» «Mảnh giấy nhắn»
+2026-11-26T08:54:34.250Z 2264s buoi 87 tap .dlg «Biếu quà làm lành» «Bức thư»
+2026-11-26T08:54:35.081Z 2265s buoi 87 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:54:35.995Z 2266s buoi 87 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:54:36.832Z 2267s buoi 87 tap .dlg «Biếu quà làm lành» «Trà mốc (hàng kém)»
+2026-11-26T08:54:37.649Z 2268s buoi 87 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:54:38.462Z 2269s buoi 87 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:54:39.287Z 2269s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:40.112Z 2270s buoi 87 tap .dlg «Biếu quà làm lành» «Trà mốc (hàng kém)»
+2026-11-26T08:54:40.944Z 2271s buoi 87 tap .dlg «Biếu quà làm lành» «Bức thư»
+2026-11-26T08:54:41.760Z 2272s buoi 87 tap .dlg «Biếu quà làm lành» «Nước bào hoa»
+2026-11-26T08:54:42.604Z 2273s buoi 87 tap .dlg «Biếu quà làm lành» «Lư pháp lam bốn chân»
+2026-11-26T08:54:43.427Z 2274s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:44.244Z 2274s buoi 87 tap .dlg «Biếu quà làm lành» «Trà mốc (hàng kém)»
+2026-11-26T08:54:45.066Z 2275s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:45.880Z 2276s buoi 87 tap .dlg «Biếu quà làm lành» «Trà mốc (hàng kém)»
+2026-11-26T08:54:46.724Z 2277s buoi 87 tap .dlg «Biếu quà làm lành» «Nến sáp vàng»
+2026-11-26T08:54:47.589Z 2278s buoi 87 tap .dlg «Biếu quà làm lành» «Bức thư»
+2026-11-26T08:54:48.560Z 2279s buoi 87 tap .dlg «Biếu quà làm lành» «Lui»
+2026-11-26T08:54:56.093Z 2286s buoi 87 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tin báo: 20 tin mới»
+2026-11-26T08:54:57.216Z 2287s buoi 87 tap .dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»
+2026-11-26T08:55:04.532Z 2295s buoi 87 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bổng lộcsau 3 tuần»
+2026-11-26T08:55:05.451Z 2296s buoi 87 tap .dlg «Bổng lộc» «Lui»
+2026-11-26T08:55:06.828Z 2297s buoi 87 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»
+2026-11-26T08:55:08.093Z 2298s buoi 88 tap .dlg «Phụ tuyến · Tân quân lập uy · Việc của phe» «Khéo từ chốiRất vữngTốnkhôngĐượcgiữ mìnhMấtmất lòn»
+2026-11-26T08:55:15.330Z 2305s buoi 88 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tâm trạngBình thản-4»
+2026-11-26T08:55:16.251Z 2306s buoi 88 tap .dlg «Danh» «Lui»
+2026-11-26T08:55:17.208Z 2307s buoi 88 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Ra vào cung cấm»
+2026-11-26T08:55:18.160Z 2308s buoi 88 tap .dlg «Ra vào cung cấm» «Lui»
+2026-11-26T08:55:19.304Z 2309s buoi 88 tap page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»
+2026-11-26T08:55:20.255Z 2310s buoi 88 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:55:21.150Z 2311s buoi 88 tap .kmov «Ta biết rồi»
+2026-11-26T08:55:26.244Z 2316s buoi 89 tap #dawn «Tiếp theo»
+2026-11-26T08:55:27.033Z 2317s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:27.815Z 2318s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:28.634Z 2319s buoi 89 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:55:29.442Z 2320s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:30.254Z 2320s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:31.051Z 2321s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:31.851Z 2322s buoi 89 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:55:32.650Z 2323s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:33.461Z 2324s buoi 89 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:55:34.249Z 2324s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:35.030Z 2325s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:35.821Z 2326s buoi 89 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:55:36.720Z 2327s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:37.522Z 2328s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:38.336Z 2328s buoi 89 tap .kbk «Tổng lược» «Trang sau»
+2026-11-26T08:55:39.131Z 2329s buoi 89 tap .kbk «Tổng lược» «Trang trước»
+2026-11-26T08:55:39.922Z 2330s buoi 89 tap .kbk «Tổng lược» «Lui»
+2026-11-26T08:55:40.948Z 2331s buoi 89 tap .dlg «Tin trong cung buổi này» «Lui»
+2026-11-26T08:55:50.489Z 2341s buoi 89 tap page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Ân tình (đêm)8»
+2026-11-26T08:55:51.369Z 2341s buoi 89 tap .dlg «Ân tình (đêm)» «Lui»
+2026-11-26T08:55:52.330Z 2342s buoi 89 tap page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Chí tôn · chạm để mở danh sách»
+2026-11-26T08:55:53.150Z 2343s buoi 89 tap page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»
+2026-11-26T08:55:54.699Z 2345s buoi 89 tap page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»
