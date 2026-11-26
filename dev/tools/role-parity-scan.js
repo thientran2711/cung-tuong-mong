@@ -16,7 +16,7 @@ const KEYLAB={
  "effort":["Kinh hồng vũ","Đàn khúc Phượng cầu hoàng","Đánh cờ với Hoàng thượng","Dâng một cành hoa","Dâng "],
  "cx:face":["Dưỡng nhan"],"cx:arts":["Luyện cầm kỳ thi họa"],"cx:book":["Đọc binh thư, sử sách"],"cx:alms":["Phát chẩn cho cung nhân"],"cx:sutra":["Tụng kinh, làm việc thiện"],
  "cx:maidR":["Thưởng cung nữ"],"cx:rest":["Nghỉ ngơi dưỡng sức"],"cx:study":["Tự học","Học với thầy","Luyện "],"cx:thHelp":["Xin Thái hậu đỡ lời"],"cx:hhShield":["Xin Hoàng hậu che chở"],
- "cx:buy":["Xem hàng Nội vụ phủ","Mua ","Nhờ thái giám mua đồ","Để ta xem"],"cx:ally":["Kết giao"],"cx:portrait":["Vẽ chân dung tặng Thái hậu"],"cx:humble":["Nhún nhường"],"cx:tqGift":["Biếu"],
+ "cx:buy":["Xem hàng Nội vụ phủ","Mua ","Nhờ thái giám mua đồ","Để ta xem"],"cx:ally":["Kết giao"],"cx:portrait":["Vẽ chân dung tặng Thái hậu"],"cx:humble":["Nhún nhường"],"cx:mendGift":["Hậu lễ tạ tội"],"cx:mendGo":["Nhờ người đứng giữa"],"cx:tqGift":["Biếu"],
  "hh:judge":["Xử tội"],"hh:conf":["Tịch thu trang sức (có cớ)","Tịch thu vô cớ"],"hh:reward":["Ban thưởng"],"hh:pardon":["Ân xá"],"hh:cutpay":["Khất bổng lộc"],
  "maid:sweep":["Quét sân, lau điện","Đốc thúc cung nữ quét dọn"],"maid:tea":["Dâng trà, hầu điểm tâm"],"maid:follow":["Theo hầu chủ"],"maid:nvp":["Lĩnh đồ ở Nội vụ phủ"],
  "maid:rite":["Học lễ nghi với cô cô"],"maid:study":["Luyện thêu thùa, chữ nghĩa"],"maid:groom":["Chải chuốt, giữ nhan sắc"],"maid:rest":["Nghỉ lấy sức"],"maid:embro":["Thêu khăn bán ra ngoài"],
