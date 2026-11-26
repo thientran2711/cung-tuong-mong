@@ -12,7 +12,7 @@ Unit U3b, pair 4. START_CTX ~3 %. Rules: real taps; segment = 2 h real-tap OR ye
 | 17 | 9SAR | u4 7959f1b5 PROVISIONAL | + patch sha 85909494 | Fold / iPad | 20 | **VALID — MITIGATED** (same RELOAD_AT list, all 10 reloads OK both seats; 85 min closed by time at buoi 149/148, year 2, 0 stuck, 0 SEATHANG). Earlier attempt: Worker not ready, 47 min on title = runner script bug, discarded. (u3br/seg17-9SAR-MITIGATED) |
 | 18a | D36E | u4 7959f1b5 | + f40a56ff | iPad / Fold | 21 | stopped at ~18 min on foreman order (switch to freeze-fix verify) |
 | 18b | FJDK | **u5b** = u4 + jksize/jinv diff of coop-freeze-kmrew c20aaa6e | + f40a56ff | Fold / iPad | 18 | **VALID — UNMITIGATED (RELOAD_AT=20 only)** B FREEZE-FIX VERIFY: passed buoi 61 + 73, closed by time 85 min at buoi 131/132 year 2, 0 stuck, 0 SEATHANG; DOM nodes flat 4–9k (u4: 25k→55k + wedge at 61) (u3br/seg18-FJDK-u5b-verify) |
-| 19 | (running) | u5b | + f40a56ff | iPad / Fold | 22 | UNMITIGATED, running |
+| 19 | VFE5 | u5b | + f40a56ff | iPad / Fold | 22 | **VALID — UNMITIGATED (RELOAD_AT=20)** B FREEZE-FIX VERIFY #3: iPad host / Fold guest, 85 min closed by time at buoi 124 year 2, 0 stuck, 0 SEATHANG; DOM nodes 4–9k flat; host documents count 9→27 (watch) (u3br/seg19-VFE5-u5b) |
 
 ## Findings
 - DOM nodes grow ~2–3k/min between reloads (host 25k@8 min → 48.6k@16 min), drop at each reload but not to baseline (~38k after 3 reloads); documents 5–12. Freeze root = jinv kitInvFit observer leak (fix review/coop-freeze-kmrew ee0824f4).
@@ -22,3 +22,6 @@ Unit U3b, pair 4. START_CTX ~3 %. Rules: real taps; segment = 2 h real-tap OR ye
 
 ## Seg16 facts for the freeze fixer
 - 76JU guest Fold passed «Chương 1 khép lại» once (buoi 73, 9 buoi after reload at 64); «Bổng lộc» chains 34 taps, first at buoi 13 (5 after reload at 8); no hang.
+
+## HANDOVER / END (U3b-2, 26/11 ~10:55Z)
+Valid: seg16 76JU + seg17 9SAR (MITIGATED), seg18 FJDK + seg19 VFE5 (u5b, UNMITIGATED, freeze fix verified twice). Invalid: seg12–15 (stuck/hang before fixes). Job done per Foreman B child 3; no seed 23 started. Box: servers stopped; work dirs /home/user/wt (game4 = u4, game5 = u5b, run17.sh/run18.sh = room scripts). START_CTX ~3 %, ended well below the roll line.
