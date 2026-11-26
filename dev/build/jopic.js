@@ -168,10 +168,24 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
+/* KK36 (MAIN 151 look «Thì thầm nói xấu … ???», law 11 = every card / option picture): a picture that would be the grey stand-in (a stranger's kit
+   silhouette) becomes the PAINTED veiled portrait (kitVeilPor) — until that art is on the CDN, the option's own act picture, else the shared stand-in.
+   The face flag / who stay (person pickers are still recognised). */
+{const kop0=kitOptPic;kitOptPic=function(title,b){const r=kop0.apply(this,arguments);try{if(r&&r.src&&KIT_GREYSRC.test(r.src)){const v=kitVeilPor(r.src);if(v)return Object.assign({},r,{src:v,veil:true});
+  /* an option that IS the person (a person picker card: kgp / kgt) keeps her kit stand-in until the veiled art lands — its picture is her, not an act */
+  try{const m=typeof Q!=="undefined"&&Q[0],o=b&&b.dataset&&b.dataset.m!=null&&m&&m.opts&&m.opts[+b.dataset.m];if(o&&(o.kgp||o.kgt))return r}catch(e){}
+  const t=kitOptPlain(title);const k=typeof kitActKey==="function"&&t?kitActKey(t):"";const s=k&&k!=="-"?`img/act-${k}.webp`:"";if(s&&kitOptOnCdn(s))return Object.assign({},r,{src:s,key:k,greyOff:true});
+  if(typeof KIT_PH!=="undefined"){const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";return Object.assign({},r,{src:KIT_PH.act[tone],key:"",greyOff:true,tone})}}}catch(e){}return r};try{window.kitOptPic=kitOptPic}catch(e){}}
+/* KK36 (MAIN 151 look: «Thì thầm nói xấu … ???» hand card = grey silhouette): the grey stand-in (KIT §59.1 img/kit/unknown[-fig]-f|m|k) is NEVER a
+   card / stage picture. An unknown person's card shows the PAINTED veiled portrait (KIT_VEILPOR, art slot for Foreman C — ART REQUEST K-VEIL-POR) once it
+   is on the CDN; until then the card falls back to its own act picture / the shared stand-in like any card without a person. */
+const KIT_GREYSRC=/img\/kit\/unknown(-fig)?-([fmk])\.webp/;const KIT_VEILPOR={f:"img/kit/veil-por-f.webp",m:"img/kit/veil-por-m.webp",k:"img/kit/veil-por-k.webp"};
+function kitVeilPor(src){try{const g=KIT_GREYSRC.exec(String(src||""));if(!g)return src;const v=KIT_VEILPOR[g[2]];const has=typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(v);return has?v:""}catch(e){return""}}
+try{window.KIT_GREYSRC=KIT_GREYSRC;window.KIT_VEILPOR=KIT_VEILPOR;window.kitVeilPor=kitVeilPor}catch(e){}
 function kitOptLead(t){try{const C=[];const m=typeof Q!=="undefined"&&Q[0];
   if(m&&Array.isArray(m.faces))m.faces.forEach(x=>{const w=x&&x[0];if(w&&w.src)C.push([w,[x[1],w.rw].filter(Boolean)])});
   if(typeof pEmp==="function")C.push([pEmp(),["Hoàng thượng","bệ hạ","Bệ hạ"]]);if(typeof pTH==="function"&&!(typeof S!=="undefined"&&S.thDead))C.push([pTH(),["Thái hậu"]]);
-  for(const [w,ns] of C)if(w&&w.src&&ns.some(n=>n&&n.length>2&&kitOptHit(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"i"),t)))return{src:w.src,key:w.rk||"",how:"lead",lead:true}}catch(e){}return null}
+  for(const [w,ns] of C)if(w&&w.src&&ns.some(n=>n&&n.length>2&&kitOptHit(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"i"),t))){const s=kitVeilPor(w.src);if(!s)return null;return{src:s,key:s===w.src?(w.rk||""):"veil",how:"lead",lead:true}}}catch(e){}return null}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
 /* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
 const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */

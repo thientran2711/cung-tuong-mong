@@ -39,6 +39,7 @@ html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .k3ev,html body #modal
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig{position:absolute!important;z-index:2;left:var(--fx)!important;top:var(--fy)!important;width:var(--fw)!important;height:var(--fh)!important;margin:0!important;padding:0!important;
  display:block!important;overflow:visible!important;pointer-events:none;background:none!important;border:0!important;max-width:none!important;max-height:none!important;flex:none!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kszfig{display:none!important}
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig.kstg-nofig{visibility:hidden!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig>img{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;min-height:0!important;object-fit:contain!important;object-position:50% 100%!important;filter:drop-shadow(0 4px 10px #0005)}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig>.kt3{position:absolute!important;left:50%!important;top:var(--tagy,0px)!important;transform:translate(-50%,-100%)!important;width:max-content!important;max-width:14em!important;z-index:3;margin:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kt3 .knr{background:#fffaf0e8;border:1px solid var(--gold,#b8901f);border-radius:8px;padding:1px 8px;box-shadow:0 2px 6px #0003}
@@ -73,11 +74,16 @@ const KIT_EVBG_PID={thbirthday:"ev-bg-thanhtho-calm",adStroll:"ev-bg-vuon-calm",
 function kitEvBg(m){try{const ok=src=>{try{return typeof KIT_CDNHAVE!=="undefined"&&!!KIT_CDNHAVE&&KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return false}};/* the CDN index (jevban KIT_CDNHAVE): a key not published yet = not used */if(m&&m.bg){const s=/\//.test(m.bg)?m.bg:"img/"+m.bg+".webp";if(ok(s))return s}
  if(m&&m.pid&&KIT_EVBG_PID[m.pid]){const s="img/"+KIT_EVBG_PID[m.pid]+".webp";if(ok(s))return s}
  const t=String(m&&(m.t||m.title)||"").replace(/<[^>]+>/g," ");for(const [re,k] of KIT_EVBG)if(re.test(t)){const s="img/"+k+".webp";if(ok(s))return s}}catch(e){}return""}
-function kstgPic(dl){try{const m=typeof Q!=="undefined"&&Q[0];const k=kitEvBg(m);if(k)return k;const im=dl.querySelector(".k3ev img,.kdlgart img,.kpiart img,.k3mpic img");return im&&(im.currentSrc||im.src)||""}catch(e){return""}}
+/* KK36 (MAIN 151 look of 893613ee, «Tin báo» Fold flat dark brown; law 11 = every stage caller): no event picture → the painting of the place she is in
+   right now (the same #scimg picture the home stage shows: SCIMG[placeOf(S.place).sc], season × buổi via scnSync); the flat kit colour is never shown */
+function kstgPlacePic(){try{if(typeof scnSync==="function")scnSync();const P=typeof placeOf==="function"&&S?placeOf(S.place):null;const f=P&&typeof SCIMG==="object"&&(SCIMG[P.sc]||SCIMG.rv);if(f)return "img/"+f+".webp"}catch(e){}
+ try{const s=getComputedStyle(document.getElementById("scimg")).backgroundImage||"";const u=/url\(["']?([^"')]+)/.exec(s);if(u)return u[1]}catch(e){}return""}
+function kstgPic(dl){try{const m=typeof Q!=="undefined"&&Q[0];const k=kitEvBg(m);if(k)return k;const im=dl.querySelector(".k3ev img,.kdlgart img,.kpiart img,.k3mpic img");return im&&(im.currentSrc||im.src)||kstgPlacePic()}catch(e){return kstgPlacePic()}}
 try{window.kitEvBg=kitEvBg;window.KIT_EVBG=KIT_EVBG;window.KIT_EVBG_PID=KIT_EVBG_PID}catch(e){}
 /* the two full figures of the stage (made once per dialog): the SPEAKER = the frame's speaker (Q item .who; else the frame's figure picture), with
    the frame's own name tag; HER = kitFigOf(S) (right tier / age band / dress), unless she is the speaker */
-function kstgFig(mb,cls,src,tagHTML){let f=mb.querySelector(":scope>."+cls);if(f){const im=f.querySelector("img");if(im&&src&&im.getAttribute("src")!==src)im.src=src;return f}if(!src)return null;
+function kstgFig(mb,cls,src,tagHTML){const grey=!!src&&typeof KIT_GREYSRC!=="undefined"&&KIT_GREYSRC.test(src);if(grey)src="";/* KK36: the grey stand-in (§59.1 silhouette) never stands on the stage */
+ let f=mb.querySelector(":scope>."+cls);if(f){const im=f.querySelector("img");if(im&&src&&im.getAttribute("src")!==src){f.style.visibility="hidden";f.classList.remove("kstg-nofig");im.src=src;const sh=()=>{if(!(mb.closest(".dlg")||{}).__kstHold)f.style.visibility=""};(im.decode?im.decode().then(sh,()=>f.classList.add("kstg-nofig")):sh())}if(grey){f.remove();return null}return f}if(!src)return null;
  f=document.createElement("div");f.className="kstg-fig "+cls;f.setAttribute("aria-hidden","true");const im=document.createElement("img");im.alt="";im.decoding="async";im.crossOrigin="anonymous";im.src=src;f.appendChild(im);
  if(tagHTML){const tg=document.createElement("div");tg.className="kt3";tg.innerHTML=tagHTML;f.appendChild(tg)}if(mb.closest(".dlg")&&mb.closest(".dlg").__kstHold)f.style.visibility="hidden";mb.appendChild(f);return f}
 function kstgFigs(dl,mb){try{const m=typeof Q!=="undefined"&&Q&&Q[0]||null,who=m&&m.who&&typeof m.who==="object"&&!m.who.src?m.who:null;const old=mb.querySelector(".kszfig");
@@ -127,9 +133,12 @@ function kstgIn(dl){try{const still=typeof kitHandStill==="function"&&kitHandSti
  const figsNow=()=>[...mb.querySelectorAll(":scope>.kstg-fig")];figsNow().forEach(f=>f.style.visibility="hidden");dl.__kstHold=1;
  /* smooth (MD4 lesson): nobody walks in half-painted — the figures wait (hidden) until their pictures are decoded, at most KIT_HAND.readyMs */
  const ims=()=>figsNow().map(f=>f.querySelector("img")).filter(Boolean),cap=(typeof KIT_HAND!=="undefined"&&KIT_HAND.readyMs)||700;
- const ready=new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))).then(()=>Promise.race([Promise.all(ims().map(i=>i.decode?i.decode().catch(()=>{}):0)),new Promise(r=>setTimeout(r,cap))]));
+ /* KK36 (MAIN 151 look, figure-wait family): no cap — a figure shows ONLY once its painting is decoded (a slow network never shows a half-painted
+    or grey figure); a picture that fails stays hidden (kstg-nofig) */
+ const dec=i=>!i.decode?Promise.resolve(i.complete&&i.naturalWidth>0):i.decode().then(()=>i.naturalWidth>0,()=>false);void cap;
+ const ready=new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))).then(()=>Promise.all(ims().map(i=>dec(i).then(ok=>{if(!ok)try{i.parentNode.classList.add("kstg-nofig")}catch(e){}}))));
  const pm=mb.querySelector(".kpmain");if(pm&&!still)pm.animate([{transform:"translateY(-14px)",opacity:0},{transform:"none",opacity:1}],{duration:KIT_STAGE.inMs[2],delay:380,easing:"ease-out",fill:"backwards"});
- ready.then(()=>{dl.__kstHold=0;try{kstgPlace(dl)}catch(e){}const F=figsNow();F.forEach(f=>f.style.visibility="");if(still)return;const [a,b]=KIT_STAGE.inMs,E="cubic-bezier(.2,.8,.3,1)";
+ ready.then(()=>{dl.__kstHold=0;try{kstgPlace(dl)}catch(e){}const F=figsNow().filter(f=>!f.classList.contains("kstg-nofig"));F.forEach(f=>f.style.visibility="");if(still)return;const [a,b]=KIT_STAGE.inMs,E="cubic-bezier(.2,.8,.3,1)";
   const bg=dl.querySelector(":scope>.kstg-bg");if(bg)bg.animate([{transform:"scale(1.05)"},{transform:"none"}],{duration:900,easing:"ease-out"});
   const sp=mb.querySelector(":scope>.kstg-sp"),me=mb.querySelector(":scope>.kstg-me");
   if(sp)sp.animate([{transform:"translateX(-36%)"},{transform:"none"}],{duration:a,easing:E,fill:"backwards"});
