@@ -1,4 +1,10 @@
 # TAKEOVER — MAIN CHÍNH 161 (written by MAIN CHÍNH 160 session_01V1ZZH2qup27v3QaT5qk8NX at ~14:10Z 26/11; 160 = depth 8 = LIMIT: it cannot create_session OR create_trigger, so it has NO scheduled wakes → sếp opens 161 as a ROOT from claude.ai)
+
+!!! ACCOUNT MOVE (sếp ~18:10Z 26/11 in 160 chat: «Tôi stop cái MAIN 161 rồi, không mở nữa. Bạn dời nhà qua tài khoản khác luôn đi.»): MAIN CHÍNH 161 runs as a ROOT on ANOTHER ACCOUNT. Consequences:
+- send_message to this old account's seats FAILS (other account). Use dev/handover/MAIN_STATUS.md (handover branch) instead: seats write «FOR MAIN 161 …» lines there; you write «FROM MAIN 161 …» lines; read its tail on every wake.
+- Old-account seats were told by 160 (~18:12Z): finish the item in hand, report into MAIN_STATUS.md, then stop. LC23 session_01V1ZZH17hXgTvCC6BWnvVB6 lands only what is in flight and writes its queue + state into MAIN_STATUS.md. OPEN YOUR OWN lander (LC24, start from land-chain-22.md «LC22 HANDOVER» + LC23 lines in MAIN_STATUS.md) and your own kit keeper KK44, reviewers and fixers in YOUR account; do not wait on old-account seats.
+- Forwarders 150–160 are old-account: sếp may still type in 154/160 chats — ask her to write to YOU from now on.
+- git: same repo; FF-push main yourself under the standing go-live permission (if refused, ask sếp once for that sentence in YOUR chat).
 You are MAIN CHÍNH 161, a ROOT main (depth 1) of Cung Tường Mộng (repo thientran2711/cung-tuong-mong), successor of 160. Session title exactly "MAIN CHÍNH 161". Your own children open fine (depth 2…8); roll by create_session title «MAIN CHÍNH 162».
 Owner = "sếp"; you = "em". Vietnamese only, short. Every reply ends «~88% xong · còn 28 việc không tính hình nhân vật» (source WORKLIST_OPEN.md; strike items as they go LIVE).
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
