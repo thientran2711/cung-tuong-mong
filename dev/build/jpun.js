@@ -53,9 +53,9 @@ function punTierRows(o,R){const x=o.x||(PUNT&&PUNT.x)||PUNTK[o.kind]||"nhe";cons
  R.splice(R.findIndex(r=>r[0]==="Hình phạt")>=0?R.findIndex(r=>r[0]==="Hình phạt"):R.length,0,["Mức tội",punEsc(punTierN(x))]);
  let g="không";if(o.kind==="giang"&&o.from!=null)g=`từ ${rn(o.from)} xuống ${rn(o.to)}`;else if(o.kind==="cold"&&o.from!=null&&o.title!=null&&o.title<o.from)g=o.life?`phế vị (từ ${rn(o.from)})`:`từ ${rn(o.from)} xuống ${rn(o.title)}`;
  R.push(["Giáng phẩm",punEsc(g)]);R.push(["Lãnh cung",punEsc(o.kind==="cold"?(o.life?"có, chung thân":o.title!=null&&o.title>0?`có, vẫn mang phẩm ${rn(o.title)}`:"có"):"không")]);return R}
-function punNote(o){if(!S||S.dead)return;const R=punRows(o);const a=punWho(o.by);
+function punNote(o){if(!S||S.dead)return;const R=punRows(o);
  if(typeof kitPanel!=="function"){Q.push({t:PUNK[o.kind]||"Bị phạt",h:`<p>${R.map(r=>`${r[0]}: ${r[1]}`).join("<br>")}</p>`,btn:"Đã rõ"});return}
- kitPanel({kind:"notice",title:o.kind==="giang"?"Bị giáng phẩm":PUNK[o.kind]||"Bị phạt",sub:typeof when==="function"?when():"",subject:a||null,sections:[{h:"",rows:R}],btn:"Đã rõ"})}
+ kitPanel({kind:"notice",title:o.kind==="giang"?"Bị giáng phẩm":PUNK[o.kind]||"Bị phạt",sub:typeof when==="function"?when():"",subject:typeof pMe==="function"?pMe():null/* PUNISH-TIER-2 (one family with j14 Lãnh cung): the left figure is HER, the one punished; the accuser is named in the «Ai tố» row */,sections:[{h:"",rows:R}],btn:"Đã rõ"})}
 /* LÃNH CUNG STAY: p may leave only after BAL.pun.coldMinDays days inside (an NPC sent there by any road is stamped lazily) */
 function coldStamp(p){if(!p)return;const inn=p===S?!!S.out:!!p.out;if(inn){if(p.coldWk==null)p.coldWk=punNow();if(p!==S&&p.coldR==null)p.coldR=coldRankIn(p)}else{if(p.coldWk!=null)p.coldWk=null;if(p!==S&&p.coldR!=null)p.coldR=null}}
 /* the rank an NPC held when she went in (Hoàng hậu = 7; a demotion earlier the same day is folded in, like her S.coldRank) — reviewer r1, law 1 */
