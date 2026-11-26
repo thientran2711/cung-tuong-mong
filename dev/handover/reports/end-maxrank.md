@@ -126,3 +126,17 @@ Delta = b564c05d (Foreman D board ruling: never-entered lives sent with their tr
 | deploy note (non-blocking) | until rank/worker is deployed, LIVE server refuses these lives («no standing») → end card says «Bảng vàng không nhận kiếp này». Deploy the worker with or before the LAND. |
 Everything from §2 still holds for the unchanged code. Re-review = delta only (rkRole + Cách tính + end-maxrank.js).
 VERDICT: FAIL dd61c8a4 — BLOCKING 1, 2.
+
+## 4. DELTA RE-REVIEW (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS 81df685d
+Delta over dd61c8a4 = 2eab1930 + rebuild 81df685d; FF from LIVE 53319e6f.
+| check | result |
+|---|---|
+| B1 board face | FIXED — rkRole: a BAL.rank.preN word → {role:"other",rank:null}; no maid/consort decor |
+| B2 «Cách tính» | FIXED — one kit note (kpnote) with words from BAL.rank.preN + RK_T.unit; cổ trang wording |
+| build | same index.html / sw.js, only CTM_BI differs |
+| end-maxrank.js | ALL PASS (incl. the 2 new rows) |
+| rank/worker score.test + board.test | ALL OK / ALL OK |
+| one-core-guard / -text / -bind | PASS ×3 |
+| coop-e2e / quickcheck | not re-run by me for this 2-line display delta (worker: coop 143/143 ×2 on dd61c8a4; my §2 runs on the same code paths) |
+Deploy: rank/worker must ship with the LAND (rank-worker.yml on land, per worker) — otherwise LIVE server refuses never-entered lives.
+VERDICT: PASS 81df685d — no BLOCKING items.
