@@ -69,7 +69,7 @@ function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(o
   /* button-crawl-fix-5 (F #10 25/11 11:01Z, robot s6d: «Sang ngày mới» greyed, Q = 12 cards, NOTHING on screen): the person view is an activity
      only while it is ON SCREEN. A tap on another tab parks it (jdfv dfTabLayers: .kfoc hidden, DF.F kept) — she is no longer inside it, so the
      waiting card shows on the tab she is on; a view whose layer is gone (no .kfoc) holds nothing either (it used to return document.body = held for ever) */
-  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=document.querySelector(".kfoc");if(f&&dqShown(f))return f;
+  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=dqOn(".kfoc");if(f)return f;
    if(D.play&&!f&&(typeof tab==="undefined"||tab==="act"))return document.body/* an on-figure game drawn on the stage itself */;return null}}catch(e){}return null}
 function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
   const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
@@ -101,7 +101,7 @@ function dqPaintQ(){try{if(!dqUiC()||!dqQHidden())return false;DQ.stat.painted++
 /* the night gate's exception (jnf showModal): the «Tin trong cung» card on top that jdayq newsHold holds the queued (NOT yet on screen) flip scene
    for. It paints first (≤ one poll), then the flip plays and the choice follows it at once (owner OD 16/11 22:45Z «no dialog under / over the flip
    scene» = while the scene is ON SCREEN). */
-function dqNewsPass(){try{if(!DQ.newsHold||!dqUi()||!Q[0]||!dqIsNews(Q[0])||dqDawn())return false;if(document.querySelector(".kmov:not(.km-out)"))return false;
+function dqNewsPass(){try{if(!DQ.newsHold||!dqUi()||!Q[0]||!dqIsNews(Q[0])||dqDawn())return false;if(dqOn(".kmov:not(.km-out)"))return false;/* r4: only a scene ON SCREEN (dqOn, as dqActEl) */
   if(typeof kmBusy!=="undefined"&&kmBusy)return false;if(!(typeof window.cfBusy==="function"&&window.cfBusy()))return false;DQ.stat.newsPass++;return true}catch(e){return false}}
 window.dqNewsPass=dqNewsPass;
 /* (a) the held turn runs by itself once the old buổi is finished (same buổi, nothing else open) */
@@ -175,7 +175,7 @@ window.dqNextCue=dqNextCue;
    motion scene / person view / new-day host / title on screen, for BAL.dayq.wake ms → the waiting card is shown (showModal: every module's own gate
    still runs, so a card a gate holds on purpose stays held). Solo only (dqUi; a co-op room paces Q with its own gates). Paint only: no S key, no draw. */
 function dqFreeScreen(){try{if(dqActEl()||dqDawn()||(typeof S!=="undefined"&&S&&S.mg))return false;
-  for(const sel of [".kfoc","#ov","#title","#kload","#kpodov","#kmrew",".kmov:not(.km-out)",".kroul-ov","[id^=\"kroul\"]","#ktut .ktut-card"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+  for(const sel of [".kfoc","#ov","#title","#kload","#kpodov","#kmrew",".kmov:not(.km-out)",".kroul-ov","[id^=\"kroul\"]","#ktut .ktut-card"]){if(dqOn(sel))return false}/* r4: EVERY match (a zero-size / hidden one first in the page no longer hides a real one behind it — same rule as dqActEl r3) */return true}catch(e){return false}}
 function dqWake(){try{dqNextSync()}catch(e){}/* r3: the emptied-queue mirror (Q 0, «Sang buổi» stale-disabled) */try{const M=document.getElementById("modal");const m=Q[0];
   if(!dqUi()||!Q.length||!M||!dqHidden(M)||!dqFreeScreen()){DQ.wk=null;return}
   const now=Date.now(),W=(BAL.dayq&&BAL.dayq.wake)||2000;if(!DQ.wk||DQ.wk.m!==m){DQ.wk={m,at:now,n:0};return}
@@ -205,7 +205,7 @@ window.DQ=DQ;
 function dqRoomWait(){try{const m=Q[0],D=window.DF;return dqUi()&&!!m&&typeof tab!=="undefined"&&tab!=="act"&&!!(m.dfSeen&&D&&D.encM===m&&D.F)}catch(e){return false}}
 function dqMgStale(){try{if(!dqUi()||!S.mg)return false;const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return false;if(window.DF&&DF.play)return false;
   const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn())return false;
-  for(const sel of [".kmov:not(.km-out)","#kmrew","#kpodov",".kroul-ov","[id^=\"kroul\"]","#title","#kload"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+  for(const sel of [".kmov:not(.km-out)","#kmrew","#kpodov",".kroul-ov","[id^=\"kroul\"]","#title","#kload"]){if(dqOn(sel))return false}/* r4: EVERY match (a zero-size / hidden one first in the page no longer hides a real one behind it — same rule as dqActEl r3) */return true}catch(e){return false}}
 function dqBring(){try{if(dqRoomWait()){DQ.stat.room=(DQ.stat.room||0)+1;tab="act";render();return true}
   if(dqMgStale()){DQ.stat.mgStale=(DQ.stat.mgStale||0)+1;const k=S.mg&&S.mg.k;try{resumeMG()}catch(e){console.error("dayq mg",e)}try{const ov=document.getElementById("ov");if(S.mg&&ov&&dqHidden(ov)){console.warn("dayq: stale mini-game record cleared",k);S.mg=null}}catch(e){}render();return true}
   const M=document.getElementById("modal");if(dqUi()&&Q.length&&M&&dqHidden(M)&&dqFreeScreen()){showModal();return true}}catch(e){console.error("dayq bring",e)}return false}
