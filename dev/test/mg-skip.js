@@ -62,7 +62,7 @@ console.log('step0');
  /* 4. Tu đức lesson (jtd): button, won = partial progress, lost = 0 */
  await reset();const k=await p.evaluate(()=>{vNorm(S);const v=VIR.find(x=>S.vir[x.k]<4);return v&&v.k});
  await p.evaluate(k=>{S.suc=90;tdPlay(k,'self')},k);await p.waitForSelector('#kg82skip');
- const tq=await btn('#kg82skip');ck('Tu đức «Học nhanh» kit button with the odds word',tq&&/Học nhanh/.test(tq.t)&&/kquick/.test(tq.cls)&&wordOK(tq.t)&&/tiến bộ một phần/.test(tq.t)&&!/5\/10/.test(tq.t)&&tq.vis,tq);
+ const tq=await btn('#kg82skip');ck('Tu đức «Học nhanh» kit button with the odds word',tq&&/Học nhanh/.test(tq.t)&&/kquick/.test(tq.cls)&&wordOK(tq.t)&&/tiến bộ \S+ phần/.test(tq.t)/* LIVE balance-pace: kStepW progress words */&&!/5\/10/.test(tq.t)&&tq.vis,tq);
  await shot('tuduc');
  for(const ok of [true,false]){await reset();const g0=await p.evaluate(k=>{S.suc=90;const g={dead:S.dead,q:Q.length,mg:!!S.mg,busy:TDS.busy,l:S.vir[k],can:can(BAL.td.k),suc:S.suc};tdPlay(k,'self');g.vis=!!document.querySelector('#kg82:not([hidden]) #kg82skip');return g},k);console.log('td guard',JSON.stringify(g0));await p.waitForSelector('#kg82skip',{state:'visible'});
   const v0=await p.evaluate(k=>S.vir[k]+(S.virP&&S.virP[k]||0)+JSON.stringify(S.virx||''),k);
@@ -74,7 +74,7 @@ console.log('step0');
 
  /* 5. the old j5 lesson overlay (#mgskip) */
  await reset();await p.evaluate(()=>{S.mg=null;openMG('ky',0,()=>{})});await p.waitForSelector('#mgskip',{state:'visible'});
- const jq=await btn('#mgskip');ck('j5 overlay «Để trời định» = kit quick (odds word, thành/hỏng)',jq&&/kquick/.test(jq.cls)&&wordOK(jq.t)&&/thành:? tiến bộ một phần/i.test(jq.t)&&/hỏng|bại/i.test(jq.t),jq);
+ const jq=await btn('#mgskip');ck('j5 overlay «Học nhanh» = kit quick (odds word, thành/hỏng)',jq&&/Học nhanh/.test(jq.t)&&/kquick/.test(jq.cls)&&wordOK(jq.t)&&/thành:? tiến bộ một phần/i.test(jq.t)&&/hỏng|bại/i.test(jq.t),jq);
  await shot('j5ov');
  const pts=await p.evaluate(()=>new Promise(res=>{window.__kq=kitQuickRoll;kitQuickRoll=()=>false;const ov=document.getElementById('mgskip');ov.click();setTimeout(()=>{kitQuickRoll=window.__kq;res(document.querySelector('#ov .mgres')&&document.querySelector('#ov .mgres').innerText)},200)}));
  ck('j5 quick lost → "Không vào"',/Không vào/.test(pts||''),pts);

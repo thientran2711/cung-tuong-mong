@@ -9,6 +9,7 @@
    6 an NPC slaps her: «Né đòn» shows its odds word; one tap = one roll, no game frame; the result card follows
    7 kept cơ-may games still open their boards (a scheme act game sgPlay exists, Dư đồ class A acts keep their engine)
    8 no page errors
+   10 BIG rv fixes 2–4 (Tự tay rank demand, her hand in the slap draw + gap to target, «Học nhanh» on every lesson quick)
    9 pet care + plant watering (owner OD 26/11 ~05:45Z): boards kept; «Chăm nhanh» on the rules screen like «Học nhanh»; «Giao … chăm» on pets + plants
    usage: node dev/test/mg-trim.js <dev dir or url> [755x1000@2,1180x820@2] */
 const {chromium}=require('playwright');const fs=require('fs'),http=require('http'),path=require('path');let [,,URL,SIZES]=process.argv;URL=URL||'dev';
@@ -90,6 +91,17 @@ const VID=process.env.VID||'';
   await p.evaluate(()=>{delete shelfOf(S).g.t9.pm;shelfPlantDraw("")});await sleep(500);await tap('[data-shc="water"]');await sleep(800);const wq=await txt('#kshpquick');const wb=await p.evaluate(()=>!!document.getElementById('kshpgame'));
   ok('9 plant watering: the board stays + «Chăm nhanh» (Tùy duyên)',wb&&/^Chăm nhanh/.test(wq||"")&&/Tùy duyên/.test(wq||""),wq);
   await p.evaluate(()=>{try{kgTutDrop()}catch(e){}SHPC.game=null;try{closeModal()}catch(e){}});await sleep(800);
+  /* 10 BIG rv fixes: (2) «Tự tay» face score has the same rank demand; (3) her slap = the same hand-aware draw, fallback gap to the target; (4) «Học nhanh» on every lesson quick */
+  const r10=await p.evaluate(()=>{const o={};Q.length=0;document.getElementById('modal').hidden=true;try{kg82Close()}catch(e){}
+   const sc=rk=>{delete S.toilette;toilOpen();toilDressDone(true);TOIL.st.parts={brow:.7,powder:.7,son:.7};const r0=S.rank;S.rank=rk;try{toilFinish(true)}finally{S.rank=r0}const v=S.toilette.score;try{kg82Close()}catch(e){}TOIL.st=null;return v};
+   o.s0=sc(0);o.s3=sc(3);o.dem=BAL.toil.rkDemand;
+   let seen=0;const h0=window.mgHandEff;window.mgHandEff=function(k,pp){if(pp===S)seen++;return h0.apply(this,arguments)};try{eval("mgHandEff=window.mgHandEff")}catch(e){}try{for(let i=0;i<5;i++)slapNpcDraw(S)}finally{window.mgHandEff=h0;try{eval("mgHandEff=window.mgHandEff")}catch(e){}}o.hand=seen;
+   o.gap=/rkOf\(a\)-rkOf\(t\|\|S\)/.test(String(slapNpcTier));
+   try{openMG("cam",1,()=>{});o.j5=(document.getElementById('mgskip')||{}).innerText||"";document.getElementById('ov').hidden=true}catch(e){o.j5="ERR "+e.message}return o});
+  ok('10 (2) «Tự tay điểm trang» score − rank demand (same as the one tap + NPCs)',r10.s0-r10.s3===Math.min(r10.s0,3*r10.dem),r10);
+  ok('10 (3) her slap draw reads HER hand (mgHandEff(S)); fallback gap = slapper → target',r10.hand>=1&&r10.gap,r10);
+  ok('10 (4) the old lesson overlay quick reads «Học nhanh»',/^Học nhanh/.test(r10.j5.trim()),r10.j5);
+  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
   ok('8 no page errors',!errs.length,errs.slice(0,3));
   await ctx.close();if(VID){const f=fs.readdirSync(VID).filter(x=>/\.webm$/.test(x)).map(x=>[x,fs.statSync(path.join(VID,x)).mtimeMs]).sort((a,c)=>c[1]-a[1])[0];if(f)fs.renameSync(path.join(VID,f[0]),path.join(VID,`mg-trim-${W}x${H}.webm`))}}
  await b.close();if(SV)SV.close();console.log(bad?`FAIL ${bad}`:'ALL PASS');process.exit(bad?1:0)})();
