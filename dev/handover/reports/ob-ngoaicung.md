@@ -91,3 +91,12 @@ a hired live-in hand is «người ở» (Vietnamese usage) — see question 1.
 ## HANDOVER (rollover: context high)
 Next: (1) quickcheck + coop-e2e on 028bcd08; (2) real-tap check of Tin báo over a few in-game weeks at home; (3) Cha định hôn stay-road ruling;
 (4) thôn nữ maid question; (5) gifts to family design. Scripts: dev/test/ob-ngoaicung/{scan,shots,video}.js.
+
+## OPEN FOR SUCCESSOR (MAIN 150 answers 00:49Z–02:07Z, arrived after my report; MAIN now 151 = session_01V1ZZH32xLDu8LN72LfSaVu)
+1. Thôn nữ (cnv): NO personal maid (law 6) — her head-count shows «Gia đình» only, no «Người hầu/Người ở» chip (today: kc:dan words «Người ở» in jroad8; remove the maid at the cnv home start instead, and its 1 chip).
+2. Home bottom tabs: MAIN 150 said «keep the same 8 bottom tabs (OD 21/11 one nav)»; this branch keeps the 8 tabs but RENAMES them from KCTABS (road8TabNames, MAIN 148 order) and points «Hoàng tự» at her letters. Decision pending MAIN 151 — revert = delete road8TabNames + restore ROAD8.kc kid/court rows (git show 45daa796:dev/build/jroad8.js).
+3. Gifts to family → PARKING LOT (no work).
+4. Fix stale dev/test/outside/route.js on this branch (fails «did not enter the palace» on LIVE too: random play stalls before Điện tuyển).
+5. k5 ACTS gate: same place gate for person-card / Giao tình ACTS at home (a palace Thái y «Gặp riêng Thái y Diệp Cảnh Hoài» showed). He is her thanh mai (j96); MAIN wants the acts list scanned + tested under placeCtx (not only events/news).
+6. Dưỡng Tú viện (tú nữ before phân cung, made a real place by OB-PHU2 session_01V1ZZH1JSCbgQLDudafVQP3): add a placeCtx context with fitting words (e.g. head-count «Tú nữ cùng khóa» / «Ma ma dạy» instead of Cung nhân / Chí tôn) in ROAD8_LAB; coordinate with OB-PHU2.
+7. FULL videos Fold 755x1000 + iPad 1180x820 (NEW names): a home life ~20 buổi with no palace visitors/news (k3/k9/k10) + the wording + Dưỡng Tú viện; then quickcheck + coop-e2e on the final sha; then LAND READY to MAIN 151.
