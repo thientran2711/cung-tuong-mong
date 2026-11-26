@@ -101,3 +101,36 @@ not a stall (the player taps the scene).
 ## Files
 dev/build/jctn.js (new) · j71.js · j8.js · j34.js · jts.js · j67.js · jbal2.js (BAL.ctn) · assemble.py (+jctn last) · dev/site/CHANGE.txt ·
 index.html / sw.js rebuilt · dev/tools/contest-thitam-scan.py · dev/test/contest-thitam.js · coop-contest-thitam.js · contest-thitam-video.js
+
+## RV-FIX after BIG rv FAIL fcd5c086 (reviewer session_01D3E3NXwED3bj8Xfp41CezN, report review/contest-thitam-rv 200f59ac) — pushed ab9e28b0
+1. LAW 11 missed kinds → wired: Xuân thí round thd_tho_7 (her win; NPC {v} win = two-way), Xuân thí final board thd_tho_10 (her win; {v}),
+   Hội bắn xuân bd_san_9 (ONLY her own last shot: option flag f "ctnself"; the prince's shot gives no night — tested). ctnWin is called
+   BEFORE rdOan there (the arc ending is called as E.go(A): G is absent). Scan widened: M3b = any «đứng đầu / thắng hội» beside
+   thi / bảng / khảo / hội / vòng / bắn in story / road files (j67, jrd_*, jgedata*, jkc*, jroad*) must be a KIND row or an IGNORE entry with
+   its reason. Result: 27 kinds · 13 wired (LIVE 0) · 14 excluded with reasons (khuê các home road, jpma duel, j31 Hội Phượng try, jexam,
+   thd_tro scholars, thd_hoc / j53 / j54 / j67 children, bd_soi polo, bd_hen wrestling, tuyển tú, cung nữ khảo việc, jcui prize table) · 0 unknown.
+2. Night gain cut by the kit hint → the night is printed FIRST among each card's gains (`ctnF()` «đêm ấy được thị tẩm, …»): kitHint levels
+   0/1/2 all read «đêm ấy được thị tẩm, đoạt giải, được để mắt; nhưng chuốc lòng ghen» (test out.hint). No kit change, no KIT REQUEST.
+3. «đêm ấy» on every entry card (j71 sign-up / invitation / feast / festival day, jts, j34). The night card itself (shown on the contest
+   day) keeps «tối nay»; the summons at night (PEND.ctnsum) «đêm nay».
+4. Order: her «Kính sự phòng báo tin» card waits until the contest's own result is off screen (kit result toast #rtoast «KẾT QUẢ», podium
+   #kpodov, the #kg82 board, S.mg), at least BAL.ctn.waitMs = 1500 ms; the result toast's «Được» row lists «đêm ấy được thị tẩm» (same kit
+   item markup). Bots (window.__bot): at once (tests). Co-op guest «ok» relay: same deferral.
+Tests after the fix: `node dev/test/contest-thitam.js` branch 21/21 (LIVE 0/21 expected), prince shot → no night, hint shows the night.
+
+## HANDOVER (D3 rolled over at 47 % context; START_CTX ~3 %; depth 2) — the COORDINATOR opens the successor
+Branch review/contest-thitam @ ab9e28b0 (LIVE 6b5d3d05 merged at 420ea238; site rebuilt at ab9e28b0). What is LEFT:
+a. Re-record the branch real-tap videos (order fix 4 + card fix 2 must be visible): `DEVS=fold,ipadAir node dev/test/contest-thitam-video.js
+   <worktree root> <out> branch` (built root index.html), look at the frames (invite card shows «đêm ấy được thị tẩm» first; KẾT QUẢ toast
+   with the night in Được BEFORE «Kính sự phòng báo tin»), copy to img/_review/contest-thitam/branch-{fold-755x1000,ipad-1180x820}.webm,
+   `python3 dev/site/cdn_sync.py img/_review/contest-thitam` (overwrites). LIVE videos there stay valid.
+b. 1-year robot count (rv advisory): `node dev/test/contest-thitam-year.js <url> 4 36` on LIVE and branch builds (was running when I
+   rolled; outputs lost with this box) → put the mean nights / ctnMe / ctnNpc table here for sếp.
+c. Co-op re-run on the final build: `node dev/test/coop-contest-thitam.js <out>` and `C4FIRST=1 …` (see «Co-op result»; harness caveats:
+   ledger extra nights, the «Lễ Phật đản ×2» week-driver stall). A LIVE-build run of the same driver was in progress to see if that
+   stall is pre-existing (copy the test into a LIVE worktree and run it; look at «week merged once» lines).
+d. quickcheck on the final sha (bash dev/tools/quickcheck.sh; give it > 20 min, the selection-reroll step is slow); dialog-fixed FAIL is
+   pre-existing on LIVE.
+e. Send the re-review to the SAME reviewer session_01D3E3NXwED3bj8Xfp41CezN (ab9e28b0 + this section), then on PASS: «LAND READY
+   review/contest-thitam <sha> (FF from LIVE)» + video URLs here, message Foreman D.
+ROLLOVER (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop." "Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker)." LINEAGE: "your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai."
