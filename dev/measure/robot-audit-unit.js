@@ -26,6 +26,9 @@ const mid = { harness: H, exitPick: { label: 'Bắt đầu kiếp mới', screen
 ok(!A.isEntryPick(mid.exitPick, []) && !A.verdict(mid, ban).valid, 'mid-life ☰ → Chọn sổ → «Bắt đầu kiếp mới» (live:true) = bot exit → INVALID');
 const pre = { harness: H, exitPick: { label: 'Bắt đầu kiếp mới', screen: '.dlg «Chọn sổ»', live: false, only: false, via: 'tap outside the exit-only branch', at: 5 } };
 ok(A.isEntryPick(pre.exitPick, []) && A.verdict(pre, ban).valid, 'pre-life «Bắt đầu kiếp mới» (live:false) = entry → VALID');
+/* 3c. JOB 13 (BIG #10 N2): an exit pick with no option count never reads «with undefined options» */
+{ const v = A.verdict({ harness: H, exitPick: { label: 'Xuất cung về quê', screen: '.dlg «Hết hạn»', only: false, at: 99 } }, ban); const w = (v.why || []).join(' | ');
+  ok(!v.valid && !/undefined/.test(w) && /option count not recorded/.test(w), 'exit pick without n → «(option count not recorded)», no «undefined»: ' + w) }
 /* 4. mini-game backs: full counter wins over the 40-detail list */
 const why = Array.from({ length: 40 }, () => ({ ph: 'play', long: false }));
 ok(A.mgQuitOf({ harness: Object.assign({}, H, { mgBackWhy: why, mgBackQuitN: 57 }) }, null).n === 57, 'mgBackQuitN 57 with 40 details → 57 quits (not 40)');

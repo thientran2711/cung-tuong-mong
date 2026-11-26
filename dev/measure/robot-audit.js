@@ -83,7 +83,7 @@ function verdict(rec, life) {
   const real = !!(h && h.realtap === true && +h.jsClicks === 0);
   if (!real) why.push(h ? 'harness not real-tap (realtap=' + h.realtap + ', jsClicks=' + h.jsClicks + ')' : 'JS-click harness (pre-25/11, no realtap proof)');
   if (e.k === 'none') why.push(e.why);
-  if (e.k === 'exit') { if (xp && (xp.only === true || +xp.n === 1)) e.note = 'exit was the only option (real ending)'; else if (!xp && rec.lastTap) e.note = 'game-imposed: last bot tap was a non-exit option «' + rec.lastTap.slice(0, 40) + '»'; else if (!xp && real && h.kind === 'realtap') e.note = 'game-imposed: the real-tap harness recorded no exit pick (it logs every exit-road tap in exitPick) — e.g. «Xuất gia làm ni cô» by old custom after the emperor dies (F #19 / Foreman E 07:30Z)'; else why.push('bot-chosen ' + e.why + (xp ? ' with ' + xp.n + ' options' : ' (no proof it was the only option)')); }
+  if (e.k === 'exit') { if (xp && (xp.only === true || +xp.n === 1)) e.note = 'exit was the only option (real ending)'; else if (!xp && rec.lastTap) e.note = 'game-imposed: last bot tap was a non-exit option «' + rec.lastTap.slice(0, 40) + '»'; else if (!xp && real && h.kind === 'realtap') e.note = 'game-imposed: the real-tap harness recorded no exit pick (it logs every exit-road tap in exitPick) — e.g. «Xuất gia làm ni cô» by old custom after the emperor dies (F #19 / Foreman E 07:30Z)'; else why.push('bot-chosen ' + e.why + (xp ? (xp.n != null && isFinite(+xp.n) ? ' with ' + xp.n + ' options' : ' (option count not recorded)') : ' (no proof it was the only option)') /* JOB 13 (BIG #10 N2): never «with undefined options» */); }
   if (h && h.cap && e.k === 'none') why.push('harness had a cap (' + h.cap + ')');
   /* MIXED BUILD (F #20 10:47Z, s7 flight2): robot-rt ≥ 2df8f5fa+ pins the build of a life (harness.build0) and hard-stops on a mismatch; a life whose loads saw more than one
      build (harness.builds), or that hit the stop (harness.buildMismatch), is not one game's play */
@@ -169,7 +169,7 @@ function audit(paths, only) {
 
 function counts(lives) {
   const u = lives.filter(r => !r.dup), c = { total: u.length, valid: 0, invalid: 0, mixed: 0, reasons: {} };
-  for (const r of u) { if (r.valid) c.valid++; else if (r.mixed) c.mixed++; else { c.invalid++; for (const w of r.why) { const k = w.replace(/ \(.*$/, '').replace(/«.*»/, '«…»').replace(/ with \d+ options/, ''); c.reasons[k] = (c.reasons[k] || 0) + 1 } } }
+  for (const r of u) { if (r.valid) c.valid++; else if (r.mixed) c.mixed++; else { c.invalid++; for (const w of r.why) { const k = w.replace(/ \(.*$/, '').replace(/«.*»/, '«…»').replace(/ with \d+ options/, '').replace(/ \(option count not recorded\)/, ''); c.reasons[k] = (c.reasons[k] || 0) + 1 } } }
   c.byEnd = {}; for (const r of u) c.byEnd[r.cls] = (c.byEnd[r.cls] || 0) + 1;
   c.offers = u.reduce((a, r) => a + (r.offers || 0), 0); c.offRaw = u.reduce((a, r) => a + (r.offRaw || 0), 0); c.offPicked = u.reduce((a, r) => a + (r.offPicked || 0), 0); /* OFFER LOG (harness ≥ 95718760+): promotion / selection options seen vs taken */
   c.mgQuitLives = u.filter(r => r.mgQuit > 0).length; c.mgQuit = u.reduce((a, r) => a + (r.mgQuit || 0), 0);
