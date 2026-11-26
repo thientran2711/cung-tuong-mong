@@ -3,6 +3,8 @@ PRIORITY #1 CHECK (successor #2, 'Tạ lỗi|Nhún nhường|hòa giải|làm l�
 # review/pace-all — SUCCESSOR #2 (session_01D3E3NXTnDZUXLbRTbkjsZy · depth 3 · START_CTX ~3 % estimate, tool reads 0)
 Head: **review/pace-all afa89339** (FF from LIVE 3af7896e: LIVE merged at 207c39b4, built files rebuilt; CHANGE line = pace-all).
 
+**LAND READY review/pace-all fa05166a8af3361be250ae2d86e8d133b0d2c8e8** (FF from LIVE aa37de21) — BIG rv session_01D3E3NbYmUBM1sWmm9ckSzA PASS 6e64445f (0 BLOCKING); fa05166a = + the rv's CHANGE-line NIT only. Sent to Foreman D session_01D3E3NaM9SCxxy6LNzERgRj 26/11 ~14:30Z. Worker done.
+
 ## ROUND 2 — BIG review FAIL afa89339/3942eafe (reports/pace-all-review.md) → fixed at **review/pace-all 6e64445f** (FF from LIVE aa37de21; LIVE 1dcb373e + aa37de21 merged, built files only)
 - B1 co-op double fade: j28 oanCool skips the friend entry (v.coop) → one cool per grudge, on its owner's client (oanMonth / her S.ro pass); test B13.
 - B2 law 16: art pace back to sếp's «Q5 A» EXACTLY — BAL.art.gain [2,1.5,1.1,.9,.8] line and jbalcore crsPush (0.1 grid) byte-identical to LIVE → days per bậc ~2/5/12/21/33 (teacher 2/4/9/16/25) unchanged by construction. The per-bậc display «Tiến bộ n/need» (owner 08:05Z) already existed on LIVE (crsNeedP / crsProg) and reads 5·10·19·28·38. SUPERSEDES part A1 above (the 10·12·16·20·24 change is gone). Công lao (BAL.srvMpN, whole merits) stays (no owner pick on it).
