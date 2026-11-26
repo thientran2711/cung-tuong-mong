@@ -200,3 +200,70 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+## HARNESS FIXER #9 (session_01UV1SzhZzWRS2YB2DuBXjFQ, depth 2, START_CTX ~5 %) — 26/11 batch on 8dc395ba (FIXER #8 READY)
+PRIORITY #1 CHECK ('OFFER_RE|offers|renderer|Khoa thi'): OD 0 | main none (robot-rt.js on main is older) | review/robot-realtap robot-rt.js OFFER_RE + offer counter (reused, fixed in place) | claims F-H9 (this job) + FOREMAN D F10 review/renderer-mem (game-side memory, not duplicated).
+Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No game / kit code touched. LIVE = origin/main 5e013076 served locally (python3 -m http.server 8809 in /home/user/wt/live9).
+
+### (1) PROMO-ROOT: real promotion roads only
+- dev/test/rt-offer.js (NEW, one rule; the same file is on the handover branch beside dev/measure/robot-audit.js, which requires it): an offer is REAL only when it is an exam entry card («Khảo hạch tấn phong», «Khảo hạch Nội vụ phủ», «Dự khảo hạch …») or a round of the exam frame (#kg82 art «Khảo hạch»), or an option inside a decree dialog («Thánh chỉ / Sắc phong / Tấn phong / Lễ tấn phong / Thăng bậc»), «Xét phẩm cuối tháng», «Tuyển tú / Đại tuyển tú nữ». Never: tab chips («Sắc phong», the «Mệnh truyện … Sắc phong» strip), utility dialogs (Lịch tháng, Sổ ghi, Tin báo …), the life-start identity card, other people's roads («Khoa thi Đình» = scholars, «Kính sự phòng báo tin · Tiến cử cung nữ» = her maid), status chips («Tuyển tú còn N tháng»), any word that only contains «phong».
+- robot-rt.js: the OFFER LOG uses it (kind + rule 2 on each entry); R.promo = recount at every save (old entries re-classified); the .md table gets «promotion roads seen / taken». robot-audit.js: offers = real count, the old count is kept as offRaw («old word-match count» in the COUNTS line). Pushed on the handover branch 9bca8084.
+- Re-count of every robot file under dev/handover/robot/ that holds offers (old word match → real; seen / picked). Note: the old log only kept labels that matched the old regex, so decree / review options with other labels («Đã rõ» …) were never logged → the real numbers of OLD files are a LOWER bound.
+
+| file | old seen / picked | real seen / picked | kinds |
+|---|---|---|---|
+| flight2-s9b | 593 / 54 | 0 / 0 | — |
+| flight2-s8 | 254 / 17 | 0 / 0 | — |
+| flight2-s8b | 135 / 18 | 4 / 0 | exam 4 (Hàm An cung «Lễ nghi · Khảo hạch tấn phong») |
+| rerun-E-E-S7 (4 lives) | 57/4 · 60/5 · 226/11 · 201/11 | 0/0 · 9/3 · 0/0 · 0/0 | exam 9 |
+| flight2-s7 | no results json on the handover branch (only flight2-s7-stuck dumps) | — | — |
+| flight2-1R | 184 / 9 | 0 / 0 | — |
+| flight2-s2d | 52 / 5 | 9 / 0 | exam 9 |
+| flight2-s9 | 55 / 6 | 1 / 1 | exam 1 |
+| flight2-s9c | 305 / 31 | 0 / 0 | — |
+| flight2-s9d | 4 / 2 | 3 / 2 | exam 3 |
+| rerun-E-E-S4 (4 lives) | 117/13 · 162/18 · 115/3 · 226/18 | 0/0 · 55/6 · 0/0 · 0/0 | exam 55 |
+| rerun-E-E-S6 (5 lives) | 49/2 · 266/11 · 11/0 · 153/17 · 189/20 | 0/0 · 0/0 · 0/0 · 6/3 · 6/1 | exam 12 |
+| rerun-E-E-S2 (5 lives) | 105/6 · 208/8 · 35/0 · 171/7 · 252/11 | 0 · 0 · 0 · 0 · 1/0 | exam 1 |
+| flight2-s4, s6, s2e, coop1i guest | 9/0 · 14/1 · 5/1 · 6/2 | 0 | — |
+- «Để tài nghệ quyết định» on drag rounds: ROOT = on LIVE the frame's quick option (j79 kitQuick #kg82skip) READS «Bỏ qua · kết quả …» (the n:"Để tài nghệ quyết định" argument is not printed) and LOW_RE /^bỏ qua/ put it behind «Bắt đầu thi» every time → s4d played the drag boards with taps, 10 vs bar 18 ×8. Now: a kg82 intro whose rules need a drag («Kéo … / Vuốt … / Đặt ngón tay …», not «Kéo thanh giá hoặc chạm») → #kg82skip (whole family: every drag board, exam or not; tap boards are still played). SCAN gives mgExam / mgDrag; counters R.harness.mgDragSkip / mgDragSkipExam. Self-test RT_TEST_EXAM=2 (iPad): the game's exRun with rounds «Bày lễ» + «Phân kho» → dragSkip 2 / 2, life goes on, 0 bugs.
+
+### (2) s3f «Khoa thi Đình» stuck ×4 = HARNESS bug (not the game)
+- Evidence (handover dev/handover/robot/flight2-s3f-khoathi/ 8155814e, stuck-1-dump): the dialog «Khoa thi Đình» had «Viết thư nhờ cha nâng đỡ học trò» DISABLED (kdis) and «Chỉ xem bảng vàng sau rèm» enabled, hit = true, class «opt ka kart kopt». NAV_RE (save-slot / menu buttons, never a move) matched «bảng vàng» INSIDE that option label (the «Bảng vàng» ranking button) → the dialog had no option → no close → its scroller branch → scroll / no-close loop, no real tap, 15 min stuck, reload, same dialog again ×4. The game was fine (a person taps «Chỉ xem bảng vàng sau rèm»).
+- Fix (law 11, whole family): NAV and LOW never apply to an option card (CARD_SEL / .opts / .kpopts); NAV matches from the label START only. Scan dev/test/rt-label-scan.js over LIVE 5e013076 option names (8823):
+
+| filter | option names hit BEFORE | AFTER (option card) |
+|---|---|---|
+| NAV («Giữ sổ …», «Xóa nợ …», «… nhạc hay», «Bảng vàng đề tên», «Chỉ xem bảng vàng sau rèm» …) | 37 | 0 |
+| LOW («Bỏ qua chuyện cũ …», «Bỏ qua lời đồn» … — only picked when nothing else) | 10 | 0 |
+- DIALOG STALL rule (any other way the picker spins in one dialog without a real tap: scroll that snaps back / changes length, wait, area / no-close verdicts, taps refused as gone / moved / popup): same dialog ≥ 40 picker steps and ≥ 60 s with no real tap while a hit-able non-exit button exists → tap its main option by handle, else at the point the scan saw it (re-checked under the point, same first 12 letters, enabled). Logged once per dialog: «picker stalled N steps / S s on … (scroll n, wait n …; last refused tap …) → tapped «…»». Counters stallForce / pointTaps (point taps count in taps). Self-test RT_TEST_STALL=3: a dialog re-rendering every 120 ms with a scroller of changing length → «picker stalled 132 steps / 60 s (scroll 133)» → closed in 64 s by 1 point tap.
+
+### (3) Renderer memory (FOREMAN E 23:25Z, E-S2 Fold «tree 7394 MB, renderer 6882 MB» at buổi 75) — harness side
+- Harness audit: every tap handle disposed (realtap finally); page-side state = window.__rtBtns (replaced each scan), the bare-tap guard (installed once), __rtEnd; R.trace ≤ 400, R.offers ≤ 800, R.rss ≤ 400; listeners pageerror + crash only, no console capture, no CDP session in play; screenshots go to disk. Profile = one persistent profile per life (disk cache, not RAM).
+- Measured on Fold 755x1000, LIVE 5e013076 local, seed 3936559208 (renderer MB / JS heap MB, ps + performance.memory):
+
+| buổi | A harness | A2 harness, screenshots off (RT_NOSHOT) | B no harness (dev/test/rt-membase.js) |
+|---|---|---|---|
+| 1 | 511 / 104 | 538 / 104 | 909 / 125 |
+| 11 | 1384 / 104 | 1222 / 104 | 1324 / 125 (b10) |
+| 21 | 1254 / 104 | 1272 / 104 | 1322 / 125 (b20) |
+| 31 | 1482 / 104 | 1375 / 104 | 1340 / 125 (b30) |
+| 41 | 1530 / 104 | 1436 / 104 | 1319 / 125 (b40) |
+| 51 | 1607 / 104 | 1433 / 104 | 1402 / 125 (b50) |
+| 56 | 1717 / 104 | 1440 / 104 | — |
+- Verdict: NO harness leak. All three sit at 1.3–1.7 GB by buổi 50 with a flat JS heap; the growth is native (decoded pictures / layers of the game), the same with no harness. A (621 taps, more screens) runs ~150–280 MB above A2 (255 taps) — more screens visited, not a per-tap leak. Long F lives on this harness family stay 1.2–2.2 GB for 1000+ buổi (s9b 594fa1ee b1581: 1151–1610; s8 b1929; s9c 496b6b66 b276: 1291–1648; s8b b739: 1469–2175). E-S2's 6.9 GB at buổi 75 is a one-off spike far above every curve → game side / that box (E runs PAR 4 lives in one container) → numbers sent to F #17 for FOREMAN D F10.
+- Single-process 95-buổi run (memC, same seed): renderer 1.2–1.6 GB to buổi 66, JS heap 104 MB … then at buổi 67 (right after «Tổng lược» Lui) the page main thread SPUN: CPU 78 %, renderer 7146 MB in < 10 min, watchdog «PAGE FROZE … tree 7760 MB» — the same freeze family as E-S2 b75 (6882 MB) and s9e b133 (6197 MB). The harness was only waiting on its next read (page.evaluate cannot run while page code spins); no harness code runs in the page then. Resumed from the buổi-66 save on the same harness: 66 → 95 clean (1411–1580 MB) → not deterministic. A2 (no screenshots) / B (no harness) are too few runs to show the rare spike; the steady curves match.
+- FREEZE STACK (new, on by default, fzstack=0 off): the CDP Debugger domain is enabled at start (a spinning page never answers Debugger.enable — measured), every unrequested pause is resumed at once; when no loop step for wdMin/2 the watchdog sends Debugger.pause and stores the call stack in R.harness.freezeStack + stderr «FREEZE STACK buổi N renderer M MB: fn @file:line …», then the old kill/resume path. Self-test RT_TEST_FREEZE=2 wdMin=2: stack captured at 1 min, then «PAGE FROZE … exit 3». Next freeze on any runner = the game function that spins → FOREMAN D F10.
+- E-S7 family (FOREMAN E 01:03Z, «Yến đầy tháng công chúa» 3 cards / «Đại án vu cổ» 4 cards, no ✕ by design): every no-close / dead-end verdict (4 noclose sites + deadEnd) now first returns cardWay(): an enabled, non-exit option card tapped < 3× in this dialog (hit → persona score; not hit → realtap scrolls it in). Counter R.harness.cardWay. E's (a) «Khoa thi Đình» = the NAV fix above.
+- Self-tests (this sha, LIVE 5e013076 local): Fold 755x1000 + iPad 1180x820 slices 10 buổi ×2 each: jsClicks 0, dead 0, stuck 0 (one pre-existing «.kmov card-flip no close» line on iPad); RT_TEST_STALL 61–64 s; RT_TEST_EXAM 2/2; RT_TEST_FREEZE stack; robot-lint OK (7 files).
+- Open: (a) the 6–7 GB freeze itself = game side (D F10) — the next frozen runner on this sha gives the stack; (b) .kmov «Hoàng thượng lật thẻ bài» card-flip still logs «no close» after its area taps (empty-label buttons; pre-existing, not a card); (c) the s3f Q-softlocks («Sang ngày mới» Q=1 ×19, «Có tin đang chờ» disabled Q=8) are game-side, routed by F #17 to the SANGBUOI owner.
+
+## HANDOVER (HARNESS FIXER #9) — job done, no successor needed for F-H9
+- State: review/robot-realtap <this commit> = HARNESS READY (BIG review). Handover branch 9bca8084: robot-audit.js + dev/test/rt-offer.js (same file). Runners switch at the next fresh CP line.
+- New env/args: RT_TEST_STALL, RT_TEST_EXAM, RT_NOSHOT (memory A/B), fzstack=0; tools dev/test/rt-offer.js, rt-label-scan.js <live dir>, rt-membase.js <url> <out> (no-harness memory baseline).
+
+## HARNESS FIXER #9 follow-up (F #17 02:23Z GO, on top of 54fa0112 under BIG review)
+- TAP-TO-SKIP / BACKDROP (FOREMAN E 02:08Z): SCAN tapSkip (layer says «Chạm để bỏ qua / để tiếp / để xem tiếp / vào màn hình»), tapOut («chạm ra ngoài / bên ngoài / chỗ trống»), bd = a bare backdrop point just outside the dialog box. Before every no-close / dead-end verdict: cardWay() || skipWay() (tapOut → 3 backdrop taps; tapSkip → taps on the scene for up to 60 s; else 3 backdrop taps) — verdict only if still there. A dialog with NO button at all now gets a backdrop tap every 3rd idle round (the inside-only area taps stuck 15 min). Counters backdropTaps / skipTaps; trace «BACKDROP …».
+- Self-test RT_TEST_SKIP=3 (Fold + iPad, LIVE 5e013076 local): the game's own card flip (kitCardFlip, «Chạm để bỏ qua») gone in 10 s; «Sổ nguyệt sự» (cyBook kit intel modal) closed in 4 s; a button-less «MẬT BÁO · Sổ nguyệt sự» box that closes on its backdrop closed in 8 s by 1–2 backdrop taps; no-close verdicts 0, stuck 0, jsClicks 0, dead 0. (Before this fix the same box: «stuck no progress 15 min» on both devices.)
+- Q-SOFTLOCK EVIDENCE (FOREMAN D via F #17): every dump (stuck / no-turn / 150-tap / no-hit / optclip) carries qs = {Q titles, DQ (safe copy), used, S.buoi, S.mg, #modal hidden, #next {disabled, text}, dqActEl(), dqDawn(), dqFreeScreen(), build}; each read guarded, read-only (the jdayq checks only read the DOM). Self-test RT_TEST_DUMP=2 shows every field.
+- BUILD STAMP: the page DOES expose its build (window.CTM_BI {s, b, t}, window.CTM_BUILD; LIVE 5e013076 = b fa8da73cecdc, s 3762da08+) → R.harness.build + «GAME BUILD …» line at start, so runners can tell which LIVE they play.

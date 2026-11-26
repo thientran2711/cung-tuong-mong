@@ -13,7 +13,7 @@ const fs = require('fs'), path = require('path'), { execFileSync } = require('ch
 /* The eslint package lives in /opt/node-tools on these containers; where it is missing the scope check is SKIPPED with a WARN (node --check still runs) — BIG #7 nit 17:10Z */
 let Linter = null; try { ({ Linter } = require('eslint')) } catch (e) { Linter = null }
 const HERE = __dirname;
-const DEFAULT = ['robot-rt.js', 'robot-rt-coop.js', 'realtap.js', 'robot-save-replay.js', 'robot-lint.js'].map(f => path.join(HERE, f)).filter(f => fs.existsSync(f));
+const DEFAULT = ['robot-rt.js', 'robot-rt-coop.js', 'realtap.js', 'robot-save-replay.js', 'robot-lint.js', 'rt-offer.js', 'rt-membase.js'].map(f => path.join(HERE, f)).filter(f => fs.existsSync(f));
 const NODE_GLOBALS = ['require', 'module', 'exports', 'process', 'console', 'Buffer', '__dirname', '__filename', 'global', 'globalThis',
   'setTimeout', 'setInterval', 'setImmediate', 'clearTimeout', 'clearInterval', 'clearImmediate', 'queueMicrotask', 'structuredClone',
   'URL', 'URLSearchParams', 'TextEncoder', 'TextDecoder', 'AbortController', 'AbortSignal', 'fetch', 'performance', 'atob', 'btoa'];
