@@ -74,12 +74,70 @@ function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(o
 function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
   const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
 /* the call comes from her own tap INSIDE the activity (a card / panel she opens there) */
-function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;return !!(t&&t.nodeType===1&&(a===document.body||a.contains(t)))}catch(e){return false}}
+/* DIALOG-ORDER (owner OD 26/11 ~03:40Z, E96): «Sai đi dò la» in her maid's person view opened NOTHING until ✕ closed the view, then the
+   pick-who dialog appeared («out of order»). Cause: the person view's own act cards (Giao thiệp / Mưu kế tabs) live in its docked person card
+   #popw (j59dock), OUTSIDE .kfoc, so her tap there read as «not inside the activity» and gate (c) held the dialog she had just asked for behind
+   the view. Fix (whole family: every act → dialog of every person card): the activity OWNS its controls — the person view = .kfoc + its docked
+   person card #popw; and «inside» is judged where her tap LANDED (capture phase, before any handler re-renders the card and detaches the
+   target), so a dialog she opens herself is painted ON TOP at once. A card the game posts by itself (no tap, or a tap outside) still waits. */
+const DQ_OWN=".kfoc,#popw,.kfoc-ov,.kfintro";
+function dqTapIn(t){try{return !!(t&&t.nodeType===1&&t.closest&&t.closest(DQ_OWN))}catch(e){return false}}
+/* DIALOG-ORDER r2 (E96r FAIL 1 + OO-SWEEP root, owner rule via MAIN 156: «a dialog she opens from a tap goes to the FRONT; cards the game
+   posted wait after it; none lost»). Two faults of one family:
+   (1) a card the GAME posted waits HIDDEN (gate (c) holds it behind her person view, or nobody painted it yet) — every tap handler that reads
+       «a card is up» as Q.length (jdfv.js:66, j25.js:20 talk-open acts, ~60 more `Q.length)return` guards) then killed EVERY act she tapped:
+       nothing on screen, nothing queued, and after ✕ the game card came and her picker was gone.
+   (2) j3 pushModal / Q.push put HER dialog at the BACK: behind a waiting game card, or behind the open box whose button she tapped.
+   ONE rule, at the queue, for every guard and every push site (no per-act patch): while her tap is being handled, a card NOBODY CAN SEE is set
+   aside (DQ.park) — so every guard sees the truth «no card is up» and her act runs; when the tap is over the set-aside cards go back BEHIND what
+   her tap queued (none lost, none doubled). And every card her tap queues (a push during the tap, or BAL.dayq.mineLook ms after it) is moved IN
+   FRONT of the cards that were already waiting, then painted: over the person view (gate (c) never holds it) and over the box she tapped in
+   (the opener comes back after it). Cards the game posts without her tap keep the back of the queue. Solo (dqUi), like gates (a)/(b): a co-op
+   room keeps its own Q pacing. The tap hook is registered EARLY by j3 (window capture, before every module's listener; window.dqTap). */
+DQ.park=null;DQ.tw=0;DQ.pdT=0;
+function dqParked(){return !!(DQ.park&&DQ.park.length)}
+/* the set-aside cards go back behind what her tap queued; a card re-queued meanwhile is not doubled */
+function dqUnpark(){try{const k=DQ.park;DQ.park=null;if(!k||!k.length)return;for(const m of k)if(!Q.includes(m))Q.push(m);DQ.stat.unpark=(DQ.stat.unpark||0)+1;
+  /* a gate's painter that ran while they were set aside saw an empty queue and stopped: arm it again (it still waits on the view / book) */
+  if(dqQHidden()){if(Q[0]&&DQ.preQ&&!DQ.preQ.has(Q[0]))showModal();if(dqQHidden())dqArmModal()}}catch(e){console.error("dayq unpark",e)}}
+/* her cards first: the cards queued since her finger came down go in front of the cards that were waiting before it (order kept in both) */
+function dqMineFront(){try{const pre=DQ.preQ;if(!pre||!dqUi()||Q.length<2)return false;
+  /* a card PLAYING in the person view / stage encounter (jdfv in-scene dialog, centre modal hidden on purpose — OB-OAN) keeps its place: what she opens there shows in that scene after it, never as a second centre card over it */
+  if(dqPlaying()||(window.DF&&DF.F&&Q[0]&&DF.encM===Q[0]))return false;const mine=Q.filter(m=>!pre.has(m)),old=Q.filter(m=>pre.has(m));if(!mine.length||!old.length||Q.every((m,i)=>m===(i<mine.length?mine[i]:old[i-mine.length])))return false;
+  /* an ending / death card already waiting keeps its place (nothing is played over the end of her life) */
+  if(dqIsEnd(Q[0])&&pre.has(Q[0]))return false;Q.length=0;Q.push(...mine,...old);DQ.stat.mineFront=(DQ.stat.mineFront||0)+1;return true}catch(e){console.error("dayq front",e);return false}}
+/* r3 (E96r REVIEW r2: «Sang buổi» passed the buổi over an unseen card): the rule is for HER ACT taps only — inside the person view she opened
+   (DQ_OWN) or inside the box / panel she has open. A time-passing control (#next «Sang buổi», a Dư đồ move, the top bar «Về phòng», a tab) is
+   never one: there an unseen card still holds the turn and is painted first (M4 rule, dqPaintQ / dqBring), exactly as before. */
+const DQ_ACT=DQ_OWN+",#modal,#panel";
+function dqActTap(t){try{if(!t||t.nodeType!==1||!t.closest)return false;if(t.closest("#next,#tabs,.tabs,#top,.ktop,#map,.mspot"))return false;return !!t.closest(DQ_ACT)}catch(e){return false}}
+function dqTapOpen(){return !!(DQ.preQ&&DQ.actTap&&Date.now()<=DQ.tw)}
+function dqTap(k,e){try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;const now=Date.now();const act=dqActTap(e.target);
+  /* the queue as it was when her finger came DOWN (the view's cards act on pointerup, before the click event); a click with no finger before it
+     (keyboard / an engine .click()) starts its own tap, a click nested inside her tap (jdfv dfRun clicks the docked card's button) does not */
+  if(k==="pointerdown"||k==="touchstart"||k==="keydown"||(k==="click"&&now-DQ.pdT>1500&&!dqParked())){DQ.preQ=new Set(Q);DQ.actTap=act;if(k!=="click")DQ.pdT=now}
+  if(!DQ.actTap)return/* not her act tap: nothing set aside, nothing moved (the old gates run as before) */;
+  DQ.tw=now+BAL.dayq.mineLook+(k==="pointerdown"||k==="touchstart"?1500:0);
+  /* (1) a card nobody can see is set aside while this event's handlers run (not over the new-day host / a mini-game: their own gates) */
+  /* set aside ONLY for a tap inside the person view she opened (its own act cards / docked card): a panel or box may hold a time-passing control */
+  if(DQ.tapIn&&!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
+  if((k==="click"||k==="pointerup"||k==="keydown")&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(dqParked())dqUnpark();
+    /* (2) what her tap queued comes first; painted at once when nothing shows it (over the view / in place of the box she tapped in) */
+    const M=$("modal"),shown=M&&!dqHidden(M)?Q[0]:null;const moved=dqMineFront();
+    if(Q.length&&!before.has(Q[0])&&(dqQHidden()||(moved&&shown&&Q[0]!==shown))){if(DQ.tapIn||moved)DQ.mine=Q[0];DQ.stat.mineTap=(DQ.stat.mineTap||0)+1;showModal();return}
+    /* the act may queue its card a moment later (the view's own act path / a reaction line first): look a few more times (BAL.dayq.mineLook ms) */
+    if(++n<4)setTimeout(look,BAL.dayq.mineLook/3)}catch(x){console.error("dayq mine",x)}};setTimeout(look,0)}}catch(x){}}
+window.dqTap=dqTap;
+function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;
+  if(t&&t.nodeType===1&&(a===document.body||a.contains(t)))return true;
+  /* the person view owns its docked card: her tap there (recorded when it landed, still the same event) is inside */
+  if(a&&a.classList&&a.classList.contains("kfoc")){if(ev===DQ.tapEv&&DQ.tapIn)return true;if(dqTapIn(t))return true}
+  return false}catch(e){return false}}
 /* the top card is the one already playing in the jdfv stage scene (its own repeated showModal) */
 function dqPlaying(){try{const D=window.DF;return !!(D&&Q[0]&&Q[0].dfSeen&&D.encM===Q[0]&&D.F)}catch(e){return false}}
 function dqActBlocks(){if(dqPlaying())return false;const a=dqActEl();return !!a&&!dqInside(a)}
 /* (c) an activity opened in the same tap as a card that was already painted (spend → card → mini-game): take the card back, unchosen */
-function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl())return;const D=window.DF,m=Q[0];let n=0;
+function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl()||(DQ.mine&&Q[0]===DQ.mine))return;const D=window.DF,m=Q[0];let n=0;
   if(D&&D.F&&D.encM===m&&m&&m.dfSeen&&!D.play){const F=D.F;m.dfSeen=0;D.encM=null;try{F.destroy()}catch(e){try{F.close()}catch(x){}}try{dfClosed(D.tk)}catch(e){}n=1}
   const M=$("modal");if(M&&!dqHidden(M)){DQ_HID.set.call(M,true);n=1}
   if(n){DQ.stat.pulled++;dqArmModal()}}catch(e){console.error("dayq pull",e)}}
@@ -116,7 +174,9 @@ function dqArmModal(){if(DQ.mt)return;const tick=DQ.mtf=()=>{clearTimeout(DQ.mt)
   if(dqQHidden()){if((DQ.ra=(DQ.ra||0)+1)<=BAL.dayq.rearm){DQ.stat.rearm++;DQ.mt=setTimeout(tick,dqPoll())}}else DQ.ra=0}catch(e){console.error("dayq modal",e)}};DQ.mt=setTimeout(tick,dqPoll())}
 function dqInstall(){
  /* (a) outermost nextBuoi: hold the turn while the old buổi's big moment is pending */
- const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}
+ const nb=nextBuoi;nextBuoi=function(){/* r3: a turn that starts while her tap has cards set aside (her act spent the last khắc) gets them back FIRST: an unseen card still holds the turn and is painted */
+  try{if(dqParked()){DQ.stat.parkTurn=(DQ.stat.parkTurn||0)+1;dqUnpark()}}catch(e){}
+  if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}
   /* r2: a card an inner wrapper queued WITHOUT painting during the turn (jagent agDrain «Có người tìm đến» runs before j9, which then returns on
      Q.length) is painted after the turn — whichever path ran it (tap, auto-advance, dqWait) */
   const r=nb.apply(this,arguments);try{if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.afterPaint++;dqPaintQ()}}catch(e){}return r};window.nextBuoi=nextBuoi;
@@ -124,8 +184,13 @@ function dqInstall(){
     queue nobody painted first (the M4 dead tap) and otherwise runs every module's nextBuoi wrapper like the auto-advance. Here only a re-entry
     guard: a click dispatched while her tap is still running (a nested .click()) is dropped — one tap = one turn */
  try{const n=$("next");if(n){const o=n.onclick;let tapIn=0;n.onclick=function(e){if(tapIn){DQ.stat.tapRe++;return}tapIn=1;try{return o?o.call(this,e):nextBuoi()}finally{tapIn=0}}}}catch(e){console.error("dayq next",e)}
+ /* r2: a save made while her tap has cards set aside writes them too (the saveable queue, jqsave) */
+ if(typeof save==="function"){const sv=save;save=function(){if(!dqParked())return sv.apply(this,arguments);const keep=Q;Q=Q.concat(DQ.park.filter(m=>!Q.includes(m)));try{return sv.apply(this,arguments)}finally{Q=keep}};window.save=save}
  /* (b) outermost showModal: nothing painted over the title card / book */
- const sm=showModal;showModal=function(){if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
+ const sm=showModal;showModal=function(){/* DIALOG-ORDER: the card she opened herself from inside the activity is hers — dqPull never takes it back */
+  try{if(dqTapOpen()&&dqMineFront())DQ.mine=Q[0]}catch(e){}/* r2: inside her tap, what she queued shows before the cards that were waiting */
+  try{if(dqUiC()&&Q.length&&Q[0]!==DQ.mine){const a=dqActEl();if(a&&dqInside(a))DQ.mine=Q[0]}}catch(e){}
+  if(dqUiC()&&Q.length&&!DQ.user&&!(DQ.mine&&Q[0]===DQ.mine)&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}const r=sm.apply(this,arguments);try{if(dqUi()&&!Q.length)setTimeout(dqNextSync,0)}catch(e){}return r};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
