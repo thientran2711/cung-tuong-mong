@@ -2257,9 +2257,9 @@ BAL.kmus={holdMs:6000};
    cấm túc); fallSung = Sủng lost with a one-rank fall (was the typed 15 in j8 fall); evShow = most evidence lines a notice lists */
 BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,oneBelow:1/* PUNISH-TIER rule (4), OD 26/11 ~19:05Z MAIN rec applied (canon overwrite of the old npcOneBelow question): leaving lãnh cung, her and an NPC alike, she takes back the rank she is owed when its seat is free, else this many ranks lower */};
 /* CHARGE-EVIDENCE (review/charge-evidence, D4 option A; owner 26/11 ~05:15Z «D4 A» + ~05:35Z find-odds formula, verbatim in OD): evidence is kept
-   PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, need = pieces
-   to accuse (Hoàng hậu target + queenPlus), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
-   pk = the kinds of piece, in the order found (the record and the evidence card name each piece «deed · kind», table A rule 4; rv); pun = what a proven charge brings (light = phạt bổng + Danh −, cam = cấm túc, giang = one rank, cold = lãnh cung; one punishment, D1).
+   PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, tier = the weight (PUNISH-TIER, BAL.charge.tier: need = its
+   pieces, the same for every rank), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
+   pk = the kinds of piece, in the order found (the record and the evidence card name each piece «deed · kind», table A rule 4; rv); lite = the nhẹ penalty (bong = phạt bổng + Danh −, cam = cấm túc); vừa / nặng penalties: BAL.charge.tier note below.
    deed = jtruth deed key → charge. FIND ODDS per search (chFind): band + Tâm cơ of the MASTER vs the target (±1 band per tcStep, cap tcCap) +
    sent servant (±1 only at the extremes: sharp & bậc ≥ srvHi / timid & bậc ≤ srvLo) + TAI MẮT (master's real eyes ≥ matMid +1, ≥ matHigh +2, a planted
    eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
@@ -2274,9 +2274,9 @@ BAL.charge={C:{
  uh:{n:"Ức hiếp quấy phá",tier:"nhe",lite:"cam",band:5,pk:["lời khai người bị hại","người tận mắt chứng kiến"]},
  mc:{n:"Mua chuộc người hầu",tier:"nhe",lite:"bong",band:4,pk:["bạc đút lót tìm thấy","lời khai người hầu bị mua"]},
  hd:{n:"Hại dung nhan",tier:"vua",band:3,pk:["tang vật","lời khai người hầu"]},
- mh:{n:"Mưu hại tính mạng",tier:"nang",band:2,pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
+ mh:{n:"Mưu hại tính mạng",tier:"vua",band:2,pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
  vo:{n:"Vu oan giá họa",tier:"vua",band:2,pk:["thư từ giả mạo","lời khai kẻ được sai","dấu vết đồ bị cài"]},
- tt:{n:"Tư thông",tier:"nang",band:1,pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
+ tt:{n:"Tư thông",tier:"vua",band:1,pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
   bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"uh",
@@ -2301,18 +2301,15 @@ BAL.charge={C:{
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
-/* PUNISH-TIER (review/punish-tier, owner OD 26/11 ~19:05Z + ~19:10Z «cây cao đón gió», history note dev/handover/reports/punish-tier.md):
-   the CRIME decides the penalty, the evidence only decides whether the charge sticks. Each charge C[c].tier = its weight; tier[x].need = the
-   pieces a charge of that weight needs (C[c].need reads it — one source); rkPlus[r] = extra pieces to accuse a consort of rank r (the seated
-   ranks Tần+ are safer: more proof), cucDeed = deed kinds that make their charge CỰC NẶNG whatever its base weight (real tư thông, khi quân:
-   giả thai / tráo hoàng tự). Penalty by weight × seat (jpun punTier, her and every NPC alike, law 1):
-   nhẹ = C[c].lite: «bong» phạt bổng (fine, danh, duc) / «cam» cấm túc ngắn (punish weight 1) — no rank change;
-   vừa = giáng 1 bậc; nặng = lãnh cung KEEPING the title on a seat-free rank, giáng 1 bậc + lãnh cung on a seated rank (SEATCAP, the seat frees);
-   cực nặng = death[temper] % ban chết (Emperor's temper: thường / nóng nảy / nhân từ), else phế vị (Đáp ứng) + lãnh cung.
-   failRk: a failed accusation of a target of rank r costs the accuser Danh × danhX[r] and a punishment of weight sev[r] (null = none). */
-BAL.charge.tier={nhe:{n:"nhẹ",need:1},vua:{n:"vừa",need:2},nang:{n:"nặng",need:3},cuc:{n:"cực nặng",need:3,death:[30,60,0]}};
-BAL.charge.tierOrd=["nhe","vua","nang","cuc"];
-BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];
-BAL.charge.cucDeed=["tryst","cyfake","catswap"];
-BAL.charge.failRk={danhX:[1,1,1,1.5,1.5,2,2,2],sev:[null,null,null,null,0,0,1,2]};
+/* PUNISH-TIER (review/punish-tier, owner OD 26/11 ~19:50Z, canon overwrite of ~19:05Z / ~19:10Z; history note dev/handover/reports/punish-tier.md):
+   the CRIME decides the penalty, the SAME for every rank; the evidence only decides whether the charge sticks. THREE weights:
+   nhẹ = C[c].lite «bong» phạt bổng (fine, Danh, Đức) / «cam» cấm túc ngắn (punish weight 1), no rank change;
+   vừa = giáng 1 bậc + lãnh cung (the seat always frees; jpun punTier / punCold);
+   nặng = ban chết (j8 deathSentence, its standing mercy rules kept: early turns, nhân từ → the vừa penalty instead).
+   tier[x].need = pieces a charge of that weight needs (C[c].need reads it — one source; nặng's third piece is the strong proof, pk[0]).
+   nangDeed = deed kinds that make their charge NẶNG whatever its base weight (real tư thông, khi quân: giả thai / tráo hoàng tự).
+   PHẢN TỌA: a failed accusation puts the same weight's penalty of that charge back on the accuser (jcharge chBack; everyone, her too). */
+BAL.charge.tier={nhe:{n:"nhẹ",need:1},vua:{n:"vừa",need:2},nang:{n:"nặng",need:3}};
+BAL.charge.tierOrd=["nhe","vua","nang"];
+BAL.charge.nangDeed=["tryst","cyfake","catswap"];
 for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});

@@ -1,7 +1,7 @@
 /* ================= LÃNH CUNG: a playable state for every consort ================= */
-/* PUNISH-TIER: x = the crime's weight (default nặng); the title she keeps inside = jpun coldTitle (seated rank: one lower; seat-free: the same;
-   cực nặng: phế vị); S.coldFrom = the rank before the conviction (minh oan gives it back), S.coldRank = the title kept inside (a pardon gives it back) */
-function cold(why,by,x){if(S.dead)return;if(S.out)return;const P=PUNT&&PUNT.title!=null?PUNT:null;x=(P&&P.x)||x||"nang";const r0=P?P.from:punFromToday(S)/* punish-reason: a demotion earlier today is folded into this one punishment */,ti=P?P.title:coldTitle(r0,x,S.rank);
+/* PUNISH-TIER (OD 26/11 ~19:50Z): lãnh cung = the VỪA penalty, one rank down + inside (jpun coldTitle), the same for every rank; x "keep" = no crime
+   (bị bỏ quên), title kept; S.coldFrom = the rank before the conviction (minh oan gives it back), S.coldRank = the title kept inside (a pardon gives it back) */
+function cold(why,by,x){if(S.dead)return;if(S.out)return;const P=PUNT&&PUNT.title!=null?PUNT:null;x=(P&&P.x)||x||"vua";const r0=P?P.from:punFromToday(S)/* punish-reason: a demotion earlier today is folded into this one punishment */,ti=P?P.title:coldTitle(r0,x,S.rank);
  const cby=punWho(by),cR=punRows({kind:"cold",why,by:cby,x,from:r0,title:ti});S.out=1;S.coldWhy=why;S.coldFrom=r0;S.coldRank=ti;S.coldX=x;S.coldTurn=S.turn;S.coldWk=punNow();S.coldPend=null;S.rank=0;S.confined=0;S.preg=S.fake?0:S.preg;S.fake=0;
  /* the cold palace keeps only what the one household table allows (BAL.promo.cap row 0 via capOf; review/staff-cap-fix): the most trusted stay, the others are named here */
  const cc=capOf(S),kp=[];for(const [role,n] of [["maid",cc[0]-1],["eunuch",cc[1]]])kp.push(...(S.staff||[]).filter(s=>s.role===role&&s.loyal>=BAL.loy.trust).sort((a,b)=>b.loyal-a.loyal).slice(0,Math.max(0,n)));

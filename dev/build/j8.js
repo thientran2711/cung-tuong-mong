@@ -100,18 +100,17 @@ function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}if(sev==nul
   const m=punishMonths(sev);p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`);if(p===S)punNote({kind:"camtuc",why,m})}
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
   if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});const r0=rkOf(p);if(r0>0&&!punTwice(p)){seatPut(p,punDown(p));punMark(p,r0)}p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);if(p===S)punNote({kind:rkOf(S)<r0?"giang":"camtuc",why,from:r0,to:S.rank,m:BAL.eff.j8.mercyConfine});return}
-  /* PUNISH-TIER: spared death = the other CỰC NẶNG penalty, phế vị + lãnh cung (jpun punCold "cuc"), her and an NPC alike */
-  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, phế vị, đày ngươi vào lãnh cung`,null,"cuc");return die(why)}
-  if(has("nhantu")&&npcWhy("empMercy",{p})){punCold(p,"cuc",`${why}; Hoàng thượng nhân từ tha tội chết`);return}
+  /* PUNISH-TIER: spared death = the VỪA penalty (one rank down + lãnh cung, jpun punCold), her and an NPC alike */
+  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`,null,"vua");return die(why)}
+  if(has("nhantu")&&npcWhy("empMercy",{p})){punCold(p,"vua",`${why}; Hoàng thượng nhân từ tha tội chết`);return}
   p.alive=false;if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
 /* a proven crime (accusation with evidence) */
 /* punish-reason (D1): ONE punishment = lãnh cung OR one rank down (never two ranks, never two punishments the same day: punTwice → cấm túc);
    her notice names who accused, why and which evidence (jpun punNote) */
-/* PUNISH-TIER: x = the crime's weight (each caller names it; default vừa): vừa = one rank down (Sủng −BAL.pun.fallSung), nặng / cực nặng = jpun
-   punTier (nặng on a seated rank = giáng + lãnh cung, the seat frees; seat-free = lãnh cung keeping the title) — was a coin toss lãnh cung / giáng */
+/* PUNISH-TIER (OD 26/11 ~19:50Z): a proven crime of weight x (default vừa = one rank down + lãnh cung, Sủng −BAL.pun.fallSung; nặng = ban chết;
+   jpun punTier, the same for every rank) — was a coin toss lãnh cung OR giáng */
 function fall(p,why,by,x){x=x||"vua";const a=punWho(by);if(p===S){if(S.out||S.dead)return;if(a)S.framedBy=key(a)}else{if(p.out||p.alive===false)return;if(a&&a!==p)p.coldBy=key(a)}
- const pt=PUNT;PUNT={x};try{if(x==="vua"){const r0=rkOf(p);punGiang(p,why,a);if(rkOf(p)<r0){if(p===S)apply({sung:-BAL.pun.fallSung});else p.sung=cl(p.sung-BAL.pun.fallSung,0,100)}return}
- punTier(p,x,p===S?`Ngươi ${why}`:why,a)}finally{PUNT=pt}}
+ const pt=PUNT;PUNT={x};try{if(x==="vua"){if(p===S)apply({sung:-BAL.pun.fallSung});else p.sung=cl(p.sung-BAL.pun.fallSung,0,100)}punTier(p,x,p===S?`Ngươi ${why}`:why,a)}finally{PUNT=pt}}
 /* a fabricated charge that sticks */
 function framed(p,why){if(ACTX.a&&ACTX.a!==p)p.framedBy=key(ACTX.a);const d=Math.round(BAL.eff.j8.framedDanh*(DG()?1.3:1));ap(p,{danh:-d,sung:-BAL.eff.j8.framedSung});punish(p,why,2);return d}
 /* the target's people notice first: same detection for everyone */

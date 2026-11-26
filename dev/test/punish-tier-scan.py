@@ -3,15 +3,15 @@
 Lists each call of fall / cold / demote / punish / deathSentence / chPunish / punCold / punTier / punGiang + every raw lãnh cung write
 (.out=true / .out=1) with the crime words and the weight → penalty after this branch.
 FAIL families: raw_cold = an NPC/her sent into lãnh cung outside jpun punCold / j14 cold (title + seat rule skipped);
-stack = a site that drops a rank AND sends to lãnh cung outside punCold (only nặng on a seated rank / cực nặng may do both, via punCold).
+stack = a site that drops a rank AND sends to lãnh cung outside punCold (the vừa penalty does both, only via punCold).
 usage: python3 dev/test/punish-tier-scan.py [-v] [--md]   (exit 1 on a FAIL)"""
 import re,sys,glob,os
 D=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','build')
 SKIP=re.compile(r'^(jbal.*|all)\.js$')
 ALLOW_RAW={('j42.js','srvW'),('jkc.js','kcW'),('j14.js','cold'),('jpun.js','punCold')}  # temporary S.out=1 wrappers (servant life / kỳ tuyển), not a punishment
-CALL=re.compile(r'(?<![\w.])(fall|cold|demote|punish|deathSentence|chPunish|punCold|punTier|punGiang)\(')
+CALL=re.compile(r'(?<![\w.])(fall|cold|demote|punish|deathSentence|chPunish|punCold|punTier)\(')
 RAW=re.compile(r'\.out=(?:true|1)\b')
-PEN={'nhe':'phạt bổng / cấm túc ngắn','vua':'giáng 1 bậc','nang':'lãnh cung giữ phẩm (ghế tự do) · giáng 1 + lãnh cung (ghế có hạn)','cuc':'ban chết hoặc phế vị + lãnh cung','keep':'lãnh cung giữ phẩm (không tội)'}
+PEN={'nhe':'phạt bổng / cấm túc ngắn','vua':'giáng 1 bậc + lãnh cung (mọi phẩm)','nang':'ban chết','keep':'lãnh cung giữ phẩm (không tội)','demote':'giáng 1 bậc (không phải tội)'}
 def args(s,i):
     d=0;j=i;q=None
     while j<len(s):
@@ -63,12 +63,12 @@ for f in sorted(glob.glob(os.path.join(D,'*.js'))):
             why=next((x for x in A if x[:1] in '"`\''),'')[:70]
             if fn=='fall':x=A[3].strip('"') if len(A)>3 else 'vua'
             elif fn=='cold':x=A[2].strip('"') if len(A)>2 else 'nang'
-            elif fn=='demote':x='vua'
+            elif fn=='demote':x='demote'
             elif fn=='punish':
                 sv=A[2] if len(A)>2 and A[0][:1] not in '"`' else (A[1] if len(A)>1 and A[0][:1] in '"`' else '1')
                 x='nhe';why=why+f' [sev {sv}]'
-            elif fn=='deathSentence':x='cuc'
-            elif fn=='chPunish':x='charge (BAL.charge.C[c].tier, cực nặng by cucDeed)'
+            elif fn=='deathSentence':x='nang'
+            elif fn=='chPunish':x='charge (BAL.charge.C[c].tier, nặng by nangDeed)'
             elif fn in ('punCold','punTier'):x=(A[1] if len(A)>1 else '').strip('"')
             else:x='vua'
             rows.append((b,n,fn,why,x,PEN.get(x,x)))

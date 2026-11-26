@@ -21,13 +21,13 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID]=proces
  const setup=await p.evaluate(()=>{S.rank=2;S.out=0;S.punWk=null;S.punR=null;S.confined=0;const v=liveRivals(true).find(x=>!x.queen&&x.rank>=1);deedAdd(S,"rumor",v,1,"tung tin đồn hại người");deedAdd(S,"musk",v,2,"bỏ xạ hương vào túi thơm");evA(v,S,2);return {v:rivals.indexOf(v),name:v.name,ev:evG(v,S)}});
  console.log('setup',JSON.stringify(setup));
  /* 1. one fall: never two ranks (force the demotion branch, not lãnh cung) */
- await p.evaluate((id)=>{const v=rivals[id];const r0=Math.random;Math.random=()=>0.01;ACTX={a:v,pen:0};try{fall(S,"bị tố mưu hại phi tần")}finally{ACTX={a:null,pen:0};Math.random=r0}render()},setup.v);
+ await p.evaluate((id)=>{const v=rivals[id];const r0=Math.random;Math.random=()=>0.01;ACTX={a:v,pen:0};try{demote(S,"bị tố mưu hại phi tần")/* PUNISH-TIER: a single-rank road (fall is now giáng + lãnh cung) */}finally{ACTX={a:null,pen:0};Math.random=r0}render()},setup.v);
  let st=await p.evaluate(()=>({rank:S.rank,out:S.out,last:S.punLast}));ok(st.rank===1&&!st.out,`fall: Quý nhân → ${st.rank===1?'Thường tại':'rank '+st.rank} (one rank)`);
  let seen=await drain();const n1=seen.find(x=>/giáng/i.test(x.t));ok(!!n1,'reason notice shown: '+(n1?n1.t:'none'));
  const body=n1?n1.body:'';ok(/Ai tố/i.test(body)&&body.includes(setup.name),'notice names WHO ('+setup.name+')');ok(/Vì sao/i.test(body)&&/mưu hại/.test(body),'notice says WHY');
  ok(/Chứng cứ/i.test(body)&&/xạ hương/.test(body),'notice lists WHICH evidence (kind + piece)');ok(/Thường tại/.test(body)&&/Quý nhân/.test(body),'notice says the punishment from → to');
  /* 2. a second fall the same day: cấm túc, no second rank */
- await p.evaluate((id)=>{const v=rivals[id];ACTX={a:v,pen:0};try{fall(S,"bị tố lần nữa")}finally{ACTX={a:null,pen:0}}render()},setup.v);
+ await p.evaluate((id)=>{const v=rivals[id];ACTX={a:v,pen:0};try{demote(S,"bị tố lần nữa")}finally{ACTX={a:null,pen:0}}render()},setup.v);
  st=await p.evaluate(()=>({rank:S.rank,conf:S.confined}));ok(st.rank===1&&st.conf>0,`second fall same day: rank stays ${st.rank}, cấm túc ${st.conf}`);await drain();
  /* 3. lãnh cung the same day: the one punishment, the old rank (Quý nhân) is the one kept for phục vị */
  await p.evaluate((id)=>{ACTX={a:rivals[id],pen:0};try{cold("Ngươi bị tố tư thông")}finally{ACTX={a:null,pen:0}}render()},setup.v);
@@ -42,8 +42,8 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID]=proces
  st=await p.evaluate(()=>({out:S.out,rank:S.rank}));ok(!st.out&&freedDay>=days,`freed on day ${freedDay} (stay ${days})`);ok(st.rank===1,`phục vị one rank below Quý nhân: rank ${st.rank}`);
  ok(typeof nf!=='undefined'&&nf&&/Vì sao được ra/i.test(nf.body)&&/thiện cảm/.test(nf.body)&&/Vì sao phẩm này/i.test(nf.body),'release notice: why freed (Hoàng hậu, thiện cảm) + why this rank '+(typeof nf!=='undefined'&&nf?nf.body.slice(0,400):'none'));
  /* 5. NPC (law 1): one rank, stay gate, one-rank release */
- const r=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.queen&&x.rank>=3&&!x.out)||liveRivals(true).find(x=>!x.queen&&!x.out);v.rank=3;v.punWk=null;const r0=Math.random;Math.random=()=>0.01;try{fall(v,"bị tố")}finally{Math.random=r0}const a=v.rank;
-   v.punWk=null;Math.random=()=>0.99;try{fall(v,"bị tố nặng",null,"nang")/* PUNISH-TIER: the caller names the weight */}finally{Math.random=r0}const out=!!v.out;const r1=v.rank;coldStamp(v);hhAct(queenP(),v,"pardon");const early=!!v.out;v.coldWk-=BAL.pun.coldMinDays;hhAct(queenP(),v,"pardon");return {a,out,early,late:!!v.out,r1,rel:v.rank,ob:!!BAL.pun.npcOneBelow}});
- ok(r.a===2,`NPC fall: Tần → rank ${r.a}`);ok(r.out&&r.early,'NPC lãnh cung: early ân xá refused');ok(!r.late&&r.rel===r.r1,`NPC release after the stay (seat-free Quý nhân, title kept): rank ${r.r1} → ${r.rel} (PUNISH-TIER rule 4)`);
+ const r=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.queen&&x.rank>=3&&!x.out)||liveRivals(true).find(x=>!x.queen&&!x.out);v.rank=3;v.punWk=null;const r0=Math.random;Math.random=()=>0.01;try{demote(v,"bị tố")}finally{Math.random=r0}const a=v.rank;
+   v.punWk=null;Math.random=()=>0.99;try{fall(v,"bị tố nặng",null,"vua")/* PUNISH-TIER vừa: giáng + lãnh cung */}finally{Math.random=r0}const out=!!v.out;const r1=v.rank;coldStamp(v);hhAct(queenP(),v,"pardon");const early=!!v.out;v.coldWk-=BAL.pun.coldMinDays;hhAct(queenP(),v,"pardon");return {a,out,early,late:!!v.out,r1,rel:v.rank,ob:!!BAL.pun.npcOneBelow}});
+ ok(r.a===2,`NPC fall: Tần → rank ${r.a}`);ok(r.out&&r.early,'NPC lãnh cung: early ân xá refused');ok(!r.late&&r.rel===r.r1,`NPC release after the stay (title kept inside, seat-free): rank ${r.r1} → ${r.rel} (PUNISH-TIER rule 4)`);
  ok(!errs.length,'no page errors '+errs.slice(0,3).join(' | '));
  await ctx.close();await b.close();console.log(fails.length?`FAILED ${fails.length}`:'ALL PASS');process.exit(fails.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
