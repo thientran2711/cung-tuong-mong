@@ -105,8 +105,8 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
  module.exports = { make, PROBE };
 diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 --- a/dev/test/robot-rt-coop.js	2026-11-25 23:30:30.071817801 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-26 06:50:17.698074062 +0000
-@@ -51,14 +51,53 @@
++++ b/dev/test/robot-rt-coop.js	2026-11-26 06:51:40.780106163 +0000
+@@ -51,14 +51,54 @@
  
  async function seatLoop(ctx, who, dev, other) {
    const p = await ctx.newPage(); const st = {}; let k = 0;
@@ -125,15 +125,16 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 +    const capF = path.join(OUT, 'hangcap-' + who + '.txt'); const capW = t => { try { fs.appendFileSync(capF, '[' + new Date().toISOString() + ' ' + ts() + '] ' + t + '\n') } catch (e) {} };
 +    const rss = () => { try { return require('child_process').execSync("ps -eo rss,pcpu,args | grep -E 'type=renderer|type=gpu' | grep -v grep | awk '{printf \"%dMB %s%% %s\\n\", $1/1024, $2, substr($0, index($0,\"--type=\"), 30)}'", { timeout: 5000 }).toString() } catch (e) { return 'ps err ' + e.message } };
 +    /* patch #26 (freeze fixer): V8 CPU-profiler TRACE from buổi >= 57 (ring buffer), read out at the first stall → the JS stacks of the last samples (works during a native wedge) → hangcap-<seat>-trace.txt */
-+    const trChunks = []; let trOn = false, trDone = false;
-+    if (cdp) cdp.on('Tracing.dataCollected', e => { try { for (const ev of e.value) if (ev.name === 'ProfileChunk' || ev.name === 'Profile') { trChunks.push(ev); if (trChunks.length > 4000) trChunks.shift() } } catch (x) {} });
-+    const trStart = async () => { if (trOn || !cdp) return; trOn = true; try { await cdp.send('Tracing.start', { traceConfig: { recordMode: 'recordContinuously', includedCategories: ['disabled-by-default-v8.cpu_profiler'], traceBufferSizeInKb: 120000 } }); capW('TRACE started at buoi ' + s.R.buoi) } catch (x) { capW('TRACE start err ' + x.message) } };
-+    const trEnd = async () => { if (!trOn || trDone || !cdp) return; trDone = true; try {
++    /* patch #27: rolling screenshot ring (24 files, every 5 s) from buổi 59 on, the last frames before a wedge */ let shotN = 0; const shT = setInterval(async () => { if (s.R.buoi < 59) return; try { await Promise.race([p.screenshot({ path: path.join(OUT, 'ring-' + who + '-' + (shotN++ % 24) + '.png'), timeout: 4000 }), new Promise(r => setTimeout(r, 4500))]) } catch (x) {} }, 5000);
++    const trChunks = [], trMem = []; let trOn = false, trDone = false;
++    if (cdp) cdp.on('Tracing.dataCollected', e => { try { for (const ev of e.value) if (ev.name === 'ProfileChunk' || ev.name === 'Profile') { trChunks.push(ev); if (trChunks.length > 4000) trChunks.shift() } else if (ev.ph === 'v' || /memory-infra|periodic_interval|MemoryDump/i.test(String(ev.cat || '') + ' ' + String(ev.name || ''))) { trMem.push(ev); if (trMem.length > 3000) trMem.shift() } } catch (x) {} });
++    const trStart = async () => { if (trOn || !cdp) return; trOn = true; try { await cdp.send('Tracing.start', { traceConfig: { recordMode: 'recordContinuously', traceBufferSizeInKb: 150000, includedCategories: ['disabled-by-default-v8.cpu_profiler', 'disabled-by-default-memory-infra', 'blink.user_timing'], memoryDumpConfig: { triggers: [{ mode: 'light', periodicIntervalMs: 20000 }] } } }); capW('TRACE started at buoi ' + s.R.buoi) } catch (x) { capW('TRACE start err ' + x.message) } };
++    const trEnd = async () => { if (!trOn || trDone || !cdp) return; trDone = true; try { await new Promise(r => setTimeout(r, 60000)) /* patch #27: 60 s more so the runaway shows in 3 memory dumps */;
 +      const fin = new Promise(r => cdp.once('Tracing.tracingComplete', r)); await Promise.race([cdp.send('Tracing.end'), new Promise(r => setTimeout(r, 30000))]); await Promise.race([fin, new Promise(r => setTimeout(r, 30000))]);
 +      const nodes = new Map(); const samples = []; for (const ev of trChunks) { const d = ev.args && ev.args.data; const cp = d && d.cpuProfile; if (!cp) continue; for (const n of (cp.nodes || [])) nodes.set(n.id, n); (cp.samples || []).forEach(id => samples.push(id)) }
 +      const par = new Map(); for (const m of nodes.values()) { if (m.parent != null) par.set(m.id, m.parent); for (const c of (m.children || [])) par.set(c, m.id) } const stack = id => { const o = []; let n = nodes.get(id); let g = 0; while (n && g++ < 14) { const f = n.callFrame || {}; o.push((f.functionName || '(anon)') + ' ' + String(f.url || '').split('/').pop() + ':' + (f.lineNumber + 1)); n = nodes.get(par.get(n.id)) } return o.join(' < ') };
 +      const last = samples.slice(-400); const cnt = new Map(); for (const id of last) { const k = stack(id); cnt.set(k, (cnt.get(k) || 0) + 1) }
-+      const top = [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25); fs.writeFileSync(path.join(OUT, 'hangcap-' + who + '-trace.txt'), 'chunks ' + trChunks.length + ' nodes ' + nodes.size + ' samples ' + samples.length + ' (last 400 below)\n' + top.map(([k, n]) => n + '× ' + k).join('\n') + '\n'); capW('TRACE read out: ' + samples.length + ' samples, top stack ' + (top[0] ? top[0][1] + '× ' + top[0][0].slice(0, 200) : 'none')) } catch (x) { capW('TRACE end err ' + x.message) } };
++      const top = [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25); fs.writeFileSync(path.join(OUT, 'hangcap-' + who + '-trace.txt'), 'chunks ' + trChunks.length + ' nodes ' + nodes.size + ' samples ' + samples.length + ' (last 400 below)\n' + top.map(([k, n]) => n + '× ' + k).join('\n') + '\n'); try { fs.writeFileSync(path.join(OUT, 'hangcap-' + who + '-trace.json'), JSON.stringify({ memoryDumps: trMem.slice(-60), profileChunksLast: trChunks.slice(-150) })) } catch (x) { capW('TRACE json err ' + x.message) } capW('TRACE memdumps ' + trMem.length + ' · json saved; '); capW('TRACE read out: ' + samples.length + ' samples, top stack ' + (top[0] ? top[0][1] + '× ' + top[0][0].slice(0, 200) : 'none')) } catch (x) { capW('TRACE end err ' + x.message) } };
 +    const memT = setInterval(async () => { if (s.R.buoi >= 57) trStart(); /* patch #22 (freeze fixer): Blink node leak — collectGarbage then DOM counters per seat each tick */ let dc = null; if (cdp) { try { await Promise.race([cdp.send('HeapProfiler.collectGarbage'), new Promise(r => setTimeout(r, 8000))]); dc = await Promise.race([cdp.send('Memory.getDOMCounters').catch(e => 'err'), new Promise(r => setTimeout(() => r('TO'), 5000))]) } catch (e) { dc = 'err ' + e.message } } if (dc && dc.nodes != null) capW('domcounters nodes ' + dc.nodes + ' listeners ' + dc.jsEventListeners + ' documents ' + dc.documents); const h = cdp ? await Promise.race([cdp.send('Runtime.getHeapUsage').catch(e => 'err'), new Promise(r => setTimeout(() => r('TO'), 5000))]) : null; capW('mem buoi ' + s.R.buoi + ' steps ' + s.R.steps + ' heap ' + JSON.stringify(h && h.usedSize ? Math.round(h.usedSize / 1e6) + '/' + Math.round(h.totalSize / 1e6) + 'MB' : h) + ' | ' + rss().replace(/\n/g, ' ; ')) }, 60e3);
 +    const grab = async tag => { if (!cdp) return capW(tag + ' no cdp'); await trEnd(); capW(tag + ' START rss: ' + rss().replace(/\n/g, ' ; '));
 +      try { const ls = await Promise.race([cdp.send('Runtime.evaluate', { expression: "JSON.stringify(Object.fromEntries(Object.keys(localStorage).filter(k=>/ctm-coop/.test(k)).map(k=>[k,String(localStorage[k]).slice(0,400)])))", returnByValue: true }).catch(e => ({ err: e.message })), new Promise(r => setTimeout(() => r('TO'), 10000))]); capW(tag + ' LS ' + (ls && ls.result ? ls.result.value : JSON.stringify(ls))) } catch (x) { capW(tag + ' LS err ' + x.message) }
@@ -153,7 +154,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 +      if (hn === 1) await p.reload({ timeout: 30000 }).catch(() => {}); else await p.close().catch(() => {}) }, 30e3);
 +    let slowN = 0, grabbed = 0; const pr = setInterval(async () => { const t0 = Date.now(); const ok = await Promise.race([p.evaluate(() => 1).then(() => 1).catch(() => 2), new Promise(r => setTimeout(() => r(0), 15000))]); if (ok === 0) { slowN++; capW('probe: evaluate > 15 s (n=' + slowN + ') buoi ' + s.R.buoi); if (slowN >= 2 && grabbed < 3) { grabbed++; await grab('PROBE') } } else slowN = 0 }, 30e3);
      try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
-+    clearInterval(wd); clearInterval(memT); clearInterval(pr);
++    clearInterval(wd); clearInterval(memT); clearInterval(pr); clearInterval(shT);
      pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
      flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
 -    if (s.R.life && /HARNESS|SLICE/.test(s.R.life.id)) break;
@@ -161,7 +162,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
      if (k >= KIEP && other.done) break;
      if (k >= KIEP && !extra && other.done) break;
      if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
-@@ -66,14 +105,18 @@
+@@ -66,14 +106,18 @@
    return p;
  }
  
