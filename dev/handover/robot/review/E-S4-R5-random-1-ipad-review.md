@@ -1,0 +1,6 @@
+# E-S4 R5-random-1 (iPad) — end-of-life review (evidence limited, see moments)
+1. Summary: random («rand», casual newcomer), pf/pt_hai, iPad, real taps, jsClicks 0, harness d2e03d80 (+ 2df8f5fa on the loop restarts), game builds bf6dd041+ / 0281bf7bcef6 → later, 1138 buổi, 8 game years, age 26, rank 0 (Phế phi), ending «Hồng nhan bạc mệnh — Ba thước lụa trắng» (Emperor dies → new Thái hậu orders her to follow him; death, VALID), ≈ 5 h wall, 0 stuck, 0 dead, 1 bug row (page crash, resumed).
+2. Scores: a first 15 min 7 (survived the ceremony) · b pacing 4 · c buttons 8 · d story 8 (Emperor dies, Thái hậu avenges old matters; cause→effect) · e characters 6 (the new Thái hậu acts on her own agenda) · f choices/fairness 5 (no promotion route; the end is dealt, not earned by a choice) · g feedback 4 (stipend popup over the ending) · h mini-games n/a · i visuals 8 · j co-op n/a.
+3. Loved: the new Thái hậu ending. Hated: stipend popup on the ending card; rank 0 for 8 years. Replay: yes.
+4. BUGS: stipend popup «Bổng lộc tháng mười một» over the ending card; page crash at buổi 604 (3 MB save), resumed.
+5. Suggestions (parking lot): a way to avoid being a 1-in-1 target of the new Thái hậu (law 1: two-way — let her act first).
