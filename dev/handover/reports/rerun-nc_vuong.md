@@ -1,4 +1,4 @@
-# Rerun nc_vuong (A4) — partial, 4/10 finished
+# Rerun nc_vuong (A4) — partial, 7/10 finished
 Open: cautious-2, speed-1, speed-2, lazy-1, rebel-1, random-2 (random-2 at buổi ~1046 running). Lives not yet started run on LIVE 5e013076; running lives keep their starting build (ROOT 2 ruling).
 | life | end | valid | buổi | links | harness | counts |
 |---|---|---|---|---|---|---|
@@ -6,6 +6,9 @@ Open: cautious-2, speed-1, speed-2, lazy-1, rebel-1, random-2 (random-2 at buổ
 | nc-nc_vuong-lover-1 | Hồng nhan bạc mệnh (age 27) | valid (no bot exit) | buổi 1312 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-lover-1-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-lover-1-review.md) | harness 1a29f470 | bugs 35 |
 | nc-nc_vuong-random-1 | Xuất gia (age 28) | valid (no bot exit) | buổi 1718 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-random-1-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-random-1-review.md) | harness 4523381f | bugs 46 |
 | nc-nc_vuong-skilled-1 | Hồng nhan bạc mệnh (age 31) | valid (no bot exit) | buổi 1941 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-skilled-1-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-skilled-1-review.md) | harness 4523381f | bugs 50 |
+| nc-nc_vuong-random-2 | Lãnh cung (age 33) | valid (exitPick None) | buổi 2204 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-random-2-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-random-2-review.md) | normal 93812531 → a4m bac25389 for part | bugs 15 |
+| nc-nc_vuong-cautious-2 | Hồng nhan bạc mệnh (age 24) | valid (exitPick None) | buổi 951 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-cautious-2-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-cautious-2-review.md) | normal 93812531 | bugs 0 |
+| nc-nc_vuong-speed-2 | Hồng nhan bạc mệnh (age 22) | valid (exitPick None) | buổi 298 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-speed-2-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-speed-2-review.md) | a4m bac25389 (F10 watchdog) from ckpt b50 | bugs 1 |
 
 Note: random-1 «Xuất gia» is a forced ending (Hoàng thượng băng hà, no children, rank 0), not a bot exit. Game bugs: see robot/rerun-nc_vuong/bugs/BUGS.md.
 
