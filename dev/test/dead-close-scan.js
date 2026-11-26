@@ -28,5 +28,10 @@ const TABS=['act','go','court','rel','kid','inv','art','story'];
      if(!d||d.nox)continue;tot++;await p.mouse.click(d.x,d.y);await p.waitForTimeout(1300);
      const a=await p.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return '';const dl=M.querySelector('.dlg');return ((dl&&(dl.querySelector('.kpt,.kt,h3,.dlgt,.kph')||{}).textContent)||'').replace(/\s+/g,' ').trim().slice(0,60)});
      const bad=a&&a===d.tt;if(bad)fails++;console.log(wh.padEnd(9),(tab+(sub?' '+sub:'')).padEnd(34),it.t.padEnd(40),'| Q',d.q,'|',d.tt.slice(0,40),'→',a?a.slice(0,30):'(closed)',bad?'FAIL same dialog after ✕':'ok')}}}
+  /* a card / confirm over a shop: its own ✕ («Lui») closes ONLY that card, the shop stays open (RV-KK41) */
+  {await reset('inv','[data-kinvsub="thu"]');await p.evaluate(()=>{const e=document.querySelector('[data-petshop]');if(e)e.click()});await p.waitForTimeout(900);
+   const d=await p.evaluate(()=>{const e=[...document.querySelectorAll('#modal [data-kshdet]')].find(x=>x.getClientRects().length);if(!e)return null;e.click();return 1});await p.waitForTimeout(700);
+   const x=d&&await p.evaluate(()=>{const e=[...document.querySelectorAll('#modal .kit-x[data-kshdetx]')].find(x=>x.getClientRects().length);if(!e)return null;const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]});
+   if(x){tot++;await p.mouse.click(x[0],x[1]);await p.waitForTimeout(900);const r=await p.evaluate(()=>({shop:!document.getElementById('modal').hidden&&!!document.querySelector('#modal .kshop'),card:!!document.querySelector('#modal .kshdet')}));const bad=!r.shop||r.card;if(bad)fails++;console.log(wh.padEnd(9),'shop item card «Lui»'.padEnd(34),JSON.stringify(r),bad?'FAIL card close must leave the shop open':'ok')}else console.log(wh,'shop item card: not reached')}
   console.log(wh,'page errors',errs.length,errs.slice(0,2).join(' | '));await ctx.close()}
  console.log('dialogs opened',tot,'FAIL',fails);await b.close();process.exit(fails?1:0)})();
