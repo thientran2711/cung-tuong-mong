@@ -398,3 +398,26 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   url is gone. (3) RT_TEST_KIP judges only after the picker was SEEN (pushDil queues it; «never shown» after 30 s). Note: «no item can be given now» (every confirm
   disabled, e.g. khắc cost) is a [note], not a [game] fault. Proof: fake build deadbeef0000 on :8820 → exit 2 logged, life plays on; pin=0 → no pin, buổi 41;
   Fold s43 pinned :8745, RT_TEST_KIP shown:true, closed after 19 s (all confirms disabled → note + ✕).
+
+## HANDOVER — HARNESS FIXER #9 → next fixer (11/26/2026 ~12:30Z, F #21 asked; ctx ~52 %)
+State: review/robot-realtap tip 0e0ebe29 (READY to BIG #9; BIG #9 PASSed up to 2df8f5fa; FAILs on cbeb334b + 8366c261 are answered by 7767c6fc + 0e0ebe29).
+Audit side (handover branch, dev/measure/robot-audit.js): 41f6e99c testHooks INVALID · 7cbc260e no-exitPick exit = game-imposed VALID, mgQuit counts board backs ·
+782c9fac mixed build · 851bc8c0 own verdict MIXED-BUILD · 359716b8 a board back is a quit only before the result.
+What 9 built today (all in robot-rt.js unless said; proofs in the sections above):
+- kscn story scene = a layer (tapSkip), on top wins on any device geometry (own-centre test, opacity/fade aware), «Chạm để tiếp ▸» card tap (from temper-g4 bb86d9ac).
+- #rtoast is a by-design cover; testHooks stamp; mini-game: «Sẵn sàng» first, back only on a result (kitOvBtn + no rules board + KG82.phase not play/intro/tut),
+  BOARD PLAY by real taps at KG82.peek (persona skill), no quick option on boards (except jexam drag exam rounds), unstick never backs out of a board, mgBackWhy log.
+- BUILD PIN: build0 = CTM_BI {s,b,t} at first load; the life is played on a local copy of its own build (rt-serve-build.sh --b <b> --t <t>, first-parent main by
+  index.html content, port 8700 + hash, detached + reused); gate on every load (b+t), HARD STOP «BUILD MISMATCH» exit 3, ckpt kept; pin=0 / RT_PIN=0 off; a failing
+  server script → no pin, given url, gate still on.
+- road rank (maid srv.rk) in every report; jgpick item grid (gift picker): tile → scroll to button.kipgo → real tap; all disabled → [note] + ✕.
+Self-tests (env, all stamped in testHooks → INVALID for play counts): RT_TEST_BOARD=<art> (vu/cam) · RT_TEST_EXAM=<buổi> · RT_TEST_KIP=<buổi> · RT_TEST_SKIP=<buổi> ·
+RT_TEST_STALL / DUMP / Q72 / KID (older). Re-run pattern: serve LIVE (cd <main worktree> && python3 -m http.server 8809), then
+`RT_TEST_BOARD=vu RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1:8809/ <out> dev=fold bot=speed seed=21 life=x` (expect raw > 0, skipped false);
+`RT_TEST_EXAM=1 … seed=31` (expect raws [5,5]); `RT_TEST_KIP=4 … seed=41` (expect shown:true, kipGo 1 or the note + ✕); BUILD PIN: start a life, resume with
+resume=1 and another url → still on the pinned port; fake b → «exited 2», life goes on. Lint: node dev/test/robot-lint.js.
+OPEN (not fixed, honest):
+- Đàn (timed notes) on Fold scores ~0 by peek taps (touch latency vs ±90 ms); iPad ~4. Dâng hương mixing board has no peek → low score.
+- jgpick: the confirm-unreachable-after-8-scrolls path never seen live; co-op room with BUILD PIN not run live (same Seat boot; room server is absolute).
+- The server on port 8809 / pin ports die between turns in this container; restart them in the same command as the run.
+- Selection lives often end Ban hoa after the persona's own «Cúi đầu chờ xét — không thi» (F #20 agreed: valid persona choice).
