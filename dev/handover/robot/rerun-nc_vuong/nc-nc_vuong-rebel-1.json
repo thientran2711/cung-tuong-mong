@@ -1,0 +1,3147 @@
+{
+ "job": {
+  "id": "nc-nc_vuong-rebel-1",
+  "origin": "nc",
+  "road": "nc_vuong",
+  "bot": "bold",
+  "seed": 454280371,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "93812531",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 3,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "areaTaps": 246,
+  "infoTaps": 426,
+  "scrolls": 19,
+  "dlgClose": 234,
+  "freezes": 1,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-26T04:10:13.383Z",
+    "buoi": 61,
+    "from": "2026-11-26T02:39:02.630Z"
+   },
+   {
+    "at": "2026-11-26T04:52:22.834Z",
+    "buoi": 77,
+    "from": "2026-11-26T04:13:50.444Z"
+   }
+  ],
+  "kfocVisits": 16,
+  "nextNoTurn": 10,
+  "dlgScroll": 1,
+  "taps": 2786
+ },
+ "life": {
+  "id": "Hồng nhan bạc mệnh",
+  "type": "death",
+  "fate": "Sốt rét nguy kịch, không qua khỏi",
+  "death": true,
+  "age": 20,
+  "year": 3,
+  "rank": 0,
+  "text": "Sốt rét nguy kịch, không qua khỏi.",
+  "card": [],
+  "duringArea": false,
+  "lastTaps": [
+   ".dlg «Lịch tháng» «Lễ Phật»",
+   ".dlg «Lịch tháng» «Lui»",
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»",
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»",
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»",
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»",
+   ".dlg «tối · còn» «Lui»",
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+   ".dlg «Lãnh cung» «Lui»",
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+   ".kmov «Ta biết rồi»",
+   ".kmov «Ta biết rồi»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "type": "freeze",
+   "msg": "page froze: no harness step for 10 min (page.evaluate hung) at buổi 63",
+   "n": 1,
+   "at": "2026-11-26T02:50:25.357Z",
+   "rss": {
+    "totalMB": 6560,
+    "rendererMB": 5655
+   }
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Mèo mướp",
+   "cover": "span.kitb in #mb",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-rebel-1/dead-fold-1795670502979.png",
+   "dev": "fold",
+   "at": 1760,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 23,
+    "w": 0,
+    "b": 2,
+    "age": 19,
+    "rank": 0,
+    "name": "Lục Như Mặc"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chó nhỏ lông xù",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-rebel-1/dead-fold-1795670509310.png",
+   "dev": "fold",
+   "at": 1767,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 23,
+    "w": 0,
+    "b": 2,
+    "age": 19,
+    "rank": 0,
+    "name": "Lục Như Mặc"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chim họa mi",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-rebel-1/dead-fold-1795670515642.png",
+   "dev": "fold",
+   "at": 1773,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 23,
+    "w": 0,
+    "b": 2,
+    "age": 19,
+    "rank": 0,
+    "name": "Lục Như Mặc"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 396280,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 61,
+   "year": null,
+   "chars": 444834,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 77,
+   "year": null,
+   "chars": 495966,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 127,
+   "year": 1,
+   "chars": 672967,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 177,
+   "year": 2,
+   "chars": 736938,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 227,
+   "year": 2,
+   "chars": 838028,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 277,
+   "year": 2,
+   "chars": 907390,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 327,
+   "year": 3,
+   "chars": 1168449,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 377,
+   "year": 3,
+   "chars": 1224926,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 422,
+ "steps": 4997,
+ "status": [],
+ "_loopAt": 1795672084055,
+ "_snapAt": 1795672041906,
+ "trace": [
+  [
+   2883,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   2883,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   2885,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng (Danh)»"
+  ],
+  [
+   2885,
+   ".dlg «Quẻ Thượng · Danh» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   2886,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   2887,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   2888,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2888,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2888,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2888,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2889,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   2892,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2894,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2896,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2898,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2901,
+   "AREA 151,374"
+  ],
+  [
+   2901,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2901,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2902,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2902,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2902,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2902,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2904,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2908,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2908,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc62Tài32Tâm cơ40Đức10Danh0Sủng0»"
+  ],
+  [
+   2909,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   2910,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-13»"
+  ],
+  [
+   2911,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   2913,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2915,
+   ".dlg «Yến đầy tháng công chúa» «Lui»"
+  ],
+  [
+   2916,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   2917,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   2917,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc62Tài32Tâm cơ40Đức10Danh0Sủng0»"
+  ],
+  [
+   2917,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   2919,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2921,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2923,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   2923,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lễ nghi 0/1»"
+  ],
+  [
+   2923,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-8»"
+  ],
+  [
+   2924,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   2925,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2927,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2929,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2931,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2933,
+   "AREA 618,292"
+  ],
+  [
+   2934,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2934,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2935,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2935,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2935,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2936,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2937,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2941,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc0Sức95/95»"
+  ],
+  [
+   2941,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2943,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   2943,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   2943,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   2944,
+   ".dlg «Lịch tháng» «mồng 1: Lĩnh bổng lộc (lãnh cung)»"
+  ],
+  [
+   2944,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   2944,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   2946,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   2946,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   2948,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2950,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   2954,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   2955,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2956,
+   ".dlg «Việc khó xử» «Bày kế phản giánCó cơTốnkhôngĐượcnắm thêm chứng cứ»"
+  ],
+  [
+   2959,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   2959,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   2960,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «gió heo may»"
+  ],
+  [
+   2962,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   2964,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   2964,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2965,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2965,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2965,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2966,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   2969,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungTrình Uyển Nhi»"
+  ],
+  [
+   2970,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   2970,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   2970,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   2972,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   2972,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   2973,
+   ".kfoc «Lui»"
+  ],
+  [
+   2975,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   2977,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2978,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2982,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2984,
+   "AREA 356,220"
+  ],
+  [
+   2985,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2987,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2988,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2988,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2989,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2989,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2989,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2991,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2992,
+   ".dlg «Bổng lộc tháng chín» «Lui»"
+  ],
+  [
+   2996,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   2996,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2997,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2997,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2997,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2998,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   3001,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   3002,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «tuyết nhẹ»"
+  ],
+  [
+   3005,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3007,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   3008,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   3008,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungTrình Uyển Nhi»"
+  ],
+  [
+   3009,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3009,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   3009,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3011,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3011,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3012,
+   ".kfoc «Lui»"
+  ],
+  [
+   3014,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3016,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3018,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3020,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3021,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3024,
+   "GONE Ta biết rồi"
+  ],
+  [
+   3026,
+   "AREA 289,557"
+  ],
+  [
+   3027,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3028,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3028,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3028,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3028,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3029,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3030,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3034,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc7Sức93/93»"
+  ],
+  [
+   3034,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   3036,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «2Chí tôn»"
+  ],
+  [
+   3036,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   3036,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3037,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3037,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3037,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3038,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   3041,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3043,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   3045,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   3045,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   3046,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 19 tin mới»"
+  ],
+  [
+   3046,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   3048,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3050,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc62Tài32Tâm cơ40Đức10Danh1Sủng0»"
+  ],
+  [
+   3050,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   3052,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   3052,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   3053,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3055,
+   ".dlg «Thời tiết» «Cởi áo bông đắp cho nàng taRất vữngTốnSức -10Đượcđ»"
+  ],
+  [
+   3058,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sốt rét · nguy kịch»"
+  ],
+  [
+   3058,
+   ".dlg «Sốt rét · nguy kịch» «Lui»"
+  ],
+  [
+   3060,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc7Sức83/93»"
+  ],
+  [
+   3060,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   3062,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc7Sức83/93»"
+  ],
+  [
+   3062,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   3064,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3066,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3068,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3071,
+   "AREA 250,497"
+  ],
+  [
+   3072,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3072,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3073,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3073,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3073,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3073,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3075,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   3075,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   3077,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   3077,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc62Tài32Tâm cơ40Đức13Danh1Sủng0»"
+  ],
+  [
+   3078,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   3080,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3082,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   3082,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   3083,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   3083,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3085,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   3085,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   3087,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   3087,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   3089,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3091,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «đêm sương giá»"
+  ],
+  [
+   3093,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-10»"
+  ],
+  [
+   3093,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   3095,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungTrình Uyển Nhi»"
+  ],
+  [
+   3095,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3095,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   3096,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3097,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3098,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3099,
+   ".kfoc «Lui»"
+  ],
+  [
+   3101,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3103,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3104,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3106,
+   "GONE Ta biết rồi"
+  ],
+  [
+   3109,
+   "AREA 519,822"
+  ],
+  [
+   3110,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3112,
+   "#kmrew «Nhận»"
+  ],
+  [
+   3114,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3114,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3114,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3115,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3115,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3117,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3119,
+   ".dlg «Bổng lộc tháng mười» «Lui»"
+  ],
+  [
+   3123,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   3123,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   3123,
+   ".dlg «Quẻ Hạ hạ · Hung» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   3124,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   3125,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   3126,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3128,
+   ".dlg «Sứ đoàn vào triều» «Đứng xem rồi về»"
+  ],
+  [
+   3128,
+   ".dlg «Đại lễ tế Giao» «Lui»"
+  ],
+  [
+   3132,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   3132,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-14»"
+  ],
+  [
+   3133,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   3134,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «2Chí tôn»"
+  ],
+  [
+   3134,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3136,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3138,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3140,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   3141,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   3141,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mai nở trong tuyết»"
+  ],
+  [
+   3144,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3146,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3147,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3147,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3148,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3152,
+   "AREA 626,484"
+  ],
+  [
+   3153,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3153,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3154,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3154,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3154,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3155,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3156,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3160,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   3160,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3160,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3161,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3161,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   3161,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   3165,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3165,
+   ".dlg «sáng · còn» «Lui»"
+  ],
+  [
+   3167,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   3167,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   3169,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3171,
+   ".dlg «Đại lễ tế Giao» «Lui»"
+  ],
+  [
+   3173,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   3174,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   3175,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sổ ghi»"
+  ],
+  [
+   3175,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   3176,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3178,
+   ".dlg «Việc khó xử» «Không dính vàoRất vữngGợi ýkhông được mất gì!»"
+  ],
+  [
+   3179,
+   ".dlg «Đại hàn, tuyết lớn» «Lui»"
+  ],
+  [
+   3183,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   3183,
+   ".dlg «Lịch tháng» «ngày 27: Nguyệt tín»"
+  ],
+  [
+   3183,
+   ".dlg «Lịch tháng» «mồng 9»"
+  ],
+  [
+   3183,
+   ".dlg «Lịch tháng» «mồng 4»"
+  ],
+  [
+   3184,
+   ".dlg «Lịch tháng» «mồng 5»"
+  ],
+  [
+   3184,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   3186,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungTrình Uyển Nhi»"
+  ],
+  [
+   3186,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3186,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   3186,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3188,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3188,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3190,
+   ".kfoc «Lui»"
+  ],
+  [
+   3192,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3194,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3195,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3197,
+   "GONE Ta biết rồi"
+  ],
+  [
+   3200,
+   "AREA 443,579"
+  ],
+  [
+   3200,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3201,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3202,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3202,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3202,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3202,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3204,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3208,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-8»"
+  ],
+  [
+   3208,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   3210,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   3210,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3212,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   3213,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc62Tài32Tâm cơ40Đức13Danh1Sủng0»"
+  ],
+  [
+   3213,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   3215,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   3216,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3218,
+   ".dlg «Chuyện trong cung» «Sang đòi lại từ Phế phi Trình Tố NgaKhó lườngTốnSứ»"
+  ],
+  [
+   3221,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   3221,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   3221,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   3222,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   3224,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3225,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mai nở trong tuyết»"
+  ],
+  [
+   3228,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3230,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3232,
+   "GONE Ta biết rồi"
+  ],
+  [
+   3235,
+   "AREA 623,512"
+  ],
+  [
+   3236,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3237,
+   "#kmrew «Nhận»"
+  ],
+  [
+   3239,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3239,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3240,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3240,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3240,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3242,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3243,
+   ".dlg «Bổng lộc tháng mười một» «Lui»"
+  ],
+  [
+   3247,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sốt rét · nguy kịch»"
+  ],
+  [
+   3247,
+   ".dlg «Sốt rét · nguy kịch» «Lui»"
+  ],
+  [
+   3249,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   3249,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   3249,
+   ".dlg «Lịch tháng» «ngày 28: Nguyệt tín»"
+  ],
+  [
+   3250,
+   ".dlg «Lịch tháng» «mồng 1: Lĩnh bổng lộc (lãnh cung)»"
+  ],
+  [
+   3250,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   3250,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   3252,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3252,
+   ".dlg «sáng · còn» «Lui»"
+  ],
+  [
+   3254,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3256,
+   ".dlg «Đại hàn, tuyết lớn» «Lui»"
+  ],
+  [
+   3257,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   3258,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   3258,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3260,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   3261,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   3262,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBất an-40»"
+  ],
+  [
+   3262,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   3264,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3266,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   3266,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   3267,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   3268,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   3269,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc11Sức68/90»"
+  ],
+  [
+   3270,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   3271,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3273,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3275,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3275,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3278,
+   "AREA 559,308"
+  ],
+  [
+   3278,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3279,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3279,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3280,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3280,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3280,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3282,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3286,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sốt rét · nguy kịch»"
+  ],
+  [
+   3286,
+   ".dlg «Sốt rét · nguy kịch» «Lui»"
+  ],
+  [
+   3288,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   3288,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   3289,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3291,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3295,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3297,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungTrình Uyển Nhi»"
+  ],
+  [
+   3297,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3297,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   3298,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3299,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   3299,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   3301,
+   ".kfoc «Lui»"
+  ],
+  [
+   3302,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungTrình Uyển Nhi»"
+  ],
+  [
+   3303,
+   ".kfoc «Lui»"
+  ],
+  [
+   3304,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3306,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3307,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3309,
+   "AREA 486,221"
+  ],
+  [
+   3310,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3311,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3311,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3311,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3311,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3312,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3313,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3317,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   3317,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   3317,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   3319,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   3320,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3322,
+   ".dlg «Việc khó xử» «Tố lên Hoàng thượngVữngTốnkhôngĐượcThường tại Nghi»"
+  ],
+  [
+   3324,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   3325,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3327,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   3327,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   3327,
+   ".dlg «Lịch tháng» «ngày 29: Nguyệt tín»"
+  ],
+  [
+   3328,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   3328,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   3328,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   3330,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   3331,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   3335,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   3335,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   3336,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   3337,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   3337,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   3339,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   3341,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3341,
+   ".kmov «Ta biết rồi»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795672039485,
+ "_ckB": 418,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1188,
+   "rendererMB": 568
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 2287,
+   "rendererMB": 1409
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 2538,
+   "rendererMB": 1635
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2380,
+   "rendererMB": 1470
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2476,
+   "rendererMB": 1546
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2572,
+   "rendererMB": 1652
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2705,
+   "rendererMB": 1782
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2801,
+   "rendererMB": 1881
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2835,
+   "rendererMB": 1896
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2815,
+   "rendererMB": 1891
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2840,
+   "rendererMB": 1911
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2830,
+   "rendererMB": 1916
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2960,
+   "rendererMB": 2007
+  },
+  {
+   "buoi": 62,
+   "y": 1,
+   "totalMB": 1409,
+   "rendererMB": 783,
+   "heapMB": 117,
+   "dom": 2248,
+   "q": 0,
+   "lsK": 515
+  },
+  {
+   "buoi": 67,
+   "y": 1,
+   "totalMB": 1956,
+   "rendererMB": 1242,
+   "heapMB": 117,
+   "dom": 1327,
+   "q": 3,
+   "lsK": 551
+  },
+  {
+   "buoi": 72,
+   "y": 1,
+   "totalMB": 2032,
+   "rendererMB": 1331,
+   "heapMB": 117,
+   "dom": 1418,
+   "q": 0,
+   "lsK": 550
+  },
+  {
+   "buoi": 77,
+   "y": 1,
+   "totalMB": 2099,
+   "rendererMB": 1395,
+   "heapMB": 117,
+   "dom": 1364,
+   "q": 2,
+   "lsK": 574
+  },
+  {
+   "buoi": 78,
+   "y": 1,
+   "totalMB": 1521,
+   "rendererMB": 881,
+   "heapMB": 273,
+   "dom": 2173,
+   "q": 0,
+   "lsK": 575
+  },
+  {
+   "buoi": 83,
+   "y": 1,
+   "totalMB": 1956,
+   "rendererMB": 1189,
+   "heapMB": 273,
+   "dom": 971,
+   "q": 2,
+   "lsK": 591
+  },
+  {
+   "buoi": 88,
+   "y": 1,
+   "totalMB": 2104,
+   "rendererMB": 1398,
+   "heapMB": 273,
+   "dom": 1471,
+   "q": 2,
+   "lsK": 577
+  },
+  {
+   "buoi": 93,
+   "y": 1,
+   "totalMB": 2206,
+   "rendererMB": 1498,
+   "heapMB": 273,
+   "dom": 900,
+   "q": 0,
+   "lsK": 627
+  },
+  {
+   "buoi": 98,
+   "y": 1,
+   "totalMB": 2185,
+   "rendererMB": 1482,
+   "heapMB": 273,
+   "dom": 1329,
+   "q": 0,
+   "lsK": 716
+  },
+  {
+   "buoi": 103,
+   "y": 1,
+   "totalMB": 2237,
+   "rendererMB": 1514,
+   "heapMB": 273,
+   "dom": 842,
+   "q": 3,
+   "lsK": 700
+  },
+  {
+   "buoi": 108,
+   "y": 1,
+   "totalMB": 2300,
+   "rendererMB": 1565,
+   "heapMB": 273,
+   "dom": 1096,
+   "q": 2,
+   "lsK": 735
+  },
+  {
+   "buoi": 113,
+   "y": 1,
+   "totalMB": 2287,
+   "rendererMB": 1563,
+   "heapMB": 273,
+   "dom": 916,
+   "q": 0,
+   "lsK": 755
+  },
+  {
+   "buoi": 118,
+   "y": 1,
+   "totalMB": 2299,
+   "rendererMB": 1570,
+   "heapMB": 273,
+   "dom": 1462,
+   "q": 0,
+   "lsK": 756
+  },
+  {
+   "buoi": 123,
+   "y": 1,
+   "totalMB": 2342,
+   "rendererMB": 1608,
+   "heapMB": 273,
+   "dom": 1272,
+   "q": 2,
+   "lsK": 789
+  },
+  {
+   "buoi": 128,
+   "y": 1,
+   "totalMB": 2422,
+   "rendererMB": 1691,
+   "heapMB": 273,
+   "dom": 1003,
+   "q": 0,
+   "lsK": 768
+  },
+  {
+   "buoi": 133,
+   "y": 2,
+   "totalMB": 2386,
+   "rendererMB": 1651,
+   "heapMB": 273,
+   "dom": 1374,
+   "q": 0,
+   "lsK": 809
+  },
+  {
+   "buoi": 138,
+   "y": 2,
+   "totalMB": 2371,
+   "rendererMB": 1648,
+   "heapMB": 273,
+   "dom": 1614,
+   "q": 0,
+   "lsK": 823
+  },
+  {
+   "buoi": 143,
+   "y": 2,
+   "totalMB": 2402,
+   "rendererMB": 1667,
+   "heapMB": 273,
+   "dom": 1406,
+   "q": 4,
+   "lsK": 808
+  },
+  {
+   "buoi": 148,
+   "y": 2,
+   "totalMB": 2394,
+   "rendererMB": 1665,
+   "heapMB": 273,
+   "dom": 967,
+   "q": 2,
+   "lsK": 750
+  },
+  {
+   "buoi": 153,
+   "y": 2,
+   "totalMB": 2446,
+   "rendererMB": 1715,
+   "heapMB": 273,
+   "dom": 1063,
+   "q": 0,
+   "lsK": 777
+  },
+  {
+   "buoi": 158,
+   "y": 2,
+   "totalMB": 2388,
+   "rendererMB": 1672,
+   "heapMB": 273,
+   "dom": 1286,
+   "q": 0,
+   "lsK": 822
+  },
+  {
+   "buoi": 163,
+   "y": 2,
+   "totalMB": 2433,
+   "rendererMB": 1701,
+   "heapMB": 273,
+   "dom": 1468,
+   "q": 2,
+   "lsK": 873
+  },
+  {
+   "buoi": 168,
+   "y": 2,
+   "totalMB": 2437,
+   "rendererMB": 1705,
+   "heapMB": 273,
+   "dom": 1550,
+   "q": 0,
+   "lsK": 846
+  },
+  {
+   "buoi": 173,
+   "y": 2,
+   "totalMB": 2448,
+   "rendererMB": 1717,
+   "heapMB": 273,
+   "dom": 1416,
+   "q": 0,
+   "lsK": 873
+  },
+  {
+   "buoi": 178,
+   "y": 2,
+   "totalMB": 2476,
+   "rendererMB": 1744,
+   "heapMB": 273,
+   "dom": 1306,
+   "q": 0,
+   "lsK": 875
+  },
+  {
+   "buoi": 183,
+   "y": 2,
+   "totalMB": 2507,
+   "rendererMB": 1760,
+   "heapMB": 273,
+   "dom": 1363,
+   "q": 2,
+   "lsK": 879
+  },
+  {
+   "buoi": 188,
+   "y": 2,
+   "totalMB": 2438,
+   "rendererMB": 1703,
+   "heapMB": 273,
+   "dom": 932,
+   "q": 1,
+   "lsK": 889
+  },
+  {
+   "buoi": 193,
+   "y": 2,
+   "totalMB": 2478,
+   "rendererMB": 1754,
+   "heapMB": 273,
+   "dom": 2173,
+   "q": 0,
+   "lsK": 899
+  },
+  {
+   "buoi": 198,
+   "y": 2,
+   "totalMB": 2518,
+   "rendererMB": 1782,
+   "heapMB": 273,
+   "dom": 1214,
+   "q": 0,
+   "lsK": 928
+  },
+  {
+   "buoi": 203,
+   "y": 2,
+   "totalMB": 2534,
+   "rendererMB": 1796,
+   "heapMB": 273,
+   "dom": 1309,
+   "q": 2,
+   "lsK": 917
+  },
+  {
+   "buoi": 208,
+   "y": 2,
+   "totalMB": 2554,
+   "rendererMB": 1823,
+   "heapMB": 190,
+   "dom": 2180,
+   "q": 0,
+   "lsK": 954
+  },
+  {
+   "buoi": 213,
+   "y": 2,
+   "totalMB": 2522,
+   "rendererMB": 1781,
+   "heapMB": 190,
+   "dom": 1196,
+   "q": 0,
+   "lsK": 956
+  },
+  {
+   "buoi": 218,
+   "y": 2,
+   "totalMB": 2500,
+   "rendererMB": 1778,
+   "heapMB": 190,
+   "dom": 2180,
+   "q": 0,
+   "lsK": 964
+  },
+  {
+   "buoi": 223,
+   "y": 2,
+   "totalMB": 2549,
+   "rendererMB": 1821,
+   "heapMB": 190,
+   "dom": 1298,
+   "q": 2,
+   "lsK": 978
+  },
+  {
+   "buoi": 228,
+   "y": 2,
+   "totalMB": 2544,
+   "rendererMB": 1815,
+   "heapMB": 190,
+   "dom": 1272,
+   "q": 1,
+   "lsK": 971
+  },
+  {
+   "buoi": 233,
+   "y": 2,
+   "totalMB": 2627,
+   "rendererMB": 1891,
+   "heapMB": 190,
+   "dom": 997,
+   "q": 0,
+   "lsK": 1010
+  },
+  {
+   "buoi": 238,
+   "y": 2,
+   "totalMB": 2627,
+   "rendererMB": 1904,
+   "heapMB": 190,
+   "dom": 1323,
+   "q": 0,
+   "lsK": 1016
+  },
+  {
+   "buoi": 243,
+   "y": 2,
+   "totalMB": 2617,
+   "rendererMB": 1879,
+   "heapMB": 190,
+   "dom": 1223,
+   "q": 2,
+   "lsK": 1040
+  },
+  {
+   "buoi": 248,
+   "y": 2,
+   "totalMB": 2575,
+   "rendererMB": 1856,
+   "heapMB": 190,
+   "dom": 2220,
+   "q": 1,
+   "lsK": 1027
+  },
+  {
+   "buoi": 253,
+   "y": 2,
+   "totalMB": 2575,
+   "rendererMB": 1850,
+   "heapMB": 190,
+   "dom": 2361,
+   "q": 0,
+   "lsK": 1040
+  },
+  {
+   "buoi": 258,
+   "y": 2,
+   "totalMB": 2618,
+   "rendererMB": 1886,
+   "heapMB": 190,
+   "dom": 969,
+   "q": 0,
+   "lsK": 1081
+  },
+  {
+   "buoi": 263,
+   "y": 2,
+   "totalMB": 2602,
+   "rendererMB": 1874,
+   "heapMB": 190,
+   "dom": 1610,
+   "q": 1,
+   "lsK": 1079
+  },
+  {
+   "buoi": 268,
+   "y": 2,
+   "totalMB": 2603,
+   "rendererMB": 1871,
+   "heapMB": 190,
+   "dom": 1455,
+   "q": 1,
+   "lsK": 1082
+  },
+  {
+   "buoi": 273,
+   "y": 2,
+   "totalMB": 2516,
+   "rendererMB": 1793,
+   "heapMB": 190,
+   "dom": 1458,
+   "q": 0,
+   "lsK": 1075
+  },
+  {
+   "buoi": 278,
+   "y": 2,
+   "totalMB": 2504,
+   "rendererMB": 1782,
+   "heapMB": 190,
+   "dom": 1260,
+   "q": 0,
+   "lsK": 1092
+  },
+  {
+   "buoi": 283,
+   "y": 3,
+   "totalMB": 2605,
+   "rendererMB": 1879,
+   "heapMB": 190,
+   "dom": 1415,
+   "q": 1,
+   "lsK": 1111
+  },
+  {
+   "buoi": 288,
+   "y": 3,
+   "totalMB": 2655,
+   "rendererMB": 1920,
+   "heapMB": 190,
+   "dom": 1433,
+   "q": 1,
+   "lsK": 1101
+  },
+  {
+   "buoi": 293,
+   "y": 3,
+   "totalMB": 2675,
+   "rendererMB": 1947,
+   "heapMB": 190,
+   "dom": 1251,
+   "q": 2,
+   "lsK": 1177
+  },
+  {
+   "buoi": 298,
+   "y": 3,
+   "totalMB": 2684,
+   "rendererMB": 1972,
+   "heapMB": 190,
+   "dom": 1456,
+   "q": 1,
+   "lsK": 1212
+  },
+  {
+   "buoi": 303,
+   "y": 3,
+   "totalMB": 2755,
+   "rendererMB": 2027,
+   "heapMB": 190,
+   "dom": 1389,
+   "q": 2,
+   "lsK": 1293
+  },
+  {
+   "buoi": 308,
+   "y": 3,
+   "totalMB": 2694,
+   "rendererMB": 1965,
+   "heapMB": 190,
+   "dom": 1316,
+   "q": 0,
+   "lsK": 1260
+  },
+  {
+   "buoi": 313,
+   "y": 3,
+   "totalMB": 2702,
+   "rendererMB": 1976,
+   "heapMB": 190,
+   "dom": 1118,
+   "q": 1,
+   "lsK": 1279
+  },
+  {
+   "buoi": 318,
+   "y": 3,
+   "totalMB": 2804,
+   "rendererMB": 2078,
+   "heapMB": 190,
+   "dom": 1285,
+   "q": 0,
+   "lsK": 1338
+  },
+  {
+   "buoi": 323,
+   "y": 3,
+   "totalMB": 2749,
+   "rendererMB": 2015,
+   "heapMB": 190,
+   "dom": 1298,
+   "q": 2,
+   "lsK": 1342
+  },
+  {
+   "buoi": 328,
+   "y": 3,
+   "totalMB": 2736,
+   "rendererMB": 2005,
+   "heapMB": 190,
+   "dom": 1484,
+   "q": 2,
+   "lsK": 1357
+  },
+  {
+   "buoi": 333,
+   "y": 3,
+   "totalMB": 2712,
+   "rendererMB": 1983,
+   "heapMB": 190,
+   "dom": 1363,
+   "q": 1,
+   "lsK": 1356
+  },
+  {
+   "buoi": 338,
+   "y": 3,
+   "totalMB": 2774,
+   "rendererMB": 2041,
+   "heapMB": 190,
+   "dom": 3413,
+   "q": 0,
+   "lsK": 1365
+  },
+  {
+   "buoi": 343,
+   "y": 3,
+   "totalMB": 2758,
+   "rendererMB": 2024,
+   "heapMB": 190,
+   "dom": 1157,
+   "q": 2,
+   "lsK": 1376
+  },
+  {
+   "buoi": 348,
+   "y": 3,
+   "totalMB": 2779,
+   "rendererMB": 2047,
+   "heapMB": 190,
+   "dom": 1452,
+   "q": 1,
+   "lsK": 1357
+  },
+  {
+   "buoi": 353,
+   "y": 3,
+   "totalMB": 2739,
+   "rendererMB": 2015,
+   "heapMB": 190,
+   "dom": 879,
+   "q": 0,
+   "lsK": 1392
+  },
+  {
+   "buoi": 358,
+   "y": 3,
+   "totalMB": 2751,
+   "rendererMB": 2013,
+   "heapMB": 190,
+   "dom": 1444,
+   "q": 0,
+   "lsK": 1407
+  },
+  {
+   "buoi": 363,
+   "y": 3,
+   "totalMB": 2792,
+   "rendererMB": 2050,
+   "heapMB": 190,
+   "dom": 1487,
+   "q": 2,
+   "lsK": 1470
+  },
+  {
+   "buoi": 368,
+   "y": 3,
+   "totalMB": 2720,
+   "rendererMB": 1986,
+   "heapMB": 190,
+   "dom": 1794,
+   "q": 1,
+   "lsK": 1408
+  },
+  {
+   "buoi": 373,
+   "y": 3,
+   "totalMB": 2746,
+   "rendererMB": 2024,
+   "heapMB": 190,
+   "dom": 1368,
+   "q": 0,
+   "lsK": 1405
+  },
+  {
+   "buoi": 378,
+   "y": 3,
+   "totalMB": 2850,
+   "rendererMB": 2127,
+   "heapMB": 190,
+   "dom": 1714,
+   "q": 0,
+   "lsK": 1457
+  },
+  {
+   "buoi": 383,
+   "y": 3,
+   "totalMB": 2782,
+   "rendererMB": 2042,
+   "heapMB": 190,
+   "dom": 1500,
+   "q": 2,
+   "lsK": 1438
+  },
+  {
+   "buoi": 388,
+   "y": 3,
+   "totalMB": 2821,
+   "rendererMB": 2091,
+   "heapMB": 190,
+   "dom": 1698,
+   "q": 1,
+   "lsK": 1449
+  },
+  {
+   "buoi": 393,
+   "y": 3,
+   "totalMB": 2763,
+   "rendererMB": 2037,
+   "heapMB": 190,
+   "dom": 2071,
+   "q": 0,
+   "lsK": 1444
+  },
+  {
+   "buoi": 398,
+   "y": 3,
+   "totalMB": 2751,
+   "rendererMB": 2026,
+   "heapMB": 190,
+   "dom": 1042,
+   "q": 0,
+   "lsK": 1449
+  },
+  {
+   "buoi": 403,
+   "y": 3,
+   "totalMB": 2785,
+   "rendererMB": 2048,
+   "heapMB": 190,
+   "dom": 1480,
+   "q": 2,
+   "lsK": 1480
+  },
+  {
+   "buoi": 408,
+   "y": 3,
+   "totalMB": 2795,
+   "rendererMB": 2059,
+   "heapMB": 190,
+   "dom": 1573,
+   "q": 0,
+   "lsK": 1463
+  },
+  {
+   "buoi": 413,
+   "y": 3,
+   "totalMB": 2768,
+   "rendererMB": 2043,
+   "heapMB": 190,
+   "dom": 1533,
+   "q": 0,
+   "lsK": 1510
+  },
+  {
+   "buoi": 418,
+   "y": 3,
+   "totalMB": 2760,
+   "rendererMB": 2041,
+   "heapMB": 190,
+   "dom": 905,
+   "q": 0,
+   "lsK": 1522
+  }
+ ],
+ "_momSeen": [
+  "#klife|",
+  "page|Khải Tường cung · Tĩnh Nghi trai · Ở đây",
+  "#modal|Nguy hiểm chung",
+  ".dlg|Nguy hiểm chung",
+  ".kne|",
+  "#dawn|",
+  ".kbk|Tổng lược",
+  ".dlg|Tin trong cung buổi này",
+  "#kmrew|",
+  ".kmov|",
+  ".kfoc|",
+  ".dlg|sáng · còn",
+  "#modal|Bổng lộc tháng bảy",
+  ".dlg|Bổng lộc tháng bảy",
+  ".dlg|Bổng lộc tháng bảy · Lễ nghĩa",
+  "#kxcatch|",
+  ".dlg|Lịch tháng",
+  ".dlg|Biếu quà làm lành",
+  ".dlg|Quẻ Hạ · Sủng",
+  ".dlg|Gieo lại quẻ",
+  ".dlg|Một ánh mắt",
+  ".dlg|Thỉnh bình an mạch",
+  ".dlg|Tai mắt",
+  ".dlg|Lỡ hẹn",
+  ".dlg|Chuyện trong cung",
+  ".dlg|Có người tìm đến",
+  ".dlg|Có người đến",
+  ".dlg|Tin chờ người sai đi",
+  ".dlg|Bạc",
+  ".dlg|Lật thẻ: Không có",
+  ".dlg|Kỳ nguyệt sự",
+  ".dlg|Bổng lộc tháng tám",
+  ".dlg|Lời cảnh báo",
+  "page|Khải Tường cung · Tĩnh Nghi trai · Không",
+  ".dlg|Thu săn",
+  ".dlg|Tâm trạng · Ta",
+  ".dlg|Lãnh cung",
+  "page|Trường Môn viện · Gió lùa qua song cửa m",
+  ".dlg|Chương # · Sơ nhập cung môn",
+  ".mapsc|",
+  ".dlg|Tin báo",
+  "#kdaytc|",
+  ".dlg|Hạn hán, mất mùa",
+  "#modal|Tâm trạng · Ta",
+  ".dlg|Việc khó xử",
+  ".dlg|Đại trai đàn cầu phúc",
+  ".dlg|trưa · còn",
+  "#modal|Lịch tháng",
+  ".dlg|Sắc",
+  "#modal|Ra vào cung cấm",
+  ".dlg|Ra vào cung cấm",
+  ".dlg|Bổng lộc tháng chín",
+  ".dlg|Quẻ Trung · Sức khỏe",
+  ".dlg|Ôn dịch",
+  ".dlg|Đại xá thiên hạ",
+  ".dlg|Người bên cạnh",
+  ".dlg|Tâm bệnh · nhẹ",
+  ".dlg|Nghe đồn",
+  ".dlg|Tra tin đồn",
+  ".dlg|Bổng lộc tháng mười",
+  ".dlg|Chương # khép lại",
+  ".dlg|Chương #: Sơ thừa ân sủng",
+  ".dlg|Tâm bệnh · nặng",
+  ".dlg|Quẻ Trung · Sủng",
+  ".dlg|Thời tiết",
+  ".dlg|Bổng lộc tháng mười một",
+  ".dlg|Bộ sưu tập",
+  ".dlg|Yến đầy tháng hoàng tử",
+  ".dlg|Đại hàn, tuyết lớn",
+  ".dlg|Quẻ Thượng · Mưu kế",
+  ".dlg|Chương # · Sơ thừa ân sủng",
+  ".dlg|Danh hiệu",
+  ".dlg|Đeo «Trăng soi rèm ngọc»",
+  ".dlg|tối · còn",
+  ".dlg|Bổng lộc tháng chạp",
+  ".dlg|Quẻ Thượng thượng · Con cái",
+  ".dlg|chiều · còn",
+  ".dlg|Tỉnh thân",
+  ".dlg|Rời lãnh cung",
+  ".dlg|Lễ tấn phong Quý nhân Lưu Liễu Nhi",
+  ".dlg|Giải bày",
+  ".dlg|Bổng lộc tháng giêng",
+  ".dlg|Quẻ Thượng thượng · Mưu kế",
+  ".dlg|Bổng lộc tháng hai",
+  ".dlg|Kẻ hầu",
+  ".dlg|Bổng lộc tháng ba",
+  "#modal|Sứ đoàn vào triều",
+  ".dlg|Sứ đoàn vào triều",
+  ".dlg|Cầm: các lối",
+  ".dlg|Quẻ Thượng · Tài nghệ",
+  ".dlg|Bổng lộc tháng tư",
+  ".dlg|Bổng lộc tháng năm",
+  "#modal|Vĩnh Hòa cung",
+  ".dlg|Vĩnh Hòa cung",
+  ".dlg|Bổng lộc tháng sáu",
+  "#modal|Đức Thọ cung",
+  ".dlg|Đức Thọ cung",
+  ".dlg|Cầm",
+  ".dlg|Chương #: Học lễ nghi cung cấm",
+  ".dlg|Phiên vương nhập triều",
+  ".dlg|Quẻ Hạ · Giao thiệp",
+  ".dlg|Lao phổi · nhẹ",
+  ".dlg|Quẻ Hạ · Sức khỏe",
+  ".dlg|Quẻ Thượng · Con cái",
+  ".dlg|Ý chỉ tiết kiệm",
+  "#modal|Nhờ thái giám tìm thú nuôi",
+  ".dlg|Nhờ thái giám tìm thú nuôi",
+  ".kshdc|",
+  ".dlg|Án mất trộm ngự khố",
+  ".dlg|Quẻ Thượng · Danh",
+  ".dlg|Học Cầm: ai dạy?",
+  ".dlg|Quẻ Thượng thượng · Danh",
+  ".dlg|Tuyển tú",
+  "#modal|Học Cầm: làm gì?",
+  ".dlg|Học Cầm: làm gì?",
+  "#modal|Khúc «Thu thủy»: dùng vật liệu gì?",
+  ".dlg|Khúc «Thu thủy»: dùng vật liệu gì?",
+  "#kg82|",
+  ".dlg|Xong việc: Học một buổi ở mục Tài nghệ",
+  ".dlg|Danh hiệu mới",
+  ".dlg|Đeo «Khúc nhạc tri âm»",
+  "#modal|Lời kết giao",
+  ".dlg|Lời kết giao",
+  ".dlg|Chương #: Ngai vàng cố quốc",
+  ".dlg|Lễ Phật đản",
+  ".dlg|Quẻ Trung · Mưu kế",
+  ".dlg|",
+  ".dlg|Hoàng thượng",
+  ".dlg|Quẻ Hạ hạ · Hung",
+  ".dlg|Bị thu hiệu ban",
+  ".dlg|Sốt rét · nhẹ",
+  ".dlg|Quẻ Thượng thượng · Tài nghệ",
+  ".dlg|Cấm túc # tháng",
+  ".dlg|Yến đầy tháng công chúa",
+  ".dlg|Sốt rét · nguy kịch",
+  ".dlg|Quẻ Thượng thượng · Giao thiệp",
+  ".dlg|Đại lễ tế Giao"
+ ],
+ "_momRank": 0,
+ "_scrW": {
+  "#modal|Nguy hiểm chung|444,763": {
+   "left": 37,
+   "n": 1
+  },
+  "#modal|Bổng lộc tháng bảy|378,672": {
+   "left": 111,
+   "n": 3
+  },
+  ".dlg|Bổng lộc tháng tám|378,651": {
+   "left": 70,
+   "n": 1
+  },
+  "#modal|Tâm trạng · Ta|450,631": {
+   "left": 20,
+   "n": 1
+  },
+  "#modal|Tâm trạng · Ta|472,631": {
+   "left": 20,
+   "n": 1
+  },
+  ".kbk|Tổng lược|511,519": {
+   "left": 95,
+   "n": 1
+  },
+  "#modal|Nhờ thái giám tìm thú nuôi|477,590": {
+   "left": 650,
+   "n": 1
+  },
+  "#modal|Học Cầm: làm gì?|378,522": {
+   "left": 445,
+   "n": 1
+  }
+ },
+ "_unsFail": {
+  "#dawn|": {},
+  ".dlg|Bổng lộc tháng bảy · Lễ nghĩa": {},
+  ".dlg|Biếu quà làm lành": {},
+  ".dlg|Quẻ Hạ · Sủng": {},
+  ".dlg|Một ánh mắt": {},
+  ".dlg|Chuyện trong cung": {},
+  ".dlg|Có người tìm đến": {},
+  ".dlg|Có người đến": {},
+  ".dlg|Kỳ nguyệt sự": {},
+  ".dlg|Lời cảnh báo": {},
+  ".dlg|Chương # · Sơ nhập cung môn": {},
+  ".kmov|": {},
+  ".dlg|Việc khó xử": {},
+  ".dlg|Quẻ Trung · Sức khỏe": {},
+  ".dlg|Người bên cạnh": {},
+  ".dlg|Nghe đồn": {},
+  ".dlg|Thời tiết": {},
+  ".dlg|Chương # · Sơ thừa ân sủng": {},
+  ".dlg|Đeo «Trăng soi rèm ngọc»": {},
+  ".dlg|Quẻ Thượng thượng · Con cái": {},
+  ".dlg|Rời lãnh cung": {},
+  ".dlg|Lễ tấn phong Quý nhân Lưu Liễu Nhi": {},
+  ".dlg|Kẻ hầu": {},
+  ".dlg|Quẻ Thượng · Tài nghệ": {},
+  ".dlg|Quẻ Hạ · Giao thiệp": {},
+  ".dlg|Quẻ Hạ · Sức khỏe": {},
+  ".dlg|Quẻ Thượng · Con cái": {},
+  ".dlg|Quẻ Thượng · Danh": {},
+  ".dlg|Quẻ Thượng thượng · Danh": {},
+  ".dlg|Học Cầm: làm gì?": {},
+  ".dlg|Khúc «Thu thủy»: dùng vật liệu gì?": {},
+  ".dlg|Danh hiệu mới": {},
+  ".dlg|Đeo «Khúc nhạc tri âm»": {},
+  ".dlg|Lời kết giao": {},
+  ".dlg|Quẻ Trung · Mưu kế": {},
+  ".dlg|Quẻ Hạ hạ · Hung": {}
+ },
+ "offers": [
+  {
+   "buoi": 64,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 65,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 2 ngư»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 67,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 68,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 75,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 83,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 92,
+   "y": 1,
+   "rank": 0,
+   "screen": ".mapsc «»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 92,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 92,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 93,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 94,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 99,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 99,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 104,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 104,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 211,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 213,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 222,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 227,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 228,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 233,
+   "y": 2,
+   "rank": 0,
+   "screen": ".mapsc «»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 351,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 352,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 353,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 354,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 369,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 370,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 373,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": true
+  },
+  {
+   "buoi": 374,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 383,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 399,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 399,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 404,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 404,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Sắc phong",
+   "picked": false
+  }
+ ],
+ "t": {
+  "total": 3341839
+ }
+}

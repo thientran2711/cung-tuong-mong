@@ -1,5 +1,5 @@
 # Rerun nc_vuong (A4) — partial, 7/10 finished
-Open: cautious-2, speed-1, speed-2, lazy-1, rebel-1, random-2 (random-2 at buổi ~1046 running). Lives not yet started run on LIVE 5e013076; running lives keep their starting build (ROOT 2 ruling).
+DONE: 10/10 lives finished. Lives not yet started run on LIVE 5e013076; running lives keep their starting build (ROOT 2 ruling).
 | life | end | valid | buổi | links | harness | counts |
 |---|---|---|---|---|---|---|
 | nc-nc_vuong-skilled-2 | Hồng nhan bạc mệnh (age 18) | valid (no bot exit) | buổi 119 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-skilled-2-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-skilled-2-review.md) | harness 4523381f | bugs 6 |
@@ -9,6 +9,9 @@ Open: cautious-2, speed-1, speed-2, lazy-1, rebel-1, random-2 (random-2 at buổ
 | nc-nc_vuong-random-2 | Lãnh cung (age 33) | valid (exitPick None) | buổi 2204 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-random-2-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-random-2-review.md) | normal 93812531 → a4m bac25389 for part | bugs 15 |
 | nc-nc_vuong-cautious-2 | Hồng nhan bạc mệnh (age 24) | valid (exitPick None) | buổi 951 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-cautious-2-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-cautious-2-review.md) | normal 93812531 | bugs 0 |
 | nc-nc_vuong-speed-2 | Hồng nhan bạc mệnh (age 22) | valid (exitPick None) | buổi 298 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-speed-2-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-speed-2-review.md) | a4m bac25389 (F10 watchdog) from ckpt b50 | bugs 1 |
+| nc-nc_vuong-lazy-1 | Lãnh cung (age 22) | valid (exitPick None) | buổi 350 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-lazy-1-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-lazy-1-review.md) | a4n 8bd0b16c8 (kc2End rule + F10 hook) | bugs 1 |
+| nc-nc_vuong-rebel-1 | Hồng nhan bạc mệnh (age 20) | valid (exitPick None) | buổi 422 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-rebel-1-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-rebel-1-review.md) | a4n 8bd0b16c8 (kc2End rule + F10 hook) | bugs 1 |
+| nc-nc_vuong-speed-1 | Hồng nhan bạc mệnh (age 33) | valid (exitPick None) | buổi 2020 | [moments](../robot/rerun-nc_vuong/nc-nc_vuong-speed-1-moments.md) · [review](../robot/rerun-nc_vuong/nc-nc_vuong-speed-1-review.md) | a4m bac25389 (F10 watchdog; kc2End rule not applied, exitPick None so no impact) | bugs 4 |
 
 Note: random-1 «Xuất gia» is a forced ending (Hoàng thượng băng hà, no children, rank 0), not a bot exit. Game bugs: see robot/rerun-nc_vuong/bugs/BUGS.md.
 

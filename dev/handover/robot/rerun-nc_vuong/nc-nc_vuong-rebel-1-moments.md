@@ -1,0 +1,163 @@
+# nc-nc_vuong-rebel-1 moment log (bot bold, fold, seed 454280371, real-tap harness 8bd0b16c)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-62-1.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 2 ngư» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài32Tâm cơ35Đức14Danh2 | Bạc6Sức100/100 | Buổi tối, còn 4 khắc | Hôm nay mặt mộc | gió heo may | Quẻ Thượng (Giao thiệp) · shots-nc-nc_vuong-rebel-1/m-new-62-2.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · #modal «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-62-3.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · .dlg «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-62-4.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-62-5.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-nc-nc_vuong-rebel-1/m-new-63-6.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-nc-nc_vuong-rebel-1/m-new-63-7.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-63-8.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons: Thường | Thường | Thường | Thường | Thường | Thường | ThườngVải thô (hàng kém)Hàng | ThườngTrà mốc (hàng kém)Trà  · shots-nc-nc_vuong-rebel-1/m-new-63-9.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Nhận · shots-nc-nc_vuong-rebel-1/m-new-63-10.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Giao thiệp 3/3 | Mưu kế 1/1 | Trò chuyện với cung nữ · Tốn | Giao việc phòng bị · Tốn 1 k | Nghe ngóng chung · Có cơ · T | Lui · shots-nc-nc_vuong-rebel-1/m-new-63-11.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-63-12.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · #modal «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-63-13.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Lót tay thái giám Nội vụ phủ | Sai Lưu Tô đòi lại phần bị c | Tố lên Thái hậuMong manhTốnk | Ghi nhớ để trả thù sauHiểmTố · shots-nc-nc_vuong-rebel-1/m-new-64-14.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng bảy · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-nc-nc_vuong-rebel-1/m-new-64-15.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài32Tâm cơ35Đức14Danh1 | Bạc71Sức100/100 | Buổi trưa, còn 4 khắc | Cấm túc2 tháng | Hôm nay mặt mộc | sương mù · shots-nc-nc_vuong-rebel-1/m-new-64-16.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc · Nội | mồng 2 | mồng 3 | mồng 4 | mồng 5 · shots-nc-nc_vuong-rebel-1/m-new-64-17.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · .dlg «Biếu quà làm lành» · NEW SCREEN · first time on this screen; buttons: Lui | Lễ bạcTốnBạc -36ĐượcPhi Nghi · shots-nc-nc_vuong-rebel-1/m-new-64-18.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · .dlg «Quẻ Hạ · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-64-19.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · .dlg «Gieo lại quẻ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-64-20.png
+- year 1 · turn 5 · tuần 0 · buổi 2 · rank 0 · .dlg «Một ánh mắt» · NEW SCREEN · first time on this screen; buttons: Giữ bài thơ, đáp lạiRất vững | Đốt đi, làm ngơRất vữngTốnkh · shots-nc-nc_vuong-rebel-1/m-new-64-21.png
+- year 1 · turn 5 · tuần 0 · buổi 2 · rank 0 · .dlg «Thỉnh bình an mạch» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-65-22.png
+- year 1 · turn 5 · tuần 0 · buổi 3 · rank 0 · .dlg «Tai mắt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-66-23.png
+- year 1 · turn 5 · tuần 1 · buổi 1 · rank 0 · .dlg «Lỡ hẹn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-67-24.png
+- year 1 · turn 5 · tuần 1 · buổi 2 · rank 0 · .dlg «Chuyện trong cung» · NEW SCREEN · first time on this screen; buttons: Đưa bạc cho xongRất vữngTốnB | Mắng thẳng mặtKhó lườngTốnkh | Ghi lại, mách Tổng quảnKhó l · shots-nc-nc_vuong-rebel-1/m-new-68-25.png
+- year 1 · turn 5 · tuần 1 · buổi 2 · rank 0 · .dlg «Có người tìm đến» · NEW SCREEN · first time on this screen; buttons: Tiếp chuyệnTốn1 khắcĐượccùng | Không tiếpTốnkhôngĐượcĐáp ứn · shots-nc-nc_vuong-rebel-1/m-new-69-26.png
+- year 1 · turn 5 · tuần 1 · buổi 3 · rank 0 · .dlg «Có người đến» · NEW SCREEN · first time on this screen; buttons: Nhận lời xin lỗiRất vữngTốnk | Lạnh lùngRất vữngTốnkhôngĐượ · shots-nc-nc_vuong-rebel-1/m-new-69-27.png
+- year 1 · turn 5 · tuần 2 · buổi 1 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-72-28.png
+- year 1 · turn 5 · tuần 2 · buổi 1 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-72-29.png
+- year 1 · turn 5 · tuần 2 · buổi 2 · rank 0 · .dlg «Lật thẻ: Không có» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-73-30.png
+- year 1 · turn 5 · tuần 2 · buổi 3 · rank 0 · .dlg «Kỳ nguyệt sự» · NEW SCREEN · first time on this screen; buttons: Báo đúng ngàyRất vữngTốnkhôn | Báo lùi vài hômTùy duyênTốnk | Báo sớm, nói đã sạch kỳRất v | Giấu, không báoRất vữngTốnkh · shots-nc-nc_vuong-rebel-1/m-new-74-31.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng tám» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Lót tay thái giám Nội vụ phủ | Sai Cung nữ thân tín tam đẳn | Tố lên Thái hậuMong manhTốnk | Ghi nhớ để trả thù sauHiểmTố · shots-nc-nc_vuong-rebel-1/m-new-75-32.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · .dlg «Lời cảnh báo» · NEW SCREEN · first time on this screen; buttons: Ghi nhớ, cứ như thườngTốnkhô · shots-nc-nc_vuong-rebel-1/m-new-76-33.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · page «Khải Tường cung · Tĩnh Nghi trai · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài32Tâm cơ35Đức13Danh9 | Bạc39Sức100/100 | Buổi trưa, còn 4 khắc | Cấm túc2 tháng | Hôm nay mặt mộc | nắng vàng · shots-nc-nc_vuong-rebel-1/m-new-76-34.png
+- year 1 · turn 6 · tuần 0 · buổi 2 · rank 0 · .dlg «Thu săn» · NEW SCREEN · first time on this screen; buttons: Nhận thêu một nửaTốnSức -5Đư | Chúc nàng ta đi săn bình anT | Nói bận việc, tránh điTốnkhô | Đem chỉ vàng dành dụm cho nà · shots-nc-nc_vuong-rebel-1/m-new-76-35.png
+- year 1 · turn 6 · tuần 0 · buổi 2 · rank 0 · .dlg «Ân thưởng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-77-36.png
+- year 1 · turn 5 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-78-1.png
+- year 1 · turn 6 · tuần 2 · buổi 0 · rank 0 · .dlg «Lãnh cung» · NEW SCREEN · first time on this screen; buttons: Bước vào · shots-nc-nc_vuong-rebel-1/m-new-79-2.png
+- year 1 · turn 6 · tuần 2 · buổi 0 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài32Tâm cơ35Đức13Danh1 | Bạc39Sức100/100 | Buổi sáng, còn 4 khắc | Lãnh cung | Cấm túc2 tháng | trời thu trong · shots-nc-nc_vuong-rebel-1/m-new-79-3.png
+- year 1 · turn 6 · tuần 2 · buổi 0 · rank 0 · .dlg «Chương 1 · Sơ nhập cung môn» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Thỉnh an Thái hậu ho | Đi làm: Đi một nơi trong cun | Đi làm: Thay y phục hay tran · shots-nc-nc_vuong-rebel-1/m-new-79-4.png
+- year 1 · turn 6 · tuần 2 · buổi 0 · rank 0 · .mapsc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài32Tâm cơ35Đức13Danh1 | Bạc39Sức100/100 | Buổi sáng, còn 4 khắc | Lãnh cung | Cấm túc2 tháng | trời thu trong · shots-nc-nc_vuong-rebel-1/m-new-79-5.png
+- year 1 · turn 6 · tuần 2 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng tám» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-80.png
+- year 1 · turn 6 · tuần 2 · buổi 3 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-82-6.png
+- year 1 · turn 7 · tuần 0 · buổi 0 · rank 0 · #kdaytc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài32Tâm cơ35Đức13Danh0 | Bạc46Sức94/100 | Buổi sáng, còn 4 khắc | Lãnh cung | Cấm túc1 tháng | lá phong rơi · shots-nc-nc_vuong-rebel-1/m-new-82-7.png
+- year 1 · turn 7 · tuần 0 · buổi 2 · rank 0 · .dlg «Hạn hán, mất mùa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-84-8.png
+- year 1 · turn 7 · tuần 0 · buổi 3 · rank 0 · #modal «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-86-9.png
+- year 1 · turn 7 · tuần 1 · buổi 1 · rank 0 · .dlg «Việc khó xử» · NEW SCREEN · first time on this screen; buttons: Nhận tội thay nàng taRất vữn | Để nàng ta chịu đònRất vữngT · shots-nc-nc_vuong-rebel-1/m-new-87-10.png
+- year 1 · turn 7 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại trai đàn cầu phúc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-88-11.png
+- year 1 · turn 7 · tuần 1 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-88-12.png
+- year 1 · turn 7 · tuần 1 · buổi 3 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-90-13.png
+- year 1 · turn 7 · tuần 1 · buổi 3 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-90-14.png
+- year 1 · turn 7 · tuần 2 · buổi 0 · rank 0 · #modal «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-91-15.png
+- year 1 · turn 7 · tuần 2 · buổi 0 · rank 0 · .dlg «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-91-16.png
+- year 1 · turn 8 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chín» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-95-17.png
+- year 1 · turn 8 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-95-18.png
+- year 1 · turn 8 · tuần 0 · buổi 1 · rank 0 · .dlg «Ôn dịch» · NEW SCREEN · first time on this screen; buttons: Đóng cửa cung, xông ngảiTốnB | Vẫn đi lại như thườngTốnkhôn · shots-nc-nc_vuong-rebel-1/m-new-95-19.png
+- year 1 · turn 8 · tuần 0 · buổi 2 · rank 0 · .dlg «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-96-20.png
+- year 1 · turn 8 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại xá thiên hạ» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-100.png
+- year 1 · turn 8 · tuần 1 · buổi 2 · rank 0 · .dlg «Người bên cạnh» · NEW SCREEN · first time on this screen; buttons: Chia chăn, ngồi cùng nàng ta | Nghe chuyện cũ, dò tin lục c | Đóng cửa, giữ sức mìnhRất vữ | Pha trà Long Tĩnh mời kháchR · shots-nc-nc_vuong-rebel-1/m-new-100-21.png
+- year 1 · turn 8 · tuần 1 · buổi 2 · rank 0 · .dlg «Tâm bệnh · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-101-22.png
+- year 1 · turn 8 · tuần 2 · buổi 2 · rank 0 · .dlg «Nghe đồn» · NEW SCREEN · first time on this screen; buttons: Sang gặp Thường tại Lưu Liễu | Cho người tra xem ai tung ti | Mặc kệTốnkhôngĐượcSức +3·giữ · shots-nc-nc_vuong-rebel-1/m-new-104-23.png
+- year 1 · turn 8 · tuần 2 · buổi 2 · rank 0 · .dlg «Tra tin đồn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-105-24.png
+- year 1 · turn 9 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-107-25.png
+- year 1 · turn 9 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 1 khép lại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-107-26.png
+- year 1 · turn 9 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 2: Sơ thừa ân sủng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-108-27.png
+- year 1 · turn 9 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm bệnh · nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-110-28.png
+- year 1 · turn 9 · tuần 1 · buổi 3 · rank 0 · .dlg «Quẻ Trung · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-114-29.png
+- year 1 · turn 9 · tuần 2 · buổi 1 · rank 0 · .dlg «Thời tiết» · NEW SCREEN · first time on this screen; buttons: Cởi áo bông đắp cho nàng taR | Dúi bạc xin lính gác ít than | Lo thân mình trướcRất vữngTố · shots-nc-nc_vuong-rebel-1/m-new-115-30.png
+- year 1 · turn 10 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười một» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-119-31.png
+- year 1 · turn 10 · tuần 0 · buổi 1 · rank 0 · .dlg «Bộ sưu tập» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-119-32.png
+- year 1 · turn 10 · tuần 0 · buổi 1 · rank 0 · .dlg «Bộ sưu tập» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-120.png
+- year 1 · turn 10 · tuần 0 · buổi 1 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-120-33.png
+- year 1 · turn 10 · tuần 1 · buổi 2 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-124-34.png
+- year 1 · turn 10 · tuần 1 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-125-35.png
+- year 1 · turn 10 · tuần 1 · buổi 3 · rank 0 · .dlg «Chương 2 · Sơ thừa ân sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Bán đồ trong rương r | Đi làm: Điểm trang hoặc Dưỡn | Đi làm: Nhờ thái giám Nội vụ · shots-nc-nc_vuong-rebel-1/m-new-126-36.png
+- year 1 · turn 10 · tuần 1 · buổi 3 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đeo «Trăng soi rèm ngọc»Ghi  · shots-nc-nc_vuong-rebel-1/m-new-126-37.png
+- year 1 · turn 10 · tuần 1 · buổi 3 · rank 0 · .dlg «Đeo «Trăng soi rèm ngọc»» · NEW SCREEN · first time on this screen; buttons: Thêm SủngTốnkhôngĐượcSủng +1 | Sủng dễ lênTốnkhôngĐượcSủng | Quay lạiGhi chúchọn rồi xem  · shots-nc-nc_vuong-rebel-1/m-new-126-38.png
+- year 1 · turn 10 · tuần 1 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-126-39.png
+- year 2 · turn 11 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng chạp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-131-40.png
+- year 2 · turn 11 · tuần 0 · buổi 1 · rank 0 · .dlg «Quẻ Thượng thượng · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-132-41.png
+- year 2 · turn 11 · tuần 1 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-137-42.png
+- year 2 · turn 11 · tuần 2 · buổi 1 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-140.png
+- year 2 · turn 11 · tuần 2 · buổi 1 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-140-43.png
+- year 2 · turn 12 · tuần 2 · buổi 0 · rank 0 · .dlg «Rời lãnh cung» · NEW SCREEN · first time on this screen; buttons: Tạ ơn · shots-nc-nc_vuong-rebel-1/m-new-143-44.png
+- year 2 · turn 12 · tuần 2 · buổi 1 · rank 0 · .dlg «Lễ tấn phong Quý nhân Lưu Liễu Nhi» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Không đếnTốnkhôngĐượcSức +3K · shots-nc-nc_vuong-rebel-1/m-new-144-45.png
+- year 2 · turn 12 · tuần 2 · buổi 1 · rank 0 · .dlg «Giải bày» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-144-46.png
+- year 2 · turn 12 · tuần 2 · buổi 2 · rank 0 · .dlg «Bổng lộc tháng giêng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-144-47.png
+- year 2 · turn 13 · tuần 1 · buổi 2 · rank 0 · .dlg «Quẻ Thượng thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-153-48.png
+- year 2 · turn 14 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng hai» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-159-49.png
+- year 2 · turn 14 · tuần 0 · buổi 1 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-160.png
+- year 2 · turn 14 · tuần 1 · buổi 1 · rank 0 · .dlg «Kẻ hầu» · NEW SCREEN · first time on this screen; buttons: Nhờ đưa thư lên Hoàng thượng | Giữ người ấy lại, không cho | Thưởng hết chút bạc còn lạiR · shots-nc-nc_vuong-rebel-1/m-new-163-50.png
+- year 2 · turn 15 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng ba» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-171-51.png
+- year 2 · turn 15 · tuần 0 · buổi 1 · rank 0 · #modal «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-172-52.png
+- year 2 · turn 15 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Đứng xem rồi về · shots-nc-nc_vuong-rebel-1/m-new-172-53.png
+- year 2 · turn 15 · tuần 0 · buổi 1 · rank 0 · .dlg «Cầm: các lối» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-172-54.png
+- year 2 · turn 15 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-179-55.png
+- year 2 · turn 15 · tuần 2 · buổi 1 · rank 0 · .dlg «Chuyện trong cung» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-180.png
+- year 2 · turn 16 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng tư» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-184-56.png
+- year 2 · turn 17 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng năm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-195-57.png
+- year 2 · turn 17 · tuần 0 · buổi 1 · rank 0 · #modal «Vĩnh Hòa cung» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-196-58.png
+- year 2 · turn 17 · tuần 0 · buổi 1 · rank 0 · .dlg «Vĩnh Hòa cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-196-59.png
+- year 2 · turn 17 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-200.png
+- year 2 · turn 18 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng sáu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-207-60.png
+- year 2 · turn 18 · tuần 1 · buổi 2 · rank 0 · #modal «Đức Thọ cung» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-213-61.png
+- year 2 · turn 18 · tuần 1 · buổi 2 · rank 0 · .dlg «Đức Thọ cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-213-62.png
+- year 2 · turn 18 · tuần 2 · buổi 0 · rank 0 · .dlg «Cầm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-215-63.png
+- year 2 · turn 19 · tuần 0 · buổi 1 · rank 0 · .dlg «Nghe đồn» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-220.png
+- year 2 · turn 19 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 3: Học lễ nghi cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-221-64.png
+- year 2 · turn 20 · tuần 2 · buổi 1 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-240.png
+- year 2 · turn 21 · tuần 0 · buổi 2 · rank 0 · .dlg «Phiên vương nhập triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-244-65.png
+- year 2 · turn 21 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-253-66.png
+- year 2 · turn 22 · tuần 0 · buổi 0 · rank 0 · .dlg «Lao phổi · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-255-67.png
+- year 2 · turn 22 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-260.png
+- year 2 · turn 22 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-260-68.png
+- year 2 · turn 22 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-265-69.png
+- year 2 · turn 23 · tuần 0 · buổi 1 · rank 0 · .dlg «Ý chỉ tiết kiệm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-267-70.png
+- year 2 · turn 23 · tuần 0 · buổi 2 · rank 0 · #modal «Nhờ thái giám tìm thú nuôi» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-269-71.png
+- year 2 · turn 23 · tuần 0 · buổi 2 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · NEW SCREEN · first time on this screen; buttons: Lui | Xem Mèo mướp | Xem Chó nhỏ lông xù | Xem Chim họa mi | Xem Thỏ ngọc | Xem Cá vàng chậu sứ | Xem Mèo tuyết | Xem Sáo nói · shots-nc-nc_vuong-rebel-1/m-new-269-72.png
+- year 2 · turn 23 · tuần 0 · buổi 2 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · FRUSTRATED · dead button «Xem Mèo mướp» covered by span.kitb in #mb · shots-nc-nc_vuong-rebel-1/dead-fold-1795670502979.png
+- year 2 · turn 23 · tuần 0 · buổi 2 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · FRUSTRATED · dead button «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · shots-nc-nc_vuong-rebel-1/dead-fold-1795670509310.png
+- year 2 · turn 23 · tuần 0 · buổi 2 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · FRUSTRATED · dead button «Xem Chim họa mi» covered by b.kidn in #mb · shots-nc-nc_vuong-rebel-1/dead-fold-1795670515642.png
+- year 2 · turn 23 · tuần 0 · buổi 2 · rank 0 · .kshdc «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-269-73.png
+- year 2 · turn 23 · tuần 1 · buổi 1 · rank 0 · .dlg «Án mất trộm ngự khố» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-271-74.png
+- year 2 · turn 23 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-277-75.png
+- year 3 · turn 24 · tuần 0 · buổi 0 · rank 0 · .dlg «Học Cầm: ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Nhạc sư Giáo phườngTốn2 khắc · shots-nc-nc_vuong-rebel-1/m-new-279-76.png
+- year 3 · turn 24 · tuần 0 · buổi 1 · rank 0 · .dlg «Án mất trộm ngự khố» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-280.png
+- year 3 · turn 24 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-283-77.png
+- year 3 · turn 25 · tuần 0 · buổi 2 · rank 0 · .dlg «Tuyển tú» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-292-78.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · #modal «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-295-79.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm | Làm · shots-nc-nc_vuong-rebel-1/m-new-295-80.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · #modal «Khúc «Thu thủy»: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-295-81.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Khúc «Thu thủy»: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Khúc «Thu thủy» · giấy thườn | Khúc «Thu thủy» · giấy hoa t · shots-nc-nc_vuong-rebel-1/m-new-295-82.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quaKhó lường · thành: tiế · shots-nc-nc_vuong-rebel-1/m-new-295-83.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Xong việc: Học một buổi ở mục Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-295-84.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayGhi chúchọn một: Thê | Để sau · shots-nc-nc_vuong-rebel-1/m-new-295-85.png
+- year 3 · turn 25 · tuần 1 · buổi 0 · rank 0 · .dlg «Đeo «Khúc nhạc tri âm»» · NEW SCREEN · first time on this screen; buttons: Thêm SắcTốnkhôngĐượcSắc +1 | Phi tần quý mếnTốnkhôngĐượcP | Để sau · shots-nc-nc_vuong-rebel-1/m-new-295-86.png
+- year 3 · turn 25 · tuần 2 · buổi 0 · rank 0 · #modal «Lời kết giao» · NEW SCREEN · first time on this screen; buttons:  · shots-nc-nc_vuong-rebel-1/m-new-299-87.png
+- year 3 · turn 25 · tuần 2 · buổi 0 · rank 0 · .dlg «Lời kết giao» · NEW SCREEN · first time on this screen; buttons: Nhận lời kết giaoRất vữngTốn | Nhận nửa lễ, giữ khoảng cách | Từ chốiRất vữngTốnkhôngĐượct | Mách lẻo với Hoàng hậuRất vữ · shots-nc-nc_vuong-rebel-1/m-new-299-88.png
+- year 3 · turn 25 · tuần 2 · buổi 1 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-300.png
+- year 3 · turn 27 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 4: Ngai vàng cố quốc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-316-89.png
+- year 3 · turn 27 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-319-90.png
+- year 3 · turn 27 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-319-91.png
+- year 3 · turn 27 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-320.png
+- year 3 · turn 27 · tuần 2 · buổi 3 · rank 0 · .dlg «» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm · shots-nc-nc_vuong-rebel-1/m-new-326-92.png
+- year 3 · turn 27 · tuần 2 · buổi 3 · rank 0 · .dlg «Hoàng thượng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-326-93.png
+- year 3 · turn 27 · tuần 2 · buổi 3 · rank 0 · .dlg «Quẻ Hạ hạ · Hung» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-nc-nc_vuong-rebel-1/m-new-326-94.png
+- year 3 · turn 29 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-340.png
+- year 3 · turn 30 · tuần 0 · buổi 1 · rank 0 · .dlg «Bị thu hiệu ban» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-351-95.png
+- year 3 · turn 30 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-360.png
+- year 3 · turn 30 · tuần 2 · buổi 2 · rank 0 · .dlg «Sốt rét · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-361-96.png
+- year 3 · turn 31 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-371-97.png
+- year 3 · turn 31 · tuần 2 · buổi 1 · rank 0 · .dlg «Cấm túc 1 tháng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-372-98.png
+- year 3 · turn 32 · tuần 0 · buổi 2 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-377-99.png
+- year 3 · turn 32 · tuần 1 · buổi 1 · rank 0 · .dlg «Yến đầy tháng công chúa» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-380.png
+- year 3 · turn 33 · tuần 1 · buổi 3 · rank 0 · .dlg «Sốt rét · nguy kịch» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-394-100.png
+- year 3 · turn 33 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-395-101.png
+- year 3 · turn 34 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-400.png
+- year 3 · turn 34 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại lễ tế Giao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-nc-nc_vuong-rebel-1/m-new-400-102.png
+- year 3 · turn 35 · tuần 2 · buổi 1 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-nc-nc_vuong-rebel-1/m-look-420.png
+- year 3 · turn 36 · tuần 2 · buổi 0 · rank 0 · ending · EVENT · life over: Hồng nhan bạc mệnh — Sốt rét nguy kịch, không qua khỏi · age 20 · buổi 422 · bugs 1 · stuck 0 · dead buttons 3 · shots-nc-nc_vuong-rebel-1/end.png
