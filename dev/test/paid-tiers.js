@@ -21,7 +21,7 @@ const {chromium}=require('playwright');const BASE=process.argv[2];
    out.wk.push(row)}}
   Object.assign(S.arts,saveArts);
   /* 2. art lessons: progress for each mini-game result (0..3 phần) — self vs teacher (the j23 rule) */
-  const tch=BAL.tchMin||1;for(let g=0;g<=3;g++){const s=Math.max(1,Math.round(g*.6)),t=Math.max(g,s+tch);out.lesson.push({g,self:s,teacher:t});if(t<=s)F(`Học với thầy, chơi ${g}`,`không hơn tự học (${t} ≤ ${s})`)}
+  const tch=BAL.tchMin||1;for(let g=0;g<=3;g++){const s=typeof lesG==="function"?lesG("self",g):Math.max(1,Math.round(g*.6)),t=typeof lesG==="function"?lesG("teacher",g):Math.max(g,s+tch);/* review/balance-pace: the game's ONE rule */out.lesson.push({g,self:s,teacher:t});if(t<=s)F(`Học với thầy, chơi ${g}`,`không hơn tự học (${t} ≤ ${s})`)}
   /* 3. Tứ đức: self +1 vs ma ma +2..3 (j85) */
   out.vir.push({self:1,mama:"2..3",cost:"5+5×bậc"});
   /* 4. veil craft: material 0..2 at grade 0 / 2 / 4, made at 5 phần: worth in bạc */

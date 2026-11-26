@@ -24,10 +24,18 @@ function kitInvGrid(o){o=o||{};const key=o.key||"bag";KINV.reg[key]=o;
 function kitInvEmpty(n){let h="";for(let i=0;i<n;i++)h+=kitItem({empty:true,size:"slot",tip:"Ô trống"});return h}
 /* fill the grid to whole rows (≥ minRows rows) once its column count is known; inside the panel, the grid also GROWS by whole rows into
    any free height left at the bottom of the panel (owner 11/15: no big empty gap under the bag; equipment panel stays below it). */
+/* the ONE shared #panel observer of the bag (coop-freeze-kmrew): made once, a panel height change refits every bag on screen */
+let KINV_RO=null;function kinvPanelWatch(P){if(!P||KINV_RO||typeof ResizeObserver!=="function")return;let h0=-1;KINV_RO=new ResizeObserver(()=>{const h=P.clientHeight;if(h===h0)return;h0=h;
+ if(!P.querySelector(".kinv .kinvg"))return;clearTimeout(window.__kinvPT);window.__kinvPT=setTimeout(kitInvFit,40)});KINV_RO.observe(P)}
 function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
- /* refit whenever the grid's width or the panel's height changes (late layout, rotation, book page open) */
- if(!g.__kro&&typeof ResizeObserver==="function"){let w0=0,h0=0;g.__kro=new ResizeObserver(()=>{const P=g.closest("#panel");const kv=g.closest(".kinv"),sd=kv&&kv.querySelector(".kinvside");const w=g.clientWidth,h=(P?P.clientHeight:0)+(sd?sd.offsetHeight*1e4:0);if(w===w0&&h===h0)return;w0=w;h0=h;
-   clearTimeout(g.__kroT);g.__kroT=setTimeout(kitInvFit,40)});g.__kro.observe(g);const P=g.closest("#panel");if(P)g.__kro.observe(P);/* page-scale-r1: the wear column grows late (pet picture, fonts): refit then too, else the bag kept its 2 minimum rows */const sd0=g.closest(".kinv")&&g.closest(".kinv").querySelector(".kinvside");if(sd0)g.__kro.observe(sd0)}
+ /* refit whenever the grid's width, its wear column or the panel's height changes (late layout, rotation, book page open).
+    coop-freeze-kmrew (26/11, law 11) ONE RULE: an observer made for ONE rendered element observes only that element's own subtree; a size
+    outside it (#panel) is watched by the ONE shared observer KINV_RO (made once). Before, every grid's own observer also observed the
+    long-lived #panel: #panel kept the observer, its callback kept the old grid (items, pictures, listeners) = one leaked bag per render,
+    ~300 000 Blink nodes after an hour of play → the page wedged in native code (co-op rooms G93J / 9FVJ / DUMQ, seed 56 at buổi 61). */
+ if(!g.__kro&&typeof ResizeObserver==="function"){let w0=0,h0=0;g.__kro=new ResizeObserver(()=>{if(!g.isConnected){g.__kro.disconnect();return}const P=g.closest("#panel");const kv=g.closest(".kinv"),sd=kv&&kv.querySelector(".kinvside");const w=g.clientWidth,h=(P?P.clientHeight:0)+(sd?sd.offsetHeight*1e4:0);if(w===w0&&h===h0)return;w0=w;h0=h;
+   clearTimeout(g.__kroT);g.__kroT=setTimeout(kitInvFit,40)});g.__kro.observe(g);/* page-scale-r1: the wear column grows late (pet picture, fonts): refit then too, else the bag kept its 2 minimum rows */const sd0=g.closest(".kinv")&&g.closest(".kinv").querySelector(".kinvside");if(sd0)g.__kro.observe(sd0)}
+ kinvPanelWatch(g.closest("#panel"));
  if(!g.clientWidth)return;g.style.removeProperty("--kinvsz");let cols=getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length||1;
  /* wear column (kinvside): its slot = one bag cell, shrunk so the 6 slots + names fit the panel height (never below 44 px); sized BEFORE the free height is measured */
  try{const sd=g.closest(".kinv").querySelector(".kinvside");if(sd){/* page-scale-r1: size with the titles shown (tight off) every time, else tight flip-flopped between fits and the bag stayed at 2 rows */g.closest(".kinv").classList.remove("kinvtight");const P0=g.closest("#panel"),cs0=getComputedStyle(P0),n0=sd.querySelectorAll(".keqc").length||6,h4=(sd.querySelector(".kpst")||{offsetHeight:0}).offsetHeight+4;
