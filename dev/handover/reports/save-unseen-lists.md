@@ -438,3 +438,52 @@ Method: step diffs / `git show --cc` for merges; mutate = patch the built index.
 | law 4 (typed numbers) in all hunks | — | OK | no new number; `tsbKh(2)` / «2 khắc» in the th answer is moved old code (pre-existing, not new) |
 | law 11 siblings of `.opts=` | j77:221, jact2:52, jecon:90-91, jhaohuu:75, jptime:433, jselxsc:174, jstatus:23, jworld:318 | OK | each has a census row (ROUTE with a code proof / ACT / PANEL); the ROUTE proof now really runs (reviewer fixed c[3]→c[2]); census 181 sites, UNCLASSIFIED 0 (I ran it). jact2 festival card is classed ACT (arrival act) — same precedent as the other ACT rows, but it sets S.adFest before the card is shown: a reload with that card unseen would lose it (probe never met it; low) |
 Result: OK 14 / CONCERN 4 (all low; none blocks a landing). Not run here: inv-stack.js, knsell-remake.js (sandbox).
+
+## REVIEW r7 (BIG rv successor, opus, session_01N1tNP2rXGixcTVd1GkYr9V, depth 5, START_CTX ≈ 4 %) — PARTIAL (gates ~85 %) + HANDOVER (rolled at ctx ≈ 28 % ≥ START + 25 %)
+PRIORITY #1 CHECK ('save-fix-stack' / 'tsbAp' / 'knSell' / 'visitor'): OD 0 | ledger 0 | claims rv r6 3nNXSbTQ (rolled) | main f573dc94 → 53319e6f → 03a8c17c | review/* save-fix-stack-rv12 25d67e01 | archive 0 → continued the r6 LEFT list; reused every test of the branch.
+**Verdict so far: no blocking fault left that a gate shows; 1 new save family found and FIXED (visitor cards); the 4 INDEPENDENT CHECK concerns answered + fixed. Not LAND READY yet: last gates on rv15 left.**
+
+### Branches (all pushed, no force; each FF on the LIVE of its time)
+| branch | sha | what |
+|---|---|---|
+| review/save-fix-stack-rv13 | 9348cf6bbf3260d49944490f9f376ec5865c75b0 | rv12 + LIVE f573dc94 (cad119aa: assemble UNION +jpun/jcharge; j8 invAdd + ilSeize; jil ilGone e.used + o.keep; jtsb tsbApCard kept, ctp's only in-block change deedW("sbribe") moved INTO it) + C1–C3 fixes |
+| review/save-fix-stack-rv14 | 2db369966c148fa098eb097e7065a57e963eadae | rv13 + LIVE 53319e6f (1a483cfd: jts tsWarn generator keeps LIVE's new first answer tsOptMend(xv); KIT_REQUESTS union) + r7 FIX visitor cards (2db36996) |
+| **review/save-fix-stack-rv15** | **273c64c3758a3ccd2ac036c6f338cb617de3cf7c** | rv14 + LIVE 03a8c17c (built only) + time-advance scan registers the new save wrapper + knsell-remake C4 hardening. FF on 03a8c17c — LAND THIS (after the gates below) |
+
+### INDEPENDENT CHECK answers (sonnet 3Zj12NeY, 4 CONCERN)
+| # | concern | answer | proof |
+|---|---|---|---|
+| C1 | knSell carried copy has no `go` → a «Sủng vừa lên/xuống» fact can come again | ACCEPTED, fixed: knCarryGo — the live fact with the same key about the same person runs its go; favour (fav / sung, both S.kf) → a newer favour fact stands in | opts-asg row «knSell carried go» PASS (kf = sung); MUTATE (fix off) FAIL kf −15 vs 122 |
+| C2 | opts-asg knSell row PASSes on a skip | ACCEPTED: the row forces real news (S.kf favour) when no seller has any; skipped rows can no longer PASS | 9/9 rows PASS on rv14 |
+| C3 | S.tb restore = JSON round trip in a silent catch | ACCEPTED: S.tb put back BY REFERENCE (top-level stores the roll re-assigns, knNo's T.no); a store changed in place falls back to a copy + console.warn; every throw logged + counted in window.__knLive | knsell-remake PASS on the fix |
+| C4 | knsell-remake not mutation-checked; «19/21 cards» | ACCEPTED: the old test could not FAIL (mutants PASSed: the roll / lazy stores were already made by the test's own read). Hardened: before each remake S.tb.no.k is made stale and S.intel / S.j95 are taken away (put back after the S check). «19/21» = the number of seller × news cards in two lives (the count varies by life; every card had rk; no card is skipped) | fix PASS (10 cards); mutTb (S.tb restore off) **FAIL** 22/22 touched S.tb.no.k ✔; mutLazy (lazy cleanup off) re-run with the final version RUNNING at handover (o/f_knmut3) — successor: re-run `node dev/test/knsell-remake.js index.html mutLazy.html` (mutLazy = build with the `for(const k of Object.keys(S))if(!k0.has(k)…)delete S[k];` line removed) → must FAIL |
+
+### Fault found by this review and FIXED (LAW 11 + 6b, whole family: every visitor card j24 ap.* + tsbAp)
+probe Fold s1 (rv12 25d67e01 AND rv13 9348cf6b): `REMAKE-FAIL tsbAp: Có người đến [person gone ["sv","<p>Liễu Nhi, cung nữ bên cung Tề Thải Vi … xin theo ngươi]` — the servant left every staff list (dismissed / framed out / dead) while the card waited: a reload drops it, the live game kept offering «Thu làm tai mắt» on a person no longer there. Fix (jtsb, 2db36996): rcpVisitGone / rcpVisitPurge — a waiting visitor card whose people are gone is withdrawn before a card is shown and at every save (the card on screen stays). Test row «visitor gone withdrawn» PASS; MUTATE (purge off) FAIL. The probe now names WHY a REMAKE-FAIL happened (rcpMk reason). time-advance scan: new wrapper registered (never holds).
+
+### Gates
+| check | rv13 9348cf6b / cad119aa | rv14 2db36996 | rv15 273c64c3 |
+|---|---|---|---|
+| inv-stack-scan RAW / census UNCLASSIFIED / time-advance | 0 / 0 / 10 PASS | 0 / 0 / (wrapper unregistered → fixed in rv15) | 0 / 0 / PASS 11 gates |
+| punish-scan / seize-scan / charge-scan | 0 / 0 / 0 | 0 / 0 / 0 | — |
+| save-unseen-lists all Fold+iPad | 24/24 | **24/24** | — |
+| opts-asg-remake | 7/7 → 8/8 | **9/9** | — |
+| knsell-remake | PASS (11 cards) | fix PASS, mutTb FAIL ✔ | — |
+| charge-trinh-punish / charge-followups / seize-ledger / cold-faction | ALL PASS ×4 | — | — |
+| punish-reason Fold / iPad | ALL PASS / ALL PASS | — | — |
+| inv-stack.js | 25/27 = the 2 known K-LIST-PAGE rows (gift picker DOM 2,226 / Dâng quà 2,319) | — | — |
+| ob-oan.js | — | 24/24 | — |
+| ob-oan-enc / kit-gloss-lower | — | first run raced my rebuild (not valid); re-run RUNNING (o/f_enc, f_kgl) | — |
+| probe save-residue | rv12 Fold s1 1 line → fixed; Fold s2 0 | iPad s1,2 **0 lines** · Fold s1,2 RUNNING (o/f_pF) | — |
+| save-boundary-reload (bare = LIVE 53319e6f) | — | iPad seed 1 PASS seen; full result RUNNING (o/f_sbr) | — |
+| death / notice | — | queued (o/f_death, f_notice) | — |
+
+### LEFT for the successor (on review/save-fix-stack-rv15 273c64c3; fresh sparse worktree; if LIVE moved past 03a8c17c merge it → rv16, rebuild, re-run the scans)
+1. On rv15: probe Fold s1,2 + iPad s1 (`node dev/test/save-residue-probe.js index.html fold 1,2 40`, `… ipadAir 1 40`), sbr (`… save-boundary-reload.js index.html bare.html fold,ipadAir 1`, bare = `git show origin/main:index.html`), death, notice, knsell-remake (+ mutLazy must FAIL, see C4), ob-oan-enc (`node dev/test/ob-oan-enc.js . -`; compare with plain LIVE if it FAILs), kit-gloss-lower, opts-asg-remake, coop-e2e SWAP0 (`cd coop/worker && npm install && npx wrangler dev --local --port 8799`; `node dev/test/coop-e2e.js <out> http://localhost:8799`), then quickcheck ALONE (`bash dev/tools/quickcheck.sh`; known pre-existing: hooks 80 dialog-fixed / 90 button-crawl FAIL on LIVE, 92 flaky).
+2. Then «LAND READY review/save-fix-stack-rv15 <sha> FOR MAIN 163 / LC25 (BIG; save; = save-unseen-lists rv5 + save-growth-r6 + inv-stack-rv 1ffddd68 — land INSTEAD of all three; supersedes rv9–rv14; covers F's ~5.2 M-char silent save-write failure; inv-stack.js 2 FAIL = K-LIST-PAGE gift picker DOM, same on plain inv-stack-rv; FF onto LIVE 03a8c17c; Worker deploy: no)» at END of FOREMAN_B_STATUS.md + mirror in MAIN_STATUS.md + send_message Foreman B child 4 session_01N1tNP6QLnHwEWxnwvUVvhp + tell save-pid-cards fixer session_01N1tNP3tHDZmhEaxQ1fmrKZ the final sha.
+
+### Open follow-ups (not blocking)
+A–H of r5/r6 unchanged. I. A non-visitor rk card whose person dies / leaves while it waits is still dropped only on a reload (rcpMk person gone) — the purge covers the visitor family only (a death-related card must not vanish live); hiếm, nhỏ; the probe names any such line with its reason.
+
+### Gain vs risk
+GAIN: the stack is FF on LIVE 03a8c17c with ctp + ob-oan + renderer-mem; the knSell remake can no longer lose a follow-up or roll S.tb silently; a visitor who left the palace no longer leaves a ghost card (live = reload). RISKS: (1) the purge drops a visitor card whose person is only briefly missing from every list (e.g. a servant mid-transfer) — hiếm, nhỏ; opts-asg + probe show it, the card's maker can re-offer it. (2) knCarryGo runs a newer favour fact's follow-up (she «knows» the current Sủng, the text she bought is older) — có thể, nhỏ; the next Sủng change is offered as news again. → **Được lớn hơn** (two save-loss paths closed, every risk small and caught by a gate).
