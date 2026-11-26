@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn.","b":"0281bf7bcef6","h":[{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"}]};
+window.CTM_BI={"s":"c596edc7","t":"2026-11-26T07:33Z","c":"dialog-order-scan: SHOTD=\u003cact> also shoots DIRECT rows of that act (look at locked-card reasons)","b":"6a69bff47ee5","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37571,8 +37571,8 @@ Object.assign(BAL,{led:{court:2,cnt:"now"}});
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
-   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
+   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; mineLook = ms after her tap inside a person view during which a NEW queued card is hers and painted on top (E96 dialog-order); stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000,mineLook:400}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -97643,7 +97643,9 @@ const DFG={cur:null,ENG:{}};window.DFG=DFG;const DFG_MS=1000;/* ms per second (u
 function dfgL(pr,f){return pr[0]+(pr[1]-pr[0])*f}
 function dfgEase(eng,rank){let t=null;try{t=mgTier("df_"+eng,{occ:"df",rank,lv:0})}catch(e){}const top=(BAL.df.easeTop);return{t,f:cl(t?t.ease:0,0,top)/top}}
 function dfgSeg(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy;let u=L?((p.x-a[0])*dx+(p.y-a[1])*dy)/L:0;u=cl(u,0,1);return Math.hypot(a[0]+u*dx-p.x,a[1]+u*dy-p.y)}
-function dfgPath(name){try{const s=String(NWB.P[name]||"");return s.split(' d=\x22').slice(1).map(x=>new Path2D(x.split('\x22')[0]))}catch(e){return[]}}
+/* NGON-LAG (E96, owner OD 26/11 ~01:25Z «môn ngôn … lag lắm»): the kit sign paths are parsed ONCE per sign (was: every sign, every frame) */
+const DFG_PATHS={};
+function dfgPath(name){if(DFG_PATHS[name])return DFG_PATHS[name];try{const s=String(NWB.P[name]||"");const P=s.split(' d=\x22').slice(1).map(x=>new Path2D(x.split('\x22')[0]));if(P.length)DFG_PATHS[name]=P;return P}catch(e){return[]}}
 function dfgCol(){const O=typeof KIT_ODDS_COL!=="undefined"?KIT_ODDS_COL:[];return{ink:kg82Col("--ink",kg82Col("--body-ink","#3b2a1c")),gold:kg82Col("--gold","#c99a1e"),red:O[0]||"#b8321f",green:O[O.length-1]||"#2d7a52",paper:kg82Col("--paper","#f6eedc")}}
 function dfGame(eng,o){const E=DFG.ENG[eng];if(!E||!o||!o.box||!o.fig)return null;if(DFG.cur)DFG.cur.destroy();
  const B=BAL.df[eng],top=BAL.df.rawTop,box=o.box,cv=document.createElement("canvas");cv.className="kfoc-cv";cv.setAttribute("aria-hidden","true");
@@ -97660,7 +97662,9 @@ function dfGame(eng,o){const E=DFG.ENG[eng];if(!E||!o||!o.box||!o.fig)return nul
  E(c);let last=0;
  const frame=()=>{if(c.done)return;const t=c.now(),dt=last?t-last:0;last=t;if(c.tick)c.tick(dt,t);if(c.done)return;
   if(t>=(c.ms||B.ms)){c.timeout?c.timeout():c.end(0);return}
-  g.clearRect(0,0,W,H);try{c.draw&&c.draw(g,t)}catch(e){}try{o.hud&&o.hud({time:Math.max(0,Math.ceil(((c.ms||B.ms)-t)/DFG_MS))})}catch(e){}c.raf=requestAnimationFrame(frame)};
+  g.clearRect(0,0,W,H);try{c.draw&&c.draw(g,t)}catch(e){}
+  /* NGON-LAG: the kit clock chip is rebuilt only when its whole second changes (was: its HTML rewritten every frame = a layout + paint per frame) */
+  const sec=Math.max(0,Math.ceil(((c.ms||B.ms)-t)/DFG_MS));if(sec!==c.hudSec){c.hudSec=sec;try{o.hud&&o.hud({time:sec})}catch(e){}}c.raf=requestAnimationFrame(frame)};
  function stop(){cancelAnimationFrame(c.raf);cv.removeEventListener("pointerdown",dn);cv.removeEventListener("pointermove",mv);cv.removeEventListener("pointerup",up);cv.removeEventListener("pointercancel",up);cv.remove();if(DFG.cur===h)DFG.cur=null}
  const h={c,skip(){if(c.done)return;c.done=true;stop();try{o.onDone&&o.onDone({raw:null,skipped:true})}catch(e){console.error(e)}},destroy(){c.done=true;stop()},
   /* test / measure oracle (never drawn): where the target is now */peek(){return c.peek?c.peek(c.now()):null},canvas:cv};
@@ -98173,12 +98177,33 @@ function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(o
 function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
   const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
 /* the call comes from her own tap INSIDE the activity (a card / panel she opens there) */
-function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;return !!(t&&t.nodeType===1&&(a===document.body||a.contains(t)))}catch(e){return false}}
+/* DIALOG-ORDER (owner OD 26/11 ~03:40Z, E96): «Sai đi dò la» in her maid's person view opened NOTHING until ✕ closed the view, then the
+   pick-who dialog appeared («out of order»). Cause: the person view's own act cards (Giao thiệp / Mưu kế tabs) live in its docked person card
+   #popw (j59dock), OUTSIDE .kfoc, so her tap there read as «not inside the activity» and gate (c) held the dialog she had just asked for behind
+   the view. Fix (whole family: every act → dialog of every person card): the activity OWNS its controls — the person view = .kfoc + its docked
+   person card #popw; and «inside» is judged where her tap LANDED (capture phase, before any handler re-renders the card and detaches the
+   target), so a dialog she opens herself is painted ON TOP at once. A card the game posts by itself (no tap, or a tap outside) still waits. */
+const DQ_OWN=".kfoc,#popw,.kfoc-ov,.kfintro";
+function dqTapIn(t){try{return !!(t&&t.nodeType===1&&t.closest&&t.closest(DQ_OWN))}catch(e){return false}}
+try{["pointerdown","pointerup","click","keydown","touchstart"].forEach(k=>document.addEventListener(k,e=>{try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;
+  /* the queue as it was when her finger came DOWN (the view's cards act on pointerup, before the click event) */
+  if(k==="pointerdown"||k==="touchstart"||k==="keydown")DQ.preQ=new Set(Q);
+  /* a dialog her tap QUEUES without painting it (Q.push + render, e.g. «Cài đồ vào rương», «Cùng chơi», «Thách đấu»: the render net armed a
+     painter that then waited on the open view) is hers too: right after her tap inside the person view, a NEW card on top of the queue is
+     painted at once, over the view */
+  if((k==="click"||k==="pointerup"||k==="keydown")&&DQ.tapIn&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(Q.length&&!before.has(Q[0])&&dqQHidden()){DQ.mine=Q[0];DQ.stat.mineTap=(DQ.stat.mineTap||0)+1;showModal();return}
+    /* the act may queue its card a moment later (the view's own act path / a reaction line first): look a few more times (BAL.dayq.mineLook ms) */
+    if(++n<4)setTimeout(look,BAL.dayq.mineLook/3)}catch(x){console.error("dayq mine",x)}};setTimeout(look,0)}}catch(x){}},true))}catch(e){}
+function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;
+  if(t&&t.nodeType===1&&(a===document.body||a.contains(t)))return true;
+  /* the person view owns its docked card: her tap there (recorded when it landed, still the same event) is inside */
+  if(a&&a.classList&&a.classList.contains("kfoc")){if(ev===DQ.tapEv&&DQ.tapIn)return true;if(dqTapIn(t))return true}
+  return false}catch(e){return false}}
 /* the top card is the one already playing in the jdfv stage scene (its own repeated showModal) */
 function dqPlaying(){try{const D=window.DF;return !!(D&&Q[0]&&Q[0].dfSeen&&D.encM===Q[0]&&D.F)}catch(e){return false}}
 function dqActBlocks(){if(dqPlaying())return false;const a=dqActEl();return !!a&&!dqInside(a)}
 /* (c) an activity opened in the same tap as a card that was already painted (spend → card → mini-game): take the card back, unchosen */
-function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl())return;const D=window.DF,m=Q[0];let n=0;
+function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl()||(DQ.mine&&Q[0]===DQ.mine))return;const D=window.DF,m=Q[0];let n=0;
   if(D&&D.F&&D.encM===m&&m&&m.dfSeen&&!D.play){const F=D.F;m.dfSeen=0;D.encM=null;try{F.destroy()}catch(e){try{F.close()}catch(x){}}try{dfClosed(D.tk)}catch(e){}n=1}
   const M=$("modal");if(M&&!dqHidden(M)){DQ_HID.set.call(M,true);n=1}
   if(n){DQ.stat.pulled++;dqArmModal()}}catch(e){console.error("dayq pull",e)}}
@@ -98224,7 +98249,9 @@ function dqInstall(){
     guard: a click dispatched while her tap is still running (a nested .click()) is dropped — one tap = one turn */
  try{const n=$("next");if(n){const o=n.onclick;let tapIn=0;n.onclick=function(e){if(tapIn){DQ.stat.tapRe++;return}tapIn=1;try{return o?o.call(this,e):nextBuoi()}finally{tapIn=0}}}}catch(e){console.error("dayq next",e)}
  /* (b) outermost showModal: nothing painted over the title card / book */
- const sm=showModal;showModal=function(){if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
+ const sm=showModal;showModal=function(){/* DIALOG-ORDER: the card she opened herself from inside the activity is hers — dqPull never takes it back */
+  try{if(dqUiC()&&Q.length&&Q[0]!==DQ.mine){const a=dqActEl();if(a&&dqInside(a))DQ.mine=Q[0]}}catch(e){}
+  if(dqUiC()&&Q.length&&!DQ.user&&!(DQ.mine&&Q[0]===DQ.mine)&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}const r=sm.apply(this,arguments);try{if(dqUi()&&!Q.length)setTimeout(dqNextSync,0)}catch(e){}return r};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
@@ -100387,7 +100414,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0281bf7bcef6";window.CTM_BUILD=BUILD;
+const BUILD="6a69bff47ee5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
