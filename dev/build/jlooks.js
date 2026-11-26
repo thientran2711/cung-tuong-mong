@@ -161,7 +161,7 @@ for(const k in LK_ACT){const D=LK_ACT[k];
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){
  if(!LK_ACT[k]||LKG.busy||typeof slapNpcTier!=="function")return d0.apply(this,arguments);
  const v=rivals[i],a=ACT[k];if(!v||!a||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
- LKG.next=slapNpcTier(S);try{return d0.apply(this,arguments)}finally{LKG.next=0}}})();
+ LKG.next=slapNpcTier(S,v);try{return d0.apply(this,arguments)}finally{LKG.next=0}}})();
 /* an NPC throws at her: level rolled (slap rank table), she may dodge (one level less; nhẹ = miss) */
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k,extra){
  if(!LK_ACT[k]||t!==S||!a||a===S||LKG.npcDone)return r0.apply(this,arguments);

@@ -100,9 +100,9 @@ window.slapGame=slapGame;
 (function(){const d0=doAct;doAct=function(i,k){
  if(k!=="tat"||SLAPG.busy)return d0.apply(this,arguments);
  const v=rivals[i],a=ACT.tat;if(!v||!a||!can(BAL.actK)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
- SLAP.next=slapNpcTier(S);try{return d0.apply(this,arguments)}finally{SLAP.next=0}}})();
+ SLAP.next=slapNpcTier(S,v);try{return d0.apply(this,arguments)}finally{SLAP.next=0}}})();
 /* ---------- an NPC slaps her: tier rolled, she may dodge ---------- */
-function slapNpcTier(a){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw(a);/* AG-ALL-2b mg2: her game, one draw */const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
+function slapNpcTier(a,t){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw(a);/* AG-ALL-2b mg2: her game, one draw */const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(t||S)/* mg-trim (BIG rv 3): the slapper's rank gap to the TARGET (her own slap: to the rival) */:1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
 window.slapNpcTier=slapNpcTier;
 (function(){const r0=runAct;runAct=function(a,t,k,extra){
  if(k!=="tat"||t!==S||!a||a===S||SLAPG.npcDone)return r0.apply(this,arguments);
@@ -133,7 +133,7 @@ function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat
  /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand) — fair spread (OD 20/11 ~01:10Z): the table is the skilled human bot = the middle hand of the band;
     f = where her "tat" hand (+ art / upbringing lift, mgHandEff) sits from the band centre, −1 … +1 at ± 2 sd of the curve (mgBand far): a weaker hand lands the heavy blow less
     (what she misses falls to nhẹ), a stronger hand lands it more (taken from nhẹ) — symmetric */
- {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHandEff==="function"){const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,Bd.far),-1,1);
+ {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&typeof mgHandEff==="function")/* mg-trim (BIG rv 3): her hand too — her slap is the SAME draw as an NPC's (law 1) */{const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,Bd.far),-1,1);
   if(f<0){w[0]+=w[2]*-f;w[2]*=1+f}else{const m=w[0]*f;w[0]-=m;w[2]+=m}}}
  let r=Math.random()*(w[0]+w[1]+w[2]);for(let j=0;j<3;j++){if(r<w[j])return j+1;r-=w[j]}return 1}
 function slapNeOdds(t,a){const D=BAL.slap.dodgeOdds;return D[mgTier("ne",{occ:"ne",p:t,rank:typeof rkOf==="function"?rkOf(a):0}).tier]}

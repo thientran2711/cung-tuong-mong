@@ -7,7 +7,7 @@
    | Dung · Dung nghi  | Đi đứng giữ bát     | hold LEFT / RIGHT half of the board to keep the bowl upright; each floor mark shows which way the next step leans it |
    | Ngôn · Lời nói    | Nói đúng lúc        | (mg-balance-2, no words) wait for the speaker (and an upset one to calm), then HOLD «Thưa» and let go in the voice band of that listener |
    | Hạnh · Đức hạnh   | Làm phúc            | share the portions among the waiting people (+ / −) so that everyone gets enough of what they need  |
-   Level (S.vir[k] 0..5) only makes it EASIER (wider band, fewer wrong choices, no shortage), never harder; "Để trời định" = the ONE quick roll (KIT §13.6, BAL.skip): won = the progress of a BAL.skip.raw play, lost = none.
+   Level (S.vir[k] 0..5) only makes it EASIER (wider band, fewer wrong choices, no shortage), never harder; «Học nhanh» (mg-trim, was "Để trời định") = the ONE quick roll (KIT §13.6, BAL.skip): won = the progress of a BAL.skip.raw play, lost = none.
    Progress: raw → lesson points (self: 1 or 2; teacher: 2 or 3, the same 1..3 span as before); Công practice also lifts the quality of handmade goods (0..2, S.vpf).
    Boards: the existing painted study rooms (theu / mua / tho / ve -bg-hoc) + existing sprites; dedicated mg-td* paintings are listed in dev/PROGRESS_tuduc-mg.md. */
 const TD_BG={td_cong:"theu-bg-hoc",td_dung:"mua-bg-hoc",td_ngon:"tho-bg-hoc",td_hanh:"ve-bg-hoc"};

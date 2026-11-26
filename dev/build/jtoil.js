@@ -496,9 +496,9 @@ function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML=
  toilHUD({round:"2/4"});setBtn();raf=requestAnimationFrame(frame);KG82.run={stop:()=>{stop=true;cancelAnimationFrame(raf)}};
  TOIL.test={get I(){return I},get brows(){return brows},get cpts(){return cpts},get lips(){return lips},next,browQ,powQ,sonQ,setPowder:v=>{cpts.forEach(p=>p.c=cheeks.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<=c.r)?v:0);pdirty=true},strokes,dots,get lr(){return lr}}}
 function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
- const sk=toilSkill();let score=0,raw=0,bonus=0;
+ const sk=toilSkill();let score=0,raw=0,bonus=0,dem=0;
  /* mg-trim (owner OD 26/11 ~05:10Z): one-tap «Điểm trang» = ONE draw of the face table on her hand (toilRollOf: Sắc, Họa, Dung, her rank, colours, hoa điền) — the same table every NPC and the bot use */
- const quick=made==="quick",QR=quick?toilRollOf(toilRollSeed()):null,qok=quick?QR.look!=="vung":false;if(quick){score=QR.score}else if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
+ const quick=made==="quick",QR=quick?toilRollOf(toilRollSeed()):null,qok=quick?QR.look!=="vung":false;if(quick){score=QR.score}else if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);dem=Math.round((BAL.toil.rkDemand||0)*Math.max(0,+S.rank||0));/* mg-trim (BIG rv 2): the same rank demand as the one tap + every NPC face (toilNpcPlay, law 5) */score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus-dem))}
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
  /* diemtrang-score: vụng = a part that went wrong (or a low total); else by the total, Khuynh thành the most (makeup-lux: no overdone level) */
  const P0=st.parts,occK=st.occ.map(o=>o.k);
@@ -513,7 +513,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG8
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];/* the day's verdict: the ONE total (clothes + jewels + face + pet) */
  if(quick)rows.push(["Điểm trang",`theo Dung bậc ${sk.dung}, Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""}`],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`]);
  else if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],...(typeof P.hd==="number"&&st.hd?[["Dán hoa điền",`<span class="ef t">${Math.round(100*P.hd)}/100</span> · ${WD_ITEMS[st.hd.k]?WD_ITEMS[st.hd.k].n:""}`]]:[]),
-  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
+  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],...(dem?[["Phẩm vị đòi hỏi",kitChip("điểm",-dem,"r")]]:[]),["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
  else rows.push(["Dung nhan",`<span class="ef n">${TOIL_MK.moc}</span>`]);
  /* makeup-lux (OD L1639): the look's xa xỉ word + number (judged only at events, inside the ONE total, never this face alone) */
  rows.push(["Xa xỉ son phấn",toilLvChips(mk)]);/* the TOTAL is shown by MAIN's kit display (it reads luxTotal) */
