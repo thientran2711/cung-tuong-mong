@@ -192,7 +192,7 @@ function pcPanel(list,o){o=o||{};const me=list.find(x=>x.p===S);const rows=[];
 /* the hook (SELSCENE «Tin sắc phong» → here): re-house the listed people by the rule, show the panel, then() when it closes */
 window.phanCungEdict=function(o){o=o||{};const list=(o.list||[]).filter(x=>x&&x.p);const then=typeof o.then==="function"?o.then:()=>{};let done=false;const fin=()=>{if(done)return;done=true;try{then()}catch(e){console.error("phanCungEdict then",e)}};
  try{if(!S||!list.length){fin();return}
-  const pc0=S.palCer;for(const x of list){const p=x.p;if(!pbLive(p)||p.queen)continue;if(rkOf(p)<3){p.resHead=null;p.resHall=null;if(p!==S&&p.palLone){p.pal=null;p.palLone=0}}else if(p!==S)p.pal=null}
+  const pc0=S.palCer;for(const x of list){const p=x.p;if(!pbLive(p)||p.queen||p.coop/* her housing is her phone's (jpal palFix co-op rule) */)continue;if(rkOf(p)<3){p.resHead=null;p.resHall=null;if(p!==S&&p.palLone){p.pal=null;p.palLone=0}}else if(p!==S)p.pal=null}
   S.__pcBusy=1;try{palFix()}finally{S.__pcBusy=0}if(pc0!=null)S.palCer=pc0;pcMark();
   window.__pcN=(window.__pcN||0)+1;const m=pcPanel(list);m.onClose=fin;Q.unshift(m);try{showModal()}catch(e){}}catch(e){console.error("phanCungEdict",e);fin()}};
 /* later promotions that change her lodging: the same panel once (the Tần ban-cung ceremony, S.palCer, has its own scene) */
