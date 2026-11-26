@@ -1,4 +1,4 @@
-/* pace-speed (owner OD 26/11 ~19:10Z rulings (A)+(D); MAIN 164 rulings 22:25Z; owner 21:20Z rare Emperor natural death; owner 23:00Z monthly proportional rescale per rank group, Danh · Đức · Sủng):
+/* pace-speed (owner OD 26/11 ~19:10Z rulings (A)+(D); MAIN 164 rulings 22:25Z; owner 21:20Z rare Emperor natural death; owner 23:00Z monthly proportional rescale: Danh · Đức · Sủng per rank group, Sắc · Tài · Tâm cơ per palace):
    unit checks on the built page — BAL.promo.gap read by promoGap, the Hoàng hậu block easing (qBlockAt), the Emperor's own lifespan curve. (Bar-tied stat ceilings: dev/test/stat-pace.js.)
    usage: node dev/test/pace-speed.js <index.html> → ok / FAIL lines, last line PASS / FAIL n; exit 1 on FAIL */
 const {chromium}=require('playwright');const path=require('path');
@@ -22,9 +22,12 @@ const {chromium}=require('playwright');const path=require('path');
    ok(/xếp lại thứ bậc/.test(t),`one news line: «${t.trim()}»`);
    for(const v of others)v.duc=10;same[0].duc=Math.floor(T)-1;S.duc=20;const k0=S.duc;spScaleMonth();ok(S.duc===k0,"highest under T → nothing moves");
    for(let rr=0;rr<7;rr++)ok(spScaleT("sung",rr)>=RANKS[rr+1].s&&spScaleT("danh",rr)>=RANKS[rr+1].d,`rank ${rr}: T Sủng ${spScaleT("sung",rr).toFixed(1)} / Danh ${spScaleT("danh",rr).toFixed(1)} ≥ next bar ${RANKS[rr+1].s} / ${RANKS[rr+1].d}`);
-   ok(C.keys.join()==="danh,duc,sung","three stats rescale: Danh · Đức · Sủng (not Sắc / Tài / Tâm cơ)");
+   ok(C.keys.join()==="danh,duc,sung"&&C.pal.join()==="sac,tai,tamco","Danh · Đức · Sủng per rank group; Sắc · Tài · Tâm cơ per whole palace");
    ok([0,1,2,3,4,5,6,7].every(rr=>spScaleT("duc",rr)>=BAL.stp.floor.duc),`Đức T never under its highest gate ${BAL.stp.floor.duc}`);
-   S.sac=100;for(const v of others)v.sac=100;spScaleMonth();ok(S.sac===100,"Sắc never rescales");
+   {const L=consorts().filter(p=>!p.out&&p.alive!==false);for(const v of L)v.tai=40;const w=L.find(p=>p!==S);w.tai=100;S.tai=50;spScaleMonth();
+    ok(w.tai===C.tq&&S.tai===Math.round(50*C.tq/100)&&L.every(p=>p===w||p.tai<=w.tai),`Tài per whole palace: leader 100 → ${w.tai}, her 50 → ${S.tai} (T ${C.tq}, leader stays first)`);
+    for(const v of L)v.tai=40;S.tai=C.tq;spScaleMonth();ok(S.tai===C.tq,"Tài top at T → nothing")}
+   ok(C.tq>=80&&C.tq>=70&&C.tq>=60,`palace T ${C.tq} ≥ the highest absolute gates (Sắc 80 · Tài 70 · Tâm cơ 60)`);
    S.duc=99;same[0].duc=50;C.on=0;spScaleMonth();ok(S.duc===99,"switch off → nothing");C.on=1}
   /* Emperor curve */
   const D=BAL.mort.life.dice;ok(D.emp&&typeof D.emp==="object"&&D.emp.mean>D.adult.mean&&D.emp.sd>=D.adult.sd,`Emperor natural death rare + wide: ${JSON.stringify(D.emp)} (adult ${JSON.stringify(D.adult)})`);
