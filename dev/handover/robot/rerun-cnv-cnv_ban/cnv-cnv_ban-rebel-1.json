@@ -18,31 +18,37 @@
   "stuck": 0,
   "unstick": [],
   "slice": null,
-  "areaTaps": 483,
-  "infoTaps": 2634,
-  "dlgClose": 567,
-  "scrolls": 198,
+  "areaTaps": 501,
+  "infoTaps": 2790,
+  "dlgClose": 590,
+  "scrolls": 207,
   "taps0": 0,
   "resumed": [
    {
     "at": "2026-11-25T21:13:01.827Z",
     "buoi": 816,
     "from": "2026-11-25T21:11:50.892Z"
+   },
+   {
+    "at": "2026-11-25T23:13:05.260Z",
+    "buoi": 1631,
+    "from": "2026-11-25T23:12:12.289Z"
    }
-  ]
+  ],
+  "taps": 672
  },
  "life": {
-  "id": "HARNESS",
-  "type": "harness"
+  "id": "Xuất cung",
+  "type": "death",
+  "fate": "Xuất cung tuổi 30",
+  "death": true,
+  "age": 30,
+  "year": 13,
+  "rank": 0,
+  "text": "Khâu Như Yên 30 tuổi, Nội vụ phủ cho xuất cung theo lệ. Ngươi rời cung với 34 lạng bạc dành dụm."
  },
  "exitPick": null,
- "bugs": [
-  {
-   "type": "harness",
-   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
-   "n": 1
-  }
- ],
+ "bugs": [],
  "dead": [],
  "saves": [
   {
@@ -242,1621 +248,1633 @@
    "year": 12,
    "chars": 2340097,
    "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1631,
+   "year": null,
+   "chars": 2331329,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1681,
+   "year": 12,
+   "chars": 2403706,
+   "key": "hclh-save-v2-1"
   }
  ],
- "buoi": 1634,
- "steps": 20119,
+ "buoi": 1706,
+ "steps": 21020,
  "status": [
   "STATUS cnv-cnv_ban-rebel-1 · buổi 429 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0",
   "STATUS cnv-cnv_ban-rebel-1 · buổi 1222 · year 9 · rank 0 · bugs 0 · stuck 0 · dead buttons 0"
  ],
- "_loopAt": 1795648379204,
- "_snapAt": 1795648331455,
+ "_loopAt": 1795649157182,
+ "_snapAt": 1795649129429,
  "trace": [
   [
-   6785,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Sang ngày mới»"
-  ],
-  [
-   6788,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   6788,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6788,
+   333,
    ".kbk «Tổng lược» «Trang trước»"
   ],
   [
-   6789,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6789,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   6789,
+   334,
    ".kbk «Tổng lược» «Lui»"
   ],
   [
-   6791,
+   335,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 27»"
+  ],
+  [
+   336,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   338,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 27»"
+  ],
+  [
+   338,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   340,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 27»"
+  ],
+  [
+   340,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   343,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   343,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   345,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «10Đồng liêu»"
+  ],
+  [
+   345,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Thúy BìnhThiện cảm 0»"
+  ],
+  [
+   346,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Thúy Bình»"
+  ],
+  [
+   347,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
+  ],
+  [
+   347,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «nắng vàng»"
+  ],
+  [
+   348,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Biết chuyện của chủ1»"
+  ],
+  [
+   349,
+   ".dlg «Biết chuyện của chủ» «Lui»"
+  ],
+  [
+   350,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
+  ],
+  [
+   350,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   353,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
+  ],
+  [
+   355,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
+  ],
+  [
+   358,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   359,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   360,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   360,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   360,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   361,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   362,
    ".dlg «Tin trong cung buổi này» «Lui»"
   ],
   [
-   6792,
+   364,
+   "#kmrew «Thường»"
+  ],
+  [
+   364,
+   ".dlg «Lui»"
+  ],
+  [
+   365,
+   "#kmrew «Thường»"
+  ],
+  [
+   366,
+   ".dlg «Lui»"
+  ],
+  [
+   367,
+   "#kmrew «Thường»"
+  ],
+  [
+   368,
+   ".dlg «Lui»"
+  ],
+  [
+   369,
+   "#kmrew «Nhận»"
+  ],
+  [
+   369,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   370,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 28»"
+  ],
+  [
+   371,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   373,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 28»"
+  ],
+  [
+   373,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   375,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 28»"
+  ],
+  [
+   375,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   378,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   378,
+   ".dlg «Đại án vu cổ» «Lui»"
+  ],
+  [
+   380,
    ".dlg «Yến đầy tháng công chúa» «Lui»"
   ],
   [
-   6794,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «4Chí tôn»"
+   382,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 27»"
   ],
   [
-   6794,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Thái hậuBình thảnthiện cảm 0»"
-  ],
-  [
-   6795,
-   ".dlg «Lui»"
-  ],
-  [
-   6796,
-   ".dlg «Lui»"
-  ],
-  [
-   6798,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6798,
-   ".dlg «Nguy hiểm chung» «Nép mình theo hầu chủTốnChủ tin -2Được2 tuần: mưu »"
-  ],
-  [
-   6799,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Sang buổi»"
-  ],
-  [
-   6800,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «Sang buổi»"
-  ],
-  [
-   6800,
-   "page «Tích Cần viện · Ở đây còn 19 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6801,
+   382,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6803,
-   "page «Tích Cần viện · Ở đây còn 19 người.» «Nguy hiểm chung: 27»"
+   384,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «tuyết nhẹ»"
   ],
   [
-   6804,
+   385,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 27»"
+  ],
+  [
+   385,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6806,
-   "page «Tích Cần viện · Ở đây còn 19 người.» «Nguy hiểm chung: 27»"
+   388,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
   ],
   [
-   6806,
+   388,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
+  ],
+  [
+   389,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6808,
-   "page «Tích Cần viện · Ở đây còn 19 người.» «Sang buổi»"
+   391,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
   ],
   [
-   6809,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6809,
+   391,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6811,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Nguy hiểm chung: 27»"
+   393,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
   ],
   [
-   6812,
+   393,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6814,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Nguy hiểm chung: 27»"
+   396,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
   ],
   [
-   6814,
+   397,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   397,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6816,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Sang ngày mới»"
+   399,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
   ],
   [
-   6819,
+   399,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   401,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   402,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   404,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
+  ],
+  [
+   407,
    "#dawn «Tiếp theo»"
   ],
   [
-   6820,
+   407,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   6820,
+   407,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   6820,
+   408,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   6820,
+   408,
    ".kbk «Tổng lược» «Trang trước»"
   ],
   [
-   6821,
+   408,
    ".kbk «Tổng lược» «Lui»"
   ],
   [
-   6822,
+   410,
    ".dlg «Tin trong cung buổi này» «Lui»"
   ],
   [
-   6824,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Nguy hiểm chung: 26»"
+   412,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
   ],
   [
-   6824,
+   412,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6826,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Bạc42Sức100/100»"
+   414,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
   ],
   [
-   6827,
-   ".dlg «Bạc» «Lui»"
-  ],
-  [
-   6828,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Nguy hiểm chung: 26»"
-  ],
-  [
-   6829,
+   414,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6831,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Sang buổi»"
+   416,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
   ],
   [
-   6832,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «10Đồng liêu»"
-  ],
-  [
-   6832,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «Ngân HạnhThiện cảm 0»"
-  ],
-  [
-   6833,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «Chí tôn»"
-  ],
-  [
-   6834,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «Sang buổi»"
-  ],
-  [
-   6834,
-   "page «Tích Cần viện · Ở đây còn 19 người.» «Nguy hiểm chung: 26»"
-  ],
-  [
-   6835,
+   417,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6837,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «Lương tháng3 bạc»"
+   419,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
   ],
   [
-   6837,
-   ".dlg «Lương tháng ba bạc» «Lui»"
+   420,
+   ".dlg «Yến đầy tháng công chúa» «Lui»"
   ],
   [
-   6839,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «Nguy hiểm chung: 26»"
+   421,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Mục tiêu chương (có mới)»"
   ],
   [
-   6839,
-   ".dlg «Nguy hiểm chung» «Lui»"
+   422,
+   ".dlg «Chương 12 · Chim sẻ hóa phượng hoàng» «Danh hiệu 1/35»"
   ],
   [
-   6841,
-   "page «Tích Cần viện · Ở đây còn 18 người.» «Sang buổi»"
-  ],
-  [
-   6842,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Tài nghệ»"
-  ],
-  [
-   6843,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Sang ngày mới»"
-  ],
-  [
-   6847,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   6849,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6849,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6849,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   6850,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   6850,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   6852,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   6853,
-   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
-  ],
-  [
-   6853,
-   ".dlg «Lui»"
-  ],
-  [
-   6855,
-   "#kmrew «Nhận»"
-  ],
-  [
-   6857,
-   "DEAD Nhận"
-  ],
-  [
-   6858,
-   ".dlg «Sứ đoàn vào triều» «Lui»"
-  ],
-  [
-   6859,
-   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
-  ],
-  [
-   6861,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6861,
-   ".dlg «Nguy hiểm chung» «Nép mình theo hầu chủTốnChủ tin -2Được2 tuần: mưu »"
-  ],
-  [
-   6862,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6863,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6865,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6865,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6867,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Sang buổi»"
-  ],
-  [
-   6868,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Ngài để ý0»"
-  ],
-  [
-   6868,
-   ".dlg «Hoàng thượng để ý» «Lui»"
-  ],
-  [
-   6870,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6870,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6872,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6873,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6875,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Sang buổi»"
-  ],
-  [
-   6875,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6875,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6877,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6878,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6880,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6880,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6883,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Sang buổi»"
-  ],
-  [
-   6883,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 27»"
-  ],
-  [
-   6884,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6886,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Giao tình»"
-  ],
-  [
-   6886,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Tin báo: 19 tin mới»"
-  ],
-  [
-   6887,
-   ".dlg «Tin báo» «Xem lời nhờTốnkhôngĐượckhôngGhi chúchọn rồi xem kế»"
-  ],
-  [
-   6889,
-   ".dlg «Có khách đến chơi» «Tiếp qua loaRất vữngTốnSức -2Đượcngười ấy có thiện»"
-  ],
-  [
-   6890,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Sang ngày mới»"
-  ],
-  [
-   6893,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   6894,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6894,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6894,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   6894,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6895,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   6896,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   6898,
-   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
-  ],
-  [
-   6900,
-   ".dlg «Sứ đoàn vào triều» «Lui»"
-  ],
-  [
-   6901,
-   ".dlg «Lễ Phật đản» «Lui»"
-  ],
-  [
-   6903,
-   "page «Tích Cần viện · Ở đây còn 27 người.» «Nguy hiểm chung: 32»"
-  ],
-  [
-   6903,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6905,
-   "page «Tích Cần viện · Ở đây còn 27 người.» «Nguy hiểm chung: 32»"
-  ],
-  [
-   6906,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6908,
-   "page «Tích Cần viện · Ở đây còn 27 người.» «Nguy hiểm chung: 32»"
-  ],
-  [
-   6908,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6910,
-   "page «Tích Cần viện · Ở đây còn 27 người.» «Sang buổi»"
-  ],
-  [
-   6911,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Tâm trạngBình thản-1»"
-  ],
-  [
-   6911,
-   ".dlg «Tâm trạng · Ta» «Lui»"
-  ],
-  [
-   6913,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Sang buổi»"
-  ],
-  [
-   6913,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 31»"
-  ],
-  [
-   6914,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6916,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 31»"
-  ],
-  [
-   6917,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6919,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 31»"
-  ],
-  [
-   6919,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   6921,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Sang buổi»"
-  ],
-  [
-   6922,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Sang ngày mới»"
-  ],
-  [
-   6925,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   6926,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6926,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   6926,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   6927,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   6927,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   6929,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   6930,
-   ".dlg «Lễ Phật đản» «Lui»"
-  ],
-  [
-   6932,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Mệnh truyện»"
-  ],
-  [
-   6932,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Hậu cung»"
-  ],
-  [
-   6933,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Thái hậu»"
-  ],
-  [
-   6934,
-   "page «Tích Cần viện · Hoàng hậu Điền Tương Quân đi vắng,» «Sang buổi»"
-  ],
-  [
-   6935,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Sang buổi»"
-  ],
-  [
-   6935,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Nguy hiểm chung: 31»"
-  ],
-  [
-   6936,
-   ".dlg «Nguy hiểm chung» «Nép mình theo hầu chủTốnChủ tin -2Được2 tuần: mưu »"
-  ],
-  [
-   6937,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Mục tiêu chương»"
-  ],
-  [
-   6937,
-   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
-  ],
-  [
-   6938,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
-  ],
-  [
-   6938,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6939,
+   422,
    ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
   ],
   [
-   6939,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: khá thườn»"
-  ],
-  [
-   6940,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6941,
-   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
-  ],
-  [
-   6941,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
-  ],
-  [
-   6942,
-   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcNgủ dậy Sức +2»"
-  ],
-  [
-   6942,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6943,
-   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
-  ],
-  [
-   6943,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
-  ],
-  [
-   6944,
-   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
-  ],
-  [
-   6945,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: khá thườn»"
-  ],
-  [
-   6945,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6946,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6946,
-   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
-  ],
-  [
-   6947,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
-  ],
-  [
-   6947,
-   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
-  ],
-  [
-   6948,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sức · đang lấyTốnkhôngĐượcNgủ dậy Sức +2»"
-  ],
-  [
-   6949,
-   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcNgủ dậy Sức +2»"
-  ],
-  [
-   6949,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6950,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6950,
-   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
-  ],
-  [
-   6950,
-   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
-  ],
-  [
-   6951,
-   ".dlg «Đeo «Diệu thủ hồi xuân»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: khá thườn»"
-  ],
-  [
-   6951,
-   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
-  ],
-  [
-   6952,
+   423,
    ".dlg «Đeo «Diệu thủ hồi xuân»» «Học mau tiến · đang lấyTốnkhôngĐượcTự học tài nghệ»"
   ],
   [
-   6953,
+   423,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   423,
    ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
   ],
   [
-   6953,
+   424,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   424,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
+  ],
+  [
+   425,
    ".dlg «Đeo «Diệu thủ hồi xuân»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
   ],
   [
-   6954,
+   425,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   425,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
+  ],
+  [
+   426,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: khá thườn»"
+  ],
+  [
+   426,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
+  ],
+  [
+   427,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   427,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   427,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   428,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   428,
+   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
+  ],
+  [
+   429,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   429,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
+  ],
+  [
+   429,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sức · đang lấyTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   430,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
+  ],
+  [
+   430,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   431,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   432,
+   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
+  ],
+  [
+   432,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: khá thườn»"
+  ],
+  [
+   432,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   433,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Diệu thủ hồi xuân»TốnkhôngĐượckhô»"
+  ],
+  [
+   433,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   434,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtTự học tài nghệ:»"
+  ],
+  [
+   434,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   434,
+   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
+  ],
+  [
+   435,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   435,
    ".dlg «Danh hiệu» «Lui»"
   ],
   [
-   6956,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Nguy hiểm chung: 31»"
+   437,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
   ],
   [
-   6957,
+   438,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6959,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Sang buổi»"
+   440,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
   ],
   [
-   6959,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Giao tình»"
+   440,
+   ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6959,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Tư trang»"
+   443,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
   ],
   [
-   6960,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Bạc45Sức100/100»"
+   443,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
   ],
   [
-   6960,
-   ".dlg «Bạc» «Lui»"
+   444,
+   ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6962,
-   "page «Tích Cần viện · Ở đây còn 20 người.» «Sang ngày mới»"
+   446,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
   ],
   [
-   6966,
+   446,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   448,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
+  ],
+  [
+   449,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   451,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
+  ],
+  [
+   452,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   452,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   454,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   454,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   456,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   457,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   459,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
+  ],
+  [
+   462,
    "#dawn «Tiếp theo»"
   ],
   [
-   6967,
+   463,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   6967,
+   463,
    ".kbk «Tổng lược» «Trang trước»"
   ],
   [
-   6968,
+   463,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   6968,
+   464,
    ".kbk «Tổng lược» «Trang trước»"
   ],
   [
-   6968,
+   464,
    ".kbk «Tổng lược» «Lui»"
   ],
   [
-   6970,
+   465,
    ".dlg «Tin trong cung buổi này» «Lui»"
   ],
   [
-   6972,
+   467,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
+  ],
+  [
+   468,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   470,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   470,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ tam đẳng» «Lui»"
+  ],
+  [
+   472,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «3Chí tôn»"
+  ],
+  [
+   472,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   473,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   474,
+   ".dlg «Kẻ hầu» «Làm cật lực, không kêu caRất vữngTốnSức -6Đượcchủ »"
+  ],
+  [
+   474,
+   ".dlg «Đại án vu cổ» «Lui»"
+  ],
+  [
+   476,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
+  ],
+  [
+   476,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   478,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
+  ],
+  [
+   479,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   481,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
+  ],
+  [
+   481,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   484,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
+  ],
+  [
+   484,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 26»"
+  ],
+  [
+   485,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   487,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Mệnh truyện»"
+  ],
+  [
+   487,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Hoàng tự»"
+  ],
+  [
+   488,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
+  ],
+  [
+   488,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 26»"
+  ],
+  [
+   489,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   491,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
+  ],
+  [
+   494,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   497,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   498,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   500,
    "#kmrew «Thường»"
   ],
   [
-   6972,
+   500,
    ".dlg «Lui»"
   ],
   [
-   6973,
-   "#kmrew «Thường»"
-  ],
-  [
-   6974,
-   ".dlg «Lui»"
-  ],
-  [
-   6975,
-   "#kmrew «Thường»"
-  ],
-  [
-   6975,
-   ".dlg «Lui»"
-  ],
-  [
-   6977,
-   "#kmrew «Thường»"
-  ],
-  [
-   6977,
-   ".dlg «Lui»"
-  ],
-  [
-   6979,
+   501,
    "#kmrew «Nhận»"
   ],
   [
-   6981,
-   "DEAD ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ"
+   507,
+   "DEAD Nguy hiểm chung: 27"
   ],
   [
-   6981,
-   ".dlg «Đại án ngoại thích» «Lui»"
+   508,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tin báo: 20 tin mới»"
   ],
   [
-   6983,
-   "page «Tích Cần viện · Ở đây còn 24 người.» «Nguy hiểm chung: 31»"
+   508,
+   ".dlg «Tin báo» «Lui»"
   ],
   [
-   6984,
-   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcThường tại Phùng Cố T»"
+   510,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
   ],
   [
-   6984,
-   ".dlg «Biếu quà làm lành» «Lễ bạcTốnBạc -48ĐượcThường tại Phùng Cố Thúy Mặc b»"
+   511,
+   ".dlg «Đại lễ tế Giao» «Lui»"
   ],
   [
-   6985,
-   "page «Tích Cần viện · Ở đây còn 24 người.» «Nguy hiểm chung: 29»"
+   513,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
   ],
   [
-   6986,
+   513,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
+  ],
+  [
+   514,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6988,
-   "page «Tích Cần viện · Ở đây còn 24 người.» «Dư đồ»"
+   516,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
   ],
   [
-   6988,
-   ".mapsc «Sang buổi»"
-  ],
-  [
-   6990,
-   ".dlg «Có người đến» «Chia sẻ bí mậtRất vữngTốnkhôngĐượcngười ấy có thiệ»"
-  ],
-  [
-   6992,
-   ".mapsc «Nguy hiểm chung: 28»"
-  ],
-  [
-   6992,
+   516,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6994,
-   ".mapsc «Sang buổi»"
+   518,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
   ],
   [
-   6995,
-   ".mapsc «Mệnh truyện»"
-  ],
-  [
-   6996,
-   "page «Tích Cần viện · Ở đây còn 24 người.» «Sang buổi»"
-  ],
-  [
-   6996,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 28»"
-  ],
-  [
-   6997,
+   519,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   6999,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 28»"
+   521,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
   ],
   [
-   6999,
+   522,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   522,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7001,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Phúc ấm đầy nhàHoàng hậuĐiền Tương Quân»"
+   524,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
   ],
   [
-   7001,
-   ".kfoc «Hầu bên cạnh chủ · Tùy duyên · Tốn 1 khắc»"
+   524,
+   ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7001,
-   ".kfoc «Sẵn sàngbắt đầu chơi»"
+   527,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Hoàng tự»"
   ],
   [
-   7002,
-   ".kfoc «Quay lại»"
+   527,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
   ],
   [
-   7003,
-   ".kfoc «Hầu bên cạnh chủ · Tùy duyên · Tốn 1 khắc»"
-  ],
-  [
-   7003,
-   ".kfoc «Sẵn sàngbắt đầu chơi»"
-  ],
-  [
-   7004,
-   ".kfoc «Quay lại»"
-  ],
-  [
-   7005,
-   ".kfoc «Hầu bên cạnh chủ · Tùy duyên · Tốn 1 khắc»"
-  ],
-  [
-   7005,
-   ".kfoc «Sẵn sàngbắt đầu chơi»"
-  ],
-  [
-   7006,
-   ".kfoc «Quay lại»"
-  ],
-  [
-   7007,
-   ".kfoc «Hầu bên cạnh chủ · Tùy duyên · Tốn 1 khắc»"
-  ],
-  [
-   7007,
-   ".kfoc «Sẵn sàngbắt đầu chơi»"
-  ],
-  [
-   7008,
-   ".kfoc «Quay lại»"
-  ],
-  [
-   7009,
-   ".kfoc «Lui»"
-  ],
-  [
-   7011,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Sang ngày mới»"
-  ],
-  [
-   7014,
+   530,
    "#dawn «Tiếp theo»"
   ],
   [
-   7015,
+   530,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7015,
+   530,
    ".kbk «Tổng lược» «Trang trước»"
   ],
   [
-   7015,
+   531,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7016,
-   ".kbk «Tổng lược» «Trang trước»"
+   531,
+   ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7016,
+   531,
    ".kbk «Tổng lược» «Lui»"
   ],
   [
-   7018,
+   533,
    ".dlg «Tin trong cung buổi này» «Lui»"
   ],
   [
-   7019,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 28»"
+   535,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
   ],
   [
-   7020,
-   ".dlg «Nguy hiểm chung» «Nép mình theo hầu chủTốnChủ tin -2Được2 tuần: mưu »"
-  ],
-  [
-   7021,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Sang buổi»"
-  ],
-  [
-   7021,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Buổi trưa, còn 4 khắc»"
-  ],
-  [
-   7021,
-   ".dlg «trưa · còn» «Lui»"
-  ],
-  [
-   7023,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Sang buổi»"
-  ],
-  [
-   7024,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 30»"
-  ],
-  [
-   7024,
+   535,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7026,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 30»"
+   537,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
   ],
   [
-   7026,
+   537,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7028,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Giao tình»"
+   539,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Mục tiêu chương (có mới)»"
   ],
   [
-   7029,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Sang buổi»"
+   540,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
   ],
   [
-   7029,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 29»"
+   540,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
   ],
   [
-   7030,
+   540,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   541,
+   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
+  ],
+  [
+   541,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: khá thườn»"
+  ],
+  [
+   541,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtTự học tài nghệ:»"
+  ],
+  [
+   542,
+   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
+  ],
+  [
+   542,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   543,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   543,
+   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
+  ],
+  [
+   543,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   544,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   544,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcNgủ dậy Sức +2»"
+  ],
+  [
+   545,
+   ".dlg «Danh hiệu» «Đeo «Diệu thủ hồi xuân»TốnkhôngĐượckhôngGhi chúchọ»"
+  ],
+  [
+   545,
+   ".dlg «Đeo «Diệu thủ hồi xuân»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   545,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   548,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   549,
+   ".dlg «Đại lễ tế Giao» «Lui»"
+  ],
+  [
+   551,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
+  ],
+  [
+   551,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7032,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Sang ngày mới»"
+   553,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
   ],
   [
-   7035,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   7035,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7035,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7036,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7036,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7036,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   7038,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   7040,
-   ".dlg «Đại án ngoại thích» «Lui»"
-  ],
-  [
-   7041,
-   "page «Tích Cần viện · Ở đây còn 26 người.» «Nguy hiểm chung: 29»"
-  ],
-  [
-   7042,
+   553,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7044,
-   "page «Tích Cần viện · Ở đây còn 26 người.» «Nguy hiểm chung: 29»"
+   555,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 26»"
   ],
   [
-   7044,
+   556,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7046,
-   "page «Tích Cần viện · Ở đây còn 26 người.» «Sang buổi»"
+   558,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
   ],
   [
-   7047,
-   "page «Tích Cần viện · Ở đây còn 23 người.» «Nguy hiểm chung: 29»"
+   559,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Giao tình»"
   ],
   [
-   7047,
-   ".dlg «Nguy hiểm chung» «Lui»"
+   559,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Tâm trạngBình thản-4»"
   ],
   [
-   7049,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 29»"
-  ],
-  [
-   7050,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7052,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Buổi trưa, còn 4 khắc»"
-  ],
-  [
-   7052,
-   ".dlg «trưa · còn» «Lui»"
-  ],
-  [
-   7054,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Sang buổi»"
-  ],
-  [
-   7055,
-   "page «Tích Cần viện · Ở đây còn 22 người.» «Nguy hiểm chung: 30»"
-  ],
-  [
-   7055,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7057,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 30»"
-  ],
-  [
-   7058,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7060,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 30»"
-  ],
-  [
-   7060,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7062,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Sang buổi»"
-  ],
-  [
-   7063,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 30»"
-  ],
-  [
-   7064,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7066,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 30»"
-  ],
-  [
-   7066,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7068,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Nguy hiểm chung: 30»"
-  ],
-  [
-   7069,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7071,
-   "page «Tích Cần viện · Ở đây còn 21 người.» «Sang ngày mới»"
-  ],
-  [
-   7075,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   7076,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7076,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   7077,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7077,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   7077,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   7079,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   7080,
-   "#kmrew «Nhận»"
-  ],
-  [
-   7081,
-   "#kmrew «Nhận»"
-  ],
-  [
-   7081,
-   "page «Tích Cần viện · Ở đây còn 10 người.» «Dư đồ»"
-  ],
-  [
-   7081,
-   ".mapsc «Công lao10/10»"
-  ],
-  [
-   7082,
-   ".dlg «Công lao 10/» «Lui»"
-  ],
-  [
-   7084,
-   ".mapsc «Nguy hiểm chung: 30»"
-  ],
-  [
-   7084,
-   ".dlg «Nguy hiểm chung» «Nép mình theo hầu chủTốnChủ tin -2Được2 tuần: mưu »"
-  ],
-  [
-   7085,
-   ".mapsc «Sang buổi»"
-  ],
-  [
-   7086,
-   ".mapsc «Nguy hiểm chung: 30»"
-  ],
-  [
-   7086,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7088,
-   ".mapsc «Sang buổi»"
-  ],
-  [
-   7089,
-   ".mapsc «Nguy hiểm chung: 30»"
-  ],
-  [
-   7090,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7092,
-   ".mapsc «Nguy hiểm chung: 30»"
-  ],
-  [
-   7092,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7094,
-   ".mapsc «Nguy hiểm chung: 30»"
-  ],
-  [
-   7094,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7097,
-   ".mapsc «Sang buổi»"
-  ],
-  [
-   7097,
-   ".mapsc «Dư đồ»"
-  ],
-  [
-   7098,
-   ".mapsc «Nguy hiểm chung: 30»"
-  ],
-  [
-   7098,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7100,
-   ".mapsc «Nguy hiểm chung: 30»"
-  ],
-  [
-   7101,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7103,
-   ".mapsc «Sang ngày mới»"
-  ],
-  [
-   7106,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   7107,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7107,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7107,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7108,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7108,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   7110,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   7111,
-   ".mapsc «Nguy hiểm chung: 29»"
-  ],
-  [
-   7112,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7114,
-   ".mapsc «Nguy hiểm chung: 29»"
-  ],
-  [
-   7114,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7116,
-   ".mapsc «Nguy hiểm chung: 29»"
-  ],
-  [
-   7116,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7119,
-   ".mapsc «Sang buổi»"
-  ],
-  [
-   7119,
-   ".mapsc «Nguy hiểm chung: 29»"
-  ],
-  [
-   7120,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7122,
-   ".mapsc «Nguy hiểm chung: 29»"
-  ],
-  [
-   7122,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7124,
-   ".mapsc «Lương tháng3 bạc»"
-  ],
-  [
-   7124,
-   ".dlg «Lương tháng ba bạc» «Lui»"
-  ],
-  [
-   7126,
-   ".mapsc «Sang buổi»"
-  ],
-  [
-   7127,
-   ".mapsc «Xét phẩm: thiếu 2»"
-  ],
-  [
-   7127,
-   ".dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»"
-  ],
-  [
-   7129,
-   ".mapsc «Nguy hiểm chung: 29»"
-  ],
-  [
-   7129,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7131,
-   ".mapsc «Nguy hiểm chung: 29»"
-  ],
-  [
-   7132,
-   ".dlg «Nguy hiểm chung» «Lui»"
-  ],
-  [
-   7134,
-   ".mapsc «Sang buổi»"
-  ],
-  [
-   7134,
-   ".mapsc «Tâm trạngBình thản-7»"
-  ],
-  [
-   7135,
+   559,
    ".dlg «Tâm trạng · Ta» «Lui»"
   ],
   [
-   7136,
-   ".mapsc «Nguy hiểm chung: 29»"
+   561,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Bạc2Sức100/100»"
   ],
   [
-   7137,
+   561,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   563,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
+  ],
+  [
+   564,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 26»"
+  ],
+  [
+   564,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7139,
-   ".mapsc «Nguy hiểm chung: 29»"
+   566,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Bạc2Sức100/100»"
   ],
   [
-   7139,
-   ".dlg «Nguy hiểm chung» «Lui»"
+   567,
+   ".dlg «Bạc» «Lui»"
   ],
   [
-   7141,
-   ".mapsc «Sang ngày mới»"
+   568,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Lương tháng1 bạc»"
   ],
   [
-   7145,
+   569,
+   ".dlg «Lương tháng giêng bạc» «Lui»"
+  ],
+  [
+   570,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
+  ],
+  [
+   573,
    "#dawn «Tiếp theo»"
   ],
   [
-   7146,
+   574,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7146,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   7146,
+   574,
    ".kbk «Tổng lược» «Trang trước»"
   ],
   [
-   7146,
+   575,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7147,
+   575,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   575,
    ".kbk «Tổng lược» «Lui»"
   ],
   [
-   7148,
+   577,
    ".dlg «Tin trong cung buổi này» «Lui»"
   ],
   [
-   7150,
-   ".mapsc «Sang buổi»"
+   579,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
   ],
   [
-   7151,
-   ".mapsc «Nguy hiểm chung: 28»"
+   579,
+   ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7151,
+   581,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
+  ],
+  [
+   581,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   583,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 26»"
+  ],
+  [
+   584,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   586,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   587,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Tâm trạngBình thản-1»"
+  ],
+  [
+   587,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   589,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Tư trang»"
+  ],
+  [
+   589,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   589,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   591,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
+  ],
+  [
+   592,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 26»"
+  ],
+  [
+   592,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   594,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 26»"
+  ],
+  [
+   595,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   597,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 26»"
+  ],
+  [
+   597,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   600,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
+  ],
+  [
+   600,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 26»"
+  ],
+  [
+   600,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   602,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Tâm trạngBình thản-1»"
+  ],
+  [
+   603,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   604,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 26»"
+  ],
+  [
+   605,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   607,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
+  ],
+  [
+   610,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   611,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   612,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   612,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   612,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   612,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   614,
+   "#kmrew «Nhận»"
+  ],
+  [
+   614,
+   "#kmrew «Nhận»"
+  ],
+  [
+   615,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tin báo: 17 tin mới»"
+  ],
+  [
+   616,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   617,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 27»"
+  ],
+  [
+   618,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   620,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 27»"
+  ],
+  [
+   620,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   623,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   623,
+   ".dlg «Cấm cung giới nghiêm» «Lui»"
+  ],
+  [
+   625,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 27»"
+  ],
+  [
+   625,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   627,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   628,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ tam đẳng» «Lui»"
+  ],
+  [
+   629,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Nguy hiểm chung: 27»"
+  ],
+  [
+   630,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   632,
+   "page «Tân Giả khố · Sang buổi trưa · ta vẫn ở Tân Giả kh» «Sang buổi»"
+  ],
+  [
+   632,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Tin báo: 2 tin mới»"
+  ],
+  [
+   633,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   634,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
+  ],
+  [
+   635,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   637,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Nguy hiểm chung: 27»"
+  ],
+  [
+   637,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   640,
+   "page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sang buổi»"
+  ],
+  [
+   641,
+   ".dlg «Kẻ hầu» «Tâu thật với Hoàng quý phi Điền Tương QuânCó cơTốn»"
+  ],
+  [
+   641,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Bạc3Sức97/100»"
+  ],
+  [
+   642,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   643,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   644,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   646,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Nguy hiểm chung: 27»"
+  ],
+  [
+   646,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   649,
+   "page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sang ngày mới»"
+  ],
+  [
+   652,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   652,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   652,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   653,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   653,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   653,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   655,
+   "#kmrew «ThườngVải bôngMay áo: áo lụa thêu hoa nhỏ (Y phục,»"
+  ],
+  [
+   655,
+   ".dlg «Lui»"
+  ],
+  [
+   656,
+   "#kmrew «Thường»"
+  ],
+  [
+   657,
+   ".dlg «Lui»"
+  ],
+  [
+   658,
+   "#kmrew «Thường»"
+  ],
+  [
+   658,
+   ".dlg «Lui»"
+  ],
+  [
+   660,
+   "#kmrew «Nhận»"
+  ],
+  [
+   660,
+   "#kmrew «ThườngHộp điểm tâmĂn: Sức +3 · tặng, chia kẻ hầu»"
+  ],
+  [
+   661,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang buổi»"
+  ],
+  [
+   662,
+   ".dlg «Đổi chủ» «Lui»"
+  ],
+  [
+   663,
+   "page «Tích Cần viện · Ở đây còn 12 người.» «Nguy hiểm chung: 26»"
+  ],
+  [
+   664,
    ".dlg «Nguy hiểm chung» «Nép mình theo hầu chủTốnChủ tin -2Được2 tuần: mưu »"
   ],
   [
-   7152,
-   ".mapsc «Sang buổi»"
+   665,
+   "page «Tích Cần viện · Ở đây còn 12 người.» «Nguy hiểm chung: 26»"
   ],
   [
-   7154,
-   ".dlg «Có người đến» «Hỏi han sức khỏeRất vữngTốnkhôngĐượcngười ấy có th»"
-  ],
-  [
-   7155,
-   ".mapsc «Nguy hiểm chung: 28»"
-  ],
-  [
-   7156,
+   665,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7158,
-   ".mapsc «Nguy hiểm chung: 28»"
+   667,
+   "page «Tích Cần viện · Ở đây còn 12 người.» «Tai mắt0»"
   ],
   [
-   7158,
+   667,
+   ".dlg «mat» «Lui»"
+  ],
+  [
+   670,
+   "page «Tích Cần viện · Ở đây còn 12 người.» «Sang buổi»"
+  ],
+  [
+   671,
+   ".dlg «Có người đến» «Chia sẻ bí mậtRất vữngTốnkhôngĐượcngười ấy có thiệ»"
+  ],
+  [
+   672,
+   "page «Tích Cần viện · Ở đây còn 16 người.» «Nguy hiểm chung: 27»"
+  ],
+  [
+   672,
    ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7160,
-   ".mapsc «Công lao10/10»"
+   674,
+   "page «Tích Cần viện · Ở đây còn 16 người.» «Nguy hiểm chung: 27»"
   ],
   [
-   7161,
-   ".dlg «Công lao 10/» «Lui»"
+   675,
+   ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7162,
-   ".mapsc «Sang buổi»"
+   677,
+   "page «Tích Cần viện · Ở đây còn 16 người.» «Nguy hiểm chung: 27»"
   ],
   [
-   7164,
-   ".mapsc «Sang ngày mới»"
+   677,
+   ".dlg «Nguy hiểm chung» «Lui»"
   ],
   [
-   7168,
+   679,
+   "page «Tích Cần viện · Ở đây còn 16 người.» «Sang buổi»"
+  ],
+  [
+   680,
+   "page «Tích Cần viện · Ở đây còn 12 người.» «Nguy hiểm chung: 27»"
+  ],
+  [
+   680,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   682,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Nguy hiểm chung: 27»"
+  ],
+  [
+   682,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   684,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Hành sự»"
+  ],
+  [
+   685,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang ngày mới»"
+  ],
+  [
+   688,
    "#dawn «Tiếp theo»"
   ],
   [
-   7169,
+   688,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7169,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   7170,
+   689,
    ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7170,
-   ".kbk «Tổng lược» «Trang trước»"
+   689,
+   ".kbk «Tổng lược» «Trang sau»"
   ],
   [
-   7170,
+   689,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   689,
    ".kbk «Tổng lược» «Lui»"
   ],
   [
-   7172,
+   691,
    ".dlg «Tin trong cung buổi này» «Lui»"
   ],
   [
-   7173,
-   "#kmrew «Thường»"
+   693,
+   "page «Tích Cần viện · Đức phi Đoan Mộc Bích Lạc đi vắng,» «Sang buổi»"
   ],
   [
-   7174,
-   ".dlg «Lui»"
+   744,
+   "DEAD Hậu cung"
   ],
   [
-   7175,
-   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+   744,
+   ".kfoc «Tiếp ▸»"
   ],
   [
-   7175,
-   ".dlg «Lui»"
+   745,
+   ".kfoc «Nhận bạc, làm tai mắt»"
   ],
   [
-   7177,
-   "#kmrew «Thường»"
+   745,
+   ".dlg «Cấm cung giới nghiêm» «Lui»"
   ],
   [
-   7177,
-   ".dlg «Lui»"
+   747,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7179,
-   "#kmrew «Thường»"
+   747,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7179,
-   ".dlg «Lui»"
+   747,
+   ".kfoc «Giao thiệp 1/1»"
   ],
   [
-   7180,
-   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+   748,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7181,
-   ".dlg «Lui»"
+   748,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7182,
-   "#kmrew «Nhận»"
+   748,
+   ".kfoc «Giao thiệp 1/1»"
   ],
   [
-   7183,
-   "#kmrew «Nhận»"
+   748,
+   ".kfoc «Giao thiệp 1/1»"
   ],
   [
-   7187,
-   ".mapsc «Thái y viện9 bóng · 2 khắc»"
+   749,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7193,
-   "DEAD Giao tình"
+   749,
+   ".kfoc «Giao thiệp 1/1»"
   ],
   [
-   7194,
-   ".dlg «Kỳ ngộ» «Dặn nàng ta có chuyện lạ thì báo taRất vữngTốn1 kh»"
+   749,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7194,
-   ".dlg «Kỳ ngộ» «Lui»"
+   749,
+   ".kfoc «Giao thiệp 1/1»"
   ],
   [
-   7196,
-   ".dlg «Nhờ thái giám mua đồ» «Nước bào hoaTốnBạc -3ĐượcDầu chải tóc·Chải tóc vấn»"
+   750,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7197,
-   ".kmov «Nhận»"
+   750,
+   ".kfoc «Lễ nghi 1/1»"
   ],
   [
-   7197,
-   ".kmov «Nhận»"
+   750,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   750,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   751,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   752,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   752,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   753,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   754,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   754,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   756,
+   ".kfoc «Lui»"
+  ],
+  [
+   757,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   758,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»"
+  ],
+  [
+   759,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Nguy hiểm chung: 26»"
+  ],
+  [
+   760,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   762,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang buổi»"
+  ],
+  [
+   763,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Tin báo: 10 tin mới»"
+  ],
+  [
+   763,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   765,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Nguy hiểm chung: 26»"
+  ],
+  [
+   765,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   767,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Nguy hiểm chung: 26»"
+  ],
+  [
+   768,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   770,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»"
+  ],
+  [
+   771,
+   "page «Tích Cần viện · Ở đây còn 12 người.» «Hậu cung»"
+  ],
+  [
+   772,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
   ]
  ],
  "_started": true,
- "_ckAt": 1795648332094,
- "_ckB": 1631,
+ "_ckAt": 1795649155534,
+ "_ckB": 1706,
  "rss": [
   {
    "buoi": 1,
@@ -3819,6 +3837,96 @@
    "y": 12,
    "totalMB": 3994,
    "rendererMB": 3216
+  },
+  {
+   "buoi": 1636,
+   "y": 12,
+   "totalMB": 1987,
+   "rendererMB": 1310
+  },
+  {
+   "buoi": 1641,
+   "y": 12,
+   "totalMB": 2133,
+   "rendererMB": 1444
+  },
+  {
+   "buoi": 1646,
+   "y": 12,
+   "totalMB": 2250,
+   "rendererMB": 1563
+  },
+  {
+   "buoi": 1651,
+   "y": 12,
+   "totalMB": 2307,
+   "rendererMB": 1589
+  },
+  {
+   "buoi": 1656,
+   "y": 12,
+   "totalMB": 2273,
+   "rendererMB": 1573
+  },
+  {
+   "buoi": 1661,
+   "y": 12,
+   "totalMB": 2455,
+   "rendererMB": 1772
+  },
+  {
+   "buoi": 1666,
+   "y": 12,
+   "totalMB": 2334,
+   "rendererMB": 1641
+  },
+  {
+   "buoi": 1671,
+   "y": 12,
+   "totalMB": 2330,
+   "rendererMB": 1630
+  },
+  {
+   "buoi": 1676,
+   "y": 12,
+   "totalMB": 2374,
+   "rendererMB": 1668
+  },
+  {
+   "buoi": 1681,
+   "y": 12,
+   "totalMB": 2340,
+   "rendererMB": 1651
+  },
+  {
+   "buoi": 1686,
+   "y": 12,
+   "totalMB": 2376,
+   "rendererMB": 1684
+  },
+  {
+   "buoi": 1691,
+   "y": 12,
+   "totalMB": 2409,
+   "rendererMB": 1710
+  },
+  {
+   "buoi": 1696,
+   "y": 12,
+   "totalMB": 2376,
+   "rendererMB": 1685
+  },
+  {
+   "buoi": 1701,
+   "y": 12,
+   "totalMB": 2429,
+   "rendererMB": 1729
+  },
+  {
+   "buoi": 1706,
+   "y": 12,
+   "totalMB": 2292,
+   "rendererMB": 1589
   }
  ],
  "cnvExit": [
@@ -3830,5 +3938,8 @@
     "Xin ở lại"
    ]
   }
- ]
+ ],
+ "t": {
+  "total": 772145
+ }
 }

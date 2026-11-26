@@ -1,12 +1,10 @@
-# cnv-cnv_ban-rebel-1 (real-tap harness 90a5b0f5, fold)
+# cnv-cnv_ban-rebel-1 (real-tap harness a4e1eca8, fold)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-rebel-1 | HARNESS |  | 1634 |  | 0 | 0 | 1 | — |
+| cnv-cnv_ban-rebel-1 | Xuất cung — Xuất cung tuổi 30 | 30 | 1706 | 672 | 0 | 0 | 0 | — |
 
 ## Dead buttons
 
 
 ## Bugs
-
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed

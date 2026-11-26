@@ -35,3 +35,12 @@ touchscreen.tap: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-rebel-4 from 2026-11-25T23:12:44.394Z buổi 1021
+CP buổi 1021 year null save 1508644 chars
+CP buổi 1071 year 8 save 1584522 chars
+CP buổi 1121 year 8 save 1621011 chars
+CP buổi 1171 year 9 save 1763160 chars
+CP buổi 1221 year 9 save 1854821 chars
+CP buổi 1271 year 9 save 1934096 chars
+CP buổi 1321 year 10 save 1972349 chars
+CP buổi 1371 year 10 save 2036778 chars
+LIFE DONE cnv-cnv_ban-rebel-4 Xuất cung age 30 · buổi 1418 · taps 3295 · dead buttons 0 · stuck 0 · bugs 0

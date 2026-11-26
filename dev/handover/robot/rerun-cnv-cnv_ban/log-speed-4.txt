@@ -1,0 +1,13 @@
+CP buổi 50 year 1 save 357901 chars
+CP buổi 100 year 1 save 425249 chars
+CP buổi 150 year 2 save 457804 chars
+CP buổi 200 year 2 save 559081 chars
+CP buổi 250 year 2 save 609505 chars
+CP buổi 300 year 3 save 717648 chars
+STATUS cnv-cnv_ban-speed-4 · buổi 317 · year 3 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:276:45)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T01:12:10.373Z buổi 331

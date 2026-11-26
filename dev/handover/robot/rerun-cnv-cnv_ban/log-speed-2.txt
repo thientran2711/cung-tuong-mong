@@ -24,3 +24,15 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-2 from 2026-11-25T23:12:40.853Z buổi 866
+CP buổi 866 year null save 1470944 chars
+CP buổi 916 year 7 save 1567812 chars
+CP buổi 966 year 7 save 1640420 chars
+CP buổi 1016 year 8 save 1715815 chars
+CP buổi 1066 year 8 save 1779988 chars
+CP buổi 1116 year 8 save 1875972 chars
+CP buổi 1166 year 9 save 1956800 chars
+CP buổi 1216 year 9 save 1999898 chars
+STATUS cnv-cnv_ban-speed-2 · buổi 1259 · year 9 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 1266 year 9 save 2101818 chars
+PAGE FROZE cnv-cnv_ban-speed-2 at buổi 1301 (tree 8278 MB, renderer 7594 MB) → exit 3, rerun with resume=1
+RESUME cnv-cnv_ban-speed-2 from 2026-11-26T00:20:13.342Z buổi 1301

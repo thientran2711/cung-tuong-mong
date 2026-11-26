@@ -47,3 +47,6 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-rebel-1 from 2026-11-25T23:12:12.289Z buổi 1631
+CP buổi 1631 year null save 2331329 chars
+CP buổi 1681 year 12 save 2403706 chars
+LIFE DONE cnv-cnv_ban-rebel-1 Xuất cung age 30 · buổi 1706 · taps 672 · dead buttons 0 · stuck 0 · bugs 0

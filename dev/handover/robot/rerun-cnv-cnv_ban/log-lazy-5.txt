@@ -1,0 +1,11 @@
+CP buổi 50 year 1 save 325961 chars
+CP buổi 100 year 1 save 413540 chars
+CP buổi 150 year 2 save 541904 chars
+CP buổi 200 year 2 save 600667 chars
+CP buổi 250 year 2 save 668620 chars
+CP buổi 300 year 3 save 815010 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:273:324)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
+  log: []
+}
