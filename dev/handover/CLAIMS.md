@@ -448,4 +448,4 @@ NEWS-SIEVE Tin trong cung sieve + monthly summary + nết open + rank respect + 
 | BIG RV save r5 successor review/save-fix-stack-rv5 0cb4e389 (opus; briefs/b-save-stack-rv5-review.md) | review/save-fix-stack-rv5; reports/save-unseen-lists.md ## REVIEW r5 | B ROOT 2 child 2 | session_01N1tNP3Zg2nHbRc546MNZYM | RUNNING | 26/11 06:55Z |
 | FIXER save follow-up A pid «Việc khó xử» cards dropped on load (opus; briefs/b-save-pid-cards.md) | review/save-pid-cards; reports/save-pid-cards.md | B ROOT 2 child 2 | session_01N1tNP3tHDZmhEaxQ1fmrKZ | RUNNING | 26/11 06:55Z |
 K-ICO-HOME | img/place-home.webp (CDN, no branch) | session_01PEhRbxricb8su4Cev3MQCY | DONE 07:25Z (was RUNNING) | 26/11 07:18Z (Foreman C ROOT 3-1)
-| FIXER co-op reg9 level-9 host routing gap (Foreman D 07:40Z; opus; briefs/b-coop-reg9-route.md) | review/coop-reg9-route; reports/coop-reg9-route.md | B ROOT 2 child 2 | (opening) | RUNNING | 26/11 07:50Z |
+| FIXER co-op reg9 level-9 host routing gap (Foreman D 07:40Z; opus; briefs/b-coop-reg9-route.md) | review/coop-reg9-route; reports/coop-reg9-route.md | B ROOT 2 child 2 | session_01N1tNP3un1wpGRWEeauvwMp | RUNNING | 26/11 07:50Z |
