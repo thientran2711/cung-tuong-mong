@@ -87,6 +87,7 @@ console.log(tbl.join('\n'));{const L=SITES.filter(s=>s.core!==null);ok(L.length>
  {const z=await p.evaluate(()=>{const W=Object.values(BAL.rank.preN||{});let h='';try{h=JSON.stringify(rkRulesSpec())}catch(e){h='ERR '+e}return{roles:W.map(w=>[w,rkRole(w).role]),spec:W.every(w=>h.includes(w)),n:W.length}});
   ok(z.n===2&&z.roles.every(r=>r[1]!=='maid'&&r[1]!=='consort'),'board face: «Chưa vào cung» / «Tú nữ» get no maid / consort decor (rkRole)',z.roles);
   ok(z.spec,'«Cách tính» explains never-entered lives (BAL.rank.preN words)',z)}
+ {const zz=await p.evaluate(()=>{try{rkOpen('lives')}catch(e){}try{rkRulesOpen()}catch(e){}const m=document.getElementById('modal'),o=document.getElementById('krkov');const r={m:+getComputedStyle(m).zIndex,o:o?+getComputedStyle(o).zIndex:0};try{closeModal()}catch(e){}try{rkClose()}catch(e){}return r});ok(zz.m>zz.o,'«Cách tính» opens ABOVE Bảng vàng (#modal.krkp z over #krkov)',zz)}
  ok(!errs.length,'no page errors',errs);
  await b.close();console.log(bad?`${bad} FAIL`:'ALL PASS');process.exit(bad?1:0)})();
 function RANKS_IDX(o){const N=["Đáp ứng","Thường tại","Quý nhân","Tần","Phi","Quý phi","Hoàng quý phi","Hoàng hậu"];return N[o.maxR|0]===o.want}
