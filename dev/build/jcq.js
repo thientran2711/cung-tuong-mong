@@ -54,7 +54,7 @@ function cqNm(t){if(t===S)return"ngươi";if(cqQueen(t))return"Hoàng hậu";try
 /* the consequence of a deliberate breach (one rule; research §3 以下犯上 / 惇妃 1778: favour softens, never cancels) */
 function cqBreach(a,t,r){try{if(!r||!cqPer(a))return"";const F=BAL.cq.fx;a.cqB=wk();if(cqPer(t))oanAdd(t,a,F.oan);if(a===S)apply({danh:-F.danh});else ap(a,{danh:-F.danh});
  const pun=roll(BAL.ea.pick.phamP);if(pun)punish(a,`${r.w} với ${cqNm(t)}`,1);
- const up=x=>x.replace(/^./,c=>c.toUpperCase()),na=cqNm(a),nt=cqNm(t);const txt=`Trái cung quy: ${r.cls==="accuse"?`${na} vu cáo ${nt}, bậc trên mình`:`${na} ${r.w} với ${nt}`}. ${cqPer(t)?`${up(nt)} oán ${balSg(F.oan)}, `:""}Danh ${na} ${balSg(-F.danh)}${pun?", bị cấm túc":""}. `;
+ const up=x=>x.replace(/^./,c=>c.toUpperCase()),na=cqNm(a),nt=cqNm(t);const txt=`Trái cung quy: ${r.cls==="accuse"?`${na} vu cáo ${nt}, bậc trên mình`:`${na} ${r.w} với ${nt}`}. ${cqPer(t)?`${up(nt)} oán ${balSg(F.oan)}, `:""}Danh ${/^một vị/.test(na)?"người ấy":na} ${balSg(-F.danh)}${pun?", bị cấm túc":""}. `;
  if(a!==S){CQN.br[r.k]=(CQN.br[r.k]||0)+1;if(t===S){try{Q.push({t:"Phạm thượng",who:pv(a),h:`<p>${txt}</p>`})}catch(e){}}else try{newsAdd(a,"cq",txt.trim(),false)}catch(e){}}
  return txt}catch(e){console.error("jcq",e);return""}}
 function cqCount(a,t,k,res){if(a===S||!res)return;const r=cqRule(a,t,k);CQN.n++;if(r&&!(r.br&&a.cqB===wk()))CQN.bad[r.k]=(CQN.bad[r.k]||0)+1}
