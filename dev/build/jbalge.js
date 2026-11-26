@@ -23,7 +23,7 @@ BAL.ge={
  /* option C shading lean: lean = Σ option tags × tag + (Đức now − Đức at life start) × duc + Ngã rẽ 2 sign × last; ≥ cut → thiện, ≤ −cut → ác, else natural */
  var:{tag:4,duc:.05,last:3,cut:8},/* run 3 (sensible bot): Đức climbs +19..+70 in every mode, so .25 drowned the arc choices; tag 4 + duc .05 lets the choices lead */
  /* "người ấy" for «Theo người ấy đi»: the strongest real bond — a man's tình ≥ men, or a consort's thiện cảm ≥ sis */
- bond:{men:30,sis:40},
+ bond:{men:30},
  seat:["NDE","THH","HH","TM"],  /* one per world: taken by anyone → every other ending needing it turns fail-only */
  /* summits that close the life with an epilogue under D4 "rec" (the game cannot simulate the life after) */
  exitSum:["FREE","NUN","FOLLOW","NDE","THH","NV","KING","ANNEX","TM","REUNION"],

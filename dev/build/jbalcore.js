@@ -99,7 +99,7 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
 (function(){try{const O=BAL.art.odds,side=x=>Math.round(x*BAL.art.side*10)/10;
  const SIDE={ky:[1],vu:[1],y:[1]};/* passive weights: mưu kế (Kỳ 1), lật thẻ (Vũ 1, Y 1) */
  for(const k in ARTFX){ARTFX[k].forEach((s0,i,arr)=>{const l=i+1;const T=s=>{
-  s=s.replace(/^(Tài|Sắc) \+(\d+)/,(m,st,n)=>`${st} +${BAL.art.stUp+(+n-2)}`);
+  /* the leading Tài/Sắc already prints BAL.art.stUp (j85 ARTFX token {n:art.stUp}; Vũ bậc 4 prints stUp + BAL.artB.vu[4]) — typed-stat-bal GROUP A */
   {const re=/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?), Danh \+\d+/;/* the bậc-up Danh (BAL.art.danh) sits on exactly the bậc that give it */
    if(BAL.art.danh[l])s=re.test(s)?s.replace(re,`$1, Danh +${BAL.art.danh[l]}`):s.replace(/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?)/,`$1, Danh +${BAL.art.danh[l]}`);else s=s.replace(re,"$1")}
   if(k==="vu"&&l===2)s=s.replace(/Múa trong yến tiệc \(mỗi bậc \+\d+\), Chặn ngự giá \(mỗi bậc \+\d+\) dễ thành hơn/,`Múa trong yến tiệc dễ thành hơn (+${O[l]})`);
@@ -122,4 +122,8 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
   if(at>=0&&at!==gi&&X[gi]){const m=X[at].match(/ · (mở «.*)$/);X[at]=X[at].replace(" · "+m[1],"");X[gi]+=" · "+m[1]}
   const a=ARTS.find(x=>x.k===k);if(a&&a.u)a.u=a.u.replace(/^Bậc \d+/,`Bậc ${BAL.deck[k].lv}`)}
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));
+/* tainghe-info (MAIN 148 wording note, VANPHONG «the number stands after its NAME»): an odds bonus never stands bare («thỉnh an +8», «dễ thành hơn (+4)»):
+   it reads «<việc>: phần thắng +N» (the j85 Ghi chú row «Phần thắng» names the same BAL.art.odds ladder); a lật-thẻ weight reads «phần được lật thẻ +N». Every Năm bậc table. */
+ {const W=s=>String(s).replace(/ dễ thành hơn \(\+([\d,]+)\)/g,": phần thắng +$1").replace(/được lật thẻ dễ hơn \(\+([\d,]+)\)/g,"phần được lật thẻ +$1").replace(/(thỉnh an|tố giác) \+(\d+)(?![\d,])/g,"$1: phần thắng +$2");
+  for(const F of [ARTFX,VIRFX])for(const k in F)F[k].forEach((s0,i,arr)=>{const d=Object.getOwnPropertyDescriptor(arr,i);if(d&&d.get){const g=d.get;Object.defineProperty(arr,i,{get:()=>W(g()),enumerable:true,configurable:true})}else arr[i]=W(s0)})}
 }catch(e){console.error("artfx text",e)}})();

@@ -75,7 +75,7 @@ for all 1088; group A alone ~18k.
 1. Spouses age: k.hW.s (phò mã) and k.pW.chinh/trac (chính/trắc phi) store the age at the wedding and never age
    (h54Month/htMonth age only the pools). Use age + (S.year - W.y) in h54Face/ctFace/qnFace so a36/a51 are reached.
 2. Eunuch rank: f88Best passes a rank only for maids; add srk(who) for staff eunuchs and pick tier r0..r3 (needs the new art).
-3. Kids: kidBandOf caps at 20; add adult bands 26/36/51 (fig-kid-<id>-a26...) once drawn.
+3. Kids: kidBandOf caps at 20; add the adult art tags a26/a36/a51 (bands from BAL.ageBand: 28/39/51) (fig-kid-<id>-a26...) once drawn.
 4. Mama rank: pass srk for mama-face maids (or the maid-identity route above).
 
 ## Crop rule for new portraits

@@ -22,7 +22,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
  if(p&&p.kind==="fallen"){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");const x=aaFallenT();if(i>=0&&x){const nm=(x.queen?"Hoàng hậu ":RANKS[x.rank].n+" ")+x.name;
   A[i]=Object.assign({},A[i],{x:`về: ${nm} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.jaudit.evN)} nếu nàng từng làm điều sai`,go:()=>{let f="";try{f=typeof intelLearn==="function"?intelLearn(x,1,{by:"Phế phi",how:"Hỏi chuyện cũ"}):""}catch(e){}const n=evA(S,x,BAL.eff.jaudit.evN);try{evdSync()}catch(e){}log(`Phế phi kể chuyện của ${nm}: ${f||"một chuyện cũ"}${n?` Chứng cứ ${balSg(BAL.eff.jaudit.evN)}.`:" Không có gì làm chứng cứ."}`)}})}}
  if(p&&(p.kind==="rival"||p.kind==="hh")&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Nhờ giúp đỡ");if(i>=0){const x=liveRivals(true).filter(y=>y!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];
-  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +${BAL.audit.loan} hoặc kể chuyện về ${x.name} (chứng cứ ${balSg(BAL.eff.jaudit.evRun)} nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=BAL.audit.loan){ap(v,{bac:-BAL.audit.loan});apply({bac:BAL.audit.loan});return `${v.name} cho ngươi mượn ${BAL.audit.loan} lượng.`}return evA(S,x,BAL.eff.jaudit.evRun)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ ${balSg(BAL.eff.jaudit.evRun)}.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,BAL.eff.jaudit.run);return `${v.name} khéo từ chối. Thiện cảm ${balSg(BAL.eff.jaudit.run)}.`}})}}}catch(e){console.error(e)}return A}})();
+  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +${BAL.audit.loan} hoặc kể chuyện về ${x.name} (chứng cứ ${balSg(BAL.eff.jaudit.evRun)} nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=netTh(v,"than")){if(roll(50)&&v.bac>=BAL.audit.loan){ap(v,{bac:-BAL.audit.loan});apply({bac:BAL.audit.loan});return `${v.name} cho ngươi mượn ${BAL.audit.loan} lượng.`}return evA(S,x,BAL.eff.jaudit.evRun)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ ${balSg(BAL.eff.jaudit.evRun)}.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,BAL.eff.jaudit.run);return `${v.name} khéo từ chối. Thiện cảm ${balSg(BAL.eff.jaudit.run)}.`}})}}}catch(e){console.error(e)}return A}})();
 
 /* 3. HIDDEN RISK of sending a servant (act audit): when she is not with the target, a consort act is done by her best servant
    (runAct → bestSent). For harm acts he may be caught (confessRisk): he confesses (the target holds 1 more chứng cứ against her)
@@ -84,10 +84,10 @@ function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}
 (function(){if(typeof kaCaughtTxt!=="function")return;const k0=kaCaughtTxt;kaCaughtTxt=function(v,k){const r=k0.apply(this,arguments);try{return r?`${r}, ${pvRel(v,-10)}`:r}catch(e){return r}}})();
 /* consort acts: outcome texts written from the code (j8 ACT.f) with the scaled numbers for the card's target */
 (function(){const T=()=>typeof J78==="object"&&J78.cardV||null;const def=(k,fn)=>{try{const old=AOUT[k];Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const t=T();return t?fn(t):old},set(v){}})}catch(e){}};
- def("spy",t=>[`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2`,`bị lộ: ${pvRel(t,-8)}`]);
- def("ally",t=>[`${pvRel(t,25)}, nàng bớt ghen 10`,`bị lạnh nhạt: ${pvRel(t,-5)}`]);
- def("rumor",t=>["Danh nàng -8",`không ai tin: nàng nắm ${balAb(BAL.eff.j8.evF)} chứng cứ, ${pvRel(t,-5)}`]);
- def("frame",t=>["nàng mất Danh và Sủng -10, Danh +3, Tâm cơ +2",`bị lộ: Danh -15, Sủng -8, ${pvRel(t,-30)}, nàng nắm ${balAb(BAL.eff.j8.evF_2)} chứng cứ, bị cấm túc 2 tháng`]);})();
+ def("spy",t=>[`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ ${balSg(BAL.eff.j8.spyTam)}`,`bị lộ: ${pvRel(t,-8)}`]);
+ def("ally",t=>[`${pvRel(t,BAL.eff.j8.f_2)}, nàng bớt ghen ${BAL.rcv.prop.ghen}`,`bị lạnh nhạt: ${pvRel(t,-5)}`]);
+ def("rumor",t=>[`Danh nàng ${balSg(BAL.eff.j8.rumorDanh)}`,`không ai tin: nàng nắm ${balAb(BAL.eff.j8.evF)} chứng cứ, ${pvRel(t,BAL.eff.j8.f_4)}`]);
+ def("frame",t=>[`nàng mất Danh và Sủng -${BAL.eff.j8.framedSung}, Danh ${balSg(BAL.eff.j8.frameDanh)}, Tâm cơ ${balSg(BAL.eff.j8.frameTam)}`,`bị lộ: Danh ${balSg(BAL.eff.j8.frameFailDanh)}, ${sgStat(BAL.eff.j8.frameFailSung)}, ${pvRel(t,BAL.eff.j8.f_5)}, nàng nắm ${balAb(BAL.eff.j8.evF_2)} chứng cứ, bị cấm túc 2 tháng`]);})();
 /* Tranh sủng / Chặn ngự giá (stealWin: relAdd −15, ghen +25) */
 (function(){if(typeof stealX!=="function")return;const s0=stealX;stealX=function(v,road){const h=s0.apply(this,arguments);try{return h.replace(/kèm: (.+?) ghen \+25, thù -15/,(m,n)=>`kèm: ${n} ghen +25, ${n} ${pvRel(v,-15)}`)}catch(e){return h}}})();
 /* talk options on a consort's card: "thiện cảm ±N" / "oán ±N" are affAdd/oanAdd on her → scaled, in the new labels */
@@ -268,7 +268,7 @@ function aaPunishTxt(sev){const m=punishMonths();return sev>=2?`bị phạt: c�
  if(i>=0)A[i]=Object.assign({},A[i],{risk:`cung nhân của nàng ta bắt gặp: ${pvRel(v,-15)}, ${aaPunishTxt(1)}`})}}catch(e){}return A}})();
 
 /* 22. servant start · Lĩnh đồ ở Nội vụ phủ: srvMeet (j42) has a hidden 1-in-4 "bắt nạt: Sức −5" — now on the card in Kèm */
-(function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{for(const a of X||[])if(a&&a.n==="Lĩnh đồ ở Nội vụ phủ"&&!/bắt nạt/.test(a.x||""))a.x=(a.x?a.x+" · ":"")+`kèm: bị thái giám Nội vụ phủ bắt nạt, Sức -5: ${typeof chanceW==="function"?chanceW(25):"khả năng thấp"}`}catch(e){}return X}})();
+(function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{for(const a of X||[])if(a&&a.n==="Lĩnh đồ ở Nội vụ phủ"&&!/bắt nạt/.test(a.x||""))a.x=(a.x?a.x+" · ":"")+`kèm: bị thái giám Nội vụ phủ bắt nạt, Sức ${balSg(BAL.rl.j42.sucSrvMeet)}: ${typeof chanceW==="function"?chanceW(SRVA.nvp.bully):"khả năng thấp"}`}catch(e){}return X}})();
 
 /* 23. MINI-GAME ACTS — one shared path (owner bug 11/15, live: one tap on the Hành sự card "Tự học Nấu nướng" paid Sức −15, Bạc −6
    and 2 khắc and showed a BẠI card, and only THEN the game intro opened). Cause: every act that opens a mini-game paid and rolled
@@ -354,17 +354,21 @@ function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitle
 function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
  const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: name test first, ancestor walk only for hits */T.rx.lastIndex=0;if(!T.rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return !p||p.closest(KRN_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
+ /* tinbao-words (owner OD 25/11 ~23:36Z «tùm lum chữ lặp tới lặp lui»): ONE title per person per block — the first mention gets «title name», every later
+    mention in the same row / line / paragraph stays the bare name (the title is never printed twice in one sentence, even when the mentions sit in one text node) */
+ const DONE=new Map();const done=b=>{let x=DONE.get(b);if(!x)DONE.set(b,x=new Set());return x};
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
   const pv=krnPrevText(n);T.rx.lastIndex=0;let m,last=0,hit=false;const f=document.createDocumentFragment();
   while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=krnT(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
-   if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index)))continue;
+   const D=done(blk);if(D.has(nm)||(blkPre+v.slice(0,m.index)).includes(nm)){D.add(nm);continue}/* named before in this block (titled or not): no second title */
+   if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index))){D.add(nm);continue}
    /* a name label on its own (card heading, portrait caption) whose title sits in a sibling element of the same card: titled */
    if(v.trim()===nm){let up=n.parentElement,ok=false;/* r1: a short sibling label of the name (person card .pcrk "Hoàng hậu" beside .pcname) holds its title */
     for(let e=n.parentElement,i=0;i<3&&e&&e.parentElement&&!ok;i++,e=e.parentElement)for(const c of e.parentElement.children){if(c===e||c.contains(e)||c.querySelector(".klab,img:not(.ic)")||c.matches(".md,.klab"))continue;/* a portrait fallback label is no title */const ct=(c.textContent||"").replace(/\s+/g," ").trim();if(ct&&ct.length<60&&t&&ct.toLowerCase().includes(t.toLowerCase())){ok=true;break}}
     for(let i=0;i<3&&up&&!ok;i++,up=up.parentElement){const tx=(up.textContent||"").replace(/\s+/g," ");if(tx.length<160&&kpTitleTail(tx.slice(0,Math.max(0,tx.indexOf(nm)))+"",t)||tx.length<160&&t&&tx.toLowerCase().includes(t.toLowerCase()))ok=true}if(ok)continue}
-   if(dry){out.push({name:nm,title:t,where:(n.parentElement.closest("[id],[class]")||{}).className||"",id:(n.parentElement.closest("[id]")||{}).id||"",text:(blk.textContent||"").replace(/\s+/g," ").trim().slice(0,140)});continue}
-   hit=true;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.innerHTML=kitName(p);f.appendChild(sp.firstChild||document.createTextNode(nm));last=m.index+nm.length}
+   if(dry){D.add(nm);out.push({name:nm,title:t,where:(n.parentElement.closest("[id],[class]")||{}).className||"",id:(n.parentElement.closest("[id]")||{}).id||"",text:(blk.textContent||"").replace(/\s+/g," ").trim().slice(0,140)});continue}
+   hit=true;D.add(nm);if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.innerHTML=kitName(p);f.appendChild(sp.firstChild||document.createTextNode(nm));last=m.index+nm.length}
   if(hit){if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
  return out}
 window.kitRankNamePaint=kitRankNamePaint;

@@ -204,7 +204,17 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* review/stage-side: the side column's width comes from the stage width only (never from its content), so it is the same narrow column
    on every screen and every render: 24 % of the stage, 132–172 px */
 function k3RW(st){/* one column width for every host: from the PAGE width (the map leather spans the spread on iPad = 2 pages) */let W=st.clientWidth;try{if((st.classList.contains("mapv")||st.classList.contains("kplfs"))&&kitView().pages===2)W=W/2}catch(e){}/* reviewer stage-pets-r1: the full-screen place painting spans the spread too (33.10) → same column as her room / the map (139 px at 1180, was 172) */if(!W)return;/* owner 17/11 06:45Z: the column is NARROWER, fits its content (the widest line is ~135 px) → ONE width KIT_RCOLW (140 px) on every screen; only a tiny stage shrinks it */const v=Math.round(Math.max(132,Math.min(140,W*.25)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
-function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);
+/* KIT 56.30 SIDE COLUMN SCALES WITH THE STAGE HEIGHT (owner 25/11 ~23:27Z iPad bug, review/ipad-size): the column rows (Ân sủng, Nguy hiểm chung,
+   Xét phẩm, the court counters) keep the SAME share of the stage height as on the Fold (stage 749 px tall, rows 44 px):
+   row = KIT_RCOL.row x stage height / KIT_RCOL.refH, between KIT_RCOL.min and KIT_RCOL.row. Fold / iPad portrait = 44 px (unchanged),
+   iPad landscape (stage ~575-600 px) = 34-35 px. Font stays the kit size (.75rem); only the row height shrinks. One rule for every stage. */
+const KIT_RCOL={row:44,refH:749,min:30};window.KIT_RCOL=KIT_RCOL;
+/* the same factor (--kss = row / 44) sizes the other stage overlays of the family (law 11): the left rail buttons (#krail .krailb), the
+   «ở đây N người» count chip and the «+N» page chips — they all kept Fold pixels on the shorter iPad stage (share 1.25x the Fold share) */
+function k3RowH(st){const H=st.clientHeight;if(!H)return;const r=Math.round(Math.max(KIT_RCOL.min,Math.min(KIT_RCOL.row,KIT_RCOL.row*H/KIT_RCOL.refH))),v=r+"px",k=(r/KIT_RCOL.row).toFixed(3);
+ if(st.style.getPropertyValue("--k3rowh")!==v)st.style.setProperty("--k3rowh",v);if(st.style.getPropertyValue("--kss")!==k)st.style.setProperty("--kss",k)}
+window.k3RowH=k3RowH;
+function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);k3RowH(st);
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
  /* KIT 33: an EMPTY plaque column (no plaques, zero height) reserves no gutter — the floor belongs to the people */
@@ -296,7 +306,8 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
-.ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:0;width:100%}
+.ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:var(--k3rowh,44px);width:100%}/* KIT 56.28 (KK28): the whole row is the tap target, kit row >= 44 px (was min-height:0 = 17 px rows, adjacent, no hit-area trick possible) */
+.ksh .k3r+.k3r{border-top:1px dotted var(--k-hair,#e6d3ac)}
 .ksh .k3r .k3l{flex:1 1 auto;min-width:0;white-space:normal}
 .ksh .k3r>b{font-weight:700;white-space:nowrap;margin-left:auto}
 .ksh .k3r img.ic{width:14px;height:14px;flex:0 0 auto}
@@ -323,7 +334,12 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
 /* kitGroupFold (stage right column): closed row like "Ân sủng ›"; open = header + the person cards stacked in place */
 .ksh .kgf.kgfopen{padding:3px 4px 4px}.ksh .kgf-t{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:3px;padding:1px 2px}
-.kgfbtns{display:flex;gap:6px;flex:none}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
+.kgfbtns{display:flex;gap:6px;flex:none}.stage .kshR .kgfbtns .kgfbtn.krailb{height:var(--k3rowh,44px);min-height:0}
+/* KIT 56.30 stage overlay family (review/ipad-size): rail buttons = the row height; the count / page chips scale by --kss (1 on Fold) */
+html body .stage>.krail .krailb,html body .stage .krail:not(.khud) .krailb{width:var(--k3rowh,44px);height:var(--k3rowh,44px);min-width:0;min-height:0}
+html body .stage .krail{gap:calc(6px*var(--kss,1))}
+html body .stage .kchip.j59more{font-size:calc(1.05rem*var(--kss,1));padding:calc(3px*var(--kss,1)) calc(9px*var(--kss,1)) calc(3px*var(--kss,1)) calc(6px*var(--kss,1))}html body .stage .kchip.j59more .j59ico{height:calc(1.7rem*var(--kss,1))}
+html body .stage .kchip.j59hchip{font-size:calc(1rem*var(--kss,1))}html body .stage .kchip.j59hchip .j59ico{height:calc(1.5rem*var(--kss,1))}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
 .ksh .kgf-l{display:flex;flex-direction:column;gap:3px}.ksh .kgf-l .k3c{flex:none;box-shadow:none;border-color:var(--k-hair,#e6d3ac)}
 .kshR>.kgf,.kshR>.kgfbtns,.kshR>.kas,.kshR>.k3py{flex:none}
 
@@ -635,7 +651,7 @@ function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-thanh,.kr-
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
   const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3","k3tight");B.forEach(x=>{x.classList.remove("k3long");const a=x.querySelector(":scope>.kaart");if(a&&a.dataset.k3t){a.style.removeProperty("flex");a.style.removeProperty("width");a.style.removeProperty("height");delete a.dataset.k3t}});
-  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight");B.forEach(x=>{const a=x.matches(".kart")&&x.querySelector(":scope>.kaart");if(a){a.style.setProperty("flex","0 0 62px","important");a.style.setProperty("width","62px","important");a.dataset.k3t="1"/* #49c: the height is the card height (kitOptTier), never a fixed 84 */}})}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
+  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight")/* KIT §6.2c: the picture keeps its tier square (kitOptTier); the old 62 px shrink is gone */}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
   if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
   g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
   B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});

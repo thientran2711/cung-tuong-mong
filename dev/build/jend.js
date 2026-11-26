@@ -12,7 +12,7 @@
      · one short entrance: fest = frame rises + painted gold sparks and petals (jfxkit), mourn = slow quiet fade + rising incense; none under reduced motion / «Gọn».
    TYPES (KIT_END.types; tone + fallback picture): death · exile · fail = mourn; leave · throne · grand · fate · rare = fest.
    WHICH DIALOG IS AN ENDING (kitEndType(m), derived from the queued card itself, so old saves and the co-op guest get it with no stored flag):
-     · the life end card of over() (j32, t "Kiếp này", cls "end") → S.kesT (set by the over() wrapper below from h / fate / alive; old save: read from S.fate)
+     · the life end card of over() (j32, cls "end", kend:1; its title = the poetic ending name; old saves: t "Kiếp này") → S.kesT (set by the over() wrapper below from h / fate / alive; old save: read from S.fate)
      · the Hồi kết nhánh result (jge PEND.geR) → grand (Đại kết cục) / fail (Kết cục)
      · any card whose cls carries "kes-t-<type>" (Bảng Thiên mệnh jge geBoardPanel → fate; a rare ending's result card j97 → rare).
    Callers that know the type before over() runs say it with kitEndNext(type) (jge grand exit, j97 rare exit). ===== */
@@ -24,6 +24,42 @@ window.KIT_END=window.KIT_END||{
  bg:t=>`img/end-bg-${t}.webp`,
  ev:k=>`img/ev-${k}.webp`,
  next:"",log:[]};
+/* ---------- ENDING NAMES (CO-NGU-TITLES, owner 25/11 ~07:40Z «Một kiếp phù sinh»: every ending gets a poetic cổ trang name, OUR OWN) ----------
+   ONE table: the title of the life end card (j32 over(): the dialog title), the death ink caption (j93), the Sổ luân hồi line (j32 pastHTML) and the
+   Phúc duyên line (j52) all read endName(). The engine keys stay as they were (h / fate: PD_END, kesLife, endArt, records), only the shown name is new.
+   name: by h (the ending heading over() receives) · fate: by the fate line (wins over name) · death: [regex on cause, name] for die() (h «Hồng nhan bạc mệnh»),
+   first match wins · grand: «Đại kết cục · X» → X (the catalogue title) · anything unlisted shows its own h (already a name: rare exits, Nữ đế…). */
+window.KIT_END.names={
+ name:{"Xuất gia":"Thanh đăng cổ Phật","Dâng biểu xuất gia":"Thanh đăng cổ Phật","Được Vương gia che chở":"Nương bóng vương phủ","Thái phi":"Tà dương cung cũ",
+  "Hoàng thái hậu":"Thiên tử từ mẫu","Mẫu hậu Hoàng thái hậu":"Đích mẫu tôn vinh","Tư thông bị phát giác":"Tình lụy thân vong","Ma ma":"Tóc bạc cung sâu",
+  "Xuất cung":"Lồng son mở cửa","Xuất cung về quê":"Mây trắng cố hương","Xuất giá":"Tơ hồng ngoài cung","Được ban hôn":"Thánh chỉ se duyên","Vào vương phủ":"Hoa dời vương phủ",
+  "Thành thân":"Bách niên giai lão","Bị đuổi khỏi cung":"Bèo dạt mây trôi","Cao chạy xa bay":"Song túc song phi","Trốn khỏi cung":"Cánh chim sổ lồng",
+  "Phế làm thứ dân":"Phượng gãy cánh","Một đời an nhiên":"Gió mát trăng thanh","Ban chết":"Ba thước lụa trắng","Tân đế đăng cơ":"Rồng mới phượng xưa","Lãnh cung":"Xuân tàn lãnh cung",
+  /* ngoài cung (jkc / jkc2) */
+  "Chính thất hầu phủ":"Phượng đậu hầu môn","Vợ quan thanh liêm":"Thanh bạch trọn đời","Nữ phu tử":"Đèn sách má hồng","Làm thiếp nhà quyền quý":"Hầu môn sâu tựa biển",
+  "Gả xa":"Viễn giá tha hương","Bỏ trốn":"Bỏ gấm theo tình","Công chúa ở lại cố quốc":"Non nước cố hương","Làm người ở nhà lý trưởng":"Phận tôi đòi",
+  "Làm thiếp nhà phú hộ":"Lẽ mọn nhà giàu","Ở lại quê nhà":"Ruộng dâu quê cũ",
+  /* tuyển tú (jselx): ban hoa = not chosen, sent home with a flower */
+  "Ban hoa":"Duyên cung lỡ hẹn",
+  /* kế vị (j99succ SUCC_END) */
+  "Bị ép trả rèm":"Rèm châu cuốn lại","Thái hậu bị giam lỏng":"Cửa son khép chặt","Nữ đế bị phế":"Ngai rồng sụp đổ","Nữ đế thoái vị":"Buông ngai ẩn thân",
+  "Nhiếp chính Thái hậu":"Buông rèm nhiếp chính","Thái hoàng thái hậu":"Ba đời mẫu nghi"},
+ fate:{"Phát điên trong lãnh cung":"Hồn lạc lãnh cung","Tuổi xuân qua đi":"Xuân tàn lãnh cung"},
+ death:[[/phá thai/i,"Chén thuốc đoạn trường"],[/sinh hạ|khó sinh|sinh nở|lâm bồn|hài nhi/i,"Hoa rụng lúc kết trái"],[/giả chết/i,"Mộng giả hóa thật"],
+  [/lụa trắng|bạch lăng|tuẫn táng|thắt cổ|ban chết/i,"Ba thước lụa trắng"],[/giếng/i,"Trăng chìm đáy giếng"],[/tru di|mưu phản/i,"Gia phá nhân vong"],
+  [/diệt khẩu/i,"Diệt khẩu trong đêm"],[/trượng|đòn|roi|tra khảo|đánh chết|thận hình/i,"Hồn lìa dưới trượng"],[/độc/i,"Độc ngấm hồng nhan"],
+  [/quỳ phạt|kiệt sức/i,"Hơi tàn trước thềm"],[/lãnh cung|chết rét|chết đói/i,"Đèn tắt lãnh cung"],[/hỏa hoạn|cháy|lửa/i,"Tro tàn cung cấm"],
+  [/tuổi cao|già yếu/i,"Thọ chung chính tẩm"],[/bệnh|nguy kịch|không qua khỏi/i,"Liễu yếu gặp sương"]],
+ deathDef:"Hương tiêu ngọc vẫn",
+ /* the closing line of the end card (j32) and its Phúc duyên form (j52 swaps tail → tailPd) */
+ close:{live:"Phù sinh nhược mộng, một kiếp đã khép lại.",dead:"Hương tàn khói lạnh, người đã đi xa.",
+  tail:"Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.",tailPd:"Kiếp sau bắt đầu lại từ đầu; chỉ còn tên trong Sổ luân hồi và Phúc duyên để đổi thân phận."}};
+window.endName=function(h,t,fate,live){const N=window.KIT_END.names,H=String(h||"").replace(/<[^>]+>/g,"").trim(),F=String(fate||"").replace(/<[^>]+>/g,"").trim();
+ const g=H.match(/^Đại kết cục\s*·\s*(.+)$/);if(g)return g[1];
+ if(N.fate[F])return N.fate[F];
+ if(H&&H!=="Hồng nhan bạc mệnh"&&N.name[H])return N.name[H];
+ if(!live&&(!H||H==="Hồng nhan bạc mệnh")){const c=`${String(t||"").replace(/<[^>]+>/g,"")} · ${F}`;for(const [re,n] of N.death)if(re.test(c))return n;return N.deathDef}
+ return H||N.deathDef};
 (function(){const KE=window.KIT_END;
 /* ---------- which ending ---------- */
 function kitEndNext(t){KE.next=KE.types[t]?t:""}
@@ -40,7 +76,7 @@ window.kesLife=kesLife;
 function kitEndType(m){if(!m||typeof m!=="object")return"";const c=String(m.cls||"");
  const x=c.match(/\bkes-t-(\w+)/);if(x&&KE.types[x[1]])return x[1];
  if(m.pid==="geR"){const r=typeof S!=="undefined"&&S&&S.ge&&S.ge.res;return r?(r.ok?"grand":"fail"):""}
- if(/\bend\b/.test(c)&&m.t==="Kiếp này"&&typeof S!=="undefined"&&S&&S.dead){
+ if(/\bend\b/.test(c)&&(m.kend||m.t==="Kiếp này")&&typeof S!=="undefined"&&S&&S.dead){
   if(S.kesT&&KE.types[S.kesT])return S.kesT;
   const f=String(S.fate||"");return kesLife("",f,typeof overAlive==="function"?overAlive(f):false)}
  return""}
@@ -148,3 +184,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§91",title:"kitEn
 window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.types[T].tone;Q.unshift({t:T==="grand"?"Đại kết cục":"Kiếp này",cls:`kes-t-${T}`,who:typeof pMe==="function"?pMe():null,
   h:`<h3>${T==="grand"?"Đại kết cục · Hiền tướng hậu cung":"Hồng nhan bạc mệnh"}</h3><p>${tone==="fest"?"Thiên hạ truyền tai: ngươi đã thành “Hiền tướng hậu cung”.":"Kiếp này khép lại."}</p>`,btn:"Đóng"});showModal()}catch(e){console.error(e)}};
 })();
+
+/* KIT §94b: the day title card shows on EVERY day change (jend.js is the LAST module: this `dawn` is the outermost wrapper, over kitNewDay / the Tuần lục book / the j79 panel) */
+try{if(typeof dawn==="function"&&typeof kitDayTitleShow==="function"){const d0=dawn;dawn=function(){const r=d0.apply(this,arguments);try{kitDayTitleShow()}catch(e){}return r}}}catch(e){}
+
+/* KIT §94b: game start = «Ngày 1 — <tên> · Chương 1 — <tên>» (owner OD 24/11 ~07:45Z; MAIN 117 OK): after a NEW life begins (week 0) the same card shows once; not for bots / sims */
+try{if(typeof start==="function"&&typeof kitDayTitleShow==="function"){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(!window.__bot&&typeof S!=="undefined"&&S&&!S.dead&&typeof wk==="function"&&wk()===0)setTimeout(()=>{try{if(S&&!S.dead&&wk()===0)kitDayTitleShow()}catch(e){}},600)}catch(e){}return r}}}catch(e){}

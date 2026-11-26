@@ -20,8 +20,8 @@ function set(id,o){if(!id||!o)return;M.set(id,o);if(window.kitStageRail)kitStage
 function refresh(){if(window.kitStageRail)kitStageRail.paint()}
 function remove(id){M.delete(id);if(window.kitStageRail)kitStageRail.remove("st-"+id)}
 function open(id){const o=M.get(id);if(o&&typeof o.onTap==="function"){o.onTap();return}if(!o||typeof o.panel!=="function")return;let sp=null;try{sp=o.panel()}catch(e){console.error("kitStatusIcon panel",e)}if(!sp)return;
- sp=Object.assign({kind:"info"},sp);sp.opts=(sp.opts||[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10); never "Đã hiểu" */
- try{(typeof kitPanelOnce==="function"?kitPanelOnce("st:"+id,sp,true):kitPanel(sp,true));showModal()}catch(e){console.error("kitStatusIcon open",e)}}
+ sp=Object.assign({kind:"info"},sp,{view:1});/* button-crawl-fix-5: a status panel = a live view, one per title in Q, never saved */sp.opts=(sp.opts||[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10); never "Đã hiểu" */
+ try{kitPanel(sp,true);showModal()}catch(e){console.error("kitStatusIcon open",e)}}
 window.kitStatusIcon={set,refresh,remove,open,has:id=>M.has(id),items:()=>[...M.keys()]};/* has(id): a module that must not overwrite another owner of the same id asks first (jerr owns «tin») */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.1",title:"kitStatusIcon · icon trạng thái (đang chạy · xong · cần chú ý), chạm → bảng thông tin",
  html:()=>`<div class="kitpg-row" style="position:relative;height:70px"><nav class="krail" style="position:static;flex-direction:row">${[["Đang thỉnh tranh (nhấp nhô)"," kbusy","ico-download"],["Đã thỉnh đủ (viền xanh)"," kdone","ico-download"],["Tạm ngưng (có chấm đỏ)"," kbadge","ico-download"],["Có bản mới (chấm đỏ)"," kbadge","ico-update"]].map(([t,c,g])=>`<button type="button" class="krailb${c}" title="${t}"><img src="img/kit/${g}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}

@@ -40,8 +40,8 @@ window.stateOn=function(n){if(worldOn()||thinW())return true;try{const C=window.
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
    ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames","nmReg","nmOrd"];  /* coop-name-clash: nmReg (every name ever given) + nmOrd (the host's rename orders for the friend's own people) are world, written by the host only (jnamefix) */  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
-const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames","nmReg","nmOrd","selxRm"];  /* SELSCENE-8: selxRm = the room's ONE selection cohort (girls drawn once on the host, room tests, their marks; jselxday) */  /* coop-name-clash: nmReg (every name ever given) + nmOrd (the host's rename orders for the friend's own people) are world, written by the host only (jnamefix) */  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd","selxRm"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen","oan"];/* oan: his oán toward her (rel-men-servants, j9) — hers, like af */
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
@@ -99,7 +99,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
  mapMe(v,false,mp);v.id=fp();
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:k==="hh"?hhSafe(v):v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null,fx:fxSnap(v)}));
  return v}
-function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,loyal:60,
+function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||BAL.ageMin,loyal:60,
  spyFor:s.srv&&s.srv.spyFor!=null?(s.srv.spyFor===me()?"me":s.srv.spyFor):null/* p2 B1: whom she spies for (me = bought by me) */,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
 function pullFriend(){T("pull");const out=[];for(let i=rivals.length-1;i>=0;i--)if(isF(rivals[i]))out.push([i,rivals.splice(i,1)[0]]);
  for(const v of rivals)if(v.staff)for(let i=v.staff.length-1;i>=0;i--)if(isF(v.staff[i]))out.push([-1,v.staff.splice(i,1)[0],v]);return out}
@@ -255,7 +255,31 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  if(S.foe&&!rivals.some(v=>v.name===S.foe)){const v=pick(liveRivals(false).filter(x=>!isF(x)));if(v)S.foe=v.name}
  if(wasSrv&&typeof srvInit==="function"){S.srv=null;quiet=true;try{withoutFriend(()=>srvInit())}catch(e){console.error(e)}quiet=false}
  S.place="home";S.visit={k:"home",people:homePeople(),talked:false};
- try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
+ try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}
+ try{lifeRekey()}catch(e){console.error("lifeRekey",e)}}
+/* ONE KEY = ONE PERSON at the join (law 6b; flight-sid-rebirth + SELSCENE-18, folded into one rule at the SELSCENE-19 merge, law 11/14):
+   a new life is built from a fresh seeded run (j52 nlRun: sidN = 0, a fresh S with S.kseq 0), then joins the room's world, which still holds
+   the people of the old lives with their servant ids (s<sid>) and «x<n>» keys. Her new household (maid, servants, children, home family) and
+   her Nội vụ phủ pool (S.npool, not in allServ) reused s1, s2 … and x1 … → two people on one j61 key (coop-e2e host rebirth: s1 «Tố Cầm» /
+   «Tiểu Đào», x33 two men). After the join: her own people that clash with a world person (or with each other) get fresh ids above every id
+   anyone holds (sidTop); links between her own people (af, lover, bullyBy) follow; the world's ids never change (host truth). */
+function lifeRekey(){const own=[S.maid].concat(S.staff||[],S.kids||[],(S.kc&&S.kc.fam)||[]);try{const P=S.npool;if(P)for(const r in P)own.push(...(P[r]||[]))}catch(e){}
+ const mine=new Set(own.filter(e=>e&&typeof e==="object"&&!e.coop));
+ /* review (flight-sid-rebirth-r): the new life's j61 levels (k61InitNew: her own household known) were written under the OLD keys before this
+    join (jcoopworld's start / nlRun wrappers run attach after j61's): move them with the id, else her own maid / servant read «Người lạ» and the
+    old-world person on the old key read «Quen biết» */
+ const mv=[];const kOf=e=>{try{return typeof kOf61==="function"?kOf61(e):""}catch(x){return""}};
+ const wS=new Set();for(const e of allServ())if(e&&e.sid!=null&&!e.coop&&!mine.has(e)&&+e.sid<900)wS.add(+e.sid);
+ if(typeof sidN!=="undefined"){sidN=Math.max(sidN,typeof sidTop==="function"?sidTop():0,...wS,0);const map={},seen=new Set();
+  for(const e of mine){if(e.sid==null)continue;const n=+e.sid;if(wS.has(n)||seen.has(n)){T("rekey s"+n);const k0=kOf(e);const k=++sidN;map[n]=k;e.sid=k;seen.add(k);mv.push([e,k0])}else seen.add(n)}
+  if(Object.keys(map).length){CW.sidFix=(CW.sidFix||[]).concat([map]).slice(-6);const M=v=>map[v]!=null?map[v]:v;
+   for(const e of mine){if(e.af&&typeof e.af==="object"){const a={};for(const k in e.af)a[M(k)]=e.af[k];e.af=a}for(const f of ["lover","bullyBy"])if(e[f]!=null)e[f]=M(e[f])}}}
+ const all=typeof k61All==="function"?k61All():[];const kk=new Set();let mx=0;
+ for(const e of all){if(!e||mine.has(e)||typeof e.kk!=="string")continue;kk.add(e.kk);const r=/^x(\d+)/.exec(e.kk);if(r&&+r[1]>mx)mx=+r[1]}
+ S.kseq=Math.max(+S.kseq||0,mx);for(const e of mine)if(typeof e.kk==="string"&&kk.has(e.kk)){T("rekey "+e.kk);const k0=kOf(e);e.kk=typeof k61NewKey==="function"?k61NewKey():"x"+(S.kseq=S.kseq+1);mv.push([e,k0])}
+ for(const [e,k0] of mv){const k1=kOf(e);if(!k0||!k1||k0===k1)continue;for(const M of [S.known,S.nkn])if(M&&typeof M==="object"&&k0 in M){M[k1]=M[k0];delete M[k0]}try{if(KREG[k0]===e)delete KREG[k0]}catch(x){}}
+ if(mv.length&&typeof K61VER!=="undefined")try{K61VER++}catch(x){}}
+CW.lifeRekey=()=>lifeRekey();/* test hooks (dev/test/sid-rekey-known.js, dev/test/sid-unique.js) */
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
 CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
@@ -328,9 +352,11 @@ function lockNext(){const n=$("next");if(!n)return;const eR=!!(CW.on&&eW()&&CW.e
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";/* owner 16/11 (owner-coop-stuck.jpg: faded "Sang buổi", no word): every lock says why */
   const s=COOP.state;const t=(CW.bend||eR||nReady()||waiting()||CW.pend)?CTM_WAIT.coopWaitPeer:wb?CTM_WAIT.coopWaitPeer2:CW.hold?CTM_WAIT.coopWaitBuild:frozen()?(s.status==="moved"?CTM_WAIT.coopMoved:s.status!=="open"?CTM_WAIT.coopRelink:CTM_WAIT.coopAbsent):CTM_WAIT.coopLinking;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
- else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=CW.on?"Sẵn sàng":S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg||selxHold()));const t=CW.on?"Sẵn sàng":S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}
  /* nothing locks it and nothing is open (render's own rule): a dialog closed by the host's patch (part D / E) without a render left it off */
- else if(CW.on&&n.disabled&&S&&!S.dead&&!Q.length&&!S.mg)n.disabled=false}
+ else if(CW.on&&n.disabled&&S&&!S.dead&&!Q.length&&!S.mg&&!selxHold())n.disabled=false}
+/* SELSCENE-8: a seat in the 3 selection days (jselxday) has not entered the palace yet: «Sẵn sàng» stays shut until the edict, as in solo */
+function selxHold(){try{return typeof selxDaysOn==="function"&&selxDaysOn()}catch(e){return false}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{},rpend:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
@@ -421,7 +447,7 @@ function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
- if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();return}CW.pendBuoi=null;
+ if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();/* SELSCENE-15 (coop-e2e a1 / r5 stall): a card pushed to Q AFTER the last show (j10 capTell from the render / nextBuoi capSweep) sat unseen while the step waited for it to close → show it */try{const M=document.getElementById("modal");if(Q.length&&!S.mg&&M&&M.hidden)showModal()}catch(e){}return}CW.pendBuoi=null;
  if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
  /* the room is further on (came back after both steps, or a pendBuoi older than the room): next step at once */
  if(!S.dead&&typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0)&&(S.buoi||0)===m.buoi)setTimeout(()=>{if(CW.on&&S&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0))onBuoi({week:wk(),buoi:(S.buoi||0)+1})},0);
@@ -921,6 +947,10 @@ function nGoNow(){if(!host()||CW.ngo===wk())return;CW.ngo=wk();T("ngo "+wk());ns
 function nCheck(){if(!CW.on||!S)return;const w=wk();
  if(host()&&CW.ngo!==w&&nAtNight()&&((CW.nrdy===w&&(CW.nfr===w||nOtherGone()))||CW.nforce===w||nOtherEnded()))nGoNow();
  if(!host()&&CW.ngoW!==w&&nAtNight()&&nOtherEnded()&&COOP.state.week===w)CW.ngoW=w;   /* the host's end is out: it committed */
+ /* flight-coop-sync (A-COOP room SX8M wk80): the host's own gate follows its commit. A new life on the host (rebirth at the week end, sendMe) resets
+    nrdy / ngoW but its commit CW.ngo stays this week, so the line above the guest's never re-opens it and nGoNow is done: the host sat in
+    buổi tối on «Chờ hảo hữu…» for ever while the guest had already ended (both seats stuck, no button). Committed = her night may run. */
+ if(host()&&CW.ngo===w&&CW.ngoW!==w&&nAtNight())CW.ngoW=w;
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;
  T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}
 CW.nCheck=()=>nCheck();CW.nightReady=()=>nightReady();CW.mapPlace=mapPlace;CW.refreshHere=()=>refreshHere();

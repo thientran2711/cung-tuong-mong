@@ -78,7 +78,7 @@ KIT_FACEFX.person=function(ref){try{if(ref==null||typeof S==="undefined"||!S)ret
 
 /* ---------- shared helpers ---------- */
 const FXF={ill:[0,2,4,6],weakSuc:25,kidHp:[35,20],doc:[0,4,7],docWk:[0,3,4],slowWk:9,docMed:40,docNpcHeal:35,docNotice:30,
- tat:3,tatWk:2,tatDuc:-2,tatRel:-20,penQuy:-8,penWk:[0,1,2],phatDuc:-1,phatRel:-15,cd:3};
+ tat:3,tatWk:2,tatDuc:-2,tatRel:-20,penQuy:BAL.rl.jface.penQuy,penWk:[0,1,2],phatDuc:-1,phatRel:-15,cd:3};
 function fxSeen(p){return KIT_FACEFX.seen(p)}                        /* the one "seen" rule: herself, or she knows / has seen the person (group rule) */
 function fxLive(p){return KIT_FACEFX.live(p)}
 function fxKey(by){try{return by&&["consort","player"].includes(KIT_FACEFX.kind(by))?key(by):null}catch(e){return null}}
@@ -180,15 +180,15 @@ A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.
  if(sev>=3&&roll(B.thau)){ap(a,{danh:B.thauDanh});r+=`Thái hậu nghe chuyện, quở trách nặng lời (Danh ${a===S?"ngươi":NM(a)} ${B.thauDanh}). `}
  if((t.sung||0)>=B.hoangMin&&roll(B.hoang[sev])){ap(a,{sung:B.sung[sev]});r+=`Hoàng thượng nghe chuyện, không vui (${sgOf(a,B.sung[sev],a===S?"Sủng ngươi":`Sủng ${NM(a)}`)}). `}
  r+=slapEvidence(a,t,sev);return `<span class="${t===S?"r":"g"}">${r}</span>`}});
-A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:"nàng quỳ nửa ngày ngoài sân: Sức -8, đi lại chậm một tuần · nàng oán ngươi",f:(a,t)=>{
+A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:`nàng quỳ nửa ngày ngoài sân: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần · nàng oán ngươi`,f:(a,t)=>{
  if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(t,a,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
  if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FXF.penQuy}, gối đau, đi lại chậm.</span> `}});
-try{AOUT.tat=["nàng in dấu tay trên má, Sắc giảm vài tuần; nàng oán ngươi",""];AOUT.phatquy=["nàng quỳ phạt: Sức -8, đi lại chậm một tuần; nàng oán ngươi",""]}catch(e){}
+try{AOUT.tat=["nàng in dấu tay trên má, Sắc giảm vài tuần; nàng oán ngươi",""];AOUT.phatquy=[`nàng quỳ phạt: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần; nàng oán ngươi`,""]}catch(e){}
 try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
  LACK.phatquy=t=>!fxAuth(S,t)?"ngươi là Hoàng hậu, hoặc trên nàng ba phẩm":t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
 try{ACTDOM.tat="Mưu kế";ACTDOM.phatquy="Mưu kế";J78VERB.tat="tát {t}";J78VERB.phatquy="phạt {t} quỳ";HARMK["Tát"]="tat";HARMK["Phạt quỳ"]="phatquy"}catch(e){}
 try{for(const k of ["tat","phatquy"]){if(!BANDS[1][2].includes(k))BANDS[1][2].push(k);const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes(k))g[1].push(k)}}catch(e){}
-(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!O.length)return O;const b=bandOf(danger(v,t));if(b>=1){
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!O.length)return O;const b=bandVT(v,t);if(b>=1){
   if(ACT.tat.ok(v,t)){const w=.8*persW(v,"trip");if(w>0)O.push(["tat",w])}if(ACT.phatquy.ok(v,t)){const w=.7*persW(v,"trip");if(w>0)O.push(["phatquy",w])}}}catch(e){}return O}})();
 
 /* ---------- 5. EXPRESSIONS: removed (owner 11/14 22:50Z — feelings are shown by the small mood icons, not by reshaping faces in code). faceExpr kept as a no-op for old callers. */
@@ -252,7 +252,7 @@ function fxServMonth(){const all=fxServants();for(const s of all){if(!KIT_FACEFX
   const w=npcWhy("fxSrvHarm",{p:s,mates},o=>!!o.tgt&&roll(BAL.ag.why.fxSrv.p));if(!w)continue;fxHarm(s,w.tgt,w.why)}/* npc-purpose G2c: a servant with a grudge strikes the mate she is jealous of */
  for(const v of liveRivals(true)){let hot=0;try{hot=typeof hostility==="function"?hostility(v,S):0}catch(e){}
   const mw=npcWhy("fxRivSrv",{p:v},()=>roll(BAL.ag.why.fxSrv.rivP));if(mw){const t=mw.tgt;/* npc-purpose G2c: her grudge against the player picks the servant most loyal to her */if(t&&KIT_FACEFX.live(t)){fxHarm(v,t,"");if(roll(40)){try{evA(S,v,BAL.eff.jface.evFxServMonth);if(fxSeen(t))log(`Ngươi lần ra dấu vết: người của ${v.name} ra tay với ${fxName(t)}: Chứng cứ về ${v.name} ${balSg(BAL.eff.jface.evFxServMonth)}.`)}catch(e){}}}}
-  const m2=npcWhy("fxRivSrv2",{p:v},o=>!!o.tgt&&roll(BAL.odb.jface.rbFxServMonth+(hostility(v,o.tgt)>=BAL.ag.why.fxSrv.hot?BAL.ag.why.fxSrv.hostAdd:0)));const v2=m2&&m2.tgt;if(v2){const t=npwPick(v2.staff||[],x=>KIT_FACEFX.live(x)?1+Math.max(0,x.loyal||0):0);if(t)fxHarm(v,t,m2.why)}}}/* npc-purpose G2c: only at a consort she bears a grudge against */
+  const m2=npcWhy("fxRivSrv2",{p:v},o=>!!o.tgt&&roll(BAL.odb.jface.rbFxServMonth+(hostility(v,o.tgt)>=netTh(v,"host")?BAL.ag.why.fxSrv.hostAdd:0)));const v2=m2&&m2.tgt;if(v2){const t=npwPick(v2.staff||[],x=>KIT_FACEFX.live(x)?1+Math.max(0,x.loyal||0):0);if(t)fxHarm(v,t,m2.why)}}}/* npc-purpose G2c: only at a consort she bears a grudge against */
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead)fxServMonth()}catch(e){console.error(e)}return r}})();
 /* a mark still on the cheek (vừa / nặng) may be seen and reported: one witness keeps evidence against whoever slapped, once per mark */
 function slapReport(p){const z=p&&p.slap;if(!z||z.rep||z.until<=wk())return;const c=BAL.slap.rep[slapSev(p)];if(!c||!roll(c))return;

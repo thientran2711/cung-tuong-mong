@@ -255,15 +255,25 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
 
 /* review r1 (MG11): the round time on the card follows the board (BAL.mgTier.lev.<g>.lim by her rank, law 5 / ONE CORE), not the typed seconds */
 function sgDur(G){const n=typeof mgPlaySec==="function"?mgPlaySec(G.g,"lim"):null;return n==null?G.dur:G.dur.replace(/\d+ giây/,n+" giây")}
-/* ---------- the choice: Tự ra tay (game) · Giao cho người làm (plain odds) · Thôi ---------- */
+/* DELEGATE-NOMG (owner OD 25/11 ~04:12Z, verbatim: "Khi nào mà tôi là người tự làm thì mới có thể làm mini game cho tôi. Còn cái này là người ta làm mà
+   tại sao lại là mini game của tôi?"): «Giao cho người làm» = the one she sends does it — no game, and the roll is the DOER's: the act as a SENT act
+   (j9 ACTSEND → actCtx / runAct: the sent one's sendPen = thiện cảm, nết, bậc; merit; caught → confesses), for Nghe lén / Mua chuộc the same sendPen on
+   the job's odds. sgDoer() = who goes (bestSent, the same pick runAct makes). */
+function sgDoer(){try{return bestSent(S)||null}catch(e){return null}}
+function sgSendRun(J,fn){if(J.gk==="over"||J.gk==="serv")return fn();const s0=ACTSEND;ACTSEND=1;try{return fn()}finally{ACTSEND=s0}}
+function sgDlgO(J){if(J.gk==="over"||J.gk==="serv")return oddsCl(Math.round(J.p0()-sendPen(sgDoer(),J.gk==="serv"?"bribe":"spy")));return sgSendRun(J,()=>J.p0())}
+function sgDlgWho(){const s=sgDoer();return s?`giao cho ${s.name}`:"không có kẻ hầu đáng tin để giao"}
+/* ---------- the choice: Tự ra tay (game) · Giao cho người làm (the doer's odds, no game) · Thôi ---------- */
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
- const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
+ const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0)),dlg=`${sgDlgWho()} · `+J.line(word(sgDlgO(J)));
  const gl=base+` · (tự chơi ${sgDur(G)}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
- const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();
+ const go=(f,dl)=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0(),fzD=sgDlgO(J2);
   /* KIT §13.9: the pay (khắc / the visit's turn) is taken on «Sẵn sàng» or «Giao cho người làm» (kgDefer); the ✕ before it = free back. pay.chk = can she pay now */
   const dfr=typeof kgDefer==="function"&&typeof J2.pay.chk==="function";if(dfr){if(!J2.pay.chk()){try{render()}catch(e){}return}}else if(!J2.pay()){try{render()}catch(e){}return}
-  J2.fz=fz;const r0=J2.run;J2.run=m=>fzRun(sgShift(fz,(m&&m.step)||0),J2.gk,()=>r0(m));if(dfr)kgDefer(J2.pay,()=>f(J2));else f(J2)};
- return{t:`<p>${J.ask}</p>`,who:p.j==="act"||p.j==="place"?(typeof pv==="function"?pv(J.v):null):null,o:[{n:`Tự ra tay: ${G.t}`,fx:{},x:gl,showOut:true,go:go(J2=>sgPlay(J2))},{n:"Giao cho người làm",fx:{},x:base,showOut:true,go:go(J2=>J2.run(null))},{n:"Thôi",fx:{},showOut:true}]}};
+  J2.fz=fz;J2.fzD=fzD;const r0=J2.run;J2.run=m=>fzRun(sgShift(fz,(m&&m.step)||0),J2.gk,()=>r0(m));
+  /* the delegated road (the choice «Giao cho người làm», or the same button inside the game's rules card): the doer's odds, run as a sent act */
+  J2.runDlg=()=>fzRun(fzD,J2.gk,()=>sgSendRun(J2,()=>r0(null)));if(dfr)kgDefer(J2.pay,()=>f(J2));else f(J2)};
+ return{t:`<p>${J.ask}</p>`,who:p.j==="act"||p.j==="place"?(typeof pv==="function"?pv(J.v):null):null,o:[{n:`Tự ra tay: ${G.t}`,fx:{},x:gl,showOut:true,go:go(J2=>sgPlay(J2))},{n:"Giao cho người làm",fx:{},x:dlg,showOut:true,go:go(J2=>J2.runDlg())},{n:"Thôi",fx:{},showOut:true}]}};
 function sgAsk(p,title){const d=mkP("sgpick",p);if(!d)return;pushDil(d,title);showModal()}
 /* the act-card click (person card / Hậu cung): capture before j6's panel handler; bots that call doAct() directly are untouched */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-r][data-a]");if(!b||b.disabled)return;const k=b.dataset.a;if(!SG.K[k])return;
@@ -288,9 +298,9 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
  /* mg-easy: a one-screen how-to card the first time (S.mgSeen), then only the Gợi ý button + a quiet nudge when she stalls */
  /* KIT §13.7 (mg-ready-guide): the step rules sit in the shared rules block EVERY time (was: first time only) + «Sẵn sàng» / «Hướng dẫn» (guided round of the same engine) */
  const hint=`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`;
- const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
+ const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`${sgDlgWho()} · ${word(J.fzD!=null?J.fzD:sgDlgO(J))}`})}</div>`;
   kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,kind:G.g}))/* MG11: the guided round keeps its easiest board (env.lv), was lv 0 = no ease read */});
-  $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.run(null)}};
+  $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.runDlg?J.runDlg():J.run(null)}};
  const finish=(raw0,o)=>{KG82.phase="result";/* MG11 (Thử tay kinds nghe/truyen/mac/thoico): her play goes through the ONE result path of every kind: graded, her rolling hand b learns it, identity offset (jmgid mgIdRes via mgPlayRes); given up = 0, nothing learnt */const raw=o&&o.gaveUp?0:mgPlayLearn(G.g,raw0);/* review r1: hand b learns; the odds step reads the graded play (class "" ±0, law 2) */const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
   const parts=[["Phần chơi",`${kg82Word(raw)} · ${raw}/10`]];
   if(G.eng===sgNghe)parts.push(["Câu thật nghe được",`${o.hits||0} / ${o.NI||0}${o.wrong?` · lầm lời đồn ${o.wrong}`:""}`]);
@@ -300,7 +310,7 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
   const html=kitGameResult({parts,note:note+" Chạm «Ra tay»: việc làm theo cơ may này, kết quả hiện ở thẻ kết quả."})+kitRows(xr)+
    `<div class="kg82act"><button class="${kg82Btn()}" id="sgdo">Ra tay</button></div>`;
   kg82ShowRes(html,st>0?true:st<0?false:null);/* merge-train-4: result sound (result-sfx): odds up = win, down = lose */kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");$("sgdo").onclick=()=>{kg82Close();J.run(m)};KG82.quit=null;/* §13.9: the ✕ never acts silently: it asks first; «Ra tay» stays the only way on (the pay is spent), «Ở lại» keeps this card */
-  KG82.xdo=()=>kg82Ask([`Ra tay ngay: việc làm theo cơ may ${word(p1)}.`,"Kết quả hiện ở thẻ kết quả."],"Ra tay",()=>{const b=$("sgdo");if(b)b.click()},"Ra tay?","Ở lại");const dd=kg82El();if(dd)dd.scrollTop=0};
+  KG82.xdo=()=>{const b=$("sgdo");if(b)b.click()};const dd=kg82El();if(dd)dd.scrollTop=0};
  intro()}
 function sgEng(G,v,onEnd){const box=kg82Box();box.innerHTML="";const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";let done=false,dead=false,stop=null;
  KG82.peekBad=null;const env=KG82.cur={v,kind:G.g,lv:mgPlayLv(G.g),hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:(raw,info)=>{if(done)return;done=true;clearTimeout(guard);KG82.peek=()=>null;KG82.peekBad=null;const st=stop;KG82.run=null;try{if(st)st()}catch(e){}onEnd(cl(Math.round(raw),0,10),info||{})}};

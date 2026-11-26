@@ -46,3 +46,6 @@ Object.assign(BAL,{kyngo:{on:1,
   sv_co:{w:1,b:"0",o:[{g:{},c:{suc:8,kh:2},s:"rk"},{g:{th:30},c:{relM:8,kh:1}}]},
   sv_tre:{w:.8,b:"123",plain:{g:{rel:34}}}
  }}});
+/* ORDER THIN P5 (jkyc.js composed Kỳ ngộ): on = cross-life memory live; seen = weight factor of an encounter (old 25 + composed) that a past life met
+   (P0 family "ky"; fresh-first). The composed encounters' own rows (w, b, o / plain) are written into BAL.kyngo.E by jbalkyc.js (built). */
+BAL.kyc={on:1,seen:.15};
