@@ -515,3 +515,4 @@ C3-SEALS (all lines above: W1/W1b/W1c/W1d/W1e, W2, W3) | review/c3-seals 4a758f6
 | D-ENDRANK end-card «Phẩm cao nhất» family (ban hoa shows Quý nhân; cnv lazy-5 shows Đáp ứng with HUD rank 0) | review/end-maxrank | FOREMAN D session_01D3E3NYYzn179gzKUA3MM7U / worker session_01D3E3NYUsUqaCwQiJyhQgsy | RUNNING | 26/11 17:08Z |
 C3-SEALS-RM re-merge main f573dc94 + rebuild + tests | review/c3-seals | (session in STATUS) | RUNNING | 2026-11-26T18:20Z (Foreman C ROOT 3-1-1-1-1)
 C3-SEALS-RM | review/c3-seals | session_01PEhRbuThfqRgsb1V4EPoSx (sonnet) | RUNNING | 2026-11-26T18:22Z (Foreman C; id for the line above)
+coop-afk-l13 OPEN 2 (host reload no replay) | review/coop-afk-l13-r3 | <pending> | RUNNING | 26/11 18:30Z (Foreman B child 4)
