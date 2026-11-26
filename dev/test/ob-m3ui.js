@@ -64,6 +64,14 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
    await clear();await p.evaluate(()=>{kitModal({kind:'info',title:'Thử',sections:[{h:'',html:'<p>Đọc xong thì đóng.</p>'}],btn:'Đã rõ'})});await p.waitForTimeout(400);
    await p.evaluate(()=>{const b=document.createElement('button');b.id='obt2';b.style.cssText='position:fixed;left:0;top:0;width:2px;height:2px;z-index:999999';document.body.appendChild(b)});await tapSel(p,'#obt2');
    const lf=await back();const bk=!lf&&await p.evaluate(()=>document.getElementById('modal').hidden);ok(dev,'2b Back on an info dialog',lf?'LEFT THE GAME':bk?'closed':'STILL OPEN',bk&&!lf);
+   /* (2c) RV-OB-M3UI: Back on the BARE room, on a FORCED event, and on a closable card opened by a timer long after the last tap — never leaves */
+   await clear();await p.waitForTimeout(1200);{const lf=await back();ok(dev,'2c Back on the bare room',lf?'LEFT THE GAME':'stays in the game',!lf)}
+   await clear();await p.evaluate(()=>{Q.push({ev:1,t:'Việc phải chọn',who:pMe(),h:'<p>Phải chọn.</p>',opts:[{n:'Theo',fx:{},x:'',go:()=>{}},{n:'Không theo',fx:{},x:'',go:()=>{}}]});showModal()});await p.waitForTimeout(1500);
+   {const lf=await back();const still=!lf&&await p.evaluate(()=>!document.getElementById('modal').hidden&&/Việc phải chọn/.test(document.getElementById('modal').innerText));
+    ok(dev,'2c Back on a forced event',lf?'LEFT THE GAME':still?'stays, event still waiting':'EVENT SKIPPED',!lf&&still)}
+   await clear();await p.evaluate(()=>{setTimeout(()=>kitModal({kind:'info',title:'Tin muộn',sections:[{h:'',html:'<p>Mở bằng giờ.</p>'}],btn:'Đã rõ'}),1500)});await p.waitForTimeout(2600);
+   {const op=await p.evaluate(()=>!document.getElementById('modal').hidden);const lf=await back();const cl=!lf&&await p.evaluate(()=>document.getElementById('modal').hidden);
+    ok(dev,'2c Back on a timer-opened card',lf?'LEFT THE GAME':`open ${op} · ${cl?'closed':'STILL OPEN'}`,op&&!lf&&cl)}
    /* (3b) a game option naming death runs at once: no «Kiếp này chưa trọn» re-ask */
    await clear();await p.evaluate(()=>{S.kpWarn=0;Q.push({ev:1,t:'Đường cùng',who:pMe(),h:'<p>Không còn lối.</p>',opts:[{n:'Tự vẫn cho xong',fx:{},x:'',go:()=>{window.__fired=1}},{n:'Sống tiếp',fx:{},x:'',go:()=>{}}]});showModal()});await p.waitForTimeout(900);
    await tapSel(p,'#modal:not([hidden]) .opts>button .kan');await p.waitForTimeout(600);

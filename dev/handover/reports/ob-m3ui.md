@@ -62,3 +62,6 @@ Target review/ob-m3ui 0c6e3222 (fix 248d95c0 on LIVE 3af7896e). Built both with 
 - Video sheets (fold/ipad fresh-life, fold old-save): the grey silhouette portrait on the «Tin» dialogs is a loading placeholder — in my own run of the same build the same dialog shows the real portrait (Tạ Tâm Duyệt, 755x1000 2-kpinfo) while option thumbnails and event art load in the video too, so it is image latency in the recorded run, not a kit fault. (Same silhouette appears in the first «Nhập cung» frame before art arrives.)
 
 Re-review after fault 1: SMALL re-check = run `node dev/test/ob-m3ui.js` + add cases «Back on forced event / bare room / timer-opened card stays in the game».
+
+## FIX r2 (after RV-OB-M3UI SMALL FAIL)
+Back guard is now kept on top ALWAYS: `kitBackArm` at boot, on every pointerdown / key, and re-pushed on every popstate; popstate runs `kitTopClose()` (closes a closable layer, else nothing). New cases in ob-m3ui.js, Fold + iPad: Back on the bare room → stays in the game; Back on a forced event → stays, event still waiting; Back on a card opened by a timer 1.5 s after the last tap → closes it. 50/50 pass, old save continues, 0 page errors. KIT.md 32.10 Back line overwritten in place.
