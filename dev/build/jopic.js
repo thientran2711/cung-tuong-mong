@@ -279,6 +279,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  if(free){ton.remove();gain.remove();if(!b.classList.contains("kfree"))b.classList.add("kfree")}else if(b.classList.contains("kfree"))b.classList.remove("kfree");
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
+ /* KIT §6.6 GAIN LIST (OB-KIEP): the rows assembled here from copies follow the one list rule */if(typeof kaListFix==="function")[ton,gain,matRow].forEach(r=>r&&kaListFix(r.querySelector(":scope > .krv")));
  b.dataset.kofin="1";b.__kofSig=kitOptSig(b,kb)}catch(e){console.error("kitOptFinal",e)}}
 /* KIT §56.19 (opt-scroll-reset): the signature covers the card's SOURCE rows only, never kitOptFinal's own copies (.kdup chips, .kfill rows, the «!»).
    The rank-name painter (jaudit kitRankNamePaint) titles a bare name inside a copied chip one frame later; with the copies in the signature that edit
