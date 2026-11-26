@@ -186,6 +186,7 @@ async function play(p) {
   const boot = async () => {
     if (!C.noBoot) await p.goto(URL0, { waitUntil: 'load', timeout: 0 });
     await p.waitForFunction(() => typeof start === 'function' && typeof over === 'function', null, { timeout: 0 });
+    await buildGate(p, R.harness.build0 ? (ck ? 'resume' : 'reload') : 'start');
     /* pre-life setup (no taps): forced thân phận through the game's own dev hooks + a recording wrapper on over() */
     await p.evaluate(C => {
       if (C.origin) { window.__forceOrigin = C.origin }
@@ -562,10 +563,24 @@ async function unstick(p, rt, sc, lvl, fromPeer) {
     /* BIG #7 nit 17:34Z: a reload is a fresh game screen → spent closes are tried again (only the escalation count per dialog is kept, ≤2 reloads per dialog) */
     if (R._unsFail) for (const k of Object.keys(R._unsFail)) R._unsFail[k] = R._unsFail[k].__esc ? { __esc: R._unsFail[k].__esc } : {};
     await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
+    await buildGate(p, 'unstick reload');
     await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { card: (() => { try { const m = document.querySelector('#modal'); return m ? [...m.querySelectorAll('button')].filter(b => b.offsetParent).slice(0, 8).map(b => (b.disabled || b.hasAttribute('disabled') ? '[off] ' : '') + b.innerText.replace(/\s+/g, ' ').slice(0, 60)) : null } catch (e) { return null } })(), duringArea: window.__rtBare > Date.now(), id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
     for (const re of (C.coop ? [/cùng hảo hữu/i, /trở lại phòng|vào lại phòng|về phòng/i] : [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i])) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); let i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; /* co-op: «Trở lại phòng» of THIS room's sổ (data-room = the stored code), never another room */ if (i >= 0 && C.coop && C.roomCode && C.roomCode() && /trở lại phòng/.test(re.source)) { const want = C.roomCode(); const j = await p.evaluate(([w, n]) => { const L = window.__rtBtns || []; for (let k = 0; k < L.length; k++) if (L[k] && L[k].dataset && L[k].dataset.room === w) return k; return -1 }, [want, s2.b.length]).catch(() => -1); if (j >= 0) i = j; else { bug('coop', 'rejoin: no «Trở lại phòng» for room ' + want + ' on the room list (only other rooms) — waiting'); i = -1 } } if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
   }
 }
+/* BUILD PIN (F #20 10:47Z, s7 flight2: a life started on build 3762da08 went on after a resume on LIVE 6b5d3d05 → mixed build, INVALID): the first page load of a life
+   records window.CTM_BI {s, b} in R.harness.build0 (kept in the ckpt); EVERY later load (resume, unstick reload, crash restart → resume=1) must show the same b.
+   A different build = HARD STOP «BUILD MISMATCH»: results saved with harness.buildMismatch, the ckpt is left as it was (resume it on the recorded build:
+   dev/test/rt-serve-build.sh --b <b> <port>), exit code 3. Never a silent continue. */
+async function buildGate(p, where) {
+  const bi = await p.evaluate(() => { try { return window.CTM_BI ? { s: window.CTM_BI.s, b: window.CTM_BI.b, t: window.CTM_BI.t } : null } catch (e) { return null } }).catch(() => null);
+  (R.harness.builds = R.harness.builds || []); if (bi && !R.harness.builds.some(x => x.b === bi.b)) R.harness.builds.push({ s: bi.s, b: bi.b, where });
+  if (!bi) return true;
+  if (!R.harness.build0) { R.harness.build0 = { s: bi.s, b: bi.b, t: bi.t, at: new Date().toISOString() }; return true }
+  if (bi.b === R.harness.build0.b) return true;
+  R.harness.buildMismatch = { want: R.harness.build0, got: bi, where, at: new Date().toISOString() };
+  const msg = 'BUILD MISMATCH at ' + where + ': life recorded on ' + R.harness.build0.s + ' (' + R.harness.build0.b + '), page is ' + bi.s + ' (' + bi.b + ') — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b ' + R.harness.build0.b + ' <port>) and resume';
+  console.log(msg); try { bug('harness', msg) } catch (e) {} try { save() } catch (e) {} process.exit(3) }
 function save() { const f = path.join(OUT, LIFE + '.json'); try { R.promo = OFFER.recount(R.offers) /* real promotion roads seen / taken (rt-offer.js rule 2; offers logged by an older harness are re-classified) */ } catch (e) {} fs.writeFileSync(f, JSON.stringify(R, null, 1));
   fs.writeFileSync(path.join(OUT, LIFE + '.md'), ['# ' + LIFE + ' (real-tap harness ' + SHA + ', ' + DEV + ')', '', '| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |', '|---|---|---|---|---|---|---|---|---|---|',
     '| ' + LIFE + ' | ' + (R.life ? R.life.id + (R.life.fate ? ' — ' + R.life.fate : '') : 'running') + ' | ' + (R.life && R.life.age || '') + ' | ' + R.buoi + ' | ' + (R.harness.taps || '') + ' | ' + R.dead.length + ' | ' + R.harness.stuck + ' | ' + R.bugs.length + ' | ' + (R.exitPick ? R.exitPick.label + (R.exitPick.only ? ' (only option)' : '') : '—') + ' | ' + (R.promo ? R.promo.real + ' / ' + R.promo.picked + (R.promo.real ? ' (' + Object.entries(R.promo.by).map(([k, v]) => k + ' ' + v).join(', ') + ')' : '') : '—') + ' |', '',

@@ -360,3 +360,15 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   (window.__rtBare) in the same page call; before the guard exists, bareTapOn takes the tap. N2 the quick option is removed only when another NON-back move is there
   (a board with only quick + ✕ takes the quick, never the 6-min give-up). N3 board moves count in areaTaps + boardTaps. Proof LIVE 6b5d3d05: RT_TEST_BOARD=vu Fold 9 /
   iPad 7 (no skip), RT_TEST_EXAM=1 Fold s31 + iPad s12 [5,5], iPad bold s4242 → buổi 14, 0 DEAD, 0 bugs.
+
+### FIXER #9 — BUILD PIN on resume (F #20 10:47Z, s7 flight2 mixed build 3762da08 → 6b5d3d05), 11/26/2026
+- Root: every resume / unstick reload / crash restart reloads the URL given on the command line; when that URL serves LIVE and LIVE moved, the life silently goes on
+  on another build (s7: recorded {"s":"3762da08+","b":"fa8da73cecdc"}, page {"s":"6b5d3d05+","b":"b7dcbbd06e03"} from 07:42Z).
+- Fix (robot-rt.js): buildGate() after EVERY page load (boot: start / resume / crash-restart resume=1; unstick reload). First load records window.CTM_BI {s,b,t} in
+  R.harness.build0 (kept in the ckpt); every load's build goes into R.harness.builds; a different b = HARD STOP «BUILD MISMATCH …» (bug [harness], results saved with
+  harness.buildMismatch, the ckpt is NOT touched, exit 3). New dev/test/rt-serve-build.sh <sha> <port> | --b <CTM_BI.b> <port>: serves the built site of that main
+  commit (sparse worktree, fetch under the shared lock) so the life resumes on its own build. robot-rt-coop seats use the same Seat boot → same gate; robot-save-replay
+  replays one save, no life (not gated). robot-audit.js (handover 782c9fac): harness.builds with > 1 b or buildMismatch → INVALID «mixed build».
+- Proof (local): life BP started on LIVE 6b5d3d05 (b 0281bf7bcef6) to buổi 11 → resume against 02f564ae (b dd1ce3d0ffa1) = «BUILD MISMATCH at resume», exit 3, ckpt
+  kept at buổi 11 → `rt-serve-build.sh --b 0281bf7bcef6 8811` serves the same b → resume goes on to buổi 27, no mismatch. Audit fixture: 2 builds → INVALID «mixed
+  build (3762da08+/fa8da73cecdc → 6b5d3d05+/b7dcbbd06e03)».
