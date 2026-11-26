@@ -404,3 +404,32 @@ Worktrees /home/user/wt/rv19, rv19m, rvst, rvho removed after this report; scrat
     - (3) Then rerun quickcheck alone.
 - phanCungEdict (MAIN 148 / Foreman D): already wired. jselxday:280 «Tin sắc phong» onClose → selxPhanCung → window.phanCungEdict({list,then}); the signature equals D's review/dfu-lr 6459cdc8 jpromob.js:193. Nothing to do until both land; then one run to «Tin sắc phong» must show window.__pcN > 0.
 - Worktree /home/user/wt/s19 (branch review/selection-scene-r19 = 3f5ace795); scratch logs in /home/user/wt/s19-out6.
+
+## SELSCENE-20 — quickcheck fixed in the TEST DRIVER (harness artefacts, proven) → **LAND READY 10a0f82b** (26/11 ~01:40Z; MAIN 150 session_01V1ZZH2YckQXrmUKJjntcTS, lander LC18 session_01V1ZZH4fCwydG8UT9j6GXGb)
+PRIORITY #1 CHECK: reused review/selection-scene-r19 3f5ace79 (SELSCENE-19 r4); no rebuild; the game source is unchanged (only dev/tools/quickcheck.js).
+- (1) Ban hoa probe, same option-0 driver as quickcheck (NEWLIFE + SETTLE, iPad, no throttle, 24 lives per build, script /home/user/wt/s20-out/probe.js):
+
+| build | lives | day lives (selection days played) | ban hoa |
+|---|---|---|---|
+| 3f5ace79 (r4 on LIVE 5e013076) | 24 | 17 | 10 (10 of 17) |
+| bb308363 (r3 on LIVE 351122ba) | 24 | 20 | 14 (14 of 20) |
+
+  The new build is **not** higher. jdayq r4 does not hold or reorder selection cards for the driver. About 3 in 5 day lives end in ban hoa on both builds. That follows from the owner's rule (BAL.selx.yard: 12 girls, top 4 kept) for an average option-0 girl. Not a game fault.
+- (2) The two harness artefacts, fixed in dev/tools/quickcheck.js:
+  - a. **Reroll cap 5 → 20** (73c14698). With p ≈ 0.6–0.7, six ban hoa in a row in one settle happen ~5–12 % of the time. With 5+ settles per run, about 1 run in 3 failed on luck. That was runs 2–3 of r4. Proof: qc run 1 here needed **7 rerolls in one settle**. Cap 20 ⇒ < 0.1 % per settle.
+  - b. **The long-task list (window.__lt) is emptied at each reroll** (10a0f82b). The perf observer starts before NEWLIFE, so every rerolled life's 3 days were added to the kept life's count. The perfgate dayLife ceiling (72) is for one life's days.
+    - Before: [33,75,52] and [34,73,51] tasks. The 75 / 73 run had 6 rerolls (playable 110 s); runs with 0 rerolls had 33–39.
+    - After: [35,36,34], [31,31,30], and [29,25,29] in a run with 3 rerolls.
+- buổi gate: noisy on both builds. New single runs 1415–6721 ms, live 1454–4951 ms; one perf-only run failed on it (5203 vs 2726). The 4 runs after the fix PASS (medians new/live 3467/2696, 1932/3952, 2338/3977). The r4 run-1 FAIL (4265 vs 2430) sits in that spread. No game change on this lane touches the buổi.
+- (3) Gates on 10a0f82b (each alone; the earlier gates are unchanged from 3f5ace79 because no game file changed):
+
+| gate | result |
+|---|---|
+| quickcheck.js (open · old save · perf vs LIVE 5e013076) | **PASS ×3**: render 228/250, 279/240, 269/289 ms · tab 469/517, 541/526, 487/448 ms · buổi 3467/2696, 1932/3952, 2338/3977 ms · tasks 35/36, 31/33, 27/35 · day lives 3/3 each run, max 36 · rerolls 0 / 0 / 3 · old save ok |
+| quickcheck.sh core G1–G3 + G4 hooks | PASS **except** G4 90-button-crawl «Ô lưu · Lui close button did not close its layer» = **pre-existing on LIVE 5e013076**: button-crawl --fast on LIVE 2/2 FAIL, same row; on this sha 2/2 the same (follow-up F2, not this lane) |
+| G4 95-next-dead | 1 Fold FAIL in the busy core-gate batch. Alone: new 3/3 PASS, LIVE 3/3 PASS ⇒ flaky under load |
+| coop-e2e A/B, selx ×6, sid ×2, k61 ×2, co-ngu, kit-faces-opts 36/36, touchdrag 8/8, notice 16/16, kit-one-opt-tap | as on 3f5ace79 (SELSCENE-19 r4 table); no game file changed since |
+
+- **For the second lander (vs Foreman D stack):** phanCungEdict is already wired (jselxday.js:280/285 «Tin sắc phong» onClose → selxPhanCung → window.phanCungEdict). Once both are stacked, one run to «Tin sắc phong» must show window.__pcN > 0.
+- **Golive note:** quickcheck.sh prints FAIL on any sha on LIVE 5e013076 until the «Ô lưu · Lui» button-crawl row (F2) is fixed or filed in dev/tools/quickcheck.d/button-crawl-known.txt by its owner lane.
+- Worktrees: /home/user/wt/s20 (branch review/selection-scene-r19 = 10a0f82b), s20b (bb308363, probe only), s20ho (this report); logs in /home/user/wt/s20-out.
