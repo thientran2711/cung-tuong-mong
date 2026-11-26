@@ -325,15 +325,11 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
 function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
-function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12»; no group summary, no cause copy.
-   MAIN 157 26/11 (night card wall «Hoàng hậu …:một vị Quý phi: ghen +8 ghen +8 …»): each person is ONE block line (.kkemi, every card: rtoast, night card, kitRows);
-   the people she cannot name with the SAME feeling and number are one line «4 vị khác: ghen +8» (one alone keeps «một vị <tước>: ghen +8») */
- const R=K.filter(x=>Math.round(x.d));const L=[],U=new Map();
- const line=(nm,k,d)=>`<span class="kitem kkemi"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${k} ${kaN(d)}</span></span>`;
- for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){L.push([0,line(kaWho(x.v),x.k,d)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[]});U.get(key).v.push(x.v)}
- for(const {k,d,v} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^M/,"m"):`${v.length} vị khác`;L.push([1,line(nm,k,d)])}
- const out=L.slice(0,8).map(x=>x[1]);if(L.length>8)out.push(`<span class="kitem kkemi"><span class="ef n">… và ${L.length-8} người khác</span></span>`);
- return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${out.join("")}</span></span>`:""}
+function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
+ const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
+  return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaN(d)}</span></span>`});
+ if(K.filter(x=>Math.round(x.d)).length>8)L.push(`<span class="kitem"><span class="ef n">… và ${K.filter(x=>Math.round(x.d)).length-8} người khác</span></span>`);
+ return L.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${L.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
    the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
@@ -392,7 +388,6 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 .rtoast.karesult .kwy,.kb .kwy{color:var(--dim);font-weight:400;font-size:.74rem}
 
 .kb .kr-kem .krl{color:var(--dim)}
-.kb .kr-kem .kitem.kkemi{display:block;text-align:left;width:auto;min-width:0;justify-content:flex-start}/* MAIN 157: one person per line in every card that lists people (rtoast, night card) */
 .kb .kkem{display:block;cursor:pointer;color:var(--ink)}
 .kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}
 .kb .kkem .kkeml{display:none;font-size:.76rem;color:var(--dim);line-height:1.35;margin-top:2px}

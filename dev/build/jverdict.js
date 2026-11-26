@@ -21,7 +21,7 @@ function isP(v){return !!v&&typeof v==="object"&&v!==S&&typeof v.name==="string"
    that dialog's chooseM; the aim then WAITS for its dialog (x.wait = the cards the act queued) and the re-entry runs on the SAME frame, so
    the deed's roll (aRoll / caught / the decision hooks below) lands on the aim the card reads. An act that is over (ran, sent, or opened
    nothing) leaves its aim to the next card (kaAimUse); a dialog closed without its deed («Thôi») closes its aim. */
-const PEND=[];let CMID=0,idleT=0;
+const PEND=[];let CMID=0,idleT=0,CMIN=0;
 const qNew=q0=>Q.filter(m=>!q0.includes(m));
 const gone=x=>!!x.wait&&!x.wait.some(m=>Q.includes(m));/* its dialog was taken off the queue: it is being answered now */
 function shut(x){if(!x)return;x.used=1;const i=PEND.indexOf(x);if(i>=0)PEND.splice(i,1)}
@@ -32,9 +32,20 @@ function fin(x,f,q0,now){if(!x)return;const nq=qNew(q0);
  const i=PEND.indexOf(x);if(i>=0)PEND.splice(i,1);x.wait=null;x.outer=0;x.jvDone=1;idleShut()}
 /* the pending act whose dialog is being answered now, for this doer → target (and act key) */
 const pendOf=(a,t,key)=>{const x=PEND.find(x=>!x.used&&x.jvF&&x.jvF.a===a&&x.jvF.t===t&&(key==null||x.jvKey===key)&&gone(x));if(x){x.jvCm=CMID;x.seq=S.logSeq||0/* the span of the card of the dialog answered now */}return x};
-function outer(v,key,o){const f={a:S,t:v,ok:null};const x=kaAim(v,Object.assign({outer:1,open:1,ok:()=>f.ok},o));if(x){x.jvF=f;x.jvKey=key}return [x,f]}
-/* RV N4: her deed that FAILED says so in ONE plain sentence (VANPHONG): «Ngươi vu oan Phi Lý Tú: bị lộ.» (caught / exposed) or «…: không thành.» */
-function failSen(k,t,f){return o=>{if(o!==false||!t)return"";const who=`<span data-k61skip>${typeof kaWho==="function"?kaWho(t):t.name}</span>`;let act="";try{act=typeof j78act==="function"?`Ngươi ${j78act(k,who)}`:""}catch(e){}if(!act)act=`${(ACT[k]&&ACT[k].n)||""} ${who}`.trim();return `${act}: ${f.lo?"bị lộ":"không thành"}.`}}
+function outer(v,key,o){const f={a:S,t:v,ok:null};const x=kaAim(v,Object.assign({outer:1,open:1,ok:()=>f.ok},o));if(x){x.jvF=f;x.jvKey=key;if(!/^act:/.test(key))withSen(x,null,o&&o.n,v,f)}return [x,f]}
+/* RV N4 (owner rule: ONE plain sentence of what happened to HER deed, never another log line): every aim of hers with a verdict carries the
+   deed's own outcome sentence, built from the deed itself — «Ngươi vu oan Phi Điền Thanh Hoan: thành, nàng bị giáng xuống Phi.» /
+   «…: bị lộ.» (caught / exposed) / «…: không thành.» / «…: bỏ dở.»; an act key k gives the verb (j78act), else the act / option name */
+function verdSen(k,n,t,f,X){return o=>{if(o===null||o===undefined||!t)return"";let r0=null;try{const x=X&&X();r0=x&&x.b0?x.b0.rank:null}catch(e){}/* her target as she knew her when she acted (rank before a demotion) */
+ const who=`<span data-k61skip>${rivals.includes(t)&&r0!=null&&typeof RANKS!=="undefined"&&RANKS[r0]?RANKS[r0].n+" "+t.name:typeof kaWho==="function"?kaWho(t):t.name}</span>`;let act="";
+ try{if(k&&typeof j78act==="function")act=`Ngươi ${j78act(k,who)}`}catch(e){}if(!act){const nm=kaPlain(n||"");act=nm.includes(t.name)?nm.replace(t.name,who):`${nm} — ${who}`}
+ if(o===false)return `${act}: ${f.lo?"bị lộ":"không thành"}.`;if(o==="soft")return `${act}: bỏ dở.`;
+ let tail="";try{const x=X&&X();const P=x?kaAimStat(x).map(kaPlain).filter(w=>/^(bị |được thăng|đã mất)/.test(w)):[];if(P.length)tail=`, nàng ${P.join(", ")}`}catch(e){}
+ return `${act}: thành${tail}.`}}
+const withSen=(x,k,n,t,f)=>{if(x&&!x.sen)x.sen=verdSen(k,n,t,f,()=>x);return x};
+/* RV N1: game code may clear the queue under her pending dialog (not ✕ / Thôi / chooseM): any card that reads the aims, outside a dialog
+   being answered, first closes the pending acts whose dialog is gone — they never leak onto a later card */
+if(typeof kaAimsOf==="function"){const k0=kaAimsOf;kaAimsOf=function(){try{if(!CMIN)for(const p of PEND.slice())if(gone(p))shut(p)}catch(e){}return k0.apply(this,arguments)}}
 /* runAct: every ACT deed (hãm hại, dò la, tố giác, vu oan, kết giao, cài đồ …), hers and an NPC's on her */
 /* her servant refused the dirty deed before it began (j29 «quỳ xin … đừng làm việc thất đức; việc không thành»): nothing done = BỎ DỞ */
 const post=(f,r)=>{try{if(f&&f.ok==null&&f.a===S&&r&&/việc không thành/.test(kaPlain(r)))f.ok="soft"}catch(e){}return r};
@@ -42,14 +53,14 @@ if(typeof runAct==="function"){const ra0=runAct;runAct=function(a,t,k){const A2=
  if(!S||!a||!t||a===t||!A2)return ra0.apply(this,arguments);
  const f0=top();if(f0&&f0.a===a&&f0.t===t){f0.ran=1;return post(f0,ra0.apply(this,arguments))}/* doAct / a dialog on her already holds this deed */
  const px=pendOf(a,t);if(px){const f=px.jvF;f.ran=1;F.push(f);try{return post(f,ra0.apply(this,arguments))}finally{F.pop()}}/* the deed of a dialog she is answering (picker, road card) */
- const f={a,t,ok:null};const x=a===S&&isP(t)?kaAim(t,{ok:()=>f.ok,n:A2.n,sen:failSen(k,t,f)}):t===S&&isP(a)?kaAim(S,{by:a,ok:()=>f.ok,n:(A2.n||"").toLowerCase()}):null;
+ const f={a,t,ok:null};const x=a===S&&isP(t)?withSen(kaAim(t,{ok:()=>f.ok,n:A2.n}),k,A2.n,t,f):t===S&&isP(a)?kaAim(S,{by:a,ok:()=>f.ok,n:(A2.n||"").toLowerCase()}):null;
  F.push(f);let r;try{r=post(f,ra0.apply(this,arguments))}finally{F.pop()}if(x){if(!r)x.used=1;else st(a===S?"runAct":"runActOnHer")}return r}}
 /* a deed SENT with a servant (jptime ptHarmSend): it lands later → «chưa rõ — người được sai về sẽ báo» */
 setTimeout(()=>{try{if(typeof ptHarmSend!=="function")return;const p0=ptHarmSend;ptHarmSend=function(){const r=p0.apply(this,arguments);const f=top();if(r&&f&&f.a===S)f.sent=1;return r}}catch(e){}},0);
 /* doAct: her deed from the person card (and its re-entry from its own «Bày mưu» / road card / mini-game) */
 if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){const v=typeof rivals!=="undefined"?rivals[i]:null;const A2=typeof ACT==="object"&&ACT[k];
  if(!S||!v||!A2||k==="plant"||k==="gift")return d0.apply(this,arguments);/* plant / gift open a picker: the picked run registers itself (runAct / giveTo) */
- const key="act:"+v.id+":"+k;let x=pendOf(S,v,key),f;if(x){f=x.jvF;x.jvCm=CMID}else{const L=outer(v,key,{n:A2.n,later:()=>f.ran?"":f.sent?"người được sai về sẽ báo":""});x=L[0];f=L[1];if(x)x.sen=failSen(k,v,f)}
+ const key="act:"+v.id+":"+k;let x=pendOf(S,v,key),f;if(x){f=x.jvF;x.jvCm=CMID}else{const L=outer(v,key,{n:A2.n,later:()=>f.ran?"":f.sent?"người được sai về sẽ báo":""});x=L[0];f=L[1];withSen(x,k,A2.n,v,f)}
  const q0=Q.slice();F.push(f);let r;try{r=d0.apply(this,arguments)}finally{F.pop()}
  if(x){if(f.ran)st("doAct");else if(f.sent)st("doActSent");fin(x,f,q0)}return r}}
 /* talk: every talk option on a person (thăm hỏi, khen, nói chuyện người thứ ba, khiêu khích, tạ lỗi, cảnh báo …).
@@ -69,7 +80,7 @@ if(typeof srvTalk==="function"){const s0=srvTalk;srvTalk=function(){const A=s0.a
 if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){const id=++CMID;let x=null,f=null;const q0=Q.slice();
  try{const m=Q[0],c=m&&m.opts&&m.opts[i];const w=m&&m.who&&m.who.w;const v=w&&w[0]==="r"&&typeof RV==="function"?RV(w[1]):null;
   if(S&&c&&!c.off&&isP(v)&&v.alive!==false&&!/^Thôi/.test(c.n||"")&&!PEND.some(p=>p.wait&&p.wait.includes(m))){const L=outer(v,"opt:"+v.id,{n:kaPlain(c.n||"")});x=L[0];f=L[1]}}catch(e){}
- if(f)F.push(f);let r;try{r=c0.apply(this,arguments)}finally{if(f)F.pop();
+ if(f)F.push(f);CMIN++;let r;try{r=c0.apply(this,arguments)}finally{CMIN--;if(f)F.pop();
   try{if(x){if(!x.used&&f.ok==null&&!f.ran)st("opt");fin(x,f,q0.slice(1),1)/* an option does not come back to itself: done at once */}for(const p of PEND.slice())if(p!==x&&p.jvCm!==id&&gone(p))shut(p)}catch(e){}}
  return r}}
 /* RV r1 #2: deeds decided WITHOUT aRoll — the decision point itself gives the verdict (hooks only, no act logic touched):
@@ -93,7 +104,7 @@ if(typeof stf2Bribe==="function"){const b0=stf2Bribe;stf2Bribe=function(a,s,o){c
 /* RV r1 #3 (law 11): runners that do a deed between two people without runAct — the same aim (target «Người ấy» / doer «Ai làm») */
 function hookRun(nm,get,set,who,after){let g0=null;try{g0=get()}catch(e){}if(typeof g0!=="function")return;set(function(){let z=null;try{z=who.apply(null,arguments)}catch(e){}const a=z&&z.a,t=z&&z.t;
  if(!S||!a||!t||a===t)return g0.apply(this,arguments);const ft=frameOf(a,t);if(ft){ft.ran=1;const r=g0.apply(this,arguments);try{if(after)after(ft,r)}catch(e){}return r}
- const f={a,t,ok:null};const x=a===S&&isP(t)?kaAim(t,{ok:()=>f.ok,n:z.n}):t===S&&(isP(a)||z.pub)?kaAim(S,{by:a,pub:z.pub,ok:()=>f.ok,n:z.n}):null;
+ const f={a,t,ok:null};const x=a===S&&isP(t)?withSen(kaAim(t,{ok:()=>f.ok,n:z.n}),null,z.n,t,f):t===S&&(isP(a)||z.pub)?kaAim(S,{by:a,pub:z.pub,ok:()=>f.ok,n:z.n}):null;
  F.push(f);let r;try{r=g0.apply(this,arguments)}finally{F.pop()}try{if(after)after(f,r)}catch(e){}if(x){if(r===""&&!z.keep)x.used=1;else st(nm)}return r})}
 /* j55 nhà ngoại: dò sổ sách nhà ngoại / dâng chứng cứ tham ô (the verdict = window.__tdOk, set by the deed itself) */
 hookRun("tdProbe",()=>tdProbe,f=>tdProbe=f,(a,t)=>({a,t,n:t===S?"sai người dò nhà ngoại ngươi":"Sai người dò nhà ngoại"}),(f,r)=>{if(r)f.ok=!!window.__tdOk});
