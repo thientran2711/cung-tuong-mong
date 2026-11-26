@@ -3767,3 +3767,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~02:28Z PROMO-ROOT2 forgetSafe 346da1ae (promo-root 8/8, coop 143) → LC19 re-stage a9 (A stack); stack (B) without a9 also prepared. PROMO-ROOT2 now on SRVMERIT-FIX r2. LC19 a10–a13 LAND READY (946080a1/27b78563/4ead655b/0dd38efb).
 - ~02:32Z PROMO-ROOT2 also depth 8 → SRVMERIT-FIX r2 ordered to FOREMAN B (plan in reports/promo-root.md 58961c0e); PROMO-ROOT2 archived.
 - ~02:35Z M5b life ended (Quý nhân, died 34, pregnant; ending shot missed by driver). Findings → picker cards clipped at dialog bottom (KK36), save drift (B), hang (D F10). M5b next life after the land.
+- ~02:36Z ROLL: context 32 % (START 7 % + 25). TAKEOVER_MAIN_152.md written. 151 is depth 8 → FOR MAIN: sếp opens a ROOT «MAIN CHÍNH 152» from claude.ai with the paste block (in 151's landing message). 151 stays until then for her messages.
