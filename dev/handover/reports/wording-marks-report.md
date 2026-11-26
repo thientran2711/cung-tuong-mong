@@ -20,3 +20,4 @@ CDN img/_review/wording-marks/marks-{choice,result}-{fold,ipad}.png
 ## Not covered / notes
 - dev/test/marks-bot-scan.js (inpage4 bot) boots but the headless bot only reaches turn ~2 (5 dialogs, 0 left) — endTurn-generated dialogs still need a mid-game save (Foreman F ~b1570); not available to this worker.
 - The scan plays no long run (new-life intro still open in the headless boot); endTurn dialogs were not reached — only builders. A longer `--bot` style run is the next check for RV.
+- RV-163 hold (9047c283): (1) rebuilt site taken (c6908ed4). (2) kit-ton-row 6/14: the SAME 6/14 FAIL run on the pre-marks base 539603bf built here (button not found, row text «?» = harness state, not Tốn): markTxt(text,"ton") returns Tốn text unchanged, so nothing marks changed there. (3) endTurn probe: marks-bot-scan.js (forced endTurn/nextBuoi with showModal stubbed, __nlInner boot) still stays at turn 0 here — NOT demonstrated; needs a mid-game save.
