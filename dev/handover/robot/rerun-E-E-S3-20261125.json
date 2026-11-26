@@ -85141,6 +85141,173 @@
    "t": {
     "total": 3579276
    }
+  },
+  {
+   "job": {
+    "id": "R2-rebel-4",
+    "origin": "thd",
+    "road": "thd_hoc",
+    "bot": "sens",
+    "seed": 2193975486,
+    "dev": "fold",
+    "url": "https://thientran2711.github.io/cung-tuong-mong/"
+   },
+   "harness": {
+    "kind": "realtap",
+    "sha": "2df8f5fa",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "build": {
+     "s": "1dcb373e+",
+     "b": "5ab5b80e406e",
+     "t": "2026-11-26T10:49Z"
+    },
+    "areaTaps": 132,
+    "dlgScroll": 8,
+    "scrolls": 8,
+    "dlgClose": 6,
+    "infoTaps": 1,
+    "mgReady": 2,
+    "mgQuickSkipped": 10,
+    "mgMiss": 1,
+    "mgPeekTaps": 1,
+    "boardTaps": 1,
+    "mgBackWhy": [
+     {
+      "at": 430,
+      "buoi": 1,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     }
+    ],
+    "taps": 76
+   },
+   "life": {
+    "id": "Ban hoa",
+    "type": "end",
+    "fate": "Bị ban hoa, xuất cung",
+    "death": false,
+    "age": 19,
+    "year": 1,
+    "rank": 0,
+    "text": "Ngươi về quê, mở một lớp dạy chữ cho con gái trong vùng. Cung cấm chỉ còn là một giấc mộng xa.",
+    "card": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "duringArea": false,
+    "lastTaps": [
+     "AREA 205,620",
+     "AREA 126,564",
+     "AREA 300,575",
+     "AREA 627,459",
+     "AREA 126,561",
+     "AREA 485,716",
+     "AREA 589,470",
+     "BOARD #kg82 1 moves",
+     "AREA 452,609",
+     "#kg82 «Quay lại»",
+     "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sang buổi»",
+     ".dlg «Thái hậu» «Thần thiếp cúi xuống bế mèo lên, vuốt nhẹ cho nó n»"
+    ]
+   },
+   "exitPick": null,
+   "bugs": [],
+   "dead": [],
+   "buoi": 1,
+   "steps": 256,
+   "status": [],
+   "_loopAt": 1795706385078,
+   "_snapAt": 1795706384109,
+   "_started": true,
+   "_ckAt": 1795706360682,
+   "_ckB": 1,
+   "rss": [
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1275,
+     "rendererMB": 534,
+     "heapMB": 111,
+     "dom": 3123,
+     "q": 4,
+     "lsK": 4
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1961,
+     "rendererMB": 1146,
+     "heapMB": 111,
+     "dom": 968,
+     "q": 1,
+     "lsK": 120
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 2057,
+     "rendererMB": 1205,
+     "heapMB": 111,
+     "dom": 788,
+     "q": 0,
+     "lsK": 127
+    }
+   ],
+   "promo": {
+    "raw": 0,
+    "real": 0,
+    "picked": 0,
+    "by": {}
+   },
+   "_unsFail": {
+    "#klife|": {},
+    ".dlg|Thân phận kiếp này": {},
+    ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+    ".dlg|Ngày thứ nhất — Nhập cung": {},
+    ".dlg|Dưỡng Tú viện": {},
+    ".dlg|Tiền sảnh": {},
+    ".dlg|Đông sở": {},
+    ".dlg|Dò hỏi ma ma": {},
+    ".mapsc|": {},
+    ".dlg|Đêm": {},
+    ".dlg|Ngày thứ hai — Điện tuyển": {},
+    ".dlg|Sân chờ": {},
+    ".kmov|": {},
+    ".dlg|Điện tuyển": {},
+    ".dlg|Thái hậu": {},
+    ".dlg|Hoàng thượng": {},
+    "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # người.": {}
+   },
+   "_scrW": {
+    ".dlg|Thân phận kiếp này|511,470": {
+     "left": 321,
+     "n": 1
+    },
+    ".mapsc||378,533": {
+     "left": 100,
+     "n": 2
+    },
+    "#kg82||378,500": {
+     "left": 77,
+     "n": 1
+    }
+   },
+   "t": {
+    "total": 438071
+   },
+   "verdict": "INVALID (left #kg82 with Quay lại after 1 move; Foreman E child8 ruling 26/11 11:13Z)"
   }
  ]
 }
