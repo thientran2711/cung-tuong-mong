@@ -33,5 +33,7 @@ r=await E(()=>{AA.scen('cao');AA.restore(1);AA.show(AA.surfaces().find(s=>s.id==
  const d=document.querySelector('[data-ill="door"]');d.click();const o=Q[0].opts.map(x=>x.n+(x.off?'|off':''));const i=Q[0].opts.findIndex(x=>/Thái y viện/.test(x.n)&&!x.off);if(i>=0)chooseM(i);return {bs,o,next:Q[0]&&Q[0].t}});
 ok(r.bs.filter(x=>/Mua đồ/.test(x)).length===1&&!r.bs.some(x=>/Sai cung nữ|Hối lộ|Chợ đen/.test(x)),'Tư trang: one «Mua đồ»: '+r.bs.join(' | '));
 ok(/Thái y viện/.test(r.next||''),'way «Hối lộ người ở Thái y viện» opens the old item dialog: '+r.next);
+r=await E(()=>{AA.scen('cao');AA.restore(1);const s=S.staff[0];const A=talkOpts({kind:'serv',ref:s,sid:s.sid}).map(a=>a.n);const t=talkOpts({kind:'serv',ref:s,sid:s.sid}).find(a=>a.n==='Thưởng phạt');t.open();return {A,q:Q[0]&&Q[0].t}});
+ok(r.A.includes('Thưởng phạt')&&!r.A.some(x=>/^(Thưởng vô|Phạt vô|Đổi người)/.test(x)),'servant stage pop-up: one Thưởng phạt: '+r.A.join(' | '));ok(r.q==='Thưởng phạt','pop-up door opens the dialog');
 ok(perr.length===0,'0 page errors '+JSON.stringify(perr));
 await b.close();console.log(fail?'FAILED '+fail:'ALL PASS');process.exit(fail?1:0)})();

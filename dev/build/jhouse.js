@@ -53,7 +53,12 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  A.push(Object.assign({n:"Tiến cử",dom:"Sai bảo",o:100,c:{bac:-H.upBac,danh:-H.upDanh},x:"công lao lên bậc +5"},S.bac<H.upBac?{lock:true,t:`cần ${H.upBac} bạc`}:{},{open:()=>{const bf=rsnap();recommend(s.sid);pay(H.k);hsvDone("Tiến cử",bf,true)}}));
  A.push(Object.assign({n:"Đổi người",dom:"Sai bảo",o:100,fix:1,c:{bac:-H.swapBac,danh:-H.swapDanh},x:`trả ${nm.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ`,risk:`đuổi 2 người trong nửa năm: Danh -${H.swapTwiceDanh}${typeof servSellO==="function"&&servSellO(S,s)>0?` · ${he} đem chuyện của ngươi bán cho kẻ thù: ${chanceW(servSellO(S,s))}`:""}`},S.bac<H.swapBac?{lock:true,t:`thiếu bạc (cần ${H.swapBac})`}:{},{open:()=>{const bf=rsnap();servAct("doi",s.sid);pay(H.k);hsvDone("Đổi người",bf,true)}}));
  return A}
-(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{return hsvOn()?hsvActs(p.ref):[]}catch(e){console.error(e);return[]}}
+/* ACT-MERGE J4: Thưởng · Phạt · Tha lỗi · Đổi người are ONE act «Thưởng phạt» on the stage too (same door as the Cung nhân card: j4ServDoor, jactj4.js).
+   Tra khảo and Che chở stay (evidence / rescue, shown only in their situation). The Dư đồ person view is closed first (jdayq gate c takes back a centre dialog painted inside it). */
+function hsvJudgeDoor(s,A){if(typeof j4ServDoor!=="function")return A;const K=/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/;const out=[];let put=false;
+ for(const a of A){if(a&&K.test(a.n||"")){if(!put){put=true;out.push({n:"Thưởng phạt",dom:"Thưởng phạt",o:100,x:"chọn cách xử: thưởng / phạt / tha lỗi / đề bạt / đổi người",open:()=>{try{if(window.DF&&DF.F&&typeof dfGone==="function")dfGone()}catch(e){}j4ServDoor(s)}})}}else out.push(a)}
+ return out}
+(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{return hsvOn()?hsvJudgeDoor(p.ref,hsvActs(p.ref)):[]}catch(e){console.error(e);return[]}}
   const A=t0.apply(this,arguments);
   /* family fix: her trusted maid's stage card gets the tab's "Giao việc phòng bị" too */
   try{if(p&&p.kind==="maid"&&S.maid&&hsvOn()&&Array.isArray(A)&&typeof def70m==="function"&&!A.some(a=>a&&/việc phòng bị/.test(a.n))){let od=null;try{od=ordOf70("maid")}catch(e){}
