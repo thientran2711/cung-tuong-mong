@@ -155,6 +155,9 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  /* its own info picture as before (KIT_INFO «nguy hiểm» → info-nguy-hiem): jk4 kitEvArt guesses an event picture from the words when m.art is empty, and a WHY «tung tin đồn» pulled «cat:tin-don» */
  let art="";try{art=kitInfoArt("Nguy hiểm chung").src||""}catch(e){}
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger",art});showModal()}
+/* a dialog she opened from a panel: always the centre modal. dfSeen = the jdfv encounter path is skipped — with the person in her room but her
+   figure folded into «+N» (token display:none) that path hid the modal and opened no scene: a dead tap (ob-oan-enc, Fold + iPad) */
+function tsDil(d,title){if(!d)return"";const m={t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,dfSeen:1};if(d.art)m.art=d.art;pushModal(m);return""}
 /* an opener card (later: no empty result card «không được gì»): the dialog it queues is shown at once, its act shows its own result */
 function tsOpener(){TSA.pre=null;setTimeout(()=>{try{const M=$("modal");if(Q.length)showModal()}catch(e){}},0)}
 /* ---------- OB-OAN: «Cách giảm» — ONE table of the real ways each rising bad stat comes down (names of the existing acts only; no new rule, no number).
@@ -193,20 +196,20 @@ function tsMendL(v){const p=v&&v.queen&&rivals[0]===v?{kind:"hh",ref:v}:{kind:"r
  return ["Tạ lỗi","Nhún nhường","Thỉnh an"].map(n=>A.find(a=>a.n===n)).filter(Boolean)}
 function tsOptMend(v){if(!v)return null;const L=tsMendL(v),G=BAL.tsGift;const can0=L.length>0||S.bac>=G.bac;
  return tsOpt({n:`Làm lành với ${tsNm(v)}`,need:can0?[]:[{t:`Bạc ${G.bac} để biếu quà (có ${S.bac})`,ok:false}],duoc:[L.map(a=>a.n).concat(["Biếu quà làm lành"]).join(", ")],kem:[`${tsOanTxt(v)} · ghen ${v.ghen||0}`],
-  later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */pushDil(mkP("tsmend",{v:v.id}),`Làm lành với ${tsNm(v)}`)}})}
+  later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */tsDil(mkP("tsmend",{v:v.id}),`Làm lành với ${tsNm(v)}`)}})}
 PEND.tsmend=p=>{const v=RV(p.v);if(!v||v.alive===false||v.out)return null;const G=BAL.tsGift;
  /* Tạ lỗi / Nhún nhường are gạt đi while her oán is at or above her own forgiving line (jnet netForgive, the same check the act runs): said on the card */
  const fg=netForgive(v,S),th=netTh(v,"nguoi");
  const o=tsMendL(v).map(a=>tsTalkOpt(a,null,/^(Tạ lỗi|Nhún nhường)$/.test(a.n)?[{t:`nàng còn chịu nghe: oán dưới ${th} (đang ${Math.round(oan(v,S))})`,ok:fg}]:[]));
  o.push(tsOpt({n:"Biếu quà làm lành",need:[{t:`Bạc ${G.bac} (có ${S.bac}), hoặc một tác phẩm hay món đồ đủ lễ`,ok:S.bac>=G.bac||tsGiftPieces(S,v,null).some(x=>x.w.ok)}],duoc:[tsGiftEaseTxt(S,v)],
-  kem:[`lễ bạc ${G.bac}, hoặc một tác phẩm tự tay làm hay một món trong rương`],later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */pushDil(mkP("tsgift",{L:[v.id]}),"Biếu quà làm lành")}}));
+  kem:[`lễ bạc ${G.bac}, hoặc một tác phẩm tự tay làm hay một món trong rương`],later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */tsDil(mkP("tsgift",{L:[v.id]}),"Biếu quà làm lành")}}));
  o.push({n:"Thôi",fx:{}});
  return{who:pv(v),t:`<p>${tsNm(v)}: ${tsOanTxt(v)} · ghen ${v.ghen||0} · ${tsWhy(v)}.</p>${tsRows([["Cách giảm",tsLowerTxt("oan"),"n"]].concat(fg?[]:[["Lưu ý",`oán còn quá sâu (từ ${th} trở lên), lời tạ lỗi bị gạt đi: biếu quà làm lành cho nguôi bớt trước`,"r"]]))}`,o}};
 /* the patrons (Xin Hoàng hậu che chở / Xin Thái hậu đỡ lời: the same talkOpts options, odds and gates) */
 function tsHelpL(){const A=[];try{if(typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0]!==S){const h=tsTalkL({kind:"hh",ref:rivals[0]}).find(a=>a.n==="Xin Hoàng hậu che chở");if(h)A.push(h)}}catch(e){}
  try{if(!S.thDead){const t=tsTalkL({kind:"th"}).find(a=>a.n==="Xin Thái hậu đỡ lời");if(t)A.push(t)}}catch(e){}return A}
 function tsOptHelp(){if(tsSrv())return null;const L=tsHelpL();if(!L.length)return null;
- return tsOpt({n:"Nhờ bề trên che chở",need:[{t:L.filter(a=>!a.lock).length?"có người để nhờ":L.map(a=>a.t).join("; "),ok:L.some(a=>!a.lock)}],duoc:[L.map(a=>a.n).join(", ")],later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */pushDil(mkP("tshelp",{}),"Nhờ bề trên che chở")}})}
+ return tsOpt({n:"Nhờ bề trên che chở",need:[{t:L.filter(a=>!a.lock).length?"có người để nhờ":L.map(a=>a.t).join("; "),ok:L.some(a=>!a.lock)}],duoc:[L.map(a=>a.n).join(", ")],later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */tsDil(mkP("tshelp",{}),"Nhờ bề trên che chở")}})}
 PEND.tshelp=()=>{const L=tsHelpL();if(!L.length)return null;return{t:`<p>Nhờ bề trên đứng ra che chở, kẻ muốn hại ngươi phải dè chừng.</p>`,o:L.map(a=>tsTalkOpt(a)).concat([{n:"Thôi",fx:{}}])}};
 /* Phòng bị: the servants' standing orders (j70, the same dialog as the Kẻ hầu tab) */
 function tsOptDef(){if(typeof def70m!=="function"||typeof j70On!=="function"||!j70On())return null;
@@ -258,11 +261,11 @@ function tsGiftPiece(a,v,i){const e=a.inv[i];const w=tsGiftWorth(e,v,a);if(!w.ok
 function tsOptGifts(D){const L=tsGiftL(D);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,x=L[0];
  const nW=tsGiftPieces(S,x.v,"wk").filter(o=>o.w.ok).length,nI=tsGiftPieces(S,x.v,"it").filter(o=>o.w.ok).length;
  return tsOpt({n:"Biếu quà làm lành",need:[{t:`Bạc ${c} (có ${S.bac}), hoặc một tác phẩm hay món đồ đủ lễ`,ok:S.bac>=c||nW+nI>0}],duoc:L.map(y=>tsGiftEaseTxt(S,y.v)),
-  kem:[`trả bằng lễ bạc (${G.bac} bạc mỗi người), hoặc một tác phẩm tự tay làm hay một món trong rương cho ${x.v.name}`],later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */pushDil(mkP("tsgift",{L:L.map(y=>y.v.id)}),"Biếu quà làm lành")}})}
+  kem:[`trả bằng lễ bạc (${G.bac} bạc mỗi người), hoặc một tác phẩm tự tay làm hay một món trong rương cho ${x.v.name}`],later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */tsDil(mkP("tsgift",{L:L.map(y=>y.v.id)}),"Biếu quà làm lành")}})}
 PEND.tsgift=p=>{const L=(p.L||[]).map(RV).filter(v=>v&&v.alive!==false&&!v.out);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,v=L[0];
  const P=k=>tsGiftPieces(S,v,k).filter(o=>o.w.ok),W=P("wk"),I=P("it");const cheap=A=>A.length?Math.min(...A.map(o=>o.w.bac)):0;
  const piece=(k,n,A,what)=>tsOpt({n,need:[{t:`${what} đủ lễ với ${v.name} (có ${A.length})`,ok:A.length>0}],duoc:[tsGiftEaseTxt(S,v),"thiện cảm theo món quà, nàng ưa thì thêm"],
-  ton:A.length?[`${what} −1 (rẻ nhất bán được ${cheap(A)} bạc)`]:[],kem:[`thay cho ${G.bac} bạc lễ của ${v.name}`],go:()=>{pushDil(mkP("tsgiftpick",{v:v.id,k}),"Biếu quà làm lành")}});
+  ton:A.length?[`${what} −1 (rẻ nhất bán được ${cheap(A)} bạc)`]:[],kem:[`thay cho ${G.bac} bạc lễ của ${v.name}`],go:()=>{tsDil(mkP("tsgiftpick",{v:v.id,k}),"Biếu quà làm lành")}});
  return{who:pv(v),t:`<p>Biếu quà làm lành: một phần lễ là ${G.bac} bạc mỗi người. Thay bạc, có thể biếu ${v.name} (người nặng lòng nhất) một tác phẩm tự tay làm hay một món trong rương, miễn nàng thấy đủ lễ.</p>`,
   o:[tsOpt({n:"Lễ bạc",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(y=>tsGiftEaseTxt(S,y)),kem:[`${L.length} người, ${G.bac} bạc mỗi người`],
      go:()=>tsGiftBacGo(L)}),
