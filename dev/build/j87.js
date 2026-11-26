@@ -114,8 +114,11 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   lastKey=key;
   book.innerHTML=sheets.map((s,i)=>`<div class="kbk-sheet" data-i="${i}"><div class="kbk-face kbk-front">${shell(s.front.cls+" r",s.front.html,s.front.folio?String(s.front.no||""):"")}<i class="kbk-sh"></i></div><div class="kbk-face kbk-back">${shell(s.back.cls+" l",s.back.html,s.back.folio?String(s.back.no||""):"")}<i class="kbk-sh"></i></div></div>`).join("")+`<i class="kbk-cast"></i><i class="kbk-gutter"></i>`;
   book.querySelectorAll(".kbk-go").forEach(b=>b.onclick=e=>{e.stopPropagation();close()});
-  /* no flash on turning (owner 15:45Z): every picture of the book decoded once, painted decoded from then on (kitImgSync, jbook) */
-  try{if(typeof kitImgSync==="function")kitImgSync(book)}catch(e){}
+  /* no flash on turning (owner 15:45Z): every picture of the book is marked decoding="sync" + eager (kitImgMark, jbook: a hidden page that
+     comes into view paints decoded, never one empty frame); only the sheets in view and the ones a turn can reveal next are decoded
+     ahead (kitImgSync in paint()). F10 renderer-mem: decoding EVERY picture of every page at open (364 pictures in a year-1 Tuần lục)
+     spiked the renderer past 2.6 GB and froze/crashed the page on phones. */
+  try{if(typeof kitImgMark==="function")kitImgMark(book);else if(typeof kitImgSync==="function")kitImgSync(book)}catch(e){}
   restore();
   try{if(typeof kitNoUnkDom==="function")kitNoUnkDom(root)}catch(e){}
   paint()}
@@ -123,6 +126,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  function paint(){const els=sheetEls();const n=els.length;els.forEach(el=>{if(el.__curl){el.__curl.destroy();el.__curl=null}});
   els.forEach((el,i)=>{const fl=i<cur;el.style.transform=fl?"rotateY(-180deg)":"";el.style.zIndex=fl?String(i+1):String(n*2-i);
    const near=mode==="spread"?(i>=cur-2&&i<=cur+1):(i>=cur-1&&i<=cur+1);el.style.visibility=near&&!(mode==="single"&&fl)?"visible":"hidden";
+   /* decode ahead: the sheets in view + one more each way (what the next / previous turn shows), once per sheet */
+   if(!el.__kis&&(mode==="spread"?(i>=cur-3&&i<=cur+2):(i>=cur-2&&i<=cur+2))){el.__kis=1;try{if(typeof kitImgSync==="function")kitImgSync(el)}catch(e){}}
    el.classList.remove("turn");el.querySelectorAll(".kbk-sh").forEach(s=>s.style.opacity="")});
   const cast=book.querySelector(".kbk-cast");if(cast){cast.style.opacity="0"}
   book.classList.toggle("closed",mode==="spread"&&cur===0);book.classList.toggle("atend",mode==="spread"&&cur>=sheets.length);
@@ -215,7 +220,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  {let nF=typeof FIGS!=="undefined"?FIGS.length:0;const iv=setInterval(()=>{if(closed){clearInterval(iv);return}const n=typeof FIGS!=="undefined"?FIGS.length:0;if(n!==nF){nF=n;if(!busy){clearInterval(iv);
   /* load the paintings first, then swap them in (never a figure that is still on its way) */
   const L=(spec.pages||[]).map(p=>p.kind==="person"?p.who:p.fig).filter(Boolean).map(w=>{try{return kitFigOf(w)}catch(e){return""}}).filter(Boolean);
-  Promise.race([Promise.all([...new Set(L)].map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(r)};im.src=u}))),new Promise(r=>setTimeout(r,4000))]).then(()=>{if(!closed&&!busy)layout(logical,logicalB)})}}},500);setTimeout(()=>clearInterval(iv),60000)}
+  /* F10: bytes only (the sheets in view are decoded by paint(), the rest when they show — kitImgMark) */
+  Promise.race([Promise.all([...new Set(L)].map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>r();im.src=u}))),new Promise(r=>setTimeout(r,4000))]).then(()=>{if(!closed&&!busy)layout(logical,logicalB)})}}},500);setTimeout(()=>clearInterval(iv),60000)}
  return {root,next,prev,go,close,get cur(){return cur},get max(){return maxCur},get mode(){return mode},relayout:()=>layout(logical)}}
 
 /* ---------- week data → pages ---------- */
