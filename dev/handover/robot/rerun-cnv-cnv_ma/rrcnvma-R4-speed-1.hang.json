@@ -1,0 +1,200 @@
+[
+ {
+  "at": "2026-11-26T05:19:38.752Z",
+  "buoi": 1254,
+  "rss": 2558,
+  "anon": 1896,
+  "stacks": [
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kitOptSig @69251:99",
+    "kitOptFinal @69219:71",
+    "kpOptArt @69253:109",
+    "kaNorm1 @69173:192",
+    "kaNorm1 @79724:15",
+    "(anon) @29232:84",
+    "kaNorm @29232:68",
+    "kaNorm @30610:98",
+    "kaNorm @48795:98",
+    "(anon) @29234:312"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T05:20:18.055Z",
+  "buoi": 1255,
+  "rss": 2745,
+  "anon": 2087,
+  "stacks": [
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T05:20:58.012Z",
+  "buoi": 1255,
+  "rss": 2940,
+  "anon": 2282,
+  "stacks": [
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kitScrollCues @80758:1",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kitScrollCues @80758:11",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kitScrollCues @80758:11",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kitScrollCues @80758:11",
+    "MutationObserver.observe.childList @80760:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T05:21:38.089Z",
+  "buoi": 1255,
+  "rss": 3168,
+  "anon": 2510,
+  "stacks": [
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "Element.setAttribute @3:122",
+    "kitScrollCues @80758:341",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T05:22:18.101Z",
+  "buoi": 1255,
+  "rss": 3371,
+  "anon": 2713,
+  "stacks": [
+   [
+    "kaNorm @29232:68",
+    "kaNorm @30610:98",
+    "kaNorm @48795:98",
+    "(anon) @29234:312"
+   ],
+   [
+    "kitScrollCues @80756:41",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kaNorm @29232:68",
+    "kaNorm @30610:98",
+    "kaNorm @48795:98",
+    "(anon) @29234:312"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T05:22:58.193Z",
+  "buoi": 1255,
+  "rss": 3536,
+  "anon": 2921,
+  "stacks": [
+   [
+    "MutationObserver.observe.childList @33936:39"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kitScrollCues @80758:11",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "kitScrollCues @80758:11",
+    "MutationObserver.observe.childList @80760:212"
+   ],
+   [
+    "(anon) @80757:68",
+    "kitScrollCues @80757:52",
+    "MutationObserver.observe.childList @80760:212"
+   ]
+  ]
+ }
+]
