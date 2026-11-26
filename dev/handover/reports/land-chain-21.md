@@ -64,3 +64,7 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 09:43Z RV-OB-M3UI-r3 (session_01V1ZZH3QBn6FBZSRePhShgd): SMALL PASS ob-m3ui r3 5843966e (+report 51855c36) → ob-m3ui slot swaps to it.
 - 09:50Z coordinator now MAIN CHÍNH 157 session_01V1ZZH1gksN2xtzkM92Peat. ob-m3ui-sololh d8dba46c joins only after 157 confirms its rv PASS; land 51855c36.
 - 09:55Z MAIN 157: (1) coop-freeze-kmrew c20aaa6e lands ALONE FIRST when B posts LAND READY (verify #1+#2 PASS, BIG rv pending); (2) renderer-mem 123a2a9c right after it on rv PASS; (3) c3-farshot/rankroom already on main → dropped.
+
+## 10:10Z — mg-trim HOLD (coop-thin-f4), HW-NITS on LIVE
+- mg-trim be7e8326: chain PASS except coop-thin-f4 0/11 (alone 1/11) vs LIVE 8/10 (same local worker) → HOLD, reported to MAIN 157. mg-craft 1/25 «kim lower at ease 0» (e0=e5=[10,10]) → rerun alone. QC PASS (buổi 1795/2083).
+- HW-NITS restaged on LIVE: review/lc21-hw d4618564 (0e71fdbc onto 3af7896e). Gates gates-hw2.sh, QC vs LIVE.
