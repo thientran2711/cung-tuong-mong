@@ -28,6 +28,8 @@ js+='\n'+cdn('jcoopthinf.js',open(d+'build/jcoopthinf.js',encoding='utf-8').read
 js+='\n'+cdn('jcoophl.js',open(d+'build/jcoophl.js',encoding='utf-8').read())
 # jnolock (review/hardlock-choice r3): the ONE no-dead-card rule (laws 2/3/14; replaces jdeadcard); the OUTERMOST showModal / chooseM wrappers, so every inner one sees the same roads
 js+='\n'+cdn('jnolock.js',open(d+'build/jnolock.js',encoding='utf-8').read())
+# person-panel look-only mock (review/person-panel-*): the LAST module
+js+='\n'+cdn('jpp.js',open(d+'build/jpp.js',encoding='utf-8').read())
 # jreg (review/story-frame): every registry pass also covers the entries later modules added (regEach); sweep at the script end + after load timers
 js+='\ntry{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}\n'
 open(d+'build/all.js','w',encoding='utf-8').write(js)
