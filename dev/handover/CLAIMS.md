@@ -553,3 +553,4 @@ map-r8 (MAP-R8) | review/map-r8 | session_01Rc5AsMBAKsCvMCqPGZy5fi | RUNNING | 2
 C3-RGART | review/c3-rg-c1b-art ba3bcdf9 + CDN act-opt-cui-dau-vang-da | session_01PEhRbv48cmAjM4J3Mem5N6 | DONE LOOK PASS (archived) → cherry-pick into kit-stage branch | 2026-11-26T21:25Z (Foreman C)
 kit keeper (KK46) | review/kit-* | session_01Rc5AsJWaXnsnQJdFazBWmx | RUNNING | 2026-11-26T21:30Z (MAIN 164; KK45 rolled)
 RING-BUILD-5 | review/ring-build | session_01Rc5AsKZcP5RNFoPVMtneyn | RUNNING | 2026-11-26T21:37Z (MAIN 164; RING-BUILD-4 archived)
+PUNISH-TIER-3 | review/punish-tier-wit | session_01Rc5AsMnybeP3fAzDgPB67Y | RUNNING | 2026-11-26T21:40Z (MAIN 164; PUNISH-TIER-2 archived)
