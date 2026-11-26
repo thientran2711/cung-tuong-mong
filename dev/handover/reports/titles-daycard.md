@@ -72,3 +72,43 @@ Independent probes (scratch scripts, not in git), checked against the goal panel
 ### FOR MAIN 147
 - KIT (kit keeper): kit-daytitle-r2 313bdfc6 new-life card plays under #klife (z 2147483500 > 12000) for ~2 of 2.8 s on Fold + iPad → show it after #klife closes (whole family: any cover over #kdaytc). KIT_REQUESTS row added 26/11. Land kit-daytitle-r2 only TOGETHER with the hook's r2 sha.
 - LIVE 5e013076 fault: quickcheck G4 «fold · Ô lưu · Lui · close button did not close its layer» (proved on bare LIVE).
+
+## FIX r1 (E92f, session_01DgYSWnoSnKPLiPFcAgkeFc, Foreman E child6, 26/11) — **SẴN SÀNG KIỂM titles-daycard 8cdc4b46**
+PRIORITY #1 CHECK ('kitChapterTitle|kitGoalAlt|kitGoalNow|chapter()'): OD 0 | ledger 0 | claims E92 / E92r (this file) | main 5e013076 jgoal.js:23 chapter() = the ONE current-chapter source (REUSED, not copied) | review/* only review/titles-daycard + kit-daytitle-r2 stub | archive 0.
+Branch review/titles-daycard: c39be532 → ae84bd4d (fix) → 8cdc4b46 (titles2-unit CT line), FF, pushed. START_CTX ~3 % (1M window).
+
+### What changed (game code: 2 lines of meaning)
+- jgoal.js: `window.kitGoalChapter=chapter` (exports the goal panel's own chapter(); nothing else touched).
+- jdh3.js chapterInfo(p) (→ kitChapterTitle / chapterTitle) = window.kitGoalChapter(): kitGoalAlt home roads first, then milestone, then ARC67 numbered by pos67, then ch.all «Mệnh truyện trọn vẹn», then old v1 story — exactly the goal panel. Name = its title (fill67 + plainT for tokens); n = its n. Null when it is not her own S or she is dead (goal panel null too). The second copy of the logic is gone.
+- ONE RULE (fix 2, ch.all + edge states): card line 2 ALWAYS = the goal panel's «Chương N — title»; hidden only when the goal panel has none. FOR MAIN 147 / KK: put this sentence in KIT §94b when kit-daytitle lands (KIT.md §94b lives on kit-daytitle-r2, not on this branch).
+
+### Before/after (law 11, scan = dev/test/chapter-title-hook.js vs kitGoalNow; before = c39be532 build, after = 8cdc4b46)
+| case | before (card) | after (card) = goal panel |
+|---|---|---|
+| home tt/dtq/muoi/thd/ch/td (Khuê các, kc3) | Chương 1 — Sơ nhập cung môn | Chương 1 — Chờ kỳ tuyển tú |
+| home nc/bd/pf (Cố quốc, kc2) | Chương 1 — Sơ nhập cung môn | Chương 1 — Chờ ngày hòa thân |
+| home cnv (Thôn quê, kc2 dan) | Chương 1 — Phận tỳ nữ buổi đầu | Chương 1 — Chờ lệnh tuyển cung nữ |
+| old save, no M.chap, ch.n 3 | Chương 1 — … | Chương 3 — … (= pos67 / lab67 «Chương 3 · Hồi 1/3») |
+| ch.all | null (hidden) | Chương 12 — Mệnh truyện trọn vẹn |
+| v2 no ch / old v1 story / no open chapter | null | the goal panel's old-story line |
+| palace lives ×11, 401 ARC67 + 9 MS67, unknown arc/ms, no S.st, dead, non-S | same | same (unchanged) |
+Totals: before 24 ok / 16 FAIL → after 40/40 (branch), 41/41 (land combo, + H7 kit line 2).
+
+### Tests (8cdc4b46; land combo = 8cdc4b46 + kit-daytitle-r2 313bdfc6 merged LOCALLY, index/sw rebuilt, NOT pushed)
+- chapter-title-hook.js: PASS 40/40 branch · 41/41 combo. Now compares with kitGoalNow (not chapterTitle), H8 = 10 home roads via kcPick «nha» → kcInit (KC.ok + KC2K, kc2 + kc3), H9 old save, H10 ch.all, H4 edge states = goal panel; card-aware fresh().
+- titles2-unit: PASS 69/69 branch · 69/69 combo (was 5 FAIL on combo). fresh() is card-aware: waits out the +600 ms start card, removes #kdaytc, clears what it held (no game change). Its CT "no open chapter" line now follows the one rule (= goal panel).
+- titles2-scan (combo): rows 833 · 0 missing/clash/dup/long/bad how.
+- coop-e2e (combo, live Worker, Fold host): 143/143 passed.
+- quickcheck 8cdc4b46 ALONE: open 1598 ms 0 errors · old save ok · time-spill PASS · perf PASS (buổi 1280/4631 new/live, tasks 25/26) · G4 button-crawl FAIL ×1 «fold · Ô lưu · Lui» = the LIVE 5e013076 fault (E92 + E92r proved it on bare LIVE), not this branch.
+- 0 page errors.
+
+### Shots (combo; Fold 755x1000@2 + iPad 1180x820@2; LOOKED at each; CDN refused: no R2 key → described, scratch only)
+- Home tt before tuyển tú: card «Ngày 1 / Chương 1 — Chờ kỳ tuyển tú» centred, on top (elementFromPoint), no overflow; goal panel side by side «Chương 1 · Chờ kỳ tuyển tú — Mệnh truyện: Khuê các». Same on both devices.
+- Home nc: card «Chương 1 — Chờ ngày hòa thân» = goal panel «Chương 1 · Chờ ngày hòa thân — Mệnh truyện: Cố quốc». Both devices.
+- Later day (wk 13, ARC67 tt_co_5 old save without M.chap, ch.n 3): card «Tháng tư, năm thứ nhất, trung tuần · mùa hạ / Chương 3 — Môn sinh của cha» = goal panel «Chương 3 · Môn sinh của cha». Box 431x80, inside the screen, both devices.
+
+### Not mine (unchanged FOR MAIN 147)
+- KIT keeper: kit-daytitle-r2 new-life card under #klife (KIT_REQUESTS row of E92r). Land kit-daytitle-r2 TOGETHER with 8cdc4b46.
+- LIVE fault G4 «Ô lưu · Lui».
+
+~ HANDOVER: not needed (done; context well under the line).
