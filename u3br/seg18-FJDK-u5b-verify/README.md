@@ -1,0 +1,1 @@
+seg18 room FJDK B FREEZE-FIX VERIFY (U3b-2): u5b = u4 7959f1b5 + jksize/jinv diff of coop-freeze-kmrew c20aaa6e (vs 5e013076), harness f40a56ff. Fold host / iPad guest, seed 18, UNMITIGATED (RELOAD_AT=20). Passed buoi 61 and 73; closed by time buoi 131/132 year 2, 0 stuck, 0 SEATHANG. DOM nodes flat 4-9k.
