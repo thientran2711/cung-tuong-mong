@@ -316,6 +316,10 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");co
    kind: rule | info | news | notice | choice | result | night | end | intel | threat | evidence | reward.  Returns the queue item. */
 function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
  if(front)Q.unshift(m);else Q.push(m);return m}
+/* ONE COPY of a panel she opens by a tap (news-sieve, LIVE fault «Tin báo» ×9 in the queue + «Lui» dead: every tap on the box / a status icon
+   queued ANOTHER copy, and each «Lui» only took one off). key = what the panel is (e.g. "notice", "st:tin"): an older queued copy of the same
+   key is dropped before the fresh one goes in front, so one «Lui» closes it. */
+function kitPanelOnce(key,spec,front){try{for(let i=Q.length-1;i>=0;i--){const x=Q[i];if(x&&x.__once===key)Q.splice(i,1)}}catch(e){}const m=kitPanel(spec,front);m.__once=key;return m}
 /* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
    are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
    (a) a kit table right after another kit table; (b) a section with no heading whose first child is a kit table, right after a section

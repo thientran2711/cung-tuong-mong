@@ -114,7 +114,7 @@ function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const
  const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
  const html=L.map(x=>`<p class="kntp">${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");
  const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}},{n:"Để sau",fx:{},go:()=>{boxPaint()}}]:undefined;/* review r4: a kit panel with options has no ✕ (jksize) — «Để sau» always lets her close it without being sent to Dư đồ */
- const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
+ const m=kitPanelOnce("notice",{kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
 /* the panel's picture = the notice's own (the kit info panel puts kitInfoArt("Tin báo") there; a notice with a picture swaps it in the same kit frame) */
 function picSwap(M,it){try{const src=picOf(it);if(!src)return;const im=M.querySelector("#mb figure.ksart img, #mb .ksart img");if(im&&im.getAttribute("src")!==src)im.setAttribute("src",src)}catch(e){}}
@@ -135,8 +135,17 @@ function tbBy(it){try{const by=String(it&&it.by||"");if(by==="mat")return"Tai m�
 const plName=k=>{try{return placeName(k)||String(k||"")}catch(e){return String(k||"")}};
 const scenePic=k=>{try{const n=SCIMG[placeOf(k).sc];return n?`img/${n}.webp`:""}catch(e){return""}};/* the place picture (same path as the Dư đồ list, j9) */
 function goDuDo(){try{const b=document.querySelector('#tabs [data-tab="go"]');if(b)b.click()}catch(e){}}
-let tbSub=null;function tbHook(){if(tbSub||typeof tinBaoOn!=="function")return;tbSub=tinBaoOn(it=>{try{if(!it||!it.id||it.seen)return;const w=tbBy(it);const pn=plName(it.place);
- kitNotice({id:"tb:"+it.id,kind:"tin",line:`${w?w+" báo: ":"Có tin: "}${pn}${it.ended?" vừa":""} có chuyện`,text:`${w?w+" báo: ":""}${plain(it.line)}`,pic:scenePic(it.place),
+/* news-sieve (owner OD 26/11 ~04:40Z + 25/11 ~23:10Z / ~23:36Z): at home (Khuê các) no palace Tai mắt news; a happening already over that is only
+   other people's business goes to the month (jnsieve); the festival places of one buổi = ONE line; the informer's name is said once */
+const tbFest={};
+let tbSub=null;function tbHook(){if(tbSub||typeof tinBaoOn!=="function")return;tbSub=tinBaoOn(it=>{try{if(!it||!it.id||it.seen)return;
+ try{if(typeof isKc==="function"&&isKc())return}catch(e){}
+ try{if(it.ended&&typeof nsGossipSkip==="function"&&(nsGossipSkip(it.line)||!nsHerLine(it.line)))return/* over and not about her: nothing left to choose */}catch(e){}
+ const w=tbBy(it);const pn=plName(it.place);
+ if(it.k==="fest"){const b=String(typeof wk==="function"?wk():0)/* one line per tuần */;const F=tbFest[b]=tbFest[b]||[];if(!F.includes(pn))F.push(pn);for(const k in tbFest)if(k!==b)delete tbFest[k];
+  kitNotice({id:"tb:fest:"+b,kind:"tin",line:`Trong cung có hội: ${F.join(", ")}`,text:`Trong cung có hội ở ${F.join(", ")}.`,pic:scenePic(it.place),go:()=>{try{tinBaoSeen(it.id)}catch(e){}goDuDo()},goLabel:"Để ta xem"});return}
+ const ln=plain(it.line);const said=w&&(ln.indexOf(w)===0||ln.indexOf(w+" báo")>=0);
+ kitNotice({id:"tb:"+it.id,kind:"tin",line:`${w?w+" báo: ":"Có tin: "}${pn}${it.ended?" vừa":""} có chuyện`,text:`${w&&!said?w+" báo: ":""}${ln}`,pic:scenePic(it.place),
   go:it.ended?null:()=>{try{tinBaoSeen(it.id)}catch(e){}goDuDo()},goLabel:"Để ta xem"})}catch(e){}})}
 /* ---------- repaint ---------- */
 const paintR=()=>(window.renderAfter||((k,g)=>g()))("knotice",()=>{tbHook();boxPaint()});
