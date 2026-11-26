@@ -17,7 +17,10 @@ const COUNT=()=>{const vis=s=>s.offsetWidth&&getComputedStyle(s).display!=='none
  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.__mapZ=0;window.__kpm=null;window.__mapZone=null;tab='go';render()});await row('palace overview');
  for(const id of await p.evaluate(()=>typeof MAPZ_ZONES!=='undefined'?MAPZ_ZONES.map(z=>z.id):[])){const ok=await p.evaluate(id=>{if(!document.querySelector(`.mspot.mzone[data-zone="${id}"]`))return 0;mapzGo(id);return 1},id);if(ok){await row('zone '+id);await p.evaluate(()=>mapzGo(null))}}
  await p.evaluate(()=>{kpmOpenSlot('p:vuon','vuon')});await row('Ngự hoa viên areas');
- await p.evaluate(()=>{window.__kpm=null;const i=MAPH.rivalSlots.findIndex((s,i)=>{try{return palSlot(palaceOf(S))===i}catch(e){return false}});kpmOpenSlot(i>=0?i:0,palaceOf(S))});await row('her palace courtyard');
+ /* her palace courtyard by the real way in (BIG rv 26/11: kpmOpenSlot(palaceOf(S)) gave 'home' → no courtyard, the row repeated the overview): her zone → tap her own palace tag */
+ await p.evaluate(()=>{window.__kpm=null;window.__mapZone=null;render();const z=document.querySelector('.mapw .mspot.mzone.mzhome');if(z)mapzGo(z.dataset.zone)});await sl(1500);
+ await p.evaluate(()=>{const k=typeof plHomeK==='function'?plHomeK():'home';const s=document.querySelector(`.mapw .mspot[data-go="${k}"]`);if(s)s.click()});await sl(1500);
+ if(!await p.evaluate(()=>!!document.querySelector('#panel .kpmv')))console.log('FAIL: her palace courtyard did not open');await row('her palace courtyard');
  await p.evaluate(()=>{window.__kpm=null;render()});
  for(const o of await p.evaluate(()=>KIT_ORIGINS)){await p.evaluate(o=>{S.origin=ORIGINS.find(x=>x.k===o);S.kcPick='nha';Q=[];window.__bot=1;try{kcInit()}catch(e){}delete window.__bot;Q=[]},o);await sl(600);
   for(let i=0;i<4;i++){const n=await p.evaluate(()=>{const B=[...document.querySelectorAll('button')].filter(b=>/^(Nhận|Bỏ qua)$/.test(b.textContent.trim())&&b.offsetParent);B.forEach(b=>b.click());return B.length});if(!n)break;await sl(400)}

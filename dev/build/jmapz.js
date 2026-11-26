@@ -1,9 +1,9 @@
 /* ================= jmapz: DƯ ĐỒ — ONE SHORT LINE PER TAG + ZONES (ZOOM/FOG) + DƯỠNG TÚ VIỆN + SECOND LEVEL OF CÀN NINH / ĐỨC THỌ (KIT §85.10) =================
    Owner OD 25/11 ~23:45Z (verbatim): "Chữ quá nhiều ở trên cái dư đồ này, cần phải coi cái cách sắp xếp lại hay là gom. Tôi đã từng nói bạn phải gom lại
    rồi mà, tức là những cái khu nào giống nhau là mình nên gom lại như thế nào đó mà." + her 18/11 rulings (OD ~19:25Z L1898 zones: total bóng on the zone,
-   tap = zoom in, fog over the rest; ~19:40Z Đông cung NOT grouped; ~19:45Z consort palaces keep their own names, no Đông/Tây lục cung layer).
+   tap = zoom in, fog over the rest; ~19:40Z Đông cung NOT grouped; ~19:45Z her palace grouped with her mark on the zone tag) + 26/11 ~07:05Z «gộp ... bấm vào tầng 2 thì sẽ hiện ra chi tiết» (MAIN 155: overwrites the 18/11 ~19:45Z cancel of the Đông/Tây lục cung zones).
    (0) every tag = name + one short count. (1) ZONES of similar common places: ONE kit map tag "<zone> · N bóng" (N = Σ members, countAt);
-       members' own tags hidden on the overview; her own place / the place she stands on stay out (her mark stays visible).
+       members' own tags hidden on the overview; her palace / the place she stands on are grouped too, the zone tag carries her marks (L1901).
    (2) TAP A ZONE → the same Dư đồ zooms onto the zone (FLIP, kit pace; reduced motion = instant), the rest under ONE kit fog layer (.kmfog: light by day,
        dark at night); inside, every member shows its own tag with all its rules. Back = tap the fog / the rail back button «Về toàn cảnh Dư đồ».
    (a) Càn Ninh (Hoàng hậu) and Đức Thọ (Thái hậu) open the courtyard (jpm kitPalaceMap) with Chính điện / Đông phối điện / Tây phối điện while
@@ -35,7 +35,7 @@ const MAPZ_DTV={k:"dtv",n:"Dưỡng Tú viện",fn:"nơi tú nữ ở và học 
 }catch(e){console.error("jmapz dtv",e)}})();
 /* ================= (1)+(2) DƯ ĐỒ ZONES + ZOOM/FOG (review/map-zones 5692c687 sections 1-2, restored; zones re-cut per the 18/11 ~19:40Z/~19:45Z rulings) ================= */
 /* the zones (owner 25/11 ~23:45Z "những cái khu nào giống nhau là mình nên gom lại" + 18/11 ~19:25Z; NOT grouped, 18/11 ~19:40Z/~19:45Z:
-   every consort palace (her own included), Càn Ninh, Đức Thọ, Dưỡng Hòa, Cần Chính, Đông cung, Ngự hoa viên, Thái y viện, Kính sự phòng, Ngoại triều).
+   Càn Ninh, Đức Thọ, Dưỡng Hòa, Cần Chính, Đông cung, Ngự hoa viên, Phật đường, Trường Môn viện, Ngoại triều; consort palaces = Đông/Tây lục cung zones since 26/11).
    Members are neighbours on the painting (the zoom box stays small). */
 const MAPZ_ZONES=[
  {id:"nv",n:"Nội vụ",fn:"các ty Nội vụ phủ coi: cung nhân ở, làm việc, chịu phạt; tú nữ ở Dưỡng Tú viện",ic:"place-cnh",keys:["nvp","tgk","cnh","dtv"]},
@@ -56,7 +56,7 @@ function mapzWest(){return mapzSide(false)}
 /* zone of a plan key / an empty palace name */
 function mapzZoneOf(k,name){try{let nm=name||null;if(k&&/^r\d+$/.test(k)){const i=palSlot(k);if(i!=null)nm=PALN[i]}else if(k==="home"&&S.pal!=null)nm=PALN[S.pal];
   for(const Z of MAPZ_ZONES){if(k&&Z.keys.includes(k))return Z;if(nm&&((Z.pal==="east"&&mapzEast().includes(nm))||(Z.pal==="west"&&mapzWest().includes(nm))))return Z}}catch(e){}return null}
-/* her own places (home / where she is / her palace): grouped like the others since 26/11 (L1901); the zone tag carries her marks instead */
+/* (unused since 26/11: her places are grouped like the others, L1901; kept for callers outside this file) */
 function mapzMine(){const M=new Set(["home"]);try{if(S.place)M.add(S.place);M.add(palaceOf(S));const r=typeof resMeHoused==="function"&&resMeHoused();if(r&&r.head)M.add(palaceOf(r.head))}catch(e){}return M}
 /* the zone box on the map (fractions): union of its members' plan boxes + padding */
 function mapzBox(Z){const B=[];try{for(const k of Z.keys){const p=MAPH.places[k];if(p&&p.box)B.push(p.box)}
