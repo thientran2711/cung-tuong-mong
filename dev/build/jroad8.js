@@ -196,6 +196,7 @@ window.placePalP=placePalP;
 (function(){if(typeof pMe!=="function")return;const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(road8()==="kc"&&f&&!S.out){const t=placeW("me");if(t)f.rw=t}}catch(e){}return f};window.pMe=pMe})();
 /* HOME START (MAIN 159 r5, law 6+11): start() first makes the palace life (consort / cung nữ entry, its «Chương 1», the Sổ ghi sync «Sủng 8 → 0
    (Hoàng thượng phật ý)») and only then «Nhận thân phận» picks the home road (kcInit → kc2Init). Those palace start lines are not her life at home:
-   the home start keeps only the life-start lot («Xin xăm») and writes its own first line. ONE place: kcInit (every home road goes through it). */
-(function(){if(typeof kcInit!=="function")return;const i0=kcInit;kcInit=function(){try{if(S&&Array.isArray(S.logs))S.logs=S.logs.filter(x=>/Xin xăm/.test(String(x).replace(/<[^>]+>/g,"")))}catch(e){}
+   the home start keeps only the life-start lot («Xin xăm») and her own new-life cost line («Đã đổi thân phận N lần (−X Phúc duyên)», nlAccept,
+   RV r5: a cost she paid stays traceable, law 6) and writes its own first line. ONE place: kcInit (every home road goes through it). */
+(function(){if(typeof kcInit!=="function")return;const i0=kcInit;kcInit=function(){try{if(S&&Array.isArray(S.logs))S.logs=S.logs.filter(x=>/Xin xăm|Đã đổi thân phận/.test(String(x).replace(/<[^>]+>/g,"")))}catch(e){}
  return i0.apply(this,arguments)};window.kcInit=kcInit})();
