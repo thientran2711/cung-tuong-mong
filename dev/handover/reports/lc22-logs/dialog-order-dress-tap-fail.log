@@ -1,0 +1,66 @@
+ok   fold Y phục: one tap on «Váy sa xanh ngọc» wears it at once {"before":"y_hoanho","after":"y_saxanh"}
+ok   fold Y phục: «Đang mặc» shows «Váy sa xanh ngọc» "Trâm hoa lụa|Hoa tai: trống|Váy sa xanh ngọc|Vòng bạc hoa mai|Ngọc bội khuê các|Túi thơm thêu|Giày: trống"
+ok   fold Y phục: the piece stays selected, its detail offers «Tháo» "off"
+ok   fold Y phục: her figure = the figure at the worn dress's tier ["fig-consort-c20-t1-a18.webp","fig-consort-c20-t1-a18.webp"]
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#kg82 .toilinv [data-kinvi="2"]')[22m
+[2m    - locator resolved to <span tabindex="0" role="button" data-kinvi="2" data-kinvkey="toil" class="kitem kitem-slot kig0" title="Trâm ngọc bích · Trâm cài" aria-label="Trâm ngọc bích · Trâm cài">…</span>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="modal" data-kx="1" class="modal" data-kreborn="1">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="modal" data-kx="1" class="modal" data-kreborn="1">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    40 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div id="modal" data-kx="1" class="modal" data-kreborn="1">…</div> intercepts pointer events[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+
+    at /home/user/wt/do/dev/test/dress-tap.js:29:34 {
+  log: [
+    `  - waiting for locator('#kg82 .toilinv [data-kinvi="2"]')`,
+    '    - locator resolved to <span tabindex="0" role="button" data-kinvi="2" data-kinvkey="toil" class="kitem kitem-slot kig0" title="Trâm ngọc bích · Trâm cài" aria-label="Trâm ngọc bích · Trâm cài">…</span>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div id="modal" data-kx="1" class="modal" data-kreborn="1">…</div> intercepts pointer events',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div id="modal" data-kx="1" class="modal" data-kreborn="1">…</div> intercepts pointer events',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    40 × waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <div id="modal" data-kx="1" class="modal" data-kreborn="1">…</div> intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.5
