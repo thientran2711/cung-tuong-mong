@@ -1,0 +1,7 @@
+# R6-scholar-5 (Fold 755x1000, bot=sens, seed 3001147699, pf/pt_tang) — end-of-life notes — COUNTED
+Ending **Hồng nhan bạc mệnh — «Chết dưới dao thích khách đêm trước ngày hòa thân»**, age 18, year 1, rank 0 (rank 2 → 0 at the «Tiền truyện · Công chúa Phù Tang hòa thân» opening), 113 buổi, 603 real taps, 0 JS clicks, 0 bugs/stuck/dead buttons. robot-audit VALID (death). github.io LIVE, GAME BUILD dd1ce3d0ffa1, harness d2e03d80, no resume. From the result JSON (last 12 taps + last card) and the moment log; I did not open its shots: no score table.
+## What happened
+A quiet first year (Phòng của ta, «Chương sau» pages, one «Có người bán tin» offer declined with «Không mua»), then the event «Thích khách» with two options both rated «Rất vững»: «Kêu cứu» (no cost; usually escapes, sometimes hurt) and «Tự mình chống trả» (Sức -10; win = …). The robot picked «Tự mình chống trả» and the life ended with the princess dead on the night before the wedding journey.
+## Findings
+1. FAIRNESS (laws 2, 3, 6) — SECOND hit: R6-lazy-3 (buổi 81) and R6-scholar-5 (buổi 113) both died on the same «Thích khách» card picking «Tự mình chống trả» while both options read «Rất vững»; both lives ended in year 1 with no earlier warning. Two of two samples fatal on a top-band option: BAL / label check needed (VANPHONG odds ladder: Rất vững = almost sure).
+2. DESIGN: the death card text («Chết dưới dao thích khách…») gives no replay hook other than «Chuyển kiếp»; the road's year-1 mortality so far: 2 of 8 counted lives die at this card, 2 of 8 end at buổi 1 (Lễ ra mắt).

@@ -13631,5 +13631,81 @@
   "row": "R6·scholar·2:365032886 (rerun on LIVE github.io, fold)",
   "game": "github.io LIVE (GAME BUILD in R6-scholar-2.log), harness d2e03d80; one buổi, no resume",
   "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after picking «Cúi đầu chờ xét» at «Lễ ra mắt», real taps, github.io) — COUNTED; fairness note"
+ },
+ {
+  "job": {
+   "id": "R6-scholar-5",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 3001147699,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 1,
+   "slice": null,
+   "build": {
+    "s": "f009e1a6+",
+    "b": "dd1ce3d0ffa1",
+    "t": "2026-11-26T02:21Z"
+   },
+   "areaTaps": 43,
+   "dlgScroll": 16,
+   "scrolls": 18,
+   "infoTaps": 113,
+   "dlgClose": 42,
+   "nextNoTurn": 8,
+   "taps": 603
+  },
+  "life": {
+   "id": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Chết dưới dao thích khách đêm trước ngày hòa thân",
+   "death": true,
+   "age": 18,
+   "year": 1,
+   "rank": 0,
+   "text": "Chết dưới dao thích khách đêm trước ngày hòa thân.",
+   "card": [
+    "Kêu cứu Rất vững TỐN không ĐƯỢC thường thoát; có khi bị thươ",
+    "Tự mình chống trả Rất vững TỐN Sức -10 ĐƯỢC thắng thì cả tri"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»",
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang trước»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Lui»",
+    "page «Phòng của ta · Không gặp ai.» «Mệnh truyện»",
+    "page «Phòng của ta · Không gặp ai.» «Chương sau»",
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»",
+    ".dlg «Có người bán tin» «Không muaGhi chúkhông biết tin ấy!»",
+    ".dlg «Thích khách» «Tự mình chống trảRất vữngTốnSức -10Đượcthắng thì c»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 113,
+  "steps": 798,
+  "status": [],
+  "t": {
+   "total": 768037
+  },
+  "unit": "E-S6",
+  "row": "R6·scholar·5:3001147699 (rerun on LIVE github.io, fold)",
+  "game": "github.io LIVE, GAME BUILD {s:f009e1a6+, b:dd1ce3d0ffa1, t:2026-11-26T02:21Z}; harness d2e03d80; no resume",
+  "audit": "VALID (assassin death age 18, real taps, github.io) — COUNTED"
  }
 ]
