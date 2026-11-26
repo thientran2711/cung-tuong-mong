@@ -1,0 +1,70 @@
+{
+ "fold": {
+  "name": "Lữ Mạn Châu",
+  "i": 3,
+  "tabs": [
+   "Gặp mặt 2/5",
+   "Giao thiệp 2/3",
+   "Dùng chứng cứ 0/8",
+   "Hại nhỏ 8/12",
+   "Hại nặng 14/18",
+   "Sát hại 5/9"
+  ],
+  "before": -65,
+  "cover": "BUTTON#.pct < DIV#.pctabs < DIV#.kpstick < DIV#.pcr < DIV#.pc kpwide < DIV#.pgwrap",
+  "toastVis": {
+   "on": true,
+   "top": 664,
+   "h": 264
+  },
+  "queen": "Chân Tử Đàn",
+  "b0": -5,
+  "after": 1,
+  "opt": null,
+  "toast": "",
+  "modal": "BÁO\nKỳ ngộ\n✕\nThái giám\nLão Thành Tử\nLão Thành Tử đã gác cổng này từ ngày tiên đế còn tại thế, tóc đã bạc, lưng đã còng.\nÔng chỉ vào góc tường: “Chỗ này nắng lên đầu tiên, mùa xuân nào cũng ấm nhất.”\nDanh +4; Lão Thành Tử thiện cảm +54.",
+  "lines": [
+   {
+    "who": "Chân Tử Đàn",
+    "delta": "+6",
+    "total": 1,
+    "row": "Hoàng hậu Chân Tử Đàn: thiện cảm +6 (1) · hoàng hậu đang buồn, ta đang vui"
+   }
+  ],
+  "perr": []
+ },
+ "ipad": {
+  "name": "Diệp Sương Hoa",
+  "i": 4,
+  "tabs": [
+   "Gặp mặt 3/5",
+   "Giao thiệp 2/3",
+   "Dùng chứng cứ 0/8",
+   "Hại nhỏ 8/12",
+   "Hại nặng 12/16",
+   "Sát hại 3/7"
+  ],
+  "before": -2,
+  "cover": "SECTION#panel.panel kpane kpfr < DIV#game.game kbook cardtab < BODY#. < HTML#.kv2 kf-still",
+  "toastVis": {
+   "on": true,
+   "top": 484,
+   "h": 264
+  },
+  "queen": "Cao Ngọc Nhu",
+  "b0": -5,
+  "after": -3,
+  "opt": null,
+  "toast": "",
+  "modal": "BÁO\nKỳ ngộ\n✕\nThái giám\nTiểu Tín Tử\nTiểu Tín Tử đã gác cổng này từ ngày tiên đế còn tại thế, tóc đã bạc, lưng đã còng.\nÔng chỉ vào góc tường: “Chỗ này nắng lên đầu tiên, mùa xuân nào cũng ấm nhất.”\nDanh +4; Tiểu Tín Tử thiện cảm +54.",
+  "lines": [
+   {
+    "who": "Cao Ngọc Nhu",
+    "delta": "+2",
+    "total": -3,
+    "row": "Hoàng hậu Cao Ngọc Nhu: thiện cảm +2 (−3) · hoàng hậu đang giận, ta đang buồn"
+   }
+  ],
+  "perr": []
+ }
+}

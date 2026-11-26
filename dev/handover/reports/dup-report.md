@@ -1,26 +1,29 @@
 # REPORT dup-report (E97, E-d) — feature duplication audit, REPORT ONLY (no build until sếp picks)
 
 PRIORITY #1 CHECK ('trùng lặp|gộp|dedupe|merge report|dup-report'): OD 19 | ledger 0 | claims 8 | main 15 | review/* 2 (act-dedupe-r1, landed 16/11 wave 1) | archive 43.
-Branch sha a0a1d1a2 (review/dup-report). Worker E97 = session_01DgYSWoPgpYzodQxz6rufXQ, FOREMAN E child7. START_CTX ~4 % (est., 1M window). Branch review/dup-report from origin/main 5e013076. Docs + scan script + mock shots only; no game code.
+Branch sha a0a1d1a2 (review/dup-report) → **fix r1 12440ec3** (E97f, measured on LIVE f009e1a6; see FIX r1 at the end). Worker E97 = session_01DgYSWoPgpYzodQxz6rufXQ, FOREMAN E child7. START_CTX ~4 % (est., 1M window). Branch review/dup-report from origin/main 5e013076. Docs + scan script + mock shots only; no game code.
 Detailed design: `dev/design/HANHSU_MERGE.md` (counts with file:line, merge groups, ways, tiers, evidence→charge table, khắc maths, relationship mock, recommendations).
 
 ## TÓM TẮT CHO SẾP (tiếng Việt)
 
 | Mục | Hiện nay | Khuyến nghị gộp | Giữ lại mỗi bậc (nhẹ · vừa · nặng) |
 |---|---|---|---|
-| Một phi tần (thẻ Hậu cung + khung gặp mặt ở Dư đồ) | 51–58 nút trên thẻ + 32 nút khi gặp mặt | **12 nút**, cùng một bộ ở cả hai chỗ | — |
-| Hãm hại (thân thể, dung nhan, tính mạng) | 12 nút: hất trà, hắt nước, quạt mực, tát, ngáng chân, bỏ phấn lạ, hủy dung, thả thú dữ, hạ độc, hạ độc dần, quà có độc, đẩy xuống hồ sen | 1 nút «Hãm hại», chọn bậc bên trong | Hất trà · Hủy dung · Hạ độc |
+| Một phi tần (thẻ Hậu cung + khung gặp mặt ở Dư đồ) | 50–58 nút trên thẻ (Quyền Hoàng hậu 5 nút) + 24–29 nút khi gặp mặt | **12 nút**, cùng một bộ ở cả hai chỗ | — |
+| Hãm hại (thân thể, dung nhan, tính mạng) | 11 nút: hất trà, hắt nước, quạt mực, ngáng chân, bỏ phấn lạ, hủy dung, thả thú dữ, hạ độc, hạ độc dần, quà có độc, đẩy xuống hồ sen (tát, phạt quỳ sang «Ra uy») | 1 nút «Hãm hại», chọn bậc bên trong | Hất trà · Hủy dung · Hạ độc |
 | Hạ uy thế (danh, sủng, phẩm vị) | 8 nút: tung tin, ly gián, rút thẻ bài ×2, xin Hoàng hậu giáng, vu oan, cài đồ vào rương, giá họa | 1 nút «Hạ uy thế» | Tung tin đồn · Rút thẻ bài · Vu oan (giáng một bậc) |
-| Hại hoàng tự (chỉ hiện khi có con) | 7 nút | 1 nút «Hại hoàng tự» | Phá việc học · Bỏ xạ hương · Hạ độc con nàng |
+| Hại hoàng tự (chỉ hiện khi có con) | 7 nút (xin bế con về nuôi sang Quyền Hoàng hậu) | 1 nút «Hại hoàng tự» | Phá việc học · Bỏ xạ hương · Hạ độc con nàng |
 | Lấy của (đồ, thú nuôi) | 6 nút | 1 nút «Lấy của» | Ép nộp của · Lấy trộm đồ · Phóng hỏa kho đồ |
 | Dò la | 5 nút (tự đi, sai cung nữ, sai tai mắt, mua chuộc cung nữ, lấy lòng) | 1 nút «Dò la», chọn cách bên trong | — |
 | Gặp / Trò chuyện / Giao hảo | ~20 nút (chào hỏi, hỏi han, khen, rỉ tai, bàn tán về từng người…) | 3 nút: «Gặp nàng», «Trò chuyện» (chọn chuyện), «Giao hảo» (kết giao, tặng quà, giúp, nhờ) | — |
-| Tố cáo | 8 nút + thẻ «Tâu xin nghiệm thân»; tố chung chung «đủ 2 chứng cứ» | 1 nút «Tố cáo»: chỉ hiện tội ta có chứng cứ thật, mỗi tội một lý do rõ, một người xử, một hình phạt | 13 tội: mưu hại phi tần · mưu hại hoàng tự · yểm bùa · hại dung nhan · tư thông · nghiệm thân · xa xỉ · vượt phẩm · đồ cấm · trộm cắp · mua chuộc người hầu · đặt điều thị phi · ỷ thế ức hiếp |
-| Hành sự | 31 thẻ | **16 thẻ** (ví dụ «Xem Sổ Kính sự phòng»: sai người / lén xem / tới tận nơi chọn bên trong) | — |
-| Khắc trong ngày | 16 khắc | một ngày làm được **6–9 việc** ở mọi nơi cộng lại → Hành sự ≤16, mỗi người ≤12 nút | — |
+| Tố cáo | 8 nút + thẻ «Tâu xin nghiệm thân»; tố chung chung «đủ 2 chứng cứ» | 1 nút «Tố cáo»: chỉ hiện tội ta có đủ chứng cứ CỦA ĐÚNG TỘI ĐÓ (số chứng mỗi tội theo bảng của thợ D4), mỗi tội một lý do rõ, một người xử, một hình phạt | 13 tội: mưu hại phi tần · mưu hại hoàng tự · yểm bùa · hại dung nhan · tư thông · nghiệm thân · xa xỉ · vượt phẩm · đồ cấm · trộm cắp · mua chuộc người hầu · đặt điều thị phi · ỷ thế ức hiếp |
+| Hành sự | 38 thẻ (lúc ốm thêm 3, có thai thêm 2, tài nghệ cao thêm 4) | **16 thẻ** (+ «An thai» khi có thai; ví dụ «Xem Sổ Kính sự phòng»: sai người / lén xem / tới tận nơi chọn bên trong) | — |
+| Hoàng tự (mỗi con) | 7–9 nút | **5 nút**: Dạy con · Thầy cho con · Chăm con · Dẫn đi thỉnh an · Về tẩm cung thăm con | — |
+| Thú cưng | mỗi con thú 3 trò chăm, mỗi trò 1 khắc → giữ một con ≈ 3 khắc mỗi ngày | **1 nút «Chăm thú»** (1 khắc cho mọi con), cung nữ thân tín chăm thay thì không tốn khắc | — |
+| Đường cung nữ | 13 việc phận sự | **5**: Hầu việc · Dò la cho chủ · Học · Nghỉ ngơi · Kiếm thêm | — |
+| Khắc trong ngày | 16 khắc | một ngày làm được **6–9 việc** ở mọi nơi cộng lại (kể cả thú cưng) → Hành sự ≤16, mỗi người ≤12 nút | — |
 | Thiện cảm | «Hoàng hậu: thiện cảm +8» | «Hoàng hậu: thiện cảm +8 (42)» ở mọi khung kết quả; Hậu cung chỉ còn một chữ màu (Thù · Ghét · Thường · Quý · Thân) + một con số | — |
 
-Mọi hệ quả cũ đều giữ (chỉ gộp nút). Người khác làm với ta cũng theo đúng các nhóm và bậc này (luật hai chiều).
+Mọi hệ quả cũ đều giữ (chỉ gộp nút; bảng cũ → mới từng việc ở HANHSU_MERGE §3.4, không bỏ việc nào). Người khác làm với ta cũng theo đúng các nhóm và bậc này (luật hai chiều). Cách «tự tay» trong mỗi việc là mini-game hay chỉ xem cơ may theo danh sách D5 sếp chọn.
 
 ## WHAT (English)
 1. Counted every khắc-costing act on the consort road from the live build (scan scripts below): Hành sự 31 cards; one consort's Hậu cung card 51 (+4 child acts, +3 Empress power = up to 58); the in-person Dư đồ pop-up of a consort 32; maid 4 / servant 10 / elder 2; Cung nhân 9; Tư trang 6–7; Hoàng tự 5; Tài nghệ 3–4 per art. ≈115–120 buttons for one rival against a 16-khắc day. ACT table = 55 entries, each with file:line in HANHSU_MERGE §1.1.
@@ -39,7 +42,7 @@ dev/handover/shots/dup-report/ (handover branch): `before-result-fold.webp`, `af
 - No game code changed → quickcheck not needed for this branch (docs + one test script).
 
 ## LIMITS
-- Servant (cung nữ) road not counted (parked; second pass on her word).
+- Servant (cung nữ) road: counted in fix r1 (§1.3) — the «parked» line of r0 was wrong (no PARKING_LOT/OD row), withdrawn.
 - The mock is an in-page text append on the real kit result card (kit parts only); the real row is KK37's job after her pick.
 - Tier picks are recommendations; she picks.
 
@@ -59,3 +62,26 @@ FAIL list (fixer, on review/dup-report; then re-review):
 7. MINIGAMES vs OD 26/11 ~04:15Z ruling (1) (keep contests + level-up/exam minigames, cut the rest where possible; FOREMAN D D5 list): §3 header, P5 «tự đi … có mini-game», P7 «tự tay tại chỗ (mini-game swipe / tug)» say self-ways keep their minigame — law 17 conflict. Say «minigame or plain odds per D5's list».
 8. SHOT WRONG: `before-hc-fold.webp` is the title splash picture, not the Hậu cung consort card (the report says «Looked at each»). Retake Fold 755x1000 of the consort card with the tab counts. Also explain «Hoàng hậu …: thiện cảm +5 (0)» (Fold) / «+9 (4)» (iPad): if the starting value was −5 say so in the caption, else the appended total is wrong — fix the mock.
 9. SERVANT ROAD «parked» is NOT parked: no row in dev/PARKING_LOT.md and no OD ruling parks it (grep 'servant|cung nữ road|E97|dup-report' → none). A worker cannot park scope (law 18 = new ideas only). Either count the cung nữ road (OD 21/11 ~03:15Z: it uses the SAME 8 tabs as the consort, so the merge carries over — at least map its Phận sự/Hành sự acts) or get a real parking line from MAIN first.
+
+## FIX r1 (E97f, fixer session_01DgYSWpmWG8zaQhrwqMuXpM, 26/11) — REPORT READY dup-report 12440ec3 (fix r1)
+PRIORITY #1 CHECK ('trùng lặp|gộp|duplicat|merge report'): OD 45 | ledger 1 | claims 8 | main 15 | review/dup-report a0a1d1a2 (REUSED, fixed in place). D4 (review/punish-reason) and D5 (mg-trim @93b0eb0f) read from FOREMAN_D_STATUS 04:25Z/04:28Z (punish-reason not pushed yet; both picks pending with sếp). START_CTX ~4 % (est., 1M window).
+Branch: review/dup-report = a0a1d1a2 + merge of LIVE f009e1a6 (71356785) + fix commit **12440ec3** (no force push). Diff vs main: HANHSU_MERGE.md, reports/dup-report.md (stale branch copy; this handover file is the live one), dev/test/dup-report-scan.js (v2), dev/test/dup-report-shots.js (new). **No game code.**
+Proof run: `node dev/test/act-dedupe-deck.js file://$PWD/index.html deck.json 755x1000@1` (rows 9067, errs 0) then `node dev/test/dup-report-scan.js scan.json deck.json` (0 page errors) — its printed summary is saved in `dev/handover/reports/dup-report/scan-sum-r1.txt`; every number below is in it. Shots: `node dev/test/dup-report-shots.js <dir>` → `dev/handover/shots/dup-report/` (CDN refused: no R2 credentials in this container → handover fallback per E-common) + `facts-r1.json` (before · delta · after of each total).
+
+| # | review item | fix | proof |
+|---|---|---|---|
+| 1a | deck ≥33, art cards missing | deck = **38** distinct: 22 most days + 7 pool + 4 art (Đàn khúc Phượng cầu hoàng j2.js:63, Vẽ chân dung tặng Thái hậu j2.js:66, Kinh hồng vũ, Đánh cờ — ONE a deal) + 3 ill-only (Truyền thái y j13.js:44, **Tự bốc thuốc j13.js:45 = a deck card, ill + Y thuật ≥3**, Tĩnh dưỡng j13.js:46) + 2 pregnant (An thai, Báo tin có thai j2.js:83); lãnh cung own deck 9; 5 pool cards already moved out by jact AD_OUT. In §1.2 rows and in H5 / H8 / (+An thai) of §3.2 with their outcomes | scan-sum «HÀNH SỰ DECK» (forced states) + deck bot 31 seen |
+| 1b | Quyền HH 5 | 5 in code (j15.js:43 incl. «Khất bổng lộc» cutpay, j8.js:529); «Ân xá» only for a confined consort; P13 now lists Khất bổng lộc | scan-sum «Quyền Hoàng hậu …: Xử tội · Tịch thu · Ban thưởng · Khất bổng lộc» + j15.js:43 |
+| 1c | Hoàng tự 7 | **7–9** per child: Dạy chữ · Dạy lễ nghi · Mời thầy riêng · Chăm sóc · Dẫn đi thỉnh an Hoàng thượng · Canh giữ các con · Về tẩm cung thăm con (j15.js:59) + Tự dạy con tài nghệ + thầy cưỡi ngựa; merge 9 → 5 (§3.3) | scan-sum «con kid:0 / kid:1» names |
+| 1d | pop-up 32 not reproducible | measured with «đầu game» added: **24–29** for a known consort (Giao thiệp 18–22 · Mưu kế 2–3 · Hại người 4 · Trừng phạt 0–1), 9 for a stranger; «Bàn tán về X» = ONE button (1 with 1/4/9 known — the reviewer's «grows per person» is not what LIVE does); Trút giận only at ghen ≥50 (j2.js:176). VN table fixed | scan-sum «DƯ ĐỒ IN-PERSON POP-UP» + «Bàn tán» line |
+| 2 | spy / bribe file:line | spy j8.js:118 (jwhy.js:44 odds, j78.js:130 hook), bribe j8.js:131 | §1.1 rows |
+| 3 | silent drops | new §3.4 OLD → NEW: all 55 ACT keys, the 38 deck cards, every pop-up/card-only act, Quyền HH, Hoàng tự, Tư trang, pets, Tài nghệ, cung nữ — each «way / tier / roll / moved / stays»; **dropped: none** (catswap, pond, kframe, pushp, slowpoison, pgift, xinhh, Khất bổng lộc, the 2 art cards, Trút giận all homed) | HANHSU_MERGE §3.4 |
+| 4 | laws per merged act | new §3.5: one row per P1–P14 + H1–H16 with law 1 / 2 / 3 / 6; xinhh's «Không được gì thêm» → gains «nàng giáng một bậc» | HANHSU_MERGE §3.5 |
+| 5 | evidence kinds real today; D4 | §4.1: what DEEDW + hooks + deedOnce really record, per charge; 4 families need a NEW deed record (rash; xa xỉ; laydo/laydol; tat/phatquy/nuoc/tea/ink); xx/vp/expose marked as accusations. §4.2: pieces + find odds = **D4's table** (one source; BAL.charge.need dropped); charges D4 does not name yet marked «awaits D4 numbers» → FOR FOREMAN D to map | HANHSU_MERGE §4.1–4.2 |
+| 6 | pets in khắc budget | §1.4 count (3 care games × 1 khắc, weekly decay = per play-day ⇒ ~3 khắc/day per pet) + §5 options A (one «Chăm thú» + passive maid care, recommended) / B / C | scan-sum «PETS» + jpetcare.js:17 BAL.pet |
+| 7 | minigame vs OD 04:15Z (1) | §3 header, P5, P7: «minigame or plain odds per D5's list»; no minigame kept against D5 | HANHSU_MERGE §3 |
+| 8 | shots wrong | r0 splash cause found: the life-wheel roulette (#kroulw), loading gate (#klife) and day banner sit over the game after a scripted start — the shot script hides them for the shot only. New: `before-hc-fold.webp` / `before-hc-ipad.webp` = the REAL Hậu cung consort card with its tab counts (Gặp mặt 2/5 · Giao thiệp 2/3 · Dùng chứng cứ 0/8 · Hại nhỏ 8/12 · Hại nặng 14/18 · Sát hại 5/9 on Fold); `after-result-*.webp` = real «Thỉnh an Hoàng hậu» result with the total READ from state: Fold «thiện cảm +6 (1)» from −5, iPad «thiện cảm +2 (−3)» from −5; r0's «+5 (0)» was the same correct sum from −5 (explained). Portraits show «Đang thỉnh tranh…» because the container cannot reach the image CDN — not a game fault. Looked at all 6 | shots + facts-r1.json |
+| 9 | servant road «parked» | withdrawn; counted (§1.3: ≈30 buttons, Phận sự 13 → 5 S1–S5) with a real servant start | scan-sum «srv» rows |
+| + | NEWS SIEVE (OD 04:40Z) | one paragraph in §6: «+8 (42)» stays on HER result cards (news about her); NPC↔NPC changes go to the monthly summary with the same kitRel words; no conflict | HANHSU_MERGE §6 |
+Kept PASS parts unchanged: §7.1 CANON OVERWRITE flag, expert view §2, VN wording, tier picks, 13-charge reasons.
+FOR FOREMAN D (from §4.2): map mưu hại hoàng tự, yểm bùa, nghiệm thân, xa xỉ, trộm cắp/phóng hỏa, đặt điều thị phi onto D4's rows; add the 4 missing deed records to the D4 build.
