@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 26/11 15:45Z — FOREMAN D (depth 7) = session_01D3E3NYYzn179gzKUA3MM7U; START_CTX ≈ 7 %; depth 7 (limit 8); roll at ≈ 32 % (ceiling 60 %); hourly wake trig_01XfLjnezpgdTMVgCjqMGWQu (:40); MAIN = 160; LIVE aa37de21
 last wake: 26/11 12:30Z — FOREMAN D (depth 4) session_01D3E3NZKCLJ7V9VupQyCnr1 (hourly :27; ctx ≈ 33 % → ROLLING to depth 5; MAIN = 159; LIVE 1dcb373e)
 last wake: 26/11 11:28Z — FOREMAN D (depth 4) = session_01D3E3NZKCLJ7V9VupQyCnr1; START_CTX ≈ 6 %; depth 4 (took over from depth 3 session_01D3E3NXsh9NaF7WkES325hr; MAIN = 158); roll at ≈ 31 %; hourly wake trig_01Y9vhQ2UfEx4qzueTX4RsW5 (:27)
 last wake: 26/11 11:24Z — FOREMAN D (depth 3) session_01D3E3NXsh9NaF7WkES325hr (hourly :23; ctx ≈ 38 % → ROLLING to depth 4; MAIN = 158; LIVE 3af7896e)
@@ -311,3 +312,4 @@ Rollover lines (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16
 last wake: 26/11 15:42Z — FOREMAN D (depth 6) session_01D3E3NWrRTYdU6JHL5bXjaj (hourly :35; ctx ≈ 32 % → ROLLING to depth 7; MAIN = 160; LIVE = aa37de21)
 - (26/11 15:43Z) D (depth 6) ROLLED OVER → **FOREMAN D (depth 7) = session_01D3E3NYYzn179gzKUA3MM7U**. Depth-6 wake trig_01F9VekcjrbdmF1TEETy1ngE is deleted once the child confirms; late reports reaching depth 6 are relayed. **FOR MAIN 160: Foreman D is now session_01D3E3NYYzn179gzKUA3MM7U.**
 - (26/11 15:45Z) (depth 6 relay) help-housemate BIG rv DELTA PASS 41125250 (no BLOCKING; §8 handover 2b93059e); N4 scan misses 8 rcv kinds; N5 queen-mediates «Mách lẻo» gain → rv says owner ruling (law 16) vs D-6 decision 15:36Z → depth 7 decides; rv wiped CDN img/_review/help-housemate/ → videos must be re-uploaded before LAND READY.
+- (26/11 15:45Z) PICKUP: FOREMAN D (depth 7) = session_01D3E3NYYzn179gzKUA3MM7U; START_CTX ≈ 7 %; depth 7 (limit 8); roll at ≈ 32 % (ceiling 60 %). Hourly wake trig_01XfLjnezpgdTMVgCjqMGWQu (:40). Push tool recreated. Heads seen: renderer-mem 4422dda2 · dayq-qsoftlock c1fff00a · selx-fair 8c56b83e · help-housemate d007c9ba (past rv-PASS 41125250 = the «Lời hòa giải» add → needs rv delta) · main aa37de21. Telling every worker/reviewer/seat + parent depth 6 now. **FOR MAIN 160: Foreman D is now session_01D3E3NYYzn179gzKUA3MM7U.**
