@@ -1,9 +1,9 @@
 /* ================= jmapz: DƯ ĐỒ — ONE SHORT LINE PER TAG + ZONES (ZOOM/FOG) + DƯỠNG TÚ VIỆN + SECOND LEVEL OF CÀN NINH / ĐỨC THỌ (KIT §85.10) =================
    Owner OD 25/11 ~23:45Z (verbatim): "Chữ quá nhiều ở trên cái dư đồ này, cần phải coi cái cách sắp xếp lại hay là gom. Tôi đã từng nói bạn phải gom lại
    rồi mà, tức là những cái khu nào giống nhau là mình nên gom lại như thế nào đó mà." + her 18/11 rulings (OD ~19:25Z L1898 zones: total bóng on the zone,
-   tap = zoom in, fog over the rest; ~19:40Z Đông cung NOT grouped; ~19:45Z consort palaces keep their own names, no Đông/Tây lục cung layer).
+   tap = zoom in, fog over the rest; ~19:40Z Đông cung NOT grouped; ~19:45Z her palace grouped with her mark on the zone tag) + 26/11 ~07:05Z «gộp ... bấm vào tầng 2 thì sẽ hiện ra chi tiết» (MAIN 155: overwrites the 18/11 ~19:45Z cancel of the Đông/Tây lục cung zones).
    (0) every tag = name + one short count. (1) ZONES of similar common places: ONE kit map tag "<zone> · N bóng" (N = Σ members, countAt);
-       members' own tags hidden on the overview; her own place / the place she stands on stay out (her mark stays visible).
+       members' own tags hidden on the overview; her palace / the place she stands on are grouped too, the zone tag carries her marks (L1901).
    (2) TAP A ZONE → the same Dư đồ zooms onto the zone (FLIP, kit pace; reduced motion = instant), the rest under ONE kit fog layer (.kmfog: light by day,
        dark at night); inside, every member shows its own tag with all its rules. Back = tap the fog / the rail back button «Về toàn cảnh Dư đồ».
    (a) Càn Ninh (Hoàng hậu) and Đức Thọ (Thái hậu) open the courtyard (jpm kitPalaceMap) with Chính điện / Đông phối điện / Tây phối điện while
@@ -35,19 +35,28 @@ const MAPZ_DTV={k:"dtv",n:"Dưỡng Tú viện",fn:"nơi tú nữ ở và học 
 }catch(e){console.error("jmapz dtv",e)}})();
 /* ================= (1)+(2) DƯ ĐỒ ZONES + ZOOM/FOG (review/map-zones 5692c687 sections 1-2, restored; zones re-cut per the 18/11 ~19:40Z/~19:45Z rulings) ================= */
 /* the zones (owner 25/11 ~23:45Z "những cái khu nào giống nhau là mình nên gom lại" + 18/11 ~19:25Z; NOT grouped, 18/11 ~19:40Z/~19:45Z:
-   every consort palace (her own included), Càn Ninh, Đức Thọ, Dưỡng Hòa, Cần Chính, Đông cung, Ngự hoa viên, Thái y viện, Kính sự phòng, Ngoại triều).
+   Càn Ninh, Đức Thọ, Dưỡng Hòa, Cần Chính, Đông cung, Ngự hoa viên, Phật đường, Trường Môn viện, Ngoại triều; consort palaces = Đông/Tây lục cung zones since 26/11).
    Members are neighbours on the painting (the zoom box stays small). */
 const MAPZ_ZONES=[
  {id:"nv",n:"Nội vụ",fn:"các ty Nội vụ phủ coi: cung nhân ở, làm việc, chịu phạt; tú nữ ở Dưỡng Tú viện",ic:"place-cnh",keys:["nvp","tgk","cnh","dtv"]},
- {id:"ht",n:"Hoàng tử sở",fn:"nơi các hoàng tử ở và học",ic:"place-acs",keys:["acs","ttp"]}];
+ {id:"ht",n:"Hoàng tử sở",fn:"nơi các hoàng tử ở và học",ic:"place-acs",keys:["acs","ttp"]},
+ /* owner 26/11 ~07:05Z «gộp cái dư đồ lại … bấm vào tầng 2 thì sẽ hiện ra chi tiết» + 18/11 ~19:45Z (L1901) «Cung của tôi … Cứ gom vào bình thường, nhưng mà có cái dấu»:
+    the consort palaces group by side (MAIN 154 brief: consort palaces keep their own names INSIDE the Đông/Tây lục cung zones); her palace is grouped too, the zone tag
+    carries her mark (kitMeMapMark when she is there, «Nhà ta» when her home is inside). Level 2 = the palaces' own tags; tap a palace = its courtyard (levels 3–4, jpm). */
+ {id:"dlc",n:"Đông lục cung",fn:"các cung phi tần phía đông",ic:"place-cung",keys:[],pal:"east"},
+ {id:"tlc",n:"Tây lục cung",fn:"các cung phi tần phía tây",ic:"place-cung",keys:[],pal:"west"},
+ /* L2537 (offices of one kind under one tag): the court's service offices on the east side */
+ {id:"ty",n:"Ty sở",fn:"Ngự thiện phòng, Thái y viện, Kính sự phòng: cơm nước, thuốc thang, sổ thị tẩm",ic:"place-nth",keys:["nth","tyv","ksp"]}];
 /* KIT §85.10 values (one place): zone box padding (fraction of the map), fill of the free area at zoom, fog feather, motion */
 const KIT_MAPZ={pad:.025,fill:.9,feather:.3,ms:460,ease:"cubic-bezier(.33,0,.2,1)"};
-function mapzEast(){return PALN.slice(0,8)}
-function mapzWest(){return PALN.slice(8)}
+/* east / west of the consort palaces = which side of Càn Ninh's axis their plan box sits (MAPH.rivalSlots), not a list index */
+function mapzSide(e){try{const ax=MAPH.places.kn?MAPH.places.kn.box.x+MAPH.places.kn.box.w/2:.5;return MAPH.rivalSlots.filter(s=>s.box&&((s.box.x+s.box.w/2>ax)===e)).map(s=>s.name)}catch(x){return []}}
+function mapzEast(){return mapzSide(true)}
+function mapzWest(){return mapzSide(false)}
 /* zone of a plan key / an empty palace name */
 function mapzZoneOf(k,name){try{let nm=name||null;if(k&&/^r\d+$/.test(k)){const i=palSlot(k);if(i!=null)nm=PALN[i]}else if(k==="home"&&S.pal!=null)nm=PALN[S.pal];
   for(const Z of MAPZ_ZONES){if(k&&Z.keys.includes(k))return Z;if(nm&&((Z.pal==="east"&&mapzEast().includes(nm))||(Z.pal==="west"&&mapzWest().includes(nm))))return Z}}catch(e){}return null}
-/* her own places: never hidden inside a zone on the overview */
+/* (unused since 26/11: her places are grouped like the others, L1901; kept for callers outside this file) */
 function mapzMine(){const M=new Set(["home"]);try{if(S.place)M.add(S.place);M.add(palaceOf(S));const r=typeof resMeHoused==="function"&&resMeHoused();if(r&&r.head)M.add(palaceOf(r.head))}catch(e){}return M}
 /* the zone box on the map (fractions): union of its members' plan boxes + padding */
 function mapzBox(Z){const B=[];try{for(const k of Z.keys){const p=MAPH.places[k];if(p&&p.box)B.push(p.box)}
@@ -61,15 +70,19 @@ function mapzOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__ma
 function mapzCur(){const Z=window.__mapZone&&mapzById(window.__mapZone);return Z&&mapzOn()?Z:null}
 /* ---------- (1)+(2) the overview / zoomed HTML ---------- */
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(!mapzOn()||h.indexOf('class="mapv')<0||h.indexOf("kpmv")>=0)return h;
- try{const cur=mapzCur();const mine=mapzMine();const tot={},hap={},has={},open_={};
+ try{const cur=mapzCur();const tot={},hap={},has={},open_={},me={},home={},mk={};const hk=S.out?null:(typeof plHomeK==="function"?plHomeK():"home");
   h=h.replace(/<(button|div) class="mspot([^"]*)"([^>]*)>/g,(all,tag,cls,attr)=>{const g=/data-(?:go|ak)="([^"]+)"/.exec(attr),t=/title="([^":]+):/.exec(attr);const k=g?g[1]:null;
    const Z=mapzZoneOf(k,!k&&t?t[1].trim():null);let hide=false;
-   if(cur){hide=!Z||Z.id!==cur.id}else if(Z&&!(k&&mine.has(k))){hide=true;has[Z.id]=1;if(!/\bmgrey\b/.test(cls))open_[Z.id]=1;if(k)try{tot[Z.id]=(tot[Z.id]||0)+countAt(k)}catch(e){}}
+   if(Z&&k)(mk[Z.id]=mk[Z.id]||[]).push(k);
+   if(cur){hide=!Z||Z.id!==cur.id}else if(Z){hide=true;has[Z.id]=1;const isHere=/\bhere\b/.test(cls);if(isHere)me[Z.id]=1;if(k&&(k===hk||k==="home"))home[Z.id]=1;if(!/\bmgrey\b/.test(cls)||isHere)open_[Z.id]=1;if(k)try{tot[Z.id]=(tot[Z.id]||0)+countAt(isHere?S.place:k)}catch(e){}}
    return `<${tag} class="mspot${cls}${hide?" mzh":""}"${Z?` data-zn="${Z.id}"`:""}${attr}>`});
   /* a "!" happening on a hidden member shows on its zone tag (KIT 78.x: the player must still see it) */
   if(!cur)h.replace(/<(?:button|div) class="mspot[^"]* mzh" data-zn="([^"]+)"(?:(?!<(?:button|div) class="mspot)[\s\S])*?class="khap"/g,(a,z)=>{hap[z]=1});
   const zt=cur?"":MAPZ_ZONES.filter(Z=>has[Z.id]).map(Z=>{const b=mapzBox(Z);if(!b)return"";const n=tot[Z.id]||0;const icn=typeof ic==="function"?ic(Z.ic,14).replace('class="ic"','class="ic kplic"'):"";
-    return `<button class="mspot mzone${open_[Z.id]?"":" mgrey"}" data-zone="${Z.id}" title="${Z.n}: ${Z.fn}${n?` · ${n} bóng`:""} · chạm để xem gần" aria-label="${Z.n}, ${n?n+" bóng":"vắng"}, chạm để xem gần" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${icn}${Z.n}${hap[Z.id]&&typeof kitHapMark==="function"?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}</span><span class="mmeta">${n?`${n} bóng`:"vắng"}</span></button>`}).join("");
+    const mm=me[Z.id]&&!S.out&&!S.dead&&typeof kitMeMapMark==="function"?kitMeMapMark():"";const hm=home[Z.id]?"Nhà ta":"";
+    /* meta = one short count (KIT §85.10 (0)); her zone: «Nhà ta · N bóng» / where she stands: «Ta + N bóng» (KIT §41.2 words) */
+    const cnt=me[Z.id]?(n?`Ta + ${n} bóng`:"Chỉ có ta"):(n?`${n} bóng`:(hm?"":"vắng"));const meta=[hm,cnt].filter(Boolean).join(" · ");
+    return `<button class="mspot mzone${open_[Z.id]?"":" mgrey"}${me[Z.id]?" mzme":""}${hm?" mzhome":""}" data-zone="${Z.id}" data-mzk="${(mk[Z.id]||[]).join(" ")}" title="${Z.n}: ${Z.fn}${hm?" · có nhà ta":""}${n?` · ${n} bóng`:""} · chạm để xem gần" aria-label="${Z.n}${hm?", có nhà ta":""}, ${n?n+" bóng":"vắng"}, chạm để xem gần" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${mm}${icn}${Z.n}${hap[Z.id]&&typeof kitHapMark==="function"?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}</span><span class="mmeta">${meta}</span></button>`}).join("");
   /* zone tags go right after the picture (under the place tags in paint order); the fog sits there in zoom mode */
   const b=cur&&mapzBox(cur);const fog=cur&&b?`<div class="kmfog" data-mzback="fog" aria-hidden="true" style="${mapzFogVars(b)}"></div>`:"";
   h=h.replace(/(<img class="mapimg"[^>]*>)/,"$1"+fog+zt);
@@ -116,6 +129,9 @@ window.addEventListener("click",e=>{try{if(!S||typeof tab==="undefined"||tab!=="
  const fx=(e.clientX-r.left)/r.width,fy=(e.clientY-r.top)/r.height;if(fx>=b.x&&fx<=b.x+b.w&&fy>=b.y&&fy<=b.y+b.h)return;e.preventDefault();e.stopImmediatePropagation();mapzGo(null)}catch(err){console.error(err)}},true);
 /* the way back = the ONE kit back button of the left rail (KIT 33.11, jplfs kplBack): zone → overview; courtyard → its zone (as before → Dư đồ) */
 (function(){if(typeof kplBack!=="function")return;const b0=kplBack;kplBack=function(){try{if(typeof tab!=="undefined"&&tab==="go"&&!window.__kpm&&mapzCur())return{t:"Về toàn cảnh Dư đồ",go:()=>mapzGo(null)}}catch(e){}return b0.apply(this,arguments)}})();
+/* back from a palace courtyard (level 3) into its zone (level 2): the zone is fitted and centred again, as on entry */
+(function(){const r0=render;render=function(){const was=window.__mzKpmPrev;const r=r0.apply(this,arguments);try{const now=!!window.__kpm;window.__mzKpmPrev=now;
+ if(was&&!now&&typeof tab!=="undefined"&&tab==="go"&&mapzCur()){window.__mapZoneDo=1;try{mapFit()}finally{window.__mapZoneDo=0}}}catch(e){console.error("jmapz back",e)}return r}})();
 /* leaving the Dư đồ by the tab bar ends the zone view; the list view too */
 document.addEventListener("click",e=>{const t=e.target.closest("#tabs [data-tab],button[data-tab]");if(t&&t.dataset.tab!=="go"){window.__mapZone=null;window.__mapZoneNew=0}},true);
 document.addEventListener("click",e=>{if(e.target.closest("[data-maplist]")){window.__mapZone=null;window.__mapZoneNew=0}},true);
