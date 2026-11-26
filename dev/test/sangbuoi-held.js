@@ -59,8 +59,10 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
     /* the selection scenes of a new life (jkitsel kitDialogue, «Chạm để tiếp ▸»): a tap on the line box goes on (only a box on top: a
        left-over box under the gate scene «Vào điện» is not tapped); its layer ignores button taps */
     {const top=e=>{const r=e.getBoundingClientRect();if(!r.width||!r.height)return false;const h=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return !!h&&e.contains(h)};const dv=[...document.querySelectorAll('.kdv-box')].find(top);if(dv)return mark(dv)}
-    const kc=[...document.querySelectorAll('.kmov:not(.km-out) button,#kpodov button,#kmrew button')].find(b=>b.getClientRects().length&&!b.disabled);if(kc)return mark(kc);
-    const ko=document.querySelector('.kmov:not(.km-out)');if(ko&&ko.getClientRects().length)return mark(ko);
+    /* the cases' own queued scene (#tstkm) is tapped by the case loop, never here: tapAny tapping it raced the loop's check (K×6 iPad 1/6 «queued
+       scene never played» with kmGhost 2, KMQ 0: the scene HAD played, tapAny closed it and the buổi turned before the loop looked) */
+    const kc=[...document.querySelectorAll('.kmov:not(.km-out):not(#tstkm) button,#kpodov button,#kmrew button')].find(b=>b.getClientRects().length&&!b.disabled);if(kc)return mark(kc);
+    const ko=document.querySelector('.kmov:not(.km-out):not(#tstkm)');if(ko&&ko.getClientRects().length)return mark(ko);
     const M=document.getElementById('modal');if(M&&!hid(M)){const o=[...M.querySelectorAll('.opt:not([disabled])')];const th=o.find(b=>/^Thôi/.test(b.textContent.trim()));if(th)return mark(th);if(o.length)return mark(o[0]);
      const c=M.querySelector('#mclose')||[...M.querySelectorAll('button')].find(b=>b.offsetParent&&!b.disabled);if(c)return mark(c)}return ''});
    if(!sel)return false;try{await p.tap(sel,{timeout:3000,force:true})}catch(e){await p.evaluate(s=>{const e=document.querySelector(s);e&&e.click()},sel)}return true};
