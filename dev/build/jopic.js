@@ -377,6 +377,24 @@ ${KIT_OPT_CSS}
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpinfo[hidden]{display:none!important}
 #kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
+/* §6.2e A SHORT PHRASE NEVER BREAKS (KK35; MAIN 149 «Tin báo» Fold: «Để / ta / xem» one word per line beside the big thumbnail; law 11 = every LIST option card,
+   hand cards §101 have their own face): a card name of ≤ 4 words that wraps, or any name broken one word per line, first gets the SMALL thumbnail (.kofit1),
+   still broken → the name goes UNDER the thumbnail row (.kofit2, full card width). Measured after layout (rAF) on every open / re-render / resize. */
+function kitOptNameBad(b){try{const kan=b.querySelector(".kat>.kan");if(!kan||!b.querySelector(":scope>.kaart"))return false;const c=kan.cloneNode(true);c.querySelectorAll(".kodds,.khnx,small,.kb,.kwhy").forEach(e=>e.remove());const t=(c.textContent||"").replace(/\s+/g," ").trim();if(!t)return false;const nw=t.split(" ").length;
+ const lh=parseFloat(getComputedStyle(kan).lineHeight)||(parseFloat(getComputedStyle(kan).fontSize)||14)*1.15;const n=Math.round(kan.getBoundingClientRect().height/lh);return n>1&&(nw<=4||(nw>=2&&n>=nw))}catch(e){return false}}
+/* ONE thumbnail size per option list (law 10): the step a card needs is given to every card of its list */
+function kitOptNameFit(g){try{if(!g||!g.isConnected||g.classList.contains("khand"))return;const bs=[...g.children].filter(b=>b.matches&&b.matches("button.ka.kart.kopt")&&b.getClientRects().length);if(!bs.length)return;
+ bs.forEach(b=>b.classList.remove("kofit1","kofit2"));if(!bs.some(kitOptNameBad))return;bs.forEach(b=>b.classList.add("kofit1"));if(!bs.some(kitOptNameBad))return;bs.forEach(b=>{b.classList.remove("kofit1");b.classList.add("kofit2")})}catch(e){}}
+function kitOptNameFitAll(){try{document.querySelectorAll("#modal:not([hidden]) .opts:not(.khand),.kitpg-opts,.kscn-box .opts:not(.khand)").forEach(kitOptNameFit)}catch(e){}}
+let KONF_T=0;function kitOptNameFitSoon(){if(KONF_T)return;KONF_T=requestAnimationFrame(()=>{KONF_T=0;kitOptNameFitAll()})}
+window.kitOptNameFit=kitOptNameFit;window.kitOptNameFitAll=kitOptNameFitAll;
+(function(){try{const M=document.getElementById("modal");if(M&&typeof MutationObserver==="function")new MutationObserver(ms=>{for(const m of ms){const t=m.target;if(t&&t.closest&&t.closest(".opts")&&!(m.type==="attributes"&&/^kofit/.test(String(t.className||"").split(" ").find(x=>/^kofit/.test(x))||"")&&m.attributeName==="class")){kitOptNameFitSoon();return}}}).observe(M,{subtree:true,childList:true,characterData:true});
+ addEventListener("resize",kitOptNameFitSoon);const s0=window.showModal;if(typeof s0==="function"){window.showModal=showModal=function(){const r=s0.apply(this,arguments);kitOptNameFitSoon();return r}}}catch(e){}})();
+(function(){const st=document.createElement("style");st.id="kit-opt-namefit";const P="html body #modal#modal#modal button.ka.kart.kopt.kopt.kopt";const Q2="html body .kitpg-opts>button.ka.kart.kopt.kopt.kopt";
+ st.textContent=[P,Q2].map(O=>`${O}.kofit1,${O}.kofit2{--ko-pw:40px;--ko-ph:40px}
+${O}.kofit2{flex-wrap:wrap!important;align-content:center!important}
+${O}.kofit2>.kabody{flex:1 0 100%!important;width:100%!important;max-width:none!important}
+${O}.kofit2>.kaart{margin-inline:auto 0}`).join("\n");document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
