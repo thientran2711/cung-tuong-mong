@@ -19,7 +19,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    const f0=SC7[sub].f;SC7[sub].f=x=>x===S?999:Math.min(40,f0(x));
    const pp={k:"trungthu",vi,e:L.map(v=>v.id),pr:[],sd:11};const d=mkP("j71f",pp);Q.unshift({t:`${fShort7("trungthu")} · ${fTitle7("trungthu",vi)}`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1});render();showModal();
    return{d:wk(),nights:S.nights||0,name:S.name,rank:S.rank,sub}});
-  await sleep(1500);await p.screenshot({path:`${OUT}/${TAG}-${dev}-0-invite.png`});
+  await sleep(1500);try{await g.waitForFunction(()=>!$('modal').hidden&&!document.getElementById('kload'),null,{timeout:20000})}catch(e){}try{await p.waitForFunction(()=>![...document.querySelectorAll('body > *')].some(x=>/Sửa soạn nhập cung/.test(x.textContent||'')&&x.offsetParent!==null),null,{timeout:30000})}catch(e){}await sleep(2500);await p.screenshot({path:`${OUT}/${TAG}-${dev}-0-invite.png`});
   const seen=[];let shots=0;
   /* one real tap: mark what a player would tap next, click it through the host frame */
   const tapOne=async(first)=>{const k=await g.evaluate(first=>{for(const x of document.querySelectorAll('[data-ctntap]'))x.removeAttribute('data-ctntap');const vis=x=>x&&x.offsetParent!==null&&!x.disabled;
@@ -43,5 +43,9 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   await sleep(1500);await p.screenshot({path:`${OUT}/${TAG}-${dev}-3-morning.png`});
   const e=await g.evaluate(s0=>({nights:(S.nights||0)-s0.nights,nightLog:(S.nightLog||[]).slice(-2),d0:s0.d,w:wk(),why:S.nightWhy||null,logs:(S.logs||[]).filter(x=>/thị tẩm|đứng đầu|đoạt giải/.test(x)).slice(0,6).map(x=>String(x).replace(/<[^>]+>/g,'').slice(0,160))}),s0);
   sum[dev]={s0,e,done,taps:seen.length,ksp:seen.filter(x=>/Kính sự phòng báo tin/.test(x)).length,flipChoice:seen.filter(x=>/Kính sự phòng\]:(Giữ chân|Tranh sủng|Chặn ngự giá|Thôi)/.test(x)).length,prep:seen.filter(x=>/thị tẩm/i.test(x)).length,seen:seen.slice(0,60),errs:errs.slice(0,5)};
+  /* rv ask: the jts Hội phối đồ entry card «Tự tay phối đồ» on screen too (its real card, tsDressHold; only the dressing-room stub skipped) */
+  if(process.env.JTS!=='0'){try{await g.evaluate(()=>{Q.length=0;try{kmReset()}catch(e){}$("modal").hidden=true;for(const id of ['kneov','dawn']){const x=document.getElementById(id);if(x){x.classList.remove('on');x.hidden=true}}const th=Object.keys(TS_THEME)[0];tsS().dress={m:S.month,y:S.year,th};const ms=tsMkSit;tsMkSit=(th,m,f)=>f();
+    try{tsDressHold()}finally{tsMkSit=ms}const m=Q.find(x=>x&&x.opts&&x.opts.some(o=>/^Tự tay phối đồ/.test(o.n||"")));if(m){Q.splice(Q.indexOf(m),1);Q.unshift(m)}render();showModal()});
+   await sleep(4000);await p.screenshot({path:`${OUT}/${TAG}-${dev}-4-jts.png`});sum[dev].jts=await g.evaluate(()=>((document.getElementById('modal')||{}).innerText||'').replace(/\s+/g,' ').slice(0,600))}catch(e){sum[dev].jtsErr=e.message.slice(0,160)}}
   const v=p.video();await ctx.close();if(v){const f=await v.path();fs.renameSync(f,path.join(OUT,`${TAG}-${dev}.webm`))}}
  console.log(JSON.stringify(sum,null,1));fs.writeFileSync(path.join(OUT,`${TAG}.json`),JSON.stringify(sum,null,1));await b.close();srv.close()})();

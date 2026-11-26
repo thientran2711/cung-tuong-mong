@@ -15,7 +15,8 @@
         layer for the next line (selx-flow.js does the same). Before (SELSCENE-15, coop-e2e a1 138/149): no bot tapped it — kept lives only got past because
         the bot clicked the HIDDEN card under the scene (visibility:hidden keeps offsetParent), which no player can do; her own ban hoa scene has no card
         under it → the guest sat on «Chạm để tiếp» for ever (the ending + rebirth wait for the scene to end)
-     5. the steal mini-game window kg82 (jsmg, night bundle): «Thôi, không chơi» #kg82skip / the result frame's kit ✕ — was pasted in coop-e2e,
+     5. the steal mini-game window kg82 (jsmg, night bundle): «Thôi, không chơi» #kg82skip (+ any other «Bỏ qua» of the same kg82 frame, e.g. the jts Hội phối đồ
+        «Trước gương đồng» / dressing room, and its result «Đã hiểu»: a guest sat in it for ever, LIVE and branch alike, D3 coop C3/C4 26/11) / the result frame's kit ✕ — was pasted in coop-e2e,
         cn-force, coop-night only; the other bots sat on its intro for ever (x.st "mg": pool-face / room-faces / emo-seat / guest-names r3)
    tap(o)  → 'x' when it tapped something, '' otherwise (page closed / navigating = '').
    first(o, fn [, arg]) → 'x' after a tap, else the bot's own step o.p.evaluate(fn, arg).
@@ -35,7 +36,7 @@ const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  if(kb){window.__kfocN=(window.__kfocN||0)+1;kb.click();return'x'}
  /* 5. the steal mini-game window (jsmg herGame after «Tranh sủng» / «Chặn ngự giá», kg82): «Thôi, không chơi» on its intro, the result frame's kit ✕
     — never under a full-screen scene (a player touches the scene first) */
- if(![...document.querySelectorAll('.kmov')].some(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none'&&getComputedStyle(x).visibility!=='hidden')){const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}}
+ if(![...document.querySelectorAll('.kmov')].some(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none'&&getComputedStyle(x).visibility!=='hidden')){const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||[...document.querySelectorAll('#kg82 .kg82act button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]')&&/^(Bỏ qua|Đã hiểu$)/.test(x.textContent.trim()))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}}
  return''};
 async function tap(o){try{return await o.p.evaluate(TAP)}catch(e){return''}}
 /* a kit selection scene covers the game (body.kscn-on): a player can only touch the scene — the bot's own step (cards, #next, tabs) waits (2b) */

@@ -43,12 +43,14 @@ function herCard(t){try{Q.push({t:"Kính sự phòng báo tin",who:typeof pEunCo
 let PC=null;
 const busy=()=>{try{const t=document.getElementById("rtoast");const pod=document.getElementById("kpodov");const vis=x=>!!(x&&!x.hidden&&x.offsetParent!==null);
  return !!((t&&t.classList.contains("on"))||vis(pod)||vis(document.getElementById("kg82"))||(S&&S.mg))}catch(e){return false}};
-function cardTick(){if(!PC)return;const age=Date.now()-PC.at;
+/* the toast is painted AFTER resultShow returns (and can be repainted): the night item is added on every tick while it is up */
+function tagToast(){try{const t=document.getElementById("rtoast");if(!t||!t.classList.contains("on")||t.querySelector("[data-ctn]"))return;
+ const v=t.querySelector(".kr-duoc .krv");if(v){v.insertAdjacentHTML("afterbegin",'<span class="kitem" data-ctn="1"><span class="ef g">đêm ấy được thị tẩm</span></span>');if(PC)PC.rs=1}}catch(e){console.error(e)}}
+function cardTick(){if(!PC)return;tagToast();const age=Date.now()-PC.at;
  if((!busy()&&(PC.rs||age>=((BAL.ctn&&BAL.ctn.waitMs)||1500)))||age>60000){const t=PC.t;PC=null;herCard(t);try{render()}catch(e){}try{if($("modal").hidden&&!S.mg)showModal()}catch(e){}return}
  setTimeout(cardTick,300)}
 function cardLater(t){if(window.__bot){herCard(t);return}PC={t,at:Date.now(),rs:0};setTimeout(cardTick,300)}
-if(typeof resultShow==="function"){const rs0=resultShow;resultShow=function(){const r=rs0.apply(this,arguments);try{if(PC&&!PC.rs){PC.rs=1;
- const v=document.querySelector("#rtoast .kr-duoc .krv");if(v)v.insertAdjacentHTML("afterbegin",'<span class="kitem"><span class="ef g">đêm ấy được thị tẩm</span></span>')}}catch(e){console.error(e)}return r}}
+if(typeof resultShow==="function"){const rs0=resultShow;resultShow=function(){const r=rs0.apply(this,arguments);try{if(PC){PC.rs=1;setTimeout(tagToast,0);setTimeout(tagToast,60)}}catch(e){console.error(e)}return r}}
 /* why the night cannot be kept for p today ("" = it can) */
 function why(p){const me=p===S;const d=day();const n=typeof ntTaken==="function"?ntTaken():null;
  if(n){if(n.who===keyOf(p))return "same";return String(typeof ntReason==="function"?ntReason(S):"đêm nay Hoàng thượng đã có hẹn").replace(/^Đ/,"đ")}
