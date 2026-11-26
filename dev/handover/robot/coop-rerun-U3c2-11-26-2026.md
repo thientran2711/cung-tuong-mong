@@ -10,3 +10,5 @@ PRIORITY #1 CHECK ('U3c|coop-rerun'): continues U3c table (dev/handover/robot/co
 
 Totals (U3c-2): 4 runs, valid 1 (MITIGATED). Combined with U3c S18 RRRG: B valid segments 2.
 Note: local Worker/static die ~90-110 min; restarted at 04:03Z, 05:28Z (between rooms).
+| S23 | F3XF | 66 | Fold host / iPad guest, build u5b = u4 7959f1b5 + jksize/jinv from c20aaa6e (BUILD OK ce85641680bc), #25, UNMITIGATED (RELOAD_AT=20) | **VALID SEGMENT / B FREEZE-FIX VERIFY PASS**: year 2 (host buổi 123, guest 122, ~85 min), stuck 0, 0 SEATHANG, passed buổi 61 + 73 (XCWQ seed froze there before), RSS ~1.2-1.8 GB. Saves u3r2/F3XF @f1251c0a |
+| S24 | 54AS | 68 | aborted by Foreman order at buổi ~2 (switched to verification) | not counted |
