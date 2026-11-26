@@ -1,0 +1,7395 @@
+{
+ "job": {
+  "id": "nc-nc_vuong-skilled-2",
+  "origin": "nc",
+  "road": "nc_vuong",
+  "bot": "sens",
+  "seed": 2618117995,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "4523381f",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 5,
+  "cap": null,
+  "stuck": 8,
+  "unstick": [
+   {
+    "at": 350,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 357,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 364,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 370,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 377,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 384,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 391,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 398,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 404,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 411,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 418,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 425,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 432,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 439,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 446,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 452,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 459,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 466,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 473,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 480,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 486,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 493,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 500,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 507,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 514,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 520,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 527,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 534,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 541,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 548,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 555,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 562,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 568,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 575,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 582,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 589,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 596,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 602,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 609,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 616,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 623,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 630,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 637,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 644,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 650,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 657,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 664,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 671,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 678,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 684,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 691,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 698,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 705,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 712,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 719,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 726,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 733,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 739,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 746,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 753,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 760,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 767,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 774,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 780,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 787,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 794,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 801,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 808,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 815,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 821,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 828,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 835,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 842,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 849,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 856,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 863,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 869,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 876,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 883,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 890,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 897,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 904,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 911,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 917,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 924,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 931,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 938,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 945,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 951,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 958,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 965,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 972,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 979,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 985,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 992,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 999,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1006,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1012,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1019,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1026,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1033,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1040,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1046,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1053,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1060,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1067,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1074,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1080,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1087,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1094,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1102,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1109,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1116,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1123,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1130,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1137,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1144,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1151,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1158,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1165,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1172,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1179,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1186,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1193,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1200,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1207,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1214,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1221,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1228,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1229,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 52,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 59,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 66,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 73,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 80,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 87,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 93,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 100,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 107,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 114,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 121,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 128,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 134,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 141,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 148,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 155,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 162,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 168,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 175,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 182,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 189,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 195,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 202,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 209,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 216,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 223,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 229,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 236,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 243,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 250,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 257,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 263,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 270,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 277,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 284,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 290,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 298,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 305,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 312,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 319,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 326,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 333,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 339,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 346,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 353,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 360,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 366,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 373,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 380,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 387,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 394,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 400,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 407,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 414,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 421,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 427,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 434,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 441,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 448,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 455,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 462,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 468,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 475,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 482,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 489,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 496,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 502,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 509,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 516,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 523,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 529,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 536,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 543,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 550,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 557,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 563,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 570,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 577,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 584,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 591,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 598,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 604,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 612,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 619,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 627,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 633,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 640,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 647,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 654,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 661,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 668,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 675,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 681,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 688,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 695,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 702,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 709,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 716,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 723,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 730,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 737,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 744,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 750,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 757,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 764,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 771,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 778,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 784,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 791,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 798,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 805,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 812,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 819,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 825,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 832,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 839,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 846,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 853,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 860,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 866,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 873,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 880,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 887,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 894,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 900,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 907,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 916,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 923,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 930,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 943,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 956,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 963,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 970,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 977,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 985,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 992,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 999,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1006,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1013,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1020,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1028,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1034,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1041,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1048,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1055,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1062,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1069,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1076,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1083,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1090,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1097,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1104,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1111,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1117,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1124,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1131,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1138,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1145,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1152,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1159,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1165,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1172,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1179,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1186,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1193,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1199,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1206,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1213,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1220,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1227,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1234,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1241,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1247,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1254,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1261,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1268,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1275,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1281,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1288,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1295,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1302,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1308,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1316,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1322,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1329,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1336,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1343,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1350,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1356,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1363,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1370,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1377,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1383,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1390,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1397,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1404,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1410,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1417,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1424,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1431,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1437,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1444,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1451,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1458,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1465,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1471,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1478,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1485,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1492,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1499,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1506,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1513,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1519,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1526,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1533,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1540,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1548,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1555,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1562,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1568,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1575,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1582,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1589,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1596,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1602,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1609,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1616,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1623,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1630,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1636,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1643,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1650,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1657,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1664,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1670,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1677,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1684,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1691,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1698,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1705,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1711,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1718,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1725,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1732,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1740,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1747,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1753,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1760,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1767,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1774,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1781,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1788,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1794,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1801,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1808,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1815,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1822,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1829,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1836,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1842,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1865,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1872,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1879,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1886,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1893,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1900,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1907,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1914,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1921,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1928,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1935,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1942,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1949,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1956,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1963,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1970,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1977,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1984,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1991,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1998,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2005,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2012,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2018,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2025,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2032,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2039,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2046,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2053,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2060,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2067,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2074,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2081,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2087,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2094,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2101,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2108,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2115,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2123,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2131,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2138,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2146,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2153,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2161,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2168,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2175,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2182,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2189,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2196,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2203,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2210,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2217,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2224,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2232,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2239,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2246,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2253,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2260,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2267,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2274,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2281,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2288,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2296,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2303,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2310,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2317,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2325,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2332,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2340,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2348,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 90,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 102,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 112,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 123,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 132,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 140,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 148,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 156,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 164,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 171,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 178,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 185,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 192,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 200,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 207,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 214,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 221,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 228,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 235,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 243,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 250,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 258,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 265,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 272,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 280,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 287,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 295,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 302,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 309,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 317,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 324,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 332,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 339,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 346,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 353,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 361,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 368,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 375,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 383,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 390,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 397,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 405,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 411,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 418,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 426,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 433,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 441,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 448,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 455,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 463,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 470,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 476,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 484,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 492,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 499,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 506,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 514,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 521,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 529,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 536,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 543,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 550,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 557,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 564,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 571,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 579,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 586,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 592,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 599,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 606,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 615,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 622,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 629,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 636,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 643,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 650,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 657,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 664,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 671,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 678,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 686,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 692,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 700,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 706,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 713,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 720,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 727,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 734,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 741,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 748,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 755,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 762,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 769,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 776,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 783,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 789,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 796,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 803,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 810,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 817,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 824,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 830,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 837,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 844,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 851,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 858,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 865,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 871,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 878,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 885,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 892,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 899,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 906,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 913,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 919,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 926,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 933,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 940,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 944,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 972,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 980,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 987,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 994,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1001,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1008,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1015,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1022,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1029,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1035,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1042,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1049,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1056,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1063,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1070,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1076,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1083,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1090,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1097,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1104,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1111,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1118,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1125,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1132,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1138,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1145,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1152,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1159,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1166,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1173,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1180,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1187,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1194,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1201,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1208,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1215,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1222,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1229,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1236,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1243,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1250,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1257,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1264,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1271,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1278,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1285,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1291,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1298,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1305,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1312,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1319,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1326,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1333,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1340,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1347,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1353,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1360,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1367,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1374,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1381,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1387,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1394,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1401,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1408,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1415,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1421,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1428,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1435,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1442,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1449,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1456,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1463,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1470,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1477,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1484,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1491,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1498,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1505,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1512,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1519,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1527,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1537,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1545,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1554,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1561,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1568,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1575,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1583,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1590,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1597,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1604,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1611,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1618,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1625,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1632,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1639,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1646,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 74,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 92,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 110,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 128,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 145,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 163,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 181,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 198,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 216,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 50,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 69,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 87,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 105,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 124,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 142,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 160,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 179,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 197,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 214,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 232,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 249,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 267,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 285,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 303,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 323,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 341,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 359,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 377,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 394,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 413,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 431,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 449,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 467,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 485,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 503,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 521,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 538,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 556,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 574,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 592,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 611,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 632,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 650,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 668,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 686,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 704,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 722,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 740,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 758,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 776,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 794,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 812,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 830,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 848,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 866,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 883,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 901,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 909,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 967,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 985,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1003,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1021,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1039,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1058,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1076,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1094,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1113,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1132,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1150,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1168,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1186,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1204,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1222,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1240,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1258,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1275,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1293,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1311,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1328,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1346,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1364,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1381,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1399,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1417,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1434,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1452,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1469,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1487,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1505,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1522,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1542,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1560,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1578,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1596,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1614,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1632,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1651,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1669,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1686,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1705,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1722,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1740,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1758,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1776,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1794,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1812,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1830,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1838,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1878,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1896,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1914,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1932,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1950,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1968,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 1986,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2003,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2021,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2039,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2057,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2074,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2092,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2110,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2128,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2145,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2163,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2181,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2198,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2216,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2233,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2251,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2268,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2285,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2303,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2320,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2338,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2356,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2373,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2391,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2408,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2426,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2444,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2462,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2479,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2497,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2514,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2532,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2549,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2567,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2584,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2602,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2620,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2638,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2655,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2673,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2692,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2709,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2727,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2746,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2752,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2786,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2804,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2822,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2840,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2858,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2876,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2894,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2912,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2930,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2948,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2967,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 2985,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3003,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3022,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3040,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3058,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3075,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3093,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3111,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3128,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3146,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3164,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3182,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3200,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3217,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3235,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3252,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3270,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3289,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3307,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3325,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 3345,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 959,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 134,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ"
+   },
+   {
+    "at": 202,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Hoàng thượng"
+   },
+   {
+    "at": 451,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ"
+   },
+   {
+    "at": 510,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Nhờ thái giám tìm thú nuôi"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 364,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T07:53:06.497Z",
+    "buoi": 24,
+    "from": "2026-11-25T07:52:19.851Z"
+   },
+   {
+    "at": "2026-11-25T08:34:51.040Z",
+    "buoi": 25,
+    "from": "2026-11-25T08:32:20.585Z"
+   },
+   {
+    "at": "2026-11-25T09:07:18.617Z",
+    "buoi": 26,
+    "from": "2026-11-25T09:02:20.872Z"
+   },
+   {
+    "at": "2026-11-25T09:12:02.025Z",
+    "buoi": 27,
+    "from": "2026-11-25T09:10:54.869Z"
+   },
+   {
+    "at": "2026-11-25T12:39:20.778Z",
+    "buoi": 28,
+    "from": "2026-11-25T10:08:02.897Z"
+   },
+   {
+    "at": "2026-11-25T14:25:49.424Z",
+    "buoi": 81,
+    "from": "2026-11-25T13:09:55.307Z"
+   }
+  ],
+  "infoTaps": 4884,
+  "scrolls": 2582,
+  "dlgClose": 48,
+  "loops": 4,
+  "dlgScroll": 5,
+  "taps": 981
+ },
+ "life": {
+  "id": "Hồng nhan bạc mệnh",
+  "type": "death",
+  "fate": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 18 tuổi",
+  "death": true,
+  "age": 18,
+  "year": 1,
+  "rank": 1,
+  "text": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 18 tuổi."
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "stuck|no progress 15 min on .dlg «Kính sự phòng báo tin»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Kính sự phòng báo tin»",
+   "n": 7,
+   "at": 1229,
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-1.png",
+   "save": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-1-save.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 3,
+    "name": "Lôi Nhược Lan"
+   },
+   "buttons": [
+    "",
+    "Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩmGợi ýchuẩn bị thị tẩm!"
+   ]
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "n": 1,
+   "at": 43,
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/noeffect-1795610403994.png"
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 1,
+   "at": 959,
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-8.png",
+   "save": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-8-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 2,
+    "name": "Lôi Nhược Lan"
+   },
+   "buttons": [
+    "Để ta xemTốnkhôngĐượckhông",
+    "Để sauTốnkhôngĐượckhông"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+   "n": 2,
+   "at": 134,
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-1.png",
+   "dump": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lôi Nhược Lan"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc80Tài70Tâm cơ19Đức37Danh44Sủng3",
+    "Bạc338Sức98/99",
+    "Buổi tối, còn 1 khắc",
+    "Trọng bệnh · nặng",
+    "Hôm nay mặt mộc",
+    "trăng thu",
+    "Quẻ Hạ hạ (Hung)",
+    "Tâm trạngBình thản+1",
+    "Về phòng",
+    "Tin báo"
+   ],
+   "trace": [
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «trăng thu»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc338Sức98/99»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc338Sức98/99»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Ân tình (đêm)0»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «3Chí tôn»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+1»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hành sự»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tài nghệ»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «ⓘ luật Đức»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Điều ngài thích»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Trọng bệnh · nặng»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Về phòng»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Hung)»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Trọng bệnh · nặng»",
+    "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Hoàng thượng»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Hoàng thượng»",
+   "n": 1,
+   "at": 202,
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-2.png",
+   "dump": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lôi Nhược Lan"
+   },
+   "buttons": [
+    "Lui"
+   ],
+   "trace": [
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá chép gấm»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo tuyết»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá chép gấm»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo tuyết»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Lui»",
+    ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»",
+    ".dlg «Hoàng tự trong cung» «Lui»",
+    ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Lui»",
+    ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»",
+    ".dlg «Đức» «Lui»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Nhờ thái giám tìm thú nuôi»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Nhờ thái giám tìm thú nuôi»",
+   "n": 1,
+   "at": 510,
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-4.png",
+   "dump": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-4-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lôi Nhược Lan"
+   },
+   "buttons": [
+    "Lui",
+    "Xem Chim họa mi",
+    "Mua",
+    "Xem Cá vàng chậu sứ",
+    "Mua",
+    "Xem Mèo tuyết",
+    "Mua",
+    "Xem Sáo nói",
+    "Mua",
+    "Xem Đôi uyên ương",
+    "Mua",
+    "Xem Cá chép gấm"
+   ],
+   "trace": [
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»",
+    ".dlg «Thú nuôi» «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Đôi uyên ương»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá vàng chậu sứ»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "img.kfr",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/dead-fold-1795592007469.png",
+   "dev": "fold",
+   "at": 107,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 3,
+    "name": "Lôi Nhược Lan"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Ta»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/noeffect-1795610403994.png",
+   "at": 43,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 2,
+    "name": "Lôi Nhược Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Vẹt ngũ sắc",
+   "cover": "span.kitb in #mb",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/dead-fold-1795617269490.png",
+   "dev": "fold",
+   "at": 520,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lôi Nhược Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Mèo mướp",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/dead-fold-1795617275843.png",
+   "dev": "fold",
+   "at": 527,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lôi Nhược Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chó nhỏ lông xù",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/dead-fold-1795617282210.png",
+   "dev": "fold",
+   "at": 533,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lôi Nhược Lan"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 352214,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 81,
+   "year": null,
+   "chars": 445637,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 119,
+ "steps": 32872,
+ "status": [],
+ "_snapAt": 1795617357445,
+ "trace": [
+  [
+   404,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hoàng thượng»"
+  ],
+  [
+   404,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+6»"
+  ],
+  [
+   404,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Y phục quá giản dị · mặt mộc»"
+  ],
+  [
+   405,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   406,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   406,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc314Sức93/98»"
+  ],
+  [
+   406,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   407,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   407,
+   ".mapsc «Dư đồ»"
+  ],
+  [
+   408,
+   ".mapsc «Mệnh truyện»"
+  ],
+  [
+   408,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   408,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   409,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Thành»"
+  ],
+  [
+   409,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Trọng bệnh · nặng»"
+  ],
+  [
+   409,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   410,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chăm conChăm conNhờ thái giám tìm thú nuôiⓘTốn1 kh»"
+  ],
+  [
+   410,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tin báo: 20 tin mới»"
+  ],
+  [
+   410,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chăm conChăm conNhờ thái giám tìm thú nuôiⓘTốn1 kh»"
+  ],
+  [
+   410,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   411,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chương trước»"
+  ],
+  [
+   411,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chương trước»"
+  ],
+  [
+   411,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   411,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mục lục»"
+  ],
+  [
+   412,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   412,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   412,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   413,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tác phẩm»"
+  ],
+  [
+   413,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   414,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»"
+  ],
+  [
+   414,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»"
+  ],
+  [
+   414,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»"
+  ],
+  [
+   414,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánPhát bạc cứu giúp cung nhân nghèoR»"
+  ],
+  [
+   415,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   415,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   415,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Đã qua 0»"
+  ],
+  [
+   416,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   416,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   416,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   417,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   417,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Danh)»"
+  ],
+  [
+   417,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Cầm kỳ thi họa 8/12»"
+  ],
+  [
+   418,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   418,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «mai nở trong tuyết»"
+  ],
+  [
+   419,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Y phục quá giản dị · mặt mộc»"
+  ],
+  [
+   419,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc314Sức93/98»"
+  ],
+  [
+   420,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+6»"
+  ],
+  [
+   420,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   420,
+   ".mapsc «Tư trang»"
+  ],
+  [
+   421,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   421,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc314Sức93/98»"
+  ],
+  [
+   422,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   422,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   422,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   422,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   423,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «3Chí tôn»"
+  ],
+  [
+   423,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   423,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   424,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Việc hôm nay 2/3»"
+  ],
+  [
+   424,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   425,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Gặp ngài ban ngày 1/4»"
+  ],
+  [
+   426,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+6»"
+  ],
+  [
+   426,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   426,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   426,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   427,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   427,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «mai nở trong tuyết»"
+  ],
+  [
+   428,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   429,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc314Sức93/98»"
+  ],
+  [
+   429,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chí tôn»"
+  ],
+  [
+   430,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Điều ngài thích»"
+  ],
+  [
+   430,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   431,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Thái hậu»"
+  ],
+  [
+   431,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   431,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   432,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Việc»"
+  ],
+  [
+   432,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   432,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   433,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   433,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   433,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   433,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệ 4/4»"
+  ],
+  [
+   434,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   434,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   434,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   434,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   435,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   435,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   435,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   435,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơi 4/4»"
+  ],
+  [
+   436,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   436,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi dưỡng sứcRất vữngUống »"
+  ],
+  [
+   436,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi dưỡng sứcRất vữngUống »"
+  ],
+  [
+   436,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi dưỡng sứcRất vữngUống »"
+  ],
+  [
+   437,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi dưỡng sứcRất vữngUống »"
+  ],
+  [
+   437,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   437,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   437,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   438,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Trọng bệnh · nặng»"
+  ],
+  [
+   438,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Danh)»"
+  ],
+  [
+   438,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+6»"
+  ],
+  [
+   438,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệp 2/3»"
+  ],
+  [
+   439,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»"
+  ],
+  [
+   439,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»"
+  ],
+  [
+   439,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»"
+  ],
+  [
+   439,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»"
+  ],
+  [
+   440,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc314Sức93/98»"
+  ],
+  [
+   440,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   440,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   441,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   441,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   441,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Túi đồThú cưngViệcTất cả 69Trang sức 1Y phục 1Vải »"
+  ],
+  [
+   441,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   442,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   442,
+   ".mapsc «Ân tình (đêm)12»"
+  ],
+  [
+   443,
+   ".mapsc «Số lần ân thưởng0»"
+  ],
+  [
+   443,
+   ".mapsc «Mệnh truyện»"
+  ],
+  [
+   443,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   443,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   444,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Ân tình (đêm)12»"
+  ],
+  [
+   444,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   444,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Trọng bệnh · nặng»"
+  ],
+  [
+   444,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   445,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   445,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Danh)»"
+  ],
+  [
+   445,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT»"
+  ],
+  [
+   446,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   446,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tác phẩm»"
+  ],
+  [
+   446,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Danh)»"
+  ],
+  [
+   446,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   447,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   447,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   448,
+   ".mapsc «Tai mắt0»"
+  ],
+  [
+   448,
+   ".mapsc «Tâm trạngBình thản+6»"
+  ],
+  [
+   449,
+   ".mapsc «Y phục quá giản dị · mặt mộc»"
+  ],
+  [
+   450,
+   ".mapsc «Xét phẩm: thiếu 2»"
+  ],
+  [
+   450,
+   ".mapsc «Hoàng tự»"
+  ],
+  [
+   450,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   451,
+   "page «unstick Đổi chỗ hai người»"
+  ],
+  [
+   451,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   452,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Xem quan hệ của Hoàng thượng»"
+  ],
+  [
+   452,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   452,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc314Sức93/98»"
+  ],
+  [
+   453,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h»"
+  ],
+  [
+   453,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Việc hôm nay 0/2»"
+  ],
+  [
+   453,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Danh)»"
+  ],
+  [
+   453,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   454,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   454,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Y phục quá giản dị · mặt mộc»"
+  ],
+  [
+   455,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   455,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   455,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   456,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Việc nhờ»"
+  ],
+  [
+   456,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «mai nở trong tuyết»"
+  ],
+  [
+   457,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Trong cung 8»"
+  ],
+  [
+   458,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   458,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tất cả 23/30»"
+  ],
+  [
+   458,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   459,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   459,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   459,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   460,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách giải »"
+  ],
+  [
+   460,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   460,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   461,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   461,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Danh)»"
+  ],
+  [
+   462,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nam nhân»"
+  ],
+  [
+   462,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Bạc314Sức93/98»"
+  ],
+  [
+   462,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   462,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «mai nở trong tuyết»"
+  ],
+  [
+   463,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   463,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   464,
+   ".mapsc «Bạc314Sức93/98»"
+  ],
+  [
+   464,
+   ".mapsc «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   464,
+   ".mapsc «Tài nghệ»"
+  ],
+  [
+   465,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   465,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   465,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chí tônPhi tầnNam nhânCung nhânTa chưa gặp nam nhâ»"
+  ],
+  [
+   466,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Y phục quá giản dị · mặt mộc»"
+  ],
+  [
+   466,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   467,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Đổi chỗ hai người»"
+  ],
+  [
+   467,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   467,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Cung nhân»"
+  ],
+  [
+   468,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Người lạNgười lạ»"
+  ],
+  [
+   468,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Linh Vận»"
+  ],
+  [
+   469,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   469,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   469,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   469,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   470,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   470,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   470,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   471,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Người lạNgười lạ»"
+  ],
+  [
+   471,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Làm quen 1/1»"
+  ],
+  [
+   471,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Linh Vận»"
+  ],
+  [
+   471,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Chí tôn»"
+  ],
+  [
+   472,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «mai nở trong tuyết»"
+  ],
+  [
+   473,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Thái hậu»"
+  ],
+  [
+   474,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   475,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Nam nhân»"
+  ],
+  [
+   475,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   475,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Việc nhờ»"
+  ],
+  [
+   476,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Danh)»"
+  ],
+  [
+   476,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh39Sủng5»"
+  ],
+  [
+   476,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Y phục quá giản dị · mặt mộc»"
+  ],
+  [
+   477,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   477,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   478,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   478,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   478,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   479,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Y phục quá giản dị · mặt mộc»"
+  ],
+  [
+   480,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   481,
+   ".dlg «Kính sự phòng» «Tranh sủngKhó lườngTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   481,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   481,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   483,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   485,
+   ".dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»"
+  ],
+  [
+   485,
+   ".dlg «Chuẩn bị thị tẩm» «Điểm trang lộng lẫyRất vữngTốnBạc -5Đượcbệ hạ để m»"
+  ],
+  [
+   486,
+   ".dlg «Đêm thị tẩm» «Lặng lẽ xoa vai, nghe ngài kểVữngTốnkhôngĐượcđêm v»"
+  ],
+  [
+   487,
+   ".dlg «Đêm thị tẩm» «Im lặng, tựa vai ngàiRất vữngTốnkhôngĐượcthêm tình»"
+  ],
+  [
+   488,
+   ".dlg «Hoàng tự trong cung» «Lui»"
+  ],
+  [
+   489,
+   ".dlg «Xem quan hệ của» «Thái hậu»"
+  ],
+  [
+   490,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   490,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   491,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   491,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   492,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   492,
+   ".dlg «Mục lục» «Lui»"
+  ],
+  [
+   494,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»"
+  ],
+  [
+   494,
+   ".kshdc «Lui»"
+  ],
+  [
+   495,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»"
+  ],
+  [
+   496,
+   ".kshdc «Lui»"
+  ],
+  [
+   497,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»"
+  ],
+  [
+   498,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»"
+  ],
+  [
+   498,
+   ".dlg «Thú nuôi» «Lui»"
+  ],
+  [
+   500,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»"
+  ],
+  [
+   500,
+   ".kshdc «Lui»"
+  ],
+  [
+   501,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Đôi uyên ương»"
+  ],
+  [
+   502,
+   ".kshdc «Lui»"
+  ],
+  [
+   503,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù»"
+  ],
+  [
+   503,
+   ".kshdc «Lui»"
+  ],
+  [
+   505,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói»"
+  ],
+  [
+   505,
+   ".kshdc «Lui»"
+  ],
+  [
+   507,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá vàng chậu sứ»"
+  ],
+  [
+   507,
+   ".kshdc «Lui»"
+  ],
+  [
+   508,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói»"
+  ],
+  [
+   509,
+   ".kshdc «Lui»"
+  ],
+  [
+   510,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Mua»"
+  ],
+  [
+   511,
+   ".dlg «unstick Lui»"
+  ],
+  [
+   513,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   514,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói»"
+  ],
+  [
+   520,
+   "DEAD Xem Vẹt ngũ sắc"
+  ],
+  [
+   527,
+   "DEAD Xem Mèo mướp"
+  ],
+  [
+   533,
+   "DEAD Xem Chó nhỏ lông xù"
+  ],
+  [
+   533,
+   ".dlg «Nhờ thái giám tìm thú nuôi» «Lui»"
+  ],
+  [
+   534,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   536,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   536,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   538,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sang ngày mới»"
+  ],
+  [
+   541,
+   ".kne «Tiếp tục»"
+  ],
+  [
+   543,
+   "DEAD Tiếp tục"
+  ],
+  [
+   543,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   544,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   544,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   544,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   544,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   546,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   548,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   548,
+   ".dlg «Lui»"
+  ],
+  [
+   549,
+   "#kmrew «Thường»"
+  ],
+  [
+   550,
+   ".dlg «Lui»"
+  ],
+  [
+   551,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   551,
+   ".dlg «Lui»"
+  ],
+  [
+   553,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   553,
+   ".dlg «Lui»"
+  ],
+  [
+   555,
+   "#kmrew «Nhận»"
+  ],
+  [
+   555,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   556,
+   ".dlg «Lui»"
+  ],
+  [
+   557,
+   "#kmrew «Thường»"
+  ],
+  [
+   558,
+   ".dlg «Lui»"
+  ],
+  [
+   559,
+   "#kmrew «Nhận»"
+  ],
+  [
+   559,
+   "#kmrew «Nhận»"
+  ],
+  [
+   560,
+   ".dlg «Bổng lộc tháng mười · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -4Đượcgiữ thể diện»"
+  ],
+  [
+   561,
+   ".dlg «Lời nhận xét» «Lui»"
+  ],
+  [
+   562,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   564,
+   ".dlg «Lời ra tiếng vào» «Cười trừRất vữngTốnkhôngĐượccho qua, không đổi gìG»"
+  ],
+  [
+   565,
+   ".mapsc «Chưa điểm trang»"
+  ],
+  [
+   565,
+   "#kg82 «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   566,
+   "#kg82 «Trang sức 0»"
+  ],
+  [
+   566,
+   "#kg82 «Trâm cài 0»"
+  ],
+  [
+   566,
+   "#kg82 «Tất cả 1»"
+  ],
+  [
+   567,
+   "#kg82 «Giữ đồ hôm quamặc như cũ»"
+  ],
+  [
+   567,
+   "#kg82 «Để mặt mộc»"
+  ],
+  [
+   568,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   568,
+   "#kg82 «Đã hiểu»"
+  ],
+  [
+   568,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   569,
+   ".mapsc «Tài nghệ»"
+  ],
+  [
+   569,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tác phẩm»"
+  ],
+  [
+   570,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   571,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   571,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 6 ngườ» «mai nở trong tuyết»"
+  ],
+  [
+   572,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 6 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   572,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   573,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 6 ngườ» «Sang ngày mới»"
+  ],
+  [
+   574,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   576,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   576,
+   ".dlg «Kính sự phòng» «Tranh sủngTùy duyênTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   577,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   577,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   579,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   583,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   583,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   583,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   583,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   584,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   584,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   586,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   587,
+   ".dlg «Kính sự phòng ghi sổ» «Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ý»"
+  ],
+  [
+   587,
+   ".dlg «Phụ tuyến · May áo bông cho cung nhân già · Lời nh» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   589,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻKhông có»"
+  ],
+  [
+   589,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   591,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   591,
+   ".dlg «Xét phẩm cuối tháng · Quý nhân» «Lui»"
+  ],
+  [
+   593,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   593,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Lật thẻKhông có»"
+  ],
+  [
+   593,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   595,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «trời giá lạnh»"
+  ],
+  [
+   596,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Sang buổi»"
+  ],
+  [
+   597,
+   ".dlg «Có người đến» «Đáp trả sắc sảoRất vữngTốnkhôngĐượcthêm thể diệnMấ»"
+  ],
+  [
+   597,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Sắc80Tài70Tâm cơ19Đức36Danh40Sủng7»"
+  ],
+  [
+   598,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   599,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Hậu cung»"
+  ],
+  [
+   600,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Sang buổi»"
+  ],
+  [
+   600,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sang ngày mới»"
+  ],
+  [
+   600,
+   ".dlg «Kỳ nguyệt sự» «Báo đúng ngàyRất vữngTốnkhôngĐượcsổ ghi đúng, khôn»"
+  ],
+  [
+   601,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   603,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   603,
+   ".dlg «Kính sự phòng» «Tranh sủngKhó lườngTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   604,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   604,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   606,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   610,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   610,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   610,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   610,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   611,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   611,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   613,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   614,
+   ".dlg «Y phục dự Tiết Đông chí» «Cáo lỗi, về cung nghỉRất vữngTốnkhôngĐượcvề cung n»"
+  ],
+  [
+   615,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hoàng tự»"
+  ],
+  [
+   616,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Quẻ Thượng thượng (Danh)»"
+  ],
+  [
+   616,
+   ".dlg «Quẻ Thượng thượng · Danh» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   617,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   618,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   619,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hoàng tự»"
+  ],
+  [
+   619,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Con của ta»"
+  ],
+  [
+   620,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   620,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Cung nữ thân tín tam đẳngKim Quất»"
+  ],
+  [
+   620,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   621,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   621,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   622,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   623,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   623,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   624,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   625,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   625,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   626,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   627,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   627,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   628,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   628,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   629,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   629,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   629,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   629,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   630,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   630,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   630,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   631,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   631,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   632,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «gió bấc»"
+  ],
+  [
+   632,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Mệnh truyện»"
+  ],
+  [
+   633,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Giao tình»"
+  ],
+  [
+   633,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Ân oánPhe pháiThái hậu▾⇄Thường tạiTa▾Quan hệ giữa »"
+  ],
+  [
+   633,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «gió bấc»"
+  ],
+  [
+   634,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Hành sự»"
+  ],
+  [
+   634,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   635,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   635,
+   ".kfoc «Lui»"
+  ],
+  [
+   637,
+   ".dlg «Sai Cung nữ thân tín tam đẳng Kim Quất đi dò la» «Quý phiTô Hoán Khê · đang nhắmCó cơTốnkhôngĐượcbiế»"
+  ],
+  [
+   638,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 4 ngườ» «Sang buổi»"
+  ],
+  [
+   638,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Người được sai đi»"
+  ],
+  [
+   639,
+   ".dlg «Tin chờ người sai đi» «Đợi tinTốnkhôngĐượcngồi chờ đến buổi chiều·khắc 3·»"
+  ],
+  [
+   640,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ» «Sang ngày mới»"
+  ],
+  [
+   640,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   643,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   643,
+   ".dlg «Kính sự phòng» «Tranh sủngKhó lườngTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   644,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   644,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   646,
+   "#kg82 «Quay lại»"
+  ]
+ ],
+ "_ckAt": 1795617356369,
+ "_ckB": 116,
+ "dumps": [
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-5-dump.json",
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-6-dump.json",
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-7-dump.json",
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/stuck-8-dump.json",
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-1-dump.json",
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-2-dump.json",
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-3-dump.json",
+  "/home/user/wt/a4-out/shots-nc-nc_vuong-skilled-2/loop-4-dump.json"
+ ],
+ "_loopAt": 1795617396709,
+ "_started": true,
+ "rss": [
+  {
+   "buoi": 29,
+   "y": 1,
+   "totalMB": 1324,
+   "rendererMB": 729
+  },
+  {
+   "buoi": 33,
+   "y": 1,
+   "totalMB": 1837,
+   "rendererMB": 1183
+  },
+  {
+   "buoi": 33,
+   "y": 1,
+   "totalMB": 1634,
+   "rendererMB": 969
+  },
+  {
+   "buoi": 33,
+   "y": 1,
+   "totalMB": 1508,
+   "rendererMB": 845
+  },
+  {
+   "buoi": 33,
+   "y": 1,
+   "totalMB": 1503,
+   "rendererMB": 839
+  },
+  {
+   "buoi": 33,
+   "y": 1,
+   "totalMB": 1513,
+   "rendererMB": 850
+  },
+  {
+   "buoi": 38,
+   "y": 1,
+   "totalMB": 2159,
+   "rendererMB": 1443
+  },
+  {
+   "buoi": 43,
+   "y": 1,
+   "totalMB": 2312,
+   "rendererMB": 1599
+  },
+  {
+   "buoi": 48,
+   "y": 1,
+   "totalMB": 2317,
+   "rendererMB": 1612
+  },
+  {
+   "buoi": 53,
+   "y": 1,
+   "totalMB": 2437,
+   "rendererMB": 1710
+  },
+  {
+   "buoi": 58,
+   "y": 1,
+   "totalMB": 2439,
+   "rendererMB": 1727
+  },
+  {
+   "buoi": 63,
+   "y": 1,
+   "totalMB": 2626,
+   "rendererMB": 1901
+  },
+  {
+   "buoi": 68,
+   "y": 1,
+   "totalMB": 2533,
+   "rendererMB": 1791
+  },
+  {
+   "buoi": 73,
+   "y": 1,
+   "totalMB": 2199,
+   "rendererMB": 1482
+  },
+  {
+   "buoi": 78,
+   "y": 1,
+   "totalMB": 2409,
+   "rendererMB": 1695
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 2351,
+   "rendererMB": 1643
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 1884,
+   "rendererMB": 1176
+  },
+  {
+   "buoi": 82,
+   "y": 1,
+   "totalMB": 1206,
+   "rendererMB": 616
+  },
+  {
+   "buoi": 87,
+   "y": 1,
+   "totalMB": 2005,
+   "rendererMB": 1316
+  },
+  {
+   "buoi": 92,
+   "y": 1,
+   "totalMB": 2268,
+   "rendererMB": 1546
+  },
+  {
+   "buoi": 97,
+   "y": 1,
+   "totalMB": 2420,
+   "rendererMB": 1665
+  },
+  {
+   "buoi": 102,
+   "y": 1,
+   "totalMB": 2405,
+   "rendererMB": 1677
+  },
+  {
+   "buoi": 107,
+   "y": 1,
+   "totalMB": 2529,
+   "rendererMB": 1800
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 2798,
+   "rendererMB": 2064
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 2661,
+   "rendererMB": 1918
+  }
+ ],
+ "t": {
+  "total": 647531
+ }
+}

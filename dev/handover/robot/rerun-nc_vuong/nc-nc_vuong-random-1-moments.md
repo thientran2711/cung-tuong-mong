@@ -1,0 +1,2 @@
+# moments nc-nc_vuong-random-1 (casual newcomer)
+- y1 tháng 3 · dialog «Bổng lộc tháng ba · Lễ nghĩa» (Chu toàn lễ nghĩa / Bớt lễ nghĩa) · FRUSTRATED · both option cards tapped repeatedly for 15+ min, the dialog never closes (stuck bug, shot shots-nc-nc_vuong-random-1/stuck-1.png, dump stuck-1-dump.json; harness 1a29f470 + local top-of-card tap). Not reproducible from the later save. Candidate GAME bug: option cards of the monthly Bổng lộc dialog do nothing; check j-code for «Lễ nghĩa».
