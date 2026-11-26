@@ -157,3 +157,32 @@ Scan `python3 dev/test/firstcard-scan.py --fail`: 39 hidden-roll options — LIV
 | jkc3.js:168 | n | Rất vững (sure stamp) | own odds |
 
 Stills (LOOKED, Fold + iPad): CDN img/_review/firstcard-2/ after2-{fold,ipad}-ba-moi.png, after2-{fold,ipad}-me-benh.png, after2-{fold,ipad}-cn-ngay1.png.
+
+## REVIEW (RV-FIRSTCARD) — BIG · PASS 
+PRIORITY #1 CHECK ('firstcard'): OD 0 | ledger 0 | claims 4 | main 0 | review/* 1 (review/firstcard) | archive 0 (from MAIN 156). Reviewer session_01V1ZZH2t5HyBQ4EUYgVmvsq. START_CTX ≈ 4 % (1M window).
+Scope (MAIN 156 scope change): review/firstcard-2 f9748b92 (= 9ba83cf0 + round 2) as ONE set, merged onto LIVE 3af7896e → **review/firstcard-2-rv** (only index.html / sw.js conflicted → rebuilt; CHANGE.txt line left to MAIN).
+(The earlier WIP push review/firstcard-rv 2ee25433 = round 1 only; superseded, not a verdict.)
+
+### Reviewer fixes on the rv branch (small, made here)
+1. **Law 9 / OD:L1096 — kit sample page missing.** KIT.md got §6.2b-END but the kit page had no sample. Added `kitEndSample()` + KIT_SAMPLES «§6.2b-END» (jopic, next to §6.2b): the button opens a REAL dialog (Q + showModal, the game's path) with a declared kitRiskOpt option («Hiểm» + red MẤT «… bị ban hoa, kiếp này dừng»), a certain ending («Cắt tóc đi tu» → «Mong manh», MẤT «kiếp này dừng») and a safe option (sure meter). Looked at Fold + iPad: rows right, 0 page errors.
+2. **Law 4 / 7 — «Tự mình chống trả» (jkc2 n_thich) showed the SURVIVAL chance**, `100−(100−fight)·odds2/100` ≈ 86 → «Rất vững» at Sức 90, while the option's own roll (winning the fight, kc2FightP = 30 + Sức/3 (+15 bd)) is ≈ 60 «Có cơ» and a loss kills ~1 in 7 — the owner's exact complaint («Rất vững» then the life ends) could recur. Now the meter = kc2FightP (max ≈ 78 → never «Rất vững»), death on a loss stays the red MẤT row. KIT §6.2b-END now states what p is (own roll; BAD-branch roll → 100 − p; a plea whose success ENDS the life → 100 − p = the chance this life goes on; no roll → the chance she lives through it).
+
+### Checks (on the rv branch, merged with LIVE)
+- Law 4 (one core): roll and word read one function — kitRiskOpt(o, ()=>P) / kc2SelRisk → selxOddsP runs the SAME selxContest/selxScore/selxHtMe as selxSelDo (selxRoomCap never touches her own kept flag; private RNG, game Math.random untouched). Typed jkc numbers moved unchanged to BAL.kc2.ill / dienSel / quyXinChaWant. PASS (after fix 2).
+- Round 2 «100 − p» inversions (Dùng thử, Từ chối giữ kín ×2, Đưa bạc, Về kể với cha): in each the roll fires the BAD branch → 100 − p = chance of the good result. Correct. No-roll options keep «Rất vững» (kit sample + family.js).
+- Law 7 ladder words only (Mong manh … Rất vững, BAL.odds.cut), no %, no typed numbers in new player text (selxNumW). PASS.
+- Law 9: no private CSS/inline style in the diff; the meter is the kit .kodds/oddsChip; frame rows via kgBangRows. PASS (after fix 1).
+- Law 11 family scan rerun: `firstcard-scan.py --fail` → 51 life-ending (declared 18 · own odds 5 · words 28 · NOT TOLD 0) + 39 hidden-roll (declared 38 · own odds 1 · NOT TOLD 0). PASS.
+- Law 2/3 on changed options: the princess card's options share the same loss and each has a gain (play / skip); certain endings name their gain + loss. PASS. Law 6b: the intake girls still compete among themselves and stay real NPCs (selxNpcOut). PASS.
+- Princess never reaches ban hoa: real taps (replay, Fold 755x1000 + iPad 1180x820) bd ×3, pf ×3 → −1 / = / +1, no life ended, 0 page errors; card read: meter Mong manh/Có cơ/Vững per life, MẤT «nếu hỏng: bị phong thấp hơn hòa ước một bậc», no «trả về cố quốc». Looked at both devices.
+- cn 3 days: real taps Fold + iPad: prequel → Dưỡng Tú viện Day 1 («Tú nữ») → Day 2 Điện tuyển (bare selection cards §93.7; ban hoa named in the text) → kept, Thường tại; no dead end, 0 page errors.
+- Tests: selx-rules 16/16 · selx-wire 44/44 · selx-days 12/12 ALL PASS.
+- Old save (quickcheck, save made by LIVE): loads + plays a buổi, 0 errors.
+- Core gates vs LIVE (same box, same scripts, side by side): dialog-fixed 82 ok + 2 FAIL «(kit-dialog-2 a) no empty Tốn/Được» — IDENTICAL on LIVE 3af7896e (test case «Mặc kệ» x:'' is a .kfree free-choice card since OD 25/11 → stale test; FOR MAIN). button-crawl: 1 fault «Ô lưu · Lui close did not close its layer» — IDENTICAL on LIVE. look-dedupe PASS (LIVE: 1 flaky FAIL), dead-card PASS (both). First quickcheck run crashed these on 180 s timeouts under load; rerun alone they pass/match LIVE. 0 new page errors vs LIVE.
+- Perf: selxOddsP 1–22 ms per call, 3–4 ms at 4× CPU (iPad). quickcheck's 6-run perf stage did not finish inside the 30-min tool limit on this box (stopped, not failed) — FOR LC21: run golive.sh quickcheck as usual.
+
+### Notes FOR MAIN (no fault, owner/MAIN calls)
+- «Xin để … đi thay» shows 100 − P(plea granted) = the chance this life goes on (the brief «a life-ending pick never Rất vững»); kept as built.
+- The dịch options can read «Rất vững» when Sức is high: that is the TRUE survival chance (law 4); the brief's literal «never Rất vững» would need a lie, so not changed.
+- «Lấy trâm bạc thử» shows the detection chance, not P(real)·P (no leak of the hidden bowl) — deliberate.
+- dialog-fixed (kit-dialog-2 a) is stale vs the .kfree rule on LIVE — route a test fix.
