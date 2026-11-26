@@ -87,9 +87,13 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
     if(r==='vis'&&i<2){try{await p.tap('#modal [data-nl=ok]',{timeout:3000,force:true})}catch(e){}}else await p.evaluate(()=>{const b=document.querySelector('#modal [data-nl=ok]');b&&b.click()});await sleep(900)}};
   /* a life that ends in its opening (a hòa thân «Lễ ra mắt» lost → «Duyên cung lỡ hẹn» → the game's own «Chuyển kiếp», or a new identity card) is
      rolled again the same way instead of being played through */
-  const newLife=async()=>{const t0=Date.now();let quiet=0;await roll();await drain();
+  const newLife=async()=>{const t0=Date.now();let quiet=0,same=0,mt0='';await roll();await drain();
    while(Date.now()-t0<NL_MS){const s=await st();if(s.buoi===1&&!s.Q.length&&!s.modal&&!s.scene&&!s.dawn&&s.next&&!s.want){if(++quiet>=2)return;await sleep(700);continue}quiet=0;
     if(await p.evaluate(()=>!!(S&&S.dead)||(S&&S.origin&&S.origin.k==='cnv')||!!(window.isSrv&&isSrv())||!!document.querySelector('#modal:not([hidden]) [data-nl=ok]')||Q.some(m=>/^(Duyên cung lỡ hẹn|Thân phận kiếp này)/.test(m.t||'')))){await roll();continue}
+    /* SETUP only: a card that stays up through 25 taps (seen once: a «Tâm trạng · <name>» look-up card over «Người bên cạnh» whose ✕/Lui did
+       nothing — the known robot «Tâm trạng ✕/Lui no effect» row, not this branch's family) is closed in the page and logged, so one dead card
+       does not cost the whole case; the cases themselves never do this */
+    if(s.modal&&s.mt===mt0){if(++same>=25){console.log('newLife setup: card «'+s.mt+'» stayed up through 25 taps — closed in page');await p.evaluate(()=>{try{closeModal()}catch(e){}});same=0}}else{same=0;mt0=s.mt}
     if(await tapAny()){await sleep(350);continue}
     /* nothing to tap: spend the khắc and turn like a player (the night / buổi 0 turn waits for her tap) */
     await p.evaluate(()=>{try{used=BAL.time.khac;render()}catch(e){}});
