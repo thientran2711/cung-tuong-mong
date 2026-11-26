@@ -16,20 +16,22 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID,LAB='br
    const btn=await p.$('#modal:not([hidden]) #mr .kbtn')||await p.$('#modal:not([hidden]) #mr button')||await p.$('#modal:not([hidden]) .kpopts button, #modal:not([hidden]) .opts button');
    if(btn){await btn.click({timeout:3000}).catch(async()=>{await p.evaluate(()=>closeModal())})}else await p.evaluate(()=>closeModal());await sleep(400)}return seen}
  /* setup (same on LIVE): v really poisoned w (one deed); she is Tần with Tâm cơ 40; v Tâm cơ 40, Quý nhân */
- const su=await p.evaluate(()=>{window.__r0=Math.random;const L=liveRivals(true).filter(x=>!x.queen&&!sameHouse(S,x));const v=L[0],w=L[1];
-  for(const x of [v,w,S]){x.wrongs=[];x.dw=0;x.schemes=0;x.dws=0;x.dkeys=[];if(x!==S){x.scandal=0;x.affair=null;x.plan=null;x.inv=(x.inv||[]).filter(e=>!(IT[e.k]&&(itm(e.k).il||itm(e.k).rk>0)))}}
-  v.ev=0;v.evc={};S.evc={};S.evq={};v.rank=2;v.tamco=40;S.tamco=40;S.rank=3;S.bac=500;S.suc=100;S.out=0;S.confined=0;
+ const su=await p.evaluate(()=>{window.__r0=Math.random;S.rank=3;const L0=(typeof spyList==='function'?spyList():liveRivals(true)).filter(x=>!x.queen&&!x.out);const L=L0.filter(x=>!sameHouse(S,x)&&x.rank<5);const v=L[0],w=L[1];
+  for(const x of [v,w,S]){x.wrongs=[];x.dw=0;x.schemes=0;x.dws=0;x.dkeys=[];if(x!==S){x.scandal=0;x.affair=null;x.plan=null;x.inv=[];x.dress=null}}
+  v.ev=0;v.evc={};S.evc={};S.evq={};v.tamco=40;S.tamco=40;S.rank=3;S.bac=500;S.suc=100;S.out=0;S.confined=0;
   deedAdd(v,"poison",w,2,`bỏ độc vào điểm tâm của ${w.name}`);if(typeof k61Know==="function")try{k61Know(v,"",true,2)}catch(e){}S.met=S.met||{};S.met[v.id]=S.turn;S.mspy={id:v.id};
   return {v:v.id,vn:v.name,w:w.id,wn:w.name}});
  console.log('setup',JSON.stringify(su));
  const out={label:LAB,searches:[],accuse:null,herNotice:null};
  /* 1. searches by real taps on the maid picker */
  for(let i=0;i<10;i++){const can=await p.evaluate(id=>accOK(S,RV(id)),su.v);if(can)break;
-  await p.evaluate(()=>{S.suc=100;used=0;if(typeof spyPick==="function")spyPick(0)});await sleep(700);if(i===0)await shot('picker');
-  const card=await p.evaluate(n=>{const B=[...document.querySelectorAll('#modal:not([hidden]) button')].find(x=>x.innerText.includes(n));return B?B.innerText.replace(/\s+/g,' '):''},su.vn);
-  const btn=await p.evaluateHandle(n=>[...document.querySelectorAll('#modal:not([hidden]) button')].find(x=>x.innerText.includes(n))||null,su.vn);
-  if(!btn||!(await btn.asElement())){out.searches.push({i,card:'(no picker card)'});break}
-  await btn.asElement().click();await sleep(900);/* the maid walks there (jptime): wait for her return = the game's «Chờ» (ptWait), then her report */await p.evaluate(()=>{try{if(typeof ptWait==='function')ptWait();if(typeof ptTick==='function')ptTick()}catch(e){}render()});await sleep(900);if(i===0)await shot('report');const after=await p.evaluate(()=>({q:Q.map(x=>x.t),m:document.getElementById('modal').hidden?'':document.getElementById('modal').innerText.replace(/\s+/g,' ').slice(0,300)}));const seen=await drain();
+  await drain();await p.evaluate(()=>{S.suc=100;used=0;if(typeof spyPick==="function")spyPick(0)});await sleep(700);if(i===0)await shot('picker');
+  const idx=await p.evaluate(id=>{const q=Q[0];window.__qdbg=JSON.stringify(Q.map(x=>[x.t,(x.opts||[]).map(o=>o.kgt&&o.kgt.id)]));return q&&q.opts?q.opts.findIndex(o=>o.kgt&&o.kgt.id===id):-1},su.v);
+  const BT=p.locator('#modal:not([hidden]) .opts > button, #modal:not([hidden]) .kpopts > button');const nb=await BT.count();
+  if(idx<0||idx>=nb){out.searches.push({i,card:`(no picker card idx ${idx}/${nb}) `+await p.evaluate(()=>window.__qdbg)});break}
+  const btnL=BT.nth(idx);await btnL.scrollIntoViewIfNeeded();await sleep(500);if(i===0)await shot('picker-card');const card=(await btnL.innerText()).replace(/\s+/g,' ');
+  const btn={asElement:async()=>btnL};
+  await btnL.click();await sleep(900);/* the maid walks there (jptime): wait for her return = the game's «Chờ» (ptWait), then her report */await p.evaluate(()=>{try{if(typeof ptWait==='function')ptWait();if(typeof ptTick==='function')ptTick()}catch(e){}render()});await sleep(900);if(i===0)await shot('report');const after=await p.evaluate(()=>({q:Q.map(x=>x.t),m:document.getElementById('modal').hidden?'':document.getElementById('modal').innerText.replace(/\s+/g,' ').slice(0,300)}));const seen=await drain();
   const st=await p.evaluate(id=>{const v=RV(id);return {ev:v.ev||0,mh:typeof chHave==="function"?chHave(S,v,"mh"):null,log:(S.logs||[]).slice(0,3).join(' | ').replace(/<[^>]+>/g,'').slice(0,400)}},su.v);
   out.searches.push({i,after,card:card.slice(0,400),ev:st.ev,mh:st.mh,log:st.log,seen:seen.map(x=>x.t)})}
  /* 2. her evidence card → Tố giác by a real tap */
