@@ -102,8 +102,10 @@ function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (t
    The rows go into her notice (punRows) under the punishment; an NPC's case goes to the log. */
 let CHPX=null;
 function chVictims(t,c){const D=chDeedMap(t)[c];const seen=new Set(),L=[];for(const d of ((D&&D.list)||[])){if(!d||!d.t||seen.has(d.t))continue;seen.add(d.t);let v=null;try{v=byKey(d.t)}catch(e){}if(v&&v!==t&&(v===S?!S.dead:v.alive!==false))L.push(v)}return L}
-function chUhPay(t){const B=chB(),L=chVictims(t,"uh").slice(0,chNeed(t,"uh"));const nm=[];for(const v of L){ap(t,{bac:-B.uhPay});ap(v,{bac:B.uhPay});nm.push(NM(v))}
- if(!nm.length)return null;const x=`bồi ${B.uhPay} lượng bạc cho ${nm.join(", ")}`;if(t!==S)log(`${NMc(t)} phải ${x}.`);return ["Bồi thường",x]}
+function chUhPay(t){const B=chB(),L=chVictims(t,"uh").slice(0,chNeed(t,"uh"));const nm=[];
+ /* rv: she pays only the bạc she has (her Bạc floors at 0 in apply; an NPC never goes below 0 here) — the victim gets exactly what was paid, no bạc made from nothing (law 6c) */
+ for(const v of L){const pay=Math.min(B.uhPay,Math.max(0,(t===S?S.bac:t.bac)|0));if(pay<=0)break;ap(t,{bac:-pay});ap(v,{bac:pay});nm.push(`${pay} lượng bạc cho ${NM(v)}`)}
+ if(!nm.length)return null;const x=`bồi ${nm.join(", ")}`;if(t!==S)log(`${NMc(t)} phải ${x}.`);return ["Bồi thường",x]}
 function chBought(t){const k=key(t),D=chDeedMap(t).mc,ds=(D&&D.list)||[];const sids=new Set(ds.map(d=>d&&d.s).filter(Boolean)),own=new Set(ds.map(d=>d&&d.o).filter(Boolean));const L=[];
  for(const o of [S].concat(rivals||[])){if(!o||o===t||o.coop||(o!==S&&(o.alive===false||o.out)))continue;for(const s of (o.staff||[]))if(s&&s.spyFor===k&&!s.coop)L.push([s,o,(sids.has(s.sid)?2:0)+(own.has(key(o))?1:0)])}
  return L.sort((a,b)=>b[2]-a[2])}

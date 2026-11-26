@@ -15,7 +15,7 @@ const A=process.argv[2]||require('path').join(__dirname,'..','..','index.html');
   const notes=()=>Q.map(m=>String(m.h||"")+JSON.stringify(m.sections||m.kit||"")).join(" ").replace(/<[^>]+>/g," ");
   ok(B.uhPay>0&&B.mcFire>0&&B.trinh&&B.trinh.per>0,`BAL.charge keys uhPay ${B.uhPay} · mcFire ${B.mcFire} · trinh ${JSON.stringify(B.trinh)}`);
   /* (b1) NPC v bullied w and u → proven by her: v pays each */
-  deedAdd(v,"trip",w,1,"ngáng chân "+w.name);deedAdd(v,"batnat",u,1,"bắt nạt "+u.name);const b0=[v.bac||0,w.bac||0,u.bac||0];
+  v.bac=Math.max(v.bac||0,3*B.uhPay);deedAdd(v,"trip",w,1,"ngáng chân "+w.name);deedAdd(v,"batnat",u,1,"bắt nạt "+u.name);const b0=[v.bac||0,w.bac||0,u.bac||0];
   Q.length=0;chPunish(v,"uh","bị tố giác",S);const b1=[v.bac||0,w.bac||0,u.bac||0];
   ok(b1[0]-b0[0]===-2*B.uhPay&&b1[1]-b0[1]===B.uhPay&&b1[2]-b0[2]===B.uhPay,`ức hiếp NPC: guilty ${b1[0]-b0[0]}, victims +${b1[1]-b0[1]} / +${b1[2]-b0[2]} (uhPay ${B.uhPay} each)`);
   /* her as the guilty one: she pays the victim; her notice shows the row */
@@ -23,6 +23,11 @@ const A=process.argv[2]||require('path').join(__dirname,'..','..','index.html');
   ok(S.bac-s0===-B.uhPay&&(w.bac||0)-w0===B.uhPay,`ức hiếp her: she ${S.bac-s0}, victim +${(w.bac||0)-w0}`);ok(/Bồi thường/.test(notes())&&new RegExp("bồi "+B.uhPay+" lượng bạc cho "+w.name).test(notes()),'her notice: «Bồi thường» row names the victim');
   /* her as the victim */
   clean(S);clean(v);S.confined=0;deedAdd(v,"trip",S,1,"ngáng chân ngươi");const s1=S.bac;chPunish(v,"uh","bị tố giác",S);ok(S.bac-s1===B.uhPay,`ức hiếp on her: she receives +${S.bac-s1}`);
+  /* rv: a guilty one short of bạc pays only what she has; the victims get exactly that (no bạc made from nothing, law 6c) — NPC and her */
+  clean(v);clean(w);clean(u);deedAdd(v,"trip",w,1,"ngáng chân "+w.name);deedAdd(v,"batnat",u,1,"bắt nạt "+u.name);v.bac=Math.round(B.uhPay/2);const p0=[v.bac,w.bac||0,u.bac||0];chPunish(v,"uh","bị tố giác",S);
+  ok(v.bac===0&&(w.bac||0)-p0[1]+(u.bac||0)-p0[2]===p0[0],`ức hiếp NPC short of bạc: paid ${p0[0]}, victims got ${(w.bac||0)-p0[1]+(u.bac||0)-p0[2]}, left ${v.bac}`);
+  clean(S);clean(w);deedAdd(S,"trip",w,1,"ngáng chân "+w.name);const sb=S.bac;S.bac=Math.round(B.uhPay/2);const q0=w.bac||0;chPunish(S,"uh","bị tố giác",v);
+  ok(S.bac===0&&(w.bac||0)-q0===Math.round(B.uhPay/2),`ức hiếp her short of bạc: victim +${(w.bac||0)-q0} = what she had`);S.bac=sb;S.confined=0;
   /* (b2) NPC v bought a servant of w (real bribeServ when it exists, else the deed + spyFor) */
   clean(v);clean(w);w.staff=w.staff||[];if(!w.staff.length&&typeof mkServ==="function")w.staff.push(mkServ("maid"));const sv=w.staff[0];
   let viaReal=false;if(sv){try{const r0=Math.random;Math.random=()=>0;try{viaReal=!!bribeServ(v,sv)}finally{Math.random=r0}}catch(e){}if(sv.spyFor!==key(v)){sv.spyFor=key(v);const d=deedAdd(v,"sbribe",null,1,"mua chuộc người hầu của "+w.name);d.s=sv.sid;d.o=key(w)}}
