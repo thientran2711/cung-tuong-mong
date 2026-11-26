@@ -1079,7 +1079,7 @@ window.kitDressPicker=kitDressPicker;
 (function(){const st=document.createElement("style");st.id="kdpk-css";st.textContent=`
 .kdpk{display:grid;grid-template-columns:minmax(150px,34%) minmax(0,1fr);gap:12px;align-items:stretch;min-width:0}
 .kdpk:not(:has(>.kdpk-fig)):not(:has(>.kdpk-left)){grid-template-columns:minmax(0,1fr)}
-.kdpk-left{display:flex;flex-direction:column;gap:8px;min-width:0;align-self:start;position:sticky;top:0}.kdpk-left>.kdpk-fig{position:relative;width:100%;box-sizing:border-box}.kdpk-left .keqg{--keqg:48px}
+.kdpk-left{display:flex;flex-direction:column;gap:8px;min-width:0;align-self:start;position:sticky;top:0}.kdpk-left>.kdpk-fig{position:relative;width:100%;box-sizing:border-box}
 .kdpk-fig{position:sticky;top:0;align-self:start;display:flex;align-items:flex-end;justify-content:center;min-height:min(420px,calc(52*var(--kvh,1dvh)));padding:10px 6px 14px;border-radius:14px;overflow:hidden;
  background:radial-gradient(ellipse 70% 55% at 50% 30%,#fffaf1 0%,#f6e8d0 60%,#ead7b6 100%);box-shadow:inset 0 0 0 1px var(--line,#d6c7a8),inset 0 -26px 30px -18px rgba(120,80,40,.22)}
 /* E95: the stand keeps its own height and stays in view (sticky) — it used to stretch with the right column, so once a tap opened the piece detail the figure sank under the buttons, out of sight */

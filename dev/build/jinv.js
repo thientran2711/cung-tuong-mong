@@ -260,7 +260,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .keq.keqv .keqc>.kitem-slot{width:var(--kside,72px)}.keq.keqv .keql{font-size:.58rem;line-height:1.1;color:var(--ink2,#7a6a58);font-weight:600;overflow-wrap:anywhere;max-width:100%}
 .keq.keqv+.keq.keqv{margin-top:6px}
 .keq.keqv.keqg{width:auto;padding:6px 6px 8px}
-.keq.keqv.keqg .keqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(var(--keqg,60px),1fr));gap:6px 6px;justify-items:stretch}
+.keq.keqv.keqg .keqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(var(--keqg,48px),1fr));gap:6px 6px;justify-items:stretch}
 .keq.keqv.keqg .keqc{min-width:0}.keq.keqv.keqg .keqc>.kitem-slot{width:min(100%,var(--keqgx,84px));aspect-ratio:1/1;height:auto}
 .keq.keqv.keqg .keql{font-size:.66rem}.keq.keqv .keqpi{display:flex;flex-direction:column;gap:1px;font-size:.56rem;line-height:1.15;color:var(--ink2,#7a6a58);overflow-wrap:anywhere;max-width:100%}
 .keq.keqv .keqpi .kchip{font-size:.56rem;padding:0 4px;margin:0;white-space:nowrap}.keq.keqv .keql[style]{font-size:.62rem}

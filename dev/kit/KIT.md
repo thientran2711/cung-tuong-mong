@@ -1526,7 +1526,7 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
 - Gift moment: a confirmed gift (giveTo by her) plays §68 `kitFxGiftCarry` after the state is applied.
 - Test: `node dev/test/gift-pick.js <build url> <outdir> [WxH@dpr,…] [shots]`. Kit page sample "§28.13i".
 ### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
-GRID MODE (DRESS-FIX, owner OD 26/11 ~18:50Z (3) «xếp gọn bên dưới»): `kitEquipSlots({…, grid:true})` → `.keq.keqv.keqg` = the SAME cells as `col` (kitItem slot + slot name) as a compact CSS grid (`repeat(auto-fit,minmax(var(--keqg,60px),1fr))`, cell ≤ `--keqgx` 84 px, square). Used by the dress picker (kitDressPicker `under`): Fold = 4 per row under her figure, iPad = one row above the chest.
+GRID MODE (DRESS-FIX, owner OD 26/11 ~18:50Z (3) «xếp gọn bên dưới»): `kitEquipSlots({…, grid:true})` → `.keq.keqv.keqg` = the SAME cells as `col` (kitItem slot + slot name) as a compact CSS grid (`repeat(auto-fit,minmax(var(--keqg,48px),1fr))`: ONE size token, no per-screen size (KK44), cell ≤ `--keqgx` 84 px, square). Used by the dress picker (kitDressPicker `under`): Fold = 4 per row under her figure, iPad = one row above the chest.
 `kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,mini}], sum, onPick:fn(slot)})` → `.keq` under the bag:
 header = kit section title + totals (Sắc/Danh chips · "Xa xỉ <total>" neutral · "N món vượt phẩm: dễ bị tố" law notice; chips wrap, never cut).
 Slots auto-fit (≥ 80 px columns, wrap to a 2nd row when needed). Each slot = kitItem "slot" (same grade ground + frame as the bag).
