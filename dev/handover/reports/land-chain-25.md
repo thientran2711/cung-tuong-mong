@@ -38,3 +38,6 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 21:51Z kit keeper now KK47 session_01Rc5AsHmtzuWMnb27oL1LC5 (kit-resfold, dress-fix-kit).
 - 21:51Z RV-163 PASS place-close → sha 6f56bc93 (review/place-close-r163 on LIVE 03a8c17c); carries k44 → with/after k44 slot (with goal-links 8d28efd7).
 - 22:08Z RV-163B BIG PASS review/punish-tier ab73bc26 (FF on 03a8c17c; MAIN 164 decides vs witness-split; wipe CDN img/_review/punish-tier/ after land). RV-163B rolled → RV-163C (kit-resfold, oan-pace-ghen, title-bal).
+- 22:05Z 504d2e6a quickcheck (in chain) overlapped my wg/wf/ov3 builds: buổi 1155/812 (1.4×) → discarded; stopped other chains. 22:20Z clean A/B alone (quickcheck.js b2 vs live2 03a8c17c --runs 5): PASS, old save ok, render 183/170, tab 451/422, buổi runs new [1140,991,3093,1112,1321] live [948,1249,837,1284,1065] → median 1140/1065 = 1.07×, longTaskMax median 1657/2095.
+- 22:21Z «READY TO PUSH 504d2e6a (B), FF from 03a8c17c» → MAIN 164.
+- SP 4cfcda61 gates (before stop): statpace-scan, pace-all, stat-pace, balance-pace, moodknow-step0, ag-moodknow, promo-root, kscue-loop ALL PASS; its QC runs after B is LIVE.
