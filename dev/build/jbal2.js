@@ -2272,14 +2272,14 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,oneBelow:1/* PUNISH-TIER r
    deed map completed by D4 #3 from dup-report §4.1: rash → hd, xa xỉ → vp, laydo/laydol/tat/phatquy/nuoc/tea/ink/mlbeat → uh, maid-line frame → vo,
    maid-line poison → mh, ls (sổ Kính sự phòng lệch ngày) → tt like pm; pushp (đẩy xuống hồ, can drown) → mh like pond; phonghoa (burns a store) → uh. */
 BAL.charge={C:{
- vp:{n:"Vượt phẩm xa xỉ",tier:"nhe",lite:"bong",band:6,pk:["tận mắt thấy món vượt phẩm"]},
- il:{n:"Giấu đồ cấm",tier:"nhe",lite:"cam",band:5,pk:["đồ cấm thấy trong rương","lời khai kẻ mua hộ"]},
- uh:{n:"Ức hiếp quấy phá",tier:"nhe",lite:"cam",band:5,pk:["lời khai người bị hại","người tận mắt chứng kiến"]},
- mc:{n:"Mua chuộc người hầu",tier:"nhe",lite:"bong",band:4,pk:["bạc đút lót tìm thấy","lời khai người hầu bị mua"]},
- hd:{n:"Hại dung nhan",tier:"vua",band:3,pk:["tang vật","lời khai người hầu"]},
- mh:{n:"Mưu hại tính mạng",tier:"nang",band:2,pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
- vo:{n:"Vu oan giá họa",tier:"vua",band:2,pk:["thư từ giả mạo","lời khai kẻ được sai","dấu vết đồ bị cài"]},
- tt:{n:"Tư thông",tier:"nang",band:1,pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
+ vp:{n:"Vượt phẩm xa xỉ",tier:"nhe",lite:"bong",band:6,pk:["món vượt phẩm thấy tận nơi"],wk:["người tận mắt chứng kiến"]},
+ il:{n:"Giấu đồ cấm",tier:"nhe",lite:"cam",band:5,pk:["đồ cấm thấy trong rương"],wk:["lời khai kẻ mua hộ"]},
+ uh:{n:"Ức hiếp quấy phá",tier:"nhe",lite:"cam",band:5,pk:["dấu vết nơi ra tay"],wk:["lời khai người bị hại","người tận mắt chứng kiến"]},
+ mc:{n:"Mua chuộc người hầu",tier:"nhe",lite:"bong",band:4,pk:["bạc đút lót tìm thấy"],wk:["lời khai người hầu bị mua"]},
+ hd:{n:"Hại dung nhan",tier:"vua",band:3,pk:["tang vật"],wk:["lời khai người hầu"]},
+ mh:{n:"Mưu hại tính mạng",tier:"nang",band:2,pk:["tang vật","dấu vết nơi ra tay"],wk:["lời khai người hầu","người tận mắt chứng kiến"]},
+ vo:{n:"Vu oan giá họa",tier:"vua",band:2,pk:["thư từ giả mạo","dấu vết đồ bị cài"],wk:["lời khai kẻ được sai"]},
+ tt:{n:"Tư thông",tier:"nang",band:1,pk:["tín vật, thư từ","sổ Kính sự phòng"],wk:["lời khai kẻ canh cửa","người tận mắt chứng kiến"]}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
   bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"uh",
@@ -2321,6 +2321,13 @@ BAL.charge.tuDeed=["cyfake","catswap"];
 BAL.charge.tuTgt=["emp"];
 BAL.charge.tu={spare:{base:10,sungD:4,thMin:60,th:20,hh:15,dadMin:60,dad:10}};
 BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];/* owner 26/11 ~21:00Z: a plain COUNT by the ACCUSED's rank group — ≤ Quý nhân +0 · Tần / Phi / Quý phi +1 · Hoàng quý phi / Hoàng hậu +2 (index 7 = Hoàng hậu); with tier need: nhẹ 1/2/3 · vừa 2/3/4 · nặng 3/4/5 · tử tội 4/5/6 */
+/* PUNISH-TIER-3 WITNESSES (owner OD 26/11 ~21:10Z + ~21:17Z as overwritten ~21:40Z, verbatim on the handover branch): NHÂN CHỨNG is a SEPARATE
+   count from CHỨNG CỨ, kept in its own store (holder h → target t → charge c: h.ewc[key(t)][c], jcharge chWit). need[tier] = witnesses a charge of that
+   weight needs beside its evidence count: nhẹ / vừa none, nặng 1, tử tội 2 — the same for every rank group (do not over-split). Witnesses are only a
+   count: no buy-off / recant / silence (owner ~21:35Z). C[c].wk = the witness kinds of each charge (the «lời khai …» / «người tận mắt chứng kiến»
+   names moved out of the evidence kinds pk). A found piece of a charge that still lacks witnesses goes to the witness store every other find
+   (and always once its evidence is at the cap); presenting the charge spends its witnesses with its pieces. Same for her and for every NPC (law 1). */
+BAL.charge.wit={need:{nhe:0,vua:0,nang:1,tu:2}};
 BAL.charge.rep={n:3,win:36};
 BAL.charge.conf={down:1,up:1};
 for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});
