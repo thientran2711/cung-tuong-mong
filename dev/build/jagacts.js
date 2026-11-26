@@ -65,14 +65,14 @@ agRunReg("cx:humble",(v,t)=>{const X=BAL.ag.cx.humble;if(!t)return"";ap(v,X.c);i
 /* ONE function for her and the NPC Empress (empAct calls it for the player) */
 function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.name}`;
  if(k==="cutpay"){v.cutPay=Math.max(v.cutPay||0,1);v.cutBy=me?"Hoàng hậu":a.name;relAdd(a,v,-BAL.ag.hh.cutRel);if(v===S)log(`<span class="r">Hoàng hậu ${a.name} sai Nội vụ phủ khất bổng lộc của ngươi tháng tới.</span>`);return `${nm} sai Nội vụ phủ khất bổng lộc của ${NM(v)} tháng tới`}
- if(k==="judge"){if(evG(a,v)<BAL.ag.ev.judge)return"";return String(judge(a,v)).trim()}
+ if(k==="judge"){if(!chOK(a,v))return"";return String(judge(a,v)).trim()}
  if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return"";if(evG(a,v)<1&&!vpItems(v).length){if(me)apply(BAL.tw.confNo);else ap(a,BAL.tw.confNo)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(a,v,-BAL.tw.g.conf[0]);v.hh=(v.hh||0)-BAL.tw.g.conf[1];return `${nm} tịch thu ${n} của ${NM(v)}`}
  if(k==="reward"){if((a.bac||0)<-BAL.tw.reward.bac)return"";if(me)apply(BAL.tw.reward);else ap(a,BAL.tw.reward);relAdd(a,v,BAL.tw.g.reward[0]);v.hh=(v.hh||0)+BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});return `${nm} ban thưởng cho ${NM(v)}`}
  if(k==="pardon"){if(!v.confined&&!v.out)return"";if(v!==S&&v.out&&!coldStayOk(v))return"";if(v===S){try{if(S.out)restore(false,`Hoàng hậu ${a.name} ân xá vì ${punAllyWhy(a,S)}`);else S.confined=0}catch(e){S.out=false;S.confined=0}}else{if(v.out)coldFree(v);v.confined=0}relAdd(a,v,BAL.ag.hh.pardonRel);if(me)apply({duc:BAL.ag.hh.pardonDuc});else ap(a,{duc:BAL.ag.hh.pardonDuc});return `${nm} ân xá cho ${NM(v)}`}
  return""}
 const AGHH={judge:{act:"xử tội",n:"spite"},conf:{act:"tịch thu trang sức",n:"spite"},reward:{act:"ban thưởng",n:"ally"},pardon:{act:"ân xá",n:"ally"},cutpay:{act:"khất bổng lộc",n:"spite"}};
 /* the gate of each of her buttons (the player-as-Empress sees the same: empAct below) — ONE list read by her options and by her duty need */
-const AGHHG={judge:(q,p)=>!p.out&&evG(q,p)>=BAL.ag.ev.judge&&rel(q,p)<0,conf:(q,p)=>!p.out&&(p.hh||0)<=BAL.ag.hh.confHh&&p.inv.some(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h),
+const AGHHG={judge:(q,p)=>!p.out&&chOK(q,p)&&rel(q,p)<0,conf:(q,p)=>!p.out&&(p.hh||0)<=BAL.ag.hh.confHh&&p.inv.some(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h),
  reward:(q,p)=>!p.out&&(p.hh||0)>=BAL.ag.hh.rewardHh&&(q.bac||0)>=-BAL.tw.reward.bac,cutpay:(q,p)=>!p.out&&rel(q,p)<=netTh(q,"ghet")&&!p.cutPay,
  pardon:(q,p)=>(p.confined||p.out)&&aff(q,p)>=netTh(q,"than")};
 /* AG-ALL r1 F5: the Empress's DUTY need "order" (keeping the inner palace in order): grows with the cases her buttons can act on now
@@ -95,7 +95,7 @@ agReg("hh","acts",(q,N,need)=>{if(q===S||!q.queen)return[];const H=BAL.ag.hh;con
 for(const k in AGHH)agRunReg("hh:"+k,(q,t)=>{if(!q||!q.queen||!t)return"";return hhAct(q,t,k)});
 /* the player-as-Empress buttons call the same function */
 (function(){const e0=empAct;empAct=function(i,k){const v=rivals[i];if(!v||S.rank<7||!(typeof agCanDay==="function"?agCanDay(BAL.ag.hh.kh):can(BAL.ag.hh.kh))||S.dead||Q.length||!AGHH[k])return e0.apply(this,arguments);
- if(k==="judge"&&evG(S,v)<2)return;if(k==="conf"&&v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h)<0)return;if(k==="reward"&&S.bac<-BAL.tw.reward.bac)return;if(k==="pardon"&&!v.confined&&!v.out)return;
+ if(k==="judge"&&!chOK(S,v))return;if(k==="conf"&&v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h)<0)return;if(k==="reward"&&S.bac<-BAL.tw.reward.bac)return;if(k==="pardon"&&!v.confined&&!v.out)return;
  const r=hhAct(S,v,k);if(!r)return;spend(BAL.ag.hh.kh);log(r+".");render()}})();
 
 /* ---------------- 3. THÁI HẬU: her acts (gift, admonish, release from lãnh cung) chosen by her needs ---------------- */

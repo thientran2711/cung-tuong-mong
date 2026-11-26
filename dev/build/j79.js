@@ -926,7 +926,7 @@ header.hud>.hud2.khud .h2t{top:3px;right:0}
 /* the real condition text of every scheme whose ok() had no words (j63 Cần row reads LACK[k](v); "" = met) */
 if(typeof LACK==="object"){const bac=n=>S.bac<n?`Bạc ${n} (có ${S.bac})`:"";const P=()=>{try{return(PLACES&&PLACES[whereOf(S)]||{}).n||whereOf(S)}catch(e){return whereOf(S)}};Object.assign(LACK,{
  spy:t=>bac(15),ally:t=>bac(30),bribe:t=>bac(40),lygian:t=>bac(20)||(rkOf(t)<1?"nàng từ Thường tại trở lên":""),slowpoison:t=>bac(40),
- accuse:t=>{const n=accNeed(t),h=evG(S,t);return h<n?`${n} chứng cứ về nàng (có ${h})`:rkOf(t)>=7&&rkOf(S)<3?"ngươi từ Tần trở lên mới tố được Hoàng hậu":""},
+ accuse:t=>{return !chOK(S,t)?chNeedTxt(S,t):rkOf(t)>=7&&rkOf(S)<3?"ngươi từ Tần trở lên mới tố được Hoàng hậu":""},
  ksab:t=>tKid(t)?"":"nàng có con từ 3 tuổi",kpoison:t=>tKid(t)?"":"nàng có con từ 3 tuổi",pond:t=>kidsOf(t).some(k=>k.age>=2)?"":"nàng có con từ 2 tuổi",
  kframe:t=>sonsOf(t).some(k=>k.age>=6)?"":"nàng có con trai từ 6 tuổi",
  takeaway:t=>rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":rkOf(t)>=4?"nàng dưới bậc Phi":!kidsOf(t).some(k=>k.age<6)?"nàng có con dưới 6 tuổi":"",
@@ -941,7 +941,7 @@ if(typeof j78when==="function"){j78when=function(){return kitDate(S.month,S.year
 function kitEvidencePanel(v){if(!v||typeof evidenceOf!=="function")return;const E=evidenceOf(v);if(!E)return;
  const items=E.items.length?E.items.map(e=>kitEvidence({what:e.proves,how:e.how,when:e.when})).join(""):`<div class="kpnote">Ngươi chưa giữ chứng cứ nào về nàng.</div>`;
  const acts=(E.acts||[]).map(a=>`<button class="opt" data-kev="${v.id}" data-kevact="${a.k}"${a.why?" disabled":""}>${a.n||(ACT[a.k]?ACT[a.k].n:a.k)}<small>${a.why?`<span class="kwhy">${a.why}</span> `:""}${kitParse(a.line||"")}</small></button>`).join("");
- const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},E.rumours?{h:`Tin đồn (${E.rumours})`,html:`<div class="kevs">${kitEvidence({what:`${E.rumours} tin đồn chưa ai chứng thực`,proves:"Không có việc thật nào đứng sau: không dùng để tố được",how:"Nghe từ trước khi sổ chứng cứ đối chiếu việc thật"})}</div>`}:null,acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;kitModalSafe(m)}
+ const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[typeof chRows==="function"&&chRows(S,v).length?{h:"Chứng cứ theo tội (mỗi tội đủ chứng riêng mới tố được)",rows:chRows(S,v)}:null,{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},E.rumours?{h:`Tin đồn (${E.rumours})`,html:`<div class="kevs">${kitEvidence({what:`${E.rumours} tin đồn chưa ai chứng thực`,proves:"Không có việc thật nào đứng sau: không dùng để tố được",how:"Nghe từ trước khi sổ chứng cứ đối chiếu việc thật"})}</div>`}:null,acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;kitModalSafe(m)}
 function kitIntelPanel(v){if(!v)return;const L=typeof intelOf==="function"?intelOf(v):[];const old=(S.notes&&S.notes[v.id])||[];
  const list=L.map(x=>({about:null,fact:x.fact+(x.current===false?` <span class="kchip n">nay đã khác</span>`:""),src:x.by?(typeof x.by==="object"?x.by:String(x.by)):"tai mắt",week:[x.how,x.when].filter(Boolean).join(" · ")}));
  old.forEach(t=>{if(!L.some(x=>kpPlain(x.fact).includes(kpPlain(t))))list.push({fact:t,src:"nghe được",week:""})});

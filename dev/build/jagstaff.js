@@ -114,7 +114,7 @@ function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(
 const AS_DO={
  nvp(s){/* NPC-PURPOSE G3: a bully is a servant there who bears her a grudge (her own af < 0), the worst first; none → no bullying. A friend = the one she already likes best */
   const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;oanAdd(s,by,BAL.relMS.bully);return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
- spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}
+ spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/const n=chSearch(v,s,()=>evA(v,m,SRVA.spy.ev));return v===S?(n?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${n}. `:`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: ${chMissed()?chMissTxt(m):"chưa thấy điều gì sai trái"} `):""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},
  askRec(s,m,o,ok){if(ok)servMerit(s,SRVA.askRec.mpOk);return""},

@@ -372,8 +372,8 @@ function rtNgNpcAuto(v,k){const N=BAL.ngh,truth=!k.tf;const foe0=liveRivals(fals
  rtStat(truth?"npc_ng_oan":"npc_ng_lo");
  return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&eyes(S)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
 /* she demands the test on another consort's child (honest, or with oil = a frame-up) */
-function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0,ne=BAL.ngh.needEv;if(ev<ne&&!v.kidRumor)continue;
-  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ về ${v.name} (có ${ev}/${ne})`,ev>=ne]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
+function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof chHave==="function"?chHave(S,v,"tt"):0,ne=typeof chNeed==="function"?chNeed(v,"tt"):BAL.ngh.needEv;if(ev<ne&&!v.kidRumor)continue;
+  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ tội tư thông về ${rtVn(v)}.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ tội tư thông về ${v.name} (có ${ev}/${ne})`,ev>=ne]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
  return A}
 PEND.rtNgNpc=pp=>{const v=RV(pp.v);const k=v&&(v.kids||[]).find(x=>x.name===pp.k&&x.alive);if(!v||!k)return null;const oF=rtMgO(4);
  const N=BAL.ngh;const fin=(shown)=>{k.tfOk=1;if(shown){apply(BAL.route.demandFail);oanAdd(v,S,N.accOan);punish(S,"vu cáo phi tần",N.accPun);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}

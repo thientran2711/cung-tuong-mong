@@ -132,7 +132,7 @@ window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
  const moms=[S].concat(liveRivals(true));
  for(const m of moms){if(m!==S&&(!m.alive||m.out))continue;if(m===S&&S.out)continue;for(const k of (m===S?S.kids:m.kids)||[]){if(!k.alive||!k.dateOff||k.tfOk||(k.age||0)>P.ageMax)continue;
   if(m===S&&S.rt&&S.rt.ng)break;
-  const Lc=liveRivals(true).filter(v=>v!==m&&v.alive&&!v.out&&khMotive(v,m,k)&&evG(v,m)>=P.accEv&&(typeof rtGateT!=="function"||rtGateT(v,m,"accuse").ok));
+  const Lc=liveRivals(true).filter(v=>v!==m&&v.alive&&!v.out&&khMotive(v,m,k)&&chOK(v,m,"tt")&&(typeof rtGateT!=="function"||rtGateT(v,m,"accuse").ok));
   const o=Lc.length?npcWhy("khAcc",{m,L:Lc},()=>roll(P.accP)):null;const acc=o&&o.who;/* npc-purpose G2: the accuser = the schemer whose grudge pushes her most; accP = the success */
   if(!o)continue;
   if(m===S){khStat("lech_set");if(typeof rtNgSet==="function"){rtNgSet(k,acc.id);ev+=`${acc.name} vốn ${o.why}, cầm chuyện ${k.name} lệch ngày trong sổ Kính sự phòng, tâu xin trích huyết nghiệm thân. `}}
@@ -143,8 +143,8 @@ window.monthTick=monthTick;
 const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead||!S.preg||S.fake||S.khInd)return;const o=khRecOff(S);if(o<1||S.preg<9-o||S.preg>8)return;deck.unshift(P3C.drug(S))}catch(e){console.error(e)}};/* AG-ALL-2e2: ONE builder P3C.drug(p) — her card and an NPC's cx3:drug */
 if(typeof rtCards==="function"){const r0=rtCards;rtCards=function(){let A=r0.apply(this,arguments);try{if(!rtRoad()||S.out||(window.__bot&&!window.__rtGo))return A;
  for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&x.dateOff&&x.dateKnown&&!x.tfOk&&(x.age||0)<=P.ageMax);if(!k)continue;if(A.some(c=>c.rtId==="ngn_"+v.id))continue;
-  const ev=typeof evG==="function"?evG(S,v):0;
-  A.push(rtCard({id:"ngl_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`${k.name} của ${v.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ về ${v.name} (có ${ev}/${P.accEv})`,ev>=P.accEv]],
+  const ev=typeof chHave==="function"?chHave(S,v,"tt"):0,evN=typeof chNeed==="function"?chNeed(v,"tt"):P.accEv;
+  A.push(rtCard({id:"ngl_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`${k.name} của ${v.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ tội tư thông về ${v.name} (có ${ev}/${evN})`,ev>=evN]],
    x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>{khStat("lech_me");rtPush("rtNgNpc",{v:v.id,k:k.name})}}));break}}catch(e){console.error(e)}return A}}
 /* ---- shown (spec 4.6, review r1 F2): the HUD Sức cell reads "N/M" (every writer of the cell goes through hudFmt); the Sức help panel lists
    Sức · Sức tối đa · Sức khỏe in kit rows (HXNOW); the person card's age line (her card, consorts' cards) carries the body in words ---- */

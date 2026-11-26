@@ -2252,3 +2252,29 @@ BAL.kmus={holdMs:6000};
    (ân xá, đại xá, cầu xin, minh oan — hers and an NPC's); gapDays = no second rank punishment on one person within this many days (it becomes
    cấm túc); fallSung = Sủng lost with a one-rank fall (was the typed 15 in j8 fall); evShow = most evidence lines a notice lists */
 BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:true/* PENDING OWNER (law 16, asked via MAIN 152): NPC release one rank below the old rank; false = old rule (always Đáp ứng) */};
+/* CHARGE-EVIDENCE (review/charge-evidence, D4 option A; owner 26/11 ~05:15Z «D4 A» + ~05:35Z find-odds formula, verbatim in OD): evidence is kept
+   PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, need = pieces
+   to accuse (Hoàng hậu target + queenPlus), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
+   pun = what a proven charge brings (light = phạt bổng + Danh −, cam = cấm túc, giang = one rank, cold = lãnh cung; one punishment, D1).
+   deed = jtruth deed key → charge. FIND ODDS per search (chFind): band + Tâm cơ of the MASTER vs the target (±1 band per tcStep, cap tcCap) +
+   sent servant (±1 only at the extremes: sharp & bậc ≥ srvHi / timid & bậc ≤ srvLo) + TAI MẮT (master's real eyes ≥ matMid +1, ≥ matHigh +2, a planted
+   eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
+   (cap missCap; reset on a find). fine = bạc of «phạt bổng» (light), danh / duc = the small stat loss of a light charge; warnMat = her Tai mắt
+   count that warns her when someone searches HER (once a day per searcher). */
+BAL.charge={C:{
+ vp:{n:"Vượt phẩm, xa xỉ",need:1,band:6,pun:"light"},
+ il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam"},
+ uh:{n:"Ức hiếp, quấy phá",need:2,band:5,pun:"cam"},
+ mc:{n:"Mua chuộc, dọa người hầu",need:2,band:4,pun:"light"},
+ bm:{n:"Bày mưu hại người",need:2,band:4,pun:"cam"},
+ hd:{n:"Hại dung nhan, hại thân",need:2,band:3,pun:"giang"},
+ mh:{n:"Mưu hại tính mạng, long thai",need:3,band:2,pun:"cold"},
+ vo:{n:"Vu oan, giá họa",need:3,band:2,pun:"cold"},
+ tt:{n:"Tư thông",need:3,band:1,pun:"cold"}},
+ order:["tt","mh","vo","hd","bm","mc","uh","il","vp"],
+ deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
+  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"bm",old:"bm",caught:"bm",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
+  poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
+  tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt"},
+ queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:5,guard:-1,missStep:1,missCap:6,
+ fine:20,danh:-3,duc:-3,warnMat:2};

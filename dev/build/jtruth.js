@@ -72,11 +72,11 @@ function harmTxt(t){const W=t===S?"ngươi":t.name;return pick([`giờ giấc đ
 function spyKnowB(a,t){try{const T=BAL.truth;const w=((a.know||{})[key(t)]);return w!=null&&wk()-w<=T.spyKnowW?T.spyKnowB:0}catch(e){return 0}}
 function spyKnow(a,t){a.know=a.know||{};a.know[key(t)]=wk();const ks=Object.keys(a.know);if(ks.length>12)delete a.know[ks[0]]}
 /* one spying attempt that succeeded: returns the act line (who · what · result); ev:true when real proof was found */
-function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=evA(a,t,BAL.eff.jtruth.evN);
- if(n>0){const d=d0;if(t===S)return `${NMc(a)} ${verb} ngươi: <span class="r">nắm được chuyện ngươi ${d?d.x:"từng làm điều sai trái"}</span>. `;
+function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=typeof chSearch==="function"?chSearch(a,typeof bestSent==="function"?bestSent(a):null,()=>evA(a,t,BAL.eff.jtruth.evN)):evA(a,t,BAL.eff.jtruth.evN);
+ if(n>0){const d=(typeof chHitDeed==="function"&&chHitDeed(t))||d0;if(t===S)return `${NMc(a)} ${verb} ngươi: <span class="r">nắm được chuyện ngươi ${d?d.x:"từng làm điều sai trái"}</span>. `;
   if(a===S)return `Ngươi ${verb} ${t.name}: <span class="g">tìm ra chuyện nàng ${d?d.x:"từng làm điều sai trái"}, thêm ${balWord(balAb(BAL.eff.jtruth.evN))} chứng cứ</span>. `;
   return `${a.name} ${verb} ${t.name}: nắm được một chuyện sai trái của nàng. `}
- spyKnow(a,t);const h=harmTxt(t);return `${NMc(a)} ${verb} ${NM(t)}: không tìm ra điều gì sai trái; chỉ biết ${h}. `}
+ spyKnow(a,t);const h=harmTxt(t);if(typeof chMissed==="function"&&chMissed()){if(a===S)return `Ngươi ${verb} ${t.name}: ${chMissTxt(t)} Chỉ biết thêm ${h}. `;if(t===S)return `${NMc(a)} ${verb} ngươi, chưa nắm được gì. `;return `${a.name} ${verb} ${t.name}, chưa tìm ra chứng. `}return `${NMc(a)} ${verb} ${NM(t)}: không tìm ra điều gì sai trái; chỉ biết ${h}. `}
 
 /* ---------- 3. frames: the victim's defence ---------- */
 function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+eyes(p)*T.clearMat;const C=[];const W=p===S?"ngươi":"nàng";
