@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt.","b":"5ab5b80e406e","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"aa37de21+","t":"2026-11-26T10:49Z","c":"Chạm việc của nàng với một người (hỏi chuyện, tặng quà…) là chạy ngay; thẻ sự kiện tới cùng lúc chờ phía sau, không mất, không bị qua buổi.","b":"a9a428dd0d55","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1617,6 +1617,9 @@ function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
 function pushModal(m){Q.push(m);}
+/* DIALOG-ORDER r2: the ONE tap hook of the queue rule (jdayq dqTap: a card nobody can see never makes her tap dead; what her tap opens goes to the
+   FRONT). Registered HERE, before every other module, on window capture: it runs before any handler of her tap reads Q */
+try{["pointerdown","pointerup","click","keydown","touchstart"].forEach(k=>window.addEventListener(k,e=>{try{if(window.dqTap)window.dqTap(k,e)}catch(x){}},true))}catch(e){}
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
@@ -4881,15 +4884,19 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
  else if(p.kind==="th"){rank="Thái hậu";lines=[tuoi(S.thAge),`Thái hậu → ta: thiện cảm <b>${S.th}</b>`]}
  else{const a=String(p.info||"").split(" · ");rank=a.shift()||"";lines=a;const ag=p.kind==="maid"?S.maid.age:p.kind==="ty"?(S.court&&S.court.ty||{}).age:p.kind==="ksp"?(S.court&&S.court.ksp||{}).age:p.kind==="peddler"?(S.court&&S.court.ped||{}).age:p.kind==="kid"&&p.ref?p.ref.age:p.kind==="fallen"&&v?v.age:0;if(ag&&p.kind!=="kid")lines.unshift(tuoi(ag))}
  const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=talkK(a);const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
-  const why=a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);
+  const why=done?POP_DONE:a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);
   return pbtn(`class="opt" data-o="${j}"`,a.n,sm,why)});
  /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the acts are split into GROUP TABS (the Hành sự categories, KIT_CAT via kitActCat; the same
     .pctabs/.pct row + "làm được/tổng" count as every other person card); one group = no tab row. The result of an act is NOT a note in the column:
     it goes to the standard bottom result card (#rtoast, j65 talk) — so the card carries no note here (popMsg stays the state the log sync reads). */
  const gk=[],gb={};opts.forEach((a,j)=>{let c="khac";try{c=(typeof kitActCat==="function"&&kitActCat(a.n))||"khac"}catch(e){}if(!gb[c]){gb[c]=[];gk.push(c)}gb[c].push(B[j])});
  const gn=c=>typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:c==="khac"?"Khác":c;
- const groups=done?[]:gk.length>1?gk.map(c=>[gn(c),gb[c]]):[["",B]];
- return pcard({f,col,name:p.name,rank,ghen,lines,chips,close,note:"",groups,empty:done?"Lần ghé này đã nói chuyện với người này rồi.":"Không có việc gì để làm với người này."})}
+ const groups=gk.length>1?gk.map(c=>[gn(c),gb[c]]):[["",B]];
+ return pcard({f,col,name:p.name,rank,ghen,lines,chips,close,note:"",groups,empty:done?POP_DONE:"Không có việc gì để làm với người này."})}
+/* DIALOG-ORDER r2 (E96r FAIL 2, OD:L317 «nút làm được nằm trên cùng, nút mờ xuống dưới»): after she talked with a person this visit the card used to
+   DROP every act — the person view (jdfv / kitFocus, built from this card) stood empty with only ✕ («nút bấm không thấy gì»). Now every act stays,
+   dimmed (kit pbtn disabled + its reason), so the view / pop-up shows what was done and why nothing more can be done this visit. ONE text. */
+const POP_DONE="Lần ghé này đã nói chuyện với người này rồi.";
 
 /* ---- the Emperor / herself, opened as a card in the dialog ---- */
 function empCardHTML(){const E=S.emp;return pcard({f:pEmp(),col:"#f0d070",name:empNm(),rank:"Hoàng thượng",rows:[["Niên hiệu",empEra(),"t"]],lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
@@ -37602,8 +37609,8 @@ Object.assign(BAL,{led:{court:2,cnt:"now"}});
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
-   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
+   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; mineLook = ms after her tap inside a person view during which a NEW queued card is hers and painted on top (E96 dialog-order); stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000,mineLook:400}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -97697,7 +97704,7 @@ function dfActs(i){const p=curPeople()[i],d=dfCard(i);if(!p||!d)return null;let 
     off:!!b.disabled,why,info:b.outerHTML,small:sm?sm.innerHTML:"",pic:dfPic(n)})});
   out.push({k:"g"+gi,n:(tabs[gi]||{}).n||dfCatName(acts),acts})});
  const done=S.visit&&(S.visit.talked===true||(S.visit.tk||{})[i]);
- if(!done)for(const x of dfInPerson(p)){const a=x.a,hk=typeof harmK==="function"?harmK(rivals[x.i],x.k):BAL.time.cost.harm;const why=can(hk)?"":dfTxt(whyTime(hk))||"hết khắc buổi này";
+ for(const x of dfInPerson(p)){const a=x.a,hk=typeof harmK==="function"?harmK(rivals[x.i],x.k):BAL.time.cost.harm;const why=done?POP_DONE:can(hk)?"":dfTxt(whyTime(hk))||"hết khắc buổi này";/* r2: after the talk they stay, dimmed with the reason (j15 POP_DONE) */
   const c=(()=>{try{return (typeof kitActCat==="function"&&kitActCat(a.n))||""}catch(e){return""}})(),cn=typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:"";
   let G=out.find(g=>g.n===cn)||(!cn&&out[0]);if(!G){G={k:"x"+c,n:cn,acts:[]};out.push(G)}
   G.acts.push({id:"a"+x.k,n:a.n,cls:x.k==="phatquy"?"C":"B",eng:dfEng(a.n),word:"",ton:[hk+" khắc",typeof fmt==="function"?dfTxt(fmt(a.c||{})):""].filter(Boolean).join(" · "),off:!!why,why,info:"",small:"",pic:dfPic(a.n)})}
@@ -97739,7 +97746,9 @@ const DFG={cur:null,ENG:{}};window.DFG=DFG;const DFG_MS=1000;/* ms per second (u
 function dfgL(pr,f){return pr[0]+(pr[1]-pr[0])*f}
 function dfgEase(eng,rank){let t=null;try{t=mgTier("df_"+eng,{occ:"df",rank,lv:0})}catch(e){}const top=(BAL.df.easeTop);return{t,f:cl(t?t.ease:0,0,top)/top}}
 function dfgSeg(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy;let u=L?((p.x-a[0])*dx+(p.y-a[1])*dy)/L:0;u=cl(u,0,1);return Math.hypot(a[0]+u*dx-p.x,a[1]+u*dy-p.y)}
-function dfgPath(name){try{const s=String(NWB.P[name]||"");return s.split(' d=\x22').slice(1).map(x=>new Path2D(x.split('\x22')[0]))}catch(e){return[]}}
+/* NGON-LAG (E96, owner OD 26/11 ~01:25Z «môn ngôn … lag lắm»): the kit sign paths are parsed ONCE per sign (was: every sign, every frame) */
+const DFG_PATHS={};
+function dfgPath(name){if(DFG_PATHS[name])return DFG_PATHS[name];try{const s=String(NWB.P[name]||"");const P=s.split(' d=\x22').slice(1).map(x=>new Path2D(x.split('\x22')[0]));if(P.length)DFG_PATHS[name]=P;return P}catch(e){return[]}}
 function dfgCol(){const O=typeof KIT_ODDS_COL!=="undefined"?KIT_ODDS_COL:[];return{ink:kg82Col("--ink",kg82Col("--body-ink","#3b2a1c")),gold:kg82Col("--gold","#c99a1e"),red:O[0]||"#b8321f",green:O[O.length-1]||"#2d7a52",paper:kg82Col("--paper","#f6eedc")}}
 function dfGame(eng,o){const E=DFG.ENG[eng];if(!E||!o||!o.box||!o.fig)return null;if(DFG.cur)DFG.cur.destroy();
  const B=BAL.df[eng],top=BAL.df.rawTop,box=o.box,cv=document.createElement("canvas");cv.className="kfoc-cv";cv.setAttribute("aria-hidden","true");
@@ -97756,7 +97765,9 @@ function dfGame(eng,o){const E=DFG.ENG[eng];if(!E||!o||!o.box||!o.fig)return nul
  E(c);let last=0;
  const frame=()=>{if(c.done)return;const t=c.now(),dt=last?t-last:0;last=t;if(c.tick)c.tick(dt,t);if(c.done)return;
   if(t>=(c.ms||B.ms)){c.timeout?c.timeout():c.end(0);return}
-  g.clearRect(0,0,W,H);try{c.draw&&c.draw(g,t)}catch(e){}try{o.hud&&o.hud({time:Math.max(0,Math.ceil(((c.ms||B.ms)-t)/DFG_MS))})}catch(e){}c.raf=requestAnimationFrame(frame)};
+  g.clearRect(0,0,W,H);try{c.draw&&c.draw(g,t)}catch(e){}
+  /* NGON-LAG: the kit clock chip is rebuilt only when its whole second changes (was: its HTML rewritten every frame = a layout + paint per frame) */
+  const sec=Math.max(0,Math.ceil(((c.ms||B.ms)-t)/DFG_MS));if(sec!==c.hudSec){c.hudSec=sec;try{o.hud&&o.hud({time:sec})}catch(e){}}c.raf=requestAnimationFrame(frame)};
  function stop(){cancelAnimationFrame(c.raf);cv.removeEventListener("pointerdown",dn);cv.removeEventListener("pointermove",mv);cv.removeEventListener("pointerup",up);cv.removeEventListener("pointercancel",up);cv.remove();if(DFG.cur===h)DFG.cur=null}
  const h={c,skip(){if(c.done)return;c.done=true;stop();try{o.onDone&&o.onDone({raw:null,skipped:true})}catch(e){console.error(e)}},destroy(){c.done=true;stop()},
   /* test / measure oracle (never drawn): where the target is now */peek(){return c.peek?c.peek(c.now()):null},canvas:cv};
@@ -98269,12 +98280,70 @@ function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(o
 function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
   const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
 /* the call comes from her own tap INSIDE the activity (a card / panel she opens there) */
-function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;return !!(t&&t.nodeType===1&&(a===document.body||a.contains(t)))}catch(e){return false}}
+/* DIALOG-ORDER (owner OD 26/11 ~03:40Z, E96): «Sai đi dò la» in her maid's person view opened NOTHING until ✕ closed the view, then the
+   pick-who dialog appeared («out of order»). Cause: the person view's own act cards (Giao thiệp / Mưu kế tabs) live in its docked person card
+   #popw (j59dock), OUTSIDE .kfoc, so her tap there read as «not inside the activity» and gate (c) held the dialog she had just asked for behind
+   the view. Fix (whole family: every act → dialog of every person card): the activity OWNS its controls — the person view = .kfoc + its docked
+   person card #popw; and «inside» is judged where her tap LANDED (capture phase, before any handler re-renders the card and detaches the
+   target), so a dialog she opens herself is painted ON TOP at once. A card the game posts by itself (no tap, or a tap outside) still waits. */
+const DQ_OWN=".kfoc,#popw,.kfoc-ov,.kfintro";
+function dqTapIn(t){try{return !!(t&&t.nodeType===1&&t.closest&&t.closest(DQ_OWN))}catch(e){return false}}
+/* DIALOG-ORDER r2 (E96r FAIL 1 + OO-SWEEP root, owner rule via MAIN 156: «a dialog she opens from a tap goes to the FRONT; cards the game
+   posted wait after it; none lost»). Two faults of one family:
+   (1) a card the GAME posted waits HIDDEN (gate (c) holds it behind her person view, or nobody painted it yet) — every tap handler that reads
+       «a card is up» as Q.length (jdfv.js:66, j25.js:20 talk-open acts, ~60 more `Q.length)return` guards) then killed EVERY act she tapped:
+       nothing on screen, nothing queued, and after ✕ the game card came and her picker was gone.
+   (2) j3 pushModal / Q.push put HER dialog at the BACK: behind a waiting game card, or behind the open box whose button she tapped.
+   ONE rule, at the queue, for every guard and every push site (no per-act patch): while her tap is being handled, a card NOBODY CAN SEE is set
+   aside (DQ.park) — so every guard sees the truth «no card is up» and her act runs; when the tap is over the set-aside cards go back BEHIND what
+   her tap queued (none lost, none doubled). And every card her tap queues (a push during the tap, or BAL.dayq.mineLook ms after it) is moved IN
+   FRONT of the cards that were already waiting, then painted: over the person view (gate (c) never holds it) and over the box she tapped in
+   (the opener comes back after it). Cards the game posts without her tap keep the back of the queue. Solo (dqUi), like gates (a)/(b): a co-op
+   room keeps its own Q pacing. The tap hook is registered EARLY by j3 (window capture, before every module's listener; window.dqTap). */
+DQ.park=null;DQ.tw=0;DQ.pdT=0;
+function dqParked(){return !!(DQ.park&&DQ.park.length)}
+/* the set-aside cards go back behind what her tap queued; a card re-queued meanwhile is not doubled */
+function dqUnpark(){try{const k=DQ.park;DQ.park=null;if(!k||!k.length)return;for(const m of k)if(!Q.includes(m))Q.push(m);DQ.stat.unpark=(DQ.stat.unpark||0)+1;
+  /* a gate's painter that ran while they were set aside saw an empty queue and stopped: arm it again (it still waits on the view / book) */
+  if(dqQHidden()){if(Q[0]&&DQ.preQ&&!DQ.preQ.has(Q[0]))showModal();if(dqQHidden())dqArmModal()}}catch(e){console.error("dayq unpark",e)}}
+/* her cards first: the cards queued since her finger came down go in front of the cards that were waiting before it (order kept in both) */
+function dqMineFront(){try{const pre=DQ.preQ;if(!pre||!dqUi()||Q.length<2)return false;
+  /* a card PLAYING in the person view / stage encounter (jdfv in-scene dialog, centre modal hidden on purpose — OB-OAN) keeps its place: what she opens there shows in that scene after it, never as a second centre card over it */
+  if(dqPlaying()||(window.DF&&DF.F&&Q[0]&&DF.encM===Q[0]))return false;const mine=Q.filter(m=>!pre.has(m)),old=Q.filter(m=>pre.has(m));if(!mine.length||!old.length||Q.every((m,i)=>m===(i<mine.length?mine[i]:old[i-mine.length])))return false;
+  /* an ending / death card already waiting keeps its place (nothing is played over the end of her life) */
+  if(dqIsEnd(Q[0])&&pre.has(Q[0]))return false;Q.length=0;Q.push(...mine,...old);DQ.stat.mineFront=(DQ.stat.mineFront||0)+1;return true}catch(e){console.error("dayq front",e);return false}}
+/* r3 (E96r REVIEW r2: «Sang buổi» passed the buổi over an unseen card): the rule is for HER ACT taps only — inside the person view she opened
+   (DQ_OWN) or inside the box / panel she has open. A time-passing control (#next «Sang buổi», a Dư đồ move, the top bar «Về phòng», a tab) is
+   never one: there an unseen card still holds the turn and is painted first (M4 rule, dqPaintQ / dqBring), exactly as before. */
+const DQ_ACT=DQ_OWN+",#modal,#panel";
+function dqActTap(t){try{if(!t||t.nodeType!==1||!t.closest)return false;if(t.closest("#next,#tabs,.tabs,#top,.ktop,#map,.mspot"))return false;return !!t.closest(DQ_ACT)}catch(e){return false}}
+function dqTapOpen(){return !!(DQ.preQ&&DQ.actTap&&Date.now()<=DQ.tw)}
+function dqTap(k,e){try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;const now=Date.now();const act=dqActTap(e.target);
+  /* the queue as it was when her finger came DOWN (the view's cards act on pointerup, before the click event); a click with no finger before it
+     (keyboard / an engine .click()) starts its own tap, a click nested inside her tap (jdfv dfRun clicks the docked card's button) does not */
+  if(k==="pointerdown"||k==="touchstart"||k==="keydown"||(k==="click"&&now-DQ.pdT>1500&&!dqParked())){DQ.preQ=new Set(Q);DQ.actTap=act;if(k!=="click")DQ.pdT=now}
+  if(!DQ.actTap)return/* not her act tap: nothing set aside, nothing moved (the old gates run as before) */;
+  DQ.tw=now+BAL.dayq.mineLook+(k==="pointerdown"||k==="touchstart"?1500:0);
+  /* (1) a card nobody can see is set aside while this event's handlers run (not over the new-day host / a mini-game: their own gates) */
+  /* set aside ONLY for a tap inside the person view she opened (its own act cards / docked card): a panel or box may hold a time-passing control */
+  if(DQ.tapIn&&!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
+  if((k==="click"||k==="pointerup"||k==="keydown")&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(dqParked())dqUnpark();
+    /* (2) what her tap queued comes first; painted at once when nothing shows it (over the view / in place of the box she tapped in) */
+    const M=$("modal"),shown=M&&!dqHidden(M)?Q[0]:null;const moved=dqMineFront();
+    if(Q.length&&!before.has(Q[0])&&(dqQHidden()||(moved&&shown&&Q[0]!==shown))){if(DQ.tapIn||moved)DQ.mine=Q[0];DQ.stat.mineTap=(DQ.stat.mineTap||0)+1;showModal();return}
+    /* the act may queue its card a moment later (the view's own act path / a reaction line first): look a few more times (BAL.dayq.mineLook ms) */
+    if(++n<4)setTimeout(look,BAL.dayq.mineLook/3)}catch(x){console.error("dayq mine",x)}};setTimeout(look,0)}}catch(x){}}
+window.dqTap=dqTap;
+function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;
+  if(t&&t.nodeType===1&&(a===document.body||a.contains(t)))return true;
+  /* the person view owns its docked card: her tap there (recorded when it landed, still the same event) is inside */
+  if(a&&a.classList&&a.classList.contains("kfoc")){if(ev===DQ.tapEv&&DQ.tapIn)return true;if(dqTapIn(t))return true}
+  return false}catch(e){return false}}
 /* the top card is the one already playing in the jdfv stage scene (its own repeated showModal) */
 function dqPlaying(){try{const D=window.DF;return !!(D&&Q[0]&&Q[0].dfSeen&&D.encM===Q[0]&&D.F)}catch(e){return false}}
 function dqActBlocks(){if(dqPlaying())return false;const a=dqActEl();return !!a&&!dqInside(a)}
 /* (c) an activity opened in the same tap as a card that was already painted (spend → card → mini-game): take the card back, unchosen */
-function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl())return;const D=window.DF,m=Q[0];let n=0;
+function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl()||(DQ.mine&&Q[0]===DQ.mine))return;const D=window.DF,m=Q[0];let n=0;
   if(D&&D.F&&D.encM===m&&m&&m.dfSeen&&!D.play){const F=D.F;m.dfSeen=0;D.encM=null;try{F.destroy()}catch(e){try{F.close()}catch(x){}}try{dfClosed(D.tk)}catch(e){}n=1}
   const M=$("modal");if(M&&!dqHidden(M)){DQ_HID.set.call(M,true);n=1}
   if(n){DQ.stat.pulled++;dqArmModal()}}catch(e){console.error("dayq pull",e)}}
@@ -98311,7 +98380,9 @@ function dqArmModal(){if(DQ.mt)return;const tick=DQ.mtf=()=>{clearTimeout(DQ.mt)
   if(dqQHidden()){if((DQ.ra=(DQ.ra||0)+1)<=BAL.dayq.rearm){DQ.stat.rearm++;DQ.mt=setTimeout(tick,dqPoll())}}else DQ.ra=0}catch(e){console.error("dayq modal",e)}};DQ.mt=setTimeout(tick,dqPoll())}
 function dqInstall(){
  /* (a) outermost nextBuoi: hold the turn while the old buổi's big moment is pending */
- const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}
+ const nb=nextBuoi;nextBuoi=function(){/* r3: a turn that starts while her tap has cards set aside (her act spent the last khắc) gets them back FIRST: an unseen card still holds the turn and is painted */
+  try{if(dqParked()){DQ.stat.parkTurn=(DQ.stat.parkTurn||0)+1;dqUnpark()}}catch(e){}
+  if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}
   /* r2: a card an inner wrapper queued WITHOUT painting during the turn (jagent agDrain «Có người tìm đến» runs before j9, which then returns on
      Q.length) is painted after the turn — whichever path ran it (tap, auto-advance, dqWait) */
   const r=nb.apply(this,arguments);try{if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.afterPaint++;dqPaintQ()}}catch(e){}return r};window.nextBuoi=nextBuoi;
@@ -98319,8 +98390,13 @@ function dqInstall(){
     queue nobody painted first (the M4 dead tap) and otherwise runs every module's nextBuoi wrapper like the auto-advance. Here only a re-entry
     guard: a click dispatched while her tap is still running (a nested .click()) is dropped — one tap = one turn */
  try{const n=$("next");if(n){const o=n.onclick;let tapIn=0;n.onclick=function(e){if(tapIn){DQ.stat.tapRe++;return}tapIn=1;try{return o?o.call(this,e):nextBuoi()}finally{tapIn=0}}}}catch(e){console.error("dayq next",e)}
+ /* r2: a save made while her tap has cards set aside writes them too (the saveable queue, jqsave) */
+ if(typeof save==="function"){const sv=save;save=function(){if(!dqParked())return sv.apply(this,arguments);const keep=Q;Q=Q.concat(DQ.park.filter(m=>!Q.includes(m)));try{return sv.apply(this,arguments)}finally{Q=keep}};window.save=save}
  /* (b) outermost showModal: nothing painted over the title card / book */
- const sm=showModal;showModal=function(){if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
+ const sm=showModal;showModal=function(){/* DIALOG-ORDER: the card she opened herself from inside the activity is hers — dqPull never takes it back */
+  try{if(dqTapOpen()&&dqMineFront())DQ.mine=Q[0]}catch(e){}/* r2: inside her tap, what she queued shows before the cards that were waiting */
+  try{if(dqUiC()&&Q.length&&Q[0]!==DQ.mine){const a=dqActEl();if(a&&dqInside(a))DQ.mine=Q[0]}}catch(e){}
+  if(dqUiC()&&Q.length&&!DQ.user&&!(DQ.mine&&Q[0]===DQ.mine)&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}const r=sm.apply(this,arguments);try{if(dqUi()&&!Q.length)setTimeout(dqNextSync,0)}catch(e){}return r};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
@@ -100499,7 +100575,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5ab5b80e406e";window.CTM_BUILD=BUILD;
+const BUILD="a9a428dd0d55";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

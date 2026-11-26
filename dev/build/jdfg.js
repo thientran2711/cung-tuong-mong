@@ -16,7 +16,9 @@ const DFG={cur:null,ENG:{}};window.DFG=DFG;const DFG_MS=1000;/* ms per second (u
 function dfgL(pr,f){return pr[0]+(pr[1]-pr[0])*f}
 function dfgEase(eng,rank){let t=null;try{t=mgTier("df_"+eng,{occ:"df",rank,lv:0})}catch(e){}const top=(BAL.df.easeTop);return{t,f:cl(t?t.ease:0,0,top)/top}}
 function dfgSeg(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy;let u=L?((p.x-a[0])*dx+(p.y-a[1])*dy)/L:0;u=cl(u,0,1);return Math.hypot(a[0]+u*dx-p.x,a[1]+u*dy-p.y)}
-function dfgPath(name){try{const s=String(NWB.P[name]||"");return s.split(' d=\x22').slice(1).map(x=>new Path2D(x.split('\x22')[0]))}catch(e){return[]}}
+/* NGON-LAG (E96, owner OD 26/11 ~01:25Z «môn ngôn … lag lắm»): the kit sign paths are parsed ONCE per sign (was: every sign, every frame) */
+const DFG_PATHS={};
+function dfgPath(name){if(DFG_PATHS[name])return DFG_PATHS[name];try{const s=String(NWB.P[name]||"");const P=s.split(' d=\x22').slice(1).map(x=>new Path2D(x.split('\x22')[0]));if(P.length)DFG_PATHS[name]=P;return P}catch(e){return[]}}
 function dfgCol(){const O=typeof KIT_ODDS_COL!=="undefined"?KIT_ODDS_COL:[];return{ink:kg82Col("--ink",kg82Col("--body-ink","#3b2a1c")),gold:kg82Col("--gold","#c99a1e"),red:O[0]||"#b8321f",green:O[O.length-1]||"#2d7a52",paper:kg82Col("--paper","#f6eedc")}}
 function dfGame(eng,o){const E=DFG.ENG[eng];if(!E||!o||!o.box||!o.fig)return null;if(DFG.cur)DFG.cur.destroy();
  const B=BAL.df[eng],top=BAL.df.rawTop,box=o.box,cv=document.createElement("canvas");cv.className="kfoc-cv";cv.setAttribute("aria-hidden","true");
@@ -33,7 +35,9 @@ function dfGame(eng,o){const E=DFG.ENG[eng];if(!E||!o||!o.box||!o.fig)return nul
  E(c);let last=0;
  const frame=()=>{if(c.done)return;const t=c.now(),dt=last?t-last:0;last=t;if(c.tick)c.tick(dt,t);if(c.done)return;
   if(t>=(c.ms||B.ms)){c.timeout?c.timeout():c.end(0);return}
-  g.clearRect(0,0,W,H);try{c.draw&&c.draw(g,t)}catch(e){}try{o.hud&&o.hud({time:Math.max(0,Math.ceil(((c.ms||B.ms)-t)/DFG_MS))})}catch(e){}c.raf=requestAnimationFrame(frame)};
+  g.clearRect(0,0,W,H);try{c.draw&&c.draw(g,t)}catch(e){}
+  /* NGON-LAG: the kit clock chip is rebuilt only when its whole second changes (was: its HTML rewritten every frame = a layout + paint per frame) */
+  const sec=Math.max(0,Math.ceil(((c.ms||B.ms)-t)/DFG_MS));if(sec!==c.hudSec){c.hudSec=sec;try{o.hud&&o.hud({time:sec})}catch(e){}}c.raf=requestAnimationFrame(frame)};
  function stop(){cancelAnimationFrame(c.raf);cv.removeEventListener("pointerdown",dn);cv.removeEventListener("pointermove",mv);cv.removeEventListener("pointerup",up);cv.removeEventListener("pointercancel",up);cv.remove();if(DFG.cur===h)DFG.cur=null}
  const h={c,skip(){if(c.done)return;c.done=true;stop();try{o.onDone&&o.onDone({raw:null,skipped:true})}catch(e){console.error(e)}},destroy(){c.done=true;stop()},
   /* test / measure oracle (never drawn): where the target is now */peek(){return c.peek?c.peek(c.now()):null},canvas:cv};

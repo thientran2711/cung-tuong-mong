@@ -89,15 +89,19 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
  else if(p.kind==="th"){rank="Thái hậu";lines=[tuoi(S.thAge),`Thái hậu → ta: thiện cảm <b>${S.th}</b>`]}
  else{const a=String(p.info||"").split(" · ");rank=a.shift()||"";lines=a;const ag=p.kind==="maid"?S.maid.age:p.kind==="ty"?(S.court&&S.court.ty||{}).age:p.kind==="ksp"?(S.court&&S.court.ksp||{}).age:p.kind==="peddler"?(S.court&&S.court.ped||{}).age:p.kind==="kid"&&p.ref?p.ref.age:p.kind==="fallen"&&v?v.age:0;if(ag&&p.kind!=="kid")lines.unshift(tuoi(ag))}
  const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=talkK(a);const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
-  const why=a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);
+  const why=done?POP_DONE:a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);
   return pbtn(`class="opt" data-o="${j}"`,a.n,sm,why)});
  /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the acts are split into GROUP TABS (the Hành sự categories, KIT_CAT via kitActCat; the same
     .pctabs/.pct row + "làm được/tổng" count as every other person card); one group = no tab row. The result of an act is NOT a note in the column:
     it goes to the standard bottom result card (#rtoast, j65 talk) — so the card carries no note here (popMsg stays the state the log sync reads). */
  const gk=[],gb={};opts.forEach((a,j)=>{let c="khac";try{c=(typeof kitActCat==="function"&&kitActCat(a.n))||"khac"}catch(e){}if(!gb[c]){gb[c]=[];gk.push(c)}gb[c].push(B[j])});
  const gn=c=>typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:c==="khac"?"Khác":c;
- const groups=done?[]:gk.length>1?gk.map(c=>[gn(c),gb[c]]):[["",B]];
- return pcard({f,col,name:p.name,rank,ghen,lines,chips,close,note:"",groups,empty:done?"Lần ghé này đã nói chuyện với người này rồi.":"Không có việc gì để làm với người này."})}
+ const groups=gk.length>1?gk.map(c=>[gn(c),gb[c]]):[["",B]];
+ return pcard({f,col,name:p.name,rank,ghen,lines,chips,close,note:"",groups,empty:done?POP_DONE:"Không có việc gì để làm với người này."})}
+/* DIALOG-ORDER r2 (E96r FAIL 2, OD:L317 «nút làm được nằm trên cùng, nút mờ xuống dưới»): after she talked with a person this visit the card used to
+   DROP every act — the person view (jdfv / kitFocus, built from this card) stood empty with only ✕ («nút bấm không thấy gì»). Now every act stays,
+   dimmed (kit pbtn disabled + its reason), so the view / pop-up shows what was done and why nothing more can be done this visit. ONE text. */
+const POP_DONE="Lần ghé này đã nói chuyện với người này rồi.";
 
 /* ---- the Emperor / herself, opened as a card in the dialog ---- */
 function empCardHTML(){const E=S.emp;return pcard({f:pEmp(),col:"#f0d070",name:empNm(),rank:"Hoàng thượng",rows:[["Niên hiệu",empEra(),"t"]],lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
