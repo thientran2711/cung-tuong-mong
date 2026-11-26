@@ -84,3 +84,17 @@ Hang files: CDN img/_review/renderer-mem/5e013076-tp-{hot-2,off-3,hot-3}-hang.js
 ## F10 renderer memory (for the F10 workers)
 - «Page crashed» = memcg OOM kill (dmesg, 7 kills, chrome renderer anon-rss 5.1–9.2 GB). Harness rssTree under-reports (logged 1.7 GB vs ps 8.5 GB).
 - Leak signature: page stuck/idle on one screen, renderer +~280 MB/min until killed (timid-2 b77 01:08–01:35Z after «Chương 2: Sơ thừa ân sủng» card; off-1 b286). Normal play 1.3–2.5 GB. Sampler: /home/user/wt/rsslog.sh -> rsslog.txt. Evidence CDN img/_review/renderer-mem/.
+
+## FOR FOREMAN F (harness owner), 26/11 08:58Z
+The selection-scene block on LIVE ≥ f009e1a6 (6b5d3d05 included) is a ROBOT GAP, not a game softlock.
+
+Proof:
+- /home/user/wt/probe/cardtap.js loads off-1's stuck save, taps the VIỆC scene card (`.kscn-veil .kdv-next`, «Chạm để tiếp ▸», tap point about 40 px above the cue on the card), and the scene goes on.
+- After 2 taps the «Đông sở» choice frame opens.
+
+The robot never taps the card. Its INFO / LAYER sets have no `.kscn-veil`, so it keeps tapping the nav under the veil and hits DEAD BUTTON «cover div.kscn-veil». Then its stuck detector fires («Sang buổi disabled with no dialog on screen»).
+
+Local fix (review/temper-g4 robot-rt.js, INFO()):
+- Return the card point when `.kscn-veil .kdv-next` is visible.
+- Key per card text, because infoTry caps 3 taps per key and a scene has many cards.
+- Please port it into the shared harness.
