@@ -41,6 +41,13 @@ const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=e
      const c=(deserQ(L)||[]).find(x=>x&&x.t===m.t);S.bac=(S.bac||0)+9999;const buy=c&&(c.opts||[]).find(x=>x.n==='Mua tin');if(buy)buy.go();
      const K=S.kf[o.id]||{};res={same:!!buy&&K.s===o.sung,rk:m.rk||null,kf:K.s,sung:o.sung,carried:true};o.sung=s0;break}}catch(e){res={err:String(e&&e.message)}}
     out['knSell carried go']=res}
+   /* 2d. r7 (probe Fold s1 REMAKE-FAIL tsbAp person gone): a waiting visitor card whose servant has left the palace is withdrawn at the write
+      (as a reload would drop it), the card on screen is kept */
+   {let res={err:'no rival staff'};try{const v3=V.find(x=>(x.staff||[]).some(y=>y&&y.name&&y.sid!=null));if(v3){const sv=v3.staff.find(y=>y&&y.name&&y.sid!=null);
+     const m=apWrapped('svDefect',{who:sv,tgt:v3});if(m){Q.length=0;const front={t:'Thẻ đang mở',h:'',opts:[{n:'Ừ',fx:{}}]};Q.push(front,m);const i=v3.staff.indexOf(sv);v3.staff.splice(i,1);
+      const mh=$('modal').hidden;$('modal').hidden=false;save();const after=Q.includes(m),fr=Q.includes(front);$('modal').hidden=mh;v3.staff.splice(i,0,sv);Q.length=0;
+      res={same:!after&&fr,rk:m.rk||null,withdrawn:!after,frontKept:fr}}else res={err:'svDefect not made'}}}catch(e){res={err:String(e&&e.message)}}
+    out['visitor gone withdrawn']=res}
    /* 3. jtoilr answers on a reaction card (a slight from a consort) */
    run('toil rx',()=>{Q.length=0;const k='rival-tease';TOIL_POP.length=0;
      TOIL_POP.push({k,who:pv(v),host:v,n:-4,name:v.name,line:'son phấn nhạt'});toilFlush();return Q.find(x=>x&&x.toilEv===k)});

@@ -251,6 +251,15 @@ const tsbApCard=rcpReg("tsbAp",(kd,h,v,s)=>{if(typeof h!=="string")return null;
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){const m=a0.apply(this,arguments);try{if(m&&m.opts&&m.t==="Thái hậu triệu"){const c=tsbApCard("th",String(m.h||""));if(c)Object.assign(m,c)}
   else if(m&&m.opts&&/xin theo ngươi/.test(String(m.h||""))){const H=String(m.h);const vic=liveRivals(true).find(v=>(v.staff||[]).some(s=>s.name&&H.includes(s.name)&&H.includes(v.name)));const s=vic&&(vic.staff||[]).find(x=>x.name&&H.includes(x.name));if(s&&vic){
    const c=tsbApCard("sv",H,vic,s);if(c)Object.assign(m,c)}}}catch(e){console.error("tsb approach2",e)}return m}})();
+/* save r7 (probe Fold s1 REMAKE-FAIL tsbAp «person gone», LAW 11 + 6b): a visitor card (j24 ap.*, tsbAp) waits in Q while its visitor leaves the
+   palace (dismissed, framed out, dead — gone from every list). A reload drops such a card (rcpMk: person gone) while the live game kept offering it
+   (e.g. «Thu làm tai mắt» on a servant no longer there). ONE rule for both: a waiting visitor card whose people are gone is withdrawn before it is
+   shown and at every write — the card on screen stays (she is answering it) */
+const RCP_VISIT=/^(ap\.|tsbAp$)/;
+function rcpVisitGone(m){if(!m||!m.rk||!m.ra||!RCP_VISIT.test(m.rk))return false;try{rcpDec(m.ra);return false}catch(e){return true}}
+function rcpVisitPurge(keep0){try{for(let i=Q.length-1;i>=(keep0?1:0);i--)if(rcpVisitGone(Q[i])){const m=Q.splice(i,1)[0];console.warn("visitor gone, card withdrawn:",m.rk,m.t)}}catch(e){console.error("rcpVisitPurge",e)}}
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){rcpVisitPurge(!$("modal").hidden);return s0.apply(this,arguments)}})();
+(function(){if(typeof save!=="function")return;const s0=save;save=function(){rcpVisitPurge(!$("modal").hidden);return s0.apply(this,arguments)}})();
 /* the cold-palace letter: helping a deposed consort is kind, but the court notices who sides with her (Hoàng hậu) */
 (function(){const p0=PEND.coldletter;if(!p0)return;PEND.coldletter=p=>{const d=p0(p);try{if(d&&d.o&&d.o[0]&&queenP()&&queenP()!==S){const g=d.o[0];g.fx=Object.assign({},g.fx,{hh:-3});g.x=(g.x?g.x+" · ":"")+"Hoàng hậu không vui vì ngươi dính dáng người lãnh cung"}}catch(e){}return d}})();
 /* the mocker's flag: an easy target draws more bullying from her (same rule for everyone through mindMenu) */
