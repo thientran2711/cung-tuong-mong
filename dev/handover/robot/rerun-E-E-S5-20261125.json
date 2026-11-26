@@ -1,7 +1,16 @@
 {
  "unit": "E-S5",
+ "E_rule_mg_unplayed_flag": [
+  "R5-greedy-2",
+  "R5-greedy-3",
+  "R5-greedy-4",
+  "R5-lazy-2",
+  "R5-lazy-4",
+  "R5-lazy-5"
+ ],
+ "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 12,
+ "finished": 13,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -412,7 +421,9 @@
      "msg": "no-clock loop: 150 taps without a clock step on .dlg «Đã biết về Quý nhân Tô Nghi Tu»"
     }
    ],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-cautious-3",
@@ -451,7 +462,9 @@
     "taps": 439
    },
    "bugs": [],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-cautious-4",
@@ -485,7 +498,9 @@
     "taps": 5649
    },
    "bugs": [],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-cautious-5",
@@ -3066,7 +3081,9 @@
      "msg": "no progress 15 min on .dlg «Tin báo»"
     }
    ],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-greedy-1",
@@ -3295,7 +3312,9 @@
      "msg": "no progress 15 min on .dlg «Tin báo»"
     }
    ],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-greedy-2",
@@ -4109,7 +4128,9 @@
      "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Điền Thanh Diên» (each close pops one; looks like a dead ✕)"
     }
    ],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-greedy-3",
@@ -6505,7 +6526,9 @@
      "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Lịch tháng / Mục lục / Chương 7 · Lạy hay vái / Chứng cứ về Phế phi Khương Vân Thường / Đã biết về Phế phi Khương Vân Thường / Chương 7 · Lạy hay vái)"
     }
    ],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-greedy-4",
@@ -12839,7 +12862,9 @@
      "msg": "every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui)"
     }
    ],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-lazy-2",
@@ -12915,7 +12940,9 @@
      "msg": "tab crashed (Page crashed) at buổi 64"
     }
    ],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": 65,
+   "mgReady": 19
   },
   {
    "life": "E-S5-R5-lazy-4",
@@ -12962,7 +12989,70 @@
     "taps": 2068
    },
    "bugs": [],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": 30,
+   "mgReady": null
+  },
+  {
+   "life": "E-S5-R5-lazy-5",
+   "dev": "fold",
+   "bot": "quiet",
+   "seed": 2279197099,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "death": true,
+   "age": 30,
+   "buoi": 1847,
+   "harness": {
+    "kind": "realtap",
+    "sha": "d2e03d80",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 1,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "build": {
+     "s": "bf6dd041+",
+     "b": "0281bf7bcef6",
+     "t": "2026-11-26T06:59Z"
+    },
+    "areaTaps": 3772,
+    "dlgScroll": 638,
+    "scrolls": 721,
+    "dlgClose": 467,
+    "infoTaps": 1341,
+    "mgDragSkip": 101,
+    "kfocVisits": 6,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-26T07:55:10.057Z",
+      "buoi": 436,
+      "from": "2026-11-26T07:54:23.199Z"
+     },
+     {
+      "at": "2026-11-26T08:39:16.236Z",
+      "buoi": 661,
+      "from": "2026-11-26T08:37:57.059Z"
+     },
+     {
+      "at": "2026-11-26T09:55:35.200Z",
+      "buoi": 1160,
+      "from": "2026-11-26T09:55:01.107Z"
+     }
+    ],
+    "mgReady": 41,
+    "backdropTaps": 1,
+    "taps": 3603
+   },
+   "bugs": [],
+   "exitPick": null,
+   "mgDragSkip": 101,
+   "mgReady": 41
   },
   {
    "life": "E-S5-R5-lover-1",
@@ -12999,7 +13089,9 @@
     "taps": 480
    },
    "bugs": [],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   },
   {
    "life": "E-S5-R5-lover-3",
@@ -13038,7 +13130,9 @@
     "taps": 570
    },
    "bugs": [],
-   "exitPick": null
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
   }
  ],
  "parked_stuck_gamebug": [
