@@ -71,3 +71,6 @@ Fix wanted: on the host, run the sweep (deedSync of every world person) BEFORE t
 - **coop-e2e on f068313b (live Worker) 143/143** (the R#9.dw seat diff is gone).
 - G1 one-core-guard: the worker's run reports PASS; this reviewer's full coregates run on 4b693c7a (same gates) failed only on the known LIVE faults.
 Land after the worker's coop-e2e ×3 are all 143/143 too. Wipe the CDN folder img/_review/charge-trinh-punish/ at landing.
+
+## MERGE DELTA f068313b → ac73cd3c (origin/main 1dcb373e, coop-freeze-kmrew scroll-cue): **PASS ac73cd3c**
+`git merge-tree` of f068313b + 1dcb373e = ac73cd3c for every source file (only index.html / sw.js / assets.json differ = rebuilt); FF from LIVE 1dcb373e; fresh build_site.sh = committed except stamps; no new duplicate functions vs LIVE; charge-trinh-punish + charge-followups ALL PASS, 0 page errors. coop-e2e ×3 + quickcheck = worker #6's run (land only if all 143/143 and quickcheck shows only the known LIVE faults).
