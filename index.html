@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bb0ae651","t":"2026-11-26T08:38Z","c":"Bớt minigame: điểm trang một lần bấm theo Dung (còn nút «Tự tay điểm trang»); tát và né thành một lần gieo; «Học nhanh» lên Tùy duyên; chăm…","b":"7d4b29c31209","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"be7e8326+","t":"2026-11-26T08:48Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt.","b":"9b7ad40a7fbc","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1539,7 +1539,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Nói thật lòng",o:od(cx2O(S,"true")),w:{...BAL.ag.cx2.true.w},l:{...BAL.ag.cx2.true.l},x:`biết thêm một điều ngài thích hay không ưa: ${chanceW(BAL.ag.cx2.true.disc)}`,go:()=>{if(roll(BAL.ag.cx2.true.disc))discover()}},
    {n:`Phô tài: ${b.n}`,c:{...BAL.ag.cx2.show.c},o:od(cx2O(S,"show")),w:{sung:BAL.ag.cx2.show.w.sung+b.l,danh:BAL.ag.cx2.show.w.danh},l:{...BAL.ag.cx2.show.l}},
    {n:K.flower?`Dâng ${L.flower}`:"Dâng một cành hoa",c:{bac:-BAL.deck.qf.bac},o:K.flower?100:od(BAL.deck.qf.o),w:{sung:K.flower?BAL.deck.qf.wKnown:BAL.deck.qf.w},l:{}}];
-  if(S.sung>=BAL.ag.cx2.favor.min)A.push({n:"Xin ân điển",o:od(cx2O(S,"favor")),w:{...BAL.ag.cx2.favor.w},l:{...BAL.ag.cx2.favor.l},fail:()=>{if(E.mood===3&&roll(BAL.ag.cx2.favor.angry))punish("làm phiền lúc thánh thượng nổi giận",1)}});
+  if(S.sung>=BAL.ag.cx2.favor.min)A.push({n:"Xin ân điển",o:od(cx2O(S,"favor")),w:{...BAL.ag.cx2.favor.w},l:{...BAL.ag.cx2.favor.l},fail:()=>{if(E.mood===3&&roll(BAL.ag.cx2.favor.angry))punish("làm phiền lúc thánh thượng nổi giận",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */)}});
   if(has("chamchinh"))A.push({n:"Bàn chuyện triều chính",o:od(cx2O(S,"court")),w:{...BAL.ag.cx2.court.w},l:{...BAL.ag.cx2.court.l}});
   return A}
  if(p.kind==="th"){if(false)return[{n:"Xin xăm ở Phật đường",o:100,fix:1,x:"rút hai quẻ, giữ quẻ tốt hơn",run:()=>{reLot(true);return "Ngươi thắp hương, xin một quẻ mới."}},];const t=liveRivals(false).filter(x=>x.ev>0).sort((a,c)=>c.ev-a.ev)[0];return[
@@ -2418,13 +2418,19 @@ function oBlock(a){return odA(a,50+a.tamco/5+eyes(a)*3)}
 function oPlant(a,t){return odA(a,40+a.tamco/3+eyes(a)*3-t.maid.loyal/4)}
 function oVP(a){return odA(a,55+a.danh/5)}
 /* punishment by standing: the same for every consort */
-/* months of cấm túc a punishment gives (one source: punish() and every card that names the risk) */
-function punishMonths(){const M=BAL.tw.g.confM;return has("nongnay")?M[1]:has("nhantu")?M[2]:M[0]}
+/* PUNISHMENT BY WEIGHT (review/home-way, owner OD 26/11 ~04:25Z): sev 0 = nhẹ, 1 = vừa (default), 2 = nặng; numbers BAL.punW (jtwoway).
+   punTemper = the column of the Emperor's temper: 0 thường, 1 nóng nảy, 2 nhân từ */
+function punTemper(){return has("nongnay")?1:has("nhantu")?2:0}
+/* months of cấm túc a punishment of weight sev gives (one source: punish() and every card that names the risk); nhẹ = 0 */
+function punishMonths(sev){if(sev==null)sev=1;const W=BAL.punW;return sev<=0?0:sev>=2?W.heavy.m[punTemper()]:W.mid.m[punTemper()]}
+/* months of khất bổng a light punishment gives (0 = a warning only) */
+function punishCut(){return BAL.punW.lite.cut[punTemper()]}
 /* the chance a heavy punishment also demotes (the roll in punish + the warning text aaPunishTxt read this ONE function) */
-function punishDemoP(){return has("nongnay")?100:has("nhantu")?25:50}
-function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}
+function punishDemoP(){return BAL.punW.heavy.demo[punTemper()]}
+function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}if(sev==null)sev=1;
+  if(sev<=0){const c=punishCut();if(c>0){p.cutPay=Math.max(p.cutPay||0,c);p.cutBy=""}log(`<span class="r">${NMc(p)} bị ${c?`khất bổng ${c} tháng`:"cảnh cáo"} vì ${why}.</span>`);return}
   if(sev>=2&&rkOf(p)>0&&roll(punishDemoP())){seatPut(p,seatDown(p,rkOf(p)-1));log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);return}
-  const m=punishMonths();p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
+  const m=punishMonths(sev);p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
   if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});if(rkOf(p)>0)seatPut(p,seatDown(p,rkOf(p)-1));p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);return}
   if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);return die(why)}
@@ -2509,7 +2515,7 @@ function stealNight(a,t,mode){ap(a,stealCost(mode));const o=oSteal(a,mode);
 function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)} theo ${n} chứng cứ. `;evA(q,p,BAL.evWipe);relAdd(q,p,BAL.eff.j8.judge);punish(p,"bị Hoàng hậu xử tội",n>=3?2:1);return r}
 function vpItems(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e.w&&IT[e.k]&&itm(e.k).rk>r);if(p.dress&&p.dress.until>S.turn&&itm(p.dress.k).rk>r)L.push({k:p.dress.k,dress:1});return L}
 function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=>itm(e.k).n).join(", ");
- if(roll(oVP(a))){ilFilter(t,e=>!(e.w&&(IT[e.k]||{}).rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",1);relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
+ if(roll(oVP(a))){ilFilter(t,e=>!(e.w&&(IT[e.k]||{}).rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */);relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
  ap(a,{danh:BAL.eff.j8.vpFailDanh});relAdd(a,t,BAL.eff.j8.vpAccuse_2);return `${NMc(a)} tố ${NM(t)} vượt phẩm, ${judgeName(t)} bỏ qua. `}
 
 /* ================= ITEMS ================= */
@@ -5165,7 +5171,8 @@ function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h
 /* keep the Pixi scene the size of the stage whenever the layout changes (not only on window resize) */
 (function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}try{if(typeof kitStagePause==="function")kitStagePause()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
 /* every disabled button says why */
-function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=BAL.time.khac?"hết khắc buổi này":"Sức dưới "+(BAL.time.sucMin)+"";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
+/* review/home-way-nits (law 11): a reason the code KNOWS (data-why, the kit reason attribute: j75 lk, jplrule homeWay, jfx kfWhy) wins over any guess */
+function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";if(b.dataset&&b.dataset.why)return b.dataset.why;const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=BAL.time.khac?"hết khắc buổi này":"Sức dưới "+(BAL.time.sucMin)+"";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
 (function(){const kf=kitFix;kitFix=function(root){kf(root);(root||document).querySelectorAll(".rbtn button:disabled,.btn:disabled,.pcb button:disabled").forEach(b=>{if(b.querySelector(".kwhy"))return;const sm=b.querySelector("small");const w=guessWhy(b);if(!w)return;if(sm)sm.insertAdjacentHTML("afterbegin",`<span class="kwhy">${w}</span> `);else b.insertAdjacentHTML("beforeend",`<small><span class="kwhy">${w}</span></small>`)})}})();
 /* ================= BỔNG LỘC (monthly, every consort by the same ladder) and ÂN THƯỞNG ================= */
 /* bổng lộc by rank: BAL.pay (jecon) is the one table; BL is its mirror for old readers, filled by jecon (one-core: the typed 30…320 here disagreed with the 40…280 paid) */
@@ -28637,7 +28644,7 @@ Object.assign(BAL,{tw:{
  cold:{suc:-10},         /* petition to leave lãnh cung (j14 'Tìm chứng cứ minh oan'; NPC release attempt pays it too) */
  accBestow:40,            /* Tố giác thành: chance of a reward from the throne (was 100 for NPCs, 40 for her) */
  /* gains (one source, read by both sides and by the option text) */
- g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,illCatch:15,illDanh:6,confM:[2,3,1],preg:[6,5,-5],ann:[6,5,6],
+ g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,illCatch:15,illDanh:6,confM:[2,3,1]/* = BAL.punW.heavy.m (one array) */,preg:[6,5,-5],ann:[6,5,6],
     provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10,admon:5,admonCd:6,
     accFail:[8,25,20],vu:[10,5,4],ky:[3,1],conf:[20,15],reward:[20,10,3],
     /* pillow slander at night (her night2 option and an NPC's night, two-way row 24, AG2): odds = o[0] + Ân tình / o[1] + night score × o[2]
@@ -28726,6 +28733,15 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   if(p.kind==="th"&&a.n==="Thỉnh an, chép kinh"){a.c=twCost("thTH");a.o=od(g.thTHo);a.w={th:g.thTH[0],danh:g.thTH[1],duc:g.thTH[2]};a.l={th:g.thTH[3]}}
   if(p.kind==="hh"&&a.n==="Thỉnh an"){a.c=twCost("thHH");a.o=od(g.thHHo);a.w={hh:g.thHH[0],danh:g.thHH[1],duc:g.thHH[2]};a.l={hh:g.thHH[3]}}}}
   if(p&&p.kind==="ksp")for(const a of A)if(a.n==="Đút lót lật thẻ"){a.c=twCost("ksp");a.go=()=>{S.tablet=G().ksp}}}catch(e){}return A}})();
+
+/* PUNISHMENT BY WEIGHT (owner OD 26/11 ~04:25Z, review/home-way: «tùy thuộc vào cái mức độ nặng nhẹ mà mình cho nó cấm túc»; law 2/3/4):
+   punish(p, why, sev) (j8), the same for her and every NPC (law 1). Each array = [Hoàng thượng thường, nóng nảy, nhân từ].
+   lite  (sev 0, NHẸ: a place / etiquette slip, e.g. staying past closing): no cấm túc; cut = months of khất bổng (Nội vụ phủ holds back
+         3 phần 10 of the next stipend, j20 cutPay); 0 = a warning only.
+   mid   (sev 1, VỪA: the common fault): m = months of cấm túc; S.confined counts down at each new month (j3 monthTick), so 1 = the rest of
+         the current month (a few days to 4 weeks).
+   heavy (sev 2, NẶNG: grave crimes): demo = chance (in 100) of losing one rank instead; else m months of cấm túc (= BAL.tw.g.confM). */
+try{BAL.punW={lite:{cut:[1,1,0]},mid:{m:[1,2,1]},heavy:{m:BAL.tw.g.confM,demo:[50,100,25]}}}catch(e){console.error("punW",e)}
 
 /* ================= j60 PORTRAIT KIT (owner 11/14, dev/kit/KIT.md): every portrait = role/rank FRAME (rectangular 3:4, img/kit/frame-*.webp)
    + BROCADE ground (https://ctm-img.victoria-tntt.workers.dev/img/kit/bg-*.webp) + rank gem / servant token / origin emblem badge; small round avatars (mdH) get the
@@ -41586,7 +41602,7 @@ function wdAccuse(a,t){const c=wdCause(a,t);const truth=wdStatus(t);const judge=
  if(!aRoll(oVP(a),a)){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} hặc ${T0} ${WD_ST_WORD[truth]}, ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.j92.danhWdAccuse_2)}. `:""}`}
  relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});const w=wdOf(t);
  if(truth==="over"){const gone=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&wdP(e,t)>wdPOf(t)&&!(it.nt&&e.own===wdKey(t))){gone.push(it.n);w[sl]=null;const k=wdDefault(t,sl);if(k)w[sl]={k,from:"base"}}}
-  ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});punish(t,"ăn mặc vượt phẩm",1);return `${A0} hặc ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${gone.length?gone.join(", ")+" bị tịch thu. ":""}${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `}
+  ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});punish(t,"ăn mặc vượt phẩm",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */);return `${A0} hặc ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${gone.length?gone.join(", ")+" bị tịch thu. ":""}${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `}
  if(truth==="under"){ap(t,{danh:BAL.eff.j92.danhWdAccuse_4});return `${A0} hặc ${T0} ăn vận quá giản dị, làm mất thể diện hoàng gia: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} bị quở, Danh ${balSg(BAL.eff.j92.danhWdAccuse_4)}. `}
  ap(t,{danh:BAL.eff.j92.danhWdAccuse,sung:BAL.eff.j92.sungWdAccuse});punish(t,"mặc đồ đỏ vàng giữa quốc tang",2);return `${A0} hặc ${T0} mặc đồ đỏ vàng giữa quốc tang: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse)}, ${sgOf(t,BAL.eff.j92.sungWdAccuse)}. `}
 A("vp","Hặc ăn mặc sai phẩm",{c:{},ok:(a,t)=>!!wdCause(a,t),o:a=>oWd(a),x:"cần nguyên cớ: đã nghe người nhận xét, hoặc tai mắt báo nàng mặc sai phẩm",f:(a,t)=>wdAccuse(a,t)});
@@ -41686,7 +41702,7 @@ PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHel
   {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);apply({sung:BAL.eff.j92.sungGo,danh:BAL.eff.j92.danhGo});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. ${sgStat(BAL.eff.j92.sungGo)}, Danh ${balSg(BAL.eff.j92.danhGo)}.</p>`})}},
   {n:pp.how==="bị mất"?"Sai người lùng tìm":"Sai thợ lén sửa",fx:{bac:BAL.eff.j92.bacFx},p:Math.round(o+(100-o)*(100-BAL.eff.j92.wdHideCatch)/100)/* whole road: found, or not found and never comes out */,j67:`tốn: Bạc ${balSg(BAL.eff.j92.bacFx)} · kèm: không xong thì chuyện còn có thể lộ ra, bị phạt: ${chanceW(Math.round((100-o)*BAL.eff.j92.wdHideCatch/100))}`,go:()=>{if(roll(o)){Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p>${pp.how==="bị mất"?"Tìm lại được":"Thợ sửa khéo, không ai nhận ra"} ${it.n}.</p>`});log(`${it.n} ngự tứ đã ${pp.how==="bị mất"?"tìm lại được":"sửa xong"}.`)}
     else{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+3+R(4)};Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p class="r">${pp.how==="bị mất"?"Lùng khắp nơi không thấy":"Thợ sửa hỏng hẳn"} ${it.n}. Chuyện này còn có thể lộ ra.</p>`})}}},
-  {n:"Giấu đi, im lặng",fx:{},p:100-BAL.eff.j92.wdHideCatch/* law 7 (review/m-fix-3): the word = the whole road, the later coming-out included */,j67:`tốn: không tốn gì · kèm: ${BAL.eff.j92.wdHideDue[0]}–${BAL.eff.j92.wdHideDue[0]+BAL.eff.j92.wdHideDue[1]-1} tuần sau chuyện lộ ra thì ${sgStat(BAL.eff.j92.sungWdNtMonth)} và bị phạt (cấm túc ${punishMonths()} tháng, có khi giáng một bậc): ${chanceW(BAL.eff.j92.wdHideCatch)}`,go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+BAL.eff.j92.wdHideDue[0]+R(BAL.eff.j92.wdHideDue[1])};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
+  {n:"Giấu đi, im lặng",fx:{},p:100-BAL.eff.j92.wdHideCatch/* law 7 (review/m-fix-3): the word = the whole road, the later coming-out included */,j67:`tốn: không tốn gì · kèm: ${BAL.eff.j92.wdHideDue[0]}–${BAL.eff.j92.wdHideDue[0]+BAL.eff.j92.wdHideDue[1]-1} tuần sau chuyện lộ ra thì ${sgStat(BAL.eff.j92.sungWdNtMonth)} và bị phạt (cấm túc ${punishMonths(2)} tháng, có khi giáng một bậc): ${chanceW(BAL.eff.j92.wdHideCatch)}`,go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+BAL.eff.j92.wdHideDue[0]+R(BAL.eff.j92.wdHideDue[1])};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
 /* ngự tứ cannot be given away or used to frame anyone */
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return g0.apply(this,arguments)}})();
 (function(){const p0=plantItem;plantItem=function(a,t,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return p0.apply(this,arguments)}})();
@@ -46154,11 +46170,17 @@ function k3Shell(){try{if(window.COOPW&&COOPW.ctx)return;/* co-op thin: the othe
  /* reviewer stage-pets-r1: the left rail (KIT 33.11) is re-drawn by renderStage while the card page still hides the stage, so closing a person card left the painting WITHOUT the rail (no way back to the map): re-draw it when the card page opens / closes */
  if(wasPop!==gm.classList.contains("k3pop"))try{if(typeof kitStageRail==="object"&&kitStageRail.paint)requestAnimationFrame(()=>kitStageRail.paint())}catch(e){}
  let rb=$$("k3room");const hd=document.querySelector("header.hud");
- if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3Home()});hd.appendChild(rb)}
- /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view keeps it only while away from the room home */
- if(rb)rb.hidden=!alive||(on&&K3SH.home&&!pop);
+ if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3RoomTap()});hd.appendChild(rb)}
+ /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view hides it only on her own room's page
+    (review/home-way, owner OD 26/11 ~04:25Z: away from home, the place painting included, it is ALWAYS there: her way home) */
+ const away=!!(alive&&typeof homeWay==="function"&&(homeWay()||{at:1}).at===0);
+ if(rb){rb.hidden=!alive||(on&&K3SH.home&&!pop&&!away);rb.classList.toggle("hwaway",away)}
  document.querySelectorAll("#tabs [data-tab]").forEach(b=>b.classList.toggle("k3dim",on&&K3SH.home&&!pop))}catch(e){console.error("k3Shell",e)}}
 window.k3Shell=k3Shell;
+/* the top-bar «Về phòng» (review/home-way): away = the walk to HER OWN room (homeWay / homeGo, jplrule: «Về phòng · N khắc»), then her room's page;
+   at home = her room's page (the one-page view's way back from a tab). Never «Về <the place she is at>» (owner OD 26/11 ~04:25Z). */
+function k3RoomTap(){try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at){if(!homeGo())return}}catch(e){console.error("k3RoomTap",e);return}k3Home()}
+window.k3RoomTap=k3RoomTap;
 function k3Home(){K3SH.home=true;try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;if(typeof renderStage==="function")renderStage()}}catch(e){}const pw=$$("popw");if(pw&&pw.children.length)pw.innerHTML="";k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay();typeof kitFloorFit==="function"&&kitFloorFit()}catch(e){}},30)}
 window.k3Home=k3Home;
 /* owner 11/15 06:38Z: tapping the place she is AT on Dư đồ opens that place's stage (scene + the people there), like arriving — on the
@@ -46170,7 +46192,10 @@ function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";retu
   if(here&&k3Phone())k3ShowPlace();return r}}
  const g0=goTo;goTo=function(k){const fromMap=typeof tab!=="undefined"&&tab==="go";const p0=S&&S.place;const r=g0.apply(this,arguments);
   try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
- const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const t=S&&S.place&&S.place!=="home"?"Về "+k3PlaceName():"Về phòng";const l=rb.querySelector(".kbl");if(l&&l.textContent!==t){l.textContent=t;rb.setAttribute("aria-label",t)}rb.title=t}}catch(e){}return r};window.k3Shell=k3Shell})();
+ /* label = the ONE way-home rule (jplrule homeWay): «Về phòng · N khắc» away, «Về phòng» at home; second line = HER palace's name (the home mark) */
+ const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const w=typeof homeWay==="function"?homeWay():null;const t=w?w.label:"Về phòng",hn=w&&w.hn||"";
+  const l=rb.querySelector(".kbl");const txt=hn?t+"\n"+hn:t;if(l){let far=0;try{far=Math.max(BAL.walk.near,BAL.walk.far)}catch(e){}const sz=["Về phòng · hết khắc",`Về phòng · ${far} khắc`,"Về phòng",hn].reduce((a,x)=>x.length>a.length?x:a,"");if(l.dataset.sz!==sz)l.dataset.sz=sz}if(l&&l.textContent!==txt){l.textContent=txt;rb.setAttribute("aria-label",hn?`${t}, ${hn}`:t)}rb.title=w?w.title:t;
+  const dis=!!(w&&!w.at&&!w.ok);if(rb.disabled!==dis)rb.disabled=dis;if(dis)rb.dataset.why=w.why||"";else delete rb.dataset.why}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
@@ -46200,17 +46225,24 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
 /* KIT §75 painted back button (room / map): icon + short label, no bar */
 .kbackb{display:inline-flex;flex-direction:row;align-items:center;gap:5px;background:none!important;border:0!important;box-shadow:none!important;padding:0 6px!important;font-weight:600;color:var(--gold);white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .kbackb .kbi{width:30px;height:30px;max-width:none;flex:none;object-fit:contain;filter:drop-shadow(0 1px 1px #5a3a2040)}
-.kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:pre-line;text-align:left}
 .kbackb:active .kbi{transform:scale(.94)}
 /* phones < 600 px: icon only (label = tooltip / aria-label, same as the stat cells), sits under the menu button */
 /* kv3:.kv1 */html:where(.kv1) body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
- html:where(.kv1) body header.hud>#k3room.kbackb .kbl{display:none}
+ html:where(.kv1) body header.hud>#k3room.kbackb:not(.hwaway) .kbl{display:none}
+ /* review/home-way: away from home the one-page view shows the cost + her palace too */
+ html:where(.kv1) body header.hud>#k3room.kbackb.hwaway{padding:0 8px 0 2px!important;min-height:36px}
  /* icon missing (CDN 404, img removed by onerror): show the label so the button never becomes invisible */
  html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
  html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}
  html:where(.kv1) body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}
 html body .stage>#tomap.kbackb,html body #tomap.kbackb{background:#fffaf0e6!important;border:1px solid var(--line,#d9c49a)!important;border-radius:18px!important;padding:2px 12px 2px 6px!important;color:var(--ink,#3a2a1a);box-shadow:0 2px 8px #0004!important;min-height:38px;font-family:var(--display)}
 html body header.hud>#k3room.kbackb{justify-self:end;min-height:36px;max-width:100%}
+/* review/home-way-nits (law 10): ONE box per device for the way-home button: a label line never wraps (white-space:pre) and the label column is as wide
+   as the LONGEST label it can ever show (hidden sizer row = data-sz, set from homeWay: «Về phòng · hết khắc», «Về phòng · <far> khắc», her palace's name),
+   so the button keeps the same size at home, away and with no khắc left */
+html body header.hud>#k3room.kbackb .kbl{display:inline-grid;grid-template-columns:auto;white-space:pre;overflow:visible;text-overflow:clip}
+html body header.hud>#k3room.kbackb .kbl::after{content:attr(data-sz);grid-column:1;grid-row:2;height:0;overflow:hidden;visibility:hidden;white-space:pre;line-height:0}
 html body header.hud>#k3room[hidden]{display:none!important}
 html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* top bar time block (31.1): the bar grid, the stat cells and the two-line time block are kitStatRow / kitStatCell (jk4, KIT 32) */
@@ -47968,7 +48000,11 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv3:.kv1 */
  html:where(.kv1) body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
- html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:not(.hwaway):has(.kbi) .kbl{display:none}
+/* review/home-way (owner OD 26/11 ~04:25Z): away from home the one-page button shows its label under the icon:
+   «Về phòng · N khắc» + her palace's name, small, centred in the menu column */
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:none;padding:0 2px 2px!important}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:inline-grid;justify-items:center;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre;overflow:visible}
 /* KIT §0 one page (design-scale p2): the time column is ~40 % narrower than on the spread, so its two lines wrapped and the block grew taller
    than her name block (top bar 132 vs 129 px, +12 px with a state chip such as "Có thai"). On the one page the time block flows as ONE
    wrapping row of whole items (time, toilette, weather, quẻ, every K3_STATE chip; an item is never split, the next drops to a new 18 px line),
@@ -47987,6 +48023,9 @@ html:where(.kv1) body header.hud.khd3s #kstrow .kstl{font-size:0!important;line-
 html:where(.kv1) body header.hud.khd3s #kstrow .kstl .ic{font-size:0}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
+/* review/home-way-nits (spread only): away from home the one-row «menu me room tc stats» rule (.k3ph :has(#k3room)) out-ranked the two-row bar, so on iPad
+   1180 the time block was squeezed to ~40 px and drew over «Sắc»; the two-row bar (.khd2, kitHdFit) wins, the same as at home */
+html:where(.kv2) body .game#game.k3ph header.hud.khd2:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
 /* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
 html body header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv (review/mg-train, KIT §0 design scale): was @media (min-width:1000px) = the spread */
@@ -55861,9 +55900,9 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
 function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
 
-/* 20. "bị phạt" on cards = what punish() (j8) does: cấm túc N tháng (Hoàng thượng nóng nảy 3, nhân từ 1, thường 2);
-   a grave fault (sev 2) may instead cost one rank (nóng nảy: always, nhân từ: 1 in 4, else half the time) */
-function aaPunishTxt(sev){const m=punishMonths();return sev>=2?`bị phạt: cấm túc ${m} tháng, giáng một bậc: ${chanceW(punishDemoP())}`/* a side chance: chanceW, never a ladder word (KIT § odds words) */:`bị phạt: cấm túc ${m} tháng`}
+/* 20. "bị phạt" on cards = what punish() (j8) does, by weight (BAL.punW, review/home-way): nhẹ (sev 0) khất bổng / cảnh cáo; vừa (sev 1)
+   cấm túc BAL.punW.mid.m; nặng (sev 2) cấm túc BAL.punW.heavy.m or one rank lost (chance BAL.punW.heavy.demo) */
+function aaPunishTxt(sev){if(sev==null)sev=1;if(sev<=0){const c=punishCut();return c?`bị phạt: khất bổng ${c} tháng`:"bị cảnh cáo"}const m=punishMonths(sev);return sev>=2?`bị phạt: cấm túc ${m} tháng, giáng một bậc: ${chanceW(punishDemoP())}`/* a side chance: chanceW, never a ladder word (KIT § odds words) */:`bị phạt: cấm túc ${m} tháng`}
 (function(){if(typeof actLineRaw!=="function")return;const a0=actLineRaw;actLineRaw=function(k){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;const sev={frame:2,ksab:2,accuse:2}[k]||1;return h.replace(/bị phạt(?! ?[:(])/g,aaPunishTxt(sev))}})();
 
 /* 21. Lục rương (j2 + j78): the caught risk now carries the real numbers for this consort (relAdd −15 → thiện cảm −15, oán ta scaled
@@ -86463,7 +86502,7 @@ agRunReg("cx2:true",v=>{const ok=ag2Roll(v,"true");if(ok==null)return"";if(ok&&r
 agRunReg("cx2:show",v=>{const X=BAL.ag.cx2.show;if(!agcCan(v,X.c))return"";const o=odA(v,cx2O(v,"show")),ok=agTry(o);if(!ok&&agSoft(o)){ag2Soft(X.c);return ag2Res(v,"show",0,"")}agcPay(v,X.c);let lv=0;for(const a in v.arts||{})lv=Math.max(lv,v.arts[a]||0);
  ap(v,ok?{"sung":X.w.sung+lv,"danh":X.w.danh}:X.l);return ag2Res(v,"show",ok,ok?`${v.name} phô tài trước Hoàng thượng, được ngài khen`:`${v.name} phô tài trước Hoàng thượng nhưng vụng về`)});
 agRunReg("cx2:favor",v=>{const X=BAL.ag.cx2.favor;if((v.sung||0)<X.min)return"";const ok=ag2Roll(v,"favor",{});if(ok==null)return"";
- if(!ok&&!ag2Sf&&S.emp&&S.emp.mood===3&&roll(agCap(X.angry)))punish(v,"làm phiền lúc thánh thượng nổi giận",1);return ag2Res(v,"favor",ok,ok?`${v.name} xin được ân điển của Hoàng thượng`:`${v.name} xin ân điển, bị Hoàng thượng gạt đi`)});
+ if(!ok&&!ag2Sf&&S.emp&&S.emp.mood===3&&roll(agCap(X.angry)))punish(v,"làm phiền lúc thánh thượng nổi giận",0/* NHẸ (two-way): sếp OD 26/11 ~05:55Z */);return ag2Res(v,"favor",ok,ok?`${v.name} xin được ân điển của Hoàng thượng`:`${v.name} xin ân điển, bị Hoàng thượng gạt đi`)});
 agRunReg("cx2:court",v=>{const ok=ag2Roll(v,"court");if(ok==null)return"";return ag2Res(v,"court",ok,ok?`${v.name} bàn chuyện triều chính, Hoàng thượng tán thưởng`:`${v.name} bàn chuyện triều chính, Hoàng thượng không vừa ý`)});
 agRunReg("cx2:nurse",v=>{if(!(S.emp&&S.emp.ill))return"";const ok=ag2Roll(v,"nurse");if(ok==null)return"";if(ok&&empGive(v,BAL.ag.cx2.nurse.best,"nurse"))bestow(v,"nurse");
  return ag2Res(v,"nurse",ok,ok?`${v.name} sang Dưỡng Hòa điện sắc thuốc, hầu bên giường Hoàng thượng`:`${v.name} hầu thuốc Hoàng thượng đến kiệt sức`)});
@@ -91735,7 +91774,7 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
  const nm=J.map(k=>itm(k).n).join(", ");
  try{a.vpA92=wk();t.vpT92=wk()}catch(e){}
  if(!roll(oVP(a))){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.j92.danhWdAccuse_2)}. `:""}`}
- relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});dropJ();ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});/* the SAME keys as a Vượt phẩm outfit (j92 wdAccuse) */punish(t,"ăn mặc vượt phẩm",1);
+ relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});dropJ();ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});/* the SAME keys as a Vượt phẩm outfit (j92 wdAccuse) */punish(t,"ăn mặc vượt phẩm",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */);
  return `${A0} tố ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${nm} bị tịch thu. ${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `};window.wdAccuse=wdAccuse})();
 
 /* ---------- TỐ XA XỈ (act xx) ---------- */
@@ -92242,7 +92281,7 @@ Object.assign(BAL,{shelf:{
  seeDeeds:["call","visit","help","apol","provoke","humil","test","mediate","warn"],
  /* Tố xa xỉ / Tố vượt phẩm, the room cause. Nobody knows the scores (owner (d)): a charge rests on what one SAW, a TIP (rumour) or a GUESS; the inquiry settles the truth.
     guessO: a hostile NPC with nothing seen / heard still accuses on a guess guessO in 100 a month (npcO in 100 with something seen / heard); vp*: a ngự ban piece above rank is allowed, so a proven charge only sends it back to the chest */
- acc:{cdA:48,vpConf:1,/* proven vượt phẩm: a ngự ban piece only goes back to the chest (vpDanhT); any other over-rank piece is confiscated + punish(vượt phẩm, vpConf) */cdT:72,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
+ acc:{cdA:48,vpConf:0,/* = punish weight (BAL.punW): 0 NHẸ (sếp OD 26/11 ~05:55Z, review/home-way). proven vượt phẩm: a ngự ban piece only goes back to the chest (vpDanhT); any other over-rank piece is confiscated + punish(vượt phẩm, vpConf) */cdT:72,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
 
 /* ---------- new décor pieces (IT, kd "Bày biện"): only earned (bought, given, bestowed); names + one line each (player text, VANPHONG) ---------- */
 (function(){const D={
@@ -94236,10 +94275,12 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
 window.stClose=stClose;
 function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
 const bN=b=>{try{return String(BUOI[b]).toLowerCase()}catch(e){return ""}};
+/* review/home-way: staying past closing is a LIGHT fault (punish sev 0, BAL.punW.lite): the notice says the light price, never «như lẻn vào» */
+const stayPrice=()=>{try{const c=typeof punishCut==="function"?punishCut():0;return `bị bắt gặp thì Danh -${BAL.sneak.danh}, ${c?`khất bổng ${c} tháng`:"bị cảnh cáo"}`}catch(e){return "bị bắt gặp thì bị phạt nhẹ"}};
 function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k);/* wording TINBAO-WORDS (owner OD 25/11 ~23:36Z: no «=», the odds word once at the end, «ta») */
- if(c.now)return `${p} đã đóng cửa${w} mà ta vẫn nán lại${o?`, chẳng khác gì lẻn vào; may rủi: ${o}`:""}.`;
- if(c.lim)return `${p} chỉ được lưu đến hết ${bN(c.b)}${w}${o?`; quá giờ mà còn nán lại thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`;
- return `${p} sắp đóng cửa sau khắc này${w}${o?`; nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`}
+ if(c.now)return `${p} đã đóng cửa${w} mà ta vẫn nán lại${o?`; ${stayPrice()}; may rủi: ${o}`:""}.`;
+ if(c.lim)return `${p} chỉ được lưu đến hết ${bN(c.b)}${w}${o?`; quá giờ mà còn nán lại, ${stayPrice()}; may rủi: ${o}`:""}.`;
+ return `${p} sắp đóng cửa sau khắc này${w}${o?`; nán lại quá giờ, ${stayPrice()}; may rủi: ${o}`:""}.`}
 function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:c.lim?2:0].join("|")}catch(e){return ""}}
 function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ta vẫn nán lại`:c.lim?`${p} chỉ được lưu đến hết ${bN(c.b)}`:`${p} sắp đóng cửa sau khắc này`}
 /* the buổi+place whose limit she has been shown (the closing notice in any of its three lines): stayRoll punishes only after it */
@@ -94290,21 +94331,30 @@ if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="
    now closed to her (accessOf says no; not her own palace), the existing «Lẻn vào» caught row is rolled ONCE for that buổi: j41 accSneakO(k)
    odds (the same number the map's Lẻn vào button shows), caught = BAL.sneak.danh + punish (exactly accSneak's fail branch) and the guards
    walk her home (a caught sneak never stays inside). No new number. Seen key S.stayRoll (optional, old saves fine). */
-function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
+/* review/home-way (owner OD 26/11 ~04:25Z): NO FAULT ⇒ NO PUNISHMENT — noWay = at the end of the buổi she had no way home (the walk home
+   cost more khắc than she had left: the «Về phòng» buttons were disabled, homeWay / jplrule); she is escorted home, no loss.
+   A warned, caught overstay is NHẸ (punish sev 0, BAL.punW.lite: khất bổng / a warning, never cấm túc). */
+function stayRoll(k,bk0,noWay){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
  const bk=typeof bkey==="function"?bkey():"";if(bk===bk0||S.stayRoll===bk+"|"+k)return;if(typeof accOwn==="function"&&accOwn(S,k))return;
  if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
  const n=nm(k),why=(accessOf(S,k)||{}).why||"";
  /* place-rules: no punishment without a warning shown before (the closing notice of the buổi that just ended): unwarned = escorted out, no loss */
+ if(noWay){log(`${n} hết giờ tiếp${why?` (${why})`:""}; ngươi đã hết khắc, không kịp về: cung nhân tiễn ngươi về tẩm cung.`);if(typeof plHome==="function"){plHome(`${n} hết giờ tiếp, cung nhân tiễn ngươi về tẩm cung.`);try{render()}catch(e){}}
+  Q.push({t:"Hết giờ tiếp",h:`<p>${n} đã hết giờ tiếp${why?` (${why})`:""}. Ngươi đã hết khắc trong buổi, không kịp tự về; cung nhân cúi đầu tiễn ngươi về tẩm cung.</p><p class="past">Không phải lỗi của ngươi: không ai bắt tội.</p>`});try{showModal()}catch(e){}return}
  if(!warned(bk0,k)){log(`${n} hết giờ tiếp${why?` (${why})`:""}: cung nhân tiễn ngươi về tẩm cung.`);if(typeof plHome==="function"){plHome(`${n} hết giờ tiếp, cung nhân tiễn ngươi về tẩm cung.`);try{render()}catch(e){}}
   Q.push({t:"Hết giờ tiếp",h:`<p>${n} đã hết giờ tiếp${why?` (${why})`:""}. Cung nhân cúi đầu tiễn ngươi ra, đưa về tẩm cung.</p><p class="past">Lần này không ai bắt tội. Lần sau, xem Tin báo: nơi nào chỉ được lưu đến hết một buổi sẽ báo trước.</p>`});try{showModal()}catch(e){}return}
  if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
- apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);punish(S,`ở lại ${n} sau giờ đóng cửa`,1);
+ apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);const cut0=S.cutPay||0;punish(S,`ở lại ${n} sau giờ đóng cửa`,0);
  /* place-rules: the guards take her home AT ONCE (goTo("home") refused while a card was open: the stage stayed on the closed place) */
  if(typeof plHome==="function"){plHome(`Thị vệ giải ngươi rời ${n} về tẩm cung.`);try{render()}catch(e){}}else{window.__actPend=null;window.__walkFree=1;try{goTo("home")}catch(e){}finally{window.__walkFree=0}}
- Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?` cấm túc ${S.confined} tháng`:" bị phạt"}</p>`});
+ Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} · ${(S.cutPay||0)>cut0?`khất bổng ${S.cutPay} tháng`:"bị cảnh cáo"}</p><p class="past">Lỗi nhẹ: không bị cấm túc.</p>`});
  try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
 window.stayRoll=stayRoll;
-if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";const r=nb0.apply(this,arguments);try{stayRoll(k,bk0)}catch(e){}return r}}
+/* RV-HOME-WAY r6: «no way home» = she NEVER had the khắc to walk home while at this place in this buổi (she arrived with too few).
+   If the «Về phòng» button was enabled at some render and she spent the khắc on something else, staying was her choice: the warned
+   overstay roll stands (else spending every khắc at a closing place would always go unpunished and the closing notice would lie). */
+if(typeof render==="function"){const rn0=render;render=function(){const r=rn0.apply(this,arguments);try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at&&w.ok)window.__hwCan=(typeof bkey==="function"?bkey():"")+"|"+S.place}catch(e){}return r}}
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";let noWay=false;try{const w=typeof homeWay==="function"?homeWay():null;noWay=!!(w&&!w.at&&!w.ok)&&window.__hwCan!==bk0+"|"+k}catch(e){}const r=nb0.apply(this,arguments);try{stayRoll(k,bk0,noWay)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 window.actPendRun=function(){return actPendRun()};
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
@@ -94985,7 +95035,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2",title:"kit
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="krailb kglyph kntb kbusy kbadge" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0">!</i></button>`+
   `<button type="button" class="krailb kglyph kntb kntcalm" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0;opacity:.5">!</i></button>`+
   `<span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ngự hoa viên sắp đóng cửa sau khắc này</span></span>`+
-  `<button type="button" class="btn" onclick="kitNotice({id:'kitpg',line:'Ngự hoa viên sắp đóng cửa sau khắc này',text:'Ngự hoa viên sắp đóng cửa sau khắc này (đóng cửa tối); nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: Có cơ.'});kitNoticeOpen('kitpg')">Mở khung Tin báo</button></div>`})}catch(e){}
+  `<button type="button" class="btn" onclick="kitNotice({id:'kitpg',line:'Ngự hoa viên sắp đóng cửa sau khắc này',text:'Ngự hoa viên sắp đóng cửa sau khắc này (đóng cửa tối); nán lại quá giờ, bị bắt gặp thì bị phạt nhẹ; may rủi: Có cơ.'});kitNoticeOpen('kitpg')">Mở khung Tin báo</button></div>`})}catch(e){}
 }catch(e){console.error("jnotice",e)}})();
 /* ================= jsmg: THE STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT row 3b; numbers BAL.steal.mg, jbal2) =================
    Owner: "nếu mà tôi win cái mini game đó thì sẽ tăng cái cơ hội tranh sủng của tôi lên một bậc. Từ 5 ăn 5 thua lên thành chắc hay cái gì đó,
@@ -98428,6 +98478,22 @@ if(typeof showModal==="function"){const sm0=showModal;showModal=function(){plArr
 function plHomeK(){try{if(!S)return null;const p0=S.place;let k;try{S.place="home";k=typeof mapHereK==="function"?mapHereK():"home"}finally{S.place=p0}return k||"home"}catch(e){return"home"}}
 window.plHomeK=plHomeK;
 if(typeof accState==="function"){const as0=accState;accState=function(k){try{if(S&&S.place==="home"&&!S.out&&k&&k===plHomeK())return{why:"",here:1}}catch(e){}return as0.apply(this,arguments)}}
+/* THE WAY HOME (owner OD 26/11 ~04:25Z, review/home-way): ONE rule for every «Về phòng» (top-bar #k3room in jk3 + the Dư đồ top row):
+   it ALWAYS walks her to HER OWN room (goTo("home")), costs travel() khắc = BAL.walk.near / BAL.walk.far by distance (+ the slow-walk khắc),
+   label «Về phòng · N khắc»; no khắc left = disabled, label «Về phòng · hết khắc» (that buổi she has no way home: jstagehere stayRoll
+   then never punishes, no fault ⇒ no punishment). hn = her palace's name (the home mark on the top bar). null = no walk at all
+   (lãnh cung, servant / Kính sự modes). */
+function homeName(){try{const k=plHomeK();return typeof accName==="function"?accName(k):""}catch(e){return""}}
+window.homeName=homeName;
+function homeWay(){try{if(typeof S!=="object"||!S||S.dead||S.out||mode())return null;const hn=homeName();if(S.place==="home"||!S.place)return{at:1,hn,label:"Về phòng",title:`Phòng của ta: ${hn}`};
+ let tc=0;try{tc=travel(S.place,"home")}catch(e){}const ok=typeof walkOk==="function"?walkOk(tc):true;
+ /* review/home-way-nits: the real reason when she cannot walk home = the kit khắc words (j76need, bound to this buổi: the walk never spills), carried as data-why (kit reason path, guessWhy / kfWhy) */
+ let why="";if(!ok){try{why=typeof j76need==="function"?j76need(tc,null,true).t:""}catch(e){}why=why||"hết khắc buổi này"}
+ return{at:0,hn,tc,ok,why,label:ok?`Về phòng · ${tc} khắc`:"Về phòng · hết khắc",title:ok?`Đi về ${hn}: ${tc} khắc`:`${why[0].toUpperCase()+why.slice(1)}, chưa về ${hn} được`}}catch(e){console.error("homeWay",e);return null}}
+window.homeWay=homeWay;
+/* the walk home from any «Về phòng» button; false when it cannot go (card open, no khắc) */
+function homeGo(){try{const w=homeWay();if(!w||w.at||!w.ok||Q.length)return false;goTo("home");return S.place==="home"}catch(e){console.error("homeGo",e);return false}}
+window.homeGo=homeGo;
 const esc2=t=>String(t).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="maptools"')<0)return h;const hk=S.out?null:plHomeK();
  /* the one reason */
@@ -98442,9 +98508,9 @@ function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="mapt
  /* her home */
  if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
  /* the way home */
- if(S.place!=="home"&&!S.out&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){let tc=0,ok=true;try{tc=travel(S.place,"home");ok=typeof walkOk==="function"?walkOk(tc):true}catch(e){}
-  const b=`<button class="btn mz" data-plhome="1"${ok?"":" disabled"} title="${ok?`Đi về cung mình: ${tc} khắc`:"Không đủ khắc để về"}">Về phòng · ${tc} khắc</button>`;
-  h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}
+ /* the way home: the ONE rule homeWay() (shared with the top-bar #k3room, review/home-way) */
+ {const w=homeWay();if(w&&!w.at){const b=`<button class="btn mz" data-plhome="1"${w.ok?"":` disabled data-why="${w.why}"`} title="${w.title}">${w.label}</button>`;
+  h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}}
  return h}catch(e){console.error("plMap",e);return h}}
 window.plMap=plMap;
 /* the Dư đồ «leather» style hides the top row's text chips (jbook): the one reason also goes through the ONE notice system (kitNotice: top chip +
@@ -98456,7 +98522,7 @@ function plBanTick(){try{if(typeof kitNotice!=="function"||!S||S.dead)return;con
  kitNotice({id:"plban",kind:"close",line:why,text:`${why}. Mọi nơi khác trên Dư đồ đều không đi được cho đến khi hết hạn.`,sticky:true})}catch(e){console.error("plBan",e)}}
 if(typeof render==="function"){const rb0=render;render=function(){const r=rb0.apply(this,arguments);plBanTick();return r}}
 if(typeof mapHTML==="function"){const mh0=mapHTML;mapHTML=function(){return plMap(mh0.apply(this,arguments))}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-plhome]");if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.disabled||!S||S.dead||Q.length)return;try{goTo("home")}catch(x){console.error(x)}},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-plhome]");if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.disabled||!S||S.dead||Q.length)return;homeGo()},true);
 }catch(e){console.error("jplrule",e)}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
@@ -100437,7 +100503,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7d4b29c31209";window.CTM_BUILD=BUILD;
+const BUILD="9b7ad40a7fbc";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

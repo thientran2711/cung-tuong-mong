@@ -1,5 +1,5 @@
 /* review/place-rules (owner OD 25/11 ~23:33Z): the three families of the Đức Thọ cung bug.
-   A warned overstay → caught: moved home AT ONCE (S.place, S.visit, stage), cấm túc, «Bị bắt»; the warning on ENTRY («chỉ được lưu đến hết …»)
+   A warned overstay → caught: moved home AT ONCE (S.place, S.visit, stage), NHẸ = khất bổng, no cấm túc (review/home-way), «Bị bắt»; the warning on ENTRY («chỉ được lưu đến hết …»)
      and at the last khắc («sắp đóng cửa sau khắc này») came first.
    B unwarned overstay (no notice shown) → escorted home, no Danh loss, no cấm túc, «Hết giờ tiếp».
    C cấm túc set by ANY path while away (plain punish at Ngự hoa viên) → the next render moves her home.
@@ -29,9 +29,9 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
  /* A: warned overstay at Đức Thọ cung (open at buổi sáng only), caught */
  const A=await g.evaluate(async()=>{__reset();await __go("tn");document.getElementById('modal').hidden=true;render();await new Promise(r=>setTimeout(r,300));
   const entry=__chips.find(x=>/chỉ được lưu đến hết/.test(x))||"";used=BAL.time.khac-1;render();await new Promise(r=>setTimeout(r,300));
-  const last=__chips.find(x=>/sắp đóng cửa sau khắc này/.test(x))||"";const danh0=S.danh,placeIn=S.place;const pw=[S.plWarn,S.closeSeen,bkey()];const sr0=stayRoll;
+  const last=__chips.find(x=>/sắp đóng cửa sau khắc này/.test(x))||"";used=BAL.time.khac-travel("tn","home");/* review/home-way: she still had the khắc to walk home (no way home = no fault, home-way.js C) */const danh0=S.danh,cut0=S.cutPay||0,placeIn=S.place;const pw=[S.plWarn,S.closeSeen,bkey()];const sr0=stayRoll;
   const cards=await __turn(0.999);const stageTxt=(document.querySelector('#stage')||document.body).innerText.slice(0,4000);
-  return{pw,placeIn,entry,last,buoi:S.buoi,place:S.place,visitK:S.visit&&S.visit.k,confined:S.confined,dDanh:S.danh-danh0,cards,stageHome:!/Đức Thọ cung/.test(stageTxt.split("\n").slice(0,3).join(" ")),msg:S.visit&&S.visit.msg}});
+  return{pw,placeIn,entry,last,buoi:S.buoi,place:S.place,visitK:S.visit&&S.visit.k,confined:S.confined,dCut:(S.cutPay||0)-cut0,dDanh:S.danh-danh0,cards,stageHome:!/Đức Thọ cung/.test(stageTxt.split("\n").slice(0,3).join(" ")),msg:S.visit&&S.visit.msg}});
  /* B: unwarned (the notice never shown) → escorted out, no loss */
  const B=await g.evaluate(async()=>{__reset();window.__accSilent=1;try{accGrant(S,"tn");await __go("tn")}finally{window.__accSilent=0}Q.length=0;document.getElementById('modal').hidden=true;
   S.plWarn=null;S.closeSeen=null;const r0=render;render=function(){};let cards;const danh0=S.danh;try{used=BAL.time.khac-1;cards=await __turn(0.999)}finally{render=r0}render();
@@ -62,7 +62,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
   const after=S.place;tab="act";render();return{place0:"home",rep,home,ban,btn,after}});
  const old=await g.evaluate(()=>{try{delete S.plWarn;S=JSON.parse(JSON.stringify(S));render();return true}catch(e){return String(e)}});
  const X=[];
- if(A.placeIn!=="tn"||!A.entry||!A.last)X.push("A-warn");if(A.place!=="home"||A.visitK!=="home"||!(A.confined>0)||!A.cards.includes("Bị bắt"))X.push("A-moved");
+ if(A.placeIn!=="tn"||!A.entry||!A.last)X.push("A-warn");if(A.place!=="home"||A.visitK!=="home"||A.confined||!(A.dCut>0)||!A.cards.includes("Bị bắt"))X.push("A-moved");/* review/home-way: a caught overstay is NHẸ (khất bổng, never cấm túc) */
  if(B.place!=="home"||B.visitK!=="home"||B.confined||B.dDanh<0||!B.cards.includes("Hết giờ tiếp"))X.push("B-unwarned");
  if(C.in0!=="vuon"||C.place!=="home"||C.visitK!=="home")X.push("C-sweep");
  if(!Dd.onStage||!Dd.with||!Dd.gmNull||!Dd.apNull||Dd.wOther||!Dd.gate||Dd.gate.t!=="Người bên cạnh"||/giá đáo/.test(Dd.gate.h))X.push("D-presence");
