@@ -1,0 +1,65 @@
+# ES2-R2-scholar-3 moment log (bot sens, ipad, seed 2568838716, real-tap harness 89f5b956)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons: Vào cung ngay · shots-ES2-R2-scholar-3/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-ES2-R2-scholar-3/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcvào | Ở nhà chờ tuyển túTốnkhôngĐư | Trang trước | Dung mạo 15 | Dung mạo 16 | Dung mạo 17 | Dung mạo 18 | Dung mạo 19 · shots-ES2-R2-scholar-3/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Con gái thầy đồ nghèo · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-ES2-R2-scholar-3/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Khuê các» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Khuê các» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Khuê phòng · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc52Tài84Tâm cơ11Đức40Danh8 | Bạc53Sức80/100 | Buổi sáng, còn 4 khắc | Tuyển túcòn 23 tháng | sương sớm | Tâm trạngBình thản0 · shots-ES2-R2-scholar-3/m-new-1-8.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui | Xem lời nhờTốnkhôngĐượcLời t · shots-ES2-R2-scholar-3/m-new-2-9.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · #modal «Lời thách đấu» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-2-10.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Lời thách đấu» · NEW SCREEN · first time on this screen; buttons: Nhận lời thách đấuRất vữngTố | Nhường bề trênRất vữngTốnkhô | Từ chốiRất vữngTốnkhôngĐượcg · shots-ES2-R2-scholar-3/m-new-2-11.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngbắt đầu chơi | Hướng dẫnchơi thử một hồi dễ | Bỏ quakết quả khá, tự thi gi · shots-ES2-R2-scholar-3/m-new-2-12.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Kỳ ngộ» · NEW SCREEN · first time on this screen; buttons: Đỡ bé dậy, bôi thuốc ngayRất | Bế bé về tận cung của mẹRất  · shots-ES2-R2-scholar-3/m-new-2-13.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · #klearnov «» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-2-14.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Thách đấu với Thường tại Phó Vân Thường» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-2-15.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Tiếp ▸ | Lui · shots-ES2-R2-scholar-3/m-new-2-16.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · page «Trường Xuân cung · Vĩnh Xuân hiên · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc56Tài84Tâm cơ11Đức40Danh7 | Bạc45Sức77/100 | Buổi trưa, còn 3 khắc | Tuyển túcòn 23 tháng | hoa đào bay | Tâm trạngBình thản+15 · shots-ES2-R2-scholar-3/m-new-2-17.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · #modal «Bạc» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-3-18.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-3-19.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «Thỉnh tranh nhân vật» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-4-20.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-ES2-R2-scholar-3/m-new-4-21.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-5-22.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Chương 1 · Chờ kỳ tuyển tú» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Học một môn tài nghệ | Đi làm: Giữ lòng cha mẹTốnkh | Đi làm: Giữ danh tiếng trong · shots-ES2-R2-scholar-3/m-new-6-23.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Thiên mệnh» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-ES2-R2-scholar-3/m-new-6-24.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc · Nội | mồng 2 | mồng 3 | mồng 4 | mồng 5: Tiết Thanh minh · shots-ES2-R2-scholar-3/m-new-7-25.png
+- year 1 · turn 0 · tuần 2 · buổi 1 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-ES2-R2-scholar-3/m-new-10-26.png
+- year 1 · turn 0 · tuần 2 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-10-27.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Cúng dường hậu hĩnhTốnBạc -4 | Chép kinh cầu phúcTốnSức -8Đ | Lễ Phật rồi về · shots-ES2-R2-scholar-3/m-new-17-28.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-scholar-3/m-look-20.png
+- year 1 · turn 1 · tuần 2 · buổi 0 · rank 0 · #kdaytc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc56Tài86Tâm cơ11Đức42Danh8 | Bạc54Sức100/100 | Buổi sáng, còn 4 khắc | Tuyển túcòn 22 tháng | trời trong mát | Tâm trạngBình thản+3 · shots-ES2-R2-scholar-3/m-new-20-29.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Mua tinTốnBạc -35·1 khắcĐược | Không muaGhi chúkhông biết t · shots-ES2-R2-scholar-3/m-new-21-30.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · .dlg «Tin mua được» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-22-31.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc56Tài86Tâm cơ11Đức42Danh8 | Bạc19Sức100/100 | Buổi trưa, còn 3 khắc | Tuyển túcòn 22 tháng | gió nồm | Tâm trạngBình thản+3 · shots-ES2-R2-scholar-3/m-new-22-32.png
+- year 1 · turn 2 · tuần 0 · buổi 0 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc56Tài88Tâm cơ11Đức44Danh8 | Bạc28Sức95/100 | Buổi sáng, còn 2 khắc | Tuyển túcòn 21 tháng | nắng sớm oi ả | Tâm trạngBình thản-2 · shots-ES2-R2-scholar-3/m-new-25-33.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · #modal «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-25-34.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Khen lụa đẹp, chúc mừng nàng | Mở khăn lụa nhỏ của ngoại qu | Cất khăn vào tay áo, lui vềT · shots-ES2-R2-scholar-3/m-new-26-35.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Tài nữ kinh thành» · NEW SCREEN · first time on this screen; buttons: Bán trâm mua sách cho chaRất | Mặc cha loRất vữngTốnkhôngĐư | Viết thơ bán ở thư phường lấ · shots-ES2-R2-scholar-3/m-new-26-36.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayGhi chúchọn một: Thê | Để sau · shots-ES2-R2-scholar-3/m-new-26-37.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Đeo «Thư hương»» · NEW SCREEN · first time on this screen; buttons: Thêm TàiTốnkhôngĐượcTài +1 | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-ES2-R2-scholar-3/m-new-26-38.png
+- year 1 · turn 2 · tuần 0 · buổi 3 · rank 0 · #modal «Có người bán tin» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-27-39.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-scholar-3/m-look-40.png
+- year 1 · turn 3 · tuần 1 · buổi 1 · rank 0 · .dlg «Danh hiệu lên bậc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-ES2-R2-scholar-3/m-new-42-40.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · #modal «Tài nữ kinh thành» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-49-41.png
+- year 1 · turn 4 · tuần 2 · buổi 1 · rank 0 · .dlg «Hộp phấn lạ» · NEW SCREEN · first time on this screen; buttons: Cảm tạ rồi cất đi, không dùn | Nhờ đại phu xem thửRất vữngT | Dùng thửRất vữngTốnkhôngĐược | Thử một chút lên cổ tayRất v · shots-ES2-R2-scholar-3/m-new-57-42.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-scholar-3/m-look-60.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · #modal «Mượn y phục» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-73-43.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · .dlg «Mượn y phục» · NEW SCREEN · first time on this screen; buttons: Cho mượnRất vữngTốnkhôngĐược | Từ chốiRất vữngTốnkhôngĐượct | Cho mượn bộ khác, giữ bộ đẹp · shots-ES2-R2-scholar-3/m-new-74-44.png
+- year 1 · turn 6 · tuần 1 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-scholar-3/m-look-80.png
+- year 1 · turn 8 · tuần 0 · buổi 1 · rank 0 · #modal «Kế mẫu» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-97-45.png
+- year 1 · turn 8 · tuần 0 · buổi 1 · rank 0 · .dlg «Kế mẫu» · NEW SCREEN · first time on this screen; buttons: Cúi đầu nhận lỗi trước mọi n | Đáp khéo: hôm ấy chính Kế mẫ | Mang trà sâm sang biếu, lấy  · shots-ES2-R2-scholar-3/m-new-98-46.png
+- year 1 · turn 8 · tuần 0 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-scholar-3/m-look-100.png
+- year 1 · turn 8 · tuần 2 · buổi 1 · rank 0 · .dlg «Vòng ngọc mất tích» · NEW SCREEN · first time on this screen; buttons: Đứng ra bênh Cung nữ thân tí | Im lặngRất vữngTốnkhôngĐượct · shots-ES2-R2-scholar-3/m-new-105-47.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Bỏ bạc mua thêm thanTốnBạc - | Chịu rét cho quaTốnSức -8Đượ · shots-ES2-R2-scholar-3/m-new-113-48.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · #modal «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-scholar-3/m-new-114-49.png
+- year 1 · turn 9 · tuần 2 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-ES2-R2-scholar-3/m-look-120.png
+- year 2 · turn 10 · tuần 2 · buổi 0 · rank 0 · .dlg «Tết Thượng nguyên» · NEW SCREEN · first time on this screen; buttons: Ra phố thắp đèn thiRất vữngT | Ở nhà cùng mẫu thânRất vữngT · shots-ES2-R2-scholar-3/m-new-129-50.png
+- year 2 · turn 10 · tuần 2 · buổi 1 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Nhận quà nhà gửi vàoTốnkhông | Nhờ cha nói giúp trước triều · shots-ES2-R2-scholar-3/m-new-129-51.png
+... (moment log truncated to its first 60 lines; full file in the out dir)
+
+## Runner notes (player feelings, from the shots)
+- year 3 · Tuyển tú path (after «Cha định hôn» plea) · «Phúc tuyển» → the trial offers «Dâng Kỳ · Rất vững · Tốn Sức -10» and «Để tài nghệ quyết định» (let my skill decide): the robot picked the latter (no board opened); «Điện tuyển» «Đối đáp lanh lợi»; then «Trả thẻ bài» with three life-ending futures («Gả cho Thế tử hầu phủ», «Xin ở vậy, mở lớp dạy chữ cho con gái», «Cắt tóc đi tu»): the robot chose «Xin ở vậy…» → «Nữ phu tử — Đèn sách má hồng», age 20, buổi 284. Same ending as skilled-2 (ruled VALID by Foreman E: all 3 options end the life = only choice).
+- 0 bugs, 0 dead buttons, 0 stuck.
