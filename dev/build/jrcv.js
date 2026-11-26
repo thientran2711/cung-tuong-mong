@@ -224,7 +224,7 @@ RCVJ.xinhh={t:"Lời xin giáng",say:(a,t)=>`${NMc(a)} sai người dâng lễ, 
   {id:"yes",n:"Nhận lễ, tâu xin giáng",fx:{bac:pr,duc:-J.duc},x:`được: lễ ${pr} lượng · mất: Đức ${balSg(-J.duc)}, ${t.name} oán ${me?"ngươi":"Hoàng hậu"} ${balSg(J.oan)}`,
    go:()=>{if(!me)ap(q,{bac:pr,duc:-J.duc});econPayWin(a,"xinhh",t,BAL.actBac.xinhh);oanAdd(t,q,J.oan);return `${qn} nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}},
   {id:"no",n:"Gạt đi, trả lễ",fx:{danh:P.danh},x:`được: tiếng công minh, Danh ${balSg(P.danh)} · mất: ${me?"ngươi":"Hoàng hậu"} quý ${a.name} ${balSg(BAL.eff.jaudit.f)}`,
-   go:()=>{if(!me)ap(q,{danh:P.danh});affAdd(q,a,BAL.eff.jaudit.f);return `${qn} gạt lời ${NM(a)} đi, lễ vật trả lại. `}}]}};
+   go:()=>{if(!me)ap(q,{danh:P.danh});affAdd(q,a,BAL.eff.jaudit.f);return `${qn} gạt lời ${NM(a)} đi, lễ vật trả lại. `+(typeof cqAccFail==="function"&&cqAccFail(a,t,"xinhh")||"")}}]}};/* CUNG QUY fail signal (a deferred card answer applies the «vu cáo» itself) */
 /* Xin son phấn (jration lxBegCard, kind "hh"; NPC cx4:rougeBeg): the Hoàng hậu decides — she as the Hoàng hậu gets the card; t = the asker (no third person).
    yes = a box from the palace stores (the same item an NPC queen gives) · the asker quý her af[0]; no = the asker's Hoàng hậu regard − BAL.ration.beg.fail (as today) · Danh + prop.danh */
 RCVJ.rougeBeg={t:"Xin son phấn",ok:a=>lxMiss(a).length>0,say:a=>`${NMc(a)} sai người sang xin ngươi ban son phấn. `,
@@ -241,7 +241,7 @@ RCVJ.trinhhh={t:"Trình chứng cứ",say:(a,t)=>`${NMc(a)} trình chứng cứ 
   {id:"yes",n:"Xét tội theo chứng cứ",fx:{danh:P.danh},x:`được: tiếng công minh, Danh ${balSg(P.danh)} · mất: ${t.name} oán ${me?"ngươi":"Hoàng hậu"} ${balSg(J.oan)}`,
    go:()=>{if(!me)ap(q,{danh:P.danh});oanAdd(t,q,J.oan);punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên ${me?"ngươi":"Hoàng hậu"}: ${j78who(t)} bị xét tội. `}},
   {id:"no",n:"Bác chứng cứ",fx:{},x:`được: ${t.name} quý ${me?"ngươi":"Hoàng hậu"} ${balSg(af)} · mất: ${me?"ngươi":"Hoàng hậu"} quý ${a.name} ${balSg(BAL.eff.jaudit.f_3)}`,
-   go:()=>{affAdd(t,q,af);affAdd(q,a,BAL.eff.jaudit.f_3);return `${qn} bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}]}};
+   go:()=>{affAdd(t,q,af);affAdd(q,a,BAL.eff.jaudit.f_3);return `${qn} bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `+(typeof cqAccFail==="function"&&cqAccFail(a,t,"trinhhh")||"")}}]}};
 /* ---- Mời đến cung ta (j21 her invite, AG cx3:invite2 the NPC host; landing p3InvLand / the parallel-time runner): the guest answers with the 4 answers.
    x = nothing; yes / qua loa = the guest is at the host's palace this buổi (rcvInvAt). rcvInviteGo(h,g) = an NPC guest's answer → true if she comes ---- */
 function rcvInvAt(h,g){try{const k=h===S?"home":palaceOf(h);if(g!==S){S.where[g.id]=k;if(h===S)seeLoc(g,k)}if(h!==S){S.where[h.id]=palaceOf(h);if(g===S)seeLoc(h,palaceOf(h))}}catch(e){}}

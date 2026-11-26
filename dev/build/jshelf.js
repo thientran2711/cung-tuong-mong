@@ -282,12 +282,12 @@ function shelfCause(a,t,kind){if(!a||!t||a===t||t.alive===false||t.out)return nu
 window.shelfCause=shelfCause;
 function shelfStrip(t){const z=shelfOf(t);const L=Object.keys(z.g).filter(s=>z.g[s]).sort((x,y)=>shelfPiece(z.g[y])-shelfPiece(z.g[x]));return L.length?shelfTake(t,L[0]):""}
 function shelfInq(a,t){for(const o of liveRivals(true))if(o!==a&&o!==t&&o.alive&&!o.out)shelfLook(o,t,"tra xét",true)}/* the inquiry makes the room known */
-function shelfFalse(a,t,what){const B=BAL.shelf.acc,A0=NMc(a),T0=NM(t);ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});relAdd(a,t,B.falseRel);
+function shelfFalse(a,t,what){typeof cqAccFail==="function"&&cqAccFail(a,t);/* CUNG QUY fail signal */const B=BAL.shelf.acc,A0=NMc(a),T0=NM(t);ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});relAdd(a,t,B.falseRel);
  return `${A0} tố ${T0} ${what}; <span class="${a===S?"r":"g"}">tra xét ra không có chuyện đó</span>, ${a===S?"ngươi":a.name} bị quở vì tố bừa. Danh ${B.falseDanhA}, ${T0} Danh +${B.falseDanhT}. `}
 function shelfAccuse(a,t){const B=BAL.shelf.acc;const x=shelfLux(t);let judge="";try{judge=judgeName(t)}catch(e){judge="Hoàng hậu"}const A0=NMc(a),T0=NM(t);shelfInq(a,t);
  if(x.sc<=x.bud)return shelfFalse(a,t,"bày biện xa xỉ");
  const w=SHELF_LV[x.lv].toLowerCase();
- if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} bày biện xa xỉ (phòng ${w}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
+ if(!roll(oVP(a))){typeof cqAccFail==="function"&&cqAccFail(a,t);ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} bày biện xa xỉ (phòng ${w}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
  relAdd(a,t,B.rel);ap(a,{danh:B.danhA});const off=shelfStrip(t);ap(t,{duc:B.ducT,danh:B.danhT});try{t.luxRep=Math.min(BAL.lux.repMax,(t.luxRep||0)+B.repT)}catch(e){}
  return `${A0} tố ${T0} bày biện xa xỉ (phòng ${w}): <span class="${t===S?"r":"g"}">thành</span>. ${off?off+" phải cất vào rương. ":""}${NMc(t)} Đức ${B.ducT}, Danh ${B.danhT}. `}
 window.shelfAccuse=shelfAccuse;
@@ -296,7 +296,7 @@ window.shelfAccuse=shelfAccuse;
 function shelfVpAccuse(a,t){const B=BAL.shelf.acc;let judge="";try{judge=judgeName(t)}catch(e){judge="Hoàng hậu"}const A0=NMc(a),T0=NM(t);shelfInq(a,t);
  const z=shelfOf(t),G=Object.keys(z.g).filter(g=>shelfOver(t,z.g[g]));if(!G.length)return shelfFalse(a,t,"bày đồ vượt phẩm");
  const ngu=G.filter(g=>z.g[g].from==="emp"),own=G.filter(g=>z.g[g].from!=="emp");
- if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} bày đồ vượt phẩm, ${judge} bỏ qua${own.length?"":", vì là đồ ngự ban"}. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
+ if(!roll(oVP(a))){typeof cqAccFail==="function"&&cqAccFail(a,t);ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} bày đồ vượt phẩm, ${judge} bỏ qua${own.length?"":", vì là đồ ngự ban"}. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
  relAdd(a,t,B.rel);ap(a,{danh:B.danhA});const back=ngu.map(g=>shelfTake(t,g)).filter(Boolean);let gone=[];
  if(own.length){const E=own.map(g=>z.g[g]);gone=E.map(shelfNm);for(const g of own)shelfTake(t,g);try{ilFilter(t,e=>!E.includes(e),"conf")}catch(x){t.inv=(t.inv||[]).filter(e=>!E.includes(e))}
   ap(t,{danh:BAL.eff.j8.danhVpAccuse});try{punish(t,"vượt phẩm",B.vpConf)}catch(x){}}else ap(t,{danh:B.vpDanhT});
@@ -318,7 +318,8 @@ function shelfNpcAccuse(){const B=BAL.shelf.acc;for(const a of liveRivals(true))
   const w=npcWhy("g3acc",{a,T});const t=w&&w.tgt;if(!t)continue;{
    const r=shelfSeen(a,t);let kind=r&&r.vr>0?"vp":r&&r.lv>=2?"xx":null;
    if(kind?!roll(B.npcO):!roll(B.guessO))continue;if(!kind)kind="xx";/* a guess */
-   a.shA=wk();t.shT=wk();const txt=kind==="vp"?shelfVpAccuse(a,t):shelfAccuse(a,t);if(t===S)Q.push({t:kind==="vp"?"Bị tố bày đồ vượt phẩm":"Bị tố bày biện xa xỉ",who:typeof pv==="function"?pv(a):null,h:`<p>${txt}</p>`});else try{newsAdd(a,kind,txt,false)}catch(e){}}}}
+   /* CUNG QUY: the monthly NPC charge passes the one gate (accQ, «vu cáo» on a failed charge upward, the robot counter) */const run=()=>kind==="vp"?shelfVpAccuse(a,t):shelfAccuse(a,t);if(typeof cqRule==="function"){const r=cqRule(a,t,kind);if(r&&BAL.cq.on)continue}
+   a.shA=wk();t.shT=wk();const txt=typeof cqRun==="function"?cqRun(a,t,kind,run):run();if(!txt)continue;if(t===S)Q.push({t:kind==="vp"?"Bị tố bày đồ vượt phẩm":"Bị tố bày biện xa xỉ",who:typeof pv==="function"?pv(a):null,h:`<p>${txt}</p>`});else try{newsAdd(a,kind,txt,false)}catch(e){}}}}
 npwReg("g3acc",{who:c=>[c.a],why:(a,c)=>{const B=BAL.shelf.acc;const L=c.T.filter(t=>hostility(a,t)>=netTh(a,"host")||(t===S&&(a.ghen||0)>=B.ghenMin));
   const t=npwPick(L,x=>hostility(a,x)+(shelfSeen(a,x)?netTh(a,"host"):0));return t?{s:Math.min(100,hostility(a,t)),t,r:"oán "+npwNm(t)}:null}});
 

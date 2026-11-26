@@ -68,7 +68,9 @@ function cqRun(a,t,k,f,blkTxt){if(CQ.d>0)return f();const r=cqRule(a,t,k),on=BAL
   else if(acc&&CQ.af&&CQ.af.a===a&&CQ.af.t===t&&!cqQueen(t)&&cqR(a)<cqR(t)&&pst(a)===st0)res=cqEnd(res)+cqBreach(a,t,{k,cls:"accuse",br:1,w:"vu cáo bề trên"})}
   cqCount(a,t,k,res)}catch(e){console.error("jcq",e)}return res}
 /* the fail branch of every open charge (accuse, vp, xx, tocao, expose, xinhh, trinhth, trinhhh) calls this: the structured fail signal */
-function cqAccFail(a,t){CQ.af={a,t}}
+function cqAccFail(a,t,k){if(CQ.d>0){CQ.af={a,t};return""}/* inside the gate: cqRun charges it */
+ /* a deferred answer (her Hoàng hậu card, jrcv RCVJ): no gate around it any more → charge here, same rule (upward, not the Hoàng hậu, gates on) */
+ try{if(!BAL.cq.on||!cqPer(a)||cqQueen(t)||!(cqR(a)<cqR(t)))return"";return cqBreach(a,t,{k:k||"accuse",cls:"accuse",br:1,w:"vu cáo bề trên"})}catch(e){return""}}
 function cqEnd(x){x=String(x).replace(/\s+$/,"");return /[.!?]$/.test(x.replace(/<[^>]+>$/,""))?x+" ":x+". "}
 const CQ_NO="Theo cung quy, ngươi không thể làm việc này với nàng. ";
 (function(){
