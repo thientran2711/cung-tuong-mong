@@ -112,3 +112,20 @@ Fold 4x: p50 16.7 · p95 29.7 · max 107 ms · >33 ms 11/277 · long tasks 129 m
 ### FOR MAIN 157
 1. E-c (picker speed) is done only when KK41 lands K-PICKER-FIT; FAIL 1/2 code does not depend on it.
 2. Worker's fallback images under dev/handover/shots/dialog-order/ stay until the verdict (E96r wipes them).
+
+## REVIEW r2 (E96r, session_01V1ZZH3mbPVRPUJvdawM1xo, 26/11 ~11:40Z) — FAIL c34f796e
+PRIORITY #1 CHECK ('dqTap|park|Sang buổi|#next|Q.length)return'): r2 report + oo-sweep root read | main 3af7896e (jdayq #next M4 dead-tap rule: a queue nobody painted is shown first) | review/*: dialog-order-r c3634a5d (my r1 probe) | claims E96 row.
+Merged c34f796e onto LIVE 3af7896e = review/dialog-order-r2 e19478ee (only built files conflicted → rebuilt) + 19181bf2 (reviewer probe dev/test/dialog-order-next-probe.js, no game code).
+### PASS
+- r1 FAIL 1 fixed: dialog-order-held-probe.js, real taps, Fold + iPad: P2 game card held → «Sai đi dò la» → picker ON TOP (9 / 10 cards), Q = [picker, GAMECARD], game card after ✕, none lost; P1 / P3 OK.
+- r1 FAIL 2 fixed: after «Trò chuyện» the maid view keeps «Giao thiệp 0/3 · Mưu kế 0/1» with every card dimmed + «!» reason (Fold shot looked at; figure = real maid painting, loading at shot time).
+- dayq-hold PASS 46 · dayq-ghost PASS all · dayq-order PASS. quickcheck: time-spill PASS, open 2.2 s, old save loads + plays 0 errors; core-gate FAILs = dialog-fixed «kit-dialog-2 a» + button-crawl «Ô lưu · Lui» (same as LIVE, pre-existing).
+- No player word / UI part / BAL key added (POP_DONE = the existing text).
+### FAIL (for the fixer)
+1. REGRESSION vs LIVE — the park (dqTap) runs on EVERY tap, so a card waiting unseen no longer stops time. Real taps, Fold, `node dev/test/dialog-order-next-probe.js <base> dev/index.html 755 1000 <shots>`:
+   - N1: person view open, game card held behind it, tap «Sang buổi» → r2: buổi 0→1, the «Buổi trưa» title plays over the view, the card is STILL unseen («Có tin đang chờ»); LIVE 3af7896e: buổi stays 0.
+   - N2: no view, a card queued but not painted, tap «Sang buổi» → r2: buổi 1→2 and the card shows only in the NEW buổi (out of order, exactly the owner's complaint); LIVE: buổi stays, the card is shown first (M4 dead-tap rule).
+   Same risk for every time-spending tap outside the activity (Dư đồ move, top-bar «Về phòng», Hành sự acts …): the guards now see «no card» and khắc passes over a card she never saw. Fix direction: set cards aside ONLY for a tap that opens her own act inside the activity (.kfoc/#popw/… or an open box she tapped in), never for #next / time-passing taps — those keep LIVE behaviour (card first). Add N1/N2 (+ one Dư đồ move) to dayq-hold so the gate catches it; rerun HOLD scan + both probes.
+2. (note) quickcheck perf new/live: buổi 1979 / 1146 ms median (tasks>200 ms 36/34) — check it is not the unpark / re-arm path after fixing 1.
+3. FAIL 3 (picker paint, K-PICKER-FIT → KK41) and FAIL 4 (iPad 4x) unchanged — not this fixer's code; E-c done only when KK41 lands.
+Worker images under dev/handover/shots/dialog-order/ still to wipe at the final verdict.
