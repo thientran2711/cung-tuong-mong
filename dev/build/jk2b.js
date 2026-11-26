@@ -244,16 +244,14 @@ const KIT_DEADLY=/(tru di|ban chết|mất mạng|lộ là chết|là chết|b�
 const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nhà/i,"hon"],[/Hồi môn/i,"hoi"],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,"rel"],[/được ưa/i,"uu"],[/Sủng/i,"sung"],[/Danh|Đức|Ân tình/i,"dan"],[/Bạc/i,"bac"],[/Sức/i,"suc"],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,"cc"]];
 /* the marks of a change: n = the amount in the phrase (null = none named), sgn = +1 / −1 the stat's OWN direction, lv = clarity */
 function kitMk(sgn,p,lv){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];let m=1;if(n&&lv>=1){const v=+n;const g=(KIT_HINT_MAG.find(r=>r[0].test(p))||[0,"cc"])[1];const big=BAL.mark.cut.big[g];m=v>=big*BAL.mark.cut.hi?3:v<=Math.max(1,Math.floor(big*BAL.mark.cut.lo))?1:2}return (sgn>0?"+":"−").repeat(m)}
-/* THE ONE CHOICE FORMATTER (owner OD 26/11 ~21:55Z, law 4 + 11): every CHOICE surface says a stat change as marks «Danh ++» / «Sủng −» (table BAL.mark.cut, kitMk); BAL.mark.exact (Bạc, Sức, khắc) and item / person counts keep
-   their exact number; the result card + Sổ ghi never call it. Idempotent (marks hold no digit). Text in, text out (HTML spans pass through). */
+/* THE ONE CHOICE FORMATTER (owner OD 26/11 ~21:55Z, law 4 + 11): every CHOICE surface says a stat change as marks «Danh ++» / «Sủng −» (table BAL.mark.cut, kitMk); the TỐN row (row==='ton') and counts with a unit (khắc, người…) keep their exact number; the result card + Sổ ghi never call it. Idempotent (marks hold no digit). Text in, text out (HTML spans pass through). */
 const MARK_NUM=/([+\-−])\s?(\d+)(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|\s?%)/g;
 const MARK_UNIT=/^\s?(khắc|lượng|người|việc|món|lần|ngày|tuần|tháng|năm|tuổi|buổi|lá|thẻ|cái|vị)(?![\p{L}])/u;
-function markTxt(h){h=String(h==null?"":h);if(/\d\s?→\s?\d/.test(h))h=h.replace(/([\p{L}][\p{L} ]*?) (\d+)\s?→\s?(\d+)(?:\s?\(([+\-−]\d+)\))?/gu,(m,L,a,b,d)=>BAL.mark.exact.includes(L.trim())||+a===+b?m:L+" "+(+b>+a?"+":"-")+Math.abs(+b-+a));/* «Đức 40 → 38» = a change of −2 */
+function markTxt(h,row){h=String(h==null?"":h);if(row==="ton")return h;/* TỐN row = what she pays: exact */if(/\d\s?→\s?\d/.test(h))h=h.replace(/([\p{L}][\p{L} ]*?) (\d+)\s?→\s?(\d+)(?:\s?\(([+\-−]\d+)\))?/gu,(m,L,a,b,d)=>+a===+b?m:L+" "+(+b>+a?"+":"-")+Math.abs(+b-+a));/* «Đức 40 → 38» = a change of −2 */
  if(!/[+\-−]\s?\d/.test(h))return h;
  return h.replace(MARK_NUM,(m,sg,a,b,off,str)=>{const pre=str.slice(Math.max(0,off-40),off),post=str.slice(off+m.length);
   const lab=pre.replace(/<[^>]*>/g,"").match(/([\p{L}][\p{L}\s]*?)\s*$/u);if(!lab||!/\s$/.test(pre.replace(/<[^>]*>$/,"").slice(-2)+" ")&&!/\s$/.test(pre))return m;
   const L=lab[1].trim();if(!L||/^\(|\($/.test(pre.trim().slice(-1))||MARK_UNIT.test(post.replace(/^<[^>]*>/,"")))return m;
-  if(BAL.mark.exact.some(e=>new RegExp("(^|[^\\p{L}])"+e+"$","iu").test(L)))return m;
   const n=Math.max(+a,b==null?0:+b);return kitMk(sg==="+"?1:-1,L.split(/\s+/).slice(-4).join(" ")+" "+sg+n,1)})}
 function kitHintPhrase(p,sg,nm,lv){const who=nm||"";
  const story=()=>{const t=p.replace(/\s*\([^()]*\d[^()]*\)/g,"").replace(/(\d+)/g,(m,d)=>kitNumVi(d)).replace(/\s*\(\s*\)/g,"").trim();return [t,t,t]};
