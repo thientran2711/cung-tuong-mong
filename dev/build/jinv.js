@@ -421,6 +421,11 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
      kitShop({key, title, info, stage:[{__fig, __cap, __role, age}], items:[{k, src, name, grade, lux, price, unit, eff, rows, stock, have, onBuy(x,q)}],
               money:()=>n, carry:9, sell:{items, empty}})  */
 const KSHOP={reg:{}};
+/* KIT §28.13s ONE PERSON ONE FIGURE on the shop stage (goal-links note (c), law 6b, KK45): a seller who IS a real person (S.court.ped …) stands on the shop
+   stage as HIS OWN record — kitFigOf / kitName draw the same figure and name as every other place he appears («Cách làm», Dư đồ, Hậu cung); the pseudo
+   person {__fig, __cap} (generic art) is only the fallback when no record exists. Every kitShop caller passes its seller through kitSeller. */
+function kitSeller(p,fb){try{if(p&&typeof p==="object"&&!p.__fig&&(p.name||p.id!=null)&&typeof kitFigOf==="function"&&kitFigOf(p))return p}catch(e){}return fb}
+window.kitSeller=kitSeller;
 /* the seller on the stage: a pseudo person {__fig, __cap} → kitFigOf / kitName use them as is */
 (function(){if(typeof kitFigOf==="function"){const f0=kitFigOf;kitFigOf=function(p){if(p&&p.__fig)return p.__fig;return f0.apply(this,arguments)};window.kitFigOf=kitFigOf}
  if(typeof kitName==="function"){const n0=kitName;kitName=function(p){if(p&&p.__fig)return p.__cap?`<b class="kname"><span class="kti" style="--rt:${kitRtOf(p.__role||"")}">${p.__role||""}</span>${p.__cap}</b>`:"";return n0.apply(this,arguments)};window.kitName=kitName}})();
@@ -586,6 +591,6 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
    onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
   info:"",
-  stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,
+  stage:[kitSeller(c,{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"})],items,money:()=>S.bac,
   sell:{items:kitShopSellItems,empty:"Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
 if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}

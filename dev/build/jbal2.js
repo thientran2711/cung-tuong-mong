@@ -2188,6 +2188,7 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
 
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
+BAL.kdlg.tapArm=320;BAL.kdlg.tapNear=40;/* px: the 2nd tap lands within this distance of the 1st *//* KIT §6.2j (KK44, MAIN 160 «double tap spends twice»): ms after a NEW dialog paints during which a real tap inside it is not taken (the 2nd tap of a double tap that opened it) */
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).
    Every relation LEVEL the game tests ("quen", "thân", "ghét", "oán to act"…) is ONE base number here, and each person's nết shifts it:
    netTh(p,key) (jnet.js) = th[key] + Σ over p's 3 nết of BAL.net.T[t].th[key] (a key a nết lacks = thFrom[key] = [source key, × share]), clamped to thClamp[key].

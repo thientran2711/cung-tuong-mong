@@ -153,7 +153,7 @@ function kitResultCard(o){o=o||{};let t=document.getElementById("rtoast");if(!t)
  const row=r=>`<span class="kr kr-${r.k||"note"}"><span class="krl">${r.label||""}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
  t.className="rtoast karesult "+SL.cls;t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${o.title||""}</span></span>${o.sen?`<span class="ksen">${o.sen}</span>`:""}<span class="kb">${rows.map(row).join("")}</span></div>`;
  t.onclick=()=>t.classList.remove("on");void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),o.ms||9000);
- window.kaLastResult={title:o.title,ok:o.ok,seal:SL.t,sentence:o.sen||"",rows};return t}
+ window.kaLastResult={title:o.title,ok:o.ok,seal:SL.t,sentence:o.sen||"",rows};try{if(typeof kitResFold==="function")kitResFold(t)}catch(e){}/* KIT §7.4a: same people fold as resultShow */return t}
 try{if(typeof KIT_SAMPLES!=="undefined"){
  KIT_SAMPLES.push({id:"§93.5",title:"kitNameTag · thẻ tên người chỉ biết mặt / chỉ biết nhà",where:"cảnh tuyển tú (sân chờ, hàng tú nữ, lượt 1–2), mọi chỗ cần tên người chưa rõ",html:()=>{const v=(typeof rivals!=="undefined"&&rivals[0])||{name:"Tô Uyển Nhi"};
   return `<div style="display:flex;gap:28px;padding:10px">${[[1,""],[1,"Con gái Đô thống"],[2,""]].map(([s,ph])=>kitNameTagBox(v,{stage:s,ph,title:"Tú nữ"})).join("")}</div>`}});

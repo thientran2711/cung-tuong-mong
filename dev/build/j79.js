@@ -1119,6 +1119,7 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(!src){src=ph;if((tries||0)<75)setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
  if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";im.decoding="async";M.prepend(im)}
  if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{const s0=im.getAttribute("src")||"";if(/\/tn\//.test(s0))return;if(im.dataset.kerr==="1"){im.dataset.kerr="2";setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
+ im.classList.toggle("kphsil",src===ph);/* KK45: the stand-in keeps the silhouette's LAYOUT only; it paints as the §59.1 neutral ground (jph img.kphsil), never as the stranger lady */
  M.classList.add("kpfig");const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
  /* review/newgame-ui (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … 1 lúc sau mới thấy hình"):
     1) ONE standard figure tier: every face is drawn with the same BODY height (head top → feet, kitFigBody, as KIT 33.6) on the same floor
