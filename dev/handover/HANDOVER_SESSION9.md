@@ -3774,3 +3774,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~03:45Z SẾP (in 147 chat, ~01:25Z) 8 items → OD row verbatim; D: demotion/lãnh cung reason+one rank+min days, daily event cap, contest first place ⇒ thị tẩm; E: help/back 0 điểm, dress pick, Ngôn lag/blank buttons, duplication audit REPORT. Told her to write in 151 until 152 opens.
 - ~03:50Z SẾP (147 chat ~03:40Z): one feature = one button (→ E-d report); «out of order» modal-queue bug family → E-e; robot sweep → ROLE B #7.
 - ~03:55Z SẾP (147 chat ~03:45Z): merge keeps all outcomes; evidence → accusation by kind; detailed REPORT → E-d.
+- ~03:50Z M2b life over (report ROBOT-PLAYER-REVIEW-M2.md); UX-OPTION-CENTRE ×469 → KK37; M2c after save fix LIVE.
