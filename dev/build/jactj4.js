@@ -24,7 +24,7 @@ const J4DOOR={};/* key -> ways, filled while a tab is drawn */
     if(m[3]==="th"&&!why&&used+2>BAL.time.khac&&used<BAL.time.khac&&!S.j76carry)why=(S.buoi||0)!==0?"chỉ buổi sáng":`không kịp xong trong ${BUOI[0].toLowerCase()}`;
     return{n:c.n,x:c.sm,why,go:()=>vir?lessonVir(k,m[3]):lessonMode(k,m[3])}});
    const allOff=J4DOOR[dk].every(w=>w.why);
-   s.acts=[pbtn(`data-learndoor="${dk}"`,"Học",`chọn cách học: ${ways.map(c=>c.n.replace(/^Học với /,"học với ").replace(/^Tự học/,"tự học")).join(", ")}`,allOff?J4DOOR[dk][0].why:""),...keep]}
+   s.acts=[pbtn(`data-learndoor="${dk}"`,"Học",`chọn cách học: ${ways.map(c=>c.n.replace(/^Học với /,"học với ").replace(/^Tự học/,"tự học")).join(" / ")}`,allOff?J4DOOR[dk][0].why:""),...keep]}
   }catch(e){console.error("j4 hoc",e)}return L}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-learndoor]");if(!b||b.disabled)return;e.stopPropagation();
  const dk=b.dataset.learndoor,W=J4DOOR[dk];if(!W)return;const vir=dk[0]==="v",k=dk.slice(2),nm=vir?((VIR.find(x=>x.k===k)||{}).n||""):((ARTS.find(x=>x.k===k)||{}).n||"");
@@ -47,7 +47,7 @@ function j4Merge(fname,rules){const f0=window[fname]||(typeof eval(fname)==="fun
    g.ways.forEach((w,i)=>{if(out.includes(`<!--J4S:${key}:${i}-->`))W.push(Object.assign({i},w))});
    /* a door with one way left is no door: the old button stays as it was */
    if(W.length>1){J4DOOR[key]=W.map(w=>({n:w.n,x:w.sm,why:w.why,go:()=>j4Tap(w.at,w.n)}));
-    const door=pbtn(`data-j4door="${key}"`,R.name,`${R.hint||"chọn một cách"}: ${W.map(w=>w.n.replace(/^(.)/,c=>c.toLowerCase())).join(", ")}`,W.every(w=>w.why)?W[0].why:"");
+    const door=pbtn(`data-j4door="${key}"`,R.name,`${R.hint||"chọn một cách"}: ${W.map(w=>w.n.replace(/^(.)/,c=>c.toLowerCase())).join(" / ")}`,W.every(w=>w.why)?W[0].why:"");
     let first=true;for(const w of W)out=out.replace(new RegExp(`<!--J4S:${esc(key)}:${w.i}-->[\\s\\S]*?<!--J4E:${esc(key)}:${w.i}-->`),()=>first?(first=false,door):"")}
    out=out.replace(new RegExp(`<!--J4[SE]:${esc(key)}:\\d+-->`,"g"),"")}
   return out};
@@ -76,3 +76,10 @@ j4Merge("kidCard",[
 (function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);return typeof h==="string"?h.replace(/<button data-inv="shop"[^>]*>[\s\S]*?<\/button>/,""):h}})();
 /* the new door names borrow the picture of the meaning group they fold (owner 15/11: one picture per meaning group); ACTS.json wins when it gains the same title */
 try{Object.assign(KIT_ACT_ALIAS,{"Học":"luyen-cam-ky","Dạy con":"day-con-hoc","Chăm con":"chua-benh-con","Thêm người":"chon-nguoi"})}catch(e){}
+
+/* ---- entry point for the servant STAGE pop-up (J2's dfActs / jhouse hsvActs): the SAME «Thưởng phạt» door as the Cung nhân card.
+   j4ServDoor(s) opens the dialog for servant s (Thưởng · Phạt · Tha lỗi · Đề bạt · Đổi người; only the ways that exist for her now). ---- */
+function j4ServDoor(s){if(!s||!S||S.dead||Q.length)return;const{cap}=j4Capture(()=>{try{servJudgeBtns(s)}catch(e){}pbtn(`data-sv="doi" data-sid="${s.sid}"`,"Đổi người",`tốn: Bạc -${BAL.house.swapBac}`,S.bac<BAL.house.swapBac?"thiếu bạc":"")});
+ const W=cap.filter(c=>/^(?:data-sj="(?:thuong|phat|tha)"|data-sv="doi") data-sid=|^data-dbsv=/.test(c.at));if(!W.length)return;
+ j4Door("Thưởng phạt","Chọn cách xử kẻ hầu này.",W.map(c=>({n:c.n,x:c.sm,why:c.why,go:()=>j4Tap(c.at,c.n)})))}
+window.j4ServDoor=j4ServDoor;
