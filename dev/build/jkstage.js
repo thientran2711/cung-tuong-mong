@@ -66,7 +66,7 @@ function kstgGeo(){try{if(typeof kscnGeo==="function")return kscnGeo()}catch(e){
    kitEvBg(m) is exported so every scene host (kitScene.open bg, §93.1) reads the same rule. */
 const KIT_EVBG=[[/(tấn phong|sắc phong)/i,"selx-tanphong"],[/(lập hậu|sách phong)/i,"selx-laphau"],[/(hòa thân)/i,"selx-hoathan"],[/(thắng trận|khải hoàn)/i,"selx-thangtran"]];
 /* review/art-event (ART-EVENT, owner 25/11: the thbirthday banquet too busy behind the dialogue on iPad): an event whose own band picture is too busy for a stage gets a calm painted stage by its PEND id (Q item pid) */
-const KIT_EVBG_PID={thbirthday:"ev-bg-thanhtho-calm"};
+const KIT_EVBG_PID={thbirthday:"ev-bg-thanhtho-calm",adStroll:"ev-bg-vuon-calm",cmTt:"ev-bg-tamthat-calm",rcvHelp:"ev-bg-tamthat-calm",cmLand:"ev-bg-hanhlang-calm",cmTd:"ev-bg-tangia-calm"};/* ART-EVENT2: quiet talks get a calm place picture (no people, open centre) instead of the busy ev-yen-tiec band: garden path · her side chamber · corridor · Tân Giả khố yard */
 function kitEvBg(m){try{const ok=src=>{try{return typeof KIT_CDNHAVE!=="undefined"&&!!KIT_CDNHAVE&&KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return false}};/* the CDN index (jevban KIT_CDNHAVE): a key not published yet = not used */if(m&&m.bg){const s=/\//.test(m.bg)?m.bg:"img/"+m.bg+".webp";if(ok(s))return s}
  if(m&&m.pid&&KIT_EVBG_PID[m.pid]){const s="img/"+KIT_EVBG_PID[m.pid]+".webp";if(ok(s))return s}
  const t=String(m&&(m.t||m.title)||"").replace(/<[^>]+>/g," ");for(const [re,k] of KIT_EVBG)if(re.test(t)){const s="img/"+k+".webp";if(ok(s))return s}}catch(e){}return""}
