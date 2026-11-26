@@ -83,7 +83,11 @@ function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot
 $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;try{if(typeof kmReset==="function")kmReset()}catch(e){}quiet=true;d.tab="act";/* owner 16/11: entering the game always opens her room (Hành sự), never the last tab */deser(d);quiet=false;$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
  /* OB-M3UI (fault 3, SYSTEM act, OD 24/11 ~08:40Z keeps system confirms): a new life over a sổ that holds one = the ONE kit confirm (kitConfirm), not a «Chắc chắn?» second tap */
- if(b.dataset.new){if(b.dataset.ask==="1"){kitConfirm({title:"Bỏ kiếp trong sổ này?",lines:["Kiếp đang ghi trong sổ này sẽ mất, không lấy lại được."],yes:"Bắt đầu kiếp mới",no:"Thôi",onYes:()=>{setTimeout(()=>{try{b.dataset.ask="2";b.click()}catch(x){console.error(x)}},0)}});return}SLOT=+b.dataset.new;$("title").hidden=true;start()}};
+ if(b.dataset.new){if(b.dataset.ask==="1"){kitConfirm({title:"Bỏ kiếp trong sổ này?",lines:["Kiếp đang ghi trong sổ này sẽ mất, không lấy lại được."],yes:"Bắt đầu kiếp mới",no:"Thôi",onYes:()=>{setTimeout(()=>{try{b.dataset.ask="2";b.click()}catch(x){console.error(x)}},0)}});return}
+  /* OB-M3UI-sololh (law 6c, nothing vanishes): a LIVING life that is already «trọn» (S.kpTron, no nghiệp) and is overwritten here still gets its Sổ luân hồi row «Bỏ ngang»;
+     an unfinished life is written by jkiep (with its nghiệp), a dead one was written at death */
+  if(b.dataset.ask==="2"){try{const d=loadSlot(+b.dataset.new),s=d&&d.S;if(s&&!s.dead&&s.kpTron&&typeof lifeLog==="function"){const p=lifeLog();p.unshift({n:s.name,o:(s.origin&&s.origin.n)||"",r:(m=>m>=7?"Hoàng hậu":RANKS[m].n)(Math.max(s.rank||0,s.maxRank||0)),age:s.age,y:s.year,kids:(s.kids||[]).filter(k=>k.alive).length,fc:s.fc||"",f:"Bỏ ngang",foes:[]});store.set("cung-luanhoi",p.slice(0,40))}}catch(x){console.error(x)}}
+  SLOT=+b.dataset.new;$("title").hidden=true;start()}};
 
 /* wiring */
 $("panel").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const d=b.dataset;

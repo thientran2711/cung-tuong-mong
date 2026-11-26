@@ -128,7 +128,7 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
     const n0=await p.evaluate(()=>{const s=loadSlot(1);return s&&s.S&&s.S.name});const L0=await p.evaluate(()=>(lifeLog()||[]).length);
     await tapSel(p,'#slots button[data-new="1"][data-ask]');await p.waitForTimeout(900);const cf=await tapSel(p,'#modal:not([hidden]) [data-kcf-yes]');await p.waitForTimeout(5000);
     const r=await p.evaluate(()=>({title:!document.getElementById('title').hidden,name:S&&S.name,dead:S&&S.dead,id:/Thân phận|thân phận/.test((document.getElementById('modal')||{}).innerText||'')}));const L1=await p.evaluate(()=>(lifeLog()||[]).length);
-    ok(dev,'3a-yes «Bắt đầu kiếp mới» / «Bỏ ngang»',cf?`yes tapped → ${r.title?'STILL ON TITLE':'new life ('+(r.id?'identity card':r.name)+')'} · old «${n0}» → Sổ luân hồi +${L1-L0}`:'NO YES BUTTON',cf&&!r.title)}
+    ok(dev,'3a-yes «Bắt đầu kiếp mới» / «Bỏ ngang»',cf?`yes tapped → ${r.title?'STILL ON TITLE':'new life ('+(r.id?'identity card':r.name)+')'} · old «${n0}» → Sổ luân hồi +${L1-L0}`:'NO YES BUTTON',cf&&!r.title&&L1-L0===1)}
    ok(dev,'B page errors',errs.length?errs.slice(0,2).join(' | '):'none',!errs.length);
    await ctx.close()}}
  async function clear2(p){await p.evaluate(()=>{try{const M=document.getElementById('modal');if(M&&!M.hidden&&typeof closeModal==='function')closeModal()}catch(e){}})}

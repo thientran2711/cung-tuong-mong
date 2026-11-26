@@ -87,3 +87,6 @@ PRIORITY #1 CHECK ('ob-m3ui'): OD 24/11 ~07:25Z/~08:08Z/~08:40Z (no confirm on g
 - `node dev/test/ob-m3ui.js` on a fresh build of 5843966e (CDN pictures), robot M3 old save, Fold 755x1000 + iPad 1180x820: **0 FAIL / 122** (kit-close cases, mini-game scan, title pages, Kiếp mới YES, old save «Tiếp tục kiếp này», A/B page errors none).
 - Note only: «3a-yes» logs «Sổ luân hồi +0» for the replaced life (lifeLog length unchanged); a new life does start. Not a Back matter, not in this delta; MAIN may check that «Bỏ ngang» is meant to write no Sổ line.
 - Not testable here: live co-op room (relay + 2nd player); Back there only calls local closers.
+
+## FIX sololh (MAIN 156, law 6c) — branch review/ob-m3ui-sololh
+LIVE and r3 wrote NOTHING to Sổ luân hồi when «Kiếp mới» overwrote a LIVING life that is already «trọn» (S.kpTron, set on entering the palace = most living lives; only unfinished lives were written, by jkiep). Now j6 writes the row «Bỏ ngang» (name, origin, highest rank, age, year, living children) for that case; unfinished lives stay with jkiep (nghiệp), dead lives were written at death — never twice. Test 3a-yes now asks Sổ luân hồi +1: Fold + iPad +1 (was +0), 122/122 pass.
