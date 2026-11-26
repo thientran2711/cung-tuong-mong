@@ -39,3 +39,15 @@ Reviewer: opus big reviewer (session_01D3E3NZdAKYGauFt2CWWGEV). Code diff 1dcb37
 
 ## For the worker
 Fix 1 (+ gate row), optionally 2–4; rebuild; re-run srv-rank.js (branch 16/16 incl. co-op row), ag-stf2, one-core guard, coop-e2e + quickcheck; one short re-review (small: the filter + test row).
+
+## DELTA RE-REVIEW 0211c65d..8559fea2 (26/11 ~13:45Z) — VERDICT: PASS 8559fea2
+PRIORITY #1 CHECK: same as above (no new topic; delta only).
+8559fea2 is FF from LIVE origin/main aa37de21 (checked). Delta = dev/build j14/j42/jagwhyg2a/jpromsv + test row + rebuild.
+| finding | fix | check |
+|---|---|---|
+| 1 BLOCKING co-op destination | `!v.coop` in spUpTo, spGoTo (jpromsv), srvReassign pool (j42:309), j14:74 sale-dice buyer, srvBuy buyers (jagwhyg2a) — whole destination family | reviewer probe (friend proxy = top palace, 2 consort lives 23–24 months): spUpTo now returns an NPC palace («Chung Nghê Thường», «Tào Liên Y»), never the proxy; household table 0 overflows; gate row CO-OP PASS |
+| 2 lock text | «Chưa có cung nào cao hơn nhận người bậc ngươi» when at cap + full Công lao and still locked (= no higher palace) | read: shown only when og is false at the cap with full Công lao; cổ trang OK |
+| 3 «còn chỗ» | outgrown ask reads «(sang hầu X, cung cao hơn cho ngươi lên bậc)» | OK |
+| 4 loop-off parity | spAsk loop-off path: og ? spUpTo + swap : spGoTo | OK (same swap guard as «Cho đi») |
+Runs (reviewer build of 8559fea2): srv-rank.js 16/16 PASS · ag-stf2 ALL 23 PASS · one-core guard PASS (inline 3100 ≤ 3592).
+Worker's coop-e2e + quickcheck on 8559fea2 were still rerunning when this was written (0211c65d: coop-e2e 143/143; quickcheck only LIVE-identical rows): coordinator FFs main only once those land green in reports/srv-rank.md.
