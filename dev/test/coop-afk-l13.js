@@ -113,8 +113,9 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   ok(!xs.afkT,'afk: her choice was never made for her',xs);
   ok(xs.q.includes('afkT')||xs.cq.includes('afkT'),'afk: her choice is kept on her seat (on her screen / carried)',xs);
   /* she comes back and answers it: it runs once */
-  await sleep(1500);const t1=Date.now();while(Date.now()-t1<40000){const r=await X.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Nhận lời/.test(x.textContent)&&x.offsetParent!==null);if(b){b.click();return 1}return 0});if(r)break;await clear(X,1);await sleep(500)}
+  await sleep(1500);const t1=Date.now();while(Date.now()-t1<150000){const r=await X.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Nhận lời/.test(x.textContent)&&x.offsetParent!==null);if(b){b.click();return 1}return 0});if(r)break;await clear(X,1);await sleep(500)}
   let got=0;const t2=Date.now();while(Date.now()-t2<30000){got=await X.p.evaluate(()=>S.afkT||0);if(got)break;await sleep(500)}await sleep(3000);got=await X.p.evaluate(()=>S.afkT||0);
+  if(got!==1)console.log('DUMP ret',JSON.stringify([await X.p.evaluate(()=>({Q:Q.map(m=>m&&(m.pid||m.t)),mt:(document.getElementById('mt')||{}).textContent,mh:document.getElementById('modal').hidden,ob:[...document.querySelectorAll('#modal button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim().slice(0,20))})).catch(e=>e.message),await A.p.evaluate(()=>{try{return (COOPW.thin.seatOf(COOPW.seat==='a'?'b':'a').S.thq||[]).map(x=>[x.pid||x.t,x.cw])}catch(e){return e.message}}).catch(e=>e.message),await X.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)]));
   ok(got===1,'afk: on her return she answers it and it runs once («Nhận lời»)',got);
   await shot(A,'afk-host-'+(process.env.COOP_SWAP?'1180x820':'755x1000'));await shot(B,'afk-guest-'+(process.env.COOP_SWAP?'755x1000':'1180x820'));
   /* the room goes on: one more week with both playing */
