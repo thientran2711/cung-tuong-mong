@@ -3805,3 +3805,10 @@ LOAD: main running 0 own workers (owner bugs/UI/go-live only) | B seats 9/12 (sa
 - ~05:25Z OB-NGOAICUNG-2 LAND READY dc43a3b9 (base 5e013076) → LOOK ok for its scope; NOTE iPad Khuê phòng stage flat grey from buổi chiều (pre-existing?) → RV-OB-NGOAICUNG BIG = session_01V1ZZH4VCvU57UnzmmawTdn (final merge onto 02f564ae). Open items (a)–(d) → PARKING_LOT.
 - ~05:40Z WAKE + ROLL. LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG | B busy (coop-freeze fix ee0824f4, save rv) | C frozen | D D1–D5 + F10 #3 | E 12/12 | F #18 harness d2e03d80 PASS | moved: E freeze repro → D F10 #3; E97f2 D4 mapping ask → D. Context 37 % ≥ roll 31 % → TAKEOVER_MAIN_153.md written; opening MAIN CHÍNH 153 as my child; 152 stays as forwarder.
 - ~05:34Z MAIN CHÍNH 153 = session_01V1ZZH4NydpsQHiFqmep3Fo (152 child, depth 1). 152 = forwarder from now.
+
+## MAIN CHÍNH 153 (session_01V1ZZH4NydpsQHiFqmep3Fo, depth 1, START_CTX ~4 % (used_tokens reads 0; estimate) → roll at 29 %, ceiling 60 %)
+LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD (owner bugs/UI/go-live) | B busy (coop-freeze ee0824f4, 2nd retainer) | C frozen | D D1–D5 + F10 #3 | E 12/12 (E97r3) | F #18 runners on d2e03d80 | moved: none
+- ~05:48Z took over. Created own tasks: hourly :47 trig_014d6fBt81qeXQb6yQcgKBqk, 07:52 NY trig_015PVJbBfn122Kn3bPUqLDD7, 19:52 NY trig_01J2KDXUH7fuCq7SvznR66Hd. Disabling 152's 3 tasks REFUSED by my permission check → asked sếp.
+- SẾP wrote the standing go-live sentence in 153 chat («cho phép đưa lên live, từ nay bản nào qua kiểm thì cứ đưa lên») → 153 FF-pushes main itself.
+- «main is now 153» sent: LC20, KK37 (+ «thiện cảm thiện cảm» + KK29 iPad dialog items), HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, OB-NGOAICUNG-2, NHV-BUILD, OB-PHU3, M2b, M3, M5b, ROLE B #7, MAIN 150/151. Message to 152 refused by permission check. FROM MAIN 153 lines in FOREMAN_B–F_STATUS. Worktree /home/user/wt/h153, hpush153.sh (guard).
+- Rulings: B co-op pack 04a45597 WAITS 2nd-retainer fix; ee0824f4 lands after SSK+BIG. E spyk «Tự đi dò la» → fold into «sai người» (OD 05:35Z).
