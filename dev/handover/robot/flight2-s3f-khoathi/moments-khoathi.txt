@@ -1,0 +1,4 @@
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» · shots-flight2-s3f/loop-10.png
+- year 4 · turn 36 · tuần 0 · buổi 1 · rank 0 · .dlg «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons: Viết thư nhờ cha nâng đỡ học | Chỉ xem bảng vàng sau rèmTốn · shots-flight2-s3f/m-new-485-250.png
+- year 7 · turn 72 · tuần 0 · buổi 2 · rank 0 · #modal «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s3f/m-new-948-123.png
+- year 7 · turn 72 · tuần 0 · buổi 2 · rank 0 · - · FRUSTRATED · [stuck] no progress 15 min on .dlg «Khoa thi Đình» · shots-flight2-s3f/stuck-1.png

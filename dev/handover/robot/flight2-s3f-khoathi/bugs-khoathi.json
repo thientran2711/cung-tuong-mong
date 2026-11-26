@@ -1,0 +1,24 @@
+[
+ {
+  "k": "stuck|no progress 15 min on .dlg «Khoa thi Đình»",
+  "type": "stuck",
+  "msg": "no progress 15 min on .dlg «Khoa thi Đình»",
+  "n": 4,
+  "at": 3785,
+  "shot": "/home/user/wt/out3f/shots-flight2-s3f/stuck-1.png",
+  "save": "/home/user/wt/out3f/shots-flight2-s3f/stuck-1-dump.json",
+  "S": {
+   "dead": false,
+   "y": 7,
+   "t": 72,
+   "w": 0,
+   "b": 2,
+   "age": 24,
+   "rank": 0,
+   "name": "Diệp Tương Quân"
+  },
+  "buttons": [
+   "Chỉ xem bảng vàng sau rèmTốnkhôngĐượckhông"
+  ]
+ }
+]
