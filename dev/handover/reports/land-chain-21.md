@@ -55,3 +55,9 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 09:26Z MAIN 156 order: mg-trim → HW-NITS → ob-oan → ob-m3ui → endcard → (firstcard / ob-verdict / news-sieve on PASS, owner bugs first) → TAINGHE → bac-progress (contains tainghe r5) → srvmerit → kit-stage → kit-empty-rows → NHV → map-zones → D1+D4. Standing: pick positions myself (owner bug first, then queue order).
 - 09:28Z RV-KK39 (session_01V1ZZH1gcwnQdqMXjiEbMy3): PASS kit-bac-progress cb221604 (after TAINGHE), kit-empty-rows cda34e5e (with/after kit-stage 22e318d5). Heads-up: firstcard 9ba83cf0 conflicts with kit-stage-r2 in jk2b.js kitOptOdds (keep both; see kit-empty-rows.md ## REVIEW) → source conflict = route to MAIN when stacking.
 - 09:29Z MAIN 156: kit-bac-progress cb221604 REPLACES TAINGHE slot (contains tainghe r5; run tainghe ×5 too). kit-empty-rows after kit-stage. firstcard↔kit-stage jk2b.js kitOptOdds: lander does union when second (KIT_ODDS_SURE=false no odds on cannot-fail cards AND kitRiskOpt/kitEndOdds true odds), rerun firstcard-scan.py + kit-stage tests.
+- 09:31Z OB-OAN: ob-oan-r6 head aa36aad7 (+ KIT_REQUESTS line + 1 wording line in jts.js TS_LOWER.ghen, post-PASS game text) → use at restack, flag in READY.
+- 09:32Z MAIN 156: ob-oan aa36aad7 confirmed; kit-gloss-lower 233de84d (RV running) slots right after ob-oan on PASS.
+- 09:33Z RV-GLOSS-LOWER (session_01V1ZZH4iJUAu4DBtG6aaKhY): SMALL PASS kit-gloss-lower 233de84d (head 3b765458 = + report) → after ob-oan. Nit for OB-OAN (non-blocking): «Dâng hoa» → «Cắm hoa dâng Hoàng thượng».
+- 09:34Z MAIN 156: kit-gloss-lower 3b765458 rides with ob-oan (one slot). Wait for OB-OAN's next text-only sha («Dâng hoa» fix) before ob-oan READY.
+- 09:34Z OB-OAN: ob-oan-r6 head d0d2fd86 (text-only TS_LOWER act names) → stage this.
+- 09:35Z MAIN 156: ob-m3ui r3 5843966e under SMALL delta rv; if PASS before ob-m3ui slot → swap to it (+report sha), else land 68a1c68d and r3 later as own slot.
