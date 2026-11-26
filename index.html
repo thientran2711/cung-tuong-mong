@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"cf696678+","t":"2026-11-26T21:35Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"ec9d46abc291","h":[]};
+window.CTM_BI={"s":"a55c139d+","t":"2026-11-26T21:38Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"46afcb8ee458","h":[{"s":"8d5e3382+","t":"2026-11-26T18:38Z","c":"Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»)."},{"s":"f573dc94+","t":"2026-11-26T17:33Z","c":"Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị)."},{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -99638,7 +99638,7 @@ html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain{transition:opa
 html body #modal#modal#modal#modal#modal.kstg .dlg.dlg.kstage:has(>.khplate:not([hidden])) .kpmain.kpmain:not(.kstg-foot){max-height:var(--bhL,var(--bh))!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces>figure.kstg-dup{display:none!important}/* the speaker standing on the stage carries his own name tag: his face is not repeated in the story's faces row (KK34, duplicate «Hoàng thượng») */
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage:has(>.khplate:not([hidden])) .kpmain.kstg-foot{opacity:0;visibility:hidden;pointer-events:none}/* one page «foot»: the lifted card's plate takes the band's place (✕ brings the story back) */`;document.head.appendChild(st)}catch(e){}})();
-function kstgWants(dl,g){try{if(!(dl&&dl.matches&&dl.matches("#modal .dlg")&&!dl.closest(".pc,.kpdlg")))return false;if(g)return g.closest(".dlg")===dl&&kitHandWants(g);return !!dl.querySelector(":scope>#mb .opts.khand")}catch(e){return false}}
+function kstgWants(dl,g){try{if(!(dl&&dl.matches&&dl.matches("#modal .dlg")&&!dl.closest(".pc,.kpdlg")))return false;/* RING-BUILD-5: a card that holds a kit picker (kitPicker, today only the new-game card's «Dung mạo») stays a card — on the stage the speech box lay over the picker and no face could be tapped */if(dl.querySelector(":scope>#mb .kpick"))return false;if(g)return g.closest(".dlg")===dl&&kitHandWants(g);return !!dl.querySelector(":scope>#mb .opts.khand")}catch(e){return false}}
 function kstgGeo(){try{if(typeof kscnGeo==="function")return kscnGeo()}catch(e){}return{t:0,H:innerHeight,L:0,R:0,w:innerWidth}}
 /* ONE bg-key rule for every event (KIT §102.1; Foreman C ROOT 3 KIT REQUEST via MAIN 146 25/11 22:35Z): the stage background =
    (1) the Q item's own `bg` key (https://ctm-img.victoria-tntt.workers.dev/img/<bg>.webp), (2) a MAJOR EVENT with no own picture key → its painted scene (KIT_EVBG, by the title words),
@@ -102845,7 +102845,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ec9d46abc291";window.CTM_BUILD=BUILD;
+const BUILD="46afcb8ee458";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
