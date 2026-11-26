@@ -333,3 +333,12 @@ Owner OD 25/11 ~23:20Z: the mirror lost its preset sets (jration lxColRows dropp
   top-bar «Về phòng» (#k3room, kitBackBtnHtml kind "home" → `img/kit/ico-home.webp`, 30x30 like ico-room) so her own palace has ONE emblem on the top bar
   AND the Dư đồ. Until painted: the button keeps ico-room and writes her palace's name as its second line (homeWay().hn); Dư đồ keeps «Nhà ta». Painting: KK37 / art (no code art).
 - K-MAP-BANNER (PLACE-RULES, owner OD 25/11 ~23:40Z k17): ONE visible line on the Dư đồ itself for an all-locked state (cấm túc / lãnh cung / hết khắc …) — the leather Dư đồ (jbook) hides the top-row .past/.fest chips. Until the kit part exists, review/place-rules says it once through kitNotice (sticky, id "plban") and writes it into a .fest chip of .maptools (shown on non-leather views); the per-label «đang cấm túc (N tháng)» plates are removed (plMap, jplrule.js).
+
+## 26/11 K-CHOICE-WARN — the small warning line «Cẩn thận khi lựa chọn» (FIRSTCARD-3, owner OD 26/11 ~18:25Z; kit keeper KK44)
+Owner rule (OD last rows 26/11 ~18:25Z): an odds word only on options that truly roll (the TRUE word); options that do NOT roll but change her ending / life
+(xuất giá, xuất gia, tự vẫn, rời cung, chuyển kiếp, «Cúi đầu chờ xét» …) carry NO odds word and the choice gets ONE small kit warning line above it:
+**«Cẩn thận khi lựa chọn»** (cổ ngữ, one line, small, calm — a caution, not an alarm: no red wash, no heartbeat, no odds ladder). Result rows stay visible.
+Needed from the kit: ONE part `kitWarnLine(text?)` (default text «Cẩn thận khi lựa chọn», VANPHONG) returning the HTML of the line, placed by the kit
+ABOVE the option list of a dialog / selection card (both devices, Fold 755x1000 + iPad 1180x820, never clipped, never shifts the options' fixed S/M/L size).
+FIRSTCARD-3 calls it from jk2b (`kitChoiceWarn`) once per choice that holds at least one life-changing option; until KIT READY it renders a temporary
+stand-in INSIDE jk2b (class `kwarnline`, no new look) so the rule works; the stand-in is swapped for the kit part the moment KIT READY lands.
