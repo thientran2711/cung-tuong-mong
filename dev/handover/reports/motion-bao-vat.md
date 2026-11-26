@@ -54,7 +54,19 @@ Note: after a gift ring closes, the game's own result toast (#rtoast, KIT 32.10 
 - Law 9: RING-BUILD kitRing (person/group) and kitRingItem must become ONE core. KRI_MATH is isolated for that; I will adapt to whichever API KK44 picks.
 - kitFlyItem (LIVE, owner ok) still plays its box after a shop buy over the ring (as before).
 
-## HANDOVER (rollover at ~28 % ctx; successor = next MOTION-BUILD, opened by MAIN)
+## MOTION-BUILD-2 (session_01Rc5AsKqmDtNiLkQzBDQ6ed, coordinator now MAIN 163 session_01Rc5AsNAg5nfWVh6wa8AKPj, kit keeper KK45 session_01Rc5AsKCWdL7VbM8UKMWRhd)
+PRIORITY #1 CHECK: review/ring-build 469ca52e→8ea545fb (kitRing, KRING_MATH, BAL.kring) | review/motion-bao-vat c6a1a392 | KK44 ruling 26/11 ~20:30Z ONE core | OD 26/11 ~20:27Z (front = big readable size) / ~20:30Z (no ring item covers a tap target).
+Commits: 44867ae3 (look notes), b7aec7b9 + fc11d919 (toilette / titles / hoa điền / face wired, old-left scan, overlap scan), ecdf5549 (merge review/ring-build 8ea545fb = ONE core).
+- LOOK NOTE «THÀNH · Được: không»: the gift went by a servant errand (jptime ptSend; the effect lands on arrival). Whole act family (kriAct → kriPending): an act that starts her errand → seal KẾT QUẢ, Được = the card's own Được row (named person), Ghi chú = «<người> đã đi …, về <khi>; phần Được đến khi việc xong». Direct acts keep THÀNH/BẠI + the real diff. Result items = kit `ef` spans joined by `ksep`.
+- FRONT ITEM 1.5×: KIT_RINGI.tw = the front tile px (Fold 124, iPad 150; old 82), sides keep the old curve (side 72); kitItem tiles get --isz = tw.
+- ONE CORE: jkring-item.js reads KRING_MATH (§104.1 jkring.js) + BAL.kring seats/decay/stop/snapMs/stepMs; KRI_MATH deleted; assemble.py: jkring.js … jkring-item.js last; KIT.md block renumbered §104.4.
+- Tests after merge (ecdf5549): kit-ring-item.js check Fold+iPad 0 page errors, overlap 0 in gift/shop/sell ring+focus+result; toil/title/hd videos 0 errors. kit-ring-oldleft.js after merge: Fold 1 / iPad 1 left = **face (new-game card)**: after the ring-build merge an info panel + a card hand («Vào cung ngay» / «Ở nhà chờ tuyển tú») cover the face picker on the new-game card, so the tap never reaches it (shot CDN img/_review/motion-bao-vat/5-face-card-covered-755x1000.jpg). Before the merge it was 0/0 (fc11d919). Reported to RING-BUILD-3 / MAIN 163; one gift row was flaky once under load (re-run 0).
+- VIDEOS (real build ecdf5549, real taps, ≤30 s): CDN img/_review/motion-bao-vat/5-gift-755x1000.mp4, 5-gift-1180x820.mp4, 5-toil-*.mp4, 5-title-*.mp4, 5-hd-*.mp4 (both devices). Face video not made (blocked by the cover above).
+- LOOK RISK for MAIN: titles ring — side plates (kitTitlePlate) are small text plates; front plate readable.
+
+## HANDOVER (MOTION-BUILD-2 rollover; successor opened by MAIN 163)
+Remaining: (a) face card cover after merge → once RING-BUILD-3 fixes the new-game card overlay, re-run `node dev/test/kit-ring-oldleft.js file://$PWD/index.html <out> 755x1000` and 1180x820 → expect 0, then record face videos (`kit-ring-item.js … face WxH`, trim ≤30 s, CDN img/_review/motion-bao-vat/). (b) KK45 family gate «old left = 0» + sếp video ok → lands as ONE set with review/ring-build. (c) optional: use BAL.kring.front for the item front boost instead of KIT_RINGI.tw ratio if KK45 wants one number.
+Older handover (MOTION-BUILD) below — items 1–5 DONE by MOTION-BUILD-2.
 State: review/motion-bao-vat (latest commit in git log). Worktree recipe: sparse worktree from origin/review/motion-bao-vat, `bash dev/site/build_site.sh`, test `node dev/test/kit-ring-item.js file://$PWD/index.html <out> check|bag|perf|gift|shop WxH`.
 Remaining (adapter contracts from the place map):
 1. (4) toilette dress — jtoil.js:350 toilDressUI → kitInvGrid({key:"toil", onPick:toilPick}) inside the #kg82 overlay (not inline). Hook: wrap toilPick or the toil tile tap → kriFromGrid-like ring over #kg82 (kitScene z 57 > modal; check #kg82 z), acts «Mặc» = toilPick(x) / «Tháo» = toilAct("off") (jtoil.js:379-385), then toilDressUI() redraw; #toilok stays.
