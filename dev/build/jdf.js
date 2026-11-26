@@ -103,9 +103,15 @@ function doorLineOf(s){if(!s)return"";const seg=[];const od=s.querySelector(".ko
  const notes=[],lab=[];for(const r of rows){const l=((r.querySelector(".krl")||{}).textContent||"").trim().toLowerCase();const it=[...r.querySelectorAll(".krv .ef, .krv .kwhy")].map(e=>e.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
   if(!it.length)continue;const L=DOOR_LAB[l];if(!L){notes.push(...it);continue}lab.push(L==="tốn"?`tốn: ${it.join(", ")}`:`${L}: ${it.join(" · ")}`)}
  return seg.concat(notes,lab).join(" · ")}
+/* RV-ACT-MERGE F3 (law 11, OD:L1095): the old button's «Cần» list (data-kneed: «2 khắc (còn 4)», «Sức ≥5», «Bạc 20», a condition …) rides along:
+   its khắc goes into the row's Tốn («tốn: 2 khắc, Đức -3», as every other door row says «Tốn N khắc»), its first unmet need is the greyed row's chip
+   (kitOffNeed shape: the dialog shows needs only when one is unmet). Numbers are the button's own (law 4). */
+function doorNeeds(b){try{const k=b.getAttribute("data-kneed");return k?JSON.parse(decodeURIComponent(k)):[]}catch(e){return[]}}
 function doorCardBtn(h){const d=document.createElement("div");d.innerHTML=String(h||"");const b=d.querySelector("button");if(!b)return null;
- const w=b.querySelector(".kwhy");const why=w?w.textContent.trim():"";if(w)w.remove();const s=b.querySelector("small");const x=doorLineOf(s);if(s)s.remove();
- return {n:b.innerHTML.trim(),x,why,off:b.disabled||!!why}}
+ const N=doorNeeds(b);const kh=(N.map(x=>String(x&&x.t||"").match(/^(\d+)\s*khắc/)).find(Boolean)||[])[1];const un=N.find(x=>x&&!x.ok);
+ const w=b.querySelector(".kwhy");const why=(un&&un.t)||(w?w.textContent.trim():"");if(w)w.remove();const s=b.querySelector("small");let x=doorLineOf(s);if(s)s.remove();
+ if(kh){const kt=`${kh} khắc`;x=/(^|\s·\s)tốn: /.test(x)?x.replace(/(^|\s·\s)tốn: /,`$1tốn: ${kt}, `):(x?(()=>{const P=x.split(" · ");const i=P.length&&/^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)$/.test(P[0])?1:0;P.splice(i,0,`tốn: ${kt}`);return P.join(" · ")})():`tốn: ${kt}`)}
+ return {n:b.innerHTML.trim(),x,why,need:N,off:b.disabled||!!un||!!(w&&why)}}
 /* the member id of a card button: a:<k> (data-a) · e:<k> (data-e Quyền Hoàng hậu) */
 function doorCardId(h){h=String(h||"");const m=h.match(/^\s*<button([^>]*)>/);if(!m)return"";let x;if((x=m[1].match(/\bdata-a="([^"]+)"/)))return"a:"+x[1];
  if((x=m[1].match(/\bdata-e="[^"]*"[^>]*\bdata-k="([^"]+)"/)))return"e:"+x[1];return""}

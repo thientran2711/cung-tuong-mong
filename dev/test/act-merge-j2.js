@@ -27,6 +27,7 @@ const URL=process.argv[2]||'file://'+path.join(ROOT,'index.html');
      const O=DOOR.rowsJ2(r,L,v);const shownN=new Set(O.map(o=>o.n));
      for(const id of rawIds){const m=memb(id);if(m.r!==r||m.role==='hide')continue;const b=L.find(x=>x.id===id);if(!b){fail('T1 '+sc,`${v.name}: ${id} not a member of ${r.k}`);continue}
       const t=(r.tiers||{})[id];if(shownN.has(t?`${b.n} · ${t}`:b.n))continue;const g=(r.roll||[]).find(g=>g.includes(id));if(g&&O.length)continue;fail('T1 '+sc,`${v.name}: ${id} not reachable in ${r.k}`)}
+     /* T6 (RV F3): a row whose old button needed khắc says it in its Tốn; an unmet need greys the row with that need */for(const m of L){const kn=(m.need||[]).find(x=>/^\d+\s*khắc/.test(String(x&&x.t||'')));if(kn&&!/tốn: [^·]*\d+ khắc/.test(m.x))fail('T6 '+sc,`${v.name}: ${m.id} row lost its khắc («${m.x.slice(0,60)}»)`);const un=(m.need||[]).find(x=>x&&!x.ok);if(un&&!(m.off&&m.why===un.t))fail('T6 '+sc,`${v.name}: ${m.id} unmet «${un.t}» not the row's chip`)}
      const S0=spy();try{for(const m of L){const n=S0.log.length;try{m.go()}catch(e){fail('T2 '+sc,`${r.k} ${m.id} threw ${e.message}`)}const got=S0.log.slice(n).join(',');if(got!==m.id)fail('T2 '+sc,`${r.k} ${m.id} fired «${got}»`)}}finally{S0.undo()}}
     try{const d=mkP('door',{r:i,k:'P7'});if(DOOR.cardM(i,DOOR.byK('P7')).length&&!(d&&d.o&&d.o.length>1))fail('T2 '+sc,`${v.name}: PEND door P7 card mode empty`)}catch(e){fail('T2 '+sc,'PEND card '+e.message)}}
    /* T3 pop-up */
@@ -46,5 +47,5 @@ const URL=process.argv[2]||'file://'+path.join(ROOT,'index.html');
  console.log('# T5 card buttons (scenario: consorts, before min–max → after min–max)');for(const [k,x] of Object.entries(agg(R.T.card,1)))console.log(`  ${k}: ${x.n} cards · ${x.b.join('–')} → ${x.a.join('–')}`);
  console.log('# T5 pop-up buttons (scenario kind: raw options + in-person acts before → focus-view acts after)');for(const [k,x] of Object.entries(agg(R.T.pop,2)))console.log(`  ${k}: ${x.n} · ${x.b.join('–')} → ${x.a.join('–')}`);
  console.log('# ACT keys outside the doors (J1 talk side / moved):',R.free.join(', '));
- console.log(R.F.length?'FAIL '+R.F.length+'\n  '+[...new Set(R.F)].slice(0,40).join('\n  '):'PASS T1 T2 T3 T4');console.log('page errors',perr.length,perr.slice(0,3).join(' | '));
+ console.log(R.F.length?'FAIL '+R.F.length+'\n  '+[...new Set(R.F)].slice(0,40).join('\n  '):'PASS T1 T2 T3 T4 T6');console.log('page errors',perr.length,perr.slice(0,3).join(' | '));
  await b.close();process.exit(R.F.length||perr.length?1:0)})();
