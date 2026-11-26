@@ -38,10 +38,23 @@ function hang(pc,k=0){if(!pc.isConnected)return;try{if(pc.__kp){pc.__kp.destroy(
  pc.__kp=kitPick.open({host,anchor:A,side:"r",acts,dismiss:false,noLap:true,
   onPick:id=>{const b=btns[+id];if(!b||!b.isConnected||b.disabled)return;b.click()},
   onOff:a=>{try{const pb=host.querySelector(`.kpk .kfoc-b[data-id="${a.id}"]`);if(typeof kpPop==="function")kpPop(pb,`<div class="kpopt">${(a.why||"Chưa làm được").replace(/</g,"&lt;")}</div>`,{})}catch(x){}}})}
+/* KIT §98.13 ENTRY-LINE BUTTONS = THẺ GỖ (KK44 §2 row j6 #sc-t buttons / jplst .kmnote.kmslot «… vừa rời đi [Theo đến]», j21 goSee / follow lines):
+   j6 renderStage puts the buttons of the visit line (S.visit.msg) / place text after the title in #sc-t, which jplst hides (the line itself is the toast) — so those
+   buttons were never on screen (found by KIT-STAGE-R4, Fold + iPad: «Theo đến» invisible). They now hang as plaques on the stage, top middle, away from the
+   people (soft avoid) and the stage columns (kitPick hard obstacles); ✓ = a real click on that same button (data-follow / data-see paths unchanged). */
+function entry(){const st=document.getElementById("stage"),t=document.getElementById("sc-t");if(!st||!t||!st.getClientRects().length)return false;
+ const B=[...t.querySelectorAll(":scope>button")];if(!B.length){if(st.__kpcK){st.__kpcK="";const P=kitPick.current();if(P&&P.host===st)P.destroy()}return false}const key=B.map(b=>b.outerHTML).join("");
+ const P0=kitPick.current();if(st.__kpcK===key&&P0&&P0.host===st&&P0.open)return true;st.__kpcK=key;
+ const acts=B.map((b,i)=>{const c=b.cloneNode(true);const sm=c.querySelector("small");const ton=sm?T(sm).replace(/^Tốn\s*/,""):"";if(sm)sm.remove();return {id:String(i),n:T(c)||"Đi",pic:"",word:"",ton,off:!!b.disabled,why:b.disabled?"Chưa làm được":"",info:""}});
+ const go=(k=0)=>{const sr=st.getBoundingClientRect();if(!sr.width||!sr.height){if(k<30)setTimeout(()=>go(k+1),100);return}
+  const avoid=[...st.querySelectorAll(".tok,.kstg-fig,.kfig")].filter(x=>x.getClientRects().length).map(x=>{const r=x.getBoundingClientRect();return {x:r.left-sr.left,y:r.top-sr.top,w:r.width,h:r.height}});
+  const nm=parseFloat(getComputedStyle(st).getPropertyValue("--kpnh"))||40;const A={x:sr.width*.5-10,y:nm+4,w:20,h:Math.max(160,sr.height*.6)};
+  kitPick.open({host:st,anchor:A,acts,avoid,dismiss:false,onPick:id=>{const b=B[+id];if(b&&b.isConnected&&!b.disabled)b.click()}})};requestAnimationFrame(()=>go(0));return true}
 function scan(){if(!on())return;try{const pw=document.querySelector("#popw .pc");if(pw&&pw.getClientRects().length){wire(pw);return}
+ if(!document.querySelector(".kfoc")&&entry())return;
  const pn=document.getElementById("panel");if(!pn)return;const pcs=[...pn.querySelectorAll(".pc")].filter(x=>x.getClientRects().length&&!x.closest(".kfoc"));if(pcs.length===1)wire(pcs[0])}catch(e){console.error("kitPcard",e)}}
 let t=0;const soon=()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;scan()})};
-const obs=()=>{["popw","panel"].forEach(id=>{const e=document.getElementById(id);if(e&&!e.__kpcObs){e.__kpcObs=1;new MutationObserver(soon).observe(e,{childList:true,subtree:true})}})};
+const obs=()=>{["popw","panel","stage"].forEach(id=>{const e=document.getElementById(id);if(e&&!e.__kpcObs){e.__kpcObs=1;new MutationObserver(soon).observe(e,{childList:true,subtree:true})}})};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",obs);else obs();
 window.kitPcard={scan,on,wire};
 const css=document.createElement("style");css.textContent=`
