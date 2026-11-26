@@ -1,8 +1,8 @@
-# flight2-s9f (real-tap harness ec026335, ipad)
+# flight2-s9f (real-tap harness 8ea10d7e, ipad)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
 |---|---|---|---|---|---|---|---|---|---|
-| flight2-s9f | HARNESS |  | 1623 |  | 1 | 0 | 1 | — | 129 / 50 (exam 18, decree 111) |
+| flight2-s9f | Lãnh cung — Tuổi xuân qua đi | 40 | 3447 | 2233 | 1 | 0 | 3 | — | 226 / 84 (exam 18, decree 201, select 7) |
 
 ## Dead buttons
 
@@ -10,15 +10,16 @@
 
 ## Bugs
 
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
-## HANDOVER (runner rollover 11/26/2026 10:45Z, life NOT ended)
+- [harness] ×1 picker stalled 96 steps / 60 s on .kmov «» without a real tap (area 96, deadEnd 1) → tapped «Chuẩn bị thị tẩm»
+- [harness] ×1 NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): no close / next after scrolling to its end → later visits unstuck at once by taps
+- [game] ×1 dialog scrolled to the end has no close / next button: .kmov «»
 
-- life: flight2-s9f · iPad 1180x820 · bot cautious · seed 2026112527 · LIVE game 5e013076 (keep the same build for the whole life)
-- state at ckpt: buổi 1623 · year ~11-12 · rank 0 (peak rank 1 at buổi 202) · promotion roads 127 seen / 49 taken (exam 18, decree 109) · bugs 0 game bugs · stuck 0 · dead buttons 1 (harness gap: #rtoast over «Nghỉ ngơi», shot dead-ipad-1795675052961.png, not a game DEAD per F #19)
-- harness: review/robot-realtap @ ec026335 (worktree: git worktree add --detach /home/user/wt/hec0 ec026335)
-- ckpt: branch review/ckpt-s9f @ 16496f71, dir ckpt-s9f/ (flight2-s9f.ckpt.json + .json + .md + -moments.md). Copy all four into the out dir (e.g. /home/user/wt/out-s9f/) before resuming. Profile/shots are not needed (pictures refetch).
-- serve the game: cd <worktree of main 5e013076> && python3 -m http.server 8765 (run_in_background, timeout 7200000; re-arm every 2 h)
-- resume command (run_in_background, timeout 7200000, re-arm every 2 h):
-  cd /home/user/wt/hec0 && until node dev/test/robot-rt.js http://localhost:8765/ /home/user/wt/out-s9f dev=ipad bot=cautious seed=2026112527 life=flight2-s9f resume=1; do sleep 5; done
-- rules unchanged: real taps only, no cap, no exit road; hourly line to the Foreman; STUCK LIFE over 30 min; switch harness only on SWITCH at a fresh ckpt; at the end run dev/measure/robot-audit.js, push flight2-s9f.{json,md,bugs.md,-moments.md}, send «LIFE DONE s9f <ending> <age>».
-- note: "runner error: browser closed" lines in the results come from deliberate harness-switch kills, not game bugs.
+## Notes (runner s9f #1/#2, 11/26/2026)
+
+- ending: Lãnh cung — Tuổi xuân qua đi, age 40, game imposed (no exit pick); robot-audit.js: VALID (real taps, jsClicks 0, no cap, no bot exit); promotion roads 226 seen / 84 picked (rt-offer rule).
+- harness switches at fresh ckpts: ec026335 → 2df8f5fa (b1673) → 0e0ebe29 (b2067) → 8ea10d7e (b2416); game pinned 5e013076 (local server, localhost:8765) for the whole life; the json harness field shows only the last harness.
+- GAME BUG: SAVE QUOTA SPLIT b2716 stored 5233180 / live b2746, lsK 6312 KB (localStorage quota ~5.2M; stored save frozen at 5228745-5228777 chars, live played on). See flight2-s9f-savesplit.md.
+- RESUMED FROM STALE SAVE b2716, lost ~245 buổi; harness R.buoi over-counts by ~245 from here (game clock is truth). Final harness buổi 3447 ≈ game clock b3202 (year 23 by audit).
+- GAME BUG: dialog scrolled to the end has no close / next button: .kmov «» (harness tapped out at once; 2 harness lines belong to it).
+- DEAD BUTTON ×1: «Nghỉ ngơi» covered by span.kitem in #rtoast (pre-8ea10d7e harness gap, not a game dead per F #19).
+- "runner error: browser closed" lines come from deliberate harness-switch kills.

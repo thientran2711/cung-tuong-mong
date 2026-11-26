@@ -8,3 +8,4 @@
 - F #24 order 16:00Z: keep playing live, no reload / no voluntary re-arm; if the runner must re-arm or the page crashes, resume from the stale ckpt and note «RESUMED FROM STALE SAVE b2716, lost N buổi»
 - proof for B's save-fix (rv9 01bad0f6)
 - 16:24Z update: live buổi 2816, stored save still 5228745 chars (stale since ~15:53Z), lag >1300 s; life valid, playing on
+- 18:35Z LIFE DONE: Lãnh cung age 40, harness b3447 (game clock ≈ b3202); stored save stayed 5228777 chars; no further freeze/rewind after the 16:46Z resume.
