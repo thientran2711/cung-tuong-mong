@@ -82610,7 +82610,7 @@
    "total": 95966
   },
   "_file": "E-S4-R5-rebel-5-ipad.json",
-  "runner_ruling": "RULING PENDING: Dang Ky board played 5 moves then Quay lai (left the trial) - not counted until Foreman E rules"
+  "runner_ruling": "INVALID (Foreman E ROOT 26/11 23:52Z: Dang Ky board left unplayed via Quay lai) - rerun fresh once F job 8 lands"
  },
  {
   "job": {
