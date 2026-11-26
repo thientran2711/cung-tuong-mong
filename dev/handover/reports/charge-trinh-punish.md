@@ -111,3 +111,10 @@ Tests on f068313b: charge-trinh-punish ALL PASS (incl. vpAccuse + co-op guest / 
 - Tests: charge-trinh-punish (incl. vpAccuse runtime + co-op guest/host/single-player lazy-write cases), charge-followups, charge-smoke, seize-ledger ALL PASS; charge-scan all 0; punish-scan npc_zero 0.
 - Videos (real page, srv-mc-video.js, looked at): https://ctm-img.victoria-tntt.workers.dev/img/_review/charge-trinh-punish/fold-755x1000-f068313b.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/charge-trinh-punish/ipad-1180x820-f068313b.webm · end cards fold-endcard-f068313b.png / ipad-endcard-f068313b.png. Lander wipes: python3 dev/site/cdn_sync.py --wipe-review charge-trinh-punish
 - Open (not gating, routed): P1 servant end card «Đáp ứng» + consort figure (pre-existing j42); N1 bought servant accusing her briber is dismissed too.
+
+## LAND READY review/charge-trinh-punish ac73cd3c (FF from LIVE 1dcb373e) — 26/11 ~13:05Z (replaces the f068313b line: LIVE moved)
+- ac73cd3c = f068313b + merge origin/main 1dcb373e (coop-freeze-kmrew scroll-cue; jinv / jksize / 2 tests; only built files conflicted → rebuilt). Reviewer MERGE DELTA PASS (handover 85208ccb).
+- coop-e2e ×3 ac73cd3c: 143 / 143 / 143.
+- quickcheck PASS (perf new/live render 294/271 ms, tab 577/683, buổi 2147/1648, tasks>200 44/40 — within the gate); core gates G1–G3 PASS, G4 only the known LIVE faults 80-dialog-fixed + 90-button-crawl «Ô lưu · Lui».
+- charge-trinh-punish ALL PASS, one-core-guard PASS, scroll-cue-loop PASS on the merge.
+- Videos: the f068313b ones stand (merge touches no D1/D4 file): img/_review/charge-trinh-punish/fold-755x1000-f068313b.webm · ipad-1180x820-f068313b.webm. Lander wipes: python3 dev/site/cdn_sync.py --wipe-review charge-trinh-punish
