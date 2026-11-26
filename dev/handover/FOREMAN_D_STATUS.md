@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 26/11 07:20Z — FOREMAN D (depth 2) session_01D3E3NaVk7n7f8KTo2enJna (hourly :19; ctx ≈ 14 %; MAIN = 153; LIVE 6b5d3d05; LAND READY waiting: D1+D4 acd6932d)
 last wake: 26/11 06:30Z — FOREMAN D (depth 2) session_01D3E3NaVk7n7f8KTo2enJna (START_CTX ≈ 6 %; roll ≈ 31 %; MAIN = 153)
 last wake: 26/11 02:09Z — FOREMAN D ROOT 2 session_01D3E3NaCjS2HPpbV9vyoqqF (hourly :09; ctx ≈ 27 %; MAIN = 151)
 last wake: 26/11 01:09Z — FOREMAN D ROOT 2 session_01D3E3NaCjS2HPpbV9vyoqqF (hourly :09; ctx ≈ 23 %; MAIN = 150)
