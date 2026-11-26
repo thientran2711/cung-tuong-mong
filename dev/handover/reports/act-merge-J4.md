@@ -51,7 +51,7 @@ PRIORITY #1 CHECK: OD 26/11 ~07:25Z/~07:32Z/~08:15Z act-merge rows | main 3af789
 - `j83.js` illDoor («Mua đồ», Tư trang): its private Q.push dialog → rows + the same card.
 - `jhouse.js` servant STAGE pop-up «Thưởng phạt»: J4's private fold `hsvJudgeDoor` + `j4ServDoor` DELETED. It is now a row of J1's engine: `DOOR.add({k:"sj",n:"Thưởng phạt",kinds:["serv"],re:/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/})` (added on the first servant list, since jdoor.js loads after jhouse.js). J1's talkOpts fold, PEND «door» card and talk(-1-j) member path run it; inside the Dư đồ person view J1's doorOpen shows the card as her tap. Members on the stage = what the stage had (Thưởng vô cớ / vì X · Phạt · Tha lỗi · Đổi người); Đề bạt stays on the Cung nhân card door (it never was a stage act).
 - Học door, Thái hậu way: the copied buổi-only khắc gate (time-spill guard FAIL) is replaced by j76's own reason: `dayWhy(n)` inside the sáng-lesson window (as `lessonMode` th does).
-- BRANCH (MAIN 158, 11:08Z): mg-trim c961211e is on HOLD, J4 does not need it → **review/act-merge-J4b = ce106915** = J1 LAND READY fe457201 + J4's own files only (jactj4.js, j83 illDoor hunk, jhouse stage row, assemble, test). review/act-merge-J4 (3b92b4b2, carries mg-trim) is superseded; not force-pushed.
+- BRANCH (MAIN 158, 11:08Z): mg-trim c961211e is on HOLD, J4 does not need it → **review/act-merge-J4b = ce106915, re-stacked on J1 07d74f6a = 3b163bcc (LAND READY)** = J1 LAND READY fe457201 + J4's own files only (jactj4.js, j83 illDoor hunk, jhouse stage row, assemble, test). review/act-merge-J4 (3b92b4b2, carries mg-trim) is superseded; not force-pushed.
 
 ## NAME table old → new (unchanged from J4 except the stage row)
 | Screen | OLD | NEW (door → ways) | ĐỂ RIÊNG |
