@@ -1,10 +1,10 @@
 # Báo cáo lỗi sếp báo 25–26/11
 
-Bản kiểm: 26/11 ~18:40Z · MAIN CHÍNH 161 · bản live **f573dc94** (lùi về b881686f nếu cần).
+Bản kiểm: 26/11 ~18:50Z · MAIN CHÍNH 161 · bản live **f573dc94** (lùi về b881686f nếu cần).
 Nguồn: mọi dòng OWNER trong sổ quyết định từ 25/11 ~23:30Z (trên máy bay, iPad không tiếng) đến cuối.
 Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main, hàng đợi lander, nhánh review và CLAIMS — không viết từ trí nhớ.
 
-**Tóm tắt.** 54 dòng sếp báo hoặc ra lệnh: **21 đã lên live · 3 nửa live, nửa còn lại đang chờ hoặc đang làm · 10 chờ lên live (đã qua kiểm, xếp hàng lander) · 12 đang làm · 4 chưa làm hoặc phải làm lại · 4 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
+**Tóm tắt.** 57 dòng sếp báo hoặc ra lệnh: **21 đã lên live · 4 nửa live, nửa còn lại chờ hoặc đang làm · 11 chờ lên live (đã qua kiểm, xếp hàng lander) · 17 đang làm · 4 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
 
 **Cách đọc cột «Trạng thái»:** LIVE <sha> = đã chạy trên game thật · chờ lên live = đã qua kiểm, đang xếp hàng lander · đang duyệt = người kiểm đang xem · đang làm (tên thợ) · chưa làm.
 
@@ -52,7 +52,7 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 | **33. Không phải gì cũng gộp; chỗ nào phải riêng thì để riêng.** | **LIVE b881686f** (mỗi nút ghi GỘP / ĐỂ RIÊNG kèm lý do). | Giữ riêng những việc khác luật chơi. |
 | **34. Khuê các: chọn A, gộp ngay tối nay.** | **LIVE b881686f** (J5c, khóa cửa theo cặp). | Khuê các gọn như các chỗ khác. |
 | **35. Tài nghệ đòi 100 điểm mà mỗi lần học 2 điểm — sửa chưa?** | **LIVE 6b5d3d05** (như số 7). | Học tốt bậc 0 được 6 điểm. |
-| **36. Tiến bộ chỉ tính trong bậc, không cộng cả 5 bậc.** Hiển thị: «Tiến bộ 8/20»; đủ thanh = lên bậc. | **Chưa lên live** — kit-bac-progress cb221604 (hàng đợi; nhánh PACE-ALL fa05166a chưa lên). Main chưa có «đã tinh thông». | Thanh tiến bộ chỉ trong bậc hiện tại. |
+| **36. Tiến bộ chỉ tính trong bậc, không cộng cả 5 bậc.** Hiển thị: «Tiến bộ 8/20»; đủ thanh = lên bậc. | **Chờ lên live** — review/kit-bac-progress cb221604 (trong hàng đợi lander; pace-all fa05166a cũng chờ). Main chưa có «đã tinh thông». | Thanh tiến bộ chỉ trong bậc hiện tại. |
 | **37. Làm sao giảm oán / giảm độ nguy hiểm?** Đường đã có nhưng ẩn: hộp «Nguy hiểm chung» liệt kê người ghét + «Cách giảm». | **Chờ lên live** — lc23-oan 53319e6f (đang qua cổng LC23). Main chưa có «Cách giảm». | Hộp nguy hiểm chỉ rõ cách hạ oán. |
 | **38. Thị tẩm nói xấu người khác — không biết thành hay không.** Kết quả luôn ghi thành/hỏng và thay đổi của người kia. | **Chờ lên live** — ob-verdict (nằm trong lc23-os d811a46d). | Thẻ kết quả có «Thành/Hỏng» và hàng của người bị nói xấu. |
 
@@ -64,18 +64,22 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 | **40. Giữ mọi hàng kết quả, kể cả «Tốn: không», «Được: không».** Luật ẩn hàng trống KHÔNG được lên. | **LIVE f573dc94**: main không có luật ẩn (`kitRowNil` = 0). Nhánh kit-empty-rows / kit-g4-r2 đã rút; KK44 làm lại không có §6.7. | Mọi hàng kết quả vẫn hiện, kể cả «không». |
 | **41. Không biết mua đồ ở đâu; chương bắt mua của thái giám mà không biết gặp ai.** Mọi dòng mục tiêu có tên người / nơi / vật thành liên kết, «Đi tới»; Dư đồ ghi «Mua bán»; chỉ rõ thái giám. | **Đang làm (GOAL-LINKS)**. | Chạm tên trong mục tiêu là ra «Cách làm» + «Đi tới». |
 | **42. Khách tới tìm: bấm chọn mà kết quả không hiện ngay.** Mọi lựa chọn hiện kết quả liền, tại chỗ. | **Đang làm (OB-VERDICT-3)** — nền ob-verdict-rv 5dc1db31 (trong lc23-os). | Chọn «Nhịn» là thấy kết quả ngay. |
-| **43. Xuất giá, đi tu, tự vẫn ghi «Rất vững» — để chữ thật, thêm cảnh báo.** Chữ odds chỉ cho việc thật sự tung may rủi; việc đổi đời không chữ odds, có dòng «Cẩn thận khi lựa chọn». | **Chưa làm / làm lại** — main chưa có «Cẩn thận khi lựa chọn»; firstcard-2-rv de123ff3 bị giữ, phải làm lại; dòng cảnh báo = KK44. | Việc đổi đời có dòng cảnh báo, không có chữ odds. |
-| **44. Biểu tượng từng nơi trên Dư đồ bị co nhỏ như con kiến.** To bằng dấu «Ta», đặt trên tên nơi. | **Chưa làm** — KK44 (kit §78); map-zones-r7 bị giữ chờ việc này. | Biểu tượng nơi to rõ trên mọi bản đồ. |
-| **45. Cảnh có người tới tìm tối đen — mờ theo buổi.** Sáng mờ vàng nhạt, trưa trắng ấm, chiều cam, tối giữ nguyên. | **Chưa làm** — KK44 (một token màu mỗi buổi). Có nhánh cũ kit-screenveil 469d7985 chưa duyệt cho việc này. | Màn mờ đổi màu theo buổi. |
+| **43. Xuất giá, đi tu, tự vẫn ghi «Rất vững» — để chữ thật, thêm cảnh báo.** Chữ odds chỉ cho việc thật sự tung may rủi; việc đổi đời không chữ odds, có dòng «Cẩn thận khi lựa chọn». | **Đang làm (KK44 + FIRSTCARD-3)** — KK44 làm dòng kit, FIRSTCARD-3 nối vào mọi chỗ dựng lựa chọn; firstcard-2-rv de123ff3 bị giữ. Main chưa có «Cẩn thận khi lựa chọn». | Việc đổi đời có dòng cảnh báo, không có chữ odds. |
+| **44. Biểu tượng từng nơi trên Dư đồ bị co nhỏ như con kiến.** To bằng dấu «Ta», đặt trên tên nơi. | **Đang làm (KK44)** (kit §78); map-zones-r7 bị giữ chờ việc này. | Biểu tượng nơi to rõ trên mọi bản đồ. |
+| **45. Cảnh có người tới tìm tối đen — mờ theo buổi.** Sáng mờ vàng nhạt, trưa trắng ấm, chiều cam, tối giữ nguyên. | **Đang làm (KK44)** (một token màu mỗi buổi). Có nhánh cũ kit-screenveil 469d7985 chưa duyệt cho việc này. | Màn mờ đổi màu theo buổi. |
 | **46. Danh hiệu: 5 lần là có, 10 lần là có — quá dễ.** Cân lại, cần chất lượng không chỉ số lần. | **Đang làm (TITLE-BAL)**. | Danh hiệu ít, hiếm, phải cố gắng thật. |
 | **47. Bàn bài, thẻ gỗ, vòng người / nhóm, «vòng bảo vật» — «đưa video tôi coi, tôi chưa duyệt mà đưa lên».** Không lên live trước khi sếp xem video Fold + iPad và nói OK. | **Đang làm (VIDEO-161)**; kit-stage-r2 ec2f7c43 đã rút khỏi hàng đợi. «Bay về túi» (kitFlyItem) đã LIVE. | Sếp xem video trước, rồi mới quyết lên. |
 | **48. Trang điểm một nút: chỉ bỏ phần chơi, vẫn tự chọn áo và hoa điền.** Hoa điền chọn riêng mỗi ngày, có ô riêng. | **Đang làm (DRESS-FIX)**. | Trang điểm nhanh vẫn chọn áo, hoa điền. |
 | **49. Ô đồ đang mặc quá dài, nhiều ô giống nhau.** Gộp ô giống nhau (2 cổ tay → 1), lưới gọn bên dưới. | **Đang làm (DRESS-FIX)** — làm hình mẫu cho sếp xem trước. | Màn mặc đồ ngắn, gọn. |
 | **50. Điểm xa xỉ quá nông: đeo đủ 7–8 món đúng phẩm vẫn quá.** | **Đang làm (DRESS-FIX)**. Ở main có xa xỉ (j8.js, jbal2.js), chưa nâng. | Đeo đủ đúng phẩm không bị ghét. |
-| **51. Sự kiện lột đồ ngày nào cũng có; đồ bị lột vẫn còn.** Hiếm thật; bị lột là mất hẳn. | **Đang làm (DRESS-FIX)**. | Lột đồ hiếm; mất là mất thật. |
+| **51. Sự kiện lột đồ ngày nào cũng có; đồ bị lột vẫn còn.** Ban đầu: làm hiếm, mất thật. Bị ghi đè bởi số 56. | **Đang làm (DRESS-FIX)** — theo số 56. | Xem số 56. |
 | **52. Thay đồ: «tốn 10 bạc ngay» hay «8 Sức, sai cung nữ».** Đường cung nữ phải chờ 2 khắc, mất Danh trong lúc chờ. | **Đang làm (DRESS-FIX)**. | Hai đường thay đồ ngang giá. |
 | **53. Chữ mơ hồ («để mắt thêm một ít») — nêu tên chỉ số + «+ / ++ / +++».** | **Đang làm (WORDING-GAIN)**. | Mọi dòng được/mất ghi «Sủng +», «Danh ++» … |
 | **54. Danh hiệu: 6 gợi ý của 160 duyệt; hạng cao nhất chủ yếu là sắc đẹp.** Khó vừa vừa thôi. | **Đang làm (TITLE-BAL)** (như số 46). | Danh hiệu khó vừa phải. |
+
+| **55. Oán tăng quá nhanh, giảm quá chậm — «chưa làm gì mà ai cũng nhắm vào tôi».** Không giới hạn sự kiện / NPC; kiểm soát con số: oán mỗi lý do một bước, trần mỗi người mỗi ngày, oán nguôi theo ngày, NPC trả thù thì tiêu bớt oán, người mới gần 0. | Nửa chờ, nửa làm: pace-all fa05166a + stat-pace d04561e8 **chờ lên live**; phần oán nguôi theo ngày **đang làm (OAN-PACE)**. Main hiện nguôi 2 điểm mỗi THÁNG (`BAL.oanFade`, jbal.js:384). | Oán tăng chậm, nguôi nhanh; mùa đầu ít người nhắm. |
+| **56. Lột đồ phải do NPC chọn: đồ nằm trong rương người đó, thành bằng chứng; sếp cũng lột được người khác.** Không còn là sự kiện hiếm; không giới hạn NPC. | **Đang làm (DRESS-FIX)**. | Lột đồ là việc người ghét sếp chọn làm; có bằng chứng; sếp làm lại được. |
+| **57. 5 kit mới đã thay hết khung cũ chưa?** | **Chưa hết — đang làm (KK44)** quét toàn game. | Mọi khung dần dùng bộ kit mới. |
 
 ## 4. Việc phụ sếp hỏi
 
@@ -87,7 +91,7 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 
 ## 5. Hết
 
-~45% xong · ~45% chơi được (đếm theo bảng: 21 live + 3 nửa live trên 50 việc có bản dựng; việc đã live đều chơi được)
+~43% xong · ~43% chơi được (đếm theo bảng: 21 live + 4 nửa live trên 53 việc có bản dựng; việc đã live đều chơi được)
 
 ---
 Cập nhật: sửa file .md này rồi chạy `python3 dev/handover/reports/owner-bugs/build_pdf.py` (cần Playwright).
