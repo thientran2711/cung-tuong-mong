@@ -219,7 +219,7 @@ function deposeHeir(k,m){if(!k||!k.heir)return false;k.heir=false;if(S.heir&&S.h
 function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null}/* fix-kframe-heir: only when it is that son */if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
-function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}return Math.round(n*k)}
+function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}const r=Math.round(n*k);/* review/oan-pace-ghen: one cause never adds more than BAL.oanPace.ghen.step — the shown «ghen +N» is the most one consort gains (a consort nearer her favour gains less: joanpace opRelF) */try{const P=BAL.oanPace;if(P&&P.on&&P.ghen)return Math.min(r,P.ghen.step)}catch(e){}return r}
 /* MOODKNOW step 0 (owner s35 Lượt 41 + OD 17/11 ~18:38Z): ONE way to RAISE the jealousy SCORE v.ghen. It adds n (clamped 0–100) and, for the real
    rise, a short Chạnh lòng FEELING cause (jmoodknow ghenFeel: true why, aimed at the one who caused it 'by', khắc timer BAL.mood2.dur.e.ghenUp).
    Lowering stays a plain write; the feeling ending never touches the score. Returns the real rise. */
@@ -233,7 +233,7 @@ function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;
  const g0=+v.ghen||0;/* review/oan-pace-ghen: relative favour × one bounded step per cause / incident, capped per day (joanpace opGhenIn, BAL.oanPace.ghen) */
  if(typeof opGhenIn==="function"){n=opGhenIn(v,n,by);if(!(n>0))return 0}
  {const M=BAL.oanCool&&BAL.oanCool.on&&BAL.oanCool.ghen.dm;/* review/pace-all: the nearer the top, the less one more slight adds (× max(min, 1 − (ghen/100)^pow)); fractions carry (v.gUc) */
-  const x=(+v.gUc||0)+n*(M?Math.max(M.min,1-Math.pow(g0/100,M.pow)):1);n=Math.floor(x);v.gUc=Math.round((x-n)*1000)/1000;if(!n)return 0}
+  const x=(+v.gUc||0)+n*(M?Math.max(M.min,1-Math.pow(g0/100,M.pow)):1);n=Math.max(0,Math.round(x));v.gUc=Math.round((x-n)*1000)/1000;if(!n)return 0}/* review/oan-pace-ghen: rounded like stat-pace spG (the fraction, + or −, carries) so a shown +N lands as N */
  v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(v,d,why,by===undefined?S:by)}catch(e){}return d}
 /* her own jealousy SCORE toward a consort (v.pg, "Ngươi ghen N") — same family as ghenUp: the ONE way to raise it; the real rise also adds a short

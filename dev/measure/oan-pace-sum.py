@@ -59,7 +59,27 @@ def one(label,R,days=36):
     for r in R:
         for c,(n,s,mx) in (r.get('src') or {}).get('oan',{}).items():S[c][0]+=n;S[c][1]+=s;S[c][2]=max(S[c][2],mx)
     print(' oán-toward-her sources (calls, sum, max):',', '.join(f'{c} {v[0]}/{v[1]}/{v[2]}' for c,v in sorted(S.items(),key=lambda z:-z[1][1])[:12]))
-    return dict(label=label,avg=avg,two=two/max(1,nd),first=first,rows=rows)
+    G=collections.defaultdict(lambda:[0,0,0])
+    for r in R:
+        for c,(n,s_,mx) in (r.get('src') or {}).get('ghen',{}).items():G[c][0]+=n;G[c][1]+=s_;G[c][2]=max(G[c][2],mx)
+    if G:print(' ghen-toward-her sources (calls, sum, max):',', '.join(f'{c} {v[0]}/{v[1]}/{v[2]}' for c,v in sorted(G.items(),key=lambda z:-z[1][1])[:12]))
+    # review/oan-pace-ghen: per quarter (months 1–3, 4–6, 7–9, 10–12): targetings/day, oán mean / max, ghen mean / max (mean over lives of the month-end values)
+    qt=collections.defaultdict(list)
+    for m,L in bym.items():qt[m//3].extend(L)
+    qm=collections.defaultdict(list)
+    for r in R:
+        for x in r['mo']:
+            if x['m']>=1:qm[(x['m']-1)//3].append(x)
+    Q=[]
+    for q in range(4):
+        L=qt.get(q,[]);M=qm.get(q,[])
+        f=lambda k:round(sum(x.get(k,0) for x in M)/len(M),1) if M else '-'
+        Q.append((f'Q{q+1}',round(sum(L)/len(L),2) if L else '-',f('mean'),f('mx'),f('ghen'),f('gmx'),f('g60')))
+    print(' quarter | targ/day | oán mean | oán max | ghen mean | ghen max | n ghen≥60')
+    for x in Q:print(' %7s | %8s | %8s | %7s | %9s | %8s | %s'%x)
+    h1=[n for m,L in bym.items() if m<6 for n in L];h2=[n for m,L in bym.items() if m>=6 for n in L]
+    if h1 and h2:a1,a2=sum(h1)/len(h1),sum(h2)/len(h2);print(f' half 1 {a1:.2f}/day · half 2 {a2:.2f}/day · ratio {a2/max(a1,1e-9):.2f} (aim ≤ 1.5, never 0)')
+    return dict(label=label,avg=avg,two=two/max(1,nd),first=first,rows=rows,q=Q)
 if __name__=='__main__':
     for a in sys.argv[1:]:
         l,f=a.split('=',1);one(l,load(f))
