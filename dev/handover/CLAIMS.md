@@ -463,7 +463,7 @@ OB-VERDICT result card verdict + target row, whole family (owner 08:30Z) | revie
 OB-M3UI 4 robot UI faults (legend soft-lock, lightbox no exit, Chuyển kiếp no confirm, unlabeled !) | review/ob-m3ui | session_01V1ZZH2Vt4J15fPjFZDCzMq | RUNNING | 26/11 08:20Z (MAIN 155)
 | CUNG QUY rank etiquette for all NPC acts (MAIN 154 order 07:10Z; opus; expert first) | review/cung-quy | FOREMAN D session_01D3E3NaVk7n7f8KTo2enJna | session_01D3E3NZyGJdTgPiznVEBfbh | RUNNING | 26/11 08:28Z |
 | KHO CLEANUP robot dumps off handover (MAIN 154 order 07:15Z; sonnet) | archive/handover-dumps-2611; reports/kho-cleanup-2611.md | FOREMAN D session_01D3E3NaVk7n7f8KTo2enJna | session_01D3E3NZeK35eTheNX9fWWtm | DONE 08:28Z (archive 8b60b9b8) | 26/11 08:28Z |
-| PACE-ALL every progress bar + OÁN cool-down (MAIN 155 orders 08:08Z/08:12Z/08:20Z; opus) | review/pace-all | FOREMAN D session_01D3E3NaVk7n7f8KTo2enJna | session_01D3E3NaoXShUHgnUPftgX5g | RUNNING | 26/11 08:28Z |
+| PACE-ALL every progress bar + OÁN cool-down (MAIN 155 orders 08:08Z/08:12Z/08:20Z; opus) | review/pace-all | FOREMAN D session_01D3E3NaVk7n7f8KTo2enJna | session_01D3E3NXTnDZUXLbRTbkjsZy (#2) | RUNNING | 26/11 08:28Z |
 | QC-NOISE-HYGIENE (A) player-noise budget table + QC gate, (D) text-hygiene permanent test (MAIN 154 order 07:10Z; opus) | review/qc-noise-hygiene; reports/qc-noise-hygiene.md | FOREMAN F #19 session_01UV1Szj6zqfxsosxSjiCp8k | session_01UV1Szjdc6ChaY51kuwNyt3 | RUNNING | 26/11 08:33Z |
 RV OB-OAN SMALL | reports/ob-oan.md ## REVIEW | session_01V1ZZH1HXNdkkuwpkaRgYjM | RUNNING | 26/11 08:37Z (MAIN 155)
 RV HW-NITS SMALL kit | reports/home-way.md ## REVIEW | session_01V1ZZGzQx5NMH95A8nTD4wd | RUNNING | 26/11 08:25Z (MAIN 155)
