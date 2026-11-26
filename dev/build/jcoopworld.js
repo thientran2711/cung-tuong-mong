@@ -821,7 +821,7 @@ function resApply(m){if(fW()&&!host()&&!CW.ctx){oldRan("actApply");return}if(S.d
  const fx={};for(const k in m.fx||{})if(DK.includes(k)&&typeof m.fx[k]==="number")fx[k]=m.fx[k];const g=m.flags||{},fpid=fp();
  try{if(m.fxl&&typeof m.fxl==="object")for(const x in m.fxl){const v=m.fxl[x];if(v==null)continue;if(x==="tlk"||x==="lk"||x==="stain"){if(typeof lkMergeIn==="function")lkMergeIn(S,x,v)}else if(FXL.includes(x))S[x]=J(v)}}catch(e){console.error("res fxl",e)}/* review/looks-2: marks an act put on me */
  if(Object.keys(fx).length)apply(fx);S.rl=S.rl||{};S.ro=S.ro||{};S.cev=S.cev||{};
- if(g.rel)S.rl[fpid]=cl((S.rl[fpid]||0)+g.rel,-100,100);if(g.oan)S.ro[fpid]=cl((S.ro[fpid]||0)+g.oan,0,100);
+ {let rk=0;try{rk=spRk(friendEntry())}catch(e){}/* stat-pace: her row for the friend, ceiling at the friend's rank (jstatpace spRow) */if(g.rel)spRow(S,"rl",fpid,g.rel,rk);if(g.oan)spRow(S,"ro",fpid,g.oan,rk)}
  if(g.em)S.cev[fpid]=Math.max(0,(S.cev[fpid]||0)+g.em);if(g.conf)S.confined=Math.max(0,(S.confined||0)+g.conf);
  const f=friendEntry();if(f&&g.rel){f.rel=cl((f.rel||0)+g.rel,-100,100);if(f.__b)f.__b.rel=f.rel}
  const pl=petApply(m.pet,m.k);const fa=famApply(m.fam);pl.push(...fa.out);
@@ -1256,7 +1256,7 @@ P2H.briber=m=>briberRes(m);
 /* the briber's side of her answer (old relay: P2H.briber; part D: the host runs it in the briber's context, m.o = the mistress) */
 /* law 2 «Bạc lạ» co-op (review coopBribe 19/11): the briber's thiện cảm for the friend who serves = HER regard row S.rl[fp()] (the same row resApply
    writes and the friend's consort entry {id:fp()} reads); the servant entity {sid,coop} has no id, so affAdd(S,s) wrote S.rl["undefined"] */
-function brbAff(n){const id=fp();S.rl=S.rl||{};S.rl[id]=cl((S.rl[id]||0)+n,-100,100)}
+function brbAff(n){const id=fp();let rk=0;try{rk=spRk(friendEntry())}catch(e){}spRow(S,"rl",id,n,rk)}/* stat-pace: the same rise rule (jstatpace spRow) */
 function briberRes(m){const a=m.o!=null?{o:m.o}:(CW.brb||{})[m.rid];if(!a)return;if(CW.brb)delete CW.brb[m.rid];if(S.dead)return;const s=fSrvE(),o=RV(a.o),B=BAL.coopBribe,nm=esc(friendName()),on=esc(o?o.name:"cung khác");let h="";
  if(m.no)h=`<p><b>${nm}</b> nay không còn hầu ở cung ${on}.</p>`;
  else{try{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${o?o.name:"cung khác"}`)}catch(e){}

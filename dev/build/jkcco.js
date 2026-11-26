@@ -31,7 +31,7 @@ window.kccoOn=kccoOn;
 function fLabel(){const FR=window.K61FR||"Hảo hữu của ta";try{const e=typeof k61CoopEnt==="function"?k61CoopEnt():null;if(e&&!k61Coop(e))return e.name}catch(x){}return FR}
 function fName(){return fBlob()?fLabel():"hảo hữu"}
 function fPid(){return pidOf(oth(seat()))}
-function bond(n){if(!n)return;S.rl=S.rl||{};const k=fPid();S.rl[k]=cl((S.rl[k]||0)+n,-100,100)}
+function bond(n){if(!n)return;spRow(S,"rl",fPid(),n,0)}/* stat-pace: before the palace both are rank 0 (jstatpace spRow) */
 const HOUSE={tt:"Tể tướng",dtq:"Đại tướng quân",thd:"Hàn lâm",td:"Lễ bộ"};
 function clanOfS(s){const c=s&&s.origin&&HOUSE[s.origin.k];return c&&typeof CLANS!=="undefined"&&CLANS.includes(c)?c:null}
 function myClan(){return clanOfS(S)}

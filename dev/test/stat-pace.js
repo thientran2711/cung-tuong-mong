@@ -20,7 +20,14 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
   ok(spG("danh",{},0,2,7)===2,"a small rise far from the ceiling is kept whole");
   /* (2) ceiling by rank; the road up never closes; above-ceiling values are kept (no rise, no drop) */
   for(let r=0;r<7;r++)ok(B.ceil[r]>RANKS[r+1].s&&B.ceil[r]>RANKS[r+1].d,`ceiling rank ${r} ${B.ceil[r]} > next rank needs Sủng ${RANKS[r+1].s} / Danh ${RANKS[r+1].d}`);
-  ok(spG("sung",{},B.ceil[0],5,0)===0&&spG("sung",{},B.ceil[0]+20,5,0)===0,"at / above the rank ceiling a rise adds nothing");
+  ok(spG("sung",{},spTop("sung",0),5,0)===0&&spG("sung",{},spTop("sung",0)+20,5,0)===0,"at / above the hard top (max of rank ceiling, floor) a rise adds nothing");
+  {const q={};let s=0;for(let i=0;i<10;i++)s+=spG("duc",q,B.ceil[0]+1,5,0);ok(s>0&&s<=Math.ceil(10*5*B.dm.min),`above the rank ceiling (under the floor) a rise goes on at the slow share: 10 × +5 → ${s}`)}
+  /* (2b) BIG review 1: every stat gate stays reachable at EVERY rank (full list: dev/measure/statpace-gates.py) */
+  {const tc=Math.max(...Object.values(BAL.net.thClamp).map(x=>x[1]).filter(x=>x>3));
+   const G=[["duc",BAL.route.anDuc,"Ẩn dật route.anDuc"],["duc",BAL.route.tuDuc,"xuất gia route.tuDuc"],["duc",BAL.route.guiltDuc,"route.guiltDuc"],["duc",BAL.ducLv.up,"Đức → Thái hậu ducLv.up"],["duc",BAL.ducLv.word[3],"hiền đức"],
+    ["danh",BAL.danhG.kcVihanh,"Khách lạ ở chùa danhG.kcVihanh"],["danh",BAL.succN.rareCDanh,"succN.rareCDanh"],["sung",BAL.sinhThanSung,"sinh thần"],["sung",BAL.sungLv.emp[2],"sungLv.emp"],
+    ["th",BAL.hhTh,"hhTh"],["th",BAL.road.ch_co.trust,"road ch_co trust"],["hh",BAL.ag.hh.rewardHh,"ag.hh.rewardHh"],["rel",tc,"net thClamp top"],["oan",tc,"net thClamp top"]];
+   for(const [k,g,n] of G){const bad=[];for(let r=0;r<8;r++)if(spTop(k,r)<g)bad.push(r);ok(g>0&&!bad.length,`gate ${n} ${k} ≥ ${g}: reachable at every rank${bad.length?" — shut at "+bad:""}`)}}
   for(let r=1;r<8;r++)ok(B.ceil[r]>=B.ceil[r-1],`ceiling rises with rank (${B.ceil[r-1]} → ${B.ceil[r]})`);
   /* (3) diminishing returns: the same rise adds less near the top */
   const lo=spG("danh",{},5,5,2),hi=spG("danh",{},55,5,2);ok(hi<lo,`Danh +5 at 5 → ${lo}, at 55 → ${hi}`);
@@ -32,13 +39,22 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
   v.rel=0;affAdd(v,S,40);ok(v.rel>0&&v.rel<=B.band.rel[2],`affAdd thiện cảm +40 toward her → ${v.rel}`);
   v.oan=0;oanAdd(v,S,48);ok(v.oan>0&&v.oan<=B.band.oan[2],`oanAdd oán +48 toward her → ${v.oan}`);
   v.rel=0;spAdd(v,"rel",25);ok(v.rel>0&&v.rel<=B.band.rel[2],`raw v.rel += 25 (spAdd) → ${v.rel}`);
-  S.danh=B.ceil[0]+10;apply({danh:5});ok(S.danh===B.ceil[0]+10,`old save above the ceiling kept: Danh ${S.danh}`);
+  S.danh=spTop("danh",0)+5;apply({danh:5});ok(S.danh===spTop("danh",0)+5,`old save above the top kept: Danh ${S.danh}`);
+  /* (5b) BIG review 3: a regard ROW (co-op friend S.rl[pid], jts tsLeNpc) goes through the same rule */
+  {S.rl=S.rl||{};S.rl.__t=0;spRow(S,"rl","__t",40,0);ok(S.rl.__t>0&&S.rl.__t<=B.band.rel[2],`spRow her row +40 → ${S.rl.__t}`);S.ro=S.ro||{};S.ro.__t=0;spRow(S,"ro","__t",40,0);ok(S.ro.__t>0&&S.ro.__t<=B.band.oan[2],`spRow oán row +40 → ${S.ro.__t}`);delete S.rl.__t;delete S.ro.__t}
   /* (6) the cap ledger */
   {const q0=Q.slice();Q.length=0;S.evc=null;const z=evcZ();z.n={};let n=0;const card={ky:{pid:"kyngo",t:"Kỳ ngộ"},visit:{t:"Có người đến"},harm:{pid:"j70",t:"Mưu hại"},opt:{pid:"q72o",t:"Việc nhờ"}};
    for(const k of ["ky","ky","visit","visit","harm","opt","opt"])if(evcOK(k)){Q.push(Object.assign({},card[k]));n++}
    ok(n===Math.min(BAL.evc.cap,4),`cap: ${n} of 7 tries let through (cap ${BAL.evc.cap}, at most ${JSON.stringify(BAL.evc.q)} a kind)`);ok(evcOK("fest"),"a festival is never refused");
    {Q.length=0;S.evc=null;evcZ().n={};const z=evcZ();z.n={visit:1};const r=BAL.evc.res&&BAL.evc.res.harm||0;ok(r<1||(evcOK("ky")===(1+1+r<=BAL.evc.cap)&&evcOK("harm")),`a slot is kept for harm (res ${r}): after 1 visit Kỳ ngộ ${evcOK("ky")?"comes":"waits"}, harm still comes`);z.n={visit:1,ky:1};ok(r<1||BAL.evc.cap<3||(!evcOK("opt")&&evcOK("harm")),"2 shown + harm not yet come: a third optional card waits, harm still comes");z.n={}}
    ok(evcKind({pid:"kyngo"})==="ky"&&evcKind({pid:"j70"})==="harm"&&evcKind({t:"Có người tìm đến"})==="visit"&&evcKind({pid:"e68x"})==="opt","card tags → kind");
+   ok(evcKind({t:"Có người bán tin"})==="visit"&&evcKind({t:"Ngươi bắt gặp"})===null,"seller = visit; «Ngươi bắt gặp» exempt (what she sees where she stands)");
+   /* BIG review 2: a deed aimed at her on a full day is put off (dropped from pend, never lands without her choice), no card */
+   {Q.length=0;S.evc=null;const z=evcZ();z.n={visit:BAL.evc.q.visit,ky:1,opt:1};const az=agZ();const pp={k:"x",id:"v"+v.id,vid:v.id,t:"me",pl:"vuon",kh:0,act:"thăm"};az.pend.push(pp);
+    let thrown=null;try{agScene(pp,v)}catch(e){thrown=e.message}ok(pp.drop===1&&az.pend.indexOf(pp)<0&&!Q.length&&!thrown,`full day: «Có người tìm đến» put off (drop ${pp.drop}, in pend ${az.pend.indexOf(pp)>=0}, cards ${Q.length}${thrown?", "+thrown:""})`);
+    ok(knSellPick(S,{})===null,"full day: no seller comes to her");z.n={}}
+   /* BIG review 6: a held card survives save + load */
+   {EVCW.length=0;EVCW.push({m:{t:"Có người đến",h:"<p>thử</p>"},at:wk(),k:"visit"});const d=JSON.parse(JSON.stringify(ser()));EVCW.length=0;deser(d);ok(EVCW.length===1&&EVCW[0].k==="visit"&&/thử/.test(EVCW[0].m.h||""),`EVCW saved + loaded (${EVCW.length})`);EVCW.length=0}
    Q.length=0;q0.forEach(m=>Q.push(m))}
   return R});
  let fail=0;for(const [g,m] of U){console.log((g?'ok   ':'FAIL ')+m);if(!g)fail++}

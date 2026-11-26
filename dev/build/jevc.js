@@ -4,17 +4,19 @@
    (made this tick, or carried from yesterday by jspread). evcKind(card) names the kind from the card's own tag (pid / title):
      fest  (fixed-date festival day: never refused; the day's festival takes one slot first)
      harm  (j70 plot beats: Mưu hại / Lời cảnh báo / Sau vụ mưu hại …; an urgent aftermath still comes)
-     visit (j24 «Có người đến», jgreet stage visitor, jagent «Có người tìm đến», «Một ánh mắt»)
+     visit (j24 «Có người đến», jgreet stage visitor, jagent «Có người tìm đến», «Một ánh mắt», jagknow «Có người bán tin» — a servant coming to sell news)
+   EXEMPT on purpose (BIG review 6): jagent «Ngươi bắt gặp» = what she SEES at the place she walked to this khắc (her own move, the world in front of
+   her — law 6 real time; holding it would show a deed after it is over); news notices (kind news), endings, must / forced cards.
      ky    (Kỳ ngộ)
      opt   (j68 life events, j72 «Việc nhờ» / Phụ tuyến, jreign, j71 «Lập công», «Việc khó xử»)
-   Gates (wraps, loaded last): kyArrive (her roll), approachOne, gmCard, agScene (a deed aimed at her: no card, the deed still lands), show70
+   Gates (wraps, loaded last): kyArrive (her roll), approachOne, gmCard, agScene (a deed aimed at her: the consort puts it off, never lands without her choice), show70
    (a non-urgent beat waits), evBusy (every optional source already asks it), makeDil; and at paint (showModal): a big card of a full day
    waits in EVCW for a later day (harm beats are never held: a warning must come before its plot). A refused event is NOT lost: its own gate keeps its state
    (a plot keeps p.pend, Kỳ ngộ keeps its pity, a visitor's reason stays) → a later day. No player-visible text, no random draw.
    Test: dev/test/stat-pace.js (unit + simulated days). */
 function evcKind(m){if(!m||typeof m!=="object")return null;const t=String(m.t||"").replace(/<[^>]+>/g,""),pid=String(m.pid||"");
  if(pid==="j70"||/^(Mưu hại|Sau vụ mưu hại|Lời cảnh báo|Tai mắt báo tin)/.test(t))return"harm";if(pid==="kyngo")return"ky";
- if(/^(Có người đến|Có người tìm đến|Một ánh mắt)/.test(t)||/visit/.test(pid))return"visit";
+ if(/^(Có người đến|Có người tìm đến|Một ánh mắt|Có người bán tin)/.test(t)||/visit/.test(pid))return"visit";
  if(/^(e68|q72o|rgo?$|j71m)/.test(pid)||/^(Việc khó xử|Phụ tuyến|Lập công)/.test(t))return"opt";if(/^j71[ix]$/.test(pid))return"fest";return null}
 function evcZ(){if(!S)return null;const d=typeof wk==="function"?wk():0;let z=S.evc;if(!z||typeof z!=="object"||z.d!==d){z=S.evc={d,n:{}};
   /* a festival day takes its slot first (on the calendar; never refused) */try{if(typeof festToday==="function"&&festToday())z.n.fest=1}catch(e){}}return z}
@@ -29,7 +31,7 @@ function evcOK(k){if(!evcOn())return true;if(k==="fest")return true;const B=BAL.
 function evcKeep(k,n){const R=BAL.evc.res;let keep=0;if(R&&typeof R==="object")for(const j in R)if(j!==k&&!n[j])keep+=R[j];return keep}
 /* EVCW: big cards (visit / ky / opt) of a full day wait here for a later day; one is released when the board is clear and the day has
    room; after BAL.evc.wait days it is let go (a plain card goes to the log, like j68 evDropInfo). Harm beats and must / forced / ending cards are
-   never held. In memory like EVHOLD (j68). */
+   never held. Saved with the life (ser / deser below). */
 let EVCW=[];
 function evcHoldable(m){return !!(m&&typeof m==="object"&&!m.must&&!m.kend&&!evcToday(m)&&!m.forced&&m.kind!=="news"&&m.cls!=="end")}
 function evcRoom(k){const B=BAL.evc,z=evcZ();let t=0;for(const j in z.n)t+=z.n[j];return t+evcKeep(k,z.n)<B.cap&&(z.n[k]||0)<(B.q[k]==null?B.cap:B.q[k])}
@@ -45,15 +47,23 @@ function evcSeen(m){try{if(!evcOn()||!m||evcToday(m))return;const k=evcKind(m);i
  if(typeof kyArrive==="function"){const k0=kyArrive;kyArrive=function(F){if(F===S&&evcOn()&&!evcOK("ky"))return;return k0.apply(this,arguments)}}
  if(typeof approachOne==="function"){const a0=approachOne;approachOne=function(){if(evcOn()&&!evcOK("visit"))return null;return a0.apply(this,arguments)}}
  if(typeof gmCard==="function"){const g0=gmCard;gmCard=function(){if(evcOn()&&!evcOK("visit"))return null;return g0.apply(this,arguments)}}
- /* jagent: a consort's deed aimed AT her («Có người tìm đến» / shared act). Day full: no card; the deed still lands at the end of its khắc window
-    (agWatch → agLand: the world goes on, law 6) */
- if(typeof agScene==="function"&&typeof agPerson==="function"){const s0=agScene;agScene=function(p){let me=false;try{me=agPerson(p.t)===S}catch(e){}
-  if(me&&evcOn()&&!evcOK("visit")){try{p.seen=1}catch(e){}return}return s0.apply(this,arguments)}}
+ /* jagent: a consort's deed aimed AT her («Có người tìm đến» / shared act, her choice). Day full: the consort puts it off — the SAME rule as
+    jagday «she changes her mind» (p.drop, out of pend, AG.stat.drop; agTouch re-plans her day), so the deed never lands without her card and
+    her choice (BIG review 2); the wish stays with the consort (agent wants), she comes on a later day with room */
+ if(typeof agScene==="function"&&typeof agPerson==="function"){const s0=agScene;agScene=function(p,v){let me=false;try{me=agPerson(p.t)===S}catch(e){}
+  if(me&&evcOn()&&!evcOK("visit")){try{p.drop=1;const z=agZ(),i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);AG.stat.drop++;AG.stat.evcPut=(AG.stat.evcPut||0)+1;if(typeof agTouch==="function"&&v)agTouch(v)}catch(e){}return}return s0.apply(this,arguments)}}
  if(typeof show70==="function"&&typeof busy70==="function"){const s0=show70;show70=function(){if(evcOn()&&!evcOK("harm")){const b0=busy70;busy70=()=>true;try{return s0.apply(this,arguments)}finally{busy70=b0}}return s0.apply(this,arguments)}}
  if(typeof evBusy==="function"){const b0=evBusy;evBusy=function(){return b0.apply(this,arguments)||(evcOn()&&!evcOK("opt"))}}
+ /* jagknow: a servant who comes to sell her news (knSellTick, after its own roll — the roll is unchanged): a full day, nobody comes this buổi
+    (the seller keeps the news; the j67 story beat knSellArc, her own choice, calls with one argument and is never refused) */
+ if(typeof knSellPick==="function"){const k1=knSellPick;knSellPick=function(x){if(x===S&&arguments.length>1&&evcOn()&&!evcOK("visit"))return null;return k1.apply(this,arguments)}}
  if(typeof makeDil==="function"){const d0=makeDil;makeDil=function(){if(evcOn()&&!evcOK("opt"))return null;return d0.apply(this,arguments)}}
  if(typeof showModal==="function"){const m0=showModal;showModal=function(){try{evcPaint()}catch(e){}return m0.apply(this,arguments)}}
  if(typeof nextBuoi==="function"){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evcRelease()}catch(e){}return r}}
  if(typeof start==="function"){const s0=start;start=function(){EVCW=[];return s0.apply(this,arguments)}}
  try{if(typeof lifeStore==="function")lifeStore("EVCW cap-held cards",()=>{EVCW=[]})}catch(e){}
+ /* EVCW is SAVED with the life (BIG review 6): each held card in the save form of Q (j3 serM: a carried generator card {rk,ra}, a pid card,
+    a notice) and rebuilt the same way on load (rcpMk / deserQ); a card that cannot be made again is dropped as Q drops it */
+ if(typeof ser==="function"&&typeof serM==="function"){const s1=ser;ser=function(){const d=s1.apply(this,arguments);try{if(d&&EVCW.length)d.W=EVCW.map(w=>{const e=serM(w.m,{});return e?{e,at:w.at,k:w.k}:null}).filter(Boolean)}catch(e){}return d}}
+ if(typeof deser==="function"){const d1=deser;deser=function(d){const r=d1.apply(this,arguments);EVCW=[];try{for(const x of (d&&d.W)||[]){let m=null;try{m=x.e.rk?rcpMk(x.e):(deserQ([x.e])[0]||null)}catch(e){m=null}if(m)EVCW.push({m,at:x.at,k:x.k})}}catch(e){}return r}}
 })();
