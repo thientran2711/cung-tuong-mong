@@ -50,7 +50,7 @@ async function cont(p){await p.evaluate(()=>document.querySelector('#slots butto
    such card behind the identity card (a visitor with a code option, as the game makes them) so the moment is the robot's every run. */
 const NLO=process.env.SUL_NLO||'td';
 const codeCard=p=>p.evaluate(()=>{Q.push({t:'Có người đến',who:null,h:'<p>Một cung nữ đứng ngoài cửa xin vào.</p>',opts:[{n:'Cho vào',fx:{},go:()=>{log('Cung nữ vào thưa chuyện.')}},{n:'Bảo về',fx:{},go:()=>{}}]})});
-const titleNew=async p=>{await p.evaluate(o=>{window.__forceOrigin=o;document.querySelector('#slots button[data-new="1"]').click()},NLO);
+const titleNew=async p=>{await p.evaluate(o=>{/* TEST SETUP ONLY (as save-boundary-reload newLife, rv r4 fault 3): the 3 selection days (jkc2 kc2SelOn) are off unless window.__sbrSelx — answered with option 1 she is not kept, the life ends and the dead life's slot is removed by design (nl-4s «Chưa ghi»); the selection days have their own selx-* tests */if(typeof kc2SelOn==='function'&&!window.__sbrSelx)kc2SelOn=()=>false;window.__forceOrigin=o;document.querySelector('#slots button[data-new="1"]').click()},NLO);
  await p.waitForFunction(()=>typeof NLP!=='undefined'&&NLP&&Q.some(m=>m.nl),null,{timeout:90000});await p.waitForTimeout(400)};
 const acceptTap=p=>p.evaluate(()=>{const b=document.querySelector('button[data-nl="ok"]');if(b&&b.offsetParent)b.click();else nlAccept(false)});
 const snap=p=>p.evaluate(([v,h])=>({v:eval(v)(S),hud:eval(h)(),nl:!!(typeof NLP!=='undefined'&&NLP),card:Q.some(m=>m.nl)}),[VEC,HUD]);
@@ -107,7 +107,7 @@ async function nl4(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>
  await p.evaluate(async()=>{const t0=Date.now();while(Date.now()-t0<4000){await __sbr.settle1();await new Promise(r=>setTimeout(r,200))}});const s=await snap(p);
  const t=await reloadTitle(p,open);let a=null;if(t.cont){await cont(p);a=await snap(p)}
  const pass=t.cont&&a&&!a.card&&a.v===s.v&&a.hud===s.hud&&!pe.length;
- return{pass,line:`4 s after «Nhận thân phận»: ${s.v} · reload → ${t.cont?'«Tiếp tục kiếp này»':'NO «Tiếp tục»'}${a?` → ${a.v===s.v?'same numbers':'DRIFT '+a.v}${a.hud===s.hud?'':' · HUD '+a.hud+' (was '+s.hud+')'}`:''}${pe.length?' · pageerror '+pe[0]:''}`}})}
+ return{pass,line:`4 s after «Nhận thân phận»: ${s.v} · reload → ${t.cont?'«Tiếp tục kiếp này»':'NO «Tiếp tục» (title: '+String(t.slot).replace(/\s+/g,' ').slice(0,80)+')'}${a?` → ${a.v===s.v?'same numbers':'DRIFT '+a.v}${a.hud===s.hud?'':' · HUD '+a.hud+' (was '+s.hud+')'}`:''}${pe.length?' · pageerror '+pe[0]:''}`}})}
 
 /* ---------- flipcards (rv r2 FIX 2, save-year-rollback «## REVIEW r2» probe) ----------
    The cards of the new buổi are left OPEN at the month / year flip (stipend «Bổng lộc tháng …» + «· Lễ nghĩa», the Nội vụ phủ skim answers, «Danh
@@ -157,7 +157,7 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
 /* ---------- drift ---------- */
 async function drift(b,dev,url,seed){const one=wait=>play(b,dev,url,seed,async(p,open,pe)=>{await open();
  const r=await p.evaluate(async([v])=>{const V=eval(v);__sbr.newLife('thd');await __sbr.settle();S.month=12;S.tuan=2;S.buoi=B4L-1;used=0;render();await __sbr.settle();
-  const sv=()=>{try{return V(JSON.parse(localStorage.getItem('hclh-save-v2-1')).S)}catch(e){return 'none'}};let mis=0;const L=[];
+  const sv=()=>{try{return V(JSON.parse(window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))/* save-growth: the slot is encoded (j6 slotPut) */.S)}catch(e){return 'none'}};let mis=0;const L=[];
   const act1=async()=>{const u0=used;for(let i=0;i<(deck||[]).length&&used===u0;i++){const a=deck[i];if(!a||a.done)continue;try{act(i)}catch(e){}if(used!==u0||Q.length){await __sbr.settle();return String(a.n||'').slice(0,20)}}return ''};
   for(let t=0;t<5;t++){const k=__sbr.key();used=BAL.time.khac;const n=document.getElementById('next');n.disabled=false;n.click();await __sbr.after(k);let a=V(S),s=sv();if(a!==s){mis++;L.push('tap ≠ '+a+' | sổ '+s)}
    const an=await act1();a=V(S);s=sv();if(a!==s){mis++;L.push('act «'+an+'» ≠ '+a+' | sổ '+s)}}

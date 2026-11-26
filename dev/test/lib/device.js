@@ -68,7 +68,7 @@ async function newDeviceContext(browser,name,extra){const d=DEVICES[name];const 
 const TYPES={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json',
  '.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp3':'audio/mpeg','.svg':'image/svg+xml','.mp4':'video/mp4','.webm':'video/webm','.css':'text/css'};
 /* dir default = the repo root (built index.html + sw.js + assets.json + img/audio). Cache-Control: no-store so a rebuilt index.html is always read. */
-function serveRoot(dir,port){const ROOT=path.resolve(dir||path.join(__dirname,'../../..'));
+function serveRoot(dir,port){const ROOT=path.resolve(dir||process.env.CTM_ROOT||path.join(__dirname,'../../..'));/* CTM_ROOT: serve another built root (e.g. a base build for a before/after) */
  return new Promise((res,rej)=>{const s=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p.endsWith('/'))p+='index.html';p=p.replace(/^\/+/,'');
   const f=path.join(ROOT,p);if(!f.startsWith(ROOT+path.sep)||!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end('nf')}
   r.setHeader('Content-Type',TYPES[path.extname(f)]||'application/octet-stream');r.setHeader('Cache-Control','no-store');fs.createReadStream(f).pipe(r)});
