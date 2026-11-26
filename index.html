@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fe457201+","t":"2026-11-26T10:40Z","c":"act-merge J1: a tiered door names the tier in the option title (KIT §7.1, J0); rebuilt","b":"46b22f2b25b8","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"576cfcde+","t":"2026-11-26T11:19Z","c":"act-merge J5b fixes (RV): F1 j76 re-add looks inside doors (j76has) + test; F2b private deck runner removed, tables registered via J1's DOO…","b":"ddd00e1001ea","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -97826,6 +97826,62 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
  if(typeof logChoice==="function"){const l0=logChoice;logChoice=function(m){if(m&&m.opts&&m.opts.some(o=>o&&o.ddoor))return;return l0.apply(this,arguments)}}
  if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){try{const d=DART[name];if(d){const A=(typeof KIT_ACTS==="object"&&KIT_ACTS.acts)||{};if(!A[name]&&A[d])return k0.call(this,d)}}catch(e){}return k0.apply(this,arguments)};window.kitActArt=kitActArt}
 })();
+/* ================= jdoor5: act-merge J5 rule tables for the ONE door engine (jdoor.js, owned by J1) =================
+   Cung nữ pop-ups (srvTalk by person, kind "srv") + the DECK doors of the three roads (cung nữ Phận sự, lãnh cung, khuê các). Only TRUE duplicates fold (owner 26/11 ~07:32Z); every other act stays its own button.
+   A door needs >= 2 members on that person today; the members are the old items UNCHANGED (price, lock, roll, result), run through talk(-1-j). No number typed (law 4). */
+(function(){if(typeof DOOR==="undefined"||!DOOR.add)return;
+[{k:"s_xin",n:"Xin chủ",kinds:["srv"],rep:"Xin chủ ban thưởng",h:"Xin chủ một ân điển: thưởng, tiến cử, hay cho đi nơi khác.",
+  re:/^(Xin chủ ban thưởng|Xin chủ tiến cử lên Nội vụ phủ|Xin chủ cho đi hầu cung khác)$/},
+ {k:"s_phan",n:"Phản chủ",kinds:["srv"],rep:"Mật báo",h:"Quay lưng với chủ: mật báo, hay tố cáo trước Hoàng hậu.",
+  re:/^(Mật báo chuyện của |Tố cáo .+ trước Hoàng hậu)/},
+ {k:"s_gh",n:"Giao hảo",kinds:["srv"],rep:"Trò chuyện",h:"Kết thân với người hầu khác: trò chuyện, hay biếu chút quà.",
+  re:/^(Trò chuyện|Biếu quà nhỏ)$/}
+].forEach(DOOR.add);
+/* ---- deck doors (jdoor.js DOOR.deck) ---- */
+const SRVG=[
+ {n:"Hầu việc",t:"Việc hằng ngày hầu chủ trong cung: chọn một việc.",re:/^(Quét sân, lau điện|Đốc thúc cung nữ quét dọn|Dâng trà, hầu điểm tâm|Theo hầu chủ|Lĩnh đồ ở Nội vụ phủ|Việc chủ sai|Quản sổ sách trong cung|Hầu trà khi ngự giá|Lui sau bình phong)$/},
+ {n:"Dò la cho chủ",t:"Thay chủ để mắt đến người khác: chọn cách làm.",re:/^(Nghe ngóng cho chủ|Tự đi dò la cho chủ|Canh chừng cung chủ)$/},
+ {n:"Học",t:"Học thêm một nghề hay một lễ: chọn môn.",re:/^(Học lễ nghi với cô cô|Luyện thêu thùa, chữ nghĩa)$/},
+ {n:"Nghỉ ngơi",t:"Lấy lại sức và sắc: chọn cách nghỉ.",re:/^(Nghỉ lấy sức|Chải chuốt, giữ nhan sắc|Mua thuốc bổ)$/},
+ {n:"Kiếm thêm",t:"Kiếm thêm chút bạc ngoài phần lương: chọn đường.",re:/^(Thêu khăn bán ra ngoài|Lén giữ đồ Nội vụ phủ phát)$/}];
+const COLDG=[
+ {n:"Nghỉ ngơi",t:"Một lúc yên tĩnh trong lãnh cung: chọn cách nghỉ.",re:/^(Nghỉ ngơi một lát|Đọc sách giải khuây)$/},
+ {n:"Xin ân xá",t:"Xin được tha khỏi lãnh cung: chọn đường xin.",re:/^(Cầu xin|Gửi bài thơ cũ|Nhờ .+ cầu xin)$/},
+ {n:"Kêu oan",t:"Nhờ người ngoài kêu oan thay ngươi: chọn người nhờ.",re:/^(Nhờ người bên ngoài|Nhờ .+ đưa thư kêu oan)$/},
+ {n:"Kiếm sống",t:"Làm lụng kiếm chút bạc và rau ăn: chọn việc.",re:/^(Trồng rau|Thêu khăn bán)$/},
+ {n:"Rời cung",t:"Rời hẳn chốn này: chọn đường đi.",re:/^(Xuất gia|Nghĩ cách trốn khỏi cung|Xin phế làm thứ dân)$/},
+ /* the same letter by two carriers (thái giám đưa cơm / cung nữ thân tín) = ONE letter card, the carrier is the way */
+ {key:a=>{const m=/^(Gửi thư .+?) \(nhờ .+\)$/.exec(a.n||"");return m?m[1]:null},t:"Một bức thư gửi ra ngoài: chọn người đưa thư."}];
+/* khuê các (G13, same rule: only TRUE duplicates). Two kinds of duplicate: (1) a TWIN = the card that already says tw:"<the card it mirrors>" (r2, owner 15/11: the same act paid in
+   bạc or in Sức / khắc / a favour — law 2 equal-value ways of ONE act, kept on every road jkc / jkc2 / jkc3); (2) acts of one purpose with the SAME result,
+   named below. Everything else (a person's own thỉnh an, hầu cha, the places chùa / chợ / trà lâu / thư phường, Gặp riêng, scene cards) stays its own button. */
+const KCR=[
+ [/^(?:Làm vừa lòng|Hầu) (.+?)(?: trọn buổi)?$/,m=>`Hầu ${m[1]}`,"Hầu người nhà: dâng quà, hay ngồi hầu trọn buổi."],
+ [/^(?:Kết thân|Giúp) (.+?)(?: một việc)?$/,m=>`Gần gũi ${m[1]}`,"Gần gũi người nhà: tặng quà nhỏ, hay giúp một việc."],
+ [/^(?:Sai tỳ nữ )?[Nn]gáng chân (.+)$/,m=>`Hại ${m[1]}`,"Ngáng chân kẻ đối đầu: tự tay làm, hay sai tỳ nữ."],
+ [/^(?:Dò la viện|Sai tỳ nữ nghe ngóng viện|Rình viện) (.+?)(?: cả đêm)?$/,m=>`Dò xét viện ${m[1]}`,"Dò xem viện ấy bàn tính gì: chọn cách dò."],
+ [/^(?:Đi lễ chùa|Lên chùa chép kinh)$/,()=>"Lễ chùa","Lên chùa: dâng lễ, hay chép kinh giúp nhà chùa."],
+ [/^(?:Dạo phố chợ|Đi xem chợ, không mua)$/,()=>"Ra chợ","Ra chợ nghe tin: mua sắm, hay chỉ đi xem."],
+ [/^(?:Nghe chuyện ở trà lâu|Nghe lỏm ngoài hiên trà lâu)$/,()=>"Nghe tin ở trà lâu","Nghe khách bàn chuyện cung đình: thuê nhã gian, hay đứng ngoài hiên."],
+ [/^(?:Lựa sách ở thư phường|Đứng đọc ở thư phường)$/,()=>"Thư phường","Đến thư phường: mua sách, hay đứng đọc."],
+ [/^(?:Thăm|Mang bánh nhà làm thăm) (.+)$/,m=>`Đi thăm ${m[1]}`,"Sang phủ thế giao thăm bạn: mang lễ, hay mang bánh nhà làm."],
+ [/^(?:Giả bệnh tránh xem mặt|Nhịn ăn tránh xem mặt|Khéo từ chối nhà .+)$/,()=>"Tránh xem mặt","Bỏ mối xem mặt này: khéo từ chối, giả bệnh, hay nhịn ăn."],
+ [/^(?:Gửi thư cho người ấy|Tự tay đưa thư cho người ấy)$/,()=>"Thư cho người ấy","Gửi thư cho người ấy: nhờ tỳ nữ, hay tự tay đưa."],
+ [/^(?:Viết thư vào cung|Gửi thư theo người đi chợ|Mua tin của thái giám ra cung|Nhờ huynh trưởng dò tin trong cung)$/,()=>"Dò tin trong cung","Biết thêm về các phi tần trong cung: chọn đường."],
+ [/^(?:Gửi quà vào cung cho|Gửi bức thêu tự tay làm cho) (.+)$/,m=>`Gửi lễ cho ${m[1]}`,"Gửi lễ vào cung: mua quà, hay tự tay thêu."],
+ [/^(?:Học lễ nghi cung đình|Tự học lễ nghi theo sách)$/,()=>"Học lễ nghi","Học lễ nghi: theo ma ma xuất cung, hay tự học theo sách."],
+ [/^(?:Mời danh sư|Xin tổ mẫu mời danh sư)$/,()=>"Mời thầy giỏi","Mời thầy giỏi về dạy: dùng bạc, hay nhờ tổ mẫu."],
+ [/^(?:Xin cha dâng sớ tiến cử|Nhờ tổ mẫu khuyên cha dâng sớ)$/,()=>"Xin vào cung sớm","Đưa ngươi vào cung sớm: xin cha, hay nhờ tổ mẫu khuyên cha."]];
+const TWN={"Mua thuốc cho mẹ":"Thuốc cho mẹ","Góp bạc cưới vợ cho huynh trưởng":"Cưới vợ cho huynh trưởng","Trả bớt nợ nhà lý trưởng":"Trả nợ nhà lý trưởng","Biếu quà lý trưởng":"Lễ lý trưởng","Học lễ nghi với bà Tư":"Học lễ nghi bà Tư","Học lễ nghi Đại Hy với ma ma sứ đoàn":"Học lễ nghi Đại Hy","Gửi lễ vật cho sứ thần":"Lễ vật cho sứ thần"};
+
+/* register on J1's ONE deck path (jdoor.js DOOR.deck: a DISPLAY fold at render; the deck keeps every card; a picked way runs the same act(i)):
+   SRVG → cung nữ Phận sự, COLDG → lãnh cung (+ the letter by name), KCR (one row each, own line) + tw twins → khuê các. `h` = the line on the door's choice card. */
+SRVG.forEach((r,i)=>DOOR.deck({k:"d_srv"+i,n:r.n,roads:["srv"],h:r.t,re:r.re}));
+COLDG.forEach((r,i)=>DOOR.deck(r.key?{k:"d_cold"+i,roads:["cold"],h:r.t,key:r.key}:{k:"d_cold"+i,n:r.n,roads:["cold"],h:r.t,re:r.re}));
+KCR.forEach(([re,f,t],i)=>DOOR.deck({k:"d_kc"+i,roads:["kc"],h:t,key:a=>{const m=re.exec(a.n||"");return m?f(m):null}}));
+DOOR.deck({k:"d_kctw",roads:["kc"],h:"Một việc, hai đường: chọn cách làm (mỗi cách tốn khác nhau).",
+ key:(a,L)=>{const tw=new Set(L.filter(x=>x&&x.tw).map(x=>x.tw));const b=a.tw||(tw.has(a.n)?a.n:null);return b?(TWN[b]||b+" (cách khác)"):null}});
+})();
 /* ================= jdfg: the ON-FIGURE act games of the Dư đồ focus view (review/duodo-focus; owner OD 21/11 ~06:50Z «bất kỳ một cái action nào … đều sẽ là một cái mini game») =================
    Seven gesture engines played ON the person (act table: dev/handover/reports/duodo-focus.md §PLAN 2):
      swipe «Giáng tay / Hắt / Ngáng»  stroke through the moving target (face, or feet) — speed = strength
@@ -100588,7 +100644,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="46b22f2b25b8";window.CTM_BUILD=BUILD;
+const BUILD="ddd00e1001ea";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

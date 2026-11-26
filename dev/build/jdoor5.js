@@ -46,11 +46,11 @@ const KCR=[
  [/^(?:Xin cha dâng sớ tiến cử|Nhờ tổ mẫu khuyên cha dâng sớ)$/,()=>"Xin vào cung sớm","Đưa ngươi vào cung sớm: xin cha, hay nhờ tổ mẫu khuyên cha."]];
 const TWN={"Mua thuốc cho mẹ":"Thuốc cho mẹ","Góp bạc cưới vợ cho huynh trưởng":"Cưới vợ cho huynh trưởng","Trả bớt nợ nhà lý trưởng":"Trả nợ nhà lý trưởng","Biếu quà lý trưởng":"Lễ lý trưởng","Học lễ nghi với bà Tư":"Học lễ nghi bà Tư","Học lễ nghi Đại Hy với ma ma sứ đoàn":"Học lễ nghi Đại Hy","Gửi lễ vật cho sứ thần":"Lễ vật cho sứ thần"};
 
-/* register: SRVG → cung nữ Phận sự, COLDG → lãnh cung, KCR + tw twins → khuê các */
-SRVG.forEach((r,i)=>DOOR.deck({k:"d_srv"+i,n:r.n,roads:["srv"],t:r.t,re:r.re}));
-COLDG.forEach((r,i)=>DOOR.deck(r.key?{k:"d_cold"+i,n:r.n||"letter",roads:["cold"],t:r.t,key:r.key}:{k:"d_cold"+i,n:r.n,roads:["cold"],t:r.t,re:r.re}));
-DOOR.deck({k:"d_kc",n:"kc",roads:["kc"],
- key:(a,L)=>{for(const [re,f] of KCR){const m=re.exec(a.n||"");if(m)return f(m)}
-  const tw=new Set(L.filter(x=>x&&x.tw).map(x=>x.tw));const b=a.tw||(tw.has(a.n)?a.n:null);return b?(TWN[b]||b+" (cách khác)"):null},
- t:(key,ways)=>{for(const [re,f,t] of KCR)if(ways.every(w=>re.test(w.n||"")))return t;return"Một việc, hai đường: chọn cách làm (mỗi cách tốn khác nhau)."}});
+/* register on J1's ONE deck path (jdoor.js DOOR.deck: a DISPLAY fold at render; the deck keeps every card; a picked way runs the same act(i)):
+   SRVG → cung nữ Phận sự, COLDG → lãnh cung (+ the letter by name), KCR (one row each, own line) + tw twins → khuê các. `h` = the line on the door's choice card. */
+SRVG.forEach((r,i)=>DOOR.deck({k:"d_srv"+i,n:r.n,roads:["srv"],h:r.t,re:r.re}));
+COLDG.forEach((r,i)=>DOOR.deck(r.key?{k:"d_cold"+i,roads:["cold"],h:r.t,key:r.key}:{k:"d_cold"+i,n:r.n,roads:["cold"],h:r.t,re:r.re}));
+KCR.forEach(([re,f,t],i)=>DOOR.deck({k:"d_kc"+i,roads:["kc"],h:t,key:a=>{const m=re.exec(a.n||"");return m?f(m):null}}));
+DOOR.deck({k:"d_kctw",roads:["kc"],h:"Một việc, hai đường: chọn cách làm (mỗi cách tốn khác nhau).",
+ key:(a,L)=>{const tw=new Set(L.filter(x=>x&&x.tw).map(x=>x.tw));const b=a.tw||(tw.has(a.n)?a.n:null);return b?(TWN[b]||b+" (cách khác)"):null}});
 })();

@@ -114,16 +114,14 @@ function j76stand(){if(!S||S.dead)return[];const A=[{n:"Nghỉ ngơi một lát"
  if(!S.out&&S.maid)A.push({n:"Trò chuyện với cung nữ",t:`Ngồi nghe ${S.maid.name} kể chuyện trong cung.`,k:1,c:{},o:100,inner:1,w:{maid:3},x:"có khi nghe được tin",dom:"Giao thiệp",j76:1,go:()=>{if(roll(BAL.ag.why.g3.maid.o)){/* NPC-PURPOSE G3: she keeps an eye on the one who bears her mistress the worst will (near-best by hostility), not a random consort */const v=npwPick(liveRivals(true),x=>1+Math.max(0,hostility(x,S)));if(v){seeLoc&&seeLoc(v);log(`${S.maid.name} kể: ${v.name}${hostility(v,S)>=netTh(v,"tell")?", người vẫn để bụng với chủ nhân,":""} đang ở ${placeName(whereOf(v))} buổi này.`)}}}});
  A.push({n:"Đọc sách giải khuây",t:"Mở một cuốn sử, đọc vài trang bên cửa sổ.",k:1,c:{},o:100,inner:1,w:{suc:2},x:`có khi Tâm cơ ${balSg(BAL.eff.j76.tamcoGo)}`,dom:"Tài nghệ",j76:1,go:()=>{if(roll(20))apply({tamco:BAL.eff.j76.tamcoGo})}});
  return A}
-(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(deck)&&!deck.some(a=>a.j76||(Array.isArray(a.ways)&&a.ways.some(w=>w&&w.j76))))deck.unshift(...j76stand())}catch(e){}return r}})();
+(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(deck)&&!deck.some(a=>a.j76))deck.unshift(...j76stand())}catch(e){}return r}})();
 /* resting can be repeated as long as khắc remain (it is never the last thing greyed) */
 (function(){const a0=act;act=function(i){const a=deck[i];const r=a0.apply(this,arguments);try{if(a&&a.j76&&a.rep)a.done=0}catch(e){}return r}})();
 /* the standing acts come back every buổi */
 (function(){const n0=nextBuoi;nextBuoi=function(){const b0=S&&S.buoi;const r=n0.apply(this,arguments);try{if(S&&S.buoi!==b0&&Array.isArray(deck))deck.forEach(a=>{if(a.j76)a.done=0})}catch(e){}return r}})();
 (function(){const cw=cardWhy;cardWhy=function(a){const r=cw.apply(this,arguments);return r==="Đã làm trong buổi này"&&!(a&&a.j76)?"Đã làm hôm nay — mai chia bài mới":r}})();
 /* a loaded game gets them too (the deck is not saved) */
-/* a standing act folded INTO a door (act-merge: lãnh cung «Nghỉ ngơi») is still on the table: look inside the door too (a.ways = its members) */
-const j76has=a=>!!a&&(!!a.j76||(Array.isArray(a.ways)&&a.ways.some(w=>w&&w.j76)));
-(function(){const r0=render;let t=0;render=function(){try{if(S&&!S.dead&&Array.isArray(deck)&&deck.length&&!deck.some(j76has)&&!(typeof isSrv==="function"&&isSrv()))deck.unshift(...j76stand())}catch(e){}return r0.apply(this,arguments)}})();
+(function(){const r0=render;let t=0;render=function(){try{if(S&&!S.dead&&Array.isArray(deck)&&deck.length&&!deck.some(a=>a.j76)&&!(typeof isSrv==="function"&&isSrv()))deck.unshift(...j76stand())}catch(e){}return r0.apply(this,arguments)}})();
 /* ===== ONE NIGHT-RECOVERY RULE (owner 11/14; folds the j80 hotfix in) =====
    endTurn's old +4 (+1 in harsh weather) stays; on top of it a night's sleep gives +14 (harsh weather +8), +6 more
    when Sức was under 30, +4 with a trusted physician (S.doctor, hers only). Same base rule for every consort.
