@@ -300,3 +300,4 @@ ROOT 3-1-1 ~13:05Z: ROLLING at ~35 % context (line ~31 %). Handover dev/handover
 ROOT 3-1-1 ~13:06Z: child FOREMAN C ROOT 3-1-1-1 = session_01PEhRbtvVxc6f1jpKGP7uep (depth 3) opened with TAKEOVER_FOREMAN_C_ROOT3_1_1.md; W1d told the new id. ROOT 3-1-1 stops now.
 FOREMAN C ROOT 3-1-1-1 = session_01PEhRbtvVxc6f1jpKGP7uep; START_CTX ~7 % (1M window, own estimate — used_tokens reads 0; roll at ~32 %, ceiling 60 %); depth 3 (child of ROOT 3-1-1 session_01PEhRbvVFiSVNCtLvEPWNbM). Took over 26/11 ~13:10Z.
 CURRENT FOREMAN C = ROOT 3-1-1-1 session_01PEhRbtvVxc6f1jpKGP7uep (depth 3). Seat: C3-SEALS-W1d session_01PEhRbwgmJUfiQSjuQmcvaz (pt/cl/cy) told my id. FOR MAIN lines → 159.
+ROOT 3-1-1-1 ~13:12Z: hourly wake trig_01QvKJdedayWRq8TMLsdyMx8 (:05, into this session). W1d told my id + ordered to write its handover when push+report are done (past its roll line); I open W1e then.
