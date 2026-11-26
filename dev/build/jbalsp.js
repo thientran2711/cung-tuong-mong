@@ -18,7 +18,12 @@ BAL.stp={on:1,
     rule closes at a low rank (Ẩn dật Đức BAL.route.anDuc, «Khách lạ ở chùa» Danh BAL.danhG.kcVihanh, Đức → Thái hậu BAL.ducLv.up, …).
     duc: «hiền đức» BAL.ducLv.word[3] 80 · danh: BAL.succN.rareCDanh 80 · sung: jpet 75 · th: BAL.hhTh / BAL.succN.cTh 60 · hh: jpet 60 ·
     rel / oan: BAL.net.thClamp top (than2 80) — a consort's liking / grudge toward her can still reach every net threshold (law 6). */
- floor:{duc:80,danh:80,sung:75,th:60,hh:60,rel:80,oan:80}};
+ floor:{duc:80,danh:80,sung:75,th:60,hh:60,rel:80,oan:80},
+ /* PACE-SPEED (owner OD 26/11 ~19:10Z ruling (A): stats rise moderately and land JUST AT the next rank's bar, no overshoot far above it):
+    bar[k] = a stat tied to the rank bars: f = the RANKS field (s Sủng / d Danh), m = margin above the NEXT rank's bar = this stat's ceiling at that
+    rank (it replaces ceil[] and floor[] for this stat: a rise slows toward it); top = the ceiling at the top rank (Hoàng hậu); */
+    x = how far above that ceiling a rise may still creep at the slow share dm.min before it stops (0 = stops at the ceiling).
+ bar:{sung:{f:"s",m:6,x:0,top:100},danh:{f:"d",m:6,x:0,top:100}}};
 /* sếp's two options (report dev/handover/reports/stat-pace.md «Cách A / Cách B»): ONE switch BAL.stpPick. A = recommended (default);
    B = stricter: lower rank ceilings, steeper slowdown, at most 2 big events a day. */
 BAL.stpPre={A:{ceil:[45,55,65,75,85,92,97,100],pow:3,cap:3},B:{ceil:[40,50,60,70,80,90,96,100],pow:2,cap:2}};
