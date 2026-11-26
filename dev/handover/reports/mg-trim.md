@@ -123,3 +123,33 @@ Done (code, all from BAL, kit parts only):
 Tests: mg-skip.js 17/17 ok (Fold @1) · mg-skip-audit.js PASS (rows updated) · new dev/test/mg-trim.js: 1–4, 7, 8 PASS; 5 + 6 FAIL = TEST BOOT only: after start() a pre-palace «KIẾP · Thân phận kiếp này» carousel card stays in the modal, so no rival is reachable (ACT.tat.ok none) and the NPC-slap card is hidden behind it. Fix the boot (copy a test that reaches the palace with real rivals, e.g. dev/test/delegate-nomg.js or tut-quests.js boot), then re-run.
 NEXT (successor): (1) fix mg-trim.js boot → 5/6 pass on Fold 755x1000@2 + iPad 1180x820@2 with VID=<dir> (videos → CDN img/_review/mg-trim/ via dev/site/cdn_sync.py); (2) run makeup-set.js, mg-back.js, mg-ready-guide.js, duodo-focus-view.js, delegate-nomg.js, ag-mgcal.js, coop quick (coop-e2e if time) + quickcheck; note duodo-focus-view (5c) still tests the jdfv slapGame dodge wrapper, which no game path calls now (dead: remove wrapper + test step, or keep as Thử tay); (3) rebuild + commit dev/index.html / sw.js as other branches do; (4) SSK → ONE opus BIG reviewer child → LAND READY to Foreman D.
 Handover note: worker D5 at ~25 % context (START ~3 % + 25 % rollover rule) — coordinator opens the successor.
+
+## BUILD #2 (worker D5 #2, opus) — SSK — branch review/mg-trim @ 7e476a56 (FF from LIVE 02f564ae; origin/main unchanged at 06:28Z)
+START_CTX ~3 % (get_session used_tokens read 0; own estimate) · depth 2
+PRIORITY #1 CHECK: as line 1 (OD 104 | ledger 12 | claims D5 row = mine | main 15 | review/* 10); BAL.trim did not exist on main or review/* before this build.
+Done this session:
+| item | files | state |
+|---|---|---|
+| FOREMAN D ruling: pet care (cho ăn/tắm/chơi) + plant watering behind ONE switch `BAL.trim.care`, default 0 = the boards play exactly as LIVE; 1 = one tap «vừa tay» (BAL.skip.raw/10) | jbal2, jpetcare, jshelf, MINIGAMES.md | done |
+| mg-trim.js boot fixed (delegate-nomg boot: __nlInner + «Sửa soạn nhập cung» loader); test 5 scene = a lower-rank rival standing with her; test 6 scene = slapper knows her + j95 motive gate off for that one act (the gate is not under test) | dev/test/mg-trim.js | done |
+| mg-trim.js test 2 taps through the look reveal (jtoil toilReveal, KIT 81 «Tiếp theo») and checks its Dung nhan + the result rows (the old test deleted the reveal overlay) | dev/test/mg-trim.js | done |
+| new test 9: BAL.trim.care = 0 and the one tap only behind the switch | dev/test/mg-trim.js | done |
+| delegate-nomg scan regex accepts class B (slap-bar family) running with no game | dev/test/delegate-nomg.js | done |
+| CHANGE line + rebuild index.html / sw.js / assets.json (build_site.sh) | root | done |
+Tests (branch, this session):
+| suite | branch | LIVE 02f564ae |
+|---|---|---|
+| mg-trim.js Fold 755x1000@2 + iPad 1180x820@2 (real taps) | 9/9 PASS both | — |
+| mg-skip.js (755x1000@1) | PASS | — |
+| mg-skip-audit.js | PASS | — |
+| makeup-set.js · makeup-set-scan.js | ALL PASS · ALL OK | — |
+| mg-ready-guide.js | 9/9 | — |
+| mg-back.js | 12/12 (one earlier run 10/12: #1 + #2 flaky) | 11/12 (#1 FAIL) |
+| delegate-nomg.js | PASS (after the class B regex) | — |
+| ag-mgcal.js | PASS | — |
+| duodo-focus-view.js | 4 FAIL (5a–5d) | same 4 FAIL — pre-existing |
+| shelf-check.js | FAIL (Thái hậu rebuke) | FAIL (same + Ghé chơi) — pre-existing |
+Note: jdfv's slapGame {dodge} wrapper has no caller in play now (only the duodo-focus-view test pushes its own card); kept with the slapGame engine (Thử tay / KG82_KIND ne) — no dead-path removal without a reviewer ask.
+VIDEOS (FULL, real taps): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm (title → Học nhanh lesson card → Điểm trang one tap → look reveal → result → Tự tay screen → Bị tát card «Né đòn» with odds word → result).
+SSK review/mg-trim 7e476a56 → BIG reviewer (opus) session_01D3E3NaqVWXaAetSGcKr7mF opened as my child; verdict lands below as «BIG REVIEW».
+Vietnamese for sếp (FOR MAIN via Foreman D): Đã làm theo lựa chọn của sếp: trang điểm một lần bấm theo Dung (còn nút «Tự tay điểm trang»), tát/né thành một lần gieo, «Học nhanh» lên Tùy duyên; các trò cơ may giữ nguyên. Chăm thú, tưới cây vẫn chơi như cũ (sếp chưa nói bỏ) — có công tắc nếu sếp muốn bỏ. ~90% xong / ~85% chơi được (chờ người duyệt).
