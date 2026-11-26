@@ -1,0 +1,1 @@
+# ES2-R2-skilled-2 — no player review (invalid). Player note: «Trả thẻ bài» is a good closing choice (three equal-value futures: marry the Thế tử, stay unmarried and teach, become a nun), each ends the life; the ending card «Đèn sách má hồng» is clean and fitting.
