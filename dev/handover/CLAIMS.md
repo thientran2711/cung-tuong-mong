@@ -545,3 +545,4 @@ oan-pace-ghen (OAN-PACE-2) | review/oan-pace-ghen | session_01Rc5AsLW5LU5PeXKJxS
 save stack BIG rv r8 (rv15 final gates) | review/save-fix-stack-rv15 | session_01N1tNP4iUdmBPnqSx74gVJM | RUNNING | 26/11 20:50Z (Foreman B child 4)
 review (RV-163) | — | session_01Rc5AsMzJjd5aqRkTRTAbkK | RUNNING | 2026-11-26T20:57Z
 review (RV-163B) | — | session_01Rc5AsHo4hJGJQAnoeB8h8c | RUNNING | 2026-11-26T20:57Z
+punish-tier (PUNISH-TIER-2) | review/punish-tier | session_01Rc5AsJPKETRcb56pBRgzJK | RUNNING | 2026-11-26T21:05Z
