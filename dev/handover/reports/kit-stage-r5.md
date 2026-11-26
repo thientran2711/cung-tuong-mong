@@ -1,6 +1,6 @@
 # KIT-STAGE-R5 report (MAIN 163): Bàn bài card FLIP + paging + long names
 
-Successor of KIT-STAGE-R4. Branch `review/kit-stage-r4`, head 914674fa (on r4 a72290a9). Built files committed.
+Successor of KIT-STAGE-R4. Branch `review/kit-stage-r4`, head c823342a (on r4 a72290a9). Built files committed. MAIN 163 LOOK PASS on the flip (914674fa); MAIN is now 164 (session_01Rc5AsMRACKNY1roydzvpF7); kit keeper KK46 (session_01Rc5AsJWaXnsnQJdFazBWmx, inactive at 21:58Z).
 
 PRIORITY #1 CHECK: OD 26/11 ~20:45Z row (Bàn bài flip + result card too long) + rulings (a)/(b) | main none (kit-stage not live) | review/kit-g4-r3 f375e154 holds KK45's kitResFold §7.4a (4 names + «+N người khác»), the result-card part | review/ring-build 8ea545fb (RING-BUILD-3 ring, hooks kitKind "ring") | claims: KK45 = kit keeper (result card), me = kitHand. No new private part: the flip is built INSIDE the existing kit part §101 kitHand (jkhand.js), so every hand gets it at once.
 
@@ -30,3 +30,12 @@ Ruling (a) >10 → paged hand: DONE. Ruling (b) long names → thẻ gỗ / ring
 
 ## HANDOVER (if I roll)
 Next: (1) KK45 result-card sha → merge + result video (Fold + iPad, real taps, after load) to _review/kit-stage-r5/; (2) the 8 outside-#modal rows when KK45 says KIT READY «kitHand.mount»; (3) re-run kit-hand / kit-stage / kit-kind-scan / kit-stage-r5-video. Worktree: /home/user/cung-tuong-mong on review/kit-stage-r4; report worktree /home/user/wt/ho (sparse, handover branch).
+
+## UPDATE 21:58Z (after owner 21:25Z «maximum 7 lá», no paging)
+- §101.11 paging REMOVED (d64663a9): KIT_HAND.max = 7; >7 = not a hand, a source fault. KIT.md §101.11 rewritten in place.
+- RESULT CARD: KK46 kitResFold 9a2c05f6 merged (4b3beedb). Videos fold-result.mp4 / ipad-result.mp4 (+ stills) in _review/kit-stage-r5/: Bàn bài flip → ✓ → result card (her row, 3 named, one «Hậu cung: …» line, «Xem đủ trong Sổ ghi», fits F + I). (fold-paging-still.png on the CDN is stale — paging is gone.)
+- KK46 review FAIL items: F1 fixed (every «Cúi đầu …» option → bowing picture, jopic; the old card fell to the shared stand-in), F2 already done, minor done (locked flipped card shows ✕ alone). kit-hand.js PASS 100/0 F + I. KK46 re-review pending (session inactive when told; next kit keeper: re-review c823342a).
+- ≤7 CENSUS tools: dev/test/hand-max-scan.js (PEND × ranks), dev/test/hand-max-hook.js + evbot EVJS/EVCEN (robot census), dev/test/hand-max-static.py (literal arrays).
+- TABLE sent to MAIN 164: shop tray 11 → 7 (BAL.shopTray 6 + Thôi, cap in the last restock wrapper jshelf) · «Sai … đi dò la» 12–13 → kind ring · evpick/itarget/plantsv already ring · selxD 8 = robot view only (player 6) · gift/plant item grids 19 = not cards · pmLad 9 = OPEN (MAIN call: rec info panel) · rest ≤6. Not reached: jerr/jptime order lists, j71c stances, jky (need a mid/late save).
+- OPEN QUESTION to MAIN 164: does «no paging» cover the thẻ gỗ talk stage (KIT_STAGE.sayPer = 3 per page)?
+HANDOVER next: MAIN's answers (pmLad, thẻ gỗ paging) → implement; count jerr/jptime/j71c/jky from a mid-game save; KK46 re-review; then land path per MAIN.
