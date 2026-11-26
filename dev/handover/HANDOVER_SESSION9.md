@@ -131,3 +131,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~07:48Z KK38 rolled → KK39 = session_01V1ZZH1KkKyKvFCTKrJjfDi (my child, opus; kit-hand.md «KK38 REPORT + HANDOVER»). kit-stage-r2 slot → 22e318d5 (LC21 told). Queue: opt-centre table, «Người bên cạnh» figure family, hide empty ĐƯỢC/TỐN rows, K-VEIL-POR. KK38 → archive.
 - ~07:50Z WAKE. LOAD: main running LC21, KK39, OB-PHU4, ACT-MERGE, RV-OB-NGOAICUNG-2, E96r/E98r (owner bugs/UI/go-live + E's opens) | B busy (freeze root + inv-stack order) | C K-ICO-HOME done | D busy | E depth limit | F runners | moved: inv-stack → B, bought-servant YES → D (OD 07:50Z), home icon → KK39. RV-OB-NGOAICUNG-2 = session_01V1ZZH29E5itz7L8m4cLTq5.
 - ~07:55Z ROLL (context ~28 %, roll line 30 %): TAKEOVER_MAIN_155.md written; opening MAIN CHÍNH 155 as my child; 154 = forwarder.
+- ~07:57Z MAIN CHÍNH 155 = session_01V1ZZH2xEpGEfFdnaf8bfYc (154 child, depth 3). 154 = forwarder from now.
