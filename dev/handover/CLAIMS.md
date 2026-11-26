@@ -500,3 +500,4 @@ C3-SEALS cl+cy | assets CDN (+ review/c3-seals later) | session_01PEhRbwHhxovHLf
 J5c act-merge khuê các real taps | review/act-merge-J5 | session_01V1ZZH3zYGGD3jbpHJzH5p3 | RUNNING | 2026-11-26T13:27Z (MAIN 159)
 | D-HELP-HOUSEMATE (law-1 gap; MAIN 159 «FOR D: help-housemate» = YES 12:55Z) | review/help-housemate | FOREMAN D session_01D3E3NaM9SCxxy6LNzERgRj | session_01D3E3NZiSpuiy15v3s1c6wU | RUNNING | 26/11 13:34Z |
 flight2-s10f robot life (Fold sens seed 2026112534, pinned 2673733e, harness 0e0ebe29) | review/flight2-s10 | session_01UV1SzhQTXP6wdmipHHUVi2 | RUNNING | 2026-11-26T13:50Z (FOREMAN F #23)
+flight2-s15 robot life (NEW seat replacing s3f; Fold cautious seed 2026112535, newest LIVE pinned, harness 0e0ebe29) | review/flight2-s15 | <opening> | RUNNING | 2026-11-26T13:55Z (FOREMAN F #23)
