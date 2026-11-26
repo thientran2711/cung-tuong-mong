@@ -8,11 +8,14 @@ REPO="$(git rev-parse --show-toplevel)"
 if [ "${1:-}" = "--b" ]; then # --b <build id> <port>: the main commit whose built index.html carries "b":"<build id>" (window.CTM_BI.b — the exact build of the life)
   BID="${2:?build id}"; shift 2; BT=""; if [ "${1:-}" = "--t" ]; then BT="${2:?build time}"; shift 2; fi
   ( flock /home/user/wt/fetch.lock git -C "$REPO" fetch -q --depth=60 origin main ) || true
-  SHA=""; for c in $(git -C "$REPO" rev-list --first-parent -n 60 FETCH_HEAD); do # newest first along FIRST-PARENT main, by index.html CONTENT (STACK LAND merges rebuild the site: a path log skips them — BIG #9 FAIL cbeb334b)
+  # FIXER #13 (BIG #13 N1): walk EVERY parent, not only the first: main can be a merge (03a8c17c renderer-mem) whose SECOND parent holds the build (LIVE f573dc94).
+  # rev-list without --first-parent lists all commits reachable within the fetched depth, newest first (commit date); --topo-order keeps a merge before its parents.
+  TIP="$(git -C "$REPO" rev-parse -q --verify FETCH_HEAD || git -C "$REPO" rev-parse origin/main)" # a twin fetching at the same moment can leave no FETCH_HEAD
+  SHA=""; for c in $(git -C "$REPO" rev-list --topo-order -n 200 "$TIP"); do # newest first over all parents, by index.html CONTENT (STACK LAND merges rebuild the site: a path log skips them — BIG #9 FAIL cbeb334b)
     h="$(git -C "$REPO" show "$c:index.html" 2>/dev/null | grep -o 'window.CTM_BI={"s":"[^"]*","t":"[^"]*"' | head -1 || true)"; f="$(git -C "$REPO" show "$c:index.html" 2>/dev/null | grep -c "\"b\":\"$BID\"" || true)"
     if [ "${f:-0}" -gt 0 ]; then if [ -z "$BT" ] || [ "${h#*\"t\":\"$BT\"}" != "$h" ]; then SHA="$c"; break; fi; fi
   done
-  [ -n "$SHA" ] || { echo "no main commit with build $BID ${BT:+t $BT} in the last 60 main commits (older: pass the sha)" >&2; exit 2; }
+  [ -n "$SHA" ] || { echo "no main commit with build $BID ${BT:+t $BT} in the last 200 commits reachable from main, all parents (older: pass the sha)" >&2; exit 2; }
   DIR_SUFFIX="$BID"
   set -- "$SHA" "$@"
 fi

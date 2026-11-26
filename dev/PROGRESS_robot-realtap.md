@@ -643,3 +643,62 @@ Note: on the local serve a «co» board stayed «in play» 6 min with 0 moves (/
 State: review/robot-realtap tip = this commit (items 21–24 + proofs above) → ONE re-review 6677dd13..tip for BIG #13 (recipe: RT_TEST_KNE=2 Fold pf/pt_su sens 43 + iPad pf 61
 → «#dawn «Tiếp theo»» ≤ 15 s, NO-EXIT 0; RT_TEST_SKIPCOV=2 MODE steady|leave|anim on both devices → DEAD BUTTON «Tiếp» cover div#rtTestSc; mix-* still DEAD; RT_TEST_SKIPLAYER
 plain/cover/css ≤ 10 s). Seeds die «Ban hoa» at buổi 1 now and then: run 2 copies. Open (not blocking): N3 dress board reads no theme / slot count; N4 tho board 0 moves.
+
+## HARNESS FIXER #13 (11/26–27/2026, worker of F #24 successor; START_CTX ~5 %) — BIG #13 FAIL f0737e88 (report efcf6429) fixed on top of f0737e88
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap 8ea10d7e PASS → f0737e88 FAIL by BIG #13 (report efcf64295) | reused: the reviewer's RT_REV13 fixture (/home/user/wt/rr13-out/hook-rev13.js) ported as RT_TEST_STALELABEL | claims: HARNESS FIXER #12 done; this job is its successor.
+Tests: game = newest origin/main 03a8c17c (fetched fresh; page build 1b5137935266, CTM_BI.s 8d5e3382+) by git archive, served 127.0.0.1:8871, RT_PIN=0 RT_NOSHOT=1 (RELOAD+DRIFT with the pin on), harness from a git worktree of this tip. Logs: /home/user/wt/hf13-out/<run>/log.txt.
+25. BLOCKING 1 — «NEW BUTTON SINCE THE SKIP LAYER CAME UP» (item 21 rule b). It keyed the first scan's hit buttons by label + spot, so a PAGE button whose label changed
+   (top bar «Bạc…Sức…», «Buổi trưa, còn 4 khắc», «Tin báo…», «(có mới)») was «new» → the scan left the .kscn scene for the page → DEAD BUTTON flood under div.kscn-veil +
+   false stuck / softlock. Rule now (SCAN, one place): (b) = a hit button inside a LAYER that was not up at the skip layer's first scan — never a page (body-layer) button,
+   never a label change: the base is the set of LAYER elements visible at that first scan (+ the layers of its hit buttons), by element, not by text; the new layer must be
+   outside the skip layer, not its host (host = rule a, kept: #dawn «Tiếp theo»), and on top at its own centre (stacked above, not under the scene's veil). Buttons in the
+   skip layer's own tree never reach this branch (they are its own buttons). When every button of the layer the scan would be pulled to is covered by the skip layer
+   itself, the scan stays on the skip layer (skip taps; trace «SKIPWIN … stay»), and a button covered by the skip layer is never a DEAD suspect (skEl). Every pull / stay is
+   now a trace line «SKIPWIN <layer> host|new|stay …».
+   Self-test RT_TEST_STALELABEL=<buổi> RT_TEST_STALELABEL_MODE=stale5|rerender5|newbtn|newlayer (the reviewer's fixture: .kscn scene on the right 65 % that needs 6 taps,
+   a page bar of 2 buttons re-drawn every 1.5 s; stale5 = label counts up «Tin báo (k)»; newbtn = a 3rd PAGE button 4.5 s in; newlayer = scene never closes by taps,
+   a NEW role=dialog «Xong» opens on top 4.5 s in):
+   | mode | Fold 755x1000 | iPad 1180x820 | control f0737e88 + same hook |
+   | stale5 | s21 12 s, s43 11 s: 6 skip taps, 0 page taps, 0 dead | s61 13 s / 6 s: 6 skip taps, 0 page taps, 0 dead | Fold s21 «still open» 180 s, 75 page taps, 24 dead · iPad s61 «still open» 187 s, 27 dead |
+   | rerender5 | s21 13 s, 6 skip taps, 0 dead | s61 6 s, 0 dead | (BIG #13: closed on the tip too) |
+   | newbtn | s21 8 s, 6 skip taps, 0 page taps, 0 dead | s61 6 s, 0 dead | (BIG #13: iPad 173 s, 21 dead) |
+   | newlayer | s21 6 s ×2 gone «newlayer» (rule b takes a new LAYER), 0 dead | s61 6 s ×2 gone «newlayer», 0 dead | — |
+   FAMILY SCAN (law 11) — every use of the «new button» set:
+   | place | before (f0737e88) | after |
+   | SCAN pull off a skip layer, (b) fresh | any hit button not in label+spot base, page included | hit button in a LAYER not up at base, outside / not host of the skip layer, on top |
+   | SCAN pull, (a) host | layer encloses the skip layer | unchanged (RT_TEST_KNE) |
+   | pulled-to layer all covered by the skip layer | pulled → deadCheck on covered buttons | stays on the skip layer (skip taps) |
+   | deadSuspect of a button covered by the skip layer after a pull | DEAD suspect | never (skEl) |
+   | skipWin / __rtSkipWin | returned, read by nobody | trace «SKIPWIN …» once per change |
+   | skipFree / main-loop skip taps / NO-EXIT exemption / backdrop rule / deadCheck(ownOnly) | read lay + btns after the pull | same code; a page is never the pulled-to layer now, so a page bar under a .kscn veil no longer reaches deadCheck |
+   | robot-rt-coop.js | Seat() of robot-rt.js | same code |
+26. N1 rt-serve-build.sh --b walked FIRST-PARENT main only; origin/main 03a8c17c is a merge whose SECOND parent line holds LIVE f573dc94 (build cc68dcfd2b1b). Now
+   `rev-list --topo-order -n 200` over every parent of the fetched tip (FETCH_HEAD, else origin/main when a twin's fetch left no FETCH_HEAD). Proof on today's main:
+   old script `--b cc68dcfd2b1b` → exit 2 «no main commit with build cc68dcfd2b1b in the last 60 main commits»; new → «serving f573dc949 … on :8915», page "b":"cc68dcfd2b1b".
+   Pin on (RELOAD+DRIFT) the life's own build 1b5137935266 = 03a8c17c is found and served on :8868.
+REGRESSION (this tip, both devices): KNE Fold s43 {6.5 s, «SKIPWIN #dawn host Tiếp theo», skipTaps 1, noExit 0, unstick 0}, iPad s61 {6.4 s, same} · SKIPCOV steady Fold s21b /
+   iPad s61, leave Fold s43 / iPad s61, anim Fold s21 / iPad s61 → «DEAD BUTTON «Tiếp» cover div#rtTestSc», skipTaps 0, noExit 0; mix-steady Fold s21 / iPad s61, mix-leave
+   iPad s61 (Fold s21: the hook never fired before the slice end — not rerun; Fold leave cover shown by leave s43), mix-anim Fold s21 / iPad s61 → DEAD «Tiếp», then «Xem thêm» (closedBy more) · OWNCLOSE own Fold s21 / iPad s61 {1, 0,
+   «Đóng» 8 s}; dead Fold s21 / s43 / iPad s61b {noEffect 1} · QUOTA+RELOAD cp=5 slice=30 Fold s21 + iPad s61 «SAVE REWIND … from b8 … to the stored b2 (6 buổi lost)» +
+   «SAVE STALE stored b2 live b25 … QuotaExceededError» · LATE Fold s21 34.6 s / iPad s61 34.1 s «LATE BUTTON … «Ta biết rồi»», NO-EXIT withdrawn · SKIPLAYER plain Fold s43
+   7.6 s / iPad s61 7.6 s, cover Fold s43 7.6 s / iPad s61 7.5 s, css Fold s43b 7.6 s / Fold s21b 7.7 s / iPad s61 7.8 s, noWayOut 0, noExit 0 · DRESS Fold s43 placed 4 (66 s; one «150 taps
+   no clock» on the board, not on the rerun s43b placed 3 / 16 s = known N3) / iPad s61 placed 4 / 40 s · RELOAD+DRIFT pin on Fold s43 + iPad s61 «BUILD PIN: unstick reload —
+   the tab was on :8871, back to the pinned :8868 (carrying 5 localStorage keys)», pinReturn 1, 0 dead. robot-lint OK 0 findings · rt-bare-unit 20/20 · 0 .click( /
+   dispatchEvent (fixture listeners are their own test layers, tapped for real).
+LIVE slices (no hooks, origin/main 03a8c17c, slice=12): Fold speed s21 a/b/c 12/12/12 · Fold pf/pt_su sens s43 a 12, f 12, c 12 (N5), b/d/e/g «Ban hoa» at buổi 1 · iPad pf/pt_su sens s61 a/b
+   12/12 · iPad cautious s72 a/d/h/i 12/12/12/12, b/c/e/f/g «Ban hoa» at buổi 1 → jsClicks 0, DEAD BUTTON 0 and 0 «kscn-veil» lines in every life. «SÂN CHỜ» on iPad s72:
+   e / f / g took «Ngày thứ hai — Điện tuyển» → «Sân chờ» (g: «Đứng yên giữ sức» → 11 «SKIP TAP .kscn» → «Điện tuyển» «Quỳ xuống thỉnh an»), 0 dead, then the game's own
+   selection ended them «Ban hoa» at buổi 1 (that road ends there on this build). Fold s21 «Sân chờ» lives (self-test lives oc-own / sc-mix-leave / sc-leave) 0 false dead.
+   NO-EXIT 0 in every slice but ONE: Fold s43 c b8 «.kmov div.kmov.kcf.km-full — picker stalled 80 steps, no close / next» (see N5).
+N5 (OPEN, found on the way, not this change: no SKIPWIN in that life, choose() untouched): the card flip «Lật thẻ bài» twice in one buổi (jflip «Chuẩn bị thị tẩm» kmend). The
+   first flip's end button is tapped, a second tap on it is refused «gone» (repeat +5 on the same sig = layer|title|labels), the second flip of the same buổi has the SAME
+   sig, so its «Chuẩn bị thị tẩm» is capped out of b and the picker area / skip-taps 60 s; the DIALOG STALL force then taps it but first calls noExit («no close / next»:
+   a .kmend end button is not NEXT_RE) → NOEXIT UNSTICK 3 → reload. iPad s61 q-i61 and L-i61a met the same double flip (one stall → «Ta biết rồi», one passed). Fix for
+   the next fixer: a refused «gone» tap should not add 5 to repeat (the layer moved on), and the stall force's noExit check should count a scene end button (.kmend /
+   data-km-close) as a way on. Repro: Fold pf/pt_su sens s43 (L-f43c), trace 142–212 s.
+
+## HANDOVER — HARNESS FIXER #13 (11/27/2026)
+State: review/robot-realtap tip = this commit (items 25–26 + proofs) → ONE re-review f0737e88..tip for BIG #14. Recipe: (1) RT_TEST_STALELABEL=2 MODE stale5 / newbtn on Fold
+s21 + iPad pf s61 → gone «skip», 6 skip taps, 0 page taps, 0 dead ≤ 20 s; MODE newlayer → gone «newlayer»; control f0737e88 + the same hook → «still open» + DEAD flood.
+(2) LIVE iPad cautious s72 ×3–6 (the «Sân chờ» road is random, ~1 of 3) and Fold speed s21 ×3 → 0 «DEAD BUTTON … cover div.kscn-veil». (3) RT_TEST_KNE, SKIPCOV, SKIPLAYER
+as before. (4) `bash dev/test/rt-serve-build.sh --b cc68dcfd2b1b <port>` on today's main serves f573dc94. Open: N5 (double card flip stall, above), N3 dress board, N4 tho board.
