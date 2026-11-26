@@ -29,6 +29,7 @@ Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg jo
 | timid-2 | SLICE b400 | 3 | 0 (0) | 8 | 10 | no | 1 (tho) |
 | even-3 | SLICE b400 | 3 | 0 (0) | 40 | 0 | no | 0 |
 | off-2 | SLICE b400 | 3 | 0 (1) | 98 | 4 | no | 0 |
+| hot-2 | HANG-BLOCKED on LIVE b273 (kitScrollCues); parked (not a game ending). Rerun from the b250 ckpt on review/renderer-mem when D gives the LAND READY sha | 2 | 0 (0) | 5 | 16 | no | 3 (danh, mang, huong) |
 | timid-1 | death b162 «Hồng nhan bạc mệnh» (Emperor died at 22 → tuẫn táng) | 2 | 0 (1) | 1 | 0 | yes | 2 (khoc, boan) |
 - Wording note for MAIN: that ending text shows «(khả năng: vừa)» — not one of the 7 odds words.
 - 2nd early-death path for low-rank lives (Emperor death → tuẫn táng, year 2) — listed with the lãnh cung balance candidate, untouched.
