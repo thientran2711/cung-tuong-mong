@@ -92,7 +92,9 @@ function kstgFigs(dl,mb){try{const m=typeof Q!=="undefined"&&Q&&Q[0]||null;let w
  const old=mb.querySelector(".kszfig");
  let src="";try{if(who&&who!==S&&typeof kitFigOf==="function")src=kitFigOf(who)}catch(e){}if(!src){const im=old&&old.querySelector("img");src=im&&(im.getAttribute("src")||"")||""}
  const tg=old&&old.querySelector(".kt3");kstgFig(mb,"kstg-sp",who===S?"":src,own||(tg?tg.innerHTML:""));
- let me="";try{me=typeof kitFigOf==="function"?kitFigOf(S):(typeof figFor==="function"?figFor(S):"")}catch(e){}kstgFig(mb,"kstg-me",me,"");
+ let me="";try{me=typeof kitFigOf==="function"?kitFigOf(S):(typeof figFor==="function"?figFor(S):"")}catch(e){}
+ /* RING-BUILD (owner OD 26/11 ~18:55Z «Mình chỉ cần một người đứng ở đó lúc đó là được rồi. 2 người xuất hiện chỉ khi nào mà đó là cuộc hội thoại giữa 2 người»): ONE person on the stage — HER figure joins the speaker only on a two-person DIALOGUE frame (§102.2 kstgTalkWants); a card frame with a speaker shows the speaker alone; a frame with no other speaker keeps only HER */
+ const spk=mb.querySelector(":scope>.kstg-sp img"),spSrc=spk&&spk.getAttribute("src");let two=true;try{two=kstgTalkWants(dl)}catch(e){}const isMe=!!spSrc&&!!me&&spSrc.replace(/^.*img\//,"")===String(me).replace(/^.*img\//,"");if(two||!spSrc||isMe)kstgFig(mb,"kstg-me",me,"");else{const o=mb.querySelector(":scope>.kstg-me");if(o)o.remove()}
  /* KK36 (STG scan: 12 story frames tt1–3, td1, nc1, ge1, prep, phoenix, thInv, vl* had HER on both sides): a frame with no other speaker keeps only HER figure */
  const sp=mb.querySelector(":scope>.kstg-sp"),spi=sp&&sp.querySelector("img"),strip=s=>String(s||"").replace(/^.*img\//,"");if(sp&&spi&&me&&strip(spi.getAttribute("src"))===strip(me))sp.remove()}catch(e){console.error("kstgFigs",e)}}
 /* the painted part of a figure picture (opaque box, §93.2 kscnOpaque) — cached per picture */

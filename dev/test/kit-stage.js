@@ -24,7 +24,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    const cards=[...dl.querySelectorAll('.opts.khand>button.kopt')].map(R);const odds=[...dl.querySelectorAll('.opts.khand>button.kopt .kodds')].filter(e=>e.getClientRects().length).length;
    return {stage:dl.classList.contains('kstage'),panel:cs.boxShadow!=='none'||parseFloat(cs.borderTopWidth)>0,n:figs.length,figsIn:figs.every(f=>f.inL),figsVis:figs.every(f=>f.vis!=='hidden'),faceUnderBox:figs.some(f=>hit(f.face,B)),upperUnderBox:figs.some(f=>hit(f.upper,B)),
     cardsIn:cards.length>1&&cards.every(c=>c.t>=D.t-1&&c.b<=D.b+1&&c.l>=D.l-1&&c.r<=D.r+1),odds,pages:(()=>{try{return kitView().pages}catch(e){return 0}})()}});
-  chk('stage (no panel box)',g.stage&&!g.panel,JSON.stringify(g).slice(0,160));chk('speaker + her in the layer',g.n===2&&g.figsIn);chk('figures visible after the entrance',g.figsVis);
+  chk('stage (no panel box)',g.stage&&!g.panel,JSON.stringify(g).slice(0,160));/* RING-BUILD (owner OD 26/11 ~18:55Z, canon overwrite): a CARD frame with a speaker = the speaker ALONE (her figure only on a two-person dialogue) */chk('one figure (the speaker) in the layer',g.n===1&&g.figsIn,'n='+g.n);chk('figures visible after the entrance',g.figsVis);
   chk('no face under the story box',!g.faceUnderBox);if(g.pages===1)chk('one page: story never over an upper body',!g.upperUnderBox);chk('hand inside the layer',g.cardsIn);chk('card face: no odds meter',g.odds===0,'odds '+g.odds);
   /* plate never over a face */
   const c1=await p.evaluate(()=>{const r=document.querySelectorAll('#modal .opts.khand>button.kopt')[1].getBoundingClientRect();return [r.left+r.width/2,r.top+r.height*.4]});await tapXY(c1);await shot('cards-lift');
