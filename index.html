@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4032a74f+","t":"2026-11-26T06:05Z","c":"punish-reason.js: NPC release check follows BAL.pun.npcOneBelow (false = back to Đáp ứng, today's rule)","b":"b0cac6e0c094","h":[{"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"442bf25b+","t":"2026-11-26T06:21Z","c":"CHARGE-EVIDENCE #3: eight owner charges (Bày mưu hại người folded into Ức hiếp quấy phá), shared optLogName strips picker sub-line markers …","b":"9487fbd23a7d","h":[{"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -39280,7 +39280,9 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
    eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
    (cap missCap; reset on a find). fine = bạc of «phạt bổng» (light), danh / duc = the small stat loss of a light charge; warnMat = her Tai mắt
    count that warns her when someone searches HER (once a day per searcher). EIGHT charges = the owner's approved list (OD 26/11 ~05:15Z «D4 A»);
-   the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc). */
+   the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc).
+   deed map completed by D4 #3 from dup-report §4.1: rash → hd, xa xỉ → vp, laydo/laydol/tat/phatquy/nuoc/tea/ink/mlbeat → uh, maid-line frame → vo,
+   maid-line poison → mh, ls (sổ Kính sự phòng lệch ngày) → tt like pm; pushp (đẩy xuống hồ, can drown) → mh like pond; phonghoa (burns a store) → uh. */
 BAL.charge={C:{
  vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light"},
  il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam"},
@@ -39292,7 +39294,8 @@ BAL.charge={C:{
  tt:{n:"Tư thông",need:3,band:1,pun:"cold"}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
-  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
+  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"uh",
+  xx:"vp",laydo:"uh",laydol:"uh",tat:"uh",phatquy:"uh",nuoc:"uh",tea:"uh",ink:"uh",mlbeat:"uh",mlframe:"vo",mlhframe:"vo",mlpoison:"mh",ls:"tt",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
   tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt"},
  queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:5,guard:-1,missStep:1,missCap:6,
@@ -74465,9 +74468,11 @@ if(typeof log==="function"){const l0=log;log=function(h){return l0.call(this,tx(
       punished, and the victim holds 2 true pieces on her. The player chooses her defence (PEND.vuoan, like PEND.wdframe).
    ============================================================================================================= */
 const DEEDW={poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
- rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1};
+ rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,
+ /* D4 #3 (dup-report §4.1 FOR FOREMAN D 1): acts that left no deed, so no piece could ever exist (law 6a) */
+ rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1};
 const DEEDX={plot:"bày mưu hại người",sbribe:"mua chuộc người hầu của người khác",sthreat:"dọa người hầu của người khác",illbuy:"lén mua đồ cấm",
- flirt:"liếc mắt đưa tình với nam nhân",mangift:"lén nhận quà của nam nhân",story:"việc xấu trong quá khứ",old:"từng bày mưu hại người"};
+ flirt:"liếc mắt đưa tình với nam nhân",mangift:"lén nhận quà của nam nhân",story:"việc xấu trong quá khứ",old:"từng bày mưu hại người",xx:"ăn vận xa xỉ quá bổng lộc phẩm mình"};
 function deedTxt(k,t){try{if(ACT[k]&&t)return j78act(k,t)}catch(e){}return DEEDX[k]||(ACT[k]?ACT[k].n.toLowerCase():"việc sai trái")}
 function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||DEEDW[k]||1,at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;return d}
 function deedUndo(p,d){if(!p||!d)return;const i=(p.wrongs||[]).indexOf(d);if(i>=0){p.wrongs.splice(i,1);p.dw=Math.max(0,(p.dw||0)-d.w)}}
@@ -74479,6 +74484,8 @@ function deedSync(p){if(!p||!S)return;try{
  if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",2,"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
  for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
  if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${itm(e.k).n})`);
+ /* xa xỉ (D4 #3, dup-report §4.1): dressed over her rank's allowance (the same luxOf as act xx Tố xa xỉ) = a real wrong, once per look */
+ try{const x=typeof luxOf==="function"?luxOf(p):null;if(x&&x.sc>x.bud)deedOnce(p,"xx:"+(typeof dsSig==="function"?dsSig(p):wk()),"xx",1,DEEDX.xx)}catch(e){}
  if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",1,`bày mưu ${deedTxt(p.plan.k,t)}`)}
 }catch(e){}}
 /* how much true evidence can exist against p (each holder separately) */
@@ -100605,7 +100612,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b0cac6e0c094";window.CTM_BUILD=BUILD;
+const BUILD="9487fbd23a7d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -39,5 +39,17 @@ for fn,mk in SR:
     if i<0: continue
     seg=s[max(0,i-300):i+1600]
     if 'chSearch' not in seg: R['search_noroll'].append(f'{fn}:{s.count(chr(10),0,i)+1}')
+# deed_unmapped (D4 #3, dup-report §4.1): every deed kind the game can write (DEEDW / DEEDX keys, deedAdd / deedOnce literal kinds,
+# maid-line "ml"+kind) must sit in BAL.charge.deed — otherwise its pieces fall back to a default charge instead of their own kind
+import re as _re
+_all='\n'.join(F.values());_bal=next((v for k,v in F.items() if k.endswith('/jbal2.js')),'')
+_m=_re.search(r'deed:\{(.*?)\}',_bal[_bal.find('BAL.charge='):],_re.S);_map=set(_re.findall(r'([a-z]+):"',_m.group(1))) if _m else set()
+_kinds=set()
+for nm in ('DEEDW','DEEDX'):
+    mm=_re.search(nm+r'=\{(.*?)\};',_all,_re.S)
+    if mm: _kinds|=set(_re.findall(r'(?:^|[,{\s])([a-z]+):',mm.group(1)))
+_kinds|=set(_re.findall(r'deedAdd\([^,]+,"([a-z]+)"',_all))|set(_re.findall(r'deedOnce\([^,]+,[^,]+,"([a-z]+)"',_all))
+_kinds|={'ml'+k for k in _re.findall(r'mlCaught\([a-z]+,[a-z]+,"([a-z]+)"',_all)}
+R['deed_unmapped']=sorted(k for k in _kinds-{'ml'} if k not in _map) if _map else ['BAL.charge.deed not found']
 print('family | count | sites');
 for k,v in R.items(): print(f'{k} | {len(v)} | {" ".join(v[:14])}')

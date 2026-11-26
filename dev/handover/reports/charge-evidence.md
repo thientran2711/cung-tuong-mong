@@ -80,3 +80,20 @@ PRIORITY #1 CHECK: OD 26/11 ~05:15Z «D4 A» + ~05:35Z formula (verbatim) | FORE
 | cold-faction.js | 20/20 |
 | charge-sim.js | table above (8 charges) |
 Videos (re-shot by #3): https://ctm-img.victoria-tntt.workers.dev/img/_review/charge-evidence/fold-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/charge-evidence/ipad-1180x820.webm (+ fold-picker.png, fold-evidence.png, ipad-evidence.png). Looked at: picker card (Tìm chứng sub-line + plain paragraph), evidence card (Chứng cứ theo tội 3/3, Tố giác), her notice — no cut text, kit panel rows.
+
+### #3 part 2 — dup-report §4.1 (FOREMAN E E97f2, relayed by MAIN 152 via Foreman D 06:15Z)
+The «6 unnamed» = the six evidence kinds §4.1 left without a D4 charge; «4 missing deed records» = the four act families that wrote no deed (law 6a: no piece could ever exist). All folded into the 8 charges, no new charge:
+| kind | before (442bf25b) | after | why |
+|---|---|---|---|
+| ls (sổ Kính sự phòng lệch ngày, jkh) | recorded, unmapped → default | tt | the same proof as pm |
+| mlbeat (maid-line beating) | recorded, unmapped → default | uh | petty harm like trip / batnat |
+| mlframe, mlhframe (maid-line frame) | recorded, unmapped → default | vo | framing |
+| mlpoison (maid-line poison) | recorded, unmapped → default | mh | poison = attempt on a life |
+| rash (Bỏ phấn lạ) | NO deed | DEEDW rash:2 → hd | harms her face |
+| xa xỉ (dressed over allowance, the luxOf of act xx) | NO deed | deedSync scan «xx», once per look → vp | the owner's «Vượt phẩm xa xỉ» |
+| laydo / laydol (sai người lấy trộm đồ) | NO deed | DEEDW :1 → uh | beside steal / petsteal |
+| tat, phatquy, nuoc / tea / ink (slap, kneel, splash) | NO deed | DEEDW :1 → uh | open bullying |
+| pushp (đẩy xuống hồ sen) | hd | mh | can drown, like pond (dup-report FOR FOREMAN D 5) |
+| phonghoa (phóng hỏa kho đồ) | hd | uh | burns objects, not a body / face (same 5) |
+New scan family `deed_unmapped` in dev/test/charge-scan.py (every DEEDW / DEEDX key, deedAdd / deedOnce literal kind and maid-line kind must sit in BAL.charge.deed): 442bf25b = 5 (ls mlbeat mlframe mlhframe mlpoison) → now 0. Probe (her as actor, runAct): trip→uh, rash→hd, tat→uh, phatquy→uh, tea→uh, laydo→uh deeds written; xa xỉ deed «ăn vận xa xỉ quá bổng lộc phẩm mình» → vp. Not in D4: the «who hears the charge» choice (dup-report FOR FOREMAN D 3) — the sentence stays the charge's pun; the hearer only matters inside the future P11 merge (E build).
+Tests after: charge-smoke 31/31 · charge-taps Fold 12 searches → accused (lãnh cung) · iPad 6 → accused · punish-reason 18/18 · cold-faction 20/20 · charge-scan all families 0.
