@@ -1861,3 +1861,4 @@ HOME-WAY top-bar Về phòng + home icon + punishment by weight | review/home-wa
 | 26/11 04:30Z | F #18 | BIG REVIEWER #8 (opus, F #18 child) | review/robot-realtap 4d7a22c6..ad5e1265 (+ fixer #9 pet-shop commit if it lands) | reports/robot-realtap-review.md | open |
 NEWS-SIEVE Tin trong cung sieve + monthly summary + nết open + rank respect + Tin báo dupes | review/news-sieve | session_01V1ZZH3wzCzJXUyoxYK9v3v | RUNNING | 2026-11-26T04:27Z (MAIN 152)
 | E97r BIG REVIEW dup-report a0a1d1a2 (opus; briefs/E97r-review-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWkmQC9riCQ7uwjnLho | FAIL a0a1d1a2 (9 items; reports/dup-report.md REVIEW) | 26/11 05:20Z |
+| E97f FIX r1 dup-report (opus; briefs/E97f-dup-report-fix.md) | review/dup-report | FOREMAN E child7 | (opening) | RUNNING | 26/11 05:25Z |
