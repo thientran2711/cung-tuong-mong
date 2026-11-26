@@ -131,3 +131,10 @@ faults: []
 
 ## Handover
 Work complete; only review remains. Worktrees /home/user/wt/hw-main and /home/user/wt/hw-vid (sparse) can be removed. Not done here: painted home icon (K-ICO-HOME+, KK37); pets khắc budget goes to FOREMAN E (E-d), not this branch.
+
+## ROLLOVER HANDOVER (26/11 ~06:35Z) — HOME-WAY → successor (coordinator MAIN 153 opens it)
+Worker session_01V1ZZH3KBeUcSLSUiQfAU1w, depth 1: START_CTX ~3 %, now ~32 % (≥ START + 25 %) → rollover, nothing of the follow-up started.
+DONE: review/home-way BIG PASS 532fbce1 (MAIN 153's r6 fix: «no way home» = never had the khắc this buổi; had it and spent it = light roll).
+NEXT JOB (MAIN 153 order 06:33Z, verbatim): "Follow-up on a NEW branch from 532fbce1 (review/home-way-nits): (1) Dư đồ disabled «Về phòng · hết khắc» shows generic «chưa đủ điều kiện» under CẦN → show the real reason (fix the kit reason path for all disabled kit buttons that have a known reason, law 11); (2) Fold: disabled label wraps «Về phòng · hết / khắc» over 3 lines → keep it to the kit button tier size (law 10), check every top-bar button label on Fold+iPad. Fold+iPad shots, LAND READY to me."
+POINTERS: the rule = jplrule.js homeWay()/homeGo()/homeName() (w.title holds the real reason; the map button passes it only as title=, the kit «CẦN» reason path does not read it). Top-bar label + Fold layout: jk3.js k3Shell wrapper (label = w.label + "\n" + palace name) and the .hwaway CSS in jk3.js (kv1 block) + jk4.js (k3ph block, font .62rem, max-width 96px). Tests: dev/test/home-way.js (DEV=fold|ipadAir, SHOT_DIR=… writes A-<dev>.png), punish-weight-scan.py, place-rules.js, tinbao-words/scan.js. Build: bash dev/site/build_site.sh; quickcheck: bash dev/tools/quickcheck.sh (~20 min; dialog-fixed + button-crawl fail on LIVE f009e1a6 too; next-dead flakes under the gate load, passes alone). Videos/CDN: dev/test/home-way-video.js, python3 dev/site/cdn_sync.py img/_review/<topic>.
+Worktree /home/user/cung-tuong-mong is on review/home-way 6ecfc659, clean.
