@@ -261,3 +261,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - Sent «main is now 160» to LC22, RV-ACT-MERGE, J5c, KK43, RV-KK41, RV-OB-NGOAICUNG-3, OB-NGOAICUNG-3b, NHV-BUILD, M2b, M5b, forwarders 150–159; FROM MAIN 160 lines in FOREMAN_B–F_STATUS.
 - To LC22: B save rv9 01bad0f6 jump-in after in-flight item when gates PASS; D LAND READY stat-pace d04561e8 / charge-trinh-punish 69dd730e (fast lane) / srv-rank 8559fea2. ACT-MERGE alone stays top.
 - NOTE F s3f: BLOCKED-SAVE-QUOTA at ~5.18 M chars (b~3060) — long lives freeze saving; B save stack + F fixer #10 JOB 9 hold it. Watch.
+- ~14:10Z TAKEOVER_MAIN_161.md written EARLY (no wakes at depth 8). FOR MAIN: sếp please open a ROOT «MAIN CHÍNH 161» from claude.ai with: «Bạn là MAIN CHÍNH 161 (ROOT). Đọc dev/handover/TAKEOVER_MAIN_161.md trên nhánh claude/cung-tuong-mong-handover-hj0h8w và làm theo.» 160 keeps working on worker reports until 161 says it took over.
