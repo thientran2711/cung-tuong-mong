@@ -108,6 +108,7 @@ function oiPanels(home){const k=oiK();const T=OI_TXT[k];if(!T)return [];const C=
  return L}
 /* the selection of this road: its name, its judges, the highest rank it can give */
 function oiSel(home){const k=oiK();const o=S.origin||{};const top=o.r||0;const K=S.kc||{};
+ if(k!=="cnv"&&typeof selxNew==="function"&&selxNew()){const T=RANKS[selxTop()].n;if(k==="nc"||k==="bd"||k==="pf")return{head:"Lễ ra mắt",top:T};if(k==="cn")return{head:"Xét phong danh phận",top:T};if(!(home&&!K.kd))return{head:"Tuyển chọn",top:T}}/* SELSCENE: new lives ±1 cap Tần / Phi (jselx) */
  if(k==="cnv")return{head:"Tuyển cung nữ",top:"Hầu phi tần bậc cao"};
  if(k==="nc"||k==="bd"||k==="pf")return{head:"Lễ ra mắt",top:RANKS[top].n};
  if(k==="cn")return{head:"Xét phong danh phận",top:RANKS[top].n};
@@ -133,8 +134,8 @@ function oiBuild(home){const L=oiPanels(home);return L.map((P,i)=>{const m=oiPan
    oiNameSel();showModal();render()}}}catch(e){console.error("oiIntro",e)}return r}})();
 
 /* ---------- 3. the selection named for what it is (direct road card of jkc2 PEND.kc2Sel; jentry exam frame heading) ---------- */
-const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="pf"?"Phù Tang":S.origin.k==="bd"?bdTxt("Bắc Địch","Ba Tư"):"Cao Ly"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.</p>`,
- cn:()=>`<p>Từ Ninh cung. Thái hậu cho gọi cung nữ được Hoàng thượng giữ lại${oiQueen()?"; Hoàng hậu ngồi bên":""}. Hoàng thượng muốn ban cho ngươi danh phận tới <b>${RANKS[S.origin.r||0].n}</b>; Thái hậu gật đầu hay không là ở buổi hôm nay.</p>`};
+const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="pf"?"Phù Tang":S.origin.k==="bd"?bdTxt("Bắc Địch","Ba Tư"):"Cao Ly"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. ${typeof selxNew==="function"&&selxNew()?`Hòa ước ứng với bậc <b>${RANKS[S.origin.r||0].n}</b>; lễ hôm nay định ngươi được phong cao hơn, đúng bậc, hay thấp hơn một bậc, hoặc bị trả về cố quốc.`:`Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.`}</p>`,
+ cn:()=>`<p>Từ Ninh cung. Thái hậu cho gọi cung nữ được Hoàng thượng giữ lại${oiQueen()?"; Hoàng hậu ngồi bên":""}. ${typeof selxNew==="function"&&selxNew()?`Hoàng thượng muốn ban cho ngươi danh phận bậc <b>${RANKS[S.origin.r||0].n}</b>; buổi hôm nay định Thái hậu cho cao hơn, đúng bậc, hay thấp hơn một bậc, hoặc cho ra khỏi cung.`:`Hoàng thượng muốn ban cho ngươi danh phận tới <b>${RANKS[S.origin.r||0].n}</b>; Thái hậu gật đầu hay không là ở buổi hôm nay.`}</p>`};
 OI_SELT.bd=OI_SELT.nc;OI_SELT.pf=OI_SELT.nc;
 function oiNameSel(){const k=oiK();const X=oiSel(false);const m=Q.find(x=>x.pid==="kc2Sel");if(!m)return;if(X.head&&k!=="cnv")m.t=X.head;if(OI_SELT[k])m.h=OI_SELT[k]()}
 (function(){if(typeof entCtx!=="function")return;const c0=entCtx;entCtx=function(o){const X=c0.apply(this,arguments);try{const k=oiK();if(S&&S.oiV&&X&&!X.srv&&!(o&&o.phuc)&&X.road==="dir"){
