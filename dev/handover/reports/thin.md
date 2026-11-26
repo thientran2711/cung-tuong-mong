@@ -2065,3 +2065,16 @@ Fixed rdseeds_a..d copied to this handover branch (8a650ce4). Laws 2/3 unchanged
 
 ### Verdict
 **PASS → LAND READY review/thin-p8-r2-rv e21050b245f0159d4d4ae4350a77582932cd1cc5** (FF on LIVE 5e013076).
+
+### REVIEW thin-p8 r2 — addendum (videos + fault 4) — SUPERSEDES the e21050b2 LAND READY
+| # | Law | Fault | Fix |
+|---|---|---|---|
+| 4 | 6b (endings / speaker) | seen while recording: rc-thd-x04 (Thái hậu's birthday at Đức Thọ) and rc-thd-x06 (Thái hậu's cough) spoke as Hoàng hậu (w hh) and their endings paid Hoàng hậu's liking («Thái hậu hết ho» → Hoàng hậu thiện cảm +2); whole scan of speakers + endings: only these 2 rows | w hh→th, E fx hh→th; validator rejects an ending that tells of one and moves the other — 51cc7791 |
+Final head **review/thin-p8-r2-rv @51cc77919b705990c859f3bb30b67ca4558202b9** (FF on LIVE 5e013076). Gates re-run on it:
+- `bash dev/tools/quickcheck.sh` ALONE: `QUICKCHECK PASS · 233 s · open 2046 ms · old save ok · perf new/live render 285/249, tab 501/515, buổi 2997/1847, tasks>200ms 28/22`; core gates: only known pre-existing G4 `FAIL fold · Ô lưu · Lui · close button did not close its layer` (fix-7 r3).
+- one-core-guard fails 0 / one-core-text PASS / `RDSEEDS: 627 rows, 0 errors, 0 warnings` / undef-scan PASS (310).
+- `RDC_STOP12=1 node dev/test/rdc-play.js` → `RDC PLAY: ALL PASS (59)` (tt_fixa/tt_fixb × 2 lives, ch4..11); `… all.md 1 tt_ruong,pf_co,thd_dich,thd_dien` → `RDC PLAY: ALL PASS (59)` (4 roads ch4..11).
+- `node dev/test/rdc-oldsave.js live.html` → `RDC OLDSAVE: ALL PASS`; reach 11 origins → `REACH PASS`, 0 page errors.
+- `node dev/test/coop-e2e.js` / `COOP_SWAP=1` → `143/143 passed` / `143/143 passed`.
+- FULL VIDEOS (one new road chapter thd_dich_8 played through from hồi 1 to its ending, real cards + KẾT QUẢ, 0 page errors): https://ctm-img.victoria-tntt.workers.dev/img/_review/thin-p8-r2/thin-p8-r2-thd_dich_8-fold.webm + …-ipadAir.webm (CDN img/_review/thin-p8-r2/) — Fold 755x1000 (61 s, end mid) + iPad 1180x820 (53 s, end mid); looked through (frame sheets): kit k3 dialog, option rows TỐN/ĐƯỢC/MẤT, odds words, KẾT QUẢ toasts; climax «Thang thuốc dâng Thái hậu» now spoken by Thái hậu. Delete with `python3 dev/site/cdn_sync.py --wipe-review thin-p8-r2` after landing.
+**Verdict: PASS → LAND READY review/thin-p8-r2-rv 51cc77919b705990c859f3bb30b67ca4558202b9.**
