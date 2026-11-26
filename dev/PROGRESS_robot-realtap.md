@@ -309,3 +309,18 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
 - Regression: Fold rand fresh life on LIVE 02f564ae, lint OK.
 - Seen in that regression, NOT from this change (open, to classify): 2 DEAD «#kg82 «?» / «Áo lụa thêu hoa nhỏ» cover div.kscn-veil» at Điện tuyển
   (dress-up exam while a «Sân chờ» kit scene is up, z 57 over #kg82). Did not repeat on a rerun; no shot (RT_NOSHOT). Watch runners for the same line.
+
+### FIXER #9 — F #19 job (Foreman E 07:14Z / 07:18Z / 07:24Z / 07:30Z / 07:32Z), 11/26/2026
+- (1) DECIDER «Dưỡng Tú viện gate» (E-S1 ×5, E-S3 ×2, E-S2 ×1 stuck at buổi 1–2, «DEAD … cover div.kscn-veil»): A/B on today's LIVE 6b5d3d05 (build 0281bf7bcef6),
+  Fold 755x1000, NEW life, same seed 31337 speed: harness 496b6b66 → «DEAD BUTTON page «Dưỡng Tú viện …» «Người lạ???» / «Chọn chính mình» cover div.kscn-veil» (same
+  signature as E); harness 89f5b956 (≥ fd9218fe) → the «Chạm để tiếp ▸» kit scene advances on the real tap, life past buổi 3, 0 DEAD. Verdict: NOT a game play-stopper;
+  the selection-scene-r19 kit scene (.kscn between the live bars) needs harness ≥ fd9218fe. Every older harness (8dc395ba, 496b6b66, d2e03d80) voted «page» under the veil.
+- kscn-veil family, same fix: a .kscn that owns the screen middle now wins the layer over the dialog / aria-modal overrides too (the #kg82 «Áo lụa thêu hoa nhỏ» /
+  «?» DEAD at Điện tuyển was a #kg82 board under a «Sân chờ» scene). A dialog inside the scene (.kscn-box options) stays the layer.
+- (2) Mini-game board: «Sẵn sàng» is tapped first on every board that offers it (repeat-capped), then the board is played; «Quay lại» / ✕ is never a move unless
+  it is the only button and the round is over (a VISIBLE kitOvBtn) or given up. mgRes / mgPh «result» now need the kitOvBtn on screen (a stale result panel of
+  an earlier round no longer opens the back). Drag boards keep the quick option «Bỏ qua · kết quả» (taps cannot play them).
+- (3) robot-audit.js (handover branch): an exit ending with NO exitPick on a real-tap harness is game-imposed → VALID (e.g. «Xuất gia làm ni cô» by old custom after
+  the emperor dies, E-S4 R5-speed-4 / R5-greedy-1); a bot-chosen exit with options stays INVALID. mgQuit also counts «#kg… «Quay lại»» taps (07:14Z).
+- Proof (today's LIVE 6b5d3d05, NEW lives, this commit): Fold rand s77 → buổi 71, 0 DEAD, 0 bugs; iPad bold s4242 → buổi 51, 0 DEAD, mgReady 1; Fold cautious s909 →
+  buổi 86, 0 DEAD, mgReady 1; DEC 89f5b956 Fold speed s31337 → buổi 86, 0 DEAD. Control 496b6b66 same seed: 94 DEAD «cover div.kscn-veil», «no progress 6 min» at buổi 2.
