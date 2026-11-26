@@ -199,3 +199,9 @@ info-tap-audit Fold+iPad: r4-on-main FAIL 2 (iPad «Hành sự» tab under #kxca
 kit-close2 (catcher family): main 34/40 = branch 34/40 (same 6 pre-existing rows) — no regression.
 tainghe-info ×5 Fold+iPad: 1ff145de 4/5 · eb38b13b 4/5 — the ONE failing row both times = iPad Tứ đức › «Công» popup, T5 «✕ did not close» (no cover logged); a direct real-tap probe of the 4 Tứ đức popups ✕ on iPad closes 12/12 → NOT yet explained; gate «×5 0 FAIL» NOT met. Next: log the dialog after the ✕ (the page-side console.log in T5 is not piped — add p.on("console")), or the robot tapped the ✕ during the popup entrance.
 Not done: merging hit-overlap into info-tap-audit (kept as its own gate dev/test/hit-overlap-lc19.js); press-guard idea dropped (no real dead tap reproduced).
+
+## r5 LAND READY (KK38, 26/11 ~07:20Z)
+PRIORITY #1 CHECK: OD none new | main 02f564ae | review/tainghe-info-r5 1483429e (KK37) | claims KK38.
+- T5 row (iPad Tứ đức › «Công» ✕): tainghe-info.js now pipes the page-side «after ✕ a game dialog» notes and prints the modal state when ✕ does not close. Gate tainghe-info ×5 Fold+iPad on eb38b13b: 10/10 ALL PASS, no T5 note fired (KK37's T5 «queued game dialog» rule holds; the earlier 1/5 row = a queued agQShow dialog).
+- Merged LIVE 02f564ae (d51556f5; only built files + CHANGE line conflicted; CHANGE line kept = this branch's). On d51556f5: tainghe-info Fold + iPad ALL PASS ×2 (one run recorded).
+- Videos (real taps, tap dots; LOOKED, contact sheets): https://ctm-img.victoria-tntt.workers.dev/img/_review/tainghe-info/kk38-d51556f5-fold.mp4 (114 s) · …/kk38-d51556f5-ipad.mp4 (123 s): sub-tabs Cầm kỳ thi họa / Vũ·Y·Nữ công / Tứ đức / Tác phẩm, every skill name → its LUẬT popup with «Năm bậc» (current bậc marked «đang ở»), ✕ closes.
