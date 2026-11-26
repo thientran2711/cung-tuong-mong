@@ -11,3 +11,7 @@ STATE at start: LIVE 6b5d3d05 (a9), ROLLBACK bf6dd041. HOME-WAY review/lc20-hw b
 ## 07:17Z — MAIN 154 queue update
 Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd567f (gates tainghe ×5 Fold+iPad; CHANGE «Tài nghệ: bấm vào từng môn hiện khung giải thích các bậc, cùng một khung chung.») → srvmerit r2 → kit-stage-r2 cfc2bedd (replaces 8d51d377; + stage-pic-wait.js) → NHV b48425a1.
 - 07:25Z HOME-WAY bdc3ee5b: stage-stay FAIL «chip-odds» (PASS on LIVE): home-way 213e3e97 rewords the garden closing chip («bị bắt gặp thì Danh -8, bị cảnh cáo; may rủi: …»), test still wants «lẻn vào, may rủi: …». Behaviour part passes. Told MAIN (fix test or re-stack DRESS on LIVE).
+
+## 07:22Z — MAIN: HOME-WAY failed (HOME-WAY-NITS fixing the test on review/home-way-r6) → DRESS on LIVE
+- review/lc21-dress 3af7896e (force-replaced c50fd693) = 4f377603 onto LIVE 6b5d3d05, built files only. Gates gates-dr2.sh (chain + promo-root, balance-pace, dress-tap, mghelp-back ×2, mg-back ×2; QC vs LIVE alone last).
+- Next: fixed HOME-WAY slots in next when MAIN sends the sha (rerun gates-hw.sh). Also own the a9 post-push buổi A/B (QC LIVE vs bf6dd041).
