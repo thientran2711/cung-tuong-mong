@@ -52,3 +52,12 @@ Fix, either: (a) MAIN 156 records an OD overwrite of L353 with her OK (show her:
 
 ## ADDENDUM 13:15Z — head moved to 3942eafe (FF from LIVE aa37de21)
 Checked again at 3942eafe: 7ca30095 + 3942eafe are LIVE merges (built files + CHANGE line; the jtwoway TW apol edit is still there); a9d6be0b makes pace-all.js deterministic (C5/C9/B9) → **S1 fixed, S5 fixed (FF from LIVE aa37de21)**. **B1 unchanged** (j28 oanCool still has no `v.coop` skip) and **B2 unchanged** (BAL.art.gain [1,1.25,1.25,1.25,1.25] vs OD:L353 Q5 A). Verdict for 3942eafe: **FAIL — 2 BLOCKING** (B1, B2); S2–S4 and the NITs still stand.
+
+## RE-JUDGE 14:45Z — review/pace-all 6e64445f (FF from LIVE aa37de21): **PASS**
+Diff checked: 3942eafe..6e64445f (f75e0c2e fixes + 6e64445f video).
+- **B1 fixed**: j28 oanCool skips `v.coop` (the friend entry); her grudges cool once, on her own client. New test B13 PASS.
+- **B2 fixed**: BAL.art.gain = [2,1.5,1.1,.9,.8] (sếp's «Q5 A», OD:L353) and jbalcore.js byte-identical to LIVE (empty diff) → days per bậc unchanged; tests A1–A8 read Q5 A.
+- S2 (jemoact refused Tạ lỗi hands Danh back), S3 (paid road gone → refund + line), S4 (accepted hậu lễ bạc → the receiver), N1, N3 (BAL.oanMend.ag), N4, N5: fixed as read in the diff. N2, N6 left as notes (accepted).
+Verified by me: build identical except build line; pace-all.js ALL PASS 32 ×3 (incl. B13); one-core-guard PASS; **coop-e2e 143/143**; quickcheck: open 0 errors, **old save loads + plays**, time-spill PASS, perf fine (buổi 1294/1478 ms), CORE GATES only G4 kit-dialog-2 empty Tốn/Được + button-crawl «Ô lưu · Lui» = the known pre-existing LIVE fails.
+NIT (not blocking): CHANGE.txt still starts «Tiến bộ tài nghệ, Tứ đức tính riêng từng bậc» — after the revert this branch no longer changes the course pace or display; drop that clause so the build line tells her only what changed (Công lao, oán/ghen nguội, làm lành).
+LAND READY: review/pace-all 6e64445f (ancestor = LIVE aa37de21).
