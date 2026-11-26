@@ -1,575 +1,6 @@
 [
  {
   "job": {
-   "id": "R6-lazy-1",
-   "origin": "pf",
-   "road": "pt_tang",
-   "bot": "sens",
-   "seed": 2176113731,
-   "dev": "ipad",
-   "url": "http://localhost:8731/index.html"
-  },
-  "harness": {
-   "kind": "realtap",
-   "sha": "93812531",
-   "realtap": true,
-   "jsClicks": 0,
-   "deadButtons": 0,
-   "cap": null,
-   "stuck": 2,
-   "unstick": 149,
-   "slice": null,
-   "areaTaps": 717,
-   "infoTaps": 336,
-   "dlgClose": 298,
-   "scrolls": 3954,
-   "taps0": 0,
-   "resumed": [
-    {
-     "at": "2026-11-25T11:54:04.122Z",
-     "buoi": 102,
-     "from": "2026-11-25T11:52:34.747Z"
-    }
-   ],
-   "dlgScroll": 1,
-   "taps": 4647
-  },
-  "life": {
-   "id": "Lãnh cung",
-   "type": "end",
-   "fate": "Phát điên trong lãnh cung",
-   "death": false,
-   "age": 25,
-   "year": 6,
-   "rank": 0,
-   "text": "Ngươi u uất thành điên dại, sống nốt quãng đời trong lãnh cung.",
-   "exitPick": {
-    "label": "Bỏ cuộc",
-    "n": 1,
-    "only": true,
-    "at": 3359,
-    "S": {
-     "dead": false,
-     "y": 1,
-     "t": 6,
-     "w": 2,
-     "b": 3,
-     "age": 20,
-     "rank": 0,
-     "name": "Triệu Cẩm Sắt"
-    }
-   }
-  },
-  "exitPick": {
-   "label": "Bỏ cuộc",
-   "n": 1,
-   "only": true,
-   "at": 3359,
-   "S": {
-    "dead": false,
-    "y": 1,
-    "t": 6,
-    "w": 2,
-    "b": 3,
-    "age": 20,
-    "rank": 0,
-    "name": "Triệu Cẩm Sắt"
-   }
-  },
-  "bugs": [
-   {
-    "k": "stuck|no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
-    "type": "stuck",
-    "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
-    "n": 2,
-    "at": 1864,
-    "shot": "/home/user/wt/out/run/shots-R6-lazy-1/stuck-1.png",
-    "save": "/home/user/wt/out/run/shots-R6-lazy-1/stuck-1-dump.json",
-    "S": {
-     "dead": false,
-     "y": 1,
-     "t": 5,
-     "w": 1,
-     "b": 0,
-     "age": 20,
-     "rank": 0,
-     "name": "Triệu Cẩm Sắt"
-    },
-    "buttons": [
-     "",
-     "",
-     "",
-     "",
-     "Theo Hoàng thượngRất vữngTốnkhôngĐượcbệ hạ để mắt hơn, Hoàng thượng tin ta hơnGợi ýbệ hạ đ",
-     "Theo Thái hậuRất vữngTốnkhôngĐượcThái hậu hài lòng, Thái hậu che chở ta, nhà Tể tướng và p",
-     "Theo Tể tướng Hách Cửu TưRất vữngTốnkhôngĐượccó thêm bạc, nhà Tể tướng hậu thuẫn ta bằng b",
-     "Đứng ngoài, giữ mìnhRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút ít), không phe nào nợ ta"
-    ]
-   },
-   {
-    "k": "game|dialog queue holds 3 copies of «Tâm trạng · Tần Tào Diệu Âm» (each close pops one; looks like a dead ✕)",
-    "type": "game",
-    "msg": "dialog queue holds 3 copies of «Tâm trạng · Tần Tào Diệu Âm» (each close pops one; looks like a dead ✕)",
-    "n": 1,
-    "at": 63,
-    "S": {
-     "dead": false,
-     "y": 1,
-     "t": 7,
-     "w": 2,
-     "b": 3,
-     "age": 20,
-     "rank": 0,
-     "name": "Triệu Cẩm Sắt"
-    }
-   },
-   {
-    "k": "game|dialog queue holds 6 copies of «Tâm trạng · Tần Tưởng Tinh Diêu» (each close pops one; looks like a dead ✕)",
-    "type": "game",
-    "msg": "dialog queue holds 6 copies of «Tâm trạng · Tần Tưởng Tinh Diêu» (each close pops one; looks like a dead ✕)",
-    "n": 1,
-    "at": 75,
-    "S": {
-     "dead": false,
-     "y": 1,
-     "t": 7,
-     "w": 2,
-     "b": 3,
-     "age": 20,
-     "rank": 0,
-     "name": "Triệu Cẩm Sắt"
-    }
-   },
-   {
-    "k": "game|dialog queue holds 5 copies of «Tâm trạng · Đức phi Tống Sương Hoa» (each close pops one; looks like a dead ✕)",
-    "type": "game",
-    "msg": "dialog queue holds 5 copies of «Tâm trạng · Đức phi Tống Sương Hoa» (each close pops one; looks like a dead ✕)",
-    "n": 1,
-    "at": 97,
-    "S": {
-     "dead": false,
-     "y": 1,
-     "t": 7,
-     "w": 2,
-     "b": 3,
-     "age": 20,
-     "rank": 0,
-     "name": "Triệu Cẩm Sắt"
-    }
-   }
-  ],
-  "dead": [],
-  "buoi": 731,
-  "steps": 22369,
-  "status": [
-   "STATUS R6-lazy-1 · buổi 417 · year 3 · rank 0 · bugs 4 · stuck 2 · dead buttons 0",
-   "STATUS R6-lazy-1 · buổi 635 · year 5 · rank 0 · bugs 4 · stuck 2 · dead buttons 0"
-  ],
-  "offers": [
-   {
-    "buoi": 124,
-    "y": 1,
-    "rank": 0,
-    "screen": ".dlg «Đại hàn, tuyết lớn»",
-    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
-    "picked": true
-   },
-   {
-    "buoi": 143,
-    "y": 2,
-    "rank": 0,
-    "screen": ".dlg «Kính sự phòng báo tin»",
-    "label": "Tiến cử Cung nữ thân tín tam đẳng Lan Tâm hầu thayRất vữngTố",
-    "picked": false
-   },
-   {
-    "buoi": 147,
-    "y": 2,
-    "rank": 0,
-    "screen": ".dlg «Kính sự phòng báo tin»",
-    "label": "Tiến cử Cung nữ thân tín tam đẳng Lan Tâm hầu thayRất vữngTố",
-    "picked": false
-   },
-   {
-    "buoi": 155,
-    "y": 2,
-    "rank": 0,
-    "screen": ".dlg «Kính sự phòng báo tin»",
-    "label": "Tiến cử Cung nữ thân tín tam đẳng Lan Tâm hầu thayRất vữngTố",
-    "picked": false
-   },
-   {
-    "buoi": 208,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 210,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 218,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 219,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 224,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 225,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 228,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 229,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 234,
-    "y": 2,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 296,
-    "y": 3,
-    "rank": 0,
-    "screen": ".dlg «Lịch tháng»",
-    "label": "mồng 1: Tuyển tú: tú nữ mới vào cung: Lĩnh bổng lộc (lãnh cu",
-    "picked": false
-   },
-   {
-    "buoi": 299,
-    "y": 3,
-    "rank": 0,
-    "screen": ".dlg «Lịch tháng»",
-    "label": "mồng 1: Tuyển tú: tú nữ mới vào cung: Lĩnh bổng lộc (lãnh cu",
-    "picked": false
-   },
-   {
-    "buoi": 356,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": true
-   },
-   {
-    "buoi": 357,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 358,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 359,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 374,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 375,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 378,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 379,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 388,
-    "y": 3,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 504,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 509,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 510,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 512,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 513,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 514,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 516,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 517,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 524,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 525,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 526,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 527,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 528,
-    "y": 4,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 650,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 651,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 652,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 653,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 654,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 655,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 657,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 658,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 660,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 672,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 673,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   },
-   {
-    "buoi": 674,
-    "y": 5,
-    "rank": 0,
-    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
-    "label": "lá phong rơi",
-    "picked": false
-   }
-  ],
-  "t": {
-   "total": 8807272
-  },
-  "unstickNote": "2 stuck episodes (~900 s and ~1000 s) on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» (story text, no option button; GAME bug lane iPad), recovered by level-3 unstick",
-  "unit": "E-S6",
-  "row": "R6·lazy·1:2176113731",
-  "game": "local build of origin/main 17835565 (NOT LIVE)",
-  "audit": "ending VALID by robot-audit, NOT COUNTED for the tally (played on a local build of main 17835565, not the LIVE github.io build; Foreman E lesson d 17:30Z). Evidence/review kept; bug-finding only."
- },
- {
-  "job": {
    "id": "R6-greedy-3",
    "origin": "pf",
    "road": "pt_tang",
@@ -6845,5 +6276,3121 @@
   "row": "R6·lover·2:1847542930 (rerun on LIVE github.io)",
   "game": "github.io LIVE, started ~19:3xZ on Build 4763d410aa0d; site updated mid-life to 0dc642a71578 and 13f84c70f2a3; harness b4b181f8 (no resume)",
   "audit": "VALID (Lãnh cung age 23, real taps, github.io); mixed builds noted — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-lazy-1",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2176113731,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "b4b181f8",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 1,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "areaTaps": 13471,
+   "dlgScroll": 699,
+   "scrolls": 856,
+   "infoTaps": 1240,
+   "kfocVisits": 60,
+   "dlgClose": 427,
+   "nextNoTurn": 44,
+   "taps0": 0,
+   "resumed": [
+    {
+     "at": "2026-11-26T01:54:51.151Z",
+     "buoi": 784,
+     "from": "2026-11-26T01:53:06.179Z"
+    },
+    {
+     "at": "2026-11-26T03:53:48.436Z",
+     "buoi": 1147,
+     "from": "2026-11-26T03:53:09.288Z"
+    }
+   ],
+   "build": {
+    "s": "3762da08+",
+    "b": "fa8da73cecdc",
+    "t": "2026-11-25T19:34Z"
+   },
+   "mgDragSkip": 6,
+   "backdropTaps": 1,
+   "taps": 825
+  },
+  "life": {
+   "id": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Sốt rét nguy kịch, không qua khỏi",
+   "death": true,
+   "age": 26,
+   "year": 8,
+   "rank": 0,
+   "text": "Sốt rét nguy kịch, không qua khỏi.",
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Lật thẻKhông có»",
+    ".dlg «Lật thẻ: Không có» «Lui»",
+    "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Mệnh truyện»",
+    "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Sang buổi»",
+    ".dlg «Có người đến» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiền đức, nàng »",
+    "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người» «Sắc100Tài48Tâm cơ100Đức59Danh0Sủng0»",
+    ".dlg «Sắc» «Lui»",
+    "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người» «Sang ngày mới»",
+    ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»",
+    ".kmov «Ta biết rồi»",
+    "GONE Ta biết rồi",
+    ".dlg «Tin trong cung buổi này» «Lui»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".mapsc",
+    "label": "Hàm An2 bóng · 2 khắc",
+    "cover": "button.k3r.kasr in #kshR",
+    "shot": "/home/user/wt/out/run/shots-R6-lazy-1/dead-ipad-1795666254483.png",
+    "dev": "ipad",
+    "at": 1026,
+    "S": {
+     "dead": false,
+     "y": 8,
+     "t": 130,
+     "w": 2,
+     "b": 3,
+     "age": 26,
+     "rank": 0,
+     "name": "Tưởng Sương Hoa"
+    }
+   }
+  ],
+  "buoi": 1263,
+  "steps": 34259,
+  "status": [
+   "STATUS R6-lazy-1 · buổi 289 · year 3 · rank 0 · bugs 0 · stuck 0 · dead buttons 0",
+   "STATUS R6-lazy-1 · buổi 550 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0",
+   "STATUS R6-lazy-1 · buổi 737 · year 5 · rank 0 · bugs 0 · stuck 0 · dead buttons 0",
+   "STATUS R6-lazy-1 · buổi 936 · year 6 · rank 0 · bugs 0 · stuck 0 · dead buttons 0"
+  ],
+  "offers": [
+   {
+    "buoi": 11,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 11,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 12,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 4 ng»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 12,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 4 ng»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 13,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 13,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "Sắc phong",
+    "picked": true
+   },
+   {
+    "buoi": 14,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 14,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 15,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 4 ng»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 15,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 4 ng»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 24,
+    "y": 1,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Xuân Đào hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 57,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 58,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 59,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 4 ng»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 61,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 62,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 63,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 67,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 68,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 69,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 70,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 70,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 70,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 71,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 71,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 72,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 72,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 73,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 73,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 79,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 79,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 80,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 80,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 89,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 98,
+    "y": 1,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 99,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 99,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 99,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 100,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 100,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 100,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 101,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 101,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 136,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 136,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 137,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 137,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 138,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 138,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 139,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 139,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 140,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 140,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 141,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 141,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 142,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 142,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 146,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 146,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 147,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 147,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 148,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 148,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 152,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 152,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 153,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 153,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 180,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 180,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 181,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 181,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 182,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 182,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 183,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 183,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 189,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 189,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 190,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 190,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 213,
+    "y": 2,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 215,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 223,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 224,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 229,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 230,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 234,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 235,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 347,
+    "y": 3,
+    "rank": 0,
+    "screen": ".dlg «Lập Hoàng hậu mới»",
+    "label": "Đứng yên, xem hai nàng ta làm tròTốnkhôngĐượcSức +5MấtUyển t",
+    "picked": true
+   },
+   {
+    "buoi": 353,
+    "y": 3,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 354,
+    "y": 3,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 355,
+    "y": 3,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 356,
+    "y": 3,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 356,
+    "y": 3,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Xuân Đào hầu thayRất vữngT",
+    "picked": true
+   },
+   {
+    "buoi": 360,
+    "y": 3,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tiết Tình Văn hầu thayRất ",
+    "picked": true
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 376,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 379,
+    "y": 3,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 380,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 389,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 417,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 418,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 419,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 420,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 421,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 422,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 423,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 424,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 425,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 426,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 427,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 428,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 532,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Viên Thu Đồng hầu thayRất ",
+    "picked": true
+   },
+   {
+    "buoi": 540,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Đường Thải Vân hầu thayRất",
+    "picked": false
+   },
+   {
+    "buoi": 558,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 559,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 561,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 562,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 563,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 565,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 566,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 577,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 578,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 579,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 580,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 581,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 589,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 590,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 591,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Không gặp ai.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 592,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 593,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 594,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 595,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Đại hàn, tuyết lớn»",
+    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+    "picked": false
+   },
+   {
+    "buoi": 595,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 596,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 597,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Không gặp ai.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 598,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 599,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 600,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 601,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 602,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 603,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 604,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 605,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 606,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Phong hàn · nhẹ",
+    "picked": true
+   },
+   {
+    "buoi": 607,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 608,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": true
+   },
+   {
+    "buoi": 609,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 4 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": true
+   },
+   {
+    "buoi": 609,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 4 ngư»",
+    "label": "Y dượcY dượcĐang thỉnh tranh…Truyền thái yTùy duyênMời thái ",
+    "picked": false
+   },
+   {
+    "buoi": 609,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 4 ngư»",
+    "label": "Y dượcY dượcTruyền thái yTùy duyênMời thái y đến chữa phong ",
+    "picked": false
+   },
+   {
+    "buoi": 610,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 610,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "Y dượcY dượcTruyền thái yTùy duyênMời thái y đến chữa phong ",
+    "picked": false
+   },
+   {
+    "buoi": 611,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 612,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 613,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 614,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 2 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 615,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 616,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 617,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 618,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 619,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Không gặp ai.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 620,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 621,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 622,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 623,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 2 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 624,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 625,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 626,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 627,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Không gặp ai.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 628,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 638,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 4Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 638,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 639,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 4Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 639,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": true
+   },
+   {
+    "buoi": 644,
+    "y": 5,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Đường Thải Vân hầu thayRất",
+    "picked": false
+   },
+   {
+    "buoi": 645,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 4Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 645,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 692,
+    "y": 5,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Đường Thải Vân hầu thayRất",
+    "picked": true
+   },
+   {
+    "buoi": 708,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 709,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 710,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 711,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 712,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 713,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 714,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 715,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 716,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 717,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 718,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 719,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 720,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 722,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 723,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 725,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 730,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 3 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 730,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 3 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 731,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 731,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 737,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 738,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 739,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 789,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 789,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 805,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Hứa Trân Châu hầu thayRất ",
+    "picked": true
+   },
+   {
+    "buoi": 817,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Bạch Tiễn Thu hầu thayRất ",
+    "picked": true
+   },
+   {
+    "buoi": 837,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Yến Uyên Ương hầu thayRất ",
+    "picked": false
+   },
+   {
+    "buoi": 839,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 3 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 839,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 3 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 840,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 840,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 857,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Yến Uyên Ương hầu thayRất ",
+    "picked": false
+   },
+   {
+    "buoi": 881,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Yến Uyên Ương hầu thayRất ",
+    "picked": false
+   },
+   {
+    "buoi": 899,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 899,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": true
+   },
+   {
+    "buoi": 900,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": true
+   },
+   {
+    "buoi": 900,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 901,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 901,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 902,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 902,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 903,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 903,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 904,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 904,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": true
+   },
+   {
+    "buoi": 906,
+    "y": 6,
+    "rank": 0,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 926,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 927,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 930,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 931,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 932,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 932,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 933,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 5Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 933,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": true
+   },
+   {
+    "buoi": 934,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 934,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 935,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 935,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 938,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 939,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 940,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 3 ngườ»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 941,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 947,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 947,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 948,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 3 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 948,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 3 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 961,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 961,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 962,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": true
+   },
+   {
+    "buoi": 962,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 963,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 963,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 1 ngườ»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 972,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Đại hàn, tuyết lớn»",
+    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+    "picked": false
+   },
+   {
+    "buoi": 981,
+    "y": 6,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Yến Uyên Ương hầu thayRất ",
+    "picked": false
+   },
+   {
+    "buoi": 1008,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1008,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1009,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1009,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1010,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1010,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1011,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1011,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1012,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1012,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1013,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1013,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1027,
+    "y": 7,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Đặt vào hương, phấnGhi chúkhông hợp đề Cổ phong",
+    "picked": true
+   },
+   {
+    "buoi": 1027,
+    "y": 7,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Đặt vào áoĐượchợp đề Cổ phong",
+    "picked": true
+   },
+   {
+    "buoi": 1027,
+    "y": 7,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Đặt vào hương, phấnKèmthay phấn gạoGhi chúkhông hợp đề Cổ ph",
+    "picked": false
+   },
+   {
+    "buoi": 1037,
+    "y": 7,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Yến Uyên Ương hầu thayRất ",
+    "picked": true
+   },
+   {
+    "buoi": 1038,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1038,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1053,
+    "y": 7,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Yến Uyên Ương hầu thayRất ",
+    "picked": false
+   },
+   {
+    "buoi": 1058,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1064,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1065,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1067,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1071,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1083,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1084,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1089,
+    "y": 7,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Yến Uyên Ương hầu thayRất ",
+    "picked": false
+   },
+   {
+    "buoi": 1092,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1092,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1093,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1093,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1094,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1094,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1094,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1098,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 1098,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1098,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1099,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1099,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1102,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1103,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1104,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1105,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1106,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1107,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1108,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1109,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1110,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Không gặp ai.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1111,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1112,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 4 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1113,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1114,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1115,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Không gặp ai.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1116,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1117,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1118,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1119,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1120,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1121,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1122,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 4 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1123,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Không gặp ai.»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1124,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1125,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1126,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1127,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1128,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1129,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1130,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1130,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1130,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1131,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1131,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1131,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1132,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1132,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1132,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1133,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1133,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1133,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1134,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1134,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1134,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1135,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1135,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1135,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1136,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1136,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1136,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1137,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 1137,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 6Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 1137,
+    "y": 7,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 1141,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Bạch Thu Thiền hầu thayRất",
+    "picked": true
+   },
+   {
+    "buoi": 1145,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Bạch Thu Thiền hầu thayRất",
+    "picked": true
+   },
+   {
+    "buoi": 1165,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trình Hứa Trân Châu»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ ta đếnCần",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1165,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trình Hứa Trân Châu»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1165,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trình Hứa Trân Châu»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1181,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Lữ Tư Kỳ»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1181,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Lữ Tư Kỳ»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1181,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Lữ Tư Kỳ»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1185,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liên Tâm»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1185,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liên Tâm»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1185,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liên Tâm»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1189,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Bạch Thu Thiền»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ ta đếnCần",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1189,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Bạch Thu Thiền»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1189,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Bạch Thu Thiền»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1193,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Phú Sát Yến Uyên Ương»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1193,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Phú Sát Yến Uyên Ương»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1193,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Phú Sát Yến Uyên Ương»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1210,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Trương Đậu Tiểu Mãn»",
+    "label": "Đến chúc mừngRất vữngTốnSức -5Đượcngười ấy có thiện cảm hơn,",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1210,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Trương Đậu Tiểu Mãn»",
+    "label": "Gửi lễ mừngRất vữngTốnBạc -15Đượcngười ấy có thiện cảm hơnGợ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1210,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Trương Đậu Tiểu Mãn»",
+    "label": "Không đếnRất vữngTốnkhôngĐượcdưỡng sứcMấtngười ấy mất thiện ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1222,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Phú Sát Yến Uyên Ương»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1222,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Phú Sát Yến Uyên Ương»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1222,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Phú Sát Yến Uyên Ương»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1246,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Trình Hứa Trân Châu»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ ta đếnCần",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1246,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Trình Hứa Trân Châu»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1246,
+    "y": 8,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Trình Hứa Trân Châu»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   }
+  ],
+  "t": {
+   "total": 1671774
+  },
+  "unit": "E-S6",
+  "row": "R6·lazy·1:2176113731 (rerun on LIVE github.io)",
+  "game": "github.io LIVE; started 22:5xZ on Build 13f84c70f2a3; resumed twice (buổi 784 at 01:54Z, buổi 1147 at 03:53Z) so later parts ran on newer builds (current Build c039fbea2394); harness 496b6b66 → 8dc395ba → 4d7a22c6 (same life, saves kept)",
+  "audit": "VALID (Hồng nhan bạc mệnh, malaria death age 26, real taps, github.io); mixed builds noted — COUNTED"
  }
 ]
