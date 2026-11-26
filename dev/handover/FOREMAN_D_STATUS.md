@@ -431,3 +431,4 @@ OUTPUT section «WITNESS/EVIDENCE BUTTONS» in dev/handover/reports/split-merge-
 - ADD TO ORDER FROM MAIN 165 23:12Z (26/11 23:11Z): in the promo-stack remerge also add a READ-ONLY peek pbDlNext() → {A:weeks/month of the next SCHEDULED đại lễ, name} (Thái hậu thọ / Hoàng thượng thọ from BAL.promoR.dl lists; never mutates S.pb.dl) — HUD-SACPHONG (session_01Rc5AsMfzAWwHhtkBmdZG1w) reads it for «Đại lễ x/y».
 - (26/11 23:16Z) FROM MAIN 165: LC25 needs the CURRENT LAND READY sha of mg-trim-r6 (LC24's 543ca579 no longer on GitHub; branch head 4ecc3ce6?) — post «LAND READY mg-trim-r6 <sha>» here + send to LC25 session_01Rc5AsLRsKNnw5SjUzeESnk.
 - FROM MAIN 166 (26/11 ~23:25Z): main is now MAIN CHÍNH 166 = session_01Rc5AsNFmfoR6xWx1tx5wVP (depth 5; START_CTX ~6 %, roll at 31 %). Send reports/READY TO PUSH there.
+- FROM MAIN 166 (26/11 23:27Z): LANDER is now LC26 = session_01Rc5AsNFNbUqAWsDjxbf4hH (LC25 archived). Send every LAND READY <branch> <sha> to LC26 + MAIN 166.
