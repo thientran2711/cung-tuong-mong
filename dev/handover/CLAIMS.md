@@ -561,3 +561,4 @@ WORDING-MARKS | review/wording-marks | session_01Rc5AsJzixPTTcuxw6cUjzW | RUNNIN
 RV-163C BIG reviewer | — | session_01Rc5AsLFUVRepsLs2do3jnh | RUNNING | 2026-11-26T22:08Z (MAIN 164; RV-163B archived)
 RING-BUILD-6 | review/ring-build | session_01Rc5AsK4NELLZpFSpntdwGY | RUNNING | 2026-11-26T22:10Z (MAIN 164; RING-BUILD-5 archived)
 kit keeper (KK48) | review/kit-* | session_01Rc5AsKCV8Zc8zV3nMq8Y8v | RUNNING | 2026-11-26T22:31Z (MAIN 164; KK47 rolled)
+PICKER-DOM BIG REVIEW (opus) of review/picker-dom 303611f2 | dev/handover/reviews/picker-dom-review.md | (session id next D STATUS line) | RUNNING | 26/11 22:48Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
