@@ -208,7 +208,7 @@ function aaThieuLeWhy(host){try{const L=leAttire(S,"thỉnh an",host),who=host==
  const lose=[d.danh?"Danh":"",d.duc?"Đức":""].filter(Boolean).join("/");
  return`Y phục dưới phẩm: thiếu lễ, ${who} phật ý (không đổi cơ may${lose?`, mất ${lose}`:""})`}catch(e){return"Y phục dưới phẩm: thiếu lễ (không đổi cơ may)"}}
 /* NPCs: the same rule when they wait on Thái hậu */
-(function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{if(aaThieuLe(v)){const f=aaThieuLeFx("th");ap(v,{danh:f.danh});v.th=cl((v.th||0)+f.aff,-100,100)}}catch(e){}return r}}}catch(e){}})();
+(function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{if(aaThieuLe(v)){const f=aaThieuLeFx("th");ap(v,{danh:f.danh});spAdd(v,"th",f.aff)}}catch(e){}return r}}}catch(e){}})();
 
 /* 17. leAttire(p, occasion, host) — ONE judgement of how someone is dressed for a formal moment (owner 11/15), used by Thiếu lễ and
    by review/toilette (the morning dress-up + makeup game writes p.toilette = {wk: wk() day key, score 0–100, makeup: bool}).

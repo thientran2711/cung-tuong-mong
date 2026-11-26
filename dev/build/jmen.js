@@ -210,9 +210,9 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
  if(c){const o=formal?odA(by,48+(by.danh||0)/5+(by.tamco||0)/4):100;oanAdd(c,by,BAL.eff.jmen.menReport_3);affAdd(c,by,BAL.eff.jmen.menReport_4);m.ban=wk()+(formal?MEN.banF:MEN.banS);oanAdd(m,by,BAL.relMS.grudge);
   if(roll(o)){log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} và ${c===S?"ngươi":`${rkName(c)} ${c.name}`} gặp riêng ở ${at}${y.r==="letter"?", trao thư lén":""}.</span>`);
    punish(c,y.r==="letter"?"trao thư lén cho nam nhân ra ngoài cung":"gặp riêng nam nhân nơi cấm địa",formal?2:1);gain({danh:BAL.eff.jmen.danhMeet});
-   if(by===S&&c!==S&&(c.sung||0)>=60){apply({sung:BAL.eff.jmen.unhappySung});log("Hoàng thượng không vui vì người ngài thương bị phạt.")}if(by===S)S.th=cl((S.th||0)+BAL.eff.jmen.thMeet,-100,100);return true}
+   if(by===S&&c!==S&&(c.sung||0)>=60){apply({sung:BAL.eff.jmen.unhappySung});log("Hoàng thượng không vui vì người ngài thương bị phạt.")}if(by===S)spAdd(S,"th",BAL.eff.jmen.thMeet);return true}
   log(`<span class="r">${menCap(byT)} trình Cung Chính ti chuyện ở ${at}, nhưng không đủ chứng: ${c===S?"ngươi":`${rkName(c)} ${c.name}`} vô can; ${byT} mang tiếng vu khống.</span>`);gain({danh:BAL.eff.jmen.danhMeetFail});return false}
- m.ban=wk()+(formal?MEN.banF:MEN.banS);m.grudge=key(by);m.grudgeN=2;oanAdd(m,by,BAL.relMS.grudge);gain({danh:formal?BAL.eff.jmen.danhManF:BAL.eff.jmen.danhMan});if(by===S)S.th=cl((S.th||0)+BAL.eff.jmen.thMan,-100,100);
+ m.ban=wk()+(formal?MEN.banF:MEN.banS);m.grudge=key(by);m.grudgeN=2;oanAdd(m,by,BAL.relMS.grudge);gain({danh:formal?BAL.eff.jmen.danhManF:BAL.eff.jmen.danhMan});if(by===S)spAdd(S,"th",BAL.eff.jmen.thMan);
  if(formal){const G=menGuards().filter(x=>x!==m&&x.alive);if(G.length){const g=G.slice().sort((a,b)=>(a.loyal||50)-(b.loyal||50))[0];if((g.loyal||50)<BAL.loy.close){g.grudge=key(by);g.grudgeN=1;oanAdd(g,by,BAL.relMS.grudge2)}}}
  log(`${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} lảng vảng ở ${at} không có lệnh, bị ${formal?"giải ra ngoại triều, cấm vào cung một năm":"đánh trượng, đuổi ra ngoại triều"}.`);return true}
 /* by hides m (and c): a debt and evidence; found → by is punished */

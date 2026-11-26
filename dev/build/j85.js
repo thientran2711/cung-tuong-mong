@@ -155,7 +155,7 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
   /* Đức: Hạnh bậc 3 keeps it rising; it moves Thái hậu / Hoàng hậu and the servants' Lòng */
   if(virtueBonus(p,"hanh").month&&ducOf(p)<BAL.virx.hanhCap)withDeed("giữ đức hạnh (Hạnh bậc 3)",()=>me?apply({duc:BAL.rl.j85.hanhDucMonth}):ap(p,{duc:BAL.rl.j85.hanhDucMonth}));
   const d=ducOf(p),q=queenP(),tf=d>=BAL.ducLv.up?BAL.rl.j85.ducTf:d<BAL.ducLv.down?-BAL.rl.j85.ducTf:0;
-  if(tf){if(me){S.th=cl(S.th+tf,-100,100);if(q&&q!==S)S.hh=cl(S.hh+tf,-100,100)}else if(q&&q!==p)p.hh=cl((p.hh||0)+tf,-100,100)}
+  if(tf){if(me){spAdd(S,"th",tf);if(q&&q!==S)spAdd(S,"hh",tf)}else if(q&&q!==p)spAdd(p,"hh",tf)}
   const lf=d>=BAL.ducLv.staffUp?BAL.rl.j85.ducStaff:d<BAL.ducLv.staffDown?-BAL.rl.j85.ducStaff:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
   /* (her Thái hậu / Hoàng hậu drift by Đức is written once, with numbers, in the turn-change line of jlogsync — log-sync r1) */
   if(me&&lf)ev+=lf>0?`Đức ${d}: kẻ hầu thêm thiện cảm (${balSg(lf)}). `:`Đức ${d}: kẻ hầu bớt thiện cảm (${balSg(lf)}). `;

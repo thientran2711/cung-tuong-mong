@@ -102,28 +102,28 @@ kc3Reg("kc_ch",{t:"Thư của cô mẫu",w:"th",g:"Thái hậu là cô mẫu c�
  p:[["s1"],["c1","c2","c3"],["t1"],["x1"]],
  B:{
  s1:{h:"Thư của cô mẫu",w:"th",t:"Thái hậu, cô mẫu của ngươi, gửi thư hỏi ngươi đã học Nữ tắc đến đâu.",o:[
-  {n:"Chép Nữ tắc gửi vào cung",wx:"cô mẫu khen ngươi giữ lễ",lx:"chép đến mỏi tay",rt:"Bản chép của ngươi nét nào cũng ngay ngắn.",go:(A,ok,G)=>{S.th=(S.th||0)+G[0]}},
-  {n:"Viết thư kể chuyện nhà",wx:"cô mẫu thấy ngươi gần gũi",lx:"bà có thể chê ngươi không nghiêm",rt:"Ngươi kể chuyện tổ mẫu, chuyện hoa trong vườn.",go:(A,ok,G)=>{S.th=(S.th||0)+G[0]}},
+  {n:"Chép Nữ tắc gửi vào cung",wx:"cô mẫu khen ngươi giữ lễ",lx:"chép đến mỏi tay",rt:"Bản chép của ngươi nét nào cũng ngay ngắn.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
+  {n:"Viết thư kể chuyện nhà",wx:"cô mẫu thấy ngươi gần gũi",lx:"bà có thể chê ngươi không nghiêm",rt:"Ngươi kể chuyện tổ mẫu, chuyện hoa trong vườn.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
   {n:"Gửi kèm một bài thơ mừng thọ",wx:"cô mẫu nhớ đến tài ngươi",lx:"thơ dở thì bị chê",rt:"Cô mẫu hồi thư, khen một câu.",rf:"Cô mẫu hồi thư, dặn con gái nên chuyên Nữ công.",go:(A,ok,G)=>{S.th=Math.max(0,(S.th||0)+(ok?G[0]:G[1]))}}]},
  c1:{h:"Hai người cháu",w:"th",t:"Cô mẫu cũng gửi thư cho một người cháu gái khác trong họ: hai người, một chỗ bên cạnh bà.",o:[
   {n:"Kết thân với người kia",wx:"người kia thành bạn",lx:"cô mẫu thấy ngươi không muốn tranh",rt:"Hai chị em hẹn ngày cùng lên chùa.",go:(A,ok,G)=>{const b=kc3P("ban0");if(b)kcAf(b,G[0])}},
   {n:"Lấn lướt người kia",f:"vs",wx:"người kia lép vế",lx:"người kia ôm hận",rt:"Thư ngươi đến cung trước, dài hơn, kèm quà quý hơn.",rf:"Người kia biết ngươi chơi khăm, kể lại với cô mẫu."},
   {n:"Mặc, để cô mẫu tự chọn",wx:"không ai oán ngươi",lx:"cô mẫu thấy ngươi nhạt",rt:"Ngươi không nhắc đến người kia trong thư.",go:(A,ok,G)=>{S.th=Math.max(0,(S.th||0)+G[0])}}]},
  c2:{h:"Quà vào cung",w:"th",t:"Tiết Trung thu, nhà nào có người trong cung cũng gửi quà. Cô mẫu thích trà Vũ Di và đồ thêu.",o:[
-  {n:"Mua trà Vũ Di thượng hạng",wx:"cô mẫu nhận quà quý",lx:"bạc riêng vơi đi",rt:"Người của Đức Thọ cung nhận trà, cúi đầu tạ.",go:(A,ok,G)=>{S.th=(S.th||0)+G[0]}},
-  {n:"Tự thêu một bức Quan Âm",wx:"cô mẫu nhận quà bằng tay cháu",lx:"thức trắng nửa tháng",rt:"Bức thêu được treo trong Phật đường của Đức Thọ cung.",go:(A,ok,G)=>{S.th=(S.th||0)+G[0]}},
+  {n:"Mua trà Vũ Di thượng hạng",wx:"cô mẫu nhận quà quý",lx:"bạc riêng vơi đi",rt:"Người của Đức Thọ cung nhận trà, cúi đầu tạ.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
+  {n:"Tự thêu một bức Quan Âm",wx:"cô mẫu nhận quà bằng tay cháu",lx:"thức trắng nửa tháng",rt:"Bức thêu được treo trong Phật đường của Đức Thọ cung.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
   {n:"Chỉ gửi một phong thư thăm hỏi",wx:"không tốn gì",lx:"cô mẫu thấy thiếu lòng",rt:"Ngươi gửi thư, không kèm quà.",go:(A,ok,G)=>{S.th=Math.max(0,(S.th||0)+G[0])}}]},
  c3:{h:"Lá thư cũ của tổ mẫu",w:"to",if:()=>!!kc3P("to"),t:"Tổ mẫu {toN} đưa ngươi một lá thư cũ của cô mẫu thời còn ở nhà, dặn: “Đọc rồi đốt. Có những chuyện chỉ người nhà được biết.”",o:[
   {n:"Đọc kỹ rồi giữ lại",f:"bi",wx:"biết một bí mật năm xưa của cô mẫu",lx:"tổ mẫu không vui",rt:"Trong thư là chuyện cô mẫu từng có một người thương trước khi vào cung.",go:(A,ok,G)=>{kc3Af("to",G[0])}},
   {n:"Đọc rồi đốt như lời tổ mẫu",f:"bi",wx:"tổ mẫu tin ngươi",lx:"không giữ được gì làm bằng",rt:"Lá thư cháy. Ngươi nhớ từng chữ.",go:(A,ok,G)=>{kc3Af("to",G[0])}},
   {n:"Không đọc, trả lại tổ mẫu",wx:"giữ mình ngoài chuyện cũ",lx:"tổ mẫu thấy ngươi nhát",rt:"Tổ mẫu cất thư, thở dài.",rf:"Tổ mẫu giận: “Người nhà mà không dám biết chuyện nhà.”"}]},
  t1:{h:"Người của cô mẫu đến",w:"th",t:"Một ma ma của Đức Thọ cung đến phủ, ở lại ba ngày, xem ngươi đi đứng, ăn uống, đối đáp với người hầu.",o:[
-  {n:"Cư xử như mọi ngày",wx:"ma ma thấy ngươi thật thà",lx:"không có gì nổi bật",rt:"Ma ma về cung, không nói gì.",go:(A,ok,G)=>{S.th=(S.th||0)+G[0]}},
-  {n:"Đánh một khúc đàn cho ma ma nghe",wx:"ma ma kể lại với cô mẫu",lx:"đàn dở thì thành chuyện cười",rt:"Ma ma ngồi nghe đến hết, gật đầu.",rf:"Dây đàn đứt giữa khúc.",go:(A,ok,G)=>{if(ok)S.th=(S.th||0)+G[0]}},
-  {n:"Biếu ma ma một lễ",wx:"ma ma nói tốt cho ngươi",lx:"bạc riêng vơi đi",rt:"Ma ma nhận lễ, cười tít mắt.",go:(A,ok,G)=>{S.th=(S.th||0)+G[0]}}]},
+  {n:"Cư xử như mọi ngày",wx:"ma ma thấy ngươi thật thà",lx:"không có gì nổi bật",rt:"Ma ma về cung, không nói gì.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
+  {n:"Đánh một khúc đàn cho ma ma nghe",wx:"ma ma kể lại với cô mẫu",lx:"đàn dở thì thành chuyện cười",rt:"Ma ma ngồi nghe đến hết, gật đầu.",rf:"Dây đàn đứt giữa khúc.",go:(A,ok,G)=>{if(ok)spAdd(S,"th",G[0])}},
+  {n:"Biếu ma ma một lễ",wx:"ma ma nói tốt cho ngươi",lx:"bạc riêng vơi đi",rt:"Ma ma nhận lễ, cười tít mắt.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}}]},
  x1:{h:"Ra mắt người của cô mẫu",w:"th",t:"Thái hậu cho người ra xem mặt ngươi trước kỳ tuyển. Người cháu kia cũng được xem cùng ngày.",o:[
-  {n:"Ra mắt khiêm nhường",e:"mid",wx:"cô mẫu thấy ngươi biết giữ lễ",lx:"người kia rực rỡ hơn",rt:"Ngươi cúi đầu suốt buổi. Người của cô mẫu gật đầu.",go:(A,ok,G)=>{S.th=(S.th||0)+G[0]}},
-  {n:"Ra mắt rực rỡ",e:["win","lose"],wx:"người của cô mẫu chọn ngươi",lx:"bị chê phô trương",rt:"Cả sảnh lặng đi khi ngươi bước vào.",rf:"Người của cô mẫu nhíu mày: con gái nhà quốc cữu mà phô trương quá.",go:(A,ok,G)=>{if(ok)S.th=(S.th||0)+G[0]}},
+  {n:"Ra mắt khiêm nhường",e:"mid",wx:"cô mẫu thấy ngươi biết giữ lễ",lx:"người kia rực rỡ hơn",rt:"Ngươi cúi đầu suốt buổi. Người của cô mẫu gật đầu.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
+  {n:"Ra mắt rực rỡ",e:["win","lose"],wx:"người của cô mẫu chọn ngươi",lx:"bị chê phô trương",rt:"Cả sảnh lặng đi khi ngươi bước vào.",rf:"Người của cô mẫu nhíu mày: con gái nhà quốc cữu mà phô trương quá.",go:(A,ok,G)=>{if(ok)spAdd(S,"th",G[0])}},
   {n:"Nhường người kia ra trước, mình lui sau",e:"lose",wx:"người kia mang ơn ngươi",lx:"cô mẫu không nhớ mặt ngươi",rt:"Người kia ra mắt trước. Ngươi chỉ kịp cúi chào."}]}},
  E:{
  win:{tag:"Cô mẫu chọn ngươi",w:"th",seed:"ch_co",t:"Cô mẫu muốn ngươi ở bên. Vào cung, ngươi sẽ là người bà giao việc, cũng là người bà dùng.",go:()=>{if(!S.kc.thAsk){S.kc.thAsk=1;pushDil(mkP("kcE",{e:"thtrieu"}),"Thái hậu triệu")}return""}},

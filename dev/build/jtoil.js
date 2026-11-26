@@ -667,7 +667,7 @@ function toilLit(r){const g=toilGest(r);let l=String(r.line||"");if(!g)l=l.charA
    the result card keeps the short facts (kShort) */
 function toilReact(r){try{if(r.say==null)r.say=toilSay(r.k,Object.assign({host:r.host},r.ctx));toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
 /* a host's regard moves for person p (default her): Thái hậu → p.th, Hoàng thượng → Sủng ±1, a consort → thiện cảm (NPCs: the same rows on their own record) */
-function toilBack(host,n,p){if(!n)return;if(p&&p!==S){if(host==="th")p.th=cl((p.th||0)+n,-100,100);else if(host==="emp")ap(p,{sung:n>0?BAL.eff.jtoil.empSung:-BAL.eff.jtoil.empSung});else if(host&&host!==p)affAdd(host,p,n);return}
+function toilBack(host,n,p){if(!n)return;if(p&&p!==S){if(host==="th")spAdd(p,"th",n);else if(host==="emp")ap(p,{sung:n>0?BAL.eff.jtoil.empSung:-BAL.eff.jtoil.empSung});else if(host&&host!==p)affAdd(host,p,n);return}
  if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?BAL.eff.jtoil.empSung:-BAL.eff.jtoil.empSung});else if(host&&host!==S)affAdd(host,S,n)}
 /* the answer to a reaction to one's look (Xin lỗi / Cười trừ / Đáp lại / Đáp trả gay gắt): ONE function for her (the dialog below) and for an NPC (jagtoil, G11).
    r = {host, n, v (the consort who reacted)}; → true / false for a reply that went well / badly, null otherwise. Her Sức for "Đáp lại" is the option's fx. */

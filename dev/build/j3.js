@@ -106,7 +106,7 @@ function moodMonth(){const E=S.emp;let L=[[0,"Được mùa khắp nơi, Hoàng 
 PEND.vase=p=>({who:pMaid(),t:`${S.maid.name} lỡ tay đánh vỡ chén ngọc Hoàng hậu ban. Thái giám Càn Ninh cung đến bắt người.${p&&p.y?`<br>Hoàng hậu ${p.y}, chẳng chịu bỏ qua.`:""}`,o:[
     {n:"Nhận tội thay nàng",fx:{...BAL.cv.vase.take}},{n:"Để nàng chịu đòn",fx:{...BAL.cv.vase.leave},x:"thành: Hoàng hậu không trách đến ngươi · kèm: nàng bị đánh hai mươi trượng"}]});
 PEND.coldletter=p=>{const f=RV(p.f),v=p.v==null?null:RV(p.v);if(!f)return null;return{who:pv(f),t:`${f.name} từ lãnh cung lén gửi thư, xin chút bạc chạy thuốc${p.y?` (nàng ${p.y})`:""}.`,o:[
-    {n:"Giúp nàng",fx:{bac:-BAL.cv.coldAid,duc:BAL.cv.coldL.duc},x:v?`${v.name} nghe chuyện, mến ngươi hơn (thiện cảm ${balSg(BAL.cv.coldL.rel)})`:"",go:()=>{if(v)v.rel+=BAL.cv.coldL.rel}},{n:"Làm ngơ",fx:{...BAL.cv.coldL.ign},x:`thành: giữ lại ${BAL.cv.coldAid} lượng bạc`}]}};
+    {n:"Giúp nàng",fx:{bac:-BAL.cv.coldAid,duc:BAL.cv.coldL.duc},x:v?`${v.name} nghe chuyện, mến ngươi hơn (thiện cảm ${balSg(BAL.cv.coldL.rel)})`:"",go:()=>{if(v)spAdd(v,"rel",BAL.cv.coldL.rel)}},{n:"Làm ngơ",fx:{...BAL.cv.coldL.ign},x:`thành: giữ lại ${BAL.cv.coldAid} lượng bạc`}]}};
 PEND.embezzle=p=>{const q=rivals[0];return{who:pEunOf(q),t:`Một thái giám lén mang đến sổ sách chứng Hoàng hậu ${q.name} biển thủ bạc nội khố, đòi 80 lượng.${p&&p.y?`<br>(Hoàng hậu ${p.y}.)`:""}`,o:[
     {n:"Mua lấy",fx:{bac:-80},x:`chứng cứ Hoàng hậu ${balSg(BAL.eff.j3.evGo)}`,go:()=>{evStory(q,BAL.eff.j3.evGo,"biển thủ bạc nội khố")}},{n:"Đuổi hắn đi",fx:{}}]}};
 PEND.tuyen=p=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên tuyển thêm tú nữ hay không."+(p&&p.y?`<br>(Ngài thấy ${p.y}.)`:""),o:[
@@ -150,9 +150,9 @@ function endTurn(){
 function monthTick(){let ev="";
   S.turn++;ev+=monthPay();
   if(S.pray)S.pray--;if(S.fert)S.fert--;if(S.master)S.master--;if(S.confined)S.confined--;if(S.shield)S.shield--;
-  {const b=typeof lsSnap==="function"?lsSnap():null;if(S.arts.thi>=BAL.tho.lv)S.sung=cl(S.sung+(S.arts.thi>=BAL.tho.lv5?BAL.tho.sung5:BAL.tho.sung),0,100);if(b)lsNote(b,{sung:"thơ hay được truyền tụng"},true)}
+  {const b=typeof lsSnap==="function"?lsSnap():null;if(S.arts.thi>=BAL.tho.lv)spAdd(S,"sung",(S.arts.thi>=BAL.tho.lv5?BAL.tho.sung5:BAL.tho.sung));if(b)lsNote(b,{sung:"thơ hay được truyền tụng"},true)}
   ev+=maidMonth();ev+=pregMonth();if(S.dead)return ev;S.anthai=0;ev+=itemMonth(S);anMonth(S);restock();oanMonth();assignHouses();S.chat={};ev+=illMonth();ev+=coldMonth();if(S.dead)return ev;ev+=servRanks();ev+=servMonth();ev+=facMonth();
-  {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=BAL.ducLv.up)S.th=cl(S.th+dd,-100,100);else if(S.duc<BAL.ducLv.down)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:lsDucWhy()},true)}
+  {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=BAL.ducLv.up)spAdd(S,"th",dd);else if(S.duc<BAL.ducLv.down)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:lsDucWhy()},true)}
   if(S.moreRivals&&!roomFor("consort"))S.moreRivals=0;if(S.moreRivals){S.moreRivals=0;const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Theo lời ngươi tâu, cung tuyển thêm tú nữ: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
   if(!S.out&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}

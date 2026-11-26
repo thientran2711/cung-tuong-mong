@@ -17,7 +17,7 @@ function actNone(a){return a===S?"Người ngươi nhắm tới nay không còn 
 function queenP(){return S.rank>=7?S:(qOn()?rivals[0]:null)}
 function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
-function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}p[k]=(p[k]||0)+v}
+function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}const w=typeof spG==="function"&&SP_K[k]?spG(k,p,p[k],v,spRk(p)):v;/* stat-pace (jstatpace) */p[k]=(p[k]||0)+w}
  for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0)}
 function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */
@@ -481,7 +481,7 @@ function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);const agd=windo
  if(v.preg&&v.hidden&&v.preg>=2&&v.tamco<55&&roll(50))twDo(v,null,"announce");
  return ev}
 function rivalsTurn(){const live=liveRivals(true);let ev="";
- for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
+ for(const v of live){if(!v.alive||v.out)continue;spAdd(v,"sung",R(3)-1);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
   if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-(v.rel>=netTh(v,"than")?3:1),0,100);v.pg=Math.max(0,v.pg-1);
   if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
@@ -504,13 +504,13 @@ if(queenP())S.vacSince=null;
 function rivalsMonth(){let ev="";
  for(const v of liveRivals(true)){if((S.storms||0)&&roll(4*S.storms)){ap(v,{suc:-15});}if(v.confined)v.confined--;if(v.shield)v.shield--;if(v.pray)v.pray--;if(v.fert)v.fert--;v.anthai=0;
   itemMonth(v);ev+=seenNPC(v,v,"")||"";const pm=pregMonthP(v);if(pm)ev+=pm;if(!v.alive||v.out)continue;anMonth(v);if(!v.coop)ev+=npcMonthly(v)/* E44j (c) T9 family (law 1 + 6c): her entry's month (study, buy, use / wear her pieces, gifts, deeds) is her own seat's, never an NPC roll on the host: useItem here used up her piece → b4Ops «rm gone» */;ev+=maidMonthP(v);
-  if(v.duc>=BAL.ducLv.up)v.th=cl(v.th+1,-100,100);else if(v.duc<BAL.ducLv.down)v.th=cl(v.th-1,-100,100);ev+=promoteP(v)}
+  if(v.duc>=BAL.ducLv.up)spAdd(v,"th",1);else if(v.duc<BAL.ducLv.down)v.th=cl(v.th-1,-100,100);ev+=promoteP(v)}
  /* Thái hậu and the Empress reward or punish, by the same rule for every consort */
  const qq=queenP();
  for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;
   if(!S.thDead&&p.th>=BAL.ag.th.fondTh&&!(window.agDOn&&agDOn())&&roll(8)){const k=pick(BAL.ag.th.items);/* one list with the NPC Thái hậu (jagacts th:gift) */p.inv.push({k,from:"th"});if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${itm(k).n}</b>.</p><p class="past">${itm(k).d}</p>`});else log(`Thái hậu ban ${itm(k).n} cho ${p.name}.`)}
   if(qq&&qq!==S&&qq!==p&&p.hh<=-40&&!(window.agDOn&&agDOn())&&roll(10)){const i=p.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(i>=0){const n=iname(p.inv[i]);/* two-way: the same act as hers (empAct conf): unfounded = Danh/Thái hậu cost, relation and regard fall */if(evG(qq,p)<1&&!vpItems(p).length)ap(qq,BAL.tw.confNo);relAdd(qq,p,-BAL.tw.g.conf[0]);p.hh-=BAL.tw.g.conf[1];p.inv.splice(i,1);ev+=p===S?`<span class="r">Hoàng hậu sai người tịch thu ${n} của ngươi, trách ngươi xa xỉ.</span> `:"";if(p!==S)log(`Hoàng hậu tịch thu ${n} của ${p.name}.`)}}
-  if(qq&&qq!==S&&qq!==p&&p.hh>=50&&!(window.agDOn&&agDOn())&&roll(6)&&(qq.bac||0)>=-BAL.tw.reward.bac){/* two-way: the same Ban thưởng as hers (empAct reward): her bạc, relation +20, regard +10, Danh +3 */ap(qq,BAL.tw.reward);relAdd(qq,p,BAL.tw.g.reward[0]);p.hh+=BAL.tw.g.reward[1];ap(p,{danh:BAL.tw.g.reward[2]});if(p===S)ev+=`Hoàng hậu ${qq.name} ban thưởng cho ngươi. Danh +${BAL.tw.g.reward[2]}. `}
+  if(qq&&qq!==S&&qq!==p&&p.hh>=50&&!(window.agDOn&&agDOn())&&roll(6)&&(qq.bac||0)>=-BAL.tw.reward.bac){/* two-way: the same Ban thưởng as hers (empAct reward): her bạc, relation +20, regard +10, Danh +3 */ap(qq,BAL.tw.reward);relAdd(qq,p,BAL.tw.g.reward[0]);spAdd(p,"hh",BAL.tw.g.reward[1]);ap(p,{danh:BAL.tw.g.reward[2]});if(p===S)ev+=`Hoàng hậu ${qq.name} ban thưởng cho ngươi. Danh +${BAL.tw.g.reward[2]}. `}
   if(npcWhy("raid",{p},()=>roll(npw1B("j8").raidGo))){const s=search(p);if(s)ev+=p===S||eyes(S)>=2?s:""}}
  return ev}
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artOE(p,"vu"):(artOE(p,"cam")+artOE(p,"thi"))/2;
@@ -529,7 +529,7 @@ function doAct(i,k){const v=rivals[i],a=ACT[k];const hk=typeof harmK==="function
 function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(2);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,BAL.eff.j8.empAct);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
  if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
  else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
- else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);v.hh+=BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
+ else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);spAdd(v,"hh",BAL.tw.g.reward[1]);ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
  else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
  else return;spend(2);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}

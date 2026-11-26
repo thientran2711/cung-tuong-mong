@@ -242,7 +242,7 @@ function rgDecide(){const W=rgW();if(!W||W.out)return;const p=W.p;W.out=p>=BAL.r
  const o=W.out;try{if(o==="emp"){tdPowAdd(RGQC,-BAL.rg.loseHouse);tdPowAdd("Hàn lâm",BAL.eff.jreign.rgDecide);tdPowAdd("Lễ bộ",BAL.eff.jreign.rgDecide_2);if(S.emp)S.emp.mood=Math.max(0,(S.emp.mood||1)-1)}
   else if(o==="quyen"){tdPowAdd(RGQC,BAL.rg.winHouse);tdPowAdd("Hàn lâm",BAL.eff.jreign.rgDecide_3);tdPowAdd("Lễ bộ",BAL.eff.jreign.rgDecide_4);if(S.emp)S.emp.mood=Math.min(3,(S.emp.mood||1)+1)}
   else{tdPowAdd(RGQC,BAL.eff.jreign.rgDecide_5);tdPowAdd("Đại tướng quân",BAL.eff.jreign.rgDecide_6)}}catch(e){}
- for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s)continue;v.sung=cl((v.sung||0)+(s===o?BAL.rg.npcWin:-BAL.rg.npcLose),0,100)}
+ for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s)continue;spAdd(v,"sung",(s===o?BAL.rg.npcWin:-BAL.rg.npcLose))}
  W.n.unshift(`T${S.month}/${S.year}: ${({emp:"Hoàng thượng thân chính",th:"Thái hậu buông rèm nghe chính",quyen:"Tể tướng nhiếp chính"})[o]}`)}
 /* her result once the court has decided (applied once, before the last beat) */
 function rgMine(){const r=rgMe(),W=rgW();if(!W||!W.out||r.res)return"";const o=W.out,s=rgSideNow();const k=.5+r.tr/100;const Bg=BAL.rg;let t="";const b0=Math.round(Bg.bacWin*(typeof rkMul67==="function"?rkMul67():1));
@@ -307,7 +307,7 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
  const h0=q72Home;q72Home=function(a){if(a&&a.k==="ly")return"lc";return h0.apply(this,arguments)};
  const k0=q72Key;q72Key=function(a){if(a&&a.k==="ly")return"ly";return k0.apply(this,arguments)};
  const H0=q72Host;q72Host=function(k,X){if(X&&X.A&&X.A.k==="ly"&&k==="lc")return true;return H0.apply(this,arguments)};
- const r0=q72Rel;q72Rel=function(a,n){if(a&&a.k==="ly"){a.o.rel=cl((a.o.rel||0)+n,-100,100);return}return r0.apply(this,arguments)};
+ const r0=q72Rel;q72Rel=function(a,n){if(a&&a.k==="ly"){spAdd(a.o,"rel",n);return}return r0.apply(this,arguments)};
  const t0=q72Tok;q72Tok=function(a,n){if(a&&a.k==="ly")return n?(n>0?G72:R72)(`${a.n} với ngươi ${n>0?"+":""}${n}`):"";return t0.apply(this,arguments)};
  const p0=q72Pick;q72Pick=function(sp,not,ff){if(sp==="ly"){const a=q72A("ly");return a&&!(not||[]).includes("ly")?a:null}return p0.apply(this,arguments)}})();
 (function(){if(typeof T7!=="function")return;const G=q72G,W=q72W,C=q72C,O=q72O;

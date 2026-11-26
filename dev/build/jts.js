@@ -363,7 +363,7 @@ function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));cons
 function tsDenNpc(){const f=tsDenFest();if(!f)return;const s=tsS();const key=`${S.year}-${f.k}`;if(s.denN===key)return;s.denN=key;const E=S.emp;
  const mg=typeof mg2On==="function"&&mg2On();/* mg2: her lantern game for each NPC = one draw (occ trieu, as tsGame) + the same odds as hers (tsDenOdds), and the same Ân tình */
  for(const o of npcWhyAll("tsDen")){const v=o.who;const ok=(E.mood||0)<=1&&(v.sung||0)>=20&&(mg?tsDenFar(kg82NpcRaw(v,"den",{occ:"trieu"}))||roll(tsDenOdds(v)):roll(30));
-  if(!mg||!ok)v.duc=cl((v.duc||0)+1,0,100);/* mg2: as her «Cầu thánh ân»: seen = Sủng +3, Ân tình +2; not seen = Đức +1 */if(ok){v.sung=cl(v.sung+3,0,100);if(mg)v.an=cl((v.an||0)+2,0,100);if(knows(v))log(`Đêm ${f.name}, Hoàng thượng dừng chân ngắm đèn của ${v.name}.`)}}}
+  if(!mg||!ok)spAdd(v,"duc",1);/* mg2: as her «Cầu thánh ân»: seen = Sủng +3, Ân tình +2; not seen = Đức +1 */if(ok){spAdd(v,"sung",3);if(mg)v.an=cl((v.an||0)+2,0,100);if(knows(v))log(`Đêm ${f.name}, Hoàng thượng dừng chân ngắm đèn của ${v.name}.`)}}}
 
 /* =============== Ý 2 · HỘI PHỐI ĐỒ THEO ĐỀ (tháng tư và tháng mười, báo đề trước một tháng) =============== */
 /* D17 (owner 15/11 23:05Z/23:15Z): each đề has a luxury RANGE r (4 pieces, absolute; capped by her own allowance: jlux luxThemeRange) and its

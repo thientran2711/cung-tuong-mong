@@ -123,7 +123,7 @@ EVD.away={place:w=>"thu",
 EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
  start(w){const b=B().tuyen;const n=b.n[0]+R(b.n[1]-b.n[0]+1);const N=[];const old=cons();
   for(let i=0;i<n;i++){try{if(typeof roomFor==="function"&&!roomFor("consort"))break;
-   const v=newRival(R(b.rankMax+1));Object.assign(v,drawFace());v.age=b.age[0]+R(b.age[1]);v.sung=cl((v.sung||0)+b.newSung,0,100);v.wNew=w.id;rivals.push(v);N.push(v)}catch(e){wErr("tuyen new",e)}}
+   const v=newRival(R(b.rankMax+1));Object.assign(v,drawFace());v.age=b.age[0]+R(b.age[1]);spAdd(v,"sung",b.newSung);v.wNew=w.id;rivals.push(v);N.push(v)}catch(e){wErr("tuyen new",e)}}
   try{if(N.length&&typeof palFix==="function")palFix()}catch(e){}w.x.n=N.map(v=>v.id);
   for(const p of old)ap(p,{sung:-b.sungThin});
   for(const v of old){if(v===S||!N.length)continue;/* NPC-PURPOSE G3: she sizes up the newcomer who counts most (Sủng + rank: the one worth winning or the one to cow), near-best */const t=npwPick(N,x=>1+(x.sung||0)+rkOf(x)*BAL.ag.why.g3.newRk);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/b.ghenDiv)],["ignore",1]]);
@@ -155,7 +155,7 @@ EVD.hoa={place:w=>{const p=byPid(w.x.who);return p&&p!==S&&typeof palaceOf==="fu
    rule (pay cut, same for all), festival gates (yến cancelled). NPCs give or keep by their own silver and traits — the same options as hers. */
 EVD.dis={place:w=>"cnh",
  start(w){const b=B().dis;moodFloor(b.mood);const G=[],K=[],nw=b.npcW;for(const v of liveR()){const k=npcPick(v,[["give",mW(v,"help")*(nw.base+Math.min(nw.cap,(v.bac||0)/nw.per))],["thrift",1],["keep",mW(v,"bribe")*nw.keep]]);
-   if(k==="give"&&(v.bac||0)>=b.give){ap(v,{bac:-b.give,danh:b.giveDanh});v.th=(v.th||0)+b.giveTh;G.push(v)}else if(k==="keep"&&(v.bac||0)>=b.stingyBac){ap(v,{danh:b.stingyDanh});K.push(v)}}
+   if(k==="give"&&(v.bac||0)>=b.give){ap(v,{bac:-b.give,danh:b.giveDanh});spAdd(v,"th",b.giveTh);G.push(v)}else if(k==="keep"&&(v.bac||0)>=b.stingyBac){ap(v,{danh:b.stingyDanh});K.push(v)}}
   w.x.G=G.map(v=>v.id);return `Hoàng thượng giảm thiện, bãi yến tiệc; bổng lộc trong cung bớt ${Math.round(b.payCut*10)} phần 10 cho đến khi qua nạn.${G.length?` Quyên bạc cứu đói: ${nmList(G)}.`:""}${K.length?` Bị chê keo kiệt: ${nmList(K)}.`:""}`},
  end(w){if(roll(B().xa.afterDis))worldStart("xa","Qua cơn thiên tai, ban ân điển");return "Nạn đói đã qua, cung cấm thôi giảm thiện."},
  card(w){const b=B().dis;const o=meCons()?[{n:"Quyên bạc cứu đói",fx:{bac:-b.give},x:`thành: Danh +${b.giveDanh}, Thái hậu +${b.giveTh}`,go:()=>apply({danh:b.giveDanh,th:b.giveTh})},
@@ -191,7 +191,7 @@ EVD.su={place:w=>"thu",
    j3 mood, j55 Kho lúa. Every consort gives a gift by her own silver (NPCs) or by her choice (her). */
 EVD.tho={place:w=>w.x.who==="th"?"tn":"thu",
  start(w){const b=B().tho;moodSet(b.mood);const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);let n=0;
-  for(const v of liveR()){const g=Math.round((v.bac||0)*b.npcGift);if(g<=0)continue;ap(v,{bac:-g});const s=g>=b.big?b.npcSung[1]:b.npcSung[0];ap(v,{sung:s});if(w.x.who==="th")v.th=(v.th||0)+s;n++}
+  for(const v of liveR()){const g=Math.round((v.bac||0)*b.npcGift);if(g<=0)continue;ap(v,{bac:-g});const s=g>=b.big?b.npcSung[1]:b.npcSung[0];ap(v,{sung:s});if(w.x.who==="th")spAdd(v,"th",s);n++}
   return `Đại yến mừng thọ, cả triều dâng lễ; ${n} phi tần đã dâng lễ vật.${T?` Kho lúa -${b.kho}.`:""}`},
  end(w){return "Đại yến mừng thọ đã tan; lễ vật các cung đã được ghi sổ."},
  card(w){const b=B().tho;const th=w.x.who==="th";const o=od(b.make[0]+(S.tai||0)/b.make[1]);

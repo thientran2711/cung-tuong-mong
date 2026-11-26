@@ -71,7 +71,7 @@ EVD.hau={nm:w=>w.x.sub==="phe"?"Phế hậu, lập hậu mới":"Lập Hoàng h�
    flows into the batch-1 quốc tang. */
 EVD.thb={place:()=>"tn",
  start(w){const b=B().thb;moodFloor(b.mood);const N=[];for(const v of liveR()){if(v.out||v.confined)continue;const k=npcPick(v,[["nurse",mW(v,"greet")*((v.suc||0)>=b.npcW.suc?1:b.npcW.weak)],["pray",mW(v,"pray")],["no",mW(v,"scheme")*b.npcW.no]]);
-   if(k==="nurse"){ap(v,{suc:-b.nurse.suc});v.th=(v.th||0)+b.npcTh[0];N.push(v)}else if(k==="pray")v.th=(v.th||0)+b.npcTh[1]}
+   if(k==="nurse"){ap(v,{suc:-b.nurse.suc});spAdd(v,"th",b.npcTh[0]);N.push(v)}else if(k==="pray")spAdd(v,"th",b.npcTh[1])}
   try{const q=liveR().find(v=>v.queen);if(q)ap(q,{danh:b.qDanh})}catch(e){}
   return `Bệnh Thái hậu trở nặng; Đức Thọ cung chia phiên hầu bệnh, hậu cung bớt thị tẩm, bãi yến.${N.length?` Vào hầu bệnh: ${nmList(N)}.`:""}`},
  tick(w){if(S.thDead||!S.thIll)w.t1=Math.min(w.t1,now()+1)},
@@ -123,7 +123,7 @@ EVD.ret={place:()=>"home",
    in the growing months. Kho lúa falls more, pay in kind cut (stipend gate), the Emperor eats less; NPCs donate or hoard; plague may follow. */
 EVD.trung={place:()=>"cnh",
  start(w){const b=B().trung;const T=T_();if(T)T.kho=cl(T.kho-b.khoCut,0,100);moodFloor(b.mood);const G=[];
-  for(const v of liveR())if(npcPick(v,[["give",mW(v,"help")*(B().dis.npcW.base+Math.min(B().dis.npcW.cap,(v.bac||0)/B().dis.npcW.per))],["keep",mW(v,"bribe")*B().dis.npcW.keep]])==="give"&&(v.bac||0)>=b.give){ap(v,{bac:-b.give,danh:b.giveDanh});v.th=(v.th||0)+b.giveTh;G.push(v)}
+  for(const v of liveR())if(npcPick(v,[["give",mW(v,"help")*(B().dis.npcW.base+Math.min(B().dis.npcW.cap,(v.bac||0)/B().dis.npcW.per))],["keep",mW(v,"bribe")*B().dis.npcW.keep]])==="give"&&(v.bac||0)>=b.give){ap(v,{bac:-b.give,danh:b.giveDanh});spAdd(v,"th",b.giveTh);G.push(v)}
   return `Châu chấu kéo qua đồng, lúa mất trắng; Kho lúa -${b.khoCut}, giá gạo trong cung lên cao, bổng lộc bớt ${Math.round(b.payCut*10)} phần 10.${G.length?` Quyên bạc mua gạo: ${nmList(G)}.`:""}`},
  end(w){if(roll(B().trung.xaP))ws("xa","Qua nạn châu chấu, ban ân điển");return "Nạn châu chấu đã qua; giá gạo trở lại."},
  card(w){const b=B().trung;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Quyên bạc mua gạo",fx:{bac:-b.give},x:`thành: Danh +${b.giveDanh}, Thái hậu +${b.giveTh}`,go:()=>apply({danh:b.giveDanh,th:b.giveTh})},
@@ -230,7 +230,7 @@ EVD.ngoai={place:()=>"thu",
 /* ---------- 16 LỄ PHẬT ĐẢN / ĐẠI TRAI ĐÀN (row 16): yearly (month 4, mild) and a great assembly one tuần into a disaster (dis / dich /
    trung) while Thái hậu lives — the great one may end that disaster early. Donations reach Thái hậu (th); pray weight up; big: no night. */
 EVD.phat={nm:w=>w.x.big?"Đại trai đàn cầu phúc":"Lễ Phật đản",place:()=>"cnh",
- start(w){const b=B().phat;let n=0;for(const v of liveR()){if(v.out||v.confined)continue;const g=Math.round((v.bac||0)*b.npcGive);if(g>0&&npcPick(v,[["g",mW(v,"pray")],["n",1]])==="g"){ap(v,{bac:-g});v.th=(v.th||0)+b.npcTh;n++}}
+ start(w){const b=B().phat;let n=0;for(const v of liveR()){if(v.out||v.confined)continue;const g=Math.round((v.bac||0)*b.npcGive);if(g>0&&npcPick(v,[["g",mW(v,"pray")],["n",1]])==="g"){ap(v,{bac:-g});spAdd(v,"th",b.npcTh);n++}}
   return `${w.x.big?"Thái hậu mở đại trai đàn cầu phúc cho thiên hạ; ngự thiện ăn chay, đêm ấy không ai thị tẩm.":"Chùa trong cung mở lễ Phật đản; ngự thiện ăn chay, các cung tụng kinh."}${n?` ${n} cung cúng dường.`:""}`},
  end(w){const b=B().phat;if(w.x.big&&roll(b.endDis)){const d=["dis","dich","trung"].map(ww).find(Boolean);if(d){d.t1=Math.min(d.t1,now()+1);return "Trai đàn tan; lòng người yên lại, cơn nạn sắp qua."}}return "Lễ Phật đã xong."},
  card(w){const b=B().phat;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Cúng dường hậu hĩnh",fx:{bac:-b.big.bac},x:`thành: Thái hậu +${b.big.th}`,go:()=>{if(!S.thDead)apply({th:b.big.th})}},

@@ -69,7 +69,7 @@ const SOC={
  follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);relAdd(v,x,BAL.eff.j28.run_11)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
  feign:{w:0.5,ok:(v,t)=>danger(v,t)>=netThK(v,"act","feign"),run:(v,t)=>{affAdd(t,v,BAL.eff.j28.run_12);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`}},
  apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=netTh(t,"oan"),run:(v,t)=>{/* net-build: accepted only under the wronged one's «nguoi» level (Rộng lượng forgives deep wrongs, Thù dai / Kiêu ngạo hardly) */if(!netForgive(t,v))return netRefused(v,t,"sang xin lỗi");oanAdd(t,v,BAL.eff.j28.run_13);return `${v.name} sang xin lỗi ${NM(t)}`}},
- serveTH:{w:0.5,ok:()=>!S.thDead,run:v=>{v.th=cl((v.th||0)+2,-100,100);return `${v.name} sớm hôm hầu hạ Thái hậu`}},
+ serveTH:{w:0.5,ok:()=>!S.thDead,run:v=>{spAdd(v,"th",2);return `${v.name} sớm hôm hầu hạ Thái hậu`}},
  gossip:{w:0.4,ok:v=>liveRivals(true).some(y=>y!==v&&hostility(v,y)>=netTh(v,"tell")),run:(v,t)=>{/* net-build: she spreads talk about someone she bears enough against (her «tell» level: Nhiều chuyện soon, Kín đáo hardly) */const x=pick(liveRivals(true).filter(y=>y!==v&&hostility(v,y)>=netTh(v,"tell")));if(x)ap(x,{danh:-1});return `${v.name} rỉ tai chuyện trong cung`}},
  pray:{w:0.3,ok:()=>true,run:v=>{v.pray=Math.max(v.pray||0,1);return `${v.name} lên chùa cầu khấn`}},
  idle:{w:3,ok:()=>true,run:()=>""}};

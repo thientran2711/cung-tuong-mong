@@ -1083,7 +1083,7 @@ ARC67.ch_ho=arcFx("ch_ho",{o:"ch",t:"Hai người cháu",w:"v",sj:"cuộc tranh 
  E:{win:{tag:"Hai người cháu một lòng",w:"th",t:"Thái hậu mừng vì con cháu hòa thuận, dồn sức cho cả hai. {v} thành đồng minh vững nhất của ngươi.",go:(A,_ok,G)=>e67ally(rv67(A,"v"),G[0])},
   win2:{tag:"Người cháu được chọn",w:"th",t:"Thái hậu chọn ngươi. Họ ngoại dồn sức cho ngươi; {v} đứng ngoài, ấm ức.",go:(A,_ok,G)=>e67foe(rv67(A,"v"),G[0])},
   mid:{tag:"Mỗi người một đường",t:"Thái hậu không chọn ai. Hai người cháu giữ lễ, mỗi người một đường."},
-  lose:{tag:"{v} được chọn",t:"Thái hậu chọn {v}. Họ ngoại dồn sức cho nàng, ngươi phải tự lo.",go:A=>{const v=rv67(A,"v");if(v)v.sung=cl((v.sung||0)+6,0,100);return v?`${v.name} được Thái hậu đỡ lời, được sủng hơn.`:""}}}});
+  lose:{tag:"{v} được chọn",t:"Thái hậu chọn {v}. Họ ngoại dồn sức cho nàng, ngươi phải tự lo.",go:A=>{const v=rv67(A,"v");if(v)spAdd(v,"sung",6);return v?`${v.name} được Thái hậu đỡ lời, được sủng hơn.`:""}}}});
 ARC67.ch_bi=arcFx("ch_bi",{o:"ch",t:"Bí mật năm xưa",w:"th",sj:"bí mật năm xưa của Thái hậu",g:"Một lá thư cũ cho thấy năm xưa Thái hậu từng hại một phi tần để giữ ngôi. Người cầm thư đang tìm cách dùng nó. Bảo vệ bà, hay biến nó thành sức mạnh của mình.",
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.emp"],["t1"],["x1"]],
  B:{
