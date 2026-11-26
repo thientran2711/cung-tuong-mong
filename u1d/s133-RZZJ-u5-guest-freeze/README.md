@@ -1,0 +1,2 @@
+# s133 room RZZJ on u5 = u4 7959f1b5 + ee0824f4 jinv observer fix (UNREVIEWED variant), build 2dbe808addd5, harness #22
+4th wedge, STILL at buổi 73 on the Fold GUEST seat, right after closing «Chương 1 khép lại» (Lui at 04:42:47Z); evaluate hangs from 04:43:25Z, CDP pause timed out. Guest nodes 85k at 2941 s (u4 would be ~340k), renderer 2.7 GB — so the lower leak curve alone does NOT clear the wedge. The host passed «Chương 1 khép lại» Lui at 04:42:02Z without wedging (iPad).
