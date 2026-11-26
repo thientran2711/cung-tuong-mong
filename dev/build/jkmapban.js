@@ -16,7 +16,7 @@ function place(){try{const v=document.querySelector("#panel .mapv");const old=do
  if(!c||!v||typeof tab!=="undefined"&&tab!=="go"){old.forEach(e=>e.remove());document.querySelectorAll("#panel .mapv.kmb-on").forEach(x=>{x.classList.remove("kmb-on","kmb-abs");x.style.removeProperty("--kmbH")});document.querySelectorAll(".mspot.kmb-home").forEach(e=>e.classList.remove("kmb-home"));return}
  let el=v.querySelector(":scope>.kmapban");old.forEach(e=>{if(e!==el)e.remove()});
  if(!el){el=document.createElement("div");el.className="kmapban";el.setAttribute("role","status");v.appendChild(el)}
- const sig=c.id+"|"+c.line+"|"+(c.home||"");if(el.dataset.sig!==sig){el.dataset.sig=sig;el.innerHTML=`<span class="kmb-ico" aria-hidden="true">🔒</span><span class="kmb-t"></span>${c.home?`<button type="button" class="kmb-home-b" aria-label="Chỗ nhà ta trên Dư đồ"><span class="kmb-hm" aria-hidden="true">⌂</span>Nhà ta</button>`:""}`;el.querySelector(".kmb-t").textContent=c.line}
+ const sig=c.id+"|"+c.line+"|"+(c.home||"");if(el.dataset.sig!==sig){el.dataset.sig=sig;el.innerHTML=`<span class="kmb-ico" aria-hidden="true">🔒</span><span class="kmb-t"></span>${c.home?`<button type="button" class="kmb-home-b" aria-label="Chỗ nhà ta trên Dư đồ"><span class="kmb-hm" aria-hidden="true">${typeof kitPlaceIcon==="function"?kitPlaceIcon("home",20):""}</span>Nhà ta</button>`:""}`;el.querySelector(".kmb-t").textContent=c.line}
  /* under the map tools, centred in the map view, never over the rail / side column */
  /* viewport px (position:fixed): the map scroller (.mapsc) moves under it, the banner stays */
  const sc=v.querySelector(".mapsc")||v,ap=parseFloat(v.style.getPropertyValue("--kmbH"))||0,V0=sc.getBoundingClientRect(),V={left:V0.left,right:V0.right,width:V0.width,top:V0.top-ap},/* V = the scroller where it sits WITHOUT the room made for the banner (no feedback loop) */T=v.querySelector(".maptools"),R=v.querySelector("#krail,.krail"),SR=v.querySelector("#kshR,.kshR");
@@ -39,7 +39,8 @@ const st=document.createElement("style");st.id="kit-map-banner";st.textContent=`
 #panel .mapv>.kmapban>.kmb-ico{flex:none;font-size:.9rem;opacity:.8}
 #panel .mapv>.kmapban>.kmb-t{flex:1 1 auto;min-width:0}
 #panel .mapv>.kmapban>.kmb-home-b{flex:none;display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:4px 12px;border-radius:999px;border:1px solid var(--gold,#b8892b);background:var(--k-red,#a3322a);color:#fffaf0;font:700 .86rem/1 var(--body,sans-serif);cursor:pointer}
-#panel .mapv>.kmapban .kmb-hm{font-size:1rem;line-height:1}
+#panel .mapv>.kmapban .kmb-hm{font-size:1rem;line-height:1;display:inline-flex}
+#panel .mapv>.kmapban .kmb-hm>.kplic{width:20px;height:20px;object-fit:contain;filter:drop-shadow(0 0 1px #fffaf0)}
 #panel .mapv .mspot.kmb-home{outline:2px solid var(--k-red,#a3322a);outline-offset:2px;border-radius:8px;filter:none!important;opacity:1!important}
 /* KK38: no floating «⌂ Nhà ta» badge on the spot (it always met the spot's own «Ta + N bóng» chip or the banner); the word «Nhà ta» is in the spot's label line (caller, jplrule plMap) and the spot keeps the red ring */
 #panel .mapv .mspot.kmb-glow{animation:kmb-glow .6s ease-in-out 3 alternate}

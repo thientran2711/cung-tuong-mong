@@ -107,7 +107,7 @@ if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const 
  return ks0.apply(this,arguments)}}
 /* ---------- 6. place icons (kit icon set) + happening mark ---------- */
 const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"sung",tn:"duc",kn:"danh",
- ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc",
+ ksp:"place-ksp",lc:"place-lc",home:"place-home"/* K-ICO-HOME (Foreman C, 26/11): her own home */,cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc",
  nth:"suc",pd:"duc"}; /* nth/pd: STAND-IN glyphs (suc = health/food, duc = virtue, as Đức Thọ) until KIT REQUEST place-nth / place-pd is painted (dev/kit/KIT_REQUESTS.md 20/11 map-places) */
 /* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
 function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
@@ -177,6 +177,7 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: 
 #sc-t h2:has(>.kplic){align-items:flex-start;text-align:left}#sc-t h2>.kplic{margin:0 0 1px}
 /* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
 .mspot .mlab:has(>.kplic){max-width:max(100%,4.4em)}
+.mmeta>.ic.kplic{display:inline-block;vertical-align:-3px;margin:0 3px 0 0;width:16px;height:16px;object-fit:contain}/* K-ICO-HOME: the home mark sits IN the label line (plHomeMark) */
 .khap,.mspot .mlab i.khap,.khead.kfb{--khy:#ffd91a;display:inline-block;font-style:normal;font-weight:900;font-size:.82rem;line-height:19px;color:#3a2200;background:radial-gradient(circle at 35% 30%,#fff27a,var(--khy) 62%,#f2b800);border-radius:50%;width:19px;height:19px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fffbe0,0 0 5px 1px #ffe24a,0 0 11px 2px #ffd40099;transform-origin:50% 80%}
 /* KIT §78 (owner 17/11 ~13:32Z): the "!" is a BRIGHT FRESH YELLOW badge (--khy) with a soft glow; every ~5 s it gives a little shake + hop (transform only, 3 phases so the marks do not move together); reduced motion = the static glow */
 @keyframes khapNudge{0%,72%,100%{transform:none}76%{transform:translateY(-3px) rotate(-14deg)}80%{transform:translateY(0) rotate(12deg)}84%{transform:translateY(-2px) rotate(-9deg)}88%{transform:rotate(6deg)}92%{transform:none}}

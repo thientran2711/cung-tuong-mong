@@ -55,10 +55,14 @@ window.plArrFix=plArrFix;
 if(typeof showModal==="function"){const sm0=showModal;showModal=function(){plArrFix();return sm0.apply(this,arguments)}}
 /* (4) DƯ ĐỒ under an all-locked state (owner OD 25/11 ~23:40Z, k17 shot: «đi đâu nó cũng xám hết … chỗ nào là nhà?»), label/marker layer only:
    · HER HOME on the plan (her room, or the palace whose phối điện houses her: mapHereK at "home") is never greyed/locked: it is where she lives;
-     its label line starts «Nhà ta» on every map view (painted home icon: KIT_REQUESTS K-ICO-HOME; until then the word).
+     its label line starts with the painted home icon + «Nhà ta» on every map view (plHomeMark, K-ICO-HOME img/place-home.webp).
    · ONE reason for the whole map: cấm túc / lãnh cung, or any reason that sits on most labels (hết khắc, buổi tối…) is said once in the map's
      top row (the kit chip of that row, .fest) and dropped from the labels; the lock marks stay.
    · Away from home: «Về phòng · N khắc» in the map's top row (kit .btn mz), the walk home (goTo("home")). */
+/* K-ICO-HOME (KIT_REQUESTS, owner OD 25/11 ~23:40Z «phải có một cái biểu tượng gì đó chứ»; art img/place-home.webp by Foreman C): the painted home icon
+   (kitPlaceIcon("home") = the same .kplic size as every place icon) + the word «Nhà ta» — ONE mark for her home on every Dư đồ view and the banner chip */
+function plHomeMark(){return (typeof kitPlaceIcon==="function"?kitPlaceIcon("home",16):"")+"Nhà ta"}
+window.plHomeMark=plHomeMark;
 function plHomeK(){try{if(!S)return null;const p0=S.place;let k;try{S.place="home";k=typeof mapHereK==="function"?mapHereK():"home"}finally{S.place=p0}return k||"home"}catch(e){return"home"}}
 window.plHomeK=plHomeK;
 if(typeof accState==="function"){const as0=accState;accState=function(k){try{if(S&&S.place==="home"&&!S.out&&k&&k===plHomeK())return{why:"",here:1}}catch(e){}return as0.apply(this,arguments)}}
@@ -76,7 +80,7 @@ function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="mapt
   else h=h.replace('<div class="maptools">',`<div class="maptools"><span class="fest" data-plban="1">${why}</span>`)}
  else if(window.kitMapBanner)kitMapBanner.clear("plban");
  /* her home */
- if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
+ if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>{const hm=plHomeMark();return b==='<span class="mmeta">'?`${a}<span class="mmeta">${hm} · `:`${a}<span class="mmeta">${hm}</span>${b}`})}
  /* the way home */
  if(S.place!=="home"&&!S.out&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){let tc=0,ok=true;try{tc=travel(S.place,"home");ok=typeof walkOk==="function"?walkOk(tc):true}catch(e){}
   const b=`<button class="btn mz" data-plhome="1"${ok?"":" disabled"} title="${ok?`Đi về cung mình: ${tc} khắc`:"Không đủ khắc để về"}">Về phòng · ${tc} khắc</button>`;
