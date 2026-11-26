@@ -208,10 +208,6 @@
  ],
  "parked": [
   {
-   "life": "E-S8-bd_san-R7-cautious3",
-   "why": "STUCK-gamebug iPad Tân quân lập uy Ch.2"
-  },
-  {
    "life": "E-S8-bd_san-R7-lazy2",
    "why": "STUCK-gamebug iPad Tân quân lập uy Ch.2"
   },
@@ -224,8 +220,12 @@
    "why": "paused at buổi 141 (iPad Tân quân lập uy)"
   },
   {
-   "life": "E-S8-bd_tuyet-R8-lover1",
-   "why": "INVALID: HARNESS quit the Lễ ra mắt dance mini-game (#kg82 «Quay lại» without «Sẵn sàng») → life ended at buổi 1; rerun after harness fix"
+   "life": "E-S8-bd_san-R7-cautious3",
+   "why": "INVALID (harness): #kg82 archery board played 2+4 moves then «Quay lại» (board-idle quit, fixer #11 job 8) → Ban hoa buổi 1; rerun after fix"
+  },
+  {
+   "life": "E-S8-bd_san-R7-greedy2",
+   "why": "STUCK-gamebug (Fold, buổi ~1328): «Biếu quà làm lành» gift picker confirm «kipgo» off-screen after 8 scrolls; save+shots kept; rerun when fixed"
   }
  ]
 }
