@@ -125,3 +125,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~07:16Z OB-PHU3 at ctx ceiling → OB-PHU4 = session_01V1ZZH3gjgi3Aiwn4ZRU2Ue (my child, opus) on review/map-zones (handover reports/ob-phu.md on review/ob-phu b5c053d1). OB-PHU3 kept only for 437d4efc (waits B kit rv .kplink §6.3j).
 - ~07:20Z LOOK PASS TAINGHE r5 88bd567f (Fold+iPad videos: every skill opens the kit bậc panel, closes clean) → LC21 slot after DRESS. kit-stage slot → cfc2bedd (grey stage box fix). KK38 re-told main = 154.
 - ~07:22Z HOME-WAY slot bdc3ee5b FAULT: stage-stay.js chip-odds pins old overstay wording (game wording intended) → HOME-WAY-NITS fixes the test on review/home-way-r6. LC21 starts DRESS on LIVE now; HOME-WAY slots in after the fix. LC20 archived.
+- ~07:24Z HOME-WAY-NITS FIXED bc822351 (test-only) → LC21 restages HOME-WAY on LIVE, DRESS on top.
