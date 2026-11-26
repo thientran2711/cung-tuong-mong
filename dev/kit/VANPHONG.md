@@ -184,6 +184,10 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Bại/Kèm k
 | (Hoàng thượng, Sủng thấp) “Quý nhân hôm nay khác hẳn mọi ngày, trẫm suýt không nhận ra.” | “Nàng hôm nay khác hẳn.” (Sủng cao: “Ái phi hôm nay khác hẳn.”) |
 | (phi tần Thường tại nói với Phi) “Ta không dám.” | “Tần thiếp không dám, Phi nương nương.” |
 
+### 2.7 Lựa chọn không có cơ hội nhưng đổi kết cục (sếp 26/11 ~18:25Z)
+- Chữ cơ hội (Mong manh … Rất vững) chỉ hiện trên lựa chọn thật sự có tung cơ hội, và luôn là chữ đúng; không bao giờ đổi chữ để cảnh báo.
+- Lựa chọn không tung cơ hội mà đổi kết cục / đời nàng (xuất giá, đi tu / xuất gia, tự vẫn, rời cung, chuyển kiếp, «Cúi đầu chờ xét» …): KHÔNG có chữ cơ hội; trên danh sách lựa chọn có MỘT dòng nhỏ: «Cẩn thận khi lựa chọn» (kit §6.2k, `KIT_WARN_LINE`). Các dòng Tốn / Được / Mất vẫn hiện đủ.
+
 ## 3. Không có trên màn hình
 
 - Chữ ngoại: OK, buff, stat, level, combo, random, bot, test, game, click, tab, slot.
