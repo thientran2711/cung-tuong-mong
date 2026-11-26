@@ -46667,7 +46667,8 @@
   "t": {
    "total": 2560731
   },
-  "_file": "E-S4-R5-greedy-1-ipad.json"
+  "_file": "E-S4-R5-greedy-1-ipad.json",
+  "runner_ruling": "VALID (Foreman E child8: game-imposed Xuat gia; audit text rule false negative)"
  },
  {
   "job": {
@@ -72165,7 +72166,8 @@
   "t": {
    "total": 119897
   },
-  "_file": "E-S4-R5-lover-3-ipad.json"
+  "_file": "E-S4-R5-lover-3-ipad.json",
+  "runner_ruling": "INVALID (Foreman E child8 26/11 07:43Z: Dâng Ky mini-game left with Quay lai, trial not played) - rerun"
  },
  {
   "job": {
@@ -72687,7 +72689,8 @@
   "t": {
    "total": 124844
   },
-  "_file": "E-S4-R5-speed-2-ipad.json"
+  "_file": "E-S4-R5-speed-2-ipad.json",
+  "runner_ruling": "INVALID (Foreman E child8 26/11 07:43Z: Dâng Ky mini-game left with Quay lai, trial not played) - rerun"
  },
  {
   "job": {
@@ -85086,7 +85089,8 @@
   "t": {
    "total": 4420414
   },
-  "_file": "E-S4-R5-speed-4-ipad.json"
+  "_file": "E-S4-R5-speed-4-ipad.json",
+  "runner_ruling": "VALID (Foreman E child8: game-imposed Xuat gia; audit text rule false negative)"
  },
  {
   "job": {
