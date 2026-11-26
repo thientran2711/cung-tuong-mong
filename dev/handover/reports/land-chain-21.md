@@ -34,3 +34,5 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 ## 08:50Z — DRESS READY sent (3af7896e)
 - QC alone vs LIVE PASS: render 310/349, tab 708/738, buổi 2286/1820, tasks>200 47/38. info-tap-audit flaky (chain FAIL iPad «! Dạo này», alone FAIL Fold sub-tab, alone ALL PASS); mg-back Fold 2/12 = LIVE.
 - HW slot = review/lc21-hw 5212024d (HOME-WAY-NITS 0e71fdbc onto 3af7896e, built files only). Gates gates-hw2.sh (+ home-way-label, kit-why-scan Fold/iPad), QC vs 3af7896e. Before it: perf A/B LIVE vs bf6dd041 alone.
+- 08:45Z PUSHED 3af7896e → main. LIVE 3af7896e · ROLLBACK 6b5d3d05.
+- MAIN 155: NITS replacing HW OK, but its READY waits for MAIN's «SMALL PASS» (kit rv RV-HW-NITS). Queue: HW-NITS → TAINGHE → srvmerit → kit-stage 22e318d5 → NHV (scan fix from NHV-BUILD) → map-zones-r7 9c8985ab8 (contains nhv b48425a1 + kit-stage-r2 22e318d5 + ob-phu b5c053d1; known: map-labels night lockBad drift, kit-mapban clear() flaky, jk3.js conflict w/ home-way → route to MAIN) → mg-trim.
