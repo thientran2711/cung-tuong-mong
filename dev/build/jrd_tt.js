@@ -686,7 +686,7 @@ RD97L.push(rdRare({a:"tt_tranh_11",tag:"Huynh muội đồng lòng, phủ dâng 
 
 /* ---------- tt_mat · Mật ước với Hoàng hậu ---------- */
 /* ONE CORE (review road-b1-r1 item 8): every RANKS index clamped */
-const MATCAP=()=>BAL.road.cap.tt_mat,MATRK=()=>RANKS[Math.min(MATCAP(),RANKS.length-1)].n,MATME=()=>RANKS[Math.min(S.rank,RANKS.length-1)].n;
+const MATCAP=()=>BAL.road.cap.tt_mat,MATRK=()=>RANKS[Math.min(MATCAP(),RANKS.length-1)].n,MATME=()=>meRankN();
 /* she already stands above the pact's cap: texts that say "the pact holds you under" read this (review road-b1-r1 item 4) */
 const MATOVER=()=>S.rank>MATCAP();
 /* the Hoàng hậu of the pact is on the seat (cast guard, review road-b1-r1 item 6). Without her (dead, deposed, or the player is Hoàng hậu)
