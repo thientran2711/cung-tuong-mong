@@ -62,3 +62,12 @@ Reviewer's own miss in the a43aa413 PASS: a43aa413 F2 defined `function j95c(s)`
 | **coop-e2e on 4b693c7a (live Worker)** | **142/143: FAIL «after week 1: the same world on both seats» {"d":["R#9.dw A=2 B=1"]}** |
 Cause (read): 5fe832c1 makes the guest skip deedSync for world people (good, host computes), but the HOST's writes still land AFTER its week snapshot: jtruth.js:56 wraps endTurn as `e0.apply(...)` THEN `evTruthSweep()`, so the sweep's deedOnce/deedAdd (dw, wrongs, dkeys) is written on seat A after the merged week was built, and seat B never gets it that week. Before 5fe832c1 the guest wrote the same deed itself, which hid the lag. Same «coop-host-lag» family as the hoadien case: a host lazy write after the snapshot.
 Fix wanted: on the host, run the sweep (deedSync of every world person) BEFORE the week is sent (call evTruthSweep before e0 in the endTurn wrapper, or at the top of toCanon when host()), so the merged week carries the deeds. Check the jmgt mgHand host store the same way (a host read after the snapshot stores mgH that the guest only gets next week). Then coop-e2e ×3, all 143/143.
+
+## DELTA r2 4b693c7a → f068313b: **PASS f068313b**
+- The host runs jtruth deedSyncAll (deedSync of S plus every living or cold-palace world person) at the top of jcoopworld toCanon when host(), BEFORE the week is cut. The endTurn evTruthSweep stays (its deedSync is a no-op for that week).
+- jmgt mgHand: in co-op a world person's hand is read (the same hash draw), never stored on a read, on both seats; an already stored current-band hand is read; single player still stores.
+- Read OK; FF from LIVE 3af7896e; new-duplicate-function scan vs LIVE = 0; built files = fresh build except the build stamps.
+- Tests: charge-trinh-punish (incl. guest / host / deedSyncAll / single-player store cases) ALL PASS · charge-followups ALL PASS · charge-smoke 0 FAIL · seize-ledger ALL PASS · 0 page errors.
+- **coop-e2e on f068313b (live Worker) 143/143** (the R#9.dw seat diff is gone).
+- G1 one-core-guard: the worker's run reports PASS; this reviewer's full coregates run on 4b693c7a (same gates) failed only on the known LIVE faults.
+Land after the worker's coop-e2e ×3 are all 143/143 too. Wipe the CDN folder img/_review/charge-trinh-punish/ at landing.
