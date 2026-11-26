@@ -378,3 +378,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:56Z OWNER: choices show marks only (Danh + / ++ / +++), exact numbers only in result card → OD row (canon overwrite of (7) 'or exact numbers') → WORDING-GAIN + KK47 + KIT-STAGE-R5.
 - ~22:00Z WORDING-GAIN at 50 % ctx → handover-only push review/wording-marks 5b1ab9d7; opened WORDING-MARKS session_01Rc5AsJzixPTTcuxw6cUjzW (sonnet, UI/wording). WORDING-GAIN stays idle until lc25-wg LIVE.
 - ~22:01Z OWNER: Bạc + Sức stay EXACT on choices (canon overwrite in 21:55Z row; MAIN rec khắc + item counts exact too) → WORDING-MARKS, KK47, R5.
+- ~22:03Z OWNER: «tốn gì vẫn ghi rõ, được mất thì không rõ» → rule by ROW: Tốn exact (anything), Được/Mất marks (everything) — OD row rewritten in place; workers told.
