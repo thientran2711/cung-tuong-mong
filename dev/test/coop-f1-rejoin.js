@@ -13,6 +13,7 @@
      P4 host reload while on the card (the guest waits on the panel) → host back on the card, guest still on the panel; host picks → both in
      P5 both reload while the host is on the card
      P6 guest reload after the host picked (control: straight back into the game)
+     P7 guest reload, «Trở lại phòng» then at once «Vào phòng» on the connecting screen (the first tap's answer comes back «replaced») → still the waiting panel
    After every row: the room advances one buổi for both. Exit 1 on any FAIL. */
 const {chromium}=require('playwright');
 const {serve,BASE}=require('./coop-serve.js');
@@ -53,14 +54,14 @@ async function advance(A,B,ms=90000){const k0=(await co(A)).key;await press(A);a
  while(Date.now()-t0<ms){const a=await co(A),c=await co(B);if(a.key!==k0&&c.key!==k0&&a.key===c.key)return true;await clear(A);await clear(B);await press(A);await press(B);await sleep(300)}return false}
 /* rejoin like a player: the title's «Cùng hảo hữu», then «Trở lại phòng» of THIS room; done once the seat is open in that room and
    no longer on the room list (the lobby has handed over: the game, the identity card or the waiting panel) */
-async function rejoin(o,code){await o.p.waitForFunction(()=>typeof start==='function'&&window.__ctmBuilt===1,null,{timeout:180000}).catch(()=>{});await sleep(1500);
+async function rejoin(o,code,dbl){await o.p.waitForFunction(()=>typeof start==='function'&&window.__ctmBuilt===1,null,{timeout:180000}).catch(()=>{});await sleep(1500);
  const t0=Date.now();let tapped=0;
  while(Date.now()-t0<60000){const c=await co(o);if(c.st==='open'&&c.room===code&&tapped)return Date.now()-tapped;
   if(c.st!=='open'&&c.st!=='connecting'&&c.st!=='retry'&&Date.now()-tapped>15000){
-   const r=await o.p.evaluate(code=>{const vis=b=>b&&b.offsetParent!==null&&!b.disabled;const rb=document.querySelector('button[data-coop="resume"][data-room="'+code+'"]');if(vis(rb)){rb.click();return'resume'}
-    const t=[...document.querySelectorAll('button')].find(b=>vis(b)&&/^(Chơi cùng bạn|Cùng hảo hữu)/.test(b.textContent.trim()));if(t){t.click();return'co'}return''},code).catch(()=>'');if(r==='resume')tapped=Date.now()}
+   const r=await o.p.evaluate(code=>{const vis=b=>b&&b.offsetParent!==null&&!b.disabled;const rb=document.querySelector('button[data-coop="resume"][data-room="'+code.c+'"]');if(vis(rb)){rb.click();if(code.dbl){const g=document.querySelector('#modal.kcoop [data-coop="go"]');window.__f1dbl=g&&g.offsetParent!==null?'go':'none';if(window.__f1dbl==='go')g.click()};return'resume'}
+    const t=[...document.querySelectorAll('button')].find(b=>vis(b)&&/^(Chơi cùng bạn|Cùng hảo hữu)/.test(b.textContent.trim()));if(t){t.click();return'co'}return''},{c:code,dbl:!!dbl}).catch(()=>'');if(r==='resume')tapped=Date.now()}
   await sleep(400)}return -1}
-async function reload(o){const code=await o.p.evaluate(()=>COOP.code);await o.p.goto(BASE,DCL);return rejoin(o,code)}
+async function reload(o,dbl){const code=await o.p.evaluate(()=>COOP.code);await o.p.goto(BASE,DCL);return rejoin(o,code,dbl)}
 /* the seat settles on `want` (fn of the view) within ms and STAYS there for hold ms (the invite screen must never come back over it) */
 async function settle(o,want,ms,hold,keepHost){const t0=Date.now();let since=0,last;
  while(Date.now()-t0<ms){last=await co(o);if(keepHost)await clear(o,keepHost);if(want(last)){if(!since)since=Date.now();if(Date.now()-since>=hold)return{ok:true,ms:since-t0,v:last}}else since=0;await sleep(400)}return{ok:false,v:last}}
@@ -98,6 +99,8 @@ const ROWS={
   const g=await settle(B,onPanel,30000,5000);ok(g.ok,'P4 guest still on the waiting panel',g.ok?undefined:{B:await dbg(B)});await after('P4',A,B)},
  P5:async(A,B)=>{await Promise.all([A.p.goto(BASE,DCL),B.p.goto(BASE,DCL)]);const [x,y]=await Promise.all([rejoin(A,A.code),rejoin(B,B.code)]);ok(x>=0&&y>=0,'P5 both back after reload');
   const h=await settle(A,hostCard,60000,3000,true);ok(h.ok,'P5 host on her card',h.ok?undefined:{A:await dbg(A)});const g=await settle(B,onPanel,30000,5000);ok(g.ok,'P5 guest on the waiting panel',g.ok?undefined:{B:await dbg(B)});await after('P5',A,B)},
+ P7:async(A,B)=>{ok(await reload(B,true)>=0,'P7 guest back after reload: «Trở lại phòng», then «Vào phòng» on the connecting screen at once (a second tap)');const d=await B.p.evaluate(()=>window.__f1dbl).catch(()=>'');ok(d==='go','P7 set-up: the second tap really hit «Vào phòng»',d);const s=await settle(B,onPanel,30000,8000);
+  ok(s.ok,'P7 waiting panel (no «Chưa vào được phòng» from the first tap), stays 8 s',s.ok?undefined:{B:await dbg(B)});await after('P7',A,B)},
  P6:async(A,B)=>{await after('P6 set-up',A,B);ok(await reload(B)>=0,'P6 guest back after reload');const s=await settle(B,inGame,60000,5000,'all');ok(s.ok,'P6 guest straight back in the game',s.ok?undefined:{B:await dbg(B)});
   for(let i=0;i<20;i++){await clear(A);await clear(B);await sleep(200)}ok(await advance(A,B),'P6 the room advances one buổi after')}};
 (async()=>{const b=await chromium.launch({args:['--disable-web-security','--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']});

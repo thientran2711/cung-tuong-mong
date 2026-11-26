@@ -74,12 +74,13 @@ function toast(msg){try{const n=document.querySelector("#modal.kcoop .kpnote");i
    can come AFTER the room already handed this seat over — "both" (drop + the game / the identity card) or the world module's waiting panel
    «Đợi hảo hữu chọn thân phận» (hostPick, the host still before her life). Before, Trở lại phòng re-opened the invite screen over it
    («Mời hảo hữu … đang vào cuộc» for ever; the host's pick then never lifted the title, PG was no longer "pick"). Now the invite screen opens
-   only while the lobby still stands on the screen this tap opened. */
-function landed(from){if(PG===from)open("wait")}
-async function make(){ERR="";try{open("wait");const r=await COOP.create();CODE=r.room;landed("wait")}catch(e){ERR=errText(e);open("err")}}
+   only while the lobby still stands on the screen this tap opened — and the same for a late failure (err): a tap's answer or error that
+   comes after the screen moved on (handed over, ‹ Lui, a newer tap: "replaced") never covers what she sees now. */
+function landed(from,e){if(PG!==from||e&&e.code==="replaced")return;if(e){ERR=errText(e);open("err")}else open("wait")}
+async function make(){ERR="";try{open("wait");const r=await COOP.create();CODE=r.room;landed("wait")}catch(e){landed("wait",e)}}
 async function join(code){code=String(code||"").trim().toUpperCase().replace(/[^A-Z0-9]/g,"");if(!code){toast("Hãy gõ ám hiệu.");return}
- CODE=code;PEND=true;try{open("join");await COOP.join(code);PEND=false;landed("join")}catch(e){PEND=false;ERR=errText(e);open("err")}}
-async function resume(code){ERR="";CODE=code||stored();try{if(code)localStorage.setItem("ctm-coop-room",code)}catch(e){}try{open("join");await COOP.resume();landed("join")}catch(e){ERR=errText(e);open("err")}}
+ CODE=code;PEND=true;try{open("join");await COOP.join(code);PEND=false;landed("join")}catch(e){PEND=false;landed("join",e)}}
+async function resume(code){ERR="";CODE=code||stored();try{if(code)localStorage.setItem("ctm-coop-room",code)}catch(e){}try{open("join");await COOP.resume();landed("join")}catch(e){landed("join",e)}}
 function errText(e){const c=e&&(e.code||e.message)||"";
  if(/full/i.test(c))return "Phòng này đã đủ hai người.";if(/not.?found|no.?room|404/i.test(c))return "Không thấy phòng mang mã này. Xem lại mã hảo hữu gửi.";
  return CTM_WAIT.coopJoinErr}
