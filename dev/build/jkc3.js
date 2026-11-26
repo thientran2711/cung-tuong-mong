@@ -107,9 +107,9 @@ const KC3PIC={kc_tt:"mat-uoc",kc_dtq:"bien-ai",kc_muoi:"bac-tien",kc_thd:"tai-ng
 function kc3Pic(q,a){try{if(q&&(q.pid==="kc3"||q.kc3a)&&KC3PIC[a]&&evArtCat("cat:"+KC3PIC[a]))q.evId="cat:"+KC3PIC[a]}catch(e){}return q}
 (function(){if(typeof deserQ!=="function")return;const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q&&q.pid==="kc3"&&q.pp)kc3Pic(q,q.pp.a)})}catch(e){}return out}})();
 function kc3Line(o,od0,A,a){const sure=od0>=100,G=t=>t?`<span class="g">${t}</span>`:"",Rd=t=>t?`<span class="r">${t}</span>`:"";const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;
- const eT=k=>{const E=a.E[k];return E?(E.k<0?Rd:G)("kết: "+kc3Fill(E.tag,A)):""};const gain=[fmt(o.w||{}),G(kc3Fill(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
- const cost=fmt(o.c||{});const lose=[fmt(o.l||{}),Rd(kc3Fill(o.lx||"",A)),end&&end[1]!==end[0]?eT(end[1]):""].filter(Boolean).join(" · ");
- if(sure)return [cost?"tốn: "+cost:"",gain||end?"thành: "+[gain,end?eT(end[0]):""].filter(Boolean).join(" · "):"",o.lx?"kèm: "+Rd(kc3Fill(o.lx,A)):""].filter(Boolean).join(" · ");
+ const eT=k=>{const E=a.E[k];return E?(E.k<0?Rd:G)("kết: "+kc3Fill(E.tag,A)):""};const gain=[fmt(o.w||{}),G(wgDrop(kc3Fill(o.wx||"",A),o.w,o.c)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
+ const cost=fmt(o.c||{});const lose=[fmt(o.l||{}),Rd(wgDrop(kc3Fill(o.lx||"",A),o.l,o.c)),end&&end[1]!==end[0]?eT(end[1]):""].filter(Boolean).join(" · ");
+ if(sure)return [cost?"tốn: "+cost:"",gain||end?"thành: "+[gain,end?eT(end[0]):""].filter(Boolean).join(" · "):"",o.lx?"kèm: "+Rd(wgDrop(kc3Fill(o.lx,A),o.l,o.c)):""].filter(Boolean).join(" · ");
  return `${word(od0)} · ${cost?"tốn: "+cost+" · ":""}thành: ${[gain,end?eT(end[0]):""].filter(Boolean).join(" · ")||"qua được"} · hỏng: ${lose||"không mất gì thêm"}`}
 PEND.kc3=pp=>{if(!kc3On())return null;const ar=S.kc.ar,A=ar&&ar.A;if(!A||A.a!==pp.a||A.cur!==pp.b)return null;const a=KCA[A.a],b=kc3Beat(A,pp.b);if(!b)return null;const O=kc3Opts(A,b);
  return{who:kc3Who(b.w),t:`<p class="past">${a.t} · hồi ${A.i+1}/${A.seq.length}</p><p>${kc3Fill(b.t,A)}</p>`,o:O.map((o,i)=>{const od0=pp.o[i]==null?100:pp.o[i];const line=kc3Line(o,od0,A,a);

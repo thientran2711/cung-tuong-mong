@@ -129,14 +129,14 @@ function txt67(o){return Object.assign({},o||{})}
 PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==p.b||A.done)return null;const a=ARC67[A.a],b=beatDef67(A,p.b);if(!b)return null;
  const O=opts67(A,b);const step=A.i+1,n=A.seq.length;
  return {who:who67(b.w,A),t:`<b>${a.t}</b> <span class="past">· hồi ${step}/${n}</span><br>${fill67(b.t,A,b.w)}${wait67(b,A)}`,o:O.map((o,i)=>{const od0=p.o[i]==null?100:p.o[i],sure=od0>=100;
-  const cm=t=>String(t).replace(/, /g," – "),G=t=>t?`<span class="g">${cm(t)}</span>`:"",Rd=t=>t?`<span class="r">${cm(t)}</span>`:"";const gain=[fmt(o.w||{}),G(fill67(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
+  const cm=t=>String(t).replace(/, /g," – "),G=t=>t?`<span class="g">${cm(t)}</span>`:"",Rd=t=>t?`<span class="r">${cm(t)}</span>`:"";const gain=[fmt(o.w||{}),G(wgDrop(fill67(o.wx||"",A),o.w,o.c)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
   const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;/* an ending no roll decides (sure option, or the same ending either way) can still turn in a 14-chapter life (jst14 f14Hold, OD:L1253).
      VANPHONG: the act ladder (Mong manh…Rất vững) is ONLY the act's own success odds (a sure act carries no word); the chance that the ending turns is a side
      chance → the chance scale Rất thấp…Rất cao (chanceLvl, j1), labelled with the result card's row name «Xoay chiều»; kept in brackets INSIDE the ending phrase so the kit hint
      of the story dialog (kitHint/kitOptModel, jk2b: splits on " · ") shows it with the ending (review/story14-p1-r3) */
   const sh=sure||(end&&end[0]===end[1]);const eT=k=>{const E=a.E[k];if(!E)return"";const w=sh&&typeof f14Hold==="function"?f14Hold(A,k):100;return (E.k<0?Rd:G)(`kết: ${fill67(E.tag,A)}${w<100?` (có thể xoay chiều: ${chanceLvl(100-w)})`:""}`)};
-  const x=sure?[gain||(end?eT(end[0]):""),o.lx?"kèm: "+Rd(fill67(o.lx,A)):""].filter(Boolean).join(" · ")
-   :`${word(od0)} · thành: ${[gain,end?eT(end[0]):""].filter(Boolean).join(" · ")||"qua được"} · hỏng: ${[fmt(o.l||{}),Rd(fill67(o.lx||"",A)),end&&end[1]!==end[0]?eT(end[1]):"",o.sf<0?`Lợi thế ${o.sf}`:""].filter(Boolean).join(" · ")||"không mất gì thêm"}`;
+  const x=sure?[gain||(end?eT(end[0]):""),o.lx?"kèm: "+Rd(wgDrop(fill67(o.lx,A),o.l,o.c)):""].filter(Boolean).join(" · ")
+   :`${word(od0)} · thành: ${[gain,end?eT(end[0]):""].filter(Boolean).join(" · ")||"qua được"} · hỏng: ${[fmt(o.l||{}),Rd(wgDrop(fill67(o.lx||"",A),o.l,o.c)),end&&end[1]!==end[0]?eT(end[1]):"",o.sf<0?`Lợi thế ${o.sf}`:""].filter(Boolean).join(" · ")||"không mất gì thêm"}`;
   const fx=txt67(o.c);
   const cost=fmt(o.c||{});const line=sure?[cost?"tốn: "+cost:"",x?(/^kèm:/.test(x)?x:"thành: "+x):""].filter(Boolean).join(" · "):x.replace(/^([^·]+) · /,(m,w)=>`${w} · ${cost?"tốn: "+cost+" · ":""}`);
   return {n:fill67(o.n,A),fx,x,j67:line,go:()=>res67(p.t,p.b,i,od0)}})}};

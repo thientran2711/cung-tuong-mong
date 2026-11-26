@@ -196,9 +196,9 @@ function rgBeatDef(id){if(RGBT[id])return RGBT[id];const m=/^(emp|th|quyen):(e\d
 function rgOpts(b){let O=typeof b.o==="function"?b.o():b.o;O=(O||[]).filter(o=>{try{return !o.if||o.if()}catch(e){return false}});return O}
 function rgChOf(id){for(let i=0;i<RGC.length;i++){const j=RGC[i].b.indexOf(id);if(j>=0)return[i,j]}return null}
 function rgTitle(id){const c=rgChOf(id);if(c)return `Phụ tuyến · ${RGT} · Chương ${c[0]+1} · Hồi ${c[1]+1}/${RGC[c[0]].b.length}`;return `Phụ tuyến · ${RGT} · Việc của phe`}
-function rgLine(o){const od=rgOd(o),c=rgCost(o.c);const cost=fmt(c);const win=[fmt(o.w||{}),o.wx?`<span class="g">${rgTok(o.wx)}</span>`:""].filter(Boolean).join(" · ");
+function rgLine(o){const od=rgOd(o),c=rgCost(o.c);const cost=fmt(c);const win=[fmt(o.w||{}),o.wx?`<span class="g">${wgDrop(rgTok(o.wx),o.w,o.c)}</span>`:""].filter(Boolean).join(" · ");
  if(od>=100)return [cost?"tốn: "+cost:"",win?"thành: "+win:""].filter(Boolean).join(" · ");
- const lose=[fmt(o.l||{}),o.lx?`<span class="r">${rgTok(o.lx)}</span>`:"",o.pun?`<span class="r">${o.pun>1?"có thể bị giáng bậc":"bị cấm túc"}</span>`:""].filter(Boolean).join(", ");
+ const lose=[fmt(o.l||{}),o.lx?`<span class="r">${wgDrop(rgTok(o.lx),o.l,o.c)}</span>`:"",o.pun?`<span class="r">${o.pun>1?"có thể bị giáng bậc":"bị cấm túc"}</span>`:""].filter(Boolean).join(", ");
  return `${word(od)} · ${cost?"tốn: "+cost+" · ":""}thành: ${win||"qua được"} · hỏng: ${lose||"không mất gì thêm"}`}
 PEND.rg=pp=>{try{if(!rgOn())return null;const b=rgBeatDef(pp.b);if(!b)return null;const O=rgOpts(b);if(!O.length)return null;
  const t=typeof b.t==="function"?b.t():b.t;const wk_=typeof b.w==="function"?b.w():b.w;

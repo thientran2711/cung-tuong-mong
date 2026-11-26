@@ -43,3 +43,11 @@ CDN `https://ctm-img.victoria-tntt.workers.dev/img/_review/wording-gain/ba-{BEFO
 (Earlier `hint-vague-*` shots were the boot cover; superseded by `ba-*`.)
 ## Gate notes
 coregates (quickcheck): dialog-fixed «no empty Tốn / Được cell» identical on LIVE base (pre-existing); button crawl «Ô lưu · Lui» not compared on base. Full quickcheck verdict line did not finish in this session.
+
+## ROUND 2 — RV-161 SMALL FAIL fixed (merged LIVE 53319e6f; sources regenerated from main with the corrected rules)
+1. «không» rows: the rewriter never touches an item holding không / khỏi / chẳng / chưa (offset-aware, per item). Lost clause «Hoàng hậu không tin» restored; jrd_cnv:384 «không thêm oán», jrd_muoi:583 «không tốn thêm bạc» back to the original words. Scan floor: wx/lx/kx texts with «không» = LIVE count (2260 = 2260, the scan exits 1 if it drops).
+2. «,,»: 0 (scan asserts no «,,»; rewriter collapses it; «mà lòng nặng» rule split so no comma is left).
+3. Wrong stat: «gia tư vơi một nửa» → «Gia tư −−» (not Bạc). Dropped the «giàu lên / giàu thêm / có thêm của» → Bạc rules (wealth / belongings ≠ Bạc: left as written). Third-person tiredness («Tố Nga mệt thêm», «làm lão kiệt sức») is no longer turned into HER Sức (KEEP class «another person's own condition»; Sức / Lòng rules skip an item with a third-person subject).
+4. Marks = one source: `wgDrop(text, w, l, c)` (j19, used by j67 / jkc3 / jreign builders): a static mark line «Danh −−» is dropped when the option's own typed fx (w / l / c) already names that stat — the BAL number prints alone. Remaining static marks exist only where the option has NO typed amount (the size word is then the only source; BAL.mk.word documents the bands). Unit check: «người ta bảo, Danh −−» + {danh:-1} → «người ta bảo»; not dropped for another stat.
+5. Minor: «đòi thêm, Bạc −»; hostility label unified to «oán» (thù ++ → oán ++, «thế lực» spelled out).
+Tests: scan LEFT 0 · «,,» 0 · không 2260/2260; kit-e-rows 26 PASS; kit-cost-rows-home 15 PASS; kit-gain-list-scan same as LIVE; kit-ton-row 4/14 FAIL (LIVE has 6 FAIL there — fewer, none new). Also removed the stray report write dev/review/hint-dedup.md (restored to main).
