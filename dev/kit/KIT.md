@@ -2028,6 +2028,15 @@ KIT_GLOSS; servant road: the Sủng cell is "Chủ tin" → HX.tin). Bars: Sức
 cell ids `#hud-<key>` (popNum, coinPop, game-feel KF_CELL) — ids never change when a cell moves group. Đức < 50 below Hoàng hậu: small gold "!" (tooltip "Cần Đức 50 mới được lập Hoàng hậu").
 `dev/test/kit_dupes.js` fails when a retired private variant comes back (table below).
 
+### 32.1s kitHudSlot — ONE fixed info slot in the top bar (KK50; ruling KK49 26/11 ~23:40Z on owner OD 26/11 ~22:58Z «Sắc phong 5/32 tuần») — `dev/build/jk4.js` (mount from jmood `mbHud`) — KIT READY
+- PLACE: header ROW 3 = the mood row `#hud-mood.kstm` (§49.4), RIGHT END (last child), the same place on Fold 755x1000 and iPad 1180x820. The mood bar (`.ksbar`) is the elastic part; seal · «Tâm trạng» · band word · number keep their size.
+- LOOK: a §32.1 kitStatCell of size `kst-chip` (label + value on ONE line, never wraps), rendered as a `<button class="kst kst-chip khslot">` (kitStatCell `tag:"button"`), height 18 px inside the 20 px row.
+- SIZE (law 10): ONE width per device = the widest of `KIT_HUD_SLOT.samples` («Sắc phong 32/32 tuần» · «Đại lễ 32/32 tuần» · «Sắc phong: tạm hoãn») measured in the chip's own font → `--khslot-w` on the row (re-measured on resize / font load). Measured: 147 px on Fold and iPad.
+- TAP: hit box ≥ 44 px tall (invisible `::after`, 6 px up / 20 px down, never over the stat numbers); tap = the hook's `tap(e)`; because it is a `<button>` the mood-row tap (`data-emo-open`, jpcf capture) does not fire under it; the rest of the row still opens the mood box.
+- DATA (worker, never the kit): `window.kitHudSlotHook = () => ({l:"Sắc phong", v:"5/32 tuần", s:"Sắc phong 5/32 tuần", tap:fn})` or `null` (= no slot). API: `kitHudSlot(d)` → HTML, `kitHudSlotMount(row)`, `kitHudSlotData()`.
+- Replaces §77c kitPromoChip (RETIRED, MAIN 166 ruling): while the hook gives data, `kitPromoMount` shows no stage chip.
+- Test: `node dev/test/kit-hud-slot.js <outdir> [fold ipadAir]` (three wordings: right end, one width, one line, in header, hit ≥ 44, tap → hook not mood box, mood tap still works, hook null → no slot). Kit sample page §32.1s.
+
 ### 32.2 kitEventStage — people FULL-BODY beside the text (owner 23:50Z, approved)
 Every kit panel whose subject is a person (weekly events with a main actor, Mệnh truyện chapters, night / thị tẩm, person reports,
 succession) gets: a wide scene band on top (headArt 31.16, else the event picture moved out of the tall slot, framed by type 32.3), then the
@@ -4822,8 +4831,8 @@ PRIORITY #1 CHECK: the ONE new-day panel = the j79 dawn panel (`.dawn .dbox.kpan
 ## 26.4 kitPodiumShow `unknown` — a person she has not met stands as «Người lạ» with her NAME (MAIN 117 KIT REQUEST #2; owner 24/11 ~05:35Z; KK16)
 `kitPodiumShow(list, {unknown: p => bool})` (or the global hook `window.kitPodiumUnknown`, so EVERY podium / ranking / result list of the game takes it without a per-caller change: j82 contest wrapper, Tranh ghế, hoàng tự exams, jentry, jge, jts): an entrant whose `unknown(p)` is true stands as the standard grey silhouette (kitFigOf, not known) with her real NAME in grey (`.kname[data-k61skip]`, never masked to «Phi ???») and is NOT marked known (no `cuMeet` for her). Default (no option / hook): unchanged (everyone on the dais is known). Test: fold + iPad probe (known before/after: only the unknown one stays unknown; name shown).
 
-## §77c kitPromoChip — «Kỳ thăng» chip at the stage top edge (MAIN 117 KIT REQUEST; owner OD 24/11 ~05:55Z; KK16) — `dev/build/jrail.js`
-ONE short chip, `#stage>.kchip.kpromo`, TOP edge, horizontally centred (z 6, not tappable): «Kỳ thăng: <b>3 tháng</b> · Tần» (months 0 → «Kỳ thăng: <b>kỳ này</b> · Phi»). The bottom edge is the figure name tags; the scene title (top-left `#kshL`) and the chip column (top-right `#kshR`) stay clear of the centre on Fold 755x1000 and iPad 1180x820. Data hook (Foreman D, PROMO-HIST): `window.kitPromoHook = () => ({months:n, rank:"Tần"})` or `null` = no chip; `kitPromoInfo()` / `kitPromoChip(r)` / `kitPromoMount()` (re-run after every `renderStage`). Words cổ trang, no %. Kit sample page §77c.
+## §77c kitPromoChip — RETIRED by §32.1s kitHudSlot (MAIN 166 ruling, 26/11) — `dev/build/jrail.js`
+RETIRED: the «Kỳ thăng» stage chip is replaced by the top-bar slot §32.1s kitHudSlot («Sắc phong 5/32 tuần», tap = promotion info). `kitPromoMount` shows nothing while `window.kitHudSlotHook` gives data; the code stays only until HUD-SACPHONG lands the hook, then it may be deleted. No new use.
 ## §94.1 NO GOLD RING ON A PICKER TAB PRESS (owner OD 24/11 ~04:25Z; KK16)
 A press / tap on a kit item tab (`[data-kinvtab]`) or an item slot in `.kinv` / `.keq` (dress picker, Tư trang, shop) shows NO gold ring, outline, box-shadow or sticky-hover glow (jinv.js CSS; tap highlight transparent; on `(hover:none)` screens the `:hover` glow is off). Keyboard `:focus-visible` glow on the item slot is kept. Test: `node dev/test/kit-dress-picker.js` (19 pass Fold + iPad + phone).
 ## MG-SKIN.1 — BOARD-OF: a kind with no board of its own takes its board's skins (KIT REQUEST «kinh / may board slot», Foreman F; KK16, 24/11)

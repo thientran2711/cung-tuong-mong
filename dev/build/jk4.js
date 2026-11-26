@@ -15,9 +15,9 @@ function kitStatIcon(icon){if(!icon)return"";if(/[\/.]/.test(icon))return `<img 
    Sizes (cls): default = top-bar cell (two fixed lines + bar slot) · "kst-tile" = info tile (status sheet / identity card / person stats grid)
    · "kst-chip" = one-line chip (person-card info grid). Same parts in every size: .kstl label line, .kstv value.
    bar: 0–100 shows the thin bar; null keeps the empty slot (row cells) — nobar drops it (tiles, chips). */
-function kitStatCell(icon,label,value,o){o=o||{};const bar=o.bar==null?"":Math.max(0,Math.min(100,+o.bar||0));const tg=o.tag==="span"?"span":"div";
+function kitStatCell(icon,label,value,o){o=o||{};const bar=o.bar==null?"":Math.max(0,Math.min(100,+o.bar||0));const tg=o.tag==="span"?"span":o.tag==="button"?"button":"div";
  const b=o.nobar?"":`<i class="mini kstb${bar===""?" kstb0":""}"><u${bar===""?"":` style="width:${bar}%"`}></u></i>`;
- return `<${tg} class="kst${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}${o.k?` data-k="${o.k}"`:""}${o.title?` title="${kitStatEsc(o.title)}"`:""}><small class="kstl">${kitStatIcon(icon)}${label}</small><span class="kstv${o.vcls?" "+o.vcls:""}">${value==null?"":value}</span>${b}</${tg}>`}
+ return `<${tg}${tg==="button"?' type="button"':""} class="kst${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}${o.k?` data-k="${o.k}"`:""}${o.title?` title="${kitStatEsc(o.title)}"`:""}><small class="kstl">${kitStatIcon(icon)}${label}</small><span class="kstv${o.vcls?" "+o.vcls:""}">${value==null?"":value}</span>${b}</${tg}>`}
 /* kitStatSet(cell,value,{bar,title}): update a live cell in place (no re-render, no flicker) */
 function kitStatSet(c,v,o){if(!c)return;o=o||{};const s=c.querySelector(".kstv");const t=v==null?"":String(v);if(s&&s.textContent!==t){const was=s.textContent;s.textContent=t;try{if(was!==""&&typeof kitStatDelta==="function"&&!c.id.startsWith("hud-"))kitStatDelta(c,was,t)}catch(e){}}
  if(o.bar!=null){const u=c.querySelector(".kstb u");if(u)u.style.width=Math.max(0,Math.min(100,+o.bar||0))+"%"}
@@ -27,6 +27,32 @@ function kitStatSet(c,v,o){if(!c)return;o=o||{};const s=c.querySelector(".kstv")
    count, so where the row is stretched (two-row bar, phones) every CELL gets the same width whatever the group sizes (6 | 2 on the top bar). */
 function kitStatRow(groups,o){o=o||{};return `<div class="kstrow${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}>${groups.map(g=>`<div class="kstg${g.cls?" "+g.cls:""}"${g.id?` id="${g.id}"`:""} style="--kn:${g.cells.length}"${g.title?` title="${kitStatEsc(g.title)}"`:""}>${g.cells.join("")}</div>`).join("")}</div>`}
 window.kitStatCell=kitStatCell;window.kitStatSet=kitStatSet;window.kitStatRow=kitStatRow;
+/* KIT §32.1s kitHudSlot — ONE fixed info slot in the top bar (KK50; ruling KK49 26/11 ~23:40Z on owner OD 26/11 ~22:58Z «Sắc phong 5/32 tuần»).
+   Place: header ROW 3 (the mood row #hud-mood, KIT 49.4), RIGHT END, the same place on Fold 755x1000 and iPad 1180x820; the mood bar is the elastic part.
+   Look: a kitStatCell "kst-chip" (label + value on ONE line, never wraps), as a <button> (so the mood-row tap does not fire under it).
+   Size (law 10): ONE width per device = the widest of KIT_HUD_SLOT.samples in the chip's own font, measured once per device/font load → --khslot-w.
+   Tap target ≥ 44 px tall (an invisible hit box, 6 px up / 18 px down, never over the stat cells' numbers).
+   Data (worker, never the kit): window.kitHudSlotHook = () => ({l:"Sắc phong", v:"5/32 tuần", s:"Sắc phong 5/32 tuần", tap:fn(e)}) | null (null = no slot).
+   When a slot is mounted the old stage chip kitPromoChip §77c is RETIRED (MAIN 166 ruling): kitPromoMount shows nothing while the hook exists. */
+window.KIT_HUD_SLOT={samples:[["Sắc phong","32/32 tuần"],["Đại lễ","32/32 tuần"],["Sắc phong:","tạm hoãn"]],hit:44};
+function kitHudSlot(d){if(!d||d.l==null)return"";return kitStatCell(null,kitStatEsc(d.l),kitStatEsc(d.v==null?"":d.v),{tag:"button",cls:"kst-chip khslot",nobar:true,title:(d.s||(d.l+" "+(d.v||"")))+(d.tap?" · chạm để xem":"")})}
+function kitHudSlotData(){try{const f=window.kitHudSlotHook;const r=typeof f==="function"?f():null;return r&&r.l!=null?r:null}catch(e){return null}}
+/* one width per device: measure every sample once in a hidden slot inside the row (same font as the live slot) */
+function kitHudSlotWidth(row){const k=innerWidth+"x"+innerHeight,R=document.documentElement;if(R.dataset.khw===k&&R.style.getPropertyValue("--khslot-w"))return;let m=0;
+ for(const [l,v] of KIT_HUD_SLOT.samples){row.insertAdjacentHTML("beforeend",kitHudSlot({l,v}));const e=row.lastElementChild;e.style.cssText="position:absolute;visibility:hidden;width:auto;flex:none";m=Math.max(m,Math.ceil(e.getBoundingClientRect().width));e.remove()}
+ if(m>0){R.style.setProperty("--khslot-w",m+"px");R.dataset.khw=k}}
+function kitHudSlotMount(row){try{row=row||document.getElementById("hud-mood");if(!row)return;const d=kitHudSlotData();let el=row.querySelector(":scope>.khslot");kitHudSlotWidth(row);
+ if(!d){if(el)el.remove();return}const h=kitHudSlot(d);
+ if(!el||el.dataset.h!==h){if(el)el.remove();row.insertAdjacentHTML("beforeend",h);el=row.lastElementChild;el.dataset.h=h}
+ el.onclick=e=>{e.stopPropagation();e.preventDefault();const g=kitHudSlotData();if(g&&typeof g.tap==="function")g.tap(e)}}catch(e){console.error("kitHudSlot",e)}}
+window.kitHudSlot=kitHudSlot;window.kitHudSlotMount=kitHudSlotMount;window.kitHudSlotWidth=kitHudSlotWidth;window.kitHudSlotData=kitHudSlotData;
+(function(){const st=document.createElement("style");st.id="kit-hudslot";st.textContent=`
+header.hud>.kstm>.khslot{position:relative;flex:0 0 var(--khslot-w,auto);width:var(--khslot-w,auto);box-sizing:border-box;justify-content:center;height:18px;min-height:0;margin:0 0 0 2px;padding:0 7px;font:inherit;font-size:.76rem;line-height:16px;cursor:pointer;overflow:visible;white-space:nowrap}
+header.hud>.kstm>.khslot::after{content:"";position:absolute;left:-4px;right:-4px;top:-6px;bottom:-20px}
+header.hud>.kstm>.khslot:focus-visible{outline:2px solid var(--gold,#b8892e);outline-offset:1px}
+.kitpg-row .khslot{position:relative;width:var(--khslot-w,auto);box-sizing:border-box;justify-content:center;height:18px;padding:0 7px;line-height:16px;font:inherit;font-size:.76rem;cursor:pointer}`;document.head.appendChild(st)})();
+addEventListener("resize",()=>{try{const r=document.getElementById("hud-mood");delete document.documentElement.dataset.khw;if(r)kitHudSlotMount(r)}catch(e){}});
+try{document.fonts&&document.fonts.ready.then(()=>{const r=document.getElementById("hud-mood");delete document.documentElement.dataset.khw;if(r)kitHudSlotMount(r)})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kit-stat";st.textContent=`
 :root{--kst-l:15px;--kst-n:21px;--kst-b:4px}
 .kstrow{display:flex;align-items:flex-start;gap:0 12px;min-width:0}
