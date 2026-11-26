@@ -1232,6 +1232,44 @@
     "review/rerun-E-S1-E-S1-R1-random-3-3676043525-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-skilled-3-2243047412",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "skilled",
+   "botHarness": "sens",
+   "kiep": 3,
+   "seed": 2243047412,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "2df8f5fa"
+   },
+   "live": "GAME BUILD b7dcbbd06e03",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Thái y đoán là hoàng tử. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",
+   "death": true,
+   "age": 21,
+   "year": 4,
+   "rank": 0,
+   "buoi": 505,
+   "steps": 18019,
+   "taps": 2920,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "death in childbirth (Hồng nhan bạc mệnh), game-imposed",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-skilled-3-2243047412-moments.md",
+    "review/rerun-E-S1-E-S1-R1-skilled-3-2243047412-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
