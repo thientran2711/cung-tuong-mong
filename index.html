@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d1981654+","t":"2026-11-26T07:41Z","c":"charge-followups report (STEP 3: b table A extras, c Trình Hoàng hậu per proven piece, a LAW 6c seize ledger; tests + videos)","b":"531c3f69469b","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"f9fa2cef+","t":"2026-11-26T08:04Z","c":"charge-followups BIG review: PASS -rv 2a2538b3 (F1 bồi conserves bạc), D4 merge delta PASS acd6932d","b":"4837f82a1965","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2430,7 +2430,7 @@ function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
   if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});const r0=rkOf(p);if(r0>0&&!punTwice(p)){seatPut(p,punDown(p));punMark(p,r0)}p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);if(p===S)punNote({kind:rkOf(S)<r0?"giang":"camtuc",why,from:r0,to:S.rank,m:BAL.eff.j8.mercyConfine});return}
   if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);return die(why)}
-  if(has("nhantu")&&npcWhy("empMercy",{p})){p.coldR=coldRankIn(p);p.out=true;p.coldWk=punNow();if(p.queen){p.queen=false;p.rank=6}log(`<span class="r">${p.name}: ${why}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
+  if(has("nhantu")&&npcWhy("empMercy",{p})){p.out=true;p.coldR=coldRankIn(p)/* rank before the fall (jpun; reads rank, not out) */;p.coldWk=punNow();if(p.queen){p.queen=false;p.rank=6}log(`<span class="r">${p.name}: ${why}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
   p.alive=false;if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
 /* a proven crime (accusation with evidence) */
 /* punish-reason (D1): ONE punishment = lãnh cung OR one rank down (never two ranks, never two punishments the same day: punTwice → cấm túc);
@@ -5338,7 +5338,7 @@ function manWit(p){const L=(p===S?liveRivals(true):[S].concat(liveRivals(true)))
 function manCards(p,m,k){if(!m||!m.alive)return[];const me=p===S,risk=lộRisk(k,p),t=mTinh(m,p),ng=me?"ngươi":p.name;const A=[];
  A.push({id4:"manHail",n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:`hắn quý ngươi +${BAL.relMS.hail}`,go:()=>{relAdd(p,m,BAL.relMS.hail)/* rel-men-servants: a greeting moves both ways (j9 relAdd: m.af / m.afw[id] ↔ her S.rl / v.rl) */}});
  A.push({id4:"manFlirt",n:"Liếc mắt đưa tình",o:odA(p,BAL.odb.j22.odO+(p.sac||0)/BAL.manRd.sacD),x:`tình ý của hắn +12 · có thể bị người thấy, một phi tần nắm ${balAb(BAL.eff.j22.evGo)} chứng cứ của ngươi: ${manWit(p)?"quanh đây có người":"quanh đây vắng người"}`,l:{},
-  go:()=>{mTinhAdd(m,p,12+(nv(m,"flirtTinh")));deedAdd(p,"flirt",null,1,`liếc mắt đưa tình với ${m.name}`);{const v=manWit(p);if(v){/*evok: flirt deed written just before*/evA(v,p,BAL.eff.j22.evGo);if(me)log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`);else if(v===S)log(`Ngươi thấy ${p.name} liếc mắt đưa tình với ${m.name}.`)}}}});
+  go:()=>{mTinhAdd(m,p,12+(nv(m,"flirtTinh")));deedAdd(p,"flirt",null,deedW("flirt"),`liếc mắt đưa tình với ${m.name}`);{const v=manWit(p);if(v){/*evok: flirt deed written just before*/evA(v,p,BAL.eff.j22.evGo);if(me)log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`);else if(v===S)log(`Ngươi thấy ${p.name} liếc mắt đưa tình với ${m.name}.`)}}}});
  if(t>=BAL.tinhLv.warm)A.push({id4:"manToken",n:"Trao khăn tay",o:odA(p,BAL.odb.j22.odO_2+(p.tamco||0)/BAL.manRd.tcD),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{mTinhAdd(m,p,15);if(me){m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}else{m.lw=m.lw||{};m.lw[p.id]=(m.lw[p.id]||0)+1}}});
  if(t>=BAL.tinhLv.close){const w=watcher(p);A.push({id4:"manTryst",n:"Hẹn gặp riêng",o:w?oddsCl(100-risk):0,lock:!w,inner:1,t:`cần một người hầu trung thành (thiện cảm ${balAb(BAL.loy.close)}+, Chủ tin ${balAb(BAL.tinLv.watch)}+) canh cửa`,act:1,x:`đêm ấy kín đáo: Sức ${balSg(BAL.eff.j22.sucTryst)}, hắn thành người che chở · có thai: ${chanceW(trystCh(p))} · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk,p)})}
  if(t>=BAL.tinhLv.warm)A.push({id4:"manCut",n:"Cắt đứt",o:100,fix:1,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{mTinhAdd(m,p,0,1)}});
@@ -8066,8 +8066,8 @@ function cnvSpyX(m,noPay){return `${noPay?"":`mỗi tháng Bạc +${BAL.ag.why.s
 PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)return null;
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:cnvPend(S,cnvBribeOpts(S,v,m,BAL.coopBribe.pay))}};
 function cnvBribeOpts(a,v,m,pay){return [
-  {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);affAdd(a,v,BAL.relMS.bribe);return""}},
-  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name} · kèm: ${v.name} ghi hận ngươi, thiện cảm ${balSg(-BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,-1);if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
+  {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);affAdd(a,v,BAL.relMS.bribe);return""}},
+  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name} · kèm: ${v.name} ghi hận ngươi, thiện cảm ${balSg(-BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,-1);if(a===S)deedAdd(v,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
   {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${v.name}, thiện cảm ${balSg(BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,1);return""}}]}
 /* law 2 «Bạc lạ» (D #7 19/11): the briber's thiện cảm for the servant who refused — ONE constant BAL.coopBribe.grudge, sign by the answer (an NPC servant without an id: no regard row) */
 function cnvBribeAff(v,a,sg){try{if(v&&a&&(a===S||a.id!=null))affAdd(v,a,sg*BAL.coopBribe.grudge)}catch(e){}}
@@ -39319,7 +39319,13 @@ BAL.charge={C:{
  uhPay:20,mcFire:2,
  /* charge-followups (c): «Trình Hoàng hậu» odds = base + the Hoàng hậu's thiện cảm to the one presenting / affD + per × the pieces of the PROVEN charge
     (jaudit card + j78 legacy; was 35 + aff/2 + 8 × the TOTAL pieces, typed) — like Tố giác (accW per piece of the proven charge) */
- trinh:{base:35,affD:2,per:8}};
+ trinh:{base:35,affD:2,per:8},
+ /* charge-followups (d) LAW 4 ONE CORE (DELTA rv parked item): the weight of every deed (jtruth). actW = deeds of harmful acts written by runAct
+    (was jtruth DEEDW, now an alias of this table: a key here makes runAct record a deed); w = every other deed kind (was typed in each
+    deedAdd / deedOnce / mlCaught call). The weight = the evidence cap of that deed (jcharge chCapC) and its share of the «old» schemes. */
+ actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
+  rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
+ w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
 /* j68sd: ORDER THIN P4 composed j68 seeds (DATA ONLY). Built by dev/build/j68sd_build.py from dev/handover/content/thin/j68seeds*.md;
    schema dev/handover/reports/thin.md «## API P4»; validator dev/test/j68seeds_validate.py; engine j68c.js. Do not hand-edit. */
 const J68SEEDS=[
@@ -52226,7 +52232,7 @@ P2H.briber=m=>briberRes(m);
 function brbAff(n){const id=fp();S.rl=S.rl||{};S.rl[id]=cl((S.rl[id]||0)+n,-100,100)}
 function briberRes(m){const a=m.o!=null?{o:m.o}:(CW.brb||{})[m.rid];if(!a)return;if(CW.brb)delete CW.brb[m.rid];if(S.dead)return;const s=fSrvE(),o=RV(a.o),B=BAL.coopBribe,nm=esc(friendName()),on=esc(o?o.name:"cung khác");let h="";
  if(m.no)h=`<p><b>${nm}</b> nay không còn hầu ở cung ${on}.</p>`;
- else{try{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${o?o.name:"cung khác"}`)}catch(e){}
+ else{try{deedAdd(S,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${o?o.name:"cung khác"}`)}catch(e){}
   if(m.ok){apply({bac:-B.pay});if(s)s.spyFor="me";h=`<p><b>${nm}</b> nhận bạc, thành tai mắt của ngươi trong cung ${on}.</p><p>${fmt({bac:-B.pay})}</p>`}
   else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,BAL.eff.jcoopworld.evBriber);relAdd(S,o,BAL.eff.jcoopworld.briber)}brbAff(-B.grudge);h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
   else{brbAff(B.grudge);h=`<p><b>${nm}</b> từ chối, trả lại bạc.</p>`}}
@@ -54070,7 +54076,7 @@ function tsbBulNpc(a,t,kind){/* an NPC target decides by the same odds (NPC rule
 /* ---------------- the planned harm: NPC -> anyone: scheduled with an omen (thathu, phonghoa) ---------------- */
 const TSB_PLAN=["thathu","phonghoa"];
 (function(){const r0=runAct;runAct=function(a,t,k){
- try{if(!TSB.now&&a&&a!==S&&t&&TSB_PLAN.includes(k)&&S&&!S.dead){S.tsbTh=S.tsbTh||[];if(!S.tsbTh.some(x=>x.a===key(a)&&x.t===key(t)&&x.k===k)){S.tsbTh.push({k,a:key(a),t:key(t),due:tsbWk()+(hasT(a,"Kín đáo")?BAL.ag.why.bul.wait[1]:BAL.ag.why.bul.wait[0]),seen:0});try{deedAdd(a,"plot",t,1,`bày mưu ${deedTxt(k,t)}`)}catch(e){}}return ""}
+ try{if(!TSB.now&&a&&a!==S&&t&&TSB_PLAN.includes(k)&&S&&!S.dead){S.tsbTh=S.tsbTh||[];if(!S.tsbTh.some(x=>x.a===key(a)&&x.t===key(t)&&x.k===k)){S.tsbTh.push({k,a:key(a),t:key(t),due:tsbWk()+(hasT(a,"Kín đáo")?BAL.ag.why.bul.wait[1]:BAL.ag.why.bul.wait[0]),seen:0});try{deedAdd(a,"plot",t,deedW("plot"),`bày mưu ${deedTxt(k,t)}`)}catch(e){}}return ""}
   if(!TSB.now&&a&&a!==S&&t===S&&(k==="batnat"||k==="uyhiep")&&tsbOn()&&!Q.some(m=>m.pid==="tsbBul")){const r=tsbBulRec(a,S);if((r.stop||0)>tsbWk())return "";const want=k==="uyhiep"?null:((npcWhy("bulWant",{a,t:S})||{}).place||null);
    tsbCard("tsbBul",{a:a.id,k,ix:want?want[1]:-1,n:r.n},k==="uyhiep"?"Bị uy hiếp đòi của":"Bị ép nộp của");return ""}}catch(e){console.error("tsb runAct",e)}
  return r0.apply(this,arguments)}})();
@@ -54202,7 +54208,7 @@ function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
   }catch(e){console.error("tsb approach",e)}return m}})();
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){const m=a0.apply(this,arguments);try{if(m&&m.opts&&m.t==="Thái hậu triệu"){m.opts=[{n:"Đến ngay",fx:{},x:`tốn: 2 khắc · Sức ${balSg(BAL.eff.jtsb.sucGo_3)} · thành: Thái hậu với ngươi ${balSg(BAL.eff.jtsb.thCall)}`,go:()=>{apply({th:BAL.eff.jtsb.thCall,suc:BAL.eff.jtsb.sucGo_3});tsbKh(2)}},{n:"Cáo bệnh",fx:{},x:`thành: giữ trọn khắc và Sức buổi này · Mất: Thái hậu với ngươi ${balSg(BAL.eff.jtsb.thCall_2)}`,go:()=>apply({th:BAL.eff.jtsb.thCall_2})}];m.optLayout="rows"}
   else if(m&&m.opts&&/xin theo ngươi/.test(String(m.h||""))){const H=String(m.h);const vic=liveRivals(true).find(v=>(v.staff||[]).some(s=>s.name&&H.includes(s.name)&&H.includes(v.name)));const s=vic&&(vic.staff||[]).find(x=>x.name&&H.includes(x.name));if(s&&vic){
-   m.opts=[{n:"Thu làm tai mắt",fx:{bac:BAL.eff.jtsb.bacFx},x:`tốn: Bạc ${balSg(BAL.eff.jtsb.bacFx)} · thành: có tai mắt trong cung ${vic.name} · kèm: kẻ đã phản chủ cũ cũng bán tin ngươi, ${vic.name} nắm ${balAb(BAL.eff.jtsb.evGo_4)} chứng cứ của ngươi: ${chanceW(BAL.odb.jtsb.leakO)}`,go:()=>{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${vic.name}`);s.spyFor="me";if(roll(BAL.odb.jtsb.leakO))/*evok: servant bribe deed*/evA(vic,S,BAL.eff.jtsb.evGo_4)}},{n:"Đuổi về",fx:{},x:`thành: không dính líu, không lộ gì`}];m.optLayout="rows"}}}catch(e){console.error("tsb approach2",e)}return m}})();
+   m.opts=[{n:"Thu làm tai mắt",fx:{bac:BAL.eff.jtsb.bacFx},x:`tốn: Bạc ${balSg(BAL.eff.jtsb.bacFx)} · thành: có tai mắt trong cung ${vic.name} · kèm: kẻ đã phản chủ cũ cũng bán tin ngươi, ${vic.name} nắm ${balAb(BAL.eff.jtsb.evGo_4)} chứng cứ của ngươi: ${chanceW(BAL.odb.jtsb.leakO)}`,go:()=>{deedAdd(S,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${vic.name}`);s.spyFor="me";if(roll(BAL.odb.jtsb.leakO))/*evok: servant bribe deed*/evA(vic,S,BAL.eff.jtsb.evGo_4)}},{n:"Đuổi về",fx:{},x:`thành: không dính líu, không lộ gì`}];m.optLayout="rows"}}}catch(e){console.error("tsb approach2",e)}return m}})();
 /* the cold-palace letter: helping a deposed consort is kind, but the court notices who sides with her (Hoàng hậu) */
 (function(){const p0=PEND.coldletter;if(!p0)return;PEND.coldletter=p=>{const d=p0(p);try{if(d&&d.o&&d.o[0]&&queenP()&&queenP()!==S){const g=d.o[0];g.fx=Object.assign({},g.fx,{hh:-3});g.x=(g.x?g.x+" · ":"")+"Hoàng hậu không vui vì ngươi dính dáng người lãnh cung"}}catch(e){}return d}})();
 /* the mocker's flag: an easy target draws more bullying from her (same rule for everyone through mindMenu) */
@@ -54396,7 +54402,7 @@ function petCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;if(d.kit&&
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsbPet/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.kit=d.kit;if(q.kit&&!q.kit.facts)q.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];q.stage=undefined}}})}catch(e){}return out}})();
 PEND.tsbPetGift=pp=>{if(!S)return null;pp.t=petK(pp.t);const T=PET[pp.t];if(!T)return null;const O=[];
  if(pp.src==="man"){const m=typeof manById==="function"?manById(pp.m):null;if(!m)return null;const risk=typeof lộRisk==="function"?lộRisk("home"):25;
-  O.push({n:"Nhận",fx:{},x:`${word(100-risk)} · ${petLine(pp.t)} · hắn vui, tình ý +5 · hỏng: có người dò ra nguồn quà, Danh ${balSg(BAL.eff.jpet.danhGo)}, một phi tần nắm ${balAb(BAL.eff.jpet.evGo)} chứng cứ của ngươi`,go:()=>{deedAdd(S,"mangift",null,1,`lén nhận quà của ${m.name}`);petTake(pp.t,`${m.name} gửi tặng`,"man");m.tinh=cl((m.tinh||0)+5,0,100);if(!roll(BAL.odb.jpet.rbGo-risk)){apply({danh:BAL.eff.jpet.danhGo});const v=liveRivals(true).sort((x,y)=>(y.mat||0)-(x.mat||0))[0];if(v)/*evok: mangift deed*/evA(v,S,BAL.eff.jpet.evGo);log(`<span class="r">Có người dò ra ${T.n.replace(/^./,c=>c.toLowerCase())} là quà ${m.name} gửi; lời ra tiếng vào.</span>`)}else log(`Ngươi lặng lẽ nhận ${T.n.replace(/^./,c=>c.toLowerCase())} ${m.name} gửi tặng.`)}});
+  O.push({n:"Nhận",fx:{},x:`${word(100-risk)} · ${petLine(pp.t)} · hắn vui, tình ý +5 · hỏng: có người dò ra nguồn quà, Danh ${balSg(BAL.eff.jpet.danhGo)}, một phi tần nắm ${balAb(BAL.eff.jpet.evGo)} chứng cứ của ngươi`,go:()=>{deedAdd(S,"mangift",null,deedW("mangift"),`lén nhận quà của ${m.name}`);petTake(pp.t,`${m.name} gửi tặng`,"man");m.tinh=cl((m.tinh||0)+5,0,100);if(!roll(BAL.odb.jpet.rbGo-risk)){apply({danh:BAL.eff.jpet.danhGo});const v=liveRivals(true).sort((x,y)=>(y.mat||0)-(x.mat||0))[0];if(v)/*evok: mangift deed*/evA(v,S,BAL.eff.jpet.evGo);log(`<span class="r">Có người dò ra ${T.n.replace(/^./,c=>c.toLowerCase())} là quà ${m.name} gửi; lời ra tiếng vào.</span>`)}else log(`Ngươi lặng lẽ nhận ${T.n.replace(/^./,c=>c.toLowerCase())} ${m.name} gửi tặng.`)}});
   O.push({n:"Trả lại",fx:{},x:`thành: giữ mình trong sạch, không ai dò được gì · Mất: hắn buồn, tình ý -5`,go:()=>{m.tinh=cl((m.tinh||0)-5,0,100);log(`Ngươi trả lại món quà của ${m.name}.`)}});
   return{t:`<p>Một thái giám quen việc lén đưa đến cung ngươi ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}); kèm mảnh giấy ghi tên ${m.name}.</p>`,o:O,headArt:petArtOf(pp.t,"","qua-tang"),kit:petPicK(pp.t),title:"Quà gửi lén"}}
  const who={emp:"Hoàng thượng",th:"Thái hậu",hh:"Hoàng hậu",trib:"Hoàng thượng"}[pp.src]||"Hoàng thượng";
@@ -74487,30 +74493,29 @@ if(typeof log==="function"){const l0=log;log=function(h){return l0.call(this,tx(
       (Kính sự phòng record, a witness, Thái y, evidence on the framer, Cung Chính ti). Cleared → the framer is exposed: Đức −, Danh −,
       punished, and the victim holds 2 true pieces on her. The player chooses her defence (PEND.vuoan, like PEND.wdframe).
    ============================================================================================================= */
-const DEEDW={poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
- rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,
- /* D4 #3 (dup-report §4.1 FOR FOREMAN D 1): acts that left no deed, so no piece could ever exist (law 6a) */
- rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1};
+const DEEDW=BAL.charge.actW;/* charge-followups (d) LAW 4: the act deed weights live in BAL.charge.actW (was a typed table here) */
+/* the weight of a deed kind: BAL.charge.actW (acts) or BAL.charge.w (every other kind); one source for every deedAdd / deedOnce / mlCaught */
+function deedW(k){const B=BAL.charge;return (B.actW[k]!=null?B.actW[k]:B.w[k])||B.w.plot}
 const DEEDX={plot:"bày mưu hại người",sbribe:"mua chuộc người hầu của người khác",sthreat:"dọa người hầu của người khác",illbuy:"lén mua đồ cấm",
  flirt:"liếc mắt đưa tình với nam nhân",mangift:"lén nhận quà của nam nhân",story:"việc xấu trong quá khứ",old:"từng bày mưu hại người",xx:"ăn vận xa xỉ quá bổng lộc phẩm mình"};
 function deedTxt(k,t){try{if(ACT[k]&&t)return j78act(k,t)}catch(e){}return DEEDX[k]||(ACT[k]?ACT[k].n.toLowerCase():"việc sai trái")}
-function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||DEEDW[k]||1,at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;return d}
+function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||deedW(k),at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;return d}
 function deedUndo(p,d){if(!p||!d)return;const i=(p.wrongs||[]).indexOf(d);if(i>=0){p.wrongs.splice(i,1);p.dw=Math.max(0,(p.dw||0)-d.w)}}
 function deedOnce(p,id,k,w,x){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return;p.dkeys.push(id);if(p.dkeys.length>60)p.dkeys.shift();deedAdd(p,k,null,w,x)}
 /* the wrongs the world already shows, written into the ledger once (so the cap never drops when the thing is hidden again) */
 function deedSync(p){if(!p||!S)return;try{
- if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",2,"tư thông với nam nhân")}
- else{if(p.scandal)deedOnce(p,"sc","tryst",2,"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",2,`tư thông${m?" với "+m.name:""}`)}}
- if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",2,"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
- for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
- if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${itm(e.k).n})`);
+ if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",deedW("tryst"),"tư thông với nam nhân")}
+ else{if(p.scandal)deedOnce(p,"sc","tryst",deedW("tryst"),"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",deedW("tryst"),`tư thông${m?" với "+m.name:""}`)}}
+ if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",deedW("pm"),"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
+ for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",deedW("il"),`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
+ if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",deedW("vp"),`dùng đồ vượt phẩm (${itm(e.k).n})`);
  /* xa xỉ (D4 #3, dup-report §4.1): dressed over her rank's allowance (the same luxOf as act xx Tố xa xỉ) = a real wrong, once per look */
- try{const x=typeof luxOf==="function"?luxOf(p):null;if(x&&x.sc>x.bud)deedOnce(p,"xx:"+(typeof dsSig==="function"?dsSig(p):wk()),"xx",1,DEEDX.xx)}catch(e){}
- if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",1,`bày mưu ${deedTxt(p.plan.k,t)}`)}
+ try{const x=typeof luxOf==="function"?luxOf(p):null;if(x&&x.sc>x.bud)deedOnce(p,"xx:"+(typeof dsSig==="function"?dsSig(p):wk()),"xx",deedW("xx"),DEEDX.xx)}catch(e){}
+ if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",deedW("plot"),`bày mưu ${deedTxt(p.plan.k,t)}`)}
 }catch(e){}}
 /* how much true evidence can exist against p (each holder separately) */
 function deedCap(p){if(!p)return 0;deedSync(p);const s=(p.dws||0);return (p.dw||0)+Math.max(0,(p.schemes||0)-s)*2}
-function deedsOf(p){if(!p)return[];deedSync(p);const L=(p.wrongs||[]).slice();const old=Math.max(0,(p.schemes||0)-(p.dws||0));for(let i=0;i<old;i++)L.unshift({k:"old",w:2,x:DEEDX.old,at:null});return L}
+function deedsOf(p){if(!p)return[];deedSync(p);const L=(p.wrongs||[]).slice();const old=Math.max(0,(p.schemes||0)-(p.dws||0));for(let i=0;i<old;i++)L.unshift({k:"old",w:deedW("old"),x:DEEDX.old,at:null});return L}
 /* evidence that was asked for but had no deed behind it (test counters only; never saved) */
 function evMiss(h,t,n){try{window.__evMiss=(window.__evMiss||0)+n;if(t===S)window.__evMissMe=(window.__evMissMe||0)+n}catch(e){}}
 /* rumours: weak, never proof */
@@ -74531,11 +74536,11 @@ function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(r
  const s0=a.schemes||0;const d=deedAdd(a,k,t,w);let r="";try{r=r0.apply(this,arguments)}catch(e){deedUndo(a,d);throw e}
  if(!r)deedUndo(a,d);else if((a.schemes||0)>s0){a.dws=(a.dws||0)+1}return r}})();
 (function(){if(typeof newPlot70!=="function")return;const n0=newPlot70;newPlot70=function(a,t,m){let d=null;try{const z=j70();const k=M70[m]?M70[m].k:"";
-  if(a&&t){const id=((z&&z.n)||0)+1;a.dkeys=a.dkeys||[];a.dkeys.push("pl:j70:"+id);d=deedAdd(a,"plot",t,1,`bày mưu ${deedTxt(k,t)}`)}}catch(e){}
+  if(a&&t){const id=((z&&z.n)||0)+1;a.dkeys=a.dkeys||[];a.dkeys.push("pl:j70:"+id);d=deedAdd(a,"plot",t,deedW("plot"),`bày mưu ${deedTxt(k,t)}`)}}catch(e){}
  const p=n0.apply(this,arguments);if(!p&&d)deedUndo(a,d);return p}})();
 (function(){for(const [fn,k] of [["bribeServ","sbribe"],["plantServ","sbribe"],["threatServ","sthreat"]]){const f0=window[fn];if(typeof f0!=="function")continue;
- window[fn]=function(a,x){const t=fn==="plantServ"?x:(typeof ownerOf==="function"?ownerOf(x):null);const d=deedAdd(a,k,null,1,t?`${DEEDX[k].replace(/ của người khác$/,"")} của ${j78who(t)}`:DEEDX[k]);/* charge-followups (b): the deed names the servant bought (d.s) and her palace (d.o) — a proven Mua chuộc dismisses THAT servant */if(d){if(t)d.o=key(t);if(fn!=="plantServ"&&x&&x.sid)d.s=x.sid}const r=f0.apply(this,arguments);if(!r)deedUndo(a,d);return r}}})();
-(function(){if(typeof illBuy!=="function")return;const i0=illBuy;illBuy=function(p,r,k){const d=deedAdd(p,"illbuy",null,1,`lén mua ${IT[k]?itm(k).n:"đồ cấm"}`);const x=i0.apply(this,arguments);if(!x)deedUndo(p,d);return x}})();
+ window[fn]=function(a,x){const t=fn==="plantServ"?x:(typeof ownerOf==="function"?ownerOf(x):null);const d=deedAdd(a,k,null,deedW(k),t?`${DEEDX[k].replace(/ của người khác$/,"")} của ${j78who(t)}`:DEEDX[k]);/* charge-followups (b): the deed names the servant bought (d.s) and her palace (d.o) — a proven Mua chuộc dismisses THAT servant */if(d){if(t)d.o=key(t);if(fn!=="plantServ"&&x&&x.sid)d.s=x.sid}const r=f0.apply(this,arguments);if(!r)deedUndo(a,d);return r}}})();
+(function(){if(typeof illBuy!=="function")return;const i0=illBuy;illBuy=function(p,r,k){const d=deedAdd(p,"illbuy",null,deedW("illbuy"),`lén mua ${IT[k]?itm(k).n:"đồ cấm"}`);const x=i0.apply(this,arguments);if(!x)deedUndo(p,d);return x}})();
 
 /* ---------- 2. picking whom a piece of evidence is about: only someone with an unproven wrong ---------- */
 function evRoom(h,t){return t&&h!==t?Math.max(0,deedCap(t)-evG(h,t)):0}
@@ -74605,7 +74610,7 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
 /* an event's own story makes the deed true (the event text says she did it): written in her ledger, then the evidence */
 function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.story);return evA(S,t,n)}
 /* caught in the act (j8 caught): the attempt itself is the wrong; written once if the act did not already write it this week */
-(function(){if(typeof caught!=="function")return;const c0=caught;caught=function(a,t,ps,desc){try{if(a&&t&&a!==t){const L=a.wrongs||[];const d=L[L.length-1];if(!(d&&d.at===wk()&&d.t===key(t)))deedAdd(a,"caught",t,2,desc||"mưu hại người")}}catch(e){}return c0.apply(this,arguments)}})();
+(function(){if(typeof caught!=="function")return;const c0=caught;caught=function(a,t,ps,desc){try{if(a&&t&&a!==t){const L=a.wrongs||[];const d=L[L.length-1];if(!(d&&d.at===wk()&&d.t===key(t)))deedAdd(a,"caught",t,deedW("caught"),desc||"mưu hại người")}}catch(e){}return c0.apply(this,arguments)}})();
 /* test counters for the other frame road (Giá họa, j92): every resolved frame-up, and the ones the victim cleared */
 (function(){if(typeof wdFrameResolve!=="function")return;const w0=wdFrameResolve;wdFrameResolve=function(a,t){const r=w0.apply(this,arguments);try{if(r||t===S){window.__frames=(window.__frames||0)+1;if(t===S)window.__framesMe=(window.__framesMe||0)+1;
  if(/minh oan được|không thấy gì|không thành/.test(r||"")){window.__framesClear=(window.__framesClear||0)+1;if(t===S)window.__framesMeClear=(window.__framesMeClear||0)+1}}}catch(e){}return r}})();
@@ -76274,7 +76279,7 @@ function cyRep(p,k){const mi=cyCur()+k,t=cyBase(p).t;if(cyAge(p)>=50)return{s:"o
  if(preg&&k0&&cyCover(p)&&cw-p.pregWk<=((B().rep||{}).luiCover||3))return{s:"ok",d:cyDaysM(p,mi)}; /* báo lùi: the first missed cycle still reads as reported (late) */
  if(preg&&!cyHideOf(p))return{s:"miss"};return{s:"ok",d:cyDaysM(p,mi),fake:!!(p.preg&&p.fake)}}
 /* evidence-truth (main, jtruth): evidence only for a real wrong in the ledger; write the deed first, announce what evA really gave */
-function cyDeed(p,id,k,x){try{if(typeof deedOnce==="function")deedOnce(p,id,k,1,x)}catch(e){}}
+function cyDeed(p,id,k,x){try{if(typeof deedOnce==="function")deedOnce(p,id,k,deedW(k),x)}catch(e){}}
 function cyCover(p){p=p||S;const c=cybOf(p);return !!c&&c.back!=null&&p.pregWk!=null&&p.pregWk-c.back>=0&&p.pregWk-c.back<=((B().rep||{}).luiCover||3)}
 function cyRepText(r){if(r.s==="old")return kitChip("đã dứt kỳ","n");if(r.s==="wait")return `chưa tới kỳ (${TU[r.t]})`;if(r.s==="miss")return kitChip("không báo","r");return `đã báo, ${dName(r.d)}`}
 function cyNights(p){const m0=wk()-(S.tuan||0);return (p.nightLog||[]).filter(w=>w>=m0&&w<=wk()).length}
@@ -78129,7 +78134,7 @@ function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"
   if(see)ev+=`${a.name} (cung ${NM(p)}) và ${b.name} (cung ${NM(t)}) giành việc ở Nội vụ phủ, cào cấu nhau giữa sân; ${l.name} bị tát. `}
  else if(k==="frame"){if(roll(B.frameCatch)){/* caught: b is cleared, a is punished by her own master to save face */
    a.loyal=cl(a.loyal-B.frameLoy,0,100);mlFx(typeof penGive==="function"?penGive:null,a,"quy","bị bắt quả tang vu oan người khác",p);
-   const d=mlCaught(p,t,"frame",1,`sai người hầu vu oan cung nữ cung ${t===S?"ta":t.name}`);
+   const d=mlCaught(p,t,"frame",deedW("mlframe"),`sai người hầu vu oan cung nữ cung ${t===S?"ta":t.name}`);
    if(see)ev+=`${a.name} (cung ${NM(p)}) vu cho ${b.name} (cung ${NM(t)}) ăn cắp, bị ${t===S?"ngươi":t.name} tra ra; ${a.name} bị phạt quỳ${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
   else{b.loyal=cl(b.loyal-B.frameLoy,0,100);b.trouble=wk();mlFx(typeof penGive==="function"?penGive:null,b,"quy","bị vu ăn cắp",t);
    if(roll(B.frameOut)&&t!==S){t.staff.splice(t.staff.indexOf(b),1);mlC("frameOut")}if(see)ev+=`${a.name} (cung ${NM(p)}) vu cho ${b.name} (cung ${NM(t)}) ăn cắp; ${b.name} bị phạt quỳ${t===S?" (ngươi có thể Che chở ở Hậu cung › Cung nhân)":""}. `}}
@@ -78157,9 +78162,9 @@ function mlHitDo(p,t,s,k,caught){const B=mlB();mlC("hit_"+k);let ev="";const see
  if(k==="bribe"){const r=bribeServ(p,s);if(t===S&&r&&s.spyFor!==key(p))ev+=r}
  else if(k==="beat"){mlFx(typeof slapGive==="function"?slapGive:null,s,p,`bị ${PN} đánh`);s.loyal=cl(s.loyal+B.beatLoy,0,100);
   /* a beating is done in the open: always a true deed; the victim's mistress resents it, and holds proof of it at hitEv % */
-  deedAdd(p,"mlbeat",t,1,`đánh người hầu cung ${t===S?"ta":t.name} giữa đường`);oanAdd(t,p,B.caughtOan);const d=roll(B.hitEv)?evA(t,p,B.evN):0;mlC("ev",d);if(t===S)mlC("evMe",d);
+  deedAdd(p,"mlbeat",t,deedW("mlbeat"),`đánh người hầu cung ${t===S?"ta":t.name} giữa đường`);oanAdd(t,p,B.caughtOan);const d=roll(B.hitEv)?evA(t,p,B.evN):0;mlC("ev",d);if(t===S)mlC("evMe",d);
   if(see)ev+=`${PB} gặp ${s.name} (cung ${NM(t)}) giữa đường, bắt quỳ, sai vả miệng${t===S?`; nàng về khóc với ngươi (thiện cảm +${B.beatLoy})${d?`; chứng cứ về ${p.name} +${d}`:""}`:""}. `}
- else if(caught==null?roll(B.hitCatch):caught){/* caught: the maid is cleared, the consort behind it is exposed */const d=mlCaught(p,t,"hframe",1,`vu oan người hầu cung ${t===S?"ta":t.name}`,1);
+ else if(caught==null?roll(B.hitCatch):caught){/* caught: the maid is cleared, the consort behind it is exposed */const d=mlCaught(p,t,"hframe",deedW("mlhframe"),`vu oan người hầu cung ${t===S?"ta":t.name}`,1);
   if(see)ev+=`Người của ${PN} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ, bị tra ra; ${PN} mất mặt${t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
  else{s.loyal=cl(s.loyal-B.frameLoy,0,100);s.trouble=wk();mlFx(typeof penGive==="function"?penGive:null,s,"quy",`bị ${PN} vu tội`,p);if(t!==S&&roll(B.frameOut)){t.staff.splice(t.staff.indexOf(s),1);mlC("frameOut")}
   if(see)ev+=`Người của ${PN} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ; ${s.name} bị phạt${t===S?" (ngươi có thể Che chở ở Hậu cung › Cung nhân)":""}. `}
@@ -100689,7 +100694,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="531c3f69469b";window.CTM_BUILD=BUILD;
+const BUILD="4837f82a1965";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -205,7 +205,7 @@ function cyRep(p,k){const mi=cyCur()+k,t=cyBase(p).t;if(cyAge(p)>=50)return{s:"o
  if(preg&&k0&&cyCover(p)&&cw-p.pregWk<=((B().rep||{}).luiCover||3))return{s:"ok",d:cyDaysM(p,mi)}; /* báo lùi: the first missed cycle still reads as reported (late) */
  if(preg&&!cyHideOf(p))return{s:"miss"};return{s:"ok",d:cyDaysM(p,mi),fake:!!(p.preg&&p.fake)}}
 /* evidence-truth (main, jtruth): evidence only for a real wrong in the ledger; write the deed first, announce what evA really gave */
-function cyDeed(p,id,k,x){try{if(typeof deedOnce==="function")deedOnce(p,id,k,1,x)}catch(e){}}
+function cyDeed(p,id,k,x){try{if(typeof deedOnce==="function")deedOnce(p,id,k,deedW(k),x)}catch(e){}}
 function cyCover(p){p=p||S;const c=cybOf(p);return !!c&&c.back!=null&&p.pregWk!=null&&p.pregWk-c.back>=0&&p.pregWk-c.back<=((B().rep||{}).luiCover||3)}
 function cyRepText(r){if(r.s==="old")return kitChip("đã dứt kỳ","n");if(r.s==="wait")return `chưa tới kỳ (${TU[r.t]})`;if(r.s==="miss")return kitChip("không báo","r");return `đã báo, ${dName(r.d)}`}
 function cyNights(p){const m0=wk()-(S.tuan||0);return (p.nightLog||[]).filter(w=>w>=m0&&w<=wk()).length}

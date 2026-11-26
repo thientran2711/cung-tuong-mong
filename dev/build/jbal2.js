@@ -2294,4 +2294,10 @@ BAL.charge={C:{
  uhPay:20,mcFire:2,
  /* charge-followups (c): «Trình Hoàng hậu» odds = base + the Hoàng hậu's thiện cảm to the one presenting / affD + per × the pieces of the PROVEN charge
     (jaudit card + j78 legacy; was 35 + aff/2 + 8 × the TOTAL pieces, typed) — like Tố giác (accW per piece of the proven charge) */
- trinh:{base:35,affD:2,per:8}};
+ trinh:{base:35,affD:2,per:8},
+ /* charge-followups (d) LAW 4 ONE CORE (DELTA rv parked item): the weight of every deed (jtruth). actW = deeds of harmful acts written by runAct
+    (was jtruth DEEDW, now an alias of this table: a key here makes runAct record a deed); w = every other deed kind (was typed in each
+    deedAdd / deedOnce / mlCaught call). The weight = the evidence cap of that deed (jcharge chCapC) and its share of the «old» schemes. */
+ actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
+  rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
+ w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};

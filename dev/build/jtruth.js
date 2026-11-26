@@ -15,30 +15,29 @@
       (Kính sự phòng record, a witness, Thái y, evidence on the framer, Cung Chính ti). Cleared → the framer is exposed: Đức −, Danh −,
       punished, and the victim holds 2 true pieces on her. The player chooses her defence (PEND.vuoan, like PEND.wdframe).
    ============================================================================================================= */
-const DEEDW={poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
- rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,
- /* D4 #3 (dup-report §4.1 FOR FOREMAN D 1): acts that left no deed, so no piece could ever exist (law 6a) */
- rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1};
+const DEEDW=BAL.charge.actW;/* charge-followups (d) LAW 4: the act deed weights live in BAL.charge.actW (was a typed table here) */
+/* the weight of a deed kind: BAL.charge.actW (acts) or BAL.charge.w (every other kind); one source for every deedAdd / deedOnce / mlCaught */
+function deedW(k){const B=BAL.charge;return (B.actW[k]!=null?B.actW[k]:B.w[k])||B.w.plot}
 const DEEDX={plot:"bày mưu hại người",sbribe:"mua chuộc người hầu của người khác",sthreat:"dọa người hầu của người khác",illbuy:"lén mua đồ cấm",
  flirt:"liếc mắt đưa tình với nam nhân",mangift:"lén nhận quà của nam nhân",story:"việc xấu trong quá khứ",old:"từng bày mưu hại người",xx:"ăn vận xa xỉ quá bổng lộc phẩm mình"};
 function deedTxt(k,t){try{if(ACT[k]&&t)return j78act(k,t)}catch(e){}return DEEDX[k]||(ACT[k]?ACT[k].n.toLowerCase():"việc sai trái")}
-function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||DEEDW[k]||1,at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;return d}
+function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||deedW(k),at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;return d}
 function deedUndo(p,d){if(!p||!d)return;const i=(p.wrongs||[]).indexOf(d);if(i>=0){p.wrongs.splice(i,1);p.dw=Math.max(0,(p.dw||0)-d.w)}}
 function deedOnce(p,id,k,w,x){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return;p.dkeys.push(id);if(p.dkeys.length>60)p.dkeys.shift();deedAdd(p,k,null,w,x)}
 /* the wrongs the world already shows, written into the ledger once (so the cap never drops when the thing is hidden again) */
 function deedSync(p){if(!p||!S)return;try{
- if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",2,"tư thông với nam nhân")}
- else{if(p.scandal)deedOnce(p,"sc","tryst",2,"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",2,`tư thông${m?" với "+m.name:""}`)}}
- if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",2,"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
- for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
- if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${itm(e.k).n})`);
+ if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",deedW("tryst"),"tư thông với nam nhân")}
+ else{if(p.scandal)deedOnce(p,"sc","tryst",deedW("tryst"),"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",deedW("tryst"),`tư thông${m?" với "+m.name:""}`)}}
+ if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",deedW("pm"),"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
+ for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",deedW("il"),`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
+ if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",deedW("vp"),`dùng đồ vượt phẩm (${itm(e.k).n})`);
  /* xa xỉ (D4 #3, dup-report §4.1): dressed over her rank's allowance (the same luxOf as act xx Tố xa xỉ) = a real wrong, once per look */
- try{const x=typeof luxOf==="function"?luxOf(p):null;if(x&&x.sc>x.bud)deedOnce(p,"xx:"+(typeof dsSig==="function"?dsSig(p):wk()),"xx",1,DEEDX.xx)}catch(e){}
- if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",1,`bày mưu ${deedTxt(p.plan.k,t)}`)}
+ try{const x=typeof luxOf==="function"?luxOf(p):null;if(x&&x.sc>x.bud)deedOnce(p,"xx:"+(typeof dsSig==="function"?dsSig(p):wk()),"xx",deedW("xx"),DEEDX.xx)}catch(e){}
+ if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",deedW("plot"),`bày mưu ${deedTxt(p.plan.k,t)}`)}
 }catch(e){}}
 /* how much true evidence can exist against p (each holder separately) */
 function deedCap(p){if(!p)return 0;deedSync(p);const s=(p.dws||0);return (p.dw||0)+Math.max(0,(p.schemes||0)-s)*2}
-function deedsOf(p){if(!p)return[];deedSync(p);const L=(p.wrongs||[]).slice();const old=Math.max(0,(p.schemes||0)-(p.dws||0));for(let i=0;i<old;i++)L.unshift({k:"old",w:2,x:DEEDX.old,at:null});return L}
+function deedsOf(p){if(!p)return[];deedSync(p);const L=(p.wrongs||[]).slice();const old=Math.max(0,(p.schemes||0)-(p.dws||0));for(let i=0;i<old;i++)L.unshift({k:"old",w:deedW("old"),x:DEEDX.old,at:null});return L}
 /* evidence that was asked for but had no deed behind it (test counters only; never saved) */
 function evMiss(h,t,n){try{window.__evMiss=(window.__evMiss||0)+n;if(t===S)window.__evMissMe=(window.__evMissMe||0)+n}catch(e){}}
 /* rumours: weak, never proof */
@@ -59,11 +58,11 @@ function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(r
  const s0=a.schemes||0;const d=deedAdd(a,k,t,w);let r="";try{r=r0.apply(this,arguments)}catch(e){deedUndo(a,d);throw e}
  if(!r)deedUndo(a,d);else if((a.schemes||0)>s0){a.dws=(a.dws||0)+1}return r}})();
 (function(){if(typeof newPlot70!=="function")return;const n0=newPlot70;newPlot70=function(a,t,m){let d=null;try{const z=j70();const k=M70[m]?M70[m].k:"";
-  if(a&&t){const id=((z&&z.n)||0)+1;a.dkeys=a.dkeys||[];a.dkeys.push("pl:j70:"+id);d=deedAdd(a,"plot",t,1,`bày mưu ${deedTxt(k,t)}`)}}catch(e){}
+  if(a&&t){const id=((z&&z.n)||0)+1;a.dkeys=a.dkeys||[];a.dkeys.push("pl:j70:"+id);d=deedAdd(a,"plot",t,deedW("plot"),`bày mưu ${deedTxt(k,t)}`)}}catch(e){}
  const p=n0.apply(this,arguments);if(!p&&d)deedUndo(a,d);return p}})();
 (function(){for(const [fn,k] of [["bribeServ","sbribe"],["plantServ","sbribe"],["threatServ","sthreat"]]){const f0=window[fn];if(typeof f0!=="function")continue;
- window[fn]=function(a,x){const t=fn==="plantServ"?x:(typeof ownerOf==="function"?ownerOf(x):null);const d=deedAdd(a,k,null,1,t?`${DEEDX[k].replace(/ của người khác$/,"")} của ${j78who(t)}`:DEEDX[k]);/* charge-followups (b): the deed names the servant bought (d.s) and her palace (d.o) — a proven Mua chuộc dismisses THAT servant */if(d){if(t)d.o=key(t);if(fn!=="plantServ"&&x&&x.sid)d.s=x.sid}const r=f0.apply(this,arguments);if(!r)deedUndo(a,d);return r}}})();
-(function(){if(typeof illBuy!=="function")return;const i0=illBuy;illBuy=function(p,r,k){const d=deedAdd(p,"illbuy",null,1,`lén mua ${IT[k]?itm(k).n:"đồ cấm"}`);const x=i0.apply(this,arguments);if(!x)deedUndo(p,d);return x}})();
+ window[fn]=function(a,x){const t=fn==="plantServ"?x:(typeof ownerOf==="function"?ownerOf(x):null);const d=deedAdd(a,k,null,deedW(k),t?`${DEEDX[k].replace(/ của người khác$/,"")} của ${j78who(t)}`:DEEDX[k]);/* charge-followups (b): the deed names the servant bought (d.s) and her palace (d.o) — a proven Mua chuộc dismisses THAT servant */if(d){if(t)d.o=key(t);if(fn!=="plantServ"&&x&&x.sid)d.s=x.sid}const r=f0.apply(this,arguments);if(!r)deedUndo(a,d);return r}}})();
+(function(){if(typeof illBuy!=="function")return;const i0=illBuy;illBuy=function(p,r,k){const d=deedAdd(p,"illbuy",null,deedW("illbuy"),`lén mua ${IT[k]?itm(k).n:"đồ cấm"}`);const x=i0.apply(this,arguments);if(!x)deedUndo(p,d);return x}})();
 
 /* ---------- 2. picking whom a piece of evidence is about: only someone with an unproven wrong ---------- */
 function evRoom(h,t){return t&&h!==t?Math.max(0,deedCap(t)-evG(h,t)):0}
@@ -133,7 +132,7 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
 /* an event's own story makes the deed true (the event text says she did it): written in her ledger, then the evidence */
 function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.story);return evA(S,t,n)}
 /* caught in the act (j8 caught): the attempt itself is the wrong; written once if the act did not already write it this week */
-(function(){if(typeof caught!=="function")return;const c0=caught;caught=function(a,t,ps,desc){try{if(a&&t&&a!==t){const L=a.wrongs||[];const d=L[L.length-1];if(!(d&&d.at===wk()&&d.t===key(t)))deedAdd(a,"caught",t,2,desc||"mưu hại người")}}catch(e){}return c0.apply(this,arguments)}})();
+(function(){if(typeof caught!=="function")return;const c0=caught;caught=function(a,t,ps,desc){try{if(a&&t&&a!==t){const L=a.wrongs||[];const d=L[L.length-1];if(!(d&&d.at===wk()&&d.t===key(t)))deedAdd(a,"caught",t,deedW("caught"),desc||"mưu hại người")}}catch(e){}return c0.apply(this,arguments)}})();
 /* test counters for the other frame road (Giá họa, j92): every resolved frame-up, and the ones the victim cleared */
 (function(){if(typeof wdFrameResolve!=="function")return;const w0=wdFrameResolve;wdFrameResolve=function(a,t){const r=w0.apply(this,arguments);try{if(r||t===S){window.__frames=(window.__frames||0)+1;if(t===S)window.__framesMe=(window.__framesMe||0)+1;
  if(/minh oan được|không thấy gì|không thành/.test(r||"")){window.__framesClear=(window.__framesClear||0)+1;if(t===S)window.__framesMeClear=(window.__framesMeClear||0)+1}}}catch(e){}return r}})();

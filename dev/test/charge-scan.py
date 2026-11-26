@@ -2,7 +2,7 @@
 """review/charge-evidence (D4) whole-family scan. usage: python3 dev/test/charge-scan.py [git-ref]  (no ref = working tree)
 Families: total_gate = an accusation/use gate on the TOTAL evidence (evG >= a BAL bar or a number >= 2) · total_need = a 'cần N chứng cứ'
 text built from the total bar · search_noroll = a search road that adds evidence with no find roll (no chSearch) · miss_lie = a search
-result that says «không ... sai trái» with no miss branch (she did wrong but the search missed) · deed_unmapped (rv) = a deed key some road writes
+result that says «không ... sai trái» with no miss branch (she did wrong but the search missed) · deed_literal_w (charge-followups d) = a deed weight typed at the call or in a DEEDW table, not BAL.charge.actW / w · deed_unmapped (rv) = a deed key some road writes
 (deedAdd / deedOnce / cyDeed / mlCaught «ml»+k / DEEDW / DEEDX) with no BAL.charge.deed entry (it would fall to the Ức hiếp default)."""
 import re,subprocess,sys,glob
 ref=sys.argv[1] if len(sys.argv)>1 else None
@@ -43,10 +43,15 @@ for fn,mk in SR:
 # deed keys written anywhere vs the BAL.charge.deed map (rv)
 ALLJ='\n'.join(v for k,v in F.items())
 K=set(re.findall(r'deedAdd\([^,()]+,"(\w+)"(?!\+)',ALLJ))|set(re.findall(r'deedOnce\([^,()]+,[^,]+?,"(\w+)"',ALLJ))|set(re.findall(r'cyDeed\([^,()]+,[^,]+?,"(\w+)"',ALLJ))|{'ml'+k for k in re.findall(r'mlCaught\([^,()]+,[^,()]+,"(\w+)"',ALLJ)}
-for nm in ('DEEDW','DEEDX'):
-    m=re.search(nm+r'=\{(.*?)\};',ALLJ,re.S)
+for nm in ('DEEDW','DEEDX','actW','w'):
+    m=re.search((r'\bactW:\{(.*?)\}' if nm=='actW' else r'\bw:\{(tryst.*?)\}' if nm=='w' else nm+r'=\{(.*?)\};'),ALLJ,re.S)
     if m: K|=set(re.findall(r'(\w+):',m.group(1)))
 m=re.search(r'BAL\.charge=\{.*?deed:\{(.*?)\}',ALLJ,re.S);MAP=set(re.findall(r'(\w+):"',m.group(1))) if m else set()
 R['deed_unmapped']=sorted(K-MAP) if m else []
+# (d) LAW 4: a deed weight typed at a deedAdd / deedOnce / mlCaught call or a typed DEEDW table (must come from BAL.charge.actW / w via deedW)
+R['deed_literal_w']=[]
+for f,src in F.items():
+    for mm in re.finditer(r'(?:deedAdd\([^,()]+,[^,]+?,[^,]+?,|deedOnce\([^,()]+,[^,]+?,[^,]+?,|mlCaught\([^,()]+,[^,]+?,[^,]+?,)(\d+)\s*,|const DEEDW=\{',src):
+        R['deed_literal_w'].append(f'{f.split("/")[-1]}:{src.count(chr(10),0,mm.start())+1}')
 print('family | count | sites');
 for k,v in R.items(): print(f'{k} | {len(v)} | {" ".join(v[:14])}')
