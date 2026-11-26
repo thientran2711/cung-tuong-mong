@@ -162,7 +162,7 @@ function toilMk(rec){if(!rec||!rec.makeup)return"moc";const o=TOIL_OLDLV[rec.loo
 function toilLv(k){return BAL.toil.lv[TOIL_OLDLV[k]||k]||BAL.toil.lv.moc}
 /* the makeup part of a person's xa xỉ today (0 = bare face / no sitting / not a consort today). Reads the RAW NPC roll (TOIL_NPC0): jlux's toilNpc reads luxOf */
 function toilMkRec(p){try{if(!p||!toilOn(p))return null;if(p===S)return toilToday(S);if(p.coop){const t=p.toilette;return t&&t.wk===toilWk()?t:null}/* the friend's sitting = the record toilFriendRec reads; NOT toilFriendRec itself: its no-sitting branch calls toilDress → luxOf → here (loop) */return TOIL_NPC0(p)}catch(e){return null}}
-function toilMkLux(p){const r=toilMkRec(p);return r&&r.makeup?toilLv(toilMk(r)).lux+(r.hd&&typeof hdLux==="function"?hdLux(r.hd):0):0}
+function toilMkLux(p){const r=toilMkRec(p);if(!r)return 0;const hd=r.hd&&typeof hdLux==="function"?hdLux(r.hd):0;return (r.makeup?toilLv(toilMk(r)).lux:0)+hd}/* DRESS-FIX: a hoa điền worn on a mộc face still counts */
 /* a look's xa xỉ: its tier word + the existing kit chip "Xa xỉ N" (jinv kitLuxChip) — no beauty number (owner ~15:45Z: the NAME is the beauty) */
 function toilLvChips(k){const L=toilLv(k);return `${kitChip(TOIL_LUXW[TOIL_OLDLV[k]||k]||TOIL_LUXW.moc,"n")}${kitLuxChip({sc:L.lux})}`}
 /* the ladder of the five looks (kitRows): name | xa xỉ word + number — the mirror shows it before she paints */
@@ -512,7 +512,9 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG8
  /* diemtrang-score: vụng = a part that went wrong (or a low total); else by the total, Khuynh thành the most (makeup-lux: no overdone level) */
  const P0=st.parts,occK=st.occ.map(o=>o.k);
  const L=quick?(qok?{look:null}:{look:"vung",slip:"son"}):made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
- S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
+ S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};
+ /* DRESS-FIX (owner OD 26/11 ~18:50Z (2)): «Điểm trang nhanh» / «Để mộc» skip ONLY the makeup — the hoa điền she picked in the dress picker is still worn today (placed by her hand, hdHandQ) */
+ else if(st.hdk&&typeof hdHandQ==="function"&&hdOwned(S).some(e=>e.k===st.hdk))S.toilette.hd={k:st.hdk,q:hdHandQ(S,st.hdk,sk.sk,String(S.name||"")+":"+toilWk()),hand:1};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
  /* jration (PL #5): the face is capped by the cosmetics she has; the sitting spends lượt from each part's box (BAL.ration) */
  if(made&&typeof lxSit==="function")lxSit(S,S.toilette);
  /* makeup-lux: the day's verdict reads the ONE total, now with the face in it (clothes + jewels + makeup level) */

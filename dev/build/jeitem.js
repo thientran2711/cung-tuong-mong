@@ -162,8 +162,8 @@ function girlChest(p,o){o=o||{};p=p||S;const L=[];const who=o.who||"Mẫu thân"
  /* o.wear (the home road, jkc kcChest): she wears all of it; else (palace road) the court issue stays worn and the robe + hairpin go in the bag */
  try{if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}
   const yk=(o.wear&&typeof wdDefault==="function"?wdDefault(p,"y"):null)||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
- for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=itm(k).sl;if(o.wear)p.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&itm(x.k).sl===sl)delete x.w});
-  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);const e={k,from:"kc",giver:who};if(!busy)e.w=1;p.inv.push(e);L.push(e)}
+ for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=itm(k).sl;if(o.wear)p.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===wearGrp(sl))delete x.w});
+  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===wearGrp(sl));/* DRESS-FIX: Túi thơm shares the Đeo eo slot */const e={k,from:"kc",giver:who};if(!busy)e.w=1;p.inv.push(e);L.push(e)}
  if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};p.inv.push(e);L.push(e)}
  p.girl=L.map(e=>e.k);return{who,L}}
 function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof kitReward!=="function")return;

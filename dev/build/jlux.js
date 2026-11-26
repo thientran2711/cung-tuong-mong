@@ -14,6 +14,11 @@
 Object.assign(BAL,{lux:{
  /* rank allowance (jinv luxAllow): base + perRank × rank (+ sungAdd from Sủng sungAt), + jwdinv wdBaseLux; above lv3 × allowance = jinv level 3 (Quá xa xỉ) */
  allow:{base:36,perRank:16,sungAt:60,sungAdd:10},lv3:1.5,
+ /* DRESS-FIX (owner OD 26/11 ~18:50Z (4) «đeo full 7 món, 8 món thì nó vẫn nằm đủ đúng trong cái bậc của tôi»): her allowance = the xa xỉ of a FULL set of
+    rank-fitting pieces (robe + trâm + hoa điền at her phẩm, the dearest piece of her rank in every jewellery slot, the best face) / k, read from the item
+    tables (luxFullSet). k < 1 = that full set sits inside her band with room to spare; a piece ABOVE her rank counts × overMul (only those push her over).
+    The old base + perRank formula stays only for the dwelling score (jshelf luxAllowShelf). */
+ full:{k:.85,overMul:3},
  /* occasion ranges, as fractions r = worn luxury / her allowance: below lo = quá giản dị, [fit0,fit1] = hợp dịp, above hi = quá phô trương
     (above 1 = beyond her rank's allowance: always phô trương, jinv lv 2+). F = formality used by jtoil reactions (0 thường, 1 thỉnh an, 2 yến/lễ). */
  occ:{thuong:{n:"ngày thường",F:0,lo:0,fit:[0,.62],hi:.9},
@@ -56,7 +61,7 @@ window.luxPiece=luxPiece;
 function luxTotal(p,o){try{return luxOf(p||S,o).sc|0}catch(e){return 0}}
 function luxParts(p){p=p||S;const o={y:0,trang:0,mk:0,pet:0,total:0};try{for(const k of luxWorn(p)){const v=luxVal(k);/* what luxOf sums (jinv), so the parts add up to the total */const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null;
   if((w&&w.sl==="y")||(p.dress&&p.dress.k===k&&!w))o.y+=v;else o.trang+=v}}catch(e){}
- try{o.pet=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}try{o.mk=typeof toilMkLux==="function"?toilMkLux(p):0}catch(e){}/* hoa-dien: o.hd = the hoa điền part OF mk (already inside mk and the total) */try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;o.hd=r&&r.makeup&&r.hd&&typeof hdLux==="function"?hdLux(r.hd):0}catch(e){}
+ try{o.pet=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}try{o.mk=typeof toilMkLux==="function"?toilMkLux(p):0}catch(e){}/* hoa-dien: o.hd = the hoa điền part OF mk (already inside mk and the total) */try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;o.hd=r&&r.hd&&typeof hdLux==="function"?hdLux(r.hd):0}catch(e){}
  o.total=luxTotal(p);return o}
 window.luxTotal=luxTotal;window.luxParts=luxParts;
 let LUX_LAST=null;
@@ -203,3 +208,22 @@ window.luxGift=luxGift;
 /* the rider words: a frugal host pleased by plain dress is not "thiếu lễ" (jtoil's head said so when the look added a line) */
 (function(){if(typeof aaThieuLeTxt!=="function")return;const t0=aaThieuLeTxt;aaThieuLeTxt=function(host,f0){const s=t0.apply(this,arguments);try{const L=leAttire(S,"",host);
  if(L.state==="plain"&&luxHostKind(host)==="frugal"&&(f0||L.delta).duc>=0){const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";return s.replace(/^thiếu lễ \([^)]*\)/,`y phục giản dị hợp ý ${who}`)}}catch(e){}return s}})();
+
+/* ---------- DRESS-FIX (4): the allowance = a full rank-fitting set (one source: the item tables; numbers BAL.lux.full) ---------- */
+const LUX_FULL={};
+function luxFullSet(r,P){r=Math.max(0,Math.min(7,r|0));P=Math.max(1,Math.min(8,P|0));const key=r+":"+P;if(LUX_FULL[key]!=null)return LUX_FULL[key];let s=0;const parts={};
+ try{const G={};for(const k in IT){const it=IT[k];if(!it||!it.sl||it.wsl||it.wd||typeof it.rk!=="number"||it.keep||(typeof WD_ITEMS==="object"&&WD_ITEMS[k]))continue;/* rank-fitting pieces = pieces with a phẩm (rk); ngự tứ / keepsakes (keep) are not part of a rank set */const g=typeof wearGrp==="function"?wearGrp(it.sl):it.sl;(G[g]=G[g]||[]).push(k)}
+  for(const g in G){const L=G[g];const at=L.filter(k=>(IT[k].rk|0)===r);const pool=at.length?at:(()=>{const lo=L.filter(k=>(IT[k].rk|0)<=r);const m=Math.max(-1,...lo.map(k=>IT[k].rk|0));return lo.filter(k=>(IT[k].rk|0)===m)})();
+   const v=pool.length?Math.max(...pool.map(k=>luxVal(k))):0;parts[g]=v;s+=v}}catch(e){console.error("luxFullSet IT",e)}
+ try{for(const sl of ["y","tram","hd"]){const A=(typeof WD_LIST==="object"?WD_LIST:[]).filter(x=>x[1]===sl&&x[3]<=P&&!(typeof hdDropped==="function"&&hdDropped(x[0])));const top=Math.max(0,...A.map(x=>x[3]));const L=A.filter(x=>x[3]===top);/* her phẩm, else the nearest phẩm below that exists */const v=L.length?Math.max(...L.map(x=>wdLux(x[0]))):0;parts[sl]=v;s+=v}}catch(e){console.error("luxFullSet WD",e)}
+ try{const lv=BAL.toil&&BAL.toil.lv;if(lv){const v=Math.max(...Object.values(lv).map(x=>x.lux|0));parts.mk=v;s+=v}}catch(e){}
+ if(r>0)s=Math.max(s,luxFullSet(r-1,Math.max(1,P-1)));/* a higher rank never has a smaller band */LUX_FULL[key]=s;LUX_FULL[key+"p"]=parts;return s}
+window.luxFullSet=luxFullSet;
+(function(){if(typeof luxAllow!=="function")return;const old=luxAllow;window.luxAllowShelf=function(p){return old.apply(this,arguments)};
+ luxAllow=function(p){const A=BAL.lux.allow,F=BAL.lux.full;let P=1;try{P=wdPOf(p)}catch(e){}return Math.round(luxFullSet(rkOf(p),P)/F.k)+((p&&p.sung|0)>=A.sungAt?A.sungAdd:0)}})();
+/* a worn piece above the wearer's rank counts × overMul (her and every NPC alike); the level is recomputed on the final total */
+function luxOverAdd(p){let a=0;try{const F=BAL.lux.full,r=rkOf(p);let P=1;try{P=wdPOf(p)}catch(e){}for(const k of luxWorn(p)){const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null;const over=w?(w.P|0)>P:((IT[k]&&IT[k].rk|0)>r);if(over)a+=Math.round(luxPiece(k)*(F.overMul-1))}}catch(e){}return a}
+(function(){if(typeof luxOf!=="function")return;const lo0=luxOf;luxOf=function(p){const x=lo0.apply(this,arguments);try{const add=luxOverAdd(p);if(!add)return x;const sc=x.sc+add,bud=x.bud;const lv=sc===0?0:sc<=bud?1:sc<=bud*BAL.lux.lv3?2:3;
+  return Object.assign({},x,{sc,lv,name:LUX_N[lv][0],cls:LUX_N[lv][1],over:add})}catch(e){return x}}})();
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(typeof wearMerge==="function"){wearMerge(S);(rivals||[]).forEach(wearMerge)}}catch(e){}return r}})();
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(typeof wearMerge==="function"&&S){wearMerge(S);(rivals||[]).forEach(wearMerge)}}catch(e){}return r};window.endTurn=endTurn})();
