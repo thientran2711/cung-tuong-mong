@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c0219a98+","t":"2026-11-26T14:31Z","c":"save r6 fix (LAW 11, the «.opts=» family): cards given their options AFTER they were made now come back whole from the sổ","b":"34d8151a5f46","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"1fad453a+","t":"2026-11-26T15:15Z","c":"save r6 fix (LAW 11 generator-args family): «Có người bán tin» carried a news object with code, so rcpReg had no rk and the step write left…","b":"2df342900c28","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -87410,9 +87410,15 @@ Object.assign(window,{knwSee,knwGossip,knwOf});
    threw and the card had no rk — a code card made at a step, left out of the sổ. The card now carries the seller + the news ID only; the news is
    found again from the live world (knSellNews, the same list the offer was picked from). An old {rk:"knSell", ra:[s, news]} still works */
 const knSellCard0=knSellCard;
-const knSellById=rcpReg("knSell",(s,n)=>{if(!s)return null;if(n&&typeof n==="object")return knSellCard0(s,n);if(typeof n!=="string")return null;
- let N=null;try{N=knSellNews(S,s).find(q=>q.id===n)}catch(e){}return N?knSellCard0(s,N):null});
-knSellCard=function(s,n){return n&&typeof n.id==="string"?knSellById(s,n.id):knSellCard0(s,n)};
+/* the news as plain data (its code — a fact's go — left out; people stay people, carried as ids) */
+const knSellData=n=>{const c={};for(const k in n){const v=n[k];if(typeof v==="function")continue;if(k==="f"&&v&&typeof v==="object"){const f={};for(const q in v)if(typeof v[q]!=="function")f[q]=v[q];c.f=f}else c[k]=v}return c};
+/* the live news with this id, read as the offer was (J78MEMO pass, as knSellTick); S is left as it was (j78facts adds an empty S.intel) */
+const knSellLive=(s,id)=>{const had=!!S.intel;const M0=window.J78MEMO;let N=null;try{window.J78MEMO=M0||new Map();N=knSellNews(S,s).find(q=>q.id===id)||null}catch(e){}finally{window.J78MEMO=M0;if(!had&&S.intel&&!Object.keys(S.intel).length)delete S.intel}return N};
+const knSellById=rcpReg("knSell",(s,n)=>{if(!s||!n||typeof n!=="object")return null;
+ /* remade on load: the live news with this id when it is still there (its follow-up kept), else the carried copy (same text and price) */
+ const N=RCPRE&&typeof n.id==="string"?knSellLive(s,n.id):null;return knSellCard0(s,N||n)});
+/* the live offer: built from the live news; carried as {rk:"knSell", ra:[seller, the news as data]} (the shape rcpReg gives) */
+knSellCard=function(s,n){const m=knSellCard0(s,n);try{if(m&&m.opts&&m.opts.length&&!RCPRE&&n&&typeof n==="object"){const a=rcpEnc([s,knSellData(n)]);if(JSON.stringify(a).length<RCP_MAX){m.rk="knSell";m.ra=a}else m.__rkLen=JSON.stringify(a).length}}catch(e){if(m)m.__rkErr="knSell"}return m};
 /* ================= jnroadhp: QUESTLINE Q2 — the NPC side line as a process + two-way (QUESTLINES_AUDIT.md §3 H-a/H-d, §4 Q2) =================
    Builds on jnroad.js / jnroadm.js (NPC roads + the help hồi) without copying them; every number is in BAL.nroad (jbal2.js: fin, sb, hpMax).
    (a) HELP RECORD H-a: v.nr.hp = [[chapter, sign, turn]] — every help (+1) / betrayal (−1) she gave on that person's road (consorts, maids,
@@ -100824,7 +100830,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="34d8151a5f46";window.CTM_BUILD=BUILD;
+const BUILD="2df342900c28";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

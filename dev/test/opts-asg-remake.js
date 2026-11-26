@@ -23,11 +23,11 @@ const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=e
      window.__j95off=1;window.__e68off=1;/* the motive gate (j95) and the j68 situations decide WHETHER a visit comes: here it must come */
      const n0=npwAsk;npwAsk=(k)=>k===kind?[Object.assign({kind,s:1},o)]:[];let m=null;try{for(let i=0;i<40;i++){m=approachOne();if(m&&m.t===inner.t&&String((m.who||{}).w||(m.who||{}).name)===String((inner.who||{}).w||(inner.who||{}).name)&&/rk|ap\.|tsbAp/.test(String(m.rk||"rk")))break;m=null}}finally{npwAsk=n0;window.__j95off=0;window.__e68off=0}return m};
    run('tsb mock',()=>apWrapped('apTaunt',{who:v,why:'ghen ghét'}));
-   run('tsb ally',()=>apWrapped('apFriend',{who:v2,sub:'ally'}));
+   run('tsb ally',()=>{for(const x of V){const m=apWrapped('apFriend',{who:x,sub:'ally'});if(m)return m}return null});
    run('tsb thCall',()=>apWrapped('thCall',{}));
    {const v3=V.find(x=>(x.staff||[]).some(y=>y&&y.name));if(v3)run('tsb svDefect',()=>apWrapped('svDefect',{who:v3.staff.find(y=>y&&y.name),tgt:v3}));else out['tsb svDefect']={same:true,skip:'no rival staff'}}
    /* 2b. jagknow «Có người bán tin» (the news object carries code: before, no rk at all; probe iPad seed 1 rv10) */
-   {let r=null;try{for(const x of [S]){const L=[];for(const v of V)for(const s of (v.staff||[]).filter(y=>y&&y.name)){const N=knSellNews(S,s);if(N.length){/* a fact that carries code (f.go, as j78 facts with a follow-up do; probe iPad seed 1) */const n=N[0];r={s,n:Object.assign({},n,{f:Object.assign({},n.f||{},{go:()=>''})})};break}}if(r)break}}catch(e){}
+   {let r=null;try{for(const x of [S]){const L=[];for(const s of (typeof knAllSrv==='function'?knAllSrv():[]).filter(y=>y&&y.name)){const N=knSellNews(S,s);if(N.length){/* a fact that carries code (f.go, as j78 facts with a follow-up do; probe iPad seed 1) */const n=N[0];r={s,n:Object.assign({},n,{f:Object.assign({},n.f||{},{go:()=>''})})};break}}if(r)break}}catch(e){}
     if(r)run('knSell',()=>knSellCard(r.s,r.n));else out['knSell']={same:true,skip:'no seller with news'}}
    /* 3. jtoilr answers on a reaction card (a slight from a consort) */
    run('toil rx',()=>{Q.length=0;const k='rival-tease';TOIL_POP.length=0;

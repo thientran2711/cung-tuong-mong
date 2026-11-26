@@ -586,6 +586,12 @@ Object.assign(window,{knwSee,knwGossip,knwOf});
    threw and the card had no rk — a code card made at a step, left out of the sổ. The card now carries the seller + the news ID only; the news is
    found again from the live world (knSellNews, the same list the offer was picked from). An old {rk:"knSell", ra:[s, news]} still works */
 const knSellCard0=knSellCard;
-const knSellById=rcpReg("knSell",(s,n)=>{if(!s)return null;if(n&&typeof n==="object")return knSellCard0(s,n);if(typeof n!=="string")return null;
- let N=null;try{N=knSellNews(S,s).find(q=>q.id===n)}catch(e){}return N?knSellCard0(s,N):null});
-knSellCard=function(s,n){return n&&typeof n.id==="string"?knSellById(s,n.id):knSellCard0(s,n)};
+/* the news as plain data (its code — a fact's go — left out; people stay people, carried as ids) */
+const knSellData=n=>{const c={};for(const k in n){const v=n[k];if(typeof v==="function")continue;if(k==="f"&&v&&typeof v==="object"){const f={};for(const q in v)if(typeof v[q]!=="function")f[q]=v[q];c.f=f}else c[k]=v}return c};
+/* the live news with this id, read as the offer was (J78MEMO pass, as knSellTick); S is left as it was (j78facts adds an empty S.intel) */
+const knSellLive=(s,id)=>{const had=!!S.intel;const M0=window.J78MEMO;let N=null;try{window.J78MEMO=M0||new Map();N=knSellNews(S,s).find(q=>q.id===id)||null}catch(e){}finally{window.J78MEMO=M0;if(!had&&S.intel&&!Object.keys(S.intel).length)delete S.intel}return N};
+const knSellById=rcpReg("knSell",(s,n)=>{if(!s||!n||typeof n!=="object")return null;
+ /* remade on load: the live news with this id when it is still there (its follow-up kept), else the carried copy (same text and price) */
+ const N=RCPRE&&typeof n.id==="string"?knSellLive(s,n.id):null;return knSellCard0(s,N||n)});
+/* the live offer: built from the live news; carried as {rk:"knSell", ra:[seller, the news as data]} (the shape rcpReg gives) */
+knSellCard=function(s,n){const m=knSellCard0(s,n);try{if(m&&m.opts&&m.opts.length&&!RCPRE&&n&&typeof n==="object"){const a=rcpEnc([s,knSellData(n)]);if(JSON.stringify(a).length<RCP_MAX){m.rk="knSell";m.ra=a}else m.__rkLen=JSON.stringify(a).length}}catch(e){if(m)m.__rkErr="knSell"}return m};
