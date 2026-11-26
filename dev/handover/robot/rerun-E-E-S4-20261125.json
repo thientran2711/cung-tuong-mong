@@ -46668,7 +46668,7 @@
    "total": 2560731
   },
   "_file": "E-S4-R5-greedy-1-ipad.json",
-  "runner_ruling": "VALID (Foreman E child8: game-imposed Xuat gia; audit text rule false negative)"
+  "runner_ruling": "VALID (Foreman E child8: game-imposed Xuat gia)"
  },
  {
   "job": {
@@ -72167,7 +72167,7 @@
    "total": 119897
   },
   "_file": "E-S4-R5-lover-3-ipad.json",
-  "runner_ruling": "INVALID (Foreman E child8 26/11 07:43Z: Dâng Ky mini-game left with Quay lai, trial not played) - rerun"
+  "runner_ruling": "INVALID (Foreman E child8 26/11 07:43Z: Dang Ky mini-game left with Quay lai, trial not played) - replayed as v2"
  },
  {
   "job": {
@@ -82060,6 +82060,979 @@
  },
  {
   "job": {
+   "id": "E-S4-R5-rebel-5-ipad",
+   "origin": "pf",
+   "road": "pt_hai",
+   "pick": null,
+   "bot": "bold",
+   "seed": 172268841,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "8ea10d7e",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [
+    {
+     "at": 27,
+     "lvl": 1,
+     "layer": "#kload",
+     "title": ""
+    }
+   ],
+   "slice": null,
+   "mgBackN": 1,
+   "mgBackQuitN": 0,
+   "builds": [
+    {
+     "s": "b881686f+",
+     "b": "cc68dcfd2b1b",
+     "where": "start"
+    }
+   ],
+   "build0": {
+    "s": "b881686f+",
+    "b": "cc68dcfd2b1b",
+    "t": "2026-11-26T15:46Z",
+    "at": "2026-11-26T19:15:12.544Z"
+   },
+   "pinUrl": "http://127.0.0.1:8914/",
+   "build": {
+    "s": "b881686f+",
+    "b": "cc68dcfd2b1b",
+    "t": "2026-11-26T15:46Z"
+   },
+   "areaTaps": 21,
+   "kloadEnter": 1,
+   "dlgScroll": 5,
+   "scrolls": 9,
+   "mgQuickSkipped": 1,
+   "mgReady": 1,
+   "mgMiss": 1,
+   "mgPeekTaps": 5,
+   "boardTaps": 5,
+   "mgBackWhy": [
+    {
+     "at": 91,
+     "buoi": 1,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    }
+   ],
+   "taps": 30
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 18,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Dung mạo 26»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 950,594",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "BOARD #kg82 5 moves",
+    "#kg82 «Quay lại»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "saves": [],
+  "buoi": 1,
+  "steps": 118,
+  "status": [],
+  "_loopAt": 1795720602136,
+  "_bootFirst": 1,
+  "_snapAt": 1795720576760,
+  "trace": [
+   [
+    12,
+    "AREA 712,590"
+   ],
+   [
+    12,
+    "AREA 266,428"
+   ],
+   [
+    12,
+    "AREA 194,179"
+   ],
+   [
+    13,
+    "AREA 962,617"
+   ],
+   [
+    13,
+    "AREA 496,360"
+   ],
+   [
+    13,
+    "AREA 926,448"
+   ],
+   [
+    13,
+    "AREA 639,229"
+   ],
+   [
+    14,
+    "AREA 596,180"
+   ],
+   [
+    14,
+    "AREA 626,355"
+   ],
+   [
+    14,
+    "AREA 613,250"
+   ],
+   [
+    15,
+    "AREA 544,568"
+   ],
+   [
+    15,
+    "AREA 653,577"
+   ],
+   [
+    15,
+    "AREA 853,233"
+   ],
+   [
+    16,
+    "AREA 376,608"
+   ],
+   [
+    16,
+    "AREA 847,195"
+   ],
+   [
+    36,
+    "#kload «Vào cung ngay»"
+   ],
+   [
+    37,
+    "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+   ],
+   [
+    39,
+    ".dlg «Chọn sổ» «Bắt đầu kiếp mới»"
+   ],
+   [
+    49,
+    "GONE Vào cung ngay"
+   ],
+   [
+    50,
+    "#kroul «Tiếp»"
+   ],
+   [
+    50,
+    "#kroul «Bỏ qua»"
+   ],
+   [
+    54,
+    ".dlg «Thân phận kiếp này» «Trang trước»"
+   ],
+   [
+    55,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    57,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    58,
+    ".dlg «Thân phận kiếp này» «Dung mạo 29»"
+   ],
+   [
+    58,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    59,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 9»"
+   ],
+   [
+    60,
+    ".dlg «Thân phận kiếp này» «Trang trước»"
+   ],
+   [
+    60,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    61,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    61,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    62,
+    ".dlg «Thân phận kiếp này» «Dung mạo 27»"
+   ],
+   [
+    62,
+    ".dlg «Thân phận kiếp này» «Dung mạo 20»"
+   ],
+   [
+    63,
+    ".dlg «Thân phận kiếp này» «Dung mạo 20»"
+   ],
+   [
+    63,
+    ".dlg «Thân phận kiếp này» «Dung mạo 19»"
+   ],
+   [
+    64,
+    ".dlg «Thân phận kiếp này» «Dung mạo 24»"
+   ],
+   [
+    64,
+    ".dlg «Thân phận kiếp này» «Dung mạo 26»"
+   ],
+   [
+    65,
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+   ],
+   [
+    68,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»"
+   ],
+   [
+    69,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»"
+   ],
+   [
+    69,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»"
+   ],
+   [
+    71,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»"
+   ],
+   [
+    76,
+    "AREA 950,594"
+   ],
+   [
+    76,
+    ".kmov «Vào điện»"
+   ],
+   [
+    82,
+    ".dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »"
+   ],
+   [
+    84,
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+   ],
+   [
+    91,
+    "BOARD #kg82 5 moves"
+   ],
+   [
+    92,
+    "#kg82 «Quay lại»"
+   ]
+  ],
+  "_unsFail": {
+   "#kload|": {},
+   "#klife|": {},
+   ".dlg|Thân phận kiếp này": {},
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thân · #/#": {},
+   ".dlg|Lễ ra mắt": {}
+  },
+  "_started": true,
+  "_ckAt": 1795720548923,
+  "_ckB": 1,
+  "rss": [
+   {
+    "buoi": 1,
+    "y": 1,
+    "totalMB": 1312,
+    "rendererMB": 658,
+    "heapMB": 133,
+    "dom": 2378,
+    "q": 3,
+    "lsK": 4
+   }
+  ],
+  "promo": {
+   "raw": 0,
+   "real": 0,
+   "picked": 0,
+   "by": {}
+  },
+  "_momSeen": [
+   "#klife|",
+   "#kroul|",
+   ".dlg|Thân phận kiếp này",
+   "#modal|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   "#modal|Lễ ra mắt",
+   ".kmov|",
+   ".dlg|Lễ ra mắt",
+   "#kxcatch|",
+   "#kg82|",
+   ".dlg|Duyên cung lỡ hẹn"
+  ],
+  "_momRank": 2,
+  "_scrW": {
+   ".dlg|Thân phận kiếp này|871,392": {
+    "left": 246,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,585": {
+    "left": 133,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 3
+   },
+   ".dlg|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 1
+   }
+  },
+  "choicePts": [
+   {
+    "k": ".dlg|Thân phận kiếp này|Dung mạo 29/Dung mạo 30/Dung mạo 31/Dung mạo 32/Dung mạo cung nữ 1/Dung mạo cung nữ 10/Dung mạo cung nữ 2/Dung mạo cung nữ 3/Dung mạo cung nữ 4/Dung mạo cung nữ 5/Dung mạo cung nữ 6/Dung mạo cung nữ 7/Dung mạo cung nữ 8/Dung mạo cung nữ 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa/Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+    "screen": ".dlg «Thân phận kiếp này»",
+    "opts": [
+     "Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+     "Trang trước",
+     "Dung mạo 29",
+     "Dung mạo 30",
+     "Dung mạo 31",
+     "Dung mạo 32",
+     "Dung mạo cung nữ 1",
+     "Dung mạo cung nữ 2",
+     "Dung mạo cung nữ 3",
+     "Dung mạo cung nữ 4",
+     "Dung mạo cung nữ 5",
+     "Dung mạo cung nữ 6",
+     "Dung mạo cung nữ 7",
+     "Dung mạo cung nữ 8",
+     "Dung mạo cung nữ 9",
+     "Dung mạo cung nữ 10",
+     "Trang sau",
+     "Dễ",
+     "Vừa",
+     "Khó",
+     "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+    ],
+    "ods": [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    "took": {
+     "Trang trước": 2,
+     "Khó": 2,
+     "Dung mạo 29": 1,
+     "Dung mạo cung nữ 9": 1
+    },
+    "n": 6
+   },
+   {
+    "k": ".dlg|Thân phận kiếp này|Dung mạo 15/Dung mạo 16/Dung mạo 17/Dung mạo 18/Dung mạo 19/Dung mạo 20/Dung mạo 21/Dung mạo 22/Dung mạo 23/Dung mạo 24/Dung mạo 25/Dung mạo 26/Dung mạo 27/Dung mạo 28/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa/Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+    "screen": ".dlg «Thân phận kiếp này»",
+    "opts": [
+     "Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+     "Trang trước",
+     "Dung mạo 15",
+     "Dung mạo 16",
+     "Dung mạo 17",
+     "Dung mạo 18",
+     "Dung mạo 19",
+     "Dung mạo 20",
+     "Dung mạo 21",
+     "Dung mạo 22",
+     "Dung mạo 23",
+     "Dung mạo 24",
+     "Dung mạo 25",
+     "Dung mạo 26",
+     "Dung mạo 27",
+     "Dung mạo 28",
+     "Trang sau",
+     "Dễ",
+     "Vừa",
+     "Khó",
+     "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+    ],
+    "ods": [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    "took": {
+     "Khó": 4
+    },
+    "n": 4
+   },
+   {
+    "k": ".dlg|Thân phận kiếp này|Dung mạo 15/Dung mạo 16/Dung mạo 17/Dung mạo 18/Dung mạo 19/Dung mạo 20/Dung mạo 21/Dung mạo 22/Dung mạo 23/Dung mạo 24/Dung mạo 25/Dung mạo 26/Dung mạo 27/Dung mạo 28/Dễ/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa/Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+    "screen": ".dlg «Thân phận kiếp này»",
+    "opts": [
+     "Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+     "Trang trước",
+     "Dung mạo 15",
+     "Dung mạo 16",
+     "Dung mạo 17",
+     "Dung mạo 18",
+     "Dung mạo 19",
+     "Dung mạo 20",
+     "Dung mạo 21",
+     "Dung mạo 22",
+     "Dung mạo 23",
+     "Dung mạo 24",
+     "Dung mạo 25",
+     "Dung mạo 26",
+     "Dung mạo 27",
+     "Dung mạo 28",
+     "Trang sau",
+     "Dễ",
+     "Vừa",
+     "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+    ],
+    "ods": [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    "took": {
+     "Dung mạo 27": 1,
+     "Dung mạo 20": 2,
+     "Dung mạo 19": 1,
+     "Dung mạo 24": 1,
+     "Dung mạo 26": 1,
+     "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này": 1
+    },
+    "n": 7
+   },
+   {
+    "k": ".dlg|Lễ ra mắt|Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K/Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt thì được trọngGợi ýchơi một mà",
+    "screen": ".dlg «Lễ ra mắt»",
+    "opts": [
+     "Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt thì được trọngGợi ýchơi một mà",
+     "Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K"
+    ],
+    "ods": [
+     "Rất vững",
+     "Rất vững"
+    ],
+    "took": {
+     "Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt thì được trọngGợi ýchơi một mà": 1
+    },
+    "n": 1
+   }
+  ],
+  "t": {
+   "total": 95966
+  },
+  "_file": "E-S4-R5-rebel-5-ipad.json",
+  "runner_ruling": "RULING PENDING: Dang Ky board played 5 moves then Quay lai (left the trial) - not counted until Foreman E rules"
+ },
+ {
+  "job": {
+   "id": "E-S4-R5-scholar-2-ipad",
+   "origin": "pf",
+   "road": "pt_hai",
+   "pick": null,
+   "bot": "quiet",
+   "seed": 1184839310,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "8ea10d7e",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [
+    {
+     "at": 30,
+     "lvl": 1,
+     "layer": "#kload",
+     "title": ""
+    }
+   ],
+   "slice": null,
+   "mgBackN": 0,
+   "mgBackQuitN": 0,
+   "builds": [
+    {
+     "s": "b881686f+",
+     "b": "cc68dcfd2b1b",
+     "where": "start"
+    }
+   ],
+   "build0": {
+    "s": "b881686f+",
+    "b": "cc68dcfd2b1b",
+    "t": "2026-11-26T15:46Z",
+    "at": "2026-11-26T19:16:53.151Z"
+   },
+   "pinUrl": "http://127.0.0.1:8914/",
+   "build": {
+    "s": "b881686f+",
+    "b": "cc68dcfd2b1b",
+    "t": "2026-11-26T15:46Z"
+   },
+   "areaTaps": 16,
+   "kloadEnter": 1,
+   "dlgScroll": 3,
+   "scrolls": 6,
+   "taps": 18
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 20,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Dung mạo 9»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 10»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 13»",
+    ".dlg «Thân phận kiếp này» «Trang sau»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 300,329",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "saves": [],
+  "buoi": 1,
+  "steps": 98,
+  "status": [],
+  "_loopAt": 1795720677322,
+  "_bootFirst": 1,
+  "_snapAt": 1795720618016,
+  "trace": [
+   [
+    15,
+    "AREA 724,219"
+   ],
+   [
+    15,
+    "AREA 233,173"
+   ],
+   [
+    15,
+    "AREA 341,464"
+   ],
+   [
+    16,
+    "AREA 400,170"
+   ],
+   [
+    16,
+    "AREA 300,187"
+   ],
+   [
+    16,
+    "AREA 250,677"
+   ],
+   [
+    16,
+    "AREA 325,237"
+   ],
+   [
+    17,
+    "AREA 313,453"
+   ],
+   [
+    17,
+    "AREA 558,494"
+   ],
+   [
+    17,
+    "AREA 929,182"
+   ],
+   [
+    18,
+    "AREA 951,262"
+   ],
+   [
+    18,
+    "AREA 550,680"
+   ],
+   [
+    18,
+    "AREA 336,547"
+   ],
+   [
+    19,
+    "AREA 542,396"
+   ],
+   [
+    19,
+    "AREA 490,286"
+   ],
+   [
+    40,
+    "#kload «Vào cung ngay»"
+   ],
+   [
+    40,
+    "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+   ],
+   [
+    41,
+    ".dlg «Chọn sổ» «Bắt đầu kiếp mới»"
+   ],
+   [
+    47,
+    "#klife «Vào cung ngay»"
+   ],
+   [
+    49,
+    "#kroul «Tiếp»"
+   ],
+   [
+    49,
+    "#kroul «Bỏ qua»"
+   ],
+   [
+    52,
+    ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+   ],
+   [
+    53,
+    ".dlg «Thân phận kiếp này» «Dung mạo 9»"
+   ],
+   [
+    53,
+    ".dlg «Thân phận kiếp này» «Dung mạo 10»"
+   ],
+   [
+    54,
+    ".dlg «Thân phận kiếp này» «Dung mạo 13»"
+   ],
+   [
+    54,
+    ".dlg «Thân phận kiếp này» «Trang sau»"
+   ],
+   [
+    56,
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+   ],
+   [
+    58,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»"
+   ],
+   [
+    58,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»"
+   ],
+   [
+    59,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»"
+   ],
+   [
+    59,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»"
+   ],
+   [
+    64,
+    "AREA 300,329"
+   ],
+   [
+    65,
+    ".kmov «Vào điện»"
+   ],
+   [
+    71,
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  ],
+  "_unsFail": {
+   "#kload|": {},
+   "#klife|": {},
+   ".dlg|Thân phận kiếp này": {},
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thân · #/#": {},
+   ".dlg|Lễ ra mắt": {}
+  },
+  "_started": true,
+  "_ckAt": 1795720649059,
+  "_ckB": 1,
+  "rss": [
+   {
+    "buoi": 1,
+    "y": 1,
+    "totalMB": 1100,
+    "rendererMB": 509,
+    "heapMB": 104,
+    "dom": 2288,
+    "q": 3,
+    "lsK": 4
+   }
+  ],
+  "promo": {
+   "raw": 0,
+   "real": 0,
+   "picked": 0,
+   "by": {}
+  },
+  "_momSeen": [
+   "#klife|",
+   "#kroul|",
+   ".dlg|Thân phận kiếp này",
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   "#modal|Lễ ra mắt",
+   ".kmov|",
+   ".dlg|Lễ ra mắt",
+   "#modal|Duyên cung lỡ hẹn"
+  ],
+  "_momRank": 2,
+  "_scrW": {
+   ".dlg|Thân phận kiếp này|871,392": {
+    "left": 246,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 3
+   },
+   ".dlg|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 1
+   }
+  },
+  "choicePts": [
+   {
+    "k": ".dlg|Thân phận kiếp này|Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 3/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dung mạo 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vừa/Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+    "screen": ".dlg «Thân phận kiếp này»",
+    "opts": [
+     "Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+     "Dung mạo 1",
+     "Dung mạo 2",
+     "Dung mạo 3",
+     "Dung mạo 4",
+     "Dung mạo 5",
+     "Dung mạo 6",
+     "Dung mạo 7",
+     "Dung mạo 8",
+     "Dung mạo 9",
+     "Dung mạo 10",
+     "Dung mạo 11",
+     "Dung mạo 12",
+     "Dung mạo 13",
+     "Dung mạo 14",
+     "Trang sau",
+     "Dễ",
+     "Vừa",
+     "Khó",
+     "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+    ],
+    "ods": [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    "took": {
+     "Dung mạo 7": 1,
+     "Dung mạo 9": 1,
+     "Dung mạo 10": 1,
+     "Dung mạo 13": 1,
+     "Trang sau": 1
+    },
+    "n": 5
+   },
+   {
+    "k": ".dlg|Thân phận kiếp này|Dung mạo 15/Dung mạo 16/Dung mạo 17/Dung mạo 18/Dung mạo 19/Dung mạo 20/Dung mạo 21/Dung mạo 22/Dung mạo 23/Dung mạo 24/Dung mạo 25/Dung mạo 26/Dung mạo 27/Dung mạo 28/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa/Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+    "screen": ".dlg «Thân phận kiếp này»",
+    "opts": [
+     "Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở cung Thiên hoàng ở Nại Lương học ",
+     "Trang trước",
+     "Dung mạo 15",
+     "Dung mạo 16",
+     "Dung mạo 17",
+     "Dung mạo 18",
+     "Dung mạo 19",
+     "Dung mạo 20",
+     "Dung mạo 21",
+     "Dung mạo 22",
+     "Dung mạo 23",
+     "Dung mạo 24",
+     "Dung mạo 25",
+     "Dung mạo 26",
+     "Dung mạo 27",
+     "Dung mạo 28",
+     "Trang sau",
+     "Dễ",
+     "Vừa",
+     "Khó",
+     "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+    ],
+    "ods": [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    "took": {
+     "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này": 1
+    },
+    "n": 1
+   },
+   {
+    "k": ".dlg|Lễ ra mắt|Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K/Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt thì được trọngGợi ýchơi một mà",
+    "screen": ".dlg «Lễ ra mắt»",
+    "opts": [
+     "Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt thì được trọngGợi ýchơi một mà",
+     "Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K"
+    ],
+    "ods": [
+     "Rất vững",
+     "Rất vững"
+    ],
+    "took": {
+     "Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K": 1
+    },
+    "n": 1
+   }
+  ],
+  "t": {
+   "total": 74252
+  },
+  "_file": "E-S4-R5-scholar-2-ipad.json"
+ },
+ {
+  "job": {
    "id": "E-S4-R5-speed-1-ipad",
    "origin": "pf",
    "road": "pt_hai",
@@ -87186,7 +88159,7 @@
    "total": 124844
   },
   "_file": "E-S4-R5-speed-2-ipad.json",
-  "runner_ruling": "INVALID (Foreman E child8 26/11 07:43Z: Dâng Ky mini-game left with Quay lai, trial not played) - rerun"
+  "runner_ruling": "INVALID (Foreman E child8 26/11 07:43Z: Dang Ky mini-game left with Quay lai, trial not played) - replayed as v2"
  },
  {
   "job": {
@@ -99586,7 +100559,7 @@
    "total": 4420414
   },
   "_file": "E-S4-R5-speed-4-ipad.json",
-  "runner_ruling": "VALID (Foreman E child8: game-imposed Xuat gia; audit text rule false negative)"
+  "runner_ruling": "VALID (Foreman E child8: game-imposed Xuat gia)"
  },
  {
   "job": {
