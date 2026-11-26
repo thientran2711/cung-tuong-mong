@@ -1356,6 +1356,10 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .kskdo{font-size:.82rem;color:var(--dim);line-height:1.35}.kskx{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.8rem}
 .kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}
 .kskb{height:8px;border-radius:5px;background:#eadfca;overflow:hidden}.kskb u{display:block;height:100%;background:linear-gradient(90deg,#c9a24a,#8f5f0c)}
+/* tainghe-info r3 (LC18 note, kit tap size): every kit info target (.kgl dotted word / «ⓘ» link, .khap «!», .kskn skill name, .ladi link) keeps its look
+   but its HIT area is at least 44 x 44 px: an invisible ::after centred on it. :where() = no specificity, so a part already positioned (absolute «!» on an
+   avatar corner) keeps its own position. Test: info-tap-audit.js asserts hit ≥ 44 x 44 for every target. */
+:where(.kgl,.kskn,button.ladi,.khap){position:relative}:where(.kgl,.kskn,button.ladi,.khap)::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%);background:transparent;z-index:1}
 .kskn{display:inline-flex;align-items:baseline;gap:.3em;border:0;background:none;padding:2px 0;margin:0;font:inherit;color:var(--gold);cursor:pointer;text-align:left;min-height:32px}.kskn>b{border-bottom:1px dotted currentColor}.kskni{font-style:normal;font-size:.9rem;font-weight:600}
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}

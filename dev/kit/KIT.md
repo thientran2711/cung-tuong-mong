@@ -1015,7 +1015,7 @@ ladder words from the real formulas; "có thể gặp người" → real words.
 - RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; the steps are NEVER a button),
   **the NAME is the card's ONE info target (review/tainghe-info, owner OD 25/11 ~23:48Z «Bấm vào dung nghi thì không ra gì hết … không biết bấm vô cái gì
   mở ra cái khung này»): with `info` (old name `stepsAttr`, e.g. `data-v85tab="cam"`) the name is drawn by `kitSkillName(o)` as `button.kskn` = «ⓘ name»
-  with the dotted underline of the kit info link (§kitInfo «ⓘ Cách học» look), min 32 px tall; tap → that skill's rule popup. No hidden tap zone: a
+  with the dotted underline of the kit info link (§kitInfo «ⓘ Cách học» look), min 32 px tall; **HIT AREA ≥ 44 × 44 px for EVERY kit info target** (`.kgl` dotted word / «ⓘ» link, `.khap` «!», `.kskn`, `.ladi`): an invisible centred `::after` (`:where()` rule in j79, z-index 1, look unchanged, no row growth); a side may stop short only at another tap target or at the clip box of a fixed one-line row (§6.3h) — asserted for every target by `dev/test/info-tap-audit.js`; tap → that skill's rule popup. No hidden tap zone: a
   popup opens only from a visible labelled target. Test `node dev/test/tainghe-info.js` (real taps, Fold + iPad, every Tài nghệ sub-tab: every
   card has «ⓘ name», no step button, tap → its popup, no text overlap in the popup, ✕ closes).**
   one desc line, tiến bộ bar `kitBar` (`.kskp`) or `kchip g "Đã tinh thông"` (`bar:false` = none),
