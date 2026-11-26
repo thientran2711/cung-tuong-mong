@@ -27,7 +27,7 @@ function asC(s,k){const G=ASN[asGrp(s)];G[k]=(G[k]||0)+1;ASN.n++}
 function asSt(s){if(s.duc==null){const T=asB().st;const ri=a=>a[0]+R(a[1]-a[0]+1);try{amSt(s)}catch(e){s.sac=s.sac||30;s.tai=s.tai||10}
   s.duc=ri(T.duc);s.tamco=ri(T.tamco);s.danh=ri(T.danh);s.suc=ri(T.suc);s.bac=ri(T.bac)}if(s.mp==null)s.mp=0;if(s.loyal==null)s.loyal=BAL.srvLoyal.base;return s}
 function asAp(s,fx){for(const k in fx||{}){const v=fx[k];if(!v)continue;if(k==="tin")s.loyal=cl((s.loyal||0)+v,0,100);else if(k==="bac")s.bac=Math.max(0,(s.bac||0)+v);
-  else if(k==="sung")s.sung=cl((s.sung||0)+v,0,100);else s[k]=cl((s[k]||0)+v,0,100)}}
+  else if(k==="sung")spAdd(s,"sung",v);else s[k]=cl((s[k]||0)+v,0,100)}}
 function asTxt(o,s,t){return t}
 /* ---------- 3 her needs ---------- */
 function asGap(g,x){return g>0?cl((g-(x||0))/g,0,1):0}
