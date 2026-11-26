@@ -235,3 +235,8 @@ S.hh−3, S.th−3, resultShow("Trong cung vừa qua") → fail if kaLastResult 
 | nc / bd | «Trong cung cố quốc vừa qua» | same rows | none |
 Scan 300 random home steps × 5 roads: iPad SCAN PASS (nc re-run alone after the palace-start flake) · Fold 755x1000 SCAN PASS 5/5 · BEFORE: SCAN FAIL 5/5 «cards».
 Page errors 0. meRank / drawnTag (r3) still PASS on every road.
+Nit (MAIN 158): the 4 palace-only `RANKS[Math.min(S.rank,…)].n` lines (j67:98, jst14:42 «nay …», jrd_dtq:179, jrd_tt:689 MATME) read meRankN() — same words
+in the palace (8 ranks, S.rank ≤ 7). No `RANKS[S.rank]` / `RANKS[Math.min(S.rank` left outside comments.
+Gates: QUICKCHECK PASS on 821eba2a (open 2002 ms · old save ok · perf new/live render 221/197, tab 510/470, buổi 1347/1287, tasks>200ms 33/32). Core gates:
+G4 80 dialog-fixed + G4 90 button-crawl = the same pre-existing LIVE FAILs; LOOK-DEDUPE failed once inside the long run → re-run alone PASS on ca368b86 AND
+821eba2a. On e1b0eba8 (+ nit): iPad scan 5 roads PASS · coop-e2e 143/143 · page errors 0. (Quickcheck not re-run for the 4-line nit: identical output.)
