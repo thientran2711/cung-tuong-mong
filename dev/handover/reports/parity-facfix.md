@@ -111,3 +111,10 @@ LIVE moved 1dcb373e → aa37de21 (home-way-nits; j10 + jagacts3 untouched). Merg
 **LAND READY review/parity-facfix 1d0f032d (FF from LIVE aa37de21)**
 
 Worker handover: none needed — job done. Open items routed by Foreman D to MAIN 157: §4 help family (housemate «Nhờ giúp đỡ», jaudit loan/tell, cx2:help never targets her); pre-existing quickcheck faults (G4 dialog-fixed «empty Tốn/Được», crawl «Ô lưu · Lui»).
+
+### LAND READY videos on 1d0f032d (real taps, Fold 755x1000 + iPad 1180x820)
+- Fold: https://ctm-img.victoria-tntt.workers.dev/img/_review/parity-facfix/parity-facfix-fold.mp4
+- iPad: https://ctm-img.victoria-tntt.workers.dev/img/_review/parity-facfix/parity-facfix-ipad.mp4
+What they show (~35 s each, 0 page errors): Hoàng hậu taps Giao tình → Phe phái: «Lập phe cùng» for a same-clan consort (road 2, new) and a friend (road 1); a tap on the clan one asks her (jrcv) → the faction is founded. Then the NPC→her parity case: a consort who likes her sends «rủ lập phe» (cx3:facFound, the same facFrOk rule) → her notice icon «Người được sai đi» → «Xem lời nhờ» → «Nhận lời lập phe» → the faction with that consort shows in Phe phái.
+Recorder (not committed — the branch sha stays 1d0f032d): dev/test/parity-facfix-video.js in the worker's local worktree, built on dev/test/lib/device.js like home-way-nits-video.js.
+Verdict giver wipes the CDN folder.
