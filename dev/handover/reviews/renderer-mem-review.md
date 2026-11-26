@@ -91,3 +91,22 @@ VERDICT §3: PASS 4422dda2 (FF from LIVE aa37de21). The worker's own gates (quic
 - Build: `bash dev/site/build_site.sh` on eb7ddb99 reproduces index.html; only window.CTM_BI changes.
 - Tests on eb7ddb99: scroll-cue-loop.js 755x1000 PASS, 1180x820 PASS; kscue-loop.js PASS all 4.
 VERDICT §4: PASS eb7ddb99 (FF from LIVE b881686f).
+
+## §5 — delta 1d57fe88 (eb7ddb99 + F10 member 5: kitOptUnify / legacy kitOptFit0 once per list per pass) — PASS
+- 1d57fe88 is a fast-forward of LIVE origin/main b881686f (checked). Game code: jopic.js (kitOptUnify → gate + kitOptUnify0 + sibling signature
+  skip) and jk4.js (kitOptFit0 legacy non-kopt path gated per dialog root, microtask re-run); plus rebuilt index.html/sw.js.
+- Logic: the gates are keyed exactly like the work they gate. kitOptUnify is keyed by the list parent `c`, and that is what unify walks.
+  kitOptFit0 is keyed by `#modal .dlg || parentElement`, and that is the same root kitOptGroup measures, so one root = one group. Because
+  of that, keeping only the LAST card per root in KIT_OPT_GL loses no group. A call that is gated re-runs once at the next microtask (after
+  the clear microtask queued earlier), so a card added later in the same pass is still unified or fitted; disconnected roots or lists are
+  skipped. kpOptArt → kitOptUnify recursion is still stopped by KIT_OPT_UNI. Same pattern as member 4 (KIT_OPT_EQ), family consistent.
+  No numbers (LAW 4 n/a); kit parts changed at source (LAW 9/11).
+- Build: build_site.sh on 1d57fe88 reproduces index.html (only CTM_BI changes).
+- Tests on 1d57fe88: scroll-cue-loop 755x1000 + 1180x820 PASS; kscue-loop PASS all 4; opt-frame-scroll-scan (MAXP=60, Fold+iPad)
+  LIVE b881686f vs 1d57fe88: 81/81 frames, 0 FAIL on both, **81/81 rows identical** (incl. picture count picc, cue, last-visible,
+  layout), so the unify / fit result has no look change.
+- minor 6: the sibling skip signature `childElementCount|textContent.length|data-kopt` cannot see a same-length text change (e.g.
+  «Bạc -40» → «Bạc -50») on an already unified art-less sibling. That sibling's own kpOptArt / CompactRows / Final still run when it is
+  rebuilt (kpOptArt wrapper), so only the placeholder re-unify of that sibling would be skipped. Low risk; a hash of textContent would close it.
+VERDICT §5: PASS 1d57fe88 (FF from LIVE b881686f). The worker's quickcheck and coop-e2e on 1d57fe88 were still running when I wrote this;
+this verdict does not cover them.
