@@ -34,3 +34,10 @@ Harness: sha column = `harness.sha` in the life JSON (value stamped by the proce
 ## Not done yet (honest)
 - Per-life player reviews (ROBOT-PLAYER-REVIEW §B) exist for cautious-k4 only (`dev/handover/robot/review/R2-cnv_chu-cautious-k4-1862968319-*.md`). The 12 other `-moments.md` files are the harness drafts (mechanical lines + shots), without the runner's own feeling lines or end-of-life review. Next worker: look at the shots in each shots-<life>/ dir (kept locally, not in git) and write the reviews.
 - speed-k2 must still end.
+
+## HANDOVER (R2, 26/11 ~14:00Z, context well past the roll line — successor please take over the reviews)
+Remaining for the successor (open as a worker with START_CORE + START_WORKER + briefs/ROBOT-PLAYER-REVIEW.md):
+1. Write the §B end-of-life review + feeling lines for the 12 lives with only a harness-drafted moments file: cautious-k2, lover-k5, random-k2, rebel-k1, rebel-k2, scholar-k2, scholar-k5, skilled-k2, skilled-k4, skilled-k5, speed-k1, speed-k4 (+ speed-k2 once it ends). Files: `dev/handover/robot/rerun-cnv-cnv_chu/R2-cnv_chu-<persona>-k<n>-<seed>.json/.md/-moments.md` (in git); the shots (`shots-<life>/`, `end.png`, `now.png`, m-*.png) are NOT in git: they live in the R2 container `/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/` — if that container is gone, replay a life by its seed (`node dev/test/robot-rt.js <url> <out> dev=fold origin=cnv road=cnv_chu bot=<sens|cautious|bold|quiet|rand> seed=<seed> life=<id>`; persona→bot: cautious→cautious, lover/skilled→sens, random→rand, rebel/speed→bold, scholar→quiet) and review the new life instead. Review file names: `dev/handover/robot/review/R2-cnv_chu-<persona>-k<n>-<seed>-review.md` (+ the finished moments file there; cautious-k4 is the format example).
+2. speed-k2 (seed 2242959839, life id R2-cnv_chu-speed-k2-2242959839): still running tracked in R2 (`/home/user/wt/r2-k2.sh`, resumes from its ckpt; exit 3 = RT_HANGKILL 3500 MB, just relaunch). When it ends, add its row/end to the table above.
+3. VOID runs in `rerun-cnv-cnv_chu/VOID/` are evidence only, never count.
+Rates must come from the 13 valid lives only.
