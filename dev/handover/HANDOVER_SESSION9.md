@@ -289,3 +289,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~17:58Z SẾP ANSWERED Mong manh: rejected; no-roll life-changing options = no odds word + «Cẩn thận khi lựa chọn» line; firstcard toggle → this rule (154 told FIRSTCARD).
 - ~18:00Z OWNER UI BUG via 154: Dư đồ place icons tiny → as big as «Ta», above name, all map views → KK44 + map-zones (161). map-zones-r7 to be checked/held.
 - ~18:01Z OWNER UI via 154: veil tint by buổi (one kit token per buổi) → KK44 (161).
+- ~18:02Z sếp asked for the ACT-MERGE report PDF → sent Bao-cao-gop-nut-LIVE-26-11.pdf (5 pages VN: summary, full NAME table, faults 1–9 fixed, checks, recs/next) — copy in reports/act-merge/.
