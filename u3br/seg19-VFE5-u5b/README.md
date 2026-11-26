@@ -1,0 +1,1 @@
+seg19 room VFE5 B FREEZE-FIX VERIFY #3 (U3b-2): u5b = u4 7959f1b5 + jksize/jinv diff of coop-freeze-kmrew c20aaa6e, harness f40a56ff. iPad host / Fold guest, seed 22, UNMITIGATED (RELOAD_AT=20). Closed by time 85 min buoi 124 year 2, 0 stuck, 0 SEATHANG. DOM nodes 4-9k flat; host documents count climbs 9->27 (worth a look).
