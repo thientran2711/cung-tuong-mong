@@ -35,3 +35,25 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-4 from 2026-11-26T03:12:46.883Z buổi 657
+CP buổi 657 year null save 1360057 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «Phế phi · lãnh cung Vu Kiều Ân»
+CP buổi 707 year 5 save 1426320 chars
+CP buổi 757 year 6 save 1651629 chars
+CP buổi 807 year 6 save 1736254 chars
+CP buổi 857 year 6 save 1830880 chars
+CP buổi 907 year 7 save 1865596 chars
+CP buổi 957 year 7 save 1977763 chars
+CP buổi 1007 year 7 save 2037430 chars
+STATUS cnv-cnv_ban-speed-4 · buổi 1017 · year 7 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+CP buổi 1057 year 8 save 2122206 chars
+CP buổi 1107 year 8 save 2170676 chars
+CP buổi 1157 year 8 save 2189392 chars
+CP buổi 1207 year 9 save 2392289 chars
+CP buổi 1257 year 9 save 2490907 chars
+CP buổi 1307 year 9 save 2594258 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:284:13)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T05:12:16.956Z buổi 1347

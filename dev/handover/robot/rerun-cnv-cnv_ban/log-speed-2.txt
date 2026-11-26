@@ -57,3 +57,7 @@ touchscreen.tap: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-2 from 2026-11-26T03:12:51.008Z buổi 1833
+CP buổi 1833 year null save 3237102 chars
+BUG dead close button has no effect: .dlg «Tin trong cung buổi này» «Lui»
+BUG game every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui)
+LIFE DONE cnv-cnv_ban-speed-2 Hồng nhan bạc mệnh age 31 · buổi 1863 · taps 259 · dead buttons 2 · stuck 0 · bugs 3

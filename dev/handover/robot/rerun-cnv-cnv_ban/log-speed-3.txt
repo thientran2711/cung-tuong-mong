@@ -35,3 +35,30 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-3 from 2026-11-26T03:12:30.407Z buổi 1079
+CP buổi 1079 year null save 1976011 chars
+CP buổi 1129 year 8 save 2058271 chars
+CP buổi 1179 year 9 save 2132451 chars
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Đôi uyên ương» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá chép gấm» cover b.kidn in #mb
+BUG dead close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»
+CP buổi 1229 year 9 save 2234476 chars
+CP buổi 1279 year 9 save 2246003 chars
+CP buổi 1329 year 10 save 2308965 chars
+CP buổi 1379 year 10 save 2373685 chars
+STATUS cnv-cnv_ban-speed-3 · buổi 1419 · year 10 · rank 0 · bugs 1 · stuck 0 · dead buttons 4
+CP buổi 1429 year 10 save 2434988 chars
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» cover b.kidn in #mb
+CP buổi 1479 year 11 save 2555969 chars
+CP buổi 1529 year 11 save 2587151 chars
+CP buổi 1579 year 11 save 2672383 chars
+CP buổi 1629 year 12 save 2770790 chars
+CP buổi 1679 year 12 save 2807445 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:171:44)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-3 from 2026-11-26T05:12:15.636Z buổi 1714

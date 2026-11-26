@@ -34,3 +34,25 @@ page.waitForTimeout: Target page, context or browser has been closed
     at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
   log: []
 }
+RESUME cnv-cnv_ban-lazy-5 from 2026-11-26T03:12:56.041Z buổi 933
+CP buổi 933 year null save 1801636 chars
+CP buổi 983 year 7 save 1873799 chars
+CNV EXIT CHOICE buổi 987 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-lazy-5/cnvexit-987.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1033 year 8 save 1981693 chars
+CP buổi 1083 year 8 save 2066668 chars
+CP buổi 1133 year 9 save 2135718 chars
+CP buổi 1183 year 9 save 2165063 chars
+CP buổi 1233 year 9 save 2240645 chars
+STATUS cnv-cnv_ban-lazy-5 · buổi 1249 · year 9 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 1283 year 10 save 2273696 chars
+CP buổi 1333 year 10 save 2345336 chars
+CP buổi 1383 year 10 save 2389505 chars
+CP buổi 1433 year 11 save 2554810 chars
+CP buổi 1483 year 11 save 2549156 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:284:13)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-lazy-5 from 2026-11-26T05:12:00.031Z buổi 1502

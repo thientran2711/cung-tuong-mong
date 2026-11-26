@@ -1,8 +1,8 @@
-# cnv-cnv_ban-lazy-5 (real-tap harness f2737ee2, fold)
+# cnv-cnv_ban-lazy-5 (real-tap harness 8bd0b16c, fold)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-lazy-5 | HARNESS |  | 933 |  | 0 | 0 | 1 | — |
+| cnv-cnv_ban-lazy-5 | HARNESS |  | 1506 |  | 0 | 0 | 1 | — |
 
 ## Dead buttons
 

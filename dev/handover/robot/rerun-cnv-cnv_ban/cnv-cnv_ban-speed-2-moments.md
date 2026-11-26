@@ -294,3 +294,15 @@ Format: game date · screen · feeling · what happened · shot (relative to the
 - year 13 · turn 151 · tuần 2 · buổi 1 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1800.png
 - year 13 · turn 153 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1820.png
 - year 13 · turn 153 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1823-266.png
+- year 13 · turn 154 · tuần 1 · buổi 2 · rank 0 · #modal «Chương 14 · Mẫu nghi thiên hạ» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-speed-2/m-new-1834-1.png
+- year 13 · turn 154 · tuần 1 · buổi 2 · rank 0 · .dlg «Chương 14 · Mẫu nghi thiên hạ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-cnv-cnv_ban-speed-2/m-new-1834-2.png
+- year 13 · turn 154 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Mạnh Liễu Tư Kỳ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1835-3.png
+- year 13 · turn 154 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Trưởng Tôn Vân La» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1835-4.png
+- year 13 · turn 154 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thuần quý nhân Nghiêm Tĩnh Thù» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1835-5.png
+- year 13 · turn 155 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1840.png
+- year 13 · turn 156 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1852-6.png
+- year 13 · turn 156 · tuần 0 · buổi 1 · rank 0 · .dlg «Hạn hán, mất mùa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1852-7.png
+- year 13 · turn 156 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1860.png
+- year 13 · turn 156 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [dead] close button has no effect: .dlg «Tin trong cung buổi này» «Lui» · shots-cnv-cnv_ban-speed-2/noeffect-1795663120951.png
+- year 13 · turn 156 · tuần 2 · buổi 3 · rank 0 · .dlg · ODD · [game] every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui) · -
+- year 13 · turn 157 · tuần 2 · buổi 0 · rank 0 · ending · EVENT · life over: Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi · age 31 · buổi 1863 · bugs 3 · stuck 0 · dead buttons 2 · shots-cnv-cnv_ban-speed-2/end.png
