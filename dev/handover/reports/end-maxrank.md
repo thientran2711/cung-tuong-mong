@@ -107,3 +107,11 @@ NON-BLOCKING notes: (1) an OLD save already PAST the edict whose LIVE tracker st
 VERDICT: PASS ef459c0a — no BLOCKING items.
 
 ADDENDUM (same reviewer): Foreman D ruled 26/11 ~19:40Z (message reached me after the verdict) that never-entered lives MUST still be sent to Bảng xếp hạng with their true rank («Chưa vào cung» / «Tú nữ»), sorted lowest. ef459c0a drops them → this PASS covers ef459c0a only and is NOT land-ready; the next worker sha (ruling + 53319e6f merge) gets a delta review here before LAND READY.
+
+## Delta r2 — Foreman D ruling (Bảng xếp hạng) · review/end-maxrank @ dd61c8a4 (FF from LIVE 53319e6f)
+RV (Naxk) PASS on ef459c0a. Foreman D then ruled (law 16): never-entered lives are NOT dropped from the board; they go with their TRUE standing, sorted lowest.
+- rank/worker/src/score.js: RULES.preN {home «Chưa vào cung», tunu «Tú nữ»}; check accepts L.pre only with no rank / post; phamName → preN word; score 0 (the lowest palace life scores ≥ 10 → always below). board.js stores pre. jrank sends pre and drops 'r' trail items for a pre life. j32 lifeTopRank reads the words from BAL.rank.preN (one core with the board).
+- Tests: score.test.mjs 34 ok (+8 pre cases), board.test ALL OK; end-maxrank.js ALL PASS (ban hoa → board «Tú nữ · 0», home → «Chưa vào cung · 0», check null).
+- quickcheck dd61c8a4 PASS (known LIVE G4 80 + 90 faults only); coop-e2e run 1 143/143.
+- **Deploy needed**: the LIVE Worker ctm-rank must be redeployed (rank/worker, wrangler deploy) before the server accepts pre lives; until then it refuses only those lives («Bảng … không nhận kiếp này»). Not deployed by the worker.
+- Known, not changed: the board keeps its 5 servant steps (srkTier), so a maid's board word («Đại cung nữ») is the tier name while the end card prints the 6-rung post («Cung nữ nhất đẳng») — pre-existing maid-ladder-6 design.
