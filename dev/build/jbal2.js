@@ -2260,20 +2260,20 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
    sent servant (±1 only at the extremes: sharp & bậc ≥ srvHi / timid & bậc ≤ srvLo) + TAI MẮT (master's real eyes ≥ matMid +1, ≥ matHigh +2, a planted
    eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
    (cap missCap; reset on a find). fine = bạc of «phạt bổng» (light), danh / duc = the small stat loss of a light charge; warnMat = her Tai mắt
-   count that warns her when someone searches HER (once a day per searcher). */
+   count that warns her when someone searches HER (once a day per searcher). EIGHT charges = the owner's approved list (OD 26/11 ~05:15Z «D4 A»);
+   the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc). */
 BAL.charge={C:{
  vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light"},
  il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam"},
  uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam"},
  mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light"},
- bm:{n:"Bày mưu hại người",need:2,band:4,pun:"cam"},
  hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang"},
  mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold"},
  vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold"},
  tt:{n:"Tư thông",need:3,band:1,pun:"cold"}},
- order:["tt","mh","vo","hd","bm","mc","uh","il","vp"],
+ order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
-  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"bm",old:"bm",caught:"bm",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
+  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
   tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt"},
  queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:5,guard:-1,missStep:1,missCap:6,

@@ -24,7 +24,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID,LAB='br
  console.log('setup',JSON.stringify(su));
  const out={label:LAB,searches:[],accuse:null,herNotice:null};
  /* 1. searches by real taps on the maid picker */
- for(let i=0;i<10;i++){const can=await p.evaluate(id=>accOK(S,RV(id)),su.v);if(can)break;
+ for(let i=0;i<14;i++){const can=await p.evaluate(id=>accOK(S,RV(id)),su.v);if(can)break;
   await drain();await p.evaluate(()=>{S.suc=100;used=0;if(typeof spyPick==="function")spyPick(0)});await sleep(700);if(i===0)await shot('picker');
   const idx=await p.evaluate(id=>{const q=Q[0];window.__qdbg=JSON.stringify(Q.map(x=>[x.t,(x.opts||[]).map(o=>o.kgt&&o.kgt.id)]));return q&&q.opts?q.opts.findIndex(o=>o.kgt&&o.kgt.id===id):-1},su.v);
   const BT=p.locator('#modal:not([hidden]) .opts > button, #modal:not([hidden]) .kpopts > button');const nb=await BT.count();

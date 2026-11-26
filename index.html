@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1e281825+","t":"2026-11-26T05:56Z","c":"charge-evidence handover: D1 reviewer status","b":"ae494c1a54e2","h":[{"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"4032a74f+","t":"2026-11-26T06:05Z","c":"punish-reason.js: NPC release check follows BAL.pun.npcOneBelow (false = back to Đáp ứng, today's rule)","b":"b0cac6e0c094","h":[{"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1683,8 +1683,10 @@ function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){
 function chooseBad(i,m){try{(window.__badPick=window.__badPick||[]).push({i,t:m&&m.t||"",pid:m&&m.pid||"",n:m&&m.opts?m.opts.length:0,st:String(new Error().stack||"").split("\n").slice(2,7).join(" < ")});console.warn("chooseM: no option",i,"on",m&&(m.pid||m.t))}catch(e){}}
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
+/* the person-picker card sub-line markers (« · đang nhắm», « · Tìm chứng: …», jwhy spy picker) belong to the card only: the log and the evidence record name the person */
+function optLogName(x){return String(x||"").replace(/\s*·\s*(đang nhắm|Tìm chứng:[^·<]*)/g,"").trim()}
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
- const d=typeof lsRest==="function"?lsRest(b0,lsArr(L)):logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
+ const d=typeof lsRest==="function"?lsRest(b0,lsArr(L)):logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=optLogName(c.n).replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
  log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" — "+res:"."}`)}/* "—", not "→": the result itself has "Sủng a → b" (log-sync r1) */
 
 /* nights */
@@ -5971,7 +5973,7 @@ function hasScandal(t){return t===S?(S.men||[]).some(m=>m.trysts>0):!!t.scandal}
 function realCrime(t){const own=e=>!((e.by&&e.by!==key(t))||e.gh);const w=(t.inv||[]).some(e=>e.w&&IT[e.k]&&itm(e.k).rk>rkOf(t));const il=(t.inv||[]).some(e=>own(e)&&(e.t||(IT[e.k]&&itm(e.k).il)));return w?"vượt phẩm (mặc đồ quá phẩm)":il?"giấu đồ cấm":t.schemes>0?"từng bày mưu hại người":""}
 A("lygian","Ly gián",{c:{get bac(){return -BAL.actBac.lygian}},ok:(a,t)=>a.bac>=BAL.actBac.lygian&&rkOf(t)>=1,o:(a,t)=>odT(a,45-(t.duc||0)/6),get x(){return `thành: nàng Sủng ${balSg(BAL.eff.j30.sungF)} · hỏng: bị lộ, ${sgStat(BAL.eff.j30.sungLyFail,"Sủng ngươi")}`},f:(a,t)=>{ap(a,{bac:-BAL.actBac.lygian});a.schemes=(a.schemes||0)+1;if(aRoll(odT(a,45-(t.duc||0)/6),a)){ap(t,{sung:BAL.eff.j30.sungF});return `${NMc(a)} tung lời ly gián, ${NM(t)} bị Hoàng thượng lạnh nhạt (${sgOf(t,BAL.eff.j30.sungF)}). `}const c=caught(a,t,false,"ly gián");if(c)return c;ap(a,{sung:BAL.eff.j30.sungLyFail});return `Lời ly gián của ${NM(a)} không ai tin. `}});
 A("slowpoison","Hạ độc dần",{c:{get bac(){return -BAL.actBac.slowpoison}},ok:(a,t)=>a.bac>=BAL.actBac.slowpoison,o:(a,t)=>odT(a,35),get x(){return `thành: nàng Sức ${balSg(BAL.eff.j30.sucF)}, ốm 3 tháng (${sgOf(null,BAL.eff.j30.sungSick)} mỗi tháng; ốm lâu bị giáng) · hỏng: dễ lộ, chứng cứ về tay nàng`},f:(a,t)=>{ap(a,{bac:-BAL.actBac.slowpoison});a.schemes=(a.schemes||0)+1;if(aRoll(odT(a,35),a)){if(t===S&&(S.doctor||S.inv.some(e=>e.k==="giaidoc"))&&roll(60))return "Thuốc bổ có vị lạ; thái y kịp phát hiện độc dược ngấm dần. ";ap(t,{suc:BAL.eff.j30.sucF});t.sick=3;return `${NM(t)} ngấm độc dần, người gầy rộc (Sức ${balSg(BAL.eff.j30.sucF)}, ốm 3 tháng). `}const c=caught(a,t,true,"hạ độc dần");if(c)return c;return "Bát thuốc bị đổ đi, mưu không thành. "}});
-A("tocao","Tố tội thật",{c:{},ok:(a,t)=>!!realCrime(t)&&!!chTocao(a,t),o:(a,t)=>odT(a,50+chHave(a,t,chTocao(a,t))*10),get x(){return `cần đủ chứng một tội thật (vượt phẩm ${chC("vp").need}, đồ cấm ${chC("il").need}, bày mưu ${chC("bm").need}) · thành: nàng chịu phạt theo tội ấy · hỏng: Danh ${balSg(BAL.eff.j30.danhF)}`},f:(a,t)=>{const c=chTocao(a,t)||"vp";const o=odT(a,50+chHave(a,t,c)*10);const n=chHave(a,t,c);evA(a,t,-n,c);if(aRoll(o,a)){ap(a,{danh:BAL.eff.j30.danhTocao});const px=CHX;CHX={a,t,c,n};try{chPunish(t,c,"bị tố",a)}finally{CHX=px}return `${NMc(a)} tố ${NM(t)} tội ${chName(c).toLowerCase()}: chứng cứ rõ ràng. `}ap(a,{danh:BAL.eff.j30.danhF});return `${NMc(a)} tố ${NM(t)} nhưng không đủ chứng, bị chê nhiều chuyện (Danh ${balSg(BAL.eff.j30.danhF)}). `}});
+A("tocao","Tố tội thật",{c:{},ok:(a,t)=>!!realCrime(t)&&!!chTocao(a,t),o:(a,t)=>odT(a,50+chHave(a,t,chTocao(a,t))*10),get x(){return `cần đủ chứng một tội thật (vượt phẩm ${chC("vp").need}, đồ cấm ${chC("il").need}, bày mưu, ức hiếp ${chC("uh").need}) · thành: nàng chịu phạt theo tội ấy · hỏng: Danh ${balSg(BAL.eff.j30.danhF)}`},f:(a,t)=>{const c=chTocao(a,t)||"vp";const o=odT(a,50+chHave(a,t,c)*10);const n=chHave(a,t,c);evA(a,t,-n,c);if(aRoll(o,a)){ap(a,{danh:BAL.eff.j30.danhTocao});const px=CHX;CHX={a,t,c,n};try{chPunish(t,c,"bị tố",a)}finally{CHX=px}return `${NMc(a)} tố ${NM(t)} tội ${chName(c).toLowerCase()}: chứng cứ rõ ràng. `}ap(a,{danh:BAL.eff.j30.danhF});return `${NMc(a)} tố ${NM(t)} nhưng không đủ chứng, bị chê nhiều chuyện (Danh ${balSg(BAL.eff.j30.danhF)}). `}});
 A("expose","Bóc chuyện tư tình",{c:{},ok:(a,t)=>hasScandal(t)&&chOK(a,t,"tt"),o:(a,t)=>odT(a,45+chHave(a,t,"tt")*8),get x(){return `cần ${chC("tt").need} chứng cứ tội tư thông · thành: nàng bị ban chết hoặc vào lãnh cung · hỏng: ngươi bị tội vu khống`},f:(a,t)=>{const o=odT(a,45+chHave(a,t,"tt")*8);evA(a,t,-chHave(a,t,"tt"),"tt");if(aRoll(o,a)){if(t===S){if(roll(50))return over("Tư thông bị phát giác","Chuyện tư tình bị phơi bày trước Hoàng thượng. Ngươi bị ban chết.","Ban chết: tư thông bại lộ")||"";cold("Ngươi tư thông bị phát giác");return "Chuyện tư tình bại lộ. "}if(roll(50)){t.alive=false;log(`${t.name} tư thông bị phát giác, bị ban chết.`);return `${t.name} tư thông bị phát giác, bị ban chết. `}fall(t,"tư thông bị phát giác");return ""}fall(a,"vu khống người khác tư thông");return ""}});
 A("xinhh","Xin Hoàng hậu giáng",{c:{get bac(){return -BAL.actBac.xinhh}},ok:(a,t)=>{const q=queenP();return a.bac>=BAL.actBac.xinhh&&q&&q!==a&&q!==t&&aff(q,a)>=netTh(q,"than")&&rkOf(t)>=1},o:(a,t)=>{const q=queenP();return q?oddsCl(30+aff(q,a)/2-aff(q,t)/2):5},get x(){return `cần Hoàng hậu thiện cảm ${(()=>{let q=null;try{q=S?queenP():null}catch(e){}return netTh(q,"than")})()}+ · thành: nàng bị giáng một phẩm · hỏng: Hoàng hậu thiện cảm ${balSg(BAL.eff.j30.f)}`},f:(a,t)=>{/* AG-ALL-2d4 (OD 17/11 ~17:10Z (1)): the gift is taken only when the Empress agrees; refused → returned */const q=queenP();const o=oddsCl(30+aff(q,a)/2-aff(q,t)/2);if(aRoll(o,a)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.j30.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}});
 /* the menus: her card groups and the NPC harm bands read the new roads */
@@ -29713,7 +29715,7 @@ function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(2);const ok=A.
  const r=e0.apply(this,arguments);evdSync();return r}})();
 (function(){const s0=seenNPC;seenNPC=function(v,t,txt){if(!txt||t===S||v===S)return s0.apply(this,arguments);const prev=J78.ctx;J78.ctx={how:"Tai mắt của ngươi thấy tận mắt",proves:plain(txt).replace(/\s*\(sai .*?đi\)\s*$/,"")};try{return s0.apply(this,arguments)}finally{J78.ctx=prev}}})();
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0];const c=m&&m.opts&&m.opts[i];const prev=J78.ctx;
-  if(c&&!prev)J78.ctx={how:`${m.t}: ${plain(c.n)}`,__t:plain(m.h||"")};
+  if(c&&!prev)J78.ctx={how:`${m.t}: ${optLogName(plain(c.n))}`/* j3 optLogName: the record names the person only */,__t:plain(m.h||"")};
   try{return c0.apply(this,arguments)}finally{try{evdSync()}finally{J78.ctx=prev}}}})();
 /* event text is the proof when it names her */
 (function(){const m0=j78mkEvd;j78mkEvd=function(v,c){if(c&&c.__t&&!c.proves){const s=c.__t.split(kRx("(?<=[.!?])\\s+","")).find(x=>x.includes(v.name));if(s)c=Object.assign({},c,{proves:s.replace(/[.!?]$/,"")})}return m0.call(this,v,c)}})();
@@ -39277,20 +39279,20 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
    sent servant (±1 only at the extremes: sharp & bậc ≥ srvHi / timid & bậc ≤ srvLo) + TAI MẮT (master's real eyes ≥ matMid +1, ≥ matHigh +2, a planted
    eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
    (cap missCap; reset on a find). fine = bạc of «phạt bổng» (light), danh / duc = the small stat loss of a light charge; warnMat = her Tai mắt
-   count that warns her when someone searches HER (once a day per searcher). */
+   count that warns her when someone searches HER (once a day per searcher). EIGHT charges = the owner's approved list (OD 26/11 ~05:15Z «D4 A»);
+   the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc). */
 BAL.charge={C:{
  vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light"},
  il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam"},
  uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam"},
  mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light"},
- bm:{n:"Bày mưu hại người",need:2,band:4,pun:"cam"},
  hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang"},
  mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold"},
  vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold"},
  tt:{n:"Tư thông",need:3,band:1,pun:"cold"}},
- order:["tt","mh","vo","hd","bm","mc","uh","il","vp"],
+ order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
-  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"bm",old:"bm",caught:"bm",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
+  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
   tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt"},
  queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:5,guard:-1,missStep:1,missCap:6,
@@ -98507,7 +98509,7 @@ function punEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;
 let CHS=null,CHLAST=null,CHX=null,CHLASTC=null;
 function chB(){return BAL.charge}
 function chC(c){return BAL.charge.C[c]||null}
-function chOfDeed(k){return BAL.charge.deed[k]||"bm"}
+function chOfDeed(k){return BAL.charge.deed[k]||"uh"}
 function chName(c){const C=chC(c);return C?C.n:"tội khác"}
 function chNeed(t,c){const C=chC(c);return C?C.need+(t&&rkOf(t)>=7?chB().queenPlus:0):99}
 /* band (0..6, the 7 equal odds bands) → the middle odds of that band */
@@ -98526,7 +98528,7 @@ function chSum(m){let s=0;for(const c in m)s+=(m[c]||0);return s}
 function chSync(h,t){if(!h||!t||h===t)return{};const m=chStore(h,t);let tot=0;try{tot=evG(h,t)}catch(e){}let s=chSum(m);if(s===tot)return m;
  if(s>tot){while(s>tot){let b=null;for(const c in m)if((m[c]||0)>0&&(b==null||m[c]>m[b]))b=c;if(!b)break;m[b]--;s--;if(!m[b])delete m[b]}return m}
  let x=tot-s;const O=chOrd(t);for(const c of O){while(x>0&&(m[c]||0)<chCapC(t,c)){m[c]=(m[c]||0)+1;x--}}
- if(x>0){const c=O[0]||"bm";m[c]=(m[c]||0)+x}return m}
+ if(x>0){const c=O[0]||"uh";m[c]=(m[c]||0)+x}return m}
 function chHave(h,t,c){if(!h||!t||h===t)return 0;return chSync(h,t)[c]||0}
 /* the charge a new piece (or a search) goes to: the one she is already building (closest to full), else her newest unproven deed */
 function chFor(h,t){const m=chSync(h,t);const O=chOrd(t);let best=null,gap=1e9;for(const c of O){const n=m[c]||0,cap=chCapC(t,c);if(n>0&&n<cap){const g=Math.max(0,chNeed(t,c)-n);if(g<gap){gap=g;best=c}}}
@@ -98590,7 +98592,7 @@ function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (t
  if(t.out||t.alive===false)return;if(a&&a!==t)t.coldBy=key(a);if(t.queen){t.queen=false;t.rank=6}t.out=true;t.coldWk=punNow();log(`<span class="g">${t.name} ${punPlain(W)}, bị ${rkOf(t)>=5?"phế":"đày"} vào lãnh cung.</span>`)}
 /* the accusation act itself (j8 «Tố giác»): the full charge only; its pieces are spent, the others kept */
 (function(){const A=ACT.accuse;if(!A)return;const f0=A.f;
- Object.defineProperty(A,"x",{configurable:true,get(){return `cần đủ chứng cứ của MỘT tội (mỗi tội một số chứng riêng: ${chB().order.slice().reverse().map(c=>`${chName(c)} ${chC(c).need}`).join(", ")}; Hoàng hậu thêm ${chB().queenPlus} và phẩm Tần trở lên)`}});
+ Object.defineProperty(A,"x",{configurable:true,get(){return `cần đủ chứng cứ của một tội (mỗi tội một số chứng riêng: ${chB().order.slice().reverse().map(c=>`${chName(c)} ${chC(c).need}`).join(", ")}; Hoàng hậu thêm ${chB().queenPlus} và phẩm Tần trở lên)`}});
  A.f=function(a,t){const c=chReady(a,t);if(!c)return f0.apply(this,arguments);const o=oAccuse(a,t);const n=chHave(a,t,c);const px=CHX;CHX={a,t,c,n};
   try{evA(a,t,-n,c);
    if(aRoll(o,a)){econPayWin(a,"accuse",t,0);const r=`${NMc(a)} tố giác ${NM(t)} tội ${chName(c).toLowerCase()} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;chPunish(t,c,"bị tố giác, chứng cứ rành rành",a);return r}
@@ -98612,7 +98614,7 @@ function chNeedTxt(h,t,c){const L=chLine(h,t);if(c){return `cần ${chNeed(t,c)}
  return L?`chưa đủ chứng một tội: ${L}`:`chưa có chứng cứ về ${chWho(t,"ngươi")}`}
 kitWhyEv=function(a,n){return a?chNeedTxt(S,a):`thiếu chứng cứ`};
 /* «Tố tội thật» (j30): a full charge among the plain crimes she can be shown to have (vượt phẩm, đồ cấm, bày mưu) */
-function chTocao(h,t){for(const c of ["bm","il","vp"])if(chReady(h,t,c))return c;return null}
+function chTocao(h,t){for(const c of ["uh","il","vp"])if(chReady(h,t,c))return c;return null}
 /* the deed behind the piece the last search found (the result line names the right wrong) */
 function chHitDeed(t){const x=(CHLAST&&CHLAST.tries||[]).filter(z=>z.hit).pop();if(!x)return null;const D=chDeedMap(t)[x.c];return D&&D.list[0]||null}
 /* evidence card rows (kit fact rows): one row per charge she holds a piece of — pieces / need, and the next search's odds word */
@@ -98620,7 +98622,7 @@ function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t);const ag=h===
  return [chName(c),n>=need?`${n}/${need}, đủ để tố`:`${n}/${need} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
 /* the short word for a picker sub-line, and the one plain paragraph that says what decides it (the search dialog) */
 function chFindWord(h,t,ag){if(!h||!t||h===t)return"";const c=chChase(h,t);return `Tìm chứng: ${word(chFind(h,t,c||"hd",ag).o)}`}
-function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `Tìm chứng = cơ may MỘT lần dò tìm ra MỘT chứng cứ. Tội nhẹ dễ tìm, tội nặng khó tìm; tâm cơ ${chWho(h)} (${h.tamco||0}) hơn người bị dò thì dễ hơn, kém thì khó hơn; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ Phi trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
+function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ Phi trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
 /* the evidence record (j78 S.evd «proves») names a real deed OF THE CHARGE the piece was written to */
 (function(){if(typeof j78proof!=="function")return;const p0=j78proof;j78proof=function(v){try{if(CHLASTC&&CHLASTC.t===v){const D=chDeedMap(v)[CHLASTC.c];S.evd=S.evd||{};
  const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}`,ref,aim:d.t}}
@@ -100603,7 +100605,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ae494c1a54e2";window.CTM_BUILD=BUILD;
+const BUILD="b0cac6e0c094";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

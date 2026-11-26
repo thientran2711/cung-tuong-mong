@@ -15,7 +15,7 @@
 let CHS=null,CHLAST=null,CHX=null,CHLASTC=null;
 function chB(){return BAL.charge}
 function chC(c){return BAL.charge.C[c]||null}
-function chOfDeed(k){return BAL.charge.deed[k]||"bm"}
+function chOfDeed(k){return BAL.charge.deed[k]||"uh"}
 function chName(c){const C=chC(c);return C?C.n:"tội khác"}
 function chNeed(t,c){const C=chC(c);return C?C.need+(t&&rkOf(t)>=7?chB().queenPlus:0):99}
 /* band (0..6, the 7 equal odds bands) → the middle odds of that band */
@@ -34,7 +34,7 @@ function chSum(m){let s=0;for(const c in m)s+=(m[c]||0);return s}
 function chSync(h,t){if(!h||!t||h===t)return{};const m=chStore(h,t);let tot=0;try{tot=evG(h,t)}catch(e){}let s=chSum(m);if(s===tot)return m;
  if(s>tot){while(s>tot){let b=null;for(const c in m)if((m[c]||0)>0&&(b==null||m[c]>m[b]))b=c;if(!b)break;m[b]--;s--;if(!m[b])delete m[b]}return m}
  let x=tot-s;const O=chOrd(t);for(const c of O){while(x>0&&(m[c]||0)<chCapC(t,c)){m[c]=(m[c]||0)+1;x--}}
- if(x>0){const c=O[0]||"bm";m[c]=(m[c]||0)+x}return m}
+ if(x>0){const c=O[0]||"uh";m[c]=(m[c]||0)+x}return m}
 function chHave(h,t,c){if(!h||!t||h===t)return 0;return chSync(h,t)[c]||0}
 /* the charge a new piece (or a search) goes to: the one she is already building (closest to full), else her newest unproven deed */
 function chFor(h,t){const m=chSync(h,t);const O=chOrd(t);let best=null,gap=1e9;for(const c of O){const n=m[c]||0,cap=chCapC(t,c);if(n>0&&n<cap){const g=Math.max(0,chNeed(t,c)-n);if(g<gap){gap=g;best=c}}}
@@ -98,7 +98,7 @@ function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (t
  if(t.out||t.alive===false)return;if(a&&a!==t)t.coldBy=key(a);if(t.queen){t.queen=false;t.rank=6}t.out=true;t.coldWk=punNow();log(`<span class="g">${t.name} ${punPlain(W)}, bị ${rkOf(t)>=5?"phế":"đày"} vào lãnh cung.</span>`)}
 /* the accusation act itself (j8 «Tố giác»): the full charge only; its pieces are spent, the others kept */
 (function(){const A=ACT.accuse;if(!A)return;const f0=A.f;
- Object.defineProperty(A,"x",{configurable:true,get(){return `cần đủ chứng cứ của MỘT tội (mỗi tội một số chứng riêng: ${chB().order.slice().reverse().map(c=>`${chName(c)} ${chC(c).need}`).join(", ")}; Hoàng hậu thêm ${chB().queenPlus} và phẩm Tần trở lên)`}});
+ Object.defineProperty(A,"x",{configurable:true,get(){return `cần đủ chứng cứ của một tội (mỗi tội một số chứng riêng: ${chB().order.slice().reverse().map(c=>`${chName(c)} ${chC(c).need}`).join(", ")}; Hoàng hậu thêm ${chB().queenPlus} và phẩm Tần trở lên)`}});
  A.f=function(a,t){const c=chReady(a,t);if(!c)return f0.apply(this,arguments);const o=oAccuse(a,t);const n=chHave(a,t,c);const px=CHX;CHX={a,t,c,n};
   try{evA(a,t,-n,c);
    if(aRoll(o,a)){econPayWin(a,"accuse",t,0);const r=`${NMc(a)} tố giác ${NM(t)} tội ${chName(c).toLowerCase()} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;chPunish(t,c,"bị tố giác, chứng cứ rành rành",a);return r}
@@ -120,7 +120,7 @@ function chNeedTxt(h,t,c){const L=chLine(h,t);if(c){return `cần ${chNeed(t,c)}
  return L?`chưa đủ chứng một tội: ${L}`:`chưa có chứng cứ về ${chWho(t,"ngươi")}`}
 kitWhyEv=function(a,n){return a?chNeedTxt(S,a):`thiếu chứng cứ`};
 /* «Tố tội thật» (j30): a full charge among the plain crimes she can be shown to have (vượt phẩm, đồ cấm, bày mưu) */
-function chTocao(h,t){for(const c of ["bm","il","vp"])if(chReady(h,t,c))return c;return null}
+function chTocao(h,t){for(const c of ["uh","il","vp"])if(chReady(h,t,c))return c;return null}
 /* the deed behind the piece the last search found (the result line names the right wrong) */
 function chHitDeed(t){const x=(CHLAST&&CHLAST.tries||[]).filter(z=>z.hit).pop();if(!x)return null;const D=chDeedMap(t)[x.c];return D&&D.list[0]||null}
 /* evidence card rows (kit fact rows): one row per charge she holds a piece of — pieces / need, and the next search's odds word */
@@ -128,7 +128,7 @@ function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t);const ag=h===
  return [chName(c),n>=need?`${n}/${need}, đủ để tố`:`${n}/${need} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
 /* the short word for a picker sub-line, and the one plain paragraph that says what decides it (the search dialog) */
 function chFindWord(h,t,ag){if(!h||!t||h===t)return"";const c=chChase(h,t);return `Tìm chứng: ${word(chFind(h,t,c||"hd",ag).o)}`}
-function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `Tìm chứng = cơ may MỘT lần dò tìm ra MỘT chứng cứ. Tội nhẹ dễ tìm, tội nặng khó tìm; tâm cơ ${chWho(h)} (${h.tamco||0}) hơn người bị dò thì dễ hơn, kém thì khó hơn; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ Phi trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
+function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ Phi trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
 /* the evidence record (j78 S.evd «proves») names a real deed OF THE CHARGE the piece was written to */
 (function(){if(typeof j78proof!=="function")return;const p0=j78proof;j78proof=function(v){try{if(CHLASTC&&CHLASTC.t===v){const D=chDeedMap(v)[CHLASTC.c];S.evd=S.evd||{};
  const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}`,ref,aim:d.t}}
