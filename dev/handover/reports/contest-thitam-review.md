@@ -1,0 +1,74 @@
+PRIORITY #1 CHECK ('thi thố|hạng nhất|thị tẩm|lật thẻ|contest'): OD 77 | ledger 6 | claims 8 | main 15 | review/* 9 | archive 0 (sparse handover worktree; worker's full count: archive 314)
+
+# BIG REVIEW — D3 review/contest-thitam @ fcd5c086 — VERDICT: FAIL (4 findings to fix, 1 advisory)
+
+Reviewer: BIG reviewer (opus) session_01D3E3NXwED3bj8Xfp41CezN · depth 3 · START_CTX ~3 % · child of worker D3 session_01D3E3NY4u5PWtro3m4FhbDG.
+Base: branch fcd5c086 is a fast-forward of LIVE 6b5d3d05 (`git merge-base --is-ancestor origin/main HEAD` = yes). Diff = jctn.js (new) + call sites
+in j71 / j8 / j34 / jts / j67 + BAL.ctn (jbal2) + assemble.py + tests/scan/report.
+Owner rule (verbatim, OD «26/11 ~01:25Z»): "Tôi thấy hiện tại tỉ lệ được lật thẻ bài thấp quá. Tôi muốn khi thắng hạng nhất các cuộc thi, ngoài
+phần thưởng hiện tại, còn được thị tẩm đêm đó" → ruling (1): first place in ANY contest ⇒ also thị tẩm that night.
+
+## What holds (verified, not trusted)
+- Logic test `node dev/test/contest-thitam.js` re-run on my own builds (assemble.py on branch and on LIVE 6b5d3d05):
+  branch 16/16 · branch LEDGER=1 16/16 · LIVE 0/16 · 0 page errors. Not-given case (with child): no promise, the tablet runs as before.
+  Lật thẻ odds: BAL.ag.emp.summon `[90,65]` identical on both; nightCh untouched in the diff.
+- Rewards unchanged: the diff only ADDS `ctnWin(...)` after each prize line; no prize code changed (Sủng/Danh deltas in the test differ only by
+  the random empGive/bestow roll, both directions).
+- Mechanism: ctnWin uses the existing j75 night-taken mark S.ntk (same as his own visit) → no flip, no steal, normal night path (jnf herNight /
+  resolveTonight rivalNight / co-op host flip relay). Old saves: S.ctn absent = nothing promised (safe). Servant / khuê các / lãnh cung / ill /
+  with child refused through isSrv / isKc / nightCh — same rule for NPCs (law 1).
+- LAW 4: BAL.ctn.on (switch only, no new number). LAW 7: no %, cổ trang words. LAW 9: kit modal card (Q) + log line only, no new part.
+- Real-tap videos (worker's, 4 files; frames extracted and looked at): branch Fold + iPad show «Kính sự phòng báo tin» → Chuẩn bị thị tẩm →
+  Đêm thị tẩm, no flip choice; LIVE shows no card and the flip deciding. Layout clean on both devices.
+- Co-op: see «Co-op re-run» at the end.
+
+## FINDINGS (FAIL)
+1. LAW 11 WHOLE FAMILY — contest kinds missed (the scan cannot see them).
+   - `dev/build/jrd_thd.js:110` road chapter thd_tho_7 «Vòng thi Ngự hoa viên» (kỳ Xuân thí, Hoàng thượng presiding): ending `win`
+     «Bài ngươi đứng đầu vòng Xuân thí…» = her FIRST PLACE → no ctnWin. Ending `lose` (`:112`) «{v} đứng đầu vòng Xuân thí» = an NPC's first
+     place → no ctnWin (LAW 1 two-way). Same road's chapter 4 (j67 ARC67 thd_tho «Tài nữ số một») IS wired → one road, two rules.
+     Failure: she wins the Xuân thí round (the only poetry contest of the Thư hương road's middle chapters) → that night the tablet is turned as
+     usual; promised rule broken.
+   - `dev/build/jrd_bd.js:262/265` road chapter bd_san_9 «Mã cầu và hội bắn xuân»: option «Tự giương cung bắn mũi cuối» → `win`
+     («Mũi tên của ngươi xẻ đôi mũi tên của em trai {v} trên hồng tâm») = she wins the archery contest → no ctnWin. (The other `win` road,
+     «Đưa cây cung cho hoàng tử», is the prince's shot, not hers → no night; «Hạ cung» → {v}'s brother wins, not a consort → no night.)
+   - Scan blind spot `dev/tools/contest-thitam-scan.py` M3: needs «Kỳ thi|Hội thi|kỳ khảo|khảo việc» AND «đứng đầu» on ONE line, so «vòng Xuân thí»
+     and «hội bắn» are invisible; «0 unknown sites» is not proof. Fix: also scan j67/jroad arc nodes (ARC67 / rdDef `t` / `sj` / `g`) for
+     thi|hội bắn|tranh tài|so tài|đua and their E endings for đứng đầu|thắng hội|xẻ đôi …; add both chapters to KIND (wired), and list the
+     excluded kinds with their reason so the table is the whole family: jkc/jkcg khuê các festivals (before she enters the palace), jpma
+     «Thách đấu / Cùng chơi» (1-to-1 duel, not a ranking contest; wiring it would make nights farmable daily), j31 «Hội Phượng» (one arrow roll,
+     no ranking), jexam khảo hạch (pass/fail), jrd thd_tro / thd_hoc / bd_soi / bd_hen (contestants are scholars / children / men).
+2. THE PROMISED GAIN IS NOT SHOWN ON THE CARD. Every entry card shows the kit hint (jk2b `kitHint`, hideOutcome), which keeps only the first two
+   gains (`good…slice(0,2)`, jk2b.js:299). `ctnX()` is appended 3rd/4th, so it is always cut. Proof:
+   - worker's own Fold video, frame t≈16.5 s: «Dự thi thơ … ĐƯỢC: đoạt giải, bệ hạ để mắt hơn; thường ổn» — no night.
+   - probe on the branch build, j71 card text at hint level 0/1/2: «đoạt giải, được để mắt…» / «đoạt giải, bệ hạ để mắt hơn; thường ổn…» /
+     «đoạt giải, Hoàng thượng để mắt hơn…» — no night at any level; the feast card «đứng đầu, bệ hạ để mắt hơn; thường ổn» — no night.
+   The report's claim «Every contest entry card prints the extra gain» holds only for the raw `x` string, not for what she sees.
+   Fix: make the night one of the first two gains (e.g. «đoạt giải, đêm ấy được thị tẩm, Sủng …») on j71 (3 cards + festival day card),
+   PEND.j71x, jts «Tự tay phối đồ», or, if the kit hint must rank it, a KIT REQUEST (do not patch kitHint yourself, LAW 9). Re-check on the
+   real cards at Fold 755x1000 + iPad 1180x820.
+3. WORDING (LAW 7 / VANPHONG, clarity): `ctnX()` says «đêm nay được thị tẩm» on cards for a contest held LATER: j71.js:338 fInv7
+   «Lời mời · … (tuần tới)» and j71.js:384 PEND.j71x (feast sign-up weeks ahead). Read as «tonight». Use «đêm ấy được thị tẩm» (j34 already
+   says «đêm ấy») — one wording for all cards.
+4. CAUSE BEFORE EFFECT (owner's own complaint in the same OD row: things happen «mà không hiểu vì sao»): in the Fold video her «Kính sự phòng
+   báo tin» card opens BEFORE the contest's «KẾT QUẢ» card (t≈16 s then ≈20 s), and the KẾT QUẢ «Được» rows list Sủng / Danh but not the night.
+   Fix: queue the summons card after the result (or add the night as a row of the result's Được) so she reads «you won → the night» in order.
+
+## ADVISORY (not a FAIL; for the worker to measure, for Foreman D to weigh)
+- Two-way means every NPC first place now also takes that day's tablet away from her. Her nights per year go UP only if her share of first
+  places is larger than her ordinary per-night tablet chance. The owner's motive is «tỉ lệ lật thẻ thấp quá»; please add a 1-year robot count
+  (her nights / year, LIVE vs branch, ranks 0–3) to the report so sếp sees the net effect.
+- Guaranteed night (no steal) is the worker's choice — keep it in the report's «Decisions» for sếp (fine by me).
+
+## Laws checked
+1 two-way: OK for the wired kinds (NPC + friend's entry), NOT for Xuân thí `lose` ({v}) → finding 1 · 2/3 equal value / gain-loss: no new choice ·
+4 one core: BAL.ctn.on · 5 n/a · 6 real people: NPC winners get a real night (rivalNight) · 7 wording: finding 3 · 9 kit: OK (Q card + log) ·
+10 n/a · 11 whole family: FAIL (finding 1) · 12 devices: videos Fold + iPad looked at · 13 prio1 line: present.
+
+## Re-run commands
+python3 dev/build/assemble.py (branch + LIVE) · node dev/test/contest-thitam.js file://…/dev/index.html (and LEDGER=1) ·
+python3 dev/tools/contest-thitam-scan.py <root> (branch 8/8, LIVE 0/8 — but see finding 1) · node dev/test/coop-contest-thitam.js (+ C4FIRST=1).
+
+## Co-op re-run (LIVE Worker, 2 browsers: host Fold 755x1000@2 / guest iPad 1180x820@2)
+Running at push time (room set-up OK: both seats in, each has the other as a consort entry). Results C1–C4 (and C4FIRST=1) are appended
+here in a follow-up commit; the FAIL above does not depend on them.
