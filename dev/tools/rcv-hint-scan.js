@@ -2,8 +2,8 @@
    (PEND.rcvHelp · PEND.rcvAsk for every RCVK key · PEND.rcvJudge for every RCVJ key) goes through the kit hint (jk2b kitHint);
    an option whose «Được» reads «chẳng được gì» is a fault (law 3). Two passes: A = asker and third person are not the Hoàng hậu (the queen
    can be told: «Mách lẻo với Hoàng hậu»); B = the Hoàng hậu herself asks (nobody above to tell).
-   OPEN (pre-existing on LIVE, a missing gain, not wording — needs a ruling, law 16): B rcvAsk:mediate «Mách lẻo» (gain «giữ mối oán» only).
-   usage: node dev/tools/rcv-hint-scan.js [dev/index.html] → table; exit 1 when a row outside OPEN reads «chẳng được gì» */
+   (B rcvAsk:mediate «Mách lẻo» had no gain on LIVE when the queen herself mediates; Foreman D 26/11 15:34Z: the same «Hoàng hậu quý …» gain, BAL.rcv.help.qAf.)
+   usage: node dev/tools/rcv-hint-scan.js [dev/index.html] → table; exit 1 when any row reads «chẳng được gì» */
 const path=require('path');const HTML=process.argv[2]||'dev/index.html';
 (async()=>{const {chromium}=require('playwright');const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
@@ -16,5 +16,5 @@ const path=require('path');const HTML=process.argv[2]||'dev/index.html';
   for(const k in RCVK){let c=null;try{c=PEND.rcvAsk({k,a:key(a),x:key(x)})}catch(e){}look(c,"rcvAsk:"+k)}
   for(const k in RCVJ){let c=null;try{c=PEND.rcvJudge({k,a:key(a),t:key(x)})}catch(e){}look(c,"rcvJudge:"+k)}
   };pass("A",V[0],V[1]);if(q)pass("B",q,V[0]);else rows.push({card:"B",opt:"(no Hoàng hậu in this world)",hint:""});return rows});
- const OPEN=new Set(["B rcvAsk:mediate · Mách lẻo"]);let bad=0;for(const r of R){const nm=r.card+' · '+r.opt.replace(/ với .*$/,'');const hit=/chẳng được gì/.test(r.hint),op=hit&&OPEN.has(nm),f=hit&&!op;if(f)bad++;console.log((f?'FAIL':op?'OPEN':'ok  ')+' '+r.card+' · '+r.opt+' → '+(r.hint||'')+(f?'   [x: '+r.x+']':''))}
+ const OPEN=new Set();let bad=0;for(const r of R){const nm=r.card+' · '+r.opt.replace(/ với .*$/,'');const hit=/chẳng được gì/.test(r.hint),op=hit&&OPEN.has(nm),f=hit&&!op;if(f)bad++;console.log((f?'FAIL':op?'OPEN':'ok  ')+' '+r.card+' · '+r.opt+' → '+(r.hint||'')+(f?'   [x: '+r.x+']':''))}
  console.log(errs.length?'page errors: '+errs.slice(0,3).join(' | '):'no page errors');console.log(bad?bad+' option(s) read «chẳng được gì»':'RCV-HINT PASS');await b.close();process.exit(bad||errs.length?1:0)})();
