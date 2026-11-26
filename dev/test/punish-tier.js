@@ -89,7 +89,9 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
  if(DIR){/* LOOK stills: the evidence card (weight on every charge) and her verdict notices */
   await p.evaluate(()=>{Q.length=0;closeModal();const L=liveRivals(true).filter(x=>!x.queen&&!x.out);const v=L[0];v.wrongs=[];v.evc={};v.ev=0;S.evc={};S.out=0;S.rank=2;v.rank=3;
    deedAdd(v,"poison",L[1],2,`bỏ độc vào điểm tâm của ${L[1].name}`);deedAdd(v,"huydung",L[2],1,`hủy dung ${L[2].name}`);deedAdd(v,"vp",null,1,"ăn vận vượt phẩm");
-   evA(S,v,chNeed(v,"hd"),"hd");evA(S,v,2,"mh");evA(S,v,1,"vp");try{k61Know(v,"",true,2)}catch(e){}kitEvidencePanel(v)});await sleep(1200);
+   evA(S,v,chNeed(v,"hd"),"hd");evA(S,v,2,"mh");evA(S,v,1,"vp");try{k61Know(v,"",true,2)}catch(e){}S.met=S.met||{};S.met[v.id]=wk();window.__ev=v;/* a KNOWN Tần (met): the kit figure, not the unmet silhouette (OD 15/11 face rule) */kitEvidencePanel(v)});await sleep(1200);
+  {const d=await p.evaluate(()=>{const v=window.__ev;const t=(document.querySelector("#modal")||document.body).innerText;return {known:kitKnown(v),tier:/· tội (nặng|vừa|nhẹ)/.test(t)}});
+   console.log((d.known&&!d.tier?"PASS ":"FAIL ")+`evidence card: accused known (kit figure) ${d.known} · no weight label on a piece (count only, 21:00Z) ${!d.tier}`);if(!(d.known&&!d.tier))fails++}
   await p.screenshot({path:`${DIR}/evidence-${W}x${H}.png`});
   for(const k of ['__coldQ','__giangQ','__backQ']){const has=await p.evaluate(k=>{closeModal();Q.length=0;const q=window[k];if(!q)return false;Q.push(q);showModal();return true},k);if(has){await sleep(2500);await p.screenshot({path:`${DIR}/${k.slice(2,-1)}-${W}x${H}.png`})}}
  }
