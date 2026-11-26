@@ -190,6 +190,7 @@ function nafNo(m){const sum=NAF_SUM.includes(m.pid);const dc=sum?nafDecl(m):"";i
    BAL.coopTm.nightMs her cards are handled with the SAME mapping as above, with NO ANSWER (CW.gAfk, in her context on the host):
      summons / the night itself (NAF_SUM / NAF_NT): nafNo, the card leaves her list;
      the flip choice (NAF_OWN): untouched (its own clock);
+     a choice with no generator (pid «live», by reference in the host's memory): LAPSES (rcpLapse, as the carry above lapses one);
      ANY OTHER card (a real choice, a notice, the item reveal): CARRIED = it stays on her seat (her stored S.thq, on her screen, unanswered;
        she answers it when she returns, rebuilt from its pid in her context then, as carryBack rebuilds a carried card), and the room no
        longer waits on it this week (c.cw = the week). A card raised after the bound fired, in the same week, is handled at once.

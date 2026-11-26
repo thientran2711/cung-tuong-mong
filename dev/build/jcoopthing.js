@@ -67,11 +67,16 @@ function herCards(){let st=null;try{st=TH.seatOf(other())}catch(e){}const q=st&&
 CW.gWait=function(own){if(!on()||!host()||CW.ctx||!CW.on||!S||S.dead)return false;const w=wkR();if(CW.ngoW!==w||CW.sent===w)return false;
  if(TH.held&&TH.held(other()))return false;return herCards().some(c=>herOpen(c)&&!(own||[]).includes(c.pid))};
 /* the bound ran out: her open cards with NO ANSWER (jcooptimer's mapping): night = the pids answered «no answer» by no(m) in her context
-   (the card leaves her list, its patch reaches her phone), own = untouched, any other = carried (kept on her seat, unanswered) */
+   (the card leaves her list, its patch reaches her phone), own = untouched, a «live» card (no generator) lapses, any other = carried (kept on her seat, unanswered) */
 CW.gAfk=function(own,night,no){if(!on()||!host()||CW.ctx)return 0;const w=wkR(),seat=other(),L=herCards();let car=0,nn=0;
  for(const c of L){if(!herOpen(c)||(own||[]).includes(c.pid))continue;
   if(c.pid&&(night||[]).includes(c.pid)){nn++;const id=c.id;D.later(seat,()=>{D.hold(S);const i=S.thq.findIndex(x=>x&&x.id===id);if(i<0)return;const x=S.thq.splice(i,1)[0];
     let m=null;try{const d=mkP(x.pid,x.pp||{});if(d)m={t:x.t,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}catch(e){console.error(e)}if(m)try{no(m)}catch(e){console.error(e)}});continue}
+  /* a card with handlers and no generator (pid "live": kept by reference in the host's memory, valid only while her store lives = this
+     week) cannot outlive the merged week: it LAPSES now, as nightAfk lapses such a card on her phone (serM lap → rcpLapse: no effect,
+     one log line), never a hollow road after the week (real run seed 32 / test THIN 13: «Hội phối đồ: báo đề» refused after the week) */
+  if(c.pid==="live"){nn++;const id=c.id,lid=c.pp&&c.pp.lid;D.later(seat,()=>{D.hold(S);const i=S.thq.findIndex(x=>x&&x.id===id);if(i<0)return;const x=S.thq.splice(i,1)[0];
+    try{LIVE.delete(lid)}catch(e){}try{rcpLapse(x.t)}catch(e){console.error(e)}G.stat.afkLap=(G.stat.afkLap|0)+1});continue}
   c.cw=w;car++}
  G.stat.afk=(G.stat.afk|0)+car+nn;lg(["afk",w,car,nn]);try{D.save()}catch(e){}try{TH.flush()}catch(e){}
  setTimeout(()=>{try{CW.nCheck()}catch(e){}try{CW.soonEnd&&CW.soonEnd()}catch(e){}},0);return car+nn};
