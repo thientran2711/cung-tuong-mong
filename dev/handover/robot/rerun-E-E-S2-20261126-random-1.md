@@ -1,0 +1,119 @@
+# ES2-R2-random-1 (real-tap harness 89f5b956, fold)
+
+| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
+|---|---|---|---|---|---|---|---|---|---|
+| ES2-R2-random-1 | Ban hoa — Bị ban hoa, xuất cung | 19 | 3 | 9 | 370 | 2 | 8 | — | 0 / 0 |
+
+## Dead buttons
+
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Người lạ???» covered by div.kscn-veil · dead-fold-1795669085933.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chọn chính mình» covered by div.kscn-veil · dead-fold-1795669094013.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Về Dư đồ» covered by div.kscn-veil · dead-fold-1795669101859.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Lịch tháng» covered by div.kscn-veil · dead-fold-1795669110288.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mục tiêu chương (có mới)» covered by div.kscn-veil · dead-fold-1795669117442.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Thỉnh tranh nhân vật» covered by div.kscn-veil · dead-fold-1795669125352.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «3Chí tôn» covered by div.kscn-veil · dead-fold-1795669133019.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tai mắt0» covered by div.kscn-veil · dead-fold-1795669141069.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Có thaiRất thấp» covered by div.kscn-veil · dead-fold-1795669150208.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Lật thẻThấp» covered by div.kscn-veil · dead-fold-1795669158502.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Ân tình (đêm)0» covered by div.kscn-veil · dead-fold-1795669166997.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Số lần ân thưởng0» covered by div.kscn-veil · dead-fold-1795669175829.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bổng lộcsau 3 tuần» covered by div.kscn-veil · dead-fold-1795669183287.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Nguy hiểm chung: 0» covered by div.kscn-veil · dead-fold-1795669190955.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Xét phẩm: thiếu 4» covered by div.kscn-veil · dead-fold-1795669198375.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «?» covered by div.kscn-veil · dead-fold-1795669206656.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12» covered by div.kscn-veil · dead-fold-1795669224531.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tứ đức 9/9» covered by div.kscn-veil · dead-fold-1795669230884.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Cầm kỳ thi họa 8/12» covered by div.kscn-veil · dead-fold-1795669237503.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Vũ · Y · Nữ công 8/12» covered by div.kscn-veil · dead-fold-1795669243938.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tác phẩm» covered by div.kscn-veil · dead-fold-1795669250512.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «ⓘ luật Đức» covered by div.kscn-veil · dead-fold-1795669256958.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Xem luật Công · Nữ công» covered by div.kscn-veil · dead-fold-1795669263333.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải » covered by div.kscn-veil · dead-fold-1795669280131.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Túi đồ» covered by div.kscn-veil · dead-fold-1795669286514.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Thú cưng» covered by div.kscn-veil · dead-fold-1795669292902.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Việc» covered by div.kscn-veil · dead-fold-1795669299277.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tất cả 16» covered by div.kscn-veil · dead-fold-1795669305697.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Trang sức 1» covered by div.kscn-veil · dead-fold-1795669312398.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Y phục 2» covered by div.kscn-veil · dead-fold-1795669318906.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Vải vóc 0» covered by div.kscn-veil · dead-fold-1795669325293.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hương liệu 0» covered by div.kscn-veil · dead-fold-1795669334904.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Lễ vật 0» covered by div.kscn-veil · dead-fold-1795669341341.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Thư từ 0» covered by div.kscn-veil · dead-fold-1795669347715.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tác phẩm 0» covered by div.kscn-veil · dead-fold-1795669354131.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Cài tóc: Trâm hoa lụa» covered by div.kscn-veil · dead-fold-1795669360945.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Y phục: Áo lụa thêu hoa nhỏ» covered by div.kscn-veil · dead-fold-1795669367398.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Trâm hoa lụa · Trâm cài» covered by div.kscn-veil · dead-fold-1795669373813.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Áo lụa thêu hoa nhỏ · Y phục» covered by div.kscn-veil · dead-fold-1795669380282.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Váy sa xanh ngọc · Y phục» covered by div.kscn-veil · dead-fold-1795669386710.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Nước bào hoa · Dầu chải tóc» covered by div.kscn-veil · dead-fold-1795669393142.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Nến mỡ dê ×3 · Nến» covered by div.kscn-veil · dead-fold-1795669399566.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Than liễu ×2 · Son phấn» covered by div.kscn-veil · dead-fold-1795669405993.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Son sáp ×2 · Son phấn» covered by div.kscn-veil · dead-fold-1795669412447.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Yên chi giấy ×2 · Son phấn» covered by div.kscn-veil · dead-fold-1795669418858.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Phấn gạo ×2 · Son phấn» covered by div.kscn-veil · dead-fold-1795669425274.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dấu ấn Đáp ứng · đang dùng» covered by div.kscn-veil · dead-fold-1795669431710.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h» covered by div.kscn-veil · dead-fold-1795669440779.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chí tôn» covered by div.kscn-veil · dead-fold-1795669448246.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Phi tần» covered by div.kscn-veil · dead-fold-1795669455562.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Nam nhân» covered by div.kscn-veil · dead-fold-1795669463051.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Cung nhân» covered by div.kscn-veil · dead-fold-1795669470254.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hoàng thượng» covered by div.kscn-veil · dead-fold-1795669478112.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Thái hậu» covered by div.kscn-veil · dead-fold-1795669485447.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Xem thêm» covered by div.kscn-veil · dead-fold-1795669492895.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Gặp ngài ban ngày 2/5» covered by div.kscn-veil · dead-fold-1795669500739.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Việc hôm nay 1/2» covered by div.kscn-veil · dead-fold-1795669508103.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Điều ngài thích» covered by div.kscn-veil · dead-fold-1795669515458.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM» covered by div.kscn-veil · dead-fold-1795669522930.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q» covered by div.kscn-veil · dead-fold-1795669530607.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện» covered by div.kscn-veil · dead-fold-1795669537124.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Việc nhờ» covered by div.kscn-veil · dead-fold-1795669543505.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Sổ ghi» covered by div.kscn-veil · dead-fold-1795669549884.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chương này» covered by div.kscn-veil · dead-fold-1795669556315.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Sắc phong» covered by div.kscn-veil · dead-fold-1795669562707.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Đã qua 0» covered by div.kscn-veil · dead-fold-1795669569161.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Triều cục» covered by div.kscn-veil · dead-fold-1795669575650.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tâm nguyện» covered by div.kscn-veil · dead-fold-1795669581990.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mục lục» covered by div.kscn-veil · dead-fold-1795669588370.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Đi làm: Hành sự» covered by div.kscn-col · dead-fold-1795669594794.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m» covered by div.kscn-veil · dead-fold-1795669606294.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti» covered by div.kscn-veil · dead-fold-1795669617197.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT» covered by div.kscn-veil · dead-fold-1795669623619.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa» covered by div.kscn-veil · dead-fold-1795669639958.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Ân oán» covered by div.kscn-veil · dead-fold-1795669646454.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Phe phái» covered by div.kscn-veil · dead-fold-1795669652905.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Xem quan hệ của Ta» covered by div.kscn-veil · dead-fold-1795669659756.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Đổi chỗ hai người» covered by div.kscn-veil · dead-fold-1795669666481.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «với Hoàng thượng» covered by div.kscn-veil · dead-fold-1795669672921.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké» covered by div.kscn-veil · dead-fold-1795669685643.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Con của ta» covered by div.kscn-veil · dead-fold-1795669692200.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Kế vị» covered by div.kscn-veil · dead-fold-1795669698591.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hoàng tự trong cung» covered by div.kscn-veil · dead-fold-1795669704966.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hôn sự» covered by div.kscn-veil · dead-fold-1795669711354.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Quý tộc kén rể · kén dâu» covered by div.kscn-veil · dead-fold-1795669717800.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mườ» covered by div.kscn-veil · dead-fold-1795669746133.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Đông sở3 bóng người» covered by div.kscn-col · dead-fold-1795669753465.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tây sở3 bóng ngườitốn: một khắc» covered by span.kdw.on · dead-fold-1795669761261.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bắc sở3 bóng ngườitốn: một khắc» covered by span.kdw.on · dead-fold-1795669768927.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tiền sảnh3 bóng ngườitốn: một khắc» covered by div.kscn-col · dead-fold-1795669776379.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Cung nhân · chạm để mở danh sách» covered by div.kscn-veil · dead-fold-1795669783844.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chí tôn · chạm để mở danh sách» covered by div.kscn-veil · dead-fold-1795669791580.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Chọn chính mình» covered by div.kscn-veil · dead-fold-1795669888989.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Về Dư đồ» covered by div.kscn-veil · dead-fold-1795669896602.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Lịch tháng» covered by div.kscn-veil · dead-fold-1795669904538.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Mục tiêu chương (có mới)» covered by div.kscn-veil · dead-fold-1795669911922.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «3Chí tôn» covered by div.kscn-veil · dead-fold-1795669919460.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Tai mắt0» covered by div.kscn-veil · dead-fold-1795669926322.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Có thaiRất thấp» covered by div.kscn-veil · dead-fold-1795669933408.png
+- page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Lật thẻThấp» covered by div.kscn-veil · dead-fold-1795669941100.png
+
+## Bugs
+
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Dưỡng Tú viện)
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.»
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Sân chờ)
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Điện tuyển)
+- [stuck] ×5 no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»
+- [game] ×5 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Điện tuyển)
+- [stuck] ×2 no progress 15 min on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»

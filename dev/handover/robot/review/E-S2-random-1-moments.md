@@ -1,0 +1,45 @@
+# ES2-R2-random-1 moment log (bot rand, fold, seed 2979049785, real-tap harness 4d7a22c6)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-random-1/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-ES2-R2-random-1/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcvào | Ở nhà chờ tuyển túTốnkhôngĐư | Trang trước | Dung mạo 19 | Dung mạo 20 | Dung mạo 21 | Dung mạo 22 | Dung mạo 23 · shots-ES2-R2-random-1/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Con gái thầy đồ nghèo · 1/4» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-random-1/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Con gái thầy đồ nghèo · 1/4» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-ES2-R2-random-1/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Ngày thứ nhất — Nhập cung» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-random-1/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-ES2-R2-random-1/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Ngày thứ nhất — Nhập cung» · NEW SCREEN · first time on this screen; buttons: Theo thái giám vào cửa việnR · shots-ES2-R2-random-1/m-new-1-8.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc62Tài54Tâm cơ23Đức40Danh8 | Bạc120Sức80/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | sương sớm | Quẻ Thượng thượng (Sủng) · shots-ES2-R2-random-1/m-new-1-9.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Người lạ???» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669085933.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Chọn chính mình» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669094013.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Về Dư đồ» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669101859.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Lịch tháng» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669110288.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Mục tiêu chương (có mới)» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669117442.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Thỉnh tranh nhân vật» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669125352.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «3Chí tôn» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669133019.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Tai mắt0» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669141069.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Có thaiRất thấp» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669150208.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Lật thẻThấp» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669158502.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Ân tình (đêm)0» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669166997.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Số lần ân thưởng0» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669175829.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Bổng lộcsau 3 tuần» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669183287.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Nguy hiểm chung: 0» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669190955.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Xét phẩm: thiếu 4» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669198375.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «?» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669206656.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669224531.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Tứ đức 9/9» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669230884.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Cầm kỳ thi họa 8/12» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669237503.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Vũ · Y · Nữ công 8/12» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669243938.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Tác phẩm» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669250512.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «ⓘ luật Đức» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669256958.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Xem luật Công · Nữ công» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669263333.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải » covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669280131.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Túi đồ» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669286514.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Thú cưng» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669292902.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Việc» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669299277.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» · FRUSTRATED · dead button «Tất cả 16» covered by div.kscn-veil · shots-ES2-R2-random-1/dead-fold-1795669305697.png
+... (moment log truncated: ~370 dead-button lines of the stuck segment removed; full file in the out dir)
+
+## Runner notes (player feelings, from the shots)
+- year 1 · Tuyển tú · «Điện tuyển» · FRUSTRATED then CONFUSED · ~1.5 h (04:57Z–07:55Z) behind the «Chạm để tiếp ▸» veil gate (370 dead buttons, harness gap; hand-probe blocked by the title menu). After the 07:55Z restart on 89f5b956 the scene passed and the life ended 1 buổi later in «Ban hoa — Bị ban hoa, xuất cung» (age 19, buổi 3): dismissed at the selection, same as rebel-1.
+- the selection (Điện tuyển) has a quick, final outcome: two lives (rebel-1, random-1) ended at buổi 2–3 of year 1 on the same ending → on thd_tro an early dismissal is a real road outcome, not a bug.
