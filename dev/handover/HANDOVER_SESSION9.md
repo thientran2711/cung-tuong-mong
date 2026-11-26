@@ -3788,3 +3788,4 @@ LOAD: main running 0 own workers (owner bugs/UI/go-live only) | B seats 9/12 (sa
 - LC19 still waiting for sếp's «cho phép đưa lên live» (last LC19 event 02:42Z: stack A a9 0860a469→a13 038e86f2 and stack B b10 2fd303aa→b13 f009e1a6 both green).
 - B srvmerit-guard-r2 917465a3 → forwarded to RV-SRVMERIT-GUARD.
 - ~04:11Z KK37 opened = session_01V1ZZH16x8rVajpgG2KwrB5 (152 child, opus, review/kit-stage 006579ae; queue = KK36 handover + NHV .ksil family + UX-OPTION-CENTRE). KK36 archived.
+- ~04:14Z ACKs: LC19 (depth 4, both stacks green, waits her words), OB-KIEP 87bc8942 LAND READY (touches j63/j79/jopic/jemoseal/jkc — ping it for rebase if the push changes those; Q10 rec accept), MAIN 150/151 forwarders (151 triggers already disabled by 152). NHV r8 nhv8-* videos ~04:40Z → LOOK.
