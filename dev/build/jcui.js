@@ -28,7 +28,7 @@ function cuAward(o,ord,place,of,kind){o=o||{};const big=!!o.big,res={mine:null,h
  const title=o.title||"Hội thi";
  ord.slice(0,3).forEach((x,i)=>{const p=x.p||null;if(!p||typeof p!=="object"){res.places.push({prize:[]});return}
   const z=cuPrize(kind,i,p,big);const chips=[];
-  if(z.k){p.inv=p.inv||[];p.inv.push({k:z.k,from:"thi"});chips.push(cuItemChip(z.k))}
+  if(z.k){p.inv=p.inv||[];invAdd(p,{k:z.k,from:"thi"});chips.push(cuItemChip(z.k))}
   if(z.bac){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac});chips.push(["Bạc",z.bac])}
   const ent={prize:chips,k:z.k,bac:z.bac,place:i+1};
   if(i===0){/* the Emperor's own gift: guaranteed at the big festivals and the feasts he attends */

@@ -99,9 +99,9 @@ function lxLines(r,out){const B=BAL.ration;r=Math.max(0,Math.min(7,r|0));const t
 /* the first sight (new life, old save): Nội vụ phủ's issue of her rank once, so the mirror is not empty on day one */
 function lxInit(p){if(!p||!lxOn()||p.lxInit)return;p.lxInit=1;p.inv=p.inv||[];
  /* WHOLE SETS at the start (BAL.ration.set.start): one full set of each tone of her level, so the mirror opens with sets she can pick */
- if(BAL.ration.set&&BAL.ration.set.on&&!p.out){const t=BAL.ration.tier[Math.min(7,rkOf(p))];for(const tone of BAL.ration.set.start){const x=lxSetOf(p,"start:"+tone,tone);if(!x)continue;for(const part of BAL.ration.parts)p.inv.push({k:lxKey(part,t),c:x[4][part],from:"noivu",d:S.turn})}lxFix(p);return}
- for(const [k] of lxLines(rkOf(p),!!p.out))p.inv.push({k,from:"noivu",d:S.turn});
- for(const part of BAL.ration.parts)if(!lxHas(p,part)&&!p.out){const k=lxKey(part,BAL.ration.tier[Math.min(7,rkOf(p))]);p.inv.push({k,from:"noivu",d:S.turn})}lxFix(p)}
+ if(BAL.ration.set&&BAL.ration.set.on&&!p.out){const t=BAL.ration.tier[Math.min(7,rkOf(p))];for(const tone of BAL.ration.set.start){const x=lxSetOf(p,"start:"+tone,tone);if(!x)continue;for(const part of BAL.ration.parts)invAdd(p,{k:lxKey(part,t),c:x[4][part],from:"noivu",d:S.turn})}lxFix(p);return}
+ for(const [k] of lxLines(rkOf(p),!!p.out))invAdd(p,{k,from:"noivu",d:S.turn});
+ for(const part of BAL.ration.parts)if(!lxHas(p,part)&&!p.out){const k=lxKey(part,BAL.ration.tier[Math.min(7,rkOf(p))]);invAdd(p,{k,from:"noivu",d:S.turn})}lxFix(p)}
 function lxInitAll(){try{if(!S||S.dead||!lxOn())return;if(typeof isSrv==="function"&&isSrv())return;lxInit(S);if(typeof mlGuest==="function"&&mlGuest())return;for(const v of consorts())if(v!==S&&v.alive!==false)lxInit(v)}catch(e){console.error("lxInit",e)}}
 /* ---------- 3. the sitting: cap by the parts she has, spend lượt (her: the colours she picked; NPC / bot: any box of the part) ---------- */
 function lxLvIx(k){return TOIL_LVS.indexOf(TOIL_OLDLV[k]||k)}
@@ -145,14 +145,14 @@ function lxMirrorNote(){if(!lxOn())return"";const M=lxMiss(S),n=lxCount(S),cap=B
  return `<div class="kgr">${kitRows(R)}</div>`}
 function lxRushBtn(){if(!lxOn()||!lxMiss(S).length)return"";const c=lxRushCost(),ok=(S.bac||0)>=c;
  return `<button class="${kg82Btn(true)}" id="lxrush"${ok?"":" disabled"}>Mua gấp son phấn còn thiếu<small>Bạc -${c}${ok?"":" · không đủ bạc"}</small></button>`}
-function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=lxMiss(S);apply({bac:-c});const t=lxTierOf(S);const E=M.map(part=>{const e={k:lxKey(part,t),from:"buy",d:S.turn};S.inv.push(e);return e});lxFix(S);
+function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=lxMiss(S);apply({bac:-c});const t=lxTierOf(S);const E=M.map(part=>{const e={k:lxKey(part,t),from:"buy",d:S.turn};invAdd(S,e);return e});lxFix(S);
  log(`Ngươi sai người mua gấp ở Nội vụ phủ: ${E.map(lxName).join(", ")}. Bạc -${c}.`);try{save()}catch(e){}}
 /* ---------- 4. roads: borrow (rival visit), beg (Hoàng hậu / Thái hậu), steal (a rival's chest) ---------- */
 function lxLend(v,part){const L=lxBoxes(v,part);if(!L.length)return null;const tot=L.reduce((a,e)=>a+e.u,0);return tot>=BAL.ration.borrow.spare?L.slice().sort((a,b)=>b.u-a.u)[0]:null}
 function lxBorrowOdds(v,p){p=p||S;const B=BAL.ration.borrow;let o=B.base+Math.round(aff(v,p)/B.aff)-Math.round((v.ghen||0)/B.ghen);for(const t of traitsOf(v))o+=B.trait[t]||0;
  o+=Math.round((lxHash(`${v.id}:${toilWk()}`)%(2*B.whim+1))-B.whim);return cl(o,5,95)}
 function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0)from.inv.splice(from.inv.indexOf(e),1);
- const g={k:e.k,c:e.c,u:n,from:how==="steal"?"steal":"borrow",d:S.turn};if(from!==S)g.giver=from.name;if(e.t){g.t=e.t;g.by=e.by}to.inv=to.inv||[];to.inv.push(g);return g}
+ const g={k:e.k,c:e.c,u:n,from:how==="steal"?"steal":"borrow",d:S.turn};if(from!==S)g.giver=from.name;if(e.t){g.t=e.t;g.by=e.by}to.inv=to.inv||[];invAdd(to,g);return g}
 /* ONE builder per road (role-parity part 2, law 1 + law 4): her talk cards (rival visit / Hoàng hậu, Thái hậu / a rival's chest) and an NPC
    consort's day-plan options cx4:rougeBorrow / rougeBeg / rougeSteal (jagacts4) — the SAME odds function of the doer, the same gain and loss.
    An NPC who asks HER is the receiver side: her answer card (lxAskHer), never a dice in her place. */
@@ -170,7 +170,7 @@ function lxBegCard(p,kind){const B=BAL.ration.beg,hh=kind==="hh",M=lxMiss(p);con
  return{n:"Xin son phấn",o:od,lock:!M.length||cd,t:!M.length?"son phấn còn đủ":`vừa xin rồi, ${B.cd} tháng mới xin lại`,x:`${word(od)} · thành: ${nm} ban một hộp ${part?TOIL_COL[part].label.toLowerCase():"còn thiếu"} · hỏng: ${nm} ${B.fail}`,
   run:()=>{(p.lxBeg=p.lxBeg||{})[kind]=S.turn;if(!part)return"";
    /* RECEIVER CHOICE (jrcv RCVJ.rougeBeg, law 1): the Hoàng hậu decides — she as the Hoàng hậu gets the card, an NPC queen the same answers at these odds (the Thái hậu is NPC-only) */
-   if(hh&&typeof rcvJudge==="function"&&queenP()&&queenP()!==p)return rcvJudge("rougeBeg",p,p,od);if(roll(od)){let n;if(p===S)n=goodsGive(S,lxKey(part,t),{from:kind});else{const e={k:lxKey(part,t),from:kind,d:S.turn};(p.inv=p.inv||[]).push(e);n=lxName(e)}lxFix(p);return `${nm} ban cho ${lxNm(p)} ${n}.`}
+   if(hh&&typeof rcvJudge==="function"&&queenP()&&queenP()!==p)return rcvJudge("rougeBeg",p,p,od);if(roll(od)){let n;if(p===S)n=goodsGive(S,lxKey(part,t),{from:kind});else{const e={k:lxKey(part,t),from:kind,d:S.turn};invAdd(p,e);n=lxName(e)}lxFix(p);return `${nm} ban cho ${lxNm(p)} ${n}.`}
    const f=hh?{hh:B.fail}:{th:B.fail};if(p===S)apply(f);else ap(p,f);return `${nm} cho là ${lxNm(p)} không biết giữ phận. ${nm} ${B.fail}.`}}}
 function lxStealOdds(p,v){return cl((typeof oPlant==="function"&&v.maid?oPlant(p,v):30)+BAL.ration.steal.add,5,95)}
 function lxStealCard(p,v){const M=lxMiss(p);const L=BAL.ration.parts.map(part=>lxLend(v,part)).filter(Boolean);const od=lxStealOdds(p,v);const ST=BAL.ration.steal;
@@ -193,7 +193,7 @@ function lxNpcSpend(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
    they are the NPC's own day-plan choices with the player's odds (jagacts4 cx4:rouge*, role-parity part 2, canon overwrite). */
 function lxNpcMonth(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
  for(const part of lxMiss(v)){const tt=lxTierOf(v),pr=lxPrice(v,tt);
-  if((v.bac||0)>=pr*2&&roll(N.buy)){ap(v,{bac:-pr});v.inv.push({k:lxKey(part,tt),from:"buy",d:S.turn})}}
+  if((v.bac||0)>=pr*2&&roll(N.buy)){ap(v,{bac:-pr});invAdd(v,{k:lxKey(part,tt),from:"buy",d:S.turn})}}
  lxFix(v)}
 /* she always gets a clue when an NPC steals from her (never an invisible loss); who did it only through Tai mắt (newsAdd) */
 function lxStolenNote(v,g){try{log(`<span class="r">Một hộp ${lxName(g)} trong rương ngươi không cánh mà bay.</span>`);newsAdd(v,"lx",`${rkName(v)} ${v.name} sai người lấy hộp son phấn trong rương ngươi`,false)}catch(e){}}
@@ -202,7 +202,7 @@ function lxAskHer(v,part){try{if(typeof rcvAsk==="function")rcvAsk("rougeBorrow"
 /* ---------- 6. tribute cosmetics with a bestowal ---------- */
 (function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{const T=BAL.ration.tribute,ch=T.ch[why]||0;if(!lxOn()||!p||p.dead||!ch||!roll(ch))return r;
   const part=BAL.ration.parts[lxHash(`${p.id!=null?p.id:"me"}:${S.turn}:${why}`)%BAL.ration.parts.length],k=lxKey(part,3);p.lxBest=S.turn;
-  if(p===S){const n=goodsGive(S,k,{from:"emp",sub:"Hoàng thượng ban cống phẩm"});lxFix(S);log(`Hoàng thượng ban thêm cống phẩm: ${n}.`)}else{p.inv=p.inv||[];p.inv.push({k,from:"emp",d:S.turn});lxFix(p);log(`${p.name} được Hoàng thượng ban cống phẩm ${IT[k].n}.`)}
+  if(p===S){const n=goodsGive(S,k,{from:"emp",sub:"Hoàng thượng ban cống phẩm"});lxFix(S);log(`Hoàng thượng ban thêm cống phẩm: ${n}.`)}else{p.inv=p.inv||[];invAdd(p,{k,from:"emp",d:S.turn});lxFix(p);log(`${p.name} được Hoàng thượng ban cống phẩm ${IT[k].n}.`)}
   for(const v of consorts())if(v!==p&&!v.out&&v.alive!==false&&v!==S)v.ghen=cl((v.ghen||0)+T.ghen,0,100)}catch(e){console.error("rt tribute",e)}return r};window.bestow=bestow})();
 /* ---------- item detail: the colour and lượt of each box (kit detail rows' own note line) ---------- */
 (function(){if(typeof kitItemDetailRows!=="function")return;const d0=kitItemDetailRows;kitItemDetailRows=function(ref,o){try{const k=ref&&(typeof ref==="string"?ref:ref.k||(ref.e&&ref.e.k));const r=lxOf(k);

@@ -49,7 +49,7 @@ function vlFix(p){if(!p||p!==S)return;try{if((p.vl!=null&&!vlIs(p.vl))||(Array.i
 function vlScrubLog(){try{if(!Array.isArray(S.logs)||vlIs(S.vl)||(S.inv||[]).some(vlIs))return;S.logs=S.logs.filter(l=>!/Vết thương trên mặt đã lành, ngươi tháo mạng che/.test(String(l)))}catch(e){}}
 function vlMig(p){try{vlFix(p);if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
   if(p===S){S.wdk=S.wdk||{};S.wdk[p.vl.k]=1}else{p.wdk=p.wdk||{};p.wdk[p.vl.k]=1}}p.scar.veil=p.vl?1:0}catch(e){}}
-function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&vlIs(p.vl)){/* only a real veil comes off (never a foreign object in the veil slot) */p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
+function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&vlIs(p.vl)){/* only a real veil comes off (never a foreign object in the veil slot) */p.inv=p.inv||[];invAdd(p,p.vl);p.vl=null;
   if(p===S)try{log("Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương.")}catch(e){}}}
 function vlPeople(){const L=[S];try{for(const v of rivals)if(v&&v!==S)L.push(v)}catch(e){}return L}
 /* r1 (merge with main it-key-guard): j8 itClean (inside normAll / co-op) also moves an old voice memory out of S.vl; vlFix runs FIRST so it still sees
@@ -64,8 +64,8 @@ KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_
 (function(){const s0=scarOf;scarOf=function(p){const r=s0.apply(this,arguments);try{const q=p||S;if(r&&q.vl&&q.scar&&q.scar.veil)r.sacLost=Math.round(q.scar.d*VL.cover[vlG(q.vl)])}catch(e){}return r};window.scarOf=scarOf})();
 
 /* ---------- wear / take off (same function for everyone) ---------- */
-function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!vlNeed(p))return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;if(p.scar)p.scar.veil=1;return itm(e.k).n}
-function vlOff(p){if(!p||!vlIs(p.vl))return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
+function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!vlNeed(p))return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){invAdd(p,p.vl)}p.vl=e;if(p.scar)p.scar.veil=1;return itm(e.k).n}
+function vlOff(p){if(!p||!vlIs(p.vl))return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];invAdd(p,p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
 function vlChest(p){return (p.inv||[]).map((e,ix)=>({e,ix})).filter(x=>vlIs(x.e)&&!x.e.h)}
 /* useItem on a veil = wear it (never consumed) */
 (function(){const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];if(vlIs(e)){const n=vlWear(p,ix);return n?`${NMc(p)} đeo ${n}. `:""}return u0.apply(this,arguments)}})();
@@ -92,7 +92,7 @@ function vlReveal(obs,k,how){if(!vlIsK(k)||k==="mcnt")return"";if(obs===S){S.wdk
 /* bought / crafted entries keep their source in .src (no .from): j93 shows a gift chest only for real gifts (.from) */
 const VL_OWN={nvp:1,ngoai:1,tay:1,cu:1,mua:1};
 function vlGain(p,k,src){src=src||{};p.inv=p.inv||[];const f=src.from||"mua";const e=VL_OWN[f]?{k,src:f}:{k,from:f};if(src.giver)e.giver=src.giver;try{e.d=wdWhen()}catch(x){}if(k==="mcnt")e.own=wdKey(p);
- p.inv.push(e);if(src.known)vlReveal(p,k,src.known===1?"":src.known);return e}
+ invAdd(p,e);if(src.known)vlReveal(p,k,src.known===1?"":src.known);return e}
 /* craft: material m 0..2 sets the band; q = mini-game raw 0..10 + art grade + material (+ Công) picks phẩm and grade */
 const VL_CRAFT=[[[0,0],[0,1],[0,2],[0,3]],[[1,0],[2,0],[3,1],[4,1]],[[4,1],[5,2],[6,2],[7,3]]];
 const VL_MATN=["vải sa, chỉ thêu","dây bạc, trai, lưu ly","kim tuyến, ngọc, trân châu"];
@@ -208,7 +208,7 @@ function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!vlNeed(v)){if(v&&v!==S)vl
 function vlFriendGift(t){if(!t||!vlNeed(t)||t.vl||vlChest(t).length)return;const P=Math.min(8,wdPOf(t));const k=vlKey(P,0);
  const F=liveRivals(true).filter(v=>v!==t&&v.alive&&!v.out&&aff(v,t)>=netTh(v,"than2")&&(v.bac||0)>=itm(k).pr+20);if(!F.length)return;
  const o=npcWhy("vlGift",{t,F},()=>roll(VL.giftP));if(!o)return;const v=o.who;/* npc-purpose G2: the friend who cares most sends it (giftP = the success) */
- ap(v,{bac:-itm(k).pr});v.inv=v.inv||[];v.inv.push({k,from:"nvp"});const r=giveTo(v,t,v.inv.length-1);if(r&&t!==S&&(typeof knows!=="function"||knows(t)))try{log(r)}catch(e){}}
+ ap(v,{bac:-itm(k).pr});v.inv=v.inv||[];invAdd(v,{k,from:"nvp"});const r=giveTo(v,t,v.inv.length-1);if(r&&t!==S&&(typeof knows!=="function"||knows(t)))try{log(r)}catch(e){}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead){vlSync(S);for(const v of rivals)if(v)vlNpcMonth(v);vlFriendGift(S);for(const v of liveRivals(true))vlFriendGift(v)}}catch(e){console.error(e)}return r}})();
 /* healed faces put the veil back in the chest (weekly, after j70 heal70) */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of vlPeople())if(p&&p.vl&&!vlNeed(p))vlSync(p)}catch(e){}return r}})();

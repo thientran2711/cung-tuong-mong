@@ -37,7 +37,7 @@ function wdSew(p,fk){const g=wdFabOf(fk);if(!g)return null;const e={k:g,src:"may
 (function(){const o0=wdOf;wdOf=function(p){if(p&&typeof p==="object"&&!p.__wdmig){p.__wdmig=1;try{
   const worn=[];if(p.inv)for(let i=p.inv.length-1;i>=0;i--){const e=p.inv[i];if(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).wsl&&itm(e.k).wsl!=="hd"){p.inv.splice(i,1);delete e.w;worn.push(e)}}
   if(!p.wd)o0.call(this,p);
-  for(const e of worn){if(!p.wd.tram||p.wd.tram.from==="base"||p.wd.tram.src==="cap")wdWearEntry(p,e);else{p.inv=p.inv||[];p.inv.push(e)}}
+  for(const e of worn){if(!p.wd.tram||p.wd.tram.from==="base"||p.wd.tram.src==="cap")wdWearEntry(p,e);else{p.inv=p.inv||[];invAdd(p,e)}}
   if(p.dress){const d=p.dress;p.dress=null;if(d.until>((S&&S.turn)|0)&&IT[d.k])wdSew(p,d.k)}}catch(e){console.error("wdmig",e)}finally{delete p.__wdmig}}
   return o0.apply(this,arguments)};window.wdOf=wdOf})();
 /* 4. ONE wearBonus */

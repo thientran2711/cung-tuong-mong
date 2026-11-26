@@ -64,7 +64,7 @@ function alSkimmed(p){try{return !!p&&p.stip&&p.stip.skT===S.turn}catch(e){retur
   const G=g0.apply(this,arguments);try{if(alOn()&&p){alFix(p);alStaffGive(p,!!SK)}}catch(e){console.error("al goods",e)}return G};window.stipGoods=stipGoods})();
 function alNpcSpend(v){if(!v||!v.inv||v.out)return;let left=BAL.allot.oil.npcUse;for(const e of alOil(v).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}
 /* first sight (new life / old save): one month's oil + candles so Kiểu cầu kỳ is not shut on day one */
-function alInit(p){if(!p||!alOn()||p.alInit)return;p.alInit=1;p.inv=p.inv||[];for(const [k,n] of alLines(alRk(p),!!p.out))for(let i=0;i<n;i++)p.inv.push({k,from:"noivu",d:S.turn});alFix(p)}
+function alInit(p){if(!p||!alOn()||p.alInit)return;p.alInit=1;p.inv=p.inv||[];for(const [k,n] of alLines(alRk(p),!!p.out))for(let i=0;i<n;i++)invAdd(p,{k,from:"noivu",d:S.turn});alFix(p)}
 function alInitAll(){try{if(!S||S.dead||!alOn())return;if(typeof isSrv==="function"&&isSrv()){S.alInit=1;return}alInit(S);if(typeof mlGuest==="function"&&mlGuest())return;for(const v of consorts())if(v!==S&&v.alive!==false)alInit(v)}catch(e){console.error("alInit",e)}}
 /* ---------- 1. hair oil at the sitting: Kiểu cầu kỳ needs it (her, NPC faces) and spends it ---------- */
 (function(){if(typeof lxCapRec!=="function")return;const c0=lxCapRec;lxCapRec=function(p,rec){const r=c0.apply(this,arguments);try{if(alOn()&&rec&&rec.makeup&&rec.col&&rec.col.want==="diem"&&!alHasOil(p)){delete rec.col.want;rec.noOil=1}}catch(e){}return r};window.lxCapRec=lxCapRec})();
@@ -102,7 +102,7 @@ function alSrvTxt(rk){const B=BAL.allot.srv;const L=B.goods[Math.max(0,Math.min(
 /* the player maid: after her wage (j42 srvMonth) */
 function alSrvMonth(){try{if(!alOn()||!S||S.dead||!(typeof isSrv==="function"&&isSrv())||!S.srv)return;const m=typeof srvM==="function"?srvM():null;
  let L=alSrvList(S.srv.rk,(S.srv.lau||0)>0);let cut=null;if(m&&alSkimmed(m)&&!(S.srv.lau>0)){const x=alSrvSkim(L);L=x.L;cut=x.cut}
- S.inv=S.inv||[];const E=[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};S.inv.push(e);E.push(e)}alFix(S);
+ S.inv=S.inv||[];const E=[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};invAdd(S,e);E.push(e)}alFix(S);
  const cutTxt=cut?` Chủ nhân ${m.name} bị Nội vụ phủ cắt xén, lệ của kẻ hầu cũng bị bớt: ${cut.k?`${itm(cut.k).n} thay ${itm(cut.k0).n}`:`thiếu ${itm(cut.k0).n}`}.`:"";
  if(E.length){log(`Lệ tháng của cung nữ: ${stipGoodsTxt(L.map(([k,n])=>({k,n})))}.${cutTxt}`);if(typeof stipReveal==="function")stipReveal(E,{kind:"chest",title:"Lệ tháng",sub:cut?"Nội vụ phủ phát · bị bớt theo chủ":"Nội vụ phủ phát"})}
  else if(cutTxt)log(cutTxt.trim())}catch(e){console.error("al srv",e)}}
@@ -110,7 +110,7 @@ function alSrvMonth(){try{if(!alOn()||!S||S.dead||!(typeof isSrv==="function"&&i
 /* NPC staff (and her own staff): the same list by their bậc, into their own small bag (kept to BAL.allot.srv.keep, older pieces used up) */
 function alStaffGive(p,skim){if(!p||!Array.isArray(p.staff)||p.out)return;const B=BAL.allot.srv;
  for(const s of p.staff){if(!s||s.sid==null||s.out||s.dead)continue;const rk=typeof srk==="function"?srk(s):0;let L=alSrvList(rk,false);if(skim)L=alSrvSkim(L).L;
-  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)s.inv.push({k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep)}}
+  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)invAdd(s,{k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep)}}
 /* the maid's help line (kit help popup of j42 "Lương tháng") names the lệ goods too */
 (function(){try{if(typeof HX==="object"){const w0=HX.wage;Object.defineProperty(HX,"wage",{get(){try{return alOn()&&S&&S.srv?`${w0} Kèm lệ tháng của bậc ngươi: ${alSrvTxt(S.srv.rk)}. Chủ nhân bị Nội vụ phủ cắt xén thì lệ kẻ hầu cũng bị bớt.`:w0}catch(e){return w0}},configurable:true,enumerable:true})}}catch(e){}})();
 /* ---------- item detail: lượt left of a bottle (kit detail rows' own note line) ---------- */

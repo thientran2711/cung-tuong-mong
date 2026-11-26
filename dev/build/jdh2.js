@@ -45,7 +45,7 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 function box(){if(!S.il||typeof S.il!=="object")S.il={};const L=S.il;L.box=L.box||[];L.log=L.log||[];return L.box}
 function lgr(e,f,t,how){try{if(typeof ilLog==="function")return ilLog(e,f,t,how)}catch(x){}try{const L=S.il;L.log.push([wk(),e.dhid||0,e.k,f||"",t||"",how||""]);if(L.log.length>600)L.log.splice(0,L.log.length-600)}catch(x){}}
 function toStore(p,e,why,o){o=o||{};const x={e,at:"nvp",why,own:o.own||pk(p),w:wk(),by:"",rel:1e9,dh:1};if(o.back)x.back=o.back;box().push(x);lgr(e,o.from||pk(p),"nvp",why==="conf"?"bị tịch thu":"Nội vụ phủ nhặt được");return x}
-function fromStore(x,p,how){const L=box(),i=L.indexOf(x);if(i<0||!p)return false;L.splice(i,1);p.inv=p.inv||[];p.inv.push(x.e);lgr(x.e,"nvp",pk(p),how||"về");return true}
+function fromStore(x,p,how){const L=box(),i=L.indexOf(x);if(i<0||!p)return false;L.splice(i,1);p.inv=p.inv||[];invAdd(p,x.e);lgr(x.e,"nvp",pk(p),how||"về");return true}
 /* ---------- where a piece is ---------- */
 function slots(p){const o=[];if(!p)return o;for(const e of p.inv||[])if(e&&typeof e==="object")o.push(e);return o}
 function cases(){try{return (S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e)}catch(e){return []}}
@@ -66,7 +66,7 @@ function dhHieuOK(p){const B=H(),W=[];if(!p||!alive(p))return{ok:false,why:["kh�
  const lp=p.lastPromo==null?-99:p.lastPromo;if(S.turn-lp<N.gap)W.push(`giữ phẩm đủ ${N.gap} tháng`);if(!freeHieu().length)W.push("hết hiệu để ban");
  return{ok:!W.length,why:W,need:N}}
 window.dhHieuOK=dhHieuOK;window.dhHieuNeed=dhHieuNeed;
-function giveItems(p,hieu,quiet){p.inv=p.inv||[];const got=[];for(const k of DK){if(findAll(pk(p),k).length)continue;const e=mk(p,k,hieu);p.inv.push(e);lgr(e,"emp",pk(p),quiet?"cấp lại sổ cũ":"ban");got.push(e)}return got}
+function giveItems(p,hieu,quiet){p.inv=p.inv||[];const got=[];for(const k of DK){if(findAll(pk(p),k).length)continue;const e=mk(p,k,hieu);invAdd(p,e);lgr(e,"emp",pk(p),quiet?"cấp lại sổ cũ":"ban");got.push(e)}return got}
 /* the ONE grant: p gets a free hiệu (or `h`), the book and the seal; Danh +hieu.danhG; returns the hiệu ("" if none left) */
 function dhHieuGrant(p,why,o){o=o||{};if(!p||!alive(p)||p.hieu||(p.dhConf&&p.dhConf.hieu))return"";const f=freeHieu();if(!f.length)return"";const h=pick(f);
  p.hieu=h;const it=giveItems(p,h);const d=H().danhG;if(d)ap(p,{danh:d});

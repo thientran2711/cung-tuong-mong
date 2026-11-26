@@ -185,9 +185,9 @@ function shelfWhyNot(p,e){if(!e||!IT[e.k])return"không có món này";const g=s
 function shelfSlotFor(p,g){const z=shelfOf(p),S0=shelfSlots(g),fr=S0.find(s=>!z.g[s]);if(fr)return fr;return S0.slice().sort((a,b)=>shelfPiece(z.g[a])-shelfPiece(z.g[b]))[0]}
 function shelfPut(p,ix,slot){const e=(p.inv||[])[ix];const why=shelfWhyNot(p,e);if(why)return{ok:false,why};const z=shelfOf(p),g=shelfGrpE(e);
  const s=slot&&shelfSlotG(slot)===g&&shelfSlots(g).includes(slot)?slot:shelfSlotFor(p,g),old=z.g[s];
- p.inv.splice(ix,1);if(old)p.inv.push(old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[s]=e;if(old)shelfSetSync(p);return{ok:true,g,slot:s,old:old?shelfNm(old):"",n:shelfNm(e)}}
+ p.inv.splice(ix,1);if(old)invAdd(p,old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[s]=e;if(old)shelfSetSync(p);return{ok:true,g,slot:s,old:old?shelfNm(old):"",n:shelfNm(e)}}
 function shelfNm(e){if(!e)return"";if(e.k==="tp"&&e.wk)return e.wk.n||itm("tp").n;return itm(e.k).n}
-function shelfTake(p,g){const z=shelfOf(p),e=z.g[g];if(!e)return"";delete z.g[g];p.inv=p.inv||[];p.inv.push(e);shelfSetSync(p);return shelfNm(e)}
+function shelfTake(p,g){const z=shelfOf(p),e=z.g[g];if(!e)return"";delete z.g[g];p.inv=p.inv||[];invAdd(p,e);shelfSetSync(p);return shelfNm(e)}
 /* the one luxury number of a displayed piece: table / IT pieces = jlux luxPiece; her handmade work = the kit grade of its bậc (LUX_V); a living piece in bad care counts witherLux */
 function shelfPiece(e){if(!e)return 0;let v=0;try{if(e.k==="tp"){const a=itemArt(e);v=LUX_V[a?a.grade|0:0]}else v=luxPiece(e.k)}catch(x){v=0}if(shelfBad(e))v=Math.round(v*BAL.shelf.plant.witherLux);return v}
 /* the DWELLING score: sum of the displayed pieces vs the rank allowance × allowF (never shown to anyone: owner (d); the player learns it from consequences) */

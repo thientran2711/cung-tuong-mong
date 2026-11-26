@@ -122,7 +122,7 @@ function nApply(v,g,res){const id=g.b+"_"+(res.i+1),sum=C(g).e[res.i][5];const o
   else if(GB().seat.includes(sum)&&sum!=="HH"&&!nSeatTaken(sum,v)){g.seat=sum}
   if(W.rel){for(const x of (typeof liveRivals==="function"?liveRivals(true):[]))if(x&&x!==v&&!x.coop){if(res.sh==="t")affAdd(x,v,W.rel);else oanAdd(x,v,W.rel)}}
   /* the one treasure, a real object in HER chest (law 6c; cannot be sold, given or lost) */
-  const kk=GB().kimsach;if(IT[kk]){v.inv=v.inv||[];v.inv.push({k:kk,from:"ge",ti:res.ti,d:S.turn,nt:true})}
+  const kk=GB().kimsach;if(IT[kk]){v.inv=v.inv||[];invAdd(v,{k:kk,from:"ge",ti:res.ti,d:S.turn,nt:true})}
   try{if(typeof dhInc==="function")dhInc(v,K().key(g.b,res.i,res.sh))}catch(e){}
   if(NB().leave.includes(sum)&&!v.queen){v.alive=false;v.left=sum;if(sum==="NUN")v.nun=1;g.left=1}
   /* GE10: her help on this road (no betrayal) is remembered */

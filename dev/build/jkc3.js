@@ -161,7 +161,7 @@ function kc3Events(){const B=BAL.kc3.ev,k=S.origin.k,me=kc3P("me");if(Q.length>B
  if(S.kc.vh===1&&!S.kc.vhAsk&&!S.kc.tt){S.kc.vhAsk=1;pushDil(mkP("kcE",{e:"vhtrieu"}),"Thánh chỉ");return}}
 function kc3Die(m){if(!m)return;m.alive=0;m.dead=1;const d=kc3P("di");if(d&&d.t==="Di nương"&&m.r==="me"){d.t="Kế mẫu";log(`Cha nâng ${d.name} lên làm chính thất. Từ nay nàng là kế mẫu của ngươi.`)}
  const ar=S.kc.ar;if(ar){const j=ar.plan.indexOf("kc_hon");if(j>ar.i&&!(ar.A&&ar.A.a==="kc_hon"))ar.plan[j]="kc_ke"}}
-function kc3Keep(me){const e={k:"divat",from:"kc",giver:me?me.name:"Mẫu thân",d:typeof wdWhen==="function"?wdWhen():""};S.inv=S.inv||[];S.inv.push(e);return e}
+function kc3Keep(me){const e={k:"divat",from:"kc",giver:me?me.name:"Mẫu thân",d:typeof wdWhen==="function"?wdWhen():""};S.inv=S.inv||[];invAdd(S,e);return e}
 /* an event option with its true line (odds word, cost, gain, loss): the roll is made once, here, with the odds the card shows */
 function kc3Ev(n,cost,p,gain,loss,go,more){const c=cost||{},t=fmt(c),G=x=>x?`<span class="g">${x}</span>`:"",Rd=x=>x?`<span class="r">${x}</span>`:"";
  const line=p==null?[t?"tốn: "+t:"",gain?"thành: "+G(gain):"",loss?"kèm: "+Rd(loss):""].filter(Boolean).join(" · "):`${word(p)} · ${t?"tốn: "+t+" · ":""}thành: ${G(gain)||"qua được"} · hỏng: ${Rd(loss)||"không mất gì thêm"}`;
