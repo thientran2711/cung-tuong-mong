@@ -53,3 +53,12 @@ Shots (Fold 755x1000@2 + iPad 1180x820@2, roads + empty, looked at): CDN img/_re
 
 ## 6. Late gates
 Reviewer: opus BIG session_01D3E3NYiNpuvC4JKoyQchxo (opened 11:15Z). role-parity.test branch run 1: ALL PASS; run 2, LIVE run, quickcheck branch + LIVE: running, filled on finish.
+
+### Late gates (11:50Z)
+| gate | branch 99ceb658 | LIVE 3af7896e |
+|---|---|---|
+| role-parity.test | ALL PASS ×2 | ALL PASS |
+| quickcheck play part (open · old save · perf) | PASS (render 194/219, buổi 1120/2166 ms new/live) | PASS |
+| quickcheck core G4 80-dialog-fixed | 2 FAIL «(kit-dialog-2 a) no empty Tốn / Được cell» 755 + 1180 | **the same 2 FAIL** |
+| quickcheck button crawl | 1 fault «Ô lưu · Lui · close did not close its layer» (Fold) | **the same fault** |
+→ Both quickcheck faults are PRE-EXISTING on LIVE (identical rows), not from this branch (it touches only j10/jagacts3 faction code + tests). Flag for MAIN as a separate kit/save-slot item.
