@@ -3778,3 +3778,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~04:00Z SẾP (~03:50Z): Hành sự ≤20–25 buttons; tiers nhẹ/vừa/nặng, one act per tier → E-d.
 - ~04:05Z SẾP (~03:55Z): khắc budget calc across all places; relationship +change (total) on results → E-d report + mock.
 - ~04:10Z NHV-BUILD 263668aa LOOK: good except grey human shapes on every area stage → asked; result to 152.
+- ~04:20Z SẾP direct (151 chat): makeup→skill roll, cut minigames, Học nhanh; evidence per charge by kind + difficulty by weight; harm shows who/why/evidence → D (D4/D5 recommendations, D1 add).
