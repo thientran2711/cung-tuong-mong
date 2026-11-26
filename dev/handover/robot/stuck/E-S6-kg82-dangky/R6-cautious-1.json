@@ -1,0 +1,400 @@
+{
+ "job": {
+  "id": "R6-cautious-1",
+  "origin": "pf",
+  "road": "pt_tang",
+  "bot": "sens",
+  "seed": 764262748,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "d2e03d80",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "build": {
+   "s": "bf6dd041+",
+   "b": "0281bf7bcef6",
+   "t": "2026-11-26T06:59Z"
+  },
+  "areaTaps": 52,
+  "dlgScroll": 2,
+  "scrolls": 2,
+  "taps": 19
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 19,
+  "year": 1,
+  "rank": 2,
+  "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+  "card": [],
+  "duringArea": false,
+  "lastTaps": [
+   ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+   "AREA 513,656",
+   ".kmov «Vào điện»",
+   ".dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »",
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Quay lại»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [],
+ "buoi": 1,
+ "steps": 165,
+ "status": [],
+ "_loopAt": 1795677059497,
+ "_snapAt": 1795677025401,
+ "trace": [
+  [
+   8,
+   "AREA 539,714"
+  ],
+  [
+   8,
+   "AREA 592,390"
+  ],
+  [
+   8,
+   "AREA 268,346"
+  ],
+  [
+   9,
+   "AREA 145,496"
+  ],
+  [
+   9,
+   "AREA 620,221"
+  ],
+  [
+   9,
+   "AREA 573,233"
+  ],
+  [
+   10,
+   "AREA 603,281"
+  ],
+  [
+   10,
+   "AREA 597,236"
+  ],
+  [
+   10,
+   "AREA 250,712"
+  ],
+  [
+   10,
+   "AREA 611,620"
+  ],
+  [
+   11,
+   "AREA 520,227"
+  ],
+  [
+   11,
+   "AREA 478,588"
+  ],
+  [
+   11,
+   "AREA 564,248"
+  ],
+  [
+   12,
+   "AREA 164,468"
+  ],
+  [
+   12,
+   "AREA 131,731"
+  ],
+  [
+   12,
+   "AREA 341,238"
+  ],
+  [
+   12,
+   "AREA 374,217"
+  ],
+  [
+   13,
+   "AREA 562,636"
+  ],
+  [
+   13,
+   "AREA 222,378"
+  ],
+  [
+   13,
+   "AREA 117,287"
+  ],
+  [
+   13,
+   "AREA 255,490"
+  ],
+  [
+   14,
+   "AREA 180,721"
+  ],
+  [
+   14,
+   "AREA 474,635"
+  ],
+  [
+   14,
+   "AREA 335,442"
+  ],
+  [
+   15,
+   "AREA 393,348"
+  ],
+  [
+   15,
+   "AREA 515,501"
+  ],
+  [
+   15,
+   "AREA 210,619"
+  ],
+  [
+   15,
+   "AREA 238,216"
+  ],
+  [
+   16,
+   "AREA 130,284"
+  ],
+  [
+   16,
+   "AREA 128,685"
+  ],
+  [
+   16,
+   "AREA 297,404"
+  ],
+  [
+   17,
+   "AREA 204,796"
+  ],
+  [
+   17,
+   "AREA 241,765"
+  ],
+  [
+   17,
+   "AREA 204,342"
+  ],
+  [
+   17,
+   "AREA 502,638"
+  ],
+  [
+   18,
+   "AREA 606,443"
+  ],
+  [
+   18,
+   "AREA 506,510"
+  ],
+  [
+   18,
+   "AREA 408,222"
+  ],
+  [
+   19,
+   "AREA 116,232"
+  ],
+  [
+   19,
+   "AREA 306,709"
+  ],
+  [
+   19,
+   "AREA 396,234"
+  ],
+  [
+   19,
+   "AREA 120,784"
+  ],
+  [
+   20,
+   "AREA 503,365"
+  ],
+  [
+   20,
+   "AREA 385,467"
+  ],
+  [
+   20,
+   "AREA 505,747"
+  ],
+  [
+   21,
+   "AREA 299,345"
+  ],
+  [
+   21,
+   "AREA 255,573"
+  ],
+  [
+   21,
+   "AREA 344,503"
+  ],
+  [
+   21,
+   "AREA 197,747"
+  ],
+  [
+   22,
+   "AREA 598,794"
+  ],
+  [
+   22,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   23,
+   "#modal «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   28,
+   "AREA 163,511"
+  ],
+  [
+   28,
+   "#kroul «Tiếp»"
+  ],
+  [
+   29,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   32,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   32,
+   ".dlg «Thân phận kiếp này» «Dung mạo 32»"
+  ],
+  [
+   33,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   36,
+   ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»"
+  ],
+  [
+   37,
+   ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»"
+  ],
+  [
+   39,
+   ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»"
+  ],
+  [
+   40,
+   ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»"
+  ],
+  [
+   44,
+   "AREA 513,656"
+  ],
+  [
+   44,
+   ".kmov «Vào điện»"
+  ],
+  [
+   46,
+   ".dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »"
+  ],
+  [
+   49,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   50,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   51,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   52,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   52,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   98,
+   "#kg82 «Quay lại»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795676983161,
+ "_ckB": 1,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1228,
+   "rendererMB": 508,
+   "heapMB": 111,
+   "dom": 2705,
+   "q": 3,
+   "lsK": 4
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Công chúa Phù Tang hòa thâ",
+  "#modal|Lễ ra mắt",
+  ".kmov|",
+  ".dlg|Lễ ra mắt",
+  "#kxcatch|",
+  "#kg82|",
+  ".dlg|Duyên cung lỡ hẹn"
+ ],
+ "_momRank": 2,
+ "_unsFail": {
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Công chúa Phù Tang hòa thân · #/#": {},
+  ".dlg|Lễ ra mắt": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|511,470": {
+   "left": 123,
+   "n": 1
+  }
+ },
+ "t": {
+  "total": 101113
+ }
+}
