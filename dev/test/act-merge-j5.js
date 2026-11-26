@@ -23,8 +23,8 @@ const src=fs.readFileSync(path.join(ROOT,'dev/test/act-audit.js'),'utf8');const 
   ok(R.srv.pop.hh==null||R.srv.pop.hh.some(x=>/^\[Phản chủ:/.test(x)),'pop-up Hoàng hậu: door Phản chủ',R.srv.pop.hh);
   ok(R.srv.pop.sv==null||R.srv.pop.sv.some(x=>/^\[Giao hảo:/.test(x)),'pop-up người hầu: door Giao hảo',R.srv.pop.sv)}
  /* run every way of every door once (fresh state each) through the real door path: open chooser → choose way */
- const run=await p.evaluate(()=>{const out=[];try{const ids=[];deal();deck.forEach((a,i)=>{if(a.j5door)a.j5ways.forEach(w=>ids.push([i,w.n,a.n]))});
-  for(const [i,wn,dn] of ids){try{let di=-1;for(let t=0;t<40&&di<0;t++){S.srv.once={};S.buoi=0;used=0;S.suc=90;S.bac=400;S.tin=99;Q.length=0;deal();di=deck.findIndex(a=>a.j5door&&a.n===dn&&a.j5ways.some(w=>w.n===wn))}if(di<0){out.push({dn,wn,miss:1});continue}const u0=used,b0=S.bac;act(di);const opened=Q.length&&Q[0].t===dn;let r={dn,wn,opened:!!opened};
+ const run=await p.evaluate(()=>{const out=[];try{SRVA.errand.offer=100;S.srv.err=null;const ids=[];deal();deck.forEach((a,i)=>{if(a.j5door)a.j5ways.forEach(w=>ids.push([i,w.n,a.n]))});
+  for(const [i,wn,dn] of ids){try{let di=-1;for(let t=0;t<40&&di<0;t++){S.srv.err=null;S.srv.once={};S.buoi=0;used=0;S.suc=90;S.bac=400;S.tin=99;Q.length=0;deal();di=deck.findIndex(a=>a.j5door&&a.n===dn&&a.j5ways.some(w=>w.n===wn))}if(di<0){out.push({dn,wn,miss:1});continue}const u0=used,b0=S.bac;act(di);const opened=Q.length&&Q[0].t===dn;let r={dn,wn,opened:!!opened};
     if(opened){const ix=Q[0].opts.findIndex(o=>o.n===wn);r.found=ix>=0;if(ix>=0){r.off=!!Q[0].opts[ix].off;r.x=String(Q[0].opts[ix].x).slice(0,140);if(!r.off){chooseM(ix);r.used=used-u0;r.err=null;Q.length=0}else Q.length=0}else Q.length=0}
     out.push(r)}catch(e){out.push({dn,wn,err:e.message})}}}catch(e){out.push({err:e.message})}return out});
  R.run=run;for(const r of run)console.log(JSON.stringify(r));

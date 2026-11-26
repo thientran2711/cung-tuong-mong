@@ -230,11 +230,14 @@ function wayOpts(ways,tcOf,okOf,pick,why){return ways.map(w=>{const tc=tcOf(w),b
 function ask(title,text,opts){opts.push({n:"Thôi, để sau",x:"chưa làm gì lúc này",go:()=>{}});Q.push({t:title,ownAct:1,who:typeof pMe==="function"?pMe():null,h:`<p>${text}</p>`,opts});showModal()}
 /* ---- cards (Phận sự deck, lãnh cung deck) ---- */
 function cardDoor(key,rule,ways){const k=Math.min(...ways.map(cc)),lock=ways.every(w=>w.lock);DOORART[key]=ways[0].n;
- return{n:key,t:lock?(ways[0].t||rule.t):rule.t,k,c:{},o:100,w:{},l:{},x:`chọn một trong ${ways.length} cách`,dom:ways[0].dom,j5door:1,j5ways:ways,rep:1,lock,ad:0,g:ways[0].g,who:ways.every(w=>w.who===ways[0].who)?ways[0].who:undefined,done:ways.some(w=>!w.done&&!(w.once&&typeof isSrv==="function"&&isSrv()&&typeof srvOnce==="function"&&srvOnce(w.once,w.onceS)))?0:1}}
+ return{n:key,t:lock?(ways[0].t||rule.t):rule.t,k,c:{},o:100,w:{},l:{},x:"kết quả tùy việc chọn",inner:1,dom:ways[0].dom,j5door:1,j5ways:ways,rep:1,lock,g:ways[0].g,who:ways.every(w=>w.who===ways[0].who)?ways[0].who:undefined,done:ways.some(w=>!w.done&&!(w.once&&typeof isSrv==="function"&&isSrv()&&typeof srvOnce==="function"&&srvOnce(w.once,w.onceS)))?0:1}}
 function openCard(d){const L=availW(d);if(!L.length){d.done=1;render();return}
  if(L.length===1){pickCard(d,L[0]);return}
  ask(d.n,d.t,wayOpts(L,cc,(w,tc)=>can(tc)&&canPay(w)&&(w.b==null||(S.buoi||0)===w.b),w=>pickCard(d,w)))}
 let A0=null;
+/* test helpers: flat(list) = the list with every door replaced by its ways (the old flat names); run(name) = run the way / plain card of that name through the real act() path */
+J5.flat=L=>(L||[]).flatMap(a=>a&&a.j5door?a.j5ways:[a]);
+J5.run=n=>{const i=deck.findIndex(a=>a&&!a.j5door&&a.n===n);if(i>=0){act(i);return true}const d=deck.find(a=>a&&a.j5door&&a.j5ways.some(w=>w.n===n&&!w.lock));if(!d)return false;pickCard(d,d.j5ways.find(w=>w.n===n));return true};
 function pickCard(d,w){if(S.dead||Q.length||!A0)return;deck.push(w);const i=deck.length-1;try{A0.call(window,i)}catch(e){console.error("j5 way",e)}finally{const j=deck.indexOf(w);if(j>=0)deck.splice(j,1)}
  d.done=availW(d).length?0:1;render()}
 (function(){const a0=act;A0=a0;act=function(i){const d=deck&&deck[i];if(d&&d.j5door){if(d.done||d.lock||S.dead||Q.length||!can(cc(d)))return;openCard(d);return}return a0.apply(this,arguments)}})();
@@ -290,7 +293,7 @@ const POPG=[
  {n:"Giao hảo",t:"Kết thân với người hầu khác: trò chuyện, hay biếu chút quà.",re:/^(Trò chuyện|Biếu quà nhỏ)$/}];
 function tk(a){return typeof talkK==="function"?talkK(a):1}
 function itemDoor(key,rule,ways){const m=ways.reduce((a,b)=>tk(b)<tk(a)?b:a,ways[0]);
- return{n:key,t:rule.t,o:100,w:{},l:{},x:`chọn một trong ${ways.length} cách`,act:m.act,pk:m.pk,lock:ways.every(w=>w.lock),j5door:1,j5ways:ways,dom:m.dom}}
+ return{n:key,t:rule.t,o:100,w:{},l:{},x:"",inner:1,act:m.act,pk:m.pk,lock:ways.every(w=>w.lock),j5door:1,j5ways:ways,dom:m.dom}}
 (function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||p.kind!=="srv"||!Array.isArray(A)||typeof isSrv!=="function"||!isSrv())return A;
   A=doorize(A,POPG,itemDoor);const f=J5.force;if(f)A=A.map(a=>a&&a.j5door&&a.n===f.door?(a.j5ways.find(w=>w.n===f.way)||a):a)}catch(e){console.error("j5 pop",e)}return A}})();
 (function(){const t1=talk;talk=function(oi){try{if(popIdx!=null&&S&&S.visit&&S.visit.talked!==true&&!S.dead&&!Q.length&&!(S.visit.tk&&S.visit.tk[popIdx])){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
