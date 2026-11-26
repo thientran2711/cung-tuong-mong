@@ -11,11 +11,11 @@ Branch review/tinbao-words (base origin/main 5e01307). Neighbours told: OB-NGOAI
 4. `intelLearn` (j78) returns its facts with «Nàng ta» instead of the full name at each fact head (`j78Nang`; stored fact keeps the name); trait fact «vốn tính <nết>» (jchat regex follows); J78_WHERE «Nhật ký» → «Sổ ghi».
 5. Closing alert (jstagehere line): «Ở lại = như lẻn vào: X.» → «… mà ta vẫn nán lại, chẳng khác gì lẻn vào; may rủi: X.»
 6. jagent agWhy «… · con gái thầy đồ nghèo» → «…, vốn là con gái …»; nghe lén note «nghe lén: nàng … — …» → «nghe lén được nàng ta …, vì …»; j21 «Sổ ghi thêm» line ends with its period; j28 trait notice «Ngươi biết X vốn tính …».
-7. NET at the one notice entry: `kitSay` (jnotice; kitNotice line/text/items + kitKnow): no «=», no « · thành/hỏng», « · » inside a sentence → «, », «) (» → «, », «a: b: c» chain → one colon (colons inside «(…)» kept), a head sentence said twice → once, «có nết X» → «vốn tính x», a repeated «title name» → bare name after the first.
+7. NET at the one notice entry: `kitSayLine` (jnotice; kitNotice line/text/items + kitKnow): no «=», no « · thành/hỏng», « · » inside a sentence → «, », «) (» → «, », «a: b: c» chain → one colon (colons inside «(…)» kept), a head sentence said twice → once, «có nết X» → «vốn tính x», a repeated «title name» → bare name after the first.
 8. Free choice card (jopic kitOptFinal): a card with no cost/gain/loss/hint and no odds («Xem tin», «Để ta xem», «Để sau», «Xem lời nhờ») shows no «Tốn: không / Được: không» rows (`.kfree`; notes stay behind «!»). KIT.md §6.2b ROWS line updated in place. NOTE for MAIN: this narrows the §6.2b grey-row rule (owner 18/11 "tốn không được không … màu xám") for free cards only, per this bug's brief — law 16, please confirm with sếp if needed.
 
 ## Tests
-- `node dev/test/tinbao-words/scan.js` — static builders (kitNotice/kitKnow/noteAdd/ptNote/log…), kitSay on the owner's exact lines, producers in place. after: PASS · before (main): 13 FAIL.
+- `node dev/test/tinbao-words/scan.js` — static builders (kitNotice/kitKnow/noteAdd/ptNote/log…), kitSayLine on the owner's exact lines, producers in place. after: PASS · before (main): 13 FAIL.
 - `node dev/test/tinbao-words/bot.js <root> <out.json> 2 1 900` — 2 bot lives (seed 1) + forced family runs, collects notices, RENDERED Tin báo rows, cards, Sổ ghi lines; `table.py before.json after.json`.
 - `node dev/test/tinbao-words/shots.js <root> <out> <tag> video` — full Tin báo from the real producers, Fold + iPad + video.
 - dev/test/stage-stay.js: check follows the new line (chipOdds true); its «caught/free» faults are the same on main (pre-existing).
@@ -52,7 +52,7 @@ lines collected: before 687 · after 1042
 | eq | 4 | 3 | Bổng lộc tháng ba: +28 bạc · 1 súc Vải bông · 1 gói Trà Long Tĩnh · 1 hộp Than liễu · 1 hộp Son sáp · 1 lọ Nước bào hoa · 3 cây Nến mỡ dê · trả công 1 | Bổng lộc tháng ba: +20 bạc · 1 súc Vải bông · 1 gói Trà Long Tĩnh · 1 hộp Than liễu · 1 hộp Son sáp · 1 lọ Nước bào hoa · 3 cây Nến mỡ dê = +20 bạc (c |
 | dupHead | 1 | 0 | Có người tìm đến: Tiếp chuyện — Trình Tử Đàn buông lời khiêu khích ngươi. Trình Tử Đàn buông lời khiêu khích ngươi. Vì sao: Quý nhân Trình Tử Đàn: tín |  |
 
-Remaining NEWS hits after: kỳ-ngộ rows (innerText of kit stat chips «A: Danh +4 B: thiện cảm +54» read as colons — chips, not prose), bare short names said 3× in a long multi-report errand (allowed: name, not title). LOG (Sổ ghi) has wider older families (stat lines «Sức +18 · …», «Vì sao: …», Hội phối đồ) not routed through kitSay — out of this scope, listed for a follow-up.
+Remaining NEWS hits after: kỳ-ngộ rows (innerText of kit stat chips «A: Danh +4 B: thiện cảm +54» read as colons — chips, not prose), bare short names said 3× in a long multi-report errand (allowed: name, not title). LOG (Sổ ghi) has wider older families (stat lines «Sức +18 · …», «Vì sao: …», Hội phối đồ) not routed through kitSayLine — out of this scope, listed for a follow-up.
 
 ## Shots (CDN)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/tinbao-words/tb2511-before-fold.jpg · tb2511-after-fold.jpg · tb2511-before-ipad.jpg · tb2511-after-ipad.jpg · tb2511-before-ipad.webm · tb2511-after-ipad.webm
@@ -71,7 +71,7 @@ Shot k20-ipad-tinchonguoisai-repeat.jpg: «Tin chờ người sai đi» (jerr er
 - Shots: tb2511d-{fold,ipad}.jpg, tb2511d-{fold,ipad}-tin.jpg, tb2511d-ipad.webm.
 
 ## Round 5 — MAIN 149 look: «Sổ ghi thêm về X:» head + verbless «Ở <nơi> ngày hội.» (whole family)
-- j21 `noteSay(v,t)`: the notice of a new Sổ line is ONE sentence about the person (stored Sổ fragment unchanged): «Nghe nói <X> hay …», «<Nguồn> báo/kể <X> …», «<Nhãn>: <X> …», «Phòng của <Y> bày …», subject-less fragment → «<X> …». jnotice kitSay turns any old «Sổ ghi thêm về X: …» head the same way.
+- j21 `noteSay(v,t)`: the notice of a new Sổ line is ONE sentence about the person (stored Sổ fragment unchanged): «Nghe nói <X> hay …», «<Nguồn> báo/kể <X> …», «<Nhãn>: <X> …», «Phòng của <Y> bày …», subject-less fragment → «<X> …». jnotice kitSayLine turns any old «Sổ ghi thêm về X: …» head the same way.
 - jagknow `KN_WHAT`: a happening is a clause with its verb («đang có hội lớn», «có Hoàng thượng đang dạo vườn», «có hai phi tần đang cãi nhau», …) — never the bare title noun → «Ở Đức Thọ cung đang có hội lớn.»
 - jnotice kitNotice: the same news told twice (two ids, same text) is ONE row.
 - jagent origin clause «; nàng vốn xuất thân …». Unicode fix: my regexes use \p{Lu}/\p{Ll} (the À-Ỹ range matched lower case too).
@@ -96,3 +96,9 @@ lines collected: before 749 · after 2084
 
 - Gates: tinbao-words/scan.js PASS (main 27 FAIL lines) · news-runner-lines.js 0 FAIL · shots.js nameInBody=false Fold+iPad.
 - Shots: tb2511e-{fold,ipad}.jpg, tb2511e-{fold,ipad}-tin.jpg, tb2511e-ipad.webm.
+
+## Round 6 — URGENT name clash (MAIN 149, caught by LC19 on a8): my news helper `kitSay` overwrote the kit speech bubble
+- Root cause: r3 put `function kitSay(x)` (text cleaner) + `window.kitSay=kitSay` in jnotice.js; jmark.js owns the kit bubble `kitSay(st,fig,text,opts)` (K-HEAD-SAY) and jnotice loads after jmark → jchat got the cleaner → pageerror «reading 'isConnected'», NPC bubbles broken. Fix: renamed to `kitSayLine` (jnotice + its callers kitNotice/kitKnow + scan.js + VANPHONG row).
+- Whole family: NEW test `node dev/test/global-names/scan.js [--list]` — parses all 444 modules in assemble.py order (TypeScript parser), lists every global FUNCTION defined by 2+ modules that is not a wrap (old value kept) or a fill (`window.X = window.X || …`). On the old r5 it reports `CLASH kitSay: jmark.js → jnotice.js` (exit 1); now 0 CLASH. 7 pre-existing double definitions were reviewed and listed in KNOWN with why they are intended (fillStaff j10→j29 pool, srvToast/kitFlipNote/kitLine rerouted by jnotice ROOT-56, kitKnown stub, lessonVir→tdPlay, kitDeskCal off by jrail). My other new globals (kitSayLine, noteSay, ptVoice, ptRepRows voice, KN_WHAT, agWhySay, j78Nang) clash with nothing.
+- shots.js now also calls the kit bubble kitSay(stage, figure, text) and fails on a wrong arity / null bubble / any page error → Fold + iPad: arity 4, bubble ok, 0 page errors.
+- Gates: global-names/scan.js 0 CLASH · tinbao-words/scan.js PASS · news-runner-lines.js 0 FAIL · shots nameInBody=false.

@@ -1,5 +1,5 @@
 /* tinbao-words: THE bad-pattern set of a news line (owner OD 25/11 ~23:36Z). One line = one clear cổ trang sentence (VANPHONG).
-   check(text) → list of pattern ids hit. Used by scan.js (static + kitSay cases) and bot.js (live lines). */
+   check(text) → list of pattern ids hit. Used by scan.js (static + kitSayLine cases) and bot.js (live lines). */
 const P=[
  ['eq',      /\s=\s/,                                   '«=» in a sentence'],
  ['dotOk',   /\s·\s(?:thành|hỏng)\b/,                   '« · thành / · hỏng» glue'],

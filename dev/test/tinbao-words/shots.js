@@ -32,7 +32,12 @@ const [,,ROOT,OUT,TAG,VID]=process.argv;
    const body=[...M.querySelectorAll('.kft, .kfacts li, .kpsec li, .kpsec p')].map(e=>e.innerText.replace(/\s+/g,' ').trim()).filter(Boolean);
    const nm=S.maid&&S.maid.name;return{title:(M.querySelector('.kptitle')||{}).innerText,maid:nm,body,nameInBody:!!nm&&body.some(t=>t.includes(nm))}});
   await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/${TAG}-${dev==='fold'?'fold':'ipad'}-tin.jpg`,type:'jpeg',quality:82});
+  /* global-names (MAIN 149): the kit speech bubble kitSay(st,fig,text,opts) of jmark must still be the bubble (a news helper once overwrote it) */
+  info.bubble=await g.evaluate(async()=>{Q.length=0;document.getElementById('modal').hidden=true;try{render()}catch(e){}await new Promise(r=>setTimeout(r,600));
+   const st=document.getElementById('stage');const fig=st&&st.querySelector('img.kpor, .kfig img, figure img, img');let q=null,err='';
+   try{q=kitSay(st,fig,'Thần thiếp thỉnh an.',{ms:1500})}catch(e){err=e.message}return{arity:kitSay.length,ok:!!q&&typeof q.close==='function',err,line:typeof kitSayLine==='function'}});
   if(VID&&dev==='ipadAir'){await p.waitForTimeout(2500);await g.evaluate(()=>{const c=[...document.querySelectorAll('#modal .opts > button')].find(b=>/Xem tin/.test(b.innerText));if(c)c.click()});await p.waitForTimeout(3000)}
   info.errs=errs.slice(0,5);res[dev]=info;const v=p.video&&p.video();await ctx.close();if(v){try{fs.renameSync(await v.path(),`${OUT}/${TAG}-ipad.webm`)}catch(e){}}}
  fs.writeFileSync(`${OUT}/${TAG}-rows.json`,JSON.stringify(res,null,1));console.log(JSON.stringify(res,null,1).slice(0,3000));await b.close();srv.close();
+ const bb=Object.values(res).filter(r=>!r.bubble||r.bubble.arity!==4||!r.bubble.ok||r.bubble.err||r.errs.length);if(bb.length){console.error('FAIL: kit speech bubble kitSay broken / page error',JSON.stringify(bb.map(r=>[r.bubble,r.errs])));process.exitCode=1}
  const bad=Object.values(res).filter(r=>r.tin&&r.tin.nameInBody);if(bad.length){console.error('FAIL: the «Tin chờ người sai đi» body names the speaker shown at the left');process.exitCode=1}})().catch(e=>{console.error(e);process.exit(2)});

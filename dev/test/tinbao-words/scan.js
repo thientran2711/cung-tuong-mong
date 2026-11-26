@@ -2,7 +2,7 @@
    (1) STATIC: every string builder in dev/build/j*.js that feeds a news line — kitNotice({line,text,items}), kitKnow({text}), noteAdd(id,`…`), ptNote, the
        errand report heads (ptReg … t:), spyNews / spyListen, the closing alert line(), agWhy — is read as a template literal and checked against
        patterns.js (with ${…} as «X»). Reports file:line + pattern. FAIL on a hit in the families fixed here (FIXED list) or any «=» / « · thành» glue.
-   (2) kitSay (jnotice, THE net at the one entry) on the owner's exact lines → must come out clean.
+   (2) kitSayLine (jnotice, THE net at the one entry) on the owner's exact lines → must come out clean.
    (3) the known producers: jstagehere line(), jptime ptRepText, jwhy spyNews, jagent agWhy, j78 trait fact, jopic free card → the new wording is in place.
    usage: node dev/test/tinbao-words/scan.js [--md]   exit 1 on FAIL */
 const fs=require('fs'),path=require('path');const D=path.resolve(__dirname,'../../build');const B=require('./patterns.js');
@@ -18,15 +18,15 @@ for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f)).sort()){const t=
   const L=lits(t,i).filter(s=>s.length>8&&/\p{L}/u.test(s)&&!/^[\w-]+$/.test(s)&&!/^(?:pt:|n:|news:|know:|kitpg)/.test(s));const line=t.slice(0,i).split('\n').length;
   for(const s of L){const hit=B.check(s).filter(x=>x!=='name3x');if(!hit.length)continue;rows.push([`${f}:${line}`,fn,s.slice(0,110),hit.join(',')]);
    if(hit.some(h=>['eq','dotOk','eqStay','rawNet','paren2'].includes(h)))bad(`${f}:${line} ${fn} «${s.slice(0,80)}» ${hit}`)}}}}
-/* ---- (2) kitSay on the owner's lines ---- */
-const J=fs.readFileSync(path.join(D,'jnotice.js'),'utf8');const a=J.indexOf('function kitSay(');if(a<0)bad('kitSay missing in jnotice.js');else{
- const kitSay=new Function(J.slice(a,J.indexOf('window.kitSay=kitSay;'))+';return kitSay')();
+/* ---- (2) kitSayLine on the owner's lines ---- */
+const J=fs.readFileSync(path.join(D,'jnotice.js'),'utf8');const a=J.indexOf('function kitSayLine(');if(a<0)bad('kitSayLine missing in jnotice.js');else{
+ const kitSayLine=new Function(J.slice(a,J.indexOf('window.kitSayLine=kitSayLine;'))+';return kitSayLine')();
  const OWNER=['Cung nữ thân tín tam đẳng Xạ Nguyệt nghe ngóng trở về · thành. Cung nữ thân tín tam đẳng Xạ Nguyệt nghe ngóng trở về: Cung nữ thân tín tam đẳng Xạ Nguyệt nghe ngóng được về Phi ở một thiên điện (chưa quen) (nàng ta đang được sủng, ai cũng bàn): Một vị Phi có nết Nhiều chuyện.',
   'Đức Thọ cung đã đóng cửa (Thái hậu chỉ tiếp lúc sáng thỉnh an), ta vẫn ở lại. Ở lại = như lẻn vào: Khó lường.',
   'Sổ ghi thêm về Hoàng hậu Tiêu Tuyết Kiến: nghe lén: nàng ta rủ người cùng chơi — muốn có thêm người thân cận · con gái thầy đồ nghèo',
   'Xạ Nguyệt dò la Lệ tần Mai Hoa trở về · hỏng. Xạ Nguyệt dò la Lệ tần Mai Hoa trở về: chẳng thấy gì.'];
- for(const o of OWNER){const r=kitSay(o);const h=B.check(r).filter(x=>x!=='titleTwice');rows.push(['kitSay',o.slice(0,60)+'…',r.slice(0,110),h.join(',')||'clean']);if(h.length)bad(`kitSay left ${h} in «${r}»`)}
- if(kitSay('Tháng ba · thượng tuần')!=='Tháng ba · thượng tuần')bad('kitSay broke a date');}
+ for(const o of OWNER){const r=kitSayLine(o);const h=B.check(r).filter(x=>x!=='titleTwice');rows.push(['kitSayLine',o.slice(0,60)+'…',r.slice(0,110),h.join(',')||'clean']);if(h.length)bad(`kitSayLine left ${h} in «${r}»`)}
+ if(kitSayLine('Tháng ba · thượng tuần')!=='Tháng ba · thượng tuần')bad('kitSayLine broke a date');}
 /* ---- (3) producers in place ---- */
 const has=(f,s,why)=>{const t=fs.readFileSync(path.join(D,f),'utf8');if(!t.includes(s))bad(`${f}: ${why} (missing «${s.slice(0,50)}»)`)};
 const no=(f,s,why)=>{const t=fs.readFileSync(path.join(D,f),'utf8');if(t.includes(s))bad(`${f}: ${why} (still «${s.slice(0,50)}»)`)};
