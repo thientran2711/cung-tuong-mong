@@ -8,7 +8,7 @@
      ky    (Kỳ ngộ)
      opt   (j68 life events, j72 «Việc nhờ» / Phụ tuyến, jreign, j71 «Lập công», «Việc khó xử»)
    Gates (wraps, loaded last): kyArrive (her roll), approachOne, gmCard, agScene (a deed aimed at her: no card, the deed still lands), show70
-   (a non-urgent beat waits), evBusy (every optional source already asks it), makeDil; and at paint (showModal): a world card of a full day
+   (a non-urgent beat waits), evBusy (every optional source already asks it), makeDil; and at paint (showModal): a big card of a full day
    waits in EVCW for a later day (harm beats are never held: a warning must come before its plot). A refused event is NOT lost: its own gate keeps its state
    (a plot keeps p.pend, Kỳ ngộ keeps its pity, a visitor's reason stays) → a later day. No player-visible text, no random draw.
    Test: dev/test/stat-pace.js (unit + simulated days). */
@@ -25,11 +25,11 @@ function evcWaiting(){const L=[];try{for(const m of Q)L.push(m)}catch(e){}try{fo
 function evcNow(){const z=evcZ(),n=Object.assign({},z?z.n:{});try{for(const m of evcWaiting())if(m&&!m.evcN){const k=evcKind(m);if(k&&k!=="fest")n[k]=(n[k]||0)+1}}catch(e){}let t=0;for(const k in n)t+=n[k];n.t=t;return n}
 function evcOK(k){if(!evcOn())return true;if(k==="fest")return true;const B=BAL.evc,n=evcNow();if(n.t>=B.cap)return false;if((n[k]||0)>=(B.q[k]==null?B.cap:B.q[k]))return false;
  const i=B.pri.indexOf(k);let keep=0;if(B.res)for(let j=0;j<i;j++)if(!n[B.pri[j]])keep+=B.res;return n.t+keep<B.cap}
-/* EVCW: world cards (jspread-planned, m.__sp13) of a full day wait here for a later day; one is released when the board is clear and the day has
-   room; after BAL.evc.wait days it is let go (a plain card goes to the log, like j68 evDropInfo). Harm beats, must / ending cards and her own
-   acts' cards are never held. In memory like EVHOLD (j68). */
+/* EVCW: big cards (visit / ky / opt) of a full day wait here for a later day; one is released when the board is clear and the day has
+   room; after BAL.evc.wait days it is let go (a plain card goes to the log, like j68 evDropInfo). Harm beats and must / forced / ending cards are
+   never held. In memory like EVHOLD (j68). */
 let EVCW=[];
-function evcHoldable(m){return !!(m&&typeof m==="object"&&m.__sp13&&!m.must&&!m.kend&&!m.evcN&&m.kind!=="news")}
+function evcHoldable(m){return !!(m&&typeof m==="object"&&!m.must&&!m.kend&&!m.evcN&&!m.forced&&m.kind!=="news"&&m.cls!=="end")}
 function evcRoom(k){const B=BAL.evc,z=evcZ();let t=0;for(const j in z.n)t+=z.n[j];return t<B.cap&&(z.n[k]||0)<(B.q[k]==null?B.cap:B.q[k])}
 function evcPaint(){if(!evcOn())return;for(let g=0;g<30&&Q.length;g++){const m=Q[0],k=evcKind(m);if(!k||k==="fest"||m.evcN)return;
   if(k!=="harm"&&evcHoldable(m)&&!evcRoom(k)){Q.shift();EVCW.push({m,at:wk(),k});continue}evcSeen(m);return}}

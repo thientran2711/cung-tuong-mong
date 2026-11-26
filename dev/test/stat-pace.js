@@ -11,7 +11,7 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
  await p.goto('file://'+path.resolve(PAGE),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv())&&S.ps)break}Q.length=0});
  const U=await p.evaluate(()=>{const R=[];const ok=(c,m)=>R.push([!!c,m]);const B=BAL.sp;
-  ok(typeof spG==="function"&&typeof spAdd==="function"&&typeof evcOK==="function","rule + cap loaded");
+  ok(typeof spG==="function"&&typeof spAdd==="function"&&typeof evcOK==="function","rule + cap loaded");if(typeof spG!=="function")return R;
   /* (1) size band: one change never passes «big»; a fall untouched */
   const h={};ok(spG("rel",h,0,34,7)<=B.band.rel[2],`kỳ ngộ thiện cảm +34 → ${spG("rel",{},0,34,7)} (big band ${B.band.rel[2]})`);
   ok(spG("sung",{},0,12,7)<=B.band.sung[2],`Sủng +12 → ${spG("sung",{},0,12,7)} (big ${B.band.sung[2]})`);
@@ -43,12 +43,14 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
  let fail=0;for(const [g,m] of U){console.log((g?'ok   ':'FAIL ')+m);if(!g)fail++}
  /* (7) simulated days with the real bot: big events she was SHOWN per day (cards by source tag) never pass the cap */
  let src=fs.readFileSync(path.join(__dirname,'..','measure','inpage6.js'),'utf8');await p.evaluate(src);
- await p.evaluate(()=>{window.__bd=[];window.__cur={};const seen=new WeakSet();const C=m=>evcKind(m);/* the game's own tag rule (jevc) */
-  const sm=showModal;showModal=function(){try{const m=Q[0];if(m&&typeof m==='object'&&!seen.has(m)){seen.add(m);const k=C(m);if(k){window.__cur[k]=(window.__cur[k]||0)+1;(window.__cur._=window.__cur._||[]).push(k+':'+(m.pid||'')+':'+String(m.t||'').slice(0,30))}}}catch(e){}return sm.apply(this,arguments)};
+ await p.evaluate(()=>{window.__bd=[];window.__cur={};const seen=new WeakSet();const C=typeof evcKind==='function'?m=>evcKind(m)/* the game's own tag rule (jevc) */:m=>{/* LIVE (no jevc): the same tags */const t=String(m.t||'').replace(/<[^>]+>/g,''),pid=String(m.pid||'');
+   if(pid==='j70'||/^(Mưu hại|Sau vụ mưu hại|Lời cảnh báo|Tai mắt báo tin)/.test(t))return'harm';if(pid==='kyngo')return'ky';if(/^(Có người đến|Có người tìm đến|Một ánh mắt)/.test(t)||/visit/.test(pid))return'visit';
+   if(/^(e68|q72o|rgo?$|j71m)/.test(pid)||/^(Việc khó xử|Phụ tuyến|Lập công)/.test(t))return'opt';if(/^j71[ix]$/.test(pid))return'fest';return null};
+  const sm=showModal;showModal=function(){const r0=sm.apply(this,arguments);/* count what is REALLY on screen after the game's own gates */try{const m=Q[0];if(m&&typeof m==='object'&&!seen.has(m)){seen.add(m);const k=C(m);if(k){window.__cur[k]=(window.__cur[k]||0)+1;(window.__cur._=window.__cur._||[]).push(k+':'+(m.pid||'')+':'+String(m.t||'').slice(0,30)+(m.must?':MUST':'')+(m.forced?':FORCED':'')+(m.kend?':END':'')+(m.cls==='end'?':CLS':''))}}}catch(e){}return r0};
   const et=endTurn;endTurn=function(){const k0=wk();const f=!!(typeof festToday==='function'&&festToday());const r=et.apply(this,arguments);if(wk()!==k0){window.__bd.push({d:k0,f,c:window.__cur});window.__cur={}}return r}});
  const t0=Date.now();while(true){const st=await p.evaluate(()=>{window.__bot.step('sens',120);return{n:window.__bd.length,dead:!!(S&&S.dead)}});if(st.dead||st.n>=ND||Date.now()-t0>500e3)break}
- const D=await p.evaluate(()=>({bd:window.__bd,cap:BAL.evc.cap}));let worst=0,over=0;
- for(const x of D.bd){const n=Object.entries(x.c).reduce((a,[k,v])=>a+(k==='fest'||k==='_'?0:v),0)+(x.f?1:0);worst=Math.max(worst,n);if(n>D.cap){over++;console.log('     day',x.d,JSON.stringify(x.c),x.f?'(festival)':'')}}
- const g=over===0&&D.bd.length>=Math.min(ND,20);console.log((g?'ok   ':'FAIL ')+`simulated ${D.bd.length} days: most big events shown in one day ${worst} (cap ${D.cap}), days over the cap ${over}`);if(!g)fail++;
+ const D=await p.evaluate(()=>({bd:window.__bd,cap:BAL.evc?BAL.evc.cap:3}));let worst=0,over=0,sum=0;const hist={};
+ for(const x of D.bd){const n=Object.entries(x.c).reduce((a,[k,v])=>a+(k==='fest'||k==='_'?0:v),0)+(x.f?1:0);worst=Math.max(worst,n);sum+=n;hist[n]=(hist[n]||0)+1;if(n>D.cap){over++;console.log('     day',x.d,JSON.stringify(x.c),x.f?'(festival)':'')}}
+ const g=over===0&&D.bd.length>=Math.min(ND,20);console.log((g?'ok   ':'FAIL ')+`simulated ${D.bd.length} days: most big events shown in one day ${worst} (cap ${D.cap}), days over the cap ${over}; mean ${(sum/Math.max(1,D.bd.length)).toFixed(2)} a day; days by count ${JSON.stringify(hist)}`);if(!g)fail++;
  if(errs.length){console.log('FAIL page errors: '+errs.slice(0,3).join(' | '));fail++}
  console.log(fail?`FAIL ${fail}`:'PASS');await b.close();process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});

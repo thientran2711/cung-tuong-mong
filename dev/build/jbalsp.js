@@ -12,7 +12,7 @@
 BAL.sp={on:1,
  band:{sung:[2,5,8],danh:[2,5,8],duc:[2,5,8],th:[4,8,12],hh:[4,8,12],rel:[4,8,12],oan:[4,8,12]},over:.3,
  ceil:[45,55,65,75,85,92,97,100],
- dm:{pow:2,min:.15}};
+ dm:{pow:3,min:.15}};
 /* evc = ONE cap on the BIG events that reach her in one game day (tuần): festival (fixed date, always kept), harm / plots against her, people
    coming to find her (j24 «Có người đến», jgreet stage visitor), Kỳ ngộ, other optional life events (j68 / j72 / jreign / j71 «Lập công» / Việc khó xử).
    cap = total per day; q = most of one kind per day; pri = priority order (a kind earlier in the list is never refused while the day has room;
