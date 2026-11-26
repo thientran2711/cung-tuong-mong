@@ -342,3 +342,10 @@ KK41 HANDOVER ADDENDUM (11:01Z, orders that arrived while rolling; MAIN is now 1
  3) K-PICKER-FIT (≤1 s at CPU 4x, off kitScrollCues; if jksize `.dlg *` scan must change, rebase on D's review/renderer-mem 123a2a9c and touch only the scan).
  4) «???» kitName fix (above).
  5) OB-NGOAICUNG-3b (session_01V1ZZH1sqdbSzbtN5g1iE4v) asks: review meRankN diff review/ob-ngoaicung 6e726d81 (report 6f3cdd5b, §r3 in reports/ob-ngoaicung.md): jroad8 meRankN, jksize:127 kszRankName, j79 kitName/header, jselxsc plate guard, jkc2 rkName/rkOfFace/pMe.
+
+## KK42 PROGRESS (26/11 ~11:45Z) — kit keeper session_01V1ZZH3CYo8F1o9jbxCsySG; coordinator MAIN 158
+PRIORITY #1 CHECK ('kitName ???'): OD 5 | ledger 1 | claims 0 | main 15 | review/* 0 | archive 18 — reuse KK41's work.
+1. review/kit-kem-row-r3 d0c24fa2 (new name: force-push over -r2 refused): rebased onto ob-verdict-rv 2ae7a503, merged FINAL 5dc1db31. ONE kitKemRow + ONE-SIEVE points (kaNT totals when K items carry t; K.more tail; only-more line; guard) + K.all (no 8 cap, ONE-SIEVE-2 request) + RV-KK41 nits (dead .kkemi rule, K.more-only card gate, «(42)» check skip-marked until kaNT). Tests kit-kem-row PASS, ob-verdict 84/0, viecnho-fix 32/0. d356c9f6 = MAIN LOOK PASS + RV SMALL PASS; d0c24fa2 sent to both + ONE-SIEVE-2.
+2. review/kit-home-frame 22beb8d8: «Hoa▪tai» = her frame's TASSEL over the identity card item grid, not a badge. Kit part KIT_PFO.clear (jk2b): the .kplscr text of EVERY person card starts 4 px under the frame art's tassel tip (KIT_FRW); it ran only for --kpcmax cards. Test kit-tassel-clear.js: id card overlap 68/81 px → −6/−7, Hậu cung unchanged. LOOK READY to MAIN + RV part C.
+NEXT: lane 3 «???» kitName (+ rel-men-servants F2 pair heading), boot cover over the chest check, lane 4 K-PICKER-FIT, lane 5 «Phối đồ» «•» button, lane 6 black box «Nguy hiểm chung».
+Worktrees /home/user/wt/{kem,hf,ho}; scratch /home/user/wt/kk42-t (hoatai*.js, tassel-scan.js).
