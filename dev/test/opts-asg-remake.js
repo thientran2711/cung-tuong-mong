@@ -27,12 +27,24 @@ const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=e
    run('tsb thCall',()=>apWrapped('thCall',{}));
    {const v3=V.find(x=>(x.staff||[]).some(y=>y&&y.name));if(v3)run('tsb svDefect',()=>apWrapped('svDefect',{who:v3.staff.find(y=>y&&y.name),tgt:v3}));else out['tsb svDefect']={same:true,skip:'no rival staff'}}
    /* 2b. jagknow «Có người bán tin» (the news object carries code: before, no rk at all; probe iPad seed 1 rv10) */
-   {let r=null;try{for(const x of [S]){const L=[];for(const s of (typeof knAllSrv==='function'?knAllSrv():[]).filter(y=>y&&y.name)){const N=knSellNews(S,s);if(N.length){/* a fact that carries code (f.go, as j78 facts with a follow-up do; probe iPad seed 1) */const n=N[0];r={s,n:Object.assign({},n,{f:Object.assign({},n.f||{},{go:()=>''})})};break}}if(r)break}}catch(e){}
-    if(r)run('knSell',()=>knSellCard(r.s,r.n));else out['knSell']={same:true,skip:'no seller with news'}}
+   /* r7 (independent check C2): a run with no seller holding news must not PASS — the row forces real news (his favour moved since she last
+      knew: S.kf, knFavFact) when none is there; still none → FAIL */
+   {const SV=()=>(typeof knAllSrv==='function'?knAllSrv():[]).filter(y=>y&&y.name);let r=null;
+    try{for(const s of SV()){const N=knSellNews(S,s);if(N.length){r={s,n:N[0]};break}}
+     if(!r)for(const s of SV()){const o=ownerOf(s);if(!o||o===S)continue;S.kf=S.kf||{};S.kf[o.id]={s:(o.sung||0)-100,n:0,w:wk()};const N=knSellNews(S,s);if(N.length){r={s,n:N[0]};break}}}catch(e){}
+    if(r){const n=r.n;run('knSell',()=>knSellCard(r.s,Object.assign({},n,{f:Object.assign({},n.f||{},{go:(n.f&&n.f.go)||(()=>'')})})))}else out['knSell']={err:'no seller with news, even forced'}}
+   /* 2c. r7 (independent check C1): the live favour news is gone at the reload (his Sủng moved again) → the carried copy is used; buying it must
+      still mark what she now knows (S.kf), else the favour news comes again */
+   {let res={err:'no servant of a rival'};try{for(const s of (typeof knAllSrv==='function'?knAllSrv():[]).filter(y=>y&&y.name)){const o=ownerOf(s);if(!o||o===S||!o.alive)continue;
+     const s0=o.sung||0;S.kf=S.kf||{};S.kf[o.id]={s:s0-100,n:0,w:wk()};const n=knSellNews(S,s).find(q=>q.f&&q.f.kind==='fav');if(!n)continue;
+     const m=knSellCard(s,n);Q.length=0;Q.push(m);const L=JSON.parse(JSON.stringify(serQ()));Q.length=0;o.sung=s0+37;
+     const c=(deserQ(L)||[]).find(x=>x&&x.t===m.t);S.bac=(S.bac||0)+9999;const buy=c&&(c.opts||[]).find(x=>x.n==='Mua tin');if(buy)buy.go();
+     const K=S.kf[o.id]||{};res={same:!!buy&&K.s===o.sung,rk:m.rk||null,kf:K.s,sung:o.sung,carried:true};o.sung=s0;break}}catch(e){res={err:String(e&&e.message)}}
+    out['knSell carried go']=res}
    /* 3. jtoilr answers on a reaction card (a slight from a consort) */
    run('toil rx',()=>{Q.length=0;const k='rival-tease';TOIL_POP.length=0;
      TOIL_POP.push({k,who:pv(v),host:v,n:-4,name:v.name,line:'son phấn nhạt'});toilFlush();return Q.find(x=>x&&x.toilEv===k)});
    return out});
-  for(const [k,r] of Object.entries(R)){const pass=r.same===true;if(!pass)bad++;console.log(page,k,pass?'PASS':'FAIL',JSON.stringify(r))}
+  for(const [k,r] of Object.entries(R)){const pass=r.same===true&&!r.skip;/* r7 C2: a skipped row cannot PASS */if(!pass)bad++;console.log(page,k,pass?'PASS':'FAIL',JSON.stringify(r))}
   if(errs.length)console.log(page,'page errors',errs.slice(0,3));await ctx.close()}
  await b.close();srv.close();process.exit(bad?1:0)})();
