@@ -21,7 +21,7 @@ const A=process.argv.slice(2);const URL=A.find(x=>!x.startsWith('--')&&!x.endsWi
   run("pregnant, hidden",()=>{S.preg=2;S.hidden=true;S.fake=0});
   run("tâm cơ ≥50, not pregnant",()=>{S.preg=0;S.tamco=80});
   run("evening (buổi tối)",()=>{S.buoi=3});
-  try{AA.scen('cao');S.out=1;deal();out["lãnh cung (J5, unchanged)"]=shown()}catch(e){out["lãnh cung"]={err:e.message}}
+  try{AA.scen('cao');S.out=1;deal();const r=shown();r.road=typeof DOOR==="object"&&DOOR.road?DOOR.road():null;out["lãnh cung (J5 cold doors)"]=r}catch(e){out["lãnh cung"]={err:e.message}}
   return out});
  let bad=0;const P=(...a)=>console.log(...a);const allB=new Set(),allA=new Set();
  P("| state | before (cards) | after (buttons) | doors (ways inside) | ĐỂ RIÊNG / single |");P("|---|---|---|---|---|");
@@ -30,7 +30,7 @@ const A=process.argv.slice(2);const URL=A.find(x=>!x.startsWith('--')&&!x.endsWi
   /* every dealt card is reachable: as its own card or as a way inside a door */
   const vis=new Set(ways);const lost=[...new Set(r.dealt)].filter(n=>!vis.has(n)&&!/^Phát bạc/.test(n));
   if(lost.length&&!/lãnh/.test(k)){P(" LOST in",k,":",lost.join(" · "));}
-  if(/lãnh/.test(k)&&r.L.some(x=>x.door)){P(" DOOR IN LÃNH CUNG");bad++}
+  if(/lãnh/.test(k)&&r.road!=="cold"){P(" LÃNH CUNG NOT ON THE COLD ROAD (J3 «hs» rows would apply):",r.road);bad++}/* J5's own cold doors (Nghỉ ngơi / Kiếm sống / Rời cung …) are expected there; J3's «hs» rows only fold on DOOR.road()==="hs" */
   ways.forEach(n=>allB.add(n));r.L.forEach(x=>allA.add(x.door?x.n:x.n));
   P("|",k,"|",before,"|",after,"|",r.L.filter(x=>x.door).map(x=>`**${x.n}** (${x.ways.join(" · ")})`).join("; ")||"—","|",r.L.filter(x=>!x.door).map(x=>x.n).join(" · "),"|")}
  const cons=k=>!/lãnh/.test(k);const B=new Set(),Af=new Set();for(const k in R){if(!cons(k)||R[k].err)continue;R[k].L.forEach(x=>{(x.ways||[x.n]).forEach(n=>B.add(n.replace(/^Để ý một .+$/,"Để ý một nam nhân").replace(/^Xin ban hôn cho .+$/,"Xin ban hôn cho Vương gia")));Af.add(x.n.replace(/^Để ý một .+$/,"Để ý một nam nhân"))})}
