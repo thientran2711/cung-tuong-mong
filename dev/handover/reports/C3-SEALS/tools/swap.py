@@ -35,7 +35,7 @@ G = {
   same="Same senior ma ma, same soft hand-painted storybook style, same silver-streaked bun with two plain silver hairpins, same coral red (#D4897D) brocade over-vest with teal (#499597) collar",
   short="senior ma ma with the silver hairpins", sl="coral red and teal sleeves", head="her hairpins", male=False, ears=True),
  "cy": dict(
-  who="a YOUNG PALACE MAID (cung nữ) of the inner palace, a girl about eighteen, sweet round face with big round eyes, black hair pinned UP in a simple neat bun with ONE plain silver hairpin with a tiny tassel (no flowers, no crown, no phoenix, nothing grand, no loose hair), a plain maid's pale blue-green (#A9CFC4) silk jacket with a narrow ivory (#EAD7BF) collar, simple and modest, clearly a servant, not a consort",
+  who="a YOUNG PALACE MAID (cung nữ) of the inner palace, a young woman about twenty, NOT a child: a slim oval adult face with a soft pointed chin, almond-shaped eyes, adult proportions like the reference woman, black hair pinned UP in a simple neat bun with ONE plain silver hairpin with a tiny tassel (no flowers, no crown, no phoenix, nothing grand, no loose hair), a plain maid's pale blue-green (#A9CFC4) silk jacket with a narrow ivory (#EAD7BF) collar, simple and modest, clearly a servant, not a consort",
   same="Same young palace maid, same soft hand-painted storybook style, same simple black bun with one silver hairpin with a tiny tassel, same pale blue-green (#A9CFC4) maid's silk jacket with ivory (#EAD7BF) collar",
   short="young maid with the silver hairpin", sl="pale blue-green sleeves", head="her hairpin", male=False, ears=True),
 }
