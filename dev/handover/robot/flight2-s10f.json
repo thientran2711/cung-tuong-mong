@@ -1,0 +1,342 @@
+{
+ "job": {
+  "id": "flight2-s10f",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 2026112534,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "0e0ebe29",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 145,
+    "lvl": 1,
+    "layer": "#kload",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "builds": [
+   {
+    "s": "1dcb373e+",
+    "b": "5ab5b80e406e",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "1dcb373e+",
+   "b": "5ab5b80e406e",
+   "t": "2026-11-26T10:49Z",
+   "at": "2026-11-26T13:43:55.994Z"
+  },
+  "pinUrl": "http://127.0.0.1:8729/",
+  "build": {
+   "s": "1dcb373e+",
+   "b": "5ab5b80e406e",
+   "t": "2026-11-26T10:49Z"
+  },
+  "areaTaps": 18,
+  "kloadEnter": 1,
+  "backdropTaps": 1,
+  "dlgScroll": 2,
+  "scrolls": 2,
+  "taps": 31
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 20,
+  "year": 1,
+  "rank": 1,
+  "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+  "card": [
+   "Pha một chén trà dâng lên Rất vững TỐN Sức -5 ĐƯỢC chơi một ",
+   "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".dlg «Thân phận kiếp này» «Dung mạo 21»",
+   ".dlg «Thân phận kiếp này» «Trang trước»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 12»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 8»",
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 1/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 2/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 3/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 4/4» «Vào cung»",
+   ".dlg «Xét phong danh phận» «Pha một chén trà dâng lênRất vữngTốnSức -5Đượcchơi»",
+   ".kmov «Tiếp theo»",
+   ".dlg «Xét phong danh phận» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [],
+ "buoi": 1,
+ "steps": 112,
+ "status": [],
+ "_loopAt": 1795700807758,
+ "_bootFirst": 1,
+ "_snapAt": 1795700758821,
+ "trace": [
+  [
+   130,
+   "AREA 627,360"
+  ],
+  [
+   130,
+   "AREA 426,611"
+  ],
+  [
+   131,
+   "AREA 635,479"
+  ],
+  [
+   131,
+   "AREA 408,829"
+  ],
+  [
+   131,
+   "AREA 618,587"
+  ],
+  [
+   132,
+   "AREA 304,230"
+  ],
+  [
+   132,
+   "AREA 240,682"
+  ],
+  [
+   132,
+   "AREA 638,261"
+  ],
+  [
+   132,
+   "AREA 180,703"
+  ],
+  [
+   133,
+   "AREA 128,803"
+  ],
+  [
+   133,
+   "AREA 600,261"
+  ],
+  [
+   133,
+   "AREA 474,329"
+  ],
+  [
+   134,
+   "AREA 230,305"
+  ],
+  [
+   134,
+   "AREA 622,698"
+  ],
+  [
+   134,
+   "AREA 603,492"
+  ],
+  [
+   155,
+   "#kload «Vào cung ngay»"
+  ],
+  [
+   155,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   156,
+   "#modal «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   160,
+   "AREA 603,375"
+  ],
+  [
+   160,
+   "AREA 378,791"
+  ],
+  [
+   160,
+   "BACKDROP #klife «» tap"
+  ],
+  [
+   161,
+   "AREA 557,269"
+  ],
+  [
+   162,
+   "#kroul «Tiếp»"
+  ],
+  [
+   162,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   164,
+   ".dlg «Thân phận kiếp này» «Dung mạo 3»"
+  ],
+  [
+   164,
+   ".dlg «Thân phận kiếp này» «Dung mạo 2»"
+  ],
+  [
+   165,
+   ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+  ],
+  [
+   165,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   165,
+   ".dlg «Thân phận kiếp này» «Dung mạo 17»"
+  ],
+  [
+   166,
+   ".dlg «Thân phận kiếp này» «Dung mạo 19»"
+  ],
+  [
+   166,
+   ".dlg «Thân phận kiếp này» «Trang trước»"
+  ],
+  [
+   166,
+   ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+  ],
+  [
+   167,
+   ".dlg «Thân phận kiếp này» «Vừa»"
+  ],
+  [
+   167,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   167,
+   ".dlg «Thân phận kiếp này» «Dung mạo 21»"
+  ],
+  [
+   168,
+   ".dlg «Thân phận kiếp này» «Dung mạo 22»"
+  ],
+  [
+   168,
+   ".dlg «Thân phận kiếp này» «Trang trước»"
+  ],
+  [
+   168,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   169,
+   ".dlg «Thân phận kiếp này» «Dung mạo 21»"
+  ],
+  [
+   169,
+   ".dlg «Thân phận kiếp này» «Trang trước»"
+  ],
+  [
+   170,
+   ".dlg «Thân phận kiếp này» «Dung mạo 12»"
+  ],
+  [
+   170,
+   ".dlg «Thân phận kiếp này» «Dung mạo 8»"
+  ],
+  [
+   171,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   172,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 1/4» «Tiếp theo»"
+  ],
+  [
+   172,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 2/4» «Tiếp theo»"
+  ],
+  [
+   173,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 3/4» «Tiếp theo»"
+  ],
+  [
+   174,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 4/4» «Vào cung»"
+  ],
+  [
+   174,
+   ".dlg «Xét phong danh phận» «Pha một chén trà dâng lênRất vữngTốnSức -5Đượcchơi»"
+  ],
+  [
+   175,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   177,
+   ".dlg «Xét phong danh phận» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+  ]
+ ],
+ "_unsFail": {
+  "#kload|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Cung nữ được sủng hạnh · #/#": {},
+  ".dlg|Xét phong danh phận": {}
+ },
+ "_started": true,
+ "_ckAt": 1795700787917,
+ "_ckB": 1,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1103,
+   "rendererMB": 515,
+   "heapMB": 104,
+   "dom": 2698,
+   "q": 3,
+   "lsK": 4
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  "#modal|Tiền truyện · Cung nữ được sủng hạnh · #",
+  ".dlg|Tiền truyện · Cung nữ được sủng hạnh · #",
+  ".dlg|Xét phong danh phận",
+  ".kmov|",
+  ".dlg|Duyên cung lỡ hẹn"
+ ],
+ "_momRank": 1,
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|511,470": {
+   "left": 235,
+   "n": 2
+  }
+ },
+ "t": {
+  "total": 177684
+ }
+}
