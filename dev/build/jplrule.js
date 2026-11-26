@@ -71,7 +71,9 @@ function homeName(){try{const k=plHomeK();return typeof accName==="function"?acc
 window.homeName=homeName;
 function homeWay(){try{if(typeof S!=="object"||!S||S.dead||S.out||mode())return null;const hn=homeName();if(S.place==="home"||!S.place)return{at:1,hn,label:"Về phòng",title:`Phòng của ta: ${hn}`};
  let tc=0;try{tc=travel(S.place,"home")}catch(e){}const ok=typeof walkOk==="function"?walkOk(tc):true;
- return{at:0,hn,tc,ok,label:ok?`Về phòng · ${tc} khắc`:"Về phòng · hết khắc",title:ok?`Đi về ${hn}: ${tc} khắc`:`Hết khắc buổi này, chưa về ${hn} được`}}catch(e){console.error("homeWay",e);return null}}
+ /* review/home-way-nits: the real reason when she cannot walk home = the kit khắc words (j76need, bound to this buổi: the walk never spills), carried as data-why (kit reason path, guessWhy / kfWhy) */
+ let why="";if(!ok){try{why=typeof j76need==="function"?j76need(tc,null,true).t:""}catch(e){}why=why||"hết khắc buổi này"}
+ return{at:0,hn,tc,ok,why,label:ok?`Về phòng · ${tc} khắc`:"Về phòng · hết khắc",title:ok?`Đi về ${hn}: ${tc} khắc`:`${why[0].toUpperCase()+why.slice(1)}, chưa về ${hn} được`}}catch(e){console.error("homeWay",e);return null}}
 window.homeWay=homeWay;
 /* the walk home from any «Về phòng» button; false when it cannot go (card open, no khắc) */
 function homeGo(){try{const w=homeWay();if(!w||w.at||!w.ok||Q.length)return false;goTo("home");return S.place==="home"}catch(e){console.error("homeGo",e);return false}}
@@ -91,7 +93,7 @@ function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="mapt
  if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
  /* the way home */
  /* the way home: the ONE rule homeWay() (shared with the top-bar #k3room, review/home-way) */
- {const w=homeWay();if(w&&!w.at){const b=`<button class="btn mz" data-plhome="1"${w.ok?"":" disabled"} title="${w.title}">${w.label}</button>`;
+ {const w=homeWay();if(w&&!w.at){const b=`<button class="btn mz" data-plhome="1"${w.ok?"":` disabled data-why="${w.why}"`} title="${w.title}">${w.label}</button>`;
   h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}}
  return h}catch(e){console.error("plMap",e);return h}}
 window.plMap=plMap;

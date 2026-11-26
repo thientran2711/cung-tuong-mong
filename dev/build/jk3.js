@@ -411,8 +411,8 @@ function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";retu
   try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
  /* label = the ONE way-home rule (jplrule homeWay): «Về phòng · N khắc» away, «Về phòng» at home; second line = HER palace's name (the home mark) */
  const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const w=typeof homeWay==="function"?homeWay():null;const t=w?w.label:"Về phòng",hn=w&&w.hn||"";
-  const l=rb.querySelector(".kbl");const txt=hn?t+"\n"+hn:t;if(l&&l.textContent!==txt){l.textContent=txt;rb.setAttribute("aria-label",hn?`${t}, ${hn}`:t)}rb.title=w?w.title:t;
-  const dis=!!(w&&!w.at&&!w.ok);if(rb.disabled!==dis)rb.disabled=dis}}catch(e){}return r};window.k3Shell=k3Shell})();
+  const l=rb.querySelector(".kbl");const txt=hn?t+"\n"+hn:t;if(l){let far=0;try{far=Math.max(BAL.walk.near,BAL.walk.far)}catch(e){}const sz=["Về phòng · hết khắc",`Về phòng · ${far} khắc`,"Về phòng",hn].reduce((a,x)=>x.length>a.length?x:a,"");if(l.dataset.sz!==sz)l.dataset.sz=sz}if(l&&l.textContent!==txt){l.textContent=txt;rb.setAttribute("aria-label",hn?`${t}, ${hn}`:t)}rb.title=w?w.title:t;
+  const dis=!!(w&&!w.at&&!w.ok);if(rb.disabled!==dis)rb.disabled=dis;if(dis)rb.dataset.why=w.why||"";else delete rb.dataset.why}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
@@ -455,6 +455,11 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
  html:where(.kv1) body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}
 html body .stage>#tomap.kbackb,html body #tomap.kbackb{background:#fffaf0e6!important;border:1px solid var(--line,#d9c49a)!important;border-radius:18px!important;padding:2px 12px 2px 6px!important;color:var(--ink,#3a2a1a);box-shadow:0 2px 8px #0004!important;min-height:38px;font-family:var(--display)}
 html body header.hud>#k3room.kbackb{justify-self:end;min-height:36px;max-width:100%}
+/* review/home-way-nits (law 10): ONE box per device for the way-home button: a label line never wraps (white-space:pre) and the label column is as wide
+   as the LONGEST label it can ever show (hidden sizer row = data-sz, set from homeWay: «Về phòng · hết khắc», «Về phòng · <far> khắc», her palace's name),
+   so the button keeps the same size at home, away and with no khắc left */
+html body header.hud>#k3room.kbackb .kbl{display:inline-grid;grid-template-columns:auto;white-space:pre;overflow:visible;text-overflow:clip}
+html body header.hud>#k3room.kbackb .kbl::after{content:attr(data-sz);grid-column:1;grid-row:2;height:0;overflow:hidden;visibility:hidden;white-space:pre;line-height:0}
 html body header.hud>#k3room[hidden]{display:none!important}
 html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* top bar time block (31.1): the bar grid, the stat cells and the two-line time block are kitStatRow / kitStatCell (jk4, KIT 32) */

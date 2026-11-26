@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7f46a130+","t":"2026-11-26T05:57Z","c":"home-way: fresh build","b":"bfbf82c0153a","h":[{"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"532fbce1+","t":"2026-11-26T06:26Z","c":"RV-HOME-WAY r6 fix: «no way home» only when she never had the khắc to walk home at that place this buổi (spending every khắc at a warned cl…","b":"2fc33f980672","h":[{"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5167,7 +5167,8 @@ function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h
 /* keep the Pixi scene the size of the stage whenever the layout changes (not only on window resize) */
 (function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}try{if(typeof kitStagePause==="function")kitStagePause()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
 /* every disabled button says why */
-function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=BAL.time.khac?"hết khắc buổi này":"Sức dưới "+(BAL.time.sucMin)+"";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
+/* review/home-way-nits (law 11): a reason the code KNOWS (data-why, the kit reason attribute: j75 lk, jplrule homeWay, jfx kfWhy) wins over any guess */
+function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";if(b.dataset&&b.dataset.why)return b.dataset.why;const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=BAL.time.khac?"hết khắc buổi này":"Sức dưới "+(BAL.time.sucMin)+"";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
 (function(){const kf=kitFix;kitFix=function(root){kf(root);(root||document).querySelectorAll(".rbtn button:disabled,.btn:disabled,.pcb button:disabled").forEach(b=>{if(b.querySelector(".kwhy"))return;const sm=b.querySelector("small");const w=guessWhy(b);if(!w)return;if(sm)sm.insertAdjacentHTML("afterbegin",`<span class="kwhy">${w}</span> `);else b.insertAdjacentHTML("beforeend",`<small><span class="kwhy">${w}</span></small>`)})}})();
 /* ================= BỔNG LỘC (monthly, every consort by the same ladder) and ÂN THƯỞNG ================= */
 /* bổng lộc by rank: BAL.pay (jecon) is the one table; BL is its mirror for old readers, filled by jecon (one-core: the typed 30…320 here disagreed with the 40…280 paid) */
@@ -46165,8 +46166,8 @@ function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";retu
   try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
  /* label = the ONE way-home rule (jplrule homeWay): «Về phòng · N khắc» away, «Về phòng» at home; second line = HER palace's name (the home mark) */
  const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const w=typeof homeWay==="function"?homeWay():null;const t=w?w.label:"Về phòng",hn=w&&w.hn||"";
-  const l=rb.querySelector(".kbl");const txt=hn?t+"\n"+hn:t;if(l&&l.textContent!==txt){l.textContent=txt;rb.setAttribute("aria-label",hn?`${t}, ${hn}`:t)}rb.title=w?w.title:t;
-  const dis=!!(w&&!w.at&&!w.ok);if(rb.disabled!==dis)rb.disabled=dis}}catch(e){}return r};window.k3Shell=k3Shell})();
+  const l=rb.querySelector(".kbl");const txt=hn?t+"\n"+hn:t;if(l){let far=0;try{far=Math.max(BAL.walk.near,BAL.walk.far)}catch(e){}const sz=["Về phòng · hết khắc",`Về phòng · ${far} khắc`,"Về phòng",hn].reduce((a,x)=>x.length>a.length?x:a,"");if(l.dataset.sz!==sz)l.dataset.sz=sz}if(l&&l.textContent!==txt){l.textContent=txt;rb.setAttribute("aria-label",hn?`${t}, ${hn}`:t)}rb.title=w?w.title:t;
+  const dis=!!(w&&!w.at&&!w.ok);if(rb.disabled!==dis)rb.disabled=dis;if(dis)rb.dataset.why=w.why||"";else delete rb.dataset.why}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
@@ -46209,6 +46210,11 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
  html:where(.kv1) body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}
 html body .stage>#tomap.kbackb,html body #tomap.kbackb{background:#fffaf0e6!important;border:1px solid var(--line,#d9c49a)!important;border-radius:18px!important;padding:2px 12px 2px 6px!important;color:var(--ink,#3a2a1a);box-shadow:0 2px 8px #0004!important;min-height:38px;font-family:var(--display)}
 html body header.hud>#k3room.kbackb{justify-self:end;min-height:36px;max-width:100%}
+/* review/home-way-nits (law 10): ONE box per device for the way-home button: a label line never wraps (white-space:pre) and the label column is as wide
+   as the LONGEST label it can ever show (hidden sizer row = data-sz, set from homeWay: «Về phòng · hết khắc», «Về phòng · <far> khắc», her palace's name),
+   so the button keeps the same size at home, away and with no khắc left */
+html body header.hud>#k3room.kbackb .kbl{display:inline-grid;grid-template-columns:auto;white-space:pre;overflow:visible;text-overflow:clip}
+html body header.hud>#k3room.kbackb .kbl::after{content:attr(data-sz);grid-column:1;grid-row:2;height:0;overflow:hidden;visibility:hidden;white-space:pre;line-height:0}
 html body header.hud>#k3room[hidden]{display:none!important}
 html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* top bar time block (31.1): the bar grid, the stat cells and the two-line time block are kitStatRow / kitStatCell (jk4, KIT 32) */
@@ -47969,8 +47975,8 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:not(.hwaway):has(.kbi) .kbl{display:none}
 /* review/home-way (owner OD 26/11 ~04:25Z): away from home the one-page button shows its label under the icon:
    «Về phòng · N khắc» + her palace's name, small, centred in the menu column */
- html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:96px;padding:0 2px 2px!important}
- html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:block;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre-line;overflow:visible}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:none;padding:0 2px 2px!important}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:inline-grid;justify-items:center;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre;overflow:visible}
 /* KIT §0 one page (design-scale p2): the time column is ~40 % narrower than on the spread, so its two lines wrapped and the block grew taller
    than her name block (top bar 132 vs 129 px, +12 px with a state chip such as "Có thai"). On the one page the time block flows as ONE
    wrapping row of whole items (time, toilette, weather, quẻ, every K3_STATE chip; an item is never split, the next drops to a new 18 px line),
@@ -47989,6 +47995,9 @@ html:where(.kv1) body header.hud.khd3s #kstrow .kstl{font-size:0!important;line-
 html:where(.kv1) body header.hud.khd3s #kstrow .kstl .ic{font-size:0}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
+/* review/home-way-nits (spread only): away from home the one-row «menu me room tc stats» rule (.k3ph :has(#k3room)) out-ranked the two-row bar, so on iPad
+   1180 the time block was squeezed to ~40 px and drew over «Sắc»; the two-row bar (.khd2, kitHdFit) wins, the same as at home */
+html:where(.kv2) body .game#game.k3ph header.hud.khd2:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
 /* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
 html body header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv (review/mg-train, KIT §0 design scale): was @media (min-width:1000px) = the spread */
@@ -98406,7 +98415,9 @@ function homeName(){try{const k=plHomeK();return typeof accName==="function"?acc
 window.homeName=homeName;
 function homeWay(){try{if(typeof S!=="object"||!S||S.dead||S.out||mode())return null;const hn=homeName();if(S.place==="home"||!S.place)return{at:1,hn,label:"Về phòng",title:`Phòng của ta: ${hn}`};
  let tc=0;try{tc=travel(S.place,"home")}catch(e){}const ok=typeof walkOk==="function"?walkOk(tc):true;
- return{at:0,hn,tc,ok,label:ok?`Về phòng · ${tc} khắc`:"Về phòng · hết khắc",title:ok?`Đi về ${hn}: ${tc} khắc`:`Hết khắc buổi này, chưa về ${hn} được`}}catch(e){console.error("homeWay",e);return null}}
+ /* review/home-way-nits: the real reason when she cannot walk home = the kit khắc words (j76need, bound to this buổi: the walk never spills), carried as data-why (kit reason path, guessWhy / kfWhy) */
+ let why="";if(!ok){try{why=typeof j76need==="function"?j76need(tc,null,true).t:""}catch(e){}why=why||"hết khắc buổi này"}
+ return{at:0,hn,tc,ok,why,label:ok?`Về phòng · ${tc} khắc`:"Về phòng · hết khắc",title:ok?`Đi về ${hn}: ${tc} khắc`:`${why[0].toUpperCase()+why.slice(1)}, chưa về ${hn} được`}}catch(e){console.error("homeWay",e);return null}}
 window.homeWay=homeWay;
 /* the walk home from any «Về phòng» button; false when it cannot go (card open, no khắc) */
 function homeGo(){try{const w=homeWay();if(!w||w.at||!w.ok||Q.length)return false;goTo("home");return S.place==="home"}catch(e){console.error("homeGo",e);return false}}
@@ -98426,7 +98437,7 @@ function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="mapt
  if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
  /* the way home */
  /* the way home: the ONE rule homeWay() (shared with the top-bar #k3room, review/home-way) */
- {const w=homeWay();if(w&&!w.at){const b=`<button class="btn mz" data-plhome="1"${w.ok?"":" disabled"} title="${w.title}">${w.label}</button>`;
+ {const w=homeWay();if(w&&!w.at){const b=`<button class="btn mz" data-plhome="1"${w.ok?"":` disabled data-why="${w.why}"`} title="${w.title}">${w.label}</button>`;
   h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}}
  return h}catch(e){console.error("plMap",e);return h}}
 window.plMap=plMap;
@@ -100419,7 +100430,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bfbf82c0153a";window.CTM_BUILD=BUILD;
+const BUILD="2fc33f980672";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

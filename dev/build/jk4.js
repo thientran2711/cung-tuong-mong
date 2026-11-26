@@ -100,8 +100,8 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:not(.hwaway):has(.kbi) .kbl{display:none}
 /* review/home-way (owner OD 26/11 ~04:25Z): away from home the one-page button shows its label under the icon:
    «Về phòng · N khắc» + her palace's name, small, centred in the menu column */
- html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:96px;padding:0 2px 2px!important}
- html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:block;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre-line;overflow:visible}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:none;padding:0 2px 2px!important}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:inline-grid;justify-items:center;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre;overflow:visible}
 /* KIT §0 one page (design-scale p2): the time column is ~40 % narrower than on the spread, so its two lines wrapped and the block grew taller
    than her name block (top bar 132 vs 129 px, +12 px with a state chip such as "Có thai"). On the one page the time block flows as ONE
    wrapping row of whole items (time, toilette, weather, quẻ, every K3_STATE chip; an item is never split, the next drops to a new 18 px line),
@@ -120,6 +120,9 @@ html:where(.kv1) body header.hud.khd3s #kstrow .kstl{font-size:0!important;line-
 html:where(.kv1) body header.hud.khd3s #kstrow .kstl .ic{font-size:0}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
+/* review/home-way-nits (spread only): away from home the one-row «menu me room tc stats» rule (.k3ph :has(#k3room)) out-ranked the two-row bar, so on iPad
+   1180 the time block was squeezed to ~40 px and drew over «Sắc»; the two-row bar (.khd2, kitHdFit) wins, the same as at home */
+html:where(.kv2) body .game#game.k3ph header.hud.khd2:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
 /* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
 html body header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv (review/mg-train, KIT §0 design scale): was @media (min-width:1000px) = the spread */
