@@ -21,3 +21,12 @@ CDN img/_review/wording-marks/marks-{choice,result}-{fold,ipad}.png
 - dev/test/marks-bot-scan.js (inpage4 bot) boots but the headless bot only reaches turn ~2 (5 dialogs, 0 left) — endTurn-generated dialogs still need a mid-game save (Foreman F ~b1570); not available to this worker.
 - The scan plays no long run (new-life intro still open in the headless boot); endTurn dialogs were not reached — only builders. A longer `--bot` style run is the next check for RV.
 - RV-163 hold (9047c283): (1) rebuilt site taken (c6908ed4). (2) kit-ton-row 6/14: the SAME 6/14 FAIL run on the pre-marks base 539603bf built here (button not found, row text «?» = harness state, not Tốn): markTxt(text,"ton") returns Tốn text unchanged, so nothing marks changed there. (3) endTurn probe: marks-bot-scan.js (forced endTurn/nextBuoi with showModal stubbed, __nlInner boot) still stays at turn 0 here — NOT demonstrated; needs a mid-game save.
+
+## kit-ton-row (owner of the whole Tốn row, MAIN 165 widen) — before / after
+Root cause was the HARNESS, not the Tốn rows: the boot left the new-life intro overlay (#klife, NLP) on screen and `showModal()` showed nothing (row text «?»), and the first card of a fresh page builds its kit rows late. dev/test/kit-ton-row.js now boots like the other kit tests (plain start(), remove #klife/#kroul, NLP=null, modal class reset), warms up 1.5 s and polls each card until its kit rows exist.
+| | before (LIVE 4cfcda61 / base 539603bf / 9047c283) | after (this branch) |
+|---|---|---|
+| kit-ton-row Fold + iPad | 6/14 FAIL (open card ×1, hidden-outcome ×2 per device) | PASS 14/14 (3 runs) |
+Tốn is exact on every card kind incl. hidden-outcome: markTxt(text,"ton") returns the text unchanged, and the test asserts the price in all 21+14 cases.
+## endTurn coverage
+marks-choice-scan.js boot fixed the same way; PEND/act: 257 dialogs, 1882 row texts, 0 stat numbers left outside Tốn. A forced endTurn() in-page runs once (buổi 0→3 = the night) and then returns at once (night scene pending), so weekly events were still not reached — kaBody choke point + grep remain the coverage there.
