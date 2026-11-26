@@ -36,3 +36,26 @@ ORDER: q1 → a1 audio → a2 art-slots → a3 ipad-size → a4 makeup → a5 ta
 - 00:17Z MAIN 149 GO a8 place-rules 3da9b4c8 (game = e66e0a93) → stacked by hand on a7 → 33a983bf (review/lc18-a8-placerules): jstagehere.js + stage-stay.js = place-rules side; KIT_REQUESTS kept both sections; CHANGE drafted «Nơi chỉ được ở có giờ nay báo trước ngay khi bước vào; bị cấm túc hay bị đuổi ra thì được đưa thẳng về tẩm cung; người đã đứng cạnh không còn «đến» lần nữa.» Gates after a7's: tinbao scan, news-runner-lines, place-rules.js, stage-stay, place-rules-scan + QC.
 - a7 257fdca4 so far: news-runner-lines ok · tinbao scan PASS · tinbao shots exit 0 · mg-color PASS · art-slots 232 · makeup-set ALL PASS · mg-craft not run (wrong arg; correct = node dev/test/mg-craft.js dev/index.html --kinds=kim,ve) → rerun after the chain.
 - 00:18Z MAIN 149 GO a6 → tinbao r5 b4725669 (on 6c348e90). RE-STAGED: a6 845d6355 → a7 mg-color 91d75d12 → a8 place-rules d218392b (same manual merge; place-rules jstagehere already holds tinbao's no-«=» wording). «Về phòng» header follow-up dropped (her 16/11 Q6 button).
+- 00:20Z ctx 30.6 % (≥ START 3 % + 25 %) → ROLLOVER. Full gate chain on a8 d218392b was started in LC18's container (will be lost) → LC19 reruns it.
+
+## HANDOVER TO LC19 (LC18 rolls on context 30.6 %)
+### STATE
+LIVE = 5e013076 (unchanged by LC18). ROLLBACK one step = 3762da08, two = 351122ba. Worker ctm-coop CURRENT (= rollback) version 83eb2dbb-f417-4a0d-b60f-3519042bf854 (wrangler deployments list via proxy works; CLOUDFLARE_API_TOKEN=dummy).
+Coordinator = MAIN CHÍNH 149 session_01V1ZZH2zAQCCznbuVpXJEf9 (GOs from 149). sếp's «cho phép đưa lên live» was NEVER written in LC18 chat → LC19 needs her words in ITS OWN chat + MAIN GO per item. Tell MAIN 149 your session id at once.
+### STAGED CHAIN (each = previous + one item; each MAIN GO given, CHANGE line approved; FF on LIVE 5e013076)
+q1 kroulw 7abb60cc (review/lc17-q1-kroulw) — QC alone PASS, READY
+a1 audio-ipad 4fae357a (review/lc18-a1-audio)
+a2 art-slots 549098d6 (review/lc18-a2-artslots) — a2 head: audio-ipad, art-slots 232/232, kit-entry-gate, QC alone PASS 208 s
+a3 ipad-size 128ab148 (review/lc18-a3-ipadsize) — 148 option (b): 34–35 px rows kept
+a4 makeup-set r4 c90f71fb (review/lc18-a4-makeup)
+a5 tainghe-info e4314b74 (review/lc18-a5-tainghe) — OPEN: its own test dev/test/tainghe-info.js crashes (:61 q.ov undefined) / «sub-tab tap» duc+cktt FAIL even on 4f9d8b2e alone; TAINGHE (session_01V1ZZH3ynsHpxuPFZmK6Wbn) asked to harden test + ≥44 px .kskn tap fix → re-stack a5 (and all above) on its new sha if it comes; else 149 said land as is.
+a6 tinbao-words r5 b4725669 → 845d6355 (review/lc18-a6-tinbao; holds E90r 8908b077 + E90 2608109d)
+a7 mg-color 802f7271 → 91d75d12 (review/lc18-a7-mgcolor)
+a8 place-rules 3da9b4c8 → d218392b (review/lc18-a8-placerules; MANUAL merge: jstagehere.js + dev/test/stage-stay.js = place-rules side (holds tinbao wording), dev/kit/KIT_REQUESTS.md keep both sections; CHANGE draft sent to 149, OK pending)
+CHANGE lines: in each branch's dev/site/CHANGE.txt (all MAIN-approved except a8 pending).
+### GATES TO RUN on a8 head d218392b (sequential, then QC ALONE; nothing else on the machine)
+news-runner-lines dev/index.html · tinbao-words/scan · place-rules · stage-stay (faults [caught,free] are PRE-EXISTING: same on LIVE) · mg-color · mg-craft dev/index.html --kinds=kim,ve · art-slots · makeup-set . (one known cache flake «face fetched again», rerun) · audio-ipad · info-tap-audit index.html <out.json> · fullscene-band . · kit-entry-gate · python3 dev/test/mg-color-scan.py · python3 dev/test/place-rules-scan.py · ipad-size-ratio http://127.0.0.1:<port>/index.html (serve root; dev/index.html boot times out) · kit-row-tap-size index.html · QC: node dev/tools/quickcheck.js . <LIVE index.html> --out <dir>.
+### PUSH (after her words + 149 GO): FF main one sha at a time in order q1 → a1 … a8 (or push the head if MAIN allows a batch); record ROLLBACK; check site build; Worker untouched by a1–a8.
+### AFTER a8 (order 149): co-op chain (LC19 deploys Worker FIRST from B's coop/worker sha; B LAND READY pending: presence-reload-land 8d5fa1fd → fix-3-r5-land 83702d7b → coop-week-wait-land 04a45597; watch FOREMAN_B_STATUS) → fix-7 r3 a32a931d (after BIG rv PASS) → thin-p8-r2 0348e07a (after BIG rv PASS) → SELSCENE-19 (3f5ace795 NOT ready; whichever of D dfu-lr / SELSCENE lands 2nd: one life to «Tin sắc phong», window.__pcN > 0) → q5 kit-text-first-2 166b3000 (KIT OK; re-stack on then-LIVE) → r3wip 4cf5e9c2 (BIG rv). Not queued: D temper-perception-lr2 ed7be1ce (149 LOOK first).
+### TOOLS
+stack2.sh/holog.sh from dev/handover/reports/lc15-tools/ (set SP, session line, land-chain-19; PASS FULL «review/<name>» as branch arg — LC18 pushed 3 stray non-review branches lc18-a1-audio/-a2-artslots/-a3-ipadsize, delete refused 403, ignore). Never pass "-" as CHANGE unless the base line is right. Local co-op worker recipe in land-chain-17.md TOOLS.
