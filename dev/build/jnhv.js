@@ -162,7 +162,7 @@ function bgPut(){if(!BG||!CUR)return;const D=CUR.D,painted=!!areaArt(CUR.a.k),a=
 function capPut(g){if(!g.cap)return;if(!g.capEl||!g.capEl.isConnected){g.capEl=document.createElement("div");g.capEl.className="nhv-cap";g.capEl.innerHTML=`<span class="kchip n">${esc(g.cap)}</span>`;L.appendChild(g.capEl)}
  const D=CUR.D;g.capEl.style.left=Math.max(D.x0+60,Math.min(D.x1-60,g.cx))+"px";g.capEl.style.top=Math.max(4,g.top-6)+"px"}
 /* name plates never overlap: the chosen person first, then her group, then the rest (a plate that would touch a kept one is hidden) */
-function tagsFix(){try{if(!CUR)return;const F=CUR.G.flatMap(g=>g.P.map(p=>p.m)).filter(m=>m.tg);const pr=m=>(m===SELM?0:SEL&&m.g===SEL?1:2);F.sort((x,y)=>pr(x)-pr(y));const keep=[];
+function tagsFix(){try{if(!CUR)return;/* MAIN 127 FAIL 4: whatever wrote a plate, an unlearnt name reads «Người lạ», never «???» */L&&L.querySelectorAll(".nhv-tag .j59n,.nhv-tag .j59t").forEach(e=>{if(e.textContent.indexOf("???")>=0)e.textContent=e.textContent.replace(/\?\?\?/g,"Người lạ")});const F=CUR.G.flatMap(g=>g.P.map(p=>p.m)).filter(m=>m.tg);const pr=m=>(m===SELM?0:SEL&&m.g===SEL?1:2);F.sort((x,y)=>pr(x)-pr(y));const keep=[];
  const caps=CUR.G.map(g=>g.capEl&&g.capEl.style.visibility!=="hidden"&&g.capEl.getBoundingClientRect()).filter(Boolean);
  F.forEach(m=>{m.tg.style.visibility="";const r=m.tg.getBoundingClientRect();const hit=keep.some(k=>!(r.right<k.left-2||r.left>k.right+2||r.bottom<k.top-2||r.top>k.bottom+2));if(hit)m.tg.style.visibility="hidden";else keep.push(r)})}catch(e){}}
 function css(){if(document.getElementById("nhv-css"))return;const c=document.createElement("style");c.id="nhv-css";c.textContent=`

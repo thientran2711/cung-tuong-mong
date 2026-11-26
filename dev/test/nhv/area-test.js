@@ -47,6 +47,7 @@ async function run(dev){const o=await boot(dev==='ipad'?'ipadAir':'fold',1,0,{})
   await g.evaluate(()=>{const G=NHV.cur.G;const g=G.find(x=>x.ms[0]&&!x.ms[0].sil)||G[0];window.__tg=g;g.ms[0].el.click()});await T(700);
   const dim=await g.evaluate(()=>({n:kitDim.state().n,others:NHV.cur.G.filter(x=>x!==window.__tg).reduce((s,x)=>s+x.P.length,0)}));ok(dim.n===dim.others,`${dev}/${k}: group tap dims exactly the other people (kit dim)`,dim);
   await g.evaluate(()=>window.__tg.ms[0].el.click());await T(1900);
+  if(await g.evaluate(()=>!NHV.kp&&Q.length>0)){/* a real NPC event came in the middle of the taps: answer it, then tap again */await clearQ();await T(800);await g.evaluate(()=>{const C=NHV.cur;const g=C&&(C.G.find(x=>x.ms[0]&&!x.ms[0].sil)||C.G[0]);window.__tg=g;if(g){g.ms[0].el.click()}});await T(700);await g.evaluate(()=>window.__tg&&window.__tg.ms[0].el.click());await T(1900)}
   const pk=await g.evaluate(()=>({kp:!!NHV.kp,n:document.querySelectorAll('#nhv .kpk .kpk-n').length,Q:Q.map(m=>m.t+'|'+(m.pid||'')).join(';'),used,sel:!!NHV.cur&&NHV.cur.G.indexOf(window.__tg)}));ok(pk.kp&&pk.n>0,`${dev}/${k}: person tap → kit thẻ gỗ (kitPick) beside her`,pk);
   await pg.screenshot({path:`${OUT}/${dev}-${k}-pk.png`});const a1=(await g.evaluate(AUDIT)).filter(x=>!/^TEXT-OVERLAP .*\/|^PERSON-OVERLAP/.test(x)||true);R.audit[k+'-pk']=a1;ok(!a1.length,`${dev}/${k}: audit with plaques up`,a1);
   await g.evaluate(()=>NHV.unsel());await T(500)}
