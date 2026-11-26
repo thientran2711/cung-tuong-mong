@@ -17,9 +17,9 @@ const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=e
      if(!m.rk){res.fail.push('no rk: '+n.kind+' '+n.id);continue}
      /* r7 (independent check C4): put back the state the remake meets after a reload at a later khắc — S.tb's khắc roll not yet made and the
         lazy stores not yet there — so a remake that rolls S.tb or makes empty S.intel / S.j95 shows here (mutate: either fix reverted → FAIL) */
-     try{if(S.tb&&S.tb.no)S.tb.no.k=-1;const emp=v=>v&&typeof v==='object'&&!Object.keys(v).length;if(emp(S.intel))delete S.intel;if(S.j95&&typeof S.j95==='object'&&Object.values(S.j95).every(emp))delete S.j95}catch(e){}
+     const keep={};try{if(S.tb&&S.tb.no)S.tb.no.k=-1;for(const k of ['intel','j95'])if(k in S){keep[k]=S[k];delete S[k]}}catch(e){}/* the lazy stores are taken away for the remake and put back after the S check */
      const a=flat(JSON.parse(JSON.stringify(S)),'S',{});let c=null;try{c=rcpMk(JSON.parse(JSON.stringify({rk:m.rk,ra:m.ra,t:m.t})))}catch(e){}
-     const b2=flat(JSON.parse(JSON.stringify(S)),'S',{});const d=[];for(const k of new Set([...Object.keys(a),...Object.keys(b2)]))if(a[k]!==b2[k])d.push(k);
+     const b2=flat(JSON.parse(JSON.stringify(S)),'S',{});const d=[];for(const k of new Set([...Object.keys(a),...Object.keys(b2)]))if(a[k]!==b2[k])d.push(k);for(const k in keep)S[k]=keep[k];
      if(!c||!c.opts||!c.opts.length)res.fail.push('remake: '+n.kind+' '+n.id);if(d.length)res.side.push(n.kind+' '+n.id+' → '+d.slice(0,4).join(' '))}}
    return {key:__sbr.key(),...res}},NB);
   const pass=R.cards>0&&!R.fail.length&&!R.side.length;if(!pass)bad++;
