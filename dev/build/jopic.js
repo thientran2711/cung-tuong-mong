@@ -258,10 +258,10 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  let ton=R("ton")[0],mats=R("mat"),gains=[...R("thanh"),...R("duoc")],gain=gains[0];
  /* tinbao-words (owner OD 25/11 ~23:36Z, Tin báo «Xem tin» card read «TỐN không / ĐƯỢC không»): a FREE CHOICE card — no cost, no gain, no loss, no
     hint row and no odds of its own (only notes such as «kèm: trả lời trước …», which stay behind «!») — shows NO grey «không» rows (.kfree) */
- const free=!ton&&!mats.length&&!gains.length&&!R("bai").length&&!R("hint").some(r=>!/^(không|chưa rõ|không được mất gì)?\.?$/i.test((r.querySelector(".krv")||r).textContent.trim()))&&!b.querySelector(".kat .kodds:not([data-ksure])");
- /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; the «Nắm chắc» meter kitOptOdds adds is data-ksure) cannot fail — its
+ const free=!ton&&!mats.length&&!gains.length&&!R("bai").length&&!R("hint").some(r=>!/^(không|chưa rõ|không được mất gì)?\.?$/i.test((r.querySelector(".krv")||r).textContent.trim()))&&!b.querySelector(".kat .kodds");
+ /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; a no-roll option carries no odds word at all, owner 26/11 ~18:25Z) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
- const sure=!b.querySelector(".kat .kodds:not([data-ksure])");if(sure)mats=mats.concat(R("bai"));
+ const sure=!b.querySelector(".kat .kodds");if(sure)mats=mats.concat(R("bai"));
  /* OD 21/11 ~05:0xZ (#72): the LOSS has its own «Mất» row (Tốn = the price, Được = the gain, Mất = what can be lost), never folded into Tốn */
  const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
  mats.forEach(m=>chipsOf(m).forEach(c=>loss.push(dupOf(c))));
@@ -397,15 +397,15 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng · ghi chú: chơi 6 phần ra Khá`],["Thôi, không làm gì","ghi chú: để lần sau"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
-/* kit sample page (§6.2b-END, FIRSTCARD; RV-FIRSTCARD): a LIFE-ENDING option never reads «Rất vững». The button opens a REAL dialog (Q + showModal,
-   the game's own path): (1) a hidden roll declared by the real kitRiskOpt (true chance → word(p) lead + the red Mất row), (2) a certain ending of a
-   real choice → kitEndOdds = word(BAL.odds.lo), (3) a safe option of the same choice keeps the sure meter. */
+/* kit sample page (§6.2b-END, FIRSTCARD-3, owner OD 26/11 ~18:25Z): the odds word only on an option that really rolls. The button opens a REAL dialog
+   (Q + showModal, the game's own path): (1) a hidden roll declared by the real kitRiskOpt (true chance → word(p) lead + the red Mất row), (2) a certain
+   ending of a real choice → NO odds word, (3) a safe option → NO odds word; the choice holds a life-changing option, so the small line «Cẩn thận khi lựa chọn» stands above it. */
 function kitEndSample(){try{if(typeof S==="undefined"||!S||typeof Q==="undefined"||Q.length)return false;const pg=document.getElementById("kitpage");const was=!!(pg&&!pg.hidden);const back=()=>{if(was&&pg)pg.hidden=false};if(pg)pg.hidden=true;
  const nop=()=>setTimeout(back,0);const o1=kitRiskOpt({n:"Dâng khúc đàn",fx:{},x:"",j67:"tốn: không",hint:"chơi một màn đàn",go:nop},BAL.odds.cut[0],"không lọt vào bốn người đứng đầu thì bị ban hoa, kiếp này dừng",true);
- Q.push({t:"Lễ ra mắt (mẫu kit)",h:"<p>Mẫu §6.2b-END: lựa chọn có thể dừng kiếp này báo đúng cơ hội và cái mất.</p>",pid:"kitpg-end",onClose:back,
+ Q.push({t:"Lễ ra mắt (mẫu kit)",h:"<p>Mẫu §6.2b-END: chữ cơ hội chỉ ở lựa chọn có gieo; lựa chọn đổi kết cục có dòng cẩn thận phía trên.</p>",pid:"kitpg-end",onClose:back,
   opts:[o1,{n:"Cắt tóc đi tu",fx:{},x:"",j67:"tốn: không",hint:"thoát khỏi mọi chuyện; nhưng kiếp này dừng",go:nop},{n:"Vâng lời, chờ ngày khác",fx:{},x:"",j67:"tốn: không",go:nop}]});showModal();return true}catch(e){console.error("kitEndSample",e);return false}}
 window.kitEndSample=kitEndSample;
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b-END",title:"Thẻ lựa chọn có thể dừng kiếp này: báo đúng cơ hội, không bao giờ «Rất vững» (chạm để mở thẻ thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b-END",title:"Thẻ lựa chọn có thể dừng kiếp này: chữ cơ hội chỉ ở lựa chọn có thật sự gieo; lựa chọn đổi kết cục không có chữ, có dòng «Cẩn thận khi lựa chọn» (chạm để mở thẻ thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
  return `<div class="kitpg-row"><button type="button" class="kbtn alt" onclick="kitEndSample()"${ok?"":" disabled"}>Lễ ra mắt · ban hoa · đi tu</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem thẻ."],{group:false}))}})}catch(e){}
 /* kit sample page (§6.2c): the tall-frame rule, described (the real frames are the modals themselves) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2c",title:"Khung hội thoại: điện thoại, chỉ khung cao (L / XL) kéo đúng tỷ lệ màn hình",html:()=>
