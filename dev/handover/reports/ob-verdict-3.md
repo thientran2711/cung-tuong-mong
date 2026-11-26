@@ -57,3 +57,10 @@ LOOK READY to MAIN.
 - N3 «Rất vững» shows on the no-roll replies «Nhịn» / «Đáp trả sắc sảo» / «Khiêu khích» — OD 18:25Z item for KK44 / FIRSTCARD (not touched here).
 - N4 in the test the «Trò chuyện → Hỏi han» talk showed its result while the on-figure game rules card for it was up — check on LIVE (jdf flow), not this change.
 - Held = one extra tap per choice that has a next screen (her rule: next screen only after she has seen / tapped the result).
+
+## r2 (MAIN 162 LOOK PASS c4cabcde + note (b)) — review/ob-verdict-3 = ae7533bc
+- The sentence under the result title never repeats the title (`kaSenDeTitle`, j63, whole family: every result card, incl. the 7.3 verdict sentence;
+  rank words in the sentence tolerated; a sentence that is only the title is dropped but the card still shows its Ghi chú row — «không» rows kept).
+  «Người bên cạnh: Nhịn lời khiêu khích của Hoàng hậu … — Đức +2 vì nhịn.» → «Đức +2 vì nhịn.». KIT §7.4 line.
+- Tests: ob-verdict-3 **34/34 ALL OK** (new: on-screen sentence ≠ title, encounter ×2 devices + family scan **0/46 repeated**, family 46/46 result-first;
+  e68 rows vary with the seed), ob-verdict **ALL 84 OK**. Stills re-uploaded (after-*-enc0-3-result.png). Note (a) empty band → KK44 (MAIN 162).
