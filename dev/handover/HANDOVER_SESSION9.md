@@ -402,3 +402,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~22:44Z (after roll) OWNER: max 7 not hard; keep >7 where needed, no paging; remove every «Thôi» card → OD row → 165, R5, KK48, RING-BUILD-6.
 - 22:55Z 164 relays (sếp wrote in 164 chat): ~22:40Z khảo hạch fixed every 3 mo + đại lễ extra → PACE-SPEED; ~22:43Z NO hard 7 cap (keep >7 where needed), still no paging, remove every «Thôi» card game-wide → R5 + KK48 + RING-BUILD-6 (OD rows by 164).
 - ~22:46Z (after roll) OWNER: keep kỳ sắc phong on festivals as is → OD 22:40Z row rewritten (no change); PACE-SPEED told to drop the 3-month rhythm.
+- 22:56Z 164 relay: sếp ~22:45Z REVERSED — kỳ sắc phong stays on festivals as today (no 3-month rhythm); OD rewritten by 164; PACE-SPEED cancelled it.
