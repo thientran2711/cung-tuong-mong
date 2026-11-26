@@ -30,4 +30,12 @@ Re-run: `KSEED=23 SAVE=<life.json> node dev/test/nhv/mklife.js` once, then `node
 
 - Videos: a few in-between frames are the game's own (place-arrival act page flash ~0.5 s on Fold, picture-loading petals ~1 s on iPad, «Buổi chiều» turn when the chosen act used the last khắc).
 
+## r5 (MAIN 149/150 asks, 26/11 ~00:20Z) — review/nhv-areas 26db71bf
+- MERGED review/kit-stage 979d5ed7 (KK33/34): plaques now lift + green ✓ / ✕; ✓ chooses, the body tap no longer chooses (OD 25/11 ~21:55Z). Videos tap ✓.
+- All 80 ART-NHV area states used directly (BAL.area.art.areaHave "*", no «tạm» fallback); map 16 states.
+- Garden map = kit kitPalaceMap .mapv inside .game.maptab #panel = the same frame as every Dư đồ (ob-phu §85.6b is only the sub-tab-row rule; no private variant). The kit right column on maps is the same chrome as the LIVE main Dư đồ.
+- NEW videos: img/_review/nhv-areas/nhv5-{fold,ipad}-{1x,2x}.mp4 + sheets (looked at every frame; ✓/✕ frame checked on both).
+- Area test 51/55: all FAILs kit (kitPick: closed plaque name cut at 3 lines; Fold 6-plaque band last plaque under the stage bottom at Đình cờ; Fold ✓/✕ over the neighbour plaque name) → KK35 session_01V1ZZGzHqCfzpp7k8KRq9QL, merge its sha when sent.
+- quickcheck 26db71bf: open/old save PASS; NEW vs r4: G3 kit-conform FAIL «MIXED … #mb child kstg-fig kstg-sp/kstg-me» on the event dialogs = kitStage classes from the kit-stage merge (not jnhv), and perf tab 679 vs live 512 (limit 666) / buổi 3910 vs 1833 (runs 1705–4059 vs live 1623–5194, noisy). r4 a04a1e75 (before the merge) passed perf (tab 610/584) and kit-conform → both come with kit-stage 979d5ed7; KK35/MAIN to judge. button-crawl «Ô lưu · Lui» pre-existing on LIVE.
+
 ~85% xong / ~70% chơi được (Ngự hoa viên khu vườn).
