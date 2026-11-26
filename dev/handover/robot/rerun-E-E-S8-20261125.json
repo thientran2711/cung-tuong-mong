@@ -23,13 +23,29 @@
    "deadButtons": 7,
    "review": "dev/handover/robot/review/E-S8-bd_san-R7-greedy1-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_san-R7-greedy1-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-random1",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "rand",
+   "seed": 444865383,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "8dc395ba (resumed through c826eca4…496b6b66)"
+   },
+   "ending": "Hồng nhan bạc mệnh — thọ 39 tuổi",
+   "age": 39,
+   "buoi": 2995,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random1-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random1-moments.md"
   }
  ],
  "parked": [
-  {
-   "life": "E-S8-bd_san-R7-greedy2",
-   "why": "STUCK-gamebug Fold Tắm gội chờ giá (LIVE 6a87c26f)"
-  },
   {
    "life": "E-S8-bd_san-R7-cautious3",
    "why": "STUCK-gamebug iPad Tân quân lập uy Ch.2"
