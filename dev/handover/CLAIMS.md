@@ -478,3 +478,4 @@ C3-SEALS-W2 sets tt(merged)/cc/bt/bg/tg | CDN | session_01PEhRbx7qfjCBsx6xC1iuFk
 C3-SEALS-W3 sets tv/qu/ty/nn | CDN | session_01PEhRbttxS463kSacT4iB52 | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
 | PARITY-FACFIX (MAIN 157 ~10:22Z; facHTML «Lập phe cùng» regression on LIVE 3af7896e + ag-par3 6 FAIL scan) | review/parity-facfix | D | session_01D3E3NaMkenmHxXe1UiMfjU | RUNNING | 26/11 10:23Z |
 | D5 mg-trim #3 (opus; LC21 HOLD coop-thin-f4 fix, successor of #2 session_01D3E3NY4dwzUxFsbZXyqSL7 handover 1bf200e4) | review/mg-trim | D | session_01D3E3NX6CByMQLRK38T6ccw | CANCELLED (dup of depth-2's D5 #3 session_01D3E3NYZ4jThrhjTN2SsGHJ; archived) | 26/11 10:26Z |
+| D1+D4 #6 (opus; charge-followups-rv coop-e2e + STEP 4 charge-trinh-punish) | review/charge-followups-rv + review/charge-trinh-punish | D | session_01D3E3NXG8jXAH8xJkgoQrNM | RUNNING | 26/11 10:41Z |
