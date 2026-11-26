@@ -41,16 +41,19 @@ const SCAN = () => {
 
 /* robot hook: init(ctx) before the first page load; sample(page, R) once per buổi (fire and forget; never throws into the robot) */
 let OUTF = null, PK = 0, PKT = null, BUSY = false;
-async function init(ctx) { OUTF = process.env.RT_MEM; if (!OUTF) return; await ctx.addInitScript(REG); PKT = setInterval(() => { try { const r = procs().rendererMax; if (r > PK) PK = r } catch (e) { } }, 1000); PKT.unref && PKT.unref();
+async function init(ctx) { OUTF = process.env.RT_MEM; if (!OUTF) return; if (process.env.RT_MOB) await ctx.addInitScript(MOB); if (process.env.RT_LIGHT) { await initLight(); return } await ctx.addInitScript(REG); PKT = setInterval(() => { try { const r = procs().rendererMax; if (r > PK) PK = r } catch (e) { } }, 1000); PKT.unref && PKT.unref();
   /* every RT_MIN s (default 60): one row by the clock (a screen loop with no buổi change still shows), RSS read from /proc like ps */
   const MIN = +(process.env.RT_MIN || 60) * 1000, t0 = Date.now(); MINT = setInterval(() => { try { const r = procs(); fs.appendFileSync(OUTF.replace(/\.jsonl$/, '') + '.min.jsonl', JSON.stringify({ t: Math.round((Date.now() - t0) / 1000), buoi: LASTB, scr: LASTSCR, rss: r }) + '\n') } catch (e) { } }, MIN); MINT.unref && MINT.unref() }
 let MINT = null, LASTB = 0, LASTSCR = '';
+async function initLight() { PKT = setInterval(() => { try { const r = procs().rendererMax; if (r > PK) PK = r } catch (e) { } }, 1000); PKT.unref && PKT.unref();
+  const MIN = +(process.env.RT_MIN || 60) * 1000, t0 = Date.now(); MINT = setInterval(() => { try { fs.appendFileSync(OUTF.replace(/\.jsonl$/, '') + '.min.jsonl', JSON.stringify({ t: Math.round((Date.now() - t0) / 1000), buoi: LASTB, rss: procs() }) + '\n') } catch (e) { } }, MIN); MINT.unref && MINT.unref() }
 /* RT_COLD=1 (test-only probe setup, F10 lãnh cung loop): at the first buổi row the life is sent to lãnh cung through the game's own cold() */
 let COLDDONE = false;
 async function coldHook(page) { if (!process.env.RT_COLD || COLDDONE) return; COLDDONE = true; try { if (page.frames) page = page.frames().find(f => f !== page.mainFrame() && (f.name() === 'krotf' || /[?&]krot=1/.test(f.url()))) || page.mainFrame(); await page.evaluate(() => { try { cold('Bị vu cáo (thử bộ nhớ)'); if (typeof deal === 'function') deal(); render() } catch (e) { return String(e) } }) } catch (e) { } }
 async function sample(page, R) { if (!OUTF || BUSY) return; LASTB = R.buoi; if (!WD) watch(page);
   /* RT_LIGHT=1: nothing runs in the page (no SCAN, no tracing dump — both add renderer memory themselves); /proc RSS row + the cold hook only */
-  if (process.env.RT_LIGHT) { BUSY = true; try { if (process.env.RT_COLD && R.buoi >= +process.env.RT_COLD) await coldHook(page); fs.appendFileSync(OUTF, JSON.stringify({ buoi: R.buoi, at: new Date().toISOString(), peak: PK, rss: procs() }) + '\n'); PK = 0 } catch (e) { } BUSY = false; return }
+  if (process.env.RT_LIGHT) { BUSY = true; try { if (process.env.RT_COLD && R.buoi >= +process.env.RT_COLD) await coldHook(page); fs.appendFileSync(OUTF, JSON.stringify({ buoi: R.buoi, at: new Date().toISOString(), peak: PK, rss: procs() }) + '\n'); PK = 0;
+    if (process.env.RT_MOB) { const h = await Promise.race([page.evaluate(() => { const fr = [window, ...[...document.querySelectorAll('iframe')].map(f => { try { return f.contentWindow } catch (e) { return null } })]; for (const w of fr) { try { if (w && w.__moHot) { const x = w.__moHot; w.__moHot = null; return x } } catch (e) { } } return null }).catch(() => null), new Promise(r => setTimeout(() => r(null), 5000))]); if (h) fs.appendFileSync(OUTF.replace(/\.jsonl$/, '') + '.mob.json', JSON.stringify({ buoi: R.buoi, ...h }) + '\n') } } catch (e) { } BUSY = false; return }
   BUSY = true; try { const rs = procs(); const fr = page.frames().find(f => f !== page.mainFrame() && (f.name() === 'krotf' || /[?&]krot=1/.test(f.url()))) || page.mainFrame();
   const sc = await Promise.race([fr.evaluate(SCAN), new Promise(r => setTimeout(() => r({ err: 'timeout' }), 15000))]).catch(e => ({ err: String(e).slice(0, 80) }));
   const row = { buoi: R.buoi, at: new Date().toISOString(), peak: PK, rss: rs, ...sc }; LASTB = R.buoi; LASTSCR = sc.screen || ''; if (R.buoi >= +(process.env.RT_COLD || 0) && process.env.RT_COLD) await coldHook(fr);
@@ -79,8 +82,24 @@ let WD = null;
 async function watch(page) { if (WD || !OUTF) return; WD = { n: 0 }; let cdp = null; try { cdp = await page.context().newCDPSession(page); await cdp.send('Debugger.enable') } catch (e) { return }
   const out = OUTF.replace(/\.jsonl$/, '') + '.hang.json', H = []; let busy = false;
   const grab = async () => { const st = []; for (let k = 0; k < 5; k++) { const p = new Promise(r => cdp.once('Debugger.paused', r)); await cdp.send('Debugger.pause').catch(() => { }); const ev = await Promise.race([p, new Promise(r => setTimeout(() => r(null), 10000))]);
-      if (ev) st.push(ev.callFrames.slice(0, 14).map(f => (f.functionName || '(anon)') + ' @' + f.location.lineNumber + ':' + f.location.columnNumber)); await cdp.send('Debugger.resume').catch(() => { }); await new Promise(r => setTimeout(r, 1500)) } return st };
+      if (ev) { st.push(ev.callFrames.slice(0, 14).map(f => (f.functionName || '(anon)') + ' @' + f.location.lineNumber + ':' + f.location.columnNumber));
+        /* what the busy frame works on: its local element «e» (if any) + the open dialog title */
+        for (const fr of ev.callFrames.slice(0, 3)) { try { const r = await cdp.send('Debugger.evaluateOnCallFrame', { callFrameId: fr.callFrameId, returnByValue: true, expression: `(()=>{try{const d=x=>x&&x.nodeType===1?{tag:x.tagName,cls:String(x.className).slice(0,60),ch:x.clientHeight,sh:x.scrollHeight,st:x.scrollTop,kids:[...x.children].slice(-4).map(c=>c.className||c.tagName).join('|'),par:x.parentElement&&String(x.parentElement.className).slice(0,40)}:null;const M=document.getElementById('modal');return {e:typeof e!=='undefined'?d(e):null,title:M&&!M.hidden?((M.querySelector('h2,.kttl,.kh')||{}).textContent||'').slice(0,60):null,cues:document.querySelectorAll('.kscue').length}}catch(x){return String(x)}})()` }); st.push(['LOCALS ' + (fr.functionName || '(anon)') + ' ' + JSON.stringify(r.result && r.result.value)]) } catch (e) { } } } await cdp.send('Debugger.resume').catch(() => { }); await new Promise(r => setTimeout(r, 1500)) } return st };
   const iv = setInterval(async () => { if (busy) return; busy = true; try { const ok = await Promise.race([page.evaluate(() => 1).then(() => true, () => true), new Promise(r => setTimeout(() => r(false), 15000))]);
       if (!ok) { const r0 = procs(); const st = await grab(); H.push({ at: new Date().toISOString(), buoi: LASTB, rss: r0.rendererMax, anon: Math.round(r0.rAnon), stacks: st }); fs.writeFileSync(out, JSON.stringify(H, null, 1));
         if (r0.rendererMax > +(process.env.RT_HANGKILL || 4000)) { fs.appendFileSync(out + '.txt', 'KILL at ' + r0.rendererMax + ' MB\n'); try { await page.context().browser().close() } catch (e) { } process.exit(3) } } } catch (e) { } busy = false }, 20000); iv.unref && iv.unref() }
 module.exports.watch = watch;
+/* RT_MOB=1 (test-only): every MutationObserver is wrapped; when one callback runs ≥ 1000 times inside ONE task (a chain that never settles —
+   F10 R1 b365) the last mutation batches (target, added/removed node classes) and the creation site of every observer active in that task
+   are kept in window.__moHot, and that observer is skipped past 3000 so the page lives on; sample() writes __moHot to <RT_MEM>.mob.json. */
+const MOB = () => { if (window.__moHot !== undefined) return; window.__moHot = null; const O = window.MutationObserver; const act = new Set(); let armed = false;
+  const nd = n => n && n.nodeType === 1 ? (n.tagName.toLowerCase() + (n.id ? '#' + n.id : '') + (typeof n.className === 'string' && n.className ? '.' + n.className.trim().split(/\s+/).slice(0, 3).join('.') : '')).slice(0, 60) : n && n.nodeType === 3 ? '#text' : String(n);
+  window.MutationObserver = function (cb) { let id = '?'; try { id = String(new Error().stack).split('\n').slice(2, 4).map(x => x.trim().replace(/^at /, '').replace(/https?:\/\/[^)]*?:(\d+):(\d+)/, '@$1:$2')).join(' < ').slice(0, 140) } catch (e) { }
+    const o = { id, cur: 0, last: [] };
+    return new O(function (ms, obs) { o.cur++; act.add(o); if (!armed) { armed = true; setTimeout(() => { armed = false; for (const x of act) x.cur = 0; act.clear() }, 0) }
+      if (o.cur > 990) { o.last.push(ms.slice(0, 4).map(m => ({ t: m.type, tg: nd(m.target), a: [...m.addedNodes].slice(0, 3).map(nd), r: [...m.removedNodes].slice(0, 3).map(nd), at: m.attributeName }))); if (o.last.length > 6) o.last.shift() }
+      if (o.cur === 1000 && !window.__moHot) window.__moHot = { at: new Date().toISOString(), title: (() => { try { const M = document.getElementById('modal'); return M && !M.hidden ? ((M.querySelector('h2,.kttl,.kh') || {}).textContent || '').slice(0, 60) : null } catch (e) { return null } })(), obs: [...act].map(x => ({ id: x.id, n: x.cur })), rec: null, who: id, rec0: o.last.slice() };
+      if (o.cur === 1006 && window.__moHot && window.__moHot.who === id) window.__moHot.rec = o.last.slice();
+      if (o.cur > 3000) return; return cb.call(this, ms, obs) }) };
+  window.MutationObserver.prototype = O.prototype };
+module.exports.MOB = MOB;
