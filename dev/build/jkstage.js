@@ -155,13 +155,11 @@ function kstgIn(dl){try{const still=typeof kitHandStill==="function"&&kitHandSti
   const sp=mb.querySelector(":scope>.kstg-sp"),me=mb.querySelector(":scope>.kstg-me");
   if(sp)sp.animate([{transform:"translateX(-36%)"},{transform:"none"}],{duration:a,easing:E,fill:"backwards"});
   if(me)me.animate([{transform:"translateX(30%)"},{transform:"none"}],{duration:b,delay:160,easing:E,fill:"backwards"})})}catch(e){}}
-/* the details plate on the stage: above the lifted card, never over a face */
+/* the flipped card on the stage (KIT §101.10, one part with the hand): ON its hand card, never above the faces band; the story box ends above it */
 function kstgPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg.kstage");if(!dl)return;const z=dl.querySelector(":scope>.khplate");if(!z||z.hidden)return;
- const W=dl.clientWidth,D=dl.getBoundingClientRect(),B=b.getBoundingClientRect(),G=g.getBoundingClientRect();const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;
- const bottom=Math.min(G.top+lift+2,B.top-6)-D.top-(b.disabled?0:Math.round(((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*.6));const top0=(dl.__kstFace||0)+4;const w=Math.min(KIT_STAGE.plateW,W-16);let x=Math.round(Math.max(8,Math.min(W-8-w,B.left-D.left+B.width/2-w/2)));
- z.style.left=x+"px";z.style.width=w+"px";z.style.bottom=Math.round(D.height-bottom)+"px";z.style.maxHeight=Math.max(80,Math.round(bottom-top0))+"px";z.style.top="auto";
- /* the story box beside the faces (iPad) never runs under the plate: it ends above the plate's top and shows its LAST lines (MAIN 147 look: the plate covered the last story line; KK34) */
- const pm=dl.querySelector(".kpmain:not(.kstg-foot):not(.ksay)");if(pm&&dl.__kstBox){const pt=bottom-z.offsetHeight-8,bh=Math.max(60,Math.round(pt-dl.__kstBox.by));if(dl.__kstBox.by+pm.offsetHeight>pt){pm.style.setProperty("--bhL",bh+"px");requestAnimationFrame(()=>{pm.scrollTop=pm.scrollHeight})}else pm.style.removeProperty("--bhL")}}catch(e){console.error("kstgPlate",e)}}
+ const D=dl.getBoundingClientRect();const top0=D.top+(dl.__kstFace||0)+4;if(typeof kitHandFlipPlace==="function")kitHandFlipPlace(b,z,dl,top0,D.left+8,D.right-8);
+ /* the story box beside the faces (iPad) never runs under the flipped card: it ends above its top and shows its LAST lines (MAIN 147 look; KK34) */
+ const pm=dl.querySelector(".kpmain:not(.kstg-foot):not(.ksay)");if(pm&&dl.__kstBox&&z.__khRect){const pt=z.__khRect.t-8,bh=Math.max(60,Math.round(pt-dl.__kstBox.by));if(dl.__kstBox.by+pm.offsetHeight>pt){pm.style.setProperty("--bhL",bh+"px");requestAnimationFrame(()=>{pm.scrollTop=pm.scrollHeight})}else pm.style.removeProperty("--bhL")}}catch(e){console.error("kstgPlate",e)}}
 (function(){if(typeof kitHandLay!=="function")return;const L0=kitHandLay;
  kitHandLay=function(g,quiet){let dl=null;try{dl=g&&g.closest&&g.closest(".dlg");if(dl&&kitHandWants(g))kstgOn(dl,g)}catch(e){}
   const r=L0.call(this,g,dl&&dl.classList.contains("kstage")?true:quiet);/* the stage owns the frame: the frame-fit passes (kszEvLaw10 / kszTextFirst3) do not run on it */
