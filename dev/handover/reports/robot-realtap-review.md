@@ -128,3 +128,10 @@ PRIORITY #1 CHECK: OD robot-realtap reviews | main none | review/robot-realtap e
 | Fold cautious s15 slice 17 | 3af7896e | through «Dưỡng Tú viện» → «Đông sở» (map, night scene), 0 dead / 0 stuck / 0 bugs, Ban hoa b1 (game) | — |
 - Gap (honest): on these LIVEs no run reproduced the QC 25-min «cover div.kscn-veil» DEAD case (controls 0 dead too; s21 on this harness does not pass through Đông sở on iPad), so the fix is proven by the synthetic probe + the fixer's lives, not by a replayed QC life. No regression seen.
 - N1–N3 from the 5c62c2b9 review sent to fixer #9 directly (still open, non-blocking). New N4: the off-middle rule checks visibility:hidden but not opacity 0 / pointer-events; a fading-out scene still hit at its centre would be taken as the layer for a moment — rare, small, self-heals when it is removed.
+
+# REVIEW robot-realtap ec026335..2df8f5fa (my N1–N3, fixer #9 READY) — BIG REVIEWER #9, 26/11 ~10:55Z
+## VERDICT: PASS robot-realtap 2df8f5fa (test files only) — the branch tip now carries every verdict above (08a4ff8b..2df8f5fa)
+- N1 OK: the peek bare check uses GUARD_SEL (passed in) and arms window.__rtBare in the same page call; with no capture guard installed yet (no __rtG) the point is «not bare» → bareTapOn takes the tap. Residual (tiny): a guard block during a board tap is counted in __rtBareN but logged on the next bareTapOn call, not on the board move.
+- N2 OK: quick removed only when nq has a non-back move (`nq.some(x => !isMgBack(x))`); quick + ✕ only → the quick stays the move. Logic only (no live board shows just quick + ✕), as the fixer says.
+- N3 OK: board moves add to areaTaps and boardTaps.
+- Runs (RT_NOSHOT=1): RT_TEST_BOARD=vu iPad s12 raw 9 / Fold s7 raw 9 on 3af7896e, never skipped, backs = result; RT_TEST_EXAM=1 Fold s31 on 6b5d3d05 → done:true [5,5]. 0 dead / 0 stuck / 0 bugs; lint OK, 0 `.click()`. N4 (fading scene) still open, non-blocking.
