@@ -698,7 +698,9 @@ function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=
  const bgk=g.kind&&typeof KG82_MGBG!=="undefined"?KG82_MGBG[g.kind]:"",bgu=bgk?(typeof IMG_U==="function"?IMG_U(bgk):bgk):"";
  return `<div class="kgfig${an?" kgf-anim":""}${bgu?" kgf-bg":""}" data-kgf="${p===S?"me":"other"}"${bgu?` data-mgbg="${g.kind}" style="--mgbg:url('${bgu}')"`:""}>${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
 function kitGameFigRefresh(p,o){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,Object.assign({cap:false},o&&o.src?{src:o.src}:{}));/* kit-dress-picker: o.src = a preview figure (the dress she is trying on) */if(!f)return;
- const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
+ /* E95: the old figure was named `o` here too — the block-scoped const shadowed the option `o` above (TDZ ReferenceError, swallowed by catch), so this refresh
+    NEVER ran: the game frame's figure column kept the first picture (dress picker preview, any caller). Renamed; errors are logged, not swallowed. */
+ const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,old=c.querySelector(".kesf");if(!n)return;if(old)old.replaceWith(n);else c.prepend(n)}catch(e){console.error("kitGameFigRefresh",e)}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
 function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v);if(k==="score"){KG82.lastScore=v;kitGameMark(v)}if(k==="time"){kitGameClock(v);kitGameMark(KG82.lastScore)}}
 /* KIT §13.9 kitGameMark (review/kit-mark, owner OD 20/11 ~07:15Z): the ONE small «n/10» chip in the title line beside the clock, in EVERY kind (all go through kg82Set -> here).

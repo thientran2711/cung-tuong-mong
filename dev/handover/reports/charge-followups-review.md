@@ -48,3 +48,32 @@ PRIORITY #1 CHECK ('tịch thu|bồi bạc|Mua chuộc|Trình Hoàng hậu'): OD
 | extra probe (WD outfit / veil / jewellery roads) | all nvp, net 0 | — |
 Videos fold-755x1000.webm + ipad-1180x820.webm + fold-notice.png + ipad-notice.png looked at 3× (contact sheets): accusation by real taps, kit notice rows, no cut text, no overflow.
 CDN review folder img/_review/charge-followups NOT wiped: the wipe command was refused by this session's permission guard; the coordinator wipes it (python3 dev/site/cdn_sync.py --wipe-review charge-followups). Scratch shots deleted.
+
+## DELTA REVIEW (d) — f9fa2cef → 0b36b274 (dev/build + dev/test only)
+Reviewer: session_01D3E3Na2v51UwPKzkqtqpLq (opus), depth 4, START_CTX ~3 %.
+PRIORITY #1 CHECK: OD 0 | main jtruth DEEDW typed table (parked by the D4 DELTA reviewer) | review/charge-followups-rv f9fa2cef BIG PASS | claims D1+D4 worker session_01D3E3NZG2LWTwaYMqBjHCPL.
+**VERDICT: DELTA PASS review/charge-followups-rv 0b36b274** (no fixes needed; this commit adds only this section).
+
+Equality (scripted on the built page, Playwright, `deedW` / `DEEDW` / `BAL.charge` at runtime):
+| check | result |
+|---|---|
+| `Object.keys(BAL.charge.actW)` == old typed DEEDW key set (35 keys) | equal; `DEEDW === BAL.charge.actW` (alias) |
+| every old DEEDW value vs `deedW(k)` and `DEEDW[k]` | 35/35 equal |
+| every old call-site literal vs `deedW(kind)` (flirt, sbribe×5, sthreat, cyfake, cylie, cyforge, mlframe, mlbeat, mlhframe, mangift, tryst×3, pm, il, vp, xx, plot×3, old, illbuy, caught) | all equal (1 / 2 as before) |
+| key overlap actW ∩ w (would shadow) | none |
+| `BAL.charge.deed` kinds in neither actW nor w | story, mlpoison, ls — weights are passed at the call (`n`, `BAL.mline.poisonW`, `BAL.preT.lsW`), never typed; a falsy weight falls back to `w.plot`=1 = old `||1`. Nit only. |
+| default when a caller omits w: old `DEEDW[k]||1`, new `deedW(k)` | differs only for tryst/pm/caught/old (1→2); grep: no call site omits w for those kinds (runAct passes DEEDW[k], mlCaught/story/ls pass their own) → no behaviour change |
+
+Law 4 / whole family: `grep` over dev/build/j*.js for typed weights at deedAdd/deedOnce/cyDeed/mlCaught, `{k:…,w:N}` deed literals, `d.w=N`, `.dw+=N` → 0 hits. charge-scan.py deed_literal_w 24 (f9fa2cef) → 0 (0b36b274); other families at 0b36b274 all 0 (total_need 2 / miss_lie 5 at f9fa2cef were fixed earlier in the branch, not by this delta).
+j8.js:98 «Hoàng thượng nhân từ»: `p.out=true` before `p.coldR=coldRankIn(p)`. coldRankIn → punFromToday → punTwice (punWk) / rkOf (rank/queen): none reads p.out → identical value. npc-purpose-scan at f9fa2cef: `FAIL j8.js:89 done-text not found`; at 0b36b274: PASS (419 rows).
+
+Tests (own sparse worktree, `bash dev/site/build_site.sh` rc 0; rebuild differs from the committed index.html only in the build-info line):
+| test | result |
+|---|---|
+| coop-e2e.js (co-op first) | run 1: 142/143 (FAIL after rejoin: `S.fidUsed.78` A=undefined B="maid:m13", maid-face id, unrelated to deed weights); run 2: **143/143 PASS**, 0 page errors fold/ipad/solo. Flaky item noted for the coop-host-lag family owner. |
+| charge-scan.py / with ref f9fa2cef | all 0 / deed_literal_w 24 |
+| charge-smoke.js | PASS, 0 page errors |
+| charge-followups.js | ALL PASS, 0 page errors |
+| npc-purpose-scan.js | PASS (419 rows) |
+| punish-reason.js 755 1000 | ALL PASS, 0 page errors |
+No UI change in the delta → no screenshots taken.
