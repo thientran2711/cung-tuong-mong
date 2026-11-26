@@ -21814,5 +21814,803 @@
   "row": "R6·greedy·1:3103755961 (rerun on LIVE github.io, fold)",
   "game": "github.io LIVE, ≈ 16 h life from 11-25 ≈18:00Z: Builds 79050fbf5464 → 9434d88366cc → 4763d410aa0d → 0dc642a71578 → 13f84c70f2a3 → c039fbea2394 → dcf5cf143550 → 3452251e0042 (page reloads at 5 resumes); harness 64d62d9b → b4b181f8 → 496b6b66 → 8dc395ba → 4d7a22c6 → d2e03d80 → 89f5b956 (resumes at buổi 306, 1998, 2405, 2824, 3354; same life, saves kept)",
   "audit": "VALID (Lãnh cung «Tuổi xuân qua đi» age 40, real taps, github.io); mixed builds noted — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-random-2",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2027701647,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 3,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "bf6dd041+",
+    "b": "0281bf7bcef6",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 1720,
+   "dlgScroll": 109,
+   "scrolls": 180,
+   "dlgClose": 161,
+   "infoTaps": 373,
+   "nextNoTurn": 6,
+   "taps0": 0,
+   "resumed": [
+    {
+     "at": "2026-11-26T07:55:10.709Z",
+     "buoi": 156,
+     "from": "2026-11-26T07:54:26.640Z"
+    }
+   ],
+   "kfocVisits": 12,
+   "mgDragSkip": 15,
+   "mgDragSkipExam": 5,
+   "backdropTaps": 1,
+   "taps": 2776
+  },
+  "life": {
+   "id": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Năm 5, Hoàng thượng niên hiệu Chính Đức băng hà, thọ 25 tuổi. Tân Thái hậu Diêu Kính Nghi xét lại chuyện cũ (khả năng: rất thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "death": true,
+   "age": 22,
+   "year": 5,
+   "rank": 0,
+   "text": "Năm 5, Hoàng thượng niên hiệu Chính Đức băng hà, thọ 25 tuổi. Ngài trúng phong đột ngột giữa đêm. Tân Thái hậu Diêu Kính Nghi xét lại chuyện cũ (khả năng: rất thấp), ban lụa trắng, ép ngươi tuẫn táng ",
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    "AREA 916,440",
+    "AREA 646,321",
+    "AREA 508,560",
+    "AREA 485,280",
+    "AREA 644,298",
+    "AREA 775,325",
+    "AREA 671,568",
+    "AREA 498,490",
+    "AREA 889,443",
+    "AREA 358,494",
+    "AREA 476,429",
+    "#kg82 «Quay lại»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".mapsc",
+    "label": "Hàm An9 bóng · 3 khắc · bái kiến",
+    "cover": "button.k3r.kasr in #kshR",
+    "shot": "/home/user/wt/out/run/shots-R6-random-2/dead-ipad-1795686805123.png",
+    "dev": "ipad",
+    "at": 7094,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 44,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 0,
+     "name": "Nhan Uyển Âm"
+    }
+   },
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".mapsc",
+    "label": "Hàm An7 bóng · 3 khắc · bái kiến",
+    "cover": "span.k3l in #kshR",
+    "shot": "/home/user/wt/out/run/shots-R6-random-2/dead-ipad-1795686870123.png",
+    "dev": "ipad",
+    "at": 7160,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 45,
+     "w": 1,
+     "b": 0,
+     "age": 21,
+     "rank": 0,
+     "name": "Nhan Uyển Âm"
+    }
+   },
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".mapsc",
+    "label": "Hàm An8 bóng · 3 khắc · bái kiến",
+    "cover": "span.k3l in #kshR",
+    "shot": "/home/user/wt/out/run/shots-R6-random-2/dead-ipad-1795686883638.png",
+    "dev": "ipad",
+    "at": 7173,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 45,
+     "w": 1,
+     "b": 1,
+     "age": 21,
+     "rank": 0,
+     "name": "Nhan Uyển Âm"
+    }
+   }
+  ],
+  "buoi": 553,
+  "steps": 16872,
+  "status": [
+   "STATUS R6-random-2 · buổi 368 · year 3 · rank 1 · bugs 0 · stuck 0 · dead buttons 0",
+   "STATUS R6-random-2 · buổi 550 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 3"
+  ],
+  "offers": [
+   {
+    "buoi": 303,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Ngọc Dao»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 303,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Ngọc Dao»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 303,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Ngọc Dao»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 306,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Chung Vân",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 306,
+    "y": 3,
+    "rank": 2,
+    "screen": "#kg82 «»",
+    "label": "Quay lại",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 306,
+    "y": 3,
+    "rank": 2,
+    "screen": "#kg82 «»",
+    "label": "Sẵn sàngtừ lúc này mới tính giờ",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 306,
+    "y": 3,
+    "rank": 2,
+    "screen": "#kg82 «»",
+    "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 306,
+    "y": 3,
+    "rank": 2,
+    "screen": "#kg82 «»",
+    "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 306,
+    "y": 3,
+    "rank": 2,
+    "screen": "#kg82 «»",
+    "label": "Môn kế tiếp",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 306,
+    "y": 3,
+    "rank": 2,
+    "screen": "#kg82 «»",
+    "label": "Xem kết quả",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 328,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hách Nguyệt Thiền»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 328,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hách Nguyệt Thiền»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 328,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hách Nguyệt Thiền»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 339,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diêu Kính Nghi»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 339,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diêu Kính Nghi»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 339,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diêu Kính Nghi»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 352,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Hiền quý phi Cố Tử Yên»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 352,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Hiền quý phi Cố Tử Yên»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 352,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Hiền quý phi Cố Tử Yên»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 364,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Mộ Dung Tập Nhân»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 364,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Mộ Dung Tập Nhân»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 364,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Mộ Dung Tập Nhân»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 373,
+    "y": 3,
+    "rank": 1,
+    "screen": "page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Hàn Tuyết",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 374,
+    "y": 3,
+    "rank": 1,
+    "screen": "page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Hàn Tuyết",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Trinh quý nhân Độc Cô Quân Dao»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Trinh quý nhân Độc Cô Quân Dao»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Trinh quý nhân Độc Cô Quân Dao»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": "page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Hàn Tuyết",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Quay lại",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Sẵn sàngtừ lúc này mới tính giờ",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Môn kế tiếp",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Xem kết quả",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 414,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Hàn Tuyết",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 414,
+    "y": 4,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Quay lại",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 414,
+    "y": 4,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Sẵn sàngtừ lúc này mới tính giờ",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 414,
+    "y": 4,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 414,
+    "y": 4,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 414,
+    "y": 4,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Môn kế tiếp",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 414,
+    "y": 4,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Xem kết quả",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 427,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Hàn Tuyết",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 447,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Lưu Ly»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ ta đếnCần",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 447,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Lưu Ly»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 447,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Lưu Ly»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 454,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Hàn Tuyết",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 454,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Quay lại",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 454,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Sẵn sàngtừ lúc này mới tính giờ",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 454,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 454,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 454,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Môn kế tiếp",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 454,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Xem kết quả",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 459,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Tăng Ngọc Khê»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 459,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Tăng Ngọc Khê»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 459,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Tăng Ngọc Khê»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 508,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Hàn Tuyết",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 508,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Quay lại",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 508,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Sẵn sàngtừ lúc này mới tính giờ",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 508,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+    "kind": "exam",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 508,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 508,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Môn kế tiếp",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 508,
+    "y": 4,
+    "rank": 0,
+    "screen": "#kg82 «»",
+    "label": "Xem kết quả",
+    "kind": "exam",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 519,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Vu Bích Dao»",
+    "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 519,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Vu Bích Dao»",
+    "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 519,
+    "y": 4,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Vu Bích Dao»",
+    "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   }
+  ],
+  "t": {
+   "total": 7298789
+  },
+  "unit": "E-S6",
+  "row": "R6·random·2:2027701647 (rerun on LIVE github.io, ipad)",
+  "game": "github.io LIVE Build 3452251e0042, GAME BUILD {bf6dd041+, 0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80 → 89f5b956 (one same-life resume at buổi 156)",
+  "audit": "VALID (story death: Chính Đức băng hà, Thái hậu ban lụa trắng, age 22 year 5, real taps, github.io) — COUNTED"
  }
 ]
