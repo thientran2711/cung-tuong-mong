@@ -153,9 +153,15 @@ if(typeof runAct==="function"){const ra0=runAct;runAct=function(a,t,k){const r=r
 /* the lines the sieve takes out of the feed (newsAdd NPC deeds, kitKnow, the morning card, gossip reports) → the record */
 function recDrop(t,ids){if(!recOn())return;const I=new Set((ids||[]).filter(x=>x!=null));try{for(const v of rivals||[])if(v&&v.name&&String(t).includes(v.name))I.add(v.id)}catch(e){}recPush({t,ids:[...I]})}
 NSV.recDrop=recDrop;
+/* a card's folded-changes record (nsCard r.K): lead «<title> — kèm theo:» + the ONE kit kitKemRow one-per-line form (named once per feeling,
+   strangers with the same feeling and number «N vị khác», names masked by the kit at show time); K.all = the Sổ ghi keeps every line (no 8 cap).
+   Old records (no K) keep their text. */
+function kemRec(r){try{if(!r||!Array.isArray(r.K)||!r.K.length||typeof kitKemRow!=="function")return"";
+ const K=r.K.map(o=>({v:persOf(o.id),k:o.k,d:o.d,t:o.t})).filter(x=>x.v);if(!K.length)return"";K.all=1;
+ const h=kitKemRow(K);if(!h)return"";const L=r.L?maskNames(r.L,r.ids):"";return `${L?L+" — kèm theo:":"Kèm theo trong cung:"} ${h}`}catch(e){console.error("nsKemRec",e);return""}}
 /* the Sổ ghi tab: her lines (S.logs) and the harem record, newest first, merged by the log sequence at which each record was written */
 function recMerge(){const L=S.logs||[],H=recList();if(!H.length)return L;const n=S.logSeq||L.length;const out=[];let j=0;
- const row=r=>`<span class="ld">${r.dt}</span><i hidden data-osk="${r.big?"big":"hc"}"></i>${maskNames(r.t,r.ids)}`;
+ const row=r=>`<span class="ld">${r.dt}</span><i hidden data-osk="${r.big?"big":"hc"}"></i>${kemRec(r)||maskNames(r.t,r.ids)}`;
  for(let i=0;i<L.length;i++){const seq=n-i;while(j<H.length&&(H[j].q||0)>=seq)out.push(row(H[j++]));out.push(L[i])}while(j<H.length)out.push(row(H[j++]));return out}
 if(typeof renderPanel==="function"){const rp=renderPanel;renderPanel=function(){let keep=null;try{nsOpen();if(on()&&typeof tab!=="undefined"&&tab==="log"&&Array.isArray(S.hrec)&&S.hrec.length){keep=S.logs;S.logs=recMerge()}}catch(e){keep=null}
   let r;try{r=rp.apply(this,arguments)}finally{if(keep)S.logs=keep}try{if(on()&&typeof tab!=="undefined"&&tab==="log")nsLogBar()}catch(e){console.error("nsLogBar",e)}return r}}
@@ -231,7 +237,12 @@ function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)r
  for(const x of kf)add(x.v,`${x.k} ${typeof kaNT==="function"?kaNT(Math.round(x.d),x.t):kaN(Math.round(x.d))}`);
  if(!byV.size)return {keep,kem,more:0,fold:[]};
  /* the Sổ ghi keeps every name and number (maskNames at show time: a stranger stays «một vị …») */
- try{const r0=recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name} ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id)});if(r0)r0.kem=1/* a card's folded changes (not an NPC act: no k) */}catch(e){}
+ /* MAIN 158 26/11 (law 11): the record is shown through the kit kitKemRow one-per-line form (recMerge), so it also stores the items:
+    K = [{id,k,d,t}] (a folded row part «thiện cảm +3 (20)» → k «thiện cảm», d 3, t 20; a Kèm item as it is); lead = the card title */
+ const KI=[];const PT=/^(.+?)\s+([+−-]\s*\d+)(?:\s*\((\d+)\))?\s*$/u;
+ for(const x of fold)for(const p of x[1].concat(x[2])){const m=txtOf(p).match(PT);if(m)KI.push({id:x[4].id,k:m[1],d:+m[2].replace(/\s/g,"").replace("−","-"),t:m[3]!=null?+m[3]:null})}
+ for(const x of kf)KI.push({id:x.v.id,k:x.k,d:Math.round(x.d),t:x.t!=null?x.t:null});
+ try{const r0=recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name} ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id)});if(r0){r0.kem=1/* a card's folded changes (not an NPC act: no k) */;if(KI.length){r0.K=KI;r0.L=title?txtOf(title):""}}}catch(e){}
  NSV.stat.cardFold=(NSV.stat.cardFold||0)+byV.size;
  const kv=new Set(kem.map(x=>x.v));return {keep,kem,more:[...byV.keys()].filter(v=>!kv.has(v)).length,fold:[...byV.keys()].map(v=>v.name)}}catch(e){console.error("nsCard",e);return null}}
 /* «VÌ SAO» (kitWhy, j63 kaWhyCl): the reasons of a card come from the span's log clauses; a clause that is other people's business only never
