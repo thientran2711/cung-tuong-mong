@@ -100,4 +100,4 @@ Run 1's C4 failed only because C3's stalled week never merged (seats still on d6
   4.4/yr. For sếp: the two-way rule keeps her net gain small; she gains clearly only when she wins more contests.
 - Co-op: worker 27/27 on the merged build; mine C1/C2/C4 PASS + C3 rule PASS on the earlier build. The «Lễ Phật đản ×2» stall is
   pre-existing (same on bare LIVE, per worker; coop-clear now taps «Bỏ qua» / «Đã hiểu» in the kg82 frame).
-- Gate left to the worker: quickcheck on 1485a122 (running at verdict time); the landing coordinator checks its line.
+- Quickcheck 1485a122 (worker): PASS (open 0 errors, old save OK, perf new/live render 181/244, buổi 1084/1507); CORE G4 80-dialog-fixed 2 rows FAIL = pre-existing, identical on bare LIVE 3af7896e. Gate closed; LAND READY sent to Foreman D.
