@@ -147,3 +147,7 @@ VERDICT: PASS ec8442e7 — no BLOCKING items.
 
 ## r3 — LAND READY ec8442e7 (FF from LIVE 03a8c17c)
 rv PASS 81df685d (B1 rkRole → role other for preN words; B2 «Cách tính» note); merged LIVE 03a8c17c (F10). end-maxrank ALL PASS, coop-e2e 143/143 on ec8442e7. rank/worker deploys via rank-worker.yml on land.
+
+## 6. DELTA RE-CHECK (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS cb17c233
+cb17c233 = ec8442e7 + merge LIVE 4cfcda61 + 601a0dba; FF from LIVE 4cfcda61. Branch-only source delta vs LIVE = the passed one + exactly 2 lines: jrank.js `html body #modal.krkp{z-index:9100}` (LIVE jk4 kit-dialog-stack `html body #modal:not(.kptitle){z-index:42}` had put «Cách tính» / «Mã khôi phục» / «Đổi tên hiệu» UNDER #krkov 8990 — equal specificity now, jrank's style is injected after jk4's so it wins; guarded by the new test row) + that end-maxrank.js row. Law 11 scan: no other `#modal.<cls>{z-index}` rule left under the jk4 stack (only jend `.kes>.dlg`, inner). Build same (only CTM_BI); end-maxrank.js ALL PASS incl. «Cách tính opens ABOVE Bảng vàng»; one-core ×3 PASS.
+VERDICT: PASS cb17c233 — no BLOCKING. Deploy note of §4 stands.
