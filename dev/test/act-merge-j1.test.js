@@ -21,7 +21,7 @@ const {chromium}=require('playwright');
  for(const sc of ['dau','cao','hh','con'])for(let bu=0;bu<4;bu++){
   const r=await p.evaluate(([sc,bu])=>{const F=[],K={},D={};let runs=0,cards=0;
    const KEEP=/^(Thỉnh an|Xin Hoàng hậu che chở|Xin son phấn|Xin ân điển|Dâng |Đút lót lật thẻ|Hỏi sở thích Hoàng thượng|Hòa giải|Tâm sự|Hỏi chuyện|Giao việc phòng bị|Tiến cử|Xem người|Chào hỏi đúng lễ|Liếc mắt|Trao khăn|Hẹn gặp riêng|Cắt đứt|Cài đồ vào rương|Lục rương|Lấy trộm son phấn|Xin Thái hậu đỡ lời|Kể tội|Xin bắt mạch|Bài thuốc dễ thụ thai|Mời làm thái y tâm phúc|Trò chuyện với cung nữ)/;
-   AA.scen(sc);for(const sf of AA.surfaces()){if(!sf.place)continue;try{AA.restore(1+bu);S.buoi=bu;used=0;AA.show(sf)}catch(e){continue}
+   const DFON=BAL.df.on;AA.scen(sc);for(const sf of AA.surfaces()){BAL.df.on=DFON;if(!sf.place)continue;try{AA.restore(1+bu);S.buoi=bu;used=0;AA.show(sf)}catch(e){continue}
     const ppl=curPeople();ppl.forEach((q,i)=>{const kind=q.kind+(q.ref&&q.ref.queen?"(HH)":"");let A,raw;try{A=talkOpts(q);raw=doorRaw(q)}catch(e){F.push(`${kind}: talkOpts threw ${e.message}`);return}
      K[kind]=K[kind]||{seen:0,before:0,after:0};K[kind].seen++;K[kind].before=Math.max(K[kind].before,raw.length);K[kind].after=Math.max(K[kind].after,A.length);
      /* 2 raw keys */raw.forEach((a,j)=>{const x=A[-1-j];if(!x||x.n!==a.n)F.push(`${kind}: raw key ${-1-j} is not «${a&&a.n}»`)});
@@ -32,16 +32,16 @@ const {chromium}=require('playwright');
       const allL=M.every(a=>a.lock);if(allL!==!!d.lock)F.push(`${kind}: door ${d.n} lock ${!!d.lock} but members all-locked ${allL}`)})});
     /* 3 + 4: open the first free door of the first person who has one, pick its first free member */
     const i=ppl.findIndex(q=>{try{return talkOpts(q).some(a=>a&&a.door&&!a.lock)}catch(e){return false}});if(i<0)continue;
-    const q=ppl[i];popIdx=i;S.visit.tk={};S.visit.talked=false;Q.length=0;const A=talkOpts(q);const di=A.findIndex(a=>a&&a.door&&!a.lock);const d=A[di];
+    const q=ppl[i];try{if(DF.F){const o=DF.F;DF.F=null;DF.p=null;DF.tk=null;o.destroy()}}catch(e){}/* the pop-up path (BAL.df.on 0 = the old pop-up; the person view path = act-merge-j1-tap.js) */const dfOn0=BAL.df.on;BAL.df.on=0;popIdx=i;S.visit.tk={};S.visit.talked=false;Q.length=0;const A=talkOpts(q);const di=A.findIndex(a=>a&&a.door&&!a.lock);const d=A[di];
     const u0=used,b0=S.bac;talk(di);if(used!==u0)F.push(`${q.kind}: door ${d.n} spent khắc ${used-u0}`);
     const m=Q[0];if(!m||m.pid!=="door"){F.push(`${q.kind}: door ${d.n} opened no door card (Q ${Q.length} ${m&&m.pid})`);Q.length=0;continue}cards++;
     const raw=doorRaw(q);const mem=raw.map((a,j)=>[a,j]).filter(([a])=>a&&!a.k61&&DOOR.of(a.n,q.kind)&&DOOR.of(a.n,q.kind).k===d.door);
     const rows=m.opts.filter(o=>o.n!=="Thôi");if(rows.length!==mem.length||rows.some((o,k)=>o.n!==mem[k][0].n))F.push(`${q.kind}: card rows ${rows.map(o=>o.n)} ≠ members ${mem.map(x=>x[0].n)}`);
     const k=m.opts.findIndex(o=>o.n!=="Thôi"&&!o.off&&!mem[m.opts.indexOf(o)][0].open);if(k<0){Q.length=0;continue}
-    const a=mem[k][0];const tc=talkK(a);const u1=used;try{chooseM(k)}catch(e){F.push(`${q.kind}: pick «${a.n}» threw ${e.message}`)}runs++;
-    if(used-u1!==tc&&!(a.pk))F.push(`${q.kind}: «${a.n}» spent ${used-u1} khắc, card says ${tc}`);
+    const a=mem[k][0];const tc=talkK(a);const u1=used;const pre=JSON.stringify({can:can(tc),pay:canPay(a),lock:a.lock,vis:!!S.visit,q:Q.length,used});const seen=[];const dp=doorPick;doorPick=function(pp,j,n){seen.push(['dp',doorIdx(pp),j,n,popIdx]);return dp.apply(this,arguments)};const tk0=talk;talk=function(oi){seen.push(['talk',oi,Q.length,S.visit&&S.visit.talked,JSON.stringify(S.visit&&S.visit.tk)]);return tk0.apply(this,arguments)};try{chooseM(k)}catch(e){F.push(`${q.kind}: pick «${a.n}» threw ${e.message}`)}finally{doorPick=dp;talk=tk0;BAL.df.on=dfOn0}runs++;
+    if(used-u1!==tc&&!(a.pk))F.push(`${q.kind}: «${a.n}» spent ${used-u1} khắc, card says ${tc} (Q ${Q.length} ${Q.map(m=>m.pid||m.t).join('/')} popIdx ${popIdx} tk ${JSON.stringify(S.visit.tk)} talked ${S.visit.talked} dead ${S.dead} p ${popIdx!=null&&curPeople()[popIdx]&&curPeople()[popIdx].kind} rawk ${JSON.stringify(mem[k][1])} now ${(talkOpts(curPeople()[popIdx])[-1-mem[k][1]]||{}).n} pre ${pre} postQ ${Q.length} seen ${JSON.stringify(seen)} log ${(S.logs||[]).slice(0,2).join('|').slice(0,200)})`);
     if(!(S.visit.tk||{})[i]&&S.visit.talked!==true&&!a.pk)F.push(`${q.kind}: «${a.n}» did not mark the person talked`);AA.hide()}
-   return {F,K,D:Object.fromEntries(Object.entries(D).map(([n,x])=>[n,{members:[...x.members],kinds:[...x.kinds]}])),runs,cards}},[sc,bu]);
+   BAL.df.on=DFON;return {F,K,D:Object.fromEntries(Object.entries(D).map(([n,x])=>[n,{members:[...x.members],kinds:[...x.kinds]}])),runs,cards}},[sc,bu]);
   R.fail.push(...r.F.map(x=>`${sc}/${bu}: ${x}`));R.runs+=r.runs;R.cards+=r.cards;
   for(const k in r.K){const x=R.kinds[k]=R.kinds[k]||{seen:0,before:0,after:0};x.seen+=r.K[k].seen;x.before=Math.max(x.before,r.K[k].before);x.after=Math.max(x.after,r.K[k].after)}
   for(const n in r.D){const x=R.doors[n]=R.doors[n]||{members:new Set(),kinds:new Set()};r.D[n].members.forEach(m=>x.members.add(m));r.D[n].kinds.forEach(m=>x.kinds.add(m))}}
