@@ -491,5 +491,5 @@ C3-SEALS-W1d (hh disc fix + pt/cl/cy) | review/c3-seals | session_01PEhRbwgmJUfi
 | D-SELX-FAIR | review/selx-fair | session_01D3E3NYb5XyihZuzW8uuS5M | RUNNING | 26/11 12:16Z | Foreman D |
 | D-SRV-RANK | review/srv-rank | session_01D3E3NbVRYoHioc81tQJMxN | RUNNING | 26/11 12:16Z | Foreman D |
 RV-ONE-SIEVE BIG rv of review/one-sieve fedd27aa | review/one-sieve-rv | session_01V1ZZGzL3edaYXX1FAuhMwS | RUNNING | 2026-11-26T12:23Z (MAIN 159)
-| F flight2-s7b life (slot 7 refill, iPad cautious seed 2026112533, PINNED build, harness 0e0ebe29) | dev/handover/robot/flight2-s7b.* | FOREMAN F #22 session_01UV1SzhSdVUsfkytrb26tER | (opening) | RUNNING | 26/11 12:47Z |
-| F HARNESS FIXER #10 (FOREMAN E pick=<label regex> param + exitPick pre-life entry; BIG #9 notes RT_TEST_KIP shown:false, mgBackWhy cap 40) | review/robot-realtap | FOREMAN F #22 session_01UV1SzhSdVUsfkytrb26tER | (opening) | RUNNING | 26/11 12:47Z |
+| F flight2-s7b life (slot 7 refill, iPad cautious seed 2026112533, PINNED build, harness 0e0ebe29) | dev/handover/robot/flight2-s7b.* | FOREMAN F #22 session_01UV1SzhSdVUsfkytrb26tER | session_01UV1Szgm7TCoy72pwoQ2EEn | RUNNING | 26/11 12:47Z |
+| F HARNESS FIXER #10 (FOREMAN E pick=<label regex> param + exitPick pre-life entry; BIG #9 notes RT_TEST_KIP shown:false, mgBackWhy cap 40) | review/robot-realtap | FOREMAN F #22 session_01UV1SzhSdVUsfkytrb26tER | session_01UV1SzhD1StB7MbhXXgUALS | RUNNING | 26/11 12:47Z |
