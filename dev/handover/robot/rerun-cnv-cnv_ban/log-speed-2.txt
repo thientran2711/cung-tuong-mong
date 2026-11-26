@@ -43,3 +43,17 @@ DEAD BUTTON page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 4 n
 CP buổi 1451 year 11 save 2597626 chars
 STATUS cnv-cnv_ban-speed-2 · buổi 1487 · year 11 · rank 0 · bugs 1 · stuck 0 · dead buttons 1
 CP buổi 1501 year 11 save 2753666 chars
+CP buổi 1551 year 11 save 2821284 chars
+CP buổi 1601 year 12 save 2900502 chars
+CP buổi 1651 year 12 save 2983452 chars
+CP buổi 1701 year 12 save 3046158 chars
+CP buổi 1751 year 13 save 3093187 chars
+CP buổi 1801 year 13 save 3160433 chars
+touchscreen.tap: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rerun-ban/dev/test/realtap.js:104:39)
+    at async Object.tap (/home/user/wt/rerun-ban/dev/test/realtap.js:79:46)
+    at async Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:270:16)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-2 from 2026-11-26T03:12:51.008Z buổi 1833

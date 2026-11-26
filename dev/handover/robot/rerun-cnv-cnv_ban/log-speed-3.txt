@@ -25,3 +25,13 @@ CP buổi 741 year 6 save 1189891 chars
 CP buổi 791 year 6 save 1313648 chars
 STATUS cnv-cnv_ban-speed-3 · buổi 834 · year 6 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
 CP buổi 841 year 6 save 1433291 chars
+CP buổi 891 year 7 save 1557222 chars
+CP buổi 941 year 7 save 1672437 chars
+CP buổi 991 year 8 save 1797224 chars
+CP buổi 1041 year 8 save 1889861 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:170:44)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-3 from 2026-11-26T03:12:30.407Z buổi 1079

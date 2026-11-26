@@ -15,3 +15,23 @@ CP buổi 331 year null save 751794 chars
 PAGE FROZE cnv-cnv_ban-speed-4 at buổi 365 (tree 7915 MB, renderer 7217 MB) → exit 3, rerun with resume=1
 RESUME cnv-cnv_ban-speed-4 from 2026-11-26T01:22:04.357Z buổi 361
 CP buổi 361 year null save 866634 chars
+CP buổi 411 year 3 save 1023881 chars
+CP buổi 461 year 4 save 1123862 chars
+CP buổi 511 year 4 save 1183934 chars
+touchscreen.tap: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rerun-ban/dev/test/realtap.js:104:39)
+    at async Object.tap (/home/user/wt/rerun-ban/dev/test/realtap.js:79:46)
+    at async Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:270:16)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T02:52:13.481Z buổi 542
+CP buổi 542 year null save 1243465 chars
+CP buổi 592 year 5 save 1241645 chars
+CP buổi 642 year 5 save 1353441 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:274:324)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T03:12:46.883Z buổi 657

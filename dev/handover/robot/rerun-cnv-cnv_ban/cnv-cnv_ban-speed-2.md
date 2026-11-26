@@ -2,7 +2,7 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-speed-2 | running |  | 1503 |  | 1 | 0 | 1 | — |
+| cnv-cnv_ban-speed-2 | HARNESS |  | 1834 |  | 1 | 0 | 2 | — |
 
 ## Dead buttons
 
@@ -11,3 +11,4 @@
 ## Bugs
 
 - [freeze] ×1 page froze: no harness step for 10 min (page.evaluate hung) at buổi 1301
+- [harness] ×1 runner error: touchscreen.tap: Target page, context or browser has been closed

@@ -17,6 +17,7 @@ const fs = require('fs'), path = require('path'), { execSync } = require('child_
 /* RSS (MB) of this runner's process tree (node + its Chromium) and of the biggest child (the renderer) — read from ps, never from the page */
 function rssTree() { try { const rows = execSync('ps -eo pid=,ppid=,rss=', { encoding: 'utf8', timeout: 5000 }).trim().split('\n').map(l => l.trim().split(/\s+/).map(Number)); const kids = new Map(); for (const [pid, pp] of rows) { if (!kids.has(pp)) kids.set(pp, []); kids.get(pp).push(pid) } const rss = new Map(rows.map(r => [r[0], r[2]])); const all = []; const st = [process.pid]; while (st.length) { const x = st.pop(); all.push(x); for (const k of kids.get(x) || []) st.push(k) } const mb = all.map(x => (rss.get(x) || 0) / 1024); return { totalMB: Math.round(mb.reduce((a, b) => a + b, 0)), maxMB: Math.round(Math.max(0, ...mb.slice(1))), pids: all } } catch (e) { return null } }
 const RT = require('./realtap.js');
+const MEMH = process.env.RT_MEM ? require('../measure/renderer-mem-lib.js') : null; /* F10 renderer-memory probe: RT_MEM=<rows.jsonl> → one memory row per buổi (test-only) */
 
 let SHA = ''; try { SHA = execSync('git -C ' + JSON.stringify(__dirname) + ' rev-parse --short=8 HEAD').toString().trim() } catch (e) {}
 
@@ -173,7 +174,7 @@ async function play(p) {
     if (sc.S && sc.S.name && !sc.S.dead && !started) { started = true; R._started = true; if (C.onStart) C.onStart() }
     /* progress + checkpoints */
     const key = clockKey(sc.S);
-    if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; tapsB = 0; nxNo = 0; repeat.clear(); tried.clear(); dlgActs.clear(); if (R.buoi % 20 === 0) { const shot = path.join(SHOTS, 'm-look-' + R.buoi + '.png'); await p.screenshot({ path: shot }).catch(() => {}); moment(sc.layer + ' «' + sc.title + '»', 'LOOK', 'every-20-buổi look (runner: write how it feels)', shot) } } lastKey = key; lastProg = Date.now();
+    if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; if (MEMH) MEMH.sample(p, R); acts = 0; tapsB = 0; nxNo = 0; repeat.clear(); tried.clear(); dlgActs.clear(); if (R.buoi % 20 === 0) { const shot = path.join(SHOTS, 'm-look-' + R.buoi + '.png'); await p.screenshot({ path: shot }).catch(() => {}); moment(sc.layer + ' «' + sc.title + '»', 'LOOK', 'every-20-buổi look (runner: write how it feels)', shot) } } lastKey = key; lastProg = Date.now();
       if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
     if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; { const m = rssTree(); if (m) { const pm = await p.evaluate(() => { let q = null; try { q = Q.length } catch (e) {} const mem = performance.memory; return { heapMB: mem ? Math.round(mem.usedJSHeapSize / 1048576) : null, dom: document.getElementsByTagName('*').length, q, lsK: Math.round(JSON.stringify(localStorage).length / 1024) } }).catch(() => ({})); /* memory triage (s7 froze at 3 GB renderer, F #10 11:03Z): JS heap + DOM nodes + queue + storage beside the RSS, every checkpoint */ (R.rss = R.rss || []).push({ buoi: R.buoi, y: sc.S && sc.S.y, totalMB: m.totalMB, rendererMB: m.maxMB, ...pm }); if (R.rss.length > 400) R.rss.splice(0, R.rss.length - 400) } } const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
@@ -451,8 +452,9 @@ const seat = Seat({ url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, li
 (async () => {
   /* one browser profile per life (<out>/profile-<life>): pictures / music are fetched once and stay cached across restarts and resume
      (a fresh profile re-downloads everything behind «Lần đầu nhập cung», which the CDN throttles (429) when many robots start together) */
-  const ctx = await chromium.launchPersistentContext(path.join(path.resolve(OUT0), 'profile-' + LIFE), { viewport: VP, deviceScaleFactor: 1, hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
+  const ctx = await chromium.launchPersistentContext(path.join(path.resolve(OUT0), 'profile-' + LIFE), { viewport: VP, deviceScaleFactor: +(process.env.RT_DSF || 1), hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
   const br = { close: () => ctx.close() };
+  if (MEMH) await MEMH.init(ctx);
   const p = ctx.pages()[0] || await ctx.newPage();
   /* WATCHDOG outside the page (s6d froze 40 min: renderer 11 GB, page.evaluate hung, the in-loop stuck timer never ran): no loop step for WD min → record the freeze + RSS in the ckpt (its save = last good one), kill this runner's Chromium, exit 3 → the until-loop resumes the SAME life */
   const WD = (+A.wdMin || 10) * 60e3;

@@ -232,3 +232,65 @@ Format: game date · screen · feeling · what happened · shot (relative to the
 - year 11 · turn 125 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1487-219.png
 - year 11 · turn 125 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1491-220.png
 - year 11 · turn 126 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng sáu» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1500.png
+- year 11 · turn 127 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Trung · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1516-221.png
+- year 11 · turn 127 · tuần 2 · buổi 1 · rank 0 · .dlg «Chuyện trong cung» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1520.png
+- year 11 · turn 127 · tuần 2 · buổi 1 · rank 0 · .dlg «Học Công (Nữ công): ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1520-222.png
+- year 11 · turn 128 · tuần 0 · buổi 1 · rank 0 · .dlg «Thu săn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1523-223.png
+- year 11 · turn 128 · tuần 0 · buổi 1 · rank 0 · #modal «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-speed-2/m-new-1524-224.png
+- year 11 · turn 128 · tuần 0 · buổi 1 · rank 0 · .dlg «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm | Làm · shots-cnv-cnv_ban-speed-2/m-new-1524-225.png
+- year 11 · turn 128 · tuần 0 · buổi 1 · rank 0 · #modal «Túi thơm thêu sen: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-speed-2/m-new-1524-226.png
+- year 11 · turn 128 · tuần 0 · buổi 1 · rank 0 · .dlg «Túi thơm thêu sen: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Túi thơm thêu sen · vải, chỉ | Túi thơm thêu sen · lụa, chỉ | Túi thơm thêu sen · gấm, chỉ · shots-cnv-cnv_ban-speed-2/m-new-1524-227.png
+- year 11 · turn 128 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Thượng thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1528-228.png
+- year 11 · turn 129 · tuần 0 · buổi 1 · rank 0 · .dlg «Phiên vương nhập triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1535-229.png
+- year 11 · turn 129 · tuần 0 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1537-230.png
+- year 11 · turn 129 · tuần 0 · buổi 3 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-speed-2/m-new-1538-231.png
+- year 11 · turn 129 · tuần 1 · buổi 1 · rank 0 · .dlg «Phiên vương nhập triều» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1540.png
+- year 11 · turn 130 · tuần 0 · buổi 2 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Đứng xem rồi vềTốnkhôngĐượck · shots-cnv-cnv_ban-speed-2/m-new-1548-232.png
+- year 11 · turn 130 · tuần 0 · buổi 3 · rank 0 · #modal «Cung nữ thân tín tam đẳng Tạ Tiểu Điệp» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-speed-2/m-new-1550-233.png
+- year 11 · turn 130 · tuần 0 · buổi 3 · rank 0 · .dlg «Cung nữ thân tín tam đẳng Tạ Tiểu Điệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1550-234.png
+- year 11 · turn 130 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1552-235.png
+- year 11 · turn 130 · tuần 1 · buổi 2 · rank 0 · .dlg «Quẻ Thượng thượng · Danh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1553-236.png
+- year 11 · turn 130 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1557-237.png
+- year 11 · turn 131 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại hàn, tuyết lớn» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1560.png
+- year 11 · turn 131 · tuần 1 · buổi 3 · rank 0 · .dlg «Thời tiết» · NEW SCREEN · first time on this screen; buttons: Cởi áo bông đắp cho nàng taR | Dúi bạc xin lính gác ít than | Lo thân mình trướcRất vữngTố · shots-cnv-cnv_ban-speed-2/m-new-1565-238.png
+- year 11 · turn 131 · tuần 2 · buổi 1 · rank 0 · .dlg «Quẻ Thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1568-239.png
+- year 12 · turn 132 · tuần 0 · buổi 1 · rank 0 · .dlg «Tra tin đồn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1572-240.png
+- year 12 · turn 132 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1576-241.png
+- year 12 · turn 132 · tuần 2 · buổi 1 · rank 0 · .dlg «Tỉnh thân» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1580.png
+- year 12 · turn 133 · tuần 0 · buổi 2 · rank 0 · .dlg «Thiên tượng» · NEW SCREEN · first time on this screen; buttons: Đứng ra nói đỡRất vữngTốnkhô | Đổ thêm dầu vào lửaRất vữngT | Im lặngRất vữngTốnkhôngĐượck · shots-cnv-cnv_ban-speed-2/m-new-1584-242.png
+- year 12 · turn 133 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 13 sắp hết hạn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1585-243.png
+- year 12 · turn 133 · tuần 0 · buổi 3 · rank 0 · .dlg «Tuyển tú» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1585-244.png
+- year 12 · turn 133 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại tuyển tú nữ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1587-245.png
+- year 12 · turn 133 · tuần 1 · buổi 1 · rank 0 · .dlg «Nhật thực, sao chổi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1587-246.png
+- year 12 · turn 134 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Hạ · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1595-247.png
+- year 12 · turn 134 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 13 khép lại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1595-248.png
+- year 12 · turn 134 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 14: Mẫu nghi thiên hạ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1596-249.png
+- year 12 · turn 134 · tuần 1 · buổi 1 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1600.png
+- year 12 · turn 134 · tuần 1 · buổi 3 · rank 0 · .dlg «Quẻ Hạ · Danh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1602-250.png
+- year 12 · turn 135 · tuần 0 · buổi 1 · rank 0 · .dlg «Cầm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1608-251.png
+- year 12 · turn 136 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng tư» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1620.png
+- year 12 · turn 137 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1640.png
+- year 12 · turn 138 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Hạ · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1646-252.png
+- year 12 · turn 138 · tuần 2 · buổi 0 · rank 0 · .dlg «Thái y viện» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1651-253.png
+- year 12 · turn 139 · tuần 1 · buổi 1 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1660.png
+- year 12 · turn 139 · tuần 2 · buổi 3 · rank 0 · .dlg «Quẻ Thượng · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1666-254.png
+- year 12 · turn 141 · tuần 0 · buổi 1 · rank 0 · .dlg «Ý chỉ tiết kiệm» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1680.png
+- year 12 · turn 142 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại lễ tế Giao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1691-255.png
+- year 12 · turn 142 · tuần 2 · buổi 1 · rank 0 · .dlg «Có người đến» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1700.png
+- year 12 · turn 142 · tuần 2 · buổi 3 · rank 0 · .dlg «Quẻ Thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1702-256.png
+- year 12 · turn 143 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Hạ hạ · Hung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1713-257.png
+- year 13 · turn 144 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1720.png
+- year 13 · turn 144 · tuần 1 · buổi 1 · rank 0 · #modal «Đức» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-speed-2/m-new-1720-258.png
+- year 13 · turn 144 · tuần 1 · buổi 1 · rank 0 · .dlg «Đức» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1720-259.png
+- year 13 · turn 145 · tuần 2 · buổi 1 · rank 0 · .dlg «Lễ tấn phong Thường tại Độc Cô Thanh Ca» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-cnv-cnv_ban-speed-2/m-new-1727-260.png
+- year 13 · turn 146 · tuần 1 · buổi 2 · rank 0 · .dlg «Dung · Dung nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1737-261.png
+- year 13 · turn 146 · tuần 1 · buổi 2 · rank 0 · .dlg «Công · Nữ công: các lối» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1737-262.png
+- year 13 · turn 146 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1740.png
+- year 13 · turn 147 · tuần 2 · buổi 0 · rank 0 · #modal «Tặng quà» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-speed-2/m-new-1751-263.png
+- year 13 · turn 147 · tuần 2 · buổi 0 · rank 0 · .dlg «Tặng quà» · NEW SCREEN · first time on this screen; buttons: Lui | Chí tôn 3/3 | Phi tần 16/16 | Diệt lưới muối lậuHoàng hậuĐ | Hoàng thượngTốn2 khắcĐượcSủn | Thái hậuTốn2 khắcĐượcThái hậ · shots-cnv-cnv_ban-speed-2/m-new-1751-264.png
+- year 13 · turn 148 · tuần 0 · buổi 1 · rank 0 · .dlg «Cấm cung giới nghiêm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-speed-2/m-new-1756-265.png
+- year 13 · turn 148 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1760.png
+- year 13 · turn 150 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng năm» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1780.png
+- year 13 · turn 151 · tuần 2 · buổi 1 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1800.png
+- year 13 · turn 153 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-speed-2/m-look-1820.png
+- year 13 · turn 153 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-cnv-cnv_ban-speed-2/m-new-1823-266.png

@@ -17,3 +17,20 @@ CP buổi 491 year 4 save 1089820 chars
 CP buổi 541 year 4 save 1215228 chars
 CNV EXIT CHOICE buổi 543 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-lazy-5/cnvexit-543.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
 CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 591 year 5 save 1299091 chars
+CNV EXIT CHOICE buổi 611 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-lazy-5/cnvexit-611.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 641 year 5 save 1379902 chars
+STATUS cnv-cnv_ban-lazy-5 · buổi 666 · year 5 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 691 year 5 save 1407872 chars
+CNV EXIT CHOICE buổi 734 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-lazy-5/cnvexit-734.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 741 year 6 save 1517413 chars
+CP buổi 791 year 6 save 1576274 chars
+CP buổi 841 year 7 save 1634650 chars
+CP buổi 891 year 7 save 1745553 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:170:44)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
+  log: []
+}
