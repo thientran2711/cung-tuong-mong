@@ -421,3 +421,30 @@ OPEN (not fixed, honest):
 - jgpick: the confirm-unreachable-after-8-scrolls path never seen live; co-op room with BUILD PIN not run live (same Seat boot; room server is absolute).
 - The server on port 8809 / pin ports die between turns in this container; restart them in the same command as the run.
 - Selection lives often end Ban hoa after the persona's own «Cúi đầu chờ xét — không thi» (F #20 agreed: valid persona choice).
+
+## HARNESS FIXER #10 (11/26/2026, session_01UV1SzhD1StB7MbhXXgUALS; START_CTX ~6 %, worker)
+PRIORITY #1 CHECK: OD 25/11 robot rules | main none (no pick= in dev/test) | review/robot-realtap 0e0ebe29 PASS tip (BIG #9 80df191d) | claims F HARNESS FIXER #10 (F #22 12:47Z).
+Jobs (FOREMAN E 12:12Z via F #22 + BIG #9 non-blocking notes); harness/audit only, no game change; 0 .click()/dispatchEvent in play paths (git grep: only the realtap.js comment).
+1. pick=<label regex> (CLI, value may hold '='; env RT_PICK): in choose(), after the tutorial hole, an eligible option whose label matches is taken by a real tap —
+   never an exit road (logged exitRefused), nav / leave / disabled; ONCE per screen and buổi (a 2nd tap undid the «Ở cố quốc chờ hòa ước» toggle on «Thân phận kiếp này»).
+   job.pick + harness.pick {re, n, exitRefused, log[≤60]}. Not a test hook (a forced persona choice, real taps) → the life stays VALID.
+   UNIFORM RAND: score() was already pick() for rand; the order leak was cardWay's not-hit fallback c[0] → now score(c). Measured at «Hòa ước» (RT_TEST_KC=n_c1, rand, LIVE b a1d2c8d4):
+   «Thưa: con xin đi» 6 / «Xin để … đi thay» 5 over 11 runs (Fold 7, iPad 4) → no lock; the E-S5 5/5 was chance + persona order of play, not a hidden filter.
+   PERSONA WEIGHTS read the card's own odds word (kit .kodds → field od; oddsOf): before, ANY ladder word in the label counted, so hint text moved weights
+   («hòa ước vững» = Vững, «khó xử» = Khó, difficulty button «Khó»).
+   FAMILY SCAN: every dialog choice with ≥ 2 options is logged once (R.choicePts: screen, opts, ods, took); dev/test/rt-choice-scan.js re-scores each persona
+   (w = bold 7-o · cautious 2o · else o, + rnd·3 → gap ≥ 3 = never reached) and lists lock-ins (one option every visit). On the self-test lives:
+   «Chuẩn bị thị tẩm»: cautious never «Tập trước giọng hát» (Có cơ vs Rất vững) · «Đêm thị tẩm» A: every persona but rand/bold never «Bàn chuyện thiên hạ» (Tùy duyên),
+   cautious never «Bàn thơ văn» (Có cơ), bold never «Rót rượu» (Rất vững) · «Đêm thị tẩm» B: cautious never «Xin ân cho gia đình» / «Đáp ứng …» (Có cơ). «Hòa ước»: reachable for all.
+   By design (persona = preference); coverage of such branches = bot=rand or pick=. Run it over any results dir: node dev/test/rt-choice-scan.js <dir> [--md=out.md].
+   Order-decided rules left in choose() (not option choices): «Sẵn sàng» first, tutorial hole, calm «Để sau/Đã hiểu…», first close, pre-life pref list, «Sang buổi».
+2. ENTRY TAP: exitPick used R._started (restored from the ckpt on resume before the seat re-enters its sổ) → the «Bắt đầu kiếp mới» tap on «Chọn sổ» was logged.
+   Now the local in-life flag + ENTRY_TAP (screen #title/#kload/#dawn/«Chọn sổ»/«Sổ luân hồi», or label Chơi một mình/Cùng hảo hữu/Nhận thân phận/Tiếp tục kiếp/Vào cung ngay);
+   a «Bắt đầu kiếp mới» on an in-life page stays an exit. exitPick now carries .screen. robot-audit.js isEntryPick (same test; old records by the trace tap at exitPick.at).
+3a. RT_TEST_KIP: while the picker is still IN Q (queued behind another dialog) it waits (≤ 12 min); never shown = neither open nor queued for 30 s. RT_TEST_KIP_AHEAD=<PEND id>
+   queues the game's own dialog first (repro). Fold kq-f: queuedFirst, aheadMax 1, shown, kipGo 1 · iPad kq-i: queuedFirst, shown, all confirms disabled → note + ✕ (deadEnd 1).
+3b. harness.mgBackN (every board back) + mgBackQuitN (before the result, not long = audit quit) full counters; mgBackWhy keeps the last 40. robot-audit uses mgBackQuitN when present.
+Self-tests (LIVE main 1dcb373e served on 8809, BUILD PIN on → 2673733e/a1d2c8d4): pick 4/4 «Thưa: con xin đi» (Fold 61/63, iPad 61/63, pick.n 2) · rand 6/5 above ·
+RT_TEST_BOARD=vu Fold raw 10 / iPad raw 9, mgBackN 2/1, mgBackQuitN 0 (backs on result) · KIP above · lint OK · rt-choice-scan --unit OK · robot-audit-unit.js 9/9 (old audit 4 FAIL).
+Re-run: RT_TEST_KC=n_c1@2 RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1:8809/ <out> dev=fold origin=pf road=pt_su bot=sens seed=61 slice=4 'pick=^(Ở cố quốc chờ hòa ước|Thưa: con xin đi)'
+(expect RT_TEST_KC took «Thưa: con xin đi», pick.n 2). Without the identity pick a sens life takes «Vào cung ngay» → no Hòa ước card (mkP null).
