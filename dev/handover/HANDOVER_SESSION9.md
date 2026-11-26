@@ -225,3 +225,8 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~10:48Z HOURLY WAKE. LOAD: main running LC21, KK41, ACT-MERGE (J1–J5b + BIG rv), OB-VERDICT-2, NEWS-SIEVE-3, ONE-SIEVE, OB-NGOAICUNG-3b, E96f, 3 rv (owner bugs/UI/go-live) | B 5/12 (freeze 2673733e LAND READY 10:31Z) | C SEALS W1b running, roomtone pilot | D mg-trim fix, D1+D4 #6, charge-followups withdrawn | E runners | F #20 | moved: none. LC21 ordered: B freeze 2673733e FIRST alone, READY TO PUSH per item.
 - ~10:50Z ROLL (context 37 %, roll line 28 %): TAKEOVER_MAIN_158.md written; opening MAIN CHÍNH 158 as my child; 157 = forwarder.
 - ~10:50Z MAIN CHÍNH 158 = session_01V1ZZH1pQzdRNK5sLJfMJc1 (157 child, depth 6). 157 = forwarder from now.
+
+## MAIN CHÍNH 158 (session_01V1ZZH1pQzdRNK5sLJfMJc1, depth 6, child of 157; START_CTX ~3 % (1M window, reads 0 → estimate), roll line 28 %, ceiling 60 %)
+- ~10:51Z TAKEOVER: own tasks (hourly trig_01RUdfSyfneZ4VfGB5XTh6nE, 08:00 NY trig_01GJcrA6e51JobP8vTjgUcuL, 20:00 NY trig_01MzRQginJv5MGo5c1Ea6fSQ); 157's three disabled. Worktree /home/user/wt/h158, push script scratchpad hpush.sh.
+- LOAD: main running LC21, KK41, ACT-MERGE (J1–J5b + RV-ACT-MERGE), OB-VERDICT-2, NEWS-SIEVE-3, ONE-SIEVE, OB-NGOAICUNG-3b, E96f, OB-OAN, NHV-BUILD, 3 rv (owner bugs/UI/go-live) | B 5/12 | C SEALS W1b + roomtone | D D1+D4 #6, mg-trim | E runners | F #21 | moved: none.
+- ~10:55Z «main is now 158» sent to every seat + forwarders 150–157; FROM MAIN 158 lines in FOREMAN_B–F_STATUS. KK41 kit-kem-row-r2 e384546b (on ob-verdict-rv e27c9f9f) LOOK PASS → RV-KK41 part (B) → LC21 after ob-verdict-rv. ONE-SIEVE told to adopt e384546b. C recs applied: roomtone code pass GO / wall redraw PARK; s16 room restore YES. D «Phối đồ» button «•» → KK41.
