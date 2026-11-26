@@ -272,3 +272,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~15:27Z RV-ACT-MERGE r8 03e9c9d2 all GREEN (quickcheck PASS, buổi 1150/1792, j1–j5 + kcscan OK, dress-tap PASS); waits J5c final taps → BIG PASS + LAND READY to LC22 ≤15:40Z. LC22 staged charge-trinh-punish lc22-ctp 5bbd551e (covers D1+D4 slot), gates running.
 - ~15:35Z RV-KK41: kit-g4-r2 1e4db52c SMALL FAIL (dead-close 56→1–2, opener-specific path remains; perf PASS). Goes to KK44 (161).
 - ~15:46Z RV-ACT-MERGE BIG PASS act-merge-ALL 03e9c9d2 (FF from aa37de21; 157 → 85 action names; NAME table rv-act-merge.md fbe794ed) → LC22 stage+gate → READY TO PUSH → MAIN FF-push → NAME table to sếp.
+- ~15:52Z OB-NGOAICUNG-3b LOOK READY r5 8aaac5ac (favour-at-home Sổ ghi fix + 3 clean quickchecks) → MAIN LOOK PASS (text-only) → RV-OB-NGOAICUNG-3 BIG review (+ wider: other non-palace roads). 3b ctx 29 % → successor via 161 if r6 needed.
