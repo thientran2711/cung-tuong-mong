@@ -43,6 +43,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
      const G=new Set(Object.values(typeof KCG==='object'?KCG:{}));const D=deck.map((a,j)=>[a,j]).filter(([a])=>(!G.size||G.has(a.g))&&!a.done&&!a.lock&&can(cardCost(a))&&canPay(a));if(D.length&&Math.random()<.7){act(D[Math.floor(Math.random()*D.length)][1]);continue}
      if(Math.random()<.2){const ks=Object.keys(KCPL).filter(k=>!kcGoWhy(k));if(ks.length){kcGo(ks[Math.floor(Math.random()*ks.length)]);render();continue}}
      nextBuoi()}catch(e){out.push({t:'ERR',tx:e.message})}}
+   try{render()}catch(e){}/* the feed as she sees it after a repaint */
    const nt=(typeof kitNoticeList==='function'?kitNoticeList():[]).map(x=>String((x.line||'')+' | '+(x.text||'')).replace(/<[^>]+>/g,''));
    const lg=(S.logs||[]).slice(0,Math.min(150,Math.max(0,(S.logSeq||0)-L0))).map(x=>String(x).replace(/<[^>]+>/g,''));return{d:out,log:lg,nt,stillKc:isKc(),turn:S.turn}},NP);
    R.surf['ev-dialogs']=R.ev.d.map(x=>`«${x.t}» [${x.who}] ${x.tx} {${x.opts}}`).join(' ‖ ');R.surf['ev-log']=R.ev.log.join(' ‖ ');R.surf['ev-notice']=R.ev.nt.join(' ‖ ')}

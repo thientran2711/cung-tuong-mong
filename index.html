@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"45daa796+","t":"2026-11-26T00:48Z","c":"OB-NGOAICUNG: report gates final","b":"94a67cf27f17","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"433ea132+","t":"2026-11-26T01:14Z","c":"OB-NGOAICUNG part 2: home tab names (KCTABS), Tin bao place gate, notice sweep","b":"61a661396f5c","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -93824,9 +93824,9 @@ body.kdlg-on #kntchip,body.kbk-open #kntchip{visibility:hidden!important}`;docum
    into ONE kitNotice (kind "know"): one fact = its own line; several = «Ngươi biết thêm N điều» + every line in the «Tin báo» panel. Same key in one batch =
    one fact (the richer pri wins; a Sổ note never doubles the trait it came from). Never blocks play; plain cổ trang words, no %. */
 const KB={m:new Map(),t:0,n:0};
-function kitKnow(o){try{if(!o||!o.text)return;const k=String(o.key||o.text),p=o.pri|0,ex=KB.m.get(k);if(!ex||p>=ex.pri)KB.m.set(k,{text:plain(o.text),pri:p});if(!KB.t)KB.t=setTimeout(kitKnowFlush,0)}catch(e){console.error("kitKnow",e)}}
-function kitKnowFlush(){try{if(KB.t){clearTimeout(KB.t);KB.t=0}const L=[...KB.m.values()].map(x=>x.text);KB.m.clear();if(!L.length)return null;
- return kitNotice({id:"know:"+Date.now()+":"+(++KB.n),kind:"know",line:L.length===1?L[0]:`Ngươi biết thêm ${L.length} điều`,text:L.join(" · "),items:L,again:true})}catch(e){console.error("kitKnowFlush",e);return null}}
+function kitKnow(o){try{if(!o||!o.text)return;const k=String(o.key||o.text),p=o.pri|0,ex=KB.m.get(k);if(!ex||p>=ex.pri)KB.m.set(k,{text:plain(o.text),pri:p,own:window.__kcActing>0||!!(ex&&ex.own)});if(!KB.t)KB.t=setTimeout(kitKnowFlush,0)}catch(e){console.error("kitKnow",e)}}
+function kitKnowFlush(){try{if(KB.t){clearTimeout(KB.t);KB.t=0}const V=[...KB.m.values()],own=V.some(x=>x.own);const L=V.map(x=>x.text);KB.m.clear();if(!L.length)return null;
+ return kitNotice({id:"know:"+Date.now()+":"+(++KB.n),kind:"know",own,line:L.length===1?L[0]:`Ngươi biết thêm ${L.length} điều`,text:L.join(" · "),items:L,again:true})}catch(e){console.error("kitKnowFlush",e);return null}}
 /* kitKnowMany([{key,text,pri}…]) = the call for a LIST of things learned at once (the sắc phong news of SELSCENE: one line per girl «<tên> nay là <phẩm>»): all into the same batch, flushed NOW → ONE notice «Ta biết thêm N điều» (returns it) */
 function kitKnowMany(list){try{for(const x of list||[])kitKnow(x);return kitKnowFlush()}catch(e){console.error("kitKnowMany",e);return null}}
 try{const l0=log;log=window.log=function(h){return l0.call(this,kitNoUnk(h))}}catch(e){}
@@ -96569,16 +96569,21 @@ window.placeLogOk=placeLogOk;
    answer in a dialog: mua tin, nhờ người dò la, viết thư vào cung … — window.__kcActing, kept a moment for the batched «biết thêm» flush);
    by itself no palace happening, palace acquaintance, «xưng danh», lật thẻ, or the empty «… vẫn ở Khuê phòng. Không gặp ai.» filler. */
 const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài/;
-function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;if(window.__kcActing>0||sp.own){sp.own=1;return true}const k=String(sp.kind||"");
- if(k==="tin"||k==="flip"||k==="know")return false;const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
- if(k==="close"&&/Không gặp ai/.test(t))return false;return !PLACE_NOTE_RE.test(t)}catch(e){return true}}
+function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;const k=String(sp.kind||"");const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
+ /* never at home, whoever acts: the palace tai-mắt feed (tin), lật thẻ (flip), the stay-filler of a new buổi (close) */
+ if(k==="tin"||k==="flip"||(k==="close"&&/vẫn ở .*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?$/.test(t)))return false;
+ if(window.__kcActing>0||sp.own){sp.own=1;return true}
+ if(k==="know")return false;return !PLACE_NOTE_RE.test(t)}catch(e){return true}}
 window.placeNoteOk=placeNoteOk;
 /* notices already in the feed when she is (or stays) at home — made in the palace world's own tick, before the home road began, or by a path that
    does not pass kitNotice — are swept by the same rule on every render (her own acts' notices carry own=1 and stay) */
 function placeNoteSweep(){try{if(road8()!=="kc"||typeof kitNoticeList!=="function"||typeof kitNoticeDrop!=="function")return;
  for(const x of kitNoticeList())if(x&&x.id!=null&&!placeNoteOk(x))kitNoticeDrop(x.id)}catch(e){console.error("placeNoteSweep",e)}}
 window.placeNoteSweep=placeNoteSweep;
-(function(){const own=f=>function(){window.__kcActing=(window.__kcActing||0)+1;try{return f.apply(this,arguments)}finally{setTimeout(()=>{window.__kcActing--},0)/* same task + its 0-ms flushes (kitKnow) only */}};
+(function(){const own=f=>function(){window.__kcActing=(window.__kcActing||0)+1;try{return f.apply(this,arguments)}finally{window.__kcActing--/* only what her act does synchronously; the batched «biết thêm» keeps the own mark (jnotice kitKnow) */}};
+ /* time moving on (a new buổi, the palace world's own turn) is never her act, even when one of her cards spends the last khắc */
+ const notOwn=f=>function(){const k=window.__kcActing||0;window.__kcActing=0;try{return f.apply(this,arguments)}finally{window.__kcActing=k}};
+ for(const n of ["nextBuoi","kcW"])if(typeof window[n]==="function"||typeof globalThis[n]==="function"){const f0=globalThis[n];const w=notOwn(f0);if(n==="nextBuoi")nextBuoi=w;else kcW=w;window[n]=w}
  if(typeof act==="function"){const a0=act;act=own(a0);window.act=act}if(typeof chooseM==="function"){const c0=chooseM;chooseM=own(c0);window.chooseM=chooseM}
  /* kitNotice (jnotice, the kit notice feed) asks placeNoteOk itself: its own module calls it from inside, so no outside wrapper could reach them */})();
 (function(){if(typeof kcW!=="function")return;const w0=kcW;kcW=function(){window.__kcWorld=(window.__kcWorld||0)+1;try{return w0.apply(this,arguments)}finally{window.__kcWorld--}}})();
@@ -99011,7 +99016,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="94a67cf27f17";window.CTM_BUILD=BUILD;
+const BUILD="61a661396f5c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

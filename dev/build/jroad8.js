@@ -83,16 +83,21 @@ window.placeLogOk=placeLogOk;
    answer in a dialog: mua tin, nhờ người dò la, viết thư vào cung … — window.__kcActing, kept a moment for the batched «biết thêm» flush);
    by itself no palace happening, palace acquaintance, «xưng danh», lật thẻ, or the empty «… vẫn ở Khuê phòng. Không gặp ai.» filler. */
 const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài/;
-function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;if(window.__kcActing>0||sp.own){sp.own=1;return true}const k=String(sp.kind||"");
- if(k==="tin"||k==="flip"||k==="know")return false;const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
- if(k==="close"&&/Không gặp ai/.test(t))return false;return !PLACE_NOTE_RE.test(t)}catch(e){return true}}
+function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;const k=String(sp.kind||"");const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
+ /* never at home, whoever acts: the palace tai-mắt feed (tin), lật thẻ (flip), the stay-filler of a new buổi (close) */
+ if(k==="tin"||k==="flip"||(k==="close"&&/vẫn ở .*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?$/.test(t)))return false;
+ if(window.__kcActing>0||sp.own){sp.own=1;return true}
+ if(k==="know")return false;return !PLACE_NOTE_RE.test(t)}catch(e){return true}}
 window.placeNoteOk=placeNoteOk;
 /* notices already in the feed when she is (or stays) at home — made in the palace world's own tick, before the home road began, or by a path that
    does not pass kitNotice — are swept by the same rule on every render (her own acts' notices carry own=1 and stay) */
 function placeNoteSweep(){try{if(road8()!=="kc"||typeof kitNoticeList!=="function"||typeof kitNoticeDrop!=="function")return;
  for(const x of kitNoticeList())if(x&&x.id!=null&&!placeNoteOk(x))kitNoticeDrop(x.id)}catch(e){console.error("placeNoteSweep",e)}}
 window.placeNoteSweep=placeNoteSweep;
-(function(){const own=f=>function(){window.__kcActing=(window.__kcActing||0)+1;try{return f.apply(this,arguments)}finally{setTimeout(()=>{window.__kcActing--},0)/* same task + its 0-ms flushes (kitKnow) only */}};
+(function(){const own=f=>function(){window.__kcActing=(window.__kcActing||0)+1;try{return f.apply(this,arguments)}finally{window.__kcActing--/* only what her act does synchronously; the batched «biết thêm» keeps the own mark (jnotice kitKnow) */}};
+ /* time moving on (a new buổi, the palace world's own turn) is never her act, even when one of her cards spends the last khắc */
+ const notOwn=f=>function(){const k=window.__kcActing||0;window.__kcActing=0;try{return f.apply(this,arguments)}finally{window.__kcActing=k}};
+ for(const n of ["nextBuoi","kcW"])if(typeof window[n]==="function"||typeof globalThis[n]==="function"){const f0=globalThis[n];const w=notOwn(f0);if(n==="nextBuoi")nextBuoi=w;else kcW=w;window[n]=w}
  if(typeof act==="function"){const a0=act;act=own(a0);window.act=act}if(typeof chooseM==="function"){const c0=chooseM;chooseM=own(c0);window.chooseM=chooseM}
  /* kitNotice (jnotice, the kit notice feed) asks placeNoteOk itself: its own module calls it from inside, so no outside wrapper could reach them */})();
 (function(){if(typeof kcW!=="function")return;const w0=kcW;kcW=function(){window.__kcWorld=(window.__kcWorld||0)+1;try{return w0.apply(this,arguments)}finally{window.__kcWorld--}}})();
