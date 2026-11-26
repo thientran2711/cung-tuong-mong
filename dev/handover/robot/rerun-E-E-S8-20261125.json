@@ -43,6 +43,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random1-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random1-moments.md"
+  },
+  {
+   "life": "E-S8-bd_san-R7-skilled1",
+   "origin": "bd",
+   "road": "bd_san",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 2632893771,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "4d7a22c6 (resumed through 69e41729…8dc395ba)"
+   },
+   "ending": "Hồng nhan bạc mệnh — Hoàng thượng băng hà năm 12, Tân Thái hậu ban lụa trắng (tuẫn táng), thọ 31",
+   "age": 30,
+   "buoi": 1786,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_san-R7-skilled1-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_san-R7-skilled1-moments.md"
   }
  ],
  "parked": [
