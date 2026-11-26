@@ -26,15 +26,17 @@ function kitTam(standin){return standin?`<span class="ktam" role="note" title="T
       in the first corner of its picture box (top-right, top-left, bottom-right, bottom-left) where it covers no visible text, button (the stage rail icons too) or name tag;
       the stage calls it after each paint (renderStage) and on resize. No free corner: it stays top-right (never moved out of its picture). */
 function kitTamFit(root){try{const T=[...(root||document).querySelectorAll(".ktam")].filter(t=>t.offsetParent);if(!T.length)return;
- const W=[...document.querySelectorAll("h1,h2,h3,button,.rt1,.rmsg,[class*=tag],[class*=name],b,span,small,a,label")].filter(e=>e.offsetParent&&!e.classList.contains("ktam")&&!e.closest(".ktam")&&((e.textContent||"").trim()||e.tagName==="BUTTON")&&getComputedStyle(e).visibility!=="hidden");
+ /* only what sits over the chip's own picture box (light: no whole-page scan, no style reads) */
+ const box=T[0].parentElement||document.body;
+ const W=[...box.querySelectorAll("h1,h2,h3,button,.rt1,.rmsg,[class*=tag],[class*=name],b,span,small,a,label")].filter(e=>!e.classList.contains("ktam")&&!e.closest(".ktam")&&((e.textContent||"").trim()||e.tagName==="BUTTON")&&e.offsetParent);
  const hit=(a,e)=>{if(e.contains&&e.contains(a.el))return false;const b=e.getBoundingClientRect();return b.width>0&&b.height>0&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top};
  for(const t of T){const C=["","ktam-tl","ktam-br","ktam-bl"];let ok="";
   for(const c of C){t.classList.remove("ktam-tl","ktam-br","ktam-bl");if(c)t.classList.add(c);const r=t.getBoundingClientRect();const a={el:t,left:r.left,right:r.right,top:r.top,bottom:r.bottom};
    if(!W.some(e=>hit(a,e))){ok=c;break}}
   t.classList.remove("ktam-tl","ktam-br","ktam-bl");if(ok)t.classList.add(ok)}}catch(e){console.error("kitTamFit",e)}}
 window.kitTamFit=kitTamFit;
-(function(){const go=()=>requestAnimationFrame(()=>kitTamFit(document.getElementById("stage")));
- if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const x=r0.apply(this,arguments);go();setTimeout(go,400);return x}}
+(function(){let q=0;const go=()=>{cancelAnimationFrame(q);q=requestAnimationFrame(()=>kitTamFit(document.getElementById("stage")))};
+ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const x=r0.apply(this,arguments);if(document.querySelector("#stage .ktam")){go();setTimeout(go,400)}return x}}
  addEventListener("resize",go)})();
 /* ONE place that maps an engine need[{t,ok,w?}] (the same shape as the Cần row / data-kneed) to the greyed option:
    the first unmet need becomes the reason chip ("thiếu …"), w (or the item/evidence/rank default) is the "opens again when" line.
