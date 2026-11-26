@@ -195,3 +195,15 @@ Still open (unchanged code in cd6eff47 — jtoil, jslap, jtds, j5, j83 untouched
 4. Law 11 — «Học nhanh» family: jtds.js:123 log «Để trời định: không ra thành phẩm.»; j5.js:14 + j83.js:141 lesson `#mgskip` still «Bỏ qua» (or prove unreachable + delete); scan + before/after table.
 New:
 5. Law 11 (co-op both seats) — the new plant «Giao … chăm» is an inline click branch (jshelf `k==="give"`) that mutates e.pc/e.pm directly; its siblings `shelfPlantQuick` and `petcMaid` are host-routed through jcoopthinf `reg9`. Fix: move it into one function (e.g. `shelfPlantGive()`) and `reg9("shelfPlantGive",[],{mine:()=>true})` like shelfPlantQuick; one co-op check that a guest's give lands on the host's copy once.
+
+## BUILD #4 (worker D5 #2) — BIG rv FAIL 8469aa07 findings 1–4 fixed + LIVE 6b5d3d05 merged — SSK review/mg-trim @ 3385b0f3
+| # | finding | fix (file) | test |
+|---|---|---|---|
+| 1 | pet/plant: sếp ruled ~05:45Z | BAL.trim.care dropped; boards as LIVE; «Chăm nhanh» (KIT_QUICK_NAMES) + logs; plants «Giao … chăm» (cd6eff47: jbal2, jpetcare, jshelf, j79, MINIGAMES.md) | mg-trim 9 (real taps) |
+| 2 | «Tự tay» score lacked rank demand | toilFinish: score −= BAL.toil.rkDemand × rank (same as one tap + NPC toilNpcPlay) + row «Phẩm vị đòi hỏi» (kit chip) (jtoil) | mg-trim 10(2): rank 0 → 3 = −6 |
+| 3 | slapNpcDraw skipped her hand; fallback gap from S | a!==S dropped (her slap = the same hand-aware draw); slapNpcTier(a,t) gap = rkOf(a)−rkOf(t‖S); callers pass the target (jslap doAct, jlooks throw, jdf class B) | mg-trim 10(3) |
+| 4 | «Học nhanh» family | before → after: j5 #mgskip «Bỏ qua» → «Học nhanh» · j83 #mgskip «Bỏ qua» → «Học nhanh» · jtds log «Để trời định:» → «Học nhanh:» · jtd n «Để trời định» → «Học nhanh» (+ result row) · j83 playArt ×4 + jrcp already «Học nhanh» · care: jpetcare/jshelf «Để trời định» → «Chăm nhanh» (n + logs) · no other learning quick label/log in j5/j83/jrcp/jtd/jtds/j85/jwkg | mg-trim 10(4), mg-skip (j5 overlay + Tu đức read «Học nhanh») |
+LIVE 6b5d3d05 merged (db29521a): conflicts only on the lesson quick lines (LIVE's kStepW progress words kept, named «Học nhanh») + built files (rebuilt). mg-skip-audit regexes accept LIVE's words.
+Tests @3385b0f3: mg-trim 10 groups ALL PASS Fold 755x1000@2 + iPad 1180x820@2 (real taps) · mg-skip-audit 21/21 · mg-skip PASS · makeup-set ALL PASS · delegate-nomg PASS · mg-ready-guide 9/9 · ag-mgcal PASS · mg-back 11/12 (#1 = LIVE too).
+VIDEOS re-shot (same URLs): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm
+~94% xong / ~90% chơi được (chờ người duyệt).
