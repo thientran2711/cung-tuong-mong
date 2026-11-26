@@ -752,20 +752,29 @@ BAL.entry.phuc={lv:[11,12,5],sp:4,max:10,duc:[30,30],pow:[40,30],foul:{od:40,oan
      thi   contest: +v phần of talent (SC7[kind].f, so the shown odds and the real score agree)
      suc   Sức +v on each night's sleep (j76sleep)
      don   rumour resistance: a rumour (ACT.rumor) against the wearer has v fewer odds (oRumor) */
-BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
- B:{sac:{v:[1,1,2]},danh:{v:[1,1,2]},sung:{v:[1,1,2]},duc:{v:[1,1,2]},tai:{v:[1,1,2]},tamco:{v:[1,1,2]},
-  gSung:{v:[20,14,10]},gDanh:{v:[20,14,10]},gBac:{v:[12,8,6]},gTren:{v:[12,8,6]},gHau:{v:[12,8,6]},gTrung:{v:[10,7,5]},
-  phuc:{v:[2,3,4]},thai:{v:[0,1,2]},nghe:{v:[15,25,35]},thi:{v:[2,3,5]},suc:{v:[1,2,3]},don:{v:[5,8,12]}},
+/* TITLE-BAL (owner OD 26/11 ~18:20Z «TITLE REBALANCE», ~18:50Z (8) «6 recs approved; top tier = beauty + small bonus; lower tiers khó vừa vừa»;
+   robot dev/measure/title-bal-bot.js, table dev/handover/reports/title-bal.md): the old flat 1 / 5 / 10 ladder is gone; every title's steps come from
+   how often its deed really happens in a robot life (median per life): step 1 ≈ a season-plus of steady play at that deed, top = a life's devotion.
+   q.wk = the least work tier (WTIER: 0 Thường, 1 Khá, 2 Tinh xảo, 3 Tuyệt phẩm) that counts for the «work» titles (quality, not tries);
+   note.per = new-title panels at most per buổi (the rest wait for the next buổi: never a pile in one buổi);
+   cond = the condition titles: han.rank = «Sen nở trong bùn» (first place at this rank or below, or while punished), th.v = «Thái hậu ưu ái» (her liking ≥ v
+   for n months in a row). «Sớm viếng chiều thăm» counts DAYS IN A ROW with a Thỉnh an (a streak), not tries.
+   Bonus v per step [s1,s2,s3]: s2 clearly above s1 (the harder bar pays more), s3 ≈ s2 + a little (the top step is mostly beauty: a higher colour tier). */
+BAL.dh={n0:[2,6,12],step:2,artLv:[4,5],q:{wk:2},note:{per:1},cond:{han:{rank:1},th:{v:60}},
+ B:{sac:{v:[1,2,2]},danh:{v:[1,2,2]},sung:{v:[1,2,2]},duc:{v:[1,2,2]},tai:{v:[1,2,2]},tamco:{v:[1,2,2]},
+  gSung:{v:[20,12,10]},gDanh:{v:[20,12,10]},gBac:{v:[12,7,6]},gTren:{v:[12,7,6]},gHau:{v:[12,7,6]},gTrung:{v:[10,6,5]},
+  phuc:{v:[1,2,3]},thai:{v:[0,1,1]},nghe:{v:[10,20,25]},thi:{v:[1,2,3]},suc:{v:[1,2,2]},don:{v:[4,8,10]}},
  T:{w_doden:{b:3,ch:["tamco","phuc","thi"]},w_tho:{b:3,ch:["tai","danh","thi"]},w_doi:{b:3,ch:["tai","gDanh","thi"]},w_dan:{b:3,ch:["sac","nghe","thi"]},
   w_mua:{b:3,ch:["sac","danh","thi"]},w_hat:{b:3,ch:["sac","gTren","thi"]},w_theu:{b:3,ch:["danh","gBac","thi"]},w_kim:{b:3,ch:["sac","phuc","thi"]},
   w_hoa:{b:3,ch:["sac","gHau","thi"]},w_ve:{b:3,ch:["tai","danh","thi"]},w_co:{b:3,ch:["tamco","phuc","thi"]},w_banh:{b:3,ch:["sung","gTren","thi"]},
   w_ban:{b:3,ch:["suc","danh","thi"]},w_dauho:{b:3,ch:["phuc","gHau","thi"]},w_huong:{b:3,ch:["sac","sung","thi"]},
-  meta:{b:6,st:1,n:[3,6,10],ch:["gSung","gDanh","phuc"]},podium:{b:2,ch:["danh","thi"]},
-  nights:{b:2,n:[1,10,30],ch:["sung","gSung","thai"]},kids:{b:3,n:[1,3,5],ch:["danh","gTren","thai"]},
-  a_thinh:{b:1,n:[5,20,50],ch:["duc","gTren"]},a_doc:{b:1,n:[5,20,50],ch:["tai","nghe"]},a_nhan:{b:1,n:[5,20,50],ch:["sac","suc"]},
-  l_cam:{b:2,st:1,ch:["suc","nghe"]},l_ky:{b:2,st:1,ch:["tamco","nghe","don"]},l_thi:{b:2,st:1,ch:["tai","nghe"]},l_hoa:{b:2,st:1,ch:["danh","nghe"]},
-  l_vu:{b:2,st:1,ch:["sac","nghe"]},l_y:{b:2,st:1,ch:["suc","nghe"]},l_theu:{b:2,st:1,ch:["gBac","nghe"]},l_nau:{b:2,st:1,ch:["gTrung","nghe"]},
-  m_mon:{b:1,ch:["sung","gTrung"]},m_kinh:{b:1,ch:["duc","don"]},m_theu:{b:1,ch:["gBac","sac"]},m_tranh:{b:1,ch:["tai","danh"]},m_khuc:{b:1,ch:["sac","gHau"]}},
+  meta:{b:6,st:1,n:[3,6,10],ch:["gSung","gDanh","phuc"]},podium:{b:2,n:[3,12,30],ch:["danh","thi"]},
+  nights:{b:2,n:[5,25,80],ch:["sung","gSung","thai"]},kids:{b:3,n:[2,4,6],ch:["danh","gTren","thai"]},
+  a_thinh:{b:1,n:[12,36,90],ch:["duc","gTren"]},a_doc:{b:1,n:[15,50,120],ch:["tai","nghe"]},a_nhan:{b:1,n:[15,50,120],ch:["sac","suc"]},
+  l_cam:{b:4,st:1,ch:["suc","nghe"]},l_ky:{b:4,st:1,ch:["tamco","nghe","don"]},l_thi:{b:4,st:1,ch:["tai","nghe"]},l_hoa:{b:4,st:1,ch:["danh","nghe"]},
+  l_vu:{b:4,st:1,ch:["sac","nghe"]},l_y:{b:4,st:1,ch:["suc","nghe"]},l_theu:{b:4,st:1,ch:["gBac","nghe"]},l_nau:{b:4,st:1,ch:["gTrung","nghe"]},
+  m_mon:{b:1,n:[4,12,30],ch:["sung","gTrung"]},m_kinh:{b:1,n:[4,12,30],ch:["duc","don"]},m_theu:{b:1,n:[4,12,30],ch:["gBac","sac"]},m_tranh:{b:1,n:[4,12,30],ch:["tai","danh"]},m_khuc:{b:1,n:[4,12,30],ch:["sac","gHau"]},
+  c_han:{b:5,n:[1],ch:["danh","thi"]},c_th:{b:3,n:[6,18,36],ch:["gTren","duc"]}},
 /* PHASE 2 (jdh2, review/title-sys2; owner 16/11 13:00Z / 13:20Z (2)(4)(5) / 13:30Z (3)):
    hieu  the Emperor's hiệu (Thục, Hiền… TITLES): rank ≥ minRank (3 = Tần), Sủng ≥ RANKS[rank].s + sung, Danh ≥ RANKS[rank].d + danh, gapM months
          at the rank; eligible → p % each month (bestow on son / promo / contest: at once); Danh +danhG on the grant. Book + seal come with it.
@@ -2023,12 +2032,13 @@ BAL.dc={on:1,
    (+ (af − mid) × k), writeBac / writeAf / lostDanh / askAf = the two «Thư nhà» acts, know = j61 intel depth, keep = letters listed, gifts = items home sends.
    ld = «lời đồn cũ» event: p % a month; own (admit) / wit (mother's letter, witBac, witO odds, foe Danh −witFoe and Oán witOan, lose Danh −witLose) / wait.
    Law 2 (review r1): writeBac 5→15, askAf 3→1 — writing (af +, a letter item Sức+10/Đức+2, true intel) dominated asking (af −, one gift item worth 6–30 bạc).
-   title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives). */
+   title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives); TITLE-BAL: ONE entry title only — Quý nhân+ → «Khuê tú danh môn»,
+   else «Trâm hoa ngự ban» only with home Danh ≥ tuyenDanh (never just for walking in). */
 BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
  carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
  home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
  ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
- title:{tier:4,rare:6,quyRank:2,carry:1}};
+ title:{tier:4,rare:6,quyRank:2,carry:1,tuyenDanh:30}};
 /* jkcco (GAP OR13 co-op half, review/outside-coop; OUTSIDE_PLAN §13): the friend at home <-> the friend in the palace, both ways.
    letter: o odds, suc Sức price, bond tình hảo hữu (S.rl[friend]) when kept, lost = Danh (palace) / Lời đồn (home) when it fails, know = j61 level,
        burn = Tâm cơ for «Đọc xong đốt đi» (law 2, review r1).
