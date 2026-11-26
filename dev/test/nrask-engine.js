@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');
  await g.waitForFunction(()=>typeof start==='function'&&typeof nrAskPick==='function'&&window.NRASK,null,{timeout:0});await g.waitForTimeout(1500);
  const FS=require('fs'),PA=require('path');const BD=PA.join(__dirname,'..','build');const NRF=FS.readdirSync(BD).filter(f=>/^jnrask.*\.js$/.test(f)).sort();
  for(const f of NRF)await g.addScriptTag({content:FS.readFileSync(PA.join(BD,f),'utf8')});console.log('jnrask files scanned:',NRF.join(' '));
- const R=await g.evaluate(()=>{const out={};document.getElementById('title').hidden=true;quiet=true;window.__forceOrigin='thd';start();quiet=false;Q.length=0;
+ const R=await g.evaluate(()=>{window.__sqoff=1;/* sideq-trim: content test, any asker (the rank gate has its own test) */const out={};document.getElementById('title').hidden=true;quiet=true;window.__forceOrigin='thd';start();quiet=false;Q.length=0;
   const roads=Object.keys(ROAD14).concat(Object.keys(NRM));
   /* 1. kinds */
   const seen={};for(const r of roads)for(let n=BAL.road.first;n<=BAL.road.last;n++){const A=nrCh(r,n);if(!A)continue;for(let t=0;t<6;t++){const k=nrKind(A);seen[k]=(seen[k]||0)+1}}
