@@ -99,3 +99,8 @@ PRIORITY #1 CHECK ('facHTML Lập phe'): reused the worker's check (OD 0 | ledge
 | shots | fac-roads + fac-empty, Fold 755x1000@2 + iPad 1180x820@2, looked at: kit buttons, 3-road line, no overflow or cut text. CDN img/_review/parity-facfix/ wiped (4 objects) |
 Nit (no action): §2 quotes «thân với ta» while the source says «ngươi»; the screen shows «ta» (pronoun layer).
 **VERDICT: PASS 53cc671e** (FF on origin/main 1dcb373e). No reviewer fixes; no -r1 branch.
+
+### Review update (13:20Z) — **PASS 1d0f032d** (supersedes 53cc671e; LIVE moved to aa37de21)
+1d0f032d = merge of LIVE origin/main aa37de21. Its source diff vs aa37de21 is byte-identical to the reviewed one (j10, jagacts3, 4 tests). FF from LIVE confirmed. Rebuilt here: only the build-info line (CTM_BI) differs → own build.
+Gates on 1d0f032d: coop-e2e 143/143 (co-op first) · fac-roads-play ALL PASS · fac-parity-play ALL PASS · role-parity-drift2-play ALL PASS · ag-par3 seed 21 + unseeded ALL PASS. §4 stays out of this branch per Foreman D (routed to MAIN 157).
+**VERDICT: PASS 1d0f032d** (FF on origin/main aa37de21).
