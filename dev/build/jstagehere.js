@@ -55,8 +55,8 @@ window.stWarned=warned;
 function chip(c){try{if(typeof kitNotice!=="function")return null;const k=key(c);let pic="";try{const n=SCIMG[placeOf(c.k).sc];pic=n?`img/${n}.webp`:""}catch(e){}
  const w=typeof homeWay==="function"?homeWay():null,way=!!(w&&!w.at&&w.ok)&&!c.lim;
  /* KIT §42.2a (KK44): hold = the chip stays up while the notice holds (back after another notice's chip), pulse = blinks, tone red = the grace;
-    the chip's tap opens «Tin báo» with ONE row «Về phòng · N khắc» (go = homeGo) */
- return kitNotice({id:"close:"+k,kind:"close",line:short(c),text:line(c),pic,sticky:true,hold:!c.lim,pulse:!c.lim,tone:c.now?"red":"",go:way?()=>{try{if(typeof homeGo==="function"&&homeGo()&&typeof render==="function")render()}catch(e){}}:null,goLabel:way?w.label:""})}catch(e){return null}}
+    chipGo = the chip reads «<line> · Về phòng · N khắc» and a tap walks her home (go = homeGo); the «!» box opens the panel */
+ return kitNotice({id:"close:"+k,kind:"close",line:short(c),text:line(c),pic,sticky:true,hold:!c.lim,pulse:!c.lim,tone:c.now?"red":"",chipGo:way,go:way?()=>{try{if(typeof homeGo==="function"&&homeGo()&&typeof render==="function")render()}catch(e){}}:null,goLabel:way?w.label:""})}catch(e){return null}}
 function tick(){try{const c=stClose();const kk=c?key(c):"";
  /* a closing notice that no longer holds (she left, the place opened, a new buổi) leaves the box */
  try{if(typeof kitNoticeList==="function")for(const x of kitNoticeList())if(x.id.indexOf("close:")===0&&x.id!=="close:"+kk)kitNoticeDrop(x.id)}catch(e){}

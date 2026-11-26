@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
   for(let i=0;i<8&&S.buoi===b0;i++){try{kmBusy=false;KMQ.length=0}catch(e){}try{nextBuoi()}catch(e){}await new Promise(r=>setTimeout(r,250));if(S.buoi===b0){Q.length=0;document.getElementById('modal').hidden=true}}
   await new Promise(r=>setTimeout(r,400));Q.length=0;document.getElementById('modal').hidden=true;render()});
  await shot('2-grace-red',9000);
- /* 3: tap the chip (chipGo → home); without the kit part: the panel opens and its go row is tapped */
+ /* 3: tap the chip (chipGo → home, KIT §42.2a); a panel go row is tapped only if the panel opened instead */
  const how=await g.evaluate(()=>{const c=document.getElementById('kntchip');if(c&&!c.hidden){c.click();return "chip"}if(typeof homeGo==="function"&&homeGo()){render();return "homeGo"}return "none"});
  await sleep(500);const pan=await g.evaluate(()=>{const r=[...document.querySelectorAll('button')].find(b=>/^Về phòng · \d+ khắc/.test(b.textContent)&&b.offsetParent&&!b.closest('header'));if(r){r.click();return 1}return 0});
  await shot('3-tap-home');

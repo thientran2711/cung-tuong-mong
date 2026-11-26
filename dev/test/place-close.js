@@ -14,7 +14,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
  await g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;document.getElementById('modal').hidden=true;S.rank=Math.max(S.rank,2);render();
   const s=document.createElement('style');s.textContent='#klife,#kroul,#kload,.kmov,.kmfls,#kpodov,#dawn,.krbox{display:none!important}';document.head.appendChild(s);
   S.emp.traits=S.emp.traits.filter(t=>t!=="nongnay"&&t!=="nhantu");
-  window.__N=[];const o=window.kitNotice;window.kitNotice=function(t){const r=o.apply(this,arguments);try{if(t&&typeof t==="object")window.__N.push({id:t.id,line:t.line,text:t.text,state:t.tone==="red"?"late":t.pulse?"pulse":"",hold:!!t.hold,go:typeof t.go==="function",goLabel:t.goLabel||""})}catch(e){}return r};
+  window.__N=[];const o=window.kitNotice;window.kitNotice=function(t){const r=o.apply(this,arguments);try{if(t&&typeof t==="object")window.__N.push({id:t.id,line:t.line,text:t.text,state:t.tone==="red"?"late":t.pulse?"pulse":"",hold:!!t.hold,go:typeof t.go==="function",chipGo:!!t.chipGo,goLabel:t.goLabel||""})}catch(e){}return r};
   window.__cl=()=>{Q.length=0;document.getElementById('modal').hidden=true};
   window.__turn=async(force)=>{const b0=S.buoi,cards=[];const R0=Math.random;if(force!=null)Math.random=()=>force;
    try{for(let i=0;i<8&&S.buoi===b0;i++){try{kmBusy=false;KMQ.length=0}catch(e){}try{nextBuoi()}catch(e){}await new Promise(r=>setTimeout(r,250));if(S.buoi===b0)__cl()}}finally{Math.random=R0}
@@ -59,7 +59,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
    out.push({k,b,t,after:{place:S.place,conf:S.confined||0,dd:S.danh-d0,Q:Q.length}});break}
   return out});
  const R={I,A,B0,B,BN,C1,C2,D:Dd,E,F,G:Gg,H,errs:errs.slice(0,5)};const fail=[];
- const a=A.N[A.N.length-1];if(!a||a.line!=="Nơi này sắp đóng cửa, mời tiểu chủ rời đi"||a.state!=="pulse"||!a.hold||!a.go||a.goLabel!==A.w.label)fail.push("A last-khắc chip "+JSON.stringify(a));
+ const a=A.N[A.N.length-1];if(!a||a.line!=="Nơi này sắp đóng cửa, mời tiểu chủ rời đi"||a.state!=="pulse"||!a.hold||!a.go||!a.chipGo||a.goLabel!==A.w.label)fail.push("A last-khắc chip "+JSON.stringify(a));
  if(!(B0.carry>0))fail.push("B no spill carry");if(B.buoi!==1||B.place!=="tn"||B.confined||B.cut||B.danh!==B0.d0||B.Q.length||B.modal)fail.push("B punished at the turn / dialog "+JSON.stringify(B));
  if(!B.G||B.G.end!==Math.max(2,B0.carry+1))fail.push("B grace end "+JSON.stringify(B.G));
  const late=BN.find(x=>/^close:/.test(x.id)&&x.state==="late");if(!late||late.line!=="Đã quá giờ, mời tiểu chủ rời đi"||!/khắc ân hạn/.test(late.text))fail.push("B red chip "+JSON.stringify(BN));
