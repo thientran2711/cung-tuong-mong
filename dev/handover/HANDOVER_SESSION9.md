@@ -466,3 +466,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:56Z OWNER (MAIN 166 chat) 3 Game of Dice shots → refs/owner-2611-god/ + OD ORDER (research worker → spec → kit). Asked her: drop flip (info on front) per GoD? Forwarded to MAIN 167.
 - 23:53Z OWNER (166 chat) Game of Dice card-UI study order → GOD-RESEARCH session_01Rc5AsMsPWc1spTKeNmYP4d (sonnet, law 8) → spec → KK51 builds → KIT-STAGE-R7 family. Flip-drop question with sếp (166 asked; rec = drop flip).
 - 23:58Z OWNER: «Ok bỏ lật, làm theo Game of Dice» → OD overwrite of 22:07Z flip rule → MAIN 167.
+- 23:56Z OWNER «Ok bỏ lật, làm theo Game of Dice» (166 OD row) → NO FLIP anywhere; GOD-RESEARCH, KK51, KIT-STAGE-R7, RING-BUILD-7 told. dev/rules has no flip line (22:07Z row lives only in OD).
