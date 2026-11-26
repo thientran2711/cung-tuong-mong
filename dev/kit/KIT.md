@@ -4703,6 +4703,13 @@ Fold 755x1000 + iPad 1180x820, the Hồi kết nhánh dialogs + Đại kết c�
 - Must fit Fold 755x1000 + iPad 1180x820 without scroll (25 people + 2 nameless: 513 → 244 px).
 - Test: `node dev/test/kit-res-fold.js <index.html>` (her rows, ≤3 named with the title person first, one «Hậu cung:» line, no «một vị», Sổ ghi list + real-tap link, fit, kitResultCard).
 
+### 7.4b TITLE NAME RULE — a title never prints «???» / «một vị» (KK47; MAIN LOOK FAIL on kit-resfold: «Yến tiệc mời Đáp ứng ???») — `kitTitleClean` / `KIT_TTL_SEL` (jnotice), run by the name-mask DOM pass (j61 `k61Node`)
+- A TITLE = result card head `.kan`, dialog / panel title `.kptitle`, `h1`–`h4`, old toast head `.rtoast .rt > b`, any `[data-kttl]`.
+- A title never prints «???», «một vị …», «một người …», «chưa quen biết», «undefined» / «null» / «NaN». A person she has not met by name reads by the TITLE her dress shows only («Yến tiệc mời Đáp ứng», «Bái kiến Tần»); a bare unknown person (no title) drops out of the title.
+- Name tags / chips inside a title (`.kname .kname2 .kti .krname .kptag .ktag .kpname .kprank`) keep their «???» tag (OD:L673). Prose keeps the §VANPHONG «một vị …» wording (kitNoUnk) — this rule is for titles only.
+- ONE function for every title builder (no per-caller fix): the j61 DOM pass runs `kitTitleClean` on every title text node after the mask.
+- Test: `node dev/test/kit-title-name.js <index.html>` (unmet consort in resultShow / kitResultCard / dialog title → «… <phẩm>», name tag keeps «???», family scan of every title after 40 quick days; FAILS on 9a2c05f6).
+
 ## 91. kitEndScreen · THE ENDING SCREEN, full screen (owner marks #48 #50 #51, OD 21/11 ~03:56Z / ~04:03Z / ~04:06Z; review/ending-screens) — `dev/build/jend.js` (last module) — KIT READY (art pending: Foreman C)
 Owner (verbatim, ~04:06Z): "bất cứ một cái gì mà kết thúc một cái game, kết thúc một cái kiếp là đều phải có một cái khung đẹp của nó … thay vì là khung nhỏ thì tôi muốn là khung full màn hình luôn … dưới là có cái nền … mỗi một cái nó sẽ có một cái nền khác nhau". #48: white mourning flower (hoa tang) top centre + white drapes down the frame sides; #50: the festive twin (red/gold celebration flowers + festive drapes/garlands) + its own «wow».
 - **91.1 ONE part, no new flow**: the ending dialog that was there (its kit body, figure, buttons, co-op + save behaviour) is SHOWN as a full-screen ceremonial screen. A showModal wrapper marks the card BEFORE the base paints it (`m.cls += "kes kes-<tone> kes-t-<type>"`, so the KIT §84 size fit measures the ending frame) and adds the layers after.
