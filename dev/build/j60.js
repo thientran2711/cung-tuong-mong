@@ -54,11 +54,16 @@ function kitRoleOfFace(f){const rk=String(f.rk||""),rw=String(f.rw||"");let m;
  if(/^kid/.test(rk))return{role:/Công chúa/.test(rw)?"princess":"prince"};
  if(rk==="off")return{role:/Thái y/i.test(rw)?"physician":/thị vệ/i.test(rw)?"guard":/vương gia/i.test(rw)?"royal":/Công tử|nhạc|họa|sứ/i.test(rw)?"man":"official"};
  if(f.ini==="Hoạn")return{role:"eunuch",rank:1};if(f.ini==="Quan")return{role:"official"};if(f.ini==="Y")return{role:"physician"};return{role:"other"}}
+/* KIT §4.3a: she is not yet a palace woman (home road, isKc) — her portrait shows no consort rank sign (gem, crest); the frame stays the plain
+   consort-0 frame until a painted home frame exists (ART REQUEST K-FRAME-HOME). kitNoCrest(f): true when f (face object or person) is HER before the palace. */
+function kitPrePal(){try{return typeof isKc==="function"&&!!isKc()}catch(e){return false}}
+function kitNoCrest(f){try{if(!f||!kitPrePal())return false;if(typeof S!=="undefined"&&(f===S||f.__kp===S))return true;const rk=String(f.rk||"");return !!(f.w&&f.w[0]==="me"&&/(?:^|\s)c\d/.test(rk))}catch(e){return false}}
+window.kitPrePal=kitPrePal;window.kitNoCrest=kitNoCrest;
 /* face object (or person) -> everything the renderer needs */
 function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);if(!r){const x=kitRoleOfFace(f);r=Object.assign({origin:null,sex:(KIT_ROLES[x.role]||KIT_ROLES.other).sex,kid:false},x)}
  const known=f.__kp?kitIsKnown(f.__kp):true;const role=known?r.role:"unknown";let frame,bg,badge=null,emb=null,col,tint=null;
  const rank=r.rank;
- if(role==="player"||role==="consort"){frame=`frame-consort-${rank}`;/* her frame = the consort frame of her rank (owner 11/14); the stage marks her */bg=`bg-consort-${rank}`;badge=`gem-${rank}`;col=kitRankCol(rank);if(role==="player"&&r.origin)emb=`origin-${r.origin}`}
+ if(role==="player"||role==="consort"){frame=`frame-consort-${rank}`;/* her frame = the consort frame of her rank (owner 11/14); the stage marks her */bg=`bg-consort-${rank}`;badge=`gem-${rank}`;col=kitRankCol(rank);if(role==="player"&&r.origin)emb=`origin-${r.origin}`;/* KIT §4.3a (pre-palace, OB-NGOAICUNG): before the palace (isKc: Tiểu thư / Thôn nữ / Công chúa at home) she holds no consort rank → no rank gem, no rank crest (kitNoCrest) */if(role==="player"&&kitPrePal())badge=null}
  else if(role==="eunuch"){const r=cl(rank||0,0,3);frame=`frame-eunuch-${r}`;bg=r>=3?"bg-eunuch-3":"bg-eunuch";badge=`tok-e${r}`;col=tint=kitServCol("eunuch",r)}
  else if(role==="maid"||role==="mama"){/* rank = the maid RUNG; art / frame / badge by its tier (BAL.srvRk.tier, maid-ladder-6) */const r=cl(typeof srkTier==="function"?srkTier(rank||0):rank||0,0,4);frame=`frame-${role}-${r}`;bg=`bg-${role}`;badge=`tok-m${r}`;col=tint=kitServCol("maid",rank||0)}
  else if(role==="cold"){frame="frame-cold";bg="bg-cold";col=KIT_COLD_COL}

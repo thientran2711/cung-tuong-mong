@@ -244,6 +244,14 @@ the portrait, `.kmf` frame on top (`--kfr`). Widths: xs 22 px, sm 32 px, default
 
 Stage strangers: full-body grey silhouettes `img/kit/unknown-fig-f|m|k.webp` (900 px tall, transparent, child padded to adult height).
 
+**4.3a Her portrait before the palace (OB-NGOAICUNG pre-palace, MAIN 156 queue, KK40).** At home (`isKc()`: Tiểu thư / Thôn nữ, the home road
+before tuyển tú / phân cung) she holds NO consort rank, so her portrait carries no rank sign: no rank gem (`kitDecor` badge null) and no rank
+crest (`kitNoCrest(f)` — jk2b pcPort crest step skips her; jhcpor gives no crest headroom when no crest is drawn). One rule for every place her
+frame shows (header, identity card, small mdH avatars, cards, dialog plates — all go through kitDecor / pcPort). The frame stays the plain
+`frame-consort-0` until a painted home frame exists (ART REQUEST K-FRAME-HOME, KIT_REQUESTS). The origin medallion stays (it is her family, not
+a rank). In the palace (`S.kc.inPal`) crest + gem come back. Helpers `kitPrePal()`, `kitNoCrest(f)` (j60). Test `node dev/test/kit-home-frame.js <index.html>`
+(LIVE 4 FAIL → 0). Kit page sample «§4.3a».
+
 ### 4.4 API (j60)
 - `personRoleRank(p)` → `{role, rank, origin, sex, kid}` for any person object (S, consorts, kids, S.emp, S.thO, S.maid, servants, S.court members, S.men, clan officials, công tử, place records `{kind,ref}`).
 - `kitDecor(faceOrPerson)` → frame/bg/badge/emblem URLs, colours, `known`, `label`.

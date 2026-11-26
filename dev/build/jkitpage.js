@@ -74,6 +74,10 @@ KIT_SAMPLES.push(
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
+/* §4.3a her portrait before the palace: the same consort-0 frame, no rank crest and no rank gem (left: in the palace · right: at home) */
+KIT_SAMPLES.push({id:"§4.3a",title:"Her frame in the palace (crest + gem) · at home before the palace (no rank sign)",html:()=>{if(typeof KIT_CREST==="undefined")return"";const f="img/kit/frame-consort-0.webp";
+ const cell=(c,g)=>`<div class="pcp kit" style="width:96px;aspect-ratio:550/1037;position:relative;display:inline-block;margin-right:12px"><span class="kin"><img class="kfr" src="${f}" alt="">${c?KIT_CREST.html(f):""}${g?`<img class="kgem" src="img/kit/gem-0.webp" alt="">`:""}</span></div>`;
+ return `<div class="kitpg-row">${cell(1,1)}${cell(0,0)}</div>`}});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
  `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});
