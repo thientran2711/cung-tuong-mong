@@ -2251,7 +2251,7 @@ BAL.kmus={holdMs:6000};
 /* PUNISH-REASON (review/punish-reason, D1; owner 26/11 ~01:25Z + ~04:15Z): coldMinDays = days (tuần, wk()) in lãnh cung before any release
    (ân xá, đại xá, cầu xin, minh oan — hers and an NPC's); gapDays = no second rank punishment on one person within this many days (it becomes
    cấm túc); fallSung = Sủng lost with a one-rank fall (was the typed 15 in j8 fall); evShow = most evidence lines a notice lists */
-BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:true/* PENDING OWNER (law 16, asked via MAIN 152): NPC release one rank below the old rank; false = old rule (always Đáp ứng) */};
+BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDING OWNER (law 16, asked via MAIN 152): false = today's rule (an NPC always comes back as Đáp ứng); true = release one rank below the old rank */};
 /* CHARGE-EVIDENCE (review/charge-evidence, D4 option A; owner 26/11 ~05:15Z «D4 A» + ~05:35Z find-odds formula, verbatim in OD): evidence is kept
    PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, need = pieces
    to accuse (Hoàng hậu target + queenPlus), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),

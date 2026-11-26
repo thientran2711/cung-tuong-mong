@@ -48,7 +48,9 @@ function punNote(o){if(!S||S.dead)return;const R=punRows(o);const a=punWho(o.by)
  if(typeof kitPanel!=="function"){Q.push({t:PUNK[o.kind]||"Bị phạt",h:`<p>${R.map(r=>`${r[0]}: ${r[1]}`).join("<br>")}</p>`,btn:"Đã rõ"});return}
  kitPanel({kind:"notice",title:o.kind==="giang"?"Bị giáng phẩm":PUNK[o.kind]||"Bị phạt",sub:typeof when==="function"?when():"",subject:a||null,sections:[{h:"",rows:R}],btn:"Đã rõ"})}
 /* LÃNH CUNG STAY: p may leave only after BAL.pun.coldMinDays days inside (an NPC sent there by any road is stamped lazily) */
-function coldStamp(p){if(!p)return;const inn=p===S?!!S.out:!!p.out;if(inn){if(p.coldWk==null)p.coldWk=punNow()}else if(p.coldWk!=null){p.coldWk=null}}
+function coldStamp(p){if(!p)return;const inn=p===S?!!S.out:!!p.out;if(inn){if(p.coldWk==null)p.coldWk=punNow();if(p!==S&&p.coldR==null)p.coldR=coldRankIn(p)}else{if(p.coldWk!=null)p.coldWk=null;if(p!==S&&p.coldR!=null)p.coldR=null}}
+/* the rank an NPC held when she went in (Hoàng hậu = 7; a demotion earlier the same day is folded in, like her S.coldRank) — reviewer r1, law 1 */
+function coldRankIn(p){return p.queen?7:punFromToday(p)}
 function coldStayOk(p){if(!p)return true;coldStamp(p);if(p===S?!S.out:!p.out)return true;return punNow()-p.coldWk>=BAL.pun.coldMinDays}
 function coldDaysLeft(p){coldStamp(p);return p.coldWk==null?0:Math.max(0,BAL.pun.coldMinDays-(punNow()-p.coldWk))}
 /* each day: stamp every NPC who entered lãnh cung by any road; her pardon that waited comes once the stay is served */
@@ -56,9 +58,9 @@ function punDay(){if(!S||S.dead)return;try{for(const v of (rivals||[]))if(v&&v.a
  if(S.out&&S.coldPend&&coldStayOk(S)){const P=S.coldPend;S.coldPend=null;restore(P.full,P.why)}else if(!S.out)S.coldPend=null}catch(e){console.error("punDay",e)}}
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{punDay()}catch(e){console.error("punDay",e)}return r}})();
 /* an NPC leaves lãnh cung (every NPC release road): one rank below the rank she held when she went in, never Đáp ứng from any height */
-function coldFree(v){v.out=false;v.rank=BAL.pun.npcOneBelow?Math.max(0,Math.min(6,(v.rank|0)-1)):0/* PENDING OWNER (law 16): false = the old rule, an NPC always comes back as Đáp ứng */;v.coldWk=null;return v.rank}
+function coldFree(v){const r=v.coldR!=null?v.coldR:(v.queen?7:(v.rank|0));if(v.queen)v.queen=false;v.out=false;v.rank=BAL.pun.npcOneBelow?Math.max(0,Math.min(6,r-1)):0/* PENDING OWNER (law 16): false = the old rule, an NPC always comes back as Đáp ứng */;v.coldWk=null;v.coldR=null;return v.rank}
 /* WHY an ally pardons her (Hoàng hậu «Ân xá», law 1 same words for an NPC): her standing with the one who pardons, read from the one relation core */
-function punAllyWhy(a,p){let n=0;try{n=Math.round(aff(a,p))}catch(e){}return `nàng quý ${p===S?"ngươi":p.name} (thiện cảm ${n})`}
+function punAllyWhy(a,p){let n=0;try{n=Math.round(aff(a,p))}catch(e){}const t=p===S?"ngươi":p.name;/* reviewer r1: the words follow the real standing from the one relation core (netTh «thân» line; never «quý» at thiện cảm < 0) */let th=Infinity;try{th=netTh(a,"than")}catch(e){}return n>=th?`nàng quý ${t} (thiện cảm ${n})`:n>=0?`nàng mở lòng khoan dung với ${t} (thiện cảm ${n})`:`nàng giữ đức khoan dung của Trung cung, dù không ưa ${t} (thiện cảm ${n})`}
 /* ONE RANK: the seat cap never pushes the punished one further (jseat settle). While she sits on the rank she was punished to, the settle
    pass does not pick her; if that rank is over its cap, the standing seat rule moves its newest other holder instead («ghế đã đủ người»,
    jseat, with its own reason line), so the cap still holds at every month end (dev/test/seatcap-active.js) */

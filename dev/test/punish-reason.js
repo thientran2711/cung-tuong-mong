@@ -43,7 +43,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID]=proces
  ok(typeof nf!=='undefined'&&nf&&/Vì sao được ra/i.test(nf.body)&&/thiện cảm/.test(nf.body)&&/một bậc/.test(nf.body),'release notice: why freed (Hoàng hậu, thiện cảm) + why this rank');
  /* 5. NPC (law 1): one rank, stay gate, one-rank release */
  const r=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.queen&&x.rank>=3&&!x.out)||liveRivals(true).find(x=>!x.queen&&!x.out);v.rank=3;v.punWk=null;const r0=Math.random;Math.random=()=>0.01;try{fall(v,"bị tố")}finally{Math.random=r0}const a=v.rank;
-   v.punWk=null;Math.random=()=>0.99;try{fall(v,"bị tố nặng")}finally{Math.random=r0}const out=!!v.out;const r1=v.rank;coldStamp(v);hhAct(queenP(),v,"pardon");const early=!!v.out;v.coldWk-=BAL.pun.coldMinDays;hhAct(queenP(),v,"pardon");return {a,out,early,late:!!v.out,r1,rel:v.rank}});
- ok(r.a===2,`NPC fall: Tần → rank ${r.a}`);ok(r.out&&r.early,'NPC lãnh cung: early ân xá refused');ok(!r.late&&r.rel===Math.max(0,r.r1-1),`NPC release after the stay: rank ${r.r1} → ${r.rel} (one below)`);
+   v.punWk=null;Math.random=()=>0.99;try{fall(v,"bị tố nặng")}finally{Math.random=r0}const out=!!v.out;const r1=v.rank;coldStamp(v);hhAct(queenP(),v,"pardon");const early=!!v.out;v.coldWk-=BAL.pun.coldMinDays;hhAct(queenP(),v,"pardon");return {a,out,early,late:!!v.out,r1,rel:v.rank,ob:!!BAL.pun.npcOneBelow}});
+ ok(r.a===2,`NPC fall: Tần → rank ${r.a}`);ok(r.out&&r.early,'NPC lãnh cung: early ân xá refused');ok(!r.late&&r.rel===(r.ob?Math.max(0,r.r1-1):0),`NPC release after the stay: rank ${r.r1} → ${r.rel} (${r.ob?'one below':'BAL.pun.npcOneBelow=false: back to Đáp ứng'})`);
  ok(!errs.length,'no page errors '+errs.slice(0,3).join(' | '));
  await ctx.close();await b.close();console.log(fails.length?`FAILED ${fails.length}`:'ALL PASS');process.exit(fails.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
