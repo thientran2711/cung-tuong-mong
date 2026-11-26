@@ -162,5 +162,5 @@ if(typeof rvCard==="function"){const r0=rvCard;rvCard=function(v){let h=r0.apply
 const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(khInit)}}catch(e){}return r};
 const z0=deser;deser=function(){const r=z0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(v=>{khInit(v);khFit(v)});khFit(S)}}catch(e){}return r};
 /* F5: the 'lệch sổ' fact in every ledger sync (her and NPCs) */
-if(typeof deedSync==="function"){const ds0=deedSync;deedSync=function(p){ds0.apply(this,arguments);try{khDeed(p)}catch(e){}}}
+if(typeof deedSync==="function"){const ds0=deedSync;deedSync=function(p){ds0.apply(this,arguments);try{if(!(typeof deedSyncGuest==="function"&&deedSyncGuest(p)))khDeed(p)}catch(e){}}/* co-op: host-only, as jtruth deedSync */}
 })();

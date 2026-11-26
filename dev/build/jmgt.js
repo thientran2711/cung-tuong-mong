@@ -119,7 +119,11 @@ function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.char
 function mgBand(kind){return mgCalBand(kind)}
 /* the offset of a person's hand from the curve centre, in sd: one standard-normal draw hashed on the person + kind (Box–Muller of two hashes), clamped ± BAL.ag.mg2.hand.zMax */
 function mgZ(id){const u=Math.max(1e-9,mgHashU(id+"|a")),v=mgHashU(id+"|b"),Z=BAL.ag.mg2.hand.zMax;return cl(Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v),-Z,Z)}
-function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
+function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;
+ /* co-op law (host computes): on a guest seat a world person's hand is the same hash draw, read but never stored (the host stores it and the merged
+    week brings it; coop-e2e: R#*.mgH.hoadien / mgHv.hoadien on seat B only) */
+ try{if(p!==S&&window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a"&&!(p.mgH&&p.mgH[kind]!=null&&p.mgHv&&p.mgHv[kind]===Bd.sig)){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;return Math.round((Bd.c+Bd.sd*mgZ(id))*100)/100}}catch(e){}
+ let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
  /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
     skewed / half-half bands carry another sig and re-roll here) */
  let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};

@@ -25,7 +25,11 @@ function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w
 function deedUndo(p,d){if(!p||!d)return;const i=(p.wrongs||[]).indexOf(d);if(i>=0){p.wrongs.splice(i,1);p.dw=Math.max(0,(p.dw||0)-d.w)}}
 function deedOnce(p,id,k,w,x){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return;p.dkeys.push(id);if(p.dkeys.length>60)p.dkeys.shift();deedAdd(p,k,null,w,x)}
 /* the wrongs the world already shows, written into the ledger once (so the cap never drops when the thing is hidden again) */
-function deedSync(p){if(!p||!S)return;try{
+/* co-op law (host computes, both seats read the same number): the wrongs the world already shows are written on the host (its endTurn
+   evTruthSweep reads every person) and reach the guest in the merged week; a guest seat never writes them into a world person's ledger on a read
+   (coop-e2e: R#9.wrongs "xx" / dkeys "xx:mk" + mgH.hoadien on seat B only). Her own person (S) stays hers on either seat. */
+function deedSyncGuest(p){try{return p!==S&&!!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}catch(e){return false}}
+function deedSync(p){if(!p||!S||deedSyncGuest(p))return;try{
  if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",deedW("tryst"),"tư thông với nam nhân")}
  else{if(p.scandal)deedOnce(p,"sc","tryst",deedW("tryst"),"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",deedW("tryst"),`tư thông${m?" với "+m.name:""}`)}}
  if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",deedW("pm"),"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
