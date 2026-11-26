@@ -433,8 +433,8 @@
   },
   {
    "rule": "long",
-   "re": "(che miệng cười|mách Hoàng hậu)",
-   "why": "NPC↔NPC deed news line (newsAdd) not about her. Owner: NEWS-SIEVE-2"
+   "re": "(che miệng cười|mách Hoàng hậu|thắng .+ một ván|nhận nửa lễ|nghe lời đồn|bớt xén bổng lộc)",
+   "why": "NPC↔NPC world news told whole in the Tin báo row / chip (newsAdd, jagacts deeds, jnroad rumours, Nội vụ phủ pay cuts) — not about her. Owner: NEWS-SIEVE-2 (daily news only about her)"
   }
  ]
 }
