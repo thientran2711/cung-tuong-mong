@@ -422,7 +422,7 @@ function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));cons
   tsOpt({n:"Cầu bình an",duoc:pdLeft?[`Phúc duyên +2 (kiếp này còn được ${pdLeft})`,`Đức ${balSg(BAL.eff.jts.ducGo)}`]:[`Đức ${balSg(BAL.eff.jts.ducGo)}`],note:"Phúc duyên từ đèn có giới hạn: 6 mỗi kiếp",later:1,go:()=>play("bình an",far=>{apply({duc:BAL.eff.jts.ducGo});if(pdLeft&&typeof pdAdd==="function"){s.denPD=(s.denPD||0)+2;pdAdd(2,`thả đèn cầu bình an đêm ${f.name}`)}else log("Ngươi thả đèn cầu bình an.")})}),
   tsOpt({n:"Cầu thánh ân",odds:seen?oddsCl(odds):null,duoc:seen?[`Hoàng thượng dạo bên hồ, trông thấy đèn: ${sgStat(BAL.eff.jts.denSung)}, Ân tình +${BAL.eff.jts.denAn}`]:[`Đức ${balSg(BAL.eff.jts.ducDenMiss)}`],kem:seen?[]:[`đêm nay Hoàng thượng không ra hồ (ngài đang phiền, hoặc Sủng của ngươi dưới ${BAL.tsx.denSung})`],later:1,
    go:()=>play("thánh ân",far=>{if(seen&&(far||roll(odds))){apply({sung:BAL.eff.jts.denSung});S.an=cl((S.an||0)+BAL.eff.jts.denAn,0,100);log(`Đêm ${f.name}, Hoàng thượng dạo bên hồ, trông thấy đèn của ngươi trôi xa, dừng lại hỏi han.`)}else{apply({duc:BAL.eff.jts.ducDenMiss});log("Ngươi thả đèn, lặng lẽ cầu thánh ân.")}})}),
-  tsOpt({n:"Thôi, không thả nữa",duoc:["không mất thêm gì"]})]})}
+  {n:"Thôi",fx:{}}/* the kit ✕ (KIT 32.10; owner 26/11 ~22:43Z: no close-only card) */]})}
 /* NPCs float lanterns too, by the same rule (seen by the Emperor when he walks there and they are in favour) */
 function tsDenNpc(){const f=tsDenFest();if(!f)return;const s=tsS();const key=`${S.year}-${f.k}`;if(s.denN===key)return;s.denN=key;const E=S.emp;
  const mg=typeof mg2On==="function"&&mg2On();/* mg2: her lantern game for each NPC = one draw (occ trieu, as tsGame) + the same odds as hers (tsDenOdds), and the same Ân tình */

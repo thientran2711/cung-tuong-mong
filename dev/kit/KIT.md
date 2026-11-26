@@ -724,6 +724,7 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
 ### 13.6 QUICK BUTTON · kitQuick (owner 18/11 ~05:45Z + ~05:55Z, review/mg-skip-all) — `dev/build/j79.js`, odds `BAL.skip` (jbal2)
 The ONE quick / skip choice of EVERY mini-game, beside its start button (the old `#mgskip` look: `.kbtn.alt` + class `kquick`, big line = name, `<small>` line).
 - `kitQuick({id, n, win, lose, sure, sub, data})` → button HTML (default id `kg82skip`, name "Để trời định"); `kitQuickSub(o)` → only the small line (j5 `#mgskip`, j83).
+- `playArt({quick:false})` (owner 26/11 ~22:43Z «lá bài thôi thì dẹp»): a game whose «not playing» = the lose result (jsmg Tranh sủng / Chặn ngự giá: cơ duyên giữ nguyên) shows NO quick card — the kg82 ✕ gives up (0/10, the lose path, 32.10); a quick option that gives its own outcome (skill / odds roll / a named deed) keeps its card.
 - Small line = the odds WORD of `BAL.skip.od` (`word(od(BAL.skip.od))`, VANPHONG ladder, never %) · `thành: <win>` · `hỏng: <lose>`; `sure:1` = no roll, no word (a sure act shows no odds word).
 - `kitQuickRoll()` = THE quick roll (`roll(od(BAL.skip.od))`), the only one; co-op: it runs where the game runs (the seat that plays).
 - `sub:"…"` = a game whose quick choice keeps its OWN rule (contests / exams: the mark of a girl of her level; court acts: the act's odds; slap: no play) — same part, its own line.
