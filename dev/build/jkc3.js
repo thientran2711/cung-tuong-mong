@@ -211,7 +211,7 @@ kc3Reg("kc_tt",{t:"Quân cờ đầu tiên",w:"cha",g:"Cha ngươi, {dadT} {chaN
  p:[["s1"],["c1","c2","c3"],["t1"],["x1"]],
  B:{
  s1:{h:"Bàn cờ trong thư phòng",w:"cha",t:"Cha gọi ngươi vào thư phòng, chỉ lên bàn cờ: “Một quân cờ tốt phải biết mình đứng ở đâu.” Ông muốn ngươi học cách nhìn người trên triều.",o:[
-  {n:"Học cách nhìn người",f:"obey",wx:"cha tin ngươi hơn",lx:"ngươi quen nhìn người như nhìn quân cờ",rt:"Mỗi tối cha bày cờ, kể từng nhà trên triều.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
+  {n:"Học cách nhìn người",f:"obey",wx:"cha: thiện cảm +",lx:"ngươi quen nhìn người như nhìn quân cờ",rt:"Mỗi tối cha bày cờ, kể từng nhà trên triều.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Thưa cha, con không muốn làm quân cờ",f:"own",wx:"giữ được lòng mình",lx:"cha phật ý",rt:"Cha gõ quân cờ xuống bàn, không nói gì.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Hỏi cha: quân cờ này được gì",f:"deal",wx:"cha nể ngươi biết đòi",lx:"cha cho là ngươi hỗn",rt:"Cha bật cười: “Được lắm. Con gái ta biết mặc cả.”",rf:"Cha sầm mặt: “Con gái mà dám đòi giá với cha?”",go:(A,ok,G)=>{kc3Af("cha",ok?G[0]:G[1])}}]},
  c1:{h:"Phong thư của môn sinh",w:"cha",t:"Môn sinh của cha nhờ ngươi chuyển một phong thư cho cha, không qua quản gia. Phong thư không dán kín.",o:[
@@ -223,13 +223,13 @@ kc3Reg("kc_tt",{t:"Quân cờ đầu tiên",w:"cha",g:"Cha ngươi, {dadT} {chaN
   {n:"Dò la cho cha",f:"obey",wx:"biết nhà ấy định cài ai vào cung",rt:"Ngươi nghe được nhà Thượng thư đã lo lót cho con gái từ vòng Sơ tuyển.",rf:"Có người thấy ngươi dỏng tai nghe chuyện ở bàn bên.",go:(A,ok,G)=>{if(ok){kcIntel(BAL.kc3.intel.n,BAL.kc3.intel.st);kc3Af("cha",G[0])}}},
   {n:"Lặng lẽ ngồi cuối tiệc",wx:"không ai chú ý đến ngươi",lx:"cha thấy uổng công đưa ngươi đi",rt:"Ngươi ngồi cuối tiệc, nhìn ra hồ sen.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  c3:{h:"Huynh trưởng ngả phe khác",w:"huynh",if:()=>!!kc3P("huynh"),t:"Ngươi bắt gặp huynh trưởng {huynhN} lén gặp người của phe đối đầu với cha ở trà lâu. Huynh xin ngươi đừng nói.",o:[
-  {n:"Báo với cha",f:"obey",wx:"cha tin ngươi hơn huynh",lx:"huynh trưởng oán ngươi",rt:"Cha nhốt huynh trưởng trong từ đường ba ngày.",go:(A,ok,G)=>{kc3Af("cha",G[0]);const h=kc3Af("huynh",G[1]);if(h)h.oan=(h.oan||0)+Math.abs(G[1])}},
+  {n:"Báo với cha",f:"obey",wx:"cha: thiện cảm +",lx:"huynh trưởng oán ngươi",rt:"Cha nhốt huynh trưởng trong từ đường ba ngày.",go:(A,ok,G)=>{kc3Af("cha",G[0]);const h=kc3Af("huynh",G[1]);if(h)h.oan=(h.oan||0)+Math.abs(G[1])}},
   {n:"Giữ kín cho huynh",f:"own",wx:"huynh trưởng nợ ngươi một lần",lx:"cha mà biết sẽ giận",rt:"Huynh trưởng nắm tay ngươi: “Muội cứ tin huynh.”",go:(A,ok,G)=>{kc3Af("huynh",G[0]);A.f.huynh=1;if(roll(G[2]))kc3Af("cha",G[1])}},
   {n:"Khuyên huynh quay về với cha",wx:"giữ được cả nhà một lòng",lx:"huynh trưởng giận ngươi xen vào",rt:"Huynh trưởng im lặng rất lâu, rồi thôi không đến trà lâu nữa.",rf:"Huynh trưởng gạt tay ngươi: “Muội thì biết gì.”",go:(A,ok,G)=>{kc3Af("huynh",ok?G[0]:G[1])}}]},
  t1:{h:"Cha thử lòng ngươi",w:"cha",t:"Cha bày một ván cờ, rồi hỏi bâng quơ: “Nếu một ngày nhà ta và Hoàng thượng không cùng một đường, con đứng bên nào?”",o:[
   {n:"Thưa: con đứng bên lẽ phải",wx:"cha nhìn ngươi khác đi",lx:"cha chưa yên lòng",rt:"Cha đi một nước cờ, không đáp.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Hỏi lại cha: vì sao cha hỏi vậy",f:"read",wx:"đoán được ván cờ thật của cha",lx:"cha thấy ngươi đa nghi",rt:"Cha lỡ lời nhắc tới Lại bộ và một mật ước. Ngươi hiểu cha đang đánh ván lớn.",rf:"Cha cười nhạt, dọn bàn cờ.",go:(A,ok,G)=>{if(!ok)kc3Af("cha",G[0])}},
-  {n:"Biếu cha một nghiên mực quý, lảng sang chuyện khác",wx:"cha vui lòng",lx:"bạc riêng vơi đi",rt:"Cha mân mê nghiên mực, quên mất câu hỏi.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
+  {n:"Biếu cha một nghiên mực quý, lảng sang chuyện khác",wx:"cha vui lòng",lx:"Bạc −",rt:"Cha mân mê nghiên mực, quên mất câu hỏi.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  x1:{h:"Lời thề trước kỳ tuyển",w:"cha",t:"Trước kỳ tuyển, cha nói: “Vào cung, ngươi sẽ là mắt tai của nhà này. Hoàng hậu sẽ coi ngươi là mối lo.” Ông chờ ngươi thề.",o:[
   {n:"Thề giữ lòng với nhà",e:"mid",wx:"cha dốc sức lo cho ngươi",lx:"vào cung vẫn là quân cờ của cha",rt:"Cha đỡ ngươi dậy, trao một danh sách những người của phủ trong cung.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Chỉ hứa sẽ giữ mình",e:"lose",wx:"không mắc nợ ai",lx:"cha bắt đầu tính đường lui",rt:"Cha gật đầu chậm rãi. Ngươi biết ông đã nghi."},

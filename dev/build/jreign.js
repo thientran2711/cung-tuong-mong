@@ -119,7 +119,7 @@ RGBT.c3b={w:()=>rgSideNow()==="emp"?"q":rgSideNow()==="quyen"?"emp":"hh",if:()=>
  t:()=>{const s=rgSideNow();const foe=liveRivals(true).find(v=>{const x=rgSideOf(v);return x&&x!==s});
   const say=x=>foe&&typeof kSay==="function"?kSay(foe,S,x):x.replace(/\{[Gg]oi\}/g,"muội muội");
   return `${foe?`${rkName(foe)} ${foe.name}`:"Một phi tần phe khác"} chặn ngươi giữa hành lang, cười nhạt: ${say("“Dạo này {goi} bận rộn quá. Không biết Thái hậu và Hoàng thượng có biết {goi} bận việc gì không?”")} Chuyện ngươi theo phe nào đã có người đánh hơi. Ngươi nên ứng phó ra sao?`},
- o:()=>{const s=rgSideNow();return[{n:"Thản nhiên chối, nói sang chuyện khác",p:45,sk:[["tamco",3]],w:{},tr:2,s,l:{danh:-3},ev:"foe",wx:"nàng không nắm được gì",lx:"nàng nắm thêm Chứng cứ về ngươi"},
+ o:()=>{const s=rgSideNow();return[{n:"Thản nhiên chối, nói sang chuyện khác",p:45,sk:[["tamco",3]],w:{},tr:2,s,l:{danh:-3},ev:"foe",wx:"nàng không nắm được gì",lx:"nàng: Chứng cứ về ngươi +"},
   {n:"Biếu lễ để nàng im lặng",c:{bac:-40},p:70,sk:[],w:{},l:{danh:-2},wx:"nàng nhận lễ, tạm im",lx:"nàng nhận lễ mà vẫn nói ra"},
   {n:"Cầu người đứng đầu phe che chở",c:{suc:-8},p:60,sk:[["danh",5]],w:{},tr:-4,s,l:{danh:-2},wx:"phe mình ra mặt che cho ngươi",lx:"phe mình không kịp ra tay"}]}};
 /* chapter 4: host a banquet, then the second clear moment (keep or switch) */
@@ -130,7 +130,7 @@ RGBT.c4a={w:"me",t:()=>{const s=rgSideNow();return s?`Phe ${rgSideN(s)} cần l�
 RGBT.c4b={w:()=>({emp:"emp",th:"th",quyen:"q"})[rgSideNow()]||"maid",t:()=>{const s=rgSideNow();const p=rgP();const lean=p>=BAL.rg.B-5?"thế bệ hạ đang lên":p<BAL.rg.A+5?"nhà Tể tướng đang mạnh":"ba phe giằng co chưa phân";
   return s?`Đã mấy mùa trôi qua kể từ ngày đăng cơ; ${lean}. ${({emp:"Hoàng thượng",th:"Thái hậu",quyen:"{q}"})[s]} hỏi thẳng: ${kSay(s==="quyen"?{role:"x",rw:"quan"}:s,S,s==="quyen"?"“{Goi} còn nhớ lời đã hứa với lão phu chứ?”":"“{Goi} còn một lòng với {xung} chứ?”")} Ngươi giữ lòng với phe cũ, hay đổi sang phe khác? Đổi thì phe cũ thành kẻ thù.`
    :`Đã mấy mùa trôi qua kể từ ngày đăng cơ; ${lean}. Người đứng giữa như ngươi, phe nào cũng muốn kéo về. Ngươi chọn một phe, hay vẫn đứng ngoài?`},
- o:()=>{const s=rgSideNow();const O=[];if(s)O.push({n:"Một lòng như cũ",w:{},tr:6,s,lead:2,wx:"phe mình tin ngươi hơn"});
+ o:()=>{const s=rgSideNow();const O=[];if(s)O.push({n:"Một lòng như cũ",w:{},tr:6,s,lead:2,wx:"phe mình: thiện cảm +"});
   for(const o of rgJoinOpts(false)){if(s){o.n="Đổi phe: "+o.n.charAt(0).toLowerCase()+o.n.slice(1);o.swc=1}O.push(o)}
   if(!s)O.push({n:"Vẫn đứng ngoài",w:{duc:1},wx:"không phe nào nợ ngươi"});return O}};
 /* chapter 5: border war — plead, risk */
@@ -149,9 +149,9 @@ RGBT.c5a={w:()=>({emp:"th",th:"emp",quyen:"emp"})[rgSideNow()]||"emp",pre:()=>{c
    {n:"Đút lót thái giám truyền chỉ cho chậm tin",c:{bac:-50},p:65,sk:[],w:{},pw:5,tr:8,s,l:{danh:-4},wx:"tin của phe bệ hạ đến muộn",lx:"thái giám nhận bạc rồi khai ra"},
    {n:"Viết thư cho người quen trong Binh bộ",c:{suc:-12},p:35,sk:[["tamco",3],["mat",.5]],w:{},pw:5,tr:8,s,l:{danh:-3},wx:"Binh bộ tâu theo ý Tể tướng",lx:"thư lọt vào tay Ngự sử"},
    {n:"Không dám can dự binh quyền",w:{},tr:-8,wx:"giữ mình"}];
-  return[{n:"Chép kinh cầu an biên ải",c:{suc:-8},w:{duc:3,danh:2},wx:"Danh và Đức thêm"},{n:"Đóng cửa cung, chờ tin",w:{},wx:"giữ mình"}]}};
+  return[{n:"Chép kinh cầu an biên ải",c:{suc:-8},w:{duc:3,danh:2},wx:"Danh +, Đức +"},{n:"Đóng cửa cung, chờ tin",w:{},wx:"giữ mình"}]}};
 RGBT.c5b={w:"emp",t:()=>{const p=rgP();const T=trS();if(T)T.bien=cl(T.bien+(p>=50?14:8),0,100);return `${p>=50?"Quân triều đình giữ được ải":"Ải giữ được, nhưng phải cắt đất cống nạp"}. Tướng sĩ ngoài biên thiếu áo rét, Hoàng thượng truyền hậu cung góp tay. Ngươi góp phần thế nào?`},
- o:()=>[{n:"Góp bạc may áo rét",c:{bac:-40},w:{danh:4},pw:1,s:"emp",wx:"tướng sĩ nhớ ơn, Danh thêm"},{n:"Thức đêm thêu khăn, may áo",c:{suc:-10},w:{danh:4},pw:1,s:"emp",wx:"tướng sĩ nhớ ơn, Danh thêm"},{n:"Lấy cớ trong cung túng thiếu",w:{danh:-2},wx:"giữ được bạc"}]};
+ o:()=>[{n:"Góp bạc may áo rét",c:{bac:-40},w:{danh:4},pw:1,s:"emp",wx:"tướng sĩ nhớ ơn, Danh +"},{n:"Thức đêm thêu khăn, may áo",c:{suc:-10},w:{danh:4},pw:1,s:"emp",wx:"tướng sĩ nhớ ơn, Danh +"},{n:"Lấy cớ trong cung túng thiếu",w:{danh:-2},wx:"giữ được bạc"}]};
 /* chapter 6: the decisive night, then the outcome */
 RGBT.c6a={w:()=>({emp:"emp",th:"th",quyen:"q"})[rgSideNow()]||"maid",
  t:()=>({emp:"Đêm trước buổi đại triều, Hoàng thượng không ngủ. “Ngày mai trẫm sẽ tự phê tấu chương. Cấm quân có người của Tể tướng, trẫm không biết là ai.” Ngươi nên giúp ngài thế nào trong đêm nay?",
@@ -181,7 +181,7 @@ RGBT.c6b={w:()=>({emp:"emp",th:"th",quyen:"q"})[rgW().out]||"emp",fin:1,
 const RGE={emp:[
  {id:"e1",w:"emp",t:"Hoàng thượng muốn biết Thái hậu nghĩ gì về việc thay Lễ bộ thượng thư. “{Goi} hay sang Đức Thọ cung, dò giúp trẫm.” Ngươi có nhận lời không?",o:[{n:"Hầu chuyện Thái hậu, khéo dò ý",p:40,sk:[["tamco",3],["duc",5]],w:{sung:2},pw:3,tr:6,l:{th:-4},wx:"bệ hạ biết ý Thái hậu",lx:"Thái hậu biết ngươi dò ý"},{n:"Thưa rằng không tiện hỏi",w:{},tr:-5,wx:"giữ mình"}]},
  {id:"e2",w:"emp",t:"Đêm khuya, Hoàng thượng đưa ngươi xem một bản tấu: “Lời lẽ khéo thế này, trẫm không biết là trung hay gian.” Ngươi có nên nói ý mình?",o:[{n:"Đọc kỹ, chỉ ra chỗ khuất",p:35,sk:[["tai",2],["tamco",4]],w:{sung:3},pw:2,tr:6,l:{},wx:"bệ hạ thấy ngươi sáng suốt",lx:"ngươi đọc không ra"},{n:"Thưa rằng hậu cung không dám xem tấu",w:{duc:1},tr:-5,wx:"giữ phép"}]},
- {id:"e3",w:"emp",t:"Hoàng thượng muốn vi hành ra phố xem dân tình, lấy cớ nghỉ lại cung ngươi đêm ấy. “Ai hỏi thì {goi} che giúp trẫm.” Ngươi nên làm sao?",o:[{n:"Nhận lời che giấu",p:45,sk:[["tamco",3]],w:{sung:4},pw:2,tr:8,l:{danh:-3,th:-3},wx:"bệ hạ về an toàn, thêm tin ngươi",lx:"chuyện lộ, Thái hậu trách ngươi"},{n:"Khuyên ngài thôi đi",w:{sung:-2},tr:-4,wx:"an toàn"}]}],
+ {id:"e3",w:"emp",t:"Hoàng thượng muốn vi hành ra phố xem dân tình, lấy cớ nghỉ lại cung ngươi đêm ấy. “Ai hỏi thì {goi} che giúp trẫm.” Ngươi nên làm sao?",o:[{n:"Nhận lời che giấu",p:45,sk:[["tamco",3]],w:{sung:4},pw:2,tr:8,l:{danh:-3,th:-3},wx:"bệ hạ về an toàn, Sủng +",lx:"chuyện lộ, Thái hậu trách ngươi"},{n:"Khuyên ngài thôi đi",w:{sung:-2},tr:-4,wx:"an toàn"}]}],
  th:[
  {id:"e1",w:"th",t:"Thái hậu muốn một bộ kinh chép tay cúng giỗ tiên đế, chữ phải nắn nót, không được nhờ người. Ngươi có nhận việc này?",o:[{n:"Tự chép kinh mấy đêm liền",c:{suc:-8},w:{th:4,duc:1},pw:1,tr:6,wx:"Thái hậu hài lòng"},{n:"Thưa rằng sức yếu, xin khất",w:{th:-2},tr:-5,wx:"giữ sức"}]},
  {id:"e2",w:"th",if:()=>typeof qOn==="function"&&qOn(),t:"Thái hậu muốn Hoàng hậu {hh} đứng về phía bà trong việc lập người phụ chính mới. “{Goi} làm cầu nối cho ai gia.” Ngươi nên làm thế nào?",o:[{n:"Sang Càn Ninh cung nói chuyện",p:40,sk:[["hh",2],["tamco",4]],w:{th:3,hh:3},pw:3,tr:6,l:{hh:-4},wx:"Hoàng hậu nghiêng về Thái hậu",lx:"Hoàng hậu phật ý vì bị kéo vào"},{n:"Khéo từ chối",w:{th:-2},tr:-5,wx:"giữ mình"}]},

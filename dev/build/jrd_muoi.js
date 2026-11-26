@@ -99,7 +99,7 @@ rdDef("muoi_tuoc",7,{t:"Con nhà buôn",w:"v",sj:"lời chê xuất thân của 
  c2:{h:"Bánh bị trả lại",w:"maid",t:"Ngươi gửi tặng các cung bánh Trung thu nhân muối hoa quê nhà. Ba cung trả lại, kèm lời: “Đồ chợ không dám nhận.”",o:[
   {n:"Gửi lần nữa, kèm thư tay",wx:"hai trong ba cung nhận",lx:"bị trả lần hai",rt:"Thư tay chữ đẹp, hai cung nhận bánh.",rf:"Bánh lại về, thư bị gấp đôi."},
   {n:"Đem bánh chia cho cung nhân",f:"true",wx:"cung nhân nhớ ơn ngươi",lx:"phi tần càng cười ngươi gần kẻ hầu",rt:"Cung nữ các cung kháo nhau về bánh nhân muối hoa."},
-  {n:"Ghi tên ba cung ấy",wx:"biết ai coi thường ngươi",lx:"lòng thêm nặng, mất ngủ mà chẳng gỡ được gì",rt:"Ngươi ghi ba cái tên vào sổ riêng."}]},
+  {n:"Ghi tên ba cung ấy",wx:"biết ai coi thường ngươi",lx:"Lòng −, mất ngủ mà chẳng gỡ được gì",rt:"Ngươi ghi ba cái tên vào sổ riêng."}]},
  t1:{h:"Đèn hoa đăng",w:"emp",t:()=>`Đèn được treo khắp Ngự hoa viên. Theo lệ, ai từ bậc ${MUOI_RN(BAL.road.muoi_tuoc.rkSeat)} trở lên được đề thơ lên đèn; người dưới bậc ấy dâng một món tài nghệ.`,o:[
   {n:"Đề thơ lên đèn",if:()=>S.rank>=BAL.road.muoi_tuoc.rkSeat,f:"wit",wx:"thơ treo cao cho cả cung đọc",lx:"thơ kém cũng treo cao cho cả cung đọc",rt:"Bài thơ về sóng biển và hạt muối được Hoàng thượng đứng đọc lâu.",rf:"Có người đọc thơ ngươi rồi huých nhau cười."},
   {n:"Dâng một khúc đàn",f:"wit",wx:"Hoàng thượng dừng chân nghe",lx:"đàn lạc phím giữa yến",rt:"Tiếng đàn lặng cả vườn.",rf:"Một dây đàn đứt giữa khúc."},
@@ -183,10 +183,10 @@ rdDef("muoi_tuoc",10,{t:"Chiếu phong tước",w:"emp",sj:"tờ chiếu phong t
   {n:"Không xin gì",wx:"không ai bắt bẻ được",lx:"Hoàng thượng thấy ngươi thờ ơ, Lễ bộ tự chọn",rt:"Ngươi chỉ tạ ơn."}]},
  s2:{h:"Lễ bộ xin hoãn",w:"emp",if:RDW(0),t:"Án chưa sạch hẳn. Lễ bộ tâu xin hoãn việc phong tước cho nhà ngươi đến khi tiếng nhà sạch lại.",o:[
   {n:"Xin Thái hậu nói một lời",need:["th"],wx:"Đức Thọ cung đỡ lời",lx:"Thái hậu mệt vì chuyện nhà ngươi",rt:"Thái hậu nói: “Hoãn thì hoãn, nhưng đừng bỏ.”",rf:"Thái hậu chỉ thở dài."},
-  {n:"Gửi thêm bạc cứu tế để rửa tiếng",wx:"tiếng nhà sạch lại phần nào",lx:"lại thêm bạc để người ta đếm",rt:"Ba nghìn thạch gạo đến các làng ven đê."},
+  {n:"Gửi thêm bạc cứu tế để rửa tiếng",wx:"tiếng nhà sạch lại phần nào",lx:"Bạc −",rt:"Ba nghìn thạch gạo đến các làng ven đê."},
   {n:"Chấp nhận hoãn",wx:"khỏi tranh cãi",lx:"người ta nói nhà ngươi bị gác, phụ thân già có khi không kịp thấy",rt:"Ngươi viết thư báo phụ thân. Thư hồi chỉ một chữ: “Ừ.”"}]},
  c1:{h:"Phụ thân lâm bệnh",w:"maid",t:"Tin nhà: phụ thân lâm bệnh, nằm nhìn tấm biển trước cửa mà nói: “Chỉ mong thấy tờ chiếu.”",o:[
-  {n:"Xin về thăm cha",wx:"phụ thân thấy mặt con",lx:"bị từ chối, lòng thêm nặng",rt:"Ngươi về đến nơi, phụ thân ngồi dậy được.",rf:"Hoàng thượng nói: “Phi tần không về nhà vì cha ốm.”"},
+  {n:"Xin về thăm cha",wx:"phụ thân thấy mặt con",lx:"bị từ chối, Lòng −",rt:"Ngươi về đến nơi, phụ thân ngồi dậy được.",rf:"Hoàng thượng nói: “Phi tần không về nhà vì cha ốm.”"},
   {n:"Gửi Thái y giỏi về quê",wx:"phụ thân khá lên",lx:"bị nói lạm dụng Thái y viện",rt:"Thái y bắt mạch, kê đơn, phụ thân ăn được cháo."},
   {n:"Viết thư dỗ cha",wx:"phụ thân đọc thư mà cười",lx:"bệnh vẫn nặng",rt:"Ngươi viết suốt đêm, kể chuyện trong cung cho cha vui."}]},
  c2:{h:"{v} khóc ở Đức Thọ cung",w:"v",need:["v","th"],t:"{v} vào Đức Thọ cung, khóc kể nhà nàng chịu tiếng oan vì ngươi, xin đừng để nhà buôn muối đứng ngang nhà nàng.",o:[
@@ -209,7 +209,7 @@ rdDef("muoi_tuoc",11,{t:"Tước vị của nhà",w:"emp",sj:"tước vị của
  g:"Tước đã phong hay chưa, đây là hồi cuối của nhà buôn muối trong đời ngươi. Phụ thân già rồi. Tấm biển trước cửa sẽ treo lại cho cháu chắt, hay bị gỡ xuống, là ở ngươi. Đây là kết cục truyện xuất thân của ngươi.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Pháo đỏ ở quê",w:"maid",if:RDW(1),t:"Chiếu phong tước về đến quê, cả huyện đốt pháo. Phụ thân gửi vào cung một hũ muối hoa đầu mùa, kèm một chữ: “Đủ.”",o:[
-  {n:"Khuyên cha mở trường cho con nhà nghèo",wx:"tước có thêm tiếng học",lx:"bạc nhà vơi đi",rt:"Trường mở ở bến muối, học trò đầu tiên là con dân làm muối."},
+  {n:"Khuyên cha mở trường cho con nhà nghèo",wx:"tước: Danh +",lx:"Bạc −",rt:"Trường mở ở bến muối, học trò đầu tiên là con dân làm muối."},
   {n:"Khuyên cha giữ mình, đừng khoe",f:"clean",wx:"nhà không thêm kẻ ghen",lx:"cả vùng chê nhà có tước mà keo",rt:"Phụ thân tháo bớt đèn lồng, đóng cổng tiếp khách."},
   {n:"Mở tiệc lớn mừng tước",wx:"cả vùng đến chúc",lx:"người ta lại nói nhà giàu mới",rt:"Tiệc kéo dài ba ngày, quan huyện ngồi ghế dưới."}]},
  s2:{h:"Dưới tấm biển cũ",w:"maid",if:RDW(0),t:"Tờ chiếu không như mong. Phụ thân ngồi lặng dưới tấm biển cũ, nửa tháng không ra cửa.",o:[
@@ -222,7 +222,7 @@ rdDef("muoi_tuoc",11,{t:"Tước vị của nhà",w:"emp",sj:"tước vị của
   {n:"Lo cho huynh một chức nhỏ",f:"buy",wx:"nhà có người trong quan trường",lx:"lại một khoản bạc mua chức",rt:"Huynh trưởng thành Chủ bộ huyện nhà."}]},
  c2:{h:"Bức thư của {v}",w:"v",need:["v"],t:"{v} gửi đến một bức thư ngắn: nàng muốn biết ngươi còn giữ chuyện ông nội nàng nộp bạc được tước hay không.",o:[
   {n:"Đốt bức thư cũ trước mặt nàng",f:"peace",wx:"mối hận dừng lại ở đây",lx:"mất lá bài cuối trong tay",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nhìn tro bay, lần đầu nói: “Đa tạ.”"},
-  {n:"Giữ lá bài, đáp lạnh nhạt",wx:"{v} không bao giờ dám động nữa",lx:"{v} hận ngươi đến cuối, lòng ngươi thêm hẹp",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Ngươi hồi thư một dòng: “Còn.”"},
+  {n:"Giữ lá bài, đáp lạnh nhạt",wx:"{v} không bao giờ dám động nữa",lx:"{v} hận ngươi đến cuối, Lòng −",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Ngươi hồi thư một dòng: “Còn.”"},
   {n:"Đổi lá bài lấy lời nàng nói giúp",wx:"nhà {v} đứng về phía ngươi ở triều nghị",lx:"{v} nói giúp nửa vời",go:(A,ok,G)=>{if(ok)rdRel(A,"v",G[0]);else rdOan(A,"v",G[1])},rt:"Một trưởng bối nhà {v} lên tiếng giúp nhà ngươi một câu.",rf:"{v} nhận giấy, rồi quên lời hứa."}]},
  t1:{h:"Lễ dâng cuối năm",w:"emp",t:"Cuối năm, các nhà có danh vị dâng lễ vào cung. Nhà ngươi dâng gì, cả triều đều nhìn.",o:[
   {n:"Dâng muối hoa đầu mùa",f:"root",wx:"không quên gốc",lx:"có người lại cười mùi muối",rt:"Hoàng thượng nếm một hạt, nói: “Mặn mà sạch.”"},
@@ -285,7 +285,7 @@ rdDef("muoi_lau",6,{t:"Kẻ hãm hại",w:"v",sj:"nhà buôn muối đã hãm h�
  s2:{h:"Kẻ mua rẻ",w:"maid",if:RDW(0),t:"Sổ không giữ được, nhưng {maid} nghe ngóng: nhà mua lại mối muối của nhà ngươi với giá rẻ chính là nhà thông gia của {v}.",o:[
   {n:"Tìm người môi giới hỏi chuyện",f:"watch",wx:"biết giá rẻ ấy do ai định",lx:"người môi giới đi kể nhà ngươi cay cú",rt:"Người môi giới khai: giá do Diêm vận sứ định trước.",rf:"Người môi giới đóng cửa không tiếp."},
   {n:"Khéo hỏi {v} về nhà thông gia",f:"warn",wx:"nghe được điều nàng không định nói",lx:"{v} biết ngươi để ý nhà nàng",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} khoe nhà thông gia sắp mua thêm thuyền.",rf:"{v} cười: “Tỷ tỷ hỏi nhiều quá.”"},
-  {n:"Thôi, nhà mình còn sống là may",wx:"lòng yên, không thêm thù",lx:"nhà kia ăn trọn mối muối Giang Khẩu, người ta nói nhà ngươi hèn",rt:"Ngươi gấp thư lại."}]},
+  {n:"Thôi, nhà mình còn sống là may",wx:"Lòng +, không thêm thù",lx:"nhà kia ăn trọn mối muối Giang Khẩu, người ta nói nhà ngươi hèn",rt:"Ngươi gấp thư lại."}]},
  c1:{h:"Lễ từ Giang Khẩu",w:"eun",need:["v"],t:"{eun} kể nhỏ: Diêm vận sứ Giang Khẩu năm nào cũng gửi vào cung một chuyến lễ, đứng tên nhà thông gia của {v}.",o:[
   {n:"Xin {eun} cho xem sổ lễ",f:"gift",wx:"thấy tận mắt dây lễ",lx:"{eun} nhận bạc rồi kể lại cho Diêm vận sứ",rt:"Sổ lễ ghi rõ: lễ của Diêm vận sứ, đưa qua tay nhà thông gia, đến cung {v}.",rf:"{eun} giả lẫn: “Sổ nào?”"},
   {n:"Báo Hoàng hậu chuyện lễ ngoài vào cung",need:["hh"],f:"gift",wx:"Trung cung để mắt đến dây lễ",lx:"Hoàng hậu thấy ngươi đem chuyện nhà vào cung",rt:"Hoàng hậu cho tra lễ vào cung {v}.",rf:"Hoàng hậu nói: “Lễ ngoài vào cung, cung nào chẳng có.”"},
@@ -385,7 +385,7 @@ rdDef("muoi_lau",9,{t:"Người lái thuyền",w:"maid",sj:"lão lái thuyền �
  c1:{h:"Lão không chịu nói",w:"maid",t:"Tìm được lão, lão quỳ lạy mà không chịu khai: “Con gái lão làm ở phủ Diêm vận sứ. Lão nói thì nó chết.”",o:[
   {n:"Hứa đưa con gái lão ra",f:"daughter",wx:"lão hết sợ mà khai",lx:"không đưa ra được, lão hết tin",rt:"Con gái lão được chuộc ra khỏi phủ Diêm vận sứ trong đêm.",rf:"Phủ Diêm vận sứ không chịu bán người."},
   {n:"Cho lão bạc, để lão tự chọn",wx:"lão nhớ ơn ngươi",lx:"lão có thể bỏ trốn lần nữa",rt:"Lão cầm bạc, khóc, nói sẽ nghĩ."},
-  {n:"Dọa giao lão cho quan",wx:"lão sợ mà khai",lx:"lão hận, khai nửa chừng, lòng ngươi thêm nặng",rt:"Lão khai hết, giọng run.",rf:"Lão khai, nhưng bỏ sót những điều quan trọng nhất."}]},
+  {n:"Dọa giao lão cho quan",wx:"lão sợ mà khai",lx:"lão hận, khai nửa chừng, Lòng −",rt:"Lão khai hết, giọng run.",rf:"Lão khai, nhưng bỏ sót những điều quan trọng nhất."}]},
  c2:{h:"{v} biết chỗ lão",w:"v",need:["v"],t:"{v} gửi lời: người của Diêm vận sứ sắp đến chỗ lão lái thuyền. Nàng có thể giữ chân họ, nếu ngươi tin.",o:[
   {n:"Tin {v}",f:"vhelp",wx:"có thêm một ngày để đưa lão đi",lx:"nàng phản, mất người canh lão",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Người của Diêm vận sứ bị giữ chân ở bến suốt một ngày.",rf:"{v} không giữ ai, người nhà ngươi bị đánh."},
   {n:"Cảm ơn mà tự dời lão đi",wx:"lão an toàn, không nợ ai",lx:"{v} thấy ngươi không tin nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Lão được dời sang một làng chài khác."},
@@ -416,7 +416,7 @@ rdDef("muoi_lau",10,{t:"Xử án Giang Khẩu",w:"emp",sj:"phiên xử án muố
  c1:{h:"Hộ bộ cãi",w:"emp",t:"Huynh trưởng báo vào cung: ở phiên đầu, Thị lang Hộ bộ đứng ra nói sổ thuế muối là sổ quan, không thể sai.",o:[
   {n:"Gửi sổ hai mặt cho thầy kiện đối chiếu",f:"book",wx:"sổ quan bị lật",lx:"không đủ sổ để đối chiếu, bị nói bôi nhọ Hộ bộ",rt:"Hai bộ sổ đặt cạnh nhau, chênh một phần ba.",rf:"Thị lang nói sổ của ngươi không rõ gốc."},
   {n:"Đêm ấy xin Hoàng thượng cho mở kho muối",f:"audit",wx:"kho muối tự nói",lx:"Hoàng thượng chê ngươi đòi nhiều",rt:"Kho Giang Khẩu được mở, hụt đúng như sổ thật.",rf:"Hộ bộ xin hoãn mở kho đến sau phiên xử."},
-  {n:"Dặn nhà chỉ nhắm Diêm vận sứ",wx:"ít kẻ thù hơn",lx:"kẻ đứng trên thoát",rt:"Thầy kiện không nhắc đến Hộ bộ một lời."}]},
+  {n:"Dặn nhà chỉ nhắm Diêm vận sứ",wx:"kẻ thù −",lx:"kẻ đứng trên thoát",rt:"Thầy kiện không nhắc đến Hộ bộ một lời."}]},
  c2:{h:"Tờ khai của nhà {v}",w:"v",need:["v"],t:"{v} hỏi: nếu nhà mẹ đẻ nàng đệ cho Đại Lý tự một tờ khai về những gì nhà thông gia đã làm, ngươi có giữ nhà thông gia khỏi tội nặng không.",o:[
   {n:"Hứa giữ",f:"vwit",wx:"nhà {v} đệ tờ khai",lx:"nhà nàng không đệ, ngươi mang tiếng mặc cả án",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} gật đầu: “Nhà muội sẽ đệ.”",rf:"{v} nghĩ lại, nhà nàng không đệ."},
   {n:"Không hứa gì",wx:"không nợ ai lời hứa",lx:"nhà nàng không đệ, người ta nói ngươi cứng nhắc",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} lặng lẽ ra về."},
@@ -480,7 +480,7 @@ rdDef("muoi_doi",5,{t:"Ruộng của dân đói",w:"maid",sj:"chuyện ruộng �
   {n:"Để cha mua, dặn giá cho công bằng",f:"fair",wx:"lãi về, tiếng vẫn còn",lx:"giá ‘công bằng’ chẳng ai tin",rt:"Cha trả thêm nửa đấu mỗi mẫu. Dân không khen, cũng không oán.",rf:"Quản sự vẫn ép giá cũ, dân đồn biển vàng là biển che."},
   {n:"Im lặng, nhận phần lãi",f:"greed",wx:"bạc vào cung",lx:"biển vàng che cho việc ép giá",rt:"Bạc lãi từ ruộng theo thuyền muối vào cung."}]},
  s2:{h:"Cha muốn gỡ lại",w:"maid",if:RDW(0),t:()=>rdEnd(4)==="lose"?"Năm đói để lại cho ngươi cái tên ‘nương nương gạo’, nhà để lại một khoản phạt. Phụ thân muốn gỡ: gom ruộng dân bán tháo, đợi giá lên.":"Năm đói qua, nhà ngươi không được khen cũng không bị trách. Phụ thân thấy dân bán tháo ruộng thì muốn gom, đợi giá lên.",o:[
-  {n:"Khuyên cha thôi, lấy tiếng làm vốn",f:"good",wx:"cha nghe, dân giữ được ruộng",lx:"cha giận, cắt bớt bạc gửi vào cung",rt:"Cha hồi thư một chữ “Được”, rồi rút người khỏi các làng.",rf:"Cha mắng con gái dạy cha làm ăn, bạc gửi vào ít đi."},
+  {n:"Khuyên cha thôi, lấy tiếng làm vốn",f:"good",wx:"cha nghe, dân giữ được ruộng",lx:"cha giận, Bạc −",rt:"Cha hồi thư một chữ “Được”, rồi rút người khỏi các làng.",rf:"Cha mắng con gái dạy cha làm ăn, bạc gửi vào ít đi."},
   {n:"Góp bạc riêng mua cùng cha",f:"greed",wx:"lãi gấp đôi khi giá lên",lx:"giá không lên, bạc chôn trong ruộng",rt:"Giá ruộng lên sau nửa năm, phần của ngươi gấp đôi.",rf:"Ruộng không ai mua lại, bạc nằm chết trong đất."},
   {n:"Bảo cha mua, nhưng thuê chính chủ cày",f:"fair",wx:"dân còn chỗ làm, ruộng vẫn về nhà",lx:"lãi mỏng, cha chê con mềm lòng",rt:"Người bán ruộng được ở lại cày thuê, có người còn khóc mà lạy."}]},
  c1:{h:"Tờ đơn của một làng ven sông",w:"maid",t:"Dân một làng ven sông nhờ người quen gửi đơn vào kinh: quản sự nhà ngươi ép họ điểm chỉ bán ruộng, có tờ còn mang dấu tay của người đã chết đói.",o:[
@@ -546,7 +546,7 @@ rdDef("muoi_doi",7,{t:"Tiếng tích trữ",w:"v",sj:"lời đồn nhà ngươi 
  c1:{h:"Tờ sổ giả",w:"v",need:["v"],t:"Cung nữ của ngươi thấy {v} sai người chép một tờ ‘sổ kho’ đóng dấu son giả của hiệu buôn nhà ngươi.",o:[
   {n:"Lấy tờ sổ giả về tay",f:"proof",wx:"có tang vật",lx:"người của ngươi bị bắt lúc lấy",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Tờ sổ giả nằm trong tay áo ngươi.",rf:"Người của ngươi bị bắt, {v} kêu bị trộm."},
   {n:"Báo Hoàng hậu có kẻ giả dấu son",need:["hh"],wx:"Hoàng hậu để mắt đến {v}",lx:"Hoàng hậu cho là chuyện vặt",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Hoàng hậu cho người khám cung {v}.",rf:"Hoàng hậu nói: “Chuyện nhà buôn, bổn cung không rảnh.”"},
-  {n:"Để {v} dâng sổ giả rồi hãy vạch",f:"trap",wx:"{v} tự đưa đầu vào",lx:"lời đồn lan thêm vài tháng",rt:"Ngươi để tờ sổ giả đi tiếp đường của nó."}]},
+  {n:"Để {v} dâng sổ giả rồi hãy vạch",f:"trap",wx:"{v} tự đưa đầu vào",lx:"Lời đồn +",rt:"Ngươi để tờ sổ giả đi tiếp đường của nó."}]},
  c2:{h:"Kho thóc có thật",w:"maid",t:"Thư nhà: ở bến Giang Khẩu đúng là có một kho thóc của cha. Không phải để đầu cơ, ông để dành cho năm sau. Nhưng chẳng ai tin điều đó.",o:[
   {n:"Bảo cha khai kho với quan phủ",f:"open",wx:"kho thành kho minh bạch",lx:"cha mất thế mặc cả với Hộ bộ",rt:"Quan phủ ghi kho vào sổ, đóng dấu."},
   {n:"Bảo cha bán bớt cho dân giá cũ",wx:"dân thấy thóc ra",lx:"kho vơi, năm sau ít dự trữ",go:(_A,_ok,G)=>e67kho(G[0]),rt:"Thuyền thóc ra bến, giá gạo chợ huyện hạ."},
@@ -568,7 +568,7 @@ rdDef("muoi_doi",8,{t:"Phát chẩn",w:"emp",sj:"đợt phát chẩn mùa giáp 
  B:{s1:{h:"Hộ bộ đến hỏi",w:"emp",if:RDW(1),t:()=>`Kho nhà ngươi đã minh bạch. Hộ bộ đến hỏi: nhà nàng có góp gạo cho đợt chẩn giáp hạt không? Hạn góp là ${kitNumVi(BAL.road.muoi_doi.han)} tháng, trước kỳ khóa sổ.`,o:[
   {n:"Góp gạo, xin đề tên Hoàng thượng",f:"emp",wx:"ngài nhớ ơn",lx:"dân không biết gạo của ai",rt:"Bao gạo nào cũng đóng chữ ‘Ân của Thiên tử’."},
   {n:"Góp gạo, đề tên nhà",f:"house",wx:"dân nhớ tên nhà ngươi",lx:"triều thần cho là nhà buôn mua tiếng",rt:"Bao gạo đóng tên hiệu buôn nhà ngươi."},
-  {n:"Góp bằng công: dẫn cung nhân khâu bao chẩn",wx:"mấy nghìn bao gạo chắc tay",lx:"ngươi kiệt sức, việc vẫn rối",rt:"Cung ngươi khâu đủ bao trước kỳ, Hộ bộ khen bao chắc, không rơi một hạt.",rf:"Ngươi ngã bệnh giữa chừng, bao khâu dở phải gửi Nội vụ phủ làm nốt."}]},
+  {n:"Góp bằng công: dẫn cung nhân khâu bao chẩn",wx:"mấy nghìn bao gạo chắc tay",lx:"Sức −−, việc vẫn rối",rt:"Cung ngươi khâu đủ bao trước kỳ, Hộ bộ khen bao chắc, không rơi một hạt.",rf:"Ngươi ngã bệnh giữa chừng, bao khâu dở phải gửi Nội vụ phủ làm nốt."}]},
  s2:{h:"Dịp rửa tiếng",w:"emp",if:RDW(0),t:()=>`Tiếng xấu của nhà còn đó. Hộ bộ gửi danh sách góp chẩn, tên nhà ngươi đứng đầu. Hạn góp ${kitNumVi(BAL.road.muoi_doi.han)} tháng, trước kỳ khóa sổ.`,o:[
   {n:"Góp gấp đôi để rửa tiếng",f:"house",wx:"cả triều thấy nhà góp nhiều nhất",lx:"người ta nói: có tật giật mình",rt:"Phần góp của nhà ngươi gấp đôi nhà đứng thứ hai."},
   {n:"Xin góp bằng thóc giống thay bạc",f:"seed",wx:"mùa sau dân có giống",lx:"Hộ bộ chê ít",rt:"Hộ bộ nhận thóc giống, ghi là ‘lo cho mùa sau’.",rf:"Hộ bộ trả lại, đòi bạc."},
@@ -580,7 +580,7 @@ rdDef("muoi_doi",8,{t:"Phát chẩn",w:"emp",sj:"đợt phát chẩn mùa giáp 
  c2:{h:"Gạo mốc trong kho chẩn",w:"maid",t:"Người nhà báo về: gạo Hộ bộ trộn với gạo nhà ngươi có nửa phần mốc. Nếu phát ra, dân sẽ chửi tên in trên bao.",o:[
   {n:"Bỏ bạc đổi gạo mới",wx:"bao gạo nào cũng thơm",lx:"bạc đi, kẻ tráo gạo vẫn ẩn",rt:"Gạo mốc được đổ ra sông, gạo mới chất vào kho."},
   {n:"Báo Hoàng thượng có kẻ tráo gạo",f:"tip",wx:"ngài cho tra kẻ tráo",lx:"bị cho là đổ lỗi cho Hộ bộ",rt:"Hoàng thượng sai Ngự sử tra kho chẩn.",rf:"Hộ bộ tâu ngược: gạo mốc là gạo của nhà buôn."},
-  {n:"Tách gạo mốc ra, phát phần tốt",wx:"không tốn thêm bạc",lx:"dân nhận ít hơn lời hứa",rt:"Mỗi người nhận bớt nửa đấu."}]},
+  {n:"Tách gạo mốc ra, phát phần tốt",wx:"không Bạc −",lx:"dân nhận ít hơn lời hứa",rt:"Mỗi người nhận bớt nửa đấu."}]},
  c3:{h:"{v} xin góp chung",w:"v",need:["v"],t:"{v} đến cung ngươi, dịu giọng xin góp một phần bạc, để tên nhà ngoại nàng đứng cạnh tên nhà ngươi trên bao gạo.",o:[
   {n:"Nhận, kéo {v} về một phía",wx:"bớt một kẻ thù",lx:"nhà nàng ăn ké tiếng nhà ngươi",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nắm tay ngươi cảm tạ."},
   {n:"Từ chối khéo",wx:"tiếng nhà là của nhà",lx:"tự gánh phần bạc nàng định góp; {v} ghi thêm một mối",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} cười nhạt, ra về."},
@@ -665,7 +665,7 @@ rdDef("muoi_doi",11,{t:"Ơn hay oán",w:"emp",sj:"tiếng nhà ngươi ở Giang
   {n:"Nhận bia, cho khắc cả tên dân góp sức",wx:"bia của cả Giang Nam",lx:"tốn bạc dựng bia",rt:"Bia dài ba trượng, khắc tên mấy trăm người chèo thuyền, gánh gạo."},
   {n:"Từ chối bia",wx:"khiêm cung",lx:"dân thất vọng, cha tiếc",rt:"Phụ thân thở dài, cho dân dựng miếu thổ địa thay bia."}]},
  s2:{h:"Cha hỏi con",w:"maid",if:RDW(0),t:"Ở Giang Nam vẫn có người gọi nhà ngươi là ‘nhà đầu cơ’. Phụ thân già đi nhiều, viết: “Con muốn nhà ta được nhớ thế nào?”",o:[
-  {n:"Xin cha lập kho nghĩa cho các làng",wx:"làng có kho dự phòng",lx:"bạc nhà vơi một góc",rt:"Mỗi làng ven sông có một kho nghĩa, chìa khóa giao cho lý trưởng."},
+  {n:"Xin cha lập kho nghĩa cho các làng",wx:"làng có kho dự phòng",lx:"Bạc −",rt:"Mỗi làng ven sông có một kho nghĩa, chìa khóa giao cho lý trưởng."},
   {n:"Xin cha lên chùa làm lễ sám hối",wx:"dân thấy nhà biết lỗi",lx:"bị cho là làm màu",rt:"Cha quỳ ở chùa ba ngày, dân đứng xem, có người khóc.",rf:"Dân nói: lạy Phật xong lại về bán gạo."},
   {n:"Bảo cha cứ làm ăn, tiếng rồi sẽ qua",wx:"nhà vẫn giàu",lx:"tiếng xấu không ai rửa",rt:"Cha gật gù, thuyền muối lại xuôi ngược."}]},
  c1:{h:"Lời cuối của {v}",w:"v",need:["v"],t:"{v} chặn ngươi ở hành lang: “Mấy năm đấu với muội, ta mệt rồi. Muội định để cả Giang Nam nhớ nhà ngoại ta là kẻ ăn chẩn sao?”",o:[
@@ -677,7 +677,7 @@ rdDef("muoi_doi",11,{t:"Ơn hay oán",w:"emp",sj:"tiếng nhà ngươi ở Giang
   {n:"Chép riêng phần tốt để dâng",wx:"chỉ phần đẹp được thấy",lx:"sổ chép có thể bị đối chiếu",rt:"Bản chép sạch sẽ, đẹp đẽ."},
   {n:"Cất rương sổ",wx:"giữ sổ trong nhà",lx:"không ai biết nhà đã làm những gì",rt:"Rương sổ khóa lại, chìa đeo ở cổ ngươi."}]},
  t1:{h:"Hoàng thượng hỏi ý",w:"emp",t:"Hoàng thượng định xét thưởng phạt các nhà buôn Giang Nam sau mấy năm đói hạn. Ngài hỏi: “Nàng muốn trẫm nhớ nhà nàng thế nào?”",o:[
-  {n:"Tâu thật cả việc tốt lẫn việc xấu",wx:"ngài quý lời thật",lx:"ngài nhớ việc xấu hơn",rt:"Hoàng thượng nghe hết, rồi nói: “Nhà nào cũng có năm đầu. Nhà nàng có năm sau.”",rf:"Hoàng thượng nhíu mày ở chuyện bán giá cao."},
+  {n:"Tâu thật cả việc tốt lẫn việc xấu",wx:"ngài quý lời thật",lx:"Sủng −",rt:"Hoàng thượng nghe hết, rồi nói: “Nhà nào cũng có năm đầu. Nhà nàng có năm sau.”",rf:"Hoàng thượng nhíu mày ở chuyện bán giá cao."},
   {n:"Xin ngài nhớ dân, đừng nhớ nhà thần thiếp",wx:"lời hợp lòng ngài",lx:"nhà không được thưởng gì, còn tự góp lễ tạ",rt:"Hoàng thượng nhìn ngươi lâu, không nói."},
   {n:"Xin ngài ban cho cha một chức nhỏ",wx:"nhà buôn có chức",lx:"ngài cho là đòi trả công",rt:"Hoàng thượng ban cho cha hàm Thất phẩm.",rf:"Hoàng thượng cười nhạt: “Ra là vì cái này.”"}]},
  x1:{h:"Chiếu thưởng phạt",w:"emp",t:"Chiếu thưởng phạt các nhà buôn Giang Nam sắp ban. Một lời của ngươi là lời cuối.",o:[
@@ -713,7 +713,7 @@ rdDef("muoi_no",5,{t:"Bản sao giấy nợ",w:"maid",sj:"bản sao giấy nợ 
   {n:"Hứa xin cha nhận lão lại làm",f:"got",wx:"lão giao sổ, cảm ơn",lx:"phải viết thư năn nỉ cha; hỏng thì lão rêu rao chuyện nhà",rt:"Cha miễn cưỡng nhận lão lại. Lão quỳ dâng bản sao.",rf:"Cha không chịu, lão kể chuyện nợ khắp quán trọ."},
   {n:"Nhờ cha báo quan bắt lão trộm sổ",wx:"lão bị bắt, sổ bị tịch",lx:"lão khai chuyện nợ trong cung ra công đường",rt:"Lão bị bắt, bản sao bị niêm trong hòm nha môn.",rf:"Lão khai to giữa công đường: có phi tần vay nợ nhà buôn."}]},
  c2:{h:"{v} đến tìm",w:"v",need:["v"],t:"{v} mặt cắt không còn hột máu: có kẻ gửi cho nàng một mảnh giấy, chép đúng từng chữ trong giấy nợ.",o:[
-  {n:"Hứa sẽ lấy lại bản sao cho nàng",f:"tell",wx:"{v} bám vào ngươi",lx:"gánh thêm lời hứa, lo nghĩ hao sức",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} gật đầu, nước mắt rơi xuống tay ngươi."},
+  {n:"Hứa sẽ lấy lại bản sao cho nàng",f:"tell",wx:"{v} bám vào ngươi",lx:"gánh thêm lời hứa, Sức −",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} gật đầu, nước mắt rơi xuống tay ngươi."},
   {n:"Hỏi nàng còn nợ ai khác",f:"hunt",wx:"biết nàng còn hai món nợ khác",lx:"{v} cho là ngươi bới móc, ngươi lỡ lời",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"{v} thú thật: nàng còn nợ một thái giám cho vay ở Nội vụ phủ.",rf:"{v} đứng phắt dậy: “Muội coi ta là con nợ đến bao giờ?”"},
   {n:"Bảo nàng tự lo",wx:"không gánh việc của nàng",lx:"quay lưng với người cầu cứu",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} cắn môi bỏ về."}]},
  t1:{h:"Mảnh giấy từ đâu",w:"eun",t:"Mảnh giấy chép giấy nợ đi qua tay một tiểu thái giám ở Nội vụ phủ. Tổng quản {eun} biết, nhưng muốn có giá.",o:[
@@ -733,11 +733,11 @@ rdDef("muoi_no",6,{t:"Đòi hay tha",w:"v",sj:"phần lãi {v} còn thiếu",cas
  B:{s1:{h:"Bản sao trong tráp",w:"maid",if:RDW(1),need:["v"],t:()=>`Bản sao giấy nợ nằm trong tráp ngươi. Phụ thân viết: hiệu buôn thiếu bạc, phần lãi {v} còn nợ phải thu trong ${kitNumVi(BAL.road.muoi_no.han)} tháng, trước kỳ thuyền muối nhập cảng.`,o:[
   {n:"Đưa {v} xem bản sao, đòi lãi",f:"press",wx:"thu được lãi",lx:"ép người bằng giấy nợ; hỏng thì {v} kể khắp nơi",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} cắn răng tháo đôi hoa tai vàng trả lãi.",rf:"{v} khóc lóc với các cung: nhà buôn ép nợ."},
   {n:"Đốt bản sao, xóa lãi",f:"free",wx:"{v} hết sợ",lx:"ngươi tự bù phần lãi cho cha",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Bản sao cháy trong lò. {v} đứng nhìn, không nói nên lời."},
-  {n:"Giữ bản sao, cho nàng trả dần",f:"hold",wx:"bạc về từng ít",lx:"tháng nào cũng phải nhắc, hao sức",rt:"{v} cúi đầu nhận lời, mỗi tháng gửi sang một ít."}]},
+  {n:"Giữ bản sao, cho nàng trả dần",f:"hold",wx:"Bạc +",lx:"tháng nào cũng phải nhắc, Sức −",rt:"{v} cúi đầu nhận lời, mỗi tháng gửi sang một ít."}]},
  s2:{h:"Cha giục",w:"maid",if:RDW(0),need:["v"],t:()=>`Bản sao chưa về tay ngươi. Phụ thân thì giục: hiệu buôn thiếu bạc, phần lãi {v} còn nợ phải thu trong ${kitNumVi(BAL.road.muoi_no.han)} tháng, trước kỳ thuyền muối nhập cảng.`,o:[
   {n:"Bảo cha xóa lãi, coi như xong",f:"free",wx:"{v} nhẹ gánh",lx:"ngươi bù phần lãi cho cha",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Cha càu nhàu nhưng gạch dòng lãi."},
   {n:"Sai người nhắc {v}",f:"press",wx:"thu được một phần",lx:"người ta thấy ngươi đòi nợ trong cung",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} gửi sang một gói bạc vụn.",rf:"Người của ngươi bị {v} đuổi ra trước mặt cả cung."},
-  {n:"Tự bù cho cha bằng bạc riêng",wx:"cha yên, {v} không biết",lx:"bạc ngươi vơi một khoản",rt:"Ngươi gửi bạc về nhà, đề là ‘lãi của người quen’."}]},
+  {n:"Tự bù cho cha bằng bạc riêng",wx:"cha yên, {v} không biết",lx:"Bạc −",rt:"Ngươi gửi bạc về nhà, đề là ‘lãi của người quen’."}]},
  c1:{h:"Mẫu thân {v} bệnh",w:"v",need:["v"],t:"{v} khóc: mẫu thân nàng ngoài cung bệnh nặng, nàng không còn bạc cắt thuốc.",o:[
   {n:"Xin thái y ra ngoài xem bệnh",f:"free",wx:"mẹ nàng được cứu",lx:"phải xin ân Hoàng thượng; hỏng thì bị trách dùng thái y riêng",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Thái y ra cung, bệnh mẹ {v} qua khỏi.",rf:"Hoàng thượng không cho, còn trách ngươi xen việc nhà người."},
   {n:"Cho thêm bạc, ghi vào nợ",f:"hold",wx:"{v} nợ thêm ngươi",lx:"bạc ra, nợ chồng thêm khó đòi",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} điểm chỉ thêm một dòng nợ."},
@@ -792,7 +792,7 @@ rdDef("muoi_no",8,{t:"Nợ chồng nợ",w:"v",sj:"những món nợ mới của
  B:{s1:{h:"Cây trâm ngự ban",w:"v",if:RDW(1),need:["v"],t:"Sau Trung thu {v} thở được ít ngày. Rồi ngươi thấy nàng lén cầm cố cả cây trâm ngự ban.",o:[
   {n:"Hỏi thẳng {v} nợ ai",to:"c3",tf:"c3",f:"know",wx:"biết chủ nợ mới",lx:"{v} xấu hổ, đóng cửa không tiếp",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"{v} khai: một thái giám coi kho ở Nội vụ phủ.",rf:"{v} đóng cửa cung, không tiếp ai."},
   {n:"Chuộc lại cây trâm cho nàng",to:"c3",tf:"c3",f:"help",wx:"{v} giữ được trâm ngự ban",lx:"bạc ngươi đi, nợ nàng vẫn còn",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Cây trâm về lại hộp gấm của {v}."},
-  {n:"Ghi lại, chờ xem",to:"c3",tf:"c3",wx:"bạc còn nguyên, {v} không phải xấu hổ trước ngươi",lx:"nợ nàng lăn thêm một tháng, lòng ngươi áy náy",rt:"Ngươi ghi vào sổ riêng."}]},
+  {n:"Ghi lại, chờ xem",to:"c3",tf:"c3",wx:"bạc còn nguyên, {v} không phải xấu hổ trước ngươi",lx:"nợ nàng lăn thêm một tháng, Lòng −",rt:"Ngươi ghi vào sổ riêng."}]},
  s2:{h:"{v} tránh mặt",w:"maid",if:RDW(0),need:["v"],t:"{v} tránh mặt ngươi đã lâu. Người của ngươi nghe được: nàng vay cả bạc của một thái giám cho vay nặng lãi.",o:[
   {n:"Sai người dò chủ nợ",to:"c3",tf:"c3",f:"know",wx:"biết kẻ cho vay là ai",lx:"tốn bạc, {v} biết ngươi dò",rt:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ."},
   {n:"Gửi lời: nếu cần, cứ đến tìm",to:"c3",tf:"c3",f:"help",wx:"{v} có lối quay lại",lx:"{v} cho là ngươi thương hại, nói khắp nơi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Đêm ấy {v} gửi sang một mảnh lụa thêu, không lời.",rf:"{v} trả lời: “Không dám làm phiền chủ nợ cũ.”"},
@@ -807,7 +807,7 @@ rdDef("muoi_no",8,{t:"Nợ chồng nợ",w:"v",sj:"những món nợ mới của
   {n:"Dạy nàng cách kiếm bạc",wx:"{v} bán tranh thêu qua hiệu nhà ngươi",lx:"nàng không quen làm ăn, ngươi bù lỗ",rt:"Tranh thêu của {v} bán chạy ở Giang Nam.",rf:"Tranh thêu không ai mua, ngươi bỏ bạc bù."}]},
  c3:{h:"Thư sinh Giang Nam",w:"maid",t:"Thư nhà kèm một tờ giấy nợ: một thư sinh nghèo ở Giang Nam vay bạc hiệu buôn nhà ngươi để lên kinh ứng thí, nay trọ ngoài cửa thành chờ khoa thi, chưa trả được đồng nào. Cha hỏi: đòi hay thôi?",o:[
   {n:"Xóa nợ, chúc y thi đỗ",f:"warm",wx:"thư sinh nhớ ơn nhà ngươi",lx:"hiệu buôn mất một món bạc",rt:"Thư sinh gửi vào một bài thơ tạ ơn."},
-  {n:"Cho hoãn, đỗ rồi hãy trả",f:"help",wx:"giữ được nợ mà không ép người",lx:"ngươi lo nghĩ hao sức thay y",rt:"Thư sinh viết giấy hẹn, nét chữ rất đẹp."},
+  {n:"Cho hoãn, đỗ rồi hãy trả",f:"help",wx:"giữ được nợ mà không ép người",lx:"Sức − thay y",rt:"Thư sinh viết giấy hẹn, nét chữ rất đẹp."},
   {n:"Giữ giấy nợ, đợi y làm quan",f:"hold",wx:"sau này có một vị quan nợ nhà ngươi",lx:"ép người lúc cùng đường",rt:"Tờ giấy nợ nằm sâu trong tráp của ngươi."}]},
  t1:{h:"Lãi quá hạn",w:"eun",t:"Hạn trả lãi đến. Kẻ cho vay dọa sẽ đem giấy nợ của {v} lên Kính sự phòng.",o:[
   {n:"Bỏ bạc trả lãi thay",wx:"hắn tạm im",lx:"bạc đi, lãi tháng sau vẫn đến",rt:"Hắn nhận bạc, hẹn tháng sau."},
