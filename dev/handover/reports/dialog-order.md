@@ -69,3 +69,46 @@ Merged 69244656 onto LIVE 6b5d3d05 = review/dialog-order-r 68e0f2b1 (clean merge
 3. (FOR MAIN / KK37, not this worker's code — law 9) Tap → «Sai đi dò la» picker paint: 0.77 s Fold / 1.56 s iPad at 1x, 5.3 s / 6.0 s at CPU 4x — not «at once» on a phone; hot = kit dialog fit passes (worker's FOR MAIN 2). E-c is not done until KK37 lands that batching; land together or sequence it.
 4. (note) iPad 4x «Lời hay»: p50 fine but p95 55–135 ms, long tasks 2.5–3 s per 4–6 s — recheck after item 3.
 Shots/videos (scratch, looked at): P1/P2 Fold+iPad before/after, talk-after-game Fold LIVE+branch. Worker's fallback images under dev/handover/shots/dialog-order/ stay until the final verdict, then wipe them (no images in git).
+
+## r2 (E96f fixer, session_01V1ZZH26Li1sb4jqYFv92t9, for MAIN 156→157) — SẴN SÀNG KIỂM review/dialog-order c34f796e
+PRIORITY #1 CHECK ('dialog-order|Q.length)return|pushModal|front of queue'): OD 34 (dò la / modal queue) | ledger 1 | claims E96 row (CLAIMS.md:428) | main 6b5d3d05: jdayq gate (c), jdfv.js:66, j25.js:20, j3.js:22 pushModal | review/*: dialog-order 69244656, dialog-order-r c3634a5d (E96r probe), ob-m3ui 0c6e3222 (kitTopClose / kitBackArm read #modal only — no Q code, no conflict), ob-oan-r6 0ffe0d23 (tsOpener `if(Q.length)showModal()` goes through the same showModal wrapper → follows the rule, nothing to fork) | robot oo-sweep.md root (pushModal = Q.push BACK) = same family.
+Branch review/dialog-order fast-forwarded from c3634a5d: e3a07f3b (rule + FAIL 2), fc2d17e5 + d25ebde6 (scan HOLD variant), 931c6df3 (in-scene guard), c34f796e (KIT REQUEST).
+
+### FAIL 1 — ONE queue rule (jdayq.js, tap hook registered early in j3.js), no per-act / per-guard patch
+Owner rule via MAIN 156: «a dialog she opens from a tap goes to the FRONT; cards the game posted wait after it; none lost».
+- (a) DEAD TAPS: while her tap is handled, a card NOBODY CAN SEE (dqQHidden: in Q, #modal hidden, not playing in-scene; not over the new-day host / a mini-game) is set aside (DQ.park) → every `Q.length)return` guard (66 sites: jdfv.js:66, j25.js:20, dfTap, j21/j42/j77 …) sees the truth «no card is up» and her act runs; after the tap the set-aside cards go back BEHIND what she queued (no card doubled; a save during the tap writes them; a painter armed meanwhile is re-armed). Hook = window capture listener in j3.js (runs before every module's own listeners incl. jselxsc / jevb window-capture ones).
+- (b) FRONT: every card her tap queues (during the tap or BAL.dayq.mineLook ms after) is moved in front of the cards that were waiting (dqMineFront, in the outermost showModal wrapper + the tap look), then painted — over the person view (marked DQ.mine, gate (c) never holds it) and in place of the open box whose button she tapped (the opener comes back after it = oo-sweep fix direction). Kept: an ending/death card already waiting keeps its place; a card PLAYING in-scene in the person view / stage encounter (OB-OAN) keeps its place (931c6df3); cards the game posts with no tap keep the back. Solo only (dqUi) like gates (a)/(b): a co-op room keeps its own Q pacing.
+- No player word, no UI part, no BAL key added (uses BAL.dayq.mineLook).
+
+### FAIL 2 — empty person view after «Trò chuyện» (whole group: every person card, pop-up + view)
+Cause j15 popCard: `groups=done?[]` dropped EVERY act once she talked with the person this visit → the kitFocus view (built from that card) had no tabs/cards, only ✕. Fix: the acts stay, dimmed with the reason (kit pbtn disabled + .kwhy, ONE text POP_DONE «Lần ghé này đã nói chuyện với người này rồi.», already player text); jdf.js in-person acts (Mưu kế / Hại người) likewise. OD:L317 (dimmed below). Fold: «Giao thiệp 0/3 · Mưu kế 0/1», cards dimmed with «!» reason (shot looked at). Family scan: only popCard + dfActs use `visit.talked`/`tk[i]` to hide acts (grep).
+
+### SCAN (law 11) — held-card variant (dev/test/dialog-order-scan.js HOLD=1: a GAME card waits hidden behind the view before EVERY tap; __D.clean no longer hides it). Joined by act with a plain run of the fix (13 acts that open a dialog).
+| run | before (base c3634a5d build) | after (r2) |
+|---|---|---|
+| Fold 755x1000 | dialog acts: DEAD 46 / 46 («Trò chuyện» 23, «Giao việc phòng bị» 23) | TOP 13 / 13 · LOST 0 · GAMEFIRST 0 · HELD 0 |
+| iPad 1180x820 | dialog acts: DEAD 45 / 45 | TOP 41 / 42 (1 NOTAP = tool tap timeout; the plain run shows 3 of the same) · LOST 0 · GAMEFIRST 0 · HELD 0 |
+Other rows DEAD in both = acts that never open a dialog (in-place line; DIRECT in the plain run). 0 page errors in all 6 runs.
+
+### E96r probe (dev/test/dialog-order-held-probe.js, real taps), r2 build
+| | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| P1 owner case | picker on top (10 cards) | picker on top (10 cards) |
+| P2 game card held → tap «Sai đi dò la» | picker ON TOP, Q = [picker, GAMECARD] (base: nothing, Q = [GAMECARD], picker lost) | same |
+| P2 order after | picker → (view) → GAMECARD after ✕ → empty: none lost | same |
+| P3 game card posted while picker open | waits behind the picker | same |
+Shots P1/P2 Fold + iPad looked at (scratch, not in git).
+
+### TESTS (r2 build)
+- dayq-hold PASS 46 · dayq-order PASS · dayq-ghost PASS all.
+- Old save (made with LIVE origin/main index.html, mk-oldsave.js) → loads on r2, 3 buổi played with real taps, 0 page errors, Fold + iPad; base build stops at the same card with the same tool (tool lacks the «Ta biết rồi» button, not a game fault).
+- 0 page errors in every run.
+
+### FAIL 3 — picker paint (measure; KIT REQUEST, law 9)
+CPU 4x, real tap «Sai đi dò la» → picker painted: 4.96 s Fold · 6.76 s iPad. Hot = forced layout reads (getBoundingClientRect 0.54 / 1.45 s, offsetParent ~0.47 s, clientWidth ~0.2 s) inside kit fit passes: jk4 kitDpAll + person-row fit, kitDlgFit; jopic `band`; jksize `.dlg *` scan; jk3 kitTabStick. → KIT REQUEST K-PICKER-FIT in dev/kit/KIT_REQUESTS.md (review/dialog-order c34f796e), sent to KK41 session_01V1ZZH1ZpR1p4UkhoUWozbE. Not patched here.
+### FAIL 4 — iPad 4x «Lời hay» (measure, note)
+Fold 4x: p50 16.7 · p95 29.7 · max 107 ms · >33 ms 11/277 · long tasks 129 ms. iPad 4x: p50 17.5 · p95 95.2 · max 1006 ms · >33 ms 16/100 · long tasks 2.9 s. The iPad long tasks come from the same layout-read family (same hot list as FAIL 3 on that run) → recheck after K-PICKER-FIT lands.
+
+### FOR MAIN 157
+1. E-c (picker speed) is done only when KK41 lands K-PICKER-FIT; FAIL 1/2 code does not depend on it.
+2. Worker's fallback images under dev/handover/shots/dialog-order/ stay until the verdict (E96r wipes them).
