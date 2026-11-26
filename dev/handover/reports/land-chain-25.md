@@ -47,3 +47,4 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 22:32Z MAIN 164 rolled → MAIN CHÍNH 165 session_01Rc5AsJ8B9RuGFGzjjQkmun gets READY.
 - 22:35Z MAIN 165 queue add: punish-tier-wit b5f3d85e after RV-163C PASS, after punish-tier ab73bc26.
 - 22:37Z RV-163 PASS dialog-order-r4 → sha 4594ec2b (review/dialog-order-r4-r163 on 03a8c17c; CHANGE both lines → fix to ONE at restack). Slot per MAIN 165.
+- 22:40Z ORDER (sent to MAIN 165): sp 4cfcda61 → ov3 d9afc3ca → wg 539603bf → wf 814bd77d (restack onto ov3) → punish-tier ab73bc26 → punish-tier-wit b5f3d85e (RV-163C) → dress-fix-kit 8cc9a284 → dialog-order-r4 4594ec2b → NG be41d1eb → lc24-st c3→m3→hf→ec → k44-parts 60599208 + goal-links 8d28efd7 + place-close 6f56bc93 + sound-cache 29a6cce7 → veil 5b4f8c56; oan-pace-ghen fe3d0888 after RV-163C. HOLD kit-resfold, kit-g4-r3, map, kitHand/kitPick/NHV.
