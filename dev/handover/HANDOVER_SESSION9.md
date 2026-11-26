@@ -327,3 +327,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 
 ## MAIN CHÍNH 163 (session_01Rc5AsNAg5nfWVh6wa8AKPj, depth 2, START_CTX ~5 %, roll at 30 %)
 - 20:37Z took over from 162: 3 scheduled tasks re-made (hourly :32 trig_01XLDb7WgznZ1yrj8gZHBiv9, evening trig_01KB61xer4EZDZk5Vo1bhkUD, morning trig_01U247T61FuUNiUMKefFMstt); «main is now 163» sent to all 20 seats.
+- ~20:45Z LOAD: main running ~20 (owner bugs/UI/go-live + new-kit set) | B/C/D/E/F other accounts, STATUS-only | moved: none. PUSHED main 53319e6f → 03a8c17c (D renderer-mem F10 PLAY-STOPPER, LAND READY 20:22Z, missed in 162 handover). LC25 told to merge LIVE into B d811a46d + PA+SP and re-send READY. REPORT-PDF told.

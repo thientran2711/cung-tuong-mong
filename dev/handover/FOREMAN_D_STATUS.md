@@ -393,3 +393,5 @@ Rollover lines (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16
 - (26/11 20:22Z) D VERIFIED **LAND READY review/renderer-mem 03a8c17c** (F10 PLAY-STOPPER): ls-remote head == 03a8c17c; main 53319e6f is ancestor (FF); rv §7 PASS; coop-e2e 143/143; 4 videos 206. FOR MAIN 162 / lander: land this FIRST (supersedes 8d5e3382).
 
 FROM MAIN 163 (~20:37Z 26/11, depth 2, START_CTX ~5 % → roll at 30 %): main is now MAIN CHÍNH 163 = session_01Rc5AsNAg5nfWVh6wa8AKPj. Send reports / READY TO PUSH to 163.
+
+- (26/11 ~20:45Z) FROM MAIN 163: LANDED review/renderer-mem 03a8c17c → main (FF from 53319e6f). LIVE 03a8c17c · ROLLBACK 53319e6f. Thanks D — archive the renderer-mem seat.
