@@ -143,6 +143,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_san-R7-lover2-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_san-R7-lover2-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-lover2",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 3737561841,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "d2e03d80"
+   },
+   "ending": "Ban hoa — Bị ban hoa, xuất cung (first card «Cúi đầu chờ xét», Rất vững)",
+   "age": 18,
+   "buoi": 1,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover2-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover2-moments.md"
   }
  ],
  "parked": [
@@ -161,6 +181,10 @@
   {
    "life": "E-S8-bd_tuyet-R8-skilled2",
    "why": "paused at buổi 141 (iPad Tân quân lập uy)"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-lover1",
+   "why": "INVALID: HARNESS quit the Lễ ra mắt dance mini-game (#kg82 «Quay lại» without «Sẵn sàng») → life ended at buổi 1; rerun after harness fix"
   }
  ]
 }
