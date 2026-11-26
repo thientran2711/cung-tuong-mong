@@ -188,6 +188,29 @@ BAL.mort={on:1,playerFloorYears:0,
     (her rửa oan story needs time), lcShow = fallen consorts shown with her in a visit; dead = faces / figures / names of the dead kept (newest) so
     no new person ever gets them (owner: a NEW person, never the dead person's picture) */
  ly:{age:34,floor:3,lcShow:3},dead:{keep:400}};
+/* REIGN-END (owner OD 26/11 ~21:20Z «Làm theo khuyên nghị hoàng thượng trên đi»; jreignend.js): the Emperor's reign ends by game state.
+   minY = no reign end by these events before this many reign years. abd = NHƯỜNG NGÔI pressure (0..100, at = he abdicates, warn = the court
+   petitions → her card): per month heir (crown prince ≥ heirAge) + th (Thái hậu alive presses, with a grown heir) / noHeir (no son: a hoàng đệ) +
+   heirK × heir's years over heirAge, th × hieu when he is Hiếu thảo; petP % a month (× 1 + misrule) the court petitions, +pet;
+   ill × st≥2 illness (×2 the lifespan omen) + old × years over age + yr × reign years over yrs + court (the heir's house power ≥ courtPow);
+   × temper (his ETRAITS: Chăm chính clings, Đa tình / Mê sắc let go) × max(gripMin, 1 − gripK × (grip − 50)/50) (jreign rg.p); decay = fall per month with no pressure.
+   phe = PHẾ per court house: evidence +1 a month at evP % × misrule count (biên cương / kho lúa < bad, black mood, illness) × house drive, once
+   power ≥ pow − evLead; fades evFade % a month with no misrule; cap evMax. Case opens when power ≥ pow, best consort's Sủng ≥ sung, evidence
+   ≥ ev and the house has a prince; vote after mo months at odds base + (power − grip)/powD + (evidence − ev)·evK + th (Thái hậu alive) + her push;
+   lose: house power −fail, its women's Sủng −sungLoss.
+   coup = LẬT ĐỔ per house: plots while power ≥ pow, power − grip ≥ gap, drive ≥ amb; rumour at rum months (her card if eyes ≥ eyes, or rumP %,
+   or it is her father's house), strikes at mo months at odds base + (gap over)·k + army (Đại tướng quân) + her push; lose: power −fail, women's
+   Sủng −sungLoss and rank (punish 2), the throne's grip +gripWin.
+   amb = a house's drive: 1 + corrupt (a greedy head) + sk × (head skill − 50) + prince (a prince of its blood).
+   her = her card (three roads of equal weight): block / help / stand aside — sung, danh, th, bac, duc = the stat moves; blk / psh = abdication
+   pressure moved; od = odds moved on a phế / coup case; evCut = evidence a mật tấu takes away; af / rel = the house's favour / its women's
+   relation; lose = what she loses if she helped a case that fails. */
+BAL.re={on:1,minY:7,
+ abd:{heirAge:10,heir:.35,heirK:.05,th:.45,hieu:1.5,noHeir:.15,petP:3,pet:5,temper:{chamchinh:.7,nongnay:.85,datinh:1.25,mesac:1.15,nhantu:1.1},ill:2.5,old:.3,age:45,yr:.1,yrs:10,court:.4,courtPow:55,gripK:.5,gripMin:.4,decay:.5,warn:55,at:100},
+ phe:{pow:60,evLead:8,sung:45,ev:4,evMax:8,evP:5,evFade:4,bad:40,mo:3,base:52,powD:2,evK:5,th:5,fail:25,sungLoss:15},
+ coup:{pow:65,gap:15,amb:1,rum:2,mo:3,eyes:2,rumP:50,base:35,k:1.5,army:10,fail:35,sungLoss:15,gripWin:8},
+ amb:{corrupt:.3,sk:.01,prince:.4},
+ her:{sung:4,danh:4,th:4,bac:60,duc:2,blk:25,psh:20,od:15,evCut:2,af:20,rel:6,lose:6}};
 /* D49 collection milestones (jcol): [items, Phúc duyên once per life (OD L46: ~+5/+10/+20/+35), danh hiệu (VANPHONG cổ trang)]; keep = lives remembered in the once-only ledger */
 BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[200,35,"Vạn bảo các chủ"]],keep:80};
 /* TÂN QUÂN LẬP UY (jreign, owner 16/11 D5): the Emperor's side story + her faction road. Months from the accession: at[c] opens chapter c+1;
