@@ -27,7 +27,7 @@ const J4DOOR={};/* key -> door ROWS (data only), filled while a tab is drawn */
    const dk=(vir?"v:":"a:")+k;
    const W=ways.map(c=>{const m=MODE.exec(c.at);let why=c.why||"";
     /* j76: the Thái hậu lesson must finish inside buổi sáng */
-    if(m[3]==="th"&&!why&&used+2>BAL.time.khac&&used<BAL.time.khac&&!S.j76carry)why=(S.buoi||0)!==0?"chỉ buổi sáng":`không kịp xong trong ${BUOI[0].toLowerCase()}`;
+    if(m[3]==="th"&&!why){const n=+((String(c.sm||"").replace(/<[^>]+>/g,"").match(/(\d+)\s*khắc/)||[])[1]||0);if(n>0&&typeof dayWhy==="function"){const w=window.__j76win;window.__j76win=1;try{why=dayWhy(n)}finally{window.__j76win=w}}}/* j76's own sáng-only reason (lessonMode th runs inside the same window) */
     return{n:c.n,sm:c.sm,why,go:()=>vir?lessonVir(k,m[3]):lessonMode(k,m[3])}});
    if(!j4Fold(dk,"Học",W))continue;/* fewer than 2 ways: the old buttons stay */
    J4DOOR[dk]=W.map(w=>j4Row(w,w.go));
