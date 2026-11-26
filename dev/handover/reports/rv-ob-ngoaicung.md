@@ -140,3 +140,19 @@ do not land it (MAIN: delete it).
   palace start values on her home week book (same k3/k10 family, new surface).
 - Tuần lục on Fold 755x1000: the book sits shifted left — left edge cut («háng ba…», figure clipped), right half dark.
 - In the palace an oán-only change opens an empty «Trong cung vừa qua» result card (rows []).
+
+## HANDOVER (reviewer session_01V1ZZH29E5itz7L8m4cLTq5, rollover: context 36 % ≥ START ~5 % + 25 %) — for the r5 reviewer
+- Next: r5 from OB-NGOAICUNG-3b (session_01V1ZZH1sqdbSzbtN5g1iE4v): perf root cause (3 clean quickcheck runs) + the home Tuần lục emperor page
+  (pre-existing a, MAIN 159 added it to this branch). (b) Fold Tuần lục layout and (c) empty oán-only card went to kit keeper KK43, not this branch.
+- How I tested (re-create in scratch, outside the repo): serve the merged worktree `python3 -m http.server <port>`; LIVE = the main checkout.
+  1. Merge the branch onto LIVE first (only index.html / sw.js / assets.json usually conflict → `git checkout --theirs` + `bash dev/site/build_site.sh`).
+  2. `node dev/test/ob-ngoaicung/scan.js <url> out.json --play=600` (5 roads; a road with isKc false began in the palace = start flake → rerun
+     `--origins=<road>`).
+  3. Result-card repro per road (tt td cnv nc bd): new life → «Ở nhà chờ tuyển tú» → Nhận thân phận; then rsnap → relAdd(topConsort,S,-5) both ways /
+     oán / S.hh / S.th → resultShow("Trong cung vừa qua",b) must give NO card; «Gửi quà vào cung cho <Hoàng hậu>» title must keep her row;
+     after kcEnter(0) (palace) every row must show.
+  4. Real taps Fold 755x1000 (hasTouch) + iPad 1180x820: Tiền truyện + home intro tags «Tiểu thư/Thôn nữ/Công chúa … (ta)», 6–8 «Sang buổi»,
+     page through the Tuần lục book (buttons ‹ › «Vào ngày mới»; it is a fixed layer, offsetParent is null) and look for palace names.
+  5. `node dev/tools/quickcheck.js <merged root> <LIVE index.html> --out <scratch>` ×3, plus LIVE vs LIVE as the control. coop-e2e:
+     `node dev/test/coop-e2e.js <scratch>`.
+- Remote branch review/ob-ngoaicung-r2 (=65348819) is NOT a PASS (deletion refused by the remote); LC22 told not to land it.
