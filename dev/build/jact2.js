@@ -76,7 +76,7 @@ function as2NgheMark(){if(!S)return;S.adDoor=S.adDoor||{};S.adDoor.__nghe=as2Ngh
    HÀNH SỰ 38 → 16: ONE FEATURE = ONE BUTTON. A true duplicate (one feature split into several cards) shows as ONE door card; the way is chosen
    INSIDE through the kit option dialog (Q modal → kitOptFinal option cards). DISPLAY ONLY: the deck keeps every original card object, every way
    runs the SAME act(i) as before (same khắc, cost, odds, wrappers, results, NPC parity: the NPCs use the same BAL.deck / AGC3BTN tables), so no
-   rule, outcome or number is lost or typed here (law 4). A door shows only while ≥2 of its ways are dealt; one way alone stays its own card.
+   rule, outcome or number is lost or typed here (law 4). A door shows whenever one of its ways is dealt (the same button name every day; the dialog lists the ways open today).
    ĐỂ RIÊNG (owner ~07:32Z «những cái cần để riêng thì vẫn cứ để riêng»): Điểm trang (H1), Hối lộ Kính sự phòng (H9 lật thẻ), Cầu tự (H10),
    Trò chuyện với cung nữ (H12), Phát bạc cứu giúp (H13), Để ý nam nhân (H15), Giả mang thai (H16) — each a feature of its own.
    Lãnh cung (S.out), the cung nữ road and khuê các keep their own decks here (act-merge J5). Co-op: display only, no shared state. */
@@ -97,11 +97,11 @@ function hsdOf(n){return HSD.find(d=>d.m.some(r=>r.test(n||"")))||null}
 function hsdWhy(a,dis){if(!dis)return"";let w="";try{w=cardWhy(a)}catch(e){}return w||(a.lock&&a.t)||"chưa làm được lúc này"}
 function hsdBuild(){if(!hsdOn())return;const P=$("panel");const G=P&&P.querySelector(".cards");if(!G)return;
  const cards=[...G.querySelectorAll(":scope > button.kcard[data-i]")];
- for(const d of HSD){const mem=cards.filter(b=>{const a=deck[+b.dataset.i];return a&&d.m.some(r=>r.test(a.n||""))});if(mem.length<2)continue;
+ for(const d of HSD){const mem=cards.filter(b=>{const a=deck[+b.dataset.i];return a&&d.m.some(r=>r.test(a.n||""))});if(!mem.length||(mem.length===1&&deck[+mem[0].dataset.i].n===d.n))continue;/* one button per feature, the SAME name every day: a lone way shows under its door too */
   const W=mem.map(b=>({i:+b.dataset.i,dis:!!(b.disabled||b.classList.contains("kdis"))}));const ok=W.filter(w=>!w.dis);
   const lead=deck[(ok[0]||W[0]).i];HSD_ART[d.n]=lead.n;
   const ks=(ok.length?ok:W).map(w=>cardCost(deck[w.i]));
-  const o={n:d.n,t:d.t,k:Math.min(...ks),c:{},w:{},x:`${W.length} cách, chọn khi làm`,dom:lead.dom,lock:!ok.length,hsDoor:d.k};
+  const o={n:d.n,t:d.t,k:Math.min(...ks),c:{},w:{},x:W.map(w=>String(deck[w.i].n).split(", ")[0]).join(" · ")/* the Thành row names the ways (short name: the part before a comma, the kit splits rows on commas) */,dom:lead.dom,lock:!ok.length,hsDoor:d.k};
   /* odds chip: when EVERY usable way rolls, the door shows the best way's odds; a door with a sure way keeps the kit's sure look (odds cap) */
   try{const R=ok.map(w=>deck[w.i]).filter(a=>a.o!=null&&a.o<100);if(ok.length&&R.length===ok.length)o.o=Math.max(...R.map(a=>a.o))}catch(e){}
   const tp=document.createElement("template");tp.innerHTML=cardH(o,W[0].i).trim();const b=tp.content.querySelector("button");if(!b)continue;
@@ -113,7 +113,7 @@ if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){tr
 /* the door: ONE kit option dialog, one option per way (its own khắc / cost / odds line), «Thôi» = the kit ✕ */
 function hsdOpt(a,why,i){const sp=String(a.x||"").split(/ · kèm: /);const ton=[`${cardCost(a)} khắc`];try{const c=fmt(a.c||{});if(c)ton.push(c)}catch(e){}
  let gain="";try{gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ")}catch(e){}const P=["tốn: "+ton.join(" · "),"thành: "+(gain||a.t||"")];if(sp[1])P.push("kèm: "+sp[1]);
- const rolled=a.o!=null&&a.o<100&&!a.lock;const o={n:a.n,x:P.join(" · "),go:()=>act(i)};
+ const rolled=a.o!=null&&a.o<100&&!a.lock;const o={n:a.n,x:P.join(" · "),go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("hsd act",e)}},0)}};/* the way runs in its OWN task, exactly like a tap on its old card: no dialog-choice context (j78 evidence «how», j85 deed, co-op pick text) wraps it */
  if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}o.x+=" · hỏng: "+(f||"không mất gì");try{o.p=optOdds(a)}catch(e){}}
  if(why)o.off={why};return o}
 function hsdOpen(b){if(!S||S.dead||Q.length)return;const d=HSD.find(x=>x.k===b.dataset.hsd);if(!d)return;const I=b.dataset.hsi.split(",").map(Number),X=b.dataset.hsx.split(",").map(Number);
