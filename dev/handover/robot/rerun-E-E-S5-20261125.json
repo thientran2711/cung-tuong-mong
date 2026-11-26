@@ -1,7 +1,7 @@
 {
  "unit": "E-S5",
  "game": "LIVE github.io",
- "finished": 9,
+ "finished": 10,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -12837,6 +12837,82 @@
      "type": "game",
      "n": 1,
      "msg": "every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui)"
+    }
+   ],
+   "exitPick": null
+  },
+  {
+   "life": "E-S5-R5-lazy-2",
+   "dev": "fold",
+   "bot": "quiet",
+   "seed": 3938049582,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Lãnh cung",
+   "type": "end",
+   "death": false,
+   "age": 30,
+   "buoi": 1922,
+   "harness": {
+    "kind": "realtap",
+    "sha": "4d7a22c6",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "build": {
+     "s": "3762da08+",
+     "b": "fa8da73cecdc",
+     "t": "2026-11-25T19:34Z"
+    },
+    "areaTaps": 5833,
+    "backdropTaps": 1,
+    "dlgScroll": 630,
+    "scrolls": 772,
+    "infoTaps": 886,
+    "kfocVisits": 40,
+    "dlgClose": 496,
+    "mgDragSkip": 65,
+    "crashes": 1,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-26T04:27:34.601Z",
+      "buoi": 61,
+      "from": "2026-11-26T04:17:00.334Z"
+     },
+     {
+      "at": "2026-11-26T05:53:28.863Z",
+      "buoi": 542,
+      "from": "2026-11-26T05:52:55.684Z"
+     },
+     {
+      "at": "2026-11-26T07:55:01.931Z",
+      "buoi": 1317,
+      "from": "2026-11-26T07:54:15.858Z"
+     },
+     {
+      "at": "2026-11-26T08:39:08.034Z",
+      "buoi": 1499,
+      "from": "2026-11-26T08:38:24.490Z"
+     },
+     {
+      "at": "2026-11-26T09:55:26.867Z",
+      "buoi": 1869,
+      "from": "2026-11-26T09:54:53.121Z"
+     }
+    ],
+    "mgReady": 19,
+    "taps": 210
+   },
+   "bugs": [
+    {
+     "type": "crash",
+     "n": 1,
+     "msg": "tab crashed (Page crashed) at buổi 64"
     }
    ],
    "exitPick": null
