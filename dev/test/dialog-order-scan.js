@@ -51,7 +51,7 @@ const CARDSEL='.kfoc button.kfoc-b';
      await p.evaluate(()=>{window.__why=null});
      await sleep(900);const s=await p.evaluate(()=>__D.state());
      const res=(s.modal||s.ov||s.scene||s.play||s.intro)?'TOP':(s.q?'HELD':'DIRECT');
-     rows.push({pl,who:who.n,tab:tb,act:cd.n,res,q:s.qt||''});if(process.env.SHOT&&res==='HELD')await p.screenshot({path:process.env.SHOT+'/held-'+rows.length+'.png'});if(process.env.WHY&&res==='HELD')console.log('WHY',cd.n,JSON.stringify(await p.evaluate(()=>({why:window.__why,mg:S.mg&&(S.mg.k||S.mg.kind||1),tapIn:DQ.tapIn,mine:!!DQ.mine,st:DQ.stat,kfoc:!!document.querySelector('.kfoc'),popw:!document.getElementById('popw').hidden,q0:Q[0]&&{t:Q[0].t,pid:Q[0].pid},fn:typeof dqTapIn,pre:DQ.preQ&&DQ.preQ.size,inPre:!!(DQ.preQ&&DQ.preQ.has(Q[0])),qh:dqQHidden(),qn:Q.length,enc:!!(DF.encM&&DF.encM===Q[0]),dfw:Q[0]&&Q[0].__dfWait,dfs:Q[0]&&Q[0].dfSeen,play:dqPlaying(),ev:DQ.tapEv&&DQ.tapEv.type}))));
+     rows.push({pl,who:who.n,tab:tb,act:cd.n,res,q:s.qt||''});if(process.env.SHOT&&(res==='HELD'||(process.env.SHOTD&&res==='DIRECT'&&cd.n.includes(process.env.SHOTD))))await p.screenshot({path:process.env.SHOT+'/held-'+rows.length+'.png'});if(process.env.WHY&&res==='HELD')console.log('WHY',cd.n,JSON.stringify(await p.evaluate(()=>({why:window.__why,mg:S.mg&&(S.mg.k||S.mg.kind||1),tapIn:DQ.tapIn,mine:!!DQ.mine,st:DQ.stat,kfoc:!!document.querySelector('.kfoc'),popw:!document.getElementById('popw').hidden,q0:Q[0]&&{t:Q[0].t,pid:Q[0].pid},fn:typeof dqTapIn,pre:DQ.preQ&&DQ.preQ.size,inPre:!!(DQ.preQ&&DQ.preQ.has(Q[0])),qh:dqQHidden(),qn:Q.length,enc:!!(DF.encM&&DF.encM===Q[0]),dfw:Q[0]&&Q[0].__dfWait,dfs:Q[0]&&Q[0].dfSeen,play:dqPlaying(),ev:DQ.tapEv&&DQ.tapEv.type}))));
     }
    }
   }
