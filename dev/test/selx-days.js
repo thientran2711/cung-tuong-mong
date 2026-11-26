@@ -17,7 +17,7 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
  const r=await p.evaluate(()=>{const out=[];const plain=h=>String(h||'').replace(/<[^>]*>/g,' ');
   const life=og=>{for(let i=0;i<600;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S&&S.origin&&S.origin.k===og)break}if(!S||!S.origin||S.origin.k!==og)return false;S.kcPick="cung";nlAccept();return true};
   const close=()=>{try{document.querySelectorAll('.kmov,#kprevov,#kg82,#kpod,.kpod').forEach(x=>x.remove())}catch(e){}};
-  const OR=ORIGINS.map(o=>o.k).filter(k=>k!=="cnv"&&k!=="cn"&&!selxHoaThan(k));
+  const OR=ORIGINS.map(o=>o.k).filter(k=>typeof selxDaysFit==="function"?(()=>{const o=S.origin;S.origin={k};const f=selxDaysFit();S.origin=o;return f})():k!=="cnv"&&!selxHoaThan(k));
   for(const og of OR)for(const mode of ["keep","ban"]){if(!life(og))continue;close();const Z=S.selx2;const o={og,mode,days:[],titles:[],kmin:99,kstart:[],digits:[],seen:[],met0:0,met:0,lessonAll:false,err:""};
    if(!Z||!Z.days){o.err="no days";out.push(o);continue}const r0=S.origin.r||0;const relBefore=JSON.stringify(Z.girls.map(v=>v.rel||0));let lastDay=0,lastKh=null;
    if(mode==="ban"){S.sac=0;S.duc=0;S.tai=0}else{S.sac=S.duc=S.tai=100}/* keep: a sure top-4 (since the first impression + the 12-girl contest a plain bot could fall to 5th) */

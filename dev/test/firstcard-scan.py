@@ -31,6 +31,7 @@ def body(s,i):
 def how(s,a,b,name):
   pre=s[max(0,a-40):a]
   if re.search(r'(kitRiskOpt|kc2SelRisk|kc2ExRisk)\((?:kc2H\()?$',pre):return 'declared'
+  if re.search(r'j67:line\b|j67:`\$\{word\(',s[a:b]):return 'own odds'  # jkc3 kc3Ev: the line leads with word(p), the roll uses the same p
   if '...[' in s[max(0,a-700):a] and re.search(r'\]\]?\.map\([^)]*\)=>kitRiskOpt',s[b:b+900]):return 'declared'  # an option list mapped through kitRiskOpt
   if re.search(r'\bx:`\$\{word\(|\bo:(?:od\(|\d)',s[a:b]):return 'own odds'
   tail=s[b:b+260].split('kcO(')[0]
@@ -54,9 +55,22 @@ for f in sorted(glob.glob(os.path.join(D,'j*.js'))):
     e=END.search(b)
     if not e:continue
     rows.append((fn,s.count('\n',0,m.start())+1,m.group(1)[:44],e.group(1) or e.group(2),how(s,m.start(),m.start()+len(b),m.group(1))))
-un=[r for r in rows if r[4]=='none']
+# FIRSTCARD-2 (MAIN 156 (c)): the NON-lethal family — every kcO option whose go rolls a hidden chance (the kit cannot see it) must carry its true odds
+H=[]
+for f in sorted(glob.glob(os.path.join(D,'j*.js'))):
+  if f.endswith('all.js'):continue
+  s=open(f,encoding='utf-8').read();fn=os.path.basename(f)
+  for m in re.finditer(r'kcO\(("(?:[^"\\]|\\.)*"|`[^`]*`|[A-Za-z0-9_.()?:"\' ]{1,80}?),',s):
+    b=body(s,m.start()+3)
+    if not re.search(r'\broll\(',b) or END.search(b):continue
+    h=how(s,m.start(),m.start()+3+len(b),m.group(1));H.append((fn,s.count('\n',0,m.start())+1,m.group(1)[:44],'roll','none' if h=='words' else h))  # a chancy roll is never told by ending words
+un=[r for r in rows+H if r[4]=='none']
 print(f"{'file:line':<22} {'option':<46} {'ends via':<12} risk told by")
 for r in rows:print(f"{r[0]+':'+str(r[1]):<22} {r[2]:<46} {r[3]:<12} {r[4]}")
 c=lambda k:sum(r[4]==k for r in rows)
-print(f"TOTAL {len(rows)} life-ending options · declared {c('declared')} · own odds {c('own odds')} · ending words {c('words')} · NOT TOLD {len(un)}")
+print(f"TOTAL {len(rows)} life-ending options · declared {c('declared')} · own odds {c('own odds')} · ending words {c('words')} · NOT TOLD {sum(r[4]=='none' for r in rows)}")
+print()
+print(f"{'file:line':<22} {'option (hidden roll, not lethal)':<46} {'':<12} risk told by")
+for r in H:print(f"{r[0]+':'+str(r[1]):<22} {r[2]:<46} {r[3]:<12} {r[4]}")
+print(f"TOTAL {len(H)} hidden-roll options · declared {sum(r[4]=='declared' for r in H)} · own odds {sum(r[4]=='own odds' for r in H)} · NOT TOLD {sum(r[4]=='none' for r in H)}")
 if '--fail' in sys.argv and un:sys.exit(1)

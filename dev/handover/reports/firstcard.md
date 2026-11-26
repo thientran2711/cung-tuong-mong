@@ -95,3 +95,65 @@ before-LIVE-fold-bd-le-ra-mat.png · after-fold-bd-le-ra-mat.png · after-ipad-b
 - Same kit gap, NOT life-ending: every `kcO` home-road option with a hidden roll (e.g. «Thưa: con đợi kỳ tuyển tú», «Thức đêm thêu», «Nghe hắn kể») still reads the sure «Rất vững»; `kitRiskOpt` is the one tool to give them their true odds (FOR MAIN: route as a follow-up family).
 - Deck act «Xuất gia» (j14, o:100, act card meter, not a dialog option) keeps «Rất vững» + its own «kết thúc kiếp này» line.
 - Changes the owner's 19/11 ~01:48Z «certain outcome = top word» rule ONLY for options whose outcome ends the life (MAIN 153 brief: «a life-ending pick never Rất vững»); FOR MAIN: confirm with sếp if needed (law 16).
+
+
+# FIRSTCARD-2 (review/firstcard-2 on 9ba83cf0; MAIN 156 recs (a) + (c))
+
+## (a) cn meets the 3 selection days
+`jselxday selxDaysFit` no longer excludes cn (hòa thân stays out, cnv stays out). A cn life now starts in Dưỡng Tú viện, Day 1 (thân phận «Tú nữ»), like every tú nữ origin; the contest is on Day 2 after her own play. selx-days ALL PASS (14 lives, cn included; the test now reads selxDaysFit).
+Measured (dev/test/firstcard/stat-days.js, 25 new lives each; her mini mark = her own level; the two answers A unknown / B both liked by the asking royal / C one liked one disliked):
+| origin | kept A | kept B | kept C |
+|---|---|---|---|
+| cn | 2/25 | 19/25 | 4/25 |
+| tt | 7/25 | 16/25 | 7/25 |
+| td | 7/25 | 20/25 | 11/25 |
+Before (round 1): cn met the ONE-card contest at once → 22/30 lives ended in the first minutes with no road to play well. Now the first card is Day 1, and a player who learns the royals' chữ trọng (ma ma, dramas) keeps ~¾ of cn lives.
+Note FOR MAIN: cn = «Cung nữ được sủng hạnh» (j1 k:"cn", ex-tea maid of Càn Thanh); OD:L1251 calls cn «Cung nữ tuyển vào cung» — the code key and the OD name differ; her prequel («ba năm nay ta hầu trà ở Càn Thanh cung») now leads into Dưỡng Tú viện as a tú nữ.
+
+## (c) non-lethal hidden-roll family (every kcO option whose go rolls a chance the card cannot see)
+Each option now reads ONE function for its roll and its odds word: `((rp)=>kitRiskOpt(kcO(…roll(rp())…),()=>P))(()=>EXPR)` (P = rp(), or 100 − rp() where the roll is the BAD branch: «Dùng thử», «Từ chối, giữ kín» ×2, «Đưa bạc», «Về kể với cha»; a person-guard `x&&roll(…)` → `x?rp():0`; the silver pin shows the detection chance, never the hidden «real»). `kitRiskOpt` accepts p as a function (a missing person → no word, never a crash). No loss words added (not life-ending): the meter alone changes.
+Scan `python3 dev/test/firstcard-scan.py --fail`: 39 hidden-roll options — LIVE 37 sure «Rất vững» (2 jkc3 kc3Ev carry own odds… 1 here) → AFTER declared 38 · own odds 1 · NOT TOLD 0. Life-ending table unchanged (51, 0 not told). Runtime (family.js): Thưa: con đợi kỳ tuyển tú «Có cơ», Thức đêm thêu «Vững», Mua bức thêu «Tùy duyên», phấn ×3 «Tùy duyên», Thức đêm sắc lá «Tùy duyên», Mời thầy cúng «Hiểm», Nhận lời cho êm «Tùy duyên», Quỳ xin cha «Có cơ»; options with no roll keep «Rất vững» (certain).
+
+| file:line | option | LIVE meter | after |
+|---|---|---|---|
+| jkc.js:373 | "Lấy trâm bạc thử" | Rất vững (sure stamp) | declared |
+| jkc.js:378 | "Nhờ đại phu xem thử" | Rất vững (sure stamp) | declared |
+| jkc.js:379 | "Dùng thử" | Rất vững (sure stamp) | declared |
+| jkc.js:381 | `Đứng ra bênh ${mz}` | Rất vững (sure stamp) | declared |
+| jkc.js:384 | "Xin tổ mẫu cho tra xét" | Rất vững (sure stamp) | declared |
+| jkc.js:392 | "Nói lại với cha" | Rất vững (sure stamp) | declared |
+| jkc.js:400 | "Từ chối, giữ kín" | Rất vững (sure stamp) | declared |
+| jkc.js:415 | "Ra phố thắp đèn thi" | Rất vững (sure stamp) | declared |
+| jkc.js:434 | "Đối lại câu đối" | Rất vững (sure stamp) | declared |
+| jkc.js:438 | "Thức đêm thêu bách thọ đồ" | Rất vững (sure stamp) | declared |
+| jkc.js:438 | "Mua bức thêu ngoài phố" | Rất vững (sure stamp) | declared |
+| jkc.js:439 | "Nghe hắn kể" | Rất vững (sure stamp) | declared |
+| jkc.js:442 | "Thưa: con đợi kỳ tuyển tú" | Rất vững (sure stamp) | declared |
+| jkc.js:780 | "Thử một chút lên cổ tay" | Rất vững (sure stamp) | declared |
+| jkc.js:786 | "Nhờ tỳ nữ dò hỏi hắn" | Rất vững (sure stamp) | declared |
+| jkc2.js:282 | "Bán đôi khuyên bạc mua thuốc" | Rất vững (sure stamp) | declared |
+| jkc2.js:283 | "Thức đêm sắc lá, chườm cho mẹ" | Rất vững (sure stamp) | declared |
+| jkc2.js:284 | "Mời thầy cúng về nhà" | Rất vững (sure stamp) | declared |
+| jkc2.js:286 | "Nghiêm mặt mắng lại" | Rất vững (sure stamp) | declared |
+| jkc2.js:288 | "Về kể với cha" | Rất vững (sure stamp) | declared |
+| jkc2.js:291 | "Bày cho nàng ghi tên đi tuyển" | Rất vững (sure stamp) | declared |
+| jkc2.js:294 | "Nhận lời dệt riêng" | Rất vững (sure stamp) | declared |
+| jkc2.js:297 | "Đưa bạc" | Rất vững (sure stamp) | declared |
+| jkc2.js:299 | "Từ chối, giữ kín" | Rất vững (sure stamp) | declared |
+| jkc2.js:301 | "Ra đồng cứu lúa cùng cha" | Rất vững (sure stamp) | declared |
+| jkc2.js:306 | "Để cha đi phu, ngươi gánh việc nhà" | Rất vững (sure stamp) | declared |
+| jkc2.js:307 | "Xin lý trưởng khất" | Rất vững (sure stamp) | declared |
+| jkc2.js:309 | "Xin cha từ chối" | Rất vững (sure stamp) | declared |
+| jkc2.js:321 | "Nói chuyện thẳng với nàng" | Rất vững (sure stamp) | declared |
+| jkc2.js:322 | "Tâu với phụ thân" | Rất vững (sure stamp) | declared |
+| jkc2.js:325 | "Xin sứ đoàn mời thầy thuốc Đại Hy" | Rất vững (sure stamp) | declared |
+| jkc2.js:327 | "Xin giữ quyền thư từ với cố quốc" | Rất vững (sure stamp) | declared |
+| jkc2.js:330 | "Kêu cứu" | Rất vững (sure stamp) | declared |
+| jkc2.js:334 | `Nhận lời cho êm, rồi tâu ${kc2L().dad.toLow | Rất vững (sure stamp) | declared |
+| jkc2.js:336 | "Quỳ trước triều xin giữ hòa ước" | Rất vững (sure stamp) | declared |
+| jkc2.js:343 | "Xin cha lo gạch tên" | Rất vững (sure stamp) | declared |
+| jkc2.js:346 | "Tự làm trả nợ, giữ đường lùi" | Rất vững (sure stamp) | declared |
+| jkc2.js:352 | "Ra mắt đoan trang, đáp lời bằng tiếng Đại H | Rất vững (sure stamp) | declared |
+| jkc3.js:168 | n | Rất vững (sure stamp) | own odds |
+
+Stills (LOOKED, Fold + iPad): CDN img/_review/firstcard-2/ after2-{fold,ipad}-ba-moi.png, after2-{fold,ipad}-me-benh.png, after2-{fold,ipad}-cn-ngay1.png.

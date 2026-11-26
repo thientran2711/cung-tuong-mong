@@ -321,7 +321,7 @@ function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.
    (n ≥ 2 options) whose words say this life ends (KIT_END_RE) → word(BAL.odds.lo) = the chance of keeping this life; else null (the sure meter). */
 const KIT_END_RE=/kiếp này dừng|kết thúc kiếp này|bị ban hoa|mất mạng/;
 function kitRiskHint(h,loss){h=String(h||"");return !loss||h.includes(loss)?h:(h?h+"; ":"")+"nhưng "+(/ thì /.test(loss)?"":"nếu hỏng: ")+loss}/* a loss that names its own condition («… thì …») is not prefixed */
-function kitRiskOpt(o,p,loss,end){if(!o||p==null||isNaN(p))return o;p=oddsCl(Math.round(p));o.oddsP=p;if(end)o.end={p};
+function kitRiskOpt(o,p,loss,end){if(typeof p==="function")try{p=p()}catch(e){p=null}/* FIRSTCARD-2: p may be the roll's own function (one formula for the roll and the word) */if(!o||p==null||isNaN(p))return o;p=oddsCl(Math.round(p));o.oddsP=p;if(end)o.end={p};
  o.j67=[word(p),String(o.j67||"").replace(KIT_ODDS_LEAD,"").replace(/^\s*·\s*/,"")].filter(Boolean).join(" · ");
  if(loss){o.__rkLoss=loss;const h=o.hint;o.hint=typeof h==="function"?(lv=>kitRiskHint(h(lv),loss)):kitRiskHint(h,loss)}return o}/* __rkLoss: a later hint table (jkc KCH) adds its own hint first, then the loss */
 function kitEndOdds(o,n){if(!o)return null;if(o.oddsP!=null)return word(o.oddsP);if(o.end)return word(o.end.p!=null?o.end.p:BAL.odds.lo);if((n||0)<2)return null;
