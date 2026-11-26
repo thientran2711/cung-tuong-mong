@@ -384,3 +384,18 @@ function kaTimeNeeds(c,bacCost){const L=[];const left=BAL.time.khac-used;L.push(
   if(ok){if(/^cần /i.test(x))L.push({t:x.replace(/^cần /i,"")+ev,ok:true})}
   else{let lw="";try{lw=typeof LACK!=="undefined"&&LACK[k]?LACK[k](v):""}catch(e){}L.push({t:lw||(x?x.replace(/^cần /i,"")+ev:"điều kiện riêng của việc này chưa có"),ok:false})}
   return String(h).replace(/^<button /,`<button${kaNeedAttr(L)} `)})}catch(e){}return G}})();
+/* KIT §7.4a RESULT CARD PEOPLE FOLD (MAIN 162 on the RING-BUILD Bàn bài video: an event result listed ~15 people's thiện cảm rows, too long for the Fold;
+   owner OD 26/11 ~17:55Z KEEP ALL rows = nothing hidden): in every result card (#rtoast), a row that holds more than KIT_RES_FOLD.keep person-feeling items
+   («<Tên>: thiện cảm +3», oán, ghen, quý ngươi, tin cậy …) shows the biggest KIT_RES_FOLD.keep changes by name, then ONE kit item
+   «+N người khác: thiện cảm ±» — tap opens all of them in place (still kit items, nothing removed). One post-render rule for every result builder. */
+const KIT_RES_FOLD={keep:4,rx:/^\s*([^:]{2,48}):\s*(thiện cảm|oán|ghen|quý ngươi|tin cậy|ta quý nàng|nàng quý ta)\s*([+−-])\s*(\d+)/u};window.KIT_RES_FOLD=KIT_RES_FOLD;
+function kitResFold(t){try{t=t||document.getElementById("rtoast");if(!t)return;t.querySelectorAll(".kr > .krv").forEach(v=>{if(v.dataset.kresf)return;
+ const it=[...v.children].filter(e=>!e.classList.contains("ksep")).map(e=>{const m=KIT_RES_FOLD.rx.exec((e.textContent||"").replace(/\s+/g," "));return m?{e,k:m[2],n:(m[3]==="+"?1:-1)*(+m[4])}:null}).filter(Boolean);
+ if(it.length<=KIT_RES_FOLD.keep+1)return;v.dataset.kresf="1";const keep=new Set([...it].sort((a,b)=>Math.abs(b.n)-Math.abs(a.n)).slice(0,KIT_RES_FOLD.keep).map(x=>x.e));
+ const rest=it.filter(x=>!keep.has(x.e));const kinds=[...new Set(rest.map(x=>x.k))];const sg=s=>{const up=rest.some(x=>x.k===s&&x.n>0),dn=rest.some(x=>x.k===s&&x.n<0);return up&&dn?"±":up?"+":"−"};
+ rest.forEach(x=>{x.e.classList.add("kresx");x.e.hidden=true;const p=x.e.previousElementSibling;if(p&&p.classList.contains("ksep"))p.hidden=true});
+ const b=document.createElement("span");b.className="kitem kresmore";b.setAttribute("role","button");b.tabIndex=0;b.innerHTML=`<span class="ef n">+${rest.length} người khác: ${kinds.map(k=>k+" "+sg(k)).join(", ")}</span>`;
+ b.addEventListener("click",e=>{e.stopPropagation();rest.forEach(x=>{x.e.hidden=false;const p=x.e.previousElementSibling;if(p&&p.classList.contains("ksep"))p.hidden=false});b.remove()});v.appendChild(b)})}catch(e){console.error("kitResFold",e)}}
+window.kitResFold=kitResFold;
+(function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{kitResFold()}catch(e){}return r};window.resultShow=resultShow})();
+(function(){const st=document.createElement("style");st.textContent=`#rtoast .kresmore{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;text-decoration-color:var(--gold)}#rtoast .kresx[hidden]{display:none!important}`;document.head.appendChild(st)})();
