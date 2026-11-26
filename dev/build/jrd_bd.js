@@ -259,10 +259,10 @@ rdDef("bd_san",9,{t:"Mã cầu và hội bắn xuân",w:"emp",sj:"hội mã cầ
   {n:"Giữ cách bắn cho riêng mình",/*bd6c: a skill, not an object*/f:"self",wx:"chỉ ngươi bắn trúng trong gió",lx:"người ta nói ngươi giấu nghề",rt:"Mũi tên của ngươi trúng hồng tâm giữa gió."},
   {n:"Tâu xin dời hội sang buổi chiều lặng gió",f:"safe",wx:"hội công bằng cho mọi người",lx:"ngài phải đợi",rt:"Chiều xuống, gió lặng. Hội bắn lại từ đầu."}]},
  x1:{h:"Mũi tên cuối",w:"emp",t:"Còn mũi tên cuối. Em trai {v} đang dẫn trước một mũi tên. Hoàng thượng nhìn sang ngươi.",o:[
-  {n:"Tự giương cung bắn mũi cuối",e:["win","lose"],rt:"Mũi tên của ngươi xẻ đôi mũi tên của em trai {v} trên hồng tâm. Cả Tây Uyển đứng dậy.",rf:"Gió đổi chiều đúng lúc buông dây, tên ngươi cắm ngoài vòng."},
+  {n:"Tự giương cung bắn mũi cuối",f:"ctnself"/* D3: her own shot = her first place */,e:["win","lose"],rt:"Mũi tên của ngươi xẻ đôi mũi tên của em trai {v} trên hồng tâm. Cả Tây Uyển đứng dậy.",rf:"Gió đổi chiều đúng lúc buông dây, tên ngươi cắm ngoài vòng."},
   {n:"Đưa cây cung cho hoàng tử ngươi đã dạy",/*bd6c: her own bow, lent for one shot, back in her hand*/e:["win","mid"],rt:"Hoàng tử bắn trúng hồng tâm, quay lại cúi đầu với ngươi trước cả triều.",rf:"Hoàng tử bắn trúng vòng hai. Ngài vẫn khen."},
   {n:"Hạ cung, chúc em trai {v} thắng",e:"mid",lx:"ngươi không bắn mũi cuối",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"Em trai {v} thắng hội. {v} gật đầu với ngươi từ xa."}]}},
- E:{win:{tag:"Cung thần của hậu cung",w:"emp",t:"Hoàng thượng ban cho ngươi cây cung sừng của tiên đế. Từ nay, hội bắn nào cũng có ghế của ngươi.",go:()=>bdO("cungtd","ta")},
+ E:{win:{tag:"Cung thần của hậu cung",w:"emp",t:"Hoàng thượng ban cho ngươi cây cung sừng của tiên đế. Từ nay, hội bắn nào cũng có ghế của ngươi.",go:(A)=>{const r=bdO("cungtd","ta");if(A&&A.f&&A.f.ctnself&&typeof ctnWin==="function")ctnWin(S,"Hội bắn xuân")/* D3: first place ⇒ thị tẩm that night (jctn); the prince's shot is not hers */;return r}},
   mid:{tag:"Tên trúng, người không nhớ",t:"Hội bắn tan. Người ta nhớ ai thắng, còn ngươi được nhớ là người đã có mặt."},
   lose:{tag:"Tên trượt trước cả triều",w:"v",t:"Cả triều thấy mũi tên của ngươi cắm ngoài vòng. {v} sai người mang sang một bó tên tập, gọi là quà."}}});
 

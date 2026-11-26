@@ -107,9 +107,9 @@ rdDef("thd_tho",7,{t:"Vòng thi Ngự hoa viên",w:"emp",sj:"vòng thi Xuân th�
   {n:"Viết về tuyết trên mái trường làng",e:["win","mid"],rt:"Hoàng thượng đọc xong, đặt bài ngươi lên trên cùng.",rf:"Bài hay, nhưng Hàn lâm viện chê lời quê."},
   {n:"Viết theo lối cung đình cho chắc",e:["mid","lose"],lx:"chắc mà nhạt",rt:"Bài ngươi đứng ngang bài {v}.",rf:"Bài ngươi chìm giữa những bài giống nhau."},
   {n:"Viết một bài đáp thẳng bài {v}",e:["win","lose"],rt:"Cả vườn nhận ra bài {v} chỉ là cái bóng của bài ngươi.",rf:"Hoàng thượng thấy ngươi đem thơ ra đấu khẩu."}]}},
- E:{win:{tag:"Đứng đầu vòng thi",w:"emp",t:"Bài ngươi đứng đầu vòng Xuân thí. Hoàng thượng cho chép lại treo ở Ngự thư phòng. {v} rời vườn trước khi tan.",go:(A,G)=>{rdOan(A,"v",G[0]);return ""}},
+ E:{win:{tag:"Đứng đầu vòng thi",w:"emp",t:"Bài ngươi đứng đầu vòng Xuân thí. Hoàng thượng cho chép lại treo ở Ngự thư phòng. {v} rời vườn trước khi tan.",go:(A,G)=>{if(typeof ctnWin==="function")ctnWin(S,"vòng Xuân thí")/* D3: first place ⇒ thị tẩm that night (jctn); before rdOan (G may be absent) */;rdOan(A,"v",G&&G[0]);return ""}},
   mid:{tag:"Đồng hạng với {v}",t:"Bài ngươi và bài {v} cùng hạng. Hàn lâm viện hẹn chấm lại khi yết bảng."},
-  lose:{tag:"{v} đứng đầu",t:"{v} đứng đầu vòng Xuân thí, bằng những câu ngươi biết rõ là của mình.",go:(A,G)=>{rdOan(A,"v",G[0]);return ""}}}});
+  lose:{tag:"{v} đứng đầu",t:"{v} đứng đầu vòng Xuân thí, bằng những câu ngươi biết rõ là của mình.",go:(A,G)=>{const v=rv67(A,"v");if(v&&typeof ctnWin==="function")ctnWin(v,"vòng Xuân thí")/* D3 two-way: the NPC's first place (jctn) */;rdOan(A,"v",G&&G[0]);return ""}}}});
 
 rdDef("thd_tho",8,{t:"Lời vu đạo thơ",w:"v",sj:"lời tố ngươi đạo thơ",cast(A){A.n1=A.n1||(S.st.f14&&S.st.f14.n1)||"Hàn lâm học trò của cha";return rdCast(A,["v"])},
  g:"Chú của {v} dâng tờ trình lên Hàn lâm viện: thơ ngươi dự thi chép từ một tập thơ có trước, chứng là những trang chép tay đề ngày từ ba năm trước. Bảng Xuân thí tạm hoãn. Đạo thơ là tội làm ô danh cả viện.",
@@ -206,9 +206,9 @@ rdDef("thd_tho",10,{t:"Ngày yết bảng",w:"emp",sj:"bảng Xuân thí",cast(A
    go:(A,ok,G)=>{rdOan(A,"v",G[0]);if(ok)return CN_CAM(rv67(A,"v"),BAL.road.thd_tho.cam)},rt:()=>`Hoàng thượng phê: chú của {v} bị cách chức, {v} bị cấm túc ${kitNumVi(BAL.road.thd_tho.cam)} tháng.`,rf:"Viện xin tha vì chứng còn mỏng. Ngài cau mày với cả hai bên."},
   {n:"Xin tha cho {v}, chỉ cần trả tên",e:["win","mid"],lx:"kẻ vu không trả giá, người ta bảo ngươi mềm tay",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Hoàng thượng khen ngươi độ lượng, tên ngươi đứng đầu bảng.",rf:"Tên ngươi về bảng, nhưng ở hàng thứ ba."},
   {n:"Thưa: thần thiếp chỉ xin giữ chữ",e:"mid",lx:"bảng thế nào cũng nhận; Hoàng thượng thấy ngươi chối ân, phật ý",rt:"Hoàng thượng nhìn ngươi lâu, rồi phẩy tay."}]}},
- E:{win:{tag:"Đứng đầu bảng Xuân thí",w:"emp",t:"Tên ngươi đứng đầu bảng, thơ ngươi sẽ mở trang thứ nhất tập Ngự tuyển. Cả kinh thành bàn về con gái thầy đồ."},
+ E:{win:{tag:"Đứng đầu bảng Xuân thí",w:"emp",t:"Tên ngươi đứng đầu bảng, thơ ngươi sẽ mở trang thứ nhất tập Ngự tuyển. Cả kinh thành bàn về con gái thầy đồ.",go:()=>{if(typeof ctnWin==="function")ctnWin(S,"bảng Xuân thí")/* D3: first place ⇒ thị tẩm that night (jctn) */;return ""}},
   mid:{tag:"Bảng yết, chuyện khép hờ",t:"Tên ngươi có trên bảng, không cao nhất. Lời vu được bỏ qua, không ai bị phạt."},
-  lose:{tag:"Tên ngươi xuống cuối bảng",t:"Bảng yết, tên ngươi ở hàng cuối, kèm dòng chú “còn nghi”. {v} được chọn mở tập Ngự tuyển.",go:(A,G)=>{rdOan(A,"v",G[0]);return ""}}}});
+  lose:{tag:"Tên ngươi xuống cuối bảng",t:"Bảng yết, tên ngươi ở hàng cuối, kèm dòng chú “còn nghi”. {v} được chọn mở tập Ngự tuyển.",go:(A,G)=>{const v=rv67(A,"v");if(v&&typeof ctnWin==="function")ctnWin(v,"bảng Xuân thí")/* D3 two-way (jctn) */;rdOan(A,"v",G&&G[0]);return ""}}}});
 
 rdDef("thd_tho",11,{t:"Tài nữ",w:"emp",sj:"danh hiệu Tài nữ sau cùng",cast(A){A.n1=A.n1||(S.st.f14&&S.st.f14.n1)||"Hàn lâm học trò của cha";return rdCast(A,["v"])},
  g:"Hoàng thượng sắp ban chiếu về tập Ngự tuyển: ai là Tài nữ của Đại Hy, ai chỉ là người có thơ in. Tên ngươi, và tên người cha nghèo dạy ngươi chữ, sẽ đứng ở đâu. Đây là kết cục truyện xuất thân của ngươi.",

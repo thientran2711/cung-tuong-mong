@@ -41,14 +41,21 @@ const HELP=H.replace(/\);\s*$/,'');/* "()=>{window.T=…}" */
      try{tsDressHold();if(W===S){const m=Q.find(x=>x&&x.opts&&x.opts.some(o=>/^Tự tay phối đồ/.test(o.n||"")));if(m){const i=m.opts.findIndex(o=>/^Tự tay phối đồ/.test(o.n||""));Q.splice(Q.indexOf(m),1);Q.unshift(m);chooseM(i)}}
       else{const m=Q.find(x=>x&&x.opts&&x.opts.some(o=>/^Cáo bệnh, không dự/.test(o.n||"")));if(m){const i=m.opts.findIndex(o=>/^Cáo bệnh, không dự/.test(o.n||""));Q.splice(Q.indexOf(m),1);Q.unshift(m);chooseM(i)}}}
      finally{tsDressTotal=tt;tsDressGame=dg;tsMkSit=ms}},
+   "jrd_thd Xuân thí round (thd_tho_7 ending)":(W,A,B)=>{const E=ARC67.thd_tho_7.E;if(W===S)E.win.go({act:{v:A.id},f:{}});else E.lose.go({act:{v:W.id},f:{}})},
+   "jrd_thd Xuân thí final board (thd_tho_10 ending)":(W,A,B)=>{const E=ARC67.thd_tho_10.E;if(W===S)E.win.go({act:{v:A.id},f:{}});else E.lose.go({act:{v:W.id},f:{}})},
+   "jrd_bd Hội bắn xuân, her own last shot (bd_san_9 ending)":(W)=>{if(W!==S)throw new Error("her shot only");ARC67.bd_san_9.E.win.go({act:{},f:{ctnself:1}})},
    "j67 Kỳ thi Tài nữ (story contest ending, her first place)":(W)=>{if(W!==S)throw new Error("her story only");const E=ARC67.thd_tho&&ARC67.thd_tho.E||null;const e=E&&E.win;if(!e||typeof e.go!=="function")throw new Error("no ending");S.arts=S.arts||{};e.go()}};
  });
  const kinds=await p.evaluate(()=>Object.keys(T.K));const out={url:URL,rows:[]};
- for(const k of kinds)for(const who of ["her","npc"]){if(/did not enter/.test(k)&&who==="her")continue;if(/Tài nữ/.test(k)&&who==="npc")continue;
+ for(const k of kinds)for(const who of ["her","npc"]){if(/did not enter/.test(k)&&who==="her")continue;if(/Tài nữ|Hội bắn/.test(k)&&who==="npc")continue;
   const r=await p.evaluate(([k,who])=>T.day((A,B)=>who==="her"?S:B,T.K[k]),[k,who]);out.rows.push(Object.assign({kind:k,who},r))}
  /* not given: she cannot serve tonight (with child) → no promise, the day goes on as before */
  out.preg=await p.evaluate(()=>T.day(()=>S,(W,A,B)=>{S.preg=2;S.pregUnk=0;const E=[S,A,B];for(const x of E){x.tai=x===S?999:0}cRun7("trungthu","dan",E,[],999,true)}));
  /* odds unchanged: the tablet weight of every consort is the same before / after the contest code (nightCh), and BAL.ag.emp.summon */
  out.odds=await p.evaluate(()=>{const L=T.fresh();return{summon:JSON.stringify(BAL.ag.emp.summon),nc:[S].concat(L.slice(0,4)).map(x=>nightCh(x))}});
  out.card=await p.evaluate(()=>{const L=T.fresh();const E=[S].concat(ents7({e:L.slice(0,3).map(v=>v.id)}));const pp={k:"trungthu",vi:FV7.trungthu.findIndex(v=>v[0]==="C"),e:L.slice(0,3).map(v=>v.id),pr:[],sd:7};const d=PEND.j71f(pp);return d&&d.o?d.o.map(o=>o.n+" — "+String(o.x||"").replace(/<[^>]+>/g,"")).join(" | "):""});
+ /* bd_san_9 won by the prince's shot (not hers): no night */
+ out.prince=await p.evaluate(()=>{T.fresh();const d=wk();ARC67.bd_san_9.E.win.go({act:{},f:{}});return{ntk:S.ntk&&S.ntk.w===d?S.ntk.who:null}});
+ /* rv #2: the kit hint of the entry card shows the night at every level */
+ out.hint=await p.evaluate(()=>{const L=T.fresh();const vi=FV7.trungthu.findIndex(v=>v[0]==="C");const d=PEND.j71f({k:"trungthu",vi,e:L.slice(0,3).map(v=>v.id),pr:[],sd:7});const o=d.o[0];return [0,1,2].map(l=>kitHint({x:o.x,od:o.od||30},l).hint)});
  out.errs=errs;console.log(JSON.stringify(out,null,1));if(JO)fs.writeFileSync(JO,JSON.stringify(out,null,1));await b.close()})();

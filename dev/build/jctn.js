@@ -18,8 +18,10 @@
 const on=()=>!!(typeof BAL==="object"&&BAL.ctn&&BAL.ctn.on);
 const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
 const keyOf=p=>p===S?"me":p&&p.id;
-/* the gain token printed on every contest entry card beside its own prize (the card prints the very gain the contest gives) */
-window.ctnX=function(){return on()?", đêm nay được thị tẩm":""};
+/* the gain printed on every contest entry card, FIRST among its own gains (the kit hint jk2b kitHint keeps the first two: rv #2); «đêm ấy»
+   = the night of the contest day, the card may be read days before (fInv7 «tuần tới», PEND.j71x a month before: rv #3) */
+window.ctnF=function(){return on()?"đêm ấy được thị tẩm, ":""};
+window.ctnX=function(){return on()?", đêm ấy được thị tẩm":""};
 /* the line her log / result shows */
 function line(p,t){return p===S?`<span class="g">${t}: ngươi đứng đầu, Hoàng thượng truyền đêm nay ngươi thị tẩm.</span>`:`${t}: ${p.name} đứng đầu, đêm nay ${p.name} thị tẩm.`}
 /* CO-OP (one world, the host's Emperor turns every tablet: jnf / jcoopworld): the night is the HOST's to keep. The host keeps it for whoever
@@ -35,6 +37,18 @@ const fEnt=()=>(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.coop&&v.aliv
 const say=(mode,o)=>{try{COOP.send(Object.assign({t:"act",k:CK,mode,id:CK+":"+mode+":"+Date.now()+":"+Math.random().toString(36).slice(2,7)},o||{}))}catch(e){console.error(e)}};
 function herCard(t){try{Q.push({t:"Kính sự phòng báo tin",who:typeof pEunCourt==="function"?pEunCourt("ksp"):undefined,art:"img/ev-ksp.webp",
   h:`<p>Hoàng thượng khen tài nghệ của ngươi ở ${t}. Thái giám Kính sự phòng tới báo: tối nay ngài truyền ngươi thị tẩm.</p><p class="past">Hết buổi tối, ngươi tắm gội chờ giá; đêm nay không ai tranh được.</p>`})}catch(e){console.error(e)}}
+/* rv #4 ORDER: her night card comes AFTER the contest's own result — the kit result toast «KẾT QUẢ» (#rtoast, j63 resultShow, shown after
+   the option's go), the podium (#kpodov) or the mini-game board: it waits until none is on screen; the toast's «Được» row also lists the
+   night (the same kit item markup as every gain there). No result toast within BAL.ctn.waitMs → the card follows anyway. Bots: at once. */
+let PC=null;
+const busy=()=>{try{const t=document.getElementById("rtoast");const pod=document.getElementById("kpodov");const vis=x=>!!(x&&!x.hidden&&x.offsetParent!==null);
+ return !!((t&&t.classList.contains("on"))||vis(pod)||vis(document.getElementById("kg82"))||(S&&S.mg))}catch(e){return false}};
+function cardTick(){if(!PC)return;const age=Date.now()-PC.at;
+ if((!busy()&&(PC.rs||age>=((BAL.ctn&&BAL.ctn.waitMs)||1500)))||age>60000){const t=PC.t;PC=null;herCard(t);try{render()}catch(e){}try{if($("modal").hidden&&!S.mg)showModal()}catch(e){}return}
+ setTimeout(cardTick,300)}
+function cardLater(t){if(window.__bot){herCard(t);return}PC={t,at:Date.now(),rs:0};setTimeout(cardTick,300)}
+if(typeof resultShow==="function"){const rs0=resultShow;resultShow=function(){const r=rs0.apply(this,arguments);try{if(PC&&!PC.rs){PC.rs=1;
+ const v=document.querySelector("#rtoast .kr-duoc .krv");if(v)v.insertAdjacentHTML("afterbegin",'<span class="kitem"><span class="ef g">đêm ấy được thị tẩm</span></span>')}}catch(e){console.error(e)}return r}}
 /* why the night cannot be kept for p today ("" = it can) */
 function why(p){const me=p===S;const d=day();const n=typeof ntTaken==="function"?ntTaken():null;
  if(n){if(n.who===keyOf(p))return "same";return String(typeof ntReason==="function"?ntReason(S):"đêm nay Hoàng thượng đã có hẹn").replace(/^Đ/,"đ")}
@@ -51,13 +65,13 @@ window.ctnWin=function(p,title){try{
  const d=day();S.ntk={w:d,who:me?"me":p.id,nm:me?"ngươi":(p.name||"")};S.ctn={w:d,who:keyOf(p),t};
  const L=line(p,t);log(L);
  if(!me&&p.coop&&CWo()&&host())say("ok",{w:d,tt:t});
- if(me)herCard(t);
+ if(me)cardLater(t);
  return L}catch(e){console.error("ctnWin",e);return ""}};
 if(typeof COOP==="object"&&COOP&&typeof COOP.on==="function")COOP.on("act",m=>{try{const c=CWo();if(!m||m.k!==CK||!c||m.from===c.seat||!S||S.dead||!on())return;
  if(m.mode==="win"&&host()){/* the friend won on her seat: keep tonight for her entry (the same rule as every winner here) */const f=fEnt();
   if(!f||m.w!==day()){say("no",{w:m.w,tt:m.tt,why:"thẻ bài đêm nay đã lật"});return}const w=why(f);if(w==="same")return;
   if(w){say("no",{w:m.w,tt:m.tt,why:w});return}window.ctnWin(f,m.tt);return}
- if(!host()&&m.w===day()){if(m.mode==="ok"){S.ntk={w:m.w,who:"me",nm:"ngươi"};S.ctn={w:m.w,who:"me",t:m.tt};log(line(S,m.tt));herCard(m.tt);try{render()}catch(e){}if(typeof showModal==="function"&&$("modal").hidden&&!S.mg)try{showModal()}catch(e){}}
+ if(!host()&&m.w===day()){if(m.mode==="ok"){S.ntk={w:m.w,who:"me",nm:"ngươi"};S.ctn={w:m.w,who:"me",t:m.tt};log(line(S,m.tt));cardLater(m.tt)}
   else if(m.mode==="no")log(`${m.tt}: ngươi đứng đầu, nhưng ${m.why||"thẻ bài đêm nay đã lật"}.`)}}catch(e){console.error("ctn relay",e)}});
 window.ctnOf=function(){const c=S&&S.ctn;return c&&c.w===day()?c:null};
 /* the live night path (no jnf: a parked co-op room, jfe flips at the start of tối): realFlip leaves S.tonight = "me" for a taken night but
