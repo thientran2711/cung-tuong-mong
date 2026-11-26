@@ -507,3 +507,4 @@ flight2-s10g robot life (Fold sens seed 2026112537, newest LIVE pinned, harness 
 HARNESS FIXER #11 (robot-realtap jobs 8 board idle + 9 save stale/console + 11 area-tap-blocked, on 8ea10d7e) | review/robot-realtap | session_01UV1SziEmdhraQi2ni7YZ4B | RUNNING | 2026-11-26T14:30Z (FOREMAN F #23)
 C3-SEALS SMALL review | review/c3-seals 4a758f6e | (reviewer session id in STATUS) | RUNNING | 2026-11-26T15:30Z (Foreman C ROOT 3-1-1-1-1)
 C3-SEALS SMALL review | review/c3-seals 4a758f6e | session_01PEhRbwimLhy2Pc9b5C32ng (sonnet) | RUNNING | 2026-11-26T15:32Z (Foreman C ROOT 3-1-1-1-1; id for the line above)
+BIG REVIEWER #11 (robot-realtap verdict 8ea10d7e..cebb0213 + audit 74d434fb) | review/robot-realtap | <opening> | RUNNING | 2026-11-26T15:24Z (FOREMAN F #23)
