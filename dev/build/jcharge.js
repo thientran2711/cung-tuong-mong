@@ -12,7 +12,7 @@
    4. ACCUSING = one charge whose pieces are full (chReady); the punishment follows that charge (BAL.charge.C[c].pun, one punishment, D1),
       only that charge's pieces are spent, and her notice lists the charge and each piece (punEvTxt). Same rule for every consort (law 1).
    ============================================================================================================================ */
-let CHS=null,CHLAST=null,CHX=null;
+let CHS=null,CHLAST=null,CHX=null,CHLASTC=null;
 function chB(){return BAL.charge}
 function chC(c){return BAL.charge.C[c]||null}
 function chOfDeed(k){return BAL.charge.deed[k]||"bm"}
@@ -74,7 +74,7 @@ function chMissed(){const L=CHLAST&&CHLAST.tries||[];return L.length&&!L.some(z=
  let got=0;const srch=CHS&&CHS.h===h;if(srch&&t===S)chWarn(h);
  for(let i=0;i<n;i++){const cc=c&&(m[c]||0)<chCapC(t,c)?c:chFor(h,t);if(!cc){if(typeof evMiss==="function")evMiss(h,t,n-i);break}
   if(srch){const F=chFind(h,t,cc,CHS.ag);const hit=roll(F.o);CHS.tries.push({c:cc,o:F.o,hit});const q=chMissS(h,t);if(!hit){q[cc]=(q[cc]||0)+1;continue}delete q[cc]}
-  m[cc]=(m[cc]||0)+1;/* first: a hook inside the write (j78 evdSync → evidenceActs) reads the pieces in step with the total */let d=0;try{d=e0(h,t,1)}catch(x){m[cc]--;throw x}if(!d){m[cc]--;if(!m[cc])delete m[cc];break}got++}
+  CHLASTC={t,c:cc};m[cc]=(m[cc]||0)+1;/* first: a hook inside the write (j78 evdSync → evidenceActs) reads the pieces in step with the total */let d=0;try{d=e0(h,t,1)}catch(x){m[cc]--;throw x}if(!d){m[cc]--;if(!m[cc])delete m[cc];break}got++}
  return got}})();
 /* jtruth's cap = the per-charge caps (a real deed of a charge leaves at least the pieces that charge needs) */
 (function(){const d0=deedCap;deedCap=function(p){if(!p)return 0;try{const O=chOrd(p);let s=0;for(const c of O)s+=chCapC(p,c);return s}catch(e){return d0.apply(this,arguments)}}})();
@@ -85,7 +85,7 @@ accNeed=function(t,h){h=h||S;const c=(h&&t&&h!==t&&chChase(h,t))||"vp";return ch
 (function(){const o0=oAccuse;oAccuse=function(a,t){const c=chReady(a,t);const n=c?chHave(a,t,c):0,g=evG(a,t);return oddsCl(Math.round(o0.apply(this,arguments)+(n-g)*15))/* the charge's own pieces weigh, not the total */}})();
 /* the punishment a proven charge brings (one punishment, D1 punish-reason; NPC and player alike) */
 function chPunTxt(t,c){const C=chC(c);if(!C)return"bị phạt";const m=typeof punishMonths==="function"?punishMonths():1;
- return C.pun==="light"?`phạt bổng ${BAL.charge.fine} lượng, Danh ${balSg(BAL.charge.danh)}`:C.pun==="cam"?`cấm túc ${m} tháng`:C.pun==="giang"?`giáng một bậc`:rkOf(t)>=5||t.queen?`phế vào lãnh cung`:`đày vào lãnh cung`}
+ return C.pun==="light"?`bị phạt bổng ${BAL.charge.fine} lượng`:C.pun==="cam"?`bị cấm túc ${m} tháng`:C.pun==="giang"?`bị giáng một bậc`:rkOf(t)>=5||t.queen?`bị phế vào lãnh cung`:`bị đày vào lãnh cung`}
 function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (tội ${chName(c).toLowerCase()})`;const a=typeof punWho==="function"?punWho(by):by;
  if(C.pun==="light"){ap(t,{bac:-BAL.charge.fine,danh:BAL.charge.danh});if(typeof ducAdd==="function")ducAdd(t,BAL.charge.duc,chName(c).toLowerCase());
   if(c==="vp"&&typeof vpItems==="function"){for(const e of vpItems(t)){if(e.dress){t.dress=null;continue}const i=(t.inv||[]).indexOf(e);if(i>=0){t.inv.splice(i,1);try{if(typeof itGone==="function")itGone(e,"tịch thu")}catch(x){}}}}
@@ -126,3 +126,10 @@ function chHitDeed(t){const x=(CHLAST&&CHLAST.tries||[]).filter(z=>z.hit).pop();
 /* evidence card rows (kit fact rows): one row per charge she holds a piece of — pieces / need, and the next search's odds word */
 function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t);const ag=h===S?S.maid:null;return chB().order.filter(c=>(m[c]||0)>0).map(c=>{const need=chNeed(t,c),n=m[c];
  return [chName(c),n>=need?`${n}/${need}, đủ để tố`:`${n}/${need} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
+/* the short word for a picker sub-line, and the one plain paragraph that says what decides it (the search dialog) */
+function chFindWord(h,t,ag){if(!h||!t||h===t)return"";const c=chChase(h,t);return `Tìm chứng: ${word(chFind(h,t,c||"hd",ag).o)}`}
+function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `Tìm chứng = cơ may MỘT lần dò tìm ra MỘT chứng cứ. Tội nhẹ dễ tìm, tội nặng khó tìm; tâm cơ ${chWho(h)} (${h.tamco||0}) hơn người bị dò thì dễ hơn, kém thì khó hơn; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ Phi trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
+/* the evidence record (j78 S.evd «proves») names a real deed OF THE CHARGE the piece was written to */
+(function(){if(typeof j78proof!=="function")return;const p0=j78proof;j78proof=function(v){try{if(CHLASTC&&CHLASTC.t===v){const D=chDeedMap(v)[CHLASTC.c];S.evd=S.evd||{};
+ const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}`,ref,aim:d.t}}
+ const d=D&&D.list[0];if(d)return{proves:`${j78Who(v)} ${d.x}`,ref:"tc:"+CHLASTC.c+":"+((S.evd[v.id]||[]).length),aim:d.t}}}catch(e){}return p0.apply(this,arguments)}})();

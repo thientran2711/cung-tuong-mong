@@ -129,7 +129,7 @@ function loOwnerMove(c){const o=loP(c.own),h=loP(c.at);if(!o||o===S||!h||c.hear|
  if(loHigh(h,o)&&loEmpEv(c,o,h)<BAL.il.empEv){c.asked=0;c.reT=wk()+LO.hearCd;return}loRaise(c,o)}
 /* a higher-rank holder (owner 16/11 13:30Z (3)): no search without the Emperor's decree; asking him needs REAL evidence = this case's evidence + evidence on the holder */
 function loHigh(h,a){return !!h&&!!a&&h!==a&&rkOf(h)>rkOf(a)}
-function loEmpEv(c,a,h){return (lostEv(c.id)|0)+((typeof evG==="function"?evG(a,h):0)|0)}
+function loEmpEv(c,a,h){return (lostEv(c.id)|0)+((typeof chHave==="function"?chHave(a,h,"uh"):0)|0)/* charge-evidence: only the ức hiếp / trộm pieces prove a theft */}
 function loRaise(c,o){c.hear=wk()+LO.hearW[0]+R(LO.hearW[1]-LO.hearW[0]+1);c.acc=key(o);const h=loP(c.at);
  if(h===S){Q.push({t:"Đồ thất lạc",who:pv(o),h:`<p>${wdNmC(o)} báo Cung Chính ti: ${loNm(c.k)} của nàng thất lạc, nay thấy ở cung ngươi. Cung Chính ti sẽ xét trong ${c.hear-wk()} tuần.</p><p class="past">${c.keep&&c.at==="me"?"Lén trả lại trước khi xét thì êm chuyện: Tư trang › Việc › Đồ thất lạc.":"Tra xét trước để minh oan: Tư trang › Việc › Đồ thất lạc."}</p>`,btn:"Đã hiểu"});log(`${wdNmC(o)} báo Cung Chính ti: ${loNm(c.k)} thấy ở cung ngươi.`)}}
 function loAskOdds(h,o,c){return oddsCl(Math.round(40+aff(h,o)/2+(loHonest(h)?20:-10)-(c&&c.keep&&c.by===key(h)?20:0)))}

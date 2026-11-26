@@ -2262,14 +2262,14 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:true/* PENDING
    (cap missCap; reset on a find). fine = bạc of «phạt bổng» (light), danh / duc = the small stat loss of a light charge; warnMat = her Tai mắt
    count that warns her when someone searches HER (once a day per searcher). */
 BAL.charge={C:{
- vp:{n:"Vượt phẩm, xa xỉ",need:1,band:6,pun:"light"},
+ vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light"},
  il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam"},
- uh:{n:"Ức hiếp, quấy phá",need:2,band:5,pun:"cam"},
- mc:{n:"Mua chuộc, dọa người hầu",need:2,band:4,pun:"light"},
+ uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam"},
+ mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light"},
  bm:{n:"Bày mưu hại người",need:2,band:4,pun:"cam"},
- hd:{n:"Hại dung nhan, hại thân",need:2,band:3,pun:"giang"},
- mh:{n:"Mưu hại tính mạng, long thai",need:3,band:2,pun:"cold"},
- vo:{n:"Vu oan, giá họa",need:3,band:2,pun:"cold"},
+ hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang"},
+ mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold"},
+ vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold"},
  tt:{n:"Tư thông",need:3,band:1,pun:"cold"}},
  order:["tt","mh","vo","hd","bm","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
