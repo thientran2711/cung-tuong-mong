@@ -538,3 +538,19 @@ Harness only, no game change; 0 .click()/dispatchEvent in play paths (git grep: 
    game's own kitDayTitleShow held) · noWayOut 0, NO-EXIT 0. (The old harness also closed these synthetic layers; the exact s14 screen of build a1d2c8d4 is not
    on the pinned LIVE build, so the proof is the rule order + layer test, not a replay.) s15b #kdaytc «no reachable button» ~b200 = the same rule on the same layer.
    Seen once: Fold «late button «Vào cung ngay» 13.5 s after #klife» (pre-life screen) — for MAIN to judge (slow pre-life load or real).
+18. BIG #11 FAIL 947aeec9 (report b2b95712) fixed on bb89b055:
+   B1 JOB 15 was a no-op (rt.tap disposed h → the ownOpen evaluate threw → .catch → always «open»). Now the close is tapped with keep:true, the handle check runs
+   in its own try (a throw / gone handle → the cr0 point check, never «open»), h is disposed after. Self-test RT_TEST_OWNCLOSE=<buổi> RT_TEST_OWNCLOSE_MODE=own|dead (a
+   shop-like dialog, card «Lui» button.kit-x[data-kshdetx] in .kshdet): own → Fold pf/pt_su sens 43 {closeOwnLayer 1, noEffect 0, closed by «Đóng» 9 s}, iPad
+   pf/pt_su sens 61 {closeOwnLayer 1, noEffect 0, «Đóng» 74 s}; dead → Fold {noEffect 1, «close button has no effect … «Lui»»}, iPad {noEffect 3}.
+   B2 SAVE STALE after a reload: the clock map keeps the FIRST buổi a clock was seen; a live clock going back (reload / «Tiếp tục kiếp này» / resume) = bug game
+   «SAVE REWIND: reload went back from b<x> (clock) to the stored b<y> (clock) (N buổi lost)», once per rewind (≥ 2 buổi = bug; 1 buổi = the game saves at the
+   buổi start, logged only). RT_TEST_RELOAD=<buổi> = one harness reload (unstick lvl 3). RT_TEST_QUOTA=2 RT_TEST_RELOAD=8 cp=5 slice=30: Fold speed 21 «SAVE REWIND
+   … from b8 … to the stored b2 (6 buổi lost)» + later «(20 buổi lost)» + «BUG SAVE STALE stored b2 live b25 chars 118590 (… QuotaExceededError)» · iPad speed
+   2305435383 «(6 buổi lost)», «(19 buổi lost)», «BUG SAVE STALE stored b2 live b25 chars 121024».
+   N1 the unstick ladder tapping the late way out calls the same late check (R._lateFn) · N2 a button clipped below the fold at the start is not «late» · the
+   visit clock also runs during JOB 17 skip taps → RT_TEST_NOEXIT=2 RT_TEST_LATE=40000: iPad pf/pt_su sens 61 (the N1 seed) «LATE BUTTON … after 33478 ms» + NO-EXIT
+   withdrawn · Fold speed 21 «after 30787 ms». N3 help line says SAVE STALE speaks at a CP. N4 no «save restored … of 0 chars» line before NO SAVE IN CKPT.
+   Found on the way (JOB 17 family): the night beat .kne-beat over animated page buttons got «no free point» (BARE_CHECK refused every point) → NO-EXIT → reload.
+   The skip tap now asks BARE_CHECK for a point ON the layer (its own top element, never a button; what lies under it cannot take the tap): natural Fold speed 21 /
+   iPad pf 61 8 buổi: NO-EXIT 0, «SKIP TAP #kdaytc tap», bareBlocked 0. rt-bare-unit 20/20 (+ I/J), lint OK, 0 JS clicks.

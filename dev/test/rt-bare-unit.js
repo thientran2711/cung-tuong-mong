@@ -6,6 +6,7 @@
      the button takes it → the guard cancels it (blocked 1) — what the new check avoids.
      F a LIVE emotion seal (img.kemo[role=button] with a running sway, like jemoseal kemo-live) 30 px from the point → 'covered' (s15b ×2)
      H a LOOPING ambient pan (the kmeg scene backdrop, infinite animation) over a button → true (a person taps the scene)
+     I/J the JOB 17 skip tap: a point ON the named layer is taken even over a button (the layer is on top) · a point off that layer is refused
      G an option card mounting under the point 60 ms after the check began → not bare (s15b first day «… Rất vững»).
    usage: node dev/test/rt-bare-unit.js   (exit 1 on any FAIL) */
 'use strict';
@@ -36,6 +37,8 @@ const OLD = ([x, y, sel]) => { const t = document.elementFromPoint(x, y); return
     const e = await p.evaluate(() => ({ blocked: window.__rtBareN || 0, hit: window.__hit || 0, why: window.__rtBareWhy }));
     cases.push(['E old check on C → tap', 'old ' + old + ', blocked ' + (e.blocked > 0 ? 'yes' : 'no') + ', button hit ' + e.hit, 'old true, blocked yes, button hit 0']);
     await set('steady'); await p.evaluate(() => { document.getElementById('cov').className = 'pan' }); cases.push(['H looping scene pan over a button', await ck(200, 160), true]);
+    await set('leave'); cases.push(['I tap ON a skip layer (own) over a button, layer leaving', await RT.bareCheck(p, 200, 160, SEL, '#cov'), true]);
+    cases.push(['J own layer given but the point is elsewhere', await RT.bareCheck(p, 600, 600, SEL, '#cov'), 'covered']);
     await set(null); await p.evaluate(() => { const i = document.createElement('div'); i.id = 'seal'; i.className = 'kemo kemo-binh kemo-live'; i.setAttribute('role', 'button'); document.body.appendChild(i) });
     cases.push(['F live seal 30 px from the point', await ck(590, 530), 'covered']);
     await set(null); const g = ck(600, 600); await p.evaluate(() => setTimeout(() => { const c = document.createElement('button'); c.textContent = '… Rất vững'; c.style.cssText = 'position:absolute;left:550px;top:550px;width:120px;height:100px'; document.body.appendChild(c) }, 60));
