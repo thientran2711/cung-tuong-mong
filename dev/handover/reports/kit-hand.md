@@ -262,3 +262,22 @@ Queue for KK38 (in order):
 Tools (dev/handover/reports/kk37-tools/): rec.js (full video: chest → Tin báo → NHV plaques → c2a cards/talk → vlnvp → tt1; `node rec.js <index.html> <dir> WxH`), grey-scan.js, opt-centre-tap.js, redraw-probe.js, nambac.js. Worktrees: /home/user/wt/ks (kit-stage), /home/user/wt/tg (tainghe-r5), /home/user/wt/kh (handover).
 Lessons: (1) a robot «DEAD BUTTON / cover #modal» is often a game event the harness did not close — print the covering dialog before blaming the kit; (2) overlap tools must cut boxes to what the player can reach (clip + opaque cover), else scrolled-away buttons count as steals.
 
+## KK38 REPORT + HANDOVER (26/11 ~08:00Z) — kit keeper session_01V1ZZH2wd7VqsCBPRaqKu7D; coordinator MAIN CHÍNH 154 session_01V1ZZGzqRF5sRSbkTyuecDd (153 = forwarder); lander LC21 session_01V1ZZH3pV1ng9hG9pEgF3yY
+START_CTX ~3 % (estimate; context_usage reads 0). Rolled at ~28 % (START + 25 %).
+PRIORITY #1 CHECK: OD 26/11 ~05:15Z «người lạ A» | main 02f564ae (LIVE now 6b5d3d05 per LC20) | review/kit-stage 006579ae, review/tainghe-info-r5, review/nhv-areas b48425a1 | claims KK38.
+DONE:
+1. review/kit-stage-r2 head 22e318d5 = kit-stage 006579ae merged onto LIVE 02f564ae. Conflicts: assemble.py (union list), jksize kszLivePick3 (fitfast hint loop + §101 hand rules; a hand never seeds the hint), jopic kitOptTier (KOT memo + hand return), jplst (railW + ResizeObserver), KIT_REQUESTS. nhv-areas after it: only assemble.py (r2 list + 'jnhv.js' after 'jkmapban.js') + built files. NOT re-merged onto LIVE 6b5d3d05 (LC21 may ask).
+   Also in r2: K-MAP-BANNER wired in jplrule (banner replaces .fest chip + kitNotice stand-in); §103 after MAIN 153 look: map scroller starts BELOW the banner, no floating «⌂ Nhà ta» tag (home = red ring + «Nhà ta» in its label line); §103 zone fallback for OB-PHU4 (.mspot.mzone[data-mzk~=key], KIT READY sent); §102.6 room picture never empty (#scimg 2nd layer url(new),url(prev) until decoded; Pixi j11 keeps the old sprite) — stage-pic-wait.js base 16 flat → 0; «thiện cảm thiện cảm» = j84 rule fired after the word «thiện cảm» — vp-doubled.js LIVE 33 → 0.
+   Tests on r2: kit-stage, kit-hand, kit-pick, kit-mapban (zone case), place-rules (G adapted to the banner), vp-doubled, stage-pic-wait, kit-faces-opts 36/36 (test fixed: a hand chooses by ✓), pick-card-reach PASS. Not run: quickcheck / look-dedupe ×10 (lander gate).
+2. review/tainghe-info-r5 88bd567f LAND READY (MAIN 154 LOOK PASS): merged LIVE 02f564ae, tainghe ×5 10/10, videos img/_review/tainghe-info/kk38-d51556f5-{fold,ipad}.mp4.
+3. Item 5 «Tân quân lập uy Ch.2»: LIVE kit-faces-opts FAIL 7/36 (iPad 7-line text scrolls though it fits; Fold last option once) → r2 0/36; real c2a = a hand, all cards in view. Fixed by r2 landing.
+4. Item 7 M5b picker clip: LIVE «Sai … đi dò la» 9/10 cards clipped → r2 0 (hand), every centre tap chooses. UX-OPTION-CENTRE: dev/test/opt-centre-tap.js (KK37 tool) LIVE Fold = CHOSE 16 · CUT 1 · DEAD 1 (c2a picture tap); rest of the table in KK38's last message to MAIN 154 (or rerun, item a).
+5. K-ICO-HOME art order in FOREMAN_C_STATUS (img/place-home.webp); wire it when it lands (label «Nhà ta» + banner chip glyph).
+QUEUE for KK39 (in order):
+a) If the opt-centre table did not reach MAIN 154: `node dev/test/opt-centre-tap.js <html> 755x1000` then 1180x820, LIVE vs r2 (one device per process, nothing beside it); fix any STOLE/DEAD family.
+b) D4 reviewer (MAIN 153 06:48Z): Fold «Người bên cạnh» visitor frame draws the Hoàng hậu figure OVER the scene/text — whole family (every visitor/companion figure slot), scan + fix, Fold+iPad shots.
+c) MAIN 154 (owner OD 26/11 ~06:50Z item E): «ĐƯỢC không / TỐN không» → KIT RULE hide empty gain/cost rows everywhere (kit level; scan every caller before/after; MAIN's check: main 4 hits).
+d) Re-merge r2 onto LIVE 6b5d3d05 if LC21 asks.
+e) K-VEIL-POR check when C's pictures land; KK35 open (NAMES scan, vnight PEND family).
+Committed tests: dev/test/{vp-doubled,stage-pic-wait,pick-card-reach,opt-centre-tap}.js. Scratch (gone): /home/user/wt/kk38-t/r2shots.js.
+Lessons: (1) main's day card #kdaytc (2.8 s, tap closes) covers taps in fresh-life harnesses — remove it with #dawn; (2) a picture-wait test must let the PREVIOUS picture decode first and judge «a decoded painting is showing», not pixel spread; (3) LOOK your own map shots — both banner faults showed only on the picture; (4) the handover branch is force-rewritten: reset to origin before appending, never rebase local commits.
