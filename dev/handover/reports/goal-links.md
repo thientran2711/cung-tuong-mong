@@ -64,3 +64,36 @@ Not scanned yet (open): arc chapters (ARC67 hồi lines, mostly «Hồi n/N»), 
 ## MAIN 161 rulings (26/11 ~18:58Z) + ROLLOVER HANDOVER
 Rulings: (a) legend → KIT_REQUESTS row for KK44 (done); (b) navigation options (Đi tới / Xem Dư đồ / jgoal «Đi làm» / every pure navigation button) must NOT show the «không được gì, cũng không mất gì» toast → kit flag `nav` via KK44 (KIT_REQUESTS row done), then apply to the whole family; (c) stranger silhouette sex = KIT FAULT to KK44 (sent), interim no figure; (d) verify zone marks on a merged r7 build once LC24 lands map-zones-r7.
 ROLLOVER (worker context past START+25%): successor continues on review/goal-links 4d71d20a (worktree /home/user/wt/gl, test dev/test/goal-links.js). TODO: (1) scan + link the not-scanned goal groups: ARC67 hồi lines (jchap chapModel arc steps / hint67), «Việc nhờ» (jnrask*), notices (jnotice) — glTarget(line,q) is the one resolver, kitChecks hook only covers checklists, so rows/notice text need a call to window.glWrap(html) at their render site; (2) when KK44 ships `nav` flag + kitGoLink/kitMapMark, swap glHow/markMap to them and apply `nav` to jgoal nextOpts + glHow options; (3) r7 merged LOOK of level-1 zone tag «Nội vụ» with bac icon + «Mua bán».
+
+## r2 (GOAL-LINKS-2, session_01Rc5AsMJutk5gwYU1eE3Kqn)
+depth: successor of GOAL-LINKS (lineage depth not given in brief) · START_CTX: not measurable here
+PRIORITY #1 CHECK: OD 5 (26/11 ~18:05Z GOAL LINKS row + ~18:35Z icon size) | main: jtq14 buy quest, jinv kitShopNvp, jpet petShop, j61 k61SeedChiTon (chí tôn seeding = reused for him), j67 arcReveal67 (rule reused for Việc nhờ), j3 logChoice / j19 wrapR chooseM (where the nav toast came from), jdoor/jselxsc «no result card» precedents | review/*: goal-links 4d71d20a (base), map-zones-r7 9c8985ab (not on main) | KIT: KK44 kitGoLink / kitMapMark / `nav` still OPEN (KK44 on its r3) → interims below.
+
+**Branch review/goal-links @ 46839ef3** (2 commits on 4d71d20a). Files: jglink, j61, jname, jtq14, jinv, jpet, jgoal, jge, test goal-links.js, index.html/sw.js.
+
+### MAIN LOOK fixes
+1. **Named from day one (law 6b)**: j61 k61SeedChiTon also seeds S.court.ped (name + face, stage 2) on new games and on every load (old saves) → goal «Đến Nội vụ phủ, nhờ thái giám <Tên> mua một món», «Cách làm» row «Người: Thái giám <Tên> · lo mua đồ ở Nội vụ phủ» + HIS full painting (same kit seller figure as his shop, kitPanel stage form — this also sidesteps the female-silhouette kit fault, still open at KK44), shop header «Nhờ thái giám <Tên> mua đồ» (+ jpet «… tìm thú nuôi», same seller). No «???», no «chưa biết tên», no «vị thái giám bày hàng». Name pool: «Thái» removed from NM_EUNX («Tiểu Thái Tử» = little crown prince); old saves with that name get a fresh one once.
+2. **Navigation is not a choice** (interim for KK44 `nav`): option flag `nav:1` → no result card, no log line (jglink wraps chooseM/logChoice/resultShow). Applied to the whole family: «Cách làm» Đi tới / Xem Dư đồ / Xem hàng / Đi làm / Đóng, jgoal «Đi làm: …», jge «Xem bảng vàng», and every bare «Đóng» with no fx. Her real arrival act (j77 bái kiến card) still shows its own card.
+3. **«Mua bán» readable**: now its own line INSIDE the kit paper name slip (13 px ink, §34.1d), not the grey info row; zone tags the same. Icon size + a VISIBLE legend row stay with KK44 (kitMapMark; .mleg legend still hidden on Fold/iPad — not done here, honest).
+4. **Whole-family scan**: (a) **Việc nhờ** — 809 step lines / every template: a text naming {A}/{B} now makes those people named (j61 stage 2, same rule as arcReveal67). Test: 8/8 templates with an UNMET consort as {B} → named, card shows her name, no «???». Việc nhờ cards already carry their own «Đến <nơi>» button (navigation exists). (b) **ARC67 hồi** — names already revealed by j67 arcReveal67; hint «… ở mục Hành sự» now resolves to the Hành sự tab in glTarget. (c) **Notices** — jnotice already never prints «???» (plain «một vị … chưa quen biết»), and notices are news, not tasks → not linked (no target to find). (d) r7 merged LOOK: a test merge of map-zones-r7 conflicts in assemble.py / jbal2 / jk3 / jksize (r7 sits on an older base) → still waits for LC24 to land r7 on main.
+
+### Tests
+`node dev/test/goal-links.js <url> 755x1000,1180x820 [shots]` → **PASS both** (r2 adds: eunuch known; buy line «thái giám <name>»; no «???»/unnamed in panel; no result card + no log after Xem Dư đồ / Đi tới / jgoal Đi làm / Đóng; «Mua bán» inside the name slip; shop header named). No page errors.
+
+### LOOK (looked at every still myself) — LOOK READY
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/755x1000-1-goal-links.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/1180x820-1-goal-links.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/755x1000-2-cach-lam.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/1180x820-2-cach-lam.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/755x1000-3-du-do-ring.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/1180x820-3-du-do-ring.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/755x1000-4-du-do-muaban.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/1180x820-4-du-do-muaban.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/755x1000-5-di-toi.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/1180x820-5-di-toi.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/755x1000-6-menh-truyen.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2/1180x820-6-menh-truyen.jpg
+
+### Open
+- KK44: kitGoLink, kitMapMark (big icon + visible legend row), `nav` kit flag, stranger silhouette sex — when READY swap jglink interims (NAV wrappers → kit flag; slip line → kitMapMark).
+- r7 merged LOOK after LC24 lands map-zones-r7.
