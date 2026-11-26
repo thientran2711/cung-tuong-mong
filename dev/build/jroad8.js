@@ -82,7 +82,7 @@ window.placeLogOk=placeLogOk;
    (kitNotice: Tin báo, ! chip, know / tin / flip / here lines). While she is at home a notice reaches her only from her OWN act (a home card or her
    answer in a dialog: mua tin, nhờ người dò la, viết thư vào cung … — window.__kcActing, kept a moment for the batched «biết thêm» flush);
    by itself no palace happening, palace acquaintance, «xưng danh», lật thẻ, or the empty «… vẫn ở Khuê phòng. Không gặp ai.» filler. */
-const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài/;
+const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài|cho gọi ngươi|thách đấu ngươi|Lời thách đấu|xưng danh|ghé chơi cung/;
 function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;const k=String(sp.kind||"");const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
  /* never at home, whoever acts: the palace tai-mắt feed (tin), lật thẻ (flip), the stay-filler of a new buổi (close) */
  if(k==="tin"||k==="flip"||(k==="close"&&/vẫn ở .*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?$/.test(t)))return false;
