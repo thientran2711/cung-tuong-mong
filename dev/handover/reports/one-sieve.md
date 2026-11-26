@@ -59,4 +59,11 @@ Lines per buổi of the daily feed: unchanged from NEWS-SIEVE-2 (its test re-run
    kitInput — no new CSS; please confirm (law 9).
 2. OB-VERDICT kaAimStat still prints «(42 → 37)» on the target row; KIT 7.1 says «−5 (37)» — OB-VERDICT-2's call (told).
 
-QUICKCHECK: (pending)
+QUICKCHECK run 2 (f5e70415): old save ok · perf new/live render 259/258, tab 642/682, buổi 1488/1549, tasks>200ms 37/35; FAIL longTaskMaxMs 3155 vs
+live 1832 (limit 2931) = one long task (run 1 on the same sieve code: 2009 vs 2419, PASS → box noise, rerun on land); G1 one-core-guard = the same 2 OB-VERDICT
+jkitpage sample numbers (not this branch's code).
+Kèm row: KK41 rolled; its ONE kitKemRow (review/kit-kem-row-r2 e384546b) will be rebased by KK42 with this branch's two content lines (kaNT totals,
+K.more tail) — KK41 asked to keep this branch's copy (f5e70415) until that lands. On land: take KK42's kitKemRow, keep jnsieve nsCard feeding K / K.more.
+
+## HANDOVER
+Nothing left on this job except re-merging review/ob-verdict(-rv) / KK42's kit-kem-row when they land. Context used ≈ 27 % (roll line 30 %).
