@@ -146,9 +146,7 @@ Object.assign(BAL,{shelf:{
 /* the Nội vụ phủ tray offers only décor within her rank (reviewer r1 fix (1), kept by builder #2): a BUYING rule — OD 17/11 ~19:50Z lifts only the DISPLAY block (an over-rank piece she owns, from a gift or bought before a demotion, may still stand) */
 /* Nội vụ phủ tray + ngự ban: décor joins without changing the old lists' balance */
 (function(){const P=BAL.shelf.it,has=(k,c)=>!!(P[k]&&!P[k].imp&&!P[k].dead&&(P[k].src||"").includes(c)&&IT[k]);window.SHELF_SRC=c=>Object.keys(P).filter(k=>has(k,c));
- if(typeof restock==="function"){const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.shop))for(const k of shuf(SHELF_SRC("m").filter(k=>(P[k].rk|0)<=(rkOf(S)|0))).slice(0,BAL.shelf.shopN))if(!S.shop.includes(k))S.shop.push(k)}catch(e){console.error("shelf restock",e)}
-  /* KIT §101.11 (owner 26/11 ~21:25Z «mỗi sự kiện maximum 7 lá»): the LAST restock wrapper caps the tray at BAL.shopTray items (+ «Thôi» = 7): every source keeps a fair chance (one random draw), the base list does not crowd out the special items */
-  try{const cap=BAL.shopTray||6;if(S&&Array.isArray(S.shop)&&S.shop.length>cap)S.shop=shuf(S.shop.slice()).slice(0,cap)}catch(e){}return r};window.restock=restock}
+ if(typeof restock==="function"){const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.shop))for(const k of shuf(SHELF_SRC("m").filter(k=>(P[k].rk|0)<=(rkOf(S)|0))).slice(0,BAL.shelf.shopN))if(!S.shop.includes(k))S.shop.push(k)}catch(e){console.error("shelf restock",e)}return r};window.restock=restock}
  if(typeof bestow==="function"){const b0=bestow;bestow=function(p,why){if(!BEST||why==="son"||!roll(BAL.shelf.bestO))return b0.apply(this,arguments);const w=BEST[why]?why:"night",L0=BEST[w];
    BEST[w]=SHELF_SRC("n");try{return b0.apply(this,arguments)}finally{BEST[w]=L0}};window.bestow=bestow}})();
 /* the one luxury number per piece (jlux luxPiece): a new décor piece = the kit formula luxVal on its BAL grade + price */

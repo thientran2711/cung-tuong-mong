@@ -42,7 +42,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
   await tapC('khx');g=await geo();chk('c2a ✕ puts it back',g.lifted===-1&&g.q0==='c2a',`lifted ${g.lifted}`);
   await tap(0);await tapC('khok');g=await geo();await shot('c2a-chosen');chk('c2a ✓ chooses',g.q0!=='c2a',`q0 ${g.q0} title ${g.title}`);
   /* 2. synthetic frames 2 / 6 / 8 / 10 cards (kit option cards with Tốn / Được rows), real tap twice on the LAST card */
-  for(const no of [2,5,7]){await clear();await p.evaluate(no=>{const names=['Theo Hoàng thượng','Theo Thái hậu','Theo Tể tướng','Đứng ngoài, giữ mình','Chờ xem thêm','Về cung nghỉ','Hỏi Hoàng hậu','Dò la Kính sự phòng','Tặng lễ','Cáo bệnh'];
+  for(const no of [2,5,7,10]){await clear();await p.evaluate(no=>{const names=['Theo Hoàng thượng','Theo Thái hậu','Theo Tể tướng','Đứng ngoài, giữ mình','Chờ xem thêm','Về cung nghỉ','Hỏi Hoàng hậu','Dò la Kính sự phòng','Tặng lễ','Cáo bệnh'];
     const o=Array.from({length:no},(_,i)=>({n:names[i],fx:{},j67:'tốn: Danh -2 · được: phe này tin ngươi hơn một chút, kèm: phe kia nghi ngờ',go:()=>{window.__fired=i}}));
     Q.push({t:'Phụ tuyến · Thử bàn bài · '+no,h:'<p>Tân quân lên ngôi, triều đình chia ba ngả, mỗi phe đều muốn kéo ngươi về phía mình.</p><p>Ngươi theo ai?</p>',opts:o,who:pEmp(),pid:'rg',__khT:'n'+no});showModal()},no);await p.waitForTimeout(2200);
    g=await geo();await shot('n'+no);chk(`n${no} hand`,g.hand&&g.n===no,`n ${g.n}`);chk(`n${no} cards in screen+frame`,g.allS&&g.allD);chk(`n${no} no slot overlap`,g.ov===0,'ov '+g.ov);chk(`n${no} no scroll`,!g.scrollers.length,g.scrollers.join());chk(`n${no} figure clear`,!g.cardOverFig);
@@ -50,7 +50,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    await tapC('khok');g=await geo();chk(`n${no} ✓ chooses last`,g.fired===no-1,'fired '+g.fired)}
   /* 2b. KIT §101.11 (owner 26/11 ~21:25Z): at most 7 cards — an 8-card frame is NOT a hand (no paging); the source must cut it (hand-max-scan.js) */
   await clear();await p.evaluate(()=>{const o=Array.from({length:8},(_,i)=>({n:'Lối '+(i+1),fx:{},go:()=>{window.__fired=i}}));Q.push({t:'Thử tám lá',h:'<p>x</p>',opts:o,who:pEmp(),pid:'rg',__khT:'p8'});showModal()});await p.waitForTimeout(1800);
-  {const q=await p.evaluate(()=>{const g=document.querySelector('#modal .opts');return {hand:!!(g&&g.classList.contains('khand')),pager:!!document.querySelector('#modal .khpg')}});chk('8 cards: no hand, no pager',!q.hand&&!q.pager,JSON.stringify(q))}
+  {const q=await p.evaluate(()=>{const g=document.querySelector('#modal .opts');return {hand:!!(g&&g.classList.contains('khand')),pager:!!document.querySelector('#modal .khpg')}});chk('8 cards: a hand, all at once, no pager (owner 22:43Z)',q.hand&&!q.pager,JSON.stringify(q))}
   /* 3. locked card */
   await clear();await p.evaluate(()=>{const o=['Dâng sớ can gián','Im lặng chờ thời','Nhờ Thái hậu nói giúp'].map((n,i)=>({n,fx:{},j67:'tốn: Danh -2 · được: bệ hạ nghe ngươi',go:()=>{window.__fired=i}}));o[0].lk=()=>'Chưa đủ Danh';Q.push({t:'Thử thẻ khóa',h:'<p>Triều nghị bàn chuyện biên ải.</p>',opts:o,who:pEmp(),pid:'rg',__khT:'lk'});showModal()});await p.waitForTimeout(2000);
   g=await geo();chk('locked hand',g.hand&&g.n===3);await tap(0);g=await geo();await shot('locked-lift');const why=await p.evaluate(()=>{const z=document.querySelector('#modal .khplate:not([hidden])');return z?z.textContent:''});
