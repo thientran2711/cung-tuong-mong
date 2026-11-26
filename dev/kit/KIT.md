@@ -1609,6 +1609,10 @@ Any grid of goods with a price (shop, later gifts, peddler, rewards to pick) use
 Scene rule (same branch, jk2b kitEvArt): a dialog id with NO EVENTS category (plain "Tin trong cung", other pid without a category) gets the room she
 is in (j17 evArt, season × buổi), never the j89 default category (Triều chính, officials kneeling).
 
+### 28.13s ONE PERSON ONE FIGURE ON THE SHOP STAGE (goal-links note (c): «Cách làm» drew Tiểu X Tử's own court figure, his shop drew the generic tray figure; law 6b, KK45) — `kitSeller(p, fallback)` (jinv)
+- A seller who IS a real person (Nội vụ phủ eunuch `S.court.ped`) stands on the kitShop stage as HIS OWN record: `kitFigOf` / `kitName` draw the same figure and name as every other place he appears. The pseudo person `{__fig, __cap}` (generic art, e.g. fig-eunuch-ndp-tray) is only the fallback when no record exists.
+- Family (kitShop / kitModal callers with a `__fig` seller, scan `grep -n '__fig:' dev/build/j*.js`): before 2 real-person sellers on generic art (jinv kitShopNvp, jpet petShop) → after 0. Not sellers, unchanged: jhaohuu unknown-person silhouette (no record known yet), jpetcare pet picture (`__pet`).
+
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})` (review/dress-offence, owner 16/11 18:30Z: "6 wear slots + the pet = 7"): SEVEN kitItem tiles right under the portrait on
   EVERY person card (player, consorts, maids, ma ma, Thái hậu…): Cài tóc (`p.wd.tram`) · Hoa tai · Đeo tay · Đeo eo · Túi thơm (jinv worn IT.sl) · Khăn che mặt
