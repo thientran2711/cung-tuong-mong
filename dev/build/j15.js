@@ -94,10 +94,7 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
  /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the acts are split into GROUP TABS (the Hành sự categories, KIT_CAT via kitActCat; the same
     .pctabs/.pct row + "làm được/tổng" count as every other person card); one group = no tab row. The result of an act is NOT a note in the column:
     it goes to the standard bottom result card (#rtoast, j65 talk) — so the card carries no note here (popMsg stays the state the log sync reads). */
- /* ACT-MERGE J2 (jdf DOOR): a consort's harm / scheme / accuse options fold into ONE door button each (Dò la · Khiêu khích · Hãm hại · Hạ uy thế · Hại hoàng tự · Tố cáo · Ra uy …); the door's dialog runs these same options (talk(oi)) */
- const DP=typeof doorPop==="function"&&!done?doorPop(p,i,opts):{skip:new Set(),doors:[]};
- const gk=[],gb={};opts.forEach((a,j)=>{if(DP.skip.has(j))return;let c="khac";try{c=(typeof kitActCat==="function"&&kitActCat(a.n))||"khac"}catch(e){}if(!gb[c]){gb[c]=[];gk.push(c)}gb[c].push(B[j])});
- for(const x of DP.doors){if(!gb[x.cat]){gb[x.cat]=[];gk.push(x.cat)}gb[x.cat].push(x.html)}
+ const gk=[],gb={};opts.forEach((a,j)=>{let c="khac";try{c=(typeof kitActCat==="function"&&kitActCat(a.n))||"khac"}catch(e){}if(!gb[c]){gb[c]=[];gk.push(c)}gb[c].push(B[j])});
  const gn=c=>typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:c==="khac"?"Khác":c;
  const groups=done?[]:gk.length>1?gk.map(c=>[gn(c),gb[c]]):[["",B]];
  return pcard({f,col,name:p.name,rank,ghen,lines,chips,close,note:"",groups,empty:done?"Lần ghé này đã nói chuyện với người này rồi.":"Không có việc gì để làm với người này."})}

@@ -38,8 +38,8 @@ const HA_AT={tieuhuy:"tpal",trip:"tgt",pushp:"tgt",rumor:"vuon",spy:"tpal",block
 const HA_PREP={musk:"nvp",poison:"tyv",kpoison:"tyv",pond:"vuon",pushp:"vuon",catswap:"own",kframe:"own",frame:"own",plant:"tpal"};
 const HA_NO=new Set(["steal","road","gift","ally"]);/* not harm options here: steal / road at the flip (§3), gift / ally = part A (jagacts cx:gift / cx:ally) */
 function haName(t){return t===S?"ngươi":t&&t.name||""}
-/* ACT-MERGE J2 (two-way, law 1): the door + tier of an NPC deed = the SAME door she uses on them (jdf DOOR / doorOf: Hãm hại nhẹ·vừa·nặng, Hạ uy thế …) */
-function haDoor(k){try{return typeof doorOf==="function"?doorOf(k):null}catch(e){return null}}
+/* ACT-MERGE J2 (two-way, law 1): the door + tier of an NPC deed = the SAME door she uses on them (jdoor DOOR.ofKey, J2 ext: Hãm hại nhẹ·vừa·nặng, Hạ uy thế …) */
+function haDoor(k){try{return typeof DOOR==="object"&&DOOR&&typeof DOOR.ofKey==="function"?DOOR.ofKey(k):null}catch(e){return null}}
 function haVerb(k,t){const V=(typeof J78VERB==="object"&&J78VERB[k])||((ACT[k]&&ACT[k].n||k).toLowerCase()+" {t}");return V.replace("{t}",haName(t))}
 /* the player's cheaper ways of the same act (jecon / jlost: by her own trusted maid or a favour owed, no silver): open where the base act is open */
 const HA_VAR={spyk:"spy",bribel:"bribe",blockf:"block",laydol:"laydo"};
