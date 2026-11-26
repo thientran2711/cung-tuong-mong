@@ -129,6 +129,9 @@ window.addEventListener("click",e=>{try{if(!S||typeof tab==="undefined"||tab!=="
  const fx=(e.clientX-r.left)/r.width,fy=(e.clientY-r.top)/r.height;if(fx>=b.x&&fx<=b.x+b.w&&fy>=b.y&&fy<=b.y+b.h)return;e.preventDefault();e.stopImmediatePropagation();mapzGo(null)}catch(err){console.error(err)}},true);
 /* the way back = the ONE kit back button of the left rail (KIT 33.11, jplfs kplBack): zone → overview; courtyard → its zone (as before → Dư đồ) */
 (function(){if(typeof kplBack!=="function")return;const b0=kplBack;kplBack=function(){try{if(typeof tab!=="undefined"&&tab==="go"&&!window.__kpm&&mapzCur())return{t:"Về toàn cảnh Dư đồ",go:()=>mapzGo(null)}}catch(e){}return b0.apply(this,arguments)}})();
+/* back from a palace courtyard (level 3) into its zone (level 2): the zone is fitted and centred again, as on entry */
+(function(){const r0=render;render=function(){const was=window.__mzKpmPrev;const r=r0.apply(this,arguments);try{const now=!!window.__kpm;window.__mzKpmPrev=now;
+ if(was&&!now&&typeof tab!=="undefined"&&tab==="go"&&mapzCur()){window.__mapZoneDo=1;try{mapFit()}finally{window.__mapZoneDo=0}}}catch(e){console.error("jmapz back",e)}return r}})();
 /* leaving the Dư đồ by the tab bar ends the zone view; the list view too */
 document.addEventListener("click",e=>{const t=e.target.closest("#tabs [data-tab],button[data-tab]");if(t&&t.dataset.tab!=="go"){window.__mapZone=null;window.__mapZoneNew=0}},true);
 document.addEventListener("click",e=>{if(e.target.closest("[data-maplist]")){window.__mapZone=null;window.__mapZoneNew=0}},true);
