@@ -39,7 +39,7 @@ Object.assign(MS67,{
   g:()=>S.origin.k==="cnv"?`Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Chủ tin lên ${F14G().tin}, hoặc được thăng Đại cung nữ, thì xong chương, có thưởng; qua ${f14Nv(F14L().nhapCnv)} tháng thì chương tự khép, không thưởng.`
    :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(f14NhapL())} tháng thì chương tự khép, không thưởng.`,
   steps:m=>S.origin.k==="cnv"?[[`Chủ tin ${S.tin||0}/${F14G().tin}`,(S.tin||0)>=F14G().tin],[`Được thăng ${SRK.maid[BAL.srvRk.dai]} (Đại cung nữ)`,!!(S.srv&&S.srv.rk>=BAL.srvRk.dai)],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().nhapCnv," đầu")]
-   :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
+   :[[`Được tấn phong một bậc (nay ${meRankN()})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
   any:1,get fx(){return{danh:F14D().nhap}},end:"Ngươi đã đứng được chân trong cung.",get rw(){return["court",F14R().nhap]}},
  sung14:{t:()=>f14Srv()?"Một ánh mắt rồng":"Sơ thừa ân sủng",lim:()=>F14L().sung,wait:()=>f14Home(),
   g:()=>f14Srv()?`Kẻ hầu cũng có ngày được Hoàng thượng để mắt: Hoàng thượng để ý lên ${F14G().nt}, hoặc được phong Đáp ứng, thì xong chương, có thưởng. Quá ${f14Nv(F14L().sung)} tháng mà chưa được thì chương tự khép để truyện đi tiếp, không thưởng.`

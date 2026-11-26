@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ca368b86+","t":"2026-11-26T10:44Z","c":"OB-NGOAICUNG-3b r3: report (before/after, gates) + chest-tap.js (tiểu thư chest «Nhận» reached with real taps on Fold + iPad)","b":"0de52781f0ee","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"436d8d72+","t":"2026-11-26T11:36Z","c":"OB-NGOAICUNG-3b r4: report (cause, fix, before/after; gates pending)","b":"fc62638c9c6a","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -10305,7 +10305,7 @@ function startArc67(k){const ids=arcIds67(k).filter(id=>arcOk67(ARC67[id]));if(!
 /* milestone chapters: Chương 1 (vào cung, đứng vững) and the last two (ngôi Trung cung, kế vị): goals are the game's own goals */
 const MS67={
  nhap:{t:()=>S.origin.k==="cnv"?"Phận tỳ nữ buổi đầu":"Sơ nhập cung môn",g:()=>S.origin.k==="cnv"?"Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Xong chương khi qua tám tháng đầu, hoặc được phong Đáp ứng.":"Mới vào cung: giữ mình, được Hoàng thượng để mắt. Xong chương khi được tấn phong một bậc, hoặc qua sáu tháng đầu.",
-  steps:m=>S.origin.k==="cnv"?[[`Qua tám tháng đầu (${Math.min(8,S.turn-m.t0)}/8)`,S.turn-m.t0>=8],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)]]:[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],[`Qua sáu tháng đầu (${Math.min(6,S.turn-m.t0)}/6)`,S.turn-m.t0>=6]],any:1,fx:BAL.arc.ms.nhap,end:"Ngươi đã đứng được chân trong cung."},
+  steps:m=>S.origin.k==="cnv"?[[`Qua tám tháng đầu (${Math.min(8,S.turn-m.t0)}/8)`,S.turn-m.t0>=8],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)]]:[[`Được tấn phong một bậc (nay ${meRankN()})`,S.rank>m.r0],[`Qua sáu tháng đầu (${Math.min(6,S.turn-m.t0)}/6)`,S.turn-m.t0>=6]],any:1,fx:BAL.arc.ms.nhap,end:"Ngươi đã đứng được chân trong cung."},
  hau:{t:()=>"Tranh phượng vị",g:()=>"Leo lên ngôi Hoàng hậu. Từng bậc phải đủ Sủng và Danh; khi ngôi Trung cung trống, Hoàng thượng chọn trong người có hoàng tử, được Thái hậu ủng hộ và đủ Đức.",
   steps:()=>[3,4,5,6,7].map(r=>[`Lên ${RANKS[r].n}`,S.rank>=r]),fx:BAL.arc.ms.hau,end:"Ngươi đã ngồi trên ngôi Trung cung."},
  ke:{t:()=>"Mẫu nghi thiên hạ",g:()=>"Đưa con mình lên ngôi Đông cung; khi con lên ngôi, ngươi thành Hoàng thái hậu.",
@@ -12051,7 +12051,7 @@ Object.assign(MS67,{
   g:()=>S.origin.k==="cnv"?`Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Chủ tin lên ${F14G().tin}, hoặc được thăng Đại cung nữ, thì xong chương, có thưởng; qua ${f14Nv(F14L().nhapCnv)} tháng thì chương tự khép, không thưởng.`
    :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(f14NhapL())} tháng thì chương tự khép, không thưởng.`,
   steps:m=>S.origin.k==="cnv"?[[`Chủ tin ${S.tin||0}/${F14G().tin}`,(S.tin||0)>=F14G().tin],[`Được thăng ${SRK.maid[BAL.srvRk.dai]} (Đại cung nữ)`,!!(S.srv&&S.srv.rk>=BAL.srvRk.dai)],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().nhapCnv," đầu")]
-   :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
+   :[[`Được tấn phong một bậc (nay ${meRankN()})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
   any:1,get fx(){return{danh:F14D().nhap}},end:"Ngươi đã đứng được chân trong cung.",get rw(){return["court",F14R().nhap]}},
  sung14:{t:()=>f14Srv()?"Một ánh mắt rồng":"Sơ thừa ân sủng",lim:()=>F14L().sung,wait:()=>f14Home(),
   g:()=>f14Srv()?`Kẻ hầu cũng có ngày được Hoàng thượng để mắt: Hoàng thượng để ý lên ${F14G().nt}, hoặc được phong Đáp ứng, thì xong chương, có thưởng. Quá ${f14Nv(F14L().sung)} tháng mà chưa được thì chương tự khép để truyện đi tiếp, không thưởng.`
@@ -14085,7 +14085,7 @@ RD97L.push(rdRare({a:"tt_tranh_11",tag:"Huynh muội đồng lòng, phủ dâng 
 
 /* ---------- tt_mat · Mật ước với Hoàng hậu ---------- */
 /* ONE CORE (review road-b1-r1 item 8): every RANKS index clamped */
-const MATCAP=()=>BAL.road.cap.tt_mat,MATRK=()=>RANKS[Math.min(MATCAP(),RANKS.length-1)].n,MATME=()=>RANKS[Math.min(S.rank,RANKS.length-1)].n;
+const MATCAP=()=>BAL.road.cap.tt_mat,MATRK=()=>RANKS[Math.min(MATCAP(),RANKS.length-1)].n,MATME=()=>meRankN();
 /* she already stands above the pact's cap: texts that say "the pact holds you under" read this (review road-b1-r1 item 4) */
 const MATOVER=()=>S.rank>MATCAP();
 /* the Hoàng hậu of the pact is on the seat (cast guard, review road-b1-r1 item 6). Without her (dead, deposed, or the player is Hoàng hậu)
@@ -14592,7 +14592,7 @@ rdDef("dtq_bien",9,{t:"Lời can gián",w:"emp",sj:"chuyện Hoàng thượng đ
   {n:"Biếu lễ, nhờ ông đặt thư lên án lúc khuya",f:"thu",wx:"thư đến tay ngài đúng lúc",lx:"lễ mất trắng nếu ông không đặt",rt:"Tổng quản gật: “Nô tài biết giờ nào ngài dễ đọc.”",rf:"Tổng quản nhận lễ, thư vẫn nằm dưới chồng tấu."},
   {n:"Tặng chút quà, cảm tạ lời khuyên",wx:"Tổng quản quý ngươi",lx:"tốn quà, bỏ một đường đưa thư",rt:"Tổng quản cúi đầu tiễn ngươi."},
   {n:"Hỏi ông ai muốn vua ra ải",wx:"biết phe xúi giục",lx:"Tổng quản cảnh giác, giữ khoảng cách với ngươi",rt:"Tổng quản khẽ nói: người Binh bộ ra vào Dưỡng Tâm điện nhiều hơn trước.",rf:"Tổng quản cười: “Nô tài chỉ biết hầu trà.”"}]},
- t1:{h:"Bậc của ngươi",w:"emp",t:()=>`Lệ cung: phi tần từ bậc ${RANKS[Math.min(DTQBN_SPK(),RANKS.length-1)].n} trở lên mới được dâng thư lên ngự án. Ngươi đang ở bậc ${RANKS[Math.min(S.rank,RANKS.length-1)].n}.`,o:[
+ t1:{h:"Bậc của ngươi",w:"emp",t:()=>`Lệ cung: phi tần từ bậc ${RANKS[Math.min(DTQBN_SPK(),RANKS.length-1)].n} trở lên mới được dâng thư lên ngự án. Ngươi đang ở bậc ${meRankN()}.`,o:[
   {n:"Dâng thư can lên ngự án",if:()=>S.rank>=DTQBN_SPK(),f:"thu",wx:"lời ngươi đến tay ngài đúng lệ",lx:"ngài đọc trong cơn bực",rt:"Hoàng thượng đọc thư hai lần, đặt dưới chặn giấy.",rf:"Hoàng thượng đọc lướt, gạt sang bên."},
   {n:"Nhờ Hoàng hậu chuyển lời",need:["hh"],f:"thu",wx:"lời ngươi đi qua Trung cung",lx:"Hoàng hậu biết ngươi nợ nàng",rt:"Hoàng hậu nói với ngài đúng ý ngươi.",rf:"Hoàng hậu chuyển lời, nhưng bớt đi một nửa."},
   {n:"Thêu một tấm bản đồ ải bắc",wx:"ngài thấy ải hiểm thế nào",lx:"tốn công, ngài có xem hay không chưa biết",rt:"Tấm bản đồ treo trong thư phòng, ngài đứng nhìn rất lâu."},
@@ -100567,7 +100567,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0de52781f0ee";window.CTM_BUILD=BUILD;
+const BUILD="fc62638c9c6a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
