@@ -332,11 +332,9 @@ function balAb(n){return String(Math.abs(n))}
 /* a printed count as a word («một chứng cứ»): balWord(balAb(BAL…)) — the number word of VP.num (j84, loads later; called only when the text is built) */
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
 /* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
-function balOan(n,m){return balOanUp(Math.abs(n)*BAL.relOan[m])}
-/* review/oan-pace: the SHOWN size of one cause = what really lands (joanpace opUp / opDn: one cause ≤ BAL.oanPace.step for an oán rise,
-   ≤ BAL.oanPace.ghet.step for a fall of liking); a fall of oán / a rise of liking is shown as typed */
-function balOanUp(n){n=Math.round(Math.abs(n));const P=BAL.oanPace;return String(P&&P.on?Math.min(n,P.step):n)}
-function balGhet(n){const P=BAL.oanPace;if(!(n<0)||!P||!P.on)return balSg(n);return balSg(-Math.min(Math.round(-n),P.ghet.step))}
+function balOan(n,m){const x=Math.round(Math.abs(n)*BAL.relOan[m]);try{return String(typeof spSee==="function"?spSee("oan",x):x)}catch(e){return String(x)}}
+/* review/oan-pace-2 (RV-163B F1, ONE preview rule): the SHOWN size of an oán rise / a fall of liking = what really lands = stat-pace spSee
+   (jstatpace: the BAL.stp.band size band + slow near the ceiling); balOan only turns a relAdd amount into its oán (BAL.relOan) and asks spSee */
 /* ONE CORE age bands (owner 24/11 ~00:25Z "Cập nhật tuổi game là 18, 28, 39, 51, 64": 18–27 / 28–38 / 39–50 / 51–63 / 64+, for everyone,
    every rank/role; review/ageband): ageMin = the first band and the youngest adult (owner OD:L104 18+; jage lifts every adult below it);
    band i starts at ageBand[i-1] (band 0 at ageMin). ageArt[i] = the file tag of band i's painted art on the CDN (img/*-a18.webp …): a tag is
@@ -400,24 +398,26 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
              alone / deep (review/oan-pace, owner OD 26/11 ~18:40Z «giảm quá chậm»): the fade of one day × (1 + alone.k × the days she was left alone past
              quiet, at most alone.max) — faster the longer nothing new feeds it; × deep.k when the grudge is at band deep.lv or more (BAL.oanLv[deep.lv − 1],
              «Oán sâu»): a deep grudge cools slower.
-   oanPace = OÁN PACE (review/oan-pace, joanpace; owner OD 26/11 ~18:40Z «điểm oán nó tăng quá nhanh … giảm quá chậm»; no cap on events or choices):
-             step = the most one cause adds (the cause's own number, capped); the same incident (one pair, one buổi) never stacks — the biggest cause
-             counts; day = the most one person's oán toward one person rises in one day (wk); act = the grudge heat (max of oán, Ghen × net.heat.ghenK
-             toward her, dislike × net.heat.affK) a hostile choice (j95 H95: schemes and quarrels) needs, unless an outside reason (j95except) pushes;
-             vent = revenge satisfies: an act against a person spends share of the doer's oán toward that person (at least min). Same rules for her (law 1).
-             ghet = the same pace for «ghét» (a fall of thiện cảm, j9 affAdd n < 0): step per cause, day per pair per day; a rise of liking is never capped.
-             rum = a rumour that she harmed someone (j95b j95bSeed): the believer's oán oa + the teller's sway, liking −af (then bounded by step).
-             ghen = the SAME pace for GHEN (review/oan-pace-ghen, MAIN 161 scope 18:58Z + 19:20Z relative-favour rule; joanpace opGhenIn / opGfK / opGvent):
-             step / day = the most one cause / one day adds to one consort's jealousy of her (same incident = same buổi never stacks); rel = the
-             jealousy grows from her favour RELATIVE to the jealous one's: a rise × clamp(1 + (her Sủng − that consort's Sủng) ÷ span, min, max), and
-             the daily fade × clamp(1 − gap ÷ span, fmin, fmax) (a consort as favoured as she is lets it go faster); deep = at ghen ≥ deep the fade
-             × BAL.oanCool.deep.k (deep jealousy cools slower); the fade also × (1 + BAL.oanCool.alone.k × the days with no new cause past
-             BAL.oanCool.quiet, at most alone.max); vent = acting against her spends share of that jealousy (at least min). Two-way (law 1): HER
-             jealousy of a consort (v.pg, pgUp / pgCool) follows the same step, day, rel (gap = that consort's Sủng − hers), deep, alone and vent.
+   oanPace = OÁN PACE (review/oan-pace-2, joanpace; owner OD 26/11 ~18:40Z «điểm oán nó tăng quá nhanh … giảm quá chậm»; no cap on events or choices).
+             ONE cap per stat (MAIN 163 ruling on RV-163B F1): the size of ONE cause is stat-pace's band (BAL.stp.band.oan / rel, jstatpace spG);
+             oanPace adds only: the same incident (one pair, one buổi) never stacks — the biggest cause counts; day = the most one person's oán toward
+             one person rises in one day (wk, counted in cause size); act = the grudge heat (max of oán, Ghen × net.heat.ghenK toward her, dislike ×
+             net.heat.affK) a hostile choice (j95 H95: schemes and quarrels) needs, unless an outside reason (j95except) pushes; vent = revenge
+             satisfies: an act against a person spends share of the doer's oán toward that person (at least min). Same rules for her (law 1).
+             ghet = the same no-stack / day for «ghét» (a fall of thiện cảm, j9 affAdd n < 0); a rise of liking is never held here.
+             rum = a rumour that she harmed someone (j95b j95bSeed): the believer's oán oa + the teller's sway, liking −af (then paced as above).
+             ghen = the same split for GHEN (review/oan-pace-2, MAIN 161 scope 18:58Z + relative-favour rec 19:20Z; joanpace opGhenIn / opGfK / opGvent):
+             band = the size band of ONE cause (stat-pace style: above band[1] only BAL.stp.over of the rest counts, never above band[2]; j1 ghenN
+             shows it); day = the most one consort's jealousy of her rises in a day; same incident never stacks; rel = the jealousy grows from her
+             favour RELATIVE to the jealous one's: a rise × clamp(1 + (her Sủng − that consort's Sủng) ÷ span, min, max), the daily fade ×
+             clamp(1 − gap ÷ span, fmin, fmax); deep = at ghen ≥ deep the fade × BAL.oanCool.deep.k (deep jealousy cools slower); the fade also
+             × (1 + BAL.oanCool.alone.k × the days with no new cause past BAL.oanCool.quiet, at most alone.max; her looks, a standing cause, do not
+             count); vent = acting against her spends share of that jealousy (at least min). Two-way (law 1): HER jealousy of a consort (v.pg, pgUp /
+             pgCool) follows the same band, day, rel (gap = that consort's Sủng − hers), deep, alone and vent.
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    (the youngest adult = BAL.ageMin, with the age bands above) */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,alone:{k:.1,max:10},deep:{k:.5,lv:3},floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5,dm:{pow:3,min:.15}}},oanPace:{on:1,step:12,day:16,act:25,vent:{share:.35,min:3},rum:{oa:18,af:12},ghet:{step:12,day:16},ghen:{step:8,day:10,rel:{span:40,min:.25,max:1.25,fmin:.5,fmax:2},deep:60,vent:{share:.35,min:3}}},oanMend:{o:50,kf:40,deep:.4,gift:{bac:60,r:30,danh:-1},go:{fav:10,danh:-1,stand:.3},ag:2},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,alone:{k:.1,max:10},deep:{k:.5,lv:3},floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5,dm:{pow:3,min:.15}}},oanPace:{on:1,day:16,act:25,vent:{share:.35,min:3},rum:{oa:18,af:12},ghet:{day:16},ghen:{band:[3,6,9],day:9,rel:{span:40,min:.25,max:1,fmin:.75,fmax:2},deep:60,vent:{share:.35,min:3}}},oanMend:{o:50,kf:40,deep:.4,gift:{bac:60,r:30,danh:-1},go:{fav:10,danh:-1,stand:.3},ag:2},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for

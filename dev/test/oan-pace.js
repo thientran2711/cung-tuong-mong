@@ -14,13 +14,13 @@ const PAGE=process.argv[2]||'index.html';
   /* NEWCOMER (e): a new face arrives with no oán toward her */
   const n=newRival(1);ok('E1 a new arrival starts at oán 0 toward her',oan(n,S)===0&&!(n.oan>0),n.oan);
   /* (b) one bounded step per cause */
-  setO(a,S,0);S.bqN=(S.bqN||0)+1;oanAdd(a,S,40);ok('B1 one cause adds at most BAL.oanPace.step ('+P.step+')',raw(a,S)<=P.step&&raw(a,S)>0,raw(a,S));
+  setO(a,S,0);S.bqN=(S.bqN||0)+1;BAL.stp.on=1;oanAdd(a,S,40);ok('B1 one cause adds at most stat-pace\'s band BAL.stp.band.oan[2] ('+BAL.stp.band.oan[2]+') — ONE cap per stat',raw(a,S)<=BAL.stp.band.oan[2]&&raw(a,S)>0,raw(a,S));BAL.stp.on=0;
   const o1=raw(a,S);oanAdd(a,S,5);ok('B2 same incident (same buổi): a smaller second cause adds nothing (the biggest counts)',raw(a,S)===o1,[o1,raw(a,S)]);
-  S.bqN++;oanAdd(a,S,P.step);const o2=raw(a,S);S.bqN++;oanAdd(a,S,P.step);
+  S.bqN++;oanAdd(a,S,12);const o2=raw(a,S);S.bqN++;oanAdd(a,S,12);
   ok('B3 one day: the rise of one pair is capped at BAL.oanPace.day ('+P.day+')',raw(a,S)<=P.day+1&&raw(a,S)>=o2,[o1,o2,raw(a,S)]);
   const keep=S.tuan;S.tuan=(S.tuan+1)%3;if(S.tuan===0)S.turn++;S.bqN++;const o3=raw(a,S);oanAdd(a,S,5);
   ok('B4 a new day: a new cause rises again',raw(a,S)>o3,[o3,raw(a,S)]);
-  setO(S,c,0);S.bqN++;oanAdd(S,c,40);ok('B5 two-way: HER oán toward a consort follows the same step',raw(S,c)<=P.step&&raw(S,c)>0,raw(S,c));
+  setO(S,c,0);S.bqN++;oanAdd(S,c,40);ok('B5 two-way: HER oán toward a consort follows the same day cap ('+P.day+')',raw(S,c)<=P.day&&raw(S,c)>0,raw(S,c));
   const m0=raw(a,S);oanAdd(a,S,-3);ok('B6 a fall is never capped',raw(a,S)===m0-3,[m0,raw(a,S)]);
   /* (c) daily fade: faster when left alone, slower when deep */
   const fade=(x,v,qd)=>{clr(x);setO(x,S,v);x.ocq={me:wk()-qd};const k=persF(x,'forgive',1);oanCool(1,false);return [v-raw(x,S),k]};
@@ -41,18 +41,18 @@ const PAGE=process.argv[2]||'index.html';
   setO(c,S,5);c.ghen=0;c.rel=0;c.j95rum={[key(S)]:{txt:'x',src:'y',w:wk()}};const gR=motiveOK(c,S,'rumor');delete c.j95rum;
   ok('F5 a rumour she believes no longer opens the gate by itself (no chain of lies)',!gR.ok,gR);
   /* (b') ghét: a fall of liking is one bounded step per cause, capped per day */
-  clr(e);e.opa={};e.rel=0;S.bqN++;affAdd(e,S,-40);ok('G1 a fall of liking is at most BAL.oanPace.ghet.step ('+P.ghet.step+')',aff(e,S)===-P.ghet.step,aff(e,S));
+  clr(e);e.opa={};e.rel=0;S.bqN++;affAdd(e,S,-40);ok('G1 a fall of liking is at most BAL.oanPace.ghet.day a day ('+P.ghet.day+')',aff(e,S)===-P.ghet.day,aff(e,S));
   const a1=aff(e,S);affAdd(e,S,20);ok('G2 a rise of liking is never capped',aff(e,S)===a1+Math.round(20*persF(e,'trust',1)),[a1,aff(e,S)]);
   /* GHEN pace (review/oan-pace-ghen) */
   {const G=P.ghen;const gz=x=>{x.opg={};x.gUc=0;x.ghen=0};const nn=newRival(1);ok('H1 a newcomer starts near 0 jealousy (< BAL.ghenNew '+BAL.ghenNew+')',(nn.ghen||0)<BAL.ghenNew,nn.ghen);
-   S.sung=50;a.sung=50;gz(a);S.bqN++;ghenUp(a,30,'t',S);const g1=a.ghen;ok('H2 one cause adds at most BAL.oanPace.ghen.step ('+G.step+')',g1>0&&g1<=G.step,g1);
+   S.sung=50;a.sung=50;gz(a);S.bqN++;ghenUp(a,30,'t',S);const g1=a.ghen;ok('H2 one cause adds at most the band BAL.oanPace.ghen.band[2] ('+G.band[2]+')',g1>0&&g1<=G.band[2],g1);
    ghenUp(a,5,'t',S);ok('H3 same incident (same buổi): a smaller second cause adds nothing',a.ghen===g1,[g1,a.ghen]);
-   S.bqN++;ghenUp(a,G.step,'t',S);S.bqN++;ghenUp(a,G.step,'t',S);ok('H4 one day: one consort\'s jealousy rises at most BAL.oanPace.ghen.day ('+G.day+')',a.ghen<=G.day+1,a.ghen);
-   gz(c);gz(d);c.sung=S.sung+G.rel.span;d.sung=S.sung-10;S.bqN++;ghenUp(c,G.step,'t',S);ghenUp(d,G.step,'t',S);
-   ok('H5 relative favour: a consort more favoured than her grows far less jealous than one below her',c.ghen<d.ghen&&c.ghen<=Math.ceil(G.step*G.rel.min),[c.ghen,d.ghen]);
+   S.bqN++;ghenUp(a,G.band[1],'t',S);S.bqN++;ghenUp(a,G.band[1],'t',S);ok('H4 one day: one consort\'s jealousy rises at most BAL.oanPace.ghen.day ('+G.day+')',a.ghen<=G.day+1,a.ghen);
+   gz(c);gz(d);c.sung=S.sung+G.rel.span;d.sung=S.sung-10;S.bqN++;ghenUp(c,G.band[1],'t',S);ghenUp(d,G.band[1],'t',S);
+   ok('H5 relative favour: a consort more favoured than her grows far less jealous than one below her',c.ghen<d.ghen&&c.ghen<=Math.ceil(G.band[1]*G.rel.min),[c.ghen,d.ghen]);
    const w=wk();ok('H6 fade: closed gap faster, deep slower, left alone faster',opGfK(30,-G.rel.span,w)>opGfK(30,0,w)&&opGfK(G.deep,0,w)<opGfK(30,0,w)&&opGfK(30,0,w-10)>opGfK(30,0,w),[opGfK(30,-G.rel.span,w),opGfK(30,0,w),opGfK(G.deep,0,w),opGfK(30,0,w-10)]);
    a.ghen=50;opVent(a,S);ok('H7 acting against her spends her jealousy (vent.share '+G.vent.share+')',a.ghen===50-Math.max(G.vent.min,Math.round(50*G.vent.share)),a.ghen);
-   c.pg=0;c.pUc=0;S.opg={};S.bqN++;pgUp(c,30,'t');const p1=c.pg;c.pg=40;opVent(S,c);ok('H8 two-way: her jealousy of a consort — one step per cause, spent when she acts',p1>0&&p1<=G.step&&c.pg===40-Math.max(G.vent.min,Math.round(40*G.vent.share)),[p1,c.pg]);
+   c.pg=0;c.pUc=0;S.opg={};S.bqN++;pgUp(c,30,'t');const p1=c.pg;c.pg=40;opVent(S,c);ok('H8 two-way: her jealousy of a consort — one band per cause, spent when she acts',p1>0&&p1<=G.band[2]&&c.pg===40-Math.max(G.vent.min,Math.round(40*G.vent.share)),[p1,c.pg]);
    gz(e);ghenUp(e,10,'t',a);ok('H9 a jealousy caused by another consort still does not raise the score toward her',e.ghen===0,e.ghen)}
   /* rollback */
   P.on=0;setO(a,S,0);S.bqN++;oanAdd(a,S,40);ok('R1 BAL.oanPace.on = 0 → the old raw rise (× the holder\'s nết only)',raw(a,S)===Math.round(40*persF(a,'slight',1)),raw(a,S));P.on=1;S.tuan=keep;

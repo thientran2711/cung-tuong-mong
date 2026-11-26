@@ -37,7 +37,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    reset(6);found(S,m);joinFac(n,facOf(S));goCold();S.staff=[md];md.loyal=90;const A3=coldActs();const mr=A3.find(c=>/^Gửi thư xin rời/.test(c.n)&&/Thu Cúc/.test(c.n));
    o.l3=names(A3).filter(x=>/^Gửi thư/.test(x));if(!mr){o.mdRoad=false;o.mdFail=false}else{o.mdRoad=!!mr&&!mr.c.bac&&mr.o<100;const l0=md.loyal;mr.fail();o.mdFail=md.loyal===l0-LT.maidLoy}
    reset(7);found(S,m);joinFac(n,facOf(S));const g=facOf(S);goCold();S.staff=[];const so=coldActs().find(c=>/^Gửi thư tố/.test(c.n));m.opz={};const om=oan(m,S),d1=S.danh;so.go();
-   o.sell=[!facOf(S),oan(m,S)>=om+Math.min(Math.min(B.fac.sell.oan*persF(m,"slight",1),BAL.oanPace&&BAL.oanPace.on?BAL.oanPace.step:1e9),100-om)-1/* review/oan-pace: one cause = one bounded step (BAL.oanPace.step) */,S.danh>=d1+B.fac.sell.danh-0]}
+   o.sell=[!facOf(S),oan(m,S)>om&&oan(m,S)<=om+Math.min(B.fac.sell.oan*persF(m,"slight",1),BAL.stp&&BAL.stp.on?BAL.stp.band.oan[2]:1e9)+1/* review/oan-pace-2: one cause = stat-pace's size band (BAL.stp.band.oan, ONE cap per stat) */,S.danh>=d1+B.fac.sell.danh-0]}
   /* 6. her letter asking to join a faction: the leader (an NPC) answers by jrcv's own pick */
   reset(8);{const [l,m]=L();found(l,m);const f=facOf(l);affAdd(l,S,60);goCold();S.staff=[];const jc=coldActs().find(c=>/^Gửi thư xin vào/.test(c.n));o.jCard=!!jc;
    const RP=window.rcvPick;let got=null;window.rcvPick=function(t,a,O,k){const c=RP.apply(this,arguments);if(t===l&&a===S)got=c&&c.id;return c};

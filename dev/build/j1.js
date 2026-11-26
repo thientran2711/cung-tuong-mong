@@ -219,7 +219,7 @@ function deposeHeir(k,m){if(!k||!k.heir)return false;k.heir=false;if(S.heir&&S.h
 function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null}/* fix-kframe-heir: only when it is that son */if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
-function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}const r=Math.round(n*k);/* review/oan-pace-ghen: one cause never adds more than BAL.oanPace.ghen.step — the shown «ghen +N» is the most one consort gains (a consort nearer her favour gains less: joanpace opRelF) */try{const P=BAL.oanPace;if(P&&P.on&&P.ghen)return Math.min(r,P.ghen.step)}catch(e){}return r}
+function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}const r=Math.round(n*k);/* review/oan-pace-ghen: one cause follows the size band BAL.oanPace.ghen.band (joanpace opBand) — the shown «ghen +N» is the most one consort gains (a consort nearer her favour gains less: joanpace opRelF) */try{const P=BAL.oanPace;if(P&&P.on&&P.ghen&&typeof opBand==="function")return Math.round(opBand(r,P.ghen.band))}catch(e){}return r}
 /* MOODKNOW step 0 (owner s35 Lượt 41 + OD 17/11 ~18:38Z): ONE way to RAISE the jealousy SCORE v.ghen. It adds n (clamped 0–100) and, for the real
    rise, a short Chạnh lòng FEELING cause (jmoodknow ghenFeel: true why, aimed at the one who caused it 'by', khắc timer BAL.mood2.dur.e.ghenUp).
    Lowering stays a plain write; the feeling ending never touches the score. Returns the real rise. */
@@ -241,7 +241,7 @@ function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;
 function pgUp(v,n,why){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.pg||0;/* review/oan-pace-ghen (law 1): her jealousy follows the same pace (joanpace opPgIn); fractions carry (v.pUc) */
  if(typeof opPgIn==="function"){const x=(+v.pUc||0)+opPgIn(v,n);n=Math.floor(x);v.pUc=Math.round((x-n)*1000)/1000;if(!n)return 0}v.pg=cl(g0+n,0,100);const d=v.pg-g0;
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(S,d,why,v)}catch(e){}return d}
-function ghenAll(n,why){const d=ghenN(n);liveRivals(true).forEach(v=>ghenUp(v,d,why||"thấy ngươi nổi bật hơn người",S))}
+function ghenAll(n,why){const d=ghenN(n);window.opGBanded=1;/* review/oan-pace-2: ghenN already applied the size band — ghenUp must not band it twice */try{liveRivals(true).forEach(v=>ghenUp(v,d,why||"thấy ngươi nổi bật hơn người",S))}finally{window.opGBanded=0}}
 function namesInUse(){const a=[];if(S){a.push(S.name);if(S.maid)a.push(S.maid.name);if(S.foe)a.push(S.foe);if(S.st){if(S.st.guard)a.push(S.st.guard);if(S.st.stu)a.push(S.st.stu)}}(rivals||[]).forEach(v=>a.push(v.name));allKids().forEach(([k])=>a.push(k.name));return a}
 function freshName(){return nmNew("f")}/* one name core (jname.js): unique across the save, living + dead */
 function ghenNew0(){return R(BAL.ghenNew)}/* ONE CORE: the jealousy a new face starts with (newRival + co-op part B rebase) */

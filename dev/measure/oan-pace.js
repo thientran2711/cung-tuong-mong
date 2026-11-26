@@ -28,7 +28,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
    const TG=window.__tag={};try{for(const g in AGREG)for(const k in AGREG[g]){const f=AGREG[g][k];AGREG[g][k]=function(){const O=f.apply(this,arguments);try{for(const o of O||[])if(o&&o.k&&o.tag)TG[o.k]=o.tag}catch(e){}return O}}}catch(e){}
    try{const ao=agOpts;agOpts=function(){const O=ao.apply(this,arguments);try{for(const o of O||[])if(o&&o.k&&o.tag)TG[o.k]=o.tag}catch(e){}return O}}catch(e){}
    /* a rumour that she harmed someone, spread by a consort (j95b): aimed at her too */
-   try{const js=j95bSeed;j95bSeed=function(x,y){const r=js.apply(this,arguments);try{if(r&&x){const w=wk();(D[w]=D[w]||[]).push(['rumor:j95b','v'+x.id])}}catch(e){}return r}}catch(e){}
+   try{const js=j95bSeed;j95bSeed=function(x,y){const r=js.apply(this,arguments);try{if(r&&x){const w=wk();let h=null;try{const H=BAL.net.heat;h=[Math.round(oan(x,S)),Math.round((+x.ghen||0)*H.ghenK),Math.round(Math.max(0,-aff(x,S))*H.affK)]}catch(e){}(D[w]=D[w]||[]).push(['rumor:j95b','v'+x.id,h])}}catch(e){}/* review/oan-pace-ghen: + the teller's heat parts [oán, Ghen×ghenK, dislike×affK] */return r}}catch(e){}
    const l0=agLand0;agLand0=function(pp,seen){const r=l0.apply(this,arguments);
     try{if(r&&pp&&!seenP.has(pp)){seenP.add(pp);let t=null;try{t=typeof agTgt==="function"?agTgt(pp.t):agPerson(pp.t)}catch(e){}if(t===S){const w=wk();(D[w]=D[w]||[]).push([pp.k,pp.vid!=null?'v'+pp.vid:String(pp.id||'?')])}}}catch(e){}return r};
    /* the old direct path (npcAct: rivalsTurn / j95b retaliation / j51 … when not muted by the agent loop) */

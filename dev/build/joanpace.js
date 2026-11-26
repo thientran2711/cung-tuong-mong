@@ -3,7 +3,7 @@
    tôi mới gì vô game tôi có làm gì đâu mà ai cũng nhắm cho tôi hết trơn … không phải là tôi đang muốn bạn kiểm soát lại cái mật độ xuất hiện trong các
    cái sự kiện … phải kiểm soát các cái điểm số này». No cap on events or choices: every NPC still decides freely; only the oán score moves differently.
    Built on review/pace-all (j28 oanCool = the weekly — i.e. per DAY, one wk() tick — cool-down of every grudge; jmend = the costly mends).
-   (b) GAIN (j9 oanAdd base, every holder and target, HER own oán too — law 1): one cause = one bounded step (≤ BAL.oanPace.step); the same
+   (b) GAIN (j9 oanAdd base, every holder and target, HER own oán too — law 1): the size of one cause = stat-pace's band (BAL.stp.band, j9 spG after this door — ONE cap per stat, MAIN 163 on RV-163B F1); the same
        incident (same pair, same buổi bq()) never stacks — the biggest cause counts, not the sum; and one person's oán toward one person rises at
        most BAL.oanPace.day in one day (wk()). Fractions carry. Store: holder.opz[key] = [day, gained today, buổi, gained this buổi].
    (c) FADE (j28 ocOne): per day, faster the longer she leaves that person alone (BAL.oanCool.alone), slower for a deep grudge (BAL.oanCool.deep).
@@ -29,7 +29,7 @@ function opStep(x,y,n,st,P){if(!opOn()||!(n>0)||!x||typeof x!=="object")return n
  const [w,b]=opNow();const z=x[st]=x[st]&&typeof x[st]==="object"?x[st]:{};
  for(const q in z)if(!Array.isArray(z[q])||z[q][0]<w)delete z[q];
  const e=z[k]||[w,0,b,0];if(e[2]!==b){e[2]=b;e[3]=0}
- const s=Math.min(n,P.step);let add=Math.max(0,s-e[3]);add=Math.min(add,Math.max(0,P.day-e[1]));
+ const s=P.band?opBand(n,P.band):n;let add=Math.max(0,s-e[3]);add=Math.min(add,Math.max(0,P.day-e[1]));
  e[3]=Math.round((e[3]+add)*100)/100;e[1]=Math.round((e[1]+add)*100)/100;z[k]=e;return add}catch(err){return n}}
 /* (f) the grudge heat of a toward t (danger without the trait shift) */
 function opHeat(a,t){const H=BAL.net.heat;return Math.max(oan(a,t),t===S?(+a.ghen||0)*H.ghenK:0,Math.max(0,-aff(a,t))*H.affK)}
@@ -59,10 +59,12 @@ function opGvent(a,t){const V=(BAL.oanPace.ghen||{}).vent;if(!V)return 0;const s
    VENT (opGvent in opVent above): acting against her spends vent.share of that jealousy (≥ vent.min).
    TWO-WAY (law 1): HER jealousy of a consort (v.pg; j1 pgUp, j8 pgCool) — same step / day / rel (gap = that consort's Sủng − hers) / deep / alone / vent;
    her base fade = BAL.oanCool.ghen.base + pct × pg (the NPC base rule; she has no nết). Rollback: BAL.oanPace.on = 0 (old rise; old fade). */
+/* the stat-pace style size band of one cause (jstatpace spG: above b[1] only BAL.stp.over of the rest counts, never above b[2]) — used for GHEN only (oán / liking: stat-pace itself) */
+function opBand(n,b){if(!(n>b[1]))return n;const o=BAL.stp&&BAL.stp.over!=null?BAL.stp.over:.3;return Math.min(b[2],b[1]+(n-b[1])*o)}
 function opRelF(gap){const R=BAL.oanPace.ghen.rel;return Math.max(R.min,Math.min(R.max,1+gap/R.span))}
 function opGhenIn(v,n,by){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;const me=by&&typeof by==="object"&&by.coop?by:S;
- n=opStep(v,me,n*opRelF((+me.sung||0)-(+v.sung||0)),"opg",G);if(!window.opGStand)v.gLw=opNow()[0];return n}catch(e){return n}}
-function opPgIn(v,n){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;n=opStep(S,v,n*opRelF((+v.sung||0)-(+S.sung||0)),"opg",G);v.pLw=opNow()[0];return n}catch(e){return n}}
+ n=opStep(v,me,(window.opGBanded?n:opBand(n,G.band))*opRelF((+me.sung||0)-(+v.sung||0)),"opg",{day:G.day});if(!window.opGStand)v.gLw=opNow()[0];return n}catch(e){return n}}
+function opPgIn(v,n){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;n=opStep(S,v,opBand(n,G.band)*opRelF((+v.sung||0)-(+S.sung||0)),"opg",{day:G.day});v.pLw=opNow()[0];return n}catch(e){return n}}
 function opGfK(lv,gap,lw){try{const G=BAL.oanPace.ghen,C=BAL.oanCool;if(!opOn()||!G)return 1;let k=1;const q=opNow()[0]-(+lw||0)-C.quiet;
  if(q>0)k*=1+C.alone.k*Math.min(q,C.alone.max);if(lv>=G.deep)k*=C.deep.k;const R=G.rel;return k*Math.max(R.fmin,Math.min(R.fmax,1-gap/R.span))}catch(e){return 1}}
 /* her own jealousy's daily fade (j8 rivalsTurn; was a flat −1): fractions carry (v.pcc) */
