@@ -1,0 +1,31 @@
+CP buổi 50 year 1 save 339353 chars
+CP buổi 100 year 1 save 422995 chars
+CP buổi 150 year 2 save 499109 chars
+CP buổi 200 year 2 save 532111 chars
+CP buổi 250 year 2 save 596333 chars
+CP buổi 300 year 3 save 705996 chars
+CP buổi 350 year 3 save 816095 chars
+CP buổi 400 year 3 save 872490 chars
+STATUS cnv-cnv_ban-skilled-4 · buổi 447 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 450 year 4 save 975254 chars
+CP buổi 500 year 4 save 1077844 chars
+CP buổi 550 year 5 save 1157903 chars
+CP buổi 600 year 5 save 1370345 chars
+CP buổi 650 year 5 save 1463363 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:171:44)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-skilled-4 from 2026-11-26T13:13:20.296Z buổi 687
+CP buổi 687 year null save 1471124 chars
+CP buổi 737 year 6 save 1552361 chars
+CP buổi 787 year 6 save 1617521 chars
+CP buổi 837 year 7 save 1701215 chars
+CP buổi 887 year 7 save 1733357 chars
+CP buổi 937 year 7 save 1772636 chars
+CNV EXIT CHOICE buổi 981 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-skilled-4/cnvexit-981.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 987 year 8 save 1821452 chars
+STATUS cnv-cnv_ban-skilled-4 · buổi 1020 · year 8 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+LIFE DONE cnv-cnv_ban-skilled-4 Hồng nhan bạc mệnh age 25 · buổi 1026 · taps 2198 · dead buttons 0 · stuck 0 · bugs 0

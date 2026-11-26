@@ -94,3 +94,28 @@ touchscreen.tap: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-3 from 2026-11-26T09:11:17.356Z buổi 2492
+CP buổi 2492 year null save 3954062 chars
+STATUS cnv-cnv_ban-speed-3 · buổi 2511 · year 18 · rank 0 · bugs 1 · stuck 0 · dead buttons 7
+CP buổi 2542 year 18 save 4117274 chars
+CP buổi 2592 year 18 save 4200166 chars
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» cover b.kidn in #mb
+CP buổi 2642 year 19 save 4257585 chars
+CP buổi 2692 year 19 save 4295718 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:157:69)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-3 from 2026-11-26T11:12:57.287Z buổi 2697
+CP buổi 2697 year null save 4308781 chars
+STATUS cnv-cnv_ban-speed-3 · buổi 2718 · year 19 · rank 0 · bugs 1 · stuck 0 · dead buttons 11
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:157:69)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-3 from 2026-11-26T13:12:30.181Z buổi 2742
+CP buổi 2742 year null save 4381942 chars
+STATUS cnv-cnv_ban-speed-3 · buổi 2760 · year 19 · rank 0 · bugs 1 · stuck 0 · dead buttons 11

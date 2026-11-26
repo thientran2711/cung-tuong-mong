@@ -92,3 +92,18 @@ touchscreen.tap: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-4 from 2026-11-26T09:12:30.133Z buổi 2277
+CP buổi 2277 year null save 3996403 chars
+STATUS cnv-cnv_ban-speed-4 · buổi 2304 · year 16 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+CP buổi 2327 year 16 save 4147889 chars
+CP buổi 2377 year 17 save 4199816 chars
+CP buổi 2427 year 17 save 4266330 chars
+CP buổi 2477 year 17 save 4280680 chars
+CP buổi 2527 year 18 save 4399961 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:171:485)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T11:12:03.467Z buổi 2550
+CP buổi 2550 year null save 4445251 chars
+LIFE DONE cnv-cnv_ban-speed-4 Hồng nhan bạc mệnh age 36 · buổi 2588 · taps 377 · dead buttons 0 · stuck 0 · bugs 2

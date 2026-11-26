@@ -21,3 +21,31 @@ touchscreen.tap: Target page, context or browser has been closed
 }
 RESUME cnv-cnv_ban-scholar-2 from 2026-11-26T09:13:29.638Z buổi 676
 CP buổi 676 year null save 1281312 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «Xem kết quả»
+CP buổi 726 year 6 save 1422507 chars
+CP buổi 776 year 6 save 1505106 chars
+CP buổi 826 year 6 save 1514064 chars
+CP buổi 876 year 7 save 1637439 chars
+STATUS cnv-cnv_ban-scholar-2 · buổi 922 · year 7 · rank 0 · bugs 1 · stuck 0 · dead buttons 0
+CP buổi 926 year 7 save 1717769 chars
+CP buổi 976 year 7 save 1788786 chars
+CNV EXIT CHOICE buổi 979 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-scholar-2/cnvexit-979.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1026 year 8 save 1862017 chars
+CP buổi 1076 year 8 save 1908836 chars
+CP buổi 1126 year 9 save 1921039 chars
+CP buổi 1176 year 9 save 2095692 chars
+CP buổi 1226 year 9 save 2143674 chars
+CP buổi 1276 year 10 save 2234411 chars
+touchscreen.tap: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rerun-ban/dev/test/realtap.js:104:39)
+    at async Object.tap (/home/user/wt/rerun-ban/dev/test/realtap.js:79:46)
+    at async Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:271:16)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-scholar-2 from 2026-11-26T11:13:53.219Z buổi 1291
+CP buổi 1291 year null save 2353288 chars
+CP buổi 1341 year 10 save 2453400 chars
+CP buổi 1391 year 10 save 2438089 chars
+LIFE DONE cnv-cnv_ban-scholar-2 Hồng nhan bạc mệnh age 27 · buổi 1409 · taps 709 · dead buttons 0 · stuck 0 · bugs 1

@@ -1,8 +1,8 @@
-# cnv-cnv_ban-speed-3 (real-tap harness 8ee776d9, fold)
+# cnv-cnv_ban-speed-3 (real-tap harness e9803260, fold)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-speed-3 | HARNESS |  | 2494 |  | 7 | 0 | 2 | — |
+| cnv-cnv_ban-speed-3 | running |  | 2767 |  | 11 | 0 | 1 | — |
 
 ## Dead buttons
 
@@ -13,8 +13,11 @@
 - .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795666744013.png
 - .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795666750557.png
 - .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795666756912.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795689809746.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795689816127.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795689822583.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795689840181.png
 
 ## Bugs
 
-- [dead] ×1 close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»
-- [harness] ×1 runner error: touchscreen.tap: Target page, context or browser has been closed
+- [dead] ×2 close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»
