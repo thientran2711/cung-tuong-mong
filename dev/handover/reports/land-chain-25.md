@@ -20,3 +20,4 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 21:15Z B chain: mg-back Fold/iPad fail = LIVE-known; ob-oan-enc 6/14 FAIL in chain (Làm lành card tap / modal) → rerun on d811a46d ALL PASS 14 (LIVE 53319e6f also 14) = flake under load.
 - 21:12Z RV-163B BIG PASS review/dress-fix-r163b e5c7be59 (dress-fix 9b40ce9b on LIVE 03a8c17c). MAIN 163: queue after lc25-sp; CONDITION: KK45 confirm of kitEquipSlots({grid}) + kitDressPicker({under}) before READY.
 - 21:17Z RV-163B FAIL/HOLD map stack kit-map-icons c11c7269 + map-zones-r7 9c8985ab (carries kitHand/kitPick/NHV via nhv-areas + kit-stage-r2; source conflicts jbal2/jk3/jksize/assemble). NOT landing; MAIN 163 decides.
+- 21:18Z MAIN 163: map-zones-r7 + kit-map-icons c11c7269 DROPPED from queue; replacement review/map-r8 later via RV-163B.
