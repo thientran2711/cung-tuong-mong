@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fd7525ae+","t":"2026-11-26T02:12Z","c":"kit-stage KK35 follow-up: K-MAP-BANNER kit part (§103 kitMapBanner); K-KDTX-BAND ×2 fixed; stage uses a person-less frame's main picture as…","b":"3df4def45196","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"51f75ae2+","t":"2026-11-26T02:18Z","c":"kit-stage KK36: (a) stage with no event picture = the painting of the place she is in (kstgPlacePic, also kitScene fallback); (b) stage fig…","b":"72ab313db0ac","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -96078,19 +96078,19 @@ function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getEle
  const gs=o.groups&&o.groups.length?o.groups:[{k:"",n:"",acts:o.acts||[]}];P.groups=gs;P.group=o.group||gs[0].k;
  P.obst=obstacles(host);const el=P.el=document.createElement("div");el.className="kpk kpk-"+m+(still()?" kpk-still":"");el.setAttribute("role","group");el.setAttribute("aria-label","Chọn việc");host.appendChild(el);
  build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
- P.lift=id=>lift(P,id);P.setGroup=k=>{if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
+ P.lift=id=>lift(P,id);P.setGroup=k=>{if(P.__pg&&!P.groups.some(g=>g.k===k)){const f=P.groups.find(g=>g.pg===k);if(f)k=f.k}if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
  return P}
 function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
- const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,K.max),n=acts.length,post=K.post;
+ const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,P.cap||K.max),n=acts.length,post=K.post;
  /* the band (tabs + rail + columns + post) goes on the side, tier and height that cover the least: kit parts of the stage (P.obst: right column, rail chips, title, name tags, corner buttons) count HARD, other people (o.avoid) SOFT */
  const ovl=(x0,y0,x1,y1,L)=>{let a=0;L.forEach(o=>{const w=Math.min(x1,o.x+o.w)-Math.max(x0,o.x),hh=Math.min(y1,o.y+o.h)-Math.max(y0,o.y);if(w>0&&hh>0)a+=w*hh});return a};
  const tabsEst=P.groups.length>1?K.tabH+8:0,av=P.o.avoid||[],ob=P.obst||[];
  const fit=s=>{let free=s==="r"?W-(A.x+A.w)-8:A.x-8,minRail=A.y+A.h*K.railMin;const maxB=H-6;
   /* last resort on a narrow phone: the band may lap the outer 35 % of her BODY (never her face: the rail then starts below the shoulders) */
   let lap=0;if(free<K.w[m]*.9&&!(P.o.noLap)){lap=Math.round(A.w*.35);free+=lap;minRail=Math.max(minRail,A.y+A.h*K.railLap)}
-  const mk=(cols,comp,narrow)=>{let cw=cols===2?Math.min(K.w[m],Math.floor((free-post-10-K.gx)/2)):Math.min(K.w[m],free-post-6);cw=Math.max(cols===2?K.minW:120,cw);const full=cw;if(narrow&&narrow<cw)cw=narrow;
+    const mk=(cols,comp,narrow)=>{let cw=cols===2?Math.min(K.w[m],Math.floor((free-post-10-K.gx)/2)):Math.min(K.w[m],free-post-6);cw=Math.max(cols===2?K.minW:120,cw);const full=cw;if(narrow&&narrow<cw)cw=narrow;
    const hh=Math.max(comp?K.hS:K.h[m],P.hx||0),gg=comp?K.cord.gapS:K.cord.gap,bw=cols*cw+(cols-1)*K.gx,x0=s==="r"?A.x+A.w+6-lap:A.x-6-bw-post-4+lap,rows=Math.ceil(n/cols),tot=K.cord.rail+rows*hh+(rows-1)*gg;return {cols,cw,bw,x0,rows,tot,hh,gg,comp:!!comp,pen:(cols===2?K.pen2:0)+(comp?K.penS:0)+(full-cw)*(cols*K.rows0||1)*30}};
-  const V=[mk(1)];if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2));V.push(mk(1,1));if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2,1));[168,150,134].forEach(w=>{V.push(mk(1,0,w));V.push(mk(1,1,w))});
+  const two=n>3&&free>=2*K.minW+post+10+K.gx;const V=[mk(1)];if(two)V.push(mk(2));V.push(mk(1,1));if(two)V.push(mk(2,1));[168,150,134].forEach(w=>{V.push(mk(1,0,w));V.push(mk(1,1,w))});
   let best=null;V.forEach(C=>{const want=A.y+A.h*K.railAt,lo=Math.max(minRail,2+tabsEst),hi=maxB-C.tot,T=[Math.max(minRail,Math.min(want,hi))];for(let t=lo;t<=hi;t+=6)T.push(t);
    const bx0=s==="r"?C.x0:C.x0-post-4,bx1=s==="r"?C.x0+C.bw+post+4:C.x0+C.bw;
    T.forEach(top=>{const over=Math.max(0,top+C.tot-maxB),y0=top-tabsEst,hard=ovl(bx0,y0,bx1,top+C.tot,ob),soft=ovl(bx0,y0,bx1,top+C.tot,av);
@@ -96100,8 +96100,17 @@ function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o
  if(side)F=fit(side);else{const r=fit("r"),l=fit("l");F=r.cost!==l.cost?(r.cost<l.cost?r:l):(r.free>=l.free?r:l)}
  let railY=F.top;
  const tabsH=P.groups.length>1?K.tabH+8:0;if(railY-tabsH<2)railY=2+tabsH;
- return {lapped:F.lap>0,comp:F.comp,A,acts,n,side:F.s,cols:F.cols,cw:F.cw,h:F.hh,gap:F.gg,rows:F.rows,railY,bandW:F.bw,x0:F.x0,post,floor:Math.min(A.y+A.h,H-2),tabsH,W,H}}
-function build(P,swap){const K=KIT_PLAQUE,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
+ return {over:F.over,lapped:F.lap>0,comp:F.comp,A,acts,n,side:F.s,cols:F.cols,cw:F.cw,h:F.hh,gap:F.gg,rows:F.rows,railY,bandW:F.bw,x0:F.x0,post,floor:Math.min(A.y+A.h,H-2),tabsH,W,H}}
+/* KK36 (NHV Fold PLAQUE-OFFSTAGE ×2: 6 plaques of 4-line names beside a person at x≈.2 ran below the stage): when NO tier / column / height keeps the
+   whole band inside the stage (geo over > 0), the group is split into PAGES of the largest count that fits (tabs «Việc · 1/2», the kit .pctabs of the groups;
+   same rule as the dialogue answers «Đáp · 1/2», §102.2) — a plaque is never off the stage, never dropped (also > KIT_PLAQUE.max acts). */
+function paginate(P){const K=KIT_PLAQUE;const gs=P.groups0||P.groups;let G=null;
+ const fits=per=>{const s=[P.groups,P.cap];P.groups=gs.length>1?gs:gs.concat([{k:"\u0000",n:"",acts:[]}]);/* tabs will show: count their height */P.cap=per;try{G=geo(P)}finally{P.groups=s[0];P.cap=s[1]}return G.over<=0};
+ const big=!P.groups0&&gs.some(g=>(g.acts||[]).length>K.max);let cur=null;try{cur=geo(P)}catch(e){return false}if(!(cur.over>0)&&!big)return false;const was=(P.groups.find(g=>g.k===P.group)||{}).pg||P.group;
+ const n=Math.max(...gs.map(g=>(g.acts||[]).length));let per=Math.min(n-1,K.max,P.cap?P.cap-1:99);while(per>1&&!fits(per))per--;if(per<1)return false;
+ const out=[],map={};gs.forEach(g=>{const A=g.acts||[];if(A.length<=per){out.push(g);map[g.k]=g.k;return}const N=Math.ceil(A.length/per);for(let i=0;i<N;i++){const k=g.k+"#"+(i+1);out.push({k,n:`${g.n||"Việc"} · ${i+1}/${N}`,acts:A.slice(i*per,(i+1)*per),pg:g.k});if(!i)map[g.k]=k}});
+ if(P.groups0&&per>=P.cap)return false;P.__pg=1;P.groups0=gs;P.groups=out;P.group=map[was]!=null?map[was]:out[0].k;P.cap=per;return true}
+function build(P,swap){const K=KIT_PLAQUE;paginate(P);const G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
  const old=[...el.querySelectorAll(".kpk-n,.kpk-tabs")];old.forEach(x=>x.remove());
  const side=G.side,pw=G.post;
  /* signpost + rail (built once) */
@@ -96149,7 +96158,13 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
  if(!c){c=document.createElement("div");c.className="khconf kpk-conf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;
   c.addEventListener("click",e=>{e.stopPropagation();const k=e.target.closest("button");if(!k||!P.up)return;const u=P.up,aa=(P.G.acts||[]).find(x=>String(x.id)===u.dataset.id);if(k.classList.contains("khok")){if(aa)pick(P,aa,u.querySelector(".kpk-b"))}else drop(P)});P.el.appendChild(c)}
  const s=(typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44,gap=6,w=2*s+gap,G=P.G,x0=parseFloat(n.style.left)||n.__x,wd=n.offsetWidth||G.cw,y0=n.offsetTop;
- /* beside the plaque on its outer side, centred on it (never over its name); no room → on its outer top corner */let x,y;const out=G.side==="l"?x0-w-6:x0+wd+6;if(out>=2&&out+w<=G.W-2){x=out;y=y0+((n.offsetHeight||G.h)-s)/2}else{x=G.side==="l"?x0-w*.35:x0+wd-w*.65;y=y0-s*.62}x=Math.max(2,Math.min(G.W-w-2,x));y=Math.max(2,y);
+ /* beside the plaque on its outer side, centred on it (never over its name); no room → on its outer top corner */let x,y;/* KK36 (NHV: the ✓/✕ of a LEFT-column plaque sat over the RIGHT column's name): with two columns each plaque's outer side is the side away from the other column */
+ const sd=G.cols===2?(((n.__x!=null?n.__x:x0)>G.x0+G.cw/2)?"r":"l"):G.side;const hh=n.offsetHeight||G.h;
+ /* candidate spots (outer side first, then the outer / inner top corners, then the bottom corners): the one that covers the least of the OTHER plaques' names wins */
+ const C=[[sd==="l"?x0-w-6:x0+wd+6,y0+(hh-s)/2],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0-s*.62],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0-s*.62],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0+hh-s*.38],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0+hh-s*.38]];
+ const hr=(n.offsetParent||P.el).getBoundingClientRect(),NB=[...P.el.querySelectorAll(".kpk-n")].filter(o=>o!==n).map(o=>{const b=(o.querySelector(".kfoc-t b")||o).getBoundingClientRect(),r=o.getBoundingClientRect();return {b:[b.left-hr.left,b.top-hr.top,b.right-hr.left,b.bottom-hr.top],r:[r.left-hr.left,r.top-hr.top,r.right-hr.left,r.bottom-hr.top]}});
+ const ov=(a,q)=>Math.max(0,Math.min(a[2],q[2])-Math.max(a[0],q[0]))*Math.max(0,Math.min(a[3],q[3])-Math.max(a[1],q[1]));let best=null;
+ C.forEach(([cx,cy],i)=>{const off=(cx<2||cx+w>G.W-2||cy<2)?1:0;const a=[cx,cy,cx+w,cy+s];const cost=off*1e9+NB.reduce((z,o)=>z+ov(a,o.b)*100+ov(a,o.r),0)+i;if(!best||cost<best.c)best={c:cost,x:cx,y:cy}});x=best.x;y=best.y;x=Math.max(2,Math.min(G.W-w-2,x));y=Math.max(2,y);
  c.hidden=false;c.style.left=Math.round(x)+"px";c.style.top=Math.round(y)+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitPick conf",e)}}
 function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
@@ -99608,7 +99623,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3df4def45196";window.CTM_BUILD=BUILD;
+const BUILD="72ab313db0ac";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
