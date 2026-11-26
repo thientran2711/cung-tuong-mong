@@ -4127,7 +4127,8 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
 - §69.4 CLOCK CHIP IN A TIMED CHOICE DIALOG (kit-size-10): `kitCoopClock({left,len})` goes in the dialog text right under the question (`<p class="nfcd">`); the kit keeps text + chip above the options (§32.5c). A caller never positions, pins or restyles the chip. Sample: kit page §8 "VIỆC CÓ ĐỒNG HỒ".
 
 ## 78. PLACE ICON · kitPlaceIcon + HAPPENING MARK · kitHapMark (owner 16/11 Dư đồ split, review/act-dedupe) — `dev/build/jact.js`
-- `kitPlaceIcon(k, size=14)` → the kit icon set glyph (`ic()`, img/<n>.webp) that says what a place is FOR, class `.ic.kplic`, placed BEFORE
+- ONE SIZE (owner 26/11 ~18:35Z «icon nơi to bằng dấu Ta, đặt trên tên, không scale nhỏ như con kiến»): on every map the icon is drawn at the size of the «Ta» marker = `kitPlaceIcPx()` (`KIT_MEMARK.mapBase` 36 × the rank scale `KIT_MEMARK.sc[r]` × `KIT_MEMARK.big`, the same numbers `.kmmapmk` uses), above the name; zone tags (jmapz) use the same call; both scale together with the tag label (`--mls`), never separately. Scan: `node dev/test/map-icon-scan.js <url> WxH shotDir` (Ta px vs icon px, icon above name, label boxes intersecting = FAIL). Places without a painted glyph (home map spots, Ngự hoa viên areas, her courtyard) have none yet: KIT REQUEST for art.
+- `kitPlaceIcon(k, size=kitPlaceIcPx())` → the kit icon set glyph (`ic()`, img/<n>.webp) that says what a place is FOR, class `.ic.kplic`, placed BEFORE
   the place name on every place-name site: Dư đồ map label (`.mspot .mlab`), Danh sách tile (`.mtile b`), stage place title (`#sc-t h2`).
   Map `KIT_PLACE_IC`: Nội vụ phủ `bac` (mua sắm) · Thái y viện `y-thuat` · Ngự hoa viên `place-vuon` (garden moon-gate) · Cần Chính điện / Dưỡng Hòa điện `sung`
   (gặp Hoàng thượng) · Đức Thọ cung `duc` (thỉnh an, chép kinh) · Càn Ninh cung `danh` (phượng ấn) · Kính sự phòng `place-ksp` (thẻ bài) · Lãnh cung `place-lc`
