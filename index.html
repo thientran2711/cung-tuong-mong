@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn.","b":"d402e37a51ed","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn.","b":"dd1ce3d0ffa1","h":[{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29330,7 +29330,21 @@ function kaOdds(M){if(!M.odds)return"";/* review/odds-no-unknown: only the 7 lad
 function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.map(x=>kaPlain(x.h).toLowerCase()).join(" ");
  R.note=R.note.filter(x=>{const p=kaPlain(x.h).toLowerCase().replace(/^[(\s]+|[)\s.]+$/g,"");const m=p.match(/^(?:chỉ )?(buổi (?:sáng|trưa|chiều|tối))$/);return !(m&&why.includes(m[1]))})}catch(e){}}
 const KA_BLK=[["duoc","Được"],["mat","Mất"],["kem","Kèm"]];
-function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
+/* KIT §6.6 GAIN LIST (OB-KIEP, owner 25/11 ~22:40Z, iPad «Thân phận kiếp này» ĐƯỢC = ~12 items in one «·» run: "chữ tràn lan đại hải thế này đọc không hiểu gì cả ...
+   nó xuống hàng, hay là nó chia làm 2 cột, 3 cột"; OD 23/11 ~20:30Z line-break law: short pairs never split, text breaks where the meaning breaks).
+   ONE rule for every TỐN / ĐƯỢC / MẤT / KÈM / THÀNH / BẠI row of every option / act card (kaRowH is the only row writer):
+   a short row (few short items, KA_LIST.chars in all) stays ONE line with «·»; a longer row becomes a LIST = one item per line (.klist),
+   or 2–3 columns when every item is short (.klist2, ≤ KA_LIST.col characters; the columns fit the card width by CSS, never measured).
+   Cần (its own chip flow) and Ghi chú are not lists. */
+const KA_LIST={chars:56,long:40,col:22,skip:new Set(["why","note"])};
+function kaListCls(k,L){try{if(KA_LIST.skip.has(k)||!L||L.length<2)return"";const n=L.map(x=>kaPlain(x.h).length),tot=n.reduce((a,b)=>a+b,0)+3*(L.length-1),mx=Math.max(...n);
+ if(tot<=KA_LIST.chars&&mx<=KA_LIST.long)return"";return mx<=KA_LIST.col&&L.length>=3?" klist klist2":" klist"}catch(e){return""}}
+/* kaListFix(krv): the same rule for a value cell assembled from copied chips (jopic kitOptFinal: the Mất row of copies, the Được row merged from Thành + Được) */
+function kaListFix(v){try{if(!v)return;const k=((v.parentElement&&[...v.parentElement.classList].find(c=>/^kr-/.test(c)))||"kr-duoc").slice(3);
+ const L=[...v.children].filter(e=>!e.classList.contains("ksep")).map(e=>({h:e.textContent}));const c=kaListCls(k,L);/* touch the class only when it changes: a no-op class write still wakes every MutationObserver on the dialog */
+ const a=/klist/.test(c),a2=/klist2/.test(c);if(v.classList.contains("klist")!==a)v.classList.toggle("klist",a);if(v.classList.contains("klist2")!==a2)v.classList.toggle("klist2",a2)}catch(e){}}
+window.kaListFix=kaListFix;
+function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv${kaListCls(k,L)}">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
 /* K-EF-UNIT (KIT_REQUESTS 21/11 econ-tamco RE-CHECK #2): a STAT item («Bạc -94», «Tâm cơ -3», «Sủng +2», «2 khắc») is ONE unbreakable unit on every option/act card row — it never splits «Bạc» / «-94» at a line end; items still wrap as wholes. Long word items keep wrapping. */
 /* r3 perf (LAND CHAIN 2 QC): one result per item text, cached — the same items are re-rendered every render()/buổi (5.8k calls ≈ 86 ms at CPU x4 before) */
 function kaUnit(h){const C=kaUnit.c||(kaUnit.c=new Map()),k=String(h);let v=C.get(k);if(v===undefined){if(C.size>3000)C.clear();v=kaUnit0(k);C.set(k,v)}return v}
@@ -29402,6 +29416,13 @@ button.ka .kodds .oc{margin:0;white-space:nowrap;text-align:center}
 button.ka .kodds .ef{font-size:.68rem;text-align:right}
 button.ka .klead{display:block;font-size:.76rem;color:var(--dim);line-height:1.3}
 .kb{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:7px;row-gap:2px;text-align:left;align-content:start}.kb .kr{display:contents}.kb .krl{font-size:.64rem;font-weight:700;color:#8a7350;text-transform:uppercase;white-space:nowrap;padding-top:.12rem}.kb .krv{min-width:0;overflow-wrap:anywhere}.kb .ef.g{color:var(--good)}.kb .ef.r{color:var(--bad)}.kb .ef.t{color:var(--ink)}.kb .ksep{color:#b9a27a;margin:0 4px}.kb .kr-why .krl,.kb .kwhy{color:var(--bad)}
+/* KIT §6.6 GAIN LIST: one rule wins over every per-card value-flow rule (jopic #modal#modal option cards, jk4 compact cards): the :is() id list only lifts the specificity (as .kef1) */
+.krv.klist:is(#kl1#kl2#kl3,.klist){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:1px!important;white-space:normal!important}
+.krv.klist:is(#kl1#kl2#kl3,.klist)>.ksep{display:none!important}
+.krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep){display:block!important;position:relative!important;padding-left:.8em!important;max-width:100%!important;text-align:left!important}
+.krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep):not(.kef1){white-space:normal!important}/* a stat unit (.kef1, K-EF-UNIT) stays ONE unbreakable unit */
+.krv.klist:is(#kl1#kl2#kl3,.klist)>:not(.ksep)::before{content:"";position:absolute;left:.12em;top:.6em;width:.3em;height:.3em;border-radius:50%;background:currentColor;opacity:.5}
+.krv.klist2:is(#kl1#kl2#kl3,.klist2){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(10.5em,1fr))!important;column-gap:10px!important;row-gap:1px!important}
 button.ka small.kb{display:grid!important;grid-template-columns:3.4rem minmax(0,1fr);column-gap:7px;row-gap:2px;font-size:.76rem!important;line-height:1.35!important;color:var(--ink);margin:0;align-content:start}
 button.ka .kr{display:contents}
 button.ka .krl{font-size:.64rem;font-weight:700;letter-spacing:.02em;color:#8a7350;text-transform:uppercase;padding-top:.12rem;white-space:nowrap}
@@ -29868,7 +29889,9 @@ function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&
   if(/^\s*ghi chú\s*$/i.test(String(r[0]))&&R.length){const v=Array.isArray(r[1])?r[1]:[r[1]];const prev=R[R.length-1];prev.bang=(prev.bang?prev.bang+" · ":"")+v.join(" · ");return}
   R.push({l:r[0],v:r[1],c:r[2]})});
  return `<span class="kb kpkb">`+R.map(({l,v,c,bang})=>{const vals=Array.isArray(v)?v:[v];
- return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?(typeof kaEfTag==="function"?kaEfTag(x):x):`<span class="ef ${c||"n"}${typeof kaUnit==="function"&&kaUnit(x)?" kef1":""}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}${bang?kitNoteBang(bang):""}</span></span>`}).join("")+`</span>`}
+ /* KIT §6.6 GAIN LIST (OB-KIEP): a Tốn / Được / Mất / Kèm / Thành / Bại row of an info table follows the same list rule as the option rows (kaListCls, j63) */
+ const lc=/^\s*(tốn|được|được ngay|mất|kèm|thành|bại)\s*$/i.test(String(l))&&typeof kaListCls==="function"&&!vals.some(x=>/^\s*<span class="kchip/.test(String(x)))?kaListCls("duoc",vals.map(x=>({h:String(x)}))):"";
+ return `<span class="kr"><span class="krl">${l}</span><span class="krv${lc}">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?(typeof kaEfTag==="function"?kaEfTag(x):x):`<span class="ef ${c||"n"}${typeof kaUnit==="function"&&kaUnit(x)?" kef1":""}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}${bang?kitNoteBang(bang):""}</span></span>`}).join("")+`</span>`}
 /* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
    are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
 function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
@@ -30926,7 +30949,7 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(KPID_OK[crisp]||!lo)show(crisp);
  else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
  if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
-const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (side layout cap, kpIdLay) */
+const KPID_OK={};const KPID_WR=.5;const KPID_PANEL=.66;/* KIT 56.11: share of the usable width the info frame keeps on the one-page figure-left card *//* widest painted width / body height over all faces (side layout cap, kpIdLay) */
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
  /* KIT 32.2b EQUAL GAPS (owner 16/11 s21 + s22 "whole group"): her full figure stands between the two frame lines of the card scene —
@@ -30941,6 +30964,10 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  /* KIT 56.9 (owner 18/11 ~20:25Z, Fold «Thân phận kiếp này»): in the figure-left layout her figure is BIG again, about the full height of the info frame (kit rule 32.2b: screen height minus the equal gaps, room for the tallest Hoàng hậu crown BAL.bookFrame.cRef), whole figure beside the panel, never over it: the figure column = body x KPID_WR, the panel takes the rest (at least the kit minimum KIT_SIZE.v3.narrow.minRight, at most 560); a body that would leave the panel less than its minimum is lowered to fit. --kpw is set here, before the panel is measured. */
  if(side){const A0=H,G0=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A0):Math.max(14,A0*.05),cR=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131;
   let Hb=Math.min((A0-2*G0)/(1+cR),H*.80,BAL.bookFigBody?BAL.bookFigBody.kv1:1e9);/* KIT 56.11 (owner 18/11 ~21:25Z): SKELETON = the Sổ tuần lục page: the figure is the SAME body as in the book (BAL.bookFigBody: Fold 641, iPad 534), so the info frame gets the width the book gives it */const minR=KZ?KZ.v3.narrow.minRight:274,avail=W-16-12-((KZ&&KZ.edge)||12);const WR=(typeof BAL==="object"&&BAL.figWideRef)||KPID_WR;let cw=Math.round(Hb*WR*.98);if(avail-cw<minR){cw=avail-minR}
+  /* KIT 56.11 Fold frame width (OB-KIEP, MAIN 148 on owner bug 25/11 ~22:40Z, law 12): on the Fold the figure column (body x figWideRef .65) left the info frame ~300 px, every
+     gain wrapped 3–4 words a line and «Nhận / Đổi thân phận» were squeezed. The frame takes at least KPID_PANEL of the usable width (≤ 560); the ONE figure
+     body of the screen is lowered to the column that is left (still whole beside the frame, KIT 56.7), never the frame narrowed for the figure. */
+  {const pMin=Math.min(560,Math.round(avail*KPID_PANEL));if(avail-cw<pMin)cw=Math.max(0,avail-pMin)}
   M.__kidBody=cw/(WR*.98);M.style.setProperty("--kpw",Math.min(560,avail-cw)+"px")}else{M.__kidBody=0;M.style.removeProperty("--kpw")}
  d.style.removeProperty("width");d.style.removeProperty("max-width");
  /* the panel is the ONE frame size (KIT 8.1 tokens --kpw/--kph, never set here; merge review/newgame-ui-r1); the figure column is the space
@@ -69652,6 +69679,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  if(free){ton.remove();gain.remove();if(!b.classList.contains("kfree"))b.classList.add("kfree")}else if(b.classList.contains("kfree"))b.classList.remove("kfree");
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
+ /* KIT §6.6 GAIN LIST (OB-KIEP): the rows assembled here from copies follow the one list rule */if(typeof kaListFix==="function")[ton,gain,matRow].forEach(r=>r&&kaListFix(r.querySelector(":scope > .krv")));
  b.dataset.kofin="1";b.__kofSig=kitOptSig(b,kb)}catch(e){console.error("kitOptFinal",e)}}
 /* KIT §56.19 (opt-scroll-reset): the signature covers the card's SOURCE rows only, never kitOptFinal's own copies (.kdup chips, .kfill rows, the «!»).
    The rank-name painter (jaudit kitRankNamePaint) titles a bare name inside a copied chip one frame later; with the copies in the signature that edit
@@ -77030,9 +77058,17 @@ function kcFreeFid(role,pref){const U=new Set(figUsed());const ch=(typeof BAL!==
 /* ---------- start: the identity card choice, then the home life ---------- */
 function kcPick(){return (S&&S.kcPick)||"cung"}
 function kcPathHTML(){const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;
- const O=[["cung","Vào cung ngay",`thành: vào cung ngay${(S.origin&&S.origin.r)?`; thân phận cho tới ${r0}, phẩm vị định ở kỳ tuyển chọn`:`, phong ${r0}`}; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
-  ["nha","Ở nhà chờ tuyển tú",`thành: hai năm học tài nghệ, nâng Tư chất; hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha; tin về các phi tần trong cung; qua tuyển tú có thể phong tới Quý nhân; Thanh mai trúc mã, kết hiếm ngoài cung; Phúc duyên khi qua tuyển tú · hỏng: vào cung muộn hai năm, lúc hai mươi tuổi · kèm: có thể bị trả thẻ bài hay bị ép gả; kế mẫu, thứ muội ngáng chân; có thể chết ở nhà`]];
- if(S.origin&&S.origin.k==="td"&&kcLore())O[1][2]=O[1][2].replace("hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha;","thế lực nhà cha, nhưng nhà ngươi sụp đổ đúng ngày ngươi rời nhà vào cung (hồi môn bị tịch thu); tỳ nữ hồi môn một lòng;");
+ /* OB-KIEP (owner 25/11 ~22:40Z «đọc khó hiểu quá ... câu nào mình nói nó cũng hiểu»): every item is ONE plain sentence (no «,» inside an item: the
+    kit splits a value at «;» and «,»); a loss / risk never sits under «thành» (the fallen house of a tội thần was shown as a gain); «Phúc duyên khi qua
+    tuyển tú» says what it gives. The kit shows a long list one item per line (KIT §6.6). */
+ const r1=(S.origin&&S.origin.r)?`được phong tối đa tới ${r0} (định ở kỳ tuyển chọn)`:`được phong ${r0}`;
+ const fall=!!(S.origin&&S.origin.k==="td"&&kcLore());
+ const G=["hai năm ở nhà học tài nghệ để nâng Tư chất",fall?"một tỳ nữ hồi môn một lòng theo hầu":"hồi môn cùng một tỳ nữ hồi môn một lòng theo hầu",fall?"thế lực nhà cha đỡ lưng những năm còn ở nhà":"thế lực nhà cha đỡ lưng",
+  "biết trước tin tức về các phi tần trong cung","qua tuyển tú có thể được phong tới Quý nhân","có thể gặp thanh mai trúc mã và mở ra những kết cục hiếm ngoài cung",
+  "qua mỗi vòng tuyển tú được thêm Phúc duyên","vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết)"];
+ const B=["muộn hai năm mới vào cung (khi đã hai mươi tuổi)"].concat(fall?["nhà cha sụp đổ đúng ngày ngươi vào cung (hồi môn bị tịch thu)"]:[]);
+ const O=[["cung","Vào cung ngay",`thành: vào cung ngay; ${r1}; có thêm khoảng hai năm trong cung để thăng phẩm · hỏng: không có hồi môn; không biết trước gì về các phi tần; không có cơ duyên ngoài cung`],
+  ["nha","Ở nhà chờ tuyển tú",`thành: ${G.join("; ")} · hỏng: ${B.join("; ")} · kèm: có thể bị trả thẻ bài (trượt tuyển tú) hay bị ép gả; kế mẫu và thứ muội có thể ngáng chân; có thể mất mạng khi còn ở nhà`]];
  return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
   O.map(([x,n,l])=>`<button type="button" class="opt${x===k?" ksel":""}" data-kcp="${x}" aria-pressed="${x===k}"${lock?" disabled":""}>${n}<small>${l}</small></button>`).join("")+`</div></div>`}
 try{KIT_GLOSS["Con đường"]="Vào cung ngay: kiếp bắt đầu trong cung. Ở nhà chờ tuyển tú: sống ở nhà cha khoảng hai năm (học tài nghệ, lo chuyện gia đình, hôn sự, tình riêng), rồi qua ba vòng tuyển tú mới vào cung; có thể không vào cung mà xuất giá. Chỉ con nhà quan, nhà buôn, nhà thầy đồ, cháu Thái hậu, con nhà Thị lang mới có đường này."}catch(e){}
@@ -82028,10 +82064,11 @@ function kc2Words(){try{const W=(S&&S.kc&&S.kc.kd)?KC2W[S.kc.kd]:(typeof NLP!=="
 
 /* ---------- the identity card: "Con đường" with the words of this origin ---------- */
 (function(){const p0=kcPathHTML;kcPathHTML=function(){const d=kc2D();if(!d)return p0.apply(this,arguments);const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;const L=d==="nc"?kc2L():null;
- const O=d==="dan"?[["cung","Vào cung ngay","thành: vào cung ngay làm cung nữ; thêm hơn hai năm trong cung để leo · hỏng: không ai cùng quê, chưa biết lễ nghi trong cung"],
-   ["nha","Ở quê chờ lệnh tuyển","thành: hơn hai năm ở nhà: học khéo tay, học lễ nghi với bà cung nữ cũ, lo cho cha mẹ; ngày tuyển làm tốt thì về hầu một vị nương nương bậc cao; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, Chủ tin, người đã biết) · hỏng: vào cung muộn hơn hai năm; tuyển kém thì phải giặt đồ ở Tân Giả khố trước · kèm: nợ nhà, lũ lụt, có thể bị gả làm thiếp hay ở lại quê; có thể chết ở nhà"]]
-  :[["cung","Vào cung ngay",`thành: sang Đại Hy ngay; hòa ước cho thân phận tới ${r0}, phẩm vị định ở kỳ tuyển chọn · hỏng: chưa biết lễ nghi, tiếng nói Đại Hy`],
-   ["nha","Ở cố quốc chờ hòa ước",`thành: hơn hai năm ở ${L.court}: học lễ nghi Đại Hy, giữ lòng ${L.dad.toLowerCase()}, giữ hòa ước; Lễ ra mắt làm tốt thì phong tới ${r0}; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết, hồi môn) · hỏng: sang Đại Hy muộn hơn hai năm; ra mắt kém thì phong thấp hơn · kèm: phe chủ chiến, người trong nhà tranh phần; có thể ở lại cố quốc; có thể chết ở nhà`]];
+ /* OB-KIEP: one plain sentence per item (no «,» inside an item), conditional losses under «kèm» (KIT §6.6) */
+ const O=d==="dan"?[["cung","Vào cung ngay","thành: vào cung ngay làm cung nữ; có thêm hơn hai năm trong cung để thăng tiến · hỏng: không có ai cùng quê trong cung; chưa biết lễ nghi trong cung"],
+   ["nha","Ở quê chờ lệnh tuyển","thành: hơn hai năm ở quê học khéo tay và lo cho cha mẹ; học lễ nghi với một bà cung nữ cũ; ngày tuyển làm tốt thì được về hầu một vị nương nương bậc cao; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, Chủ tin, người đã biết) · hỏng: muộn hơn hai năm mới vào cung · kèm: tuyển kém thì phải giặt đồ ở Tân Giả khố trước; nhà có thể mắc nợ hay gặp lũ lụt; có thể bị gả làm thiếp hoặc phải ở lại quê; có thể mất mạng khi còn ở nhà"]]
+  :[["cung","Vào cung ngay",`thành: sang Đại Hy ngay; hòa ước cho phong tối đa tới ${r0} (định ở kỳ tuyển chọn) · hỏng: chưa biết lễ nghi và tiếng nói Đại Hy`],
+   ["nha","Ở cố quốc chờ hòa ước",`thành: hơn hai năm ở ${L.court} học lễ nghi Đại Hy; giữ lòng ${L.dad.toLowerCase()} và giữ hòa ước; Lễ ra mắt làm tốt thì được phong tới ${r0}; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết, hồi môn) · hỏng: muộn hơn hai năm mới sang Đại Hy · kèm: ra mắt kém thì bị phong thấp hơn; phe chủ chiến và người trong nhà tranh phần; có thể phải ở lại cố quốc; có thể mất mạng khi còn ở nhà`]];
  return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
   O.map(([x,n,l])=>`<button type="button" class="opt${x===k?" ksel":""}" data-kcp="${x}" aria-pressed="${x===k}"${lock?" disabled":""}>${n}<small>${l}</small></button>`).join("")+`</div></div>`}})();
 try{KIT_GLOSS["Con đường"]="Vào cung ngay: kiếp bắt đầu trong cung. Ở nhà: sống ở nhà một thời gian (học, lo chuyện nhà, gặp những người của kiếp này), rồi một việc lớn đưa ngươi vào cung: kỳ tuyển tú, lệnh tuyển cung nữ, hay hòa ước. Có thể không vào cung mà dừng ở nhà. Thân phận nào chưa có đường này thì vào cung ngay."}catch(e){}
@@ -82491,7 +82528,7 @@ function kc2Carry(kind,tier){const ok=S&&S.origin&&BAL.kcv[S.origin.k]?S.origin.
 (function(){const e0=kc2Enter;kc2Enter=function(raw){const r=e0.apply(this,arguments);try{if(S&&S.kc&&S.kc.inPal&&S.kc.ex)kc2Carry(S.kc.kd,S.kc.ex.tier)}catch(e){console.error("kc2Carry",e)}return r}})();
 (function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S&&S.kc&&S.kc.inPal&&!S.kc.kd)kc2Carry("kc",Math.max(0,Math.min(2,S.rank)))}catch(e){console.error("kc2Carry kc",e)}return r}})();
 /* the tiểu thư card says the same (jkc text, one line added) */
-(function(){const p0=kcPathHTML;kcPathHTML=function(){const h=p0.apply(this,arguments);try{if(!kc2D())return h.replace("Phúc duyên khi qua tuyển tú","Phúc duyên khi qua tuyển tú; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết)")}catch(e){}return h}})();
+/* (OB-KIEP: the «hành trang» line of the tiểu thư home road now sits in jkc kcPathHTML itself, one item of the gain list) */
 
 /* caoly-road old-save migration (E20 r2): a Nam Chiếu princess life saved before the Cao Ly rename keeps stored TITLES / ROLES (ids and keys unchanged).
    On load, an nc life (not the bd branch) has them rewritten in place: S.kc.fam titles (Hoàng huynh / Hoàng thúc / Mẫu hậu) and every stored string of the
@@ -91831,7 +91868,7 @@ body.kbk-open img.kemo.kfseal:not(.kbk-person>img.kfseal){visibility:hidden!impo
        pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:2.8},binh:{m:"nod",d:3.0},buon:{m:"droop",d:3.6},gian:{m:"shake",d:2.0},so:{m:"tremble",d:2.4},ghen:{m:"flicker",d:3.0},lo:{m:"bob",d:2.8},dau:{m:"wince",d:2.8},muu:{m:"glint",d:3.0},an:{m:"nod",d:3.0},khoc:{m:"droop",d:3.6,name:"Khóc"},hon:{m:"flicker",d:3.0,name:"Hờn"},chanh:{m:"flicker",d:3.0},phanno:{m:"shake",d:2.0},runso:{m:"tremble",d:2.4},matngu:{m:"droop",d:3.6},tutin:{m:"nod",d:3.0},hanghai:{m:"bob",d:2.8},tinhtu:{m:"sway",d:2.8},chuyentam:{m:"nod",d:3.0},hungkhoi:{m:"glint",d:3.0},tinhnghich:{m:"bob",d:2.8},hothen:{m:"droop",d:3.6},chan:{m:"droop",d:3.6},khochiu:{m:"flicker",d:3.0},choang:{m:"wince",d:2.8}},
- defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,nowDelay:.05,parts:{out:"-out",back:"-back"},partLead:.12,overlapMs:150,bubblePad:10,bubbleRetry:900,modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",roleSet:{thaihau:"th-"},/* ACTWIRE: a person's OWN painted seal set (jemo emoArtSet(p,k)); used per key only when that still is on the CDN */
+ defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",nonPlay:"#title,#slots,#kroul,#kroulw,.kpick,.nlcard",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,nowDelay:.05,parts:{out:"-out",back:"-back"},partLead:.12,overlapMs:150,bubblePad:10,bubbleRetry:900,modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",roleSet:{thaihau:"th-"},/* ACTWIRE: a person's OWN painted seal set (jemo emoArtSet(p,k)); used per key only when that still is on the CDN */
  setThree:{"th-act-":{ks:["vui","lo","an","muu","ghen","buon","so","chan","khochiu","tinhtu","binh","dau","hothen","choang","hon","hanghai","chuyentam","hungkhoi","gian","tutin","tinhnghich"],out:4.0,back:3.0,c0:.514,c1:.576}},/* THACT5 FINAL (spec dev/art/emo-anim/disc_scale_spec.py, A58): 288 px, 15 fps, OUT 60 f / LOOP 61 f / BACK 45 f, disc r 74 at rest (c0 = 148/288), 112 % in the loop (c1) → expanded into three["th-act-<k>"] below */
  fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
 (function(){const E=KIT_EMOSEAL,T=E.three=E.three||{};for(const pre in E.setThree||{}){const q=E.setThree[pre];q.ks.forEach(k=>{if(!T[pre+k])T[pre+k]={out:q.out,back:q.back,c0:q.c0,c1:q.c1}})}})();
@@ -91857,7 +91894,17 @@ function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}if(el.__lw){
  const still=el.dataset.kemos;if(still&&el.getAttribute("src")!==still)el.setAttribute("src",still);kesFxOff(el);if(kesCur===el){kesCur=null;kesLastEnd=performance.now()}}
 /* SCOPE (owner 19/11 ~06:25Z): only a seal beside a figure ON THE STAGE (lean.stage = jfigseal head seals: room / Dư đồ / place stages) leans, plus a seal inside a tab / panel she has opened (lean.panel);
    every avatar / portrait frame (top-bar pcPort, lists, cards) is ALWAYS STILL: no lean, no idle sway. Never inside the top bar (lean.deny). */
-function kesCan(el){const L=KIT_EMOSEAL.lean;try{if(el.closest(L.deny))return false;return el.matches(L.stage)||!!el.closest(L.panel)}catch(e){return false}}
+/* OB-KIEP (owner 25/11 ~22:40Z, iPad «Thân phận kiếp này»: "đây là cái chọn thân phận mà tự nhiên có mấy cái animation cái dấu ấn biểu cảm chi vậy, nó cứ hiện lên hiện xuống"):
+   an emotion seal NEVER leans / pops on a non-play screen = title + its sub-screens (co-op lobby, slots), the Luân hồi roulette, the identity card
+   (NLP set or the nl queue item), any kitPicker selection list (.kpick) — whole family, one gate (KIT §38.4 lean.nonPlay). The small seal stays still there. */
+function kesNonPlay(el){try{const L=KIT_EMOSEAL.lean;if(el&&el.closest&&el.closest(L.nonPlay))return true;
+ /* no layout read here (kesCan runs for every seal of a render): the title is shown/hidden by its hidden attribute, the roulette exists only while it runs */
+ const t=document.getElementById("title");if(t&&!t.hidden)return true;
+ if(document.getElementById("kroul"))return true;
+ if(typeof NLP!=="undefined"&&NLP)return true;const m=typeof Q!=="undefined"&&Q&&Q[0];if(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")))return true;
+ return false}catch(e){return false}}
+window.kesNonPlay=kesNonPlay;
+function kesCan(el){const L=KIT_EMOSEAL.lean;try{if(el.closest(L.deny))return false;if(kesNonPlay(el))return false;return el.matches(L.stage)||!!el.closest(L.panel)}catch(e){return false}}
 /* EVENT DIALOG (owner 19/11 ~07:25Z): a seal inside lean.open (the event / person dialog .ksz3) leans ONCE each time the dialog opens (lean.openDelay s after the seal shows, then still); stage / panel seals keep the random lean every min..max s. */
 function kesOpenRoot(el){try{const L=KIT_EMOSEAL.lean;return el.closest(L.open)&&(el.closest(L.openKey)||el.closest(L.open))}catch(e){return null}}/* the dialog may keep its .ksz3 shell between openings: the once-flag sits on the figure column (openKey), which is built anew at every opening */
 function kesPre(el){try{const U=kesPartsUrl(el,kesKey(el));if(U)[U.out,U.loop,U.back].forEach(u=>kesProbe(u,()=>{}))}catch(e){}}/* the painted set is fetched before the lean needs it */
@@ -91870,7 +91917,7 @@ function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__
  if(!H&&el.__fig){const q=el.__fig.getBoundingClientRect();if(q.height>20)H=q.height*(KIT_FIG&&KIT_FIG.h||.79)}}catch(e){}
  return H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel}
 /* STAGE SEALS UNDER A MODAL (ROOT-66 / owner 19/11 ~07:25Z): while ANY dialog / sheet / book page is open (kitDialogOpen = the whole family, body.kbk-open) a seal that is NOT inside it never leans (and a running lean ends); only the seal beside the person in the dialog leans. */
-function kesBlocked(el){try{if(el.closest(KIT_EMOSEAL.lean.modalIn))return false;return(typeof kitDialogOpen==="function"&&kitDialogOpen())||document.body.classList.contains("kbk-open")||!!document.querySelector(".kmov,.krbox")/* owner 24/11 flight (law 11): a reward / gain / scene overlay counts as an open dialog even without role=dialog: no big seal clone (z 9990) above ANY overlay */}catch(e){return false}}
+function kesBlocked(el){try{if(kesNonPlay(el))return true;if(el.closest(KIT_EMOSEAL.lean.modalIn))return false;return(typeof kitDialogOpen==="function"&&kitDialogOpen())||document.body.classList.contains("kbk-open")||!!document.querySelector(".kmov,.krbox")/* owner 24/11 flight (law 11): a reward / gain / scene overlay counts as an open dialog even without role=dialog: no big seal clone (z 9990) above ANY overlay */}catch(e){return false}}
 /* 3-PART SET (KIT_EMOSEAL.three[ak] = {out,back} clip seconds, c0/c1 = the gold circle as a share of the clip frame at the clip's start / end vs in the loop): files <set><ak>-out.webp / <set><ak>.webp / <set><ak>-back.webp.
    "yes" = all three probed present, "no" = a part is missing (single loop / CSS motion), "wait" = still probing (the lean waits, it never starts with the wrong set). */
 /* A seal picture is NEVER swapped inside a displayed <img> (the owner-visible "beige square" for a frame at every part change): each picture is its own <img> inside the big seal's box (span.kemo-big),
@@ -100317,7 +100364,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d402e37a51ed";window.CTM_BUILD=BUILD;
+const BUILD="dd1ce3d0ffa1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
