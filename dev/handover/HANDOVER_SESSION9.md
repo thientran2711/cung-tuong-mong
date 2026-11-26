@@ -294,3 +294,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~18:20Z OWNER: titles too easy → OD row + TITLE-BAL for 161. Sếp: this account out of quota → moving to another account now.
 - ~18:30Z sếp asked whether the PDF covers her plane/landing bugs → NO (ACT-MERGE only). Full owner-bug status PDF (25/11 23:30Z → end, ~46 rows, verified vs origin/main) = 161 FIRST REPORT.
 - ~18:40Z sếp asked about the «tèo» tap sound → fixed 310bad2e (25/11 04:57Z, file replaced in place); stale-cache risk → rename + cache audit = 161 job.
+- ~18:50Z OWNER long msg (8 points, OD last row): videos before any Bàn bài/thẻ gỗ/ring/vòng bảo vật land — kit-stage-r2 PULLED (LC23 told); dress/hoa điền/slots/xa xỉ/strip-event/maid-wait; wording stat names + ++; titles recs approved. All → TAKEOVER_161 «DO FIRST». She wants nothing more sent in 160 chat.
