@@ -35,3 +35,4 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 21:44Z MAIN 164 ORDER: lc25-os → lc25-sp → ob-verdict-3 (lc25-ov3 d9afc3ca, MAIN OK) → wg/wf (after RV-163 narrow OK; restack onto ov3 then) → dress-fix (KK46 confirm) → k44-parts + goal-links 8d28efd7 together → veil 5b4f8c56.
 - 21:49Z MAIN 164: OAN-PACE-2 review/oan-pace-ghen fe3d0888 replaces oan-pace; stacks after lc25-sp; land only after RV-163B PASS; MAIN ruling BAL.oanPace.act stays 25.
 - 21:49Z KK46 (session_01Rc5AsJWaXnsnQJdFazBWmx): KIT CONFIRMED dress-fix kitEquipSlots({grid}) §28.13c + kitDressPicker({under}) §60.2; added kit page sample → land review/dress-fix-kit 8cc9a284 (= e5c7be59 + 2 commits) instead of e5c7be59.
+- 21:51Z kit keeper now KK47 session_01Rc5AsHmtzuWMnb27oL1LC5 (kit-resfold, dress-fix-kit).
