@@ -381,9 +381,10 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   `kitResultSeal(ok)` (renamed by reviewer r7: `kitSeal` is the Trân nữ seal, §39) → {cls: ok | bad | sure, t: THÀNH | BẠI | KẾT QUẢ} (j63; kit sample page). Never
   inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
   "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
-- KÈM (owner 11/15): other people's feelings — the consorts' ghen / oán — are not her gains or losses: one collapsed line
-  "Kèm: 12 phi tần ghen thêm 8" — KIT PART `kitKemRow(K)` (j63, `.kb .kkem`, ranges as "3–8"; kit sample page), a tap opens the
-  names (`.kkem.on`); a person she has not met is "người chưa quen".
+- KÈM (owner 11/15 + 24/11 ~21:57Z «ngắn gọn rõ ràng»; MAIN 157 LOOK 26/11): other people's feelings — the consorts' ghen / oán — are not her
+  gains or losses. Kèm — KIT PART `kitKemRow(K)` (j63, `.kb .kr-kem .kkemi`): ONE line per person «<Tên>: ghen +8» (named = kaNamed); people she
+  cannot name with the same feeling and number = one line «N vị khác: ghen +8» (one alone: «một vị <tước>: ghen +8»); max 8 lines then
+  «… và N người khác»; every card (rtoast, night card kitNightEnd).
   Their liking FOR HER (quý ngươi hơn / ghét ngươi hơn) and evidence stay in Được / Mất.
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
@@ -391,6 +392,30 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   a sentence that only repeats the act name is dropped.
 - EVERY line says SHORTLY WHY (owner 18/11 09:03Z): `value · reason` on ONE row, label column left, value next to its label (left-aligned, never a centred floating column), the reason dim after the value: `Sức 56→74 (+18) · nghỉ qua đêm`, `Sủng 26→25 (−1) · lâu không được gặp Hoàng thượng`, `1 vị chưa quen biết: ghét ta hơn · ghé chơi cung ngươi`, KÈM `8 phi tần bớt ghen 1 · lòng ghen nguôi dần theo ngày`. Part `kitWhy` (j63: kaWhyCl / kaWhyStat / kaWhyWho / kaWhyKem / kaWhyHtml `.kwy`): the reason is read from the SAME Sổ ghi lines of the span (clause "lead: … Sức +10" → lead; a person matched by name; strangers stay unnamed), else the act's own title, else a short fixed cause per stat (KA_WHYD); max 44 chars, no colon, no %. Every result card (between-buổi "Trong cung vừa qua", act, event, night, co-op) goes through kaResultRows, so one part changes all. Kit sample page §7.
 - Rows are arrays: one fact per line (`.kitem`), never joined sentences; also exposed as `window.kaLastResult {title, ok, sentence, rows:[{k,label,items[]}]}`.
+- **7.3 ACT PAYLOAD — verdict + target row (OB-VERDICT, owner OD 26/11 ~08:30Z «nói xấu xong ... không biết được là có nói xấu thành công hay không»).**
+  KIT PART `kaAim(v,{ok,n,sen,by,pub,later,outer,open})` (j63): an act aimed at a person registers its target when it STARTS (v's Sủng / Danh / Sức /
+  thiện cảm (servant) / rank / cấm túc / phế / mất are read then); `ok` = the act's OWN roll (may be a function, read when the card is built).
+  `open` = an OUTER act's aim (doAct, talk, a dialog option on a consort, servant / court acts): it belongs to every card until it is closed —
+  by the card that shows it, by a «Thôi» on its own dialog, or by the idle board — so a deed run from its own dialog («Bày mưu» → «Ra tay ngay»,
+  the road card «Làm như thường», a picker) re-enters on the SAME aim and its card keeps the verdict. `pub` = a doer known to all by title
+  (the Emperor, the Thái hậu) for «Ai làm». Hooks in `jverdict.js` (no act logic): runAct (every ACT deed, hers and an NPC's on her), doAct,
+  talk (servant mode: an option naming her mistress is aimed at the mistress), chooseM (a card about a consort), pillowDo, giveTo, servAct, empAct,
+  and the runners outside runAct (j55 tdProbe / tdLeak, j67 e67pun, jemoact eaHitMe) —
+  the verdict comes from the first `aRoll` of the actor in that act, `caught` (bị lộ → BẠI), `oddsSoft` (→ BỎ DỞ), `runOpt`, and the decision
+  points without aRoll: the accuse family (vp / xx: «…: thành» / «bỏ qua» / «tố bừa»), wdFrameResolve (Giá họa), frameExpose (Vu oan cleared → BẠI),
+  rcvPick (the receiver's yes / no), rcvMaidBribe / stf2Bribe (the bribe taken / refused), a servant's refusal («việc không thành» → BỎ DỞ).
+  The card of that span (resultShow AND the night card `kitNightEnd`, jne) then shows, in this order:
+  1. SEAL `kitResultSeal(ok)`: THÀNH / BẠI / **BỎ DỞ** (`"soft"`: a capped act slipped, nothing done) / KẾT QUẢ (no roll). An act with no seal of its own
+     (null / "sure", e.g. the night) takes the carried act's verdict. The night card shows it as a `kitChip(seal)` in a «Kết cục» row.
+  2. the act's own plain sentence (`sen`, e.g. «Gối đầu, ngươi thì thầm nói xấu Lệ phi: ngài nghe lọt tai.»).
+  3. row **«Người ấy»** (`.kr-tgt`), one item per target: «Lệ phi Tô Mạn: Sủng −10 (34 → 24), thiện cảm −5, ghen +14, oán +2» — the target's
+     relation / ghen / oán move HERE (not in Được / Mất / Kèm). A failed / slipped deed with no number moved: «không hề hấn gì»; a stranger or a
+     done deed with nothing she can see yet: «chưa rõ — tai mắt sẽ báo»; a deed handed to a sent servant: «chưa rõ — người được sai về sẽ báo»
+     (law 6: hidden effects stay hidden). The name-mask (`kaNamed`, «???») applies as everywhere.
+  4. row **«Ai làm»** (`.kr-by`, two-way law 1): an NPC's deed on HER — «Tần Vu Uyển Đình: nói xấu ngươi bên gối · thành» — ONLY when the span's
+     Sổ ghi names that person; then her own Được / Mất / Kèm as before.
+  An outer act's aims (`outer:1`: doAct, talk, servAct, empAct) are closed by their wrapper when the act ends; others are shown once.
+  Test: `node dev/test/ob-verdict.test.js index.html <shots>` (real-tap night pillow thành / hỏng / bỏ dở on Fold + iPad, deed + talk scan, two-way, old save).
 - Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
 
 
@@ -2423,7 +2448,7 @@ Code `dev/build/j93.js` (after j86, before j84). Art `img/kit/mo-*.webp` (Magnif
 |---|---|---|---|---|
 | 1 | thị tẩm | `kitFlipTablet(p,{me})` · `kitFlipNote(p)` | wraps `flip()` (week start, after the week panel) | ONLY when the tablet is HERS: full piece — 5 green tablets `mo-tablet-back`; the middle one lifts and flips in 3D (rotateY) to `mo-tablet-front` with rank + name (one word per line); gold glow + sparks; result chip with the face, "Thẻ bài của ngươi được lật". The title "Hoàng thượng lật thẻ bài" sits above the lift height (padding on `.kmtabs`, title on its own layer). Someone else's tablet: NO overlay — `kitFlipNote` shows one short line `.kmnote` (kit chip with face: "Tối nay Hoàng thượng lật thẻ <bậc> <tên>") under the top bar, `pointer-events:none`, fades after ~2.8 s, never asks for a tap. |
 | 2 | quẻ tuần | `kitXamPlay(el,lot)` / `kitXamHTML(lot)` | wraps `dawn()` (Quẻ tuần section) and every modal holding the old `.xam` (Gieo lại, Phật đường, the HUD chip) | `mo-xam-tube` shakes (0.9 s), `mo-xam-stick` jumps out and lands (0.7 s), the lot word pops (green good / red bad / ink neutral); the section rows fade in after. In the week panel it starts after the calendar. |
-| 3 | kết quả | `kitResultFx(card)` | wraps `resultShow` (j63 result card `#rtoast.karesult`) | seal `mo-seal-thanh` (chữ Việt "THÀNH") or `mo-seal-bai` ("BẠI") stamps on the card's corner (scale 2.6→1, card thumps); each changed stat floats up as a pill (green +, red −); every 0–100 stat row gets a thin bar `.kmbar` running from the old to the new value (green up / red down). Existing `.seal` word (THÀNH/HỎNG/BẤT LỢI) stays. |
+| 3 | kết quả | `kitResultFx(card)` | wraps `resultShow` (j63 result card `#rtoast.karesult`) | seal `mo-seal-thanh` (chữ Việt "THÀNH") or `mo-seal-bai` ("BẠI") stamps INSIDE the card's top-right corner (MAIN 157 26/11: on the result card only, never hanging over what is behind; the title + sentence keep that corner free, never on words) (scale 2.6→1, card thumps); each changed stat floats up as a pill (green +, red −); every 0–100 stat row gets a thin bar `.kmbar` running from the old to the new value (green up / red down). Existing `.seal` word (THÀNH/HỎNG/BẤT LỢI) stays. |
 | 4 | thăng phẩm, tấn phong | `kitEdict({who,from,to})` | state diff after `render()`: `S.rank` up (also cung nữ → Đáp ứng when `S.srv.risen`) | closed edict `mo-edict-closed` → unrolls (clip-path) to `mo-edict-open` with "Thánh chỉ · Tấn phong X làm <bậc>" (Hoàng hậu: "Lập … làm Hoàng hậu"); the kit portrait (mdH big) changes from the old rank frame/brocade to the new one under a light sweep; chips old → new (new chip in `RCOL[rank]`, pops with sparks). j11's "Tấn phong" stamp is replaced (sound and haptics kept). |
 | 4b | giáng phẩm, lãnh cung | `kitGloom({title,sub})` | state diff: `S.rank` down, or `S.out` newly set | screen darkens (radial vignette), 14 dry leaves `mo-leaf-dry` fall and sway, grey caption. |
 | 5 | qua buổi | `kitDayShift()` | wraps `buoiShift()` (#curtain) | sky band slides in (b0 morning gold, b1 afternoon amber, b2 night indigo) + an incense stick `mo-incense` beside the buổi label, ember burning down, two smoke wisps. |

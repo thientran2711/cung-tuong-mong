@@ -87,9 +87,14 @@ function preload(src,ms){if(!src)return Promise.resolve();const w=ms||NE.wait;if
 function moodRow(m0,m1,tier){const W=MOODS;const a=W[m0]?W[m0][0]:"",b=W[m1]?W[m1][0]:"";
  return [`${a}${m1!==m0?` → ${b}`:""} · ${TIER[tier].liked}`,m1<m0?"g":m1>m0?"r":"n"]}
 /* kitNightEnd({tier, m0, m1, before, items:[inv entries], line}) — before = the night's rsnap (j75 __nsnap) */
-function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Object.assign({},T0,o.pic?{pic:o.pic}:{});let G=[],B=[],K=[];try{[G,B,K]=kaResultRows(o.before)}catch(e){}
+function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Object.assign({},T0,o.pic?{pic:o.pic}:{});let G=[],B=[],K=[];try{[G,B,K]=kaResultRows(o.before,"",kaAimVerdict(o.before).ok)/* KAWHY-VERDICT: reasons follow the night verdict (read only; closed by kaAimUse below) */}catch(e){}
  const [mv,mc]=moodRow(o.m0,o.m1,o.tier);
- const rows=[["Hoàng thượng",mv,mc]];if(G.length)rows.push(["Được",G,"g"]);if(B.length)rows.push(["Mất",B,"r"]);
+ const rows=[["Hoàng thượng",mv,mc]];
+ /* KIT 7.3 (OB-VERDICT, owner OD 26/11 ~08:30Z): her pillow talk's verdict + sentence, the target's real change, an NPC's deed on her */
+ try{const AV=kaAimVerdict(o.before);if(AV.n&&AV.ok!==null){const SL=kitResultSeal(AV.ok);rows.push(["Kết cục",[`${AV.sen||esc(AV.n)} ${kitChip(SL.t,AV.ok===true?"ok":AV.ok===false?"no":"n")}`],""])}
+  if(K&&K.tgt&&K.tgt.length)rows.push(["Người ấy",K.tgt,""]);if(K&&K.by&&K.by.length)rows.push(["Ai làm",K.by,""]);kaAimUse(AV.AIM);
+  window.kneLast=Object.assign(window.kneLast||{},{verdict:AV.ok,sen:AV.sen,tgt:(K&&K.tgt||[]).map(kaPlain),by:(K&&K.by||[]).map(kaPlain)})}catch(e){console.error(e)}
+ if(G.length)rows.push(["Được",G,"g"]);if(B.length)rows.push(["Mất",B,"r"]);
  let tb=kitRows(rows);try{const kem=kitKemRow(K);if(kem)tb=tb.replace(/<\/span>$/,kem+"</span>")}catch(e){}
  const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",gname:I.gname,tip:I.name}).replace('<span class="kitn"></span>',""):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
  const html=`<div class="kne kne-${o.tier}">${picHTML(DIR+T.pic+".webp",o.tier)}<div class="kne-side"><div class="kne-cap"><b>${T.t}</b>${o.line?`<small>${esc(o.line)}</small>`:""}</div>

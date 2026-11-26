@@ -340,3 +340,9 @@ option / act card that prints «không» in a row: go / later / close / look opt
 CONFLICT to settle (canon overwrite, law 14): the quickcheck gate dev/test/dialog-fixed.js (l) «MAIN 88 (a) no empty Được cell: a card with no gain
 says «không»» still demands the «không» rows, and it FAILS on origin/main 02f564ae today (Fold + iPad: card «Mặc kệ» has an EMPTY Tốn and Được
 cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) wins: hide the empty rows and update gate (l) in the same kit change.
+
+## 26/11 OB-VERDICT — result-card ACT PAYLOAD (KIT 7.3) — built by OB-VERDICT on review/ob-verdict, needs KK39 review
+- Owner OD 26/11 ~08:30Z (pillow slander verdict). Additions to the §7 result card (j63), same `.kb` row grid and classes, no new CSS:
+  seal value `kitResultSeal("soft")` → «BỎ DỞ» (grey `.sure`); rows «Người ấy» (`kr-tgt`) and «Ai làm» (`kr-by`); `kaAim` / `kaAimVerdict` / `kaAimUse`;
+  the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
+  Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
