@@ -1,0 +1,3 @@
+# Review — nc-nc_gian-lazy-1c (low-effort player · nc_gian · bot=quiet) — NO LIFE DATA
+Ended at buổi 1 (13-14 taps) at the entry selection «Lễ ra mắt»: «Duyên cung lỡ hẹn · Bị ban hoa, xuất cung» (game outcome, VALID-EXIT «failed selection»), BUILD cc68dcfd2b1b. Nothing to score beyond the first minutes; replayed as lazy-1d/1e. End shot: CDN img/_review/rerun-nc_gian/lazy-1c-end-banhoa.png.
+Player note (low-effort player): the first screens (Chọn sổ → Vào cung ngay → Thân phận → Tiền truyện 1/4-4/4 → Vào điện → Lễ ra mắt) are clear and short; being sent home after a few taps with no visible warning that the selection could fail feels harsh for a player who just chose the quiet option.
