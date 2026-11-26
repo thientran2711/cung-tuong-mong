@@ -1850,7 +1850,7 @@ RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vb
 | FIXER SRVMERIT-FIX r2 (ORDER MAIN 151 02:32Z; opus BIG; briefs/b-srvmerit-fix-r2.md) | review/srvmerit-guard-r2 | B ROOT 2 | session_01N1tNP638LmnJhHkppg5naw | RUNNING | 26/11 02:42Z |
 | CO-OP RERUN RUNNER U3c-2 (sonnet; successor of U3c 6q6oiuzP; briefs/b-coop-rerun-U3c2.md; seeds 64+) | review/robot10-coop-saves u3r2/; robot/coop-rerun-U3c2-11-26-2026.md | B ROOT 2 child 1 | session_01N1tNP5oqP6qYRiEcv5KUcm | RUNNING | 26/11 03:20Z |
 | FIXER co-op F1 guest reload during «Thân phận kiếp này» stuck (opus BIG; briefs/b-coop-f1-rejoin.md) | review/coop-f1-rejoin; reports/coop-f1-rejoin.md | B ROOT 2 child 1 | session_01N1tNP5kNGpWGnBCaNTeHRx | RUNNING | 26/11 04:00Z |
-| E95 E-a+E-b mghelp-dress (opus; briefs/E95-mghelp-dress.md) | review/mghelp-dress | FOREMAN E child7 | session_01DgYSWkswMaVgErr9xy4z23 | RUNNING | 26/11 04:25Z |
+| E95 E-a+E-b mghelp-dress (opus; briefs/E95-mghelp-dress.md) | review/mghelp-dress c081852a | FOREMAN E child7 | session_01DgYSWkswMaVgErr9xy4z23 | SẴN SÀNG KIỂM (reports/mghelp-dress.md) | 26/11 05:14Z |
 | E96 E-c+E-e dialog-order (opus; briefs/E96-dialog-order.md) | review/dialog-order | FOREMAN E child7 | session_01DgYSWkVu3mJTZ8LRPwH1Jm | RUNNING | 26/11 04:25Z |
 | E97 E-d dup-report (opus REPORT; briefs/E97-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWoPgpYzodQxz6rufXQ | REPORT READY a0a1d1a2 (review/dup-report; reports/dup-report.md; design dev/design/HANHSU_MERGE.md) | 26/11 05:10Z |
 KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING | 2026-11-26T04:11Z (MAIN 152)
