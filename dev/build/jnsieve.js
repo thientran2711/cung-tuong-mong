@@ -55,7 +55,8 @@ if(typeof kitKnow==="function"){const k0=kitKnow;kitKnow=function(o){try{if(on()
     ||(BAL.news.netOpen&&/^n:/.test(key)&&/(biết nết|lộ nết|có nết)/.test(t))
     ||(/^n:/.test(key)&&(/^Sổ ghi thêm/.test(t)&&!/(ngươi|Ngươi)/.test(t)||nsNpcLine(t)))/* a person-book line about others only (noteAdd → noteSay: remarks overheard, j92 «lời của …») */
     ||(NS_NPC_ONLY.test(t)&&nsNpcLine(t))/* «X trượt khảo hạch …» */
-    ||(/ kể: /.test(t)&&!/(ngươi|Ngươi)/.test(t)&&nsNpcLine(t.slice(t.indexOf(" kể: ")+5)))/* «A kể: B làm gì đó» about others (j75 tellers) */;
+    ||(/ kể: /.test(t)&&!/(ngươi|Ngươi)/.test(t)&&nsNpcLine(t.slice(t.indexOf(" kể: ")+5)))/* «A kể: B làm gì đó» about others (j75 tellers) */
+    ||(!/^(hr|id|rk):/.test(key)&&nsNpcLine(t))/* any other know line about other people only (whole family: every direct kitKnow caller — jration chest thefts …); her own knowledge of names / ranks and the big harm lines stay */;
    if(drop){NSV.stat.knowDrop++;if(!NSV.mute){tally("so");if(!/(biết nết|lộ nết|có nết)/.test(t))try{recDrop(t)}catch(e){}}note("know:"+key.split(":")[0],t);return}}}catch(e){}return k0.apply(this,arguments)}}
 
 /* ---------- 3. the morning card, sentence by sentence ---------- */

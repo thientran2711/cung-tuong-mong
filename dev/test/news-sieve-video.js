@@ -1,6 +1,8 @@
 /* NEWS SIEVE videos (owner OD 26/11 ~04:40Z): BUILT site, HOST mode, the owner's two devices. A palace life is played ~4 tuần by the bot (the
    same one as news-sieve.test.js), then on screen: the «Tin báo» box (short, only her news), the morning «Tin trong cung» card, the monthly
    «Tin trong cung · tổng kết tháng» panel, and a consort's card in Hậu cung with every nết shown. Each step held ~3 s, closed with «Lui» / ✕.
+   NEWS-SIEVE-2 (owner OD 26/11 ~05:05Z): one big NPC ↔ NPC harm (a hủy dung, landed now) is in the «Tin báo» box, the Sổ ghi tab shows its record
+   (doer, victim, cause, result), and the Cung nhân tab shows her servants' nết open.
    usage: node dev/test/news-sieve-video.js <outdir> [fold,ipadAir]   (run bash dev/site/build_site.sh first) */
 const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');const path=require('path');
 const OUT=process.argv[2]||'/tmp/news-sieve-video';const DEVS=(process.argv[3]||'fold,ipadAir').split(',');fs.mkdirSync(OUT,{recursive:true});
@@ -25,6 +27,9 @@ const OUT=process.argv[2]||'/tmp/news-sieve-video';const DEVS=(process.argv[3]||
   await clear();
   /* the start-of-life chest (kit motion scene) re-queues itself after the bot skipped it: hidden for this recording only (not part of this change) */
   await f.evaluate(()=>{const st=document.createElement('style');st.textContent='.kmov{display:none!important}';document.head.appendChild(st)});
+  /* 0 a big harm between two other consorts lands now (parallel time: as when a sent deed lands) */
+  await f.evaluate(()=>{const L=liveRivals(true).filter(v=>v&&v.alive&&!v.out&&!v.confined);const A=L[0],B=L.find(v=>v!==A&&!sameHouse(A,v));if(!A||!B)return;
+   try{npcLearn(A,B)}catch(e){}delete B.scar;const mo=motiveOK;motiveOK=()=>({ok:true});const pl=PT.landing;PT.landing=1;try{runAct(A,B,'huydung')}finally{PT.landing=pl;motiveOK=mo}try{kitKnowFlush()}catch(e){}Q.length=0;render()});
   /* 1 the box «Tin báo» */
   await f.evaluate(()=>{try{kitNoticeSeen&&0}catch(e){}const L=kitNoticeList();if(!L.length)kitNotice({id:'nsv-v',line:'Đêm qua thẻ bài của Hoàng hậu được lật.',text:'Đêm qua thẻ bài của Hoàng hậu được lật.'});for(const x of kitNoticeList().slice(0,6))x.seen=false;kitNoticeOpen()});
   await p.waitForTimeout(1200);await clear();await f.evaluate(()=>{if(!Q.some(m=>m&&m.t==='Tin báo'))kitNoticeOpen()});await p.waitForTimeout(2500);await shot('1-tinbao');
@@ -32,12 +37,16 @@ const OUT=process.argv[2]||'/tmp/news-sieve-video';const DEVS=(process.argv[3]||
   /* 2 the morning card «Tin trong cung buổi này» (after the sieve) */
   await f.evaluate(()=>{const m=__keep.card;if(m){Q.unshift(m);showModal()}});await p.waitForTimeout(1200);await clear();await p.waitForTimeout(2500);await shot('2-tintrongcung');
   await f.evaluate(()=>{try{closeModal()}catch(e){}});await p.waitForTimeout(1500);await clear();
+  /* 2b the Sổ ghi (Mệnh truyện › Sổ ghi): the harem record with doer, victim, cause */
+  await f.evaluate(()=>{tab='log';render()});await p.waitForTimeout(3500);await shot('2b-soghi');
   /* 3 the monthly summary */
   await f.evaluate(()=>{let m=__keep.sum;if(!m){m=nsMonth()}else{Q.unshift(m)}showModal()});await p.waitForTimeout(1200);await clear();await p.waitForTimeout(3000);await shot('3-tongket');
   await f.evaluate(()=>{try{closeModal()}catch(e){}});await p.waitForTimeout(1500);await clear();
   /* 4 Hậu cung: a consort's card, nết open */
   await f.evaluate(()=>{const b=[...document.querySelectorAll('#tabs [data-tab], #tabs button, .tabs button')].find(x=>/Hậu cung/.test(x.textContent||''));if(b)b.click();else{tab='rv';render()}});
   await p.waitForTimeout(3500);await shot('4-haucung-net');
+  /* 5 Cung nhân: servants' nết open (no «Xem người») */
+  await f.evaluate(()=>{tab='staff';render()});await p.waitForTimeout(3500);await shot('5-cungnhan-net');
   const v=p.video();await ctx.close();const vp=await v.path();const dst=path.join(OUT,`news-sieve-${dev}-${dev==='fold'?'755x1000':'1180x820'}.webm`);fs.renameSync(vp,dst);
   console.log(dev,'video',dst,'errors',errs.length,errs.slice(0,3))}
  await b.close();srv.close()})();

@@ -62,12 +62,12 @@ const res=[];let DEATHS=0;const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  '
   const npcOnly=t=>{if(/^tổng kết tháng$/.test(t))return false;if(/^(Qua câu chuyện|Ta biết|Ngươi biết)/.test(t))return false;if(/^Trong cung truyền tai nhau: (Hoàng thượng|Thái hậu)/.test(t))return false;if(/^Trong cung truyền tai nhau/.test(t))return !isHer(t);if(isHer(t))return false;if(KEEP0.test(t))return rn.some(n=>t.includes(n));if(KEEP.test(t))return false;return rn.some(n=>t.includes(n))};
   const F=R.feed.filter(x=>x.src!=='sum'&&x.src!=='tin-live'/* a live «go see» item opens a choice */);const per={};for(const x of R.feed)per[x.d]=(per[x.d]||0)+1;
   const days=Object.keys(per).length?Math.max(...Object.keys(per).map(Number))+1:0;const counts=[];for(let d=0;d<=R.day;d++)counts.push(per[d]||0);
-  const TB=new Set((NSV.hr||[]).map(x=>x.tb));const npc=F.filter(x=>!TB.has(x.t)&&npcOnly(x.t));
+  const TB=[...new Set((NSV.hr||[]).map(x=>x.tb.replace(/\.$/,'')))];const npc=F.filter(x=>!TB.some(l=>x.t.includes(l))&&npcOnly(x.t));
   /* nết open */
   let netOpen=null;try{const L=liveRivals(true).filter(v=>v&&v.alive&&!v.out);netOpen={n:L.length,open:L.filter(v=>{const T=traitsOf(v),K=trKnown(v);return T.length&&T.every(t=>K.includes(t))}).length}}catch(e){netOpen={err:String(e)}}
   return {feed:R.feed,tuan:R.day+1,lines:R.feed.length,avg:+(R.feed.length/(R.day+1)).toFixed(2),max:Math.max(...counts),counts,npc:npc.length,npcEx:npc.slice(0,8),
    big:(()=>{const E=R.acts.filter(x=>x.big);const H=(R.oldRec||[]).concat(S.hrec||[]).filter(x=>x.big);const tb=new Set((NSV.hr||[]).map(x=>x.tb));
-     const tbFeed=R.feed.filter(x=>x.src==='know'&&tb.has(x.t)).length;
+     const tbFeed=[...tb].filter(l=>R.feed.some(x=>x.src==='know'&&x.t.includes(l.replace(/\.$/,'')))).length+((NSV.hr||[]).length-tb.size)/* a Tin báo notice may join a few lines of one buổi */;
      return {events:E.length,tinbao:tbFeed,hr:(NSV.hr||[]).length,sogi:H.length,kinds:E.reduce((o,x)=>(o[x.k]=(o[x.k]||0)+1,o),{}),ex:(NSV.hr||[]).slice(0,3).map(x=>x.tb)}})(),
    allActs:R.acts.length,
    srcs:R.feed.reduce((o,x)=>(o[x.src]=(o[x.src]||0)+1,o),{}),sum:R.sum,mock:R.mock.length,low:R.mock.filter(x=>x.low),mockEx:R.mock.slice(0,5),netOpen,nsv:window.NSV?NSV.stat:null,err:R.err||0}});
