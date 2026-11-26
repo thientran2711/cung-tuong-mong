@@ -315,7 +315,8 @@ Rules
   khắc `2 khắc (còn N)` (used+c ≤ 4), `Sức ≥20 (có N)` for acts over 1 khắc (`can`), `Bạc N (có M)`, buổi `Buổi tối (đang buổi sáng)`,
   "chưa làm trong buổi này", lãnh cung / còn sống / cấm túc (CRIME), and the act's own requirement from `ok()` + `ACT[k].x` / `LACK[k]`
   with evidence counts `(có N)` from `evG`. Producers: `cardH` and `rvGroups` wrappers put the list on the button as `data-kneed`;
-  any other disabled button turns its reason (`.kwhy`/`guessWhy`) into a ✗ item. A requirement that `ok()` checks but no text names
+  any other disabled button turns its reason (`.kwhy`/`guessWhy`) into a ✗ item; a reason the code KNOWS goes in `data-why` and `guessWhy` returns it
+  before any guess (review/home-way-nits; scan `node dev/test/kit-why-scan.js`: no disabled card with a known reason shows «chưa đủ điều kiện»). A requirement that `ok()` checks but no text names
   shows "điều kiện riêng của việc này chưa có" (to be named by the act owner).
 - Disabled (`.kdis`): grey ground `#eee7da`, grey title, chip greyed; the Cần row (from `.kwhy` / `cardWhy` / `guessWhy` / `data-kneed`) replaces
   the rows that cannot apply (Mất and Kèm hidden; Tốn and Được stay so she sees what it would give). Never opacity below 1 on the text.
@@ -4057,8 +4058,19 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
 - Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
   → `<img.kbi>` (img/kit/ico-<kind>.webp, 30 px, gpt-2-6 gouache, transparent, 128 px WebP ~7 KB: ico-room = red-lacquered door under green tiles with a lantern,
   ico-map = palace scroll map) + `<span.kbl>` label; the button class is `.kbackb` (no border / ground in the header; a soft paper pill over the stage art for #tomap).
-- Header `#k3room` (phone shell only, as before): label "Về phòng", or "Về <place>" when she is elsewhere (tooltip + aria-label the same). >= 600 px: icon + label in the
-  right column under the time block, right-aligned, no bar. < 600 px: icon only (label in tooltip, same rule as the stat cells), under the menu button next to the time block.
+- Header `#k3room` = THE WAY HOME (review/home-way, owner OD 26/11 ~04:25Z; canon overwrite of «Về <place>»): ONE rule with the Dư đồ top-row
+  «Về phòng» = `homeWay()` / `homeGo()` (jplrule.js). Away from home it ALWAYS walks her to HER OWN room (goTo("home"), cost travel() =
+  BAL.walk.near / BAL.walk.far), label «Về phòng · N khắc» + second line = her palace's name (the home mark, `homeName()`); no khắc left =
+  disabled, «Về phòng · hết khắc». At home: «Về phòng» + her palace's name, tap = her room's page. Label lines: `.kbl` white-space:pre-line.
+  Spread (>= 600 px): icon + label, right column. One page (kv1): icon only at home (tooltip); AWAY (class `.hwaway`, jk3/jk4) the label
+  shows under the icon (small, centred, menu column) — the button is never hidden away from home, the place painting included.
+- ONE BOX (review/home-way-nits, law 10): a label line never wraps (`.kbl` white-space:pre, inline-grid) and the label column is as wide as the LONGEST
+  label the button can show (hidden sizer row `.kbl::after{content:attr(data-sz)}`, data-sz set in jk3 from «Về phòng · hết khắc», «Về phòng · <far> khắc»,
+  her palace's name) → the same size at home, away and with no khắc left (Fold one page 101 px, iPad 163 px). The iPad two-row bar (`.khd2`) keeps
+  its rows away from home too (a one-row :has(#k3room) rule out-ranked it and the time block drew over «Sắc»).
+- REAL REASON when disabled: `homeWay().why` = the kit khắc words `j76need(tc,null,true)` (the walk never spills into the next buổi): «hết khắc buổi
+  này (cần N)» / «không kịp xong trong buổi trưa (cần N khắc)» → `data-why` on both buttons; the Dư đồ card's «Cần» row and the lock pop show it.
+  Test `node dev/test/home-way-label.js` (DEV=fold|ipadAir|ipadPro: no wrap, one width, no top-bar overlap).
 - New back buttons to a place MUST use this part (`node dev/test/room-btn-scan.py` fails on a text "‹ <place>" bar). New icon kinds: add `img/kit/ico-<kind>.webp` in the same style.
 - Tests: `node dev/test/room-btn.js <url> <outdir>` (6 viewports). Kit page: sample §75. Number §75 (KIT_NUMBERS.md; was provisional §72).
 ## 69. CO-OP BUỔI CLOCK · kitCoopClock (owner 15/11 ~21:25Z, review/coop-timer) — `dev/build/jcooptimer.js` (after jkitpage)
