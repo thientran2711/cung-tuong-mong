@@ -133,6 +133,9 @@ COOP.on("week",()=>setTimeout(check,0));
 (function(){let q="";try{q=new URLSearchParams(location.search).get("room")||"";if(q){const u=new URL(location.href);u.searchParams.delete("room");history.replaceState(null,"",u.toString())}}catch(e){console.error(e)}
  if(!q)return;const t0=Date.now();const go=()=>{if(COOP.state.status!=="off")return;if(T.hidden&&Date.now()-t0<20000){setTimeout(go,150);return}if(!T.hidden){CODE=q.toUpperCase();join(CODE)}};setTimeout(go,60)})();
 /* guest in, host still choosing her thân phận: keep the title backdrop with a kit panel instead of an empty game frame */
+/* review/coop-f1-rejoin: the waiting panel has no way out but its own «‹ Về màn đầu» (room kept): Esc (iPad / Fold keyboard) does not
+   send her to the title home (j74 Esc → home) while she sits in the room waiting for the host's pick */
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&PG==="pick"&&LM&&!T.hidden){e.preventDefault();e.stopImmediatePropagation()}},true);
 function hostPick(on){if(on){try{T.hidden=false}catch(e){}LM=null;open("pick")}else if(PG==="pick"){PG="";drop();try{T.hidden=true}catch(e){}}}
 window.COOP_LOBBY={open,fz,check,hostPick};
 }catch(e){console.error(e)}})();
