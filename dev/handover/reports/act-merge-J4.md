@@ -24,7 +24,7 @@ New module `dev/build/jactj4.js` (assemble.py: one name after jshelf.js) + `j83.
 Counts (buttons on one panel, from the code): Tài nghệ 3 per art → 1; Tứ đức 2 → 1; Cung nhân tab 6 → 5; servant 10 → 6; Hoàng tự 7–9 → 5 (after the Hoàng tự dialog opens: 6 ways inside Dạy con); Tư trang 7 → 4 (Mua đồ · Kiểm tra đồ · Xin đồng minh · Nhờ thái giám tìm thú nuôi).
 
 ## Gaps for MAIN / other jobs (not edited: files owned elsewhere)
-1. Stage pop-up of a servant (`hsvActs`, jhouse.js) still shows Thưởng vô cớ / Phạt vô cớ / Đổi người separately (G8 row; it lives on the pop-up that J1/J2 own via dfActs). The same `Thưởng phạt` door can be wired there; I left it because the pop-up list is a `dfActs` act array, not a tab.
+1. (DONE in the last commit: `hsvJudgeDoor` in jhouse.js folds Thưởng/Phạt/Tha lỗi/Đổi người into ONE «Thưởng phạt» on the stage pop-up via j4ServDoor; Tra khảo/Che chở stay.) Was: stage pop-up of a servant still shows Thưởng vô cớ / Phạt vô cớ / Đổi người separately (G8 row; it lives on the pop-up that J1/J2 own via dfActs). The same `Thưởng phạt` door can be wired there; I left it because the pop-up list is a `dfActs` act array, not a tab.
 2. The Tài nghệ builders (jtabs, j85, j23, jrcp) are not in my file list: the door is a wrapper in jactj4.js over `ktArtSkills`, so no file of another job was touched.
 3. `act-inventory.js` counts an act button only when its small line names tốn/khắc/bạc; the doors say «chọn cách …», so the scan's «ACT buttons» row under-counts doors (it shows Hoàng tự 4, real 5). The test counts button names itself.
 
