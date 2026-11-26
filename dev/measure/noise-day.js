@@ -3,7 +3,7 @@
    interrupts her … with BAL budgets + a QC gate that FAILS a build over budget — so floods can't come back»).
    Lives = REAL-TAP robot lives (dev/test/robot-rt.js, review/robot-realtap) with the read-only sampler (noise-preload.js / noise-sampler.js).
    usage:
-     node dev/measure/noise-day.js run <url> <out> [lives=fold:sens:11,ipad:sens:21] [slice=<buổi>] [mins=<wall-clock cap per life>] [harness=<dir with dev/test/robot-rt.js>]
+     node dev/measure/noise-day.js run <url> <out> [lives=fold:sens:11,ipad:sens:21] [slice=<buổi>] [mins=<wall-clock cap per lane>] [mindays=<full days needed>] [harness=<dir with dev/test/robot-rt.js>]
          plays the lives in parallel (one robot = one life, real taps), then prints the table (same as «table»)
      node dev/measure/noise-day.js table <out> [--md out.md] [--build dev/build]
          reads <out>/noise-*.jsonl → per life per game day (wk(), tuần) the count of every channel; budget = BAL.noise (+ FOREMAN D's BAL.evc for
@@ -67,16 +67,22 @@ async function run(url, out) {
       for (const f of ['robot-rt.js', 'realtap.js', 'rt-offer.js', 'robot-lint.js']) fs.writeFileSync(path.join(H, 'dev/test', f), execSync(`git -C "${KIT}" show ${ref}:dev/test/${f}`, { maxBuffer: 64e6 })) }
     catch (e) { console.log('NOISE-DAY FAIL · no real-tap harness (dev/test/robot-rt.js here, RT_HARNESS, or git ref ' + ref + ')'); process.exit(1) } }
   const lives = (KV.lives || 'fold:sens:11,ipad:sens:21').split(',').map(s => s.split(':')); const slice = KV.slice || '40', MINS = +(KV.mins || 0) || Math.ceil(+slice * 0.5) + 3; /* wall-clock cap per life (a stuck robot never blocks the gate; ~0.35 min / buổi measured) */
-  await Promise.all(lives.map(([dev, bot, seed], i) => new Promise(res => { const life = `nz-${dev}-${bot}-${seed}`;
-    const env = Object.assign({}, process.env, { RT_NOISE: path.join(out, `noise-${life}.jsonl`), RT_NOISE_DEV: dev });
-    const c = spawn(process.execPath, ['-r', path.join(__dirname, 'noise-preload.js'), path.join(H, 'dev/test/robot-rt.js'), url, out, 'dev=' + dev, 'bot=' + bot, 'seed=' + seed, 'life=' + life, 'slice=' + slice, 'lint=0', 'force=1'], { env, stdio: ['ignore', 'pipe', 'pipe'] });
-    const lg = fs.createWriteStream(path.join(out, life + '.log')); c.stdout.pipe(lg); c.stderr.pipe(lg); const kill = setTimeout(() => { lg.write('NOISE-DAY: time limit ' + MINS + ' min — life stopped, its full days count\n'); try { c.kill('SIGTERM') } catch (e) {} setTimeout(() => { try { c.kill('SIGKILL') } catch (e) {} }, 15e3) }, MINS * 60e3);
-    c.on('exit', code => { clearTimeout(kill); lg.end(); res(code) }) })));
+  /* one LANE per device: a life that ends early (a real ending at buổi 1, e.g. «Ban hoa») is followed by the next seed (seed + 100·k) until the lane
+     has played <slice> buổi or its wall-clock cap is spent — so the gate always measures days, not one lucky / unlucky life */
+  const T0 = Date.now();
+  await Promise.all(lives.map(([dev, bot, seed]) => (async () => { let done = 0;
+    for (let k = 0; k < 8 && done < +slice; k++) { const left = MINS * 60e3 - (Date.now() - T0); if (left < 60e3) break; const sd = +seed + 100 * k, life = `nz-${dev}-${bot}-${sd}`;
+      const env = Object.assign({}, process.env, { RT_NOISE: path.join(out, `noise-${life}.jsonl`), RT_NOISE_DEV: dev });
+      const code = await new Promise(res => { const c = spawn(process.execPath, ['-r', path.join(__dirname, 'noise-preload.js'), path.join(H, 'dev/test/robot-rt.js'), url, out, 'dev=' + dev, 'bot=' + bot, 'seed=' + sd, 'life=' + life, 'slice=' + (+slice - done), 'lint=0', 'force=1'], { env, stdio: ['ignore', 'pipe', 'pipe'] });
+        const lg = fs.createWriteStream(path.join(out, life + '.log')); c.stdout.pipe(lg); c.stderr.pipe(lg);
+        const kill = setTimeout(() => { lg.write('NOISE-DAY: time limit ' + MINS + ' min — life stopped, its full days count\n'); try { c.kill('SIGTERM') } catch (e) {} setTimeout(() => { try { c.kill('SIGKILL') } catch (e) {} }, 15e3) }, left);
+        c.on('exit', code => { clearTimeout(kill); lg.end(); res(code) }) });
+      let b = 0; try { const m = fs.readFileSync(path.join(out, life + '.log'), 'utf8').match(/LIFE DONE .*? · buổi (\d+)/); b = m ? +m[1] : +slice } catch (e) { b = +slice } done += Math.max(1, b); if (code == null) break } })()));
 }
 (async () => {
   if (MODE === 'run') { const [url, out] = POS; if (!url || !out) { console.error('usage: noise-day.js run <url> <out> [lives=..] [slice=..]'); process.exit(2) } await run(url, out); POS.splice(0, 1) }
   const out = POS[0]; if (!out) { console.error('usage: noise-day.js table <out>'); process.exit(2) }
   const T = table(path.resolve(out), path.resolve(opt('--build') || path.join(KIT, 'dev/build'))); console.log(T.md); if (opt('--md')) fs.writeFileSync(opt('--md'), T.md + '\n');
-  if (!T.full) { console.log('NOISE-DAY FAIL · no full game day measured'); process.exit(1) }
+  const MIND = +(KV.mindays || 1); if (T.full < MIND) { console.log(`NOISE-DAY FAIL · only ${T.full} full game day(s) measured (need ${MIND}): the robot lives ended or stuck early`); process.exit(1) }
   console.log(T.fails.length ? 'NOISE-DAY FAIL · over budget: ' + T.fails.join(' · ') : `NOISE-DAY PASS · ${T.full} game days, every channel inside BAL.noise${T.bud.evc ? ' + BAL.evc' : ' (big / visit: no D2 cap in this build, measured only)'}`);
   process.exit(T.fails.length ? 1 : 0) })();

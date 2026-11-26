@@ -434,7 +434,6 @@
   {
    "rule": "long",
    "re": "(che miệng cười|mách Hoàng hậu)",
-   "surf": "tinbao",
    "why": "NPC↔NPC deed news line (newsAdd) not about her. Owner: NEWS-SIEVE-2"
   }
  ]

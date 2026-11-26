@@ -29,8 +29,10 @@ const VNL = /[àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêế�
 const RULES = [
   ['dup', s => { const m = /(?<![\p{L}\p{M}])(\p{L}+ \p{L}+) \1(?![\p{L}\p{M}])/u.exec(s); if (m) return m[1];
     const w = /(?<![\p{L}\p{M}])(\p{L}+) \1(?![\p{L}\p{M}])/iu.exec(s); if (w && NODUP.has(w[1].toLowerCase())) return w[1] + ' ' + w[1]; return null }],
-  ['glue', s => { let m = /[\p{L}\d)»”] ?= ?[\p{L}\d(«“+−-]/u.exec(s); if (m && !/=>|==/.test(m[0])) return m[0];
-    if ((m = /=>|&&|\|\||;\s*;|·\s*·|^\s*·|·\s*$/.exec(s))) return m[0];
+  ['glue', (s, surf) => { let m = /[\p{L}\d)»”] ?= ?[\p{L}\d(«“+−-]/u.exec(s); if (m && !/=>|==/.test(m[0])) return m[0];
+    if ((m = /=>|&&|\|\||;\s*;|·\s*·/.exec(s))) return m[0];
+    /* a line that starts / ends on «·»: only on one-line surfaces (a kit row wraps its «·» items onto the next line of a panel's innerText) */
+    if (!/^(body|panel|button)$/.test(surf || '') && (m = /^\s*·|·\s*$/.exec(s))) return m[0];
     const n = (s.match(/·/g) || []).length; if (n > TX.dotMax) return n + '×·'; return null }],
   ['bracket', s => { const m = /\(\(|\)\)|\[\[|\]\]|««|»»|\(\s*\)|\[\s*\]|«\s*»|\{\s*\}|\$\{/.exec(s); return m ? m[0] : null }],
   ['leak', s => { const m = /\b(undefined|NaN|null|\[object|function|true|false|Infinity)\b/.exec(s) || /(?<![\p{L}\p{M}])(?=[A-Za-z]*[fjwzFJWZ])[A-Za-z]{2,}(?![\p{L}\p{M}])/u.exec(s)
@@ -39,7 +41,7 @@ const RULES = [
   ['pct', s => s.includes('%') ? '%' : null],
 ];
 const longMax = surf => (TX.lineMax[surf] != null ? TX.lineMax[surf] : null);
-function check(s, surf) { const out = []; for (const [k, f] of RULES) { let h = null; try { h = f(s) } catch (e) {} if (h) out.push([k, h]) }
+function check(s, surf) { const out = []; for (const [k, f] of RULES) { let h = null; try { h = f(s, surf) } catch (e) {} if (h) out.push([k, h]) }
   const L = surf && longMax(surf); if (L != null && [...s].length > L) out.push(['long', [...s].length + '>' + L]); return out }
 /* ---- runtime: the robot's visible lines ---- */
 function runtime(srcs) { const F = []; for (const s of srcs) { const st = fs.statSync(s); if (st.isDirectory()) { for (const f of fs.readdirSync(s)) if (/^noise-.*\.jsonl$/.test(f)) F.push(path.join(s, f)) } else F.push(s) }
