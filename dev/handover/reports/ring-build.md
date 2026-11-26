@@ -203,3 +203,10 @@ PRIORITY #1 CHECK: OD 26/11 ~21:41Z, ~21:45Z, ~22:43Z rows (verbatim read) | mai
 3. «Thôi» plaque: none in jkring / jkring-item (grep).
 ## Waiting
 - KK48 (session_01Rc5AsKCV8Zc8zV3nMq8Y8v) INACTIVE (send failed 26/11 ~23:10Z) → MAIN 165 told. (A) owner 22:43Z no 7-cap: proposal for §98.1 jkpick = drop KIT_PLAQUE.max + warn + slice; cols ≤4→1, 5–7→2, 8–12→3, new columns LEFT, post fixed (ring follows postBox already). (B) name plate draft afa26154 (jkitsel kitNameTagBox {fix:1}, KIT §93.5a) for the kit keeper to adopt / replace. RB-7 does not edit jkpick / jkitsel until MAIN / kit keeper answers.
+- 26/11 ~23:00Z MAIN 165: kit keeper = KK49 session_01Rc5AsJHZTVo6v5Ks4SpWbw (KK48 rolled); MAIN forwarded (A) + (B) to KK49 → wait for KIT READY, do not touch jkpick. Reviewer = RV-164 session_01Rc5AsK6n6JQHacgiCCd7ks (not RV-163), only after MAIN PASS.
+## Land gate (0ddda103) — LOOK READY sent to MAIN 165 ~23:25Z
+- ring-overlap 36 states F+I: overlap 0 / headCut 0 / layerOverNav 0 / errs 0 · oldleft F 0 + I 0 (13 places) · kit-pick ALL PASS · kit-plaque-post PASS · title / face / bag checks OK.
+- Videos + tiled sheets on CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/ring-build/ring-build7-{a,b,title,face,bag}-{755x1000,1180x820}.mp4, ring-build7-sheet-{755x1000,1180x820}.jpg.
+## Next (successor)
+a. MAIN LOOK verdict → PASS: RV READY to RV-164. FAIL: fix.
+b. KK49 KIT READY (A) >7 columns / (B) name plate → merge their branch, switch the ring group plate to theirs if different, re-run the gate (record: `node dev/test/kit-ring-record.js <url> <out> a|b WxH`, `node dev/test/kit-ring-item.js <url> <out> title|face|bag WxH`; marks are under .marks.start).
