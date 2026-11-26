@@ -150,3 +150,24 @@ PRIORITY #1 CHECK: OD robot-realtap reviews | main none (harness on review/*) | 
 - Co-op: robot-rt-coop seats are `Seat(...)` from robot-rt.js → same boot → same gate (process.exit(3) stops both seats = a hard stop, as wanted) ✓ (code read; no co-op run).
 - robot-audit 782c9fac: builds with > 1 b or buildMismatch → INVALID «mixed build (s/b → s/b)» ✓. A mismatch run writes the wrong b into the results json only; the ckpt is clean, so the resumed life overwrites it with one build ✓.
 - Small notes: (a) a later load with NO CTM_BI passes the gate silently (`if (!bi) return true`) — only matters for a pre-CTM_BI build, rare; (b) the fixer's announced follow-up (audit verdict wording) had not landed at this review — fold it into the FAIL fix.
+
+# RE-REVIEW robot-realtap cbeb334b..8366c261 (BUILD PIN fix + part 2, RANK METRIC, GIFT PICKER, N4) — BIG REVIEWER #9 for F #21, 26/11 ~12:20Z
+PRIORITY #1 CHECK: OD robot-realtap reviews | main none | review/robot-realtap 8366c261 (f3f8d944 + 8366c261 on cbeb334b FAIL) | claims BIG #9.
+## VERDICT: FAIL robot-realtap 8366c261 (FAIL 1 of cbeb334b is fixed; 1 new blocking item + 2 small ones)
+### FIXED (my cbeb334b FAIL 1)
+- rt-serve-build.sh --b now walks main commits newest-first by index.html CONTENT (+ optional --t): `--b b7dcbbd06e03` → serves 3af7896e (merge-built LIVE) ✓; `--b 0281bf7bcef6` → 6b5d3d05 ✓. Gate compares b AND t ✓. A NEW life on LIVE 3af7896e (file://, from a git worktree) → «BUILD PIN: … served at http://127.0.0.1:8745/», played there, builds = 1, 205 s for a 2-buổi slice ✓.
+- Nit left: the help line still says «<sha> = the «s» of window.CTM_BI» (s is the PARENT the build was made on) — fix the wording.
+### FAIL 1 (new, blocking) — PIN is on by default and STALLS every run on a build that is not on main
+- pinUrl() spawns rt-serve-build.sh detached and then polls 120 × 5 s; it never looks at the child's exit. When the build is not on the last 60 main commits (every review candidate a reviewer or a QC hook plays, a local worktree build) the script exits 2 at once, the harness waits 10 min at buổi 0, the freeze watchdog fires: «PAGE FROZE pinB at buổi 0 … exit 3», no life. Proof: 3af7896e index.html with b changed to a non-main id, file:// → rc 3 after 601 s, 0 buổi. Same when the harness runs outside a git checkout (`git archive` copy): «fatal: not a git repository» → 10-min stall.
+- Fix: watch the child — exit ≠ 0 → no pin, log «BUILD PIN: build not on main, playing the given url (gate still on)» and go on at once; pin only a build rt-serve-build can find (or only when the given url is remote / LIVE), never stall.
+### FAIL 2 (small) — `pin=0` on the command line does nothing
+- PIN reads `C.pin`, but the main entry builds `Seat({ url, out, dev, bot, seed, life, origin, road, stuckMin, slice, cp, resume })` without `pin` → `pin=0` is ignored (my pin=0 runs were still pinned to :8745); only env RT_PIN=0 works. PROGRESS documents «pin=0 / RT_PIN=0 off». Fix: pass `pin: A.pin` (and the co-op Seat calls).
+### FAIL 3 (small) — RT_TEST_KIP proves nothing on 4 seeds
+- Fold s7 / s41, iPad s12 / s42 (LIVE 3af7896e): RT_TEST_KIP → {"open":"open 1","closed":true,"sec":3,"kipPick":0,"kipScroll":0,"kipGo":0,"deadEnd":0}. The check ends 3 s after the open when no `#modal [data-kip]` is on screen — the picker is queued (pushDil) and not yet shown, so the test reports «closed» before it ever appeared. Fix: wait until the picker is on screen first (or fail «never shown» after N s), then judge pick / scroll / go / dead-end.
+- In real play the new code did run: iPad s42 buổi 3–4 logged «[game] item pick grid dead-end: no item can be given (28 items, every confirm disabled …)» then ✕, no stall ✓. Note: a confirm disabled for lack of khắc is the game's rule, not a game fault — consider [harness]/info instead of [game] when the card names the cost, so bug counts stay true.
+### OK
+- RANK METRIC: every S.rank snapshot (status / moments / end / dumps / over() wrapper) reads isSrv() ? 'maid ' + S.srv.rk : S.rank ✓ (code; read-only).
+- N4: off-middle .kscn skipped at opacity < .1 or .kscn-out ✓.
+- Real taps only: kip tiles / kipgo / ✕ via rt.tap, scroll via mouse.wheel; 0 .click() / dispatchEvent; robot-lint OK.
+- Co-op: not exercised live here. The gate and pin go through the same Seat boot (code) → not blocking for the gate; the shared pin port for the friend seat is unproven — run one co-op room after FAIL 1–3.
+- Audit: robot-audit.js (handover) still says «mixed build» inside the INVALID reasons; there is no separate «MIXED-BUILD» verdict yet → REQUIRED FOLLOW-UP (non-blocking for runners): a distinct verdict/label so mixed-build lives are counted apart from other INVALID ones.
