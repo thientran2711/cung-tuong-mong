@@ -83,12 +83,10 @@ function rcvYesO(p,t,i,o){const R=BAL.rcv,me=t===S,af=R.help.af[i],suc=i?Math.ro
 function rcvNoO(p,t,o){const F=BAL.ag.cx2.help.fail,me=t===S;
  return{i:2,id:"no",n:rcvKw(2),fx:o.fx||{},x:`được: ${o.g} · mất: hai bên quý nhau ${balSg(-F)}`,
   go:()=>{if(!me&&o.fx)rcvAp(t,o.fx);affAdd(t,p,-F);affAdd(p,t,-F);if(o.go)o.go();return{ok:0,r:o.r}}}}
-function rcvSabO(p,t,o){const H=BAL.road.hp,R=BAL.rcv.help,me=t===S,tq0=rcvQ(p,t),pn=p===S?"ngươi":p.name;
- /* o.qSelf (Lời hòa giải, Foreman D 26/11 15:34Z, law 3): when the Hoàng hậu HERSELF asks there is nobody above to tell — the gain is the same «Hoàng hậu quý <receiver> +qAf» (one BAL key), the name keeps no «với …» */
- const qs=!tq0&&o.qSelf&&typeof queenP==="function"&&queenP()===p&&p!==t&&p!==S?p:null,tq=tq0||qs;
- return{i:3,id:"sab",n:(o.n||rcvKw(3))+(tq0?` với ${rcvQn(tq0)}`:""),fx:{duc:-H.sab.duc},
+function rcvSabO(p,t,o){const H=BAL.road.hp,R=BAL.rcv.help,me=t===S,tq=rcvQ(p,t),pn=p===S?"ngươi":p.name;
+ return{i:3,id:"sab",n:(o.n||rcvKw(3))+(tq?` với ${rcvQn(tq)}`:""),fx:{duc:-H.sab.duc},
   x:`được: ${tq?rcvQn(tq)+" quý "+(me?"ngươi":t.name)+" "+balSg(R.qAf):o.g} · mất: Đức ${balSg(-H.sab.duc)}, ${pn} oán ${balSg(H.sab.oan)} · ${p===S?"ngươi":pn} mang tiếng: Danh ${balSg(-R.danh)}`,
-  go:()=>{if(!me)ap(t,{duc:-H.sab.duc});if(tq&&tq!==S)affAdd(tq,t,R.qAf);oanAdd(p,t,H.sab.oan);rcvAp(p,{danh:-R.danh});if(o.go)o.go();return{ok:0,r:typeof o.r==="function"?o.r(tq0):o.r}}}}
+  go:()=>{if(!me)ap(t,{duc:-H.sab.duc});if(tq&&tq!==S)affAdd(tq,t,R.qAf);oanAdd(p,t,H.sab.oan);rcvAp(p,{danh:-R.danh});if(o.go)o.go();return{ok:0,r:typeof o.r==="function"?o.r(tq):o.r}}}}
 /* the asks: RCVK[k] = {t card title, kind (BAL.rcv.k), line(p,x) her card text, ok(p,t,x) still possible, opts(p,t,x) the 4 answers}.
    rcvAsk(k, asker, receiver, x): an NPC receiver answers now (rcvPick); HER card comes as a queued dialog (PEND.rcvAsk, saved with the game) */
 const RCVK={};
@@ -156,7 +154,7 @@ RCVK.mediate={t:"Lời hòa giải",act:"đứng ra hòa giải với",kind:"hel
   no?null:rcvYesO(p,t,0,{n:"Nghe lời, bỏ qua",g:`oán ${fn} ${balSg(-m)}`,go:()=>{if(f)oanAdd(t,f,-m);return `${NMc(p)} đứng ra hòa giải giữa ${NM(t)} và ${fn}`}}),
   no?null:rcvYesO(p,t,1,{n:"Nguôi một nửa",g:`oán ${fn} ${balSg(-mh)}`,go:()=>{if(f)oanAdd(t,f,-mh);return `${me?"Ngươi":t.name} nguôi giận ${fn} một nửa`}}),
   rcvNoO(p,t,{g:`giữ thể diện, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} không nghe lời hòa giải của ${NM(p)}`}),
-  rcvSabO(p,t,{g:"giữ mối oán",qSelf:1,r:tq=>`${me?"Ngươi":t.name} đem chuyện ${NM(p)} hòa giải đi kể${tq?" với "+rcvQn(tq):""}`})]}};
+  rcvSabO(p,t,{g:"giữ mối oán",r:tq=>`${me?"Ngươi":t.name} đem chuyện ${NM(p)} hòa giải đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Nhờ ơn người quen rút thẻ bài (jecon ACT.blockf): the receiver is the acquaintance who owes the asker; x = key of the target.
    yes: the favour is spent (the acquaintance's thiện cảm with the asker − BAL.favorCost, as before) and the plot runs (caught / oBlock);
    «làm qua loa»: the same plot at the odds − BAL.road.hp.half (the L1876 «qua loa» minus: a half-hearted word to Kính sự phòng) */
