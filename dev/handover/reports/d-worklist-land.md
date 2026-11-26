@@ -88,3 +88,38 @@ Unchanged screens keep their CDN videos (img/_review/d-worklist-land/: svt, card
 dfu (phân cung): RE-SHOOT running at roll time — /home/user/wt/lr3-tools/selx-flow-lr3.js (= dev/test/selx-flow.js + real taps «Về nơi ở mới» on «Tin sắc phong» → jpromob «Phân cung» panel shot → «Về nơi ở mới» → the game) → /home/user/wt/lr3-out/flow3/{fold,ipad}{,-2x}.mp4 + *-phan-cung.png; then quickcheck ALONE → /home/user/wt/lr3-out/qc2.log. Successor: look at the shots, upload with `python3 dev/site/cdn_sync.py img/_review/d-worklist-land` (copy the mp4s to img/_review/d-worklist-land/dfu3-fold.mp4 / dfu3-ipad.mp4 inside the dlr3 worktree first; never commit them).
 Tools (this container): /home/user/wt/lr3-tools/{gates.sh, gates2.sh, origins.js, selx-flow-lr3.js}; logs /home/user/wt/lr3-out/; worktrees /home/user/wt/dlr3 (review/d-stack-lr3), /home/user/wt/live-f009 (bare LIVE, assembled).
 STATUS: NOT LAND READY yet (coop-ban-cung friend). FOREMAN D = session_01D3E3NaVk7n7f8KTo2enJna.
+
+## LR4 (lead #3 session_01D3E3Nb7sG6zYcKgPdneqfh, depth 3/8, START_CTX ≈ 3 % est. (get_session reads 0), roll line 28 %, ceiling 60 %)
+PRIORITY #1 CHECK: OD 0 new since lead #2 | main LIVE moved again 02f564ae → **6b5d3d05** (qc-daylife bf6dd041 + a9 promo-root «A» 42e1fd7f) | review/d-stack-lr3 8d0f7143 | claims D WORKLIST lead row (predecessor session_01D3E3NZeAqwoAJM9sKXozFJ, now this session).
+
+### Re-stack
+**review/d-stack-lr3 = c757e504 = FF from LIVE 6b5d3d05** (f36cc48e merge of 8d0f7143 + 30dda528 co-op housing fix + c757e504 selx-flow-lr4 tool).
+Conflicts → one rule: j23 / j85 / jrcp / jtabs = LIVE a9 `crsGainW(...)` gain words + stack `BAL.artLes.k` / `BAL.btn.virLes.k` khắc (both edits on the same long lines, token-level 3-way, 0 overlaps; `tốn: 2 khắc|whyTime(2)|can(2)` count 19 = same as the stack, no new typed khắc); generated rebuilt; CHANGE.txt = stack line. assemble.py auto-merged (jpromob / jsvt / jpdist / jtperc present). node --check clean.
+
+### BLOCKER coop-ban-cung «each seat sees the friend as a person» — JUDGED: test-side + one real co-op fault found and fixed
+1. **Cung nữ friend = product right (proof).** Instrumented runs dumped both seats at the check: every failure has a seat with `S.origin.k="cnv"` and a full `S.srv` (mid, rk, af, met… = a real cung nữ life), and the OTHER seat finds her in her mistress's `staff` (jcoopworld placeFriend → buildFriendSrv), not in `rivals`. Bare LIVE 6b5d3d05 fails the SAME check whenever a seat is cung nữ (cb-live1: thd + cnv → «each seat sees» FAIL; pin COOP_B_ORIGIN=cnv on bare LIVE → FAIL). The 8/15 vs 0/7 of LR3 was chance on a 2-seat draw (cnv/cn weights), not a stack origin change (no stack hunk touches the origin roll; j69 ow69Pick is a pure function of the room seed). → dev/test/coop-ban-cung.js is servant-aware: the friend lookup reads rivals, then staff; a person on a cung nữ life has no Ban cung (a consort decree, jbancung bcAsk/bcGrant) → asserted as «the other seat sees her as a servant» instead of the odds compare.
+2. **Real co-op fault found by the diagnostics (CO-OP FIRST, fixed in product): the friend's housing differed per seat.** Bare LIVE too: seat A's copy of the guest had `resHead:null` (→ Ngọc Thanh các) or a lone `pal:0` while she lived in a side hall (`resHead:5, resHall:"dong"`). Root cause: each seat's jpal palFix re-housed the friend entry like an NPC (cap trim, re-pick, lone palace), and her resHall / palLone / palWait were not carried by buildFriend. On the stack jpdist turns this into different Emperor visit / night odds for the same person on the two seats (law 1 one world, law 11 shown==applied). Fix 30dda528 (one rule: «the co-op friend's housing is HER phone's»): jcoopworld LOOK + resHall/palLone/palWait; jpal palFix (10 move sites), j95c cap trim, jpromob phân cung never move a `v.coop` entry; she still counts in occupancy and side-hall caps.
+
+Family scan (every housing write site in dev/build, before → after):
+| site | moves the friend entry before | after |
+|---|---|---|
+| jpal palFix: pal reset / palLone reset / head occupancy / lone occupancy / palace grant / lone steal / cap trim / main re-house / lone→host / spread / hallFix / «was» log | 11 unguarded (1 guarded: out-of-palace clear) | all 12 guarded |
+| j95c j95cCap (over-cap trim) | unguarded | guarded |
+| jpromob phanCungEdict (clears resHead of listed) | unguarded | guarded |
+| jbancung NPC ask loop | guarded (`!v.coop`) | unchanged |
+| j9 assignHouses | → palFix (j27) | covered |
+| jkcco «Về ở cung hảo hữu» | S only | n/a |
+| jcoopworld LOOK (blob → friend entry) | pal, resHead | + resHall, palLone, palWait |
+Diag after the fix, 3 random + 1 pinned cnv run: residence (part / pal / head / far) identical on both seats in 4/4 (incl. cung nữ seats).
+
+### GATES on c757e504
+PASS: promo-build · servant-trust · kit-promo-hook Fold+iPad · net-build · one-core-khac · svt-scan 69 / 0 unwired · law1-gifts · palace-distance 27/27 · ban-cung 33 · ka-know 6/6 · actwalk-scan · relshow-rt · relshow-bal · relshow-scan · temper-judged / moodsrc 11 / equal 36 / signs 17 all 0 wrong · temper-perception Fold+iPad · temper-outburst Fold+iPad · net-scan · selx-days · selx-days2 · selx-wire · place-rules Fold+iPad · stage-stay · promo-root (LIVE a9) · balance-pace (LIVE a9) · **coop-e2e 143/143** · coop-ban-cung 26/26 (+ 2 runs with only the «Xin» 4 below) · TIME-SPILL GUARD.
+QUICKCHECK on 30dda528 (game = c757e504, tools-only after): core gates = only the 2 known G4 rows below; TIME-SPILL GUARD PASS; browser part PASS: open 2291 ms · old save from LIVE ok + a buổi · perf median of 3 day-vs-day new/live render 266/323 ms, tab 729/797, buổi 1890/3187, tasks>200 ms 37/45. (Full quickcheck.sh hit my 25-min cap inside the perf step on ban hoa rerolls; quickcheck.js re-run alone = PASS above.)
+SAME AS BARE LIVE 6b5d3d05 (re-run there today, identical): promo-skip 2 FAIL («passed grace exam waits for a free seat, then the decree», «strike-back hits once when due») · emperor-visit 3 («forced visit did not pick her», «no empnight card», «no 2nd card») · coop-ban-cung «Xin» cards / dialog drawn 4 (n=1 dialog; seen on bare LIVE pin run) · quickcheck G4 80-dialog-fixed «kit-dialog-2 a no empty Tốn / Được cell» Fold+iPad (dialog-fixed.js on bare 6b5d3d05 today: the same 2 FAIL) + G4 90-button-crawl «Ô lưu · Lui» (known).
+
+### VIDEOS
+dfu (phân cung) RE-SHOT on c757e504, REAL taps (Playwright mouse) through the 3 selection days → «Tin sắc phong» «Về nơi ở mới» → jpromob «Phân cung» panel → «Về nơi ở mới» → the game, Fold 755x1000 + iPad 1180x820; looked at: kit dialog, Nơi ở / Vì sao rows + one row per co-resident, one button. https://ctm-img.victoria-tntt.workers.dev/img/_review/d-worklist-land/dfu4-fold.mp4 · https://ctm-img.victoria-tntt.workers.dev/img/_review/d-worklist-land/dfu4-ipad.mp4 (2× copies dfu4-fold-2x.mp4 / dfu4-ipad-2x.mp4) · stills dfu4-fold-phan-cung.png / dfu4-ipad-phan-cung.png. selx-flow PASS (every choice card visible + tapped, no danger pulse / heartbeat). Its «???» / «Người lạ» day-1 plate lines (TEXT) are the SAME on bare LIVE 6b5d3d05 (selx-flow.js run there: 3 + 5 lines) = SELSCENE pre-existing, FYI MAIN.
+Other videos unchanged (svt, card, temper, ncfix, pd: those screens' code untouched by 6b5d3d05; jpal change only moves no co-op friend entry).
+CDN folder img/_review/d-worklist-land must be wiped by the verdict giver after land (python3 dev/site/cdn_sync.py --wipe-review d-worklist-land).
+STATUS: **LAND READY review/d-stack-lr3 c757e504 (FF from LIVE 6b5d3d05)** — sent to FOREMAN D.
+Tools (this container): /home/user/wt/lr4-tools/{gates.sh, charmerge.py}; logs /home/user/wt/lr4-out/; worktrees /home/user/wt/dlr4 (review/d-stack-lr3), /home/user/wt/live6b (bare LIVE).
