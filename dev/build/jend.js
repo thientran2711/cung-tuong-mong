@@ -111,7 +111,25 @@ function kesFx(M,m,t){if(m.__kesFx)return;try{Object.defineProperty(m,"__kesFx",
 function kesShow(){const M=document.getElementById("modal");if(!M)return;const m=typeof Q!=="undefined"?Q[0]:null;const t=M.hidden?"":kitEndType(m);
  if(!t){if(M.querySelector(":scope>.kes-bg"))kesClear(M);return}kesDecorate(M,m,t);kesFx(M,m,t)}
 /* pre: the card carries the frame class BEFORE the base paints it, so the kit size fit measures the full-screen frame; post: layers + entrance */
-if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{const m=typeof Q!=="undefined"?Q[0]:null;const t=kitEndType(m);if(t)kesMark(m,t)}catch(e){console.error("kes",e)}
+/* ---------- E98 END CARD ON TOP: the end card is the top and ONLY card of a dead life (whole family, dev/test/endcard-top.js) ----------
+   Robots (E-S2 8/8 lives, E-S3 4 lives, 11+ ending kinds): the «Bổng lộc tháng …» chest, the month card and other day/month popups opened over or
+   before the life end card. ONE rule for every popup source of a life that has ended (S.dead, kit j93 kmLifeOver):
+   (1) cards: while the life end card (kend) is in Q, every other card is dropped — pushed after it, unshifted before it, or queued before the death
+       (month card, news, events, co-op cards): kesFront() before every draw;
+   (2) kit scenes (chest, edict, bloom, reward, learn, gain…): j93 kmPush / kmPump drop them, kitEndClear voids the one on screen at the death;
+   (3) the popups that are NOT kit scenes (toasts, notices, coin / stat / item flights, podium, the new-day panel, the night tablet): KES_GATE below
+       does nothing for a dead life; kitEndToasts() hides the ones already up at the death.
+   The next life (start → S.dead false) is untouched; co-op: a seat's run on the host (CW.ctx) is never gated here (jcoopthin captures it first). */
+function kesIsEnd(m){return !!(m&&(m.kend||(/\bend\b/.test(String(m.cls||""))&&m.t==="Kiếp này")))}
+function kesFront(){try{if(typeof Q==="undefined"||Q.length<2||typeof kmLifeOver!=="function"||!kmLifeOver())return;const k=Q.find(kesIsEnd);if(!k)return;Q.length=0;Q.push(k)}catch(e){console.error("kes front",e)}}
+function kitEndToasts(){try{const t=document.getElementById("rtoast");if(t)t.classList.remove("on");const l=document.getElementById("kupdline");if(l)l.remove();
+ document.querySelectorAll(".kcoinfly,#kpodov").forEach(e=>e.remove())}catch(e){}}
+window.kesFront=kesFront;window.kitEndToasts=kitEndToasts;
+const KES_GATE=["srvToast","kitLine","kitStatFx","kitCoins","kitGain","kitLose","kitLearn","kitItemFx","kitNotice","kitKnow","kitReward","stipReveal","kitEdict","kitGloom","kitBloom",
+ "kitAlarm","kitFlyItem","kitPodium","kitPodiumShow","kitFlipTablet","kitFlipNote","kitNewDay","dawn","kitDayTitleShow","kitLineToast"];
+for(const n of KES_GATE)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(typeof kmLifeOver==="function"&&kmLifeOver())return null;return f.apply(this,arguments)}}
+if(typeof closeModal==="function"){const c0=closeModal;closeModal=function(){kesFront();return c0.apply(this,arguments)};window.closeModal=closeModal}
+if(typeof showModal==="function"){const s0=showModal;showModal=function(){kesFront();try{const m=typeof Q!=="undefined"?Q[0]:null;const t=kitEndType(m);if(t)kesMark(m,t)}catch(e){console.error("kes",e)}
   const r=s0.apply(this,arguments);try{kesShow()}catch(e){console.error("kes",e)}return r};window.showModal=showModal}
 /* a rare ending (Kỳ ngộ, j97): the arc's result card that r97Take queues (card67 "result" → kit panel) is that ending's screen */
 if(typeof r97Take==="function"){const r0=r97Take;r97Take=function(){const before=new Set(typeof Q!=="undefined"?Q:[]);const r=r0.apply(this,arguments);
