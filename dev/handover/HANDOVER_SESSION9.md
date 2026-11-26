@@ -405,3 +405,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 22:56Z 164 relay: sếp ~22:45Z REVERSED — kỳ sắc phong stays on festivals as today (no 3-month rhythm); OD rewritten by 164; PACE-SPEED cancelled it.
 - 22:57Z PACE-SPEED status fb404ee0 had BAL.ex.every 3 (3-month kỳ) → owner FINAL 22:45Z dropped it → told to REMOVE (keep other rulings) → robot table → RV-163C.
 - 22:57Z RV-163 HOLD wording-marks 9047c283 (stale build, kit-ton-row +2 Fold hidden-outcome, endTurn unproven) → WORDING-MARKS told (forced-endTurn probe). kit-ton-row 4/14 already red on lc25-wf → LC25 checks vs LIVE. RV-163 rolled → archived; opened RV-164 session_01Rc5AsK6n6JQHacgiCCd7ks (sonnet UI): wording-marks re-review, ring-build(+plaque-post), kit-stage-r4. Seats told.
+- 22:58Z KK48 kit-resfold-r2 8740785b on LIVE 4cfcda61 (one fold jnsieve, one Sổ ghi record, empty band fixed) → RV-163C (via 164). MAIN LOOK of empty band pending KK48 shot list → then send sếp.
