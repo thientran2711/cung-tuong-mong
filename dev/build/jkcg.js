@@ -29,9 +29,12 @@ const KCMAP={phu:{img:"img/map-kc-nha.webp",js:"img/map-kc-hotspots-nha.json",ga
  kinh:{img:"img/map-kc-kinh.webp",js:"img/map-kc-hotspots-kinh.json",gate:"kc_nha",to:"phu",alt:"Kinh thành"}};
 const KCMAPH={};
 function kcgMapLoad(w){if(KCMAPH[w]!==undefined)return;KCMAPH[w]=null;try{fetch(KCMAP[w].js,{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{
-  if(j&&j.places){KCMAPH[w]=j.places;try{if(S&&isKc()&&tab==="go")render()}catch(e){}}else delete KCMAPH[w]})}catch(e){delete KCMAPH[w]}}
+  if(j&&j.places){KCMAPH[w]=j.places;try{if(S&&isKc()&&tab==="go")render()}catch(e){}}else{delete KCMAPH[w];KCMAPF[w]=1;try{if(S&&isKc()&&tab==="go")render()}catch(e){}}})}catch(e){delete KCMAPH[w];KCMAPF[w]=1}}
+const KCMAPF={};/* a hotspot file that failed to load: the plain list stands in (never a wait without end) */
 (function(){const m0=kcMapHTML;kcMapHTML=function(){
  const L0=[{k:"phu",label:"Trong phủ"},{k:"kinh",label:"Kinh thành"}];const w=ktSubGet("kcgo",L0)==="kinh"?"kinh":"phu";kcgMapLoad(w);const H=KCMAPH[w];
+ /* KIT §85.11 (MAIN 149 26/11): while the hotspots load, the map area waits with the kit wait cue — never the stand-in list flashing first */
+ if(!window.__mapList&&!H&&!KCMAPF[w])return kitSubTabs("kcgo",L0).html+`<div class="mapv kcgwait"><div class="mapsc"><div class="mapw" data-kmhold="1" style="width:100%;min-height:calc(50*var(--kvh,1vh))"></div></div></div>`;
  if(window.__mapList||!H)return (H?`<div class="ph"><button class="btn" data-maplist="0">Xem bản đồ<small>${KCMAP[w].alt}</small></button></div>`:"")+m0.apply(this,arguments);
  const T=kitSubTabs("kcgo",L0,w==="kinh"?kitInfo("Ra phố","Ra phố cần tỳ nữ đi cùng; buổi tối không ra ngoài"):"");const z=window.__mapZ||1;
  const spot=(k,P)=>{const b=P.box;const y=Math.max(b.y,.04);/* a box on the picture's top edge (Hoa viên) keeps its label on the map */const pos=`left:${b.x*100}%;top:${y*100}%;width:${b.w*100}%;height:${(b.h-(y-b.y))*100}%`;

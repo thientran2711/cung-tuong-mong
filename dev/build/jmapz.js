@@ -178,3 +178,29 @@ if(typeof kpmParts==="function"){
   const m=document.querySelector("#sc-t .rmsg");if(!m)return r;const N=mapzStaffNow(h.k);const n=N?N.in[h.part].length:0;const t=` · ${hallRole(h.part)}. ${n?`${n} cung nhân đang ${h.part==="dong"?"quét dọn, sắp đồ":h.part==="tay"?"nghỉ ngơi":"đứng hầu"} ở đây.`:"Không có ai ở đây."}`;if(m.textContent!==t){m.textContent=t;m.title=t}}catch(e){}return r}})();
 /* kit sample page (KIT §85.10): zone tag + fog, day / night */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§85.10 khu Dư đồ",title:"DƯ ĐỒ ZONES · zone tag (same slip, one count) + fog layer day / night",where:"Dư đồ overview (zone tags Nội vụ, Hoàng tử sở) and zone zoom (fog over the rest)",html:()=>`<div style="display:flex;gap:10px;flex-wrap:wrap;max-width:460px">${["","night"].map(n=>`<div class="mapv" data-sky="${n}" style="position:relative;width:200px;height:120px;border-radius:6px;overflow:hidden;background:#cdbb97"><div class="mapw" style="position:absolute;inset:0;width:100%"><div class="kmfog" style="${mapzFogVars({x:.25,y:.3,w:.5,h:.4})};animation:none"></div><span class="mspot mzone" style="position:absolute;left:20%;top:30%;width:60%;height:40%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0;background:none"><span class="mlab">Nội vụ</span><span class="mmeta">9 bóng</span></span></div></div>`).join("")}</div>`})}catch(e){}
+/* ================= (5) EVERY MAP WAITS FOR ITS PAINTING + MARKS (MAIN 149 26/11, family of k4/k17; law: no code stand-in visible; KIT §85.11) =================
+   On a slow / first load the Dư đồ showed the bare board, grey tag boxes and an EMPTY box for her mark for ~2.5 s. Now every map (.mapw: palace Dư đồ all zooms,
+   courtyard level, home phủ / Kinh thành / garden maps) keeps its tags, mark and leader lines INVISIBLE (visibility only: the layout stays, mapFit still measures)
+   until the painting (.mapimg) and every mark picture (.kmmapmk img) have loaded; meanwhile the map area shows the ONE kit wait cue (kitSpin + CTM_WAIT.picWait,
+   KIT §59.3) in the middle. A picture that fails or hangs never blocks: after KIT_MAPWAIT.max ms the map shows as it is. */
+const KIT_MAPWAIT={max:8000,fade:220};
+function mapzWaitCheck(w){try{if(!w||!w.isConnected)return;const img=w.querySelector(":scope>.mapimg");if(!img&&!w.dataset.kmhold){w.classList.add("kmready");return}
+ const lab0=(window.CTM_WAIT&&CTM_WAIT.picWait)||"Đang thỉnh tranh…";if(!img){if(!w.querySelector(":scope>.kmwait"))w.insertAdjacentHTML("beforeend",`<div class="kmwait" role="status">${typeof kitSpin==="function"?kitSpin({s:true,label:lab0}):""}<span>${lab0}</span></div>`);return}
+ const pics=[img].concat([...w.querySelectorAll(".kmmapmk img")]);const done=i=>i.complete&&(i.naturalWidth>0||i!==img);
+ const ok=pics.every(done)||(w.__kmT0&&Date.now()-w.__kmT0>KIT_MAPWAIT.max);
+ if(ok){if(!w.classList.contains("kmready")){w.classList.add("kmready");const c=w.querySelector(":scope>.kmwait");if(c)c.remove()}return}
+ if(!w.__kmT0){w.__kmT0=Date.now();setTimeout(()=>mapzWaitCheck(w),KIT_MAPWAIT.max+50)}
+ if(!w.querySelector(":scope>.kmwait")){const lab=(window.CTM_WAIT&&CTM_WAIT.picWait)||"Đang thỉnh tranh…";w.insertAdjacentHTML("beforeend",`<div class="kmwait" role="status">${typeof kitSpin==="function"?kitSpin({s:true,label:lab}):""}<span>${lab}</span></div>`)}
+ for(const i of pics)if(!done(i)&&!i.__kmL){i.__kmL=1;const f=()=>mapzWaitCheck(w);i.addEventListener("load",f);i.addEventListener("error",()=>setTimeout(f,60))}}catch(e){try{w.classList.add("kmready")}catch(x){}}}
+function mapzWaitAll(){try{document.querySelectorAll(".mapw:not(.kmready)").forEach(mapzWaitCheck)}catch(e){}}
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);mapzWaitAll();return r}})();
+try{new MutationObserver(()=>{if(document.querySelector(".mapw:not(.kmready)"))mapzWaitAll()}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+(function(){const st=document.createElement("style");st.id="kit-mapwait";st.textContent=`
+.mapw:not(.kmready)>:not(.kmwait){visibility:hidden!important}
+.mapw:not(.kmready)>.mapimg{opacity:0}
+html body .game .mapv .mapsc>.mapw[data-kmhold]{margin:0!important;width:100%!important;flex:1 1 auto!important;align-self:stretch}
+.mapw.kmready>.mapimg{animation:kmwaitIn ${KIT_MAPWAIT.fade}ms ease-out}
+.mapw>.kmwait{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:70;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--k-card,#fffaf0);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 4px 14px rgba(60,30,10,.25);font:600 .82rem var(--k-font,inherit);color:var(--k-ink,#5a3a1a);pointer-events:none;white-space:nowrap}
+@keyframes kmwaitIn{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mapw.kmready>.mapimg{animation:none}}
+`;document.head.appendChild(st)})();
