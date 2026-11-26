@@ -61,15 +61,19 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
   const ACTK=await p.evaluate(()=>Object.keys(ACT));
   for(const k of ACTK){const r=await p.evaluate((k)=>{try{Q.length=0;closeModal&&closeModal();window.kaLastResult=null;S.bac=Math.max(S.bac,500);S.suc=Math.max(S.suc,80);used=0;
     const L=liveRivals(false).filter(v=>!sameHouse(S,v)&&ACT[k].ok(S,v));const v=L[0];if(!v)return {k,n:ACT[k].n,skip:'no target'};
-    const i=rivals.indexOf(v);const pt0=window.ptHarmSend;window.ptHarmSend=()=>false;try{doAct(i,k)}finally{window.ptHarmSend=pt0}let dl='';for(let g=0;g<3&&Q.length&&!window.kaLastResult;g++){const m=Q[0];dl+=(m.t||'')+';';const j=(m.opts||[]).findIndex(c=>!c.off&&!/^Thôi/.test(c.n||''));if(j<0){Q.shift();continue}try{DQ.user=1}catch(e){}chooseM(j)}const R=window.kaLastResult;Q.length=0;try{closeModal()}catch(e){}
-    return {k,n:ACT[k].n,dl,seal:R&&R.seal,rows:R?R.rows.map(r=>r.label+': '+r.items.join(' | ')):null,sen:R&&R.sentence}}catch(e){return {k,err:String(e).slice(0,120)}}},k);
+    try{const K=k61S();if(K)K[kOf61(v)]=3}catch(e){}/* she knows her (a deed is only on a person she knows: j61) */
+    const i=rivals.indexOf(v);const pt0=ptHarmSend;ptHarmSend=()=>false;let dl='',R=null;try{doAct(i,k);R=window.kaLastResult;
+    /* her own dialogs: «Bày mưu» → «Ra tay ngay», the road card → «Làm như thường», a picker → its first choice; the LAST card is the deed's */
+    for(let g=0;g<5&&Q.length;g++){const m=Q[0];dl+=(m.t||'')+';';const O=m.opts||[];let j=O.findIndex(c=>/^Ra tay ngay/.test(c.n||''));if(j<0)j=O.findIndex(c=>/^Làm như thường/.test(c.n||''));if(j<0)j=O.findIndex(c=>!c.off&&!/^Thôi/.test(c.n||''));if(j<0){Q.shift();continue}try{DQ.user=1}catch(e){}window.kaLastResult=null;chooseM(j);if(window.kaLastResult)R=window.kaLastResult}}finally{ptHarmSend=pt0}Q.length=0;try{closeModal()}catch(e){}
+    const lg=S.logs.slice(0,6).map(plain).join(' ‖ ');
+    return {k,n:ACT[k].n,dl,lg,seal:R&&R.seal,rows:R?R.rows.map(r=>r.label+': '+r.items.join(' | ')):null,sen:R&&R.sentence}}catch(e){return {k,err:String(e).slice(0,120)}}},k);
    OUTJ.scan.push(Object.assign({via:'doAct'},r))}
   OUTJ.two=await p.evaluate(()=>{try{Q.length=0;window.kaLastResult=null;const v=liveRivals(false).find(v=>!sameHouse(S,v));const b=rsnap();
     const r0=window.roll;window.roll=()=>true;let r;try{r=pillowDo(v,S,100)}finally{window.roll=r0}log(`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.`);resultShow("Trong cung vừa qua",b,null);const R=window.kaLastResult;
     return {r,seal:R&&R.seal,rows:R?R.rows.map(r=>r.label+': '+r.items.join(' | ')):null}}catch(e){return {err:String(e)}}});
   ok(OUTJ.two&&OUTJ.two.rows&&OUTJ.two.rows.some(x=>/^Ai làm: .*nói xấu ngươi bên gối · thành/.test(x)),'two-way: «Ai làm» row for an NPC deed on her',OUTJ.two);
   ok(!p.errs.length,'scan: no page errors',p.errs.slice(0,3));await p.close()}
- for(const s of OUTJ.scan)console.log(s.via.padEnd(6),String(s.n||s.k).padEnd(24),s.dl?'['+s.dl.slice(0,30)+']':'',s.skip?'SKIP '+s.skip:s.err?'ERR '+s.err:`${s.seal} | ${(s.rows||[]).join(' || ')}`.slice(0,330));
+ for(const s of OUTJ.scan)console.log(s.via.padEnd(6),String(s.n||s.k).padEnd(24),s.dl?'['+s.dl.slice(0,30)+']':'',s.skip?'SKIP '+s.skip:s.err?'ERR '+s.err:`${s.seal} | ${(s.rows||[]).join(' || ')}`.slice(0,330)+(process.env.OBLG&&s.lg?'\n      LOG '+s.lg.slice(0,400):''));
  console.log('two-way',JSON.stringify(OUTJ.two));
  /* 4 old save */
  {const p=await boot(b,{width:755,height:1000},7);const r=await p.evaluate(()=>{try{save();const raw=localStorage.getItem(Object.keys(localStorage).find(k=>/ctm|save|slot/i.test(k))||'');return !!raw}catch(e){return String(e)}});

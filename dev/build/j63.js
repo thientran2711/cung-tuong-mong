@@ -279,7 +279,7 @@ const KA_AIMK=[["sung","Sủng"],["danh","Danh"],["suc","Sức"],["loyal","thi�
 function kaAim(v,o){try{if(!S||!v)return null;const b0={};for(const [k] of KA_AIMK)if(typeof v[k]==="number")b0[k]=v[k];b0.rank=v.rank;b0.confined=v.confined||0;b0.out=!!v.out;b0.alive=v.alive!==false;
   const x=Object.assign({seq:S.logSeq||0,t:Date.now(),v,b0},o||{});KA_AIM.push(x);if(KA_AIM.length>40)KA_AIM.splice(0,KA_AIM.length-40);return x}catch(e){return null}}
 function kaAimOk(x){let o=null;try{o=typeof x.ok==="function"?x.ok():x.ok}catch(e){}return o===true||o===1?true:o===false||o===0?false:o==="soft"?"soft":null}
-function kaAimsOf(b){if(!b)return[];/* RV r1 #5: the span is the log seq + «used» only (no wall clock: a card held behind a dialog / minigame may come minutes later) */return KA_AIM.filter(x=>!x.used&&x.seq>=(b.seq||0))}
+function kaAimsOf(b){if(!b)return[];/* RV r1 #5: the span is the log seq + «used» only (no wall clock: a card held behind a dialog / minigame may come minutes later); an OPEN act's aim (x.open: doAct / talk / a dialog option, closed only by its card, its cancel or the idle board — jverdict) belongs to every card until then, even one whose snapshot was taken inside that act */return KA_AIM.filter(x=>!x.used&&(x.open||x.seq>=(b.seq||0)))}
 /* the verdict of HER act carried by this span (the last own aim with a roll) + its sentence; kaAimUse marks the aims shown (once) */
 function kaAimVerdict(b){const AIM=kaAimsOf(b);let ok=null,sen="",n="";for(const x of AIM){if(x.by)continue;const o=kaAimOk(x);if(o!==null){ok=o;n=x.n||"";sen=x.sen?(typeof x.sen==="function"?x.sen(o):x.sen):""}}return {AIM,ok,sen,n}}
 function kaAimUse(L){for(const x of L||[])if(!x.outer)x.used=1}/* an outer act's aim (doAct, talk …) is closed by its wrapper when the act ends: two cards of one act both show it */
@@ -317,8 +317,8 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   const P=named?((okx===false||okx==="soft")&&!P0.length&&rel.length?['<span class="ef n">không hề hấn gì</span>']:P0).concat(rel):[];
   const txt=P.length?P.join(", "):!ran&&(typeof x.later==="function"?x.later():x.later)?`<span class="ef n">chưa rõ — ${typeof x.later==="function"?x.later():x.later}</span>`:!named||okx===true?'<span class="ef n">chưa rõ — tai mắt sẽ báo</span>'/* done, but nothing she can see yet (planted proof, a sent hand) */:okx===false||okx==="soft"?'<span class="ef n">không hề hấn gì</span>':"";/* no number moved on a done deed: the sentence says what happened (a wet robe, a gift) — no empty row */
   if(txt)K.tgt.push(`<span class="ef t">${who}:</span> ${txt}`)}
- {const C=WC.join(" ");const seen=new Set();for(const x of AIM){if(!x.by||x.v!==S||seen.has(x.by)||!x.by.name||!kaNamed(x.by)||!C.includes(x.by.name))continue;seen.add(x.by);const o=kaAimOk(x);
-  K.by.push(`<span class="ef t">${kaWho(x.by)}:</span> ${kaPlain(x.n||"")}${o===true?' · <span class="ef r">thành</span>':o===false?' · <span class="ef g">không thành</span>':o==="soft"?' · <span class="ef n">bỏ dở</span>':""}`);if(K.by.length>=4)break}}
+ {const C=WC.join(" ");const seen=new Set();for(const x of AIM){const bn=x.pub||x.by&&x.by.name;/* pub: the Emperor / Thái hậu, known to all by title */if(!x.by||x.v!==S||seen.has(x.by)||!bn||!(x.pub||kaNamed(x.by))||!C.includes(bn))continue;seen.add(x.by);const o=kaAimOk(x);
+  K.by.push(`<span class="ef t">${x.pub||kaWho(x.by)}:</span> ${kaPlain(x.n||"")}${o===true?' · <span class="ef r">thành</span>':o===false?' · <span class="ef g">không thành</span>':o==="soft"?' · <span class="ef n">bỏ dở</span>':""}`);if(K.by.length>=4)break}}
  return [G,B,K]}
 /* KIT PART kitKemRow(K) (KIT 7 + 28.6, kit sample page): the KÈM line of a result — other people's feelings, one summary per kind and
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
