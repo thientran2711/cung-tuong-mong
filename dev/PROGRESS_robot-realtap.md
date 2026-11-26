@@ -378,3 +378,12 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   reused by the next resume and by the co-op friend seat) and moves there before the life starts; every resume / restart / unstick reload goes to that port (re-served
   after a container restart). The gate compares b AND t. Co-op: both seats boot through the same Seat → same pin port; the room server is absolute (ctm-coop workers.dev),
   so a local page plays co-op. Proof: PIN1 on 8809 → pinned to :8907, buổi 51; resume given the OLD url :8810 (dd1ce3d0ffa1) → still :8907, buổi 66, builds = 1.
+- RANK METRIC (F #21; MAIN 157 + PROMO-ROOT3 10:01Z/10:40Z): every page snapshot that read S.rank (gate/status/moments/end/dumps) now reads the ROAD's rank:
+  isSrv() ? 'maid ' + S.srv.rk : S.rank, so a cung-nữ life reports «maid N» in report lines, STATUS, moments and the json.
+- ITEM PICK GRID (F #21, Foreman E 10:03Z E-S4 15 min idle / 10:23Z E-S8 ~30 tile taps then «Lui»): jgpick «Tặng quà / Biếu quà làm lành / Dâng quà / Cài vào rương»
+  = tiles [data-kip] that only SELECT + ONE confirm button.kipgo under the grid (often below the fold on Fold). Now: confirm enabled → real wheel scroll until it is on
+  screen, real tap; confirm disabled → set that item aside and tap the next non-greyed tile; every item tried and no usable confirm → [game] «item pick grid dead-end»
+  with the card text, then the ✕. RT_TEST_KIP=<buổi> self-test (the game's own pushDil(mkP('giftpick'))). Proof: Fold s41 → 3 real scrolls, kipgo tapped, gift given
+  (#rtoast) in 6 s; iPad s42 / Fold s41 later day → every confirm disabled («TỐN 2 khắc», no time left) → dead-end logged + ✕ in 18–24 s (was 15 min / 30 taps).
+- BIG #9 N4: the off-middle .kscn rule skips a scene at opacity < .1 or .kscn-out (fading).
+- Regression (LIVE 6b5d3d05, pinned :8907): RT_TEST_BOARD=vu Fold raw 10; RT_TEST_EXAM=1 iPad [5,5]; Fold speed → buổi 46, iPad cnv → buổi 26, 0 DEAD.
