@@ -96,3 +96,23 @@ Nit: jagacts.js:71 pardon catch-fallback (`S.out=false;S.confined=0` when restor
 2. jagacts.js:71 catch fallback — add the same line.
 3. jkc.js:578 (`S.out=0;S.pal=null` palace entry from the kc home life) and jkc2.js:400 (`K.inPal=1…S.out=0`) — REAL gap, not only a nit: during the home life monthTick already initialised `S.forgetAt`, so it can be past when she enters the palace → a rank-0 entrant with Sủng 0 / Danh ≤ 5 can be forgotten at once. Set the grace at entry too.
 Plan: one helper in j14 `function forgetSafe(p){if(p===S)S.forgetAt=S.turn+1+BAL.danhG.forgetGrace}` used by all 4 sites (restore keeps it). Scan: `grep -n "S.out=0\|S.out=false" dev/build/j*.js` (4 sites today). Test: extend dev/test/promo-root.js with (5) catch-fallback path (stub restore to throw, call agActs pardon) and (6) kc entry (S.kc home life with forgetAt in the past → enter palace → free for forgetGrace months). Own commit on review/promo-root, then sha to MAIN 150 + LC19.
+
+## PROMO-ROOT2 (successor worker, 26/11) — the open nit closed for the whole family
+PRIORITY #1 CHECK: OD «bỏ quên|forget|grace» 0 rulings | main j3.js:158 / j14.js:8 | review/promo-root 8169d9da + e03b8369 | claims PROMO-ROOT only.
+One helper `forgetSafe(p)` (j14, before restore): `if(p===S)S.forgetAt=S.turn+1+BAL.danhG.forgetGrace` (number stays BAL, law 4).
+Scan: `grep -n "S\.out *= *\(0\|false\)\|\.out=0\|\.out=false\|S\.confined *= *0" dev/build/j*.js` + `inPal=1` + `srvRise` (every path that frees her from lãnh cung or makes her a consort).
+
+| site | path | before | after |
+|---|---|---|---|
+| j14 restore() | đại xá, cầu xin, Thái hậu (jagacts:116), every restore caller | own inline line | forgetSafe(S) |
+| jagacts.js:71 hhAct pardon catch | restore throws → fallback frees her | NO grace (test (5): forgetAt -9, free 0/6) | forgetSafe(S) — free 6/6 |
+| jkc.js:578 kcEnter | kỳ tuyển palace entry (home life) | forgetAt from the home life, already past (test (6): free 0/6) | forgetSafe(S) — 6/6 |
+| jkc2.js:400 kc2Enter | kỳ tuyển (kc2) entry | same gap (test (7): free 1/6) | forgetSafe(S) — 6/6 |
+| j42.js:448 srvRise | maid raised to Đáp ứng (all callers: jagmaid, j97, jrd_cnv) | NEW find: old/past forgetAt (test (8): free 4/6) | forgetSafe(S) — 6/6 |
+| j7:155, j72:495, j8:533, j14:46, jagacts3 p3Free, jworld:215, jcoopworld:510 | NPC releases (v≠S) | n/a | not in family: the clock is her own (j3 monthTick reads S only) |
+| j3:152 / jworld:214 / j54:220 S.confined | cấm túc ends | — | not in family: she never left the palace; the rule is «since entry / last left lãnh cung» (law 16: not changing a working rule) |
+
+Tests (worktree, built by dev/site/build_site.sh): dev/test/promo-root.js PASS (cases 1–8; before the fix 4 BAD on 5–8). coop-e2e 143/143 PASS.
+quickcheck (sha 346da1ae): G4 90-button-crawl FAIL only «Ô lưu · Lui» (pre-existing on LIVE, per brief) · open ok · old save ok · perf gate flips on buổi ms.
+Perf evidence (buổi ms is bimodal ~1.5–2.3 s or ~4.2–6 s on EVERY build; the median of 5 flips by which mode wins): mine 4827/5561/4187 vs live 1913/2216/1820 (runs mine 5065,1641,5030,4187,1954 · live 1649,1820,5411,4653,1674); base e03b8369 2327 vs live 2054 PASS with runs 1494,4513,2230,2327,4886 · live 1755,2054,6028,1452,4844.
+Proof the change is not on the perf path: forgetSafe wrapped with a counter → 0 calls over a new life + 8 months of bot play (it runs only at a lãnh cung exit / palace entry). The 5 code lines are one assignment each. Recommend MAIN treat the buổi flip as gate noise (perfgate bimodal), or rerun quickcheck once.
