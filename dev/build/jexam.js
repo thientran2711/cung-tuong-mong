@@ -71,14 +71,11 @@ function exChance(p){const P=exPlan(p);const rnd=exRng(((p.id||7)*977+S.turn*131
 const EX_SKIP=/^Ghế |Chờ ghế|Đang tranh ghế/;let exQ0=null;
 function exBase(p){const to=rkOf(p)+1;return (exQ0?exQ0(p):[]).filter(x=>!EX_SKIP.test(x[1])&&!(to===7&&/Cách lần/.test(x[1])))}
 function exElig(p){if(!exOn()||!p||rkOf(p)>=7||p.out||p.confined||exSrv(p)||(p!==S&&p.alive===false))return false;const e=exS(p);if(e.grace===e.to&&e.to<7)return true;const L=exBase(p);return L.length>0&&L.every(x=>x[0])}
-function exCanSit(p){const e=exS(p);return !e.pass&&!(e.cd>S.turn)&&exElig(p)&&(e.grace===e.to||exKy())}
+function exCanSit(p){const e=exS(p);return !e.pass&&!(e.cd>S.turn)&&exElig(p)}
 /* dates in the game's own words (kitDate) */
 function exDateT(turn,tuan){const d=turn-S.turn;const m0=S.month-1+d;const m=((m0%12)+12)%12+1,y=S.year+Math.floor(m0/12);
  try{if(typeof kitDate==="function")return kitDate(m,y,tuan)}catch(e){}return `tháng ${m}${tuan!=null?" "+TUAN[tuan]:""}`}
 function exDateW(w){return exDateT(Math.floor(w/3),w%3)}
-/* the kỳ khảo hạch: the regular exam opens only in its months (BAL.ex.every / at, calendar months); exKyNext = turn of the next kỳ month from now */
-function exKy(t){const B=BAL.ex;if(!B.every)return true;const m=(((S.month-1+((t==null?S.turn:t)-S.turn))%12)+12)%12;return (m%B.every)===((B.at||0)%B.every)}
-function exKyNext(){let t=S.turn;for(let i=0;i<24&&!exKy(t);i++)t++;return t}
 /* the examiner's name only: how her liking moves the bar is said once, on the «Mức đỗ» row (exBarTxt) — keeps the round frame short on phones */
 function exExTxt(P){return P.ex?P.ex.name:"Quan Nội vụ phủ"}
 function exBarTxt(P){return P.sh?`${P.bar} phần (mức ${P.bar0}, ${P.sh>0?"hạ":"nâng"} ${Math.abs(P.sh)} vì ${P.ex.k==="th"?"Thái hậu":"Hoàng hậu"} ${P.sh>0?"quý":"không ưa"} ngươi)`:`${P.bar} phần`}
@@ -88,7 +85,7 @@ function exRow(p){const e=exS(p),to=e.to,rk=exRk(to);if(e.pass)return[true,`Đã
  if(e.cd>S.turn)return[false,`Khảo hạch tấn phong: ${e.lapse?"lỡ hạn thi":"vừa trượt"}, chờ đến ${exDateT(e.cd)} mới được thi lại`];
  if(p===S&&e.w1!=null)return[false,`Khảo hạch tấn phong ${rk}: được thi, hạn đến hết ${exDateW(e.w1)}`];
  if(e.grace===to)return[false,`Khảo hạch tấn phong ${rk}: được ân thi ngay (${exGw(e)})`];
- return[false,`Khảo hạch tấn phong ${rk}: đủ các điều kiện trên thì được thi ở kỳ khảo hạch ${exKy()?"tháng này":(d=>d.charAt(0).toLowerCase()+d.slice(1))(exDateT(exKyNext()))}`]}
+ return[false,`Khảo hạch tấn phong ${rk}: đủ các điều kiện trên thì được thi`]}
 (function(){if(typeof promoReqP!=="function")return;exQ0=promoReqP;const q1=promoReqP;promoReqP=function(p){const L=q1.apply(this,arguments);
  try{if(exOn()&&p&&rkOf(p)<7&&!p.out&&!exSrv(p))L.push(exRow(p))}catch(e){console.error("exam row",e)}return L}})();
 
@@ -180,7 +177,7 @@ function exTick(){if(!exOn()||S.dead||S.out||exSrv(S)||S.rank>=7)return;const e=
  if(e.w1!=null){if(w>e.w1){e.w0=e.w1=null;e.cd=S.turn+exCd(e.to);e.lapse=1;window.__exN.lapse++;exDrop();
    log(`<span class="r">Lỡ hạn khảo hạch tấn phong ${exRk(e.to)}</span>: chờ đến ${exDateT(e.cd)} mới được thi.`)}
   else if(!exElig(S)){e.w0=e.w1=null;exDrop()}return}
- if(e.cd>S.turn||!exElig(S)||!(e.grace===e.to||exKy()))return;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;const P=exPlan(S);
+ if(e.cd>S.turn||!exElig(S))return;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;const P=exPlan(S);
  log(`<b class="g">Được dự khảo hạch tấn phong ${exRk(e.to)}</b>: ${P.ex?P.ex.name:"Nội vụ phủ"} khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch tấn phong» ở Hành sự.`);exAdd()}
 /* the act card: true cost, the honest chance (as one who plays at her own level), what a fail costs */
 function exCard(){const e=exS(S),P=exPlan(S),o=oddsCl(exChance(S));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");

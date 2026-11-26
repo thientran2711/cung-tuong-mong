@@ -13,9 +13,7 @@ Object.assign(BAL,{ad:{hapP:65,hap2:35,strollP:80,rareMinGrade:3,nightSneak:10,n
    high one 27-40 % (cooldown 3 months), so Quý phi -> Hoàng hậu took years; now mid ~75-93 %, high ~64-72 % (the odds the exam was designed
    for, PROGRESS_promo-exam). dev/tmp probe: exChance at ranks 0/3/5. */
 /* PACE-SPEED (owner OD 26/11 ~19:10Z (D) «điều kiện để lên những bậc cao phải khó hơn», law 5; (A) the low ranks quicker): bar [22,25,28] -> [21,26,30]. */
-/* every / at = the FIXED rhythm of the kỳ khảo hạch (owner 26/11 ~22:40Z via MAIN 164): a regular exam opens only in calendar months m with (m − 1) % every = at
-   (every 3 → tháng 1, 4, 7, 10), for her and every NPC; full conditions + exam as before. A grace exam («được ân thi ngay») keeps its own timing. */
-BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[21,26,30],every:3,at:0,wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
+BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[21,26,30],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
  /* servant / ma ma road (review/promo-rules; maid-ladder-6: six rungs): bar and wait by target, index 1..5 = SRK.maid rank, 6 = ma ma (BAL.srvRk.mama) */
  srvBar:[0,18,19,20,22,24,24],srvCd:[1,1,1,1,2,2,3]};
 /* NO-WORD-GAMES family C (jnwq, owner 16/11 07:20Z): the four promotion-exam games (le lay · tc sort · xa clue · thq seat). tier = level tier 0..2 (+shift;
