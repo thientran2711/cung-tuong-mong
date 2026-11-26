@@ -1,0 +1,2946 @@
+{
+ "job": {
+  "id": "coop-rt-u3c63-host-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 731,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8732/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "7959f1b5",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 23,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 731,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Gieo lại quẻ"
+   },
+   {
+    "at": 1818,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2544,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2555,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3827,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4170,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 73,
+  "kpopTrap": 59,
+  "popClose": 66,
+  "noFreeSkip": 6,
+  "reloads": [
+   20
+  ],
+  "reloadDone": 20,
+  "chipTrap": 7,
+  "lockedSkip": 7,
+  "taps": 2930,
+  "noFreePoint": 21,
+  "reachFocus": 22,
+  "reachRows": [
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": "#kg82",
+    "label": "Khảo hạch tấn phong Thường tại",
+    "top": 524,
+    "top0": 524,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": "#kg82",
+    "label": "Khảo hạch tấn phong Thường tại",
+    "top": 524,
+    "top0": 524,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 456,
+    "top0": 456,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": "#kg82",
+    "label": "Trước khi ra tay",
+    "top": 524,
+    "top0": 524,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   }
+  ],
+  "chipCover": [
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Chưa điểm trang",
+    "chip": "button.krailb.kctmf",
+    "pct": 35,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Chương 1 · Sơ nhập cung môn»",
+    "label": "Danh hiệu 0/35",
+    "chip": "img",
+    "pct": 100,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 0/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 0/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 0/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 0/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lẻn vào Có cơ3 khắc · bắt: Danh -8",
+    "chip": "span.kodm.oc",
+    "pct": 16,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Tâm trạngBình thản-20",
+    "chip": "div#kntchip.ktbt.kntc",
+    "pct": 43,
+    "vw": 755
+   },
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "gió heo may",
+    "chip": "button.krailb.kctmf",
+    "pct": 30,
+    "vw": 755
+   },
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Lẻn vào Vững3 khắc · bắt: Danh -8",
+    "chip": "span.kodm.oc",
+    "pct": 16,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Chương 1 · Sơ nhập cung môn»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 100,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Lẻn vào Vững3 khắc · bắt: Danh -8",
+    "chip": "span.kodm.oc",
+    "pct": 16,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Tâm trạngBình thản-15",
+    "chip": "div#kntchip.ktbt.kntc",
+    "pct": 43,
+    "vw": 755
+   },
+   {
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Tâm trạngBình thản+11",
+    "chip": "div#kntchip.ktbt.kntc",
+    "pct": 55,
+    "vw": 755
+   }
+  ]
+ },
+ "life": {
+  "id": "SEGMENT",
+  "type": "segment",
+  "fate": "segment closed: {\"why\":\"year\",\"min\":76,\"buoi\":121,\"year\":2}"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|tap on option «Tuyển chọn trước ngày phong» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tuyển chọn trước ngày phong» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 1,
+   "at": 40,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 308,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 14,
+   "at": 405,
+   "screen": ".dlg «»"
+  },
+  {
+   "k": "game|tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 3,
+   "at": 454,
+   "screen": ".dlg «Bổng lộc tháng ba»"
+  },
+  {
+   "k": "game|tap on option «giông tố» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «giông tố» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 562,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «nắng sớm oi ả» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «nắng sớm oi ả» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 691,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "n": 9,
+   "at": 702,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «mưa rào» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa rào» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 975,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 4,
+   "at": 1104,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «Khảo hạch tấn phong Thường tại» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Khảo hạch tấn phong Thường tại» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 2,
+   "at": 1394,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «ngày 11: Hội Phượng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «ngày 11: Hội Phượng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 1561,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «đêm oi nồng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «đêm oi nồng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 1628,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «gió lớn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «gió lớn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 1707,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «chiều âm u» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «chiều âm u» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 3,
+   "at": 1714,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «Có thaiRất thấp» opened chip modal «Có thai: Rất thấp» (chip class button.k3r.kasr overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Có thaiRất thấp» opened chip modal «Có thai: Rất thấp» (chip class button.k3r.kasr overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 1726,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 4,
+   "at": 1867,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «gió heo may» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «gió heo may» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 3,
+   "at": 1978,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»"
+  },
+  {
+   "k": "game|tap on option «Tiết Vạn thọ» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tiết Vạn thọ» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 1,
+   "at": 2587,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 2848,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+  },
+  {
+   "k": "game|tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 2956,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+  },
+  {
+   "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 3107,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+  },
+  {
+   "k": "game|tap on option «sương giá» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «sương giá» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 3245,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+  },
+  {
+   "k": "game|tap on option «Y phục diêm dúa · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Y phục diêm dúa · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "n": 1,
+   "at": 3368,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+  },
+  {
+   "k": "game|tap on option «trời âm u» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời âm u» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 3386,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+   "n": 1,
+   "at": 3441,
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/noeffect-1795666390711.png"
+  },
+  {
+   "k": "game|tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class img overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class img overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 2,
+   "at": 3574,
+   "screen": ".dlg «»"
+  },
+  {
+   "k": "game|tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class div.kskdo overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Tâm trạng: Bình thảnTâm trạng:» opened chip modal «Tâm trạng · Ta» (chip class div.kskdo overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 3,
+   "at": 3575,
+   "screen": ".dlg «»"
+  },
+  {
+   "k": "game|tap on option «Buôn bánBuôn bánSai cung nữ th» opened chip modal «Sai cung nữ thân tín mua lén ngoài cung» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Buôn bánBuôn bánSai cung nữ th» opened chip modal «Sai cung nữ thân tín mua lén ngoài cung» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 3700,
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»"
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795663367203.png",
+   "dev": "fold",
+   "at": 417,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795663385339.png",
+   "dev": "fold",
+   "at": 435,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795663393564.png",
+   "dev": "fold",
+   "at": 443,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795663828363.png",
+   "dev": "fold",
+   "at": 878,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795663867902.png",
+   "dev": "fold",
+   "at": 918,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795663876070.png",
+   "dev": "fold",
+   "at": 926,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795664239557.png",
+   "dev": "fold",
+   "at": 1289,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795664254388.png",
+   "dev": "fold",
+   "at": 1304,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795664262439.png",
+   "dev": "fold",
+   "at": 1312,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Khảo hạch tấn phong Thường tại",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795664405761.png",
+   "dev": "fold",
+   "at": 1458,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795664742459.png",
+   "dev": "fold",
+   "at": 1792,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665378994.png",
+   "dev": "fold",
+   "at": 2429,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665423028.png",
+   "dev": "fold",
+   "at": 2473,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665431120.png",
+   "dev": "fold",
+   "at": 2481,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+   "label": "Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh",
+   "cover": "zero size",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665670613.png",
+   "dev": "fold",
+   "at": 2720,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665738229.png",
+   "dev": "fold",
+   "at": 2788,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665754820.png",
+   "dev": "fold",
+   "at": 2805,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665762914.png",
+   "dev": "fold",
+   "at": 2813,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Trước khi ra tay",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795665955830.png",
+   "dev": "fold",
+   "at": 3006,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795666094102.png",
+   "dev": "fold",
+   "at": 3144,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795666109044.png",
+   "dev": "fold",
+   "at": 3159,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/dead-fold-1795666117772.png",
+   "dev": "fold",
+   "at": 3168,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin trong cung buổi này»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out63/shots-coop-rt-u3c63-host-k1/noeffect-1795666390711.png",
+   "at": 3441,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 1,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Bành Tịnh Sơ"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 121,
+ "steps": 5625,
+ "status": [
+  "STATUS coop-rt-u3c63-host-k1 · buổi 93 · year 1 · rank 0 · bugs 27 · stuck 0 · dead buttons 23"
+ ],
+ "_snapAt": 1795667500064,
+ "_un": 0,
+ "_lkB": 120,
+ "trace": [
+  [
+   3945,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «sương giá»"
+  ],
+  [
+   3947,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «2Chí tôn»"
+  ],
+  [
+   3948,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Số lần ân thưởng0»"
+  ],
+  [
+   3949,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao tình»"
+  ],
+  [
+   3949,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Ân oán»"
+  ],
+  [
+   3950,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa»"
+  ],
+  [
+   3951,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Bạc50Sức96/100»"
+  ],
+  [
+   3952,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   3953,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hoàng tự»"
+  ],
+  [
+   3954,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   3956,
+   ".dlg «Có người đến» «Đùa là phải thêm tiền vẽRất vữngTốnkhôngĐượccó thê»"
+  ],
+  [
+   3963,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hoàng tự trong cung»"
+  ],
+  [
+   3964,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hậu cung»"
+  ],
+  [
+   3965,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   3966,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Số lần ân thưởng0»"
+  ],
+  [
+   3967,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   3968,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Cấm túc1 tháng»"
+  ],
+  [
+   3969,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   3969,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   3970,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Cung nữ thân tín tam đẳngThúy Lũ»"
+  ],
+  [
+   3971,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   3979,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Ngụy Trầm Bích: Đang bận»"
+  ],
+  [
+   3979,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   3987,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Người được sai đi»"
+  ],
+  [
+   3987,
+   ".dlg «Tin chờ người sai đi» «Đợi tinTốnkhôngĐượcngồi chờ đến khắc 3·khi người đ»"
+  ],
+  [
+   3995,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Buổi chiều, còn 2 khắc»"
+  ],
+  [
+   3995,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   3996,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mệnh truyện»"
+  ],
+  [
+   3997,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hành sự»"
+  ],
+  [
+   3998,
+   ".kfoc «Giao việc phòng bị»"
+  ],
+  [
+   3999,
+   ".kfoc «Giao việc phòng bị»"
+  ],
+  [
+   3999,
+   ".kfoc «Giao việc phòng bị»"
+  ],
+  [
+   4000,
+   ".kfoc «Giao việc phòng bị»"
+  ],
+  [
+   4001,
+   ".kfoc «Lui»"
+  ],
+  [
+   4002,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»"
+  ],
+  [
+   4003,
+   ".dlg «Sổ nguyệt sự» «Lui»"
+  ],
+  [
+   4010,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kếMưu kếXem lén sổ nguyệt sựCó cơSang Kính sự »"
+  ],
+  [
+   4012,
+   ".dlg «Sổ nguyệt sự» «Lui»"
+  ],
+  [
+   4020,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Cấm túc1 tháng»"
+  ],
+  [
+   4021,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   4022,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kếMưu kếSai cung nữ đi dò laVữngSai Thúy Lũ đi»"
+  ],
+  [
+   4023,
+   ".dlg «Sai Thúy Lũ đi dò la» «Quý phiThạch Hải LanRất vữngTốnkhôngĐượcbiết 2 điề»"
+  ],
+  [
+   4033,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4036,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   4041,
+   "DEAD Lui"
+  ],
+  [
+   4045,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   4046,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   4047,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   4048,
+   ".dlg «Phụ tuyến · Vẽ quạt cho Chu Tố Tuyết dâng Hoàng th» «Nhận lờiVữngTốnkhôngĐượcChu Tố Tuyết có thiện cảm »"
+  ],
+  [
+   4049,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4050,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4051,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4052,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4053,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4054,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4055,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4055,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4056,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4057,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4058,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4059,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4059,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4060,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4061,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4062,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4063,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4063,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4064,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4065,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4066,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4067,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4067,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4068,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4069,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4070,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4071,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4072,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4072,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4073,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4074,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4075,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Lịch tháng»"
+  ],
+  [
+   4076,
+   ".dlg «Lịch tháng» «mồng 9»"
+  ],
+  [
+   4076,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   4077,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4078,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   4079,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4080,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4080,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4081,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4082,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   4083,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   4083,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4084,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   4085,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   4086,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4087,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4087,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4088,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4089,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4090,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4090,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4091,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4092,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4093,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4094,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   4094,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4095,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   4096,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4097,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   4098,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4098,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   4099,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   4100,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   4101,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4102,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4102,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   4103,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   4104,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   4105,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   4106,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4107,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Cung nữ thân tín tam đẳngThúy Lũ»"
+  ],
+  [
+   4108,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   4109,
+   ".kfoc «Lui»"
+  ],
+  [
+   4116,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mệnh truyện»"
+  ],
+  [
+   4117,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4118,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   4119,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   4119,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Cung nữ thân tín tam đẳngThúy Lũ»"
+  ],
+  [
+   4120,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   4122,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4123,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   4123,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   4125,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   4126,
+   ".dlg «Phòng bị» «Canh chừng cungRất vữngTốnkhôngĐượcbắt kẻ lẻn vào »"
+  ],
+  [
+   4133,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4134,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   4135,
+   ".dlg «Quẻ Trung · Giao thiệp» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   4136,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   4136,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sắc75Tài40Tâm cơ28Đức32Danh30Sủng9»"
+  ],
+  [
+   4137,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4138,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mệnh truyện»"
+  ],
+  [
+   4140,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   4143,
+   "DEAD Lui"
+  ],
+  [
+   4146,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   4147,
+   "#kmrew «Nhận»"
+  ],
+  [
+   4148,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   4149,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   4150,
+   ".dlg «Bổng lộc tháng mười một» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút »"
+  ],
+  [
+   4151,
+   ".dlg «Lời nhận xét» «Lui»"
+  ],
+  [
+   4153,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   4154,
+   ".dlg «Lời cảnh báo» «Ra lệnh phòng bịRất vữngTốnkhôngĐượcgiữ được mình:»"
+  ],
+  [
+   4155,
+   ".dlg «Phòng bị» «Giữ nguyênRất vữngTốnkhôngĐượckẻ hầu yên việc cũ, »"
+  ],
+  [
+   4157,
+   ".dlg «Lễ Lạp bát · Lễ» «Lặng lẽ cầu cho gia đìnhRất vữngTốnkhôngĐượcdưỡng »"
+  ],
+  [
+   4158,
+   ".dlg «Yến tiệc đầu xuân · Lời mời» «Ghi tên dâng múa (theo Vũ, Sắc)Rất vữngTốnkhôngĐượ»"
+  ],
+  [
+   4159,
+   ".dlg «Lễ Lạp bát · Chuyện bên lề hội» «Đổ rượu lên áo nàng ta như vô tìnhTốnĐức -5ĐượcTâm»"
+  ],
+  [
+   4177,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4178,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4179,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4179,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4180,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4181,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4182,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4183,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4183,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4184,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4185,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4186,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4186,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4187,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4188,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4189,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4190,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4190,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4191,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4192,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4193,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4194,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4194,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4195,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4196,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4197,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4197,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4198,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4199,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4200,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4201,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4201,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4202,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tư trang»"
+  ],
+  [
+   4203,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4204,
+   ".dlg «Có người đến» «Đáp trả sắc sảoRất vữngTốnkhôngĐượcthêm thể diện t»"
+  ],
+  [
+   4212,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Người được sai đi (có mới)»"
+  ],
+  [
+   4212,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   4220,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mệnh truyện»"
+  ],
+  [
+   4220,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4221,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tư trang»"
+  ],
+  [
+   4222,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Về phòng»"
+  ],
+  [
+   4223,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4224,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Bạc70Sức100/100»"
+  ],
+  [
+   4224,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   4225,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mệnh truyện»"
+  ],
+  [
+   4226,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tư trang»"
+  ],
+  [
+   4227,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tâm trạngBình thản+2»"
+  ],
+  [
+   4228,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   4229,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Ngụy Trầm Bích: Đang làm việc»"
+  ],
+  [
+   4230,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   4237,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   4238,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   4239,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4241,
+   ".dlg «Kỳ nguyệt sự» «Giấu, không báoRất vữngTốnkhôngĐượcthẻ bài vẫn trê»"
+  ],
+  [
+   4242,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   4244,
+   ".dlg «Kính sự phòng» «Chặn ngự giáTùy duyênTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   4248,
+   "DEAD Lui"
+  ],
+  [
+   4253,
+   "DEAD "
+  ],
+  [
+   4256,
+   "DEAD Lui"
+  ],
+  [
+   4259,
+   "DEAD Lui"
+  ],
+  [
+   4263,
+   "DEAD Lui"
+  ],
+  [
+   4266,
+   "DEAD Lui"
+  ],
+  [
+   4270,
+   "DEAD Lui"
+  ],
+  [
+   4273,
+   "DEAD Lui"
+  ],
+  [
+   4275,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   4278,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   4281,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   4283,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   4287,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   4288,
+   ".dlg «Sắp tới: Yến tiệc đầu xuân» «Lui»"
+  ],
+  [
+   4289,
+   ".dlg «Đại hàn, tuyết lớn» «Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcK»"
+  ],
+  [
+   4290,
+   ".dlg «Đại hàn, tuyết lớn» «Khen nàng ta nhân hậu, mời nàng ta cùng tràTốnSức »"
+  ],
+  [
+   4295,
+   ".dlg «Gió lạnh, đường trơn» «Lui»"
+  ],
+  [
+   4296,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4297,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4298,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4298,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4299,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4300,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4301,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4302,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4302,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4303,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4304,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4305,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4306,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4306,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4307,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4308,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4309,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4310,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tâm trạngBình thản-15»"
+  ],
+  [
+   4311,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   4312,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hậu cung»"
+  ],
+  [
+   4312,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4313,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Quẻ Hạ (Con cái)»"
+  ],
+  [
+   4314,
+   ".dlg «Quẻ Hạ · Con cái» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   4315,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   4316,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sắc75Tài40Tâm cơ34Đức28Danh34Sủng0»"
+  ],
+  [
+   4317,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao tình»"
+  ],
+  [
+   4318,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hành sự»"
+  ],
+  [
+   4319,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   4320,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4321,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   4322,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   4323,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4324,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   4324,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   4326,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4326,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   4327,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   4328,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4329,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4330,
+   ".kfoc «Sai đi dò la · Vững · Tốn 2 khắc»"
+  ],
+  [
+   4331,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4332,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4334,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   4335,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   4336,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   4337,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4338,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4339,
+   ".kfoc «Sai đi dò la · Vững · Tốn 2 khắc»"
+  ],
+  [
+   4341,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4341,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4342,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4343,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   4344,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4344,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4345,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4346,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4347,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   4347,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   4348,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4349,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4350,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4351,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4351,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4352,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   4353,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4354,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4354,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4355,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   4356,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   4357,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   4357,
+   ".kfoc «Lui»"
+  ],
+  [
+   4358,
+   ".dlg «Việc khó xử» «Mời sư làm lễ trừ tàRất vữngTốnBạc -30Đượcđược tiế»"
+  ],
+  [
+   4366,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»"
+  ],
+  [
+   4367,
+   ".dlg «Sổ nguyệt sự» «Lui»"
+  ],
+  [
+   4369,
+   ".dlg «Kỳ ngộ» «Sửa lời cho nàng ta, dạy ngắt câuRất vữngTốn1 khắc»"
+  ],
+  [
+   4370,
+   "#klearnov «Tiếp theo»"
+  ],
+  [
+   4371,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   4379,
+   "page «Kính sự phòng · Ở đây còn 4 người.» «Mưu kếMưu kếXem lén sổ nguyệt sựCó cơSang Kính sự »"
+  ],
+  [
+   4380,
+   ".dlg «Sổ nguyệt sự» «Lui»"
+  ],
+  [
+   4386,
+   ".dlg «Hoàng thượng» «Tặng ngài làm vật tùy thânRất vữngTốnBạc -10Đượcth»"
+  ],
+  [
+   4393,
+   "page «Kính sự phòng · Sang buổi chiều · ta vẫn ở Kính sự» «Sẵn sàng»"
+  ],
+  [
+   4394,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Sắc75Tài42Tâm cơ34Đức30Danh37Sủng0»"
+  ],
+  [
+   4395,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Sẵn sàng»"
+  ],
+  [
+   4397,
+   "DEAD Ngụy Trầm Bích: Đang làm việc"
+  ],
+  [
+   4398,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Hành sự»"
+  ],
+  [
+   4399,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Mưu kếMưu kếSai cung nữ đi dò laRất vữngSai Thúy L»"
+  ],
+  [
+   4401,
+   ".dlg «Sai Thúy Lũ đi dò la» «Quý phiThạch Hải LanRất vữngTốnkhôngĐượcbiết 2 điề»"
+  ],
+  [
+   4410,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Giao thiệp 2/3»"
+  ],
+  [
+   4411,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngQuẻ: k»"
+  ],
+  [
+   4412,
+   ".dlg «Nghe ngóng chung» «Lui»"
+  ],
+  [
+   4413,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Lễ nghi 1/2»"
+  ],
+  [
+   4414,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Buổi tối, còn 2 khắc»"
+  ],
+  [
+   4415,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   4416,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Mưu kế 0/5»"
+  ],
+  [
+   4417,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Y dược 1/2»"
+  ],
+  [
+   4417,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Hôm nay mặt mộc»"
+  ],
+  [
+   4419,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Nghỉ ngơi 3/4»"
+  ],
+  [
+   4420,
+   "page «Kính sự phòng · Sang buổi tối · ta vẫn ở Kính sự p» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi dưỡng sứcRất vữngUống »"
+  ],
+  [
+   4429,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kế 0/5»"
+  ],
+  [
+   4430,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tư trang»"
+  ],
+  [
+   4431,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tài nghệ»"
+  ],
+  [
+   4432,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tâm trạngBình thản+11»"
+  ],
+  [
+   4433,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   4434,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hành sự»"
+  ],
+  [
+   4435,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tư trang»"
+  ],
+  [
+   4435,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Buôn bánBuôn bánNhờ thái giám mua đồⓘĐượcxem hàng·»"
+  ],
+  [
+   4436,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tâm trạngBình thản+11»"
+  ],
+  [
+   4437,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   4440,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   4443,
+   "DEAD Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài"
+  ],
+  [
+   4448,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   4449,
+   ".dlg «Đêm Giao thừa · Trò vui» «Từ chối khéoRất vữngTốnkhôngĐượckhôngGợi ýkhông đư»"
+  ],
+  [
+   4450,
+   ".dlg «Tết Nguyên đán · Lời mời: Thi đàn bên lò sưởi» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   4451,
+   ".dlg «Đêm Giao thừa · Chuyện bên lề hội» «Hứa đứng về phía nàng taTốnDanh -5·Sủng -5ĐượcĐức »"
+  ],
+  [
+   4452,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   4455,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4456,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4457,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4458,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4459,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4459,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4460,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4461,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4462,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4463,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4463,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4464,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4465,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4466,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4466,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4467,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4468,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4469,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Dư đồ»"
+  ],
+  [
+   4470,
+   ".mapsc «Người được sai đi (có mới)»"
+  ],
+  [
+   4471,
+   ".dlg «Tin chờ người sai đi» «Đợi tinTốnkhôngĐượcngồi chờ đến khắc 3·khi người đ»"
+  ],
+  [
+   4472,
+   ".dlg «Nhờ thái giám mua đồ» «Lui»"
+  ],
+  [
+   4479,
+   ".mapsc «Buổi sáng, còn 2 khắc»"
+  ],
+  [
+   4480,
+   ".dlg «sáng · còn» «Lui»"
+  ],
+  [
+   4481,
+   ".mapsc «Tư trang»"
+  ],
+  [
+   4483,
+   ".dlg «Chuyện lạ cần tra» «Bắt phạt để rănRất vữngTốnkhôngĐượcthêm thể diện t»"
+  ],
+  [
+   4493,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   4494,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   4502,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   4502,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   4510,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4510,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Chọn chính mình»"
+  ],
+  [
+   4511,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao tình»"
+  ],
+  [
+   4512,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sẵn sàng»"
+  ],
+  [
+   4513,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   4514,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   4515,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hoàng tự»"
+  ],
+  [
+   4515,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   4516,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Phong hàn · nhẹ»"
+  ],
+  [
+   4517,
+   ".dlg «Phong hàn · nhẹ» «Lui»"
+  ],
+  [
+   4518,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mệnh truyện»"
+  ],
+  [
+   4519,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Sổ ghi»"
+  ],
+  [
+   4520,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   4521,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   4522,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hôm nay mặt mộc»"
+  ],
+  [
+   4524,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hoàng tự»"
+  ],
+  [
+   4525,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Tâm trạngBình thản+16»"
+  ],
+  [
+   4525,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   4526,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hôn sự»"
+  ],
+  [
+   4527,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hành sự»"
+  ],
+  [
+   4528,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kếMưu kếSai cung nữ đi dò laRất vữngSai Thúy L»"
+  ],
+  [
+   4530,
+   ".dlg «Sai Thúy Lũ đi dò la» «Quý phiThạch Hải LanRất vữngTốnkhôngĐượcbiết 2 điề»"
+  ],
+  [
+   4537,
+   ".dlg «Lập công · Dịch trong cung» «Đóng cửa cung tránh dịchRất vữngTốnkhôngĐượcdưỡng »"
+  ],
+  [
+   4544,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kếMưu kếXem lén sổ nguyệt sựCó cơSang Kính sự »"
+  ],
+  [
+   4546,
+   ".dlg «Sổ nguyệt sự» «Lui»"
+  ],
+  [
+   4548,
+   ".dlg «Kỳ ngộ» «Hỏi ông việc đã xảy ra gần đâyRất vữngTốn2 khắcĐượ»"
+  ],
+  [
+   4549,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   4555,
+   ".kmov «Ta biết rồi»"
+  ]
+ ],
+ "_ckAt": 1795667414382,
+ "_ckB": 117,
+ "_nfp": 21,
+ "sliced": true,
+ "segment": {
+  "why": "year",
+  "min": 76,
+  "buoi": 121,
+  "year": 2
+ },
+ "t": {
+  "total": 4560475
+ }
+}

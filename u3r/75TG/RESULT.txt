@@ -1,0 +1,1 @@
+VALID SEGMENT: u4 7959f1b5 b0cf6e61f03b + patch 6d43a5a1; seed 63; year 2 buoi 121 in ~76 min; reload at 20 both seats; stuck 0; jsClicks 0
