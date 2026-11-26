@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b48425a1+","t":"2026-11-26T06:09Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"ecd8e4e36c28","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"b905190e+","t":"2026-11-26T07:32Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"b386c3539450","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -94724,15 +94724,24 @@ const MAPZ_DTV={k:"dtv",n:"Dưỡng Tú viện",fn:"nơi tú nữ ở và học 
    Members are neighbours on the painting (the zoom box stays small). */
 const MAPZ_ZONES=[
  {id:"nv",n:"Nội vụ",fn:"các ty Nội vụ phủ coi: cung nhân ở, làm việc, chịu phạt; tú nữ ở Dưỡng Tú viện",ic:"place-cnh",keys:["nvp","tgk","cnh","dtv"]},
- {id:"ht",n:"Hoàng tử sở",fn:"nơi các hoàng tử ở và học",ic:"place-acs",keys:["acs","ttp"]}];
+ {id:"ht",n:"Hoàng tử sở",fn:"nơi các hoàng tử ở và học",ic:"place-acs",keys:["acs","ttp"]},
+ /* owner 26/11 ~07:05Z «gộp cái dư đồ lại … bấm vào tầng 2 thì sẽ hiện ra chi tiết» + 18/11 ~19:45Z (L1901) «Cung của tôi … Cứ gom vào bình thường, nhưng mà có cái dấu»:
+    the consort palaces group by side (MAIN 154 brief: consort palaces keep their own names INSIDE the Đông/Tây lục cung zones); her palace is grouped too, the zone tag
+    carries her mark (kitMeMapMark when she is there, «Nhà ta» when her home is inside). Level 2 = the palaces' own tags; tap a palace = its courtyard (levels 3–4, jpm). */
+ {id:"dlc",n:"Đông lục cung",fn:"các cung phi tần phía đông",ic:"place-cung",keys:[],pal:"east"},
+ {id:"tlc",n:"Tây lục cung",fn:"các cung phi tần phía tây",ic:"place-cung",keys:[],pal:"west"},
+ /* L2537 (offices of one kind under one tag): the court's service offices on the east side */
+ {id:"ty",n:"Ty sở",fn:"Ngự thiện phòng, Thái y viện, Kính sự phòng: cơm nước, thuốc thang, sổ thị tẩm",ic:"place-nth",keys:["nth","tyv","ksp"]}];
 /* KIT §85.10 values (one place): zone box padding (fraction of the map), fill of the free area at zoom, fog feather, motion */
 const KIT_MAPZ={pad:.025,fill:.9,feather:.3,ms:460,ease:"cubic-bezier(.33,0,.2,1)"};
-function mapzEast(){return PALN.slice(0,8)}
-function mapzWest(){return PALN.slice(8)}
+/* east / west of the consort palaces = which side of Càn Ninh's axis their plan box sits (MAPH.rivalSlots), not a list index */
+function mapzSide(e){try{const ax=MAPH.places.kn?MAPH.places.kn.box.x+MAPH.places.kn.box.w/2:.5;return MAPH.rivalSlots.filter(s=>s.box&&((s.box.x+s.box.w/2>ax)===e)).map(s=>s.name)}catch(x){return []}}
+function mapzEast(){return mapzSide(true)}
+function mapzWest(){return mapzSide(false)}
 /* zone of a plan key / an empty palace name */
 function mapzZoneOf(k,name){try{let nm=name||null;if(k&&/^r\d+$/.test(k)){const i=palSlot(k);if(i!=null)nm=PALN[i]}else if(k==="home"&&S.pal!=null)nm=PALN[S.pal];
   for(const Z of MAPZ_ZONES){if(k&&Z.keys.includes(k))return Z;if(nm&&((Z.pal==="east"&&mapzEast().includes(nm))||(Z.pal==="west"&&mapzWest().includes(nm))))return Z}}catch(e){}return null}
-/* her own places: never hidden inside a zone on the overview */
+/* her own places (home / where she is / her palace): grouped like the others since 26/11 (L1901); the zone tag carries her marks instead */
 function mapzMine(){const M=new Set(["home"]);try{if(S.place)M.add(S.place);M.add(palaceOf(S));const r=typeof resMeHoused==="function"&&resMeHoused();if(r&&r.head)M.add(palaceOf(r.head))}catch(e){}return M}
 /* the zone box on the map (fractions): union of its members' plan boxes + padding */
 function mapzBox(Z){const B=[];try{for(const k of Z.keys){const p=MAPH.places[k];if(p&&p.box)B.push(p.box)}
@@ -94746,15 +94755,19 @@ function mapzOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__ma
 function mapzCur(){const Z=window.__mapZone&&mapzById(window.__mapZone);return Z&&mapzOn()?Z:null}
 /* ---------- (1)+(2) the overview / zoomed HTML ---------- */
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(!mapzOn()||h.indexOf('class="mapv')<0||h.indexOf("kpmv")>=0)return h;
- try{const cur=mapzCur();const mine=mapzMine();const tot={},hap={},has={},open_={};
+ try{const cur=mapzCur();const tot={},hap={},has={},open_={},me={},home={},mk={};const hk=S.out?null:(typeof plHomeK==="function"?plHomeK():"home");
   h=h.replace(/<(button|div) class="mspot([^"]*)"([^>]*)>/g,(all,tag,cls,attr)=>{const g=/data-(?:go|ak)="([^"]+)"/.exec(attr),t=/title="([^":]+):/.exec(attr);const k=g?g[1]:null;
    const Z=mapzZoneOf(k,!k&&t?t[1].trim():null);let hide=false;
-   if(cur){hide=!Z||Z.id!==cur.id}else if(Z&&!(k&&mine.has(k))){hide=true;has[Z.id]=1;if(!/\bmgrey\b/.test(cls))open_[Z.id]=1;if(k)try{tot[Z.id]=(tot[Z.id]||0)+countAt(k)}catch(e){}}
+   if(Z&&k)(mk[Z.id]=mk[Z.id]||[]).push(k);
+   if(cur){hide=!Z||Z.id!==cur.id}else if(Z){hide=true;has[Z.id]=1;const isHere=/\bhere\b/.test(cls);if(isHere)me[Z.id]=1;if(k&&(k===hk||k==="home"))home[Z.id]=1;if(!/\bmgrey\b/.test(cls)||isHere)open_[Z.id]=1;if(k)try{tot[Z.id]=(tot[Z.id]||0)+countAt(isHere?S.place:k)}catch(e){}}
    return `<${tag} class="mspot${cls}${hide?" mzh":""}"${Z?` data-zn="${Z.id}"`:""}${attr}>`});
   /* a "!" happening on a hidden member shows on its zone tag (KIT 78.x: the player must still see it) */
   if(!cur)h.replace(/<(?:button|div) class="mspot[^"]* mzh" data-zn="([^"]+)"(?:(?!<(?:button|div) class="mspot)[\s\S])*?class="khap"/g,(a,z)=>{hap[z]=1});
   const zt=cur?"":MAPZ_ZONES.filter(Z=>has[Z.id]).map(Z=>{const b=mapzBox(Z);if(!b)return"";const n=tot[Z.id]||0;const icn=typeof ic==="function"?ic(Z.ic,14).replace('class="ic"','class="ic kplic"'):"";
-    return `<button class="mspot mzone${open_[Z.id]?"":" mgrey"}" data-zone="${Z.id}" title="${Z.n}: ${Z.fn}${n?` · ${n} bóng`:""} · chạm để xem gần" aria-label="${Z.n}, ${n?n+" bóng":"vắng"}, chạm để xem gần" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${icn}${Z.n}${hap[Z.id]&&typeof kitHapMark==="function"?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}</span><span class="mmeta">${n?`${n} bóng`:"vắng"}</span></button>`}).join("");
+    const mm=me[Z.id]&&!S.out&&!S.dead&&typeof kitMeMapMark==="function"?kitMeMapMark():"";const hm=home[Z.id]?"Nhà ta":"";
+    /* meta = one short count (KIT §85.10 (0)); her zone: «Nhà ta · N bóng» / where she stands: «Ta + N bóng» (KIT §41.2 words) */
+    const cnt=me[Z.id]?(n?`Ta + ${n} bóng`:"Chỉ có ta"):(n?`${n} bóng`:(hm?"":"vắng"));const meta=[hm,cnt].filter(Boolean).join(" · ");
+    return `<button class="mspot mzone${open_[Z.id]?"":" mgrey"}${me[Z.id]?" mzme":""}${hm?" mzhome":""}" data-zone="${Z.id}" data-mzk="${(mk[Z.id]||[]).join(" ")}" title="${Z.n}: ${Z.fn}${hm?" · có nhà ta":""}${n?` · ${n} bóng`:""} · chạm để xem gần" aria-label="${Z.n}${hm?", có nhà ta":""}, ${n?n+" bóng":"vắng"}, chạm để xem gần" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${mm}${icn}${Z.n}${hap[Z.id]&&typeof kitHapMark==="function"?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}</span><span class="mmeta">${meta}</span></button>`}).join("");
   /* zone tags go right after the picture (under the place tags in paint order); the fog sits there in zoom mode */
   const b=cur&&mapzBox(cur);const fog=cur&&b?`<div class="kmfog" data-mzback="fog" aria-hidden="true" style="${mapzFogVars(b)}"></div>`:"";
   h=h.replace(/(<img class="mapimg"[^>]*>)/,"$1"+fog+zt);
@@ -94801,6 +94814,9 @@ window.addEventListener("click",e=>{try{if(!S||typeof tab==="undefined"||tab!=="
  const fx=(e.clientX-r.left)/r.width,fy=(e.clientY-r.top)/r.height;if(fx>=b.x&&fx<=b.x+b.w&&fy>=b.y&&fy<=b.y+b.h)return;e.preventDefault();e.stopImmediatePropagation();mapzGo(null)}catch(err){console.error(err)}},true);
 /* the way back = the ONE kit back button of the left rail (KIT 33.11, jplfs kplBack): zone → overview; courtyard → its zone (as before → Dư đồ) */
 (function(){if(typeof kplBack!=="function")return;const b0=kplBack;kplBack=function(){try{if(typeof tab!=="undefined"&&tab==="go"&&!window.__kpm&&mapzCur())return{t:"Về toàn cảnh Dư đồ",go:()=>mapzGo(null)}}catch(e){}return b0.apply(this,arguments)}})();
+/* back from a palace courtyard (level 3) into its zone (level 2): the zone is fitted and centred again, as on entry */
+(function(){const r0=render;render=function(){const was=window.__mzKpmPrev;const r=r0.apply(this,arguments);try{const now=!!window.__kpm;window.__mzKpmPrev=now;
+ if(was&&!now&&typeof tab!=="undefined"&&tab==="go"&&mapzCur()){window.__mapZoneDo=1;try{mapFit()}finally{window.__mapZoneDo=0}}}catch(e){console.error("jmapz back",e)}return r}})();
 /* leaving the Dư đồ by the tab bar ends the zone view; the list view too */
 document.addEventListener("click",e=>{const t=e.target.closest("#tabs [data-tab],button[data-tab]");if(t&&t.dataset.tab!=="go"){window.__mapZone=null;window.__mapZoneNew=0}},true);
 document.addEventListener("click",e=>{if(e.target.closest("[data-maplist]")){window.__mapZone=null;window.__mapZoneNew=0}},true);
@@ -100264,7 +100280,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ecd8e4e36c28";window.CTM_BUILD=BUILD;
+const BUILD="b386c3539450";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
