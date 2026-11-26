@@ -1845,3 +1845,4 @@ PROMO-ROOT2 (forgetSafe family) | review/promo-root | session_01V1ZZH26xAYYTTzWt
 RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vbp2tNbrLxfyP4t7 (MAIN 150) | RUNNING | 2026-11-26T01:17Z
 | KIT REVIEW ob-kiep 87bc8942 (ORDER MAIN 150 01:00Z; sonnet, fresh; briefs/b-ob-kiep-kit-review.md) | review/ob-kiep; reports/ob-kiep.md | B ROOT 2 | session_01N1tNP4EdLUs5oEMqzcHrMy | KIT OK 87bc8942 (archived) | 26/11 01:42Z |
 | E92r2 REVIEW titles-daycard 8cdc4b46 BIG (opus; briefs/E92r2-review-titles-daycard.md) | review/titles-daycard 8cdc4b46 (no push needed) | FOREMAN E child6 | session_01DgYSWoBExdJN41AEUaMfCH | PASS 8cdc4b46 (reports/titles-daycard.md REVIEW r2; FOR MAIN 147: kit start card timing) | 26/11 |
+| co-op FIXER coop-night week-6 stall cases 10/11/12 on B lands chain (opus BIG; briefs/b-coop-night-wk6.md) | review/coop-night-wk6; reports/coop-night-wk6.md | B ROOT 2 | (opening) | RUNNING | 26/11 02:29Z |
