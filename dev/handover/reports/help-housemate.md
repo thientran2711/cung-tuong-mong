@@ -118,3 +118,9 @@ Delta 41125250 → d007c9ba: jrcv.js rcvSabO `qSelf` (RCVK.mediate «Mách lẻo
 Foreman D order 26/11 15:34Z (law 11 same family, law 3): when the Hoàng hậu HERSELF mediates there is no third-party queen to tell, so «Mách lẻo» had only «giữ mối oán» (no gain). Now it gets the same gain as the normal case, «Hoàng hậu quý <receiver> +BAL.rcv.help.qAf» (one BAL key, no new number), shown with its subject and applied in go(). jrcv rcvSabO o.qSelf (mediate only); the option name keeps no «với …»; skipped when the asker is HER (p!==S).
 rcv-hint-scan (75 rows): branch **0 FAIL** (no OPEN row) · LIVE 3 FAIL (A+B rcvHelp «Giúp qua loa», B rcvAsk:mediate «Mách lẻo»). Branch row now: «B rcvAsk:mediate · Mách lẻo → Hoàng hậu hài lòng; nhưng mang tiếng thất đức, <asker> sinh oán».
 Gates on d007c9ba: help-housemate.test ALL PASS · receiver-choice ALL PASS · one-core ×3 PASS · **coop-e2e 143/0** (alone; a run under parallel load had 1 world-sync flake «R#27.wd.y.iu», coop-host-lag family, not this code) · quickcheck running. Videos (help card) on the CDN stay valid: the help card is the same since 41125250.
+
+## 10. FINAL REVIEW (opus BIG, session_01D3E3NbbsVnx5jrHuceQUuf) — PASS 3aa87e1b
+3aa87e1b = git revert of d007c9ba; tree 3fc6a5e6 == tree of 41125250 (my PASS, §8) byte for byte; FF of LIVE origin/main aa37de21.
+coop-e2e: not re-run on an identical tree (143/143 my run on 5ac9c150, 143/0 worker on 41125250 and 3aa87e1b) — the bytes under test are the same.
+Videos re-uploaded (fold-755x1000.webm 3.5 MB, ipad-1180x820.webm 4.4 MB + frames): looked at fold-6-loinho — «Giúp qua loa» ĐƯỢC «được lòng người», MẤT «hao bạc, mất lòng người»; kit card only ✔.
+Open, not this branch: N4 (scan coverage, 8 rcv kinds) and N5 (queen-self «Mách lẻo» gain → FOR MAIN owner question). CDN review folder wiped with this verdict.
