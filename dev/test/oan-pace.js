@@ -1,4 +1,5 @@
 // review/oan-pace unit test (owner OD 26/11 ~18:40Z «điểm oán nó tăng quá nhanh … giảm quá chậm»): joanpace + j28 ocOne alone/deep.
+// review/oan-pace-ghen: + H1–H9 GHEN pace (BAL.oanPace.ghen); stat-pace (BAL.stp, own test dev/test/stat-pace.js) is switched off here so joanpace is measured alone.
 // usage: node dev/test/oan-pace.js [index.html]   → one line per check, last line ALL PASS n / FAIL n
 const {chromium}=require('playwright');const path=require('path');
 const PAGE=process.argv[2]||'index.html';
@@ -6,7 +7,7 @@ const PAGE=process.argv[2]||'index.html';
  await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
  await p.goto('file://'+path.resolve(PAGE));await p.waitForTimeout(2500);
  const R=await p.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push([n,!!c,x===undefined?'':JSON.stringify(x)]);
-  document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv())&&S.ps)break}Q.length=0;
+  document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv())&&S.ps)break}Q.length=0;if(BAL.stp)BAL.stp.on=0;
   const P=BAL.oanPace,C=BAL.oanCool,L=liveRivals(true);const [a,c,d,e]=[L[0],L[1],L[2],L[3]||L[0]];
   const clr=x=>{x.opz={};x.ocq={};x.occ={}};for(const x of [a,c,d,e,S])clr(x);
   const raw=(x,y)=>oan(x,y);const setO=(x,y,v)=>{if(y===S)x.oan=v;else if(x===S)S.ro[y.id]=v;else x.ro[y.id]=v};
@@ -29,7 +30,7 @@ const PAGE=process.argv[2]||'index.html';
   const w3=ocBandW(35),w4=ocBandW(60);ok('C2 a deep grudge (≥ '+BAL.oanLv[C.deep.lv-1]+') fades slower for its band width (× deep.k '+C.deep.k+')',f4/w4<f3/w3+1e-9,[[f3,w3],[f4,w4]]);
   clr(d);setO(d,S,30);oanAdd(d,S,1);const g0=raw(d,S);oanCool(1,false);ok('C3 fed today → no fade (quiet days restart)',raw(d,S)===g0,[g0,raw(d,S)]);
   /* (d) revenge spends the oán */
-  clr(e);setO(e,S,40);const v0=raw(e,S);const sp=opVent(e,S);ok('D1 an act against her spends BAL.oanPace.vent.share of the doer\'s oán',sp===Math.max(P.vent.min,Math.round(v0*P.vent.share))&&raw(e,S)===v0-sp,[v0,sp,raw(e,S)]);
+  clr(e);setO(e,S,40);e.ghen=0;const v0=raw(e,S);const sp=opVent(e,S);ok('D1 an act against her spends BAL.oanPace.vent.share of the doer\'s oán',sp===Math.max(P.vent.min,Math.round(v0*P.vent.share))&&raw(e,S)===v0-sp,[v0,sp,raw(e,S)]);
   setO(S,e,20);const s0=raw(S,e);const sp2=opVent(S,e);ok('D2 two-way: her act spends her oán the same way',raw(S,e)===s0-sp2&&sp2>0,[s0,sp2]);
   /* (f) a hostile choice needs the grudge heat ≥ BAL.oanPace.act */
   clr(c);setO(c,S,0);c.ghen=40;c.rel=0;delete c.j95rum;const gL=motiveOK(c,S,'frame');
@@ -42,6 +43,17 @@ const PAGE=process.argv[2]||'index.html';
   /* (b') ghét: a fall of liking is one bounded step per cause, capped per day */
   clr(e);e.opa={};e.rel=0;S.bqN++;affAdd(e,S,-40);ok('G1 a fall of liking is at most BAL.oanPace.ghet.step ('+P.ghet.step+')',aff(e,S)===-P.ghet.step,aff(e,S));
   const a1=aff(e,S);affAdd(e,S,20);ok('G2 a rise of liking is never capped',aff(e,S)===a1+Math.round(20*persF(e,'trust',1)),[a1,aff(e,S)]);
+  /* GHEN pace (review/oan-pace-ghen) */
+  {const G=P.ghen;const gz=x=>{x.opg={};x.gUc=0;x.ghen=0};const nn=newRival(1);ok('H1 a newcomer starts near 0 jealousy (< BAL.ghenNew '+BAL.ghenNew+')',(nn.ghen||0)<BAL.ghenNew,nn.ghen);
+   S.sung=50;a.sung=50;gz(a);S.bqN++;ghenUp(a,30,'t',S);const g1=a.ghen;ok('H2 one cause adds at most BAL.oanPace.ghen.step ('+G.step+')',g1>0&&g1<=G.step,g1);
+   ghenUp(a,5,'t',S);ok('H3 same incident (same buổi): a smaller second cause adds nothing',a.ghen===g1,[g1,a.ghen]);
+   S.bqN++;ghenUp(a,G.step,'t',S);S.bqN++;ghenUp(a,G.step,'t',S);ok('H4 one day: one consort\'s jealousy rises at most BAL.oanPace.ghen.day ('+G.day+')',a.ghen<=G.day+1,a.ghen);
+   gz(c);gz(d);c.sung=S.sung+G.rel.span;d.sung=S.sung-10;S.bqN++;ghenUp(c,G.step,'t',S);ghenUp(d,G.step,'t',S);
+   ok('H5 relative favour: a consort more favoured than her grows far less jealous than one below her',c.ghen<d.ghen&&c.ghen<=Math.ceil(G.step*G.rel.min),[c.ghen,d.ghen]);
+   const w=wk();ok('H6 fade: closed gap faster, deep slower, left alone faster',opGfK(30,-G.rel.span,w)>opGfK(30,0,w)&&opGfK(G.deep,0,w)<opGfK(30,0,w)&&opGfK(30,0,w-10)>opGfK(30,0,w),[opGfK(30,-G.rel.span,w),opGfK(30,0,w),opGfK(G.deep,0,w),opGfK(30,0,w-10)]);
+   a.ghen=50;opVent(a,S);ok('H7 acting against her spends her jealousy (vent.share '+G.vent.share+')',a.ghen===50-Math.max(G.vent.min,Math.round(50*G.vent.share)),a.ghen);
+   c.pg=0;c.pUc=0;S.opg={};S.bqN++;pgUp(c,30,'t');const p1=c.pg;c.pg=40;opVent(S,c);ok('H8 two-way: her jealousy of a consort — one step per cause, spent when she acts',p1>0&&p1<=G.step&&c.pg===40-Math.max(G.vent.min,Math.round(40*G.vent.share)),[p1,c.pg]);
+   gz(e);ghenUp(e,10,'t',a);ok('H9 a jealousy caused by another consort still does not raise the score toward her',e.ghen===0,e.ghen)}
   /* rollback */
   P.on=0;setO(a,S,0);S.bqN++;oanAdd(a,S,40);ok('R1 BAL.oanPace.on = 0 → the old raw rise (× the holder\'s nết only)',raw(a,S)===Math.round(40*persF(a,'slight',1)),raw(a,S));P.on=1;S.tuan=keep;
   return out});

@@ -86,7 +86,7 @@ const SELX_LES=[["Tập thật kỹ từng bước, từng lạy","Ngươi tập
 function selxLesson(){const Z=S.selx2;const L=BAL.selx.lesson;
  selxCard(BAL.selx.lodge.sanh[1],`<p>Ma ma dạy quy củ: đi bước nhỏ, mắt không ngẩng quá vai người trên; hành lễ vạn phúc hai tay chồng bên hông; thưa gửi nhỏ nhẹ, không cướp lời.</p><p>Bà gõ thước: «Ai tập kỹ, ta nhớ. Ai lười, ta cũng nhớ.»</p>`,
   SELX_LES.map(([n,o],i)=>selxO(n,()=>{const b=rsnap();selxSpend(L.k[i]);const mk=selxLessonMark(S,i);Z.lesson=mk;const dm=(mk-L.mid)*BAL.selx.maStep;const dmm=i===0?Math.max(L.maMin*BAL.selx.maStep,dm):dm;Z.ma=(Z.ma||0)+dmm;
-   const fx=L.fx[i]||{};if(fx.duc)S.duc=cl((S.duc||0)+fx.duc,0,100);if(fx.suc)S.suc=cl((S.suc||0)+fx.suc,0,sucCap(S));
+   const fx=L.fx[i]||{};if(fx.duc)spAdd(S,"duc",fx.duc);if(fx.suc)S.suc=cl((S.suc||0)+fx.suc,0,sucCap(S));
    selxAll().forEach(v=>{const e=R(L.k.length);v.__ma=(v.__ma||0)+(selxLessonMark(v,e)-L.mid)*BAL.selx.maStep});/* law 1: every girl takes the same lesson */
    try{selxAskNpc()}catch(e){}
    const know=[];const H=selxHints(mk);H.forEach(t=>know.push(t));
@@ -139,7 +139,7 @@ const SELX_VOUT={benh:"{bully} sững lại; người xung quanh nhìn ngươi k
 function selxApply(side,c,f,sign){const D=BAL.selx;const Z=S.selx2;const who=k=>k==="bystander"?(c.bystanders||[]):c[k]?[c[k]]:[];let t=0;
  for(const [key,n] of Object.entries(side||{})){const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){if(r==="ma"){Z.ma=(Z.ma||0)+(a==="friend"?1:-1)*n*D.maStep;continue}
    const s=a==="friend"?1:-1;who(r).forEach(v=>{if(v&&v!==S)relAdd(S,v,s*n*f)})}
-  else if(a==="duc")S.duc=cl((S.duc||0)+sign*n*D.ducStep,0,100);else if(a==="face")S.danh=cl((S.danh||0)+sign*n*D.faceStep,0,100);/* face in gain = she keeps face (Danh +), in loss = loses face (Danh −); before it always lowered Danh, so a «face» gain was a hidden loss (law 2/3) */else if(a==="time")t+=sign*n;else if(a==="fav"){/* RV-SELX (law 2/3): «fav» = how the three royals (E / T / H) hear of her from the yard; was written to an unread Z.fav0 (a loss that did nothing) */Z.fav=Z.fav||{};["E","T","H"].forEach(x=>{Z.fav[x]=(Z.fav[x]||0)+sign*n*D.fav.plus})}}return t}
+  else if(a==="duc")spAdd(S,"duc",sign*n*D.ducStep);else if(a==="face")spAdd(S,"danh",sign*n*D.faceStep);/* face in gain = she keeps face (Danh +), in loss = loses face (Danh −); before it always lowered Danh, so a «face» gain was a hidden loss (law 2/3) */else if(a==="time")t+=sign*n;else if(a==="fav"){/* RV-SELX (law 2/3): «fav» = how the three royals (E / T / H) hear of her from the yard; was written to an unread Z.fav0 (a loss that did nothing) */Z.fav=Z.fav||{};["E","T","H"].forEach(x=>{Z.fav[x]=(Z.fav[x]||0)+sign*n*D.fav.plus})}}return t}
 /* bystanders act by their nết (the seed's bystander table): defend → closer to the victim, cold to the bully; join → the reverse (law 1, NPC↔NPC) */
 function selxBystand(seed,c,f){const T=seed.bystander||{};for(const v of c.bystanders||[]){const N=selxNet(v);const act=["defend","join","silent","ma"].find(k=>(T[k]||[]).some(x=>N.includes(x)))||(R(100)<BAL.selx.byDef?"defend":"silent");/* law 4: the fallback chance from BAL */
   if(act==="defend"){if(c.victim&&c.victim!==v)relAdd(v,c.victim,f);if(c.bully&&c.bully!==v)relAdd(v,c.bully,-f)}else if(act==="join"){if(c.bully&&c.bully!==v)relAdd(v,c.bully,f);if(c.victim&&c.victim!==v)relAdd(v,c.victim,-f)}}}
@@ -285,8 +285,8 @@ function selxPhanCung(then){const Z=S.selx2||{};const list=[{p:S,fav:Object.assi
  if(typeof window.phanCungEdict==="function"){try{return window.phanCungEdict({list,then})}catch(e){console.error("phanCungEdict",e)}}then()}
 /* MAIN 118 law 1 scan row 20: the selection-days thiện cảm goes into the palace — Hoàng thượng → Sủng, Thái hậu → her favour, Hoàng hậu → her favour; the kept girls the same */
 function selxCarry(){const Z=S.selx2;const C=BAL.selx.carry,F=Z.fav||{};if(Z.carried)return;Z.carried=1;
- S.sung=Math.max(0,(S.sung||0)+(F.E||0)*C.E);S.th=cl((S.th||0)+(F.T||0)*C.T,-100,100);S.hh=cl((S.hh||0)+(F.H||0)*C.H,-100,100);
- for(const v of Z.keptV||[]){const f=(Z.favG||{})[v.id]||v.__fav||{};v.sung=Math.max(0,(v.sung||0)+(f.E||0)*C.E);v.th=cl((v.th||0)+(f.T||0)*C.T,-100,100);
+ S.sung=Math.max(0,(S.sung||0)+(F.E||0)*C.E);spAdd(S,"th",(F.T||0)*C.T);spAdd(S,"hh",(F.H||0)*C.H);
+ for(const v of Z.keptV||[]){const f=(Z.favG||{})[v.id]||v.__fav||{};v.sung=Math.max(0,(v.sung||0)+(f.E||0)*C.E);spAdd(v,"th",(f.T||0)*C.T);
   const q=(selxRoyals().find(x=>x[0]==="H")||[])[2];if(q&&typeof q==="object"&&f.H)try{relAdd(v,q,(f.H||0)*C.H)}catch(e){}}}
 /* MAIN 118 (a): the 3 days = BAL.selx.days tuần (OD ~07:05Z); the clock moves at the edict (j8 wk() = turn · tuần-per-month + tuan) */
 function selxClock(){const Z=S.selx2;if(Z.clock)return;Z.clock=1;const n=BAL.selx.tuan;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}}

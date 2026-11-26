@@ -40,9 +40,30 @@ function opEx(a,t){const r=a.j95rum;try{if(r)a.j95rum=null;return !!j95except(a,
 (function(){const g0=motiveOK;motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!opOn()||!g||!g.ok||!a||!t||a===S||a===t||typeof a!=="object"||a.rel==null||!H95.has(kind))return g;
   const h=Math.round(opHeat(a,t));if(h>=BAL.oanPace.act)return g;if(opEx(a,t))return g;
   return{ok:false,why:`chưa đủ oán với ${t===S?"ngươi":t.name} (${h}, cần ${BAL.oanPace.act})`}}catch(e){return g}};window.motiveOK=motiveOK})();
-/* (d) revenge spends the oán it vents */
-function opVent(a,t){try{if(!opOn()||!a||!t||a===t)return 0;const o=oan(a,t);if(!(o>0))return 0;const V=BAL.oanPace.vent;const d=Math.min(o,Math.max(V.min,Math.round(o*V.share)));oanAdd(a,t,-d);return d}catch(e){return 0}}
+/* (d) revenge spends the oán it vents — and the jealousy (review/oan-pace-ghen: a consort who acts against her spends her Ghen; she, acting against a consort, spends her own jealousy of that consort, law 1) */
+function opVent(a,t){try{if(!opOn()||!a||!t||a===t)return 0;let d=opGvent(a,t);const o=oan(a,t);if(!(o>0))return d;const V=BAL.oanPace.vent;const x=Math.min(o,Math.max(V.min,Math.round(o*V.share)));oanAdd(a,t,-x);return d+x}catch(e){return 0}}
+function opGvent(a,t){const V=(BAL.oanPace.ghen||{}).vent;if(!V)return 0;const sp=g=>Math.min(g,Math.max(V.min,Math.round(g*V.share)));
+ if(t===S&&a!==S&&typeof a==="object"&&(+a.ghen||0)>0){const x=sp(+a.ghen);a.ghen=cl(a.ghen-x,0,100);return x}
+ if(a===S&&t&&typeof t==="object"&&(+t.pg||0)>0){const x=sp(+t.pg);t.pg=cl(t.pg-x,0,100);return x}return 0}
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(r&&a&&t&&a!==t&&H95.has(k)&&!F95.has(k))opVent(a,t)}catch(e){}return r}})();
 (function(){const w0=twDo;twDo=function(a,t,k){const r=w0.apply(this,arguments);try{if(r&&a&&t&&a!==t&&typeof AGHOST!=="undefined"&&AGHOST.has(k))opVent(a,t)}catch(e){}return r}})();
 /* (d) a lie spread about her (j95b j95bSeed: x tells y she harmed y) is an act against her too: the teller spends her oán the same way */
 (function(){if(typeof j95bSeed!=="function")return;const s0=j95bSeed;j95bSeed=function(x,y){const r=s0.apply(this,arguments);try{if(r&&x&&typeof x==="object")opVent(x,S)}catch(e){}return r}})();
+/* ===== GHEN PACE (review/oan-pace-ghen; MAIN 161 scope 18:58Z «GHEN gets the same control» + 19:20Z relative-favour rule; numbers BAL.oanPace.ghen) =====
+   v.ghen = a consort's jealousy of HER (j1 ghenUp is the one door; a jealousy caused by another consort already turns into oán between the two).
+   RISE (opGhenIn, called by ghenUp before its slow-near-the-top share): × relative favour clamp(1 + (her Sủng − that consort's Sủng) ÷ rel.span, rel.min,
+   rel.max) — a consort as favoured as she is, or more, hardly grows jealous; then one bounded step per cause (≤ step), the same incident (same buổi)
+   never stacks, at most day a day (opStep, store v.opg). The day of the last cause is v.gLw.
+   FADE (opGfK, × the j28 ghenCool of each day): faster the longer nothing new feeds it (BAL.oanCool.quiet / alone, like oán), slower when deep
+   (ghen ≥ deep: × BAL.oanCool.deep.k), and × clamp(1 − gap ÷ rel.span, rel.fmin, rel.fmax): her lead in favour keeps it, a closed gap lets it go.
+   VENT (opGvent in opVent above): acting against her spends vent.share of that jealousy (≥ vent.min).
+   TWO-WAY (law 1): HER jealousy of a consort (v.pg; j1 pgUp, j8 pgCool) — same step / day / rel (gap = that consort's Sủng − hers) / deep / alone / vent;
+   her base fade = BAL.oanCool.ghen.base + pct × pg (the NPC base rule; she has no nết). Rollback: BAL.oanPace.on = 0 (old rise; old fade). */
+function opRelF(gap){const R=BAL.oanPace.ghen.rel;return Math.max(R.min,Math.min(R.max,1+gap/R.span))}
+function opGhenIn(v,n,by){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;const me=by&&typeof by==="object"&&by.coop?by:S;
+ n=opStep(v,me,n*opRelF((+me.sung||0)-(+v.sung||0)),"opg",G);v.gLw=opNow()[0];return n}catch(e){return n}}
+function opPgIn(v,n){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;n=opStep(S,v,n*opRelF((+v.sung||0)-(+S.sung||0)),"opg",G);v.pLw=opNow()[0];return n}catch(e){return n}}
+function opGfK(lv,gap,lw){try{const G=BAL.oanPace.ghen,C=BAL.oanCool;if(!opOn()||!G)return 1;let k=1;const q=opNow()[0]-(+lw||0)-C.quiet;
+ if(q>0)k*=1+C.alone.k*Math.min(q,C.alone.max);if(lv>=G.deep)k*=C.deep.k;const R=G.rel;return k*Math.max(R.fmin,Math.min(R.fmax,1-gap/R.span))}catch(e){return 1}}
+/* her own jealousy's daily fade (j8 rivalsTurn; was a flat −1): fractions carry (v.pcc) */
+function pgCool(v){try{if(!opOn()||!(BAL.oanCool&&BAL.oanCool.on))return 1;const G=BAL.oanCool.ghen,p=+v.pg||0;const d=(+v.pcc||0)+(G.base+G.pct*p)*BAL.oanCool.me*opGfK(p,(+v.sung||0)-(+S.sung||0),v.pLw),n=Math.floor(d);v.pcc=Math.round((d-n)*1000)/1000;return n}catch(e){return 1}}

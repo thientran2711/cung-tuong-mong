@@ -266,7 +266,7 @@ const R_=[
  {k:"soat",g:"so",who:"c",n:"Lục soát tẩm cung",art:"phat-vo-co-h",ok:(p,T)=>T.k!=="timid"&&staffOf(p).length>0},
  {k:"cau",g:"so",who:"c",n:"Cầu khấn khắp nơi",art:"cau-tu",ok:p=>p===S||(p.bac||0)>=BAL.ea.fx.cau.bac},
  {k:"huong",g:"so",who:"c",n:"Thắp hương cầu an",art:"cau-tu",ok:p=>(p===S?S.bac:(p.bac||0))>=BAL.ea.fx.huong.bac},
- {k:"cham",g:"ghen",who:"c",n:"Châm chọc tình địch",art:"dap-tra-mia-h",ok:(p,T)=>T.k!=="timid"&&!!eaRival(p)},
+ {k:"cham",g:"ghen",who:"c",n:"Châm chọc tình địch",art:"dap-tra-mia-h",ok:(p,T)=>T.k!=="timid"&&!!eaMockT(p)},
  {k:"tui",g:"ghen",who:"c",n:"Tủi thân khóc thầm",art:"nhin-loi-mia-h",ok:()=>true},
  {k:"huong",g:"ghen",who:"c",n:"Tụng kinh cho lòng lắng lại",art:"cau-tu",ok:p=>(p===S?S.bac:(p.bac||0))>=BAL.ea.fx.huong.bac},
  {k:"trang",g:"ghen",who:"c",n:"Trang điểm lộng lẫy chờ ngự giá",art:"dang-tra",ok:p=>!!S.emp&&!((p===S?S.confined:p.confined)>0)&&(p===S?S.bac:(p.bac||0))>=BAL.ea.fx.trang.bac},
@@ -326,6 +326,8 @@ function eaTopSung(){try{const L=[S].concat(liveC()).filter(x=>!(x===S&&(S.out||
 function eaTarget(p){try{const e=p.emo;if(e&&e.t!=null){const t=byKey(e.t);if(t&&t!==p&&(t===S||t.alive))return t}}catch(e){}return null}
 /* the Emperor / Thái hậu with no named target: the consort they think least of now (Sủng / Thái hậu regard), her included */
 function eaTargetET(p){const t=eaTarget(p);if(t&&(t===S||(rivals||[]).includes(t)))return t;try{const L=[S].concat(liveC()).filter(x=>!(x===S&&(S.out||S.dead)));const f=p===S.thO?"th":"sung";return L.sort((a,b)=>(a[f]||0)-(b[f]||0))[0]||null}catch(e){return null}}
+/* rank respect (j8 mockOK): open mockery only toward an equal or lower rank */
+function eaMockT(p){const t=eaRival(p);return t&&mockOK(p,t)?t:null}
 function eaRival(p){const t=eaTarget(p);if(t&&(t===S||(rivals||[]).includes(t)))return t;try{const L=[S].concat(liveC()).filter(x=>x!==p&&!(x===S&&S.out));let best=null,bv=-1;for(const x of L){const h=(p===S?(S.ro&&S.ro[x.id]||0):oan(p,x))-(p===S?(S.rl&&S.rl[x.id]||0):aff(p,x))/BAL.ea.rival.affDiv;if(h>bv){bv=h;best=x}}return bv>BAL.ea.rival.min?best:null}catch(e){return null}}
 function eaOtherMaid(p){const t=eaRival(p);if(t&&t!==p){const L=maidOf(t);if(L.length)return{who:t,m:eaVictim(L)}}return null}
 /* G3: the maid an outburst falls on = the one her mistress is least pleased with (lowest lòng), near-best — not a random maid */
@@ -432,7 +434,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:BAL.ea.ventDef},me=p===S,res=[]
   case"theu":pay({suc:-F.suc,sung:F.sung});h=me?"Lòng vui, ngươi ngồi thêu một chiếc túi thơm đến khuya rồi sai người dâng lên Hoàng thượng. Ngài cầm lên ngắm, khẽ mỉm cười.":`${Nm(p)} thêu túi thơm dâng Hoàng thượng.`;break;
   case"kexau":{const t=eaRival(p);if(!t)return null;target=t;if(t===S)apply({danh:-F.rd});else ap(t,{danh:-F.rd});oanAdd(t,p,F.oan);pay({danh:-F.danh});if(me){add(`${nm(t)} Danh −${F.rd}`);add(`${nm(t)} oán ngươi +${F.oan}`)}
    h=me?`Ngươi kể với cung nữ mấy chuyện chẳng hay về ${nm(t)}; chẳng mấy hôm lời đồn đã lan ra khỏi cung.`:`${Nm(p)} kể xấu ${t===S?"ngươi":t.name} với cung nữ; lời đồn lan khắp hậu cung.`;break}
-  case"cham":{const t=eaRival(p);if(!t)return null;target=t;affAdd(t,p,-F.rel);oanAdd(t,p,F.oan);if(me)add(`${nm(t)} thiện cảm −${F.rel}`);pay({danh:-F.danh});
+  case"cham":{const t=eaMockT(p);if(!t)return null;target=t;affAdd(t,p,-F.rel);oanAdd(t,p,F.oan);if(me)add(`${nm(t)} thiện cảm −${F.rel}`);pay({danh:-F.danh});
   h=me?`Gặp ${nm(t)} ở ngự hoa viên, cơn ghen trào lên, ngươi buông mấy câu châm chọc. Người xung quanh nghe rõ cả.`:`${Nm(p)} châm chọc ${t===S?"ngươi":t.name} trước mặt mọi người.`;
   if(t===S&&!me)eaHitMe(p,"cham");break}
  case"thuong":{const st=staffOf(p);const b=Math.min(F.bac,me?S.bac:(p.bac||0));pay({bac:-b});for(const s of st)loyAdd(s,F.loy);add(`lòng cung nhân +${F.loy}`);h=me?"Lòng vui như mở hội, ngươi mở rương, thưởng bạc cho cả cung. Cung nhân mừng rỡ tạ ơn.":`${Nm(p)} vui vẻ thưởng bạc cho cung nhân.`;break}

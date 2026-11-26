@@ -5,7 +5,7 @@
 //  - who raised oán toward her (caller names), to see the causes.
 // usage: node dev/measure/oan-pace.js <page.html> <seeds> [months=12] [seed0=0]
 // env PAR (default 3), CAP (s per seed, default 1500), BALO (JSON merged into BAL before play)
-// prints one JSON line per seed: {seed,end,turn,days:{wk:[[k,doer]...]},mo:[{m,mean,mx,n,deep,my,ghen}],src}
+// prints one JSON line per seed: {seed,end,turn,days:{wk:[[k,doer]...]},mo:[{m,mean,mx,n,deep,my,ghen,gmx,g60}],src:{oan,ghen}}
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const [,,PAGE,NS,MO,S0]=process.argv;const N=+NS||3,MONTHS=+MO||12,seed0=+S0||0,PAR=+process.env.PAR||3;
 const BALO=process.env.BALO?JSON.parse(process.env.BALO):null;
@@ -36,12 +36,14 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
    window.__mo=[];const mo=()=>{try{const R=rivals.filter(v=>v&&v.alive!==false&&!v.out&&!v.coop);const a=R.map(v=>{try{return oan(v,S)}catch(e){return +v.oan||0}}),g=R.map(v=>+v.ghen||0);
      const mine=R.map(v=>{try{return oan(S,v)}catch(e){return 0}});const dg=R.map(v=>{try{return danger(v,S)}catch(e){return 0}});const L=BAL.oanLv;
      window.__mo.push({m:S.turn,n:a.length,mean:a.length?+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1):0,mx:a.length?Math.max(...a):0,oan:a.filter(x=>x>=L[1]).length,deep:a.filter(x=>x>=L[2]).length,
-      my:mine.length?Math.max(...mine):0,ghen:g.length?+(g.reduce((x,y)=>x+y,0)/g.length).toFixed(1):0,dg:dg.length?+(dg.reduce((x,y)=>x+y,0)/dg.length).toFixed(1):0,dg30:dg.filter(x=>x>=30).length,rank:S.rank})}catch(e){}};
+      my:mine.length?Math.max(...mine):0,ghen:g.length?+(g.reduce((x,y)=>x+y,0)/g.length).toFixed(1):0,gmx:g.length?Math.max(...g):0,g60:g.filter(x=>x>=60).length,dg:dg.length?+(dg.reduce((x,y)=>x+y,0)/dg.length).toFixed(1):0,dg30:dg.filter(x=>x>=30).length,rank:S.rank})}catch(e){}};
    window.__mo0=mo;
    const et=endTurn;endTurn=function(){const m0=S.turn;const r=et.apply(this,arguments);if(S.turn!==m0)mo();return r};
    const W=window.__src={};const who=()=>{const L=String(new Error().stack).split('\n').slice(3).map(l=>(l.match(/at (?:Object\.|window\.)?([\w$.]+)/)||[])[1]||'?').filter(f=>!/^(oanAdd|tally|who|Array|eval|Function|o0|a0|n0|g0|f0|r0|c0|e0)$/.test(f)&&!/^(Array|Object)\./.test(f));return L.slice(0,2).join('<')};
    const tally=(k,n)=>{if(!(n>0))return;const z=W[k]=W[k]||{};const w=who();const e=z[w]=z[w]||[0,0,0];e[0]++;e[1]+=n;e[2]=Math.max(e[2],n)};
    const oa=oanAdd;oanAdd=function(x,y,n){let o0=0;try{o0=oan(x,y)}catch(e){}const r=oa.apply(this,arguments);try{if(y===S&&x!==S){const d=oan(x,y)-o0;if(d>0)tally('oan',d)}}catch(e){}return r};
+   /* review/oan-pace-ghen: who raised Ghen toward her (ghenUp with by = her / none), to see the causes */
+   const gu=ghenUp;ghenUp=function(v,n,why,by){const r=gu.apply(this,arguments);try{if(r>0&&(by===undefined||by===S))tally('ghen',r)}catch(e){}return r};
   });
   await p.evaluate(()=>window.__mo0());
   const t0=Date.now();let end='months';
