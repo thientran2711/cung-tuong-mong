@@ -172,7 +172,10 @@ Object.assign(BAL,{dis:{n:[1,2],aff:4,sung:1,refuse:35,refAff:2,refSung:1,talk:2
         else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ tuanTh */
 BAL.mort={on:1,playerFloorYears:0,
  life:{show:0,care:1,careAdd:1,careMax:3,cureTy:40,careYt:1,cureOther:20,cureSuc:5,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
-  dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:"adult",
+  /* emp = the Emperor's OWN curve (owner question 26/11 «tuổi đời tính thế nào cho hợp lý», MAIN 163 rec; PACE-SPEED): enthroned ~20 (BAL.ps.empAge 19–25),
+     death mean 36 sd 7 (28–60) ⇒ a reign of ~14 years (half of reigns 9–18; MAIN asked 34/8/26–60, but its clip at 26 piles early deaths: reign mean 12, p10 4 years). Everyone else keeps adult mean 45 sd 15; her age-40 end (j3) unchanged.
+     A save whose Emperor already rolled his lifespan keeps it (no reroll, jmort rule). */
+  dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:{mean:36,sd:7,lo:28,hi:60},
         kid:{risk:12,early:[[1,3,5],[3,6,3],[6,10,2]],adult:"adult"}}},
  oldFloor:0,thIllKeep:30,sudden:15,omen:[2,6],omenSt:[1,3],oldAge:55,thDanh:5,maidLoy:40,repl:{young:[22,8],adult:[40,10]},pre:{mo:12,ill:6,suc:2,omenSuc:3},acc:{me:.05,npc:.08,emp:.15},oddP:30,
  emp:{ass:.45,poi:.3,weak:1.2,foil:60,foilLo:20,foilHi:90,rumour:50,rumourMat:2,plotMo:[1,2]},

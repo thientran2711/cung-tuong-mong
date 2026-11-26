@@ -39,6 +39,6 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
     return{t:S.turn,dead}});
    if(st.dead){end='ended';break}
    if(st.t>=MONTHS)break;if(Date.now()-t0>(+process.env.CAP||2400)*1e3){end='cap';break}}
-  const W=await p.evaluate(()=>{const W=window.__ps;const r=window.__res[window.__res.length-1]||null;return Object.assign({},W,{botActs:window.__acts,trimN:window.__trimN,trimL:window.__trimL,res:r?{title:r.title,fate:r.fate,turns:r.turns,age:r.age,rank:r.rank,maxRank:r.maxRank,hhTurn:r.hhTurn}:null,tNow:S.turn,rankNow:S.rank})});
+  const W=await p.evaluate(()=>{const W=window.__ps;const r=window.__res[window.__res.length-1]||null;return Object.assign({},W,{botActs:window.__acts,trimN:window.__trimN,emp:{age:S.emp&&S.emp.age,tho:S.emp&&S.emp.tho,year:S.year},trimL:window.__trimL,res:r?{title:r.title,fate:r.fate,turns:r.turns,age:r.age,rank:r.rank,maxRank:r.maxRank,hhTurn:r.hhTurn}:null,tNow:S.turn,rankNow:S.rank})});
   console.log(JSON.stringify({seed:si,end,wall:Math.round((Date.now()-t0)/1000),ps:W,errs:errs.slice(0,3)}));await ctx.close()};
  const q=jobs.slice();await Promise.all(Array.from({length:PAR},async()=>{while(q.length)await run(q.shift())}));await b.close()})().catch(e=>{console.error(e);process.exit(2)});
