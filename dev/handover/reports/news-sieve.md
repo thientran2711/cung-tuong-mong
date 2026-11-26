@@ -264,3 +264,14 @@ G4 90-button-crawl «Ô lưu · Lui» 1 FAIL = the same as LIVE (RV-NEWS-SIEVE-2
 HANDOVER: nothing left on KAWHY-VERDICT. Open for MAIN: the OB-VERDICT merge line above (kaResultRows 3rd arg); stale result-reason.js gate (old rule) for its owner.
 
 ## LAND READY review/news-sieve d6e27b01 (NEWS-SIEVE-3: RV PASS 82eb2832 + KAWHY-VERDICT; fast-forward of LIVE 3af7896e)
+
+### NEWS-SIEVE-3 · MAIN 157 order: KAWHY-VERDICT as its own branch `review/kawhy-verdict` (for MAIN 158)
+Base: review/news-sieve d6e27b01 (= RV PASS news-sieve-rv 82eb2832 + KAWHY ab2358b1) + merge review/ob-verdict-rv 5dc1db31 (contains e27c9f9f) → cace0315.
+Merge: conflicts j63 (kaAim block + kitKemRow: ob-verdict's code kept, my 3rd arg + kaWhyLead(c,0,C) re-applied), assemble.py (jnsieve + jverdict both kept, jnsieve in its old slot),
+KIT_REQUESTS (both entries kept), built files rebuilt.
+Verdict wiring (agreed with OB-VERDICT-2): resultShow passes ok0 = okHint true/false, else kaAimVerdict(before).ok, to kaResultRows BEFORE kaAimUse (kaAimVerdict only reads);
+jne kitNightEnd passes kaAimVerdict(o.before).ok. Now the Bày mưu Vu oan card reads THÀNH · «Ta vu oan … thành» · Người ấy … · «Được: Danh +3 | Tâm cơ +2» (no false reason).
+Tests on cace0315 (each run alone): kawhy-verdict PASS 25/25 (530-case scan 0 against the verdict) · ob-verdict ALL 84 OK · news-sieve 36 tuần seed 1 PASS 10/10.
+(Run three at once on this box: a toast had already hidden → «card is shown» flipped in 1–2 checks; content right; alone all pass.)
+Shots looked (Fold 755x1000 + iPad 1180x820): CDN img/_review/kawhy-verdict/after-{fold-755x1000,ipad-1180x820}.png; before = img/_review/news-sieve/kawhy-before-*.png.
+## LOOK READY review/kawhy-verdict cace0315
