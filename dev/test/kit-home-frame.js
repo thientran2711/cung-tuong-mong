@@ -1,5 +1,5 @@
 /* kit-home-frame.js — KIT §4.3a (pre-palace portrait, OB-NGOAICUNG; MAIN 156 queue): before the palace (isKc: Tiểu thư / Thôn nữ at home) HER portrait
-   frame shows NO consort rank sign — no rank crest (.kcrest), no rank gem (.kgem) — in the header and her identity card; once she is in the palace
+   frame shows NO consort rank sign (frame by home kind: Công chúa → frame-princess) — no rank crest (.kcrest), no rank gem (.kgem) — in the header and her identity card; once she is in the palace
    (S.kc.inPal) the crest + gem come back. Fold 755x1000 + iPad 1180x820, a real «Ở nhà» start (origin tt), real click on her header portrait.
    usage: node dev/test/kit-home-frame.js <index.html> [shotdir]   exit 1 on a FAIL */
 const {chromium}=require('playwright');const path=require('path');const F=path.resolve(process.argv[2]);const SH=process.argv[3];const ORG='tt';let bad=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++};const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -21,6 +21,10 @@ const {chromium}=require('playwright');const path=require('path');const F=path.r
  await p.evaluate(()=>{const e=document.getElementById('me-p');if(e)e.click()});await sleep(2500);
  const id=await p.evaluate(()=>{const M=document.getElementById('modal');return {open:!M.hidden,fr:[...M.querySelectorAll('img.kfr')].filter(f=>/consort/.test(f.src)).map(f=>({crest:!!f.parentElement.querySelector('.kcrest'),gem:!!f.parentElement.querySelector('.kgem')}))}});
  ok(id.open&&id.fr.length&&id.fr.every(x=>!x.crest&&!x.gem),`${D}: identity card at home: her frame has no crest, no gem ${JSON.stringify(id)}`);if(SH)await p.screenshot({path:`${SH}/home-id-${W}.png`});
+ /* home kinds (KIT_HOME_FRAME by kc2D): a foreign princess at her own court → frame-princess; thôn nữ → plain consort-0; never a crest / gem */
+ for(const [kd,want] of [["nc","frame-princess"],["dan","frame-consort-0"],["","frame-consort-0"]]){const r=await p.evaluate(kd=>{for(let i=0;i<6&&Q.length;i++)closeModal();const M=document.getElementById('modal');if(M)M.hidden=true;const k0=S.kc.kd;S.kc.kd=kd;render();
+   const e=document.getElementById('me-p');const f=e&&e.querySelector('img.kfr');const o={fr:f&&f.src.split('/').pop(),crest:!!(e&&e.querySelector('.kcrest')),gem:!!(e&&e.querySelector('.kgem'))};S.kc.kd=k0;return o},kd);
+  ok(r.fr===want+'.webp'&&!r.crest&&!r.gem,`${D}: home kind «${kd||'tiểu thư'}» → ${want}, no crest/gem ${JSON.stringify(r)}`)}
  await p.evaluate(()=>{for(let i=0;i<6&&Q.length;i++)closeModal();const M=document.getElementById('modal');if(M)M.hidden=true;window.__kcdbg=JSON.stringify(Object.keys(S.kc||{})).slice(0,80)+' isKc='+isKc();if(S.kc)S.kc.inPal=true;render()});await sleep(1500);
  const pal=await p.evaluate(()=>{const e=document.getElementById('me-p');return {kc:isKc(),crest:!!(e&&e.querySelector('.kcrest')),gem:!!(e&&e.querySelector('.kgem'))}});
  if(pal.kc!==false)console.log('DBG',await p.evaluate(()=>window.__kcdbg));ok(!pal.kc&&pal.crest&&pal.gem,`${D}: in the palace: crest + gem back ${JSON.stringify(pal)}`);

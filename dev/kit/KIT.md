@@ -247,8 +247,10 @@ Stage strangers: full-body grey silhouettes `img/kit/unknown-fig-f|m|k.webp` (90
 **4.3a Her portrait before the palace (OB-NGOAICUNG pre-palace, MAIN 156 queue, KK40).** At home (`isKc()`: Tiểu thư / Thôn nữ, the home road
 before tuyển tú / phân cung) she holds NO consort rank, so her portrait carries no rank sign: no rank gem (`kitDecor` badge null) and no rank
 crest (`kitNoCrest(f)` — jk2b pcPort crest step skips her; jhcpor gives no crest headroom when no crest is drawn). One rule for every place her
-frame shows (header, identity card, small mdH avatars, cards, dialog plates — all go through kitDecor / pcPort). The frame stays the plain
-`frame-consort-0` until a painted home frame exists (ART REQUEST K-FRAME-HOME, KIT_REQUESTS). The origin medallion stays (it is her family, not
+frame shows (header, identity card, small mdH avatars, cards, dialog plates — all go through kitDecor / pcPort). Her frame at home comes from ONE
+table `KIT_HOME_FRAME[kc2D()]` (`kitHomeFrame()`): a foreign princess at her own court (nc / bd / pf) → the existing `frame-princess` + `bg-princess`
+(MAIN 156); tiểu thư ("") and thôn nữ (dan) → the plain `frame-consort-0` until Foreman C's painted frames land (ART REQUEST K-FRAME-HOME:
+set `KIT_HOME_FRAME[""]="home"`, `.dan="dan"` + KIT_FRW numbers, nothing else). The origin medallion stays (it is her family, not
 a rank). In the palace (`S.kc.inPal`) crest + gem come back. Helpers `kitPrePal()`, `kitNoCrest(f)` (j60). Test `node dev/test/kit-home-frame.js <index.html>`
 (LIVE 4 FAIL → 0). Kit page sample «§4.3a».
 
