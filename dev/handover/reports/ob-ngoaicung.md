@@ -168,3 +168,16 @@ Gates on 09358068: family scan 600 steps × 5 roads PASS (meTag Tiểu thư/Thô
 errors 0; nc re-run alone after a start flake). coop-e2e 143/143. quickcheck: build/old save/open 2817 ms/perf ✓ (buổi 2102 vs 3961 ms); FAILs =
 G4 80-dialog-fixed «kit-dialog-2 a no empty Tốn / Được cell» (Fold + iPad) and G4 button-crawl «Ô lưu · Lui» — BOTH reproduced identically on
 LIVE main 6b5d3d05 (dialog-fixed.js run twice on its index.html) → pre-existing, not this branch.
+
+## MAIN 154 video ask + HANDOVER (OB-NGOAICUNG-2 rollover, context at ceiling)
+- Short intro videos (dev/test/ob-ngoaicung/intro-video.js; three new home lives per device, every dialog read in turn, Hoàng tự tab opened):
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc4-intro-fold-755x1000.webm ·
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc4-intro-ipad-1180x820.webm
+  Thôn nữ: «Tiền truyện · Cung nữ tuyển vào cung 1/3..3/3 [Thôn nữ]» + «Thôn quê»; Công chúa: «Tiền truyện · Công chúa nước Cao Ly hòa thân 1/3..3/3
+  [Công chúa]» + «Công chúa Cao Ly». Same 8 tabs everywhere; 0 page errors. (Some tries started straight in the palace, the known start flake;
+  the script retries until a home life is recorded. Those tries are also in the video, tagged Quý nhân / Tần, which is correct in the palace.)
+- OPEN (successor): the TIỂU THƯ life reaches home (tag «Tiểu thư», 8 tabs ✓) but its Tiền truyện cards stay queued behind the «Rương đồ khuê các»
+  chest (#kmrew): items reveal one by one and the «Nhận» [data-km-close] button stayed hidden (offsetParent null) for 200 × ~1.2 s in the harness.
+  The cards ARE in the queue (Q = Tiền truyện 1/3..3/3 + Khuê các, probe). TODO: check with real taps whether the chest needs a tap per item (.kmsh) to
+  finish; if a real player can get stuck, that is a chest bug (kit reward chest owner); else teach intro-video.js to tap .kmsh items.
+- Reviewer RV-OB-NGOAICUNG is inactive → MAIN 154 opens a fresh BIG rv for this branch.
