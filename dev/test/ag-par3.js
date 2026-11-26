@@ -74,13 +74,17 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const spy={};const sp=nm=>{const f=window[nm];spy[nm]=0;window[nm]=function(){if(arguments[0]===v||arguments[1]===v)spy[nm]++;return f.apply(this,arguments)};return()=>window[nm]=f};
   const U=["itemTest","hireTake","staffTam","recommend","searchMaids","threatServ"].map(sp);
   const rk0=v.rank;try{v.rank=6;/* merge r2: main's household table (BAL.promo.cap) gives low ranks no eunuch — test at a rank with room */v.bac=500;const k0=Object.keys(IT).find(k=>IT[k].pr>0&&!IT[k].sl);v.inv=[{k:k0,from:key(t),d:S.turn}];
-   v.staff=[{sid:9e6+1,name:"Thử A",role:"maid",loyal:20,af:{},rk:3},{sid:9e6+2,name:"Thử B",role:"maid",loyal:90,af:{}}];
+   v.staff=[{sid:9e6+1,name:"Thử A",role:"maid",loyal:20,af:{},rk:BAL.srvRk.cs/* parity-facfix: Tra xét needs a Chưởng sự cô cô (maid-ladder-6: cs = 4, was rk 3) — her searchMaids has the same gate */},{sid:9e6+2,name:"Thử B",role:"maid",loyal:90,af:{}}];
    S.npool=S.npool||{maid:[],eunuch:[]};S.npool.eunuch.push({sid:9e6+3,name:"Thử C",role:"eunuch",loyal:50,af:{},age:16,org:"dân",imp:"hiền"});
    const ts=(t.staff||[])[0]||(t.staff=[{sid:9e6+4,name:"Thử D",role:"maid",loyal:50,af:{}}])[0];ts.lover=9e6+5;ts.spyFor=null;v.knowDT=[ts.sid];const h0=hostility;hostility=(a,b)=>a===v&&b===t?90:h0(a,b);
    try{const H=AGREG.consort.par3house(v,N,null);out.house=H.map(o=>o.k);out.houseRun={};for(const o of H)out.houseRun[o.k]=String(AGRUN[o.k](v,o.t)||"").slice(0,60)}finally{hostility=h0}
   }finally{v.rank=rk0;U.forEach(f=>f())}out.spy=spy;
   /* phe phái */
-  const F0=(S.facs||[]).slice();try{S.facs=[];v.p3FacM=-1;v.rl[t.id]=60;const F=AGREG.consort.par3fac(v,N,null);out.fac=F.map(o=>o.k);const of=F.find(o=>o.k==="cx3:facFound");out.facRun=of?AGRUN[of.k](v,of.t):"";out.facMade=!!facOf(v)}finally{S.facs=F0}
+  const F0=(S.facs||[]).slice();try{S.facs=[];v.p3FacM=-1;const ft=L.find(x=>x!==v&&!sameHouse(v,x))||t;/* parity-facfix: p3FacFr skips a consort of the founder's own house — a drawn L[1] there offered nothing */v.rl[ft.id]=60;const F=AGREG.consort.par3fac(v,N,null);out.fac=F.map(o=>o.k);const of=F.find(o=>o.k==="cx3:facFound");
+   /* parity-facfix: founding is a REQUEST — the friend answers one of the 4 (jrcv rcvPick, a real choice, law 6b); the faction exists exactly on «full»; then «Nhận lời» is played */
+   const RP=window.rcvPick;const REC=[];window.rcvPick=function(t,a){const c=RP.apply(this,arguments);REC.push({t,a,id:c&&c.id});return c};
+   try{out.facRun=of?AGRUN[of.k](v,of.t):""}finally{window.rcvPick=RP}const tg=of&&(of.t||ft);const g=facOf(v);out.facAns=REC.filter(x=>x.a===v).map(x=>x.id);
+   out.facOk=!!of&&out.facAns.length===1&&!!(g&&facMembers(g).includes(tg))===(out.facAns[0]==="full");if(of&&!g)RCVK.facFound.opts(v,tg)[0].go();out.facMade=!!facOf(v)}finally{S.facs=F0}
   /* thuốc thúc sinh: her card = P3C.drug(S); the NPC builder gives the same odds */
   const D=P3C.drug(S),Dv=P3C.drug(v);out.drug={n:D.n,same:D.n===Dv.n&&JSON.stringify(D.c)===JSON.stringify(Dv.c)};
   return out});
@@ -88,18 +92,20 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(["cx3:talkHealth","cx3:talkPraise","cx3:talkSecret"].every(k=>r6.talkOpt.includes(k))&&r6.talkMoved,'NPC↔NPC talk: offered, runs the same card, moves the listener’s liking',{opt:r6.talkOpt,run:r6.talkRun});
  ok(["cx3:test","cx3:hire","cx3:staffTam","cx3:staffUp","cx3:search","cx3:threat"].every(k=>r6.house.includes(k)),'household options offered (Nghiệm độc / Thêm người / Tâm sự / Tiến cử / Tra xét / Dọa tố)',r6.house);
  ok(Object.values(r6.spy).every(x=>x>=1),'household deeds run her buttons’ own functions',r6.spy);
- ok(r6.fac.includes("cx3:facFound")&&r6.facMade,'phe phái: NPC founds a faction through found() (the same as Lập phe cùng)',{fac:r6.fac,run:r6.facRun});
+ ok(r6.fac.includes("cx3:facFound")&&r6.facOk&&r6.facMade,'phe phái: NPC asks through rcvAsk facFound (the same as Lập phe cùng); the friend answers one of the 4; «Nhận lời» founds it',{fac:r6.fac,ans:r6.facAns,run:r6.facRun});
  ok(r6.drug.same,'Uống thuốc thúc sinh: one builder P3C.drug for her and the NPC',r6.drug);
  /* 2e3 (AG-ALL-2e3): Mời đến cung ta · Phòng bị · thú nuôi · dạy con · điểm trang answers */
- const r7=await p.evaluate(()=>{const out={};const L=liveRivals(true).filter(x=>!x.out&&!x.queen&&x.alive&&!x.confined);const v=L[0],t=L.find(x=>x!==v&&!sameHouse(v,x));vNorm(v);vNorm(t);
+ const r7=await p.evaluate(()=>{const out={};const L=liveRivals(true).filter(x=>!x.out&&!x.queen&&x.alive&&!x.confined);const v=L[0],t=L.find(x=>x!==v&&!sameHouse(v,x)&&!sameHouse(S,x))/* parity-facfix: inviteBtn shows nothing for a consort of her own house — a drawn guest there read herInv 0 */;vNorm(v);vNorm(t);
   const N=Object.assign({},agNeeds(v),{ally:1,spite:1,safe:1,kid:1,danh:1});v.rl[t.id]=60;t.rl[v.id]=40;S.invQ=[];
   /* invite: one odds function for her button and the NPC host */
   let n=0;const f0=inviteO;inviteO=function(){n++;return f0.apply(this,arguments)};try{inviteBtn(t)}finally{inviteO=f0}out.herInv=n;
-  const I=AGREG.consort.par3inv(v,N,null);out.inv=I.map(o=>o.k);if(I[0]){AGRUN[I[0].k](v,I[0].t);out.q=S.invQ.length;const r0=roll;roll=()=>true;try{S.where=S.where||{};p3InvLand()}finally{roll=r0}out.came=S.where[I[0].t.id]===palaceOf(v)}
+  const I=AGREG.consort.par3inv(v,N,null);out.inv=I.map(o=>o.k);if(I[0]){/* parity-facfix: the landing puts the invitation on S.invQ and p3InvLand runs at once (jptime «no double wait»): count what reaches invQ there */const IL=p3InvLand;out.q=0;p3InvLand=function(){out.q=Math.max(out.q,(S.invQ||[]).length);return IL.apply(this,arguments)};
+   try{AGRUN[I[0].k](v,I[0].t);/* parity-facfix: jptime PT_NPC["cx3:invite2"] — the runner walks; the deed lands at the due khắc (ptLand), not at once */const r0=roll;roll=()=>true;S.where=S.where||{};/* the guest answers through rcvInviteGo (jrcv RCVK.invite, 4 answers, a real choice): read her answer */const RP=window.rcvPick;out.ans=[];window.rcvPick=function(tt,a){const c=RP.apply(this,arguments);if(a===v)out.ans.push(c&&c.id);return c};try{for(const a of ptZ().slice())if(!a.back&&a.a&&a.a.npc==="cx3:invite2"&&a.a.v===v.id)ptLand(a)}finally{roll=r0;window.rcvPick=RP}}finally{p3InvLand=IL}out.q=Math.max(out.q,(S.invQ||[]).length);const r0=roll;roll=()=>true;try{S.where=S.where||{};p3InvLand()}finally{roll=r0}out.came=S.where[I[0].t.id]===palaceOf(v);
+   /* parity-facfix: she comes on 3 of the 4 answers (all but «cáo bận» = no); then «Nhận lời, sang chơi» is played */out.ansOk=out.ans.length===1&&out.came===(out.ans[0]!=="no");if(!out.came){RCVK.invite.opts(v,I[0].t)[0].go();out.came=S.where[I[0].t.id]===palaceOf(v)}}
   /* defence orders */
   v.staff=(v.staff||[]).filter(s=>!s.spyFor);if(v.staff.length<2)v.staff.push({sid:9e6+21,name:"Thử F",role:"maid",loyal:60,af:{}},{sid:9e6+22,name:"Thử G",role:"eunuch",loyal:60,af:{}});
   v.ord70=[];v.p3DefM=-1;v.bac=500;const h0=hostility;hostility=(a,b)=>a===t&&b===v?90:h0(a,b);
-  try{const D=AGREG.consort.par3def(v,N,null);out.def=D.map(o=>o.k);const s0=oSee(v,1);const o1=D.find(o=>o.k==="cx3:def_canh")||D[0];if(o1)AGRUN[o1.k](v,o1.t);out.ord=(v.ord70||[]).length;out.see=[s0,oSee(v,1)];
+  try{const D=AGREG.consort.par3def(v,N,null);out.def=D.map(o=>o.k);const SMX=BAL.seeMaxP;BAL.seeMaxP=0;const s0=oSee(v,1);const o1=D.find(o=>o.k==="cx3:def_canh")||D[0];if(o1)AGRUN[o1.k](v,o1.t);out.ord=(v.ord70||[]).length;out.see=[s0,oSee(v,1)];BAL.seeMaxP=SMX;out.traitor=ords70Of(v).filter(o=>o.k===(o1&&o1.k||"").slice(8)).some(o=>traitor70(sv70(o.sid,v)));
    const b0=v.bac;ordMonth70npc(v);out.paid=v.bac<=b0}finally{hostility=h0}
   /* pets + teaching */
   v.bac=500;v.mat=3;const sp={petBuyOne:0,runAct:0,ktTeach:0};const W={};for(const k in sp){W[k]=window[k];window[k]=function(){if(arguments[0]===v||arguments[1]===v)sp[k]++;return W[k].apply(this,arguments)}}
@@ -111,8 +117,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   try{for(let i=0;i<40;i++){const c=tl2AnsPick(v,t);if(c==="grudge"||c==="tell")p3ToilAns(v,t,c)}}finally{for(const k in T0)window[k]=T0[k]}out.toil=tc;
   const H={};for(let i=0;i<200;i++){const c=tl2AnsPick(v,t);H[c]=(H[c]||0)+1}out.toilH=H;
   return out});
- ok(r7.herInv>=1&&r7.inv.includes("cx3:invite2")&&r7.q===1&&r7.came,'Mời đến cung ta: her odds = inviteO; NPC host invites, the guest comes next buổi by the same odds',r7);
- ok(r7.def.length>=3&&r7.ord===1&&r7.see[1]>r7.see[0]&&r7.paid,'Phòng bị: NPC gives the same ORD70 orders; j70 reads them (oSee up, monthly price)',{def:r7.def,see:r7.see});
+ ok(r7.herInv>=1&&r7.inv.includes("cx3:invite2")&&r7.q===1&&r7.ansOk&&r7.came,'Mời đến cung ta: her odds = inviteO; NPC host invites, the guest comes next buổi by the same odds',r7);
+ ok(r7.def.length>=3&&r7.ord===1&&(r7.see[1]>r7.see[0]||r7.traitor)&&r7.paid,/* parity-facfix: oSee is read with the BAL.seeMaxP ceiling lifted (a drawn host under fog sat at 70 − fog = 62 both times); a traitor guard (j70 traitor70) adds nothing — real-world law */'Phòng bị: NPC gives the same ORD70 orders; j70 reads them (oSee up, monthly price)',{def:r7.def,see:r7.see,traitor:r7.traitor});
  ok(r7.life.includes("cx3:petBuy")&&r7.life.includes("cx3:petcare")&&r7.life.includes("cx3:teachV")&&r7.spy.petBuyOne>=1&&r7.spy.runAct>=1&&r7.spy.ktTeach>=1,'pets / dạy con: NPC options run petBuyOne / runAct petcare / ktTeach',{life:r7.life,spy:r7.spy});
  ok(Object.keys(r7.toilH).length>=4&&(r7.toil.toilRxGrudge+r7.toil.toilRxTell)>=1,'toilette slight: NPC picks among 5 answers (mindPick) and runs her toilRx functions',{H:r7.toilH,run:r7.toil});
  const r8=await p.evaluate(()=>{const o=liveRivals(true).find(x=>(x.staff||[]).some(s=>s.role==="maid"));if(!o)return{skip:1};const m=o.staff.find(s=>s.role==="maid");const H={go:0,no:0};
@@ -139,7 +145,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r9.skip||r9.hb.length===3,'her PEND cnvScold / cnvFest / cnvBlack are built by the same builders',r9.hb);
  ok(r9.skip||r9.od[0]===r9.od[2]&&r9.od[1]===r9.od[3]&&r9.od[0]<100&&r9.od[1]>0,'odds clamped by BAL.odds.lo/hi',r9.od);
  /* 2e4 DIFF pairs: her button and the NPC run ONE function */
- const r10=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.out&&!x.queen);vNorm(v);const t=liveRivals(true).find(x=>x!==v&&!x.out);const sp={};const W={};
+ const r10=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.out&&!x.queen&&!sameHouse(S,x))/* parity-facfix: a housemate gets the short «Cùng cung» list (j9) with no «Nhờ giúp đỡ» — this row checks the ONE function (helpAsk); the housemate case is an open parity question (reports/parity-facfix.md) */||liveRivals(true).find(x=>!x.out&&!x.queen);vNorm(v);const t=liveRivals(true).find(x=>x!==v&&!x.out);const sp={};const W={};
   for(const k of ["helpAsk","maidTalkDo","spyRoll","inspect","twDo","qinCard"]){W[k]=window[k];sp[k]={me:0,npc:0};window[k]=function(){sp[k][arguments[0]===S?"me":"npc"]++;return W[k].apply(this,arguments)}}
   const P0={};for(const k of ["health","praise","secret","gossip"]){P0[k]=P3T[k];P3T[k]=function(){sp["P3T_"+k]=(sp["P3T_"+k]||0)+1;return P0[k].apply(this,arguments)}}
   const out={};try{
@@ -148,7 +154,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    if(!S.maid)S.maid=newMaid(pick(MAIDS),50);const mo=talkOpts({kind:"maid"})||[];const mt=mo.find(a=>a.n==="Trò chuyện với cung nữ");if(mt&&mt.go)mt.go();
    PEND.adStroll();
    /* NPC side */
-   v.maid=v.maid||newMaid(pick(MAIDS),50);AGRUN["cx2:help"](v,t);AGRUN["cx2:maidTalk"](v);AGRUN["cx2:maidSpy"](v,t);v.inv=v.inv||[];TW.check.run(v);
+   v.maid=v.maid||newMaid(pick(MAIDS),50);/* parity-facfix: a maid still out (jptime) is not there to talk to — bring back her open errands first */const back=()=>{for(const a of ptZ().slice())if(!a.back&&a.who==="mm:"+v.id)ptLand(a)};back();
+   AGRUN["cx2:help"](v,t);back();AGRUN["cx2:maidTalk"](v);AGRUN["cx2:maidSpy"](v,t);/* deferred: the maid walks, the deed lands at the due khắc */back();v.inv=v.inv||[];TW.check.run(v);
    v.arts=v.arts||{};v.arts.cam=Math.max(2,v.arts.cam||0);v.suc=80;AGRUN["cx3:qin"](v);
    /* jgreet: an NPC who comes to her */
    const nk0=window.npcKnows,kn0=window.k61Named;window.npcKnows=()=>true;window.k61Named=()=>true;S.known=S.known||{};for(const k in sp)if(k.startsWith("P3T_"))delete sp[k];

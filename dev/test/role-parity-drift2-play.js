@@ -22,7 +22,7 @@ async function page(b,maid){const p=await b.newPage({viewport:{width:755,height:
   const r=await p.evaluate(()=>{let sd=20261120;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};
    const RP=window.rcvPick;let REC=[];window.rcvPick=function(t,a){const c=RP.apply(this,arguments);REC.push({t,a,id:c&&c.id});return c};
    const o={};S.rank=7;S.queen=true;for(const x of rivals)if(x!==S)x.queen=false;S.kh=0;try{used=0}catch(e){}
-   const t=liveRivals(true).find(v=>v!==S&&!v.out&&!facOf(v)&&!sameHouse(S,v));const K=k61S();if(K)K[kOf61(t)]=3;affAdd(t,S,40);
+   const t=liveRivals(true).find(v=>v!==S&&!v.out&&!facOf(v)&&!sameHouse(S,v));const K=k61S();if(K)K[kOf61(t)]=3;affAdd(t,S,Math.max(40,netTh(t,"than")-aff(t,S)));/* parity-facfix: «likes her» = at least «thân» (BAL.net); the drawn consort can start below 0 (-5 + 40 = 35 < 38 on LIVE 3af7896e: a seed fault, no game change) */
    const h=facHTML();o.btn=new RegExp('data-fa="lap" data-fv="'+t.id+'"[^>]*>[\\s\\S]*?Lập phe cùng '+t.name).test(h);o.dis=/data-fa="lap"[^>]*disabled/.test(h);
    REC=[];facAct("lap",{fv:String(t.id)});Q.length=0;const f=facOf(S);o.joined=!!(f&&facMembers(f).includes(t));o.name=f&&f.name;
    o.ans=REC.filter(x=>x.t===t&&x.a===S).map(x=>x.id);o.lapOk=o.ans.length===1&&o.joined===(o.ans[0]==="full");
