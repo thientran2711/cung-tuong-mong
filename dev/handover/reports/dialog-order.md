@@ -147,3 +147,19 @@ Base: your review/dialog-order-r2 19181bf2 (fast-forwarded, probe dialog-order-n
 ### quickcheck perf (your «buổi 1979 vs 1146 ms»)
 quickcheck.js on b6fb7a30 vs live origin/main, iPad CPU 4x, 3 runs each, run alone on the box: QUICKCHECK PASS · buổi median 1800 / 1689 ms (runs new 1481 · 1779 · 1821 vs live 1650 · 1689 · 1739 — overlapping = box noise, no cost found) · render 232/257 · tab 586/524 · tasks>200 33/32 · open 2425 ms 0 errors · old save ok. Full quickcheck.sh on 9b983d4c: CORE GATES = only the two pre-existing LIVE fails (80-dialog-fixed «kit-dialog-2 a», 90-button-crawl «Ô lưu · Lui»), time-spill PASS.
 ### Still open (not this code): FAIL 3/4 = K-PICKER-FIT with KK42 session_01V1ZZH3CYo8F1o9jbxCsySG.
+
+## REVIEW r3 (E96r, session_01V1ZZH3mbPVRPUJvdawM1xo, 26/11 ~13:50Z) — PASS af8de6c8
+PRIORITY #1 CHECK ('dqActTap|park|nextBuoi|Sang buổi|DQ_OWN'): r3 report read | main 1dcb373e (moved during review: jksize kit only, no queue code) | review/*: dialog-order-r2 19181bf2 (my probe), dialog-order b6fb7a30 | claims E96 row.
+r3 b6fb7a30 checked on its own build (FF of LIVE 3af7896e), then LIVE moved → merged LIVE 1dcb373e in = review/dialog-order-r3 af8de6c8 (only built files conflicted → rebuilt); key tests rerun on af8de6c8.
+### Checks (real taps, Fold 755x1000 + iPad 1180x820, LIVE 3af7896e as «before»)
+- r2 regression fixed: dialog-order-next-probe N1 (card held behind the view) + N2 (card queued, unpainted) → «Sang buổi» holds the buổi (0→0), N2 card painted first = LIVE behaviour; Fold + iPad; also on af8de6c8.
+- r1 FAIL 1: held-probe P2 → picker ON TOP, Q = [picker, GAMECARD], game card after ✕, none lost (Fold + iPad + af8de6c8).
+- Own probes (the forced event MAIN 157 asked for): X3 game card posted DURING her «Sai đi dò la» tap → her picker on top, game card queued after (LIVE: nothing shown); X2 card held + in-view act «Nghe ngóng chung» → the act runs (khắc spent; LIVE: dead), card shown after ✕, none lost; X1 card held + tap the «Dư đồ» tab → the waiting card is painted first (= LIVE). Fold + iPad, 0 page errors. Shots looked at.
+- r1 FAIL 2: after «Trò chuyện với cung nữ» the view keeps «Giao thiệp 0/3 · Mưu kế 0/1», every card dimmed with «!» (Fold + iPad @2, looked at; real maid painting).
+- HOLD scan Fold: TOP 26 · DEAD 17 · LOST 0 · GAMEFIRST 0 · HELD 0; the 17 «DEAD» rows = exactly the 17 acts that run in place without opening a dialog (DIRECT in the plain scan: TOP 23 · DIRECT 17); X2 shows such an act really runs with a held card.
+- dayq-hold PASS 50 (incl. new N1/N2; also on af8de6c8) · dayq-ghost PASS all · dayq-order PASS.
+- quickcheck (b6fb7a30 and af8de6c8): built files match, time-spill PASS, old save loads + plays 0 errors, perf buổi 1983/1852 and 1878/2216 ms new/live (no slowdown; my r2 note closed); core-gate FAILs = dialog-fixed «kit-dialog-2 a» + button-crawl «Ô lưu · Lui» = identical on LIVE (pre-existing, not this branch).
+- Laws: 4 (BAL.dayq.mineLook only), 7 (no new player word; POP_DONE = existing text), 9 (no kit/UI part touched; K-PICKER-FIT filed to KK41), 11 (one queue rule + scan HOLD variant + both probes), 12 (Fold + iPad looked at).
+### Pending (not this branch)
+- E-c picker speed (FAIL 3: 5–7 s at CPU 4x) and iPad 4x «Lời hay» p95 (FAIL 4) wait for KK41 K-PICKER-FIT; recheck both after it lands.
+- Worker fallback images dev/handover/shots/dialog-order/ wiped with this verdict.
