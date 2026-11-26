@@ -78457,6 +78457,2067 @@
  },
  {
   "job": {
+   "id": "E-S4-R5-random-2-ipad",
+   "origin": "pf",
+   "road": "pt_hai",
+   "bot": "rand",
+   "seed": 3525233687,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [],
+   "slice": null,
+   "build": {
+    "s": "1dcb373e+",
+    "b": "5ab5b80e406e",
+    "t": "2026-11-26T10:49Z"
+   },
+   "areaTaps": 63,
+   "dlgScroll": 14,
+   "scrolls": 22,
+   "infoTaps": 37,
+   "dlgClose": 47,
+   "nextNoTurn": 9,
+   "kfocVisits": 2,
+   "taps": 764
+  },
+  "life": {
+   "id": "Công chúa ở lại cố quốc",
+   "type": "death",
+   "fate": "Công chúa ở lại cố quốc",
+   "death": true,
+   "age": 19,
+   "year": 2,
+   "rank": 0,
+   "text": "Niên Dao Quang đi hòa thân thay nàng. Nàng ở lại cung Thiên hoàng ở Nại Lương, mười năm sau được gả cho một tộc trưởng phương tây. (Công chúa chờ hòa thân · Công chúa Phù Tang)",
+   "card": [
+    "Thưa: con xin đi, vì muôn dân Rất vững TỐN không ĐƯỢC hòa ướ",
+    "Xin để hoàng muội đi thay Rất vững TỐN Sức -5 ĐƯỢC có thể ở "
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    "page «Phòng của ta · Không gặp ai.» «Hoàng tự»",
+    "page «Phòng của ta · Không gặp ai.» «Bạc64Sức100/100»",
+    ".dlg «Bạc» «Lui»",
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang trước»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Lui»",
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 12 tháng»",
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»",
+    ".dlg «Hòa ước» «Xin để hoàng muội đi thayRất vữngTốnSức -5Đượccó t»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "saves": [
+   {
+    "buoi": 50,
+    "year": 1,
+    "chars": 319357,
+    "key": "hclh-save-v2-1"
+   },
+   {
+    "buoi": 100,
+    "year": 1,
+    "chars": 398567,
+    "key": "hclh-save-v2-1"
+   }
+  ],
+  "buoi": 122,
+  "steps": 1669,
+  "status": [],
+  "_loopAt": 1795701552265,
+  "_snapAt": 1795701521424,
+  "trace": [
+   [
+    647,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    651,
+    "page «Phòng của ta · Không gặp ai.» «Hoàng tự»"
+   ],
+   [
+    652,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    653,
+    "page «Phòng của ta · Không gặp ai.» «Mệnh truyện»"
+   ],
+   [
+    654,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    656,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    657,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến54»"
+   ],
+   [
+    658,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    660,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    660,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    660,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    661,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    661,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    663,
+    "page «Phòng của ta · Không gặp ai.» «Bạc9Sức100/100»"
+   ],
+   [
+    663,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    664,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    665,
+    "page «Phòng của ta · Không gặp ai.» «Giao tình»"
+   ],
+   [
+    665,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    667,
+    ".dlg «Có người bán tin» «Không muaGhi chúkhông biết tin ấy!»"
+   ],
+   [
+    674,
+    "page «Phòng của ta · Không gặp ai.» «Hoàng tự»"
+   ],
+   [
+    675,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    677,
+    "page «Phòng của ta · Ở đây có 1 người.» «Buổi chiều, còn 4 khắc»"
+   ],
+   [
+    677,
+    ".dlg «chiều · còn» «Lui»"
+   ],
+   [
+    679,
+    "page «Phòng của ta · Ở đây có 1 người.» «Hoàng tự»"
+   ],
+   [
+    679,
+    "page «Phòng của ta · Ở đây có 1 người.» «Hoàng hậu Tử Đàn»"
+   ],
+   [
+    679,
+    ".kfoc «Lễ nghi 1/1»"
+   ],
+   [
+    680,
+    ".kfoc «Giao thiệp 1/1»"
+   ],
+   [
+    680,
+    ".kfoc «Lễ nghi 1/1»"
+   ],
+   [
+    680,
+    ".kfoc «Lui»"
+   ],
+   [
+    682,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    685,
+    "page «Phòng của ta · Không gặp ai.» «Tư trang»"
+   ],
+   [
+    686,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    688,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    688,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    689,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    689,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    689,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    693,
+    "page «Phòng của ta · Không gặp ai.» «Tài nghệ»"
+   ],
+   [
+    693,
+    "page «Phòng của ta · Không gặp ai.» «3Chí tôn»"
+   ],
+   [
+    694,
+    "page «Phòng của ta · Không gặp ai.» «Xem luật Cầm»"
+   ],
+   [
+    694,
+    ".dlg «Cầm» «Lui»"
+   ],
+   [
+    696,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    698,
+    "page «Phòng của ta · Ở đây có 1 người.» «Giao tình»"
+   ],
+   [
+    698,
+    "page «Phòng của ta · Ở đây có 1 người.» «Mệnh truyện»"
+   ],
+   [
+    699,
+    "page «Phòng của ta · Ở đây có 1 người.» «Phe chủ chiến59»"
+   ],
+   [
+    699,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    701,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    702,
+    "page «Phòng của ta · Không gặp ai.» «Tâm trạngBình thản+4»"
+   ],
+   [
+    702,
+    ".dlg «Tâm trạng · Ta» «Lui»"
+   ],
+   [
+    704,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến59»"
+   ],
+   [
+    704,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    707,
+    "page «Phòng của ta · Không gặp ai.» «3Chí tôn»"
+   ],
+   [
+    707,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    709,
+    "page «Phòng của ta · Không gặp ai.» «1Cung nhân»"
+   ],
+   [
+    709,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến59»"
+   ],
+   [
+    709,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    711,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    713,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    713,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    714,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    714,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    714,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    716,
+    "page «Phòng của ta · Không gặp ai.» «1Cung nhân»"
+   ],
+   [
+    716,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    716,
+    "page «Phòng của ta · Không gặp ai.» «Hoàng tự»"
+   ],
+   [
+    717,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    719,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến59»"
+   ],
+   [
+    719,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    720,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến59»"
+   ],
+   [
+    720,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    722,
+    "page «Phòng của ta · Ở đây có 1 người.» «Chọn chính mình»"
+   ],
+   [
+    723,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tin báo: 14 tin mới»"
+   ],
+   [
+    724,
+    ".dlg «Tin báo» «Để ta xem»"
+   ],
+   [
+    731,
+    "page «Phòng của ta · Ở đây có 1 người.» «Hoàng tự»"
+   ],
+   [
+    732,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    734,
+    "page «Phòng của ta · Không gặp ai.» «1Cung nhân»"
+   ],
+   [
+    734,
+    "page «Phòng của ta · Không gặp ai.» «Buổi tối, còn 4 khắc»"
+   ],
+   [
+    734,
+    ".dlg «tối · còn» «Lui»"
+   ],
+   [
+    736,
+    "page «Phòng của ta · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách Đại H»"
+   ],
+   [
+    745,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    747,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    747,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    748,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    748,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    749,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    750,
+    "page «Phòng của ta · Không gặp ai.» «Giao tình»"
+   ],
+   [
+    751,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    753,
+    "page «Phòng của ta · Không gặp ai.» «Mục tiêu chương (có mới)»"
+   ],
+   [
+    754,
+    ".dlg «Chương 1 · Chờ ngày hòa thân» «Đi làm: Học lễ nghi Đại HyTốnkhôngĐượctới Tài nghệ»"
+   ],
+   [
+    757,
+    "page «Phòng của ta · Không gặp ai.» «Xem luật Cầm»"
+   ],
+   [
+    758,
+    ".dlg «Cầm» «Lui»"
+   ],
+   [
+    759,
+    "page «Phòng của ta · Không gặp ai.» «Tâm trạngBình thản+4»"
+   ],
+   [
+    759,
+    ".dlg «Tâm trạng · Ta» «Lui»"
+   ],
+   [
+    761,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    763,
+    "page «Phòng của ta · Không gặp ai.» «Hoàng tự»"
+   ],
+   [
+    763,
+    "page «Phòng của ta · Không gặp ai.» «Tâm trạngBình thản+4»"
+   ],
+   [
+    764,
+    ".dlg «Tâm trạng · Ta» «Lui»"
+   ],
+   [
+    765,
+    "page «Phòng của ta · Không gặp ai.» «Tâm trạngBình thản+4»"
+   ],
+   [
+    766,
+    ".dlg «Tâm trạng · Ta» «Lui»"
+   ],
+   [
+    767,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    769,
+    "page «Phòng của ta · Không gặp ai.» «Hành sự»"
+   ],
+   [
+    770,
+    "page «Phòng của ta · Không gặp ai.» «Hoàng tự»"
+   ],
+   [
+    770,
+    "page «Phòng của ta · Không gặp ai.» «Tài nghệ»"
+   ],
+   [
+    771,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    773,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    773,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    773,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    774,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    774,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    778,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 16 tháng»"
+   ],
+   [
+    778,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến64»"
+   ],
+   [
+    779,
+    "page «Phòng của ta · Không gặp ai.» «Mệnh truyện»"
+   ],
+   [
+    780,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    782,
+    ".dlg «Thu săn» «Đem chỉ vàng dành dụm cho nàng taTốnDanh -2ĐượcĐức»"
+   ],
+   [
+    782,
+    ".dlg «Thích khách» «Kêu cứuRất vữngTốnkhôngĐượcthường thoát; có khi bị»"
+   ],
+   [
+    790,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tài nghệ»"
+   ],
+   [
+    790,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tư trang»"
+   ],
+   [
+    791,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    793,
+    ".dlg «Thu săn» «Lui»"
+   ],
+   [
+    794,
+    "page «Phòng của ta · Không gặp ai.» «Chọn chính mình»"
+   ],
+   [
+    795,
+    "page «Phòng của ta · Không gặp ai.» «Tâm trạngBình thản-11»"
+   ],
+   [
+    795,
+    ".dlg «Tâm trạng · Ta» «Lui»"
+   ],
+   [
+    796,
+    "page «Phòng của ta · Không gặp ai.» «Chọn chính mình»"
+   ],
+   [
+    797,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    799,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    799,
+    "page «Phòng của ta · Không gặp ai.» «Tài nghệ»"
+   ],
+   [
+    799,
+    "page «Phòng của ta · Không gặp ai.» «Chọn chính mình»"
+   ],
+   [
+    800,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    802,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    802,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    803,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    803,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    803,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    805,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    805,
+    "page «Phòng của ta · Không gặp ai.» «Giao tình»"
+   ],
+   [
+    805,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    806,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    808,
+    "page «Phòng của ta · Không gặp ai.» «Bạc21Sức100/100»"
+   ],
+   [
+    808,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    810,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    812,
+    "page «Phòng của ta · Không gặp ai.» «Mệnh truyện»"
+   ],
+   [
+    812,
+    "page «Phòng của ta · Không gặp ai.» «Bạc21Sức100/100»"
+   ],
+   [
+    812,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    814,
+    "page «Phòng của ta · Không gặp ai.» «Chọn chính mình»"
+   ],
+   [
+    815,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    819,
+    "page «Phòng của ta · Ở đây có 1 người.» «Buổi tối, còn 4 khắc»"
+   ],
+   [
+    819,
+    ".dlg «tối · còn» «Lui»"
+   ],
+   [
+    821,
+    "page «Phòng của ta · Ở đây có 1 người.» «Về phòng»"
+   ],
+   [
+    821,
+    "page «Phòng của ta · Ở đây có 1 người.» «Bạc21Sức100/100»"
+   ],
+   [
+    821,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    823,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang ngày mới»"
+   ],
+   [
+    825,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    825,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    826,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    826,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    826,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    828,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tài nghệ»"
+   ],
+   [
+    828,
+    "page «Phòng của ta · Ở đây có 1 người.» «Ngày lên đườngcòn 16 tháng»"
+   ],
+   [
+    829,
+    "page «Phòng của ta · Ở đây có 1 người.» «Ngày lên đườngcòn 16 tháng»"
+   ],
+   [
+    829,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    831,
+    ".dlg «Có người bán tin» «Không muaGhi chúkhông biết tin ấy!»"
+   ],
+   [
+    831,
+    ".dlg «Thu săn» «Lui»"
+   ],
+   [
+    839,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    839,
+    "page «Phòng của ta · Không gặp ai.» «Bạc21Sức100/100»"
+   ],
+   [
+    839,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    841,
+    "page «Phòng của ta · Không gặp ai.» «Bạc21Sức100/100»"
+   ],
+   [
+    841,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    843,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    845,
+    "page «Phòng của ta · Không gặp ai.» «3Chí tôn»"
+   ],
+   [
+    845,
+    "page «Phòng của ta · Không gặp ai.» «Giao tình»"
+   ],
+   [
+    846,
+    "page «Phòng của ta · Không gặp ai.» «lá phong rơi»"
+   ],
+   [
+    849,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    851,
+    "page «Phòng của ta · Không gặp ai.» «Lịch tháng»"
+   ],
+   [
+    852,
+    ".dlg «Lịch tháng» «ngày 24»"
+   ],
+   [
+    852,
+    ".dlg «Lịch tháng» «ngày 21»"
+   ],
+   [
+    852,
+    ".dlg «Lịch tháng» «ngày 27»"
+   ],
+   [
+    853,
+    ".dlg «Lịch tháng» «ngày 30»"
+   ],
+   [
+    853,
+    ".dlg «Lịch tháng» «Lui»"
+   ],
+   [
+    854,
+    "page «Phòng của ta · Không gặp ai.» «lá phong rơi»"
+   ],
+   [
+    857,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 16 tháng»"
+   ],
+   [
+    858,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    859,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    860,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    860,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    861,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    861,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    865,
+    "page «Phòng của ta · Không gặp ai.» «Sắc94Tài34Tâm cơ27Đức35Danh16Hòa ước59»"
+   ],
+   [
+    866,
+    ".dlg «Sắc» «Lui»"
+   ],
+   [
+    867,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    869,
+    ".dlg «Hoàng muội tranh phần» «Nói chuyện thẳng với nàngRất vữngTốnSức -5Đượctùy »"
+   ],
+   [
+    877,
+    "page «Phòng của ta · Không gặp ai.» «Buổi trưa, còn 4 khắc»"
+   ],
+   [
+    877,
+    ".dlg «trưa · còn» «Lui»"
+   ],
+   [
+    879,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 15 tháng»"
+   ],
+   [
+    879,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến54»"
+   ],
+   [
+    880,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    882,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 15 tháng»"
+   ],
+   [
+    882,
+    "page «Phòng của ta · Không gặp ai.» «Bạc27Sức95/100»"
+   ],
+   [
+    882,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    884,
+    "page «Phòng của ta · Không gặp ai.» «3Chí tôn»"
+   ],
+   [
+    884,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    886,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    888,
+    "page «Phòng của ta · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách Đại H»"
+   ],
+   [
+    888,
+    ".dlg «Danh hiệu mới» «Đeo ngayGhi chúchọn một: Thêm Tài hay Học mau tiến»"
+   ],
+   [
+    889,
+    ".dlg «Đeo «Thư hương»» «Thêm TàiTốnkhôngĐượcTài +1»"
+   ],
+   [
+    896,
+    "page «Phòng của ta · Không gặp ai.» «Tư trang»"
+   ],
+   [
+    896,
+    "page «Phòng của ta · Không gặp ai.» «Y phục: Áo the thêu lan»"
+   ],
+   [
+    897,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    899,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    900,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    900,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    900,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    901,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    902,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    902,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    903,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến54»"
+   ],
+   [
+    904,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    906,
+    "page «Phòng của ta · Ở đây có 1 người.» «Hoàng tự»"
+   ],
+   [
+    906,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tin báo: 20 tin mới»"
+   ],
+   [
+    907,
+    ".dlg «Tin báo» «Để ta xem»"
+   ],
+   [
+    914,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tin báo»"
+   ],
+   [
+    914,
+    ".dlg «Tin báo» «Để ta xem»"
+   ],
+   [
+    922,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    924,
+    "page «Phòng của ta · Không gặp ai.» «Tin báo: 2 tin mới»"
+   ],
+   [
+    924,
+    ".dlg «Tin báo» «Lui»"
+   ],
+   [
+    926,
+    "page «Phòng của ta · Không gặp ai.» «Tin báo»"
+   ],
+   [
+    926,
+    ".dlg «Tin báo» «Để ta xem»"
+   ],
+   [
+    933,
+    "page «Phòng của ta · Không gặp ai.» «3Chí tôn»"
+   ],
+   [
+    934,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    936,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    938,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    938,
+    "page «Phòng của ta · Không gặp ai.» «Tư trang»"
+   ],
+   [
+    939,
+    "page «Phòng của ta · Không gặp ai.» «Tâm trạngBình thản+4»"
+   ],
+   [
+    939,
+    ".dlg «Tâm trạng · Ta» «Lui»"
+   ],
+   [
+    942,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    944,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    944,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    944,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    945,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    945,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    947,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 15 tháng»"
+   ],
+   [
+    947,
+    "page «Phòng của ta · Không gặp ai.» «Tài nghệ»"
+   ],
+   [
+    948,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    950,
+    "page «Phòng của ta · Không gặp ai.» «Tài nghệ»"
+   ],
+   [
+    950,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    953,
+    "page «Phòng của ta · Không gặp ai.» «Dư đồ»"
+   ],
+   [
+    953,
+    "page «Phòng của ta · Không gặp ai.» «Bạc27Sức100/100»"
+   ],
+   [
+    953,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    955,
+    "page «Phòng của ta · Không gặp ai.» «1Cung nhân»"
+   ],
+   [
+    955,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    957,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    959,
+    "page «Phòng của ta · Không gặp ai.» «Tin báo: 2 tin mới»"
+   ],
+   [
+    959,
+    ".dlg «Tin báo» «Lui»"
+   ],
+   [
+    961,
+    "page «Phòng của ta · Không gặp ai.» «Buổi tối, còn 4 khắc»"
+   ],
+   [
+    961,
+    ".dlg «tối · còn» «Lui»"
+   ],
+   [
+    963,
+    "page «Phòng của ta · Không gặp ai.» «Tư trang»"
+   ],
+   [
+    964,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    966,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    966,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    966,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    966,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    967,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    971,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    973,
+    "page «Phòng của ta · Không gặp ai.» «Hành sự»"
+   ],
+   [
+    973,
+    "page «Phòng của ta · Không gặp ai.» «Tài nghệ»"
+   ],
+   [
+    974,
+    "page «Phòng của ta · Không gặp ai.» «Xem luật Kỳ»"
+   ],
+   [
+    974,
+    ".dlg «Kỳ» «Lui»"
+   ],
+   [
+    976,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    978,
+    "page «Phòng của ta · Không gặp ai.» «Sắc94Tài36Tâm cơ27Đức35Danh16Hòa ước59»"
+   ],
+   [
+    978,
+    ".dlg «Sắc» «Lui»"
+   ],
+   [
+    980,
+    "page «Phòng của ta · Không gặp ai.» «mai nở trong tuyết»"
+   ],
+   [
+    982,
+    "page «Phòng của ta · Không gặp ai.» «mai nở trong tuyết»"
+   ],
+   [
+    985,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    987,
+    "page «Phòng của ta · Ở đây có 1 người.» «Hành sự»"
+   ],
+   [
+    987,
+    "page «Phòng của ta · Ở đây có 1 người.» «Mục tiêu chương (có mới)»"
+   ],
+   [
+    988,
+    ".dlg «Chương 1 · Chờ ngày hòa thân» «Thiên mệnh»"
+   ],
+   [
+    988,
+    ".dlg «Thiên mệnh» «Thiên mệnh»"
+   ],
+   [
+    989,
+    ".dlg «Thiên mệnh» «Danh hiệu 1/35»"
+   ],
+   [
+    989,
+    ".dlg «Danh hiệu» «Mục tiêu»"
+   ],
+   [
+    990,
+    ".dlg «Chương 1 · Chờ ngày hòa thân» «Mục tiêu»"
+   ],
+   [
+    990,
+    ".dlg «Chương 1 · Chờ ngày hòa thân» «Danh hiệu 1/35»"
+   ],
+   [
+    991,
+    ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcTài +1»"
+   ],
+   [
+    991,
+    ".dlg «Danh hiệu» «Mục tiêu»"
+   ],
+   [
+    992,
+    ".dlg «Chương 1 · Chờ ngày hòa thân» «Đi làm: Học lễ nghi Đại HyTốnkhôngĐượctới Tài nghệ»"
+   ],
+   [
+    995,
+    "page «Phòng của ta · Ở đây có 1 người.» «Hoàng hậu Tử Đàn»"
+   ],
+   [
+    996,
+    ".kfoc «Vấn an mẫu hậu · Rất vững · Tốn 1 khắc»"
+   ],
+   [
+    996,
+    ".kfoc «Sẵn sàngbắt đầu chơi»"
+   ],
+   [
+    997,
+    ".kfoc «Bỏ qua · kết quả thường»"
+   ],
+   [
+    1000,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang ngày mới»"
+   ],
+   [
+    1002,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1003,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    1004,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1004,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1004,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    1008,
+    "page «Phòng của ta · Không gặp ai.» «Lịch tháng»"
+   ],
+   [
+    1009,
+    ".dlg «Lịch tháng» «ngày 24»"
+   ],
+   [
+    1009,
+    ".dlg «Lịch tháng» «ngày 13: Nguyệt tín»"
+   ],
+   [
+    1010,
+    ".dlg «Lịch tháng» «ngày 19»"
+   ],
+   [
+    1010,
+    ".dlg «Lịch tháng» «ngày 15: Tiết Đông chí: Nguyệt tín»"
+   ],
+   [
+    1013,
+    ".dlg «Lịch tháng» «Lui»"
+   ],
+   [
+    1015,
+    "page «Phòng của ta · Không gặp ai.» «Tư trang»"
+   ],
+   [
+    1015,
+    "page «Phòng của ta · Không gặp ai.» «Việc»"
+   ],
+   [
+    1016,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1025,
+    "page «Phòng của ta · Không gặp ai.» «Tư trang»"
+   ],
+   [
+    1026,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1027,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 14 tháng»"
+   ],
+   [
+    1028,
+    "page «Phòng của ta · Không gặp ai.» «Sắc94Tài35Tâm cơ27Đức35Danh16Hòa ước59»"
+   ],
+   [
+    1028,
+    ".dlg «Sắc» «Lui»"
+   ],
+   [
+    1030,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    1030,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1032,
+    "page «Phòng của ta · Ở đây có 1 người.» «3Chí tôn»"
+   ],
+   [
+    1032,
+    "page «Phòng của ta · Ở đây có 1 người.» «Về phòng»"
+   ],
+   [
+    1033,
+    "page «Phòng của ta · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệViết chữ trên »"
+   ],
+   [
+    1043,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang ngày mới»"
+   ],
+   [
+    1045,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1046,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    1046,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1047,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1047,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    1054,
+    "page «Phòng của ta · Không gặp ai.» «Giao tình»"
+   ],
+   [
+    1055,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1057,
+    "page «Phòng của ta · Không gặp ai.» «tuyết nhẹ»"
+   ],
+   [
+    1059,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến59»"
+   ],
+   [
+    1060,
+    "page «Phòng của ta · Không gặp ai.» «3Chí tôn»"
+   ],
+   [
+    1060,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1062,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1064,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tư trang»"
+   ],
+   [
+    1064,
+    "page «Phòng của ta · Ở đây có 1 người.» «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+   ],
+   [
+    1068,
+    "page «Phòng của ta · Ở đây có 1 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+   ],
+   [
+    1069,
+    ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+   ],
+   [
+    1074,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    1076,
+    "page «Phòng của ta · Không gặp ai.» «Buổi tối, còn 4 khắc»"
+   ],
+   [
+    1076,
+    ".dlg «tối · còn» «Lui»"
+   ],
+   [
+    1079,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    1081,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1082,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    1082,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1083,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1083,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    1087,
+    "page «Phòng của ta · Không gặp ai.» «3Chí tôn»"
+   ],
+   [
+    1087,
+    "page «Phòng của ta · Không gặp ai.» «Mục tiêu chương (có mới)»"
+   ],
+   [
+    1088,
+    ".dlg «Chương 1 · Chờ ngày hòa thân» «Đi làm: Giữ lòng phụ hoàngTốnkhôngĐượctới Hậu cung»"
+   ],
+   [
+    1095,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    1096,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1098,
+    "page «Phòng của ta · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+   ],
+   [
+    1107,
+    "page «Phòng của ta · Không gặp ai.» «Lịch tháng»"
+   ],
+   [
+    1108,
+    ".dlg «Lịch tháng» «ngày 25»"
+   ],
+   [
+    1108,
+    ".dlg «Lịch tháng» «mồng 4»"
+   ],
+   [
+    1109,
+    ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+   ],
+   [
+    1109,
+    ".dlg «Lịch tháng» «ngày 29»"
+   ],
+   [
+    1109,
+    ".dlg «Lịch tháng» «Lui»"
+   ],
+   [
+    1111,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1113,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1116,
+    "page «Phòng của ta · Ở đây có 1 người.» «Mệnh truyện»"
+   ],
+   [
+    1117,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang ngày mới»"
+   ],
+   [
+    1119,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1119,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1120,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1120,
+    ".kbk «Tổng lược» «Vào ngày mới»"
+   ],
+   [
+    1128,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    1128,
+    "page «Phòng của ta · Không gặp ai.» «Tài nghệ»"
+   ],
+   [
+    1129,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1133,
+    ".dlg «Đại hàn, tuyết lớn» «Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcK»"
+   ],
+   [
+    1135,
+    ".dlg «Đại hàn, tuyết lớn» «Đóng cửa giữ than cho mìnhTốnDanh -10ĐượcSức +24·B»"
+   ],
+   [
+    1142,
+    "page «Phòng của ta · Ở đây có 1 người.» «tuyết nhẹ»"
+   ],
+   [
+    1145,
+    "page «Phòng của ta · Ở đây có 1 người.» «Tài nghệ»"
+   ],
+   [
+    1146,
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»"
+   ],
+   [
+    1148,
+    ".dlg «Có người bán tin» «Mua tinTốnBạc -35·1 khắcĐượcnghe một tin thật·đáng»"
+   ],
+   [
+    1148,
+    ".dlg «Tin mua được» «Lui»"
+   ],
+   [
+    1155,
+    "page «Phòng của ta · Không gặp ai.» «1Cung nhân»"
+   ],
+   [
+    1156,
+    "page «Phòng của ta · Không gặp ai.» «tuyết dày»"
+   ],
+   [
+    1158,
+    "page «Phòng của ta · Không gặp ai.» «Dư đồ»"
+   ],
+   [
+    1159,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1161,
+    "page «Phòng của ta · Không gặp ai.» «Dư đồ»"
+   ],
+   [
+    1161,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 13 tháng»"
+   ],
+   [
+    1162,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    1163,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1164,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1164,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1164,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1165,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    1167,
+    "page «Phòng của ta · Không gặp ai.» «Hậu cung»"
+   ],
+   [
+    1167,
+    "page «Phòng của ta · Không gặp ai.» «Phe chủ chiến64»"
+   ],
+   [
+    1168,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1170,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 13 tháng»"
+   ],
+   [
+    1170,
+    "page «Phòng của ta · Không gặp ai.» «Dư đồ»"
+   ],
+   [
+    1171,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1173,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1175,
+    "page «Phòng của ta · Không gặp ai.» «Về phòng»"
+   ],
+   [
+    1176,
+    "page «Phòng của ta · Không gặp ai.» «Hoàng tự»"
+   ],
+   [
+    1176,
+    "page «Phòng của ta · Không gặp ai.» «Bạc64Sức100/100»"
+   ],
+   [
+    1176,
+    ".dlg «Bạc» «Lui»"
+   ],
+   [
+    1178,
+    "page «Phòng của ta · Không gặp ai.» «Sang ngày mới»"
+   ],
+   [
+    1180,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1181,
+    ".kbk «Tổng lược» «Trang trước»"
+   ],
+   [
+    1181,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1181,
+    ".kbk «Tổng lược» «Trang sau»"
+   ],
+   [
+    1182,
+    ".kbk «Tổng lược» «Lui»"
+   ],
+   [
+    1185,
+    "page «Phòng của ta · Không gặp ai.» «Ngày lên đườngcòn 12 tháng»"
+   ],
+   [
+    1186,
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»"
+   ],
+   [
+    1188,
+    ".dlg «Hòa ước» «Xin để hoàng muội đi thayRất vữngTốnSức -5Đượccó t»"
+   ]
+  ],
+  "_started": true,
+  "_ckAt": 1795701543599,
+  "_ckB": 121,
+  "rss": [
+   {
+    "buoi": 1,
+    "y": 1,
+    "totalMB": 1378,
+    "rendererMB": 633,
+    "heapMB": 111,
+    "dom": 2722,
+    "q": 3,
+    "lsK": 4
+   },
+   {
+    "buoi": 6,
+    "y": 1,
+    "totalMB": 1991,
+    "rendererMB": 1104,
+    "heapMB": 111,
+    "dom": 943,
+    "q": 1,
+    "lsK": 173
+   },
+   {
+    "buoi": 11,
+    "y": 1,
+    "totalMB": 2043,
+    "rendererMB": 1158,
+    "heapMB": 111,
+    "dom": 975,
+    "q": 0,
+    "lsK": 218
+   },
+   {
+    "buoi": 16,
+    "y": 1,
+    "totalMB": 2126,
+    "rendererMB": 1248,
+    "heapMB": 111,
+    "dom": 975,
+    "q": 0,
+    "lsK": 278
+   },
+   {
+    "buoi": 21,
+    "y": 1,
+    "totalMB": 2228,
+    "rendererMB": 1338,
+    "heapMB": 111,
+    "dom": 1354,
+    "q": 1,
+    "lsK": 301
+   },
+   {
+    "buoi": 26,
+    "y": 1,
+    "totalMB": 2206,
+    "rendererMB": 1308,
+    "heapMB": 111,
+    "dom": 1010,
+    "q": 2,
+    "lsK": 316
+   },
+   {
+    "buoi": 31,
+    "y": 1,
+    "totalMB": 2190,
+    "rendererMB": 1327,
+    "heapMB": 111,
+    "dom": 953,
+    "q": 0,
+    "lsK": 318
+   },
+   {
+    "buoi": 36,
+    "y": 1,
+    "totalMB": 2185,
+    "rendererMB": 1326,
+    "heapMB": 111,
+    "dom": 916,
+    "q": 0,
+    "lsK": 328
+   },
+   {
+    "buoi": 41,
+    "y": 1,
+    "totalMB": 2269,
+    "rendererMB": 1379,
+    "heapMB": 111,
+    "dom": 1130,
+    "q": 0,
+    "lsK": 349
+   },
+   {
+    "buoi": 46,
+    "y": 1,
+    "totalMB": 2266,
+    "rendererMB": 1390,
+    "heapMB": 111,
+    "dom": 931,
+    "q": 0,
+    "lsK": 346
+   },
+   {
+    "buoi": 51,
+    "y": 1,
+    "totalMB": 2254,
+    "rendererMB": 1387,
+    "heapMB": 111,
+    "dom": 908,
+    "q": 1,
+    "lsK": 384
+   },
+   {
+    "buoi": 56,
+    "y": 1,
+    "totalMB": 2280,
+    "rendererMB": 1411,
+    "heapMB": 111,
+    "dom": 905,
+    "q": 0,
+    "lsK": 397
+   },
+   {
+    "buoi": 61,
+    "y": 1,
+    "totalMB": 2321,
+    "rendererMB": 1422,
+    "heapMB": 111,
+    "dom": 1643,
+    "q": 0,
+    "lsK": 402
+   },
+   {
+    "buoi": 66,
+    "y": 1,
+    "totalMB": 2351,
+    "rendererMB": 1458,
+    "heapMB": 111,
+    "dom": 958,
+    "q": 0,
+    "lsK": 381
+   },
+   {
+    "buoi": 71,
+    "y": 1,
+    "totalMB": 2252,
+    "rendererMB": 1422,
+    "heapMB": 111,
+    "dom": 906,
+    "q": 0,
+    "lsK": 390
+   },
+   {
+    "buoi": 76,
+    "y": 1,
+    "totalMB": 2186,
+    "rendererMB": 1419,
+    "heapMB": 111,
+    "dom": 911,
+    "q": 0,
+    "lsK": 427
+   },
+   {
+    "buoi": 81,
+    "y": 1,
+    "totalMB": 2225,
+    "rendererMB": 1432,
+    "heapMB": 111,
+    "dom": 1085,
+    "q": 0,
+    "lsK": 439
+   },
+   {
+    "buoi": 86,
+    "y": 1,
+    "totalMB": 2165,
+    "rendererMB": 1381,
+    "heapMB": 111,
+    "dom": 1015,
+    "q": 1,
+    "lsK": 426
+   },
+   {
+    "buoi": 91,
+    "y": 1,
+    "totalMB": 2132,
+    "rendererMB": 1392,
+    "heapMB": 111,
+    "dom": 900,
+    "q": 0,
+    "lsK": 440
+   },
+   {
+    "buoi": 96,
+    "y": 1,
+    "totalMB": 2094,
+    "rendererMB": 1393,
+    "heapMB": 111,
+    "dom": 870,
+    "q": 0,
+    "lsK": 451
+   },
+   {
+    "buoi": 101,
+    "y": 1,
+    "totalMB": 2167,
+    "rendererMB": 1452,
+    "heapMB": 111,
+    "dom": 1669,
+    "q": 0,
+    "lsK": 456
+   },
+   {
+    "buoi": 106,
+    "y": 1,
+    "totalMB": 2114,
+    "rendererMB": 1429,
+    "heapMB": 111,
+    "dom": 883,
+    "q": 0,
+    "lsK": 447
+   },
+   {
+    "buoi": 111,
+    "y": 1,
+    "totalMB": 2114,
+    "rendererMB": 1455,
+    "heapMB": 111,
+    "dom": 957,
+    "q": 0,
+    "lsK": 479
+   },
+   {
+    "buoi": 116,
+    "y": 1,
+    "totalMB": 2100,
+    "rendererMB": 1442,
+    "heapMB": 111,
+    "dom": 900,
+    "q": 0,
+    "lsK": 492
+   },
+   {
+    "buoi": 121,
+    "y": 2,
+    "totalMB": 2156,
+    "rendererMB": 1485,
+    "heapMB": 111,
+    "dom": 1122,
+    "q": 0,
+    "lsK": 502
+   }
+  ],
+  "promo": {
+   "raw": 0,
+   "real": 0,
+   "picked": 0,
+   "by": {}
+  },
+  "_momSeen": [
+   "#klife|",
+   "#kroul|",
+   ".dlg|Thân phận kiếp này",
+   "#modal|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   "#modal|Công chúa Phù Tang",
+   ".dlg|Công chúa Phù Tang",
+   "page|Phòng của ta · Không gặp ai.",
+   "#modal|Bạc",
+   ".dlg|Bạc",
+   "#modal|Chương # · Chờ ngày hòa thân",
+   ".dlg|Chương # · Chờ ngày hòa thân",
+   "#modal|Danh hiệu",
+   ".dlg|Danh hiệu",
+   ".dlg|Tin báo",
+   "page|Phòng của ta · Ở đây có # người.",
+   ".kbk|Tổng lược",
+   "#kxcatch|",
+   ".dlg|Hoàng thúc mời yến",
+   ".dlg|Lịch tháng",
+   ".dlg|Tâm trạng · Ta",
+   ".dlg|Phụ hoàng ngã bệnh",
+   ".dlg|Lễ Phật đản",
+   "#modal|Lễ Phật đản",
+   "#modal|Thiên mệnh",
+   ".dlg|Thiên mệnh",
+   ".dlg|Có người bán tin",
+   ".dlg|Sắc",
+   ".dlg|Sứ đoàn vào triều",
+   "#modal|Lịch tháng",
+   "#modal|sáng · còn",
+   ".dlg|sáng · còn",
+   "#klearnov|",
+   ".dlg|chiều · còn",
+   "#modal|Có khách đến chơi",
+   ".dlg|Có khách đến chơi",
+   ".dlg|Hòa ước",
+   ".dlg|Tin mua được",
+   ".dlg|Cầm",
+   ".kfoc|",
+   ".dlg|tối · còn",
+   ".dlg|Thu săn",
+   ".dlg|Thích khách",
+   "#modal|Sắc",
+   ".dlg|Hoàng muội tranh phần",
+   ".dlg|trưa · còn",
+   ".dlg|Danh hiệu mới",
+   ".dlg|Đeo «Thư hương»",
+   ".dlg|Kỳ",
+   "#modal|Sai cung nữ thân tín mua lén ngoài cung",
+   ".dlg|Sai cung nữ thân tín mua lén ngoài cung",
+   ".dlg|Đại hàn, tuyết lớn",
+   "#modal|Đại hàn, tuyết lớn",
+   ".kmov|"
+  ],
+  "_momRank": 0,
+  "_unsFail": {
+   "#klife|": {},
+   ".dlg|Thân phận kiếp này": {},
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thân · #/#": {},
+   ".dlg|Chương # · Chờ ngày hòa thân": {},
+   ".dlg|Danh hiệu": {},
+   "page|Phòng của ta · Không gặp ai.": {},
+   "page|Phòng của ta · Ở đây có # người.": {},
+   ".dlg|Hoàng thúc mời yến": {},
+   ".dlg|Phụ hoàng ngã bệnh": {},
+   ".dlg|Thiên mệnh": {},
+   ".dlg|Có người bán tin": {},
+   ".dlg|Có khách đến chơi": {},
+   ".dlg|Hòa ước": {},
+   ".dlg|Thích khách": {},
+   ".dlg|Hoàng muội tranh phần": {},
+   ".dlg|Danh hiệu mới": {},
+   ".dlg|Đeo «Thư hương»": {},
+   ".kfoc|": {},
+   ".dlg|Đại hàn, tuyết lớn": {}
+  },
+  "_scrW": {
+   ".dlg|Thân phận kiếp này|871,392": {
+    "left": 246,
+    "n": 1
+   },
+   "#modal|Chương # · Chờ ngày hòa thân|590,595": {
+    "left": 216,
+    "n": 1
+   },
+   "#modal|Danh hiệu|590,439": {
+    "left": 14,
+    "n": 1
+   },
+   "#modal|Chương # · Chờ ngày hòa thân|590,576": {
+    "left": 240,
+    "n": 3
+   },
+   ".dlg|Chương # · Chờ ngày hòa thân|590,583": {
+    "left": 240,
+    "n": 1
+   },
+   "#modal|Sai cung nữ thân tín mua lén ngoài cung|706,593": {
+    "left": 280,
+    "n": 1
+   },
+   "#modal|Chương # · Chờ ngày hòa thân|590,577": {
+    "left": 240,
+    "n": 1
+   }
+  },
+  "t": {
+   "total": 1189838
+  },
+  "_file": "E-S4-R5-random-2-ipad.json"
+ },
+ {
+  "job": {
    "id": "E-S4-R5-speed-1-ipad",
    "origin": "pf",
    "road": "pt_hai",

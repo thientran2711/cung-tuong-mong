@@ -1,0 +1,6 @@
+# E-S4 R5-random-2 (iPad) — end-of-life review (evidence limited, see moments)
+1. Summary: random («rand», casual newcomer), pf/pt_hai (road «Ở cố quốc chờ hòa ước»), iPad, real taps, jsClicks 0, harness 2df8f5fa, build ≥ bf6dd041+, 122 buổi, age 19, ending «Công chúa ở lại cố quốc» reached by the bot tapping «Xin để hoàng muội đi thay» in the «Hòa ước» dialog while «Ra mắt đoan trang…» / «Ra mắt theo lễ cố quốc» were also offered. robot-audit.js says VALID (no exit label matched, exitPick none) but by the owner ~05:20Z/~05:40Z rule («no voluntary exit while another option exists») this may be a bot-chosen way out → RULING NEEDED; not counted as valid until Foreman E rules.
+2. Scores: a first 15 min 7 · b pacing 4 · c buttons 8 · d story 5 (a clean sister-substitution plot) · e characters 6 (a sister who goes in her place — law 6 real people) · f choices/fairness 4 (a «Rất vững» option that ends the whole life) · g feedback 7 (ending card) · h mini-games n/a · i visuals 8 · j co-op n/a.
+3. Loved: the sister-substitution premise. Hated: a «Rất vững» option that silently ends the life. Replay: yes.
+4. BUGS: none. Harness note: add «đi thay» / «ở lại cố quốc» to the exit-road blacklist if Foreman E rules it an exit.
+5. Suggestions (parking lot): mark life-ending options on the choice card (not as a percentage; in words).
