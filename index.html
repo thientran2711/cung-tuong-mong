@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"49c26ed9","t":"2026-11-26T11:28Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay.","b":"21d557a78657","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
+window.CTM_BI={"s":"fa66b6c6","t":"2026-11-26T11:34Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay.","b":"27a21266f2b6","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -98213,12 +98213,12 @@ NSV.recLedger=recLedger;
 /* the lines the sieve takes out of the feed (newsAdd NPC deeds, kitKnow, the morning card, gossip reports) → the record */
 function recDrop(t,ids){if(!recOn())return;const I=new Set((ids||[]).filter(x=>x!=null));try{for(const v of rivals||[])if(v&&v.name&&String(t).includes(v.name))I.add(v.id)}catch(e){}recPush({t,ids:[...I]})}
 NSV.recDrop=recDrop;
-/* a card's folded-changes record (nsCard r.K): lead «<title> — kèm theo:» + the ONE kit kitKemRow one-per-line form (named once per feeling,
+/* a card's folded-changes record (nsCard r.K): lead «<title>:» (none: «Trong cung vừa qua:») + the ONE kit kitKemRow one-per-line form (named once per feeling,
    strangers with the same feeling and number «N vị khác», names masked by the kit at show time); K.all = the Sổ ghi keeps every line (no 8 cap).
    Old records (no K) keep their text. */
 function kemRec(r){try{if(!r||!Array.isArray(r.K)||!r.K.length||typeof kitKemRow!=="function")return"";
  const K=r.K.map(o=>({v:persOf(o.id),k:o.k,d:o.d,t:o.t})).filter(x=>x.v);if(!K.length)return"";K.all=1;
- const h=kitKemRow(K);if(!h)return"";const L=r.L?maskNames(r.L,r.ids):"";return `${L?L+" — kèm theo:":"Kèm theo trong cung:"} ${h}`}catch(e){console.error("nsKemRec",e);return""}}
+ const h=kitKemRow(K);if(!h)return"";return `${r.L?maskNames(r.L,r.ids):"Trong cung vừa qua"}: ${h}`/* the kit row carries its own «Kèm» label */}catch(e){console.error("nsKemRec",e);return""}}
 /* the Sổ ghi tab: her lines (S.logs) and the harem record, newest first, merged by the log sequence at which each record was written */
 function recMerge(){const L=S.logs||[],H=recList();if(!H.length)return L;const n=S.logSeq||L.length;const out=[];let j=0;
  const row=r=>`<span class="ld">${r.dt}</span><i hidden data-osk="${r.big?"big":"hc"}"></i>${kemRec(r)||maskNames(r.t,r.ids)}`;
@@ -100930,7 +100930,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="21d557a78657";window.CTM_BUILD=BUILD;
+const BUILD="27a21266f2b6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
