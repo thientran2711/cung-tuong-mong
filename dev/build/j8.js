@@ -100,9 +100,9 @@ function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}if(sev==nul
   const m=punishMonths(sev);p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`);if(p===S)punNote({kind:"camtuc",why,m})}
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
   if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});const r0=rkOf(p);if(r0>0&&!punTwice(p)){seatPut(p,punDown(p));punMark(p,r0)}p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);if(p===S)punNote({kind:rkOf(S)<r0?"giang":"camtuc",why,from:r0,to:S.rank,m:BAL.eff.j8.mercyConfine});return}
-  /* PUNISH-TIER: spared death = the VỪA penalty (one rank down + lãnh cung, jpun punCold), her and an NPC alike */
-  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`,null,"vua");return die(why)}
-  if(has("nhantu")&&npcWhy("empMercy",{p})){punCold(p,"vua",`${why}; Hoàng thượng nhân từ tha tội chết`);return}
+  /* PUNISH-TIER (OD 20:35Z rec 1): a death sentence spared = phế vị + lãnh cung chung thân (jpun punCold "phe"), her and an NPC alike */
+  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, phế vị, đày ngươi vào lãnh cung chung thân`,null,"phe");return die(why)}
+  if(has("nhantu")&&npcWhy("empMercy",{p})){punCold(p,"phe",`${why}; Hoàng thượng nhân từ tha tội chết`);return}
   p.alive=false;if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
 /* a proven crime (accusation with evidence) */
 /* punish-reason (D1): ONE punishment = lãnh cung OR one rank down (never two ranks, never two punishments the same day: punTwice → cấm túc);

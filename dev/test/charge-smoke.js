@@ -5,13 +5,13 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;const sleep=t=
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});for(let i=0;i<300;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;quiet=false});await sleep(1200);
- const R=await p.evaluate(()=>{const out=[];const ok=(c,m)=>out.push([!!c,m]);Q.length=0;
+ const R=await p.evaluate(()=>{BAL.charge.rep.n=99;/* PUNISH-TIER: the repeat-nhẹ rule is tested in punish-tier.js; these steps punish the same people many times */const out=[];const ok=(c,m)=>out.push([!!c,m]);Q.length=0;
   const L=liveRivals(true).filter(x=>!x.queen);const clean=x=>{x.wrongs=[];x.dw=0;x.schemes=0;x.dws=0;x.dkeys=[];x.scandal=0;x.affair=null;x.pregMismatch=0;x.plan=null;x.inv=[];x.dress=null};L.slice(0,3).forEach(clean);const v=L[0],w=L[1];v.wrongs=[];v.dw=0;v.schemes=0;v.dws=0;v.evc={};v.evq={};v.ev=0;S.evc={};S.evq={};
   ok(deedCap(v)===0,'clean target: cap 0');ok(!chSearch(S,null,()=>evA(S,v,1)),'search on a clean target finds nothing');ok(!chMissed(),'no miss line on a clean target (nothing to find)');
   deedAdd(v,"catswap",w,2,"bỏ độc")/* PUNISH-TIER: a nặng deed (nangDeed) keeps mưu hại at 3 pieces for this test */;ok(chCapC(v,"mh")===3,'one poisoning: mưu hại cap 3 (= pieces needed)');ok(deedCap(v)===3,'deedCap = per-charge caps');
   /* certain pieces (caught): go to the charge */
   evA(S,v,2);ok(chHave(S,v,"mh")===2&&v.ev===2,'2 certain pieces → mưu hại 2, total 2');ok(!accOK(S,v),'2/3 mưu hại: cannot accuse');
-  ok(/Mưu hại tính mạng \(nặng\) 2\/3/.test(chLine(S,v)),'card line: '+chLine(S,v));ok(/Tìm chứng tội mưu hại/.test(chFindTxt(S,v,S.maid)),'search card text names the charge she builds: '+chFindTxt(S,v,S.maid));
+  ok(/Mưu hại tính mạng \(tử tội\) 2\/3/.test(chLine(S,v)),'card line: '+chLine(S,v));ok(/Tìm chứng tội mưu hại/.test(chFindTxt(S,v,S.maid)),'search card text names the charge she builds: '+chFindTxt(S,v,S.maid));
   /* find odds factors */
   S.tamco=60;v.tamco=10;v.rank=2;Object.defineProperty(S,'mat',{get:()=>0,configurable:true});let F=chFind(S,v,"mh",null);ok(F.band===4,`tâm cơ gap +50 → +2 bands (cap): band ${F.band}`);
   S.tamco=10;v.tamco=60;F=chFind(S,v,"mh",null);ok(F.band===0,`tâm cơ −50 → −2: band ${F.band}`);

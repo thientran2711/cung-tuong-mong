@@ -16,7 +16,7 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
  /* ---- consort life: O2 ---- */
  let p=await page(b,errs);
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;quiet=false});await sleep(1000);
- out.push(...await p.evaluate(()=>{const o=[];const ok=(c,m)=>o.push([!!c,m]);const B=BAL.charge;
+ out.push(...await p.evaluate(()=>{BAL.charge.rep.n=99;/* PUNISH-TIER: the repeat-nhẹ rule is tested in punish-tier.js; these steps punish the same people many times */const o=[];const ok=(c,m)=>o.push([!!c,m]);const B=BAL.charge;
   const L=liveRivals(true).filter(x=>!x.queen&&!x.coop);const [v,w,u]=L;const clean=x=>{x.wrongs=[];x.dw=0;x.evc={};x.evq={};x.ev=0;x.out=x===S?0:false;x.confined=0;x.punWk=null;x.tsbBul={}};
   let cp=[],gp=[];const c0=chPunish;chPunish=function(t,c,why){cp.push([t===S?"S":t.name,c]);return c0.apply(this,arguments)};
   let inC=0;const c1=chPunish;chPunish=function(){inC++;try{return c1.apply(this,arguments)}finally{inC--}};
