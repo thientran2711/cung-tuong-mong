@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn.","b":"0281bf7bcef6","h":[{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"}]};
+window.CTM_BI={"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"STACK LAND a9 promo-root «A» 42e1fd7f onto qc slot bf6dd041 (CHANGE/built files only; rebuilt); CHANGE line MAIN 150","b":"5aa06fd003b8","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2816,7 +2816,7 @@ function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);const agd=windo
 function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
-  if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-(v.rel>=netTh(v,"than")?3:1),0,100);v.pg=Math.max(0,v.pg-1);
+  if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-ghenCool(v),0,100);v.pg=Math.max(0,v.pg-1);
   if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
@@ -5813,7 +5813,41 @@ function npcAct(v,t){const b=bandVT(v,t);if(!b)return"";const allow=BANDS.slice(
 /* reactions: Oán from a slight scales with the victim's traits; forgiveness (monthly fade) too; trust gains from her too */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)n*=persF(x,"slight",1);return o0.call(this,x,y,n)}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){/* AG-ALL-2 G12 (one rule both ways): her trust trait slows how fast she warms to ANYONE, the player or an NPC */if(n>0&&x&&x!==S&&y&&y!==x)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
-function oanMonth(){for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade);
+/* review/pace-all PART B (owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán … Điểm thì nó tăng cao chót vót mà không biết làm cách nào để cho nó giảm»):
+   OÁN COOL-DOWN = the ONE fade of every grudge (canon overwrite: it replaces the old flat «BAL.oanFade a month»; oanMonth keeps its monthly hooks).
+   Each tuần (rivalsTurn), a grudge nothing new fed for BAL.oanCool.quiet tuần fades by (the width of its oán band, BAL.oanLv) ÷ BAL.oanCool.season
+   × the holder's nết (persF "forgive": Thù dai slower, Rộng lượng faster), so a feud left alone one season drops one band. Same rule for every holder:
+   consorts, men, servants and HER own oán toward them (law 1). It never goes below the floor while the CAUSE stands (law 6a real evidence): the holder
+   still remembers a bad deed of that person (jmem memTop, weight ≥ BAL.mem.faint) → floor «Chút oán» (BAL.oanLv[floor.mem − 1]); a deed carved for
+   life (keep / khắc cốt) → «Oán» (BAL.oanLv[floor.keep − 1]); the memory itself fades by BAL.mem.fadeMo, then the floor goes. A new rise
+   (oanAdd n > 0) restarts the quiet count (p.ocq[key] = tuần of the last rise); fractions carry (p.occ). Old saves: no stamp = quiet. */
+function ocBandW(v){const L=BAL.oanLv;let i=0;while(i<L.length&&v>=L[i])i++;return Math.max(1,(i<L.length?L[i]:100)-(i?L[i-1]:0))}
+function ocKey(p){return p===S?"me":p&&p.id!=null?String(p.id):null}
+function ocWk(){try{return wk()}catch(e){return 0}}
+function ocStamp(x,y){try{if(!x||!y||typeof x!=="object")return;const k=ocKey(y);if(k==null)return;(x.ocq=x.ocq&&typeof x.ocq==="object"?x.ocq:{})[k]=ocWk()}catch(e){}}
+function ocFloor(h,t){const C=BAL.oanCool,L=BAL.oanLv;try{if(typeof memTop!=="function"||!t)return 0;const m=memTop(h,t,-1);if(!m)return 0;
+  if(m.L||m.k)return L[C.floor.keep-1]||0;return m.g>=((BAL.mem&&BAL.mem.faint)||15)?(L[C.floor.mem-1]||0):0}catch(e){return 0}}
+/* fade one grudge value v held by h toward t (key k) by w tuần of cool-down; returns the new value */
+function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;const q=h.ocq&&h.ocq[k];if(q!=null&&ocWk()-q<C.quiet)return v;
+ const fl=ocFloor(h,t);if(v<=fl)return v;const cc=h.occ=h.occ&&typeof h.occ==="object"?h.occ:{};
+ const d=(cc[k]||0)+w*ocBandW(v)/C.season*kf;const n=Math.floor(d);cc[k]=Math.round((d-n)*1000)/1000;if(!n)return v;return Math.max(fl,v-n)}
+function ocPerson(id){try{return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&String(v.id)===String(id))||null}catch(e){return null}}
+/* w tuần of cool-down for every grudge in the world; mine = also HER own grudges (S.ro) */
+function oanCool(w,mine,onlyMine){const C=BAL.oanCool;if(!C||!C.on||!S)return;w=w||1;
+ if(!onlyMine)for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||typeof v!=="object"||v.alive===false)continue;const kf=persF(v,"forgive",1);
+  if(v.oan)v.oan=ocOne(v,S,"me",v.oan,w,kf);if(v.ro&&typeof v.ro==="object")for(const k in v.ro)v.ro[k]=ocOne(v,ocPerson(k),k,v.ro[k],w,kf)}
+ if(mine&&S.ro)for(const k in S.ro)S.ro[k]=ocOne(S,ocPerson(k),k,S.ro[k],w,C.me);
+ /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
+ if(!onlyMine)for(const h of relMSAll()){const kf=persF(h,"forgive",1);if(h.oan)h.oan=ocOne(h,S,"me",h.oan,w,kf);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=ocOne(h,ocPerson(k),k,h.ro[k],w,kf)}}
+/* the weekly jealousy fade of one consort (j8 rivalsTurn): BAL.oanCool.ghen.than when she likes her, .base otherwise, × her nết; fractions carry (v.gcc) */
+function ghenCool(v){const G=(BAL.oanCool&&BAL.oanCool.ghen)||{base:1,than:3};const b=(+v.rel||0)>=netTh(v,"than")?G.than:G.base;
+ if(!(BAL.oanCool&&BAL.oanCool.on))return b;const d=(+v.gcc||0)+b*persF(v,"forgive",1),n=Math.floor(d);v.gcc=Math.round((d-n)*1000)/1000;return n}
+/* the weekly tick: inside rivalsTurn (host only in co-op: jcoopworld mutes it on the guest, whose OWN grudges cool in her oanMonth, 3 tuần at once) */
+(function(){const r0=rivalsTurn;rivalsTurn=function(){const r=r0.apply(this,arguments);try{oanCool(1,true)}catch(e){console.error("oanCool",e)}return r}})();
+/* a new rise restarts the quiet count of that grudge */
+(function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0)ocStamp(x,y);return o0.apply(this,arguments)}})();
+function oanMonth(){if(BAL.oanCool&&BAL.oanCool.on){try{if(typeof worldOn==="function"&&!worldOn())oanCool(3,true,true)}catch(e){}return}
+ for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade);
  /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
  for(const h of relMSAll()){const f=Math.round(BAL.oanFade*persF(h,"forgive",1));if(h.oan)h.oan=Math.max(0,h.oan-f);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=Math.max(0,h.ro[k]-f)}}
 /* gifts land by trait: Kiêu ngạo shrugs at small ones, Tham vọng warms to a rising giver, Tham tiền to anything */
@@ -6863,11 +6897,17 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
              at the door for a secret meeting (jtin watcher, printed by jroute / j22 «… canh cửa (lòng …+, Chủ tin …+)»; review/one-core-dup3).
    rareLv  = rarity word of an origin / event weight (j69 ow69Rare, jk2b kitRare): ≤ [0] Rất hiếm, ≤ [1] Hiếm.
    sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
-   oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
+   oanFade = the OLD flat monthly oán fade (j28 oanMonth), used only when BAL.oanCool.on = 0 (rollback switch); the live fade is BAL.oanCool below.
+   oanCool = OÁN / GHEN COOL-DOWN (review/pace-all, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán»; j28 oanCool, each tuần in rivalsTurn):
+             a grudge nothing new fed for quiet tuần fades by (width of its BAL.oanLv band) ÷ season × the holder's nết (persF forgive:
+             Thù dai ×.3, Rộng lượng ×1.8; me = HER own grudges, she has no nết) → a feud left alone one season drops one band (law 3: time is the cost).
+             floor = band kept while the cause stands (law 6a): mem = a bad deed still remembered (jmem, weight ≥ BAL.mem.faint) → band 1 «Chút oán»;
+             keep = a deed carved for life → band 2 «Oán». ghen = the weekly jealousy fade (j8 rivalsTurn, was typed 3 / 1): than = when she is
+             liked (rel ≥ BAL.net.th.than), base otherwise, × the same nết; her own jealousy (v.pg) keeps its −1 a tuần.
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    (the youngest adult = BAL.ageMin, with the age bands above) */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,floor:{mem:1,keep:2},ghen:{base:1,than:3}},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
@@ -6981,7 +7021,7 @@ Object.assign(BAL,{eff:{
  j34:{gW:1.6,miniW:1.5,rN:4,rW:1.2,scMax:10,sucDef:60,sucLow:40,sucPen:-2,dHit:6,dMiss:3,dDuc:25,dTam:30,pheMax:4,pheBase:1,pheDiv:2/* jemo-bal: tScore art × / mini-game × / roll R(rN) × rW, score 0..scMax, Sức (default sucDef) under sucLow → sucPen; dScore virtue hit / miss + Đức ÷ dDuc + Tâm cơ ÷ dTam; fScore a phe backer min(pheMax, pheBase + n ÷ pheDiv) */,contestEnd:10,meGo:1,danhSabotage:-6,sungSabotage:-8,prW:1.5,sabCut:2,backerPt:2,wTrong:1.5,wHieu:1.5,wDanghi:.6/* law4-typed: practice weight / sabotage cut / backer point / judge-trait round weights — were typed in tScore/fScore/crW + their card text */},
  j4:{evMonth:2,evGo:1,danhMonth:4,danhMonth_2:-4,danhMonth_3:-20,danhMonth_4:-20,sungMonth:-15,danhMonth_5:10,sungMonth_2:-10,sungMonth_3:-10,danhMonth_6:-10,danhGo:5,tamcoGo:2,danhGo_2:-8,thGo:10,sungMonth_4:3,sungMonth_5:-3,sungMonth_6:-15,danhGo_3:8,danhMonth_7:-1,sungMonth_7:-20,danhMonth_8:5,bacMonth:150,danhMonth_9:-10,thMonth:10,danhMonth_10:-10,danhMonth_11:3,danhLose:-15},
  j40:{mindBelief:8,mindBelief_2:8,evMindRun:1,evTop:1},
- j42:{cnvFrame:-30,srvErrandDone:3,srvErrandDone_2:1,srvDoOrder_2:1,meritMis:0.25,meritRec:3,meritSweep:0.5,meritTea:0.25,meritNvp:0.5,meritRite:0.25,meritBooks:0.5,srvDoOrder:-10,go:-5,srvRise:[25,-25],top:15,top_2:40,evSrvTalk:1,evSrvTalk_2:2,evGo:1,evSrvMonth:1,evN:1,evSrvDoOrder:2,evTop:2,tinSrvMonth:5,loyalSrvStaffAct:15,loyalSrvAffairCaught:20,tinSrvAffairCaught:20,tinSrvMoodEvent:1,tinGo:3,tinGo_2:-3,sucGo:-15,sucGo_2:-20,tinGo_3:2,tinGo_4:-12,sucGo_3:-15,tinGo_5:-15,tinGo_6:-5,tinGo_7:-4,bacTop:30,tinTop:6,sucGo_4:-15,sucL:-30,sucSrvDoOrder:-20,tinKeep:2,tinWedStay:5,tinGrantStay:-5,tinPrinceStay:3,tinhPrinceStay:-15/* cnv-exit-promo: the stay answers of cnvAge / cnvWed / cnvGrant / cnvPrince (were typed) */},
+ j42:{cnvFrame:-30,srvErrandDone:3,srvErrandDone_2:3,srvDoOrder_2:3,meritMis:1,meritRec:3,meritSweep:2,meritTea:1,meritNvp:2,meritRite:1,meritBooks:2,srvDoOrder:-10,go:-5,srvRise:[25,-25],top:15,top_2:40,evSrvTalk:1,evSrvTalk_2:2,evGo:1,evSrvMonth:1,evN:1,evSrvDoOrder:2,evTop:2,tinSrvMonth:5,loyalSrvStaffAct:15,loyalSrvAffairCaught:20,tinSrvAffairCaught:20,tinSrvMoodEvent:1,tinGo:3,tinGo_2:-3,sucGo:-15,sucGo_2:-20,tinGo_3:2,tinGo_4:-12,sucGo_3:-15,tinGo_5:-15,tinGo_6:-5,tinGo_7:-4,bacTop:30,tinTop:6,sucGo_4:-15,sucL:-30,sucSrvDoOrder:-20,tinKeep:2,tinWedStay:5,tinGrantStay:-5,tinPrinceStay:3,tinhPrinceStay:-15/* cnv-exit-promo: the stay answers of cnvAge / cnvWed / cnvGrant / cnvPrince (were typed) */},
  j53:{fondKtGrow:1,sungFav:-4/* r3 sg-card: «Xin Hoàng thượng cử Đại học sĩ» Sủng cost (was typed on card + apply) */},
  j54:{noiSung:3,noiTinh:2/* r2 sg-card: child «vào cung nói giúp» Sủng (+2 for a tình child) — was typed 3 times */,sungGo:-10,danhGo:-3,sucGo:-15,thGo:8,sungGo_2:6,sucGo_2:-15},
  j55:{tdGiftHead:-10,ccStep:-5,ccStep_2:-5,tdAsk:-3,tdProbe:-8,tdProbe_2:8,tdLeak:-6,tdLeak_2:25,tdLeak_3:-10,top:2,top_2:3,top_3:6,top_4:-8,top_5:-6,top_6:8,top_7:-10,tdSoMonth:3,tdSoMonth_2:[4,-3],tdSoMonth_3:2,tdSoMonth_4:-2,tdSoMonth_5:-5,tdSoMonth_6:-5,tdImpeach:-6,tdImpeach_2:2,tdImpeach_3:-5,top_8:6,top_9:-6,go:-3,fail:-3,danhTdAsk:4,sungTdAsk:2,danhTdAsk_2:-2},
@@ -8235,7 +8275,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function srvMen(){try{menInit()}catch(e){}return (S.men||[]).filter(m=>m.alive&&(m.age||0)>=BAL.ageMin)}
 function srvAdult(m){return (S.age||0)>=BAL.ageMin&&!!m&&(m.age||0)>=BAL.ageMin}
 function srvRiskOf(k,eyes,fr,tc){const T=BAL.srvRisk;const base=T[k]!=null&&k!=="def"?T[k]:T.def;return cl(Math.round(base+eyes-fr*T.fr-(tc||0)/T.tc),T.min,T.max)}
-function srvMpNeed(rk){return ((rk||0)+1)*BAL.srvMp}
+function srvMpNeed(rk){const N=BAL.srvMpN;return N[Math.max(0,Math.min(N.length-1,rk|0))]}
 function srvRisk(k){const eN=liveRivals(true).reduce((s,v)=>s+eyes(v),0);return srvRiskOf(k,eN,srvFriendList().length,S.tamco)}
 function srvBond(){const L=srvMen().filter(m=>m.tinh>=BAL.tinhLv.close&&m.rw!=="vương gia").sort((a,b)=>(b.tinh+(S.srv.vow===b.id?50:0))-(a.tinh+(S.srv.vow===a.id?50:0)));return L[0]||null}
 function srvSeen(m,n){S.srv.rumor=(S.srv.rumor||0)+n;const mi=srvM(),W=npcWit(S.place,null,{not:[mi,S],vs:S}).map(x=>x.p).filter(v=>rivals.includes(v));const lv=npwPick(W,x=>hostility(x,S)+(mi?hostility(x,mi):0)-BAL.ag.why.srv.leakMin);if(lv&&roll(BAL.odb.j42.rlSrvSeen)){S.srv.leak=lv.id}/* npc-purpose G2a: only one who was really there, with a grudge to use it, holds it over her */log(`Có người thấy ngươi với ${m.name}. Lời ra tiếng vào.`)}
@@ -37605,7 +37645,10 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[2,1.5,1.1,.9,.8] /* review/balance-pace (owner OD 25/11 ~23:52Z «một lần chơi chỉ được cộng có 2 điểm … bao giờ tao mới lên được bậc»): was [1.2,1,.8,.6,.4]
+ gain:[1,1.25,1.25,1.25,1.25] /* review/pace-all (owner OD 26/11 ~08:05Z «tiến bộ là tiến bộ của cái bậc đó»; ONE PACE TABLE rule: one ordinary
+   lesson moves 1/15 … 1/3 of the bậc she is in): phần per bậc = tier width ÷ gain = 10 · 12 · 16 · 20 · 24 (was 5 · 10 · 19 · 28 · 38: a good game was 3/5 of
+   Nhập môn, too fast, and 1/38 of Xuất chúng, too slow); a played lesson (2 phần) = 5 · 6 · 8 · 10 · 12 lessons a bậc, harder as she climbs (law 5);
+   one-decimal gains keep every phần exact on the 0.1 points grid (crsPush). Report dev/handover/reports/pace-all.md. Before that: review/balance-pace (owner OD 25/11 ~23:52Z «một lần chơi chỉ được cộng có 2 điểm … bao giờ tao mới lên được bậc»): was [1.2,1,.8,.6,.4]
    (a good self-study = 2.4 points → Tông sư after ~83 good games of ONE course). Now a good game (raw ≥ BAL.mgTier.lessonPts[2]) of self-study = 6 points at bậc 0:
    Nhập môn after 2 good games, Tông sư after ~35 (teacher ~26); still slower each bậc. Measured dev/measure/pace.js, report dev/handover/reports/balance-pace.md */,
  les:{self:1,min:1} /* review/balance-pace: lesson points of ONE play (jbalcore lesG, her lessons and an NPC's): self-study = max(min, round(game points × self)) (was × .6:
@@ -37923,7 +37966,9 @@ BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},
    srvMp = công lao per bậc (need (bậc+1)*srvMp); srvLoyal = a new servant's loyalty base+R(r) */
 BAL.srvRisk={vuon:28,thu:34,tyv:20,tn:40,home:18,def:26,fr:4,tc:10,min:6,max:92};
 BAL.caught={fac:4};/* j8 caughtOdds (clamped by the ONE odds cap, oddsCl) */
-BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMp=5;BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
+BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMpN=[6,8,10,12,14,16,18];/* review/pace-all: Công lao a servant needs at each rank (srvMpNeed; her and every NPC servant, law 1), rising (law 5); with the whole-number merits
+   (BAL.eff.j42 merit* 1 / 2, errand / order 3; BAL.ag … listen / watch 1, scout 2) one ordinary chore moves 1/6 … 1/16 of a rank step (was 0.25–0.5 of (rank+1)×5: 1/20 … 1/100,
+   and the shown «Công lao n/need» did not move for 2–4 chores). Canon overwrite of the old BAL.srvMp = 5 (need = (rank+1) × 5). */BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
  riskD:3,caughtTin:20,caughtSuc:20,vowTinh:20,dt:40,expel:30,exile:35,vowW:.5,outW:.3,monthSuc:10,secSee:30,hit:1,uMul:3,peerGap:40,nvpAf:5,askAf:2};
@@ -38258,7 +38303,7 @@ Object.assign(BAL.ag,{kh2:{on:1,spill:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:
    tell.late = weight of a report a buổi late (peaks at lòng 50); scout.caught = % of failed scouting that is caught (else she comes back empty-handed);
    scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
 BAL.ag.know={eye:100,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
- hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5,caught:50},watch:{k:1,tin:2,mp:.25},keep:20,share:[5,20]};
+ hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:1},scout:{k:2,tin:3,lose:5,mp:2,oan:5,caught:50},watch:{k:1,tin:2,mp:1},keep:20,share:[5,20]};
 /* AG-ALL-2g INFO SELLERS (jagknow tail; owner OD 17/11 ~16:50Z (2)): o = % per buổi that a seller comes to a buyer (her and each consort);
    kh = khắc to hear him out (dayFit); min = least worth of news that may be sold (never trivial); val = worth per kind of news (j78 fact key prefix;
    scheme / schemeMe = a scheme deed of this buổi against another / against the buyer; fav = a change of favour ≥ fav.d Sủng); price = bạc at worth 100
@@ -83980,7 +84025,7 @@ function artNeed(l){const T=BAL.art.tier,top=T.length-1;return l>=top?100-T[top]
 function crsPush(lv,pt,k,g,up){if(!(g>0))return 0;const T=BAL.art.tier,G=BAL.art.gain,top=T.length-1;let left=g,n=0;
  for(let guard=0;left>1e-9&&guard<20;guard++){const l=lv[k]||0,need=artNeed(l),have=pt[k]||0;if(l>=top&&have>=need){pt[k]=need;break}
   const room=need-have,give=left*G[Math.min(l,G.length-1)];
-  if(give<room-1e-9){pt[k]=Math.round((have+give)*10)/10;left=0}
+  if(give<room-1e-9){pt[k]=Math.round((have+give)*100)/100/* review/pace-all: 0.01 grid, so a 1.25-points phần stays exact (0.1 rounding drifted a bậc 1 phần short) */;left=0}
   else{left-=room/G[Math.min(l,G.length-1)];if(l>=top){pt[k]=need;left=0}else{pt[k]=0;lv[k]=l+1;n++;if(up)up(l+1)}}}
  return n}
 /* review/balance-pace: the ONE lesson-points rule of one play (her j23 lesson, an NPC's j85 npcStudyDo): pts = the game's points (j83 wkLessonPts 0..3, × the
@@ -100387,7 +100432,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0281bf7bcef6";window.CTM_BUILD=BUILD;
+const BUILD="5aa06fd003b8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

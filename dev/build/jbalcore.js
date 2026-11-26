@@ -15,7 +15,7 @@ function artNeed(l){const T=BAL.art.tier,top=T.length-1;return l>=top?100-T[top]
 function crsPush(lv,pt,k,g,up){if(!(g>0))return 0;const T=BAL.art.tier,G=BAL.art.gain,top=T.length-1;let left=g,n=0;
  for(let guard=0;left>1e-9&&guard<20;guard++){const l=lv[k]||0,need=artNeed(l),have=pt[k]||0;if(l>=top&&have>=need){pt[k]=need;break}
   const room=need-have,give=left*G[Math.min(l,G.length-1)];
-  if(give<room-1e-9){pt[k]=Math.round((have+give)*10)/10;left=0}
+  if(give<room-1e-9){pt[k]=Math.round((have+give)*100)/100/* review/pace-all: 0.01 grid, so a 1.25-points phần stays exact (0.1 rounding drifted a bậc 1 phần short) */;left=0}
   else{left-=room/G[Math.min(l,G.length-1)];if(l>=top){pt[k]=need;left=0}else{pt[k]=0;lv[k]=l+1;n++;if(up)up(l+1)}}}
  return n}
 /* review/balance-pace: the ONE lesson-points rule of one play (her j23 lesson, an NPC's j85 npcStudyDo): pts = the game's points (j83 wkLessonPts 0..3, × the
