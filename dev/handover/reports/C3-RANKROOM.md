@@ -22,4 +22,12 @@ Open: bedroom trigger = buoi toi (C8 assumption), unchanged.
 - Per-palace Tan/Phi/Quy phi coverage is now whatever the table has; remaining fallbacks = rooms with no picture (Hoang quy phi etc.).
 - OLD-SAVE LOAD TEST: NOT RUN. dev/test/palace-oldsave.js needs old and new builds on one origin; my local http.server on a shared port was refused by the auto-mode classifier (twice), I did not work around it. Please run: node dev/test/palace-oldsave.js <old main index url> <new index url> 755x1000@1 <outdir> with both builds under one server, or allow the server command. Change touches only art keys + the resBase lookup (falls back to old keys), no save fields.
 ~90% xong / ~88% choi duoc
-LAND READY review/c3-rankroom d8ed8090 (old-save test pending)
+LAND READY review/c3-rankroom 9bbebc9f (reviewer r1 PASS; old-save PASS by reviewer)
+
+## Round 3 (Foreman C ROOT 3-1)
+- Revert manifest: CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/rankroom-stage/manifest.json + committed as dev/art/place-rank/rank_rooms_manifest.json (live 256 keys, new 64) on review/c3-rankroom @9bbebc9f.
+- Videos (real stage, residence -> room; Tan/Phi/Quy phi of all 8 palaces day, Phi/Quy phi night for 3 palaces, 4 buoi walk, Thua Minh Dong phoi bedroom; 0 page errors; each stop waits for the picture to load): 
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-rankroom-video/c3-rankroom-fold-755x1000.mp4 (~9 min, 25.6 MB)
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-rankroom-video/c3-rankroom-ipad-1180x820.mp4 (~9.4 min, 31.2 MB)
+  I looked at a grid of a frame every 4 s of both: rooms and figures render, no plain/missing-picture frames except one pale transition frame in the iPad video. Videos are long because each stop waits up to 12 s for the picture-load check.
+- Not covered on the stage: Tay phoi of other palaces (only Thua Minh phoi reached).
