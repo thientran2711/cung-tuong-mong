@@ -86,8 +86,10 @@ function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){
 function chooseBad(i,m){try{(window.__badPick=window.__badPick||[]).push({i,t:m&&m.t||"",pid:m&&m.pid||"",n:m&&m.opts?m.opts.length:0,st:String(new Error().stack||"").split("\n").slice(2,7).join(" < ")});console.warn("chooseM: no option",i,"on",m&&(m.pid||m.t))}catch(e){}}
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
+/* the person-picker card sub-line markers (« · đang nhắm», « · Tìm chứng: …», jwhy spy picker) belong to the card only: the log and the evidence record name the person */
+function optLogName(x){return String(x||"").replace(/\s*·\s*(đang nhắm|Tìm chứng:[^·<]*)/g,"").trim()}
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
- const d=typeof lsRest==="function"?lsRest(b0,lsArr(L)):logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
+ const d=typeof lsRest==="function"?lsRest(b0,lsArr(L)):logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=optLogName(c.n).replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
  log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" — "+res:"."}`)}/* "—", not "→": the result itself has "Sủng a → b" (log-sync r1) */
 
 /* nights */

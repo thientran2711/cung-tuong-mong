@@ -384,8 +384,8 @@ function ptOrdTick(){if(!S||S.dead||!Array.isArray(S.ordQ)||!S.ordQ.length)retur
 (function(){try{const c0=PEND.cnvOrd;if(!c0)return;PEND.cnvOrd=function(pp){if(!ptOn()||!pp)return c0.apply(this,arguments);const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;
   const k=pp.k,kind=k==="spy"?"spy":k==="plant"?"plant":"harm",H=BAL.road.hp.half,pl=palaceOf(t);let o,deed,gain,loss,say;
   if(k==="spy"){o=spyRoll(m,t,knMeAg());const L=BAL.eff.jwhy.loyalSpyMaidRun,F=BAL.eff.j78.j78maidFail,E=BAL.eff.j78.evN;say=`dò la cung ${t.name}, xem nàng gặp ai, nói gì`;
-   gain=`${m.name} nắm ${balSg(E)} chứng cứ của ${t.name} nếu nàng từng làm điều sai · ngươi công lao +${srvOrdMerit()}`;loss=`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(F)}`;
-   deed=oo=>{if(roll(oo)){const n=evA(m,t,E);srvMerit(srvOrdMerit());log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(E)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
+   gain=`${m.name} nắm ${balSg(E)} chứng cứ của ${t.name} nếu nàng từng làm điều sai và tìm ra (${chFindTxt(m,t,knMeAg())}) · ngươi công lao +${srvOrdMerit()}`;loss=`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(F)}`;
+   deed=oo=>{if(roll(oo)){const n=chSearch(m,knMeAg(),()=>evA(m,t,E));srvMerit(srvOrdMerit());log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(E)} chứng cứ.`:chMissed()?`Ngươi dò la ${t.name}: ${chMissTxt(t)}`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
     else{apply({tin:-L});oanAdd(t,m,F);log(`<span class="r">Ngươi nấp nghe ngoài cửa sổ cung ${t.name} thì bị bắt gặp, hoảng sợ chạy về.</span> Chủ tin -${balAb(L)}.`)}}}
   else{o=ordOdds(k);deed=()=>srvDoOrder(k,t);const R=ordRow(k,t);say=R.say;gain=R.gain;loss=R.loss}
   const oq=PT.opening||null,go=(run,half)=>ptOrdGo(pl,kind,run,half,oq,pp,m);
