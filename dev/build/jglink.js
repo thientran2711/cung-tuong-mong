@@ -84,15 +84,8 @@ function glShop(){try{if(Q.length||!S||S.dead)return;const here=S.visit&&S.visit
 function glGo(T){try{if(!S||S.dead||Q.length)return;const k=T.k;if(typeof j77Tap==="function")j77Tap(k);else goTo(k);
   /* a seller: once she stands there (after the «Chọn người theo hầu» card of her first walk of the day, if any) his wares open */
   if(T.who&&T.who.sell){let n=0;const iv=setInterval(()=>{n++;try{if(S.place===k&&!Q.length){clearInterval(iv);glShop()}else if(n>120||S.dead||(S.place!==k&&!Q.length&&n>4))clearInterval(iv)}catch(e){clearInterval(iv)}},250)}}catch(e){console.error("glink go",e)}}
-/* ---------- r2: NAVIGATION IS NOT A CHOICE (MAIN LOOK; KIT REQUEST KK44 option flag `nav`) ----------
-   An option {nav:1} only moves her eye (open a tab, ring a place, walk her there, close): no «KẾT QUẢ … không được gì, cũng không mất gì» card and no
-   «Cách làm: Xem Dư đồ» log line. Interim until KK44 ships the kit flag; whole family = every pure navigation option: this panel (Đi tới / Xem Dư đồ /
-   Xem hàng / Đi làm / Đóng), jgoal «Đi làm: …», jge «Xem bảng vàng». A real act that follows (her arrival bow at a palace, j77) keeps its own card. */
-let NAVH=0;
-if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){let nav=false;try{const c=Q[0]&&Q[0].opts&&Q[0].opts[i];nav=!!(c&&(c.nav||/\bkgoalhow\b/.test(Q[0].cls||"")/* kit §6.2l «Cách làm» → «Đi tới» = navigation (ask KK44: nav on the kit option) */||(/^Đóng$/.test(String(c.n||"").trim())&&!(c.fx&&Object.keys(c.fx).length))))/* a bare close button is navigation too (whole family) */}catch(e){}
-  if(!nav)return c0.apply(this,arguments);NAVH++;try{return c0.apply(this,arguments)}finally{setTimeout(()=>{NAVH=Math.max(0,NAVH-1)},0)}};window.chooseM=chooseM}
-if(typeof logChoice==="function"){const l0=logChoice;logChoice=function(m,c){if(c&&c.nav||NAVH)return;return l0.apply(this,arguments)};window.logChoice=logChoice}
-if(typeof resultShow==="function"){const r0=resultShow;resultShow=function(){if(NAVH)return;return r0.apply(this,arguments)};window.resultShow=resultShow}
+/* ---------- NAVIGATION IS NOT A CHOICE: now the KIT flag §6.2m nav:1 (j3 chooseM: no effects, no log, no result card). The r2 interim
+   wrappers that lived here are removed; the family carries nav:1 itself (kit «Cách làm» buttons, jgoal «Đi làm», jge «Xem bảng vàng», bare «Đóng»). */
 /* r2: an old save whose eunuch is called «Tiểu Thái Tử» (= «little crown prince»; «Thái» left the jname pool) gets a fresh eunuch name, once (jname nmNew) */
 function fixEunName(){try{if(!S||typeof nmNew!=="function")return;const L=[S.court&&S.court.ped].concat((S.staff||[]).filter(x=>x&&x.role==="eunuch"));
  for(const o of L)if(o&&o.name==="Tiểu Thái Tử")o.name=nmNew("eun")}catch(e){}}
