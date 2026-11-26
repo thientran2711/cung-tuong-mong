@@ -5,33 +5,35 @@ Branch review/act-merge from origin/main 6b5d3d05 (LIVE: index.html md5 3e1f85f2
 
 ## TÓM TẮT CHO SẾP (tiếng Việt)
 
-Em đã quét TOÀN BỘ nút hành động của game bằng script trên bản đang chạy (không đếm theo trí nhớ), và bấm thật trên Fold + iPad: chạm phi tần khác cung ra **28–31 nút** (đúng như sếp thấy: «Giao thiệp 19/22» — chào hỏi, hỏi han, khen, bàn tán, bí mật, thử lòng, cảnh báo, rỉ tai, nương theo, hòa giải, hắt nước, hắt trà, quạt mực, tát…).
+Em đã quét TOÀN BỘ nút hành động của game bằng script trên bản đang chạy (không đếm theo trí nhớ), và bấm thật trên Fold + iPad: chạm phi tần khác cung ra **28–31 nút** (đúng như sếp thấy: «Giao thiệp 19/22»).
 
-| Chỗ bấm | Nút hiện nay | Sau khi gộp |
-|---|---|---|
-| Hành sự | 38 thẻ (21–26 mỗi buổi) | **16** (bản dup-report, giữ nguyên) |
-| Thẻ một phi tần ở Hậu cung (kể cả Hoàng hậu) | 50–60 | **12** |
-| Chạm một phi tần trên Dư đồ | 23–32 | **cùng 12 nút đó** (chỗ nào cũng một bộ) |
-| Chạm phi tần cùng cung | 9–11 | 5 |
-| Chạm Hoàng hậu | 11–12 | 6 |
-| Chạm Hoàng thượng | 5–6 | 3 |
-| Chạm Thái hậu | 4 | 3 |
-| Chạm Kính sự phòng | 6 | 3 |
-| Chạm thái y | 4 | 2 |
-| Chạm người hầu / cung nữ thân cận | 10 / 4 | 4 / 2 |
-| Chạm nam nhân | 5 | 3 |
-| Chạm rương | 3 | 2 |
-| Cung nhân (tab / một người) | 6 / 10 | 5 / 6 |
-| Hoàng tự · Tư trang · Tài nghệ (mỗi môn) | 7–9 · 6–7 · 3–4 | 5 · 4 · 1 |
-| Đường cung nữ (Phận sự) · Lãnh cung | 13 (23 trong code) · 11 | 5 · 5 |
-| Ma ma, người bán, phế phi, đêm thị tẩm, nơi chốn, hảo hữu | 1–5, mỗi cái đã là MỘT khung chọn | giữ (hảo hữu tự theo bộ nút phi tần) |
-| **Toàn game (tên nút khác nhau, đường phi tần)** | **≈165** | **≈70** |
+Theo lời sếp lúc 07:32Z: **chỉ gộp những nút thật sự trùng** (một tính năng bị xé ra nhiều nút); nút nào là tính năng riêng, làm game hay hơn hoặc bắt buộc phải riêng (luật khác, rủi ro khác, người nhận khác, lúc khác) thì **ĐỂ RIÊNG**.
 
-Gộp theo luật của sếp: một tính năng = một nút; bên trong chọn cách làm (tự đi / sai người / mua chuộc) và bậc nhẹ · vừa · nặng (mỗi bậc MỘT việc). Mọi hệ quả cũ giữ nguyên; người khác làm với ta cũng theo đúng các nút này (luật hai chiều). Ví dụ chạm phi tần còn: Trò chuyện · Giao hảo · Cùng chơi · Dò la · Khiêu khích · Hãm hại · Hạ uy thế · Hại hoàng tự (khi có con) · Tố cáo · Mặc cả chứng cứ · Ra uy (với người phẩm thấp) · Gặp nàng (ở Hậu cung). «Chào hỏi» chỉ hiện khi chưa quen, quen rồi thì mất.
+| Chỗ bấm | Nút hiện nay | Sau | GỘP (nút trùng) | ĐỂ RIÊNG (vì sao) |
+|---|---|---|---|---|
+| Hành sự | 38 | 16 | theo bản dup-report đã duyệt (nghỉ ngơi ×3, thỉnh an ×2, xem sổ ×2, thái y ×5, múa/đàn/vẽ…) | Cầu tự, Giả mang thai, Để ý nam nhân, Trò chuyện với cung nữ, Phát bạc — mỗi cái một đường riêng |
+| Thẻ phi tần ở Hậu cung | 50–60 | 12 | hãm hại 12 → 1 (nhẹ hất trà · vừa hủy dung · nặng hạ độc), hạ uy thế 8 → 1, hại hoàng tự 7 → 1, lấy của 6 → 1, dò la 5 → 1, tố cáo 8 → 1 | Khiêu khích, Cùng chơi, Mặc cả chứng cứ, Ra uy, Quyền Hoàng hậu — luật và hậu quả khác hẳn |
+| Chạm phi tần trên Dư đồ | 23–32 | 13 (cùng bộ thẻ trên + Hòa giải) | hỏi han · khen · bàn tán · bí mật · thử lòng · cảnh báo · rỉ tai · nương theo → «Trò chuyện»; hắt nước · hắt trà · quạt mực · ngáng chân → «Hãm hại» nhẹ; Hặc ăn mặc · Tố xa xỉ → «Tố cáo» | **Hòa giải**: nhắm vào hai người khác, không phải nàng · **Ghé chơi**: được xem phòng ốc (nằm trong Giao hảo nhưng giữ hệ quả) · Chào hỏi: chỉ hiện khi chưa quen |
+| Chạm phi tần cùng cung | 9–11 | 6 | hắt nước/trà/mực/tát → Hãm hại nhẹ + Ra uy | Bàn tán, Mượn son phấn, Cùng chơi — việc khác nhau |
+| Chạm Hoàng hậu | 11–12 | 7 | hỏi han + chia sẻ bí mật → Trò chuyện; hắt nước/trà/mực → Hãm hại nhẹ | **Thỉnh an** (lễ buổi sáng) · **Xin che chở** (2 tháng khó bị hại — chỉ Hoàng hậu cho được) · Xin son phấn · Khiêu khích · Cùng chơi |
+| Chạm Hoàng thượng | 5–6 | 4 | Tâng bốc + Nói thật lòng → «Hầu chuyện»; Phô tài từng môn → 1 nút chọn môn | **Xin ân điển** (xin bạc, rủi ro mất sủng) · **Dâng hoa** (hầu hạ) |
+| Chạm Thái hậu | 4 | 4 | — | cả 4 riêng: Thỉnh an (lễ), Xin đỡ lời (Thái hậu nói giúp với Hoàng hậu), Kể tội (= Tố cáo trước Thái hậu), Xin son phấn |
+| Chạm Kính sự phòng | 6 | 4 | Xem sổ thị tẩm · Xem sổ nguyệt sự · Xem lén → **1 nút «Xem sổ Kính sự phòng»** (đúng ví dụ của sếp) | Đút lót lật thẻ (tranh sủng) · Hỏi sở thích Hoàng thượng · Chào hỏi khi chưa quen |
+| Chạm thái y | 4 | 4 | — | Bắt mạch · Bài thuốc dễ thụ thai · Mời làm tâm phúc: ba việc khác hẳn (khám / có con / đồng minh lâu dài) |
+| Chạm người hầu | 10 | 7 | Nghe ngóng chung + Sai đi dò la → «Sai đi dò la»; Thưởng · Phạt · Đổi người → «Thưởng phạt» (bản dup-report) | Tâm sự (thiện cảm) ≠ Hỏi chuyện (chứng cứ) · Giao việc phòng bị · Tiến cử · Xem người |
+| Chạm cung nữ thân cận | 4 | 3 | Nghe ngóng + Dò la → 1 | Trò chuyện · Phòng bị |
+| Chạm nam nhân | 5 | 5 | — | Chào hỏi · Liếc mắt · Trao khăn · Hẹn gặp · Cắt đứt là **các bước nối nhau** của đường tình, bước sau mở khi bước trước xong → bắt buộc riêng |
+| Chạm rương | 3 | 3 | — | Lục tìm chứng cứ · Lấy trộm son phấn · Cài đồ: ba mục đích khác nhau |
+| Cung nhân (tab / một người) | 6 / 10 | 5 / 6 | Thêm cung nữ + Thêm thái giám; Thưởng/Phạt/Đổi/Đề bạt | Cài người, Tra xét, Thân cận, Phòng bị |
+| Hoàng tự · Tư trang · Tài nghệ | 7–9 · 6–7 · 3–4 mỗi môn | 5 · 4 · 1 | dạy con ×3, thầy ×2, chăm ×2 · mua đồ 4 đường → 1 · tự học/học thầy/học Thái hậu → «Học» | Dẫn con thỉnh an, Về thăm con, Kiểm tra đồ, Xin đồng minh, Phát bạc; thú cưng giữ trò chơi + Chăm nhanh + Giao người chăm |
+| Lãnh cung | 11 | 6 | Nghỉ + Đọc sách; Trồng rau + Thêu khăn («Kiếm sống»); 2 đường nhờ người ngoài («Kêu oan»); Trốn · Xuất gia · Xin phế → «Rời cung» (như Hành sự) | Chép kinh (giữ đức) ≠ Cầu xin (xin tha) |
+| Phận sự cung nữ | 13 (23 code) | 5 | theo bản dup-report | — |
+| Đêm thị tẩm, nơi chốn, hảo hữu, ma ma, người bán | 1–5, mỗi bước một khung chọn | giữ | — | mỗi bước đêm là một lựa chọn riêng; hảo hữu theo bộ nút phi tần |
+| **Toàn game (tên nút khác nhau)** | **≈165** | **≈80** | | |
 
-**Cần sếp chọn 1 việc:** Khuê các (trước khi vào cung, 45–53 thẻ): A = gộp luôn đêm nay theo cùng luật; B = để sau khi xong phần trong cung. Em chọn **A** (sếp muốn gộp toàn game một lần).
+**Cần sếp chọn 1 việc:** Khuê các (trước khi vào cung, 45–53 thẻ): A = gộp luôn đêm nay theo cùng luật (chỉ gộp nút trùng); B = để sau khi xong phần trong cung. Em chọn **A**.
 
-**Khi nào xong:** 5 thợ làm song song + 1 thợ kit; đường dài nhất ≈ 8 giờ (làm 5 giờ + duyệt lớn 1,5 giờ + sửa 1 giờ + lên game 0,5 giờ) → nếu bắt đầu ~08:30Z thì **xong khoảng 16:30Z ngày 26/11** (≈ 23:30 giờ Việt Nam).
+**Khi nào xong:** 5 thợ làm song song + 1 thợ kit; đường dài nhất ≈ 8 giờ (làm 5 giờ + duyệt lớn 1,5 giờ + sửa 1 giờ + lên game 0,5 giờ) → bắt đầu ~08:30Z thì **xong khoảng 16:30Z ngày 26/11** (≈ 23:30 giờ Việt Nam).
 
 ## 1. INVENTORY — every action button, per screen (scan on LIVE 6b5d3d05, 0 page errors)
 Method: `act-inventory.js` loads the built page, uses the act-audit harness (AA.scen dau/cao/hh/con × 4 buổi × every place) and reads, for every person the schedules put on a place, `dfActs(i)` = the exact stage pop-up a tap opens (tab, name, cost, outcome line); every tab panel by group pane (nav, list rows, ⓘ help, sub-tabs excluded: an act button names a cost or sits in an act pane); the cung nữ road (`srvTalk` per person kind, `srvCards`); lãnh cung deck over 8 deals. Each name → first file:line holding it (static index over dev/build/j*.js). Full print with every outcome line: `act-merge/scan-live-6b5d3d05.txt`. Real tap: `act-inventory-tap.js` on https://thientran2711.github.io/cung-tuong-mong/ — a real click on the stage figure `[data-p]`, then every pop-up tab; the game's own tab labels confirm the scan (Fold: rival «Giao thiệp 19/22 · Mưu kế 3/3 · Hại người 4/4 · Trừng phạt 1/1» = 30 shown / 31 total; iPad 28; servant 10; maid 4; thái y 4; Thái hậu 4).
@@ -75,22 +77,23 @@ Method: `act-inventory.js` loads the built page, uses the act-audit harness (AA.
 | Khuê các (pre-palace road) | 45 card calls (jkc.js:231) + 43 (jkc2 dân nữ / ngoại quốc roads, replace the base) + 8 (jkc3.js:74) + 5–6 co-op (jkcco.js:156) | jkc* |
 
 ## 2. MERGE GROUPS (one feature = one button; ways + tiers inside; all outcomes kept)
+OWNER REFINEMENT 26/11 ~07:32Z (verbatim, via MAIN 154): "Tức là không phải là cái hành động nào cũng bắt buộc phải gộp đâu nha. Những cái nào mà cần phải để riêng đó, để cho game mình nó hay là bắt buộc phải để riêng thì vẫn cứ để riêng, chứ không phải là tôi nói gộp là bạn cứ gộp hết tất cả mọi thứ lại đâu nha." → only TRUE duplicates merge; the GỘP / ĐỂ RIÊNG columns with one reason per kept act are in the TÓM TẮT table (the per-group text below is the build spec; where it lists an act inside a door that the TÓM TẮT marks ĐỂ RIÊNG, the TÓM TẮT wins: G3 Cầu xin, G4 Hầu chuyện, G7 Nhờ thái y, G8 Trò chuyện, G10 Tư tình, G11 Lục rương, G12 Giữ đức are NOT merged).
 Reused UNCHANGED from dup-report (reviewed 3×, HANHSU_MERGE §3): consort person acts **P1–P14** (card AND pop-up share one set), Hành sự **H1–H16**, Tài nghệ «Học», Cung nhân, Tư trang «Mua đồ», pets/plants («Chăm thú» door per OD ~05:45Z), Hoàng tự 5, cung nữ S1–S5, Tố cáo on D4's built `BAL.charge` (9 charges). The groups below are NEW (screens the dup-report did not cover); each reuses a P/H door where the act is the same feature, so one button = one engine everywhere.
 
 | # | Screen | Merged buttons (before → after) | Folded in (ways / tiers inside) |
 |---|---|---|---|
-| G1 | Tap a consort (Dư đồ) | 23–32 → ≤12 = P1–P14 | Trò chuyện P2 = hỏi han · khen tài · bàn về <người> (picker) · chia sẻ bí mật · thử lòng · cảnh báo · rỉ tai · **nương theo · hòa giải** (new topics, same results); Giao hảo P3 = tặng quà · giúp đỡ · nhờ giúp · mượn son phấn · **ghé chơi**; P4 Cùng chơi/Thách đấu; P5 Dò la = sai người ways + **Nghe lén** (a way: tại chỗ, 1 khắc); P6 Khiêu khích = nhẹ Khoe quà · vừa Khiêu khích · nặng Hạ nhục; P7 Hãm hại = nhẹ Hất trà (hắt nước, quạt mực, ngáng chân = roll outcomes) · vừa Hủy dung · nặng Hạ độc (đẩy hồ sen = a nặng way); P8 Hạ uy thế (Tung tin · Vu oan); P9 Hại hoàng tự (đẩy con xuống hồ = nặng way, only with a child); P11 Tố cáo (Tố xa xỉ · Hặc ăn mặc = the D4 «vp» charge); P14 Ra uy (Tát · Phạt quỳ). Chào hỏi = the j61 stranger gate: shown only until known, then gone |
-| G2 | Same-palace consort | 9–11 → 5 | Trò chuyện · Giao hảo (mượn son) · Cùng chơi · Hãm hại nhẹ · Ra uy (lower rank); the «Cùng cung» lock row stays as the reason line, not a button |
-| G3 | Hoàng hậu (person) | 11–12 → 6 | Thỉnh an · Trò chuyện · **Cầu xin** (Xin che chở · Xin son phấn) · Khiêu khích · Cùng chơi · Hãm hại nhẹ; her P-acts on the Hậu cung card stay P1–P14 |
-| G4 | Hoàng thượng | 5–6 → 3 | **Hầu chuyện** (Tâng bốc · Nói thật lòng · Xin ân điển — topics, each its own odds) · **Phô tài** (pick the art) · Dâng một cành hoa |
-| G5 | Thái hậu | 4 → 3 | Thỉnh an, chép kinh · Cầu xin (Xin đỡ lời · Xin son phấn) · Tố cáo (Kể tội = P11 heard by Thái hậu) |
-| G6 | Kính sự phòng | 6 → 3 | **Xem sổ Kính sự phòng** = H6 (sổ thị tẩm · sổ nguyệt sự; ways lót tay · xem lén) · **Lót tay lật thẻ** = H9 way · Hỏi sở thích Hoàng thượng; Chào hỏi gate |
-| G7 | Thái y | 4 → 2 | Xin bắt mạch = H5 · **Nhờ thái y** (bài thuốc dễ thụ thai · làm tâm phúc); Chào hỏi gate |
-| G8 | Servant (pop-up) | 10 → 4 | Trò chuyện (Tâm sự · Hỏi chuyện) · **Sai việc** = H11 (Nghe ngóng chung · Sai đi dò la · Giao việc phòng bị · Tiến cử) · Xem người · Thưởng phạt (thưởng · phạt · đổi người); the Cung nhân card keeps dup-report's 6 |
-| G9 | Her maid | 4 → 2 | Trò chuyện · Sai việc (as G8) |
-| G10 | A man | 5 → 3 | Chào hỏi đúng lễ (gate) · **Tư tình** nhẹ Liếc mắt · vừa Trao khăn tay · nặng Hẹn gặp riêng · Cắt đứt; NPC side `AGC4BTN.man*` maps to the same tiers (law 1) |
-| G11 | Rương | 3 → 2 | **Lục rương** (tìm chứng cứ · lấy trộm son phấn) · Cài đồ vào rương (= P8 nặng way) |
-| G12 | Lãnh cung deck | 11 → 5 | Nghỉ ngơi (nghỉ · đọc sách) · Giữ đức (chép kinh · cầu xin) · Kiếm sống (trồng rau · thêu khăn bán) · Kêu oan (nhờ <người> đưa thư · nhờ người bên ngoài) · Rời cung = H14 (trốn · xuất gia · xin phế làm thứ dân) |
+| G1 | Tap a consort (Dư đồ) | 23–32 → 13 = P1–P14 + Hòa giải | Trò chuyện P2 = hỏi han · khen tài · bàn về <người> (picker) · chia sẻ bí mật · thử lòng · cảnh báo · rỉ tai · **nương theo · hòa giải** (new topics, same results); Giao hảo P3 = tặng quà · giúp đỡ · nhờ giúp · mượn son phấn · **ghé chơi**; P4 Cùng chơi/Thách đấu; P5 Dò la = sai người ways + **Nghe lén** (a way: tại chỗ, 1 khắc); P6 Khiêu khích = nhẹ Khoe quà · vừa Khiêu khích · nặng Hạ nhục; P7 Hãm hại = nhẹ Hất trà (hắt nước, quạt mực, ngáng chân = roll outcomes) · vừa Hủy dung · nặng Hạ độc (đẩy hồ sen = a nặng way); P8 Hạ uy thế (Tung tin · Vu oan); P9 Hại hoàng tự (đẩy con xuống hồ = nặng way, only with a child); P11 Tố cáo (Tố xa xỉ · Hặc ăn mặc = the D4 «vp» charge); P14 Ra uy (Tát · Phạt quỳ). Chào hỏi = the j61 stranger gate: shown only until known, then gone |
+| G2 | Same-palace consort | 9–11 → 6 (Bàn tán kept) | Trò chuyện · Giao hảo (mượn son) · Cùng chơi · Hãm hại nhẹ · Ra uy (lower rank); the «Cùng cung» lock row stays as the reason line, not a button |
+| G3 | Hoàng hậu (person) | 11–12 → 7 (Xin che chở + Xin son phấn SEPARATE) | Thỉnh an · Trò chuyện · **Cầu xin** (Xin che chở · Xin son phấn) · Khiêu khích · Cùng chơi · Hãm hại nhẹ; her P-acts on the Hậu cung card stay P1–P14 |
+| G4 | Hoàng thượng | 5–6 → 4 (Xin ân điển SEPARATE) | **Hầu chuyện** (Tâng bốc · Nói thật lòng · Xin ân điển — topics, each its own odds) · **Phô tài** (pick the art) · Dâng một cành hoa |
+| G5 | Thái hậu | 4 → 4 (ALL SEPARATE; Kể tội runs the P11 engine) | Thỉnh an, chép kinh · Cầu xin (Xin đỡ lời · Xin son phấn) · Tố cáo (Kể tội = P11 heard by Thái hậu) |
+| G6 | Kính sự phòng | 6 → 4 | **Xem sổ Kính sự phòng** = H6 (sổ thị tẩm · sổ nguyệt sự; ways lót tay · xem lén) · **Lót tay lật thẻ** = H9 way · Hỏi sở thích Hoàng thượng; Chào hỏi gate |
+| G7 | Thái y | 4 → 4 (ALL SEPARATE: three different features) | Xin bắt mạch = H5 · **Nhờ thái y** (bài thuốc dễ thụ thai · làm tâm phúc); Chào hỏi gate |
+| G8 | Servant (pop-up) | 10 → 7 (Tâm sự ≠ Hỏi chuyện; Tiến cử, Xem người, Phòng bị SEPARATE) | Trò chuyện (Tâm sự · Hỏi chuyện) · **Sai việc** = H11 (Nghe ngóng chung · Sai đi dò la · Giao việc phòng bị · Tiến cử) · Xem người · Thưởng phạt (thưởng · phạt · đổi người); the Cung nhân card keeps dup-report's 6 |
+| G9 | Her maid | 4 → 3 | Trò chuyện · Sai việc (as G8) |
+| G10 | A man | 5 → 5 (ALL SEPARATE: road steps, each unlocks the next) | Chào hỏi đúng lễ (gate) · **Tư tình** nhẹ Liếc mắt · vừa Trao khăn tay · nặng Hẹn gặp riêng · Cắt đứt; NPC side `AGC4BTN.man*` maps to the same tiers (law 1) |
+| G11 | Rương | 3 → 3 (ALL SEPARATE: three goals) | **Lục rương** (tìm chứng cứ · lấy trộm son phấn) · Cài đồ vào rương (= P8 nặng way) |
+| G12 | Lãnh cung deck | 11 → 6 (Chép kinh ≠ Cầu xin) | Nghỉ ngơi (nghỉ · đọc sách) · Giữ đức (chép kinh · cầu xin) · Kiếm sống (trồng rau · thêu khăn bán) · Kêu oan (nhờ <người> đưa thư · nhờ người bên ngoài) · Rời cung = H14 (trốn · xuất gia · xin phế làm thứ dân) |
 | G13 | Khuê các | 45–53 → ~12 (**CẦN SẾP CHỌN**) | same pattern: Nghỉ ngơi · Học (chép kinh, danh sư …) · Hầu người nhà (picker) · Ra ngoài (chợ, trà lâu, chùa) · Dò la (nhũ mẫu …) · Thư từ (người ấy · vào cung · hảo hữu) · Xin cha (tiền · dâng sớ) · Tránh xem mặt (giả bệnh · nhịn ăn) · Hại thứ muội · road cards (dân nữ / ngoại quốc keep their own work doors) |
 | keep | night dialogs, place cards, elder / peddler / fallen, cung nữ pop-ups 2–5, co-op | already ONE choice each; co-op follows G1 automatically |
 
