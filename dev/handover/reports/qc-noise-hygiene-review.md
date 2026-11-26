@@ -50,3 +50,25 @@ Reviewer merge ready for reuse: review/qc-noise-hygiene-r10 acf94a95 = e5c39877 
 
 ### OK
 LAW 4 (BAL.noise one core) ✓ · LAW 6(a) sampler no longer changes the life ✓ · LAW 7 wording fixes cổ trang, no % ✓ · LAW 12 both devices (Fold + iPad lanes; main's scroll-cue-loop + observer-leak PASS 755x1000 + 1180x820 on the merged build) ✓ · LAW 9 no UI change ✓.
+
+# RE-REVIEW #2 qc-noise-hygiene 5e1a6eda (+ report 5b8af9d8 «R10») — BIG REVIEWER #10 for F #22, 26/11 ~14:05Z
+PRIORITY #1 CHECK: OD 26/11 ~06:50Z (A)+(D) | main none (no noise gate on origin/main aa37de21) | review/qc-noise-hygiene 5e1a6eda, BIG #10 FAIL e5c39877 (above) | claims QC-NOISE-HYGIENE #2.
+## VERDICT: PASS bdb0f65d (branch review/qc-noise-hygiene-r10b = 5e1a6eda + merge origin/main aa37de21, built files rebuilt; origin/main is its ancestor → fast-forward)
+(review/qc-noise-hygiene-r10 acf94a95 = my earlier merge, superseded; not force-moved.)
+
+### FAIL 1 (e5c39877) — FIXED
+- 1a rank dup: jwhy spyPick kgt row `n` = bare `v.name` (same as every other kgt row: j10 plantsv, j8 evpick / itarget, j55). Masking checked at runtime (my page probe, Fold): the dò la list shows «Phi ???», «Tần ???», «Quý nhân ???» for people she has not met and «Hoàng hậu <tên>» / «Tần <tên>» for known ones — the kit person row prints rank + mask, no name leak (LAW 6(b) knowledge) ✓.
+- 1b known family 3 now = the whole baoL builder (warm «mới kịp bẩm: lúc trước», cool «chuyện buổi trước:», cold «Chuyện buổi trước,», + `what` forms «tận mắt thấy ở » / «nghe X kể: », jagknow.js:118 / :545); rule «long», surf tinbao only ✓ (the «nghe .+ kể: » arm is broad, but on tinbao only knBao builds that form; j75 «<người> kể:» has no «nghe»).
+- 1c «·» chains → commas: jstip stipGoodsTxt / stipRankTxt / chest list, jallot list ✓ (the j68i «Lý do» family).
+- 1d jecon stipend line: «…, trả công N kẻ hầu −X bạc; tổng cộng +Y bạc» — no «=», cổ trang sentence ✓.
+- Proof: hook 96 on my merged build bdb0f65d → sampler-pure 9/9 · static PASS · vp-doubled PASS · noise-day PASS (4 days) · runtime PASS · **rc 0**. Extra lanes fold:rand:13 + ipad:bold:23 → runtime 228 lines, 0 NEW. The worker's page probes for 1a/1c/1d (lanes did not reach dò la / payday) are enough: the builders are one-line string changes, and I checked 1a on the page myself.
+
+### FAIL 2 — FIXED
+- hook 96: noise-day `nrc` kept apart; blocking only with QC_NOISE_STRICT=1, else «noise-day ADVISORY (QC_NOISE_STRICT=1 makes it blocking)»; the other 4 steps stay blocking ✓. N4 «Trong cung vừa qua · 16» (jaudit) added to the report ✓. FOR MAIN: set QC_NOISE_STRICT=1 the day N1 + N2 land.
+
+### Notes for landing (not blocking)
+- N-A: **the hook lanes do not use RT_HARNESS_REF when the kit has its own dev/test/robot-rt.js** (noise-day.js:63) — main carries robot-rt.js from 69e41729 (HARNESS FIXER #4 era), so every hook 96 run so far (worker's «harness 0e0ebe29 / 2df8f5fa» and mine) played on THAT copy. It still taps for real (realtap), but it lacks later fixes: my fold:rand:13 / ipad:bold:23 lanes stopped at buổi 1 (by-design cover div.kscn-veil logged as DEAD BUTTON, an error at robot-rt.js:355) → 0 full days. Correct the report wording («harness 0e0ebe29» → «main's robot-rt copy 69e41729»). The hook gets the newer harness automatically once review/robot-realtap lands on main; until then the runtime step sees fewer screens than the runners do.
+- N-B: the A/B tables (2df8f5fa runner lanes, 42 + 42 days) stay the measured truth; the smoke never is.
+
+### LAWS touched
+LAW 4 ✓ · LAW 6(a)(b) ✓ (sampler read-only; no name leak) · LAW 7 ✓ (commas, «tổng cộng», no «=» / %) · LAW 11 ✓ (families a–d whole builder) · LAW 12 ✓ (Fold + iPad lanes) · LAW 9: no UI part changed.
