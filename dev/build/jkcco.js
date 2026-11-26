@@ -286,18 +286,4 @@ function kcDoorT(key,rule,ways){const d=cardDoor(key,rule,ways);for(const [re,f,
   if(typeof isKc==="function"&&isKc())deck=doorize(deck,kcRules(deck),kcDoorT);
   else if(typeof isSrv==="function"&&isSrv()){if(!(S.srv&&S.srv.lau>0))deck=doorize(deck,SRVG,cardDoor)}
   else if(S.out)deck=doorize(deck,COLDG,cardDoor)}}catch(e){console.error("j5 doors",e)}return r}})();
-/* ---- pop-up items (cung nữ talk) ---- */
-const POPG=[
- {n:"Xin chủ",t:"Xin chủ một ân điển: thưởng, tiến cử, hay cho đi nơi khác.",re:/^(Xin chủ ban thưởng|Xin chủ tiến cử lên Nội vụ phủ|Xin chủ cho đi hầu cung khác)$/},
- {n:"Phản chủ",t:"Quay lưng với chủ: mật báo, hay tố cáo trước Hoàng hậu.",re:/^(Mật báo chuyện của .+|Tố cáo .+ trước Hoàng hậu)$/},
- {n:"Giao hảo",t:"Kết thân với người hầu khác: trò chuyện, hay biếu chút quà.",re:/^(Trò chuyện|Biếu quà nhỏ)$/}];
-function tk(a){return typeof talkK==="function"?talkK(a):1}
-function itemDoor(key,rule,ways){const m=ways.reduce((a,b)=>tk(b)<tk(a)?b:a,ways[0]);
- return{n:key,t:rule.t,o:100,w:{},l:{},x:"",inner:1,act:m.act,pk:m.pk,lock:ways.every(w=>w.lock),j5door:1,j5ways:ways,dom:m.dom}}
-(function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||p.kind!=="srv"||!Array.isArray(A)||typeof isSrv!=="function"||!isSrv())return A;
-  A=doorize(A,POPG,itemDoor);const f=J5.force;if(f)A=A.map(a=>a&&a.j5door&&a.n===f.door?(a.j5ways.find(w=>w.n===f.way)||a):a)}catch(e){console.error("j5 pop",e)}return A}})();
-(function(){const t1=talk;talk=function(oi){try{if(popIdx!=null&&S&&S.visit&&S.visit.talked!==true&&!S.dead&&!Q.length&&!(S.visit.tk&&S.visit.tk[popIdx])){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
-  if(a&&a.j5door){if(a.lock||!can(tk(a)))return;const ways=a.j5ways;
-   ask(a.n,a.t,wayOpts(ways,tk,(w,tc)=>can(tc)&&canPay(w),w=>{J5.force={door:a.n,way:w.n};try{talk(oi)}finally{J5.force=null}}));render();return}}}catch(e){console.error("j5 talk",e)}
-  return t1.apply(this,arguments)}})();
 })();
