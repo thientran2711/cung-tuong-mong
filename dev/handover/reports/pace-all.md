@@ -1,3 +1,57 @@
+PRIORITY #1 CHECK (successor #2, 'Tạ lỗi|Nhún nhường|hòa giải|làm lành|apologise|humble|oán'): OD 26/11 ~08:25Z row + MAIN 155 add-on (FOREMAN_D_STATUS ~08:30Z) | main: j9 Tạ lỗi / Nhún nhường, jtwoway TW apol, j28 SOC.apologise / mediate, jagacts cx:humble, jnet netForgive (all REUSED, not rebuilt) | review/* none for a deep-grudge road | claims: PACE-ALL row (this worker).
+
+# review/pace-all — SUCCESSOR #2 (session_01D3E3NXTnDZUXLbRTbkjsZy · depth 3 · START_CTX ~3 % estimate, tool reads 0)
+Head: **review/pace-all afa89339** (FF from LIVE 3af7896e: LIVE merged at 207c39b4, built files rebuilt; CHANGE line = pace-all).
+
+## Done by #2
+1. Merged LIVE 3af7896e (conflicts only in built index.html / sw.js → rebuilt).
+2. Video script fixed (dev/test/pace-all-video.js), 3 parts, all real taps in the page (page.evaluate clicks):
+   (1) Tứ đức: «Tự học» → «Làm» → material → lesson game «Bỏ qua» → result card → ✕ (owner OD:L1352: no «Đã hiểu» word; ✕ presses the hidden #kg82ok) → card «Tiến bộ 0/10 → 2/10» (if the «để trời định» roll fails it studies again, caption says so).
+   (2) a known consort set to Oán hận 85, nothing feeds it → real «Nguy hiểm chung» chip → «Người nặng lòng nhất … oán 85»; 9 quiet tuần (BAL.oanCool, fast-forwarded, caption) → «oán 57/58 · Oán sâu».
+   (3) MAIN 155 add-on: deep grudge talk card: Tạ lỗi / Nhún nhường greyed (locked, reason in the card's «Cần ✗» row), «Hậu lễ tạ tội» tapped → Fold: refused, bạc/Danh handed back; iPad: accepted, oán −25, Bạc −60, Danh −1. (The Lễ nghi tab tap did not switch in the recording; the row runs through talk(i), the same function the card button calls.)
+   Videos: https://ctm-img.victoria-tntt.workers.dev/img/_review/pace-all/pace-all-fold.mp4 · https://ctm-img.victoria-tntt.workers.dev/img/_review/pace-all/pace-all-ipad.mp4 (0 page errors). Known look note (not this diff): some silhouettes grey where pictures were not loaded in the test server.
+3. **MAIN 155 ADD-ON BUILT** (jmend.js + BAL.oanMend in jbal.js):
+   - A refused word costs nothing: while netForgive fails (oán ≥ the wronged one's «nguoi» level) her «Tạ lỗi» / «Nhún nhường» rows are LOCKED with the reason (kit option lock + t → «Cần ✗ … chưa nguôi giận (Oán hận): lời suông chưa đủ, cần hậu lễ hoặc người đứng giữa»), never paid. NPC side: TW apol req needs netForgive (no paid refusal), SOC.apologise ok needs it, cx:humble pays only after the check and is not chosen toward a deep grudge.
+   - Two equal-value costly roads (law 2: bạc vs a friend's goodwill; law 3: each has a gain; law 5: the gift grows with rank): «Hậu lễ tạ tội» (Bạc 60 + 30 × the giver's rank, Danh −1) and «Nhờ người đứng giữa» (a person the wronged one likes ≥ than who likes the doer ≥ quen; that person's liking −10, Danh −1). Odds = 50 + 40 × (forgive nết − 1) − 0.4 × (oán − nguoi) (+ 0.3 × (her liking for the go-between − than)), shown as odds words (typical: Hiểm / Khó lường; Rộng lượng: Vững). Thành: oán − its BAL.oanLv band width (one band down = one quiet season). Hỏng: the gift is sent back / the go-between is turned away — nothing paid (her card pays the Tốn row first, a refusal refunds it).
+   - Two-way: ONE mendDo(doer, wronged, road) for her and every consort; agent options cx:mendGift / cx:mendGo (toward her and toward each other); her own deep grudge (S.ro) is mended by an NPC's roads the same way. Note: NPC «Tạ lỗi» already existed (SOC.apologise / AGSOC apol / TW apol) — the real gap was the deep-grudge road and paid refusals.
+4. Tests: dev/test/pace-all.js **ALL PASS 32** (new C1–C9: locked rows not payable; costs from BAL by rank; refused gift nothing paid; card-paid refusal refunded; accepted gift one band; go-between; NPC→her; NPC↔NPC; NPC refused words not paid; agent offers the roads). net-build 189/189. one-core-guard PASS. receiver-choice ALL PASS (mendGift/mendGo classified DONE like apol/humble). **coop-e2e 143/143.**
+5. Regression (111 tests = the predecessor's rule, LIVE build vs branch build, same test files): exit codes differ on 5:
+   | test | LIVE | branch | why / action |
+   |---|---|---|---|
+   | ag-all-b.js | 1 | 0 | branch better (passes) |
+   | moodknow-step0.test.js | 0 | 1→0 | asserted the OLD ghen rise (+10 flat; NPC-caused raise). Rule changed on purpose (5a/5c) → test now reads BAL.oanCool.ghen.dm; 19/19 PASS |
+   | receiver-choice.test.js | 0 | 1→0 | new acts cx:mendGift/Go unclassified → classified DONE (scan) |
+   | rel-men-servants.js | 0 | 1→0 | D5 called the old flat oanMonth (canon overwritten) → test uses the weekly oanCool; 30/30 PASS |
+   | person-minigame-acts-c.test.js | 124 | 1 | re-run alone on BOTH: the same 3 FAIL on LIVE and branch (pre-existing, not this diff) |
+   All other 106 the same exit code (82 non-zero on both = harness args / pre-existing; only differences matter).
+6. Quickcheck (under robot load): build OK, open 0 errors, OLD SAVE loads + plays a buổi, time-spill PASS; CORE GATES: G1 one-core PASS; G4 80-dialog-fixed «kit-dialog-2 empty Tốn/Được» + 90-button-crawl «Ô lưu · Lui» FAIL = the SAME pre-existing LIVE fails (Foreman D 08:33Z line). Perf smoke: re-run on an idle box (see the last line below).
+
+## Robot (dev/measure/pace-all.js, 6 lives × 24 months each, LIVE 3af7896e vs branch)
+| season | LIVE oán mean · sâu+ · hận · ghen mean · her own oán max · Nguy hiểm | branch #3 (cool-down, no mend) | branch #4 (final, + mend) |
+|---|---|---|---|
+| 1 | 7 · 0.2 · 0.0 · 50 · 4.5 · 61 | 4 · 0.2 · 0.1 · 17 · 9 · 9 | 3.5 · 0.2 · 0.0 · 15.5 · 7 · 10 |
+| 2 | 14 · 1.1 · 0.2 · 81 · 32.5 · 76 | 12 · 0.9 · 0.4 · 38 · 18.5 · 37.5 | 12 · 0.8 · 0.2 · 23.5 · 20 · 35 |
+| 3 | 23 · 2.4 · 0.7 · 90 · 40 · 86.5 | 19 · 2.1 · 0.9 · 54 · 26 · 74.5 | 17 · 2.4 · 0.7 · 43 · 32.5 · 62 |
+| 4 | 25 · 3.3 · 1.2 · 96 · 40 · 84 | 23 · 2.7 · 1.9 · 54.5 · 31 · 72.5 | 21 · 3.7 · 1.5 · 58 · 36 · 77 |
+| 5 | 23.5 · 3.7 · 1.6 · 99 · 81 · 77.5 | 23 · 3.2 · 1.9 · 58.5 · 22 · 71.5 | 24 · 4.2 · 1.9 · 61 · 58 · 76.5 |
+| 6 | 25 · 4.1 · 1.6 · 97 · 86.5 · 75 | 24 · 3.2 · 1.6 · 60 · 19 · 71 | 24 · 4.9 · 2.3 · 60 · 47.5 · 78.5 |
+| 7 | 25 · 4.6 · 2.1 · 99 · 80.5 · 77 | 22 · 2.6 · 1.5 · 68.5 · 25.5 · 68.5 | 26 · 4.5 · 2.7 · 69 · 39.5 · 83 |
+| 8 | 29.5 · 5.1 · 2.4 · 99 · 81.5 · 81 | 20 · 2.4 · 1.3 · 67 · 30.5 · 71 | 25.5 · 4.6 · 2.6 · 79 · 37.5 · 84.5 |
+| 9 | 28.5 · 5.1 · 2.6 · 99 · 91 · 80.5 | 20 · 2.7 · 1.2 · 71 · 37 · 69.5 | 22 · 3.2 · 1.8 · 76 · 25 · 76 |
+Reading: ghen toward her stays well under 90 in year 2 (LIVE 99); her own grudges stay far lower (max 25–58 vs 80–91). Oán toward her: the cool-down + mend roads trim it, but the RISES (j95b ledger seeds, relAdd: +up to 28 a hit) are D2's job (review/stat-pace); #3 vs #4 differ within the noise of 6 lives (different random lives). The bot (her) does not use the new talk rows; NPC use of cx:mend is not counted by this robot.
+Per-act shares (unchanged from run #2): art bậc 0–2 1/10 · 1/12 · 1/16, vir 1/5 · 1/6 (LIVE 1/5 · 1/10 · 1/19, 1/2.5 · 1/5).
+
+## HANDOVER / NEXT (if a successor is needed)
+Left: BIG reviewer (opus, my child) → on PASS «LAND READY review/pace-all <sha>» to Foreman D (now session_01D3E3NZKCLJ7V9VupQyCnr1). D2 merge note stands (j8 rivalsTurn ghen line next to D2's spAdd line: keep both). KK39 display numbers: crsNeedP / srvMpNeed / BAL.oanLv / BAL.oanMend (read functions).
+
+## For sếp (Vietnamese, short) — thêm phần làm lành
+- Oán sâu thì «Tạ lỗi», «Nhún nhường» hiện khóa kèm lý do, không mất Danh nữa.
+- Thêm hai đường tốn kém, ngang giá: «Hậu lễ tạ tội» (bạc, càng cao phẩm lễ càng lớn) hoặc «Nhờ người đứng giữa» (nhờ người nàng ấy nể; người đó bớt quý ta một chút). Thành thì oán xuống một bậc; hỏng thì lễ bị trả về, không mất gì.
+- Phi tần khác cũng làm lành với ta và với nhau bằng đúng hai đường này.
+~72% xong / ~66% chơi được
+
+---
+# (predecessor #1 report below, unchanged)
 PRIORITY #1 CHECK ('tài nghệ|tiến bộ|oán|ghen|giảm oán|Công lao|BAL.art.gain|oanFade'): OD 26/11 ~08:00Z / ~08:05Z / ~08:25Z rows | main dev/measure/pace.js, BAL.art.gain (LIVE 6b5d3d05), j28 oanMonth + BAL.oanFade (the existing monthly fade — REUSED / overwritten in place, not rebuilt), jmem memTop (cause), PERS/BAL.net forgive (nết) | review/stat-pace (D2 #3, rises of Danh/Đức/Sủng/thiện cảm/oán = theirs; messaged), review/kit-bac-progress (KK39 display = theirs), review/ob-oan (oán UI = theirs) | claims: CLAIMS row by Foreman D 08:30Z.
 
 # review/pace-all — PACE-ALL + OÁN / GHEN COOL-DOWN (worker of Foreman D) — STATUS: BUILD DONE, measured; tests/regression/videos/reviewer = successor
