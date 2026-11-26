@@ -72,3 +72,31 @@ fold-notice.png / ipad-notice.png (consort hand kept in a cung nữ sổ, one ta
 2/3 gain–loss: a wrong-life card can no longer pay (0 paid in 4 directions) · 4 one core: no number · 6 real world: she only acts in the life she lives · 7 wording: one cổ trang notice line, no % · 9 kit: kitNotice §42.2 only, no new part · 11 whole group: 4 directions + co-op new face + same-kind new life by one key · 12 two devices: Fold + iPad shots · 13: this line · 16: lãnh cung / cấm túc rules untouched.
 
 ~97% xong / ~92% chơi được
+
+## r2 REVIEW — VERDICT: PASS 0bbb81fd (review/srvmerit-guard-r2-rv = r2 917465a3 + one reviewer test fix; ancestor origin/main 5e013076)
+PRIORITY #1 CHECK: lifeKey|lifeK|lifeStale|srvGuardTag — main 0 | review/* only srvmerit-guard(-r2) | lander stacks (coop-thin-g-land ec88b0e2, lc18-a8-placerules 9812646a) 0 → no name clash; reused kitNotice §42.2.
+
+### r1 FAIL list → r2
+1. Reverse directions: FIXED — my r1 probe (rev.js, life A hand kept in life B by deser without deal) on r2: consort→cung nữ, cung nữ→consort, kc→palace all redealt, 0 paid, 0 throw, 0 page errors (r1: 4 consort cards and 1 kc card paid).
+2. Source: FIXED by ONE rule — deal() stamps lifeK (origin·srv·kc·name) on every card; render() redeals a stale hand before it shows; act/runOpt never run or pay a stale card. Life key checked stable inside a life: S.name is set only at life build (j2:12, jcoopthinb:58 clash rename at build); isSrv/isKc change only at real life steps (risen / inPal), where a fresh hand is right. Co-op thin guest new face: coop-thin-b 146/146 incl. the new row «hand dealt for the new life on accept (0 cards of the old life)» for all 10 origins (tt…cnv, tt/nha).
+3. Silent tap: FIXED — one kitNotice «Thân phận đã đổi: việc trong buổi đã bày lại theo kiếp này.» (kit chip + kit «Tin báo» panel; cổ trang, no %). B's shots looked at: Fold 755x1000 + iPad 1180x820, chip in the HUD row, the hand shows cung nữ cards, panel inside the frame, no overflow / cut text.
+4. Test family: DONE (4 directions × gate/tap + current-life card runs). ONE reviewer fix (commit 0bbb81fd, test only): the tap row counted «ran» as ANY new S.logs line; on this box the new consort hand's deal/render logs a world event («Viên Dung Âm sang cung ngươi thăm hỏi») → 2 BAD (cung nữ→consort, kc→palace tap) with the game correct (notice shown, nothing paid — checked by instrumenting). Now «ran» = the tapped card got a.done (j2 act sets it before paying/running). Result r2 47/47 PASS (twice), LIVE 5e013076 20 BAD.
+5. Gates re-run here (one at a time):
+| gate | r2 | baseline |
+|---|---|---|
+| srvmerit-guard.js (with fix) | PASS 47/47 | LIVE 20 BAD |
+| coop-thin-b (level 2, all origins) | 146/146 | — |
+| coop-e2e (alone) | 143/143 | 143/143 |
+| coop-guest-maid | 36/40, rows 3a/3b week advanced · 3 refused → maid back · log line | = LIVE rows (r1 report); one earlier loaded run showed relay-timing FAILs on case 1, re-run alone clean on those rows |
+| maid-8tabs | 4 FAIL / 69: maid-acts-a ×2 rows ×2 devices | = LIVE rows |
+| s8 replay (scratch s8rep.js: flight2-s8 stuck-1 sổ deser'd over a fresh cung nữ life, no deal, random bot 250 steps, 6 seeds) | 0/6 throw | LIVE: 4/6 seeds throw (srvMerit «mp» ×2, «intel», «lau») |
+| quickcheck (alone) | build ok · G1–G3 ok · time-spill PASS · open 1944 ms · old save ok · perf PASS render 300/265 tab 581/647 buổi 4731/4718 tasks>200 31/26 · G4 FAIL fold «Ô lưu · Lui» | pre-existing on LIVE |
+| assemble.py | no diff | — |
+| merge-tree onto LIVE | fast-forward | — |
+| merge-tree onto coop-thin-g-land ec88b0e2 and lc18-a8-placerules 9812646a | conflicts only in built files (assets.json, index.html, sw.js) → regenerate | — |
+CDN img/_review/srvmerit-guard-r2/ wiped (4 objects); no shots in git.
+
+### Laws
+2/3 gain–loss: no wrong-life card pays (4 directions) · 4 one core: no number · 6 real world: she acts only in the life she lives · 7 wording: one cổ trang line · 9 kit: kitNotice only · 11 whole group: 4 directions + co-op new face, one key · 12 two devices: Fold + iPad shots looked at · 13: lines present · 16: lãnh cung / cấm túc untouched.
+
+~97% xong / ~92% chơi được
