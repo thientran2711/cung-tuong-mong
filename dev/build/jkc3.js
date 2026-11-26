@@ -55,10 +55,19 @@ for(let i=0;i<KC3THAY.length;i++)KCHAB["thay"+i]=[["kc_hoc",3],["",2]];
 /* the tabs: teachers under Tài nghệ, the bà mối and the suitors under Giao du, the rest stays Người nhà */
 (function(){const l0=kcFamList;kcFamList=function(w){const L=l0.apply(this,arguments);return w==="nha"?L.filter(m=>!m.grp):L}})();
 function kc3Grp(g){return S.kc.fam.filter(m=>m.alive&&m.grp===g)}
-/* E25r2: the home roster strip sits INSIDE a scrolling tab (Tài nghệ / Giao du), not as a person tab: kept one level below #panel so the kit person-tab frame (KIT §6.3c #panel.kpfr, LIVE 21/11) does not take the whole panel and squeeze the strip to 0 px */
-function kc3Pager(key,L){return L.length?`<div class="kc3pgw"><div class="pgwrap">`+pager(key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t})),i=>kcFamCard(L[i]))+`</div></div>`:""}
-(function(){const a0=kcArtHTML;kcArtHTML=function(){const h=a0.apply(this,arguments);if(!kc3On())return h;return kc3Pager("kcthay",kc3Grp("thay"))+h}})();
-(function(){const s0=kcSocHTML;kcSocHTML=function(){const h=s0.apply(this,arguments);if(!kc3On())return h;return h+kc3Pager("kcsoc",kc3Grp("soc"))}})();
+/* PEOPLE TAB ONLY (owner 25/11 ~23:00Z verbatim: "Tất cả những cái thông tin nào liên quan tới người là phải để vào một cái tab người riêng. Tại sao lại có những cái
+   thông tin của người nằm ở trong cái tab và liên quan tới hành động như thế này?"; shots k5/k6 bà mối card under Giao tình, k7 teacher cards under Tài nghệ):
+   the teachers and the bà mối / suitors are persons of the ONE home people tab (Gia tộc, tab "rv": the same kit sub-tab row + pager strip + kit person card as
+   Người nhà / Khuê hữu) — sub-tabs «Thầy dạy» and «Người ngoài». Tài nghệ and Giao tình hold only their act cards (the acts with a teacher / the bà mối
+   stay there and in that person's card «Việc», as for Người nhà). Was: kc3Pager strips inside Tài nghệ / Giao du (E25r2). */
+const KC3PT=[{k:"thay",label:"Thầy dạy",key:"kcthay"},{k:"soc",label:"Người ngoài",key:"kcsoc"}];
+function kc3PtCnt(L){const A=L.flatMap(kcFamActs);return{doable:A.filter(([a])=>kcDoable(a)).length,total:A.length}}
+(function(){const t0=kitSubTabs;kitSubTabs=function(key,list){try{if(key==="kcfam"&&kc3On()&&Array.isArray(list)&&!list.some(x=>x&&x.k==="thay")){const add=KC3PT.filter(x=>kc3Grp(x.k).length).map(x=>Object.assign({k:x.k,label:x.label},kc3PtCnt(kc3Grp(x.k))));if(add.length){const L=list.slice();L.splice(Math.min(2,L.length),0,...add);arguments[1]=L}}}catch(e){console.error("kc3 tabs",e)}return t0.apply(this,arguments)}})();
+(function(){const h0=kcFamHTML;kcFamHTML=function(){if(!kc3On())return h0.apply(this,arguments);const cur=ktSubGet("kcfam",[{k:"nha"},{k:"ban"},{k:"gia"}].concat(KC3PT.filter(x=>kc3Grp(x.k).length).map(x=>({k:x.k}))));const P=KC3PT.find(x=>x.k===cur);const L=P?kc3Grp(P.k):[];if(!P||!L.length)return h0.apply(this,arguments);
+ const base=[{k:"nha",label:"Người nhà"},{k:"ban",label:"Khuê hữu"},{k:"gia",label:"Gia thế"}];const T=kitSubTabs("kcfam",base);
+ return `<div class="pgwrap"><div class="kpinline">${T.html}</div>`+pager(P.key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t})),i=>kcFamCard(L[i]))+`</div>`}})();
+/* an act card about one of them is tapped on its person chip → that person in the people tab (kcSel knows every list) */
+(function(){const s0=kcSel;kcSel=function(id){const m=S&&S.kc&&S.kc.fam.find(x=>x.id===id);if(m&&m.grp&&kc3On()){const P=KC3PT.find(x=>x.k===m.grp);if(P){const L=kc3Grp(P.k);const i=L.findIndex(x=>x.id===id);if(i>=0){PG[P.key]=i;KTSUB.kcfam=P.k;return}}}return s0.apply(this,arguments)}})();
 /* teacher favour → tier (0 học trò, 1 được quý, 2 truyền nhân); the tier speeds the lessons of her art (the base Tài nghệ games) */
 function kc3Tier(m){const T=BAL.kc3.thay.t;return m.af>=T[1]?2:m.af>=T[0]?1:0}
 const KC3TIERW=["học trò","học trò được quý","truyền nhân"];

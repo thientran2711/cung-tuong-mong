@@ -1,0 +1,26 @@
+/* people-tab-scan (owner 25/11 ~23:00Z: person info ONLY in the people tab; action tabs hold only actions): for every tab of the home road (khuê các) and the
+   palace, count what of a PERSON is drawn in #panel: kit person cards (.pcard), portrait pager strips (.pgwrap .pager / .kc3pgw). The people tab (home «Gia tộc» rv,
+   palace «Hậu cung» rv) may hold them; every other tab must show 0. usage: node dev/test/people-tab-scan.js <url> [WxH] ; exit 1 on a person card in an action tab */
+const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const [,,URL_,SZ]=process.argv;const sl=t=>new Promise(r=>setTimeout(r,t));/* action tabs (hold only actions); the person tabs (Phi tần rv, Nam nhân men, Cung nhân staff on the palace road, Hoàng tự kid/kin, Phe phái fac, Kế vị kvo, Hôn sự hon, Quý tộc qt) are not checked */
+const ACTION={home:['act','go','court','rel','staff','inv','art','story'],palace:['act','go','court','rel','inv','art','story']};
+(async()=>{const b=await chromium.launch();const [W,H]=(SZ||'1180x820').split('x').map(Number);let fail=0;
+ for(const road of ['home','palace']){const errs=[];const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
+  await ctx.route(u=>u.href.startsWith(CDN),async r=>{const u=new URL(r.request().url()),c=CACHE+u.pathname.slice(1).replace(/\//g,'__');const ct=u.pathname.endsWith('.json')?'application/json':u.pathname.endsWith('.webp')?'image/webp':'application/octet-stream';
+   if(!u.pathname.endsWith('.json')&&fs.existsSync(c))return r.fulfill({status:200,body:fs.readFileSync(c),contentType:ct});
+   for(let i=0;i<4;i++){try{const res=await r.fetch();const body=await res.body();if(res.status()===200&&!u.pathname.endsWith('.json'))fs.writeFileSync(c,body);return r.fulfill({status:res.status(),body,contentType:ct})}catch(e){}}return r.abort()});
+  const p=await ctx.newPage();p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+  await p.goto(URL_,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf,#title,#kload{display:none!important}'});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sl(2500);
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+  for(let i=0;i<15;i++){await sl(400);const s=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!s)break}
+  if(road==='home'){await p.evaluate(()=>{S.origin=ORIGINS.find(x=>x.k==='tt');S.kcPick='nha';Q=[];window.__bot=1;kcInit();delete window.__bot;Q=[]});await sl(800);for(let i=0;i<4;i++){const n=await p.evaluate(()=>{const B=[...document.querySelectorAll('button')].filter(b=>/^(Nhận|Bỏ qua)$/.test(b.textContent.trim())&&b.offsetParent);B.forEach(b=>b.click());return B.length});if(!n)break;await sl(700)}
+   /* a bà mối and a suitor exist (k5/k6 case) */await p.evaluate(()=>{try{S.kap=Math.max(S.kap,BAL.kc2.st.kc.moi);if(typeof kcSuitor==="function")S.kc.suit.push(kcSuitor());deal()}catch(e){}})}
+  const tabs=await p.evaluate(()=>{const L={};for(const b of document.querySelectorAll('#tabs [data-tab], nav [data-tab]'))if(!L[b.dataset.tab])L[b.dataset.tab]=b.textContent.trim().slice(0,24);return Object.entries(L)});
+  for(const [t,label] of tabs){const subs=await p.evaluate(t=>{Q.length=0;document.getElementById('modal').hidden=true;tab=t;render();return [...document.querySelectorAll('#panel [data-ktsv]')].map(b=>b.dataset.ktsv)},t);await sl(400);
+   const all=[null].concat(subs);let pc=0,pg=0;const where=[];
+   for(const sv of all){if(sv)await p.evaluate(sv=>{const b=document.querySelector(`#panel [data-ktsv="${sv}"]`);if(b)b.click()},sv);await sl(300);
+    const c=await p.evaluate(()=>{const P=document.getElementById('panel');return{pc:P.querySelectorAll('.pcard').length,pg:P.querySelectorAll('.pager,.kc3pgw').length}});if(c.pc||c.pg)where.push((sv||'-')+':'+c.pc+'/'+c.pg);pc=Math.max(pc,c.pc);pg=Math.max(pg,c.pg)}
+   const bad=ACTION[road].includes(t)&&(pc||pg);if(bad)fail++;console.log([road,t,label,'personCards='+pc,'strips='+pg,where.join(' '),bad?'FAIL':ACTION[road].includes(t)?'ok':'(people tab)'].join('\t'))}
+  if(errs.length){fail++;console.log(road,'errors',errs.slice(0,3).join(' || '))}await ctx.close()}
+ await b.close();console.log(fail?`FAIL ${fail}`:'PASS');process.exit(fail?1:0)})();
