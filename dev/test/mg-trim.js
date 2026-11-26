@@ -29,7 +29,7 @@ const fs9={};for(const f of ['jpetcare.js','jshelf.js'])fs9[f]=fs.readFileSync(p
   for(let k=0;k<30;k++){const gone=await p.evaluate(()=>{const r=document.getElementById('kmrew');if(r)r.remove();const bt=[...document.querySelectorAll('button')].find(x=>/Vào cung ngay/.test(x.textContent||'')&&x.offsetParent);if(bt)bt.click();return !/Sửa soạn nhập cung/.test(document.body.innerText||'')});if(gone&&k>2)break;await sleep(1500)}
   for(let k=0;k<12;k++){const n=await p.evaluate(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return 0;const bt=[...m.querySelectorAll('button')].find(x=>/^(Đã hiểu|Tiếp|Vào cung ngay)/.test(x.innerText.trim()));if(bt){bt.click();return 1}return 0});if(!n)break;await sleep(900)}
   await p.waitForFunction(()=>typeof rivals!=='undefined'&&rivals.some(v=>v.alive&&!v.out),null,{timeout:60000}).catch(()=>{});
-  await p.evaluate(()=>{new MutationObserver(()=>document.querySelectorAll('.ktrv-ov').forEach(e=>e.remove())).observe(document.body,{childList:true,subtree:true});Q.length=0;document.getElementById('modal').hidden=true;S.suc=90;S.bac=Math.max(S.bac||0,500);render()});await sleep(800);
+  await p.evaluate(()=>{new MutationObserver(()=>{if(!window.__keepRev)document.querySelectorAll('.ktrv-ov').forEach(e=>e.remove())}).observe(document.body,{childList:true,subtree:true});Q.length=0;document.getElementById('modal').hidden=true;S.suc=90;S.bac=Math.max(S.bac||0,500);render()});await sleep(800);
   const tap=async sel=>{const e=await p.waitForSelector(sel,{state:'visible',timeout:30000});await e.scrollIntoViewIfNeeded();await e.tap();await sleep(500)};
   const txt=sel=>p.evaluate(s=>{const e=document.querySelector(s);return e?e.textContent.replace(/\s+/g,' ').trim():null},sel);
   /* 1 */
@@ -44,9 +44,13 @@ const fs9={};for(const f of ['jpetcare.js','jshelf.js'])fs9[f]=fs.readFileSync(p
   const bt=await p.evaluate(()=>['toilquick','toilmk','toilmoc'].map(id=>{const e=document.getElementById(id);return e?{id,t:e.innerText.replace(/\s+/g,' '),cls:e.className}:null}));
   ok('2 dress screen: «Điểm trang» (kit .kbtn, odds words) · «Tự tay điểm trang» · «Để mặt mộc»',bt[0]&&/^Điểm trang/.test(bt[0].t)&&/Đoan trang: (Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(bt[0].t)&&!/%/.test(bt[0].t)&&/\bkbtn\b/.test(bt[0].cls)&&!/kquick/.test(bt[0].cls)&&bt[1]&&/Tự tay điểm trang/.test(bt[1].t)&&bt[2]&&/mộc/.test(bt[2].t),bt);
   const want=await p.evaluate(()=>{const r=toilRollOf(toilRollSeed());return{score:r.score,vung:r.look==="vung"}});await sleep(800);
-  await tap('#toilquick');await p.waitForFunction(()=>/Dung nhan/.test((document.querySelector('#kg82')||{}).innerText||''),null,{timeout:30000}).catch(()=>{});await sleep(800);
+  await p.evaluate(()=>{window.__keepRev=1});await tap('#toilquick');
+  /* the look reveal (jtoil toilReveal: close-up + the result rows, «Chạm để bỏ qua») plays as in LIVE; she taps through it */
+  const rv=await p.waitForSelector('.ktrv-ov',{timeout:15000}).then(()=>1).catch(()=>0);const rvTxt=rv?await txt('.ktrv-ov .ktrv-card'):null;await sleep(3500);
+  if(rv){for(let k=0;k<12;k++){const nx=await p.$('.ktrv-ov button');if(nx&&await nx.isVisible()){await sleep(1500);await nx.tap();break}try{await p.tap('.ktrv-ov .kmhint',{timeout:3000})}catch(e){}await sleep(1000)}}/* the scene ends with the ONE kit scene-end button «Tiếp theo» (KIT 81) */
+  await p.waitForFunction(()=>!document.querySelector('.ktrv-ov')&&/dung nhan/i.test((document.querySelector('#kg82')||{}).innerText||''),null,{timeout:30000}).catch(()=>{});await p.evaluate(()=>{window.__keepRev=0});await sleep(1500);
   const r2=await p.evaluate(()=>({made:S.toilette&&S.toilette.makeup,score:S.toilette&&S.toilette.score,mk:toilMk(S.toilette),mirror:!!document.querySelector('#kg82 canvas'),rows:(document.querySelector('#kg82')||{}).innerText||""}));
-  ok('2 one tap = the face-table draw on her hand; no mirror canvas; result rows follow',r2.made&&r2.score===want.score&&(want.vung?r2.mk==="vung":r2.mk!=="vung")&&!r2.mirror,{r2:Object.assign({},r2,{rows:r2.rows.slice(0,160)}),want});
+  ok('2 one tap = the face-table draw on her hand; no mirror canvas; the look reveal shows Dung nhan, then the result rows follow',r2.made&&r2.score===want.score&&(want.vung?r2.mk==="vung":r2.mk!=="vung")&&!r2.mirror&&rv&&/Dung nhan/.test(rvTxt||"")&&/dung nhan/i.test(r2.rows),{r2:Object.assign({},r2,{rows:r2.rows.slice(0,200)}),want,rvTxt});
   await sleep(1200);const okb=await p.$('#kg82ok,#toildone');if(okb){try{await okb.tap()}catch(e){}}await sleep(500);
   /* 3 */
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;delete S.toilette;try{kg82Close()}catch(e){}toilOpen()});await sleep(1000);await p.evaluate(()=>toilDressDone(true));await sleep(700);
