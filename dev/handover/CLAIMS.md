@@ -542,4 +542,4 @@ FLIGHT2-S15D life (Fold 755x1000 cautious, seed 2026112541, LIVE origin/main new
 ring-build (RING-BUILD-4) | review/ring-build | session_01Rc5AsLAGTatyNHnR3hq1ar | RUNNING | 2026-11-26T20:42Z
 kit-stage (KIT-STAGE-R5) | review/kit-stage-r4 | session_01Rc5AsMRAw5RECMDAjyTgYV | RUNNING | 2026-11-26T20:43Z
 oan-pace-ghen (OAN-PACE-2) | review/oan-pace-ghen | session_01Rc5AsLW5LU5PeXKJxSXJE7 | RUNNING | 2026-11-26T20:45Z
-save stack BIG rv r8 (rv15 final gates) | review/save-fix-stack-rv15 | <pending> | RUNNING | 26/11 20:50Z (Foreman B child 4)
+save stack BIG rv r8 (rv15 final gates) | review/save-fix-stack-rv15 | session_01N1tNP4iUdmBPnqSx74gVJM | RUNNING | 26/11 20:50Z (Foreman B child 4)
