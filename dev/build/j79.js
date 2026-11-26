@@ -69,7 +69,9 @@ function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&
   if(/^\s*ghi chú\s*$/i.test(String(r[0]))&&R.length){const v=Array.isArray(r[1])?r[1]:[r[1]];const prev=R[R.length-1];prev.bang=(prev.bang?prev.bang+" · ":"")+v.join(" · ");return}
   R.push({l:r[0],v:r[1],c:r[2]})});
  return `<span class="kb kpkb">`+R.map(({l,v,c,bang})=>{const vals=Array.isArray(v)?v:[v];
- return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?(typeof kaEfTag==="function"?kaEfTag(x):x):`<span class="ef ${c||"n"}${typeof kaUnit==="function"&&kaUnit(x)?" kef1":""}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}${bang?kitNoteBang(bang):""}</span></span>`}).join("")+`</span>`}
+ /* KIT §6.6 GAIN LIST (OB-KIEP): a Tốn / Được / Mất / Kèm / Thành / Bại row of an info table follows the same list rule as the option rows (kaListCls, j63) */
+ const lc=/^\s*(tốn|được|được ngay|mất|kèm|thành|bại)\s*$/i.test(String(l))&&typeof kaListCls==="function"&&!vals.some(x=>/^\s*<span class="kchip/.test(String(x)))?kaListCls("duoc",vals.map(x=>({h:String(x)}))):"";
+ return `<span class="kr"><span class="krl">${l}</span><span class="krv${lc}">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?(typeof kaEfTag==="function"?kaEfTag(x):x):`<span class="ef ${c||"n"}${typeof kaUnit==="function"&&kaUnit(x)?" kef1":""}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}${bang?kitNoteBang(bang):""}</span></span>`}).join("")+`</span>`}
 /* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
    are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
 function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
@@ -1127,7 +1129,7 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(KPID_OK[crisp]||!lo)show(crisp);
  else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
  if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
-const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (side layout cap, kpIdLay) */
+const KPID_OK={};const KPID_WR=.5;const KPID_PANEL=.66;/* KIT 56.11: share of the usable width the info frame keeps on the one-page figure-left card *//* widest painted width / body height over all faces (side layout cap, kpIdLay) */
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
  /* KIT 32.2b EQUAL GAPS (owner 16/11 s21 + s22 "whole group"): her full figure stands between the two frame lines of the card scene —
@@ -1142,6 +1144,10 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  /* KIT 56.9 (owner 18/11 ~20:25Z, Fold «Thân phận kiếp này»): in the figure-left layout her figure is BIG again, about the full height of the info frame (kit rule 32.2b: screen height minus the equal gaps, room for the tallest Hoàng hậu crown BAL.bookFrame.cRef), whole figure beside the panel, never over it: the figure column = body x KPID_WR, the panel takes the rest (at least the kit minimum KIT_SIZE.v3.narrow.minRight, at most 560); a body that would leave the panel less than its minimum is lowered to fit. --kpw is set here, before the panel is measured. */
  if(side){const A0=H,G0=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A0):Math.max(14,A0*.05),cR=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131;
   let Hb=Math.min((A0-2*G0)/(1+cR),H*.80,BAL.bookFigBody?BAL.bookFigBody.kv1:1e9);/* KIT 56.11 (owner 18/11 ~21:25Z): SKELETON = the Sổ tuần lục page: the figure is the SAME body as in the book (BAL.bookFigBody: Fold 641, iPad 534), so the info frame gets the width the book gives it */const minR=KZ?KZ.v3.narrow.minRight:274,avail=W-16-12-((KZ&&KZ.edge)||12);const WR=(typeof BAL==="object"&&BAL.figWideRef)||KPID_WR;let cw=Math.round(Hb*WR*.98);if(avail-cw<minR){cw=avail-minR}
+  /* KIT 56.11 Fold frame width (OB-KIEP, MAIN 148 on owner bug 25/11 ~22:40Z, law 12): on the Fold the figure column (body x figWideRef .65) left the info frame ~300 px, every
+     gain wrapped 3–4 words a line and «Nhận / Đổi thân phận» were squeezed. The frame takes at least KPID_PANEL of the usable width (≤ 560); the ONE figure
+     body of the screen is lowered to the column that is left (still whole beside the frame, KIT 56.7), never the frame narrowed for the figure. */
+  {const pMin=Math.min(560,Math.round(avail*KPID_PANEL));if(avail-cw<pMin)cw=Math.max(0,avail-pMin)}
   M.__kidBody=cw/(WR*.98);M.style.setProperty("--kpw",Math.min(560,avail-cw)+"px")}else{M.__kidBody=0;M.style.removeProperty("--kpw")}
  d.style.removeProperty("width");d.style.removeProperty("max-width");
  /* the panel is the ONE frame size (KIT 8.1 tokens --kpw/--kph, never set here; merge review/newgame-ui-r1); the figure column is the space
