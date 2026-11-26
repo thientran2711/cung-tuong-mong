@@ -1528,6 +1528,12 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   picture) · name in its KIT_GRADE colour (2 lines) · what it is (IT.d, or the work tier) · (grade = the chip on the picture). No button row. Taint = corner tag
   "đã tẩm". A tile she cannot choose (option `lock`, or not enough bạc) is greyed (`.kshno`) but still selectable to read why.
   Doable tiles first, then the dialog's own order. Horizontal rows that wrap (the Tư trang look).
+- PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows
+  `BAL.kip.page` tiles at a time, with the §23 kit pager around it (`.kpkwrap` ‹ › `.kpkpg` + `.kpkpn` «trang N/M», no count; pager
+  hidden on one page; the tile box keeps its max height and scroll as above). The page that holds the chosen tile opens first. The dialog (j3 `showModal`, `m.kipOnly`) draws only the CHOSEN
+  item's option card; another tile's card is built when it is chosen (`kipCard` = the same `optBtnHTML` + `kitFix`, so the copy and the
+  confirm are the real option). Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save, every entry reached once,
+  on-demand card = drawn card, confirm gives one piece); scan `node dev/test/picker-dom-scan.js`.
 - Tap a tile → selected (31.13: glow + ×1.06, the rest at .75 opacity; `aria-checked`), the first doable tile is preselected.
   Under the grid `.kipd`: that option's OWN kit card (display copy of its `.opt`: name, odds word, Tốn / Được / Mất / Kèm or the reason
   `.kwhy`) + ONE confirm button `.kipgo` (kit `.kbtn`, verb per dialog: Tặng / Dâng / Cài vào rương), greyed when the option is locked.

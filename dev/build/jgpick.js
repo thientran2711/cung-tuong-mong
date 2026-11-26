@@ -38,22 +38,39 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
  d.innerHTML=det;d.classList.toggle("kipd2",!!det);
  d.appendChild(card);
  d.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kipgo" data-kipgo="${i}"${lock?" disabled":""}>${kipE(KIP_VERB[m.pid]||"Chọn")}</button>`)}
-function kipSelect(M,m,i){KIP_SEL.set(m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
+/* K-LIST-PAGE (picker-dom, MAIN 164 play-stopper 26/11; Foreman F s14 iPad b1570 tab crash, one screen 20,108 nodes; s7 save 36k–63k nodes,
+   «Dâng quà» 232 s to open): the grid used to draw a FULL hidden act card (.opts.kiphas>.opt, ~26 nodes, kaNorm'd) for EVERY entry + a tile.
+   Now (1) the base dialog (j3, m.kipOnly) draws only the chosen item's card; kipCard draws another one when its tile is chosen (same
+   optBtnHTML + kitFix → kaNorm1, so the copy and the confirm are the real option); (2) the grid shows BAL.kip.page tiles at a time with the
+   kit pager of §23 (‹ › + «trang N/M», kitPicker's .kpkwrap/.kpkpg/.kpkpn look; no count). Doable first, then the dialog's order (unchanged). */
+/* the cards the base dialog draws (j3 showModal): never saved with the queue (not enumerable) */
+function kipOnlySet(m,v){Object.defineProperty(m,"kipOnly",{value:v,writable:true,configurable:true,enumerable:false});return v}
+function kipList(m){const L=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null&&S.inv[c.ik]);L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));return L}
+function kipSel0(m,L){let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}return sel}
+function kipCard(M,m,i){const ops=M.querySelector(".opts");if(!ops||ops.querySelector(`:scope>.opt[data-m="${i}"]`))return;const c=m.opts[i];if(!c)return;
+ kipOnlySet(m,(m.kipOnly instanceof Set?m.kipOnly:new Set())).add(i);ops.insertAdjacentHTML("beforeend",optBtnHTML(c,i));try{kitFix(M)}catch(e){console.error("kipCard",e)}}
+function kipSelect(M,m,i){KIP_SEL.set(m,i);kipCard(M,m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
  M.querySelector(".kipw").classList.add("has");kipDetail(M,m,i)}
+function kipPage(M,m,pg){const w=M.querySelector(".kipw");if(!w)return;const L=w.__kipL||kipList(m),per=Math.max(1,BAL.kip.page|0),pages=Math.max(1,Math.ceil(L.length/per));
+ pg=Math.min(Math.max(0,pg|0),pages-1);w.dataset.pg=pg;const sel=KIP_SEL.get(m);
+ w.querySelector(".kipg").innerHTML=L.slice(pg*per,(pg+1)*per).map(([c,i])=>kipTile(c,i,i===sel)).join("");
+ const B=w.querySelectorAll(".kpkpg");B.forEach(b=>{b.hidden=pages<2;b.disabled=b.dataset.kippg<0?pg<=0:pg>=pages-1});
+ const n=w.querySelector(".kpkpn");if(n)n.textContent=pages>1?`trang ${pg+1}/${pages}`:""}
 function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;const ops=M.querySelector(".opts");if(!ops||M.querySelector(".kipw"))return;
- const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops.querySelector(`.opt[data-m="${i}"]`));
- /* doable first (kitDoableFirst rule), then the dialog's own order */
- L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));
- let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}
- const w=document.createElement("div");w.className="kipw kshop";
- w.innerHTML=`<div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.map(([c,i])=>kipTile(c,i,i===sel)).join("")}</div><div class="kipd" aria-live="polite"></div>`;
+ const L=kipList(m);/* doable first (kitDoableFirst rule), then the dialog's own order */
+ const sel=kipSel0(m,L);if(sel!=null)KIP_SEL.set(m,sel);const per=Math.max(1,BAL.kip.page|0);/* ONE CORE: BAL.kip (jbal2) */
+ const w=document.createElement("div");w.className="kipw kshop";w.__kipL=L;
+ w.innerHTML=`<div class="kpkwrap kipwrap"><button type="button" class="kpkpg" data-kippg="-1" aria-label="Trang trước">‹</button><div class="kshg kipg" role="radiogroup" aria-label="Chọn món"></div><button type="button" class="kpkpg" data-kippg="1" aria-label="Trang sau">›</button></div><div class="kpkpn"></div><div class="kipd" aria-live="polite"></div>`;
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");
+ const at=sel!=null?L.findIndex(x=>x[1]===sel):0;kipPage(M,m,Math.floor(Math.max(0,at)/per));
  if(sel!=null)kipSelect(M,m,sel);else kipDetail(M,m,-1)
  /* the gift moment's two pictures load when a gift picker opens (on demand, ~60 KB; sw.js caches them) */
  try{if(KIP_VERB[m.pid]&&m.pid!=="plantpick"&&kfOn()&&!kfStill())["gift-hands.webp","gift.webp"].forEach(f=>{const i=new Image();i.src=kfkU(f)})}catch(e){}}
-(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kipBuild()}catch(e){console.error("kipBuild",e)}return r}})();
-document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("#modal [data-kip],#modal [data-kipgo]");if(!t)return;const M=$("modal"),m=Q[0];if(!kipOn(m))return;
+(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(kipOn(m)){const sel=kipSel0(m,kipList(m));kipOnlySet(m,new Set(sel!=null?[sel]:[]))}else if(m&&m.kipOnly)kipOnlySet(m,null)}catch(e){}
+ const r=s0.apply(this,arguments);try{kipBuild()}catch(e){console.error("kipBuild",e)}return r}})();
+document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("#modal [data-kip],#modal [data-kipgo],#modal [data-kippg]");if(!t)return;const M=$("modal"),m=Q[0];if(!kipOn(m))return;
  ev.stopPropagation();ev.preventDefault();
+ if(t.dataset.kippg!=null){if(t.disabled)return;const w=M.querySelector(".kipw");kipPage(M,m,(+(w&&w.dataset.pg)||0)+(+t.dataset.kippg));return}
  if(t.dataset.kipgo!=null){if(t.disabled)return;const i=+t.dataset.kipgo,b=M.querySelector(`.opts>.opt[data-m="${i}"]`);if(!b||b.disabled)return;
   KIP_GO={pid:m.pid,pp:m.pp,c:m.opts[i],from:(M.querySelector(`.kipc[data-kip="${i}"] .kitem`)||t).getBoundingClientRect(),to:kipTarget(M)};b.click();return}
  kipSelect(M,m,+t.dataset.kip)},true);
@@ -98,6 +115,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kshc.kipc>.kshpic{cursor:pointer;transition:transform .15s}
 .kipw.has .kshc.kipc:not(.on){opacity:.75}
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
+.kipw>.kipwrap{grid-template-columns:28px minmax(0,1fr) 28px}.kipw>.kipwrap>.kipg{min-width:0}.kipw>.kipwrap:has(>.kpkpg[hidden]){grid-template-columns:minmax(0,1fr)}.kipw>.kipwrap>.kpkpg[hidden]{display:none}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipd>.kipgo{align-self:stretch;min-height:40px}
@@ -109,6 +127,6 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 
 /* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}
 `;document.head.appendChild(st)})();
-if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected",html:()=>{try{
- const L=Object.keys(IT).filter(k=>!itm(k).story).slice(0,4);return `<div class="kipw kshop has"><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});
-  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div></div>`}catch(e){return""}}});
+if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected, one page + the §23 pager",html:()=>{try{
+ const L=Object.keys(IT).filter(k=>!itm(k).story).slice(0,4);return `<div class="kipw kshop has"><div class="kpkwrap kipwrap"><button type="button" class="kpkpg" disabled aria-label="Trang trước">‹</button><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});
+  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div><button type="button" class="kpkpg" aria-label="Trang sau">›</button></div><div class="kpkpn">trang 1/3</div></div>`}catch(e){return""}}});
