@@ -14,7 +14,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
   await p.waitForFunction(()=>!/Sửa soạn nhập cung/.test(document.body.innerText),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);
   await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],#kxcatch{display:none!important}'});
   const chk=(n,ok,info)=>{if(!ok){fails++;log(`FAIL ${dev} ${n} ${info||''}`)}else log(`ok   ${dev} ${n}`)};const shot=async n=>{if(OUT)await p.screenshot({path:`${OUT}/${dev}-${n}.png`})};
-  const fire=talk=>p.evaluate(async talk=>{for(let k=0;k<6;k++){try{while(Q.length){const n=Q.length;closeModal();if(Q.length>=n)break}}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;if(rgFire('c2a')){Q.length=1;Q[0].__ks='c2a';if(talk)Q[0].talk=1;showModal();return true}window.__nlInner=1;start();window.__nlInner=0;Q.length=0;await new Promise(r=>setTimeout(r,2000))}return false},talk);
+  const fire=talk=>p.evaluate(async talk=>{for(let k=0;k<6;k++){try{while(Q.length){const n=Q.length;closeModal();if(Q.length>=n)break}}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;if(rgFire('c1b')/*c2a = a side choice = vòng nhóm (KIT §101.9)*/){Q.length=1;Q[0].__ks='c2a';if(talk)Q[0].talk=1;showModal();return true}window.__nlInner=1;start();window.__nlInner=0;Q.length=0;await new Promise(r=>setTimeout(r,2000))}return false},talk);
   const tapXY=async q=>{await p.touchscreen.tap(q[0],q[1]);await p.waitForTimeout(450)};
   /* ---- CARDS ---- */
   chk('c2a fired',await fire(false));await p.waitForTimeout(3200);await shot('cards');
@@ -24,7 +24,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    const cards=[...dl.querySelectorAll('.opts.khand>button.kopt')].map(R);const odds=[...dl.querySelectorAll('.opts.khand>button.kopt .kodds')].filter(e=>e.getClientRects().length).length;
    return {stage:dl.classList.contains('kstage'),panel:cs.boxShadow!=='none'||parseFloat(cs.borderTopWidth)>0,n:figs.length,figsIn:figs.every(f=>f.inL),figsVis:figs.every(f=>f.vis!=='hidden'),faceUnderBox:figs.some(f=>hit(f.face,B)),upperUnderBox:figs.some(f=>hit(f.upper,B)),
     cardsIn:cards.length>1&&cards.every(c=>c.t>=D.t-1&&c.b<=D.b+1&&c.l>=D.l-1&&c.r<=D.r+1),odds,pages:(()=>{try{return kitView().pages}catch(e){return 0}})()}});
-  chk('stage (no panel box)',g.stage&&!g.panel,JSON.stringify(g).slice(0,160));chk('speaker + her in the layer',g.n===2&&g.figsIn);chk('figures visible after the entrance',g.figsVis);
+  chk('stage (no panel box)',g.stage&&!g.panel,JSON.stringify(g).slice(0,160));chk('ONE figure (§102.7: the speaker, her figure never walks in) in the layer',g.n===1&&g.figsIn,'n='+g.n);chk('figures visible after the entrance',g.figsVis);
   chk('no face under the story box',!g.faceUnderBox);if(g.pages===1)chk('one page: story never over an upper body',!g.upperUnderBox);chk('hand inside the layer',g.cardsIn);chk('card face: no odds meter',g.odds===0,'odds '+g.odds);
   /* plate never over a face */
   const c1=await p.evaluate(()=>{const r=document.querySelectorAll('#modal .opts.khand>button.kopt')[1].getBoundingClientRect();return [r.left+r.width/2,r.top+r.height*.4]});await tapXY(c1);await shot('cards-lift');

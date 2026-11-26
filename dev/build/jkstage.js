@@ -92,7 +92,7 @@ function kstgFigs(dl,mb){try{const m=typeof Q!=="undefined"&&Q&&Q[0]||null;let w
  const old=mb.querySelector(".kszfig");
  let src="";try{if(who&&who!==S&&typeof kitFigOf==="function")src=kitFigOf(who)}catch(e){}if(!src){const im=old&&old.querySelector("img");src=im&&(im.getAttribute("src")||"")||""}
  const tg=old&&old.querySelector(".kt3");kstgFig(mb,"kstg-sp",who===S?"":src,own||(tg?tg.innerHTML:""));
- let me="",me2skip=0;try{me=typeof kitFigOf==="function"?kitFigOf(S):(typeof figFor==="function"?figFor(S):"")}catch(e){}{const pk0=kstgPickWants(),sp0=mb.querySelector(":scope>.kstg-sp");if(pk0||(!kstgTalkWants(dl)&&sp0))me2skip=1}if(!me2skip)kstgFig(mb,"kstg-me",me,"");
+ let me="",me2skip=0;try{me=typeof kitFigOf==="function"?kitFigOf(S):(typeof figFor==="function"?figFor(S):"")}catch(e){}{const pk0=kstgPickWants();let sp0=mb.querySelector(":scope>.kstg-sp");const sq=s=>String(s||"").replace(/^.*img\//,"");if(sp0&&me&&sq((sp0.querySelector("img")||{}).getAttribute&&sp0.querySelector("img").getAttribute("src"))===sq(me)){sp0.remove();sp0=null}/* KK36 dedupe first: a «speaker» that is HER is no speaker */if(pk0||(!kstgTalkWants(dl)&&sp0))me2skip=1}if(!me2skip)kstgFig(mb,"kstg-me",me,"");
  /* KK36 (STG scan: 12 story frames tt1–3, td1, nc1, ge1, prep, phoenix, thInv, vl* had HER on both sides): a frame with no other speaker keeps only HER figure */
  const sp=mb.querySelector(":scope>.kstg-sp"),spi=sp&&sp.querySelector("img"),strip=s=>String(s||"").replace(/^.*img\//,"");if(sp&&spi&&me&&strip(spi.getAttribute("src"))===strip(me))sp.remove();
  /* §102.7 ONE FIGURE (owner OD 26/11 ~18:55Z «Mình chỉ cần một người đứng ở đó lúc đó là được rồi. 2 người xuất hiện chỉ khi nào mà đó là cuộc hội thoại giữa 2 người»):

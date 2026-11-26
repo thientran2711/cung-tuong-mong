@@ -18,7 +18,7 @@ const KIT_HAND={min:2,max:10,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,9
    "ring" / "group" frames keep today's list until RING-BUILD's ring lands with the set (never a hand: the wrong part). A frame that names no kind
    is an event choice only when it passes the structural test below (story + 2–10 kit option cards, not every card a person) — the census
    dev/test/kit-kind-scan.js lists every PEND family + every Q-pushed builder with the part it gets. */
-const KIT_KIND={pid:{plantsv:"ring",evpick:"ring",itarget:"ring",pgpick:"ring",runner:"ring",cmPick:"ring"},hands:["hand","pick"]};
+const KIT_KIND={pid:{entpick:"ring"/* «Chọn người theo hầu» retinue (j95s) */,plantsv:"ring",evpick:"ring",itarget:"ring",pgpick:"ring",runner:"ring",cmPick:"ring"},hands:["hand","pick"]};
 function kitKind(m){try{if(!m)return"";if(m.kind)return String(m.kind);if(m.placeK)return"pick";if(m.pid&&KIT_KIND.pid[m.pid])return KIT_KIND.pid[m.pid];
  if(Array.isArray(m.opts)&&m.opts.some(o=>o&&o.grp))return"group";if(m.kit&&KIT_HAND.notKinds.indexOf(m.kit.kind)>=0)return"list";return""}catch(e){return""}}
 function kitKindOf(g){try{return g&&g.closest&&g.closest("#modal")&&typeof Q!=="undefined"?kitKind(Q[0]):""}catch(e){return""}}
