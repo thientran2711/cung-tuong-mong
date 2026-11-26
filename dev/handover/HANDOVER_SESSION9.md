@@ -292,3 +292,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~18:02Z sếp asked for the ACT-MERGE report PDF → sent Bao-cao-gop-nut-LIVE-26-11.pdf (5 pages VN: summary, full NAME table, faults 1–9 fixed, checks, recs/next) — copy in reports/act-merge/.
 - ~18:12Z SẾP: stopped MAIN 161 (this account); MAIN moves to ANOTHER ACCOUNT as ROOT «MAIN CHÍNH 161». TAKEOVER_MAIN_161 updated (ACCOUNT MOVE block); cross-account mailbox dev/handover/MAIN_STATUS.md created; old-account seats told to finish in-hand item, write state there, stop.
 - ~18:20Z OWNER: titles too easy → OD row + TITLE-BAL for 161. Sếp: this account out of quota → moving to another account now.
+- ~18:30Z sếp asked whether the PDF covers her plane/landing bugs → NO (ACT-MERGE only). Full owner-bug status PDF (25/11 23:30Z → end, ~46 rows, verified vs origin/main) = 161 FIRST REPORT.
