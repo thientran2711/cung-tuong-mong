@@ -99,7 +99,9 @@ function kstgFigs(dl,mb){try{const m=typeof Q!=="undefined"&&Q&&Q[0]||null;let w
     only a DIALOGUE (§102.2, kstgTalkWants) has two figures; any other stage keeps ONE — the speaker when there is one (her figure never walks in), else her.
     A thẻ gỗ place card (§102.3, kind "pick") has no figure at all: the place painting + its signpost. */
  const two=kstgTalkWants(dl),pk=kstgPickWants(),sp2=mb.querySelector(":scope>.kstg-sp"),me2=mb.querySelector(":scope>.kstg-me");
- if(pk){if(sp2)sp2.remove();if(me2)me2.remove()}else if(!two&&sp2&&me2)me2.remove()}catch(e){console.error("kstgFigs",e)}}
+ /* §102.7 NO FIGURE ON AN EVENT STAGE (owner OD 26/11 ~22:07Z, verbatim: "những cái khung sự kiện thế này là mình bỏ cái hình nhân vật luôn, mình chỉ để cái nền của sự kiện cho nó đẹp thôi, rồi sau đó hiện mấy cái lá bài và cái khung thông tin ở trên"; CANON OVERWRITE of «one figure»):
+    a Bàn bài / thẻ gỗ event stage = the event background + the cards + the info box; figures stand only in a DIALOGUE (§102.2, two people talking). */
+ if(!two){if(sp2)sp2.remove();if(me2)me2.remove()}}catch(e){console.error("kstgFigs",e)}}
 /* §102.3 kind "pick" (KIT §101.9 kitKind): the frame's choices are THẺ GỖ TREO on the stage, never a hand */
 function kstgPickWants(){try{return typeof kitKind==="function"&&typeof Q!=="undefined"&&kitKind(Q[0])==="pick"}catch(e){return false}}
 /* the painted part of a figure picture (opaque box, §93.2 kscnOpaque) — cached per picture */
