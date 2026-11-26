@@ -16,6 +16,7 @@ Ruling (Foreman D, 26/11 03:18Z): the 5 finished lives stay VALID, no replays �
 | nc-nc_gian-lazy-1c | Ban hoa — Bị ban hoa, xuất cung | 20 | 1 | VALID-EXIT «failed selection» (Lễ ra mắt «Cúi đầu chờ xét», no exam; no life data; BUILD cc68dcfd2b1b) - replaced by lazy-1e | 54fa0112+F10 hooks |
 | nc-nc_gian-speed-1 | Lãnh cung — Phát điên trong lãnh cung | 31 | 1780 | yes | 54fa0112+F10 hooks (16 resumes), BUILD fa8da73cecdc; crawl b1649+ (kitOptUnify) |
 | nc-nc_gian-speed-2 | Hồng nhan bạc mệnh (dysentery) | 24 | 726 | yes | 54fa0112+F10 hooks, BUILD b7dcbbd06e03 |
+| nc-nc_gian-lazy-1n (quiet 7013) | Hồng nhan bạc mệnh (illness) | 25 | 1010 | yes (VALID, 11th real life) | 54fa0112+F10 hooks, 1 resume (browser closed b784), BUILD 1b5137935266 (first seen 21:17Z 26/11) |
 | nc-nc_gian-lazy-1d (quiet 7003) | Ban hoa (failed selection) | 20 | 1 | VALID-EXIT, no data | cc68dcfd2b1b |
 | nc-nc_gian-lazy-1e (quiet 7004) | Công chúa ở lại cố quốc («Hòa ước» choice «Xin để vương muội đi thay») | 19 | 122 | VALID-EXIT «story ending (stay home)» per Foreman ruling 19:19Z; no life data | |
 | nc-nc_gian-lazy-1f (quiet 7005) | Ban hoa (failed selection) | 20 | 1 | VALID-EXIT, no data | cc68dcfd2b1b |
@@ -35,3 +36,6 @@ BUILD tag windows (BUILD = sha256[:12] of dev/index.html + site/swreg.js + site/
 Renderer hang files per life (CDN img/_review/renderer-mem/seatA-D-nc-nc_gian-<life>-hang*.json): scholar-1, speed-1 (25 samples to b1696, kitOptFit0/kitOptFit), speed-2 (3 samples b714, kitOptUnify).
 
 Spares 19:50-21:10Z: lazy-1h (quiet 7007) Ban hoa b1 = failed selection; lazy-1i (7008) «Công chúa ở lại cố quốc» b122 = story ending, same «Hòa ước» choice «Xin để vương muội đi thay» as lazy-1e (the quiet bot takes it, lazy-1g/lazy-2 got past); lazy-1j (7009) Ban hoa b1 = failed selection. All VALID-EXIT, no data. Quiet bot now: selection fail 6 of 10 attempts on cc68dcfd2b1b; «Hòa ước» stay-home ending 2 of 4 that reached it. Real lazy lives still running: lazy-2 (b1101), lazy-1g (b500); spares lazy-1k..1n (seeds 7010-7013) queued for the 13th real life.
+
+
+Update 23:55Z 26/11: lazy-1k, 1l, 1m (quiet 7010-7012) failed «Lễ ra mắt» at b1 on cc68dcfd2b1b = VALID-EXIT, no data. lazy-1n passed selection and Hòa ước, died at 25 (valid). Quiet selection-fail count on cc68dcfd2b1b: 1b, 1c, 1d, 1f, 1h, 1k, 1l, 1m fail + 1i/1e stay-home story endings; passes 1e, lazy-2, 1g, 1n. lazy-2 (b2110 y15) and lazy-1g (b1475 y11) still running: 11 valid real lives so far, 13th pending.
