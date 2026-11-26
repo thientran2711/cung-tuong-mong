@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d45adb93+","t":"2026-11-26T12:52Z","c":"srv-rank: gate test adds the maid OLD SAVE from LIVE (loads, plays a month, the ask follows the one rule) — 15/15","b":"22e39440bf45","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"0211c65d+","t":"2026-11-26T13:07Z","c":"srv-rank: gate test adds the maid OLD SAVE from LIVE (loads, plays a month, the ask follows the one rule) — 15/15","b":"d43e896b7ae8","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4780,7 +4780,7 @@ function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC st
   {const t=srkTier(srk(s),s.role);if(t>=2)ap(p,{bac:-Math.floor(t/2)})}
   /* the Emperor's eye: any maid rank, chance by rank / her seeking / the master's favour (jmline mlEye, BAL.mline; was srk>=2 at 1.2 %) */
   if(s.role==="maid"&&(typeof mlEye==="function"?mlEye(p,s):srk(s)>=BAL.mline.offRank&&roll(BAL.mline.offEye))&&roomFor("consort")){if(typeof mlRose==="function")mlRose(p,s);p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());n.fromMaidOf=key(p);if(typeof riseCore==="function")riseCore(n,s,p);else relAdd(p,n,s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=BAL.mline.riseLoy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
-  /* AG-ALL B: the sale dice go while staff are agents (fillStaff = the buyer's "Nội vụ phủ: thêm cung nữ") */if(srkTier(srk(s),s.role)>=2&&!(typeof asSelfOn==="function"&&asSelfOn(p))&&roll(1.5)){const ci=s.role==="maid"?0:1;const big=consorts().find(x=>x!==p&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60&&hhHas(x)[ci]<capOf(x)[ci]);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
+  /* AG-ALL B: the sale dice go while staff are agents (fillStaff = the buyer's "Nội vụ phủ: thêm cung nữ") */if(srkTier(srk(s),s.role)>=2&&!(typeof asSelfOn==="function"&&asSelfOn(p))&&roll(1.5)){const ci=s.role==="maid"?0:1;const big=consorts().find(x=>x!==p&&!x.coop/* review/srv-rank rv#1 */&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60&&hhHas(x)[ci]<capOf(x)[ci]);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
  return ev}
 /* AG-ALL-2e2: m = the master (default her); an NPC master runs the same (cx3:staffUp) */
 function recommend(id,m){m=m||S;const H=BAL.house;const s=servById(id);if(!s||ownerOf(s)!==m||(m.bac||0)<H.upBac)return"";if(m===S)apply({bac:-H.upBac,danh:-H.upDanh});else ap(m,{bac:-H.upBac,danh:-H.upDanh});servMerit(s,BAL.ag.par3.house.merit);
@@ -7869,8 +7869,8 @@ function srvTalk(p){const m=srvM();const A=[];if(!m)return A;
   T("Xin chủ tiến cử lên Nội vụ phủ",od(SRVA.askRec.o(S,m)),{},SRVA.askRec.l,`công lao +${SRVA.askRec.mpOk}`,ok=>{if(ok)srvMerit(SRVA.askRec.mpOk)},{lock:S.tin<SRVA.askRec.tin||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":`Cần Chủ tin ${SRVA.askRec.tin}`})
   /* AG-ALL-2 G6: what a servant of hers may do (jpromsv spAsk, the same three answers an NPC master picks from / the player consort's card) */
   {const og=typeof spOutgrown==="function"&&spOutgrown(m,S);const v=og?spUpTo(m,S):typeof spGoTo==="function"?spGoTo(m,{role:"maid",rk:S.srv.rk}):null;const cd=(S.srv.lvCd||0)>S.turn;
-   T("Xin chủ cho đi hầu cung khác",SRVA.leave.o(S,m),{},{},`${m.name} chọn: tăng tiền thưởng giữ ngươi lại, giáng một bậc, hoặc cho đi${v?` (bên ${v.name} còn chỗ)`:" (Nội vụ phủ chia về cung khác)"}`,()=>spAsk(m,S),
-    {lock:(S.tin>=BAL.sp.leaveLoyal&&!og)||cd,t:cd?"Vừa xin xong, chủ chưa nguôi":`Chủ tin dưới ${BAL.sp.leaveLoyal} mới dám xin, hoặc đủ công lao ở bậc cao nhất cung này cho phép`})}}
+   T("Xin chủ cho đi hầu cung khác",SRVA.leave.o(S,m),{},{},`${m.name} chọn: tăng tiền thưởng giữ ngươi lại, giáng một bậc, hoặc cho đi${v?og?` (sang hầu ${v.name}, cung cao hơn cho ngươi lên bậc)`:` (bên ${v.name} còn chỗ)`:" (Nội vụ phủ chia về cung khác)"}`,()=>spAsk(m,S),
+    {lock:(S.tin>=BAL.sp.leaveLoyal&&!og)||cd,t:cd?"Vừa xin xong, chủ chưa nguôi":S.srv.rk>=srvMax()&&(S.srv.mp||0)>=srvMpNeed(S.srv.rk)?"Chưa có cung nào cao hơn nhận người bậc ngươi":`Chủ tin dưới ${BAL.sp.leaveLoyal} mới dám xin, hoặc đủ công lao ở bậc cao nhất cung này cho phép`})}}
  if(p.sk==="emp"){T("Quỳ dâng trà",od(amTeaO(S)),{},{tin:-BAL.ag.maid.tea.fail},`Hoàng thượng để ý +${amTeaG(S)} · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`,ok=>{if(ok)srvNotice("meet",BAL.ag.maid.tea.g);return ok?"Ngài nhận chén trà, liếc nhìn ngươi.":"Tay run, trà sóng ra khay."});
   T("Cúi đầu lui tránh",100,{duc:1},{},"giữ phận",null)}
  if(p.sk==="rv"||p.sk==="hh"){const v=p.ref&&RV(p.ref.id);if(v&&v!==m){{const gN=typeof trSrvGreet==="function"?trSrvGreet(v):2;T("Hành lễ thỉnh an",100,SRVA.greet.w,{},gN?`${v.name} quý ngươi +${gN}`:`${v.name} không để tâm`,()=>{if(gN)affAdd(v,S,gN)})}
@@ -7998,7 +7998,7 @@ function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]
  return ev}
 function srvMisCheck(){if(!isSrv())return;const m=srvM();if(m&&m.alive&&!m.out)return;
  srvReassign(`${!m?"Chủ nhân không còn":!m.alive?m.name+" đã qua đời":m.name+" bị đày vào lãnh cung"}; cung nhân bị Nội vụ phủ chia đi nơi khác.`)}
-function srvReassign(why,to){const old=S.srv.mid;const L=liveRivals(true).filter(v=>v.id!==old);const n=to||npwPick(L,v=>Math.max(BAL.ag.why.srv.reMin,BAL.ag.why.srv.reNeed-(v.staff||[]).length)+rkOf(v)*BAL.ag.why.srv.reRk);if(!n)return;/* npc-purpose G2a: Nội vụ phủ sends her where hands are short */
+function srvReassign(why,to){const old=S.srv.mid;const L=liveRivals(true).filter(v=>v.id!==old&&!v.coop/* review/srv-rank rv#1: never the co-op friend's proxy */);const n=to||npwPick(L,v=>Math.max(BAL.ag.why.srv.reMin,BAL.ag.why.srv.reNeed-(v.staff||[]).length)+rkOf(v)*BAL.ag.why.srv.reRk);if(!n)return;/* npc-purpose G2a: Nội vụ phủ sends her where hands are short */
  S.srv.mid=n.id;S.tin=to?50:40;S.srv.msch=n.schemes||0;S.srv.betray=null;S.srv.sent=null;if(S.srv.spyFor===n.id)S.srv.spyFor=null;S.srv.lau=0;
  S.srv.rk=Math.max(1,Math.min(S.srv.rk||1,srkMax(n,{role:"maid"})));if(!n.staff)n.staff=[];if(!n.staff.length)try{fillStaff(n,true)}catch(e){}
  for(const s of n.staff)if(S.srv.af[s.sid]==null)S.srv.af[s.sid]=R(21)-5;
@@ -78593,7 +78593,7 @@ function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+
    tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`thiện cảm -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
-function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
+function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&!v.coop/* review/srv-rank rv#1: never the co-op friend's proxy */&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
  return L.length?L.sort((a,b)=>rkOf(b)-rkOf(a))[0]:null}
 function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.proud=0;if(v){v.staff=v.staff||[];s.rk=Math.min(srk(s),srkMax(v,s));v.staff.push(s)}}
 /* AG-ALL-2 G6 / G10 (ONE CORE): a servant asks her master o to let her go — the three answers, built once: the player consort's card (spLeaveCard),
@@ -78608,7 +78608,7 @@ function spOutgrown(o,s){try{const B=BAL.srvCap;if(!B||!B.open||!o||!s)return fa
    household table (hhHas), an NPC servant needs a free seat there or the Nội vụ phủ swap — that house's lowest servant of her kind, below her
    rung, takes the seat she leaves (the household table BAL.promo.cap holds on both sides) */
 function spSwapOf(v,x){return ((v&&v.staff)||[]).filter(y=>y&&y.role===x.role&&!y.coop&&srk(y)<srk(x)).sort((a,b)=>srk(a)-srk(b))[0]||null}
-function spUpTo(o,s){const x=spLvS(s),i=x.role==="maid"?0:1;return liveRivals(true).filter(v=>v!==o&&!v.out&&rkOf(v)>rkOf(o)&&srkMax(v,x)>srk(x)&&(s===S||hhHas(v)[i]<capOf(v)[i]||!!spSwapOf(v,x))).sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
+function spUpTo(o,s){const x=spLvS(s),i=x.role==="maid"?0:1;return liveRivals(true).filter(v=>v!==o&&!v.coop&&!v.out&&rkOf(v)>rkOf(o)&&srkMax(v,x)>srk(x)&&(s===S||hhHas(v)[i]<capOf(v)[i]||!!spSwapOf(v,x))).sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
 function spLvTrust(s){return s===S?(S.tin||0):(s.loyal||0)}
 function spLvLoy(s,n){if(s===S)apply({tin:n});else s.loyal=cl(s.loyal+n,0,100)}
 function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spOutgrown(o,s)?spUpTo(o,s):spGoTo(o,x);/* review/srv-rank: an outgrown servant goes up */const me=o===S,rk=srk(x);const keep=Math.max(B.keepMin,Math.round(dbCost({role:x.role,rk:rk-1})*B.keepMul));
@@ -78623,7 +78623,7 @@ function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spOutgrown(o,s)?spUpTo(o,s
 /* s asks o: o = the player → her card; an NPC master → her own choice (loop on), else the old move (a higher palace with room, else nothing) */
 function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.leave.cd;else s.lvCd=S.turn+BAL.ag.stf2.leave.cd;
  if(o===S){if(!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))spLeaveCard(s);return""}
- if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const v=spGoTo(o,s);if(v)spMove(o,s,v);return""}
+ if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const og=spOutgrown(o,s),v=og?spUpTo(o,s):spGoTo(o,s);if(v){const i=s.role==="maid"?0:1,sw=og&&hhHas(v)[i]>=capOf(v)[i]?spSwapOf(v,s):null;spMove(o,s,v);if(sw)spMove(v,sw,o)}return""}/* review/srv-rank rv#4: the loop-off path follows the same one rule */
  const W=Object.assign({},BAL.ag.stf2.lvW),O=spLeaveOpts(o,s).filter(x=>!x.lock);
  if(spOutgrown(o,s)&&spLvTrust(s)>=BAL.sp.leaveLoyal){W.let=(W.let||0)*BAL.srvCap.letW;W.demote=(W.demote||0)*BAL.srvCap.demW}/* review/srv-rank: a trusted servant who outgrew the house is let go more often, punished less */const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
  const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}
@@ -89479,7 +89479,7 @@ npwReg("srvCard",{grp:"G2a",cdOf:p=>{const B=npwB().srvWk;return p===srvM()?B.cd
   if(p===m){const mo=srvCardW(m,"mood"),or=srvCardW(m,"order");return mo>=or?{s:mo,t:S,r:(S.tin||0)>=B.mid?"vui lòng với ngươi":"chán ghét ngươi"}:{s:or,r:"lòng dạ hiểm, muốn hại người"}}
   if(rivals.includes(p))return {s:hostility(p,m)*B.bribe,t:m,r:"oán "+npwNm(m)+", muốn mua tai mắt trong cung nàng"};
   const a=S.srv.af[p.sid]||0;return a<0?{s:-a*B.frame,t:S,r:"ghét ngươi"}:{s:a*B.tip,t:S,r:"thân với ngươi"}}});
-npwReg("srvBuy",{grp:"G2a",who:c=>{const m=c.m;if(!m)return[];const B=BAL.ag.why.srv.buy;try{return liveRivals(true).filter(x=>x!==m&&rkOf(x)>rkOf(m)+B.gap&&(x.bac||0)>=B.bac)}catch(e){return[]}},
+npwReg("srvBuy",{grp:"G2a",who:c=>{const m=c.m;if(!m)return[];const B=BAL.ag.why.srv.buy;try{return liveRivals(true).filter(x=>x!==m&&!x.coop/* review/srv-rank rv#1 */&&rkOf(x)>rkOf(m)+B.gap&&(x.bac||0)>=B.bac)}catch(e){return[]}},
  why:(x,c)=>{const B=npwB().srv.buy;const sk=(S.srv.rk||0)*B.rk+(S.tai||0)*B.tai,h=Math.max(0,hostility(x,c.m))*B.host;
   return {s:sk+h,t:c.m,r:h>sk?"oán "+npwNm(c.m)+", muốn lấy người hầu của nàng":"muốn có người hầu giỏi"}}});
 npwReg("srvWatch",{grp:"G2a",who:c=>c.m?[c.m]:[],why:m=>{const B=npwB().srv.watch;return {s:(100-(S.tin||0))*B.tin+(hasT(m,"Kín đáo")?B.close:0),t:S,r:"không tin ngươi, sai người để mắt"}}});
@@ -100512,7 +100512,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="22e39440bf45";window.CTM_BUILD=BUILD;
+const BUILD="d43e896b7ae8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

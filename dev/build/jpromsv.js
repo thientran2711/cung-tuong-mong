@@ -42,7 +42,7 @@ function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+
    tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`thiện cảm -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
-function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
+function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&!v.coop/* review/srv-rank rv#1: never the co-op friend's proxy */&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
  return L.length?L.sort((a,b)=>rkOf(b)-rkOf(a))[0]:null}
 function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.proud=0;if(v){v.staff=v.staff||[];s.rk=Math.min(srk(s),srkMax(v,s));v.staff.push(s)}}
 /* AG-ALL-2 G6 / G10 (ONE CORE): a servant asks her master o to let her go — the three answers, built once: the player consort's card (spLeaveCard),
@@ -57,7 +57,7 @@ function spOutgrown(o,s){try{const B=BAL.srvCap;if(!B||!B.open||!o||!s)return fa
    household table (hhHas), an NPC servant needs a free seat there or the Nội vụ phủ swap — that house's lowest servant of her kind, below her
    rung, takes the seat she leaves (the household table BAL.promo.cap holds on both sides) */
 function spSwapOf(v,x){return ((v&&v.staff)||[]).filter(y=>y&&y.role===x.role&&!y.coop&&srk(y)<srk(x)).sort((a,b)=>srk(a)-srk(b))[0]||null}
-function spUpTo(o,s){const x=spLvS(s),i=x.role==="maid"?0:1;return liveRivals(true).filter(v=>v!==o&&!v.out&&rkOf(v)>rkOf(o)&&srkMax(v,x)>srk(x)&&(s===S||hhHas(v)[i]<capOf(v)[i]||!!spSwapOf(v,x))).sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
+function spUpTo(o,s){const x=spLvS(s),i=x.role==="maid"?0:1;return liveRivals(true).filter(v=>v!==o&&!v.coop&&!v.out&&rkOf(v)>rkOf(o)&&srkMax(v,x)>srk(x)&&(s===S||hhHas(v)[i]<capOf(v)[i]||!!spSwapOf(v,x))).sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
 function spLvTrust(s){return s===S?(S.tin||0):(s.loyal||0)}
 function spLvLoy(s,n){if(s===S)apply({tin:n});else s.loyal=cl(s.loyal+n,0,100)}
 function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spOutgrown(o,s)?spUpTo(o,s):spGoTo(o,x);/* review/srv-rank: an outgrown servant goes up */const me=o===S,rk=srk(x);const keep=Math.max(B.keepMin,Math.round(dbCost({role:x.role,rk:rk-1})*B.keepMul));
@@ -72,7 +72,7 @@ function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spOutgrown(o,s)?spUpTo(o,s
 /* s asks o: o = the player → her card; an NPC master → her own choice (loop on), else the old move (a higher palace with room, else nothing) */
 function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.leave.cd;else s.lvCd=S.turn+BAL.ag.stf2.leave.cd;
  if(o===S){if(!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))spLeaveCard(s);return""}
- if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const v=spGoTo(o,s);if(v)spMove(o,s,v);return""}
+ if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const og=spOutgrown(o,s),v=og?spUpTo(o,s):spGoTo(o,s);if(v){const i=s.role==="maid"?0:1,sw=og&&hhHas(v)[i]>=capOf(v)[i]?spSwapOf(v,s):null;spMove(o,s,v);if(sw)spMove(v,sw,o)}return""}/* review/srv-rank rv#4: the loop-off path follows the same one rule */
  const W=Object.assign({},BAL.ag.stf2.lvW),O=spLeaveOpts(o,s).filter(x=>!x.lock);
  if(spOutgrown(o,s)&&spLvTrust(s)>=BAL.sp.leaveLoyal){W.let=(W.let||0)*BAL.srvCap.letW;W.demote=(W.demote||0)*BAL.srvCap.demW}/* review/srv-rank: a trusted servant who outgrew the house is let go more often, punished less */const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
  const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}

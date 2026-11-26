@@ -43,6 +43,12 @@ const [,,URL,LBL,OLD]=process.argv;/* OLD = optional LIVE URL: a maid life saved
    try{const O=asOpts(s);out.npcLeave=O.some(z=>z.sk==="leave");out.npcIds=O.map(z=>z.sk).slice(0,20)}catch(e){out.npcErr=e.message.slice(0,120)}
    s.loyal=85;s.mp=0;try{out.npcLeaveShort=asOpts(s).some(z=>z.sk==="leave")}catch(e){}}
   else out.npcNone=1;
+  /* CO-OP (BIG rv #1): the friend's proxy (coop:true, staff []) is never a destination — spUpTo / spGoTo / srvReassign / buy-out */
+  {const lo2=liveRivals(true).find(v=>rkOf(v)<4&&!v.queen&&!v.coop);if(lo2&&lo2!==srvM())srvReassign("probe",lo2);Q.length=0;const m=srvM();S.srv.rk=srvMax();S.srv.mp=srvMpNeed(S.srv.rk);S.tin=80;S.srv.lvCd=0;const tops=liveRivals(true).filter(v=>v!==m&&rkOf(v)>rkOf(m));const keep=tops.map(v=>[v,v.coop]);
+   const top=tops.sort((a,b)=>rkOf(b)-rkOf(a))[0];if(top){top.coop=true;const r={up:spUpTo(m,S)===top,go:spGoTo(m,{role:"maid",rk:S.srv.rk})===top};
+    let hit=0;const mid0=S.srv.mid;for(let i=0;i<40;i++){S.srv.mid=mid0;srvReassign("coop probe");if(srvM()===top)hit++}S.srv.mid=mid0;r.re=hit;
+    let bh=0;try{const B=BAL.ag.why.srv.buy;bh=npwB?0:0;bh=(NPW.reg.srvBuy.who({m})||[]).includes(top)?1:0}catch(e){r.bErr=e.message.slice(0,80)}r.buy=bh;
+    tops.forEach(v=>v.coop=true);r.allCoop=spOutgrown(m,S);keep.forEach(([v,c])=>v.coop=c);out.coop=r}else out.coop={none:1}}
   /* save / load round trip */
   try{const j=JSON.stringify(ser());deser(JSON.parse(j));out.load=isSrv();try{srvMonth()}catch(e){out.loadErr=e.message.slice(0,120)}}catch(e){out.loadErr=e.message.slice(0,120)}
   return out});
@@ -57,6 +63,7 @@ const [,,URL,LBL,OLD]=process.argv;/* OLD = optional LIVE URL: a maid life saved
  ok(r.v&&r.rose,'after the move she rises within 12 months (exam at its BAL odds, sat each window)',{rose:r.rose,rk:r.rkAfter,mrk:r.mrkAfter});
  ok(r.npcNone||r.npcLeave,'NPC parity: an NPC maid at her cap, full Công lao, loyalty 85 may ask to leave (asOpts «leave»)',{out:r.npcOut,leave:r.npcLeave,ids:r.npcIds,err:r.npcErr,none:r.npcNone});
  ok(r.npcNone||!r.npcLeaveShort,'NPC parity: same NPC maid without full Công lao: no ask',r.npcLeaveShort);
+ ok(r.coop&&(r.coop.none||(!r.coop.up&&!r.coop.go&&!r.coop.re&&!r.coop.buy&&!r.coop.allCoop)),'CO-OP: the friend\'s proxy is never a destination (spUpTo, spGoTo, srvReassign ×40, buy-out list; only proxies above → no ask)',r.coop);
  ok(r.load&&!r.loadErr,'save / load round trip + one month',{load:r.load,err:r.loadErr});
  if(OLD){const c2=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});await c2.addInitScript(()=>{window.__nlInner=1;window.__bot=1});const q=await c2.newPage();
   await q.goto(OLD,{waitUntil:'domcontentloaded',timeout:0});await q.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await q.waitForTimeout(1000);
