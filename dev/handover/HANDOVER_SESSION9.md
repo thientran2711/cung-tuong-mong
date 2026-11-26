@@ -467,3 +467,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:53Z OWNER (166 chat) Game of Dice card-UI study order → GOD-RESEARCH session_01Rc5AsMsPWc1spTKeNmYP4d (sonnet, law 8) → spec → KK51 builds → KIT-STAGE-R7 family. Flip-drop question with sếp (166 asked; rec = drop flip).
 - 23:58Z OWNER: «Ok bỏ lật, làm theo Game of Dice» → OD overwrite of 22:07Z flip rule → MAIN 167.
 - 23:56Z OWNER «Ok bỏ lật, làm theo Game of Dice» (166 OD row) → NO FLIP anywhere; GOD-RESEARCH, KK51, KIT-STAGE-R7, RING-BUILD-7 told. dev/rules has no flip line (22:07Z row lives only in OD).
+- 23:57Z GOD-RESEARCH SPEC READY god-research.md f64348ba (no web reachable → pattern from her 3 shots; timings proposed) → archived; KK51 builds after JOB 1; KIT-STAGE-R7 applies. OWED TO SẾP + : Bàn bài Game-of-Dice-style VIDEO Fold+iPad (sếp «Khi nào xong gửi video Bàn bài cho tôi coi»).
