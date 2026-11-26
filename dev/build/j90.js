@@ -122,7 +122,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 
 /* ---------- kit CSS (tokens of j79; art img/kit/podium-bg, podium-step, medal-1..3) ---------- */
 (function(){const st=document.createElement("style");st.id="kit90";st.textContent=`
-#kpodov{position:fixed;inset:0;z-index:9000;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
+#kpodov{position:fixed;inset:0;z-index:9000;display:flex;align-items:stretch;justify-content:center;background:var(--kveil,#2a1a12b8)}
 .kpod{position:relative;width:100%;max-width:1100px;height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;
  box-shadow:0 0 0 1px #c9a46a,0 14px 40px #2a1a1270;
  padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;cursor:pointer}

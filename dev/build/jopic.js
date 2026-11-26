@@ -213,7 +213,7 @@ window.kitPicZoom=kitPicZoom;
 /* KK29 (MAIN 136 25/11, robot M3, KIT BUG #6): a tap ANYWHERE on an option card chooses it, its picture included (iPad 1180x820: the picture tap opened this lightbox and the option was never chosen). The picture is no zoom trigger any more; kitPicZoom(src) stays for a SEPARATE control (nothing in the option card calls it). */
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
 button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-weight:400;white-space:nowrap}
-#kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
+#kpzoom{position:fixed;inset:0;z-index:100000;background:var(--kveil,#1a0f08cc);display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}

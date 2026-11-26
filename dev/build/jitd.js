@@ -137,7 +137,7 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 .kidet .kidacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:6px;margin:2px 0 0}
 .kidet .kidacts>button{height:auto!important;min-height:44px;align-self:start}
 .kidet.kidet-strip{padding:8px 10px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:var(--k-card,#fffaf0)}
-.kidfl{position:fixed;inset:0;z-index:9470;display:grid;place-items:center;padding:16px;background:#2a1a1255}
+.kidfl{position:fixed;inset:0;z-index:9470;display:grid;place-items:center;padding:16px;background:var(--kveil,#2a1a1255)}
 #kidfl>.dlg.kpanel{width:var(--kpw,min(560px,calc(100vw - 28px)));max-height:var(--kph,calc(100dvh - 32px));display:flex;flex-direction:column;overflow:hidden}
 #kidfl>.dlg.kpanel>.kidb{overflow:auto;overscroll-behavior:contain;padding:10px 14px 12px}
 .kidc .kidhd,.kshdc .kidet .kidhd{padding-right:40px}
