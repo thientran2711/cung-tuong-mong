@@ -48,12 +48,12 @@ window.kitNoUnkDom=function(root,qq){try{if(!root||(root.textContent.indexOf("??
 /* DISPLAY-TIME pass (owner 24/11 ~22:14Z, old saves): stored text printed verbatim (Tuần lục book pages, Sổ ghi, logs) loses «một vị … chưa quen biết» / «???» right after each render — SYNCHRONOUS hooks on render() and on the book build (j87), no observer / timer / rAF (a global observer perturbed the co-op one-world gate when merged with day-queue, LC12 24/11) */
 try{const r0=render;render=window.render=function(){const r=r0.apply(this,arguments);try{kitNoUnkDom(document.getElementById("panel")||document.body)}catch(e){}return r}}catch(e){}
 
-function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitNoUnk(spec.line);if(spec.text)spec.text=kitNoUnk(spec.text);if(Array.isArray(spec.items))spec.items=spec.items.map(kitNoUnk);
+function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(typeof window.placeNoteOk==="function"&&!window.placeNoteOk(spec))return null;/* the place gate (jroad8, review/ob-ngoaicung): at home no palace news by itself */if(spec.line)spec.line=kitNoUnk(spec.line);if(spec.text)spec.text=kitNoUnk(spec.text);if(Array.isArray(spec.items))spec.items=spec.items.map(kitNoUnk);
  let line=plain(spec.line||spec.text||"");if(!line)return null;try{if(typeof kShort==="function")line=kShort(line)}catch(e){}
  const id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
- Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
+ Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",own:!!(spec.own||it.own),sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
  if(again)it.seen=false;
  while(NT.list.length>cap()){const i=NT.list.map(x=>!!x.sticky).lastIndexOf(false);NT.list.splice(i>=0?i:NT.list.length-1,1)}
  boxPaint();if(again)chipShow(it);return it}catch(e){console.error("kitNotice",e);return null}}

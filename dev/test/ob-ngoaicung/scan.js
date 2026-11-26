@@ -30,23 +30,24 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    for(const k of ['cn','ct']){window.__kgfOpen=k;try{k3Stage()}catch(e){}await w(300);const f=document.querySelector('#kshR .kgfopen');put('list-'+k,f?f.innerText:'');
     put('tips-'+k,f?[...f.querySelectorAll('[title]')].map(x=>x.title).join(' | '):'')}
    window.__kgfOpen=null;try{k3Stage()}catch(e){}
-   put('maidTitle',typeof kitMaidTitle==='function'&&S.maid?kitMaidTitle():'');put('maidFigTag',S.maid&&typeof pMaid==='function'?pMaid().rw:'');
+   put('tabs',[...document.querySelectorAll('#tabs button[data-tab]')].filter(x=>x.offsetParent).map(x=>x.textContent.trim()).join(' | '));put('maidTitle',typeof kitMaidTitle==='function'&&S.maid?kitMaidTitle():'');put('maidFigTag',S.maid&&typeof pMaid==='function'?pMaid().rw:'');
    put('stageTags',[...document.querySelectorAll('.figtag,.kfigt,.ftag,[class*=figname]')].filter(x=>x.offsetParent).map(x=>x.innerText).join(' | '));
    for(const t of ['act','go','rv','staff','rel','kid','inv','art','story']){tab=t;render();await w(500);const P=document.getElementById('panel');put('tab-'+t,P?P.innerText:'')}
    tab='act';render();return o});
   /* --play=N: N random steps at home (cards, options, moves, next buổi; as dev/test/outside/route.js) collecting every dialog (title, speaker tag, text)
      and every new journal line shown while she is still at home: the EVENT / NEWS / DIALOGUE-TAG family */
   const NP=+(opt('play')||0);if(NP){R.ev=await p.evaluate(async n=>{const out=[];const seen=new Set();const L0=S.logSeq||0;const w=ms=>new Promise(r=>setTimeout(r,ms));
-   for(let i=0;i<n&&isKc()&&!S.dead;i++){try{if(Q.length)showModal();/* a dialog held for later (jdayq pacing) is what she sees later: sift it as the game will (placeSift), then read it */if(typeof placeSift==='function')placeSift();if(Q.length){const m=Q[0];const who=m.who&&(m.who.rw||m.who.n)||'';const tx=String(m.h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,400);
+   for(let i=0;i<n&&isKc()&&!S.dead;i++){await w(5)/* every step its own task, as a real tap */;try{if(Q.length)showModal();/* a dialog held for later (jdayq pacing) is what she sees later: sift it as the game will (placeSift), then read it */if(typeof placeSift==='function')placeSift();if(Q.length){const m=Q[0];const who=m.who&&(m.who.rw||m.who.n)||'';const tx=String(m.h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,400);
       const k=m.t+'|'+who;if(!seen.has(k)){seen.add(k);out.push({t:m.t,who,tx,opts:(m.opts||[]).map(o=>String(o.n||'').replace(/<[^>]+>/g,'')).join(' / ')})}
       if(m.opts&&m.opts.length){const L=m.opts.map((o,j)=>j).filter(j=>!m.opts[j].dis&&!m.opts[j].off);chooseM(L.length?L[Math.floor(Math.random()*L.length)]:0)}else closeModal();await w(30);continue}
      const G=new Set(Object.values(typeof KCG==='object'?KCG:{}));const D=deck.map((a,j)=>[a,j]).filter(([a])=>(!G.size||G.has(a.g))&&!a.done&&!a.lock&&can(cardCost(a))&&canPay(a));if(D.length&&Math.random()<.7){act(D[Math.floor(Math.random()*D.length)][1]);continue}
      if(Math.random()<.2){const ks=Object.keys(KCPL).filter(k=>!kcGoWhy(k));if(ks.length){kcGo(ks[Math.floor(Math.random()*ks.length)]);render();continue}}
      nextBuoi()}catch(e){out.push({t:'ERR',tx:e.message})}}
-   const lg=(S.logs||[]).slice(0,Math.min(150,Math.max(0,(S.logSeq||0)-L0))).map(x=>String(x).replace(/<[^>]+>/g,''));return{d:out,log:lg,stillKc:isKc(),turn:S.turn}},NP);
-   R.surf['ev-dialogs']=R.ev.d.map(x=>`«${x.t}» [${x.who}] ${x.tx} {${x.opts}}`).join(' ‖ ');R.surf['ev-log']=R.ev.log.join(' ‖ ')}
+   const nt=(typeof kitNoticeList==='function'?kitNoticeList():[]).map(x=>String((x.line||'')+' | '+(x.text||'')).replace(/<[^>]+>/g,''));
+   const lg=(S.logs||[]).slice(0,Math.min(150,Math.max(0,(S.logSeq||0)-L0))).map(x=>String(x).replace(/<[^>]+>/g,''));return{d:out,log:lg,nt,stillKc:isKc(),turn:S.turn}},NP);
+   R.surf['ev-dialogs']=R.ev.d.map(x=>`«${x.t}» [${x.who}] ${x.tx} {${x.opts}}`).join(' ‖ ');R.surf['ev-log']=R.ev.log.join(' ‖ ');R.surf['ev-notice']=R.ev.nt.join(' ‖ ')}
   R.rolled=rolled;R.errs=errs.slice(0,5);R.hits={};
-  const strict=['headcount','list-cn','list-ct','tips-cn','tips-ct','maidTitle','maidFigTag','stageTags'];
+  const strict=['tabs','headcount','list-cn','list-ct','tips-cn','tips-ct','maidTitle','maidFigTag','stageTags'];
   for(const [k,v] of Object.entries(R.surf)){const H2=[];let m;PALACE.lastIndex=0;while((m=PALACE.exec(v)))H2.push(v.slice(Math.max(0,m.index-60),m.index+m[0].length+40));if(H2.length){R.hits[k]=H2.slice(0,k.startsWith('ev')?60:12);if(strict.includes(k)){bad++;R.fail=(R.fail||[]).concat(k)}}}
   if(SH){fs.mkdirSync(SH,{recursive:true});await p.evaluate(()=>{window.__kgfOpen='cn';try{k3Stage()}catch(e){}});await sleep(400);await p.screenshot({path:`${SH}/${ORG}-${wh}.jpg`,type:'jpeg',quality:70})}
   rep[ORG]=R;console.log(ORG,R.isKc,R.kd,'strict-fails:',(R.fail||[]).join(',')||'none');await c.close()}

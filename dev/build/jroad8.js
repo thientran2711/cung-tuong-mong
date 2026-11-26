@@ -26,10 +26,10 @@ const ROAD8={
    "k61:ask":{}},
    /* the card's side note on her road (the consort's «phải sai người» / «làm tại chỗ» lines speak of a consort's means) */
    note:{rival:"Gặp mặt: hành lễ thỉnh an; biết chuyện của chủ thì có thể mật báo."}}},
- /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → Hậu cung › first sub-tab, Gia tộc → Hậu cung › second,
-    Giao du → Giao tình, Hoàng tự = empty card; Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
- kc:{court:{k:"kid",l:()=>KCTABS.kid},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
-  kid:{empty:["Hoàng tự","Ngươi chưa vào cung, chưa có con."]},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
+ /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → the Hoàng tự button, Gia tộc → Hậu cung › second,
+    Giao du → Giao tình, Hoàng tự → her letters (Thư từ, the bar shows the KCTABS names: road8TabNames); Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
+ kc:{court:{hide:1},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
+  kid:{k:"kid"},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
   q72:{hide:1},nho:{hide:1},quest:{hide:1},req:{hide:1},log:{hide:1}}};
 /* ROAD8_LAB = the ONE label table of the stage right column groups (owner 21/11 ~03:25Z mark #36: "bất kỳ một cái gì thông tin nào ở bên phi tần có thì bên
    cung nữ đều có, nhưng mà mình có thể linh động đổi tên lại … cung nhân ở bên phi tần thì mình có thể đổi lại là đồng liêu ở bên cung nữ … chủ tử").
@@ -78,6 +78,23 @@ const PLACE_LOG_DROP={kc:[/sang cung ngươi/,/ghé chơi cung ngươi/,/tròn n
 /* a line written while the palace world runs its own buổi for the home road (jkc kcW: rivals' turns, the night, the palace news) is palace business */
 function placeLogOk(h){try{const L=PLACE_LOG_DROP[road8()];if(!L)return true;if(window.__kcWorld>0)return false;const t=String(h||"").replace(/<[^>]+>/g,"");return !L.some(re=>re.test(t))}catch(e){return true}}
 window.placeLogOk=placeLogOk;
+/* TIN BÁO at home (owner OD 25/11 ~23:10Z: "tin tức nó chỉ tới khi mà tôi mua tin hay là cho người dò la thôi"): ONE gate on the notice feed
+   (kitNotice: Tin báo, ! chip, know / tin / flip / here lines). While she is at home a notice reaches her only from her OWN act (a home card or her
+   answer in a dialog: mua tin, nhờ người dò la, viết thư vào cung … — window.__kcActing, kept a moment for the batched «biết thêm» flush);
+   by itself no palace happening, palace acquaintance, «xưng danh», lật thẻ, or the empty «… vẫn ở Khuê phòng. Không gặp ai.» filler. */
+const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài/;
+function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;if(window.__kcActing>0||sp.own){sp.own=1;return true}const k=String(sp.kind||"");
+ if(k==="tin"||k==="flip"||k==="know")return false;const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
+ if(k==="close"&&/Không gặp ai/.test(t))return false;return !PLACE_NOTE_RE.test(t)}catch(e){return true}}
+window.placeNoteOk=placeNoteOk;
+/* notices already in the feed when she is (or stays) at home — made in the palace world's own tick, before the home road began, or by a path that
+   does not pass kitNotice — are swept by the same rule on every render (her own acts' notices carry own=1 and stay) */
+function placeNoteSweep(){try{if(road8()!=="kc"||typeof kitNoticeList!=="function"||typeof kitNoticeDrop!=="function")return;
+ for(const x of kitNoticeList())if(x&&x.id!=null&&!placeNoteOk(x))kitNoticeDrop(x.id)}catch(e){console.error("placeNoteSweep",e)}}
+window.placeNoteSweep=placeNoteSweep;
+(function(){const own=f=>function(){window.__kcActing=(window.__kcActing||0)+1;try{return f.apply(this,arguments)}finally{setTimeout(()=>{window.__kcActing--},0)/* same task + its 0-ms flushes (kitKnow) only */}};
+ if(typeof act==="function"){const a0=act;act=own(a0);window.act=act}if(typeof chooseM==="function"){const c0=chooseM;chooseM=own(c0);window.chooseM=chooseM}
+ /* kitNotice (jnotice, the kit notice feed) asks placeNoteOk itself: its own module calls it from inside, so no outside wrapper could reach them */})();
 (function(){if(typeof kcW!=="function")return;const w0=kcW;kcW=function(){window.__kcWorld=(window.__kcWorld||0)+1;try{return w0.apply(this,arguments)}finally{window.__kcWorld--}}})();
 (function(){if(typeof log!=="function")return;const l0=log;log=function(h){if(!placeLogOk(h))return;return l0.apply(this,arguments)}})();
 (function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){placeSift();return g0.apply(this,arguments)}}
@@ -96,6 +113,15 @@ function road8Name(k){try{if(!road8()||road8Hide(k))return"";const g=typeof kgOf
   if(g&&KG[g]){const L=kgKeys(g);if(L.length<2)return KG[g].l;return `${KG[g].l} › ${kgLabel(k)}`}
   const b=document.querySelector(`#tabs [data-tab="${k}"]`);return b?(b.dataset.l0||b.textContent).trim():""}catch(e){return""}}
 window.ROAD8=ROAD8;window.road8=road8;window.road8Hide=road8Hide;window.road8Label=road8Label;window.road8Name=road8Name;
+/* BOTTOM TAB NAMES at home (MAIN 148 from OB-PHU shots; owner 21/11 ~03:25Z «chỉ là những cái thay đổi của cái tên thôi»): the SAME 8 tabs, only the
+   names follow the home tab set KCTABS (jkc / jkc2 variant names): Hành sự → KCTABS.act, Hậu cung → KCTABS.rv, Giao tình → KCTABS.staff (her Giao du
+   panel), Hoàng tự → KCTABS.kid (her letters, no more «chưa có con» card). Back in the palace every button gets its own name again. */
+function road8TabNames(){try{const B=[...document.querySelectorAll("#tabs button[data-tab]")];const kc=road8()==="kc"&&typeof KCTABS==="object";
+ const M=kc?{act:KCTABS.act,rv:KCTABS.rv,rel:KCTABS.staff,kid:KCTABS.kid}:{};
+ for(const b of B){const k=b.dataset.tab;if(M[k]){if(b.dataset.r8l0==null)b.dataset.r8l0=b.innerHTML;if(b.textContent!==M[k])b.textContent=M[k];b.title=M[k]}
+  else if(b.dataset.r8l0!=null){b.innerHTML=b.dataset.r8l0;delete b.dataset.r8l0;b.removeAttribute("title")}}}catch(e){console.error("road8TabNames",e)}}
+window.road8TabNames=road8TabNames;
+(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);road8TabNames();placeNoteSweep();return x}})();
 /* a key with no bar button, or one her road leaves out, opens Hành sự (old saves / old links of the old servant and home bars) */
 (function(){const r0=render;render=function(){try{if(road8()){const b=document.querySelector(`#tabs [data-tab="${tab}"]`);if(!b||road8Hide(tab))tab="act"}}catch(e){}return r0.apply(this,arguments)}})();
 (function(){const p0=renderPanel0;renderPanel0=function(){const e=road8E(tab);const el=$("panel");if(!e||e.hide){if(el)el.__r8=null;return p0.apply(this,arguments)}

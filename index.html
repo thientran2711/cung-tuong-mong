@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4ba427bf+","t":"2026-11-26T00:07Z","c":"OB-NGOAICUNG: report (table, shots, gates, expert note)","b":"e70ca4a0bdfc","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"45daa796+","t":"2026-11-26T00:48Z","c":"OB-NGOAICUNG: report gates final","b":"94a67cf27f17","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -93693,12 +93693,12 @@ window.kitNoUnkDom=function(root,qq){try{if(!root||(root.textContent.indexOf("??
 /* DISPLAY-TIME pass (owner 24/11 ~22:14Z, old saves): stored text printed verbatim (Tuần lục book pages, Sổ ghi, logs) loses «một vị … chưa quen biết» / «???» right after each render — SYNCHRONOUS hooks on render() and on the book build (j87), no observer / timer / rAF (a global observer perturbed the co-op one-world gate when merged with day-queue, LC12 24/11) */
 try{const r0=render;render=window.render=function(){const r=r0.apply(this,arguments);try{kitNoUnkDom(document.getElementById("panel")||document.body)}catch(e){}return r}}catch(e){}
 
-function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitNoUnk(spec.line);if(spec.text)spec.text=kitNoUnk(spec.text);if(Array.isArray(spec.items))spec.items=spec.items.map(kitNoUnk);
+function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(typeof window.placeNoteOk==="function"&&!window.placeNoteOk(spec))return null;/* the place gate (jroad8, review/ob-ngoaicung): at home no palace news by itself */if(spec.line)spec.line=kitNoUnk(spec.line);if(spec.text)spec.text=kitNoUnk(spec.text);if(Array.isArray(spec.items))spec.items=spec.items.map(kitNoUnk);
  let line=plain(spec.line||spec.text||"");if(!line)return null;try{if(typeof kShort==="function")line=kShort(line)}catch(e){}
  const id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
- Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
+ Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",own:!!(spec.own||it.own),sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
  if(again)it.seen=false;
  while(NT.list.length>cap()){const i=NT.list.map(x=>!!x.sticky).lastIndexOf(false);NT.list.splice(i>=0?i:NT.list.length-1,1)}
  boxPaint();if(again)chipShow(it);return it}catch(e){console.error("kitNotice",e);return null}}
@@ -96512,10 +96512,10 @@ const ROAD8={
    "k61:ask":{}},
    /* the card's side note on her road (the consort's «phải sai người» / «làm tại chỗ» lines speak of a consort's means) */
    note:{rival:"Gặp mặt: hành lễ thỉnh an; biết chuyện của chủ thì có thể mật báo."}}},
- /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → Hậu cung › first sub-tab, Gia tộc → Hậu cung › second,
-    Giao du → Giao tình, Hoàng tự = empty card; Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
- kc:{court:{k:"kid",l:()=>KCTABS.kid},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
-  kid:{empty:["Hoàng tự","Ngươi chưa vào cung, chưa có con."]},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
+ /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → the Hoàng tự button, Gia tộc → Hậu cung › second,
+    Giao du → Giao tình, Hoàng tự → her letters (Thư từ, the bar shows the KCTABS names: road8TabNames); Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
+ kc:{court:{hide:1},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
+  kid:{k:"kid"},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
   q72:{hide:1},nho:{hide:1},quest:{hide:1},req:{hide:1},log:{hide:1}}};
 /* ROAD8_LAB = the ONE label table of the stage right column groups (owner 21/11 ~03:25Z mark #36: "bất kỳ một cái gì thông tin nào ở bên phi tần có thì bên
    cung nữ đều có, nhưng mà mình có thể linh động đổi tên lại … cung nhân ở bên phi tần thì mình có thể đổi lại là đồng liêu ở bên cung nữ … chủ tử").
@@ -96564,6 +96564,23 @@ const PLACE_LOG_DROP={kc:[/sang cung ngươi/,/ghé chơi cung ngươi/,/tròn n
 /* a line written while the palace world runs its own buổi for the home road (jkc kcW: rivals' turns, the night, the palace news) is palace business */
 function placeLogOk(h){try{const L=PLACE_LOG_DROP[road8()];if(!L)return true;if(window.__kcWorld>0)return false;const t=String(h||"").replace(/<[^>]+>/g,"");return !L.some(re=>re.test(t))}catch(e){return true}}
 window.placeLogOk=placeLogOk;
+/* TIN BÁO at home (owner OD 25/11 ~23:10Z: "tin tức nó chỉ tới khi mà tôi mua tin hay là cho người dò la thôi"): ONE gate on the notice feed
+   (kitNotice: Tin báo, ! chip, know / tin / flip / here lines). While she is at home a notice reaches her only from her OWN act (a home card or her
+   answer in a dialog: mua tin, nhờ người dò la, viết thư vào cung … — window.__kcActing, kept a moment for the batched «biết thêm» flush);
+   by itself no palace happening, palace acquaintance, «xưng danh», lật thẻ, or the empty «… vẫn ở Khuê phòng. Không gặp ai.» filler. */
+const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài/;
+function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;if(window.__kcActing>0||sp.own){sp.own=1;return true}const k=String(sp.kind||"");
+ if(k==="tin"||k==="flip"||k==="know")return false;const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
+ if(k==="close"&&/Không gặp ai/.test(t))return false;return !PLACE_NOTE_RE.test(t)}catch(e){return true}}
+window.placeNoteOk=placeNoteOk;
+/* notices already in the feed when she is (or stays) at home — made in the palace world's own tick, before the home road began, or by a path that
+   does not pass kitNotice — are swept by the same rule on every render (her own acts' notices carry own=1 and stay) */
+function placeNoteSweep(){try{if(road8()!=="kc"||typeof kitNoticeList!=="function"||typeof kitNoticeDrop!=="function")return;
+ for(const x of kitNoticeList())if(x&&x.id!=null&&!placeNoteOk(x))kitNoticeDrop(x.id)}catch(e){console.error("placeNoteSweep",e)}}
+window.placeNoteSweep=placeNoteSweep;
+(function(){const own=f=>function(){window.__kcActing=(window.__kcActing||0)+1;try{return f.apply(this,arguments)}finally{setTimeout(()=>{window.__kcActing--},0)/* same task + its 0-ms flushes (kitKnow) only */}};
+ if(typeof act==="function"){const a0=act;act=own(a0);window.act=act}if(typeof chooseM==="function"){const c0=chooseM;chooseM=own(c0);window.chooseM=chooseM}
+ /* kitNotice (jnotice, the kit notice feed) asks placeNoteOk itself: its own module calls it from inside, so no outside wrapper could reach them */})();
 (function(){if(typeof kcW!=="function")return;const w0=kcW;kcW=function(){window.__kcWorld=(window.__kcWorld||0)+1;try{return w0.apply(this,arguments)}finally{window.__kcWorld--}}})();
 (function(){if(typeof log!=="function")return;const l0=log;log=function(h){if(!placeLogOk(h))return;return l0.apply(this,arguments)}})();
 (function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){placeSift();return g0.apply(this,arguments)}}
@@ -96582,6 +96599,15 @@ function road8Name(k){try{if(!road8()||road8Hide(k))return"";const g=typeof kgOf
   if(g&&KG[g]){const L=kgKeys(g);if(L.length<2)return KG[g].l;return `${KG[g].l} › ${kgLabel(k)}`}
   const b=document.querySelector(`#tabs [data-tab="${k}"]`);return b?(b.dataset.l0||b.textContent).trim():""}catch(e){return""}}
 window.ROAD8=ROAD8;window.road8=road8;window.road8Hide=road8Hide;window.road8Label=road8Label;window.road8Name=road8Name;
+/* BOTTOM TAB NAMES at home (MAIN 148 from OB-PHU shots; owner 21/11 ~03:25Z «chỉ là những cái thay đổi của cái tên thôi»): the SAME 8 tabs, only the
+   names follow the home tab set KCTABS (jkc / jkc2 variant names): Hành sự → KCTABS.act, Hậu cung → KCTABS.rv, Giao tình → KCTABS.staff (her Giao du
+   panel), Hoàng tự → KCTABS.kid (her letters, no more «chưa có con» card). Back in the palace every button gets its own name again. */
+function road8TabNames(){try{const B=[...document.querySelectorAll("#tabs button[data-tab]")];const kc=road8()==="kc"&&typeof KCTABS==="object";
+ const M=kc?{act:KCTABS.act,rv:KCTABS.rv,rel:KCTABS.staff,kid:KCTABS.kid}:{};
+ for(const b of B){const k=b.dataset.tab;if(M[k]){if(b.dataset.r8l0==null)b.dataset.r8l0=b.innerHTML;if(b.textContent!==M[k])b.textContent=M[k];b.title=M[k]}
+  else if(b.dataset.r8l0!=null){b.innerHTML=b.dataset.r8l0;delete b.dataset.r8l0;b.removeAttribute("title")}}}catch(e){console.error("road8TabNames",e)}}
+window.road8TabNames=road8TabNames;
+(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);road8TabNames();placeNoteSweep();return x}})();
 /* a key with no bar button, or one her road leaves out, opens Hành sự (old saves / old links of the old servant and home bars) */
 (function(){const r0=render;render=function(){try{if(road8()){const b=document.querySelector(`#tabs [data-tab="${tab}"]`);if(!b||road8Hide(tab))tab="act"}}catch(e){}return r0.apply(this,arguments)}})();
 (function(){const p0=renderPanel0;renderPanel0=function(){const e=road8E(tab);const el=$("panel");if(!e||e.hide){if(el)el.__r8=null;return p0.apply(this,arguments)}
@@ -98985,7 +99011,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e70ca4a0bdfc";window.CTM_BUILD=BUILD;
+const BUILD="94a67cf27f17";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
