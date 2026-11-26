@@ -261,3 +261,4 @@ Queue for KK38 (in order):
 4. K-VEIL-POR check when Foreman C's pictures land; KK35 OPEN (NAMES scan, vnight PEND family).
 Tools (dev/handover/reports/kk37-tools/): rec.js (full video: chest → Tin báo → NHV plaques → c2a cards/talk → vlnvp → tt1; `node rec.js <index.html> <dir> WxH`), grey-scan.js, opt-centre-tap.js, redraw-probe.js, nambac.js. Worktrees: /home/user/wt/ks (kit-stage), /home/user/wt/tg (tainghe-r5), /home/user/wt/kh (handover).
 Lessons: (1) a robot «DEAD BUTTON / cover #modal» is often a game event the harness did not close — print the covering dialog before blaming the kit; (2) overlap tools must cut boxes to what the player can reach (clip + opaque cover), else scrolled-away buttons count as steals.
+
