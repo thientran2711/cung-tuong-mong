@@ -396,7 +396,7 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   Row look = kit keeper (KK42, review/kit-kem-row-r3). Test: `node dev/test/one-sieve.test.js dev/index.html 12 <seed>`.
 - SỔ GHI (ONE SIEVE): over the rows, kit parts only — `kitSubTabs("soghi")` kinds `BAL.news.logTabs` (Tất cả · Việc của ta · Chuyện hậu cung ·
   Mưu hại; an empty kind has no tab), one `kitTabRowHTML` person chip row («Mọi người» + the 12 most named, count = rows), `kitInput` search
-  (accents ignored); filtering hides rows, a date heading with no row left hides too. A card's folded-changes record (nsCard, «<title> — kèm theo:»)
+  (accents ignored); filtering hides rows, a date heading with no row left hides too. A card's folded-changes record (nsCard, «<title>:» then the «Kèm» row)
   shows the SAME `kitKemRow` one-per-line form (named once per feeling, «N vị khác»; `K.all` = no 8-line cap: the Sổ ghi keeps every name; MAIN 158).
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);

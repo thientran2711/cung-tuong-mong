@@ -168,12 +168,12 @@ NSV.recLedger=recLedger;
 /* the lines the sieve takes out of the feed (newsAdd NPC deeds, kitKnow, the morning card, gossip reports) → the record */
 function recDrop(t,ids){if(!recOn())return;const I=new Set((ids||[]).filter(x=>x!=null));try{for(const v of rivals||[])if(v&&v.name&&String(t).includes(v.name))I.add(v.id)}catch(e){}recPush({t,ids:[...I]})}
 NSV.recDrop=recDrop;
-/* a card's folded-changes record (nsCard r.K): lead «<title> — kèm theo:» + the ONE kit kitKemRow one-per-line form (named once per feeling,
+/* a card's folded-changes record (nsCard r.K): lead «<title>:» (none: «Trong cung vừa qua:») + the ONE kit kitKemRow one-per-line form (named once per feeling,
    strangers with the same feeling and number «N vị khác», names masked by the kit at show time); K.all = the Sổ ghi keeps every line (no 8 cap).
    Old records (no K) keep their text. */
 function kemRec(r){try{if(!r||!Array.isArray(r.K)||!r.K.length||typeof kitKemRow!=="function")return"";
  const K=r.K.map(o=>({v:persOf(o.id),k:o.k,d:o.d,t:o.t})).filter(x=>x.v);if(!K.length)return"";K.all=1;
- const h=kitKemRow(K);if(!h)return"";const L=r.L?maskNames(r.L,r.ids):"";return `${L?L+" — kèm theo:":"Kèm theo trong cung:"} ${h}`}catch(e){console.error("nsKemRec",e);return""}}
+ const h=kitKemRow(K);if(!h)return"";return `${r.L?maskNames(r.L,r.ids):"Trong cung vừa qua"}: ${h}`/* the kit row carries its own «Kèm» label */}catch(e){console.error("nsKemRec",e);return""}}
 /* the Sổ ghi tab: her lines (S.logs) and the harem record, newest first, merged by the log sequence at which each record was written */
 function recMerge(){const L=S.logs||[],H=recList();if(!H.length)return L;const n=S.logSeq||L.length;const out=[];let j=0;
  const row=r=>`<span class="ld">${r.dt}</span><i hidden data-osk="${r.big?"big":"hc"}"></i>${kemRec(r)||maskNames(r.t,r.ids)}`;
