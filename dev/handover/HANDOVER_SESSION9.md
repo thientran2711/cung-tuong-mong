@@ -284,3 +284,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~17:50Z OWNER: keep all empty result rows → kitRowNil (kit-empty-rows cda34e5e, kit-g4-r2 4dbce886) PULLED from LC23 queue; not in LIVE/ctp. KK44 strips §6.7.
 - ~17:50Z RV-KK41: A ec2f7c43 / B a5ff660a / C f75a3f3c / D e25dfd52 + main CLEAN of kitRowNil → land as slotted. Carry it (void): kit-g4-r2 4dbce886, kit-empty-rows cda34e5e, kit-g4-baseline 6b7df96b.
 - ~17:51Z OWNER BUG via 154: unclear where to buy / who the chapter's eunuch seller is → «GOAL-LINKS» fixer = 161 first act (goal lines as tap links + Dư đồ «Mua bán» marks + name the seller).
+- ~17:55Z OWNER BUG via 154: visitor scene choices show no result → OB-VERDICT-3 (scope extend) = 161 first act (OB-VERDICT-2 at 45 %).
