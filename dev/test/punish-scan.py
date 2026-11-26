@@ -9,6 +9,7 @@ Families
   me_free    her release roads (restore(full,why) calls): all gated inside restore (count only)
   me_note    her punishment functions without the reason notice (punNote / kitPanel rows) — fall, demote, punish, deathSentence, cold
   gloom      the j93 rank-drop scene without the reason line (S.punLast)
+  npc_zero   (reviewer r1) a punishment that sets an NPC straight to Đáp ứng (v.rank=0 outside a new-life / new-rival set-up)
 """
 import re, subprocess, sys, glob, os
 ref = sys.argv[1] if len(sys.argv) > 1 else None
@@ -23,7 +24,7 @@ def files():
     else:
         for f in sorted(glob.glob(os.path.join(root, 'j*.js'))):
             yield os.path.basename(f), open(f, encoding='utf-8').read()
-F = {k: [] for k in ['two_rank', 'skip_seat', 'npc_free', 'npc_floor', 'me_free', 'me_note', 'gloom']}
+F = {k: [] for k in ['two_rank', 'skip_seat', 'npc_free', 'npc_floor', 'me_free', 'me_note', 'gloom', 'npc_zero']}
 for name, src in files():
     if name in ('jpun.js',):
         continue
@@ -44,6 +45,8 @@ for name, src in files():
         for m in re.finditer(r'\brestore\((?:true|false|full|[^)]*,)', line):
             if 'function restore' not in line[max(0, m.start() - 9): m.end()]:
                 F['me_free'].append(f'{name}:{i}')
+        for m in re.finditer(r'\b(v|p|e|x|t)\.rank\s*=\s*0\b', line):
+            F['npc_zero'].append(f'{name}:{i}')
         if name == 'j93.js' and 'Bị giáng xuống ${kmRankName(b.rank)}' in line and 'punLast' not in line:
             F['gloom'].append(f'{name}:{i}')
     for fn in ['fall', 'demote', 'punish', 'deathSentence', 'cold']:
