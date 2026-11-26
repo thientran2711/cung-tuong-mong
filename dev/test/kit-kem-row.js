@@ -25,16 +25,24 @@ for(const [W,H] of [[755,1000],[1180,820]]){const dev=W<H?'fold':'ipad';const ct
   if(ex.g>1)chk(`${dev} ${where} strangers grouped «${ex.g} vị khác: ghen +8»`,T.includes(`${ex.g} vị khác: ghen +8`),JSON.stringify(T));
   chk(`${dev} ${where} a named person once`,new Set(T).size===T.length,JSON.stringify(T));
   for(const r of rows.filter(r=>/^(Kèm|Được|Mất)$/.test(r.l))){const tops=r.L.map(x=>x.top);chk(`${dev} ${where} ${r.l}: one line per row`,new Set(tops).size===tops.length,JSON.stringify(r.L));chk(`${dev} ${where} ${r.l}: name on its value's row`,r.L.every(x=>x.same));chk(`${dev} ${where} ${r.l}: no row starts «một vị»`,r.L.every(x=>!/^một vị/.test(x.t)),JSON.stringify(r.L.map(x=>x.t)))}};
- await p.evaluate(()=>{try{kmReset()}catch(e){}kmFree=()=>true;kitNightEnd({tier:"normal",m0:1,m1:1,before:rsnap()})});
+ await p.evaluate(()=>{document.querySelectorAll('#kload,#kboot,#kcover,#dawn').forEach(e=>e.remove())/* the boot cover «Sửa soạn nhập cung» is not part of this check */;try{kmReset()}catch(e){}kmFree=()=>true;kitNightEnd({tier:"normal",m0:1,m1:1,before:rsnap()})});
  for(let i=0;i<30;i++){if(await p.evaluate(()=>!!document.querySelector('.kne.km-done')))break;await p.waitForTimeout(400)}await p.waitForTimeout(900);
- judge('night card',await read('.kne'));if(OUT)await p.screenshot({path:`${OUT}/${dev}-kne.png`});
+ judge('night card',await read('.kne'));if(OUT){await p.waitForTimeout(3000);await p.screenshot({path:`${OUT}/${dev}-kne.png`})}
  await p.evaluate(()=>{try{kmReset()}catch(e){}resultShow('Thỉnh an Hoàng hậu',rsnap(),true)});await p.waitForTimeout(900);
  judge('result toast',await read('#rtoast'));if(OUT)await p.screenshot({path:`${OUT}/${dev}-rtoast.png`});
+ /* on screen (RV-KK41 nits): «(42)» totals in the real toast once kaNT exists (skip-marked before act-merge-J0 lands); a K.more-only Kèm still makes the card */
+ const scr=await p.evaluate(async()=>{const nat=typeof kaNT==="function";const R=liveRivals(true);const v=R.find(x=>kaNamed(x))||R[0];const o=kaResultRows;
+  const show=async K=>{kaResultRows=function(){return [[],[],K]};try{kmReset()}catch(e){}resultShow('Thử',rsnap(),true);await new Promise(r=>setTimeout(r,600));const t=document.getElementById('rtoast');return {on:!!t&&t.classList.contains('on'),kem:t?[...t.querySelectorAll('.kr-kem .kitem')].map(x=>x.textContent.trim()):[]}};
+  const a=await show([{v,k:"ghen",d:8,t:42}]);const M=[];M.more=3;const b=await show(M);kaResultRows=o;return {nat,a,b}});
+ if(scr.nat)chk(`${dev} toast shows the total «ghen +8 (42)»`,scr.a.kem.some(x=>/ghen \+8 \(42\)$/.test(x)),JSON.stringify(scr.a));else console.log(`SKIP ${dev} toast «(42)» total: kaNT not on this base (act-merge-J0 / one-sieve brings it)`);
+ chk(`${dev} K.more-only Kèm still shows the card`,scr.b.on&&scr.b.kem.length===1&&scr.b.kem[0]==='3 người khác trong cung đổi lòng chút ít',JSON.stringify(scr.b));
  /* ONE-SIEVE points (MAIN 158): totals «ghen +8 (42)» on a named / single line (kaNT, x.t), none on a group; K.more counted in the tail; only K.more → «N người khác trong cung đổi lòng chút ít» */
  const os=await p.evaluate(()=>{const R=liveRivals(true);const nm=R.filter(v=>kaNamed(v)),an=R.filter(v=>!kaNamed(v));if(typeof kaNT!=="function")window.kaNT=(n,t)=>kaN(n)+(t==null?"":` (${Math.round(t)})`);
   const T=h=>{const d=document.createElement('div');d.innerHTML=h;return [...d.querySelectorAll('.kitem')].map(x=>x.textContent.trim())};
   const K=[{v:nm[0],k:"ghen",d:8,t:42},{v:an[0],k:"oán",d:3,t:20},{v:an[1],k:"ghen",d:8,t:30},{v:an[2],k:"ghen",d:8,t:31}];K.more=5;const M=[];M.more=4;
-  return {a:T(kitKemRow(K)),b:T(kitKemRow(M)),c:kitKemRow([])}});
+  const A=R.slice(0,10).map((v,i)=>({v,k:"oán",d:i+1}));A.all=1;A.more=2;
+  return {a:T(kitKemRow(K)),b:T(kitKemRow(M)),c:kitKemRow([]),all:T(kitKemRow(A)),n:R.slice(0,10).length}});
+ chk(`${dev} K.all: every line, no 8-cap, K.more still counted`,os.all.length===os.n+1&&os.all[os.all.length-1]==='… và 2 người khác',JSON.stringify(os.all));
  chk(`${dev} ONE-SIEVE named total «ghen +8 (42)»`,os.a.some(x=>/: ghen \+8 \(42\)$/.test(x)),JSON.stringify(os.a));
  chk(`${dev} ONE-SIEVE single stranger total «oán +3 (20)»`,os.a.some(x=>/^Một vị .*: oán \+3 \(20\)$/.test(x)),JSON.stringify(os.a));
  chk(`${dev} ONE-SIEVE group «2 vị khác: ghen +8» has no total`,os.a.includes('2 vị khác: ghen +8'),JSON.stringify(os.a));
