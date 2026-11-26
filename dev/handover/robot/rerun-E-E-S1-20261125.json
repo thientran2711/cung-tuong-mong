@@ -1346,6 +1346,44 @@
     "review/rerun-E-S1-E-S1-R1-random-4-3513467308-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-cautious-5-752387021",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "cautious",
+   "botHarness": "cautious",
+   "kiep": 5,
+   "seed": 752387021,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "08a4ff8b"
+   },
+   "live": "GAME BUILD b7dcbbd06e03",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Lao phổi nguy kịch, không qua khỏi",
+   "death": true,
+   "age": 30,
+   "year": 13,
+   "rank": 0,
+   "buoi": 1763,
+   "steps": 45062,
+   "taps": 1826,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "death by illness at 30 (Hồng nhan bạc mệnh), game-imposed; debut board played (Sẵn sàng first)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-cautious-5-752387021-moments.md",
+    "review/rerun-E-S1-E-S1-R1-cautious-5-752387021-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
