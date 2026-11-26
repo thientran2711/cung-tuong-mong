@@ -21,6 +21,16 @@ const {chromium}=require('playwright');const path=require('path');
     const lo=spG(k,{},20,5,0),hi=spG(k,{},85,5,0);ok(hi<lo&&hi>=1,`${k}: +5 at 20 → ${lo}, at 85 → ${hi} (slower near 100, never 0 forever)`);
     ok(spG(k,{},60,-7,0)===-7,`${k}: a fall untouched`);ok(spTop(k,0)===100&&spTop(k,7)===100,`${k}: no rank ceiling`)}
    const v=liveRivals(false)[0];v.tai=50;v.spc={};ap(v,{tai:30});ok(v.tai<=50+BAL.stp.band.tai[2],`same rule for an NPC (Tài 50 +30 → ${v.tai})`)}
+  /* proportional adjustment at each promotion (owner 26/11 ~23:35Z) */
+  {const C=BAL.stp.scale;ok(C&&C.keys.join()==="danh,duc,sung"&&C.pal.join()==="sac,tai,tamco"&&C.tq===85,"scale: Danh·Đức·Sủng per new rank group, Sắc·Tài·Tâm cơ palace-wide (T 85)");
+   ok(typeof spScaleMonth==="undefined","no monthly rescale (dropped 23:24Z)");
+   const L=consorts().filter(p=>!p.out&&p.alive!==false);for(const v of L)v.tai=40;const w=L.find(p=>p!==S);w.tai=100;S.tai=50;
+   const r0=S.rank;S.lastPromo=-99;const t=exDirectUp(S,"thử");ok(S.rank===r0+1||r0>=6,`exDirectUp promoted her (${r0} → ${S.rank})`);
+   if(S.rank===r0+1){ok(w.tai===85&&S.tai===Math.round(50*85/100),`on promotion Tài palace-wide: leader 100 → ${w.tai}, her 50 → ${S.tai}`);ok(/xếp lại/.test(t),`line on the promotion result: «${String(t).trim().slice(0,90)}»`)}
+   for(const v of L)v.tai=40;S.tai=60;spScaleAt(S);ok(S.tai===60,"top under T → nothing");
+   {for(const v of L)v.tai=40;w.tai=100;S.spRk0=S.rank;S.rank++;render();ok(w.tai===85,`watcher: a rank-up by any road adjusts too (leader Tài 100 → ${w.tai})`)}
+const r=S.rank|0,grp=L.filter(p=>(p===S?(S.rank|0):rkOf(p))===r);for(const v of grp)v.duc=50;S.duc=100;spScaleAt(S);
+   const T=spScaleT("duc",r);ok(S.duc===Math.round(T)&&grp.every(p=>p===S||p.duc===Math.round(50*T/100)),`Đức in the new rank group: top 100 → ${S.duc} (T ${T.toFixed(1)}), others 50 → ${Math.round(50*T/100)}`)}
   /* Emperor curve */
   const D=BAL.mort.life.dice;ok(D.emp&&typeof D.emp==="object"&&D.emp.mean>D.adult.mean&&D.emp.sd>=D.adult.sd,`Emperor natural death rare + wide: ${JSON.stringify(D.emp)} (adult ${JSON.stringify(D.adult)})`);
   return R});

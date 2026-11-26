@@ -46,3 +46,27 @@ function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M
    the rule is off, so a new life starts exactly as on LIVE; every rise after that is paced */
 var SP_OFF=0;
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){SP_OFF++;try{return s0.apply(this,arguments)}finally{SP_OFF--}}})();
+/* PACE-SPEED · PROPORTIONAL ADJUSTMENT AT EACH PROMOTION (owner 26/11 ~23:35Z row via MAIN 164; the monthly version of ~23:00Z was dropped at ~23:24Z):
+   when ANYONE is promoted (decree promoteP, direct decree exDirectUp, grace exam exGraceUp; every other road through a rank watcher at each render), Danh / Đức / Sủng are checked in the
+   NEW rank group (the consorts holding that rank, the promoted one included; T = spScaleT) and Sắc / Tài / Tâm cơ over the WHOLE palace (T = BAL.stp.scale.tq):
+   if the top value is above T, EVERY value in that group × T / top (rounded; order and ratios kept, no hard ceiling); else nothing. Lãnh cung, the dead and
+   servants are left out. Co-op: NPC values change on the host only (jmort rule). Her own changes = one line on the promotion result text + her Sổ ghi. */
+function spScaleT(k,r){const B=BAL.stp,C=B.ceil;r=Math.max(0,r|0);
+ let T=C[Math.min(C.length-1,r)]*B.scale.t;const f={sung:"s",danh:"d"}[k];
+ if(f&&typeof RANKS==="object"&&r<RANKS.length-1)T=Math.max(T,RANKS[r+1][f]);if(!f&&B.floor&&B.floor[k])T=Math.max(T,B.floor[k]);return T}
+function spScaleAt(who){const B=BAL.stp&&BAL.stp.scale;if(!B||!B.on||!S||S.dead||!who)return"";
+ const host=!(window.COOPW&&COOPW.on)||COOPW.seat==="a";const L=consorts().filter(p=>p&&!p.out&&p.alive!==false);const rw=who===S?(S.rank|0):rkOf(who);
+ const grp=L.filter(p=>(p===S?(S.rank|0):rkOf(p))===rw);const mine=[],palm=[];
+ const run=(P,k,T,out)=>{if(!P.length)return;const hi=Math.max(...P.map(p=>+p[k]||0));if(!(hi>T))return;const f=T/hi;
+  for(const p of P){if(p!==S&&!host)continue;const now=+p[k]||0,nv=Math.round(now*f);if(nv===now)continue;p[k]=nv;if(typeof statSet==="function")statSet(p,k,p[k]);if(p===S)out.push([k,nv-now])}};
+ for(const k of B.keys)run(grp,k,spScaleT(k,rw),mine);
+ for(const k of (B.pal||[]))run(L,k,B.tq,palm);
+ if(!mine.length&&!palm.length)return"";const N={sung:"Sủng",danh:"Danh",duc:"Đức",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ"},W=a=>a.map(([k,n])=>`${N[k]||k} ${n>0?"+":"−"}${Math.abs(n)}`).join(", ");
+ const t=[mine.length?`Hàng ${RANKS[rw].n} xếp lại thứ bậc: ${W(mine)}.`:"",palm.length?`Cả hậu cung so tài sắc, ngươi được xếp lại: ${W(palm)}.`:""].filter(Boolean).join(" ");log(t);return " "+t}
+/* every rank-up road: run the adjustment once the rank really rose; the line joins that road's result text */
+(function(){const W=(n,who)=>{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(){const p=who(arguments)||S,r0=p===S?S.rank:rkOf(p);let r=f0.apply(this,arguments);
+  try{const r1=p===S?S.rank:rkOf(p);if(r1>r0){const t=spScaleAt(p);if(t&&typeof r==="string")r+=t}p.spRk0=r1}catch(e){console.error(e)}return r}};
+ W("promoteP",a=>a[0]);W("exDirectUp",a=>a[0]);W("exGraceUp",a=>a[0]);
+ /* every OTHER rank-up road (the grand-ending road geRank inside jge, story decrees, …): a watcher at each render compares the rank last seen (p.spRk0) */
+ const watch=()=>{try{if(!S||S.dead)return;for(const p of consorts()){if(!p||p.out||p.alive===false)continue;const r=p===S?(S.rank|0):rkOf(p);if(p.spRk0==null){p.spRk0=r;continue}if(r>p.spRk0)spScaleAt(p);p.spRk0=r}}catch(e){console.error(e)}};
+ if(typeof render==="function"){const r0=render;render=function(){watch();return r0.apply(this,arguments)}}})();

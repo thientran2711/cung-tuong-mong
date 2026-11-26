@@ -30,6 +30,10 @@ BAL.stp={on:1,
    band cap per change BAL.stp.band[k]; no rank ceiling, no hard stop below 100, never taken away; same rule for every NPC. Target: a focused year ≈ +20–25 from 50,
    80 → 90 ≈ 3 years (robot table in dev/handover/reports/pace-speed.md). */
 BAL.stp.abs={sac:{pow:2,min:.15},tai:{pow:2,min:.15},tamco:{pow:2,min:.15}};
+/* scale = the PROPORTIONAL adjustment at each PROMOTION (owner 26/11 ~23:35Z via MAIN 164; jstatpace spScaleAt): keys = per the new RANK GROUP, T = ceil[rank] × t
+   (Đức never under BAL.stp.floor.duc; Danh / Sủng never under the next rank's bar); pal = per WHOLE palace with T = tq 85 (above every absolute gate of
+   Sắc 80 / Tài 70 / Tâm cơ 60, dev/measure/scale-gates.py). */
+BAL.stp.scale={on:1,t:.85,keys:["danh","duc","sung"],pal:["sac","tai","tamco"],tq:85};
 Object.assign(BAL.stp.band,{sac:[2,5,8],tai:[2,5,8],tamco:[2,5,8]});
 BAL.stpPre={A:{ceil:[45,55,65,75,85,92,97,100],pow:3,cap:3},B:{ceil:[40,50,60,70,80,90,96,100],pow:2,cap:2}};
 BAL.stpPick="A";
