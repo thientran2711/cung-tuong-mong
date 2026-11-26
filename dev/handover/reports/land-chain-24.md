@@ -14,3 +14,4 @@ JUMP-INS on PASS: renderer-mem (D head 2b5bbbb3), ob-ngoaicung r5 8aaac5ac (afte
 
 ## LOG
 - 18:31Z start. Read START_CORE (18 laws) + START_WORKER, MAIN_STATUS, LC22 handover, LC23 log. LC23 last line ~18:55Z(stamp) gating A+B; no READY yet → not taken over. NHV check done (holds kitHand). B: no LAND READY rv12 yet.
+- 18:40Z PRE-STAGE review/lc24-m3 9bf1cc38 = lc23-os d811a46d + ob-m3ui-sololh eca83a5d. SELF-MERGE j79.js union (kitNoteBang title= + kitLineCap/KIT_PLINE; KIT_OPT_TAP in LIVE's guard + kitGlossPopHtml + tap-on-pop closes only) — asked MAIN 161 OK. Own CHANGE line. kitRowNil 0. Gates (scratch gates-m3.sh: ob-m3ui Fold+iPad + M3 old save, kit-opt-art-tap, kit-close + old save, QC --runs 5 vs LIVE) running. Dry-run merges onto d811a46d: kit-home-frame f75a3f3c → jkitpage.js + KIT_REQUESTS (source/doc), endcard 3f38961f / name-stranger e25dfd52 / bac-progress cb221604 → built files + CHANGE only.
