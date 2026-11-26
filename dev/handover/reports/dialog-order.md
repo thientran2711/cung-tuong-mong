@@ -129,3 +129,21 @@ Merged c34f796e onto LIVE 3af7896e = review/dialog-order-r2 e19478ee (only built
 2. (note) quickcheck perf new/live: buổi 1979 / 1146 ms median (tasks>200 ms 36/34) — check it is not the unpark / re-arm path after fixing 1.
 3. FAIL 3 (picker paint, K-PICKER-FIT → KK41) and FAIL 4 (iPad 4x) unchanged — not this fixer's code; E-c done only when KK41 lands.
 Worker images under dev/handover/shots/dialog-order/ still to wipe at the final verdict.
+
+## r3 (E96f, answer to «REVIEW r2» E96r + MAIN 158) — SẴN SÀNG KIỂM review/dialog-order b6fb7a30
+Base: your review/dialog-order-r2 19181bf2 (fast-forwarded, probe dialog-order-next-probe.js taken in) → d56d60c4 + 9b983d4c (r3) → b6fb7a30 (r3b, rebuilt site files).
+### REGRESSION fixed — «Sang buổi» passed the buổi over an unseen card
+- Set-aside (park) now runs ONLY for a tap inside the person view she opened (DQ_OWN: .kfoc, its docked #popw, the view's intro layer) — never #next, a tab, Dư đồ, the top bar, a panel or a box (a panel/box may hold a time-passing control). The FRONT move runs only for her act taps (person view / the box or panel she has open), never a time-passing control.
+- Whole family of time-passing controls: every buổi turn goes through ONE function nextBuoi (j9; endTurn from it) — «Sang buổi», auto-advance, «Nghỉ», night end, dqWait. The outermost jdayq nextBuoi wrapper now gives set-aside cards back FIRST (her act in the view may spend the last khắc) → an unseen card holds the turn and is painted (M4 rule), as LIVE.
+- dayq-hold: new cases N1 (card held behind the person view + real tap «Sang buổi») / N2 (card queued unpainted + real tap). On the r2 jdayq (c34f796e): N1 FAIL Fold + iPad «buổi passed over the unseen card (0→1)». On r3b: PASS 50 cases (46 + N1/N2 × 2).
+### r3b tests (real taps)
+| test | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| dialog-order-next-probe (yours) | N1 buổi 0→0, card waits behind the view · N2 buổi 0→0, card painted first · 0 errors | same |
+| dialog-order-held-probe P2 | picker on top, Q = [picker, GAMECARD]; order picker → GAMECARD → empty | same |
+| held-card scan HOLD=1 | TOP 22 · LOST/GAMEFIRST/HELD 0 · 0 errors | (r3: TOP 59 · LOST/GAMEFIRST/HELD 0) |
+| dayq-hold | PASS 50 (both) | |
+| dayq-order / dayq-ghost (r3) | PASS / PASS all | |
+### quickcheck perf (your «buổi 1979 vs 1146 ms»)
+quickcheck.js on b6fb7a30 vs live origin/main, iPad CPU 4x, 3 runs each, run alone on the box: QUICKCHECK PASS · buổi median 1800 / 1689 ms (runs new 1481 · 1779 · 1821 vs live 1650 · 1689 · 1739 — overlapping = box noise, no cost found) · render 232/257 · tab 586/524 · tasks>200 33/32 · open 2425 ms 0 errors · old save ok. Full quickcheck.sh on 9b983d4c: CORE GATES = only the two pre-existing LIVE fails (80-dialog-fixed «kit-dialog-2 a», 90-button-crawl «Ô lưu · Lui»), time-spill PASS.
+### Still open (not this code): FAIL 3/4 = K-PICKER-FIT with KK42 session_01V1ZZH3CYo8F1o9jbxCsySG.
