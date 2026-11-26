@@ -27,8 +27,12 @@ for(const f of fs.readdirSync(B).filter(f=>/^j.*\.js$/.test(f))){let s=fs.readFi
   return `${k}:${q}${nt}${q}`});
  if(FIX&&changed)fs.writeFileSync(path.join(B,f),out)}
 if(TABLE){fs.writeFileSync(TABLE,`| file:line | key | family | before | after |\n|---|---|---|---|---|\n`+rows.map(r=>`| ${r.f}:${r.line} | ${r.k} | ${r.fam} | ${r.before.replace(/\|/g,'\\|')} | ${r.after.replace(/\|/g,'\\|')} |`).join('\n')+'\n')}
+/* ROUGH-CHANCE words outside the odds ladder (law 7 + 4, MAIN 162): «thường ổn» / «hên xui» / «dễ hỏng» printed as the chance of an option; the chance is the card's ladder word (BAL.odds.cut → KIT_ODDS).
+   Allowed: the ladder gloss table KIT_ODDS_TXT (j79), story prose of the sd data / agent comments. Before this fix: 8 code lines (jk2b, jevb, jtoilr, jne, jtoil ×2, jge, jecon «dễ hỏng hơn» = a comparison, kept). Whole family now 0. */
+let chance=0;const CH=[];for(const f of fs.readdirSync(B).filter(f=>/^j.*\.js$/.test(f)&&!/sd\.js$|^jagwhy|^j79\.js$|^j70\.js$/.test(f))){fs.readFileSync(path.join(B,f),'utf8').split('\n').forEach((l,i)=>{if(/WORDING-GAIN|^\s*\/\*/.test(l)&&!/hint:/.test(l))return;for(const m of l.matchAll(/(?:"|`)[^"`]*(?:thường ổn|hên xui|dễ hỏng(?! hơn))[^"`]*(?:"|`)/g)){chance++;CH.push(f+':'+(i+1)+' '+m[0].slice(0,80))}})}
+console.log('rough-chance words outside the ladder in code: '+chance);CH.forEach(x=>console.log('  CHANCE',x));
 const fams={};rows.forEach(r=>r.fam.split('+').forEach(x=>fams[x]=(fams[x]||0)+1));
 console.log(`WORDING-GAIN scan · ${total} wx/lx/kx texts · vague-word items beside a stat ${inScope} · kept ${JSON.stringify(kept)} · VAGUE GAIN LINES LEFT ${left.length} · «,,» ${dbl} · texts with «không» ${khNow} (LIVE ${liveKh})`+(FIX?` · rewritten ${rows.length} texts ${JSON.stringify(fams)}`:''));
 const uniq=[...new Set(left.map(x=>x.replace(/^\S+ \S+ /,'')))];console.log('left unique items:',uniq.length);
 left.slice(0,+(process.env.SHOW||40)).forEach(x=>console.log('  LEFT',x));
-process.exit(left.length||dbl||khNow<liveKh?1:0);
+process.exit(left.length||dbl||chance||khNow<liveKh?1:0);
