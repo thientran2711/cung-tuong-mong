@@ -338,7 +338,7 @@ const relP=q=>q.k==="me"?S:q.k==="emp"?S.emp:q.k==="th"?{kind:"th"}:q.p;
 function relRing(w,g){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w==="x"?C.X:C.Y;const GR=["Ta","Chí tôn","Phi tần","Nam nhân","Cung nhân"].filter(n=>L.some(x=>x.g===n));
  g=g||cur.g;const items=L.filter(x=>x.g===g);const at=Math.max(0,items.findIndex(x=>String(x.k)===String(cur.k)));
  return open({people:items.map(x=>relP(x.q)),title:w==="x"?"Xem quan hệ của":"Quan hệ với",at,tabs:GR.length>1?GR.map(n=>({label:n,on:n===g,fn:()=>relRing(w,n)})):null,
-  acts:x=>[{id:"go",n:"Chọn",word:"",ton:""}],onPick:i=>{const q=items[i];if(!q)return;if(w==="x")relSel=q.k;else relYk=q.k;try{renderPanel()}catch(e){console.error(e)}}})}
+  acts:x=>[{id:"go",n:"Chọn",word:"",ton:""}],onPick:i=>{const q=items[i];if(!q)return;if(w==="x")relSel=q.k;else window.relSetY(q.k);try{renderPanel()}catch(e){console.error(e)}}})}
 if(typeof relPopOpen==="function"){const rp0=relPopOpen;relPopOpen=window.relPopOpen=function(w){try{if(KIT_RING.wire&&!window.__bot&&!window.__kringOff&&typeof relCands==="function"){relRing(w);return null}}catch(e){console.error("kitRing rel",e)}return rp0.apply(this,arguments)}}
 kitRing.relRing=relRing;
 /* ---------- §104.2 wiring F: the map / stage group buttons «Cung nhân» (Đồng liêu) · «Chí tôn» (kitGroupBtns, rail kgf-*, the #kgfdrop list, #kshR court rows) → vòng người of

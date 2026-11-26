@@ -6,10 +6,10 @@ const tapFront=async p=>{const r=await p.evaluate(()=>{const R=kitRing.cur;if(!R
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let fail=0;
  for(const wh of (process.env.SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
-  await boot(p,{url:URL});const sh=n=>p.screenshot({path:`${OUT}/${wh}-${n}.jpg`,type:'jpeg',quality:70});const res={};
+  const p=await ctx.newPage();let res0;const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  await boot(p,{url:URL});res0=await boot.seedWire(p);console.log('seed',JSON.stringify(res0));const sh=n=>p.screenshot({path:`${OUT}/${wh}-${n}.jpg`,type:'jpeg',quality:70});const res={};
   /* C: stage — close the auto ring, tap a stage figure → ring at that person, focused */
-  await p.evaluate(()=>kitRing.close(true));await p.waitForTimeout(600);
+  await p.evaluate(()=>kitRing.close(true));await p.waitForTimeout(600);await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m&&!m.classList.contains('kring-held'))m.hidden=true});
   const tk=await p.evaluate(()=>{const P=curPeople();const t=[...document.querySelectorAll('#tokens .tok[data-p]')].find(t=>t.getClientRects().length&&kitRing.ringable(P[+t.dataset.p]));return t?t.dataset.p:null});
   if(tk!=null){await tapEl(p,`#tokens .tok[data-p="${tk}"]`);await p.waitForTimeout(2600);res.stageDbg=await p.evaluate(()=>({cur:!!kitRing.cur,sel:kitRing.cur&&kitRing.cur.sel,q:Q.length,foc:!!document.querySelector('.kfoc,#popw .pcpop')}));res.stage=await p.evaluate(i=>!!kitRing.cur&&kitRing.cur.sel>=0&&!!kitRing.cur.who&&String(kitRing.cur.who.i)===i&&!!document.querySelector('.kpk'),tk);await sh('C-stage')}else res.stage='no token';
   await p.evaluate(()=>kitRing.close(true));await p.waitForTimeout(400);
@@ -30,9 +30,9 @@ const tapFront=async p=>{const r=await p.evaluate(()=>{const R=kitRing.cur;if(!R
   if(res.modal.ring){await tapFront(p);await p.waitForTimeout(1600);res.modal.acts=await p.evaluate(()=>[...document.querySelectorAll('.kpk .kpk-b b')].map(b=>b.textContent).join('|'));await sh('A-focus');
    await tapEl(p,'.kring-x button');await p.waitForTimeout(700);await tapEl(p,'.kring-x button');await p.waitForTimeout(800);res.modal.closed=await p.evaluate(()=>!kitRing.cur)}
   /* RING-BUILD-3 cases: staff / q72 strips, Ân oán slot, Chí tôn rows (#kshR / group buttons), Phe phái person + group ring */
-  const ringCase=async(name,prep,sel,opt)=>{opt=opt||{};await p.evaluate(()=>{try{kitRing.close(true)}catch(e){}Q.length=0;document.getElementById('modal').hidden=true});await p.evaluate(prep).catch(()=>{});await p.waitForTimeout(800);
+  const ringCase=async(name,prep,sel,opt)=>{opt=opt||{};await p.evaluate(()=>{try{kitRing.close(true)}catch(e){}Q.length=0;document.getElementById('modal').hidden=true});await p.evaluate(prep).catch(()=>{});await p.waitForTimeout(800);await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m&&!m.classList.contains('kring-held'))m.hidden=true});await p.waitForTimeout(200);
    const vis=await p.evaluate(sel=>{const b=document.querySelector(sel);return b?b.getClientRects().length>0:null},sel);if(!vis){res[name]=vis===null?'n/a here':'hidden';return}
-   await tapEl(p,sel);await p.waitForFunction(()=>kitRing.cur&&kitRing.cur.slots.length,null,{timeout:8000}).catch(()=>{});await p.waitForTimeout(900);const o={open:!!(await p.evaluate(()=>kitRing.cur)),n:await p.evaluate(()=>kitRing.cur?kitRing.cur.slots.length:0)};
+   await tapEl(p,sel);await p.waitForFunction(()=>kitRing.cur&&kitRing.cur.slots.length,null,{timeout:8000}).catch(()=>{});await p.waitForTimeout(900);const o={open:!!(await p.evaluate(()=>kitRing.cur)),n:await p.evaluate(()=>kitRing.cur?kitRing.cur.slots.length:0)};if(!o.open)o.why=await p.evaluate(sel=>{const b=document.querySelector(sel);const r=b&&b.getBoundingClientRect();const top=r&&document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return{q:Q.length,modal:!document.getElementById('modal').hidden,top:top&&(top.tagName+'.'+String(top.className).slice(0,30)+'#'+top.id)}},sel);
    if(o.open){if(o.n>1){await p.evaluate(()=>kitRing.turnBy(1));await p.waitForTimeout(600)}await tapFront(p);await p.waitForTimeout(1700);o.acts=await p.evaluate(()=>[...document.querySelectorAll('.kpk .kpk-b b')].map(b=>b.textContent).join('|'));await sh(name);
     if(opt.pick){await tapEl(p,'.kpk .kpk-b');await p.waitForTimeout(500);await tapEl(p,'.kpk-conf .khok');await p.waitForTimeout(900);o.after=await p.evaluate(opt.pick)}
     else{await tapEl(p,'.kring-x button');await p.waitForTimeout(600);await tapEl(p,'.kring-x button');await p.waitForTimeout(600)}o.closed=await p.evaluate(()=>!kitRing.cur)}
