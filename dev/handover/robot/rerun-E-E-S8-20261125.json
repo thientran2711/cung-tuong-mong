@@ -83,6 +83,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_san-R7-scholar5-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_san-R7-scholar5-moments.md"
+  },
+  {
+   "life": "E-S8-bd_san-R7-lover4",
+   "origin": "bd",
+   "road": "bd_san",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 653072582,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "d2e03d80"
+   },
+   "ending": "Ban hoa — Bị ban hoa, xuất cung (first card «Lễ ra mắt» «Cúi đầu chờ xét», Rất vững)",
+   "age": 20,
+   "buoi": 1,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_san-R7-lover4-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_san-R7-lover4-moments.md"
   }
  ],
  "parked": [
