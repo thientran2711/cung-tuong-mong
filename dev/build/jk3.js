@@ -412,7 +412,7 @@ document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.clos
 try{const pw=$$("popw");if(pw)new MutationObserver(()=>{clearTimeout(window.__k3pw);window.__k3pw=setTimeout(k3Shell,0)}).observe(pw,{childList:true})}catch(e){}
 addEventListener("resize",()=>{clearTimeout(window.__k3sh);window.__k3sh=setTimeout(k3Shell,60)});
 if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Shell()}catch(e){}return r}}
-/* any code path that switches tab on its own (rank chip, court chips, links "Xem đầy đủ ở Nhật ký") opens the panel view */
+/* any code path that switches tab on its own (rank chip, court chips, links "Xem đầy đủ trong Sổ ghi") opens the panel view */
 (function(){let t0=typeof tab!=="undefined"?tab:null;setInterval(()=>{try{if(tab!==t0){t0=tab;if(k3Phone()&&K3SH.home&&!window.__k3quiet){K3SH.home=false;k3Shell()}}}catch(e){}},150)})();
 const cssS=document.createElement("style");cssS.id="k3-shell";cssS.textContent=`
 html body .game#game.k3ph:not(.maptab)>#stage{grid-area:stage!important}html body .game#game.k3ph:not(.maptab)>#panel{grid-area:stage!important}

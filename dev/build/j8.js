@@ -6,6 +6,10 @@ function byKey(k){return k==="me"?S:k==="emp"||k==="th"||k==null?null:RV(k)}
 function NM(p){return p===S?"ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu":p.name}
 function NMc(p){return p===S?"Ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu":p.name}
 function rkOf(p){return p===S?S.rank:(p.queen?7:p.rank)}
+/* RANK RESPECT (owner OD 26/11 ~04:40Z: "làm gì có cái chuyện người phi nào mà dám cười nhạo hoàng hậu"): open mockery / humiliation / taunts
+   (BAL.news.mock kinds) only go DOWN or level: a lower rank never openly mocks a higher one — her, the NPCs, the co-op friend alike (law 1).
+   Anyone without a consort rank (Thái hậu, Hoàng thượng, servants, strings) is not limited here. */
+function mockOK(a,t){try{if(!a||!t||a===t)return true;const r=x=>x===S?S.rank:(x&&typeof x==="object"&&(x.queen||typeof x.rank==="number")?(x.queen?7:x.rank):null);const ra=r(a),rt=r(t);if(ra==null||rt==null)return true;return ra>=rt}catch(e){return true}}
 function rkName(p){const r=rkOf(p);const n=r>=7?"Hoàng hậu":RANKS[r].n;return typeof kitHieuJoin==="function"?kitHieuJoin(n,p):n}
 function maidMk(p){const mn=nmNew("maid");/* a new maid's NAME only (name generation, not an NPC act) */return p===S?newMaid(mn,45):{name:mn,loyal:50}}
 function consorts(){const L=[S].concat(liveRivals(true));for(const p of L){if(!p.maid)p.maid=maidMk(p);if(!p.staff)p.staff=[]}return L}

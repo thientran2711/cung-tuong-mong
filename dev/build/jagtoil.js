@@ -62,7 +62,7 @@ function tl2AnsPick(w){const A=BAL.ag.toil2.ans,O=[];for(const c in A){let n=A[c
  return (typeof mindPick==="function"?mindPick(O,w):null)||"smile"}
 const TL2_ANS={sorry:"nàng cúi đầu nhận lỗi",smile:"nàng cười trừ cho qua",win:"nàng đáp lại khéo léo, người nghe gật gù",lose:"nàng đáp lại, không khí càng gượng"};
 /* one consort x sees consort w (the player's rule toilSeeRule) → a line when it matters (tease), else "" */
-function tl2See(x,w,L){if(toilSeen(x,w))return"";const e=toilSeeRule(x,L);toilMark(x,w);if(!e)return"";
+function tl2See(x,w,L){if(toilSeen(x,w))return"";const e=toilSeeRule(x,L,w);toilMark(x,w);if(!e)return"";
  if(e.aff)affAdd(x,w,e.aff);if(e.g)affAdd(x,w,-e.g);
  if(e.k!=="tease")return"";TL2.stat.tease++;const ease=Math.min(e.n,Math.max(0,-aff(x,w)));if(ease)affAdd(x,w,ease);
  const c=tl2AnsPick(w,x);let a=typeof p3ToilAns==="function"?p3ToilAns(w,x,c):null;if(!a){const r=toilAns(w,{host:x,n:-BAL.toil.teaseN,v:x},c);a=c==="reply"?(r?"win":"lose"):c}TL2.stat.ans[a]=(TL2.stat.ans[a]||0)+1;

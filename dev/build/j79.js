@@ -65,10 +65,16 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* KIT §62.1 NO VISIBLE «Ghi chú» ROW (owner 21/11 ~04:30Z, repeat of OD L1867): a row labelled «Ghi chú» is not drawn; its text goes behind a kit round «!» (.khap.kgnb) at the end of the row it explains (the row just above it),
    tap → the kit pop-up titled «Ghi chú». A Ghi chú with no row above it (first row) stays as a row. Every kitRows caller (dialog info frames, item cards, results, books) gets it from here — no caller changes. */
 function kitNoteBang(text,title){const t=title||"Ghi chú";return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="${kpEsc(t)}" data-kfxt="${kpEsc(t)}" data-kfx="${kpEsc(String(text))}">!</span>`}/* title optional (mini-game intro «Phần của ngươi» …): the ONE «!» part */
+/* a line that starts a row starts with a capital (owner 24/11: «Một vị Phi …», never «một vị …» at the start of a line) */
+function kitLineCap(x){return String(x).replace(/^(\s*<span class="ef t">)m(ột )/,"$1M$2")}
+const KIT_PLINE=/^\s*<span class="ef t">[^<]{1,80}:<\/span>/;
 function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).forEach(r=>{
   if(/^\s*ghi chú\s*$/i.test(String(r[0]))&&R.length){const v=Array.isArray(r[1])?r[1]:[r[1]];const prev=R[R.length-1];prev.bang=(prev.bang?prev.bang+" · ":"")+v.join(" · ");return}
   R.push({l:r[0],v:r[1],c:r[2]})});
  return `<span class="kb kpkb">`+R.map(({l,v,c,bang})=>{const vals=Array.isArray(v)?v:[v];
+ /* KK41 (MAIN 157, law 11 — result rows that list people): a row holding PERSON lines «<Tên>: thiện cảm +6» (the night card's Được / Mất) is the Kèm list form:
+    one line per person (or per plain value), the name never split from its value, never run together with «·» (KIT §7, kitKemRow) */
+ if(vals.some(x=>KIT_PLINE.test(String(x))))return `<span class="kr"><span class="krl">${l}</span><span class="krv kklist">${vals.map(x=>kitLineCap(x)).map(x=>`<span class="kitem kkemi">${KIT_PLINE.test(String(x))||/^\s*<(span|b) class="(ef|kchip|kname)/.test(String(x))?x:`<span class="ef ${c||"n"}">${x}</span>`}</span>`).join("")}${bang?kitNoteBang(bang):""}</span></span>`;
  /* KIT §6.6 GAIN LIST (OB-KIEP): a Tốn / Được / Mất / Kèm / Thành / Bại row of an info table follows the same list rule as the option rows (kaListCls, j63) */
  const lc=/^\s*(tốn|được|được ngay|mất|kèm|thành|bại)\s*$/i.test(String(l))&&typeof kaListCls==="function"&&!vals.some(x=>/^\s*<span class="kchip/.test(String(x)))?kaListCls("duoc",vals.map(x=>({h:String(x)}))):"";
  return `<span class="kr"><span class="krl">${l}</span><span class="krv${lc}">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?(typeof kaEfTag==="function"?kaEfTag(x):x):`<span class="ef ${c||"n"}${typeof kaUnit==="function"&&kaUnit(x)?" kef1":""}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}${bang?kitNoteBang(bang):""}</span></span>`}).join("")+`</span>`}
@@ -324,6 +330,9 @@ function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.
     the live state — kitStatusIcon «Tin chờ / Tin báo», the «Tin báo» notice list, «Lịch tháng») is one per title too; the fresh copy replaces the waiting one */
  if((spec.look||spec.view)&&m.t){for(let i=Q.length-1;i>=0;i--){const q=Q[i];if(q&&q.kit&&(q.kit.look||q.kit.view)&&q.t===m.t)Q.splice(i,1)}}
  if(front)Q.unshift(m);else Q.push(m);return m}
+/* ONE COPY of a panel she opens by a tap (news-sieve, LIVE fault «Tin báo» ×9 in the queue + «Lui» dead: every tap on the box / a status icon
+   queued ANOTHER copy, and each «Lui» only took one off). key = what the panel is (e.g. "notice", "st:tin"): an older queued copy of the same
+   key is dropped before the fresh one goes in front, so one «Lui» closes it. */
 /* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
    are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
    (a) a kit table right after another kit table; (b) a section with no heading whose first child is a kit table, right after a section

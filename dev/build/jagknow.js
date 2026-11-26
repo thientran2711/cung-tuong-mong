@@ -542,7 +542,7 @@ function knwUp(Z,id,iid){const I=Z.I[iid];const o=knwObj(id);if(!I||!o||!o.s||!o
  const mz=Z.K[mk]&&Z.K[mk][iid];if(mz)return;/* she knows already (she was there, or another told her) */
  let c="keep";try{c=knTell(o.s,m,"knw:"+iid)}catch(e){}if(c!=="tell")return;const fr=Z.K[id][iid][0];
  knwAdd(Z,mk,iid,id,Z.K[id][iid][1]+1);
- if(m===S){const what=(fr==="saw"?`tận mắt thấy ở ${agPlaceTxt(I.pl)}: `:`nghe ${knwName(fr)} kể: `)+I.w;try{knBao(o.s,S,what,I.pl,I.b!==(S.buoi||0)||I.wk!==wk())}catch(e){}}}
+ if(m===S&&!(typeof nsGossipSkip==="function"&&nsGossipSkip(I.w))/* news-sieve: other people's doings → the month */){const what=(fr==="saw"?`tận mắt thấy ở ${agPlaceTxt(I.pl)}: `:`nghe ${knwName(fr)} kể: `)+I.w;try{knBao(o.s,S,what,I.pl,I.b!==(S.buoi||0)||I.wk!==wk())}catch(e){}}}
 function knwSee(pl,kh,what,ab,key){if(!knwOn()||!pl)return 0;const R=agRec();if(!R||!R.P)return 0;const Z=knwSt();Z.seen=Z.seen||{};if(key){if(Z.seen[key])return 0;Z.seen[key]=1}
  const iid="i"+wk()+"."+(++Z.n);Z.I[iid]={w:what,pl,wk:wk(),b:S.buoi||0,kh,ab};const L=[];
  for(const id in R.P){const x=R.P[id][kh];if(!x||x[0]!==pl)continue;if(knwSrv(id)){if(x[1]==="sleep")continue;if(knwAdd(Z,id,iid,"saw",0))L.push(id)}
