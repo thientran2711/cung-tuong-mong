@@ -201,7 +201,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
  if(process.env.NIGHT_UPTO==='5'){const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed (NIGHT_UPTO 5)`);await b.close();process.exit(bad.length?1:0)}
  /* 6-8 reconnect (owner 16/11): one leaves mid-buổi, the other sees the wait; she comes back → the one who stayed recovers by itself */
  const Ok=o=>o.p.evaluate(()=>{const n=document.getElementById('next');const fz=document.getElementById('coopfz');const h=document.getElementById('kctmh');
-   return {fz:!!fz,hold:!!h,frozen:!!COOP.frozen,dis:n.disabled,next:n.textContent,k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),Q:Q.length,bend:COOPW.bend,pb:!!COOPW.pendBuoi,wk:COOPW.whereKey,ps:COOPW.sent===(COOP.state.week||0)||!!COOPW.pend,tr:(COOPW.tr||[]).slice(-8)}});
+   return {fz:!!fz,hold:!!h,frozen:!!COOP.frozen,dis:n.disabled,next:n.textContent,k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),Q:Q.length,bend:COOPW.bend,pb:!!COOPW.pendBuoi,wk:COOPW.whereKey,ps:COOPW.sent===(COOP.state.week||0)||!!COOPW.pend||(COOPW.ngoW===(COOP.state.week||0)&&(S.buoi||0)<(typeof B4L==='number'?B4L:3))/* thin G: her week end ran on the host (her phone at the new morning, sent cleared by the host's view) */,tr:(COOPW.tr||[]).slice(-8)}});
  async function rejoinHost(){await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(600);await tapText(A,/^Trở lại phòng/);
    return until(A,()=>COOP.seat==='a'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000)}
  async function leaveBack(X,Y,tag,mid){const k0=await X.p.evaluate(()=>COOPW.tm.myKey());await X.p.close();
