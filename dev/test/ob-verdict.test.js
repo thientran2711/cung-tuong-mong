@@ -81,19 +81,20 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
   const pre=await p.evaluate((mode)=>{Q.length=0;try{closeModal()}catch(e){}window.kaLastResult=null;S.confined=0;S.bac=Math.max(S.bac,500);S.suc=Math.max(S.suc,80);S.tamco=Math.max(S.tamco||0,50);used=0;
    const v=liveRivals(false).filter(v=>!sameHouse(S,v)&&ACT.frame.ok(S,v)&&!v.confined)[0];if(!v)return null;try{const K=k61S();if(K)K[kOf61(v)]=3}catch(e){}
    if(!window.__vuR0){window.__vuR0=window.roll;window.roll=function(n){if(window.__vuMode){const st=String(new Error().stack);return window.__vuMode==='ok'?!/\b(caught|framed)\b/.test(st):true}return window.__vuR0.apply(this,arguments)}}
-   window.__vuMode=mode;const pt0=ptHarmSend;window.__vuPt=pt0;ptHarmSend=()=>false;try{DQ.user=1}catch(e){}doAct(rivals.indexOf(v),'frame');showModal();return {v:v.name,id:v.id,sung:v.sung,danh:v.danh,q:Q.map(m=>m.t)}},mode);
+   window.__vuMode=mode;const pt0=ptHarmSend;window.__vuPt=pt0;ptHarmSend=()=>false;try{DQ.user=1}catch(e){}doAct(rivals.indexOf(v),'frame');showModal();return {v:v.name,id:v.id,sung:v.sung,danh:v.danh,rank:v.rank,q:Q.map(m=>m.t)}},mode);
   if(!pre)return null;const steps=[];
   for(let g=0;g<3;g++){await p.waitForTimeout(500);await p.evaluate(()=>{document.querySelectorAll('#klife').forEach(e=>{e.hidden=true;e.style.display='none'});document.querySelectorAll('#kmrew,.kmov').forEach(e=>e.remove());if(Q.length&&document.getElementById('modal').hidden)showModal()});let o=p.locator('#modal:not([hidden]) .opt',{hasText:'Ra tay ngay'}).first();if(!(await o.count()))o=p.locator('#modal:not([hidden]) .opt',{hasText:'Làm như thường'}).first();if(!(await o.count()))break;steps.push((await o.innerText()).split('\n')[0].slice(0,30));await o.click({timeout:8000})}
   await p.waitForTimeout(900);await p.evaluate(()=>{document.querySelectorAll('#kmrew,.kmov').forEach(e=>e.remove())});if(shot)await p.screenshot({path:shot});
-  const c=await card(p);const post=await p.evaluate((id)=>{window.__vuMode=null;ptHarmSend=window.__vuPt;const v=RV(id);const lg=S.logs.slice(0,3).map(plain).join(' ‖ ');Q.length=0;try{closeModal()}catch(e){}return {sung:v.sung,danh:v.danh,confined:v.confined||0,lg}},pre.id);
+  const c=await card(p);const post=await p.evaluate((id)=>{window.__vuMode=null;ptHarmSend=window.__vuPt;const v=RV(id);const lg=S.logs.slice(0,3).map(plain).join(' ‖ ');Q.length=0;try{closeModal()}catch(e){}return {sung:v.sung,danh:v.danh,rank:v.rank,confined:v.confined||0,lg}},pre.id);
   return {pre,post,steps,card:c}};
- for(const [dn,vp] of DEV){const p=await boot(b,vp,3);R2[dn]={};
-  for(const m of ['ok','lo']){const r=await vuTap(p,m,path.join(OUT,`after-${dn}-vuoan-${m}.png`));R2[dn][m]=r;const c=r&&r.card;
+ for(const [dn,vp] of DEV){R2[dn]={};
+  for(const m of ['ok','lo']){const p=await boot(b,vp,3)/* a fresh life per outcome: no notice or rank change left over from the other run (MAIN 157 (2)) */;const r=await vuTap(p,m,path.join(OUT,`after-${dn}-vuoan-${m}.png`));R2[dn][m]=r;const c=r&&r.card;
    ok(c&&c.on,`${dn} Vu oan via Bày mưu (${m}): the card is shown`,r&&{steps:r.steps,c});
    ok(c&&c.seal===(m==='ok'?'THÀNH':'BẠI'),`${dn} Vu oan via Bày mưu (${m}): seal ${m==='ok'?'THÀNH':'BẠI'}`,c&&{seal:c.seal,lg:r.post.lg.slice(0,200)});
    const tg=c&&c.rows.find(x=>x.startsWith('Người ấy'));ok(tg&&tg.includes(r.pre.v),`${dn} Vu oan via Bày mưu (${m}): «Người ấy» names her target`,tg);
-   if(m==='ok')ok(tg&&/bị cấm túc|Sủng −|Danh −/.test(tg),`${dn} Vu oan thành: the target's real loss`,tg);else ok(tg&&/không hề hấn gì/.test(tg),`${dn} Vu oan bị lộ: «không hề hấn gì»`,tg)}
-  ok(!p.errs.length,`${dn} r2 taps: no page errors`,p.errs.slice(0,3));await p.close()}
+   if(m==='ok')ok(tg&&/bị cấm túc|Sủng −|Danh −/.test(tg),`${dn} Vu oan thành: the target's real loss`,tg);else ok(tg&&/không hề hấn gì/.test(tg)&&r.post.rank===r.pre.rank,`${dn} Vu oan bị lộ: «không hề hấn gì», her rank unchanged`,{tg,rank:[r.pre.rank,r.post.rank]});
+   const sp=await p.evaluate(()=>{const c=document.getElementById('rtoast'),s=c&&c.querySelector('.kmseal');if(!s)return null;const a=c.getBoundingClientRect(),b=s.getBoundingClientRect();return {inside:b.top>=a.top-1&&b.bottom<=a.bottom+1&&b.left>=a.left-1&&b.right<=a.right+1}});ok(sp&&sp.inside,`${dn} ${m}: the stamp sits on the result card only`,sp);
+   ok(!p.errs.length,`${dn} ${m} r2 taps: no page errors`,p.errs.slice(0,3));await p.close()}}
  {const p=await boot(b,{width:1180,height:820},11);
   const E=(fn,arg)=>p.evaluate(fn,arg);
   const pre=()=>{Q.length=0;try{closeModal()}catch(e){}window.kaLastResult=null;S.bac=Math.max(S.bac,500);S.suc=Math.max(S.suc,80);S.tamco=Math.max(S.tamco||0,50);used=0};

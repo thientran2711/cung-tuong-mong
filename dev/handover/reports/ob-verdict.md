@@ -115,3 +115,9 @@ Files: `dev/build/jverdict.js` (hooks only), `dev/build/j63.js` (kaAimsOf: open 
 - Stills on the CDN (img/_review/ob-verdict/): `after-{fold,ipad}-vuoan-{ok,lo}.png` (new: Vu oan via Bày mưu thành + bị lộ), `after-{fold,ipad}-night-{ok,fail,soft}.png` (refreshed); r1 `before-…` + videos stay.
 Standing orders kept: her target always named (data-k61skip); seal word BẠI; «Kèm» rows = NEWS-SIEVE-2 (untouched); J2 owns Bày mưu act logic (hooks only).
 Open: the card of the intermediate «Bày mưu: Ra tay ngay» choice (before the road card) stays a plain KẾT QUẢ choice card (pre-existing, no deed yet); slap-game deeds (Tát, Hắt nước) show their card after the mini-game (headless scan: no card).
+
+## r3 (MAIN 157 LOOK on 6503999a)
+- (3) the THÀNH / BẠI stamp (kit part kitResultFx, j93 `.kmseal`) hung ABOVE the card (bottom:100%) and landed on the option card behind it (iPad «Nghỉ ngơi một lát»). Now it sits INSIDE the result card's top-right corner (top 8px, 58px); the title row and the sentence reserve that corner (padding-right 66px, min-height so no row runs under it) — never on words. One kit place → every result card. Test assert: the stamp's box lies inside #rtoast (Fold + iPad, thành + bị lộ).
+- (2) vuoan-lo header «Phi Điền Thanh Hoan nay bị giáng xuống Phi» = LEFTOVER of the thành run on the same page (that run demoted her; the notice stayed). The test now boots a fresh life per outcome; the bị lộ still shows no such notice, «Người ấy: Quý phi Điền Thanh Hoan: không hề hấn gì» and an assert that her rank did not change.
+- (1) night card «Kèm» wall: the Kèm block belongs to ONE-SIEVE (MAIN 156 split); asked ONE-SIEVE session_01V1ZZH2fHrCdnudewe1PcfC whether review/one-sieve covers the night card; kit keeper KK41 for a new many-people row if needed.
+- Tests: ALL 73 OK (Fold 755x1000 + iPad 1180x820). Stills re-uploaded (img/_review/ob-verdict/after-{fold,ipad}-vuoan-{ok,lo}.png).
