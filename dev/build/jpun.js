@@ -34,7 +34,7 @@ function punEvTxt(a,t){t=t||S;if(!a)return"";let n=0;try{n=evG(a,t)}catch(e){}co
  if(pl.length)L.push(`tìm thấy trong rương: ${pl.slice(0,BAL.pun.evShow).join(", ")}`);
  if(!n&&!pl.length)return "không có chứng cứ, chỉ có lời tố";
  return `${n?`${n} món`:""}${n&&L.length?": ":""}${L.join("; ")}`}
-const PUNK={giang:"Giáng một bậc",cold:"Đày vào lãnh cung",camtuc:"Cấm túc",chet:"Ban chết"};
+const PUNK={giang:"Giáng một bậc",cold:"Đày vào lãnh cung",camtuc:"Cấm túc",chet:"Ban chết",nhe:"Phạt nhẹ"};
 /* the ONE reason notice for her (kit notice, fact rows); S.punLast feeds the j93 gloom line */
 function punRows(o){const a=punWho(o.by),R=[];const w=punPlain(o.why);/* the edict names the accuser: she now knows her name (k61, no «???» beside the row) */try{if(a&&typeof k61Know==="function")k61Know(a,"",true,2)}catch(e){}
  if(a)R.push(["Ai tố",punEsc(punWhoTxt(a))]);else R.push(["Ai xử",punEsc(o.auth||"Hoàng thượng, theo cung quy")]);
@@ -42,6 +42,7 @@ function punRows(o){const a=punWho(o.by),R=[];const w=punPlain(o.why);/* the edi
  if(a)R.push(["Chứng cứ",punEsc(punEvTxt(a,S))]);
  if(o.kind==="giang"&&o.from!=null)R.push(["Hình phạt",punEsc(`${PUNK.giang}: từ ${RANKS[o.from].n} xuống ${RANKS[o.to].n}`)]);
  else if(o.kind==="camtuc")R.push(["Hình phạt",punEsc(`${PUNK.camtuc} ${o.m} tháng`)]);
+ else if(o.kind==="nhe")R.push(["Hình phạt",punEsc(o.c>0?`Khất bổng ${o.c} tháng`:"Cảnh cáo")]);/* merge home-way (BAL.punW nhẹ, sev 0): the light punishment shows its reason too (D1) */
  else if(o.kind==="cold")R.push(["Hình phạt",punEsc(`${PUNK.cold}, ở ít nhất ${BAL.pun.coldMinDays} ngày mới được xét tha`)]);
  S.punLast={why:w,who:a?a.name:"",kind:o.kind,wk:punNow()};return R}
 function punNote(o){if(!S||S.dead)return;const R=punRows(o);const a=punWho(o.by);

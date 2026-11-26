@@ -62,6 +62,22 @@ if(typeof showModal==="function"){const sm0=showModal;showModal=function(){plArr
 function plHomeK(){try{if(!S)return null;const p0=S.place;let k;try{S.place="home";k=typeof mapHereK==="function"?mapHereK():"home"}finally{S.place=p0}return k||"home"}catch(e){return"home"}}
 window.plHomeK=plHomeK;
 if(typeof accState==="function"){const as0=accState;accState=function(k){try{if(S&&S.place==="home"&&!S.out&&k&&k===plHomeK())return{why:"",here:1}}catch(e){}return as0.apply(this,arguments)}}
+/* THE WAY HOME (owner OD 26/11 ~04:25Z, review/home-way): ONE rule for every «Về phòng» (top-bar #k3room in jk3 + the Dư đồ top row):
+   it ALWAYS walks her to HER OWN room (goTo("home")), costs travel() khắc = BAL.walk.near / BAL.walk.far by distance (+ the slow-walk khắc),
+   label «Về phòng · N khắc»; no khắc left = disabled, label «Về phòng · hết khắc» (that buổi she has no way home: jstagehere stayRoll
+   then never punishes, no fault ⇒ no punishment). hn = her palace's name (the home mark on the top bar). null = no walk at all
+   (lãnh cung, servant / Kính sự modes). */
+function homeName(){try{const k=plHomeK();return typeof accName==="function"?accName(k):""}catch(e){return""}}
+window.homeName=homeName;
+function homeWay(){try{if(typeof S!=="object"||!S||S.dead||S.out||mode())return null;const hn=homeName();if(S.place==="home"||!S.place)return{at:1,hn,label:"Về phòng",title:`Phòng của ta: ${hn}`};
+ let tc=0;try{tc=travel(S.place,"home")}catch(e){}const ok=typeof walkOk==="function"?walkOk(tc):true;
+ /* review/home-way-nits: the real reason when she cannot walk home = the kit khắc words (j76need, bound to this buổi: the walk never spills), carried as data-why (kit reason path, guessWhy / kfWhy) */
+ let why="";if(!ok){try{why=typeof j76need==="function"?j76need(tc,null,true).t:""}catch(e){}why=why||"hết khắc buổi này"}
+ return{at:0,hn,tc,ok,why,label:ok?`Về phòng · ${tc} khắc`:"Về phòng · hết khắc",title:ok?`Đi về ${hn}: ${tc} khắc`:`${why[0].toUpperCase()+why.slice(1)}, chưa về ${hn} được`}}catch(e){console.error("homeWay",e);return null}}
+window.homeWay=homeWay;
+/* the walk home from any «Về phòng» button; false when it cannot go (card open, no khắc) */
+function homeGo(){try{const w=homeWay();if(!w||w.at||!w.ok||Q.length)return false;goTo("home");return S.place==="home"}catch(e){console.error("homeGo",e);return false}}
+window.homeGo=homeGo;
 const esc2=t=>String(t).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="maptools"')<0)return h;const hk=S.out?null:plHomeK();
  /* the one reason */
@@ -76,9 +92,9 @@ function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="mapt
  /* her home */
  if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
  /* the way home */
- if(S.place!=="home"&&!S.out&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){let tc=0,ok=true;try{tc=travel(S.place,"home");ok=typeof walkOk==="function"?walkOk(tc):true}catch(e){}
-  const b=`<button class="btn mz" data-plhome="1"${ok?"":" disabled"} title="${ok?`Đi về cung mình: ${tc} khắc`:"Không đủ khắc để về"}">Về phòng · ${tc} khắc</button>`;
-  h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}
+ /* the way home: the ONE rule homeWay() (shared with the top-bar #k3room, review/home-way) */
+ {const w=homeWay();if(w&&!w.at){const b=`<button class="btn mz" data-plhome="1"${w.ok?"":` disabled data-why="${w.why}"`} title="${w.title}">${w.label}</button>`;
+  h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}}
  return h}catch(e){console.error("plMap",e);return h}}
 window.plMap=plMap;
 /* the Dư đồ «leather» style hides the top row's text chips (jbook): the one reason also goes through the ONE notice system (kitNotice: top chip +
@@ -90,5 +106,5 @@ function plBanTick(){try{if(typeof kitNotice!=="function"||!S||S.dead)return;con
  kitNotice({id:"plban",kind:"close",line:why,text:`${why}. Mọi nơi khác trên Dư đồ đều không đi được cho đến khi hết hạn.`,sticky:true})}catch(e){console.error("plBan",e)}}
 if(typeof render==="function"){const rb0=render;render=function(){const r=rb0.apply(this,arguments);plBanTick();return r}}
 if(typeof mapHTML==="function"){const mh0=mapHTML;mapHTML=function(){return plMap(mh0.apply(this,arguments))}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-plhome]");if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.disabled||!S||S.dead||Q.length)return;try{goTo("home")}catch(x){console.error(x)}},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-plhome]");if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.disabled||!S||S.dead||Q.length)return;homeGo()},true);
 }catch(e){console.error("jplrule",e)}})();
