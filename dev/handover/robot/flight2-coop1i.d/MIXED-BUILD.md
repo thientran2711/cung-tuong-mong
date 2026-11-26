@@ -1,0 +1,2 @@
+# coop1i P89H — tag MIXED-BUILD (F #20 10:48Z)
+Timeline (each pair rejoin = fresh LIVE page load): life start 11/25 10:22Z-… unstamped builds (≤ 03:24Z 11/26, GAME BUILD line first printed at the 03:24Z resume on 4d7a22c6) → 3762da08+ (b fa8da73cecdc, t 2026-11-25T19:34Z) until ~07:00Z 11/26 → 6b5d3d05+ (t 2026-11-26T06:59Z) since. Counts for co-op/harness/bug findings only, reported separately from VALID lives.

@@ -1,0 +1,325 @@
+18:42 start run11 pid 15150 buoi-sum 165
+18:57 no progress 12 min (sum 167) -> reload+rejoin
+18:57 start run12 pid 15882 buoi-sum 167
+19:09 start run21 pid 16355 buoi-sum 169
+19:17 no progress 6 min (sum 171) -> reload+rejoin
+19:17 start run22 pid 16784 buoi-sum 171
+19:27 no progress 6 min (sum 173) -> reload+rejoin
+19:27 start run23 pid 17184 buoi-sum 173
+19:36 no progress 6 min (sum 175) -> reload+rejoin
+19:36 start run24 pid 17579 buoi-sum 175
+19:45 no progress 6 min (sum 177) -> reload+rejoin
+19:46 start run25 pid 18038 buoi-sum 177
+19:54 no progress 6 min (sum 179) -> reload+rejoin
+19:54 start run26 pid 18673 buoi-sum 179
+20:04 no progress 6 min (sum 181) -> reload+rejoin
+20:04 start run27 pid 19558 buoi-sum 181
+20:12 no progress 6 min (sum 183) -> reload+rejoin
+20:12 start run28 pid 20012 buoi-sum 183
+20:21 no progress 6 min (sum 185) -> reload+rejoin
+20:21 ROOM DONE (exit)
+20:36 start run41 pid 20627 buoi-sum 185
+20:44 no progress 6 min (sum 187) -> reload+rejoin
+20:44 start run42 pid 21096 buoi-sum 187
+20:52 no progress 6 min (sum 189) -> reload+rejoin
+20:52 start run43 pid 21500 buoi-sum 189
+21:02 no progress 6 min (sum 191) -> reload+rejoin
+21:03 start run44 pid 21936 buoi-sum 191
+21:11 no progress 6 min (sum 193) -> reload+rejoin
+21:11 start run45 pid 22397 buoi-sum 193
+21:21 no progress 6 min (sum 195) -> reload+rejoin
+21:21 start run46 pid 22831 buoi-sum 195
+21:29 no progress 6 min (sum 197) -> reload+rejoin
+21:29 start run47 pid 23234 buoi-sum 197
+21:38 no progress 6 min (sum 199) -> reload+rejoin
+21:38 start run48 pid 23719 buoi-sum 199
+21:46 no progress 6 min (sum 201) -> reload+rejoin
+21:46 start run49 pid 24112 buoi-sum 201
+21:56 no progress 6 min (sum 203) -> reload+rejoin
+21:56 start run61 pid 24589 buoi-sum 203
+22:05 no progress 6 min (sum 205) -> reload+rejoin
+22:05 start run62 pid 25094 buoi-sum 205
+22:15 no progress 6 min (sum 207) -> reload+rejoin
+22:15 start run63 pid 25537 buoi-sum 207
+22:24 no progress 6 min (sum 209) -> reload+rejoin
+22:24 start run64 pid 26028 buoi-sum 209
+22:33 no progress 6 min (sum 211) -> reload+rejoin
+22:33 start run65 pid 26503 buoi-sum 211
+22:42 no progress 6 min (sum 213) -> reload+rejoin
+22:42 start run66 pid 26911 buoi-sum 213
+22:51 no progress 6 min (sum 215) -> reload+rejoin
+22:51 start run67 pid 27390 buoi-sum 215
+23:00 no progress 6 min (sum 217) -> reload+rejoin
+23:00 start run68 pid 27807 buoi-sum 217
+23:10 no progress 6 min (sum 219) -> reload+rejoin
+23:10 start run69 pid 28224 buoi-sum 219
+23:19 no progress 6 min (sum 221) -> reload+rejoin
+23:19 start run70 pid 28705 buoi-sum 221
+23:28 no progress 6 min (sum 223) -> reload+rejoin
+23:28 start run71 pid 29168 buoi-sum 223
+23:37 no progress 6 min (sum 225) -> reload+rejoin
+23:37 start run72 pid 29577 buoi-sum 225
+23:45 no progress 6 min (sum 227) -> reload+rejoin
+23:45 start run73 pid 30095 buoi-sum 227
+23:55 no progress 6 min (sum 229) -> reload+rejoin
+23:55 start run74 pid 30525 buoi-sum 229
+00:03 no progress 6 min (sum 231) -> reload+rejoin
+00:03 start run75 pid 30925 buoi-sum 231
+00:12 no progress 6 min (sum 233) -> reload+rejoin
+00:13 start run76 pid 31339 buoi-sum 233
+00:21 no progress 6 min (sum 235) -> reload+rejoin
+00:21 start run77 pid 31803 buoi-sum 235
+00:31 no progress 6 min (sum 237) -> reload+rejoin
+00:31 start run78 pid 32228 buoi-sum 237
+00:40 no progress 6 min (sum 239) -> reload+rejoin
+00:40 start run79 pid 32642 buoi-sum 239
+00:49 no progress 6 min (sum 241) -> reload+rejoin
+00:49 start run80 pid 644 buoi-sum 241
+00:54 start run81 pid 1023 buoi-sum 243
+01:03 no progress 6 min (sum 245) -> reload+rejoin
+01:03 start run82 pid 1495 buoi-sum 245
+01:11 no progress 6 min (sum 247) -> reload+rejoin
+01:11 start run83 pid 1882 buoi-sum 247
+01:21 no progress 6 min (sum 249) -> reload+rejoin
+01:21 start run84 pid 2365 buoi-sum 249
+01:29 no progress 6 min (sum 251) -> reload+rejoin
+01:29 start run85 pid 2825 buoi-sum 251
+01:39 no progress 6 min (sum 253) -> reload+rejoin
+01:40 start run86 pid 3262 buoi-sum 253
+01:49 no progress 6 min (sum 255) -> reload+rejoin
+01:49 start run87 pid 3662 buoi-sum 255
+01:56 no progress 6 min (sum 257) -> reload+rejoin
+01:56 start run88 pid 4127 buoi-sum 257
+02:06 no progress 6 min (sum 259) -> reload+rejoin
+02:06 start run89 pid 4556 buoi-sum 259
+02:14 no progress 6 min (sum 261) -> reload+rejoin
+02:14 start run90 pid 4957 buoi-sum 261
+02:24 no progress 6 min (sum 263) -> reload+rejoin
+02:24 start run91 pid 5459 buoi-sum 263
+02:32 no progress 6 min (sum 265) -> reload+rejoin
+02:32 start run92 pid 5863 buoi-sum 265
+02:42 no progress 6 min (sum 267) -> reload+rejoin
+02:43 start run93 pid 6288 buoi-sum 267
+02:51 no progress 6 min (sum 269) -> reload+rejoin
+02:51 start run94 pid 6691 buoi-sum 269
+03:01 no progress 6 min (sum 271) -> reload+rejoin
+03:01 start run95 pid 7181 buoi-sum 271
+03:08 no progress 6 min (sum 273) -> reload+rejoin
+03:08 start run96 pid 7565 buoi-sum 273
+03:18 no progress 6 min (sum 275) -> reload+rejoin
+03:18 start run97 pid 7990 buoi-sum 275
+03:24 start run101 pid 8455 buoi-sum 277
+03:34 no progress 6 min (sum 279) -> reload+rejoin
+03:34 start run102 pid 8954 buoi-sum 279
+03:42 no progress 6 min (sum 281) -> reload+rejoin
+03:42 start run103 pid 9372 buoi-sum 281
+03:52 no progress 6 min (sum 283) -> reload+rejoin
+03:52 start run104 pid 9873 buoi-sum 283
+04:00 no progress 6 min (sum 285) -> reload+rejoin
+04:00 start run105 pid 10345 buoi-sum 285
+04:10 no progress 6 min (sum 287) -> reload+rejoin
+04:11 start run106 pid 10783 buoi-sum 287
+04:20 no progress 6 min (sum 289) -> reload+rejoin
+04:20 start run107 pid 11220 buoi-sum 289
+04:29 no progress 6 min (sum 291) -> reload+rejoin
+04:29 start run108 pid 11762 buoi-sum 291
+04:38 no progress 6 min (sum 293) -> reload+rejoin
+04:38 start run109 pid 12183 buoi-sum 293
+04:46 no progress 6 min (sum 295) -> reload+rejoin
+04:46 start run110 pid 12593 buoi-sum 295
+04:56 no progress 6 min (sum 297) -> reload+rejoin
+04:56 start run111 pid 13102 buoi-sum 297
+05:05 no progress 6 min (sum 299) -> reload+rejoin
+05:05 start run112 pid 13530 buoi-sum 299
+05:14 no progress 6 min (sum 301) -> reload+rejoin
+05:15 start run113 pid 13950 buoi-sum 301
+05:23 start run121 pid 14476 buoi-sum 303
+05:32 no progress 6 min (sum 305) -> reload+rejoin
+05:33 start run122 pid 14968 buoi-sum 305
+05:41 no progress 6 min (sum 307) -> reload+rejoin
+05:41 start run123 pid 15371 buoi-sum 307
+05:51 no progress 6 min (sum 309) -> reload+rejoin
+05:51 start run124 pid 15862 buoi-sum 309
+06:00 no progress 6 min (sum 311) -> reload+rejoin
+06:00 start run125 pid 16356 buoi-sum 311
+06:09 no progress 6 min (sum 313) -> reload+rejoin
+06:09 start run126 pid 16780 buoi-sum 313
+06:12 start run141 pid 17137 buoi-sum 315
+06:21 no progress 6 min (sum 317) -> reload+rejoin
+06:21 start run142 pid 17645 buoi-sum 317
+06:30 no progress 6 min (sum 319) -> reload+rejoin
+06:30 start run143 pid 18133 buoi-sum 319
+06:39 no progress 6 min (sum 321) -> reload+rejoin
+06:40 start run144 pid 18565 buoi-sum 321
+06:48 no progress 6 min (sum 323) -> reload+rejoin
+06:48 start run145 pid 19045 buoi-sum 323
+06:58 no progress 6 min (sum 325) -> reload+rejoin
+06:58 start run146 pid 19491 buoi-sum 325
+07:07 no progress 6 min (sum 327) -> reload+rejoin
+07:07 start run147 pid 19926 buoi-sum 327
+07:15 no progress 6 min (sum 329) -> reload+rejoin
+07:15 start run148 pid 20408 buoi-sum 329
+07:25 no progress 6 min (sum 331) -> reload+rejoin
+07:25 start run149 pid 20851 buoi-sum 331
+07:34 no progress 6 min (sum 333) -> reload+rejoin
+07:34 start run150 pid 21327 buoi-sum 333
+07:40 start run161 pid 21740 buoi-sum 335
+07:50 no progress 6 min (sum 337) -> reload+rejoin
+07:50 start run162 pid 22258 buoi-sum 337
+07:59 no progress 6 min (sum 339) -> reload+rejoin
+07:59 start run163 pid 22690 buoi-sum 339
+08:09 no progress 6 min (sum 341) -> reload+rejoin
+08:09 start run164 pid 23213 buoi-sum 341
+08:18 no progress 6 min (sum 343) -> reload+rejoin
+08:19 start run165 pid 23643 buoi-sum 343
+08:27 no progress 6 min (sum 345) -> reload+rejoin
+08:27 start run166 pid 24049 buoi-sum 345
+08:33 start run181 pid 24473 buoi-sum 347
+08:42 no progress 6 min (sum 349) -> reload+rejoin
+08:42 start run182 pid 25006 buoi-sum 349
+08:51 no progress 6 min (sum 351) -> reload+rejoin
+08:51 start run183 pid 25485 buoi-sum 351
+09:00 no progress 6 min (sum 353) -> reload+rejoin
+09:00 start run184 pid 25909 buoi-sum 353
+09:09 no progress 6 min (sum 355) -> reload+rejoin
+09:09 start run185 pid 26402 buoi-sum 355
+09:17 no progress 6 min (sum 357) -> reload+rejoin
+09:18 start run186 pid 26815 buoi-sum 357
+09:27 no progress 6 min (sum 359) -> reload+rejoin
+09:27 start run187 pid 27250 buoi-sum 359
+09:37 no progress 6 min (sum 361) -> reload+rejoin
+09:37 start run188 pid 27771 buoi-sum 361
+09:46 no progress 6 min (sum 363) -> reload+rejoin
+09:46 start run189 pid 28201 buoi-sum 363
+09:54 no progress 6 min (sum 365) -> reload+rejoin
+09:54 start run190 pid 28614 buoi-sum 365
+10:03 no progress 6 min (sum 367) -> reload+rejoin
+10:03 start run191 pid 29114 buoi-sum 367
+10:11 no progress 6 min (sum 369) -> reload+rejoin
+10:11 start run192 pid 29534 buoi-sum 369
+10:21 no progress 6 min (sum 371) -> reload+rejoin
+10:22 start run193 pid 29985 buoi-sum 371
+10:30 no progress 6 min (sum 373) -> reload+rejoin
+10:30 start run194 pid 30397 buoi-sum 373
+10:39 no progress 6 min (sum 375) -> reload+rejoin
+10:39 start run195 pid 30911 buoi-sum 375
+10:42 start run201 pid 31295 buoi-sum 377
+10:52 no progress 6 min (sum 379) -> reload+rejoin
+10:53 start run202 pid 32002 buoi-sum 379
+10:54 start run221 pid 32336 buoi-sum 380
+11:03 no progress 6 min (sum 382) -> reload+rejoin
+11:03 start run222 pid 422 buoi-sum 382
+11:13 no progress 6 min (sum 384) -> reload+rejoin
+11:13 start run223 pid 1049 buoi-sum 384
+11:22 no progress 6 min (sum 386) -> reload+rejoin
+11:22 start run224 pid 1486 buoi-sum 386
+11:32 no progress 6 min (sum 388) -> reload+rejoin
+11:32 start run225 pid 2040 buoi-sum 388
+11:42 no progress 6 min (sum 390) -> reload+rejoin
+11:42 start run226 pid 2538 buoi-sum 390
+11:51 no progress 6 min (sum 392) -> reload+rejoin
+11:51 start run227 pid 2972 buoi-sum 392
+12:00 no progress 6 min (sum 394) -> reload+rejoin
+12:01 start run228 pid 3409 buoi-sum 394
+12:09 no progress 6 min (sum 396) -> reload+rejoin
+12:09 start run229 pid 3822 buoi-sum 396
+12:19 no progress 6 min (sum 398) -> reload+rejoin
+12:19 start run230 pid 4283 buoi-sum 398
+12:28 no progress 6 min (sum 400) -> reload+rejoin
+12:28 start run231 pid 4763 buoi-sum 400
+12:36 no progress 6 min (sum 402) -> reload+rejoin
+12:36 start run232 pid 5189 buoi-sum 402
+12:46 no progress 6 min (sum 404) -> reload+rejoin
+12:46 start run233 pid 5683 buoi-sum 404
+12:55 no progress 6 min (sum 406) -> reload+rejoin
+12:55 start run234 pid 6115 buoi-sum 406
+13:04 no progress 6 min (sum 408) -> reload+rejoin
+13:05 start run235 pid 6543 buoi-sum 408
+13:14 no progress 6 min (sum 410) -> reload+rejoin
+13:14 start run236 pid 6972 buoi-sum 410
+13:22 no progress 6 min (sum 412) -> reload+rejoin
+13:22 start run237 pid 7460 buoi-sum 412
+13:32 no progress 6 min (sum 414) -> reload+rejoin
+13:32 start run238 pid 7897 buoi-sum 414
+13:41 no progress 6 min (sum 416) -> reload+rejoin
+13:41 start run239 pid 8323 buoi-sum 416
+13:49 no progress 6 min (sum 418) -> reload+rejoin
+13:49 start run240 pid 8795 buoi-sum 418
+13:59 no progress 6 min (sum 420) -> reload+rejoin
+13:59 start run241 pid 9233 buoi-sum 420
+14:08 no progress 6 min (sum 422) -> reload+rejoin
+14:09 start run242 pid 9668 buoi-sum 422
+14:17 no progress 6 min (sum 424) -> reload+rejoin
+14:17 start run243 pid 10150 buoi-sum 424
+14:27 no progress 6 min (sum 426) -> reload+rejoin
+14:27 start run244 pid 10605 buoi-sum 426
+14:35 no progress 6 min (sum 428) -> reload+rejoin
+14:35 start run245 pid 11034 buoi-sum 428
+14:45 no progress 6 min (sum 430) -> reload+rejoin
+14:45 start run246 pid 11477 buoi-sum 430
+14:54 no progress 6 min (sum 432) -> reload+rejoin
+14:54 start run247 pid 11922 buoi-sum 432
+15:02 no progress 6 min (sum 434) -> reload+rejoin
+15:02 start run248 pid 12347 buoi-sum 434
+15:12 no progress 6 min (sum 436) -> reload+rejoin
+15:13 start run249 pid 12868 buoi-sum 436
+15:21 no progress 6 min (sum 438) -> reload+rejoin
+15:21 start run250 pid 13287 buoi-sum 438
+15:31 no progress 6 min (sum 440) -> reload+rejoin
+15:31 start run251 pid 13786 buoi-sum 440
+15:40 no progress 6 min (sum 442) -> reload+rejoin
+15:40 start run252 pid 14213 buoi-sum 442
+15:49 no progress 6 min (sum 444) -> reload+rejoin
+15:49 start run253 pid 14647 buoi-sum 444
+15:58 no progress 6 min (sum 446) -> reload+rejoin
+15:58 start run254 pid 15083 buoi-sum 446
+16:06 no progress 6 min (sum 448) -> reload+rejoin
+16:06 start run255 pid 15575 buoi-sum 448
+16:16 no progress 6 min (sum 450) -> reload+rejoin
+16:17 start run256 pid 16024 buoi-sum 450
+16:25 no progress 6 min (sum 452) -> reload+rejoin
+16:25 start run257 pid 16450 buoi-sum 452
+16:33 no progress 6 min (sum 454) -> reload+rejoin
+16:33 start run258 pid 16876 buoi-sum 454
+16:42 no progress 6 min (sum 456) -> reload+rejoin
+16:42 start run259 pid 17321 buoi-sum 456
+16:50 no progress 6 min (sum 458) -> reload+rejoin
+16:50 start run260 pid 17737 buoi-sum 458
+17:00 no progress 6 min (sum 460) -> reload+rejoin
+17:00 start run261 pid 18265 buoi-sum 460
+17:08 no progress 6 min (sum 462) -> reload+rejoin
+17:08 start run262 pid 18683 buoi-sum 462
+17:18 no progress 6 min (sum 464) -> reload+rejoin
+17:19 start run263 pid 19130 buoi-sum 464
+17:28 no progress 6 min (sum 466) -> reload+rejoin
+17:28 start run264 pid 19563 buoi-sum 466
+17:36 no progress 6 min (sum 468) -> reload+rejoin
+17:36 start run265 pid 19978 buoi-sum 468
+17:46 no progress 6 min (sum 470) -> reload+rejoin
+17:46 start run266 pid 20438 buoi-sum 470
+17:55 no progress 6 min (sum 472) -> reload+rejoin
+17:55 start run267 pid 20884 buoi-sum 472
+18:03 no progress 6 min (sum 474) -> reload+rejoin
+18:03 start run268 pid 21375 buoi-sum 474
+18:12 no progress 6 min (sum 476) -> reload+rejoin
+18:12 start run269 pid 21817 buoi-sum 476
+18:20 no progress 6 min (sum 478) -> reload+rejoin
+18:21 start run270 pid 22230 buoi-sum 478
+18:31 no progress 6 min (sum 480) -> reload+rejoin
+18:31 start run271 pid 22684 buoi-sum 480
+18:40 no progress 6 min (sum 482) -> reload+rejoin
+18:40 start run272 pid 23120 buoi-sum 482
+18:50 no progress 6 min (sum 484) -> reload+rejoin
+18:50 start run273 pid 23573 buoi-sum 484
+18:58 no progress 6 min (sum 486) -> reload+rejoin
+18:58 start run274 pid 24064 buoi-sum 486
+19:08 no progress 6 min (sum 488) -> reload+rejoin
+19:08 start run275 pid 24502 buoi-sum 488
+19:17 no progress 6 min (sum 490) -> reload+rejoin
+19:17 start run276 pid 24940 buoi-sum 490
+19:26 no progress 6 min (sum 492) -> reload+rejoin
+19:27 start run277 pid 25380 buoi-sum 492
+19:36 no progress 6 min (sum 494) -> reload+rejoin
+19:36 start run278 pid 25815 buoi-sum 494
+19:44 no progress 6 min (sum 496) -> reload+rejoin
+19:44 start run279 pid 26244 buoi-sum 496
