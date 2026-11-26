@@ -1853,3 +1853,7 @@ RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vb
 | E96 E-c+E-e dialog-order (opus; briefs/E96-dialog-order.md) | review/dialog-order | FOREMAN E child7 | session_01DgYSWkVu3mJTZ8LRPwH1Jm | RUNNING | 26/11 04:25Z |
 | E97 E-d dup-report (opus REPORT; briefs/E97-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWoPgpYzodQxz6rufXQ | RUNNING | 26/11 04:25Z |
 KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING | 2026-11-26T04:11Z (MAIN 152)
+| D1+D4 punishment reason / one rank / lãnh cung stay / harm WHO-WHY-EVIDENCE + evidence-per-charge rec (opus; briefs/D-owner-bugs-2611.md) | review/punish-reason | FOREMAN D | (opening) | RUNNING | 26/11 04:30Z |
+| D2 daily event cap + STAT PACE (opus; briefs/D-owner-bugs-2611.md) | review/stat-pace | FOREMAN D | (opening) | RUNNING | 26/11 04:30Z |
+| D3 contest first place ⇒ thị tẩm (opus; briefs/D-owner-bugs-2611.md) | review/contest-thitam | FOREMAN D | (opening) | RUNNING | 26/11 04:30Z |
+| D5 minigame cut / skill roll / Học nhanh recommendation (opus; briefs/D-owner-bugs-2611.md) | review/mg-trim | FOREMAN D | (opening) | RUNNING | 26/11 04:30Z |
