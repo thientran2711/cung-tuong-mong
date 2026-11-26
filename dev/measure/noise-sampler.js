@@ -32,9 +32,9 @@ module.exports = function nzSampler(cfg) {
   const ex = (c, s) => { const e = cur.ex; e[c] = e[c] || []; if (e[c].length < 6) e[c].push(String(s).replace(/\s+/g, ' ').slice(0, 120)) };
   /* who asked for the card: a tap on the PAGE (a tab, a person, an item, a place — not inside a card, not the buổi / day turn) within OWN_MS before the
      card shows = she opened it herself (counted as «own», not as an interruption); read-only passive listener, it never stops the tap */
-  const OWN_MS = 1500; let lastTap = { t: 0, own: false };
-  addEventListener('pointerdown', e => { try { const t = e.target, inCard = !!(t.closest && t.closest('#modal,.dlg,#kntbox,#kntchip,#rtoast'));
-    const lab = ((t.closest && t.closest('button,[role=button]')) || t).innerText || ''; lastTap = { t: Date.now(), own: !inCard && !/Sang (buổi|ngày)/i.test(lab) } } catch (x) {} }, { capture: true, passive: true });
+  const OWN_MS = 1500; let lastTap = { t: 0, own: false }, lastOwn = false; /* lastOwn: the card on screen is one she opened — a card opened from inside it is hers too */
+  addEventListener('pointerdown', e => { try { const t = e.target, inCard = !!(t.closest && t.closest('#modal,#rtoast')); /* a tap on the Tin báo box / chip = she opens the news herself */
+    const lab = ((t.closest && t.closest('button,[role=button]')) || t).innerText || ''; lastTap = { t: Date.now(), own: (!inCard || lastOwn) && !/Sang (buổi|ngày)/i.test(lab) } } catch (x) {} }, { capture: true, passive: true });
   const txt = [];
   const addTxt = (surf, s) => { if (s == null) return; for (let l of String(s).split(/\n+/)) { l = l.replace(/[ \s]+/g, ' ').trim(); if (!l || l.length < 2) continue; if (l.length > LMAX) l = l.slice(0, LMAX) + '…';
       const k = surf + '|' + l; if (seenTxt.has(k)) continue; if (seenTxt.size > 30000) return; seenTxt.add(k); txt.push([surf, l, day, buoi]) } };
@@ -60,8 +60,9 @@ module.exports = function nzSampler(cfg) {
     const rt = document.getElementById('rtoast'); if (rt && rt.classList.contains('on')) addTxt('result', rt.innerText);
     /* dialog cards */
     const M = document.getElementById('modal'); let m = null; try { m = (typeof Q !== 'undefined' && Q.length && M && !M.hidden) ? Q[0] : null } catch (e) {}
-    if (m && typeof m === 'object' && !seenQ.has(m)) { seenQ.add(m); if (base && STORY.test(String(m.t || ''))) { cur.story = (cur.story || 0) + 1 } else if (base && lastTap.own && Date.now() - lastTap.t < OWN_MS) { cur.own = (cur.own || 0) + 1; ex('own', m.t) } else if (base) { cur.dlg++; cur.buoiDlg[b] = (cur.buoiDlg[b] || 0) + 1; const k = kindOf(m); if (k) { cur.big++; cur.kinds[k] = (cur.kinds[k] || 0) + 1; ex('big', k + ': ' + (m.t || '')) }
+    if (m && typeof m === 'object' && !seenQ.has(m)) { seenQ.add(m); if (base && STORY.test(String(m.t || ''))) { cur.story = (cur.story || 0) + 1 } else if (base && lastTap.own && Date.now() - lastTap.t < OWN_MS) { lastOwn = true; cur.own = (cur.own || 0) + 1; ex('own', m.t) } else if (base) { lastOwn = false; cur.dlg++; cur.buoiDlg[b] = (cur.buoiDlg[b] || 0) + 1; const k = kindOf(m); if (k) { cur.big++; cur.kinds[k] = (cur.kinds[k] || 0) + 1; ex('big', k + ': ' + (m.t || '')) }
         if (k === 'visit' || VIS.test(String(m.t || ''))) { cur.visit++; ex('visit', m.t) } if (m.emoSeal) { cur.seal++; ex('seal', m.t) } ex('dlg', m.t) } }
+    if (!M || M.hidden) lastOwn = false;
     if (M && !M.hidden) { const t = document.getElementById('mt'); if (t) addTxt('title', t.innerText); const mb = document.getElementById('mb'); if (mb) addTxt('body', mb.innerText);
       for (const o of M.querySelectorAll('button')) if (vis(o)) addTxt('button', o.innerText) }
     for (const dl of document.querySelectorAll('.dlg')) { if (M && M.contains(dl)) continue; if (!vis(dl)) continue; addTxt('panel', dl.innerText) }
