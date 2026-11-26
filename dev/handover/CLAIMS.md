@@ -430,7 +430,7 @@ RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vb
 KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING | 2026-11-26T04:11Z (MAIN 152)
 | D1+D4 punishment reason / one rank / lãnh cung stay / harm WHO-WHY-EVIDENCE + evidence-per-charge rec (opus; briefs/D-owner-bugs-2611.md) | review/punish-reason + review/charge-evidence | FOREMAN D | session_01D3E3NbLPKdQmHXFEQ4xkHv (#5; D4 LAND READY 137882fd) | RUNNING | 26/11 04:30Z |
 | D2 daily event cap + STAT PACE (opus; briefs/D-owner-bugs-2611.md) | review/stat-pace | FOREMAN D | session_01D3E3NapjNambTi15A89ezj (D2 #3) (#2) | RUNNING | 26/11 04:30Z |
-| D3 contest first place ⇒ thị tẩm (opus; briefs/D-owner-bugs-2611.md) | review/contest-thitam | FOREMAN D | session_01D3E3NZf6R8fMhpgSkgZZZG (D3 #2) | RUNNING | 26/11 04:30Z |
+| D3 contest first place ⇒ thị tẩm (opus; briefs/D-owner-bugs-2611.md) | review/contest-thitam | FOREMAN D | session_01D3E3NZf6R8fMhpgSkgZZZG (D3 #2) | LAND READY 2c956d97 | 26/11 04:30Z |
 | D5 minigame cut / skill roll / Học nhanh recommendation (opus; briefs/D-owner-bugs-2611.md) | review/mg-trim | FOREMAN D | session_01D3E3NY4dwzUxFsbZXyqSL7 (#2) | RUNNING | 26/11 04:30Z |
 HOME-WAY top-bar Về phòng + home icon + punishment by weight | review/home-way | session_01V1ZZH3KBeUcSLSUiQfAU1w | RUNNING | 2026-11-26T04:18Z (MAIN 152)
 | 26/11 04:30Z | F #18 | BIG REVIEWER #8 (opus, F #18 child) | review/robot-realtap 4d7a22c6..ad5e1265 (+ fixer #9 pet-shop commit if it lands) | reports/robot-realtap-review.md | open |
