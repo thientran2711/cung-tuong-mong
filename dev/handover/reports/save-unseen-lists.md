@@ -243,3 +243,63 @@ Build f21a1042 = the kit stack on LIVE dbae89eb, BEFORE save-year-rollback: jspr
 
 ### Gain vs risk
 GAIN — no card a step makes can vanish on a true reload any more (26 families + every empty-«Tiếp tục» card), the Hội phối đồ contest and its loan return survive, and the sổ never lags the screen (the M2b months-long rollback). RISKS: (1) a NEW code card added later outside a generator → the census FAILs at once (unclassified site) — possible, small, caught by the scan + probe; (2) a lapsing generator (dcGate «Y phục dự Tết»: the need is gone) gives no card after a reload while the live card still showed — rare (1 of 16 flip runs, timing), no cost or object lost, by design («the gate lapses»); (3) approach cards changed after creation by jtsb / j68h wrappers (opts replaced) come back with the base options after a reload — pre-existing since r2, possible, small (a different but valid choice set); fix = route those wrappers through their own generator (follow-up). → **Được lớn hơn.**
+
+## REVIEW r4 (BIG rv, opus, session_01N1tNP5NE1WTFojcW3fS7Xt, depth 6, START_CTX ≈ 3 %) — PARTIAL (gate ~80 % done) + HANDOVER (rolled at ctx ≈ 47 %)
+PRIORITY #1 CHECK ('save-unseen-lists' / 'save quota' / 'rebirth save'): OD 0 | ledger 0 | claims 5NE1WTFo | main 0 | review/* save-unseen-lists c6d08026, -rv 9037e5a9, save-growth-r6 ad8955e1, e-pack-a 7ee5ab55 | archive 0 → reused reports «## REVIEW» + «## r4», save-residue-probe, save-growth-r6 (NOT rebuilt). NEVER 7e01f0f5 (kit pack-4).
+**Verdict so far: no blocking fault left in the save-unseen-lists code; 3 faults found and FIXED by me (below). Landing pack = review/save-fix-stack-rv5 (rv5 + save-growth-r6); final LAND READY waits for the gates listed under «LEFT».**
+
+### Branches (all pushed)
+| branch | sha | what |
+|---|---|---|
+| review/save-unseen-lists-rv4 | c51db3d412037302ffa23119b410c33c51ed2eb3 | c6d08026 merged on LIVE 5e013076 (4768ca55) + fix 1 j71Day (192ece5a) + save-quota-repro (aef085c8) + fix 2 jnotice (c51db3d4) |
+| **review/save-unseen-lists-rv5** | **deb9859d6f98d1f283b2a0efda2172fa8a18f1c6** | rv4 merged on LIVE **f009e1a6** (20b22b2b; only index/sw/assets conflicted, rebuilt) + scan rows (73c076ef) + test harness fix (deb9859d). `git diff origin/main` = the 39 save game files + tests/scans; no kit file. |
+| review/save-fix-stack | ae3251897c6b3b74ca5fc116a3db4fba5bfb9cf4 | OLD stack (rv4 192ece5a + save-growth-r6) — superseded |
+| **review/save-fix-stack-rv5** | **0cb4e389832f45b8cefaecd45f4ae2cd62c1fdc8** | rv5 73c076ef + save-growth-r6 ad8955e1 (only j6 save() conflicted → `slotPut` + `SAVE_N++` + `saveBlocked()`; rebuilt). Lacks only the test-only commit deb9859d (copy dev/test/save-boundary-reload.js + notice-late-save.js from rv5 before landing). |
+
+### Faults found by this review and fixed (whole family)
+1. **j71Day festival-day card remade from the LIVE plan** (probe REMAKE-FAIL, iPad seed 1): Hội Phượng spans 3 tuần (FEST phoenix t:[0,1,2]); in the same endTurn fDay7 makes the card (P.y=-1) and fPlan7 REPLACES j.plans[k] for next tuần → a reload rebuilt another contest or lapsed. Fix: the card carries its own plan (pp, me, pb) in ra; an old {ra:[k]} falls back. Test dev/test/j71day-remake.js: pre-fix FAIL (same title, different body/entrants), fixed PASS. Only multi-tuần festival: phoenix (j71Fest yearly fx record not affected).
+2. **Tin báo line lost on a true reload** (my iPad video, LAW 11 = robot M2 family): kitKnow batches with setTimeout 0, so the «know:» notice is added AFTER the act's render+save; nothing wrote it until the next render. Fix (jnotice, ONE rule for every notice): when NT.list changed after the last slot write (SAVE_N), one more save at the end of the tick. Test dev/test/notice-late-save.js: LIVE / pre-fix FAIL Fold+iPad, fixed PASS Fold+iPad. time-advance-save-scan row added (the wrapper never holds).
+3. **Harness on LIVE f009e1a6**: every new life now opens with the 3 selection days (jkc2 kc2SelOn); the player helpers answer option 1, she is not kept (ban hoa), the life ends → every save test showed «1 step, sổ none». TEST SETUP ONLY: save-boundary-reload newLife turns kc2SelOn off unless window.__sbrSelx (the selection days have their own selx-* tests). Census: one NOTCARD row (jselxday selxCard PARAMETER list parse hit; its cards are pid selxD).
+
+### SAVE ROLLBACK (MAIN 151 BLOCKING, M2b Y20→Y19, M5b 5.2 MB) — cause found, fix = this branch + save-growth together
+Repro dev/test/save-quota-repro.js (real robot year-14 save dev/handover/robot/nc-B-tuc/saves/20261124-0057-010.json, 4.34 M chars + 820 k other site storage, real taps, true reload):
+| build | write errors | SAVE-LAG | true reload | slot |
+|---|---|---|---|---|
+| rv4 alone (= LIVE save path) | 71 QuotaExceededError, swallowed by j6 save() catch{} | 13/24 | 14.9.2.3 → **14.8.2.2 (−13 buổi; grows without end = M2b)** | 4.42 M stuck |
+| e-pack-a 7ee5ab55 (save-growth, no save-unseen) | 0 | **6/24** (LIVE's own lag) | exact | 0.39 M |
+| **save-fix-stack (rv4 + sg)** | 0 | **0/84** · **0/160** | Y14 m8 → past Y15 boundary → Y15 m9, **43 min wall**, reload mid-year exact = 0 months / 0 turns lost | 0.40–0.43 M (ser 2.8–2.96 M) |
+| **save-fix-stack-rv5** (on f009e1a6) | 0 | **0/160** | Y14 m8 → Y15 m9 exact | 0.40–0.43 M |
+| stack, whole site store full (QR_ROOM 200) | game writes refused | — | — | sticky kit notice «saveBlocked» shown (not silent) |
+
+### MAIN 152 rebirth (M5b: death + new life never saved) — dev/test/save-death-rebirth.js (reload at the death card / at the new-life identity card / 4 s after «Nhận thân phận»; the dead life may never come back alive)
+LIVE 5e013076 and LIVE f009e1a6: FAIL «reload at the new-life identity card» Fold+iPad (title «Sổ một · Chưa ghi» = the new life never saved); save-unseen-lists nl-death/nl-0s LIVE FAIL 4/4. rv4, rv5, save-fix-stack-rv5: **6/6 PASS** (Fold+iPad). Fixed by the branch's j52 at-once write + jqsave SAVE_N rule.
+
+### Gate results (head = rv4 192ece5a/c51db3d4 on 5e013076 unless marked rv5)
+| check | result |
+|---|---|
+| save-residue-probe Fold seeds 1–3 × 40 | rv4: seed 1 one REMAKE-FAIL ap.svDefect (traced: remake is fine when the rival's maid is still in any staff list, lapses only when she left every staff — j3 «person gone» lapse by design; re-run of seed 1 clean) · seeds 2,3 0 lines · **rv5: seeds 1,2,3 0 lines (689 / 1056 / 378 writes)** |
+| probe iPad seeds 1–3 × 40 | rv4: seed 1 j71Day (fixed) → after fix seeds 1,2 0 lines · **rv5: seed 1 0 lines; seeds 2,3 RUNNING at handover** |
+| probe with rivals in the remake fingerprint (_rvprobe) | rv4 / rv5 Fold seed 2: 0 lines (remake never touches rivals) |
+| RP_MUTATE | tsLeNpc: PASS (that run never met the card — insensitive); **stipCard: FAIL 3 LOST ✔** |
+| LIVE must FAIL | 5e013076: SAVE-LAG 6/40 ✔ · f009e1a6: SAVE-LAG 8–10/40 ✔ · rows LIVE: tinbao / held / nl-0s FAIL ✔ |
+| save-unseen-lists flip Fold+iPad | rv4 **16/16** · rv5 running |
+| rows + family Fold+iPad | rv4 **16/16** · rv5 running |
+| MUTATE rk / rk2 / nt / evh / nl | all FAIL ✔ |
+| save-boundary-reload (incl. 0-s) | rv4 Fold 12/12, iPad 12/12 · **rv5 Fold 12/12** · rv5 iPad running |
+| scans | rv5: unseen-lists PASS (census 157 sites, UNCLASSIFIED 0) · time-advance PASS (10 paths, 10 gates) |
+| coop-e2e local Worker | rv4 SWAP0 **143/143**, SWAP1 **143/143** · rv5 queued |
+| save-rt-coop (robot-coop-savert 71c538df) | rv4 rows = LIVE rows (identical; 5 FAILs are LIVE's own) |
+| death-rebirth / notice-late / j71day | rv5 6/6 · 2/2 · PASS |
+| videos (true reload → lists / waiting cards) | rv4 Fold PASS; iPad found fault 2 (fixed). rv5 Fold: Tin báo intact, generator cards intact, ONE pid «Việc khó xử» card lost (open follow-up A) · iPad queued |
+| quickcheck ALONE | NOT run yet (needs an idle box) |
+
+### Open follow-ups (not blocking; pre-existing, not made worse)
+A. **pid choice cards («Việc khó xử», j7 ev: rvbribe / rvmusk / doll / eunuch / maidhostage / condemnedmaid / rcpMama)**: written in the sổ P now, but on load deserQ → mkP rebuilds only some (in-page test: 4 written, 1 rebuilt at load, 0 left after «Tiếp tục»). On LIVE they are not even written (held). Probability có thể, nặng vừa (an unseen dilemma lost on reload), found by: the rv5 video / /home/user/wt/sul6-out/pid4.js (copy into dev/test to run). Needs its own fixer (pid family: why PEND rebuild / a later load step drops them).
+B. jtsb / j68h wrappers change opts after creation (r4 risk 3) and q72o pid retitle («Phụ tuyến · …» → «Việc nhờ» after reload) — cosmetic, same family as A.
+C. selection days (S.selx2) save/reload not covered by these tests (selx-* own tests).
+
+### LEFT for the successor (all on rv5 deb9859d / stack-rv5 0cb4e389; worktrees /home/user/wt/sul6 and /home/user/wt/sulsg2 if the container lives, else fresh sparse worktrees)
+1. Finish rv5: probe iPad seeds 2,3; sbr iPad; flip + rows Fold+iPad; coop-e2e SWAP0/1 (local Worker: `cd coop/worker && npm install && npx wrangler dev --local --port 8799`); spread-e2e; videos Fold 755x1000 + iPad 1180x820 (dev/test/_rvvideo.js in /home/user/wt/sul6, untracked; expect follow-up A only).
+2. Stack-rv5: copy the two rv5 test files, commit, push (new commit, no force); run save-death-rebirth, probe Fold seed 2, coop-e2e SWAP0, savegrow-slot on robot saves.
+3. quickcheck ALONE on the stack (`bash dev/tools/quickcheck.sh`), after every other test has stopped.
+4. Then «LAND READY review/save-fix-stack-rv5 <sha> FOR MAIN 153 / LC19 (BIG; save; = save-unseen-lists rv5 + save-growth-r6 — land INSTEAD of both, e-pack-a must then drop its save-growth merge or land after)» at the END of FOREMAN_B_STATUS.md + send_message Foreman B, with the numbers above.
