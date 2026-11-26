@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8d5e3382+","t":"2026-11-26T18:38Z","c":"Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»).","b":"1b5137935266","h":[{"s":"f573dc94+","t":"2026-11-26T17:33Z","c":"Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị)."},{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"70ebaa8c","t":"2026-11-26T22:20Z","c":"picker-dom: KIT 28.13i item pick grid paged (BAL.kip.page, §23 pager) + only the chosen item's option card drawn, others on demand (K-LIST-…","b":"fb045ded4651","h":[{"s":"8d5e3382+","t":"2026-11-26T18:38Z","c":"Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»)."},{"s":"f573dc94+","t":"2026-11-26T17:33Z","c":"Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị)."},{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1670,9 +1670,11 @@ function kitCloseTxt(h){return String(h==null?"":h).replace(/<[^>]*>/g,"").repla
 function kitCancelIx(m){if(!m||!m.opts||m.mustChoose)return -1;return m.opts.findIndex(c=>c&&KIT_CLOSE_W.test(kitCloseTxt(c.n))&&(!c.fx||Object.keys(c.fx).every(k=>!c.fx[k])))}
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
-  const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}" ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
+  const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";if(m.kipOnly instanceof Set&&c&&c.ik!=null&&!m.kipOnly.has(i))return "";/* KIT 28.13i K-LIST-PAGE (picker-dom): an item pick grid builds only the chosen item's card; jgpick builds the others on demand */return optBtnHTML(c,i)}).join("")}</div>`:"");
   $("mr").innerHTML=m.opts?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
   kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
+/* ONE option button of a dialog (base markup; kaNorm1 frames it); jgpick kipCard builds a picker's card on demand with the same call */
+function optBtnHTML(c,i){const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}" ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}
 function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
 function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
   const b0=snapReal(),s0=S.logSeq||0;
@@ -37680,6 +37682,8 @@ Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
    (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
 Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
+/* picker-dom (MAIN 164 play-stopper 26/11): BAL.kip.page = tiles per page of the KIT 28.13i item pick grid (jgpick; 4 rows of 6 on Fold and iPad) */
+Object.assign(BAL,{kip:{page:24}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -74468,22 +74472,39 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
  d.innerHTML=det;d.classList.toggle("kipd2",!!det);
  d.appendChild(card);
  d.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kipgo" data-kipgo="${i}"${lock?" disabled":""}>${kipE(KIP_VERB[m.pid]||"Chọn")}</button>`)}
-function kipSelect(M,m,i){KIP_SEL.set(m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
+/* K-LIST-PAGE (picker-dom, MAIN 164 play-stopper 26/11; Foreman F s14 iPad b1570 tab crash, one screen 20,108 nodes; s7 save 36k–63k nodes,
+   «Dâng quà» 232 s to open): the grid used to draw a FULL hidden act card (.opts.kiphas>.opt, ~26 nodes, kaNorm'd) for EVERY entry + a tile.
+   Now (1) the base dialog (j3, m.kipOnly) draws only the chosen item's card; kipCard draws another one when its tile is chosen (same
+   optBtnHTML + kitFix → kaNorm1, so the copy and the confirm are the real option); (2) the grid shows BAL.kip.page tiles at a time with the
+   kit pager of §23 (‹ › + «trang N/M», kitPicker's .kpkwrap/.kpkpg/.kpkpn look; no count). Doable first, then the dialog's order (unchanged). */
+/* the cards the base dialog draws (j3 showModal): never saved with the queue (not enumerable) */
+function kipOnlySet(m,v){Object.defineProperty(m,"kipOnly",{value:v,writable:true,configurable:true,enumerable:false});return v}
+function kipList(m){const L=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null&&S.inv[c.ik]);L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));return L}
+function kipSel0(m,L){let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}return sel}
+function kipCard(M,m,i){const ops=M.querySelector(".opts");if(!ops||ops.querySelector(`:scope>.opt[data-m="${i}"]`))return;const c=m.opts[i];if(!c)return;
+ kipOnlySet(m,(m.kipOnly instanceof Set?m.kipOnly:new Set())).add(i);ops.insertAdjacentHTML("beforeend",optBtnHTML(c,i));try{kitFix(M)}catch(e){console.error("kipCard",e)}}
+function kipSelect(M,m,i){KIP_SEL.set(m,i);kipCard(M,m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
  M.querySelector(".kipw").classList.add("has");kipDetail(M,m,i)}
+function kipPage(M,m,pg){const w=M.querySelector(".kipw");if(!w)return;const L=w.__kipL||kipList(m),per=Math.max(1,BAL.kip.page|0),pages=Math.max(1,Math.ceil(L.length/per));
+ pg=Math.min(Math.max(0,pg|0),pages-1);w.dataset.pg=pg;const sel=KIP_SEL.get(m);
+ w.querySelector(".kipg").innerHTML=L.slice(pg*per,(pg+1)*per).map(([c,i])=>kipTile(c,i,i===sel)).join("");
+ const B=w.querySelectorAll(".kpkpg");B.forEach(b=>{b.hidden=pages<2;b.disabled=b.dataset.kippg<0?pg<=0:pg>=pages-1});
+ const n=w.querySelector(".kpkpn");if(n)n.textContent=pages>1?`trang ${pg+1}/${pages}`:""}
 function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;const ops=M.querySelector(".opts");if(!ops||M.querySelector(".kipw"))return;
- const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops.querySelector(`.opt[data-m="${i}"]`));
- /* doable first (kitDoableFirst rule), then the dialog's own order */
- L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));
- let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}
- const w=document.createElement("div");w.className="kipw kshop";
- w.innerHTML=`<div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.map(([c,i])=>kipTile(c,i,i===sel)).join("")}</div><div class="kipd" aria-live="polite"></div>`;
+ const L=kipList(m);/* doable first (kitDoableFirst rule), then the dialog's own order */
+ const sel=kipSel0(m,L);if(sel!=null)KIP_SEL.set(m,sel);const per=Math.max(1,BAL.kip.page|0);/* ONE CORE: BAL.kip (jbal2) */
+ const w=document.createElement("div");w.className="kipw kshop";w.__kipL=L;
+ w.innerHTML=`<div class="kpkwrap kipwrap"><button type="button" class="kpkpg" data-kippg="-1" aria-label="Trang trước">‹</button><div class="kshg kipg" role="radiogroup" aria-label="Chọn món"></div><button type="button" class="kpkpg" data-kippg="1" aria-label="Trang sau">›</button></div><div class="kpkpn"></div><div class="kipd" aria-live="polite"></div>`;
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");
+ const at=sel!=null?L.findIndex(x=>x[1]===sel):0;kipPage(M,m,Math.floor(Math.max(0,at)/per));
  if(sel!=null)kipSelect(M,m,sel);else kipDetail(M,m,-1)
  /* the gift moment's two pictures load when a gift picker opens (on demand, ~60 KB; sw.js caches them) */
  try{if(KIP_VERB[m.pid]&&m.pid!=="plantpick"&&kfOn()&&!kfStill())["gift-hands.webp","gift.webp"].forEach(f=>{const i=new Image();i.src=kfkU(f)})}catch(e){}}
-(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kipBuild()}catch(e){console.error("kipBuild",e)}return r}})();
-document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("#modal [data-kip],#modal [data-kipgo]");if(!t)return;const M=$("modal"),m=Q[0];if(!kipOn(m))return;
+(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(kipOn(m)){const sel=kipSel0(m,kipList(m));kipOnlySet(m,new Set(sel!=null?[sel]:[]))}else if(m&&m.kipOnly)kipOnlySet(m,null)}catch(e){}
+ const r=s0.apply(this,arguments);try{kipBuild()}catch(e){console.error("kipBuild",e)}return r}})();
+document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("#modal [data-kip],#modal [data-kipgo],#modal [data-kippg]");if(!t)return;const M=$("modal"),m=Q[0];if(!kipOn(m))return;
  ev.stopPropagation();ev.preventDefault();
+ if(t.dataset.kippg!=null){if(t.disabled)return;const w=M.querySelector(".kipw");kipPage(M,m,(+(w&&w.dataset.pg)||0)+(+t.dataset.kippg));return}
  if(t.dataset.kipgo!=null){if(t.disabled)return;const i=+t.dataset.kipgo,b=M.querySelector(`.opts>.opt[data-m="${i}"]`);if(!b||b.disabled)return;
   KIP_GO={pid:m.pid,pp:m.pp,c:m.opts[i],from:(M.querySelector(`.kipc[data-kip="${i}"] .kitem`)||t).getBoundingClientRect(),to:kipTarget(M)};b.click();return}
  kipSelect(M,m,+t.dataset.kip)},true);
@@ -74528,6 +74549,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kshc.kipc>.kshpic{cursor:pointer;transition:transform .15s}
 .kipw.has .kshc.kipc:not(.on){opacity:.75}
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
+.kipw>.kipwrap{grid-template-columns:28px minmax(0,1fr) 28px}.kipw>.kipwrap>.kipg{min-width:0}.kipw>.kipwrap:has(>.kpkpg[hidden]){grid-template-columns:minmax(0,1fr)}.kipw>.kipwrap>.kpkpg[hidden]{display:none}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipd>.kipgo{align-self:stretch;min-height:40px}
@@ -74539,9 +74561,9 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 
 /* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}
 `;document.head.appendChild(st)})();
-if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected",html:()=>{try{
- const L=Object.keys(IT).filter(k=>!itm(k).story).slice(0,4);return `<div class="kipw kshop has"><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});
-  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div></div>`}catch(e){return""}}});
+if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected, one page + the §23 pager",html:()=>{try{
+ const L=Object.keys(IT).filter(k=>!itm(k).story).slice(0,4);return `<div class="kipw kshop has"><div class="kpkwrap kipwrap"><button type="button" class="kpkpg" disabled aria-label="Trang trước">‹</button><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});
+  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div><button type="button" class="kpkpg" aria-label="Trang sau">›</button></div><div class="kpkpn">trang 1/3</div></div>`}catch(e){return""}}});
 /* ================= jstaff: NAMED PALACE STAFF (owner 16/11, review/elder-staff) =================
    Five named servants hold the palace's offices, each with 3–4 duties (numbers and names in BAL.staff, jbal.js):
      gt  Giáo tập ma ma, Nội vụ phủ: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
@@ -101480,7 +101502,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1b5137935266";window.CTM_BUILD=BUILD;
+const BUILD="fb045ded4651";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
