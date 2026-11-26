@@ -38,7 +38,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    /* paged build only: page turns reach every entry once; an on-demand card = the render-time card; confirm really gives the piece */
    const deep=async(name,pid,pp)=>{const r={name:name+' · trang',pid,deep:1};while(Q.length)Q.shift();try{closeModal()}catch(e){}pushDil(mkP(pid,pp),name);showModal();await w(300);
     const M=document.getElementById('modal');const m=Q[0];if(!M.querySelector('[data-kippg]')){r.paged=false;out.push(r);return}r.paged=true;
-    const all=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null&&S.inv[c.ik]).map(x=>x[1]);const seen=[];let guard=0;
+    const all=kipList(m).map(x=>x[1]);/* one tile per entry, or per stack of twins once jstack (inv-stack) is in */const seen=[];let guard=0;
     const nx=()=>M.querySelector('.kipw .kpkpg[data-kippg="1"]');
     for(;;){seen.push(...[...M.querySelectorAll('.kipc')].map(t=>+t.dataset.kip));const b=nx();if(!b||b.disabled||b.hidden||++guard>500)break;b.click();await w(20)}
     r.pages=guard+1;r.all=all.length;r.seen=seen.length;r.uniq=new Set(seen).size;r.miss=all.filter(i=>!seen.includes(i)).length;r.maxTiles=+(Math.min(all.length,BAL.kip.page));
