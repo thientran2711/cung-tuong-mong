@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6f3cdd5b+","t":"2026-11-26T10:43Z","c":"OB-NGOAICUNG-3b r3: report (before/after, gates) + chest-tap.js (tiểu thư chest «Nhận» reached with real taps on Fold + iPad)","b":"42b10677014f","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"ca368b86+","t":"2026-11-26T10:44Z","c":"OB-NGOAICUNG-3b r3: report (before/after, gates) + chest-tap.js (tiểu thư chest «Nhận» reached with real taps on Fold + iPad)","b":"0de52781f0ee","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -98072,7 +98072,16 @@ window.placePalP=placePalP;
    own act names in its title (a gift / letter she sends into the palace: «Gửi quà vào cung cho X») */
 (function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(t,b){try{if(road8()==="kc"){if(t==="Trong cung vừa qua")t=placeW("aa_t")||t;
  if(b&&b.rel&&typeof relSnap==="function"){const now=relSnap(),rel={},T=String(t||"");for(const v of (typeof rivals!=="undefined"&&rivals)||[]){if(!v||!v.id)continue;
-  rel[v.id]=v.name&&T.includes(v.name)&&b.rel[v.id]?b.rel[v.id]:now[v.id]}b=Object.assign({},b,{rel})}}}catch(e){}return r0.apply(this,[t,b].concat([].slice.call(arguments,2)))};window.resultShow=resultShow})();
+  rel[v.id]=v.name&&T.includes(v.name)&&b.rel[v.id]?b.rel[v.id]:now[v.id]}b=Object.assign({},b,{rel})}
+ /* RV r3 FAIL 1 (same gate): Hoàng hậu's / Thái hậu's «thiện cảm» are HER stats hh / th (RKEYS rows «Hoàng hậu <tên>: thiện cảm −10») — at home they are
+    palace people's feelings too: kept only when her own act names them in the title */
+ if(b){const T=String(t||""),q=typeof queenP==="function"?queenP():null;const nb={};if(b.hh!=null&&!(q&&q!==S&&q.name&&T.includes(q.name))&&!/Hoàng hậu/.test(T))nb.hh=S.hh||0;
+  if(b.th!=null&&!/Thái hậu/.test(T))nb.th=S.th||0;if(Object.keys(nb).length)b=Object.assign({},b,nb)}
+ window.__r8T=String(t||"")}}catch(e){}try{return r0.apply(this,[t,b].concat([].slice.call(arguments,2)))}finally{window.__r8T=null}};window.resultShow=resultShow})();
+/* the «Vì sao» rows of a result card / Sổ ghi tail (jwhyn whyText: one note per relAdd change) at home: no palace person's note (placePalP), except the
+   person her own act names in the card title (RV r3 FAIL 1: «Mất: Hoàng hậu …: thiện cảm −10» came from this change list, not before.rel) */
+(function(){if(typeof whyText!=="function")return;const w0=whyText;whyText=function(e){try{if(e&&road8()==="kc"&&placePalP(e.who)){const T=window.__r8T||"",n=e.who&&e.who.name;
+ if(!(n&&T.includes(n))&&!(e.who==="th"&&/Thái hậu/.test(T)))return""}}catch(x){}return w0.apply(this,arguments)};window.whyText=whyText})();
 /* HER TAG AT HOME (RV-OB-NGOAICUNG FAIL 2, k2 wording family): pMe().rw = her home station from ROAD8_LAB «me» (Tiểu thư / Thôn nữ / Công chúa / Tú nữ),
    never a palace rank, wherever her figure is drawn (dialogs, cards, stage) */
 (function(){if(typeof pMe!=="function")return;const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(road8()==="kc"&&f&&!S.out){const t=placeW("me");if(t)f.rw=t}}catch(e){}return f};window.pMe=pMe})();
@@ -100558,7 +100567,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="42b10677014f";window.CTM_BUILD=BUILD;
+const BUILD="0de52781f0ee";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

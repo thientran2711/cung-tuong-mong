@@ -181,7 +181,16 @@ window.placePalP=placePalP;
    own act names in its title (a gift / letter she sends into the palace: «Gửi quà vào cung cho X») */
 (function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(t,b){try{if(road8()==="kc"){if(t==="Trong cung vừa qua")t=placeW("aa_t")||t;
  if(b&&b.rel&&typeof relSnap==="function"){const now=relSnap(),rel={},T=String(t||"");for(const v of (typeof rivals!=="undefined"&&rivals)||[]){if(!v||!v.id)continue;
-  rel[v.id]=v.name&&T.includes(v.name)&&b.rel[v.id]?b.rel[v.id]:now[v.id]}b=Object.assign({},b,{rel})}}}catch(e){}return r0.apply(this,[t,b].concat([].slice.call(arguments,2)))};window.resultShow=resultShow})();
+  rel[v.id]=v.name&&T.includes(v.name)&&b.rel[v.id]?b.rel[v.id]:now[v.id]}b=Object.assign({},b,{rel})}
+ /* RV r3 FAIL 1 (same gate): Hoàng hậu's / Thái hậu's «thiện cảm» are HER stats hh / th (RKEYS rows «Hoàng hậu <tên>: thiện cảm −10») — at home they are
+    palace people's feelings too: kept only when her own act names them in the title */
+ if(b){const T=String(t||""),q=typeof queenP==="function"?queenP():null;const nb={};if(b.hh!=null&&!(q&&q!==S&&q.name&&T.includes(q.name))&&!/Hoàng hậu/.test(T))nb.hh=S.hh||0;
+  if(b.th!=null&&!/Thái hậu/.test(T))nb.th=S.th||0;if(Object.keys(nb).length)b=Object.assign({},b,nb)}
+ window.__r8T=String(t||"")}}catch(e){}try{return r0.apply(this,[t,b].concat([].slice.call(arguments,2)))}finally{window.__r8T=null}};window.resultShow=resultShow})();
+/* the «Vì sao» rows of a result card / Sổ ghi tail (jwhyn whyText: one note per relAdd change) at home: no palace person's note (placePalP), except the
+   person her own act names in the card title (RV r3 FAIL 1: «Mất: Hoàng hậu …: thiện cảm −10» came from this change list, not before.rel) */
+(function(){if(typeof whyText!=="function")return;const w0=whyText;whyText=function(e){try{if(e&&road8()==="kc"&&placePalP(e.who)){const T=window.__r8T||"",n=e.who&&e.who.name;
+ if(!(n&&T.includes(n))&&!(e.who==="th"&&/Thái hậu/.test(T)))return""}}catch(x){}return w0.apply(this,arguments)};window.whyText=whyText})();
 /* HER TAG AT HOME (RV-OB-NGOAICUNG FAIL 2, k2 wording family): pMe().rw = her home station from ROAD8_LAB «me» (Tiểu thư / Thôn nữ / Công chúa / Tú nữ),
    never a palace rank, wherever her figure is drawn (dialogs, cards, stage) */
 (function(){if(typeof pMe!=="function")return;const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(road8()==="kc"&&f&&!S.out){const t=placeW("me");if(t)f.rw=t}}catch(e){}return f};window.pMe=pMe})();
