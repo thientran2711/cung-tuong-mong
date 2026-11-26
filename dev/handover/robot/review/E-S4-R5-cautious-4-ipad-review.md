@@ -1,0 +1,6 @@
+# E-S4 R5-cautious-4 (iPad) — end-of-life review (evidence limited, see moments)
+1. Summary: cautious, pf/pt_hai, iPad, real taps, jsClicks 0, harness 1ffae8bb at start; resumed on 10fbc51c/b4b181f8/8dc395ba/d2e03d80 (same life, ckpt buổi 121-126), game builds 6a87c26fe0f5→4763d410aa0d→f009e1a6+, 194 buổi, 2 game years, age 20, rank 0, ending «Lãnh cung — Phát điên trong lãnh cung» (game-imposed, no exitPick, VALID), 17 stuck rows from the parked attempts (harness gaps), 0 dead buttons.
+2. Scores: a first 15 min 3 (two stalls in the first 125 buổi) · b loop/pacing 4 · c buttons 5 (the iPad option-card gap is a harness issue, fixed; softlocks from queue fixed on the new Build) · d story 4 (an unexplained fast fall into lãnh cung) · e characters 4 · f choices/fairness 3 (a cautious road ends in lãnh cung after 2 years with no visible cause) · g feedback 4 (stipend popup over the ending) · h mini-games n/a · i visuals 7 · j co-op n/a.
+3. Loved: nothing stood out. Hated: fall into lãnh cung without a cause; stipend popup over the ending. Replay: yes.
+4. BUGS: stipend popup over the ending card (5 of 6); cold-palace fall without explanation (design question for MAIN: why Phế phi at year 2 after «Hối lộ người ở Thái y viện»?).
+5. Suggestions (parking lot): a short «why you were deposed» line on the ending card.
