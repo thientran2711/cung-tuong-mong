@@ -27,3 +27,28 @@ PRIORITY #1 CHECK ('cung quy'): OD 2 (06:50Z (C) + this order) | main: existing 
 - On a guest (co-op friend) the NPC breach arrives as a Tin báo line, not the Q card, like other NPC deeds.
 
 Shots are kept on the CDN for the re-review. No wipe, because the verdict is FAIL.
+
+---
+# RV1 — review/cung-quy 77d9a6e4 (b54f367e + 77d9a6e4 on main 3af7896e) — **FAIL** (2 fixes, one family)
+
+Reviewer session_01D3E3NZRZa7GDM13XyeesMm · depth 4. Every gate rerun on 77d9a6e4 by me.
+
+| check | result |
+|---|---|
+| fix 1: Dư đồ focus-view warning | OK. jdf sends cqWarn as the row `info` = the kit «!» detail (jfocus kfoc-i), the same kit path as lock reasons. Scan rows check the j6 xw for every breachable act |
+| fix 2: batnat → `high`; tsbBulOK reads cqOK; scan BEFORE row | OK |
+| fix 3: cqAccFail marked in the fail branch of j8 accuse/vpAccuse, jdress xxAccuse, j30 tocao/expose/xinhh, j78 trinhth/trinhhh; «vu cáo» only on that signal, upward, and not when the act already punished the accuser | OK for those functions |
+| maid/srv:accuse → free (target = the Hoàng hậu as listener) | accepted |
+| name-mask in breach lines (k61Mask, then «người ấy») | OK |
+| scan cung-quy-scan.js | PASS (42 rank-ruled, 0 unchecked, 0 page errors) |
+| robot cung-quy-rate.js 20 tuần × 1 | 113 acts, 0 breaks, 3 blocked (provoke) |
+| old save LIVE → 77d9a6e4 | PASS (tuần 4→9, 0 errors) |
+| coop-e2e on the CDN build of 77d9a6e4 | **143/143** |
+
+## FAIL — fix list
+1. **The «Tố xa xỉ» / «Tố vượt phẩm» shelf branch has no fail signal.** jshelf.js shelfHook1 rewires ACT.xx.f and ACT.vp.f: when the worn-item cause is missing, they run shelfAccuse / shelfVpAccuse (the room-display charge). Their fail branches are unmarked: shelfFalse («tra xét ra không có chuyện đó … bị quở vì tố bừa») and the wave branch («… bỏ qua, chỉ dặn lần sau giữ ý»). My probe sent runAct(Đáp ứng → Quý phi, "xx") with a forced fail and got that shelf text with no «Trái cung quy». So the same act, xx, pays «vu cáo bề trên» on one branch and not on the other (one rule, law 11). Mark both fail branches of shelfAccuse and shelfVpAccuse with cqAccFail. The static scan only reads jdress/j8, so add the jshelf functions to its SRC table.
+2. **The monthly NPC shelf charge skips the gate: a generator outside the one rule.** jshelf.js shelfNpcAccuse calls shelfVpAccuse / shelfAccuse directly, not through runAct. As a result: (a) the failed-charge consequence never fires for NPCs there; (b) the accQ rule (charging the Hoàng hậu needs ≥ BAL.cq.accQ) is not checked, because T is every live consort including the Hoàng hậu with no rank check; (c) the robot counter (cqCount) never sees these acts. Route it through the gate (runAct(a,t,kind), or cqRun around the call) and add it to the scan's generator table. Then rerun a full git grep for any other direct caller of an accuse-class body (my grep found only this one).
+
+Not blocking: the scan checks the fail signal statically. A runtime row per key (forced fail upward → breach line; forced win → none) would have caught #1.
+
+Shots stay on the CDN (FAIL).
