@@ -15,6 +15,13 @@ const PAL_WEST=[["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222]];
 const PAL_GONE=["Trữ Tú cung","Hàm Phúc cung","Thái Cực điện"]; /* names of the old tail slots, only for the save-migration log line */
 PAL_WEST.forEach(([n,x,y],i)=>{
  if(MAPH.rivalSlots.some(s=>s.name===n))return;const s={slot:9+i,name:n,box:{x,y,w:.058,h:.105},anchor:{x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}};MAPH.rivalSlots.push(s);PALN.push(n)});
+/* PALACE PLAN = HISTORY (owner OD 24/11 ~08:45Z «vị trí trên bản đồ … khớp một phần nào đó với lịch sử»; Foreman D order 24/11, review/palace-distance P1):
+   the Tây lục cung courtyards of the Dư đồ art (2 columns × 3 rows west of the axis) hold the palaces that were WEST in the Forbidden City:
+   inner column (nearest Dưỡng Hòa điện) — Vĩnh Thọ (south, next to the Emperor's hall: the favourites' palace) and Dực Khôn (middle), its north courtyard
+   left empty (Trữ Tú, dropped 18/11); outer column — Khải Tường (= Thái Cực, south), Trường Xuân (middle), Hàm An (= Hàm Phúc, north).
+   Names keep their slot INDEX (every save's S.pal / v.pal unchanged); only the place on the plan moves. jbancung bcNear / jpdist pdFar read these anchors. */
+const PAL_PLAN={"Vĩnh Thọ cung":[.368,.455],"Dực Khôn cung":[.368,.338],"Khải Tường cung":[.303,.455],"Trường Xuân cung":[.303,.338],"Hàm An cung":[.303,.222]};
+for(const s of MAPH.rivalSlots){const q=PAL_PLAN[s.name];if(!q)continue;const [x,y]=q;s.box={x,y,w:.058,h:.105};s.anchor={x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}}
 palHeadOK=function(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=3};
 function palHostOK(p){return palHeadOK(p)&&rkOf(p)<=5&&p.pal!=null}
 function palLive(p){return p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out}
@@ -55,7 +62,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const p of rivals)if(!palLive(p)&&!p.coop&&(p.resHead!=null||p.resHall!=null)){p.resHead=null;p.resHall=null}
  /* a house over the cap (old saves had 3, a promotion placed someone first): the newest NPC extras leave and are housed again below */
  for(const h of hs){const M=mates(h);if(M.length<=cap)continue;const N=M.filter(y=>y!==S);for(const y of N.slice(-(M.length-cap))){y.resHead=null;y.resHall=null}}
- const pickHost=p=>{const c=hs.filter(x=>x!==p&&cnt(x)<cap);if(!c.length)return null;const m=Math.min(...c.map(cnt));return pick(c.filter(x=>cnt(x)===m))};
+ const pickHost=p=>{const c=hs.filter(x=>x!==p&&cnt(x)<cap);if(!c.length)return null;if(typeof pcHostPick==="function"){const h=pcHostPick(p,c,cnt);if(h)return h}/* promo-build PHÂN CUNG: the host by the royals' thiện cảm (jpromob), one rule for her and every NPC */const m=Math.min(...c.map(cnt));return pick(c.filter(x=>cnt(x)===m))};
  for(const p of all){if(!palLive(p)||p.queen)continue;const r=rkOf(p);
   if(r>=3&&p.pal!=null){p.resHead=null;p.resHall=null;if(p!==S)p.palWait=0;continue}
   if(p===S&&sv){S.resHead=null;continue}

@@ -216,14 +216,19 @@ function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir=
 /* fix-kframe-heir: the ONE road that puts a living Thái tử aside with no new one named (j8 kframe). m = his mother (S = her, or an NPC / co-op entry).
    S.heir is cleared only when it is that son. Her / an NPC mother's Danh loss (BAL.kid.heirDanh, two-way) is jkidlife's deposeHeir wrap, as setHeir. */
 function deposeHeir(k,m){if(!k||!k.heir)return false;k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null;return true}
-function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null}/* fix-kframe-heir: only when it is that son */if(mine)apply({suc:-15});
+function kidDie(k,why,mine){k.alive=false;dieMk(k,why||"ill");const wasH=k.heir;if(wasH){k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null}/* fix-kframe-heir: only when it is that son */if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
 function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}return Math.round(n*k)}
 /* MOODKNOW step 0 (owner s35 Lượt 41 + OD 17/11 ~18:38Z): ONE way to RAISE the jealousy SCORE v.ghen. It adds n (clamped 0–100) and, for the real
    rise, a short Chạnh lòng FEELING cause (jmoodknow ghenFeel: true why, aimed at the one who caused it 'by', khắc timer BAL.mood2.dur.e.ghenUp).
    Lowering stays a plain write; the feeling ending never touches the score. Returns the real rise. */
-function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
+function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;
+ /* review/net-ghen (law 6 real cause, law 1 one rule): v.ghen is jealousy OF HER. When another consort caused it (by = an NPC), it is aimed at that
+    consort, not at the player: v's oán toward by × BAL.net.ghenOanK (the ONE NPC↔NPC jealousy rule; jshelf uses it too) + the Chạnh lòng feeling at by.
+    A co-op player seat (by.coop) keeps the old path (its rows are rebased per player). */
+ if(by&&typeof by==="object"&&by!==S&&by!==v&&!by.coop){oanAdd(v,by,n*BAL.net.ghenOanK);if(typeof ghenFeel==="function")try{ghenFeel(v,n,why,by)}catch(e){}return 0}
+ const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(v,d,why,by===undefined?S:by)}catch(e){}return d}
 /* her own jealousy SCORE toward a consort (v.pg, "Ngươi ghen N") — same family as ghenUp: the ONE way to raise it; the real rise also adds a short
    Chạnh lòng FEELING on her (ghenFeel), aimed at that consort. Lowering stays a plain write; the feeling ending never touches the score. */

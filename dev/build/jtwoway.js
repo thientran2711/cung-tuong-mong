@@ -95,18 +95,19 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
 /* ---------- Player side: her options read the same costs; NPC-only deeds become her options ---------- */
 (function(){const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{if(!S||!v)return A;
   /* her existing options: costs/gains from BAL.tw (one source) */
-  for(const a of A){if(a.n==="Giúp đỡ nàng"){a.c=twCost("help");a.x=`nàng quý ngươi +${G().help} · oán -${G().helpOan}`;a.run=()=>{chatMark(v);return twDo(S,v,"help",true)+"."}}
+  for(const a of A){if(a.n==="Giúp đỡ nàng"){a.c=twCost("help");a.x=`nàng ${pvQuy(v,G().help,"quý ngươi")} · oán -${G().helpOan}`;a.run=()=>{chatMark(v);return twDo(S,v,"help",true)+"."}}
    else if(a.n==="Tạ lỗi"){a.c=twCost("apol");a.x=`thành: oán -${G().apol}`;a.run=()=>{chatMark(v);return twDo(S,v,"apol",true)+"."}}}
   if(sameHouse(S,v))return A;
   const add=(k,x)=>{const D=TW[k];if(!D||(D.req&&!D.req(S,k==="mediate"?v:v)))return;const c=twCost(k);
-   A.push({n:D.n,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
+   A.push({n:D.n,tw:k,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
   const g=G();
-  add("visit",`nàng quý ngươi +${g.visit[0]} · Sức nàng +${g.visit[1]}`);
+  add("visit",`nàng ${pvQuy(v,g.visit[0],"quý ngươi")} · Sức nàng +${g.visit[1]}`);
   {const x=twFoeOf(S,v);if(x)add("mediate",`nàng bớt oán ${x.name} ${g.mediate}`)}
-  add("humil",`nàng oán ngươi +${g.humil[0]} · Danh nàng -${g.humil[1]}`);
+  add("humil",`${pvOanAny(g.humil[0],"nàng oán ngươi")} · Danh nàng -${g.humil[1]}`);
   add("test",`thành: ngươi tin nàng hơn +${g.test[0]} · hỏng: ngờ vực ${g.test[1]}`);
   add("drop",`ngươi lạnh với nàng -${g.drop}`);
-  add("follow",`nàng quý ngươi +${g.follow}`);
+  add("follow",`nàng ${pvQuy(v,g.follow,"quý ngươi")}`);
+
   add("gossip",`một phi tần khác Danh -${g.gossip}`);
   add("admon",`Sủng nàng -${g.admon} · hai tuần ngài để ý người khác`);
   add("flaunt",`mọi phi tần ghen +${g.flaunt}`)}catch(e){console.error(e)}return A}})();

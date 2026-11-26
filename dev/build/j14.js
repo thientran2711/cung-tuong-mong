@@ -33,7 +33,7 @@ function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,o
  if(f){A.push(...card(`Gửi thư xin rời ${f.name}`,"Viết thư báo với phe rằng ngươi không muốn liên lụy ai nữa.",`rời phe, không dính bè phái: Danh ${balSg(BAL.rcv.prop.danh)} · đồng đảng quý ${me?"ngươi":p.name} ${balSg(-F.leave.rel)}`,F.gLeave,
    ()=>leaveFacSelf(p)));
   if(facRoll(f).some(x=>x!==p)){const q=queenP()&&queenP()!==p?queenP():null;
-   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, ${sgOf(p,F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
+   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, ${sgOf(p,F.sell.sung)} · cả phe ${pvOan(null,F.sell.oan,"oán")}`,F.gSell,()=>sellOut(p)))}}
  else{const G=(S.facs||[]).map(g=>({g,l:facLeader(g)})).filter(o=>o.l&&o.l!==p&&facIn(o.l)&&aff(o.l,p)>=netTh(o.l,"quen")).sort((a,b)=>aff(b.l,p)-aff(a.l,p));const o=G[0];
   if(o)A.push(...card(`Gửi thư xin vào ${o.g.name}`,`Xin ${o.l===S?"ngươi":o.l.name} cho đứng cùng phe, để có người bên ngoài nói giúp.`,`${o.l===S?"ngươi":o.l.name} tự quyết (${rcvWord(o.l,p)}) · vào phe thì nhờ phe vận động được`,F.gJoin,()=>rcvAsk("facJoin",p,o.l,o.g.id)))}
  return A}
@@ -43,7 +43,7 @@ function coldMonth(){let ev="";
   if(!S.thDead&&S.th>=50&&!(window.agDOn&&agDOn())&&roll(10)){restore(false,"Thái hậu mở lòng từ bi");return ev}
   if((S.month===1||S.month===8)&&roll(25)){restore(false,S.month===1?"Đại xá đầu năm":"Đại xá nhân tiết Vạn thọ");return ev}
   if(S.suc<=0){die("Chết rét, chết đói trong lãnh cung");return ev}}
- for(const v of rivals){if(!v.alive||!v.out)continue;ap(v,{suc:-4});if(v.suc<=0){v.alive=false;continue}
+ for(const v of rivals){if(!v.alive||!v.out)continue;ap(v,{suc:-4});if(v.suc<=0){v.alive=false;dieMk(v,"disgrace");continue}
   if(typeof p3On==="function"&&p3On()){ev+=p3Cold(v);continue}/* AG-ALL-2e: she chooses among her own lãnh cung cards (coldActsOf), not a flat roll */
   if((roll(3)||(v.th>=50&&roll(5)))&&roomFor("consort")&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+eyes(v)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */v.out=false;v.rank=0;v.lastPromo=S.turn;v.oan=cl((v.oan||0)+20,0,100);ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[0].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}}}
  return ev}
@@ -76,7 +76,7 @@ function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC st
 /* AG-ALL-2e2: m = the master (default her); an NPC master runs the same (cx3:staffUp) */
 function recommend(id,m){m=m||S;const H=BAL.house;const s=servById(id);if(!s||ownerOf(s)!==m||(m.bac||0)<H.upBac)return"";if(m===S)apply({bac:-H.upBac,danh:-H.upDanh});else ap(m,{bac:-H.upBac,danh:-H.upDanh});servMerit(s,BAL.ag.par3.house.merit);
  if(m!==S)return `${m.name} tiến cử ${s.name} lên Nội vụ phủ`;log(`Tiến cử ${s.name} lên Nội vụ phủ.`);render();return""}
-function searchMaids(m){m=m||S;const me=m===S;if(me&&!can(2))return"";const head=(m.staff||[]).find(s=>s.role==="maid"&&srk(s)>=BAL.srvRk.cs);if(!head)return"";if(me)spend(2);const spies=m.staff.filter(s=>s.spyFor&&s.spyFor!==key(m));
+function searchMaids(m){m=m||S;const me=m===S;if(me&&!can(BAL.btn.svSearch.k))return"";const head=(m.staff||[]).find(s=>s.role==="maid"&&srk(s)>=BAL.srvRk.cs);if(!head)return"";if(me)spend(BAL.btn.svSearch.k);const spies=m.staff.filter(s=>s.spyFor&&s.spyFor!==key(m));
  if(!me){/* AG-ALL-2e2 cx3:search: the same rule for an NPC master */let r;if(spies.length){const s=spies[0];const b=byKey(s.spyFor);m.staff.splice(m.staff.indexOf(s),1);if(b&&b!==m)evA(m,b,BAL.eff.j14.evSearchMaids);r=`${head.name} tra xét cung nữ của ${m.name}: lôi ra ${s.name} là tai mắt`}
   else{const dt=allServ().find(x=>x.lover&&!(m.knowDT||[]).includes(x.sid)&&ownerOf(x)!==m);if(dt){m.knowDT=(m.knowDT||[]).concat([dt.sid,dt.lover]);r=`${head.name} tra xét cung nữ của ${m.name}, nghe ra một chuyện đối thực`}else r=`${head.name} tra xét cung nữ của ${m.name}, không thấy gì lạ`}return r}
  let r=`${head.name} tra xét cung nữ: `;if(spies.length){const s=spies[0];const m=byKey(s.spyFor);typeof knSoldFound==="function"&&knSoldFound(s);S.staff.splice(S.staff.indexOf(s),1);if(m&&m!==S)/*evok: the spy servant was bought (bribeServ deed)*/evA(S,m,BAL.eff.j14.evSearchMaids);r+=`lôi ra ${s.name} là tai mắt của ${m?NM(m):"kẻ khác"} (chứng cứ ${balSg(BAL.eff.j14.evSearchMaids)}).`}else{const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=`nghe ra chuyện đối thực của ${dt.name}.`}else r+="không thấy gì lạ."}log(r);render()}
