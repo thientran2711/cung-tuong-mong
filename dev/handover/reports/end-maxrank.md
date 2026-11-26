@@ -144,3 +144,6 @@ VERDICT: PASS 81df685d — no BLOCKING items.
 ## 5. MERGE RE-CHECK (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS ec8442e7
 LIVE moved to 03a8c17c (F10). ec8442e7 = 81df685d + merge of LIVE; FF from 03a8c17c. Source delta vs LIVE (dev/build, rank, dev/test) is byte-identical to the 81df685d delta vs 53319e6f; jksize.js:127 kszRankName intact after LIVE's auto-merge. Build: same index.html / sw.js (only CTM_BI). end-maxrank.js ALL PASS; one-core-guard / -text / -bind PASS. Deploy note of §4 stands (rank/worker ships with the LAND).
 VERDICT: PASS ec8442e7 — no BLOCKING items.
+
+## r3 — LAND READY ec8442e7 (FF from LIVE 03a8c17c)
+rv PASS 81df685d (B1 rkRole → role other for preN words; B2 «Cách tính» note); merged LIVE 03a8c17c (F10). end-maxrank ALL PASS, coop-e2e 143/143 on ec8442e7. rank/worker deploys via rank-worker.yml on land.
