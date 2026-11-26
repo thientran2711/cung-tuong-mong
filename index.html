@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4032a74f+","t":"2026-11-26T06:05Z","c":"punish-reason.js: NPC release check follows BAL.pun.npcOneBelow (false = back to Đáp ứng, today's rule)","b":"b0cac6e0c094","h":[{"s":"f009e1a6+","t":"2026-11-26T02:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"442bf25b+","t":"2026-11-26T06:21Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn.","b":"4eb2a4e9d76e","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29779,7 +29779,7 @@ Object.assign(ACTDOM,{trinhth:"Danh",trinhhh:"Danh",uyhiep:"Mưu kế",banphe:"M
 /* the act card lines read the target being shown (true numbers per target) */
 function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=punishMonths();const W=t?j78who(t):"nàng";
  if(k==="trinhth")return[`${W} ${sgOf(t,BAL.eff.j78.sungF)} · Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`];
- if(k==="trinhhh")return[`${W} bị cấm túc ${m} tháng`,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`];
+ if(k==="trinhhh"){const c=t&&chReady(a,t);return[c?`${W} ${chPunTxt(t,c)}`:`${W} chịu phạt theo tội`,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`]}
  if(k==="uyhiep")return[`Bạc +${t?j78pay(t):0} · kèm: ${W} oán ngươi ${balSg(BAL.eff.j78.f_4)}`,`Danh ${balSg(BAL.eff.j78.danhUyhiep)} · ${W} oán ngươi ${balSg(BAL.eff.j78.f_5)}`];
  if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${15*n} · ${b?j78who(b):"người mua"} thiện cảm ${balSg(BAL.eff.j78.f_6)} · ${b?j78who(b):"người mua"} nắm ${n>0?n+" ":""}chứng cứ về ${W} · kèm: ${W} oán ngươi ${balSg(BAL.eff.j78.f_7)}`,""]}
  if(k==="tieuhuy")return[`${W} quý ngươi +${j78thAff(n)} · ${W} oán ngươi -${j78thOan(n)} · Đức ${balSg(BAL.eff.j78.ducTieuhuy)}`,""];
@@ -29811,7 +29811,7 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao"),why:busy()||(!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":!chTocao(S,p)?chNeedTxt(S,p):""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j30.evF)}`],gain:[`${W} bị giáng xuống ${RANKS[Math.max(0,rkOf(p)-1)].n} vì ${cr||"tội thật"}`,`Danh ${balSg(BAL.eff.j30.danhTocao)}`],fail:[`Danh ${balSg(BAL.eff.j30.danhF)}`]}});
  add("expose",ok=>({odds:odds("expose"),why:busy()||(!hasScandal(p)?"nàng không có chuyện tư tình bị lộ":!chOK(S,p,"tt")?chNeedTxt(S,p,"tt"):""),cost:["2 khắc",`Chứng cứ tội tư thông -${chHave(S,p,"tt")}`],gain:[`${W} bị ban chết hoặc vào lãnh cung`],fail:["ngươi bị tội vu khống: vào lãnh cung hoặc giáng một bậc"]}));
  add("trinhth",ok=>({odds:odds("trinhth"),why:busy()||(n<1?nf(1):S.thDead?"Thái hậu đã băng hà":rkOf(p)>=7?"Thái hậu không xét tội Hoàng hậu":""),cost:["2 khắc",`Đức ${balSg(BAL.eff.j78.ducTrinhth)}`,`Chứng cứ ${balSg(BAL.eff.j78.evF)}`],gain:[`${W} ${sgOf(p,BAL.eff.j78.sungF)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`],fail:[`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f)}`]}));
- add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh"):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":!chOK(S,p)?chNeedTxt(S,p):""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j78.evF_2)}`],gain:[`${W} bị cấm túc ${m} tháng`],fail:[`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f_2)}`]}});
+ add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh"):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":!chOK(S,p)?chNeedTxt(S,p):""),cost:["2 khắc",chReady(S,p)?`Chứng cứ tội ${chName(chReady(S,p)).toLowerCase()} -${chHave(S,p,chReady(S,p))}`:"chứng cứ của tội ấy"],gain:[chReady(S,p)?`${W} ${chPunTxt(p,chReady(S,p))}`:`${W} chịu phạt theo tội`],fail:[`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f_2)}`]}});
  add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep"),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j78.evF_3)} (trả lại khi nàng chịu chi)`],gain:[`Bạc +${g}`],fail:[`Danh ${balSg(BAL.eff.j78.danhUyhiep)}`,`${W} oán ngươi ${balSg(BAL.eff.j78.f_5)}`],risk:[`${W} oán ngươi ${balSg(BAL.eff.j78.f_4)}`].concat(together(S,p)?[]:[/* previews: runAct (sent servant confesses) */`sai người đi: kẻ đi bị bắt, khai ra ngươi (${W} nắm ${balAb(BAL.eff.j9.evN)} chứng cứ): ${chanceW(confessRisk(bestSent(S)))}`])}});
  add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${15*n}`].concat(b?[`${j78who(b)} thiện cảm ${balSg(BAL.eff.j78.f_6)}`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${W} oán ngươi ${balSg(BAL.eff.j78.f_7)}`],buyer:b?j78Ref(b):null}});
  add("tieuhuy",ok=>({why:busy()||(n<1?nf(1):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} quý ngươi +${j78thAff(n)}`,`${W} oán ngươi -${j78thOan(n)}`,`Đức ${balSg(BAL.eff.j78.ducTieuhuy)}`]}));
@@ -39274,7 +39274,7 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
 /* CHARGE-EVIDENCE (review/charge-evidence, D4 option A; owner 26/11 ~05:15Z «D4 A» + ~05:35Z find-odds formula, verbatim in OD): evidence is kept
    PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, need = pieces
    to accuse (Hoàng hậu target + queenPlus), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
-   pun = what a proven charge brings (light = phạt bổng + Danh −, cam = cấm túc, giang = one rank, cold = lãnh cung; one punishment, D1).
+   pk = the kinds of piece, in the order found (the record and the evidence card name each piece «deed · kind», table A rule 4; rv); pun = what a proven charge brings (light = phạt bổng + Danh −, cam = cấm túc, giang = one rank, cold = lãnh cung; one punishment, D1).
    deed = jtruth deed key → charge. FIND ODDS per search (chFind): band + Tâm cơ of the MASTER vs the target (±1 band per tcStep, cap tcCap) +
    sent servant (±1 only at the extremes: sharp & bậc ≥ srvHi / timid & bậc ≤ srvLo) + TAI MẮT (master's real eyes ≥ matMid +1, ≥ matHigh +2, a planted
    eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
@@ -39282,21 +39282,24 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
    count that warns her when someone searches HER (once a day per searcher). EIGHT charges = the owner's approved list (OD 26/11 ~05:15Z «D4 A»);
    the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc). */
 BAL.charge={C:{
- vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light"},
- il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam"},
- uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam"},
- mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light"},
- hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang"},
- mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold"},
- vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold"},
- tt:{n:"Tư thông",need:3,band:1,pun:"cold"}},
+ vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light",pk:["tận mắt thấy món vượt phẩm"]},
+ il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam",pk:["đồ cấm thấy trong rương","lời khai kẻ mua hộ"]},
+ uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam",pk:["lời khai người bị hại","người tận mắt chứng kiến"]},
+ mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light",pk:["bạc đút lót tìm thấy","lời khai người hầu bị mua"]},
+ hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang",pk:["tang vật","lời khai người hầu"]},
+ mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold",pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
+ vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold",pk:["thư từ giả mạo","lời khai kẻ được sai","dấu vết đồ bị cài"]},
+ tt:{n:"Tư thông",need:3,band:1,pun:"cold",pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
   bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
-  tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt"},
- queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:5,guard:-1,missStep:1,missCap:6,
- fine:20,danh:-3,duc:-3,warnMat:2};
+  tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt",
+  /* charge-evidence rv (whole family: every key deedAdd / deedOnce / cyDeed / mlCaught writes): maid-line deeds = the act ordered, the pregnancy-register
+     deeds = the «thai không khớp sổ» row of Tư thông (table A, H), bribing Kính sự phòng = Mua chuộc */
+  mlpoison:"mh",mlframe:"vo",mlhframe:"vo",mlbeat:"uh",ls:"tt",cyfake:"tt",cylie:"tt",cyforge:"mc"},
+ queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:4/* Phi (RANKS[4]) and up = Cung chủ, owner canon «Phi+ −1»; rv: was 5 = Quý phi */,guard:-1,missStep:1,missCap:6,
+ fine:20,danh:-3,duc:-3,warnMat:2,accW:15/* Tố giác odds per piece of the proven charge (the j8 accuse weight per piece; rv: was typed in jcharge) */};
 /* j68sd: ORDER THIN P4 composed j68 seeds (DATA ONLY). Built by dev/build/j68sd_build.py from dev/handover/content/thin/j68seeds*.md;
    schema dev/handover/reports/thin.md «## API P4»; validator dev/test/j68seeds_validate.py; engine j68c.js. Do not hand-edit. */
 const J68SEEDS=[
@@ -98506,7 +98509,7 @@ function punEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;
    4. ACCUSING = one charge whose pieces are full (chReady); the punishment follows that charge (BAL.charge.C[c].pun, one punishment, D1),
       only that charge's pieces are spent, and her notice lists the charge and each piece (punEvTxt). Same rule for every consort (law 1).
    ============================================================================================================================ */
-let CHS=null,CHLAST=null,CHX=null,CHLASTC=null;
+let CHS=null,CHLAST=null,CHX=null,CHLASTC=null,CHSKIP=null;
 function chB(){return BAL.charge}
 function chC(c){return BAL.charge.C[c]||null}
 function chOfDeed(k){return BAL.charge.deed[k]||"uh"}
@@ -98564,6 +98567,7 @@ function chMissTxt(t){const L=CHLAST&&CHLAST.tries||[];const x=L.filter(z=>!z.hi
 function chMissed(){const L=CHLAST&&CHLAST.tries||[];return L.length&&!L.some(z=>z.hit)}
 /* ---------- the one evidence write: per charge ---------- */
 (function(){const e0=evA;evA=function(h,t,n,c){if(!h||!t||h===t||!n)return e0.apply(this,arguments);const m=chSync(h,t);
+ if(n<0&&!c&&CHSKIP&&CHSKIP.a===h&&CHSKIP.t===t){const z=CHSKIP;CHSKIP=null;return evA(h,t,-z.n,z.c)}/* rv: a road that spends a typed count (jaudit «Trình Hoàng hậu») spends the proven charge's pieces instead */
  if(n<0){const d=e0(h,t,n);let x=-d;const L=(c?[c]:[]).concat(Object.keys(m).sort((a,b)=>(m[b]||0)-(m[a]||0)));for(const z of L){while(x>0&&(m[z]||0)>0){m[z]--;x--}if(!m[z])delete m[z]}return d}
  let got=0;const srch=CHS&&CHS.h===h;if(srch&&t===S)chWarn(h);
  for(let i=0;i<n;i++){const cc=c&&(m[c]||0)<chCapC(t,c)?c:chFor(h,t);if(!cc){if(typeof evMiss==="function")evMiss(h,t,n-i);break}
@@ -98576,7 +98580,7 @@ function chMissed(){const L=CHLAST&&CHLAST.tries||[];return L.length&&!L.some(z=
 accOK=function(a,t){return chOK(a,t)&&(rkOf(t)<7||rkOf(a)>=3)};
 /* the pieces needed, as shown: the charge she builds (else the lightest) */
 accNeed=function(t,h){h=h||S;const c=(h&&t&&h!==t&&chChase(h,t))||"vp";return chNeed(t,c)};
-(function(){const o0=oAccuse;oAccuse=function(a,t){const c=chReady(a,t);const n=c?chHave(a,t,c):0,g=evG(a,t);return oddsCl(Math.round(o0.apply(this,arguments)+(n-g)*15))/* the charge's own pieces weigh, not the total */}})();
+(function(){const o0=oAccuse;oAccuse=function(a,t){const c=chReady(a,t);const n=c?chHave(a,t,c):0,g=evG(a,t);return oddsCl(Math.round(o0.apply(this,arguments)+(n-g)*BAL.charge.accW))/* the charge's own pieces weigh, not the total */}})();
 /* the punishment a proven charge brings (one punishment, D1 punish-reason; NPC and player alike) */
 function chPunTxt(t,c){const C=chC(c);if(!C)return"bị phạt";const m=typeof punishMonths==="function"?punishMonths():1;
  return C.pun==="light"?`bị phạt bổng ${BAL.charge.fine} lượng`:C.pun==="cam"?`bị cấm túc ${m} tháng`:C.pun==="giang"?`bị giáng một bậc`:rkOf(t)>=5||t.queen?`bị phế vào lãnh cung`:`bị đày vào lãnh cung`}
@@ -98601,9 +98605,16 @@ function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (t
 /* Hoàng hậu «Xử tội» (j8 judge, hers and an NPC queen's): by the full charge */
 (function(){const j0=judge;judge=function(q,p){const c=chReady(q,p);if(!c)return j0.apply(this,arguments);const n=chHave(q,p,c);const px=CHX;CHX={a:q,t:p,c,n};
  try{const r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)}: ${chName(c).toLowerCase()}, theo ${n} chứng cứ. `;evA(q,p,-n,c);relAdd(q,p,BAL.eff.j8.judge);chPunish(p,c,"bị Hoàng hậu xử tội",q);return r}finally{CHX=px}}})();
+/* «Trình Hoàng hậu» (rv: the live executor is jaudit T.f → jrcv rcvJudge — her card when she is the Hoàng hậu, the same options for an NPC queen):
+   one full charge — only its pieces are spent, and «Xét tội theo chứng cứ» punishes by that charge (as Tố giác / Xử tội), even when she decides later */
+(function(){const T=ACT.trinhhh;if(!T)return;const f0=T.f;T.f=function(a,t){const c=chReady(a,t);if(!c){if(t)t.chTr=null;return f0.apply(this,arguments)}
+ const n=chHave(a,t,c);t.chTr={a:key(a),c,n};const ps=CHSKIP;CHSKIP={a,t,c,n};try{return f0.apply(this,arguments)}finally{CHSKIP=ps}}})();
+(function(){const p0=punish;punish=function(p,why,sev){if(p&&typeof p==="object"&&p.chTr&&why==="bị Hoàng hậu xét tội theo chứng cứ"){const z=p.chTr;p.chTr=null;
+ const a=byKey(z.a);const px=CHX;CHX={a,t:p,c:z.c,n:z.n};try{chPunish(p,z.c,why,a||queenP())/* AI TỐ = the one who presented the proof */}finally{CHX=px}return}return p0.apply(this,arguments)}})();
 /* WHICH EVIDENCE in her notice: the charge and each piece behind it (jpun punEvTxt) */
 (function(){if(typeof punEvTxt!=="function")return;const p0=punEvTxt;punEvTxt=function(a,t){t=t||S;if(!a||!CHX||CHX.a!==a||CHX.t!==t)return p0.apply(this,arguments);
- const D=chDeedMap(t)[CHX.c];const L=[];for(const d of (D&&D.list)||[]){if(L.length>=BAL.pun.evShow)break;if(d&&d.x&&!L.includes(d.x))L.push(d.x)}
+ const D=chDeedMap(t)[CHX.c];const DL=((D&&D.list)||[]).filter(d=>d&&d.x);const PK=(chC(CHX.c)||{}).pk||[];const L=[];/* rv: one line per piece, «deed · kind» (table A rule 4) */
+ for(let i=0;i<Math.min(CHX.n,BAL.pun.evShow)&&DL.length;i++)L.push(`${DL[i%DL.length].x}${PK.length?" · "+PK[i%PK.length]:""}`)
  return `tội ${chName(CHX.c).toLowerCase()}, ${CHX.n} món chứng${L.length?": "+L.join("; "):""}`}})();
 if(typeof PUNK==="object")PUNK.phat="Phạt bổng";
 (function(){if(typeof punRows!=="function")return;const r0=punRows;punRows=function(o){const R=r0.apply(this,arguments);if(o&&o.kind==="phat")R.push(["Hình phạt",punEsc(`Phạt bổng ${BAL.charge.fine} lượng, Danh ${balSg(BAL.charge.danh)}`)]);return R}})();
@@ -98622,11 +98633,12 @@ function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t);const ag=h===
  return [chName(c),n>=need?`${n}/${need}, đủ để tố`:`${n}/${need} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
 /* the short word for a picker sub-line, and the one plain paragraph that says what decides it (the search dialog) */
 function chFindWord(h,t,ag){if(!h||!t||h===t)return"";const c=chChase(h,t);return `Tìm chứng: ${word(chFind(h,t,c||"hd",ag).o)}`}
-function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ Phi trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
+function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ ${RANKS[B.guardRk].n} trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
 /* the evidence record (j78 S.evd «proves») names a real deed OF THE CHARGE the piece was written to */
 (function(){if(typeof j78proof!=="function")return;const p0=j78proof;j78proof=function(v){try{if(CHLASTC&&CHLASTC.t===v){const D=chDeedMap(v)[CHLASTC.c];S.evd=S.evd||{};
- const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}`,ref,aim:d.t}}
- const d=D&&D.list[0];if(d)return{proves:`${j78Who(v)} ${d.x}`,ref:"tc:"+CHLASTC.c+":"+((S.evd[v.id]||[]).length),aim:d.t}}}catch(e){}return p0.apply(this,arguments)}})();
+ const PK=(chC(CHLASTC.c)||{}).pk||[];const i=Math.max(0,chHave(S,v,CHLASTC.c)-1);const kd=PK.length?` · ${PK[i%PK.length]}`:"";/* rv: each piece names its kind (table A rule 4), never the same line twice */
+ const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}${kd}`,ref,aim:d.t}}
+ const d=D&&D.list[0];if(d)return{proves:`${j78Who(v)} ${d.x}${kd}`,ref:"tc:"+CHLASTC.c+":"+((S.evd[v.id]||[]).length),aim:d.t}}}catch(e){}return p0.apply(this,arguments)}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -100605,7 +100617,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b0cac6e0c094";window.CTM_BUILD=BUILD;
+const BUILD="4eb2a4e9d76e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

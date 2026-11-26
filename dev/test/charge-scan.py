@@ -2,7 +2,8 @@
 """review/charge-evidence (D4) whole-family scan. usage: python3 dev/test/charge-scan.py [git-ref]  (no ref = working tree)
 Families: total_gate = an accusation/use gate on the TOTAL evidence (evG >= a BAL bar or a number >= 2) · total_need = a 'cần N chứng cứ'
 text built from the total bar · search_noroll = a search road that adds evidence with no find roll (no chSearch) · miss_lie = a search
-result that says «không ... sai trái» with no miss branch (she did wrong but the search missed)."""
+result that says «không ... sai trái» with no miss branch (she did wrong but the search missed) · deed_unmapped (rv) = a deed key some road writes
+(deedAdd / deedOnce / cyDeed / mlCaught «ml»+k / DEEDW / DEEDX) with no BAL.charge.deed entry (it would fall to the Ức hiếp default)."""
 import re,subprocess,sys,glob
 ref=sys.argv[1] if len(sys.argv)>1 else None
 def files():
@@ -39,5 +40,13 @@ for fn,mk in SR:
     if i<0: continue
     seg=s[max(0,i-300):i+1600]
     if 'chSearch' not in seg: R['search_noroll'].append(f'{fn}:{s.count(chr(10),0,i)+1}')
+# deed keys written anywhere vs the BAL.charge.deed map (rv)
+ALLJ='\n'.join(v for k,v in F.items())
+K=set(re.findall(r'deedAdd\([^,()]+,"(\w+)"(?!\+)',ALLJ))|set(re.findall(r'deedOnce\([^,()]+,[^,]+?,"(\w+)"',ALLJ))|set(re.findall(r'cyDeed\([^,()]+,[^,]+?,"(\w+)"',ALLJ))|{'ml'+k for k in re.findall(r'mlCaught\([^,()]+,[^,()]+,"(\w+)"',ALLJ)}
+for nm in ('DEEDW','DEEDX'):
+    m=re.search(nm+r'=\{(.*?)\};',ALLJ,re.S)
+    if m: K|=set(re.findall(r'(\w+):',m.group(1)))
+m=re.search(r'BAL\.charge=\{.*?deed:\{(.*?)\}',ALLJ,re.S);MAP=set(re.findall(r'(\w+):"',m.group(1))) if m else set()
+R['deed_unmapped']=sorted(K-MAP) if m else []
 print('family | count | sites');
 for k,v in R.items(): print(f'{k} | {len(v)} | {" ".join(v[:14])}')

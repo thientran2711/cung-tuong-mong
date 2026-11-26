@@ -12,7 +12,7 @@
    4. ACCUSING = one charge whose pieces are full (chReady); the punishment follows that charge (BAL.charge.C[c].pun, one punishment, D1),
       only that charge's pieces are spent, and her notice lists the charge and each piece (punEvTxt). Same rule for every consort (law 1).
    ============================================================================================================================ */
-let CHS=null,CHLAST=null,CHX=null,CHLASTC=null;
+let CHS=null,CHLAST=null,CHX=null,CHLASTC=null,CHSKIP=null;
 function chB(){return BAL.charge}
 function chC(c){return BAL.charge.C[c]||null}
 function chOfDeed(k){return BAL.charge.deed[k]||"uh"}
@@ -70,6 +70,7 @@ function chMissTxt(t){const L=CHLAST&&CHLAST.tries||[];const x=L.filter(z=>!z.hi
 function chMissed(){const L=CHLAST&&CHLAST.tries||[];return L.length&&!L.some(z=>z.hit)}
 /* ---------- the one evidence write: per charge ---------- */
 (function(){const e0=evA;evA=function(h,t,n,c){if(!h||!t||h===t||!n)return e0.apply(this,arguments);const m=chSync(h,t);
+ if(n<0&&!c&&CHSKIP&&CHSKIP.a===h&&CHSKIP.t===t){const z=CHSKIP;CHSKIP=null;return evA(h,t,-z.n,z.c)}/* rv: a road that spends a typed count (jaudit «Trình Hoàng hậu») spends the proven charge's pieces instead */
  if(n<0){const d=e0(h,t,n);let x=-d;const L=(c?[c]:[]).concat(Object.keys(m).sort((a,b)=>(m[b]||0)-(m[a]||0)));for(const z of L){while(x>0&&(m[z]||0)>0){m[z]--;x--}if(!m[z])delete m[z]}return d}
  let got=0;const srch=CHS&&CHS.h===h;if(srch&&t===S)chWarn(h);
  for(let i=0;i<n;i++){const cc=c&&(m[c]||0)<chCapC(t,c)?c:chFor(h,t);if(!cc){if(typeof evMiss==="function")evMiss(h,t,n-i);break}
@@ -82,7 +83,7 @@ function chMissed(){const L=CHLAST&&CHLAST.tries||[];return L.length&&!L.some(z=
 accOK=function(a,t){return chOK(a,t)&&(rkOf(t)<7||rkOf(a)>=3)};
 /* the pieces needed, as shown: the charge she builds (else the lightest) */
 accNeed=function(t,h){h=h||S;const c=(h&&t&&h!==t&&chChase(h,t))||"vp";return chNeed(t,c)};
-(function(){const o0=oAccuse;oAccuse=function(a,t){const c=chReady(a,t);const n=c?chHave(a,t,c):0,g=evG(a,t);return oddsCl(Math.round(o0.apply(this,arguments)+(n-g)*15))/* the charge's own pieces weigh, not the total */}})();
+(function(){const o0=oAccuse;oAccuse=function(a,t){const c=chReady(a,t);const n=c?chHave(a,t,c):0,g=evG(a,t);return oddsCl(Math.round(o0.apply(this,arguments)+(n-g)*BAL.charge.accW))/* the charge's own pieces weigh, not the total */}})();
 /* the punishment a proven charge brings (one punishment, D1 punish-reason; NPC and player alike) */
 function chPunTxt(t,c){const C=chC(c);if(!C)return"bị phạt";const m=typeof punishMonths==="function"?punishMonths():1;
  return C.pun==="light"?`bị phạt bổng ${BAL.charge.fine} lượng`:C.pun==="cam"?`bị cấm túc ${m} tháng`:C.pun==="giang"?`bị giáng một bậc`:rkOf(t)>=5||t.queen?`bị phế vào lãnh cung`:`bị đày vào lãnh cung`}
@@ -107,9 +108,16 @@ function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (t
 /* Hoàng hậu «Xử tội» (j8 judge, hers and an NPC queen's): by the full charge */
 (function(){const j0=judge;judge=function(q,p){const c=chReady(q,p);if(!c)return j0.apply(this,arguments);const n=chHave(q,p,c);const px=CHX;CHX={a:q,t:p,c,n};
  try{const r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)}: ${chName(c).toLowerCase()}, theo ${n} chứng cứ. `;evA(q,p,-n,c);relAdd(q,p,BAL.eff.j8.judge);chPunish(p,c,"bị Hoàng hậu xử tội",q);return r}finally{CHX=px}}})();
+/* «Trình Hoàng hậu» (rv: the live executor is jaudit T.f → jrcv rcvJudge — her card when she is the Hoàng hậu, the same options for an NPC queen):
+   one full charge — only its pieces are spent, and «Xét tội theo chứng cứ» punishes by that charge (as Tố giác / Xử tội), even when she decides later */
+(function(){const T=ACT.trinhhh;if(!T)return;const f0=T.f;T.f=function(a,t){const c=chReady(a,t);if(!c){if(t)t.chTr=null;return f0.apply(this,arguments)}
+ const n=chHave(a,t,c);t.chTr={a:key(a),c,n};const ps=CHSKIP;CHSKIP={a,t,c,n};try{return f0.apply(this,arguments)}finally{CHSKIP=ps}}})();
+(function(){const p0=punish;punish=function(p,why,sev){if(p&&typeof p==="object"&&p.chTr&&why==="bị Hoàng hậu xét tội theo chứng cứ"){const z=p.chTr;p.chTr=null;
+ const a=byKey(z.a);const px=CHX;CHX={a,t:p,c:z.c,n:z.n};try{chPunish(p,z.c,why,a||queenP())/* AI TỐ = the one who presented the proof */}finally{CHX=px}return}return p0.apply(this,arguments)}})();
 /* WHICH EVIDENCE in her notice: the charge and each piece behind it (jpun punEvTxt) */
 (function(){if(typeof punEvTxt!=="function")return;const p0=punEvTxt;punEvTxt=function(a,t){t=t||S;if(!a||!CHX||CHX.a!==a||CHX.t!==t)return p0.apply(this,arguments);
- const D=chDeedMap(t)[CHX.c];const L=[];for(const d of (D&&D.list)||[]){if(L.length>=BAL.pun.evShow)break;if(d&&d.x&&!L.includes(d.x))L.push(d.x)}
+ const D=chDeedMap(t)[CHX.c];const DL=((D&&D.list)||[]).filter(d=>d&&d.x);const PK=(chC(CHX.c)||{}).pk||[];const L=[];/* rv: one line per piece, «deed · kind» (table A rule 4) */
+ for(let i=0;i<Math.min(CHX.n,BAL.pun.evShow)&&DL.length;i++)L.push(`${DL[i%DL.length].x}${PK.length?" · "+PK[i%PK.length]:""}`)
  return `tội ${chName(CHX.c).toLowerCase()}, ${CHX.n} món chứng${L.length?": "+L.join("; "):""}`}})();
 if(typeof PUNK==="object")PUNK.phat="Phạt bổng";
 (function(){if(typeof punRows!=="function")return;const r0=punRows;punRows=function(o){const R=r0.apply(this,arguments);if(o&&o.kind==="phat")R.push(["Hình phạt",punEsc(`Phạt bổng ${BAL.charge.fine} lượng, Danh ${balSg(BAL.charge.danh)}`)]);return R}})();
@@ -128,8 +136,9 @@ function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t);const ag=h===
  return [chName(c),n>=need?`${n}/${need}, đủ để tố`:`${n}/${need} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
 /* the short word for a picker sub-line, and the one plain paragraph that says what decides it (the search dialog) */
 function chFindWord(h,t,ag){if(!h||!t||h===t)return"";const c=chChase(h,t);return `Tìm chứng: ${word(chFind(h,t,c||"hd",ag).o)}`}
-function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ Phi trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
+function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ ${RANKS[B.guardRk].n} trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
 /* the evidence record (j78 S.evd «proves») names a real deed OF THE CHARGE the piece was written to */
 (function(){if(typeof j78proof!=="function")return;const p0=j78proof;j78proof=function(v){try{if(CHLASTC&&CHLASTC.t===v){const D=chDeedMap(v)[CHLASTC.c];S.evd=S.evd||{};
- const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}`,ref,aim:d.t}}
- const d=D&&D.list[0];if(d)return{proves:`${j78Who(v)} ${d.x}`,ref:"tc:"+CHLASTC.c+":"+((S.evd[v.id]||[]).length),aim:d.t}}}catch(e){}return p0.apply(this,arguments)}})();
+ const PK=(chC(CHLASTC.c)||{}).pk||[];const i=Math.max(0,chHave(S,v,CHLASTC.c)-1);const kd=PK.length?` · ${PK[i%PK.length]}`:"";/* rv: each piece names its kind (table A rule 4), never the same line twice */
+ const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}${kd}`,ref,aim:d.t}}
+ const d=D&&D.list[0];if(d)return{proves:`${j78Who(v)} ${d.x}${kd}`,ref:"tc:"+CHLASTC.c+":"+((S.evd[v.id]||[]).length),aim:d.t}}}catch(e){}return p0.apply(this,arguments)}})();

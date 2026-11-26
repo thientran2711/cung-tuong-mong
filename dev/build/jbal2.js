@@ -2255,7 +2255,7 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
 /* CHARGE-EVIDENCE (review/charge-evidence, D4 option A; owner 26/11 ~05:15Z «D4 A» + ~05:35Z find-odds formula, verbatim in OD): evidence is kept
    PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, need = pieces
    to accuse (Hoàng hậu target + queenPlus), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
-   pun = what a proven charge brings (light = phạt bổng + Danh −, cam = cấm túc, giang = one rank, cold = lãnh cung; one punishment, D1).
+   pk = the kinds of piece, in the order found (the record and the evidence card name each piece «deed · kind», table A rule 4; rv); pun = what a proven charge brings (light = phạt bổng + Danh −, cam = cấm túc, giang = one rank, cold = lãnh cung; one punishment, D1).
    deed = jtruth deed key → charge. FIND ODDS per search (chFind): band + Tâm cơ of the MASTER vs the target (±1 band per tcStep, cap tcCap) +
    sent servant (±1 only at the extremes: sharp & bậc ≥ srvHi / timid & bậc ≤ srvLo) + TAI MẮT (master's real eyes ≥ matMid +1, ≥ matHigh +2, a planted
    eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
@@ -2263,18 +2263,21 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
    count that warns her when someone searches HER (once a day per searcher). EIGHT charges = the owner's approved list (OD 26/11 ~05:15Z «D4 A»);
    the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc). */
 BAL.charge={C:{
- vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light"},
- il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam"},
- uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam"},
- mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light"},
- hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang"},
- mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold"},
- vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold"},
- tt:{n:"Tư thông",need:3,band:1,pun:"cold"}},
+ vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light",pk:["tận mắt thấy món vượt phẩm"]},
+ il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam",pk:["đồ cấm thấy trong rương","lời khai kẻ mua hộ"]},
+ uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam",pk:["lời khai người bị hại","người tận mắt chứng kiến"]},
+ mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light",pk:["bạc đút lót tìm thấy","lời khai người hầu bị mua"]},
+ hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang",pk:["tang vật","lời khai người hầu"]},
+ mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold",pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
+ vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold",pk:["thư từ giả mạo","lời khai kẻ được sai","dấu vết đồ bị cài"]},
+ tt:{n:"Tư thông",need:3,band:1,pun:"cold",pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
   bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",pushp:"hd",phonghoa:"hd",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
-  tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt"},
- queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:5,guard:-1,missStep:1,missCap:6,
- fine:20,danh:-3,duc:-3,warnMat:2};
+  tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt",
+  /* charge-evidence rv (whole family: every key deedAdd / deedOnce / cyDeed / mlCaught writes): maid-line deeds = the act ordered, the pregnancy-register
+     deeds = the «thai không khớp sổ» row of Tư thông (table A, H), bribing Kính sự phòng = Mua chuộc */
+  mlpoison:"mh",mlframe:"vo",mlhframe:"vo",mlbeat:"uh",ls:"tt",cyfake:"tt",cylie:"tt",cyforge:"mc"},
+ queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:4/* Phi (RANKS[4]) and up = Cung chủ, owner canon «Phi+ −1»; rv: was 5 = Quý phi */,guard:-1,missStep:1,missCap:6,
+ fine:20,danh:-3,duc:-3,warnMat:2,accW:15/* Tố giác odds per piece of the proven charge (the j8 accuse weight per piece; rv: was typed in jcharge) */};
