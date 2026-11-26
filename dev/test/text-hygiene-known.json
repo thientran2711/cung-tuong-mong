@@ -412,5 +412,30 @@
   "leak|jtoil.js|kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",
   "leak|jtoil.js|thông tin món y phục / trang sức (hàng «Màu»), lịch lễ, cổng lễ: màu chính + màu phụ; màu lấy từ MỘT bảng dữ liệu (BAL.dc.fam), kit không tự giữ màu nào",
   "pct|jkitpage.js|Ô đồ Xa xỉ · MỘT khuôn chủ (đơn vị theo khung: ô vuông 22,7 % khung, số phẩm bên trong) ở mọi cỡ: sm · md · lg · xl · slot"
+ ],
+ "runtime": [
+  {
+   "rule": "long",
+   "re": "^Nghe nói .+ gặp kỳ ngộ",
+   "why": "NPC kỳ ngộ rumour told whole in the Tin báo row / chip (jky.js:251 → newsAdd → kitKnowFlush line = full text); the panel already shortens it (jnotice ntRow, owner 24/11 ~21:58Z). Owner: NEWS-SIEVE-2 (review/news-sieve: daily news only about her)"
+  },
+  {
+   "rule": "long",
+   "re": "(Việc ấy đã xong|Chuyện đã qua rồi|chẳng còn gì|đã vắng|người hầu cung .+ (bẩm|nói nhỏ))",
+   "surf": "tinbao",
+   "why": "world news told by a bearer: «X, người hầu cung Y, đi ngang ghé bẩm / nói nhỏ / nhận bạc rồi bẩm: …» + KN_POOL.end phrase (jagknow knLine / knEnd / knBao sold) → 120–150 letters. Owner: NEWS-SIEVE-2"
+  },
+  {
+   "rule": "long",
+   "re": "giờ nô tỳ mới kịp bẩm",
+   "surf": "tinbao",
+   "why": "late servant report «Bẩm …, giờ nô tỳ mới kịp bẩm: lúc trước nô tỳ nghe X kể: …» (jagknow knBao late) — two colons + long. Owner: NEWS-SIEVE-2"
+  },
+  {
+   "rule": "long",
+   "re": "(che miệng cười|mách Hoàng hậu)",
+   "surf": "tinbao",
+   "why": "NPC↔NPC deed news line (newsAdd) not about her. Owner: NEWS-SIEVE-2"
+  }
  ]
 }
