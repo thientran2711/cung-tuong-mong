@@ -51,3 +51,9 @@ Delta vs 22beb8d8: jk2b KIT_PFO.side (item grid → right column `.kpside` when 
 Tests (built index of f75a3f3c): kit-tassel-clear.js PASS ×4 runs (all four cases HOME/PAL × Fold/iPad: side true, rows 2, rowsVisible 2, labelOverTassel false, on both tabs); kit-home-frame.js 0 FAIL.
 LOOK (n-home-755 Fold, n-pal-1180 iPad): the whole item grid (2 rows, «Xa xỉ 48») shows at scroll 0 in the right column under the Tâm trạng block, «Hoa tai» label clear; portrait + frame whole (home red-lacquer frame, palace consort frame), tassel free, left column text below the portrait scrolls with a cue (Fold) — nothing the item grid needed is hidden. Fixes the MAIN LOOK hold (grid pushed down / cut).
 Not run: full viecnho-scan family (script not parameterized); judged by the 4 card kinds in kit-tassel-clear.js. Land: replaces daa31a5e, rebuild index/sw/assets.
+
+## (C) f75a3f3c — addendum (MAIN 159 gap: iPad HOME card)
+I looked all four shots myself: n-home-755 (Fold home), n-home-1180 (iPad HOME identity card: red-lacquer frame, tassel free, 2 tile rows + «Xa xỉ 48» in the right column at scroll 0, «Hoa tai» clear), n-pal-755 and n-pal-1180 (palace: same). Content fits without scroll (grid) on all 4; the left-column text under the portrait scrolls with a cue, as before. Hậu cung / rival cards: kit-tassel-clear measured them as unchanged (−6) in the 22beb8d8 run; f75a3f3c's own test prints only the identity-card cases — not re-measured for Hậu cung by me.
+
+## (B) delta a5ff660a (on d0c24fa2; G1 fix only) — SMALL PASS
+Delta = jbal BAL.kitpage.demo.kem {g:8,o:-3,tc1:6,tc2:2,sung:3,tc3:-4,suc:-10} + jkitpage kitPgKem reads it (kaN). Same numbers as before (8 / −3 / +6 / +2 / +3 / −4 / −10) → the sample renders the same. On a5ff660a: kit-kem-row.js PASS (2 SKIP «(42)»), one-core-guard PASS (fails 0), one-core-text PASS, one-core-text-rule PASS. Law 4 ok.
