@@ -381,10 +381,8 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   `kitResultSeal(ok)` (renamed by reviewer r7: `kitSeal` is the Trân nữ seal, §39) → {cls: ok | bad | sure, t: THÀNH | BẠI | KẾT QUẢ} (j63; kit sample page). Never
   inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
   "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
-- KÈM (owner 11/15 + 24/11 ~21:57Z «ngắn gọn rõ ràng»; MAIN 157 LOOK 26/11): other people's feelings — the consorts' ghen / oán — are not her
-  gains or losses. Kèm — KIT PART `kitKemRow(K)` (j63, `.kb .kr-kem .kkemi`): ONE line per person «<Tên>: ghen +8» (named = kaNamed); people she
-  cannot name with the same feeling and number = one line «N vị khác: ghen +8» (one alone: «một vị <tước>: ghen +8»); max 8 lines then
-  «… và N người khác»; every card (rtoast, night card kitNightEnd).
+- KÈM (owner 11/15; form overwritten by MAIN 157 ruling 26/11 — ONE kit part, OB-VERDICT-2 + KK41, law 14): other people's feelings — the consorts' ghen / oán — are not her gains or losses: KIT PART `kitKemRow(K)` (j63; kit sample page §53) = ONE line per NAMED person «Hoàng hậu Điền Chi Lan: ghen +8» (a person once per feeling), the people she cannot name with the SAME feeling and number grouped «4 vị khác: ghen +8» (one alone: «Một vị Phi: ghen +8», capital at the row start); a named person and a single stranger show the new total «ghen +8 (42)» (`kaNT`, K items carry `t`; a group «N vị khác» none); at most 8 lines, then «… và N người khác» where N also counts `K.more` (people the sieve folded away, jnsieve nsCard); nothing listed but `K.more` → «N người khác trong cung đổi lòng chút ít»; exact numbers, no cause copy. `.krv.kklist > .kitem.kkemi`: every line is its own row in EVERY result card (rtoast, the night card `.kne`, any `.kb`) — never run together (the night card's `.kitem` is the centred item cell otherwise).
+- PERSON ROWS (KK41, same family, law 11): a `kitRows` row whose values are person lines «<Tên>: thiện cảm +6» (`KIT_PLINE`, j79; the night card's Được / Mất) takes the same `.kklist > .kitem.kkemi` form: one line per person or plain value, the name never split from its value, no «·» run-on. `kitLineCap`: a result line that starts a row starts with a capital («Một vị Phi …», rtoast rows too). Test `dev/test/kit-kem-row.js`.
   Their liking FOR HER (quý ngươi hơn / ghét ngươi hơn) and evidence stay in Được / Mất.
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
@@ -3478,7 +3476,7 @@ Index of the shared parts review/opt-render added (number from the coordinator's
 - `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.
 - `kitHint(o, m, lv)` → `{hint}` (pure, bots too), `kitHintLevel()` (Tâm cơ / Tai mắt → vague / plain / sharp): §28.6.
 - `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitOptOdds(b)` (the kit odds meter on every option, certain = «Rất vững»; a rolled option's `p` → `oddsLead`, §25): §28.6.
-- `kitResultSeal(ok)` (THÀNH / BẠI / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
+- `kitResultSeal(ok)` (THÀNH / BẠI / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.krv.kklist > .kitem.kkemi`, one line per named person, strangers with the same feeling + number grouped «N vị khác»): §7.
 - Samples on the kit page (§47): ids "§53" (chip tones + the 7 odds-meter steps; an event option in cost mode through the real modal markup → kaNorm →
   kitHideOut; kitResultSeal ×3; kitKemRow). Tests: `dev/test/opt-render.js`, `dev/test/opt-scan.py --fail`.
 
