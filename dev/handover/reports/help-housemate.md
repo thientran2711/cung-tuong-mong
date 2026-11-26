@@ -106,3 +106,10 @@ Notes (non-blocking, FOR D):
 - N5: OPEN, pre-existing on LIVE: rcvAsk:mediate «Mách lẻo» when the queen herself mediates reads ĐƯỢC «chẳng được gì» (a missing gain, not wording) → needs a ruling before any change (law 16), FOR D.
 - N1–N3 from §6 stand.
 CDN review folder wiped with this verdict.
+
+## 9. DELTA REVIEW (opus BIG, session_01D3E3NbbsVnx5jrHuceQUuf) — FAIL d007c9ba (41125250 stays PASS)
+Delta 41125250 → d007c9ba: jrcv.js rcvSabO `qSelf` (RCVK.mediate «Mách lẻo» when the Hoàng hậu HERSELF mediates gets the gain «Hoàng hậu quý <receiver> +qAf») + rcv-hint-scan OPEN set emptied. Build ok; rcv-hint-scan PASS.
+
+**BLOCKING**
+- **B2 (law 6b real people, law 3 the gain must be real).** The «gain» comes from the very person the option betrays. Probe (her card, queen Nhan Ngọc Thù mediates, she picks «Mách lẻo»): x = «được: Hoàng hậu quý ngươi +5 · mất: … Nhan Ngọc Thù oán +6»; after go(): the queen's liking −5 → −3 AND the queen's oán 0 → 6. The kit card reads «Hoàng hậu hài lòng; nhưng … <queen's name> sinh oán» (scan row B rcvAsk:mediate · Mách lẻo) — the same woman pleased and resentful because she gossiped about the queen's own mediation, with nobody above to tell. Not a real gain, it only silences the scan. Fix options: (a) revert d007c9ba (back to 41125250) and keep N5 as an owner question (the gain of gossiping when no one is above is a design call, law 16/17); or (b) a gain from a REAL other person who would be pleased to hear it (e.g. a rival of the queen / a palace gossip, named on the card), never the queen herself.
+- Also seen (check while fixing): the card prints +5 but the queen's liking moved +2 (−5 → −3) — confirm the printed number is what affAdd applies (law 4), or show the rule's real value.
