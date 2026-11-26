@@ -1,0 +1,173 @@
+[
+ {
+  "at": "2026-11-26T09:58:35.544Z",
+  "buoi": 65,
+  "rss": 2205,
+  "anon": 1526,
+  "stacks": [
+   [
+    "(anon) @29409:302"
+   ],
+   [
+    "(anon) @29409:302"
+   ],
+   [
+    "(anon) @29409:302"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T09:59:15.061Z",
+  "buoi": 65,
+  "rss": 2620,
+  "anon": 1945,
+  "stacks": [
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "kitActCompactOn @48862:62",
+    "kitActCompactOn @48889:79",
+    "kaNorm @49147:124",
+    "(anon) @29409:312"
+   ],
+   [
+    "kfCls @58723:26",
+    "kitOptSig @69729:172",
+    "kitOptFinal @69692:71",
+    "kpOptArt @69731:109",
+    "kaNorm1 @69646:192",
+    "kaNorm1 @83605:220",
+    "kaNorm1 @80228:15",
+    "(anon) @29407:84",
+    "kaNorm @29407:68",
+    "kaNorm @30829:98",
+    "kaNorm @49147:98",
+    "(anon) @29409:312"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T09:59:54.980Z",
+  "buoi": 65,
+  "rss": 3017,
+  "anon": 2343,
+  "stacks": [
+   [
+    "kaNorm @29407:68",
+    "kaNorm @30829:98",
+    "kaNorm @49147:98",
+    "(anon) @29409:312"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "kitScrollCues @81274:1",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T10:00:34.994Z",
+  "buoi": 65,
+  "rss": 3424,
+  "anon": 2750,
+  "stacks": [
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "kaNorm @29407:68",
+    "kaNorm @30829:98",
+    "kaNorm @49147:98",
+    "(anon) @29409:312"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ]
+  ]
+ },
+ {
+  "at": "2026-11-26T10:01:14.995Z",
+  "buoi": 65,
+  "rss": 3811,
+  "anon": 3137,
+  "stacks": [
+   [
+    "kaNorm @29407:68",
+    "kaNorm @30829:98",
+    "kaNorm @49147:98",
+    "(anon) @29409:312"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ],
+   [
+    "(anon) @81273:68",
+    "kitScrollCues @81273:52",
+    "MutationObserver.observe.childList @81276:212"
+   ]
+  ]
+ }
+]
