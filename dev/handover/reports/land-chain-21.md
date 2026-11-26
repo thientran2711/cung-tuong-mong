@@ -41,3 +41,5 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 08:50Z coordinator now MAIN CHÍNH 156 session_01V1ZZH4YYLnxnhwuGEx25zf.
 - 08:53Z SMALL PASS home-way-nits 0e71fdbc → may go READY (after mg-trim; restack onto be7e8326).
 - 08:53Z MAIN 156 queue: mg-trim → HW-NITS → endcard-top 3f38961f → TAINGHE 88bd567f → srvmerit c7f4fc0a → kit-stage 22e318d5 → NHV (new sha) → map-zones 9c8985ab8 → D1+D4 (one sha).
+- 08:54Z NHV-BUILD (session_01V1ZZH11unC8raKPPDux51Y): nhv-areas new head 50840478 (replaces b48425a1; map-labels-scan night fix + jnhv one-liner; transition 1003/1003, area 55/55).
+- 09:05Z A/B 6b5d3d05 vs bf6dd041 (alone): buổi 2139/2169, render 301/289, tab 684/638, tasks>200 47/39 → no regression; reported. mg-trim gates started.
