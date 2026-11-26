@@ -181,3 +181,37 @@ LIVE main 6b5d3d05 (dialog-fixed.js run twice on its index.html) → pre-existin
   The cards ARE in the queue (Q = Tiền truyện 1/3..3/3 + Khuê các, probe). TODO: check with real taps whether the chest needs a tap per item (.kmsh) to
   finish; if a real player can get stuck, that is a chest bug (kit reward chest owner); else teach intro-video.js to tap .kmsh items.
 - Reviewer RV-OB-NGOAICUNG is inactive → MAIN 154 opens a fresh BIG rv for this branch.
+
+## r3 — OB-NGOAICUNG-3b (BIG FAIL r2: her DRAWN tag read the palace rank at home) — MAIN 156/157
+PRIORITY #1 CHECK ('kszRankName'): OD 0 | ledger 0 | claims 0 | main 10 (jksize.js:127 kszRankName → RANKS[S.rank].n) | review/* review/ob-ngoaicung 72fb3ff7 | archive 1.
+START_CTX ≈ 8 % of the window. OB-NGOAICUNG-3's patch never arrived (told MAIN 157: no) → built from 72fb3ff7 myself.
+**Fix = ONE source** — `meRankN()` (jroad8.js, next to placeW): at home (road8()==="kc", not out) = ROAD8_LAB «me» (Tiểu thư / Thôn nữ / Công chúa / Tú nữ);
+in the palace = RANKS[S.rank].n exactly as before. Routed (law 11, every place that prints HER rank): all 44 `RANKS[S.rank].n` sites in 33 files
+(jksize kszRankName = the drawn dialog plate .knr-r; j79 header/kitName; j15/j2/j34 cards; jhc/j95/jdc/j25 portraits + tags; jne/jaudit/j8/j30/j4/j77/j70
+Sổ ghi + Tin báo lines; j18/j68i/j87 result rows; jentry/j52 sub-lines; jselxsc replace/guard; j3 hall record; jgoal/j99succ/jge/jexam/jht/jrd_cnv/j14/j27/jbancung),
+plus jkc2's rkName / rkOfFace / pMe overrides (were only for thôn nữ/công chúa via KC2W.rw → the tiểu thư fell through to the palace rank; now every home
+road via isKc()+meRankN()). KC2W.rw (a second copy of the same words) deleted. jselxsc (tú nữ days) also accepts the home word in its plate guard.
+**scan.js** extended: surface `meRank` = meRankN · kszRankName(S) · rkName(S) · rkOfFace(S) · HUD #me-r; `drawnTag` = the .knr-r of HER plate in a real kit
+dialog (who:pMe()); `drawnPlay` = her drawn .knr-r in every dialog met during the random play; strict «rank» = any RANKS[].n word on these at home.
+
+| road | surface | BEFORE 72fb3ff7 | AFTER 6e726d81+ |
+|---|---|---|---|
+| td (tiểu thư) | drawn dialog plate .knr-r / kszRankName | **Đáp ứng** («Huynh trưởng thua bạc», «Hội thơ xuân») | Tiểu thư |
+| tt (tiểu thư) | same (+ rkName / rkOfFace / pMe) | Đáp ứng (start flake that run; td same code path) | Tiểu thư («Cha say rượu», «Quân cờ đầu tiên», «Đêm Thất tịch»…) |
+| cnv (thôn nữ) | drawn plate | **Đáp ứng** («Xuân Đào khóc», «Mẹ trở bệnh», «Nước lên») | Thôn nữ |
+| nc / bd (công chúa) | drawn plate | **Đáp ứng** («Vương thúc mời yến», «Hòa ước»…) | Công chúa |
+| all 5 | rkName / rkOfFace / HUD | ok on cnv/nc, palace rank on tt/td | home word |
+Scan (300 random home steps per road): iPad 1180x820 SCAN PASS 5/5 · Fold 755x1000 PASS 5/5 (tt re-run alone after the known palace-start flake) ·
+BEFORE build: SCAN FAIL (rank:meRank/drawnTag/drawnPlay on td cnv nc). Page errors 0 everywhere.
+
+**Tiểu thư chest «Rương đồ khuê các» (#kmrew) — real taps** (new dev/test/ob-ngoaicung/chest-tap.js: touchscreen / mouse at screen points, elementFromPoint hit test,
+no element.click() once the chest is up): «Nhận» IS reachable on Fold and iPad → chest closes → Tiền truyện 1/3..3/3 + Khuê các show. Not a kit bug.
+Why the old harness stuck: step 0 of the chest waits for «Chạm để mở» (a tap) — nothing reveals by itself (11 s, no «Nhận»); the harness only clicked a visible «Nhận».
+Note for MAIN (KK owner, not blocking): when the chest comes up the boot/art cover «Sửa soạn nhập cung · Vào cung ngay» (#modal.kload) can still sit OVER it —
+the first tap on «Chạm để mở» hit that cover, a second tap opened the chest, a third hurried the reveal; then «Nhận» at the bottom centre (hit-test ok).
+Gates (code sha 6e726d81): QUICKCHECK PASS (open 1715 ms · old save from LIVE main loads + plays a buổi · perf median new/live render 178/202, tab 380/402,
+buổi 2338/1192 ms, tasks>200ms 31/25 — within perfgate). Core gates: only G4 80-dialog-fixed «kit-dialog-2 a» + G4 90 button-crawl «Ô lưu · Lui» = the same
+pre-existing FAILs reproduced on LIVE in r2; G4 95-next-dead failed once on iPad while my chest test ran in parallel → re-run alone: PASS 8/8 on this build
+AND on 72fb3ff7. coop-e2e not re-run (change = rank words only). Page errors 0 in every run.
+Stills (CDN, looked at): https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc5-r3-tag-tieuthu-ipad.jpg · …-fold.jpg (Tiền truyện 1/3 plate
+«Tiểu thư · Bạch Lang Hoa (ta)», stage tag «Tiểu thư») · ngc5-r3-chest-open-{fold,ipad}.jpg.
