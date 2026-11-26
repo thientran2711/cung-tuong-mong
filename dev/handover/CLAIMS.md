@@ -1857,3 +1857,4 @@ KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING 
 | D2 daily event cap + STAT PACE (opus; briefs/D-owner-bugs-2611.md) | review/stat-pace | FOREMAN D | session_01D3E3Na4s9nsVUDJ4L7XktF | RUNNING | 26/11 04:30Z |
 | D3 contest first place ⇒ thị tẩm (opus; briefs/D-owner-bugs-2611.md) | review/contest-thitam | FOREMAN D | session_01D3E3NY4u5PWtro3m4FhbDG | RUNNING | 26/11 04:30Z |
 | D5 minigame cut / skill roll / Học nhanh recommendation (opus; briefs/D-owner-bugs-2611.md) | review/mg-trim | FOREMAN D | session_01D3E3NaHccBNYdCLfx5BnTi | RUNNING | 26/11 04:30Z |
+HOME-WAY top-bar Về phòng + home icon + punishment by weight | review/home-way | session_01V1ZZH3KBeUcSLSUiQfAU1w | RUNNING | 2026-11-26T04:18Z (MAIN 152)
