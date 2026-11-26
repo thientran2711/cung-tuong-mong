@@ -36,3 +36,29 @@ New kit hooks in jk4 next to KIT 32.10: `kitTopClose()` (Esc + Back share it) an
 dev/build/j6.js, j79.js, jk4.js, jkiep.js, jopic.js, jwhy.js, jact.js, jfocus.js; dev/kit/KIT.md; dev/test/ob-m3ui.js.
 
 LOOK READY.
+
+## REVIEW (RV-OB-M3UI)
+PRIORITY #1 CHECK: OD 24/11 ~07:25Z / ~08:08Z / ~08:40Z (real) | main KIT 32.10 closers, kitConfirm 83.9, jkiep kpGate | review/* review/ob-m3ui only | claims OB-M3UI session_01V1ZZH2Vt4J15fPjFZDCzMq.
+Target review/ob-m3ui 0c6e3222 (fix 248d95c0 on LIVE 3af7896e). Built both with dev/build/assemble.py (review.html / live.html) and ran every test on both.
+
+**VERDICT: FAIL** — 1 real fault (Back still leaves the game), 2 smaller. Everything else PASSES.
+
+### Numbered faults
+1. **Device Back still LEAVES the game in three states; the "Back never leaves the game" claim (brief + report §2 «Back on a forced event does nothing (never leaves)») is false.** Cause: `kitBackArm()` (jk4) pushes the one history guard entry ONLY when `kitTopClose(true)` is true at the moment of a click +80 ms / +700 ms. Probe (Fold 755x1000, touch, page.goBack, 0 page errors) on review.html:
+   - forced event (options, no cancel option, nothing closable): Back → page LEFT (history entry before the game). Not armed, `kitTopClose(true)=false`.
+   - nothing open: Back → LEFT.
+   - a closable card that opens by itself >700 ms after the last tap (timer / dawn / world step; no click armed it): `kitTopClose(true)=true` yet Back → LEFT (no guard entry).
+   - a guard entry left behind after a layer is closed with ✕ swallows one Back with no visible effect, the next Back leaves (guard is never re-armed after a plain pop with nothing to close).
+   Same on LIVE for the first two (not a regression), but the brief for this branch was exactly «never leaves the game». Fix proposal (small, kit-side, jk4): push the guard once at boot (and on every popstate), make `popstate` run `kitTopClose()` and otherwise do nothing (stay in the game), drop the click-timer arming. Owner decision needed only if she wants Back to be able to exit the app from the bare room — law 16: ask her; the brief says never leave.
+2. **law 11 list — where Back now acts as the ✕/Esc of that layer (new behaviour, was «leave game»)**; none skips a required choice, but MAIN should know: (a) a dialog with a close-only option («Thôi» / «Lui» / «Đóng» / «Đã hiểu» / «Đã rõ» / «OK» / «Xong», kitCancelIx) → Back = that option via chooseM (its go/wrappers run, same as ✕ and Esc since KIT 32.10), so Back on an invitation-type card with a «Thôi» DECLINES it; (b) game/lesson result card #ov → Back presses its result button (applies the result, same as ✕); (c) kitBook, mini-game while it runs (no result button), podium, forced events (no ✕), `.kpod` → Back does nothing in-layer (and see fault 1: it then leaves). No layer found where Back skips a must-answer choice. Not tested live: co-op screens and individual minigames (one-by-one scan not possible in a sparse harness); they use the same #modal/#ov paths.
+3. **Minor / test-harness:** (a) report says LIVE 31 FAIL / 45; I get 32 FAIL / 45 on LIVE, 0 FAIL / 44 on the branch (count differs by 1, same cases). (b) `kit-opt-art-tap` is flaky on BOTH builds: the «ksp-card» row randomly reads «no card» (review run 1 Fold, LIVE run 1 Fold; re-run both green) — not a regression. (c) `dialog-stack-scan.js` cannot run here at all (times out waiting for `#krotf`, 120 s) on LIVE AND the branch, so the 10/10 LIVE count could not be compared; harness, not branch.
+
+### What PASSES (evidence)
+- law 16/17 (OD quote): the removed re-ask is exactly what she ruled. OD 24/11 ~07:25Z: «Tôi không có muốn phải hỏi lại confirm gì hết. Chọn là chọn luôn, không có confirm lại một lần nữa» ; ~08:08Z real: «Không có một lời nhắc nào về bất cứ một cái hành động của tôi nha … tôi không có muốn có một cái lời nhắc nào cả» ; ~08:40Z real: «những cái vấn đề liên quan tới hệ thống … xóa bản lưu … là bắt buộc phải hỏi lại … Tôi đang nói … khi tôi bấm vào một lựa chọn rồi sau đó nó báo nhắc nhở để phải chọn lại». So «Kiếp này chưa trọn … Nghĩ lại / Vẫn chọn» (a game option) → removed = correct; «Kiếp mới» over a live sổ (system act, deletes the save) → ONE kit confirm = correct. kpGate kept as a stub returning false (co-op thin callers keep working).
+- law 9: KIT.md 32.10/32.11, §6.2, 83.9 overwritten in place (no side-by-side copy); ✕ = existing kitXHTML, `.kxov` / `.kxpop` only place it; list `KIT_OPT_TAP` is one list read by j79 and jwhy.
+- `dev/test/ob-m3ui.js` Fold 755x1000 + iPad 1180x820, robot M3 old save: branch 0 FAIL / 44 (legend ✕/outside/Esc/Back, #kpzoom, #kpinfo all four, Back on info dialog, death option chosen at once, «Kiếp mới» → kit confirm + ✕ keeps life, every «!» named, old save «Tiếp tục kiếp này» → Mạnh Mi Trang, A/B page errors none); LIVE 32 FAIL / 45.
+- `kit-opt-art-tap` 6/6 on branch and LIVE (flaky row only). 0 new page errors vs LIVE (0 on both).
+- LOOK PASS: shots 755x1000/1180x820 1b-ladder, 2-kpinfo, 2-kpzoom, 3a-confirm, 4-bang looked at: ✕ in the corner, sits inside the screen, no cut text. Note: on 3a the confirm shows ✕ + «Bắt đầu kiếp mới»; the «Thôi» word is the ✕ (kit close-only option), by design.
+- Video sheets (fold/ipad fresh-life, fold old-save): the grey silhouette portrait on the «Tin» dialogs is a loading placeholder — in my own run of the same build the same dialog shows the real portrait (Tạ Tâm Duyệt, 755x1000 2-kpinfo) while option thumbnails and event art load in the video too, so it is image latency in the recorded run, not a kit fault. (Same silhouette appears in the first «Nhập cung» frame before art arrives.)
+
+Re-review after fault 1: SMALL re-check = run `node dev/test/ob-m3ui.js` + add cases «Back on forced event / bare room / timer-opened card stays in the game».
