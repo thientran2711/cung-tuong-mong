@@ -51,3 +51,8 @@ STATE at start: LIVE 3af7896e · ROLLBACK 6b5d3d05. Tools = lc21-tools (SP= fixe
 ## 13:00Z — HW-NITS READY sent (aa37de21)
 - gates-hw2: all PASS except global-names 1 CLASH (=LIVE), mg-back 1/12 both (LIVE 2/12), tainghe-info TypeError (rerun FAILS on LIVE 1dcb373e too → pre-existing). QC PASS vs 1dcb373e; perf render 263/286, tab 672/678, buổi 1846/2070, tasks 36/38.
 - ob-oan lc22-oan 143515c6 gates start (gates-oan22.sh, QCBASE=wt/hw).
+- kw 30915038 self-merge tests: kawhy-verdict 25/25, news-sieve 10/10, ob-verdict 84 OK (old save), kit-kem-row PASS (incl ONE-SIEVE K.more rows). QC at its slot.
+- 13:03Z PUSHED aa37de21 → LIVE aa37de21 · ROLLBACK 1dcb373e. Post-push OK (index+sw byte-identical, CHANGE shown).
+- 13:10Z CONTAINER RESTART (uptime 0) killed ob-oan gates at test 7 (no FAIL yet). Scratchpad + worktrees survived.
+- 13:10Z MAIN 159: dialog-order r3 jump-in (owner bug) = review/dialog-order-r3 af8de6c8 onto aa37de21. Staged review/lc22-do 04fed510 (built files only; own CHANGE «Chạm việc của nàng với một người (hỏi chuyện, tặng quà…) là chạy ngay; thẻ sự kiện tới cùng lúc chờ phía sau, không mất, không bị qua buổi.» 139). Gates gates-do.sh = gates-hw2 chain + dayq-hold, dialog-order next/held probes Fold+iPad, dialog-order-scan Fold+iPad, dayq-order; QC vs aa37de21. dup_live.txt regenerated from aa37de21.
+- After dialog-order: restack oan → ov → km → kw onto it (built files) and gate oan.
