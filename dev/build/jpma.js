@@ -217,7 +217,7 @@ if(typeof agReg==="function"&&typeof p3O==="function"){
   const L=others(v).filter(x=>x&&x!==v&&live(x)&&!x.confined&&(x!==S||(pmMeFree()&&!isSrvSafe()&&!S.confined)));if(!L.length)return O;
   if(!need||G.play[need]!=null){const F=L.filter(x=>aff(v,x)>=0);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v,"play"):null;
    if(t){const x=p3O(v,"pmPlay",{n:"Cùng chơi",c:{},o:100,k:B().kc},N,G.play,"social",pmAt(t),t);if(x)O.push(x)}}
-  if(!need||G.duel[need]!=null){const F=L.filter(x=>(typeof agSpite==="function"?agSpite(v,x):-aff(v,x))>=B().npc.spite);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,typeof agSpite==="function"?agSpite(v,x):-aff(v,x)),v,"duel"):null;
+  if(!need||G.duel[need]!=null){const F=L.filter(x=>(typeof agSpite==="function"?agSpite(v,x):-aff(v,x))>=B().npc.spite&&(typeof opHeatOK!=="function"||opHeatOK(v,x)))/* review/oan-pace (f): a spite challenge needs the grudge heat ≥ BAL.oanPace.act, like every hostile choice (the ladder challenge below is rank, not spite) */;const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,typeof agSpite==="function"?agSpite(v,x):-aff(v,x)),v,"duel"):null;
    if(t&&pmStakes(v,t).some(z=>z.ok)){const x=p3O(v,"pmDuel",{n:"Thách đấu",c:{},o:pmOddsEst(v,t,pmX(v,t,"duel").kind),k:B().kc},N,G.duel,"social",pmAt(t),t);if(x)O.push(x)}}
   /* C4 (law 1): a ladder challenge FOR THE PLACE right above (her too), at most one per BAL.pm.lad.gapW weeks */
   if((!need||B().lad.g[need]!=null)&&!(v.pmLW!=null&&wk()-v.pmLW<B().lad.gapW)){const A=pmLadAim(v);const t=A&&A.p;

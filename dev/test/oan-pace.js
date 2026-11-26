@@ -37,6 +37,11 @@ const PAGE=process.argv[2]||'index.html';
   setO(c,S,Math.max(30,P.act+5));c.ghen=0;const gH=motiveOK(c,S,'frame');ok('F2 oán ≥ act (and the old motive) → open',gH.ok,gH);
   setO(c,S,0);c.ghen=60;const gG=motiveOK(c,S,'provoke');ok('F3 Ghen counts × net.heat.ghenK (60 × '+BAL.net.heat.ghenK+' ≥ act)',gG.ok===(60*BAL.net.heat.ghenK>=P.act),[gG,60*BAL.net.heat.ghenK]);
   ok('F4 the player is never gated',motiveOK(S,c,'frame').ok);
+  setO(c,S,5);c.ghen=0;c.rel=0;c.j95rum={[key(S)]:{txt:'x',src:'y',w:wk()}};const gR=motiveOK(c,S,'rumor');delete c.j95rum;
+  ok('F5 a rumour she believes no longer opens the gate by itself (no chain of lies)',!gR.ok,gR);
+  /* (b') ghét: a fall of liking is one bounded step per cause, capped per day */
+  clr(e);e.opa={};e.rel=0;S.bqN++;affAdd(e,S,-40);ok('G1 a fall of liking is at most BAL.oanPace.ghet.step ('+P.ghet.step+')',aff(e,S)===-P.ghet.step,aff(e,S));
+  const a1=aff(e,S);affAdd(e,S,20);ok('G2 a rise of liking is never capped',aff(e,S)===a1+Math.round(20*persF(e,'trust',1)),[a1,aff(e,S)]);
   /* rollback */
   P.on=0;setO(a,S,0);S.bqN++;oanAdd(a,S,40);ok('R1 BAL.oanPace.on = 0 → the old raw rise (× the holder\'s nết only)',raw(a,S)===Math.round(40*persF(a,'slight',1)),raw(a,S));P.on=1;S.tuan=keep;
   return out});

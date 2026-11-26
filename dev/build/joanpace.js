@@ -12,25 +12,33 @@
        vent.min). Same for her (law 1).
    (e) NEWCOMER: nobody arrives with oán (j1 newRival keeps oán 0); a lie or a slight is still one bounded step, so a new face has no grudge until
        someone gives her one.
-   (f) THRESHOLD: a hostile choice (every j95 H95 kind: schemes, quarrels) toward anyone needs the chooser's grudge heat toward that person —
+   (f) THRESHOLD: a hostile choice (every j95 H95 kind: schemes, quarrels, lie rumours; jpma spite «Thách đấu» via opHeatOK) toward anyone needs the chooser's grudge heat toward that person —
        max(oán, Ghen × BAL.net.heat.ghenK (her only), dislike × BAL.net.heat.affK) — ≥ BAL.oanPace.act; a recorded outside reason (j95except:
-       coerced by proof, a faction leader's order, a rumour she believes) still opens it. The player chooses for herself (never gated).
+       coerced by proof, a faction leader's order; NOT a rumour she believes — opEx) still opens it. The player chooses for herself (never gated).
+   (b') GHÉT: a fall of liking (j9 affAdd n < 0) follows the same pace (BAL.oanPace.ghet: step / day; store holder.opa).
    Every number: BAL.oanPace (jbal.js), BAL.oanCool, BAL.oanLv, BAL.net.heat. Rollback: BAL.oanPace.on = 0.
    ===================================================================================================================================== */
 function opOn(){return !!(BAL.oanPace&&BAL.oanPace.on)}
 function opKey(y){return y===S?"me":y&&y.id!=null?String(y.id):y&&y.name?"n:"+y.name:null}
 function opNow(){try{return[wk(),bq()]}catch(e){return[0,0]}}
 /* (b) the bounded rise: n (> 0, after the holder's nết) → what really lands */
-function opUp(x,y,n){if(!opOn()||!(n>0)||!x||typeof x!=="object")return n;try{const P=BAL.oanPace,k=opKey(y);if(k==null)return n;
- const [w,b]=opNow();const z=x.opz=x.opz&&typeof x.opz==="object"?x.opz:{};
+function opUp(x,y,n){return opStep(x,y,n,"opz",BAL.oanPace)}
+/* the same pace for «ghét»: a fall of liking (thiện cảm, j9 affAdd n < 0) — one bounded step per cause / incident, capped per day (BAL.oanPace.ghet) */
+function opDn(x,y,n){return opStep(x,y,n,"opa",BAL.oanPace.ghet)}
+function opStep(x,y,n,st,P){if(!opOn()||!(n>0)||!x||typeof x!=="object")return n;try{const k=opKey(y);if(k==null)return n;
+ const [w,b]=opNow();const z=x[st]=x[st]&&typeof x[st]==="object"?x[st]:{};
  for(const q in z)if(!Array.isArray(z[q])||z[q][0]<w)delete z[q];
  const e=z[k]||[w,0,b,0];if(e[2]!==b){e[2]=b;e[3]=0}
  const s=Math.min(n,P.step);let add=Math.max(0,s-e[3]);add=Math.min(add,Math.max(0,P.day-e[1]));
  e[3]=Math.round((e[3]+add)*100)/100;e[1]=Math.round((e[1]+add)*100)/100;z[k]=e;return add}catch(err){return n}}
 /* (f) the grudge heat of a toward t (danger without the trait shift) */
 function opHeat(a,t){const H=BAL.net.heat;return Math.max(oan(a,t),t===S?(+a.ghen||0)*H.ghenK:0,Math.max(0,-aff(a,t))*H.affK)}
-(function(){const g0=motiveOK;motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!opOn()||!g||!g.ok||g.ex||!a||!t||a===S||a===t||typeof a!=="object"||a.rel==null||!H95.has(kind))return g;
-  const h=Math.round(opHeat(a,t));if(h>=BAL.oanPace.act)return g;if(j95except(a,t))return g;
+function opHeatOK(a,t){try{return !opOn()||a===S||opHeat(a,t)>=BAL.oanPace.act||opEx(a,t)}catch(e){return true}}
+/* an outside reason that still opens a hostile choice: coerced by proof / a faction leader's order (j95except). A rumour she believes is NOT one here:
+   its oán already landed (one bounded step), and letting it open the gate made every believer a new liar (a chain of lies from day one, robot 26/11) */
+function opEx(a,t){const r=a.j95rum;try{if(r)a.j95rum=null;return !!j95except(a,t)}catch(e){return false}finally{if(r)a.j95rum=r}}
+(function(){const g0=motiveOK;motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!opOn()||!g||!g.ok||!a||!t||a===S||a===t||typeof a!=="object"||a.rel==null||!H95.has(kind))return g;
+  const h=Math.round(opHeat(a,t));if(h>=BAL.oanPace.act)return g;if(opEx(a,t))return g;
   return{ok:false,why:`chưa đủ oán với ${t===S?"ngươi":t.name} (${h}, cần ${BAL.oanPace.act})`}}catch(e){return g}};window.motiveOK=motiveOK})();
 /* (d) revenge spends the oán it vents */
 function opVent(a,t){try{if(!opOn()||!a||!t||a===t)return 0;const o=oan(a,t);if(!(o>0))return 0;const V=BAL.oanPace.vent;const d=Math.min(o,Math.max(V.min,Math.round(o*V.share)));oanAdd(a,t,-d);return d}catch(e){return 0}}
