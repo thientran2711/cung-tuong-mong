@@ -5,7 +5,7 @@
    ONE ENTRY POINT for every game notice: kitNotice({id, line, text, pic, kind, sticky, go, goLabel}) (or kitNotice("one line")).
      id      same id = the same notice (updated, not doubled; the chip shows again only when its line changed). Default = the line itself.
      line    the SHORT one line of the chip («Ngự hoa viên sắp đóng cửa sau khắc này»). Plain text.
-     text    the FULL text of the panel («… Ở lại = như lẻn vào: Có cơ.»), plain text; default = line.
+     text    the FULL text of the panel («… nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: Có cơ.»), plain text; default = line.
      pic     representative picture (img/… path); default = the kit info picture of «Tin báo» (kitInfoArt).
      sticky  the box keeps its busy light while this notice exists, even when read (closing alert: until she leaves / the place opens).
      go      optional real action of the panel (one option row, label goLabel), e.g. the Tai mắt news «Để ta xem».
@@ -48,9 +48,34 @@ window.kitNoUnkDom=function(root,qq){try{if(!root||(root.textContent.indexOf("??
 /* DISPLAY-TIME pass (owner 24/11 ~22:14Z, old saves): stored text printed verbatim (Tuần lục book pages, Sổ ghi, logs) loses «một vị … chưa quen biết» / «???» right after each render — SYNCHRONOUS hooks on render() and on the book build (j87), no observer / timer / rAF (a global observer perturbed the co-op one-world gate when merged with day-queue, LC12 24/11) */
 try{const r0=render;render=window.render=function(){const r=r0.apply(this,arguments);try{kitNoUnkDom(document.getElementById("panel")||document.body)}catch(e){}return r}}catch(e){}
 
-function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(typeof window.placeNoteOk==="function"&&!window.placeNoteOk(spec))return null;/* the place gate (jroad8, review/ob-ngoaicung): at home no palace news by itself */if(spec.line)spec.line=kitNoUnk(spec.line);if(spec.text)spec.text=kitNoUnk(spec.text);if(Array.isArray(spec.items))spec.items=spec.items.map(kitNoUnk);
+/* tinbao-words (owner OD 25/11 ~23:36Z, verbatim: "Cái gì mà tùm lum chữ lặp tới lặp lui, lũng ca lũng cũng không hiểu nổi."): THE ONE SENTENCE RULE (kitSayLine — never «kitSay», that name is the kit speech bubble of jmark.js) of every
+   Tin báo / news / servant report / Sổ ghi / overheard / place line, applied at the ONE entry (kitNotice line + text + items, kitKnow). Producers write plain
+   cổ trang sentences (their own fixes: jptime ptRepText, jwhy spyNews, jstagehere line, jagent agWhy, j21 noteAdd, j78 trait fact); this pass is the net
+   for every other builder (law 11): no «=», no « · thành / · hỏng» glue, no « · » join inside a sentence, no stacked «) (», no «a: b: c» chain, no sentence
+   said twice («X trở về. X trở về: …»), no raw «có nết Nhiều chuyện». Test: node dev/test/tinbao-words/scan.js (static + kitSayLine cases). */
+function kitSayLine(x){if(typeof x!=="string"||!x)return x;let s=x.replace(/\s+/g," ").trim();
+ /* a sentence that is only the head of the next one is said once («X nghe ngóng trở về · thành. X nghe ngóng trở về: …») */
+ {const Q=s.split(/(?<=[.!?])\s+/);for(let i=Q.length-2;i>=0;i--){const h=Q[i].replace(/ · (?:thành|hỏng)\b/,"").replace(/[.!?:,\s]+$/,"");if(h.length>6&&Q[i+1].indexOf(h)===0)Q.splice(i,1)}s=Q.join(" ")}
+ /* an old «Sổ ghi thêm về X: …» head (stored notices, other builders) → one sentence about X (j21 noteSay) */
+ s=s.replace(/^Sổ ghi thêm về ([^:]{2,60}): (.+)$/u,(m,w,r)=>{try{if(typeof noteSay==="function")return noteSay({name:w},r)}catch(e){}return `Về ${w}, ${r}`});
+ s=s.replace(/ · thành\b(\.?)/g,", việc đã thành$1").replace(/ · hỏng\b(\.?)/g,", việc không thành$1");
+ s=s.replace(/ = (?:như )?/g,", coi như ").replace(/\)\s*\(/g,", ");
+ /* « · » between two words of one sentence → «, » (a date «Tháng ba · thượng tuần» keeps its dot) */
+ s=s.replace(/([\p{L}\p{M}\d)%»”"]) · (?!(?:thượng|trung|hạ) tuần|năm thứ)([\p{L}\p{M}\d(«“"])/gu,"$1, $2");
+ s=s.replace(/\bcó nết (\p{Lu}[\p{L}\p{M}]*(?: [\p{L}\p{M}]+)?)(?=[.,;]|$)/gu,(m,t)=>"vốn tính "+t.toLowerCase());
+ /* «a: b: c» chain → the first colon stays, later ones in the same sentence become commas */
+ /* «X trở về: X nghe ngóng được …» — the part after the colon names the same subject again → that part alone */
+ s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^\p{Lu}/u.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
+ /* the same «title + name» printed again in one notice → the bare name after the first (title once; owner: «tên đầy đủ một lần») */
+ {const seen=new Set();s=s.replace(/(?<![\p{L}\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:\p{Lu}[\p{Ll}\p{M}]+ )?(?:phi|tần)|Phi|Tần) )(\p{Lu}[\p{Ll}\p{M}]+(?: \p{Lu}[\p{Ll}\p{M}]+){1,2})(?![\p{L}\p{M}])/gu,(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
+ s=s.split(/(?<=[.!?])\s+/).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w,i)=>{const pre=q.slice(0,i);if((pre.match(/\(/g)||[]).length>(pre.match(/\)/g)||[]).length)return m;/* a colon inside «(…)» is not part of the chain */return ++n===1?m:", "+(w?w.toLowerCase():"")})}).join(" ");
+ return s}
+window.kitSayLine=kitSayLine;
+function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(typeof window.placeNoteOk==="function"&&!window.placeNoteOk(spec))return null;/* the place gate (jroad8, review/ob-ngoaicung): at home no palace news by itself */if(spec.line)spec.line=kitSayLine(kitNoUnk(spec.line));if(spec.text)spec.text=kitSayLine(kitNoUnk(spec.text));if(Array.isArray(spec.items))spec.items=spec.items.map(x=>kitSayLine(kitNoUnk(x)));
  let line=plain(spec.line||spec.text||"");if(!line)return null;try{if(typeof kShort==="function")line=kShort(line)}catch(e){}
- const id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
+ let id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
+ /* tinbao-words (MAIN 149 look): the SAME news told twice (two ids, one text: «Ở Đức Thọ cung …» from two tellers) is ONE row */
+ {const d=NT.list.find(x=>x.id!==id&&!x.sticky&&x.text===text);if(d&&!NT.list.some(x=>x.id===id))id=d.id}
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
  Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",own:!!(spec.own||it.own),sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
@@ -179,7 +204,7 @@ body.kdlg-on #kntchip,body.kbk-open #kntchip{visibility:hidden!important}`;docum
    into ONE kitNotice (kind "know"): one fact = its own line; several = «Ngươi biết thêm N điều» + every line in the «Tin báo» panel. Same key in one batch =
    one fact (the richer pri wins; a Sổ note never doubles the trait it came from). Never blocks play; plain cổ trang words, no %. */
 const KB={m:new Map(),t:0,n:0};
-function kitKnow(o){try{if(!o||!o.text)return;const k=String(o.key||o.text),p=o.pri|0,ex=KB.m.get(k);if(!ex||p>=ex.pri)KB.m.set(k,{text:plain(o.text),pri:p,own:window.__kcActing>0||!!(ex&&ex.own)});if(!KB.t)KB.t=setTimeout(kitKnowFlush,0)}catch(e){console.error("kitKnow",e)}}
+function kitKnow(o){try{if(!o||!o.text)return;const k=String(o.key||o.text),p=o.pri|0,ex=KB.m.get(k);if(!ex||p>=ex.pri)KB.m.set(k,{text:kitSayLine(plain(o.text)),pri:p,own:window.__kcActing>0||!!(ex&&ex.own)});if(!KB.t)KB.t=setTimeout(kitKnowFlush,0)}catch(e){console.error("kitKnow",e)}}
 function kitKnowFlush(){try{if(KB.t){clearTimeout(KB.t);KB.t=0}const V=[...KB.m.values()],own=V.some(x=>x.own);const L=V.map(x=>x.text);KB.m.clear();if(!L.length)return null;
  return kitNotice({id:"know:"+Date.now()+":"+(++KB.n),kind:"know",own,line:L.length===1?L[0]:`Ngươi biết thêm ${L.length} điều`,text:L.join(" · "),items:L,again:true})}catch(e){console.error("kitKnowFlush",e);return null}}
 /* kitKnowMany([{key,text,pri}…]) = the call for a LIST of things learned at once (the sắc phong news of SELSCENE: one line per girl «<tên> nay là <phẩm>»): all into the same batch, flushed NOW → ONE notice «Ta biết thêm N điều» (returns it) */
@@ -193,5 +218,5 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2",title:"kit
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="krailb kglyph kntb kbusy kbadge" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0">!</i></button>`+
   `<button type="button" class="krailb kglyph kntb kntcalm" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0;opacity:.5">!</i></button>`+
   `<span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ngự hoa viên sắp đóng cửa sau khắc này</span></span>`+
-  `<button type="button" class="btn" onclick="kitNotice({id:'kitpg',line:'Ngự hoa viên sắp đóng cửa sau khắc này',text:'Ngự hoa viên sắp đóng cửa sau khắc này (đóng cửa tối). Ở lại = như lẻn vào: Có cơ.'});kitNoticeOpen('kitpg')">Mở khung Tin báo</button></div>`})}catch(e){}
+  `<button type="button" class="btn" onclick="kitNotice({id:'kitpg',line:'Ngự hoa viên sắp đóng cửa sau khắc này',text:'Ngự hoa viên sắp đóng cửa sau khắc này (đóng cửa tối); nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: Có cơ.'});kitNoticeOpen('kitpg')">Mở khung Tin báo</button></div>`})}catch(e){}
 }catch(e){console.error("jnotice",e)}})();

@@ -120,7 +120,9 @@ const KN_POOL={
 function knMood(n){const V=knB().voice;return n>=V.warm?"warm":n>=V.cool?"cool":"cold"}
 function knSpk(s){return {srv:s.role==="eunuch"?"m":"f",name:s.name}}
 function knWhat(h){const p=knPend(h);try{if(p){const v=agDoer?agDoer(p):RV(p.vid);const t=agPerson(p.t);const nm=v&&v.name?v.name:"có người";return `${nm} đang ${p.act}${t?" "+(t===S?"ngươi":t.name||""):""}`.replace(/\s+$/,"")}}catch(e){}
- return String((AD_HAP_T[h.id]||"có chuyện")).toLowerCase()}
+ /* tinbao-words (MAIN 149 look, owner k16 «Ở Đức Thọ cung ngày hội.»): the happening as a CLAUSE with its verb, never the bare title noun */
+ return KN_WHAT[h.id]||(AD_HAP_T[h.id]?"đang có chuyện "+String(AD_HAP_T[h.id]).toLowerCase():"đang có chuyện")}
+const KN_WHAT={emp:"có Hoàng thượng đang dạo vườn",quarrel:"có hai phi tần đang cãi nhau",gossip:"có người đang to nhỏ chuyện riêng",favour:"có người đang tìm người nhờ việc",fest:"đang có hội lớn",cold:"có tiếng khóc vọng ra",deed:"đang có chuyện"};
 function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String(t||"").replace(/\{W\}/g,W).replace(/\{what\}/g,what);
  try{if(r.s){const s=r.s;const sp=knSpk(s);const m=knMood(s.loyal||0);return kSay(sp,S,fill(kLine("tinbao:srv",KN_POOL.srv,{m})),{own:true,close:m==="warm",m})}
   if(r.v){const m=knMood(aff(r.v,S));return kSay(r.v,S,fill(kLine("tinbao:friend",KN_POOL.friend,{m})),{m})}

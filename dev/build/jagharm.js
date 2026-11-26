@@ -157,7 +157,7 @@ function haHapFire(h,k){const x=h.x;const p=haPend(x);if(!p)return false;const v
  if(h.id==="quarrel"){const b=agPerson(p.t);let d=null;try{d=b&&p.pl==="vuon"?mkP("rvquarrel",{a:v.id,b:b.id}):null}catch(e){d=null}
   if(d){agLand(p,true);pushDil(d,AD_HAP_T.quarrel);return true}agScene(p,v);return true}/* the quarrel card is resting (seen lately): the witness card of the same deed */
  if(h.id==="gossip"){const r=agLand(p,true);let f="";try{f=typeof intelLearn==="function"?intelLearn(v,1,{by:"ngươi",how:"Nghe lỏm"}):""}catch(e){}if(!f){try{f=overhear(k)}catch(e){}}
-  pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe ${v.name} to nhỏ với người bên cạnh.</p><p>${f||r||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});return true}
+  pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe nàng ta to nhỏ với người bên cạnh.</p><p>${f||r||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});return true}
  if(h.id==="favour"&&x.q){try{if(q72X(x.q)&&q72CanOffer()){q72().a.push(x.q);const ok=q72Offer(x.q,"meet");if(!ok){const q=q72();q.a.splice(q.a.indexOf(x.q),1)}else{agLand(p,true);return true}}}catch(e){console.error(e)}return false}
  /* any other witnessable deed: the witness card of that real deed (jagent agScene / haScene) */
  agScene(p,v);return true}
