@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bf290579+","t":"2026-11-26T22:23Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"993a50cc131c","h":[]};
+window.CTM_BI={"s":"e88ef929+","t":"2026-11-26T22:48Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"8e6aa8cbb070","h":[]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -97749,7 +97749,10 @@ button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-dir
 button.ka.kbare.kbare{--kasq:${KIT_SQOPT.pic}px;--kaw:var(--kasq)!important;--kah:var(--kasq)!important;min-height:0!important;height:auto!important;padding:6px 10px 6px 6px!important;align-items:center!important}
 button.ka.kbare.kbare>.kaart{flex:0 0 var(--kasq)!important;width:var(--kasq)!important;height:var(--kasq)!important;min-height:0!important;aspect-ratio:1/1;align-self:center!important;margin-block:0!important}
 html.kpnarrow button.ka.kbare.kbare{--kasq:${KIT_SQOPT.narrow}px}
-.kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}`;document.head.appendChild(st)}catch(e){}})();
+.kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}
+/* §93.5a FIXED-SIZE NAME PLATE: one width + one height (2 lines) for every plate of a row of figures (law 10); a long name wraps inside it, never runs on, never cut (OD:L177) */
+html .kscn-tag.kscn-fix{width:var(--kscn-fixW,7.6em);max-width:none;min-height:calc(2.3em + 4px);display:inline-flex;flex-direction:column;justify-content:center;white-space:normal;overflow-wrap:anywhere;font-size:.74rem;line-height:1.15;box-sizing:border-box}
+html.kv2 .kscn-tag.kscn-fix{--kscn-fixW:8.4em}`;document.head.appendChild(st)}catch(e){}})();
 function kscnGeo(){const h=document.querySelector("header.hud"),b=document.querySelector("nav.bar");const hr=h?h.getBoundingClientRect():{bottom:0,left:0,right:innerWidth},br=b?b.getBoundingClientRect():{top:innerHeight};
  const t=Math.round(hr.bottom+4),bt=Math.round(br.top-4),L=Math.round(hr.left),R=Math.round(innerWidth-hr.right);return{t,H:bt-t,L,R,w:innerWidth-L-R}}
 function kscnCalm(){try{return(typeof reducedMotion==="function"&&reducedMotion())||(typeof kfStill==="function"&&kfStill())}catch(e){return false}}
@@ -97837,7 +97840,8 @@ function kitNameTag(p,o){o=o||{};let st=o.stage;try{if(st==null)st=!(typeof j59k
  const t=o.title||(typeof j59title==="function"&&j59title(p))||"Tú nữ";if(st<=0&&!o.ph&&typeof j59tagHTML==="function")return j59tagHTML(p,p.name);
  return `<span class="j59t" style="--tc:${c};--rt:${typeof kitRankTone==="function"?kitRankTone(t,c):c}">${esc(t)}</span><span class="j59n" style="--tc:${c}">${esc(o.ph||"Chưa rõ tên")}</span>`}
 /* the tag in its own box (a scene layer, not the place stage): <span class="kscn-tag"> + the j59 title/name lines */
-function kitNameTagBox(p,o){const c=typeof j59col==="function"?j59col(p):"";return `<span class="kscn-tag"${c?` style="--tc:${c}"`:""}>${kitNameTag(p,o)}</span>`}
+/* o.fix = the FIXED-SIZE name plate (owner 26/11 ~21:45Z «Phi Đường Mi Trang · Tố…» runs under the figures → one plate per figure, one size; KIT §93.5a) */
+function kitNameTagBox(p,o){const c=typeof j59col==="function"?j59col(p):"";return `<span class="kscn-tag${o&&o.fix?" kscn-fix":""}"${c?` style="--tc:${c}"`:""}>${kitNameTag(p,o)}</span>`}
 /* 93.6 sắc phong news row: kit face (stranger rule of kitFaceH) + name or placeholder + new rank chip + how she is known; list = the kit list frame */
 function kitNewsRankRow(p,o){o=o||{};const named=typeof kitKnownName==="function"?kitKnownName(p):true;const col=(typeof kitRankCol==="function"&&o.rank!=null&&typeof o.rank==="number"?kitRankCol(o.rank):"")||"";
  const rk=o.rank==null?"":typeof o.rank==="number"&&typeof kmRankName==="function"?kmRankName(o.rank):String(o.rank);
@@ -100236,7 +100240,7 @@ async function loadFig(p){let src="";try{const q=p&&p.ref||p;src=typeof kitFigOf
  const ob=typeof kscnOpaque==="function"?kscnOpaque(im):{l:0,r:1,t:0,b:1};return {src,ob,ar:im.naturalWidth/Math.max(1,im.naturalHeight)}}
 function memberEl(x,fh){const d=document.createElement("div");d.className="kring-m";const fw=fh*x.f.ar;d.style.cssText=`width:${fw}px;height:${fh}px`;
  const s=esc(x.f.src);d.innerHTML=`<img src="${s}" alt=""><img class="kring-dim" src="${s}" alt="" style="filter:brightness(${(BAL.kring||BAL.kdim).dimB||BAL.kdim.b}) saturate(${(BAL.kring||BAL.kdim).dimS||BAL.kdim.s})">`;x.el=d;x.dim=d.querySelector(".kring-dim");x.fw=fw;x.fh=fh;return d}
-function tagEl(p,cls){const t=document.createElement("div");t.className=cls;try{t.innerHTML=kitNameTagBox(p.ref||p,{})}catch(e){t.innerHTML=`<span class="kscn-tag">${esc(p.name)}</span>`}return t}
+function tagEl(p,cls,fix){const t=document.createElement("div");t.className=cls;try{t.innerHTML=kitNameTagBox(p.ref||p,fix?{fix:1}:{})}catch(e){t.innerHTML=`<span class="kscn-tag">${esc(p.name)}</span>`}return t}
 /* ---------- build a slot ---------- */
 /* OWNER 26/11 ~20:27Z «kích thước lúc trong vòng quay không to như ban đầu»: the FRONT figure = the LIVE stage figure size, px for px. Read from the place stage under the ring
    (a visible woman figure: its image px, absolute); no stage → layer px × KIT_RING.stdR (measured LIVE: Fold 541/724, iPad 436/601). Per person × KIT_FIG.fac (men ×1.07, children by age). */
@@ -100255,7 +100259,10 @@ function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="k
   const lead=M[0];s.style.width=W+"px";s.style.height=fh0+"px";M.forEach(x=>{x.el.style.top=(fh0-x.fh)+"px";x.el.style.bottom="auto"});
   s.__cx=W/2;s.__feet=fh0-fh*(1-lead.f.ob.b);s.__top=Math.min(...M.map(x=>fh0-x.fh+x.f.ob.t*x.fh-(x.lift||0)));
   const a=document.createElement("div");a.className="kring-act";a.innerHTML=`<span class="kscn-tag">${esc(g.line)}</span>`;a.style.left=(W/2)+"px";a.style.top=Math.max(-30,s.__top-30)+"px";s.appendChild(a);
-  const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${g.gi!=null&&R.o.groups&&R.o.groups[g.gi].name?esc(R.o.groups[g.gi].name):M.map(x=>esc(typeof kitUnkName==="function"?kitUnkName(x.p.ref||x.p):x.p.name)).join(" · ")}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
+  /* OWNER 26/11 ~21:45Z (WIDER): the joined names label ran on under the figures → a named group (picker: its name) keeps ONE label; otherwise ONE FIXED-SIZE kit name plate
+     (kitNameTagBox fix, KIT §93.5a) under EACH member's feet */
+  if(g.gi!=null&&R.o.groups&&R.o.groups[g.gi].name){const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${esc(R.o.groups[g.gi].name)}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
+  else M.forEach(x=>{const t=tagEl(x.p,"kring-tg",1);t.style.left=(x.left+(x.f.ob.l+x.f.ob.r)/2*x.fw)+"px";t.style.top=(fh0-x.fh+x.f.ob.b*x.fh-(x.lift||0)+2)+"px";s.appendChild(t)})}
  /* the warm light behind the slot in front (static gradient, opacity only) */const h=document.createElement("div");h.className="kring-halo";const W0=parseFloat(s.style.width);h.style.cssText=`left:${-W0*.25}px;top:${s.__top-fh0*.04}px;width:${W0*1.5}px;height:${(s.__feet-s.__top)*1.08}px`;s.insertBefore(h,s.firstChild);s.__halo=h;
  s.__g=g;return s}
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
@@ -100264,7 +100271,7 @@ function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const 
   const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,y=g.floor-g.Ry*(1-c);let x=g.cx+g.Rx*sn;
   /* RING-BUILD-6: a wide slot (a group cluster at M / L size) stays between the ‹ › arrows (overlap gate: no figure over a tap target) */if(N>1&&!q.hide){const P=s.__px||(s.__px=paintX(s)),aw=(KIT_RING.arrow[kv()]||44)+12,l=x+(P.l-s.__cx)*sc,r=x+(P.r-s.__cx)*sc;if(r-l<g.w-2*aw){if(l<aw)x+=aw-l;else if(r>g.w-aw)x-=r-(g.w-aw)}}
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
-  const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
+  const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tgs=s.__tg||(s.__tg=[...s.querySelectorAll(":scope>.kring-tg")]);if(tgs.length){const over=y+(tgs.length>1?50:44)-g.H;const tf=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)";tgs.forEach(tg=>{tg.style.transform=tf})}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
 function stepPx(R){const g=geo(R);return Math.max(60,g.Rx*2*Math.PI/Math.max(3,R.slots.length)*.7)}
 function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){yieldCard(R);res();return false}}))}
@@ -102871,7 +102878,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="993a50cc131c";window.CTM_BUILD=BUILD;
+const BUILD="8e6aa8cbb070";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

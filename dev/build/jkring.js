@@ -81,7 +81,7 @@ async function loadFig(p){let src="";try{const q=p&&p.ref||p;src=typeof kitFigOf
  const ob=typeof kscnOpaque==="function"?kscnOpaque(im):{l:0,r:1,t:0,b:1};return {src,ob,ar:im.naturalWidth/Math.max(1,im.naturalHeight)}}
 function memberEl(x,fh){const d=document.createElement("div");d.className="kring-m";const fw=fh*x.f.ar;d.style.cssText=`width:${fw}px;height:${fh}px`;
  const s=esc(x.f.src);d.innerHTML=`<img src="${s}" alt=""><img class="kring-dim" src="${s}" alt="" style="filter:brightness(${(BAL.kring||BAL.kdim).dimB||BAL.kdim.b}) saturate(${(BAL.kring||BAL.kdim).dimS||BAL.kdim.s})">`;x.el=d;x.dim=d.querySelector(".kring-dim");x.fw=fw;x.fh=fh;return d}
-function tagEl(p,cls){const t=document.createElement("div");t.className=cls;try{t.innerHTML=kitNameTagBox(p.ref||p,{})}catch(e){t.innerHTML=`<span class="kscn-tag">${esc(p.name)}</span>`}return t}
+function tagEl(p,cls,fix){const t=document.createElement("div");t.className=cls;try{t.innerHTML=kitNameTagBox(p.ref||p,fix?{fix:1}:{})}catch(e){t.innerHTML=`<span class="kscn-tag">${esc(p.name)}</span>`}return t}
 /* ---------- build a slot ---------- */
 /* OWNER 26/11 ~20:27Z «kích thước lúc trong vòng quay không to như ban đầu»: the FRONT figure = the LIVE stage figure size, px for px. Read from the place stage under the ring
    (a visible woman figure: its image px, absolute); no stage → layer px × KIT_RING.stdR (measured LIVE: Fold 541/724, iPad 436/601). Per person × KIT_FIG.fac (men ×1.07, children by age). */
@@ -100,7 +100,10 @@ function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="k
   const lead=M[0];s.style.width=W+"px";s.style.height=fh0+"px";M.forEach(x=>{x.el.style.top=(fh0-x.fh)+"px";x.el.style.bottom="auto"});
   s.__cx=W/2;s.__feet=fh0-fh*(1-lead.f.ob.b);s.__top=Math.min(...M.map(x=>fh0-x.fh+x.f.ob.t*x.fh-(x.lift||0)));
   const a=document.createElement("div");a.className="kring-act";a.innerHTML=`<span class="kscn-tag">${esc(g.line)}</span>`;a.style.left=(W/2)+"px";a.style.top=Math.max(-30,s.__top-30)+"px";s.appendChild(a);
-  const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${g.gi!=null&&R.o.groups&&R.o.groups[g.gi].name?esc(R.o.groups[g.gi].name):M.map(x=>esc(typeof kitUnkName==="function"?kitUnkName(x.p.ref||x.p):x.p.name)).join(" · ")}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
+  /* OWNER 26/11 ~21:45Z (WIDER): the joined names label ran on under the figures → a named group (picker: its name) keeps ONE label; otherwise ONE FIXED-SIZE kit name plate
+     (kitNameTagBox fix, KIT §93.5a) under EACH member's feet */
+  if(g.gi!=null&&R.o.groups&&R.o.groups[g.gi].name){const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${esc(R.o.groups[g.gi].name)}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
+  else M.forEach(x=>{const t=tagEl(x.p,"kring-tg",1);t.style.left=(x.left+(x.f.ob.l+x.f.ob.r)/2*x.fw)+"px";t.style.top=(fh0-x.fh+x.f.ob.b*x.fh-(x.lift||0)+2)+"px";s.appendChild(t)})}
  /* the warm light behind the slot in front (static gradient, opacity only) */const h=document.createElement("div");h.className="kring-halo";const W0=parseFloat(s.style.width);h.style.cssText=`left:${-W0*.25}px;top:${s.__top-fh0*.04}px;width:${W0*1.5}px;height:${(s.__feet-s.__top)*1.08}px`;s.insertBefore(h,s.firstChild);s.__halo=h;
  s.__g=g;return s}
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
@@ -109,7 +112,7 @@ function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const 
   const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,y=g.floor-g.Ry*(1-c);let x=g.cx+g.Rx*sn;
   /* RING-BUILD-6: a wide slot (a group cluster at M / L size) stays between the ‹ › arrows (overlap gate: no figure over a tap target) */if(N>1&&!q.hide){const P=s.__px||(s.__px=paintX(s)),aw=(KIT_RING.arrow[kv()]||44)+12,l=x+(P.l-s.__cx)*sc,r=x+(P.r-s.__cx)*sc;if(r-l<g.w-2*aw){if(l<aw)x+=aw-l;else if(r>g.w-aw)x-=r-(g.w-aw)}}
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
-  const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
+  const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tgs=s.__tg||(s.__tg=[...s.querySelectorAll(":scope>.kring-tg")]);if(tgs.length){const over=y+(tgs.length>1?50:44)-g.H;const tf=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)";tgs.forEach(tg=>{tg.style.transform=tf})}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
 function stepPx(R){const g=geo(R);return Math.max(60,g.Rx*2*Math.PI/Math.max(3,R.slots.length)*.7)}
 function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){yieldCard(R);res();return false}}))}

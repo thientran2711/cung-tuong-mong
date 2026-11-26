@@ -41,7 +41,10 @@ button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-dir
 button.ka.kbare.kbare{--kasq:${KIT_SQOPT.pic}px;--kaw:var(--kasq)!important;--kah:var(--kasq)!important;min-height:0!important;height:auto!important;padding:6px 10px 6px 6px!important;align-items:center!important}
 button.ka.kbare.kbare>.kaart{flex:0 0 var(--kasq)!important;width:var(--kasq)!important;height:var(--kasq)!important;min-height:0!important;aspect-ratio:1/1;align-self:center!important;margin-block:0!important}
 html.kpnarrow button.ka.kbare.kbare{--kasq:${KIT_SQOPT.narrow}px}
-.kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}`;document.head.appendChild(st)}catch(e){}})();
+.kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}
+/* §93.5a FIXED-SIZE NAME PLATE: one width + one height (2 lines) for every plate of a row of figures (law 10); a long name wraps inside it, never runs on, never cut (OD:L177) */
+html .kscn-tag.kscn-fix{width:var(--kscn-fixW,7.6em);max-width:none;min-height:calc(2.3em + 4px);display:inline-flex;flex-direction:column;justify-content:center;white-space:normal;overflow-wrap:anywhere;font-size:.74rem;line-height:1.15;box-sizing:border-box}
+html.kv2 .kscn-tag.kscn-fix{--kscn-fixW:8.4em}`;document.head.appendChild(st)}catch(e){}})();
 function kscnGeo(){const h=document.querySelector("header.hud"),b=document.querySelector("nav.bar");const hr=h?h.getBoundingClientRect():{bottom:0,left:0,right:innerWidth},br=b?b.getBoundingClientRect():{top:innerHeight};
  const t=Math.round(hr.bottom+4),bt=Math.round(br.top-4),L=Math.round(hr.left),R=Math.round(innerWidth-hr.right);return{t,H:bt-t,L,R,w:innerWidth-L-R}}
 function kscnCalm(){try{return(typeof reducedMotion==="function"&&reducedMotion())||(typeof kfStill==="function"&&kfStill())}catch(e){return false}}
@@ -129,7 +132,8 @@ function kitNameTag(p,o){o=o||{};let st=o.stage;try{if(st==null)st=!(typeof j59k
  const t=o.title||(typeof j59title==="function"&&j59title(p))||"Tú nữ";if(st<=0&&!o.ph&&typeof j59tagHTML==="function")return j59tagHTML(p,p.name);
  return `<span class="j59t" style="--tc:${c};--rt:${typeof kitRankTone==="function"?kitRankTone(t,c):c}">${esc(t)}</span><span class="j59n" style="--tc:${c}">${esc(o.ph||"Chưa rõ tên")}</span>`}
 /* the tag in its own box (a scene layer, not the place stage): <span class="kscn-tag"> + the j59 title/name lines */
-function kitNameTagBox(p,o){const c=typeof j59col==="function"?j59col(p):"";return `<span class="kscn-tag"${c?` style="--tc:${c}"`:""}>${kitNameTag(p,o)}</span>`}
+/* o.fix = the FIXED-SIZE name plate (owner 26/11 ~21:45Z «Phi Đường Mi Trang · Tố…» runs under the figures → one plate per figure, one size; KIT §93.5a) */
+function kitNameTagBox(p,o){const c=typeof j59col==="function"?j59col(p):"";return `<span class="kscn-tag${o&&o.fix?" kscn-fix":""}"${c?` style="--tc:${c}"`:""}>${kitNameTag(p,o)}</span>`}
 /* 93.6 sắc phong news row: kit face (stranger rule of kitFaceH) + name or placeholder + new rank chip + how she is known; list = the kit list frame */
 function kitNewsRankRow(p,o){o=o||{};const named=typeof kitKnownName==="function"?kitKnownName(p):true;const col=(typeof kitRankCol==="function"&&o.rank!=null&&typeof o.rank==="number"?kitRankCol(o.rank):"")||"";
  const rk=o.rank==null?"":typeof o.rank==="number"&&typeof kmRankName==="function"?kmRankName(o.rank):String(o.rank);
