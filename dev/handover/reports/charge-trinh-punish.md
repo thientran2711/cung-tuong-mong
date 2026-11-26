@@ -84,3 +84,22 @@ TODO for the successor:
 1. -rv c3e1b8fd: investigate the guest-only world writes in coop-e2e (wrongs "xx" / dkeys "xx:mk" on R#9; mgH.hoadien; Thái hậu face) — compare with a second LIVE run; if pre-existing/flaky on LIVE → coop-e2e green run + «LAND READY review/charge-followups-rv c3e1b8fd» to Foreman D (re-merge if LIVE moved).
 2. STEP 4 a43aa413: coop-e2e + coregates (quickcheck) on it; vpAccuse runtime test (give a consort an over-rank piece); re-ask the BIG reviewer session_01D3E3NXbek1mcjhNBkMvvT4 (DELTA c59bae19→a43aa413); on PASS «LAND READY review/charge-trinh-punish <sha>» + video URLs (img/_review/charge-trinh-punish/ fold-755x1000.webm, ipad-1180x820.webm).
 3. Foreman D routed to MAIN: servant end card shows «Đáp ứng» + consort portrait (pre-existing). Reviewer nit N1: a servant accusing her own briber is dismissed too («Ai tố: ngươi») — warning line if such a road is offered.
+
+## Worker D1+D4 #6 (session_01D3E3NXG8jXAH8xJkgoQrNM, START_CTX ~4 %) — 26/11 ~11:40Z
+PRIORITY #1 CHECK: OD 26/11 ~01:25Z–04:20Z D1/D4 rows | main LIVE 3af7896e | review/charge-followups-rv c3e1b8fd + review/charge-trinh-punish a43aa413 | claims D1+D4 (Foreman D).
+Plan changed by Foreman D (10:55Z): land ONE sha on review/charge-trinh-punish (contains -rv).
+| commit | what |
+|---|---|
+| 5fe832c1 | co-op law (host computes): jtruth deedSync (+ jkh khDeed wrapper) never writes a world person's ledger on a guest seat (the new xx deed wrote R#9.wrongs "xx" / dkeys "xx:mk" on B on a read); jmgt mgHand guest read-not-stored; rv nits j95 chOK(v,S,"tt"), j71 picker w = mh pieces |
+| 0a69b83f | test: vpAccuse case always runs (over-rank piece given) → chPunish vp PASS; co-op lazy-write case |
+| 4b693c7a | REAL BUG in a43aa413: F2 `function j95c(s)` REPLACED the buổi calendar `j95c(b)` (callers in j95 / jagday / jagacts / jagacts2 / jagent got "mh"/"tt"); G1 one-core-guard FAIL «defined twice» → renamed j95chg, G1 PASS |
+| f068313b | rv FAIL 4b693c7a (R#9.dw A=2 B=1, host deeds written after the week cut): host deedSyncAll at the top of jcoopworld toCanon (before the cut); mgHand read-not-stored in co-op on both seats (stored hand still read; single player stores) |
+coop-e2e (live Worker, same machine, sequential):
+| build | runs |
+|---|---|
+| LIVE 3af7896e | 143 · 142 (1 FAIL «week after rebirth advances», flake on LIVE) · 143 |
+| c3e1b8fd | 141 (mgH.hoadien / mgHv on seat B only = guest lazy write, real) |
+| a43aa413 | 143 |
+| 4b693c7a | 143 · 143 (reviewer's run 142: R#9.dw) |
+| f068313b | running ×3 |
+Tests on f068313b: charge-trinh-punish ALL PASS (incl. vpAccuse + co-op guest / host / single-player cases), one-core-guard PASS. Reviewer on 4b693c7a: coregates PASS except the known LIVE dialog-fixed / button-crawl.
