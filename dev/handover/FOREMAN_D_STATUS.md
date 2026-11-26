@@ -403,3 +403,5 @@ FROM MAIN 163 (~20:37Z 26/11, depth 2, START_CTX ~5 % → roll at 30 %): main is
 - (26/11 ~21:12Z) ORDER FROM MAIN 163 (non-UI audit → Foreman D, whole job, one worker):
   PRIORITY #1 CHECK (nhân chứng|over-split|merged): OD 25 | ledger 20 | claims 8 | main 15 | review/* 5 (punish-tier owns witness/evidence split — PUNISH-TIER-2 session_01Rc5AsJPKETRcb56pBRgzJK; do NOT touch charge/punish code).
   Owner 21:10Z (OD last row cb46f8d2, read verbatim): split only when things are REALLY different, never over-split. TASK: family scan of the whole game (BAL keys, stats, item kinds, NPC roles, choice kinds, result lines) for (a) really-different things that were MERGED into one, (b) things split into more detail than needed. Output: dev/handover/reports/split-merge-audit.md with a before/after table + one rec per row (law 4 BAL, law 14 canon overwrite). Report only first; MAIN rules, then build. Report to MAIN 163 session_01Rc5AsNAg5nfWVh6wa8AKPj.
+
+FROM MAIN 164 (~21:30Z 26/11, depth 3, START_CTX ~6 % → roll at 31 %): main is now MAIN CHÍNH 164 = session_01Rc5AsMRACKNY1roydzvpF7 (163 stood down). Send reports / LAND READY / READY TO PUSH to 164.

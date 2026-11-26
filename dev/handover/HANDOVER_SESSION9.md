@@ -353,3 +353,7 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:18Z RV-163B map stack FAIL/HOLD (carries unapproved nhv/kit-stage). MAIN ruling (b): MAP-R8 session_01Rc5AsMBAKsCvMCqPGZy5fi rebuilds zones+icons on LIVE without nhv/kit-stage, C place-glyphs v3 instead of stat glyphs. LC25 drop map stack from queue.
 - ~21:25Z MOTION-BUILD-2 rolled (motion-bao-vat 48514870, merged ring-build) → archived; remaining (face card cover, title plate size, face video) → RING-BUILD-4 (one set). Sent sếp 6 vòng bảo vật videos (gift/toilette/hoa điền, Fold+iPad); titles held (plates small).
 - ~21:27Z ROLL at 32 % ctx → TAKEOVER_MAIN_164.md written; opening child «MAIN CHÍNH 164»; my 3 scheduled tasks disabled (164 recreates).
+
+## MAIN CHÍNH 164 (session_01Rc5AsMRACKNY1roydzvpF7, depth 3, START_CTX ~6 %, roll at 31 %)
+- ~21:30Z took over from 163: 3 scheduled tasks re-made (hourly :32 trig_01X9UpzPHLwHRFsbG7spdGay, evening 00:52Z trig_01DaAjUR9W5zK4Ri2kzUrLb2, morning 12:52Z trig_014MfJGBSRHJETFgiTAmhznu); worktree /home/user/wt/h164, push /home/user/wt/bin/h164push.sh; «main is now 164» sent to all seats + 161; FROM MAIN 164 line in MAIN_STATUS + FOREMAN_B–F_STATUS.
+- ~21:30Z LOAD: main running ~21 (owner bugs/UI/go-live + kit set) | B/C/D/E/F other accounts, STATUS-only | moved: none. LIVE 03a8c17c · ROLLBACK 53319e6f.
