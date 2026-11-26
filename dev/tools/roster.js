@@ -16,6 +16,8 @@
    no duplicate, no one missing a place, every living consort / child / servant of a living mistress present, nobody
    dead present, counts per place equal to what the map showed at that khắc (recorded by the game). */
 const fs=require('fs'),path=require('path'),zlib=require('zlib');
+/* save-growth: a dumped sổ may be packed («CTMZ», j6 slotEnc) → the ONE decoder, taken from dev/build/j6.js */
+const slotDecN=(()=>{try{const t=require('fs').readFileSync(require('path').join(__dirname,'../build/j6.js'),'utf8');const a=t.indexOf('const SLOTZ='),b=t.indexOf('function slotGet(');return new Function(t.slice(a,b)+';return slotDec')()}catch(e){return x=>x}})();
 const JSONOUT=process.argv.includes('--json'),ALL=process.argv.includes('--all');const AV=process.argv.slice();const wi=AV.indexOf('--who');const WHO=wi>=0?AV.splice(wi,2)[1]:null;
 const [,,FILE,T,B,K]=AV.filter(x=>x!=='--json'&&x!=='--all');if(!FILE){console.log(fs.readFileSync(__filename,'utf8').split('\n').slice(1,9).join('\n'));process.exit(1)}
 const j95=fs.readFileSync(path.join(__dirname,'..','build','j95.js'),'utf8');
@@ -39,7 +41,7 @@ function actW(a){a=a==null?'':String(a);if(ACT[a])return ACT[a];let m=/^ag_(?:ma
 const PLN={home:"Tẩm cung của ngươi",kn:"Càn Ninh cung (Hoàng hậu)",tn:"Đức Thọ cung (Thái hậu)",dtd:"Dưỡng Hòa điện",thu:"Cần Chính điện",lc:"Trường Môn viện (lãnh cung)",vuon:"Ngự hoa viên",tyv:"Thái y viện",ksp:"Kính sự phòng",tgk:"Tân Giả khố",cnh:"Dãy nhà cung nhân",ttp:"Thượng thư phòng",acs:"A ca sở",dc:"Đông cung",ngoai:"Ngoài cung (chưa vào)"};
 function readSave(txt){txt=txt.trim();let d=null;
  const m=/^CTM([12]):([A-Za-z0-9+/=\s]+)$/.exec(txt);if(m){let u=Buffer.from(m[2].replace(/\s+/g,''),'base64');if(m[1]==='2')u=zlib.inflateRawSync(u);d=JSON.parse(u.toString('utf8'))}
- else{d=JSON.parse(txt);if(!d.S){const slot=d['hclh-slot']||Object.keys(d).find(k=>/^hclh-save-v2-/.test(k)).split('-').pop();const v=d['hclh-save-v2-'+slot];d=typeof v==='string'?JSON.parse(v):v}}
+ else{d=JSON.parse(txt);if(!d.S){const slot=d['hclh-slot']||Object.keys(d).find(k=>/^hclh-save-v2-/.test(k)).split('-').pop();const v=d['hclh-save-v2-'+slot];d=typeof v==='string'?JSON.parse(slotDecN(v)):v}}
  if(!d||!d.S)throw new Error('không thấy ván chơi trong tệp');return d}
 const d=readSave(fs.readFileSync(FILE,'utf8'));const S=d.S,RV=d.R||[];
 const wk=S.turn*3+S.tuan;const t=T!=null&&T!==''?+T:null,b=B!=null&&B!==''?+B:null,kh=K!=null&&K!==''?+K:null;

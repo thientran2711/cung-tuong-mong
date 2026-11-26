@@ -13,5 +13,5 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
   if(typeof tsbPetAdd==='function'){tsbPetAdd(S,'cho','Hoàng thượng ban');tsbPetAdd(S,'hoami','nhờ thái giám mua');S.pets[1].care=25}
   else{S.pets=[{t:'cho',care:70,at:0,src:'emp',from:'Hoàng thượng ban'},{t:'hoami',care:25,at:0,src:'buy',from:'nhờ thái giám mua'},{t:'linhquy',care:60,at:0,src:'emp'}];S.petOn=0}
   Q.push({t:'Ngự ban',h:'',opts:[],pid:'tsbPetGift',pp:{src:'emp',t:'tho'}});quiet=false;save();
-  let er='';try{localStorage.setItem(SK(2),JSON.stringify(ser()))}catch(e){er=e.message}const k=SK(2);if(er)return{er};return{k,len:k&&localStorage.getItem(k).length,name:S.name}});
- const d=await p.evaluate(k=>localStorage.getItem(k),r.k);fs.writeFileSync(OUT,d);console.log(JSON.stringify({r,errs}));await b.close()})();
+  let er='';try{localStorage.setItem(SK(2),JSON.stringify(ser()))}catch(e){er=e.message}const k=SK(2);if(er)return{er};return{k,len:k&&(window.slotGet?slotGet(k):localStorage.getItem(k)).length,name:S.name}});
+ const d=await p.evaluate(k=>(window.slotGet?slotGet(k):localStorage.getItem(k)),r.k);fs.writeFileSync(OUT,d);console.log(JSON.stringify({r,errs}));await b.close()})();

@@ -17,19 +17,19 @@ const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs'
   const life=async()=>{await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:60000});await p.evaluate(()=>{try{nlAccept()}catch(e){}while(Q.length)Q.shift();try{closeModal()}catch(e){}try{render()}catch(e){}})};
   await p.evaluate(()=>{SLOT=1;$("title").hidden=true;start()});await life();
   const solo=await p.evaluate(()=>{save();return {name:S.name,rank:S.rank}});
-  const r1=await p.evaluate(()=>JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name);ok(r1===solo.name,`${tag} solo life saved in Sổ 1`,r1);
+  const r1=await p.evaluate(()=>JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))).S.name);ok(r1===solo.name,`${tag} solo life saved in Sổ 1`,r1);
   /* co-op life (host, no world yet) */
   await p.evaluate(()=>{window.__solo=S;COOP.state.room='K7QD';COOP.state.you='a';COOP.state.status='open';COOP.emit('start',{room:'K7QD',you:'a',host:true,week:0,state:null})});
   await p.waitForFunction(()=>S!==window.__solo&&S&&S.name,null,{timeout:60000});await life();
   const co=await p.evaluate(()=>({name:S&&S.name,on:COOPW.on}));
   ok(co.on&&co.name&&co.name!==solo.name,`${tag} co-op life built`,co);
-  const mid=await p.evaluate(()=>JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name);ok(mid===solo.name,`${tag} Sổ 1 untouched while in co-op`,mid);
+  const mid=await p.evaluate(()=>JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))).S.name);ok(mid===solo.name,`${tag} Sổ 1 untouched while in co-op`,mid);
   /* she leaves the room (freeze panel "Về màn đầu" path), then anything renders */
   await p.evaluate(()=>{COOP.leave(true);try{showTitle()}catch(e){}});await p.waitForTimeout(1500);
-  const aft0=await p.evaluate(()=>{const d=JSON.parse(localStorage.getItem('hclh-save-v2-1')||'null');return d&&d.S.name});
+  const aft0=await p.evaluate(()=>{const d=JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))||'null');return d&&d.S.name});
   ok(aft0===solo.name,`${tag} Sổ 1 intact after "Về màn đầu" (leave + title, no other action)`,aft0);
   await p.evaluate(()=>{try{render()}catch(e){}try{save()}catch(e){}});
-  const aft=await p.evaluate(()=>{const d=JSON.parse(localStorage.getItem('hclh-save-v2-1')||'null');return d&&d.S.name});
+  const aft=await p.evaluate(()=>{const d=JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))||'null');return d&&d.S.name});
   ok(aft===solo.name,`${tag} Sổ 1 still the solo life after leaving co-op`,{slot1:aft,solo:solo.name,coop:co.name});
   /* the solo sổ loads as the solo life (title: Chọn sổ › Tiếp tục kiếp này) */
   const ld=await p.evaluate(()=>{$("title").hidden=false;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();return {name:S&&S.name,coop:!!(S&&S.coopRoom),on:COOPW.on}});
@@ -42,7 +42,7 @@ const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs'
     await p.evaluate(c=>{window.__solo=S;COOP.state.room=c;COOP.state.you='a';COOP.state.status='open';COOP.emit('room',{t:'room',code:c,you:'a'});COOP.emit('start',{room:c,you:'a',host:true,week:0,state:null})},code);
     await p.waitForFunction(()=>S!==window.__solo&&S&&S.name&&S.coopRoom,null,{timeout:60000});await life();
     await p.evaluate(()=>{$("menu").click()});await p.waitForTimeout(300);
-    const st=await p.evaluate(()=>({on:COOPW.on,status:COOP.state.status,slot1:JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name,title:!$("title").hidden}));
+    const st=await p.evaluate(()=>({on:COOPW.on,status:COOP.state.status,slot1:JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))).S.name,title:!$("title").hidden}));
     ok(!st.on&&st.status==='off'&&st.slot1===solo.name&&st.title,`${tag} in-game title button in room ${code}: room left, Sổ 1 intact`,st)}
   /* friend lines differ per room (set directly: the friend's own character comes from the server) */
   await p.evaluate(R=>{R.forEach(([c,f])=>{const L=CTM_ROOMS.list();const x=L.find(y=>y.room===c);if(x){x.fr=f;localStorage.setItem('ctm-coop-rooms',JSON.stringify(L))}})},rooms);
@@ -51,32 +51,32 @@ const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs'
   /* still in a room, she picks the solo sổ: the room is left before the sổ loads */
   await p.evaluate(()=>{window.__solo=S;COOP.state.room='Q9ZT';COOP.state.you='a';COOP.state.status='open';COOP.emit('start',{room:'Q9ZT',you:'a',host:true,week:0,state:null})});
   await p.waitForFunction(()=>S!==window.__solo&&S&&S.name&&S.coopRoom,null,{timeout:60000});await life();
-  const ld2=await p.evaluate(()=>{$("title").hidden=false;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();try{render()}catch(e){}return {name:S.name,on:COOPW.on,st:COOP.state.status,slot1:JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name}});
+  const ld2=await p.evaluate(()=>{$("title").hidden=false;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();try{render()}catch(e){}return {name:S.name,on:COOPW.on,st:COOP.state.status,slot1:JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))).S.name}});
   ok(ld2.name===solo.name&&!ld2.on&&ld2.st==='off'&&ld2.slot1===solo.name,`${tag} solo sổ picked while in a room: room left, solo life loaded`,ld2);
   /* review r1: co-op death (in the room, then after leaving) never removes the solo sổ; Kiếp mới in the room stays a room life */
   await p.evaluate(()=>{window.__solo=S;COOP.state.room='Q9ZT';COOP.state.you='a';COOP.state.status='open';COOP.emit('start',{room:'Q9ZT',you:'a',host:true,week:0,state:null})});
   await p.waitForFunction(()=>S!==window.__solo&&S&&S.name&&S.coopRoom,null,{timeout:60000});await life();
-  const dth=await p.evaluate(()=>{try{over("Qua đời","Thử chết trong phòng.","chết")}catch(e){}try{render()}catch(e){}try{save()}catch(e){}const a=localStorage.getItem('hclh-save-v2-1');
+  const dth=await p.evaluate(()=>{try{over("Qua đời","Thử chết trong phòng.","chết")}catch(e){}try{render()}catch(e){}try{save()}catch(e){}const a=(window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'));
     window.__dead=S;try{start()}catch(e){}return {dead:window.__dead.dead,slot1:a&&JSON.parse(a).S.name}});
   ok(dth.dead&&dth.slot1===solo.name,`${tag} co-op death in the room: Sổ 1 kept`,dth);
   await p.waitForFunction(()=>S!==window.__dead&&S&&S.name,null,{timeout:60000});await life();
-  const kn=await p.evaluate(()=>({tag:S.coopRoom,slot1:JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name}));
+  const kn=await p.evaluate(()=>({tag:S.coopRoom,slot1:JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))).S.name}));
   ok(kn.tag==='Q9ZT'&&kn.slot1===solo.name,`${tag} Kiếp mới after a co-op death belongs to the room`,kn);
   const dth2=await p.evaluate(()=>{COOP.leave(true);try{showTitle()}catch(e){}try{over("Qua đời","Thử chết sau khi rời phòng.","chết")}catch(e){}try{render()}catch(e){}try{save()}catch(e){}
-    const a=localStorage.getItem('hclh-save-v2-1');return a&&JSON.parse(a).S.name});
+    const a=(window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'));return a&&JSON.parse(a).S.name});
   ok(dth2===solo.name,`${tag} co-op life dying after the room is left: Sổ 1 kept`,dth2);
   /* guest waiting for the host's world with a solo sổ loaded, then back to the title: the solo life is never marked nor listed as the room's */
   const gw=await p.evaluate(()=>{window.__rl=localStorage.getItem('ctm-coop-rooms');$("title").hidden=false;showTitle();document.querySelector('#slots [data-load="1"]').click();
     COOP.state.room='W4IT';COOP.state.you='b';COOP.state.status='open';COOP.emit('room',{t:'room',code:'W4IT',you:'b'});COOP.emit('start',{room:'W4IT',you:'b',host:false,week:0,state:null});
     try{render()}catch(e){}try{save()}catch(e){}const tg=S.coopRoom||'';$("title").hidden=false;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();
-    const w=CTM_ROOMS.list().find(x=>x.room==='W4IT');return {tag:tg,on:COOPW.on,name:S.name,listed:w&&w.name||'',slot1:JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name}});
+    const w=CTM_ROOMS.list().find(x=>x.room==='W4IT');return {tag:tg,on:COOPW.on,name:S.name,listed:w&&w.name||'',slot1:JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))).S.name}});
   ok(!gw.tag&&!gw.on&&gw.name===solo.name&&!gw.listed&&gw.slot1===solo.name,`${tag} guest waiting with a solo sổ open: solo life unmarked, not listed as the room's`,gw);
   await p.evaluate(()=>{localStorage.setItem('ctm-coop-rooms',window.__rl)});/* a 4th room pushes the oldest out (max 3): put the three back */
   /* reload in the middle of a co-op life: Sổ 1 intact, the title continues the solo life, the rooms are still listed */
   await p.evaluate(()=>{window.__solo=S;COOP.state.room='M2PX';COOP.state.you='a';COOP.state.status='open';COOP.emit('start',{room:'M2PX',you:'a',host:true,week:0,state:null})});
   await p.waitForFunction(()=>S!==window.__solo&&S&&S.name&&S.coopRoom,null,{timeout:60000});await life();
   await p.reload({waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.COOPW&&document.querySelector('#modal.kpthome'),null,{timeout:90000});await p.waitForTimeout(1500);
-  const rl=await p.evaluate(()=>{try{render()}catch(e){}const a=JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();
+  const rl=await p.evaluate(()=>{try{render()}catch(e){}const a=JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1'))).S.name;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();
     return {slot1:a,name:S&&S.name,tag:!!(S&&S.coopRoom),rooms:CTM_ROOMS.list().map(x=>x.room)}});
   ok(rl.slot1===solo.name&&rl.name===solo.name&&!rl.tag&&rl.rooms.length===3,`${tag} reload mid co-op: Sổ 1 intact, solo life continues, 3 rooms listed`,rl);
   /* menu: Chọn sổ shows both sets */
@@ -120,7 +120,7 @@ const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs'
   const rj=await p.evaluate(()=>{const b=document.querySelector('#modal .kroom [data-room="M2PX"][data-coop="resume"]');b.click();return localStorage.getItem('ctm-coop-room')});
   ok(rj==='M2PX',`${tag} Trở lại phòng picks that room's ám hiệu`,rj);await p.evaluate(()=>COOP.leave(true));
   /* old saves: a v5 sổ shape from an older build loads; an old single ctm-coop-room shows as a room */
-  const old=await p.evaluate(()=>{const d=JSON.parse(localStorage.getItem('hclh-save-v2-1'));d.v=5;localStorage.setItem('hclh-save-v2-3',JSON.stringify(d));
+  const old=await p.evaluate(()=>{const d=JSON.parse((window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1')));d.v=5;localStorage.setItem('hclh-save-v2-3',JSON.stringify(d));
     localStorage.removeItem('ctm-coop-rooms');localStorage.setItem('ctm-coop-room','OLD1');const L=CTM_ROOMS.list();const x=loadSlot(3);return {rooms:L.map(r=>r.room),s3:x&&x.S.name}});
   ok(old.s3===solo.name&&old.rooms[0]==='OLD1',`${tag} old sổ + old room code still show`,old);
   ok(!errs.length,`${tag} no page errors`,errs.slice(0,3));await ctx.close()}

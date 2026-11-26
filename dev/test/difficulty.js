@@ -71,7 +71,7 @@ const PX=process.env.HTTPS_PROXY||process.env.https_proxy||'';
   ok(rl.d==='kho'&&Math.abs(rl.hz-Math.round(base.hz*1.1*100)/100)<1e-9&&rl.mot===kn(base.mot,1.2),`${tag} reload: Khó life loads with Khó knobs`,rl);
   /* old save: no S.diff */
   /* (edited in storage, then loaded from the title in the same page: a reload would save the live Khó life over the edit on unload) */
-  const old=await p.evaluate(()=>{const k='hclh-save-v2-1';const d=JSON.parse(localStorage.getItem(k));delete d.S.diff;delete d.S.bac0;localStorage.setItem(k,JSON.stringify(d));
+  const old=await p.evaluate(()=>{const k='hclh-save-v2-1';const d=JSON.parse((window.slotGet?slotGet(k):localStorage.getItem(k)));delete d.S.diff;delete d.S.bac0;localStorage.setItem(k,JSON.stringify(d));
    $("title").hidden=false;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();try{render()}catch(e){}return {d:diffOf(),sd:S.diff,name:diffName(),hz:BAL.hz,poisonNow:BAL.poisonNow,outQ:BAL.outQ}});
   ok(old.d==='vua'&&old.hz===base.hz&&old.poisonNow===base.poisonNow&&old.outQ===base.outQ,`${tag} old save (no S.diff) = Vừa, base knobs`,old);
   /* Khó death: end card row + Phúc duyên ×1.5 + Sổ luân hồi */

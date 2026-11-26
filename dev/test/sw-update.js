@@ -26,7 +26,7 @@ async function until(p,f,ms,a){const t=Date.now();while(Date.now()-t<ms){const v
 const swV=p=>ev(p,()=>new Promise(ok=>{const c=navigator.serviceWorker.controller;if(!c)return ok(null);const h=e=>{if(e.data&&e.data.ctm==='v'){navigator.serviceWorker.removeEventListener('message',h);ok(e.data.v)}};
  navigator.serviceWorker.addEventListener('message',h);c.postMessage({ctm:'v'});setTimeout(()=>ok('no-answer'),3000)}));
 /* the sổ keys; 'at' (time written) is dropped: the game writes the same sổ again on every render */
-const saves=p=>ev(p,()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^hclh-(slot|save-v2-)/.test(k)){let v=localStorage.getItem(k);try{const d=JSON.parse(v);if(d&&typeof d==='object'){delete d.at;v=JSON.stringify(d)}}catch(e){}o[k]=v}}return o});
+const saves=p=>ev(p,()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^hclh-(slot|save-v2-)/.test(k)){let v=(window.slotGet?slotGet(k):localStorage.getItem(k));try{const d=JSON.parse(v);if(d&&typeof d==='object'){delete d.at;v=JSON.stringify(d)}}catch(e){}o[k]=v}}return o});
 function box(p,sel){return ev(p,s=>{const vw=innerWidth,vh=innerHeight,bad=[];const r=document.querySelector(s);if(!r)return{none:true};
  const all=[r,...r.querySelectorAll('.kptitle,.kpsub,.kpst,.kprog-n,.kprog-s,.kpnote,.kbtn,.kpseal')];
  all.forEach(e=>{const q=e.getBoundingClientRect();if(!q.width)return;
@@ -48,11 +48,11 @@ async function settle(p){for(let i=0;i<20;i++){const st=await ev(p,()=>{document
 const flip=(p,s)=>ev(p,s=>{Object.defineProperty(document,'visibilityState',{configurable:true,get:()=>s});Object.defineProperty(document,'hidden',{configurable:true,get:()=>s==='hidden'});document.dispatchEvent(new Event('visibilitychange'))},s);
 async function bgShort(p){await flip(p,'hidden');await sleep(300);await flip(p,'visible')}
 /* every sổ written right before the page left (beforeunload) is kept in sessionStorage to compare after the reload */
-const keepPre=p=>ev(p,()=>{addEventListener('beforeunload',()=>{try{const d=JSON.parse(localStorage.getItem('hclh-save-v2-'+SLOT));delete d.at;sessionStorage.setItem('t-pre',JSON.stringify(d))}catch(e){}})});
+const keepPre=p=>ev(p,()=>{addEventListener('beforeunload',()=>{try{const d=JSON.parse((window.slotGet?slotGet('hclh-save-v2-'+SLOT):localStorage.getItem('hclh-save-v2-'+SLOT)));delete d.at;sessionStorage.setItem('t-pre',JSON.stringify(d))}catch(e){}})});
 /* the game's own "Tiếp tục" (no new build: dev/test baseline) rebuilds two derived fields on every load: S.visit.tk (who she talked to
    at this place, an empty {} after loading) and the rivals' relations to EACH OTHER (rl, normalised on load). They are left out. */
 const samePre=p=>ev(p,()=>{try{const st=d=>{d=JSON.parse(JSON.stringify(d));delete d.at;if(d.S&&d.S.visit)delete d.S.visit.tk;(d.R||[]).forEach(r=>delete r.rl);return d};
- const A=st(JSON.parse(sessionStorage.getItem('t-pre'))),B=st(JSON.parse(localStorage.getItem('hclh-save-v2-'+SLOT)));const a=JSON.stringify(A),b=JSON.stringify(B);const diff=Object.keys(Object.assign({},A.S,B.S)).filter(k=>JSON.stringify(A.S[k])!==JSON.stringify(B.S[k]));
+ const A=st(JSON.parse(sessionStorage.getItem('t-pre'))),B=st(JSON.parse((window.slotGet?slotGet('hclh-save-v2-'+SLOT):localStorage.getItem('hclh-save-v2-'+SLOT))));const a=JSON.stringify(A),b=JSON.stringify(B);const diff=Object.keys(Object.assign({},A.S,B.S)).filter(k=>JSON.stringify(A.S[k])!==JSON.stringify(B.S[k]));
  const rd=[];(A.R||[]).forEach((r,i)=>{const q=(B.R||[])[i]||{};for(const k of Object.keys(Object.assign({},r,q)))if(JSON.stringify(r[k])!==JSON.stringify(q[k]))rd.push(r.id+'.'+k+':'+JSON.stringify(r[k]).slice(0,80)+'→'+JSON.stringify(q[k]).slice(0,80))});
  return{same:a===b,len:[a&&a.length,b.length],diffS:diff.slice(0,8),visit:diff.includes('visit')?[JSON.stringify(A.S.visit).slice(0,300),JSON.stringify(B.S.visit).slice(0,300)]:null,rd:rd.slice(0,6),top:Object.keys(Object.assign({},A,B)).filter(k=>k!=='S'&&JSON.stringify(A[k])!==JSON.stringify(B[k]))}}catch(e){return{err:e.message}}});
 const loaded=p=>until(p,()=>window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')&&navigator.serviceWorker.controller&&document.readyState==='complete',600000);
