@@ -50,7 +50,7 @@ function kscnOpaque(im){try{const W=120,H=Math.max(1,Math.round(120*im.naturalHe
  let l=W,r=-1,t=H,b=-1;for(let y=0;y<H;y++)for(let i=0;i<W;i++)if(D[(y*W+i)*4+3]>24){if(i<l)l=i;if(i>r)r=i;if(y<t)t=y;if(y>b)b=y}return r<0?{l:0,r:1,t:0,b:1}:{l:l/W,r:(r+1)/W,t:t/H,b:(b+1)/H}}catch(e){return{l:0,r:1,t:0,b:1}}}
 const kitScene={
  open(o){o=o||{};kitScene.close(true);const g=kscnGeo();const L=document.createElement("div");L.className="kscn"+(o.night?" kscn-night":"")+(o.intro&&!kscnCalm()?" kscn-clear":"");
-  L.style.cssText=`left:${g.L}px;right:${g.R}px;top:${g.t}px;height:${g.H}px`;L.innerHTML=`<div class="kscn-bg" style="background-image:url('${String(o.bg||"").replace(/'/g,"%27")}')"></div><div class="kscn-veil"></div>`;
+  L.style.cssText=`left:${g.L}px;right:${g.R}px;top:${g.t}px;height:${g.H}px`;L.innerHTML=`<div class="kscn-bg" style="background-image:url('${String(o.bg||(typeof kstgPlacePic==="function"?kstgPlacePic():"")).replace(/'/g,"%27")}')"></div><div class="kscn-veil"></div>`;
   document.body.appendChild(L);document.body.classList.add("kscn-on");/* the stage mood seal (.kemo-big, z 9990) must not pop over the scene */L.g=g;L.figs=[];L.boxes=[];const S0={L,
    fig:(src,f)=>kitScene.fig(L,src,f),box:(title,nodes,pos,tail,ho)=>kitDlgBox(L,title,nodes,pos,tail,ho),pair:x=>kitScene.pair(L,x),
    /* intro: the picture clear and full for o.intro ms, then blur + veil (KIT_SCN.toBlur), then figures from the left, boxes from the right */

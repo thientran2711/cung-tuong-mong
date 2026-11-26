@@ -100,7 +100,7 @@ window.kitSealEvPlace=kitSealEvPlace;
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitSealEvPlace()}catch(e){}});setTimeout(later,400);setTimeout(later,1200)}catch(e){}return r}}
  addEventListener("resize",later);document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG"&&e.target.closest&&e.target.closest("#modal"))later()},true);
  const hook=()=>{const M=document.getElementById("modal");if(!M||M.__ksObs)return;M.__ksObs=1;
-  try{const mine=n=>n&&n.nodeType===1&&n.closest&&n.closest(".kseal-ev");
+  try{const mine=n=>n&&n.nodeType===1&&n.closest&&n.closest(".kseal-ev,.opts.khand,.khplate");/* KIT §101: a hand card lifting / its plate never re-places the seal (it ran 90 ms into the lift = a long frame) */
   new MutationObserver(ms=>{if(ms.some(x=>x.type==="attributes"?!mine(x.target):![...x.addedNodes,...x.removedNodes].every(mine)))later()}).observe(M,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden","class","style"]})}catch(e){}
   try{window.__ksRO=new ResizeObserver(later);const d=M.querySelector(".dlg");if(d){d.__ksRO=1;window.__ksRO.observe(d)}}catch(e){}};
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hook);else hook()})();

@@ -66,7 +66,9 @@ const RULES=[
  [kRx("(?<![\\p{L}])(?:[Nn]gươi|Ta) (?:quý nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|:)))","gu"),"Ta → nàng: thiện cảm"],
  /* ts-a 11/15: "với ngươi" is a relation label only before a number or ":" — "ra tay với ngươi, …", "hẹn ước với ngươi, …",
     "thân với ngươi hơn" are sentences (they became "ra tay thiện cảm," before) and only get "ngươi" → "ta" below */
- [kRx("(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"thiện cảm"],
+ /* KK38 (FOREMAN E 26/11 06:15Z «VÌ SAO» row «thiện cảm thiện cảm +6»): after the word «thiện cảm» itself, «với ngươi/ta ±N» is already the label
+    («thiện cảm với ta +6», jwhyn WHY_STAT; «thiện cảm với ngươi −N», j72) → left as it is (only ngươi → ta below), never a second «thiện cảm» */
+ [kRx("(?<!thiện cảm )(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"thiện cảm"],
  /* NPC ↔ NPC "thân +7" (j8 giveTo, old logs): the one relation word */
  [kRx("(?<![\\p{L}])thân ([+\\-−]\\s?\\d)","gu"),"thiện cảm $1"],
  [kRx("^[^“”]*”|“[^”]*(?:”|$)|(?<![\\p{L}\\p{M}])([Nn])gươi(?![\\p{L}\\p{M}])","gu"),(m,n)=>n?(n==="N"?"Ta":"ta"):m],

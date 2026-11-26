@@ -3,7 +3,7 @@
    spin by swipe (inertia) or ‹ ›, tap a side item = it turns to the front; tap the bright item → it ZOOMS big to the LEFT, its kit info + the caller's action buttons DROP
    on the RIGHT (Tặng / Dùng / Mua / Bán / Đeo …); an action runs the game's real function and its RESULT shows IN PLACE as kit result rows («không» rows kept).
    Ring maths (angle per slot, depth scale, front/far, inertia, snap) = the mock maths of motion-design-4 mẫu 2 / RING-DESIGN (ONE ring maths; on merge with jkring.js the
-   KRI_MATH block is the shared core). Motion = transform + opacity only (60 fps; no animated filter / layout). Calm (reduced motion / Gọn) = no tweening, same flow.
+   KRING_MATH block is the shared core). Motion = transform + opacity only (60 fps; no animated filter / layout). Calm (reduced motion / Gọn) = no tweening, same flow.
    API  kitRingItem.open(o) → R      o = {
      title, sub, bg (scene picture), key,
      tabs:[{k,label,n}], tab, onTab(k) → re-read items,
@@ -13,14 +13,9 @@
      empty: html, onClose }
    R = {el, rot, front(), turnTo(i), focus(), back(), refresh(), close()}.  kitRingItem.cur = the open ring.  Wiring (adapters) at the end of this file. */
 /* tw = the FRONT tile size in px (MAIN look note 26/11: front ≈1.5× the old 82 px, more on iPad); side tiles keep the old size curve (side = old kitItem md 72 px) */
-const KIT_RINGI={seats:12,tw:{fold:124,ipad:150},side:72,frontPow:20,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
- openMs:420,focusMs:520,dropMs:360,stagger:26,snapMs:200,stepMs:280,maxN:24};
-/* ---------- KRI_MATH: the shared ring maths (slot angle, depth, front, inertia) ---------- */
-const KRI_MATH={
- /* N > KIT_RINGI.seats: the ring keeps ONE seat spacing (2π/seats) and only the seats around the front show (a scrolling ring of many items) */
- slot(i,rot,N){let a=((i-rot)%N+N)%N;if(a>N/2)a-=N;const n=Math.max(3,Math.min(N,KIT_RINGI.seats)),th=a*2*Math.PI/n,c=Math.cos(th),s=Math.sin(th),k=(1+c)/2;return{a,c,s,k,hide:Math.abs(a)>n/2-.5}},
- front(rot,N){return((Math.round(rot)%N)+N)%N},
- short(i,rot,N){let d=((i-rot)%N+N)%N;if(d>N/2)d-=N;return d}};
+const KIT_RINGI={tw:{fold:124,ipad:150},side:72,frontPow:20,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
+ openMs:420,focusMs:520,dropMs:360,stagger:26,maxN:24};
+/* ---------- ring maths = KRING_MATH (§104.1, jkring.js; numbers in BAL.kring) — KK44 ruling 26/11: ONE core, KRING_MATH deleted ---------- */
 function kriCalm(){try{return(typeof reducedMotion==="function"&&reducedMotion())||(typeof kfStill==="function"&&kfStill())}catch(e){return false}}
 function kriE(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function kriIp(){return document.documentElement.classList.contains("kv2")}
@@ -76,8 +71,8 @@ const kitRingItem={cur:null,
   kriBuild(R,true);kriBand(R);
   L.animate([{opacity:0},{opacity:1}],{duration:kriCalm()?120:300,easing:"ease-out",fill:"both"});
   return kitRingItem.api(R)},
- api(R){return{el:R.L,get rot(){return R.rot},front:()=>KRI_MATH.front(R.rot,R.tiles.length),turnTo:i=>kriTurnTo(R,i),focus:()=>kriFocus(R),back:()=>kriBack(R),refresh:()=>kriRefresh(R),close:()=>kitRingItem.close(),get state(){return R.st},get items(){return R.items}}},
- front(){const R=kitRingItem.cur;return R?KRI_MATH.front(R.rot,R.tiles.length):-1},
+ api(R){return{el:R.L,get rot(){return R.rot},front:()=>KRING_MATH.front(R.rot,R.tiles.length),turnTo:i=>kriTurnTo(R,i),focus:()=>kriFocus(R),back:()=>kriBack(R),refresh:()=>kriRefresh(R),close:()=>kitRingItem.close(),get state(){return R.st},get items(){return R.items}}},
+ front(){const R=kitRingItem.cur;return R?KRING_MATH.front(R.rot,R.tiles.length):-1},
  close(now){const R=kitRingItem.cur;if(!R)return;kitRingItem.cur=null;cancelAnimationFrame(R.raf||0);document.body.classList.remove("kring-on");const cb=R.o.onClose;
   try{if(kitScene.cur&&kitScene.cur.L===R.L)kitScene.close(now);else R.L.remove()}catch(e){try{R.L.remove()}catch(x){}}if(cb)try{cb()}catch(e){console.error("kri close",e)}}};
 function kriItems(R){let L=[];try{L=typeof R.o.items==="function"?R.o.items(R.tab):(R.o.items||[])}catch(e){console.error("kri items",e)}return (L||[]).filter(Boolean).slice(0,KIT_RINGI.maxN)}
@@ -99,27 +94,27 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  kriPlace(R);
  if(bloom&&!kriCalm()){const N=R.tiles.length;R.tiles.forEach((t,i)=>{const fin=t.style.transform,op=t.style.opacity;t.animate([{transform:`translate(${-g.tw/2}px,${-g.tw*.6}px) scale(.1)`,opacity:0},{transform:fin,opacity:op}],{duration:KIT_RINGI.openMs,delay:i*KIT_RINGI.stagger,easing:"cubic-bezier(.2,1.25,.4,1)"})});
   [R.arL,R.arR,nm,hi].forEach(b=>b.animate([{opacity:0},{opacity:1}],{duration:260,delay:280,fill:"backwards"}))}}
-function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=KRI_MATH.front(R.rot,N);
- R.tiles.forEach((t,i)=>{const m=KRI_MATH.slot(i,R.rot,N);const F=g.tw/(KIT_RINGI.side*1.14),sc=KIT_RINGI.side*(.42+.72*Math.pow(m.k,1.8))/g.tw*(1+(F-1)*Math.pow(m.k,KIT_RINGI.frontPow)),x=g.Rx*m.s,y=-g.Ry*m.c;
+function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=KRING_MATH.front(R.rot,N);
+ R.tiles.forEach((t,i)=>{const m=KRING_MATH.slot(i,R.rot,N);const F=g.tw/(KIT_RINGI.side*1.14),sc=KIT_RINGI.side*(.42+.72*Math.pow(m.k,1.8))/g.tw*(1+(F-1)*Math.pow(m.k,KIT_RINGI.frontPow)),x=g.Rx*m.s,y=-g.Ry*m.c;
   t.style.transform=`translate(${(x-g.tw/2).toFixed(1)}px,${(y-g.tw*.6).toFixed(1)}px) scale(${sc.toFixed(3)})`;
-  const front=Math.abs(m.a)<.5;const op=m.hide?0:front?1:Math.min(1,(KIT_RINGI.dim+.3*Math.pow(m.k,2))*Math.min(1,(KIT_RINGI.seats/2-Math.abs(m.a))));t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
+  const front=Math.abs(m.a)<.5;const op=m.hide?0:front?1:Math.min(1,(KIT_RINGI.dim+.3*Math.pow(m.k,2))*Math.min(1,(KRING_MATH.seats/2-Math.abs(m.a))));t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
   R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */
 function kriBand(R){const L=R.L;let x0=0,y0=0,last=0,lt=0,drag=0,moved=0;
- const step=()=>{const g=R.geo(),N=Math.max(3,Math.min(KIT_RINGI.seats,R.tiles.length));return g.Rx*2*Math.PI/N*.75};
+ const step=()=>{const g=R.geo(),N=Math.max(3,Math.min(KRING_MATH.seats,R.tiles.length));return g.Rx*2*Math.PI/N*.75};
  L.addEventListener("pointerdown",e=>{if(R.st!=="ring"||!R.tiles.length||e.target.closest("button,.kri-pane,.kri-tabs"))return;drag=1;moved=0;x0=last=e.clientX;y0=e.clientY;lt=performance.now();R.v=0;cancelAnimationFrame(R.raf||0)});
  L.addEventListener("pointermove",e=>{if(!drag)return;const now=performance.now(),dx=e.clientX-last;if(Math.abs(e.clientX-x0)>6)moved=1;if(!moved)return;R.rot-=dx/step();R.v=-(dx/step())/Math.max(1,now-lt);last=e.clientX;lt=now;kriPlace(R)});
- const up=e=>{if(!drag)return;drag=0;if(!moved){const t=document.elementsFromPoint(e.clientX,e.clientY).find(x=>x.classList&&x.classList.contains("kri-t"));if(t){const i=t.__i;if(i===KRI_MATH.front(R.rot,R.tiles.length)&&Math.abs(KRI_MATH.short(i,R.rot,R.tiles.length))<.5)kriFocus(R);else kriTurnTo(R,i)}return}kriFling(R,R.v)};
+ const up=e=>{if(!drag)return;drag=0;if(!moved){const t=document.elementsFromPoint(e.clientX,e.clientY).find(x=>x.classList&&x.classList.contains("kri-t"));if(t){const i=t.__i;if(i===KRING_MATH.front(R.rot,R.tiles.length)&&Math.abs(KRING_MATH.short(i,R.rot,R.tiles.length))<.5)kriFocus(R);else kriTurnTo(R,i)}return}kriFling(R,R.v)};
  L.addEventListener("pointerup",up);L.addEventListener("pointercancel",up);
  L.addEventListener("keydown",e=>{if(R.st!=="ring")return;if(e.key==="ArrowLeft")kriTurnBy(R,-1);else if(e.key==="ArrowRight")kriTurnBy(R,1);else if(e.key==="Enter")kriFocus(R)});L.tabIndex=-1}
 function kriLoop(R,fn){cancelAnimationFrame(R.raf||0);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)R.raf=requestAnimationFrame(f);else R.raf=0};R.raf=requestAnimationFrame(f)}
 function kriTween(R,to,ms){if(kriCalm()||ms<=0){R.rot=to;kriPlace(R);return Promise.resolve()}const from=R.rot,t0=performance.now();return new Promise(res=>kriLoop(R,()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;kriPlace(R);if(k>=1){res();return false}}))}
-function kriFling(R,v){if(kriCalm())return kriTween(R,Math.round(R.rot),0);R.v=v;return new Promise(res=>kriLoop(R,dt=>{R.rot+=R.v*dt;R.v*=Math.pow(.94,dt/16.67);kriPlace(R);if(Math.abs(R.v)<.0009){kriTween(R,Math.round(R.rot),KIT_RINGI.snapMs).then(res);return false}}))}
-function kriTurnBy(R,d){if(R.st!=="ring"||!R.tiles.length)return;return kriTween(R,Math.round(R.rot)+d,KIT_RINGI.stepMs)}
-function kriTurnTo(R,i){const N=R.tiles.length;if(!N)return;const d=KRI_MATH.short(i,R.rot,N);return kriTween(R,R.rot+d,Math.min(700,220+Math.abs(d)*90))}
+function kriFling(R,v){if(kriCalm())return kriTween(R,Math.round(R.rot),0);R.v=v;return new Promise(res=>kriLoop(R,dt=>{R.rot+=R.v*dt;R.v*=Math.pow(KRING_MATH.decay,dt/16.67);kriPlace(R);if(Math.abs(R.v)<KRING_MATH.stop){kriTween(R,Math.round(R.rot),KRING_MATH.snapMs).then(res);return false}}))}
+function kriTurnBy(R,d){if(R.st!=="ring"||!R.tiles.length)return;return kriTween(R,Math.round(R.rot)+d,KRING_MATH.stepMs)}
+function kriTurnTo(R,i){const N=R.tiles.length;if(!N)return;const d=KRING_MATH.short(i,R.rot,N);return kriTween(R,R.rot+d,Math.min(700,220+Math.abs(d)*90))}
 /* ---------- focus: the bright item zooms big to the LEFT, info + buttons drop on the RIGHT ---------- */
-async function kriFocus(R){if(R.st!=="ring"||R.busy||!R.tiles.length)return;R.busy=1;const N=R.tiles.length,fi=KRI_MATH.front(R.rot,N);await kriTween(R,Math.round(R.rot),120);
+async function kriFocus(R){if(R.st!=="ring"||R.busy||!R.tiles.length)return;R.busy=1;const N=R.tiles.length,fi=KRING_MATH.front(R.rot,N);await kriTween(R,Math.round(R.rot),120);
  const it=R.items[fi],t=R.tiles[fi],g=R.geo(),calm=kriCalm();R.st="focus";R.fi=fi;
  const sc0=1.12,bigS=KIT_RINGI.big[R.K];const colW=R.ip?R.w*.42:R.w*.44,lx=colW/2,ly=Math.max(g.top0+g.tw*bigS*.62,R.H*.44);
  const big=document.createElement("div");big.className="kri-big";big.style.width=g.tw+"px";big.innerHTML=it.tile?(it.tileBig||it.tile):typeof kitItem==="function"?kitItem({src:it.src512||it.src,name:it.name,grade:it.grade,qty:it.qty>1?it.qty:0,lux:it.lux,mark:it.mark,size:"md"}):"";
@@ -191,7 +186,7 @@ function kriBack(R,quick){if(R.st!=="focus")return;R.st="ring";const calm=kriCal
   if(!calm)[R.ring,R.arL,R.arR,R.nameEl,R.hint].forEach(e=>e&&e.animate([{opacity:0},{opacity:1}],{duration:260,fill:"backwards"}))};
  if(big&&D){const to=`translate(${g.cx-g.tw/2}px,${g.cy-g.tw*.6}px) scale(1.12)`;big.animate([{transform:big.style.transform,opacity:1},{transform:to,opacity:.2}],{duration:D,easing:"cubic-bezier(.3,.6,.3,1)",fill:"forwards"}).onfinish=done}else done();if(t)t.style.visibility=""}
 function kriRefresh(R){if(R.st==="focus"){const it=R.items[R.fi];kriPane(R,it)}else{const old=R.rot;kriBuild(R,false);R.rot=Math.min(old,Math.max(0,R.items.length-1));kriPlace(R)}}
-try{window.kitRingItem=kitRingItem;window.KRI_MATH=KRI_MATH}catch(e){}
+try{window.kitRingItem=kitRingItem;window.KRING_MATH=KRING_MATH}catch(e){}
 /* ======================= WIRING: every item / treasure picker → kitRingItem (KK44 NEW-KIT FAMILY SCAN §5) ======================= */
 function kriOn(){try{return !window.__bot&&!window.__kriOff&&typeof kitScene==="object"&&!!document.querySelector("header.hud")&&!(typeof S!=="undefined"&&S&&S.dead)}catch(e){return false}}
 /* the scene picture = the stage she stands on now (place / palace), else her room */
