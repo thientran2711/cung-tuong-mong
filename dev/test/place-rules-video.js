@@ -55,7 +55,11 @@ const OUT=process.argv[2]||'place-rules.mp4';const DEV=process.env.DEV||'fold';
  const meet=await g.evaluate(()=>{const q=window.__q;const onStage=[...document.querySelectorAll('#tokens .tok')].map(t=>t.innerText.replace(/\s+/g,' ').slice(0,40));const n0=Q.length;let c=null;try{c=gmCard(q)}catch(e){c="err "+e}if(c)Q.push(c);return{onStage,with:plWith(q),cardMade:!!c,newCards:Q.length-n0,stat:PR.stat}});
  await cap(`Hoàng hậu «đến gặp» ngay khắc này → ${meet.cardMade?'CÓ thẻ (LỖI)':'không có thẻ «Có người đến»: nàng đã ở cạnh'}`);await sleep(3500);
  await clr();await g.evaluate(()=>{popIdx=null;render()});await sleep(600);
- await g.evaluate(()=>{used=BAL.time.khac-1;render()});await cap('Khắc cuối buổi sáng: «Đức Thọ cung sắp đóng cửa sau khắc này»');await sleep(4000);
+ /* close her person view (kit focus, iPad) by its own ✕ so the stage and the «!» are seen */
+ for(let i=0;i<3;i++){const c=await g.evaluate(()=>{const f=[...document.querySelectorAll('[class*="kfoc"]')].find(e=>e.getClientRects().length&&/kfoc(?!-)/.test(e.className));if(!f)return 0;
+  const x=[...document.querySelectorAll('button,[role=button],.kx')].find(b=>b.getClientRects().length&&(/^[✕×]$/.test((b.innerText||'').trim())||/Đóng/.test(b.getAttribute('aria-label')||'')));if(x){x.click();return 1}return 0});if(!c)break;await sleep(800)}await clr();
+ await g.evaluate(()=>{used=BAL.time.khac-1;render()});await cap('Khắc cuối buổi sáng: «Đức Thọ cung sắp đóng cửa sau khắc này» + «!»');await sleep(3500);
+ {const bx=await g.$('#kntbox');if(bx){await bx.click({timeout:3000}).catch(()=>{});await cap('Chạm «!»: Tin báo «sắp đóng cửa sau khắc này» + may rủi nếu nán lại');await sleep(4000);await p.keyboard.press('Escape').catch(()=>{});await g.evaluate(()=>{try{const x=document.querySelector('#kntpanel .kx, .knt-panel .kx, #modal .kx');if(x)x.click()}catch(e){}});await sleep(600);await clr();await g.evaluate(()=>render())}}
  await cap('Vẫn ở lại quá giờ → sang buổi trưa (thử: lần này bị bắt gặp)');await sleep(1200);
  const turn=await g.evaluate(async()=>{const b0=S.buoi;const R0=Math.random;Math.random=()=>0.999;const seen=[];try{for(let i=0;i<8&&S.buoi===b0;i++){try{kmBusy=false;KMQ.length=0}catch(e){}nextBuoi();await new Promise(r=>setTimeout(r,300));
    if(S.buoi===b0&&Q.length){seen.push(...Q.map(m=>m.t));Q.length=0;document.getElementById('modal').hidden=true}}}finally{Math.random=R0}
@@ -63,7 +67,7 @@ const OUT=process.argv[2]||'place-rules.mp4';const DEV=process.env.DEV||'fold';
  await cap(`Bị bắt → đưa NGAY về tẩm cung · cấm túc ${turn.confined} tháng`);await sleep(5000);
  for(let i=0;i<6;i++){const t=await qn();if(!t.length)break;const bt=await g.$('#modal .opt, #modal button.btn');if(bt)await bt.click({timeout:3000}).catch(()=>{});else await clr();await sleep(900)}
  await clr();await g.evaluate(()=>render());await cap('Sân khấu = phòng mình; thanh trên: cấm túc');await sleep(3500);
- await g.click('#tabs [data-tab="go"]').catch(()=>g.evaluate(()=>{tab="go";render()}));await cap('Dư đồ: ngươi ở cung mình (đang cấm túc)');await sleep(3500);
+ await g.click('#tabs [data-tab="go"]').catch(()=>g.evaluate(()=>{tab="go";render()}));await g.waitForFunction(()=>{const i=document.querySelector('.mapimg');return i&&i.complete&&i.naturalWidth>0},null,{timeout:30000}).catch(()=>{});await cap('Dư đồ: tranh bản đồ giữ nguyên, «Nhà ta» ở cung mình, cấm túc báo MỘT lần');await sleep(4500);
  const fin=await g.evaluate(()=>({place:S.place,visit:S.visit&&S.visit.k,confined:S.confined,stat:PR.stat}));
  const vpath=await p.video().path();await ctx.close();await b.close();srv.close();
  const ss=Math.max(0,tStart-0.5).toFixed(2);cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',ss,'-i',vpath,'-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart','-crf','28',OUT]);

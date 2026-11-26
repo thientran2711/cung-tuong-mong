@@ -156,3 +156,8 @@ Recorder: DEV=fold|ipadAir node dev/test/place-rules-video.js <out.mp4> (TEST ca
 - Pulsing alert (owner 18/11 ~19:45Z point 5): replaced by her ONE NOTICE ruling 18/11 ~22:10Z (top-bar «!» box + chip, jnotice); it was not broken by SANGBUOI r4 — it fired only at the LAST khắc (left<=1) and her talk skipped that khắc. Now it also fires on entry.
 - Test G in dev/test/place-rules.js (map). iPad [] Fold []; stage-stay PASS.
 - Shots: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rules/map-camtuc-ipad-r2.jpg · map-camtuc-fold-r2.jpg · map-vephong-ipad-r2.jpg · map-vephong-fold-r2.jpg (map art blank in the cấm túc shots = CDN load timing in the test, not this change).
+
+## r3 (MAIN 149 LOOK)
+- (1) «map gone under cấm túc» and (2) «white square over her home» in the r2 stills = the stills were taken 2.5 s after render, before the painted map and the kit me-mark (img/kit/me-mark-0.webp, 200 OK) loaded. Waiting for load: painted map present, the mark is the kit me-mark (no blank slot) — map-camtuc-{ipad,fold}-r3.jpg. No code change; the r2 videos already show the painted map under cấm túc.
+- (3) r3 videos add the tap on «!» at the last khắc (Tin báo «… sắp đóng cửa sau khắc này …») and wait for the painted map at the end: place-rules-{fold,ipad}-r3.mp4.
+- Files this branch touches on the map side: dev/build/jplrule.js only (plMap/plBanTick/accState wrap); OB-PHU2 told.
