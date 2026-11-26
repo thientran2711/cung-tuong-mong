@@ -28,7 +28,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
   out.plain=deserQ([{t:"Tin",h:"<p>x</p>"}]).length;
   /* (2) NPC receiver: 4 answers over many draws (vary her liking so every weight is live) */const H={};for(let i=0;i<400;i++){t.bac=500;t.rl=t.rl||{};t.rl[a.id]=(i%9-4)*10;t.duc=90;const rr=helpAsk(a,t).r;
    const k=/mượn 30|kể cho|ân cần/.test(rr)?"full":/cho có|qua loa/.test(rr)?"half":/từ chối/.test(rr)?"no":/đi kể/.test(rr)?"sab":"?";H[k]=(H[k]||0)+1}out.help=H;
-  /* (3) gift to an NPC */const G={};const k0=Object.keys(IT).find(k=>itm(k).gv);for(let i=0;i<300;i++){a.inv=[{k:k0}];t.bac=500;t.inv=[];const r0=giveTo(a,t,0);const g=/trả lại/.test(r0)?"back":/Thái y viện/.test(r0)?"found":t.inv.length?"keep":"?";G[g]=(G[g]||0)+1}out.gift=G;
+  /* (3) gift to an NPC */const G={};const k0=Object.keys(IT).find(k=>itm(k).gv);/* review/oan-pace-2: 300 tries in ONE day — the per-day pace (BAL.oanPace.day / ghet.day, checked by dev/test/oan-pace.js) would freeze the scores that make an answer possible; switched off for this answer-variety scan only */const OPg=BAL.oanPace&&BAL.oanPace.on;if(OPg)BAL.oanPace.on=0;try{for(let i=0;i<300;i++){a.inv=[{k:k0}];t.bac=500;t.inv=[];const r0=giveTo(a,t,0);const g=/trả lại/.test(r0)?"back":/Thái y viện/.test(r0)?"found":t.inv.length?"keep":"?";G[g]=(G[g]||0)+1}}finally{if(OPg)BAL.oanPace.on=OPg}out.gift=G;
   out.pick=Object.assign({},window.__rcvN||{});
   /* (4) summons */const M={};for(let i=0;i<200;i++){t.suc=80;t.sung=40;t.alive=true;t.out=0;t.confined=0;const s0=t.sung,c0=t.suc;tsSummonGo(t);const k=t.suc===c0-BAL.rcv.sumSuc?"go":t.sung===s0+BAL.eff.jts.sungGo_2?"ill":"?";M[k]=(M[k]||0)+1}out.sum=M;
   return out});
