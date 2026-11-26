@@ -62,13 +62,13 @@ function endClass(life) {
    n = «Bỏ cuộc?» «Bỏ cuộc» taps in the kept trace (last 400 taps only → a lower bound) + harness.mgGiveUp (harness ≥ the fix: given up after 6 min with no end), ≥ 1 when exitPick is «Bỏ cuộc». */
 const MGQ_RE = /^bỏ cuộc$/i;
 function mgQuitOf(rec, life) { const xp = rec.exitPick || (life && life.exitPick) || null, h = rec.harness || (life && life.harness) || {}; const tr = Array.isArray(rec.trace) ? rec.trace : [];
-  let n = tr.filter(t => Array.isArray(t) && /«bỏ cuộc\?»\s*«bỏ cuộc»\s*$/i.test(String(t[1]))).length; if (!n && xp && MGQ_RE.test(String(xp.label || '').trim())) n = 1; return { n, giveUp: +h.mgGiveUp || 0, lowerBound: tr.length >= 400 } }
+  let n = tr.filter(t => Array.isArray(t) && /«bỏ cuộc\?»\s*«bỏ cuộc»\s*$/i.test(String(t[1]))).length; n += tr.filter(t => Array.isArray(t) && /^#kg\d+\b.*«quay lại»\s*$/i.test(String(t[1]))).length; /* a «Quay lại» on a mini-game board leaves the round unplayed (E-S6/E-S8 «Lễ ra mắt», Foreman E 07:14Z) — counted as a quit too */ if (!n && xp && MGQ_RE.test(String(xp.label || '').trim())) n = 1; return { n, giveUp: +h.mgGiveUp || 0, lowerBound: tr.length >= 400 } }
 function verdict(rec, life) {
   const why = [], e = endClass(life), h = rec.harness || (life && life.harness) || null; let xp = rec.exitPick || (life && life.exitPick) || null; if (xp && MGQ_RE.test(String(xp.label || '').trim())) xp = null; /* a mini-game «Bỏ cuộc» is never the life's exit pick */
   const real = !!(h && h.realtap === true && +h.jsClicks === 0);
   if (!real) why.push(h ? 'harness not real-tap (realtap=' + h.realtap + ', jsClicks=' + h.jsClicks + ')' : 'JS-click harness (pre-25/11, no realtap proof)');
   if (e.k === 'none') why.push(e.why);
-  if (e.k === 'exit') { if (xp && (xp.only === true || +xp.n === 1)) e.note = 'exit was the only option (real ending)'; else if (!xp && rec.lastTap) e.note = 'game-imposed: last bot tap was a non-exit option «' + rec.lastTap.slice(0, 40) + '»'; else why.push('bot-chosen ' + e.why + (xp ? ' with ' + xp.n + ' options' : ' (no proof it was the only option)')); }
+  if (e.k === 'exit') { if (xp && (xp.only === true || +xp.n === 1)) e.note = 'exit was the only option (real ending)'; else if (!xp && rec.lastTap) e.note = 'game-imposed: last bot tap was a non-exit option «' + rec.lastTap.slice(0, 40) + '»'; else if (!xp && real && h.kind === 'realtap') e.note = 'game-imposed: the real-tap harness recorded no exit pick (it logs every exit-road tap in exitPick) — e.g. «Xuất gia làm ni cô» by old custom after the emperor dies (F #19 / Foreman E 07:30Z)'; else why.push('bot-chosen ' + e.why + (xp ? ' with ' + xp.n + ' options' : ' (no proof it was the only option)')); }
   if (h && h.cap && e.k === 'none') why.push('harness had a cap (' + h.cap + ')');
   /* TEST HOOKS (BIG #8 F1, robot-rt ≥ fd9218fe+): a life run with any RT_TEST_* self-test or the RT_COLD probe setup (sent to lãnh cung by cold(), not by play) is not real play */
   if (h && h.testHooks && Object.keys(h.testHooks).length) why.push('test hooks used (' + Object.entries(h.testHooks).map(([k, v]) => k + '=' + v).join(', ') + ')');
