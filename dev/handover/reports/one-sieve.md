@@ -87,3 +87,6 @@ PRIORITY #1 CHECK: OD 26/11 ~06:50Z (B) ONE SIEVE | main jnsieve/j63/jhc | revie
    G4 80-dialog-fixed «kit-dialog-2 a: empty Tốn / Được cell» both devices and G4 90 button-crawl «fold · Ô lưu · Lui did not close its layer» — not touched by this branch (Sổ ghi render only); not checked on base.
 4. Stills (looked at each), CDN img/_review/one-sieve/: live-fold-soghi-kem.png / live-ipad-soghi-kem.png (glued «Kèm theo trong cung: … ; … ; …» wall) vs fix-fold-soghi-kem.png / fix-ipad-soghi-kem.png (one person per line, «N vị khác»).
    Look note for KK42: in the Sổ ghi the kit «Kèm» label sits inline after the lead and the lines start at the row's left edge (not indented under the portrait) — kit look, not changed here.
+5. Re-merge KK42 review/kit-kem-row-r3 a5ff660a (G1 fix) → 5334ef71. coregates on 5334ef71 vs base review/kawhy-verdict cace0315 (same box): G1 PASS now.
+   G4 80-dialog-fixed («kit-dialog-2 a» empty Tốn/Được cell, both devices) and G4 90 button-crawl («fold · Ô lưu · Lui») FAIL IDENTICALLY on the base → pre-existing, not this branch.
+   G4 95 next-dead FAILed once on 5334ef71 inside coregates (fold: «Sang» covered by div#kxcatch); rerun alone: PASS, PASS (base PASS) → box-load flake.
