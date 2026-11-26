@@ -203,3 +203,71 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  try{const c=CW();if(kind==="enter"&&c&&c.on&&S&&!S.dead){const P=fBlob();if(P&&sideOf(P)==="p")send("join",{rank:S.rank})}}catch(e){console.error("kcco join",e)}return r};window.kcHook=kcHook})();
 window.KCCO={H,RQ,route,send:(...a)=>send(...a),acts:kccoActs};
 })();
+
+/* ================= ACT-MERGE J5 — roads: cung nữ Phận sự + pop-ups (S1–S5), lãnh cung (G12) =================
+   Owner 26/11 ~07:25Z / ~07:32Z (OD verbatim): ONE feature = ONE button, the ways (and tiers) sit INSIDE the existing kit option dialog (Q opts → kitOptFinal);
+   only TRUE duplicates merge — every other act stays its own button. Plan: dev/handover/reports/act-merge.md (G12, dup-report §1.3 S1–S5).
+   Engine (kept here because this file loads after every deal / talkOpts / act wrapper, so it sees the FINAL deck / list):
+     - a DOOR = a card (deck) or an item (pop-up) with j5door + j5ways; the ways are the OLD cards / items UNCHANGED (name, khắc, bạc, odds, w / l,
+       go / fail, once, rep, lock) — a way runs through the SAME act() / talk() chain it ran through before, so every outcome, every rule, every
+       NPC hook (jagknow / jagacts3 p3Cold / coldActsOf read the same engines) stays; no number is typed here (law 4).
+     - a door shows only when 2+ ways exist today; a lone way stays its own button, as before.
+     - the door costs nothing itself (the cheapest way's khắc is only the gate "can she do any of them"); the way pays its own khắc when chosen. */
+(function(){
+const J5={force:null};window.J5DOOR=J5;
+const DOORART={};/* door name → the first way's name (kitActArt: the door borrows its picture) */
+function cc(a){return typeof cardCost==="function"?cardCost(a):(a.k||1)}
+/* groups a list: rule = {n,t,re | key(card)→door name or null}; the door takes the place of its first way; < 2 ways = left alone */
+function doorize(L,R,mk){const M=new Map(),out=[];
+ for(const a of L){if(!a||a.j5door){out.push(a);continue}let key=null,rule=null;for(const r of R){const k=r.key?r.key(a):(r.re.test(a.n||"")?r.n:null);if(k){key=k;rule=r;break}}
+  if(key==null){out.push(a);continue}let g=M.get(key);if(!g){g={key,rule,ways:[],ix:out.length};M.set(key,g);out.push(null)}g.ways.push(a)}
+ const res=[];out.forEach((a,i)=>{if(a!==null){res.push(a);return}const g=[...M.values()].find(x=>x.ix===i);if(g.ways.length<2)res.push(...g.ways);else res.push(mk(g.key,g.rule,g.ways))});
+ return res}
+const availW=d=>d.j5ways.filter(w=>!w.done&&!(w.once&&typeof isSrv==="function"&&isSrv()&&typeof srvOnce==="function"&&srvOnce(w.once,w.onceS)));
+function wayLine(w,tc){let s="";try{s=typeof optLine==="function"?optLine(w):(w.x||"")}catch(e){s=w.x||""}return[`${tc} khắc`,s].filter(Boolean).join(" · ")}
+function wayOpts(ways,tcOf,okOf,pick,why){return ways.map(w=>{const tc=tcOf(w),bad=!!w.lock||!okOf(w,tc);let o=null;try{o=typeof oddsOf==="function"?oddsOf(w):(w.o==null?100:w.o)}catch(e){}
+  const e={n:w.n,x:w.lock?(w.t||""):`${w.t?w.t+" · ":""}${wayLine(w,tc)}`,dom:w.dom,why:w.why,go:()=>pick(w)};if(bad)e.off=true;if(o!=null&&o<100&&!w.lock)e.p=o;return e})}
+function ask(title,text,opts){opts.push({n:"Thôi, để sau",x:"chưa làm gì lúc này",go:()=>{}});Q.push({t:title,ownAct:1,who:typeof pMe==="function"?pMe():null,h:`<p>${text}</p>`,opts});showModal()}
+/* ---- cards (Phận sự deck, lãnh cung deck) ---- */
+function cardDoor(key,rule,ways){const k=Math.min(...ways.map(cc)),lock=ways.every(w=>w.lock);DOORART[key]=ways[0].n;
+ return{n:key,t:lock?(ways[0].t||rule.t):rule.t,k,c:{},o:100,w:{},l:{},x:`chọn một trong ${ways.length} cách`,dom:ways[0].dom,j5door:1,j5ways:ways,rep:1,lock,ad:0}}
+function openCard(d){const L=availW(d);if(!L.length){d.done=1;render();return}
+ ask(d.n,d.t,wayOpts(L,cc,(w,tc)=>can(tc)&&canPay(w)&&(w.b==null||(S.buoi||0)===w.b),w=>pickCard(d,w)))}
+let A0=null;
+function pickCard(d,w){if(S.dead||Q.length||!A0)return;deck.push(w);const i=deck.length-1;try{A0.call(window,i)}catch(e){console.error("j5 way",e)}finally{const j=deck.indexOf(w);if(j>=0)deck.splice(j,1)}
+ d.done=availW(d).length?0:1;render()}
+(function(){const a0=act;A0=a0;act=function(i){const d=deck&&deck[i];if(d&&d.j5door){if(d.done||d.lock||S.dead||Q.length||!can(cc(d)))return;openCard(d);return}return a0.apply(this,arguments)}})();
+(function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){try{const d=DOORART[name];if(d){const A=(typeof KIT_ACTS==="object"&&KIT_ACTS.acts)||{};if(!A[name]&&A[d])return k0.call(this,d)}}catch(e){}return k0.apply(this,arguments)}})();
+/* the doors of each road (names are the owner-facing buttons; ways keep their old names) */
+const SRVG=[
+ {n:"Hầu việc",t:"Việc hằng ngày hầu chủ trong cung: chọn một việc.",re:/^(Quét sân, lau điện|Đốc thúc cung nữ quét dọn|Dâng trà, hầu điểm tâm|Theo hầu chủ|Lĩnh đồ ở Nội vụ phủ|Việc chủ sai|Quản sổ sách trong cung|Hầu trà khi ngự giá|Lui sau bình phong)$/},
+ {n:"Dò la cho chủ",t:"Thay chủ để mắt đến người khác: chọn cách làm.",re:/^(Nghe ngóng cho chủ|Tự đi dò la cho chủ|Canh chừng cung chủ)$/},
+ {n:"Học",t:"Học thêm một nghề hay một lễ: chọn môn.",re:/^(Học lễ nghi với cô cô|Luyện thêu thùa, chữ nghĩa)$/},
+ {n:"Nghỉ ngơi",t:"Lấy lại sức và sắc: chọn cách nghỉ.",re:/^(Nghỉ lấy sức|Chải chuốt, giữ nhan sắc|Mua thuốc bổ)$/},
+ {n:"Kiếm thêm",t:"Kiếm thêm chút bạc ngoài phần lương: chọn đường.",re:/^(Thêu khăn bán ra ngoài|Lén giữ đồ Nội vụ phủ phát)$/}];
+const COLDG=[
+ {n:"Nghỉ ngơi",t:"Một lúc yên tĩnh trong lãnh cung: chọn cách nghỉ.",re:/^(Nghỉ ngơi một lát|Đọc sách giải khuây)$/},
+ {n:"Xin ân xá",t:"Xin được tha khỏi lãnh cung: chọn đường xin.",re:/^(Cầu xin|Gửi bài thơ cũ|Nhờ .+ cầu xin)$/},
+ {n:"Kêu oan",t:"Nhờ người ngoài kêu oan thay ngươi: chọn người nhờ.",re:/^(Nhờ người bên ngoài|Nhờ .+ đưa thư kêu oan)$/},
+ {n:"Kiếm sống",t:"Làm lụng kiếm chút bạc và rau ăn: chọn việc.",re:/^(Trồng rau|Thêu khăn bán)$/},
+ {n:"Rời cung",t:"Rời hẳn chốn này: chọn đường đi.",re:/^(Xuất gia|Nghĩ cách trốn khỏi cung|Xin phế làm thứ dân)$/},
+ /* the same letter by two carriers (thái giám đưa cơm / cung nữ thân tín) = ONE letter card, the carrier is the way */
+ {key:a=>{const m=/^(Gửi thư .+?) \(nhờ .+\)$/.exec(a.n||"");return m?m[1]:null},t:"Một bức thư gửi ra ngoài: chọn người đưa thư."}];
+(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&Array.isArray(deck)){
+  if(typeof isSrv==="function"&&isSrv()){if(!(S.srv&&S.srv.lau>0))deck=doorize(deck,SRVG,cardDoor)}
+  else if(S.out)deck=doorize(deck,COLDG,cardDoor)}}catch(e){console.error("j5 doors",e)}return r}})();
+/* ---- pop-up items (cung nữ talk) ---- */
+const POPG=[
+ {n:"Xin chủ",t:"Xin chủ một ân điển: thưởng, tiến cử, hay cho đi nơi khác.",re:/^(Xin chủ ban thưởng|Xin chủ tiến cử lên Nội vụ phủ|Xin chủ cho đi hầu cung khác)$/},
+ {n:"Phản chủ",t:"Quay lưng với chủ: mật báo, hay tố cáo trước Hoàng hậu.",re:/^(Mật báo chuyện của .+|Tố cáo .+ trước Hoàng hậu)$/},
+ {n:"Giao hảo",t:"Kết thân với người hầu khác: trò chuyện, hay biếu chút quà.",re:/^(Trò chuyện|Biếu quà nhỏ)$/}];
+function tk(a){return typeof talkK==="function"?talkK(a):1}
+function itemDoor(key,rule,ways){const m=ways.reduce((a,b)=>tk(b)<tk(a)?b:a,ways[0]);
+ return{n:key,t:rule.t,o:100,w:{},l:{},x:`chọn một trong ${ways.length} cách`,act:m.act,pk:m.pk,lock:ways.every(w=>w.lock),j5door:1,j5ways:ways,dom:m.dom}}
+(function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||p.kind!=="srv"||!Array.isArray(A)||typeof isSrv!=="function"||!isSrv())return A;
+  A=doorize(A,POPG,itemDoor);const f=J5.force;if(f)A=A.map(a=>a&&a.j5door&&a.n===f.door?(a.j5ways.find(w=>w.n===f.way)||a):a)}catch(e){console.error("j5 pop",e)}return A}})();
+(function(){const t1=talk;talk=function(oi){try{if(popIdx!=null&&S&&S.visit&&S.visit.talked!==true&&!S.dead&&!Q.length&&!(S.visit.tk&&S.visit.tk[popIdx])){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
+  if(a&&a.j5door){if(a.lock||!can(tk(a)))return;const ways=a.j5ways;
+   ask(a.n,a.t,wayOpts(ways,tk,(w,tc)=>can(tc)&&canPay(w),w=>{J5.force={door:a.n,way:w.n};try{talk(oi)}finally{J5.force=null}}));render();return}}}catch(e){console.error("j5 talk",e)}
+  return t1.apply(this,arguments)}})();
+})();
