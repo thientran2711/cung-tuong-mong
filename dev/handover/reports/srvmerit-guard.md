@@ -27,7 +27,8 @@ Branch `review/srvmerit-guard` off LIVE 5e013076. Worker: PROMO-ROOT session_01V
 | static S.srv.<x> reads (dev/tools/srv-reader-scan.py) | 468 · 169 guarded on the line · 88 in the act builders (unguarded) · 211 other | 468 · 171 guarded · 88 now behind the one gate · 209 other |
 The 209 «other» reads sit in cung nữ-only flows (HUD / Thân phận rows / month ticks / event options) reached through isSrv branches or built per tap; their stored form (Q cards) is rebuilt on every life swap (deserQ / start); `--list` prints them for any later audit.
 
-## 4. Run one at a time on this box; head 45daa0a9 vs LIVE 5e013076.
+## 4. GATES
+Run one at a time on this box; head 45daa0a9 vs LIVE 5e013076.
 | gate | review/srvmerit-guard | LIVE 5e013076 | verdict |
 |---|---|---|---|
 | dev/test/srvmerit-guard.js (new) | PASS 9/9 | 4 BAD | fixed |
@@ -40,7 +41,6 @@ The 209 «other» reads sit in cung nữ-only flows (HUD / Thân phận rows / m
 | quickcheck core gates G1–G3, time-spill guard, open, old save | PASS | — | PASS |
 | quickcheck G4 90-button-crawl | FAIL «Ô lưu → Lui» (fold) | same FAIL on LIVE (checked 25/11 23:02Z, promo-root report) | pre-existing |
 | **quickcheck perf, median of 11** | **PASS** · render 252/248, tab 638/616, buổi 2002/1872 ms, tasks>200 26/25 | — | PASS |
-GATES
 
 ## 5. Notes
 - Optional follow-up for the co-op owner (not done, behaviour change in co-op): deal() after a life-changing fromCanon (rebirth paths) would remove the stale hand at the source; the gate already makes it harmless.
