@@ -238,7 +238,7 @@ function runAct(m,id){closePk(true);const p=curPeople()[m.i];if(!p||typeof kitFo
  DF.F=kitFocus.open({p,person:p,fig:m.img,from:m.img.getBoundingClientRect(),groups:[],onAct:x=>dfTap(x),onClose:()=>{window.__nhvAct=0;try{dfClosed(tk)}catch(e){}setTimeout(()=>{try{if(CUR&&SELM===m&&m.el.isConnected)openPk(m)}catch(e){}},60)}});
  try{dfTap(id)}catch(e){console.error("nhv act",e)}}
 /* after the act's result: the focus closes by itself and the plaques of the same person come back (her area scene stays) */
-(function(){if(typeof dfAfter!=="function")return;const a0=dfAfter;dfAfter=function(){const r=a0.apply(this,arguments);try{if(window.__nhvAct&&DF.F){const F=DF.F;setTimeout(()=>{try{if(DF.F===F&&!DF.play&&!Q.length)F.close()}catch(e){}},BAL.df&&BAL.df.reactMs||1400)}}catch(e){}return r};window.dfAfter=dfAfter})();
+(function(){if(typeof dfAfter!=="function")return;const a0=dfAfter;dfAfter=function(){const r=a0.apply(this,arguments);try{if(window.__nhvAct&&DF.F){const F=DF.F;setTimeout(()=>{try{if(DF.F===F&&!DF.play&&!Q.length){/* the area painting stays while the focus layer goes and the scene comes back */const cur=bgNow();if(cur)holdOn(cur);F.close()}}catch(e){}},BAL.df&&BAL.df.reactMs||1400)}}catch(e){}return r};window.dfAfter=dfAfter})();
 /* the scene follows the stage: mounted after every stage paint while she stands in an area, gone everywhere else */
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const h=on()&&typeof tab!=="undefined"&&tab==="act"&&!S.out?hall():null;
   if(h){const a=areaByK(h.part);if(a)mount(a)}else if(document.getElementById("nhv")||document.documentElement.classList.contains("nhvon"))unmount()}catch(e){console.error("nhv stage",e);(window.__nhvErr=window.__nhvErr||[]).push(String(e&&e.stack||e).slice(0,300))}return r};window.renderStage=renderStage})();
@@ -254,12 +254,15 @@ const DEC={},DONE={};function decode(u){if(!u)return Promise.resolve(false);if(D
 let LASTBG=null;/* the last painting the scene showed (decoded) */
 function preloadAreas(){try{plan().areas.forEach(a=>{const P=areaArt(a.k);if(P)decode(P.src)});decode(mapSrc())}catch(e){}}
 let HOLD=null;
+function sceneUp(){try{if(!(CUR&&L&&L.isConnected&&CUR.bgReady&&CUR.D&&CUR.D.H>80&&typeof tab!=="undefined"&&tab==="act"))return false;const r=L.getBoundingClientRect();if(r.height<80||getComputedStyle(L).visibility==="hidden")return false;
+ const F=typeof kitFocus==="object"&&kitFocus.current?kitFocus.current():null;return !(F&&F.open)}catch(e){return false}}
+function bgNow(){try{return BG&&(BG.style.backgroundImage.match(/url\(["']?([^"')]+)/)||[])[1]}catch(e){return null}}
 function holdOff(){if(HOLD){try{HOLD.el.remove()}catch(e){}HOLD=null}}
 function holdOn(srcIn,readyFn){holdOff();try{const hud=document.querySelector("header.hud"),tb=document.getElementById("tabs");const t=hud?hud.getBoundingClientRect().bottom:0,b=tb&&tb.getClientRects().length?tb.getBoundingClientRect().top:innerHeight;
  const im=document.querySelector("#panel .nhv-map .mapimg");const src=srcIn||im&&(im.currentSrc||im.src)||mapSrc();const d=document.createElement("div");d.id="nhv-hold";
  d.style.cssText=`position:fixed;left:0;right:0;top:${t}px;height:${Math.max(0,b-t)}px;z-index:900;background:url("${src}") center/cover no-repeat;pointer-events:none`;document.body.appendChild(d);HOLD={el:d,t0:Date.now()};
  let last=Date.now(),waited=0;const tick=()=>{if(!HOLD||HOLD.el!==d)return;const up=typeof Q!=="undefined"&&Q.length>0;d.style.visibility=up?"hidden":"";const now=Date.now();if(!up)waited+=now-last;last=now;/* only time without a dialog counts toward the safety limit */
-  const ready=!up&&(readyFn?readyFn():(CUR&&L&&L.isConnected&&CUR.bgReady&&CUR.D&&CUR.D.H>80&&typeof tab!=="undefined"&&tab==="act"));if(ready||waited>20000){holdOff();return}requestAnimationFrame(tick)};requestAnimationFrame(tick)}catch(e){holdOff()}}
+  const ready=!up&&(readyFn?readyFn():sceneUp());if(ready||waited>20000){holdOff();return}requestAnimationFrame(tick)};requestAnimationFrame(tick)}catch(e){holdOff()}}
 (function(){const e0=kpmEnter;kpmEnter=function(slot,part){if(slot===SLOT&&on())holdOn();return e0.apply(this,arguments)};window.kpmEnter=kpmEnter;
  const pm=kitPalaceMap;kitPalaceMap=function(o){const h=pm.apply(this,arguments);if(o&&o.slot===SLOT&&on())setTimeout(preloadAreas,0);return h}
  /* Dư đồ → garden map: the Dư đồ painting stays until the garden map painting is decoded (first open of a mùa × buổi) */
