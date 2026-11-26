@@ -53,4 +53,42 @@ function plArrFix(){try{for(const m of Q){if(!m||m.plDup||!ARR.test(m.t||"")||!m
   m.plDup=1;PR.stat.dupGate=(PR.stat.dupGate||0)+1;m.t="Người bên cạnh";if(typeof m.h==="string")m.h=m.h.replace(/<p>[^<]*(giá đáo|xin cầu kiến|xin ra mắt)[^<]*<\/p>/g,"").replace(/tìm đến ngươi ở ([^:.<]+)/,"đang ở cùng ngươi tại $1, quay sang ngươi")}}catch(e){console.error("plArrFix",e)}}
 window.plArrFix=plArrFix;
 if(typeof showModal==="function"){const sm0=showModal;showModal=function(){plArrFix();return sm0.apply(this,arguments)}}
+/* (4) DƯ ĐỒ under an all-locked state (owner OD 25/11 ~23:40Z, k17 shot: «đi đâu nó cũng xám hết … chỗ nào là nhà?»), label/marker layer only:
+   · HER HOME on the plan (her room, or the palace whose phối điện houses her: mapHereK at "home") is never greyed/locked: it is where she lives;
+     its label line starts «Nhà ta» on every map view (painted home icon: KIT_REQUESTS K-ICO-HOME; until then the word).
+   · ONE reason for the whole map: cấm túc / lãnh cung, or any reason that sits on most labels (hết khắc, buổi tối…) is said once in the map's
+     top row (the kit chip of that row, .fest) and dropped from the labels; the lock marks stay.
+   · Away from home: «Về phòng · N khắc» in the map's top row (kit .btn mz), the walk home (goTo("home")). */
+function plHomeK(){try{if(!S)return null;const p0=S.place;let k;try{S.place="home";k=typeof mapHereK==="function"?mapHereK():"home"}finally{S.place=p0}return k||"home"}catch(e){return"home"}}
+window.plHomeK=plHomeK;
+if(typeof accState==="function"){const as0=accState;accState=function(k){try{if(S&&S.place==="home"&&!S.out&&k&&k===plHomeK())return{why:"",here:1}}catch(e){}return as0.apply(this,arguments)}}
+const esc2=t=>String(t).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="maptools"')<0)return h;const hk=S.out?null:plHomeK();
+ /* the one reason */
+ let why=S.out?"Đang ở lãnh cung":S.confined>0?`Đang cấm túc, còn ${S.confined} tháng: chỉ ở trong cung mình`:"";const strip=[];
+ if(S.out)strip.push("đang ở lãnh cung");if(S.confined>0)strip.push(`đang cấm túc (${S.confined} tháng)`,`đang cấm túc (còn ${S.confined} tháng)`,`cấm túc ${S.confined} tháng`);
+ if(!why){const C={};let n=0;h.replace(/<span class="mmeta">([^]*?)<\/span>/g,(m,x)=>{n++;const e=x.match(/<em>([^<]+)<\/em>/);if(e)C[e[1]]=(C[e[1]]||0)+1;return m});
+  const top=Object.entries(C).sort((a,b)=>b[1]-a[1])[0];if(top&&top[1]>=5&&top[1]>=n*.6){why=top[0].charAt(0).toUpperCase()+top[0].slice(1);strip.push(top[0])}}
+ if(why){PR.stat.banner=(PR.stat.banner||0)+1;for(const w of strip){const W=esc2(w);
+   h=h.replace(new RegExp(`( · )?<em>${W}</em>`,"g"),"").replace(new RegExp(`<span class="mchip[^"]*">${W}</span>`,"g"),"")}
+  h=h.replace(/<span class="mmeta">\s*<\/span>/g,"");
+  h=h.replace('<div class="maptools">',`<div class="maptools"><span class="fest" data-plban="1">${why}</span>`)}
+ /* her home */
+ if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
+ /* the way home */
+ if(S.place!=="home"&&!S.out&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){let tc=0,ok=true;try{tc=travel(S.place,"home");ok=typeof walkOk==="function"?walkOk(tc):true}catch(e){}
+  const b=`<button class="btn mz" data-plhome="1"${ok?"":" disabled"} title="${ok?`Đi về cung mình: ${tc} khắc`:"Không đủ khắc để về"}">Về phòng · ${tc} khắc</button>`;
+  h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}
+ return h}catch(e){console.error("plMap",e);return h}}
+window.plMap=plMap;
+/* the Dư đồ «leather» style hides the top row's text chips (jbook): the one reason also goes through the ONE notice system (kitNotice: top chip +
+   «!» box), sticky while the state holds — the chip shows once per buổi on the Dư đồ; dropped when she is free again. (A dedicated map banner part:
+   KIT_REQUESTS K-MAP-BANNER.) */
+function plBanTick(){try{if(typeof kitNotice!=="function"||!S||S.dead)return;const why=S.out?"Đang ở lãnh cung":S.confined>0?`Đang cấm túc, còn ${S.confined} tháng: chỉ ở trong cung mình`:"";
+ if(!why){try{if(typeof kitNoticeDrop==="function")kitNoticeDrop("plban")}catch(e){}return}
+ if(typeof tab==="undefined"||tab!=="go")return;const key=(typeof bkey==="function"?bkey():"")+"|"+why;if(S.plBan===key)return;S.plBan=key;
+ kitNotice({id:"plban",kind:"close",line:why,text:`${why}. Mọi nơi khác trên Dư đồ đều không đi được cho đến khi hết hạn.`,sticky:true})}catch(e){console.error("plBan",e)}}
+if(typeof render==="function"){const rb0=render;render=function(){const r=rb0.apply(this,arguments);plBanTick();return r}}
+if(typeof mapHTML==="function"){const mh0=mapHTML;mapHTML=function(){return plMap(mh0.apply(this,arguments))}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-plhome]");if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.disabled||!S||S.dead||Q.length)return;try{goTo("home")}catch(x){console.error(x)}},true);
 }catch(e){console.error("jplrule",e)}})();

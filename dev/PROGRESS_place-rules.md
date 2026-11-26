@@ -143,3 +143,16 @@ Recorder: DEV=fold|ipadAir node dev/test/place-rules-video.js <out.mp4> (TEST ca
 | time-limited place | jplace.js:26 | if(k==="tn"){if(S.thDead)return null;return relPerson | jstagehere stClose: entry notice «chỉ được lưu đến hết …» + last-khắc notice; stayRoll needs it shown |
 
 104 rows
+
+## r2 (MAIN 147/148 adds: k17 Dư đồ + TINBAO wording)
+- Wording (TINBAO-WORDS, OD 25/11 ~23:36Z: no «=», odds once at the end, «ta»): entry «<Nơi> chỉ được lưu đến hết <buổi> (<why>); quá giờ mà còn nán lại thì chẳng khác gì lẻn vào, may rủi: <odds>.» · next «… sắp đóng cửa sau khắc này (…); nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: …» · now «… đã đóng cửa (…) mà ta vẫn nán lại, chẳng khác gì lẻn vào; may rủi: …» (chip «… đã đóng cửa, ta vẫn nán lại»). TINBAO-WORDS drops its jstagehere hunk.
+- Dư đồ (plMap/plBanTick in jplrule.js, label layer only; OB-PHU owns full screen + label grouping):
+| before (k17) | after |
+|---|---|
+| under cấm túc the map marked her at the old place | she is in her room (plSweep) |
+| her own home spot greyed + locked like the rest | home spot never locked (accState: her home = here), its line starts «Nhà ta» (painted icon K-ICO-HOME requested) |
+| «đang cấm túc (2 tháng)» on ~15 labels | removed from labels; said ONCE: kitNotice sticky «Đang cấm túc, còn N tháng: chỉ ở trong cung mình» (top chip + «!» box) + .fest chip in the map row (hidden on leather view → K-MAP-BANNER requested). Same for lãnh cung, and any reason on ≥60 % of labels (hết khắc / tối) is said once in the row |
+| no obvious way home | «Về phòng · N khắc» kit button in the map's top row when away (disabled with reason when the khắc do not allow) |
+- Pulsing alert (owner 18/11 ~19:45Z point 5): replaced by her ONE NOTICE ruling 18/11 ~22:10Z (top-bar «!» box + chip, jnotice); it was not broken by SANGBUOI r4 — it fired only at the LAST khắc (left<=1) and her talk skipped that khắc. Now it also fires on entry.
+- Test G in dev/test/place-rules.js (map). iPad [] Fold []; stage-stay PASS.
+- Shots: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rules/map-camtuc-ipad-r2.jpg · map-camtuc-fold-r2.jpg · map-vephong-ipad-r2.jpg · map-vephong-fold-r2.jpg (map art blank in the cấm túc shots = CDN load timing in the test, not this change).

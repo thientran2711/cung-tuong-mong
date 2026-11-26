@@ -55,11 +55,16 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
  const F=await g.evaluate(async()=>{__reset();S.where=S.where||{};S.where.emp="thu";try{if(S.roster&&S.roster.P&&S.roster.P.emp)for(const e of S.roster.P.emp)e[0]="thu"}catch(e){}S.sung=0;accGrant(S,"thu");
   const R0=Math.random;Math.random=()=>0.999;try{window.__accSilent=1;goTo("thu")}finally{window.__accSilent=0;Math.random=R0}const ref=/lui/.test(String(S.visit&&S.visit.msg));Q.length=0;document.getElementById('modal').hidden=true;render();
   return{place:S.place,visitK:S.visit&&S.visit.k,msg:S.visit&&S.visit.msg,ref}});
+ /* G: Dư đồ under cấm túc (k17): she is home, no label repeats «cấm túc», her home label says «Nhà ta», ONE notice; away: «Về phòng» walks home */
+ const G=await g.evaluate(async()=>{__reset();S.buoi=1;await __go("vuon");S.confined=2;tab="go";window.__chips=[];render();await new Promise(r=>setTimeout(r,500));
+  const labs=[...document.querySelectorAll('.mapv .mspot')].map(e=>e.innerText);const rep=labs.filter(t=>/cấm túc/.test(t)).length;const home=labs.some(t=>/Nhà ta/.test(t));const ban=window.__chips.filter(x=>/Đang cấm túc/.test(x)).length;
+  S.confined=0;S.buoi=1;used=0;S.plBan=null;await __go("vuon");tab="go";render();await new Promise(r=>setTimeout(r,300));const b=document.querySelector('[data-plhome]');const btn=b?b.innerText:"";if(b)b.click();await new Promise(r=>setTimeout(r,300));
+  const after=S.place;tab="act";render();return{place0:"home",rep,home,ban,btn,after}});
  const old=await g.evaluate(()=>{try{delete S.plWarn;S=JSON.parse(JSON.stringify(S));render();return true}catch(e){return String(e)}});
  const X=[];
  if(A.placeIn!=="tn"||!A.entry||!A.last)X.push("A-warn");if(A.place!=="home"||A.visitK!=="home"||!(A.confined>0)||!A.cards.includes("Bị bắt"))X.push("A-moved");
  if(B.place!=="home"||B.visitK!=="home"||B.confined||B.dDanh<0||!B.cards.includes("Hết giờ tiếp"))X.push("B-unwarned");
  if(C.in0!=="vuon"||C.place!=="home"||C.visitK!=="home")X.push("C-sweep");
  if(!Dd.onStage||!Dd.with||!Dd.gmNull||!Dd.apNull||Dd.wOther||!Dd.gate||Dd.gate.t!=="Người bên cạnh"||/giá đáo/.test(Dd.gate.h))X.push("D-presence");
- if(E.place!=="tn")X.push("E-summon");if(F.ref&&F.place!=="home")X.push("F-door");if(old!==true)X.push("old");
- console.log(JSON.stringify({dev:process.env.DEV||'ipadAir',faults:X,A,B,C,D:Dd,E,F,old,errs:errs.slice(0,3)}));await b.close();srv.close();process.exit(X.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
+ if(E.place!=="tn")X.push("E-summon");if(F.ref&&F.place!=="home")X.push("F-door");if(old!==true)X.push("old");if(G.rep||!G.home||G.ban!==1||!/Về phòng/.test(G.btn)||G.after!=="home")X.push("G-map");
+ console.log(JSON.stringify({dev:process.env.DEV||'ipadAir',faults:X,A,B,C,D:Dd,E,F,G,old,errs:errs.slice(0,3)}));await b.close();srv.close();process.exit(X.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

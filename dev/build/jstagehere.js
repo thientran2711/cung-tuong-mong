@@ -24,9 +24,12 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
 window.stClose=stClose;
 function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
 const bN=b=>{try{return String(BUOI[b]).toLowerCase()}catch(e){return ""}};
-function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k),t=o?` ${c.lim?"Quá giờ mà còn ở lại":"Ở lại"} = như lẻn vào: ${o}.`:"";return (c.now?`${p} đã đóng cửa${w}, ngươi vẫn ở lại.`:c.lim?`${p}: chỉ được lưu đến hết ${bN(c.b)}${w}.`:`${p} sắp đóng cửa sau khắc này${w}.`)+t}
+function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k);/* wording TINBAO-WORDS (owner OD 25/11 ~23:36Z: no «=», the odds word once at the end, «ta») */
+ if(c.now)return `${p} đã đóng cửa${w} mà ta vẫn nán lại${o?`, chẳng khác gì lẻn vào; may rủi: ${o}`:""}.`;
+ if(c.lim)return `${p} chỉ được lưu đến hết ${bN(c.b)}${w}${o?`; quá giờ mà còn nán lại thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`;
+ return `${p} sắp đóng cửa sau khắc này${w}${o?`; nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`}
 function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:c.lim?2:0].join("|")}catch(e){return ""}}
-function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ngươi vẫn ở lại`:c.lim?`${p}: chỉ được lưu đến hết ${bN(c.b)}`:`${p} sắp đóng cửa sau khắc này`}
+function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ta vẫn nán lại`:c.lim?`${p} chỉ được lưu đến hết ${bN(c.b)}`:`${p} sắp đóng cửa sau khắc này`}
 /* the buổi+place whose limit she has been shown (the closing notice in any of its three lines): stayRoll punishes only after it */
 function warned(bk,k){try{const w=String(S.plWarn||""),c=String(S.closeSeen||"");return w===bk+"|"+k||c.indexOf(bk+"|"+k+"|")===0}catch(e){return false}}
 window.stWarned=warned;
