@@ -43,3 +43,24 @@ Read: START_CORE (18 laws), START_WORKER, START_REVIEWER, brief D-owner-bugs-261
 
 Known pre-existing on LIVE too (not this branch, not counted): quickcheck G4 80-dialog-fixed «kit-dialog-2 a», 90-button-crawl «Ô lưu · Lui».
 Review shots/frames: scratch only (/home/user/wt/spr-vid), none in git.
+
+---
+# RE-REVIEW — review/stat-pace @ 055873b9 (D2 worker #3; LIVE aa37de21 merged and an ancestor → FF) — VERDICT: PASS
+Build: `build_site.sh` on 055873b9 → index.html differs from the committed one only in the build-info line.
+Answers to the FAIL list (report «#3 work»), checked:
+1. Gates: `BAL.stp.floor` {duc 80, danh 80, sung 75, th 60, hh 60, rel 80, oan 80} + `spTop`. A rise slows to dm.min above the rank ceiling and stops only at max(ceil, floor).
+   I ran dev/measure/statpace-gates.py on the built page's BAL (my own dump; the report's baldump.js is not in the repo, nit): A and B → 0 of 155 gates shut; `--nofloor` → 75 shut (the bug confirmed, and fixed).
+2. agScene on a full day: the consort puts the deed off (p.drop, out of pend, agTouch), never lands without her choice. ag-carry ALL 26 PASS.
+3. statpace-scan: riseMap 0, spRow 4 (jcoopworld resApply/brbAff, jkcco bond); jts tsLeNpc → affAdd with BAL.eff.jts.liXiAff (same key as her lì xì card).
+   riseDirect 18 = the intended fx builders + co-op mirror.
+4. 6 lives × 24 months, LIVE / A / B, same seeds, with ranks + lãnh cung: A at100 0, max 84, rank median 3 at 2 y (LIVE 3.5, at100 15); B too tight (rank 0, 2/5 in lãnh cung). Sufficient.
+5. Report lines filled; LAND READY wording «preset A default, B = one-line switch (BAL.stpPick)».
+6. «Có người bán tin» = visit kind + source gate (knSellPick); «Ngươi bắt gặp» exempt with reason in jevc; EVCW saved (ser `d.W` / deser: no key clash with ser's v/b4/buoi/ok/S/R/rid/tab/used/P/at); spRk → RANKS.length-1.
+Tests I ran on 055873b9:
+- stat-pace.js A: PASS (45 d, worst 3/cap 3, 0 over, mean 1.38).
+- stat-pace.js B: PASS (47 d, worst 2/cap 2, 0 over).
+- one-core-guard: PASS.
+- ag-carry 26/26, cold-faction 20, receiver-choice, visitor-scene, kyngo-unit: PASS.
+- ag-sell 19/19 on the branch and on LIVE.
+The tests that switch pace/cap off (ag-sell, night-multi, ag-all §5, cold-faction, receiver-choice, visitor-scene) do it scoped, with the reason written in the file. OK.
+Laws 1/4/5/7/9/11/16: OK. No player-visible change since #2, so #2's videos stand. Sếp's A/B pick stays open; preset A is the default, B = the one-line switch BAL.stpPick.
