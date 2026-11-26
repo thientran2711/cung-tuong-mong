@@ -3772,3 +3772,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~03:16Z KK36 rolled (depth 8): kit-stage fix 006579ae QC PASS, videos owed → KK37 must be opened by ROOT 152 (FIRST WORKER in TAKEOVER_MAIN_152). NHV-BUILD has the sha.
 - ~03:33Z WAKE (151 past roll line, waiting for ROOT 152). LOAD: main running 1 | B busy (save rv, srvmerit r2) | C frozen | D busy (F10, q-softlock) | moved: none. LIVE 5e013076.
 - ~03:45Z SẾP (in 147 chat, ~01:25Z) 8 items → OD row verbatim; D: demotion/lãnh cung reason+one rank+min days, daily event cap, contest first place ⇒ thị tẩm; E: help/back 0 điểm, dress pick, Ngôn lag/blank buttons, duplication audit REPORT. Told her to write in 151 until 152 opens.
+- ~03:50Z SẾP (147 chat ~03:40Z): one feature = one button (→ E-d report); «out of order» modal-queue bug family → E-e; robot sweep → ROLE B #7.
