@@ -4,24 +4,27 @@
    spG(k, holder, now, rise, rank) → the rise really added: size band (one change never passes the «big» band), diminishing returns near the
    rank ceiling, the ceiling itself. Integer result; the fraction carries over in holder.spc[key] (saved with the person), so many small rises
    still add up the same way for everyone. A fall of Danh / Đức / Sủng / oán is returned unchanged; thiện cảm (th, hh, rel: −100..100) is paced on BOTH sides of 0 (dislike growing below 0 the same way as liking above it; a fall back toward 0 is not). No player-visible text, no random draw (co-op safe). */
-const SP_K=Object.fromEntries(["sung","danh","duc","th","hh","rel","oan"].map(k=>[k,true]));/* the five paced stats (flags, not numbers) */
+const SP_K=Object.fromEntries(["sung","danh","duc","th","hh","rel","oan","sac","tai","tamco"].map(k=>[k,true]));/* the paced stats (flags, not numbers); sac / tai / tamco: PACE-SPEED, BAL.stp.abs */
 function spRk(p){try{return p===S?(S.rank|0):(p&&p.queen?RANKS.length-1:(p&&p.rank|0)||0)}catch(e){return 0}}
 /* PACE-SPEED (owner OD 26/11 ~19:10Z (A) «điểm của mình ở ngay đó thôi … không vút lên cao quá nhiều so với điểm chuẩn»): a stat tied to the rank
    bars (BAL.stp.bar: Sủng → RANKS.s, Danh → RANKS.d) has its OWN ceiling = the NEXT rank's bar + BAL.stp.bar[k].m (a small margin); at the top
    rank BAL.stp.bar[k].top. Every other stat keeps the shared rank list BAL.stp.ceil. */
 function spBar(k){const T=BAL.stp.bar;return T&&k&&T[k]||null}
-function spCeil(rk,k){rk=Math.max(0,rk|0);const b=spBar(k);if(b&&typeof RANKS==="object"){const n=Math.min(RANKS.length-1,rk+1);return rk>=RANKS.length-1?b.top:Math.min(b.top,RANKS[n][b.f]+b.m)}
+/* PACE-SPEED (sếp FINAL 26/11 ~23:24Z via MAIN 164): Sắc / Tài / Tâm cơ = her own qualities, no rank link and no hard ceiling: they take the same slowdown
+   with their OWN curve BAL.stp.abs[k] {pow, min} against 100 (every rise × max(min, 1 − (now/100)^pow), band cap per change); nothing is ever taken away. */
+function spAbs(k){const A=BAL.stp.abs;return A&&k&&A[k]||null}
+function spCeil(rk,k){rk=Math.max(0,rk|0);if(spAbs(k))return 100;const b=spBar(k);if(b&&typeof RANKS==="object"){const n=Math.min(RANKS.length-1,rk+1);return rk>=RANKS.length-1?b.top:Math.min(b.top,RANKS[n][b.f]+b.m)}
  const C=BAL.stp.ceil;return C[Math.min(C.length-1,rk)]}
 /* the hard stop of a rise = the rank ceiling, but never below BAL.stp.floor[k] (the highest stat gate the game asks at any rank, BIG review 1:
    above the rank ceiling a rise still counts at the slow share dm.min, so every gate stays reachable at every rank; law 16) */
 /* a bar-tied stat (BAL.stp.bar) stops at its ceiling + bar[k].x (above the ceiling only the slow share dm.min counts; owner (A): no overshoot far above it) */
-function spTop(k,rk){const b=spBar(k);if(b)return Math.min(b.top,spCeil(rk,k)+(b.x||0));const f=BAL.stp.floor;return Math.max(spCeil(rk,k),f&&f[k]||0)}
+function spTop(k,rk){if(spAbs(k))return 100;const b=spBar(k);if(b)return Math.min(b.top,spCeil(rk,k)+(b.x||0));const f=BAL.stp.floor;return Math.max(spCeil(rk,k),f&&f[k]||0)}
 const SP_SIGN=Object.fromEntries(["th","hh","rel"].map(k=>[k,true]));/* thiện cảm runs −100..100: dislike growing (below 0) is paced the same way as liking; a fall back toward 0 is not */
 function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||SP_OFF||!n||!SP_K[k])return n;
  if(n<0){if(!SP_SIGN[k])return n;const c=+now||0,z=Math.min(-n,Math.max(0,c)),rest=-n-z;return -(z+(rest>0?spG(k,h,Math.max(0,-Math.min(0,c)),rest,rk,(ck||k)+"-",peek):0))}
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
  const ce=spCeil(rk,k),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
- let g=n*Math.max(B.dm.min,1-Math.pow(c0/ce,B.dm.pow));
+ const ab=spAbs(k),pw=ab?ab.pow:B.dm.pow,mn=ab?ab.min:B.dm.min;let g=n*Math.max(mn,1-Math.pow(c0/ce,pw));
  const cc=h&&typeof h==="object"?(h.spc||(h.spc={})):null,key=ck||k;
  if(cc){g+=+cc[key]||0;const gi=Math.round(g);if(!peek)cc[key]=Math.round((g-gi)*1000)/1000;g=gi}else g=Math.round(g);
  return Math.max(0,Math.min(g,Math.ceil(top-c0)))}
@@ -43,23 +46,3 @@ function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M
    the rule is off, so a new life starts exactly as on LIVE; every rise after that is paced */
 var SP_OFF=0;
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){SP_OFF++;try{return s0.apply(this,arguments)}finally{SP_OFF--}}})();
-
-/* PACE-SPEED · PROPORTIONAL MONTHLY RESCALE (owner 26/11 ~23:00Z row, overwritten in place, via MAIN 164): once a month, for each of Danh / Đức / Sủng
-   (BAL.stp.scale.keys) and each RANK GROUP (the consorts holding the same rank, her included): if the group's highest value is above T, EVERY value in the group is multiplied by
-   f = T / highest — the order and the ratios stay (80 : 30 stays 8 : 3); else nothing. T = spScaleT: BAL.stp.ceil[rank] × BAL.stp.scale.t, never under the NEXT rank's bar for Sủng / Danh (the leader can still be promoted) nor under BAL.stp.floor for Đức. Sắc / Tài / Tâm cơ (BAL.stp.scale.pal) the same way over the WHOLE palace with T = BAL.stp.scale.tq (no hard
-   ceiling for them; the leader stays first). Lãnh cung, the dead and servants are left out. Co-op: NPC values change
-   on the host only (world people, jmort rule); her own on her side. One line in the month's news and her Sổ ghi when her own values change. */
-function spScaleT(k,r){const B=BAL.stp,C=B.ceil;r=Math.max(0,r|0);
- let T=C[Math.min(C.length-1,r)]*B.scale.t;const f={sung:"s",danh:"d"}[k];
- if(f&&typeof RANKS==="object"&&r<RANKS.length-1)T=Math.max(T,RANKS[r+1][f]);if(!f&&B.floor&&B.floor[k])T=Math.max(T,B.floor[k]);return T}
-function spScaleMonth(){const B=BAL.stp&&BAL.stp.scale;if(!B||!B.on||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return"";
- const host=!(window.COOPW&&COOPW.on)||COOPW.seat==="a";const L=consorts().filter(p=>p&&!p.out&&p.alive!==false);
- const G={};for(const p of L){const r=p===S?(S.rank|0):rkOf(p);(G[r]=G[r]||[]).push(p)}
- const mine=[],palm=[];
- const run=(P,k,T,out)=>{const hi=Math.max(...P.map(p=>+p[k]||0));if(!(hi>T))return;const f=T/hi;
-  for(const p of P){if(p!==S&&!host)continue;const now=+p[k]||0,nv=Math.round(now*f);if(nv===now)continue;p[k]=nv;if(typeof statSet==="function")statSet(p,k,p[k]);if(p===S)out.push([k,nv-now])}};
- for(const r in G)for(const k of B.keys)run(G[r],k,spScaleT(k,+r),mine);
- for(const k of (B.pal||[]))run(L,k,B.tq,palm);
- if(!mine.length&&!palm.length)return"";const N={sung:"Sủng",danh:"Danh",duc:"Đức",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ"},W=a=>a.map(([k,n])=>`${N[k]||k} ${n>0?"+":"−"}${Math.abs(n)}`).join(", ");
- const t=[mine.length?`Lục cung xếp lại thứ bậc trong hàng ${RANKS[S.rank|0].n}: ${W(mine)}.`:"",palm.length?`Cả hậu cung so tài sắc, ngươi được xếp lại: ${W(palm)}.`:""].filter(Boolean).join(" ");log(t);return t+" "}
-(function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{ev+=spScaleMonth()}catch(e){console.error(e)}return ev}})();
