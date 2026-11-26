@@ -41,3 +41,6 @@ Remaining for the successor (open as a worker with START_CORE + START_WORKER + b
 2. speed-k2 (seed 2242959839, life id R2-cnv_chu-speed-k2-2242959839): still running tracked in R2 (`/home/user/wt/r2-k2.sh`, resumes from its ckpt; exit 3 = RT_HANGKILL 3500 MB, just relaunch). When it ends, add its row/end to the table above.
 3. VOID runs in `rerun-cnv-cnv_chu/VOID/` are evidence only, never count.
 Rates must come from the 13 valid lives only.
+
+### SHOTS ON CDN (R2, 26/11)
+Every shot a moments file names + `end` + `now` + noeffect/stuck/dead shots of the 14 lives, converted to webp q70 (name `.png` → `.webp`): `https://ctm-img.victoria-tntt.workers.dev/img/_review/rerun-cnv_chu/<life>/<name>.webp` (3811 files, 238 MB). `<life>` = `R2-cnv_chu-<persona>-k<n>-<seed>`, `<name>` as in the moments file (shots-<life>/m-new-1-1.png → `<life>/m-new-1-1.webp`). speed-k2 was uploaded mid-life (re-run `python3 dev/site/cdn_sync.py img/_review/rerun-cnv_chu` after it ends if shots are needed). Wipe with the verdict: `python3 dev/site/cdn_sync.py --wipe-review rerun-cnv_chu`.
