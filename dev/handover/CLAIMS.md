@@ -467,4 +467,4 @@ OB-M3UI 4 robot UI faults (legend soft-lock, lightbox no exit, Chuyển kiếp n
 | QC-NOISE-HYGIENE (A) player-noise budget table + QC gate, (D) text-hygiene permanent test (MAIN 154 order 07:10Z; opus) | review/qc-noise-hygiene; reports/qc-noise-hygiene.md | FOREMAN F #19 session_01UV1Szj6zqfxsosxSjiCp8k | session_01UV1Szjdc6ChaY51kuwNyt3 | RUNNING | 26/11 08:33Z |
 RV OB-OAN SMALL | reports/ob-oan.md ## REVIEW | session_01V1ZZH1HXNdkkuwpkaRgYjM | RUNNING | 26/11 08:37Z (MAIN 155)
 RV HW-NITS SMALL kit | reports/home-way.md ## REVIEW | session_01V1ZZGzQx5NMH95A8nTD4wd | RUNNING | 26/11 08:25Z (MAIN 155)
-| FIXER inv-stack S.inv unstacked entries (ORDER MAIN 154 07:50Z; opus; briefs/b-inv-stack.md) | review/inv-stack; reports/inv-stack.md | B ROOT 2 child 2 | (opening) | RUNNING | 26/11 08:50Z |
+| FIXER inv-stack S.inv unstacked entries (ORDER MAIN 154 07:50Z; opus; briefs/b-inv-stack.md) | review/inv-stack; reports/inv-stack.md | B ROOT 2 child 2 | session_01N1tNP2EMfAg5NhMGDBov8v | RUNNING | 26/11 08:50Z |
