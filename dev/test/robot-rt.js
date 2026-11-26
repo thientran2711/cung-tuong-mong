@@ -613,7 +613,7 @@ async function pinUrl(b, t) {
 async function buildGate(p, where) {
   const bi = await p.evaluate(() => { try { return window.CTM_BI ? { s: window.CTM_BI.s, b: window.CTM_BI.b, t: window.CTM_BI.t } : null } catch (e) { return null } }).catch(() => null);
   (R.harness.builds = R.harness.builds || []); if (bi && !R.harness.builds.some(x => x.b === bi.b)) R.harness.builds.push({ s: bi.s, b: bi.b, where });
-  if (!bi) return true;
+  if (!bi) { R.harness.buildUnknown = (R.harness.buildUnknown || 0) + 1; if (R.harness.buildUnknown === 1) bug('harness', 'build gate: no window.CTM_BI on the page at ' + where + ' (' + URL0 + ') — the build of this load is unknown'); return true } /* BIG #9 note: never silent */
   if (!R.harness.build0) { R.harness.build0 = { s: bi.s, b: bi.b, t: bi.t, at: new Date().toISOString() }; return true }
   if (bi.b === R.harness.build0.b && (!bi.t || !R.harness.build0.t || bi.t === R.harness.build0.t)) return true; /* b AND t (F #20: a worktree build can stamp the same s for another build) */
   R.harness.buildMismatch = { want: R.harness.build0, got: bi, where, at: new Date().toISOString() };

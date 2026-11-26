@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# rt-serve-build.sh <sha> <port> [dir]  |  rt-serve-build.sh --b <CTM_BI.b> [--t <CTM_BI.t>] <port> [dir] — serve the BUILT game of one main commit (the «s» of window.CTM_BI, without «+») on 127.0.0.1:<port>,
+# rt-serve-build.sh --b <CTM_BI.b> [--t <CTM_BI.t>] <port> [dir]   (USE THIS: the exact build id of the life)
+#   or rt-serve-build.sh <main commit sha> <port> [dir]  — NOT CTM_BI.s: «s» is the PARENT the build was made on (a page of 3af7896e says s 6b5d3d05+), so «sha = s» serves the wrong build.
 # so a robot-rt life is resumed on the SAME build it started on (robot-rt.js BUILD PIN; F #20 10:47Z s7 mixed-build life).
 # Sparse worktree of the site files only (root index.html / sw.js / assets.json / manifest + coop/), fetched --depth under the shared fetch lock.
 set -euo pipefail
@@ -7,7 +8,7 @@ REPO="$(git rev-parse --show-toplevel)"
 if [ "${1:-}" = "--b" ]; then # --b <build id> <port>: the main commit whose built index.html carries "b":"<build id>" (window.CTM_BI.b — the exact build of the life)
   BID="${2:?build id}"; shift 2; BT=""; if [ "${1:-}" = "--t" ]; then BT="${2:?build time}"; shift 2; fi
   ( flock /home/user/wt/fetch.lock git -C "$REPO" fetch -q --depth=60 origin main ) || true
-  SHA=""; for c in $(git -C "$REPO" log --format=%h FETCH_HEAD -- index.html); do # newest first: the main commit whose built index.html has this b (and this t)
+  SHA=""; for c in $(git -C "$REPO" rev-list --first-parent -n 60 FETCH_HEAD); do # newest first along FIRST-PARENT main, by index.html CONTENT (STACK LAND merges rebuild the site: a path log skips them — BIG #9 FAIL cbeb334b)
     h="$(git -C "$REPO" show "$c:index.html" 2>/dev/null | grep -o 'window.CTM_BI={"s":"[^"]*","t":"[^"]*"' | head -1 || true)"; f="$(git -C "$REPO" show "$c:index.html" 2>/dev/null | grep -c "\"b\":\"$BID\"" || true)"
     if [ "${f:-0}" -gt 0 ]; then if [ -z "$BT" ] || [ "${h#*\"t\":\"$BT\"}" != "$h" ]; then SHA="$c"; break; fi; fi
   done

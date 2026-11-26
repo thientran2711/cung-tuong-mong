@@ -387,3 +387,8 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   (#rtoast) in 6 s; iPad s42 / Fold s41 later day → every confirm disabled («TỐN 2 khắc», no time left) → dead-end logged + ✕ in 18–24 s (was 15 min / 30 taps).
 - BIG #9 N4: the off-middle .kscn rule skips a scene at opacity < .1 or .kscn-out (fading).
 - Regression (LIVE 6b5d3d05, pinned :8907): RT_TEST_BOARD=vu Fold raw 10; RT_TEST_EXAM=1 iPad [5,5]; Fold speed → buổi 46, iPad cnv → buổi 26, 0 DEAD.
+- BIG #9 FAIL cbeb334b (rt-serve-build --b missed merge-built STACK LAND builds: a path log skips merges): the search now walks FIRST-PARENT main (rev-list
+  --first-parent -n 60) by index.html CONTENT (b, and t when given); help fixed — use --b; CTM_BI.s is the PARENT the build was made on, never the sha to serve.
+  Re-proof on merge-built LIVE 3af7896e (b7dcbbd06e03): new life MB pinned → build-3af7896e… served :8745, buổi 16; pin server killed (container restart) + resume given
+  the OLD url :8810 (dd1ce3d0ffa1) → re-served, buổi 17, builds = 1, no mismatch. A load without window.CTM_BI is now a [harness] note (buildUnknown), not silent.
+  robot-audit (handover): builds > 1 / buildMismatch = its OWN verdict «MIXED-BUILD», counted apart (COUNTS … · MIXED-BUILD n), not plain INVALID (F #21, F ops 10:55Z).
