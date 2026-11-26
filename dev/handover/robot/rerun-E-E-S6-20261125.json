@@ -13918,5 +13918,149 @@
   "row": "R6·cautious·1:764262748 (rerun on LIVE github.io, fold)",
   "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; one buổi, no resume",
   "audit": "INVALID by Foreman E ruling (26/11 ~08:55Z): the Lễ ra mắt trial was never played («Gợi ý» ×4 → «Quay lại» → 0 điểm → ban hoa = owner bug E-a, LIVE until mghelp-dress-r6 lands). NOT COUNTED; rerun this seed after that fix is LIVE."
+ },
+ {
+  "job": {
+   "id": "R6-lover-1",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 1317970579,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "bf6dd041+",
+    "b": "0281bf7bcef6",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 57,
+   "dlgScroll": 2,
+   "scrolls": 6,
+   "taps": 13
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 18,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    "#klife «Vào cung ngay»",
+    "#kroul «Tiếp»",
+    "#kroul «Bỏ qua»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 18»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 815,481",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 89,
+  "status": [],
+  "t": {
+   "total": 56640
+  },
+  "unit": "E-S6",
+  "row": "R6·lover·1:1317970579 (rerun on LIVE github.io, ipad)",
+  "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; ipad; no resume",
+  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after picking «Cúi đầu chờ xét» (no exam) at «Lễ ra mắt», real taps, github.io) — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-lover-3",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2308033329,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "bf6dd041+",
+    "b": "0281bf7bcef6",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 56,
+   "dlgScroll": 4,
+   "scrolls": 8,
+   "taps": 38
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 20,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 313,259",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Quay lại»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 197,
+  "status": [],
+  "t": {
+   "total": 109911
+  },
+  "unit": "E-S6",
+  "row": "R6·lover·3:2308033329 (rerun on LIVE github.io, ipad)",
+  "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; ipad; no resume",
+  "audit": "INVALID by the Foreman E ruling (trial never played: «Dâng Kỳ» → «Sẵn sàng» → «Gợi ý» ×4 → «Quay lại», owner bug E-a); NOT COUNTED; seed parked until mghelp-dress-r6 is LIVE"
  }
 ]

@@ -1,0 +1,2 @@
+# R6-lover-3 (iPad, bot=sens, seed 2308033329, pf/pt_tang) — NOT COUNTED (INVALID by ruling)
+«Bị ban hoa, xuất cung», age 20, year 1, buổi 1, 38 taps. Last taps: «Lễ ra mắt» → «Dâng Kỳ» (Rất vững) → #kg82 «Sẵn sàng» → «Gợi ý» ×4 → «Quay lại», no board taps: the trial was never played → INVALID under Foreman E's ruling of 26/11 ~08:55Z (owner bug E-a: «Gợi ý → Quay lại → 0 điểm → ban hoa», LIVE until mghelp-dress-r6 lands). Seed 2308033329 (ipad) parked for a rerun after that fix. github.io GAME BUILD 0281bf7bcef6, harness d2e03d80.
