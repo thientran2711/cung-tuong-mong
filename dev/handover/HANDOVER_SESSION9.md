@@ -361,3 +361,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:29Z RV-163 PASS kit-veil-buoi 5b4f8c56 (on LIVE) → LC25; tell sếp one line when LIVE (lighter veils, her 20:05Z ask). G4 empty Tốn/Được cell fails on plain LIVE too → pre-existing, KK45 kit-g4-r3 owns; not a land blocker for others.
 - ~21:30Z 163 relay: owner ~21:45Z max 7 cards/event, cut at source, NO paging → KIT-STAGE-R5 (scan+trims, by 163) + KK45 told (kitHand §101.11 removed).
 - ~21:30Z KK45 rolled (kit-g4-r3 24ba7015 → RV-163B by 163) → archived; opened KK46 session_01Rc5AsJWaXnsnQJdFazBWmx (opus): kitResFold first + 7-card no-paging, dress-fix kit confirm, kitHand.mount, double-tap/ghost, person panel B.
+- ~21:31Z LC25: B 504d2e6a gates PASS, QC running → READY next. lc25-wg 539603bf + lc25-wf 814bd77d hand-resolved code conflicts → MAIN: narrow conflict-hunk re-check by RV-163 (self-merge rule: conflict → reviewer), then land after SP.
