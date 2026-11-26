@@ -44,7 +44,8 @@ function choose67(k,ids){const r=hist67()[k]||[];const w=ids.map(id=>{const i=r.
 /* ---------- actors ---------- */
 function rvOk67(v){return !!(v&&v.alive&&!v.out)}
 function rv67(A,k){const v=A.act&&A.act[k]!=null?RV(A.act[k]):null;return rvOk67(v)?v:null}
-function castRv67(A,k,f){const used=Object.values(A.act||{});const L=liveRivals(false).filter(v=>!used.includes(v.id)&&(!f||f(v)));if(!L.length)return false;A.act[k]=pk67(L).id;return true}
+/* the co-op friend (rival entry v.coop, jcoopworld) is a real player: never cast as a scripted role of a story (OD:L94 no AI stand-in; thin-p8 r1) */
+function castRv67(A,k,f){const used=Object.values(A.act||{});const L=liveRivals(false).filter(v=>!v.coop&&!used.includes(v.id)&&(!f||f(v)));if(!L.length)return false;A.act[k]=pk67(L).id;return true}
 function son67(){return mySons().slice().sort((a,b)=>(b.fond||0)-(a.fond||0))[0]||null}
 function dau67(){return myDaus()[0]||null}
 function man67(A){try{menInit()}catch(e){}const L=(S.men||[]).filter(m=>m.alive&&(m.age||0)>=BAL.ageMin);let m=L.find(x=>x.id===A.act.m);if(!m&&L.length){m=pk67(L);A.act.m=m.id}return m||null}
@@ -1589,11 +1590,12 @@ ARC67.s_ban=arcFx("s_ban",{o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:
   lose:{tag:"Liên minh đổ vỡ",t:"Liên minh đổ vỡ, cả hai cùng bị phạt. {v2} đắc ý.",go:(A,_ok,G)=>e67foe(rv67(A,"v2"),G[0])}}});
 /* balance (measured): story choices must not wear her health down; Sức costs/losses of story options are halved.
    jreg: every hand-typed arc, also those of modules after j67 (jorigins bd_*, jst14 st_*, j96…). Road chapters (o:"rd", jroad rdDef) are
-   NOT halved: their numbers are read from BAL.road (jbalroad, one core) and already set at their final value. */
+   NOT halved: their numbers are read from BAL.road (jbalroad, one core) and already set at their final value; nor the composed premises of
+   jroadc (a.rdc: steps × BAL.road.c, laws 2/3/4). */
 (function(){const H=new WeakSet();/* each option / ending object is halved once, even when two arcs share it */
  const h=o=>{if(!o||H.has(o))return;H.add(o);for(const k of ["c","l"])if(o[k]){if(o[k].suc<0)o[k].suc=Math.min(-1,Math.round(o[k].suc/2));if(o[k].hh<0)o[k].hh=Math.min(-1,Math.round(o[k].hh/2))}};
  const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);
- regEach(ARC67,(id,a)=>{if(!a||a.o==="rd"||H.has(a))return;H.add(a);Object.values(a.E||{}).forEach(E=>{if(!E||H.has(E))return;H.add(E);if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)});Object.values(a.B||{}).forEach(walk)},"ARC67 halve")})();
+ regEach(ARC67,(id,a)=>{if(!a||a.o==="rd"||a.rdc||H.has(a))return;H.add(a);Object.values(a.E||{}).forEach(E=>{if(!E||H.has(E))return;H.add(E);if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)});Object.values(a.B||{}).forEach(walk)},"ARC67 halve")})();
 
 /* one-line objective of the main quest on the Hành sự tab */
 (function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch&&!window.kitStageRail){/* owner 16/11: the goal lives in the stage rail icon (§77), no strip here */const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();

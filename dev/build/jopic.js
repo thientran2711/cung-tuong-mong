@@ -291,6 +291,9 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  const dupOf=c=>{const x=c.cloneNode(true);x.classList.add("kdup");return x};
  const R=k=>[...kb.querySelectorAll(":scope > .kr-"+k)];
  let ton=R("ton")[0],mats=R("mat"),gains=[...R("thanh"),...R("duoc")],gain=gains[0];
+ /* tinbao-words (owner OD 25/11 ~23:36Z, Tin báo «Xem tin» card read «TỐN không / ĐƯỢC không»): a FREE CHOICE card — no cost, no gain, no loss, no
+    hint row and no odds of its own (only notes such as «kèm: trả lời trước …», which stay behind «!») — shows NO grey «không» rows (.kfree) */
+ const free=!ton&&!mats.length&&!gains.length&&!R("bai").length&&!R("hint").some(r=>!/^(không|chưa rõ|không được mất gì)?\.?$/i.test((r.querySelector(".krv")||r).textContent.trim()))&&!b.querySelector(".kat .kodds:not([data-ksure])");
  /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; the «Nắm chắc» meter kitOptOdds adds is data-ksure) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
  const sure=!b.querySelector(".kat .kodds:not([data-ksure])");if(sure)mats=mats.concat(R("bai"));
@@ -308,8 +311,10 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||(sure&&r.classList.contains("kr-bai"))||gains.includes(r)))extra=true});
  /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
  {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}gain.classList.toggle("kwinrow",!sure&&gain.classList.contains("kr-thanh"))/* K-WIN-PAY (KIT_REQUESTS 21/11 econ-tamco F1): on a rolled card the Được slot IS the Thành row, so a red item there (a price paid only when it works, §88 THÀNH Mất) reads «… khi thành» */;kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
+ if(free){ton.remove();gain.remove();if(!b.classList.contains("kfree"))b.classList.add("kfree")}else if(b.classList.contains("kfree"))b.classList.remove("kfree");
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
+ /* KIT §6.6 GAIN LIST (OB-KIEP): the rows assembled here from copies follow the one list rule */if(typeof kaListFix==="function")[ton,gain,matRow].forEach(r=>r&&kaListFix(r.querySelector(":scope > .krv")));
  b.dataset.kofin="1";b.__kofSig=kitOptSig(b,kb)}catch(e){console.error("kitOptFinal",e)}}
 /* KIT §56.19 (opt-scroll-reset): the signature covers the card's SOURCE rows only, never kitOptFinal's own copies (.kdup chips, .kfill rows, the «!»).
    The rank-name painter (jaudit kitRankNamePaint) titles a bare name inside a copied chip one frame later; with the copies in the signature that edit
@@ -335,12 +340,16 @@ html body #modal#modal .opts[data-kol]>button.kopt>.kabody{align-self:flex-start
 html body #modal#modal .opts[data-kol]>button.kopt .kat{min-height:var(--kat-h,0px);align-content:center;box-sizing:border-box}
 html body #modal#modal .opts[data-kol]>button.kopt{grid-column:auto!important;width:auto;min-width:0;max-width:none;margin:0}`;return c})();
 function kitOptCards(g){return[...g.children].filter(b=>b.matches&&b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.closest(".pc")&&b.getClientRects().length)}
+/* KIT §98.17 (K-BARE-GRID): a bare card (§93.7, title only) has no meter, so kitOdFit1 never sets __kodRoom for it; its title column must still be at least KIT_ODFIT.bare em wide, else the layout (2 columns) does not fit and the picker goes to 1 column (never «one word per line») */
+function kitBareNarrow(b){try{if(!b.classList.contains("kbare"))return false;const k=b.querySelector(".kat");if(!k)return false;const fs=parseFloat(getComputedStyle(k).fontSize)||13;return k.getBoundingClientRect().width/fs<(typeof KIT_ODFIT!=="undefined"?KIT_ODFIT.bare:9)}catch(e){return false}}
 function kitOptCut(b){const R=b.getBoundingClientRect();const bd=b.querySelector(":scope > .kabody")||b;for(const e of bd.querySelectorAll("*")){if(!e.getClientRects().length)continue;const r=e.getBoundingClientRect();if(r.width&&r.right>R.right+1)return true}return false}
 /* KIT §56.19 (opt-scroll-reset): kitOptTier runs again on every kaNorm pass (any node added anywhere in the page: a toast, a timer, the HUD). Its trial layouts
    (2 columns S first) shrink the list for a moment and the browser clamps the scroll owner's scrollTop, so the player's scroll snapped back to the top.
    (1) Nothing changed since the last pick (list width, the cards, their classes, text and heights under the picked tier) → keep the pick, touch nothing.
    (2) A real re-pick keeps the scroll position of the list and its scrolling ancestors. */
 function kitOptTierSig(g,bs){return Math.round(g.clientWidth)+"|"+(g.dataset.kol||"")+(g.dataset.kot||"")+"|"+bs.map(b=>(typeof kfCls==="function"?kfCls(b):b.className)+":"+b.textContent.length+":"+b.offsetHeight)/* layout height: the press scale (.kfdown) is not a size change (button-crawl-fix-4) */.join(",")}
+const KOT_MEMO=new Map(),KOT_MEMO_MAX=200;window.KOT_MEMO=KOT_MEMO;
+function kitOptMemoKey(g,bs){try{return Math.round(g.clientWidth)+"|"+innerWidth+"x"+innerHeight+"|"+(parseFloat(getComputedStyle(document.documentElement).fontSize)||16)+"|"+bs.map(b=>b.className.replace(/\bk(?:od(?:row|w|stk)|apic\w*)\b/g,"").replace(/\s+/g," ").trim()+":"+(b.querySelector(":scope > .kaart")?1:0)+":"+b.textContent).join("¦")}catch(e){return""}}
 function kitOptTier(g){try{if(g.classList.contains("khand"))return;/* KIT §101: a hand of cards (jkhand) lays itself out */const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs)){g.style.setProperty("--k3c",g.dataset.kol);/* kszBtnGridLive3 rewrote --k3c from its own width rule: the picked layout wins (OD 21/11 ~04:00Z #49b, iPad 2 columns) */return g.dataset.kol+g.dataset.kot}
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;
@@ -348,17 +357,24 @@ function kitOptTier(g){try{if(g.classList.contains("khand"))return;/* KIT §101:
  const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>{if(typeof kitOdFit1==="function")kitOdFit1(b)});/* KIT §6.2b-1: the meter stacks by the TITLE ROOM (j79 kitOdFit1), one rule for every card */void g.offsetHeight};
  const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
   const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
- const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]&&!(typeof KIT_ODFIT!=="undefined"&&b.__kodRoom<KIT_ODFIT.min));/* KIT §6.2b-1: a layout that leaves a title less than KIT_ODFIT.min em beside its meter does not fit (2 columns → 1 column) */(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
- const seq=bs.length>=2?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1];for(const q of seq)if(fit(q[0],q[1])){pick=q;break}
- set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
+ const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]&&!(typeof KIT_ODFIT!=="undefined"&&b.__kodRoom<KIT_ODFIT.min)&&!kitBareNarrow(b));/* KIT §6.2b-1: a layout that leaves a title less than KIT_ODFIT.min em beside its meter does not fit (2 columns → 1 column) */(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
+ const seq=bs.length>=2?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1],last=null,settled=false;
+ /* KIT §98.13 (fitfast r2): the pick is a pure function of the list width, the viewport and what the cards SAY (class + text), so a card shape seen before is laid out ONCE: try its remembered tier first (same fit test); it only wins when it fits AND is where the trial loop stopped before (every tier before it in the sequence was rejected for the same inputs) — a miss or a failed check runs the full loop exactly as before */
+ const mk=kitOptMemoKey(g,bs),hit=mk&&KOT_MEMO.get(mk);
+ if(hit){const q=seq.find(x=>x[0]+x[1]===hit);if(q&&fit(q[0],q[1])){pick=q;last=q;settled=true}}
+ if(!settled)for(const q of seq){const ok=fit(q[0],q[1]);last=q;if(ok){pick=q;settled=true;break}}
+ if(mk&&settled){if(KOT_MEMO.size>=KOT_MEMO_MAX)KOT_MEMO.delete(KOT_MEMO.keys().next().value);KOT_MEMO.set(mk,pick.join(""))}
+ /* the layout left by the last trial IS the picked one (set + band done): nothing to lay out again */
+ const again=!(last&&last[0]===pick[0]&&last[1]===pick[1]);
+ if(again)set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
- band(pick[1]);
+ if(again)band(pick[1]);
  /* KIT §6.2c (owner 24/11, MAIN GO): the picture is a SQUARE of the tier (pw = ph), never stretched to the card height (the #49c fill rule is gone) */
  g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function"){kszEvLaw10(dl);if(typeof kszTextFirst3==="function")kszTextFirst3(dl)/* law 10 text first stays after every option re-layout */}}catch(e){}
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
  if(!g.__kotRO&&typeof ResizeObserver==="function"){g.__kotRO=new ResizeObserver(()=>{if(g.__kotBusy||!g.isConnected)return;const T0=KIT_OPT.tiers[g.dataset.kot],c=kitOptCards(g);const bad=c.some(b=>b.getBoundingClientRect().height>T0.h+1||kitOptCut(b));const w=Math.round(g.clientWidth);if(bad||w!==g.__kotW){g.__kotW=w;clearTimeout(g.__kotT);g.__kotT=setTimeout(()=>kitOptTier(g),50)}});g.__kotRO.observe(g);bs.forEach(b=>g.__kotRO.observe(b))}
- g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);if(typeof kitOdRefit==="function")kitOdRefit(bs);/* KIT §6.2b-1: the trial layouts moved every title row; fit the meters on the final one */return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
+ g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);if(again&&typeof kitOdRefit==="function")kitOdRefit(bs);/* KIT §6.2b-1: the trial layouts moved every title row; fit the meters on the final one (when the last trial was the picked layout the meters were just fitted on it: no refit) */return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
 window.kitOptTier=kitOptTier;window.kitOptCards=kitOptCards;
 /* "!" on a card: the full card (every row, lead text) in an overlay; tap anywhere closes; the option is NOT chosen */
 function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
@@ -383,6 +399,8 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 #modal .knbang::after{content:"";position:absolute;inset:-9px}
 #kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
 #kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
+/* tinbao-words (MAIN 147 look): a FREE CHOICE card (.kfree, no rows) has no title rule under its name — nothing sits under it (same as .kback) */
+(function(){const st=document.createElement("style");st.id="kit-opt-free";st.textContent="html body button.ka.kfree .kat{border-bottom:0!important;padding-bottom:0!important;margin-bottom:0!important}html body button.ka.kfree>.kabody>small.kb:empty,html body button.ka.kfree small.kb:empty{display:none!important}";document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:var(--ko-pw,66px)!important;--kah:var(--ko-ph,66px)!important;min-height:var(--ko-h,104px)!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
 ${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:var(--ko-ph,66px)!important;min-height:0!important;aspect-ratio:1/1;align-self:center!important;margin-block:0!important}/* KIT §6.2c: SQUARE picture, one size per tier */
 ${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:24px}/* OD 21/11 ~04:00Z (#49a): the odds word sits ON THE TITLE ROW, never its own row */

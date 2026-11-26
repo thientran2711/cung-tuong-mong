@@ -1,6 +1,6 @@
 /* kit-entry-gate (review/kit-podium-gate, KP07 / K-OI-1, KIT §81.1) — node dev/test/kit-entry-gate.js [dev/index.html] [outdir]
    kitEntryGate({kind,to}) for the 4 kinds: a kmStage scene with the gate (two leaves), the caption «<cap> · Vào <to>», ONE kit button (label by kind) that is the only way to close it
-   (an outside tap only skips to the final frame), scenes queue one at a time, reduced motion = final frame at once (leaves open, button there), the oiGate caller of joi.js finds the part.
+   (an outside tap only skips to the final frame), the scene + leaves are PAINTED (no glow / kit-paper leaves: review/art-slots), scenes queue one at a time, reduced motion = final frame at once (leaves open, button there), the oiGate caller of joi.js finds the part.
    Shots (final frame) of the 4 kinds on Fold 755x1000 and iPad 1180x820 to <outdir> (outside git). */
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
 const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);const OUT=process.argv[3]||'';
@@ -15,7 +15,7 @@ const END={consort:'Vào điện',bride:'Vào điện',maid:'Theo ma ma',corrido
    await p.waitForTimeout(1200);
    for(const kind of Object.keys(END)){
     const r=await p.evaluate(async(kind)=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};try{kmReset()}catch(e){}document.querySelectorAll('.kmov').forEach(e=>e.remove());const dw=document.getElementById('dawn');if(dw){dw.classList.remove('on');dw.hidden=true}document.querySelectorAll('[id^="kroul"],.kroul-ov,#kmrew').forEach(e=>e.remove());
-     window.__eg=0;kitEntryGate({kind,to:'Điện tuyển',origin:'tt'});kitEntryGate({kind,to:'Lần hai'});await sleep(400);
+     window.__eg=0;kitEntryGate({kind,to:'Điện tuyển',origin:'tt'});kitEntryGate({kind,to:'Lần hai'});/* review/art-slots: the stage opens once the PAINTED scene has loaded (never a code-drawn frame) */for(let i=0;i<60&&!document.querySelector('.kmov.km-gate');i++)await sleep(100);await sleep(400);
      const ov=document.querySelector('.kmov.km-gate');o.up=!!ov;o.cap=ov&&ov.querySelector('.kmeg-cap').innerText.replace(/\s+/g,' ');o.leaves=ov?ov.querySelectorAll('.kmeg-d').length:0;o.n=document.querySelectorAll('.kmov.km-gate').length;
      o.btn0=!!(ov&&ov.querySelector('.kmend'));
      /* an outside tap = skip to the final frame, never a close */

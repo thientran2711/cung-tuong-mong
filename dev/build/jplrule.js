@@ -72,7 +72,9 @@ function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="mapt
  if(why){PR.stat.banner=(PR.stat.banner||0)+1;for(const w of strip){const W=esc2(w);
    h=h.replace(new RegExp(`( · )?<em>${W}</em>`,"g"),"").replace(new RegExp(`<span class="mchip[^"]*">${W}</span>`,"g"),"")}
   h=h.replace(/<span class="mmeta">\s*<\/span>/g,"");
-  h=h.replace('<div class="maptools">',`<div class="maptools"><span class="fest" data-plban="1">${why}</span>`)}
+  if(window.kitMapBanner)kitMapBanner.set({id:"plban",line:why,home:hk});/* KIT §103 the one Dư đồ banner (K-MAP-BANNER) carries the reason + the home mark on every map style */
+  else h=h.replace('<div class="maptools">',`<div class="maptools"><span class="fest" data-plban="1">${why}</span>`)}
+ else if(window.kitMapBanner)kitMapBanner.clear("plban");
  /* her home */
  if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
  /* the way home */
@@ -84,7 +86,7 @@ window.plMap=plMap;
 /* the Dư đồ «leather» style hides the top row's text chips (jbook): the one reason also goes through the ONE notice system (kitNotice: top chip +
    «!» box), sticky while the state holds — the chip shows once per buổi on the Dư đồ; dropped when she is free again. (A dedicated map banner part:
    KIT_REQUESTS K-MAP-BANNER.) */
-function plBanTick(){try{if(typeof kitNotice!=="function"||!S||S.dead)return;const why=S.out?"Đang ở lãnh cung":S.confined>0?`Đang cấm túc, còn ${S.confined} tháng: chỉ ở trong cung mình`:"";
+function plBanTick(){try{if(window.kitMapBanner){try{if(typeof kitNoticeDrop==="function")kitNoticeDrop("plban")}catch(e){}return}/* KIT §103: the Dư đồ banner replaces this notice stand-in */if(typeof kitNotice!=="function"||!S||S.dead)return;const why=S.out?"Đang ở lãnh cung":S.confined>0?`Đang cấm túc, còn ${S.confined} tháng: chỉ ở trong cung mình`:"";
  if(!why){try{if(typeof kitNoticeDrop==="function")kitNoticeDrop("plban")}catch(e){}return}
  if(typeof tab==="undefined"||tab!=="go")return;const key=(typeof bkey==="function"?bkey():"")+"|"+why;if(S.plBan===key)return;S.plBan=key;
  kitNotice({id:"plban",kind:"close",line:why,text:`${why}. Mọi nơi khác trên Dư đồ đều không đi được cho đến khi hết hạn.`,sticky:true})}catch(e){console.error("plBan",e)}}
