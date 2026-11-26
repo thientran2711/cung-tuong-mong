@@ -48,10 +48,13 @@ function invFold(p,all){if(!invOn()||!invFoldOk(p)||!Array.isArray(p.inv)||!p.in
  return moved}
 /* bring pieces out of the stack until each kind-and-source has `live` real pieces again (or `want` of one stack: selling ×N) */
 function invUnit(st){const e={};for(const f in st)if(f!=="n"&&f!=="d0")e[f]=st[f];return e}
+/* a piece that comes out of HER stack is not a new piece: the «new in the chest» reveal (j93 kmDiff snapshot, jfx kfSeen) already knows it
+   (inv-stack-rv: before, using one candle of 518 played «kitGain» for the next one coming out) */
+function invSeen(p,e){if(typeof S==="undefined"||p!==S)return;try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMSNAP.inv&&typeof KMS!=="undefined"&&KMS===S)KMSNAP.inv.push(e)}catch(x){}try{if(typeof kfSeen!=="undefined")kfSeen.add(e)}catch(x){}}
 function invTop(p,only,want){if(!p||!Array.isArray(p.invS)||!p.invS.length)return 0;if(!Array.isArray(p.inv))p.inv=[];const C=new Map();
  for(const e of p.inv)if(invCan(e)){const s=invSig(e);C.set(s,(C.get(s)||0)+1)}let out=0;
  for(const st of p.invS.slice()){if(only&&!only(st))continue;const s=invSig(st);let have=C.get(s)||0;const need=want!=null?want:invLive();
-  while(have<need&&st.n>0){p.inv.push(invUnit(st));st.n--;have++;out++}C.set(s,have)}
+  while(have<need&&st.n>0){const u=invUnit(st);p.inv.push(u);invSeen(p,u);st.n--;have++;out++}C.set(s,have)}
  p.invS=p.invS.filter(st=>st.n>0);return out}
 /* count: real pieces + stacked ones matching pred (pred sees an entry or a stack: k, from, giver, …) */
 function invCount(p,pred){if(!p)return 0;let n=0;for(const e of p.inv||[])if(e&&(!pred||pred(e)))n++;for(const st of p.invS||[])if(st&&st.n>0&&(!pred||pred(st)))n+=st.n|0;return n}

@@ -27,7 +27,7 @@ function s7(){const f=file||process.env.CTM_S7;if(f&&fs.existsSync(f))return {sr
    S.il=S.il||{};S.il.box=S.il.box||[];for(let i=0;i<3000;i++)S.il.box.push({e:{k:'alnen0',from:'noivu',d:i%216,iu:id++},at:'nvp',why:'kho',own:rivals[i%5].id,w:i%800,by:''});
    localStorage.setItem(SK(1),JSON.stringify(ser()))});
   /* MUTATE: break the core the checks stand on */
-  if(mut)await p.evaluate(m=>{if(m==='count')window.invMoreOnce=()=>0;if(m==='drop'){const f=window.invFold;window.invFold=function(q,all){const L=(q&&q.inv||[]).slice();const r=f.apply(this,arguments);if(q&&q.invS&&q.invS[0])q.invS[0].n--;return r};invFold=window.invFold}if(m==='nostack'){invMoreOnce=()=>0}},mut);
+  if(mut)await p.evaluate(m=>{if(m==='count')window.invMoreOnce=()=>0;if(m==='drop'){const f=window.invFold;window.invFold=function(q,all){const L=(q&&q.inv||[]).slice();const r=f.apply(this,arguments);if(q&&q.invS&&q.invS[0])q.invS[0].n--;return r};invFold=window.invFold}if(m==='nostack'){invMoreOnce=()=>0}if(m==='seen'){invSeen=()=>{}}},mut);
   const pre=await p.evaluate(()=>{const d=JSON.parse(localStorage.getItem(SK(1)));const T=L=>{const o={};for(const e of L||[])o[e.k]=(o[e.k]||0)+1;return o};
    const R={};for(const v of d.R)R[v.id]=T(v.inv);const B={};for(const x of (d.S.il&&d.S.il.box)||[])B[x.e.k]=(B[x.e.k]||0)+1;return{n:d.S.inv.length,S:T(d.S.inv),R,B,len:localStorage.getItem(SK(1)).length}});
   const t0=Date.now();
@@ -68,6 +68,12 @@ function s7(){const f=file||process.env.CTM_S7;if(f&&fs.existsSync(f))return {sr
    const t0=S.turn;let g=0;while(S.turn===t0&&g++<8){try{endTurn()}catch(e){}while(Q.length)Q.shift()}invFoldAll(true);const n=S.inv.filter(e=>e.k==='tragoi'&&!e.h).length;return{want,have:invTotals(S).tragoi||0,real:n}});
   out.turn=tr.have>=tr.want-1&&tr.real<=3;/* a turn may use one tea (host a guest) */
   if(!mut)ok(out.turn,`${tag} after a turn: tea folded (real ≤ live+1), none lost`,tr);
+  /* (4b) inv-stack-rv: a piece that comes out of her stack after she uses one is NOT a «new piece» (no kitGain / reward reveal; LIVE plays none) */
+  const nv=await p.evaluate(async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));while(Q.length)Q.shift();try{closeModal()}catch(e){}render();await w(250);render();await w(250);
+   const L=[];const keep={};for(const f of ['kitGain','kitReward']){const o=window[f];if(typeof o!=='function')continue;keep[f]=o;const nf=function(){L.push(f);return o.apply(this,arguments)};window[f]=nf;try{eval(f+'=nf')}catch(e){}}
+   const k=Object.entries(invTotals(S)).filter(([k])=>invMore(S,S.inv.find(e=>e.k===k))>0).sort((a,b)=>b[1]-a[1])[0][0];const ix=S.inv.findIndex(e=>e.k===k&&invMore(S,e)>0);S.inv.splice(ix,1);render();await w(400);
+   for(const f in keep){window[f]=keep[f];try{eval(f+'=keep[f]')}catch(e){}}return{k,reveal:L}});
+  out.nonew=nv.reveal.length===0;if(!mut)ok(out.nonew,`${tag} one piece used → the next out of the stack plays no «new piece» reveal`,nv);
   /* (5) save → reload */
   const rl=await p.evaluate(()=>{const T0=invTotals(S);const B0=boxCount();quiet=false;save();const d=loadSlot(SLOT);quiet=true;deser(d);quiet=false;while(Q.length)Q.shift();const T1=invTotals(S);
    const df=[];for(const k of new Set(Object.keys(T0).concat(Object.keys(T1))))if((T0[k]||0)!==(T1[k]||0))df.push(k);return{df,b:[B0,boxCount()],n:S.inv.length,len:localStorage.getItem(SK(SLOT)).length}});
@@ -82,4 +88,5 @@ function s7(){const f=file||process.env.CTM_S7;if(f&&fs.existsSync(f))return {sr
  /* MUTATE: each broken core must be caught */
  const m1=await run(755,1000,'count');ok(!m1.qty,'MUTATE stack count ignored → bag-count check FAILS',m1);
  const m2=await run(755,1000,'drop');ok(!m2.her||!m2.reload,'MUTATE fold drops a piece → totals check FAILS',m2);
+ const m3=await run(755,1000,'seen');ok(!m3.nonew,'MUTATE stack piece not marked seen → «new piece» check FAILS',m3);
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`INV-STACK FAIL ${f}/${res.length}`:`INV-STACK PASS ${res.length}/${res.length}`);process.exit(f?1:0)})();

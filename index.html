@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2673733e+","t":"2026-11-26T09:18Z","c":"coop-freeze-kmrew: scroll cue one rule — a scroller only touches its OWN cue, an observer never re-runs the pass in the same task (THE free…","b":"54e82834d343","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"f6e4cb4e+","t":"2026-11-26T11:58Z","c":"inv-stack: report gates","b":"c45251f6a573","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -98509,10 +98509,13 @@ function invFold(p,all){if(!invOn()||!invFoldOk(p)||!Array.isArray(p.inv)||!p.in
  return moved}
 /* bring pieces out of the stack until each kind-and-source has `live` real pieces again (or `want` of one stack: selling ×N) */
 function invUnit(st){const e={};for(const f in st)if(f!=="n"&&f!=="d0")e[f]=st[f];return e}
+/* a piece that comes out of HER stack is not a new piece: the «new in the chest» reveal (j93 kmDiff snapshot, jfx kfSeen) already knows it
+   (inv-stack-rv: before, using one candle of 518 played «kitGain» for the next one coming out) */
+function invSeen(p,e){if(typeof S==="undefined"||p!==S)return;try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMSNAP.inv&&typeof KMS!=="undefined"&&KMS===S)KMSNAP.inv.push(e)}catch(x){}try{if(typeof kfSeen!=="undefined")kfSeen.add(e)}catch(x){}}
 function invTop(p,only,want){if(!p||!Array.isArray(p.invS)||!p.invS.length)return 0;if(!Array.isArray(p.inv))p.inv=[];const C=new Map();
  for(const e of p.inv)if(invCan(e)){const s=invSig(e);C.set(s,(C.get(s)||0)+1)}let out=0;
  for(const st of p.invS.slice()){if(only&&!only(st))continue;const s=invSig(st);let have=C.get(s)||0;const need=want!=null?want:invLive();
-  while(have<need&&st.n>0){p.inv.push(invUnit(st));st.n--;have++;out++}C.set(s,have)}
+  while(have<need&&st.n>0){const u=invUnit(st);p.inv.push(u);invSeen(p,u);st.n--;have++;out++}C.set(s,have)}
  p.invS=p.invS.filter(st=>st.n>0);return out}
 /* count: real pieces + stacked ones matching pred (pred sees an entry or a stack: k, from, giver, …) */
 function invCount(p,pred){if(!p)return 0;let n=0;for(const e of p.inv||[])if(e&&(!pred||pred(e)))n++;for(const st of p.invS||[])if(st&&st.n>0&&(!pred||pred(st)))n+=st.n|0;return n}
@@ -100536,7 +100539,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="54e82834d343";window.CTM_BUILD=BUILD;
+const BUILD="c45251f6a573";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
