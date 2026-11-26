@@ -78,7 +78,7 @@ function mapzCur(){const Z=window.__mapZone&&mapzById(window.__mapZone);return Z
    return `<${tag} class="mspot${cls}${hide?" mzh":""}"${Z?` data-zn="${Z.id}"`:""}${attr}>`});
   /* a "!" happening on a hidden member shows on its zone tag (KIT 78.x: the player must still see it) */
   if(!cur)h.replace(/<(?:button|div) class="mspot[^"]* mzh" data-zn="([^"]+)"(?:(?!<(?:button|div) class="mspot)[\s\S])*?class="khap"/g,(a,z)=>{hap[z]=1});
-  const zt=cur?"":MAPZ_ZONES.filter(Z=>has[Z.id]).map(Z=>{const b=mapzBox(Z);if(!b)return"";const n=tot[Z.id]||0;const icn=typeof ic==="function"?ic(Z.ic,14).replace('class="ic"','class="ic kplic"'):"";
+  const zt=cur?"":MAPZ_ZONES.filter(Z=>has[Z.id]).map(Z=>{const b=mapzBox(Z);if(!b)return"";const n=tot[Z.id]||0;const icn=typeof ic==="function"?ic(Z.ic,typeof kitPlaceIcPx==="function"?kitPlaceIcPx():14).replace('class="ic"','class="ic kplic"'):"";
     const mm=me[Z.id]&&!S.out&&!S.dead&&typeof kitMeMapMark==="function"?kitMeMapMark():"";const hm=home[Z.id]?"Nhà ta":"";
     /* meta = one short count (KIT §85.10 (0)); her zone: «Nhà ta · N bóng» / where she stands: «Ta + N bóng» (KIT §41.2 words) */
     const cnt=me[Z.id]?(n?`Ta + ${n} bóng`:"Chỉ có ta"):(n?`${n} bóng`:(hm?"":"vắng"));const meta=[hm,cnt].filter(Boolean).join(" · ");
