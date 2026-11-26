@@ -82,7 +82,15 @@ function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(
    target), so a dialog she opens herself is painted ON TOP at once. A card the game posts by itself (no tap, or a tap outside) still waits. */
 const DQ_OWN=".kfoc,#popw,.kfoc-ov,.kfintro";
 function dqTapIn(t){try{return !!(t&&t.nodeType===1&&t.closest&&t.closest(DQ_OWN))}catch(e){return false}}
-try{["pointerdown","click","keydown","touchstart"].forEach(k=>document.addEventListener(k,e=>{try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target}catch(x){}},true))}catch(e){}
+try{["pointerdown","pointerup","click","keydown","touchstart"].forEach(k=>document.addEventListener(k,e=>{try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;
+  /* the queue as it was when her finger came DOWN (the view's cards act on pointerup, before the click event) */
+  if(k==="pointerdown"||k==="touchstart"||k==="keydown")DQ.preQ=new Set(Q);
+  /* a dialog her tap QUEUES without painting it (Q.push + render, e.g. «Cài đồ vào rương», «Cùng chơi», «Thách đấu»: the render net armed a
+     painter that then waited on the open view) is hers too: right after her tap inside the person view, a NEW card on top of the queue is
+     painted at once, over the view */
+  if((k==="click"||k==="pointerup"||k==="keydown")&&DQ.tapIn&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(Q.length&&!before.has(Q[0])&&dqQHidden()){DQ.mine=Q[0];DQ.stat.mineTap=(DQ.stat.mineTap||0)+1;showModal();return}
+    /* the act may queue its card a moment later (the view's own act path / a reaction line first): look a few more times (BAL.dayq.mineLook ms) */
+    if(++n<4)setTimeout(look,BAL.dayq.mineLook/3)}catch(x){console.error("dayq mine",x)}};setTimeout(look,0)}}catch(x){}},true))}catch(e){}
 function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;
   if(t&&t.nodeType===1&&(a===document.body||a.contains(t)))return true;
   /* the person view owns its docked card: her tap there (recorded when it landed, still the same event) is inside */
@@ -140,7 +148,7 @@ function dqInstall(){
  /* (b) outermost showModal: nothing painted over the title card / book */
  const sm=showModal;showModal=function(){/* DIALOG-ORDER: the card she opened herself from inside the activity is hers — dqPull never takes it back */
   try{if(dqUiC()&&Q.length&&Q[0]!==DQ.mine){const a=dqActEl();if(a&&dqInside(a))DQ.mine=Q[0]}}catch(e){}
-  if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
+  if(dqUiC()&&Q.length&&!DQ.user&&!(DQ.mine&&Q[0]===DQ.mine)&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}const r=sm.apply(this,arguments);try{if(dqUi()&&!Q.length)setTimeout(dqNextSync,0)}catch(e){}return r};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
