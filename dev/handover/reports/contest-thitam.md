@@ -134,3 +134,38 @@ d. quickcheck on the final sha (bash dev/tools/quickcheck.sh; give it > 20 min, 
 e. Send the re-review to the SAME reviewer session_01D3E3NXwED3bj8Xfp41CezN (ab9e28b0 + this section), then on PASS: «LAND READY
    review/contest-thitam <sha> (FF from LIVE)» + video URLs here, message Foreman D.
 ROLLOVER (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop." "Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker)." LINEAGE: "your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai."
+
+## D3 #2 (session_01D3E3NZf6R8fMhpgSkgZZZG, depth 3, START_CTX ~3 %) — finish after the rv re-check
+PRIORITY #1 CHECK: OD 26/11 D3 row | main LIVE 3af7896e (merged) | review/contest-thitam (this), review/contest-thitam-rv 5726f49a | claims D3 row.
+1. NEW FIX (found while re-recording): the night item was NOT in the «KẾT QUẢ» toast's «Được» row on screen — the toast is painted
+   after resultShow returns, so the old insert found no row (DOM probe: «Được | Sủng +3 | Danh +3»). jctn now tags the toast on the card's
+   300 ms tick (tagToast, data-ctn, re-adds if the toast is repainted). After: «Được | đêm ấy được thị tẩm | Sủng +4 | Danh +3». (32bdeda4)
+2. LIVE 3af7896e (DRESS stack) merged (1485a122): only conflicts = built files + CHANGE line (this branch's line kept; site rebuilt).
+3. Logic `node dev/test/contest-thitam.js` on the merged build: 21/21, prince shot → no night, 0 page errors; card hint starts «đêm ấy được thị tẩm».
+4. Co-op 2 browsers (host Fold 755x1000 / guest iPad 1180x820, LIVE Worker): merged build 27/27 PASS (C1–C4); pre-merge build 27/27 (coopD).
+   «Lễ Phật đản ×2» STALL = PRE-EXISTING, NOT this branch: the same driver on the bare LIVE build (6b5d3d05) stalls the same way at C3/C4
+   (host queue «Lễ Phật đản, Lễ Phật đản», week not merged). Real cause (screens of the stuck seat): the GUEST sat in the jts Hội phối đồ
+   screens of the kg82 frame («Điểm trang: Trước gương đồng» → its result «Đã hiểu», «Phối đồ: Đề …») that the shared bot helper could not
+   leave. dev/test/lib/coop-clear.js step 5 now also taps «Bỏ qua» / «Đã hiểu» of any visible kg82 frame (#kg82 .kg82act) → weeks merge.
+   Side note for the kit owner (not this branch, LIVE too): the «Phối đồ» dressing screen showed its main red button with only «•» as label.
+5. 1-year robot (`node dev/test/contest-thitam-year.js <url> N 36`; robot ends contest mini-games by the contest's own «not played» score,
+   she enters every contest she is invited to; 16 lives each, 36 tuần = 1 year):
+   | build | her nights / year (mean, sd) | her first places | NPC first places | nights kept by the rule: her / NPC |
+   |---|---|---|---|---|
+   | LIVE 6b5d3d05 | 10.2 (sd 6.2) | 2.3 | 5.3 | — |
+   | branch 32bdeda4 | 10.6 (sd 5.0) | 1.9 | 5.1 | 1.9 / 4.4 |
+   Net ≈ +0.4 night / year (inside the noise). Why: two-way (law 1) — she gets ~2 promised nights a year, but NPC first places (~4.4 / year)
+   now also keep those tối for the NPC winner, and on those days her normal tablet chance is gone. FOR SẾP / FOREMAN D: the rule alone does
+   not raise her lật thẻ rate much unless she wins more contests (her own play: mini-game score) — the gain is real for a player who wins.
+6. Real-tap videos (merged build 1485a122, HOST mode, only real taps after the invitation set-up), frames looked at:
+   - Fold 755x1000: https://ctm-img.victoria-tntt.workers.dev/img/_review/contest-thitam/branch-fold-755x1000.webm
+     entry card «Dự thi thơ … ĐƯỢC đêm ấy được thị tẩm, đoạt giải…» (t≈24 s) → KẾT QUẢ «Được: đêm ấy được thị tẩm, Sủng +4, Danh +3»
+     (t≈29–35 s) → Sang buổi → «Kính sự phòng báo tin» (t≈38 s) → … → Chuẩn bị thị tẩm → Đêm thị tẩm; no flip choice; her nights +1.
+   - iPad 1180x820: https://ctm-img.victoria-tntt.workers.dev/img/_review/contest-thitam/branch-ipad-1180x820.webm
+     entry card → KẾT QUẢ with the night (t≈22 s) → Rương bảo vật (his bestow) → «Kính sự phòng báo tin» (t≈32 s) → night.
+   - jts «Tự tay phối đồ» card (Được: «đứng đầu: đêm ấy được thị tẩm, Sủng +4, Danh +3, một món ban thưởng»):
+     https://ctm-img.victoria-tntt.workers.dev/img/_review/contest-thitam/branch-fold-jts-card.png ·
+     https://ctm-img.victoria-tntt.workers.dev/img/_review/contest-thitam/branch-ipad-jts-card.png
+   LIVE videos (unchanged rule on LIVE) stay in the same folder.
+7. quickcheck on 1485a122: running at push time (result follows in the message to the reviewer / Foreman D).
+STATUS D3 #2: READY FOR FINAL RE-REVIEW (same reviewer session_01D3E3NXwED3bj8Xfp41CezN).
