@@ -16,7 +16,11 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
  /* WORDING-GAIN (owner OD 26/11 ~18:50Z (7)): a gain / loss said without its number is the stat NAME + marks «+ / ++ / +++» (loss «− / −− / −−−»); ONE source for the bands (law 4):
     an amount ≤ max(1, ⌊big × lo⌋) = ONE mark, ≥ big × hi = THREE marks, between = TWO. big = the usual size of one change of that stat (group keys of KIT_HINT_MAG, jk2b).
     word = the marks of a size word in a static kit line when it carries no amount: nhẹ (chút / hơn / thêm / bớt) · vừa (khá / nhiều) · nặng (rất / hẳn / lắm). */
- mk:{lo:.25,hi:1.5,big:{hon:10,hoi:40,rel:10,uu:3,sung:5,dan:4,bac:40,suc:10,cc:2},word:{nhe:1,vua:2,nang:3}},
+ /* MARKS (owner OD 26/11 ~21:55Z + ~22:00Z, canon overwrite of «Danh +8»): ONE table for every CHOICE surface (button, plaque, card, flip back, option row, Tốn / Được / Mất cells, hint row).
+    cut = the size of a change relative to its stat's scale: an amount ≤ max(1, ⌊big × lo⌋) = ONE mark, ≥ big × hi = THREE marks, between = TWO; big = the usual size of one change (group keys of KIT_HINT_MAG, jk2b);
+    word = the marks of a size word in a static kit line without an amount. exact = what a choice still prints as its EXACT number (things she spends from a pool, owner: Bạc and Sức; khắc and item counts). Exact numbers
+    live only in the result card + Sổ ghi. One formatter (jk2b markTxt) calls this table. */
+ mark:{cut:{lo:.25,hi:1.5,big:{hon:10,hoi:40,rel:10,uu:3,sung:5,dan:4,bac:40,suc:10,cc:2},word:{nhe:1,vua:2,nang:3}},exact:["Bạc","Sức","khắc"]},
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
   robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
