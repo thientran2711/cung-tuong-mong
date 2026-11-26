@@ -168,6 +168,8 @@ Every quickcheck core-gate FAIL is pre-existing and FAILs the same on LIVE (chec
 - dialog-fixed: «kit-dialog-2 a» empty cell, and the script crashes after the Fold row. The #71 width row varies by which dialog is drawn.
 - crawl: «Ô lưu · Lui».
 - G4 next-dead «B real then Sang buổi» is flaky: LIVE 1dcb373e failed it 1 of 2 runs.
+- perf longTaskMax on 8d5e3382: a phase-tagged probe (long tasks >900 ms labelled newlife/tabs/buổi) shows the max task is the NEW-LIFE setup on BOTH builds (LIVE 2310–2703 ms, fix 2089–2525 ms per run); which life is drawn decides the max. Not an F10 cost; tasks>200 stay 21–25 vs 24–25.
+- LOOK-DEDUPE printed «FAIL 1» once on 8d5e3382 (no FAIL row); re-run on fix + LIVE f573dc94: 16/16 PASS each (flake under load).
 - coop-e2e's «Thái hậu keeps the face» failed 4 rows once under load, then passed 143/143 on re-run. F10 does not touch S.thO.
 
 **Long run** (Fold, solo, bot bold, resumed from the R2 ckpt b654 to slice b1260, RT_LIGHT, renderer MB, one page process per arm):
