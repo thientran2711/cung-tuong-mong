@@ -89,7 +89,7 @@ document.documentElement.dataset.pp=PP_OPT;
 function fix(pc){try{if(!pc.matches(".kpwide[data-k2]"))return;const L=pc.querySelector(":scope > .pcl"),R=pc.querySelector(":scope > .pcr");if(!L||!R)return;
  const pcp=L.querySelector(":scope > .pcp");if(pcp&&(PP_OPT==="a"||PP_OPT==="c"||PP_OPT==="d")){pcp.style.setProperty("margin-bottom","0","important");pcp.style.setProperty("margin-top","0","important")}
  const sc=L.querySelector(":scope > .kplscr");if(sc)sc.style.marginTop="0";
- if(pc.dataset.pp===PP_OPT){compactify(pc);fit(pc);return}pc.dataset.pp=PP_OPT;
+ if(pc.dataset.pp===PP_OPT){compactify(pc);fit(pc);pc.querySelectorAll('.ppt .pct').forEach(x=>x.classList.toggle('on',x.dataset.ppv===pc.dataset.ppv));return}pc.dataset.pp=PP_OPT;
  const nm=(L.querySelector(".pcname")||{}).textContent||"";
  if(PP_OPT==="a"||PP_OPT==="d"){const pcf=R.querySelector(":scope > .kpstick > .pcf");if(pcf&&sc)L.insertBefore(pcf,sc)}
  if(PP_OPT==="b"){buildB(pc,L,R,sc)}
@@ -109,7 +109,7 @@ function compactify(pc){pc.querySelectorAll(".pcb>button.ka").forEach(b=>{if(b.q
 function fit(pc){try{const pcb=pc.querySelector(".pcg.on > .pcb");if(!pcb||PP_OPT==="c")return;pcb.style.removeProperty("--ppch");pcb.querySelectorAll(":scope>button.ka").forEach(e=>e.style.height="");if(pcb.scrollHeight<=pcb.clientHeight+2){pcb.dataset.ppn="all";return}const cs=[...pcb.querySelectorAll(":scope > button.ka")].filter(e=>e.offsetParent);if(!cs.length)return;
  const gap=parseFloat(getComputedStyle(pcb).rowGap)||8;let H=0;cs.forEach(e=>{e.style.height="auto";H=Math.max(H,Math.ceil(e.getBoundingClientRect().height));e.style.height=""});
  const A=pcb.clientHeight;if(A<20)return;const n=Math.max(1,Math.floor((A+gap)/(H+gap)));const h=Math.floor((A-gap*(n-1))/n);pcb.style.setProperty("--ppch",Math.max(h,Math.min(H,A))+"px");pcb.dataset.ppn=n}catch(e){}}
-addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ppv]");if(!b)return;const pc=b.closest(".pc");if(!pc)return;e.stopPropagation();pc.dataset.ppv=b.dataset.ppv;window.__ppTab=b.dataset.ppv;b.parentNode.querySelectorAll(".pct").forEach(x=>x.classList.toggle("on",x===b));requestAnimationFrame(()=>fit(pc))},true);
+addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".ppt .pct[data-ppv]");if(!b)return;const pc=b.closest(".pc");if(!pc)return;e.stopPropagation();pc.dataset.ppv=b.dataset.ppv;window.__ppTab=b.dataset.ppv;b.parentNode.querySelectorAll(".pct").forEach(x=>x.classList.toggle("on",x===b));requestAnimationFrame(()=>fit(pc))},true);
 let busy=0;function run(){if(busy)return;busy=1;setTimeout(()=>{busy=0;document.querySelectorAll(".pc.kpwide[data-k2]").forEach(fix)},80)}
 new MutationObserver(run).observe(document.body,{childList:true,subtree:true});addEventListener("resize",run);setInterval(run,1200);run();
 })();
