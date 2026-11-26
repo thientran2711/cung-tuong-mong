@@ -454,7 +454,7 @@ ACT-MERGE J1 talk side | review/act-merge-J1 | session_01V1ZZH3t16bcosA8e3k56aF 
 ACT-MERGE J2 harm side | review/act-merge-J2 | session_01V1ZZH3CqezByRAUZudKLCM | RUNNING | 26/11 08:15Z (MAIN 155)
 ACT-MERGE J3 Hanh su 16 | review/act-merge-J3 | session_01V1ZZH2JvFTkAQBPLdCwCti | RUNNING | 26/11 08:15Z (MAIN 155)
 ACT-MERGE J4 tabs | review/act-merge-J4 | session_01V1ZZH4KYkh2QzjisNwGsGc | RUNNING | 26/11 08:15Z (MAIN 155)
-ACT-MERGE J5 roads | review/act-merge-J5 | session_01V1ZZH4ik1qjdX1WApZB5aF | RUNNING | 26/11 08:15Z (MAIN 155)
+ACT-MERGE J5 roads | review/act-merge-J5 | session_01V1ZZGznKCu1vEsajbws4nE (J5b; J5 rolled) | RUNNING | 26/11 08:15Z (MAIN 155)
 ACT-MERGE plan worker | review/act-merge 45cc9930 | session_01V1ZZH4kA6w5uudtydsgvjc | DONE 08:01Z, archived | 26/11 (MAIN 155)
 KIT bac-progress (owner UI bug 08:05Z) | review/kit-bac-progress | session_01V1ZZH1KkKyKvFCTKrJjfDi (KK39) | RUNNING | 26/11 08:12Z (MAIN 155)
 BIG RV map-zones r7 abc1c795 | reports/map-zones.md ## REVIEW | session_01V1ZZH1WzF9VpNYw1Q3uuhA | RUNNING | 26/11 08:12Z (MAIN 155)
@@ -465,3 +465,5 @@ OB-M3UI 4 robot UI faults (legend soft-lock, lightbox no exit, Chuyển kiếp n
 | KHO CLEANUP robot dumps off handover (MAIN 154 order 07:15Z; sonnet) | archive/handover-dumps-2611; reports/kho-cleanup-2611.md | FOREMAN D session_01D3E3NaVk7n7f8KTo2enJna | session_01D3E3NZeK35eTheNX9fWWtm | DONE 08:28Z (archive 8b60b9b8) | 26/11 08:28Z |
 | PACE-ALL every progress bar + OÁN cool-down (MAIN 155 orders 08:08Z/08:12Z/08:20Z; opus) | review/pace-all | FOREMAN D session_01D3E3NaVk7n7f8KTo2enJna | session_01D3E3NaoXShUHgnUPftgX5g | RUNNING | 26/11 08:28Z |
 | QC-NOISE-HYGIENE (A) player-noise budget table + QC gate, (D) text-hygiene permanent test (MAIN 154 order 07:10Z; opus) | review/qc-noise-hygiene; reports/qc-noise-hygiene.md | FOREMAN F #19 session_01UV1Szj6zqfxsosxSjiCp8k | session_01UV1Szjdc6ChaY51kuwNyt3 | RUNNING | 26/11 08:33Z |
+RV OB-OAN SMALL | reports/ob-oan.md ## REVIEW | session_01V1ZZH1HXNdkkuwpkaRgYjM | RUNNING | 26/11 08:37Z (MAIN 155)
+RV HW-NITS SMALL kit | reports/home-way.md ## REVIEW | session_01V1ZZGzQx5NMH95A8nTD4wd | RUNNING | 26/11 08:25Z (MAIN 155)
