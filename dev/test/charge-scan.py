@@ -59,18 +59,27 @@ PG_OK={'bị đồng đảng tố giác':'faction sell-out roll, no pieces','vu 
  'giá họa':'false accusation','lật tẩy':'false accusation','tư thông bị phát giác':'Bóc chuyện tư tình: the tư thông charge\'s own table-A road (chOK "tt")','bị cung nữ tố giác, chứng cứ rành rành':'servant life: the maid\'s known secrets (SRVA.accuse.sec), not charge pieces',
  'bị bắt quả tang':'caught in the act (j70 trap)','bị Hoàng hậu xét tội theo chứng cứ':'routed: jcharge punish wrapper (p.chTr) → chPunish (runtime test charge-trinh-punish.js); j78 f is replaced by jaudit T.f',
  'bị tố giác, chứng cứ rành rành':'j8 Tố giác fallback, only when no charge is ready (jcharge A.f)','bị Hoàng hậu xử tội':'j8 judge fallback (callers gate chOK; jcharge judge wrapper)','bị cung nữ tố giác mưu kế':'a bought maid leaks schemes (no pieces)',
- 'lấy trộm đồ':'lost-item hearing, its own bar (loEmpEv)','dâng đồ làm':'a gift made someone ill, not an accusation'}
+ 'lấy trộm đồ':'lost-item hearing, its own bar (loEmpEv)',
+ 'thư tư tình với thị vệ':'j3 story event: the found letter itself is the proof (one roll), no charge pieces','bị vu trộm đồ':'helping a frame (vu): a false accusation','trộn xạ hương':'j7 story event: a maid\'s tip, no pieces',
+ 'cốt nhục hoàng gia':'jroute nghiệm thân: the blood test is the proof','gian lận khi trích huyết':'jroute nghiệm thân: caught cheating the blood test','can dự chuyện triều chính':'jreign: her own court meddling, not an accusation',
+ 'Bị ban rượu độc vì mưu hại':'j8 poison found and traced (caught in the act)','phá việc học':'failed road (the schemer is punished)','ngọc bội ngự dụng':'j8 khám cung: the stolen piece found on her (caught with it)',
+ 'sinh ra yêu vật':'j8 birth rumour scheme, not an accusation','lục lọi cung':'caught in the act (jagacts2 chest search)','hợp mưu tố tội':'j10 faction joint frame (a scheme roll, no pieces): false accusation',
+ 'che giấu nam nhân':'caught in the act (jmen)','tư thông${m':'j95 caught in the act (her own eyes); odds + spend = the pieces of the matching charge (j95c)','chuẩn bị mưu hại':'j95 caught in the act (her own eyes); odds + spend = the pieces of the matching charge (j95c)',
+ 'tâu giáng':'«Xin Hoàng hậu giáng»: a request with a gift, not an accusation','dâng đồ làm':'a gift made someone ill, not an accusation'}
 R['proof_generic']=[];PGL=[]
+# rv F2: statement-wide — the evidence may sit up to WIN chars before the punish (an option's gate / odds / text); routed = chPunish in that window
+WIN=1500;EVRX=re.compile(r'evG\(|evA\(|chứng cứ|chOK\(|chReady\(|chHave\(|\.ev\s*>=|\bev\*')
 for f,src in F.items():
     if f.endswith('jcharge.js'): continue
-    for i,l in enumerate(src.split('\n'),1):
-        if not (re.search(r'\b(punish|demote|fall)\(',l) and re.search(r'evG\(|evA\(|chứng cứ|chOK\(|chReady\(',l)): continue
-        for m in re.finditer(r'\b(punish|demote|fall)\(([^,()]+),\s*([`"][^`"]*[`"])',l):
-            w=m.group(3);site=f'{f.split("/")[-1]}:{i}'
-            if 'chPunish(' in l[:m.start()]: PGL.append((site,w,'routed (chPunish on the same road)'));continue
-            why=next((v for k,v in PG_OK.items() if k in w),None)
-            if why: PGL.append((site,w,why))
-            else: R['proof_generic'].append(site);PGL.append((site,w,'GENERIC'))
+    for m in re.finditer(r'\b(punish|demote|fall|deathSentence)\(([^,()]+),\s*([`"][^`"]*[`"])',src):
+        w0=src[max(0,m.start()-WIN):m.start()]
+        if not EVRX.search(w0+src[m.start():m.end()]): continue
+        if src[max(0,m.start()-9):m.start()].endswith('function '): continue
+        i0=src.count('\n',0,m.start())+1;site=f'{f.split("/")[-1]}:{i0}';w=m.group(3)
+        if 'chPunish(' in src[max(0,m.start()-400):m.start()]: PGL.append((site,w,'routed (chPunish on the same road)'));continue
+        why=next((v for k,v in PG_OK.items() if k in w),None)
+        if why: PGL.append((site,w,why))
+        else: R['proof_generic'].append(site);PGL.append((site,w,'GENERIC'))
 if '-v' in sys.argv:
     for x in PGL: print(' | '.join(x))
 print('family | count | sites');

@@ -36,12 +36,41 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
   const tsb=(a,t,kind)=>{clean(a);clean(t);t.evc={};a.bac=Math.max(a.bac||0,100);if(a===S)S.bac=Math.max(S.bac,100);
    if(kind==="uh"){deedAdd(a,"batnat",t,1,"ép nộp của "+NM2(t));deedAdd(a,"trip",t,1,"ngáng chân");evA(t,a,chNeed(a,"uh"),"uh")}else{deedAdd(a,"vp",null,1,"vượt phẩm");evA(t,a,1,"vp")}
    t.tsbBul={[key(a)]:{n:1,calm:0,stop:0}};aff(t,queenP())<0&&affAdd(t,queenP(),20);oanAdd(t,a,90);
-   const nw=npcWhy;npcWhy=(k,c)=>k==="bulTell"?{}:nw(k,c);cp=[];gp=[];const t0=t===S?S.bac:t.bac;let r;try{r=tsbBulNpc(a,t,"batnat")}finally{npcWhy=nw}return {r:String(r||""),pay:(t===S?S.bac:t.bac)-t0}};
+   const nw=npcWhy;npcWhy=(k,c)=>k==="bulTell"?{}:nw(k,c);cp=[];gp=[];const t0=t===S?S.bac:t.bac;let r;try{r=win(()=>tsbBulNpc(a,t,"batnat"))}finally{npcWhy=nw}return {r:String(r||""),pay:(t===S?S.bac:t.bac)-t0}};
   let x=tsb(v,w,"uh");ok(/trình Hoàng hậu/.test(x.r)&&cp.some(y=>y[0]===v.name&&y[1]==="uh")&&!gp.some(y=>y[0]===v.name)&&x.pay>0,`jtsb NPC bully, ức hiếp pieces: chPunish ${JSON.stringify(cp)}, the bullied one gets ${x.pay} lượng`);
   Q.length=0;x=tsb(S,w,"uh");ok(/trình Hoàng hậu/.test(x.r)&&cp.some(y=>y[0]==="S"&&y[1]==="uh")&&!gp.some(y=>y[0]==="S"),`jtsb SHE is the bully: chPunish ${JSON.stringify(cp)} (her notice by charge)`);
   const nt=Q.map(m=>String(m.h||"")+JSON.stringify(m.sections||m.kit||"")).join(" ").replace(/<[^>]+>/g," ");window.__nt=nt.slice(0,600);ok(/Chứng cứ/.test(nt)&&/ức hiếp/.test(nt)&&/Bồi thường/.test(nt),'her notice: Chứng cứ (tội ức hiếp…) + Bồi thường rows · '+nt.slice(0,400)+' · Q '+Q.length+' confined '+S.confined);
   x=tsb(v,w,"vp");ok(!/trình Hoàng hậu/.test(x.r)&&!cp.length,`jtsb with a piece of ANOTHER charge only: no telling (${x.r.slice(0,60)})`);
+
+  /* rv F1: HER «Báo lên Hoàng hậu / Thái hậu» (PEND.tsbBul) — the mirror of jtsb:100: ức hiếp pieces gate + spend, chPunish, same odds helper */
+  const bul=(pieces)=>{clean(v);S.evc={};deedAdd(v,"batnat",S,1,"ép nộp của ngươi");deedAdd(v,"trip",S,1,"ngáng chân ngươi");if(pieces)evA(S,v,pieces,pieces==="vp"?1:"uh");else S.evc={};
+   S.tsbBul=S.tsbBul||{};S.tsbBul[key(v)]={n:2,calm:0,stop:0};const d=PEND.tsbBul({a:v.id,k:"batnat",ix:-1,n:2});return d&&d.o.find(o=>/^Báo lên/.test(o.n))};
+  let ob=bul(0);ok(ob&&ob.need.some(x=>/ức hiếp/.test(x.t)&&!x.ok),`her «Báo lên» with no ức hiếp pieces: locked (${ob&&ob.need.map(x=>x.t+":"+x.ok).join(" / ")})`);
+  ob=bul(chNeed(v,"uh"));const o1=tsbRepO(S,v),o2=tsbRepO(v,S);ok(ob&&ob.need.every(x=>x.ok!==false||/khắc/.test(x.t))&&/tội ức hiếp/.test(ob.x),`her «Báo lên» with the pieces: open, card «${String(ob&&ob.x).slice(0,140)}»`);
+  ok(typeof o1==="number"&&o1===tsbRepO(S,v),`one odds helper tsbRepO for her (${o1}) and an NPC victim (${o2})`);
+  if(ob){cp=[];gp=[];const h0=chHave(S,v,"uh");win(()=>ob.go());ok(cp.some(x=>x[0]===v.name&&x[1]==="uh")&&!gp.some(x=>x[0]===v.name)&&chHave(S,v,"uh")===0&&h0>0,`her «Báo lên» won: chPunish ${JSON.stringify(cp)}, pieces ${h0} → ${chHave(S,v,"uh")}`)}
+  /* rv F3: the Hậu cung person card (actLineRaw + AOUT) and the evidence card print what the act spends / does — one helper */
+  clean(w);S.evc={};deedAdd(w,"trip",u,1,"ngáng chân");deedAdd(w,"batnat",u,1,"bắt nạt");deedAdd(w,"vp",null,1,"vượt phẩm");evA(S,w,chNeed(w,"uh"),"uh");evA(S,w,1,"vp");J78.cardV=w;
+  for(const k of ["accuse","trinhhh"]){const line=String(actLineRaw(k,"",""));const ea=(evidenceActs(w).find(a=>a.k===k)||{});const want=`Chứng cứ ${balSg(-chHave(S,w,"uh"))} (tội ức hiếp quấy phá)`;
+   ok(line.includes(want)&&String(ea.cost).includes(want)&&!new RegExp("Chứng cứ -"+evG(S,w)+"(?!\\d)").test(line.replace(want,"")),`${k}: person card «${line.replace(/<[^>]+>/g," ").slice(0,90)}» = evidence card «${ea.cost}»`)}
+  const ao=AOUT.accuse;ok(ao&&/cấm túc/.test(ao[0])&&!/phế hoặc giáng/.test(ao[0]),`Tố giác «thành» on the person card: ${ao&&ao[0]}`);J78.cardV=null;
   S.confined=0;return o}));
+
+ out.push(...await p.evaluate(()=>{const o=[];const ok=(c,m)=>o.push([!!c,m]);const L=liveRivals(true).filter(x=>!x.queen&&!x.coop);const [v,w]=L;const win=f=>{const r0=Math.random;Math.random=()=>0;try{return f()}finally{Math.random=r0}};
+  let cp=[];const c0=chPunish;chPunish=function(t,c){cp.push([t===S?"S":t.name,c]);return c0.apply(this,arguments)};
+  /* rv F2 j71 tomuu: mưu hại pieces gate the «Trình chứng cứ» options, the win punishes by chPunish "mh" and spends those pieces */
+  const F=typeof MF7==="object"&&MF7.tomuu||null;
+  v.wrongs=[];S.evc={};deedAdd(v,"poison",w,2,"bỏ độc");evA(S,v,1,"mh");const t0=chHave(S,v,"mh");
+  const one=(typeof evFind==="function"?null:null);o.push([true,`j71 tomuu def found: ${!!F}`]);
+  if(F&&F.o){let O=F.o({A:{o:v},p:{}});ok(!O.some(x=>/Trình/.test(x.n||"")),`tomuu with ${t0}/${chNeed(v,"mh")} mưu hại pieces: no «Trình» option`);
+   evA(S,v,chNeed(v,"mh"),"mh");O=F.o({A:{o:v},p:{}});const tr=O.find(x=>/Trình chứng cứ/.test(x.n||""));ok(!!tr,`tomuu with the pieces: «${tr&&tr.n}»`);
+   if(tr&&tr.go){cp=[];win(()=>tr.go());ok(cp.some(x=>x[0]===v.name&&x[1]==="mh")&&chHave(S,v,"mh")===0,`tomuu win: chPunish ${JSON.stringify(cp)}, pieces left ${chHave(S,v,"mh")}`)}}
+  /* rv F2 j95 caught in the act: odds read the matching charge's pieces (not the total), the win spends only those */
+  v.wrongs=[];S.evc={};deedAdd(v,"vp",null,1,"vượt phẩm");deedAdd(v,"poison",w,2,"bỏ độc");evA(S,v,1,"vp");const a1=j95accO(v,"hh",{kind:"plot"});evA(S,v,1,"mh");const a2=j95accO(v,"hh",{kind:"plot"});
+  ok(a2>a1,`j95 plot: a mưu hại piece moves the odds (${a1} → ${a2}; mh ${chHave(S,v,'mh')} vp ${chHave(S,v,'vp')} tot ${evG(S,v)}), a vượt phẩm piece does not count`);
+  /* vượt phẩm accusation (j8 vpAccuse) = the vp charge's punishment */
+  cp=[];const vi=typeof vpItems==="function"?vpItems(w):[];if(vi.length){win(()=>vpAccuse(S,w));ok(cp.some(x=>x[0]===w.name&&x[1]==="vp"),`Tố vượt phẩm: chPunish ${JSON.stringify(cp)}`)}else o.push([true,'Tố vượt phẩm: no over-rank piece on the sample consort (skipped)']);
+  chPunish=c0;return o}));
  /* co-op seat (host side, seat a): the friend serves as a bought servant in an NPC's staff → marked → toCanon carries it */
  out.push(...await p.evaluate(()=>{const o=[];const ok=(c,m)=>o.push([!!c,m]);const CW=COOPW;const L=liveRivals(true).filter(x=>!x.queen&&!x.coop);const [v,w]=L;
   v.wrongs=[];v.evc={};w.staff=w.staff||[];const fsv={sid:902,coop:true,name:"Bạn Hiền",role:"maid",spyFor:v.id,loyal:60,af:{}};w.staff.push(fsv);

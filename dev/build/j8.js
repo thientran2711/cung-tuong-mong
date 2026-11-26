@@ -179,7 +179,7 @@ function stealNight(a,t,mode){ap(a,stealCost(mode));const o=oSteal(a,mode);
 function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)} theo ${n} chứng cứ. `;evA(q,p,BAL.evWipe);relAdd(q,p,BAL.eff.j8.judge);punish(p,"bị Hoàng hậu xử tội",n>=3?2:1);return r}
 function vpItems(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e.w&&IT[e.k]&&itm(e.k).rk>r);if(p.dress&&p.dress.until>S.turn&&itm(p.dress.k).rk>r)L.push({k:p.dress.k,dress:1});return L}
 function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=>itm(e.k).n).join(", ");
- if(roll(oVP(a))){vpSeize(t)/* charge-followups (a): exactly the listed pieces (WD slots too) */;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",1);relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
+ if(roll(oVP(a))){ap(t,{danh:BAL.eff.j8.danhVpAccuse});chPunish(t,"vp","bị tố vượt phẩm",a)/* STEP 4 rv F2 family: ONE vượt phẩm punishment = the vp charge (chPunish: the listed pieces seized through vpSeize + phạt bổng), was vpSeize + a generic cấm túc */;relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
  ap(a,{danh:BAL.eff.j8.vpFailDanh});relAdd(a,t,BAL.eff.j8.vpAccuse_2);return `${NMc(a)} tố ${NM(t)} vượt phẩm, ${judgeName(t)} bỏ qua. `}
 
 /* ================= ITEMS ================= */

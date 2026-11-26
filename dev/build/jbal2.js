@@ -1445,7 +1445,7 @@ Object.assign(BAL,{odb:{
  j68g:{odP:30,odP_2:40,odP_3:40,odP_4:55,odP_5:40,odP_6:35,odP_7:40,odP_8:50,odP_9:55,odP_10:35,odP_11:30},
  j68h:{odP:40,odP_2:50,odP_3:35,odP_4:40,odP_5:40},
  j7:{odO:35,odX:50,odO_2:40,odO_3:40,odX_2:45,odO_4:50,odO_5:40,odO_6:40,odO_7:30,odO_8:40,odO_9:35,odO_10:35,odO_11:35,odO_12:35,odO_13:30,odO_14:30,odO_15:45,odO_16:40},
- j71:{odP:35,odP2:30,odP_2:30,odP_3:30,odP_4:40,odP_5:55,odP_6:40,odP_7:70,odP_8:25,odP_9:20,odP_10:20,odP_11:50,odP_12:30,odP_13:30,odP_14:40,odP_15:25,odP_16:30},
+ j71:{evPer:12,evDanhD:5,evThD:3/* tomuu «Trình chứng cứ»: + evPer × the mưu hại pieces (was typed ev*12 on the total) */,odP:35,odP2:30,odP_2:30,odP_3:30,odP_4:40,odP_5:55,odP_6:40,odP_7:70,odP_8:25,odP_9:20,odP_10:20,odP_11:50,odP_12:30,odP_13:30,odP_14:40,odP_15:25,odP_16:30},
 
  j75:{odOP:40,rbFit:35,rbTop:10},
  j77:{odAccLeadO:35},
@@ -1459,7 +1459,7 @@ Object.assign(BAL,{odb:{
  jpet:{rbGo:100},
  jroute:{odRtSeeO:80,odO:62,odO_2:55,odO_3:55,odO_4:55,odO_5:42,odO_6:85,odO_7:50,odO_8:35,odO_9:22,odO_10:14,odO_11:38,odOA:30,odO_12:35,odOT:55,odOB:45,odOM:40,odO_13:45,odO_14:50,odO_15:30,odOV:45,odOR:38,odRtMgO:62},
  jts:{rbSmart:40},
- jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44,leakO:35 /* Thu làm tai mắt: the turned servant also sells HER news (side chance) */},
+ jtsb:{odOr:30,orPer:12,orWit:12,orDanhD:6/* «Báo lên Hoàng hậu / Thái hậu» (her and an NPC victim, tsbRepO): + orPer × the ức hiếp pieces, + orWit with a trusted witness, + Danh/orDanhD (were typed 12 / 12 / 6) */,odTd:38,odTc:34,odTsbMockO:44,leakO:35 /* Thu làm tai mắt: the turned servant also sells HER news (side chance) */},
  j95:{dcPrepTell:80,dcJ95drift:15,dcJ95week:15,dcJ95weekEye:12,dcJ95weekSpy:30,dcN:35,dcJ95week_2:15,dcC:70,dcJ95intent:40,dcJ95planTH:15,dcJ95watch:35,dcJ95watch_2:35,dcJ95caught:50,dcJ95npcCatch:35},
  j95b:{dcJ95bWeek:30},
  jkc:{rlMomAlive:60,rlKcGo:4,rlGo:40,rlGo_2:50,rlGo_3:40,rlKcMeet:35,rlKcVh:4,rlO:80,rlO_2:45,rlO_3:55,rlKcMeet_2:60,rlO_4:50,rlO_5:60,rlKcFest:50,rlKcElope:25,rlGianhan:55}

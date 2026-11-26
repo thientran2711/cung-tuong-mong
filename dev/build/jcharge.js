@@ -192,3 +192,12 @@ function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là m
 let CHBY=null;
 (function(){const c0=chPunish;chPunish=function(t,c,why,by){const px=CHBY;CHBY=t===S&&by&&by!==S?{a:by}:null;try{return c0.apply(this,arguments)}finally{CHBY=px}}})();
 (function(){if(typeof punNote!=="function")return;const n0=punNote;punNote=function(o){if(CHBY&&o&&!o.by)o=Object.assign({},o,{by:CHBY.a});return n0.call(this,o)}})();
+/* STEP 4 rv F3 (law 4 + kit consistency OD:L1095): ONE helper for what an evidence act spends and does, read by BOTH cards of the act — the Hậu cung
+   person card (j78 actLineRaw + AOUT) and the evidence card (j78 evidenceActs). Tố giác / Trình Hoàng hậu / Xử tội = the ready charge, Tố tội thật =
+   chTocao, Bóc chuyện tư tình = tư thông: its pieces (chHave) and its punishment (chPunTxt) — never the total, never BAL.eff.j30.evF / j78.evF_2. */
+const CH_USE={accuse:(a,t)=>chReady(a,t),trinhhh:(a,t)=>chReady(a,t),judge:(a,t)=>chReady(a,t),tocao:(a,t)=>chTocao(a,t),expose:(a,t)=>chOK(a,t,"tt")?"tt":null};
+function chUse(k,a,t){const f=CH_USE[k];if(!f||!a||!t||a===t)return null;let c=null;try{c=f(a,t)}catch(e){}return c?{c,n:chHave(a,t,c)}:null}
+function chUseTxt(k,a,t){const u=chUse(k,a,t);return u?`Chứng cứ ${balSg(-u.n)} (tội ${chName(u.c).toLowerCase()})`:null}
+function chWinTxt(k,a,t,W){const u=chUse(k,a,t);return u&&k!=="expose"/* tư thông: its own road (ban chết / lãnh cung) */?`${W||NM(t)} ${chPunTxt(t,u.c)}`:null}
+(function(){if(typeof AOUT!=="object")return;for(const k of ["accuse","tocao"]){const d=Object.getOwnPropertyDescriptor(AOUT,k);const base=()=>d?(d.get?d.get.call(AOUT):d.value):null;
+ try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const b=base()||["",""];const t=typeof J78==="object"&&J78.cardV;const w=t?chWinTxt(k,S,t,j78who(t)):null;return w?[w+(k==="accuse"?`; Danh ${balSg(BAL.eff.j8.accuseDanh)}`:""),b[1]]:b}})}catch(e){}}})();
