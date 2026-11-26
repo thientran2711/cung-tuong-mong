@@ -381,9 +381,10 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   `kitResultSeal(ok)` (renamed by reviewer r7: `kitSeal` is the Trân nữ seal, §39) → {cls: ok | bad | sure, t: THÀNH | BẠI | KẾT QUẢ} (j63; kit sample page). Never
   inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
   "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
-- KÈM (owner 11/15): other people's feelings — the consorts' ghen / oán — are not her gains or losses: one collapsed line
-  "Kèm: 12 phi tần ghen thêm 8" — KIT PART `kitKemRow(K)` (j63, `.kb .kkem`, ranges as "3–8"; kit sample page), a tap opens the
-  names (`.kkem.on`); a person she has not met is "người chưa quen".
+- KÈM (owner 11/15 + 24/11 ~21:57Z «ngắn gọn rõ ràng»; MAIN 157 LOOK 26/11): other people's feelings — the consorts' ghen / oán — are not her
+  gains or losses. Kèm — KIT PART `kitKemRow(K)` (j63, `.kb .kr-kem .kkemi`): ONE line per person «<Tên>: ghen +8» (named = kaNamed); people she
+  cannot name with the same feeling and number = one line «N vị khác: ghen +8» (one alone: «một vị <tước>: ghen +8»); max 8 lines then
+  «… và N người khác»; every card (rtoast, night card kitNightEnd).
   Their liking FOR HER (quý ngươi hơn / ghét ngươi hơn) and evidence stay in Được / Mất.
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
