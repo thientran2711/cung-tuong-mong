@@ -206,7 +206,9 @@ Object.assign(BAL,{
   selfMin:25,       /* Tự học: Sức needed */
   mSuc:10,          /* Học với thầy (ma ma or a consort): Sức -N */
   mMin:10,          /* Học với thầy: Sức needed (jtds lesson check) */
-  exNeed:2          /* Hạnh minigame first-time example: "Người ghi cần N phần" */
+  exNeed:2          /* Hạnh minigame first-time example: "Người ghi cần N phần" */,
+  pts:{self:[1,1,2,3],m:[2,2,3,4]} /* review/balance-pace: lesson points by game points 0..3 (raw bands BAL.mgTier.lessonPts, same as an art lesson);
+                    was typed in jtd tdPoints: self raw ≥ 9 → 2 else 1, ma ma raw ≥ 7 → 3 else 2 */
  }
 });
 /* one-core small modules (j95, j95b, jkitpage, jsgame, jslap, jdiff, j92, jsteal, jmort, jly, jcmaid, jaudit, j90, j72). Module-owned tables that
@@ -215,7 +217,7 @@ Object.assign(BAL,{
 Object.assign(BAL,{
  actK:2,          /* khắc a scheme act on a person takes (j8 doAct / j6 act cards; jsgame Tự ra tay and place acts, jslap Giáng tay read it) */
  servK:2,         /* khắc a servant act takes (j10 Mua chuộc / Dọa; jsgame Mặc cả reads it) */
- m95:{dtdSung:50,       /* Sủng below which the Emperor is not shown / met in Dưỡng tâm điện (j2's door uses the same 50) */
+ m95:{accPer:15/* caught-in-act accusation: + accPer × the pieces of the matching charge (was typed pr*15 on the total) */,dtdSung:50,       /* Sủng below which the Emperor is not shown / met in Dưỡng tâm điện (j2's door uses the same 50) */
       k:1,              /* khắc to accuse a consort (Hoàng hậu / Hoàng thượng / luật cung) or to keep silent for a favour */
       accWin:{danh:4}}, /* an accusation that holds: her Danh (a failed one: BAL.tw.g.accFail) */
  m95b:{k:1,             /* khắc to clear a rumour face to face, or to trace who spread it */

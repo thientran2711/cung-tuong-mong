@@ -1,0 +1,244 @@
+ACT-INVENTORY on file:///home/user/wt/actm/index.html · md5 3e1f85f27d69cb8e0d42036b85f9eac1 · page errors 0
+
+# 1. TAP A PERSON (Dư đồ stage pop-up, dfActs) — by person kind; max = the most buttons one pop-up showed; distinct = union of collapsed names
+
+## rival — seen 87× · one pop-up 23–32 buttons · distinct 35
+   tabs (max per tab): Giao thiệp 23 · Mưu kế 3 · Hại người 5 · Trừng phạt 1 · Buôn bán 1
+   - Chào hỏi | Giao thiệp | 1 khắc | Tốn 1 khắc Được thấy mặt, rõ thân phận, ngươi xưng danh trước, nàng biết tên ngươi, tên người ấy: tùy tính nết | j22.js:30
+   - Hỏi han sức khỏe | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được thiện cảm 0 đến +3, biết nàng khỏe hay yếu | j2.js:92
+   - Khen tài nghệ nàng | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được nàng quý ngươi +4 | jagacts3.js:130
+   - Bàn tán về <người> | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Thành nàng quý ngươi -3 Bại nàng mách lại, Bành Thục Nghi oán ngươi +10:  | j9.js:138
+   - Chia sẻ bí mật | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được nàng quý ngươi +10 | j2.js:169
+   - Nhờ giúp đỡ | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được nàng cho mượn Bạc +30 hoặc kể chuyện về Bành Thục Nghi Ghi chú (chứn | j25.js:7
+   - Cảnh báo nàng | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Ghi chú không có căn cứ: nàng quý ngươi -2 | j25.js:8
+   - Giúp đỡ nàng | Giao thiệp | 1 khắc · 20 bạc | Chưa biết người này là ai Tốn 1 khắc · Bạc -20 Được nàng quý ngươi +10, bớt oán ta 5 | j9.js:137
+   - Thử lòng | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được thành: ngươi tin nàng hơn +3, hỏng: ngờ vực -6 | j68f.js:90
+   - Rỉ tai chuyện trong cung | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Mất một phi tần khác Danh -1 | jtwoway.js:73
+   - Ghé chơi | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được nàng quý ngươi +3, hai bên thấy phòng ốc của nhau | jshelf.js:98
+   - Tặng quà | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Ghi chú chọn món trong rương | j2.js:174
+   - Khiêu khích | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Thành Danh +1 , thiện cảm -15, oán ta +3 đến +30, nàng ta ghen +10 Bại nà | j2.js:172
+   - Hặc ăn mặc sai phẩm | Giao thiệp | 2 khắc | Chưa biết người này là ai Tốn 2 khắc Được Danh +2 Kèm nàng bị quở (đồ vượt phẩm bị tịch thu · phạm tang thì bị | j92.js:298
+   - Mượn son phấn | Giao thiệp | 1 khắc | son phấn còn đủ Tốn 1 khắc Được Lắm lời, nàng có thể chia một nửa hộp còn thiếu, chia chút ít cho có, từ chối  | jagacts4.js:14
+   - Cùng chơi | Giao thiệp | 0 khắc | Tốn 0 khắc Được môn của nàng · tốn: 1 khắc · thành: hai bên quý nhau thêm | jpma.js:116
+   - Thách đấu | Giao thiệp | 0 khắc | Tốn 0 khắc Được hai bên đặt cược ngang giá · tốn: 1 khắc · thành: lấy cược của nàng Kèm hỏng: mất cược của ngư | jpma.js:116
+   - Dò la | Mưu kế | 2 khắc · 17 bạc | Chưa biết người này là ai Tốn 2 khắc · Bạc -17 Được chứng cứ +1 · Tâm cơ +2 | j25.js:3
+   - Tung tin đồn | Mưu kế | 2 khắc | Chưa biết người này là ai Tốn 2 khắc Được Danh nàng -8 Kèm bị người của nàng phát giác: khả năng thấp — nàng n | j25.js:3
+   - Hạ độc | Hại người | 2 khắc · 23 bạc | Chưa biết người này là ai Tốn 2 khắc · Đức -10 · Bạc -23 Được nàng trúng độc · nàng không chết (có thuốc giải) | j30.js:23
+   - Ngáng chân | Hại người | 2 khắc | Chưa biết người này là ai Tốn 2 khắc · Đức -4 Được nàng vấp ngã: Danh nàng -3 | j25.js:3
+   - Vu oan | Hại người | 2 khắc | Chưa biết người này là ai Tốn 2 khắc Được nàng mất Danh và Sủng -10 · Danh +3 Kèm bị người của nàng phát giác, | j25.js:3
+   - Tố xa xỉ | Hại người | 2 khắc | Chưa biết người này là ai Tốn 2 khắc Được nàng bị quở: Đức -2, Danh -4, tháo món xa xỉ nhất · ngươi Danh +2 | j9.js:148
+   - Nghe lén câu chuyện | Mưu kế | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được biết 1 điều thật về nàng, chứng cứ +1 nếu nàng từng làm điều sai | j2.js:177
+   - Đẩy xuống hồ sen | Hại người | 2 khắc | Chưa biết người này là ai Tốn 2 khắc · Đức -12 Được nàng rơi xuống hồ sen: Sức nàng -25 | j9.js:215
+   - Đẩy con nàng xuống hồ | Hại người | 2 khắc | Chưa biết người này là ai Tốn 2 khắc · Đức -15 Được con nàng rơi xuống hồ · con nàng chết: khả năng cao Kèm bị | j25.js:3
+   - Hạ nhục | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc · Danh -1 Mất nàng oán ngươi +10, Danh nàng -2 | jtwoway.js:68
+   - Nương theo | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được nàng quý ngươi +6 | jtwoway.js:72
+   - Khoe quà ngự ban | Giao thiệp | 1 khắc | Rất vững Tốn 1 khắc Thành Không được gì thêm Kèm mọi phi tần ghen +2 Bại nàng ta chuộng giản dị: quý ta +1 · c | jtwoway.js:69
+   - Tát | Giao thiệp | 2 khắc |  | (runtime only)
+   - Hắt nước | Giao thiệp | 2 khắc · Đức -2 |  | jlooks.js:146
+   - Hắt trà | Giao thiệp | 2 khắc · Đức -3 |  | jlooks.js:147
+   - Quạt mực | Giao thiệp | 2 khắc · Đức -4 |  | jlooks.js:148
+   - Phạt quỳ | Trừng phạt | 2 khắc · Đức -1 |  | j68e.js:43
+   - Hòa giải | Giao thiệp | 1 khắc | Rất vững Tốn 1 khắc Thành nàng bớt oán Lâm Mạn Nhu 10 Bại chỉ uổng công · không mất gì khác | j68e.js:34
+
+## hh — seen 5× · one pop-up 11–12 buttons · distinct 12
+   tabs (max per tab): Giao thiệp 11 · Lễ nghi 1
+   - Chào hỏi | Giao thiệp | 1 khắc | Tốn 1 khắc Được thấy mặt, rõ thân phận, ngươi xưng danh trước, nàng biết tên ngươi, tên người ấy: ngôi chỉ một | j22.js:30
+   - Hỏi han sức khỏe | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được thiện cảm 0 đến +3, biết nàng khỏe hay yếu | j2.js:92
+   - Chia sẻ bí mật | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Thành nàng quý ngươi +10 Bại nàng nắm 1 chứng cứ của ngươi: khả năng cao | j2.js:169
+   - Xin Hoàng hậu che chở | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được Hoàng hậu → ta: thiện cảm +3 · 2 tháng phi tần khó hại ngươi | j2.js:171
+   - Khiêu khích | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Thành Danh +2 · Hoàng hậu → ta: thiện cảm -15 Bại Hoàng hậu ghen +15 · oá | j2.js:172
+   - Xin son phấn | Giao thiệp | 1 khắc | son phấn còn đủ Tốn 1 khắc Được Mong manh · thành: Hoàng hậu ban một hộp còn thiếu Mất hỏng: Hoàng hậu -3 | jagacts4.js:14
+   - Cùng chơi | Giao thiệp | 0 khắc | Tốn 0 khắc Được môn của nàng · tốn: 1 khắc · thành: hai bên quý nhau thêm | jpma.js:116
+   - Thách đấu | Giao thiệp | 0 khắc | Tốn 0 khắc Được hai bên đặt cược ngang giá · tốn: 1 khắc · thành: lấy cược của nàng Kèm hỏng: mất cược của ngư | jpma.js:116
+   - Hắt nước | Giao thiệp | 2 khắc · Đức -2 |  | jlooks.js:146
+   - Hắt trà | Giao thiệp | 2 khắc · Đức -3 |  | jlooks.js:147
+   - Quạt mực | Giao thiệp | 2 khắc · Đức -4 |  | jlooks.js:148
+   - Thỉnh an | Lễ nghi | 1 khắc | Chưa biết người này là ai Tốn 1 khắc · Sức -5 Được Hoàng hậu → ta: thiện cảm +3 · Danh +2 · Đức +1 , nàng bớt  | j2.js:91
+
+## rival(cùng cung) — seen 16× · one pop-up 9–11 buttons · distinct 11
+   tabs (max per tab): Giao thiệp 10 · Trừng phạt 1
+   - Hỏi han sức khỏe | Giao thiệp | 1 khắc | Rất vững Tốn 1 khắc Thành thiện cảm 0 đến +3, biết nàng khỏe hay yếu Bại chỉ uổng công · không mất gì khác | j2.js:92
+   - Bàn tán về <người> | Giao thiệp | 1 khắc | Tốn 1 khắc Thành nàng quý ngươi -3 Bại nàng mách lại, Kiều Lan Âm oán ngươi +10: khả năng cao | j9.js:138
+   - Cùng cung | Giao thiệp | 1 khắc | không thể lấy lòng hay ra tay Tốn 1 khắc | j42.js:503
+   - Mượn son phấn | Giao thiệp | 1 khắc | son phấn còn đủ Tốn 1 khắc Ghi chú Không ưa, nàng có thể chia một nửa hộp còn thiếu, chia chút ít cho có, từ c | jagacts4.js:14
+   - Cùng chơi | Giao thiệp | 0 khắc | Tốn 0 khắc Được môn của nàng · tốn: 1 khắc · thành: hai bên quý nhau thêm | jpma.js:116
+   - Thách đấu | Giao thiệp | 0 khắc | Tốn 0 khắc Được hai bên đặt cược ngang giá · tốn: 1 khắc · thành: lấy cược của nàng Kèm hỏng: mất cược của ngư | jpma.js:116
+   - Hắt nước | Giao thiệp | 2 khắc · Đức -2 |  | jlooks.js:146
+   - Hắt trà | Giao thiệp | 2 khắc · Đức -3 |  | jlooks.js:147
+   - Quạt mực | Giao thiệp | 2 khắc · Đức -4 |  | jlooks.js:148
+   - Tát | Giao thiệp | 2 khắc |  | (runtime only)
+   - Phạt quỳ | Trừng phạt | 2 khắc · Đức -1 |  | j68e.js:43
+
+## serv — seen 110× · one pop-up 10–10 buttons · distinct 10
+   tabs (max per tab): Giao thiệp 6 · Mưu kế 1 · Ban thưởng 1 · Trừng phạt 2
+   - Tâm sự | Giao thiệp | 1 khắc | Rất vững Tốn 1 khắc Thành thiện cảm Bán Hạ +6 Bại chỉ uổng công · không mất gì khác | j2.js:193
+   - Nghe ngóng chung | Giao thiệp | 1 khắc | Rất vững Tốn 1 khắc · chờ 2 khắc Thành Bán Hạ đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gâ | jact.js:20
+   - Hỏi chuyện | Giao thiệp | 2 khắc | Khó lường Tốn 2 khắc Thành chứng cứ +1 nếu quen người cung khác Bại Tốn công, không được gì | j15.js:75
+   - Giao việc phòng bị | Giao thiệp | 1 khắc | Tốn 1 khắc Được thử độc · theo dõi · giữ sổ sách Ghi chú chọn canh cung | j70.js:488
+   - Xem người | Giao thiệp | 1 khắc · 15 bạc | Tốn 1 khắc · Bạc -15 Được biết nết thật | j15.js:75
+   - Tiến cử | Giao thiệp | 1 khắc · 30 bạc | Tốn 1 khắc · Bạc -30 · Danh -2 Được công lao lên bậc +5 | j14.js:78
+   - Sai đi dò la | Mưu kế | 1 khắc | Rất vững Tốn 1 khắc · chờ 2 khắc Thành nhắm: Thường tại Nghiêm Thục Nghi (chạm để chọn người khác), biết 2 điề | j2.js:194
+   - Thưởng vô cớ | Ban thưởng | 1 khắc · 10 bạc | Tốn 1 khắc · Bạc -10 Được thiện cảm +6 Ghi chú (ít hơn thưởng có cớ) | j24.js:78
+   - Phạt vô cớ | Trừng phạt | 1 khắc | Tốn 1 khắc Thành thiện cảm -25 · Đức -3 · kẻ hầu khác thiện cảm -5 Bại nàng mang hận Ghi chú thiện cảm dưới 30 | j24.js:79
+   - Đổi người | Trừng phạt | 1 khắc · 20 bạc | Tốn 1 khắc · Bạc -20 · Danh -1 Thành trả Hạ về · người thay ngẫu nhiên · nết chưa rõ Bại đuổi 2 người trong nử | j15.js:75
+
+## ksp — seen 9× · one pop-up 5–6 buttons · distinct 6
+   tabs (max per tab): Giao thiệp 2 · Tranh sủng 1 · Mưu kế 3
+   - Chào hỏi | Giao thiệp | 1 khắc | Tốn 1 khắc Được thấy mặt · rõ thân phận · người ấy phận dưới · xưng danh trước · biết tên người ấy · tên ngươi | j22.js:30
+   - Hỏi sở thích Hoàng thượng | Giao thiệp | 1 khắc · 15 bạc | Chưa biết người này là ai Tốn 1 khắc · Bạc -15 Được biết thêm một điều ngài thích hay không ưa | j2.js:186
+   - Đút lót lật thẻ | Tranh sủng | 1 khắc · 30 bạc | Chưa biết người này là ai Tốn 1 khắc · Bạc -30 Được 2 tuần tới dễ được lật thẻ: khả năng thấp → dễ hơn một bậc | j2.js:185
+   - Xem sổ thị tẩm | Mưu kế | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được thấy Sủng và số đêm của từng người | j2.js:187
+   - Xem sổ nguyệt sự | Mưu kế | 1 khắc · 10 bạc | Chưa biết người này là ai Tốn 1 khắc · Bạc -10 Được thấy từng người báo kỳ ngày nào · ai tháng này không báo | jcycle.js:21
+   - Hầu chuyện, xem lén sổ nguyệt sự | Mưu kế | 2 khắc | Chưa biết người này là ai Tốn 2 khắc · Sức -4 · Danh -2 Được thấy từng người báo kỳ ngày nào Mất hỏng: bị Tổng | jcycle.js:234
+
+## emp — seen 2× · one pop-up 4–5 buttons · distinct 6
+   tabs (max per tab): Giao thiệp 4 · Hầu hạ 1
+   - Tâng bốc | Giao thiệp | 1 khắc | Có cơ Tốn 1 khắc Thành Sủng +2 Bại Sủng -1 · thiếu lễ (y phục dưới phẩm) · dung nhan mặt mộc (dịp lớn cần Kiều | j2.js:158
+   - Nói thật lòng | Giao thiệp | 1 khắc | Có cơ Tốn 1 khắc Thành Sủng +1 · Danh +2 · biết thêm một điều ngài thích hay không ưa: khả năng cao Bại Sủng - | j2.js:159
+   - Phô tài: Y thuật & điều hương | Giao thiệp | 1 khắc | Tùy duyên Tốn 1 khắc · Sức -5 Thành Sủng +4 · Danh +1 Bại Danh -2 · thiếu lễ (y phục dưới phẩm) · dung nhan mặ | j2.js:160
+   - Xin ân điển | Giao thiệp | 1 khắc | Có cơ Tốn 1 khắc Thành Bạc +60 Bại Sủng -4 · thiếu lễ (y phục dưới phẩm) · dung nhan mặt mộc (dịp lớn cần Kiều | j2.js:162
+   - Dâng một cành hoa | Hầu hạ | 1 khắc · 5 bạc | Tùy duyên Tốn 1 khắc · Bạc -5 Thành Sủng +1 Bại có hậu quả · xem kết quả · thiếu lễ (y phục dưới phẩm) · dung  | j2.js:161
+   - Phô tài: Cầm | Giao thiệp | 1 khắc | Tùy duyên Tốn 1 khắc · Sức -5 Thành Sủng +5 · Danh +1 Bại Danh -2 | j2.js:160
+
+## maid — seen 115× · one pop-up 4–4 buttons · distinct 4
+   tabs (max per tab): Giao thiệp 3 · Mưu kế 1
+   - Trò chuyện với cung nữ | Giao thiệp | 1 khắc | Tốn 1 khắc Được thiện cảm +6 · có khi nghe được tin | j76.js:114
+   - Nghe ngóng chung | Giao thiệp | 1 khắc | Vững Tốn 1 khắc · chờ 2 khắc Thành Họa Nhi đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc n | jact.js:20
+   - Giao việc phòng bị | Giao thiệp | 1 khắc | Tốn 1 khắc Được thử độc · theo dõi · giữ sổ sách Ghi chú chọn canh cung | j70.js:488
+   - Sai đi dò la | Mưu kế | 1 khắc | Có cơ Tốn 1 khắc · chờ 2 khắc Thành nhắm: một vị Đáp ứng ta chưa quen (chạm để đổi), biết 2 điều thật về nàng, | j2.js:194
+
+## th — seen 9× · one pop-up 4–4 buttons · distinct 4
+   tabs (max per tab): Lễ nghi 1 · Giao thiệp 3
+   - Thỉnh an, chép kinh | Lễ nghi | 1 khắc | chỉ buổi sáng Tốn 1 khắc · Sức -5 Thành Thái hậu → ta: thiện cảm +4 · Danh +2 · Đức +1 Bại dung nhan mặt mộc ( | j2.js:166
+   - Xin Thái hậu đỡ lời | Giao thiệp | 1 khắc | cần Thái hậu 30 Tốn 1 khắc Được Danh +4 · Hoàng hậu → ta: thiện cảm +5 · Hoàng hậu nể mặt | j2.js:167
+   - Kể tội một phi tần | Giao thiệp | 1 khắc | cần chứng cứ Tốn 1 khắc · Đức -2 , nàng bị phạt Được Thái hậu → ta: thiện cảm +2 | jagacts3.js:32
+   - Xin son phấn | Giao thiệp | 1 khắc | son phấn còn đủ Tốn 1 khắc Được Mong manh · thành: Thái hậu ban một hộp còn thiếu Mất hỏng: Thái hậu -3 | jagacts4.js:14
+
+## ty — seen 6× · one pop-up 4–4 buttons · distinct 4
+   tabs (max per tab): Giao thiệp 1 · Y dược 3
+   - Chào hỏi | Giao thiệp | 1 khắc | Tốn 1 khắc Được thấy mặt · rõ thân phận · người ấy phận dưới · xưng danh trước · biết tên người ấy · tên ngươi | j22.js:30
+   - Bài thuốc dễ thụ thai | Y dược | 1 khắc · 40 bạc | Chưa biết người này là ai Tốn 1 khắc · Bạc -40 Được 3 tháng dễ có thai hơn | j2.js:181
+   - Mời làm thái y tâm phúc | Y dược | 1 khắc · 50 bạc | Chưa biết người này là ai Tốn 1 khắc · Bạc -50 Được dễ phát hiện xạ hương và độc · bệnh của con nhẹ hơn | j2.js:182
+   - Xin bắt mạch | Y dược | 1 khắc | Tốn 1 khắc · Sức -5 Được thành: rõ Sức · bệnh và có thai hay chưa · thấy mưu hại ngầm (nếu có): Có cơ · kèm: n | jthaiy.js:146
+
+## chest — seen 21× · one pop-up 3–3 buttons · distinct 3
+   tabs (max per tab): Hại người 1 · Giao thiệp 2
+   - Cài đồ vào rương nàng | Hại người | 1 khắc | Tùy duyên Tốn 1 khắc Thành tại chỗ · dễ hơn sai người Bại Tốn công, không được gì Ghi chú chọn món đồ | j2.js:179
+   - Lục rương tìm chứng cứ | Giao thiệp | 2 khắc | Tùy duyên Tốn 2 khắc Thành chứng cứ +1 Bại cung nhân của nàng ta bắt gặp: thiện cảm -15, oán ta +3 đến +30, bị | j2.js:180
+   - Lấy trộm son phấn | Giao thiệp | 2 khắc | Tùy duyên Tốn 2 khắc Thành Tùy duyên, thành: lấy một hộp son phấn của nàng, hỏng: bị bắt, Danh -4, Đức -2, nàn | jagacts4.js:14
+
+## elder — seen 106× · one pop-up 2–2 buttons · distinct 2
+   tabs (max per tab): Giao thiệp 2
+   - Biếu | Giao thiệp | — | Tốn Bạc -20 Được người ấy quý ngươi +10 | j10.js:121
+   - Hỏi chuyện | Giao thiệp | — | Rất vững Tốn 2 khắc Thành nghe chuyện Nội vụ phủ Bại chỉ uổng công · không mất gì khác | j15.js:75
+
+## peddler — seen 6× · one pop-up 1–2 buttons · distinct 2
+   tabs (max per tab): Giao thiệp 2
+   - Chào hỏi | Giao thiệp | 1 khắc | Tốn 1 khắc Được thấy mặt · rõ thân phận · người ấy phận dưới · xưng danh trước · biết tên người ấy · tên ngươi | j22.js:30
+   - Để ta xem | Giao thiệp | 1 khắc | Chưa biết người này là ai Tốn 1 khắc Được hàng mua từ ngoài cung · tuần này có một món hiếm Ghi chú không tốn  | jact.js:70
+
+## npc — seen 108× · one pop-up 1–1 buttons · distinct 1
+   tabs (max per tab): Giao thiệp 1
+   - Chào hỏi | Giao thiệp | 1 khắc | Tốn 1 khắc Được thấy mặt, rõ thân phận, nàng phận dưới, xưng danh trước, biết tên người ấy, tên ngươi: tùy tín | j22.js:30
+
+## fallen — seen 9× · one pop-up 1–1 buttons · distinct 1
+   tabs (max per tab): Giao thiệp 1
+   - Hỏi chuyện cũ | Giao thiệp | 1 khắc | Tùy duyên Tốn 1 khắc Thành về: Phi Mã Như Ý, biết 1 điều thật về nàng, chứng cứ +1 nếu nàng từng làm điều sai  | j2.js:191
+
+# 2. TABS (panel buttons by pane, nav excluded) — union over scenarios
+
+## Hành sự — one panel 21–26 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 29
+   [-] 29: Điểm trang (j75.js:109) · Nghỉ ngơi một lát (j76.js:113) · Trò chuyện với cung nữ (j76.js:114) · Đọc sách giải khuây (j76.js:115) · Thỉnh an Thái hậu (j2.js:91) · Thỉnh an Hoàng hậu (j2.js:93) · Hối lộ Kính sự phòng (j2.js:94) · Giả bệnh (j13.js:47) · Mời thái y bắt mạch (j70.js:86) · Sang Thái y viện xin bắt mạch (jstagehere.js:52) · Đọc binh thư, sử sách (j2.js:52) · Dưỡng nhan (j2.js:50) · Xem sổ nguyệt sự (jcycle.js:21) · Xem lén sổ nguyệt sự (jcycle.js:21) · Múa trong yến tiệc (j23.js:8) · Cài tai mắt (j67.js:1622) · Nghỉ ngơi dưỡng sức (j2.js:45) · Cầu tự ở Phụng Tiên điện (j2.js:48) · Sai cung nữ đi dò la (jact.js:19) · Nghe ngóng chung (jact.js:20) · Phát bạc cứu giúp cung nhân nghèo (j85.js:188) · Kinh hồng vũ (j2.js:64) · Giả mang thai (j2.js:58) · Để ý một vị vương gia (jroute.js:75) · Nghĩ cách trốn khỏi cung (jroute.js:131) · Dâng biểu xin xuất gia (jroute.js:180) · Nhờ Thái hậu nói giúp (j4.js:33) · Xin ban hôn cho một vị vương gia (rt) · Xin về quê phụng dưỡng cha mẹ (jroute.js:192)
+
+## Hậu cung › thẻ Hoàng hậu — one panel 51–51 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 51
+   [Gặp mặt] 5: Đến cung nàng thăm (j21.js:85) · Sai tai mắt dò nơi ở (j21.js:68) · Mời đến cung ta (j21.js:69) · Cùng chơi (jpma.js:116) · Thách đấu (jpma.js:116)
+   [Giao thiệp] 3: Kết giao (j67.js:463) · Tặng quà (j2.js:174) · Giúp chăm thú nuôi của nàng (jagacts3.js:251)
+   [Dùng chứng cứ] 8: Tố giác (j20.js:27) · Tố tội thật (j30.js:24) · Bóc chuyện tư tình (j30.js:25) · Trình Thái hậu (j78.js:141) · Trình Hoàng hậu (j72.js:539) · Uy hiếp đòi bạc (j78.js:146) · Bán cho phe khác (j78.js:149) · Trả chứng cứ lấy lòng (j78.js:154)
+   [Hại nhỏ] 12: Tung tin đồn (j25.js:3) · Dò la (j25.js:3) · Ngáng chân (j25.js:3) · Tát (rt) · Phạt quỳ (j68e.js:43) · Bỏ phấn lạ (jrash.js:4) · Tự đi dò la (jagknow.js:22) · Ép nộp của (jlost.js:23) · Hại thú nuôi của nàng (jpet.js:212) · Hắt nước (jlooks.js:146) · Hắt trà (jlooks.js:147) · Quạt mực (jlooks.js:148)
+   [Hại nặng] 16: Vu oan (j25.js:3) · Cài đồ vào rương (j2.js:179) · Rút thẻ bài (j70.js:83) · Mua chuộc cung nữ (j70.js:42) · Hặc ăn mặc sai phẩm (j92.js:298) · Tố xa xỉ (j9.js:148) · Ly gián (j30.js:22) · Xin Hoàng hậu giáng (j30.js:26) · Giá họa trộm đồ (j92.js:356) · Sai người lấy trộm đồ (jlost.js:17) · Sai cung nữ thân tín lấy đồ (jlost.js:17) · Sai cung nữ thân tín lấy lòng (jecon.js:149) · Nhờ ơn người quen rút thẻ bài (jecon.js:189) · Thả thú dữ làm hại dung nhan (jtsb.js:52) · Phóng hỏa kho đồ (jtsb.js:72) · Trộm thú nuôi của nàng (jpetcare.js:196)
+   [Sát hại] 7: Hạ độc (j30.js:23) · Đẩy xuống hồ sen (j9.js:215) · Bỏ xạ hương (j25.js:3) · Mua chuộc bà đỡ (j70.js:53) · Hạ độc dần (j30.js:23) · Hủy dung (j70.js:510) · Tặng quà ăn có độc (jpoison.js:112)
+
+## Hậu cung › thẻ một phi tần — one panel 0–59 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 60
+   [Làm quen] 1: Hỏi người hầu: đó là ai? (j61.js:190)
+   [Gặp mặt] 5: Đến cung nàng thăm (j21.js:85) · Mời đến cung ta (j21.js:69) · Cùng chơi (jpma.js:116) · Thách đấu (jpma.js:116) · Sai tai mắt dò nơi ở (j21.js:68)
+   [Giao thiệp] 3: Kết giao (j67.js:463) · Tặng quà (j2.js:174) · Giúp chăm thú nuôi của nàng (jagacts3.js:251)
+   [Dùng chứng cứ] 8: Tố giác (j20.js:27) · Tố tội thật (j30.js:24) · Bóc chuyện tư tình (j30.js:25) · Trình Thái hậu (j78.js:141) · Trình Hoàng hậu (j72.js:539) · Uy hiếp đòi bạc (j78.js:146) · Bán cho phe khác (j78.js:149) · Trả chứng cứ lấy lòng (j78.js:154)
+   [Hại nhỏ] 12: Tung tin đồn (j25.js:3) · Dò la (j25.js:3) · Ngáng chân (j25.js:3) · Tát (rt) · Phạt quỳ (j68e.js:43) · Bỏ phấn lạ (jrash.js:4) · Tự đi dò la (jagknow.js:22) · Ép nộp của (jlost.js:23) · Hại thú nuôi của nàng (jpet.js:212) · Hắt nước (jlooks.js:146) · Hắt trà (jlooks.js:147) · Quạt mực (jlooks.js:148)
+   [Hại nặng] 18: Vu oan (j25.js:3) · Cài đồ vào rương (j2.js:179) · Rút thẻ bài (j70.js:83) · Mua chuộc cung nữ (j70.js:42) · Hặc ăn mặc sai phẩm (j92.js:298) · Tố xa xỉ (j9.js:148) · Ly gián (j30.js:22) · Xin Hoàng hậu giáng (j30.js:26) · Giá họa trộm đồ (j92.js:356) · Sai người lấy trộm đồ (jlost.js:17) · Sai cung nữ thân tín lấy đồ (jlost.js:17) · Sai cung nữ thân tín lấy lòng (jecon.js:149) · Nhờ ơn người quen rút thẻ bài (jecon.js:189) · Thả thú dữ làm hại dung nhan (jtsb.js:52) · Phóng hỏa kho đồ (jtsb.js:72) · Trộm thú nuôi của nàng (jpetcare.js:196) · Phá việc học (j70.js:95) · Xin bế con nàng về nuôi (j8.js:155)
+   [Sát hại] 9: Hạ độc (j30.js:23) · Đẩy con nàng xuống hồ (j25.js:3) · Đẩy xuống hồ sen (j9.js:215) · Bỏ xạ hương (j25.js:3) · Mua chuộc bà đỡ (j70.js:53) · Hạ độc dần (j30.js:23) · Hủy dung (j70.js:510) · Tặng quà ăn có độc (jpoison.js:112) · Hạ độc con nàng (j70.js:56)
+   [Quyền Hoàng hậu] 4: Xử tội (j15.js:43) · Tịch thu vô cớ (j15.js:43) · Ban thưởng (j15.js:43) · Khất bổng lộc (j15.js:43)
+
+## Cung nhân › tab — one panel 37–42 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 6
+   [Quản kẻ hầu] 4: Thêm cung nữ (j15.js:74) · Thêm thái giám (j15.js:74) · Cài người vào cung khác (j15.js:74) · Chưởng sự tra xét cung nữ (j15.js:74)
+   [Thân cận] 1: Chọn làm cung nữ thân cận (jcoopthinf.js:202)
+   [Phòng bị] 1: Giao việc phòng bị (j70.js:488)
+
+## Cung nhân › một người hầu — one panel 41–45 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 10
+   [Thưởng phạt] 5: Thưởng vô cớ (j24.js:78) · Phạt vô cớ (j24.js:79) · Đề bạt lên Cung nữ nhị đẳng (rt) · Xem người (j15.js:75) · Đề bạt lên Thủ lĩnh thái giám (rt)
+   [Sai bảo] 3: Hỏi chuyện (j15.js:75) · Tiến cử (j14.js:78) · Đổi người (j15.js:75)
+   [Thân cận] 1: Chọn làm cung nữ thân cận (jcoopthinf.js:202)
+   [Phòng bị] 1: Giao việc phòng bị (j70.js:488)
+
+## Hoàng tự — one panel 5–15 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 7
+   [-] 7: Dạy chữ (j53.js:187) · Dạy lễ nghi (j53.js:188) · Mời thầy riêng (j53.js:190) · Chăm sóc (j25.js:49) · Dẫn đi thỉnh an Hoàng thượng (j25.js:50) · Canh giữ các con (j25.js:51) · Về tẩm cung thăm con (j15.js:59)
+
+## Tư trang — one panel 10–10 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 6
+   [-] 6: Nhờ thái giám tìm thú nuôi (jagacts3.js:251) · Kiểm tra đồ (j8.js:568) · Sai cung nữ thân tín mua lén ngoài cung (j83.js:242) · Hối lộ người ở Thái y viện (j83.js:244) · Chợ đen ở cửa Thần Vũ (j83.js:245) · Xin đồng minh (j83.js:246)
+
+## Tài nghệ — one panel 19–19 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 4
+   [-] 4: Tự học (j23.js:25) · Học với thầy (j23.js:25) · Phát bạc cứu giúp cung nhân nghèo (j85.js:188) · Bảng tài nghệ hậu cung (jpma.js:274)
+
+## Mệnh truyện — one panel 5–5 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 0
+
+## Giao tình › Ân oán — one panel 5–5 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 0
+
+## Giao tình › Phe phái — one panel 4–4 buttons incl. nav/list rows · ACT buttons (named cost or act pane) 0
+
+# 3. CUNG NỮ ROAD (srvTalk by person kind; Phận sự deck)
+   pop-up chủ (mis): 5 · Đấm lưng, hầu chuyện · Xin chủ ban thưởng · Bẩm tin dò được · Xin chủ tiến cử lên Nội vụ phủ · Xin chủ cho đi hầu cung khác
+   pop-up phi tần khác (rv): 2 · Hành lễ thỉnh an · Mật báo chuyện của Vu Cẩm Sương
+   pop-up Hoàng hậu (hh): 3 · Hành lễ thỉnh an · Mật báo chuyện của Vu Cẩm Sương · Tố cáo Vu Cẩm Sương trước Hoàng hậu
+   pop-up Hoàng thượng (emp): 2 · Quỳ dâng trà · Cúi đầu lui tránh
+   pop-up thái y (ty): 2 · Xin thuốc bổ · Học lỏm nghề thuốc
+   pop-up người hầu khác (sv): 2 · Trò chuyện · Biếu quà nhỏ
+   pop-up nam nhân (man): 2 · Chào hỏi đúng lễ · Liếc mắt đưa tình
+   Phận sự deck: 13 · Quét sân, lau điện · Dâng trà, hầu điểm tâm · Theo hầu chủ · Lĩnh đồ ở Nội vụ phủ · Học lễ nghi với cô cô · Luyện thêu thùa, chữ nghĩa · Chải chuốt, giữ nhan sắc · Nghỉ lấy sức · Thêu khăn bán ra ngoài · Việc chủ sai · Nghe ngóng cho chủ · Tự đi dò la cho chủ · Canh chừng cung chủ
+
+# 4. LÃNH CUNG deck: 11 · Nghỉ ngơi một lát · Đọc sách giải khuây · Cầu xin · Chép kinh, giữ đức · Trồng rau · Thêu khăn bán · Xuất gia · Nhờ <người> đưa thư kêu oan · Nghĩ cách trốn khỏi cung · Xin phế làm thứ dân · Nhờ người bên ngoài
+
+# TOTALS (screen | most buttons on one screen | distinct collapsed names)
+   Dư đồ › chạm rival | 32 | 35
+   Dư đồ › chạm hh | 12 | 12
+   Dư đồ › chạm rival(cùng cung) | 11 | 11
+   Dư đồ › chạm serv | 10 | 10
+   Dư đồ › chạm ksp | 6 | 6
+   Dư đồ › chạm emp | 5 | 6
+   Dư đồ › chạm maid | 4 | 4
+   Dư đồ › chạm th | 4 | 4
+   Dư đồ › chạm ty | 4 | 4
+   Dư đồ › chạm chest | 3 | 3
+   Dư đồ › chạm elder | 2 | 2
+   Dư đồ › chạm peddler | 2 | 2
+   Dư đồ › chạm npc | 1 | 1
+   Dư đồ › chạm fallen | 1 | 1
+   Hành sự | (see list) | 29
+   Hậu cung › thẻ Hoàng hậu | (see list) | 51
+   Hậu cung › thẻ một phi tần | (see list) | 60
+   Cung nhân › tab | (see list) | 6
+   Cung nhân › một người hầu | (see list) | 10
+   Hoàng tự | (see list) | 7
+   Tư trang | (see list) | 6
+   Tài nghệ | (see list) | 4
+   Mệnh truyện | (see list) | 0
+   Giao tình › Ân oán | (see list) | 0
+   Giao tình › Phe phái | (see list) | 0
+   cung nữ › chạm chủ (mis) | 5 | 5
+   cung nữ › chạm phi tần khác (rv) | 2 | 2
+   cung nữ › chạm Hoàng hậu (hh) | 3 | 3
+   cung nữ › chạm Hoàng thượng (emp) | 2 | 2
+   cung nữ › chạm thái y (ty) | 2 | 2
+   cung nữ › chạm người hầu khác (sv) | 2 | 2
+   cung nữ › chạm nam nhân (man) | 2 | 2
+   cung nữ › Phận sự | 13 | 13
+   Lãnh cung deck | 11 | 11
+   DISTINCT action names, whole game (person pop-ups + tabs, consort road): 165
