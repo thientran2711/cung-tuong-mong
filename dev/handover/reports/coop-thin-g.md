@@ -991,3 +991,32 @@ NOT run (express; named): trip1 DANHP 36-week ×N (r3 ran ×2 88/88 before this 
 WORKER DEPLOY: coop/worker/src/index.js = LIVE BIG 8000 + branch **THINMAX 13** (+ test/thin.test.mjs). The land push to main touching coop/worker/** starts «Deploy co-op Worker»; else recipe in «WORKER DEPLOY RECIPE (THINMAX 13)» above. ORDER vs B queue: week-wait 8e654ee0 + presence-reload dad08c51 also deploy the Worker and week-wait edits jcoopworld nCheck (stepQ) — whichever lands second needs a re-merge of jcoopworld nCheck (keep ONE carry rule: stepQ + host commit gate + part-G guest line). Recommend: land week-wait / presence-reload first (owner deadlock bug), then re-merge r4 on that LIVE (small, nCheck only) and land with the Worker deploy.
 FOR MAIN (unchanged): rkOfFace {$r} · hn H2 k61PortEnt p.kk · dialog-fixed #54 · thin d / f1 / as9s / cyc / lost-scan.
 SSK review/coop-thin-g-r4 **6449175a8e93d42262d7506fb1863e20a478663b** (contains LIVE 5e013076).
+
+## REVIEW r4 — BIG reviewer-lander session_01N1tNP6DRTr3qUb2JUdpj8n (opus), Foreman B ROOT 2, 11/26/2026 — VERDICT: PASS ec88b0e2 (ec88b0e256f7b92d078fe81fa2f6fb35d85a059b)
+PRIORITY #1 CHECK ('coop-thin-g'): OD 1 | ledger 0 | claims 8 | main 6 | review/* 7 | archive 0 → reused review/coop-thin-g-r4 6449175a (worker 6cP62jVG) + review/coop-week-wait-land 04a45597 (rv-lander 4KCumgKv, FINAL base confirmed 01:44Z); nothing rebuilt. START_CTX ≈ 3 % of 1M; depth 1.
+Branch **review/coop-thin-g-land** = (3) review/coop-week-wait-land 04a45597 (presence-reload-land 8d5fa1fd → fix-3-r5-land 83702d7b → week-wait-land) + merge r4 6449175a → **ec88b0e2** (link 4, FF on 04a45597; main 5e013076 ⊂ head).
+### Conflicts — each ONE rule, both sides' behaviour kept (law 11)
+| file | resolution |
+|---|---|
+| jcoopworld nCheck | ONE gate: flight-coop-sync host commit line → part-G guest line (gG: on the go her phone runs nothing) → week-wait gate (no bare `Q.length`: stepQ judges the queue) → part-G host `gNight` (her week end in HER context; TH.withSeat swaps Q, so his carried panels never mix with hers) → `stepQ("night", …)` carry rule (a telling panel is carried, a real choice holds) with `gPost` inside the night step → fix-4 trace |
+| jcoopworld over() | part-G flag-only ending (CW.gWk in her context) first, then robot-coop-fix-6 room-date dying fix (roomDate / calFix) |
+| dev/test/lib/coop-clear.js TAP | both: 5 / 5b kquick / 5c one-road (night-live) + 6 #ov mini game (coop-thin-g-f1 #7); `mg` export kept |
+| index.html / sw.js | rebuilt (build_site.sh); assets.json = base (local image set differs from the committed manifest → committed one kept) |
+### Gates (local Worker wrangler dev from each branch: land :8787 THINMAX 13, base 04a45597 :8788)
+| gate | land ec88b0e2 | base 04a45597 (back-to-back) |
+|---|---|---|
+| coop/worker npm test (merge vault seat stale thin range presence) | PASS (thin ALL OK) | — |
+| undef-scan · one-core-guard · coop-keymove-unit · coop-house-unit | PASS 317 names · 0 fails · 12/12 · 52/52 | PASS 310 · 0 fails · 12/12 · 52/52 |
+| coop-e2e (room level 13) SWAP=0 | 143/143 ×2 | — |
+| coop-e2e SWAP=1 | 143/143 ×2 | — |
+| coop-week-wait SWAP=0 / SWAP=1 | 34/34 / 34/34 alone (1 A2 red under 3-room load; alone PASS) | base SWAP1 run under load only |
+| coop-thin-g g4 / g4s (WEEKS=4) | 24/24 / 24/24 (G0 level 13 both seats) | n/a (no part G) |
+| coop-night THIN=13 alone | 124/126: **case 10** «both in the next week» [6,6,6] + 12 host clock | alone: **10 + 11 ×2** fail (stall at week 6 from case 10, same family); under load base also 4/4b/9 |
+| save-rt-coop (71c538df) | rows IDENTICAL to base 11/11 (6 ok, 5 FAIL = known, robot-coop-savert not landed) | same |
+| quickcheck ALONE (old save) | quickcheck.js PASS (open 2143 ms, old save loads + plays a buổi, perf); core gates: G4 button-crawl «Ô lưu · Lui» = PRE-EXISTING (fix-7 r3) + 95-next-dead red in the 18-min run → next-dead.js alone **FIX-6 PASS** (load flake) | — |
+| trip1 DANHP 36-week | **NOT run**: ~60+ min exclusive CPU did not fit the 02:20Z pack; r3 ran it ×2 88/88; this merge adds no part-D/thin code, only the nCheck order; g4/g4s G9/G9b week checks ran instead | — |
+| REAL 2-seat room (robot-rt-coop real taps; Fold 755x1000 host + iPad 1180x820 guest; seed 23; room JCU9; slice 24) + host reload at buổi 10 (test-only hook in an uncommitted local copy) | **24 buổi each seat**; reload → guest rejoined via «Trở lại phòng» (peerRejoin 1), both played on to 24; **stuck 0, dead buttons 0, page errors 0**. Harness note (pre-existing): «Lịch tháng» no-clock loop ×2 on the host (recovered) | — |
+| FULL VIDEOS (60 min each, looked: 10 min / reload / end frames; same date «Tháng ba · hạ tuần · năm thứ nhất» both seats at the end, kit cards, no overflow) | CDN img/_review/coop-thin-g-land/fold-host-755x1000-full.mp4 + ipad-guest-1180x820-full.mp4 | — |
+coop-night case 10 = the known u4 / week-wait-land case («being judged», ROOT 2 23:45Z): the host's night commit + a dialog + sendMe re-send → the week never steps; on land the host's night runs over the dialog (stepQ) and his `end` then waits on gHold when sendMe clears pend — same end state as base ([6,6,6]); land is not worse than base (base alone fails one more case). FOR MAIN 151: fix the case-10 family on the co-op lands chain (sendMe while the night commit / end is pending), not in this link.
+18 LAWS touched: 4 ONE CORE (no number added; one-core 0 fails) · co-op first: host computes, guest reads (part-G guest line runs nothing; her week end on the host) · 9 KIT (no UI change) · 11 (one nCheck rule, both sides kept) · 12 (Fold + iPad full videos). None broken.
+LAND READY review/coop-thin-g-land **ec88b0e256f7b92d078fe81fa2f6fb35d85a059b** — FF on review/coop-week-wait-land 04a45597; land AFTER that chain; Worker deploy THINMAX 13 from coop/worker (recipe «WORKER DEPLOY RECIPE (THINMAX 13)» above).
