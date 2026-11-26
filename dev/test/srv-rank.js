@@ -4,9 +4,9 @@
    and «Xin chủ tiến cử» is locked at the cap, so a good maid under a low master stood still for years (the buy-out roll and the ma ma age
    are the only other exits). FIX = ONE rule spOutgrown (jpromsv, BAL.srvCap) for her AND every NPC servant (law 1): at the cap with full
    Công lao and a higher palace with room, the ask is open whatever her trust; a trusted servant who asks is let go more, demoted less.
-   usage: node dev/test/srv-rank.js <URL> [label]   → PASS/FAIL rows; exit 1 on any FAIL (on LIVE the «open» rows FAIL = the bug) */
+   usage: node dev/test/srv-rank.js <URL> [label] [oldURL]   → PASS/FAIL rows; exit 1 on any FAIL (on LIVE the «open» rows FAIL = the bug) */
 const {chromium}=require('playwright');
-const [,,URL,LBL]=process.argv;
+const [,,URL,LBL,OLD]=process.argv;/* OLD = optional LIVE URL: a maid life saved there (at her cap, trusted, Công lao full) loads here and has the open ask */
 (async()=>{const b=await chromium.launch();const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':JSON.stringify(x).slice(0,300)]);const errs=[];
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block',reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{window.__nlInner=1;window.__exAuto=1;window.__bot=1});
@@ -58,6 +58,12 @@ const [,,URL,LBL]=process.argv;
  ok(r.npcNone||r.npcLeave,'NPC parity: an NPC maid at her cap, full Công lao, loyalty 85 may ask to leave (asOpts «leave»)',{out:r.npcOut,leave:r.npcLeave,ids:r.npcIds,err:r.npcErr,none:r.npcNone});
  ok(r.npcNone||!r.npcLeaveShort,'NPC parity: same NPC maid without full Công lao: no ask',r.npcLeaveShort);
  ok(r.load&&!r.loadErr,'save / load round trip + one month',{load:r.load,err:r.loadErr});
+ if(OLD){const c2=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});await c2.addInitScript(()=>{window.__nlInner=1;window.__bot=1});const q=await c2.newPage();
+  await q.goto(OLD,{waitUntil:'domcontentloaded',timeout:0});await q.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await q.waitForTimeout(1000);
+  const sv=await q.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;window.__forceOrigin="cnv";for(let i=0;i<20;i++){start();if(isSrv())break}Q.length=0;render=()=>{};
+   const L=liveRivals(true);const lo=L.find(v=>rkOf(v)<4&&!v.queen);if(lo&&lo!==srvM())srvReassign("old",lo);Q.length=0;S.srv.rk=srvMax();S.srv.mp=srvMpNeed(S.srv.rk);S.tin=80;S.srv.lvCd=0;return JSON.stringify(ser())});await c2.close();
+  const o=await p.evaluate(j=>{try{deser(JSON.parse(j));Q.length=0;const lv=srvTalk({kind:"srv",sk:"mis"}).find(x=>x.n==="Xin chủ cho đi hầu cung khác");const og=spOutgrown(srvM(),S);let e2=null;try{srvMonth()}catch(e){e2=e.message.slice(0,120)}return{srv:isSrv(),open:lv&&!lv.lock,og,e2}}catch(e){return{err:e.message.slice(0,150)}}},sv);
+  ok(o.srv&&!o.err&&!o.e2,'OLD SAVE (LIVE maid at her cap) loads here and plays a month',o);ok(o.open===o.og,'OLD SAVE: the ask follows the one rule (open iff outgrown)',o)}
  ok(!errs.length,'no page errors',errs.slice(0,3));
  console.log(`# srv-rank ${LBL||URL}`);for(const t of T)console.log(t.join(' | '));const f=T.filter(t=>t[0]==='FAIL').length;console.log(`${T.length-f}/${T.length} PASS`);
  await b.close();process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});
