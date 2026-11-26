@@ -548,3 +548,4 @@ review (RV-163B) | — | session_01Rc5AsHo4hJGJQAnoeB8h8c | RUNNING | 2026-11-26
 punish-tier (PUNISH-TIER-2) | review/punish-tier | session_01Rc5AsJPKETRcb56pBRgzJK | RUNNING | 2026-11-26T21:05Z
 C3-RGART rg c1b option 1 «Cúi đầu vâng dạ» own act picture (KIT-STAGE-R4 ART REQUEST 20:50Z) | CDN + review/c3-rg-c1b-art if mapping needed | (session in STATUS) | RUNNING | 2026-11-26T21:15Z (Foreman C ROOT 3-1-1-1-1)
 C3-RGART | rg c1b card picture | session_01PEhRbv48cmAjM4J3Mem5N6 (sonnet) | RUNNING | 2026-11-26T21:17Z (Foreman C; id for the line above)
+reign-end (REIGN-END) | review/reign-end | session_01Rc5AsKDTgMubUASiLMBaba | RUNNING | 2026-11-26T21:13Z
