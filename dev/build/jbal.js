@@ -206,7 +206,9 @@ Object.assign(BAL,{
   selfMin:25,       /* Tự học: Sức needed */
   mSuc:10,          /* Học với thầy (ma ma or a consort): Sức -N */
   mMin:10,          /* Học với thầy: Sức needed (jtds lesson check) */
-  exNeed:2          /* Hạnh minigame first-time example: "Người ghi cần N phần" */
+  exNeed:2          /* Hạnh minigame first-time example: "Người ghi cần N phần" */,
+  pts:{self:[1,1,2,3],m:[2,2,3,4]} /* review/balance-pace: lesson points by game points 0..3 (raw bands BAL.mgTier.lessonPts, same as an art lesson);
+                    was typed in jtd tdPoints: self raw ≥ 9 → 2 else 1, ma ma raw ≥ 7 → 3 else 2 */
  }
 });
 /* one-core small modules (j95, j95b, jkitpage, jsgame, jslap, jdiff, j92, jsteal, jmort, jly, jcmaid, jaudit, j90, j72). Module-owned tables that
