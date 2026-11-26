@@ -1,0 +1,102 @@
+[2026-11-26T03:21:33.651Z 60s] domcounters nodes 3223 listeners 851 documents 5
+[2026-11-26T03:21:34.332Z 61s] mem buoi 1 steps 98 heap "66/75MB" | 204MB 59.2% --type=gpu-process --gpu-recen ; 205MB 69.5% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 763MB 48.7% --type=renderer --gpu-client-i ; 807MB 51.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:22:33.772Z 120s] domcounters nodes 4917 listeners 871 documents 5
+[2026-11-26T03:22:33.808Z 121s] mem buoi 3 steps 186 heap "69/73MB" | 212MB 62.1% --type=gpu-process --gpu-recen ; 227MB 81.3% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 820MB 46.6% --type=renderer --gpu-client-i ; 928MB 49.0% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:23:35.167Z 182s] domcounters nodes 8824 listeners 1200 documents 6
+[2026-11-26T03:23:35.633Z 182s] mem buoi 4 steps 234 heap "73/80MB" | 218MB 48.8% --type=gpu-process --gpu-recen ; 238MB 86.5% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 981MB 55.4% --type=renderer --gpu-client-i ; 1132MB 62.1% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:24:33.811Z 241s] domcounters nodes 10207 listeners 1320 documents 6
+[2026-11-26T03:24:33.854Z 241s] mem buoi 6 steps 314 heap "76/82MB" | 216MB 43.6% --type=gpu-process --gpu-recen ; 255MB 87.1% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1005MB 56.9% --type=renderer --gpu-client-i ; 1103MB 63.0% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:25:34.298Z 301s] domcounters nodes 27478 listeners 1958 documents 6
+[2026-11-26T03:25:34.581Z 301s] mem buoi 8 steps 405 heap "79/86MB" | 226MB 40.9% --type=gpu-process --gpu-recen ; 265MB 81.8% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1453MB 57.8% --type=renderer --gpu-client-i ; 1166MB 64.7% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:26:33.663Z 360s] domcounters nodes 18440 listeners 1765 documents 6
+[2026-11-26T03:26:33.677Z 360s] mem buoi 9 steps 465 heap "79/83MB" | 222MB 39.0% --type=gpu-process --gpu-recen ; 265MB 75.4% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1084MB 59.2% --type=renderer --gpu-client-i ; 1137MB 66.2% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:27:33.745Z 420s] domcounters nodes 24030 listeners 2031 documents 6
+[2026-11-26T03:27:33.793Z 421s] mem buoi 9 steps 568 heap "81/87MB" | 224MB 38.9% --type=gpu-process --gpu-recen ; 254MB 65.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1086MB 53.3% --type=renderer --gpu-client-i ; 1144MB 63.1% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:28:33.924Z 481s] domcounters nodes 35706 listeners 2495 documents 6
+[2026-11-26T03:28:33.936Z 481s] mem buoi 9 steps 634 heap "81/86MB" | 241MB 39.3% --type=gpu-process --gpu-recen ; 267MB 58.6% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1098MB 50.0% --type=renderer --gpu-client-i ; 1198MB 64.8% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:29:34.720Z 541s] domcounters nodes 44887 listeners 2912 documents 6
+[2026-11-26T03:29:35.098Z 542s] mem buoi 12 steps 718 heap "89/97MB" | 225MB 38.0% --type=gpu-process --gpu-recen ; 249MB 53.3% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1108MB 54.5% --type=renderer --gpu-client-i ; 1243MB 62.9% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:30:33.777Z 601s] domcounters nodes 41055 listeners 2828 documents 6
+[2026-11-26T03:30:33.794Z 601s] mem buoi 13 steps 807 heap "84/88MB" | 218MB 38.8% --type=gpu-process --gpu-recen ; 248MB 50.5% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1081MB 53.3% --type=renderer --gpu-client-i ; 1184MB 61.0% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:31:34.141Z 661s] domcounters nodes 53947 listeners 3416 documents 6
+[2026-11-26T03:31:34.321Z 661s] mem buoi 17 steps 916 heap "90/96MB" | 256MB 36.8% --type=gpu-process --gpu-recen ; 276MB 46.8% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1211MB 55.0% --type=renderer --gpu-client-i ; 1259MB 60.8% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:32:33.775Z 721s] domcounters nodes 2987 listeners 652 documents 6
+[2026-11-26T03:32:33.977Z 721s] mem buoi 20 steps 1006 heap "61/66MB" | 177MB 37.0% --type=gpu-process --gpu-recen ; 207MB 45.0% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 931MB 54.9% --type=renderer --gpu-client-i ; 969MB 59.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:33:34.635Z 781s] domcounters nodes 4815 listeners 936 documents 7
+[2026-11-26T03:33:34.682Z 781s] mem buoi 21 steps 1076 heap "74/78MB" | 210MB 38.1% --type=gpu-process --gpu-recen ; 231MB 47.5% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 801MB 56.0% --type=renderer --gpu-client-i ; 956MB 61.1% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:34:33.831Z 841s] domcounters nodes 5335 listeners 942 documents 8
+[2026-11-26T03:34:33.851Z 841s] mem buoi 25 steps 1155 heap "77/79MB" | 240MB 37.4% --type=gpu-process --gpu-recen ; 247MB 48.6% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1059MB 55.8% --type=renderer --gpu-client-i ; 1050MB 59.8% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:35:33.720Z 900s] domcounters nodes 7983 listeners 1113 documents 8
+[2026-11-26T03:35:33.765Z 900s] mem buoi 25 steps 1201 heap "79/81MB" | 234MB 38.7% --type=gpu-process --gpu-recen ; 268MB 50.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 878MB 54.8% --type=renderer --gpu-client-i ; 1078MB 58.1% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:36:33.749Z 960s] domcounters nodes 14512 listeners 1375 documents 8
+[2026-11-26T03:36:33.773Z 960s] mem buoi 26 steps 1291 heap "80/83MB" | 213MB 39.3% --type=gpu-process --gpu-recen ; 232MB 49.3% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 880MB 53.6% --type=renderer --gpu-client-i ; 1042MB 56.8% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:37:33.818Z 1021s] domcounters nodes 19657 listeners 1718 documents 9
+[2026-11-26T03:37:33.847Z 1021s] mem buoi 29 steps 1394 heap "81/84MB" | 246MB 38.5% --type=gpu-process --gpu-recen ; 284MB 47.7% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 941MB 54.9% --type=renderer --gpu-client-i ; 1128MB 56.4% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:38:33.716Z 1080s] domcounters nodes 22341 listeners 1839 documents 9
+[2026-11-26T03:38:33.759Z 1080s] mem buoi 31 steps 1496 heap "84/87MB" | 221MB 38.4% --type=gpu-process --gpu-recen ; 230MB 45.8% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 932MB 54.7% --type=renderer --gpu-client-i ; 1068MB 55.7% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:39:33.794Z 1141s] domcounters nodes 33366 listeners 2412 documents 11
+[2026-11-26T03:39:33.815Z 1141s] mem buoi 33 steps 1587 heap "84/87MB" | 245MB 38.1% --type=gpu-process --gpu-recen ; 268MB 44.1% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1011MB 55.1% --type=renderer --gpu-client-i ; 1146MB 56.5% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:40:33.603Z 1200s] domcounters nodes 36278 listeners 2679 documents 11
+[2026-11-26T03:40:33.622Z 1200s] mem buoi 34 steps 1689 heap "84/87MB" | 220MB 37.6% --type=gpu-process --gpu-recen ; 220MB 42.4% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1003MB 54.3% --type=renderer --gpu-client-i ; 1089MB 55.5% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:41:33.868Z 1261s] domcounters nodes 44990 listeners 3447 documents 11
+[2026-11-26T03:41:33.888Z 1261s] mem buoi 37 steps 1776 heap "87/90MB" | 241MB 37.4% --type=gpu-process --gpu-recen ; 305MB 42.2% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1046MB 54.5% --type=renderer --gpu-client-i ; 1203MB 55.1% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:42:33.858Z 1321s] domcounters nodes 46660 listeners 3478 documents 11
+[2026-11-26T03:42:33.886Z 1321s] mem buoi 37 steps 1825 heap "88/91MB" | 246MB 37.9% --type=gpu-process --gpu-recen ; 290MB 44.0% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1065MB 53.8% --type=renderer --gpu-client-i ; 1192MB 54.9% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:43:33.879Z 1381s] domcounters nodes 51387 listeners 3654 documents 11
+[2026-11-26T03:43:33.904Z 1381s] mem buoi 40 steps 1934 heap "89/92MB" | 221MB 37.5% --type=gpu-process --gpu-recen ; 230MB 42.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1097MB 53.6% --type=renderer --gpu-client-i ; 1151MB 54.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:44:34.161Z 1441s] domcounters nodes 117210 listeners 7857 documents 11
+[2026-11-26T03:44:34.190Z 1441s] mem buoi 41 steps 1986 heap "92/96MB" | 247MB 36.9% --type=gpu-process --gpu-recen ; 290MB 42.3% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1174MB 55.5% --type=renderer --gpu-client-i ; 1290MB 56.5% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:45:34.149Z 1501s] domcounters nodes 120976 listeners 8183 documents 12
+[2026-11-26T03:45:34.230Z 1501s] mem buoi 45 steps 2059 heap "93/97MB" | 227MB 36.4% --type=gpu-process --gpu-recen ; 259MB 42.0% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1693MB 56.3% --type=renderer --gpu-client-i ; 1295MB 57.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:46:33.820Z 1561s] domcounters nodes 126224 listeners 8360 documents 12
+[2026-11-26T03:46:33.831Z 1561s] mem buoi 46 steps 2141 heap "94/100MB" | 216MB 36.6% --type=gpu-process --gpu-recen ; 244MB 41.2% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1136MB 56.0% --type=renderer --gpu-client-i ; 1266MB 56.6% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:47:34.118Z 1621s] domcounters nodes 128289 listeners 8599 documents 12
+[2026-11-26T03:47:34.301Z 1621s] mem buoi 48 steps 2241 heap "99/107MB" | 214MB 36.4% --type=gpu-process --gpu-recen ; 239MB 40.5% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1637MB 56.2% --type=renderer --gpu-client-i ; 1284MB 56.0% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:48:34.096Z 1681s] domcounters nodes 132583 listeners 8977 documents 12
+[2026-11-26T03:48:34.155Z 1681s] mem buoi 49 steps 2326 heap "96/100MB" | 239MB 37.4% --type=gpu-process --gpu-recen ; 299MB 41.8% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1606MB 56.2% --type=renderer --gpu-client-i ; 1335MB 55.8% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:49:33.849Z 1741s] domcounters nodes 133678 listeners 8974 documents 12
+[2026-11-26T03:49:33.866Z 1741s] mem buoi 51 steps 2420 heap "99/105MB" | 217MB 37.3% --type=gpu-process --gpu-recen ; 238MB 41.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1111MB 56.2% --type=renderer --gpu-client-i ; 1288MB 55.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:50:33.936Z 1801s] domcounters nodes 138155 listeners 9300 documents 12
+[2026-11-26T03:50:33.960Z 1801s] mem buoi 55 steps 2494 heap "98/103MB" | 225MB 37.1% --type=gpu-process --gpu-recen ; 236MB 41.4% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1183MB 56.7% --type=renderer --gpu-client-i ; 1303MB 55.7% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:51:34.077Z 1861s] domcounters nodes 143760 listeners 9638 documents 12
+[2026-11-26T03:51:34.106Z 1861s] mem buoi 58 steps 2593 heap "99/105MB" | 218MB 37.5% --type=gpu-process --gpu-recen ; 240MB 40.8% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1176MB 56.8% --type=renderer --gpu-client-i ; 1319MB 55.6% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:52:34.052Z 1921s] domcounters nodes 153208 listeners 9967 documents 12
+[2026-11-26T03:52:34.081Z 1921s] mem buoi 60 steps 2709 heap "100/105MB" | 212MB 37.2% --type=gpu-process --gpu-recen ; 227MB 39.8% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1170MB 56.6% --type=renderer --gpu-client-i ; 1329MB 55.1% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:53:34.026Z 1981s] domcounters nodes 156811 listeners 10343 documents 12
+[2026-11-26T03:53:34.074Z 1981s] mem buoi 61 steps 2751 heap "101/106MB" | 227MB 37.4% --type=gpu-process --gpu-recen ; 302MB 40.8% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1207MB 56.2% --type=renderer --gpu-client-i ; 1405MB 54.7% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:54:18.379Z 2025s] probe: evaluate > 15 s (n=1) buoi 61
+[2026-11-26T03:54:48.382Z 2055s] probe: evaluate > 15 s (n=2) buoi 61
+[2026-11-26T03:54:48.405Z 2055s] PROBE START rss: 219MB 37.7% --type=gpu-process --gpu-recen ; 290MB 42.1% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1204MB 55.0% --type=renderer --gpu-client-i ; 2178MB 56.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:54:51.321Z 2058s] mem buoi 61 steps 2769 heap "TO" | 219MB 37.7% --type=gpu-process --gpu-recen ; 290MB 42.1% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1203MB 55.0% --type=renderer --gpu-client-i ; 2203MB 56.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:54:58.405Z 2065s] PROBE LS "TO"
+[2026-11-26T03:55:18.383Z 2085s] probe: evaluate > 15 s (n=3) buoi 61
+[2026-11-26T03:55:18.401Z 2085s] PROBE START rss: 218MB 37.9% --type=gpu-process --gpu-recen ; 288MB 42.6% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1216MB 54.5% --type=renderer --gpu-client-i ; 2349MB 57.0% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:55:18.409Z 2085s] pause err cdpSession.send: Protocol error (Debugger.pause): Debugger agent is not enabled
+[2026-11-26T03:55:28.402Z 2095s] PROBE LS "TO"
+[2026-11-26T03:55:48.383Z 2115s] probe: evaluate > 15 s (n=4) buoi 61
+[2026-11-26T03:55:48.400Z 2115s] PROBE START rss: 218MB 38.0% --type=gpu-process --gpu-recen ; 291MB 43.1% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1164MB 54.0% --type=renderer --gpu-client-i ; 2524MB 57.8% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:55:48.407Z 2115s] pause err cdpSession.send: Protocol error (Debugger.pause): Debugger agent is not enabled
+[2026-11-26T03:55:48.410Z 2115s] PROBE PAUSE TIMED OUT (no JS frame reachable: not a JS loop, or renderer wedged)
+[2026-11-26T03:55:51.323Z 2118s] mem buoi 61 steps 2769 heap "TO" | 219MB 38.1% --type=gpu-process --gpu-recen ; 289MB 43.1% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1164MB 53.9% --type=renderer --gpu-client-i ; 2532MB 57.9% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:55:58.402Z 2125s] PROBE LS "TO"
+[2026-11-26T03:56:18.385Z 2145s] probe: evaluate > 15 s (n=5) buoi 61
+[2026-11-26T03:56:18.407Z 2145s] pause err cdpSession.send: Protocol error (Debugger.pause): Debugger agent is not enabled
+[2026-11-26T03:56:18.407Z 2145s] PROBE PAUSE TIMED OUT (no JS frame reachable: not a JS loop, or renderer wedged)
+[2026-11-26T03:56:48.385Z 2175s] probe: evaluate > 15 s (n=6) buoi 61
+[2026-11-26T03:56:48.407Z 2175s] PROBE PAUSE TIMED OUT (no JS frame reachable: not a JS loop, or renderer wedged)
+[2026-11-26T03:56:51.327Z 2178s] mem buoi 61 steps 2769 heap "TO" | 218MB 38.4% --type=gpu-process --gpu-recen ; 290MB 44.1% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1143MB 52.9% --type=renderer --gpu-client-i ; 2884MB 59.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:57:18.386Z 2205s] probe: evaluate > 15 s (n=7) buoi 61
+[2026-11-26T03:57:48.386Z 2235s] probe: evaluate > 15 s (n=8) buoi 61
+[2026-11-26T03:57:51.327Z 2238s] mem buoi 61 steps 2769 heap "TO" | 221MB 38.6% --type=gpu-process --gpu-recen ; 290MB 44.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 1096MB 52.1% --type=renderer --gpu-client-i ; 3212MB 60.6% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:58:18.386Z 2265s] probe: evaluate > 15 s (n=9) buoi 61
+[2026-11-26T03:58:48.389Z 2295s] probe: evaluate > 15 s (n=10) buoi 61
+[2026-11-26T03:58:51.327Z 2298s] mem buoi 61 steps 2769 heap "TO" | 219MB 38.9% --type=gpu-process --gpu-recen ; 288MB 45.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 862MB 51.1% --type=renderer --gpu-client-i ; 3559MB 62.0% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:59:08.398Z 2315s] SEATHANG stage 1 START rss: 219MB 38.9% --type=gpu-process --gpu-recen ; 291MB 46.2% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 870MB 50.9% --type=renderer --gpu-client-i ; 3657MB 62.3% --type=renderer --gpu-client-i ; 
+[2026-11-26T03:59:18.387Z 2325s] probe: evaluate > 15 s (n=11) buoi 61
+[2026-11-26T03:59:18.399Z 2325s] SEATHANG stage 1 LS "TO"
+[2026-11-26T03:59:38.411Z 2345s] pause err cdpSession.send: Protocol error (Debugger.pause): Debugger agent is not enabled
+[2026-11-26T03:59:48.390Z 2355s] probe: evaluate > 15 s (n=12) buoi 61
+[2026-11-26T03:59:51.325Z 2358s] mem buoi 61 steps 2769 heap "TO" | 218MB 39.0% --type=gpu-process --gpu-recen ; 291MB 46.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 863MB 50.2% --type=renderer --gpu-client-i ; 3912MB 63.2% --type=renderer --gpu-client-i ; 
+[2026-11-26T04:00:08.412Z 2375s] SEATHANG stage 1 PAUSE TIMED OUT (no JS frame reachable: not a JS loop, or renderer wedged)
+[2026-11-26T04:00:48.393Z 2415s] probe: evaluate > 15 s (n=1) buoi 61
+[2026-11-26T04:00:51.330Z 2418s] mem buoi 61 steps 2769 heap "TO" | 219MB 39.1% --type=gpu-process --gpu-recen ; 291MB 47.9% --type=gpu-process --gpu-recen ; 72MB 0.0% --type=renderer --gpu-client-i ; 74MB 0.0% --type=renderer --gpu-client-i ; 862MB 49.4% --type=renderer --gpu-client-i ; 4253MB 64.4% --type=renderer --gpu-client-i ; 
