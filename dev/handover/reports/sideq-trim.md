@@ -67,7 +67,8 @@ Open-quest weeks: LIVE y1 {0:16,1:33,2:20,3:12} → branch {0:37,1:38,2:1}. Bran
 ## Tests
 - npc-purpose-g1d PASS (11) · nrask-engine ALL PASS · j72c-play ALL PASS ×3 (one earlier run: 4 seeds stuck at step 0 «phải đến …», not reproduced in 4 reruns; LIVE PASS ×1) — both content tests now set `window.__sqoff=1` (content checks deal any asker; the rank gate is checked by the robot + sideq-shots).
 - dev/test/sideq-shots.js (Quý phi life, real deal through the gate): PASS, 0 page errors.
-- quickcheck + interleaved perf ×3: see below.
+- quickcheck.sh (full): build OK, old save OK; CORE GATES FAIL only on G4 80-dialog-fixed («kit-dialog-2 a» empty Tốn/Được cell, Fold+iPad) + G4 90-button-crawl («Ô lưu · Lui» close) = both LIVE-identical (FOREMAN_D_STATUS 26/11 11:18Z «LIVE-identical: dialog-fixed 2 + «Ô lưu · Lui»»); this branch touches no dialog/kit code.
+- quickcheck.js interleaved perf ×3 (iPad, new/live alternating, medians): run 1 PASS render 256/261 ms, tab 602/708, buổi 1576/1450, tasks>200 39/33 · run 2 PASS 248/221, 641/584, 1298/1702, 29/29 · run 3 PASS 274/240, 634/695, 1460/1327, 37/29. Open ~2.3–2.5 s, old save OK every run.
 
 ## LOOK stills (CDN img/_review/sideq-trim/)
 fold-ask.jpg · fold-tab.jpg · ipad-ask.jpg · ipad-tab.jpg — https://ctm-img.victoria-tntt.workers.dev/img/_review/sideq-trim/<name>
