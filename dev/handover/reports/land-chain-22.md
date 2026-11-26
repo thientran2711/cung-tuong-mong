@@ -45,3 +45,9 @@ STATE at start: LIVE 3af7896e · ROLLBACK 6b5d3d05. Tools = lc21-tools (SP= fixe
 - 12:46Z RV-KK41: LAND SLOT kit-name-stranger e25dfd52 SMALL PASS (on 3af7896e line; j61 + KIT.md §98.15; gates kit-name-stranger seeded loop 6/6, name-sentence, kit-name-sites). Slot: after current queue items (MAIN to place).
 - 12:55Z SELF-MERGE LAND kawhy on kem-row (MAIN 159 (a) OK): review/lc22-kw 30915038 (force-replaced 83604711) = cace0315 onto 53e52a1f; j63.js kaWhyKem (kawhy) + kitKemRow (kem-row); kaWhyKem..kitKemRow block (17 lines) byte-identical to review/one-sieve 5334ef71. Tests kawhy-verdict, news-sieve, ob-verdict, kit-kem-row running.
 - Stack now: HW aa37de21 → oan 143515c6 → ov 9cdc4d82 → km 53e52a1f → kw 30915038.
+- 12:50Z MAIN 159 queue check: added D cung-quy 99876fde, contest-thitam 2c956d97, d-stack-lr3 cb398c07 (FF from 3af7896e; stack-land; conflict → «FOR D: remerge <branch>» in FOREMAN_D_STATUS) after kit/verdict stack + map-zones. Coming: B save-fix-stack-rv8 (~13:00Z, replaces rv5+save-growth), D mg-trim-r6 543ca579 (contains B coop-reg9-route; ALONE). Full queue sent to MAIN.
+- 12:50Z MAIN 159 queue edits: (a) ACT-MERGE (RV-ACT-MERGE BIG ≈13:05Z) TOP once LAND SLOT arrives — owner LIVE ≈16:30Z; land right after whatever is mid-gate, ALONE. (b) jump-ins on PASS in order: renderer-mem head 2b5bbbb3 (game build 82bbe53e, not 123a2a9c; memory freeze play-stopper) → ob-ngoaicung r4 → dialog-order r3. (c) mg-trim-r6 ALONE after act-merge.
+
+## 13:00Z — HW-NITS READY sent (aa37de21)
+- gates-hw2: all PASS except global-names 1 CLASH (=LIVE), mg-back 1/12 both (LIVE 2/12), tainghe-info TypeError (rerun FAILS on LIVE 1dcb373e too → pre-existing). QC PASS vs 1dcb373e; perf render 263/286, tab 672/678, buổi 1846/2070, tasks 36/38.
+- ob-oan lc22-oan 143515c6 gates start (gates-oan22.sh, QCBASE=wt/hw).
