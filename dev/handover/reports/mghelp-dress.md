@@ -61,3 +61,42 @@ CDN upload refused (no R2 credentials in this container: cdn_sync HTTP 400). Sho
 ## FOR FOREMAN E (decision, not built)
 - The full-body figures are painted per RANK TIER, not per robe: after a tap the figure changes only when the robe's phẩm differs; a green robe of the same phẩm still shows that tier's painting (red in the Fold shot). If sếp still reads that as «không thấy mặc», options: (a) per-robe figure art (art seat), (b) a code tint layer on the robe like jcloth (no new art). Owner call / Foreman C — law 18 freeze applies.
 - Pre-existing seen, not touched: the big empty «?» hint button under the Lễ nghi board during «Hướng dẫn»; button-crawl «Ô lưu» Lui on the title screen.
+
+## REVIEW — E95r (session_01DgYSWpXJEYdkTcVgaJDDTj, opus, fresh eyes) — PASS c081852a
+START_CTX ~3 %. Merge-ready sha for the coordinator: **review/mghelp-dress-r6 4f377603** = c081852a merged onto origin/main 02f564ae (quickchecked; tree identical to the tested 41e8664a). No code fixed by the reviewer.
+PRIORITY #1 CHECK: brief E95 line 1 (OD 'Hướng dẫn' 11 / 'Điểm trang|outfit' 65; review/mg-back, mg-ready-guide, kit-dress-picker already in main) — worker reused kgTut / kg82Back / kitModalClose / toilAct / kitDressFigSrc / kitGameFigRefresh, no new parts. Report has the line. OK.
+
+### (1) E-a «Hướng dẫn» → close = back to the rules, never 0 — OK
+- Code: `KG82.tut.back` (= the «Về luật chơi» path) is called from kg82Back, a capture listener on any `.kit-x/#mclose` of the layer holding the guided round, Esc + outside tap on #ov, and kitModalClose (dialog games). One place, kit level (j82 + jk4). The help never starts the clock / charges / scores.
+- dev/test/mghelp-back.js: 97/97 on c081852a and on the merge.
+- OWN REAL-TAP probe (`shots/mghelp-dress/e95r-realtap-probe.js`; page.mouse at the ✕ centre, real keyboard Escape, a real tap on a point where elementFromPoint = the dim layer), incl. 4 callers NOT in its list (j83 wkPractice, j83 lessonMode self, jrcp teacher, jveil craft — all with a remembered charge `KG82.payOnGo`) + jexam + jpetcare: **Fold 18/18 ok, iPad 18/18 ok, 0 page errors**; after each close: tutorial off, same rules screen with «Sẵn sàng»/«Hướng dẫn», onDone not called, no result, exam raws [], S identical, payOnGo unchanged (nothing charged); a real tap on «Sẵn sàng» afterwards starts the real round (phase play).
+- Same probe on bare main 02f564ae: **17 FAIL** (✕ / Esc / outside end the round) → bug reproduced, fix confirmed.
+- mg-back.js on the merge: 1–2/12 FAIL, varying per run (item 1/2 = `onTop:false` of the ✕ at the probe instant, item 6 once = ambient `__mkAt` + a visitor ref); main fails item 1 the same way → flaky probe, pre-existing. My real taps on that ✕ always landed.
+
+### (2) E-b Điểm trang tap = worn at once — OK (with an owner-visible caveat, see FOR FOREMAN)
+- dress-tap.js PASS 32 (branch + merge); kit-dress-picker.js PASS 19 (merge).
+- Own real-tap shots (consort road, Fold + iPad): tap «Áo gấm hoa mai» (phẩm 2) → «Đang mặc» slot + chest badge switch at once, detail with «Tháo» (Fold), figure t1 → t2; tap the old robe → back to t1; Trâm tab tap → worn. Saved: dress-tap reload rows ok.
+- Figure fixes verified: (a) j79 kitGameFigRefresh shadowed `o` — real (TDZ), now refreshes; only callers are jtoil (3 places) → no other screen changes. (b) tier off by one: kitDressFigSrc(S,r) on main gives t1,t1,t2,t3 for r=0..3; branch gives t1,t2,t3,t4 (6 lives sampled). Whole family toilPorAt/toilFigAt/kitDressFigSrc all use toilTierAt. Guard `isSrv()` → on the cung nữ road the figure stays (maid dress) — by design.
+- KIT §60.2 `.kdpk-fig` sticky: only user of kitDressPicker / .kdpk-fig is toilDressUI (+ its kit sample; Hội phối đồ + co-op redraw call the same function) → consistency scan = 1 part, all places identical. KIT.md §13.9 + §60.2 updated in the same branch. OK (law 9/11, OD:L1093–1095).
+- Tư trang «card → Mặc» kept: justified (that tap also opens sell / give / pawn; a blind tap must not spend 1 khắc; owner word names «trang điểm»). NOTE the worker's Tư trang row in dress-tap.js is vacuous (it re-wears the robe already worn: y0 = y1 = k). My own check wears ANOTHER robe: Fold + iPad y_hoanho → y_saxanh, 1 khắc — works. Non-blocking; worth fixing the test later.
+- Co-op: the tap goes through the same toilAct → wdWear (reg8 intent) as the old «Mặc» button; quickcheck G4 coop-one-world PASS (seeds 7, 3). coop-thin-f3 (2 clients via the public relay) not run.
+
+### (3) BIG gates — OK
+- quickcheck.sh on the merge 41e8664a vs live 02f564ae: G1 one-core, G2 rules-one-source (old save ok), G3 kit-conform, G4 coop-one-world, time-spill, open 2120 ms, OLD SAVE from LIVE loads + plays a buổi, 0 errors.
+- FAILs, all reproduced IDENTICALLY on bare LIVE 02f564ae (quickcheck HEAD vs f009e1a6): G4 80-dialog-fixed «kit-dialog-2 a no empty Tốn/Được cell» (Fold + iPad), G4 90-button-crawl «Ô lưu · Lui», perf «live build could not be measured» (tool). → pre-existing, not this branch. (look-dedupe did not fail in my runs.)
+- Perf medians (same box, iPad): merge render 109 / tab 436 / buổi 789 ms / long tasks 24 vs bare-live run 167 / 433 / 864 / 23 → no regression.
+
+### (4) Merge onto newest origin/main 02f564ae (brief said f009e1a6; main moved): ONE real conflict dev/build/jtoil.js (main added `toilRankOfFile` next to toilPorAt; kept both) + built files (rebuilt). Pushed as review/mghelp-dress-r6 4f377603.
+
+### (5) Shots / videos (Fold 755x1000@2 + iPad 1180x820@2, real taps, looked at each 3×) — handover branch dev/handover/shots/mghelp-dress/
+a1 rules → a2 «Hướng dẫn» (guided Lễ nghi board) → a3 after ✕ = the same rules screen → a4 «Sẵn sàng» plays; b1 dress before → b2 after ONE tap (worn, slot, figure tier) → b3 tap back → b4 Trâm tap; video-realtap-fold/ipad.webm = the whole run. (CDN: no key on this account.)
+Seen, not this branch: «KHẢO HẠCH TẤN PHONG UNDEFINED» heading in my shots = harness opened exRun outside an exam window (exPlan without a target); the new-game «Rương đồ khuê các» reveal can sit over the first frame (dismissed by «Nhận» before shooting).
+
+### Laws touched
+4 ONE CORE: no numbers added. 9 KIT: shared parts only (kgTut/kg82Back/kitModalClose/kitDressPicker), KIT.md updated. 11 WHOLE GROUP: 12 + my 4 extra callers × paths; every dress-picker place (1 function). 12 devices: Fold + iPad. 15 verbatim owner words in brief + code comments. 16: owner 15/11 «tap shows the info» kept (detail still opens). 18: no new feature. OK.
+
+### FOR FOREMAN E (not blocking, owner-visible)
+1. The figure is painted per RANK TIER, not per robe: in my shots she taps a PINK robe and the figure wears a TEAL (Fold) / RED (iPad) dress of that tier; two robes of one phẩm show the same picture; on the cung nữ road it never changes. Code now does all it can; if sếp still says «không thấy mặc», the worker's options stand: (a) per-robe art (Foreman C), (b) a code tint like jcloth. Owner call.
+2. iPad: after a tap the piece detail («Tháo» + info) sits below the tall «Đang mặc» column, out of view without scrolling (pre-existing layout; owner 15/11 «tap shows the info»). Kit follow-up candidate.
+3. dress-tap.js Tư trang row is vacuous (see above).
+VERDICT: **PASS c081852a** (merge-ready: review/mghelp-dress-r6 4f377603).

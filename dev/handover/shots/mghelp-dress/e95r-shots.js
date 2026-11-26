@@ -1,0 +1,43 @@
+/* E95r shots + videos, REAL taps (page.mouse at element centres). node shots.js dev/index.html outdir */
+const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const URL='file://'+path.resolve(process.argv[2]);const OUT=process.argv[3];fs.mkdirSync(OUT,{recursive:true});const log=[];
+const ctr=async(p,sel)=>p.evaluate(s=>{const e=[...document.querySelectorAll(s)].find(x=>x.offsetParent);if(!e)return null;e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2}},sel);
+const tap=async(p,sel)=>{const c=await ctr(p,sel);if(!c)throw new Error('no '+sel);await p.mouse.click(c.x,c.y);return c};
+(async()=>{const b=await chromium.launch();process.on("unhandledRejection",e=>{console.log("ERR",e.message);console.log(JSON.stringify(log));process.exit(1)});
+ for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad']]){
+  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,recordVideo:{dir:OUT,size:{width:W,height:H}}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof toilOpen==='function'&&typeof start==='function');await p.waitForTimeout(2500);
+  await p.evaluate(()=>{for(let i=0;i<30;i++){localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;if(!isSrv()&&S.rank===0)break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.bac=500;S.ap=9;S.suc=100;
+   try{const k=Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="y"&&!(S.inv||[]).some(e=>e&&e.k===k));const pk=k.find(x=>(WD_ITEMS[x].P|0)>=2)||k[0];if(pk)S.inv.push({k:pk})}catch(e){}save();try{render()}catch(e){}});
+  await p.waitForTimeout(3500);
+  for(let i=0;i<6;i++){const n=await p.evaluate(()=>{const b=[...document.querySelectorAll('button')].find(x=>x.offsetParent&&/^\s*Nhận\s*$/.test(x.textContent));if(!b)return null;const r=b.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2}});if(!n)break;await p.mouse.click(n.x,n.y);await p.waitForTimeout(1500)}
+  await p.evaluate(()=>{document.querySelectorAll('body>*>.kmst').forEach(e=>e.parentElement.remove());document.querySelectorAll('#klife,#kmrew').forEach(e=>e.remove())});log.push([tag,'overlays',await p.evaluate(()=>[...document.querySelectorAll('.kmov,#kmrew,.kmst,.kdaytc.on')].length)]);
+  /* E-a: KHẢO HẠCH rules → «Hướng dẫn» → ✕ «Quay lại» → same rules, no 0 */
+  await p.waitForFunction(()=>!document.querySelector('.kdaytc.on'),null,{timeout:30000}).catch(()=>0);await p.evaluate(()=>{window.__E={};window.__done=[];exRun(exPlan(S),window.__E,x=>window.__done.push(1))});await p.waitForTimeout(2200);
+  await p.screenshot({path:`${OUT}/a1-rules-${tag}.png`});
+  await tap(p,'#kgrtut');await p.waitForTimeout(2500);await p.screenshot({path:`${OUT}/a2-huongdan-${tag}.png`});
+  await tap(p,'#kg82 .kit-x[data-kitx=kgback]');await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/a3-after-x-${tag}.png`});
+  const a=await p.evaluate(()=>({tut:!!KG82.tut,rules:!![...document.querySelectorAll('.kgr-go')].find(x=>x.offsetParent),done:window.__done.length,raws:JSON.stringify((window.__E.pend||{}).raws||null)}));log.push([tag,'E-a after ✕',a]);
+  await tap(p,'#kgrtut');await p.waitForTimeout(2000);await p.keyboard.press('Escape');await p.waitForTimeout(1200);
+  const a2=await p.evaluate(()=>({tut:!!KG82.tut,rules:!![...document.querySelectorAll('.kgr-go')].find(x=>x.offsetParent),done:window.__done.length}));log.push([tag,'E-a after Esc',a2]);
+  await tap(p,'.kgr-go');await p.waitForTimeout(2000);await p.screenshot({path:`${OUT}/a4-sansang-plays-${tag}.png`});log.push([tag,'E-a Sẵn sàng phase',await p.evaluate(()=>KG82.phase)]);
+  await p.evaluate(()=>{try{kg82Close()}catch(e){}try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.remove());S.ap=9;Q.length=0;try{closeModal()}catch(e){}});await p.waitForTimeout(800);
+  /* E-b: Điểm trang → Y phục → tap a robe in the chest → worn at once */
+  await p.waitForFunction(()=>!document.querySelector('.kdaytc.on'),null,{timeout:30000}).catch(()=>log.push([tag,'kdaytc still on']));for(let i=0;i<3;i++){const open=await p.evaluate(()=>[...document.querySelectorAll('.kidet,.kpinfo')].some(e=>e.offsetParent));if(!open)break;await p.keyboard.press('Escape');await p.waitForTimeout(500)}log.push([tag,'popup left',await p.evaluate(()=>[...document.querySelectorAll('.kidet,.kpinfo')].filter(e=>e.offsetParent).length)]);await p.evaluate(()=>{toilOpen()});await p.waitForTimeout(1500);log.push([tag,'rdyhit',await p.evaluate(()=>{const e=document.getElementById('toilrdy');if(!e)return 'none';e.scrollIntoView({block:'center'});const q=e.getBoundingClientRect();const h=document.elementFromPoint(q.left+q.width/2,q.top+q.height/2);return (h===e||e.contains(h))?'hit':(h.id+'.'+h.className+' / '+(h.innerText||'').slice(0,80))})]);await p.screenshot({path:`${OUT}/dbg-${tag}.png`});await tap(p,'#toilrdy');await p.waitForTimeout(2000);log.push([tag,'dbg',await p.evaluate(()=>({kg:!!document.getElementById('kg82'),tabs:[...document.querySelectorAll('[data-kinvtab]')].map(e=>e.dataset.kinvtab+':'+!!e.offsetParent),txt:(document.querySelector('#kg82')||{}).innerText?.slice(0,200)}))]);
+  await tap(p,'#kg82 [data-kinvtab="y"]');await p.waitForTimeout(800);await p.screenshot({path:`${OUT}/b1-dress-before-${tag}.png`});
+  const st=()=>p.evaluate(()=>({y:(wdOf(S).y||{}).k,P:((WD_ITEMS[(wdOf(S).y||{}).k]||{}).P),fig:((document.querySelector('#kg82 .kesf img')||{}).src||'').split('/').pop(),all:[...document.querySelectorAll('#kg82 .kesf img, #ov .kgfig img')].map(i=>(i.closest('.kgfig')?'COL:':i.closest('.kdpk-fig')?'STAND:':'?:')+i.src.split('/').pop()),want:String(kitDressFigSrc(S,toilPor().rank)).split('/').pop(),por:toilPor().rank,wP:(wdItem(wdOf(S).y)||{}).P,k1:String(kitDressFigSrc(S,1)).split('/').pop(),k2:String(kitDressFigSrc(S,2)).split('/').pop(),ft:figTierOf(S),age:S.age,pid:S.pid,rk:S.rank,slot:[...document.querySelectorAll('#kg82 [data-keqk="toil"]')].map(e=>e.getAttribute('title')||'').filter(Boolean).join('|')}));
+  const s0=await st();
+  const cands=await p.evaluate(()=>{const o=KINV.reg.toil;return [...document.querySelectorAll('#kg82 .toilinv [data-kinvi]')].filter(e=>e.offsetParent).map(e=>{const it=o.items[+e.dataset.kinvi];return{i:+e.dataset.kinvi,k:it&&it.g&&it.g.k,P:it&&it.g&&WD_ITEMS[it.g.k]?WD_ITEMS[it.g.k].P:null,worn:!!(it&&it.g&&(it.g.wdSlot||it.g.w))}})});
+  const pick=cands.filter(c=>!c.worn).sort((a,b)=>Math.abs((b.P|0)-(s0.P|0))-Math.abs((a.P|0)-(s0.P|0)))[0];log.push([tag,'chest',cands,'pick',pick]);
+  if(pick){await tap(p,`#kg82 .toilinv [data-kinvi="${pick.i}"]`);await p.waitForTimeout(1800);await p.screenshot({path:`${OUT}/b2-dress-after-tap-${tag}.png`});const s1=await st();log.push([tag,'E-b before',s0,'after',s1]);
+   /* tap back the first robe */
+   const back=await p.evaluate(k=>{const o=KINV.reg.toil;const e=[...document.querySelectorAll('#kg82 .toilinv [data-kinvi]')].find(e=>{const it=o.items[+e.dataset.kinvi];return e.offsetParent&&it&&it.g&&it.g.k===k&&!(it.g.wdSlot||it.g.w)});return e?+e.dataset.kinvi:-1},s0.y);
+   if(back>=0){await tap(p,`#kg82 .toilinv [data-kinvi="${back}"]`);await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/b3-dress-tap-back-${tag}.png`});log.push([tag,'E-b tap back',await st()])}}
+  await tap(p,'#kg82 [data-kinvtab="tram"]');await p.waitForTimeout(700);
+  const tr=await p.evaluate(()=>{const o=KINV.reg.toil;const e=[...document.querySelectorAll('#kg82 .toilinv [data-kinvi]')].find(e=>{const it=o.items[+e.dataset.kinvi];return e.offsetParent&&it&&it.g&&!(it.g.wdSlot||it.g.w)});return e?+e.dataset.kinvi:-1});
+  if(tr>=0){await tap(p,`#kg82 .toilinv [data-kinvi="${tr}"]`);await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/b4-tram-after-tap-${tag}.png`});log.push([tag,'E-b tram',await p.evaluate(()=>(wdOf(S).tram||{}).k)])}
+  /* Tư trang: «Mặc» a robe she does NOT wear (dress-tap's check wore the same robe again) */
+  const tt=await p.evaluate(async()=>{try{kg82Close()}catch(e){}S.ap=9;const cur=(wdOf(S).y||{}).k;const i=(S.inv||[]).findIndex(e=>e&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==="y"&&!e.h&&e.k!==cur);if(i<0)return{none:1,cur};const k=S.inv[i].k;const u0=used;wdWearUI(i);await new Promise(r=>setTimeout(r,300));return{k,y0:cur,y1:(wdOf(S).y||{}).k,khac:used-u0}});
+  log.push([tag,'Tư trang Mặc (other robe)',tt]);
+  log.push([tag,'errors',errs.slice(0,3)]);await ctx.close()}
+ await b.close();fs.writeFileSync(OUT+'/log.json',JSON.stringify(log,null,1));console.log(JSON.stringify(log))})();
