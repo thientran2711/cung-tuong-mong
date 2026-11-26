@@ -460,3 +460,4 @@ KIT bac-progress (owner UI bug 08:05Z) | review/kit-bac-progress | session_01V1Z
 BIG RV map-zones r7 abc1c795 | reports/map-zones.md ## REVIEW | session_01V1ZZH1WzF9VpNYw1Q3uuhA | RUNNING | 26/11 08:12Z (MAIN 155)
 OB-OAN giảm oán/nguy hiểm panel + «Cách giảm» rows (owner 08:25Z) | review/ob-oan | session_01V1ZZH3GxCcQzWNoKy1ARxN | RUNNING | 26/11 08:20Z (MAIN 155)
 OB-VERDICT result card verdict + target row, whole family (owner 08:30Z) | review/ob-verdict | session_01V1ZZH2Q8mUpEYyBNTQvhzP | RUNNING | 26/11 08:25Z (MAIN 155)
+OB-M3UI 4 robot UI faults (legend soft-lock, lightbox no exit, Chuyển kiếp no confirm, unlabeled !) | review/ob-m3ui | session_01V1ZZH2Vt4J15fPjFZDCzMq | RUNNING | 26/11 08:20Z (MAIN 155)
