@@ -315,7 +315,8 @@ Rules
   khắc `2 khắc (còn N)` (used+c ≤ 4), `Sức ≥20 (có N)` for acts over 1 khắc (`can`), `Bạc N (có M)`, buổi `Buổi tối (đang buổi sáng)`,
   "chưa làm trong buổi này", lãnh cung / còn sống / cấm túc (CRIME), and the act's own requirement from `ok()` + `ACT[k].x` / `LACK[k]`
   with evidence counts `(có N)` from `evG`. Producers: `cardH` and `rvGroups` wrappers put the list on the button as `data-kneed`;
-  any other disabled button turns its reason (`.kwhy`/`guessWhy`) into a ✗ item. A requirement that `ok()` checks but no text names
+  any other disabled button turns its reason (`.kwhy`/`guessWhy`) into a ✗ item; a reason the code KNOWS goes in `data-why` and `guessWhy` returns it
+  before any guess (review/home-way-nits; scan `node dev/test/kit-why-scan.js`: no disabled card with a known reason shows «chưa đủ điều kiện»). A requirement that `ok()` checks but no text names
   shows "điều kiện riêng của việc này chưa có" (to be named by the act owner).
 - Disabled (`.kdis`): grey ground `#eee7da`, grey title, chip greyed; the Cần row (from `.kwhy` / `cardWhy` / `guessWhy` / `data-kneed`) replaces
   the rows that cannot apply (Mất and Kèm hidden; Tốn and Được stay so she sees what it would give). Never opacity below 1 on the text.
@@ -355,11 +356,12 @@ Rules
 
 ## 7.1 RESULT POPUP = SHORT AND CLEAR (owner 24/11 ~21:50Z real v5 + ~21:57Z real v6-good-short + ~22:14Z real) — `dev/build/j63.js` `kaResultRows`, `dev/build/jwhyn.js` `whyText`/`whyUniq`, `dev/build/j61.js` `k61Mask`/`kitNameList`
 - The cause appears ONCE: as the card TITLE (the act / job step, e.g. «Vá lại quạt tròn bị mối cắn: Cắt viền…»). The first sentence is never a copy of the title (Việc nhờ steps pass `__kaSenOvr` = the title, so the card drops the duplicate).
-- ONE short line per change, the kit row «<Tên>: thiện cảm +8» / «Thái hậu: thiện cảm −3» / «ta quý nàng +4» / «<bạn cung nữ>: thiện cảm +2». NEVER «có thiện cảm với ta hơn», never «(5→13, +8)» on a person line, never the action text repeated after the number (the long detail lives in the Sổ ghi). Her own stats keep the kit «Danh 10→12 (+2)» form (§7).
+- ONE short line per change, the kit row «<Tên>: thiện cảm +8 (42)» / «Thái hậu: thiện cảm −3 (17)» / «ta quý nàng +4 (20)» / «<bạn cung nữ>: thiện cảm +2 (61)» / Kèm «<Tên>: oán +9 (31)» (CANON OVERWRITE, owner OD 26/11 ~03:55Z «Hoàng hậu thiện cảm +8 (42)», ACT-MERGE J0): EVERY person number a result moves (thiện cảm, ta quý nàng, chứng cứ về nàng, ghen, oán, Thái hậu / Hoàng hậu, the maid) shows the change and then the NEW TOTAL in brackets; the bracket never repeats the change and has no arrow; a negative total reads «(−4)». One writer: `kaNT(change,total)` (j63) inside `kaResultRows` / `kitKemRow`; act-card Được / Mất rows where a person number moves use `kitRelW(kind,change,total)` → «thiện cảm +6 (48)» (J1–J5 callers; total = now + change). NEVER «có thiện cảm với ta hơn», never «(5→13, +8)», never the action text repeated after the number (the long detail lives in the Sổ ghi). Her own stats keep the kit «Danh 10→12 (+2)» form (§7).
+- ACT-MERGE chooser (J0 check): a merged button's ways (tự đi / sai người / mua chuộc) and tiers (nhẹ · vừa · nặng) are the options of the ONE kit option dialog (§6.2b `kitOptFinal` cards, a hand / stage when it qualifies §101/§102); the tier is said in the option title («Nói xấu · nặng»). No new kit part, no tier header.
 - «Vì sao» row only when the cause is NOT the action itself and is a REAL cause she knows: «<WHO>: tính Ân cần, trọng Lễ, hợp ý → thiện cảm với ta +6» (nết / trọng named only when she knows them). A cause she does not know («ta chưa rõ tính nết nàng») says nothing → NO line (the number is already on the Được / Mất / Kèm line). Identical lines merge («… (2 người)»). No %, numbers from BAL.
 - An unnamed person (name not yet known) is «một vị <cung nữ / phi tần / thái giám / tước>» (`k61MaskT`: the visible title), in every result line, Kèm row and log text — NEVER «chưa quen biết» / «người chưa quen» (`k61Mask(plain)`, `kitNameList`, `whyWho`).
 - Nothing changed: Ghi chú «ta không được gì, cũng không mất gì» (was «không đổi gì»).
-- Test: `dev/test/viecnho-fix.test.js` (generated «Vì sao» lines: 0 vague / % / «chưa quen»; a real resultShow: «<Tên>: thiện cảm +N», no «hơn» / (a→b) / «chưa rõ»; an unnamed person says «một vị …»).
+- Test: `dev/test/viecnho-fix.test.js` (generated «Vì sao» lines: 0 vague / % / «chưa quen»; a real resultShow: «<Tên>: thiện cảm +N (total)», Kèm «oán +N (total)», no «hơn» / arrow / repeated «(+N)» / «chưa rõ»; an unnamed person says «một vị …»).
 
 ## 85.8 HER MARKER IS ALWAYS THE TOP LAYER ON EVERY MAP (owner 24/11 ~22:00Z real, shot v8: «Ta đang ở đây» hid behind the Vĩnh Hòa plaque) — `dev/build/jmapc.js`
 - `.mapw .mspot.here` (the spot she stands on: its name tag with her marker `.kmmapmk`, «Ta + N bóng · còn K khắc», faces) has `z-index:60` and its tag parts are positioned above the other spots: it is above every other spot, plaque and tag on Dư đồ (all zooms), palace detail and Kinh thành (all use `.mspot`). Covering a plaque's words is fine; hiding her marker is not.
@@ -4057,8 +4059,19 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
 - Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
   → `<img.kbi>` (img/kit/ico-<kind>.webp, 30 px, gpt-2-6 gouache, transparent, 128 px WebP ~7 KB: ico-room = red-lacquered door under green tiles with a lantern,
   ico-map = palace scroll map) + `<span.kbl>` label; the button class is `.kbackb` (no border / ground in the header; a soft paper pill over the stage art for #tomap).
-- Header `#k3room` (phone shell only, as before): label "Về phòng", or "Về <place>" when she is elsewhere (tooltip + aria-label the same). >= 600 px: icon + label in the
-  right column under the time block, right-aligned, no bar. < 600 px: icon only (label in tooltip, same rule as the stat cells), under the menu button next to the time block.
+- Header `#k3room` = THE WAY HOME (review/home-way, owner OD 26/11 ~04:25Z; canon overwrite of «Về <place>»): ONE rule with the Dư đồ top-row
+  «Về phòng» = `homeWay()` / `homeGo()` (jplrule.js). Away from home it ALWAYS walks her to HER OWN room (goTo("home"), cost travel() =
+  BAL.walk.near / BAL.walk.far), label «Về phòng · N khắc» + second line = her palace's name (the home mark, `homeName()`); no khắc left =
+  disabled, «Về phòng · hết khắc». At home: «Về phòng» + her palace's name, tap = her room's page. Label lines: `.kbl` white-space:pre-line.
+  Spread (>= 600 px): icon + label, right column. One page (kv1): icon only at home (tooltip); AWAY (class `.hwaway`, jk3/jk4) the label
+  shows under the icon (small, centred, menu column) — the button is never hidden away from home, the place painting included.
+- ONE BOX (review/home-way-nits, law 10): a label line never wraps (`.kbl` white-space:pre, inline-grid) and the label column is as wide as the LONGEST
+  label the button can show (hidden sizer row `.kbl::after{content:attr(data-sz)}`, data-sz set in jk3 from «Về phòng · hết khắc», «Về phòng · <far> khắc»,
+  her palace's name) → the same size at home, away and with no khắc left (Fold one page 101 px, iPad 163 px). The iPad two-row bar (`.khd2`) keeps
+  its rows away from home too (a one-row :has(#k3room) rule out-ranked it and the time block drew over «Sắc»).
+- REAL REASON when disabled: `homeWay().why` = the kit khắc words `j76need(tc,null,true)` (the walk never spills into the next buổi): «hết khắc buổi
+  này (cần N)» / «không kịp xong trong buổi trưa (cần N khắc)» → `data-why` on both buttons; the Dư đồ card's «Cần» row and the lock pop show it.
+  Test `node dev/test/home-way-label.js` (DEV=fold|ipadAir|ipadPro: no wrap, one width, no top-bar overlap).
 - New back buttons to a place MUST use this part (`node dev/test/room-btn-scan.py` fails on a text "‹ <place>" bar). New icon kinds: add `img/kit/ico-<kind>.webp` in the same style.
 - Tests: `node dev/test/room-btn.js <url> <outdir>` (6 viewports). Kit page: sample §75. Number §75 (KIT_NUMBERS.md; was provisional §72).
 ## 69. CO-OP BUỔI CLOCK · kitCoopClock (owner 15/11 ~21:25Z, review/coop-timer) — `dev/build/jcooptimer.js` (after jkitpage)

@@ -1,1 +1,1 @@
-Sửa lỗi treo máy khi chơi lâu (nhất là màn Fold): khung túi đồ và dải «Kéo xuống» không còn chồng dồn.
+Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên.

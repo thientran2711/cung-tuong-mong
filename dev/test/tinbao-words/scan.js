@@ -30,7 +30,7 @@ const J=fs.readFileSync(path.join(D,'jnotice.js'),'utf8');const a=J.indexOf('fun
 /* ---- (3) producers in place ---- */
 const has=(f,s,why)=>{const t=fs.readFileSync(path.join(D,f),'utf8');if(!t.includes(s))bad(`${f}: ${why} (missing «${s.slice(0,50)}»)`)};
 const no=(f,s,why)=>{const t=fs.readFileSync(path.join(D,f),'utf8');if(t.includes(s))bad(`${f}: ${why} (still «${s.slice(0,50)}»)`)};
-no('jstagehere.js','Ở lại = như lẻn vào','closing alert «=»');has('jstagehere.js','chẳng khác gì lẻn vào','closing alert sentence');
+no('jstagehere.js','Ở lại = như lẻn vào','closing alert «=»');has('jstagehere.js','${stayPrice()}; may rủi:','closing alert sentence (review/home-way: the light price, never «như lẻn vào»)');no('jstagehere.js','chẳng khác gì lẻn vào','closing alert: overstay is NHẸ (review/home-way)');
 no('jptime.js','" · thành":','errand report glue');has('jptime.js','function ptRepFacts(','errand report one sentence (E90 composer)');has('jptime.js','function ptRepRows(','E90r rows composer');
 no('jwhy.js','(chưa quen)`','spyWho stacked paren');no('jwhy.js','nghe ngóng được về ${spyWho(v)} (${why})','spyNews chain');
 no('j78.js','có nết ${T[0]}','raw trait label');no('jagent.js','`${w} · ${o}`','agWhy dot glue');no('jagent.js','nghe lén: nàng ${p.act} — ${p.why}','nghe lén note chain');no('jagent.js','vì ${p.why}','«vì <filler>» reason');has('jagent.js','function agWhySay(','reason clause helper');
