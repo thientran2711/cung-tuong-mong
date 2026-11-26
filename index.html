@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9e23088d+","t":"2026-11-26T01:35Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"49b9957719a4","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"f2557529+","t":"2026-11-26T01:42Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"927d4ce4a29f","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -96859,7 +96859,27 @@ function dqInstall(){
  try{/* the activity is gone (scene / podium / mini-game screen closed): the held card is painted AT ONCE, not at the next poll (DAYQ-3) */
   const mo=new MutationObserver(()=>{if(!Q.length)return;dqPull();try{if(DQ.mt&&DQ.mtf&&dqUiC()&&!dqActEl()&&!(dqUi()&&dqDawn()))DQ.mtf()}catch(e){}});mo.observe(document.body,{childList:true});const ov=document.getElementById("ov");if(ov)mo.observe(ov,{attributes:true,attributeFilter:["hidden"]})}catch(e){console.error("dayq observe",e)}}
 /* (b) the new day's motion scenes (stipend chest, rewards …) wait until «Tin trong cung» is closed */
-(function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments))return false;
+/* Q-SOFTLOCK (MAIN 150 order, F s3f LIVE 5e013076: (a) «Sang ngày mới» ×3 no turn, Q=1 «Tin trong cung buổi này» ×19; (b) «Có tin đang chờ» greyed,
+   Q=8 Tin báo / Xét phẩm, 150 taps): the MOTION-SCENE QUEUE (KMQ) blocked with nothing on screen. A blocked queue holds the turn (dqOldPending:
+   KMQ.length) and a queued, unstarted night flip makes the jnf night gate hold every card (up to BAL.steal.choice cap, 80 s) — a held card neither
+   shows nor lets the turn pass. Two blockers, both «a host that is not on screen» (the dqShown family of r3 / r4 / coop-rebirth):
+   (1) j93 kmFree says «not free» while #kmrew / #kpodov / a roulette / #dawn.on merely EXISTS in the page (a left-over host);
+   (2) a scene job keeps kmBusy (its finish guard is 600 s) while nothing of it is on screen (a picture preload that never lands, a host removed).
+   Rule (one rule, the on-screen rule): a host / busy flag that holds the queue with NOTHING on screen for BAL.dayq.stale ms no longer holds it —
+   (1) kmFree counts only hosts ON SCREEN (dqDawn / dqOn) once the ghost has lasted BAL.dayq.wake ms; (2) the stale job's finish is voided (kmGen,
+   exactly what kmReset does for a whole life) and the queue moves on. Solo only (dqUi; a co-op room keeps its own caps). Paint only: no S key, no draw. */
+function dqKmReal(){return dqDawn()||!!dqOn('#kpodov,[id^="kroul"],.kroul-ov,#kmrew')}
+function dqScreenEmpty(){try{const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn()||(typeof S!=="undefined"&&S&&S.mg))return false;
+  return !dqOn('.kmov:not(.km-out),#kmrew,#kpodov,.kroul-ov,[id^="kroul"],.kfoc,#ov,#title,#kload,#ktut .ktut-card')}catch(e){return false}}
+function dqKmStale(){try{if(!dqUi()||typeof kmBusy==="undefined"||!kmBusy||typeof KMQ==="undefined"||!KMQ.length||!dqScreenEmpty()){DQ.kz=0;return false}
+  const n=Date.now();if(!DQ.kz){DQ.kz=n;return false}if(n-DQ.kz<((BAL.dayq&&BAL.dayq.stale)||10000))return false;
+  DQ.kz=0;DQ.stat.kmStale=(DQ.stat.kmStale||0)+1;console.warn("dayq: stale scene job released (nothing on screen), queue",KMQ.length);
+  if(typeof kmGen!=="undefined")kmGen++;kmBusy=false;if(typeof kmPump==="function")kmPump();return true}catch(e){console.error("dayq kmStale",e);return false}}
+setTimeout(()=>setTimeout(()=>{try{setInterval(dqKmStale,700)}catch(e){}},0),0);
+window.dqKmStale=dqKmStale;
+(function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments)){
+  /* (1) the base said «not free»: only a host ON SCREEN keeps that answer; a ghost host for BAL.dayq.wake ms does not */
+  try{if(!dqUi()||dqKmReal()){DQ.kg=0;return false}const n=Date.now();if(!DQ.kg)DQ.kg=n;if(n-DQ.kg<((BAL.dayq&&BAL.dayq.wake)||2000))return false;DQ.stat.kmGhost=(DQ.stat.kmGhost||0)+1}catch(e){return false}}else DQ.kg=0;
  /* (c) a new motion scene waits while a mini-game screen or an on-figure game is open (a scene on screen is already one at a time: kmBusy;
     a scene from her own act in the person view shows there as before) */
  try{if(dqUiC()){const ov=document.getElementById("ov");if((ov&&!dqHidden(ov))||(window.DF&&DF.play)){DQ.stat.actKm++;return false}
@@ -98912,7 +98932,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="49b9957719a4";window.CTM_BUILD=BUILD;
+const BUILD="927d4ce4a29f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

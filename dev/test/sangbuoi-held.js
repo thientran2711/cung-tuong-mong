@@ -20,6 +20,8 @@
       the greyed button shows it at once (dqBring); she taps through all 7, then «Sang buổi» advances.
    I  (r3, robot E-S1) a scene left in the page but NOT on screen (I1 zero-size, I2 hidden layer) + 7 kit info panels queued → the first panel shows
       by itself; I3 control: a scene ON screen holds them (none painted over it for 3 s), they show once it closes; I4 (r4) the same with a zero-size scene FIRST in the page; then «Sang buổi» advances.
+   J  (Q-SOFTLOCK a) night news card ⇄ queued flip behind a stale scene job (kmBusy, nothing on screen) → the flip plays, the news shows, the turn goes on.
+   K  (Q-SOFTLOCK b) a left-over #kmrew host (not on screen) blocks the scene queue; 8 cards wait, khắc spent → cards, scene, the buổi turns.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.split(',').includes(v[0]+'x'+v[1]));/* VP=1180x820: one device */
@@ -50,7 +52,12 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
     const M=document.getElementById('modal');if(M&&!hid(M)){const o=[...M.querySelectorAll('.opt:not([disabled])')];const th=o.find(b=>/^Thôi/.test(b.textContent.trim()));if(th)return mark(th);if(o.length)return mark(o[0]);
      const c=M.querySelector('#mclose')||[...M.querySelectorAll('button')].find(b=>b.offsetParent&&!b.disabled);if(c)return mark(c)}return ''});
    if(!sel)return false;try{await p.tap(sel,{timeout:3000,force:true})}catch(e){await p.evaluate(s=>{const e=document.querySelector(s);e&&e.click()},sel)}return true};
-  const drain=async(n=120)=>{let idle=0;for(let i=0;i<n&&idle<3;i++){if(await tapAny()){idle=0;await sleep(350)}else{idle++;await sleep(500)}}};
+  /* Q-SOFTLOCK owner (26/11): «nothing to tap» is only idle once the jdayq safety net (dqWake, BAL.dayq.wake ms + one 700 ms tick) has had its turn —
+     a card held for a moment (a real game card the turn brought) is painted by that net; a drain that gave up at 1.5 s left it on screen after the
+     case ended (case A «cards closed but the buổi did not advance» with a real «Có người tìm đến» card up; the changed jdayq line was not in those traces) */
+  const BAL_W=await p.evaluate(()=>(BAL.dayq&&BAL.dayq.wake)||2000);
+  const IDLE=await p.evaluate(()=>Math.ceil(((BAL.dayq&&BAL.dayq.wake)||2000)/500)+2);
+  const drain=async(n=120)=>{let idle=0;for(let i=0;i<n&&idle<IDLE;i++){if(await tapAny()){idle=0;await sleep(350)}else{idle++;await sleep(500)}}};
   /* a fresh solo life at a quiet Buổi trưa (buổi 1) like the robot: start, accept «Thân phận», tap through, turn to buổi 1 */
   const newLife=async()=>{await p.evaluate(()=>{try{kmReset()}catch(e){}Q.length=0;SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});
    await p.waitForFunction(()=>document.querySelector('#modal:not([hidden]) [data-nl=ok]'),null,{timeout:60000});
@@ -187,6 +194,42 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
      const fin=await p.evaluate(()=>({cf:!!document.getElementById('tstcf'),KMQ:KMQ.length}));if(fin.cf||fin.KMQ)return 'after the flip: '+JSON.stringify(fin);
      rows.push(`${W}x${H} F timing: news painted ${dt} ms, flip after ${dt2} ms`);console.log(rows[rows.length-1]);
      const bk0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(bk0))?'':'«Sang buổi» after the night did not advance'},
+   /* J (Q-SOFTLOCK (a), F s3f ×19: «Sang ngày mới» ×3 no turn, Q=1 «Tin trong cung buổi này»): night choice open, the flip QUEUED behind a scene job that
+      holds kmBusy with NOTHING on screen (stale), the per-buổi news card (DQ.newsHold 0) held by the night gate for that unstarted flip → mutual wait
+      (LIVE: up to the 80 s choice cap). Now: the stale job is released after BAL.dayq.stale ms → the flip plays → she taps it → the news card shows → the turn goes on. */
+   J:async()=>{for(let i=0;i<4&&!(await p.evaluate(()=>typeof nfOn==='function'&&nfOn()));i++){await newLife();await ensureQuiet()}
+     const r0=await p.evaluate(()=>{used=0;advLock=false;render();S.nfX={d:(typeof wk==='function'?wk():(S.turn*3+(S.tuan||0))),st:'open',at:Date.now()};window.__cf0=window.cfBusy;window.__cfQ=1;window.cfBusy=()=>window.__cfQ===1;
+       DQ.newsHold=0;kmBusy=true/* a stale job: nothing of it on screen */;Q.unshift({t:'Tin trong cung buổi này',kind:'news',h:'<p>Thử: tin trong cung buổi này.</p>'});Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').set.call(document.getElementById('modal'),true);
+       kmPush(done=>{const d=document.createElement('div');d.className='kmov kcf';d.id='tstcf';d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35);display:flex;align-items:center;justify-content:center';
+         d.innerHTML='<button type="button" class="main" id="tstcfb">Lật thẻ · xong</button>';document.body.appendChild(d);
+         d.querySelector('button').onclick=()=>{d.remove();window.__cfQ=0;S.nfX.st='done';window.cfBusy=window.__cf0;done()}});
+       window.__t0=Date.now();showModal();return {nf:typeof nfOn==='function'&&nfOn(),lim:(BAL.dayq.stale+BAL.dayq.wake*2+3000)}});
+     if(!r0.nf)return 'setup: nfOn() false';
+     /* she taps «Sang ngày mới» 3× like the robot, then waits */
+     for(let k=0;k<3;k++){await p.tap('#next',{force:true}).catch(()=>{});await sleep(400)}
+     let on=0;for(let i=0;i<r0.lim/250&&!on;i++){on=await p.evaluate(()=>!!document.getElementById('tstcf'));if(!on)await sleep(250)}
+     const dt=await p.evaluate(()=>Date.now()-window.__t0);
+     if(!on){const dg=await diag();await p.evaluate(()=>{window.cfBusy=window.__cf0;window.__cfQ=0;S.nfX.st='done';kmBusy=false;try{kmPump()}catch(e){}});return 'flip never played (queue blocked by a stale job, '+dt+' ms) '+JSON.stringify({s:await st(),d:dg})}
+     await shot('J1-flip');await p.tap('#tstcfb',{force:true});
+     const s1=await waitCard(BAL_W*2+1500);await shot('J2-news');if(!s1.modal||!/Tin trong cung/.test(s1.mt))return 'flip done but the news card did not show '+JSON.stringify({Q:s1.Q,d:await diag()});
+     rows.push(`${W}x${H} J timing: flip after ${dt} ms`);console.log(rows[rows.length-1]);
+     await drain();const bk0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(bk0))?'':'news closed but «Sang buổi» did not advance'},
+   /* K (Q-SOFTLOCK (b), F s3f: «Có tin đang chờ» greyed, Q=8 Tin báo / Xét phẩm, 150 taps): a LEFT-OVER #kmrew host (not on screen) makes j93 kmFree «not free»
+      for ever → the month-end scene never starts → KMQ holds the turn (dqOldPending). 8 kit info cards wait in Q unpainted, khắc spent. Now: the cards show
+      (net), she taps through all 8, the scene plays (the ghost host no longer holds it after BAL.dayq.wake ms), she taps it, the buổi turns. */
+   K:async()=>{const bk0=(await st()).bk;await p.evaluate(c=>{const g=document.createElement('div');g.id='kmrew';g.className='tstghost';g.style.display='none';document.body.appendChild(g);
+       used=BAL.time.khac;advLock=true;Q.push(...c);Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').set.call(document.getElementById('modal'),true);
+       kmPush(done=>{const d=document.createElement('div');d.className='kmov';d.id='tstkm';d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35);display:flex;align-items:center;justify-content:center';
+         d.innerHTML='<button type="button" class="main" id="tstkmb">Bổng lộc · Nhận</button>';document.body.appendChild(d);d.querySelector('button').onclick=()=>{d.remove();done()}});
+       setTimeout(()=>{advLock=false},300)},['Tin báo','Xét phẩm cuối tháng','Tin báo · 2','Tin báo · 3','Tin báo · 4','Tin báo · 5','Tin báo · 6','Tin báo · 7'].map(card));
+     for(let k=0;k<3;k++){await p.tap('#next',{force:true}).catch(()=>{});await sleep(400)}
+     const s1=await waitCard(BAL_W*3+1500);await shot('K1-card');if(!s1.modal)return 'no card shown '+JSON.stringify({Q:s1.Q,d:await diag()});
+     /* tap through the 8 cards (and whatever the turn brings), the scene when it comes */
+     let km=0;for(let i=0;i<60;i++){if(await p.evaluate(()=>!!document.getElementById('tstkm'))){km=1;await shot('K2-scene');await p.tap('#tstkmb',{force:true});await sleep(500);continue}
+       if((await st()).bk!==bk0)break;if(!(await tapAny())){await sleep(500)}else await sleep(350)}
+     await p.evaluate(()=>{const g=document.querySelector('#kmrew.tstghost');if(g)g.remove()});
+     if(!km)return 'the queued scene never played (ghost #kmrew held kmFree) '+JSON.stringify({s:await st(),KMQ:await p.evaluate(()=>KMQ.length),d:await diag()});
+     return (await advanced(bk0,BAL_W*3+6000))?'':'cards + scene done but the buổi did not turn '+JSON.stringify(await st())},
   };
   console.log(`${W}x${H} life ready`,JSON.stringify(await st()));
   const order=Object.keys(CASES).filter(k=>!process.env.CASES||process.env.CASES.includes(k));const REP=+process.env.REPEAT||1;/* REPEAT=10: each case N times (stability gate) */

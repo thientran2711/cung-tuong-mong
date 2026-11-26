@@ -141,7 +141,27 @@ function dqInstall(){
  try{/* the activity is gone (scene / podium / mini-game screen closed): the held card is painted AT ONCE, not at the next poll (DAYQ-3) */
   const mo=new MutationObserver(()=>{if(!Q.length)return;dqPull();try{if(DQ.mt&&DQ.mtf&&dqUiC()&&!dqActEl()&&!(dqUi()&&dqDawn()))DQ.mtf()}catch(e){}});mo.observe(document.body,{childList:true});const ov=document.getElementById("ov");if(ov)mo.observe(ov,{attributes:true,attributeFilter:["hidden"]})}catch(e){console.error("dayq observe",e)}}
 /* (b) the new day's motion scenes (stipend chest, rewards …) wait until «Tin trong cung» is closed */
-(function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments))return false;
+/* Q-SOFTLOCK (MAIN 150 order, F s3f LIVE 5e013076: (a) «Sang ngày mới» ×3 no turn, Q=1 «Tin trong cung buổi này» ×19; (b) «Có tin đang chờ» greyed,
+   Q=8 Tin báo / Xét phẩm, 150 taps): the MOTION-SCENE QUEUE (KMQ) blocked with nothing on screen. A blocked queue holds the turn (dqOldPending:
+   KMQ.length) and a queued, unstarted night flip makes the jnf night gate hold every card (up to BAL.steal.choice cap, 80 s) — a held card neither
+   shows nor lets the turn pass. Two blockers, both «a host that is not on screen» (the dqShown family of r3 / r4 / coop-rebirth):
+   (1) j93 kmFree says «not free» while #kmrew / #kpodov / a roulette / #dawn.on merely EXISTS in the page (a left-over host);
+   (2) a scene job keeps kmBusy (its finish guard is 600 s) while nothing of it is on screen (a picture preload that never lands, a host removed).
+   Rule (one rule, the on-screen rule): a host / busy flag that holds the queue with NOTHING on screen for BAL.dayq.stale ms no longer holds it —
+   (1) kmFree counts only hosts ON SCREEN (dqDawn / dqOn) once the ghost has lasted BAL.dayq.wake ms; (2) the stale job's finish is voided (kmGen,
+   exactly what kmReset does for a whole life) and the queue moves on. Solo only (dqUi; a co-op room keeps its own caps). Paint only: no S key, no draw. */
+function dqKmReal(){return dqDawn()||!!dqOn('#kpodov,[id^="kroul"],.kroul-ov,#kmrew')}
+function dqScreenEmpty(){try{const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn()||(typeof S!=="undefined"&&S&&S.mg))return false;
+  return !dqOn('.kmov:not(.km-out),#kmrew,#kpodov,.kroul-ov,[id^="kroul"],.kfoc,#ov,#title,#kload,#ktut .ktut-card')}catch(e){return false}}
+function dqKmStale(){try{if(!dqUi()||typeof kmBusy==="undefined"||!kmBusy||typeof KMQ==="undefined"||!KMQ.length||!dqScreenEmpty()){DQ.kz=0;return false}
+  const n=Date.now();if(!DQ.kz){DQ.kz=n;return false}if(n-DQ.kz<((BAL.dayq&&BAL.dayq.stale)||10000))return false;
+  DQ.kz=0;DQ.stat.kmStale=(DQ.stat.kmStale||0)+1;console.warn("dayq: stale scene job released (nothing on screen), queue",KMQ.length);
+  if(typeof kmGen!=="undefined")kmGen++;kmBusy=false;if(typeof kmPump==="function")kmPump();return true}catch(e){console.error("dayq kmStale",e);return false}}
+setTimeout(()=>setTimeout(()=>{try{setInterval(dqKmStale,700)}catch(e){}},0),0);
+window.dqKmStale=dqKmStale;
+(function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments)){
+  /* (1) the base said «not free»: only a host ON SCREEN keeps that answer; a ghost host for BAL.dayq.wake ms does not */
+  try{if(!dqUi()||dqKmReal()){DQ.kg=0;return false}const n=Date.now();if(!DQ.kg)DQ.kg=n;if(n-DQ.kg<((BAL.dayq&&BAL.dayq.wake)||2000))return false;DQ.stat.kmGhost=(DQ.stat.kmGhost||0)+1}catch(e){return false}}else DQ.kg=0;
  /* (c) a new motion scene waits while a mini-game screen or an on-figure game is open (a scene on screen is already one at a time: kmBusy;
     a scene from her own act in the person view shows there as before) */
  try{if(dqUiC()){const ov=document.getElementById("ov");if((ov&&!dqHidden(ov))||(window.DF&&DF.play)){DQ.stat.actKm++;return false}
