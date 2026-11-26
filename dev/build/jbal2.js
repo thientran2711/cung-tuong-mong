@@ -207,7 +207,7 @@ BAL.mort={on:1,playerFloorYears:0,
    relation; lose = what she loses if she helped a case that fails. */
 BAL.re={on:1,minY:7,
  abd:{heirAge:10,heir:.35,heirK:.05,th:.45,hieu:1.5,noHeir:.15,petP:3,pet:5,temper:{chamchinh:.7,nongnay:.85,datinh:1.25,mesac:1.15,nhantu:1.1},ill:2.5,old:.3,age:45,yr:.1,yrs:10,court:.4,courtPow:55,gripK:.5,gripMin:.4,decay:.5,warn:55,at:100},
- phe:{pow:60,evLead:8,sung:45,ev:4,evMax:8,evP:5,evFade:4,bad:40,mo:3,base:52,powD:2,evK:5,th:5,fail:25,sungLoss:15},
+ phe:{pow:60,evLead:8,sung:45,ev:4,evMax:8,evP:5,evFade:4,bad:40,mo:3,base:60,powD:2,evK:5,th:5,fail:25,sungLoss:15},
  coup:{pow:65,gap:15,amb:1,rum:2,mo:3,eyes:2,rumP:50,base:35,k:1.5,army:10,fail:35,sungLoss:15,gripWin:8},
  amb:{corrupt:.3,sk:.01,prince:.4},
  her:{sung:4,danh:4,th:4,bac:60,duc:2,blk:25,psh:20,od:15,evCut:2,af:20,rel:6,lose:6}};
