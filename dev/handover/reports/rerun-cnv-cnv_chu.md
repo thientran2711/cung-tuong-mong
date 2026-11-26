@@ -32,8 +32,8 @@ Harness: sha column = `harness.sha` in the life JSON (value stamped by the proce
 - Design note (from the VOID runs, to MAIN after the flight): prologue cards «Nhận lời làm thiếp, trả nợ cho nhà» (d_moi) and «Theo họ về làm người ở» (d_siet) end the life at once but are labelled «an toàn»; options differ in cost, one is a life-ender (LAW 2/3).
 
 ## Not done yet (honest)
-- Per-life player reviews (ROBOT-PLAYER-REVIEW §B) exist for cautious-k4 only (`dev/handover/robot/review/R2-cnv_chu-cautious-k4-1862968319-*.md`). The 12 other `-moments.md` files are the harness drafts (mechanical lines + shots), without the runner's own feeling lines or end-of-life review. Next worker: look at the shots in each shots-<life>/ dir (kept locally, not in git) and write the reviews.
-- speed-k2 must still end.
+- speed-k2 must still end (R2 runs it); its §B review is still to write.
+- Per-life reviews (§B) for the other 13 lives are DONE by seat R2b (below). They are written from the CDN shots (a sample of 8–17 shots per life, contact sheets, not every one of the ~3800 files); each review lists the shots it looked at.
 
 ## HANDOVER (R2, 26/11 ~14:00Z, context well past the roll line — successor please take over the reviews)
 Remaining for the successor (open as a worker with START_CORE + START_WORKER + briefs/ROBOT-PLAYER-REVIEW.md):
@@ -44,3 +44,33 @@ Rates must come from the 13 valid lives only.
 
 ### SHOTS ON CDN (R2, 26/11)
 Every shot a moments file names + `end` + `now` + noeffect/stuck/dead shots of the 14 lives, converted to webp q70 (name `.png` → `.webp`): `https://ctm-img.victoria-tntt.workers.dev/img/_review/rerun-cnv_chu/<life>/<name>.webp` (3811 files, 238 MB). `<life>` = `R2-cnv_chu-<persona>-k<n>-<seed>`, `<name>` as in the moments file (shots-<life>/m-new-1-1.png → `<life>/m-new-1-1.webp`). speed-k2 was uploaded mid-life (re-run `python3 dev/site/cdn_sync.py img/_review/rerun-cnv_chu` after it ends if shots are needed). Wipe with the verdict: `python3 dev/site/cdn_sync.py --wipe-review rerun-cnv_chu`.
+
+
+## PLAYER REVIEWS §B (seat R2b, 26/11) — 13 of 14 lives (speed-k2 pending)
+Files: `dev/handover/robot/review/R2-cnv_chu-<persona>-k<n>-<seed>-review.md`. Shots viewed per life in brackets. Scores: pacing / UI / story (0–10, n/a if not judged).
+
+| life | felt | pacing/UI/story | bugs-candidates (new unless noted) |
+|---|---|---|---|
+| cautious-k2 [10] | alive court news, nothing changes for 13 y | 4 / 5 / – | Tin báo wall (20+ items/day); dead chip «3 Chí tôn» (harness) |
+| cautious-k4 | (R2's own) | 4 / 4 / – | known: dead «Tâm trạng +1», end-title overlap |
+| lover-k5 [17] | beautiful start, flat middle | 4 / 3 / 6 | Tin báo dialog with 28–77 items has no ✕/«Lui» visible ×3; clipped option text in «Tỉnh thân» |
+| random-k2 [10] | two mistresses stage is charming | 5 / 5 / 6 | name tag wraps letter-by-letter + figure cut at right edge (m-look-1200); «Học Cầm» row shows no cost |
+| rebel-k1 [12] | broke from y3, slide to illness at 25 | 3 / 3 / 7 | Tin báo no ✕ ×2 (70/76 items); invitee list over Hoàng thượng robe (m-new-460-10); huge season banner over stage |
+| rebel-k2 [11] | strong start, starved 11 y (11 lạng) | 4 / 7 / 7 | «Đổi thân phận» text one word per line; «cung nữ ???» tag |
+| scholar-k2 [11] | rich (953 lạng) and boring | 3 / 7 / 5 | promotion never moves (see below); stage cut + name wrap |
+| scholar-k5 [12] | chain card great, then flat | 4 / 6 / 7 | Tin báo 73 items no ✕; «Xét phẩm: thiếu 1» names nothing |
+| skilled-k2 [12] | the life where I felt I rose (tam → nhị → nhất đẳng) | 5 / 6 / 6 | Tin báo 62 items no ✕; info rail on figure |
+| skilled-k4 [11] | village prologue + title ladder to Chưởng sự cô cô | 6 / 7 / 6 | end card shows entry status, not top title; 14-line rules wall «Ra vào cung cấm» |
+| skilled-k5 [7] | clear chain card, Chủ tín 0 | 5 / 7 / 7 | Xét phẩm thiếu 2–3 unnamed |
+| speed-k1 [10] | village debt card is the best moment | 5 / 8 / 7 | **design:** «Chủ nợ đến nhà» all 3 roads «Rất vững», one ends the life (LAW 2/3, now seen in m-new-206-9) |
+| speed-k4 [13] | best arc: maid → Đáp ứng → lãnh cung → tuẫn táng | 8 / 4 / 9 | pet-shop dialog ✕ dead ×3 (known); end.png shows Bổng lộc popup, not the ending card |
+
+### Candidates (first = most important)
+1. **Tin báo dialog without a visible close** (lover-k5 ×3, rebel-k1 ×2, scholar-k5, skilled-k2, + stuck-1): with 28–77 news lines the header has no ✕ and the footer/«Lui» is not on screen (all `nohit-*.png` / `stuck-1.png` are the same picture). R2 filed these as the harness «Tin báo» family (fixed in newer harness shas); the shots show the game dialog really lacks a reachable close — needs a real-hand test on Fold 755x1000. Not confirmed play-stopper (outside tap may close it).
+2. **Pet-shop dialog ✕ dead** (speed-k2, speed-k4): confirmed by `noeffect-1795681622773.png` (dialog still open, Bạc 0, all «Thiếu bạc»). Known, with MAIN 159.
+3. **Promotion rule is opaque**: scholar-k2 Công lao 10/10 + Chủ tín 99–100 + «Xét phẩm: đủ» but title stays «Cung nữ tam đẳng» for 13 y (Danh 0); skilled-k2 (Danh 73, Chủ tín 43) rose to nhất đẳng; skilled-k5 (Danh 98, Chủ tín 0–18) stuck at nhị; the Công lao help text says «cần tin cậy 35». Player cannot tell what is missing. Foreman to confirm the rule vs the text.
+4. **LAW 2/3 design** (known): prologue life-ender tagged «Rất vững» (speed-k1 m-new-206-9).
+5. **Stage layout family** (cosmetic): when the player stands at the right edge the figure is half hidden under the icon rail and the name tag wraps one letter per line (random-k2 m-look-1200, scholar-k2 m-look-240…1420, scholar-k5 m-look-140).
+6. End card: shows entry status not the highest title (skilled-k4); end shot for speed-k4 shows the Bổng lộc popup.
+7. Economics: rebel-k1/k2, speed-k1/k4 are broke for the whole life (Bạc 0–21, mood −13…−55) — nothing buyable, no equal-value free road (LAW 2 watch).
+No new play-stopper found.
