@@ -157,3 +157,11 @@ Ask the kit keeper to choose the kit rule for a title that does not fit at the f
 - Found: KIT §94b kitDayTitleShow (review/kit-daytitle-r2 313bdfc6, j79 + jend start wrapper) shows the new-life card at start()+600 ms with #kdaytc z-index 12000; the life-loading cover #klife «Sửa soạn nhập cung» is z 2147483500 and stays ~3–5 s → the card plays ~2 of its 2.8 s UNDER the cover (Fold 755x1000 + iPad 1180x820, elementFromPoint = #klife). Seen first by E92, confirmed by E92r.
 - Need (kit keeper only): start the card after #klife (and any other full-screen cover: #kload, #kroulw/#kroul, #dawn book) has closed, or hold its timer while a cover is up; scan every cover vs #kdaytc on both devices.
 - Status: OPEN. Blocks landing kit-daytitle-r2 (lands together with the titles-daycard hook r2).
+
+## 26/11 K-LIST-PAGE — long option/tile lists render only what is on screen (FIXER inv-stack, Foreman B ROOT 2 child 2; MAIN 154 ORDER ~07:50Z part 3)
+After stacking (review/inv-stack) the s7 late save's gift pickers fell from ~37k to ~2.3k DOM nodes, but a picker can still hold ~80 distinct pieces
+(son phấn boxes by colour × uses left, gifts by giver): «Dâng quà» 2,319 nodes (78 tiles), «Biếu quà làm lành» 2,226 (target < 2,000 per list).
+Most of it is the hidden option cards behind the jgpick tile grid (`.opts.kiphas>.opt{display:none}`, ~26 nodes each; kipDetail clones the chosen one).
+Wanted (ONE kit part, every long list): the kip tile grid (and the bag grid kitInvGrid, any kitPanel list) renders only the rows in view (or a page
++ «Xem thêm»), and the hidden option card is built on demand when its tile is chosen (kipDetail) instead of up front. Until then review/inv-stack
+dedupes twin tiles (one tile ×N with the kitItem `qty` badge) and drops their hidden twin cards. Test: dev/test/inv-stack.js (DOM check).
