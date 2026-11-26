@@ -43,3 +43,6 @@ JUMP-INS on PASS: renderer-mem (D head 2b5bbbb3), ob-ngoaicung r5 8aaac5ac (afte
 | 9 | 99/99/98 | 65/59/58 | 61/-99 | 20/-33 | 27/75 | 10/31 | 5 | 0 |
 | 12 | 100/94/100 | 70/56/57 | 59/-98 | 25/-62 | 26/97 | 11/32 | 6 | 0 |
 Max over lives at mo 12: LIVE oán 97, SP oán 53 (still rising; not ~0). Year 1 nobody at 100 on SP (LIVE: 6 stats at 100 by month 6). Cards reaching her (3 lives): harm LIVE 3 / SP 1, visit 119/36, opt 114/62, ky 30/14 (jevc daily big-event cap). Per-person oán is not recorded by the robot (median/max only).
+- 20:25Z «READY TO PUSH 23b0b3d3 (pace-all + stat-pace, one push), FF from lc23-os d811a46d» sent to MAIN 162 (push after LC23's B). FLAG sent: harm cards 3→1 (rare both).
+- NG staged: review/lc24-ng be41d1eb = SP 23b0b3d3 + ob-ngoaicung-r6 fe8b928f (built-only; own CHANGE; dup-globals = SP; kitRowNil 0). g-ng running (scan iPad + Fold 5 home roads --play=600, QC --runs 5).
+- RESTACK onto NG, one commit per item, on review/lc24-st (file sets verified = original items): c3 872f1b0b → m3 625868d5 → hf f664b94c → ec 416bd4e3. Gates per slot still to run (c3: emoseal-setthree + nonplay + QC; m3: ob-m3ui + opt-tap-guard + QC; hf: kit-home-frame + kit-tassel-clear + QC; ec: endcard-top Fold+iPad + scan + QC).
