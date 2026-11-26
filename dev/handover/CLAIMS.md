@@ -471,3 +471,8 @@ RV HW-NITS SMALL kit | reports/home-way.md ## REVIEW | session_01V1ZZGzQx5NMH95A
 | RV (sonnet, test-only) co-op reg9 review/coop-reg9-route 5af1ed9f (briefs/b-coop-reg9-route-review.md) | review/coop-reg9-route; reports/coop-reg9-route.md ## REVIEW | B ROOT 2 child 2 | session_01N1tNP2SWedmyc4LP9ZuA2f | RUNNING | 26/11 09:05Z |
 | BIG REVIEWER #9 robot-realtap 08a4ff8b..5c62c2b9 (+ queued qc-noise-hygiene); successor of BIG #8 (rolled over 09:42Z) | dev/handover/reports/robot-realtap-review.md | FOREMAN F #20 session_01UV1SzgwtMTK26QKqkzEVsp | session_01UV1SzhG9iG47sywkoL5qVr | RUNNING | 26/11 09:43Z |
 PROMO-ROOT3 (rank stuck 0 after exam road) | review/promo-root3 | session_01V1ZZH3cQjartTvYvycx68b (MAIN 157) | DONE (no game bug; test 987c3599 → LC21 tail) | 2026-11-26T09:53Z
+K-FRAMES-PREPALACE (img/kit/frame-home + frame-dan) | CDN, no branch | session_01PEhRbvKt9ugrKFPFMHAjkd | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
+C3-ROOMTONE (59 rank-room tone pass + 14 toilette redraw) | CDN (+review/c3-roomtone if code) | session_01PEhRbxHaZPfwAwdUGpuzcM | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
+C3-SEALS sets 1-5 + wiring/merge | review/c3-seals | session_01PEhRbuDj3G9XdAmaourSm7 | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
+C3-SEALS-W2 sets tt(merged)/cc/bt/bg/tg | CDN | session_01PEhRbx7qfjCBsx6xC1iuFk | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
+C3-SEALS-W3 sets tv/qu/ty/nn | CDN | session_01PEhRbttxS463kSacT4iB52 | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
