@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"411d411b+","t":"2026-11-26T08:55Z","c":"Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị).","b":"067edc3e4a34","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"a93978de+","t":"2026-11-26T08:57Z","c":"Hết kiếp: khung kết thúc luôn ở trên cùng; không còn rương bổng lộc, tin tức hay thẻ sự kiện nào hiện đè lên.","b":"1aec3b8ae50d","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -42526,7 +42526,21 @@ function kmEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;"
 const KMQ=[];let kmBusy=false;
 function kmFree(){const d=document.getElementById("dawn");if(d&&!d.hidden&&d.classList.contains("on"))return false;
  if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return false;if(document.getElementById("kmrew"))return false;return true}
-function kmPush(fn){KMQ.push(fn);kmPump()}
+function kmPush(fn){if(kmLifeOver()&&!(fn&&fn.kend))return;KMQ.push(fn);kmPump()}
+/* E98 END CARD ON TOP (FIX-THE-WHOLE-GROUP, robots E-S2 8/8 + E-S3 4 lives: «Bổng lộc tháng …» chest over the life end card): once a life has ENDED
+   (S.dead, over()), no kit scene of that life plays any more — a dead life gets no pay, no chest, no edict, no bloom. ONE rule: kmLifeOver().
+   kmPush drops new scenes, kmPump drops queued ones, and kitEndClear() (called by the over() hook below at the moment of death) voids the scene
+   already on screen (a chest paid out a tick before the death, e.g. a death on the month roll). Only the ending's own entrance (kitInk, job.kend) plays. */
+function kmLifeOver(){try{return typeof S!=="undefined"&&!!S&&!!S.dead&&!(typeof CW!=="undefined"&&CW&&CW.ctx)}catch(e){return false}}
+function kitEndClear(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
+ KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
+ try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
+ try{if(typeof btrKill==="function")btrKill()}catch(e){}
+ try{if(typeof cfDrop==="function")cfDrop()}catch(e){}/* jflip: a night card-flip job already running (waiting on its pictures) builds its scene after the death otherwise */
+ try{document.querySelectorAll(".kmov,#kmrew,.kmfly:not(.kmerr-lay),.kmalarm").forEach(e=>e.remove())}catch(e){}
+ try{const d=document.getElementById("dawn");if(d&&!d.hidden){d.hidden=true;d.classList.remove("on")}}catch(e){}
+ try{if(typeof kitEndToasts==="function")kitEndToasts()}catch(e){}}
+window.kmLifeOver=kmLifeOver;window.kitEndClear=kitEndClear;
 /* kmReset (FIX-THE-WHOLE-GROUP, review/flip-newlife): everything that belongs to ONE life must not outlive it. A new life / a loaded slot / the title
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
    podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
@@ -42537,7 +42551,7 @@ function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
  try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
-function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
+function kmPump(){if(kmLifeOver())for(let i=KMQ.length-1;i>=0;i--)if(!(KMQ[i]&&KMQ[i].kend))KMQ.splice(i,1);if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
  kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
  try{fn(fin)}catch(e){console.error(e);fin()}}
 
@@ -42713,7 +42727,7 @@ function kitBloom(o){o=o||{};const pet=Array.from({length:12},(_,i)=>`<img class
  kmPush(done=>kmStage("km-bloom",html,{dur:1800,hold:1600,onEnd:done}))}
 function kitInk(o){o=o||{};const html=`<div class="kmink"><img class="kmblot b1" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><img class="kmblot b2" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><div class="kmicap"><b>${kmEsc(o.title||"Hồng nhan bạc mệnh")}</b><small>Mở Sổ luân hồi</small></div></div>`;
  /* death jumps the queue: nothing else matters now */
- KMQ.length=0;kmPush(done=>kmStage("km-inkov",html,{dur:2000,hold:900,onEnd:done}))}
+ KMQ.length=0;const job=done=>kmStage("km-inkov",html,{dur:2000,hold:900,onEnd:done});job.kend=1;kmPush(job)}
 
 /* ================= 7 BAN THƯỞNG / QUÀ ================= */
 /* grades = KIT_GRADE (jk2b) everywhere: the tier of a reward item is its REAL grade (kitItemInfo, the same as the Tư trang bag), never a price guess */
@@ -42820,7 +42834,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
  /* buổi change: the incense curtain was replaced by the painted time-of-day transition (jbuoi.js, KIT §71); kitDayShift stays for old callers */
  /* death: ink spreads, then the Kiếp này / Sổ luân hồi panel underneath */
- W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:(S&&S.kend)||h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
+ W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */if(S&&S.dead&&!was&&kmLifeOver())kitEndClear();const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:(S&&S.kend)||h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
    const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!kitNoDanger(q)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
@@ -98176,7 +98190,25 @@ function kesFx(M,m,t){if(m.__kesFx)return;try{Object.defineProperty(m,"__kesFx",
 function kesShow(){const M=document.getElementById("modal");if(!M)return;const m=typeof Q!=="undefined"?Q[0]:null;const t=M.hidden?"":kitEndType(m);
  if(!t){if(M.querySelector(":scope>.kes-bg"))kesClear(M);return}kesDecorate(M,m,t);kesFx(M,m,t)}
 /* pre: the card carries the frame class BEFORE the base paints it, so the kit size fit measures the full-screen frame; post: layers + entrance */
-if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{const m=typeof Q!=="undefined"?Q[0]:null;const t=kitEndType(m);if(t)kesMark(m,t)}catch(e){console.error("kes",e)}
+/* ---------- E98 END CARD ON TOP: the end card is the top and ONLY card of a dead life (whole family, dev/test/endcard-top.js) ----------
+   Robots (E-S2 8/8 lives, E-S3 4 lives, 11+ ending kinds): the «Bổng lộc tháng …» chest, the month card and other day/month popups opened over or
+   before the life end card. ONE rule for every popup source of a life that has ended (S.dead, kit j93 kmLifeOver):
+   (1) cards: while the life end card (kend) is in Q, every other card is dropped — pushed after it, unshifted before it, or queued before the death
+       (month card, news, events, co-op cards): kesFront() before every draw;
+   (2) kit scenes (chest, edict, bloom, reward, learn, gain…): j93 kmPush / kmPump drop them, kitEndClear voids the one on screen at the death;
+   (3) the popups that are NOT kit scenes (toasts, notices, coin / stat / item flights, podium, the new-day panel, the night tablet): KES_GATE below
+       does nothing for a dead life; kitEndToasts() hides the ones already up at the death.
+   The next life (start → S.dead false) is untouched; co-op: a seat's run on the host (CW.ctx) is never gated here (jcoopthin captures it first). */
+function kesIsEnd(m){return !!(m&&(m.kend||(/\bend\b/.test(String(m.cls||""))&&m.t==="Kiếp này")))}
+function kesFront(){try{if(typeof Q==="undefined"||Q.length<2||typeof kmLifeOver!=="function"||!kmLifeOver())return;const k=Q.find(kesIsEnd);if(!k)return;Q.length=0;Q.push(k)}catch(e){console.error("kes front",e)}}
+function kitEndToasts(){try{const t=document.getElementById("rtoast");if(t)t.classList.remove("on");const l=document.getElementById("kupdline");if(l)l.remove();
+ document.querySelectorAll(".kcoinfly,#kpodov").forEach(e=>e.remove())}catch(e){}}
+window.kesFront=kesFront;window.kitEndToasts=kitEndToasts;
+const KES_GATE=["srvToast","kitLine","kitStatFx","kitCoins","kitGain","kitLose","kitLearn","kitItemFx","kitNotice","kitKnow","kitReward","stipReveal","kitEdict","kitGloom","kitBloom",
+ "kitAlarm","kitFlyItem","kitPodium","kitPodiumShow","kitFlipTablet","kitFlipNote","kitNewDay","dawn","kitDayTitleShow","kitLineToast"];
+for(const n of KES_GATE)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(typeof kmLifeOver==="function"&&kmLifeOver())return null;return f.apply(this,arguments)}}
+if(typeof closeModal==="function"){const c0=closeModal;closeModal=function(){kesFront();return c0.apply(this,arguments)};window.closeModal=closeModal}
+if(typeof showModal==="function"){const s0=showModal;showModal=function(){kesFront();try{const m=typeof Q!=="undefined"?Q[0]:null;const t=kitEndType(m);if(t)kesMark(m,t)}catch(e){console.error("kes",e)}
   const r=s0.apply(this,arguments);try{kesShow()}catch(e){console.error("kes",e)}return r};window.showModal=showModal}
 /* a rare ending (Kỳ ngộ, j97): the arc's result card that r97Take queues (card67 "result" → kit panel) is that ending's screen */
 if(typeof r97Take==="function"){const r0=r97Take;r97Take=function(){const before=new Set(typeof Q!=="undefined"?Q:[]);const r=r0.apply(this,arguments);
@@ -100562,7 +100594,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="067edc3e4a34";window.CTM_BUILD=BUILD;
+const BUILD="1aec3b8ae50d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
