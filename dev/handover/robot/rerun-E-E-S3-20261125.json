@@ -51019,7 +51019,8 @@
    },
    "t": {
     "total": 162377
-   }
+   },
+   "verdict": "INVALID (#kg82 board «Quay lại» unplayed + ban hoa; Foreman E child8 rule 26/11 08:00Z; rerun after F board-play PASS)"
   },
   {
    "job": {
@@ -56381,7 +56382,8 @@
    },
    "t": {
     "total": 212070
-   }
+   },
+   "verdict": "INVALID (#kg82 board «Quay lại» unplayed + ban hoa; Foreman E child8 rule 26/11 08:00Z; rerun after F board-play PASS)"
   }
  ]
 }
