@@ -262,6 +262,6 @@ function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)r
  const kv=new Set(kem.map(x=>x.v));return {keep,kem,more:[...byV.keys()].filter(v=>!kv.has(v)).length,fold:[...byV.keys()].map(v=>v.name)}}catch(e){console.error("nsCard",e);return null}}
 /* «VÌ SAO» (kitWhy, j63 kaWhyCl): the reasons of a card come from the span's log clauses; a clause that is other people's business only never
    becomes a reason on her card (it stays in the Sổ ghi) */
-if(typeof kaWhyCl==="function"){const w0=kaWhyCl;kaWhyCl=function(){const L=w0.apply(this,arguments);try{if(on()&&Array.isArray(L))return L.filter(c=>!nsNpcLine(c))}catch(e){}return L}}
+if(typeof kaWhyCl==="function"){const w0=kaWhyCl;kaWhyCl=function(){const L=w0.apply(this,arguments);try{if(on()&&Array.isArray(L)){const F=L.filter(c=>!nsNpcLine(c));F.side=L.side;return F}/* keep the kwside set (KAWHY-VERDICT: a side clause is never a cause) */}catch(e){}return L}}
 Object.assign(window,{nsSieve,nsCard,nsHouse,nsHerLine,nsNpcLine,nsMonth,nsSieveQ:sieveQ,nsGossipSkip,nsOpen,nsRecMerge:recMerge,nsMask:maskNames});
 })();
