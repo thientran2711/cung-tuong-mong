@@ -57,3 +57,10 @@ for k,L in A.items():
   print()
 for k,L in A.items():
   print(f"**{k} lives**: "+" · ".join(f"s{l['seed']} {l['ps']['origin']} {l['end']} m{l['ps']['tNow']} rank {l['ps']['rankNow']}"+(f" «{l['ps']['res']['title']}»" if l['ps'].get('res') else '') for l in L))
+print("\nStall months per life by cause (monthly look, rank < Hoàng hậu, not in lãnh cung; first blocking cause in this order: qBlock «Hoàng hậu không chặn/phản đối» · seat «Chờ ghế trống» · stat bar · gap «Cách lần sắc phong» · exam only = eligible, exam not yet sat/passed · ready = nothing missing):\n")
+print("| arm | life | months below top | qBlock | seat | stat | gap | exam | other | ready |\n|---|---|---|---|---|---|---|---|---|---|")
+for k,L in A.items():
+  for l in L:
+    c=l['ps'].get('stall')
+    if not c:continue
+    print(f"| {k} | s{l['seed']} {l['ps']['origin']} | {sum(c.values())} | "+" | ".join(str(c.get(x,0)) for x in ['qBlock','seat','stat','gap','exam','other','ready'])+" |")
