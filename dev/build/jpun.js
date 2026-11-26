@@ -43,8 +43,16 @@ function punRows(o){const a=punWho(o.by),R=[];const w=punPlain(o.why);/* the edi
  if(o.kind==="giang"&&o.from!=null)R.push(["Hình phạt",punEsc(`${PUNK.giang}: từ ${RANKS[o.from].n} xuống ${RANKS[o.to].n}`)]);
  else if(o.kind==="camtuc")R.push(["Hình phạt",punEsc(`${PUNK.camtuc} ${o.m} tháng`)]);
  else if(o.kind==="nhe")R.push(["Hình phạt",punEsc(o.c>0?`Khất bổng ${o.c} tháng`:"Cảnh cáo")]);/* merge home-way (BAL.punW nhẹ, sev 0): the light punishment shows its reason too (D1) */
- else if(o.kind==="cold")R.push(["Hình phạt",punEsc(`${PUNK.cold}, ở ít nhất ${BAL.pun.coldMinDays} ngày mới được xét tha`)]);
+ else if(o.kind==="cold")R.push(["Hình phạt",punEsc(o.title!=null&&o.from!=null?`${punColdTxt(o.from,o.title,o.x).replace(/^bị /,"").replace(/^./,c=>c.toUpperCase())}, ở ít nhất ${BAL.pun.coldMinDays} ngày mới được xét tha`:`${PUNK.cold}, ở ít nhất ${BAL.pun.coldMinDays} ngày mới được xét tha`)]);
+ else if(o.kind==="phat")R.push(["Hình phạt",punEsc(`Phạt bổng ${BAL.charge.fine} lượng, Danh ${balSg(BAL.charge.danh)}`)]);
+ punTierRows(o,R);
  S.punLast={why:w,who:a?a.name:"",kind:o.kind,wk:punNow()};return R}
+/* PUNISH-TIER result rows (kit fact rows, «không» rows kept): Mức tội · Giáng phẩm · Lãnh cung — the same three rows on every punishment of her */
+const PUNTK={nhe:"nhe",phat:"nhe",camtuc:"nhe",giang:"vua",cold:"nang",chet:"cuc"};
+function punTierRows(o,R){const x=o.x||(PUNT&&PUNT.x)||PUNTK[o.kind]||"nhe";const rn=k=>k>=7?"Hoàng hậu":RANKS[Math.max(0,k|0)].n;
+ R.splice(R.findIndex(r=>r[0]==="Hình phạt")>=0?R.findIndex(r=>r[0]==="Hình phạt"):R.length,0,["Mức tội",punEsc(punTierN(x))]);
+ let g="không";if(o.kind==="giang"&&o.from!=null)g=`từ ${rn(o.from)} xuống ${rn(o.to)}`;else if(o.kind==="cold"&&o.from!=null&&o.title!=null&&o.title<o.from)g=x==="cuc"?`phế vị (từ ${rn(o.from)})`:`từ ${rn(o.from)} xuống ${rn(o.title)}`;
+ R.push(["Giáng phẩm",punEsc(g)]);R.push(["Lãnh cung",punEsc(o.kind==="cold"?(o.title!=null&&o.title>0&&x!=="cuc"?`có, vẫn mang phẩm ${rn(o.title)}`:"có"):"không")]);return R}
 function punNote(o){if(!S||S.dead)return;const R=punRows(o);const a=punWho(o.by);
  if(typeof kitPanel!=="function"){Q.push({t:PUNK[o.kind]||"Bị phạt",h:`<p>${R.map(r=>`${r[0]}: ${r[1]}`).join("<br>")}</p>`,btn:"Đã rõ"});return}
  kitPanel({kind:"notice",title:o.kind==="giang"?"Bị giáng phẩm":PUNK[o.kind]||"Bị phạt",sub:typeof when==="function"?when():"",subject:a||null,sections:[{h:"",rows:R}],btn:"Đã rõ"})}
@@ -59,7 +67,48 @@ function punDay(){if(!S||S.dead)return;try{for(const v of (rivals||[]))if(v&&v.a
  if(S.out&&S.coldPend&&coldStayOk(S)){const P=S.coldPend;S.coldPend=null;restore(P.full,P.why)}else if(!S.out)S.coldPend=null}catch(e){console.error("punDay",e)}}
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{punDay()}catch(e){console.error("punDay",e)}return r}})();
 /* an NPC leaves lãnh cung (every NPC release road): one rank below the rank she held when she went in, never Đáp ứng from any height */
-function coldFree(v){const r=v.coldR!=null?v.coldR:(v.queen?7:(v.rank|0));if(v.queen)v.queen=false;v.out=false;v.rank=BAL.pun.npcOneBelow?Math.max(0,Math.min(6,r-1)):0/* PENDING OWNER (law 16): false = the old rule, an NPC always comes back as Đáp ứng */;v.coldWk=null;v.coldR=null;return v.rank}
+function coldFree(v,full){const T=coldTitleOf(v),from=v.coldFrom!=null?v.coldFrom:(v.coldR!=null?v.coldR:(v.queen?7:(v.rank|0)));const want=full?Math.max(from,T==null?0:T):(T==null?from:T);
+ if(v.queen)v.queen=false;v.out=false;v.coldWk=null;v.coldR=null;v.coldFrom=null;v.coldX=null;const r=coldBack(v,want);if(r>=7){v.rank=6;v.queen=true}else v.rank=r;return rkOf(v)}
+/* ================= PUNISH-TIER (review/punish-tier, owner OD 26/11 ~19:05Z + ~19:10Z, verbatim in OD; numbers BAL.charge.tier) =================
+   The CRIME decides the penalty (its weight: nhẹ / vừa / nặng / cực nặng), the evidence only decides whether it sticks. «Cây cao đón gió»: on a
+   seated rank (SEATCAP, Tần and up) a NẶNG crime costs one rank AND lãnh cung, so the seat always frees; on a seat-free rank she keeps her title
+   inside. CỰC NẶNG = ban chết or phế vị + lãnh cung. Leaving lãnh cung (her and an NPC alike, law 1): the rank she is owed (minh oan = the rank
+   before the conviction, a pardon = the title she kept inside) when its seat is free, else BAL.pun.oneBelow lower. A consort inside holds no seat
+   (holders / liveRivals skip her; her own S.rank is 0 while out). */
+function punSeated(r){r=Math.max(0,Math.min(7,r|0));return SEATCAP[r]!=null}
+function punTierN(x){const T=BAL.charge.tier[x];return T?T.n:""}
+/* the title she keeps inside lãnh cung for a crime of weight x, from rank r (Hoàng hậu = 7): cực nặng = phế vị (0); nặng = one rank lower on a
+   seated rank, the same title on a seat-free one; "keep" (no crime: bị bỏ quên) = the same title */
+function coldTitle(r,x,cur){r=Math.max(0,Math.min(7,r|0));cur=cur==null?r:Math.max(0,Math.min(7,cur|0));if(x==="cuc")return 0;if(x==="keep")return cur;return punSeated(r)?Math.max(0,Math.min(6,r-1)):cur}
+/* (cur = her rank now: a demotion earlier the same day already took the rank, D1 «one rank per punishment» — the stay never gives it back) */
+/* the title p holds while inside (null = not in lãnh cung); an old save / an old road (no coldFrom) is read as a NẶNG stay */
+function coldTitleOf(p){if(!p)return null;if(p===S){if(!S.out)return null;return S.coldFrom!=null?(S.coldRank|0):coldTitle(S.coldRank|0,"nang")}
+ if(!p.out)return null;if(p.coldFrom!=null)return p.coldR!=null?p.coldR:(p.rank|0);return coldTitle(p.coldR!=null?p.coldR:(p.queen?7:(p.rank|0)),"nang")}
+function coldTitleTxt(p){const t=coldTitleOf(p);if(t==null)return"";return t>=7?"Hoàng hậu":RANKS[Math.max(0,t)].n}
+/* the rank she comes back to: the one owed when its seat is free (the Hoàng hậu seat too), else BAL.pun.oneBelow lower — one step, never more */
+function coldBack(p,want){want=Math.max(0,Math.min(7,want|0));if(want<=0)return 0;if(seatHas(p,want))return want;return Math.max(0,Math.min(6,want-BAL.pun.oneBelow))}
+/* the weight of a punishment road with no charge (fall / cold callers name theirs; default as the road always meant) */
+let PUNT=null;
+/* send p into lãnh cung for a crime of weight x (her: j14 cold with the title; an NPC: the same state and the same log words) */
+function punCold(p,x,why,by,quiet){const a=punWho(by);const r0=punFromToday(p),r=p.queen?7:r0,title=coldTitle(r,x,rkOf(p));
+ if(p===S){if(S.out||S.dead)return;const pt=PUNT;PUNT={x,title,from:r};try{cold(/^Ngươi/.test(why)?why:`Ngươi ${punPlain(why)}`,a,x)}finally{PUNT=pt}return}
+ if(p.out||p.alive===false)return;if(a&&a!==p)p.coldBy=key(a);if(p.queen)p.queen=false;p.coldFrom=r;p.rank=Math.min(6,title);p.coldR=title;p.coldX=x;p.out=true;p.coldWk=punNow();
+ if(!quiet)log(`<span class="g">${p.name} ${punPlain(why)}, ${punColdTxt(r,title,x)}.</span>`)}
+function punColdTxt(r,title,x){const rn=k=>k>=7?"Hoàng hậu":RANKS[k].n;return x==="cuc"?"bị phế vị, đày vào lãnh cung":title<r?`bị giáng xuống ${rn(title)} rồi đày vào lãnh cung`:`bị đày vào lãnh cung, vẫn giữ phẩm ${rn(title)}`}
+/* one rank down for a crime of weight vừa (her: j30 demote; an NPC: the same; the Hoàng hậu steps to Hoàng quý phi; Đáp ứng / a second rank
+   punishment the same day = cấm túc, D1) */
+function punGiang(p,why,by){if(p===S){if(S.out||S.dead)return;const a=punWho(by);const pt=PUNT;PUNT=Object.assign({},pt||{},{x:(pt&&pt.x)||"vua"});try{if(S.rank<=0){punish(S,why,1);return}if(punTwice(S)){punLight(S,why,a);return}
+  const r0=S.rank;S.rank=punDown(S);punMark(S,r0);S.lastPromo=S.turn;log(`<span class="r">Ngươi ${punPlain(why)}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);punNote({kind:"giang",why,by:a,from:r0,to:S.rank})}finally{PUNT=pt}return}
+ if(p.out||p.alive===false)return;if(rkOf(p)<=0||punTwice(p)){punish(p,why,1);return}const r0=rkOf(p);seatPut(p,punDown(p));punMark(p,r0);p.lastPromo=S.turn;
+ const t=`${p.name} ${punPlain(why)}, bị giáng xuống ${RANKS[rkOf(p)].n}.`;log(`<span class="g">${t}</span>`)}
+/* the ONE penalty of a crime of weight x (vừa / nặng / cực nặng; nhẹ stays with its road: phạt bổng or cấm túc ngắn) */
+function punTier(p,x,why,by){if(!p)return;if(x==="vua")return punGiang(p,why,by);if(x==="nang")return punCold(p,"nang",why,by);
+ if(x==="cuc"){const D=BAL.charge.tier.cuc.death;const pd=D[typeof punTemper==="function"?punTemper():0]||0;if(roll(pd)){const pt=PUNT;PUNT={x:"cuc"};try{deathSentence(p,`Bị ban chết vì ${punPlain(why)}`)}finally{PUNT=pt}return}return punCold(p,"cuc",why,by)}
+ return punish(p,why,1)}
+/* the plain words of the penalty a weight brings on p now (cards, warnings: the same rule as punTier) */
+function punTierTxt(p,x){const r=p?(p.queen?7:rkOf(p)):0;if(x==="vua")return r>0?"bị giáng một bậc":`bị cấm túc ${typeof punishMonths==="function"?punishMonths():1} tháng`;
+ if(x==="nang"){const t=coldTitle(r,"nang");return t<r?"bị giáng một bậc và đày vào lãnh cung":"bị đày vào lãnh cung, giữ phẩm vị"}
+ if(x==="cuc")return "bị phế vị và đày vào lãnh cung, hoặc bị ban chết";return `bị cấm túc ${typeof punishMonths==="function"?punishMonths():1} tháng`}
 /* WHY an ally pardons her (Hoàng hậu «Ân xá», law 1 same words for an NPC): her standing with the one who pardons, read from the one relation core */
 function punAllyWhy(a,p){let n=0;try{n=Math.round(aff(a,p))}catch(e){}const t=p===S?"ngươi":p.name;/* reviewer r1: the words follow the real standing from the one relation core (netTh «thân» line; never «quý» at thiện cảm < 0) */let th=Infinity;try{th=netTh(a,"than")}catch(e){}return n>=th?`nàng quý ${t} (thiện cảm ${n})`:n>=0?`nàng mở lòng khoan dung với ${t} (thiện cảm ${n})`:`nàng giữ đức khoan dung của Trung cung, dù không ưa ${t} (thiện cảm ${n})`}
 /* ONE RANK: the seat cap never pushes the punished one further (jseat settle). While she sits on the rank she was punished to, the settle

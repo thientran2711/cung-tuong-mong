@@ -2255,7 +2255,7 @@ BAL.kmus={holdMs:6000};
 /* PUNISH-REASON (review/punish-reason, D1; owner 26/11 ~01:25Z + ~04:15Z): coldMinDays = days (tuần, wk()) in lãnh cung before any release
    (ân xá, đại xá, cầu xin, minh oan — hers and an NPC's); gapDays = no second rank punishment on one person within this many days (it becomes
    cấm túc); fallSung = Sủng lost with a one-rank fall (was the typed 15 in j8 fall); evShow = most evidence lines a notice lists */
-BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDING OWNER (law 16, asked via MAIN 152): false = today's rule (an NPC always comes back as Đáp ứng); true = release one rank below the old rank */};
+BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,oneBelow:1/* PUNISH-TIER rule (4), OD 26/11 ~19:05Z MAIN rec applied (canon overwrite of the old npcOneBelow question): leaving lãnh cung, her and an NPC alike, she takes back the rank she is owed when its seat is free, else this many ranks lower */};
 /* CHARGE-EVIDENCE (review/charge-evidence, D4 option A; owner 26/11 ~05:15Z «D4 A» + ~05:35Z find-odds formula, verbatim in OD): evidence is kept
    PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, need = pieces
    to accuse (Hoàng hậu target + queenPlus), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
@@ -2269,14 +2269,14 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
    deed map completed by D4 #3 from dup-report §4.1: rash → hd, xa xỉ → vp, laydo/laydol/tat/phatquy/nuoc/tea/ink/mlbeat → uh, maid-line frame → vo,
    maid-line poison → mh, ls (sổ Kính sự phòng lệch ngày) → tt like pm; pushp (đẩy xuống hồ, can drown) → mh like pond; phonghoa (burns a store) → uh. */
 BAL.charge={C:{
- vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light",pk:["tận mắt thấy món vượt phẩm"]},
- il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam",pk:["đồ cấm thấy trong rương","lời khai kẻ mua hộ"]},
- uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam",pk:["lời khai người bị hại","người tận mắt chứng kiến"]},
- mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light",pk:["bạc đút lót tìm thấy","lời khai người hầu bị mua"]},
- hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang",pk:["tang vật","lời khai người hầu"]},
- mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold",pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
- vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold",pk:["thư từ giả mạo","lời khai kẻ được sai","dấu vết đồ bị cài"]},
- tt:{n:"Tư thông",need:3,band:1,pun:"cold",pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
+ vp:{n:"Vượt phẩm xa xỉ",tier:"nhe",lite:"bong",band:6,pk:["tận mắt thấy món vượt phẩm"]},
+ il:{n:"Giấu đồ cấm",tier:"nhe",lite:"cam",band:5,pk:["đồ cấm thấy trong rương","lời khai kẻ mua hộ"]},
+ uh:{n:"Ức hiếp quấy phá",tier:"nhe",lite:"cam",band:5,pk:["lời khai người bị hại","người tận mắt chứng kiến"]},
+ mc:{n:"Mua chuộc người hầu",tier:"nhe",lite:"bong",band:4,pk:["bạc đút lót tìm thấy","lời khai người hầu bị mua"]},
+ hd:{n:"Hại dung nhan",tier:"vua",band:3,pk:["tang vật","lời khai người hầu"]},
+ mh:{n:"Mưu hại tính mạng",tier:"nang",band:2,pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
+ vo:{n:"Vu oan giá họa",tier:"vua",band:2,pk:["thư từ giả mạo","lời khai kẻ được sai","dấu vết đồ bị cài"]},
+ tt:{n:"Tư thông",tier:"nang",band:1,pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
   bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"uh",
@@ -2286,12 +2286,12 @@ BAL.charge={C:{
   /* charge-evidence rv (whole family: every key deedAdd / deedOnce / cyDeed / mlCaught writes): maid-line deeds = the act ordered, the pregnancy-register
      deeds = the «thai không khớp sổ» row of Tư thông (table A, H), bribing Kính sự phòng = Mua chuộc */
   mlpoison:"mh",mlframe:"vo",mlhframe:"vo",mlbeat:"uh",ls:"tt",cyfake:"tt",cylie:"tt",cyforge:"mc"},
- queenPlus:1,tcStep:20,tcCap:2,bandWord:[2,5]/* chFind weight words: band ≤ [0] «tội nặng» · ≥ [1] «tội nhẹ» · else «tội vừa» */,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:4/* Phi (RANKS[4]) and up = Cung chủ, owner canon «Phi+ −1»; rv: was 5 = Quý phi */,guard:-1,missStep:1,missCap:6,
+ tcStep:20,tcCap:2,bandWord:[2,5]/* chFind weight words: band ≤ [0] «tội nặng» · ≥ [1] «tội nhẹ» · else «tội vừa» */,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:4/* Phi (RANKS[4]) and up = Cung chủ, owner canon «Phi+ −1»; rv: was 5 = Quý phi */,guard:-1,missStep:1,missCap:6,
  fine:20,danh:-3,duc:-3,warnMat:2,accW:15/* Tố giác odds per piece of the proven charge (the j8 accuse weight per piece; rv: was typed in jcharge) */,
  /* charge-followups (b), D4 table A (reports/punish-reason.md): beside the charge's one punishment — Ức hiếp quấy phá: bồi uhPay lượng bạc to each person
     she harmed (victims of her uh deeds, at most «need» people); Mua chuộc người hầu: the servants she bought (spyFor = her) are dismissed from the palace
     (jagstaff asOut "expel"), those named by her mc deeds first, at most mcFire. Same for every consort (law 1). */
- uhPay:20,mcFire:2,
+ uhPay:20,uhMax:2/* most people paid (PUNISH-TIER: was the charge need) */,mcFire:2,
  /* charge-followups (c): «Trình Hoàng hậu» odds = base + the Hoàng hậu's thiện cảm to the one presenting / affD + per × the pieces of the PROVEN charge
     (jaudit card + j78 legacy; was 35 + aff/2 + 8 × the TOTAL pieces, typed) — like Tố giác (accW per piece of the proven charge) */
  trinh:{base:35,affD:2,per:8},
@@ -2301,3 +2301,18 @@ BAL.charge={C:{
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
+/* PUNISH-TIER (review/punish-tier, owner OD 26/11 ~19:05Z + ~19:10Z «cây cao đón gió», history note dev/handover/reports/punish-tier.md):
+   the CRIME decides the penalty, the evidence only decides whether the charge sticks. Each charge C[c].tier = its weight; tier[x].need = the
+   pieces a charge of that weight needs (C[c].need reads it — one source); rkPlus[r] = extra pieces to accuse a consort of rank r (the seated
+   ranks Tần+ are safer: more proof), cucDeed = deed kinds that make their charge CỰC NẶNG whatever its base weight (real tư thông, khi quân:
+   giả thai / tráo hoàng tự). Penalty by weight × seat (jpun punTier, her and every NPC alike, law 1):
+   nhẹ = C[c].lite: «bong» phạt bổng (fine, danh, duc) / «cam» cấm túc ngắn (punish weight 1) — no rank change;
+   vừa = giáng 1 bậc; nặng = lãnh cung KEEPING the title on a seat-free rank, giáng 1 bậc + lãnh cung on a seated rank (SEATCAP, the seat frees);
+   cực nặng = death[temper] % ban chết (Emperor's temper: thường / nóng nảy / nhân từ), else phế vị (Đáp ứng) + lãnh cung.
+   failRk: a failed accusation of a target of rank r costs the accuser Danh × danhX[r] and a punishment of weight sev[r] (null = none). */
+BAL.charge.tier={nhe:{n:"nhẹ",need:1},vua:{n:"vừa",need:2},nang:{n:"nặng",need:3},cuc:{n:"cực nặng",need:3,death:[30,60,0]}};
+BAL.charge.tierOrd=["nhe","vua","nang","cuc"];
+BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];
+BAL.charge.cucDeed=["tryst","cyfake","catswap"];
+BAL.charge.failRk={danhX:[1,1,1,1.5,1.5,2,2,2],sev:[null,null,null,null,0,0,1,2]};
+for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});

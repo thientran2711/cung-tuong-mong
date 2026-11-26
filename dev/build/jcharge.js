@@ -17,7 +17,13 @@ function chB(){return BAL.charge}
 function chC(c){return BAL.charge.C[c]||null}
 function chOfDeed(k){return BAL.charge.deed[k]||"uh"}
 function chName(c){const C=chC(c);return C?C.n:"tội khác"}
-function chNeed(t,c){const C=chC(c);return C?C.need+(t&&rkOf(t)>=7?chB().queenPlus:0):99}
+/* pieces to accuse t of charge c: the weight's need (BAL.charge.tier, PUNISH-TIER: heavier crime, more proof) + rkPlus of her rank (seated ranks safer) */
+function chNeed(t,c){const C=chC(c);if(!C)return 99;const x=t?chTier(t,c):C.tier;const n=chB().tier[x].need;return n+(t?chB().rkPlus[Math.max(0,Math.min(7,rkOf(t)))]||0:0)}
+/* the WEIGHT of charge c on t: its base tier, CỰC NẶNG when one of her deeds of that charge is a cucDeed (real tư thông, khi quân) */
+function chTier(t,c){const C=chC(c);if(!C)return"nhe";if(t){const D=chDeedMap(t)[c];if(D&&D.list&&D.list.some(d=>d&&chB().cucDeed.includes(d.k)))return"cuc"}return C.tier}
+function chTierN(t,c){return punTierN(chTier(t,c))}
+/* «tội X (nặng)» — every place that names a charge with its pieces shows its weight */
+function chNameW(t,c){return `${chName(c)} (${chTierN(t,c)})`}
 /* band (0..6, the 7 equal odds bands) → the middle odds of that band */
 function chBandO(b){const K=BAL.odds.cut,lo=BAL.odds.lo,hi=BAL.odds.hi;b=Math.max(0,Math.min(K.length,b|0));const a=b===0?lo:K[b-1],z=b===K.length?hi:K[b]-1;return Math.round((a+z)/2)}
 /* the target's real deeds per charge (memo per day and ledger size) */
@@ -85,24 +91,22 @@ accOK=function(a,t){return chOK(a,t)&&(rkOf(t)<7||rkOf(a)>=3)};
 accNeed=function(t,h){h=h||S;const c=(h&&t&&h!==t&&chChase(h,t))||"vp";return chNeed(t,c)};
 (function(){const o0=oAccuse;oAccuse=function(a,t){const c=chReady(a,t);const n=c?chHave(a,t,c):0,g=evG(a,t);return oddsCl(Math.round(o0.apply(this,arguments)+(n-g)*BAL.charge.accW))/* the charge's own pieces weigh, not the total */}})();
 /* the punishment a proven charge brings (one punishment, D1 punish-reason; NPC and player alike) */
-function chPunTxt(t,c){const C=chC(c);if(!C)return"bị phạt";const m=typeof punishMonths==="function"?punishMonths():1;
- return C.pun==="light"?`bị phạt bổng ${BAL.charge.fine} lượng`:C.pun==="cam"?`bị cấm túc ${m} tháng`:C.pun==="giang"?`bị giáng một bậc`:rkOf(t)>=5||t.queen?`bị phế vào lãnh cung`:`bị đày vào lãnh cung`}
-function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (tội ${chName(c).toLowerCase()})`;const a=typeof punWho==="function"?punWho(by):by;
- if(C.pun==="light"){ap(t,{bac:-BAL.charge.fine,danh:BAL.charge.danh});if(typeof ducAdd==="function")ducAdd(t,BAL.charge.duc,chName(c).toLowerCase());
+function chPunTxt(t,c){const C=chC(c);if(!C)return"bị phạt";const x=chTier(t,c);const m=typeof punishMonths==="function"?punishMonths():1;
+ if(x==="nhe")return C.lite==="bong"?`bị phạt bổng ${BAL.charge.fine} lượng`:`bị cấm túc ${m} tháng`;return punTierTxt(t,x)}
+/* PUNISH-TIER: the one penalty of a proven charge = its WEIGHT (chTier) × her rank (jpun punTier: nặng on a seated rank = giáng + lãnh cung) */
+function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (tội ${chName(c).toLowerCase()})`;const a=typeof punWho==="function"?punWho(by):by;const x=chTier(t,c);
+ const pt=PUNT;PUNT={x};try{
+ if(x==="nhe"&&C.lite==="bong"){ap(t,{bac:-BAL.charge.fine,danh:BAL.charge.danh});if(typeof ducAdd==="function")ducAdd(t,BAL.charge.duc,chName(c).toLowerCase());
   if(c==="vp")vpSeize(t)/* charge-followups (a): the listed pieces really go to the Nội vụ phủ store (was: vpItems copies, nothing taken) */;
   log(`<span class="r">${NMc(t)} bị phạt bổng ${BAL.charge.fine} lượng vì ${punPlain(W)}.</span>`);if(t===S)punNote({kind:"phat",why:W,by:a});return}
- if(C.pun==="cam"){if(c==="il")for(const e of (t.inv||[]).slice()){if(e&&IT[e.k]&&itm(e.k).il&&!((e.by&&e.by!==key(t))||e.gh)){ilSeize(t,e,"evid",{keep:1})/* charge-followups (a): đồ cấm → Cung Chính ti as tang vật (was spliced: gone) */}}punish(t,W,1);return}
- if(C.pun==="giang"){if(t===S){if(typeof demote==="function"&&S.rank>0)demote(S,punPlain(W));else punish(S,W,1);return}
-  if(rkOf(t)<=0||punTwice(t)){punish(t,W,1);return}const r0=rkOf(t);seatPut(t,punDown(t));punMark(t,r0);log(`<span class="g">${t.name} ${punPlain(W)}, bị giáng xuống ${RANKS[rkOf(t)].n}.</span>`);return}
- /* cold */
- if(t===S){if(!S.out&&!S.dead)cold(`Ngươi ${punPlain(W)}`,a);return}
- if(t.out||t.alive===false)return;if(a&&a!==t)t.coldBy=key(a);if(t.queen){t.queen=false;t.rank=6}t.out=true;t.coldWk=punNow();log(`<span class="g">${t.name} ${punPlain(W)}, bị ${rkOf(t)>=5?"phế":"đày"} vào lãnh cung.</span>`)}
+ if(x==="nhe"){if(c==="il")for(const e of (t.inv||[]).slice()){if(e&&IT[e.k]&&itm(e.k).il&&!((e.by&&e.by!==key(t))||e.gh)){ilSeize(t,e,"evid",{keep:1})/* charge-followups (a): đồ cấm → Cung Chính ti as tang vật (was spliced: gone) */}}punish(t,W,1);return}
+ punTier(t,x,W,a)}finally{PUNT=pt}}
 /* charge-followups (b) — table A extras beside the one punishment (numbers BAL.charge.uhPay / mcFire; NPC and her alike, law 1):
    Ức hiếp quấy phá → she pays bạc to each person she harmed; Mua chuộc người hầu → the servants she bought are dismissed (asOut "expel").
    The rows go into her notice (punRows) under the punishment; an NPC's case goes to the log. */
 let CHPX=null;
 function chVictims(t,c){const D=chDeedMap(t)[c];const seen=new Set(),L=[];for(const d of ((D&&D.list)||[])){if(!d||!d.t||seen.has(d.t))continue;seen.add(d.t);let v=null;try{v=byKey(d.t)}catch(e){}if(v&&v!==t&&(v===S?!S.dead:v.alive!==false))L.push(v)}return L}
-function chUhPay(t){const B=chB(),L=chVictims(t,"uh").slice(0,chNeed(t,"uh"));const nm=[];
+function chUhPay(t){const B=chB(),L=chVictims(t,"uh").slice(0,B.uhMax)/* PUNISH-TIER: ức hiếp now needs 1 piece (nhẹ); the people paid stay capped by uhMax (was «need» = 2) */;const nm=[];
  /* rv: she pays only the bạc she has (her Bạc floors at 0 in apply; an NPC never goes below 0 here) — the victim gets exactly what was paid, no bạc made from nothing (law 6c) */
  for(const v of L){const pay=Math.min(B.uhPay,Math.max(0,(t===S?S.bac:t.bac)|0));if(pay<=0)break;ap(t,{bac:-pay});ap(v,{bac:pay});nm.push(`${pay} lượng bạc cho ${NM(v)}`)}
  if(!nm.length)return null;const x=`bồi ${nm.join(", ")}`;if(t!==S)log(`${NMc(t)} phải ${x}.`);return ["Bồi thường",x]}
@@ -143,11 +147,13 @@ function chExtras(t,c){const R=[];try{const a=c==="uh"?chUhPay(t):c==="mc"?chMcF
 function chTrinhO(a,t,q){const B=chB().trinh,c=chReady(a,t);return B.base+aff(q,a)/B.affD+(c?chHave(a,t,c):0)*B.per}
 /* the accusation act itself (j8 «Tố giác»): the full charge only; its pieces are spent, the others kept */
 (function(){const A=ACT.accuse;if(!A)return;const f0=A.f;
- Object.defineProperty(A,"x",{configurable:true,get(){return `cần đủ chứng cứ của một tội (mỗi tội một số chứng riêng: ${chB().order.slice().reverse().map(c=>`${chName(c)} ${chC(c).need}`).join(", ")}; Hoàng hậu thêm ${chB().queenPlus} và phẩm Tần trở lên)`}});
+ Object.defineProperty(A,"x",{configurable:true,get(){const B=chB(),P=B.rkPlus;const up=[3,4,5,6,7].filter(r=>P[r]>0).map(r=>`${r>=7?"Hoàng hậu":RANKS[r].n} +${P[r]}`);/* PUNISH-TIER: need by weight, more for a seated rank */
+  return `cần đủ chứng cứ của một tội; tội càng nặng càng cần nhiều chứng (${B.tierOrd.map(x=>`tội ${B.tier[x].n} ${B.tier[x].need}`).join(", ")}); tố người ở phẩm cao cần thêm (${up.join(", ")}); tố hụt người phẩm cao thì chịu phạt nặng hơn`}});
  A.f=function(a,t){const c=chReady(a,t);if(!c)return f0.apply(this,arguments);const o=oAccuse(a,t);const n=chHave(a,t,c);const px=CHX;CHX={a,t,c,n};
   try{evA(a,t,-n,c);
    if(aRoll(o,a)){econPayWin(a,"accuse",t,0);const r=`${NMc(a)} tố giác ${NM(t)} tội ${chName(c).toLowerCase()} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;chPunish(t,c,"bị tố giác, chứng cứ rành rành",a);return r}
-   ap(a,{danh:BAL.eff.j8.accuseFailDanh});relAdd(a,t,BAL.eff.j8.f_6);if(rkOf(t)>=7)punish(a,"tố hụt Hoàng hậu, phạm thượng",2);return `${NMc(a)} tố giác ${NM(t)} tội ${chName(c).toLowerCase()} không thành; chứng cứ bị hủy. `}
+   /* PUNISH-TIER (C): a failed accusation of a higher (seated) consort hurts the accuser more (BAL.charge.failRk by the target's rank) */
+   const fr=chB().failRk,tr=Math.max(0,Math.min(7,rkOf(t)));ap(a,{danh:Math.round(BAL.eff.j8.accuseFailDanh*fr.danhX[tr])});relAdd(a,t,BAL.eff.j8.f_6);if(fr.sev[tr]!=null)punish(a,tr>=7?"tố hụt Hoàng hậu, phạm thượng":`tố hụt ${RANKS[tr].n} ${NM(t)}, phạm thượng`,fr.sev[tr]);return `${NMc(a)} tố giác ${NM(t)} tội ${chName(c).toLowerCase()} không thành; chứng cứ bị hủy. `}
   finally{CHX=px}}})();
 /* Hoàng hậu «Xử tội» (j8 judge, hers and an NPC queen's): by the full charge */
 (function(){const j0=judge;judge=function(q,p){const c=chReady(q,p);if(!c)return j0.apply(this,arguments);const n=chHave(q,p,c);const px=CHX;CHX={a:q,t:p,c,n};
@@ -162,13 +168,13 @@ function chTrinhO(a,t,q){const B=chB().trinh,c=chReady(a,t);return B.base+aff(q,
 (function(){if(typeof punEvTxt!=="function")return;const p0=punEvTxt;punEvTxt=function(a,t){t=t||S;if(!a||!CHX||CHX.a!==a||CHX.t!==t)return p0.apply(this,arguments);
  const D=chDeedMap(t)[CHX.c];const DL=((D&&D.list)||[]).filter(d=>d&&d.x);const PK=(chC(CHX.c)||{}).pk||[];const L=[];/* rv: one line per piece, «deed · kind» (table A rule 4) */
  for(let i=0;i<Math.min(CHX.n,BAL.pun.evShow)&&DL.length;i++)L.push(`${DL[i%DL.length].x}${PK.length?" · "+PK[i%PK.length]:""}`)
- return `tội ${chName(CHX.c).toLowerCase()}, ${CHX.n} món chứng${L.length?": "+L.join("; "):""}`}})();
+ return `tội ${chName(CHX.c).toLowerCase()} (${chTierN(t,CHX.c)}), ${CHX.n} món chứng${L.length?": "+L.join("; "):""}`}})();
 if(typeof PUNK==="object")PUNK.phat="Phạt bổng";
-(function(){if(typeof punRows!=="function")return;const r0=punRows;punRows=function(o){const R=r0.apply(this,arguments);if(o&&o.kind==="phat")R.push(["Hình phạt",punEsc(`Phạt bổng ${BAL.charge.fine} lượng, Danh ${balSg(BAL.charge.danh)}`)]);return R}})();
+/* «phat» Hình phạt row: jpun punRows (PUNISH-TIER: before the tier rows) */
 /* ---------- the evidence lines for the cards ---------- */
 /* «Tư thông 2/3 · Vượt phẩm 1/1» — every charge she holds a piece of */
-function chLine(h,t){if(!h||!t||h===t)return"";const m=chSync(h,t);return chB().order.filter(c=>(m[c]||0)>0).map(c=>`${chName(c)} ${m[c]}/${chNeed(t,c)}`).join(" · ")}
-function chNeedTxt(h,t,c){const L=chLine(h,t);if(c){return `cần ${chNeed(t,c)} chứng cứ tội ${chName(c).toLowerCase()} (có ${chHave(h,t,c)})`}
+function chLine(h,t){if(!h||!t||h===t)return"";const m=chSync(h,t);return chB().order.filter(c=>(m[c]||0)>0).map(c=>`${chNameW(t,c)} ${m[c]}/${chNeed(t,c)}`).join(" · ")}
+function chNeedTxt(h,t,c){const L=chLine(h,t);if(c){return `cần ${chNeed(t,c)} chứng cứ tội ${chName(c).toLowerCase()}, tội ${chTierN(t,c)} (có ${chHave(h,t,c)})`}
  return L?`chưa đủ chứng một tội: ${L}`:`chưa có chứng cứ về ${chWho(t,"ngươi")}`}
 kitWhyEv=function(a,n){return a?chNeedTxt(S,a):`thiếu chứng cứ`};
 /* «Tố tội thật» (j30): a full charge among the plain crimes she can be shown to have (vượt phẩm, đồ cấm, bày mưu) */
@@ -177,13 +183,13 @@ function chTocao(h,t){for(const c of ["uh","il","vp"])if(chReady(h,t,c))return c
 function chHitDeed(t){const x=(CHLAST&&CHLAST.tries||[]).filter(z=>z.hit).pop();if(!x)return null;const D=chDeedMap(t)[x.c];return D&&D.list[0]||null}
 /* evidence card rows (kit fact rows): one row per charge she holds a piece of — pieces / need, and the next search's odds word */
 function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t);const ag=h===S?S.maid:null;return chB().order.filter(c=>(m[c]||0)>0).map(c=>{const need=chNeed(t,c),n=m[c];
- return [chName(c),n>=need?`${n}/${need}, đủ để tố`:`${n}/${need} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
+ return [chNameW(t,c),n>=need?`${n}/${need}, đủ để tố`:`${n}/${need} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
 /* the short word for a picker sub-line, and the one plain paragraph that says what decides it (the search dialog) */
 function chFindWord(h,t,ag){if(!h||!t||h===t)return"";const c=chChase(h,t);return `Tìm chứng: ${word(chFind(h,t,c||"hd",ag).o)}`}
 function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ ${RANKS[B.guardRk].n} trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}
 /* the evidence record (j78 S.evd «proves») names a real deed OF THE CHARGE the piece was written to */
 (function(){if(typeof j78proof!=="function")return;const p0=j78proof;j78proof=function(v){try{if(CHLASTC&&CHLASTC.t===v){const D=chDeedMap(v)[CHLASTC.c];S.evd=S.evd||{};
- const PK=(chC(CHLASTC.c)||{}).pk||[];const i=Math.max(0,chHave(S,v,CHLASTC.c)-1);const kd=PK.length?` · ${PK[i%PK.length]}`:"";/* rv: each piece names its kind (table A rule 4), never the same line twice */
+ const PK=(chC(CHLASTC.c)||{}).pk||[];const i=Math.max(0,chHave(S,v,CHLASTC.c)-1);const kd=(PK.length?` · ${PK[i%PK.length]}`:"")+` · tội ${chTierN(v,CHLASTC.c)}`;/* PUNISH-TIER: each piece shows its crime weight *//* rv: each piece names its kind (table A rule 4), never the same line twice */
  const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}${kd}`,ref,aim:d.t}}
  const d=D&&D.list[0];if(d)return{proves:`${j78Who(v)} ${d.x}${kd}`,ref:"tc:"+CHLASTC.c+":"+((S.evd[v.id]||[]).length),aim:d.t}}}catch(e){}return p0.apply(this,arguments)}})();
 /* STEP 4 family (her notice WHO / EVIDENCE on every charge): chPunish's cấm túc («cam») and giáng roads end in the generic punish / demote,
@@ -197,7 +203,11 @@ let CHBY=null;
    chTocao, Bóc chuyện tư tình = tư thông: its pieces (chHave) and its punishment (chPunTxt) — never the total, never BAL.eff.j30.evF / j78.evF_2. */
 const CH_USE={accuse:(a,t)=>chReady(a,t),trinhhh:(a,t)=>chReady(a,t),judge:(a,t)=>chReady(a,t),tocao:(a,t)=>chTocao(a,t),expose:(a,t)=>chOK(a,t,"tt")?"tt":null};
 function chUse(k,a,t){const f=CH_USE[k];if(!f||!a||!t||a===t)return null;let c=null;try{c=f(a,t)}catch(e){}return c?{c,n:chHave(a,t,c)}:null}
-function chUseTxt(k,a,t){const u=chUse(k,a,t);return u?`Chứng cứ ${balSg(-u.n)} (tội ${chName(u.c).toLowerCase()})`:null}
+function chUseTxt(k,a,t){const u=chUse(k,a,t);return u?`Chứng cứ ${balSg(-u.n)} (tội ${chName(u.c).toLowerCase()}, ${chTierN(t,u.c)})`:null}
+/* PUNISH-TIER (C): what a failed accusation of t costs the accuser (the same numbers the act applies: BAL.charge.failRk by t's rank) */
+function chFailDanh(t){const tr=t?Math.max(0,Math.min(7,rkOf(t))):0;return Math.round(BAL.eff.j8.accuseFailDanh*chB().failRk.danhX[tr])}
+function chFailPun(t){const tr=t?Math.max(0,Math.min(7,rkOf(t))):0;const v=chB().failRk.sev[tr];if(v==null)return"";
+ return v<=0?(punishCut()>0?`phạm thượng: khất bổng ${punishCut()} tháng`:"phạm thượng: bị cảnh cáo"):v===1?`phạm thượng: bị cấm túc ${punishMonths(1)} tháng`:"phạm thượng: bị giáng một bậc hoặc cấm túc"}
 function chWinTxt(k,a,t,W){const u=chUse(k,a,t);return u&&k!=="expose"/* tư thông: its own road (ban chết / lãnh cung) */?`${W||NM(t)} ${chPunTxt(t,u.c)}`:null}
 (function(){if(typeof AOUT!=="object")return;for(const k of ["accuse","tocao"]){const d=Object.getOwnPropertyDescriptor(AOUT,k);const base=()=>d?(d.get?d.get.call(AOUT):d.value):null;
- try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const b=base()||["",""];const t=typeof J78==="object"&&J78.cardV;const w=t?chWinTxt(k,S,t,j78who(t)):null;return w?[w+(k==="accuse"?`; Danh ${balSg(BAL.eff.j8.accuseDanh)}`:""),b[1]]:b}})}catch(e){}}})();
+ try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const b=base()||["",""];const t=typeof J78==="object"&&J78.cardV;const w=t?chWinTxt(k,S,t,j78who(t)):null;const f=k==="accuse"&&t?`Danh ${balSg(chFailDanh(t))}, thù ${balSg(BAL.eff.j8.f_6)}, chứng cứ bị hủy${chFailPun(t)?"; "+chFailPun(t):""}`:b[1];return w?[w+(k==="accuse"?`; Danh ${balSg(BAL.eff.j8.accuseDanh)}`:""),f]:[b[0],f]}})}catch(e){}}})();

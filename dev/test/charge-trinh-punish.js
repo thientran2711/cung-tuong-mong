@@ -51,7 +51,7 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
   if(ob){cp=[];gp=[];const h0=chHave(S,v,"uh");win(()=>ob.go());ok(cp.some(x=>x[0]===v.name&&x[1]==="uh")&&!gp.some(x=>x[0]===v.name)&&chHave(S,v,"uh")===0&&h0>0,`her «Báo lên» won: chPunish ${JSON.stringify(cp)}, pieces ${h0} → ${chHave(S,v,"uh")}`)}
   /* rv F3: the Hậu cung person card (actLineRaw + AOUT) and the evidence card print what the act spends / does — one helper */
   clean(w);S.evc={};deedAdd(w,"trip",u,1,"ngáng chân");deedAdd(w,"batnat",u,1,"bắt nạt");deedAdd(w,"vp",null,1,"vượt phẩm");evA(S,w,chNeed(w,"uh"),"uh");evA(S,w,1,"vp");J78.cardV=w;
-  for(const k of ["accuse","trinhhh"]){const line=String(actLineRaw(k,"",""));const ea=(evidenceActs(w).find(a=>a.k===k)||{});const want=`Chứng cứ ${balSg(-chHave(S,w,"uh"))} (tội ức hiếp quấy phá)`;
+  for(const k of ["accuse","trinhhh"]){const line=String(actLineRaw(k,"",""));const ea=(evidenceActs(w).find(a=>a.k===k)||{});const want=`Chứng cứ ${balSg(-chHave(S,w,"uh"))} (tội ức hiếp quấy phá, ${chTierN(w,"uh")})`;/* PUNISH-TIER: the weight is shown */
    ok(line.includes(want)&&String(ea.cost).includes(want)&&!new RegExp("Chứng cứ -"+evG(S,w)+"(?!\\d)").test(line.replace(want,"")),`${k}: person card «${line.replace(/<[^>]+>/g," ").slice(0,90)}» = evidence card «${ea.cost}»`)}
   const ao=AOUT.accuse;ok(ao&&/cấm túc/.test(ao[0])&&!/phế hoặc giáng/.test(ao[0]),`Tố giác «thành» on the person card: ${ao&&ao[0]}`);J78.cardV=null;
   S.confined=0;return o}));
