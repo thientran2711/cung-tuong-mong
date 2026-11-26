@@ -53,6 +53,10 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
   await p.screenshot({path:`${OUT}/${W}x${H}-shop.jpg`,type:'jpeg',quality:60});
   await tapAct('Xem món khác');await w(700);await tap('.kri-tabs [data-kritab="sell"]').catch(()=>{});await w(800);out.sell=await meas();
   out.errs=errs;console.log(JSON.stringify(out));await b.close();return}
+ if(SC==='bag'){
+  await p.evaluate(()=>{try{tab='inv'}catch(e){}render()});await w(1200);const c=await at('.kinv[data-kinv="tutrang"] .kinvg [data-kinvi]');out.tile=!!c;if(c){await tapXY(c[0],c[1]);await w(1500)}out.bag=await meas();
+  await p.screenshot({path:`${OUT}/${W}x${H}-bag.jpg`,type:'jpeg',quality:60});out.acts=await p.evaluate(()=>[...document.querySelectorAll('.kri-pane [data-kria]')].map(b=>b.textContent.trim()));
+  const ok=await tapAct('^(Dùng|Đeo|Mặc)');await w(1200);out.actTapped=ok;out.after=await meas();await p.screenshot({path:`${OUT}/${W}x${H}-bag2.jpg`,type:'jpeg',quality:60});out.errs=errs;console.log(JSON.stringify(out));await b.close();return}
  if(SC==='gift'){
   await w(400);mark('start');await openGift();await w(2000);const y=(await ringY());
   await swipe(W*.8,W*.25,y,14);await w(1800);await tap('.kri-ar[aria-label="Quay phải"]');await w(900);await tap('.kri-ar[aria-label="Quay phải"]');await w(900);

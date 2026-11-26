@@ -225,3 +225,30 @@ if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){if(!o||win
      :{ok:true,title:`Mua ${x.name}${q>1?" ×"+q:""}`,rows:[{k:"duoc",label:"Được",items:[`${kriE(x.name)} ×${q} vào Tư trang`]},{k:"mat",label:"Mất",items:[`Bạc ${dB}`]}]}}}]},
   onClose:()=>{try{delete KSHOP.reg[key]}catch(e){}try{o.onClose&&o.onClose()}catch(e){}try{render()}catch(e){}}});
  return R}}
+/* ---- (2)(3)(8)(9)(12) the bag family: every kitInvGrid({inline}) tile (Tư trang: items, wardrobe dresses / hairpins, works, recipe books, «Trưng bày») →
+        the ring on the SAME list (same category tab), focused on the tapped item. Info + acts = the item's own capture spec (kinlCapture: every kinvOpen wrapper
+        jwdinv / jecon / jrcp / jmark / jshelf stays the engine); an act = its own data-* button, clicked in the document (every delegated route stays). ---- */
+function kriSpecOf(o,x){try{return typeof kinlCapture==="function"?kinlCapture(o,x):null}catch(e){return null}}
+function kriSplitActs(html){const t=document.createElement("div");t.innerHTML=html||"";const A=[...t.querySelectorAll(".kinvacts button, .kinvacts .kbtn, [data-shelfput]")];
+ const acts=A.map(b=>({b,n:(b.childNodes[0]&&b.childNodes[0].textContent||b.textContent||"").trim(),off:b.disabled?((b.querySelector(".kwhy")||{}).textContent||b.title||"Chưa được"):""}));
+ t.querySelectorAll(".kinvacts").forEach(a=>a.remove());return{info:t.innerHTML,acts}}
+/* one hidden host in the ring layer: a replayed button lives there while it is clicked (delegated document handlers see a real attached element) */
+function kriClick(btn){const R=kitRingItem.cur;const h=document.createElement("div");h.style.cssText="position:fixed;left:-9999px;top:0;width:10px;height:10px;overflow:hidden";h.className="rbtn kinvacts";
+ const b=btn.cloneNode(true);b.disabled=false;h.appendChild(b);document.body.appendChild(h);try{b.click()}finally{h.remove()}}
+function kriFromGrid(o,x0){const key=o.key||"bag";const tabs=[{k:"all",label:"Tất cả"}].concat(o.tabs||[]);let tab=(typeof KINV!=="undefined"&&KINV.cur[key])||"all";
+ const list=t=>(o.items||[]).filter(x=>t==="all"||x.cat===t);
+ const toItem=x=>({id:typeof kinlId==="function"?kinlId(x):x.name,src:x.src,src512:x.src512,name:x.name,grade:x.grade,qty:x.qty,lux:x.lux,mark:x.mark,sub:x.onText||x.sub||"",x});
+ const title=key==="tutrang"?"Tư trang":key==="toil"?"Rương trang phục":(o.title||"Tư trang");
+ const R=kitRingItem.open({key:"inv:"+key,title,sub:o.sumTitle||"",bg:o.bg||kriBg(),tabs:tabs.length>2?tabs:null,tab,onTab:k=>{tab=k;try{KINV.cur[key]=k}catch(e){}},
+  items:t=>{/* the bag may have changed (sold / given / worn): the grid's own item list is rebuilt by its owner on render → re-read the registered grid */
+   const o2=(typeof KINV!=="undefined"&&KINV.reg[key])||o;o=o2;return list(t||tab).map(toItem)},
+  info:it=>{const sp=kriSpecOf(o,it.x);it.__sp=sp?kriSplitActs(sp.html):{info:"",acts:[]};return it.__sp.info||""},
+  acts:it=>{const sp=it.__sp||kriSplitActs((kriSpecOf(o,it.x)||{}).html);return sp.acts.map((a,i)=>({n:a.n,main:i===0,off:a.off,fn:()=>{const s=kriSnap(null),l0=kriLogMark();window.__kriAct=1;
+   try{kriClick(a.b)}finally{window.__kriAct=0}try{render()}catch(e){}
+   /* the act opened its own dialog (e.g. Tặng → who?) or a scene: the ring steps aside for it */
+   const M=$("modal");if((M&&!M.hidden&&Q.length)||document.querySelector("#kg82:not([hidden])"))return"close";
+   const L=kriLogSince(l0);return{ok:L.length?true:null,title:`${a.n} · ${it.name}`,rows:kriDiffRows(s,null).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}))},
+  empty:"Rương trống."});
+ if(R&&x0){const i=R.items.findIndex(y=>y.x===x0||y.id===(typeof kinlId==="function"?kinlId(x0):""));if(i>=0){kitRingItem.cur.rot=i;kriPlace(kitRingItem.cur);setTimeout(()=>kriFocus(kitRingItem.cur),kriCalm()?0:180)}}
+ return R}
+if(typeof kinlPick==="function"){const kp0=kinlPick;kinlPick=function(o,x){if(o&&kriOn()&&!window.__kriAct&&o.inline&&o.onPick){try{if(kriFromGrid(o,x))return}catch(e){console.error("kri bag",e)}}return kp0.apply(this,arguments)}}
