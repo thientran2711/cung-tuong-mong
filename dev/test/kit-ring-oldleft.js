@@ -43,14 +43,14 @@ const [,,BASE,OUT,WH,MODE]=process.argv;const SC='check';fs.mkdirSync(OUT,{recur
    for(let a=e;a;a=a.parentElement){if(a.hidden)return false;const cs=getComputedStyle(a);if(cs.visibility==='hidden'||cs.display==='none')return false}return r.bottom>0&&r.top<innerHeight}),s);
  const ring=()=>p.evaluate(()=>!!kitRingItem.cur&&!!document.querySelector('.kri .kri-t'));
  const reset=async()=>{await p.evaluate(()=>{try{kitRingItem.close(true)}catch(e){}Q.length=0;const m=document.getElementById('modal');m.hidden=true;m.classList.remove('kri-hide');
-   const k=document.getElementById('kg82');if(k){k.hidden=true;k.classList.remove('kri-hide')}document.querySelectorAll('#kriInj,#kdaytc,#klife,#kmrew,.kroul,#kroulw').forEach(e=>e.remove());render()});await w(500)};
+   const k=document.getElementById('kg82');if(k){k.hidden=true;k.classList.remove('kri-hide')}document.querySelectorAll('#kriInj,#kdaytc,#klife,#kmrew,.kroul,#kroulw').forEach(e=>e.remove());/* a result toast left by the previous place keeps its tap catcher (KIT 32.10): the first tap only closes it — closed here */const t=document.getElementById('rtoast');if(t)t.classList.remove('on');document.querySelectorAll('#kxcatch').forEach(e=>{e.hidden=true;e.__close=null});render()});await w(700)};
  const inj=html=>p.evaluate(h=>{const d=document.createElement('div');d.id='kriInj';d.className='kpanel';d.style.cssText='position:fixed;left:10px;top:200px;width:60vw;z-index:5';d.innerHTML=h;document.body.appendChild(d)},html);
  const tapIn=async s=>{const c=await at(s);if(!c)return false;await tapXY(c[0],c[1]);return true};
  const OLD={pick:'#modal .kipw, #modal .kshop, #modal .opts .opt',strip:'',toil:'#kg82 .kinvg [data-kinvi]',dh:'#modal .opt[data-m]',hd:'#kg82 [data-hdk]',face:'.kpick[data-pick="face"]'};
  await p.evaluate(()=>{const v=liveRivals(true).find(v=>v.queen)||liveRivals(true)[0];window.__qv=v.id;S.met=S.met||{};S.met[v.id]=1;
   for(const k of Object.keys(IT).filter(k=>/^mc\d\d$/.test(k)).slice(0,3))S.inv.push({k,from:"me"});
   for(const k of Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="hd").slice(0,3))S.inv.push({k,from:"me"});
-  try{petAdd(S,Object.keys(PET)[0],"me")}catch(e){}const K=DHKEYS();S.dh=S.dh||{};K.slice(0,4).forEach(k=>{S.dh[k]=S.dh[k]||{};S.dh[k].i=0});render()});
+  try{petAdd(S,Object.keys(PET)[0],"me")}catch(e){}const K=DHKEYS();S.dh=S.dh||{};K.slice(0,4).forEach(k=>{S.dh[k]=S.dh[k]||{};S.dh[k].i=0});try{KMS=S;KMSNAP=kmSnap()}catch(e){}render()});
  const dhBtn=()=>p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opt[data-m]')].find(b=>/^Đeo «/.test((Q[0].opts[+b.dataset.m]||{}).n||''));if(!b)return null;b.scrollIntoView({block:'center'});const r=b.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});
  const bag=async()=>{await p.evaluate(()=>{try{tab='inv'}catch(e){}render()});await w(1500)};
  const P=[
@@ -70,13 +70,9 @@ const [,,BASE,OUT,WH,MODE]=process.argv;const SC='check';fs.mkdirSync(OUT,{recur
  const rows=[];
  for(const [name,open,ok] of P){await reset();let err='';try{await open()}catch(e){err=String(e).slice(0,120)}await w(1500);const r=await ring();const o=OLD[ok]?await vis(OLD[ok]):false;rows.push({place:name,ring:r,oldVisible:o,left:(!r||o)?1:0,err});
   await p.screenshot({path:`${OUT}/oldleft-${MODE||'after'}-${W}x${H}-${rows.length}.jpg`,type:'jpeg',quality:45})}
- /* face: the new-game card of a fresh life, last */
- await reset();{const p2=await ctx.newPage();p2.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p2.goto(BASE,{waitUntil:'domcontentloaded'});await p2.waitForFunction(()=>typeof start==='function');await p2.waitForTimeout(2500);
-  await p2.evaluate(()=>{try{kitRoulette=function(){}}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}try{start()}catch(e){}if(typeof S!=='undefined'&&S&&!(typeof isSrv==='function'&&isSrv()))break}render();showModal()});
-  await p.close();p=p2}await w(2500);
- const fc=await p.evaluate(()=>{const b=[...document.querySelectorAll('.kpick[data-pick="face"] [data-pk]')].filter(b=>!b.hidden)[1];if(!b)return null;b.scrollIntoView({block:'center'});const r=b.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});
- if(fc){await w(800);const f2=await p.evaluate(()=>{const b=[...document.querySelectorAll('.kpick[data-pick="face"] [data-pk]')].filter(b=>!b.hidden)[1];const r=b.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await tapXY(f2[0],f2[1])}await w(1500);{const r=await ring();const o=await vis(OLD.face);rows.push({place:'14 face (new-game card)',ring:r,oldVisible:o,left:(!r||o)?1:0,err:fc?'':'no face cell'})}
- await p.screenshot({path:`${OUT}/oldleft-${MODE||'after'}-${W}x${H}-${rows.length}.jpg`,type:'jpeg',quality:45});
+ /* face: the new-game card of a fresh life — the face scene of kit-ring-item.js (its own page, real taps) */
+ {let d=null;try{const o=require('child_process').execFileSync('node',[__dirname+'/kit-ring-item.js',BASE,OUT,'face',W+'x'+H],{env:Object.assign({},process.env,MODE==='before'?{KRI_OFF:'1'}:{}),encoding:'utf8',timeout:400000});d=JSON.parse(o.split('\n').find(l=>l.startsWith('{')))}catch(e){}
+  const r=!!(d&&d.open&&d.open.open);rows.push({place:'14 face (new-game card)',ring:r,oldVisible:!!(d&&d.picker&&!r),left:r?0:1,err:d?'':'face scene failed'})}
  const left=rows.reduce((a,x)=>a+x.left,0);
  console.log(JSON.stringify({sz:W+'x'+H,mode:MODE||'after',places:rows.length,oldLeft:left,rows,errs}));
  console.log(`old left = ${left}`);await b.close()})();

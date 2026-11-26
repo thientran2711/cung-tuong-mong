@@ -8,7 +8,7 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const [W,H]=(WH||'755x1000').split('x').map(Number);const rec=SC!=='check';
  const ctx=await b.newContext(Object.assign({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,serviceWorkers:'block'},rec?{recordVideo:{dir:OUT,size:{width:W,height:H}}}:{}));
- await ctx.addInitScript(sc=>{window.__SC=sc},SC);await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
+ await ctx.addInitScript(([sc,off])=>{window.__SC=sc;if(off)window.__kriOff=1},[SC,!!process.env.KRI_OFF]);await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
  const p=await ctx.newPage();const T0=Date.now();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
@@ -49,7 +49,7 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
   const A=[...document.querySelectorAll('.kri .kri-t, .kri .kri-big')].map(e=>[e,shown(e)]).filter(x=>x[1]);
   const T=[...document.querySelectorAll('button, [role=button], .kri-ar, .kri-tabs, .kit-x, .kri-pane, .kri-acts, .kri-name b, header.hud, nav, .kbtn')].filter(e=>!e.closest('.kri-t,.kri-big')).map(e=>[e,shown(e)]).filter(x=>x[1]);
   /* a target outside the ring layer that the scene itself covers (stage figures, the bag grid under the scene) is not tappable: skipped (hit test with the ring items hidden) */
-  const H=A.map(([e])=>[e,e.style.visibility]);H.forEach(([e])=>e.style.visibility='hidden');const reach=([t,r])=>{if(t.closest('.kri'))return true;const pts=[[.5,.5],[.15,.5],[.85,.5],[.5,.15],[.5,.85]];return pts.some(([fx,fy])=>{const x=r.left+r.width*fx,y=r.top+r.height*fy;if(x<0||y<0||x>=innerWidth||y>=innerHeight)return false;const h=document.elementFromPoint(x,y);return !!h&&!h.closest('.kri')})};
+  const H=A.map(([e])=>[e,e.style.visibility]);H.forEach(([e])=>e.style.visibility='hidden');const reach=([t,r])=>{if(t.closest('.kri'))return true;const pts=[[.5,.5],[.15,.5],[.85,.5],[.5,.15],[.5,.85]];return pts.some(([fx,fy])=>{const x=r.left+r.width*fx,y=r.top+r.height*fy;if(x<0||y<0||x>=innerWidth||y>=innerHeight)return false;const h=document.elementFromPoint(x,y);return !!h&&(t===h||t.contains(h))})};
   const T2=T.filter(reach);H.forEach(([e,v])=>e.style.visibility=v);T.length=0;T.push(...T2);
   const hit=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
   const L=[];for(const [a,ra] of A)for(const [t,rt] of T){if(t.contains(a)||a.contains(t))continue;if(hit(ra,rt))L.push(nm(a).slice(0,30)+' × '+nm(t).slice(0,40))}
@@ -66,7 +66,7 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});
   await openShop();await w(900);out.shop0=await meas();await ov('shop-ring');const s=await front();await tapXY(s[0],s[1]);await w(1100);await ov('shop-focus');await tapAct('^\\+$|Thêm');await tapAct('^Mua');await w(900);out.shopAct=await meas();await ov('shop-result');out.bac=await p.evaluate(()=>S.bac);
   await p.screenshot({path:`${OUT}/${W}x${H}-shop.jpg`,type:'jpeg',quality:60});
-  await tapAct('Xem món khác');await w(700);await tap('.kri-tabs [data-kritab="sell"]').catch(()=>{});await w(800);out.sell=await meas();await ov('sell-ring');
+  await tapAct('Xem món khác');await w(700);await tap('.kri-tabs [data-kritab="sell"]').catch(()=>{});await w(1600);out.sell=await meas();await ov('sell-ring');
   out.ov=OV;out.errs=errs;console.log(JSON.stringify(out));await b.close();return}
  if(SC==='bag'){
   await p.evaluate(()=>{try{tab='inv'}catch(e){}render()});await w(1200);const c=await at('.kinv[data-kinv="tutrang"] .kinvg [data-kinvi]');out.tile=!!c;if(c){await tapXY(c[0],c[1]);await w(1500)}out.bag=await meas();await ov('bag-focus');
@@ -99,7 +99,7 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
  const res=()=>p.evaluate(()=>{const r=document.querySelector('.kri-pane .kri-res');return r?r.innerText.replace(/\n/g,' | '):''});
  const shot=n=>p.screenshot({path:`${OUT}/${W}x${H}-${n}.jpg`,type:'jpeg',quality:60});
  if(SC==='toil'){
-  await p.evaluate(()=>{for(const k of Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="tram").slice(0,3))S.inv.push({k,from:"me"});render()});
+  await p.evaluate(()=>{for(const k of Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="tram").slice(0,3))S.inv.push({k,from:"me"});try{KMS=S;KMSNAP=kmSnap()}catch(e){}render()});
   await w(400);mark('start');await p.evaluate(()=>{toilOpen()});await w(1500);
   if(!await vis('#kg82 [data-kinvkey="toil"][data-kinvi]'))await p.evaluate(()=>{try{toilDressUI()}catch(e){console.log('toilDressUI',e)}});await w(1500);
   out.oldGrid=await vis('#kg82 [data-kinvkey="toil"][data-kinvi]');await shot('toil-old');
@@ -118,7 +118,7 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
   await tapAct('Xem món khác');await w(900);const y=await ringY();await swipe(W*.75,W*.3,y,10);await w(1600);await ov('title-ring');await shot('title-ring');
   await tap('.kri .kit-x');await w(500);await tap('.kri .kit-x').catch(()=>{});await w(1200);out.closed=await p.evaluate(()=>!kitRingItem.cur);out.panelBack=await vis('#modal .opt[data-m]');mark('end')}
  if(SC==='hd'){
-  await p.evaluate(()=>{for(const k of Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="hd").slice(0,5))S.inv.push({k,from:"me"});render()});
+  await p.evaluate(()=>{for(const k of Object.keys(WD_ITEMS).filter(k=>WD_ITEMS[k].sl==="hd").slice(0,5))S.inv.push({k,from:"me"});try{KMS=S;KMSNAP=kmSnap()}catch(e){}render()});
   await w(400);mark('start');await p.evaluate(()=>{toilOpen()});await w(1500);
   out.step=await p.evaluate(()=>{try{return hdStep({box:kg82Box(),draw:()=>{},done:()=>{window.__hdDone=1},C:null,G:null,file:""})}catch(e){return String(e)}});await w(1800);
   out.open=await meas();await ov('hd-ring');await shot('hd-ring');const c=await front();await tapXY(c[0],c[1]);await w(1800);out.focus=await meas();await ov('hd-focus');out.acts=await p.evaluate(()=>[...document.querySelectorAll('.kri-pane [data-kria]')].map(b=>b.textContent.trim()));await shot('hd-focus');
@@ -127,8 +127,8 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
   await w(400);mark('start');await p.evaluate(()=>{try{render();showModal()}catch(e){}});await w(2500);out.picker=await vis('.kpick[data-pick="face"]');await shot('face-old');
   const pid0=await p.evaluate(()=>S.pid);const c0=await p.evaluate(()=>{const b=[...document.querySelectorAll('.kpick[data-pick="face"] [data-pk]')].filter(b=>!b.hidden)[1];if(!b)return null;b.scrollIntoView({block:'center'});const r=b.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});
   if(c0){await w(400);await tapXY(c0[0],c0[1])}await w(2000);out.open=await meas();await ov('face-focus');await shot('face-focus');
-  await tapAct('^Chọn');await w(1500);out.res=await res();await ov('face-result');out.changed=await p.evaluate(p0=>S.pid!==p0,pid0);await shot('face-res');
-  await tap('.kri .kit-x');await w(500);await tap('.kri .kit-x').catch(()=>{});await w(1200);out.closed=await p.evaluate(()=>!kitRingItem.cur);out.cardBack=await vis('.kpick[data-pick="face"]');await shot('face-back');mark('end')}
+  if(out.open&&out.open.open){await tapAct('^Chọn');await w(1500);out.res=await res();await ov('face-result');out.changed=await p.evaluate(p0=>S.pid!==p0,pid0);await shot('face-res');
+  await tap('.kri .kit-x').catch(()=>{});await w(500);await tap('.kri .kit-x').catch(()=>{})}await w(1200);out.closed=await p.evaluate(()=>!kitRingItem.cur);out.cardBack=await vis('.kpick[data-pick="face"]');await shot('face-back');mark('end')}
  if(['toil','title','hd','face'].includes(SC)){out.ov=OV;out.errs=errs;out.ovf=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);console.log(JSON.stringify(out))}
  fs.writeFileSync(`${OUT}/marks-${SC}-${W}x${H}.json`,JSON.stringify({marks,errs}));const v=p.video();await ctx.close();const src=await v.path();fs.renameSync(src,`${OUT}/${SC}-${W}x${H}.webm`);
  console.log(SC,W+'x'+H,JSON.stringify(marks),errs.slice(0,3));await b.close()})();

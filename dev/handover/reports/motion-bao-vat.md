@@ -28,8 +28,12 @@ kitRingItem.open({title, sub, bg, tabs, tab, onTab, items:[]|fn, info(it), acts(
 | 9 | wardrobe acts (wdOpen/wdFabOpen) | via bag | covered by #2/#3 |
 | 12 | Trưng bày (jshelf kinvOpen wrapper) | via bag | covered by #2/#3 (shelfOpen dialog itself has no caller) |
 | 7 | j8 invHTML .cards | dead (cut by jinv.js:379) | nothing to move |
+| 4 | toilette dress (#kg82 «Rương trang phục», kitInvGrid toil + kitEquipSlots toil) | chest grid + inline detail | tap a chest piece / worn slot → ring (tabs Tất cả/Trâm cài/Y phục/Trang sức) focused on it; act Cài/Mặc/Đeo or Tháo = toilAct (E95: worn at once, saved); #kg82 steps aside (kri-hide) and is redrawn on close; no false «Rương đồ» box after wear/take-off (KMSNAP refreshed) |
+| 11 | titles (Danh hiệu panel, «Đeo «…»» / «Đổi phần thưởng «…»») | dhPick kitPanel option list | ring of earned titles, tile = kit title plate (kitTitlePlate via new `it.tile` html support, size only); acts = the title's own dhPick bonus options (their go), «Tháo danh hiệu» on the worn one; closing returns to the Danh hiệu panel |
+| 13 | hoa điền (jhd hdStep, toilette makeup) | [data-hdk] button row | ring of owned hoa điền; «Dán» = the step's own button (→ drag board, ring closes), «Không dán» = its own; ✕ leaves the step buttons |
+| 14 | face (new-game card, j86 fpHTML → kitPicker face) | portrait grid with pages | tap a face → item ring (MAIN ruling: a look, not a person), grade chip hidden; act «Chọn» = fpPick; close → card redrawn (fpRedraw) |
 Also wired since: 10 veil chest (tap a veil → ring, acts = the veil strip's own buttons), 15 pets (tap a pet card → ring, acts = Chăm / Cho theo hầu / Gửi về).
-TODO: 4 toilette dress (kitInvGrid toil in #kg82), 10 veil (vlInvHTML), 11 titles (dhPanel, kitTitlePlate), 13 hoa điền (hdStep, real picker; jhd.js:59 hdPick is a random key, not UI), 14 face (fpHTML/kitPicker — portraits, owner: ring?), 15 pets pane. Corrections to the KK44 table: j83 wkUseOpts (j83.js:220) is NPC-only (no UI); jhd hdPick is not a UI.
+TODO: none of the 15 places left (law-11 scan dev/test/kit-ring-oldleft.js, table below). Corrections to the KK44 table: j83 wkUseOpts (j83.js:220) is NPC-only (no UI); jhd hdPick is not a UI; jgift item→person dialog (giftpick with ix) is a PERSON pick → person ring (RING-BUILD), not this family.
 
 ## Videos (owner look gate) — CDN img/_review/motion-bao-vat/
 4-baovat-gift-755x1000.mp4, 4-baovat-shop-755x1000.mp4, 4-baovat-gift-1180x820.mp4, 4-baovat-shop-1180x820.mp4 (sent to MAIN 162).
@@ -38,7 +42,13 @@ TODO: 4 toilette dress (kitInvGrid toil in #kg82), 10 veil (vlInvHTML), 11 title
 kit-ring-item.js check Fold + iPad: ring open, 24 tiles, front opacity 1 / others ≤ .68, tiles in view, pane in view, act → result rows (gift 3 rows, shop 2), no overflow, 0 page errors. bag Fold: Tư trang tile → ring focused, act list from the item («Tháo trâm»).
 KIT.md §104 + kit page sample «§104» (button opens a demo ring) — DONE.
 PERF (kit-ring-item.js perf, CPU×4, headless software raster): LIVE idle stage 8 fps (env floor) · ring idle 11.6 fps · ring spin+focus 10.7 fps → the ring costs nothing above the page's own floor (transform/opacity only, one rAF loop, no filter animation); absolute 60 fps needs a real device (same limit as motion-design-3).
-PENDING: places 4, 11, 13, 14 (see HANDOVER), merge with RING-BUILD core.
+PENDING: merge with RING-BUILD core (KK44 decides).
+
+## Law-11 family scan + overlap scan (MOTION-BUILD-2, 26/11)
+`node dev/test/kit-ring-oldleft.js file://$PWD/index.html <out> <WxH> [before]` — 14 rows (15 places; 8/9/12 share the bag path): BEFORE (ring off) old left = 14/14 on Fold and iPad; AFTER old left = 0 on Fold 755x1000 and iPad 1180x820, 0 page errors.
+Overlap scan (owner 20:30Z via MAIN 162; in kit-ring-item.js, every scene: ring / focus / result states; ring tiles + big item vs every reachable tap target — buttons, [role=button], arrows, tabs, ✕, pane, acts, name plaque, HUD, nav; targets the scene itself covers are skipped by hit test): Fold + iPad, scenes check(gift, shop, sell) · bag · toil · title · hd · face → intersections 0 everywhere, big item inside the stage everywhere. (An early 1-hit «tile × ‹» on the sell tab was the tab-switch bloom still moving; measured after it settles = 0.)
+Test modes: kit-ring-item.js check|bag|perf|gift|shop|toil|title|hd|face (toil/title/hd/face also print JSON incl. ov counts; env KRI_OFF=1 = old UI).
+Note: after a gift ring closes, the game's own result toast (#rtoast, KIT 32.10 tap catcher) may stay: the next tap only closes it (existing kit rule, not changed).
 
 ## Open points for MAIN / KK44
 - Law 9: RING-BUILD kitRing (person/group) and kitRingItem must become ONE core. KRI_MATH is isolated for that; I will adapt to whichever API KK44 picks.

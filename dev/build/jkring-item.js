@@ -299,6 +299,8 @@ function kriToilOpen(x0){if(typeof toilAct!=="function"||typeof TOIL==="undefine
   acts:it=>{const g=it.x.g,worn=!!g.wdSlot||!!g.w,sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;
    return[{n:worn?"Tháo":verb(g),main:1,off:worn&&sl==="y"?"Y phục chỉ thay: chọn bộ khác":"",fn:()=>{const s=kriSnap(null),l0=kriLogMark();
     TOIL.st.sel={k:g.k,wdSlot:g.wdSlot||null,w:!!g.w};window.__kriAct=1;try{toilAct(worn?"off":"wear")}finally{window.__kriAct=0}
+    /* putting a piece on / taking it off moves it between the slot and the chest; it is not a new item (no «Rương đồ / Vừa vào Tư trang» box, j93 kmDiff) */
+    try{if(typeof kmSnap==="function"&&KMS===S)KMSNAP=kmSnap()}catch(e){}
     const L=kriLogSince(l0);return{ok:true,title:`${worn?"Tháo":verb(g)} · ${it.name}`,rows:kriDiffRows(s,null).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}]},
   empty:"Ngăn này chưa có món nào.",onClose:()=>{if(K82)K82.classList.remove("kri-hide");try{if(TOIL.st&&!TOIL.st.dv)toilDressUI()}catch(e){console.error("kri toil",e)}}});
  if(!R)return false;if(K82)K82.classList.add("kri-hide");if(x0){const C=kitRingItem.cur;const i=C.items.findIndex(y=>y.x===x0||(y.x.g&&x0.g&&y.x.g.k===x0.g.k&&!!y.x.g.w===!!x0.g.w&&!!y.x.g.wdSlot===!!x0.g.wdSlot));if(i>=0){C.rot=i;kriPlace(C);setTimeout(()=>kriFocus(C),kriCalm()?0:180)}}return true}
