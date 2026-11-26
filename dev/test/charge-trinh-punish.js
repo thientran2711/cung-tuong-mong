@@ -110,7 +110,9 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
   const v=liveRivals(true).find(x=>!x.coop&&!x.queen);const r=rkOf(v);const k=Object.keys(IT).find(k=>{try{const it=itm(k);return it&&it.sl&&it.rk>r}catch(e){return false}});
   v.inv=(v.inv||[]).concat(k?[{k,w:1}]:[]);v.wrongs=[];v.dkeys=[];v.dw=0;delete v.mgH;delete v.mgHv;
   try{CW.on=true;CW.seat="b";const c=deedCap(v);const h=mgHand("hoadien",v);ok(!(v.wrongs||[]).length&&!(v.dkeys||[]).length&&!(v.mgH&&v.mgH.hoadien!=null),`guest seat: deedCap / mgHand on a world person write nothing (wrongs ${(v.wrongs||[]).length}, dkeys ${(v.dkeys||[]).length}, mgH ${JSON.stringify(v.mgH||null)})`);
-   CW.seat="a";const c2=deedCap(v);const h2=mgHand("hoadien",v);ok((v.wrongs||[]).some(d=>d.k==="vp")&&v.mgH&&v.mgH.hoadien===h2&&h===h2,`host seat: the same read stores them (vp deed ${(v.wrongs||[]).some(d=>d.k==="vp")}, hand guest ${h} = host ${h2})`)}
+   CW.seat="a";const c2=deedCap(v);const h2=mgHand("hoadien",v);ok((v.wrongs||[]).some(d=>d.k==="vp")&&!(v.mgH&&v.mgH.hoadien!=null)&&h===h2,`host seat: the deed is stored (vp ${(v.wrongs||[]).some(d=>d.k==="vp")}), the hand is the same draw and not stored in co-op (guest ${h} = host ${h2})`);
+   v.wrongs=[];v.dkeys=[];v.dw=0;deedSyncAll();ok((v.wrongs||[]).some(d=>d.k==="vp"),'host deedSyncAll (jcoopworld toCanon, before the week is cut) writes the world person\'s lazy deeds');
+   CW.on=false;const h3=mgHand("hoadien",v);ok(v.mgH&&v.mgH.hoadien===h3&&h3===h,`single player: the hand is stored (${h3})`)}
   finally{CW.on=sv.on;CW.seat=sv.seat}return o}));
  let bad=0;for(const [c,m] of out){if(!c)bad++;console.log((c?'PASS ':'FAIL ')+m)}
  console.log(`page errors: ${errs.length} ${JSON.stringify(errs.slice(0,3))}`);if(errs.length)bad++;

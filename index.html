@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0a69b83f+","t":"2026-11-26T10:59Z","c":"charge-trinh-punish test: vpAccuse runtime case always runs (over-rank piece put on the sample consort); co-op guest seat lazy-write case (…","b":"691a5fe04a42","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"4b693c7a+","t":"2026-11-26T11:03Z","c":"charge-trinh-punish fix: j95 charge-of-scene helper renamed j95chg (a43aa413 F2 named it j95c, which REPLACED the buổi calendar j95c(b) — e…","b":"f476c4468295","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -34661,9 +34661,9 @@ function mgBand(kind){return mgCalBand(kind)}
 /* the offset of a person's hand from the curve centre, in sd: one standard-normal draw hashed on the person + kind (Box–Muller of two hashes), clamped ± BAL.ag.mg2.hand.zMax */
 function mgZ(id){const u=Math.max(1e-9,mgHashU(id+"|a")),v=mgHashU(id+"|b"),Z=BAL.ag.mg2.hand.zMax;return cl(Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v),-Z,Z)}
 function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;
- /* co-op law (host computes): on a guest seat a world person's hand is the same hash draw, read but never stored (the host stores it and the merged
-    week brings it; coop-e2e: R#*.mgH.hoadien / mgHv.hoadien on seat B only) */
- try{if(p!==S&&window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a"&&!(p.mgH&&p.mgH[kind]!=null&&p.mgHv&&p.mgHv[kind]===Bd.sig)){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;return Math.round((Bd.c+Bd.sd*mgZ(id))*100)/100}}catch(e){}
+ /* co-op law (both seats read the same number): in co-op a world person's hand is the same hash draw on both seats, read but never stored on a READ
+    (a lazy store lands on one seat only, after the week is cut: coop-e2e R#*.mgH.hoadien / mgHv on one seat only); a stored hand (save / single player) is read */
+ try{if(p!==S&&window.COOPW&&COOPW.on&&!(p.mgH&&p.mgH[kind]!=null&&p.mgHv&&p.mgHv[kind]===Bd.sig)){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;return Math.round((Bd.c+Bd.sd*mgZ(id))*100)/100}}catch(e){}
  let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
  /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
     skewed / half-half bands carry another sig and re-roll here) */
@@ -51127,7 +51127,7 @@ function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);
  if(sS.emp)P.S.empKnown=sS.emp.known||{};delete P.S.heir;/* p2 B2: the heir is the world key hr, resolved again on every rebuild */
  delete P.S.thq;/* part D r1: her open cards live only in the host's store (localStorage per room); a copy in a blob came back stale after a host reload */return P}
-function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{rfYield(CW.base)}catch(e){console.error("face yield",e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
+function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{if(host()&&typeof deedSyncAll==="function")deedSyncAll()}catch(e){console.error("deed sync",e)}/* co-op law: the host writes the world's lazy deeds (jtruth deedSync) BEFORE the week is cut, so the guest gets them in the same merged week (rv 4b693c7a: R#9.dw A=2 B=1) */try{rfYield(CW.base)}catch(e){console.error("face yield",e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
  const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=worldPart(k,sS[k]);if(WS.emp)delete WS.emp.known;
  if(!stateOn("hostOnly")){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
  if(host())WS.cnews={w:wk(),h:CW.news||""};else if(CW.base&&CW.base.W&&CW.base.W.S)WS.cnews=J(CW.base.W.S.cnews);
@@ -74550,6 +74550,8 @@ function deedOnce(p,id,k,w,x){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return
    evTruthSweep reads every person) and reach the guest in the merged week; a guest seat never writes them into a world person's ledger on a read
    (coop-e2e: R#9.wrongs "xx" / dkeys "xx:mk" + mgH.hoadien on seat B only). Her own person (S) stays hers on either seat. */
 function deedSyncGuest(p){try{return p!==S&&!!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}catch(e){return false}}
+/* the host, before its week is cut (jcoopworld toCanon): every world person's lazy deeds at once */
+function deedSyncAll(){if(!S||!rivals)return;for(const p of [S].concat(rivals.filter(v=>v&&!v.coop)))if(p===S||p.alive||p.out)deedSync(p)}
 function deedSync(p){if(!p||!S||deedSyncGuest(p))return;try{
  if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",deedW("tryst"),"tư thông với nam nhân")}
  else{if(p.scandal)deedOnce(p,"sc","tryst",deedW("tryst"),"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",deedW("tryst"),`tư thông${m?" với "+m.name:""}`)}}
@@ -100780,7 +100782,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="691a5fe04a42";window.CTM_BUILD=BUILD;
+const BUILD="f476c4468295";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -29,6 +29,8 @@ function deedOnce(p,id,k,w,x){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return
    evTruthSweep reads every person) and reach the guest in the merged week; a guest seat never writes them into a world person's ledger on a read
    (coop-e2e: R#9.wrongs "xx" / dkeys "xx:mk" + mgH.hoadien on seat B only). Her own person (S) stays hers on either seat. */
 function deedSyncGuest(p){try{return p!==S&&!!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}catch(e){return false}}
+/* the host, before its week is cut (jcoopworld toCanon): every world person's lazy deeds at once */
+function deedSyncAll(){if(!S||!rivals)return;for(const p of [S].concat(rivals.filter(v=>v&&!v.coop)))if(p===S||p.alive||p.out)deedSync(p)}
 function deedSync(p){if(!p||!S||deedSyncGuest(p))return;try{
  if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",deedW("tryst"),"tư thông với nam nhân")}
  else{if(p.scandal)deedOnce(p,"sc","tryst",deedW("tryst"),"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",deedW("tryst"),`tư thông${m?" với "+m.name:""}`)}}
