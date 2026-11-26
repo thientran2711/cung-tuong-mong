@@ -103,7 +103,7 @@ Also: ONE CORE — the typed fallbacks `{cueShort:260,cueHyst:24}` / `||3` remov
 | scroll-cue-scan | ALL OK | ALL OK (rows same except random j7c/ge1 draws) |
 | opt-frame-scroll-scan | 0 FAIL | 0 FAIL |
 | kscue-shots Fold 755x1000@2 + iPad 1180x820@2 | | same layout + cue (looked at every pair; j7c content is a random draw on both) |
-| coop-e2e both seats | | 143/143 (008662ef); chain on 123a2a9c below |
+| coop-e2e both seats | | 143/143 (123a2a9c) |
 | page-curl2 Fold/iPad, weekbook-entries | | PASS |
 | book-relayout iPad «jumped» | FAIL (same) | FAIL — pre-existing on LIVE |
 | q-softlock | PASS 2/2 | PASS 2/2 (one flaky iPad «person» dead-tap in a quickcheck run) |
@@ -118,9 +118,11 @@ Robot seats, LIVE vs fix (watchdog RT_LIGHT=1 RT_HANGKILL=3500):
 | A4 nc_vuong rebel-1 | 1 (b77) | 0 | b78→242 (307b3b77) | 2339 |
 | Foreman E E-S1 | 2 (b2239, b2240) | 0 | 123a2a9c | 2641 |
 | R2 cnv_chu speed-k2 b650 | 1 (first pass) | — | LIVE did not re-hang on resume → no gate |
+| R1 cnv_ban speed-4 late game (y16, ckpt b2277, this box, 20 min each) | hang (hang.json), 5 buổi in 20 min | 0 | b2278→2342 (123a2a9c) | 2428 |
 More LIVE hangs of the same stacks today: R3 cnv_ma b1254, Seat A scholar-1 b1510, R1 cnv_ban speed-3/4, T1d hot-1 b305 on 6b5d3d05.
 Evidence on CDN img/_review/renderer-mem/: f10c-pair-{fold,ipad}-{j7c,evpick,giftpick}-*.webp, f10c-video-{old,new}-{fold,ipad}.webm (LIVE vs fix), f10c-E-S1-b2240-LIVE-hang.json, f10c-E-S1-b2240-60db5f48-hang.json, f10c-E-S1-{60db5f48,fix3}-prof.txt; seat files *-hang.json.
 Pre-existing faults seen (not F10, for the owners of those gates): G4 dialog-fixed kit-dialog-2 a; crawl «Ô lưu · Lui»; book-relayout iPad jump; quickcheck old-save step fails LIVE-vs-LIVE with f009e1a6 as the old build (harness); robot new lives stuck under the selection veil (div.kscn-veil) on LIVE ≥ f009e1a6 (Foreman F); lib buổi probe reads 0 on LIVE builds (T1d note).
 Perf item left (not a hang): kpOptArt/kitOptUnify ~5 ms per card → a 1351-card list costs ~7 s once when it opens.
-«SẴN SÀNG KIỂM 123a2a9c» — ONE opus BIG reviewer opened as my child (see §9 when it reports).
+Gate chain on 123a2a9c finished 11:35Z (all rows above are from 123a2a9c unless a sha is named). More LIVE hangs of the same stacks reported after SSK: A3 nc_tuc speed-2 b65, Seat A scholar-1 b1559 + speed-1 b1116 (kitOptEqual < kitOptFitAll = member 4), T1d 6b5d3d05 even-1/timid-1 b305 + off-2 b65.
+«SẴN SÀNG KIỂM 123a2a9c» — ONE opus BIG reviewer opened as my child: session_01D3E3NZbhXYHfto1CRNMJSa (see §9 when it reports).
 ~X%: F10 ~92 % done (four members fixed + proofs; review + land open).
