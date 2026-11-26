@@ -2191,7 +2191,13 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    (the night / accusation / rank / title); recMax: lines kept in the harem record S.hrec shown in the Sổ ghi (OD ~05:05Z); bigBand: an NPC ↔ NPC act of
    this danger band (BANDS, j24) or higher is also a «Tin báo» line («ai mưu hại ai»); mock: open-mockery kinds that a lower rank never does to a higher one (mockOK, j8). */
 BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,recMax:300,bigBand:2,keepK:["steal","illicit","hieu","rank","evd"],
- mock:["provoke","humiliate","humil","tease","cham","apTaunt"]};
+ mock:["provoke","humiliate","humil","tease","cham","apTaunt"],
+ /* ONE SIEVE (owner OD 26/11 ~06:50Z (B), jnsieve nsSieve): on a result card a person row of someone else (not her act's target, not her household,
+    not Thái hậu / Hoàng hậu) shows only when the span's own log names that person about HER, or the change is at least `big`; at most `rowMax`
+    such rows; every other person change is ONE summary line «Trong cung: …» (names behind the tap) and a full record in the Sổ ghi. */
+ card:{big:5,rowMax:3,kemMax:1},
+ /* Sổ ghi kinds (the kind tabs of the Sổ ghi, nsKind): her own lines, the harem record, big harm, rumours heard */
+ logTabs:[["all","Tất cả"],["me","Việc của ta"],["hc","Chuyện hậu cung"],["big","Mưu hại"]]};
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).

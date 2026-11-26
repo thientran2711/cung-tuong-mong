@@ -235,7 +235,7 @@ button.ka.kcard .kinfo{display:none}
 /* kv:(max-width:1199px) */.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
-/* ================= RESULT CARD (kit): after every act/choice — [seal THÀNH/BẠI | act name] · one sentence · Được (green) · Mất (red, grouped per person) · "Xem đầy đủ ở Nhật ký" =================
+/* ================= RESULT CARD (kit): after every act/choice — [seal THÀNH/BẠI | act name] · one sentence · Được (green) · Mất (red, grouped per person) · "Xem đầy đủ trong Sổ ghi" =================
    Built from REAL deltas (snapshot before → now), never from the option preview: no ranges, no "có thể"; two-way relations merged into one plain phrase. */
 const KA_RANKRE=new RegExp("("+RANKS.map(r=>r.n).join("|")+")\\s*$","i");
 function kaWho(v){const r=v&&RANKS[v.rank];return (r&&v!==S?r.n+" ":"")+(v&&v.name||"")}
@@ -310,12 +310,14 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g,t:g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o,t:o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaNT(e-b.e,e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m));U.t=U.t||new Map();U.t.set(v,da?hi:m)}}}
- {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");const tt=v=>U.t&&U.t.get(v);for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaNT(U.d.get(v)||1,tt(v))}`],[],""]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaNT(U.d.get(v)||-1,tt(v))}`],""])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title),v,(da||(m-b.m)||(e-b.e))]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m));U.t=U.t||new Map();U.t.set(v,da?hi:m)}}}
+ {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");const tt=v=>U.t&&U.t.get(v);for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaNT(U.d.get(v)||1,tt(v))}`],[],"",v,U.d.get(v)||1]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaNT(U.d.get(v)||-1,tt(v))}`],"",v,U.d.get(v)||-1])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaNT(d,now)}`]:[],d<0?[`thiện cảm ${kaNT(d,now)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaNT(d,S.maid.loyal)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
+ /* ONE SIEVE (jnsieve nsCard, owner OD 26/11 ~06:50Z (B)): other people's rows that do not touch her fold into ONE «Trong cung: …» line + the Sổ ghi */
+ const SV=typeof nsCard==="function"?nsCard(per,K,WC,title,[...TG.keys()]):null;if(SV){per.length=0;per.push(...SV.keep);K.sum=SV.sum;K.fold=SV.fold;K.kemOne=SV.kemOne}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;K.tgt=[];K.by=[];
  for(const [v,{x,rel,ran}] of TG){const cons=typeof rivals!=="undefined"&&rivals.includes(v);const named=true/* MAIN 155 (OB-VERDICT LOOK): she CHOSE this person, so she knows the name — the target of her own act always shows its real name (the «???» mask stays for doers she cannot know, law 6) */;const who=`<span data-k61skip>${kaEsc(!cons?(v.name||""):kaWho(v))}</span>`;
@@ -331,7 +333,8 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
 function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
-function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
+function kitKemRow(K){if(K&&K.sum!=null&&!K.kemOne)return K.sum?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${K.sum}</span></span>`:"";/* ONE SIEVE: one summary line, names behind the tap */
+ if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
  const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
   return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaNT(d,x.t)}</span></span>`});
  if(K.filter(x=>Math.round(x.d)).length>8)L.push(`<span class="kitem"><span class="ef n">… và ${K.filter(x=>Math.round(x.d)).length-8} người khác</span></span>`);
@@ -371,15 +374,15 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  const ok=okHint===true?true:okHint===false?false:av;const SL=kitResultSeal(ok),seal=SL.t;void failTxt;void netBad;
  /* ODDS CAP: a soft failure changes nothing but still shows its one BẠI line (j63 oddsSoft) */
  if(okHint===false&&window.__oddsSoft&&!sen)sen=window.__oddsSoft;window.__oddsSoft="";
- if(!G.length&&!B.length&&!sen&&!(K&&K.length)&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
+ if(!G.length&&!B.length&&!sen&&!(K&&K.length)&&!(K&&K.sum)&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
  const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!G.length&&!B.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
- window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
+ window.kaLastResult={title,ok,seal,sentence:sen,fold:K.fold||null,kem:K.sum?kaPlain(K.sum):"",rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
  t.className="rtoast karesult "+SL.cls;
- t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ ở Nhật ký</span></div>`;
+ t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ trong Sổ ghi</span></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000)};
 (function(){const st=document.createElement("style");st.id="ka-res-css";st.textContent=`
 .rtoast.karesult{display:block;max-width:min(94vw,520px);width:max-content;min-width:min(94vw,300px);padding:9px 12px 8px}

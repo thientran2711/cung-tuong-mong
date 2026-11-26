@@ -155,11 +155,35 @@ function recDrop(t,ids){if(!recOn())return;const I=new Set((ids||[]).filter(x=>x
 NSV.recDrop=recDrop;
 /* the Sổ ghi tab: her lines (S.logs) and the harem record, newest first, merged by the log sequence at which each record was written */
 function recMerge(){const L=S.logs||[],H=recList();if(!H.length)return L;const n=S.logSeq||L.length;const out=[];let j=0;
- const row=r=>`<span class="ld">${r.dt}</span>${maskNames(r.t,r.ids)}`;
+ const row=r=>`<span class="ld">${r.dt}</span><i hidden data-osk="${r.big?"big":"hc"}"></i>${maskNames(r.t,r.ids)}`;
  for(let i=0;i<L.length;i++){const seq=n-i;while(j<H.length&&(H[j].q||0)>=seq)out.push(row(H[j++]));out.push(L[i])}while(j<H.length)out.push(row(H[j++]));return out}
 if(typeof renderPanel==="function"){const rp=renderPanel;renderPanel=function(){let keep=null;try{nsOpen();if(on()&&typeof tab!=="undefined"&&tab==="log"&&Array.isArray(S.hrec)&&S.hrec.length){keep=S.logs;S.logs=recMerge()}}catch(e){keep=null}
-  try{return rp.apply(this,arguments)}finally{if(keep)S.logs=keep}}}
+  let r;try{r=rp.apply(this,arguments)}finally{if(keep)S.logs=keep}try{if(on()&&typeof tab!=="undefined"&&tab==="log")nsLogBar()}catch(e){console.error("nsLogBar",e)}return r}}
 
+
+/* ---------- 8. SỔ GHI grouped by kind and by person, searchable (ONE SIEVE (B), kit parts only: kitSubTabs §46 kind tabs, kitTabRowHTML §31.11 person
+   chips, kitInput §29 search box). Kinds: her own lines (S.logs) · the harem record (S.hrec) · big harm (S.hrec big). The rows stay the Sổ ghi rows. ---------- */
+NSV.q="";NSV.p="";
+const nsFold=t=>String(t||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase();
+function nsLogRows(P){return [...P.querySelectorAll(".logs > div")]}
+function nsLogKind(r){const m=r.querySelector("[data-osk]");return m?m.dataset.osk:"me"}
+function nsLogPeople(rows){const C=new Map();const L=[];try{for(const v of liveRivals(true)||[])if(v&&v!==S&&v.name)L.push(v.name);L.push("Hoàng thượng","Thái hậu");if(S.maid&&S.maid.name)L.push(S.maid.name)}catch(e){}
+ for(const r of rows){if(r.dataset.nrh)continue;const t=r.textContent;for(const n of L)if(t.includes(n))C.set(n,(C.get(n)||0)+1)}
+ return [...C].sort((a,b)=>b[1]-a[1]).slice(0,12)}
+function nsLogApply(P){const q=nsFold(NSV.q).trim(),pn=NSV.p,kd=(typeof KTSUB!=="undefined"&&KTSUB.soghi)||"all";const rows=nsLogRows(P);let head=null,seen=0,vis=0;
+ const close=()=>{if(head)head.hidden=!seen};
+ for(const r of rows){if(r.dataset.nrh){close();head=r;seen=0;continue}if(r.dataset.osnone)continue;const k=nsLogKind(r);
+  const okK=kd==="all"||kd===k||(kd==="hc"&&k==="big");const okP=!pn||r.textContent.includes(pn);const okQ=!q||nsFold(r.textContent).includes(q);const on1=okK&&okP&&okQ;r.hidden=!on1;if(on1){seen++;vis++}}
+ close();const L=P.querySelector(".logs");if(!L)return vis;let e=L.querySelector("[data-osnone]");if(!vis){if(!e){e=document.createElement("div");e.dataset.osnone=1;e.textContent="Không có dòng nào khớp.";L.appendChild(e)}e.hidden=false}else if(e)e.hidden=true;return vis}
+function nsLogBar(){const P=document.getElementById("panel");if(!P)return;const L=P.querySelector(".logs");if(!L||P.querySelector(".ksoghi"))return;const rows=nsLogRows(P);
+ const cnt={all:0,me:0,hc:0,big:0};for(const r of rows){if(r.dataset.nrh)continue;const k=nsLogKind(r);cnt.all++;cnt[k]++;if(k==="big")cnt.hc++}
+ const T=(BAL.news.logTabs||[["all","Tất cả"]]).map(([k,l])=>({k,label:l,n:cnt[k]||0}));const tb=kitSubTabs("soghi",T.map(x=>Object.assign({},x,{doable:x.k==="all"?1:0})));
+ const ppl=nsLogPeople(rows);if(NSV.p&&!ppl.some(([n])=>n===NSV.p))NSV.p="";
+ const pr=ppl.length?`<div class="pctabs kcattabs" role="tablist" data-osprow="1">${kitTabRowHTML([{k:"",label:"Mọi người"}].concat(ppl.map(([n,c])=>({k:n,label:n,n:c}))),NSV.p,"data-osp")}</div>`:"";
+ const box=document.createElement("div");box.className="ksoghi";box.innerHTML=tb.html+pr+kitInput({id:"osq",label:"Tìm trong sổ",placeholder:"tên người hay việc…",value:NSV.q});
+ L.before(box);const inp=box.querySelector("#osq");if(inp)inp.dataset.osq=1;nsLogApply(P)}
+document.addEventListener("input",e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.osq)return;NSV.q=t.value;const P=document.getElementById("panel");if(P)nsLogApply(P)},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-osp]");if(!b||!b.closest("[data-osprow]"))return;e.stopPropagation();NSV.p=b.dataset.osp===NSV.p?"":b.dataset.osp;try{renderPanel()}catch(x){}},true);
 /* ---------- 6. NẾT OPEN for servants and children too (MAIN decision OD 26/11 ~06:47Z under the standing rule ~05:55Z; law 6b, nothing hidden):
    every servant's nết (s.kn, j29 strShow / jhouse «Xem người» — that paid look is no longer offered, nothing left to look) and every child's
    learning nết (k.dilK, j53) are known from the start. ---------- */
@@ -170,5 +194,47 @@ if(typeof mkServ==="function"){const ms=mkServ;mkServ=function(){const s=ms.appl
 if(typeof mindRows==="function"){const mr=mindRows;window.mindRows=mindRows=function(p){const R=mr.apply(this,arguments);try{if(on()&&BAL.news.netOpen&&p&&typeof p==="object"&&(p.sid!=null||p===S.maid||(typeof allServ==="function"&&allServ().includes(p)))&&typeof netTxt==="function"&&!R.some(r=>r&&r[0]==="Tính nết")){
   const W=p.kn?String(netTxt(p)||"").split(/\s*,\s*/).filter(Boolean):[];R.unshift(["Tính nết",W.length?W.join(", "):"chưa rõ",W.length?"t":"n"])}}catch(e){}return R}}
 for(const f of ["endTurn","nextBuoi"]){const g0=window[f];if(typeof g0!=="function")continue;const w=function(){const r=g0.apply(this,arguments);nsOpen();return r};window[f]=w;try{if(f==="endTurn")endTurn=w;else nextBuoi=w}catch(e){}}
-Object.assign(window,{nsHerLine,nsNpcLine,nsMonth,nsSieveQ:sieveQ,nsGossipSkip,nsOpen,nsRecMerge:recMerge,nsMask:maskNames});
+
+/* ---------- 7. ONE SIEVE for every info surface (owner OD 26/11 ~06:50Z (B), verbatim in dev/OWNER_DECISIONS.md: «result cards (only rows that
+   changed for HER + «+8 (42)» totals), «VÌ SAO» rows, Hậu cung view, person popups, Sổ ghi grouping (by person/kind, searchable), news at home —
+   same rule «touches her / her choices first, the rest in Sổ ghi»»). nsSieve(o) is THE one test; every surface asks it, none filters on its own:
+     o = {t}                         a line of text  → it touches her (nsHerLine) or is not other people's business only (nsNpcLine)
+     o = {v, d, why, tgt, ev}        a person row    → her / her household / Thái hậu · Hoàng hậu / her act's target / evidence /
+                                                       a change ≥ BAL.news.card.big / the span's log names that person in a line about HER
+   true = show it on the surface, false = it goes to the Sổ ghi (nothing is deleted). ---------- */
+function nsHouse(v){try{if(!v||v===S)return true;if(v===S.maid||(S.staff||[]).includes(v))return true;const q=typeof queenP==="function"?queenP():null;return !!(q&&q!==S&&v===q)}catch(e){return false}}
+function nsSieve(o){try{if(!o)return true;if(!on())return true;
+ if(o.v==null){return o.t==null?true:!nsNpcLine(o.t)}
+ const v=o.v;if(v===S||nsHouse(v))return true;if((o.tgt||[]).includes(v))return true;if(o.ev)return true;
+ const B=BAL.news.card||{};if(Math.abs(o.d||0)>=(B.big||99))return true;
+ if(v.name&&(o.why||[]).some(c=>String(c).includes(v.name)&&nsHerLine(String(c).split(v.name).join(" "))))return true;/* the line is about HER, not only about that person */
+ return false}catch(e){return true}}
+/* the result card (j63 kaResultRows calls it): per = [[who, goodParts, badParts, why, v, d, raw]] person rows, K = Kèm [{v,k,d,t}] (ghen / oán of others).
+   Keeps the rows nsSieve passes (at most BAL.news.card.rowMax of other people, largest change first); every other change becomes ONE summary
+   line «Trong cung: 5 người ghen thêm, 2 người bớt quý ta» (names behind the tap, kit .kkem) and ONE Sổ ghi record with every name and number. */
+const NS_SUMW={g:"quý ta hơn",b:"bớt quý ta","ghen+":"ghen thêm","ghen-":"bớt ghen","oán+":"thêm oán","oán-":"nguôi oán"};
+function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)return null;try{
+ const keep=[],fold=[],rest=[];const isP=x=>x&&x[4]&&typeof x[4]==="object"&&x[4]!==S&&!nsHouse(x[4]);
+ for(const x of per){if(!isP(x)){keep.push(x);continue}const ev=(x[1].concat(x[2])).some(t=>/chứng cứ/.test(t));
+  if(nsSieve({v:x[4],d:x[5],why,tgt,ev}))rest.push(x);else fold.push(x)}
+ rest.sort((a,b)=>Math.abs(b[5]||0)-Math.abs(a[5]||0));for(const x of rest.splice(B.rowMax))fold.push(x);keep.push(...rest);
+ const Kk=(K||[]).filter(x=>Math.round(x.d));const kemOne=!fold.length&&Kk.length<=B.kemMax&&Kk.every(x=>nsSieve({v:x.v,d:x.d,why,tgt}));/* one Kèm person she should see and nothing else folded: her own kit row; else everything in the ONE summary */
+ const items=[];/* [groupKey, raw name, words] */
+ for(const x of fold){const nm=x[4].name||"";if(x[1].length)items.push(["g",x[4],x[1].join(", ")]);if(x[2].length)items.push(["b",x[4],x[2].join(", ")])}
+ if(!kemOne)for(const x of Kk)items.push([x.k+(x.d>0?"+":"-"),x.v,`${x.k} ${typeof kaNT==="function"?kaNT(Math.round(x.d),x.t):kaN(Math.round(x.d))}`]);
+ if(!items.length)return {keep,sum:"",fold:[],kemOne};
+ const G=new Map();for(const [g,v] of items){if(!G.has(g))G.set(g,new Set());G.get(g).add(v)}
+ const order=["g","b","ghen+","oán+","ghen-","oán-"];const parts=order.filter(g=>G.has(g)).map(g=>`${G.get(g).size} người ${NS_SUMW[g]}`);
+ const nmOf=v=>{try{return typeof kaNamed==="function"&&kaNamed(v)?kaWho(v):String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m")}catch(e){return v.name}};
+ const byV=new Map();for(const [,v,w] of items){if(!byV.has(v))byV.set(v,[]);byV.get(v).push(w)}
+ const names=[...byV].map(([v,W])=>`${nmOf(v)}: ${W.join(", ")}`);
+ const sum=`<span class="kitem kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">Trong cung: ${parts.join(", ")}</span><span class="kkeml">${names.map(n=>`<span>${n}</span>`).join("<br>")}</span></span>`;
+ /* the Sổ ghi keeps every name and number (maskNames at show time: a stranger stays «một vị …») */
+ try{recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name}: ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id),k:"kem"})}catch(e){}
+ NSV.stat.cardFold=(NSV.stat.cardFold||0)+byV.size;
+ return {keep,sum,fold:[...byV.keys()].map(v=>v.name),kemOne}}catch(e){console.error("nsCard",e);return null}}
+/* «VÌ SAO» (kitWhy, j63 kaWhyCl): the reasons of a card come from the span's log clauses; a clause that is other people's business only never
+   becomes a reason on her card (it stays in the Sổ ghi) */
+if(typeof kaWhyCl==="function"){const w0=kaWhyCl;kaWhyCl=function(){const L=w0.apply(this,arguments);try{if(on()&&Array.isArray(L))return L.filter(c=>!nsNpcLine(c))}catch(e){}return L}}
+Object.assign(window,{nsSieve,nsCard,nsHouse,nsHerLine,nsNpcLine,nsMonth,nsSieveQ:sieveQ,nsGossipSkip,nsOpen,nsRecMerge:recMerge,nsMask:maskNames});
 })();
