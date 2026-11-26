@@ -36,7 +36,7 @@ function cqAuth(a,t){try{if(!a||!t||a===t)return false;const A=cqR(a),T=cqR(t);i
 /* the rule: null = proper (or not a rank matter); else {k, cls, br: a deliberate breach is possible, w: the word} */
 function cqRule(a,t,k){const cls=cqCls(k);/* a deed whose real target is fixed (hầu Thái hậu, thỉnh an Hoàng hậu), whatever person the caller passed */if(k==="thTH")t="th";else if(k==="thHH"&&typeof queenP==="function")t=queenP()||t;if(!cls||!a||!t||a===t)return null;if(cqThrone(a))return null;const A=cqR(a),T=cqR(t);if(A==null||T==null)return null;
  const B=BAL.cq;let ok=true,br=false,w="";
- if(cls==="up"){ok=T-A>=((B.gap[k]!=null)?B.gap[k]:1);w="sai lễ"}
+ if(cls==="up"){ok=T-A>=((B.gap[k]!=null)?B.gap[k]:1)||(A===B.r.srv&&T>=A)/* cung nhân greet each other */;w="sai lễ"}
  else if(cls==="down"||cls==="downNB"){ok=A>=T;br=cls==="down";w="dĩ hạ phạm thượng"}
  else if(cls==="high"){ok=A>T;br=A===T;w="vượt phận"}
  else if(cls==="auth"){ok=cqAuth(a,t);br=!ok&&A>=T;w="vượt quyền"}
