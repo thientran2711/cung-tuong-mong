@@ -400,7 +400,9 @@ function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){sh
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shc]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.shc;
  if(k==="pet"){try{closeModal()}catch(x){}petcOpen(+b.dataset.i);return}
  if(k==="plant"){shelfPlantOpen(b.dataset.g);return}
- if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
+ /* mg-trim (owner OD 26/11 ~05:10Z «bớt … được thì bớt»): watering = ONE tap, the care of a «vừa tay» hand (BAL.skip.raw of 10), no game (the board stays in Thử tay) */
+ if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c);shelfPlantGain(BAL.skip.raw/10);return}
+ if(k==="water0"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
   const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame",kind:"tuoi"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
   const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;

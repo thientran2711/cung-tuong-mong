@@ -77,7 +77,7 @@ function dfRun(i,id,res){const p=curPeople()[i];DF.why="";if(!p||S.dead||Q.lengt
   const b=[...host.querySelectorAll("button")].find(x=>dfSig(x)===sig&&dfBtnTitle(x));if(!b||b.disabled){DF.why=b?"locked":"no button "+sig+" in "+[...host.querySelectorAll("button")].map(dfSig).join("|");return false}
   DF.step=dfStep(res);try{b.click()}finally{DF.step=0}return true}
  if(id[0]==="a"){const k=id.slice(1),v=p.ref,ri=rivals.indexOf(v);if(ri<0)return false;
-  const tier=res&&!res.skipped&&res.raw!=null&&typeof slapTierOf==="function"?slapTierOf(res.raw):(BAL.slap?BAL.slap.def:1);
+  const tier=res&&!res.skipped&&res.raw!=null&&typeof slapTierOf==="function"?slapTierOf(res.raw):typeof slapNpcTier==="function"?slapNpcTier(S):(BAL.slap?BAL.slap.def:1);/* mg-trim: no game (class B) = ONE draw, the same as an NPC's */
   if(k==="tat"&&typeof SLAPG==="object"&&typeof SLAP==="object"){SLAPG.busy=1;SLAP.next=tier;try{doAct(ri,k)}finally{SLAPG.busy=0;SLAP.next=0}return true}
   if(typeof LKG==="object"&&LKG&&typeof LK_ACT==="object"&&LK_ACT[k]){LKG.busy=1;LKG.next=tier;try{doAct(ri,k)}finally{LKG.busy=0;LKG.next=0}return true}
   doAct(ri,k);return true}

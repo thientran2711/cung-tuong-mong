@@ -95,16 +95,12 @@ function slapGame(o){const kind=o.dodge?"ne":"tat",skipRes={raw:0,skipped:true};
   $("kg82ok").onclick=()=>{kg82Close();try{o.onDone({raw,skipped:false})}catch(e){console.error(e)}}});
  $("kg82skip").onclick=()=>{kg82Close();try{o.onDone(skipRes)}catch(e){console.error(e)}}}
 window.slapGame=slapGame;
-/* ---------- her slap: the game decides the tier ---------- */
+/* ---------- her slap: ONE draw, the same as an NPC's (mg-trim, owner OD 26/11 ~05:10Z «trò tát hay né thì bỏ»): no power-bar game; the tier is
+   slapNpcTier(S) — the mg2 draw on HER «tat» board (her rank, Vũ / Sức) or the old BAL.slap.npc weights — then the dodge roll of the target (runAct wrapper below) ---------- */
 (function(){const d0=doAct;doAct=function(i,k){
- if(k!=="tat"||SLAPG.busy||typeof window.__bot!=="undefined"||typeof kg82Open!=="function")return d0.apply(this,arguments);
- const v=rivals[i],a=ACT.tat,self=this,args=arguments;if(!v||!a||!can(BAL.actK)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
- const B=BAL.slap;SLAPG.busy=1;
- slapGame({title:"Giáng tay",by:S,go:"Giơ tay",skip:"Tát luôn",skipSub:"không chơi: tay nhẹ",rows:[
-  ["Vùng đỏ",`tay nặng: Đức ${B.duc[3]}, oán sâu, dấu tay đậm sưng đỏ ${B.wk[3]} tuần, dễ bị tố giác, Thái hậu có thể quở`,"r"],
-  ["Vùng vàng",`tay vừa: Đức ${B.duc[2]}, dấu tay đậm ${B.wk[2]} tuần`,"r"],
-  ["Ngoài vùng",`tay nhẹ: Đức ${B.duc[1]}, dấu tay mờ ${B.wk[1]} tuần`,"r"]],
-  onDone:res=>{SLAPG.busy=0;SLAP.next=res.skipped?B.def:slapTierOf(res.raw);try{d0.apply(self,args)}finally{SLAP.next=0}}})}})();
+ if(k!=="tat"||SLAPG.busy)return d0.apply(this,arguments);
+ const v=rivals[i],a=ACT.tat;if(!v||!a||!can(BAL.actK)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
+ SLAP.next=slapNpcTier(S);try{return d0.apply(this,arguments)}finally{SLAP.next=0}}})();
 /* ---------- an NPC slaps her: tier rolled, she may dodge ---------- */
 function slapNpcTier(a){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw(a);/* AG-ALL-2b mg2: her game, one draw */const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
 window.slapNpcTier=slapNpcTier;
@@ -118,9 +114,8 @@ window.slapNpcTier=slapNpcTier;
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`});showModal();render()}};
  const nm=a.name||"Nàng";
  pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
-  Object.assign(tsOpt({n:"Né đòn",odds:B.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],kem:[`một ván ngắn chừng ${slapSec(B.dodge.ms)}`],go:()=>{
-    slapGame({dodge:true,by:a,title:"Né đòn",go:"Né",skip:"Chịu đòn",skipSub:"không né",rows:[["Né kịp","cái tát nhẹ đi một bậc; tát nhẹ thì hụt hẳn","g"],["Không né","nhận trọn cái tát","r"]],
-     onDone:res=>show(fin(res.skipped||res.raw<B.raw[3]?sev:sev-1))})}}),{}),
+  /* mg-trim: «Né đòn» = ONE roll of the odds the card shows (BAL.slap.dodgeOdds by the «ne» board tier), no game — the same roll an NPC target makes */
+  (()=>{const dOd=B.dodgeOdds[slapMg(true,a).tier];return tsOpt({n:"Né đòn",odds:dOd,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],go:()=>show(fin(roll(dOd)?sev-1:sev))})})(),
   tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`})}}})]});
  return""}})();
 /* ---------- co-op: the tier of a slap on the friend rides on the existing "res" message ---------- */

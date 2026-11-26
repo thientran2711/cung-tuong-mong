@@ -17,13 +17,13 @@ const G=[
  ['Tài nghệ lesson, old overlay (Cầm/Kỳ/Họa/Vũ, j5 openMG)','j5.js',/function openMG/,/kitQuickSub\(\{win:"tiến bộ một phần"/,'roll','thành: tiến bộ một phần (1 of 3 pts) · hỏng: 0'],
  ['Tài nghệ lesson with a work (j83 «Học nhanh», every art)','j83.js',/playArt\(\{art:k,title:`\$\{m\.mode/,/n:"Học nhanh",roll:1/,'roll','thành: tiến bộ một phần, no work · hỏng: 0'],
  ['Tài nghệ practice at bậc 5 (j83 tự học, jrcp học với thầy)','jrcp.js',/title:`Học \$\{an\} với thầy`/,/n:"Học nhanh",sure:1/,'sure','no work (sure, no roll)'],
- ['Tu đức lesson (jtd: Công/Dung/Ngôn/Hạnh games)','jtd.js',/function tdPlay/,/kitQuick\(\{n:"Để trời định",win:"tiến bộ một phần"/,'roll','thành: progress of a 5/10 play · hỏng: 0'],
+ ['Tu đức lesson (jtd: Công/Dung/Ngôn/Hạnh games)','jtd.js',/function tdPlay/,/kitQuick\(\{n:"Học nhanh",win:"tiến bộ một phần"/,'roll','thành: progress of a 5/10 play · hỏng: 0'],
  ['Tu đức work (jtds, through jtd)','jtds.js',/function tdsFinish/,/TDV\.skip/,'via jtd','no work (the jtd quick button)'],
  ['Kết mạng che mặt (jveil craft)','jveil.js',/title:"Kết mạng che mặt"/,/n:"Kết nhanh",sure:1/,'sure','no veil, material back (sure)'],
- ['Điểm trang buổi sáng (jtoil, dress + colour screens)','jtoil.js',/function toilOpen/,/id:"toilquick2?",n:"Điểm trang nhanh"/,'roll','thành: Đoan trang (middle tier) · hỏng: Vụng về; Để mặt mộc stays'],
+ ['Điểm trang buổi sáng (jtoil, dress + colour screens)','jtoil.js',/function toilOpen/,/toilRollBtn\("toilquick2?"\)/,'roll: Dung (mg-trim)','one tap = the face table on her hand (Dung, Họa, Sắc, rank, colours, hoa điền); «Tự tay điểm trang» = the mirror game; Để mặt mộc stays'],
  ['Điểm trang before a contest (jmkt → toilColUI)','jmkt.js',/toilColUI\(\)/,null,'roll','same button as jtoil colour screen'],
- ['Chăm thú cưng: cho ăn / tắm / chơi (jpetcare)','jpetcare.js',/function petcGameBox/,/id:"kpcquick"/,'roll','thành: BAL.skip.care of the gain · hỏng: nothing'],
- ['Chăm cây: tưới (jshelf)','jshelf.js',/kshpgame/,/id:"kshpquick"/,'roll','thành: BAL.skip.care of the gain · hỏng: nothing'],
+ ['Chăm thú cưng: cho ăn / tắm / chơi (jpetcare)','jpetcare.js',/function petcGameBox/,/petcGain\(k,BAL\.skip\.raw\/10\)/,'cut: one tap (mg-trim)','the care of a «vừa tay» hand, no game'],
+ ['Chăm cây: tưới (jshelf)','jshelf.js',/kshpgame/,/shelfPlantGain\(BAL\.skip\.raw\/10\)/,'cut: one tap (mg-trim)','the care of a «vừa tay» hand, no game'],
  ['Hội thi / thi tài (j82 startContest)','j82.js',/function startContest/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap (Khá)'],
  ['Tự luyện / lesson frame default (j82 playArt)','j82.js',/function playArt/,/\$\{kitQuick\(QK\)\}/,'per caller','the caller\'s quick (o.quick), mark capped'],
  ['Tuyển chọn entry round (jentry)','jentry.js',/kg82go/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap (Khá)'],
@@ -31,15 +31,15 @@ const G=[
  ['Phúc tuyển / tuyển chọn at home (jkc, jkc2 playArt)','jkc2.js',/playArt\(\{art,title,note/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap'],
  ['Court act games (jts tsGame)','jts.js',/function tsGame/,/id:"kg82skip",n:"Bỏ qua"/,'own: act odds','the act\'s own odds; won = capped mark'],
  ['Phối đồ hội (jts dress)','jts.js',/id="tsdgo"/,/id:"tsdskip"/,'own: maid','the maid picks (by her goodwill)'],
- ['Tát / né (jslap, jlooks)','jslap.js',/function slapGame/,/kitQuick\(\{id:"kg82skip",n:`\$\{o\.skip\}`/,'own: no play','tát nhẹ / no dodge'],
+ ['Tát / né (jslap, jlooks, Dư đồ class B)','jslap.js',/function slapGame/,/SLAP\.next=slapNpcTier\(S\)/,'cut: one draw (mg-trim)','her tier = the NPC draw (slapNpcTier); Né = one roll of the card odds'],
  ['Nghiệm thân sleight (jroute)','jroute.js',/function rtNgSleight/,/n:"Để Tâm cơ quyết định"/,'own: Tâm cơ odds','the act\'s Tâm cơ odds'],
  ['Mưu kế games (jsgame)','jsgame.js',/kg82Open\(\{art:J\.art/,/id:"sgskip"/,'own: hand off','a helper does it at today\'s odds'],
  ['Chải chuốt (j92 wdGroomUI)','j92.js',/function wdGroomUI/,/id:"kg92skip"/,'own: auto dress','as Tự chọn đồ'],
 ];
 const fails=[],rows=[];
 for(const [n,f,entry,qm,fam,gives] of G){const s=rd(f);const has=!!s&&entry.test(s);let q;
- if(f==='jmkt.js')q=has&&/id:"toilquick2",n:"Điểm trang nhanh"/.test(rd('jtoil.js'));
- else if(f==='jtds.js')q=has&&/kitQuick\(\{n:"Để trời định"/.test(rd('jtd.js'));
+ if(f==='jmkt.js')q=has&&/toilRollBtn\("toilquick2"\)/.test(rd('jtoil.js'));
+ else if(f==='jtds.js')q=has&&/kitQuick\(\{n:"Học nhanh"/.test(rd("jtd.js"));
  else q=has&&qm.test(s);
  const old=!q&&has&&/id="(?:mgskip|kg82skip|kg92skip|tsdskip|sgskip|toilmoc2?)"|Để trời định|Học nhanh/.test(s);
  rows.push([n,f,has?(q?'yes (kit)':old?'own button':'NO'):'not in build',q?fam:'',q?gives:'']);if(has&&!q)fails.push(`no kit quick: ${n} (${f})`)}
@@ -47,7 +47,7 @@ for(const [n,f,entry,qm,fam,gives] of G){const s=rd(f);const has=!!s&&entry.test
 const files=fs.readdirSync(B).filter(f=>/^j.*\.js$/.test(f));
 const SKIPF=new Set(['j79.js','jcui.js','jaudit.js','jmkt.js','j91.js','jnwq.js','jmgt.js','jcal.js','jwkg.js','jkitpage.js','jmgcal.js']);/* m-fix-1: + jkitpage (the kit sample page, not a game) + jmgcal (her hand-test calibration: a skip would fake her measured hand) *//* kit itself, samples, audit wrappers, engines / kind routers (their games run inside a listed frame: jwkg picks the game of a j83 work) */
 for(const f of files){if(SKIPF.has(f))continue;const s=rd(f).replace(/\/\*[\s\S]*?\*\//g,'');
- if(/kg82Open\(\{|kitGameFrame\(\{|\bopenMG=function|function openMG/.test(s)&&!Q.test(s)&&!(f==='jroute.js'))fails.push(`game frame without the kit quick button: ${f}`);
+ if(/kg82Open\(\{|kitGameFrame\(\{|\bopenMG=function|function openMG/.test(s)&&!Q.test(s)&&!(f==='jroute.js')&&!(f==='jtoil.js'&&/toilRollBtn\(/.test(s))/* mg-trim: the mirror's quick = the one-tap Điểm trang roll */)fails.push(`game frame without the kit quick button: ${f}`);
  if(f==='jroute.js'&&/function rtNgScene/.test(s)){/* rtNgScene = the blood-bowl cut-scene (no play): not a game */}
  for(const m of s.matchAll(/playArt\(\{([^]*?)onDone/g))if(!/quick:/.test(m[1]))fails.push(`playArt caller without quick: ${f}: ${m[1].slice(0,60)}`);
  if(/BAL\.odb\.j5\b|BAL\.odb\.j83\b/.test(s))fails.push(`old skip key still read: ${f}`)}
