@@ -1866,3 +1866,4 @@ NEWS-SIEVE Tin trong cung sieve + monthly summary + nết open + rank respect + 
 | E97r2 BIG RE-REVIEW dup-report 12440ec3 (opus; briefs/E97r2-review-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWmXDTARVJA1HHV5nUN | FAIL 12440ec3 (3 items; reports/dup-report.md REVIEW r2) | 26/11 06:40Z |
 | E98 endcard-top (opus; briefs/E98-endcard-popup.md) — end card covered by «Bổng lộc tháng» etc. | review/endcard-top | FOREMAN E child7 | session_01DgYSWobPGyK9ErjyBvPqBE | RUNNING | 26/11 06:10Z |
 | E97f2 FIX r2 dup-report (opus; briefs/E97f2-dup-report-fix.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWneX23YAZoFEryXv3n | RUNNING | 26/11 06:15Z |
+| E95r BIG REVIEW mghelp-dress c081852a (opus; briefs/E95r-review-mghelp-dress.md) | review/mghelp-dress | FOREMAN E child7 | (opening) | RUNNING | 26/11 06:25Z |
