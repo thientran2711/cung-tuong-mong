@@ -2,7 +2,7 @@
    Every Việc nhờ / Phụ tuyến reaches her through j72 (q72Make → q72Offer), whatever the source: the random tuần tick, follow-ups and NPC-road
    help hồi (jnroad / jnroadm / jnroade push q72().ch), the Tâm nguyện lines (jreign rgLNext), meetings on the map (jact «favour»), NPC visits
    (jagharm «favour»), exam errors (jexam psErr), debts collected (q72Collect) and her own «Hỏi han» (q72Ask). So ONE gate here covers them all:
-   (1) RANK FIT — q72Fit(A): BAL.sideq.who by her band, consorts within rvDn/rvUp ranks, only people who know her (BAL.sideq.know / offKnow);
+   (1) RANK FIT — q72Fit(A): BAL.sideq.who by her band, consorts within rvDn/rvUp ranks, only people who know her (j61 reveal stage ≥ BAL.sideq.knowSt, plus BAL.sideq.know / offKnow);
        q72Pick never draws an unfit asker, q72Make refuses a given unfit asker (follow-ups, lines, visits): that NPC keeps her own road and her
        chapter is played without the player (jnroad nrHold withdraws an unshown request), nobody is forced.
    (2) FEW AT ONCE — Q72CFG.max / Q72CFG.mo read BAL.sideq.open[band] / BAL.sideq.mo (the Việc nhờ tab and the chapter hints read Q72CFG),
@@ -19,8 +19,12 @@ function sqKnows(v){try{if(!v||typeof v!=="object")return false;if(aff(v,S)>=net
 /* the who key of an asker: "man:<role>" for men, else the q72 kind */
 function sqKey(A){if(!A)return"";if(A.k==="man"&&A.o&&A.o.rw)return "man:"+A.o.rw;return A.fam?"fam":A.k}
 function q72Fit(A,T){try{if(!A||!S||window.__sqoff)return true;/* window.__sqoff: content tests (j72c-play, nrask-engine) deal any asker */const Q=B(),bd=sqBand();if(T&&T.s&&T.s.length>Q.stepMax)return false;
+ if(A.k==="rv"&&typeof k61St==="function"){let st=3;try{st=k61St(A.o)}catch(e){}if(st<Q.knowSt)return false}
  if(A.k==="rv"){const v=A.o;const d=(v.rank|0)-(S.rank|0);if(d<-Q.rvDn||d>Q.rvUp)return false;return sqKnows(v)}
  if(A.k==="ak"&&A.mom===S)return true;/* her own grown child asks at every band */
+ /* (5) only people she knows: the j61 reveal stage of the asker (1 face, 2 name, 3 acquainted) must reach knowSt — a stranger («Người lạ / ???»)
+    never comes with a favour (MAIN 162 LOOK: a minister shown as «Người lạ» asked her). The Emperor and the Thái hậu are known to every consort. */
+ if(A.k!=="emp"&&A.k!=="th"&&A.o&&typeof A.o==="object"&&typeof k61St==="function"){let st=3;try{st=k61St(A.o)}catch(e){}if(st<Q.knowSt)return false}
  const k=sqKey(A);const w=Q.who[k]||(k.indexOf("man:")===0?Q.who.man:null);if(w&&(bd<w[0]||bd>w[1]))return false;
  if(A.k==="fallen")return sqKnows(A.o);
  if(A.k==="rsv")return !!(A.own&&sqKnows(A.own));

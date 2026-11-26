@@ -2311,11 +2311,11 @@ BAL.charge={C:{
      Hoàng hậu, Thái hậu, a prince / princess not hers, a foreign envoy: bands 1–2. Ministers (off: Tể tướng, Thượng thư…): band 2 only, never a Quý nhân.
    rvDn / rvUp = a consort asks her only when her rank is at most rvDn below / rvUp above her own (nobody far below asks a Hoàng hậu).
    know = the net threshold a consort (or the mistress of a servant who asks, or a fallen woman) must feel for her: only people who know her ask.
-   offKnow = a minister's regard for her (trS().H[c].af) needed to ask. open = most open quests at once per band (2 at every band: MAIN 162 LOOK «2/2 max, never /3»).
+   knowSt = the j61 reveal stage she must have of any asker (2 = she knows the name; 0 = «Người lạ»): a stranger never asks. offKnow = a minister's regard for her (trS().H[c].af) needed to ask. open = most open quests at once per band (2 at every band: MAIN 162 LOOK «2/2 max, never /3»).
    mo = new asks a month; gapW = tuần between two new asks from anyone (her own «Hỏi han» is exempt); dlMax = longest deadline in tuần (a short
    errand done within about a tuần; never under its own waits + 1); stepMax = most steps; lateR = the asker's small regard loss when she accepted
    and never began before the deadline (the asker took it to someone else). */
 BAL.sideq={band:[0,0,0,1,1,2,2,2],
  who:{maid:[0,2],sv:[0,2],kid:[0,2],fam:[0,2],emp:[0,2],rsv:[0,0],eun:[0,1],ksp:[0,1],doc:[0,1],fallen:[0,1],ly:[0,1],
   hh:[1,2],th:[1,2],ak:[1,2],off:[2,2],"man:sứ thần":[1,2],man:[0,1]},
- rvDn:2,rvUp:2,know:"quen",offKnow:0,open:[2,2,2],mo:2,gapW:2,dlMax:2,stepMax:3,lateR:-2};
+ rvDn:2,rvUp:2,know:"quen",knowSt:2,offKnow:0,open:[2,2,2],mo:2,gapW:2,dlMax:2,stepMax:3,lateR:-2};
