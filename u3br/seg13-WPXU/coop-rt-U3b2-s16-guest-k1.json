@@ -1,0 +1,3081 @@
+{
+ "job": {
+  "id": "coop-rt-U3b2-s16-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 262,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8081/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "5edf09f6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 1531,
+    "lvl": 3,
+    "layer": "#dawn",
+    "title": ""
+   },
+   {
+    "at": 2745,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2756,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2767,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2778,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2789,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3123,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3536,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3547,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3557,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3568,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4395,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 5577,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5588,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5600,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5612,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5623,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5635,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5647,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5658,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5670,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5681,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5693,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5704,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5716,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5728,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5739,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5751,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5763,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5774,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5785,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5797,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5808,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5820,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5831,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5843,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5854,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5865,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5877,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5888,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5900,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5912,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5923,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5934,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5946,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5957,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5969,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5980,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 5992,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6003,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6014,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6026,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6037,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6048,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6060,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6071,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6083,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6094,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6106,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6117,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6128,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6140,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6151,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6163,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6174,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6186,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6198,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6209,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6221,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6232,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6243,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6255,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6266,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6278,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6289,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6301,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6312,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6324,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6335,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6346,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6358,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6369,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6381,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6405,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6411,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 6730,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 6860,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 6881,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 6945,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 6982,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 7048,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 7067,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 86,
+  "typed": 1,
+  "kpopTrap": 101,
+  "popClose": 106,
+  "noFreeSkip": 6,
+  "chipTrap": 6,
+  "reloads": [
+   30
+  ],
+  "reloadDone": 30,
+  "midReload": [
+   {
+    "at": 4408,
+    "buoi": 122,
+    "before": {
+     "y": 2,
+     "t": 10,
+     "w": 0,
+     "b": 0,
+     "age": 19
+    },
+    "after": {
+     "y": 2,
+     "t": 10,
+     "w": 0,
+     "b": 0,
+     "age": 19
+    }
+   }
+  ],
+  "lockedSkip": 5,
+  "scrolls": 1831
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 1,
+   "at": 342,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 24,
+   "at": 394,
+   "screen": ".dlg «»"
+  },
+  {
+   "k": "game|tap on option «ve kêu râm ran» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «ve kêu râm ran» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 486,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Bạc105Sức100/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Bạc105Sức100/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 1226,
+   "screen": ".mapsc «»"
+  },
+  {
+   "k": "game|tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 10,
+   "at": 1293,
+   "screen": ".dlg «Bổng lộc tháng tư»"
+  },
+  {
+   "k": "game|tap on option «đêm gió lớn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «đêm gió lớn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 1401,
+   "screen": ".mapsc «»"
+  },
+  {
+   "k": "game|tap on option «Buổi tối, còn 2 khắc» opened chip modal «tối · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Buổi tối, còn 2 khắc» opened chip modal «tối · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 1404,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «đêm u ám» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «đêm u ám» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 1433,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «mồng 5: Tết Đoan ngọ» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mồng 5: Tết Đoan ngọ» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 1473,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «trời trong mát» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời trong mát» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 1793,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «chiều lộng gió» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «chiều lộng gió» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 1811,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «ngày 21: Hội Phượng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «ngày 21: Hội Phượng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 1847,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «nắng gắt» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «nắng gắt» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 1871,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Bạc84Sức100/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Bạc84Sức100/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 1899,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «trăng rằm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trăng rằm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 2169,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «ngày 15: Lễ Vu Lan» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «ngày 15: Lễ Vu Lan» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 2177,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 2270,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 3,
+   "at": 2292,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 4,
+   "at": 2394,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 2424,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 4,
+   "at": 3226,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «ngày 15: Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «ngày 15: Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 3506,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 2,
+   "at": 3509,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «chiều giá lạnh» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «chiều giá lạnh» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 3771,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Tiết Đông chí» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tiết Đông chí» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 2,
+   "at": 3832,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «Tâm trạngBình thản-3» opened chip modal «Tâm trạng · Ta» (chip class div#hud-mood.kstm overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Tâm trạngBình thản-3» opened chip modal «Tâm trạng · Ta» (chip class div#hud-mood.kstm overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 4037,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 4040,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Thục phi Liêu Diệu Âm» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Thục phi Liêu Diệu Âm» «Lui»",
+   "n": 1,
+   "at": 4514,
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/noeffect-1795650451996.png"
+  },
+  {
+   "k": "game|tap on option «Buổi chiều, còn 0 khắc» opened chip modal «chiều · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Buổi chiều, còn 0 khắc» opened chip modal «chiều · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 4710,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Tết Nguyên tiêu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tết Nguyên tiêu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 1,
+   "at": 4742,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 5285,
+   "screen": "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ»"
+  },
+  {
+   "k": "game|tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 5288,
+   "screen": "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ»"
+  },
+  {
+   "k": "game|tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 5429,
+   "screen": "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ»"
+  },
+  {
+   "k": "game|tap on option «Tâm trạngBình thản+15» opened chip modal «Tâm trạng · Ta» (chip class div#hud-mood.kstm overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Tâm trạngBình thản+15» opened chip modal «Tâm trạng · Ta» (chip class div#hud-mood.kstm overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 5433,
+   "screen": "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ»"
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+   "n": 1,
+   "at": 6411,
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/stuck-1.png",
+   "save": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   },
+   "buttons": [
+    "",
+    "",
+    "",
+    "",
+    "Theo Hoàng thượngRất vữngTốnkhôngĐượcđược để mắt, Hoàng thượng tin ta hơn, phụ thân cùng p",
+    "Theo Thái hậuRất vữngTốnkhôngĐượcđược lòng bề trên, Thái hậu che chở ta, trái ý phụ thân, ",
+    "Theo Tể tướng Nam Cung Tử KhiêmRất vữngTốnkhôngĐượccó thêm bạc, nhà Tể tướng hậu thuẫn ta ",
+    "Đứng ngoài, giữ mìnhRất vữngTốnkhôngĐượcđược tiếng hiền, không phe nào nợ ta, cũng không p"
+   ]
+  },
+  {
+   "k": "game|tap on option «trời trong, sao sáng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời trong, sao sáng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 14,
+   "at": 6450,
+   "screen": "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ»"
+  },
+  {
+   "k": "game|tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "n": 15,
+   "at": 6512,
+   "screen": "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ»"
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Kính sự phòng»",
+   "label": "?",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795646154073.png",
+   "dev": "ipad",
+   "at": 216,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Trước khi ra tay",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795646309207.png",
+   "dev": "ipad",
+   "at": 374,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795646341113.png",
+   "dev": "ipad",
+   "at": 403,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795646361750.png",
+   "dev": "ipad",
+   "at": 424,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795646369797.png",
+   "dev": "ipad",
+   "at": 432,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795647227815.png",
+   "dev": "ipad",
+   "at": 1290,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795647652211.png",
+   "dev": "ipad",
+   "at": 1714,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795647971376.png",
+   "dev": "ipad",
+   "at": 2033,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795648277543.png",
+   "dev": "ipad",
+   "at": 2339,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649080474.png",
+   "dev": "ipad",
+   "at": 3142,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649097192.png",
+   "dev": "ipad",
+   "at": 3159,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649105645.png",
+   "dev": "ipad",
+   "at": 3168,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Lãnh cung",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649265571.png",
+   "dev": "ipad",
+   "at": 3327,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649549328.png",
+   "dev": "ipad",
+   "at": 3611,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649569452.png",
+   "dev": "ipad",
+   "at": 3631,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649577801.png",
+   "dev": "ipad",
+   "at": 3640,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795649948996.png",
+   "dev": "ipad",
+   "at": 4011,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795650284378.png",
+   "dev": "ipad",
+   "at": 4346,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795650303906.png",
+   "dev": "ipad",
+   "at": 4366,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795650312163.png",
+   "dev": "ipad",
+   "at": 4374,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Thục phi Liêu Diệu Âm»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/noeffect-1795650451996.png",
+   "at": 4514,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795650723378.png",
+   "dev": "ipad",
+   "at": 4785,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795650738562.png",
+   "dev": "ipad",
+   "at": 4801,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795650747388.png",
+   "dev": "ipad",
+   "at": 4809,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795651464647.png",
+   "dev": "ipad",
+   "at": 5527,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795651481838.png",
+   "dev": "ipad",
+   "at": 5544,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/dead-ipad-1795651489960.png",
+   "dev": "ipad",
+   "at": 5552,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Khổng Thải Vi"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 147,
+ "steps": 10885,
+ "status": [
+  "STATUS coop-rt-U3b2-s16-guest-k1 · buổi 98 · year 1 · rank 0 · bugs 23 · stuck 0 · dead buttons 14"
+ ],
+ "_snapAt": 1795653094644,
+ "_un": 0,
+ "_lkB": 147,
+ "trace": [
+  [
+   6794,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   6795,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   6796,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bậc 1 trên 5»"
+  ],
+  [
+   6797,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   6798,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   6799,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   6799,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   6800,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   6801,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   6802,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem quan hệ của Hoàng thượng»"
+  ],
+  [
+   6803,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «trời trong, sao sáng»"
+  ],
+  [
+   6804,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem quan hệ của Hoàng thượng»"
+  ],
+  [
+   6805,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Phe phái»"
+  ],
+  [
+   6806,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   6807,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «trời trong, sao sáng»"
+  ],
+  [
+   6808,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   6809,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tất cả 0/27Nghỉ ngơi 0/4Giao thiệp 0/3Học tập · Tà»"
+  ],
+  [
+   6810,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bạc0Sức100/100»"
+  ],
+  [
+   6811,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   6812,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   6812,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Y dược 0/2»"
+  ],
+  [
+   6813,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mưu kế 0/5»"
+  ],
+  [
+   6814,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   6815,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   6816,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệ 0/3»"
+  ],
+  [
+   6816,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   6817,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6818,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   6819,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   6820,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6821,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   6822,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   6823,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   6824,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   6824,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6825,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Túi đồ»"
+  ],
+  [
+   6826,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Y phục 3»"
+  ],
+  [
+   6827,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thú cưng»"
+  ],
+  [
+   6828,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   6829,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   6829,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «???»"
+  ],
+  [
+   6830,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   6832,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người sau»"
+  ],
+  [
+   6833,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Toàn Phúc»"
+  ],
+  [
+   6833,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Đức Thọ»"
+  ],
+  [
+   6834,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   6835,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6836,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Chọn chính mình»"
+  ],
+  [
+   6837,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Cung nhân»"
+  ],
+  [
+   6837,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   6838,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quế Chi»"
+  ],
+  [
+   6839,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «trời trong, sao sáng»"
+  ],
+  [
+   6841,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   6841,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người trước»"
+  ],
+  [
+   6842,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Nam nhân»"
+  ],
+  [
+   6843,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   6845,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   6846,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   6847,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Phe phái hậu cung»"
+  ],
+  [
+   6847,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6848,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thư từ»"
+  ],
+  [
+   6860,
+   "#kchatp «unstick ✕»"
+  ],
+  [
+   6860,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   6861,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôn sự»"
+  ],
+  [
+   6862,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   6863,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   6863,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   6864,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   6865,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   6866,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   6867,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «1Cung nhân»"
+  ],
+  [
+   6867,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   6868,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Chọn chính mình»"
+  ],
+  [
+   6869,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bạc0Sức100/100»"
+  ],
+  [
+   6870,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thư từ»"
+  ],
+  [
+   6881,
+   "#kchatp «unstick ✕»"
+  ],
+  [
+   6882,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6882,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   6883,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Cung nữ thân tín tam đẳngNgân Linh»"
+  ],
+  [
+   6884,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   6885,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   6885,
+   ".kfoc «Lui»"
+  ],
+  [
+   6886,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   6887,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   6888,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lật thẻRất thấp»"
+  ],
+  [
+   6889,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người lạ»"
+  ],
+  [
+   6889,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   6890,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bạc0Sức100/100»"
+  ],
+  [
+   6891,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   6892,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «trời trong, sao sáng»"
+  ],
+  [
+   6894,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «trời trong, sao sáng»"
+  ],
+  [
+   6895,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6896,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6897,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   6898,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   6899,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «2Chí tôn»"
+  ],
+  [
+   6899,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   6901,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   6902,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   6903,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   6903,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   6905,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   6906,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   6907,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   6907,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   6908,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   6909,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   6910,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   6911,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6911,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người lạ»"
+  ],
+  [
+   6912,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   6913,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «1Cung nhân»"
+  ],
+  [
+   6914,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   6915,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   6915,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   6916,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   6917,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôn sự»"
+  ],
+  [
+   6918,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   6918,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Chọn chính mình»"
+  ],
+  [
+   6919,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   6920,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôn sự»"
+  ],
+  [
+   6921,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lịch tháng»"
+  ],
+  [
+   6922,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Chọn chính mình»"
+  ],
+  [
+   6922,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   6923,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   6924,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   6925,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6925,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   6926,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   6927,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Chọn chính mình»"
+  ],
+  [
+   6928,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   6929,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhTa chưa v»"
+  ],
+  [
+   6929,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhTa chưa v»"
+  ],
+  [
+   6930,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   6931,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   6932,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhTa chưa v»"
+  ],
+  [
+   6932,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Phe phái»"
+  ],
+  [
+   6933,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6934,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thư từ»"
+  ],
+  [
+   6946,
+   "#kchatp «unstick ✕»"
+  ],
+  [
+   6946,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   6947,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Kế vị»"
+  ],
+  [
+   6947,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   6948,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   6949,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lịch tháng»"
+  ],
+  [
+   6950,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Túi đồ»"
+  ],
+  [
+   6951,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   6951,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6952,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự trong cung»"
+  ],
+  [
+   6953,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người sau»"
+  ],
+  [
+   6954,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   6955,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   6956,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   6956,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   6957,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thu nhỏ»"
+  ],
+  [
+   6958,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   6959,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6960,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Chọn chính mình»"
+  ],
+  [
+   6961,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người sau»"
+  ],
+  [
+   6962,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   6962,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   6963,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sổ ghi»"
+  ],
+  [
+   6964,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   6965,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bạc0Sức100/100»"
+  ],
+  [
+   6966,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   6967,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «trời trong, sao sáng»"
+  ],
+  [
+   6969,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6969,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6970,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thư từ»"
+  ],
+  [
+   6983,
+   "#kchatp «unstick ✕»"
+  ],
+  [
+   6983,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6984,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người trước»"
+  ],
+  [
+   6985,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   6986,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   6987,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «1Cung nhân»"
+  ],
+  [
+   6987,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Con của ta»"
+  ],
+  [
+   6988,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự trong cung»"
+  ],
+  [
+   6989,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   6990,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Nghỉ ngơi 0/4»"
+  ],
+  [
+   6991,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «1Cung nhân»"
+  ],
+  [
+   6991,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   6992,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Học tập · Tài nghệ 0/3»"
+  ],
+  [
+   6993,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   6994,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   6995,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   6996,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   6996,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Xem thêm»"
+  ],
+  [
+   6997,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   6998,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tửDuệ»"
+  ],
+  [
+   6999,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   6999,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tửDuệ»"
+  ],
+  [
+   7000,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   7001,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   7002,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   7003,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   7004,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lật thẻRất thấp»"
+  ],
+  [
+   7004,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   7005,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   7006,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   7007,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   7008,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «1Cung nhân»"
+  ],
+  [
+   7009,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tác phẩm»"
+  ],
+  [
+   7010,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Về phòng»"
+  ],
+  [
+   7011,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «trời trong, sao sáng»"
+  ],
+  [
+   7012,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   7013,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Vũ · Y · Nữ công 0/12»"
+  ],
+  [
+   7014,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «2Chí tôn»"
+  ],
+  [
+   7015,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   7015,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người trước»"
+  ],
+  [
+   7016,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tửDuệ»"
+  ],
+  [
+   7017,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   7018,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   7019,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   7020,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   7021,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   7021,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   7022,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   7023,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   7024,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   7024,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «2Chí tôn»"
+  ],
+  [
+   7025,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Triều đình»"
+  ],
+  [
+   7026,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lịch tháng»"
+  ],
+  [
+   7027,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhQuốc sựBi»"
+  ],
+  [
+   7028,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   7028,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lật thẻRất thấp»"
+  ],
+  [
+   7029,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lịch tháng»"
+  ],
+  [
+   7030,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «2Chí tôn»"
+  ],
+  [
+   7031,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   7032,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   7032,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   7033,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   7034,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   7035,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   7036,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   7036,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tứ đức 0/9Cầm kỳ thi họa 0/12Vũ · Y · Nữ công 0/12»"
+  ],
+  [
+   7037,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thư từ»"
+  ],
+  [
+   7049,
+   "#kchatp «unstick ✕»"
+  ],
+  [
+   7049,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «1Cung nhân»"
+  ],
+  [
+   7050,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bậc 0 trên 5»"
+  ],
+  [
+   7051,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lật thẻRất thấp»"
+  ],
+  [
+   7051,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   7052,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   7053,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   7054,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   7055,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   7055,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Thư từ»"
+  ],
+  [
+   7067,
+   "#kchatp «unstick ✕»"
+  ],
+  [
+   7067,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   7068,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bạc0Sức100/100»"
+  ],
+  [
+   7069,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   7070,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «1Cung nhân»"
+  ],
+  [
+   7071,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Dư đồ»"
+  ],
+  [
+   7071,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tai mắt0»"
+  ],
+  [
+   7072,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhQuốc sựBi»"
+  ],
+  [
+   7073,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân oán»"
+  ],
+  [
+   7074,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   7075,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hậu cung»"
+  ],
+  [
+   7076,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bạc0Sức100/100»"
+  ],
+  [
+   7077,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   7078,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   7078,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   7079,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   7080,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   7081,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hoàng tự»"
+  ],
+  [
+   7082,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   7083,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tin báo»"
+  ],
+  [
+   7083,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   7084,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Người trước»"
+  ],
+  [
+   7085,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   7086,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   7086,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «2Chí tôn»"
+  ],
+  [
+   7087,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tài nghệ»"
+  ],
+  [
+   7088,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   7089,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   7090,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   7091,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   7091,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   7092,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   7093,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   7094,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Con gái Đại tướng quân 0/16»"
+  ],
+  [
+   7095,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Lật thẻRất thấp»"
+  ],
+  [
+   7095,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   7096,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sổ ghi»"
+  ],
+  [
+   7097,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   7098,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   7099,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   7100,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Tâm trạngBình thản+7»"
+  ],
+  [
+   7100,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mệnh truyện»"
+  ],
+  [
+   7101,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Sắc71Tài68Tâm cơ23Đức77Danh12Sủng0»"
+  ],
+  [
+   7102,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   7103,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   7104,
+   "page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» «Cung nữ thân tín tam đẳngNgân Linh»"
+  ],
+  [
+   7104,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7105,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7106,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7106,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7107,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7108,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7109,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7109,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7110,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7111,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7112,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7112,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7113,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7114,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7115,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7115,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7116,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7117,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7118,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7118,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7119,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7120,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7121,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7121,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7122,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7123,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7124,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7124,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7125,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7126,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7127,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7127,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7128,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7129,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7130,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7130,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7131,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7132,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7133,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7133,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7134,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7135,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7136,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7136,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7137,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7138,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7139,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7139,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7140,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7141,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7142,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7142,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7143,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7144,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7145,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7145,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7146,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7147,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7147,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7148,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7149,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7150,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7150,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7151,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7152,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7153,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7153,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7154,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7155,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7156,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7157,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7157,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7158,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7159,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7160,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7160,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7161,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7162,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7163,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7163,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7164,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7165,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7166,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7166,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7167,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7168,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7169,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7169,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7170,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7171,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7172,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7172,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7173,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7174,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7175,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7175,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7176,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7177,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7178,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7178,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7179,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7180,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7180,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7181,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7182,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   7183,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7183,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   7184,
+   ".kfoc «Mưu kế 0/1»"
+  ]
+ ],
+ "_ckAt": 1795653094639,
+ "_ckB": 147,
+ "_nfp": 26,
+ "_mrY": 2,
+ "dumps": [
+  "/home/user/wt/out18/shots-coop-rt-U3b2-s16-guest-k1/stuck-1-dump.json"
+ ]
+}

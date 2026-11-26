@@ -1,0 +1,3710 @@
+{
+ "job": {
+  "id": "coop-rt-U3b2-s16-host-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 261,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8081/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "5edf09f6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 221,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 460,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1553,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Có người đến"
+   },
+   {
+    "at": 1721,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2314,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2325,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2336,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2347,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2358,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2369,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2379,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2390,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2401,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2412,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2423,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2433,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2444,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3167,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3237,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3248,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3259,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3270,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3728,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4415,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người"
+   },
+   {
+    "at": 4804,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4815,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4826,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4837,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4848,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5531,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5542,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5552,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5563,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5574,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5585,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5596,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5607,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5618,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5629,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5640,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5651,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5662,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5672,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5683,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5694,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5705,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5716,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5727,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5738,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5748,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5759,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5770,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5781,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5792,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5802,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5813,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5824,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5835,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5845,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5856,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5867,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5878,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5888,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5899,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5910,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5920,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5931,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5942,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5953,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5963,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5974,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5985,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 5996,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6006,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6017,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6028,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6038,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6049,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6060,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6071,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6081,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6092,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6103,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6113,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6124,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6135,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6146,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6156,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6167,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6178,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6189,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6199,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6210,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6221,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6232,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6243,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6253,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6264,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6275,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6286,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6296,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6307,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6318,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6329,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6339,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6350,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6361,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6372,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6382,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6389,
+    "lvl": 3,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6408,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6427,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6438,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6450,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6461,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6472,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6483,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6494,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6505,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6517,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6528,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6539,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6550,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6562,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6573,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6584,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6595,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6607,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6618,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6629,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6640,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6651,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6662,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6673,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6685,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6696,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6707,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6718,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6729,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6740,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6751,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6762,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6773,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6784,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6795,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6806,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6817,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6828,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6839,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6850,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6861,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6872,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6883,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6894,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6906,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6917,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6927,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6938,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6949,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6960,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6972,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6983,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 6994,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7005,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7016,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7027,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7038,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7049,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7060,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7070,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7082,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7093,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7104,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7115,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7126,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7137,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7148,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7159,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7170,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 7180,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 382,
+  "kpopTrap": 91,
+  "popClose": 91,
+  "chipTrap": 19,
+  "noFreeSkip": 6,
+  "reloads": [
+   30
+  ],
+  "reloadDone": 30,
+  "midReload": [
+   {
+    "at": 4429,
+    "buoi": 121,
+    "before": {
+     "y": 2,
+     "t": 10,
+     "w": 0,
+     "b": 0,
+     "age": 21
+    },
+    "after": {
+     "y": 2,
+     "t": 10,
+     "w": 0,
+     "b": 0,
+     "age": 21
+    }
+   }
+  ]
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|tap on option «Tuyển chọn trước ngày phong» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tuyển chọn trước ngày phong» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 1,
+   "at": 39,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «Y phục vượt phẩm · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Y phục vượt phẩm · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "n": 2,
+   "at": 80,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "ktut-no-target|tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "type": "ktut-no-target",
+   "msg": "tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "n": 1,
+   "at": 102,
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/ktut-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   },
+   "hole": null,
+   "card": "",
+   "buttons": [
+    "",
+    "Đã hiểu"
+   ]
+  },
+  {
+   "k": "game|tap on option «Chặn ngự giáKhó lườngTốnkhôngĐ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Chặn ngự giáKhó lườngTốnkhôngĐ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body",
+   "n": 1,
+   "at": 118,
+   "screen": ".dlg «Kính sự phòng»"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Đáp ứng Vu Vân Thường» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Đáp ứng Vu Vân Thường» «Lui»",
+   "n": 1,
+   "at": 123,
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/noeffect-1795646061182.png"
+  },
+  {
+   "k": "game|tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 168,
+   "screen": "page «Tích Cần viện · Sang buổi trưa · ta vẫn ở Tích Cần»"
+  },
+  {
+   "k": "game|tap on option «Tranh sủngTùy duyênTốnkhôngĐượ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tranh sủngTùy duyênTốnkhôngĐượ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body",
+   "n": 1,
+   "at": 203,
+   "screen": ".dlg «Kính sự phòng»"
+  },
+  {
+   "k": "game|tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 312,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «sương đêm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «sương đêm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 330,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Cấm túc2 tháng» opened chip modal «Cấm túc 2 tháng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Cấm túc2 tháng» opened chip modal «Cấm túc 2 tháng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 345,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Cấm túc2 tháng» opened chip modal «Cấm túc 2 tháng» (chip class b overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Cấm túc2 tháng» opened chip modal «Cấm túc 2 tháng» (chip class b overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 348,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 24,
+   "at": 402,
+   "screen": ".dlg «»"
+  },
+  {
+   "k": "game|tap on option «Buổi trưa, còn 4 khắc» opened chip modal «trưa · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Buổi trưa, còn 4 khắc» opened chip modal «trưa · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 569,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «giông tố» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «giông tố» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 641,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "n": 21,
+   "at": 1174,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 6,
+   "at": 1500,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «mưa rào» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa rào» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 4,
+   "at": 1676,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Chu toàn lễ nghĩaRất vữngTốnBạ» opened a hint popup (#kpop) — trigger class span.kan sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Chu toàn lễ nghĩaRất vữngTốnBạ» opened a hint popup (#kpop) — trigger class span.kan sits on the card body",
+   "n": 2,
+   "at": 1701,
+   "screen": ".dlg «Bổng lộc tháng năm · Lễ nghĩa»"
+  },
+  {
+   "k": "game|tap on option «Bớt lễ nghĩaRất vữngTốnkhôngĐư» opened a hint popup (#kpop) — trigger class span.kan sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Bớt lễ nghĩaRất vữngTốnkhôngĐư» opened a hint popup (#kpop) — trigger class span.kan sits on the card body",
+   "n": 2,
+   "at": 1703,
+   "screen": ".dlg «Bổng lộc tháng năm · Lễ nghĩa»"
+  },
+  {
+   "k": "game|tap on option «Ghi tên dâng đàn (theo Cầm, Tà» opened a hint popup (#kpop) — trigger class span.kan sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Ghi tên dâng đàn (theo Cầm, Tà» opened a hint popup (#kpop) — trigger class span.kan sits on the card body",
+   "n": 1,
+   "at": 1708,
+   "screen": ".dlg «Thi tài ngày Thất tịch · Lời mời»"
+  },
+  {
+   "k": "game|tap on option «Lật thẻKhông có» opened chip modal «Lật thẻ: Không có» (chip class button.k3r.kasr overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Lật thẻKhông có» opened chip modal «Lật thẻ: Không có» (chip class button.k3r.kasr overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 1976,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Tranh sủngKhó lườngTốnkhôngĐượ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tranh sủngKhó lườngTốnkhôngĐượ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body",
+   "n": 3,
+   "at": 2191,
+   "screen": ".dlg «Kính sự phòng»"
+  },
+  {
+   "k": "game|tap on option «Lật thẻRất thấp» opened chip modal «Lật thẻ: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Lật thẻRất thấp» opened chip modal «Lật thẻ: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 2501,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «trời thu trong» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời thu trong» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 2649,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Có thaiRất thấp» opened chip modal «Có thai: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Có thaiRất thấp» opened chip modal «Có thai: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 2662,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 2664,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 2666,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Tết Thất tịch» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tết Thất tịch» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 1,
+   "at": 2687,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 3012,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tin báo» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin báo» «Lui»",
+   "n": 1,
+   "at": 3071,
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/noeffect-1795649009647.png"
+  },
+  {
+   "k": "game|tap on option «Đáp ứngTa» opened chip modal «Lật thẻ: Không có» (chip class small.knr-r.krt overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Đáp ứngTa» opened chip modal «Lật thẻ: Không có» (chip class small.knr-r.krt overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 3084,
+   "screen": ".dlg «Quan hệ với»"
+  },
+  {
+   "k": "game|tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 3,
+   "at": 3401,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 4,
+   "at": 3416,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Quẻ Trung (Mưu kế)» opened chip modal «Quẻ Trung · Mưu kế» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Quẻ Trung (Mưu kế)» opened chip modal «Quẻ Trung · Mưu kế» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 4229,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Khổng Thải Vi: Đang làm việc» opened a hint popup (#kpop) — trigger class button.krailb.kctmf sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Khổng Thải Vi: Đang làm việc» opened a hint popup (#kpop) — trigger class button.krailb.kctmf sits on the card body",
+   "n": 1,
+   "at": 4462,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Đêm Giao thừa» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Đêm Giao thừa» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 1,
+   "at": 4490,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «Số lần ân thưởng0» opened chip modal «Ân thưởng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Số lần ân thưởng0» opened chip modal «Ân thưởng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 4970,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Y dượcY dượcHối lộ người ở Thá» opened chip modal «Hối lộ người ở Thái y viện» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Y dượcY dượcHối lộ người ở Thá» opened chip modal «Hối lộ người ở Thái y viện» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 6,
+   "at": 4991,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Buổi chiều, còn 2 khắc» opened chip modal «chiều · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Buổi chiều, còn 2 khắc» opened chip modal «chiều · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 5126,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Xét phẩm: thiếu 2» opened chip modal «Xét phẩm cuối tháng · Thường tại» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Xét phẩm: thiếu 2» opened chip modal «Xét phẩm cuối tháng · Thường tại» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 5129,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Buổi tối, còn 2 khắc» opened chip modal «tối · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Buổi tối, còn 2 khắc» opened chip modal «tối · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 5205,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Học tập · Tài nghệHọc tập · Tà» opened chip modal «Cầm: các lối» (chip class button.ka.kart overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Học tập · Tài nghệHọc tập · Tà» opened chip modal «Cầm: các lối» (chip class button.ka.kart overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 5212,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»"
+  },
+  {
+   "k": "game|tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 1,
+   "at": 5517,
+   "screen": ".dlg «Bổng lộc tháng hai»"
+  },
+  {
+   "k": "stuck|no progress 15 min on #coopfz «»",
+   "type": "stuck",
+   "msg": "no progress 15 min on #coopfz «»",
+   "n": 1,
+   "at": 6389,
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/stuck-1.png",
+   "save": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 0,
+    "b": 0,
+    "age": 21,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   },
+   "buttons": [
+    "Về màn đầu"
+   ]
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Tuyển chọn trước ngày phong",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795645987322.png",
+   "dev": "fold",
+   "at": 49,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 2,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Đáp ứng Vu Vân Thường»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/noeffect-1795646061182.png",
+   "at": 123,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795646350099.png",
+   "dev": "fold",
+   "at": 412,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795646366344.png",
+   "dev": "fold",
+   "at": 428,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795646374493.png",
+   "dev": "fold",
+   "at": 436,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795646440905.png",
+   "dev": "fold",
+   "at": 503,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 1,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795646455394.png",
+   "dev": "fold",
+   "at": 517,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 1,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795646463421.png",
+   "dev": "fold",
+   "at": 525,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 1,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795647227844.png",
+   "dev": "fold",
+   "at": 1290,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Trước khi ra tay",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795647447540.png",
+   "dev": "fold",
+   "at": 1509,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795647713528.png",
+   "dev": "fold",
+   "at": 1775,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795647721560.png",
+   "dev": "fold",
+   "at": 1783,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795647729572.png",
+   "dev": "fold",
+   "at": 1791,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Trước khi ra tay",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795647860012.png",
+   "dev": "fold",
+   "at": 1922,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795648167087.png",
+   "dev": "fold",
+   "at": 2229,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795648678741.png",
+   "dev": "fold",
+   "at": 2741,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/noeffect-1795649009647.png",
+   "at": 3071,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 2,
+    "b": 2,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795649055505.png",
+   "dev": "fold",
+   "at": 3117,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795649076675.png",
+   "dev": "fold",
+   "at": 3139,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795649085225.png",
+   "dev": "fold",
+   "at": 3147,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795649469525.png",
+   "dev": "fold",
+   "at": 3531,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795649489642.png",
+   "dev": "fold",
+   "at": 3552,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795649498127.png",
+   "dev": "fold",
+   "at": 3560,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795649939900.png",
+   "dev": "fold",
+   "at": 4002,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795650280038.png",
+   "dev": "fold",
+   "at": 4342,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 0,
+    "b": 0,
+    "age": 21,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795650299938.png",
+   "dev": "fold",
+   "at": 4362,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 0,
+    "b": 0,
+    "age": 21,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795650308338.png",
+   "dev": "fold",
+   "at": 4370,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 0,
+    "b": 0,
+    "age": 21,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Danh»",
+   "label": "?",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795651078408.png",
+   "dev": "fold",
+   "at": 5140,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 2,
+    "age": 21,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/dead-fold-1795651444112.png",
+   "dev": "fold",
+   "at": 5506,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 0,
+    "b": 0,
+    "age": 21,
+    "rank": 0,
+    "name": "Nam Cung Ngưng Hoa"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 146,
+ "steps": 11946,
+ "status": [
+  "STATUS coop-rt-U3b2-s16-host-k1 · buổi 97 · year 1 · rank 0 · bugs 33 · stuck 0 · dead buttons 23"
+ ],
+ "_snapAt": 1795653080659,
+ "_un": 69,
+ "_lkB": 146,
+ "trace": [
+  [
+   4990,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   4991,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   4992,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   4999,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   5000,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   5008,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   5009,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   5016,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tin báo: 18 tin mới»"
+  ],
+  [
+   5030,
+   ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»"
+  ],
+  [
+   5030,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   5037,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Buổi chiều, còn 3 khắc»"
+  ],
+  [
+   5038,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   5039,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   5040,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   5047,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   5048,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   5055,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   5056,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   5063,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   5064,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   5072,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tư trang»"
+  ],
+  [
+   5072,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tâm trạngBình thản+20»"
+  ],
+  [
+   5073,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5074,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sắc65Tài33Tâm cơ8Đức51Danh70Sủng0»"
+  ],
+  [
+   5075,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   5076,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   5077,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Dư đồ»"
+  ],
+  [
+   5078,
+   ".mapsc «Vĩnh Hòa1 bóng · 2 khắc»"
+  ],
+  [
+   5078,
+   ".mapsc «Mục tiêu chương»"
+  ],
+  [
+   5079,
+   ".dlg «Chương 2 · Lần đầu được sủng» «Đi làm: Nhờ thái giám Nội vụ phủ mua một mónTốnkhô»"
+  ],
+  [
+   5087,
+   ".mapsc «Lật thẻRất thấp»"
+  ],
+  [
+   5087,
+   ".dlg «Lật thẻ: Rất thấp» «Lui»"
+  ],
+  [
+   5088,
+   ".mapsc «Chí tôn · chạm để mở danh sách»"
+  ],
+  [
+   5089,
+   ".mapsc «Xem bản thân»"
+  ],
+  [
+   5090,
+   ".mapsc «Quẻ Hạ (Con cái)»"
+  ],
+  [
+   5091,
+   ".dlg «Quẻ Hạ · Con cái» «Lui»"
+  ],
+  [
+   5092,
+   ".mapsc «Hoàng tự»"
+  ],
+  [
+   5092,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tâm trạngBình thản+20»"
+  ],
+  [
+   5093,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5094,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Hoàng tự»"
+  ],
+  [
+   5095,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Dư đồ»"
+  ],
+  [
+   5096,
+   ".mapsc «Khổng Thải Vi: Đang bận»"
+  ],
+  [
+   5097,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   5104,
+   ".mapsc «Có thaiRất thấp»"
+  ],
+  [
+   5105,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   5105,
+   ".mapsc «Thừa Minh3 bóng · 2 khắc»"
+  ],
+  [
+   5106,
+   ".mapsc «‹ Dư đồThừa Minh cung Chiêu Huy điện1 bóng người t»"
+  ],
+  [
+   5107,
+   ".mapsc «Mệnh truyện»"
+  ],
+  [
+   5108,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Giao thiệpGiao thiệpHỏi han ở tẩm cung ta: ai cần »"
+  ],
+  [
+   5109,
+   ".dlg «Phụ tuyến · Cung nữ mang thư nhà vào · Lời nhờ (2 » «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   5116,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Về phòng»"
+  ],
+  [
+   5117,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «mưa rào»"
+  ],
+  [
+   5118,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Lật thẻRất thấp»"
+  ],
+  [
+   5119,
+   ".dlg «Lật thẻ: Rất thấp» «Lui»"
+  ],
+  [
+   5120,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   5121,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   5122,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Buổi chiều, còn 2 khắc»"
+  ],
+  [
+   5123,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   5123,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tâm trạngBình thản+20»"
+  ],
+  [
+   5124,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5125,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Buổi chiều, còn 2 khắc»"
+  ],
+  [
+   5126,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   5127,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Ân tình (đêm)0»"
+  ],
+  [
+   5128,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   5128,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   5129,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   5130,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tâm trạngBình thản+20»"
+  ],
+  [
+   5131,
+   ".dlg «Danh» «»"
+  ],
+  [
+   5132,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   5140,
+   "DEAD "
+  ],
+  [
+   5140,
+   "DEAD ?"
+  ],
+  [
+   5141,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5142,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tai mắt0»"
+  ],
+  [
+   5142,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   5143,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «2Chí tôn»"
+  ],
+  [
+   5144,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Lật thẻRất thấp»"
+  ],
+  [
+   5145,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «2Chí tôn»"
+  ],
+  [
+   5146,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tài nghệ»"
+  ],
+  [
+   5146,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Việc nhờ»"
+  ],
+  [
+   5147,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tâm trạngBình thản+20»"
+  ],
+  [
+   5148,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5149,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «mưa rào»"
+  ],
+  [
+   5150,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sổ ghi»"
+  ],
+  [
+   5152,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Mệnh truyện»"
+  ],
+  [
+   5153,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Hôm nay mặt mộc»"
+  ],
+  [
+   5155,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Quẻ Hạ (Con cái)»"
+  ],
+  [
+   5155,
+   ".dlg «Quẻ Hạ · Con cái» «Lui»"
+  ],
+  [
+   5156,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Dư đồ»"
+  ],
+  [
+   5157,
+   ".mapsc «Tai mắt0»"
+  ],
+  [
+   5158,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   5159,
+   ".mapsc «Số lần ân thưởng0»"
+  ],
+  [
+   5160,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   5161,
+   ".mapsc «Danh sách»"
+  ],
+  [
+   5162,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Lẻn vào Có cơ3 khắc · bắt: Danh -8»"
+  ],
+  [
+   5163,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tin báo»"
+  ],
+  [
+   5175,
+   ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»"
+  ],
+  [
+   5176,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   5180,
+   ".dlg «Ngự thiện phòng» «Lẻn vàoCó cơTốn2 khắcĐượcvào được buổi nàyBạiDanh »"
+  ],
+  [
+   5181,
+   ".dlg «Bị bắt» «Lui»"
+  ],
+  [
+   5188,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Cấm túc2 tháng»"
+  ],
+  [
+   5189,
+   ".dlg «Cấm túc 2 tháng» «Lui»"
+  ],
+  [
+   5190,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5191,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tài nghệ»"
+  ],
+  [
+   5191,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   5192,
+   ".dlg «Cầm: các lối» «Lui»"
+  ],
+  [
+   5193,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT»"
+  ],
+  [
+   5194,
+   ".dlg «Học Cầm: ai dạy?» «Lui»"
+  ],
+  [
+   5201,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Mệnh truyện»"
+  ],
+  [
+   5202,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Việc nhờ»"
+  ],
+  [
+   5203,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Buổi tối, còn 2 khắc»"
+  ],
+  [
+   5204,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   5205,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Buổi tối, còn 2 khắc»"
+  ],
+  [
+   5205,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   5206,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Quẻ Hạ (Con cái)»"
+  ],
+  [
+   5207,
+   ".dlg «Quẻ Hạ · Con cái» «Lui»"
+  ],
+  [
+   5208,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Nợ ân 1»"
+  ],
+  [
+   5209,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Quẻ Hạ (Con cái)»"
+  ],
+  [
+   5210,
+   ".dlg «Quẻ Hạ · Con cái» «Lui»"
+  ],
+  [
+   5210,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tài nghệ»"
+  ],
+  [
+   5211,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   5212,
+   ".dlg «Cầm: các lối» «Lui»"
+  ],
+  [
+   5213,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Buổi tối, còn 2 khắc»"
+  ],
+  [
+   5214,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   5215,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Học tập · Tài nghệHọc tập · Tài nghệTự họcⓘTốn2 kh»"
+  ],
+  [
+   5216,
+   ".dlg «Học Cầm: làm gì?» «Làm»"
+  ],
+  [
+   5217,
+   ".dlg «Khúc «Xuân hiểu»: dùng vật liệu gì?» «Khúc «Xuân hiểu» · dây đàn tơ mới, phổ lụaTốnBạc -»"
+  ],
+  [
+   5218,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   5218,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   5219,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   5222,
+   ".kmov «Nhận»"
+  ],
+  [
+   5224,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   5229,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5230,
+   ".dlg «Phụ tuyến · Gặp Sơ Tuyết giờ Tý ở vườn ngự · Lời n» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   5231,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5233,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5233,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5234,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5235,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5236,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5236,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5237,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5238,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5239,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5240,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5240,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5241,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5242,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5243,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5243,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5244,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tứ đức 8/9»"
+  ],
+  [
+   5245,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tâm trạngBất an-27»"
+  ],
+  [
+   5246,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5247,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5248,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tai mắt0»"
+  ],
+  [
+   5248,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   5249,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Có thaiRất thấp»"
+  ],
+  [
+   5251,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   5252,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «2Chí tôn»"
+  ],
+  [
+   5253,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Cung nữ thân tín tam đẳngKim Xuyến»"
+  ],
+  [
+   5253,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5254,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5255,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5256,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5256,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5257,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5258,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5259,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5260,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5260,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5261,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5262,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5263,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5264,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5264,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5265,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5266,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5267,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5267,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5268,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5269,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5270,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5271,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5271,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5272,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5273,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5274,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5275,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Về phòng»"
+  ],
+  [
+   5276,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tài nghệ»"
+  ],
+  [
+   5277,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Hậu cung»"
+  ],
+  [
+   5277,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tâm trạngBất an-27»"
+  ],
+  [
+   5278,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Nam nhân»"
+  ],
+  [
+   5279,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Về phòng»"
+  ],
+  [
+   5280,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Lật thẻKhông có»"
+  ],
+  [
+   5281,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   5281,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Số lần ân thưởng0»"
+  ],
+  [
+   5282,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Mục tiêu chương»"
+  ],
+  [
+   5283,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Hoàng tự»"
+  ],
+  [
+   5284,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Hành sự»"
+  ],
+  [
+   5284,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5285,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5286,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5287,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5288,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5288,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5289,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5290,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5291,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5291,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5292,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5293,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5294,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5294,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5295,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5296,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5297,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5297,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5298,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5299,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5300,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5300,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5301,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5302,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5303,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5303,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5304,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5305,
+   ".kfoc «Lui»"
+  ],
+  [
+   5306,
+   ".dlg «Chương 2 · Lần đầu được sủng» «Đi làm: Bán đồ trong rương riêngTốnkhôngĐượctới Tư»"
+  ],
+  [
+   5307,
+   ".dlg «Phòng bị» «Thử độc đồ ănRất vữngTốnkhôngĐượcnếm trước mọi món»"
+  ],
+  [
+   5315,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5315,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «1Cung nhân»"
+  ],
+  [
+   5316,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Cấm túc2 tháng»"
+  ],
+  [
+   5317,
+   ".dlg «Cấm túc 2 tháng» «Lui»"
+  ],
+  [
+   5318,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5319,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Số lần ân thưởng0»"
+  ],
+  [
+   5320,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   5320,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Dư đồ»"
+  ],
+  [
+   5321,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «đang ở đâyđang cấm túc (còn 2 tháng)Tẩm cung · đan»"
+  ],
+  [
+   5322,
+   ".mapsc «Giao tình»"
+  ],
+  [
+   5323,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Mệnh truyện»"
+  ],
+  [
+   5324,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tài nghệ»"
+  ],
+  [
+   5325,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   5326,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT»"
+  ],
+  [
+   5326,
+   ".dlg «Học Vũ: ai dạy?» «Trăng soi rèm ngọcThục phiLiêu Diệu ÂmTốn2 khắc·Sứ»"
+  ],
+  [
+   5327,
+   ".dlg «Học Vũ: làm gì?» «Làm»"
+  ],
+  [
+   5328,
+   ".dlg «Điệu «Đạp ca»: dùng vật liệu gì?» «Điệu «Đạp ca» · tập chayTốnkhôngĐượckhôngGhi chú(c»"
+  ],
+  [
+   5329,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   5330,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   5331,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   5332,
+   ".kmov «Nhận»"
+  ],
+  [
+   5339,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «mưa rào»"
+  ],
+  [
+   5341,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5342,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   5343,
+   ".dlg «Có người đến» «Đuổi vềRất vữngTốnkhôngĐượckhông dính líuGợi ýkhôn»"
+  ],
+  [
+   5351,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5352,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5361,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5362,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5363,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5363,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5364,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5365,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5366,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5366,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5367,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5368,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5369,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5369,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5370,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5371,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5372,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5372,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5373,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5374,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5375,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5376,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5376,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5377,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5378,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5379,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5380,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Giao tình»"
+  ],
+  [
+   5380,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Khổng Thải Vi: Đang làm việc»"
+  ],
+  [
+   5381,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   5389,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5389,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Mục tiêu chương»"
+  ],
+  [
+   5390,
+   ".dlg «Chương 2 · Lần đầu được sủng» «Danh hiệu 4/35»"
+  ],
+  [
+   5391,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Dung nhan như ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5392,
+   ".dlg «Đeo «Dung nhan như ngọc»» «Ngủ lại sứcTốnkhôngĐượcNgủ dậy Sức +1»"
+  ],
+  [
+   5393,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   5394,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Dung nhan như ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5395,
+   ".dlg «Đeo «Dung nhan như ngọc»» «Ngủ lại sức · đang lấyTốnkhôngĐượcNgủ dậy Sức +1»"
+  ],
+  [
+   5396,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Dung nhan như ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5397,
+   ".dlg «Đeo «Dung nhan như ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   5397,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   5398,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Dung nhan như ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5399,
+   ".dlg «Đeo «Dung nhan như ngọc»» «Thêm SắcTốnkhôngĐượcSắc +1»"
+  ],
+  [
+   5400,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   5401,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   5402,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   5402,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Dung nhan như ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5403,
+   ".dlg «Đeo «Dung nhan như ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   5404,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Dung nhan như ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5405,
+   ".dlg «Đeo «Dung nhan như ngọc»» «Thêm Sắc · đang lấyTốnkhôngĐượcSắc +1»"
+  ],
+  [
+   5406,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   5407,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Dung nhan như ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5408,
+   ".dlg «Đeo «Dung nhan như ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   5409,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   5416,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sắc65Tài33Tâm cơ8Đức51Danh56Sủng0»"
+  ],
+  [
+   5416,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5417,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Ân tình (đêm)0»"
+  ],
+  [
+   5418,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   5419,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Hành sự»"
+  ],
+  [
+   5420,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5421,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Cung nữ thân tín tam đẳngKim Xuyến»"
+  ],
+  [
+   5421,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5422,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5423,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5424,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5425,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5426,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5426,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5427,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5428,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5429,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5430,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5430,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5431,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5432,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5433,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5434,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5435,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5435,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5436,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5437,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5438,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5438,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5439,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5440,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5441,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5441,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5442,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5443,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5444,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5444,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5445,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5446,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5447,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5447,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5448,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5449,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5450,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5450,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5451,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5452,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5453,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5453,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5454,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5455,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5456,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   5457,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5457,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5458,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5459,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5460,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5460,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5461,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5462,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   5463,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5463,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5464,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   5465,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   5466,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   5466,
+   ".kfoc «Lui»"
+  ],
+  [
+   5468,
+   ".dlg «Sai Kim Xuyến đi dò la» «PhiLiêu Diệu ÂmTùy duyênTốnkhôngĐượcbiết 2 điều th»"
+  ],
+  [
+   5478,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   5479,
+   ".dlg «Kỳ nguyệt sự» «Giấu, không báoRất vữngTốnkhôngĐượcthẻ bài vẫn trê»"
+  ],
+  [
+   5480,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   5481,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5491,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5492,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   5493,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   5494,
+   "#kmrew «Thường»"
+  ],
+  [
+   5495,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   5497,
+   "#kmrew «Thường»"
+  ],
+  [
+   5506,
+   "DEAD Ghi chú"
+  ],
+  [
+   5506,
+   "DEAD Ghi chú"
+  ],
+  [
+   5506,
+   ".dlg «Lui»"
+  ],
+  [
+   5507,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   5508,
+   ".dlg «Lui»"
+  ],
+  [
+   5509,
+   "#kmrew «Thường»"
+  ],
+  [
+   5510,
+   ".dlg «Lui»"
+  ],
+  [
+   5511,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   5512,
+   ".dlg «Lui»"
+  ],
+  [
+   5513,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   5514,
+   ".dlg «Lui»"
+  ],
+  [
+   5515,
+   "#kmrew «Nhận»"
+  ],
+  [
+   5516,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5517,
+   ".dlg «Bổng lộc tháng hai» «Vì sao»"
+  ],
+  [
+   5519,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   6391,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   6393,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ]
+ ],
+ "_ckAt": 1795652977421,
+ "_ckB": 146,
+ "_nfp": 27,
+ "_kn": 1,
+ "_kb": 4,
+ "_mrY": 2,
+ "dumps": [
+  "/home/user/wt/out18/shots-coop-rt-U3b2-s16-host-k1/stuck-1-dump.json"
+ ]
+}

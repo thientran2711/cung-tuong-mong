@@ -1,0 +1,1 @@
+seg13 room WPXU (U3b-2): stack 512cfee6 rebuilt, harness 5edf09f6 + patch #13 (19535bcd). Fold host / iPad guest, seed 16. 2h real taps, reload buoi 30 both seats OK, reached buoi 146/147 (_mrY 2). 1 stuck per seat: guest on story scene 'Phu tuyen · Tan quan lap uy' (Chuong 2 Hoi 1/1); host on #coopfz. Both ended HARNESS at the 2h task limit. Not VALID (stuck>0).

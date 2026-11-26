@@ -1,0 +1,259 @@
+NAV guest 0s http://127.0.0.1:8081/index.html
+NAV host 0s http://127.0.0.1:8081/index.html
+CONSOLE host 3s error Failed to load resource: the server responded with a status of 429 (Too Many Requests)
+ROOM CODE WPXU
+CONSOLE guest 21s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 22s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE guest 29s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 31s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 31s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 31s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Tuyển chọn trước ngày phong» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body
+CONSOLE guest 41s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 41s error Failed to load resource: the server responded with a status of 404 (Not Found)
+DEAD BUTTON #kg82 «Tuyển chọn trước ngày phong» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE host 53s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 68s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 79s error Failed to load resource: the server responded with a status of 404 (File not found)
+BUG game tap on option «Y phục vượt phẩm · mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body
+CONSOLE host 81s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 83s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 85s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 85s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 86s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 86s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE host 91s error Failed to load resource: the server responded with a status of 404 (File not found)
+CONSOLE guest 92s error Failed to load resource: the server responded with a status of 404 (File not found)
+BUG ktut-no-target tutorial open with no tappable target card; tapped its own «Đã hiểu»
+CONSOLE host 110s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 110s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Chặn ngự giáKhó lườngTốnkhôngĐ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body
+BUG dead close button has no effect: .dlg «Tâm trạng · Đáp ứng Vu Vân Thường» «Lui»
+BUG game tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+CONSOLE guest 171s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 195s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 195s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Tranh sủngTùy duyênTốnkhôngĐượ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body
+CONSOLE host 204s error Failed to load resource: the server responded with a status of 404 (Not Found)
+DEAD BUTTON .dlg «Kính sự phòng» «?» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «sương đêm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+CONSOLE guest 334s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body
+BUG game tap on option «Cấm túc2 tháng» opened chip modal «Cấm túc 2 tháng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «Cấm túc2 tháng» opened chip modal «Cấm túc 2 tháng» (chip class b overlaps the card body; 2nd tap on the same card also opened a modal)
+DEAD BUTTON #kg82 «Trước khi ra tay» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body
+BUG game tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «ve kêu râm ran» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «Buổi trưa, còn 4 khắc» opened chip modal «trưa · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+CONSOLE host 581s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «giông tố» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+CONSOLE host 1110s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 1114s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 1126s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body
+BUG game tap on option «Bạc105Sức100/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body
+CONSOLE guest 1322s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 1369s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 1371s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 1371s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «đêm gió lớn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «Buổi tối, còn 2 khắc» opened chip modal «tối · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «đêm u ám» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «mồng 5: Tết Đoan ngọ» opened a hint popup (#kpop) — trigger class img sits on the card body
+BUG game tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body
+DEAD BUTTON #kg82 «Trước khi ra tay» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE host 1517s error Failed to load resource: the server responded with a status of 404 (Not Found)
+SCHEDULED RELOAD coop-rt-U3b2-s16-guest-k1 buổi 30
+NAV guest 1531s http://127.0.0.1:8081/index.html
+CONSOLE guest 1543s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 1543s error Failed to load resource: the server responded with a status of 404 (Not Found)
+SCHEDULED RELOAD coop-rt-U3b2-s16-host-k1 buổi 30
+NAV host 1554s http://127.0.0.1:8081/index.html
+CONSOLE host 1556s error Failed to load resource: the server responded with a status of 429 (Too Many Requests)
+CONSOLE guest 1597s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 1601s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 1618s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 1618s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 1629s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 1637s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «mưa rào» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+CONSOLE host 1689s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 1689s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Chu toàn lễ nghĩaRất vữngTốnBạ» opened a hint popup (#kpop) — trigger class span.kan sits on the card body
+BUG game tap on option «Bớt lễ nghĩaRất vữngTốnkhôngĐư» opened a hint popup (#kpop) — trigger class span.kan sits on the card body
+BUG game tap on option «Ghi tên dâng đàn (theo Cầm, Tà» opened a hint popup (#kpop) — trigger class span.kan sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE guest 1724s error Failed to load resource: the server responded with a status of 404 (Not Found)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «trời trong mát» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «chiều lộng gió» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+CONSOLE guest 1835s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «ngày 21: Hội Phượng» opened a hint popup (#kpop) — trigger class img sits on the card body
+CONSOLE guest 1867s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «nắng gắt» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «Bạc84Sức100/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)
+DEAD BUTTON #kg82 «Trước khi ra tay» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE host 1926s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 1929s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Lật thẻKhông có» opened chip modal «Lật thẻ: Không có» (chip class button.k3r.kasr overlaps the card body; 2nd tap on the same card also opened a modal)
+CP buổi 50 year 1 save 0 chars
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CP buổi 50 year 1 save 0 chars
+BUG game tap on option «trăng rằm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «ngày 15: Lễ Vu Lan» opened a hint popup (#kpop) — trigger class img sits on the card body
+BUG game tap on option «Tranh sủngKhó lườngTốnkhôngĐượ» opened a hint popup (#kpop) — trigger class span.kat sits on the card body
+DEAD BUTTON #kg82 «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class img sits on the card body
+BUG game tap on option «Lật thẻRất thấp» opened chip modal «Lật thẻ: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+CONSOLE host 2526s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 2529s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «trời thu trong» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «Có thaiRất thấp» opened chip modal «Có thai: Rất thấp» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class img sits on the card body
+BUG game tap on option «Tết Thất tịch» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE guest 2876s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 2877s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+CONSOLE host 3014s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 3015s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 3015s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG dead close button has no effect: .dlg «Tin báo» «Lui»
+BUG game tap on option «Đáp ứngTa» opened chip modal «Lật thẻ: Không có» (chip class small.knr-r.krt overlaps the card body; 2nd tap on the same card also opened a modal)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE host 3224s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+DEAD BUTTON page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE host 3337s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «ngày 15: Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class img sits on the card body
+BUG game tap on option «Thánh thọ Thái hậu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+STATUS coop-rt-U3b2-s16-host-k1 · buổi 97 · year 1 · rank 0 · bugs 33 · stuck 0 · dead buttons 23
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+STATUS coop-rt-U3b2-s16-guest-k1 · buổi 98 · year 1 · rank 0 · bugs 23 · stuck 0 · dead buttons 14
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE host 3659s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CP buổi 100 year 1 save 0 chars
+CP buổi 100 year 1 save 0 chars
+BUG game tap on option «chiều giá lạnh» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «Tiết Đông chí» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «Tâm trạngBình thản-3» opened chip modal «Tâm trạng · Ta» (chip class div#hud-mood.kstm overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «Quẻ Trung (Mưu kế)» opened chip modal «Quẻ Trung · Mưu kế» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+CONSOLE host 4235s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4280s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4321s error Failed to load resource: the server responded with a status of 404 (Not Found)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+NAV guest 4395s http://127.0.0.1:8081/index.html
+CONSOLE guest 4407s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4407s error Failed to load resource: the server responded with a status of 404 (Not Found)
+NAV host 4416s http://127.0.0.1:8081/index.html
+CONSOLE host 4419s error Failed to load resource: the server responded with a status of 429 (Too Many Requests)
+CONSOLE guest 4426s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4426s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4427s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4427s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Khổng Thải Vi: Đang làm việc» opened a hint popup (#kpop) — trigger class button.krailb.kctmf sits on the card body
+BUG game tap on option «Đêm Giao thừa» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body
+CONSOLE guest 4491s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4499s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4499s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4507s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4507s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG dead close button has no effect: .dlg «Tâm trạng · Thục phi Liêu Diệu Âm» «Lui»
+CONSOLE host 4525s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4527s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4535s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4535s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4536s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4551s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4551s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4592s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Buổi chiều, còn 0 khắc» opened chip modal «chiều · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «Tết Nguyên tiêu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body
+CONSOLE host 4765s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 4769s error Failed to load resource: the server responded with a status of 404 (Not Found)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+CONSOLE guest 4819s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 4819s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Số lần ân thưởng0» opened chip modal «Ân thưởng» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «Y dượcY dượcHối lộ người ở Thá» opened chip modal «Hối lộ người ở Thái y viện» (chip class button.ka.kart.kodw overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «Buổi chiều, còn 2 khắc» opened chip modal «chiều · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «Xét phẩm: thiếu 2» opened chip modal «Xét phẩm cuối tháng · Thường tại» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+DEAD BUTTON .dlg «Danh» «?» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «Buổi tối, còn 2 khắc» opened chip modal «tối · còn» (chip class span.k3l overlaps the card body; 2nd tap on the same card also opened a modal)
+BUG game tap on option «Học tập · Tài nghệHọc tập · Tà» opened chip modal «Cầm: các lối» (chip class button.ka.kart overlaps the card body; 2nd tap on the same card also opened a modal)
+CONSOLE guest 5216s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 5277s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class img sits on the card body
+BUG game tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+BUG game tap on option «Tâm trạngBình thản+15» opened chip modal «Tâm trạng · Ta» (chip class div#hud-mood.kstm overlaps the card body; 2nd tap on the same card also opened a modal)
+CONSOLE host 5480s error Failed to load resource: the server responded with a status of 404 (Not Found)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG game tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+DEAD BUTTON .dlg «Ghi chú» cover noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)
+BUG stuck no progress 15 min on #coopfz «»
+NAV host 6390s http://127.0.0.1:8081/index.html
+CONSOLE host 6401s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 6401s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 6409s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE host 6409s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG stuck no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»
+NAV guest 6411s http://127.0.0.1:8081/index.html
+CONSOLE guest 6426s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 6426s error Failed to load resource: the server responded with a status of 404 (Not Found)
+CONSOLE guest 6439s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «trời trong, sao sáng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body
+CONSOLE guest 6494s error Failed to load resource: the server responded with a status of 404 (Not Found)
+BUG game tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body
+PAGECLOSE guest 7185s
+SEAT LIFE DONE guest k1 HARNESS
+PAGECLOSE host 7185s
+SEAT LIFE DONE host k1 HARNESS
+browserContext.close: Target page, context or browser has been closed
+    at async /home/user/wt/rt/dev/test/robot-rt-coop.js:93:34 {
+  log: []
+}
