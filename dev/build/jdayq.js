@@ -101,7 +101,9 @@ function dqUnpark(){try{const k=DQ.park;DQ.park=null;if(!k||!k.length)return;for
   /* a gate's painter that ran while they were set aside saw an empty queue and stopped: arm it again (it still waits on the view / book) */
   if(dqQHidden()){if(Q[0]&&DQ.preQ&&!DQ.preQ.has(Q[0]))showModal();if(dqQHidden())dqArmModal()}}catch(e){console.error("dayq unpark",e)}}
 /* her cards first: the cards queued since her finger came down go in front of the cards that were waiting before it (order kept in both) */
-function dqMineFront(){try{const pre=DQ.preQ;if(!pre||!dqUi()||Q.length<2)return false;const mine=Q.filter(m=>!pre.has(m)),old=Q.filter(m=>pre.has(m));if(!mine.length||!old.length||Q.every((m,i)=>m===(i<mine.length?mine[i]:old[i-mine.length])))return false;
+function dqMineFront(){try{const pre=DQ.preQ;if(!pre||!dqUi()||Q.length<2)return false;
+  /* a card PLAYING in the person view / stage encounter (jdfv in-scene dialog, centre modal hidden on purpose — OB-OAN) keeps its place: what she opens there shows in that scene after it, never as a second centre card over it */
+  if(dqPlaying()||(window.DF&&DF.F&&Q[0]&&DF.encM===Q[0]))return false;const mine=Q.filter(m=>!pre.has(m)),old=Q.filter(m=>pre.has(m));if(!mine.length||!old.length||Q.every((m,i)=>m===(i<mine.length?mine[i]:old[i-mine.length])))return false;
   /* an ending / death card already waiting keeps its place (nothing is played over the end of her life) */
   if(dqIsEnd(Q[0])&&pre.has(Q[0]))return false;Q.length=0;Q.push(...mine,...old);DQ.stat.mineFront=(DQ.stat.mineFront||0)+1;return true}catch(e){console.error("dayq front",e);return false}}
 function dqTapOpen(){return !!(DQ.preQ&&Date.now()<=DQ.tw)}
