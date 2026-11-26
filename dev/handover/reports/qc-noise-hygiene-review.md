@@ -19,3 +19,34 @@ PRIORITY #1 CHECK: OD 26/11 ~06:50Z (A)+(D) (read verbatim) + FOREMAN_F_STATUS L
 - Q1: the quickcheck lanes see ~3–4 game days with fixed seeds; LIVE goes over budget on 6 / 177 days → the hook will usually PASS a flooded build, and the day a lane does meet a flood day it turns go-live red for an unrelated landing. The nightly table is the real gate; MAIN should decide the landing order the worker gives (NEWS-SIEVE-2 / N2 chip rule first) before hook 96 blocks go-live.
 - Q2: branch base = 6b5d3d05; LIVE is now 3af7896e → it needs a stack-land / rebuild of index.html + sw.js + assets.json (built files only; no source conflict expected: 3af changes are mghelp-dress files).
 - Q3: «leak» = 410 frozen static faults — mostly dev comments / ids in strings; fine as frozen debt, but the list only shrinks if someone owns it (no owner named).
+
+# RE-REVIEW qc-noise-hygiene e5c39877 (+ report eeb19123) — BIG REVIEWER #10 (session_01UV1Szhak9NE4akDTPc45mF) for F #22, 26/11 ~13:30Z
+PRIORITY #1 CHECK: OD 26/11 ~06:50Z (A)+(D) | main none (no noise gate on origin/main 1dcb373e) | review/qc-noise-hygiene e5c39877, review/robot-realtap 0e0ebe29 (runners' harness, used here), BIG #9 FAIL 81c148b0 (above) | claims QC-NOISE-HYGIENE #2 session_01UV1SziHz797K3qQPHWASGq.
+## VERDICT: FAIL qc-noise-hygiene e5c39877 (2 blocking items; BIG #9 FAIL 1 is FIXED)
+Reviewer merge ready for reuse: review/qc-noise-hygiene-r10 acf94a95 = e5c39877 + origin/main 1dcb373e (conflicts only index.html / sw.js / assets.json → rebuilt with build_site.sh; CHANGE.txt = main's LC21 line). Start the fix from it.
+
+### BIG #9 FAIL 1 — FIXED (probe first, independent of the worker's self-test)
+- Probe (mine, scratch): sampler installed as an INIT SCRIPT exactly as noise-preload.js does, REAL TIME 30 s at 350 ms, seeded life 2 buổi in; one expired S.tb.K + one due S.tb.W item re-planted every 2 s; all 8135 game globals wrapped in counting Proxies that count only calls made INSIDE the sampler's interval callback; S JSON compared before/after every tick.
+  - new sampler, idle: 95 ticks · game calls = wk 85 + kitNoticeList 85 (pure getters) · S changed by a tick 0 · Math.random in ticks 0.
+  - new sampler, 4 buổi turns (nextBuoi) during the 30 s: 87 ticks · wk 78 + kitNoticeList 78 · S changed 0.
+  - CONTROL old 81c148b0 sampler, same probe: tinBaoList 86, adHapNow 86, knTb 258, knEnd 29, kLine 29, knCarryTick 14 … · S changed 5× (expired line rewritten) → probe sensitive.
+- dev/test/noise-sampler-pure.js: 9/9 PASS (branch + merged build); NZP_SAMPLER=<old> → 5 FAIL. Hook 96 step 0 + nightly ✓. Write-scan of noise-sampler.js: no assignment / push / splice on S, Q, BAL, KN, NT ✓.
+- e5c39877: known family 3 widened to «nô tỳ tận mắt thấy ở …» = same builder (jagknow.js:545 `what` → knBao → baoL, jagknow.js:118) ✓.
+- A/B re-measure (eeb19123): fixed sampler, harness 2df8f5fa, 42 + 42 days; budgets = BAL.noise (10/6/2/4/10/8) ✓; BAL.noise read only by QC (LAW 4) ✓; old 177-day tables dropped ✓.
+
+### FAIL 1 — hook 96 is RED on the branch's own tip with the runners' harness (runtime text hygiene: 14 NEW)
+- Run: merged build acf94a95, `RT_PIN=0 RT_NOSHOT=1 RT_HARNESS_REF=0e0ebe29 bash dev/tools/quickcheck.d/96-noise-hygiene.sh` (default lanes fold:sens:11 + ipad:sens:21) → sampler-pure PASS · static PASS · vp-doubled PASS · noise-day FAIL · **TEXT-HYGIENE FAIL 14** (rc 1). The worker's «runtime PASS» was on harness 2df8f5fa; the lanes on 0e0ebe29 reach other screens. All 14 come from LIVE code the branch does not touch (branch build diff = j68i, j84, jbal2, joi only) — not regressions, but they are the SAME families the branch fixes / freezes, so LAW 11 (whole family) applies:
+  a. dup rank «Sai Tuyết Liên đi dò la: Quý nhân Quý nhân Khổng Nhu Tắc.» (maid spy result, j78 / j2 maidSpy) = the joi «Hoàng thượng Hoàng thượng» family: a rank word printed before a name builder that already carries the rank. Scan EVERY `<rank> ${who()}` site (not only «Hoàng thượng ${emp…}») and fix.
+  b. family 3 incomplete: «Bẩm tiểu chủ, chuyện buổi trước: nô tỳ nghe Lan Tâm kể: …» (111>110) = baoL.cool (jagknow.js:118); the known regex covers warm + eyewitness only → cover the builder (all baoL warm / cool / cold forms × both `what` forms).
+  c. «·» chains in the stipend list: kitReward body «40 bạc·1 súc vải bông · 1 gói trà … · 3 cây nến mỡ dê · mùa đông …» (8–12×«·», and no space after «bạc·») + result «Bổng lộc tháng ba: +55 bạc · 1 súc … · trả công 1 kẻ hầu: −3 bạc = +52 bạc.» (jstip.js:123 stipReveal) = the j68i «Lý do: A · B · C» family the branch fixed with commas → same fix (or freeze with owner + why if the chest body is a deliberate list).
+  d. «= +52 bạc» (glue «=») in that same result line → wording fix (e.g. «còn lại +52 bạc») or a reasoned rule exception.
+- Fix: whole families a–d (or frozen entries with owner + why), then prove: hook 96 on the merged build with RT_HARNESS_REF=0e0ebe29 (the harness the runners use) → runtime 0 NEW, plus one extra seed per device (e.g. fold:cautious:12, ipad:cautious:22) runtime 0 NEW.
+
+### FAIL 2 — hook 96 must not turn go-live red for families owned elsewhere (noise-day step)
+- Same run: «NOISE-DAY FAIL · over budget: tinbao 18>10 on 1 day · chip 8>6 on 2 days · resRowsMax 16>8 on 1 day» (lane nz-fold-sens-11 day 3: «Thu Sương báo: Chung Tú cung có chuyện» … ; result card «Trong cung vừa qua · 16» rows). Worker run: «chip 9>6». So the smoke WILL fail unrelated landings until N1 / N2 land (N1 is NOT gone: 18 / day seen here even though the 42-day A/B saw 0 days over).
+- Fix (F's question «advisory or N2 first» — my judgement: advisory): in hook 96 the noise-day step is ADVISORY by default (prints its FAIL line + «noise-day ADVISORY (QC_NOISE_STRICT=1 makes it blocking)», rc unchanged); QC_NOISE_STRICT=1 → blocking. sampler-pure / static / vp-doubled / runtime stay blocking (runtime must be green after FAIL 1). Nightly «noise-day» stays the real budget gate (blocking there). FOR MAIN: set QC_NOISE_STRICT=1 the day N1 + N2 land.
+  - Weighing: gain = the clean gates + wording fixes go live; go-live not blocked by NEWS-SIEVE-2 / kit-keeper families. Risk = a NEW flood lands without blocking go-live — possible, middle, caught by the next nightly table. **Gain is bigger**: the smoke sees ~4 days and is not a budget measure (BIG #9 Q1).
+- Report: add to «Noise families over budget» N4 = result-card rows «Trong cung vừa qua · 16» (jaudit.js, budget 8) with owner, and the smoke evidence N1 18 / day on harness 0e0ebe29.
+
+### OK
+LAW 4 (BAL.noise one core) ✓ · LAW 6(a) sampler no longer changes the life ✓ · LAW 7 wording fixes cổ trang, no % ✓ · LAW 12 both devices (Fold + iPad lanes; main's scroll-cue-loop + observer-leak PASS 755x1000 + 1180x820 on the merged build) ✓ · LAW 9 no UI change ✓.
