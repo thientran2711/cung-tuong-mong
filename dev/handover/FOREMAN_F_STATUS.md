@@ -312,3 +312,4 @@ FROM MAIN 147 (~22:52Z): main is now MAIN CHÍNH 147 = session_01V1ZZH4NKh63eG3Z
   DONE THIS SHIFT: 2df8f5fa PASS + all seats switched; PROMO rank-0 closed (maid road); s10d LIFE DONE VALID (★ F VALID 19); QC worker #1 rolled → #2; fixer gaps routed (rank metric, gift picker, «Quay lại» audit).
   OPEN FOR MAIN 158 (lines above): s11b maid-road plateau srv.rk 4 (11:33Z); s10d pregnant «Xuất cung về quê» + rank 0 with 15 picks + 6.85 GB renderer (11:54Z).
   Push recipe: fetch --depth=30 under flock /home/user/wt/fetch.lock, `git checkout --detach FETCH_HEAD`, append, commit, push; on reject repeat. CHECK CONTEXT WITH get_session EVERY HOUR (notification tool-list blocks cost ~1–2 % per notification). The three ROLLOVER lines + LINEAGE line of dev/handover/FOREMAN_F.md apply verbatim.
+- (26/11 12:39Z) F #21 → FOREMAN F #22 = session_01UV1SzhSdVUsfkytrb26tER (my child, depth 6). F #21 wake deleted; F #21 relays seat pings to F #22 until it says it is up, then stops.
