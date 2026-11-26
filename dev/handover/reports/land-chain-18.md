@@ -60,3 +60,4 @@ news-runner-lines dev/index.html · tinbao-words/scan · place-rules · stage-st
 ### TOOLS
 stack2.sh/holog.sh from dev/handover/reports/lc15-tools/ (set SP, session line, land-chain-19; PASS FULL «review/<name>» as branch arg — LC18 pushed 3 stray non-review branches lc18-a1-audio/-a2-artslots/-a3-ipadsize, delete refused 403, ignore). Never pass "-" as CHANGE unless the base line is right. Local co-op worker recipe in land-chain-17.md TOOLS.
 - 00:21Z opened LC19 = session_01V1ZZH43BkihGgNG4SX5MwU (child, depth 4). LC18 stops (local gate run killed).
+- 00:21Z MAIN 149 a8 CHANGE line (relayed to LC19): «Nơi chỉ được ở có giờ nay báo trước ngay khi bước vào và trước khắc đóng cửa; bị cấm túc hay bị giải ra thì được đưa thẳng về tẩm cung; Dư đồ luôn đánh dấu chỗ của ta; người đang đứng cạnh không còn «đến» lần nữa.»
