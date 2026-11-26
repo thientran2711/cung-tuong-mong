@@ -163,6 +163,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover2-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover2-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-lover5",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 1559366944,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "89f5b956 (resumed from d2e03d80)"
+   },
+   "ending": "Công chúa ở lại cố quốc (Hòa ước «Xin để muội muội đi thay», Rất vững)",
+   "age": 19,
+   "buoi": 123,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover5-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover5-moments.md"
   }
  ],
  "parked": [
