@@ -43,6 +43,9 @@ const PAGE=process.argv[2]||'index.html';
   /* (b') ghét: a fall of liking is one bounded step per cause, capped per day */
   clr(e);e.opa={};e.rel=0;S.bqN++;affAdd(e,S,-40);ok('G1 a fall of liking is at most BAL.oanPace.ghet.day a day ('+P.ghet.day+')',aff(e,S)===-P.ghet.day,aff(e,S));
   const a1=aff(e,S);affAdd(e,S,20);ok('G2 a rise of liking is never capped',aff(e,S)===a1+Math.round(20*persF(e,'trust',1)),[a1,aff(e,S)]);
+  /* strip plot gate (review/oan-pace-2) */
+  {const v=e;const keep=[v.oan,v.ghen,v.rel];v.oan=0;v.ghen=0;v.rel=-100;const A=tyEnemies(S).includes(v);v.oan=0;v.ghen=0;v.rel=-10;const B2=tyEnemies(S).includes(v);[v.oan,v.ghen,v.rel]=keep;
+   ok('T1 the strip plot (jty tyEnemies) needs the grudge heat BAL.oanPace.act',!B2,[A,B2])}
   /* GHÉT fade (review/oan-pace-2) */
   {const F=P.ghet.fade;e.rel=-30;e.agw={me:wk()};e.agc={};ghetCool();const r1=e.rel;e.rel=-30;e.agw={me:wk()-20};e.agc={};ghetCool();const r2=e.rel;e.rel=-80;e.agw={me:wk()};e.agc={};ghetCool();const r3=e.rel+80;
    ok('G3 a dislike toward her eases each day, faster when left alone, deep slower (BAL.oanPace.ghet.fade)',r1>-30&&r1<=0&&r2-(-30)>r1-(-30)&&r3>=0,[r1,r2,r3]);
