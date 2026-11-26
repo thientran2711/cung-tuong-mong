@@ -427,9 +427,9 @@
   },
   {
    "rule": "long",
-   "re": "giờ nô tỳ mới kịp bẩm",
+   "re": "(giờ nô tỳ mới kịp bẩm|nô tỳ tận mắt thấy ở)",
    "surf": "tinbao",
-   "why": "late servant report «Bẩm …, giờ nô tỳ mới kịp bẩm: lúc trước nô tỳ nghe X kể: …» (jagknow knBao late) — two colons + long. Owner: NEWS-SIEVE-2"
+   "why": "late servant report «Bẩm …, giờ nô tỳ mới kịp bẩm: lúc trước nô tỳ nghe X kể: …» (jagknow knBao late) — two colons + long; same builder, eyewitness form «Bẩm …, nô tỳ tận mắt thấy ở <nơi>: …» (jagknow.js:545 knBao fr=saw) 111+. Owner: NEWS-SIEVE-2"
   },
   {
    "rule": "long",
