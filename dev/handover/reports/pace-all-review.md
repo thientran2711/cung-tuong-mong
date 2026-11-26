@@ -49,3 +49,6 @@ Fix, either: (a) MAIN 156 records an OD overwrite of L353 with her OK (show her:
 
 ## To the worker (fix list, in order)
 1. B1: `oanCool` skip `v.coop`; test. 2. B2: wait for MAIN 156 (a) or restore Q5 A gains (b). 3. S1, S3, S4, S2 (family table). 4. N1–N6 as cheap. 5. Re-merge LIVE 1dcb373e, rebuild, rerun pace-all ×3, coop-e2e, quickcheck → delta review.
+
+## ADDENDUM 13:15Z — head moved to 3942eafe (FF from LIVE aa37de21)
+Checked again at 3942eafe: 7ca30095 + 3942eafe are LIVE merges (built files + CHANGE line; the jtwoway TW apol edit is still there); a9d6be0b makes pace-all.js deterministic (C5/C9/B9) → **S1 fixed, S5 fixed (FF from LIVE aa37de21)**. **B1 unchanged** (j28 oanCool still has no `v.coop` skip) and **B2 unchanged** (BAL.art.gain [1,1.25,1.25,1.25,1.25] vs OD:L353 Q5 A). Verdict for 3942eafe: **FAIL — 2 BLOCKING** (B1, B2); S2–S4 and the NITs still stand.
