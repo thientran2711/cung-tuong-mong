@@ -473,6 +473,9 @@ function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector("
  else{d.insertAdjacentHTML("afterbegin",html);d.firstElementChild.classList.add("kxabs")}
  d.querySelector(".kit-x[data-kitx=kgback]").addEventListener("click",e=>{e.stopPropagation();e.preventDefault();kg82Back()})}catch(e){console.error("kg82BackX",e)}}
 function kg82Back(){if(!kg82El())return;
+ /* E95 (owner OD 26/11 ~01:25Z «bấm vào hướng dẫn … bấm quay lại thì phần thi 0 điểm luôn»): the ✕ «Quay lại» during «Hướng dẫn» = «Về luật chơi» — the guided round
+    ends and the SAME rules screen comes back unchanged (nothing played, nothing scored, nothing charged); it never gives the round up. */
+ if(KG82.tut&&typeof KG82.tut.back==="function"){KG82.tut.back();return}
  if(typeof KG82.backPre==="function"&&KG82.phase!=="play"&&KG82.phase!=="result"){const f=KG82.backPre;KG82.backPre=null;KG82.payOnGo=null;kg82Close();try{f()}catch(e){console.error(e)}
   /* jaudit (b)/(c): the cost it holds pending for this game is dropped — a game closed unplayed costs nothing — so the next act is not blocked */
   window.__aaPend=null;window.__aaTitle=null;try{if(S&&S.mg&&S.mg.cost)S.mg=null;save();render()}catch(e){}return}
@@ -645,7 +648,7 @@ function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);cons
  const env={kind:s.kind,lv:ease,tut:1,v:s.v,zw:s.zw,
   hud:o=>{if(!o||o.round==null)return;const m=/(\d+)\s*\/\s*(\d+)/.exec(String(o.round));if(!m)return;const a=+m[1],b=+m[2];if(b>0&&a-1>=Math.max(1,Math.ceil(b*T.part)))setTimeout(finish,500)},
   end:()=>finish()};
- const TU={stop:()=>cleanup()};KG82.tut=TU;KG82.run={stop:()=>cleanup()};/* ✕ / Esc while the guided round runs: kg82Close stops it and nothing is kept */
+ const TU={stop:()=>cleanup(),back:()=>{over=true;restore(false)},el:d};/* E95: TU.back = «Về luật chơi» (kg82Back / kitModalClose / Esc / outside tap during the guided round) */KG82.tut=TU;KG82.run={stop:()=>cleanup()};/* ✕ / Esc while the guided round runs: kg82Close stops it and nothing is kept */
  back.querySelector("button").onclick=()=>{over=true;restore(false)};
  guard=setTimeout(finish,T.ms);
  const loop=now=>{if(dead)return;let p=null,h=null;try{h=KG82.hint?KG82.hint():null;p=h?null:kgTutPt(KG82.peek&&KG82.peek(),now)}catch(e){}
@@ -659,6 +662,15 @@ function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);cons
  if(s.kind&&KG82_KIND[s.kind])kg82Preload(s.kind).then(go);else go();
  KG82.tutSteps=()=>steps}
 function kgTutDrop(){if(KG82.tut&&KG82.tut.stop){try{KG82.tut.stop()}catch(e){}}}/* a screen that leaves the rules screen without «Sẵn sàng» (quick roll, redraw, ✕) drops a running guided round */
+/* E95 (owner OD 26/11 ~01:25Z, whole family): while «Hướng dẫn» runs, EVERY kit ✕ of the layer that holds the game — the game frame's «Quay lại», a dialog's
+   panel ✕ (kitXAdd, own close functions included), #mclose — means «Về luật chơi»: caught first (capture), the guided round stops, the same rules screen comes
+   back, nothing played / scored / charged / closed. Esc and a tap outside reach the same TU.back through kitModalClose (jk4). Test: node dev/test/mghelp-back.js */
+document.addEventListener("click",e=>{const t=KG82.tut;if(!t||typeof t.back!=="function"||!t.el||!t.el.isConnected)return;const x=e.target&&e.target.closest&&e.target.closest(".kit-x,#mclose");if(!x)return;
+ const L=x.closest("#modal,#ov")||x.closest(".kgame");if(!L||!(L===t.el||L.contains(t.el)))return;e.preventDefault();e.stopImmediatePropagation();t.back()},true);
+/* the game frame (#ov) during «Hướng dẫn»: Esc and a tap on the dimmed ground outside the frame = «Về luật chơi» too (a dialog's Esc / outside go through kitModalClose) */
+document.addEventListener("keydown",e=>{const t=KG82.tut;if(e.key!=="Escape"||!t||typeof t.back!=="function"||!t.el||!t.el.isConnected)return;const ov=$("ov");if(!ov||ov.hidden||!ov.contains(t.el))return;
+ const M=document.getElementById("modal");if(M&&!M.hidden)return;e.preventDefault();e.stopImmediatePropagation();t.back()},true);
+document.addEventListener("click",e=>{const t=KG82.tut;if(!t||typeof t.back!=="function"||!t.el||!t.el.isConnected)return;const ov=$("ov");if(!ov||e.target!==ov||!ov.contains(t.el))return;e.preventDefault();e.stopImmediatePropagation();t.back()},true);
 window.kgReady=kgReady;window.kgTut=kgTut;window.kgTutDrop=kgTutDrop;window.KG82_DEMO=KG82_DEMO;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7.2",title:"kg82Guide · dòng dẫn một câu trên mọi màn chơi (chờ / chạm ngay / nguy)",where:"mọi trò tài nghệ có một câu dẫn theo trạng thái trên khung vẽ (Bắn cung, Tát, Né, Nấu, Hái sen, Đối, Hoa điền, Thái hậu …): viên thuốc kem viền màu — nâu = chờ, xanh = chạm ngay, đỏ = nguy; chữ tự co cho vừa. Màu lấy từ token, không trò nào tự gõ màu",
  html:()=>{requestAnimationFrame(()=>{try{document.querySelectorAll("canvas[data-kgguide-demo]").forEach(c=>{const W=c.width=Math.min(520,c.parentNode.clientWidth||520),H=c.height=150,g=c.getContext("2d");[["Chờ mũi ngắm vào giữa hồng tâm, rồi chạm","wait"],["Chạm ngay!","go"],["Đòn đang tới · tránh ngay","bad"]].forEach(([t,k],i)=>kg82Guide(g,t,W/2,26+i*44,k,14,W-16))})}catch(e){}});return `<div class="kgbox"><canvas data-kgguide-demo style="width:100%;max-width:520px;display:block;margin:0 auto"></canvas></div>`}})}catch(e){}
