@@ -100,3 +100,35 @@ Next: (1) quickcheck + coop-e2e on 028bcd08; (2) real-tap check of Tin báo over
 5. k5 ACTS gate: same place gate for person-card / Giao tình ACTS at home (a palace Thái y «Gặp riêng Thái y Diệp Cảnh Hoài» showed). He is her thanh mai (j96); MAIN wants the acts list scanned + tested under placeCtx (not only events/news).
 6. Dưỡng Tú viện (tú nữ before phân cung, made a real place by OB-PHU2 session_01V1ZZH1JSCbgQLDudafVQP3): add a placeCtx context with fitting words (e.g. head-count «Tú nữ cùng khóa» / «Ma ma dạy» instead of Cung nhân / Chí tôn) in ROAD8_LAB; coordinate with OB-PHU2.
 7. FULL videos Fold 755x1000 + iPad 1180x820 (NEW names): a home life ~20 buổi with no palace visitors/news (k3/k9/k10) + the wording + Dưỡng Tú viện; then quickcheck + coop-e2e on the final sha; then LAND READY to MAIN 151.
+
+## PART 3 — OB-NGOAICUNG-2 (successor, MAIN 151 order 26/11)
+PRIORITY #1 CHECK ('road8TabNames|KCTABS|Dưỡng Tú|Hoàng tự'): OD 3 | ledger 0 | claims 0 | main 15 | review/* 0 | archive 0
+→ OD:L2108 (21/11 ~03:15Z) «Mình vẫn giữ đủ 8 cái tab … mỗi một cái tab mình để y chang luôn … không có bị lạ khi mà họ thay đổi thân phận» governs;
+reused: ROAD8 / ROAD8_LAB / placeCtx (jroad8), review/ob-phu jmapz MAPZ_DTV (place key dtv), jrcv RCVK (the one NPC-ask entry), scan/video scripts.
+
+1. **Bottom-tab rename REVERTED** (law 14/16): road8TabNames + its render hook deleted; ROAD8.kc rows back to 45daa796: court = KCTABS.kid (her letters,
+   as a sub-tab inside Hậu cung), kid = honest empty line «Hoàng tự — Ngươi chưa vào cung, chưa có con.». The 8 bottom tabs read Hành sự · Dư đồ ·
+   Hậu cung · Giao tình · Hoàng tự · Tư trang · Tài nghệ · Mệnh truyện on EVERY road (home included); content inside fits her station.
+   scan.js: the old strict «tabs» surface is replaced by **tabsRenamed** (FAIL when a home tab shows a KCTABS name instead of its own) — the reverse rule.
+2. **Dưỡng Tú viện words**: ROAD8_LAB row `dtv` (cn «Tú nữ cùng khóa», ct «Ma ma giáo dưỡng», fame3, no consort teacher), placeCtx → "dtv" when
+   she is still on the home road (isKc) and stands at place dtv. NOTE (honest): in today's game no state puts HER at Dưỡng Tú viện as a tú nữ —
+   on review/ob-phu dtv is a palace place she may visit, and the home tuyển tú is a dialog chain (jkc S.kc.tt) while she is at home; the cn/ct boxes
+   count HER household / the people above HER, not the people of a place. So the row is in place but not reached until such a state exists.
+   OB-PHU2 (session_01V1ZZH1JSCbgQLDudafVQP3) is INACTIVE (send_message refused) → MAIN to decide whether a tú-nữ lodging state is wanted (law 16/18).
+3. **Thôn nữ has no personal maid** (MAIN 150, law 6): S.maid = null on the cnv home road (kc2Init + render + old saves); the palace sim leaves her
+   out of consorts() / maidMonthP at home so no maid is re-made; HUD maid chip guarded (j19). Head-count = «3 Gia đình» only. Entering the palace
+   (cung nữ placement) tested: no maid, 6 buổi, no errors; a later consort rank gets her palace maid from the existing lazy maker.
+4. **k5 ACTS family**: scan collects every home card + Giao tình naming a palace person (her family + thanh mai excepted; sending letters / gifts INTO
+   the palace is her own act and kept by design) → 0 on 5 roads × 600 steps. Thái y Diệp Cảnh Hoài as thanh mai = his own office (kept, MAIN 151).
+5. **NEW leak found in the full-life video (k3/k9 family)**: home «Nghỉ ngơi» result card «BẠI · Một vị Phi sai người sang thách đấu ta.» —
+   palace NPC asks (jrcv rcvAsk, RCVK: thách đấu / nhờ / kết giao …) still targeted her at home. Fix at the ONE entry: rcvAsk + PEND.rcvAsk drop an
+   ask from a palace person (consort, palace servant, emperor, Thái hậu) while road8()==="kc"; journal pattern «sai người sang … ngươi» in
+   PLACE_LOG_DROP.kc. scan.js counts every ask reaching her at home (strict «asks»): 0 on 5 roads × 600 steps.
+6. **k10 Tin báo**: the stay filler «… vẫn ở Khuê phòng. Không gặp ai. / Ở đây có N người.» reached the iPad feed under a kind other than «close» →
+   placeNoteOk drops it whatever its kind. Videos: Tin báo empty after 20 buổi on Fold and iPad.
+7. **dev/test/outside/route.js fixed** (stale): time runs in buổi now → the second leg moves time fast; it closes the Phúc tuyển podium (kpodov held the
+   turn via jdayq) and a finished game's kit ✕. --origin=tt: 4/4 PASS (was FAIL «did not enter the palace» on LIVE too).
+
+Scan (node dev/test/ob-ngoaicung/scan.js <url> out.json --play=600, 5 home roads, iPad): SCAN PASS — head-count tt/td «1 Người hầu · 3 Trưởng bối»,
+cnv «3 Gia đình», nc/bd «1 Người hầu · 3 Vương tộc»; tabsRenamed 0; acts 0; asks 0; dialogs with palace words only the home selection pool
+(Điện tuyển, Lệnh tuyển cung nữ — by design); page errors 0.

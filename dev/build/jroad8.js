@@ -41,13 +41,13 @@ const ROAD8={
    isKc) · kc:dan = thôn nữ at home (cnv) · kc:nc = a foreign princess at her own court before the hòa thân (nc / bd / pf). A context falls back
    kc:x -> kc -> "" word by word. Keys: cn / ct = the two stage head-count groups (her household / the people above her) · maid = her personal
    maid's title (kitMaidTitle; no palace rank like «tam đẳng» outside) · sv_maid / sv_eunuch = the role word of other servants of her household. */
-const ROAD8_LAB={"":{cn:"Cung nhân",ct:"Chí tôn",t_mus:"Nhạc sư Giáo phường",t_craft:"Ma ma Thượng công cục",t_rite:"Nữ quan Thượng nghi cục",t_vir:"Ma ma giáo tập",t_fee:"nữ quan",tch_cons:"1"},srv:{cn:"Đồng liêu"},
- kc:{cn:"Người hầu",ct:"Trưởng bối",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",
+const ROAD8_LAB={"":{aa_t:"Trong cung vừa qua",cn:"Cung nhân",ct:"Chí tôn",t_mus:"Nhạc sư Giáo phường",t_craft:"Ma ma Thượng công cục",t_rite:"Nữ quan Thượng nghi cục",t_vir:"Ma ma giáo tập",t_fee:"nữ quan",tch_cons:"1"},srv:{cn:"Đồng liêu"},
+ kc:{aa_t:"Trong phủ vừa qua",cn:"Người hầu",ct:"Trưởng bối",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",
   /* teachers she can have at home (no palace office, no consort): t_mus = music / dance, t_craft = needlework / cooking, t_rite = letters / rites, t_vir = Tứ đức;
      tch_cons = 0: no consort teaches her before she is in the palace (law 6: she cannot reach them) */
   fame3:"Cả phủ nghe danh.",t_mus:"Nhạc sư",t_craft:"Ma ma trong phủ",t_rite:"Nữ sư",t_vir:"Nữ sư",t_fee:"nữ sư",tch_cons:"0"},
- "kc:dan":{fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},dtv:{cn:"Tú nữ cùng khóa",ct:"Ma ma giáo dưỡng",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",fame3:"Cả Dưỡng Tú viện nghe danh.",tch_cons:"0"},
- "kc:nc":{fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
+ "kc:dan":{aa_t:"Ở nhà vừa qua",fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},dtv:{aa_t:"Ở Dưỡng Tú viện vừa qua",cn:"Tú nữ cùng khóa",ct:"Ma ma giáo dưỡng",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",fame3:"Cả Dưỡng Tú viện nghe danh.",tch_cons:"0"},
+ "kc:nc":{aa_t:"Trong cung cố quốc vừa qua",fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
 /* DƯỠNG TÚ VIỆN (MAIN 150/151 order; place key dtv = review/ob-phu jmapz MAPZ_DTV, tú nữ lodging): a girl who lodges there as a tú nữ before phân cung
    (still on her home road, isKc, standing at dtv) is no palace woman and has no household there: cn = the tú nữ of her intake, ct = the ma ma who teach them. */
 function placeCtx(){const r=road8();if(r==="kc"){try{if(S&&S.place==="dtv")return "dtv"}catch(e){}}if(r!=="kc")return r;let d="";try{d=typeof kc2D==="function"?kc2D():(S.kc&&S.kc.kd)||""}catch(e){}
@@ -168,3 +168,11 @@ function placePalP(p){try{if(!p||p===S)return false;if(p==="emp"||p==="th"||p===
 window.placePalP=placePalP;
 (function(){if(typeof rcvAsk==="function"){const a0=rcvAsk;rcvAsk=function(k,p,t){if(t===S&&road8()==="kc"&&placePalP(p))return"";return a0.apply(this,arguments)};window.rcvAsk=rcvAsk}
  if(typeof PEND==="object"&&PEND.rcvAsk){const q0=PEND.rcvAsk;PEND.rcvAsk=function(pp){try{if(road8()==="kc"&&placePalP(byKey(pp.a)))return null}catch(e){}return q0.apply(this,arguments)}}})();
+/* «TIME PASSED» CARD AT HOME (jaudit aaNote → resultShow "Trong cung vừa qua"; OB-NGOAICUNG-2 full-life video, thôn nữ Fold: «KẾT QUẢ · Trong cung vừa qua …
+   Hoàng hậu …: ghen +8, Quý phi …, một vị Phi …») — at home the card is titled by place (ROAD8_LAB aa_t) and shows only HER own numbers: the palace
+   people's feelings drifting in the palace world are not news that reaches her (law 6; placeNoteOk / placeEvOk family). */
+/* the same for EVERY result card at home (a home act that spends khắc lets the palace world run: its drift is not hers to see), except the person her
+   own act names in its title (a gift / letter she sends into the palace: «Gửi quà vào cung cho X») */
+(function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(t,b){try{if(road8()==="kc"){if(t==="Trong cung vừa qua")t=placeW("aa_t")||t;
+ if(b&&b.rel&&typeof relSnap==="function"){const now=relSnap(),rel={},T=String(t||"");for(const v of (typeof rivals!=="undefined"&&rivals)||[]){if(!v||!v.id)continue;
+  rel[v.id]=v.name&&T.includes(v.name)&&b.rel[v.id]?b.rel[v.id]:now[v.id]}b=Object.assign({},b,{rel})}}}catch(e){}return r0.apply(this,[t,b].concat([].slice.call(arguments,2)))};window.resultShow=resultShow})();
