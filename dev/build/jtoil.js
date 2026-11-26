@@ -327,9 +327,14 @@ function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82
  if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}try{const por=toilPor(),im=new Image();im.decoding="async";im.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;if(im.decode)im.decode().catch(()=>0)}catch(e){}/* warm her face (decode) while she reads the rules / picks the dress */
  TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilBackX();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilRules()}
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
-const TOIL_SL=[["tram","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["shoe","Giày","giayhoa"]];
+/* DRESS-FIX (owner OD 26/11 ~18:50Z (2)(3)): + «Hoa điền» = its own slot, picked for the day here (not stuck to the makeup); Túi thơm merged into «Đeo eo» (j8 wearGrp) */
+const TOIL_SL=[["tram","Cài tóc","tramngoc"],["hd","Hoa điền",""],["ear","Hoa tai","hoatai"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["shoe","Giày","giayhoa"]];
+/* the hoa điền of the day (TOIL.st.hdk: a key she owns, "" = none); starts as the one of her last sitting while she still owns it */
+function toilHdK(){const st=TOIL.st;if(!st)return"";if(st.hdk==null){let k="";try{const r=S.toilette&&S.toilette.hd;if(r&&r.k&&typeof hdOwned==="function"){const m=hdMap(r.k);if(hdOwned(S).some(e=>e.k===m))k=m}}catch(e){}st.hdk=k}return st.hdk}
+function toilHdGhost(){try{const w=WD_ITEMS.hoadien_bac||Object.values(WD_ITEMS).find(x=>x.sl==="hd");return w?w.icon:""}catch(e){return""}}
 function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(w.k),tip:w.n}:null}
- const e=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);if(!e)return null;let a=null;try{a=itemArt(e.k)}catch(x){}return{src:a?a.src:keqArt(e.k),name:itm(e.k).n,grade:a?a.grade|0:0,lux:luxVal(e.k),tip:itm(e.k).n}}
+ if(sl==="hd"){const k=toilHdK(),w=k&&WD_ITEMS[k];return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(k),tip:w.n}:null}
+ const e=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===sl);if(!e)return null;let a=null;try{a=itemArt(e.k)}catch(x){}return{src:a?a.src:keqArt(e.k),name:itm(e.k).n,grade:a?a.grade|0:0,lux:luxVal(e.k),tip:itm(e.k).n}}
 /* E95 (owner OD 26/11 ~01:25Z «bấm chọn mà không thấy mặc», whole family = every "her figure at the dress's tier" picture: dress preview kitDressFigSrc,
    mirror portrait toilPorAt, mirror figure toilFigAt): the stand-in figTierOf answered the raw rank (0–7), but her real figTierOf (j66, with an identity S.pid)
    answers the 1-based dress TIER (rank+1) — so every preview showed the dress one tier LOWER than the one she wears (a phẩm-2 robe drew as phẩm 1, and a
@@ -340,14 +345,14 @@ function toilPorAt(rank){const f0=figTierOf;try{figTierOf=toilTierAt(f0,rank);re
 function toilRankOfFile(f){const m=/-t(\d)(?:[-.]|$)/.exec(String(f||""));return m?+m[1]:0}
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
 function toilDressUI(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;const st=TOIL.st;toilMkPre();
- const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null&&WD_ITEMS[x.g.k].sl!=="hd":(IT[x.g.k]&&["ear","wrist","waist","scent","shoe"].includes(itm(x.g.k).sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
+ const hdk=toilHdK();const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null:(IT[x.g.k]&&["ear","wrist","waist","scent","shoe"].includes(itm(x.g.k).sl)))).map(x=>{const w=WD_ITEMS[x.g.k];const o=Object.assign({},x,{cat:w?(w.sl==="tram"?"tram":w.sl==="hd"?"hd":"y"):"trang"});if(w&&w.sl==="hd"&&x.g.k===hdk){o.on=true;o.onText="Hôm nay dán"}return o});
  const sel=toilSelFind(items);items.forEach(x=>{x.sel=!!(sel&&sel.x===x)});
- const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"}];
- const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
+ const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"},{k:"hd",label:"Hoa điền"}];
+ const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:k==="hd"?toilHdGhost():(keqArt(gk)||""),sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
  const sum=kitChips([wb.sac-(wb.shSac||0)?["Sắc",wb.sac-(wb.shSac||0)]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
  const mama=toilSkill().mama;
- box.innerHTML=`<div class="toilw toil1">`+kitDressPicker({p:S,rank:por.rank,head:(mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên chỉnh tề, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:""),body:`<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true})})}`+`<div class="toildet">${toilDetHTML(sel,sum)}</div></div>`})+`</div>`+
+ box.innerHTML=`<div class="toilw toil1">`+kitDressPicker({p:S,rank:por.rank,under:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,grid:true}),head:(mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên chỉnh tề, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:""),body:`<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick})}`+`<div class="toildet">${toilDetHTML(sel,sum)}</div></div>`})+`</div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
  try{kitInvFit()}catch(e){}
  /* E95 (owner OD 26/11 ~01:25Z «bấm chọn mà không thấy mặc»): the frame's figure column is the LIVE preview of the dress she has on (kitDressPicker §60.2) —
@@ -362,23 +367,28 @@ function toilSelFind(items){const s=TOIL.st&&TOIL.st.sel;if(!s)return null;
  if(s.sl){const it=toilWorn(s.sl);return it?{sl:s.sl}:null}
  const x=items.find(y=>y.g&&y.g.k===s.k&&!!y.g.wdSlot===!!s.wdSlot&&(s.wdSlot||!!y.g.w===!!s.w))||null;return x?{x}:null}
 function toilRefOfSel(sel){if(!sel)return null;if(sel.x)return{g:sel.x.g};const sl=sel.sl;if(sl==="tram"||sl==="y")return{wdSlot:sl};
- const i=(S.inv||[]).findIndex(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl===sl);return i>=0?{ix:i}:null}
+ if(sl==="hd"){const k=toilHdK();if(!k)return null;const i=(S.inv||[]).findIndex(e=>e&&!e.h&&e.k===k);return i>=0?{ix:i}:{k}}
+ const i=(S.inv||[]).findIndex(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&wearGrp(itm(e.k).sl)===sl);return i>=0?{ix:i}:null}
 function toilDetHTML(sel,sum){const ref=toilRefOfSel(sel);if(!ref)return typeof kinlDetail==="function"?kinlDetail(null,{key:"toil",sum}):"";
- const R=kitItemRef(ref);if(!R)return"";const sl=toilSlotOf(R.k);const slN=TOIL_SL.find(z=>z[0]===(sl==="hair"?"tram":sl));const fx=R.wd?plainFx(WD_ITEMS[R.k].w):kinvPlain(R.it&&R.it.w);
+ const R=kitItemRef(ref);if(!R)return"";const sl=toilSlotOf(R.k);const slN=TOIL_SL.find(z=>z[0]===(sl==="hair"?"tram":sl==="scent"?"waist":sl));
+ if(sl==="hd"){const on=toilHdK()===R.k;return kinlDetail(R,{key:"toil",sum,acts:[on?pbtn(`data-toilact="off"`,"Bỏ","thành: hôm nay để trán trơn",""):pbtn(`data-toilact="wear"`,"Dán",`thành: vào ô Hoa điền, dán lên trán khi trang điểm · xa xỉ ${wdLux(R.k)}`,"")]})}const fx=R.wd?plainFx(WD_ITEMS[R.k].w):kinvPlain(R.it&&R.it.w);
  let b;if(R.worn){b=sl==="y"?pbtn(`data-toilact="off"`,"Tháo","thành: cất vào rương","y phục chỉ thay: chọn bộ khác trong rương rồi chạm Mặc"):pbtn(`data-toilact="off"`,"Tháo",`thành: cất vào rương, ô ${slN?slN[1]:""} để trống`,"")}
  else{const n=sl==="tram"?"Cài":sl==="y"?"Mặc":"Đeo";b=pbtn(`data-toilact="wear"`,n,`thành: vào ô ${slN?slN[1]:""}${fx?", "+fx:""}`,"")}
  return kinlDetail(R,{key:"toil",sum,acts:[b]})}
 /* E95 (owner OD 26/11 ~01:25Z «Buổi sáng mặc y phục trong trang điểm không được, bấm chọn mà không thấy mặc»): a tap on a piece IN THE CHEST wears it at once
    (shown = worn: the «Đang mặc» slot, her figure at the dress's tier, the saved look) and keeps it selected with its detail (owner 15/11: a tap shows the piece's info)
    — the detail then offers «Tháo». A tap on a piece she already wears only selects it (detail + «Tháo»). The old two-step tap → «Mặc» is gone. */
-function toilPick(x){try{const g=x&&x.g;if(!g)return;const worn=!!g.wdSlot||!!g.w;
+function toilPick(x){try{const g=x&&x.g;if(!g)return;
+ if(typeof hdIsK==="function"&&hdIsK(g.k)){/* DRESS-FIX: a tap on a hoa điền picks it for today (shown in the «Hoa điền» slot); a tap on today's one only selects it */const st=TOIL.st;const was=toilHdK()===g.k;st.hdk=g.k;const s=st.sel;st.sel=was&&s&&s.k===g.k?null:{k:g.k,wdSlot:null,w:false};sfx("tap");toilDressUI();return}
+ const worn=!!g.wdSlot||!!g.w;
  if(!worn){TOIL.st.sel={k:g.k,wdSlot:null,w:false};toilAct("wear");return}
  const s=TOIL.st.sel;const same=s&&!s.sl&&s.k===g.k&&!!s.wdSlot===!!g.wdSlot&&(s.wdSlot||!!s.w===!!g.w);
  TOIL.st.sel=same?null:{k:g.k,wdSlot:g.wdSlot||null,w:!!g.w};sfx("tap")}catch(e){console.error(e)}toilDressUI()}
 function toilSlotPick(x){try{const s=TOIL.st.sel;TOIL.st.sel=x.item&&!(s&&s.sl===x.k)?{sl:x.k}:null;sfx("tap")}catch(e){console.error(e)}toilDressUI()}
 function toilAct(a){try{const s=TOIL.st.sel;if(!s)return;let ref=null;
   if(s.sl)ref=toilRefOfSel({sl:s.sl});else{const x=kinvItems().find(y=>y.g&&y.g.k===s.k&&!!y.g.wdSlot===!!s.wdSlot&&(s.wdSlot||!!y.g.w===!!s.w));ref=x?{g:x.g}:null}
-  const R=ref&&kitItemRef(ref);if(!R)return;const sl=toilSlotOf(R.k);const tsl=sl==="hair"?"tram":sl;
+  const R=ref&&kitItemRef(ref);if(!R)return;const sl=toilSlotOf(R.k);const tsl=sl==="hair"?"tram":sl==="scent"?"waist":sl;
+  if(sl==="hd"){TOIL.st.hdk=a==="off"?"":R.k;TOIL.st.sel=a==="off"?null:{sl:"hd"};sfx("tap");toilDressUI();return}
   if(a==="off"){if(R.wd){if(sl==="tram")wdTakeOff(S,"tram")}else{const i=S.inv.indexOf(R.e);if(i>=0&&S.inv[i].w)wear(S,i)}TOIL.st.sel=null}
   else{if(R.wd){const i=S.inv.indexOf(R.e);if(i>=0)wdWear(S,i)}else{const i=S.inv.indexOf(R.e);if(i>=0&&!S.inv[i].w)wear(S,i)}TOIL.st.sel={sl:tsl}}
   sfx("tap");try{save()}catch(x){}/* E95: the worn look is saved at once (a reload shows what she put on) */}catch(e){console.error(e)}toilDressUI()}
@@ -1059,11 +1069,13 @@ function kitDressPicker(o){o=o||{};const p=o.p||S;let src="";try{src=kitDressFig
  /* a game frame that already has its own left figure column (.kgfig, wide screens) is THE preview: it is refreshed with the dress she wears now, no second figure; otherwise (Fold) the picker brings its own */
  /* a frame narrower than 480 px (a phone) has no room for a figure beside the wear column + bag (law 12: Fold 755 + iPad first): none there, the picker reads as before (decided by the MEASURED frame width, not by a viewport breakpoint — media-check, KIT §0) */
  let fig="";const own=[...document.querySelectorAll(".kgame .kgfig")].find(e=>{const r=e.getBoundingClientRect();return r.width>40&&r.height>80&&getComputedStyle(e).display!=="none"});if(own){try{if(src)kitGameFigRefresh(p,{src})}catch(e){}}else if(((document.getElementById("kg82")||{}).clientWidth||999)>=480)try{fig=typeof kitStageFig==="function"&&src?kitStageFig(p,{src}):""}catch(e){}
- return `<div class="kdpk">${fig?`<aside class="kdpk-fig" aria-label="Nàng đang thử y phục">${fig}</aside>`:""}<div class="kdpk-body">${o.head||""}${o.body||""}</div></div>`}
+ /* o.under (DRESS-FIX, owner OD 26/11 ~18:50Z (3)): the worn-slot grid (kitEquipSlots grid) — under her figure when the picker brings the stand (Fold), else above the chest (iPad: the frame's own figure column fills the height) */
+ const un=o.under||"";return `<div class="kdpk">${fig?`<div class="kdpk-left"><aside class="kdpk-fig" aria-label="Nàng đang thử y phục">${fig}</aside>${un}</div>`:""}<div class="kdpk-body">${o.head||""}${fig?"":un}${o.body||""}</div></div>`}
 window.kitDressPicker=kitDressPicker;
 (function(){const st=document.createElement("style");st.id="kdpk-css";st.textContent=`
 .kdpk{display:grid;grid-template-columns:minmax(150px,34%) minmax(0,1fr);gap:12px;align-items:stretch;min-width:0}
-.kdpk:not(:has(>.kdpk-fig)){grid-template-columns:minmax(0,1fr)}
+.kdpk:not(:has(>.kdpk-fig)):not(:has(>.kdpk-left)){grid-template-columns:minmax(0,1fr)}
+.kdpk-left{display:flex;flex-direction:column;gap:8px;min-width:0;align-self:start;position:sticky;top:0}.kdpk-left>.kdpk-fig{position:relative;width:100%;box-sizing:border-box}.kdpk-left .keqg{--keqg:48px}
 .kdpk-fig{position:sticky;top:0;align-self:start;display:flex;align-items:flex-end;justify-content:center;min-height:min(420px,calc(52*var(--kvh,1dvh)));padding:10px 6px 14px;border-radius:14px;overflow:hidden;
  background:radial-gradient(ellipse 70% 55% at 50% 30%,#fffaf1 0%,#f6e8d0 60%,#ead7b6 100%);box-shadow:inset 0 0 0 1px var(--line,#d6c7a8),inset 0 -26px 30px -18px rgba(120,80,40,.22)}
 /* E95: the stand keeps its own height and stays in view (sticky) — it used to stretch with the right column, so once a tap opened the piece detail the figure sank under the buttons, out of sight */

@@ -214,6 +214,8 @@ function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o
  const cell=(x,i)=>kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel||(typeof kinlSlotSel==="function"&&kinlSlotSel(key,i)),size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`});
  /* col = the VERTICAL "Đang mang" column beside the bag: slot picture + the slot name (small) under it; the item name, chips and note live in the tap panel / tooltip */
+ /* grid (DRESS-FIX, owner OD 26/11 ~18:50Z (3) «xếp gọn bên dưới»): the SAME cells as col (picture + slot name), laid out as a compact grid that wraps (under her figure / above the chest) */
+ if(o.grid)return `<div class="keq keqv keqg" data-keq="${key}" style="--keqn:${L.length}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql"${x.lc?` style="color:${x.lc}"`:""}>${x.label}</b></div>`).join("")+`</div></div>`;
  if(o.col)return `<div class="keq keqv" data-keq="${key}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql"${x.lc?` style="color:${x.lc}"`:""}>${x.label}</b>${x.info?`<span class="keqpi">${x.info}</span>`:""}</div>`).join("")+`</div></div>`;
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
   L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel||(typeof kinlSlotSel==="function"&&kinlSlotSel(key,i)),size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
@@ -256,7 +258,11 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .keq.keqv{margin:0;padding:6px 4px 6px;width:max(66px,calc(var(--kside,72px) + 14px));box-sizing:border-box;text-align:center}.keq.keqv .kpst{margin:0 0 4px;font-size:.52rem;letter-spacing:0;white-space:nowrap;border:0;padding:0}
 .keq.keqv .keqs{display:flex;flex-direction:column;gap:5px}.keq.keqv .keqc{display:flex;flex-direction:column;align-items:center;gap:1px}
 .keq.keqv .keqc>.kitem-slot{width:var(--kside,72px)}.keq.keqv .keql{font-size:.58rem;line-height:1.1;color:var(--ink2,#7a6a58);font-weight:600;overflow-wrap:anywhere;max-width:100%}
-.keq.keqv+.keq.keqv{margin-top:6px}.keq.keqv .keqpi{display:flex;flex-direction:column;gap:1px;font-size:.56rem;line-height:1.15;color:var(--ink2,#7a6a58);overflow-wrap:anywhere;max-width:100%}
+.keq.keqv+.keq.keqv{margin-top:6px}
+.keq.keqv.keqg{width:auto;padding:6px 6px 8px}
+.keq.keqv.keqg .keqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(var(--keqg,60px),1fr));gap:6px 6px;justify-items:stretch}
+.keq.keqv.keqg .keqc{min-width:0}.keq.keqv.keqg .keqc>.kitem-slot{width:min(100%,var(--keqgx,84px));aspect-ratio:1/1;height:auto}
+.keq.keqv.keqg .keql{font-size:.66rem}.keq.keqv .keqpi{display:flex;flex-direction:column;gap:1px;font-size:.56rem;line-height:1.15;color:var(--ink2,#7a6a58);overflow-wrap:anywhere;max-width:100%}
 .keq.keqv .keqpi .kchip{font-size:.56rem;padding:0 4px;margin:0;white-space:nowrap}.keq.keqv .keql[style]{font-size:.62rem}
 .kinvtight .keq.keqv>.kpst,.kinvtight .keq.keqv .keqpi>span:nth-child(n+3){display:none}
 .kinvsum{margin:6px 0 0;padding:0 2px}

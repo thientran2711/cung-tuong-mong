@@ -260,7 +260,9 @@ function wearBonus(p){const b={sac:0,danh:0};if(!p||!p.inv)return b;const r=rkOf
  for(const e of p.inv)if(e.w&&IT[e.k]&&itm(e.k).w){const m=itm(e.k).rk>r?1.5:1;for(const s in itm(e.k).w)b[s]+=Math.round(itm(e.k).w[s]*m)}
  if(p.dress&&p.dress.until>S.turn){const it=IT[p.dress.k];b.sac+=Math.round(it.dr*(it.rk>r?1.5:1))}return b}
 function buy(p,k){const it=IT[k];if(!it||p.bac<it.pr)return false;ap(p,{bac:-it.pr});p.inv.push({k});return true}
-function wear(p,ix){const e=p.inv[ix],it=e&&IT[e.k];if(!it||!it.sl||e.h)return;const on=!e.w;p.inv.forEach(x=>{if(IT[x.k]&&itm(x.k).sl===it.sl)x.w=0});e.w=on?1:0}
+/* DRESS-FIX (owner OD 26/11 ~18:50Z (3) «gộp những ô na ná nhau»): Túi thơm and Ngọc bội both hang at the waist = ONE slot «Đeo eo» (wearGrp), one piece at a time, her and every NPC */
+function wearGrp(sl){return sl==="scent"?"waist":sl}
+function wear(p,ix){const e=p.inv[ix],it=e&&IT[e.k];if(!it||!it.sl||e.h)return;const on=!e.w,g=wearGrp(it.sl);p.inv.forEach(x=>{if(IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===g)x.w=0});e.w=on?1:0}
 function useItem(p,ix,tgt){const e=p.inv[ix],it=e&&IT[e.k];if(!it||e.h)return"";let r="";
  if(it.dr){p.inv.splice(ix,1);p.dress={k:e.k,until:S.turn+3};return `${NMc(p)} may áo mới bằng ${it.n}${it.rk>rkOf(p)?" (vượt phẩm!)":""}. `}
  if(it.sl){wear(p,ix);return""}
