@@ -576,3 +576,5 @@ kit-stage-r7 | review/kit-stage-r4 | session_01Rc5AsN1USbcwua1X1b7211 | RUNNING 
 lc26 | land chain | session_01Rc5AsNFNbUqAWsDjxbf4hH | RUNNING | 2026-11-26T23:25Z (opened by MAIN 165 for 166)
 KK50 kit keeper | review/kit-hud-slot | session_01Rc5AsMUwtXE6eVHGdk8jfo | RUNNING | 26/11 23:27Z (MAIN 166)
 PACE-SPEED-2 | review/pace-speed | session_01Rc5AsN2DLjhrFeTq7DV51d | RUNNING | 26/11 23:38Z (MAIN 166)
+D PROMO-STACK REMERGE (opus BIG; d-stack-lr3 cb398c07 incl. cung-quy + contest-thitam + rest of d-followups-1-rv cc4fed89 onto LIVE 4cfcda61; + pbDlNext() peek + HUD-SACPHONG fixes 1–2; MAIN 165/167 orders) | review/promo-stack-lr4 | (session id next D STATUS line) | RUNNING | 26/11 23:55Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
+D REMERGE LEAD (opus; mg-trim-r6 4ecc3ce6, srv-rank 8559fea2, parity-facfix 1d0f032d, help-housemate 3aa87e1b, selx-fair c7594222 — verify not on LIVE, remerge one by one onto LIVE, LAND READY each) | review/<topic>-lr5 | (session id next D STATUS line) | RUNNING | 26/11 23:55Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
