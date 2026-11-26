@@ -43,7 +43,17 @@ Remaining driver after month 6: Ghen (her favour with the Emperor — a reason s
 ## Tests
 - dev/test/oan-pace.js: ALL PASS 20 (E1 newcomer, B1–B6 step/incident/day/two-way, C1–C3 fade, D1–D2 vent, F1–F5 gate, G1–G2 ghét, R1 rollback).
 - dev/test/pace-all.js: ALL PASS 32. one-core-guard: PASS.
-- Regression (58 tests that read oán / motive, LIVE vs branch): see below.
+- Regression (58 tests that read oán / motive / oanCool, dev/measure/pace-all-regress.sh, LIVE f573dc94 vs branch): differences only in
+  cold-faction (5d/8a/8b: test SETUP used oanAdd/affAdd ±40..100 in one buổi → now bypasses the pace for the setup, 5d expects min(sell.oan × nết, BAL.oanPace.step)) → ALL PASS 20;
+  receiver-choice (scan setup feuds at once → the scan sets BAL.oanPace.on = 0; law-2 block same) → PASS on 3 of 4 branch runs, the 4th a one-off gap / a ±2 nết-scaled liking (11 vs 13) that moved run to run (LIVE 3/3 PASS) — reviewer: please re-run 2×;
+  moodknow-step0, npc-purpose-g1g, pace-all: LIVE FAIL (pace-all's own tests, not on LIVE) → branch PASS. Everything else same exit code as LIVE.
+- Shown numbers (law 4, family scan /home/user/wt/oanpace-out/dispscan.js idea): a card that prints an oán rise or a liking fall bigger than the step now prints what really lands (jbal balOanUp / balGhet; balOan uses it): j14 «Gửi thư tố» (sell.oan 40 → 12), j55 tdLeak ×3, j95 vu cáo fail ×2, j78 f_6, jgift, jpoison, jmen ×2. Servant «thiện cảm» (s.loyal) is not affAdd — unchanged.
+- quickcheck 2bc7e193 vs LIVE: TIME-SPILL PASS; open 1870 ms 0 errors; old save loads + plays; perf (interleaved, median of 3, new/live): render 229/192 ms, tab 515/407, buổi 1819/922 (runs 1819/691/3328 vs 922/1083/868: noisy box), tasks>200ms 25/25 → QUICKCHECK PASS. CORE GATES: G4 80-dialog-fixed (2 FAIL «empty Tốn/Được cell») and 90-button-crawl («Ô lưu · Lui») FAIL — the SAME 2 + 1 faults on LIVE f573dc94 and on pace-all (run here on all three) → pre-existing, not this branch. one-core-guard PASS.
+
+## RV READY → MAIN: review/oan-pace (head in the message). Lander: stack AFTER pace-all fa05166a is NOT needed — this branch already holds pace-all + LIVE f573dc94; it REPLACES the pace-all slot (land this one instead of pace-all).
+
+## Handover (worker at rollover point)
+Open items for a successor / reviewer: (1) Ghen is the main hostile driver after month 6 (pace-all ghen rules); if sếp wants a quieter second half, the lever is BAL.oanPace.act or BAL.net.heat.ghenK — both one number. (2) receiver-choice flake above. (3) direct writes to .rel (55 modules) are not paced (only the affAdd door).
 
 ## Tóm tắt cho sếp
 Bản LIVE: mới vào cung 0–3 ngày đã có người nhắm, trung bình ~0,9 lần/ngày, 1/5 số ngày bị ≥2 người; oán cao nhất lên ~72 sau 1 năm; nguồn lớn nhất là tin đồn bịa (một lời đồn +18–40 oán, người tin lại đi đồn tiếp). Bản mới (không chặn sự kiện, NPC vẫn tự quyết): mỗi cớ chỉ tăng một bậc (tối đa 12), cùng một chuyện không cộng dồn, mỗi ngày mỗi người tăng tối đa 16 (cả oán lẫn ghét); oán nguôi mỗi ngày, càng để yên càng nguôi nhanh, oán sâu nguôi chậm; ra tay xong thì hả giận (tiêu bớt oán); muốn nhắm sếp phải đủ «độ giận» 25. Kết quả: 5 tháng đầu gần như yên (0–0,2 lần/ngày), lần đầu bị nhắm từ ngày 7–21; cả năm 0,62 lần/ngày; oán trung bình sau 1 năm 27 → 10. Từ tháng 6 trở đi người nhắm chủ yếu do Ghen khi sếp được sủng (lý do sếp tạo ra).
