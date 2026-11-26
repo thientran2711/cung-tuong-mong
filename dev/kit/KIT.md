@@ -392,10 +392,17 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
 - EVERY line says SHORTLY WHY (owner 18/11 09:03Z): `value · reason` on ONE row, label column left, value next to its label (left-aligned, never a centred floating column), the reason dim after the value: `Sức 56→74 (+18) · nghỉ qua đêm`, `Sủng 26→25 (−1) · lâu không được gặp Hoàng thượng`, `1 vị chưa quen biết: ghét ta hơn · ghé chơi cung ngươi`, KÈM `8 phi tần bớt ghen 1 · lòng ghen nguôi dần theo ngày`. Part `kitWhy` (j63: kaWhyCl / kaWhyStat / kaWhyWho / kaWhyKem / kaWhyHtml `.kwy`): the reason is read from the SAME Sổ ghi lines of the span (clause "lead: … Sức +10" → lead; a person matched by name; strangers stay unnamed), else the act's own title, else a short fixed cause per stat (KA_WHYD); max 44 chars, no colon, no %. Every result card (between-buổi "Trong cung vừa qua", act, event, night, co-op) goes through kaResultRows, so one part changes all. Kit sample page §7.
 - Rows are arrays: one fact per line (`.kitem`), never joined sentences; also exposed as `window.kaLastResult {title, ok, sentence, rows:[{k,label,items[]}]}`.
 - **7.3 ACT PAYLOAD — verdict + target row (OB-VERDICT, owner OD 26/11 ~08:30Z «nói xấu xong ... không biết được là có nói xấu thành công hay không»).**
-  KIT PART `kaAim(v,{ok,n,sen,by,later,outer})` (j63): an act aimed at a person registers its target when it STARTS (v's Sủng / Danh / Sức /
+  KIT PART `kaAim(v,{ok,n,sen,by,pub,later,outer,open})` (j63): an act aimed at a person registers its target when it STARTS (v's Sủng / Danh / Sức /
   thiện cảm (servant) / rank / cấm túc / phế / mất are read then); `ok` = the act's OWN roll (may be a function, read when the card is built).
-  Hooks in `jverdict.js` (no act logic): runAct (every ACT deed, hers and an NPC's on her), doAct, talk, pillowDo, giveTo, servAct, empAct —
-  the verdict comes from the first `aRoll` of the actor in that act, `caught` (bị lộ → BẠI), `oddsSoft` (→ BỎ DỞ), `runOpt`.
+  `open` = an OUTER act's aim (doAct, talk, a dialog option on a consort, servant / court acts): it belongs to every card until it is closed —
+  by the card that shows it, by a «Thôi» on its own dialog, or by the idle board — so a deed run from its own dialog («Bày mưu» → «Ra tay ngay»,
+  the road card «Làm như thường», a picker) re-enters on the SAME aim and its card keeps the verdict. `pub` = a doer known to all by title
+  (the Emperor, the Thái hậu) for «Ai làm». Hooks in `jverdict.js` (no act logic): runAct (every ACT deed, hers and an NPC's on her), doAct,
+  talk (servant mode: an option naming her mistress is aimed at the mistress), chooseM (a card about a consort), pillowDo, giveTo, servAct, empAct,
+  and the runners outside runAct (j55 tdProbe / tdLeak, j67 e67pun, jemoact eaHitMe) —
+  the verdict comes from the first `aRoll` of the actor in that act, `caught` (bị lộ → BẠI), `oddsSoft` (→ BỎ DỞ), `runOpt`, and the decision
+  points without aRoll: the accuse family (vp / xx: «…: thành» / «bỏ qua» / «tố bừa»), wdFrameResolve (Giá họa), frameExpose (Vu oan cleared → BẠI),
+  rcvPick (the receiver's yes / no), rcvMaidBribe / stf2Bribe (the bribe taken / refused), a servant's refusal («việc không thành» → BỎ DỞ).
   The card of that span (resultShow AND the night card `kitNightEnd`, jne) then shows, in this order:
   1. SEAL `kitResultSeal(ok)`: THÀNH / BẠI / **BỎ DỞ** (`"soft"`: a capped act slipped, nothing done) / KẾT QUẢ (no roll). An act with no seal of its own
      (null / "sure", e.g. the night) takes the carried act's verdict. The night card shows it as a `kitChip(seal)` in a «Kết cục» row.
