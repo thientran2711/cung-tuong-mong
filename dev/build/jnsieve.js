@@ -46,24 +46,24 @@ function note(kind,t){if(NSV.log.length<400)NSV.log.push({kind,t:txtOf(t).slice(
 /* ---------- 1. newsAdd: the notice only ---------- */
 if(typeof newsAdd==="function"){const n0=newsAdd;newsAdd=function(v,k,txt,toMe){
   if(!on()||toMe||v===S||(BAL.news.keepK||[]).includes(k)||!nsNpcLine(txt)){NSV.stat.keep++;return n0.apply(this,arguments)}
-  NSV.stat.drop++;tally(k);note("news:"+k,txt);const f0=S.news&&S.news[0];NSV.mute++;let r;try{r=n0.apply(this,arguments)}finally{NSV.mute--}
+  NSV.stat.drop++;tally(k);note("news:"+k,txt);try{recDrop(txt,[v&&v.id])}catch(e){}const f0=S.news&&S.news[0];NSV.mute++;let r;try{r=n0.apply(this,arguments)}finally{NSV.mute--}
   try{const f=S.news&&S.news[0];if(f&&f!==f0)f.npc=1}catch(e){}return r}}
 
 /* ---------- 2. kitKnow: nết lines and others' favour-book lines ---------- */
 if(typeof kitKnow==="function"){const k0=kitKnow;kitKnow=function(o){try{if(on()&&o&&o.text){const key=String(o.key||""),t=txtOf(o.text);NSV.stat.know++;
    const drop=(NSV.mute&&/^news:/.test(key))
     ||(BAL.news.netOpen&&/^n:/.test(key)&&/(biết nết|lộ nết|có nết)/.test(t))
-    ||(/^n:/.test(key)&&/^Sổ ghi thêm/.test(t)&&!/(ngươi|Ngươi)/.test(t))
+    ||(/^n:/.test(key)&&(/^Sổ ghi thêm/.test(t)&&!/(ngươi|Ngươi)/.test(t)||nsNpcLine(t)))/* a person-book line about others only (noteAdd → noteSay: remarks overheard, j92 «lời của …») */
     ||(NS_NPC_ONLY.test(t)&&nsNpcLine(t))/* «X trượt khảo hạch …» */
     ||(/ kể: /.test(t)&&!/(ngươi|Ngươi)/.test(t)&&nsNpcLine(t.slice(t.indexOf(" kể: ")+5)))/* «A kể: B làm gì đó» about others (j75 tellers) */;
-   if(drop){NSV.stat.knowDrop++;if(!NSV.mute)tally("so");note("know:"+key.split(":")[0],t);return}}}catch(e){}return k0.apply(this,arguments)}}
+   if(drop){NSV.stat.knowDrop++;if(!NSV.mute){tally("so");if(!/(biết nết|lộ nết|có nết)/.test(t))try{recDrop(t)}catch(e){}}note("know:"+key.split(":")[0],t);return}}}catch(e){}return k0.apply(this,arguments)}}
 
 /* ---------- 3. the morning card, sentence by sentence ---------- */
 const SENT=/(?<=[.!?…])\s+(?=[^\s.,;:!?…)\]»”])/u;
 function sieveHtml(inner){const S0=String(inner).split(SENT);const out=[];let lastKept=true,dropped=0;
  for(const s of S0){const t=txtOf(s);if(!t){continue}
   if(/^(Lý do|Vì sao|Kết quả|Người được sai)/.test(t)){if(lastKept)out.push(s);else dropped++;continue}
-  if(nsNpcLine(t)){dropped++;lastKept=false;note("card",t);continue}out.push(s);lastKept=true}
+  if(nsNpcLine(t)){dropped++;lastKept=false;note("card",t);try{recDrop(t)}catch(e){}continue}out.push(s);lastKept=true}
  return{h:out.join(" "),dropped}}
 function sieveCard(m){if(!m||typeof m.h!=="string"||m.kit||m.__nsv)return false;if(!(m.kind==="news"||/^Tin trong cung/.test(m.t||"")))return false;
  let body=0,dropTot=0;const h=m.h.replace(/<p(\s[^>]*)?>([\s\S]*?)<\/p>/g,(all,attr,inner)=>{if(/class="past"/.test(attr||""))return all;
@@ -96,6 +96,75 @@ if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){try{if(on()&
 /* a servant's gossip report (jagknow knBao from the gossip chain: «nghe X kể: <chuyện người khác>»): another consort's doing, even unnamed
    («Thường tại ???»), that does not touch her → no report line; it is counted for the month */
 const NS_TITLE=/(Đáp ứng|Thường tại|Quý nhân|Tần|Phi|Quý phi|Hoàng quý phi|Hoàng hậu|phi tần)\s/;
-function nsGossipSkip(w){if(!on())return false;const t=txtOf(w);const skip=nsNpcLine(t)||(!nsHerLine(t)&&NS_TITLE.test(t));if(skip){NSV.stat.drop++;tally("bao");note("bao",t)}return skip}
-Object.assign(window,{nsHerLine,nsNpcLine,nsMonth,nsSieveQ:sieveQ,nsGossipSkip});
+function nsGossipSkip(w){if(!on())return false;const t=txtOf(w);const skip=nsNpcLine(t)||(!nsHerLine(t)&&NS_TITLE.test(t));if(skip){NSV.stat.drop++;tally("bao");note("bao",t);try{recDrop(t)}catch(e){}}return skip}
+
+/* ---------- 5. HAREM RECORD in the Sổ ghi + big harm in Tin báo (owner OD 26/11 ~05:05Z, verbatim: "Những tin như ai mưu hại ai thì vẫn báo,
+   tức là khung tin báo chỉ báo tin tôi, còn chuyện hậu cung vẫn đầy đủ thông tin trong sổ ghi, tôi muốn xem thông tin vì sao ai bị gì, như tại sao
+   mặt bị hủy dung thì tôi qua sổ ghi thì biết ai rạch mặt ai đầy đủ, hiểu không. Chứ không mất hết thông tin này") ----------
+   (a) every act between two other people (runAct NPC ↔ NPC: the same acts the cause ledger jmem records, with its REASON causeText) is written in
+       S.hrec with doer, victim, the act, the cause and the result; every line the sieve takes out of the daily feed goes there too (nothing lost).
+       The Sổ ghi tab (j6 «log») shows S.hrec merged by time with her own lines (S.logs untouched: Tuần lục / kitWhy / jlogsync read S.logs only).
+   (b) a BIG harm (an act of danger band ≥ BAL.news.bigBand in BANDS, j24: vu oan, hủy dung, hạ độc, đẩy xuống hồ …) between two other people is
+       also ONE «Tin báo» line «A hủy dung B, vì ghen nàng được sủng.» (law 6b; at home in Khuê các nothing, OD 25/11 ~23:10Z).
+   Names through knowWho (a stranger stays «một phi tần áo bậc …»), read at show time so a name she learns later appears. */
+function recOn(){return on()&&!(typeof isKc==="function"&&isKc())}
+function recList(){if(!Array.isArray(S.hrec))S.hrec=[];return S.hrec}
+const DATE=()=>`T${S.month}/${S.year} ${typeof TUAN!=="undefined"?TUAN[S.tuan]:""}`;
+function recPush(o){try{const L=recList();const t=txtOf(o.t);if(!t)return null;
+  if(L.some(x=>x.w===wk()&&x.t===t))return null;/* the same happening told twice (a deed + its rumour) = one line */
+  const r={q:S.logSeq||0,w:wk(),dt:DATE(),t,ids:(o.ids||[]).filter(x=>x!=null)};if(o.big)r.big=1;if(o.k)r.k=o.k;L.unshift(r);
+  const mx=(BAL.news&&BAL.news.recMax)||300;while(L.length>mx){const rk=x=>x.big?2:x.k?1:0;let i=-1;for(const lv of [0,1,2]){for(let j=L.length-1;j>=0;j--)if(rk(L[j])===lv){i=j;break}if(i>=0)break}L.splice(i,1)}/* oldest first: a heard line, then a small act, a big harm last */NSV.stat.rec=(NSV.stat.rec||0)+1;return r}catch(e){console.error("nsRec",e);return null}}
+function persOf(id){try{return typeof RV==="function"?RV(+id):null}catch(e){return null}}
+/* a stranger's name → her description (k61), capital first letter at the start of a sentence */
+function maskNames(t,ids){let s=String(t);for(const id of ids||[]){const v=persOf(id);if(!v||!v.name)continue;const w=who(v);if(w&&w!==v.name)s=s.split(v.name).join(w)}
+ return s.replace(/(^|[.!?…]\s+)(\p{Ll})/gu,(m,a,b)=>a+b.toUpperCase())}
+function bigK(k){try{const b=(BAL.news&&BAL.news.bigBand)||2;return (typeof BANDS!=="undefined"?BANDS:[]).slice(b).some(x=>(x[2]||[]).includes(k))}catch(e){return false}}
+/* the act said as a plain clause about the victim T (NEWS WORDING: one clear sentence; «nàng» stands for T inside the clause) */
+const ACT_SAY={frame:"vu oan T",plant:"cài đồ vào rương của T",block:"rút thẻ bài của T",bribe:"mua chuộc cung nữ của T",accuse:"tố giác T",vp:"hặc T ăn mặc sai phẩm",
+ ksab:"phá việc học của con T",takeaway:"xin bế con của T về nuôi",lygian:"ly gián T",tocao:"tố tội thật của T",xinhh:"xin Hoàng hậu giáng T",trinhth:"trình Thái hậu chuyện của T",
+ trinhhh:"trình Hoàng hậu chuyện của T",huydung:"hủy dung T",giahoa:"giá họa trộm đồ cho T",laydo:"sai người lấy trộm đồ của T",laydol:"sai cung nữ lấy đồ của T",
+ thathu:"thả thú dữ hại dung nhan T",phonghoa:"phóng hỏa kho đồ của T",petsteal:"trộm thú nuôi của T",xx:"tố T xa xỉ",poison:"hạ độc T",kpoison:"hạ độc con của T",
+ pond:"đẩy con của T xuống hồ",pushp:"đẩy T xuống hồ sen",musk:"bỏ xạ hương hại T",catswap:"mua chuộc bà đỡ của T",kframe:"vu con của T trù ẻo",slowpoison:"hạ độc dần T",
+ expose:"bóc chuyện tư tình của T",pgift:"tặng T quà ăn có độc",rumor:"tung tin đồn về T",spy:"dò la T",spyk:"dò la T",trip:"ngáng chân T",uyhiep:"uy hiếp T đòi bạc",
+ banphe:"bán chuyện của T cho phe khác",tat:"tát T",phatquy:"phạt T quỳ",rash:"bỏ phấn lạ hại T",batnat:"ép T nộp của",thaopet:"hại thú nuôi của T",nuoc:"hắt nước vào T",
+ tea:"hắt trà vào T",ink:"quạt mực vào T",ally:"kết giao với T",gift:"tặng quà T",steal:"tranh sủng với T",road:"chặn ngự giá trước cung T",tieuhuy:"trả chứng cứ cho T để lấy lòng",
+ bribel:"sai cung nữ lấy lòng T",blockf:"nhờ người quen rút thẻ bài của T",petcare:"giúp T chăm thú nuôi",pmplay:"cùng T chơi",pmduel:"thách đấu T"};
+/* «A hủy dung B, vì ghen nàng được sủng.» / «A định hủy dung B, vì …, nhưng không thành.» (reason = jmem causeText, the cause ledger) */
+function recSentence(rec,a,t,k){const fail=rec&&rec.r==="fail";const pat=ACT_SAY[k]||`${String(ACT[k]&&ACT[k].n||k).toLowerCase()} với T`;
+ let why="";try{why=causeText(rec)||""}catch(e){}if(why&&t&&t.name)why=why.split(t.name).join("nàng");
+ return `${a.name} ${fail?"định ":""}${pat.replace("T",t.name)}${why?", "+why:""}${fail?", nhưng không thành":""}.`}
+function isNpc(p){return !!p&&p!==S&&p.id!=null&&typeof p==="object"&&(typeof rivals==="undefined"||rivals.includes(p))}
+if(typeof runAct==="function"){const ra0=runAct;runAct=function(a,t,k){const r=ra0.apply(this,arguments);
+  try{if(r&&recOn()&&isNpc(a)&&isNpc(t)&&a!==t&&!NSV.inRec){NSV.inRec=1;try{
+    let rec=null;try{rec=(causeQuery({by:a,to:t,limit:1})||[])[0]||null}catch(e){}
+    if(!rec||rec.w!==(typeof nowW==="function"?nowW():rec.w)||rec.a!==k)rec={by:String(a.id),to:String(t.id),a:k,n:ACT[k]?ACT[k].n:k,y:{k:"net",x:""},r:/không thành|bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(txtOf(r))?"fail":"ok"};
+    /* failed or not = the act's OWN first sentence (a later «… sai đi bị bắt, khai ra chủ» is about the servant, the deed itself may have landed) */
+    const first=txtOf(r).split(/(?<=[.!?…;])\s+/)[0]||"";rec=Object.assign({},rec,{r:/không thành|phát giác|bị lộ|bị bắt|chặn kịp|từ chối|không ai tin|đã bị cắt/.test(first)?"fail":"ok"});
+    const line=recSentence(rec,a,t,k);
+    let sent="";const res0=txtOf(r).replace(/\s*\((?:([^()]*?) )?sai ([^()]*) đi\)/g,(m,x,y)=>{sent=y;return""}).replace(/\s*\(tại [^()]*\)/g,"").trim();
+    /* the result without the act told again: «A định hủy dung B nhưng không thành, bị lộ dấu vết.» → «bị lộ dấu vết.» */
+    const res=res0.split(/(?<=[.!?…])\s+/).map(x=>{if(!(x.includes(a.name)&&x.includes(t.name)))return x;const m=x.match(/nhưng không thành,\s*(.+)$/);return m?m[1]:(/^\S+( \S+)* (định|bày mưu)/.test(x)&&/không thành/.test(x)?"":x)}).filter(Boolean).join(" ").trim();
+    const big=bigK(k);
+    const R=recPush({t:`${line}${sent?` Người được sai: ${sent}.`:""}${res?` Kết quả: ${res[0].toUpperCase()+res.slice(1)}`:""}`,ids:[a.id,t.id],big,k});
+    if(R&&big){NSV.stat.big=(NSV.stat.big||0)+1;const tb=maskNames(line,[a.id,t.id]);R.tb=tb;
+      try{kitKnow({key:"hr:"+R.w+":"+a.id+":"+t.id+":"+k,pri:2,text:tb})}catch(e){}NSV.hr=NSV.hr||[];if(NSV.hr.length<400)NSV.hr.push({w:R.w,k,a:a.id,t:t.id,tb})}
+  }finally{NSV.inRec=0}}}catch(e){console.error("nsRec act",e)}return r}}
+/* the lines the sieve takes out of the feed (newsAdd NPC deeds, kitKnow, the morning card, gossip reports) → the record */
+function recDrop(t,ids){if(!recOn())return;const I=new Set((ids||[]).filter(x=>x!=null));try{for(const v of rivals||[])if(v&&v.name&&String(t).includes(v.name))I.add(v.id)}catch(e){}recPush({t,ids:[...I]})}
+NSV.recDrop=recDrop;
+/* the Sổ ghi tab: her lines (S.logs) and the harem record, newest first, merged by the log sequence at which each record was written */
+function recMerge(){const L=S.logs||[],H=recList();if(!H.length)return L;const n=S.logSeq||L.length;const out=[];let j=0;
+ const row=r=>`<span class="ld">${r.dt}</span>${maskNames(r.t,r.ids)}`;
+ for(let i=0;i<L.length;i++){const seq=n-i;while(j<H.length&&(H[j].q||0)>=seq)out.push(row(H[j++]));out.push(L[i])}while(j<H.length)out.push(row(H[j++]));return out}
+if(typeof renderPanel==="function"){const rp=renderPanel;renderPanel=function(){let keep=null;try{nsOpen();if(on()&&typeof tab!=="undefined"&&tab==="log"&&Array.isArray(S.hrec)&&S.hrec.length){keep=S.logs;S.logs=recMerge()}}catch(e){keep=null}
+  try{return rp.apply(this,arguments)}finally{if(keep)S.logs=keep}}}
+
+/* ---------- 6. NẾT OPEN for servants and children too (MAIN decision OD 26/11 ~06:47Z under the standing rule ~05:55Z; law 6b, nothing hidden):
+   every servant's nết (s.kn, j29 strShow / jhouse «Xem người» — that paid look is no longer offered, nothing left to look) and every child's
+   learning nết (k.dilK, j53) are known from the start. ---------- */
+function nsOpen(){try{if(!on()||!BAL.news.netOpen)return;for(const s of (typeof allServ==="function"?allServ():S.staff||[])||[])if(s&&!s.kn)s.kn=1;if(S.maid&&!S.maid.kn)S.maid.kn=1;
+  for(const [k] of (typeof allKids==="function"?allKids():[]))if(k&&k.dil&&!k.dilK)k.dilK=1}catch(e){}}
+if(typeof mkServ==="function"){const ms=mkServ;mkServ=function(){const s=ms.apply(this,arguments);try{if(on()&&BAL.news.netOpen&&s)s.kn=1}catch(e){}return s}}
+for(const f of ["endTurn","nextBuoi"]){const g0=window[f];if(typeof g0!=="function")continue;const w=function(){const r=g0.apply(this,arguments);nsOpen();return r};window[f]=w;try{if(f==="endTurn")endTurn=w;else nextBuoi=w}catch(e){}}
+Object.assign(window,{nsHerLine,nsNpcLine,nsMonth,nsSieveQ:sieveQ,nsGossipSkip,nsOpen,nsRecMerge:recMerge,nsMask:maskNames});
 })();

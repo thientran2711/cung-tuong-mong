@@ -2184,8 +2184,9 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    NPC ↔ NPC drama keeps running (law 6b) and reaches her as ONE monthly summary (jnsieve nsMonth). on: the sieve; netOpen: every consort's
    nết is shown from the start (trKnown), tai mắt no longer «discover» it; sumTop: most pairs listed in the summary; sumMin: smallest thiện cảm
    change worth a line; sumOwnMin: smallest change of a person's feeling toward HER worth a line; keepK: newsAdd kinds that always stay
-   (the night / accusation / rank / title); mock: open-mockery kinds that a lower rank never does to a higher one (mockOK, j8). */
-BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,keepK:["steal","illicit","hieu","rank","evd"],
+   (the night / accusation / rank / title); recMax: lines kept in the harem record S.hrec shown in the Sổ ghi (OD ~05:05Z); bigBand: an NPC ↔ NPC act of
+   this danger band (BANDS, j24) or higher is also a «Tin báo» line («ai mưu hại ai»); mock: open-mockery kinds that a lower rank never does to a higher one (mockOK, j8). */
+BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,recMax:300,bigBand:2,keepK:["steal","illicit","hieu","rank","evd"],
  mock:["provoke","humiliate","humil","tease","cham","apTaunt"]};
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
