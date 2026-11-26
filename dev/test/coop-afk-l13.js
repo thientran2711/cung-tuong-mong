@@ -15,7 +15,7 @@ const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
-async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
+async function mk(b,name,vp){const ctx=await b.newContext(Object.assign({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'},process.env.VIDEO?{recordVideo:{dir:path.join(process.env.VIDEO,name),size:{width:vp[0],height:vp[1]}}}:{}))/* VIDEO=<dir>: the real 2-seat run's clips (outside git) */;
   await serve(ctx);await ctx.addInitScript(()=>{const t=setInterval(()=>{if(typeof PEND!=="undefined"){PEND.afkT=PEND.afkT||(()=>({t:"<p>Một việc cần ngươi tự quyết.</p>",o:[{n:"Nhận lời",fx:{},go:()=>{S.afkT=(S.afkT||0)+1}},{n:"Từ chối",fx:{},go:()=>{S.afkT=(S.afkT||0)+10}}]}));clearInterval(t)}},50)});/* OPEN 2: a reloaded page rebuilds the test card from its pid */
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}},[WURL,name==='host'&&process.env.THIN?+process.env.THIN:0]);/* THIN=<level>: the host asks for that thin room level */
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
@@ -100,9 +100,11 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
  await RUN.p.evaluate(([inCtx,seat])=>{window.__afkArm=0;window.__afkHit=0;const post=()=>{try{
    const mine=inCtx?!!(COOPW.gWk&&COOPW.ctx):(COOPW.seat===seat&&!COOPW.ctx);if(window.__afkArm&&mine){window.__afkArm=0;window.__afkHit=Date.now();
     Q.push(deserQ([{pid:"afkT",pp:{},t:"Việc khó xử"}])[0]);Q.push({t:"Tin báo",h:"<p>Có tin nhỏ trong cung.</p>"})}}catch(e){window.__afkErr=e.message}};
-   const f=endTurn;endTurn=function(){const r=f.apply(this,arguments);post();return r};
+   /* only a week end that really ran (the date moved): a call the co-op wrapper holds (night not run yet) queues nothing */
+   const dk=()=>{try{return [S.year,S.month,S.tuan,S.turn].join('/')}catch(e){return ''}};
+   const f=endTurn;endTurn=function(){const d0=dk();const r=f.apply(this,arguments);if(dk()!==d0)post();return r};
    /* a life still at home before the tuyển tú (jkc) ends its week through COOPW.weekEnd directly, past the global endTurn */
-   if(typeof COOPW.weekEnd==="function"){const g=COOPW.weekEnd;COOPW.weekEnd=function(){const r=g.apply(this,arguments);post();return r}}},[RUN===A&&X===B,X===A?'a':'b']);
+   if(typeof COOPW.weekEnd==="function"){const g=COOPW.weekEnd;COOPW.weekEnd=function(){const d0=dk();const r=g.apply(this,arguments);if(dk()!==d0)post();return r}}},[RUN===A&&X===B,X===A?'a':'b']);
  for(const o of [A,B])await setTm(o,{nightMs:NMS,buoiMs:600000});await reset(A);
  /* her Kỳ nguyệt sự card (cyrep) has its OWN bound for the host's draw (BAL.coop.cyWaitMs, review/coop-cyhold): when it is out the step may wait on it */
  const CYW=await A.p.evaluate(()=>+((BAL.coop||{}).cyWaitMs)||0);MARGIN=Math.max(MARGIN,CYW+30000);
@@ -112,15 +114,17 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   /* OPEN 2: RELOAD=h|g — that seat reloads while its week end waits, then the bound is shortened to NMS on the fresh pages */
   let HIT0=0;const RL=process.env.RELOAD;if(RL){const Z=RL==='h'?A:B;let z0=null,zl=null,hl=0;const tr=Date.now();
    while(Date.now()-tr<120000){if(Z!==X)await clear(Z);const h=await RUN.p.evaluate(()=>window.__afkHit||0);const z=await D(Z);zl=z;hl=h;
-    const wait=Z===A?(lv.gW&&X===B?await A.p.evaluate(()=>!!(COOPW.thin&&COOPW.thin.G&&COOPW.thin.G.done[COOP.state.week||0])):true):true;
-    if(h&&wait&&(z.pend||(Z===B&&lv.gW&&z.sent===z.w))){await sleep(2500);z0=await D(Z);if(z0.pend||(Z===B&&lv.gW&&z0.sent===z0.w))break}await sleep(400)}
+    /* level 13: her week end ran on the host (G.done) = the host's pend waits on her cards / her phone is past her go (her date moves by the host's patches) */
+    const gd=lv.gW?await A.p.evaluate(()=>!!(COOPW.thin&&COOPW.thin.G&&COOPW.thin.G.done[COOP.state.week||0])):true;
+    const at=z=>Z===B&&lv.gW?gd&&!z.pend:z.pend;
+    if(h&&gd&&at(z)){await sleep(2500);const z2=await D(Z);if(at(z2)&&z2.w===z.w){z0=z2;break}}await sleep(400)}
    ok(!!z0,'reload: '+Z.name+' week end waits (pend / her go) before the reload',z0||{hit:hl,last:zl});
-   HIT0=await RUN.p.evaluate(()=>window.__afkHit||0);if(z0){await Z.p.evaluate(()=>{try{COOPW.snapNow()}catch(e){}})/* = the page's pagehide save of a real reload */;await Z.p.close();await until(Z===A?B:A,()=>COOP.frozen,null,60000);
+   HIT0=await RUN.p.evaluate(()=>window.__afkHit||0);if(z0&&process.env.VIDEO){await shot(A,'rl-1-host-before');await shot(B,'rl-1-guest-before')}if(z0){await Z.p.evaluate(()=>{try{COOPW.snapNow()}catch(e){}})/* = the page's pagehide save of a real reload */;await Z.p.close();await until(Z===A?B:A,()=>COOP.frozen,null,60000);
     if(Z===A){await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(600);await tapText(A,/^Trở lại phòng/);
      ok(await until(A,()=>COOP.seat==='a'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000),'reload: host back in the room')}
     else{await join(B,code);ok(await until(B,()=>COOP.seat==='b'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000),'reload: guest back in the room')}
     await sleep(2500);await Z.p.evaluate(()=>{window.__ownEnd=0;const f=endTurn;endTurn=function(){if(!COOPW.ctx)window.__ownEnd++;return f.apply(this,arguments)};if(typeof COOPW.weekEnd==="function"){const g=COOPW.weekEnd;COOPW.weekEnd=function(){if(!COOPW.ctx)window.__ownEnd++;return g.apply(this,arguments)}}});
-    const z1=await D(Z);console.log('reload trace',JSON.stringify((z1.tr||[])));
+    const z1=await D(Z);console.log('reload trace',JSON.stringify((z1.tr||[])));if(process.env.VIDEO){await shot(A,'rl-2-host-after');await shot(B,'rl-2-guest-after')}
     ok(z1.date===z0.date&&((z1.w===z0.w&&z1.b===z0.b&&z1.pend===z0.pend&&z1.sent===z0.sent)||(z1.w===z0.w+1&&!z1.pend&&z0.w===(await D(Z===A?B:A)).w-1))/* its kept end may already have gone out: the room stepped once from it */,'reload: '+Z.name+' keeps the SAME week end (same date; same pend / sent, or the room stepped once from it): no replay',[z0,z1]);
     for(const o of [A,B])await setTm(o,{nightMs:+process.env.NAFMS2||8000,buoiMs:600000});await reset(A)}}
   /* from here the AFK seat is never touched; the other plays on like a player */
@@ -133,6 +137,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   ok(st>0&&dt<NMS+MARGIN,'afk: the room steps to the next week while '+X.name+' is AFK (within nightMs + margin; her Kỳ nguyệt card: its own cyWaitMs)',{w0,w:[a.w,c.w],ms:dt,bound:NMS});
   console.log('host AFK stat',JSON.stringify(await A.p.evaluate(()=>{try{const G=COOPW.thin.G;return {afk:G.stat.afk|0,lapsed:G.stat.afkLap|0,gaf:COOPW.tm.gaf()}}catch(e){return e.message}}).catch(e=>e.message)));
   ok(a.date===c.date,'afk: same date on both seats',[a.date,c.date]);
+  if(RL&&process.env.VIDEO){await shot(A,'rl-3-host-stepped');await shot(B,'rl-3-guest-stepped')}
   if(RL){const Z=RL==='h'?A:B;const n=await Z.p.evaluate(()=>window.__ownEnd).catch(()=>-1);ok(n===0,'reload: '+Z.name+'\'s own week end never ran again after the reload',n)}
   /* her choice is CARRIED, not made: still on her seat, not answered */
   const xs=await X.p.evaluate(()=>({afkT:S.afkT||0,q:Q.filter(m=>m&&(m.pid==="afkT"||m.thin)).map(m=>m.pid||m.t),cq:(S.cq||[]).map(e=>e.pid||e.t)}));

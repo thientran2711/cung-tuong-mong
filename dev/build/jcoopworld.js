@@ -1606,7 +1606,7 @@ CW.b4Fest=(t,kk)=>{const L=pullFriend();CW.pulled=L;try{return festival(t,kk)}fi
 COOP.on("res",m=>{try{if(!m||!m.fest||m.from===CW.seat||!CW.on||!S)return;const j=S.j71&&S.j71.fx&&S.j71.fx[m.fest.f];if(j&&j.y===m.fest.y)j.done=1}catch(e){}});
 
 CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base||CW.inLife)return null;let d;try{d=ser()}catch(e){return null}
- return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{nrdy:CW.nrdy,ngo:CW.ngo,ngoW:CW.ngoW,nfr:CW.nfr/* OPEN 2: the night's commit + her ready stand across a reload too */,sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||"",thl:(CW.thin&&CW.thin.lvl)||0}}};
+ return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{nrdy:CW.nrdy,sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||"",thl:(CW.thin&&CW.thin.lvl)||0}}};
 /* thin E (room level 5, also when the level message has not arrived yet: the snapshot's own level): the server's buổi stays at the week's
    start, the host's own copy is the room's buổi (his snapshot wins; her buổi is adopted from the host's view, jcoopthine gView) */
 /* robot-coop-fix-6 (CAUSE 4 family: reload / resume): a snapshot whose own date is not the room's merged date (taken after her night moved
