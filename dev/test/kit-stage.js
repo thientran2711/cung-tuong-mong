@@ -1,7 +1,7 @@
 /* kit-stage.js — KIT §102 kitStage «sân khấu không khung» + §102.2 dialogue (KK33, owner 25/11 ~21:50Z / ~21:55Z / ~22:00Z). Fold 755x1000 + iPad 1180x820, real c2a «Tân quân lập uy · Chương 2».
    CARDS: the frame is a stage (no panel: no border / shadow on the dialog), both figures inside the layer, no face under the story box or the plate,
    on one page the story box never over the upper half of a painted figure (KIT_STAGE.bodyK), the hand inside the layer, card faces = picture + name (no odds), the figures visible after the entrance.
-   DIALOGUE (Q item talk:1): one line at a time in the bubble, a real tap on the stage = the next line, after the last line thẻ gỗ (≤ KIT_STAGE.sayPer per page) beside her,
+   DIALOGUE (Q item talk:1): one line at a time in the bubble, a real tap on the stage = the next line, after the last line thẻ gỗ (all at once, ≤ 7, no pages) beside her,
    real tap = lift + ✓ / ✕; ✓ chooses the frame's card (the frame leaves Q[0]).
    usage: node dev/test/kit-stage.js <index.html> [outdir]   Exit 1 on a FAIL. Shots never go in git. */
 const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
@@ -37,7 +37,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
   const mid=await p.evaluate(()=>{const r=document.querySelector('#modal .dlg').getBoundingClientRect();return [r.left+r.width/2,r.top+r.height*.45]});
   await tapXY(mid);let s1=await st();chk('tap = next line',s1.i===1&&s1.on===1,JSON.stringify(s1));
   for(let k=0;k<12&&!(await st()).plaques;k++)await tapXY(mid);await p.waitForTimeout(1200);let s2=await st();await shot('talk-plaques');
-  chk('answers = thẻ gỗ after the last line, ≤ 3 per page',s2.plaques>0&&s2.plaques<=3,JSON.stringify(s2));
+  chk('answers = thẻ gỗ after the last line, all at once (no pages)',s2.plaques>0&&s2.plaques<=7,JSON.stringify(s2));
   const pl=await p.evaluate(()=>{const r=document.querySelector('.kpk .kpk-n .kpk-b').getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await tapXY(pl);
   const ok=await p.evaluate(()=>{const e=document.querySelector('.kpk .khconf:not([hidden])>.khok'),x=document.querySelector('.kpk .khconf:not([hidden])>.khx');if(!e||!x)return null;const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await shot('talk-lift');
   chk('plaque tap = lift + ✓ / ✕',!!ok);await tapXY(pl);chk('lifted plaque body tap chooses nothing',(await st()).q0==='c2a');
