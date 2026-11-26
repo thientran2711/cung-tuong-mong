@@ -70,3 +70,36 @@ The over-detail sits in **system mechanics that keep a witness alive as its own 
 - MAIN 161 hits: j4.js:113–114 → A6 (113 remove, 114 keep) · j42.js:376–377 → C1 keep · j42.js:414 → A4 remove · j29.js:23 → C2 keep · j15.js:80 → C3 keep · j19.js:64 → C3 keep · j2.js:58 → C4 keep · j13.js:41 → C5 keep · spyFor → C6 keep · tài-lộ paths → C7 keep.
 
 Nothing built. Owners if picked: A1–A3, B1–B3 = PUNISH-TIER-2 (charge/evidence code) or whoever MAIN names; A4–A6 = the maid-life / story owner MAIN names.
+
+---
+
+## PART 2 — WHOLE-GAME SPLIT / MERGE FAMILY SCAN (BAL keys, stats, item kinds, NPC roles, choice kinds, result lines)
+
+Same sha (origin/main 03a8c17c), same rules (law 1, 2, 3, 4 ONE CORE, 14 canon overwrite; recs only remove detail or point to the ONE store that already exists; nothing built).
+Kinds: **(a)** really-different things merged into one · **(b)** one thing split finer than needed (or kept in two stores).
+
+| # | Kind | Before (file:line) | After (rec) | Why (law) |
+|---|---|---|---|---|
+| P1 | (b) | «Hoàng hậu → ta: thiện cảm» lives in TWO stores: her stat S.hh (j1.js:57 NAMES, j85.js:158, jselxday.js:288; NPCs p.hh) AND, when the Hoàng hậu is an NPC, the relation model aff(queen, x) (j9.js:33). jtrong.js:83 reads S.hh for her but aff(host, who) for others; nothing syncs them → two numbers for one feeling | ONE store: when a Hoàng hậu exists, S.hh / p.hh read and write aff(queenP(), x) (affAdd); the separate number only while the seat is empty (or drop it then). Same check for S.th vs the Thái hậu elder card | law 4 (one number per fact); law 1 (her and NPCs read the same relation) |
+| P2 | (b) | «nàng nợ ngươi một ân tình» = j95 z.owe (written j95.js:426, 451, 459) — **never read anywhere**; the game's real favour ledger is j72 «nợ ân» (q72Debt / q72DebtAdd, j72.js:67–69, used by jnroadhp) | write those 3 places into the j72 ledger (q72DebtAdd); delete z.owe | law 3 (a promised gain that does nothing); law 4 (one ledger) |
+| P3 | (a)+law 4 | crime WEIGHT is typed in two tables that disagree: door tiers jdoor.js:184–201 («nhẹ/vừa/nặng» per act) vs BAL.charge deed → charge (jbal2.js:2274–2286; tiers on review/punish-tier ab73bc26). Mismatches: frame / plant / giahoa door «nặng» vs charge vo «vừa»; musk door «vừa» vs mh «nặng»; phonghoa (arson) door «nặng» vs uh «nhẹ»; block / blockf / lygian / laydo / laydol / petsteal / thaopet door «vừa» vs uh «nhẹ» | doors print the tier read from BAL.charge (deed → C[c].tier); delete jdoor `tiers` maps. And move **phonghoa → mh** (an existing charge): arson is really different from «Ức hiếp quấy phá» | law 4; (a) arson ≠ teasing; no new charge |
+| P4 | (b) | evidence kept twice: total t.ev / h.evm AND per-charge h.evc, kept equal by chSync (jcharge.js:1–5) | keep per-charge evc only; the total = sum on read | law 4. Internal; PUNISH-TIER-2 owns it |
+| P5 | (a) | on main, witness pieces are counted INSIDE evidence: BAL.charge.C pk «lời khai người bị hại», «người tận mắt chứng kiến», «lời khai người hầu», «lời khai kẻ canh cửa» … (jbal2.js:2275–2282) | already ruled (OD 21:17Z/21:40Z): those pieces move to the witness store BAL.charge.wit; review/punish-tier ab73bc26 does not have BAL.charge.wit yet → **PUNISH-TIER-2's open item, do not double-fix** | owner 21:10Z «chứng cứ khác nhân chứng» |
+| P6 | (b) | «tâu với ai» split into separate buttons in 3 places: j78 evidence panel (6), j95 catch card (3), jtsb «Báo lên Hoàng hậu / Thái hậu» (jtsb.js:20–21) | one «Tố / Báo» button per place, listener = the highest one who can judge (see B1/B3) | owner 21:00Z «hạn chế tách 1 việc»; 21:45Z ≤ 7 cards |
+| P7 | (a) naming | BAL key «wit» means two different things: BAL.wit = Tâm cơ cleverness marks (jbal.js:360–369, j40/j43/j51/j70) vs BAL.ag.wit / BAL.ag.why.wit = witness hearing / witness rank (jbal2.js:859, 1602) — and BAL.charge.wit is about to be a third | rename the cleverness table (e.g. BAL.tcw) when PUNISH-TIER-2 adds BAL.charge.wit, so a «witness» number is never read from the cleverness table | law 4 (a wrong-table read is a silent bug); no play change |
+| P8 | law 14 (docs) | odds words: live code + VANPHONG = Mong manh / Hiểm / Khó lường / Tùy duyên / Có cơ / Vững / Rất vững (j0.js:5 KIT_ODDS, jbal.js:322 BAL.odds.cut). Old ladder (Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc) still in CLAUDE.md «Core laws», WORKER_BRIEF L15 (START_WORKER), j0.js:4 comment | overwrite the old ladder in place in those 3 spots (coordinator owns CLAUDE.md / brief) | law 14 canon overwrite; law 7 |
+| P9 | (b) dup text | the beat «thái giám đánh hơi, đòi bạc» written 3× (j67.js:682–685, j67.js:1520–1522, j96.js:162–164) | keep the 3 cards (3 arcs); optional: one shared text | no mechanic; low |
+| P10 | (b) checked → keep | item kinds: 27 kd labels on IT (j8.js:192…), many with 1–3 items (Rượu, Nến, Băng, Than sưởi …) | KEEP: the bag already folds them into a few tabs (jinv.js:380 KINV_CATS / kinvCat) | no player-visible over-split |
+| P11 | checked → keep | Sủng (S.sung) vs Ân tình (S.an, «tích qua các đêm», fades, j8.js:388) | KEEP: fast favour vs slow bond = really different | — |
+| P12 | checked → keep | spy recruitment (tai mắt) across j15 / j19 / j29 / j42 / jcoopworld: one rule (bribeServ ↔ cnvBribeOpts, BAL.coopBribe) | KEEP (already one core, two-way) | — |
+| P13 | checked → keep | servant role words (Cung nữ / Thái giám / ma ma / quản sự) | KEEP: each has its own work and places | — |
+
+Not re-scanned here (already ordered to other seats, do not double): every hand > 7 cards (owner 21:45Z → MAIN's whole-game scan), oán / ghét / ghen caps (OD 21:09Z, applied), punish tiers + witness counts (PUNISH-TIER-2).
+
+### Part 2 totals
+Recs that change something: **P1, P2, P3, P6** (play / numbers), **P4, P7** (internal, law 4), **P8** (docs). P5 = PUNISH-TIER-2 open item. P9–P13 checked, keep.
+
+---
+
+## HANDOVER (worker)
+Both parts done; nothing built. If MAIN / sếp pick rows, owners: A1–A3, B1–B3, P3–P7 → PUNISH-TIER-2 (charge/evidence code) or the seat MAIN names; A4–A6, P1, P2 → seat MAIN names; P8 → coordinator (CLAUDE.md / WORKER_BRIEF). Worker ctx at end ≈ 22 % (START_CTX ~3 %): no successor needed.
