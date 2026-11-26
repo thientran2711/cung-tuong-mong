@@ -33,11 +33,11 @@ async function rkHello(force){const d=rkIdGet();if(!force&&d.pn&&Date.now()-(d.h
 function rkSrvNever(){return !!(S&&S.srv&&!S.srv.risen)}
 function rkTrack(){if(!S||S.dead)return;const k=S.rk=S.rk||{t:[],mr:-1,sr:-1,k:(S.kids||[]).length,a0:S.age-((S.year||1)-1)};const y=(S.year||1)-1,m=S.month||1;
  try{S.rkGid=rkIdGet().gid}catch(e){}
- if(!rkSrvNever()){const r=S.rank|0;if(r>k.mr){if(k.t.length<70)k.t.push([y,m,"r",r]);k.mr=r}}
+ if(rankHeld(S)){const r=S.rank|0;if(r>k.mr){if(k.t.length<70)k.t.push([y,m,"r",r]);k.mr=r}}
  if(S.srv){const r=S.srv.rk|0;if(r>k.sr){if(k.t.length<70)k.t.push([y,m,"s",r]);k.sr=r}if(S.srv.mama)k.mama=1}
  const nk=(S.kids||[]).length;while(nk>k.k){const c=S.kids[k.k];if(k.t.length<78)k.t.push([y,m,"k",c&&c.sex==="m"?1:0]);k.k++}}
 function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Math.max(0,(S.year||1)-1);
- const mr=rkSrvNever()?-1:Math.max(S.rank|0,S.maxRank|0,k.mr==null?-1:k.mr);const sr0=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;/* the board keeps its 5 servant steps (rank/worker score.js): a six-rung maid rung is sent as its tier (BAL.srvRk.tier, maid-ladder-6) */const sr=sr0>=0?srkTier(sr0):-1;
+ const TR=lifeTopRank(S);const mr=TR.r<0?-1:Math.max(TR.r,k.mr==null?-1:k.mr);/* ONE CORE (j32 lifeTopRank): the rank she really held */const sr0=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;/* the board keeps its 5 servant steps (rank/worker score.js): a six-rung maid rung is sent as its tier (BAL.srvRk.tier, maid-ladder-6) */const sr=sr0>=0?srkTier(sr0):-1;
  let fig="",por="";try{fig=typeof figFor==="function"?figFor(S)||"":""}catch(e){}try{por=typeof figFor==="function"?figFor(S,"por")||"":""}catch(e){}
  if(!por)try{por=fsrc(S.fc,"")}catch(e){}
  /* the server keeps only "img/<file>.webp": strip the CDN base (assemble.py turns every quoted "img/…" literal into IMG_BASE+"img/…", so no quoted img/ here) */
@@ -85,7 +85,7 @@ function rkEndPaint(lid){document.querySelectorAll(`.krk-end[data-lid="${lid}"]`
 if(typeof nlAccept==="function")(function(){const a0=nlAccept;nlAccept=function(){const sd=typeof NLP!=="undefined"&&NLP?NLP.seed:0;const r=a0.apply(this,arguments);
  try{if(S&&sd){S.rkSeed=sd>>>0;S.rkT0=Date.now();S.rk=null;rkTrack()}}catch(e){}return r}})();
 (function(){const o0=over;over=function(h,t,fate){const was=!S||S.dead;const r=o0.apply(this,arguments);if(was)return r;
- try{if(!S||!S.dead||(typeof NLP!=="undefined"&&NLP))return r;rkTrack();const m=Q.find(x=>x&&x.cls==="end"&&!x.rkLid)||null;
+ try{if(!S||!S.dead||(typeof NLP!=="undefined"&&NLP))return r;{const st=rankStage(S);if(st==="home"||st==="tunu")return r}/* D-ENDRANK: never entered = no standing on the board (score.js «no standing»); was sent with the origin ceiling */rkTrack();const m=Q.find(x=>x&&x.cls==="end"&&!x.rkLid)||null;
   const endk=(((m&&m.h||"").match(/<h3>([\s\S]*?)<\/h3>/)||[])[1]||h||"").replace(/<[^>]+>/g,"").trim();
   const sum=rkSummary(endk,S.fate||fate);const lid=rkPush(sum);RK.ends[lid]=sum;
   if(m){m.rkLid=lid;m.h+=`<div class="krk-end kpsec" data-lid="${lid}">${rkEndInner(lid)}</div>`;if(!$("modal").hidden&&Q[0]===m)showModal()}
