@@ -74,6 +74,11 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   if(R.ev){R.wwShown=R.ev.d.filter(x=>x.ww).map(x=>x.t);if(R.wwShown.length){bad++;R.fail=(R.fail||[]).concat('worldcare')}}
   R.droppedBad=R.dropped.filter(x=>x.me||(!/^(emp|th|c\d|cold|sv)/.test(x.rk)&&!/^Tin trong cung/.test(x.t)&&!x.ww));/* the palace news sheet of the buổi is dropped by design */if(R.droppedBad.length){bad++;R.fail=(R.fail||[]).concat('dropped')}
   R.rolled=rolled;R.errs=errs.slice(0,5);R.hits={};
+  /* MAIN 159 r5 (law 6+11): no palace FAVOUR line in her whole home Sổ ghi (start line «Sủng 8 → 0 (Hoàng thượng phật ý)», Thái hậu / Hoàng hậu numbers)
+     and so no emperor page «Hoàng thượng nhạt lòng / để tâm» in Tuần lục */
+  R.favour=await p.evaluate(()=>{if(!isKc())return[];const F=/Sủng\s*[+−-]?\s*\d|Sủng \d+\s*→|Hoàng thượng (nhạt lòng|để tâm)|(Thái hậu|Hoàng hậu)( phật lòng| vừa lòng|: thiện cảm)/;
+   return (S.logs||[]).map(x=>String(x).replace(/<[^>]+>/g,'')).filter(x=>F.test(x)).slice(0,8)});
+  if(R.favour.length){bad++;R.fail=(R.fail||[]).concat('favourLog')}
   /* BIG FAIL r2: no palace RANK word (RANKS[].n, e.g. «Đáp ứng») on her own tag / probes / drawn plates at home */
   if(R.ev)R.surf['drawnPlay']=(R.ev.drawn||[]).join(' ‖ ');
   R.rankHits=await p.evaluate(sv=>{const N=(RANKS||[]).map(x=>x&&x.n).filter(Boolean);const out={};for(const k of ['meTag','meRank','drawnTag','drawnPlay']){const v=sv[k]||'';const h=N.filter(n=>new RegExp('(^|[^\\p{L}])'+n+'($|[^\\p{L}])','u').test(v));if(h.length)out[k]=h}return out},R.surf);
@@ -85,5 +90,5 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   /* owner OD:L2108 (21/11 ~03:15Z): the SAME 8 bottom tabs with the SAME names on every road — a home tab renamed to a KCTABS name is a FAIL */
   if(R.surf.tabsRenamed){bad++;R.fail=(R.fail||[]).concat('tabsRenamed')}
   if(SH){fs.mkdirSync(SH,{recursive:true});await p.evaluate(()=>{window.__kgfOpen='cn';try{k3Stage()}catch(e){}});await sleep(400);await p.screenshot({path:`${SH}/${ORG}-${wh}.jpg`,type:'jpeg',quality:70})}
-  rep[ORG]=R;console.log(ORG,R.isKc,R.kd,'meRank:',R.surf.meRank,'drawn:',R.surf.drawnTag,'play:',(R.ev&&R.ev.drawn||[]).slice(0,4).join(' ; '),'strict-fails:',(R.fail||[]).join(',')||'none');await c.close()}
+  rep[ORG]=R;console.log(ORG,R.isKc,R.kd,'favour:',JSON.stringify(R.favour||[]).slice(0,200),'meRank:',R.surf.meRank,'drawn:',R.surf.drawnTag,'play:',(R.ev&&R.ev.drawn||[]).slice(0,4).join(' ; '),'strict-fails:',(R.fail||[]).join(',')||'none');await c.close()}
  fs.writeFileSync(OUT,JSON.stringify(rep,null,1));await b.close();console.log(bad?'SCAN FAIL '+bad:'SCAN PASS');process.exit(bad?1:0)})();
