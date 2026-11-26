@@ -468,3 +468,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:58Z OWNER: «Ok bỏ lật, làm theo Game of Dice» → OD overwrite of 22:07Z flip rule → MAIN 167.
 - 23:56Z OWNER «Ok bỏ lật, làm theo Game of Dice» (166 OD row) → NO FLIP anywhere; GOD-RESEARCH, KK51, KIT-STAGE-R7, RING-BUILD-7 told. dev/rules has no flip line (22:07Z row lives only in OD).
 - 23:57Z GOD-RESEARCH SPEC READY god-research.md f64348ba (no web reachable → pattern from her 3 shots; timings proposed) → archived; KK51 builds after JOB 1; KIT-STAGE-R7 applies. OWED TO SẾP + : Bàn bài Game-of-Dice-style VIDEO Fold+iPad (sếp «Khi nào xong gửi video Bàn bài cho tôi coi»).
+- 23:58Z OWNER «nhiều quá tôi đọc không hết» → OD row: MAIN replies to her only LIVE/owner-bug done/asked-for items/real decisions, ≤3 lines. Footer recount of WORKLIST_OPEN.md in progress (list stale since 24/11).
