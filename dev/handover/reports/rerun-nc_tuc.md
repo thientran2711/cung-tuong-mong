@@ -1,5 +1,5 @@
 # rerun-nc_tuc — rerun of D's INVALID nc_tuc lives (seat A3)
-Updated 2026-11-26 ~10:35Z. Lives 10/14 finished (scholar-2, lazy-2, speed-2 running; lazy-1 queued). Harness: review/robot-realtap 93812531 (segments on 4523381f / 2aad6849 / 1a29f470 earlier). 3 lives run in parallel; checkpoint/resume across page crashes and 2 h job limits.
+Updated 2026-11-26 ~14:40Z. Lives 12/14 finished (scholar-2, speed-2 running). Harness: review/robot-realtap 93812531 (segments on 4523381f / 2aad6849 / 1a29f470 earlier). 3 lives run in parallel; checkpoint/resume across page crashes and 2 h job limits.
 
 | life | bot/dev | end | valid | harness sha | review |
 |---|---|---|---|---|---|
@@ -13,7 +13,9 @@ Updated 2026-11-26 ~10:35Z. Lives 10/14 finished (scholar-2, lazy-2, speed-2 run
 | lover-2 | sens ipad 2367368888 | Hồng nhan bạc mệnh (lao phổi) age 27 y8 b1113 | VALID | rt2 | robot/review/rerun-nc_tuc-lover-2-review.md (no live moment log) |
 | scholar-1 | sens fold 4239854445 | Công chúa ở lại cố quốc age 19 y2 b122 | VALID | rt2 | robot/review/rerun-nc_tuc-scholar-1-review.md (no live moment log) |
 | speed-1 | bold ipad 3376192488 | Hồng nhan bạc mệnh (Cảnh Hòa băng hà, lụa trắng) age 20 y3 b277 | VALID | rt2 | robot/review/rerun-nc_tuc-speed-1-review.md (no live moment log) |
-| others (scholar-2, lazy-1/2, speed-1/2) | — | running / queued | — | — | — |
+| lazy-1 | quiet ipad 2348989713 | Ban hoa «Bị ban hoa, xuất cung» age 18 y1 b1 (16 taps, game-imposed) | VALID | rt2 | robot/review/rerun-nc_tuc-lazy-1-review.md (no live moment log; flag: ends in first buổi) |
+| lazy-2 | quiet fold 3336481980 | Hồng nhan bạc mệnh (Hưng Long băng hà) age 31 y14 | VALID | rt2 | robot/review/rerun-nc_tuc-lazy-2-review.md (no live moment log) |
+| others (scholar-2, speed-2) | — | running | — | — | — |
 
 ## HARNESS-STUCK
 - speed-2 b65 (~09:58Z): renderer hang (kitScrollCues in MutationObserver, RSS 2.2-2.6 GB); watchdog kill + resume from b61. Evidence robot/rerun-nc_tuc/stuck/rerun-nc_tuc-speed-2.hang.json (sent to F10). lover-1 had a 10-min freeze at b65 too.
