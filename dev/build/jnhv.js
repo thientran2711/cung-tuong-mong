@@ -124,11 +124,17 @@ function st(){return document.getElementById("stage")}
 function geo(){const s=st(),r=s.getBoundingClientRect(),B=AB();const q=x=>{const e=s.querySelector(x)||document.querySelector(x);if(!e||getComputedStyle(e).display==="none"||!e.getBoundingClientRect().width)return null;const b=e.getBoundingClientRect();if(b.bottom<r.top||b.top>r.bottom)return null;return{l:b.left-r.left,r:b.right-r.left}};
  const rl=q("#krail"),cl=kv()==="kv1"?null:q(".kshR");const rlR=rl&&rl.l>r.width/2;
  return{W:r.width,H:r.height,x0:(rl&&!rlR?Math.min(rl.r,r.width*.2):6)+6,x1:Math.min(cl&&cl.l>r.width/2?cl.l:r.width-6,rlR?rl.l:r.width-6)-6,feet:r.height*(B.feet||.9),fh:r.height*(B.figH||.62)}}
+/* every person on the scene = a PAINTED figure (owner, via MAIN 151 26/11 ~03:57Z: never a flat grey stand-in): consorts / Emperor / Thái hậu their own (figFor);
+   servants on the place list with no record object (npc «Cung nữ … của X», «Tiểu … Tử», «Thị vệ …») get the painted figure of their role (maid / eunuch / man) chosen by
+   figFor's own stable hash on their name; a person she has not met keeps her painted figure, only softened (blur + less colour, class nhv-unk). */
+function figRoleOf(p){const t=((p.info||"")+" "+(p.role||"")+" "+(p.name||"")).toLowerCase();if(/thị vệ|thi ve|thống lĩnh/.test(t))return{kind:"man"};
+ if(/thái giám|công công|tổng quản|(^|\s)tiểu .+ tử\b|(^|\s)lão .+ tử\b|\stử$/.test(t)||/ Tử$/.test(p.name||""))return{kind:"maid",ref:{role:"eunuch",name:p.name,id:"n:"+p.name}};
+ return{kind:"maid",ref:{role:"maid",name:p.name,id:"n:"+p.name}}}
 function figSrc(p){let src="";try{const who=p.kind==="emp"||p.kind==="th"?p:p.ref;if(who)src=figFor(p.kind==="emp"||p.kind==="th"?p:who)}catch(e){}
+ if(!src){try{src=figFor(Object.assign({name:p.name},figRoleOf(p)))}catch(e){}}
  let kn=true;try{kn=j59known(p)!==false}catch(e){}
- if(!kn||!src){let g="f";try{if(/^(ksp|peddler|ty|man|min|emp|guard)$/.test(p.kind)||(p.kind==="srv"&&/^(man|emp|ty)$/.test(p.sk))||/thái giám|công công/i.test((p.info||"")+" "+(p.name||"")))g="m";else{const r=typeof personRoleRank==="function"?personRoleRank(p.kind==="srv"&&p.ref?p.ref:{kind:p.kind,ref:p.ref}):null;if(r&&(r.kid||r.sex==="k"))g="k";else if(r&&r.sex==="m")g="m"}}catch(e){}
-  return{src:"img/kit/unknown-fig-"+g+".webp",sil:1}}
- return{src,sil:0}}
+ if(src)return{src,sil:0,unk:!kn};
+ let g="f";try{if(/^(ksp|peddler|ty|man|min|emp|guard)$/.test(p.kind))g="m"}catch(e){}return{src:"img/kit/unknown-fig-"+g+".webp",sil:1}}
 /* the scene's people: the area's groups, each person bound to her index on the place list (the act flow reads that list) */
 function sceneGroups(a){const ppl=curPeople(),E=entries(),used=new Set();const pOf=e=>{const i=ppl.findIndex((p,j)=>{if(used.has(j)||p===S)return false;const x=entryOfP(p,E);return !!x&&x.id===e.id});if(i<0)return null;used.add(i);return{p:ppl[i],i}};
  const out=a.g.map(g=>({cap:g.cap,emp:g.emp,ms:g.ms.map(pOf).filter(Boolean),fol:g.fol.map(pOf).filter(Boolean)})).filter(g=>g.ms.length||g.fol.length);
@@ -140,7 +146,7 @@ function sceneGroups(a){const ppl=curPeople(),E=entries(),used=new Set();const p
 function mkFig(m,master){const e=document.createElement("div");e.className="nhv-f";const F=figSrc(m.p);m.sil=F.sil;
  let tag="",tc="";try{tag=j59tagHTML(m.p,m.p.name);tc=j59col(m.p)}catch(x){}
  /* a name she has not learnt is never «???» on her screen: the kit §59.1 word «Người lạ» (MAIN 127 FAIL 4) */if(/\?\?\?/.test(tag))tag=tag.replace(/\?\?\?/g,"Người lạ");
- e.innerHTML=`<img class="nhv-i${F.sil?" ksil":""}" alt="" draggable="false" src="${esc(F.src)}">${master?`<span class="nhv-tag kscn-tag" style="--tc:${tc}">${tag}</span>`:""}`;
+ e.innerHTML=`<img class="nhv-i${F.sil?" ksil":""}${F.unk?" nhv-unk":""}" alt="" draggable="false" src="${esc(F.src)}">${master?`<span class="nhv-tag kscn-tag" style="--tc:${tc}">${tag}</span>`:""}`;
  m.el=e;m.img=e.querySelector("img");m.tg=e.querySelector(".nhv-tag");m.asp=.32;
  const fixA=()=>{if(m.img.naturalWidth&&m.img.naturalHeight){m.asp=m.img.naturalWidth/m.img.naturalHeight}};m.img.addEventListener("load",()=>{const a0=m.asp;fixA();if(Math.abs(a0-m.asp)>.01&&CUR)layout(true)});fixA();
  e.addEventListener("click",ev=>{ev.stopPropagation();onTap(m)});L.appendChild(e);return e}
@@ -172,6 +178,7 @@ html.nhvon .kfoc-mood:not(.nhv-say),html.nhvon #stage .khead.ksay{display:none!i
 #nhv{position:absolute;inset:0;z-index:1;overflow:hidden;contain:layout paint}
 #nhv .nhv-bg{position:absolute;left:0;top:0;background-size:100% 100%;background-repeat:no-repeat;z-index:0}
 #nhv .nhv-f{position:absolute;left:0;top:0;transform-origin:50% 100%;cursor:pointer;contain:layout}
+#nhv .nhv-f>img.nhv-unk{filter:blur(1.6px) saturate(.55) brightness(.97)}/* a stranger: her own painting, softened — never a grey shape */
 #nhv .nhv-f>img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;object-fit:contain;object-position:50% 100%}
 #nhv .nhv-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:-6px;z-index:2;white-space:nowrap;pointer-events:none}
 #nhv .nhv-tam{position:absolute;left:8px;bottom:6px;z-index:41;pointer-events:none}

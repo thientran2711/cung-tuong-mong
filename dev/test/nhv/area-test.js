@@ -11,6 +11,7 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
 const AUDIT=`(()=>{const out=[];const L=document.getElementById('nhv');if(!L)return ['NO SCENE'];const st=document.getElementById('stage').getBoundingClientRect();
  const vis=e=>{if(!e||!e.isConnected)return false;const cs=getComputedStyle(e);if(cs.display==='none'||cs.visibility==='hidden')return false;const b=e.getBoundingClientRect();return b.width>2&&b.height>2};
  const F=[...L.querySelectorAll('.nhv-f')].filter(vis);
+ F.forEach(f=>{const im=f.querySelector('img');if(im&&(im.classList.contains('ksil')||/unknown-fig/.test(im.getAttribute('src')||'')))out.push('GREY-STANDIN '+((f.querySelector('.nhv-tag')||{}).textContent||'follower'))});/* owner via MAIN 151: every person = her painted figure */
  F.forEach(f=>{let x=f,op=1;while(x&&x!==document.body){op*=+getComputedStyle(x).opacity;x=x.parentElement}const im=f.querySelector('img');const io=+getComputedStyle(im).opacity;if(op<.99||io<.99)out.push('SEE-THROUGH '+op.toFixed(2)+'/'+io.toFixed(2))});
  /* people never overlap: the painted body (the figure box minus its transparent side margins, ~22 % each side) of two people may not cross */
  const B=F.map(f=>{const r=f.getBoundingClientRect();const m=r.width*.22;return {l:r.left+m,r:r.right-m,t:r.top,b:r.bottom,n:(f.querySelector('.nhv-tag')||{}).textContent||'fol'}});
