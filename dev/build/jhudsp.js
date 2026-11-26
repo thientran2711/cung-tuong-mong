@@ -24,4 +24,6 @@
  /* the slot's tap = the EXISTING promotion info (jts tsPromoPanel: the «Xét phẩm» box, conditions she still lacks); no panel of its own. Same guard as the «Xét phẩm» chip tap (jts) */
  window.hudSacphongTap=function(e){try{if(e){e.stopPropagation();e.preventDefault()}const md=document.getElementById("modal");if(md&&!md.hidden)return false;
   if(typeof tsPromoPanel!=="function"||(typeof tsBoxOn==="function"&&!tsBoxOn()))return false;tsPromoPanel(false);return true}catch(x){console.error("hudSacphongTap",x);return false}};
+ /* KIT §32.1s kitHudSlot (KK50): the kit mounts one fixed slot at the right end of the mood row from this hook; no CSS here. Retires the §77c stage chip while it returns data (MAIN 166). */
+ window.kitHudSlotHook=()=>{const t=hudSacphongText();return t?{l:t.l,v:t.v,s:t.s,tap:hudSacphongTap}:null};
 })();
