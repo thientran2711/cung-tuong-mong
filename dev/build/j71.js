@@ -343,9 +343,9 @@ function fPlan7(){const n=nextT7();const f=festAt7(n.m,n.t);if(!f||!FV7[f.k])ret
  return FV7[f.k][vi][0]==="C"&&!S.confined?fInv7(f.k,pp,true):null}
 /* the festival day */
 /* save-unseen-lists r4 (LAW 11 / 6c): her festival-day contest card (made at the turn of the tuần) is BUILT by a registered generator from the festival
-   key: the plan (j.plans[k]: variant, entrants, her preparation) stays on S, its «held» mark (P.y) is set before, once — written into the sổ and
-   made again on load. Queued by its caller (not pushed here). */
-const fDayCard7=rcpReg("j71Day",k=>{const j=j7s();const P=j.plans&&j.plans[k];if(!P||!P.pp||!FV7[k])return null;const pp=P.pp,V=FV7[k][pp.vi];if(!V||V[0]!=="C")return null;
+   key + its plan (variant, entrants as ids, her preparation: carried in ra since rv4; an old {rk,ra:[k]} falls back to j.plans[k]); its «held» mark (P.y)
+   is set before, once — written into the sổ and made again on load. Queued by its caller (not pushed here). */
+const fDayCard7=rcpReg("j71Day",(k,pp0,me0,pb0)=>{const j=j7s();const P=pp0&&typeof pp0==="object"?{pp:pp0,me:me0||0,pb:pb0||0}:(j.plans&&j.plans[k]);if(!P||!P.pp||!FV7[k])return null;const pp=P.pp,V=FV7[k][pp.vi];if(!V||V[0]!=="C")return null;
   const E=[S].concat(ents7(pp));const meB=(P.me===2?J71.prep:0)+(P.pb||0);
   return {t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.rl.j71.danhCRun7)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhCRun7_2)} · kèm: thắng thì các phi tần ghen +${ghenN(BAL.ghen.contest)}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
@@ -353,7 +353,7 @@ const fDayCard7=rcpReg("j71Day",k=>{const j=j7s();const P=j.plans&&j.plans[k];if
 function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){const pp=P.pp,V=FV7[k][pp.vi];P.y=-1;
   if(V[0]!=="C")return fMake7(k,null,false,pp);
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
-  if(meIn&&mgOn7())return fDayCard7(k);
+  if(meIn&&mgOn7())return fDayCard7(k,pp,P.me,P.pb||0);/* rv4: the plan travels WITH the card — a festival of several tuần (Hội Phượng t:[0,1,2]) is planned again for the next tuần in the same step (fPlan7 replaces j.plans[k]), so a remake from the live plan built another contest or lapsed */
   if(meIn)apply({suc:-J71.cost});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
   return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
  return fMake7(k,null,true)}
