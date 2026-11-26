@@ -410,3 +410,31 @@ A–F of r5 unchanged. G. knSell: a habit news (j95 random habit pick) is often 
 
 ### Gain vs risk
 GAIN: four more ways a waiting card was lost or changed by a reload are closed (pregnancy choice, visitor answers, reaction answers, news seller), and the census can no longer miss a `.opts=` card or a ROUTE row whose proof is gone. RISKS: (1) a generator whose args are not data — có thể, nhỏ; rcpReg marks it, the probe names it at once. (2) S.tb put back after the live read — hiếm, nhỏ; the next render makes the same roll; knsell-remake + probe check S. → **Được lớn hơn**.
+
+## INDEPENDENT CHECK (B CHECK sonnet, read-only; save-fix-stack rv9 7446cd0c → rv12 25d67e01)
+PRIORITY #1 CHECK: brief b-save-stack-rvcode-check.md; reused the reviewer's own tests; no code committed. Scope = game source dev/build + dev/test only.
+Method: step diffs / `git show --cc` for merges; mutate = patch the built index.html (revert one hunk) and run the node test; pre-fix build = index.html at 7446cd0c.
+| hunk | file:line | verdict | why |
+|---|---|---|---|
+| j75 «Thái y bắt mạch» → rcpReg `pregFind` (body, canHide) | j75.js:87-94 | OK | same card/answers; people/ids only; census catches it (mutated: UNCLASSIFIED 1 j75.js:91). MUTATE (rcpReg removed): opts-asg-remake pregFind FAIL 3/3; pre-fix build FAIL. Note: no-opts branch (canHide false, btn only) has no rk — same as before, not a regression |
+| jtsb visitor answers → ONE generator `tsbAp` (mock/ally/sorry/th/sv) + Object.assign onto the j24 card | jtsb.js:231-250 | OK | answers identical to old inline code; people as ids; null guards (v/s missing → null, card kept as j24 made it). MUTATE (rcpReg removed): mock/ally/thCall/svDefect FAIL 3/3. Old saves with rk «ap.*» still remake via j24 (j24 answers, as before the fix) |
+| jtoilr QRC.toilPop remake hook adds the 4 reaction answers | jtoilr.js:68-73 | OK | live path untouched (rcpReg closure); remake adds once (toilRx flag); toilRxOpts reads only host/n/name (all in ra); module order jtoil(248) < jtoilr(249). MUTATE: toil rx FAIL |
+| jagknow knSell carries news as data (knSellData) + knSellById + wrapper | jagknow.js:586-606 | OK (with notes) | rk now set, remake finds live news by id else carried copy; try/catch marks __rkErr (probe names it). MUTATE (wrapper off): knSell FAIL — but see test row concern below |
+| jagknow carried-copy fallback (live news gone) | jagknow.js:603 | CONCERN (low) | the copy has the fact's `go` removed; if the live fact is gone and she buys, `n.f.go()` is skipped. For the «Sủng vừa lên/xuống» fact (knFavFact) go sets S.kf[o.id] → the same favour fact can be offered again later (duplicate news). Rare (needs the news to vanish between save and load), small |
+| j3 rcpReg `__rkErr` mark | j3.js:49 | OK | only sets a debug field in the catch; no behaviour change |
+| opts-asg-remake.js row `knSell` | test:27-29 | CONCERN (low) | when no seller has news it prints PASS with `skip` (same:true) → cannot FAIL. In my 3 mutate runs it was skipped 2 of 3 times (mut_kn caught only on the run that had a seller). The knsell-remake.js test is the real cover |
+| other rows of opts-asg-remake.js | test | OK | real round trip serQ→JSON→deserQ comparing title+options text+fx; every row FAILs on the pre-fix build and on its own mutate |
+| rv11 j29 svMarketCard | j29.js:62 | OK | generator + `invAdd(S,{k})` (both sides merged); Q.push inside generator is handled by rcpMk |
+| rv11 jallot alNpcSpend / alInit / alStaffGive | jallot.js:65,67,113 | OK | LIVE ilUsedUp / ilStock (E-FIX-3) kept AND invAdd kept in each |
+| rv11 jration lxGive | jration.js:154-156 | OK | LIVE ilUsedUp kept + `invAdd(to,g)` |
+| rv11 jstip stipGoods | jstip.js:103-105 | OK | ilStockTake → `invAdd(p,e)`; invTop before the keep trim; trim keeps ilStock(e,1,p). Union of both sides, no piece dropped |
+| rv11 jts tsLeHost gift | jts.js:275 | OK | `invAdd(S,…)`; tsLeMeCard generator from the other parent exists (jts.js:283) |
+| rv11 inv-stack scan | dev/test/inv-stack-scan.py | OK | RAW 0 (I ran it). Only KMSNAP.inv / display fixtures remain |
+| rv11 give-1 test relaxation | inv-stack.js:64 | OK (read only) | accepts only «trả lại» text AND both counts 0; a lost piece (hers −1, NPC 0) still FAILs. I could not run inv-stack.js here (needs dev/index.html: assemble.py wants rank/ + the robot save) |
+| rv12 assemble.py module UNION | assemble.py:14 | OK | I diffed the lists: stack added jstack; LIVE added jactj4/jdoor/jdoor5; result has all, 0 duplicates, 0 removed, both relative orders kept, each after its LIVE predecessor |
+| rv12 knSellLive restore of lazy stores + S.tb | jagknow.js:592-601 | CONCERN (low) | (1) S.tb restore is a JSON round trip: nested arrays/objects (K, R, W, no…) are replaced by copies (identity lost) and any non-JSON value would be damaged; whole restore sits in `catch(e){}` so a throw (e.g. a newly made S.j95 = non-object → Object.values throws) silently skips the S.tb restore. (2) knCarryIn side effects on S.tb.W/C are inside tb only → covered. Fault is invisible; the probe (S / NT ids / Q.length) is the only guard |
+| rv12 save-residue-probe names touched S keys | probe | OK | debug text only |
+| rv12 knsell-remake.js | test | CONCERN (not verified) | does not finish in my sandbox: 30 buổi → killed at 560 s, 5 buổi → killed at 110 s (page.evaluate never returns; harness __sbr.after wait). So I could NOT run it or MUTATE fixes 3/4. Reviewer reports PASS 19/21 cards, 0 touched: "19 of 21" means 2 cards had no rk/remake — not explained in the commit message; ask the reviewer which 2 and why |
+| law 4 (typed numbers) in all hunks | — | OK | no new number; `tsbKh(2)` / «2 khắc» in the th answer is moved old code (pre-existing, not new) |
+| law 11 siblings of `.opts=` | j77:221, jact2:52, jecon:90-91, jhaohuu:75, jptime:433, jselxsc:174, jstatus:23, jworld:318 | OK | each has a census row (ROUTE with a code proof / ACT / PANEL); the ROUTE proof now really runs (reviewer fixed c[3]→c[2]); census 181 sites, UNCLASSIFIED 0 (I ran it). jact2 festival card is classed ACT (arrival act) — same precedent as the other ACT rows, but it sets S.adFest before the card is shown: a reload with that card unseen would lose it (probe never met it; low) |
+Result: OK 14 / CONCERN 4 (all low; none blocks a landing). Not run here: inv-stack.js, knsell-remake.js (sandbox).
