@@ -1,0 +1,114 @@
+ACT keys: 55
+
+# HÀNH SỰ DECK (code: pool() + every conditional card under forced states)
+pool (5 random a buổi, after jact AD_OUT): 7 · Múa trong yến tiệc · Cài tai mắt · Nghỉ ngơi dưỡng sức · Cầu tự ở Phụng Tiên điện · Dưỡng nhan · Đọc binh thư, sử sách · Giả mang thai
+ pool cards moved out of Hành sự by jact AD_OUT (live in Tài nghệ / Hoàng tự): Đánh đàn ở ngự hoa viên · Phát chẩn cho cung nhân · Luyện cầm kỳ thi họa · Tụng kinh, làm việc thiện · Thưởng cung nữ
+ + base: 16 · Điểm trang · Nghỉ ngơi một lát · Trò chuyện với cung nữ · Đọc sách giải khuây · Kinh hồng vũ · Thỉnh an Thái hậu · Thỉnh an Hoàng hậu · Hối lộ Kính sự phòng · Giả bệnh · Mời thái y bắt mạch · Sang Thái y viện xin bắt mạch · Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Sai cung nữ đi dò la · Nghe ngóng chung · Phát bạc cứu giúp cung nhân nghèo
+ + art lv max (cam/vu/ky/hoa; deal shows ONE of these): 19 · Điểm trang · Nghỉ ngơi một lát · Trò chuyện với cung nữ · Đọc sách giải khuây · Kinh hồng vũ · Thỉnh an Thái hậu · Thỉnh an Hoàng hậu · Hối lộ Kính sự phòng · Giả bệnh · Mời thái y bắt mạch · Sang Thái y viện xin bắt mạch · Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Sai cung nữ đi dò la · Nghe ngóng chung · Phát bạc cứu giúp cung nhân nghèo · Đàn khúc Phượng cầu hoàng · Đánh cờ với Hoàng thượng · Vẽ chân dung tặng Thái hậu
+ + ill: 17 · Điểm trang · Nghỉ ngơi một lát · Trò chuyện với cung nữ · Đọc sách giải khuây · Thỉnh an Thái hậu · Thỉnh an Hoàng hậu · Hối lộ Kính sự phòng · Truyền thái y · Tự bốc thuốc · Tĩnh dưỡng · Mời thái y bắt mạch · Sang Thái y viện xin bắt mạch · Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Sai cung nữ đi dò la · Nghe ngóng chung · Phát bạc cứu giúp cung nhân nghèo
+ + con: kid ≥3, sick, Y thuật: 15 · Điểm trang · Nghỉ ngơi một lát · Trò chuyện với cung nữ · Đọc sách giải khuây · Thỉnh an Thái hậu · Thỉnh an Hoàng hậu · Hối lộ Kính sự phòng · Giả bệnh · Mời thái y bắt mạch · Sang Thái y viện xin bắt mạch · Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Sai cung nữ đi dò la · Nghe ngóng chung · Phát bạc cứu giúp cung nhân nghèo
+ + pregnant, hidden: 17 · Điểm trang · Nghỉ ngơi một lát · Trò chuyện với cung nữ · Đọc sách giải khuây · An thai · Báo tin có thai · Thỉnh an Thái hậu · Thỉnh an Hoàng hậu · Hối lộ Kính sự phòng · Giả bệnh · Mời thái y bắt mạch · Sang Thái y viện xin bắt mạch · Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Sai cung nữ đi dò la · Nghe ngóng chung · Phát bạc cứu giúp cung nhân nghèo
+ + tâm cơ ≥50, not pregnant: 15 · Điểm trang · Nghỉ ngơi một lát · Trò chuyện với cung nữ · Đọc sách giải khuây · Thỉnh an Thái hậu · Thỉnh an Hoàng hậu · Hối lộ Kính sự phòng · Giả bệnh · Mời thái y bắt mạch · Sang Thái y viện xin bắt mạch · Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Sai cung nữ đi dò la · Nghe ngóng chung · Phát bạc cứu giúp cung nhân nghèo
+deck distinct total (consort road, every state): 31 = pool 7 + fixed/conditional 24
+ lãnh cung deck (own deck, not the consort Hành sự): 10 · Nghỉ ngơi một lát · Đọc sách giải khuây · Cầu xin · Chép kinh, giữ đức · Trồng rau · Thêu khăn bán · Xuất gia · Nhờ Thị lang Hộ bộ đưa thư kêu oan · Nghĩ cách trốn khỏi cung · Xin phế làm thứ dân
+deck seen by the seeded deck bot (act-dedupe-deck.js): 29 · not in the forced list: Để ý một nam nhân áo gấm · Nghĩ cách trốn khỏi cung · Dâng biểu xin xuất gia · Nhờ Thái hậu nói giúp · Xin ban hôn cho Vương gia · Xin về quê phụng dưỡng cha mẹ · Xin rút thẻ bài, đóng cửa tĩnh dưỡng
+
+# HẬU CUNG CONSORT CARD (act buttons, by group pane)
+ dau rv:HH Khổng Chỉ Lan: 54 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 17 · Sát hại 9
+ dau rv:Tề Lạc Anh: 52 = Làm quen 1 · Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 16 · Sát hại 7
+ cao rv:HH Viên Tĩnh Uyển: 51 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 16 · Sát hại 7
+ cao rv:Viên Lưu Ly: 51 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 16 · Sát hại 7
+ hh rv:Mạnh Mạn Nhu: 59 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 18 · Sát hại 9 · Quyền Hoàng hậu 4
+ hh rv:Lư Tuyết Nhạn: 57 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 17 · Sát hại 8 · Quyền Hoàng hậu 4
+ hh rv:Phó Tĩnh Thù: 55 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 16 · Sát hại 7 · Quyền Hoàng hậu 4
+ con rv:HH Thạch Ngọc Hành: 52 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 16 · Sát hại 8
+ con rv:Ngụy Ngưng Sương: 54 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 17 · Sát hại 9
+ con rv:Nam Cung Nhu Tắc: 51 = Gặp mặt 5 · Giao thiệp 3 · Dùng chứng cứ 8 · Hại nhỏ 12 · Hại nặng 16 · Sát hại 7
+ srv rv:Tăng Mạn Châu: 2 = Làm quen 1 · Gặp mặt 1
+ srv rv:Viên Mặc Lan: 2 = Làm quen 1 · Gặp mặt 1
+ Quyền Hoàng hậu with a confined consort (forced): 4 · Xử tội° · Tịch thu vô cớ · Ban thưởng · Khất bổng lộc
+
+# DƯ ĐỒ IN-PERSON POP-UP (dfActs), by person kind
+ maid [dau]: 4 · max e.g. Giao thiệp 3 · Mưu kế 1
+ maid [cao]: 4 · max e.g. Giao thiệp 3 · Mưu kế 1
+ maid [hh]: 4 · max e.g. Giao thiệp 3 · Mưu kế 1
+ maid [con]: 4 · max e.g. Giao thiệp 3 · Mưu kế 1
+ elder [dau]: 2 · max e.g. Giao thiệp 2
+ elder [cao]: 2 · max e.g. Giao thiệp 2
+ elder [hh]: 2 · max e.g. Giao thiệp 2
+ elder [srv]: 2 · max e.g. Giao thiệp 2
+ serv [dau]: 10 · max e.g. Giao thiệp 6 · Mưu kế 1 · Ban thưởng 1 · Trừng phạt 2
+ serv [cao]: 10 · max e.g. Giao thiệp 6 · Mưu kế 1 · Ban thưởng 1 · Trừng phạt 2
+ serv [hh]: 10 · max e.g. Giao thiệp 6 · Mưu kế 1 · Ban thưởng 1 · Trừng phạt 2
+ rival [dau]: 11 · max e.g. Giao thiệp 10 · Trừng phạt 1
+ rival [cao]: 11 · max e.g. Giao thiệp 10 · Trừng phạt 1
+ rival [con]: 10 · max e.g. Giao thiệp 10
+ srv [srv]: 2–5 · max e.g. Hầu hạ 2 · Ban thưởng 1 · Giao thiệp 2
+ kid [srv]: 1 · max e.g. Giao thiệp 1
+ «Bàn tán về X» buttons in one rival pop-up vs people she knows: 1 known → 1 / 4 known → 1 / 9 known → 1
+
+# OTHER TABS (act buttons, nav excluded)
+ dau: staff:0 38 · staff:1 42 · staff:2 41 · kid 5 · inv 10 · art 19 · story 5 · rel 5 · fac 4
+ cao: staff:0 40 · staff:1 44 · staff:2 44 · staff:3 43 · kid 5 · inv 10 · art 19 · story 5 · rel 5 · fac 4
+ hh: staff:0 42 · staff:1 45 · staff:2 45 · staff:3 45 · kid 5 · inv 10 · art 19 · story 5 · rel 5 · fac 4
+ con: staff:0 37 · staff:1 41 · kid:0 14 · kid:1 15 · inv 10 · art 19 · story 5 · rel 5 · fac 4
+ srv: staff:0 14 · kid 5 · inv 9 · art 18 · story 3 · rel 5 · fac 4
+
+# NAMES per surface (° = shown but locked)
+ con act: Điểm trang | Nghỉ ngơi một lát | Trò chuyện với cung nữ | Đọc sách giải khuây | Thỉnh an Thái hậu | Thỉnh an Hoàng hậu | Hối lộ Kính sự phòng | Giả bệnh | Mời thái y bắt mạch | Sang Thái y viện xin bắt mạch | Đọc binh thư, sử sách | Dưỡng nhan | Xem sổ nguyệt sự | Xem lén sổ nguyệt sự | Múa trong yến tiệc | Cài tai mắt | Nghỉ ngơi dưỡng sức° | Cầu tự ở Phụng Tiên điện | Sai cung nữ đi dò la | Nghe ngóng chung | Phát bạc cứu giúp cung nhân nghèo
+ con staff:0: Chí tôn | Phi tần | Nam nhân | Cung nhân | Tình | Tiêu | Lộc Toàn | Thường Hỷ | Kiệt Tử | Người lạNgười lạ | Quế Chi | Tú Dung | Sương | Mặc | Nhi | Duyệt Tử | Trụ Tử | Thanh Hòa | Quế | Cẩn Tử | Tường Tử | Chi | Châu | Lộc Tử | Xuyến | Thịnh Tử | Quất | Đắc Tử | Tâm | Tranh | Vi | Quản kẻ hầu›Thêm cung nữ° | Quản kẻ hầu›Thêm thái giám° | Quản kẻ hầu›Cài người vào cung khác | Thân cận›Chọn làm cung nữ thân cận° | Phòng bị›Giao việc phòng bị
+ con kid:0: Con của ngươi | Kế vị | Hoàng tự trong cung | Hôn sự | Quý tộc kén rể · kén dâu | Mẫn | Gia | Dạy chữ | Dạy lễ nghi | Mời thầy riêng° | Chăm sóc | Dẫn đi thỉnh an Hoàng thượng | Canh giữ các con | Về tẩm cung thăm con°
+ con kid:1: Con của ngươi | Kế vị | Hoàng tự trong cung | Hôn sự | Quý tộc kén rể · kén dâu | Mẫn | Gia | Tự dạy con tài nghệ° | Dạy chữ° | Dạy lễ nghi° | Mời thầy riêng° | Chăm sóc | Dẫn đi thỉnh an Hoàng thượng | Canh giữ các con | Về tẩm cung thăm con°
+ con inv: Túi đồ | Thú cưng | Việc | Nhờ thái giám tìm thú nuôi | Nhờ thái giám mua đồ | Kiểm tra đồ | Sai cung nữ thân tín mua lén ngoài cung | Hối lộ người ở Thái y viện | Chợ đen ở cửa Thần Vũ° | Xin đồng minh°
+ con art: ⓘ luật Đức | ⓘCông · Nữ công | Tự học | Học với thầy | Các lối, sách phổ | ⓘDung · Dung nghi | ⓘNgôn · Lời nói | ⓘHạnh · Đức hạnh | Phát bạc cứu giúp cung nhân nghèo | Bảng tài nghệ hậu cung
+ con story: Mệnh truyện | Việc nhờ | Sổ ghi | Mục lục | Đi làm: Hành sự
+ con rel: Ân oán | Phe phái | Ta▾ | ⇄ | Hoàng thượng▾
+ con fac: Ân oán | Phe phái | Phe phái hậu cung | Triều đình
+ hh act: Điểm trang | Nghỉ ngơi một lát | Trò chuyện với cung nữ | Đọc sách giải khuây | Thỉnh an Thái hậu | Hối lộ Kính sự phòng | Giả bệnh | Mời thái y bắt mạch | Sang Thái y viện xin bắt mạch | Đọc binh thư, sử sách | Dưỡng nhan | Để ý một nam nhân áo gấm | Nghĩ cách trốn khỏi cung° | Dâng biểu xin xuất gia° | Nhờ Thái hậu nói giúp° | Xin ban hôn cho Vương gia° | Xin về quê phụng dưỡng cha mẹ° | Xem sổ nguyệt sự | Xem lén sổ nguyệt sự | Múa trong yến tiệc | Cài tai mắt | Nghỉ ngơi dưỡng sức° | Cầu tự ở Phụng Tiên điện | Sai cung nữ đi dò la | Nghe ngóng chung | Phát bạc cứu giúp cung nhân nghèo
+ hh staff:0: Chí tôn | Phi tần | Nam nhân | Cung nhân | Tâm | Nguyệt | Nhi | Cầm | Song Tử | Bình Tử | Thanh Hòa | Người lạNgười lạ | Quế Chi | Tú Dung | Quản kẻ hầu›Thêm cung nữ° | Quản kẻ hầu›Thêm thái giám° | Quản kẻ hầu›Cài người vào cung khác | Quản kẻ hầu›Chưởng sự tra xét cung nữ | Thân cận›Chọn làm cung nữ thân cận° | Phòng bị›Giao việc phòng bị
+ hh kid: Con của ngươi | Kế vị | Hoàng tự trong cung | Hôn sự | Quý tộc kén rể · kén dâu
+ hh inv: Túi đồ | Thú cưng | Việc | Nhờ thái giám tìm thú nuôi | Nhờ thái giám mua đồ | Kiểm tra đồ | Hối lộ người ở Thái y viện | Sai cung nữ thân tín mua lén ngoài cung° | Chợ đen ở cửa Thần Vũ° | Xin đồng minh°
+ hh art: ⓘ luật Đức | ⓘCông · Nữ công | Tự học | Học với thầy | Các lối, sách phổ | ⓘDung · Dung nghi | ⓘNgôn · Lời nói | ⓘHạnh · Đức hạnh | Phát bạc cứu giúp cung nhân nghèo | Bảng tài nghệ hậu cung
+ hh story: Mệnh truyện | Việc nhờ | Sổ ghi | Mục lục | Đi làm: Hành sự
+ hh rel: Ân oán | Phe phái | Ta▾ | ⇄ | Hoàng thượng▾
+ hh fac: Ân oán | Phe phái | Phe phái hậu cung | Triều đình
+ srv act: Quét sân, lau điện | Dâng trà, hầu điểm tâm° | Theo hầu chủ | Lĩnh đồ ở Nội vụ phủ | Học lễ nghi với cô cô | Luyện thêu thùa, chữ nghĩa | Chải chuốt, giữ nhan sắc | Nghỉ lấy sức | Thêu khăn bán ra ngoài | Lén giữ đồ Nội vụ phủ phát | Việc chủ sai | Nghe ngóng cho chủ | Tự đi dò la cho chủ | Canh chừng cung chủ
+ srv staff:0: Chí tôn | Chủ tử | Nam nhân | Đồng liêu | Hô | Châu | Cát Tử | Họa | Điệp | Nhi | Giao thiệp›Trò chuyện | Giao thiệp›Biếu quà | Giao thiệp›Nhờ dò tin° | Mưu kế›Tố lỗi với chủ
+ srv kid: Con của ngươi | Kế vị | Hoàng tự trong cung | Hôn sự | Quý tộc kén rể · kén dâu
+ srv inv: Túi đồ | Thú cưng | Việc | Nhờ thái giám mua đồ | Kiểm tra đồ | Sai cung nữ thân tín mua lén ngoài cung | Hối lộ người ở Thái y viện | Chợ đen ở cửa Thần Vũ° | Xin đồng minh°
+ srv art: ⓘ luật Đức | ⓘCông · Nữ công | Tự học | Học với thầy | Các lối, sách phổ | ⓘDung · Dung nghi | ⓘNgôn · Lời nói | ⓘHạnh · Đức hạnh | Phát bạc cứu giúp cung nhân nghèo
+ srv story: Thân phận | Việc nhờ | Sổ ghi
+ srv rel: Ân oán | Phe phái | Ta▾ | ⇄ | Hoàng thượng▾
+ srv fac: Ân oán | Phe phái | Phe phái hậu cung | Triều đình
+
+# PETS (khắc budget, OD 26/11 ~04:25Z)
+ pet acts found: rv:HH Nam Cung Thục Nghi: Giúp chăm thú nuôi của nàng | rv:HH Nam Cung Thục Nghi: Hại thú nuôi của nàng | rv:HH Nam Cung Thục Nghi: Thả thú dữ làm hại dung nhan | rv:HH Nam Cung Thục Nghi: Trộm thú nuôi của nàng | rv:Từ Mộng Điệp: Giúp chăm thú nuôi của nàng | rv:Từ Mộng Điệp: Hại thú nuôi của nàng | rv:Từ Mộng Điệp: Thả thú dữ làm hại dung nhan | rv:Từ Mộng Điệp: Trộm thú nuôi của nàng | staff:0: Thúy | staff:1: Thúy | staff:2: Thúy | staff:3: Thúy | inv: Thú cưng | inv: Nhờ thái giám tìm thú nuôi
+
+# TOTALS THE REPORT STATES (v3)
+ deck: forced-state union 31 + deck-bot-only 7 = 38 names printed; men-road name variants 1 ( Để ý một nam nhân áo gấm ) counted once → COLLAPSED deck = 38
+  collapsed list: Múa trong yến tiệc · Cài tai mắt · Nghỉ ngơi dưỡng sức · Cầu tự ở Phụng Tiên điện · Dưỡng nhan · Đọc binh thư, sử sách · Giả mang thai · Điểm trang · Nghỉ ngơi một lát · Trò chuyện với cung nữ · Đọc sách giải khuây · Kinh hồng vũ · Thỉnh an Thái hậu · Thỉnh an Hoàng hậu · Hối lộ Kính sự phòng · Giả bệnh · Mời thái y bắt mạch · Sang Thái y viện xin bắt mạch · Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Sai cung nữ đi dò la · Nghe ngóng chung · Phát bạc cứu giúp cung nhân nghèo · Đàn khúc Phượng cầu hoàng · Đánh cờ với Hoàng thượng · Vẽ chân dung tặng Thái hậu · Truyền thái y · Tự bốc thuốc · Tĩnh dưỡng · An thai · Báo tin có thai · Để ý một nam nhân (men road, any man) · Nghĩ cách trốn khỏi cung · Dâng biểu xin xuất gia · Nhờ Thái hậu nói giúp · Xin ban hôn cho Vương gia · Xin về quê phụng dưỡng cha mẹ · Xin rút thẻ bài, đóng cửa tĩnh dưỡng
+ consort card WITHOUT Quyền Hoàng hậu: 51–55 (per consort met: 54 / 52 / 51 / 51 / 55 / 53 / 51 / 52 / 54 / 51)
+ Quyền Hoàng hậu: on the card 4 · with a confined consort 4 («Ân xá» needs v.confined, j15.js:43) · in code 5 → card max = 55 + 5 = 60
+ lãnh cung deck per deal (12 deals, half with a strong father): 9–11 · union 14 names printed; «Nhờ <who> đưa thư kêu oan» name variants counted once → COLLAPSED lãnh cung deck = 11 · Nghỉ ngơi một lát · Đọc sách giải khuây · Cầu xin · Chép kinh, giữ đức · Trồng rau · Thêu khăn bán · Xuất gia · Nghĩ cách trốn khỏi cung · Xin phế làm thứ dân · Nhờ người bên ngoài · Nhờ <người quen> đưa thư kêu oan
+
+# CUNG NỮ ROAD (forced states, v3)
+ Phận sự [base]: 12 · Quét sân, lau điện · Dâng trà, hầu điểm tâm · Lĩnh đồ ở Nội vụ phủ · Học lễ nghi với cô cô · Luyện thêu thùa, chữ nghĩa · Chải chuốt, giữ nhan sắc · Nghỉ lấy sức · Thêu khăn bán ra ngoài · Việc chủ sai · Nghe ngóng cho chủ · Tự đi dò la cho chủ · Canh chừng cung chủ
+ Phận sự [errand offered (Việc chủ sai)]: 13 · Quét sân, lau điện · Dâng trà, hầu điểm tâm · Theo hầu chủ · Lĩnh đồ ở Nội vụ phủ · Học lễ nghi với cô cô · Luyện thêu thùa, chữ nghĩa · Chải chuốt, giữ nhan sắc · Nghỉ lấy sức · Thêu khăn bán ra ngoài · Việc chủ sai · Nghe ngóng cho chủ · Tự đi dò la cho chủ · Canh chừng cung chủ
+ Phận sự [rank ≥ books + low Sức (Quản sổ sách · Mua thuốc bổ · Đốc thúc)]: 14 · Đốc thúc cung nữ quét dọn · Dâng trà, hầu điểm tâm · Lĩnh đồ ở Nội vụ phủ · Học lễ nghi với cô cô · Luyện thêu thùa, chữ nghĩa · Chải chuốt, giữ nhan sắc · Nghỉ lấy sức · Thêu khăn bán ra ngoài · Mua thuốc bổ · Quản sổ sách trong cung · Việc chủ sai · Nghe ngóng cho chủ · Tự đi dò la cho chủ · Canh chừng cung chủ
+ Phận sự [HT at her master tonight (Hầu trà · Lui sau bình phong)]: 15 · Quét sân, lau điện · Dâng trà, hầu điểm tâm · Theo hầu chủ · Lĩnh đồ ở Nội vụ phủ · Học lễ nghi với cô cô · Luyện thêu thùa, chữ nghĩa · Chải chuốt, giữ nhan sắc · Nghỉ lấy sức · Thêu khăn bán ra ngoài · Lén giữ đồ Nội vụ phủ phát · Hầu trà khi ngự giá · Lui sau bình phong · Nghe ngóng cho chủ · Tự đi dò la cho chủ · Canh chừng cung chủ
+ Phận sự [bought by a rival (Lén báo tin)]: 14 · Quét sân, lau điện · Dâng trà, hầu điểm tâm · Theo hầu chủ · Lĩnh đồ ở Nội vụ phủ · Học lễ nghi với cô cô · Luyện thêu thùa, chữ nghĩa · Chải chuốt, giữ nhan sắc · Nghỉ lấy sức · Thêu khăn bán ra ngoài · Lén giữ đồ Nội vụ phủ phát · Lén báo tin cho Độc Cô Hân Duyệt · Nghe ngóng cho chủ · Tự đi dò la cho chủ · Canh chừng cung chủ
+ Phận sự [punished: Tân Giả khố (lau)]: 3 · Giặt đồ · Nghỉ tay một lát · Cầu xin quản sự
+ Phận sự distinct (every state): 23 · Quét sân, lau điện · Dâng trà, hầu điểm tâm · Lĩnh đồ ở Nội vụ phủ · Học lễ nghi với cô cô · Luyện thêu thùa, chữ nghĩa · Chải chuốt, giữ nhan sắc · Nghỉ lấy sức · Thêu khăn bán ra ngoài · Việc chủ sai · Nghe ngóng cho chủ · Tự đi dò la cho chủ · Canh chừng cung chủ · Theo hầu chủ · Đốc thúc cung nữ quét dọn · Mua thuốc bổ · Quản sổ sách trong cung · Lén giữ đồ Nội vụ phủ phát · Hầu trà khi ngự giá · Lui sau bình phong · Lén báo tin cho Độc Cô Hân Duyệt · Giặt đồ · Nghỉ tay một lát · Cầu xin quản sự
+ pop-up [mis (her own chủ)]: 5 · Đấm lưng, hầu chuyện · Xin chủ ban thưởng · Bẩm tin dò được · Xin chủ tiến cử lên Nội vụ phủ · Xin chủ cho đi hầu cung khác
+ pop-up [rv (another consort)]: 2 · Hành lễ thỉnh an · Mật báo chuyện của Thôi Vân Khanh
+ pop-up [hh (Hoàng hậu)]: 3 · Hành lễ thỉnh an · Mật báo chuyện của Thôi Vân Khanh · Tố cáo Thôi Vân Khanh trước Hoàng hậu
+ pop-up [rv = chủ (met outside)]: 1 · Hầu bên cạnh chủ
+ pop-up [emp (Hoàng thượng)]: 2 · Quỳ dâng trà · Cúi đầu lui tránh
+ pop-up [ty (thái y)]: 2 · Xin thuốc bổ · Học lỏm nghề thuốc
+ pop-up [task (errand place)]: 1 · Làm xong: Việc chủ sai
+ pop-up [sv (another servant)]: 2 · Trò chuyện · Biếu quà nhỏ
+ pop-up [man (a man met, tình ý max)]: 6 · Chào hỏi đúng lễ · Liếc mắt đưa tình · Trao khăn tay, thư · Hẹn gặp riêng · Hẹn ước trăm năm · Cắt đứt
+ pop-up [mis] with Chủ tin 0: Đấm lưng, hầu chuyện · Xin chủ ban thưởng · Bẩm tin dò được · Xin chủ tiến cử lên Nội vụ phủ · Xin chủ cho đi hầu cung khác
+ Cung nhân › Đồng liêu: 4 · Giao thiệp›Trò chuyện · Giao thiệp›Biếu quà · Giao thiệp›Nhờ dò tin · Mưu kế›Tố lỗi với chủ
+
+page errors: 0
