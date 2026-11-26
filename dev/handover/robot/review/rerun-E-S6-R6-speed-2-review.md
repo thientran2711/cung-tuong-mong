@@ -1,0 +1,6 @@
+# R6-speed-2 (Fold 755x1000, bot=sens, seed 2881086999, pf/pt_tang) — end-of-life notes — COUNTED (13 taps)
+Ending **«Bị ban hoa, xuất cung»** (card «Duyên cung lỡ hẹn»), age 20, year 1, **buổi 1**, rank 2, **13 real taps**, 0 JS clicks, 0 bugs. robot-audit VALID (game-imposed; exitPick none). github.io LIVE, GAME BUILD 0281bf7bcef6 (2026-11-26 06:59Z), harness d2e03d80, no resume. From the result JSON (last taps) and the moment log; I did not open its shots: no score table.
+## What happened
+The last taps are 4 «AREA x,y» taps (the robot playing the Lễ ra mắt mini-game board) then the mini-game's own «Quay lại» (#kg82); the game closed the life at once. Same shape as R6-random-5 (Đàn trial, «Mong manh»): a first-buổi debut trial that is failed ends the whole life.
+## Finding (fairness / balance, with R6-random-5 and R6-scholar-2)
+THREE of the 9 counted LIVE lives of pt_tang so far (random-5, scholar-2, speed-2) ended at **buổi 1** on «Lễ ra mắt»; two more (lazy-3, scholar-5) died at the «Thích khách» card in year 1. Five of nine lives are over inside year 1 before the player has made any real choice about the palace. A speed/casual persona (13 taps) finishes the «life» in well under a minute. Needs the expert + owner view (soft landing for the debut trial; warning on the card). Not asserted as a bug.

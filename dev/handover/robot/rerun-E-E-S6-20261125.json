@@ -13707,5 +13707,75 @@
   "row": "R6·scholar·5:3001147699 (rerun on LIVE github.io, fold)",
   "game": "github.io LIVE, GAME BUILD {s:f009e1a6+, b:dd1ce3d0ffa1, t:2026-11-26T02:21Z}; harness d2e03d80; no resume",
   "audit": "VALID (assassin death age 18, real taps, github.io) — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-speed-2",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2881086999,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "bf6dd041+",
+    "b": "0281bf7bcef6",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 82,
+   "dlgScroll": 2,
+   "scrolls": 2,
+   "taps": 13
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 20,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    "AREA 531,358",
+    "AREA 331,600",
+    "AREA 369,658",
+    "AREA 494,342",
+    "AREA 529,580",
+    "AREA 576,611",
+    "AREA 493,493",
+    "AREA 418,566",
+    "AREA 571,659",
+    "AREA 586,592",
+    "AREA 361,496",
+    "#kg82 «Quay lại»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 114,
+  "status": [],
+  "t": {
+   "total": 78149
+  },
+  "unit": "E-S6",
+  "row": "R6·speed·2:2881086999 (rerun on LIVE github.io, fold)",
+  "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; one buổi, no resume",
+  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after the Lễ ra mắt mini-game played by real taps, github.io) — COUNTED"
  }
 ]
