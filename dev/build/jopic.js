@@ -245,8 +245,16 @@ function kitOptCompactRows(b){try{if(!b||b.dataset.kocr==="1")return;const kb=b.
   note.querySelectorAll(".krv > .ksep").forEach(s=>{if(!s.previousElementSibling||!s.nextElementSibling)s.remove()});if(!note.querySelector(".krv > .ef"))note.remove()}}catch(e){}}
 window.kitOptCompactRows=kitOptCompactRows;
 /* a picture-less option gets the §59 placeholder in the same slot when a sibling has a picture (one form per dialog) */
-let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const c=b.parentElement;if(!c)return;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
- sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
+/* F10 member 5 (26/11, Seat A nc_gian speed-1 b1649 crawl: kitOptUnify ← kpOptArt ← kaNorm1, 1 buổi per 3–4 min): every card of a list ran the
+   whole-list unify, and each run rebuilt EVERY art-less sibling again (data-kopt off/on, rows redone) → n × n rebuilds + mutation records per pass.
+   Now: one list is unified once per synchronous pass (a card normalised later in the same pass re-runs it once at the next microtask), and a
+   sibling already unified whose card is unchanged is skipped. */
+const KIT_OPT_UNQ=new Set(),KIT_OPT_UNL=new Set();const kitOptUnSig=x=>x.childElementCount+"|"+x.textContent.length+"|"+(x.dataset.kopt||"");
+let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;const c=b&&b.parentElement;if(!c)return;
+ if(KIT_OPT_UNQ.has(c)){if(!KIT_OPT_UNL.size)queueMicrotask(()=>{const L=[...KIT_OPT_UNL];KIT_OPT_UNL.clear();L.forEach(c=>{if(c.isConnected)kitOptUnify0(c)})});KIT_OPT_UNL.add(c);return}
+ if(!KIT_OPT_UNQ.size)queueMicrotask(()=>KIT_OPT_UNQ.clear());KIT_OPT_UNQ.add(c);kitOptUnify0(c)}
+function kitOptUnify0(c){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
+ sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;if(x.__kouS&&x.__kouS===kitOptUnSig(x))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x);x.__kouS=kitOptUnSig(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
 function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc")||b.classList.contains("kbare"))return;/* KIT §93.7 bare selection card: no rows */
  {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===kitOptSig(b,k1))return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
  b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
