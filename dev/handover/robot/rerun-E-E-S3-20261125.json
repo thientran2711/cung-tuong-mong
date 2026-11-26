@@ -75027,6 +75027,128 @@
    "t": {
     "total": 1423254
    }
+  },
+  {
+   "job": {
+    "id": "R2-random-4",
+    "origin": "thd",
+    "road": "thd_hoc",
+    "bot": "rand",
+    "seed": 3167866133,
+    "dev": "fold",
+    "url": "https://thientran2711.github.io/cung-tuong-mong/"
+   },
+   "harness": {
+    "kind": "realtap",
+    "sha": "08a4ff8b",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "build": {
+     "s": "6b5d3d05+",
+     "b": "b7dcbbd06e03",
+     "t": "2026-11-26T06:59Z"
+    },
+    "areaTaps": 101,
+    "dlgScroll": 4,
+    "scrolls": 4,
+    "infoTaps": 2,
+    "taps": 40
+   },
+   "life": {
+    "id": "Ban hoa",
+    "type": "end",
+    "fate": "Bị ban hoa, xuất cung",
+    "death": false,
+    "age": 18,
+    "year": 1,
+    "rank": 0,
+    "text": "Ngươi về quê, mở một lớp dạy chữ cho con gái trong vùng. Cung cấm chỉ còn là một giấc mộng xa.",
+    "card": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "duringArea": false,
+    "lastTaps": [
+     "AREA 438,681",
+     "AREA 125,661",
+     "AREA 570,584",
+     "AREA 156,354",
+     "AREA 501,792",
+     "AREA 287,450",
+     "AREA 627,438",
+     "AREA 179,788",
+     ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+     ".dlg «Thái hậu» «Người già thì phúc dày, chúng con chỉ mong được họ»",
+     ".dlg «Hoàng thượng» «Cúi đầu chờ xét»",
+     ".dlg «Thái hậu» «Thần thiếp lấy tay áo lót vào đỡ chén, vẫn giữ nét»"
+    ]
+   },
+   "exitPick": null,
+   "bugs": [],
+   "dead": [],
+   "buoi": 1,
+   "steps": 172,
+   "status": [],
+   "_loopAt": 1795691374220,
+   "_snapAt": 1795691369709,
+   "_started": true,
+   "_ckAt": 1795691271312,
+   "_ckB": 1,
+   "rss": [
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1283,
+     "rendererMB": 572,
+     "heapMB": 111,
+     "dom": 2831,
+     "q": 4,
+     "lsK": 4
+    }
+   ],
+   "promo": {
+    "raw": 0,
+    "real": 0,
+    "picked": 0,
+    "by": {}
+   },
+   "_unsFail": {
+    "#klife|": {},
+    ".dlg|Thân phận kiếp này": {},
+    ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+    ".dlg|Ngày thứ nhất — Nhập cung": {},
+    ".dlg|Dưỡng Tú viện": {},
+    ".dlg|Tiền sảnh": {},
+    ".dlg|Đông sở": {},
+    ".mapsc|": {},
+    ".dlg|Đêm": {},
+    ".dlg|Ngày thứ hai — Điện tuyển": {},
+    ".dlg|Dò hỏi ma ma": {},
+    ".dlg|Sân chờ": {},
+    ".dlg|Điện tuyển": {},
+    ".dlg|Thái hậu": {},
+    ".dlg|Hoàng thượng": {}
+   },
+   "_scrW": {
+    ".dlg|Thân phận kiếp này|511,470": {
+     "left": 321,
+     "n": 1
+    },
+    ".mapsc||378,533": {
+     "left": 100,
+     "n": 2
+    }
+   },
+   "t": {
+    "total": 132975
+   }
   }
  ]
 }
