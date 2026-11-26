@@ -55,9 +55,9 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  return A}
 /* ACT-MERGE J4: Thưởng · Phạt · Tha lỗi · Đổi người are ONE act «Thưởng phạt» on the stage too (same door as the Cung nhân card: j4ServDoor, jactj4.js).
    Tra khảo and Che chở stay (evidence / rescue, shown only in their situation). The Dư đồ person view is closed first (jdayq gate c takes back a centre dialog painted inside it). */
-function hsvJudgeDoor(s,A){if(typeof j4ServDoor!=="function")return A;const K=/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/;const out=[];let put=false;
- for(const a of A){if(a&&K.test(a.n||"")){if(!put){put=true;out.push({n:"Thưởng phạt",dom:"Thưởng phạt",o:100,x:"chọn cách xử: thưởng / phạt / tha lỗi / đề bạt / đổi người",open:()=>{try{if(window.DF&&DF.F&&typeof dfGone==="function")dfGone()}catch(e){}j4ServDoor(s)}})}}else out.push(a)}
- return out}
+function hsvJudgeDoor(s,A){if(typeof j4ServDoor!=="function"||typeof j4FoldList!=="function")return A;/* ONE DOOR ENGINE: DOOR.fold (talk-list rule, via j4FoldList) + the same DOOR.card */
+ return j4FoldList(A,{k:"sj",n:"Thưởng phạt",re:/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/},()=>({n:"Thưởng phạt",door:"sj",inner:1,dom:"Thưởng phạt",o:100,x:"chọn cách xử: thưởng / phạt / tha lỗi / đề bạt / đổi người"}),
+  ()=>{try{if(window.DF&&DF.F&&typeof dfGone==="function")dfGone()}catch(e){}j4ServDoor(s)})}
 (function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{return hsvOn()?hsvJudgeDoor(p.ref,hsvActs(p.ref)):[]}catch(e){console.error(e);return[]}}
   const A=t0.apply(this,arguments);
   /* family fix: her trusted maid's stage card gets the tab's "Giao việc phòng bị" too */

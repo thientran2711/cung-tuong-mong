@@ -272,9 +272,10 @@ if(typeof wrapR==="function")wrapR("illAsk",r=>IROUTE[r]?IROUTE[r].n:"");
    «Xin đồng minh» stays its own button (a favour from a friend, answered by her, not a purchase). */
 const ILL_WAYS=()=>Object.keys(IROUTE).filter(r=>r!=="ally");
 function illWayLine(r){const R0=IROUTE[r],lo=Math.min(...R0.ks.map(R0.cost)),hi=Math.max(...R0.ks.map(R0.cost));return `${word(R0.o(S))} · tốn: ${R0.k} khắc, Bạc -${lo} đến -${hi} · thành: có độc dược, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức ${balSg(BAL.rl.j83.ducIllBuy)}`}
-function illDoor(){if(S.dead||Q.length)return;const O=[{n:"Nhờ thái giám mua đồ",fx:{},x:"thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ",go:()=>invAct("shop")}];
- for(const r of ILL_WAYS()){const R0=IROUTE[r],why=whyTime(R0.k)||R0.need(S);const o={n:R0.n,fx:{},x:illWayLine(r),go:()=>illAsk(r)};if(why)kitOff(o,why);O.push(o)}
- O.push({n:"Thôi",fx:{}});Q.push({act:1,t:"Mua đồ",who:pMe(),h:`<p>Chọn đường mua. Ba đường lén mua đồ cấm (độc dược không bán công khai): bị lộ là có người nắm chứng cứ của ngươi.</p>`,opts:O});showModal();render()}
+function illDoor(){if(S.dead||Q.length)return;/* ONE DOOR ENGINE: rows only, the card is DOOR.card via j4Card (jactj4.js) */
+ const O=[{n:"Nhờ thái giám mua đồ",x:"thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ",go:()=>invAct("shop")}];
+ for(const r of ILL_WAYS()){const R0=IROUTE[r],why=whyTime(R0.k)||R0.need(S);O.push(Object.assign({n:R0.n,x:illWayLine(r),go:()=>illAsk(r)},why?{off:{why:String(why)}}:{}))}
+ j4Card("Mua đồ","Chọn đường mua. Ba đường lén mua đồ cấm (độc dược không bán công khai): bị lộ là có người nắm chứng cứ của ngươi.",O)}
 function illHTML(){const W=ILL_WAYS(),kk=W.map(r=>IROUTE[r].k),all=W.flatMap(r=>IROUTE[r].ks.map(IROUTE[r].cost)),A=IROUTE.ally,nd=A.need(S);
  return `<div class="ph"><span>Đồ cấm: độc dược không bán công khai. Bị lộ là có người nắm chứng cứ của ngươi.</span></div><div class="rbtn" style="margin-bottom:6px">`
  +pbtn(`data-ill="door"`,"Mua đồ",`chọn đường mua: Nội vụ phủ (công khai) / nhờ cung nữ / Thái y viện / chợ đen (đồ cấm: mỗi đường có thành bại riêng; tốn ${Math.min(...kk)} đến ${Math.max(...kk)} khắc, Bạc -${Math.min(...all)} đến -${Math.max(...all)})`,"")
