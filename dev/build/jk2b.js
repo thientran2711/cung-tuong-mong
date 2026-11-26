@@ -326,6 +326,9 @@ function kitRiskOpt(o,p,loss,end){if(typeof p==="function")try{p=p()}catch(e){p=
 function kitLifeOpt(o){if(!o)return false;if(o.life||o.end)return true;let t="";try{t=[o.n,typeof o.hint==="function"?o.hint(1):o.hint,o.x,o.j67].filter(Boolean).join(" ")}catch(e){}return KIT_END_RE.test(String(t).replace(/<[^>]*>/g,""))}
 /* the warning line is the kit part §6.2k (jopic kitWarnLine / kitWarnPut, KK44): a Q card (or kitPanel spec) carries warn:1 and the kit draws ONE line above .opts.
    kitChoiceWarn(m) sets it on every choice that holds a life-changing option (before showModal renders it). */
+/* the sticky option row's shadow + gap (jksize KIT BUG #3) are a scroll cue: only a dialog whose body really scrolls keeps them (MAIN 162 look) */
+function kitOptsFit(){try{const M=document.getElementById("modal"),o=M&&M.querySelector("#mb .opts");if(!o||M.hidden)return;let sc=false;for(let e=o.parentElement;e&&e!==M;e=e.parentElement){if(e.scrollHeight>e.clientHeight+2&&/auto|scroll/.test(getComputedStyle(e).overflowY)){sc=true;break}}
+ if(o.scrollHeight>o.clientHeight+2)sc=true;const v=sc?"":"1";if((o.dataset.kfit||"")!==v){if(v)o.dataset.kfit=v;else delete o.dataset.kfit}}catch(e){}}
 function kitChoiceWarn(m){try{if(!m||!m.opts||(m.opts.length||0)<2)return;if(m.opts.some(kitLifeOpt))m.warn=1}catch(e){console.error("kitChoiceWarn",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;if(b.classList.contains("kbare"))return;/* KIT §93.7 + §98.16 (K-BARE-HINT): a bare card carries NO «Gợi ý» row (owner: no guidance on selection answers), same guard as kitOptFinal */b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
@@ -355,7 +358,7 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
 const KIT_ACT_PIDS=new Set(["giftpick","plantpick","taintpick","evpick","itarget","shop","plantsv","wkgive","runner","vlget","vlcraft","vlnvp","vlout","htban","h54ban"]);
 function kitIsEventChoice(m){if(!m||!m.opts||!m.opts.length||m.showOut||m.act||m.shop)return false;if(m.pid&&KIT_ACT_PIDS.has(m.pid))return false;
  return !!(m.hideOut||m.ev||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut)))}
-(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;kitChoiceWarn(m);const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
+(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;kitChoiceWarn(m);const r=s0.apply(this,arguments);setTimeout(kitOptsFit,150);setTimeout(kitOptsFit,700);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
   document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(o&&o.showOut)return;if(m.hideOut||(o&&o.hideOut)){b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
 /* ACT-LIKE OPTIONS inside a dialog (kit owner #2): every hidden-outcome option keeps its odds meter (owner 19/11 ~01:48Z; the old showOdds
    flag is now the default for all) — an option may carry showOut:true — the full act card (Được / Mất / odds), e.g. "Xin ban", "Mua lén". */
