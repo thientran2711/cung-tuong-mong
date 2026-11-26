@@ -163,3 +163,45 @@ ALL PASS
 ## Delivery
 - CDN review folder: https://ctm-img.victoria-tntt.workers.dev/img/_review/tainghe-info/ — tainghe-info-fold-755x1000.mp4, tainghe-info-ipad-1180x820.mp4 (real taps, red dot = tap; every sub-tab, every skill name → its popup → ✕), before-ipad-dungnghi-popup.png, after-ipad-dungnghi-popup.png, after-fold-dungnghi-popup.png
 - Tests: node dev/test/tainghe-info.js [index.html] [out] (ALL PASS Fold+iPad); node dev/test/info-tap-audit.js [index.html] [out.json] (ALL PASS Fold+iPad).
+
+## r3 — kit tap size (LC18 note via MAIN 148)
+`.kskn` was 32 px tall (< 44 px kit tap size). Fix at kit level for the whole family: every kit info target (`.kgl`, `.khap`, `.kskn`, `button.ladi`) gets an invisible centred `::after` hit area of at least 44 × 44 px (`:where()` = no specificity, so parts already positioned keep their position; z-index 1; look unchanged; rows do not grow).
+info-tap-audit.js now measures the real hit area through the target's centre (elementFromPoint, ±40 px) and FAILs < 44 px, except a side that stops at ANOTHER tap target (two targets closer than 44 px share the gap) or at the clip box of a fixed one-line row (§6.3h person rows).
+| measure (Fold) | before r3 | after r3 |
+|---|---|---|
+| info targets with hit < 44 px and no neighbour/clip reason | 65 / 119 | 0 |
+| e.g. «ⓘ Cầm» skill name | 58 × 32 | ≥ 44 × 44 |
+| e.g. «! Xem thêm» / «! Dạo này» | 20 × 20 | ≥ 44 × 44 (or neighbour-limited) |
+| e.g. «ⓘ Cách học» | 81 × 17 | 81 × 44 |
+Full run Fold + iPad: ALL PASS (Fold 117 rows incl. sub-tabs, iPad ALL PASS after the horizontal tab-bar scroll fix in the harness).
+
+## r4 — hit area only into empty space (LC19 / MAIN 150: r3's fixed 44×44 ::after stole taps from neighbour controls)
+- `kitHitGrow` (j79) replaces the fixed box: per target it measures the free room on each side and grows toward 44 px ONLY there — never over another tap control, never past the largest box around it that holds no other control (its row, its card head), never out of its sticky bar / clip box, nothing when it sits inside a control (a «!» on a card, «ⓘ» in an act button). No room → no layer and no `position:relative` (the part is exactly as on main). Runs throttled (120 ms) on DOM change / scroll / resize; ignores kitInfoOneLine's own «!» re-draws.
+- `kitInfoOneLine` (jk4) keeps its row «!» when it is still needed instead of removing and re-making it on every pass (main: 31 new «!» elements in 2 s on a person card → 5); taps on «! Dạo này» no longer land on a thrown-away node.
+- Tab-bar info slot `.pctabs>.pctinfo` spans the bar height (align-self:stretch), so «ⓘ Cách học» can grow over its own bar.
+- Gates (all on this sha): info-tap-audit.js Fold + iPad → 1 row of 238 not measured: «Biết tên» on iPad was re-drawn before its hit could be measured; its popup opened. Every other target is ≥ 44 or stops at a neighbour / its box. tainghe-info.js ALL PASS. dev/test/hit-overlap-lc19.js (LC19's tool, now with/without the layers via `html.khg-off`): 0 points taken by the grown layers from a reachable control (GROW 0); the remaining overlap/steal rows are the same kind as on main (seeded SEED=7: main 123, branch 99) — a part's OWN box over a neighbour, not the hit layer.
+- Note: dev/test/kit-info-fixed.js Fold FAILs from a sparse worktree directory for main's own build too (environment: local img/), PASS from /home/user/cung-tuong-mong — not this change.
+
+## r5 (KK37, 26/11 ~05:30Z) — branch review/tainghe-info-r5 (= main f009e1a6 + r4 via LC19's resolved bf321724 diff + r5)
+PRIORITY #1 CHECK: OD 21/11 ~04:30Z (§62.1 Ghi chú behind «!») + 11/15 (32.10 tap catcher) | main f009e1a6 (r3 in, r4 not) | review/lc19-a14-tainghe4 bf321724 (r4 resolved, reused) · review/balance-pace-r1 c0f41387 (Năm bậc «Tiến bộ» row) | claims KK37.
+| open item | finding | fix |
+|---|---|---|
+| Fold «dead sub-tab after an info popup» (LC19 a14 3/4) | NOT a game fault: robot log `DEAD BUTTON cover div.kph in #modal` = a timed game event («Có người bán tin», agQShow) opened over the tab mid-run; harness CLEAN only closed Q-backed dialogs | tainghe-info.js: CLEAN closes any dialog + #kdaytc, re-CLEAN between retries, logs the covering dialog; T5 «closed» = the rule popup is gone (a queued dialog may follow the ✕) |
+| person-popup dotted words over «Xin …» | measured: the act list scrolls UNDER the opaque info block — the hidden part of a button is not tappable anyway → tool artefact; the REAL family = the one-line «Dạo này» value («Trong cung: Chương 1…») whose cut rest lay under its own «!» (row clips at its padding edge) | KIT §6.3h `.kone-t`: the cut text block ends before the «!» lane (jk4 kitInfoOneLine) |
+| gate (hit-overlap merge) | hit-overlap-lc19.js measured raw boxes | boxes cut to what the player can reach (clipping ancestors + screen); steal / pair only where the control is really reachable under the word |
+| «Biết tên» iPad | not seen in 4 audits | — |
+| #kxcatch over a tab | real: iPad «Hành sự» tab dead under a catcher whose card had gone | KIT 32.10: the catcher lives only while its card is on screen (MutationObserver, jk4 kitCatchOn) |
+| kitHitGrow 1 pt over the mood bar | exact-edge clamp touched a neighbour after rounding | 1 px gap on neighbour-clamped sides (j79) |
+| «Năm bậc» Ghi chú not rendered | by design: owner OD 21/11 ~04:30Z §62.1 — the «Ghi chú» section sits behind the «!» on the «Năm bậc» head (shot checked Fold+iPad) | — |
+| «… tới bậc 2 · Chưa thạo» name order | only on review/balance-pace-r1 (not on main): `tới bậc ${l+1} · ${artNm(l)}` → must be `artNm(l+1)`; family scan = 1 place | for whoever lands a9 / balance-pace (not my branch) |
+Before / after (SEED=7 LC19 tool, honest version, Fold+iPad): main f009e1a6 = 11 real rows (all «Trong cung…» × «!») → r5 = 0 (PASS). Old raw tool: main 123 / r4 99.
+info-tap-audit Fold+iPad: r4-on-main FAIL 2 (iPad «Hành sự» tab under #kxcatch; «! Xem thêm» opens a dialog) → r5 ALL PASS ×2 (one earlier run: iPad sub-tab «Lễ nghi» clipped in the side-scroll bar = harness, not repeated).
+kit-close2 (catcher family): main 34/40 = branch 34/40 (same 6 pre-existing rows) — no regression.
+tainghe-info ×5 Fold+iPad: 1ff145de 4/5 · eb38b13b 4/5 — the ONE failing row both times = iPad Tứ đức › «Công» popup, T5 «✕ did not close» (no cover logged); a direct real-tap probe of the 4 Tứ đức popups ✕ on iPad closes 12/12 → NOT yet explained; gate «×5 0 FAIL» NOT met. Next: log the dialog after the ✕ (the page-side console.log in T5 is not piped — add p.on("console")), or the robot tapped the ✕ during the popup entrance.
+Not done: merging hit-overlap into info-tap-audit (kept as its own gate dev/test/hit-overlap-lc19.js); press-guard idea dropped (no real dead tap reproduced).
+
+## r5 LAND READY (KK38, 26/11 ~07:20Z)
+PRIORITY #1 CHECK: OD none new | main 02f564ae | review/tainghe-info-r5 1483429e (KK37) | claims KK38.
+- T5 row (iPad Tứ đức › «Công» ✕): tainghe-info.js now pipes the page-side «after ✕ a game dialog» notes and prints the modal state when ✕ does not close. Gate tainghe-info ×5 Fold+iPad on eb38b13b: 10/10 ALL PASS, no T5 note fired (KK37's T5 «queued game dialog» rule holds; the earlier 1/5 row = a queued agQShow dialog).
+- Merged LIVE 02f564ae (d51556f5; only built files + CHANGE line conflicted; CHANGE line kept = this branch's). On d51556f5: tainghe-info Fold + iPad ALL PASS ×2 (one run recorded).
+- Videos (real taps, tap dots; LOOKED, contact sheets): https://ctm-img.victoria-tntt.workers.dev/img/_review/tainghe-info/kk38-d51556f5-fold.mp4 (114 s) · …/kk38-d51556f5-ipad.mp4 (123 s): sub-tabs Cầm kỳ thi họa / Vũ·Y·Nữ công / Tứ đức / Tác phẩm, every skill name → its LUẬT popup with «Năm bậc» (current bậc marked «đang ở»), ✕ closes.
