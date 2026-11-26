@@ -538,3 +538,4 @@ FLIGHT2-S15C life (iPad 1180x820 sensitive, seed 2026112540, LIVE origin/main f5
 C3-PLACEGLYPH 24 place glyphs (MAIN 161 ART REQUEST 19:25Z, KIT_REQUESTS L171 + KP02 nth/pd) | CDN img/place-<key>.webp | (session in STATUS) | RUNNING | 2026-11-26T20:15Z (Foreman C ROOT 3-1-1-1-1)
 C3-PLACEGLYPH | CDN img/place-<key>.webp | session_01PEhRbxjDAS9eWrpj8jm1p8 (sonnet) | RUNNING | 2026-11-26T20:17Z (Foreman C; id for the line above)
 C3-PLACEGLYPH | CDN img/place-<key>.webp 24/24 | session_01PEhRbxjDAS9eWrpj8jm1p8 | DONE LOOK PASS (archived), 1 920 cr → KK44 wires | 2026-11-26T20:25Z (Foreman C)
+FLIGHT2-S15D life (Fold 755x1000 cautious, seed 2026112541, LIVE origin/main newest served locally + pin=1 fresh profile, harness review/robot-realtap 8ea10d7e) | review/flight2-s15 flight2-s15d.* | session_01UV1Szhk5EbghGNi7oDMvVw | CLAIMED | 2026-11-26T20:27Z (FOREMAN F #24)
