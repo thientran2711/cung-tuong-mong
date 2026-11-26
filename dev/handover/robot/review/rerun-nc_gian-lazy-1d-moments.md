@@ -1,0 +1,2 @@
+# Review — nc-nc_gian-lazy-1d (low-effort · nc_gian · bot=quiet · seed 7003) — NO LIFE DATA
+Failed the entry selection «Lễ ra mắt» again (took «Dâng khúc đàn cố quốc» → mini-game #kg82), 21 taps, buổi 1, «Ban hoa — Bị ban hoa, xuất cung» age 20, BUILD cc68dcfd2b1b. VALID-EXIT «failed selection», no data. Selection fails for bot=quiet: 3 of 4 on cc68dcfd2b1b-era lives (1b, 1c, 1d fail; lazy-1 passed on 5ab5b80e406e).

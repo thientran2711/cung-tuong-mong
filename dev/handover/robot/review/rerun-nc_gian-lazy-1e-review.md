@@ -1,0 +1,3 @@
+# Review — nc-nc_gian-lazy-1e (low-effort · nc_gian · bot=quiet · seed 7004)
+Ended at buổi 122, age 19, 337 taps: «Công chúa ở lại cố quốc» after dlg «Hòa ước» where the robot took «Xin để vương muội đi thay». Passed selection, so the character reached the palace, but a story choice ends the life: another option existed on that dialog, so under the no-voluntary-exit rule this is SUSPECT/VOID pending Foreman ruling; replacement lives lazy-1f/1g queued. BUILD: see rerun-nc-nc_gian/nc-nc_gian-lazy-1e.build. 0 dead buttons, 0 stuck, 0 bugs.
+Player note: a one-tap «let my younger sister go instead» ends the whole life at 19 with a cold ending; a low-effort player would take the easy-looking option and lose everything - the choice wording does not say the life ends.

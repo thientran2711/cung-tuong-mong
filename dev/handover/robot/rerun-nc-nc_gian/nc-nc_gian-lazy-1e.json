@@ -1,0 +1,2006 @@
+{
+ "job": {
+  "id": "nc-nc_gian-lazy-1e",
+  "origin": "nc",
+  "road": "nc_gian",
+  "bot": "quiet",
+  "seed": 7004,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "54fa0112",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 105,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Thân phận kiếp này"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 197,
+  "dlgScroll": 22,
+  "scrolls": 23,
+  "dlgClose": 29,
+  "infoTaps": 48,
+  "taps": 337
+ },
+ "life": {
+  "id": "Công chúa ở lại cố quốc",
+  "type": "death",
+  "fate": "Công chúa ở lại cố quốc",
+  "death": true,
+  "age": 19,
+  "year": 2,
+  "rank": 0,
+  "text": "Lương Tư Dao đi hòa thân thay nàng. Nàng ở lại vương cung Cao Ly, mười năm sau được gả cho một tộc trưởng phương tây. (Công chúa chờ hòa thân · Công chúa Cao Ly)",
+  "card": [
+   "Thưa: con xin đi, vì muôn dân Rất vững TỐN không ĐƯỢC hòa ướ",
+   "Xin để vương muội đi thay Rất vững TỐN Sức -5 ĐƯỢC có thể ở "
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".kbk «Tổng lược» «Lui»",
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»",
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»",
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»",
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»",
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang trước»",
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang trước»",
+   ".kbk «Tổng lược» «Lui»",
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»",
+   ".dlg «Hòa ước» «Xin để vương muội đi thayRất vữngTốnSức -5Đượccó t»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 309529,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 398328,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 122,
+ "steps": 621,
+ "status": [],
+ "_loopAt": 1795720674273,
+ "_snapAt": 1795720658053,
+ "trace": [
+  [
+   48,
+   "AREA 287,458"
+  ],
+  [
+   49,
+   "AREA 502,479"
+  ],
+  [
+   49,
+   "AREA 172,801"
+  ],
+  [
+   49,
+   "AREA 637,659"
+  ],
+  [
+   49,
+   "AREA 414,482"
+  ],
+  [
+   50,
+   "AREA 195,615"
+  ],
+  [
+   50,
+   "AREA 518,439"
+  ],
+  [
+   50,
+   "AREA 410,834"
+  ],
+  [
+   51,
+   "AREA 350,515"
+  ],
+  [
+   51,
+   "AREA 132,288"
+  ],
+  [
+   51,
+   "AREA 525,329"
+  ],
+  [
+   51,
+   "AREA 310,409"
+  ],
+  [
+   52,
+   "AREA 347,565"
+  ],
+  [
+   52,
+   "AREA 593,584"
+  ],
+  [
+   52,
+   "AREA 621,203"
+  ],
+  [
+   53,
+   "AREA 220,749"
+  ],
+  [
+   53,
+   "AREA 159,840"
+  ],
+  [
+   53,
+   "AREA 307,356"
+  ],
+  [
+   53,
+   "AREA 410,360"
+  ],
+  [
+   54,
+   "AREA 590,528"
+  ],
+  [
+   54,
+   "AREA 338,212"
+  ],
+  [
+   54,
+   "AREA 116,490"
+  ],
+  [
+   55,
+   "AREA 385,279"
+  ],
+  [
+   55,
+   "AREA 510,561"
+  ],
+  [
+   55,
+   "AREA 321,350"
+  ],
+  [
+   56,
+   "AREA 603,370"
+  ],
+  [
+   56,
+   "AREA 376,307"
+  ],
+  [
+   56,
+   "AREA 299,216"
+  ],
+  [
+   56,
+   "AREA 221,662"
+  ],
+  [
+   57,
+   "AREA 357,304"
+  ],
+  [
+   57,
+   "AREA 421,627"
+  ],
+  [
+   57,
+   "AREA 575,621"
+  ],
+  [
+   58,
+   "AREA 126,333"
+  ],
+  [
+   58,
+   "AREA 290,416"
+  ],
+  [
+   58,
+   "AREA 539,451"
+  ],
+  [
+   58,
+   "AREA 317,706"
+  ],
+  [
+   59,
+   "AREA 320,808"
+  ],
+  [
+   59,
+   "AREA 537,665"
+  ],
+  [
+   59,
+   "AREA 633,620"
+  ],
+  [
+   60,
+   "AREA 337,272"
+  ],
+  [
+   60,
+   "AREA 329,300"
+  ],
+  [
+   60,
+   "AREA 428,470"
+  ],
+  [
+   60,
+   "AREA 600,614"
+  ],
+  [
+   61,
+   "AREA 620,617"
+  ],
+  [
+   61,
+   "AREA 491,633"
+  ],
+  [
+   61,
+   "AREA 214,665"
+  ],
+  [
+   62,
+   "AREA 252,496"
+  ],
+  [
+   62,
+   "AREA 198,349"
+  ],
+  [
+   62,
+   "AREA 325,215"
+  ],
+  [
+   63,
+   "AREA 504,406"
+  ],
+  [
+   63,
+   "AREA 498,374"
+  ],
+  [
+   63,
+   "AREA 614,537"
+  ],
+  [
+   63,
+   "AREA 319,771"
+  ],
+  [
+   64,
+   "AREA 247,615"
+  ],
+  [
+   64,
+   "AREA 253,210"
+  ],
+  [
+   64,
+   "AREA 446,449"
+  ],
+  [
+   65,
+   "AREA 220,239"
+  ],
+  [
+   65,
+   "AREA 186,729"
+  ],
+  [
+   65,
+   "AREA 614,452"
+  ],
+  [
+   65,
+   "AREA 423,289"
+  ],
+  [
+   66,
+   "AREA 475,708"
+  ],
+  [
+   66,
+   "AREA 458,270"
+  ],
+  [
+   66,
+   "AREA 456,791"
+  ],
+  [
+   67,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   68,
+   "#modal «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   74,
+   "#klife «Vào cung ngay»"
+  ],
+  [
+   75,
+   "#kroul «Tiếp»"
+  ],
+  [
+   75,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   79,
+   ".dlg «Thân phận kiếp này» «Dung mạo 20»"
+  ],
+  [
+   79,
+   ".dlg «Thân phận kiếp này» «Dung mạo 24»"
+  ],
+  [
+   79,
+   ".dlg «Thân phận kiếp này» «Dung mạo 20»"
+  ],
+  [
+   80,
+   ".dlg «Thân phận kiếp này» «Dung mạo 14»"
+  ],
+  [
+   80,
+   ".dlg «Thân phận kiếp này» «Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở vươ»"
+  ],
+  [
+   82,
+   ".dlg «Thân phận kiếp này» «Dung mạo 19»"
+  ],
+  [
+   83,
+   ".dlg «Thân phận kiếp này» «Dung mạo 16»"
+  ],
+  [
+   83,
+   ".dlg «Thân phận kiếp này» «Dung mạo 14»"
+  ],
+  [
+   83,
+   ".dlg «Thân phận kiếp này» «Dung mạo 17»"
+  ],
+  [
+   84,
+   ".dlg «Thân phận kiếp này» «Dung mạo 13»"
+  ],
+  [
+   84,
+   ".dlg «Thân phận kiếp này» «Dung mạo 19»"
+  ],
+  [
+   84,
+   ".dlg «Thân phận kiếp này» «Vừa»"
+  ],
+  [
+   85,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   85,
+   ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 1»"
+  ],
+  [
+   85,
+   ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 2»"
+  ],
+  [
+   86,
+   ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 2»"
+  ],
+  [
+   86,
+   ".dlg «Thân phận kiếp này» «Dung mạo 29»"
+  ],
+  [
+   87,
+   ".dlg «Thân phận kiếp này» «Dung mạo 30»"
+  ],
+  [
+   87,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   89,
+   ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 4»"
+  ],
+  [
+   89,
+   ".dlg «Thân phận kiếp này» «Vừa»"
+  ],
+  [
+   91,
+   ".dlg «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcsang Đại Hy ngay·hòa ước »"
+  ],
+  [
+   92,
+   ".dlg «Thân phận kiếp này» «Trang trước»"
+  ],
+  [
+   93,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   94,
+   ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 4»"
+  ],
+  [
+   95,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   95,
+   ".dlg «Thân phận kiếp này» «Dung mạo 31»"
+  ],
+  [
+   96,
+   ".dlg «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcsang Đại Hy ngay·hòa ước »"
+  ],
+  [
+   97,
+   ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 2»"
+  ],
+  [
+   98,
+   ".dlg «Thân phận kiếp này» «Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở vươ»"
+  ],
+  [
+   99,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   99,
+   ".dlg «Thân phận kiếp này» «Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở vươ»"
+  ],
+  [
+   101,
+   ".dlg «Thân phận kiếp này» «Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở vươ»"
+  ],
+  [
+   102,
+   ".dlg «Thân phận kiếp này» «Dung mạo 31»"
+  ],
+  [
+   102,
+   ".dlg «Thân phận kiếp này» «Dung mạo 31»"
+  ],
+  [
+   103,
+   ".dlg «Thân phận kiếp này» «Vừa»"
+  ],
+  [
+   104,
+   ".dlg «Thân phận kiếp này» «Dung mạo 30»"
+  ],
+  [
+   105,
+   ".dlg «Thân phận kiếp này» «Dung mạo 26»"
+  ],
+  [
+   105,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   106,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   111,
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 1/3» «Tiếp theo»"
+  ],
+  [
+   112,
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 2/3» «Tiếp theo»"
+  ],
+  [
+   114,
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 3/3» «Tiếp theo»"
+  ],
+  [
+   116,
+   ".dlg «Công chúa Cao Ly» «Lui»"
+  ],
+  [
+   119,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   123,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   125,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   129,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   133,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   133,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   134,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   134,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   134,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   139,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   141,
+   ".dlg «Vương thúc mời yến» «Nhận lời cho êm, rồi tâu phụ vươngRất vữngTốnSức -»"
+  ],
+  [
+   143,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   145,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   147,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   149,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   150,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   150,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   150,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   150,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   154,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   159,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   161,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   163,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   165,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   165,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   165,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   165,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   166,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   170,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   172,
+   ".dlg «Sứ đoàn vào triều» «Xin thử một tiếng đàn lạTốnSức -5ĐượcDanh +2»"
+  ],
+  [
+   173,
+   ".dlg «Sứ đoàn vào triều» «Đứng xem rồi về»"
+  ],
+  [
+   176,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   178,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   180,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   182,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   182,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   182,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   183,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   183,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   185,
+   ".dlg «Lễ Phật đản» «Chép kinh cầu phúcTốnSức -8ĐượcĐức +2·Thái hậu +2»"
+  ],
+  [
+   186,
+   ".dlg «Lễ Phật đản» «Dâng một nén hương, cầu bình anTốnBạc -20ĐượcĐức +»"
+  ],
+  [
+   189,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   191,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   192,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   194,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   199,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   201,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   201,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   201,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   201,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   202,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   203,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   207,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   209,
+   ".dlg «Phụ vương ngã bệnh» «Xin sứ đoàn mời thầy thuốc Đại HyRất vữngTốnSức -5»"
+  ],
+  [
+   212,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   214,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   216,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   218,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   218,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   218,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   219,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   219,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   223,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   225,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   227,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   229,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   231,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   231,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   231,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   232,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   232,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   236,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   238,
+   ".dlg «Có người bán tin» «Mua tinTốnBạc -35·1 khắcĐượcnghe một tin thật·đáng»"
+  ],
+  [
+   239,
+   ".dlg «Tin mua được» «Lui»"
+  ],
+  [
+   243,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   245,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   247,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   249,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   249,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   249,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   250,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   250,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   254,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   258,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   260,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   262,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   264,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   264,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   265,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   265,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   265,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   269,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   271,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   273,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   275,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   277,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   277,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   278,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   278,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   278,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   282,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   284,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   286,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   288,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   290,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   290,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   290,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   291,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   291,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   293,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   297,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   299,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   301,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   303,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   304,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   305,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   305,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   305,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   306,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   310,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   312,
+   ".dlg «Hòa ước» «Ra mắt theo lễ cố quốcRất vữngTốnkhôngĐượcphụ thân»"
+  ],
+  [
+   314,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   316,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   319,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   320,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   321,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   321,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   321,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   321,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   325,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   327,
+   ".dlg «Thích khách» «Tự mình chống trảRất vữngTốnSức -10Đượcthắng thì c»"
+  ],
+  [
+   330,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   332,
+   ".dlg «Có người bán tin» «Không muaGhi chúkhông biết tin ấy!»"
+  ],
+  [
+   335,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   337,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   339,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   339,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   339,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   339,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   340,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   344,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   346,
+   ".dlg «Điều khoản hòa ước» «Xin giữ quyền thư từ với cố quốcRất vữngTốnSức -10»"
+  ],
+  [
+   348,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   351,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   353,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   355,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   355,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   355,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   355,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   356,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   360,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   362,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   364,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   366,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   367,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   368,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   368,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   368,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   369,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   373,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   375,
+   ".dlg «Vương muội tranh phần» «Mặc nàng taRất vữngTốnkhôngĐượcthế của ta trong hò»"
+  ],
+  [
+   377,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   380,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   384,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   385,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   386,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   386,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   386,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   386,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   390,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   392,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   394,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   399,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   400,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   401,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   401,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   401,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   402,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   405,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   407,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   409,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   414,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   415,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   416,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   416,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   416,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   417,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   420,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   422,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   425,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   427,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   428,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   429,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   429,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   432,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   434,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   436,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   438,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   440,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   440,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   440,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   441,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   441,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   445,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   447,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   449,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   453,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   455,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   455,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   455,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   455,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   456,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   459,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   462,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   464,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   466,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   467,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   468,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   468,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   468,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   468,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   473,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   475,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   477,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   479,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   480,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   481,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   481,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   481,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   482,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   485,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   487,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   489,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   494,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   497,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   500,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   502,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   504,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   506,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   508,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   508,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   509,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   509,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   509,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   513,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   515,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   517,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   519,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   521,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   521,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   522,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   522,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   522,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   526,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   528,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   530,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   532,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   534,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   534,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   535,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   535,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   535,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   539,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   541,
+   ".dlg «Đại hàn, tuyết lớn» «Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcK»"
+  ],
+  [
+   542,
+   ".dlg «Đại hàn, tuyết lớn» «Nói mình chẳng dư, xin lỗiTốnDanh -2ĐượcBạc +20»"
+  ],
+  [
+   545,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   547,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   549,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   551,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   551,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   551,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   551,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   552,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   556,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   558,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   560,
+   "page «Tẩm điện của ta · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   562,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   564,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   564,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   564,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   565,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   565,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   569,
+   "page «Tẩm điện của ta · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   571,
+   ".dlg «Hòa ước» «Xin để vương muội đi thayRất vữngTốnSức -5Đượccó t»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795720666396,
+ "_ckB": 121,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1557,
+   "rendererMB": 542,
+   "heapMB": 98,
+   "dom": 2451,
+   "q": 3,
+   "lsK": 4
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 2257,
+   "rendererMB": 1058,
+   "heapMB": 98,
+   "dom": 977,
+   "q": 1,
+   "lsK": 173
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 2304,
+   "rendererMB": 1069,
+   "heapMB": 98,
+   "dom": 983,
+   "q": 0,
+   "lsK": 221
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2389,
+   "rendererMB": 1143,
+   "heapMB": 98,
+   "dom": 882,
+   "q": 0,
+   "lsK": 274
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2546,
+   "rendererMB": 1266,
+   "heapMB": 98,
+   "dom": 1288,
+   "q": 1,
+   "lsK": 305
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2494,
+   "rendererMB": 1246,
+   "heapMB": 98,
+   "dom": 951,
+   "q": 0,
+   "lsK": 297
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2553,
+   "rendererMB": 1313,
+   "heapMB": 98,
+   "dom": 862,
+   "q": 0,
+   "lsK": 318
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2582,
+   "rendererMB": 1341,
+   "heapMB": 98,
+   "dom": 908,
+   "q": 0,
+   "lsK": 329
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2666,
+   "rendererMB": 1389,
+   "heapMB": 98,
+   "dom": 1087,
+   "q": 0,
+   "lsK": 344
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2636,
+   "rendererMB": 1377,
+   "heapMB": 98,
+   "dom": 900,
+   "q": 0,
+   "lsK": 331
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2637,
+   "rendererMB": 1388,
+   "heapMB": 98,
+   "dom": 926,
+   "q": 0,
+   "lsK": 371
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2632,
+   "rendererMB": 1389,
+   "heapMB": 98,
+   "dom": 891,
+   "q": 0,
+   "lsK": 397
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2717,
+   "rendererMB": 1434,
+   "heapMB": 98,
+   "dom": 1229,
+   "q": 0,
+   "lsK": 408
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 2684,
+   "rendererMB": 1427,
+   "heapMB": 98,
+   "dom": 970,
+   "q": 1,
+   "lsK": 395
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "totalMB": 2655,
+   "rendererMB": 1407,
+   "heapMB": 98,
+   "dom": 966,
+   "q": 0,
+   "lsK": 408
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "totalMB": 2660,
+   "rendererMB": 1418,
+   "heapMB": 98,
+   "dom": 970,
+   "q": 0,
+   "lsK": 438
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 2723,
+   "rendererMB": 1450,
+   "heapMB": 98,
+   "dom": 1135,
+   "q": 0,
+   "lsK": 432
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "totalMB": 2699,
+   "rendererMB": 1448,
+   "heapMB": 98,
+   "dom": 979,
+   "q": 0,
+   "lsK": 427
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "totalMB": 2697,
+   "rendererMB": 1450,
+   "heapMB": 98,
+   "dom": 969,
+   "q": 0,
+   "lsK": 439
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "totalMB": 2666,
+   "rendererMB": 1414,
+   "heapMB": 98,
+   "dom": 966,
+   "q": 0,
+   "lsK": 449
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "totalMB": 2749,
+   "rendererMB": 1472,
+   "heapMB": 98,
+   "dom": 1206,
+   "q": 0,
+   "lsK": 454
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "totalMB": 2701,
+   "rendererMB": 1454,
+   "heapMB": 98,
+   "dom": 988,
+   "q": 0,
+   "lsK": 436
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 2690,
+   "rendererMB": 1444,
+   "heapMB": 98,
+   "dom": 981,
+   "q": 0,
+   "lsK": 457
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 2723,
+   "rendererMB": 1475,
+   "heapMB": 98,
+   "dom": 971,
+   "q": 0,
+   "lsK": 471
+  },
+  {
+   "buoi": 121,
+   "y": 2,
+   "totalMB": 2763,
+   "rendererMB": 1474,
+   "heapMB": 98,
+   "dom": 1332,
+   "q": 0,
+   "lsK": 475
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  "#modal|Tiền truyện · Công chúa nước Cao Ly hòa ",
+  ".dlg|Tiền truyện · Công chúa nước Cao Ly hòa ",
+  ".dlg|Công chúa Cao Ly",
+  "page|Tẩm điện của ta · Không gặp ai.",
+  "#kdaytc|",
+  ".kbk|Tổng lược",
+  "page|Tẩm điện của ta · Ở đây có # người.",
+  ".dlg|Vương thúc mời yến",
+  ".dlg|Sứ đoàn vào triều",
+  "#modal|Sứ đoàn vào triều",
+  ".dlg|Lễ Phật đản",
+  "#modal|Lễ Phật đản",
+  "#kxcatch|",
+  ".dlg|Phụ vương ngã bệnh",
+  ".dlg|Có người bán tin",
+  "#modal|Tin mua được",
+  ".dlg|Tin mua được",
+  ".dlg|Tin trong cung buổi này",
+  ".dlg|Hòa ước",
+  ".dlg|Thích khách",
+  ".dlg|Điều khoản hòa ước",
+  ".dlg|Vương muội tranh phần",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Đại hàn, tuyết lớn",
+  ".kmov|"
+ ],
+ "_momRank": 0,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Công chúa nước Cao Ly hòa thân · #/#": {},
+  ".dlg|Vương thúc mời yến": {},
+  ".dlg|Phụ vương ngã bệnh": {},
+  ".dlg|Có người bán tin": {},
+  ".dlg|Hòa ước": {},
+  ".dlg|Thích khách": {},
+  ".dlg|Điều khoản hòa ước": {},
+  ".dlg|Vương muội tranh phần": {},
+  ".dlg|Đại hàn, tuyết lớn": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|511,470": {
+   "left": 188,
+   "n": 1
+  },
+  "#modal|Đại hàn, tuyết lớn|494,643": {
+   "left": 109,
+   "n": 1
+  }
+ },
+ "t": {
+  "total": 571958
+ }
+}
