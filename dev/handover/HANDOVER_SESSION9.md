@@ -3709,3 +3709,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? | D free
 - ~00:25Z MAKEUP-SET r4 374282f9 LOOK PASS (no Fold black band) → LC18 a4 slot replaces 35f3e92c.
 - ~00:00Z PROMO-ROOT 8169d9da SẴN SÀNG KIỂM (report copied to reports/promo-root.md) → BIG rv opened by MAIN; srvMerit crash (j42 no S.srv guard, LIVE too) → PROMO-ROOT as review/srvmerit-guard; robot-rt.js:150 regex → Foreman F. PLACE-RULES a02416e3 sent back («=» wording, pulse alert buổi before, k17 home mark/banner). LC18 chain a1–a6 staged (a6 bd122069); .kskn 32 px tap → TAINGHE-INFO.
 - ~00:02Z ROLL: context 27 % (≈ 29 % line, landing pack is image-heavy) → TAKEOVER_MAIN_149.md written; opening MAIN CHÍNH 149; disabling 148's 4 scheduled tasks.
+- ~00:01Z MAIN CHÍNH 149 = session_01V1ZZH2zAQCCznbuVpXJEf9 opened (depth 6). 148's 4 scheduled tasks disabled. 148 stops; sếp told to write in 149's chat.
