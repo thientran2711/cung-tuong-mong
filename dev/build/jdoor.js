@@ -147,7 +147,8 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
  function open(b){if(!S||S.dead||Q.length)return;const I=b.dataset.ddi.split(",").map(Number),X=b.dataset.ddx.split(",").map(Number);
   const rows=I.map((i,j)=>{const a=deck[i];if(!a)return null;const o={n:a.n,x:lineOf(a),ddoor:1,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jdoor deck way",e)}},0)}};/* its OWN task, like a tap on its old card (no dialog-choice context wraps it) */
    try{if(a.o!=null&&a.o<100&&!a.lock)o.p=optOdds(a)}catch(e){}const w=whyOf(a,!X[j]);if(w)o.off={why:w};return o}).filter(Boolean);
-  DOOR.card(b.dataset.ddoor,b.dataset.ddh,rows,null)}
+  let who=null;try{who=typeof pMe==="function"?pMe():null}catch(e){}/* RV F4: her own act → her figure speaks, like every self-act door */
+  DOOR.card(b.dataset.ddoor,b.dataset.ddh,rows,who)}
  DOOR.deckDoors=()=>[...document.querySelectorAll("#panel button[data-ddoor]")].map(b=>{const I=b.dataset.ddi.split(",").map(Number),X=b.dataset.ddx.split(",").map(Number);return{n:b.dataset.ddoor,ways:I.map(i=>deck[i]&&deck[i].n),free:I.filter((i,j)=>X[j]).map(i=>deck[i]&&deck[i].n)}});
  DOOR.run=n=>{const i=Array.isArray(deck)?deck.findIndex(a=>a&&a.n===n):-1;if(i<0)return false;act(i);return true};
  if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{build()}catch(e){console.error("jdoor deck",e)}return r};window.renderPanel=renderPanel}
