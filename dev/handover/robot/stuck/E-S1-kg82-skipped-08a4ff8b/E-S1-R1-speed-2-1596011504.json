@@ -1,0 +1,722 @@
+{
+ "job": {
+  "id": "E-S1-R1-speed-2-1596011504",
+  "origin": "thd",
+  "road": "thd_tho",
+  "bot": "bold",
+  "seed": 1596011504,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "08a4ff8b",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "build": {
+   "s": "bf6dd041+",
+   "b": "0281bf7bcef6",
+   "t": "2026-11-26T06:59Z"
+  },
+  "areaTaps": 93,
+  "dlgScroll": 8,
+  "scrolls": 8,
+  "mgDragSkip": 1,
+  "taps": 49
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 19,
+  "year": 1,
+  "rank": 0,
+  "text": "Ngươi về quê, mở một lớp dạy chữ cho con gái trong vùng. Cung cấm chỉ còn là một giấc mộng xa.",
+  "card": [
+   "",
+   "",
+   "",
+   ""
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "AREA 225,550",
+   "AREA 193,340",
+   "AREA 562,633",
+   "AREA 758,575",
+   "AREA 933,557",
+   "AREA 660,374",
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+   ".dlg «Thái hậu» «Con thích ngủ sớm dậy sớm, ăn đủ bữa, đó là điều c»",
+   ".dlg «Hoàng thượng» «Dâng Họa»",
+   "#kg82 «Bỏ quakết quả khá, tự thi giỏi thì hơn»",
+   "#kg82 «Quay lại»",
+   ".dlg «Thái hậu» «Thần thiếp cúi xuống vuốt ve chó nhỏ cho nó bớt sợ»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [],
+ "buoi": 1,
+ "steps": 174,
+ "status": [],
+ "_loopAt": 1795682609626,
+ "_snapAt": 1795682567471,
+ "trace": [
+  [
+   8,
+   "AREA 444,320"
+  ],
+  [
+   8,
+   "AREA 870,205"
+  ],
+  [
+   8,
+   "AREA 220,255"
+  ],
+  [
+   9,
+   "AREA 259,172"
+  ],
+  [
+   9,
+   "AREA 348,455"
+  ],
+  [
+   9,
+   "AREA 424,244"
+  ],
+  [
+   10,
+   "AREA 564,399"
+  ],
+  [
+   10,
+   "AREA 386,559"
+  ],
+  [
+   10,
+   "AREA 454,586"
+  ],
+  [
+   10,
+   "AREA 594,412"
+  ],
+  [
+   11,
+   "AREA 736,251"
+  ],
+  [
+   11,
+   "AREA 397,458"
+  ],
+  [
+   11,
+   "AREA 408,696"
+  ],
+  [
+   11,
+   "AREA 307,515"
+  ],
+  [
+   12,
+   "AREA 223,522"
+  ],
+  [
+   12,
+   "AREA 240,542"
+  ],
+  [
+   12,
+   "AREA 605,622"
+  ],
+  [
+   13,
+   "AREA 493,529"
+  ],
+  [
+   13,
+   "AREA 691,593"
+  ],
+  [
+   13,
+   "AREA 911,426"
+  ],
+  [
+   13,
+   "AREA 732,319"
+  ],
+  [
+   14,
+   "AREA 578,201"
+  ],
+  [
+   14,
+   "AREA 220,423"
+  ],
+  [
+   14,
+   "AREA 902,376"
+  ],
+  [
+   15,
+   "AREA 218,237"
+  ],
+  [
+   15,
+   "AREA 440,361"
+  ],
+  [
+   15,
+   "AREA 455,511"
+  ],
+  [
+   15,
+   "AREA 463,182"
+  ],
+  [
+   16,
+   "AREA 408,178"
+  ],
+  [
+   16,
+   "AREA 179,237"
+  ],
+  [
+   16,
+   "AREA 264,166"
+  ],
+  [
+   17,
+   "AREA 813,293"
+  ],
+  [
+   17,
+   "AREA 554,206"
+  ],
+  [
+   17,
+   "AREA 222,425"
+  ],
+  [
+   18,
+   "AREA 304,245"
+  ],
+  [
+   18,
+   "AREA 231,451"
+  ],
+  [
+   18,
+   "AREA 183,590"
+  ],
+  [
+   19,
+   "AREA 743,673"
+  ],
+  [
+   19,
+   "AREA 384,614"
+  ],
+  [
+   19,
+   "AREA 620,410"
+  ],
+  [
+   19,
+   "AREA 845,171"
+  ],
+  [
+   20,
+   "AREA 752,567"
+  ],
+  [
+   20,
+   "AREA 460,639"
+  ],
+  [
+   20,
+   "AREA 495,491"
+  ],
+  [
+   21,
+   "AREA 216,682"
+  ],
+  [
+   21,
+   "AREA 464,608"
+  ],
+  [
+   21,
+   "AREA 636,349"
+  ],
+  [
+   21,
+   "AREA 352,524"
+  ],
+  [
+   22,
+   "AREA 653,259"
+  ],
+  [
+   22,
+   "AREA 793,177"
+  ],
+  [
+   22,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   24,
+   ".dlg «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   32,
+   "#klife «Vào cung ngay»"
+  ],
+  [
+   34,
+   "#kroul «Tiếp»"
+  ],
+  [
+   34,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   38,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   39,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   39,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   39,
+   ".dlg «Thân phận kiếp này» «Dung mạo 11»"
+  ],
+  [
+   40,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   40,
+   ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+  ],
+  [
+   40,
+   ".dlg «Thân phận kiếp này» «Dung mạo 12»"
+  ],
+  [
+   41,
+   ".dlg «Thân phận kiếp này» «Dung mạo 11»"
+  ],
+  [
+   41,
+   ".dlg «Thân phận kiếp này» «Dung mạo 9»"
+  ],
+  [
+   42,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   43,
+   ".dlg «Tiền truyện · Con gái thầy đồ nghèo · 1/4» «Tiếp theo»"
+  ],
+  [
+   44,
+   ".dlg «Tiền truyện · Con gái thầy đồ nghèo · 2/4» «Tiếp theo»"
+  ],
+  [
+   44,
+   ".dlg «Tiền truyện · Con gái thầy đồ nghèo · 3/4» «Tiếp theo»"
+  ],
+  [
+   45,
+   ".dlg «Tiền truyện · Con gái thầy đồ nghèo · 4/4» «Vào cung»"
+  ],
+  [
+   49,
+   "AREA 636,203"
+  ],
+  [
+   50,
+   ".kmov «Vào điện»"
+  ],
+  [
+   52,
+   ".dlg «Ngày thứ nhất — Nhập cung» «Theo thái giám vào cửa việnRất vữngTốn2 khắcĐượcvà»"
+  ],
+  [
+   55,
+   "AREA 996,335"
+  ],
+  [
+   56,
+   "AREA 612,296"
+  ],
+  [
+   56,
+   "AREA 975,430"
+  ],
+  [
+   57,
+   "AREA 386,405"
+  ],
+  [
+   57,
+   "AREA 284,323"
+  ],
+  [
+   57,
+   "AREA 485,298"
+  ],
+  [
+   58,
+   "AREA 369,376"
+  ],
+  [
+   59,
+   "AREA 427,471"
+  ],
+  [
+   59,
+   "AREA 327,319"
+  ],
+  [
+   60,
+   "AREA 640,434"
+  ],
+  [
+   60,
+   "AREA 910,589"
+  ],
+  [
+   61,
+   "AREA 691,308"
+  ],
+  [
+   62,
+   "AREA 970,410"
+  ],
+  [
+   63,
+   "AREA 941,510"
+  ],
+  [
+   63,
+   "AREA 821,290"
+  ],
+  [
+   64,
+   "AREA 185,661"
+  ],
+  [
+   64,
+   "AREA 349,373"
+  ],
+  [
+   65,
+   "AREA 512,642"
+  ],
+  [
+   66,
+   "AREA 659,438"
+  ],
+  [
+   67,
+   "AREA 683,329"
+  ],
+  [
+   67,
+   "AREA 285,575"
+  ],
+  [
+   68,
+   "AREA 269,389"
+  ],
+  [
+   68,
+   "AREA 983,286"
+  ],
+  [
+   68,
+   "AREA 188,414"
+  ],
+  [
+   69,
+   "AREA 442,585"
+  ],
+  [
+   69,
+   "AREA 577,662"
+  ],
+  [
+   70,
+   "AREA 979,340"
+  ],
+  [
+   70,
+   "AREA 635,629"
+  ],
+  [
+   70,
+   "AREA 461,423"
+  ],
+  [
+   71,
+   "AREA 404,432"
+  ],
+  [
+   71,
+   "AREA 456,462"
+  ],
+  [
+   71,
+   "AREA 376,411"
+  ],
+  [
+   72,
+   "AREA 866,635"
+  ],
+  [
+   72,
+   "AREA 854,659"
+  ],
+  [
+   72,
+   "AREA 405,297"
+  ],
+  [
+   74,
+   ".dlg «Dưỡng Tú viện» «Cất đồ, ra Tiền sảnhRất vữngTốn1 khắcĐượcra học qu»"
+  ],
+  [
+   75,
+   ".dlg «Tiền sảnh» «Tập qua loa, để sức cho ngày maiRất vữngTốn1 khắcĐ»"
+  ],
+  [
+   77,
+   ".dlg «Đông sở» «Dò hỏi ma ma về các vị chí tônRất vữngTốnkhôngĐược»"
+  ],
+  [
+   78,
+   ".dlg «Dò hỏi ma ma» «Hỏi về Thái hậuRất vữngTốnkhôngĐượcchọn rồi xem kế»"
+  ],
+  [
+   79,
+   ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳngRất vữngTốn1 khắcĐượcma ma đáp tùy tín»"
+  ],
+  [
+   79,
+   ".dlg «Đông sở» «Dò hỏi ma ma về các vị chí tônRất vữngTốnkhôngĐược»"
+  ],
+  [
+   80,
+   ".dlg «Dò hỏi ma ma» «Hỏi về Thái hậuRất vữngTốnkhôngĐượcchọn rồi xem kế»"
+  ],
+  [
+   81,
+   ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳngRất vữngTốn1 khắcĐượcma ma đáp tùy tín»"
+  ],
+  [
+   82,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữRất vữngTốn1 khắcĐượcbiết»"
+  ],
+  [
+   83,
+   ".dlg «Đông sở» «Nghỉ một látRất vữngTốn1 khắcĐượcdưỡng sứcGợi ýdưỡ»"
+  ],
+  [
+   85,
+   ".dlg «Đông sở» «Nghỉ một látRất vữngTốn1 khắcĐượcdưỡng sứcGợi ýdưỡ»"
+  ],
+  [
+   86,
+   ".dlg «Đông sở» «Trò chuyện với Lục Tịnh DungRất vữngTốn1 khắcĐượcL»"
+  ],
+  [
+   87,
+   ".dlg «Đông sở» «Trò chuyện với Lục Tịnh DungRất vữngTốn1 khắcĐượcL»"
+  ],
+  [
+   87,
+   ".dlg «Đông sở» «Trò chuyện với Lục Tịnh DungRất vữngTốn1 khắcĐượcL»"
+  ],
+  [
+   89,
+   ".dlg «Đông sở» «Ta xin ma ma phân xử.Rất vữngTốn2 khắcĐượcGiáo tập»"
+  ],
+  [
+   92,
+   ".dlg «Đêm» «NgủRất vữngTốnkhôngĐượcdưỡng sứcGợi ýdưỡng sức!»"
+  ],
+  [
+   93,
+   ".dlg «Ngày thứ hai — Điện tuyển» «Theo ma ma ra sân chờ, để mặt mộc»"
+  ],
+  [
+   94,
+   ".dlg «Sân chờ» «Làm quen với một vị tú nữ»"
+  ],
+  [
+   94,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   94,
+   ".dlg «Sân chờ» «Ta cười xòa, coi như chuyện đùa.»"
+  ],
+  [
+   95,
+   ".dlg «Sân chờ» «Dò hỏi thái giám về các vị chí tôn»"
+  ],
+  [
+   95,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   98,
+   "AREA 575,499"
+  ],
+  [
+   98,
+   "AREA 225,550"
+  ],
+  [
+   99,
+   "AREA 193,340"
+  ],
+  [
+   99,
+   "AREA 562,633"
+  ],
+  [
+   99,
+   "AREA 758,575"
+  ],
+  [
+   100,
+   "AREA 933,557"
+  ],
+  [
+   100,
+   "AREA 660,374"
+  ],
+  [
+   101,
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»"
+  ],
+  [
+   101,
+   ".dlg «Thái hậu» «Con thích ngủ sớm dậy sớm, ăn đủ bữa, đó là điều c»"
+  ],
+  [
+   102,
+   ".dlg «Hoàng thượng» «Dâng Họa»"
+  ],
+  [
+   104,
+   "#kg82 «Bỏ quakết quả khá, tự thi giỏi thì hơn»"
+  ],
+  [
+   104,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   108,
+   ".dlg «Thái hậu» «Thần thiếp cúi xuống vuốt ve chó nhỏ cho nó bớt sợ»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795682528423,
+ "_ckB": 1,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1385,
+   "rendererMB": 666,
+   "heapMB": 111,
+   "dom": 3155,
+   "q": 4,
+   "lsK": 4
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  "#modal|Ngày thứ nhất — Nhập cung",
+  ".kmov|",
+  ".dlg|Ngày thứ nhất — Nhập cung",
+  ".kscn|",
+  ".dlg|Dưỡng Tú viện",
+  ".dlg|Tiền sảnh",
+  ".dlg|Đông sở",
+  ".dlg|Dò hỏi ma ma",
+  ".dlg|Đêm",
+  ".dlg|Ngày thứ hai — Điện tuyển",
+  ".dlg|Sân chờ",
+  ".dlg|Điện tuyển",
+  ".dlg|Thái hậu",
+  "#modal|Hoàng thượng",
+  ".dlg|Hoàng thượng",
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # n",
+  "#kg82|",
+  "#modal|Thái hậu"
+ ],
+ "_momRank": 0,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+  ".dlg|Ngày thứ nhất — Nhập cung": {},
+  ".dlg|Dưỡng Tú viện": {},
+  ".dlg|Tiền sảnh": {},
+  ".dlg|Đông sở": {},
+  ".dlg|Dò hỏi ma ma": {},
+  ".dlg|Đêm": {},
+  ".dlg|Ngày thứ hai — Điện tuyển": {},
+  ".dlg|Sân chờ": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Thái hậu": {},
+  ".dlg|Hoàng thượng": {},
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # người.": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|871,392": {
+   "left": 400,
+   "n": 1
+  },
+  ".dlg|Tiền sảnh|706,560": {
+   "left": 142,
+   "n": 1
+  },
+  ".dlg|Đông sở|706,540": {
+   "left": 175,
+   "n": 3
+  }
+ },
+ "t": {
+  "total": 110011
+ }
+}
