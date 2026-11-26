@@ -24,7 +24,7 @@ const J4DOOR={};/* key -> ways, filled while a tab is drawn */
     if(m[3]==="th"&&!why&&used+2>BAL.time.khac&&used<BAL.time.khac&&!S.j76carry)why=(S.buoi||0)!==0?"chỉ buổi sáng":`không kịp xong trong ${BUOI[0].toLowerCase()}`;
     return{n:c.n,x:c.sm,why,go:()=>vir?lessonVir(k,m[3]):lessonMode(k,m[3])}});
    const allOff=J4DOOR[dk].every(w=>w.why);
-   s.acts=[pbtn(`data-learndoor="${dk}"`,"Học",`ghi chú: chọn cách học: ${ways.map(c=>c.n.replace(/^Học với /,"học với ").replace(/^Tự học/,"tự học")).join(" · ")}`,allOff?J4DOOR[dk][0].why:""),...keep]}
+   s.acts=[pbtn(`data-learndoor="${dk}"`,"Học",`chọn cách học: ${ways.map(c=>c.n.replace(/^Học với /,"học với ").replace(/^Tự học/,"tự học")).join(", ")}`,allOff?J4DOOR[dk][0].why:""),...keep]}
   }catch(e){console.error("j4 hoc",e)}return L}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-learndoor]");if(!b||b.disabled)return;e.stopPropagation();
  const dk=b.dataset.learndoor,W=J4DOOR[dk];if(!W)return;const vir=dk[0]==="v",k=dk.slice(2),nm=vir?((VIR.find(x=>x.k===k)||{}).n||""):((ARTS.find(x=>x.k===k)||{}).n||"");
@@ -47,7 +47,7 @@ function j4Merge(fname,rules){const f0=window[fname]||(typeof eval(fname)==="fun
    g.ways.forEach((w,i)=>{if(out.includes(`<!--J4S:${key}:${i}-->`))W.push(Object.assign({i},w))});
    /* a door with one way left is no door: the old button stays as it was */
    if(W.length>1){J4DOOR[key]=W.map(w=>({n:w.n,x:w.sm,why:w.why,go:()=>j4Tap(w.at,w.n)}));
-    const door=pbtn(`data-j4door="${key}"`,R.name,`ghi chú: ${R.hint||"chọn một cách"}: ${W.map(w=>w.n.replace(/^(.)/,c=>c.toLowerCase())).join(" · ")}`,W.every(w=>w.why)?W[0].why:"");
+    const door=pbtn(`data-j4door="${key}"`,R.name,`${R.hint||"chọn một cách"}: ${W.map(w=>w.n.replace(/^(.)/,c=>c.toLowerCase())).join(", ")}`,W.every(w=>w.why)?W[0].why:"");
     let first=true;for(const w of W)out=out.replace(new RegExp(`<!--J4S:${esc(key)}:${w.i}-->[\\s\\S]*?<!--J4E:${esc(key)}:${w.i}-->`),()=>first?(first=false,door):"")}
    out=out.replace(new RegExp(`<!--J4[SE]:${esc(key)}:\\d+-->`,"g"),"")}
   return out};
