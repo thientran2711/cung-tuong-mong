@@ -128,8 +128,9 @@ function chMcFire(t){const L=chBought(t);
 let CHSRV=null;
 function chSrvMe(t){return !!(t&&t!==S&&typeof isSrv==="function"&&isSrv()&&!S.dead&&S.srv.spyFor!=null&&String(S.srv.spyFor)===String(t.id))}
 function chSrvOut(t,row){const a=CHX&&CHX.t===t?CHX.a:null;const w=a&&a!==S?punWhoTxt(a):a===S?"ngươi":"";let ev="";try{ev=a?punEvTxt(a,t):""}catch(e){}
- return {g:t.name,a:w,ev,x:row[1]}}
+ return {g:t.name,a:w,ev,x:row[1],gk:key(t),ak:a&&a!==S?key(a):null}}
 function chSrvEnd(o){if(!o||typeof isSrv!=="function"||!isSrv()||S.dead)return;S.srv.spyFor=null;S.srvMcEnd=o;
+ /* the edict names them (as punRows): she knows the accuser and the one who bought her (k61) */try{if(typeof k61Know==="function")for(const k of [o.ak,o.gk]){const x=k&&k!=="me"?byKey(k):null;if(x)k61Know(x,"",true,2)}}catch(e){}
  over("Bị đuổi khỏi cung",`Tội mua chuộc người hầu của ${o.g} bị phơi ra; ngươi là kẻ nhận bạc làm tai mắt. Cung Chính ti tước tên ngươi khỏi sổ cung nhân, đuổi ra cửa Thần Vũ.`,"Bị đuổi khỏi cung vì nhận bạc mua chuộc",true)}
 (function(){if(typeof deathChain!=="function")return;const d0=deathChain;deathChain=function(f){const L=d0.apply(this,arguments);const o=S&&S.srvMcEnd;
  if(!o||!/nhận bạc mua chuộc/.test(String(f||"")))return L;const R=[o.a?`Ai tố: ${o.a}`:"Ai xử: Cung Chính ti, theo cung quy",`Vì sao: nhận bạc của ${o.g}, làm tai mắt cho nàng`];
