@@ -115,3 +115,40 @@ Session credits total ~4,480.
 
 ## NVP v4 finals are on the CDN + branch review/nvp-v4 (manifest only)
 Repo law (CLAUDE.md, dev/art/CDN.md): images live on the CDN, never in git, so instead of pushing PNGs: 16 tone-passed + 16 raw edits (3072x2048 webp q90, 53.8 MB) uploaded to https://ctm-img.victoria-tntt.workers.dev/img/nvp-v4-<season>-<buoi>.webp and img/nvp-v4-raw-<season>-<buoi>.webp. Branch review/nvp-v4 (from origin/main) holds only dev/art/NVP_V4.md: URLs, creation ids, md5s and the wiring steps. Not wired.
+
+## PLACE GLYPHS v3 (26/11)
+PRIORITY #1 CHECK: OD:L1254 + OD:L1281 (v2 style approved) | main: KIT_PLACE_IC place-ttp/cung/lc live | review/kit-map-icons c11c7269 KIT_PLACE_STAND (stand-ins) | claims C3-PLACEGLYPH = this session | CDN: all 24 keys were 404 before.
+Session C3-PLACEGLYPH (depth 5). Recipe: gpt-2-6, Personal folder (ba4aecfe), 1k, 1:1, transparent, refs = live place-ttp/cung/lc, 1 candidate each (pilot kc_khue/thuyta/chinh looked at first, all accepted), every image looked at on dark + light; trimmed to bbox, 120 px in a 128 px canvas, webp q90 (7-12 KB each); alpha clean (min 0 / max 254, no halo seen). Uploaded as img/place-<key>.webp. Nothing wired.
+Contact sheet (24 new + old ttp/cung/lc first; large + 28 px + 14 px): https://ctm-img.victoria-tntt.workers.dev/img/_review/place-glyphs-v3/sheet.png (200)
+
+| key | Magnific creation | CDN URL | HTTP | note |
+|---|---|---|---|---|
+| kc_khue | fHYotGUCDY | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_khue.webp | 200 |  |
+| thuyta | 5jeCQpoKxe | https://ctm-img.victoria-tntt.workers.dev/img/place-thuyta.webp | 200 |  |
+| chinh | p84Y0Ntehw | https://ctm-img.victoria-tntt.workers.dev/img/place-chinh.webp | 200 |  |
+| kc_sanh | jUIqk1OLD0 | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_sanh.webp | 200 |  |
+| kc_thu | u50taEtQLD | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_thu.webp | 200 |  |
+| kc_me | TdJAWDIVNR | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_me.webp | 200 |  |
+| kc_di | 8aRMXvsIrU | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_di.webp | 200 |  |
+| kc_vuon | bxpfFjF5Y2 | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_vuon.webp | 200 |  |
+| kc_tu | N25wPnl6D9 | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_tu.webp | 200 |  |
+| kc_hoc | UPfrlRFwny | https://ctm-img.victoria-tntt.workers.dev/img/place-kc_hoc.webp | 200 |  |
+| kinh | jUIq1i0LD0 | https://ctm-img.victoria-tntt.workers.dev/img/place-kinh.webp | 200 |  |
+| ngudao | rgoFKBsxtc | https://ctm-img.victoria-tntt.workers.dev/img/place-ngudao.webp | 200 |  |
+| vuonhoa | Sya1sCDUb8 | https://ctm-img.victoria-tntt.workers.dev/img/place-vuonhoa.webp | 200 |  |
+| dinhco | fHYohVPCDY | https://ctm-img.victoria-tntt.workers.dev/img/place-dinhco.webp | 200 |  |
+| nonbo | Sya1sHBUb8 | https://ctm-img.victoria-tntt.workers.dev/img/place-nonbo.webp | 200 |  |
+| dong | 79EjS1NJAL | https://ctm-img.victoria-tntt.workers.dev/img/place-dong.webp | 200 |  |
+| tay | cpwZnRU0eP | https://ctm-img.victoria-tntt.workers.dev/img/place-tay.webp | 200 |  |
+| dtv | CqW8vt7EEy | https://ctm-img.victoria-tntt.workers.dev/img/place-dtv.webp | 200 |  |
+| ty | MByzTqjDCm | https://ctm-img.victoria-tntt.workers.dev/img/place-ty.webp | 200 |  |
+| ngoaitrieu | UPfrgTjwny | https://ctm-img.victoria-tntt.workers.dev/img/place-ngoaitrieu.webp | 200 | Ngoại triều — file name PROVISIONAL, no key exists |
+| cungtrong | DoPnVrqpcl | https://ctm-img.victoria-tntt.workers.dev/img/place-cungtrong.webp | 200 | cung trống (empty palace) — file name PROVISIONAL, no key exists |
+| vinhtho | s7m5jVFl8e | https://ctm-img.victoria-tntt.workers.dev/img/place-vinhtho.webp | 200 | Vĩnh Thọ — file name PROVISIONAL, no key exists |
+| nth | 3z1O6E6REY | https://ctm-img.victoria-tntt.workers.dev/img/place-nth.webp | 200 |  |
+| pd | P3HgOab42C | https://ctm-img.victoria-tntt.workers.dev/img/place-pd.webp | 200 |  |
+
+KEYS: KIT_PLACE_STAND has no key for Ngoại triều (k:null), cung trống, Vĩnh Thọ (empty/rival-slot palaces have no data-go). Not invented: files are place-ngoaitrieu / place-cungtrong / place-vinhtho; KK44 picks the key (or tell me a different file name and I re-upload). ty and dtv come from KIT_PLACE_STAND; chinh/dong/tay = kpm:chinh/dong/tay (files place-chinh etc.).
+Honest notes: (1) dong (faces left, sun-disc plaque) and tay (faces right, moon plaque, pink side panel) are both long low side halls - told apart at 28 px, close at 14 px; chinh (front, double gold roof) is clearly different. (2) pd (gold pavilion + lotus) shares the pavilion silhouette of place-cung but the lotus/incense reads at 28 px. (3) Pale glyphs (kc_di, dtv, vinhtho) are lower contrast on dark at 14 px.
+CREDITS: 24 images x 80 cr = 1,920 (gpt-2-6 costs 80 cr, not the 40 of the old v1 note). No redo, no second candidates.
+~100% xong (art) / ~0% chơi được (not wired; KK44 wires KIT_PLACE_STAND).
