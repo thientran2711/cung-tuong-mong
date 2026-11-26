@@ -37,9 +37,8 @@ const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"
 const LAST=()=>typeof B4L==="number"?B4L:2;
 const wkN=()=>COOP.state.week||0;
 const live=()=>CW.on&&typeof S!=="undefined"&&!!S;
-/* thin E (level 5): no server `buoi` (no bend): the room's buổi is the host's own (host) / the host's in the view (guest) */
-function eRoomB(){try{if(!(CW.eW&&CW.eW()))return null;if(host())return (S&&S.buoi)||0;const V=CW.thin&&CW.thin.view;return V&&V.o&&V.o.w===wkN()&&typeof V.o.buoi==="number"?V.o.buoi:null}catch(e){return null}}
-function roomKey(){const w=wkN();const eb=eRoomB();const b=eb!=null?eb:(CW.rweek===w&&typeof CW.rbuoi==="number")?CW.rbuoi:((typeof S!=="undefined"&&S&&S.buoi)||0);return w+":"+b}
+/* the room's buổi: jcoopworld's ONE room-buổi rule CW.roomB (thin E: the host's own step / the host's view; else the server's); unknown → hers */
+function roomKey(){const w=wkN();const rb=CW.roomB?CW.roomB():null;const b=rb!=null?rb:((typeof S!=="undefined"&&S&&S.buoi)||0);return w+":"+b}
 function myKey(){return wkN()+":"+((typeof S!=="undefined"&&S&&S.buoi)||0)}
 const frozenRoom=()=>!CW.on||!CW.base||(CW.isFrozen?CW.isFrozen():!!COOP.frozen);
 function say(mode,o){try{COOP.send(Object.assign({t:"act",k:"ctm-tm",mode},o||{}))}catch(e){}}

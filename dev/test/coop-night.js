@@ -231,7 +231,9 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
  /* 10 (robot-coop-fix-4, robot10-coop week-end stuck): the host COMMITS the night (go out, the guest runs hers and sends `end`) while his own night
     waits on a dialog; then his seat re-sends its life (sendMe: a new life / rejoin) — that reset cleared his run flag but kept the commit, so his
     next Sẵn sàng could never commit again: both #next locked at buổi 3 for ever. Now the reset clears the commit too (and nCheck: his commit = his go). */
- if(await toNight('10')){const w0=(await D(A)).w;await clear(A);await clear(B);ok(await isRd(B)||await press(B),'10: guest presses at tối');await sleep(3000);
+ if(await toNight('10')){const w0=(await D(A)).w;/* coop-night-wk6: the host's real choice holds his committed night only up to the AFK bound (jcooptimer nightAfk,
+    BAL.coopTm.nightMs 30 s, OD L680: then it is carried); this case waits on the guest's end (up to ~25 s at week 6, her own night cards) and
+    must see the hold, not the bound: the bound is lifted for this case only (case 4 / 4h test it) */await setTm(A,{nightMs:600000});await clear(A);await clear(B);ok(await isRd(B)||await press(B),'10: guest presses at tối');await sleep(3000);
   ok(await until(A,w=>COOPW.nfr===w,w0,30000),'10: the host has her ready');
   await A.p.evaluate(()=>{pushModal({t:'Biến cố đêm',h:'<p>Có tiếng động ngoài hiên.</p>',opts:[{n:'Ra xem',fx:{},x:'',go:()=>{}}]});showModal();render();COOPW.nightReady()});
   ok(await A.p.evaluate(w=>COOPW.ngo===w,w0),'10: the host committed the night (go out), his own night waits on the dialog');
@@ -240,7 +242,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   const a1=await D(A);ok(a1.w===w0&&a1.b===LAST&&a1.Q===1,'10: the host still in tối behind his dialog',a1);
   await A.p.evaluate(()=>{COOPW.sendMe(JSON.parse(JSON.stringify(COOPW.base.P[COOPW.seat])))});await sleep(1500);
   await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Ra xem/.test(x.textContent));if(b)b.click()});await sleep(1000);
-  await clear(A);ok(await isRd(A)||await press(A),'10: host presses again after the re-send');await merged('10',w0)}
+  await clear(A);ok(await isRd(A)||await press(A),'10: host presses again after the re-send');await setTm(A,{nightMs:30000});await merged('10',w0)}
  /* 11 (robot-coop-fix-4, same family): the night gate and thin E's asks are keyed by week only; a NEW room (no reload) starts at week 0 again, so
     the old room's commit / ready / ask would hit the same week of the new room. The room's start (begin) clears them when the room changes and
     keeps them on a reconnect to the same room. Simulated: the seat's last room is named OLD1 with a commit / ask at this very week, then the
