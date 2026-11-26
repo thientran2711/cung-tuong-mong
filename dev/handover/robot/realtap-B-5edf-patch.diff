@@ -169,7 +169,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
    const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
 diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 --- a/dev/test/robot-rt.js	2026-11-25 23:30:30.063404399 +0000
-+++ b/dev/test/robot-rt.js	2026-11-26 00:42:06.130988857 +0000
++++ b/dev/test/robot-rt.js	2026-11-26 01:08:23.509293441 +0000
 @@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
@@ -283,7 +283,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
        const nonExit = opts.filter(x => !isExit(x));
        const exits = opts.filter(isExit);
        const isPage = sc.layer === 'page' || sc.b.some(x => x.id === 'next');
-@@ -202,11 +254,12 @@
+@@ -202,24 +254,31 @@
    /* life over → read the ending (the game's own over() args) */
    const end = await p.evaluate(() => window.__rtEnd || null).catch(() => null);
    if (end) { const death = !end.alive; R.life = { id: end.id, type: death ? 'death' : 'end', fate: end.fate, death, age: end.age, year: end.year, rank: end.rank, text: end.text } }
@@ -297,14 +297,25 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
    save();
    console.log('LIFE DONE ' + LIFE + ' ' + (R.life.id) + ' age ' + (R.life.age ?? '?') + ' · buổi ' + R.buoi + ' · taps ' + R.harness.taps + ' · dead buttons ' + R.dead.length + ' · stuck ' + R.harness.stuck + ' · bugs ' + R.bugs.length);
  }
-@@ -214,8 +267,8 @@
+ 
++/* patch #19 (U3c 9QRN / 3FH8): the light unstick ✕ (lvl 1-2) can LEAVE the co-op room (host lands on bare #title, guest «hảo hữu đang vắng»). Never tap a leave/exit-type ✕ in co-op, and if the seat is on #title after any unstick tap, rejoin like a player: Cùng hảo hữu → Trở lại phòng. Same ladder the lvl-3 reload uses. */
++const UNSTICK_LEAVE_RE = /rời phòng|thoát phòng|rời khỏi|về sảnh|về trang đầu|trở về trang|đóng phòng|giải tán|bỏ phòng|thoát/i;
++async function rejoinFromTitle(p, rt) {
++  for (const re of (C.coop ? [/cùng hảo hữu/i, /trở lại phòng|vào lại phòng|về phòng/i] : [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i])) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); const i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
++}
++async function onTitle(p) { return p.evaluate(() => { const e = document.querySelector('#title'); return !!(e && e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden') }).catch(() => false) }
  /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
  async function unstick(p, rt, sc, lvl) {
    R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
 -  await p.keyboard.press('Escape').catch(() => {}); await p.waitForTimeout(500);
 -  if (lvl >= 2) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
 +  await p.waitForTimeout(500); /* U3 no-Esc patch: a keyboard key is not a real tap (owner rule); close with a hit-checked tap on ✕/Lui only */
-+  if (lvl >= 1) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
++  if (lvl >= 1) { const i = sc.b.findIndex(b => (b.x || CLOSE_RE.test(b.t)) && !(C.coop && UNSTICK_LEAVE_RE.test(b.t))); if (i >= 0) { const U = R.harness.unstick[R.harness.unstick.length - 1]; U.tapped = String(sc.b[i].t || '').slice(0, 40); await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }); if (C.coop && lvl < 3) { await p.waitForTimeout(1500); if (await onTitle(p)) { U.leftRoom = true; R.harness.unstickLeft = (R.harness.unstickLeft || 0) + 1; console.log('UNSTICK LEFT ROOM → rejoin', LIFE, 'tapped «' + U.tapped + '»'); await rejoinFromTitle(p, rt) } } } }
    if (lvl >= 3) {
      await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
      await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
+-    for (const re of (C.coop ? [/cùng hảo hữu/i, /trở lại phòng|vào lại phòng|về phòng/i] : [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i])) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); const i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
++    await rejoinFromTitle(p, rt);
+   }
+ }
+ function save() { const f = path.join(OUT, LIFE + '.json'); fs.writeFileSync(f, JSON.stringify(R, null, 1));
