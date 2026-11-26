@@ -36,7 +36,9 @@ function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)retu
   b.style.setProperty("--kx",Math.round(x)+"px");b.style.setProperty("--ky",Math.round(y)+"px");b.style.setProperty("--kr",rot.toFixed(2)+"deg");b.dataset.khi=i});
  g.style.setProperty("--khH",Math.ceil(maxY+8)+"px");
  const dl=g.closest(".dlg");if(dl){dl.classList.add("khdlg");if(!quiet)try{if(typeof kszEvLaw10==="function")kszEvLaw10(dl);if(typeof kszTextFirst3==="function")kszTextFirst3(dl)}catch(e){}}
- const L=g.querySelector(":scope>button.klift");if(L)kitHandPlate(L)}catch(e){console.error("kitHandLay",e)}}
+ kitHandNameFit(g);const L=g.querySelector(":scope>button.klift");if(L)kitHandPlate(L)}catch(e){console.error("kitHandLay",e)}}
+/* KK35 (item 2, OD:L177 a name is never cut; iPad «Đi làm: Thay y phục hay trang sức trong Tư…»): a card name that spills its 3 lines → the WHOLE hand takes the tighter face font (.khn1); still spilling → 4 lines (.khn2). One face size per hand (law 10). */
+function kitHandNameFit(g){try{g.classList.remove("khn1","khn2");const over=()=>kitHandCards(g).some(b=>{const k=b.querySelector(".kan");return k&&k.scrollHeight>k.clientHeight+1});if(!over())return;g.classList.add("khn1");if(!over())return;g.classList.add("khn2")}catch(e){}}
 /* the details plate: the kit «!» card clone (jopic kitOptInfo form), in the frame, just above the hand, never over the speaker's figure column */
 function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let z=dl.querySelector(":scope>.khplate");if(!z){z=document.createElement("div");z.className="khplate";z.setAttribute("role","status");dl.appendChild(z)}
  const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
@@ -146,3 +148,6 @@ ${P}>.kaart>.md>.kin{position:absolute!important;inset:0!important;width:100%!im
 ${P}>.kaart>.md .kfr,${P}>.kaart>.md .kcrest,${P}>.kaart>.md .kgem,${P}>.kaart>.md .klab{display:none!important}
 ${P}>.kaart>.md .kbg,${P}>.kaart>.md .kpor{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:cover;object-position:50% 12%;border-radius:inherit}
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kan>.kname:not(:first-child){margin-left:.28em}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.id="kit-hand-namefit";const P="html body #modal#modal#modal#modal .opts.khand";
+st.textContent=`${P}.khn1>button.kopt .kan{font-size:calc(var(--khfs) * .88)!important;letter-spacing:-.1px}
+${P}.khn2>button.kopt .kan{font-size:calc(var(--khfs) * .82)!important;-webkit-line-clamp:4!important;line-height:1.1!important}`;document.head.appendChild(st)})();
