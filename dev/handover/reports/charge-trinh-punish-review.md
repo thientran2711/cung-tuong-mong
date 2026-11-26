@@ -42,3 +42,12 @@ chSrvMe (S.srv.spyFor === t.id, set by j42:376 «Nhận bạc, làm tai mắt» 
 
 ## Not changed by the reviewer
 No code pushed. Videos / shots looked at in scratch only; CDN folder img/_review/charge-trinh-punish/ left for the worker's fix round (the verdict giver wipes it at the final PASS).
+
+## DELTA c59bae19 → a43aa413 (fix round): **PASS a43aa413** — coop-e2e on a43aa413 (live Worker, room EQEC) 143/143, 0 buổi timeouts
+| item | fix | checked |
+|---|---|---|
+| F1 | jtsb her «Báo lên Hoàng hậu / Thái hậu» needs the ức hiếp pieces (need row «có n/need»), spends them, chPunish "uh"; one odds helper tsbRepO for her AND the NPC victim (BAL.odb.jtsb.orPer / orWit / orDanhD, the witness = odds factor); the NPC road now rolls the same odds | PASS (read + charge-trinh-punish.js) — two-way equal, LAW 4 |
+| F2 | j71 tomuu: actor picked by chOK(S,v,"mh"), options only when the mưu hại charge is ready, odds by its pieces (BAL.odb.j71.evPer / evDanhD / evThD), spend + chPunish "mh"; j95 caught in the act: odds + spend = the pieces of the matching charge (j95c: tryst → tt, else mh, BAL.m95.accPer), kept as a caught-in-act punishment with reason; j8 Tố vượt phẩm → chPunish "vp"; charge-scan proof_generic uses a 1500-char statement window and lists every hit with a reason | PASS — -v list judged: every reason fits (false accusations, caught-in-act, story-event proof, gift / hearing / court roads) |
+| F3 | one helper jcharge chUse / chUseTxt / chWinTxt read by the Hậu cung card (actLineRaw + AOUT accuse / tocao) and the evidence card | PASS — runtime the same rival (uh 2/2 + vp 1): person card Tố giác / Tố tội thật / Trình Hoàng hậu = «Chứng cứ −2», win = the uh punishment; the evidence card = «Chứng cứ −2 (tội ức hiếp quấy phá)» |
+Tests on a43aa413: charge-trinh-punish ALL PASS · charge-followups ALL PASS · charge-smoke 0 FAIL · seize-ledger ALL PASS · punish-reason 755x1000 / 1180x820 ALL PASS · charge-scan all 0 · 0 page errors; built files = a fresh build_site.sh except the build stamps.
+Nits (not gating): j95 NPC→her road gates chOK(v,S) (any charge) while its odds read the tt pieces (gate with chOK(v,S,"tt")); j71 tomuu picker weight still `v.ev+1` (total, used only for the pick weight); j71 typed w:{danh:4,sung:3} (pre-existing).
