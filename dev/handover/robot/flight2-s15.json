@@ -1,0 +1,694 @@
+{
+ "job": {
+  "id": "flight2-s15",
+  "origin": null,
+  "road": null,
+  "bot": "cautious",
+  "seed": 2026112535,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "0e0ebe29",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 156,
+    "lvl": 1,
+    "layer": "#kload",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "builds": [
+   {
+    "s": "1dcb373e+",
+    "b": "5ab5b80e406e",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "1dcb373e+",
+   "b": "5ab5b80e406e",
+   "t": "2026-11-26T10:49Z",
+   "at": "2026-11-26T13:49:26.740Z"
+  },
+  "pinUrl": "http://127.0.0.1:8729/",
+  "build": {
+   "s": "1dcb373e+",
+   "b": "5ab5b80e406e",
+   "t": "2026-11-26T10:49Z"
+  },
+  "areaTaps": 86,
+  "kloadEnter": 1,
+  "dlgScroll": 6,
+  "scrolls": 6,
+  "dlgClose": 4,
+  "backdropTaps": 1,
+  "mgQuickSkipped": 1,
+  "mgReady": 1,
+  "mgMiss": 4,
+  "mgPeekTaps": 16,
+  "boardTaps": 16,
+  "mgBackWhy": [
+   {
+    "at": 251,
+    "buoi": 1,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   }
+  ],
+  "taps": 52
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 20,
+  "year": 1,
+  "rank": 0,
+  "text": "Ngươi về lại phường muối. Năm tháng mặn chát trôi qua, ngươi gả cho người cùng xóm.",
+  "card": [
+   "",
+   "",
+   "",
+   ""
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "AREA 444,688",
+   "AREA 638,319",
+   "AREA 427,577",
+   "AREA 520,605",
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+   ".dlg «Thái hậu» «Con ăn ít cũng được, ngủ giường cứng cũng quen, đi»",
+   ".dlg «Hoàng thượng» «Dâng Cầm»",
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+   "BOARD #kg82 16 moves",
+   "#kg82 «Quay lại»",
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sang buổi»",
+   ".dlg «Thái hậu» «Thần thiếp thưa rằng thần thiếp múa chưa tinh, xin»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [],
+ "buoi": 1,
+ "steps": 207,
+ "status": [],
+ "_loopAt": 1795701216172,
+ "_bootFirst": 1,
+ "_snapAt": 1795701159651,
+ "trace": [
+  [
+   141,
+   "AREA 627,350"
+  ],
+  [
+   141,
+   "AREA 135,656"
+  ],
+  [
+   141,
+   "AREA 349,366"
+  ],
+  [
+   142,
+   "AREA 467,805"
+  ],
+  [
+   142,
+   "AREA 384,336"
+  ],
+  [
+   142,
+   "AREA 514,411"
+  ],
+  [
+   142,
+   "AREA 398,670"
+  ],
+  [
+   143,
+   "AREA 632,733"
+  ],
+  [
+   143,
+   "AREA 157,200"
+  ],
+  [
+   143,
+   "AREA 155,248"
+  ],
+  [
+   144,
+   "AREA 324,839"
+  ],
+  [
+   144,
+   "AREA 634,797"
+  ],
+  [
+   144,
+   "AREA 233,496"
+  ],
+  [
+   144,
+   "AREA 327,748"
+  ],
+  [
+   145,
+   "AREA 546,744"
+  ],
+  [
+   165,
+   "#kload «Vào cung ngay»"
+  ],
+  [
+   166,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   167,
+   "#modal «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   171,
+   "#kroul «Tiếp»"
+  ],
+  [
+   171,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   174,
+   ".dlg «Thân phận kiếp này» «Trang trước»"
+  ],
+  [
+   174,
+   ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+  ],
+  [
+   174,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   176,
+   ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+  ],
+  [
+   176,
+   ".dlg «Thân phận kiếp này» «Dung mạo 10»"
+  ],
+  [
+   176,
+   ".dlg «Thân phận kiếp này» «Dung mạo 2»"
+  ],
+  [
+   177,
+   ".dlg «Thân phận kiếp này» «Dung mạo 8»"
+  ],
+  [
+   177,
+   ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+  ],
+  [
+   177,
+   ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+  ],
+  [
+   178,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   178,
+   ".dlg «Thân phận kiếp này» «Dung mạo 13»"
+  ],
+  [
+   178,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   179,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 1/4» «Tiếp theo»"
+  ],
+  [
+   180,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 2/4» «Tiếp theo»"
+  ],
+  [
+   181,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 3/4» «Tiếp theo»"
+  ],
+  [
+   181,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 4/4» «Vào cung»"
+  ],
+  [
+   183,
+   "ZERO Theo thái giám vào cửa việnRất vữngTốn2 khắcĐượcvà"
+  ],
+  [
+   186,
+   "AREA 517,741"
+  ],
+  [
+   186,
+   ".kmov «Vào điện»"
+  ],
+  [
+   187,
+   ".dlg «Ngày thứ nhất — Nhập cung» «»"
+  ],
+  [
+   188,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   189,
+   ".dlg «Ngày thứ nhất — Nhập cung» «»"
+  ],
+  [
+   190,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   191,
+   ".dlg «Ngày thứ nhất — Nhập cung» «»"
+  ],
+  [
+   192,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   193,
+   ".dlg «Ngày thứ nhất — Nhập cung» «»"
+  ],
+  [
+   194,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   195,
+   ".dlg «Ngày thứ nhất — Nhập cung» «Theo thái giám vào cửa việnRất vữngTốn2 khắcĐượcvà»"
+  ],
+  [
+   198,
+   "AREA 266,616"
+  ],
+  [
+   198,
+   "AREA 369,681"
+  ],
+  [
+   198,
+   "AREA 502,655"
+  ],
+  [
+   199,
+   "AREA 494,329"
+  ],
+  [
+   199,
+   "AREA 399,524"
+  ],
+  [
+   199,
+   "AREA 424,659"
+  ],
+  [
+   200,
+   "AREA 579,772"
+  ],
+  [
+   200,
+   "AREA 434,569"
+  ],
+  [
+   200,
+   "AREA 636,524"
+  ],
+  [
+   201,
+   "AREA 554,563"
+  ],
+  [
+   201,
+   "AREA 625,739"
+  ],
+  [
+   201,
+   "AREA 146,499"
+  ],
+  [
+   202,
+   "AREA 178,608"
+  ],
+  [
+   202,
+   "AREA 123,537"
+  ],
+  [
+   202,
+   "AREA 635,324"
+  ],
+  [
+   203,
+   "AREA 548,505"
+  ],
+  [
+   203,
+   "AREA 442,320"
+  ],
+  [
+   203,
+   "AREA 175,621"
+  ],
+  [
+   204,
+   "AREA 494,337"
+  ],
+  [
+   204,
+   "AREA 335,728"
+  ],
+  [
+   204,
+   "AREA 125,368"
+  ],
+  [
+   204,
+   "AREA 294,514"
+  ],
+  [
+   205,
+   "AREA 490,690"
+  ],
+  [
+   205,
+   "AREA 493,335"
+  ],
+  [
+   205,
+   "AREA 545,602"
+  ],
+  [
+   206,
+   "AREA 379,798"
+  ],
+  [
+   206,
+   "AREA 589,613"
+  ],
+  [
+   206,
+   "AREA 566,338"
+  ],
+  [
+   207,
+   "AREA 203,700"
+  ],
+  [
+   207,
+   "AREA 398,596"
+  ],
+  [
+   207,
+   "AREA 582,498"
+  ],
+  [
+   208,
+   "AREA 618,706"
+  ],
+  [
+   208,
+   ".dlg «Dưỡng Tú viện» «Cất đồ, ra Tiền sảnhRất vữngTốn1 khắcĐượcra học qu»"
+  ],
+  [
+   210,
+   ".dlg «Tiền sảnh» «Tập qua loa, để sức cho ngày maiRất vữngTốn1 khắcĐ»"
+  ],
+  [
+   211,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữRất vữngTốn1 khắcĐượcbiết»"
+  ],
+  [
+   212,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữRất vữngTốn1 khắcĐượcbiết»"
+  ],
+  [
+   213,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiRất vữngTốnkhôngĐượctới ngay b»"
+  ],
+  [
+   213,
+   ".dlg «Đông sở» «Ta đáp thẳng, không để ai đổ oan.Rất vữngTốn1 khắc»"
+  ],
+  [
+   214,
+   ".dlg «Đêm» «NgủRất vữngTốnkhôngĐượcdưỡng sứcGợi ýdưỡng sức!»"
+  ],
+  [
+   215,
+   ".dlg «Ngày thứ hai — Điện tuyển» «Theo ma ma ra sân chờ, để mặt mộc»"
+  ],
+  [
+   215,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   215,
+   ".dlg «Sân chờ» «Làm quen với một vị tú nữ»"
+  ],
+  [
+   218,
+   "AREA 157,523"
+  ],
+  [
+   218,
+   "AREA 586,466"
+  ],
+  [
+   218,
+   "AREA 127,438"
+  ],
+  [
+   219,
+   "AREA 199,717"
+  ],
+  [
+   219,
+   "AREA 568,322"
+  ],
+  [
+   219,
+   "AREA 551,450"
+  ],
+  [
+   220,
+   "AREA 579,563"
+  ],
+  [
+   220,
+   "AREA 378,97"
+  ],
+  [
+   220,
+   "BACKDROP #modal «Sân chờ» tap"
+  ],
+  [
+   221,
+   ".dlg «Sân chờ» «Ta giữ chỗ của mình, không dịch chân.»"
+  ],
+  [
+   221,
+   ".dlg «Sân chờ» «Dò hỏi thái giám về các vị chí tôn»"
+  ],
+  [
+   221,
+   ".dlg «Sân chờ» «Làm quen với một vị tú nữ»"
+  ],
+  [
+   222,
+   ".dlg «Sân chờ» «Làm quen với một vị tú nữ»"
+  ],
+  [
+   224,
+   "AREA 295,709"
+  ],
+  [
+   224,
+   "AREA 626,511"
+  ],
+  [
+   225,
+   "AREA 620,689"
+  ],
+  [
+   225,
+   "AREA 589,398"
+  ],
+  [
+   225,
+   "AREA 389,794"
+  ],
+  [
+   226,
+   "AREA 471,774"
+  ],
+  [
+   226,
+   "AREA 361,507"
+  ],
+  [
+   226,
+   "AREA 583,460"
+  ],
+  [
+   227,
+   "AREA 630,446"
+  ],
+  [
+   227,
+   "AREA 321,443"
+  ],
+  [
+   227,
+   "AREA 444,688"
+  ],
+  [
+   227,
+   "AREA 638,319"
+  ],
+  [
+   228,
+   "AREA 427,577"
+  ],
+  [
+   228,
+   "AREA 520,605"
+  ],
+  [
+   228,
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»"
+  ],
+  [
+   229,
+   ".dlg «Thái hậu» «Con ăn ít cũng được, ngủ giường cứng cũng quen, đi»"
+  ],
+  [
+   229,
+   ".dlg «Hoàng thượng» «Dâng Cầm»"
+  ],
+  [
+   230,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   251,
+   "BOARD #kg82 16 moves"
+  ],
+  [
+   251,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   253,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sang buổi»"
+  ],
+  [
+   255,
+   ".dlg «Thái hậu» «Thần thiếp thưa rằng thần thiếp múa chưa tinh, xin»"
+  ]
+ ],
+ "_unsFail": {
+  "#kload|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái nhà buôn muối · #/#": {},
+  ".dlg|Ngày thứ nhất — Nhập cung": {},
+  ".dlg|Dưỡng Tú viện": {},
+  ".dlg|Tiền sảnh": {},
+  ".dlg|Đông sở": {},
+  ".dlg|Đêm": {},
+  ".dlg|Ngày thứ hai — Điện tuyển": {},
+  ".dlg|Sân chờ": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Thái hậu": {},
+  ".dlg|Hoàng thượng": {}
+ },
+ "_started": true,
+ "_ckAt": 1795701128490,
+ "_ckB": 1,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1131,
+   "rendererMB": 525,
+   "heapMB": 104,
+   "dom": 2812,
+   "q": 3,
+   "lsK": 4
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  "#modal|Tiền truyện · Con gái nhà buôn muối · #/",
+  ".dlg|Tiền truyện · Con gái nhà buôn muối · #/",
+  ".dlg|Ngày thứ nhất — Nhập cung",
+  ".kmov|",
+  ".dlg|Tâm trạng · Ta",
+  ".kscn|",
+  ".dlg|Dưỡng Tú viện",
+  "#modal|Tiền sảnh",
+  ".dlg|Tiền sảnh",
+  "#modal|Đông sở",
+  ".dlg|Đông sở",
+  ".dlg|Đêm",
+  ".dlg|Ngày thứ hai — Điện tuyển",
+  ".dlg|Sân chờ",
+  "#modal|Sân chờ",
+  ".dlg|Điện tuyển",
+  ".dlg|Thái hậu",
+  ".dlg|Hoàng thượng",
+  "#kg82|",
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # n"
+ ],
+ "_momRank": 0,
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|511,470": {
+   "left": 321,
+   "n": 1
+  },
+  ".dlg|Đông sở|377,522": {
+   "left": 738,
+   "n": 1
+  },
+  ".dlg|Đông sở|378,521": {
+   "left": 338,
+   "n": 1
+  }
+ },
+ "t": {
+  "total": 255941
+ }
+}
