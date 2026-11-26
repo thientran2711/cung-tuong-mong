@@ -875,12 +875,36 @@ window.kitCloseLayer=kitCloseLayer;
  M.addEventListener("pointerdown",e=>{down=e.target===M&&M.__kx?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
  M.addEventListener("click",e=>{const d=down;down=null;if(!d||e.target!==M)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();kitModalClose()})})();
 /* Esc: the top-most open closable panel (another overlay over the dialog first, then the dialog, then the room person card) */
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented||document.body.classList.contains("kbk-open"))return;
- if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return;
+/* KIT 32.11 ONE WAY OUT (OB-M3UI, robot M3 26/11: a legend / picture / «!» card with no visible way back = a soft-lock; whole family):
+   every closable layer closes the SAME three ways — the kit ✕, a tap outside, Esc / the device Back. kitTopClose() closes the top-most closable
+   thing and says whether it did: the word pop-up #kpop, the «!» card #kpinfo, the picture #kpzoom, kitCloseLayer layers (by pri), the dialog
+   (only when closable: a FORCED event panel never closes this way), the room person card. Back = ONE history guard entry kept on top ALWAYS
+   (kitBackArm: at boot, on every pointerdown / key, and again on every popstate — RV-OB-M3UI: arming only after a tap missed forced events, the bare
+   room and cards opened by a timer); the Back press pops it, the guard is re-pushed at once and Back acts as Esc (kitTopClose + each layer's own Esc): a closable layer closes, otherwise
+   nothing happens — Back never leaves the game and never skips a required choice. */
+function kitOvOpen(id){const z=document.getElementById(id);return !!z&&!z.hidden&&z.getClientRects().length>0&&z}
+function kitTopClose(dry){try{if(document.body.classList.contains("kbk-open"))return false;
+ for(const id of ["kpop","kpinfo","kpzoom"]){const z=kitOvOpen(id);if(z){if(!dry)z.hidden=true;return true}}
+ /* the co-op letters panel (#kchatp, own layer with the kit ✕) */
+ {const z=kitOvOpen("kchatp");const x=z&&z.querySelector(".kit-x");if(x){if(!dry)x.click();return true}}
+ /* a mini-game shell (#ov, kg82): its kit ✕ «Quay lại» only while that back is FREE (KG82.backPre before «Sẵn sàng», KG82.back nothing at stake);
+    during a live round with stakes nothing happens (the ✕ there = give up; Esc / Back never give up for her) */
+ {const ov=kitOvOpen("ov");const x=ov&&ov.querySelector('[data-kitx="kgback"]');if(x&&x.getClientRects().length&&typeof KG82!=="undefined"&&(KG82.backPre||KG82.back)){if(!dry)x.click();return true}}
+ if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return false;
  const L=KIT_LAYERS.filter(r=>r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl.box()).sort((a,b)=>b.__kxl.pri-a.__kxl.pri);
- if(L.length){e.preventDefault();L[0].__kxl.close();return}
- if(kitModalClose()){e.preventDefault();return}
- const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+ if(L.length){if(!dry)L[0].__kxl.close();return true}
+ const M=document.getElementById("modal");if(M&&!M.hidden){const f=M.__kx||kitModalCloser();if(!f)return false;if(!dry)f();return true}
+ const px=document.getElementById("popx");if(px&&px.offsetParent){if(!dry)px.click();return true}}catch(x){console.error("kitTopClose",x)}return false}
+window.kitTopClose=kitTopClose;
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented)return;if(kitTopClose())e.preventDefault()},0)});
+function kitBackArm(){try{if(!history.pushState||window.__kbackOff)return;if(!(history.state&&history.state.kback))history.pushState({kback:1},"")}catch(x){}}
+window.kitBackArm=kitBackArm;
+(function(){if(typeof window==="undefined"||!window.history)return;
+ kitBackArm();/* boot */for(const t of ["pointerdown","keydown"])document.addEventListener(t,kitBackArm,true);
+ /* Back = Esc, by construction (MAIN 156 r2): the guard comes back, then ONE Escape key event goes to the focused element, so every layer's own
+    Esc handler (title pages, book, podium, Bảng vàng, item card, shop, chat, mini-game tutorial, kitTopClose) answers Back exactly as it answers Esc */
+ window.addEventListener("popstate",()=>{try{if(window.__kbackOff)return;kitBackArm();const a=document.activeElement;const t=a&&a!==document.body&&a.isConnected?a:document.body;
+  t.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",code:"Escape",bubbles:true,cancelable:true}))}catch(x){console.error("kitBack",x)}})})();
 /* KIT 8.9 ONE DIALOG STACK (owner 21/11, mark #46: the «Kiếp này» death card opened with a person pop-up still open ON TOP of its bottom part).
    ONE rule for the kit modal layer (#modal / Q), applied from showModal, for every dialog opener (kitModal, kitConfirm, kitPanel, resultShow, over(), events, PEND cards):
    (1) a newer dialog is always the TOP layer: #modal sits above the room pop-up card (#popw) and every second-layer pop-up (kitCloseLayer layers, .kpop) — never under them (CSS below);
