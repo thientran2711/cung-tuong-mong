@@ -1635,7 +1635,10 @@ CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk())return false
  Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
  /* her "Sẵn sàng" of this buổi survives too: the room still holds her bend (the night's ready is re-sent by nResync) */
  {const rm=CW.roomMsg;if(rm&&rm.week===wk()&&rm.buoi===(S.buoi||0)&&rm.bended&&rm.bended[CW.seat])CW.bend=true}
- if(lost){CW.sent=-1;CW.pend=true}if(gb)try{gb()}catch(e){console.error("restore her week end",e)}if(pk)T("restore: own pend "+o.week+(lost?" (lost end)":""));
+ if(lost){CW.sent=-1;CW.pend=true}
+ /* a pending week end = its night was committed and ran (the commit lives in memory only: lost by the reload, so the ONE AFK bound — jcooptimer
+    nafEnd / gAfk read ngoW — never armed again: fix-h13 SWAP 1 run, the room held on her open cards) */
+ if(pk){CW.ngoW=wk();if(host())CW.ngo=wk()}if(gb)try{gb()}catch(e){console.error("restore her week end",e)}if(pk)T("restore: own pend "+o.week+(lost?" (lost end)":""));
  try{keepFriendPos();refreshHere()}catch(e){}syncRoom(CW.roomMsg);try{$("title").hidden=true}catch(e){}
  if(Q.length)showModal();render();lockNext();if(CW.pend)soonEnd();return true};
 
