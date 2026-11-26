@@ -332,3 +332,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~20:52Z PLACE-CLOSE 9d550ef1 MAIN LOOK PASS (sheets fold+ipadAir) → RV-162 (lands after kit-k44-parts).
 - ~20:55Z REPORT-PDF refreshed for LIVE 03a8c17c (7d704c99e; 22 LIVE · 4 half · 10 chờ · 17 đang làm · 4 rules) → send in evening report 00:52Z.
 - ~20:42Z RING-BUILD-3 rolled (8ea545fb, front = LIVE stage size) → archived. MAIN LOOK of size videos: size OK, heads OK, nav not covered, BUT iPad group ring with cards open: front figure covers left card column → FAIL (owner 20:30Z rule). Opened RING-BUILD-4 session_01Rc5AsLAGTatyNHnR3hq1ar (opus): overlap family scan + fix, then new videos → MAIN looks → sếp. Videos NOT sent to sếp yet.
+- ~20:44Z LC25 re-merged onto LIVE 03a8c17c: B = review/lc25-os 504d2e6a, PA+SP = review/lc25-sp 4cfcda61; gates running, READY one at a time.
