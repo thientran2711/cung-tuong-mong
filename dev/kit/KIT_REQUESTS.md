@@ -333,3 +333,11 @@ Owner OD 25/11 ~23:20Z: the mirror lost its preset sets (jration lxColRows dropp
   top-bar «Về phòng» (#k3room, kitBackBtnHtml kind "home" → `img/kit/ico-home.webp`, 30x30 like ico-room) so her own palace has ONE emblem on the top bar
   AND the Dư đồ. Until painted: the button keeps ico-room and writes her palace's name as its second line (homeWay().hn); Dư đồ keeps «Nhà ta». Painting: KK37 / art (no code art).
 - K-MAP-BANNER (PLACE-RULES, owner OD 25/11 ~23:40Z k17): ONE visible line on the Dư đồ itself for an all-locked state (cấm túc / lãnh cung / hết khắc …) — the leather Dư đồ (jbook) hides the top-row .past/.fest chips. Until the kit part exists, review/place-rules says it once through kitNotice (sticky, id "plban") and writes it into a .fest chip of .maptools (shown on non-leather views); the per-label «đang cấm túc (N tháng)» plates are removed (plMap, jplrule.js).
+- K-CHIP-PULSE (PLACE-CLOSE, owner OD 26/11 ~14:00Z «cái chip nhỏ… mảnh… nó phải chớp nháy»; kit keeper KK44): new STATES of the ONE notice chip `#kntchip.ktbt` (KIT §42.2, jnotice.js), no new part.
+  The caller (jstagehere chip(), review/place-close) already passes these kitNotice spec fields; kitNotice must keep them on the item (Object.assign list) and paint them:
+  `state:"pulse"` = the chip PULSES (kit blink, reduced-motion = steady) — last allowed khắc of a place, text «Nơi này sắp đóng cửa, mời tiểu chủ rời đi»;
+  `state:"late"` = the chip is RED (seal red trim / text, same size) — grace khắc after closing, text «Đã quá giờ, mời tiểu chủ rời đi»;
+  `hold:true` = the chip stays up (no BAL.entryToastMs fade) while the notice exists (dropped by kitNoticeDrop when she leaves / the place opens);
+  `chipGo:true` + `go` + `goLabel` = a tap on the chip runs `go` (her way home, homeGo) instead of opening the panel; the chip shows goLabel («Về phòng · N khắc») after the line
+  (or as its second half on one line); the box «!» still opens the panel with the full text + the same `go` row. Place: the existing finder (under the top bar, above Dư đồ / stage).
+  Until KK44 lands it the chip shows plain (5 s, tap = panel); the logic (grace, NHẸ, no dialog) works without it.
