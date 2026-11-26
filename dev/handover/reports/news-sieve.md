@@ -184,3 +184,43 @@ OPEN FOR MAIN: (1) names in the Sổ ghi / Tin báo follow knowWho: a consort sh
 HANDOVER: nothing left on this job; follow-on ONE SIEVE (MAIN 154 order) not started — it goes on review/one-sieve from this branch.
 
 ## LAND READY review/news-sieve 2a24d4db (NEWS-SIEVE-2)
+
+## REVIEW (RV-NEWS-SIEVE-2) — PASS review/news-sieve-rv 82eb2832 (base LIVE 3af7896e, fast-forwardable)
+Reviewer session_01V1ZZH3QAYX1bQZ4KysAkM7 (BIG), for MAIN 156 → MAIN 157. START_CTX ≈ 5 %.
+PRIORITY #1 CHECK: OD 26/11 ~04:40Z + ~05:05Z + ~06:47Z (verbatim, read) | main 3af7896e jmem cause ledger (causeAdd/causeQuery/causeText), j1 S.logs, j24 BANDS, jptime | review/news-sieve 2a24d4db | claims NEWS-SIEVE-2 session_01V1ZZH2L7SB2YyEATuwgbWi.
+
+MERGE onto LIVE 3af7896e: only index.html / sw.js conflicted (built files) → rebuilt (3f0ece2b). Overlapping sources (jtoil, j85, j79, jbal2) merged clean; read the result.
+
+FIXES made by the reviewer (82eb2832, small, on review/news-sieve-rv):
+1. LAW 11 — not every NPC↔NPC act reached S.hrec: only runAct acts were caught. Acts the cause ledger holds from other paths were missing
+   (probe, 1 year seed 1 on 2a24d4db-merged: SOC dò la «spy» 12, giveTo NPC→NPC gifts 3, SOC «feign» 1 of 36 ledger records). Fix (whole family):
+   jnsieve recLedger — after each buổi every new ledger record between two consorts not yet written this tuần is written with the ledger's own
+   cause (causeText); ACT_SAY gained the SOC / gift wordings. After: 10 tuần seed 2 → 12/12 ledger records in S.hrec, 0 miss (at 36 tuần the
+   only «misses» are older lines pushed out by the recMax cap, by design).
+2. LAW 6 (known names) — a THIRD consort named in a record's cause / result («trả đũa chuyện X đã …», «Người của X phát giác …») kept her real
+   name although unmet; only doer + victim were masked. Fix: every consort named in the record / Tin báo line is in its ids → knowWho at show time.
+3. LAW 1 (two-way) — the branch stopped NPCs openly mocking a higher rank (mockOK) but HER own «Khiêu khích» (j2 talkOpts, rival + Hoàng hậu)
+   stayed open upward. Fix: the same mockOK lock on her two options, shown locked «phận dưới không dám khiêu khích bậc trên» (VANPHONG wording).
+   LAW 16 note for MAIN: this takes away her «Khiêu khích Hoàng hậu» while she is below the Hoàng hậu (the owner's own words «làm gì có cái chuyện
+   người phi nào mà dám cười nhạo hoàng hậu» + law 1); revert = drop the two `lock:` keys in j2 if sếp wants it open for her.
+
+CHECKS on 82eb2832 (LIVE merge):
+| check | result |
+|---|---|
+| news-sieve.test.js 36 tuần seeds 1/2/3 | 10/10 · 10/10 · 10/10 (big harms Tin báo = Sổ ghi = events: 1/1, 7/7, 5/5; acts in Sổ ghi 42 · 105 · 66 incl. ledger acts) |
+| law 6 (nothing invented) | records built only from runAct text + jmem ledger (doer / victim / cause causeText); knowWho masking kept («một vị Quý phi») + fix 2 |
+| law 4 | BAL.news (recMax, bigBand, sum*) read; no new typed number |
+| law 9 kit | Tin báo = kitNotice, monthly = kitPanel news facts + kit chips, servant «Tính nết» via mindRows → kitRows; Sổ ghi rows = the j6 log rows. No private CSS. |
+| law 11 | fix 1 (all ledger paths) |
+| save growth (1 year, seed 1) | S.hrec capped 300 rows ≈ 41 KB; whole save 606 KB vs LIVE 586 KB (+3 %); bounded |
+| render safety | Sổ ghi render swaps S.logs only inside renderPanel, restored (150→150), save after render clean |
+| perf (buổi, 180 buổi, same seed) | mean 2082 ms vs LIVE 2617 ms (box shared with other runs; no slowdown) |
+| quickcheck (HEAD) | open ok 0 err · OLD SAVE PASS (loads, plays a buổi; LIVE's quickcheck now rerolls ban hoa → the worker's old-save note is fixed on LIVE, not this branch) · G4 80-dialog-fixed (a) empty Tốn/Được 2 FAIL and G4 90-button-crawl «Ô lưu · Lui» 1 FAIL = IDENTICAL on LIVE 3af7896e (run here) → pre-existing (K-FREE-OPT / crawl owner) · perf step cut by my timeout (measured by probe above) |
+| real taps Fold 755x1000 + iPad 1180x820 | cover «Vào cung ngay» → Mệnh truyện → Sổ ghi by touch taps: Sổ ghi opens, records shown, 0 page errors, no horizontal overflow |
+| MAIN LOOK PASS stills (looked) | Tin báo (hủy dung line, names masked), Sổ ghi record (doer, victim, cause, servant sent, result), monthly «tổng kết tháng» kit rows + chips, servant card «Tính nết» row — Fold + iPad |
+
+NOTES (not blocking): (a) recMax 300 fills in < 10 tuần, mostly heard lines («truyền tai nhau … đang tình tứ» rows, the same text again next tuần);
+big harms are kept longest, so «ai rạch mặt ai» survives, but small history spans ~2 months — MAIN may raise recMax (≈ 0.14 KB/row) or skip mood
+lines from the record. (b) names in the monthly summary have no rank title where the Tin báo line has one («Phùng Nghê Thường» vs «Phi Phùng Nghê
+Thường») — knowWho vs kit name chip, pre-existing style.
+VERDICT: PASS review/news-sieve-rv 82eb2832 (ancestor = LIVE 3af7896e).
