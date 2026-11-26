@@ -1140,7 +1140,7 @@ ARC67.thd_tho=arcFx("thd_tho",{o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"th�
   {n:"Viết thơ chân thật về tuyết quê nghèo",e:["win","mid"],rt:"Bài thơ đứng đầu, Hoàng thượng phong ngươi Tài nữ.",rf:"Bài thơ hay, nhưng giám khảo chuộng lời hoa mỹ."},
   {n:"Viết thơ hoa mỹ theo lối cung đình",e:["win2","lose"],rt:"Thơ đúng ý giám khảo, đứng nhì.",rf:"Thơ bị chê sáo rỗng, {v} cười to nhất."},
   {n:"Cáo bệnh không thi",e:"mid",lx:"bỏ lỡ dịp",rt:"Ngươi nằm nhà."}]}},
- E:{win:{tag:"Tài nữ số một",w:"emp",t:"Ngươi được phong Tài nữ. Thơ ngươi được khắc vào bia Hàn lâm, sách của cha được in kèm. Hoàng thượng thường gọi ngươi đến đối thơ.",go:()=>{S.arts.thi=Math.min(5,(S.arts.thi||0)+1);return "Thi +1 bậc."}},
+ E:{win:{tag:"Tài nữ số một",w:"emp",t:"Ngươi được phong Tài nữ. Thơ ngươi được khắc vào bia Hàn lâm, sách của cha được in kèm. Hoàng thượng thường gọi ngươi đến đối thơ.",go:()=>{S.arts.thi=Math.min(5,(S.arts.thi||0)+1);if(typeof ctnWin==="function")ctnWin(S,"Kỳ thi Tài nữ")/* D3: first place in a contest ⇒ thị tẩm that night (jctn) */;return "Thi +1 bậc."}},
   win2:{gi:["nghien","emp"],tag:"Đứng nhì kỳ thi",t:"Ngươi đứng nhì, được ban bút nghiên. Không rực rỡ, nhưng đủ để cả cung biết tên."},
   mid:{tag:"Lỡ hẹn với danh hiệu",t:"Không đứng đầu, nhưng ai đọc thơ ngươi cũng nhớ."},
   lose:{tag:"Mang tiếng sáo rỗng",t:"Thơ ngươi bị chê, {v} được dịp chế giễu. Danh tài nữ trôi xa."}}});

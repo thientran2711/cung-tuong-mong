@@ -515,7 +515,7 @@ function rivalsMonth(){let ev="";
  return ev}
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artOE(p,"vu"):(artOE(p,"cam")+artOE(p,"thi"))/2;
  const sc=C.map(p=>(k==="sac"?effSac(p):p[k])+art(p)+R(wet()?40:30)+(wet()&&k==="sac"?-artOE(p,"vu")/2:0));const wi=sc.indexOf(Math.max(...sc)),w=C[wi];
- ap(w,{sung:BAL.eff.j8.festSung,danh:BAL.eff.j8.festDanh});if(empGive(w,50,"contest"))bestow(w,"contest");
+ ap(w,{sung:BAL.eff.j8.festSung,danh:BAL.eff.j8.festDanh});if(empGive(w,50,"contest"))bestow(w,"contest");if(typeof ctnWin==="function")ctnWin(w,title)/* D3 (jctn) */;
  if(w===S){ghenAll(BAL.ghen.festival,"ngươi nổi bật trong ngày hội");return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> ${sgStat(BAL.eff.j8.festSung)} · Danh +${BAL.eff.j8.festDanh}. `}
  apply({danh:BAL.eff.j8.danhFestival});return `<span class="r">${title}: ${w.name} chiếm hết phong quang, ngươi lu mờ.</span> Danh ${balSg(BAL.eff.j8.danhFestival)}. `}
 function artW2(p,k){const l=p.arts[k];return l*(((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))?2:1)}

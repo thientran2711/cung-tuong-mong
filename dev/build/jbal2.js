@@ -2248,3 +2248,5 @@ Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,
 BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
 /* KIT music (KK18 §96): an event track holds this long before the base track returns */
 BAL.kmus={holdMs:6000};
+/* D3 (owner 26/11 ~01:25Z, jctn): first place in ANY contest kind ⇒ the winner (her, an NPC, the co-op friend: two-way) also serves that night; on = the rule; rewards and lật thẻ odds unchanged */
+BAL.ctn={on:true};
