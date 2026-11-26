@@ -337,3 +337,6 @@ Owner OD 25/11 ~23:36Z NEWS WORDING (verbatim row in dev/OWNER_DECISIONS.md): "n
 one row writer (j63 kaRowH / KA_ROWS, j19 kgrid «Tốn … không»), so this is the KIT option-card family, not the news code.
 Wanted (kit keeper only, law 9/11): an option with no cost hides the «Tốn» row, an option with no gain hides the «Được» row (whole family: every
 option / act card that prints «không» in a row: go / later / close / look options of every panel). Not changed on review/news-sieve.
+CONFLICT to settle (canon overwrite, law 14): the quickcheck gate dev/test/dialog-fixed.js (l) «MAIN 88 (a) no empty Được cell: a card with no gain
+says «không»» still demands the «không» rows, and it FAILS on origin/main 02f564ae today (Fold + iPad: card «Mặc kệ» has an EMPTY Tốn and Được
+cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) wins: hide the empty rows and update gate (l) in the same kit change.
