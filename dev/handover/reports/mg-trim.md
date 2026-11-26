@@ -170,3 +170,17 @@ Findings (numbered, all must be fixed on review/mg-trim):
 
 Notes (not blocking): duodo-focus-view 5a–5d + shelf-check pre-existing on LIVE; jdfv `slapGame({dodge})` wrapper has no game caller now (keep for Thử tay or delete, worker's call); toilRollOdds runs 240 draws per button render — no lag seen in either video.
 Shots/frames: reviewer scratch only (nothing in git, nothing uploaded).
+
+## BUILD #3 (worker D5 #2) — sếp's pet/plant answer — SSK review/mg-trim @ cd6eff47
+Owner (verbatim, OD 26/11 ~05:45Z): "Trò chăm thú cưng và tưới cây giữ như cũ và option chăm nhanh như học nhanh hoặc giao người chăm" (relayed by FOREMAN D 06:15Z).
+| item | files | state |
+|---|---|---|
+| BAL.trim.care switch DROPPED; pet care (cho ăn / tắm / chơi, every pet) + plant / chim cá care boards exactly as LIVE | jbal2, jpetcare, jshelf | done |
+| the care quick on the rules screen named «Chăm nhanh» (kit KIT_QUICK_NAMES, like «Học nhanh»; roll BAL.skip.od Tùy duyên; won = BAL.skip.care of the gain < a fair own play; lost = nothing) | j79, jpetcare, jshelf | done |
+| «Giao … chăm»: pets = her close maid for BAL.pet.maidW tuần (exists in LIVE, kept); plants NEW button = the week's servant care (shelfPlantWeek, shelfSrvQ) done now, 0 khắc, once a tuần, never on top of her own care that tuần (e.pm) — same care earlier, no free gain | jshelf | done |
+| audit rows (mg-skip-audit 21/21 kit quick), MINIGAMES.md, CHANGE line, rebuild | tests/docs/root | done |
+Kit: none missing (pbtn rows, kitQuick).
+Tests: mg-trim.js 9/9 groups PASS Fold 755x1000@2 + iPad 1180x820@2 (test 9 real taps: feed → rules screen with «Chăm nhanh» Tùy duyên → tap → «Vừa rồi»; plant «Giao … chăm» → Tươi tốt up, locked «tuần này đã chăm»; watering board + «Chăm nhanh») · mg-skip-audit PASS · mg-skip PASS · delegate-nomg PASS · makeup-set «ration: two months give a whole set» flaky on Fold on BOTH branch and LIVE (LIVE 1 of 2 runs FAIL) · mg-back flaky #1/#6 (LIVE #1 too) · shelf-check same pre-existing FAIL as LIVE.
+VIDEOS (FULL, real taps, re-shot): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm
+BIG reviewer session_01D3E3NaqVWXaAetSGcKr7mF re-pointed to cd6eff47.
+Vietnamese for sếp: Chăm thú, tưới cây giữ trò như cũ; trong màn luật có thêm nút «Chăm nhanh» (như Học nhanh, Tùy duyên, kém tự chơi); thú có «Giao cung nữ chăm», cây cũng có «Giao người hầu chăm» (không tốn khắc, mỗi tuần một lần). ~92% xong / ~88% chơi được (chờ người duyệt).
