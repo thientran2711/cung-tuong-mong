@@ -121,3 +121,12 @@ this verdict does not cover them.
 - Worker's evidence (not re-run by me): Seat A ckpt b1658 replay, 44 min each. LIVE b881686f: 8 buổi, 33 hang samples.
   Fix 1d57fe88: 61 buổi, 0 hangs. Minor 6 (sibling signature) is left as is and noted in the worker report; still non-blocking.
 VERDICT §6: PASS 8d5e3382 (FF from LIVE f573dc94).
+
+## §7 — delta 03a8c17c (8d5e3382 + merge of LIVE 53319e6f) — PASS
+- 03a8c17c is a fast-forward of LIVE origin/main 53319e6f (checked).
+- `git diff 53319e6f 03a8c17c -- dev/build dev/kit` is line-for-line the F10 diff passed in §6 (`git diff f573dc94 8d5e3382`) → identical.
+- The LIVE delta f573dc94..53319e6f in dev/build is j79.js, jkitpage.js and jts.js. None of these is an F10 file, and the delta adds no
+  MutationObserver / ResizeObserver / requestAnimationFrame / setInterval (grep: 0).
+- Build: build_site.sh on 03a8c17c reproduces index.html (only CTM_BI changes). Tests: scroll-cue-loop 755x1000 + 1180x820 PASS;
+  kscue-loop PASS all 4.
+VERDICT §7: PASS 03a8c17c (FF from LIVE 53319e6f).
