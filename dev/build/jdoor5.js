@@ -9,7 +9,7 @@
  {k:"s_gh",n:"Giao hảo",kinds:["srv"],rep:"Trò chuyện",h:"Kết thân với người hầu khác: trò chuyện, hay biếu chút quà.",
   re:/^(Trò chuyện|Biếu quà nhỏ)$/}
 ].forEach(DOOR.add);
-/* ---- deck doors: J5 rule tables + the fold through J1's DOOR.fold / DOOR.card (the deck wrapper is here, the fold rule is jdoor.js's) ---- */
+/* ---- deck doors (jdoor.js DOOR.deck) ---- */
 const SRVG=[
  {n:"Hầu việc",t:"Việc hằng ngày hầu chủ trong cung: chọn một việc.",re:/^(Quét sân, lau điện|Đốc thúc cung nữ quét dọn|Dâng trà, hầu điểm tâm|Theo hầu chủ|Lĩnh đồ ở Nội vụ phủ|Việc chủ sai|Quản sổ sách trong cung|Hầu trà khi ngự giá|Lui sau bình phong)$/},
  {n:"Dò la cho chủ",t:"Thay chủ để mắt đến người khác: chọn cách làm.",re:/^(Nghe ngóng cho chủ|Tự đi dò la cho chủ|Canh chừng cung chủ)$/},
@@ -46,37 +46,11 @@ const KCR=[
  [/^(?:Xin cha dâng sớ tiến cử|Nhờ tổ mẫu khuyên cha dâng sớ)$/,()=>"Xin vào cung sớm","Đưa ngươi vào cung sớm: xin cha, hay nhờ tổ mẫu khuyên cha."]];
 const TWN={"Mua thuốc cho mẹ":"Thuốc cho mẹ","Góp bạc cưới vợ cho huynh trưởng":"Cưới vợ cho huynh trưởng","Trả bớt nợ nhà lý trưởng":"Trả nợ nhà lý trưởng","Biếu quà lý trưởng":"Lễ lý trưởng","Học lễ nghi với bà Tư":"Học lễ nghi bà Tư","Học lễ nghi Đại Hy với ma ma sứ đoàn":"Học lễ nghi Đại Hy","Gửi lễ vật cho sứ thần":"Lễ vật cho sứ thần"};
 
-/* rows for DOOR.fold: SRVG / COLDG are plain regex rows; the grouped ones (letter by name, KCR groups by the person in the name, tw twins) become one row per group built from
-   the names on the table today (exact-name regex), so J1's fold rule (>= 2 available members) decides, exactly as for the fixed rows */
-const escRe=x=>String(x).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-function keyRows(L,keyOf,tOf,pre){const G=new Map();for(const a of L){if(!a||a.door)continue;const k=keyOf(a,L);if(k==null)continue;if(!G.has(k))G.set(k,[]);G.get(k).push(a.n)}
- return[...G].map(([k,names])=>({k:pre+k,n:k,h:tOf(k,names),re:new RegExp("^("+names.map(escRe).join("|")+")$")}))}
-const kcT=(k,names)=>{for(const [re,f,t] of KCR)if(names.every(n=>re.test(n)))return t;return"Một việc, hai đường: chọn cách làm (mỗi cách tốn khác nhau)."};
-function kcKey(a,L){for(const [re,f] of KCR){const m=re.exec(a.n||"");if(m)return f(m)}
- const tw=new Set(L.filter(x=>x&&x.tw).map(x=>x.tw));const b=a.tw||(tw.has(a.n)?a.n:null);return b?(TWN[b]||b+" (cách khác)"):null}
-function roadNow(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeof isSrv==="function"&&isSrv())return(S.srv&&S.srv.lau>0)?null:"srv";if(S.out)return"cold"}catch(e){}return null}
-function rowsOf(road,L){if(road==="srv")return SRVG.map((r,i)=>({k:"d_srv"+i,n:r.n,h:r.t,re:r.re}));
- if(road==="cold")return COLDG.filter(r=>r.re).map((r,i)=>({k:"d_cold"+i,n:r.n,h:r.t,re:r.re})).concat(keyRows(L,a=>{const m=/^(Gửi thư .+?) \(nhờ .+\)$/.exec(a.n||"");return m?m[1]:null},()=>COLDG.find(r=>r.key).t,"d_let_"));
- return keyRows(L,kcKey,kcT,"d_kc_")}
-const cc=a=>typeof cardCost==="function"?cardCost(a):(a.k||1);
-const srvOnceNow=w=>!!(w.once&&typeof isSrv==="function"&&isSrv()&&typeof srvOnce==="function"&&srvOnce(w.once,w.onceS));
-const availW=M=>M.filter(w=>!w.done&&!srvOnceNow(w));
-const DART={};
-function mk(r,M){const lock=M.every(w=>w.lock);DART[r.n]=M[0].n;
- return{n:r.n,t:lock?(M[0].t||r.h):r.h,k:Math.min(...M.map(cc)),c:{},w:{},l:{},o:100,x:"được: kết quả tùy việc chọn",inner:1,door:r.k,dom:M[0].dom,rep:1,lock,g:M[0].g,who:M.every(w=>w.who===M[0].who)?M[0].who:undefined,done:availW(M).length?0:1,_d5:r.h}}
-let A0=null;
-function pickCard(d,w){if(S.dead||Q.length||!A0)return;deck.push(w);const i=deck.length-1;try{A0.call(window,i)}catch(e){console.error("jdoor5 way",e)}finally{const j=deck.indexOf(w);if(j>=0)deck.splice(j,1)}
- d.done=availW(d.m).length?0:1;render()}
-function openCard(d){const L=availW(d.m);if(!L.length){d.done=1;render();return}if(L.length===1){pickCard(d,L[0]);return}
- const rows=d.m.map(w=>{const tc=cc(w);let x="";try{x=typeof optLine==="function"?optLine(w):(w.x||"")}catch(e){x=w.x||""}
-  const poor=!w.lock&&!(typeof canPay!=="function"||canPay(w)),late=w.b!=null&&(S.buoi||0)!==w.b,gone=w.done||srvOnceNow(w);
-  const why=w.lock?(String(w.t||"chưa làm được")):gone?"đã làm rồi":poor?"không đủ bạc":late?"chưa đến buổi ấy":!can(tc)?"hết khắc buổi này":"";
-  const row={n:w.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>pickCard(d,w)};if(why)row.off={why};return row});
- let who=null;try{who=typeof pMe==="function"?pMe():null}catch(e){}
- DOOR.card(d.n,d._d5||d.t,rows,who)}
-(function(){const a0=act;A0=a0;act=function(i){const d=deck&&deck[i];if(d&&d.door&&d.m){if(d.done||d.lock||S.dead||Q.length||!can(cc(d)))return;openCard(d);return}return a0.apply(this,arguments)};window.act=act})();
-(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&Array.isArray(deck)){const road=roadNow();if(road)deck=DOOR.fold(deck,rowsOf(road,deck),{mk})}}catch(e){console.error("jdoor5 deck",e)}return r};window.deal=deal})();
-(function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){try{const d=DART[name];if(d){const A=(typeof KIT_ACTS==="object"&&KIT_ACTS.acts)||{};if(!A[name]&&A[d])return k0.call(this,d)}}catch(e){}return k0.apply(this,arguments)};window.kitActArt=kitActArt})();
-/* test helper: run a member (or a plain card) by name through the real act() path */
-window.J5RUN=n=>{const i=deck.findIndex(a=>a&&!a.door&&a.n===n);if(i>=0){act(i);return true}const d=deck.find(a=>a&&a.door&&a.m&&a.m.some(w=>w.n===n&&!w.lock));if(!d)return false;pickCard(d,d.m.find(w=>w.n===n));return true};
+/* register: SRVG → cung nữ Phận sự, COLDG → lãnh cung, KCR + tw twins → khuê các */
+SRVG.forEach((r,i)=>DOOR.deck({k:"d_srv"+i,n:r.n,roads:["srv"],t:r.t,re:r.re}));
+COLDG.forEach((r,i)=>DOOR.deck(r.key?{k:"d_cold"+i,n:r.n||"letter",roads:["cold"],t:r.t,key:r.key}:{k:"d_cold"+i,n:r.n,roads:["cold"],t:r.t,re:r.re}));
+DOOR.deck({k:"d_kc",n:"kc",roads:["kc"],
+ key:(a,L)=>{for(const [re,f] of KCR){const m=re.exec(a.n||"");if(m)return f(m)}
+  const tw=new Set(L.filter(x=>x&&x.tw).map(x=>x.tw));const b=a.tw||(tw.has(a.n)?a.n:null);return b?(TWN[b]||b+" (cách khác)"):null},
+ t:(key,ways)=>{for(const [re,f,t] of KCR)if(ways.every(w=>re.test(w.n||"")))return t;return"Một việc, hai đường: chọn cách làm (mỗi cách tốn khác nhau)."}});
 })();
