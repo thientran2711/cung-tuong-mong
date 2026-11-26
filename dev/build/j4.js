@@ -68,7 +68,7 @@ td:{t:"Báo thù cho nhà",n:5,goal:"Cả nhà ngươi bị vu mưu phản. Gom 
   return""},
  acts(){const A=[{n:"Điều tra án cũ",t:`Lục hồ sơ Hình bộ, tìm người làm chứng. Chứng cứ: ${S.caseEv}/3.`,c:{bac:-20,suc:-10},o:od(BAL.odb.j4.odO_9+eyes(S)*6+S.tai/10+S.tamco/5),w:{},l:{danh:-3},x:`chứng cứ án cũ ${balSg(BAL.ag.ev.one)}`,go:()=>{S.caseEv+=BAL.ag.ev.one}}];
   if(S.caseEv>=3){const ok=S.rank>=3&&S.st.wit;A.unshift({n:"Dâng sớ lật án",t:ok?`Đem chứng cứ và nhân chứng trình Hoàng thượng, trị tội ${S.foeDad}.`:!S.st.wit?"Cần giữ được nhân chứng.":"Cần đạt bậc Tần mới được dâng sớ.",c:{suc:-10},o:ok?od(BAL.odb.j4.odO_10+S.danh/4+S.sung/5+(has("nhantu")?5:0)):0,w:{danh:20},l:{danh:-15,sung:-10},lock:!ok,x:"lật án, trị tội kẻ thù",
-   go:()=>{S.avenged=true;const e=rivals.find(x=>x.enemy);log(`<b class="g">Án cũ được lật. Cả nhà ngươi được rửa oan, truy phong. ${S.foeDad} bị xử trảm.</b>`);if(e&&e.alive&&!e.out)punCold(e,"cuc","bị liên lụy án nhà")/* PUNISH-TIER: phế vị + lãnh cung */S.thu=0;stEnd(1,"Đã báo thù");fx("gold")},
+   go:()=>{S.avenged=true;const e=rivals.find(x=>x.enemy);log(`<b class="g">Án cũ được lật. Cả nhà ngươi được rửa oan, truy phong. ${S.foeDad} bị xử trảm.</b>`);if(e&&e.alive&&!e.out)punCold(e,"cuc","bị liên lụy án nhà");/* PUNISH-TIER: phế vị + lãnh cung */S.thu=0;stEnd(1,"Đã báo thù");fx("gold")},
    fail:()=>{S.caseEv=0;log(`<span class="r">Hoàng thượng nổi giận vì ngươi lật án của tiên đế. Chứng cứ bị thu hủy.</span>`)}})}
   return A}},
 ch:{t:"Quân cờ của Thái hậu",n:3,goal:"Thái hậu đưa ngươi vào cung để thay Hoàng hậu. Mệnh lệnh của bà ngày một nặng. Khi bà mất, chỗ dựa sụp đổ.",
