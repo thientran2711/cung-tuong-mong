@@ -79,3 +79,32 @@ dev/build/jtds.js (teacher lines) → this branch's place words (rcpFeeW / place
 - Real-tap screens Fold 755x1000 + iPad 1180x820 (home stage, Tiền truyện, home intro dialog): kit dialog frame, no horizontal scroll, no page errors,
   VANPHONG wording OK except item 1.
 - Not run: coop-e2e (verdict already FAIL; run it on the next sha together with the full gates).
+
+## REVIEW r3 (reviewer session_01V1ZZH29E5itz7L8m4cLTq5) — target review/ob-ngoaicung 6f3cdd5b (code 6e726d81, OB-NGOAICUNG-3b)
+PRIORITY #1 CHECK: review of an existing branch — nothing rebuilt; r2 FAIL + worker §r3 read.
+
+### VERDICT: FAIL (1 item — result-card family, law 6 + 11). r2 item FIXED.
+Merge onto LIVE 3af7896e DONE: **ca368b86** (pushed to review/ob-ngoaicung, FF of 6f3cdd5b; only index.html / sw.js conflicted → regenerated). Build on it.
+
+1. **BLOCKING — a palace consort's «thiện cảm» change still reaches her HOME result card (cards family, worker item 8).**
+   - Real play: scan.js --play=600, bd: «Trong cung cố quốc vừa qua» row «Hoàng quý phi Kiều Lang Hoa: thiện cảm −5» (strict «cards», 1 of 3 bd runs).
+   - Deterministic repro, every home road (tt «Trong phủ vừa qua», cnv «Ở nhà vừa qua», nc/bd «Trong cung cố quốc vừa qua»): at home,
+     `b=rsnap(); relAdd(topConsort,S,-5); relAdd(S,topConsort,-5); resultShow("Trong cung vừa qua",b)` → Mất: «Hoàng hậu <name>: thiện cảm −10».
+     The same with only `v.ghen+=8` → no card (ghen is hidden correctly).
+   - Cause (for the builder to confirm): the row is NOT from before.rel (jroad8's resultShow wrapper resets that) — it comes from the per-act relation
+     change list fed by relAdd (jwhyn WHY_STAT aff «thiện cảm với ta» / j63 rows), which the home gate does not filter. Fix at the one gate: at home
+     no palace person's (consort / emperor / Thái hậu / palace servant) relation row on any result card, except the person her own act names
+     (same rule as before.rel); and make the scan's «cards» check fire a forced relAdd on a palace consort each run (not only random play).
+
+### Checks that PASS (merged ca368b86)
+- **r2 item FIXED (her drawn tag at home):** real taps — Fold 755x1000 tt: Tiền truyện 1/3, 2/3, Khuê các = «Tiểu thư … (ta)»; iPad 1180x820 cnv:
+  «Thôn nữ … (ta)»; iPad nc: «Công chúa … (ta)» incl. «Công chúa Cao Ly». No RANKS name in any drawn tag of hers at home, no hscroll, 0 page errors.
+  Entering the palace (kcEnter at home): «Nhập cung» card and her tag read «Đáp ứng» (palace side unchanged).
+- Law-11 grep: no `RANKS[S.rank].n` left outside meRankN (only comments). 4 sites still print her current rank as `RANKS[Math.min(S.rank,…)].n`
+  (j67.js:98 + jst14.js:42 «Được tấn phong một bậc (nay …)» milestone, jrd_dtq.js:179 lệ cung dâng thư, jrd_tt.js:689 MATME) — palace-only
+  lines today, same word as meRankN in the palace; NIT: route them through meRankN for one source.
+- Family scan 5 roads × 600 steps (merged): tt, cnv, nc PASS; td and bd PASS on rerun (several runs began in the palace = the known start flake,
+  isKc false); drawnTag / meRank / headcount / dropped bad 0 / worldcare 0 / acts 0 / asks 0 / errors 0; «cards» FAIL once (item 1).
+- coop-e2e on ca368b86: **143/143 passed**.
+- quickcheck not re-run by me this round (worker: PASS on 6f3cdd5b); run it on the next sha vs LIVE.
+- Kit / VANPHONG on the looked screens (home stage + kit dialogs, Fold + iPad): OK.
