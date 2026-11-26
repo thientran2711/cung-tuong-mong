@@ -487,3 +487,4 @@ C3-S16LOOK (s16 room restore LOOK Fold+iPad) | img/_review/c3-s16restore (no bra
 | co-op FIXER coop-afk-l13: AFK guest at L13 holds the week end (opus; briefs/b-coop-afk-l13.md; OPEN 1 of reports/coop-night-wk6.md) | review/coop-afk-l13; reports/coop-afk-l13.md | B ROOT 2 child 3 | session_01N1tNP6jh7b7Ud9kToYmCa1 | RUNNING | 26/11 11:15Z |
 C3-S16LOOK | img/_review/c3-s16restore | session_01PEhRbxeYsVaG6eCe3Sn9db | DONE (PASS, archived) | 2026-11-26T11:30Z
 | BIG RV inv-stack 20cdb016 (opus; briefs/b-inv-stack-review.md) | review/inv-stack(-rv); reports/inv-stack.md | B ROOT 2 child 3 | session_01N1tNP5uzxRPQ9hqgmZYK2b | RUNNING | 26/11 11:57Z |
+C3-SEALS-W1d (hh disc fix + pt/cl/cy) | review/c3-seals | session_01PEhRbwgmJUfiQSjuQmcvaz | RUNNING | 2026-11-26T11:59Z (Foreman C ROOT 3-1-1; successor of W1c)
