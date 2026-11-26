@@ -324,3 +324,7 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   the emperor dies, E-S4 R5-speed-4 / R5-greedy-1); a bot-chosen exit with options stays INVALID. mgQuit also counts «#kg… «Quay lại»» taps (07:14Z).
 - Proof (today's LIVE 6b5d3d05, NEW lives, this commit): Fold rand s77 → buổi 71, 0 DEAD, 0 bugs; iPad bold s4242 → buổi 51, 0 DEAD, mgReady 1; Fold cautious s909 →
   buổi 86, 0 DEAD, mgReady 1; DEC 89f5b956 Fold speed s31337 → buổi 86, 0 DEAD. Control 496b6b66 same seed: 94 DEAD «cover div.kscn-veil», «no progress 6 min» at buổi 2.
+- BIG #8 FAIL 074abe46 (1 item): «result» needed a VISIBLE kitOvBtn, but the jexam result hides #kg82ok on purpose (only ✕, kitOvSync → kitOvBtn) = the BIG #7
+  54fa0112 case again. Now: result = kitOvBtn() (the game's own panel test) AND no rules board on screen (no visible «Sẵn sàng» in #ov) — a stale kitOvBtn while a
+  rules board is up is not a result, so the back stays off there. Proof LIVE 6b5d3d05: RT_TEST_EXAM=1 Fold s31 / s7 and iPad s12 / s8 → done:true raws [5,5] ×4;
+  regression Fold cautious s909 → buổi 71, iPad bold s4242 → buổi 51 (mgReady 1), 0 DEAD, 0 bugs, no give-up.
