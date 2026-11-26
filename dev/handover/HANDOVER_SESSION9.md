@@ -383,3 +383,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~22:08Z OWNER: result card empty band; event stage no figure; flip = tap1 enlarge, tap2 flip, back same size → OD row → R5 (2,3) + KK47 (1).
 - ~22:09Z RV-163B: punish-tier ab73bc26 BIG PASS → LC25 land now (wit later); dress-fix-kit 8cc9a284 → LC25; rolled → archived; opened RV-163C session_01Rc5AsLFUVRepsLs2do3jnh (kit-resfold, oan-pace-ghen, title-bal, punish-tier-wit, reign-end, pace-speed). «Ban chết» stamp on evidence art → ORDER Foreman C.
 - ~22:10Z RING-BUILD-5 rolled 34c24a38 (motion merged, face card, title plates, Ân oán ring fixed) → archived; opened RING-BUILD-6 session_01Rc5AsK4NELLZpFSpntdwGY (plaque post OD 21:41Z + 3 sizes OD 21:45Z first, reruns, Fold court/crew).
+- ~22:18Z PUSHED main 03a8c17c → 504d2e6a (LC25 B = os stack ov+km+kw+os d811a46d on LIVE; QC A/B pass). ROLLBACK now 03a8c17c. Next lc25-sp.
