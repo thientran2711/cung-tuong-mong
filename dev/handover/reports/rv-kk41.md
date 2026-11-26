@@ -1,0 +1,17 @@
+# RV-KK41 — small kit review (reviewer child of MAIN 157; session of 26/11 ~11:00Z)
+PRIORITY #1 CHECK: OD:L1103 (kit keeper) | OD 24/11 ~21:57Z + 26/11 ~06:50Z | main 3af7896e | review/kit-stage-r2 22e318d5..ec2f7c43 | claim KK41 session_01V1ZZH1ZpR1p4UkhoUWozbE | j61 mask (k61Mask) already on main.
+
+## (A) review/kit-stage-r2 ec2f7c43 — SMALL PASS
+Delta 22e318d5..ec2f7c43 = jkhand.js (kitHandLongOff / kitHandSig / kitHandIsLong, early returns in kitHandWants + kitHandLay + kitHand), jkitpage.js sample, KIT.md §101 line (written IN PLACE next to CARD NAME FIT, law 14 ok), kit-hand.js case «long», built files. No other file.
+Laws touched: 9/11/12/14 — one kit card (the LIST card, jopic option rows) for a long name, no private variant; whole group = every hand-face frame (the rule sits in kitHandNameFit, which every hand runs); KIT.md overwritten in place.
+Tests (built index.html of each sha, Fold 755x1000 + iPad 1180x820, same process each):
+- node dev/test/kit-hand.js: base 22e318d5 FAIL 4 (long names cut 3, hand+stage kept) → ec2f7c43 KIT-HAND PASS (both devices; «long names: whole», «list card, no hand/stage left», «short names after a long set: hand again»).
+- NAMES=1 node dev/test/opt-frame-scroll-scan.js, one device per process: Fold 133 cards (hand 130, list 3) broken 0 cut 0, option frames 42 FAIL 0; iPad 133 cards (hand 126, list 7) broken 0 cut 0, option frames 42 FAIL 0. Law 11 scan: no cut name anywhere on either device.
+LOOK (shots ipad-long / fold-long of kit-hand.js): iPad 1180x820 — three whole names on the list card, 2 lines each, no «…», figure at left, no ✓/✕/plate; Fold 755x1000 — same list card, 4–5 lines per name, whole, last row fully inside the frame, no hand/stage left. (Looked once per device here; MAIN LOOK 3× is KK41's.)
+Not run: j7c iPad list scroll 7 px (KK41 note, LIVE same frame 46 px) — accepted, better than LIVE; scan w1 flakiness ~1 in 4 not seen in my single runs.
+«Tổng quản thái giám ???» in Mệnh truyện (Quan hệ pair heading): NOT part of this delta (j61 / jnotice untouched, git diff main..ec2f7c43 empty for them). It comes from the j61 name mask (k61Mask, main) and is the already filed F2 of review/rel-men-servants (heading «Quan hệ giữa Tổng quản thái giám ??? và ta», side «… ???», while the strip says «Người lạ»; fix r2 494ea79b by that worker, not in this checkout). I did NOT reproduce it at runtime on LIVE; the NAMES scan (option cards only) has 0 «???». Treat as LIVE baseline / owned by rel-men-servants; VANPHONG §3 says no «???» on screen → the worker must land F2.
+Landing note: ec2f7c43 is 50 ahead / 23 behind current main (stack branch, base 02f564ae) → coordinator STACK-LANDs it (not a plain fast-forward).
+
+## (B) kit-kem-row — VOID / MOVED (MAIN 157 + MAIN 158 messages 10:43–10:56Z)
+68d24cd8 is dead (kitKemRow owned by ob-verdict). New head will be kit-kem-row-r2 on ob-verdict-rv a622ccde (not e384546b). Not reviewed yet — waiting for KK41's sha.
+Trial merge that was asked first (68d24cd8 onto e27c9f9f), for the record: CONFLICTS in dev/build/j63.js (the two kitKemRow bodies), dev/build/jkitpage.js (kitPgKem + seal/Kem sample titles), assets.json, sw.js, index.html (built; rebuild). Resolution used: kem-row's kitKemRow wins (superset: named once per feeling, «Một vị Phi», «+4 đến +8», kitLineCap) and jkitpage keeps ob-verdict's «BỎ DỞ» seal sample. LEFTOVER (law 14): ob-verdict's `.kb .kr-kem .kitem.kkemi` CSS line (j63 ~404) stays dead after that resolution → must be deleted. Not built-and-tested further because the base moved.
