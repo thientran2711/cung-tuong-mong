@@ -1852,3 +1852,4 @@ RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vb
 | E95 E-a+E-b mghelp-dress (opus; briefs/E95-mghelp-dress.md) | review/mghelp-dress | FOREMAN E child7 | session_01DgYSWkswMaVgErr9xy4z23 | RUNNING | 26/11 04:25Z |
 | E96 E-c+E-e dialog-order (opus; briefs/E96-dialog-order.md) | review/dialog-order | FOREMAN E child7 | session_01DgYSWkVu3mJTZ8LRPwH1Jm | RUNNING | 26/11 04:25Z |
 | E97 E-d dup-report (opus REPORT; briefs/E97-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWoPgpYzodQxz6rufXQ | RUNNING | 26/11 04:25Z |
+KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING | 2026-11-26T04:11Z (MAIN 152)

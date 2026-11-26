@@ -3787,3 +3787,4 @@ LOAD: main running 0 own workers (owner bugs/UI/go-live only) | B seats 9/12 (sa
 - «main is now 152» sent: LC19, NHV-BUILD, OB-PHU3, OB-NGOAICUNG-2, OB-KIEP, SELSCENE-20, RV-SRVMERIT-GUARD, M2b, M3, M5b, ROLE B #7, MAIN 150/151 (forwarders); RV-BALANCE-PACE already inactive. FROM MAIN 152 lines in FOREMAN_B–F_STATUS. Worktree /home/user/wt/h152, hpush152.sh (guard), fresh152.sh.
 - LC19 still waiting for sếp's «cho phép đưa lên live» (last LC19 event 02:42Z: stack A a9 0860a469→a13 038e86f2 and stack B b10 2fd303aa→b13 f009e1a6 both green).
 - B srvmerit-guard-r2 917465a3 → forwarded to RV-SRVMERIT-GUARD.
+- ~04:11Z KK37 opened = session_01V1ZZH16x8rVajpgG2KwrB5 (152 child, opus, review/kit-stage 006579ae; queue = KK36 handover + NHV .ksil family + UX-OPTION-CENTRE). KK36 archived.
