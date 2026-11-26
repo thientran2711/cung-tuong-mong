@@ -364,3 +364,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:31Z LC25: B 504d2e6a gates PASS, QC running → READY next. lc25-wg 539603bf + lc25-wf 814bd77d hand-resolved code conflicts → MAIN: narrow conflict-hunk re-check by RV-163 (self-merge rule: conflict → reviewer), then land after SP.
 - ~21:36Z WAKE LOAD: main running ~21 (owner bugs/UI/go-live + kit) | B save stack landing via LC25 | C art idle-ish (c1b art done) | D split-merge audit + NEW ORDER gift-grid crash | E robot runs | F robot runs | moved: F 21:34Z tab crash/gift-grid pile-up → ORDER Foreman D.
 - ~21:35Z RV-163 PASS goal-links-r2d → land 8d28efd7 (review/goal-links-r2d-r163; contains kit-k44-parts commits → land with/after k44 60599208); LC25 copied. Nit §6.2l «Cách làm» narrow on Fold → KK46 leftovers.
+- ~21:37Z 161 relay: sếp asks witness-button over-detail audit (read-only table, then her pick) → ORDER Foreman D (added to split-merge audit, this section first).
