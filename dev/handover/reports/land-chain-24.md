@@ -31,3 +31,15 @@ JUMP-INS on PASS: renderer-mem (D head 2b5bbbb3), ob-ngoaicung r5 8aaac5ac (afte
 - 19:50Z g-sp QC #1: CORE = LIVE baseline only (G4 80 ×2, G4 90 Ô lưu·Lui); perf render 189/183, tab 515/493, buổi 1279/1211 (1.06×), tasks 24/25 BUT longTaskMaxMs 3190 vs 1419 (limit 2270) FAIL — run was contaminated (I ran ag-moodknow ×7 in parallel during it). SP test fix committed → review/lc24-sp 23b0b3d3. QC #2 alone running, then robots (LIVE vs SP).
 - 19:54Z MAIN 162 queue adds (RV-161 SMALL PASS, rv-161.md @ e0b6d0ad): review/kit-k44-parts 60599208 (notice-hold/warn line/goal link; RV ran no perf → my QC; carries kitOptFinal nav line — when kit-g4-r3 lands resolve as `const free=b.dataset.knav==="1";`; goal-links-r2c + place-close sit on it) and review/sound-cache 29a6cce7 (test-only). Slot: after ec (k44-parts, sound-cache rides along).
 - 19:56Z RV-161 (session_01Rc5AsNAuTsL1MQi1DNgL5S): SMALL PASS kit-k44-parts 60599208, sound-cache 29a6cce7, kit-veil-buoi 8655f6da (independent). wording-gain SMALL FAIL (not queued). Queue tail after ec: k44-parts (+sound-cache) → kit-veil-buoi → [map-zones-r7 + kit-map-icons, wait RV].
+- 20:20Z g-sp QC #2 (alone, 23b0b3d3): perf PASS render 182/174 (1.05×), tab 490/491, buổi 990/1042 (0.95×), tasks 25/24, longTaskMax 2180/2295; old save ok; CORE = LIVE baseline only (G4 80 ×2, G4 90 Ô lưu·Lui); time-spill PASS.
+### ROBOT TABLE LIVE f573dc94 vs SP 23b0b3d3 (dev/measure/statpace.js, 3 seeds × 12 months, PAR 3; medians over lives at month start; oanM = median oán of consorts toward her, oanX = highest; at100 = stats at ≥99)
+| mo | LIVE sung/danh/duc | SP sung/danh/duc | LIVE th/hh | SP th/hh | LIVE oán med/max | SP oán med/max | LIVE at100 | SP at100 |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 37/35/36 | 39/53/33 | 5/-17 | 22/-5 | 4/19 | 3/14 | 0 | 0 |
+| 2 | 52/57/40 | 56/54/41 | 11/-22 | 39/-8 | 5/21 | 6/16 | 0 | 0 |
+| 3 | 66/64/49 | 55/57/44 | 31/-20 | 35/-10 | 8/36 | 6/27 | 0 | 0 |
+| 4 | 73/77/61 | 59/57/49 | 33/-37 | 32/-10 | 12/39 | 6/22 | 2 | 0 |
+| 6 | 100/100/82 | 60/60/51 | 62/-85 | 28/-29 | 22/73 | 7/22 | 6 | 0 |
+| 9 | 99/99/98 | 65/59/58 | 61/-99 | 20/-33 | 27/75 | 10/31 | 5 | 0 |
+| 12 | 100/94/100 | 70/56/57 | 59/-98 | 25/-62 | 26/97 | 11/32 | 6 | 0 |
+Max over lives at mo 12: LIVE oán 97, SP oán 53 (still rising; not ~0). Year 1 nobody at 100 on SP (LIVE: 6 stats at 100 by month 6). Cards reaching her (3 lives): harm LIVE 3 / SP 1, visit 119/36, opt 114/62, ky 30/14 (jevc daily big-event cap). Per-person oán is not recorded by the robot (median/max only).
