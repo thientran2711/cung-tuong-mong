@@ -3023,6 +3023,12 @@ Owner: "Bất kỳ một cái thông báo nào của cái game đều phải vô
 - `kitToastKeepRects` / `kitToastCol` (jclose) stay the shared keep-clear list; `kitToastPlace` / `kitToastCollapse` are no longer used by notices (no stage-rail «!» item).
 - Sample: kit page §42.2 (box lit / calm, chip, button that opens the panel). Test: `DEV=fold|ipadAir node dev/test/stage-here.js` (faults `toast-cover`: chip-low / hud-word / kept / person / card; `collapse-no-box`; `float-toast` = any visible `#kupdline`, `#ktbtoast`, floating `.kmnote`, `body > [role=status]` other than the chip), `node dev/test/stage-stay.js` (the closing notice text names the stay odds).
 
+### 42.2a HELD CHIP · PULSE · RED STATE (owner 26/11 ~14:00Z place closing, MAIN REC applied: «Nơi này sắp đóng cửa, mời tiểu chủ rời đi» pulsing on the LAST allowed khắc, red «Đã quá giờ, mời tiểu chủ rời đi» in the grace khắc; KK44) — `kitNotice({…, hold, pulse, tone})` (jnotice), the SAME thin chip `.ktbt.kntc` of §42.2, no new part
+- `hold:1` — the chip stays up (no `BAL.entryToastMs` timer) until `kitNoticeDrop(id)`; it hides under a dialog / the book and comes back after (the §42.2 watcher). Another notice's chip shows for its 5 s, then the held chip returns.
+- `pulse:1` — the whole chip blinks with the kit `kntBlink` (same beat as the busy «!» box; `--pace`); reduced motion: no blink, a solid outline instead.
+- `tone:"red"` — the red state: chip filled `var(--bad)`, text + «!» disc inverted (`.kntred`). Same place, same size.
+- Use with `sticky:1` so the «!» box keeps its light. The place-close fixer (PLACE-CLOSE) calls it: last khắc → `{id:"close-<place>", line:"Nơi này sắp đóng cửa, mời tiểu chủ rời đi", sticky:1, hold:1, pulse:1, go: walk home}`; grace khắc → same id with `line:"Đã quá giờ, mời tiểu chủ rời đi", tone:"red"`; she leaves → `kitNoticeDrop("close-<place>")`.
+- Kit page sample §42.2a (hold / red / drop buttons).
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
 - The week rolls ONE weather (`S.wx.b`, its flag f drives every rule); the WORDS shown follow the buổi (`S.wx.n = wxAt(S.wx.b, buổi)[0]`, icon
   `[1]`). Night never: nắng, ve kêu, "sớm". Day never: trăng, sao, đom đóm, đêm, dế. "sớm" only in the morning. Every new weather row gives all
