@@ -1,0 +1,8 @@
+# E-S2 rebel-1 — end-of-life review (robot as player: rule-breaker, bot=sens, iPad 1180x820)
+## 1 Summary
+thd / thd_tro seed 2212037548 (R2 rebel kiếp 1 rerun; the original was an exit «Xuất gia»), iPad, real taps (jsClicks 0), started 07:00Z 26/11, stuck ~55 min behind the kscn-veil gate («Chạm để tiếp ▸»), resumed at the 07:55Z harness switch, finished at buổi 2 a few minutes later (~1 h total). Harness d2e03d80 (file); the stuck segment on 4d7a22c6/d2e03d80. Year 1 (age 19), rank 0 (Đáp ứng), ending «Ban hoa — Bị ban hoa, xuất cung» (Tuyển tú dismissal; no option tapped as an exit, exitPick null → game-imposed, VALID, flagged). 2 buổi, 264 dead buttons + 9 bugs (almost all from the stuck segment), 1 stall.
+## 2 Scores (1–10) — a very short life, scored on what I saw
+a. First 15 min — 3 (the Tuyển tú gate: nothing happens for an hour until the harness taps the bubble; as a real player I would also be lost). b. Loop & pacing — n/a (2 buổi). c. Buttons & UI — 2 for the veil gate (every nav button covered), 6 once passed. d. Story — 5: the selection hall (Thái hậu, Hoàng thượng) is a strong opening. e. Characters — 5. f. Choices — 4 («Cúi đầu chờ xét / Dâng Kỳ / Dâng Nấu nướng» look equal-value; waiting got me dismissed). g. Feedback — 3 (the end screen shows a cut-off bubble, no card). h. Mini-games — the tài-nghệ offers (Dâng Kỳ / Nấu nướng) were not played. i. Visuals — 7. j. Co-op n/a.
+## 3 Loved: the selection scene writing. Hated: 55 min behind a tap-to-continue veil; a life of 2 buổi. Replay: yes.
+## 4 Bugs: kscn-veil «Chạm để tiếp ▸» gate (harness gap, F #19 fixed it); end-screen shot shows a cut-off «Thái giám Trương Mạn Sương —» bubble (transition).
+## 5 Suggestions: none.

@@ -1,0 +1,7289 @@
+{
+ "job": {
+  "id": "ES2-R2-rebel-1",
+  "origin": "thd",
+  "road": "thd_tro",
+  "bot": "sens",
+  "seed": 2212037548,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "d2e03d80",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 264,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 915,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Đông sở · Ở đây có 4 người."
+   },
+   {
+    "at": 1112,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Đông sở · Ở đây có 4 người."
+   },
+   {
+    "at": 2022,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Đông sở · Ở đây có 2 người."
+   },
+   {
+    "at": 2057,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Đông sở · Ở đây có 2 người."
+   },
+   {
+    "at": 2252,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Đông sở · Ở đây có 2 người."
+   },
+   {
+    "at": 2961,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người."
+   }
+  ],
+  "slice": null,
+  "build": {
+   "s": "bf6dd041+",
+   "b": "0281bf7bcef6",
+   "t": "2026-11-26T06:59Z"
+  },
+  "areaTaps": 80,
+  "dlgScroll": 3,
+  "scrolls": 3,
+  "infoTaps": 98,
+  "loops": 5,
+  "backdropTaps": 1,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-26T07:55:11.894Z",
+    "buoi": 1,
+    "from": "2026-11-26T07:52:26.943Z"
+   }
+  ],
+  "taps": 6
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 19,
+  "year": 1,
+  "rank": 0,
+  "text": "Ngươi về quê, mở một lớp dạy chữ cho con gái trong vùng. Cung cấm chỉ còn là một giấc mộng xa.",
+  "card": [
+   "",
+   "",
+   "",
+   ""
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "AREA 318,574",
+   "AREA 204,510",
+   "AREA 637,536",
+   "AREA 742,472",
+   "AREA 245,369",
+   "AREA 759,618",
+   "AREA 585,442",
+   "AREA 742,457",
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+   ".dlg «Thái hậu» «Con thích nhất ngồi bên Thái hậu nghe chuyện, ăn g»",
+   ".dlg «Hoàng thượng» «Cúi đầu chờ xét»",
+   ".dlg «Thái hậu» «Thần thiếp gọi nhũ mẫu của đứa nhỏ đến, vì việc ch»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "n": 2,
+   "at": 915,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-1.png",
+   "dump": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc40Tài50Tâm cơ29Đức40Danh8Sủng8",
+    "Bạc80Sức80/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Hạ hạ (Hung)",
+    "Tâm trạngBình thản0",
+    "Tin báo",
+    "Người lạ???",
+    "Chọn chính mình"
+   ],
+   "trace": [
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bạc80Sức80/100»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức40Danh8Sủng8»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tâm trạngBình thản0»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hành sự»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bạc80Sức80/100»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hoàng tự»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 3,
+    "mg": false,
+    "qt": [
+     "Tin báo",
+     "Tâm trạng · Ngươi",
+     "Dưỡng Tú viện"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Dưỡng Tú viện)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Dưỡng Tú viện)",
+   "n": 1,
+   "at": 915,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Đông sở)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Đông sở)",
+   "n": 1,
+   "at": 1112,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-2.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "stuck|no progress 15 min on page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "type": "stuck",
+   "msg": "no progress 15 min on page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "n": 1,
+   "at": 2022,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/stuck-1.png",
+   "save": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc40Tài50Tâm cơ29Đức40Danh8Sủng8",
+    "Bạc80Sức85/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Hạ hạ (Hung)",
+    "Tâm trạngBình thản0",
+    "Tin báo",
+    "Người lạ???",
+    "Chọn chính mình"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "n": 2,
+   "at": 2057,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-3.png",
+   "dump": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-3-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc40Tài50Tâm cơ29Đức40Danh8Sủng8",
+    "Bạc80Sức85/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Hạ hạ (Hung)",
+    "Tâm trạngBình thản0",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn bốn khắc Đông sở3 bóng ngườiTây sở3 bóng ng",
+    "Đông sở3 bóng người",
+    "Tây sở3 bóng ngườitốn: một khắc"
+   ],
+   "trace": [
+    "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Quẻ Hạ hạ (Hung)»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chưa điểm trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hoàng tự»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Buổi sáng, còn 4 khắc»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Quẻ Hạ hạ (Hung)»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hoàng tự»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bạc80Sức85/100»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bạc80Sức85/100»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 1,
+    "mg": false,
+    "qt": [
+     "Đông sở"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Đông sở)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Đông sở)",
+   "n": 1,
+   "at": 2057,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-3.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=2: Tin báo / Đông sở)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=2: Tin báo / Đông sở)",
+   "n": 1,
+   "at": 2252,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-4.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "n": 1,
+   "at": 2961,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-5.png",
+   "dump": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-5-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8",
+    "Bạc80Sức100/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Hạ hạ (Hung)",
+    "Tâm trạngBình thản0",
+    "Tin báo",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở · còn mười ba khắc Đông sở3 bóng ngườiTây sở3 bóng ngườiB",
+    "Đông sở3 bóng ngườitốn: một khắc"
+   ],
+   "trace": [
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 3,
+    "mg": false,
+    "qt": [
+     "Tâm trạng · Ngươi",
+     "Tin báo",
+     "Sân chờ"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Sân chờ)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Sân chờ)",
+   "n": 1,
+   "at": 2961,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-5.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Người lạ???",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676530545.png",
+   "dev": "ipad",
+   "at": 71,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chọn chính mình",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676539479.png",
+   "dev": "ipad",
+   "at": 82,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Về Dư đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676549687.png",
+   "dev": "ipad",
+   "at": 90,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Lịch tháng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676558222.png",
+   "dev": "ipad",
+   "at": 99,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676566551.png",
+   "dev": "ipad",
+   "at": 107,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thỉnh tranh nhân vật",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676574291.png",
+   "dev": "ipad",
+   "at": 115,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "3Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676581521.png",
+   "dev": "ipad",
+   "at": 122,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tai mắt0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676589890.png",
+   "dev": "ipad",
+   "at": 131,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676597950.png",
+   "dev": "ipad",
+   "at": 139,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Lật thẻRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676605675.png",
+   "dev": "ipad",
+   "at": 146,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676611883.png",
+   "dev": "ipad",
+   "at": 152,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676619556.png",
+   "dev": "ipad",
+   "at": 160,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Bổng lộcsau 3 tuần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676626934.png",
+   "dev": "ipad",
+   "at": 167,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676635512.png",
+   "dev": "ipad",
+   "at": 176,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xét phẩm: thiếu 4",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676643340.png",
+   "dev": "ipad",
+   "at": 184,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676651440.png",
+   "dev": "ipad",
+   "at": 192,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "?",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676658534.png",
+   "dev": "ipad",
+   "at": 199,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676667001.png",
+   "dev": "ipad",
+   "at": 208,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Túi đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676676191.png",
+   "dev": "ipad",
+   "at": 216,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thú cưng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676683337.png",
+   "dev": "ipad",
+   "at": 224,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Việc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676690923.png",
+   "dev": "ipad",
+   "at": 231,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tất cả 16",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676698099.png",
+   "dev": "ipad",
+   "at": 239,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Trang sức 1",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676705553.png",
+   "dev": "ipad",
+   "at": 246,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Y phục 2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676712786.png",
+   "dev": "ipad",
+   "at": 253,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Vải vóc 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676719908.png",
+   "dev": "ipad",
+   "at": 260,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thuốc men 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676727331.png",
+   "dev": "ipad",
+   "at": 268,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hương liệu 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676734522.png",
+   "dev": "ipad",
+   "at": 276,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Lễ vật 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676742600.png",
+   "dev": "ipad",
+   "at": 283,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Cài tóc: Trâm hoa lụa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676750475.png",
+   "dev": "ipad",
+   "at": 291,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Y phục: Áo lụa thêu hoa nhỏ",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676758104.png",
+   "dev": "ipad",
+   "at": 299,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Áo lụa thêu hoa nhỏ · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676769801.png",
+   "dev": "ipad",
+   "at": 310,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Váy sa xanh ngọc · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676777783.png",
+   "dev": "ipad",
+   "at": 318,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nước bào hoa · Dầu chải tóc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676785441.png",
+   "dev": "ipad",
+   "at": 326,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nến mỡ dê ×3 · Nến",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676793478.png",
+   "dev": "ipad",
+   "at": 334,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Than liễu ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676801179.png",
+   "dev": "ipad",
+   "at": 342,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Son sáp ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676808547.png",
+   "dev": "ipad",
+   "at": 349,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Yên chi giấy ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676816664.png",
+   "dev": "ipad",
+   "at": 358,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Phấn gạo ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676825467.png",
+   "dev": "ipad",
+   "at": 366,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Dấu ấn Đáp ứng · đang dùng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676833034.png",
+   "dev": "ipad",
+   "at": 374,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676845719.png",
+   "dev": "ipad",
+   "at": 386,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Ân oán",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676853024.png",
+   "dev": "ipad",
+   "at": 393,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Phe phái",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676860773.png",
+   "dev": "ipad",
+   "at": 402,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xem quan hệ của Ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676869349.png",
+   "dev": "ipad",
+   "at": 410,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đổi chỗ hai người",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676877335.png",
+   "dev": "ipad",
+   "at": 418,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "với Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676884578.png",
+   "dev": "ipad",
+   "at": 425,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676893871.png",
+   "dev": "ipad",
+   "at": 434,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Mệnh truyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676901661.png",
+   "dev": "ipad",
+   "at": 442,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Việc nhờ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676909830.png",
+   "dev": "ipad",
+   "at": 450,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Sổ ghi",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676919245.png",
+   "dev": "ipad",
+   "at": 460,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chương này",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676927607.png",
+   "dev": "ipad",
+   "at": 468,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Sắc phong",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676935294.png",
+   "dev": "ipad",
+   "at": 476,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đã qua 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676943053.png",
+   "dev": "ipad",
+   "at": 483,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Triều cục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676950074.png",
+   "dev": "ipad",
+   "at": 491,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tâm nguyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676957141.png",
+   "dev": "ipad",
+   "at": 497,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Mục lục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676964043.png",
+   "dev": "ipad",
+   "at": 504,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676982075.png",
+   "dev": "ipad",
+   "at": 524,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795676990907.png",
+   "dev": "ipad",
+   "at": 532,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Phi tần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677000175.png",
+   "dev": "ipad",
+   "at": 542,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nam nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677009772.png",
+   "dev": "ipad",
+   "at": 551,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677019831.png",
+   "dev": "ipad",
+   "at": 561,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677028427.png",
+   "dev": "ipad",
+   "at": 569,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thái hậu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677036624.png",
+   "dev": "ipad",
+   "at": 577,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xem thêm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677046185.png",
+   "dev": "ipad",
+   "at": 587,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Gặp ngài ban ngày 2/5",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677054371.png",
+   "dev": "ipad",
+   "at": 596,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Điều ngài thích",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677071995.png",
+   "dev": "ipad",
+   "at": 613,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+   "cover": "div.kph",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677092371.png",
+   "dev": "ipad",
+   "at": 633,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677110435.png",
+   "dev": "ipad",
+   "at": 651,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Con của ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677117905.png",
+   "dev": "ipad",
+   "at": 658,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Kế vị",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677125606.png",
+   "dev": "ipad",
+   "at": 666,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hoàng tự trong cung",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677134151.png",
+   "dev": "ipad",
+   "at": 675,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hôn sự",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677143495.png",
+   "dev": "ipad",
+   "at": 685,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Quý tộc kén rể · kén dâu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677152431.png",
+   "dev": "ipad",
+   "at": 693,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677162988.png",
+   "dev": "ipad",
+   "at": 704,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tứ đức 9/9",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677172185.png",
+   "dev": "ipad",
+   "at": 713,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Cầm kỳ thi họa 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677180650.png",
+   "dev": "ipad",
+   "at": 721,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677189021.png",
+   "dev": "ipad",
+   "at": 729,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tác phẩm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677196501.png",
+   "dev": "ipad",
+   "at": 737,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "ⓘ luật Đức",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677204811.png",
+   "dev": "ipad",
+   "at": 745,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xem luật Công · Nữ công",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677213200.png",
+   "dev": "ipad",
+   "at": 754,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677226601.png",
+   "dev": "ipad",
+   "at": 767,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mườ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677237132.png",
+   "dev": "ipad",
+   "at": 778,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đông sở3 bóng người",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677245097.png",
+   "dev": "ipad",
+   "at": 785,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tây sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677253159.png",
+   "dev": "ipad",
+   "at": 794,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Bắc sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677260902.png",
+   "dev": "ipad",
+   "at": 802,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tiền sảnh3 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677268518.png",
+   "dev": "ipad",
+   "at": 809,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "1Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677276574.png",
+   "dev": "ipad",
+   "at": 818,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn bốn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677438276.png",
+   "dev": "ipad",
+   "at": 979,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Bắc sở4 bóng ngườitốn: một khắc",
+   "cover": "div.kdv-line",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677446191.png",
+   "dev": "ipad",
+   "at": 986,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677453370.png",
+   "dev": "ipad",
+   "at": 994,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tâm trạngBình thản0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677588625.png",
+   "dev": "ipad",
+   "at": 1129,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Người lạ???",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677596483.png",
+   "dev": "ipad",
+   "at": 1137,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Chọn chính mình",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677604443.png",
+   "dev": "ipad",
+   "at": 1145,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Về Dư đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677611979.png",
+   "dev": "ipad",
+   "at": 1152,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Lịch tháng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677619106.png",
+   "dev": "ipad",
+   "at": 1160,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677626523.png",
+   "dev": "ipad",
+   "at": 1167,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "3Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677635998.png",
+   "dev": "ipad",
+   "at": 1176,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tai mắt0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677643304.png",
+   "dev": "ipad",
+   "at": 1184,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677651433.png",
+   "dev": "ipad",
+   "at": 1192,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Lật thẻRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677658425.png",
+   "dev": "ipad",
+   "at": 1199,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677664733.png",
+   "dev": "ipad",
+   "at": 1205,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677672059.png",
+   "dev": "ipad",
+   "at": 1213,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Bổng lộcsau 3 tuần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677679481.png",
+   "dev": "ipad",
+   "at": 1220,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677686811.png",
+   "dev": "ipad",
+   "at": 1227,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Xét phẩm: thiếu 4",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677693810.png",
+   "dev": "ipad",
+   "at": 1234,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "?",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677700820.png",
+   "dev": "ipad",
+   "at": 1241,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677709507.png",
+   "dev": "ipad",
+   "at": 1250,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Con của ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677716992.png",
+   "dev": "ipad",
+   "at": 1257,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Kế vị",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677724061.png",
+   "dev": "ipad",
+   "at": 1264,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Hoàng tự trong cung",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677731607.png",
+   "dev": "ipad",
+   "at": 1272,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Hôn sự",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677738896.png",
+   "dev": "ipad",
+   "at": 1279,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Quý tộc kén rể · kén dâu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677746342.png",
+   "dev": "ipad",
+   "at": 1287,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677758412.png",
+   "dev": "ipad",
+   "at": 1299,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Mệnh truyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677765574.png",
+   "dev": "ipad",
+   "at": 1306,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Việc nhờ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677774337.png",
+   "dev": "ipad",
+   "at": 1315,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Sổ ghi",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677781277.png",
+   "dev": "ipad",
+   "at": 1322,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Chương này",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677789023.png",
+   "dev": "ipad",
+   "at": 1329,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Sắc phong",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677796309.png",
+   "dev": "ipad",
+   "at": 1337,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Đã qua 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677805348.png",
+   "dev": "ipad",
+   "at": 1346,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Triều cục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677813101.png",
+   "dev": "ipad",
+   "at": 1354,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tâm nguyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677821160.png",
+   "dev": "ipad",
+   "at": 1362,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Mục lục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677829644.png",
+   "dev": "ipad",
+   "at": 1371,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677840407.png",
+   "dev": "ipad",
+   "at": 1381,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Ân oán",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677848243.png",
+   "dev": "ipad",
+   "at": 1389,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Phe phái",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677856086.png",
+   "dev": "ipad",
+   "at": 1396,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Xem quan hệ của Ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677863303.png",
+   "dev": "ipad",
+   "at": 1404,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Đổi chỗ hai người",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677871088.png",
+   "dev": "ipad",
+   "at": 1412,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677884004.png",
+   "dev": "ipad",
+   "at": 1425,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tứ đức 9/9",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677891852.png",
+   "dev": "ipad",
+   "at": 1432,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Cầm kỳ thi họa 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677899689.png",
+   "dev": "ipad",
+   "at": 1440,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677908138.png",
+   "dev": "ipad",
+   "at": 1449,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tác phẩm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677917870.png",
+   "dev": "ipad",
+   "at": 1458,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "ⓘ luật Đức",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677926084.png",
+   "dev": "ipad",
+   "at": 1468,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Xem luật Công · Nữ công",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677935661.png",
+   "dev": "ipad",
+   "at": 1476,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677950544.png",
+   "dev": "ipad",
+   "at": 1491,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677960075.png",
+   "dev": "ipad",
+   "at": 1501,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Túi đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677968684.png",
+   "dev": "ipad",
+   "at": 1509,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Thú cưng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677977520.png",
+   "dev": "ipad",
+   "at": 1518,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Việc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677985579.png",
+   "dev": "ipad",
+   "at": 1527,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tất cả 16",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795677994788.png",
+   "dev": "ipad",
+   "at": 1535,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Trang sức 1",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678002314.png",
+   "dev": "ipad",
+   "at": 1543,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Y phục 2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678010197.png",
+   "dev": "ipad",
+   "at": 1550,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Vải vóc 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678017063.png",
+   "dev": "ipad",
+   "at": 1557,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Thuốc men 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678025161.png",
+   "dev": "ipad",
+   "at": 1566,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Hương liệu 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678033504.png",
+   "dev": "ipad",
+   "at": 1575,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Lễ vật 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678043060.png",
+   "dev": "ipad",
+   "at": 1584,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Cài tóc: Trâm hoa lụa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678050736.png",
+   "dev": "ipad",
+   "at": 1591,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Y phục: Áo lụa thêu hoa nhỏ",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678060199.png",
+   "dev": "ipad",
+   "at": 1601,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Trâm hoa lụa · Trâm cài",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678068862.png",
+   "dev": "ipad",
+   "at": 1610,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Áo lụa thêu hoa nhỏ · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678078475.png",
+   "dev": "ipad",
+   "at": 1620,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Váy sa xanh ngọc · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678088697.png",
+   "dev": "ipad",
+   "at": 1629,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Nước bào hoa · Dầu chải tóc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678097670.png",
+   "dev": "ipad",
+   "at": 1638,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Nến mỡ dê ×3 · Nến",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678105215.png",
+   "dev": "ipad",
+   "at": 1646,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Than liễu ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678113772.png",
+   "dev": "ipad",
+   "at": 1654,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Son sáp ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678121481.png",
+   "dev": "ipad",
+   "at": 1662,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Yên chi giấy ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678130074.png",
+   "dev": "ipad",
+   "at": 1670,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Phấn gạo ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678138005.png",
+   "dev": "ipad",
+   "at": 1679,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Dấu ấn Đáp ứng · đang dùng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678147733.png",
+   "dev": "ipad",
+   "at": 1689,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678163939.png",
+   "dev": "ipad",
+   "at": 1705,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn bốn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678199827.png",
+   "dev": "ipad",
+   "at": 1740,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Đông sở3 bóng người",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678207471.png",
+   "dev": "ipad",
+   "at": 1748,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tây sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678215320.png",
+   "dev": "ipad",
+   "at": 1756,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Bắc sở4 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678222688.png",
+   "dev": "ipad",
+   "at": 1763,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678230099.png",
+   "dev": "ipad",
+   "at": 1771,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "1Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678238031.png",
+   "dev": "ipad",
+   "at": 1779,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678256107.png",
+   "dev": "ipad",
+   "at": 1797,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678264828.png",
+   "dev": "ipad",
+   "at": 1806,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Phi tần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678273374.png",
+   "dev": "ipad",
+   "at": 1815,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Nam nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678282349.png",
+   "dev": "ipad",
+   "at": 1823,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678293179.png",
+   "dev": "ipad",
+   "at": 1835,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678305032.png",
+   "dev": "ipad",
+   "at": 1846,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Thái hậu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678313563.png",
+   "dev": "ipad",
+   "at": 1854,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Xem thêm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678323132.png",
+   "dev": "ipad",
+   "at": 1864,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Gặp ngài ban ngày 2/5",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678332150.png",
+   "dev": "ipad",
+   "at": 1873,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Việc hôm nay 1/2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678339856.png",
+   "dev": "ipad",
+   "at": 1881,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Điều ngài thích",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678349288.png",
+   "dev": "ipad",
+   "at": 1890,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»",
+   "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+   "cover": "div.kph",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678358353.png",
+   "dev": "ipad",
+   "at": 1899,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chọn chính mình",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678745279.png",
+   "dev": "ipad",
+   "at": 2286,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Về Dư đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678755023.png",
+   "dev": "ipad",
+   "at": 2296,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Lịch tháng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678763401.png",
+   "dev": "ipad",
+   "at": 2304,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678769798.png",
+   "dev": "ipad",
+   "at": 2310,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "3Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678776205.png",
+   "dev": "ipad",
+   "at": 2316,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tai mắt0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678782664.png",
+   "dev": "ipad",
+   "at": 2323,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678789216.png",
+   "dev": "ipad",
+   "at": 2329,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Lật thẻRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678795654.png",
+   "dev": "ipad",
+   "at": 2336,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678801584.png",
+   "dev": "ipad",
+   "at": 2342,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678807955.png",
+   "dev": "ipad",
+   "at": 2348,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Bổng lộcsau 3 tuần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678814516.png",
+   "dev": "ipad",
+   "at": 2355,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678821016.png",
+   "dev": "ipad",
+   "at": 2361,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xét phẩm: thiếu 4",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678827431.png",
+   "dev": "ipad",
+   "at": 2368,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "?",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678834099.png",
+   "dev": "ipad",
+   "at": 2374,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678841386.png",
+   "dev": "ipad",
+   "at": 2382,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Túi đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678847967.png",
+   "dev": "ipad",
+   "at": 2388,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Thú cưng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678854476.png",
+   "dev": "ipad",
+   "at": 2395,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Việc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678860965.png",
+   "dev": "ipad",
+   "at": 2401,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tất cả 16",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678867550.png",
+   "dev": "ipad",
+   "at": 2408,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Trang sức 1",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678874027.png",
+   "dev": "ipad",
+   "at": 2414,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Y phục 2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678880550.png",
+   "dev": "ipad",
+   "at": 2421,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Vải vóc 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678886974.png",
+   "dev": "ipad",
+   "at": 2427,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Thuốc men 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678893416.png",
+   "dev": "ipad",
+   "at": 2434,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hương liệu 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678899922.png",
+   "dev": "ipad",
+   "at": 2440,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Lễ vật 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678906359.png",
+   "dev": "ipad",
+   "at": 2447,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Cài tóc: Trâm hoa lụa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678912827.png",
+   "dev": "ipad",
+   "at": 2453,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Y phục: Áo lụa thêu hoa nhỏ",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678919375.png",
+   "dev": "ipad",
+   "at": 2460,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Trâm hoa lụa · Trâm cài",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678926146.png",
+   "dev": "ipad",
+   "at": 2466,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Áo lụa thêu hoa nhỏ · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678932968.png",
+   "dev": "ipad",
+   "at": 2473,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Váy sa xanh ngọc · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678939411.png",
+   "dev": "ipad",
+   "at": 2480,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nước bào hoa · Dầu chải tóc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678946005.png",
+   "dev": "ipad",
+   "at": 2486,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nến mỡ dê ×3 · Nến",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678952572.png",
+   "dev": "ipad",
+   "at": 2493,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Than liễu ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678959002.png",
+   "dev": "ipad",
+   "at": 2499,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Son sáp ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678965507.png",
+   "dev": "ipad",
+   "at": 2506,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Yên chi giấy ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678971931.png",
+   "dev": "ipad",
+   "at": 2512,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Phấn gạo ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678978540.png",
+   "dev": "ipad",
+   "at": 2519,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Dấu ấn Đáp ứng · đang dùng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678985182.png",
+   "dev": "ipad",
+   "at": 2525,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678992663.png",
+   "dev": "ipad",
+   "at": 2533,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Ân oán",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795678999118.png",
+   "dev": "ipad",
+   "at": 2539,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Phe phái",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679005548.png",
+   "dev": "ipad",
+   "at": 2546,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xem quan hệ của Ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679011934.png",
+   "dev": "ipad",
+   "at": 2552,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "với Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679024647.png",
+   "dev": "ipad",
+   "at": 2565,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679031391.png",
+   "dev": "ipad",
+   "at": 2572,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở · còn mười ba khắ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679038629.png",
+   "dev": "ipad",
+   "at": 2579,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Đông sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679045056.png",
+   "dev": "ipad",
+   "at": 2585,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tây sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679051447.png",
+   "dev": "ipad",
+   "at": 2592,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Bắc sở2 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679057907.png",
+   "dev": "ipad",
+   "at": 2598,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tiền sảnh3 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679064322.png",
+   "dev": "ipad",
+   "at": 2604,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "1Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679070707.png",
+   "dev": "ipad",
+   "at": 2611,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679085271.png",
+   "dev": "ipad",
+   "at": 2626,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679092223.png",
+   "dev": "ipad",
+   "at": 2633,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Phi tần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679100225.png",
+   "dev": "ipad",
+   "at": 2641,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nam nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679107887.png",
+   "dev": "ipad",
+   "at": 2648,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679115551.png",
+   "dev": "ipad",
+   "at": 2656,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679123269.png",
+   "dev": "ipad",
+   "at": 2664,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Thái hậu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679130756.png",
+   "dev": "ipad",
+   "at": 2671,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xem thêm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679138453.png",
+   "dev": "ipad",
+   "at": 2679,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Gặp ngài ban ngày 2/5",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679147735.png",
+   "dev": "ipad",
+   "at": 2688,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Việc hôm nay 1/2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679156083.png",
+   "dev": "ipad",
+   "at": 2697,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Điều ngài thích",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679164188.png",
+   "dev": "ipad",
+   "at": 2705,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+   "cover": "div.kph",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679172419.png",
+   "dev": "ipad",
+   "at": 2713,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679184646.png",
+   "dev": "ipad",
+   "at": 2725,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mệnh truyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679191044.png",
+   "dev": "ipad",
+   "at": 2731,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Việc nhờ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679197423.png",
+   "dev": "ipad",
+   "at": 2738,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Sổ ghi",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679203819.png",
+   "dev": "ipad",
+   "at": 2744,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chương này",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679210248.png",
+   "dev": "ipad",
+   "at": 2750,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Sắc phong",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679216663.png",
+   "dev": "ipad",
+   "at": 2757,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Đã qua 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679223038.png",
+   "dev": "ipad",
+   "at": 2763,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Triều cục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679229550.png",
+   "dev": "ipad",
+   "at": 2770,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tâm nguyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679235973.png",
+   "dev": "ipad",
+   "at": 2776,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mục lục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679242449.png",
+   "dev": "ipad",
+   "at": 2783,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679249584.png",
+   "dev": "ipad",
+   "at": 2790,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tứ đức 9/9",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679255969.png",
+   "dev": "ipad",
+   "at": 2796,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Cầm kỳ thi họa 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679262417.png",
+   "dev": "ipad",
+   "at": 2803,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679268783.png",
+   "dev": "ipad",
+   "at": 2809,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tác phẩm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679275146.png",
+   "dev": "ipad",
+   "at": 2815,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "ⓘ luật Đức",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679281548.png",
+   "dev": "ipad",
+   "at": 2822,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xem luật Công · Nữ công",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679287997.png",
+   "dev": "ipad",
+   "at": 2828,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679294364.png",
+   "dev": "ipad",
+   "at": 2835,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679332914.png",
+   "dev": "ipad",
+   "at": 2873,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Con của ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679339304.png",
+   "dev": "ipad",
+   "at": 2879,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Kế vị",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679345710.png",
+   "dev": "ipad",
+   "at": 2886,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hoàng tự trong cung",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679352073.png",
+   "dev": "ipad",
+   "at": 2892,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hôn sự",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679358449.png",
+   "dev": "ipad",
+   "at": 2899,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Quý tộc kén rể · kén dâu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679364882.png",
+   "dev": "ipad",
+   "at": 2905,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở · còn mười khắc Đ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679457268.png",
+   "dev": "ipad",
+   "at": 2998,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Đông sở2 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679464901.png",
+   "dev": "ipad",
+   "at": 3005,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Bắc sở3 bóng ngườitốn: một khắc",
+   "cover": "div.kdv-line",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/dead-ipad-1795679472903.png",
+   "dev": "ipad",
+   "at": 3013,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Lương Hân Duyệt"
+   }
+  }
+ ],
+ "saves": [],
+ "buoi": 2,
+ "steps": 1067,
+ "status": [],
+ "_loopAt": 1795679782990,
+ "_snapAt": 1795679721176,
+ "trace": [
+  [
+   2201,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Giao tình»"
+  ],
+  [
+   2201,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện»"
+  ],
+  [
+   2202,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «sương sớm»"
+  ],
+  [
+   2205,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Sắc40Tài50Tâm cơ29Đức40Danh8Sủng8»"
+  ],
+  [
+   2207,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Giao tình»"
+  ],
+  [
+   2208,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Giao tình»"
+  ],
+  [
+   2208,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»"
+  ],
+  [
+   2209,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»"
+  ],
+  [
+   2209,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tin báo»"
+  ],
+  [
+   2210,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện»"
+  ],
+  [
+   2211,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «sương sớm»"
+  ],
+  [
+   2215,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Giao tình»"
+  ],
+  [
+   2216,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»"
+  ],
+  [
+   2216,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tin báo»"
+  ],
+  [
+   2217,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bạc80Sức85/100»"
+  ],
+  [
+   2218,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tin báo»"
+  ],
+  [
+   2219,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện»"
+  ],
+  [
+   2220,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tin báo»"
+  ],
+  [
+   2222,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hậu cung»"
+  ],
+  [
+   2223,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bạc80Sức85/100»"
+  ],
+  [
+   2225,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»"
+  ],
+  [
+   2226,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»"
+  ],
+  [
+   2227,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»"
+  ],
+  [
+   2228,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hậu cung»"
+  ],
+  [
+   2229,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tư trang»"
+  ],
+  [
+   2230,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «sương sớm»"
+  ],
+  [
+   2232,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2233,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bạc80Sức85/100»"
+  ],
+  [
+   2234,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dư đồ»"
+  ],
+  [
+   2234,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chưa điểm trang»"
+  ],
+  [
+   2237,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Sắc40Tài50Tâm cơ29Đức40Danh8Sủng8»"
+  ],
+  [
+   2238,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chưa điểm trang»"
+  ],
+  [
+   2241,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hoàng tự»"
+  ],
+  [
+   2242,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mệnh truyện»"
+  ],
+  [
+   2243,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tài nghệ»"
+  ],
+  [
+   2244,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2245,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Hành sự»"
+  ],
+  [
+   2245,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Dư đồ»"
+  ],
+  [
+   2246,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «sương sớm»"
+  ],
+  [
+   2249,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2250,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Bạc80Sức85/100»"
+  ],
+  [
+   2250,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Giao tình»"
+  ],
+  [
+   2253,
+   "page «unstick Tài nghệ»"
+  ],
+  [
+   2257,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   2259,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   2262,
+   ".dlg «Đông sở» «Ta đáp thẳng, không để ai đổ oan.Rất vữngTốn1 khắc»"
+  ],
+  [
+   2267,
+   ".dlg «Đêm» «NgủRất vữngTốnkhôngĐượcdưỡng sức (nhiều)Gợi ýdưỡng»"
+  ],
+  [
+   2269,
+   ".dlg «Ngày thứ hai — Điện tuyển» «Theo ma ma ra sân chờ, để mặt mộc»"
+  ],
+  [
+   2272,
+   ".dlg «Sân chờ» «Dò hỏi thái giám về các vị chí tôn»"
+  ],
+  [
+   2274,
+   ".dlg «Sân chờ» «Làm quen với một vị tú nữ»"
+  ],
+  [
+   2286,
+   "DEAD Chọn chính mình"
+  ],
+  [
+   2296,
+   "DEAD Về Dư đồ"
+  ],
+  [
+   2304,
+   "DEAD Lịch tháng"
+  ],
+  [
+   2310,
+   "DEAD Mục tiêu chương (có mới)"
+  ],
+  [
+   2316,
+   "DEAD 3Chí tôn"
+  ],
+  [
+   2323,
+   "DEAD Tai mắt0"
+  ],
+  [
+   2329,
+   "DEAD Có thaiRất thấp"
+  ],
+  [
+   2336,
+   "DEAD Lật thẻRất thấp"
+  ],
+  [
+   2342,
+   "DEAD Ân tình (đêm)0"
+  ],
+  [
+   2348,
+   "DEAD Số lần ân thưởng0"
+  ],
+  [
+   2355,
+   "DEAD Bổng lộcsau 3 tuần"
+  ],
+  [
+   2361,
+   "DEAD Nguy hiểm chung: 0"
+  ],
+  [
+   2368,
+   "DEAD Xét phẩm: thiếu 4"
+  ],
+  [
+   2374,
+   "DEAD ?"
+  ],
+  [
+   2374,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2382,
+   "DEAD Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải "
+  ],
+  [
+   2388,
+   "DEAD Túi đồ"
+  ],
+  [
+   2395,
+   "DEAD Thú cưng"
+  ],
+  [
+   2401,
+   "DEAD Việc"
+  ],
+  [
+   2408,
+   "DEAD Tất cả 16"
+  ],
+  [
+   2414,
+   "DEAD Trang sức 1"
+  ],
+  [
+   2421,
+   "DEAD Y phục 2"
+  ],
+  [
+   2427,
+   "DEAD Vải vóc 0"
+  ],
+  [
+   2434,
+   "DEAD Thuốc men 0"
+  ],
+  [
+   2440,
+   "DEAD Hương liệu 0"
+  ],
+  [
+   2447,
+   "DEAD Lễ vật 0"
+  ],
+  [
+   2453,
+   "DEAD Cài tóc: Trâm hoa lụa"
+  ],
+  [
+   2460,
+   "DEAD Y phục: Áo lụa thêu hoa nhỏ"
+  ],
+  [
+   2466,
+   "DEAD Trâm hoa lụa · Trâm cài"
+  ],
+  [
+   2473,
+   "DEAD Áo lụa thêu hoa nhỏ · Y phục"
+  ],
+  [
+   2480,
+   "DEAD Váy sa xanh ngọc · Y phục"
+  ],
+  [
+   2486,
+   "DEAD Nước bào hoa · Dầu chải tóc"
+  ],
+  [
+   2493,
+   "DEAD Nến mỡ dê ×3 · Nến"
+  ],
+  [
+   2499,
+   "DEAD Than liễu ×2 · Son phấn"
+  ],
+  [
+   2506,
+   "DEAD Son sáp ×2 · Son phấn"
+  ],
+  [
+   2512,
+   "DEAD Yên chi giấy ×2 · Son phấn"
+  ],
+  [
+   2519,
+   "DEAD Phấn gạo ×2 · Son phấn"
+  ],
+  [
+   2525,
+   "DEAD Dấu ấn Đáp ứng · đang dùng"
+  ],
+  [
+   2525,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2526,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   2533,
+   "DEAD Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa"
+  ],
+  [
+   2539,
+   "DEAD Ân oán"
+  ],
+  [
+   2546,
+   "DEAD Phe phái"
+  ],
+  [
+   2552,
+   "DEAD Xem quan hệ của Ta"
+  ],
+  [
+   2558,
+   "GONE Đổi chỗ hai người"
+  ],
+  [
+   2565,
+   "DEAD với Hoàng thượng"
+  ],
+  [
+   2565,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2572,
+   "DEAD Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m"
+  ],
+  [
+   2572,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2572,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2579,
+   "DEAD ‹ Dư đồDưỡng Tú viện · ta đang ở · còn mười ba khắ"
+  ],
+  [
+   2585,
+   "DEAD Đông sở3 bóng ngườitốn: một khắc"
+  ],
+  [
+   2592,
+   "DEAD Tây sở3 bóng ngườitốn: một khắc"
+  ],
+  [
+   2598,
+   "DEAD Bắc sở2 bóng ngườitốn: một khắc"
+  ],
+  [
+   2604,
+   "DEAD Tiền sảnh3 bóng ngườitốn: một khắc"
+  ],
+  [
+   2611,
+   "DEAD 1Cung nhân"
+  ],
+  [
+   2611,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2614,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2614,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2615,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo: 3 tin mới»"
+  ],
+  [
+   2615,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2616,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2616,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2616,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2617,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2617,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2626,
+   "DEAD Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h"
+  ],
+  [
+   2633,
+   "DEAD Chí tôn"
+  ],
+  [
+   2641,
+   "DEAD Phi tần"
+  ],
+  [
+   2648,
+   "DEAD Nam nhân"
+  ],
+  [
+   2656,
+   "DEAD Cung nhân"
+  ],
+  [
+   2664,
+   "DEAD Hoàng thượng"
+  ],
+  [
+   2671,
+   "DEAD Thái hậu"
+  ],
+  [
+   2679,
+   "DEAD Xem thêm"
+  ],
+  [
+   2688,
+   "DEAD Gặp ngài ban ngày 2/5"
+  ],
+  [
+   2697,
+   "DEAD Việc hôm nay 1/2"
+  ],
+  [
+   2705,
+   "DEAD Điều ngài thích"
+  ],
+  [
+   2713,
+   "DEAD Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM"
+  ],
+  [
+   2713,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2714,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2715,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2715,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2715,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2716,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2716,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   2717,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2717,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2717,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   2718,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2718,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2725,
+   "DEAD Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q"
+  ],
+  [
+   2731,
+   "DEAD Mệnh truyện"
+  ],
+  [
+   2738,
+   "DEAD Việc nhờ"
+  ],
+  [
+   2744,
+   "DEAD Sổ ghi"
+  ],
+  [
+   2750,
+   "DEAD Chương này"
+  ],
+  [
+   2757,
+   "DEAD Sắc phong"
+  ],
+  [
+   2763,
+   "DEAD Đã qua 0"
+  ],
+  [
+   2770,
+   "DEAD Triều cục"
+  ],
+  [
+   2776,
+   "DEAD Tâm nguyện"
+  ],
+  [
+   2783,
+   "DEAD Mục lục"
+  ],
+  [
+   2783,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo»"
+  ],
+  [
+   2783,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   2790,
+   "DEAD Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12"
+  ],
+  [
+   2796,
+   "DEAD Tứ đức 9/9"
+  ],
+  [
+   2803,
+   "DEAD Cầm kỳ thi họa 8/12"
+  ],
+  [
+   2809,
+   "DEAD Vũ · Y · Nữ công 8/12"
+  ],
+  [
+   2815,
+   "DEAD Tác phẩm"
+  ],
+  [
+   2822,
+   "DEAD ⓘ luật Đức"
+  ],
+  [
+   2828,
+   "DEAD Xem luật Công · Nữ công"
+  ],
+  [
+   2835,
+   "DEAD Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti"
+  ],
+  [
+   2835,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2835,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2835,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2835,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   2836,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2838,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo»"
+  ],
+  [
+   2838,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2839,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2841,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   2842,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2842,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2844,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2844,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   2844,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   2845,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2845,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2848,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2848,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2848,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2849,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2849,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2850,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2852,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2852,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2853,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2855,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2855,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2858,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2858,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2858,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2861,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2863,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2863,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2866,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2866,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2866,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   2873,
+   "DEAD Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké"
+  ],
+  [
+   2879,
+   "DEAD Con của ta"
+  ],
+  [
+   2886,
+   "DEAD Kế vị"
+  ],
+  [
+   2892,
+   "DEAD Hoàng tự trong cung"
+  ],
+  [
+   2899,
+   "DEAD Hôn sự"
+  ],
+  [
+   2905,
+   "DEAD Quý tộc kén rể · kén dâu"
+  ],
+  [
+   2905,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2905,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2906,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2906,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2906,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   2907,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2907,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2907,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2907,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2908,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2908,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   2909,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2909,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2909,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2910,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2913,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2913,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2913,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2914,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2914,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2915,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2915,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2915,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   2916,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2916,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   2917,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2917,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2918,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   2918,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   2918,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2921,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2921,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   2921,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo»"
+  ],
+  [
+   2922,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2924,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   2925,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   2925,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2926,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2926,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   2926,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2927,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2927,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2930,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2930,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2930,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2933,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2933,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2937,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2937,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2939,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   2940,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo»"
+  ],
+  [
+   2940,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2940,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2941,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2942,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   2942,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2943,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2943,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2944,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2944,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2944,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2945,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   2945,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   2945,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2946,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2946,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2949,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2949,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2951,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2954,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2956,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2956,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2957,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   2957,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2958,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2958,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2958,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2958,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   2961,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2961,
+   "page «unstick Dư đồ»"
+  ],
+  [
+   2966,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   2968,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   2971,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   2971,
+   ".dlg «Sân chờ» «Làm quen với một vị tú nữ»"
+  ],
+  [
+   2973,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   2974,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2975,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2976,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2977,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   2978,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2979,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   2981,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   2985,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   2986,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   2987,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo: 1 tin mới»"
+  ],
+  [
+   2987,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2988,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   2998,
+   "DEAD ‹ Dư đồDưỡng Tú viện · ta đang ở · còn mười khắc Đ"
+  ],
+  [
+   3005,
+   "DEAD Đông sở2 bóng ngườitốn: một khắc"
+  ],
+  [
+   3013,
+   "DEAD Bắc sở3 bóng ngườitốn: một khắc"
+  ],
+  [
+   3013,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3014,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   3015,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   3015,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   3016,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   3017,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3018,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   3019,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3020,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   3020,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   3021,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3022,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   3023,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3023,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3024,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3024,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   3025,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3026,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo»"
+  ],
+  [
+   3026,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   3027,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3028,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3029,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3030,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   3033,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   3034,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   3037,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3037,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   3041,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3041,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   3042,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   3045,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   3048,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3048,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   3049,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3050,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   3051,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»"
+  ],
+  [
+   3052,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3052,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   3053,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo»"
+  ],
+  [
+   3054,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3055,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tin báo»"
+  ],
+  [
+   3055,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   3056,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3057,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   3058,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   3059,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Chưa điểm trang»"
+  ],
+  [
+   3061,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3062,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3062,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   3063,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3065,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3065,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3067,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hoàng tự»"
+  ],
+  [
+   3067,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   3068,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3068,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»"
+  ],
+  [
+   3069,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   3069,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3070,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   3070,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   3071,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3072,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   3073,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc40Tài50Tâm cơ29Đức41Danh8Sủng8»"
+  ],
+  [
+   3073,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Giao tình»"
+  ],
+  [
+   3074,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3074,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   3075,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   3076,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»"
+  ],
+  [
+   3076,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   3077,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   3077,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc80Sức100/100»"
+  ],
+  [
+   3078,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3078,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»"
+  ],
+  [
+   3081,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»"
+  ],
+  [
+   3082,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3083,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»"
+  ],
+  [
+   3087,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»"
+  ],
+  [
+   10,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhTiếp tục: Đáp ứng Lương Hân Duyệt · T»"
+  ],
+  [
+   11,
+   ".dlg «Chọn sổ» «Tiếp tục kiếp này»"
+  ],
+  [
+   19,
+   "AREA 673,421"
+  ],
+  [
+   20,
+   "AREA 189,533"
+  ],
+  [
+   22,
+   "AREA 948,402"
+  ],
+  [
+   22,
+   "AREA 927,532"
+  ],
+  [
+   26,
+   "AREA 252,351"
+  ],
+  [
+   27,
+   "AREA 707,332"
+  ],
+  [
+   27,
+   "AREA 905,429"
+  ],
+  [
+   28,
+   "AREA 318,574"
+  ],
+  [
+   30,
+   "AREA 204,510"
+  ],
+  [
+   30,
+   "AREA 637,536"
+  ],
+  [
+   33,
+   "AREA 742,472"
+  ],
+  [
+   34,
+   "AREA 245,369"
+  ],
+  [
+   37,
+   "AREA 759,618"
+  ],
+  [
+   40,
+   "AREA 585,442"
+  ],
+  [
+   41,
+   "AREA 742,457"
+  ],
+  [
+   46,
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»"
+  ],
+  [
+   59,
+   ".dlg «Thái hậu» «Con thích nhất ngồi bên Thái hậu nghe chuyện, ăn g»"
+  ],
+  [
+   65,
+   ".dlg «Hoàng thượng» «Cúi đầu chờ xét»"
+  ],
+  [
+   71,
+   ".dlg «Thái hậu» «Thần thiếp gọi nhũ mẫu của đứa nhỏ đến, vì việc ch»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795679728585,
+ "_ckB": 2,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1370,
+   "rendererMB": 645,
+   "heapMB": 111,
+   "dom": 3176,
+   "q": 4,
+   "lsK": 4
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1449,
+   "rendererMB": 602,
+   "heapMB": 111,
+   "dom": 1251,
+   "q": 2,
+   "lsK": 116
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1511,
+   "rendererMB": 657,
+   "heapMB": 111,
+   "dom": 806,
+   "q": 2,
+   "lsK": 116
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1455,
+   "rendererMB": 589,
+   "heapMB": 111,
+   "dom": 850,
+   "q": 3,
+   "lsK": 116
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1426,
+   "rendererMB": 723,
+   "heapMB": 111,
+   "dom": 1305,
+   "q": 3,
+   "lsK": 119
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1336,
+   "rendererMB": 644,
+   "heapMB": 78,
+   "dom": 941,
+   "q": 1,
+   "lsK": 119
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1259,
+   "rendererMB": 565,
+   "heapMB": 78,
+   "dom": 1486,
+   "q": 1,
+   "lsK": 119
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1244,
+   "rendererMB": 555,
+   "heapMB": 78,
+   "dom": 1236,
+   "q": 2,
+   "lsK": 119
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1365,
+   "rendererMB": 645,
+   "heapMB": 78,
+   "dom": 1253,
+   "q": 2,
+   "lsK": 119
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1593,
+   "rendererMB": 907,
+   "heapMB": 78,
+   "dom": 1490,
+   "q": 1,
+   "lsK": 120
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1721,
+   "rendererMB": 1081,
+   "heapMB": 78,
+   "dom": 928,
+   "q": 1,
+   "lsK": 120
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1434,
+   "rendererMB": 749,
+   "heapMB": 98,
+   "dom": 1269,
+   "q": 1,
+   "lsK": 125
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1367,
+   "rendererMB": 684,
+   "heapMB": 98,
+   "dom": 1298,
+   "q": 3,
+   "lsK": 125
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1297,
+   "rendererMB": 703,
+   "heapMB": 98,
+   "dom": 835,
+   "q": 3,
+   "lsK": 125
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1506,
+   "rendererMB": 861,
+   "heapMB": 98,
+   "dom": 817,
+   "q": 3,
+   "lsK": 126
+  },
+  {
+   "buoi": 2,
+   "y": 1,
+   "totalMB": 1434,
+   "rendererMB": 737,
+   "heapMB": 190,
+   "dom": 788,
+   "q": 1,
+   "lsK": 126
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  "#modal|Ngày thứ nhất — Nhập cung",
+  ".kmov|",
+  ".dlg|Ngày thứ nhất — Nhập cung",
+  "page|Dưỡng Tú viện · Đông sở · Ở đây có # ngư",
+  ".dlg|Dưỡng Tú viện",
+  "#modal|Đông sở",
+  ".dlg|Đông sở",
+  ".dlg|Đêm",
+  ".dlg|Ngày thứ hai — Điện tuyển",
+  ".dlg|Sân chờ",
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # n",
+  ".kscn|",
+  ".dlg|Điện tuyển",
+  "#modal|Thái hậu",
+  ".dlg|Thái hậu",
+  ".dlg|Hoàng thượng"
+ ],
+ "_momRank": 0,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+  ".dlg|Ngày thứ nhất — Nhập cung": {},
+  "page|Dưỡng Tú viện · Đông sở · Ở đây có # người.": {},
+  ".dlg|Dưỡng Tú viện": {},
+  ".dlg|Đông sở": {},
+  ".dlg|Đêm": {},
+  ".dlg|Ngày thứ hai — Điện tuyển": {},
+  ".dlg|Sân chờ": {},
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # người.": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Thái hậu": {},
+  ".dlg|Hoàng thượng": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|871,392": {
+   "left": 400,
+   "n": 1
+  },
+  ".dlg|Dưỡng Tú viện|706,589": {
+   "left": 142,
+   "n": 1
+  }
+ },
+ "dumps": [
+  "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-1-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-2-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/stuck-1-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-3-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-4-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-rebel-1/loop-5-dump.json"
+ ],
+ "t": {
+  "total": 82864
+ }
+}

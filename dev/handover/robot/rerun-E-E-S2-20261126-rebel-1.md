@@ -1,0 +1,120 @@
+# ES2-R2-rebel-1 (real-tap harness 89f5b956, ipad)
+
+| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
+|---|---|---|---|---|---|---|---|---|---|
+| ES2-R2-rebel-1 | Ban hoa — Bị ban hoa, xuất cung | 19 | 2 | 6 | 264 | 1 | 9 | — | 0 / 0 |
+
+## Dead buttons
+
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Người lạ???» covered by div.kscn-veil · dead-ipad-1795676530545.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chọn chính mình» covered by div.kscn-veil · dead-ipad-1795676539479.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Về Dư đồ» covered by div.kscn-veil · dead-ipad-1795676549687.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Lịch tháng» covered by div.kscn-veil · dead-ipad-1795676558222.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Mục tiêu chương (có mới)» covered by div.kscn-veil · dead-ipad-1795676566551.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Thỉnh tranh nhân vật» covered by div.kscn-veil · dead-ipad-1795676574291.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «3Chí tôn» covered by div.kscn-veil · dead-ipad-1795676581521.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tai mắt0» covered by div.kscn-veil · dead-ipad-1795676589890.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Có thaiRất thấp» covered by div.kscn-veil · dead-ipad-1795676597950.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Lật thẻRất thấp» covered by div.kscn-veil · dead-ipad-1795676605675.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Ân tình (đêm)0» covered by div.kscn-veil · dead-ipad-1795676611883.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Số lần ân thưởng0» covered by div.kscn-veil · dead-ipad-1795676619556.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bổng lộcsau 3 tuần» covered by div.kscn-veil · dead-ipad-1795676626934.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Nguy hiểm chung: 0» covered by div.kscn-veil · dead-ipad-1795676635512.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Xét phẩm: thiếu 4» covered by div.kscn-veil · dead-ipad-1795676643340.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m» covered by div.kscn-veil · dead-ipad-1795676651440.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «?» covered by div.kscn-veil · dead-ipad-1795676658534.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải » covered by div.kscn-veil · dead-ipad-1795676667001.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Túi đồ» covered by div.kscn-veil · dead-ipad-1795676676191.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Thú cưng» covered by div.kscn-veil · dead-ipad-1795676683337.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Việc» covered by div.kscn-veil · dead-ipad-1795676690923.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tất cả 16» covered by div.kscn-veil · dead-ipad-1795676698099.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Trang sức 1» covered by div.kscn-veil · dead-ipad-1795676705553.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Y phục 2» covered by div.kscn-veil · dead-ipad-1795676712786.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Vải vóc 0» covered by div.kscn-veil · dead-ipad-1795676719908.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Thuốc men 0» covered by div.kscn-veil · dead-ipad-1795676727331.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hương liệu 0» covered by div.kscn-veil · dead-ipad-1795676734522.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Lễ vật 0» covered by div.kscn-veil · dead-ipad-1795676742600.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Cài tóc: Trâm hoa lụa» covered by div.kscn-veil · dead-ipad-1795676750475.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Y phục: Áo lụa thêu hoa nhỏ» covered by span.kdw.on · dead-ipad-1795676758104.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Áo lụa thêu hoa nhỏ · Y phục» covered by div.kscn-veil · dead-ipad-1795676769801.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Váy sa xanh ngọc · Y phục» covered by div.kscn-veil · dead-ipad-1795676777783.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Nước bào hoa · Dầu chải tóc» covered by div.kscn-veil · dead-ipad-1795676785441.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Nến mỡ dê ×3 · Nến» covered by div.kscn-veil · dead-ipad-1795676793478.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Than liễu ×2 · Son phấn» covered by div.kscn-veil · dead-ipad-1795676801179.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Son sáp ×2 · Son phấn» covered by div.kscn-veil · dead-ipad-1795676808547.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Yên chi giấy ×2 · Son phấn» covered by div.kscn-veil · dead-ipad-1795676816664.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Phấn gạo ×2 · Son phấn» covered by div.kscn-veil · dead-ipad-1795676825467.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Dấu ấn Đáp ứng · đang dùng» covered by div.kscn-veil · dead-ipad-1795676833034.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa» covered by div.kscn-veil · dead-ipad-1795676845719.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Ân oán» covered by div.kscn-veil · dead-ipad-1795676853024.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Phe phái» covered by div.kscn-veil · dead-ipad-1795676860773.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Xem quan hệ của Ta» covered by div.kscn-veil · dead-ipad-1795676869349.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Đổi chỗ hai người» covered by div.kscn-veil · dead-ipad-1795676877335.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «với Hoàng thượng» covered by div.kscn-veil · dead-ipad-1795676884578.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q» covered by div.kscn-veil · dead-ipad-1795676893871.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Mệnh truyện» covered by div.kscn-veil · dead-ipad-1795676901661.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Việc nhờ» covered by div.kscn-veil · dead-ipad-1795676909830.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Sổ ghi» covered by div.kscn-veil · dead-ipad-1795676919245.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chương này» covered by div.kscn-veil · dead-ipad-1795676927607.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Sắc phong» covered by div.kscn-veil · dead-ipad-1795676935294.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Đã qua 0» covered by div.kscn-veil · dead-ipad-1795676943053.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Triều cục» covered by div.kscn-veil · dead-ipad-1795676950074.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tâm nguyện» covered by div.kscn-veil · dead-ipad-1795676957141.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Mục lục» covered by div.kscn-veil · dead-ipad-1795676964043.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h» covered by div.kscn-veil · dead-ipad-1795676982075.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chí tôn» covered by div.kscn-veil · dead-ipad-1795676990907.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Phi tần» covered by div.kscn-veil · dead-ipad-1795677000175.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Nam nhân» covered by div.kscn-veil · dead-ipad-1795677009772.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Cung nhân» covered by div.kscn-veil · dead-ipad-1795677019831.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hoàng thượng» covered by div.kscn-veil · dead-ipad-1795677028427.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Thái hậu» covered by div.kscn-veil · dead-ipad-1795677036624.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Xem thêm» covered by div.kscn-veil · dead-ipad-1795677046185.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Gặp ngài ban ngày 2/5» covered by div.kscn-veil · dead-ipad-1795677054371.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Điều ngài thích» covered by div.kscn-veil · dead-ipad-1795677071995.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM» covered by div.kph · dead-ipad-1795677092371.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké» covered by div.kscn-veil · dead-ipad-1795677110435.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Con của ta» covered by div.kscn-veil · dead-ipad-1795677117905.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Kế vị» covered by div.kscn-veil · dead-ipad-1795677125606.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hoàng tự trong cung» covered by div.kscn-veil · dead-ipad-1795677134151.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hôn sự» covered by div.kscn-veil · dead-ipad-1795677143495.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Quý tộc kén rể · kén dâu» covered by div.kscn-veil · dead-ipad-1795677152431.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12» covered by div.kscn-veil · dead-ipad-1795677162988.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tứ đức 9/9» covered by div.kscn-veil · dead-ipad-1795677172185.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Cầm kỳ thi họa 8/12» covered by div.kscn-veil · dead-ipad-1795677180650.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Vũ · Y · Nữ công 8/12» covered by div.kscn-veil · dead-ipad-1795677189021.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tác phẩm» covered by div.kscn-veil · dead-ipad-1795677196501.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «ⓘ luật Đức» covered by div.kscn-veil · dead-ipad-1795677204811.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Xem luật Công · Nữ công» covered by div.kscn-veil · dead-ipad-1795677213200.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti» covered by div.kscn-veil · dead-ipad-1795677226601.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mườ» covered by div.kscn-veil · dead-ipad-1795677237132.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Đông sở3 bóng người» covered by span.kdw.on · dead-ipad-1795677245097.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tây sở3 bóng ngườitốn: một khắc» covered by span.kdw.on · dead-ipad-1795677253159.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bắc sở3 bóng ngườitốn: một khắc» covered by span.kdw.on · dead-ipad-1795677260902.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tiền sảnh3 bóng ngườitốn: một khắc» covered by div.kscn-col · dead-ipad-1795677268518.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «1Cung nhân» covered by div.kscn-veil · dead-ipad-1795677276574.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn bốn» covered by div.kscn-veil · dead-ipad-1795677438276.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bắc sở4 bóng ngườitốn: một khắc» covered by div.kdv-line · dead-ipad-1795677446191.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tiền sảnh2 bóng ngườitốn: một khắc» covered by div.kscn-col · dead-ipad-1795677453370.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tâm trạngBình thản0» covered by div.kscn-veil · dead-ipad-1795677588625.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Người lạ???» covered by div.kscn-veil · dead-ipad-1795677596483.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Chọn chính mình» covered by div.kscn-veil · dead-ipad-1795677604443.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Về Dư đồ» covered by div.kscn-veil · dead-ipad-1795677611979.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Lịch tháng» covered by div.kscn-veil · dead-ipad-1795677619106.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Mục tiêu chương (có mới)» covered by div.kscn-veil · dead-ipad-1795677626523.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «3Chí tôn» covered by div.kscn-veil · dead-ipad-1795677635998.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Tai mắt0» covered by div.kscn-veil · dead-ipad-1795677643304.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Có thaiRất thấp» covered by div.kscn-veil · dead-ipad-1795677651433.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Lật thẻRất thấp» covered by div.kscn-veil · dead-ipad-1795677658425.png
+- page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.» «Ân tình (đêm)0» covered by div.kscn-veil · dead-ipad-1795677664733.png
+
+## Bugs
+
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Dưỡng Tú viện)
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Đông sở)
+- [stuck] ×1 no progress 15 min on page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 2 người.»
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Đông sở)
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=2: Tin báo / Đông sở)
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»
+- [game] ×1 softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Sân chờ)
