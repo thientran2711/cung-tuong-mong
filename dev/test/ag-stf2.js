@@ -92,7 +92,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(!r9.E.length,'12 tuần as a consort: no throw',r9);
  await fresh(true);
  const r10=await p.evaluate(()=>{const E=[];const ce=console.error;console.error=(...a)=>{E.push(String(a[0]))};S.tin=20;try{for(let i=0;i<12&&isSrv()&&!S.dead;i++){try{Q.length=0;used=0;deal();
-   for(const a of DOOR.flat(deck)){if(a&&!a.lock&&/Lén giữ đồ/.test(a.n)){try{DOOR.run(a.n)}catch(e){E.push(e.message)}}}
+   for(const a of DOOR.flat(deck)){if(a&&!a.lock&&/Lén giữ đồ/.test(a.n)){try{J5RUN(a.n)}catch(e){E.push(e.message)}}}
    for(const x of srvTalk({sk:"mis"}))if(/Xin chủ cho đi/.test(x.n)&&!x.lock){try{x.run()}catch(e){E.push(e.message)}}
    endTurn()}catch(e){E.push(e.message)}}}finally{console.error=ce}return{E:E.slice(0,5),srv:isSrv(),dead:!!S.dead}});
  ok(!r10.E.length,'12 tuần as a maid using the new cards: no throw',r10);
