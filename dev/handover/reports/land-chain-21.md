@@ -15,3 +15,6 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 ## 07:22Z — MAIN: HOME-WAY failed (HOME-WAY-NITS fixing the test on review/home-way-r6) → DRESS on LIVE
 - review/lc21-dress 3af7896e (force-replaced c50fd693) = 4f377603 onto LIVE 6b5d3d05, built files only. Gates gates-dr2.sh (chain + promo-root, balance-pace, dress-tap, mghelp-back ×2, mg-back ×2; QC vs LIVE alone last).
 - Next: fixed HOME-WAY slots in next when MAIN sends the sha (rerun gates-hw.sh). Also own the a9 post-push buổi A/B (QC LIVE vs bf6dd041).
+
+## 07:25Z — HOME-WAY fixed bc822351 (test-only over 532fbce1) → staged on top of DRESS
+- review/lc21-hw 56636416 = bc822351 onto DRESS 3af7896e (built files only). Gates after DRESS: gates-dr.sh (gates-hw chain + dress tests), QC vs 3af7896e.
