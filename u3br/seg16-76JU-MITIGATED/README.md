@@ -1,0 +1,1 @@
+seg16 room 76JU MITIGATED (U3b-2): u4 7959f1b5 + patch #22 6ebd0f5d, iPad host / Fold guest, seed 19, RELOAD_AT=8,15,28,40,52,64,76,88,100,112 (both seats, all OK), SEG_MIN 85. Closed by time at buoi 130 year 2, stuck 0 both seats. VALID except the DOM leak (MITIGATED).
