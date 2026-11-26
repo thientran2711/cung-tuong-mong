@@ -356,8 +356,13 @@ const K61SKIP="[data-k61skip],.kpt-mount,.kslot,.mspot .mlab,.mtile>b";
 function k61UnkChip(b){try{if(!b||b.dataset.kunkDone||!b.isConnected||(b.closest&&b.closest(K61SKIP)))return;const t=b.dataset.kunk;if(!t)return;
  let nx=b.nextSibling;while(nx&&nx.nodeType===3&&!nx.nodeValue.trim()&&nx.nextSibling)nx=nx.nextSibling;if(!nx&&b.parentNode&&!/^(DIV|P|LI|BUTTON|H\d|TD|SECTION)$/.test(b.parentNode.nodeName))nx=b.parentNode.nextSibling;
  const after=nx?(nx.nodeType===3?nx.nodeValue:nx.textContent||""):"";if(!K61SENT.test(after))return;b.dataset.kunkDone="1";
- const pv=k61PrevText(b);const lead=!pv.trim()||/[.!?:“"]\s*$/.test(pv);const ti=b.querySelector(".kti");const st=ti?ti.getAttribute("style")||"":"";
- const tt=ti&&ti.textContent.trim()||t;/* the text's own title («Tổng quản thái giám …», j79 kpPeopleIn puts it inside the chip) wins over the dress title */
+ const ti=b.querySelector(".kti");const st=ti?ti.getAttribute("style")||"":"";let tt=ti&&ti.textContent.trim()||t;
+ /* RV-KK41 (fold «Tổng quản một vị thái giám»): j79 kpPeopleIn takes only the LAST title word into the chip («thái giám»); the title words written right
+    before the chip in the same text («Tổng quản ») join the chip's title, so the group «<tước> <chip>» is rewritten ONCE */
+ try{const TR=typeof KP_TITLE_RX!=="undefined"?new RegExp("(^|\\s)("+KP_TITLE_RX.source.replace(/\s*\$$/,"")+")\\s+$"):null;let pr=b.previousSibling;
+  if(pr&&pr.nodeType===3){const q=pr.nodeValue,j=q.toLowerCase().lastIndexOf(tt.toLowerCase());if(j>=0&&/^\s+$/.test(q.slice(j+tt.length))&&(j===0||/\s/.test(q[j-1])))pr.nodeValue=q.slice(0,j)}/* the same title written before the chip («Vương gia <Vương gia ???>») */
+  for(let i=0;TR&&i<3&&pr&&pr.nodeType===3;i++){const m=TR.exec(pr.nodeValue);if(!m)break;tt=m[2]+" "+tt;pr.nodeValue=pr.nodeValue.slice(0,m.index+m[1].length)}}catch(x){}
+ const pv=k61PrevText(b);const lead=!pv.trim()||/[.!?:“"]\s*$/.test(pv);/* the text's own title («Tổng quản thái giám …», j79 kpPeopleIn puts it inside the chip) wins over the dress title */
  /* the wording of the ONE prose rule kitNoUnkT (jnotice): «một vị <tước>», servant words lower case; the chip's WHOLE title is kept («Tổng quản thái giám») */
  const t2=/^(thái giám|cung nữ|thị nữ|tì nữ|nô tì)$/i.test(tt)?tt.toLowerCase():tt;
  b.innerHTML=`${lead?"Một":"một"} vị <span class="kti"${st?` style="${st}"`:""}>${t2}</span>`}catch(e){}}/* Dư đồ place names (map spots + tiles): a place called like an unknown servant ("Vĩnh Thọ") must never read "Thái giám ???" (map-portrait-r2) */
