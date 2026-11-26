@@ -1,4 +1,4 @@
-# LC24 — lander log (successor of LC23 session_01V1ZZH17hXgTvCC6BWnvVB6; coordinator MAIN CHÍNH 161 session_01Rc5AsJdeC2ESTHf1nYGMJ5)
+# LC24 — lander log (successor of LC23 session_01V1ZZH17hXgTvCC6BWnvVB6; coordinator MAIN CHÍNH 162 session_01Rc5AsM4J5C58YM4bW3tekV, was 161 session_01Rc5AsJdeC2ESTHf1nYGMJ5)
 PRIORITY #1 CHECK: continuing the land chain (land-chain-22.md «## LC22 HANDOVER» + land-chain-23.md + MAIN_STATUS.md) — nothing rebuilt.
 depth 1 · START_CTX ~3% · roll at ~28%, ceiling 60%. Session session_01Rc5AsLJkhS4a8JShz36jYe.
 STATE at start (18:31Z): LIVE f573dc94 · ROLLBACK b881686f. GO-LIVE standing permission (OD 26/11 ~04:30Z): lander stages + gates, sends «READY TO PUSH <sha>»; MAIN 161 FF-pushes.
@@ -26,3 +26,4 @@ JUMP-INS on PASS: renderer-mem (D head 2b5bbbb3), ob-ngoaicung r5 8aaac5ac (afte
 - 19:15Z g-m3 (on 9bf1cc38) ALL item gates PASS: ob-m3ui, kit-opt-art-tap, kit-close (+M3 old save), opt-tap-guard. QC --runs 5 vs LIVE: perf PASS render 215/188 (1.14×), tab 473/586, buổi 1098/1311 (0.84×), tasks 25/24; old save ok; CORE FAIL only LIVE baseline (G4 80 empty Tốn/Được ×2 Fold+iPad, G4 90 «Ô lưu · Lui»). m3 must be restacked onto C3 → re-run QC + ob-m3ui then.
 - 19:29Z KK44-H (session_01Rc5AsN8LSabyhHvueR4eDo, from MAIN 161): map-zones-r7 UNBLOCKED → land WITH review/kit-map-icons c11c7269 as ONE stack (built on r7 9c8985ab; keep jmapz.js ic(Z.ic,kitPlaceIcPx()) if r7 rebuilt). review/kit-veil-buoi 8655f6da independent. Both wait RV-161 PASS; slot: after ec unless MAIN says otherwise.
 - 19:25Z g-sp: statpace-scan, pace-all, stat-pace, balance-pace, moodknow-step0, promo-root PASS. ag-moodknow 1 FAIL «HỜN NPC» = TEST SETUP: affAdd(a,b2,60-ab) close-friend setup now paced (aff 10–19, need 60); stat-pace tip d04561e8 fails it 2/2, LIVE 1/3 (flaky). Fix test-only: window.SP_OFF around that one setup write → SP ALL 33 PASS ×4 (1 flake run), LIVE still ALL 33 PASS. Commit after SP QC finishes.
+- 19:32Z MAIN rolled: MAIN CHÍNH 162 = session_01Rc5AsM4J5C58YM4bW3tekV (child of 161, verified via get_session). All READY/reports → 162.
