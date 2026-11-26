@@ -58,6 +58,26 @@ Markers: every `bestow(w,"contest")`, the finish functions by name, story ending
    - Entry card on branch: «Dự thi thơ — … thành: đoạt giải, Sủng +3, Danh +3, đêm nay được thị tẩm, có thể được ban thưởng …».
 2. Co-op `node dev/test/coop-contest-thitam.js` (2 browsers, LIVE Worker, host Fold 755x1000 / guest iPad 1180x820): C1 host wins, C2 the
    friend's entry wins in the host's contest, C3 the guest wins on her own seat (relay), C4 an NPC wins. RESULT: see «Co-op result» below.
+
+## Co-op result (LIVE Worker, room per run; logs on the worker box /home/user/wt/d3out/coop6.log, coop7.log)
+| case | passing run | checks passed |
+|---|---|---|
+| C1 host first | run 6, run 7 | host keeps tonight (ntk me) · her Kính sự phòng card · that day's played tối = host on BOTH seats (jnf nfX), no flip choice · host +1 night |
+| C2 friend's entry first (host's contest) | run 6 | host keeps tonight for her entry (902) · guest gets ok relay + her card · played tối = guest on both seats · guest +1, host +0 |
+| C3 guest first on HER seat | run 6 | relay ctm-ctn → host keeps tonight for her entry · guest card · played tối = guest on both seats |
+| C4 NPC first (host's contest) | run 7 (C4FIRST=1) | host keeps tonight for the NPC · played tối = that NPC on both seats · neither seat +1 |
+Harness notes (not the rule): (a) the «exactly +1» count is loose with the 10-night ledger ON — the guest's other ledger nights of that
+tuần land too (run 7 C1 guest +2); (b) the week driver (coop-b2b5 week()) stalls when the host's queue holds «Lễ Phật đản» twice — every run
+around that date, then the following cases cannot merge their week (run 6 C3/C4, run 7 C2/C3). Checked on LIVE f009e1a6 with the same
+driver: see «LIVE stall check» (below). The set-up steers ONLY «can serve tonight» for the intended winner on both seats (her monthly days
+would rightly refuse the night); the rule itself is not stubbed.
+
+## Gates
+- quickcheck (bash dev/tools/quickcheck.sh, 420ea238 vs LIVE 6b5d3d05): open 0 errors · old save loads + plays a buổi · time-spill PASS ·
+  CORE GATES: G4 80-dialog-fixed FAIL «(kit-dialog-2 a) no empty Tốn / Được cell» = PRE-EXISTING on LIVE (dev/test/dialog-fixed.js on the LIVE
+  build fails the same 2 rows); G4 90-button-crawl «Ô lưu · Lui close did not close its layer» (save-slot screen, untouched by this branch;
+  not re-run on LIVE). The run hit its 20-minute bound in the selection-reroll step (perf smoke not reached).
+- scan: 8/8 wired · solo logic on the final build: 16/16.
 3. Real-tap videos (HOST mode, rot.js, the player's screen; set-up = the j71 festival invitation card + her talent pinned top; then only
    real taps): `node dev/test/contest-thitam-video.js <root> <out> <tag>`.
 
