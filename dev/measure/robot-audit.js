@@ -70,6 +70,8 @@ function verdict(rec, life) {
   if (e.k === 'none') why.push(e.why);
   if (e.k === 'exit') { if (xp && (xp.only === true || +xp.n === 1)) e.note = 'exit was the only option (real ending)'; else if (!xp && rec.lastTap) e.note = 'game-imposed: last bot tap was a non-exit option «' + rec.lastTap.slice(0, 40) + '»'; else why.push('bot-chosen ' + e.why + (xp ? ' with ' + xp.n + ' options' : ' (no proof it was the only option)')); }
   if (h && h.cap && e.k === 'none') why.push('harness had a cap (' + h.cap + ')');
+  /* TEST HOOKS (BIG #8 F1, robot-rt ≥ fd9218fe+): a life run with any RT_TEST_* self-test or the RT_COLD probe setup (sent to lãnh cung by cold(), not by play) is not real play */
+  if (h && h.testHooks && Object.keys(h.testHooks).length) why.push('test hooks used (' + Object.entries(h.testHooks).map(([k, v]) => k + '=' + v).join(', ') + ')');
   return { valid: why.length === 0, why, end: e };
 }
 
