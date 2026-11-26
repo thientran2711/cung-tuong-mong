@@ -572,7 +572,7 @@ BAL.relOan={hurt:.6,doer:.2,mend:.3};
    grudge = a man reported to the guards / Cung Chính ti, or threatened and refusing (jmen m.grudge); grudge2 = the guard shamed beside him (grudgeN 1);
    hail = a greeting with a man (j22 manHail, both ways: relAdd); srvGrudge = a servant punished without cause (j24 s.grudge); bully = a servant bullied by another (jagstaff s.bullyBy);
    threat = a servant threatened over a secret tie (j10 threatServ, j42 the servant road); bribe = thiện cảm of a servant who took the bribe toward the giver.
-   The fade is the shared BAL.oanFade (j28 oanMonth), the caps the shared −100..100 / 0..100. */
+   The fade is the weekly cool-down BAL.oanCool (j28 oanCool; BAL.oanFade / oanMonth only with BAL.oanCool.on = 0), the caps the shared −100..100 / 0..100. */
 BAL.relMS={hail:5,grudge:40,grudge2:20,srvGrudge:30,bully:20,threat:30,bribe:10};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
@@ -906,7 +906,9 @@ BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},
    srvMp = công lao per bậc (need (bậc+1)*srvMp); srvLoyal = a new servant's loyalty base+R(r) */
 BAL.srvRisk={vuon:28,thu:34,tyv:20,tn:40,home:18,def:26,fr:4,tc:10,min:6,max:92};
 BAL.caught={fac:4};/* j8 caughtOdds (clamped by the ONE odds cap, oddsCl) */
-BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMp=5;BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
+BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMpN=[6,8,10,12,14,16,18];/* review/pace-all: Công lao a servant needs at each rank (srvMpNeed; her and every NPC servant, law 1), rising (law 5); with the whole-number merits
+   (BAL.eff.j42 merit* 1 / 2, errand / order 3; BAL.ag … listen / watch 1, scout 2) one ordinary chore moves 1/6 … 1/16 of a rank step (was 0.25–0.5 of (rank+1)×5: 1/20 … 1/100,
+   and the shown «Công lao n/need» did not move for 2–4 chores). Canon overwrite of the old BAL.srvMp = 5 (need = (rank+1) × 5). */BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
  riskD:3,caughtTin:20,caughtSuc:20,vowTinh:20,dt:40,expel:30,exile:35,vowW:.5,outW:.3,monthSuc:10,secSee:30,hit:1,uMul:3,peerGap:40,nvpAf:5,askAf:2};
@@ -1241,7 +1243,7 @@ Object.assign(BAL.ag,{kh2:{on:1,spill:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:
    tell.late = weight of a report a buổi late (peaks at lòng 50); scout.caught = % of failed scouting that is caught (else she comes back empty-handed);
    scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
 BAL.ag.know={eye:100,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
- hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5,caught:50},watch:{k:1,tin:2,mp:.25},keep:20,share:[5,20]};
+ hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:1},scout:{k:2,tin:3,lose:5,mp:2,oan:5,caught:50},watch:{k:1,tin:2,mp:1},keep:20,share:[5,20]};
 /* AG-ALL-2g INFO SELLERS (jagknow tail; owner OD 17/11 ~16:50Z (2)): o = % per buổi that a seller comes to a buyer (her and each consort);
    kh = khắc to hear him out (dayFit); min = least worth of news that may be sold (never trivial); val = worth per kind of news (j78 fact key prefix;
    scheme / schemeMe = a scheme deed of this buổi against another / against the buyer; fav = a change of favour ≥ fav.d Sủng); price = bạc at worth 100
