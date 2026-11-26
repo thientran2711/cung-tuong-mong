@@ -12,7 +12,7 @@ kc3Reg("kc_ke",{t:"Kế mẫu",w:"di",g:"{diT} {diN} muốn dọn đường cho 
  s1:{h:"Buổi thỉnh an đầu tháng",w:"di",if:()=>!!kc3Di(),t:"Buổi thỉnh an trước mặt tổ mẫu, {diT} cười nói: “Đại tiểu thư dạo này ngủ trưa lâu quá, chẳng thấy sang thăm ai.”",o:[
   {n:"Cúi đầu nhận lỗi trước mọi người",wx:"tổ mẫu khen ngươi biết nhẫn",lx:"{diT} được thể lấn tới",rt:"Ngươi cúi đầu. Tổ mẫu khẽ gật.",go:(A,ok,G)=>{kc3Af("to",G[0])}},
   {n:"Đáp khéo: hôm ấy chính {diT} đến muộn hơn",f:"sharp",wx:"tổ mẫu thấy ngươi sắc sảo",lx:"{diT} ghi hận",rt:"Tổ mẫu bật cười. {diT} đỏ mặt.",rf:"Tổ mẫu cau mày: con cháu sao dám bắt bẻ người trên.",go:(A,ok,G)=>{if(ok)kc3Af("to",G[0]);const d=kc3Di();if(d)d.oan=(d.oan||0)+G[1]}},
-  {n:"Mang trà sâm sang biếu, lấy lòng {diT}",wx:"{diT} dịu giọng",lx:"bạc riêng vơi đi",rt:"{diT} nhận trà, khen ngươi hiếu thuận.",go:(A,ok,G)=>{kc3Af("di",G[0])}}]},
+  {n:"Mang trà sâm sang biếu, lấy lòng {diT}",wx:"{diT} dịu giọng",lx:"Bạc −",rt:"{diT} nhận trà, khen ngươi hiếu thuận.",go:(A,ok,G)=>{kc3Af("di",G[0])}}]},
  c1:{h:"Xấp lụa có bùa",w:"di",if:()=>!!kc3Di(),t:"{diT} sai người mang sang một xấp lụa thêu cho ngày đi tuyển. {tyN} giũ ra, trong nếp vải rơi xuống một lá bùa yểm.",o:[
   {n:"Đem lá bùa trình tổ mẫu",f:"proof",wx:"có chứng cứ thật trong tay",lx:"bị nói ngược là tự giắt bùa để vu người",rt:"Tổ mẫu cho tra; gia nhân viện {diT} cúi đầu không cãi được.",rf:"{diT} khóc lóc: ai biết tiểu thư tự giắt vào để vu cho thiếp.",go:(A,ok,G)=>{if(ok)kc3Proof(G[0]);else{S.kc.diAct=(S.kc.diAct||0)+1;kc3Ld(G[1]);S.kgt-=G[2]}}},
   {n:"Lặng lẽ đốt bùa, giữ xấp lụa",wx:"biết {diT} đã ra tay mà nàng không hay",lx:"không còn gì làm chứng",rt:"Lá bùa cháy trong lò hương. Ngươi cất xấp lụa.",go:()=>{S.kc.diAct=(S.kc.diAct||0)+1}},
@@ -22,12 +22,12 @@ kc3Reg("kc_ke",{t:"Kế mẫu",w:"di",g:"{diT} {diN} muốn dọn đường cho 
   {n:"Bỏ bạc đền trâm, chuộc tội cho tỳ nữ",wx:"tỳ nữ thoát đòn",lx:"{diT} biết ngươi chịu bỏ tiền vì người hầu",rt:"Ngươi đền bạc. {tyN} lạy ngươi ba lạy.",go:(A,ok,G)=>{if(S.maid)S.maid.loyal=cl(S.maid.loyal+G[0],0,100);const d=kc3Di();if(d)d.oan=(d.oan||0)+G[1]}},
   {n:"Lật lại: chỉ ra chính gia nhân kia giấu trâm",f:"turn",wx:"{diT} mất một tay chân",lx:"vu không thành thì chính ngươi mang tiếng",rt:"Gia nhân của {diT} bị đuổi khỏi phủ ngay hôm ấy.",rf:"Lời ngươi không đứng vững. Người ta bảo đại tiểu thư cũng biết vu oan.",go:(A,ok,G)=>{const d=kc3Di();if(ok){if(d)d.oan=(d.oan||0)+G[0]}else{kc3Ld(G[1]);apply({duc:-G[2]})}}}]},
  c3:{h:"Lời đồn ngoài phố",w:"di",if:()=>!!kc3Di(),t:"Ngoài phố có tin đồn đại tiểu thư {house} hay lén ra chùa gặp nam nhân. Người tung tin là bà vú của {diT}.",o:[
-  {n:"Mời các phu nhân đến nghe đàn, tự rửa tiếng",wx:"tiếng xấu tan đi",lx:"hao sức cả tháng",rt:"Tiếng đàn hôm ấy được nhắc khắp kinh thành; tin đồn kia chẳng ai nhắc nữa.",rf:"Các phu nhân đến nghe, nhưng ra về vẫn thì thầm.",go:(A,ok,G)=>{if(ok)kc3Ld(-G[0])}},
+  {n:"Mời các phu nhân đến nghe đàn, tự rửa tiếng",wx:"tiếng xấu tan đi",lx:"Sức − cả tháng",rt:"Tiếng đàn hôm ấy được nhắc khắp kinh thành; tin đồn kia chẳng ai nhắc nữa.",rf:"Các phu nhân đến nghe, nhưng ra về vẫn thì thầm.",go:(A,ok,G)=>{if(ok)kc3Ld(-G[0])}},
   {n:"Nhờ tổ mẫu lên tiếng cho mình",if:()=>!!kc3P("to"),wx:"lời tổ mẫu dập tắt tin đồn",lx:"tổ mẫu phiền lòng",rt:"Tổ mẫu mắng bà vú kia trước cả phủ.",go:(A,ok,G)=>{kc3Ld(-G[0]);kc3Af("to",-G[1])}},
   {n:"Tung tin ngược về chuyện cũ của {diT}",f:"turn",wx:"thứ muội mất tiếng trước kỳ tuyển",lx:"lộ ra thì ngươi bị coi là độc miệng",rt:"Chuyện {diT} năm xưa vào phủ bằng cửa sau lan khắp phố.",rf:"Người ta lần ra tin từ khuê phòng ngươi.",go:(A,ok,G)=>{const m=kc3P("muoi");if(ok){if(m)m.danh=Math.max(0,(m.danh||0)-G[0])}else{kc3Ld(G[1]);apply({duc:-G[2]})}}}]},
  t1:{h:"Thứ muội tìm đến",w:"muoi",if:()=>!!kc3P("muoi")&&!!kc3Di(),t:"Đêm khuya, thứ muội {muoiN} gõ cửa khuê phòng, mắt đỏ hoe: “Mẹ muội bắt muội làm những việc muội không muốn. Tỷ tỷ, muội phải làm sao?”",o:[
   {n:"Kết tình chị em với muội ấy",f:"muoi",wx:"thứ muội đứng về phía ngươi",lx:"{diT} mà biết sẽ đổ cả lên đầu muội ấy",rt:"Hai chị em ngồi đến canh ba.",go:(A,ok,G)=>{kc3Af("muoi",G[0])}},
-  {n:"Khéo hỏi, để muội ấy kể hết việc của {diT}",f:"proof",wx:"có thêm lời làm chứng",lx:"muội ấy thấy mình bị lợi dụng",rt:"{muoiN} kể hết những việc mẹ mình đã làm. Ngươi ghi nhớ từng lời.",rf:"{muoiN} chợt im bặt, lau nước mắt rồi đi.",go:(A,ok,G)=>{if(ok){if(kc3DiActed())kc3Proof(G[0])}else kc3Af("muoi",-G[1])}},
+  {n:"Khéo hỏi, để muội ấy kể hết việc của {diT}",f:"proof",wx:"Chứng cứ +",lx:"muội ấy thấy mình bị lợi dụng",rt:"{muoiN} kể hết những việc mẹ mình đã làm. Ngươi ghi nhớ từng lời.",rf:"{muoiN} chợt im bặt, lau nước mắt rồi đi.",go:(A,ok,G)=>{if(ok){if(kc3DiActed())kc3Proof(G[0])}else kc3Af("muoi",-G[1])}},
   {n:"Khuyên muội ấy về, đừng chống lại mẹ",wx:"không dây vào chuyện hai mẹ con",lx:"thứ muội tủi thân",rt:"{muoiN} cúi đầu đi về.",go:(A,ok,G)=>{kc3Af("muoi",-G[0])}}]},
  x1:{h:"Trước mặt tổ mẫu",w:"di",if:()=>!!kc3Di(),t:"{diT} quỳ trước tổ mẫu, kể tội ngươi ngỗ nghịch, yểm bùa, hẹn hò. Cả phủ đứng chật chính sảnh chờ ngươi đáp.",o:[
   {n:"Trình đủ chứng cứ trước tổ mẫu",if:()=>{const d=kc3Di();return !!d&&(S.kc.proof[d.id]||0)>0},e:["win","lose"],wx:"lật được bộ mặt {diT}",lx:"chứng cứ không đủ thì bị nói là vu cho người trên",rt:"Từng món chứng cứ bày ra. {diT} không đáp được câu nào.",rf:"{diT} chối từng món một; tổ mẫu không tin ngươi."},
@@ -45,10 +45,10 @@ kc3Reg("kc_hon",{t:"Hôn sự",w:"ba",g:"{baN} ra vào chính sảnh, các nhà 
  s1:{h:"Bà mối đến lần đầu",w:"ba",if:()=>kc3SuitOk(),t:"{baN} ngồi uống trà ở chính sảnh, kể nhà {suitN} giàu sang thế nào, con trai nhà ấy tuấn tú ra sao. Cha quay sang hỏi ý ngươi.",o:[
   {n:"Tiếp bà mối, hỏi kỹ về nhà trai",wx:"biết rõ nhà ấy",lx:"cha tưởng ngươi ưng",rt:"Bà mối kể không sót chuyện gì, kể cả mấy người thiếp.",go:(A,ok,G)=>{kc3Af("ba",G[0])}},
   {n:"Thưa: con xin đợi kỳ tuyển tú",wx:"nhà thôi giục",lx:"cha nhíu mày",rt:"Cha gật đầu: cũng được.",rf:"Cha gạt đi: “Tuyển tú là chuyện xa.”",go:(A,ok,G)=>{if(!ok)kc3Af("cha",G[0])}},
-  {n:"Biếu bà mối, nhờ bà đánh tiếng nhà khác",wx:"bà mối đứng về phía ngươi",lx:"bạc riêng vơi đi",rt:"Bà mối cười tít mắt, hứa sẽ lựa nhà xứng hơn.",go:(A,ok,G)=>{kc3Af("ba",G[0])}}]},
+  {n:"Biếu bà mối, nhờ bà đánh tiếng nhà khác",wx:"bà mối đứng về phía ngươi",lx:"Bạc −",rt:"Bà mối cười tít mắt, hứa sẽ lựa nhà xứng hơn.",go:(A,ok,G)=>{kc3Af("ba",G[0])}}]},
  c1:{h:"Thư của nhà trai",w:"ba",if:()=>kc3SuitOk(),t:"Qua tay bà mối, {suitN} gửi đến một bài thơ chép trên giấy hoa tiên, ý tứ khẩn thiết.",o:[
-  {n:"Họa lại một bài cho phải lễ",wx:"nhà trai thêm quý ngươi",lx:"nhà trai tưởng có hy vọng",rt:"Bài họa của ngươi được nhà trai chép lại treo trong thư phòng.",go:(A,ok,G)=>{const s=kc3Sx(S.kc.suit[0]);if(s)kcAf(s,G[0])}},
-  {n:"Gửi trả bài thơ, không một lời",wx:"nhà trai bớt giục",lx:"nhà trai mất mặt, đi đâu cũng kể",rt:"Bài thơ trở về nguyên nếp gấp.",go:(A,ok,G)=>{const s=kc3Sx(S.kc.suit[0]);if(s)kcAf(s,G[0])}},
+  {n:"Họa lại một bài cho phải lễ",wx:"nhà trai: thiện cảm +",lx:"nhà trai tưởng có hy vọng",rt:"Bài họa của ngươi được nhà trai chép lại treo trong thư phòng.",go:(A,ok,G)=>{const s=kc3Sx(S.kc.suit[0]);if(s)kcAf(s,G[0])}},
+  {n:"Gửi trả bài thơ, không một lời",wx:"nhà trai: oán −",lx:"nhà trai mất mặt, đi đâu cũng kể",rt:"Bài thơ trở về nguyên nếp gấp.",go:(A,ok,G)=>{const s=kc3Sx(S.kc.suit[0]);if(s)kcAf(s,G[0])}},
   {n:"Đưa bài thơ cho cha xem",wx:"cha thấy ngươi biết phép",lx:"cha giục bà mối tính ngày",rt:"Cha đọc xong, gật gù khen chữ tốt.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  c2:{h:"Thứ muội giành mối",w:"muoi",if:()=>!!kc3P("muoi")&&kc3SuitOk(),t:"Thứ muội {muoiN} lén gặp bà mối, nói tốt cho mình trước nhà {suitN}.",o:[
   {n:"Nhường mối cho thứ muội",wx:"bớt một mối phải chối",lx:"người ngoài cho rằng ngươi bị chê",rt:"Nhà trai quay sang hỏi {muoiN}. Muội ấy cảm ơn ngươi rối rít.",go:(A,ok,G)=>{kc3Af("muoi",G[0]);S.kc.suit.shift()}},
@@ -56,7 +56,7 @@ kc3Reg("kc_hon",{t:"Hôn sự",w:"ba",g:"{baN} ra vào chính sảnh, các nhà 
   {n:"Mặc nàng, xem nhà trai chọn ai",wx:"không phải ra mặt",lx:"thứ muội thấy ngươi coi thường",rt:"Ngươi đứng ngoài. Nhà trai vẫn còn do dự.",go:(A,ok,G)=>{kc3Af("muoi",G[0])}}]},
  c3:{h:"Nhà trai giục cưới",w:"ba",if:()=>kc3SuitOk(),t:"Bà mối báo: nhà {suitN} muốn đưa sính lễ trước mùa thu. Cha bắt đầu cho người dọn chính sảnh.",o:[
   {n:"Giả bệnh, nằm liệt giường",wx:"nhà trai lùi ngày",lx:"lộ ra thì mang tiếng dối trá",rt:"Đại phu lắc đầu bảo cần tĩnh dưỡng nửa năm. Nhà trai lùi ngày.",rf:"Bà mối nhìn thấy ngươi đi dạo trong hoa viên."},
-  {n:"Nhờ bà mối nói khéo, kèm lễ vật",wx:"nhà trai chịu chờ",lx:"bạc riêng vơi đi",rt:"Bà mối nói một hồi, nhà trai vui vẻ chờ thêm.",go:(A,ok,G)=>{kc3Af("ba",G[0])}},
+  {n:"Nhờ bà mối nói khéo, kèm lễ vật",wx:"nhà trai chịu chờ",lx:"Bạc −",rt:"Bà mối nói một hồi, nhà trai vui vẻ chờ thêm.",go:(A,ok,G)=>{kc3Af("ba",G[0])}},
   {n:"Ra mắt nhà trai đường hoàng, hẹn sau kỳ tuyển",wx:"được tiếng nết na",lx:"nhà trai càng muốn cưới",rt:"Phu nhân nhà trai khen ngươi hết lời.",go:(A,ok,G)=>{const s=kc3Sx(S.kc.suit[0]);if(s)kcAf(s,G[0])}}]},
  t1:{h:"Cha hỏi ý",w:"cha",t:"Tối ấy cha gọi ngươi vào thư phòng: “Gả vào nhà tử tế là phúc. Vào cung là được ăn cả ngã về không. Con nghĩ sao?”",o:[
   {n:"Thưa: con nghe theo cha",wx:"cha yên lòng",lx:"lời đã nói khó rút lại",rt:"Cha gật đầu, vuốt râu.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
@@ -82,7 +82,7 @@ kc3Reg("tm96z",{t:"Thuở thanh mai",w:"tm",g:"{tmN} là người ngươi hẹn 
   {n:"Trả lại, giữ lễ",wx:"không ai nói được gì",lx:"chàng buồn",rt:"Chàng cúi đầu, cất tín vật đi.",go:(A,ok,G)=>{kc3Tm(-G[0])}},
   {n:"Hẹn chàng ngày rằm ở hậu viện chùa",f:"hen",wx:"có lời hẹn riêng",lx:"có người trông thấy",rt:"Chàng gật đầu, không nói thêm.",rf:"Một bà khách hành hương nhìn hai người rất lâu.",go:(A,ok,G)=>{if(ok)kc3Tm(G[0]);else kc3Ld(G[1])}}]},
  c1:{h:"Người ấy thành danh",w:"tm",if:kc3TmOk,t:"{tmN} {tmHow}. Tin bay khắp kinh thành.",o:[
-  {n:"Gửi lời chúc mừng",wx:"chàng gửi lại một bài thơ",lx:"bạc riêng vơi đi",rt:"Chàng gửi lại một bài thơ.",go:(A,ok,G)=>{S.tm96.rise=1;kc3Tm(G[0])}},
+  {n:"Gửi lời chúc mừng",wx:"chàng gửi lại một bài thơ",lx:"Bạc −",rt:"Chàng gửi lại một bài thơ.",go:(A,ok,G)=>{S.tm96.rise=1;kc3Tm(G[0])}},
   {n:"Thêu một chiếc khăn gửi tặng",wx:"chàng giữ khăn bên mình",lx:"khăn có thể lọt vào tay người khác",rt:"Chàng nhận khăn, gấp cất trong ngực áo.",go:(A,ok,G)=>{S.tm96.rise=1;kc3Tm(G[0]);kc3Ld(G[1])}},
   {n:"Im lặng",wx:"giữ được tiếng",lx:"chàng tưởng ngươi đã quên",rt:"Ngươi không gửi gì.",go:(A,ok,G)=>{S.tm96.rise=1;kc3Tm(-G[0])}}]},
  c2:{h:"Cha cấm cửa",w:"cha",if:kc3TmOk,t:"Cha biết chuyện ngươi với {tmN}, cấm chàng bước qua cửa phủ: “Con gái nhà này là để đưa vào cung.”",o:[
@@ -92,7 +92,7 @@ kc3Reg("tm96z",{t:"Thuở thanh mai",w:"tm",g:"{tmN} là người ngươi hẹn 
  c3:{h:"Đêm Thượng nguyên",w:"tm",if:kc3TmOk,t:"Đêm rằm tháng giêng, cả kinh thành treo đèn. {tyN} báo: {tmN} đứng chờ dưới cầu đá.",o:[
   {n:"Ra phố ngắm đèn cùng chàng",f:"hen",wx:"một đêm nhớ suốt đời",lx:"có người nhận ra ngươi",rt:"Dưới đèn hoa, hai người đứng cạnh nhau rất lâu.",rf:"Gia nhân nhà bên nhận ra ngươi dưới cầu.",go:(A,ok,G)=>{if(ok)kc3Tm(G[0]);else kc3Ld(G[1])}},
   {n:"Ở nhà cùng cả nhà",wx:"không ai nói được gì",lx:"chàng chờ đến tàn đèn",rt:"Ngươi ngồi bên cửa sổ nhìn đèn trôi trên sông.",go:(A,ok,G)=>{kc3Tm(-G[0])}},
-  {n:"Gửi chàng một chiếc đèn hoa qua tỳ nữ",wx:"chàng biết ngươi vẫn nhớ",lx:"bạc riêng vơi đi",rt:"{tyN} mang về lời nhắn: chàng sẽ đợi.",go:(A,ok,G)=>{kc3Tm(G[0])}}]},
+  {n:"Gửi chàng một chiếc đèn hoa qua tỳ nữ",wx:"chàng biết ngươi vẫn nhớ",lx:"Bạc −",rt:"{tyN} mang về lời nhắn: chàng sẽ đợi.",go:(A,ok,G)=>{kc3Tm(G[0])}}]},
  t1:{h:"Bị bắt gặp",w:"cha",if:kc3TmOk,t:"Gia nhân bắt gặp ngươi với {tmN} trong hoa viên. Cả phủ biết trước khi trời sáng.",o:[
   {n:"Quỳ xin cha tha",f:"forced",wx:"cha nguôi giận",lx:"cha cho gọi bà mối",rt:"Cha cho ngươi cấm túc trong khuê phòng.",go:(A,ok,G)=>{kc3Af("cha",G[0]);S.kc.ldSeen=1}},
   {n:"Nhận hết, xin gả cho chàng",f:"hen",wx:"lòng chàng không còn ngờ vực",lx:"cha giận, cả phủ bàn tán",rt:"Cha không nói một lời, đóng cửa thư phòng.",go:(A,ok,G)=>{kc3Tm(G[0]);kc3Af("cha",-G[1]);S.kc.ldSeen=1;S.kc.askTm=1}},
