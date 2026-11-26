@@ -32,7 +32,9 @@ const RULES=[
  [/Nội vụ phủ|thái giám[^.]*mua|mua (một |giúp )?món|mua sắm|mua đồ/i,{who:"ped",cost:"bạc theo giá từng món; xem hàng thì không tốn"}],
  [/Thái hậu/,{who:"th"}],[/Hoàng hậu/,{who:"hh"}],[/Hoàng thượng|ngự giá/,{who:"emp"}],
  [/Tư trang|y phục|trang sức|Bán đồ|rương/i,{tab:"inv"}],[/Tài nghệ|Học một/i,{tab:"art"}],[/Hậu cung|phi tần/i,{tab:"court"}],
- [/Đi một nơi|Đi làm quen|nơi được đến/i,{tab:"go"}]];
+ [/Đi một nơi|Đi làm quen|nơi được đến/i,{tab:"go"}],
+ /* r2 family scan: an arc hồi hint «Chơi thẻ «Mệnh truyện: …» ở mục Hành sự» (j67 hint67) → the Hành sự tab */
+ [/ở mục Hành sự|ở Hành sự/,{tab:"act"}]];
 function placeName(k){try{if(typeof accName==="function"){const n=accName(k);if(n)return n}}catch(e){}try{if(PLNAME[k])return PLNAME[k][0]}catch(e){}try{const p=places().find(x=>x.k===k);if(p)return p.n}catch(e){}return k}
 function placeByName(t){try{for(const p of places())if(p&&p.n&&p.k!=="home"&&t.includes(p.n))return p.k}catch(e){}return ""}
 /* open hours in plain words + why not now (accState, j77) */
@@ -106,6 +108,10 @@ if(typeof resultShow==="function"){const r0=resultShow;resultShow=function(){if(
 function fixEunName(){try{if(!S||typeof nmNew!=="function")return;const L=[S.court&&S.court.ped].concat((S.staff||[]).filter(x=>x&&x.role==="eunuch"));
  for(const o of L)if(o&&o.name==="Tiểu Thái Tử")o.name=nmNew("eun")}catch(e){}}
 if(typeof normAll==="function"){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);fixEunName();return r};window.normAll=normAll}
+/* r2 whole family (MAIN LOOK (1): a person she must find is NAMED, never «???»): a «Việc nhờ» text that names its people ({A} the asker, {B} the one
+   to visit / help) tells her who they are — the same rule as the arc lines (j67 arcReveal67: name + face, j61 stage 2, nothing logged) */
+if(typeof q72Txt==="function"){const t0=q72Txt;q72Txt=function(t,X){try{if(typeof k61Know==="function"&&X&&typeof t==="string"){const L=[];/* q72A record = {o: the real person, n, f} */if(t.includes("{A}")&&X.A&&X.A.o&&typeof X.A.o==="object")L.push(X.A.o);if(t.includes("{B}")&&X.B&&X.B.o&&typeof X.B.o==="object")L.push(X.B.o);
+  const need=L.filter(e=>typeof k61Named!=="function"||!k61Named(e));if(need.length)k61Know(need,"",true,2)}}catch(e){}return t0.apply(this,arguments)};window.q72Txt=q72Txt}
 /* ---------- (2) «Mua bán» on the Dư đồ: every place where she can buy NOW — its own tag (level 2 / no zones) and the zone tag holding it (level 1) ---------- */
 function shopKeys(){const s=new Set();try{if(srv())return s;const L=places().map(x=>x.k);if(L.includes("nvp"))s.add("nvp");const k=pedAt();if(k&&k!=="home")s.add(k)}catch(e){}return s}
 window.glShopKeys=()=>[...shopKeys()];
