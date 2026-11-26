@@ -101,5 +101,13 @@ coop-e2e (live Worker, same machine, sequential):
 | c3e1b8fd | 141 (mgH.hoadien / mgHv on seat B only = guest lazy write, real) |
 | a43aa413 | 143 |
 | 4b693c7a | 143 · 143 (reviewer's run 142: R#9.dw) |
-| f068313b | running ×3 |
+| f068313b | 143 · 143 · 143 (reviewer's run 143) |
 Tests on f068313b: charge-trinh-punish ALL PASS (incl. vpAccuse + co-op guest / host / single-player cases), one-core-guard PASS. Reviewer on 4b693c7a: coregates PASS except the known LIVE dialog-fixed / button-crawl.
+
+## LAND READY review/charge-trinh-punish f068313b (FF from LIVE 3af7896e) — 26/11 ~12:20Z
+- BIG reviewer session_01D3E3NXbek1mcjhNBkMvvT4: DELTA r2 PASS f068313b (verdict on handover 0f25aed1). Contains review/charge-followups-rv c3e1b8fd (one land for D1 + D4 + follow-ups + STEP 4).
+- coop-e2e ×3 f068313b: 143 / 143 / 143; LIVE ×3: 143 / 142 (flake «week after rebirth advances») / 143.
+- quickcheck: QUICKCHECK PASS (open, old save, perf new/live render 256/271 ms, tab 658/627, buổi 1700/1523, tasks>200 32/35); CORE GATES: G1 / G2 / G3 PASS, G4 only the known LIVE faults 80-dialog-fixed «kit-dialog-2 empty Tốn/Được» + 90-button-crawl «Ô lưu · Lui».
+- Tests: charge-trinh-punish (incl. vpAccuse runtime + co-op guest/host/single-player lazy-write cases), charge-followups, charge-smoke, seize-ledger ALL PASS; charge-scan all 0; punish-scan npc_zero 0.
+- Videos (real page, srv-mc-video.js, looked at): https://ctm-img.victoria-tntt.workers.dev/img/_review/charge-trinh-punish/fold-755x1000-f068313b.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/charge-trinh-punish/ipad-1180x820-f068313b.webm · end cards fold-endcard-f068313b.png / ipad-endcard-f068313b.png. Lander wipes: python3 dev/site/cdn_sync.py --wipe-review charge-trinh-punish
+- Open (not gating, routed): P1 servant end card «Đáp ứng» + consort figure (pre-existing j42); N1 bought servant accusing her briber is dismissed too.
