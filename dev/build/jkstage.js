@@ -68,10 +68,13 @@ function kstgGeo(){try{if(typeof kscnGeo==="function")return kscnGeo()}catch(e){
    (3) the event's own picture (the frame band), (4) the warm kit stage colour. A key whose picture is not on the CDN yet falls through (never a broken picture).
    kitEvBg(m) is exported so every scene host (kitScene.open bg, §93.1) reads the same rule. */
 const KIT_EVBG=[[/(tấn phong|sắc phong)/i,"selx-tanphong"],[/(lập hậu|sách phong)/i,"selx-laphau"],[/(hòa thân)/i,"selx-hoathan"],[/(thắng trận|khải hoàn)/i,"selx-thangtran"]];
+/* review/art-event (ART-EVENT, owner 25/11: the thbirthday banquet too busy behind the dialogue on iPad): an event whose own band picture is too busy for a stage gets a calm painted stage by its PEND id (Q item pid) */
+const KIT_EVBG_PID={thbirthday:"ev-bg-thanhtho-calm"};
 function kitEvBg(m){try{const ok=src=>{try{return typeof KIT_CDNHAVE!=="undefined"&&!!KIT_CDNHAVE&&KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return false}};/* the CDN index (jevban KIT_CDNHAVE): a key not published yet = not used */if(m&&m.bg){const s=/\//.test(m.bg)?m.bg:"img/"+m.bg+".webp";if(ok(s))return s}
+ if(m&&m.pid&&KIT_EVBG_PID[m.pid]){const s="img/"+KIT_EVBG_PID[m.pid]+".webp";if(ok(s))return s}
  const t=String(m&&(m.t||m.title)||"").replace(/<[^>]+>/g," ");for(const [re,k] of KIT_EVBG)if(re.test(t)){const s="img/"+k+".webp";if(ok(s))return s}}catch(e){}return""}
 function kstgPic(dl){try{const m=typeof Q!=="undefined"&&Q[0];const k=kitEvBg(m);if(k)return k;const im=dl.querySelector(".k3ev img,.kdlgart img,.kpiart img,.k3mpic img");return im&&(im.currentSrc||im.src)||""}catch(e){return""}}
-try{window.kitEvBg=kitEvBg;window.KIT_EVBG=KIT_EVBG}catch(e){}
+try{window.kitEvBg=kitEvBg;window.KIT_EVBG=KIT_EVBG;window.KIT_EVBG_PID=KIT_EVBG_PID}catch(e){}
 /* the two full figures of the stage (made once per dialog): the SPEAKER = the frame's speaker (Q item .who; else the frame's figure picture), with
    the frame's own name tag; HER = kitFigOf(S) (right tier / age band / dress), unless she is the speaker */
 function kstgFig(mb,cls,src,tagHTML){let f=mb.querySelector(":scope>."+cls);if(f){const im=f.querySelector("img");if(im&&src&&im.getAttribute("src")!==src)im.src=src;return f}if(!src)return null;

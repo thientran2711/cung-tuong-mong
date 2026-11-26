@@ -17,6 +17,16 @@
 /* stand-ins (title → an existing act picture) shown with the 'tạm' chip: Giữ chân Hoàng thượng (night-final flip choice, main s26 23:39Z; ART REQUEST by main) */
 const KIT_OPT_TAM=[[/^Giữ chân Hoàng thượng/,"thap-den-hau-ruou-h"]];
 const KIT_OPT_RULES=[
+ /* review/art-event (ART-EVENT, KK33 ART LIST, owner 25/11 via MAIN «each card's picture must differ and fit its option»): the event hand cards that showed the
+    shared stand-in or a picture another card of the same frame shows. FIRST so they beat the generic rules below. New paintings = opt-ev-*; the rest reuse existing act pictures. */
+ [/^đàn$/i,"opt-wk-cam"],[/^cờ$/i,"opt-wk-ky"],[/^(vẽ|họa)$/i,"opt-wk-hoa"],[/^(múa|vũ)$/i,"opt-wk-vu"],[/^(thơ|thi)$/i,"opt-wk-thi"],[/^điều hương$/i,"tu-hoc-huong-h"],
+ [/^nấu ăn$/i,"opt-wk-nau"],[/^thêu$/i,"opt-wk-theu"],[/^y thuật (&|và) điều hương/i,"opt-wk-y"],[/^đầu hồ$/i,"opt-ev-dau-ho"],
+ [/^ra vấn an/i,"opt-ev-ra-van-an"],[/^lánh đi lối khác/i,"opt-ev-lanh-loi-khac"],[/^để cung chính ti tra hỏi/i,"opt-ev-ccti-tra-hoi"],[/^đứng ra bảo lãnh/i,"opt-ev-bao-lanh"],
+ [/^làm như không quen/i,"opt-ev-nhu-khong-quen"],[/^làm theo lời cha/i,"opt-ev-theo-loi-cha"],[/^dặn .{1,24} chỉ viết chuyện vặt/i,"opt-ev-viet-chuyen-vat"],
+ [/^ở lại, nắm lấy quyền bính/i,"opt-ev-nam-quyen-binh"],[/^rời khỏi cung cấm/i,"opt-ev-roi-cung-cam"],[/^theo người ấy đi/i,"opt-ev-theo-nguoi-ay"],
+ [/^giao việc: canh chừng cung/i,"opt-ev-canh-chung-cung"],[/^giao việc: thử độc/i,"opt-ev-thu-doc"],[/^giao việc: giữ sổ sách/i,"so-sach"],[/^giữ nguyên$/i,"opt-ev-giu-nguyen"],
+ [/^để .{1,24} nhận lỗi thay/i,"opt-ev-nhan-loi-thay"],[/^kêu oan: ta không biết/i,"keu-oan-h"],[/^giúp qua loa/i,"opt-ev-giup-qua-loa"],[/^đeo trang sức đẹp nhất/i,"deo-trang-suc-h"],
+ [/^kết bằng dây bạc/i,"opt-ev-ket-day-bac"],[/^kết bằng kim tuyến/i,"opt-ev-ket-kim-tuyen"],[/^xin thái hậu ban mạng/i,"opt-ev-xin-th-ban-mang"],
  /* review/cycle-art (owner 16/11): the monthly report options (jcycle PEND.cyrep) — before the generic "báo" (tố giác) / "giấu" rules */
  [/^báo đúng ngày/i,"opt-bao-ky-dung"],[/^báo lùi/i,"opt-bao-ky-lui"],[/^báo sớm/i,"opt-bao-ky-som"],[/^giấu, không báo/i,"opt-bao-ky-giau"],
  /* review/placeholder-pics3 (D46b): new main content. "thuê thợ thêu" first so it no longer falls to the padlock rule (opt-canh-giu) further down */
@@ -131,6 +141,9 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  /* kit-size #8 (kit-conform "generic picture on a person option", SRV:night2): an option whose title NAMES a live person shows THAT person's kit portrait (pv: a stranger gives the kit
     silhouette), whatever act / meaning group its words hit. Not inside a person-event frame (the figure column on the left already is that person). Same name test as kit-conform (b). */
  if(t&&b&&b.closest){try{const dl=b.closest(".dlg");if(dl&&!dl.querySelector(".kpsubj.kes,.kszfig")&&typeof liveRivals==="function"&&typeof pv==="function"){const who=liveRivals(true).find(v=>v&&v.name&&v.name.length>3&&t.includes(v.name));const f=who&&pv(who);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who}}}catch(e){}}
+ /* review/art-event: a face-veil option («Mạng … · <phẩm>», jveil vlnvp / vlout) shows that veil's own painting at its grade (kitItemSrc), never the generic «mạng» rule */
+ if(t&&typeof vlIsK==="function"&&typeof IT!=="undefined"&&typeof kitItemSrc==="function"){try{const [nm,gr]=t.split(" · ");const G=typeof WD_GRADE!=="undefined"?WD_GRADE:["Thường","Tinh phẩm","Trân phẩm","Tuyệt phẩm"];const gi=gr?G.indexOf(gr.trim()):-1;
+  const k=Object.keys(IT).find(k=>vlIsK(k)&&IT[k]&&IT[k].n===nm.trim()&&(gi<0||k==="mcnt"||+k[3]===gi));const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}catch(e){}}
  if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
   /* review/pcard-actrow (owner 16/11 "Hình nhân vật đâu?"): an option that is a PERSON (spy target, gift recipient, invite, accuse, visit … any "chọn người"
      — it carries that person's kit portrait chip in its title) shows THAT person's portrait (a stranger: the kit silhouette pv gives), never a meaning-group
