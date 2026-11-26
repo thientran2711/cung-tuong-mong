@@ -104,3 +104,10 @@ Nit (no action): §2 quotes «thân với ta» while the source says «ngươi»
 1d0f032d = merge of LIVE origin/main aa37de21. Its source diff vs aa37de21 is byte-identical to the reviewed one (j10, jagacts3, 4 tests). FF from LIVE confirmed. Rebuilt here: only the build-info line (CTM_BI) differs → own build.
 Gates on 1d0f032d: coop-e2e 143/143 (co-op first) · fac-roads-play ALL PASS · fac-parity-play ALL PASS · role-parity-drift2-play ALL PASS · ag-par3 seed 21 + unseeded ALL PASS. §4 stays out of this branch per Foreman D (routed to MAIN 157).
 **VERDICT: PASS 1d0f032d** (FF on origin/main aa37de21).
+
+### Merged on LIVE aa37de21 — tip 1d0f032d (13:30Z)
+LIVE moved 1dcb373e → aa37de21 (home-way-nits; j10 + jagacts3 untouched). Merged; built-file conflicts only (taken from LIVE, rebuilt). Worker gates on 1d0f032d: coop-e2e 143 ok / 0 FAIL · fac-roads ALL PASS · fac-parity ALL PASS · drift2-play ALL PASS · ag-par3 ALL PASS · role-parity.test ALL PASS. Reviewer session_01D3E3NYiNpuvC4JKoyQchxo: PASS 1d0f032d (§7 update, handover 8e6efa57).
+
+**LAND READY review/parity-facfix 1d0f032d (FF from LIVE aa37de21)**
+
+Worker handover: none needed — job done. Open items routed by Foreman D to MAIN 157: §4 help family (housemate «Nhờ giúp đỡ», jaudit loan/tell, cx2:help never targets her); pre-existing quickcheck faults (G4 dialog-fixed «empty Tốn/Được», crawl «Ô lưu · Lui»).
