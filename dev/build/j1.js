@@ -230,7 +230,9 @@ function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}retur
 function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;
  if(by&&typeof by==="object"&&by!==S&&by!==v&&!by.coop&&BAL.oanCool&&BAL.oanCool.on){try{if(typeof ghenFeel==="function")ghenFeel(v,n,why,by)}catch(e){}
   const k=(BAL.oanCool.ghen||{}).npc||0;if(k>0&&typeof oanAdd==="function")oanAdd(v,by,Math.max(1,Math.round(n*k)));return 0}
- const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
+ const g0=+v.ghen||0;{const M=BAL.oanCool&&BAL.oanCool.on&&BAL.oanCool.ghen.dm;if(M){/* review/pace-all: the nearer the top, the less one more slight adds (× max(min, 1 − (ghen/100)^pow)); fractions carry (v.gUc) */
+  const x=(+v.gUc||0)+n*Math.max(M.min,1-Math.pow(g0/100,M.pow));n=Math.floor(x);v.gUc=Math.round((x-n)*1000)/1000;if(!n)return 0}}
+ v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(v,d,why,by===undefined?S:by)}catch(e){}return d}
 /* her own jealousy SCORE toward a consort (v.pg, "Ngươi ghen N") — same family as ghenUp: the ONE way to raise it; the real rise also adds a short
    Chạnh lòng FEELING on her (ghenFeel), aimed at that consort. Lowering stays a plain write; the feeling ending never touches the score. */

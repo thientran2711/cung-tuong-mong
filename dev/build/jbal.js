@@ -384,11 +384,12 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
              floor = band kept while the cause stands (law 6a): mem = a bad deed still remembered (jmem, weight ≥ BAL.mem.faint) → band 1 «Chút oán»;
              keep = a deed carved for life → band 2 «Oán». ghen = the weekly jealousy fade (j8 rivalsTurn, was typed 3 / 1): than = when she is
              liked (rel ≥ BAL.net.th.than), base otherwise, + pct × the jealousy itself (a quiet season takes about a third off), × the same nết; her own jealousy (v.pg) keeps its −1 a tuần. npc = share of a jealousy
-             caused by ANOTHER consort that becomes a grudge toward that consort (j1 ghenUp; it no longer raises the score toward her).
+             caused by ANOTHER consort that becomes a grudge toward that consort (j1 ghenUp; it no longer raises the score toward her). dm = a jealousy RISE
+             toward her × max(min, 1 − (ghen/100)^pow) (j1 ghenUp: slows near the top, like BAL.stp.dm for the other stats; carry v.gUc).
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    (the youngest adult = BAL.ageMin, with the age bands above) */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5}},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5,dm:{pow:3,min:.15}}},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
