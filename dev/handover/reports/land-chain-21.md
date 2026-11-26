@@ -141,3 +141,29 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 10:47Z MAIN 157: news-sieve after ob-verdict; on its stack rerun news-sieve.test + ob-verdict.test; QC incl perf + old save.
 
 ## 10:50Z — B FREEZE FIRST (MAIN 157): coop-freeze-kmrew-rv2 2673733e → review/lc21-fz (+ CHANGE line LC21 «Sửa lỗi treo máy khi chơi lâu (nhất là màn Fold): khung túi đồ và dải «Kéo xuống» không còn chồng dồn.»). HW-NITS gates stopped (restack after). Gates gates-fz.sh (chain + dress + observer-leak, scroll-cue-loop Fold+iPad; QC vs LIVE). MAIN: send READY per item, no batching.
+
+## LC21 HANDOVER (to LC22; rolled at 32 % context, START_CTX ~5 %)
+### STATE
+LIVE = 3af7896e (DRESS) · ROLLBACK 6b5d3d05. Coordinator = MAIN CHÍNH 157 session_01V1ZZH1gksN2xtzkM92Peat (send every «READY TO PUSH <sha> on <branch>, parent <sha>, gates …» there; MAIN FF-pushes; lander never pushes main). Kit keeper KK41 session_01V1ZZH1ZpR1p4UkhoUWozbE.
+MAIN standing rules: send READY per item (no batching); pick queue positions yourself (owner bug first, then queue order); a branch with no CHANGE line → write your own ≤140-char cổ trang line (buildinfo one() cuts at 140); source conflict → stop & report (exception: firstcard × kit-stage odds union → KK41).
+### IN FLIGHT (LC21's gates die with this container → RERUN)
+1. FREEZE (B, Fold freeze cure, FIRST, alone): review/lc21-fz 1dcb373e = coop-freeze-kmrew-rv2 2673733e (FF on LIVE) + CHANGE «Sửa lỗi treo máy khi chơi lâu (nhất là màn Fold): khung túi đồ và dải «Kéo xuống» không còn chồng dồn.» Gates = lc21-tools/gates-fz.sh (observer-leak + scroll-cue-loop Fold/iPad first, then chain + dress tests, QC vs LIVE alone last). Was running at handover; MAIN told «~60–70 min».
+### STAGED NEXT (restack each onto the previous pushed sha; built files only conflicted so far)
+2. HW-NITS: review/lc21-hw aa37de21 = home-way-nits 0e71fdbc onto 1dcb373e (SMALL PASS given; CHANGE = LC20 «Nút «Về phòng · N khắc» …»). Gates gates-hw2.sh (gates-hw chain + dress + home-way-label, kit-why-scan Fold/iPad). On LIVE (d4618564) it was 80 % through with 0 new FAILs when stopped.
+3. ob-oan 5d663810 + kit-gloss-lower 3b765458 (one slot): staged review/lc21-oan ed7ac28d on old d4618564 → restack. CHANGE «Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị).» Gates gates-oan.sh (ob-oan.js takes ROOT DIRS: `$PWD /home/user/wt/<LIVE>`; kit-gloss-lower.js; ob-oan-scan.py). Encounter-scene check: MAIN accepted on code read (lc21-tools/ob-oan-lc21b.js: modal path PASS 26; scene path not reachable here: no figure art). OB-OAN may send a hotfix.
+4. ob-m3ui → review/ob-m3ui-sololh eca83a5d (SMALL PASS). Gates ob-m3ui.js Fold+iPad (122/122), kit-opt-art-tap, kit-close, old save, QC. Own CHANGE line.
+5. kit-home-frame daa31a5e (SMALL PASS; on LIVE). QC (rv didn't). Own CHANGE.
+6. endcard-top-r6 3f38961f: CHANGE «Hết kiếp: khung kết thúc luôn ở trên cùng; không còn rương bổng lộc, tin tức hay thẻ sự kiện nào hiện đè lên.» (MAIN OK). Gates gates-ec.sh (endcard-top.js, endcard-top-scan.py, ending-screens.js flaky). LIVE pre-existing: quickcheck G4 dialog-fixed ×2, coop-ending-screens guest never joins.
+7. firstcard-2-rv de123ff3 (BIG PASS; FF on LIVE; no CHANGE line, must not mention «Mong manh») + ONE separate toggle commit: jk2b.js kitEndOdds `return KIT_END_RE.test(t)?word(BAL.odds.lo):null` → `return null`; rebuild; rerun selx-rules/selx-wire/selx-days + firstcard-scan.py + QC incl perf. LIVE-identical fails: dialog-fixed, button-crawl Ô lưu «Lui».
+8. ob-verdict-rv e27c9f9f (BIG+SMALL PASS; gate ob-verdict.test.js 81; a successor sha with only a KIT.md doc line is equivalent). After LAND tell MAIN: wipe CDN img/_review/ob-verdict.
+9. news-sieve-rv 82eb2832 (BIG PASS) — rerun news-sieve.test + ob-verdict.test on the stack; QC incl perf + old save.
+10. renderer-mem 123a2a9c (D F10 #3) — jumps right after FREEZE once its rv PASS arrives.
+11. kit-bac-progress cb221604 (REPLACES TAINGHE slot; contains tainghe r5 88bd567f; run tainghe-info ×5 + pcard-overlap + hit-overlap-lc19 + its own).
+12. srvmerit r2 (LC20 c7f4fc0a / source 0bbb81fd; gates-sm.sh w/ local wrangler at /home/user/wt/wr: copy coop/worker + npm install).
+13. kit-stage-r2 22e318d5 (+ kit-faces-opts.js Fold/iPad, picker clip; firstcard odds union → KK41 if conflict) → 14. kit-empty-rows cda34e5e → 15. NHV review/nhv-areas 50840478 (assemble.py r2 list + 'jnhv.js' after 'jkmapban.js') → 16. map-zones-r7 9c8985ab8 (union-merge nhv 50840478; rerun map-labels-scan day+night; jk3.js conflict w/ home-way → MAIN) → 17. mg-trim NEW sha from FOREMAN D (old bb0ae651 HELD: coop-thin-f4 regression, see «mg-trim HOLD»; my 139-char CHANGE: «Bớt minigame: điểm trang một lần bấm (còn «Tự tay»); tát, né một lần gieo; «Học nhanh» lên Tùy duyên; thêm «Chăm nhanh», «Giao người chăm».») → 18. D1+D4 (one sha from D) → 19. promo-root3 987c3599 (test only, ride along).
+### KNOWN (LIVE-identical / flaky — compare, don't block)
+global-names 1 CLASH; tainghe-info TypeError (fixed by bac-progress/tainghe r5); mg-back Fold/iPad FAIL 1(+2) flips between devices; info-tap-audit + makeup-set (Fold «ration») + mg-craft (kim law 5) flake under load → rerun alone; coop-thin-f4 LIVE 8/10 (P1,P3 pend:true).
+### PERF
+a9 A/B done (6b5d3d05 vs bf6dd041 alone): buổi 2139/2169 → no regression (reported). Container buổi runs ~1.8–2.4 s.
+### TOOLS
+dev/handover/reports/lc21-tools/: gates-*.sh (edit SP= to your scratchpad; worktrees /home/user/wt/<slot>; QCBASE=<parent worktree>), dupfn.py (+ make dup_live.txt from a LIVE worktree first), holog.sh (pushes this log + lc21-logs/). Stack recipe = LC20's (merge --no-commit --no-ff, checkout --theirs index.html sw.js assets.json, CHANGE.txt, build_site BEFORE commit, push review/lc21-<slot> or review/lc22-<slot>).
