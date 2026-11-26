@@ -346,3 +346,13 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
 - Limits (open): Đàn timed notes on Fold still score ~0 (touch latency vs the ±90 ms peek window); «Dâng hương» mixing board has no peek → its «chấm độ khớp» button
   is tapped without mixing (low score). 3 of 6 fresh nc/any lives were ban hoa at buổi 1 after the BOT chose «Cúi đầu chờ xét — không thi» (persona pick, game rule,
   not a harness fault).
+
+### FIXER #9 — kscn-veil family, part 3 (F #20 09:33Z / 09:50Z, QC-NOISE-HYGIENE iPad cautious s21 on 08a4ff8b), 11/26/2026
+- Root: the «scene on top wins» rule (074abe46) tested only the SCREEN MIDDLE; on iPad 1180x820 the scene does not always cover it, so the layer stayed «page» and every
+  page button + Túi đồ item row was probed DEAD under div.kscn-veil for 25 min (same family as E-S1 / #kg82 / page).
+- Fix (robot-rt.js): any visible .kscn that is on top at its OWN centre and covers ≥ 20 % of the screen is the layer (any device geometry); the scene card cue
+  «Chạm để tiếp ▸» (.kdv-next) is tapped on the card ~40 px above it (reused from Foreman D's proven local patch review/temper-g4 bb86d9ac, LAW 13), else the scene area.
+- Proof LIVE 6b5d3d05, NEW lives: iPad cautious s21 → buổi 26, iPad rand s22 → buổi 31, iPad bold s31 → buổi 31, Fold cautious s15 → buổi 17 — 0 DEAD each;
+  E-S1 ckpt resume (Fold) → buổi 9, 0 DEAD, no new bug. Ban hoa lives seen by QC (f2/f5/i2) = «Cúi đầu chờ xét — không thi» persona pick, the pre-5c62c2b9 «Bỏ qua
+  kết quả khá» quick option (fixed in 5c62c2b9), and a board «Quay lại» on 08a4ff8b (fixed in 5c62c2b9: unstick / picker never back out of a running board).
+  #kroul «Bỏ qua» = skip of the identity roulette animation before the life, not a mini-game result; left as is.
