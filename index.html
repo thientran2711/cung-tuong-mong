@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"abc1c795+","t":"2026-11-26T07:49Z","c":"Màn «Thân phận kiếp này»: điều được, điều mất xếp mỗi điều một dòng; ấn cảm xúc không còn nhảy lên mặt người khi đang chọn.","b":"58d979a2abd1","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"bae1fcd1+","t":"2026-11-26T08:24Z","c":"RV-MAP-ZONES (BIG rv) small fixes: jmapz header comments match the 26/11 zones (no stale 'no lục cung layer'); map-family-scan opens her co…","b":"0175e8ad4b65","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1752,7 +1752,9 @@ function monthTick(){let ev="";
   {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=BAL.ducLv.up)S.th=cl(S.th+dd,-100,100);else if(S.duc<BAL.ducLv.down)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:lsDucWhy()},true)}
   if(S.moreRivals&&!roomFor("consort"))S.moreRivals=0;if(S.moreRivals){S.moreRivals=0;const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Theo lời ngươi tâu, cung tuyển thêm tú nữ: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
-  if(!S.out&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
+  /* promo-root (25/11): «Bị bỏ quên» only after BAL.danhG.forgetGrace months since she entered the palace or last left lãnh cung (S.forgetAt, set by restore j14): before, a release from lãnh cung was undone in the same monthTick (Sủng 0 / Danh 0 / rank 0 after restore) and rank-0 origins were forgotten in month 1–3 */
+  if(S.forgetAt==null)S.forgetAt=S.turn+BAL.danhG.forgetGrace;
+  if(!S.out&&S.turn>=S.forgetAt&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
   const wasQ=S.rank>=7;ev+=promote();if(!wasQ&&S.rank>=7)S.justCrowned=1;
   S.month++;S.tuan=0;
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});
@@ -1924,7 +1926,7 @@ const MG={
  vu:["Vũ: theo bước múa","Xem các bước sáng lên rồi múa lại đúng thứ tự. 5 lượt, mỗi lượt dài thêm một bước.",gVu]};
 /* review/mg-train (owner 16/11 07:20Z no word games): thi + y lessons and their banks (DOI, YQ) + quiz() removed; the openMG wrapper (j82) puts KG82_MGL thi / y (calli, blend) in MG before every open */
 function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").textContent=h;$("ov").hidden=false;mgDone=false;
- const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Bỏ qua<small>${kitQuickSub({win:"tiến bộ một phần",lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
+ const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Bỏ qua<small>${kitQuickSub({win:`tiến bộ ${kStepW(lesG((S.mg&&S.mg.mode)||"self",1))}`,lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
  const fin=(pts,skip)=>{if(mgDone)return;mgDone=true;if(mgStop)mgStop();mgStop=null;sk.hidden=true;const g=pts*(S.master?2:1);
   $("mgb").innerHTML=`<p class="mgres">${skip?(pts?"May mắn":"Không vào"):["","Tạm được","Khá","Xuất sắc"][pts]}</p><p style="text-align:center">Tiến bộ +${g}${S.master&&pts?" (danh sư dạy, gấp đôi)":""}</p><div style="display:flex;justify-content:center"><button class="main" id="mgok">Xong</button></div>`;
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
@@ -4706,7 +4708,9 @@ function cold(why){if(S.dead)return;if(S.out)return;S.out=1;S.coldWhy=why;S.cold
  const keep=kp.concat((S.staff||[]).filter(s=>s.coop&&!kp.includes(s))),left=(S.staff||[]).filter(s=>!keep.includes(s));S.staff=keep;
  log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${left.length?`: Nội vụ phủ điều ${left.map(s=>s.name).join(", ")} sang nơi khác`:""}${keep.length?`; chỉ ${keep.map(s=>s.name).join(", ")} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
 function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.visit={k:"lc",people:lcPeople("Phế phi · cùng cảnh ngộ"),talked:false,tk:{},msg:"Gió lùa qua song cửa mục. Ở đây chỉ có những người bị quên lãng."}}
-function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
+/* promo-root (whole family): every way she leaves lãnh cung or enters the palace as a consort starts the «Bị bỏ quên» clock (j3 monthTick, S.forgetAt) the same way: restore, the pardon fallback (jagacts), the kỳ tuyển entries (jkc kcEnter, jkc2 kc2Enter), a maid raised to Đáp ứng (j42 srvRise). Number: BAL.danhG.forgetGrace */
+function forgetSafe(p){if(p===S)S.forgetAt=S.turn+1+BAL.danhG.forgetGrace}
+function restore(full,why){S.out=0;forgetSafe(S);/* promo-root: a release is not undone by «Bị bỏ quên» (j3) */S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
  log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
 /* ONE list for her lãnh cung cards and an NPC in the cold palace (AG-ALL-2e, jagacts3 p3Cold): p = the one inside; free / end = what "được tha" / Xuất gia do for her or an NPC */
 function coldActs(){return coldActsOf(S)}
@@ -5417,13 +5421,13 @@ function lessonMode(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
  else{if(!can(2)||S.bac<cost)return;c={suc:-BAL.artLes.tch,bac:-cost,tch:k}}
  c.khac=2;/* KIT §13.9 (j82 kgDefer): the lesson's charge is taken on «Sẵn sàng»; the ✕ before it is a free back */
  const open=()=>{S.mg={k,l,mode};save();render();resumeMG()};if(typeof kgDefer==="function")kgDefer(c,open);else{const f={suc:c.suc};if(c.bac)f.bac=c.bac;if(c.th)f.th=c.th;apply(f);if(c.tch)tchPaid(k);spend(2);open()}}
-(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gs=Math.max(1,Math.round(g*.6)),gg=m.mode==="self"?gs:m.mode==="teacher"?Math.max(g,gs+((typeof BAL!=="undefined"&&BAL.tchMin)||1)):g;log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
+(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gg=lesG(m.mode,g);/* review/balance-pace: ONE rule (jbalcore lesG, BAL.art.les) */log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
   if(m.mode==="teacher"&&roll(30)){if(roll(50)&&discover())log("Thầy dạy kể một sở thích của Hoàng thượng.");else{const t=evGuilty(S,liveRivals(true));if(t&&evA(S,t,BAL.eff.j23.evTop))log(`Thầy dạy buột miệng chuyện của ${t.name}: chứng cứ ${balSg(BAL.eff.j23.evTop)}.`);else log("Thầy dạy kể chuyện trong cung, toàn chuyện vô hại.")}}render()})}})();
 function artTabHTML(){const nx=ARTS.map(a=>S.arts[a.k]);let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Ba cách học, giá trị ngang nhau, tốn thứ khác nhau.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=artFee(l),ms=ARTMS[a.k]||[];const t2=whyTime(2);
-  const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu → ta: thiện cảm 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
+  const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu → ta: thiện cảm 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · Bậc ${l}/5</b><span class="u">${ARTDO[a.k]||""} · lên bậc: ${a.st==="sac"?"Sắc":"Tài"} ${balSg(BAL.art.stUp)}</span>${l<5?`<span class="lv">Tiến bộ ${S.artp[a.k]}/${need}</span><div class="mini"><u style="width:${S.artp[a.k]/need*100}%"></u></div>`:""}
   <div class="ams">${ms.map((m,i)=>`<span class="${i<l?"ef g":i===l?"ef nx":"ef n"}" title="${m}">B${i+1}: ${m}</span>`).join("")}</div><div class="pcb">${B.join("")}</div></div>`}).join("")+`</div>`;
  return h}
@@ -6694,7 +6698,9 @@ Object.assign(BAL,{
   selfMin:25,       /* Tự học: Sức needed */
   mSuc:10,          /* Học với thầy (ma ma or a consort): Sức -N */
   mMin:10,          /* Học với thầy: Sức needed (jtds lesson check) */
-  exNeed:2          /* Hạnh minigame first-time example: "Người ghi cần N phần" */
+  exNeed:2          /* Hạnh minigame first-time example: "Người ghi cần N phần" */,
+  pts:{self:[1,1,2,3],m:[2,2,3,4]} /* review/balance-pace: lesson points by game points 0..3 (raw bands BAL.mgTier.lessonPts, same as an art lesson);
+                    was typed in jtd tdPoints: self raw ≥ 9 → 2 else 1, ma ma raw ≥ 7 → 3 else 2 */
  }
 });
 /* one-core small modules (j95, j95b, jkitpage, jsgame, jslap, jdiff, j92, jsteal, jmort, jly, jcmaid, jaudit, j90, j72). Module-owned tables that
@@ -8130,7 +8136,7 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
  return{t:`<p>${pp.m===1?"Yến tiệc đầu xuân ở Thái Hòa điện":"Tiệc Thất tịch bên hồ sen"}. Ngươi theo hầu ${m?m.name:"chủ"}.</p>`,who:pMe(),o:cnvPend(S,cnvFestOpts(S,m))}};
 
 /* ---------- rising: she joins the consort game ---------- */
-function srvRise(why){if(!S||(S.age||0)<BAL.ageMin)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* balance-2 fault 9 (only BAL.danhG.srvRise of her servant Danh carries over) lives in riseCore, the same rule for an NPC maid (role-parity-bundle-fix) *//* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
+function srvRise(why){if(!S||(S.age||0)<BAL.ageMin)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;forgetSafe(S);/* promo-root: a raised maid enters as a consort, same «Bị bỏ quên» grace *//* balance-2 fault 9 (only BAL.danhG.srvRise of her servant Danh carries over) lives in riseCore, the same rule for an NPC maid (role-parity-bundle-fix) *//* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
  S.maid=newMaid(nmNew("maid"),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
  if(loyR==null&&m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
@@ -35683,10 +35689,10 @@ function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].
  if(!m.wk)m.wk=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const pick=m.wk;let skip=false;const ms=S.master?2:1;
  const cb2=g=>{const raw=wkRawOfPts(Math.round(g/ms));if(m.mode==="prac"){S.mg=null;if(skip)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}if(skip)return cb(g);
   const r=cb(g);try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}return r};
- if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"},onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
+ if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:`tiến bộ ${kStepW(lesG(m.mode,ms))}, không ra thành phẩm`,lose:"không tiến bộ"},onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
    if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}cb(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}});return}catch(x){}}
  const r=o0.call(this,k,lv,cb2);
- try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Bỏ qua<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"}))}</small>`;
+ try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Bỏ qua<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:`tiến bộ ${kStepW(lesG(m.mode,ms))}, không ra thành phẩm`,lose:"không tiến bộ"}))}</small>`;
   sk.onclick=()=>{skip=true;os()};const h=$("mgh");if(h)h.textContent+=` Tự tay làm (chơi): ra thành phẩm, ${WK[kind].w.toLowerCase()}: phẩm = phần chơi (từ 0 đến 10) + ${ARTS.find(x=>x.k===k).n} bậc ${wkLv(S,k)}: +${wkLv(S,k)}${WMAT[pick.mat||0]?` + vật liệu: +${WMAT[pick.mat||0]}`:""}.`}catch(x){}
  return r}})();
 /* product dialog in front of every lesson button (and the practice button once an art is mastered) */
@@ -35715,7 +35721,7 @@ function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=
  const t=k==="mon"?(S.emp.known.dish?`Tự tay nấu ${s}, món ngài thích.`:`Tự tay nấu ${s}; chưa biết ngài thích món gì.`):k==="bhoa"?(S.emp.known.flower?`Cắm một bình ${s}, loài hoa ngài yêu.`:`Cắm một bình ${s}; chưa biết ngài thích hoa gì.`):k==="tho"?"Mài mực, viết một bài thơ.":"Thêu một chiếc khăn lụa.";
  const an=ARTS.find(x=>x.k===a).n;
  return{n:`${prac?"Tự học":"Tự học"} ${an}: ${K.n.toLowerCase()}`,t,c:Object.assign({suc:prac?-BAL.artLes.prac:-BAL.artLes.self},K.mat[m]?{bac:-K.mat[m]}:{}),o:100,k:2,w:{},dom:"Tài nghệ",lock:!prac&&S.suc<BAL.sucNeed.self,
-  x:`${prac?"":`tiến bộ ${an} ${kStepW(1,2)} · `}tự tay chơi thì ra thành phẩm · ${wkOddsTxt(S,k,m)}`,go:()=>{S.mg={k:a,l,mode:prac?"prac":"self",wk:{kind:k,mat:m,subj:s}};save();resumeMG()}}}
+  x:`${prac?"":`tiến bộ ${an} ${crsGainW("self",l)} · `}tự tay chơi thì ra thành phẩm · ${wkOddsTxt(S,k,m)}`,go:()=>{S.mg={k:a,l,mode:prac?"prac":"self",wk:{kind:k,mat:m,subj:s}};save();resumeMG()}}}
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==="function"&&isSrv())||!Array.isArray(deck))return;/* ROLE PARITY: a risen maid gets the works card like a born consort */deck.push(wkDeckCard())}catch(e){}}})();
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
 function wkTargets(a){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,`${rkName(v)} ${v.name}`]));if(a.maid)L.push(["maid",`${a.maid.name} (cung nữ thân tín)`]);return L}
@@ -35965,7 +35971,7 @@ function npcStudyDo(v){if(!v||!v.alive||v.out)return;vNorm(v);const T=traitsOf(v
  const SX=BAL.ag.par3.study;const paid=(v.bac||0)>=cost+SX.keep&&mindPick([["t",SX.teach],["s",SX.self]],v)==="t";let g=1;if(paid){ap(v,{bac:-cost});g=2+R(2)}
  /* AG-ALL-2b mg2 (owner OD 17/11 ~15:25Z (3)): her lesson game for the NPC = one draw (jmgt mgNpcRaw, practice board occ hoc at the NPC's level) through HER
     points rule: an art = j83 wkLessonPts (teacher or self, same value, as her art lessons); a virtue = jtd tdPoints (self / with a ma ma) */
- if(typeof mg2On==="function"&&mg2On()&&BAL.ag.mg2.study){try{if(t==="a"&&typeof wkLessonPts==="function")g=wkLessonPts(kg82NpcRaw(v,kg82Kind(k,"",true),{occ:"hoc"}));
+ if(typeof mg2On==="function"&&mg2On()&&BAL.ag.mg2.study){try{if(t==="a"&&typeof wkLessonPts==="function")g=lesG(paid?"teacher":"self",wkLessonPts(kg82NpcRaw(v,kg82Kind(k,"",true),{occ:"hoc"})));/* review/balance-pace law 2: her lesson rule */
   else if(t==="v"&&typeof tdPoints==="function"&&typeof TD_OF!=="undefined"&&TD_OF[k])g=tdPoints(paid?"master":"self",kg82NpcRaw(v,TD_OF[k],{occ:"hoc",lv:l}))}catch(e){}}
  if(!g)return;if(t==="a")addArtP(v,k,g);else addVir(v,k,g)}
 /* ---- monthly effects (every consort alike) ---- */
@@ -35994,7 +36000,7 @@ function fxItems(s,cls){return String(s).split(" · ").map(x=>`<span class="ef $
 function lvRows(fx,l,nm){const rows=[];fx.slice(0,l).forEach((s,i)=>rows.push([`Bậc ${i+1}`,fxItems(s,"g"),"g"]));if(l<5)rows.push([`Bậc ${l+1} mở`,fxItems(fx[l],"n"),"n"]);return kitRows(rows)}
 function v85Table(k){const V=VIR.find(x=>x.k===k),A=ARTS.find(x=>x.k===k);
  if(k==="duc")return v85DucPanel();const fx=V?VIRFX[k]:ARTFX[k],l=V?virLv(S,k):artLv(S,k);if(!fx)return;
- kitModal({kind:"rule",title:V?`${V.n} · ${V.full}`:`${A.n}`,sub:V?V.d:(ARTDO[k]||""),sections:[{h:"Năm bậc",tiers:fx.map((s,i)=>({k:`Bậc ${i+1} · ${artNm(i+1)} · ${BAL.art.tier[i+1]} điểm`,n:s,c:i<l?"g":"",on:i+1===l}))}].concat(V?[]:[{h:"Ghi chú",rows:[["Điểm",`${artPts(S,k)}/100 · ${artNm(l)}; Tông sư (100) là cả đời khổ luyện`,"t"],["Lên bậc",`${A.st==="sac"?"Sắc":"Tài"} +${BAL.art.stUp} mỗi bậc; ${Object.keys(BAL.art.danh).map(l=>`bậc ${l} Danh +${BAL.art.danh[l]}`).join(", ")}`,"t"],["Phần thắng",`việc dùng ${A.n} dễ thành hơn: ${BAL.art.odds.slice(1).map((x,i)=>`bậc ${i+1} +${x}`).join(", ")}`,"t"],["Đêm lật thẻ",`Tranh sủng, Chặn ngự giá, Giữ chân Hoàng thượng dùng môn giỏi nhất: trúng môn Hoàng thượng chuộng tháng này thì dễ thành hơn theo bậc, trúng môn ngài không ưa thì khó hơn`,"t"]].concat(["cam","ky","thi","hoa"].includes(k)?[["Hoàng thượng trọng tài",`thi tài, phô tài trước mặt ngài tính bậc này ${xWord(BAL.art.emp)}`,"t"]]:k==="vu"?[["Hoàng thượng mê sắc",`múa trước mặt ngài tính bậc này ${xWord(BAL.art.emp)}, lật thẻ ${xWord(BAL.art.flipX)}`,"t"]]:[])}]),btn:"Đã hiểu"})}
+ kitModal({kind:"rule",title:V?`${V.n} · ${V.full}`:`${A.n}`,sub:V?V.d:(ARTDO[k]||""),sections:[{h:"Năm bậc",tiers:fx.map((s,i)=>({k:`Bậc ${i+1} · ${artNm(i+1)} · ${crsNeedP(i)} phần`,n:s,c:i<l?"g":"",on:i+1===l}))}].concat(V?[]:[{h:"Ghi chú",rows:[["Tiến bộ",l>=5?`${artNm(5)}: đã tới bậc cao nhất`:`${crsProg(S.arts,S.artp,k).join("/")} phần tới bậc ${l+1} · ${artNm(l+1)}; Tông sư là cả đời khổ luyện`,"t"],["Lên bậc",`${A.st==="sac"?"Sắc":"Tài"} +${BAL.art.stUp} mỗi bậc; ${Object.keys(BAL.art.danh).map(l=>`bậc ${l} Danh +${BAL.art.danh[l]}`).join(", ")}`,"t"],["Phần thắng",`việc dùng ${A.n} dễ thành hơn: ${BAL.art.odds.slice(1).map((x,i)=>`bậc ${i+1} +${x}`).join(", ")}`,"t"],["Đêm lật thẻ",`Tranh sủng, Chặn ngự giá, Giữ chân Hoàng thượng dùng môn giỏi nhất: trúng môn Hoàng thượng chuộng tháng này thì dễ thành hơn theo bậc, trúng môn ngài không ưa thì khó hơn`,"t"]].concat(["cam","ky","thi","hoa"].includes(k)?[["Hoàng thượng trọng tài",`thi tài, phô tài trước mặt ngài tính bậc này ${xWord(BAL.art.emp)}`,"t"]]:k==="vu"?[["Hoàng thượng mê sắc",`múa trước mặt ngài tính bậc này ${xWord(BAL.art.emp)}, lật thẻ ${xWord(BAL.art.flipX)}`,"t"]]:[])}]),btn:"Đã hiểu"})}
 function ducDeedList(){const L=[];for(const k in ACT){const A2=ACT[k];if(A2&&A2.c&&A2.c.duc<0)L.push([A2.n,A2.c.duc])}L.sort((a,b)=>a[1]-b[1]);return L}
 function v85DucPanel(){const d=S.duc,bad=ducDeedList();
  kitModal({kind:"rule",title:"Đức",sub:"Ai cũng có Đức; việc làm thật mới làm Đức lên xuống",
@@ -36007,15 +36013,15 @@ artTabHTML=function(){vNormAll();const t2=whyTime(2);
  let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Học với thầy tốn bạc, tiến nhanh; tự học không tốn bạc, tiến chậm. Phi tần khác cũng học theo cùng luật.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
  h+=`<div class="ph"><span><b>Tứ đức</b> · bốn môn của nữ nhi trong cung, không phải thanh số: mỗi bậc đổ vào Sắc, Đức, phần thắng và phẩm đồ tự làm.</span><span><button class="lnk ladi" data-v85tab="duc" title="Luật Đức" aria-label="Xem luật Đức">ⓘ luật Đức</button></span></div><div>`;
  h+=VIR.map(V=>{const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức ${balSg(-BAL.td.selfSuc)} · thành: tiến bộ một phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: 2 khắc, Bạc -${cost}, Sức ${balSg(-BAL.td.mSuc)} · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức ${balSg(-BAL.td.selfSuc)} · thành: tiến bộ ${crsGainW("self",l,1)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: 2 khắc, Bạc -${cost}, Sức ${balSg(-BAL.td.mSuc)} · thành: tiến bộ ${crsGainW("teacher",l,1)}`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"${capAt({k:BAL.charity.khac},BAL.charity.bac)}`,"Phát bạc cứu giúp cung nhân nghèo",`${capW()} · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
   return card(`${V.n} · ${V.full}`,"",l,S.virp[V.k],l+2,V.d,VIRFX[V.k],B,V.k)}).join("")+`</div>`;
  h+=`<div class="ph"><span><b>Tài nghệ</b> · cầm, kỳ, thi, họa, vũ, y, thêu, nấu.</span></div><div>`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=artFee(l);
-  const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: 2 khắc, Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
+  const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: 2 khắc, Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   const extra=(a.k==="theu"||a.k==="nau")?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100, bậc phẩm ${artBonus(S,a.k).tier}`:"";
   return card(a.n,AIMG[a.k],l,S.artp[a.k],need,(ARTDO[a.k]||"")+extra,ARTFX[a.k]||[],B,a.k)}).join("")+`</div>`;
  return h};
@@ -36245,8 +36251,8 @@ crReg("td_cong","stitch",tdWrap(crtStitch,"stitch"));/* the stitch board inside 
 
 /* ---------- the study acts (j85 lessonVir): intro (rules) -> game -> result -> progress ---------- */
 const TD_MODE={self:"Tự học",master:"Học với ma ma"};
-function tdPoints(mode,raw){return mode==="self"?(raw>=9?2:1):(raw>=7?3:2)}
-/* mg-skip-all: a quick lesson ("Để trời định", KIT §13.6) won = the progress of a BAL.skip.raw play (tiến bộ một phần), lost = no progress; TDS.q = that roll (null = played / bot) */
+function tdPoints(mode,raw){const P=BAL.mgTier.lessonPts;return tdPts(mode,raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0)}/* review/balance-pace: BAL.td.pts (jbalcore tdPts) */
+/* mg-skip-all: a quick lesson ("Để trời định", KIT §13.6) won = the progress of a BAL.skip.raw play (BAL.td.pts by that raw; review/balance-pace), lost = no progress; TDS.q = that roll (null = played / bot) */
 function tdGain(mode,raw,skipped){return skipped&&TDS.q===false?0:tdPoints(mode,raw)}
 function tdQuality(p){try{const a=(p&&p.vpf&&p.vpf.cong)||[];return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length/10*2):0}catch(e){return 0}}
 (function(){const v0=virtueBonus;virtueBonus=function(p,k){const b=v0.apply(this,arguments);try{if(k==="cong"&&b&&b.q!=null&&p===S)b.q+=tdQuality(p)}catch(e){}return b};window.virtueBonus=virtueBonus})();
@@ -36259,12 +36265,12 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped,qok)=>{KG82.phase="result";TDS.q=skipped?!!qok:null;const gain=tdGain(mode,raw,skipped),q=k==="cong"?Math.round(raw/10*2):0;
-  kg82ShowRes(kg82Rows([skipped?["Để trời định",qok?"thành: tiến bộ một phần":"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
+  kg82ShowRes(kg82Rows([skipped?["Để trời định",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
  KG82.phase="intro";const HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
  /* KIT §13.7 (mg-ready-guide): the step rules + example now sit in the shared rules block EVERY time (was: first time only), «Sẵn sàng» / «Hướng dẫn» */
- box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Để trời định",win:"tiến bộ một phần",lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
+ box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Để trời định",win:`tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`,lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
  kgReady(box,{kind,steps:TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"])});
 
  KG82.backPre=cancel;/* KIT §13.9: ✕ before «Sẵn sàng» = its own free «Thôi, để lúc khác» (nothing is charged before tdFinish) */
@@ -37370,7 +37376,7 @@ Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
-Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,/* promo-root: months after palace entry / leaving lãnh cung before «Bị bỏ quên» can fire */forgetGrace:6,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
@@ -37608,7 +37614,11 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
+ gain:[2,1.5,1.1,.9,.8] /* review/balance-pace (owner OD 25/11 ~23:52Z «một lần chơi chỉ được cộng có 2 điểm … bao giờ tao mới lên được bậc»): was [1.2,1,.8,.6,.4]
+   (a good self-study = 2.4 points → Tông sư after ~83 good games of ONE course). Now a good game (raw ≥ BAL.mgTier.lessonPts[2]) of self-study = 6 points at bậc 0:
+   Nhập môn after 2 good games, Tông sư after ~35 (teacher ~26); still slower each bậc. Measured dev/measure/pace.js, report dev/handover/reports/balance-pace.md */,
+ les:{self:1,min:1} /* review/balance-pace: lesson points of ONE play (jbalcore lesG, her lessons and an NPC's): self-study = max(min, round(game points × self)) (was × .6:
+   a Xuất sắc game and a poor one both gave 1–2, so the game score barely mattered); a teacher = max(game points, self-study + BAL.tchMin) */,odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
@@ -56985,16 +56995,16 @@ const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac
 /* ---------- TÀI NGHỆ ---------- */
 function ktArtSkills(){const t2=whyTime(2);const out=[];
  for(const V of (typeof VIR!=="undefined"?VIR:[])){const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -${BAL.td.selfSuc} · chơi một trò nhỏ · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: 2 khắc, Bạc -${cost}, Sức -${BAL.td.mSuc} · chơi một trò nhỏ · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -${BAL.td.selfSuc} · chơi một trò nhỏ · thành: tiến bộ ${crsGainW("self",l,1)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: 2 khắc, Bạc -${cost}, Sức -${BAL.td.mSuc} · chơi một trò nhỏ · thành: tiến bộ ${crsGainW("teacher",l,1)}`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"${capAt({k:BAL.charity.khac},BAL.charity.bac)}`,"Phát bạc cứu giúp cung nhân nghèo",`${capW()} · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
-  const fx=(typeof VIRFX==="object"&&VIRFX[V.k])||[];out.push({g:"duc",kind:"vir",k:V.k,name:`${V.n} · ${V.full}`,kicker:artNm(l),level:l,prog:[virPts(S,V.k),100],bar:l>=5?false:undefined,desc:V.d,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img:kitSkillArt("vir",V.k,V.n),stepsAttr:`data-v85tab="${V.k}"`})}
+  const fx=(typeof VIRFX==="object"&&VIRFX[V.k])||[];out.push({g:"duc",kind:"vir",k:V.k,name:`${V.n} · ${V.full}`,kicker:artNm(l),level:l,prog:crsProg(S.vir,S.virp,V.k),bar:l>=5?false:undefined,desc:V.d,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img:kitSkillArt("vir",V.k,V.n),stepsAttr:`data-v85tab="${V.k}"`})}
  for(const a of ARTS){const l=S.arts[a.k],cost=artFee(l);const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
-  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -${BAL.artLes.self} · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Bạc -${cost}, Sức -${BAL.artLes.tch} · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: 2 khắc, Sức -${BAL.artLes.th} · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
+  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -${BAL.artLes.self} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Bạc -${cost}, Sức -${BAL.artLes.tch} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: 2 khắc, Sức -${BAL.artLes.th} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
   const extra=(a.k==="theu"||a.k==="nau")&&typeof artBonus==="function"?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100`:"";const fx=(typeof ARTFX==="object"&&ARTFX[a.k])||[];
-  out.push({g:["cam","ky","thi","hoa"].includes(a.k)?"cktt":"nc",kind:"art",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:[artPts(S,a.k),100],bar:l>=5?false:undefined,desc:((typeof ARTDO==="object"&&ARTDO[a.k])||"")+extra,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img,stepsAttr:`data-v85tab="${a.k}"`})}
+  out.push({g:["cam","ky","thi","hoa"].includes(a.k)?"cktt":"nc",kind:"art",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:crsProg(S.arts,S.artp,a.k),bar:l>=5?false:undefined,desc:((typeof ARTDO==="object"&&ARTDO[a.k])||"")+extra,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img,stepsAttr:`data-v85tab="${a.k}"`})}
  return out}
 function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["duc","Tứ đức"],["cktt","Cầm kỳ thi họa"],["nc","Vũ · Y · Nữ công"]];
  let works="";try{works=ktWorksHTML()}catch(e){works=""}
@@ -57012,7 +57022,7 @@ function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")re
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
-  return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:[artPts(S,a.k),100],bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,info:`data-v85tab="${a.k}"`,can:!!(acts.length&&!why)}}).filter(Boolean);
+  return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:crsProg(S.arts,S.artp,a.k),bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,info:`data-v85tab="${a.k}"`,can:!!(acts.length&&!why)}}).filter(Boolean);
  L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillCard).join("")}
 KIT_GLOSS["Tác phẩm"]="Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đạt "+BAL.art.nm[5]+" thì tự học là ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
@@ -70237,8 +70247,8 @@ function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.
 tchFee=function(k){return RCPT.k===k&&rcpTchV()?0:rcpFeeNq()};
 tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){relAdd(S,v,-BAL.rcp.tFavor);S.askAt=S.askAt||{};S.askAt[v.id]=wk();log(`${rkName(v)} ${v.name} dạy ta ${ARTS.find(a=>a.k===k).n}: ta nợ nàng ta một ân (thiện cảm -${BAL.rcp.tFavor}).`)}}catch(e){}RCPT.started=1;RCPT.k=null;RCPT.t=null};
 function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];const t2=whyTime(2);
- O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
- for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch} · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
+ O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${fee} · thành: tiến bộ ${crsGainW("teacher",S.arts[k]||0)}, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
+ for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch} · thành: tiến bộ ${crsGainW("teacher",S.arts[k]||0)}, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(O.length===0){log(`Chưa có ai dạy: nữ quan cần ${fee} bạc, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
@@ -70257,7 +70267,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="art")continue;const k=s.k,l=S.arts[k]||0;
-  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
+  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
   if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")));
   if(wkKindsOf(k).some(x=>RCP_ST[x]))s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("rcp skills",e)}return L}})();
 function rcpListOpen(k){const a=ARTS.find(x=>x.k===k);const R=[];for(const kind of wkKindsOf(k).filter(x=>RCP_ST[x]))RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);
@@ -76472,8 +76482,8 @@ function tdsOK(k,mode){if(!S||S.dead||Q.length||S.mg)return false;const l=virLv(
  if(mode==="self")return can(BAL.td.k)&&S.suc>=BAL.td.selfMin;return can(BAL.td.k)&&S.suc>=BAL.td.mMin}
 function tdsReset(){TDV.pend=null;TDV.tch=null;TDV.hit=null;TDV.raw=null;TDV.skip=0;RCPT.k=null;RCPT.t=null}
 function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S),fav=rcpFavorOf(S),O=[];const t2=whyTime(BAL.td.k);
- O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
- for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc} · thành: tiến bộ +2..3, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
+ O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ ${crsGainW("teacher",virLv(S,k),1)}, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
+ for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc} · thành: tiến bộ ${crsGainW("teacher",virLv(S,k),1)}, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
   go:()=>{TDV.tch=String(v.id);RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(!O.length){log(`Chưa có ai dạy ${V.n}: ma ma cần ${fee} bạc, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
@@ -76522,8 +76532,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tứ đức cards: real costs, "ra một món", the lối list ---------- */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(BAL.td.k);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
   const fee=virCost(l,S),fav=rcpFavorOf(S),game=s.acts.some(h=>/trò nhỏ/.test(h))?"chơi một trò nhỏ · ":"";
-  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${game?"+1..2":"+1"}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
-   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
+  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${crsGainW("self",l,1)}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
+   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ ${crsGainW("teacher",l,1)}, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
   s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("tds skills",e)}return L}})();
 /* the lối list of a course: lối opened by level are named with their level */
 (function(){const o0=rcpListOpen;rcpListOpen=function(k){if(!TDS_KIND[k])return o0.apply(this,arguments);const V=VIR.find(x=>x.k===k),kind=TDS_KIND[k],R=[];
@@ -77649,7 +77659,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
  /* r2-r1 (FAIL 3): home dialogs still queued (Phúc tuyển, family events …) never follow her into the palace, and an open mini-game card closes */
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE"&&!(m.pp&&m.pp.e==="dien"))Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
  const CY=BAL.kcg.carry;S.rank=rank=seatDown(S,rank);S.sung=CY.sung[0]+rank*CY.sung[1];S.lastPromo=S.turn;S.danh=Math.min(CY.danhMax,Math.round(S.danh*CY.danhK));S.bac=Math.min(CY.bacMax,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
- S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc.loyalKcEnter,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
+ S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc.loyalKcEnter,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;forgetSafe(S);S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
  const L=[];for(const m of kcRivalsTT()){const raw=kcPhucMark(m);/* review/podium-wire: the same Phúc tuyển mark the podium showed (S.kc.tt.pod) */const sc=kcScore({sac:m.sac,tai:m.tai,duc:m.pduc,danh:m.danh,raw,pow:m.ppow==null?kcPow():m.ppow})+R(9)-4;
@@ -82518,7 +82528,7 @@ function kc2Score(raw){const K=S.kc;const g=(K.ex&&K.ex.art)||"";return entScore
 const KC2CUT=BAL.entry.cut;/* below [0]: two steps under the ceiling; [0]: one step under; [1]: the ceiling */
 function kc2Enter(raw){const K=S.kc;const sc=Math.round(kc2Score(raw));K.ex.sc=sc;const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;K.ex.tier=tier;
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE")Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
- K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;S.pal=null;
+ K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;forgetSafe(S);S.pal=null;
  if(K.kd==="dan")kc2EnterSrv(tier,sc,raw);else kc2EnterNc(tier,sc,raw);
  kc2R0();kcSnapReset();try{kcHook("enter",{rank:S.rank,tier})}catch(e){}tab="act";render()}
 const KC2SW=["kém","khá","tốt"];
@@ -84139,6 +84149,19 @@ function crsPush(lv,pt,k,g,up){if(!(g>0))return 0;const T=BAL.art.tier,G=BAL.art
   if(give<room-1e-9){pt[k]=Math.round((have+give)*10)/10;left=0}
   else{left-=room/G[Math.min(l,G.length-1)];if(l>=top){pt[k]=need;left=0}else{pt[k]=0;lv[k]=l+1;n++;if(up)up(l+1)}}}
  return n}
+/* review/balance-pace: the ONE lesson-points rule of one play (her j23 lesson, an NPC's j85 npcStudyDo): pts = the game's points (j83 wkLessonPts 0..3, × the
+   danh sư's 2 for her); mode "self" | "teacher" | other (Thái hậu: the game's points) */
+function lesG(mode,pts){const L=BAL.art.les,gs=Math.max(L.min,Math.round((pts||0)*L.self));return mode==="self"?gs:mode==="teacher"?Math.max(pts||0,gs+(BAL.tchMin||1)):(pts||0)}
+/* the progress shown on a course card, in PHẦN (lesson points, the unit every «tiến bộ … phần» text uses): phần inside the bậc / phần that bậc needs
+   (BAL.art.tier width ÷ BAL.art.gain of the bậc). Was points / 100, read by sếp as «100 to one bậc» (OD 25/11). */
+function crsG(l){const G=BAL.art.gain;return G[Math.max(0,Math.min(l|0,G.length-1))]}
+/* phần a course needs from bậc l to bậc l+1 (rule cards «Năm bậc», the bar) */
+function crsNeedP(l){return Math.ceil(artNeed(l)/crsG(l)-1e-6)}
+function crsProg(lv,pt,k){const T=BAL.art.tier,l=Math.min((lv||{})[k]||0,T.length-1);return [Math.floor(((pt||{})[k]||0)/crsG(l)+1e-6),crsNeedP(l)]}
+/* the phần one play of mode gives (game points 1..3 through lesG / tdPts), as words («một đến ba phần»): every lesson button reads this, never a typed range */
+function crsGainW(mode,l,vir){const f=pts=>Math.max(1,vir?tdPts(mode,pts):lesG(mode,pts));const a=f(1),b=f(3);return typeof kStepW==="function"?kStepW(a,b):`${a}–${b} phần`}
+/* a Tứ đức lesson's points by game points 0..3 (BAL.td.pts; jtd tdPoints reads it through the raw bands BAL.mgTier.lessonPts) */
+function tdPts(mode,pts){const P=BAL.td.pts[mode==="self"?"self":"m"];return P[Math.max(0,Math.min(P.length-1,pts|0))]}
 function crsPts(lv,pt,k){const T=BAL.art.tier;const l=Math.min((lv||{})[k]||0,T.length-1);return Math.min(100,Math.round(T[l]+((pt||{})[k]||0)))}
 function artPts(p,k){return crsPts(p&&p.arts,p&&p.artp,k)}
 function virPts(p,k){return crsPts(p&&p.vir,p&&p.virp,k)}
@@ -85750,7 +85773,7 @@ function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.nam
  if(k==="judge"){if(evG(a,v)<BAL.ag.ev.judge)return"";return String(judge(a,v)).trim()}
  if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return"";if(evG(a,v)<1&&!vpItems(v).length){if(me)apply(BAL.tw.confNo);else ap(a,BAL.tw.confNo)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(a,v,-BAL.tw.g.conf[0]);v.hh=(v.hh||0)-BAL.tw.g.conf[1];return `${nm} tịch thu ${n} của ${NM(v)}`}
  if(k==="reward"){if((a.bac||0)<-BAL.tw.reward.bac)return"";if(me)apply(BAL.tw.reward);else ap(a,BAL.tw.reward);relAdd(a,v,BAL.tw.g.reward[0]);v.hh=(v.hh||0)+BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});return `${nm} ban thưởng cho ${NM(v)}`}
- if(k==="pardon"){if(!v.confined&&!v.out)return"";if(v===S){try{restore(false,`Hoàng hậu ${a.name} ân xá`)}catch(e){S.out=false;S.confined=0}}else{if(v.out){v.out=false;v.rank=0}v.confined=0}relAdd(a,v,BAL.ag.hh.pardonRel);if(me)apply({duc:BAL.ag.hh.pardonDuc});else ap(a,{duc:BAL.ag.hh.pardonDuc});return `${nm} ân xá cho ${NM(v)}`}
+ if(k==="pardon"){if(!v.confined&&!v.out)return"";if(v===S){try{restore(false,`Hoàng hậu ${a.name} ân xá`)}catch(e){S.out=false;S.confined=0;forgetSafe(S)}}else{if(v.out){v.out=false;v.rank=0}v.confined=0}relAdd(a,v,BAL.ag.hh.pardonRel);if(me)apply({duc:BAL.ag.hh.pardonDuc});else ap(a,{duc:BAL.ag.hh.pardonDuc});return `${nm} ân xá cho ${NM(v)}`}
  return""}
 const AGHH={judge:{act:"xử tội",n:"spite"},conf:{act:"tịch thu trang sức",n:"spite"},reward:{act:"ban thưởng",n:"ally"},pardon:{act:"ân xá",n:"ally"},cutpay:{act:"khất bổng lộc",n:"spite"}};
 /* the gate of each of her buttons (the player-as-Empress sees the same: empAct below) — ONE list read by her options and by her duty need */
@@ -101648,7 +101671,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="58d979a2abd1";window.CTM_BUILD=BUILD;
+const BUILD="0175e8ad4b65";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
