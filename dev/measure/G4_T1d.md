@@ -70,6 +70,15 @@ FINAL hangs, LIVE vs fix («fix arm = 60db5f48 (5e013076 base)»; the hot-2 run 
 | timid-3 | 1 (b65) | 0 | b1 → 150 | 2370 / 2360 |
 Total: 5 LIVE hangs vs 0 on the fix.
 
+CONFIRMATION on F10's final sha 008662ef (each lane resumed from a LIVE 5e013076 ckpt taken before its hang buổi):
+| lane | range | hangs | peak / last MB |
+|---|---|---|---|
+| hot-2 | b273 → 300 | 0 | 1678 / 1656 |
+| off-3 | b51 → 150 | 0 | 2140 / 2040 |
+| hot-3 | b46 → 150 | 0 | 2090 / 1920 |
+| timid-3 | b46 → 150 | 0 | 1952 / 1934 |
+Total: 5 hangs on LIVE vs 0 on 008662ef.
+
 Hang files: CDN img/_review/renderer-mem/5e013076-tp-{hot-2,off-3,hot-3}-hang.json (sent to F10 #2 and Foreman D).
 
 ## F10 renderer memory (for the F10 workers)
