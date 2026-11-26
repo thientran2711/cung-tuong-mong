@@ -1,0 +1,6 @@
+# E-S4 R5-speed-4 (iPad) — end-of-life review (evidence limited, see moments)
+1. Summary: speed («bold»), pf/pt_hai, iPad, real taps, jsClicks 0, harness b4b181f8→4d7a22c6 (resumed ×2 at buổi 567 and 1898, same life, plus 1 page crash resume), 2097 buổi, 14 game years, age 32, rank 0, ending «Xuất gia — Xuất gia làm ni cô» which is GAME-IMPOSED (Hoàng thượng băng hà → childless low rank → temple by old custom); no exitPick, no tap on an exit label. robot-audit.js says INVALID («bot-chosen exit road, no proof it was the only option») = false negative of the text rule; owner rule ~05:20Z/05:40Z says a game-imposed ending counts. RULING NEEDED from Foreman E.
+2. Scores: a first 15 min 7 · b loop/pacing 3 (14 years at rank 0) · c buttons 8 (clean on the new Build) · d story 7 (the Emperor dies, custom fits) · e characters 5 · f choices/fairness 5 (no promotion route) · g feedback 4 (stipend popup over the ending) · h mini-games n/a · i visuals 7 · j co-op n/a.
+3. Loved: the death-of-Emperor ending logic. Hated: rank 0 for 14 years; popup over the ending. Replay: yes.
+4. BUGS: stipend popup «Bổng lộc tháng chín» over the ending card (4 of 5 endings); page crash at buổi 1899 with a 3.5 MB save (harness resumed, same life).
+5. Suggestions (parking lot): promotion path for a speed player.
