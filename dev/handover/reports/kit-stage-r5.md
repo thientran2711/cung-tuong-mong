@@ -46,3 +46,10 @@ HANDOVER next: MAIN's answers (pmLad, thẻ gỗ paging) → implement; count je
 - Honest-limit lists counted from source: event/road/kỳ ngộ data ≤7; j71c 4 stances; orders expire after 2 khắc (no cap needed).
 - Card back marks: inherits WORDING-MARKS (markTxt in kaBody, review/wording-marks 51a0575a) — verify after it lands.
 - KK47 (session_01Rc5AsHmtzuWMnb27oL1LC5) asked to re-review 489cd579; then RV-163.
+
+## UPDATE 22:50Z (owner 26/11 ~22:07Z bugs) — head b1b16a4a, LOOK READY sent to MAIN 164
+- §101.10: tap 1 = the card enlarges (front, card's own shape), tap 2 = turns over, back same size; ✓/✕ on the lower edge; ✕ shrinks back. KIT.md rewritten in place.
+- §102.7: event stages (hand / thẻ gỗ) show NO figure — background + cards + info box; figures only in a dialogue. kit-stage.js check = 0 figures.
+- Result card empty band (owner 22:07Z (1)) = kit keeper (KK47 session_01Rc5AsHmtzuWMnb27oL1LC5 was inactive when told; next kit keeper please take it + review b1b16a4a).
+- Videos/stills: img/_review/kit-stage-r5/{fold,ipad}-{banbai,result}.mp4 + *-still.png.
+HANDOVER (context high, roll at next task): open = MAIN look + sếp ok on b1b16a4a; kit review (KK47 or successor); WORDING-MARKS land → check the card back shows marks (Được/Mất) and exact Tốn; RV-163 after kit PASS. Test commands: node dev/test/kit-hand.js index.html <out>; node dev/test/kit-stage.js index.html <out>; ONLY=banbai,result node dev/test/kit-stage-r5-video.js index.html <out>; node dev/test/hand-max-scan.js index.html.
