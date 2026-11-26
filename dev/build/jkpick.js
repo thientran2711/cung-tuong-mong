@@ -13,7 +13,7 @@
 (function(){try{
 const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:7,two:5,postIn:{kv1:10,kv2:16},postTop:{kv1:176,kv2:120},railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:10,two:5,three:8,postIn:{kv1:10,kv2:16},postTop:{kv1:176,kv2:120},railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const still=()=>{if(KIT_PLAQUE.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
@@ -35,18 +35,19 @@ function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getEle
 /* KIT §98.1 PLAQUE POST (owner OD 26/11 ~21:41Z «để cái sự lựa chọn nào nó cũng tới từ một cái cột thôi … lúc thì nằm bên giữa, lúc thì nằm bên phải là sao?»; KK47, canon overwrite of the
    anchor-relative side/tier search and of the KK36 «Việc · 1/2» pages): EVERY choice board hangs from ONE post at ONE fixed place — the right side of the stage
    (x = host width − KIT_PLAQUE.postIn), the same top (KIT_PLAQUE.postTop px from the host top) on every board and device. 1–4 plaques = one column hanging LEFT of the post;
-   5–7 = two columns, the second column added on the LEFT (the post never moves). At most KIT_PLAQUE.max (7) plaques, cut at the SOURCE (owner 21:45Z) — no paging.
+   5–7 = two columns, the second column added on the LEFT (the post never moves); 8+ (KIT_PLAQUE.three) = three columns, the third added on the LEFT again (owner 26/11 ~22:43Z:
+   7 is not a hard cap, an event that needs more keeps them, all at once, no paging; KIT_PLAQUE.max 10 = the design size, never a cut: more = the compact tier).
    The figure / cluster yields to the post (kitPick.postBox before opening), never the reverse; the kit result card yields too (yieldCard). Group tabs (really different groups) sit in
    the fixed room above the rail. */
 function postBox(host,n,hx){const K=KIT_PLAQUE,m=kv(),hr=(host||document.getElementById("stage")||document.body).getBoundingClientRect(),W=hr.width,H=hr.height,post=K.post;
- n=Math.max(1,Math.min(n||1,K.max));const cols=n>=K.two?2:1,xR=Math.round(W-K.postIn[m]-post-4),free=xR-8;
- const cw=Math.max(cols===2?K.minW:120,Math.min(K.w[m],cols===2?Math.floor((free-K.gx)/2):free)),bw=cols*cw+(cols-1)*K.gx,x0=xR-bw;
+ n=Math.max(1,n||1);const cols=n>=K.three?3:n>=K.two?2:1,xR=Math.round(W-K.postIn[m]-post-4),free=xR-8;
+ const cw=Math.max(cols>1?K.minW:120,Math.min(K.w[m],cols>1?Math.floor((free-(cols-1)*K.gx)/cols):free)),bw=cols*cw+(cols-1)*K.gx,x0=xR-bw;
  const top=K.postTop[m],railY=top+K.tabH+8,rows=Math.ceil(n/cols);let hh=Math.max(K.h[m],hx||0),gap=K.cord.gap,comp=false;
  const tot=()=>K.cord.rail+rows*hh+(rows-1)*gap;if(railY+tot()>H-6&&!hx){hh=K.hS;gap=K.cord.gapS;comp=true}
  return {x0,x1:xR+post+4,top,railY,bottom:railY+tot(),cols,cw,bw,rows,h:hh,gap,comp,post,W,H}}
 function geo(P){const K=KIT_PLAQUE,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.3,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6};
- const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],all=gr.acts||[],acts=all.slice(0,K.max),n=acts.length;
- if(all.length>K.max)console.warn("kitPick: "+all.length+" plaques > "+K.max+" — a source fault (owner 26/11 ~21:45Z: cut at the source)");
+ const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],all=gr.acts||[],acts=all,n=acts.length;
+ if(all.length>K.max)console.warn("kitPick: "+all.length+" plaques > "+K.max+" — all shown (compact tier); KIT REQUEST if it leaves the stage");
  const B=postBox(P.host,n,P.hx);
  return {over:Math.max(0,B.bottom-(B.H-2)),lapped:false,comp:B.comp,A,acts,n,side:"l"/* the outer side of a plaque = away from the post (✓ / ✕, widen) */,cols:B.cols,cw:B.cw,h:B.h,gap:B.gap,rows:B.rows,
   railY:B.railY,bandW:B.bw,x0:B.x0,post:B.post,postTop:B.top,floor:B.H-2,tabsH:P.groups.length>1?K.tabH+8:0,W:B.W,H:B.H}}
@@ -99,7 +100,7 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
   c.addEventListener("click",e=>{e.stopPropagation();const k=e.target.closest("button");if(!k||!P.up)return;const u=P.up,aa=(P.G.acts||[]).find(x=>String(x.id)===u.dataset.id);if(k.classList.contains("khok")){if(aa)pick(P,aa,u.querySelector(".kpk-b"))}else drop(P)});P.el.appendChild(c)}
  const s=(typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44,gap=6,w=2*s+gap,G=P.G,x0=parseFloat(n.style.left)||n.__x,wd=n.offsetWidth||G.cw,y0=n.offsetTop;
  /* beside the plaque on its outer side, centred on it (never over its name); no room → on its outer top corner */let x,y;/* KK36 (NHV: the ✓/✕ of a LEFT-column plaque sat over the RIGHT column's name): with two columns each plaque's outer side is the side away from the other column */
- const sd=G.cols===2?(((n.__x!=null?n.__x:x0)>G.x0+G.cw/2)?"r":"l"):G.side;const hh=n.offsetHeight||G.h;
+ const sd=G.cols>1?(((n.__x!=null?n.__x:x0)>G.x0+(G.cols-1)*(G.cw+KIT_PLAQUE.gx)/2)?"r":"l"):G.side;const hh=n.offsetHeight||G.h;
  /* candidate spots (outer side first, then the outer / inner top corners, then the bottom corners): the one that covers the least of the OTHER plaques' names wins */
  /* §98.1 a plaque against the post (one column, or the right column of two) has no outer room: its ✓ / ✕ stand UPRIGHT on the post, beside its own right edge */const vt=x0+wd>=G.x0+G.bandW-2&&G.postTop!=null,vh=2*s+gap;
  const C=[...(vt?[[Math.min(G.x0+G.bandW+4+G.post/2-s/2,G.W-3-s),y0+(hh-vh)/2,1]]:[]),[sd==="l"?x0-w-6:x0+wd+6,y0+(hh-s)/2],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0-s*.62],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0-s*.62],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0+hh-s*.38],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0+hh-s*.38]];
