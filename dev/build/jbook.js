@@ -60,6 +60,11 @@ function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.
  for(const im of L){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
+/* kitImgMark(root): the same marks as kitImgSync (decoding="sync" + eager) WITHOUT forcing a decode now — for pictures that are not on screen
+   yet (a book's far pages): a forced decode stays in the browser's picture cache for the whole session (F10 renderer-mem), a marked picture
+   is decoded only when it is really painted, and then without an empty frame. */
+function kitImgMark(root){try{if(!root)return;for(const im of (root.tagName==="IMG"?[root]:root.querySelectorAll("img"))){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}}catch(e){}}
+window.kitImgMark=kitImgMark;
 /* lag-play: copied scrollers follow their live page each frame — all reads first, then the writes (read/write interleaved forced one
    layout per scroller per frame during a page turn).
    Reading scrollTop forces a layout every frame of the turn, so it is read only after a scroll happened somewhere (or a face changed). */
