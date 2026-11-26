@@ -91,7 +91,7 @@ function hand(moved){try{if(!S||S.dead||Q.length||S.mg||typeof deal!=="function"
 function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";hand(true);try{render()}catch(e){}}
  /* her phone behind / ahead of her own buổi on the host (a reload rebuilt her week): the host's copy wins (buoi is the host's), once no patch is pending */
- {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&P.buoi<=(typeof V.o.buoi==="number"?V.o.buoi:0)&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;hand(true);try{render()}catch(x){}}}
+ {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&P.buoi<=(CW.roomB?CW.roomB():null)/* coop-night-wk6 r6 (law 11): the ONE room-buổi rule (jcoopworld roomB = the host's view here; null → 0 as before) */&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;hand(true);try{render()}catch(x){}}}
  hand(false);
  seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
  /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
@@ -103,7 +103,7 @@ function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
 COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
 let wasMg=false;
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(rr)reNet()/* net: her dialog was open at the view */}catch(e){}try{const mg=!!(S&&S.mg);const left=wasMg&&!mg;wasMg=mg;if(left&&on()&&!host()&&S&&!S.dead&&!Q.length){const V=TH.view;
-  if(V&&V.o&&V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"&&V.o.buoi>(S.buoi||0)&&E.mine!==bk())gReady()}}catch(e){}return r}}
+  if(V&&V.o&&CW.roomB&&CW.roomB()>(S.buoi||0)&&E.mine!==bk())gReady()/* r6: the ONE room-buổi rule */}}catch(e){}return r}}
 COOP.on("week",()=>{E.mine="";seen="";/* her ready for the NEW week may arrive before this event (race): keep it */const w=COOP.state.week||0;for(const k of Object.keys(E.rd))if((E.rd[k].w|0)<w)delete E.rd[k];E.hr="";E.forced=""});
 
 /* ---------- HOST ---------- */
