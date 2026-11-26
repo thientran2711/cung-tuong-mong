@@ -18,9 +18,7 @@ function pedRec(){try{const R=S.roster;if(R&&R.P&&R.P["c:ped"]&&typeof j95kh==="
 function pedAt(){const e=pedRec();if(e&&e[0])return e[0];try{if(typeof places==="function"&&places().some(x=>x.k==="nvp"))return "nvp"}catch(e){}return ""}
 /* r2 (MAIN LOOK: «???» / «chưa biết tên» reached her; owner asked to NAME him): he is a named person from the first day (j61 k61SeedChiTon seeds
    his name + face), so the panel always shows his name and painting (kit person column) */
-function pedPerson(){const c=S&&S.court&&S.court.ped;return {kind:"peddler",name:c&&c.name?`Thái giám ${c.name}`:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"lo mua đồ ở Nội vụ phủ",
-  /* his painting = the SAME full figure as his shop (jinv kitShopNvp stage, the kit seller form {__fig,__cap,__role}); the kitPanel subject path drew the female stranger silhouette */
-  stage:{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:c&&c.name||"",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}}}
+function pedPerson(){const c=S&&S.court&&S.court.ped;return {kind:"peddler",name:c&&c.name?`Thái giám ${c.name}`:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"lo mua đồ ở Nội vụ phủ"}}
 function hh(){try{return typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0].alive?rivals[0]:null}catch(e){return null}}
 const WHO={
  ped:()=>({p:pedPerson(),k:pedAt(),does:(pedRec()||[])[3]||"bày hàng mua từ ngoài cung",sell:1}),
@@ -51,56 +49,40 @@ window.glTarget=glTarget;
 /* the open goal lines of her current chapter (jtq14 quests with their own fields) — matched by text */
 function questOf(t){try{const m=S&&S.st&&S.st.ms;const L=m&&typeof tq14Todo==="function"?tq14Todo(m):null;if(L)for(const q of L)if(t.indexOf(plain(q.t))===0)return q;
  const G=typeof kitGoalNow==="function"?kitGoalNow():null;if(G&&G.next)for(const q of G.next)if(t.indexOf(plain(q.t))===0)return q}catch(e){}return null}
-/* ---------- (1) the link on every open goal line (kitChecks is the ONE checklist of the goal family) ---------- */
-const GL=window.__glT=window.__glT||[];
-function glWrap(html,q){const T=glTarget(html,q);if(!T)return html;GL.push(T);if(GL.length>60)GL.splice(0,GL.length-60);
- return `<span class="kgl kglk" role="link" tabindex="0" data-gl="${GL.length-1}" data-glk="${esc(T.k||T.tab)}">${html}</span>`}
-window.glWrap=glWrap;
-if(typeof kitChecks==="function"){const c0=kitChecks;kitChecks=function(list){try{if(Array.isArray(list)&&S&&!S.dead&&S.st)list=list.map(x=>{if(!Array.isArray(x)||x[0]||!x[1]||/data-gl=/.test(x[1]))return x;
+/* ---------- (1) the link on every open goal line (kitChecks is the ONE checklist of the goal family) ----------
+   r2b (MAIN 161 KIT READY §6.2l): the link + the «Cách làm» panel are the KIT part kitGoalLink / kitHowPanel (jopic); this file only gives the DATA
+   (glTarget → how = {who, where, hours, cost, note, go, goK}); no private panel or link look is left here (law 9). */
+function glSpec(T){const W=T.who;const k=T.k;const H=k?hours(k):{h:"",why:""};const kh=k?walkK(k):0;
+ const note=[];if(W&&W.does)note.push(`${W.p&&W.p.name?W.p.name+" ":""}đang ${W.does}`);if(H.why)note.push(`lúc này: ${H.why}`);
+ if(T.tab&&!k){let tn=T.tab;try{tn=(typeof road8Name==="function"&&road8Name(T.tab))||T.tab}catch(e){}note.push(`chỗ bấm: ${tn}${T.card?` › thẻ ${T.card}`:""}`)}if(T.why)note.push(T.why);
+ const cost=[k&&k!==S.place?`đường đi ${kh} khắc`:"",T.cost||""].filter(Boolean).join(" · ");
+ /* who: his real record (S.court.ped, named + face from day one) so the kit draws his painting; th / hh / emp: their own person objects */
+ const who=W&&W.p?(W.p.kind==="peddler"?(S.court&&S.court.ped)||W.p.name:(W.p.ref||W.p)):undefined;
+ /* navigation leaves the info frames she opened it from (the chapter detail under «Cách làm»), so the walk / shop / tab can open */
+ const closeInfo=()=>{try{for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].kit&&Q[i].kit.kind==="info")Q.splice(i,1);showModal()}catch(e){}};
+ let go=null,goK=null;
+ if(k&&k!==S.place){go=()=>{closeInfo();setTimeout(()=>glGo(T),60)};goK=kh}
+ else if(k&&W&&W.sell)go=()=>{closeInfo();setTimeout(()=>glShop(),60)};
+ else if(T.tab&&typeof kitGoalGo==="function")go=()=>{closeInfo();setTimeout(()=>kitGoalGo({tab:T.tab,act:T.act,t:T.t}),80)};
+ return {who,where:k||"",hours:H.h,cost,note:note.join(". "),go,goK}}
+function glWrap(html,q){const T=glTarget(html,q);if(!T||typeof kitGoalLink!=="function")return html;return kitGoalLink(html,glSpec(T))}
+window.glWrap=glWrap;window.glHow=T=>typeof kitHowPanel==="function"?kitHowPanel(glSpec(T)):null;
+if(typeof kitChecks==="function"){const c0=kitChecks;kitChecks=function(list){try{if(Array.isArray(list)&&S&&!S.dead&&S.st)list=list.map(x=>{if(!Array.isArray(x)||x[0]||!x[1]||/data-kglink=/.test(x[1]))return x;
   const q=questOf(plain(x[1]));if(!q&&!isGoalLine(plain(x[1])))return x;const y=x.slice();y[1]=glWrap(x[1],q);return y})}catch(e){console.error("glink checks",e)}return c0.call(this,list)};window.kitChecks=kitChecks}
 /* a chapter step that is not a quest: link it only when it is one of her chapter's steps (never other checklists: kit page, reign, route) */
 function isGoalLine(t){try{const m=S.st.ms;if(m&&typeof MS67==="object"&&MS67[m.id]){const st=MS67[m.id].steps(m);if(st.some(x=>t.indexOf(plain(x[0]))===0))return true}
  const CM=typeof chapModel==="function"?chapModel():null;if(CM&&CM.steps.some(x=>t.indexOf(plain(x.t))===0))return true}catch(e){}return false}
-/* ---------- the «Cách làm» panel ---------- */
-function glHow(T){if(!T||!S||S.dead)return;const base=Q[0]&&Q[0].kit&&Q[0].kit.kind==="info"?Q[0]:null;
- const sec=[];const W=T.who;const k=T.k;
- if(W&&W.p)sec.push({h:"Ai",rows:[["Người",esc(W.p.name)+(W.p.info&&W.p.info!==W.p.name?` · ${esc(W.p.info)}`:"")],["Đang làm",esc(W.does||"")]]});
- if(k){const H=hours(k);const kh=walkK(k);const R=[["Nơi",esc(placeName(k))+(k===S.place?" · ngươi đang ở đây":"")],["Giờ mở",esc(H.h)]];
-  if(H.why)R.push(["Lúc này",esc(H.why),"r"]);R.push(["Đường đi",kh?`${kh} khắc`:"không tốn khắc"]);sec.push({h:"Ở đâu",rows:R})}
- const C=[];if(T.cost)C.push(["Tốn",esc(T.cost)]);if(T.tab&&!k){let tn=T.tab;try{tn=(typeof road8Name==="function"&&road8Name(T.tab))||T.tab}catch(e){}C.push(["Chỗ bấm",esc(tn)+(T.card?` › thẻ ${esc(T.card)}`:"")])}
- if(T.why)C.push(["Vì sao",esc(T.why)]);if(C.length)sec.push({h:"Cách làm",rows:C});
- const close=()=>{if(base){const i=Q.indexOf(base);if(i>=0)Q.splice(i,1)}};
- const opts=[];
- if(k&&k!==S.place){const kh=walkK(k);opts.push({n:"Đi tới",fx:{},nav:1,x:`tốn: ${kh} khắc · thành: tới ${placeName(k)}${W&&W.p?`, gặp ${W.p.name}`:""}`,go:()=>{close();setTimeout(()=>glGo(T),60)}});
-  opts.push({n:"Xem Dư đồ",fx:{},nav:1,x:`${placeName(k)} sáng lên trên Dư đồ`,go:()=>{close();setTimeout(()=>glMap(T),60)}})}
- else if(k&&k===S.place&&W&&W.sell)opts.push({n:"Xem hàng",fx:{},nav:1,x:`${W.p.name} bày hàng ngay đây`,go:()=>{close();setTimeout(()=>glShop(),60)}});
- else if(T.tab&&typeof kitGoalGo==="function")opts.push({n:"Đi làm",fx:{},nav:1,x:"mở đúng chỗ bấm",go:()=>{close();setTimeout(()=>kitGoalGo({tab:T.tab,act:T.act,t:T.t}),80)}});
- opts.push({n:"Đóng",fx:{},nav:1,go:()=>{}});
- /* his painting = the kit panel's person column (spec.subject → kitFace, the same slot every person panel uses) */
- let head;try{if(k&&typeof kitPlaceArt==="function"){const a=kitPlaceArt(k);if(a&&a.src)head={src:a.src,label:placeName(k)}}}catch(e){}/* the place picture in the head band: where she must go */
- kitPanel({kind:"info",look:1,title:"Cách làm",sub:T.t,subject:W&&W.p&&!W.p.stage?W.p:undefined,stage:W&&W.p&&W.p.stage?[W.p.stage]:undefined,headArt:head,sections:sec,opts},true);showModal()}
-window.glHow=glHow;
 /* his wares: standing at Nội vụ phủ with him there = his own «Để ta xem» (jact talkOpts peddler → kitShopNvp); elsewhere nothing opens (she taps him herself) */
 function glShop(){try{if(Q.length||!S||S.dead)return;const here=S.visit&&S.visit.people&&S.visit.people.some(x=>x.kind==="peddler");if(here&&S.place==="nvp"&&typeof kitShopNvp==="function"){kitShopNvp();render()}}catch(e){console.error("glink shop",e)}}
 function glGo(T){try{if(!S||S.dead||Q.length)return;const k=T.k;if(typeof j77Tap==="function")j77Tap(k);else goTo(k);
   /* a seller: once she stands there (after the «Chọn người theo hầu» card of her first walk of the day, if any) his wares open */
   if(T.who&&T.who.sell){let n=0;const iv=setInterval(()=>{n++;try{if(S.place===k&&!Q.length){clearInterval(iv);glShop()}else if(n>120||S.dead||(S.place!==k&&!Q.length&&n>4))clearInterval(iv)}catch(e){clearInterval(iv)}},250)}}catch(e){console.error("glink go",e)}}
-function glMap(T){try{if(!S||S.dead)return;const b=document.querySelector('#tabs [data-tab="go"]');if(typeof tab!=="undefined"&&tab!=="go"){if(b&&b.offsetParent)b.click();else{tab="go";render()}}
- const find=()=>document.querySelector(`#panel .mspot[data-go="${T.k}"]`)||[...document.querySelectorAll("#panel .mspot.mzone")].find(z=>(" "+(z.dataset.mzk||"")+" ").includes(" "+T.k+" "))||null;
- setTimeout(()=>{const el=find();if(!el||typeof kitCoach!=="function")return;
-  const who=T.who&&T.who.p?`<p>${esc(T.who.p.name)} ở đây: ${esc(T.who.does||"")}.</p>`:"";
-  kitCoach({title:placeName(T.k),sub:"Cách làm · nơi cần đến",html:`${who}<p>Chạm vào nơi đang sáng để đi tới.</p>`,target:find,pad:4,interact:true,btns:[{k:"ok",t:"Đã hiểu"}],on(){kitCoachOff()}});
-  const off=e=>{if(e.target.closest&&e.target.closest("#panel .mspot")){document.removeEventListener("click",off,true);try{kitCoachOff()}catch(x){}}};document.addEventListener("click",off,true)},420)}catch(e){console.error("glink map",e)}}
-function tapGL(e){const a=e.target.closest&&e.target.closest("[data-gl]");if(!a)return false;const T=GL[+a.dataset.gl];if(!T)return false;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();glHow(T);return true}
-/* window capture: runs before the kit tap-word handler (j79, document capture) so a goal link opens «Cách làm», not the word popover */
-window.addEventListener("click",e=>{try{tapGL(e)}catch(x){}},true);
-window.addEventListener("keydown",e=>{try{if(e.key==="Enter"||e.key===" ")tapGL(e)}catch(x){}},true);
 /* ---------- r2: NAVIGATION IS NOT A CHOICE (MAIN LOOK; KIT REQUEST KK44 option flag `nav`) ----------
    An option {nav:1} only moves her eye (open a tab, ring a place, walk her there, close): no «KẾT QUẢ … không được gì, cũng không mất gì» card and no
    «Cách làm: Xem Dư đồ» log line. Interim until KK44 ships the kit flag; whole family = every pure navigation option: this panel (Đi tới / Xem Dư đồ /
    Xem hàng / Đi làm / Đóng), jgoal «Đi làm: …», jge «Xem bảng vàng». A real act that follows (her arrival bow at a palace, j77) keeps its own card. */
 let NAVH=0;
-if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){let nav=false;try{const c=Q[0]&&Q[0].opts&&Q[0].opts[i];nav=!!(c&&(c.nav||(/^Đóng$/.test(String(c.n||"").trim())&&!(c.fx&&Object.keys(c.fx).length))))/* a bare close button is navigation too (whole family) */}catch(e){}
+if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){let nav=false;try{const c=Q[0]&&Q[0].opts&&Q[0].opts[i];nav=!!(c&&(c.nav||/\bkgoalhow\b/.test(Q[0].cls||"")/* kit §6.2l «Cách làm» → «Đi tới» = navigation (ask KK44: nav on the kit option) */||(/^Đóng$/.test(String(c.n||"").trim())&&!(c.fx&&Object.keys(c.fx).length))))/* a bare close button is navigation too (whole family) */}catch(e){}
   if(!nav)return c0.apply(this,arguments);NAVH++;try{return c0.apply(this,arguments)}finally{setTimeout(()=>{NAVH=Math.max(0,NAVH-1)},0)}};window.chooseM=chooseM}
 if(typeof logChoice==="function"){const l0=logChoice;logChoice=function(m,c){if(c&&c.nav||NAVH)return;return l0.apply(this,arguments)};window.logChoice=logChoice}
 if(typeof resultShow==="function"){const r0=resultShow;resultShow=function(){if(NAVH)return;return r0.apply(this,arguments)};window.resultShow=resultShow}
