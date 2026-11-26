@@ -5,13 +5,13 @@
 #  3. noise-day: REAL-TAP robot slices (Fold 755x1000 + iPad 1180x820, dev/test/robot-rt.js, the shared harness) with the read-only noise
 #     sampler; every channel per game day inside BAL.noise (+ D2's BAL.evc for big / visit cards); then text-hygiene --runtime on every line
 #     the robot SAW (doubled words, code glue, brackets, English / ids, %, over-long one-line texts).
-#  env QC_NOISE_SLICE (buổi per life, default 9 ≈ 3 game days), QC_NOISE_LIVES (default fold:sens:11,ipad:cautious:21). ~4 min.
+#  env QC_NOISE_SLICE (buổi per life, default 12 ≈ 4 game days), QC_NOISE_LIVES (default fold:sens:11,ipad:sens:21; QC_NOISE_MIN wall-clock cap per life, default 8). ~8 min.
 KIT=${QC_KIT:-$(cd "$(dirname "$0")/../../.." && pwd)}; WT=${QC_WT:-$KIT}; OUT=${QC_OUT:-/tmp}/noise-hygiene; mkdir -p "$OUT"; rc=0
 [ -f "$KIT/dev/test/text-hygiene.js" ] || { echo "noise-hygiene: dev/test/text-hygiene.js missing in kit"; exit 1; }
 grep -q 'BAL.noise=' "$WT/dev/build/jbal2.js" || { echo "noise-hygiene: the sha has no BAL.noise (pre qc-noise-hygiene build)"; exit 1; }
 node "$KIT/dev/test/text-hygiene.js" --static --build "$WT/dev/build" > "$OUT/static.log" 2>&1 || rc=1; tail -1 "$OUT/static.log"
 URL=${QC_URL:-file://$WT/index.html}
 ( cd "$WT" && node "$KIT/dev/test/vp-doubled.js" "$WT/index.html" ) > "$OUT/vp-doubled.log" 2>&1 || rc=1; tail -1 "$OUT/vp-doubled.log"
-rm -rf "$OUT/lives"; node "$KIT/dev/measure/noise-day.js" run "$URL" "$OUT/lives" lives=${QC_NOISE_LIVES:-fold:sens:11,ipad:cautious:21} slice=${QC_NOISE_SLICE:-9} --build "$WT/dev/build" > "$OUT/noise-day.log" 2>&1 || rc=1; tail -1 "$OUT/noise-day.log"
+rm -rf "$OUT/lives"; node "$KIT/dev/measure/noise-day.js" run "$URL" "$OUT/lives" lives=${QC_NOISE_LIVES:-fold:sens:11,ipad:sens:21} slice=${QC_NOISE_SLICE:-12} mins=${QC_NOISE_MIN:-8} --build "$WT/dev/build" > "$OUT/noise-day.log" 2>&1 || rc=1; tail -1 "$OUT/noise-day.log"
 node "$KIT/dev/test/text-hygiene.js" --runtime "$OUT/lives" --build "$WT/dev/build" > "$OUT/runtime.log" 2>&1 || rc=1; tail -1 "$OUT/runtime.log"
 exit $rc
