@@ -185,3 +185,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~09:43Z SMALL PASS ob-m3ui r3 → LC21 slot swapped to 51855c36. Follow-up: «Kiếp mới» YES writes +0 Sổ luân hồi lines → OB-M3UI checks/fixes on review/ob-m3ui-sololh. RV-OB-M3UI-r3 archived.
 - ~09:48Z HOURLY WAKE. LOAD: main running LC21, KK40, J1–J5b, OB-VERDICT-2, OB-NGOAICUNG-3b, E96f, ONE-SIEVE, FIRSTCARD, 4 rv | B 9/12 (freeze SSK c20aaa6e ~10:15Z, verify #1+#2 PASS) | C idle (frames art request) | D PACE-ALL #2, F10 renderer-mem | E runners (kitScrollCues freeze repro) | F #20 robot-realtap rv, PROMO rank-0 report | moved: none.
 - ~09:50Z ROLL (context ~39 %, roll line 30 %): TAKEOVER_MAIN_157.md written; opening MAIN CHÍNH 157 as my child; 156 = forwarder.
+- ~09:50Z MAIN CHÍNH 157 = session_01V1ZZH1gksN2xtzkM92Peat (156 child, depth 5). 156 = forwarder from now.
