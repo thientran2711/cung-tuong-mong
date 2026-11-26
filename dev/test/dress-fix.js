@@ -9,7 +9,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
 (async()=>{const b=await chromium.launch();
  for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad']]){const p=await (await b.newContext({viewport:{width:W,height:H}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof toilOpen==='function'&&typeof start==='function');await p.waitForTimeout(2500);
-  const boot=()=>p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
+  const boot=()=>p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;for(let n=0;n<10;n++){localStorage.clear();window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==="function"&&isSrv()))break}/* a consort life (a palace-maid life is checked once below) */Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
    for(const k of ["hd_dao","hd_lan"])if(WD_ITEMS[k])S.inv.push({k});S.toilette=null;save();try{render()}catch(e){}});
   const open=async()=>{await p.evaluate(()=>{try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.remove());try{kg82Close()}catch(e){}toilOpen();document.getElementById('toilrdy').click()});await p.waitForTimeout(1500)};
   for(const way of ['quick','moc','hand']){await boot();await p.waitForTimeout(600);await open();
@@ -32,15 +32,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* rules (one page) */
  const p=await (await b.newContext({viewport:{width:755,height:1000}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof tyRob==='function');await p.waitForTimeout(2000);
- const R=await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const o={};
+ const R=await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;for(let n=0;n<10;n++){localStorage.clear();window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==="function"&&isSrv()))break}/* a consort life (a palace-maid life is checked once below) */Q.length=0;const o={};
   /* (3) merge */const kw=Object.keys(IT).find(k=>IT[k].sl==="waist"),ks=Object.keys(IT).find(k=>IT[k].sl==="scent");S.inv=S.inv.filter(e=>!(IT[e.k]&&["waist","scent"].includes(IT[e.k].sl)));
   S.inv.push({k:kw});wear(S,S.inv.length-1);S.inv.push({k:ks});wear(S,S.inv.length-1);o.mergeWear=S.inv.filter(e=>e.w&&IT[e.k]&&["waist","scent"].includes(IT[e.k].sl)).length;
   S.inv.forEach(e=>{if(IT[e.k]&&["waist","scent"].includes(IT[e.k].sl))e.w=1});wearMerge(S);o.mergeOld=S.inv.filter(e=>e.w&&IT[e.k]&&["waist","scent"].includes(IT[e.k].sl)).length;
   const v=rivals.find(x=>x&&x.alive!==false);if(v){v.inv=v.inv||[];v.inv.push({k:kw,w:1},{k:ks,w:1});wearMerge(v);o.mergeNpc=v.inv.filter(e=>e.w&&IT[e.k]&&["waist","scent"].includes(IT[e.k].sl)).length}
   /* (5) strip = an enemy's CHOICE only (MAIN 161 ruling ~18:40Z) */S.buoi=3;const k0="ngự hoa viên";const save0=window.curPeople;window.curPeople=()=>[];S.tyOmen=null;o.noPlot=tyRobOdds(k0,0);
   const en=rivals.find(x=>x&&x.alive!==false&&!x.out);let inEnemy=0,home=0,dup=0;
-  for(let i=0;i<20;i++){const w=wdOf(S);if(!w.y){const k=earnPlainY(S);if((S.inv||[]).some(e=>e&&!e.h&&e.k===k))dup++;w.y={k,src:"nvp",nvp:1}}const rk=w.y.k;S.tyOmen={by:en.id,until:wk()+2};o.plot=tyRobOdds(k0,0);tyRob(k0);
-   if((en.inv||[]).some(e=>e&&e.k===rk))inEnemy++;if((S.inv||[]).some(e=>e&&e.k===rk))home++;Q.length=0}
+  for(let i=0;i<20;i++){const w=wdOf(S);if(!w.y){const k=earnPlainY(S);if(k&&(S.inv||[]).some(e=>e&&!e.h&&e.k===k))dup++;if(!k){const i=S.inv.findIndex(e=>e&&!e.h&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==="y");if(i>=0)wdWear(S,i)}else w.y={k,src:"nvp",nvp:1}}if(!wdOf(S).y)break;const rk=w.y.k;const nS=(S.inv||[]).filter(e=>e&&e.k===rk).length,nE=(en.inv||[]).filter(e=>e&&e.k===rk).length;S.tyOmen={by:en.id,until:wk()+2};o.plot=tyRobOdds(k0,0);tyRob(k0);
+   if((en.inv||[]).filter(e=>e&&e.k===rk).length>nE)inEnemy++;if((S.inv||[]).filter(e=>e&&e.k===rk).length>nS)home++;Q.length=0}
   o.inEnemy=inEnemy;o.robHome=home;o.reissueDup=dup;
   /* two-way: her act */const t=rivals.find(x=>x&&x.alive!==false&&!x.out&&x!==en&&wdOf(x).y)||en;const ty=(wdOf(t).y||{}).k;S.bac=500;const save1=window.caught;window.caught=()=>"";const r0=window.aRoll;window.aRoll=()=>true;
   o.actOk=!!(ACT.tyrob&&ACT.tyrob.ok(S,t)&&ACT.tyrobl);let txt="";try{txt=ACT.tyrob.f(S,t)}catch(e){txt="ERR "+e}window.caught=save1;window.aRoll=r0;
