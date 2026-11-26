@@ -146,7 +146,7 @@ async function open(o){o=o||{};close(true);css();const m=kv();
  return R}
 async function build(R){R.slots.forEach(s=>s.remove());R.slots=[];const m=kv(),g0=R.L.g;if(R.stdPx==null)R.stdPx=stdImgR()||g0.H*KIT_RING.stdR[m];R.stdR=R.stdPx/g0.H;const fh0=Math.round(R.stdPx);
  const groups=R.o.groups?R.o.groups.map((G,gi)=>({gi,members:R.list.filter(x=>x.gi===gi),line:G.line||G.name||""})).filter(g=>g.members.length):R.mode==="group"?groupsOf(R.list):R.list.map(x=>({members:[x],line:""}));
- R.groups=groups;R.slots=groups.map(g=>{const s=buildSlot(R,g,fh0);R.W.appendChild(s);return s});R.rot=0;
+ R.groups=groups;R.slots=groups.map(g=>{const s=buildSlot(R,g,fh0);R.W.appendChild(s);/* KIT §93.5a: one plate height per row (KK49), measured once the slot is in the page */if(g.members.length>1)try{kitNameTagFit(s)}catch(e){}return s});R.rot=0;
  if(R.o.at!=null){const k=R.o.groups?groups.findIndex(g=>g.gi===R.o.at):R.list.findIndex(x=>x.i===R.o.at);if(k>=0)R.rot=k}place(R);
  if(!R.o.acts)R.tabs.querySelectorAll(".pct").forEach(b=>b.classList.toggle("on",b.dataset.kr===R.mode));
  arrows(R);yieldCard(R)}
