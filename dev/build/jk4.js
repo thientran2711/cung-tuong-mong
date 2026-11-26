@@ -842,7 +842,10 @@ function kitModalCloser(){const M=document.getElementById("modal");if(!M||M.hidd
  const m=typeof Q!=="undefined"?Q[0]:null;const onQ=m&&!M.classList.contains("kptitle");
  if(onQ&&m.opts){const i=kitCancelIx(m);if(i>=0)return()=>chooseM(i)}
  return null}
-function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
+function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;
+ /* E95: a guided round «Hướng dẫn» running inside a dialog (Chăm thú, Chăm cây …): the dialog ✕ / Esc / tap outside first puts its rules screen back (never closes or ends the game) */
+ try{const t=typeof KG82!=="undefined"&&KG82.tut;if(t&&typeof t.back==="function"&&t.el&&M.contains(t.el)){t.back();return true}}catch(e){console.error(e)}
+const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
 function kitCloseSync(){try{const M=document.getElementById("modal");if(!M)return;const dlg=M.querySelector(".dlg");if(!dlg)return;
  const f=M.hidden?null:kitModalCloser();M.__kx=f;const kx=f?"1":"0";if(M.dataset.kx!==kx)M.dataset.kx=kx;
  const old=dlg.querySelectorAll(".kit-x[data-kitx=panel]");
