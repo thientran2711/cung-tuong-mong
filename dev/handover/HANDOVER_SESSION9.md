@@ -349,3 +349,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:15Z PACE-SPEED bc3cb096: Emperor natural death rare-wide {70,18,30,95}; final robot ~22:25Z then RV READY. REIGN-END told to base on bc3cb096.
 - ~21:17Z PUNISH-TIER-2 lands current work (RV READY) and hands witness split to successor; MAIN witness rule written in OD.
 - ~21:19Z owner 21:30Z: her life ends only by Emperor decision / reign end / her own choice; remove age-40 end → added to REIGN-END; PACE-SPEED told.
+- ~21:22Z KIT-STAGE-R5 914674fa flip LOOK PASS → Fold+iPad videos SENT to sếp. Result card waits on KK45 kitResFold (pushed KK45 + dress-fix kit confirm).
