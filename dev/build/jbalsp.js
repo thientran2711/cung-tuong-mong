@@ -28,7 +28,12 @@ BAL.stp={on:1,
    B = stricter: lower rank ceilings, steeper slowdown, at most 2 big events a day. */
 /* scale = the monthly PROPORTIONAL rescale of Danh / Đức / Sủng per rank group (owner 26/11 ~23:00Z row via MAIN 164; jstatpace spScaleMonth):
    t = share of the rank ceiling BAL.stp.ceil[rank] the group's highest value may hold (T, never under the next rank's bar for Sủng / Danh); keys = the stats. */
-BAL.stp.scale={on:1,t:.85,keys:["danh","duc","sung"]};
+/* owner correction (via MAIN 164): ALL SIX HUD palace stats — Sắc · Tài · Tâm cơ · Đức · Danh · Sủng (not Bạc / Sức / Tâm trạng, thiện cảm / oán, tài nghệ).
+   T[k][rank] = own table for a stat with no stp ceiling (Sắc / Tài / Tâm cơ): starts at the highest gate that stat opens anywhere (Sắc 80 jkcg vpSac / jkc,
+   Tài 70 j2 / j4, Tâm cơ 60 BAL.kc3.rare.muoiTc / BAL.succN.cTam) and rises with rank, so no gate ever closes. Đức: ceil × t but never under BAL.stp.floor.duc
+   (its highest gate, hiền đức 80). Danh / Sủng: ceil × t, never under the next rank's bar (their high gates are rank-tied by ruling A). */
+BAL.stp.scale={on:1,t:.85,keys:["sac","tai","tamco","duc","danh","sung"],
+ T:{sac:[80,82,84,86,88,90,92,95],tai:[70,73,76,79,82,86,90,95],tamco:[60,64,68,72,76,80,85,90]}};
 BAL.stpPre={A:{ceil:[45,55,65,75,85,92,97,100],pow:3,cap:3},B:{ceil:[40,50,60,70,80,90,96,100],pow:2,cap:2}};
 BAL.stpPick="A";
 /* evc = ONE cap on the BIG events that reach her in one game day (tuần): festival (fixed date, always kept), harm / plots against her, people

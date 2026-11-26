@@ -1,4 +1,4 @@
-/* pace-speed (owner OD 26/11 ~19:10Z rulings (A)+(D); MAIN 164 rulings 22:25Z; owner 21:20Z rare Emperor natural death; owner 23:00Z monthly proportional rescale per rank group):
+/* pace-speed (owner OD 26/11 ~19:10Z rulings (A)+(D); MAIN 164 rulings 22:25Z; owner 21:20Z rare Emperor natural death; owner 23:00Z monthly proportional rescale per rank group, six HUD stats):
    unit checks on the built page — BAL.promo.gap read by promoGap, the Hoàng hậu block easing (qBlockAt), the Emperor's own lifespan curve. (Bar-tied stat ceilings: dev/test/stat-pace.js.)
    usage: node dev/test/pace-speed.js <index.html> → ok / FAIL lines, last line PASS / FAIL n; exit 1 on FAIL */
 const {chromium}=require('playwright');const path=require('path');
@@ -17,11 +17,15 @@ const {chromium}=require('playwright');const path=require('path');
   {const v=liveRivals(false)[0];if(v){v.lastPromo=S.turn-B.after-2;ok(qBlockAt(v)===BAL.qBlockHh-2*B.ease,"same easing for an NPC (law 1)")}}
   /* proportional rescale per rank group (owner 26/11 ~23:00Z) */
   {const C=BAL.stp.scale;const r=S.rank|0;let same=liveRivals(false).filter(v=>!v.out&&rkOf(v)===r);if(!same.length){const v=liveRivals(false)[0];v.rank=r;same=[v]}
-   const T=spScaleT("duc",r);const others=liveRivals(true).filter(v=>!v.out&&rkOf(v)===r);for(const v of others)v.duc=10;same[0].duc=80;S.duc=30;
-   const t=spScaleMonth();const f=T/80;ok(same[0].duc===Math.round(80*f)&&S.duc===Math.round(30*f),`group leader 80 → ${same[0].duc}, her 30 → ${S.duc} (T ${T.toFixed(1)}, ratio kept)`);
+   const T=spScaleT("duc",r);const others=liveRivals(true).filter(v=>!v.out&&rkOf(v)===r);for(const v of others)v.duc=10;same[0].duc=100;S.duc=30;
+   const t=spScaleMonth();const f=T/100;ok(same[0].duc===Math.round(100*f)&&S.duc===Math.round(30*f),`group leader 100 → ${same[0].duc}, her 30 → ${S.duc} (T ${T.toFixed(1)}, ratio kept)`);
    ok(/xếp lại thứ bậc/.test(t),`one news line: «${t.trim()}»`);
    for(const v of others)v.duc=10;same[0].duc=Math.floor(T)-1;S.duc=20;const k0=S.duc;spScaleMonth();ok(S.duc===k0,"highest under T → nothing moves");
    for(let rr=0;rr<7;rr++)ok(spScaleT("sung",rr)>=RANKS[rr+1].s&&spScaleT("danh",rr)>=RANKS[rr+1].d,`rank ${rr}: T Sủng ${spScaleT("sung",rr).toFixed(1)} / Danh ${spScaleT("danh",rr).toFixed(1)} ≥ next bar ${RANKS[rr+1].s} / ${RANKS[rr+1].d}`);
+   ok(C.keys.join()==="sac,tai,tamco,duc,danh,sung","all six HUD palace stats rescale (Sắc · Tài · Tâm cơ · Đức · Danh · Sủng)");
+   for(const k of ["sac","tai","tamco"])ok([0,1,2,3,4,5,6,7].every(rr=>spScaleT(k,rr)>=C.T[k][0])&&C.T[k].every((x,i,a)=>!i||x>=a[i-1]),`${k}: own T per rank ${C.T[k]} (never under its highest gate, rising)`);
+   ok([0,1,2,3,4,5,6,7].every(rr=>spScaleT("duc",rr)>=BAL.stp.floor.duc),`Đức T never under its highest gate ${BAL.stp.floor.duc}`);
+   for(const v of others)v.sac=10;same[0].sac=100;S.sac=60;spScaleMonth();ok(same[0].sac===Math.round(100*spScaleT("sac",r)/100)&&S.sac===Math.round(60*spScaleT("sac",r)/100),`Sắc rescales too (100 → ${same[0].sac}, her 60 → ${S.sac})`);
    S.duc=99;same[0].duc=50;C.on=0;spScaleMonth();ok(S.duc===99,"switch off → nothing");C.on=1}
   /* Emperor curve */
   const D=BAL.mort.life.dice;ok(D.emp&&typeof D.emp==="object"&&D.emp.mean>D.adult.mean&&D.emp.sd>=D.adult.sd,`Emperor natural death rare + wide: ${JSON.stringify(D.emp)} (adult ${JSON.stringify(D.adult)})`);
