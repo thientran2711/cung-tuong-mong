@@ -19,4 +19,4 @@ BAL.sp={on:1,
    later kinds also leave room for the ones before them: res = slots kept free for each earlier kind not yet seen today).
    A refused event is not lost: its own gate keeps its wait / pity, so it comes on a later day; a world card that reaches a full day waits
    (jevc EVCW) and comes on a later day with room, at most wait days, then it is let go. */
-BAL.evc={on:1,cap:3,q:{fest:2,harm:1,visit:1,ky:1,opt:1},pri:["fest","harm","visit","ky","opt"],res:0,wait:3};
+BAL.evc={on:1,cap:3,q:{fest:2,harm:1,visit:1,ky:1,opt:1},pri:["fest","harm","visit","ky","opt"],res:{harm:1},wait:3};/* res: slots kept free each day for a kind that can never wait (a plot's warning / aftermath) until that kind has come that day */

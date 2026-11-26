@@ -24,13 +24,15 @@ function evcOn(){return !!(typeof BAL==="object"&&BAL.evc&&BAL.evc.on&&S&&!S.dea
 function evcWaiting(){const L=[];try{for(const m of Q)L.push(m)}catch(e){}try{for(const x of SP13.L)L.push(x.m)}catch(e){}try{for(const h of EVHOLD)L.push(h.m)}catch(e){}for(const w of EVCW)L.push(w.m);return L}
 function evcNow(){const z=evcZ(),n=Object.assign({},z?z.n:{});try{for(const m of evcWaiting())if(m&&!m.evcN){const k=evcKind(m);if(k&&k!=="fest")n[k]=(n[k]||0)+1}}catch(e){}let t=0;for(const k in n)t+=n[k];n.t=t;return n}
 function evcOK(k){if(!evcOn())return true;if(k==="fest")return true;const B=BAL.evc,n=evcNow();if(n.t>=B.cap)return false;if((n[k]||0)>=(B.q[k]==null?B.cap:B.q[k]))return false;
- const i=B.pri.indexOf(k);let keep=0;if(B.res)for(let j=0;j<i;j++)if(!n[B.pri[j]])keep+=B.res;return n.t+keep<B.cap}
+ return n.t+evcKeep(k,n)<B.cap}
+/* slots kept for a kind that never waits (BAL.evc.res, e.g. harm 1) until it has come today; that kind itself does not keep room from itself */
+function evcKeep(k,n){const R=BAL.evc.res;let keep=0;if(R&&typeof R==="object")for(const j in R)if(j!==k&&!n[j])keep+=R[j];return keep}
 /* EVCW: big cards (visit / ky / opt) of a full day wait here for a later day; one is released when the board is clear and the day has
    room; after BAL.evc.wait days it is let go (a plain card goes to the log, like j68 evDropInfo). Harm beats and must / forced / ending cards are
    never held. In memory like EVHOLD (j68). */
 let EVCW=[];
 function evcHoldable(m){return !!(m&&typeof m==="object"&&!m.must&&!m.kend&&!m.evcN&&!m.forced&&m.kind!=="news"&&m.cls!=="end")}
-function evcRoom(k){const B=BAL.evc,z=evcZ();let t=0;for(const j in z.n)t+=z.n[j];return t<B.cap&&(z.n[k]||0)<(B.q[k]==null?B.cap:B.q[k])}
+function evcRoom(k){const B=BAL.evc,z=evcZ();let t=0;for(const j in z.n)t+=z.n[j];return t+evcKeep(k,z.n)<B.cap&&(z.n[k]||0)<(B.q[k]==null?B.cap:B.q[k])}
 function evcPaint(){if(!evcOn())return;for(let g=0;g<30&&Q.length;g++){const m=Q[0],k=evcKind(m);if(!k||k==="fest"||m.evcN)return;
   if(k!=="harm"&&evcHoldable(m)&&!evcRoom(k)){Q.shift();EVCW.push({m,at:wk(),k});continue}evcSeen(m);return}}
 function evcRelease(){if(!evcOn()||!EVCW.length||Q.length||S.mg)return;const now=wk();
