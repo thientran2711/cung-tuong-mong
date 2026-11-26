@@ -49,4 +49,9 @@ Re-run: `KSEED=23 SAVE=<life.json> node dev/test/nhv/mklife.js` once, then `node
 - Gates on 263668aa: **QUICKCHECK PASS** (open 2159 ms · old save ok · perf render 255/243, tab 635/607, buổi 1831/2952 ms · core gates PASS incl. kit-conform, button-crawl, look-dedupe) · look-dedupe ×10 under 2× parallel load **10/10 PASS** · **coop-e2e alone 143/143** · **area test 57/57** (Fold=iPad same areas+people, no overlap / see-through / cut text / «???» / off-stage plaque) · **art-states 96/96**.
 - Videos (NEW names, every frame looked at): img/_review/nhv-areas/nhv7-{fold,ipad}-{1x,2x}.mp4 + nhv7-*-sheet.png — https://ctm-img.victoria-tntt.workers.dev/img/_review/nhv-areas/index.html
 
+## r8 — review/nhv-areas c685b0d8 (26/11 ~04:30Z, MAIN 151 look point)
+- The grey shapes MAIN 151 saw = KIT §59.1 silhouette art file img/kit/unknown-fig-{f,m}.webp (.ksil), used for servants with no record object and strangers. FIXED: servants get the painted figure of their role (fig-maid / eunuch / man via figFor, stable per name); strangers keep their own painting, softened (blur + less colour). area-test now FAILS on any stand-in (GREY-STANDIN) → **60/60 PASS**.
+- quickcheck c685b0d8: open/old save/perf PASS, core gates PASS except G4 next-dead «Sang buổi» which is FLAKY ON LIVE TOO (paired reruns: mine 3/3 PASS, LIVE 2/3 PASS).
+- Videos NEW names: img/_review/nhv-areas/nhv8-{fold,ipad}-{1x,2x}.mp4 + sheets (looked at every frame: no grey shape on any area scene; the only grey ghosts are LIVE screens outside the garden — the home room stand-in on Fold's first frame, the Kỳ ngộ card figure on iPad → j59 / kitFocus family, not jnhv).
+
 ~92% xong / ~80% chơi được (Ngự hoa viên khu vườn).
