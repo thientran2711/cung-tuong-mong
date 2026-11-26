@@ -21,7 +21,12 @@ const A = process.argv.slice(2); const opt = (k, d) => { const i = A.indexOf('--
        short one's strip (.kscue.sib, placed right after it) is also a direct child of #mb, so #mb had two «:scope > .kscue»: its keep-last
        observer moved one to the end, then the other, for ever */
     nested: () => { const M = document.getElementById('modal'); M.hidden = false; M.innerHTML = `<div class="dlg"><h2>thử</h2><div id="mb" class="body" style="display:block;overflow-y:auto;height:420px"><div class="opts" style="display:block;overflow-y:auto;height:150px">${'<p>lựa chọn</p>'.repeat(40)}</div>${'<p>dòng</p>'.repeat(120)}</div></div>`; kitScrollCues() }
+,
+    /* A2 nc_su b703 case: a card whose normalisation never settles (its rebuild adds nodes every pass) — kaMO used to wake kaNorm on kaNorm's
+       own records for ever (page spinning). Modelled by wrapping kaNorm1 so it always adds a node. */
+    kaloop: () => { const M = document.getElementById('modal'); M.hidden = false; const k0 = window.kaNorm1; window.__k0 = k0; window.kaNorm1 = function (b) { const r = k0.apply(this, arguments); try { b.appendChild(document.createElement('i')) } catch (e) { } return r };
+      M.innerHTML = `<div class="dlg"><h2>thử</h2><div class="opts"><button class="opt">Lựa chọn một</button><button class="opt">Lựa chọn hai</button></div></div>`; setTimeout(() => { window.kaNorm1 = window.__k0 }, 2500) }
   };
-  let bad = 0; for (const [k, fn] of Object.entries(CASES)) { await Promise.race([f.evaluate(fn).catch(() => { }), sleep(4000)]); await sleep(1500); const ok = await alive(3000); const n = ok ? await f.evaluate(() => { let mx = 0; for (const e of document.querySelectorAll('#modal *')) { const c = e.querySelectorAll('.kscue').length; if (c > mx) mx = c } return mx }) : -1;
+  let bad = 0; for (const [k, fn] of Object.entries(CASES)) { if (opt('only') && !opt('only').split(',').includes(k)) continue; await Promise.race([f.evaluate(fn).catch(() => { }), sleep(4000)]); await sleep(1500); const ok = await alive(3000); const n = ok ? await f.evaluate(() => { let mx = 0; for (const e of document.querySelectorAll('#modal *')) { const c = e.querySelectorAll('.kscue').length; if (c > mx) mx = c } return mx }) : -1;
     const pass = ok && n <= 2; if (!pass) bad++; console.log(`${pass ? 'PASS' : 'FAIL'} ${k}: page answers ${ok}, cues in one scroller ${n}`); if (!ok) break; await f.evaluate(() => { const M = document.getElementById('modal'); M.innerHTML = ''; M.hidden = true }).catch(() => { }) }
   console.log(bad ? `FAIL ${bad}` : 'PASS all'); await Promise.race([b.close().catch(() => { }), sleep(5000)]); if (srv) srv.close(); process.exit(bad ? 1 : 0) })().catch(e => { console.error(e); process.exit(2) });

@@ -156,7 +156,14 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  b.innerHTML=`<span class="kat"><span class="kan">${titleH||"&nbsp;"}</span>${odds?`<span class="kodds">${odds}</span>`:""}</span>`+(leadH?`<span class="klead">${leadH}</span>`:"")+kaBody(R,dis)+kinfo}
 function kaNorm(root){try{(root||document).querySelectorAll(KA_SEL).forEach(b=>{try{kaNorm1(b);if(typeof kitNoUnkDom==="function")kitNoUnkDom(b,true)}catch(e){console.error("kaNorm",e)}})}catch(e){}}
 /* disabled state can change after build: keep the class honest */
-let kaQ=false;const kaMO=new MutationObserver(ms=>{if(kaQ)return;let hit=false;for(const m of ms){if(m.type==="attributes"){const b=m.target;if(b.classList&&b.classList.contains("ka"))b.classList.toggle("kdis",b.disabled);continue}if(m.addedNodes.length&&[...m.addedNodes].some(n=>!(n.nodeType===1&&n.classList&&n.classList.contains("kscue")))){hit=true}/* F10: a scroll cue (jksize) is not a card: it never wakes the normaliser (the two fed each other forever) */}if(hit){kaQ=true;queueMicrotask(()=>{kaQ=false;kaNorm(document)})}});
+let kaQ=false;const kaMO=new MutationObserver(ms=>{if(kaQ)return;let hit=false;for(const m of ms){if(m.type==="attributes"){const b=m.target;if(b.classList&&b.classList.contains("ka"))b.classList.toggle("kdis",b.disabled);continue}if(m.addedNodes.length&&[...m.addedNodes].some(n=>!(n.nodeType===1&&n.classList&&n.classList.contains("kscue")))){hit=true}/* F10: a scroll cue (jksize) is not a card: it never wakes the normaliser (the two fed each other forever) */}if(hit){kaQ=true;queueMicrotask(kaRun)}});
+/* F10 (26/11, robots A2 nc_su b703 / R1 / T1d): kaNorm's own DOM edits (kaNorm1 → kpOptArt / kitOptUnify / kitOptFinal rebuilding a card) were
+   records for kaMO → another kaNorm → … a chain that never let the page breathe when one card's rebuild never settles. A pass now takes back
+   the records it made itself; it runs again only for a card that is really new (a KA_SEL button with no data-ka yet), at most BAL.kobs.kaPass
+   passes per wake. */
+function kaRun(){kaQ=false;const N=(typeof BAL!=="undefined"&&BAL.kobs&&BAL.kobs.kaPass)||3;for(let i=0;i<N;i++){kaNorm(document);let more=false;
+ for(const m of kaMO.takeRecords()){if(m.type!=="childList")continue;for(const n of m.addedNodes){if(n.nodeType!==1||!n.isConnected)continue;if(n.matches&&n.matches(KA_SEL)&&!n.dataset.ka||n.querySelector&&[...n.querySelectorAll(KA_SEL)].some(b=>!b.dataset.ka)){more=true;break}}if(more)break}
+ if(!more)break}}
 kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["disabled"]});
 (function(){const kf=kitFix;kitFix=function(root){kf.apply(this,arguments);kaNorm(root)}})();
 /* ---------- the look (scoped to .ka act cards / options) ---------- */
