@@ -166,11 +166,11 @@ function sgRuleArr(a){if(Array.isArray(a))a.forEach((s,i)=>{if(typeof s==="strin
 function sgRuleObj(o,k){const dsc=o&&Object.getOwnPropertyDescriptor(o,k);if(!dsc||dsc.get)return o;/* a getter text (IT.ngocboi) builds itself; reading it here could touch BAL before it loads */const s=dsc.value;if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(o,k,{get:()=>sgRule(s),set:sgRuleSet(o,k),enumerable:true,configurable:true});return o}
 function sgOf(p,v,lbl){return p===S?sgStat(v,lbl):statTxt("sung",v,lbl)}
 function sgRange(a,b,lbl){const x=sgNow(a),y=sgNow(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
-function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{const t=k==="sung"?sgStat(v):statTxt(k,v);if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
+function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{/* stat-pace: a rise shows what it REALLY adds now (jstatpace spSee) */const pv=typeof spSee==="function"&&SP_K[k]&&(v>0||SP_SIGN[k]);if(pv&&k!=="sung")v=spSee(k,v);let t=k==="sung"?sgStat(v):statTxt(k,v);if(pv&&k==="sung"&&v>0){const w=sgNow(v),r=spSee("sung",w);if(r!==w)t=statTxt("sung",r)}if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
-    if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
+    if(k==="sung")v=sg(v);if(typeof spG==="function"&&SP_K[k]){v=spG(k,S,S[k],v,spRk(S));if(!v)continue}/* stat-pace: the one rise rule (jstatpace) */S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
