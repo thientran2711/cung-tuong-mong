@@ -27,16 +27,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
     /* her card for an NPC's ask: PEND.rcvAsk builds the 4 answers she taps (the same RCVK opts an NPC picks from) */
   const herCard=(k,a,x)=>PEND.rcvAsk({k,a:key(a),x:x==null?null:x});
   /* ---- 1. Lập phe cùng: she → NPC (facAct lap) ---- */
-  reset(1);{const t=L()[0];const K=k61S();if(K)K[kOf61(t)]=3;affAdd(t,S,40);const h=facHTML();
+  reset(1);{const t=L()[0];const K=k61S();if(K)K[kOf61(t)]=3;affAdd(t,S,Math.max(40,netTh(t,"than")-aff(t,S)));/* parity-facfix: «likes her» = at least «thân» (a drawn start below 0 left +40 short) */const h=facHTML();
    o.lapBtn=new RegExp('data-fa="lap" data-fv="'+t.id+'"').test(h);const a=pick(t,S,()=>facAct("lap",{fv:String(t.id)}));
    o.lapAns=a.k;o.lapJoined=!!(facOf(S)&&facMembers(facOf(S)).includes(t));o.lapOk=a.k.length===1&&K4.includes(a.k[0])&&o.lapJoined===(a.k[0]==="full");
    reset(2);RCVK.facFound.opts(S,t)[0].go();o.lapYes=!!(facOf(S)&&facMembers(facOf(S)).includes(t))}
   /* ---- 2. Lập phe cùng: NPC → NPC (par3fac cx3:facFound + AGRUN) ---- */
-  reset(3);{const v=L()[0],y=L().find(x=>x!==v&&!sameHouse(v,x));affAdd(v,y,60);for(const x of L())if(x!==y)affAdd(v,x,-100);affAdd(v,S,-100);
+  reset(3);{const v=L()[0],y=L().find(x=>x!==v&&!sameHouse(v,x));affAdd(v,y,Math.max(60,netTh(v,"than")-aff(v,y)));/* parity-facfix: at least «thân» */for(const x of L())if(x!==y)affAdd(v,x,-100);affAdd(v,S,-100);
    const op=opt(v,"cx3:facFound");o.nnOpt=!!op&&op.t===y;const a=pick(y,v,()=>AGRUN["cx3:facFound"](v,op?op.t:y));o.nnAns=a.k;
    o.nnOk=a.k.length===1&&(!!facOf(v)===(a.k[0]==="full"));reset(4);RCVK.facFound.opts(v,y)[0].go();o.nnYes=!!(facOf(v)&&facMembers(facOf(v)).includes(y))}
   /* ---- 3. Lập phe cùng: NPC → HER (law 1 reverse; was never sent: p3FacFr / j10 dropped her) ---- */
-  reset(5);{const v=L()[0];affAdd(v,S,60);for(const x of L())if(x!==v)affAdd(v,x,-100);
+  reset(5);{const v=L()[0];affAdd(v,S,Math.max(60,netTh(v,"than")-aff(v,S)));/* parity-facfix: at least «thân» */for(const x of L())if(x!==v)affAdd(v,x,-100);
    const op=opt(v,"cx3:facFound");o.nhOpt=!!op&&op.t===S;const r=op?AGRUN["cx3:facFound"](v,S):"";o.nhSent=/rủ lập phe với ngươi/.test(String(r));
    const c=herCard("facFound",v);o.nhCard=!!c&&c.o.length===4&&c.o[0].n==="Nhận lời lập phe";Q.length=0;if(c){c.o[0].go()}o.nhYes=!!(facOf(v)&&facMembers(facOf(v)).includes(S))}
   /* ---- 4. Xin vào phe: she → NPC leader (facAct xin) and NPC → NPC leader (cx3:facJoin) ---- */
