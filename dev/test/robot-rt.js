@@ -46,9 +46,14 @@ const T0 = Date.now(), sec = () => Math.round((Date.now() - T0) / 1e3);
 const R = { job: { id: LIFE, origin: A.origin || null, road: A.road || null, bot: BOT, seed: SEED, dev: DEV, url: URL0 },
   harness: { kind: 'realtap', sha: SHA, realtap: true, jsClicks: 0, deadButtons: 0, cap: null, stuck: 0, unstick: [], slice: SLICE || null },
   life: null, exitPick: null, bugs: [], dead: [], saves: [], buoi: 0, steps: 0, status: [] };
+/* TEST HOOKS STAMP (BIG #8 F1 on fd9218fe): every RT_TEST_* self-test and the RT_COLD probe setup (renderer-mem-lib coldHook sends the life to lãnh cung
+   through the game's own cold()) changes the life outside real play; each one in use is written into R.harness.testHooks (kept across resume) so
+   dev/measure/robot-audit.js can mark the life INVALID for play counts. */
+const TEST_HOOKS = Object.fromEntries(Object.entries(process.env).filter(([k, v]) => /^RT_(TEST_[A-Z0-9_]+|COLD)$/.test(k) && v !== '' && v !== '0'));
 /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
 const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
 if (C.resume && fs.existsSync(CKPT)) { try { ck = JSON.parse(fs.readFileSync(CKPT, 'utf8')); Object.assign(R, ck.R); rs = ck.rs >>> 0 || rs; R.harness.taps0 = R.harness.taps || 0; R.harness.resumed = (R.harness.resumed || []).concat([{ at: new Date().toISOString(), buoi: R.buoi, from: ck.at }]); console.log('RESUME', LIFE, 'from', ck.at, 'buổi', R.buoi) } catch (e) { console.log('RESUME failed: ' + e.message); ck = null } }
+if (Object.keys(TEST_HOOKS).length) R.harness.testHooks = Object.assign({}, R.harness.testHooks || {}, TEST_HOOKS);
 /* MOMENT LOG draft (dev/handover/briefs/ROBOT-PLAYER-REVIEW.md §A; Foreman D 25/11 10:35Z «harness writes no MOMENT LOG»): <out>/<life>-moments.md.
    The harness writes the mechanical lines with a shot each — a look every 20 buổi, the first sight of each screen type, rank change, every new bug
    (dead / stuck / no effect = FRUSTRATED, game / page error = ODD), the ending. The runner AI looks at those shots and adds its own feeling lines. */

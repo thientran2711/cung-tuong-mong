@@ -297,3 +297,6 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   no new bug). RT_TEST_SKIP=3 regression Fold flip 10 s / book 4 s / backdrop 8 s, iPad flip 6 s / book 4 s / backdrop 8 s, 0 no-close verdicts. Lint OK.
 - README «fresh browser with the ckpt injected did not advance the title menu»: with the harness resume=1 the title advances (Chơi một mình → Vào cung ngay →
   Chọn sổ «Tiếp tục kiếp này») within seconds; nothing to fix there.
+- BIG #8 F1 (non-blocking, on fd9218fe): every RT_TEST_* self-test and RT_COLD (renderer-mem-lib coldHook → game cold()) in use is stamped into
+  R.harness.testHooks {NAME: value} (merged across resume; RT_COLD=0 / empty = off). dev/measure/robot-audit.js (handover branch) marks such a life INVALID
+  «test hooks used (…)». Check: RT_TEST_SKIP=3 life → testHooks {RT_TEST_SKIP:'3'} → audit INVALID; the E-S1 resume life (no hooks) stays VALID.
