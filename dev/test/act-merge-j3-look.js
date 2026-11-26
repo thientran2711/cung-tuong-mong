@@ -14,9 +14,9 @@ const DEV={fold:{width:755,height:1000,mob:true},ipad:{width:1180,height:820,mob
   await p.waitForTimeout(1500);await p.evaluate(()=>{DRclean();const m=document.getElementById('modal');if(m&&!m.hidden&&!Q.length)m.hidden=true});
   /* one-page Fold: the room page shows first; a real tap on the «Hành sự» tab opens the card page (jk3 K3SH) */
   for(let t=0;t<2;t++){const hb=await p.evaluate(()=>{const g=document.querySelector('.game');if(!g||!g.classList.contains('k3home'))return null;const b=[...document.querySelectorAll('nav button, .tabs button, button')].find(x=>x.textContent.trim()==="Hành sự"&&x.getClientRects().length);if(!b)return null;const q=b.getBoundingClientRect();return {x:q.x+q.width/2,y:q.y+q.height/2}});if(!hb)break;await p.mouse.click(hb.x,hb.y);await p.waitForTimeout(900);await p.evaluate(()=>DRclean())}
-  const list=await p.evaluate(()=>[...document.querySelectorAll('#panel .cards > button')].filter(b=>!b.hidden).map(b=>(deck[+b.dataset.i]&&deck[+b.dataset.i].ddoor?"[cửa] ":"")+((b.querySelector('.kan')||{}).textContent||"").trim()));
+  const list=await p.evaluate(()=>[...document.querySelectorAll('#panel .cards > button')].filter(b=>!b.hidden).map(b=>(b.dataset.ddoor?"[cửa] ":"")+((b.querySelector('.kan')||{}).textContent||"").trim()));
   await p.screenshot({path:`${OUT}/${dn}-1-list.png`});
-  const r=await p.evaluate(k=>{const di=deck.findIndex(a=>a&&a.ddoor&&a.n===k);const b=di<0?null:document.querySelector(`#panel .cards > button[data-i="${di}"]`);if(!b)return null;b.scrollIntoView({block:"center"});const q=b.getBoundingClientRect();return {x:q.x+q.width/2,y:q.y+Math.min(60,q.height/2)}},DOOR);
+  const r=await p.evaluate(k=>{const b=document.querySelector(`#panel button[data-ddoor="${k}"]`);if(!b)return null;b.scrollIntoView({block:"center"});const q=b.getBoundingClientRect();return {x:q.x+q.width/2,y:q.y+Math.min(60,q.height/2)}},DOOR);
   await p.waitForTimeout(600);if(!r){facts[dn]={err:"no door "+DOOR,list};await ctx.close();continue}
   await p.screenshot({path:`${OUT}/${dn}-2-door.png`});
   await p.mouse.click(r.x,r.y);await p.waitForTimeout(1200);

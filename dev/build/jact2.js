@@ -74,9 +74,9 @@ function as2NgheMark(){if(!S)return;S.adDoor=S.adDoor||{};S.adDoor.__nghe=as2Ngh
 (function(){const a0=adHapFire1;adHapFire1=function(h,k){const r=a0.apply(this,arguments);try{if(h&&h.id==="gossip"&&r)as2NgheMark()}catch(e){}return r}})();
 /* ================= ACT-MERGE J3 (owner 26/11 ~07:25Z + ~07:32Z, plan review/act-merge §4 row J3 = dup-report HANHSU_MERGE §3.2 H1–H16) =================
    HÀNH SỰ 38 → 16: ONE FEATURE = ONE BUTTON, on the ONE door engine (J1 dev/build/jdoor.js, DECK doors: DOOR.deck rows, road «hs» = the consort
-   Hành sự). This block only REGISTERS the rows (true duplicates, H-number = HANHSU_MERGE §3.2); jdoor folds the dealt deck (a door when ≥2 ways are
-   dealt, a lone way stays its own card), opens the standard choice card with her figure (pMe), keeps locked ways grey with their reason, and runs
-   the picked way through the SAME act() chain as its old card (same khắc, cost, odds, wrappers, result). No rule, outcome or number moved (law 4);
+   Hành sự). This block only REGISTERS the rows (true duplicates, H-number = HANHSU_MERGE §3.2); jdoor folds the RENDERED panel (display only, deck untouched;
+   a door when ≥2 ways are dealt, a lone way stays its own card), opens the standard choice card, keeps locked ways grey with their reason, and runs
+   the picked way as act(i) of its old card in its own task (same khắc, cost, odds, wrappers, result). No rule, outcome or number moved (law 4);
    NPCs keep their BAL.deck / AGC3BTN tables (law 1).
    ĐỂ RIÊNG (owner ~07:32Z «những cái cần để riêng thì vẫn cứ để riêng»): Điểm trang (H1), Hối lộ Kính sự phòng (H9 lật thẻ), Cầu tự (H10),
    Trò chuyện với cung nữ (H12), Phát bạc cứu giúp (H13), Để ý nam nhân (H15), Giả mang thai (H16) — each a feature of its own.
@@ -92,7 +92,6 @@ const HSD=[/* door key, door name, line, ways (card names) — H-number = HANHSU
  {k:"taimat",h:"H11",n:"Tai mắt",t:"Sai cung nữ dò la, nghe ngóng chung, hay cài tai mắt.",m:[/^Sai cung nữ đi dò la$/,/^Nghe ngóng chung$/,/^Cài tai mắt$/]},
  {k:"roicung",h:"H14",n:"Rời cung",t:"Trốn, xuất gia, xin ban hôn, về quê; nhờ Thái hậu nói giúp trước khi xin.",m:[/^Nghĩ cách trốn khỏi cung$/,/^Dâng biểu xin xuất gia$/,/^Xin ban hôn cho /,/^Xin về quê phụng dưỡng cha mẹ$/,/^Nhờ Thái hậu nói giúp$/]},
  {k:"anthai",h:"(+)",n:"An thai",t:"Uống thuốc an thai, hay báo tin có thai.",m:[/^An thai$/,/^Báo tin có thai$/]}];
-function hsdReg(){try{if(window.DOOR&&DOOR.deck&&!(DOOR.D||[]).some(r=>r.k==="hs-nghi"))HSD.forEach(d=>DOOR.deck({k:"hs-"+d.k,n:d.n,roads:["hs"],h:d.t,t:d.t,re:new RegExp(d.m.map(r=>r.source).join("|")),hs:d.h}))}catch(e){console.error("hsdReg",e)}}
-/* registered before jdoor folds: this deal wrapper runs INSIDE jdoor's outer one (jdoor is assembled later) */
-(function(){const d0=deal;deal=function(){hsdReg();return d0.apply(this,arguments)}})();
-setTimeout(hsdReg,0);
+/* registration only (jdoor is assembled after this file: registered once DOOR exists — at the end of this script task, and before any deal) */
+let hsdOk=false;function hsdReg(){if(hsdOk||!window.DOOR||!DOOR.deck)return;hsdOk=true;HSD.forEach(d=>DOOR.deck({k:"hs-"+d.k,n:d.n,roads:["hs"],h:d.t,re:new RegExp(d.m.map(r=>r.source).join("|"))}))}
+setTimeout(hsdReg,0);(function(){const d0=deal;deal=function(){hsdReg();return d0.apply(this,arguments)}})();
