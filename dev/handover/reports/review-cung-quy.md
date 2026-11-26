@@ -52,3 +52,22 @@ Reviewer session_01D3E3NZRZa7GDM13XyeesMm · depth 4. Every gate rerun on 77d9a6
 Not blocking: the scan checks the fail signal statically. A runtime row per key (forced fail upward → breach line; forced win → none) would have caught #1.
 
 Shots stay on the CDN (FAIL).
+
+---
+# RV2 — review/cung-quy 99876fde — **PASS 99876fde** (fast-forward from origin/main 3af7896e)
+
+Reviewer session_01D3E3NZRZa7GDM13XyeesMm · depth 4. Every gate rerun on 99876fde by me.
+
+| check | result |
+|---|---|
+| RV1 fix 1: jshelf fail branches (shelfFalse + both wave branches) carry cqAccFail | OK. My probe: runAct(Đáp ứng → Quý phi, "xx"), forced fail, shelf path → «Trái cung quy … vu cáo» line. The downward charge has no breach |
+| RV1 fix 2: shelfNpcAccuse goes through the gate | OK. cqRule first (accQ), then cqRun (fail signal + robot counter). Probe with every consort forced to charge the Hoàng hậu: only ranks ≥ BAL.cq.accQ (3) charged; ranks 0–2 skipped |
+| jaudit / jrcv Hoàng hậu verdicts (xinhh, trinhhh) | OK. Their «no» branches mark the fail. cqAccFail charges directly only outside the gate (her deferred Hoàng hậu card), so a charge is paid once and only once |
+| scan cung-quy-scan.js (now with runtime + static rows per open charge) | PASS (42 rank-ruled, 0 unchecked, 0 page errors) |
+| robot cung-quy-rate.js 20 tuần × 1 | 112 acts, **0 breaks**, 2 blocked (provoke, tea) |
+| old save LIVE 3af7896e → 99876fde | PASS (tuần 4→9, 0 errors) |
+| coop-e2e on the CDN build of 99876fde | **143/143** |
+| laws touched | 1 two-way ✓ · 2/3 her breach is warned on every surface and pays a real cost against a real gain ✓ · 4 BAL.cq ✓ · 7 cổ trang words ✓ · 8 expert first ✓ · 9 kit only (Q card, kit «!» detail) ✓ · 11 scan + before/after table ✓ |
+
+Review shots wiped: `cdn_sync.py --wipe-review cung-quy` (4 objects).
+LAND READY: review/cung-quy **99876fde** is a fast-forward of origin/main 3af7896e → MAIN 154 / FOREMAN D.
