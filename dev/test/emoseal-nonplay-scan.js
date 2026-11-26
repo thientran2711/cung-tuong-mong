@@ -10,7 +10,7 @@ const [,,PURL,SZ='1180x820',SEC='20',FLAG]=process.argv;
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(PURL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});
  await p.evaluate(()=>{window.__lean=0;new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1&&(n.matches('.kemo-big')||n.querySelector&&n.querySelector('.kemo-big')))window.__lean++}).observe(document.body,{childList:true,subtree:true})});
- const watch=async(name)=>{await p.evaluate(()=>{window.__lean=0});await sleep(+SEC*1000);const r=await p.evaluate(()=>({lean:window.__lean,seals:document.querySelectorAll('img.kemo').length}));return Object.assign({screen:name},r)};
+ const watch=async(name)=>{await p.evaluate(()=>{window.__lean=0});await sleep(+SEC*1000);const r=await p.evaluate(()=>({lean:window.__lean,seals:document.querySelectorAll('img.kemo').length,np:typeof kesNonPlay==='function'?kesNonPlay(document.querySelector('img.kemo')||document.body):'-'}));return Object.assign({screen:name},r)};
  const R=[];
  R.push(await watch('title'));
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
@@ -22,5 +22,5 @@ const [,,PURL,SZ='1180x820',SEC='20',FLAG]=process.argv;
  await p.evaluate(()=>{const x=document.querySelector('#modal button[data-nl=ok]');x&&x.click()});await sleep(4000);
  for(let i=0;i<12;i++){await p.evaluate(()=>{try{if(typeof closeModal==='function'&&!document.getElementById('modal').hidden){const m=Q[0];if(m&&m.opts&&m.opts.length){const bt=document.querySelector('#modal .opts button:not([disabled])');bt&&bt.click()}else closeModal()}}catch(e){}});await sleep(600)}
  R.push(await watch('PLAY (control)'));
- console.log(`KIT §38.4 emotion-seal non-play scan @${SZ} (${SEC}s per screen)`);R.forEach(r=>console.log(`  ${r.screen.padEnd(36)} leans ${r.lean} · seals ${r.seals}`));if(errs.length)console.log('ERR',errs.slice(0,4));
- await b.close();if(FLAG==='--fail'&&R.slice(0,4).some(r=>r.lean))process.exit(1)})();
+ console.log(`KIT §38.4 emotion-seal non-play scan @${SZ} (${SEC}s per screen)`);R.forEach(r=>console.log(`  ${r.screen.padEnd(36)} leans ${r.lean} · seals ${r.seals} · nonPlay ${r.np}`));if(errs.length)console.log('ERR',errs.slice(0,4));
+ await b.close();if(FLAG==='--fail'&&(R.slice(0,4).some(r=>r.lean)||R[4].np===true))process.exit(1)})();
