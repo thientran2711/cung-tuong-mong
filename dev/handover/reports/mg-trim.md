@@ -227,3 +227,8 @@ Tests (reviewer, c961211e): assemble clean · mg-trim.js on Fold 755x1000@2 and 
 Co-op, coop-thin-f4 ROWS G1,G2: G2 behaves like its sibling G1. Over 3 runs on the branch, the G1/G2 send-or-local row and the plant-screen row both flip between ok and FAIL. G1 on LIVE 6b5d3d05 also FAILED 2 of 3 runs (sent 0, local 1) → pre-existing flakiness at level 9, not caused by this branch. G2 «Giao … chăm» passed its intent row once (sent to the host, 459 ms).
 Laws: 1 ok (slap draw and makeup demand are now the same for her and NPCs) · 2/3 ok (quick options sit below a fair own play) · 4 ok (all numbers from BAL) · 5 ok (rank demand) · 7 ok · 9/10 ok (kit parts only, the new row is kitChip) · 11 ok (Học nhanh / Chăm nhanh families, co-op routing) · 12 ok (videos on both devices) · 16/17 ok (her 05:10Z + 05:45Z words; nothing beyond them).
 Known pre-existing, not this branch: duodo-focus-view 5a–5d, shelf-check, mg-back #1/#6 flaky, coop-thin-f4 G rows flaky.
+
+## LAND READY review/mg-trim c961211e (FF from LIVE 6b5d3d05) — BIG REVIEW #4 PASS (61b51dfe)
+Videos: https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm (wipe img/_review/mg-trim after the verdict giver lands it).
+Open for Foreman D (pre-existing, not this branch): co-op level-9 F4 intents (coop-thin-f4 G1/G2/D1) run local on the guest on LIVE too.
+Vietnamese for sếp: Đã xong bớt minigame theo lựa chọn của sếp: trang điểm một lần bấm theo Dung (còn «Tự tay điểm trang»), tát/né một lần gieo, «Học nhanh» Tùy duyên ở mọi buổi học; chăm thú, tưới cây giữ trò, thêm «Chăm nhanh» và «Giao người chăm». ~100% xong / ~95% chơi được (chờ đưa lên).
