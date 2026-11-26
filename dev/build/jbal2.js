@@ -682,9 +682,9 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
 Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},coop:{npcKept:3},room:{perRoom:4,perBed:2},
  /* D-SELX-FAIR (26/11, measured dev/measure/selx-tune.js + selx-fair.js; law 1): w.duc .15 → .05 (her fresh Đức is 30 at every start while the girls are
     drawn on the consort scale, ≈ 48: at .15 that gap alone put an average player under the base rate of yard.kept / yard.n), w.tai .1 → .15 (talent counts like
-    Sắc), w.mini 1.5 → 2 (the board she plays decides more than the luck); the same formula for every girl. Kept-rate «Cúi đầu» .18 → .47 · board «Giỏi» .42 → .81
-    · «Giỏi» + the valued answers .78 → .97, rising with Tài. */
- w:{sac:.15,duc:.05,tai:.15,mini:2,dd:.75,hx:.75,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
+    Sắc), w.mini 1.5 → 2 and w.dd / w.hx .75 → 1 (the three tests decide more than the luck, keeping the accepted ratio mini ½ · đối đáp ¼ · hành xử ¼, OD 23/11 ~23:47Z (c)); the same formula for every girl. Kept-rate «Cúi đầu» .18 → .45 · board «Giỏi» .42 → .83
+    · «Giỏi» + the valued answers .78 → .99, rising with Tài. */
+ w:{sac:.15,duc:.05,tai:.15,mini:2,dd:1,hx:1,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
  fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Dưỡng Tú viện",x:.303,y:.338,so:[["dong","Đông sở"],["tay","Tây sở"],["bac","Bắc sở"]],sanh:["sanh","Tiền sảnh"]},npcMatch:{hit:8,miss:3,none:5},
  /* THE 3 DAYS (SELSCENE-4, jselxday; OD 24/11 ~07:05Z / ~08:20Z): beat = khắc of each fixed beat (gate + roll-call, rooms, dress, the yard buổi, each test, day-3 teaching;
     yardDrama = yard khắc spent before the yard drama); lesson = the Tiền sảnh drill (k = khắc of effort kỹ / vừa / qua loa; mark 0..10 = base + duc·Đức + eff·effort ± r,
