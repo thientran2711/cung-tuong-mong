@@ -21,3 +21,21 @@ STATE at start: LIVE b881686f · ROLLBACK aa37de21. In flight: «READY TO PUSH f
 - 18:31Z oan gate run killed by my 30-min background limit after audio-ipad (13 done: only global-names (=LIVE), makeup-set + audio-ipad fails → rerun alone). Resumed from info-tap-audit with 2 h limit; os gates start after.
 - 19:20Z RV-OB-NGOAICUNG-3 (session_01V1ZZH1CncuHjsCRna8YJJf): BIG PASS ob-ngoaicung r5 → LAND SLOT review/ob-ngoaicung-r6 fe8b928f (FF on LIVE f573dc94; perf longTaskMax 2444/2181 ≤1.25; NEVER review/ob-ngoaicung-r2). Was a jump-in (after renderer-mem) → place per MAIN 161.
 - (26/11 ~19:45Z) READY TO PUSH 53319e6f on review/lc23-oan (parent LIVE f573dc94; ob-oan-r6 + kit-gloss-lower; MAIN 160 OK'd self-merge). QC PASS old save ok, buổi 1406/1323; only LIVE-identical fails (global-names, tainghe, mg-back, audio-ipad bgm-joy nosw = env, info-tap Hành sự sub-tab clipped). Post-push check: Pages index.html + sw.js vs the 53319e6f build. NEXT READY: review/lc23-os d811a46d (stack ov+km+kw+os) after its gates. (also sent to MAIN 160)
+
+## LC23 HANDOVER (to LC24, opened by MAIN 161 on the new account; written 19:50Z, context ~15 %)
+### STATE
+LIVE = f573dc94 (charge-trinh-punish) · ROLLBACK b881686f. Mailbox to MAIN 161 = dev/handover/MAIN_STATUS.md (old-account seats cannot message it).
+### IN FLIGHT
+1. «READY TO PUSH 53319e6f» review/lc23-oan (ob-oan-r6 + kit-gloss-lower on LIVE f573dc94) — sent to MAIN 160 19:45Z + MAIN_STATUS. After push: post-push check (curl Pages index.html + sw.js vs a 53319e6f built worktree; CHANGE «Nguy hiểm chung: …»).
+2. review/lc23-os d811a46d = ONE STACK LAND ov+km+kw+os on 53319e6f (MAIN 160 OK 18:06Z). Gates = $SP/gates-os.sh (gates-oan22 chain + ob-verdict 84, viecnho-fix, one-core-guard/text, kawhy-verdict, news-sieve, kit-kem-row, one-sieve, kpcheck, rowsprobe, kitRowNil grep) + QC vs f573dc94 — running since 19:46Z; result line follows below if I get it. dup-globals differs from LIVE but = os tip (RV-ONE-SIEVE reviewed). If OB-VERDICT-3 moves ob-verdict: merge its new head on top of lc23-os.
+### NEXT (in order; MAIN 161 decides)
+3. save-fix-stack: ONE land review/save-fix-stack-rv12 fa4c0945 (on b881686f; carries inv-stack-rv) on B's LAND READY (ETA ≈19:30Z); never rv9/10/11. Jumps in when ready. Merge onto LIVE (ctp landed after it was cut).
+4. ob-ngoaicung r6 fe8b928f (RV-OB-NGOAICUNG-3 BIG PASS 19:20Z; FF on f573dc94; never review/ob-ngoaicung-r2) — jump-in, place per MAIN 161.
+5. Clean kit slots (RV-KK41): kit-home-frame f75a3f3c, kit-name-stranger e25dfd52 (kem-row a5ff660a is already inside lc23-os).
+6. Rest of LC22 queue: ob-m3ui-sololh eca83a5d → endcard-top-r6 3f38961f → kit-bac-progress cb221604 (fixes tainghe) → srvmerit r2 c7f4fc0a → NHV 50840478 → D cung-quy 99876fde → contest-thitam 2c956d97 → d-stack-lr3 cb398c07 → stat-pace d04561e8, srv-rank 8559fea2 → D mg-trim-r6 543ca579 ALONE → promo-root3 987c3599 (test only). renderer-mem 2b5bbbb3 jump-in on PASS.
+### HOLD / PULLED (do NOT land)
+kit-stage-r2 ec2f7c43 (kitHand/kitPick look not approved; wait «sếp approved» in MAIN_STATUS) · kit-g4-r2 4dbce886, kit-empty-rows cda34e5e, kit-g4-baseline 6b7df96b (§6.7 kitRowNil hide; owner keeps all rows) · firstcard-2-rv de123ff3 (no-roll life options: no odds word + «Cẩn thận khi lựa chọn»; wait new sha) · map-zones-r7 9c8985ab8 (icons as big as «Ta», never shrunk; KK44) · dialog-order lc22-do 04fed510 (dress-tap regression).
+### KNOWN LIVE-identical fails
+global-names 1 CLASH; tainghe-info TypeError; mg-back FAIL 1 + FAIL 6 / 2/12; audio-ipad bgm-joy nosw rs:0 (flips; fails on LIVE f573dc94 2/2 at 19:30Z, passed at 17:50Z → CDN/env); info-tap-audit iPad Hành sự sub-tab «clipped» (label varies); makeup-set / stage-stay / info-tap flake under load → rerun alone.
+### TOOLS
+dev/handover/reports/lc22-tools/ (gates-*.sh: fix SP=; gates-oan22.sh ob-oan old-save root = LIVE worktree; srv.py utf-8 server). Background runs: ALWAYS pass a long timeout (default 30 min killed my oan chain once). Handover branch pushes: fetch + reset --hard origin + append + push (rebase over the shallow fetch breaks with add/add conflicts).
