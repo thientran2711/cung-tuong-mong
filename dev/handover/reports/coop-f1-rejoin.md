@@ -77,3 +77,26 @@ TODO for the successor (all on a44e3cbb, nothing else to code unless a gate fail
 3. quickcheck ALONE with `CTM_LIVE_REF=5e013076` (origin/main f009e1a6 failed to load as «live» here). Known PRE-EXISTING: G4 button-crawl «fold · Ô lưu · Lui · close did not close its layer» fails identically on base 04a45597 (A/B done) — report, not this branch. fix-7 rv saw the same row PASS on a32a931d, so recheck it on a44e3cbb.
 4. Videos: `VIDEO=<dir> ROWS=P1,P8 node dev/test/coop-f1-rejoin.js` (+ COOP_SWAP=1), ffmpeg webm→mp4, put in img/_review/coop-f1-rejoin/ (overwrite the 4 old ones), `python3 dev/site/cdn_sync.py img/_review/coop-f1-rejoin`, curl 200, rm the local folder, look at frames 3×.
 5. Write «SẴN SÀNG KIỂM <sha>» here + STATUS line; tell Foreman B (child 2 = session_01N1tNP3uEmVZq9qfYDmWJUZ) to open the BIG opus reviewer.
+
+## RE-REVIEW (BIG co-op rv session_01N1tNP5jcP3hHwSv7nspxfp, 26/11 ~07:00–09:30Z) — head a44e3cbb41e6125db5a888e768dff9f3b32f6001 → **PASS**
+PRIORITY #1 CHECK: as in «## REVIEW» above + the head now merges review/robot-coop-fix-7-r3 a32a931d (LAND READY 01:40Z, rv 2KxFM4UD).
+FAIL rows of 112fab25 CLOSED: (a) the waiting panel «Đợi hảo hữu chọn thân phận» «‹ Về màn đầu» → jcooplobby back() pg "pick" → CTM_ROOM_LIFE.askThen = the same kitConfirm «Rời phòng?» (friend told by the "say" line; «Thôi» = back on the panel; PG "pickask" so the host's pick still lifts the title and the confirm stays over her game); fallback leave only when the socket is not open. (b) fix-7 r3 in: ☰ in a co-op life = the life menu (Trở lại cuộc chơi / Rời phòng / Sổ luân hồi / Bảng vàng / Thiết lập + ✕), ✕ / Esc / ‹ Lui go back to the game, freeze «Về màn đầu» = the same confirm. ONE confirmed leave for every co-op leave button (law 11). Code read: no other COOP.leave / leaveRoom path mid-room except the confirmed one and the solo-sổ capture (by design).
+| gate (local wrangler dev :8788 unless said) | result |
+|---|---|
+| coop-f1-rejoin.js P1–P9 COOP_SWAP unset / =1 | **82/82 / 82/82** rc 0 |
+| MUTATE: the new test on 112fab25 build, ROWS=P8 | FAIL (no «Rời phòng?», seat off at once, host freezes) = the old fault |
+| coop-e2e SWAP0 / SWAP1 | 143/143 / 143/143 |
+| coop-presence-reload SWAP0 / SWAP1 | 35/35 / 35/35 |
+| coop-title-leave SWAP0 / SWAP1 | 110/110 / 110/110 |
+| title-never-bare | 18/18 |
+| coop-keymove-unit | 12/12 |
+| coop/worker npm test | merge · vault 48 · seat · stale · thin · range · presence ALL OK (Worker unchanged) |
+| build | assemble.py on the head = no diff |
+| sangbuoi-held | Fold+iPad all rows PASS except Fold D «setup: card already painted» in 2 of 3 full runs (test precondition: a queued card painted itself, dqWake, before the 200 ms check — not a game assertion). Targeted: CASES=D ×5 = 10/10 PASS, CASES=CD ×3 = 12/12 PASS. Base 04a45597 full run PASS. Run 1 iPad A FAIL was under load (2 suites in parallel), PASS in runs 2–3. → flake of the test set-up, not this diff (diff = lobby / title menu only). Foreman B: own lane if it repeats. |
+| quickcheck ALONE (CTM_LIVE_REF=5e013076) run 1 / run 2 | core gates PASS incl. G4 90-button-crawl (**«Ô lưu · Lui» cured**; base 04a45597 still FAILS it) / G4 50-coop-one-world seed 7 FAIL once → re-run seed 7 ×3 PASS (flake; diff touches no merge). open ~2 s, old save ok both. perf buổi run 1 3918 vs live 2116 (FAIL), run 2 2174 vs 3847 (PASS); base run: 2054 vs live 5890 → the buổi number is bimodal by random life (live itself 2116↔5890), render/tab ≈ live. |
+| real 2-seat runs, REAL taps (touchscreen Fold / mouse iPad), both seatings, videos | 23/25 each — the 2 FAILs were my probe reading only 90 chars of the menu; the video frames show the co-op life menu right. Videos (CDN, not git, ~150 s each): img/_review/coop-f1-rejoin/f1r2-hostFold-755x1000.mp4, f1r2-guestIpad-1180x820.mp4, f1r2-hostIpad-1180x820.mp4, f1r2-guestFold-755x1000.mp4 — guest reload while the host is on «Thân phận kiếp này» → Cùng hảo hữu › Trở lại phòng → waiting panel (never the invite) → «‹ Về màn đầu» → «Rời phòng?» → Thôi → still on the panel → host Nhận thân phận → both in the game → ☰ = co-op menu, ✕ back → guest Rời phòng confirmed → host freeze «Hảo hữu đã rời phòng». Frames looked 3×: no cut text, no overflow. |
+| reviewer close scan (mid-play, random #modal/.dlg/#kpop closed by own ✕/Lui, real taps) on 112fab25 | 0 leaves; P9 covers it on the head |
+Laws: 1 n/a · 4 no number · 7 wording = existing kit confirm lines (VANPHONG ok) · 9 kitConfirm + existing kit panels, no new part · 11 one confirmed leave for every co-op leave button + landed() for every way in · 12 Fold + iPad videos · 13 check line · 14 old join() guard and old leave lines replaced in place · images: none in git.
+LAND: branch = 04a45597 (B co-op land head) + F1 + fix-7 r3 → lands AFTER coop-week-wait-land and INSTEAD of fix-7 r3 (or after it). Without 04a45597: jcooplobby.js / j74.js / jslots.js are identical on LIVE 02f564ae, 5e013076 and 04a45597, so the game diff (git diff 04a45597 a44e3cbb -- dev/build) applies cleanly onto LIVE; only dev/test/lib/coop-clear.js conflicts — a LIVE port is possible but needs its own rebuild + gate run (not done here). Worker deploy: NO.
+
+**LAND READY review/coop-f1-rejoin a44e3cbb41e6125db5a888e768dff9f3b32f6001**
