@@ -85,16 +85,13 @@ Hang files: CDN img/_review/renderer-mem/5e013076-tp-{hot-2,off-3,hot-3}-hang.js
 - «Page crashed» = memcg OOM kill (dmesg, 7 kills, chrome renderer anon-rss 5.1–9.2 GB). Harness rssTree under-reports (logged 1.7 GB vs ps 8.5 GB).
 - Leak signature: page stuck/idle on one screen, renderer +~280 MB/min until killed (timid-2 b77 01:08–01:35Z after «Chương 2: Sơ thừa ân sủng» card; off-1 b286). Normal play 1.3–2.5 GB. Sampler: /home/user/wt/rsslog.sh -> rsslog.txt. Evidence CDN img/_review/renderer-mem/.
 
-## FOR FOREMAN F (harness owner), 26/11 08:58Z
-The selection-scene block on LIVE ≥ f009e1a6 (6b5d3d05 included) is a ROBOT GAP, not a game softlock.
+## FOR FOREMAN F (harness owner), corrected 26/11 11:45Z
+The selection-scene block on LIVE ≥ f009e1a6 is a ROBOT GAP, not a game softlock.
 
-Proof:
-- /home/user/wt/probe/cardtap.js loads off-1's stuck save, taps the VIỆC scene card (`.kscn-veil .kdv-next`, «Chạm để tiếp ▸», tap point about 40 px above the cue on the card), and the scene goes on.
-- After 2 taps the «Đông sở» choice frame opens.
-
-The robot never taps the card. Its INFO / LAYER sets have no `.kscn-veil`, so it keeps tapping the nav under the veil and hits DEAD BUTTON «cover div.kscn-veil». Then its stuck detector fires («Sang buổi disabled with no dialog on screen»).
-
-Local fix (review/temper-g4 robot-rt.js, INFO()):
-- Return the card point when `.kscn-veil .kdv-next` is visible.
-- Key per card text, because infoTry caps 3 taps per key and a scene has many cards.
-- Please port it into the shared harness.
+- The scene card is `.kdv-box` (`.dlg.kpanel.kscn-box`), and its «Chạm để tiếp ▸» cue is `.kdv-next` inside it.
+- `.kscn-veil` is an EMPTY sibling veil, not the card's parent. The robot's LAYER/INFO sets do not know the card, so it taps the nav under the veil (DEAD BUTTON «cover div.kscn-veil») until its stuck detector fires.
+- Fix, local on review/temper-g4 7c0258ab, robot-rt INFO() and the info-tap step:
+  - When `.kdv-box .kdv-next` is visible, tap the CENTRE of the `.kdv-box`.
+  - Key per card text, up to 12 taps per key, 900 ms apart: a card can ignore taps for a while.
+- Verified on 6b5d3d05: lanes even-2, hot-2, hot-3 and timid-2 walked the whole selection scene (31–36 card taps each) up to the Điện tuyển result.
+- Please port this into the shared harness.
