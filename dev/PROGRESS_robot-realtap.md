@@ -487,3 +487,37 @@ OPEN (not started):
   a setItem probe at CP: write+remove a 1-char key, catch the quota error in page and log it); (b) at each CP (the «save N chars» block, R.saves) parse S.buoi/S.year
   (and turn) from the stored hclh-save-v2-<slot>; if it lags R.buoi by > 20 buổi → bug «SAVE STALE stored b<x> live b<y> chars <n>» once per 100 buổi.
 Re-run patterns: see items 1–7 above (LIVE https://thientran2711.github.io/cung-tuong-mong/ works from this container; pin on by default).
+
+## HARNESS FIXER #11 (11/26/2026, session_01UV1SziEmdhraQi2ni7YZ4B; worker of F #23; START_CTX ~5 %)
+PRIORITY #1 CHECK: OD robot rules 25/11 (F-robot-2511.md) | main dev/measure/robot-audit.js | review/robot-realtap 8ea10d7e (BIG #10 PASS) | claims HARNESS FIXER #11 (F #23 14:30Z).
+Harness only, no game change; 0 .click()/dispatchEvent in play paths (git grep: only the realtap.js comment); lint OK; rt-bare-unit 16/16; robot-audit-unit 12/12.
+8. JOB 8 BOARD LOOP: the board loop left after 6 s with no peek (a «xem bước» / «nhìn kỹ» show phase, a slow note) and then area-tapped blind. Now it stays while
+   KG82.phase is «play» (the board's end, its timer, or the game guard ≤ 97.5 s), every persona and kind; a board that never gives a peek gets bare area taps on its
+   canvas; > 6 min still in play = harness bug. Every board logs «BOARD <kind> N moves <result>» (0 moves too) in the run log, the trace and harness.boards (+ boardN).
+   Proof (LIVE 1dcb373e+ pinned 5ab5b80e406e): RT_TEST_BOARD Fold mua 11 moves 2/10 (48 s), dan 11 moves 0/10, iPad theu 32 moves 10/10, mua 24 moves 10/10 (cautious),
+   dan 16 moves 4/10 (bold), hoa→ve 2 moves + 18 canvas taps, round to the guard (97 s); natural boards: Fold speed seed 2305435383 «ban 6 moves 4/10» (then Ban hoa b1 =
+   real ending), Fold sens/cautious seed 72 «mua 24 moves 10/10», «hat 87 moves 2/10», «dan 18 moves 7/10». (The E-S1 iPad seed gave no board within 8 buổi.)
+   Note for MAIN (not harness): Đàn / Hát timed boards score low even with every peek hit (dan 11 moves 0/10, hat 87 moves 2/10) — the ±90 ms window vs real-tap latency.
+9. JOB 9 SAVE QUOTA: (a) page console «error» → run log «PAGE CONSOLE error: …» (each distinct text 3×, then every 100th; resource errors name their file);
+   the game's save() swallows its setItem error (j6 try/catch), so a passive Storage.setItem observer (addInitScript) records the failure, console.errors
+   «[rt] localStorage.setItem failed: QuotaExceededError key … (N chars)» and RE-THROWS (game flow unchanged) → bug game «QuotaExceededError …» + CP «CP SAVE ERROR».
+   (b) live clock → buổi map (R._clk); at each CP the stored hclh-save-v2-<slot> clock is parsed; lag > 20 buổi → «BUG SAVE STALE stored b<x> live b<y> chars <n>»
+   once per 100 buổi (+ harness.saveStale, bug game «SAVE STALE …»). Self-test RT_TEST_QUOTA=<buổi> fills the origin to its quota (__rtfill* keys).
+   Proof: iPad q-i seed 72 «BUG SAVE STALE stored b2 live b25 chars 104305 (stored clock 1.0.0.1, live 1.2.0.0, QuotaExceededError)» · Fold q-f2 seed 72
+   «BUG SAVE STALE stored b2 live b25 chars 117293 (… QuotaExceededError)»; both with the QuotaExceededError console line from b2.
+11. JOB 11 «area tap blocked» (s15b Fold ×3 at b66; s15b data from its ckpt: 2× the LIVE emotion seal img.kemo[role=button] «kemo-binh kemo-live kemo-m-nod» /
+   «kemo-vui … sway», 1× an option card «… Rất vững» mounting on the first day). Root: the bare check looked at the TOP element once; a moving button (jemoseal
+   idle sway / lean) or a mounting card reached the point before the touch; the guard cancelled the tap (no wrong tap happened, the harness logged it). Not a game
+   layer covering a button → no DEAD BUTTON / GAME BUG. Fix (whole family: every bare tap = area / backdrop / NO-EXIT / unstick / board miss goes through ONE
+   check, moved to realtap.BARE_CHECK): bare only if no button on top; no button under a see-through or LEAVING layer (transition / finite animation; a looping pan
+   such as the kmeg scene backdrop and a steady backdrop are fine); no animated button within 0.35 × its size (≥ 40 px); the same 120 ms later. Else 'covered: <why>'
+   → the caller tries another point (harness.bareCovered + bareCoveredBy). Every block that still happens logs «AREA BLOCKED {screen, x, y, ev, hit, tgt, dt, top0}».
+   Live check (Fold cautious 72 / iPad cautious 62, 6 buổi): bareBlocked 0, bareCovered 86 / 86 (moving bobbing figure button.tok.fig.bob, kbtn, kscn-veil leaving).
+   Unit dev/test/rt-bare-unit.js 16/16 (Fold touch + iPad mouse: bare, button, leaving layer, steady backdrop, old check = blocked, live seal, looping pan, mount).
+12. JOB 12 (BIG #10 N1): RESUME with no / empty save in the ckpt = «RESUME: NO SAVE IN CKPT …» + harness bug; content compare per hclh-save key (FNV-1a hash + parsed
+   clock; a different clock = harness bug). Proof: iPad rs-i «content identical (hash 61d6d1de · 61d6d1de, clock 1.0.1.1 · 1.0.1.1)»; Fold rs-f (a real buổi-1 ckpt
+   with no save) and iPad ns-i (save stripped) «RESUME: NO SAVE IN CKPT».
+13. JOB 13 (BIG #10 N2, handover branch dev/measure/robot-audit.js): «with undefined options» → «(option count not recorded)»; robot-audit-unit 12/12.
+14. JOB 14: no CP before the game clock is up (sc.S.y defined) → rs-i first CP after RESUME «CP buổi 7 year 1».
+15. JOB 15 (KK43 / MAIN 160): a close counts toward NO EFFECT only when its OWN layer stays open (the tapped close, or the same close at its spot, still on screen);
+   the shop card «Lui» (button.kit-x[data-kshdetx] in .kshdet) closing only the card = harness.closeOwnLayer, not a dead ✕.
