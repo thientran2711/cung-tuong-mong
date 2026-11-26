@@ -92,7 +92,7 @@ window.dfActs=dfActs;window.dfRun=dfRun;window.dfEng=dfEng;window.dfCls=dfCls;
 /* ================= ACT-MERGE J2 (harm / scheme / accuse doors P5–P14; OD 26/11 ~07:25Z + ~07:32Z; plan review/act-merge §2 G1–G3): the PARTS OF THE ONE
    DOOR ENGINE (jdoor.js, J1) that read the Hậu cung card and her in-person acts. The rows (which act sits in which door, tier, roll, way) live in jdoor.js
    (DOOR.add, «J2 ext»); this file only: (1) folds the card's member buttons into door buttons (the outermost rvGroups wrapper), (2) gives PEND «door» its
-   members from the card (DOOR.card) and from her in-person acts in the pop-up (DOOR.more), each running its OLD click path (jsgame scheme game →
+   members from the card (DOOR.cardM) and from her in-person acts in the pop-up (DOOR.more), each running its OLD click path (jsgame scheme game →
    doAct + every wrapper: j70 chains, jtamco ways, jslap / jlooks games, jptime sends; empAct), with the old button's own kit line (law 4: nothing typed). ==== */
 /* one card button html → {n, x (its raw kit line), why, off} */
 const DOOR_LAB={"tốn":"tốn","thành":"thành","được":"thành","bại":"hỏng","hỏng":"hỏng","mất":"hỏng","kèm":"kèm"};
@@ -118,14 +118,14 @@ const DOORC={raw:0};
 function doorCardAll(i){const v=rivals[i];if(!v)return[];DOORC.raw++;let G=[];try{G=rvGroups(v,i)}finally{DOORC.raw--}
  const L=[];for(const g of G)for(const h of g[1]||[]){const id=doorCardId(h);const m=doorJ2Id(id);if(!m)continue;const b=doorCardBtn(h);if(!b)continue;
   const k=id.slice(2);b.id=id;b.r=m.r;b.go=id[0]==="a"?()=>doorFireAct(i,k):()=>empAct(i,k);L.push(b)}return L}
-function doorJ2Attach(){if(typeof DOOR!=="object"||!DOOR||DOOR.card)return;
- DOOR.card=(i,r)=>doorCardAll(i).filter(b=>b.r===r);
+function doorJ2Attach(){if(typeof DOOR!=="object"||!DOOR||DOOR.cardM)return;
+ DOOR.cardM=(i,r)=>doorCardAll(i).filter(b=>b.r===r);/* card members (J1 owns DOOR.card = the generic card) */
  /* her in-person Hậu cung acts in the pop-up (dfInPerson: Tát, Phạt quỳ, Hắt nước, Hắt trà, Quạt mực) — same lock; lines = her card's rows */
  DOOR.more=(p,r)=>{try{const v=p&&p.ref;if(!v||!(p.kind==="rival"||p.kind==="hh"))return[];const done=S.visit&&(S.visit.talked===true||(S.visit.tk||{})[curPeople().indexOf(p)]);if(done)return[];
   const ks=dfInPerson(p).map(x=>"a:"+x.k).filter(id=>{const m=DOOR.ofId(id);return m&&m.r===r});if(!ks.length)return[];const ri=rivals.indexOf(v);return doorCardAll(ri).filter(b=>ks.includes(b.id))}catch(e){console.error("door more",e);return[]}}}
 /* (1) the consort card: the outermost rvGroups wrapper folds the member buttons into ONE door button per row (kit group = the row's cat) */
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v,i){const G=g0.apply(this,arguments);if(DOORC.raw||!v)return G;
- try{doorJ2Attach();if(typeof DOOR!=="object"||!DOOR.card)return G;const left=[],M=new Map();
+ try{doorJ2Attach();if(typeof DOOR!=="object"||!DOOR.cardM)return G;const left=[],M=new Map();
   for(const g of G){const keep=[];for(const h of g[1]||[]){const id=doorCardId(h);const m=doorJ2Id(id);if(m){if(m.role!=="hide"){const b=doorCardBtn(h);if(b){b.id=id;if(!M.has(m.r))M.set(m.r,[]);M.get(m.r).push(b)}}}else keep.push(h)}
    if(keep.filter(Boolean).length)left.push([g[0],keep])}
   const add={};for(const r of DOOR.T){const L=M.get(r);if(!L||!L.length)continue;const gn=r.k==="P13"?"Quyền Hoàng hậu":(KIT_CAT[r.cat]||[r.cat])[0];

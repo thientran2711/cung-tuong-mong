@@ -1,4 +1,4 @@
-/* ACT-MERGE J2 test (harm / scheme / accuse doors P5–P14 = jdoor DOOR rows «J2 ext» + jdf card fold / DOOR.card / DOOR.more). usage: node dev/test/act-merge-j2.js [url]
+/* ACT-MERGE J2 test (harm / scheme / accuse doors P5–P14 = jdoor DOOR rows «J2 ext» + jdf card fold / DOOR.cardM / DOOR.more). usage: node dev/test/act-merge-j2.js [url]
    Whole family, every scenario (dau/cao/hh/con) × every live consort she can act on (card) and every consort met on Dư đồ (pop-up):
    T1 card: no member act button left outside its door; every door has ≥1 option; every member the OLD card showed is reachable in its door
       (rep / way shown as an option; a roll member = one of the tier's pick pool) — nothing dropped.
@@ -21,14 +21,14 @@ const URL=process.argv[2]||'file://'+path.join(ROOT,'index.html');
     DOORC.raw++;let raw=[];try{raw=rvGroups(v,i)}finally{DOORC.raw--}const after=rvGroups(v,i);const AH=after.flatMap(g=>g[1]).filter(Boolean);
     T.card.push([sc,raw.flatMap(g=>g[1]).filter(Boolean).length,AH.length]);
     const rawIds=raw.flatMap(g=>g[1]).map(idOf).filter(id=>memb(id));
-    for(const r of J2){const L=DOOR.card(i,r);const has=AH.some(h=>String(h).includes(`data-door="${r.k}"`));const lone=L.length===1&&!(r.roll||[]).length;
+    for(const r of J2){const L=DOOR.cardM(i,r);const has=AH.some(h=>String(h).includes(`data-door="${r.k}"`));const lone=L.length===1&&!(r.roll||[]).length;
      if(L.length&&!lone&&!has)fail('T1 '+sc,`${v.name}: ${r.k} has members but no door button`);
      if(!lone)for(const h of AH){const id=idOf(h);const m=memb(id);if(m&&m.r===r)fail('T1 '+sc,`${v.name}: member ${id} outside door ${r.k}`)}
      const O=DOOR.rowsJ2(r,L,v);const shownN=new Set(O.map(o=>o.n));
      for(const id of rawIds){const m=memb(id);if(m.r!==r||m.role==='hide')continue;const b=L.find(x=>x.id===id);if(!b){fail('T1 '+sc,`${v.name}: ${id} not a member of ${r.k}`);continue}
       const t=(r.tiers||{})[id];if(shownN.has(t?`${b.n} · ${t}`:b.n))continue;const g=(r.roll||[]).find(g=>g.includes(id));if(g&&O.length)continue;fail('T1 '+sc,`${v.name}: ${id} not reachable in ${r.k}`)}
      const S0=spy();try{for(const m of L){const n=S0.log.length;try{m.go()}catch(e){fail('T2 '+sc,`${r.k} ${m.id} threw ${e.message}`)}const got=S0.log.slice(n).join(',');if(got!==m.id)fail('T2 '+sc,`${r.k} ${m.id} fired «${got}»`)}}finally{S0.undo()}}
-    try{const d=mkP('door',{r:i,k:'P7'});if(DOOR.card(i,DOOR.byK('P7')).length&&!(d&&d.o&&d.o.length>1))fail('T2 '+sc,`${v.name}: PEND door P7 card mode empty`)}catch(e){fail('T2 '+sc,'PEND card '+e.message)}}
+    try{const d=mkP('door',{r:i,k:'P7'});if(DOOR.cardM(i,DOOR.byK('P7')).length&&!(d&&d.o&&d.o.length>1))fail('T2 '+sc,`${v.name}: PEND door P7 card mode empty`)}catch(e){fail('T2 '+sc,'PEND card '+e.message)}}
    /* T3 pop-up */
    for(const [i,v] of rivals.entries()){if(!v.alive||v.out)continue;S.visit={k:S.place,people:[rp(v)],talked:false,tk:{},msg:"",cap:{}};popIdx=0;const pp=curPeople()[0];
     let opts=[],raw=[];try{opts=talkOpts(pp);raw=doorRaw(pp)}catch(e){continue}const ip=dfInPerson(pp).length;
