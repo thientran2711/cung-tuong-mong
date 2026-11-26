@@ -7,7 +7,7 @@ const VOALIAS={"f-softlaugh":"f-laugh-soft","old-hmph":"old-f-hmph","m-chuckle":
 function voFiles(k){k=VOX[k]?k:(VOALIAS[k]||k);const L=VOX[k];if(L&&L.length)return L.map(f=>/^audio\//.test(f)?f:"audio/"+f);return [1,2].map(n=>`audio/vo-${k}-${n}.mp3`)}
 const VO={cur:null,last:{}};
 function voice(k,force){try{if(!auOk()&&!force)return;if(!force&&Date.now()-(VO.last[k]||0)<6000)return;VO.last[k]=Date.now();const vol=OPT.vo==null?.7:OPT.vo;if(!vol)return;
- if(VO.cur){try{VO.cur.pause()}catch(e){}}const a=new Audio(pick(voFiles(k)));a.volume=vol;VO.cur=a;a.addEventListener("error",()=>{if(VO.cur===a)VO.cur=null});
+ if(VO.cur){try{VO.cur.pause()}catch(e){}}const a=typeof auSrc==="function"?auSrc(new Audio(),pick(voFiles(k))):new Audio(pick(voFiles(k)));a.volume=vol;VO.cur=a;a.addEventListener("error",()=>{if(VO.cur===a)VO.cur=null});
  AU.duck=.6;if(AU.cur)AU.cur.volume=musVol();a.addEventListener("ended",()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol();if(VO.cur===a)VO.cur=null});const p=a.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}}
 /* which voice a card calls for: the MEANING of the card first (tone), then the speaker (sex, age).
    Owner 11/15 ("Có người đến": a consort sends back my gift, 'không dám nhận', played a laugh): a word like "tặng" says nothing about the

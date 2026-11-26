@@ -211,9 +211,14 @@ function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){
 function agFlush(){if(AG.q){AG.q.all=1;agSlice()}}
 function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95,buoi:(()=>{const M=AG.bt.slice().sort((a,b)=>a-b);return M.length?{n:M.length,p50:+M[Math.floor(.5*M.length)].toFixed(2),p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2)}:null})(),sync:(()=>{const M=(AG.sms||[]).slice().sort((a,b)=>a-b);return M.length?{n:M.length,p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2),max:+M[M.length-1].toFixed(2)}:null})()}}
 window.agPerf=agPerf;
+/* tinbao-words (MAIN 147 look 25/11): the reason of a deed said as ONE natural clause — «, vì <lý do>» only when there is a real reason (no filler «vì tiện tay» /
+   «vì lo việc của mình»), the origin as its own clause «; vốn xuất thân <gia thế>» (never glued with « · » or «, vốn là»). p.why = agWhy() text. */
+const AGWHY_FILL=/^(tiện tay|lo việc của mình)$/;
+function agWhySay(why){const t=String(why||"").trim();if(!t)return"";const i=t.indexOf(", vốn là ");const w=(i>=0?t.slice(0,i):t).trim(),o=i>=0?t.slice(i+9).trim():"";
+ return `${w&&!AGWHY_FILL.test(w)?`, vì ${w}`:""}${o?`; nàng vốn xuất thân ${o}`:""}`}
 function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?/* the deck act's own gain (BAL.deck via j75), ONE CORE */((window.npcEffortKind&&window.npcEffortKind(v))||{}).w||{}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
  for(const n in W){const x=(N[n]||0)*W[n];if(x>bv){bv=x;best=n}}let w=best?AGWHY[best]:"tiện tay";if(best==="spite"&&c.t)w+=` ${c.t===S?"ngươi":c.t.name}`;
- if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w} · ${o}`:w}
+ if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w}, vốn là ${o.replace(/ · /g," ")}`/* tinbao-words: a clause, never the « · » glue inside a sentence */:w}
 function agPlan(v,c,N,kh,k){const z=agZ(),R=agRec(),id="v"+v.id;const why=agWhy(v,c,N);const tid=c.t?ledgerId(c.t):null;
  const p={key:agKey(),id,vid:v.id,k:c.k,kd:c.kd||"",t:tid,kh,pl:k,act:c.act,why};z.pend.push(p);z.did=z.did||{};z.did[v.id]=p.key;
  if(R&&R.P[id]){const was=R.P[id][kh]&&R.P[id][kh][0];R.P[id][kh]=[k,"ag_"+c.k,tid,why];
@@ -273,7 +278,7 @@ function agKhLock(){const k=BAL.ag.kh;return typeof can==="function"&&!can(k)?(t
 function agSpendKh(){const k=BAL.ag.kh;if(!can(k))return false;spend(k);return true}
 function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();const kh=BAL.ag.kh;const lock=agKhLock();
  O.push({n:"Nghe lén",r:"hear",fx:{},x:`${word(o)} · tốn: ${kh} khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?` · chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}`:""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
-  go:()=>{if(!agSpendKh()){agLand(p);return}if(agTry(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
+  go:()=>{if(!agSpendKh()){agLand(p);return}if(agTry(o)){noteAdd(v.id,`nghe nói nàng ta hay ${p.act}${agWhySay(p.why)}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén được: ${v.name} ${p.act}${agWhySay(p.why)}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
    else if(agSoft(o))agSoftTxt(S,"Nghe lén");else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
  const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");

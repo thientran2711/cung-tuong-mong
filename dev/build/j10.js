@@ -16,12 +16,16 @@ function hhHas(p){const L=((p&&p.staff)||[]).filter(s=>s&&!s.coop);return[L.filt
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;
  const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:nmNew(role==="maid"?"maid":"eun"),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
+/* SELSCENE-18 (law 11, the servant-id family): the highest sid any person still holds — every household (allServ: S, rivals, the Thái hậu's
+   elders via jstaff), her Nội vụ phủ pool (S.npool, not in allServ: a reload issued a pool servant's sid again) and her maid; a co-op
+   stand-in (coop:true, sid = the friend's pid 901/902) never counts. Every place that sets sidN from the living reads this. */
+function sidTop(){let m=0;const sc=s=>{const n=s&&!s.coop?+s.sid:0;if(n>m)m=n};try{allServ().forEach(sc)}catch(e){}try{const P=S&&S.npool;if(P)for(const r in P)(P[r]||[]).forEach(sc)}catch(e){}try{if(S&&S.maid)sc(S.maid)}catch(e){}return m}
 /* perf (review ag-all-2 r2 B5): the last owner found is checked first (one includes on one list); a moved servant falls through to the full scan */
 const OWN_C=new WeakMap();
 function ownerOf(s){const o=s&&typeof s==="object";if(o){const c=OWN_C.get(s);if(c&&c.staff&&c.staff.includes(s)&&(c===S||rivals.includes(c)))return c}
  for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s)){if(o)OWN_C.set(s,p);return p}return null}
 function servById(id){return allServ().find(s=>s.sid===id)||null}
-function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];fillStaff(p,true)}
+function staffInit(){sidN=Math.max(sidN,sidTop());capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];fillStaff(p,true)}
  if(!S.court)S.court={tq:{name:"Tổng quản "+nmNew("eunE"),n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:nmNew("eun"),n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
  const L=allServ();if(!L.some(s=>s.af&&Object.keys(s.af).length))for(const s of L){const o=pick(L.filter(x=>ownerOf(x)!==ownerOf(s)));if(o){s.af[o.sid]=30;o.af[s.sid]=30}
   if(s.role==="eunuch"&&!(typeof asSelfOn==="function"&&asSelfOn(ownerOf(s)))&&roll(20)){/* AG-ALL B: đối thực is chosen ("Hẹn ước", jagstaff) */const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
@@ -47,7 +51,7 @@ function capTell(gone,c){c=c||capOf(S);const T=gone.filter(s=>(s.loyal||0)>=BAL.
  if(O.length){const nm=O.map(s=>s.name).join(", ");try{if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Nội vụ phủ điều người",sub:"Định lại kẻ hầu theo phẩm vị",subject:pServ(O[0]),
    facts:[capLaw(c),`${nm} ${O.length>1?"đều ":""}được điều sang hầu nơi khác.`],btn:"Đã hiểu"});
   else Q.push({t:"Nội vụ phủ điều người",who:pServ(O[0]),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${nm} được điều sang hầu nơi khác.</p>`,btn:"Đã hiểu"})}catch(e){console.error("capTell",e)}}
- for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"})}
+ for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"});/* SELSCENE-15: capSweep runs after render / nextBuoi — a card pushed here was never shown (co-op guest: her step waited on it for ever) */try{if(Q.length){const M=document.getElementById("modal");if(M&&M.hidden)setTimeout(()=>{try{if(Q.length&&M.hidden)showModal()}catch(e){}},0)}}catch(e){}}
 /* the household law as she reads it, from the one table (BAL.promo.cap via capOf) */
 function capLaw(c){let w="";try{w=S.out?"Ở lãnh cung":`Phẩm ${typeof prRankName==="function"?prRankName(rkOf(S)):RANKS[Math.max(0,Math.min(RANKS.length-1,S.rank|0))].n}`}catch(e){}
  return `${w||"Phẩm vị này"} theo lệ giữ ${c[0]} cung nữ (kể cả cung nữ thân tín)${c[1]?`, ${c[1]} thái giám`:", không có thái giám"}.`}

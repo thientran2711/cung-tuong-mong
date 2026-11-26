@@ -24,7 +24,8 @@ const mb=n=>(n/1e6<10?(Math.round(n/1e5)/10):Math.round(n/1e6)).toLocaleString("
 /* pictures (img/…) come from Cloudflare (jcdn.js IMG_BASE, dev/art/CDN.md): their key is IMG_BASE+'img/…?h=<md5/16>'; a CDN download is
    marked with &ctmload=1 instead of the x-ctm-load header (a custom header would cost a CORS preflight per file) */
 const CDNB=(typeof IMG_BASE==="string"&&IMG_BASE)||"";
-const keyOf=f=>new URL(f[0]+"?h="+f[1],CDNB&&f[0].startsWith("img/")?CDNB:location.href).href;
+/* review/audio-ipad: a sound that lives only on the CDN (the event / festival music, assets.json 5th field "c") is keyed on the CDN too, as sw.js baseOf does */
+const keyOf=f=>new URL(f[0]+"?h="+f[1],CDNB&&(f[0].startsWith("img/")||f[4]==="c")?CDNB:location.href).href;
 let el=null,shown=false,speed=[],enterCb=[];
 try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 
@@ -430,7 +431,7 @@ function allPlan(){if(OFF)return Promise.resolve(false);if(allPlanning)return al
 function oaBase(){const A=ALL;A.have=0;A.total=0;A.files=0;A.left=0;A.skipped=0;let u=0;const L=[];
  for(const f of MAN.files){A.total+=f[2];const k=deadKey(f);if(SEEN.has(k)){A.have+=f[2];A.files++}else if(allDead.has(k))A.skipped++;else{L.push(f);A.left++;if(!NEED.has(k))u++}}
  /* the figures and the effects first: what she is likely to see soonest */
- const rk={core:0,fig:1,fx:2,lazy:3};L.sort((a,b)=>(rk[a[3]]-rk[b[3]]));allList=L;A.unknown=u;A.counting=u>0;
+ const rk={core:0,fig:1,fx:2,lazy:3},rq=f=>f[4]==="c"?-1:rk[f[3]];L.sort((a,b)=>(rq(a)-rq(b)));/* review/audio-ipad: the CDN music (~39 MB) first: offline the game is silent without it */allList=L;A.unknown=u;A.counting=u>0;
  if(!L.length){A.state="done";oaSet({done:MAN.v,on:0})}else if(A.state==="done")A.state="idle"}
 /* the background count (see above): from the end of the list, 2 at a time, a breath every 32 lookups, never while a loading / life screen works */
 async function oaCount(){if(cntOn)return;cntOn=true;try{const c=await caches.open(AC);const L=allList;let j=L.length-1,n=0;

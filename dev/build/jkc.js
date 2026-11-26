@@ -92,9 +92,17 @@ function kcFreeFid(role,pref){const U=new Set(figUsed());const ch=(typeof BAL!==
 /* ---------- start: the identity card choice, then the home life ---------- */
 function kcPick(){return (S&&S.kcPick)||"cung"}
 function kcPathHTML(){const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;
- const O=[["cung","Vào cung ngay",`thành: vào cung ngay${(S.origin&&S.origin.r)?`; thân phận cho tới ${r0}, phẩm vị định ở kỳ tuyển chọn`:`, phong ${r0}`}; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
-  ["nha","Ở nhà chờ tuyển tú",`thành: hai năm học tài nghệ, nâng Tư chất; hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha; tin về các phi tần trong cung; qua tuyển tú có thể phong tới Quý nhân; Thanh mai trúc mã, kết hiếm ngoài cung; Phúc duyên khi qua tuyển tú · hỏng: vào cung muộn hai năm, lúc hai mươi tuổi · kèm: có thể bị trả thẻ bài hay bị ép gả; kế mẫu, thứ muội ngáng chân; có thể chết ở nhà`]];
- if(S.origin&&S.origin.k==="td"&&kcLore())O[1][2]=O[1][2].replace("hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha;","thế lực nhà cha, nhưng nhà ngươi sụp đổ đúng ngày ngươi rời nhà vào cung (hồi môn bị tịch thu); tỳ nữ hồi môn một lòng;");
+ /* OB-KIEP (owner 25/11 ~22:40Z «đọc khó hiểu quá ... câu nào mình nói nó cũng hiểu»): every item is ONE plain sentence (no «,» inside an item: the
+    kit splits a value at «;» and «,»); a loss / risk never sits under «thành» (the fallen house of a tội thần was shown as a gain); «Phúc duyên khi qua
+    tuyển tú» says what it gives. The kit shows a long list one item per line (KIT §6.6). */
+ const r1=(S.origin&&S.origin.r)?`được phong tối đa tới ${r0} (định ở kỳ tuyển chọn)`:`được phong ${r0}`;
+ const fall=!!(S.origin&&S.origin.k==="td"&&kcLore());
+ const G=["hai năm ở nhà học tài nghệ để nâng Tư chất",fall?"một tỳ nữ hồi môn một lòng theo hầu":"hồi môn cùng một tỳ nữ hồi môn một lòng theo hầu",fall?"thế lực nhà cha đỡ lưng những năm còn ở nhà":"thế lực nhà cha đỡ lưng",
+  "biết trước tin tức về các phi tần trong cung","qua tuyển tú có thể được phong tới Quý nhân","có thể gặp thanh mai trúc mã và mở ra những kết cục hiếm ngoài cung",
+  "qua mỗi vòng tuyển tú được thêm Phúc duyên","vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết)"];
+ const B=["muộn hai năm mới vào cung (khi đã hai mươi tuổi)"].concat(fall?["nhà cha sụp đổ đúng ngày ngươi vào cung (hồi môn bị tịch thu)"]:[]);
+ const O=[["cung","Vào cung ngay",`thành: vào cung ngay; ${r1}; có thêm khoảng hai năm trong cung để thăng phẩm · hỏng: không có hồi môn; không biết trước gì về các phi tần; không có cơ duyên ngoài cung`],
+  ["nha","Ở nhà chờ tuyển tú",`thành: ${G.join("; ")} · hỏng: ${B.join("; ")} · kèm: có thể bị trả thẻ bài (trượt tuyển tú) hay bị ép gả; kế mẫu và thứ muội có thể ngáng chân; có thể mất mạng khi còn ở nhà`]];
  return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
   O.map(([x,n,l])=>`<button type="button" class="opt${x===k?" ksel":""}" data-kcp="${x}" aria-pressed="${x===k}"${lock?" disabled":""}>${n}<small>${l}</small></button>`).join("")+`</div></div>`}
 try{KIT_GLOSS["Con đường"]="Vào cung ngay: kiếp bắt đầu trong cung. Ở nhà chờ tuyển tú: sống ở nhà cha khoảng hai năm (học tài nghệ, lo chuyện gia đình, hôn sự, tình riêng), rồi qua ba vòng tuyển tú mới vào cung; có thể không vào cung mà xuất giá. Chỉ con nhà quan, nhà buôn, nhà thầy đồ, cháu Thái hậu, con nhà Thị lang mới có đường này."}catch(e){}
@@ -575,7 +583,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
  /* r2-r1 (FAIL 3): home dialogs still queued (Phúc tuyển, family events …) never follow her into the palace, and an open mini-game card closes */
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE"&&!(m.pp&&m.pp.e==="dien"))Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
  const CY=BAL.kcg.carry;S.rank=rank=seatDown(S,rank);S.sung=CY.sung[0]+rank*CY.sung[1];S.lastPromo=S.turn;S.danh=Math.min(CY.danhMax,Math.round(S.danh*CY.danhK));S.bac=Math.min(CY.bacMax,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
- S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc.loyalKcEnter,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
+ S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc.loyalKcEnter,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;forgetSafe(S);S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
  const L=[];for(const m of kcRivalsTT()){const raw=kcPhucMark(m);/* review/podium-wire: the same Phúc tuyển mark the podium showed (S.kc.tt.pod) */const sc=kcScore({sac:m.sac,tai:m.tai,duc:m.pduc,danh:m.danh,raw,pow:m.ppow==null?kcPow():m.ppow})+R(9)-4;

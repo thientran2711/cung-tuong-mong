@@ -45,7 +45,7 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
-async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(k0=>{
+async function press(o,k0){for(let t=0;t<80;t++){await require('./lib/coop-clear.js').lifeWait(o,clear);await clear(o);const r=await o.p.evaluate(k0=>{
    /* a night with the Emperor (jnight) spends the rest of her day: her buổi is already ended through the co-op path (bend / week end) */
    if(k0&&(COOPW.bend||COOPW.pend||__co().waiting))return true;
    const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true},k0||null);if(r)return true;await sleep(250)}

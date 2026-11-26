@@ -257,9 +257,9 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
 function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
 
-/* 20. "bị phạt" on cards = what punish() (j8) does: cấm túc N tháng (Hoàng thượng nóng nảy 3, nhân từ 1, thường 2);
-   a grave fault (sev 2) may instead cost one rank (nóng nảy: always, nhân từ: 1 in 4, else half the time) */
-function aaPunishTxt(sev){const m=punishMonths();return sev>=2?`bị phạt: cấm túc ${m} tháng, giáng một bậc: ${chanceW(punishDemoP())}`/* a side chance: chanceW, never a ladder word (KIT § odds words) */:`bị phạt: cấm túc ${m} tháng`}
+/* 20. "bị phạt" on cards = what punish() (j8) does, by weight (BAL.punW, review/home-way): nhẹ (sev 0) khất bổng / cảnh cáo; vừa (sev 1)
+   cấm túc BAL.punW.mid.m; nặng (sev 2) cấm túc BAL.punW.heavy.m or one rank lost (chance BAL.punW.heavy.demo) */
+function aaPunishTxt(sev){if(sev==null)sev=1;if(sev<=0){const c=punishCut();return c?`bị phạt: khất bổng ${c} tháng`:"bị cảnh cáo"}const m=punishMonths(sev);return sev>=2?`bị phạt: cấm túc ${m} tháng, giáng một bậc: ${chanceW(punishDemoP())}`/* a side chance: chanceW, never a ladder word (KIT § odds words) */:`bị phạt: cấm túc ${m} tháng`}
 (function(){if(typeof actLineRaw!=="function")return;const a0=actLineRaw;actLineRaw=function(k){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;const sev={frame:2,ksab:2,accuse:2}[k]||1;return h.replace(/bị phạt(?! ?[:(])/g,aaPunishTxt(sev))}})();
 
 /* 21. Lục rương (j2 + j78): the caught risk now carries the real numbers for this consort (relAdd −15 → thiện cảm −15, oán ta scaled
@@ -354,17 +354,21 @@ function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitle
 function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
  const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: name test first, ancestor walk only for hits */T.rx.lastIndex=0;if(!T.rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return !p||p.closest(KRN_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
+ /* tinbao-words (owner OD 25/11 ~23:36Z «tùm lum chữ lặp tới lặp lui»): ONE title per person per block — the first mention gets «title name», every later
+    mention in the same row / line / paragraph stays the bare name (the title is never printed twice in one sentence, even when the mentions sit in one text node) */
+ const DONE=new Map();const done=b=>{let x=DONE.get(b);if(!x)DONE.set(b,x=new Set());return x};
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
   const pv=krnPrevText(n);T.rx.lastIndex=0;let m,last=0,hit=false;const f=document.createDocumentFragment();
   while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=krnT(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
-   if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index)))continue;
+   const D=done(blk);if(D.has(nm)||(blkPre+v.slice(0,m.index)).includes(nm)){D.add(nm);continue}/* named before in this block (titled or not): no second title */
+   if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index))){D.add(nm);continue}
    /* a name label on its own (card heading, portrait caption) whose title sits in a sibling element of the same card: titled */
    if(v.trim()===nm){let up=n.parentElement,ok=false;/* r1: a short sibling label of the name (person card .pcrk "Hoàng hậu" beside .pcname) holds its title */
     for(let e=n.parentElement,i=0;i<3&&e&&e.parentElement&&!ok;i++,e=e.parentElement)for(const c of e.parentElement.children){if(c===e||c.contains(e)||c.querySelector(".klab,img:not(.ic)")||c.matches(".md,.klab"))continue;/* a portrait fallback label is no title */const ct=(c.textContent||"").replace(/\s+/g," ").trim();if(ct&&ct.length<60&&t&&ct.toLowerCase().includes(t.toLowerCase())){ok=true;break}}
     for(let i=0;i<3&&up&&!ok;i++,up=up.parentElement){const tx=(up.textContent||"").replace(/\s+/g," ");if(tx.length<160&&kpTitleTail(tx.slice(0,Math.max(0,tx.indexOf(nm)))+"",t)||tx.length<160&&t&&tx.toLowerCase().includes(t.toLowerCase()))ok=true}if(ok)continue}
-   if(dry){out.push({name:nm,title:t,where:(n.parentElement.closest("[id],[class]")||{}).className||"",id:(n.parentElement.closest("[id]")||{}).id||"",text:(blk.textContent||"").replace(/\s+/g," ").trim().slice(0,140)});continue}
-   hit=true;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.innerHTML=kitName(p);f.appendChild(sp.firstChild||document.createTextNode(nm));last=m.index+nm.length}
+   if(dry){D.add(nm);out.push({name:nm,title:t,where:(n.parentElement.closest("[id],[class]")||{}).className||"",id:(n.parentElement.closest("[id]")||{}).id||"",text:(blk.textContent||"").replace(/\s+/g," ").trim().slice(0,140)});continue}
+   hit=true;D.add(nm);if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.innerHTML=kitName(p);f.appendChild(sp.firstChild||document.createTextNode(nm));last=m.index+nm.length}
   if(hit){if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
  return out}
 window.kitRankNamePaint=kitRankNamePaint;

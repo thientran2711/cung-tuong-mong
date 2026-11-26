@@ -55,7 +55,7 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
  for(const n of ["nextBuoi","endTurn"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(J95C.later.length){const L=J95C.later;J95C.later=[];for(const w of L)j95cStrip(w)}if(j95cCur()&&j95cVisitFix())j95sync()}catch(e){j95cErr(n,e)}return r}}
  /* ---- 5. loading creates nobody; names unique ---- */
  if(typeof staffInit==="function"){const si0=staffInit;staffInit=function(){if(!J95C.loading)return si0.apply(this,arguments);
-   try{sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);for(const p of consorts()){if(!p.staff){p.staff=[];fillStaff(p,true)}else J95C.stat.loadNoFill++}}catch(e){j95cErr("staffInit",e)}}}
+   try{sidN=Math.max(sidN,sidTop());for(const p of consorts()){if(!p.staff){p.staff=[];fillStaff(p,true)}else J95C.stat.loadNoFill++}}catch(e){j95cErr("staffInit",e)}}}
  const d0=deser;deser=function(){J95C.loading=1;let r;try{r=d0.apply(this,arguments)}finally{J95C.loading=0}J95C.lastV=null;try{j95cVisitFix();if(j95cCur())j95sync()}catch(e){j95cErr("deserVisit",e)}try{J95C.sig=j95cSig();if(j95cCur()&&S.visit&&S.visit.k===S.place){J95C.lastV=S.visit;j95stage(S.roster,j95kh())}}catch(e){j95cErr("deser",e)}return r};
  if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{const taken=new Set(allServ().map(x=>x.name).concat([S&&S.maid&&S.maid.name],(rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
    if(s&&taken.has(s.name)){/* no numbers in names (main jaudit) */s.name=nmNew(s.role==="eunuch"?"eun":"maid",{more:[...taken]});J95C.stat.dedupe++}}catch(e){}return s}}

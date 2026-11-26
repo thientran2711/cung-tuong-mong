@@ -47,10 +47,10 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
    const d=D[P.k];if(d){/* the lit dot and the needle bobbing onto it on the beat */const ph=((now-P.dip0)%BEAT+BEAT)%BEAT/BEAT,lift=(1-Math.cos(ph*Math.PI*2))/2;
     const near=1-Math.min(1,Math.abs(now-dipAt(dipIdx(now)))/(BEAT*.5));const rr=7+6*near;
     g.save();g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*near;g.fillStyle=near>.75?BAL.mgFx.ring:"#f6d27a";g.strokeStyle="#8f5f0c";g.lineWidth=1.5;g.beginPath();g.arc(d[0],d[1],rr,0,Math.PI*2);g.fill();g.stroke();g.restore();
-    const ny=d[1]-6-lift*R0*.5;crArt(g,"theu-needle",d[0],ny,14,R0*.5,{ay:1},()=>{g.save();g.strokeStyle="#5b5b66";g.lineWidth=3;g.lineCap="round";g.beginPath();g.moveTo(d[0],ny);g.lineTo(d[0]+3,ny-R0*.42);g.stroke();
-     g.strokeStyle=crRGB(P.cols[P.band]);g.lineWidth=1.6;g.beginPath();g.moveTo(d[0]+3,ny-R0*.4);g.quadraticCurveTo(d[0]+R0*.3,ny-R0*.6,d[0]+R0*.45,ny-R0*.2);g.stroke();g.restore()})}}
+    const ny=d[1]-6-lift*R0*.5;crArt(g,"theu-needle",d[0],ny,14,R0*.5,{ay:1},()=>{g.save();g.strokeStyle="#5b5b66";g.lineWidth=3;g.lineCap="round";g.beginPath();g.moveTo(d[0],ny);g.lineTo(d[0]+3,ny-R0*.42);g.stroke();g.restore()});
+     /* the thread in the needle = the chosen spool's shade, drawn over the needle picture too (review/mg-color: a painted needle must not hide which silk she took) */g.save();g.strokeStyle=crRGB(P.cols[P.band]);g.lineWidth=1.6;g.beginPath();g.moveTo(d[0]+3,ny-R0*.4);g.quadraticCurveTo(d[0]+R0*.3,ny-R0*.6,d[0]+R0*.45,ny-R0*.2);g.stroke();g.restore()}}
   /* sample in the corner */const sr=Math.min(W,H)*.08;sample(sr*1.35,sr*1.35,sr,now);
-  /* spools */P.sp.forEach((s,i)=>{const on=P.pk===i&&now-P.litAt<BAL.mgFx.ms;const sz=on?kg82FxPop(P.litAt,now):1;crArt(g,"theu-spool",s.x,s.y,s.r*2*sz,s.r*2.4*sz,{},()=>{g.save();g.translate(s.x,s.y);g.scale(sz,sz);
+  /* spools: the painted spool in THIS spool's shade (crArtTint; review/mg-color, owner OD 25/11 ~23:05Z: the bare sprite drew all 8 the painter's red) */P.sp.forEach((s,i)=>{const on=P.pk===i&&now-P.litAt<BAL.mgFx.ms;const sz=on?kg82FxPop(P.litAt,now):1;crArtTint(g,"theu-spool",s.x,s.y,s.r*2*sz,s.r*2.4*sz,{},s.c,()=>{g.save();g.translate(s.x,s.y);g.scale(sz,sz);
     g.fillStyle="#b88a3a";g.fillRect(-s.r*.95,-s.r*1.15,s.r*1.9,s.r*.3);g.fillRect(-s.r*.95,s.r*.85,s.r*1.9,s.r*.3);g.fillStyle=crRGB(s.c);g.fillRect(-s.r*.8,-s.r*.85,s.r*1.6,s.r*1.7);
     g.globalAlpha=.22;g.strokeStyle="#000";g.lineWidth=1;for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(-s.r*.8,k*s.r*.24);g.lineTo(s.r*.8,k*s.r*.24+2);g.stroke()}g.restore()});
    if(P.pk===i)kg82FxRing(g,s.x,s.y,s.r*1.2,P.litAt,now)});
@@ -84,7 +84,9 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
    const al=P.sp.filter(t=>t!==s&&t.b<0&&Math.abs(t.c[0]-s.c[0])+Math.abs(t.c[1]-s.c[1])+Math.abs(t.c[2]-s.c[2])<90).map(t=>C.client(t.x,t.y));return Object.assign(c,{alike:al,hidden:now-P.start>PEEK})}
   /* stitch: the next free dip once it is near (≤ 300 ms); at = ms until that moment (the jslap convention read by dev/measure/mg-bots.js), so a bot taps on the beat, not on the call */
   if(P.ph==="stitch"&&P.k<ST){let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;if(dipAt(di)-now>300)return null;const d=dots(P.band,hx(now),HY)[P.k];return d?Object.assign(C.client(d[0],d[1]),{at:dipAt(di)-now}):null}return null};
+ /* review/mg-color test hook: every spool on the board (client px) with the shade it stands for, b = its band (−1 = a look-alike); read by dev/test/mg-color.js */
+ KG82.choices=()=>phase==="play"&&P&&P.ph==="pick"?P.sp.map(s=>Object.assign(C.client(s.x,s.y),{c:s.c.slice(),b:s.b,right:s.b===P.band,r:s.r})):null;
  KG82.hint=()=>{if(phase!=="play"||!P||P.ph!=="stitch"||P.k>=ST)return null;const now=crNow();let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;
   const d=dots(P.band,hx(now),HY)[P.k];if(!d)return null;const c=C.client(d[0],d[1]);return{x:c.x,y:c.y,soon:dipAt(di)-now<BAL.mgTier.tut.lead}};
- piece();stop=crLoop(draw);return()=>{done=true;KG82.hint=null;if(stop)stop()}}
+ piece();stop=crLoop(draw);return()=>{done=true;KG82.hint=null;KG82.choices=null;if(stop)stop()}}
 window.crtStitch=crtStitch;/* registered by jtd (loads later): crReg("td_cong","stitch",tdWrap(crtStitch,"stitch")) */

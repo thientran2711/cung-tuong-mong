@@ -133,7 +133,7 @@ function hNp(a){const was=rivals.find(v=>v&&v.coopAsk===a.id);if(was)return was.
  S.usedFaces=S.usedFaces||[];if(n.face>=0&&S.usedFaces.includes(n.face)&&!(n.fc))Object.assign(n,drawFace());else if(n.face>=0&&!S.usedFaces.includes(n.face))S.usedFaces.push(n.face);
  rivals.push(n);try{palFix()}catch(e){}try{log(`${n.name} vào cung, phong ${RANKS[n.rank]?RANKS[n.rank].n:""}.`)}catch(e){}return n.id}
 function hSrv(a){const t=npcOf(a.to);if(!t||!a.s)return 0;t.staff=t.staff||[];if(t.staff.some(s=>s&&s.sid===a.s.sid&&s.name===a.s.name))return 1;
- const s=toHost(J(a.s));try{if(allServ().some(x=>x&&x.sid===s.sid))s.sid=++sidN}catch(e){}t.staff.push(s);return 1}
+ const s=toHost(J(a.s));try{if(allServ().some(x=>x&&x.sid===s.sid)){sidN=Math.max(sidN,sidTop());s.sid=++sidN}}catch(e){}t.staff.push(s);return 1}
 function hPet(a){const t=npcOf(a.to);if(!t||!a.P)return 0;t.pets=t.pets||[];if(!t.pets.some(P=>petKey(P)===petKey(a.P)))t.pets.push(toHost(J(a.P)));return 1}
 function hKid(a){const t=rivals.find(v=>v&&v.id===a.from&&!v.coop);if(!t||!t.kids)return 1;const i=t.kids.findIndex(k=>k&&k.name===a.name);if(i>=0)t.kids.splice(i,1);return 1}
 function hSrvOut(a){const t=rivals.find(v=>v&&v.id===a.from&&!v.coop);if(!t||!t.staff)return 1;const i=t.staff.findIndex(s=>s&&s.sid===a.sid&&s.name===a.name);if(i>=0)t.staff.splice(i,1);return 1}

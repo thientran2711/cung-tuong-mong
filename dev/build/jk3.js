@@ -204,7 +204,17 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* review/stage-side: the side column's width comes from the stage width only (never from its content), so it is the same narrow column
    on every screen and every render: 24 % of the stage, 132–172 px */
 function k3RW(st){/* one column width for every host: from the PAGE width (the map leather spans the spread on iPad = 2 pages) */let W=st.clientWidth;try{if((st.classList.contains("mapv")||st.classList.contains("kplfs"))&&kitView().pages===2)W=W/2}catch(e){}/* reviewer stage-pets-r1: the full-screen place painting spans the spread too (33.10) → same column as her room / the map (139 px at 1180, was 172) */if(!W)return;/* owner 17/11 06:45Z: the column is NARROWER, fits its content (the widest line is ~135 px) → ONE width KIT_RCOLW (140 px) on every screen; only a tiny stage shrinks it */const v=Math.round(Math.max(132,Math.min(140,W*.25)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
-function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);
+/* KIT 56.30 SIDE COLUMN SCALES WITH THE STAGE HEIGHT (owner 25/11 ~23:27Z iPad bug, review/ipad-size): the column rows (Ân sủng, Nguy hiểm chung,
+   Xét phẩm, the court counters) keep the SAME share of the stage height as on the Fold (stage 749 px tall, rows 44 px):
+   row = KIT_RCOL.row x stage height / KIT_RCOL.refH, between KIT_RCOL.min and KIT_RCOL.row. Fold / iPad portrait = 44 px (unchanged),
+   iPad landscape (stage ~575-600 px) = 34-35 px. Font stays the kit size (.75rem); only the row height shrinks. One rule for every stage. */
+const KIT_RCOL={row:44,refH:749,min:30};window.KIT_RCOL=KIT_RCOL;
+/* the same factor (--kss = row / 44) sizes the other stage overlays of the family (law 11): the left rail buttons (#krail .krailb), the
+   «ở đây N người» count chip and the «+N» page chips — they all kept Fold pixels on the shorter iPad stage (share 1.25x the Fold share) */
+function k3RowH(st){const H=st.clientHeight;if(!H)return;const r=Math.round(Math.max(KIT_RCOL.min,Math.min(KIT_RCOL.row,KIT_RCOL.row*H/KIT_RCOL.refH))),v=r+"px",k=(r/KIT_RCOL.row).toFixed(3);
+ if(st.style.getPropertyValue("--k3rowh")!==v)st.style.setProperty("--k3rowh",v);if(st.style.getPropertyValue("--kss")!==k)st.style.setProperty("--kss",k)}
+window.k3RowH=k3RowH;
+function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);k3RowH(st);
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
  /* KIT 33: an EMPTY plaque column (no plaques, zero height) reserves no gutter — the floor belongs to the people */
@@ -324,7 +334,12 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
 /* kitGroupFold (stage right column): closed row like "Ân sủng ›"; open = header + the person cards stacked in place */
 .ksh .kgf.kgfopen{padding:3px 4px 4px}.ksh .kgf-t{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:3px;padding:1px 2px}
-.kgfbtns{display:flex;gap:6px;flex:none}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
+.kgfbtns{display:flex;gap:6px;flex:none}.stage .kshR .kgfbtns .kgfbtn.krailb{height:var(--k3rowh,44px);min-height:0}
+/* KIT 56.30 stage overlay family (review/ipad-size): rail buttons = the row height; the count / page chips scale by --kss (1 on Fold) */
+html body .stage>.krail .krailb,html body .stage .krail:not(.khud) .krailb{width:var(--k3rowh,44px);height:var(--k3rowh,44px);min-width:0;min-height:0}
+html body .stage .krail{gap:calc(6px*var(--kss,1))}
+html body .stage .kchip.j59more{font-size:calc(1.05rem*var(--kss,1));padding:calc(3px*var(--kss,1)) calc(9px*var(--kss,1)) calc(3px*var(--kss,1)) calc(6px*var(--kss,1))}html body .stage .kchip.j59more .j59ico{height:calc(1.7rem*var(--kss,1))}
+html body .stage .kchip.j59hchip{font-size:calc(1rem*var(--kss,1))}html body .stage .kchip.j59hchip .j59ico{height:calc(1.5rem*var(--kss,1))}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
 .ksh .kgf-l{display:flex;flex-direction:column;gap:3px}.ksh .kgf-l .k3c{flex:none;box-shadow:none;border-color:var(--k-hair,#e6d3ac)}
 .kshR>.kgf,.kshR>.kgfbtns,.kshR>.kas,.kshR>.k3py{flex:none}
 
@@ -372,11 +387,17 @@ function k3Shell(){try{if(window.COOPW&&COOPW.ctx)return;/* co-op thin: the othe
  /* reviewer stage-pets-r1: the left rail (KIT 33.11) is re-drawn by renderStage while the card page still hides the stage, so closing a person card left the painting WITHOUT the rail (no way back to the map): re-draw it when the card page opens / closes */
  if(wasPop!==gm.classList.contains("k3pop"))try{if(typeof kitStageRail==="object"&&kitStageRail.paint)requestAnimationFrame(()=>kitStageRail.paint())}catch(e){}
  let rb=$$("k3room");const hd=document.querySelector("header.hud");
- if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3Home()});hd.appendChild(rb)}
- /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view keeps it only while away from the room home */
- if(rb)rb.hidden=!alive||(on&&K3SH.home&&!pop);
+ if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3RoomTap()});hd.appendChild(rb)}
+ /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view hides it only on her own room's page
+    (review/home-way, owner OD 26/11 ~04:25Z: away from home, the place painting included, it is ALWAYS there: her way home) */
+ const away=!!(alive&&typeof homeWay==="function"&&(homeWay()||{at:1}).at===0);
+ if(rb){rb.hidden=!alive||(on&&K3SH.home&&!pop&&!away);rb.classList.toggle("hwaway",away)}
  document.querySelectorAll("#tabs [data-tab]").forEach(b=>b.classList.toggle("k3dim",on&&K3SH.home&&!pop))}catch(e){console.error("k3Shell",e)}}
 window.k3Shell=k3Shell;
+/* the top-bar «Về phòng» (review/home-way): away = the walk to HER OWN room (homeWay / homeGo, jplrule: «Về phòng · N khắc»), then her room's page;
+   at home = her room's page (the one-page view's way back from a tab). Never «Về <the place she is at>» (owner OD 26/11 ~04:25Z). */
+function k3RoomTap(){try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at){if(!homeGo())return}}catch(e){console.error("k3RoomTap",e);return}k3Home()}
+window.k3RoomTap=k3RoomTap;
 function k3Home(){K3SH.home=true;try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;if(typeof renderStage==="function")renderStage()}}catch(e){}const pw=$$("popw");if(pw&&pw.children.length)pw.innerHTML="";k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay();typeof kitFloorFit==="function"&&kitFloorFit()}catch(e){}},30)}
 window.k3Home=k3Home;
 /* owner 11/15 06:38Z: tapping the place she is AT on Dư đồ opens that place's stage (scene + the people there), like arriving — on the
@@ -388,7 +409,10 @@ function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";retu
   if(here&&k3Phone())k3ShowPlace();return r}}
  const g0=goTo;goTo=function(k){const fromMap=typeof tab!=="undefined"&&tab==="go";const p0=S&&S.place;const r=g0.apply(this,arguments);
   try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
- const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const t=S&&S.place&&S.place!=="home"?"Về "+k3PlaceName():"Về phòng";const l=rb.querySelector(".kbl");if(l&&l.textContent!==t){l.textContent=t;rb.setAttribute("aria-label",t)}rb.title=t}}catch(e){}return r};window.k3Shell=k3Shell})();
+ /* label = the ONE way-home rule (jplrule homeWay): «Về phòng · N khắc» away, «Về phòng» at home; second line = HER palace's name (the home mark) */
+ const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const w=typeof homeWay==="function"?homeWay():null;const t=w?w.label:"Về phòng",hn=w&&w.hn||"";
+  const l=rb.querySelector(".kbl");const txt=hn?t+"\n"+hn:t;if(l){let far=0;try{far=Math.max(BAL.walk.near,BAL.walk.far)}catch(e){}const sz=["Về phòng · hết khắc",`Về phòng · ${far} khắc`,"Về phòng",hn].reduce((a,x)=>x.length>a.length?x:a,"");if(l.dataset.sz!==sz)l.dataset.sz=sz}if(l&&l.textContent!==txt){l.textContent=txt;rb.setAttribute("aria-label",hn?`${t}, ${hn}`:t)}rb.title=w?w.title:t;
+  const dis=!!(w&&!w.at&&!w.ok);if(rb.disabled!==dis)rb.disabled=dis;if(dis)rb.dataset.why=w.why||"";else delete rb.dataset.why}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
@@ -418,17 +442,24 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
 /* KIT §75 painted back button (room / map): icon + short label, no bar */
 .kbackb{display:inline-flex;flex-direction:row;align-items:center;gap:5px;background:none!important;border:0!important;box-shadow:none!important;padding:0 6px!important;font-weight:600;color:var(--gold);white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .kbackb .kbi{width:30px;height:30px;max-width:none;flex:none;object-fit:contain;filter:drop-shadow(0 1px 1px #5a3a2040)}
-.kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:pre-line;text-align:left}
 .kbackb:active .kbi{transform:scale(.94)}
 /* phones < 600 px: icon only (label = tooltip / aria-label, same as the stat cells), sits under the menu button */
 /* kv3:.kv1 */html:where(.kv1) body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
- html:where(.kv1) body header.hud>#k3room.kbackb .kbl{display:none}
+ html:where(.kv1) body header.hud>#k3room.kbackb:not(.hwaway) .kbl{display:none}
+ /* review/home-way: away from home the one-page view shows the cost + her palace too */
+ html:where(.kv1) body header.hud>#k3room.kbackb.hwaway{padding:0 8px 0 2px!important;min-height:36px}
  /* icon missing (CDN 404, img removed by onerror): show the label so the button never becomes invisible */
  html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
  html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}
  html:where(.kv1) body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}
 html body .stage>#tomap.kbackb,html body #tomap.kbackb{background:#fffaf0e6!important;border:1px solid var(--line,#d9c49a)!important;border-radius:18px!important;padding:2px 12px 2px 6px!important;color:var(--ink,#3a2a1a);box-shadow:0 2px 8px #0004!important;min-height:38px;font-family:var(--display)}
 html body header.hud>#k3room.kbackb{justify-self:end;min-height:36px;max-width:100%}
+/* review/home-way-nits (law 10): ONE box per device for the way-home button: a label line never wraps (white-space:pre) and the label column is as wide
+   as the LONGEST label it can ever show (hidden sizer row = data-sz, set from homeWay: «Về phòng · hết khắc», «Về phòng · <far> khắc», her palace's name),
+   so the button keeps the same size at home, away and with no khắc left */
+html body header.hud>#k3room.kbackb .kbl{display:inline-grid;grid-template-columns:auto;white-space:pre;overflow:visible;text-overflow:clip}
+html body header.hud>#k3room.kbackb .kbl::after{content:attr(data-sz);grid-column:1;grid-row:2;height:0;overflow:hidden;visibility:hidden;white-space:pre;line-height:0}
 html body header.hud>#k3room[hidden]{display:none!important}
 html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* top bar time block (31.1): the bar grid, the stat cells and the two-line time block are kitStatRow / kitStatCell (jk4, KIT 32) */

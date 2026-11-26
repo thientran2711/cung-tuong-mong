@@ -291,6 +291,7 @@ Object.assign(BAL.mgTier.lev,{nghe:{cross:[5600,7850]},truyen:{lim:[10000,15000]
    pop = scale of the lit / pressed target (was 1.08 / 1.14: hard to see) · ms = how long the pop + lit ring stay · glow/ring = colours · blur = glow size px ·
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
 BAL.mgVeilMs=1500;/* owner 24/11 ~22:02Z: a mini-game frame stays veiled until its pictures (her face, the board) are decoded, at most this long */
+BAL.mgDoneWords=2;/* makeup-set (owner OD 25/11 ~23:24Z): a mini-game DONE button shows «✓» + at most this many words of its label (j82 sign pass), never a bare ✓ */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
 /* dauho-lv5 (owner 21/11, Fold, «Thử tay: Đầu hồ · hồi 5/5», verbatim: "để cái mức độ mà cho mọi người chơi á, là ở cái level 5, cái hồi 5 mà bạn đang test tôi á,
    thấy nó hợp lý hơn á. Với lại là cái vòng ... của cái mũi tên này nó vô cái bình nó to quá, cho nên có một cái mũi tên nó nằm ở ngoài nhìn nó bị giả đó. Mình thu
@@ -349,7 +350,7 @@ Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
-Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,/* promo-root: months after palace entry / leaving lãnh cung before «Bị bỏ quên» can fire */forgetGrace:6,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
@@ -587,7 +588,11 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
+ gain:[2,1.5,1.1,.9,.8] /* review/balance-pace (owner OD 25/11 ~23:52Z «một lần chơi chỉ được cộng có 2 điểm … bao giờ tao mới lên được bậc»): was [1.2,1,.8,.6,.4]
+   (a good self-study = 2.4 points → Tông sư after ~83 good games of ONE course). Now a good game (raw ≥ BAL.mgTier.lessonPts[2]) of self-study = 6 points at bậc 0:
+   Nhập môn after 2 good games, Tông sư after ~35 (teacher ~26); still slower each bậc. Measured dev/measure/pace.js, report dev/handover/reports/balance-pace.md */,
+ les:{self:1,min:1} /* review/balance-pace: lesson points of ONE play (jbalcore lesG, her lessons and an NPC's): self-study = max(min, round(game points × self)) (was × .6:
+   a Xuất sắc game and a poor one both gave 1–2, so the game score barely mattered); a teacher = max(game points, self-study + BAL.tchMin) */,odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
@@ -663,6 +668,51 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
    fx[tier] = what the result itself gives or takes on top of the rank (gain and loss on every path, also when the ceiling is Đáp ứng);
    stepSung = Sủng lost per step under the ceiling. word = mini-game kinds that are word games (never offered; drop a key when its
    non-word replacement lands, review/nw-*). The tier of the board is mgTier occ "tuyen" (BAL.mgTier). Measured: dev/measure/entry-bots.js. */
+/* SELSCENE (review/selection-scene; owner OD 23/11 ~22:28Z/~23:25Z/~23:28Z/~23:47Z, 24/11 ~05:35Z/~05:40Z/~05:50Z; brief M112 ADD.6/18/19/22/23):
+   ONE CORE for the nhập cung selection. intake = tú nữ per intake (also the mid-game tuyển tú, j27 tuyenTu: was the typed 3+R(3));
+   yard = waiting yard {n girls incl. her, perRound, kept}; room = lodging {perRoom, perBed}; w = score weights (base from Đức/Tài/Sắc + the three tests,
+   each test mark 0..10: mini ½, đối đáp ¼, hành xử ¼, ADD.22); noise = luck ± for everyone (same for her and the girls, law 1);
+   placeStep = the rank step of each KEPT place (1st +1, 2nd–3rd same, 4th −1; measured dev/measure/selx-contest.js: score cuts put every kept girl at +1, so the step goes by place); the selection is a CONTEST (OD 24/11 ~06:15Z): all yard.n tú nữ (her included) take the same 3 tests,
+   ranked by score, the top yard.kept are kept, the rest ban hoa (for her: the life ends, OD ~05:40Z); only the 3 tests count, yard / lodging events move
+   relations only (OD ~06:20Z); npcRank = [rank, weight] of the other tú nữ's own standing (was typed roll(60)?0:1 in j27 tuyenTu), npcAge = [min, spread]; npcMini = a tú nữ's mini-game mark from her art level (base + lv·level ± r; was typed in jselx);
+   cap = highest entry rank (Tần, OD ~23:25Z); hoaThan = the hòa thân roads (cap Phi, +1 needs Sắc ≥ hoaThanSac, ADD.19);
+   fav = thiện cảm moved with the asking royal per reaction (+ / − / none); days = the playable opening days (OD 24/11 ~07:05Z: day 1 enter + rooms, day 2 yard + contest, day 3 the kept wait → edict; 1 day = 1 tuần = 16 khắc);
+   lodge = the tú nữ lodging (OD 24/11 ~08:20Z FINAL: «Dưỡng Tú viện», a viện not a cung — selection-time lodging ONLY, not in PAL / seats, PAL_GONE untouched;
+   x/y = its Dư đồ spot; so = its 3 sở (level 2), one room each of room.perRoom girls on beds of room.perBed; sanh = the shared Tiền sảnh where the ma ma teaches). */
+Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},coop:{npcKept:3},room:{perRoom:4,perBed:2},
+ w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
+ fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Dưỡng Tú viện",x:.303,y:.338,so:[["dong","Đông sở"],["tay","Tây sở"],["bac","Bắc sở"]],sanh:["sanh","Tiền sảnh"]},npcMatch:{hit:8,miss:3,none:5},
+ /* THE 3 DAYS (SELSCENE-4, jselxday; OD 24/11 ~07:05Z / ~08:20Z): beat = khắc of each fixed beat (gate + roll-call, rooms, dress, the yard buổi, each test, day-3 teaching;
+    yardDrama = yard khắc spent before the yard drama); lesson = the Tiền sảnh drill (k = khắc of effort kỹ / vừa / qua loa; mark 0..10 = base + duc·Đức + eff·effort ± r,
+    the same for every girl; mid = neutral mark; hint = marks at which the ma ma lets slip one / two royals' chữ trọng; fx = the sure gain of each effort beside the ma ma's regard (law 3: kỹ = her regard, at least maMin steps · vừa = Đức · qua loa = Sức «để sức cho ngày mai»)); maStep = ma ma regard per mark / per drama step;
+    ducStep / faceStep = Đức / Danh per drama step; fx = thiện cảm per drama step by the seed tier s/m/l; drama = {k khắc of a drama, victim = chance in a hundred she is the
+    target when the seed allows, mem = no-repeat memory across lives, extra = girls of other sở in the day-1 evening pool, two = chance in a hundred of a SECOND day-3 drama (OD ~09:50Z «1-2 chuyện không lặp lại»)}; roam = [own sở, Tiền sảnh] weights of a girl's
+    place each buổi (days 1–2); menuN = names listed per menu; rest = Sức of «Nghỉ một lát»; conf = virtue pairs that clash (SELW-TESTS2 README, CONF) */
+ beat:{gate:2,rooms:1,dress:2,yard:4,yardDrama:1,test:1,teach:2},lesson:{k:[3,2,1],base:3,duc:.05,eff:2,r:1,mid:6,hint:[6,8],fx:[{},{duc:1},{suc:5}],maMin:1},maStep:1,ducStep:1,faceStep:1,
+ fx:{s:2,m:3,l:5},drama:{k:1,victim:25,mem:40,extra:2,two:50},roam:[3,1],menuN:4,menuNew:1/* «Làm quen với một vị tú nữ» options per menu: strangers look alike to her, one button (SELSCENE-15) */,rest:5,conf:[["Hiếu","Trung"],["Tín","Nhân"],["Lễ","Nghĩa"],["Nghĩa","Liêm"],["Sỉ","Khiêm"]],
+ /* SELSCENE-5 (OD 24/11 ~08:55Z / ~09:25Z / ~09:40Z / ~09:20Z; MAIN 118 answers a–e):
+    imp = the FIRST IMPRESSION on Day 2 (the toilette look judged by each of the 3 royals by HIS / HER own taste, the one jtoil rule toilHostKind + BAL.toil.react):
+      a royal's reaction aff (BAL.toil.cap) → a mark mid + k·aff (0..10); the score adds w.imp × the mean of the three marks (≈ 13 % of the test part: ONLY the royals' look
+      counts, the girls' and the ma ma's look moves thiện cảm only); F = the formality of the hall (2 = great occasion); dressK = khắc of the mirror, mocK = khắc of
+      dressing without it (mặt mộc). The same for every tú nữ (law 1: her look = toilNpc by her nết, the same table).
+    ask = «DÒ HỎI MA MA» (3 roads of equal value, law 2): bac = silver for a sure full answer; pleaseK = khắc spent helping her, maPlease = her regard gained, then the answer
+      grows with regard; just ask = one talk khắc, the answer by her nết (net.full / one / no on her 3 nết; lure = a greedy nết that answers nothing for free) and her regard
+      (≥ maHi one step more, ≤ maLo one step less); levels 2 = taste + both chữ trọng, 1 = one point, 0 = refusal. NPC girls the same: npcBuyR0 = the standing from which
+      a girl pays, npcPlease = nết that win the ma ma first, others just ask; known = the mark a girl who knows the asker's chữ trọng aims at (she picks the answer he values).
+    carry = thiện cảm of the selection days carried into the palace per point (E → Sủng, T → Thái hậu, H → Hoàng hậu, kept girls the same on their own fields).
+    tuan = tuần per month (j8 wk = turn·3 + tuan): at the edict the clock moves BAL.selx.days tuần (OD ~07:05Z «3 ngày, tức là 3 tuần»). */
+ imp:{mid:5,k:1.25,F:2,dressK:2,mocK:1},
+ ask:{bac:40,pleaseK:3,maPlease:2,maHi:3,maLo:-2,net:{full:["Nhiều chuyện","Ân cần","Nóng nảy","Rộng lượng"],one:["Điềm tĩnh","Kín đáo","Khiêm nhường","Thật thà"],no:["Lạnh lùng","Kiêu ngạo"]},lure:["Ham lợi"],
+  npcBuyR0:1,npcPlease:["Ân cần","Khiêm nhường","Xu nịnh","Thực dụng"]},
+ carry:{E:1,T:1,H:1},tuan:3,
+ /* SELSCENE-14 (RV-SELX13 8/9/10, law 4 / 1 / 6c): mark = one test mark scale {lo, hi, mid = a missing mark}; byDef = chance in a hundred that a bystander whose nết
+    the seed does not list defends (else stays silent); huong = the item key of the hương nang (the túi thơm item, IT.tuithom) given to each kept girl, her included */
+ mark:{lo:0,hi:10,mid:5},byDef:50,huong:"tuithom",
+ /* the scene layer of the 3 days (jselxsc on KIT §93 kitScene + §95 kitDialogue): fh = figure height / layer height (the stage size), view = figures per view
+    (Fold: the waiting-yard exception, OD ~05:00Z: 4; iPad 6), side = scale of a called group standing aside, ms = move time of a figure (ms) */
+ sc:{fh:.8,view:{fold:4,ipad:6},side:.42,ms:520},
+ /* vst = her four stances when SHE is the drama victim (jselxday SELX_VST words): gain / loss in drama steps (each step × ducStep / faceStep / maStep / fx tier), law 2/3: one gain + one loss each */
+ vst:{benh:{gain:{duc:1},loss:{"grudge.bully":1}},hua:{gain:{"friend.bully":1},loss:{face:1}},hoagiai:{gain:{"friend.ma":1},loss:{time:1}},ngoai:{gain:{time:1},loss:{"grudge.bystander":1}}}}});
 Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
  w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
   dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
@@ -2134,6 +2184,8 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
 
+/* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
+BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).
    Every relation LEVEL the game tests ("quen", "thân", "ghét", "oán to act"…) is ONE base number here, and each person's nết shifts it:
    netTh(p,key) (jnet.js) = th[key] + Σ over p's 3 nết of BAL.net.T[t].th[key] (a key a nết lacks = thFrom[key] = [source key, × share]), clamped to thClamp[key].

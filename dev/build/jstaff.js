@@ -35,7 +35,7 @@ function masterName(m){if(!m)return"";if(m===S.thO)return"Thái hậu";if(m===S)
 function elderName(post,i){const nm=post.names[i%post.names.length];let T=null;try{T=nmTaken()}catch(e){}
  if(i<post.names.length&&(!T||!T.full.has(nm[0])&&!nmVars(nm[0]).some(v=>T.vars.has(v)))&&!nmBad(nm[0])){try{const R=nmReg();if(R&&nmOwner())R[nm[0]]="f"}catch(e){}return nm}
  const nb=nmNew("f");return[nb,nmSurOf(nb)+" "+nm[1].split(" ").slice(-2).join(" ")]}
-function mk(post,i,age){const nm=elderName(post,i);if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
+function mk(post,i,age){const nm=elderName(post,i);if(typeof sidN!=="undefined")sidN=Math.max(sidN,sidTop());
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};

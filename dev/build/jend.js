@@ -39,6 +39,8 @@ window.KIT_END.names={
   "Chính thất hầu phủ":"Phượng đậu hầu môn","Vợ quan thanh liêm":"Thanh bạch trọn đời","Nữ phu tử":"Đèn sách má hồng","Làm thiếp nhà quyền quý":"Hầu môn sâu tựa biển",
   "Gả xa":"Viễn giá tha hương","Bỏ trốn":"Bỏ gấm theo tình","Công chúa ở lại cố quốc":"Non nước cố hương","Làm người ở nhà lý trưởng":"Phận tôi đòi",
   "Làm thiếp nhà phú hộ":"Lẽ mọn nhà giàu","Ở lại quê nhà":"Ruộng dâu quê cũ",
+  /* tuyển tú (jselx): ban hoa = not chosen, sent home with a flower */
+  "Ban hoa":"Duyên cung lỡ hẹn",
   /* kế vị (j99succ SUCC_END) */
   "Bị ép trả rèm":"Rèm châu cuốn lại","Thái hậu bị giam lỏng":"Cửa son khép chặt","Nữ đế bị phế":"Ngai rồng sụp đổ","Nữ đế thoái vị":"Buông ngai ẩn thân",
   "Nhiếp chính Thái hậu":"Buông rèm nhiếp chính","Thái hoàng thái hậu":"Ba đời mẫu nghi"},
@@ -182,3 +184,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§91",title:"kitEn
 window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.types[T].tone;Q.unshift({t:T==="grand"?"Đại kết cục":"Kiếp này",cls:`kes-t-${T}`,who:typeof pMe==="function"?pMe():null,
   h:`<h3>${T==="grand"?"Đại kết cục · Hiền tướng hậu cung":"Hồng nhan bạc mệnh"}</h3><p>${tone==="fest"?"Thiên hạ truyền tai: ngươi đã thành “Hiền tướng hậu cung”.":"Kiếp này khép lại."}</p>`,btn:"Đóng"});showModal()}catch(e){console.error(e)}};
 })();
+
+/* KIT §94b: the day title card shows on EVERY day change (jend.js is the LAST module: this `dawn` is the outermost wrapper, over kitNewDay / the Tuần lục book / the j79 panel) */
+try{if(typeof dawn==="function"&&typeof kitDayTitleShow==="function"){const d0=dawn;dawn=function(){const r=d0.apply(this,arguments);try{kitDayTitleShow()}catch(e){}return r}}}catch(e){}
+
+/* KIT §94b: game start = «Ngày 1 — <tên> · Chương 1 — <tên>» (owner OD 24/11 ~07:45Z; MAIN 117 OK): after a NEW life begins (week 0) the same card shows once; not for bots / sims */
+try{if(typeof start==="function"&&typeof kitDayTitleShow==="function"){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(!window.__bot&&typeof S!=="undefined"&&S&&!S.dead&&typeof wk==="function"&&wk()===0)setTimeout(()=>{try{if(S&&!S.dead&&wk()===0)kitDayTitleShow()}catch(e){}},600)}catch(e){}return r}}}catch(e){}
