@@ -1173,8 +1173,16 @@ const KIT_PFO={gap:10,dflt:762,band:{cold:762,"consort-0":749,"consort-1":749,"c
   const h=kin.offsetHeight||pcp.offsetHeight;if(!h)return;const k=h/1037,top=kin===pcp?0:kin.offsetTop;
   const want=top+this.of(pcp)*k+this.gap;let mb=Math.round(want-pcp.offsetHeight);const set=v=>{if(pcp.__kpfoMb!==v){pcp.__kpfoMb=v;pcp.style.setProperty("margin-bottom",v+"px","important")}};set(mb);pcp.classList.add("kpfo");
   /* the column's own row-gap and empty rows also push: correct once on the first visible row after the frame, so its top is EXACTLY band + gap */
-  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top;if(first==null||t<first)first=t}
-  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}}catch(e){}}};
+  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top-(c.classList.contains("kplscr")?parseFloat(c.style.marginTop)||0:0)/* its own clear-tassel margin (below) is not a column gap */;if(first==null||t<first)first=t}
+  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}
+  /* KK42 (MAIN 158 LOOK nit «Hoa▪tai», law 11): a card's SCROLLING text area (.kplscr, KIT §6.4) starts UNDER the pendant + tassel (kitPcClearTassel rule) in EVERY
+     person card — it only ran for cards with a fixed height (--kpcmax), so the identity card's item grid lay under her frame's tassel */
+  KIT_PFO.clear(pc)}catch(e){}},
+ /* THE clear-tassel rule (one part; jk4 kitPcClearTassel calls it): .kplscr's top = the frame ART's real bottom (tassel tip, KIT_FRW opaque bottom, jhcpor) + 4 px */
+ clear:function(pc){try{const L=pc&&pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp"),sc=L&&L.querySelector(":scope > .kplscr");if(!pcp||!sc)return;
+  const mb=parseFloat(pcp.style.marginBottom)||0;const kin=pcp.querySelector(".kin")||pcp;const k=(kin.offsetHeight||pcp.offsetHeight)/1037;const im=pcp.querySelector(".kin img.kfr");
+  const F=im&&typeof kitFrw==="function"?kitFrw(im.getAttribute("src")):null;const tip=F?F[1][2]:1037;/* below the tassel tip the frame box is empty */
+  const below=Math.max(0,pcp.offsetHeight-((kin===pcp?0:kin.offsetTop)+tip*k));sc.style.marginTop=(mb<0?Math.max(0,Math.round(-mb-below+4)):0)+"px"}catch(e){}}};
 window.KIT_PFO=KIT_PFO;
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;

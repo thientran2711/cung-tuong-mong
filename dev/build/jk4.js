@@ -1250,7 +1250,7 @@ function kitPcFitPortrait(pc){try{const max=parseFloat(pc.style.getPropertyValue
  const nm=pc.querySelector(":scope > .pcl > .pcname"),pcp=pc.querySelector(":scope > .pcl > .pcp"),head=(nm?nm.offsetHeight:44)+8,mb=pcp?parseFloat(pcp.style.marginBottom)||0:0,vis=1;void mb;/* the text starts BELOW the frame's pendant + tassel (kitPcClearTassel), so the whole frame counts */
  const w=Math.max(120,Math.min(nat,Math.floor((max-head-80)/vis*550/1037)));pc.style.setProperty("--kpcw",w+"px");kitPcClearTassel(pc);requestAnimationFrame(()=>{kitPcClearTassel(pc);requestAnimationFrame(()=>kitPcClearTassel(pc))})}catch(e){}}
 /* the rows under the frame used to start OVER the pendant + tassel (negative margin of the frame): inside the scrolling text area that overlapped the label («Hoàng thượng → ta», owner-visible, KK23b nit): the text area now starts under the tassel */
-function kitPcClearTassel(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
+function kitPcClearTassel(pc){try{if(window.KIT_PFO&&KIT_PFO.clear)return KIT_PFO.clear(pc);const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
 window.kitPcClearTassel=kitPcClearTassel;
 window.kitPcFitPortrait=kitPcFitPortrait;
 (function(){const k0=window.kitPcKeyFit;kitPcKeyFit=function(pc){try{k0&&k0.apply(this,arguments)}catch(e){}try{kitPcScroll(pc);kitPcFitPortrait(pc)}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;

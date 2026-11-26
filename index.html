@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"daa31a5e+","t":"2026-11-26T09:47Z","c":"KIT §4.3a: her frame at home by home kind — KIT_HOME_FRAME[kc2D()] (Công chúa nc/bd/pf → frame-princess per MAIN 156; tiểu thư / thôn nữ pl…","b":"8f737d5f3f63","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"48c791a1+","t":"2026-11-26T10:57Z","c":"kit-home-frame (KK41, MAIN 157 GO): K-FRAME-HOME wired — KIT §4.3a tiểu thư -> frame-home (red lacquer), thôn nữ -> frame-dan (plain wood),…","b":"b6d1a1f36c46","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -44283,8 +44283,16 @@ const KIT_PFO={gap:10,dflt:762,band:{cold:762,"consort-0":749,"consort-1":749,"c
   const h=kin.offsetHeight||pcp.offsetHeight;if(!h)return;const k=h/1037,top=kin===pcp?0:kin.offsetTop;
   const want=top+this.of(pcp)*k+this.gap;let mb=Math.round(want-pcp.offsetHeight);const set=v=>{if(pcp.__kpfoMb!==v){pcp.__kpfoMb=v;pcp.style.setProperty("margin-bottom",v+"px","important")}};set(mb);pcp.classList.add("kpfo");
   /* the column's own row-gap and empty rows also push: correct once on the first visible row after the frame, so its top is EXACTLY band + gap */
-  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top;if(first==null||t<first)first=t}
-  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}}catch(e){}}};
+  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top-(c.classList.contains("kplscr")?parseFloat(c.style.marginTop)||0:0)/* its own clear-tassel margin (below) is not a column gap */;if(first==null||t<first)first=t}
+  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}
+  /* KK42 (MAIN 158 LOOK nit «Hoa▪tai», law 11): a card's SCROLLING text area (.kplscr, KIT §6.4) starts UNDER the pendant + tassel (kitPcClearTassel rule) in EVERY
+     person card — it only ran for cards with a fixed height (--kpcmax), so the identity card's item grid lay under her frame's tassel */
+  KIT_PFO.clear(pc)}catch(e){}},
+ /* THE clear-tassel rule (one part; jk4 kitPcClearTassel calls it): .kplscr's top = the frame ART's real bottom (tassel tip, KIT_FRW opaque bottom, jhcpor) + 4 px */
+ clear:function(pc){try{const L=pc&&pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp"),sc=L&&L.querySelector(":scope > .kplscr");if(!pcp||!sc)return;
+  const mb=parseFloat(pcp.style.marginBottom)||0;const kin=pcp.querySelector(".kin")||pcp;const k=(kin.offsetHeight||pcp.offsetHeight)/1037;const im=pcp.querySelector(".kin img.kfr");
+  const F=im&&typeof kitFrw==="function"?kitFrw(im.getAttribute("src")):null;const tip=F?F[1][2]:1037;/* below the tassel tip the frame box is empty */
+  const below=Math.max(0,pcp.offsetHeight-((kin===pcp?0:kin.offsetTop)+tip*k));sc.style.marginTop=(mb<0?Math.max(0,Math.round(-mb-below+4)):0)+"px"}catch(e){}}};
 window.KIT_PFO=KIT_PFO;
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
@@ -49128,7 +49136,7 @@ function kitPcFitPortrait(pc){try{const max=parseFloat(pc.style.getPropertyValue
  const nm=pc.querySelector(":scope > .pcl > .pcname"),pcp=pc.querySelector(":scope > .pcl > .pcp"),head=(nm?nm.offsetHeight:44)+8,mb=pcp?parseFloat(pcp.style.marginBottom)||0:0,vis=1;void mb;/* the text starts BELOW the frame's pendant + tassel (kitPcClearTassel), so the whole frame counts */
  const w=Math.max(120,Math.min(nat,Math.floor((max-head-80)/vis*550/1037)));pc.style.setProperty("--kpcw",w+"px");kitPcClearTassel(pc);requestAnimationFrame(()=>{kitPcClearTassel(pc);requestAnimationFrame(()=>kitPcClearTassel(pc))})}catch(e){}}
 /* the rows under the frame used to start OVER the pendant + tassel (negative margin of the frame): inside the scrolling text area that overlapped the label («Hoàng thượng → ta», owner-visible, KK23b nit): the text area now starts under the tassel */
-function kitPcClearTassel(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
+function kitPcClearTassel(pc){try{if(window.KIT_PFO&&KIT_PFO.clear)return KIT_PFO.clear(pc);const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
 window.kitPcClearTassel=kitPcClearTassel;
 window.kitPcFitPortrait=kitPcFitPortrait;
 (function(){const k0=window.kitPcKeyFit;kitPcKeyFit=function(pc){try{k0&&k0.apply(this,arguments)}catch(e){}try{kitPcScroll(pc);kitPcFitPortrait(pc)}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
@@ -100433,7 +100441,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8f737d5f3f63";window.CTM_BUILD=BUILD;
+const BUILD="b6d1a1f36c46";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

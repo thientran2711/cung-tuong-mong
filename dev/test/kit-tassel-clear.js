@@ -1,0 +1,32 @@
+/* kit-tassel-clear.js — KIT_PFO.clear (KK42): in every person card with a scrolling text area (.kplscr) the text starts under the frame art tassel tip (overlap <= 0): identity card at home + in the palace, Hậu cung card; Fold + iPad. usage: node dev/test/kit-tassel-clear.js <index.html> [shotdir]. Prints one JSON row per card; exit 1 on overlap > 0. */
+/* kit-home-frame.js — KIT §4.3a (pre-palace portrait, OB-NGOAICUNG; MAIN 156 queue): before the palace (isKc: Tiểu thư / Thôn nữ at home) HER portrait
+   frame shows NO consort rank sign (frame by home kind: Công chúa → frame-princess) — no rank crest (.kcrest), no rank gem (.kgem) — in the header and her identity card; once she is in the palace
+   (S.kc.inPal) the crest + gem come back. Fold 755x1000 + iPad 1180x820, a real «Ở nhà» start (origin tt), real click on her header portrait.
+   usage: node dev/test/kit-home-frame.js <index.html> [shotdir]   exit 1 on a FAIL */
+const {chromium}=require('playwright');const path=require('path');const F=path.resolve(process.argv[2]);const SH=process.argv[3];const ORG='tt';let bad=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++};const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+(async()=>{const b=await chromium.launch();for(const [W,H] of [[755,1000],[1180,820]]){const D=W+'x'+H;const c=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block',hasTouch:W<1100,isMobile:W<1100,reducedMotion:'reduce'});
+ await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click());document.querySelectorAll('[data-km-close]').forEach(b=>{if(b.offsetParent)b.click()})},300)});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
+ await p.route(/\.(mp3|ogg|m4a|mp4|webm|wav)(\?|$)/,r=>r.abort());
+ await p.goto('file://'+F);await sleep(2500);await p.evaluate(()=>localStorage.clear());await p.reload();await p.waitForFunction(()=>typeof start==='function',null,{timeout:240000});await sleep(3500);
+ const skip=async()=>{for(let i=0;i<6;i++){const n=await p.evaluate(()=>{const k=document.getElementById('kload');if(k){k.remove();return 1}const o=document.getElementById('kroul');if(o&&o.isConnected){const b=[...o.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(b){b.click();return 1}}return 0});if(!n)break;await sleep(700)}};
+ await skip();await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await sleep(2500);await skip();
+ await p.evaluate(o=>{for(let i=0;i<200&&S.origin.k!==o;i++){try{store.set(NL_KEY,null)}catch(e){}start()}if(S.origin.k!==o){S.origin=ORIGINS.find(x=>x.k===o);nlCard()}},ORG);await sleep(700);await skip();
+ await p.evaluate(()=>{const b=document.querySelector('#modal [data-kcp="nha"]');if(b)b.click()});await sleep(800);for(let i=0;i<40&&await p.evaluate(()=>!!document.getElementById('kroul'));i++)await sleep(500);
+ await p.evaluate(()=>{const b=document.querySelector('#modal button[data-nl="ok"]');if(b)b.click()});await sleep(1500);
+ await p.evaluate(()=>{for(let i=0;i<12&&Q.length;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}tab='act';render()});await sleep(1500);
+ await p.evaluate(()=>{for(let i=0;i<12&&Q.length;i++){closeModal()}document.querySelectorAll('#dawn,#kdaytc,#kboot,#kcover').forEach(e=>e.remove());const t=document.getElementById('title');if(t)t.hidden=true;render()});await sleep(2500);
+ const info=await p.evaluate(()=>{const me=[...document.querySelectorAll('.pcp.kit,.md.kit')].filter(e=>e.offsetParent);return {kc:typeof isKc==='function'&&isKc(),road:typeof road8==='function'?road8():'',rank:S.rank,
+   frames:me.slice(0,12).map(e=>{const f=e.querySelector('img.kfr');const cr=e.querySelector('.kcrest');const g=e.querySelector('[src*="gem-"],[style*="gem-"]');return {where:(e.closest('[id]')||{}).id,fr:f&&f.src.split('/').pop(),crest:!!cr,gem:!!g}})}});
+ await p.evaluate(()=>{const e=document.getElementById('me-p');if(e)e.click()});await sleep(2500);
+ await p.evaluate(()=>{for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if((cs.position==='fixed'||cs.position==='absolute')&&e.id!=='modal'&&!e.closest('#modal')&&+cs.zIndex>=(+getComputedStyle(document.getElementById('modal')).zIndex||0)&&e.offsetWidth>300&&e.offsetHeight>300)e.remove()}});await sleep(500);
+ const G=(where)=>p.evaluate((where)=>{const out=[];for(const pc of document.querySelectorAll('.pc')){if(!pc.offsetParent)continue;const L=pc.querySelector(':scope>.pcl'),pcp=L&&L.querySelector(':scope>.pcp'),sc=L&&L.querySelector(':scope>.kplscr');if(!pcp||!sc)continue;
+   const im=pcp.querySelector('.kin img.kfr');const F=im&&kitFrw(im.getAttribute('src'));const kin=pcp.querySelector('.kin')||pcp;const k=kin.offsetHeight/1037;const tip=kin.getBoundingClientRect().top+(F?F[1][2]:1037)*k;
+   const st=sc.getBoundingClientRect().top;out.push({where,inModal:!!pc.closest('#modal'),fr:F&&F[0],kpcmax:!!pc.style.getPropertyValue('--kpcmax'),tip:Math.round(tip),textTop:Math.round(st),overlap:Math.round(tip-st),gapUnder:Math.round(st-tip)})}return out},where);
+ const all=[];await p.evaluate(()=>{const e=document.getElementById('me-p');if(e)e.click()});await sleep(2500);all.push(...await G('id-home'));
+ await p.evaluate(()=>{for(let i=0;i<6&&Q.length;i++)closeModal();const M=document.getElementById('modal');if(M)M.hidden=true;S.kc.inPal=true;render()});await sleep(1500);
+ await p.evaluate(()=>{const e=document.getElementById('me-p');if(e)e.click()});await sleep(2500);all.push(...await G('id-pal'));if(SH)await p.screenshot({path:`${SH}/pal-${W}.png`});
+ await p.evaluate(()=>{for(let i=0;i<6&&Q.length;i++)closeModal();const M=document.getElementById('modal');if(M)M.hidden=true;const b=document.querySelector('[data-tab="hc"],[data-tab="harem"]')||[...document.querySelectorAll('#tabs button,[data-tab]')].find(x=>/Hậu cung/.test(x.textContent));if(b)b.click()});await sleep(3000);all.push(...await G('hau-cung'));
+ await p.evaluate(()=>{const v=liveRivals(true)[0];try{openRival?openRival(rivals.indexOf(v)):0}catch(e){}});await sleep(2000);all.push(...await G('rival'));
+ for(const x of all){console.log(D,JSON.stringify(x));if(x.overlap>0)bad++}ok(all.some(x=>x.where==='id-home')&&all.some(x=>x.where==='id-pal'),`${D}: identity card measured`);
+ await c.close()}
+ await b.close();console.log(bad?`KIT-TASSEL-CLEAR FAIL (${bad})`:'KIT-TASSEL-CLEAR PASS');process.exit(bad?1:0)})();
