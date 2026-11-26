@@ -396,3 +396,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 22:45Z RV-163 PASS dialog-order-r4 4594ec2b → LC25 order. WORDING-MARKS RV READY 9047c283 (markTxt(text,row)) → RV-163 after sideq-trim; KK48 + R5 told the signature. REPORT-PDF ack (PDF @7d704c99e on LIVE 03a8c17c).
 - 22:46Z PUSHED main 504d2e6a → 4cfcda61 (LC25 PA+SP pace-all + stat-pace; QC pass, old save ok). ROLLBACK now 504d2e6a. Told sếp.
 - 22:46Z RV-163 PASS sideq-trim a6ecd04e → LC25; flake nrask/j72c ~1/4 on branch → SIDEQ-TRIM hunts race (review/sideq-race). RV-163 ctx high → WORDING-MARKS if fits, else handover → MAIN opens RV-164.
+- 22:47Z SIDEQ-TRIM rolled (handover review/sideq-race a395ab08) → archived; opened SIDEQ-RACE session_01Rc5AsM8GCMiy4J62EJgPAW (opus, race hunt nrask/j72c).
