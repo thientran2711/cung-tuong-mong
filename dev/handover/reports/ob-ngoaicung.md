@@ -240,3 +240,21 @@ in the palace (8 ranks, S.rank ≤ 7). No `RANKS[S.rank]` / `RANKS[Math.min(S.ra
 Gates: QUICKCHECK PASS on 821eba2a (open 2002 ms · old save ok · perf new/live render 221/197, tab 510/470, buổi 1347/1287, tasks>200ms 33/32). Core gates:
 G4 80 dialog-fixed + G4 90 button-crawl = the same pre-existing LIVE FAILs; LOOK-DEDUPE failed once inside the long run → re-run alone PASS on ca368b86 AND
 821eba2a. On e1b0eba8 (+ nit): iPad scan 5 roads PASS · coop-e2e 143/143 · page errors 0. (Quickcheck not re-run for the 4-line nit: identical output.)
+
+## r5 — OB-NGOAICUNG-3b (RV r4 PERF FAIL + MAIN 159 same-family: palace favour at home) — on RV merge ca386345
+PRIORITY #1 CHECK ('lsSync|nhạt lòng với ta|kcInit'): reused jlogsync lsSync (the ONE Sổ ghi number sync), kcInit (the one home start, kc2Init wraps it),
+jroad8 gates; no new table. Context ≈ 29 % at the end of r5 (start 8 %).
+**PERF**: dev/test/ob-ngoaicung/perf-probe.js (per origin, timed buổi like quickcheck BUOI under CPU×4 + inclusive time inside every wrapped function):
+branch vs LIVE aa37de21, 5 origins × 4 buổi: mean ≈ 2.07 s vs ≈ 1.85 s (noise; no 5 s buổi in 40); every gate of this branch (placeSift, placeEvOk,
+placeNoteSweep, whyText, resultShow, meRankN, road8 …) < 5 ms per buổi; render() ×5 per buổi dominates on both builds. quickcheck.js --runs 5 on ca386345:
+PASS (branch buổi 1143–1868 ms, LIVE 995–2026). RV-OB-NGOAICUNG-3's LIVE-vs-LIVE control also showed a 4.4 s buổi → the outlier is LIVE's.
+r5 final (8410a928), quickcheck 3 runs in a row: perf PASS ×3 (buổi new/live 1528/1838 · 1161/1055 · 1189/1656 ms; render 166/229 · 205/220 · 243/235;
+tab 488/548 · 457/510 · 508/490; tasks>200ms 27/29 · 29/30 · 29/32); old save ok ×3; core gates only G4 80 dialog-fixed + G4 90 button-crawl (pre-existing LIVE).
+**Palace favour at home (MAIN 159, pre-existing on LIVE)**: (1) jlogsync lsSync: at home (road8 kc) the parts sung / th / hh are no Sổ ghi line → no emperor
+Tuần lục page («Hoàng thượng nhạt lòng với ta. Sủng −8»), no «Thái hậu → ta … (Thái hậu phật lòng), Hoàng hậu → ta …». (2) the home START: start() makes the
+palace life first and its sync writes «Ngươi vào cung làm cung nữ … Sủng 8 → 0 (Hoàng thượng phật ý)» + «Chương 1: Phận tỳ nữ…»; «Nhận thân phận» → nhà
+then kcInit — those abandoned palace lines stayed as her first home lines. kcInit wrapper (jroad8): the pre-home lines of the life are dropped, «Xin xăm» kept.
+Probe: cnv home start BEFORE [«Kiếp này ngươi ở quê…», «Ngươi vào cung làm cung nữ … Sủng 8 → 0 (Hoàng thượng phật ý)…», «Xin xăm…», «Chương 1: Phận tỳ nữ…»]
+→ AFTER [«Kiếp này ngươi ở quê… — Bạc 9 → 8», «Xin xăm…»]; a palace-path life keeps its lines.
+scan.js strict «favourLog» (whole home Sổ ghi: Sủng numbers, «Hoàng thượng nhạt lòng / để tâm», Thái hậu / Hoàng hậu favour): LIVE tt/cnv FAIL (lines above);
+branch: iPad 5/5 PASS (nc re-run alone, palace-start flake), Fold 5/5 PASS; all earlier strict surfaces (meRank, drawnTag, cards forced …) PASS; 0 page errors.
