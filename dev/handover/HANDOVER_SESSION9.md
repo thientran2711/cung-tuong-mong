@@ -351,3 +351,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:19Z owner 21:30Z: her life ends only by Emperor decision / reign end / her own choice; remove age-40 end → added to REIGN-END; PACE-SPEED told.
 - ~21:22Z KIT-STAGE-R5 914674fa flip LOOK PASS → Fold+iPad videos SENT to sếp. Result card waits on KK45 kitResFold (pushed KK45 + dress-fix kit confirm).
 - ~21:18Z RV-163B map stack FAIL/HOLD (carries unapproved nhv/kit-stage). MAIN ruling (b): MAP-R8 session_01Rc5AsMBAKsCvMCqPGZy5fi rebuilds zones+icons on LIVE without nhv/kit-stage, C place-glyphs v3 instead of stat glyphs. LC25 drop map stack from queue.
+- ~21:25Z MOTION-BUILD-2 rolled (motion-bao-vat 48514870, merged ring-build) → archived; remaining (face card cover, title plate size, face video) → RING-BUILD-4 (one set). Sent sếp 6 vòng bảo vật videos (gift/toilette/hoa điền, Fold+iPad); titles held (plates small).
