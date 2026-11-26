@@ -174,3 +174,10 @@ info-tap-audit.js now measures the real hit area through the target's centre (el
 | e.g. «! Xem thêm» / «! Dạo này» | 20 × 20 | ≥ 44 × 44 (or neighbour-limited) |
 | e.g. «ⓘ Cách học» | 81 × 17 | 81 × 44 |
 Full run Fold + iPad: ALL PASS (Fold 117 rows incl. sub-tabs, iPad ALL PASS after the horizontal tab-bar scroll fix in the harness).
+
+## r4 — hit area only into empty space (LC19 / MAIN 150: r3's fixed 44×44 ::after stole taps from neighbour controls)
+- `kitHitGrow` (j79) replaces the fixed box: per target it measures the free room on each side and grows toward 44 px ONLY there — never over another tap control, never past the largest box around it that holds no other control (its row, its card head), never out of its sticky bar / clip box, nothing when it sits inside a control (a «!» on a card, «ⓘ» in an act button). No room → no layer and no `position:relative` (the part is exactly as on main). Runs throttled (120 ms) on DOM change / scroll / resize; ignores kitInfoOneLine's own «!» re-draws.
+- `kitInfoOneLine` (jk4) keeps its row «!» when it is still needed instead of removing and re-making it on every pass (main: 31 new «!» elements in 2 s on a person card → 5); taps on «! Dạo này» no longer land on a thrown-away node.
+- Tab-bar info slot `.pctabs>.pctinfo` spans the bar height (align-self:stretch), so «ⓘ Cách học» can grow over its own bar.
+- Gates (all on this sha): info-tap-audit.js Fold + iPad → 1 row of 238 not measured: «Biết tên» on iPad was re-drawn before its hit could be measured; its popup opened. Every other target is ≥ 44 or stops at a neighbour / its box. tainghe-info.js ALL PASS. dev/test/hit-overlap-lc19.js (LC19's tool, now with/without the layers via `html.khg-off`): 0 points taken by the grown layers from a reachable control (GROW 0); the remaining overlap/steal rows are the same kind as on main (seeded SEED=7: main 123, branch 99) — a part's OWN box over a neighbour, not the hit layer.
+- Note: dev/test/kit-info-fixed.js Fold FAILs from a sparse worktree directory for main's own build too (environment: local img/), PASS from /home/user/cung-tuong-mong — not this change.

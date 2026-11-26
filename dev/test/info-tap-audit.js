@@ -39,7 +39,11 @@ const HIT=(id)=>{const e=document.querySelector(`[data-itx="${id}"]`);if(!e)retu
  for(let k=1;k<=40;k++){if(on(cx,cy-k))u=k;else break}for(let k=1;k<=40;k++){if(on(cx,cy+k))d=k;else break}
  for(let k=1;k<=40;k++){if(on(cx-k,cy))l=k;else break}for(let k=1;k<=40;k++){if(on(cx+k,cy))rr=k;else break}/* a side may stop short of 44 only where the next thing is ANOTHER tap target (two targets closer than 44 px share the gap; whichever is under the finger wins) */
  const tapAt=(x,y)=>{const h=document.elementFromPoint(x,y);return !!h&&!!h.closest('button,a,[role=button],.kgl,.khap,.kskn,.pcl,.pc,[onclick],[data-k3go]')};
- const okH=(u>=21||tapAt(cx,cy-u-1))&&(d>=21||tapAt(cx,cy+d+1)),okW=(l>=21||tapAt(cx-l-1,cy))&&(rr>=21||tapAt(cx+rr+1,cy));
+ /* …or at the edge of the largest box around it that holds no other tap control (kit rule kitHitGrow: grow only into empty space) */
+ const CSEL='button,a[href],[role=button],[onclick],input,select,textarea,.pc,.tok,.kgl,.kskn,button.ladi,.khap:not([role=img])';let fb={l:r.left,t:r.top,r:r.right,b:r.bottom};
+ for(let a=e.parentElement;a&&a!==document.body&&a!==document.documentElement;a=a.parentElement){if(a.matches(CSEL))break;if([...a.querySelectorAll(CSEL)].some(c=>c!==e&&!e.contains(c)&&c.getClientRects().length))break;const q=a.getBoundingClientRect();fb={l:q.left,t:q.top,r:q.right,b:q.bottom}}
+ const out=(x,y)=>x<fb.l+2||x>fb.r-2||y<fb.t+2||y>fb.b-2;
+ const okH=(u>=21||tapAt(cx,cy-u-1)||out(cx,cy-u-1))&&(d>=21||tapAt(cx,cy+d+1)||out(cx,cy+d+1)),okW=(l>=21||tapAt(cx-l-1,cy)||out(cx-l-1,cy))&&(rr>=21||tapAt(cx+rr+1,cy)||out(cx+rr+1,cy));
  const who=(x,y)=>{const h=document.elementFromPoint(x,y);return h?h.tagName.toLowerCase()+'.'+String(h.className).split(' ')[0]:'-'};const bl=[who(cx,cy-u-1),who(cx,cy+d+1),who(cx-l-1,cy),who(cx+rr+1,cy)].join('/');return {bl,okH,okW,h:u+d+1,w:l+rr+1,needH:Math.min(TAPMIN,Math.floor(ch)-1),needW:Math.min(TAPMIN,Math.floor(cw)-1)}};
 const TAPMIN=+(process.env.TAPMIN||44);
 (async()=>{const b=await chromium.launch();const res=[];let bad=0;
@@ -63,6 +67,7 @@ const TAPMIN=+(process.env.TAPMIN||44);
     for(const h of sc.hidden)res.push({dev,screen:scr,what:'HIDDEN',ok:!/^unlabelled/.test(h),note:h});
     for(const it of sc.info){await p.evaluate(CLEAN);const has=await p.evaluate(id=>!!document.querySelector(`[data-itx="${id}"]`),it.id);
      if(!has){const sc2=await p.evaluate(SCAN,MAXN);const m=sc2.info.find(x=>x.lab===it.lab);if(!m){res.push({dev,screen:scr,what:it.cls+' «'+it.lab+'»',ok:true,note:'gone after re-render (skipped)'});continue}it.id=m.id}
+     await p.evaluate(id=>{const e=document.querySelector(`[data-itx="${id}"]`);if(e)e.scrollIntoView({block:'center',inline:'nearest'})},it.id);await p.waitForTimeout(300);/* let kitHitGrow re-measure after the scroll (throttled 120 ms) */
      const hs=await p.evaluate(([f,id,m])=>{window.TAPMIN=m;return (new Function('return '+f))()(id)},[HIT.toString(),it.id,TAPMIN]);
      last=null;let t=await rt.tap(`[data-itx="${it.id}"]`,{screen:scr,label:it.lab});
      if(!t&&last&&/not in page|gone/.test(JSON.stringify(last))){/* re-drawn while scrolling (kitInfoOneLine re-adds its «!»): find it again, tap once more */await p.evaluate(CLEAN);const sc3=await p.evaluate(SCAN,MAXN);const m=sc3.info.find(x=>x.lab===it.lab);if(m){last=null;t=await rt.tap(`[data-itx="${m.id}"]`,{screen:scr,label:it.lab})}}await p.waitForTimeout(700);

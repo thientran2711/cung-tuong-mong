@@ -1195,8 +1195,11 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
    kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
 function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv, .pc .pcb > .kb.kpkb > .kr > .krv").forEach(v=>{/* K-INFO-TAP (law 11): the kit-rows info block of a person card body (Hoàng tự / Quý tộc cards: Tuổi · Thứ bậc · Tước vị …) is the same info block */
   if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
-  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
-  if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
+  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.style.display="none";
+  /* tainghe-info r4: measure with the old «!» hidden and KEEP it when it is still needed (it used to be removed and re-made on every pass: ~15 new «!» a second,
+     a tap could land on one that was just thrown away) */
+  if(v.scrollWidth>v.clientWidth+1){v.classList.add("kone");if(old){old.style.display="";return}const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}
+  else if(old)old.remove()})}catch(e){console.error("kitInfoOneLine",e)}}
 window.kitInfoOneLine=kitInfoOneLine;
 (function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
 .pc .pcf .kr>.krv,.pc .pcb>.kb.kpkb>.kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}

@@ -1,0 +1,42 @@
+/* (copy of dev/handover/reports/lc19-tools/hit-overlap.js @33d0f021, box() reads the r4 measured hit vars) LC19 gate: kit info-target hit areas (::after >= 44x44, tainghe r3b) — on Fold + iPad, every bottom tab + sub-tab:
+   (A) pairs of visible info targets whose hit boxes intersect; (B) a hit box covering another tap control where the tap lands on the info target. expect 0/0 */
+const {chromium}=require('playwright');const path=require('path');
+const U0=process.argv[2];const URL='file://'+path.resolve(U0);
+const SETUP=()=>{try{window.__kbootHostDrop&&window.__kbootHostDrop()}catch(e){}document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());
+ SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
+ Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;for(let i=0;i<3;i++){try{nextBuoi()}catch(e){}Q.length=0}
+ try{kn();for(const v of rivals){S.met[v.id]=1}}catch(e){}try{S.arts.cam=2;S.artp.cam=30;S.vir.dung=1}catch(e){}
+ const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');render()};
+const CLEAN=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn,#kmrew,.km-reward').forEach(e=>e.remove());const k=document.getElementById('kpop');if(k)k.hidden=true;
+ if(Q.length||!document.getElementById('modal').hidden){Q.length=0;document.getElementById('modal').hidden=true}document.querySelectorAll('.kpscene').forEach(e=>e.hidden=true);/* harness: the outside-tap catcher of a person pop-up (not what this audit is about, see kit-info-tap.js) */const c=document.getElementById('kxcatch');if(c)c.style.pointerEvents='none'};
+
+const CHK=()=>{const T='.kgl,.khap:not([role=img]),.kskn,button.ladi';const vis=e=>{const r=e.getBoundingClientRect();return r.width>1&&r.height>1&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth&&getComputedStyle(e).visibility!=='hidden'};
+ const L=[...document.querySelectorAll(T)].filter(vis).filter((e,i,a)=>!a.some(o=>o!==e&&o.contains(e)));
+ const box=e=>{const r=e.getBoundingClientRect(),cs=getComputedStyle(e,'::after');if(cs.content==='none'||cs.content==='normal')return {l:r.left,t:r.top,r:r.right,b:r.bottom,real:r};/* r4: the ::after box is the measured free room (--kht/--khb/--khl/--khr set by kitHitGrow) */const v=k=>parseFloat(e.style.getPropertyValue(k))||0;return {l:r.left-v('--khl'),t:r.top-v('--kht'),r:r.right+v('--khr'),b:r.bottom+v('--khb'),real:r}};
+ const X=(a,b)=>!(a.r<=b.l+.5||b.r<=a.l+.5||a.b<=b.t+.5||b.b<=a.t+.5);const nm=e=>(e.className.split?e.className.split(' ')[0]:'')+' «'+(e.innerText||e.getAttribute('aria-label')||'').replace(/\s+/g,' ').trim().slice(0,24)+'»';
+ const A=[],B=[];const BX=L.map(box);
+ for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++)if(X(BX[i],BX[j])){const a=BX[i],b=BX[j];const l=Math.max(a.l,b.l),r=Math.min(a.r,b.r),t=Math.max(a.t,b.t),bb=Math.min(a.b,b.b);A.push(nm(L[i])+' × '+nm(L[j])+` (${Math.round(r-l)}x${Math.round(bb-t)})`)}
+ const C=[...document.querySelectorAll('button,a,[role=button],[onclick],.pc,.tok')].filter(vis);
+ for(let i=0;i<L.length;i++){const e=L[i],bx=BX[i];for(const c of C){if(c===e||c.contains(e)||e.contains(c))continue;if(c.matches(T))continue;const r=c.getBoundingClientRect();const q={l:r.left,t:r.top,r:r.right,b:r.bottom};if(!X(bx,q))continue;
+   const l=Math.max(bx.l,q.l),rr=Math.min(bx.r,q.r),t=Math.max(bx.t,q.t),b=Math.min(bx.b,q.b);let hit=0,n=0,g=0;const R=bx.real;const H=document.documentElement;for(let x=l+1;x<rr;x+=4)for(let y=t+1;y<b;y+=4){n++;const h=document.elementFromPoint(x,y);if(h&&(h===e||e.contains(h))){H.classList.add('khg-off');const h0=document.elementFromPoint(x,y);H.classList.remove('khg-off');/* a steal only where, with the hit layers off, the finger would reach the control */if(!(h0&&(h0===c||c.contains(h0)))&&!(h0&&(h0===e||e.contains(h0))))continue;hit++;if(!(h0===e||e.contains(h0)))g++}}/* g = points taken ONLY by the grown hit layer (outside the part's own box) */
+   if(hit)B.push(nm(e)+' steals '+hit+'/'+n+' pts'+(g?` [GROW ${g}]`:'')+' of '+c.tagName.toLowerCase()+'.'+nm(c))}}
+ return {n:L.length,A,B}};
+(async()=>{const b=await chromium.launch();let bad=0;const rows=[];
+ for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
+  if(process.env.SEED)await ctx.addInitScript(sd=>{let x=+sd||1;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},process.env.SEED);/* SEED=n: same game on both builds, so a baseline diff compares like with like */
+  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});
+  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:240000});await p.waitForTimeout(2000);
+  await p.evaluate(SETUP);await p.waitForTimeout(1500);await p.evaluate(CLEAN);
+  const scan=async(scr)=>{const r=await p.evaluate(CHK);rows.push({dev:W+'x'+H,scr,...r});bad+=r.A.length+r.B.length};
+  await scan('home');
+  const nt=await p.evaluate(()=>[...document.querySelectorAll('#tabs button')].filter(b=>b.getBoundingClientRect().width>0).length);
+  for(let i=0;i<nt;i++){await p.evaluate(CLEAN);const t=await p.evaluate(i=>{const b=[...document.querySelectorAll('#tabs button')].filter(b=>b.getBoundingClientRect().width>0)[i];b.click();return b.innerText.replace(/\s+/g,' ').trim()},i);await p.waitForTimeout(900);await p.evaluate(CLEAN);await scan(t);
+   const ns=await p.evaluate(()=>[...document.querySelectorAll('#panel .pctabs [data-ktsv], #panel .pctabs > button.pct')].filter(b=>b.getBoundingClientRect().width>0).length);
+   for(let s=0;s<ns;s++){await p.evaluate(CLEAN);const st=await p.evaluate(s=>{const b=[...document.querySelectorAll('#panel .pctabs [data-ktsv], #panel .pctabs > button.pct')].filter(b=>b.getBoundingClientRect().width>0)[s];if(!b)return null;b.click();return b.innerText.replace(/\s+/g,' ').trim()},s);if(st==null)continue;await p.waitForTimeout(700);await p.evaluate(CLEAN);
+    await scan(t+' › '+st);
+    /* scroll the panel through */const steps=await p.evaluate(()=>{const P=document.querySelector('#panel .pcr')||document.getElementById('panel');return P?Math.min(6,Math.ceil(P.scrollHeight/Math.max(1,P.clientHeight))):0});
+    for(let k=1;k<steps;k++){await p.evaluate(k=>{const P=document.querySelector('#panel .pcr')||document.getElementById('panel');P.scrollTop=k*P.clientHeight*0.9},k);await p.waitForTimeout(250);await scan(t+' › '+st+' ↓'+k)}}}
+  if(errs.length)rows.push({dev:W+'x'+H,scr:'pageerrors',n:0,A:errs,B:[]});await ctx.close()}
+ let tot=0;for(const r of rows){tot+=r.n;if(r.A.length||r.B.length)console.log(r.dev,'|',r.scr,'| targets',r.n,'\n  OVERLAP:',r.A.join(' ; '),'\n  STEAL:',r.B.join(' ; '))}
+ console.log(`screens ${rows.length} · target-views ${tot} · overlap+steal ${bad} → ${bad?'FAIL':'PASS'}`);await b.close();process.exit(bad?1:0)})();
