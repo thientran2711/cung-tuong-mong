@@ -1,0 +1,9 @@
+2026-11-26T07:55:04.694Z ok silence 6s renderer 24248 1494MB 53.3%
+2026-11-26T08:00:05.373Z ok silence 1s renderer 24248 1445MB 50.2%
+2026-11-26T08:05:05.966Z ok silence 5s renderer 24248 1535MB 49.0%
+2026-11-26T08:10:06.596Z ok silence 1s renderer 24248 1705MB 47.2%
+2026-11-26T08:15:07.239Z ok silence 70s renderer 24248 2271MB 49.1%
+2026-11-26T08:15:37.309Z WEDGE suspected: taplog silent 100s, renderer 24248 2500MB cpu 50.3% — taking proc info + 30 s trace
+2026-11-26T08:15:37.641Z page http://127.0.0.1:8083/index.html
+2026-11-26T08:16:09.674Z TRACE saved: 0 samples; top: none
+2026-11-26T08:16:09.674Z WEDGE capture done

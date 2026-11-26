@@ -1,0 +1,22 @@
+  PID   RSS %CPU ELAPSED
+24248 2560184 50.3  1571
+Rss:             2560184 kB
+Anonymous:       1852388 kB
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+24248 root      20   0 1455.1g   2.4g 707796 R  99.9  15.5   8:09.02 chrome-he+
+24249 root      20   0 1455.1g   2.4g 707796 S   0.0  15.5   0:00.00 PerfettoT+
+24250 root      20   0 1455.1g   2.4g 707796 S   0.0  15.5   0:12.15 ThreadPoo+
+
+last taps:
+2026-11-26T08:13:39.212Z 1453s buoi 62 tap page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»
+2026-11-26T08:13:40.027Z 1454s buoi 62 tap page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «ⓘ luật Đức»
+2026-11-26T08:13:40.937Z 1455s buoi 62 tap .dlg «Đức» «Lui»
+2026-11-26T08:13:42.093Z 1456s buoi 62 tap page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»
+2026-11-26T08:13:43.396Z 1458s buoi 63 tap .dlg «Kẻ hầu ăn bớt» «Răn dạy rồi thaRất vữngTốnkhôngĐượclấy lại đồ, ngư»
+2026-11-26T08:13:44.167Z 1458s buoi 63 tap .kmov «Nhận»
+2026-11-26T08:13:45.241Z 1459s buoi 63 tap .dlg «Lễ tấn phong Thuần tần Tôn Nhu Gia» «Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +»
+2026-11-26T08:13:46.183Z 1460s buoi 63 tap .dlg «Lời cảnh báo» «Ghi nhớ, cứ như thườngTốnkhôngĐượcSức +3Kèmkẻ muốn»
+2026-11-26T08:13:53.581Z 1468s buoi 63 tap page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «lá phong rơi»
+2026-11-26T08:13:55.220Z 1469s buoi 63 tap page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Phong hàn · nhẹ»
+2026-11-26T08:13:56.081Z 1470s buoi 63 tap .dlg «Phong hàn · nhẹ» «Lui»
+2026-11-26T08:13:57.213Z 1471s buoi 63 tap page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»
