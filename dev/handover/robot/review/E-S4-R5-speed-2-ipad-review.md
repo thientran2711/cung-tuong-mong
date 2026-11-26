@@ -1,0 +1,6 @@
+# E-S4 R5-speed-2 (iPad) — end-of-life review (evidence limited, see moments)
+1. Summary: speed («bold»), pf/pt_hai, iPad, real taps, jsClicks 0, harness d2e03d80 (no resume), 1 buổi, 1 game year, age 20, max rank Quý nhân (2), ending «Ban hoa — Bị ban hoa, xuất cung» (game-imposed through the ceremony mini-game; no exitPick, no exit label tapped; audit VALID), 49 taps, 0 stuck, 0 dead.
+2. Scores: a first 15 min 6 (clear, but the life ends inside it) · b pacing 3 · c buttons 8 · d story 5 · e characters 4 · f choices/fairness 3 (three «Rất vững» equal options, one of which loses the whole life on the first ceremony — whether the loss comes from the mini-game result or from the odds needs a BAL check) · g feedback 6 · h mini-games 4 (#kg82 «Dâng Kỳ»: hints used 4×, then «Quay lại») · i visuals 8 · j co-op n/a.
+3. Loved: opening art and prologue. Hated: a life lost in minute three. Replay: yes.
+4. BUGS: none from this life. Possible fairness bug (one sample): ceremony mini-game «Dâng Kỳ» at «Rất vững» ends the life; compare BAL odds band vs the result, and whether «Quay lại» inside the mini-game is read as «give up → lose».
+5. Suggestions (parking lot): the first ceremony should not be able to end the life for a new player.

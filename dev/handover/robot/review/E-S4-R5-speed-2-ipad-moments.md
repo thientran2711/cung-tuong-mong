@@ -1,0 +1,19 @@
+# E-S4 R5-speed-2 (iPad, pf/pt_hai, speed→«bold», seed 3835466079) — runner feelings (top) + harness moment log (below)
+Runner reading (evidence limit: a 49-tap life; I read the trace, the last taps and the ending shot):
+- buổi 0 · DELIGHTED · clean start: roulette → «Thân phận kiếp này» → «Tiền truyện · Công chúa Phù Tang hòa thân» 4 pages → «Vào cung» → «Vào điện» → «Lễ ra mắt» with three equal choices (Dâng Cầm / Dâng Kỳ / Cúi đầu chờ xét, all «Rất vững»).
+- buổi 0 · CONFUSED/FRUSTRATED · the chosen «Dâng Kỳ» opens a mini-game #kg82 («Sẵn sàng · từ lúc này mới tính giờ»); the bot used «Gợi ý» 4× and then «Quay lại» (the mini-game's own «back»), and the life ended right there: ending «Ban hoa — Bị ban hoa, xuất cung», age 20, year 1, 49 taps. The odds label said «Rất vững», yet the very first ceremony ended the life at Quý nhân rank — a brand-new player loses a whole life in their first 3 minutes.
+- final · ODD · the ending card «Duyên cung lỡ hẹn» shows «Thuyền đưa ta về Phù Tang. Ta sống lặng lẽ bên bờ biển quê nhà» — a quiet return home; no reward popup over this card (shot shots-E-S4-R5-speed-2-ipad/end.png). Bittersweet and readable, but in a 1-buổi life the reader has no time to care.
+# E-S4-R5-speed-2-ipad moment log (bot bold, ipad, seed 3835466079, real-tap harness d2e03d80)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S4-R5-speed-2-ipad/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-E-S4-R5-speed-2-ipad/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcsan | Ở cố quốc chờ hòa ướcTốnkhôn | Trang trước | Dung mạo 29 | Dung mạo 30 | Dung mạo 31 | Dung mạo 32 | Dung mạo cung nữ 1 · shots-E-S4-R5-speed-2-ipad/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-E-S4-R5-speed-2-ipad/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #modal «Lễ ra mắt» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S4-R5-speed-2-ipad/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S4-R5-speed-2-ipad/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Lễ ra mắt» · NEW SCREEN · first time on this screen; buttons: Dâng CầmRất vữngTốnSức -5Đượ | Dâng KỳRất vữngTốnSức -5Được | Cúi đầu chờ xétRất vữngTốnSứ · shots-E-S4-R5-speed-2-ipad/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc90Tài50Tâm cơ20Đức30Danh2 | Bạc255Sức95/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | sương sớm | Quẻ Hạ (Danh) · shots-E-S4-R5-speed-2-ipad/m-new-1-8.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quakết quả khá, tự thi gi · shots-E-S4-R5-speed-2-ipad/m-new-1-9.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Duyên cung lỡ hẹn» · NEW SCREEN · first time on this screen; buttons: Chuyển kiếp · shots-E-S4-R5-speed-2-ipad/m-new-1-10.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · ending · EVENT · life over: Ban hoa — Bị ban hoa, xuất cung · age 20 · buổi 1 · bugs 0 · stuck 0 · dead buttons 0 · shots-E-S4-R5-speed-2-ipad/end.png
