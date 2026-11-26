@@ -7,7 +7,7 @@
        incident (same pair, same buổi bq()) never stacks — the biggest cause counts, not the sum; and one person's oán toward one person rises at
        most BAL.oanPace.day in one day (wk()). Fractions carry. Store: holder.opz[key] = [day, gained today, buổi, gained this buổi].
    (c) FADE (j28 ocOne): per day, faster the longer she leaves that person alone (BAL.oanCool.alone), slower for a deep grudge (BAL.oanCool.deep).
-   (d) REVENGE SATISFIES: whoever acts against a person (a harm act through runAct — the act groups of j95 H95 — or a hostile talk deed through
+   (d) REVENGE SATISFIES: whoever acts against a person (a harm act through runAct — the act groups of j95 H95 —, a lie about her (j95bSeed), or a hostile talk deed through
        twDo — jagent AGHOST: khiêu khích / hạ nhục / lạnh nhạt / rỉ tai) spends BAL.oanPace.vent.share of her oán toward that person (at least
        vent.min). Same for her (law 1).
    (e) NEWCOMER: nobody arrives with oán (j1 newRival keeps oán 0); a lie or a slight is still one bounded step, so a new face has no grudge until
@@ -44,3 +44,5 @@ function opEx(a,t){const r=a.j95rum;try{if(r)a.j95rum=null;return !!j95except(a,
 function opVent(a,t){try{if(!opOn()||!a||!t||a===t)return 0;const o=oan(a,t);if(!(o>0))return 0;const V=BAL.oanPace.vent;const d=Math.min(o,Math.max(V.min,Math.round(o*V.share)));oanAdd(a,t,-d);return d}catch(e){return 0}}
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(r&&a&&t&&a!==t&&H95.has(k)&&!F95.has(k))opVent(a,t)}catch(e){}return r}})();
 (function(){const w0=twDo;twDo=function(a,t,k){const r=w0.apply(this,arguments);try{if(r&&a&&t&&a!==t&&typeof AGHOST!=="undefined"&&AGHOST.has(k))opVent(a,t)}catch(e){}return r}})();
+/* (d) a lie spread about her (j95b j95bSeed: x tells y she harmed y) is an act against her too: the teller spends her oán the same way */
+(function(){if(typeof j95bSeed!=="function")return;const s0=j95bSeed;j95bSeed=function(x,y){const r=s0.apply(this,arguments);try{if(r&&x&&typeof x==="object")opVent(x,S)}catch(e){}return r}})();

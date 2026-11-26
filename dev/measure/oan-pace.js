@@ -48,6 +48,6 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
   while(true){const st=await p.evaluate(m=>{const n0=window.__res.length;window.__bot.step(m,120);return{t:S.turn,dead:window.__res.length>n0}},'sens');
    if(st.dead){end='died';break}
    if(st.t>=MONTHS)break;if(Date.now()-t0>(+process.env.CAP||1500)*1e3){end='cap';break}}
-  const out=await p.evaluate(()=>({tag:window.__tag,days:window.__days,mo:window.__mo,src:window.__src,rank:S.rank,turn:S.turn,wk:wk(),srv:!!(typeof isSrv==='function'&&isSrv())}));
+  const out=await p.evaluate(()=>({res:(window.__res||[]).slice(-1).map(x=>({title:x.title,fate:x.fate,turns:x.turns,rank:x.rank})),tag:window.__tag,days:window.__days,mo:window.__mo,src:window.__src,rank:S.rank,turn:S.turn,wk:wk(),srv:!!(typeof isSrv==='function'&&isSrv())}));
   console.log(JSON.stringify(Object.assign({seed:si,end,errs:errs.slice(0,3)},out)));await ctx.close()};
  const q=jobs.slice();await Promise.all(Array.from({length:PAR},async()=>{while(q.length)await run(q.shift())}));await b.close()})().catch(e=>{console.error(e);process.exit(2)});

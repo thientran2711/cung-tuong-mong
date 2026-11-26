@@ -42,6 +42,11 @@ def one(label,R,days=36):
     for m in sorted(mo):
         L=mo[m];k=len(L)
         rows.append((m,round(sum(x['mean'] for x in L)/k,1),round(sum(x['mx'] for x in L)/k,1),round(sum(x['oan'] for x in L)/k,1),round(sum(x['deep'] for x in L)/k,1),round(sum(x['my'] for x in L)/k,1),round(sum(x['ghen'] for x in L)/k,1),round(sum(x['dg30'] for x in L)/k,1),k))
+    bym=collections.defaultdict(list)
+    for r in R:
+        D={int(k):v for k,v in r['days'].items()}
+        for w in range(min(days,r.get('wk',days))):bym[w//3].append(sum(1 for x in D.get(w,[]) if hostile(x[0])))
+    print(' targetings/day by month (year 1):',' '.join(f'm{m+1}:{sum(L)/len(L):.2f}' for m,L in sorted(bym.items())))
     avg=sum(per)/max(1,len(per))
     print(f'== {label}: {len(R)} lives, {nd} days of year 1; ends {collections.Counter(r["end"] for r in R)}')
     print(f'targetings/day {avg:.2f} · distinct NPCs/day {sum(doers)/max(1,len(doers)):.2f} · days ≥2 {100*two/max(1,nd):.0f}% · days with any {100*sum(1 for x in per if x)/max(1,nd):.0f}% · first day {first}')
