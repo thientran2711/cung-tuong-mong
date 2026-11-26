@@ -11,17 +11,17 @@ const URL=process.argv[2]||'file://'+path.join(ROOT,'index.html');
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof DOOR==='object',null,{timeout:0});await p.waitForTimeout(2500);
  const R=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const F=[];let doors=0,runs=0,cards=0;const seen={};
-  DOOR.deck({k:"t-nghi",n:"Nghỉ ngơi",roads:["hs"],h:"Nghỉ một lát, nghỉ dưỡng sức, hay dưỡng nhan.",re:/^(Nghỉ ngơi một lát|Nghỉ ngơi dưỡng sức|Dưỡng nhan)$/});
-  DOOR.deck({k:"t-thinhan",n:"Thỉnh an",roads:["hs"],h:"Sang thỉnh an Thái hậu hay Hoàng hậu.",re:/^(Thỉnh an Thái hậu|Thỉnh an Hoàng hậu)$/});
-  DOOR.deck({k:"t-taimat",n:"Tai mắt",roads:["hs"],h:"Sai cung nữ dò la, nghe ngóng chung, hay cài tai mắt.",re:/^(Sai cung nữ đi dò la|Nghe ngóng chung|Cài tai mắt)$/});
-  DOOR.deck({k:"t-cold",n:"Nghỉ ngơi",roads:["cold"],h:"Nghỉ, hay đọc sách.",re:/^(Nghỉ ngơi một lát|Đọc sách)$/});
-  const R0=DOOR.D.filter(r=>/^t-/.test(r.k));
+  /* the deck jobs' real rows when they are registered (J3 hs, J5 srv/cold/kc); else sample rows with names of their own («Thử …»: no clash with a real door) */
+  if(!DOOR.D.some(r=>r.roads.includes("hs"))){DOOR.deck({k:"t-nghi",n:"Thử nghỉ ngơi",roads:["hs"],h:"thử",re:/^(Nghỉ ngơi một lát|Nghỉ ngơi dưỡng sức|Dưỡng nhan)$/});
+   DOOR.deck({k:"t-thinhan",n:"Thử thỉnh an",roads:["hs"],h:"thử",re:/^(Thỉnh an Thái hậu|Thỉnh an Hoàng hậu)$/});DOOR.deck({k:"t-taimat",n:"Thử tai mắt",roads:["hs"],h:"thử",re:/^(Sai cung nữ đi dò la|Nghe ngóng chung|Cài tai mắt)$/})}
+  if(!DOOR.D.some(r=>r.roads.includes("cold")))DOOR.deck({k:"t-cold",n:"Thử nghỉ lãnh cung",roads:["cold"],h:"thử",re:/^(Nghỉ ngơi một lát|Đọc sách.*)$/});
+  const R0=DOOR.D;/* every row, first match wins (the engine's own rule) */
   try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;
   for(let s=0;s<16;s++){let sd=900+s;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};
    try{start()}catch(e){}for(let k=0;k<30&&(isSrv()||(typeof isKc==="function"&&isKc()));k++)start();window.__nlInner=0;Q.length=0;
    if(s%4===3){S.out=1}used=0;S.bac=Math.max(S.bac||0,300);if(S.suc<60)S.suc=80;deal();tab="act";render();await sleep(30);Q.length=0;
    const road=DOOR.road();const R=R0.filter(r=>r.roads.includes(road));const D=DOOR.deckDoors();
-   const dealt={};deck.forEach(a=>{const r=R.find(r=>r.re.test(a.n||""));if(r)(dealt[r.n]=dealt[r.n]||[]).push(a.n)});
+   const dealt={};deck.forEach(a=>{for(const r of R){const k=r.key?r.key(a,deck):(r.re.test(a.n||"")?r.n:null);if(k){(dealt[k]=dealt[k]||[]).push(a.n);break}}});
    for(const n in dealt){const d=D.find(x=>x.n===n);if(dealt[n].length>=2&&!d)F.push(`${road}/${s}: «${n}» ${dealt[n].length} ways dealt, no door`);if(dealt[n].length<2&&d)F.push(`${road}/${s}: «${n}» door with one way`)}
    const bare=[...document.querySelectorAll('#panel .cards > button.kcard[data-i]')].map(x=>deck[+x.dataset.i]&&deck[+x.dataset.i].n);
    for(const d of D){doors++;seen[road+":"+d.n]=d.ways;d.ways.forEach(w=>{if(bare.includes(w))F.push(`${road}/${s}: way «${w}» also bare beside door ${d.n}`);if(!deck.some(a=>a.n===w))F.push(`${road}/${s}: way «${w}» not in deck`)})}
