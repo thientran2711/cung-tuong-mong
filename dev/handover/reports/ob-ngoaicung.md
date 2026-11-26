@@ -215,3 +215,23 @@ pre-existing FAILs reproduced on LIVE in r2; G4 95-next-dead failed once on iPad
 AND on 72fb3ff7. coop-e2e not re-run (change = rank words only). Page errors 0 in every run.
 Stills (CDN, looked at): https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc5-r3-tag-tieuthu-ipad.jpg · …-fold.jpg (Tiền truyện 1/3 plate
 «Tiểu thư · Bạch Lang Hoa (ta)», stage tag «Tiểu thư») · ngc5-r3-chest-open-{fold,ipad}.jpg.
+
+## r4 — OB-NGOAICUNG-3b (RV r3 FAIL 1: a palace consort's «thiện cảm» row on a HOME result card) — on RV merge ca368b86
+PRIORITY #1 CHECK ('resultShow|whyRows|kaResultRows'): reused the existing ONE gate (jroad8 resultShow wrapper, r2 item 8) + placePalP (jroad8, the one
+«palace person» test of the asks family); no new table. Context at start of r4 ≈ 21 % of the window.
+Cause: the r2 gate reset only before.rel (rivals' aff/m/ghen/oán). Two other sources fed the card: (a) Hoàng hậu's / Thái hậu's «thiện cảm» are HER stats
+hh / th (RKEYS rows in j63 kaResultRows «Hoàng hậu <tên>: thiện cảm −13», «Thái hậu: thiện cảm −3»); (b) the «Vì sao» rows = jwhyn whyRows → whyText,
+one note per relAdd change, read from WHYL, not from before.
+Fix (one gate, jroad8): at home the resultShow wrapper also resets before.hh / before.th to now unless her own act names Hoàng hậu (or the queen's name) /
+Thái hậu in the title; whyText at home returns "" for a palace person (placePalP) not named in the card title (title passed as window.__r8T during the call)
+— so the Sổ ghi why-tail at home drops them too.
+scan.js «cards»: forceCard() at the start and mid-play of every road (only while isKc): palace consort relAdd(v,S,-5)+relAdd(S,v,-5), queen relAdd(-4),
+S.hh−3, S.th−3, resultShow("Trong cung vừa qua") → fail if kaLastResult rows or the drawn #rtoast name a palace person or Hoàng hậu / Thái hậu.
+
+| road | forced home card | BEFORE ca368b86 | AFTER 821eba2a |
+|---|---|---|---|
+| tt / td | «Trong phủ vừa qua» | Mất: Hoàng hậu <tên>: thiện cảm −13 · Thái hậu: thiện cảm −3 | only her own numbers |
+| cnv | «Ở nhà vừa qua» | same rows | none |
+| nc / bd | «Trong cung cố quốc vừa qua» | same rows | none |
+Scan 300 random home steps × 5 roads: iPad SCAN PASS (nc re-run alone after the palace-start flake) · Fold 755x1000 SCAN PASS 5/5 · BEFORE: SCAN FAIL 5/5 «cards».
+Page errors 0. meRank / drawnTag (r3) still PASS on every road.
