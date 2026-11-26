@@ -13,6 +13,7 @@ ${P}[style*="--kpcmax"]>.pcr>.pcg.on>.pcb>button.ka{scroll-snap-align:start;box-
 ${P} .kpstick{position:static!important;box-shadow:none!important;margin:0 0 4px!important;padding:2px 0 4px!important}
 ${P} .pcp.kit .kin>.klab{display:none!important}
 .ppmed{}
+${P}>.pcl>.pcname{white-space:nowrap!important;overflow:visible}
 `;
 /* round head-and-shoulders crop of the kit portrait (A and C): the SAME .pcp.kit frame picture, cropped to the opening, no pendant/tassel */
 const MEDAL=(S,d)=>`
@@ -44,6 +45,16 @@ ${P}>.pcl>.pcf{grid-column:1/-1;grid-row:3;margin-top:8px;font-size:.92em}
 ${P}>.pcl>.kplscr{grid-column:1/-1;grid-row:4;margin-top:4px!important;overflow-y:auto}
 ${P}>.pcl>.pcf .kpsec{margin:0 0 2px}
 ${COMP(P,'1fr')}`,
+d:`${P}{grid-template-columns:var(--ppl,270px) minmax(0,1fr)!important}
+${P}>.pcl{display:grid!important;grid-template-columns:72px minmax(0,1fr);grid-template-rows:auto auto auto minmax(0,1fr);column-gap:8px;align-content:start;height:100%}
+${MEDAL(P,72)}
+${P}>.pcl>.pcf{grid-column:1/-1;grid-row:3;margin-top:8px;font-size:.92em}
+${P}>.pcl>.kplscr{grid-column:1/-1;grid-row:4;margin-top:4px!important;overflow-y:auto}
+${P}>.pcl>.pcf .kpsec{margin:0 0 2px}
+${COMP(P,'repeat(2,minmax(0,1fr))')}
+html[data-pp="d"] body:has(#panel .pc.kpwide[data-pp="d"]) .stage#stage{display:none!important}
+html[data-pp="d"] body:has(#panel .pc.kpwide[data-pp="d"]) #game.game{grid-template-columns:1fr!important;grid-template-areas:"hud" "panel" "bar"!important}
+html[data-pp="d"] body:has(#panel .pc.kpwide[data-pp="d"]) #panel.panel{grid-column:1!important;width:auto!important;max-width:none!important}`,
 b:`${P}{--kpcw:104px!important;--kpcl:116px!important;grid-template-columns:116px minmax(0,1fr)!important}
 ${P}>.pcl>.kplscr{display:none!important}
 ${P}>.pcl>.pcname{font-size:1rem!important;text-align:center}
@@ -76,11 +87,11 @@ const st=document.createElement("style");st.id="kit-pp-"+PP_OPT;st.textContent=C
 document.documentElement.dataset.pp=PP_OPT;
 /* ---- DOM helpers (run after every panel render; each card once) ---- */
 function fix(pc){try{if(!pc.matches(".kpwide[data-k2]"))return;const L=pc.querySelector(":scope > .pcl"),R=pc.querySelector(":scope > .pcr");if(!L||!R)return;
- const pcp=L.querySelector(":scope > .pcp");if(pcp&&(PP_OPT==="a"||PP_OPT==="c")){pcp.style.setProperty("margin-bottom","0","important");pcp.style.setProperty("margin-top","0","important")}
+ const pcp=L.querySelector(":scope > .pcp");if(pcp&&(PP_OPT==="a"||PP_OPT==="c"||PP_OPT==="d")){pcp.style.setProperty("margin-bottom","0","important");pcp.style.setProperty("margin-top","0","important")}
  const sc=L.querySelector(":scope > .kplscr");if(sc)sc.style.marginTop="0";
  if(pc.dataset.pp===PP_OPT){compactify(pc);fit(pc);return}pc.dataset.pp=PP_OPT;
  const nm=(L.querySelector(".pcname")||{}).textContent||"";
- if(PP_OPT==="a"){const pcf=R.querySelector(":scope > .kpstick > .pcf");if(pcf&&sc)L.insertBefore(pcf,sc)}
+ if(PP_OPT==="a"||PP_OPT==="d"){const pcf=R.querySelector(":scope > .kpstick > .pcf");if(pcf&&sc)L.insertBefore(pcf,sc)}
  if(PP_OPT==="b"){buildB(pc,L,R,sc)}
  if(PP_OPT==="c"){const b=document.createElement("button");b.className="btn ppsee";b.textContent="Xem dáng";b.addEventListener("click",e=>{e.stopPropagation();const wear=sc?sc.querySelector(".kwear"):null,facts=sc?sc.querySelector(".kpfacts"):null,key=sc?sc.querySelector(".kpkey"):null,rows=sc?sc.querySelector(".pcrows"):null;
    const big=pcp?pcp.cloneNode(true):null;if(big){big.removeAttribute("style");big.style.cssText="width:200px;max-width:60%;margin:0 auto 8px;display:block"}
