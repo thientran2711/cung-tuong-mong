@@ -15,8 +15,8 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
  hintMid:25,hintSharp:45,hintMat:3,
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
-  robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
-  npcOut:2,npcRob:2},                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
+  robNight:3,robLonely:2,robPlot:25,robThug:1,robDanh:3,robWalk:2,omenWk:2,plotCh:4,robCdWk:12, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it. DRESS-FIX (owner OD 26/11 ~18:50Z (5) «chỉ là một cái sự kiện hy hữu thôi»): RARE — night+lonely thug 6 %, a plot 30 %, and never again within robCdWk weeks of the last one (her and every NPC) */
+  npcOut:2,npcRob:1},                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
  /* THÁI Y (jthaiy, owner 15/11 20:20Z): monthly "Thỉnh bình an mạch" (free) + "Mời thái y bắt mạch" (two roads) + bribed / trusted physician */
  thy:{cost:[6,8,10,12,15,20,25,35],  /* bạc road by rank (≈ 1/7–1/8 of BAL.pay[rank]: scarce at low ranks, the same weight at every rank) */
   khPay:1,khSelf:3,sucSelf:5,        /* khắc of the bạc road (he comes to her) / of her own road (she walks to Thái y viện and waits) + Sức lost on her road */

@@ -330,7 +330,9 @@ function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82
 /* DRESS-FIX (owner OD 26/11 ~18:50Z (2)(3)): + «Hoa điền» = its own slot, picked for the day here (not stuck to the makeup); Túi thơm merged into «Đeo eo» (j8 wearGrp) */
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["hd","Hoa điền",""],["ear","Hoa tai","hoatai"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["shoe","Giày","giayhoa"]];
 /* the hoa điền of the day (TOIL.st.hdk: a key she owns, "" = none); starts as the one of her last sitting while she still owns it */
-function toilHdK(){const st=TOIL.st;if(!st)return"";if(st.hdk==null){let k="";try{const r=S.toilette&&S.toilette.hd;if(r&&r.k&&typeof hdOwned==="function"){const m=hdMap(r.k);if(hdOwned(S).some(e=>e.k===m))k=m}}catch(e){}st.hdk=k}return st.hdk}
+/* hoa điền is for consorts only (art rule: never maids / lãnh cung): no slot, no tab, no pick for a palace maid */
+function toilHdOn(){try{if(typeof isSrv==="function"&&isSrv())return false;if(S&&S.cold)return false}catch(e){}return true}
+function toilHdK(){const st=TOIL.st;if(!st)return"";if(!toilHdOn())return st.hdk="";if(st.hdk==null){let k="";try{const r=S.toilette&&S.toilette.hd;if(r&&r.k&&typeof hdOwned==="function"){const m=hdMap(r.k);if(hdOwned(S).some(e=>e.k===m))k=m}}catch(e){}st.hdk=k}return st.hdk}
 function toilHdGhost(){try{const w=WD_ITEMS.hoadien_bac||Object.values(WD_ITEMS).find(x=>x.sl==="hd");return w?w.icon:""}catch(e){return""}}
 function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(w.k),tip:w.n}:null}
  if(sl==="hd"){const k=toilHdK(),w=k&&WD_ITEMS[k];return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(k),tip:w.n}:null}
@@ -345,10 +347,10 @@ function toilPorAt(rank){const f0=figTierOf;try{figTierOf=toilTierAt(f0,rank);re
 function toilRankOfFile(f){const m=/-t(\d)(?:[-.]|$)/.exec(String(f||""));return m?+m[1]:0}
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
 function toilDressUI(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;const st=TOIL.st;toilMkPre();
- const hdk=toilHdK();const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null:(IT[x.g.k]&&["ear","wrist","waist","scent","shoe"].includes(itm(x.g.k).sl)))).map(x=>{const w=WD_ITEMS[x.g.k];const o=Object.assign({},x,{cat:w?(w.sl==="tram"?"tram":w.sl==="hd"?"hd":"y"):"trang"});if(w&&w.sl==="hd"&&x.g.k===hdk){o.on=true;o.onText="Hôm nay dán"}return o});
+ const hdk=toilHdK(),hdOn=toilHdOn();const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null&&(hdOn||WD_ITEMS[x.g.k].sl!=="hd"):(IT[x.g.k]&&["ear","wrist","waist","scent","shoe"].includes(itm(x.g.k).sl)))).map(x=>{const w=WD_ITEMS[x.g.k];const o=Object.assign({},x,{cat:w?(w.sl==="tram"?"tram":w.sl==="hd"?"hd":"y"):"trang"});if(w&&w.sl==="hd"&&x.g.k===hdk){o.on=true;o.onText="Hôm nay dán"}return o});
  const sel=toilSelFind(items);items.forEach(x=>{x.sel=!!(sel&&sel.x===x)});
- const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"},{k:"hd",label:"Hoa điền"}];
- const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:k==="hd"?toilHdGhost():(keqArt(gk)||""),sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
+ const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"}].concat(hdOn?[{k:"hd",label:"Hoa điền"}]:[]);
+ const slots=TOIL_SL.filter(z=>hdOn||z[0]!=="hd").map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:k==="hd"?toilHdGhost():(keqArt(gk)||""),sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
  const sum=kitChips([wb.sac-(wb.shSac||0)?["Sắc",wb.sac-(wb.shSac||0)]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
  const mama=toilSkill().mama;
@@ -514,7 +516,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG8
  const L=quick?(qok?{look:null}:{look:"vung",slip:"son"}):made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
  S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};
  /* DRESS-FIX (owner OD 26/11 ~18:50Z (2)): «Điểm trang nhanh» / «Để mộc» skip ONLY the makeup — the hoa điền she picked in the dress picker is still worn today (placed by her hand, hdHandQ) */
- else if(st.hdk&&typeof hdHandQ==="function"&&hdOwned(S).some(e=>e.k===st.hdk))S.toilette.hd={k:st.hdk,q:hdHandQ(S,st.hdk,sk.sk,String(S.name||"")+":"+toilWk()),hand:1};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
+ else if(st.hdk&&toilHdOn()&&typeof hdHandQ==="function"&&hdOwned(S).some(e=>e.k===st.hdk))S.toilette.hd={k:st.hdk,q:hdHandQ(S,st.hdk,sk.sk,String(S.name||"")+":"+toilWk()),hand:1};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
  /* jration (PL #5): the face is capped by the cosmetics she has; the sitting spends lượt from each part's box (BAL.ration) */
  if(made&&typeof lxSit==="function")lxSit(S,S.toilette);
  /* makeup-lux: the day's verdict reads the ONE total, now with the face in it (clothes + jewels + makeup level) */
