@@ -81,3 +81,13 @@ VERDICT §2: PASS 82bbe53e (FF from LIVE 1dcb373e).
 - Build: `bash dev/site/build_site.sh` on 4422dda2 reproduces index.html; the only changed line is window.CTM_BI (allowed).
 - Tests on 4422dda2: scroll-cue-loop.js 755x1000 PASS, 1180x820 PASS; kscue-loop.js PASS all 4. Test-header nit from §2 fixed (2b5bbbb3).
 VERDICT §3: PASS 4422dda2 (FF from LIVE aa37de21). The worker's own gates (quickcheck, coop-e2e, shots, long run) were still running when I wrote this; this verdict does not cover them.
+
+## §4 — delta eb7ddb99 (4422dda2 + merge of LIVE b881686f act-merge stack) — PASS
+- eb7ddb99 is a fast-forward of LIVE origin/main b881686f (checked).
+- `git diff b881686f eb7ddb99 -- dev/build dev/kit` is line-for-line the F10 diff passed in §3 (`git diff aa37de21 4422dda2`): the +/- lines
+  compared with diff → identical. The remaining files are F10's measure/test tools, the CHANGE line and the rebuilt index.html/sw.js/assets.json.
+- LIVE j63 hunks (kaNT / kitRelW result-row words) are outside kaSort/kaRun/kaWants/kaNew. The LIVE delta aa37de21..b881686f adds no
+  MutationObserver / ResizeObserver / requestAnimationFrame / setInterval in dev/build (grep: 0).
+- Build: `bash dev/site/build_site.sh` on eb7ddb99 reproduces index.html; only window.CTM_BI changes.
+- Tests on eb7ddb99: scroll-cue-loop.js 755x1000 PASS, 1180x820 PASS; kscue-loop.js PASS all 4.
+VERDICT §4: PASS eb7ddb99 (FF from LIVE b881686f).
