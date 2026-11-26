@@ -60,11 +60,11 @@ function dfActs(i){const p=curPeople()[i],d=dfCard(i);if(!p||!d)return null;let 
  src.forEach((g,gi)=>{const acts=[];[...g.querySelectorAll("button")].forEach((b,bi)=>{if(!dfIsAct(b))return;
    const n=dfBtnTitle(b);if(!n)return;const sm=b.querySelector("small");const why=(b.querySelector(".kwhy")||{}).textContent||"";const o=b.dataset.o!=null?T[+b.dataset.o]:null;
    const oo=o?(typeof oddsOf==="function"?oddsOf(o):(o.o==null?100:o.o)):null;/* 100 = the game's own «sure» mark on an option (o:100), not a balance number */
-   acts.push({id:"g"+dfSig(b),n,cls:o?dfCls(o):"C",eng:dfEng(n),word:oo!=null&&oo<100?dfWord(oo):"",ton:o?[talkK(o)+" khắc",o.c&&o.c.bac?(-o.c.bac)+" bạc":""].filter(Boolean).join(" · "):"",
+   acts.push({id:"g"+dfSig(b),n,cls:b.dataset.door?"D"/* ACT-MERGE J2: a door opens its own dialog (its acts keep their own games) */:o?dfCls(o):"C",eng:dfEng(n),word:oo!=null&&oo<100?dfWord(oo):"",ton:o?[talkK(o)+" khắc",o.c&&o.c.bac?(-o.c.bac)+" bạc":""].filter(Boolean).join(" · "):"",
     off:!!b.disabled,why,info:b.outerHTML,small:sm?sm.innerHTML:"",pic:dfPic(n)})});
   out.push({k:"g"+gi,n:(tabs[gi]||{}).n||dfCatName(acts),acts})});
  const done=S.visit&&(S.visit.talked===true||(S.visit.tk||{})[i]);
- if(!done)for(const x of dfInPerson(p)){const a=x.a,hk=typeof harmK==="function"?harmK(rivals[x.i],x.k):BAL.time.cost.harm;const why=can(hk)?"":dfTxt(whyTime(hk))||"hết khắc buổi này";
+ if(!done)for(const x of dfInPerson(p)){if(typeof DOOR_M==="object"&&DOOR_M["a:"+x.k])continue;/* ACT-MERGE J2: inside its door (Hãm hại nhẹ / Ra uy) */const a=x.a,hk=typeof harmK==="function"?harmK(rivals[x.i],x.k):BAL.time.cost.harm;const why=can(hk)?"":dfTxt(whyTime(hk))||"hết khắc buổi này";
   const c=(()=>{try{return (typeof kitActCat==="function"&&kitActCat(a.n))||""}catch(e){return""}})(),cn=typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:"";
   let G=out.find(g=>g.n===cn)||(!cn&&out[0]);if(!G){G={k:"x"+c,n:cn,acts:[]};out.push(G)}
   G.acts.push({id:"a"+x.k,n:a.n,cls:x.k==="phatquy"?"C":"B",eng:dfEng(a.n),word:"",ton:[hk+" khắc",typeof fmt==="function"?dfTxt(fmt(a.c||{})):""].filter(Boolean).join(" · "),off:!!why,why,info:"",small:"",pic:dfPic(a.n)})}
@@ -88,3 +88,121 @@ function dfRun(i,id,res){const p=curPeople()[i];DF.why="";if(!p||S.dead||Q.lengt
 /* (3) the stage tap */
 function dfViewOn(){return !!(BAL.df&&BAL.df.on)&&typeof kitFocus==="object"&&kitFocus&&typeof kitFocus.open==="function"&&typeof window.__bot==="undefined"}
 window.dfActs=dfActs;window.dfRun=dfRun;window.dfEng=dfEng;window.dfCls=dfCls;
+/* ================= ACT-MERGE J2 (MAIN CHÍNH 155, OD 26/11 ~07:25Z + ~07:32Z; plan review/act-merge §2 G1–G3, dup-report HANHSU_MERGE §3.1 P5–P14 / §3.4):
+   ONE FEATURE = ONE BUTTON on the Hậu cung consort card AND the Dư đồ person pop-up (focus view). DOOR = the one table below (the ONLY place that says
+   which old act sits in which door, at which tier, as which kind):
+     rep  = the ONE representative act of a tier (her examples: Hãm hại nhẹ Hất trà · vừa Hủy dung · nặng Hạ độc)
+     roll = the button goes, its outcome lives on as a result of that tier (§3.4 «roll»): the tier offers ONE act, picked among rep + rolls that can run
+            now, fixed for this target this buổi (doorPick), so the card she reads is the act that runs (law 4: its own BAL line, nothing typed here)
+     way  = a way chosen inside the door, it keeps its own cost, odds and full outcome
+     hide = folded into another way (spyk «Tự đi dò la» → «sai người», MAIN 153 per OD ~05:35Z: no self-search way)
+   Members: "a:<ACT key>" (card data-a / in-person act, run = the exact card click path: jsgame scheme game → doAct + every wrapper),
+            "e:<k>" (Quyền Hoàng hậu data-e, empAct), "t:<talkOpts name>" (the pop-up option, run = talk(oi): every talk wrapper, same price/odds/result).
+   The door opens the kit option dialog (pushDil → kitOptFinal option cards, KIT §6.2b: no new kit part); each option card shows the SAME kit rows the
+   old button showed (its raw kit line, read back from its rows: doorRaw). Old outcomes, deeds (jtruth), evidence, minigames (jslap/jlooks/jsgame/j70 chains) unchanged.
+   Two-way (law 1): NPCs run the same ACT keys (jagharm haOpts); doorOf(k) gives the door + tier of any key for both sides. ================= */
+const DOOR=[
+ {id:"P5",n:"Dò la",cat:"muu-ke",T:[[null,["a:spy","t:Dò la"],[],["a:bribe","a:bribel","t:Nghe lén câu chuyện"]]],hide:["a:spyk"]},
+ {id:"P6",n:"Khiêu khích",cat:"giao-thiep",T:[["nhẹ",["t:Khoe quà ngự ban"],[],[]],["vừa",["t:Khiêu khích"],[],["t:Trút giận"]],["nặng",["t:Hạ nhục"],[],[]]]},
+ {id:"P7",n:"Hãm hại",cat:"hai-nguoi",T:[["nhẹ",["a:tea"],["a:nuoc","a:ink","a:trip","t:Ngáng chân"],[]],["vừa",["a:huydung"],["a:rash"],["a:thathu"]],
+   ["nặng",["a:poison","t:Hạ độc"],[],["a:slowpoison","a:pgift","a:pushp","t:Đẩy xuống hồ sen"]]]},
+ {id:"P8",n:"Hạ uy thế",cat:"muu-ke",T:[["nhẹ",["a:rumor","t:Tung tin đồn"],[],[]],["vừa",["a:block"],[],["a:blockf","a:lygian"]],["nặng",["a:frame","t:Vu oan"],[],["a:plant","a:giahoa","a:xinhh"]]]},
+ {id:"P9",n:"Hại hoàng tự",cat:"hai-nguoi",T:[["nhẹ",["a:ksab"],[],[]],["vừa",["a:musk"],[],["a:kframe"]],["nặng",["a:kpoison"],[],["a:catswap","a:pond","t:Đẩy con nàng xuống hồ"]]]},
+ {id:"P10",n:"Lấy của",cat:"hai-nguoi",T:[["nhẹ",["a:batnat"],[],[]],["vừa",["a:laydo"],[],["a:laydol","a:petsteal","a:thaopet"]],["nặng",["a:phonghoa"],[],[]]]},
+ {id:"P11",n:"Tố cáo",cat:"muu-ke",T:[[null,["a:accuse"],[],["a:tocao","a:expose","a:xx","a:vp","t:Tố xa xỉ","t:Hặc ăn mặc sai phẩm","a:trinhhh","a:trinhth"]]]},
+ {id:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",T:[[null,["a:uyhiep"],[],["a:banphe","a:tieuhuy"]]]},
+ {id:"P13",n:"Quyền Hoàng hậu",cat:"trung-phat",T:[[null,["e:judge"],[],["e:conf","e:reward","e:pardon","e:cutpay","a:takeaway"]]]},
+ {id:"P14",n:"Ra uy",cat:"trung-phat",T:[["nhẹ",["a:tat"],[],[]],["vừa",["a:phatquy"],[],[]]]}];
+window.DOOR=DOOR;
+/* member → {d (door), ti (tier index), role} — ONE lookup for her card, her pop-up, the NPC side and the tests */
+const DOOR_M=(()=>{const M={};for(const d of DOOR){d.T.forEach(([t,rep,roll,way],ti)=>{for(const [role,L] of [["rep",rep],["roll",roll],["way",way]])for(const m of L)M[m]={d,ti,tier:t,role}});for(const m of d.hide||[])M[m]={d,ti:-1,tier:null,role:"hide"}}return M})();
+window.DOOR_M=DOOR_M;
+/* the door + tier of an ACT key (her acts and NPC acts alike: jagharm haDoor reads this) */
+function doorOf(k){const m=DOOR_M["a:"+k];return m?{id:m.d.id,n:m.d.n,tier:m.tier,role:m.role}:null}
+window.doorOf=doorOf;
+const DOOR_TIER={"nhẹ":"Nhẹ","vừa":"Vừa","nặng":"Nặng"};
+/* parse one card / pop-up button html → {n, sm (kit rows html, lock span removed), why, off} */
+function doorBtn(h){const d=document.createElement("div");d.innerHTML=String(h||"");const b=d.querySelector("button");if(!b)return null;
+ const w=b.querySelector(".kwhy");const why=w?w.textContent.trim():"";if(w)w.remove();const s=b.querySelector("small");const sm=s?s.innerHTML.trim():"";if(s)s.remove();
+ return {n:b.innerHTML.trim(),sm,x:doorRaw(s),why,off:b.disabled||!!why}}
+/* the raw kit line of an old button (the input kitParse reads: «<odds word> · tốn: … · thành: … · hỏng: … · kèm: …»), read back from its kit rows, so the
+   option card (kitOptFinal reads the raw line, dilLineRaw) shows the SAME rows the old button showed — no number typed here (law 4) */
+const DOOR_LAB={"tốn":"tốn","thành":"thành","được":"thành","bại":"hỏng","hỏng":"hỏng","mất":"hỏng","kèm":"kèm"};
+function doorRaw(s){if(!s)return"";const seg=[];const od=s.querySelector(".kodm b,.kodm");const w=od?(od.getAttribute("title")||od.textContent||"").trim():"";if(w)seg.push(w);
+ const rows=[...s.querySelectorAll(".kr")];if(!rows.length){const t=s.textContent.replace(/\s+/g," ").trim();if(t&&t!==w)seg.push(t);return seg.join(" · ")}
+ const notes=[],lab=[];for(const r of rows){const l=((r.querySelector(".krl")||{}).textContent||"").trim().toLowerCase();const it=[...r.querySelectorAll(".krv .ef, .krv .kwhy")].map(e=>e.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
+  if(!it.length)continue;const L=DOOR_LAB[l];if(!L){notes.push(...it);continue}lab.push(L==="tốn"?`tốn: ${it.join(", ")}`:`${L}: ${it.join(" · ")}`)}
+ return seg.concat(notes,lab).join(" · ")}
+/* the key of a card button: a:<k> (data-a) · e:<k> (data-e Quyền Hoàng hậu) */
+function doorKeyOf(h){h=String(h||"");const m=h.match(/^\s*<button([^>]*)>/);if(!m)return"";let x;if((x=m[1].match(/\bdata-a="([^"]+)"/)))return"a:"+x[1];
+ if((x=m[1].match(/\bdata-e="[^"]*"[^>]*\bdata-k="([^"]+)"/)))return"e:"+x[1];return""}
+/* the tier's ONE act: rep, or (roll) one of rep + rolls that can run now, fixed per target and buổi (no re-roll by redraw) */
+function doorPick(list,seed){const ok=list.filter(x=>!x.off);if(!ok.length)return list[0]||null;if(ok.length===1)return ok[0];
+ let h=0;const s=String(seed);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return ok[Math.abs(h)%ok.length]}
+function doorSeed(v,d,ti){return [S.turn||0,S.buoi||0,v&&v.id,d.id,ti].join(":")}
+/* build the options of a door from the members present (M = member → {n, sm, why, off, run}) */
+function doorOpts(d,M,v){const O=[];
+ d.T.forEach(([t,rep,roll,way],ti)=>{const reps=rep.filter(m=>M[m]).map(m=>Object.assign({m},M[m])),rolls=roll.filter(m=>M[m]).map(m=>Object.assign({m},M[m]));
+  /* the rep: the first present rep member; a roll tier picks among rep + rolls */
+  const pool=reps.slice(0,1).concat(rolls);const one=rolls.length?doorPick(pool,doorSeed(v,d,ti)):pool[0];
+  if(one)O.push(Object.assign({tier:t,role:one.m===(reps[0]||{}).m?"rep":"roll"},one));
+  for(const m of way)if(M[m])O.push(Object.assign({tier:t,role:"way",m},M[m]))});
+ return O}
+/* the door button line: the tiers she can pick (cổ trang words, VANPHONG) */
+function doorLine(d,O){const tiers=d.T.map(x=>x[0]).filter(Boolean);
+ if(tiers.length)return tiers.filter(t=>O.some(o=>o.tier===t)).map(t=>{const o=O.find(x=>x.tier===t&&x.role!=="way");return `${t}: ${(o||O.find(x=>x.tier===t)).n.replace(/<[^>]+>/g,"")}`}).join(" · ");
+ return O.slice(0,3).map(o=>o.n.replace(/<[^>]+>/g,"")).join(" · ")+(O.length>3?" …":"")}
+function doorWhy(O){if(O.some(o=>!o.off))return"";const o=O.find(o=>o.why)||O[0];return o?(o.why||"chưa đủ điều kiện"):""}
+/* the door button (card: data-dr = rivals index · pop-up: data-dp = curPeople index) */
+function doorButton(d,O,at){return pbtn(`${at} data-door="${d.id}"`,d.n,doorLine(d,O),doorWhy(O))}
+/* ---- the consort card: the outermost rvGroups wrapper (jdf loads after every other rvGroups wrapper) ---- */
+const DOORX={raw:0};
+function doorCardMembers(v,i){DOORX.raw++;let G=[];try{G=rvGroups(v,i)}finally{DOORX.raw--}const M={};
+ for(const g of G)for(const h of g[1]||[]){const k=doorKeyOf(h);if(!k||!DOOR_M[k])continue;const b=doorBtn(h);if(!b)continue;
+  const [t,x]=[k.slice(0,1),k.slice(2)];b.run=t==="a"?()=>doorFireAct(i,x):()=>empAct(i,x);M[k]=b}
+ return M}
+(function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v,i){const G=g0.apply(this,arguments);if(DOORX.raw||!v)return G;
+ try{const M={},left=[];for(const g of G){const keep=[];for(const h of g[1]||[]){const k=doorKeyOf(h);if(k&&DOOR_M[k]){if(DOOR_M[k].role!=="hide"){const b=doorBtn(h);if(b)M[k]=b}}else keep.push(h)}
+   if(keep.filter(Boolean).length)left.push([g[0],keep])}
+  const add={};for(const d of DOOR){const O=doorOpts(d,M,v);if(!O.length)continue;const c=KIT_CAT[d.cat]?KIT_CAT[d.cat][0]:d.cat;const gn=d.id==="P13"?"Quyền Hoàng hậu":c;
+   (add[gn]=add[gn]||[]).push(doorButton(d,O,`data-dr="${i}"`))}
+  for(const gn in add){const g=left.find(x=>x[0]===gn);if(g)g[1]=g[1].concat(add[gn]);else left.push([gn,add[gn]])}
+  return left}catch(e){console.error("door rvGroups",e);return G}}})();
+/* the card click path of an ACT key: the same as tapping its old button (jsgame scheme game first, then j6 → doAct with every wrapper) */
+function doorFireAct(i,k){const v=rivals[i];if(!v)return;try{if(typeof SG==="object"&&SG&&SG.K&&SG.K[k]&&typeof sgCan==="function"&&sgCan(i,k)&&typeof sgAsk==="function"){sgAsk({j:"act",v:v.id,k},sgTitle(k));return}}catch(e){console.error(e)}doAct(i,k)}
+window.doorFireAct=doorFireAct;
+/* ---- the pop-up: popCard (j15) asks doorPop for the talk options of a consort she meets + her in-person Hậu cung acts ---- */
+function doorPopMembers(p,i,opts){const v=p&&p.ref,M={};if(!v||!(p.kind==="rival"||p.kind==="hh")||typeof rivals==="undefined")return M;const ri=rivals.indexOf(v);
+ const B=opts.map((a,j)=>{const k="t:"+String(a.n||"").replace(/<[^>]+>/g,"").trim();if(!DOOR_M[k])return null;const o=a.o==null?100:a.o;const tc=talkK(a);const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
+  const why=a.lock?a.t:poor?"không đủ bạc":whyTime(tc);return {k,j,why,sm:typeof optLine==="function"?optLine(a):"",n:a.n}});
+ for(const x of B){if(!x||M[x.k])continue;const b=doorBtn(pbtn("",x.n,x.sm,x.why))||{};b.x=x.sm;/* the talk option's own raw line (optLine) */const nm=x.n;b.run=()=>{popIdx=i;const L=talkOpts(curPeople()[i]||p);const j=L.findIndex(a=>a&&a.n===nm);if(j>=0)talk(j)};b.j=x.j;M[x.k]=b}
+ /* her in-person Hậu cung acts (BAL.df.inPerson: Tát, Phạt quỳ, Hắt nước, Hắt trà, Quạt mực) — the same lock dfInPerson asks; lines = her card's rows */
+ const done=S.visit&&(S.visit.talked===true||(S.visit.tk||{})[i]);
+ if(!done&&ri>=0){const ip=dfInPerson(p).map(x=>"a:"+x.k).filter(k=>DOOR_M[k]);if(ip.length){const C=doorCardMembers(v,ri);for(const k of ip)if(C[k])M[k]=C[k]}}
+ return M}
+function doorPop(p,i,opts){const out={skip:new Set(),doors:[]};try{const v=p&&p.ref;if(!v||!(p.kind==="rival"||p.kind==="hh"))return out;const M=doorPopMembers(p,i,opts);
+  for(const k in M)if(M[k].j!=null)out.skip.add(M[k].j);
+  opts.forEach((a,j)=>{const k="t:"+String(a.n||"").replace(/<[^>]+>/g,"").trim();if(DOOR_M[k]&&DOOR_M[k].role==="hide")out.skip.add(j)});
+  for(const d of DOOR){const O=doorOpts(d,M,v);if(!O.length)continue;out.doors.push({cat:d.cat,html:doorButton(d,O,`class="opt" data-dp="${i}"`)})}}catch(e){console.error("doorPop",e)}return out}
+window.doorPop=doorPop;
+/* ---- the door dialog (kit option dialog) ---- */
+PEND.door=pp=>{const d=DOOR.find(x=>x.id===pp.d);if(!d)return null;let v=null,M={};
+ if(pp.r!=null){v=rivals[pp.r];if(!v)return null;M=doorCardMembers(v,pp.r)}
+ else if(pp.p!=null){const p=curPeople()[pp.p];if(!p)return null;v=p.ref;let T=[];try{T=talkOpts(p)}catch(e){}M=doorPopMembers(p,pp.p,T)}
+ const O=doorOpts(d,M,v);if(!O.length)return null;
+ const tiers=d.T.map(x=>x[0]).filter(Boolean);
+ const head=`<p>${d.n}${v?` ${v.name}`:""}: chọn ${tiers.length?"mức và cách":"cách"}.</p>`+(tiers.length?`<p class="past">${tiers.filter(t=>O.some(o=>o.tier===t)).map(t=>`${DOOR_TIER[t]}: ${O.filter(o=>o.tier===t).map(o=>o.n.replace(/<[^>]+>/g,"")).join(", ")}`).join(" · ")}. Càng nặng càng hại, lộ ra càng bị phạt nặng.</p>`:"");
+ const opts=O.map(o=>{const c={n:o.n,fx:{},x:o.x||"",go:()=>o.run()};if(o.off&&typeof kitOff==="function")kitOff(c,o.why||"chưa đủ điều kiện","");else if(o.off)c.off={why:o.why||""};return c});
+ /* who (her face on the dialog) only from the card: from the pop-up a «who» standing on the stage would turn the dialog into a focus-scene encounter (jdfv), losing the kit option card */
+ return {who:pp.r!=null&&v&&typeof pv==="function"?pv(v):null,t:head,o:opts.concat([{n:"Thôi",fx:{}}])}};
+function doorOpen(id,at){if(typeof S==="undefined"||!S||S.dead||Q.length)return;const d=mkP("door",at);if(!d)return;doorLeaveFocus();pushDil(d,(DOOR.find(x=>x.id===id)||{}).n);showModal();render()}
+window.doorOpen=doorOpen;
+/* the tap: capture before j6 (#panel / #stage) — a door button carries no act key of its own */
+document.addEventListener("click",e=>{try{const b=e.target.closest&&e.target.closest("button[data-door]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();
+ const at={d:b.dataset.door};if(b.dataset.dr!=null)at.r=+b.dataset.dr;else if(b.dataset.dp!=null)at.p=+b.dataset.dp;else return;doorOpen(b.dataset.door,at)}catch(x){console.error("door tap",x)}},true);
+/* the door dialog is only the old buttons in one place: the old card / pop-up buttons never passed the once-per-life «Kiếp này chưa trọn» gate (jkiep kpGate:
+   it reads «chết» in a line, here the SENT servant's «có khi bị đánh chết»), so a door option does not either (behaviour unchanged; the act's own cards follow) */
+(function(){const k0=window.kpGate;if(typeof k0!=="function")return;window.kpGate=function(i){try{const m=Q[0];if(m&&m.pid==="door")return false}catch(e){}return k0.apply(this,arguments)}})();
+/* from the person view (jdfv focus, an «activity» for jdayq gate (c), which takes back any centre card painted inside it): a door is its own flow, so
+   the person view closes first (as her ✕ would) and the kit option dialog opens on the free stage; the act's own scenes / games follow as before */
+function doorLeaveFocus(){try{if(window.DF&&DF.F&&typeof dfGone==="function")dfGone()}catch(e){console.error("door focus",e)}}
