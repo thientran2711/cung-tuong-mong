@@ -25,7 +25,9 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
  const left=BAL.time.khac-(typeof used==="number"?used:0);
  const b0=S.buoi;let n;try{S.buoi=b+1;n=accessOf(S,k)}finally{S.buoi=b0}
  /* place-rules (owner OD 25/11 ~23:33Z): a place that closes at the next buổi warns ON ENTRY too (lim), not only at its last khắc (next) */
- return n&&!n.ok?{k,now:false,next:left<=1,lim:left>1,b,why:n.why||""}:null}catch(e){return null}}
+ /* PLACE-CLOSE: «the last allowed khắc» = the last one from which the walk home still fits in this buổi (left ≤ max(1, the walk)), so the chip's tap can take her home */
+ let tc=1;try{tc=Math.max(1,travel(k,"home")||1)}catch(e){}
+ return n&&!n.ok?{k,now:false,next:left<=tc,lim:left>tc,b,why:n.why||""}:null}catch(e){return null}}
 window.stClose=stClose;
 function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
 const bN=b=>{try{return String(BUOI[b]).toLowerCase()}catch(e){return ""}};
@@ -60,7 +62,7 @@ function tick(){try{const c=stClose();const kk=c?key(c):"";
  if(!c)return;if(S.closeSeen===kk){try{if(c.now&&typeof kitNoticeList==="function"){const it=kitNoticeList().find(x=>x.id==="close:"+kk);if(it&&it.text!==line(c)){it.text=line(c)}}}catch(e){}try{if(typeof kitNoticeList==="function"&&!kitNoticeList().some(x=>x.id==="close:"+kk)){const it=chip(c);if(it)it.seen=true;kitNoticeBox()}}catch(e){}return}/* reload: in the box again, no second chip */
  if(chip(c)){S.closeSeen=kk;/* the warning BEFORE the limit (on entry / last khắc); the after-the-fact «đã đóng cửa» line never overwrites it */if(!c.now)try{S.plWarn=(typeof bkey==="function"?bkey():"")+"|"+c.k}catch(e){}}}catch(e){}}
 /* r4: no stage-rail «!» item any more — the ONE «!» lives in the top bar (kitNotice box) */
-if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{actPendRun()}catch(e){}try{pcCheck()}catch(e){}try{tick()}catch(e){}return r}}
+if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{actPendRun()}catch(e){}try{const T=window.__pcT;if(T)pcTurn(T.k,T.bk0)}catch(e){}try{pcCheck()}catch(e){}try{tick()}catch(e){}return r}}
 /* (3) ACT = A PLACE (owner OD 18/11 ~19:55Z + ~20:00Z): a Hành sự act that means going somewhere really moves her there on Dư đồ (the ONE
    walk: goTo → S.place, S.visit, location ledger), she STAYS there, the stage shows it. ONE cost: the act's own khắc/sức already include
    the trip, so the walk khắc is not charged again (the j9 load idiom `const u=used; goTo(k); used=u`). The act itself is the permission
@@ -100,13 +102,15 @@ if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="
    NO FAULT ⇒ NO PUNISHMENT (review/home-way): unwarned (no closing notice shown before the limit) or no way home all grace long (the «Về phòng»
    button never enabled: window.__hwCan) → cung nhân walk her home at the end of the grace, no loss.
    A second closed buổi in a row (she stayed through, not caught) has no new grace: the roll comes at once. Seen keys S.stayRoll, S.plGrace (optional). */
-function pcTurn(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
- const bk=pcBk();if(bk===bk0||pcG(k))return;if(typeof accOwn==="function"&&accOwn(S,k))return;if(typeof accessOf!=="function"||accessOf(S,k).ok)return;
+function pcTurn(k,bk0,fin){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
+ const bk=pcBk();if(bk===bk0)return;
+ /* a render inside the turn opened it before the spill carry was paid (j76): the turn's end fixes the grace end once */
+ {const G=pcG(k);if(G){if(fin&&G.t){const u=typeof used==="number"?used:0;if(G.end)G.end=Math.max(PC().grace,u>0?u+PC().leave:0);delete G.t}return}}if(typeof accOwn==="function"&&accOwn(S,k))return;if(typeof accessOf!=="function"||accessOf(S,k).ok)return;
  const P=PC(),G0=S.plGrace,again=!!(G0&&G0.bk===bk0&&G0.k===k),u=typeof used==="number"?used:0;
- S.plGrace={bk,k,end:again?0:Math.max(P.grace,u>0?u+P.leave:0),nf:warned(bk0,k)||again?0:1}}catch(e){console.error("pcTurn",e)}}
+ S.plGrace={bk,k,end:again?0:Math.max(P.grace,u>0?u+P.leave:0),nf:warned(bk0,k)||again?0:1};if(!fin)S.plGrace.t=1}catch(e){console.error("pcTurn",e)}}
 window.pcTurn=pcTurn;
 function pcCheck(){try{if(typeof S==="undefined"||!S||S.dead||S.out||S.confined||Q.length||S.mg)return;const k=S.place;if(!k||k==="home")return;
- const G=pcG(k);if(!G)return;try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at&&w.ok)window.__hwCan=pcBk()+"|"+k}catch(e){}/* this render's way home counts before the check */
+ const G=pcG(k);if(!G||G.t)return;try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at&&w.ok)window.__hwCan=pcBk()+"|"+k}catch(e){}/* this render's way home counts before the check */
  if((typeof used==="number"?used:0)<G.end)return;stayPen(k,G)}catch(e){console.error("pcCheck",e)}}
 window.pcCheck=pcCheck;
 function stayPen(k,G){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
@@ -132,7 +136,7 @@ window.stayRoll=function(k,bk0){return pcTurn(k,bk0)};
 /* RV-HOME-WAY r6: «no way home» = she NEVER had the khắc to walk home while at this place in this buổi. If the «Về phòng» button was enabled
    at some render and she spent the khắc on something else, staying was her choice: the caught roll stands. */
 if(typeof render==="function"){const rn0=render;render=function(){const r=rn0.apply(this,arguments);try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at&&w.ok)window.__hwCan=(typeof bkey==="function"?bkey():"")+"|"+S.place}catch(e){}return r}}
-if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=pcBk();const r=nb0.apply(this,arguments);try{pcTurn(k,bk0)}catch(e){}return r}}
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=pcBk(),T0=window.__pcT;window.__pcT={k,bk0};let r;try{r=nb0.apply(this,arguments)}finally{window.__pcT=T0}try{pcTurn(k,bk0,1)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 window.actPendRun=function(){return actPendRun()};
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
