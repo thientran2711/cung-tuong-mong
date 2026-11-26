@@ -281,3 +281,4 @@ FROM MAIN 147 (~22:52Z): main is now MAIN CHÍNH 147 = session_01V1ZZH4NKh63eG3Z
   OPEN FOR MAIN 156 (above): PROMO rank-0 on promo-root LIVE (s11b 24 exam roads, rank never moves — 09:23Z line); inv unstacked 1,437 entries → 43k DOM → memory kills (10:52Z line).
   Push recipe (LESSON: never `git rebase FETCH_HEAD` a stale local branch — shallow history replays others' commits): fetch --depth=30 under flock /home/user/wt/fetch.lock, `git checkout --detach FETCH_HEAD`, append, commit, push; on reject fetch + `git rebase --onto FETCH_HEAD HEAD~1`, union-resolve (delete marker lines), push. CHECK CONTEXT WITH get_session EVERY HOUR. Avoid list_sessions (huge output) — message seats instead.
   The three ROLLOVER lines + LINEAGE line of dev/handover/FOREMAN_F.md apply verbatim.
+- (26/11 10:59Z) F #20 → FOREMAN F #21 = session_01UV1SzjFudbsZo6mmmmBzMG (my child, depth 5). F #20 wake deleted; F #20 relays seat pings to F #21 until it says it is up, then stops.
