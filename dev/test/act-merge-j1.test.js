@@ -29,7 +29,7 @@ const {chromium}=require('playwright');
      A.forEach(a=>{const d=a&&!a.door&&!a.k61&&DOOR.of(a.n,q.kind);if(d&&cnt[d.k]>=2)F.push(`${kind}: «${a.n}» shown bare beside door ${d.n}`)});
      /* 6 kept acts stay buttons */raw.forEach(a=>{if(a&&KEEP.test(String(a.n))&&!A.some(x=>x===a||x.n===a.n))F.push(`${kind}: kept act «${a.n}» folded`)});
      /* 5 lock */A.filter(a=>a&&a.door).forEach(d=>{const M=raw.filter(a=>a&&!a.k61&&DOOR.of(a.n,q.kind)&&DOOR.of(a.n,q.kind).k===d.door);D[d.n]=D[d.n]||{members:new Set(),kinds:new Set()};M.forEach(a=>D[d.n].members.add(String(a.n).replace(/^Bàn tán về .+$/,"Bàn tán về <người>").replace(/^Phô tài: .+$/,"Phô tài: <môn>")));D[d.n].kinds.add(kind);
-      const allL=M.every(a=>a.lock);if(allL!==!!d.lock)F.push(`${kind}: door ${d.n} lock ${!!d.lock} but members all-locked ${allL}`)})});
+      const R2=DOOR.byK(d.door);const XM=R2&&R2.acts&&typeof DOOR.more==='function'?DOOR.more(q,R2):[];/* J2 ext: her in-person members count too */const allL=M.every(a=>a.lock)&&XM.every(x=>x.off);if(allL!==!!d.lock)F.push(`${kind}: door ${d.n} lock ${!!d.lock} but members all-locked ${allL}`)})});
     /* 3 + 4: open the first free door of the first person who has one, pick its first free member */
     const i=ppl.findIndex(q=>{try{return talkOpts(q).some(a=>a&&a.door&&!a.lock)}catch(e){return false}});if(i<0)continue;
     const q=ppl[i];try{if(DF.F){const o=DF.F;DF.F=null;DF.p=null;DF.tk=null;o.destroy()}}catch(e){}/* the pop-up path (BAL.df.on 0 = the old pop-up; the person view path = act-merge-j1-tap.js) */const dfOn0=BAL.df.on;BAL.df.on=0;popIdx=i;S.visit.tk={};S.visit.talked=false;Q.length=0;const A=talkOpts(q);const di=A.findIndex(a=>a&&a.door&&!a.lock);const d=A[di];
