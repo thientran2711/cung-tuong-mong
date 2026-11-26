@@ -24,7 +24,7 @@ PRIORITY #1 CHECK: OD 2 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0;
 | dim board | keep the event backdrop visible at 65 % |
 Two-way law: NPC hands use the same card face. Cards of one hand have equal value (law 2), so the face must make no card look «best» (no crown/«recommended» banner).
 
-## SPEC — MAIN version: info on FRONT, tap = enlarge + «Chọn», NO flip
+## SPEC — info on FRONT, tap = enlarge + ONE «Chọn», NO flip
 Sizes (law 10/12, ratio 5:7 like her shots; one fixed size per tier across devices):
 | | Fold 755x1000 portrait | iPad 1180x820 landscape |
 |---|---|---|
@@ -37,10 +37,9 @@ Face layout on both (enlarged): plaque 12 % · art 45 % · Tốn chip row 9 % ·
 Behaviour: tap card A → A enlarges, others shrink back/dim; tap another card → switch; tap outside or ✕ (kit ✕) → back to hand; «Chọn» → play. Hit target ≥ 48 px; the button never overlaps the card text.
 Motion (PROP, not observed): deal 3 cards in 220 ms each, stagger 80 ms, from bottom; lift 120 ms ease-out; enlarge 200 ms ease-out (scale + move to centre); use: card flies up and fades 250 ms; dismiss 150 ms.
 
-## OPEN for sếp (law 16) — both ways, 3 lines each
-- A (MAIN rec): front-only. Tap = enlarge, ONE «Chọn» under the card. No flip. Fewer taps, nothing hidden, matches Game of Dice.
-- B (current rule 22:07Z): tap 1 enlarge (front = plaque + art + Tốn), tap 2 flip to back = Được/Mất + «Chọn» on the back. Cleaner front, but one extra tap and the choice is made before seeing Được/Mất unless flipped.
-- Cost of switching: A removes the flip-back state from kitHand (smaller code); B keeps it. Sếp to say A or B; do not build before.
+## RULED by sếp (verbatim, via MAIN 167): "Ok bỏ lật, làm theo Game of Dice"
+NO FLIP anywhere. Version A is the only spec; the old rule 22:07Z (tap 2 flip) is overwritten (canon overwrite, law 14). The flip-back state is removed from kitHand.
+Card FRONT carries everything: name · picture · Tốn exact · Được/Mất marks · odds word (Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc, kit chip, no %). In the enlarged card the odds word sits on the Tốn chip row (right end); the small hand card shows plaque + art + Tốn only.
 
 ## Wireframes
 refs/god-spec/fold-755x1000.svg and ipad-1180x820.svg (plain shapes, enlarged state, version A).
