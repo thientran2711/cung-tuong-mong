@@ -62,7 +62,7 @@ dev/test/stat-pace.js (unit 31 checks all ok: bands, ceilings above next-rank ne
   https://ctm-img.victoria-tntt.workers.dev/img/_review/stat-pace/stat-pace-ipad-1180x820.mp4
 
 - **Merged LIVE 6b5d3d05** → d693723f (conflict jagacts reward/pardon: kept the spAdd pace route + LIVE's forgetSafe). Law-11 scan after merge: no new raw rise (only the intended fx-builders jlux/jpoison/jrcp + co-op mirror).
-- **Quickcheck d693723f**: open 1991 ms, old LIVE save loads + plays a buổi OK; core gates: 2 G4 FAILs that are IDENTICAL on LIVE 6b5d3d05 (80-dialog-fixed «kit-dialog-2 a no empty Tốn/Được cell», 90-button-crawl «Ô lưu · Lui close») = pre-existing, not this branch; perf run 1: tab 573 vs live 422 ms (limit 549) — profiled: spG/spSee/evc hooks cost ~0 ms, repeated tab timing new 1832/1437 vs live 1590/1587 = noise; perf re-run: see below.
+- **Quickcheck d693723f**: open 1991 ms, old LIVE save loads + plays a buổi OK; core gates: 2 G4 FAILs that are IDENTICAL on LIVE 6b5d3d05 (80-dialog-fixed «kit-dialog-2 a no empty Tốn/Được cell», 90-button-crawl «Ô lưu · Lui close») = pre-existing, not this branch; perf run 1: tab 573 vs live 422 ms (limit 549) — profiled: spG/spSee/evc hooks cost ~0 ms, repeated tab timing new 1832/1437 vs live 1590/1587 = noise; perf re-run: QUICKCHECK PASS (512 s · open 2288 ms · old save ok · render 268/233, tab 695/572, buổi 1849/2919 ms, tasks>200ms 38/37).
 - **BIG reviewer** opened (child): session_01D3E3NXKn1Hw6DCUdV6BXbE on d693723f.
 
 ## HANDOVER (for the successor — the COORDINATOR opens it)
