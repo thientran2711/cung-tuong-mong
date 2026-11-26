@@ -1,16 +1,18 @@
 # rerun-nc_tuc — rerun of D's INVALID nc_tuc lives (seat A3)
-Updated 2026-11-25 ~21:30Z. Lives 5/14 finished. Harness: review/robot-realtap 93812531 (segments on 4523381f / 2aad6849 / 1a29f470 earlier). 3 lives run in parallel; checkpoint/resume across page crashes and 2 h job limits.
+Updated 2026-11-26 ~09:20Z. Lives 9/14 finished (scholar-2, lazy-2, speed-1 running; lazy-1, speed-2 queued). Harness: review/robot-realtap 93812531 (segments on 4523381f / 2aad6849 / 1a29f470 earlier). 3 lives run in parallel; checkpoint/resume across page crashes and 2 h job limits.
 
 | life | bot/dev | end | valid | harness sha | review |
 |---|---|---|---|---|---|
 | random-1 | rand fold 4180392236 | Lãnh cung «Phát điên trong lãnh cung» age 27 b1482 | VALID | 4523381f→1a29f470→93812531 | robot/review/rerun-nc_tuc-random-1-review.md (no live moment log) |
 | skilled-1 | sens fold 1103809447 | Hồng nhan bạc mệnh (Chính Đức băng hà) age 26 y8 b1220 | VALID | 4523381f→2aad6849→1a29f470→93812531 (HARNESS-STUCK b23 fixed by 93812531) | robot/review/rerun-nc_tuc-skilled-1-review.md (no live moment log) |
-| skilled-2 | sens ipad 3241370198 | running (b1849 y12) | — | → 93812531 | — |
+| skilled-2 | sens ipad 3241370198 | Lãnh cung «Tuổi xuân qua đi» age 40 y22 b3247 | VALID | rt2 | robot/review/rerun-nc_tuc-skilled-2-review.md (no live moment log; 17 dead buttons, 23 stuck) |
 | random-2 | rand ipad 3192899969 | «Hồng nhan bạc mệnh» ban rượu độc (mưu hại Tô Bạch Mạch Nhi) age 23 y5 b642 | VALID | →93812531 | robot/review/rerun-nc_tuc-random-2-review.md (no live moment log) |
 | greedy-1 | bold fold 2020792563 | «Hồng nhan bạc mệnh» (Hưng Long băng hà) age 31 y12 b1678 | VALID | 93812531 | robot/review/rerun-nc_tuc-greedy-1-review.md (no live moment log) |
 | cautious-2 | cautious ipad 3758694459 | «Hồng nhan bạc mệnh» (Vĩnh An băng hà) age 24 y5 b639 | VALID | 93812531 | robot/review/rerun-nc_tuc-cautious-2-review.md (no live moment log) |
-| lover-1 | sens fold 1379876621 | running (try 2) | — | 93812531 | — |
-| others (cautious-2, lover-1/2, scholar-1/2, lazy-1/2, speed-1/2) | — | queued | — | — | — |
+| lover-1 | sens fold 1379876621 | Xuất gia làm ni cô age 30 y13 b1867 (game-imposed) | VALID | rt2 | robot/review/rerun-nc_tuc-lover-1-review.md (no live moment log) |
+| lover-2 | sens ipad 2367368888 | Hồng nhan bạc mệnh (lao phổi) age 27 y8 b1113 | VALID | rt2 | robot/review/rerun-nc_tuc-lover-2-review.md (no live moment log) |
+| scholar-1 | sens fold 4239854445 | Công chúa ở lại cố quốc age 19 y2 b122 | VALID | rt2 | robot/review/rerun-nc_tuc-scholar-1-review.md (no live moment log) |
+| others (scholar-2, lazy-1/2, speed-1/2) | — | running / queued | — | — | — |
 
 ## HARNESS-STUCK
 - skilled-1 b23 (08:31Z–10:01Z): sole-option card «Tắm gội chờ giá» in «Kính sự phòng báo tin». Evidence robot/rerun-nc_tuc/stuck/. Fixed by 93812531; life resumed from ckpt.
