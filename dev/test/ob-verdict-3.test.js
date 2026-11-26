@@ -25,7 +25,7 @@ const look=p=>p.evaluate(()=>{const t=document.getElementById('rtoast');const r=
  const vis=!!(t&&t.classList.contains('on')&&getComputedStyle(t).visibility!=='hidden'&&+getComputedStyle(t).opacity>0.5);
  const M=document.getElementById('modal');const R=window.kaLastResult;
  return {res:vis&&top,vis,top,txt:t&&vis?t.innerText.replace(/\s+/g,' ').slice(0,240):'',tiep:!!(t&&t.querySelector('.kres-next')),modal:!!(M&&!M.hidden),mt:M&&!M.hidden?document.getElementById('mt').textContent:'',q:Q.length,
-  tgt:R?R.rows.filter(x=>x.k==='tgt').map(x=>x.items.join(' | ')).join(''):'',acts:[...document.querySelectorAll('.kfoc .kfoc-b')].filter(e=>e.getClientRects().length).map(e=>e.innerText.trim().split('\n')[0]).slice(0,8),held:!!(window.RF&&RF.held)}});
+  rep:(()=>{/* what is ON SCREEN: the sentence line vs the title line of the card (names painted with their rank) */const sn=t&&t.querySelector('.ksen'),tn=t&&t.querySelector('.kan');if(!vis||!sn||!tn||typeof kaSenDeTitle!=='function')return false;const x=sn.textContent.replace(/\s+/g,' ').trim();return kaSenDeTitle(x,tn.textContent)!==x})(),tgt:R?R.rows.filter(x=>x.k==='tgt').map(x=>x.items.join(' | ')).join(''):'',acts:[...document.querySelectorAll('.kfoc .kfoc-b')].filter(e=>e.getClientRects().length).map(e=>e.innerText.trim().split('\n')[0]).slice(0,8),held:!!(window.RF&&RF.held)}});
 const tapResult=async p=>{const b=p.locator('#rtoast .kres-next');if(await b.count()&&await b.isVisible()){await b.click();return 'tiep'}const t=p.locator('#rtoast.on');if(await t.count()){await t.click({position:{x:20,y:12}}).catch(()=>{});return 'card'}return 'none'};
 /* A: the queen comes to her at the garden (the encounter scene) */
 async function encounter(p,optName,shot){await p.evaluate(()=>{Q.length=0;try{const F=kitFocus.current&&kitFocus.current();if(F){try{F.endPlay()}catch(e){}F.destroy()}}catch(e){}try{document.querySelectorAll('.kfoc').forEach(e=>e.remove())}catch(e){}try{if(window.DF){DF.F=null;DF.p=null;DF.i=null;DF.tk=null;DF.encM=null}}catch(e){}
@@ -70,12 +70,13 @@ async function family(p,key,followed){const mk=await p.evaluate(({src,followed,N
  /* PASS: the result card is on top right after the tap; a queued next card is NOT up before the tap and IS up after it */
  const pass=L1.res&&(!followed||(!L1.modal&&L2.modal&&/Thẻ kế tiếp|Chuyện trong cung/.test(L2.mt)));
  await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}document.getElementById('modal').hidden=true});
- return {key,followed,t:mk.t,opt:on,res:L1.res,parked:L1.vis&&!L1.top?1:0,nextBefore:L1.modal,nextAfter:L2.modal,tiep:L1.tiep,pass}}
+ return {key,followed,t:mk.t,opt:on,res:L1.res,parked:L1.vis&&!L1.top?1:0,nextBefore:L1.modal,nextAfter:L2.modal,tiep:L1.tiep,rep:L1.rep,pass}}
 (async()=>{const b=await chromium.launch();const DEV=[['fold',{width:755,height:1000}],['ipad',{width:1180,height:820}]];const OJ={enc:{},talk:{},fam:[],bot:null,old:null};
  const isNew=await (async()=>{const p=await boot(b,{width:755,height:1000},3);const r=await p.evaluate(()=>!!window.RF);await p.close();return r})();console.log('build has RESULT FIRST:',isNew);
  if(!SCAN)for(const [dn,vp] of DEV){const p=await boot(b,vp,3);
   for(const [i,opt] of ['Nhịn','Đáp trả sắc sảo'].entries()){const r=await encounter(p,opt,`${OUT}/${dn}-enc${i}`);OJ.enc[dn+'-'+opt]=r;console.log(dn,'enc',opt,JSON.stringify(r).slice(0,900));
    ok(r.L1.res,`${dn} «${opt}»: the result card is on top right after the tap`,r.L1);
+   ok(!r.L1.rep,`${dn} «${opt}»: the sentence does not repeat the title`,r.L1.txt);
    ok(r.L1.tgt.includes(await p.evaluate(()=>window.__obq)),`${dn} «${opt}»: «Người ấy» row = the queen`,r.L1.tgt);
    ok(!r.L1.acts.length,`${dn} «${opt}»: the talk acts are not up before the tap`,r.L1.acts);
    ok(r.L2.res&&r.L2.tiep,`${dn} «${opt}»: still on screen 10 s later (no timer takes it), «Tiếp ▸»`,{res:r.L2.res,tiep:r.L2.tiep});
@@ -88,6 +89,8 @@ async function family(p,key,followed){const mk=await p.evaluate(({src,followed,N
  const rows=OJ.fam.filter(r=>!r.skip&&!r.err);const bad=rows.filter(r=>!r.pass);console.log(`\nFAMILY TABLE (${isNew?'after':'before'}): ${rows.length-bad.length}/${rows.length} result-first`);
  for(const r of rows)console.log(`  ${r.dev.padEnd(5)} ${r.key.padEnd(20)} ${r.followed?'+next':'alone'}  result on top ${r.res?'yes':'NO '}  next before tap ${r.nextBefore?'YES':'no '}  ${r.pass?'PASS':'FAIL'}`);
  for(const r of OJ.fam.filter(r=>r.skip||r.err))console.log(`  ${r.dev} ${r.key} ${r.followed?'+next':'alone'} skipped: ${r.skip||r.err}`);
+ if(isNew)ok(!rows.some(r=>r.rep),'family scan: no result sentence repeats its title (MAIN 162)',rows.filter(r=>r.rep).map(r=>r.dev+' '+r.key));
+ console.log('title repeated in the sentence: '+rows.filter(r=>r.rep).length+'/'+rows.length);
  if(isNew)ok(!bad.length,'family scan: every choice shows its result first',bad.map(r=>r.dev+' '+r.key+(r.followed?' +next':'')));
  /* D bots */
  {const p=await boot(b,{width:755,height:1000},7);const r=await p.evaluate(()=>{window.__bot=1;const V=liveRivals(false)[0];Q.push(AP_MK.apTaunt({who:V,why:"x"}));Q.push({t:"Chuyện trong cung",h:"<p>x</p>",opts:[{n:"Biết rồi",fx:{}}]});showModal();chooseM(0);
