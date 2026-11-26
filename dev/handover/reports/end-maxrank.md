@@ -115,3 +115,14 @@ RV (Naxk) PASS on ef459c0a. Foreman D then ruled (law 16): never-entered lives a
 - quickcheck dd61c8a4 PASS (known LIVE G4 80 + 90 faults only); coop-e2e run 1 143/143.
 - **Deploy needed**: the LIVE Worker ctm-rank must be redeployed (rank/worker, wrangler deploy) before the server accepts pre lives; until then it refuses only those lives («Bảng … không nhận kiếp này»). Not deployed by the worker.
 - Known, not changed: the board keeps its 5 servant steps (srkTier), so a maid's board word («Đại cung nữ») is the tier name while the end card prints the 6-rung post («Cung nữ nhất đẳng») — pre-existing maid-ladder-6 design.
+
+## 3. DELTA REVIEW (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — FAIL dd61c8a4
+Delta = b564c05d (Foreman D board ruling: never-entered lives sent with their true standing, sorted lowest) + rebuild on LIVE 53319e6f (FF ok).
+| check | result |
+|---|---|
+| ruling: lives sent, true word, lowest | OK — jrank sends pre=home/tunu (no 'r' trail), score.js preN words = BAL.rank.preN (one core with lifeTopRank), check accepts pre / refuses pre+rank / unknown pre, score 0 < lowest palace life; score.test.mjs ALL OK |
+| BLOCKING 1 — law 11, same family (board row of that life) | jrank.js rkRole(ph): «Chưa vào cung» / «Tú nữ» are in neither consortN nor servantN → falls to `{role:"maid",rank:1}` → rkFace __kr → kitDecor draws the CUNG NỮ metal/colour on the board face of a tiểu thư at home or a ban-hoa tú nữ. Fix: rkRole returns a non-maid role for BAL.rank.preN words (e.g. role "other"/"consort" with rank null, as jselxsc figRoles does for a tú nữ), + a test row in end-maxrank.js. |
+| BLOCKING 2 — law 3/7 readable rule (same family) | «Cách tính» (rkRulesSpec, «Phẩm cao nhất từng đạt») lists consort and maid points only; a never-entered life shows Công danh 0 with no line saying why. Add one kit note/tile from BAL.rank.preN: «Chưa vào cung / Tú nữ: 0 — không tính Công danh» (wording per VANPHONG, words read from preN, no typed number other than BAL). |
+| deploy note (non-blocking) | until rank/worker is deployed, LIVE server refuses these lives («no standing») → end card says «Bảng vàng không nhận kiếp này». Deploy the worker with or before the LAND. |
+Everything from §2 still holds for the unchanged code. Re-review = delta only (rkRole + Cách tính + end-maxrank.js).
+VERDICT: FAIL dd61c8a4 — BLOCKING 1, 2.
