@@ -74,3 +74,14 @@ Land after the worker's coop-e2e ×3 are all 143/143 too. Wipe the CDN folder im
 
 ## MERGE DELTA f068313b → ac73cd3c (origin/main 1dcb373e, coop-freeze-kmrew scroll-cue): **PASS ac73cd3c**
 `git merge-tree` of f068313b + 1dcb373e = ac73cd3c for every source file (only index.html / sw.js / assets.json differ = rebuilt); FF from LIVE 1dcb373e; fresh build_site.sh = committed except stamps; no new duplicate functions vs LIVE; charge-trinh-punish + charge-followups ALL PASS, 0 page errors. coop-e2e ×3 + quickcheck = worker #6's run (land only if all 143/143 and quickcheck shows only the known LIVE faults).
+
+## MERGE DELTA ac73cd3c → 69dd730e (origin/main aa37de21 home-way-nits): **PASS 69dd730e**
+- FF from LIVE aa37de21. The auto-merge tree of ac73cd3c + aa37de21 differs from 69dd730e only in the resolved conflict: j8.js punish() and jpun.js PUNK/punRows, plus the rebuilt index.html / sw.js.
+- j8 punish(): main's weights are kept: sev 0 nhẹ = khất bổng BAL.punW.lite.cut, or cảnh cáo; sev 1 = cấm túc mid; sev 2 = demote by BAL.punW heavy.
+  - The branch's D1 rules sit on top: !punTwice + punDown + punMark on the demotion, and punNote for her on every weight.
+  - New PUNK.nhe «Phạt nhẹ» with the row «Hình phạt: Khất bổng n tháng / Cảnh cáo», so a light punishment also shows Ai xử / Vì sao (D1). Cổ trang wording, no typed number.
+- vpAccuse = chPunish(t,"vp"): the vp charge is pun "light" = phạt bổng BAL.charge.fine + Danh / Đức + vpSeize, NO cấm túc. This matches the owner's HOME-WAY row (OD 26/11, «vượt phẩm → NHẸ (khất bổng, no cấm túc)»), and there is one punishment, not two (main's punish(t,"vượt phẩm",0) + its own seize are not doubled).
+- Nit, not gating: the light charge says «phạt bổng N lượng» (bạc) while punish sev 0 says «khất bổng n tháng». Both are light and both match the owner row, but the game has two light forms → Foreman D may want one wording.
+- No new duplicate functions vs LIVE; fresh build = committed except stamps.
+- Tests: charge-trinh-punish / charge-followups ALL PASS, charge-smoke 0 FAIL, punish-reason Fold + iPad ALL PASS, 0 page errors.
+- Land when worker #6's coop-e2e + quickcheck are clean (only the known LIVE faults).
