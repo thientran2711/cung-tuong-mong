@@ -145,6 +145,13 @@ def check_hoi(v, rid, o, h, clim, titles):
 
 def check_E(v, rid, o, E, roles):
     if not isinstance(E, dict): v.e(rid, 'E missing'); return
+    # thin-p8 r2: an ending that tells of Thái hậu (only) must not move «hh», and the reverse
+    for k, e in E.items():
+        if not isinstance(e, dict): continue
+        et = (e.get('tag') or '') + ' ' + (e.get('t') or ''); fx = e.get('fx') or {}
+        TH = 'Thái hậu' in et; HH = 'Hoàng hậu' in et or '{hh}' in et
+        if TH and not HH and 'hh' in fx: v.e(rid, f'E.{k}: tells of Thái hậu but moves «hh» (Hoàng hậu)')
+        if HH and not TH and 'th' in fx: v.e(rid, f'E.{k}: tells of Hoàng hậu but moves «th» (Thái hậu)')
     ok = [k for k in STATS] + ['rel.' + r for r in roles] + (['tin'] if o == 'cnv' else [])
     for k in ('win', 'mid', 'lose'):
         e = E.get(k)
