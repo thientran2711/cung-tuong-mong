@@ -64,3 +64,4 @@ HOLD: animation kit (kitHand/kitPick/ring/vòng bảo vật) ONLY as one whole s
 G4 80 dialog-fixed «no empty Tốn/Được cell» Fold+iPad; G4 90 button-crawl «Ô lưu · Lui». Do not run tests in parallel with QC perf (my QC #1 on SP got longTaskMax 3190 from that).
 ### TOOLS dev/handover/reports/lc24-tools/ (gates-m3/sp/ng.sh, robots.sh, opt-tap-guard.js, hopush.sh — fix SP= path); restack recipe = merge stage branch, ours built files, item CHANGE, build_site.sh, amend. CHANGE.txt holds ONE line.
 - ~20:30Z ROLLED; MAIN 162 told.
+- 20:11Z MAIN 162: HOLD kit-veil-buoi 8655f6da (sếp 20:05Z: all 4 veils lighter; KK44-H makes a new sha). Do NOT land 8655f6da — LC25 note.
