@@ -204,3 +204,43 @@ PRIORITY #1 CHECK ('law1-audit|law1-maid-away|wdNpcRedeem|misHome'): OD 0 | ledg
   - Shots (outside git, /home/user/wt/law1-tools/shots, looked 3×): maid life, her master's card at home vs away, Fold 755x1000 + iPad 1180x820. Home: tabs Hầu hạ/Ban thưởng/Giao thiệp with the four acts; away: only «Hầu bên cạnh chủ» + «Xin chủ cho đi hầu cung khác». Kit option cards only, odds in words, no %, no cut text, no overflow. Pre-existing (not this branch): the portrait pendant tassel covers the «Hoa tai» slot label in the jewellery grid on both devices → FOR MAIN 146 / kit.
 - (4) NOT-FIXED rows of the law-1 audit (not small / not inside these files → FOR MAIN 146): (a) D: Quà tặng «Có sở thích / sở ghét» for her / servants / men / Thái hậu; (b) D: «Quà trúng sở ghét → mất thiện cảm» for every giver/recipient (NPC → her none); (c) D: NPCs learn others' likes; (d) B parked: co-op ration borrow/steal never targets the friend (needs a cross-seat item-ledger protocol; jagacts4 p4Lender/p4StealT x.coop skip). Also OPEN in other lanes: per-nết thresholds (D), promotion routes (D, waits sếp), selection 12 tú nữ (MAIN SELSCENE-4), leaving ladder for NPCs (E64b).
 **SSK review/law1-land 52263f496c4063544868ca4e6cf465a96d12e61c**
+
+## REVIEW law1-land (B EXPRESS BIG reviewer session_01N1tNP4PNwJ48R7BjEw5mTA, opus, fresh, 26/11)
+PRIORITY #1 CHECK ('law1-land|law1-audit|law1-maid'): brief line reused (OD 0 | ledger 0 | claims 8 | main 0 | review/* 5) + re-checked: LIVE origin/main 5e013076 = brief's LIVE, has none of wdNpcPawn / wdNpcRedeem / bcHumble / maid-mis-away → both features still missing from LIVE; review/law1-land 52263f49 is a fast-forward of 5e013076.
+START_CTX ≈ 3 % of 1M. Read: START_CORE (18 laws) + START_WORKER + START_REVIEWER, brief b-law1-land-review.md, this report (fixes table, REVIEW r1 parts, «## EXPRESS LAND r2»).
+
+### (1) Merge resolution keeps LIVE
+- `git diff origin/main..52263f49 --stat` = j42 / j92 / jbal2 / jbancung + law1-audit.test / maid-mis-away.js / role-parity test + scan + fam + exempt/open json + index.html / sw.js / assets.json. Nothing else of LIVE touched.
+- Game diff read line by line: j42 srvTalk = maid-away's ONE rule (hh→mis remap + srvMisHome gate; the old `else if(v===m)` beside line removed — safe: every card builder (j42 srvVisitOf rvP, j95 ×3) tags the master «mis» or «hh», never «rv»); j92 wdNpcPawn / wdNpcRedeem / wdMonth world-pass gate + NPC pawn-leak news; jbal2 BAL.net.n.bcHumble / wdPawn; jbancung bcNpcAsk three roads. LIVE's lines around them unchanged.
+- Rebuild check: `python3 dev/build/assemble.py && bash dev/site/build_site.sh` on 52263f49 → index.html / sw.js / assets.json differ ONLY in the build stamp (CTM_BI.s/c, sw V); same bundle hash b=e7867898f54f → the committed build is this tree.
+
+### (2) Laws on each new path
+| path | law 1 two-way | laws 2–3 gain AND loss | law 4 BAL | law 6b/6c real | co-op |
+|---|---|---|---|---|---|
+| NPC «Cầm cố» (wdNpcPawn) | NPC short of silver holds HER two roads: wdPawn or wdSell (same functions, prices, leak) | pawn: Bạc now / piece away, Bạc to redeem, lost at due, leak Danh −; sell: Bạc / piece gone, leak | WD.*, BAL.net.n.wdPawn, wdLeak | agent = a real trusted eunuch / ma ma of hers (wdAgent; play: «Tiểu Hải Tử»); piece kept in v.wdPawn = an ilSlots slot (jil:35) → owned, traceable; at expiry ilGuard("wdPawnMonth","pawn") routes it to the market box (test bx0 0 → bx1 1) | NPC pawn / expiry only in the world pass (worldOn; host) |
+| NPC «Chuộc» (wdNpcRedeem) | her same wdRedeem | Bạc − back, piece back | BAL.ag.why.wd.poor | piece returns to v.inv | returns on a non-world seat and for x.coop |
+| Ban cung NPC (bcNpcAsk) | NPC picks among HER three roads (humble / up / Nhận), same bcChoices / bcAsk / bcGain | ask: gain Đức/Danh, fail: Sủng/Danh loss + grudge; Nhận = gain-only (time) — allowed | BAL.banCung.*, BAL.net.n.bcHumble | palaces real (PALN) | host-only palFix wrap (COOPW.seat a) |
+| maid ↔ master (srvTalk) | player maid = NPC maid's asOpts rule: four acts at home, only «Hầu bên cạnh chủ» away; master as Hoàng hậu same | beside: Chủ tin +2 / −1; the four acts unchanged | SRVA.* (BAL.odb.j42) | master = her real srvM() | maid talk is her own seat (unchanged) |
+No new card, frame or wording beyond one news line (cổ trang, no number) → kit / VANPHONG untouched (laws 7, 9).
+
+### (3) NOT-FIXED rows — out of scope, not hidden fails
+- D gift ×3 (Có sở thích / sở ghét · Quà trúng sở ghét · Biết sở thích người khác) and B co-op ration from the friend: the scan still lists exactly these 4 as GAP (`role-parity-scan --fam` → GAP 4, same as LIVE and both source branches) and role-parity.test FAM_OPEN gates them (no new GAP row). They belong to D's law1-gifts lane and to a co-op item-ledger protocol job; none of this branch's files can close them. FOR MAIN 150 to route (as listed in «EXPRESS LAND r2» (4)).
+- Carried note from REVIEW r1 row 10 (player maid at an away master still shown the four acts) = CLOSED by the maid-away half of this land (proved below).
+
+### (4) Tests on 52263f49 (worktree /home/user/wt/l1lr, sparse)
+- `node dev/test/law1-audit.test.js` → `law1-audit: 13/13 PASS` · `… index.html` → `law1-audit: 13/13 PASS`
+- `node dev/test/maid-mis-away.js` → `MAID-MIS-AWAY PASS` · `… index.html` → `MAID-MIS-AWAY PASS` (home / away / real stage card / master Hoàng hậu home + away)
+- `node dev/test/role-parity.test.js index.html` → `ALL PASS`
+- `node dev/tools/role-parity-scan.js index.html --fam` → `LAW-1 FAMILIES: rows 22 · GAP 4 · D:Quà tặng/Có sở thích / sở ghét ; D:Quà tặng/Quà trúng sở ghét → mất thiện cảm ; D:Quà tặng/Biết sở thích người khác ; B:Co-op/Vay / lấy trộm khẩu phần`
+- `node dev/test/one-core-guard.js` (no --allow-grow) → `{"modules":445,"inlineNow":3100,"baseline":3592,"balKeys":858,"fails":0}` `PASS: one core …`
+- `node dev/test/undef-scan.js` → `PASS: no unguarded undefined identifier (310 names checked)`
+- coop-e2e vs a LOCAL Worker (`wrangler dev --local --port 8799` in this tree's coop/worker): `node dev/test/coop-e2e.js <out> http://127.0.0.1:8799` → `143/143 passed` · `COOP_SWAP=1 …` (iPad hosts) → `143/143 passed`
+- `bash dev/tools/quickcheck.sh` ALONE → `QUICKCHECK PASS · 212 s · open 2008 ms · old save ok · perf (median of 3, new/live): render 213/221 ms, tab 489/500 ms, buổi 1330/1561 ms` · core gates: only `G4 button-crawl «fold · Ô lưu [#modal.kptitle] · Lui · close button did not close its layer»` = the known pre-existing LIVE fault (fixed by fix-7 r3), not this branch. Old save `{"load":{"ok":true},"buoi":true,"errors":0}`.
+- Play on both devices (script /home/user/wt/l1shots/play.js, outside git; touch contexts; first-run screens, roulette, gift chests, new-life popups and Kỳ ngộ events passed by player taps; shots looked 3×):
+  - Pawn / redeem (her UI, real taps): a life with a trusted eunuch (wdAgent: «Tiểu Phong Tử») → Tư trang → tap «Trâm gỗ đào» → «Cầm cố» (Rất vững · Bạc +6, chuộc lại 7 bạc trong 12 tuần) → bag tile carries «đang cầm» (the piece stays traceable) → tap it → «Chuộc lại» (1 khắc · Bạc −7) → back in the bag. Fold + iPad: wdPawn 1 → 0, Bạc 200 → 206 → 199. Kit cards, odds in words, no %, no overflow, no page error.
+  - NPC pawn / redeem by nết (same session, game functions): «Phi Thẩm Tuyết Nhạn sai Tiểu Bảo Tử mang Trâm gỗ đào đi cầm: Bạc +6 …» → held in her wdPawn → «… chuộc lại Trâm gỗ đào: Bạc −7» when her silver stays above the poor line.
+  - Maid ↔ master: master away (real «Theo hầu chủ» tap → her place) → her card shows only «Hầu bên cạnh chủ» (Có cơ · Chủ tin +2 / −1) + «Xin chủ cho đi hầu cung khác»; master at home → Hầu hạ / Ban thưởng / Giao thiệp with the four acts (Fold life = master is the Hoàng hậu: same four acts, the r1 «hh» case). iPad: card opened by a real tap both times. Fold: the stage figures are not tappable in the Fold layout at that moment (0×0 boxes) → the card was opened by the same code a tap runs (popIdx + render); content identical to the iPad tap. Pre-existing (not this branch, already reported): the portrait pendant tassel covers «Hoa tai» in the jewellery grid.
+  - FULL videos (outside git): /home/user/wt/l1shots/videos/law1-land-fold-755x1000.webm · /home/user/wt/l1shots/videos/law1-land-ipad-1180x820.webm
+Verdict: no law broken by any new path; LIVE kept; gates green except the known LIVE G4. **PASS.**
+
+**LAND READY review/law1-land 52263f496c4063544868ca4e6cf465a96d12e61c FOR MAIN 150 / LC19 (BIG; FF on LIVE 5e013076)**
