@@ -44,4 +44,15 @@ cov2='function dqKmStale' in dq
 print('\n| family B: scene-queue holder (j93 kmFree / kmPump) | ghost-prone (exists ≠ on screen) | covered by jdayq on-screen rule |\n|---|---|---|')
 for h in hosts:print(f'| kmFree host `{h}` | yes | {"yes (kmFree wrapper: dqKmReal after BAL.dayq.wake)" if cov1 else "NO"} |')
 print(f'| kmBusy held by a scene job with nothing on screen (600 s guard) | yes | {"yes (dqKmStale after BAL.dayq.stale, queue waiting)" if cov2 else "NO"} |')
-print(f'\nFAMILY B uncovered: {sum(1 for h in hosts if not cov1)+(0 if cov2 else 1)} of {len(hosts)+1}')
+# the jdayq kmFree wrapper's OWN gates (every other kmFree wrapper in dev/build would be listed the same way: grep `kmFree=function`)
+wr=re.search(r'const kf=kmFree;kmFree=function\(\)\{(.*?)\}\}\)\(\);',dq,re.S);wb=wr.group(1) if wr else ''
+gates=[('activity gate (c): `#ov` un-hidden','ovS',r'dqShown\(ov\)'),('activity gate (c): `DF.play` handle','dfS',r'dqOn\("\.kfoc"\)')]
+unc=sum(1 for h in hosts if not cov1)+(0 if cov2 else 1)
+for name,key,onrule in gates:
+    held=(key in wb) or ('DF.play' in wb if key=='dfS' else '!dqHidden(ov)' in wb)
+    ok=bool(re.search(onrule,wb)) and 'DQ.ka' in wb
+    if held and not ok:unc+=1
+    print(f'| jdayq kmFree {name} | {"yes" if held else "n/a"} | {"yes (on screen only, ghost released after BAL.dayq.wake: DQ.ka)" if ok else "NO"} |')
+print('| jdayq kmFree tap gate (scene posted inside a tap waits ONE pump) | no (bounded: one 250 ms pump) | n/a |')
+print('| jdayq kmFree newsHold (scene waits on the unpainted news card) | no (bounded: newsLet lets the scene through when the card cannot paint) | n/a |')
+print(f'\nFAMILY B uncovered: {unc} of {len(hosts)+1+len(gates)}')

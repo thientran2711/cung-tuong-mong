@@ -164,7 +164,12 @@ window.dqKmStale=dqKmStale;
   try{if(!dqUi()||dqKmReal()){DQ.kg=0;return false}const n=Date.now();if(!DQ.kg)DQ.kg=n;if(n-DQ.kg<((BAL.dayq&&BAL.dayq.wake)||2000))return false;DQ.stat.kmGhost=(DQ.stat.kmGhost||0)+1}catch(e){return false}}else DQ.kg=0;
  /* (c) a new motion scene waits while a mini-game screen or an on-figure game is open (a scene on screen is already one at a time: kmBusy;
     a scene from her own act in the person view shows there as before) */
- try{if(dqUiC()){const ov=document.getElementById("ov");if((ov&&!dqHidden(ov))||(window.DF&&DF.play)){DQ.stat.actKm++;return false}
+ try{if(dqUiC()){const ov=document.getElementById("ov"),ovS=!!(ov&&!dqHidden(ov)),dfS=!!(window.DF&&DF.play);
+  /* Q-SOFTLOCK (c) (F s9e 03:47Z: Q=0, DQ.want held, screen free, actKm +4/s): the same on-screen rule as (1) — only a mini-game screen or a person
+     view REALLY on screen holds the scene; an un-hidden #ov that is not on screen, or a left-over DF.play handle with no .kfoc on screen, stops
+     holding it once it has lasted BAL.dayq.wake ms (solo only, dqUi, as (1); a co-op seat keeps the old answer; paint/queue only, no S key, no draw) */
+  if(ovS||dfS){if(!dqUi()||(ovS&&dqShown(ov))||(dfS&&dqOn(".kfoc"))){DQ.ka=0;DQ.stat.actKm++;return false}
+   const n=Date.now();if(!DQ.ka)DQ.ka=n;if(n-DQ.ka<((BAL.dayq&&BAL.dayq.wake)||2000)){DQ.stat.actKm++;return false}DQ.stat.kmGhost=(DQ.stat.kmGhost||0)+1}else DQ.ka=0;
   /* a scene posted inside a tap waits one pump (kmPump retries in 250 ms): the tap may be opening an activity (her «Điểm trang» tap spends the
      khắc first, then opens the mirror) — a scene of the khắc never starts before / under that screen */
   const ev=window.event;if(ev&&/click|pointer|touch|key|mouse/.test(ev.type)&&!DQ.kmTap){DQ.kmTap=1;setTimeout(()=>{DQ.kmTap=0},0);DQ.stat.actKm++;return false}}}catch(e){}

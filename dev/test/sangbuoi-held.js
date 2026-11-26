@@ -22,6 +22,7 @@
       by itself; I3 control: a scene ON screen holds them (none painted over it for 3 s), they show once it closes; I4 (r4) the same with a zero-size scene FIRST in the page; then «Sang buổi» advances.
    J  (Q-SOFTLOCK a) night news card ⇄ queued flip behind a stale scene job (kmBusy, nothing on screen) → the flip plays, the news shows, the turn goes on.
    K  (Q-SOFTLOCK b) a left-over #kmrew host (not on screen) blocks the scene queue; 8 cards wait, khắc spent → cards, scene, the buổi turns.
+   L  (Q-SOFTLOCK c, F s9e Q=0) the kmFree activity gate trusted a ghost #ov (L1) / a left-over DF.play (L2) → scene queue blocked, turn held → cards, scene, the buổi turns.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.split(',').includes(v[0]+'x'+v[1]));/* VP=1180x820: one device */
@@ -230,6 +231,25 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
      await p.evaluate(()=>{const g=document.querySelector('#kmrew.tstghost');if(g)g.remove()});
      if(!km)return 'the queued scene never played (ghost #kmrew held kmFree) '+JSON.stringify({s:await st(),KMQ:await p.evaluate(()=>KMQ.length),d:await diag()});
      return (await advanced(bk0,BAL_W*3+6000))?'':'cards + scene done but the buổi did not turn '+JSON.stringify(await st())},
+   /* L (Q-SOFTLOCK c, F s9e 03:47Z: «Sang ngày mới» ×3 in one buổi, no turn, Q=0, DQ.want held, screen free, DQ.stat.actKm +4/s; 03:27Z before it:
+      Q=4 «Mục lục / Tin báo / Danh hiệu / Quẻ» held, «Có tin đang chờ» greyed): the jdayq kmFree activity gate (c) believed an #ov that is merely
+      un-hidden (L1, not on screen) or a left-over DF.play handle with no person view on screen (L2) → the queued scene never starts → KMQ holds the turn.
+      Now: only an activity ON SCREEN holds the scene; a ghost lasting BAL.dayq.wake ms no longer does. 2 cards + a queued scene, khắc spent, she taps
+      «Sang ngày mới» 3× → the cards, the scene, then the buổi turns. */
+   L:async()=>{for(const v of [1,2]){const bk0=(await st()).bk;await p.evaluate(([c,v])=>{const hs=Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').set;
+       if(v===1){const o=document.getElementById('ov');window.__ovC=o.style.cssText;hs.call(o,false);o.style.display='none'}else{window.DF=window.DF||{};window.__dfp=DF.play;DF.play={tst:1,skip(){},destroy(){}}}
+       used=BAL.time.khac;advLock=true;Q.push(...c);hs.call(document.getElementById('modal'),true);
+       kmPush(done=>{const d=document.createElement('div');d.className='kmov';d.id='tstkm';d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35);display:flex;align-items:center;justify-content:center';
+         d.innerHTML='<button type="button" class="main" id="tstkmb">Bổng lộc · Nhận</button>';document.body.appendChild(d);d.querySelector('button').onclick=()=>{d.remove();done()}});
+       setTimeout(()=>{advLock=false},300)},[['Tin báo','Danh hiệu'].map(card),v]);
+     const undo=()=>p.evaluate(v=>{const hs=Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').set;if(v===1){const o=document.getElementById('ov');o.style.cssText=window.__ovC||'';hs.call(o,true)}else if(window.DF&&DF.play&&DF.play.tst)DF.play=window.__dfp||null},v);
+     for(let k=0;k<3;k++){await p.tap('#next',{force:true}).catch(()=>{});await sleep(400)}
+     let km=0;const t0=Date.now();for(let i=0;i<80;i++){if(await p.evaluate(()=>!!document.getElementById('tstkm'))){km=1;await shot('L'+v+'-scene');await p.tap('#tstkmb',{force:true});await sleep(500);continue}
+       if((await st()).bk!==bk0)break;if(!(await tapAny())){await sleep(500)}else await sleep(350)}
+     const dg=km?null:{s:await st(),KMQ:await p.evaluate(()=>KMQ.length),d:await diag()};await undo();
+     if(!km){await p.evaluate(()=>{try{kmPump()}catch(e){}});await drain();return 'L'+v+' the queued scene never played (ghost '+(v===1?'#ov':'DF.play')+' held kmFree) '+JSON.stringify(dg)}
+     rows.push(`${W}x${H} L${v} scene played after ${Date.now()-t0} ms`);console.log(rows[rows.length-1]);
+     if(!(await advanced(bk0,BAL_W*3+6000)))return 'L'+v+' cards + scene done but the buổi did not turn '+JSON.stringify(await st());await drain()}return ''},
   };
   console.log(`${W}x${H} life ready`,JSON.stringify(await st()));
   const order=Object.keys(CASES).filter(k=>!process.env.CASES||process.env.CASES.includes(k));const REP=+process.env.REPEAT||1;/* REPEAT=10: each case N times (stability gate) */
