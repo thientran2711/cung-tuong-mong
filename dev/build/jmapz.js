@@ -93,11 +93,11 @@ function mapzCur(){const Z=window.__mapZone&&mapzById(window.__mapZone);return Z
 (function(){const f0=mapFit;mapFit=function(){const Z=mapzCur();const sc=document.querySelector(".game.maptab .mapsc");const w=sc&&sc.querySelector(".mapw");
  /* first a normal fit (it lays out the card rows and sets the real margins), then the zone zoom from those margins */
  if(Z&&w&&window.__mapZoneDo){try{f0.apply(this,arguments);const b=mapzBox(Z),img=sc.querySelector(".mapimg"),cs=getComputedStyle(w);const mL=parseFloat(cs.marginLeft)||0,mR=parseFloat(cs.marginRight)||0,mT=parseFloat(cs.marginTop)||0,mB=parseFloat(cs.marginBottom)||0;
-   const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:1.792,cw=Math.max(1,sc.clientWidth),aw=Math.max(120,cw-mL-mR),ah=Math.max(120,sc.clientHeight-mT-mB);
+   const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:1.792,cw=Math.max(1,sc.clientWidth),FR0=mapFreeRect(sc),aw=Math.max(120,FR0.r-FR0.l),ah=Math.max(120,FR0.b-FR0.t);
    const W=Math.min(aw*KIT_MAPZ.fill/b.w,ah*KIT_MAPZ.fill*asp/b.h);window.__mapZ=Math.min(W/cw,(window.__mapFit||1)+2.5)}catch(e){}}
  const r=f0.apply(this,arguments);
  if(Z&&w&&window.__mapZoneDo){try{const b=mapzBox(Z),cs=getComputedStyle(w),mL=parseFloat(cs.marginLeft)||0,mR=parseFloat(cs.marginRight)||0,mT=parseFloat(cs.marginTop)||0,mB=parseFloat(cs.marginBottom)||0;
-   const wr=w.getBoundingClientRect(),sr=sc.getBoundingClientRect();const cx=sr.left+mL+(sc.clientWidth-mL-mR)/2,cy=sr.top+mT+(sc.clientHeight-mT-mB)/2;
+   const wr=w.getBoundingClientRect(),sr=sc.getBoundingClientRect();const FR=mapFreeRect(sc),cx=(FR.l+FR.r)/2,cy=(FR.t+FR.b)/2;
    sc.scrollLeft+=wr.left+(b.x+b.w/2)*wr.width-cx;sc.scrollTop+=wr.top+(b.y+b.h/2)*wr.height-cy;window.__mapPos2=[sc.scrollLeft,sc.scrollTop]}catch(e){}}
  try{if(w&&!Z)mapzNudge(w)}catch(e){}
  return r}})();
