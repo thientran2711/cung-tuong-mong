@@ -1,1 +1,1 @@
-Kết quả mưu sự: thẻ kết cục ghi rõ người ấy, ai làm, thành bại hay bỏ dở; mỗi người kèm một dòng riêng.
+Dòng «Kèm» trên thẻ kết cục: người có tên mỗi người một dòng, người lạ gộp thành «N vị khác».

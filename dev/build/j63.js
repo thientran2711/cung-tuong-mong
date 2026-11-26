@@ -325,15 +325,17 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
 function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
-function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12»; no group summary, no cause copy.
+function kitKemRow(K){if(!K||!K.length&&!K.more)return"";/* K.all (ONE-SIEVE-2 Sổ ghi «kèm theo» record): every line, no 8-line cap (K.more still counted) */const CAP=K.all?Infinity:8;/* ONE-SIEVE (MAIN 158 order 26/11): K.more = people the sieve folded away (jnsieve nsCard) — counted in the tail *//* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12»; no group summary, no cause copy.
    MAIN 157 26/11 (night card wall «Hoàng hậu …:một vị Quý phi: ghen +8 ghen +8 …»): each person is ONE block line (.kkemi, every card: rtoast, night card, kitRows);
    the people she cannot name with the SAME feeling and number are one line «4 vị khác: ghen +8» (one alone keeps «một vị <tước>: ghen +8») */
  const R=K.filter(x=>Math.round(x.d));const L=[],U=new Map();
- const line=(nm,k,d)=>`<span class="kitem kkemi"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${k} ${kaN(d)}</span></span>`;
- for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){L.push([0,line(kaWho(x.v),x.k,d)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[]});U.get(key).v.push(x.v)}
- for(const {k,d,v} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^M/,"m"):`${v.length} vị khác`;L.push([1,line(nm,k,d)])}
- const out=L.slice(0,8).map(x=>x[1]);if(L.length>8)out.push(`<span class="kitem kkemi"><span class="ef n">… và ${L.length-8} người khác</span></span>`);
- return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${out.join("")}</span></span>`:""}
+ /* KIT 7.1 (ONE-SIEVE): a named person or a single unnamed one shows the new total «ghen +8 (42)» (kaNT, K items carry t); a group «N vị khác» none */
+ const line=(nm,k,d,t)=>`<span class="kitem kkemi"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${k} ${t!=null&&typeof kaNT==="function"?kaNT(d,t):kaN(d)}</span></span>`;
+ const seen=new Set();for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){const sk=(x.v&&x.v.id||kaWho(x.v))+"|"+x.k;if(seen.has(sk))continue;seen.add(sk);L.push([0,line(kaWho(x.v),x.k,d,x.t)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[],t:[]});U.get(key).v.push(x.v);U.get(key).t.push(x.t)}
+ for(const {k,d,v,t} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^m/,"M")/* KK41: a line that starts its row starts with a capital («Một vị Phi …»; owner 24/11) */:`${v.length} vị khác`;L.push([1,line(nm,k,d,v.length===1?t[0]:null)])}
+ const more=Math.max(0,L.length-CAP)+(+K.more||0);const out=L.slice(0,CAP).map(x=>x[1]);
+ if(more)out.push(`<span class="kitem kkemi"><span class="ef n">${out.length?`… và ${more} người khác`:`${more} người khác trong cung đổi lòng chút ít`}</span></span>`);
+ return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv kklist">${out.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
    the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
@@ -369,13 +371,13 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  const ok=okHint===true?true:okHint===false?false:av;const SL=kitResultSeal(ok),seal=SL.t;void failTxt;void netBad;
  /* ODDS CAP: a soft failure changes nothing but still shows its one BẠI line (j63 oddsSoft) */
  if(okHint===false&&window.__oddsSoft&&!sen)sen=window.__oddsSoft;window.__oddsSoft="";
- if(!G.length&&!B.length&&!sen&&!(K&&K.length)&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
+ if(!G.length&&!B.length&&!sen&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
- const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!G.length&&!B.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
+ const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!G.length&&!B.length&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
- const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
+ const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${typeof kitLineCap==="function"?kitLineCap(x):x}</span>`).join("")}</span></span>`;/* KK41: each result line starts its row with a capital */
  t.className="rtoast karesult "+SL.cls;
  t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ ở Nhật ký</span></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000)};
@@ -392,7 +394,10 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 .rtoast.karesult .kwy,.kb .kwy{color:var(--dim);font-weight:400;font-size:.74rem}
 
 .kb .kr-kem .krl{color:var(--dim)}
-.kb .kr-kem .kitem.kkemi{display:block;text-align:left;width:auto;min-width:0;justify-content:flex-start}/* MAIN 157: one person per line in every card that lists people (rtoast, night card) */
+/* KK41 (one kit part with OB-VERDICT-2): ANY row listing people (Kèm + a kitRows Được / Mất of person lines, j79 KIT_PLINE) = .krv.kklist > .kitem.kkemi, one line each in every container (the night card's .kitem is the centred item cell otherwise) */
+html body .kr>.krv.kklist{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:1px!important;text-align:left!important;min-width:0}
+html body .kr>.krv.kklist>.kitem.kkemi{display:block!important;width:auto!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:0!important;text-align:left!important;white-space:normal!important;border:0!important;background:none!important;box-shadow:none!important;aspect-ratio:auto!important;height:auto!important}
+html body .kr>.krv.kklist>.kitem.kkemi>.ef{display:inline!important;margin:0!important;white-space:normal!important}/* MAIN 157: one person per line in every card that lists people (rtoast, night card) */
 .kb .kkem{display:block;cursor:pointer;color:var(--ink)}
 .kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}
 .kb .kkem .kkeml{display:none;font-size:.76rem;color:var(--dim);line-height:1.35;margin-top:2px}

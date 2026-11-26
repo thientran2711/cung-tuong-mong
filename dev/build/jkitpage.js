@@ -64,8 +64,10 @@ function kitPgEvOpts(){const W=o=>word(o);const O=[{n:"Gói bánh ú dâng Thái
   {n:"Theo cha mưu đại sự",fx:{},x:`${W(20)} · thành: Hoàng hậu bị phế, Danh +10 · hỏng: cả họ bị tru di`}];
  return `<div class="opts kitpg-ev">${O.map((c,i)=>`<button class="opt" data-m="${i}" data-khide="1" data-kitsample="ev${i}">${c.n}<small>${typeof dilLine==="function"?dilLine(c):c.x}</small></button>`).join("")}</div>`}
 function kitPgSeals(){const s=ok=>{const r=kitResultSeal(ok);return `<span class="rtoast karesult ${r.cls}"><b class="seal">${r.t}</b></span>`};return `<div class="kitpg-row kitpg-seal">${s(true)}${s(false)}${s("soft")}${s(null)}</div>`}
-function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,3)}catch(e){}if(!L.length)L=[{name:"Phi tần A"},{name:"Phi tần B"}];
- return `<span class="kb" onclick="const k=event.target.closest('.kkem');if(k)k.classList.toggle('on')">${kitKemRow(L.map((v,i)=>({v,k:"ghen",d:4+i*2})))}</span>`}
+function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,8)}catch(e){}if(!L.length)L=[{name:"Phi tần A"},{name:"Phi tần B"}];
+ /* KK41: named people one line each, the ones she does not know grouped «N vị khác: ghen +8» (oán lines grouped apart) — plus the night-card Được / Mất person rows (kitRows) */
+ const D=BAL.kitpage.demo.kem;/* law 4: the sample's numbers come from BAL */const K=L.map((v,i)=>({v,k:i%4===3?"oán":"ghen",d:i%4===3?D.o:D.g}));let night="";try{const P=(n,t,c)=>`<span class="ef t">${n}:</span> <span class="ef ${c}">${t}</span>`;night=kitRows([["Được",[P(L[0]&&kaWho(L[0])||"Phi tần A",`thiện cảm ${kaN(D.tc1)}`,"g"),P("một vị Phi",`thiện cảm ${kaN(D.tc2)}`,"g"),`<span class="ef g">Sủng ${kaN(D.sung)}</span>`],"g"],["Mất",[P(L[1]&&kaWho(L[1])||"Phi tần B",`thiện cảm ${kaN(D.tc3)}`,"r"),`<span class="ef r">Sức ${kaN(D.suc)}</span>`],"r"]])}catch(e){}
+ return `<span class="kb">${kitKemRow(K)}</span>${night}`}
 function kitPgWhy(){const w=(c,t,r)=>`<span class="kitem"><span class="ef ${c}">${t}</span>${kaWhyHtml(r)}</span>`;
  return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-tgt"><span class="krl">Người ấy</span><span class="krv"><span class="kitem"><span class="ef t">Lệ phi Tô Mạn:</span> ${(()=>{const D=BAL.kitpage.demo.aim;return `${kaAimPart("sung","Sủng",D.sung0,D.sung0+D.sung)}, <span class="ef r">thiện cảm ${kaN(D.loyal)}</span>`})()}</span></span></span><span class="kr kr-by"><span class="krl">Ai làm</span><span class="krv"><span class="kitem"><span class="ef t">Tần Vu Uyển Đình:</span> nói xấu ngươi bên gối · <span class="ef r">thành</span></span></span></span><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv">${w("g","Sức 56→74 (+18)","nghỉ qua đêm")}</span></span><span class="kr kr-mat"><span class="krl">Mất</span><span class="krv">${w("r","Sủng 26→25 (−1)","lâu không được gặp Hoàng thượng")}${w("r","Bạc 80→65 (−15)","sai tai mắt dò chủ hội")}</span></span></span>`}
 KIT_SAMPLES.push(
@@ -73,7 +75,7 @@ KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · BỎ DỞ · KẾT QUẢ",html:kitPgSeals},
- {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
+ {id:"§53",title:"kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)",html:kitPgKem});
 /* §12.2 glossary popover with the «Cách giảm» / «Cách tăng» row (K-GLOSS-LOWER): the REAL popover body kitGlossPopHtml, static (no data = no row) */
 KIT_SAMPLES.push({id:"§12.2",title:"Glossary popover: meaning + «Cách giảm» (rise hurts) / «Cách tăng» (fall hurts) row from kitLowerText",html:()=>typeof kitGlossPopHtml!=="function"?"":
  `<div class="kitpg-row">${["Oán","Sủng","Đức"].map(t=>`<div class="kpop" style="position:static;display:block;max-width:300px">${kitGlossPopHtml(t)}</div>`).join("")}</div>`});
