@@ -159,7 +159,11 @@ function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
 const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"],NAF_OWN=["nfch"];let NA={w0:0,said:-1};
 /* r4 (Foreman B ruling 2): the carried cards live in her SAVE (S.cq, save form: pid {pid,pp,t} / generator {rk,ra,t}); both seats, a reload keeps them */
 const CQ=()=>(S.cq=Array.isArray(S.cq)?S.cq:[]);
-function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
+/* coop-afk-l13 (law 11, same family): her week end RAN on her own phone (CW.pend: the committed night went) but her `end` waits on her open
+   dialogs (jcoopworld tryEnd: !Q.length) while the partner's end is already out (level 13: the host — the guest sends none): the same wait,
+   the same bound (THIN 0 AFK=g: «Kỳ nguyệt sự» + two week-end cards held her end, the room never stepped) */
+const nafEnd=()=>{if(!CW.pend||CW.ngoW!==wkN())return false;const e=COOP.state.ended||{};return !!e[other()]||!!(host()&&CW.gW&&CW.gW())};
+function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&CW.sent!==wkN()&&(((S.buoi||0)>=LAST()&&!CW.pend&&(overdue()||CW.ngoW===wkN()))||nafEnd())}
 let NAT=[],NAL="";function nafTr(m,on){try{const s=[m&&(m.pid||String(m.t||"").slice(0,20)),on?1:0,overdue()?1:0,CW.ngoW===wkN()?1:0,NA.w0?Math.floor((pnow()-NA.w0)/10000)*10:-1].join(",");if(s!==NAL){NAL=s;NAT.push([Math.round(pnow()),s]);if(NAT.length>60)NAT.shift()}}catch(e){}}
 function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w0=pnow();nafTr(m,on);
  if(!on||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
