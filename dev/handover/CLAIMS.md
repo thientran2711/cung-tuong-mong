@@ -476,3 +476,4 @@ C3-ROOMTONE (59 rank-room tone pass + 14 toilette redraw) | CDN (+review/c3-room
 C3-SEALS sets 1-5 + wiring/merge | review/c3-seals | session_01PEhRbuDj3G9XdAmaourSm7 | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
 C3-SEALS-W2 sets tt(merged)/cc/bt/bg/tg | CDN | session_01PEhRbx7qfjCBsx6xC1iuFk | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
 C3-SEALS-W3 sets tv/qu/ty/nn | CDN | session_01PEhRbttxS463kSacT4iB52 | RUNNING | 26/11 10:20Z (Foreman C ROOT 3-1)
+| PARITY-FACFIX (MAIN 157 ~10:22Z; facHTML «Lập phe cùng» regression on LIVE 3af7896e + ag-par3 6 FAIL scan) | review/parity-facfix | D | (opening) | RUNNING | 26/11 10:23Z |
