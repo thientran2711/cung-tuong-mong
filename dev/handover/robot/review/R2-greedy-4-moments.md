@@ -1,0 +1,370 @@
+# R2-greedy-4 moment log (bot bold, ipad, seed 1267730586, real-tap harness 496b6b66)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-R2-greedy-4/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcvào | Ở nhà chờ tuyển túTốnkhôngĐư | Trang trước | Dung mạo 15 | Dung mạo 16 | Dung mạo 17 | Dung mạo 18 | Dung mạo 19 · shots-R2-greedy-4/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Con gái thầy đồ nghèo · 1/4» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Con gái thầy đồ nghèo · 1/4» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R2-greedy-4/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tuyển chọn» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tuyển chọn» · NEW SCREEN · first time on this screen; buttons: Dâng HọaRất vữngTốnSức -5Đượ | Dâng CầmRất vữngTốnSức -5Đượ | Cúi đầu chờ xétRất vữngTốnSứ · shots-R2-greedy-4/m-new-1-8.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Nhập cung» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-1-9.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Nhập cung» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R2-greedy-4/m-new-1-10.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Mệnh truyện kiếp này» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-1-11.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kprevov «» · NEW SCREEN · first time on this screen; buttons: Tạ ơn · shots-R2-greedy-4/m-new-1-12.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Mệnh truyện kiếp này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-1-13.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Chọn cung nữ thân tín» · NEW SCREEN · first time on this screen; buttons: Chọn Tịch NguyệtRất vữngTốnk | Chọn Trân ChâuRất vữngTốnkhô | Chọn Thu SươngRất vữngTốnkhô · shots-R2-greedy-4/m-new-1-14.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ12Đức40Danh8 | Bạc120Sức75/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | sương sớm | Quẻ Trung (Giao thiệp) · shots-R2-greedy-4/m-new-1-15.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ12Đức40Danh8 | Bạc120Sức75/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | sương sớm | Quẻ Trung (Giao thiệp) · shots-R2-greedy-4/m-new-1-16.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-1-17.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons: Lui | Đóng cửa giữ mìnhTốnSủng -3Đ · shots-R2-greedy-4/m-new-1-18.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Có người đến» · NEW SCREEN · first time on this screen; buttons: Hỏi han sức khỏeRất vữngTốnk | Khen tài nghệ nàng taRất vữn | Chia sẻ bí mậtRất vữngTốnkhô | Khéo cáo luiRất vữngTốnkhông · shots-R2-greedy-4/m-new-1-19.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · #modal «Bổng lộc» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-2-20.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-2-21.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Giao thiệp 3/3 | Mưu kế 1/1 | Trò chuyện với cung nữ · Tốn | Giao việc phòng bị · Tốn 1 k | Nghe ngóng chung · Vững · Tố | Lui · shots-R2-greedy-4/m-new-4-22.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «Phòng bị» · NEW SCREEN · first time on this screen; buttons: Lui | Canh chừng cungRất vữngTốnkh | Thử độc đồ ănRất vữngTốnkhôn | Theo dõi một ngườiRất vữngTố | Giữ sổ sách, làm chứngRất vữ · shots-R2-greedy-4/m-new-4-23.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «Kính sự phòng» · NEW SCREEN · first time on this screen; buttons: Lui | Tranh sủngKhó lườngTốnkhôngĐ | Chặn ngự giáKhó lườngTốnkhôn · shots-R2-greedy-4/m-new-4-24.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quagiữ nguyên Khó lường · shots-R2-greedy-4/m-new-4-25.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «Kính sự phòng báo tin» · NEW SCREEN · first time on this screen; buttons: Tắm gội chờ giáRất vữngTốnkh · shots-R2-greedy-4/m-new-4-26.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · #modal «Chuẩn bị thị tẩm» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-4-27.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «Chuẩn bị thị tẩm» · NEW SCREEN · first time on this screen; buttons: Tắm cánh hoa, xông hươngRất | Điểm trang lộng lẫyRất vữngT | Đeo trang sức đẹp nhấtRất vữ | Tập trước ThiRất vữngTốnSức | Để mộc, nghỉ ngơiRất vữngTốn · shots-R2-greedy-4/m-new-4-28.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · #modal «Đêm thị tẩm» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-4-29.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «Đêm thị tẩm» · NEW SCREEN · first time on this screen; buttons: Bàn thơ văn, cầm kỳCó cơTốnk | Bàn chuyện thiên hạKhó lường | Rót rượu, nũng nịuTùy duyênT | Lặng lẽ xoa vai, nghe ngài k · shots-R2-greedy-4/m-new-4-30.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-4-31.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-R2-greedy-4/m-new-4-32.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · #modal «Lời ra tiếng vào» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-5-33.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Lời ra tiếng vào» · NEW SCREEN · first time on this screen; buttons: Nhẫn nhịnRất vữngTốnkhôngĐượ | Cười trừRất vữngTốnkhôngĐược | Đáp lạiTùy duyênTốnSức -2Đượ · shots-R2-greedy-4/m-new-6-34.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · #modal «Hội phối đồ: báo đề» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-6-35.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Hội phối đồ: báo đề» · NEW SCREEN · first time on this screen; buttons: Xem thêm | Đã hiểu, sẽ chuẩn bịTốnkhông · shots-R2-greedy-4/m-new-6-36.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · .dlg «Việc khó xử» · NEW SCREEN · first time on this screen; buttons: Bỏ bạc chuộc ngườiRất vữngTố | Bày kế phản giánTùy duyênTốn | Bỏ mặcRất vữngTốnkhôngĐượccó · shots-R2-greedy-4/m-new-6-37.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · #modal «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-7-38.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayTốnkhôngĐượckhôngGhi | Để sauTốnkhôngĐượckhông · shots-R2-greedy-4/m-new-7-39.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · .dlg «Phụ tuyến · Chữa lan quý bị sâu cho cung bên · Lời» · NEW SCREEN · first time on this screen; buttons: Nhận lờiRất vữngTốnkhôngĐược | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-7-40.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · .mapsc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ12Đức40Danh9 | Bạc105Sức91/100 | Buổi tối, còn 4 khắc | Hôm nay mặt mộc | trời trong, sao sáng | Quẻ Thượng thượng (Sủng) · shots-R2-greedy-4/m-new-8-41.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · .dlg «Hoàng thượng» · NEW SCREEN · first time on this screen; buttons: Thay ngay màu đỏ theo ý ngài | Từ chối khéo, nhắc lễ Hoàng | Khoác thêm dải đỏ, vẫn giữ á | Hứa mặc màu đỏ vào ngày khác · shots-R2-greedy-4/m-new-8-42.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · #modal «Kính sự phòng báo tin» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-8-43.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · #modal «Giữ hay không giữ» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-8-44.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · .dlg «Giữ hay không giữ» · NEW SCREEN · first time on this screen; buttons: Cúi đầu tuân lệnhRất vữngTốn | Đút bạc xin giữTùy duyênTốnB | Cầu xin Hoàng thượngKhó lườn · shots-R2-greedy-4/m-new-8-45.png
+- year 1 · turn 0 · tuần 2 · buổi 0 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-9-46.png
+- year 1 · turn 0 · tuần 2 · buổi 1 · rank 0 · .dlg «Một ánh mắt» · NEW SCREEN · first time on this screen; buttons: Giữ bài thơ, đáp lạiRất vững | Đốt đi, làm ngơRất vữngTốnkh · shots-R2-greedy-4/m-new-9-47.png
+- year 1 · turn 0 · tuần 2 · buổi 2 · rank 0 · .dlg «Chuyện trong cung» · NEW SCREEN · first time on this screen; buttons: Giữ lại nuôiRất vữngTốnBạc - | Cho người mang đi xaRất vững | Dò xem mèo của aiCó cơTốnSức · shots-R2-greedy-4/m-new-10-48.png
+- year 1 · turn 0 · tuần 2 · buổi 2 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-11-49.png
+- year 1 · turn 0 · tuần 2 · buổi 3 · rank 0 · #modal «Chương 1 · Sơ nhập cung môn» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-12-50.png
+- year 1 · turn 0 · tuần 2 · buổi 3 · rank 0 · .dlg «Chương 1 · Sơ nhập cung môn» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Thỉnh an Thái hậu ho | Đi làm: Đi một nơi trong cun | Đi làm: Thay y phục hay tran · shots-R2-greedy-4/m-new-12-51.png
+- year 1 · turn 0 · tuần 2 · buổi 3 · rank 0 · .dlg «Ân thưởng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-12-52.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R2-greedy-4/m-new-13-53.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons: Thường | Thường | Thường | Thường | Thường | Thường | ThườngVải thô (hàng kém)Hàng | ThườngTrà mốc (hàng kém)Trà  · shots-R2-greedy-4/m-new-13-54.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · .dlg «Thái y bắt mạch» · NEW SCREEN · first time on this screen; buttons: Giữ kín, dặn thái y không nó | Báo tin cho Hoàng thượngRất  · shots-R2-greedy-4/m-new-13-55.png
+- year 1 · turn 1 · tuần 0 · buổi 1 · rank 0 · #modal «Bổng lộc tháng ba» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-14-56.png
+- year 1 · turn 1 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng ba» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Lót tay thái giám Nội vụ phủ | Sai Cung nữ thân tín tam đẳn | Tố lên Hoàng hậuHiểmTốnkhông | Ghi nhớ để trả thù sauHiểmTố · shots-R2-greedy-4/m-new-14-57.png
+- year 1 · turn 1 · tuần 0 · buổi 2 · rank 0 · .dlg «Hỏa hoạn lớn» · NEW SCREEN · first time on this screen; buttons: Lao vào cứu ngườiMong manhTố | Chỉ huy cung nhân dập lửaRất | Ngầm tra kẻ phóng hỏaTùy duy · shots-R2-greedy-4/m-new-14-58.png
+- year 1 · turn 1 · tuần 0 · buổi 2 · rank 0 · .dlg «Bổng lộc tháng ba · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-15-59.png
+- year 1 · turn 1 · tuần 0 · buổi 2 · rank 0 · #modal «Hỏa hoạn lớn» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-15-60.png
+- year 1 · turn 1 · tuần 0 · buổi 2 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-15-61.png
+- year 1 · turn 1 · tuần 0 · buổi 3 · rank 0 · .dlg «Có người tìm đến» · NEW SCREEN · first time on this screen; buttons: Tiếp chuyệnTốn1 khắcĐượccùng | Không tiếpTốnkhôngĐượcTần Hà · shots-R2-greedy-4/m-new-15-62.png
+- year 1 · turn 1 · tuần 0 · buổi 3 · rank 0 · .dlg «Thỉnh bình an mạch» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-16-63.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2» · NEW SCREEN · first time on this screen; buttons: Khuyên ngài nhẫn nại chờ thờ | Khuyên ngài dựa vào lớp quan | Chỉ lặng lẽ mài mực hầu ngài · shots-R2-greedy-4/m-new-17-64.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .dlg «Hội phối đồ · Hương sắc» · NEW SCREEN · first time on this screen; buttons: Tự tay phối đồRất vữngTốnSức | Cáo bệnh, không dựRất vữngTố · shots-R2-greedy-4/m-new-17-65.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .kpod «» · NEW SCREEN · first time on this screen; buttons: Tiếp · shots-R2-greedy-4/m-new-18-66.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · #modal «Biếu quà làm lành» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-18-67.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .dlg «Biếu quà làm lành» · NEW SCREEN · first time on this screen; buttons: Lui | Lễ bạcTốnBạc -12ĐượcĐáp ứng  · shots-R2-greedy-4/m-new-18-68.png
+- year 1 · turn 1 · tuần 1 · buổi 2 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Cúng dường hậu hĩnhTốnBạc -4 | Chép kinh cầu phúcTốnSức -8Đ | Lễ Phật rồi vềTốnkhôngĐượckh · shots-R2-greedy-4/m-new-18-69.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · .dlg «Việc nhờ» · NEW SCREEN · first time on this screen; buttons: Nhận lờiRất vữngTốnkhôngĐược | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-19-70.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · .dlg «Việc nhờ» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-20.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · .dlg «Xét phẩm cuối tháng · Thường tại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-20-71.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc · Nội | mồng 2 | mồng 3 | mồng 4 | mồng 5 · shots-R2-greedy-4/m-new-20-72.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · .dlg «Phụ tuyến · Tìm vị thuốc quý gửi về thăm nhà · Lời» · NEW SCREEN · first time on this screen; buttons: Nhận lờiVữngTốnkhôngĐượcđược | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-22-73.png
+- year 1 · turn 1 · tuần 2 · buổi 2 · rank 0 · .dlg «Kẻ hầu» · NEW SCREEN · first time on this screen; buttons: Giúp nàng ta thêu cho xongRấ | Hỏi nhẹ người đó là aiRất vữ | Khuyên nàng ta đừng đi quá x | Hứa lo đường xuất cung khi t · shots-R2-greedy-4/m-new-22-74.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng tư» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Lót tay thái giám Nội vụ phủ | Sai Cung nữ thân tín tam đẳn | Tố lên Hoàng hậuHiểmTốnkhông | Ghi nhớ để trả thù sauHiểmTố · shots-R2-greedy-4/m-new-26-75.png
+- year 1 · turn 2 · tuần 0 · buổi 2 · rank 0 · .dlg «Bổng lộc tháng tư · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-26-76.png
+- year 1 · turn 2 · tuần 0 · buổi 2 · rank 0 · .dlg «Tết Đoan ngọ · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Kể chuyện ngũ độc cho bé ngh | Tự tay đeo túi thuốc cho béT | Gọi nhũ mẫu đưa bé về nghỉTố | Tâu thái y cho xem mạchTốnSủ · shots-R2-greedy-4/m-new-27-77.png
+- year 1 · turn 2 · tuần 0 · buổi 3 · rank 0 · #modal «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 2/2» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-28-78.png
+- year 1 · turn 2 · tuần 1 · buổi 0 · rank 0 · .dlg «Tết Đoan ngọ · Yến tiệc» · NEW SCREEN · first time on this screen; buttons: Bày tiệc lớnTùy duyênTốnBạc | Tiệc trà nhỏ mời Đáp ứng Đoa | Không bày tiệc, nghỉ ngơiRất · shots-R2-greedy-4/m-new-29-79.png
+- year 1 · turn 2 · tuần 1 · buổi 1 · rank 0 · #modal «Tặng quà» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-30-80.png
+- year 1 · turn 2 · tuần 1 · buổi 1 · rank 0 · .dlg «Tặng quà» · NEW SCREEN · first time on this screen; buttons: Lui | Chí tôn 3/3 | Phi tần 9/9 | Hoàng thượngTốn2 khắcĐượcSủn | Thái hậuTốn2 khắcĐượcThái hậ | Nhả ngọc phun châuHoàng hậuT · shots-R2-greedy-4/m-new-30-81.png
+- year 1 · turn 2 · tuần 2 · buổi 1 · rank 0 · .dlg «Lỡ hẹn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-34-82.png
+- year 1 · turn 3 · tuần 2 · buổi 0 · rank 0 · .dlg «Lãnh cung» · NEW SCREEN · first time on this screen; buttons: Bước vào · shots-R2-greedy-4/m-new-37-83.png
+- year 1 · turn 3 · tuần 2 · buổi 0 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ13Đức38Danh6 | Bạc56Sức100/100 | Buổi sáng, còn 4 khắc | Có thai:tháng tư | Lãnh cung | giông tố · shots-R2-greedy-4/m-new-37-84.png
+- year 1 · turn 3 · tuần 2 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-37-85.png
+- year 1 · turn 3 · tuần 2 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng năm» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-37-86.png
+- year 1 · turn 3 · tuần 2 · buổi 1 · rank 0 · .dlg «Lễ tấn phong Tần Thôi Uyển Dung» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-R2-greedy-4/m-new-38-87.png
+- year 1 · turn 3 · tuần 2 · buổi 1 · rank 0 · #modal «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-38-88.png
+- year 1 · turn 3 · tuần 2 · buổi 2 · rank 0 · .dlg «Nội vụ phủ thu đồ» · NEW SCREEN · first time on this screen; buttons: ThườngTrâm hoa lụa | ThườngÁo lụa thêu hoa nhỏ | Tuân chỉ · shots-R2-greedy-4/m-new-38-89.png
+- year 1 · turn 3 · tuần 2 · buổi 2 · rank 0 · .dlg «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-39-90.png
+- year 1 · turn 3 · tuần 2 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-39-91.png
+- year 1 · turn 3 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-40.png
+- year 1 · turn 3 · tuần 2 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-40-92.png
+- year 1 · turn 4 · tuần 1 · buổi 0 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-45-93.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng sáu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-53-94.png
+- year 1 · turn 5 · tuần 0 · buổi 0 · rank 0 · .dlg «Hiểm sinh nở Thấp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-53-95.png
+- year 1 · turn 5 · tuần 0 · buổi 3 · rank 0 · #modal «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-56-96.png
+- year 1 · turn 5 · tuần 0 · buổi 3 · rank 0 · .dlg «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm · shots-R2-greedy-4/m-new-56-97.png
+- year 1 · turn 5 · tuần 1 · buổi 0 · rank 0 · #modal «Quẻ Hạ · Giao thiệp» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-57-98.png
+- year 1 · turn 5 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Hạ · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-57-99.png
+- year 1 · turn 5 · tuần 1 · buổi 0 · rank 0 · .dlg «Gieo lại quẻ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-57-100.png
+- year 1 · turn 5 · tuần 1 · buổi 2 · rank 0 · .dlg «Công · Nữ công» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-59-101.png
+- year 1 · turn 5 · tuần 1 · buổi 3 · rank 0 · .dlg «Kẻ hầu» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-60.png
+- year 1 · turn 6 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-65-102.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 1 khép lại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-65-103.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 2: Sơ thừa ân sủng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-66-104.png
+- year 1 · turn 6 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 2 · Sơ thừa ân sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Bán đồ trong rương r | Đi làm: Điểm trang hoặc Dưỡn | Đi làm: Nhờ thái giám Nội vụ · shots-R2-greedy-4/m-new-67-105.png
+- year 1 · turn 7 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tám» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-77-106.png
+- year 1 · turn 7 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-80.png
+- year 1 · turn 7 · tuần 1 · buổi 3 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-84-107.png
+- year 1 · turn 8 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chín» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-89-108.png
+- year 1 · turn 8 · tuần 0 · buổi 0 · rank 0 · .dlg «Hiểm sinh nở Vừa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-89-109.png
+- year 1 · turn 8 · tuần 1 · buổi 3 · rank 0 · .dlg «Có thai: tháng chín» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-96-110.png
+- year 1 · turn 8 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-100.png
+- year 1 · turn 9 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-101-111.png
+- year 1 · turn 9 · tuần 0 · buổi 1 · rank 0 · .dlg «Đeo «Phúc ấm đầy nhà»» · NEW SCREEN · first time on this screen; buttons: Thêm DanhTốnkhôngĐượcDanh +1 | Bề trên quý mếnTốnkhôngĐượcT | Để sau · shots-R2-greedy-4/m-new-102-112.png
+- year 1 · turn 9 · tuần 0 · buổi 1 · rank 0 · .dlg «Ân thưởng sau sinh» · NEW SCREEN · first time on this screen; buttons: Tạ ơn · shots-R2-greedy-4/m-new-102-113.png
+- year 1 · turn 9 · tuần 2 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-110-114.png
+- year 1 · turn 9 · tuần 2 · buổi 1 · rank 0 · #modal «Thiên mệnh» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-110-115.png
+- year 1 · turn 9 · tuần 2 · buổi 1 · rank 0 · .dlg «Thiên mệnh» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 2/35 | Thiên mệnh · shots-R2-greedy-4/m-new-110-116.png
+- year 1 · turn 9 · tuần 2 · buổi 1 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 2/35 | Thiên mệnh | Đổi phần thưởng «Phúc ấm đầy | Đeo «Trăng soi rèm ngọc»Tốnk | Tháo danh hiệuTốnkhôngĐượckh · shots-R2-greedy-4/m-new-110-117.png
+- year 1 · turn 9 · tuần 2 · buổi 3 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-112-118.png
+- year 1 · turn 10 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười một» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-113-119.png
+- year 1 · turn 10 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Đứng xem rồi vềTốnkhôngĐượck · shots-R2-greedy-4/m-new-113-120.png
+- year 1 · turn 10 · tuần 0 · buổi 1 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-114-121.png
+- year 1 · turn 10 · tuần 0 · buổi 1 · rank 0 · .dlg «Phong hàn · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-114-122.png
+- year 1 · turn 10 · tuần 1 · buổi 2 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-119-123.png
+- year 1 · turn 10 · tuần 1 · buổi 2 · rank 0 · .dlg «Rời lãnh cung» · NEW SCREEN · first time on this screen; buttons: Tạ ơn · shots-R2-greedy-4/m-new-119-124.png
+- year 1 · turn 10 · tuần 1 · buổi 3 · rank 0 · page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-120.png
+- year 1 · turn 10 · tuần 2 · buổi 1 · rank 0 · .dlg «Lời cảnh báo» · NEW SCREEN · first time on this screen; buttons: Biếu quà làm lànhTốnkhôngĐượ | Ghi nhớ, cứ như thườngTốnkhô · shots-R2-greedy-4/m-new-121-125.png
+- year 1 · turn 10 · tuần 2 · buổi 1 · rank 0 · #modal «Đêm Giao thừa · Lễ» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-122-126.png
+- year 1 · turn 10 · tuần 2 · buổi 1 · rank 0 · .dlg «Đêm Giao thừa · Lễ» · NEW SCREEN · first time on this screen; buttons: Xin đứng hầu gần hương ánTùy | Cúng dường bạc dầu đènRất vữ | Lặng lẽ cầu cho gia đìnhRất  · shots-R2-greedy-4/m-new-122-127.png
+- year 1 · turn 10 · tuần 2 · buổi 2 · rank 0 · #modal «Đêm Giao thừa · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-123-128.png
+- year 1 · turn 10 · tuần 2 · buổi 2 · rank 0 · .dlg «Đêm Giao thừa · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Nhận bánh, khen nàng ta khéo | Mang bánh của Hoàng hậu Tôn | Cười từ chối, nói đã noTốnHo · shots-R2-greedy-4/m-new-123-129.png
+- year 1 · turn 10 · tuần 2 · buổi 3 · rank 0 · #modal «Nội vụ phủ trả đồ» · NEW SCREEN · first time on this screen; buttons: Lui | ThườngTrâm hoa lụa · shots-R2-greedy-4/m-new-124-130.png
+- year 1 · turn 10 · tuần 2 · buổi 3 · rank 0 · .dlg «Kỳ nguyệt sự» · NEW SCREEN · first time on this screen; buttons: Báo đúng ngàyRất vữngTốnkhôn | Báo lùi vài hômTùy duyênTốnk | Báo sớm, nói đã sạch kỳRất v | Giấu, không báoRất vữngTốnkh · shots-R2-greedy-4/m-new-124-131.png
+- year 2 · turn 11 · tuần 0 · buổi 0 · rank 0 · .dlg «Xong việc: Điểm trang hoặc Dưỡng nhan» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-125-132.png
+- year 2 · turn 11 · tuần 0 · buổi 1 · rank 0 · .dlg «Thái hậu triệu» · NEW SCREEN · first time on this screen; buttons: Đến ngayRất vữngTốn2 khắc·Sứ | Cáo bệnhRất vữngTốnkhôngĐược · shots-R2-greedy-4/m-new-125-133.png
+- year 2 · turn 11 · tuần 0 · buổi 1 · rank 0 · #modal «Bổng lộc tháng chạp» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-126-134.png
+- year 2 · turn 11 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng chạp» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Lót tay thái giám Nội vụ phủ | Sai Cung nữ thân tín tam đẳn | Tố lên Hoàng hậuMong manhTốn | Ghi nhớ để trả thù sauHiểmTố · shots-R2-greedy-4/m-new-126-135.png
+- year 2 · turn 11 · tuần 0 · buổi 2 · rank 0 · .dlg «Bổng lộc tháng chạp · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-126-136.png
+- year 2 · turn 11 · tuần 0 · buổi 2 · rank 0 · .dlg «Tết Nguyên đán · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Cho nàng ta đứng cạnh, giới | Chỉ chỗ đứng thích hợp rồi đ | Hỏi tên rồi ghi nhớ vào lòng | Tặng nàng ta chiếc khăn tayT · shots-R2-greedy-4/m-new-127-137.png
+- year 2 · turn 11 · tuần 0 · buổi 3 · rank 0 · .dlg «Tết Nguyên đán · Đặt cược» · NEW SCREEN · first time on this screen; buttons: Cược đội Kiện DuệKhó lườngTố | Cược đội Cấm VệMong manhTốnB | Không cược, chỉ xemRất vữngT · shots-R2-greedy-4/m-new-128-138.png
+- year 2 · turn 11 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Thượng thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-128-139.png
+- year 2 · turn 11 · tuần 1 · buổi 1 · rank 0 · .dlg «Tết Nguyên tiêu · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Mở ra xem tại chỗTốnSức -8Đư | Đem tới Nội vụ phủ xin ghi s | Cất kín, chờ xem ai nhắc tới · shots-R2-greedy-4/m-new-129-140.png
+- year 2 · turn 11 · tuần 1 · buổi 3 · rank 0 · .dlg «Tết Nguyên tiêu · Yến tiệc» · NEW SCREEN · first time on this screen; buttons: Không bày tiệc, nghỉ ngơiRất · shots-R2-greedy-4/m-new-131-141.png
+- year 2 · turn 11 · tuần 1 · buổi 3 · rank 0 · .dlg «Ân tình (đêm)» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-132-142.png
+- year 2 · turn 11 · tuần 2 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Không muaTốnkhôngĐượckhôngGh · shots-R2-greedy-4/m-new-134-143.png
+- year 2 · turn 11 · tuần 2 · buổi 2 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Nhận quà nhà gửi vàoTốnkhông | Nhờ cha nói giúp trước triều · shots-R2-greedy-4/m-new-135-144.png
+- year 2 · turn 11 · tuần 2 · buổi 3 · rank 0 · .dlg «Phụ tuyến · Đề thơ lên bức tranh dâng Hoàng thượng» · NEW SCREEN · first time on this screen; buttons: Nhận lờiRất vữngTốnkhôngĐược | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-135-145.png
+- year 2 · turn 12 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng giêng» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-137-146.png
+- year 2 · turn 12 · tuần 0 · buổi 1 · rank 0 · .dlg «Lễ tấn phong Quý nhân Mã Tử Yên» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-R2-greedy-4/m-new-138-147.png
+- year 2 · turn 12 · tuần 0 · buổi 2 · rank 0 · page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ8Đức40Danh18 | Bạc35Sức85/95 | Buổi chiều, còn 4 khắc | Phong hàn · nhẹ | Hôm nay mặt mộc | mưa rào · shots-R2-greedy-4/m-new-139-148.png
+- year 2 · turn 12 · tuần 0 · buổi 3 · rank 0 · .dlg «Tỉnh thân» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-140.png
+- year 2 · turn 12 · tuần 1 · buổi 2 · rank 0 · #modal «Tai mắt» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-143-149.png
+- year 2 · turn 12 · tuần 1 · buổi 2 · rank 0 · .dlg «Tai mắt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-143-150.png
+- year 2 · turn 13 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng hai» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Lót tay thái giám Nội vụ phủ | Sai Cung nữ thân tín tam đẳn | Tố lên Thái hậuKhó lườngTốnk | Ghi nhớ để trả thù sauHiểmTố · shots-R2-greedy-4/m-new-149-151.png
+- year 2 · turn 13 · tuần 0 · buổi 1 · rank 0 · #modal «Bổng lộc tháng hai · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-150-152.png
+- year 2 · turn 13 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng hai · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-150-153.png
+- year 2 · turn 13 · tuần 0 · buổi 2 · rank 0 · .dlg «Y phục dự Tiết Thanh minh» · NEW SCREEN · first time on this screen; buttons: Sai người mua trâm ngọc bích | Cứ thế vào dựRất vữngTốnkhôn | Cáo lỗi, về cung nghỉRất vữn · shots-R2-greedy-4/m-new-151-154.png
+- year 2 · turn 13 · tuần 0 · buổi 2 · rank 0 · .dlg «Tiết Thanh minh · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Hỏi thẳng chuyện gì họ giấuT | Nhận lời khen, mỉm cườiTốnTâ | Khen họ lại, khen thật nhiều | Cười rồi lẩn đi, tránh chuyệ · shots-R2-greedy-4/m-new-151-155.png
+- year 2 · turn 13 · tuần 0 · buổi 3 · rank 0 · .dlg «Tiết Thanh minh · Dâng lễ» · NEW SCREEN · first time on this screen; buttons: Tự tay làm lễ vật (theo Họa, | Lễ mọn cho phải phépMong man | Không dâng lễRất vữngTốnkhôn · shots-R2-greedy-4/m-new-152-156.png
+- year 2 · turn 13 · tuần 0 · buổi 3 · rank 0 · .dlg «Bị từ chối» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-152-157.png
+- year 2 · turn 13 · tuần 1 · buổi 0 · rank 0 · #modal «Chọn người theo hầu» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-153-158.png
+- year 2 · turn 13 · tuần 1 · buổi 0 · rank 0 · .dlg «Chọn người theo hầu» · NEW SCREEN · first time on this screen; buttons: Lui | Cung nữ thân tín tam đẳngThu | Đi một mìnhTốnkhôngĐượcviệc  · shots-R2-greedy-4/m-new-153-159.png
+- year 2 · turn 13 · tuần 1 · buổi 0 · rank 0 · .dlg «Ra ngoài khi mặc trung y?» · NEW SCREEN · first time on this screen; buttons: Vẫn điTốnDanh -11·Đức -1Được | Ở lạiTốnkhôngĐượckhôngGhi ch · shots-R2-greedy-4/m-new-153-160.png
+- year 2 · turn 13 · tuần 1 · buổi 2 · rank 0 · #kpinfo «» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-155-161.png
+- year 2 · turn 13 · tuần 2 · buổi 0 · rank 0 · #modal «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-157-162.png
+- year 2 · turn 13 · tuần 2 · buổi 1 · rank 0 · .dlg «Phụ tuyến · Báo tin buồn nhà cho người trong cung » · NEW SCREEN · first time on this screen; buttons: Nhận lờiCó cơTốnkhôngĐượcthê | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-158-163.png
+- year 2 · turn 13 · tuần 2 · buổi 1 · rank 0 · .dlg «Bị bắt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-158-164.png
+- year 2 · turn 13 · tuần 2 · buổi 3 · rank 0 · page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-160.png
+- year 2 · turn 14 · tuần 0 · buổi 2 · rank 0 · #modal «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-162-165.png
+- year 2 · turn 14 · tuần 0 · buổi 2 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Quà vừa phảiTốnBạc -15ĐượcTh | Cáo bệnh không tớiTốnkhôngĐư · shots-R2-greedy-4/m-new-163-166.png
+- year 2 · turn 14 · tuần 0 · buổi 3 · rank 0 · .dlg «Lòng không giữ được» · NEW SCREEN · first time on this screen; buttons: Khóc vì uất ứcRất vữngTốnSức | Nuốt giận chép kinhRất vữngT | Giận đến bỏ bữaRất vữngTốnSứ | Mắng cung nữRất vữngTốnkhông · shots-R2-greedy-4/m-new-163-167.png
+- year 2 · turn 14 · tuần 1 · buổi 1 · rank 0 · .dlg «Tin triều đình» · NEW SCREEN · first time on this screen; buttons: Mở cửa cho khám, tự đi cùngR | Dặn cung nhân giữ kín đồ riê | Tự đi khám trước cung nhân c | Mời Thái giám Kiều Vĩnh Lộc  · shots-R2-greedy-4/m-new-165-168.png
+- year 2 · turn 14 · tuần 2 · buổi 1 · rank 0 · .dlg «Phụ tuyến · Thư đệ đệ: xin mẹo viết thư tình · Lời» · NEW SCREEN · first time on this screen; buttons: Nhận lờiCó cơTốnkhôngĐượcthê | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-170-169.png
+- year 2 · turn 15 · tuần 2 · buổi 1 · rank 0 · .dlg «Bị thu hiệu ban» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-174-170.png
+- year 2 · turn 16 · tuần 0 · buổi 1 · rank 0 · .dlg «Có người đến an ủi» · NEW SCREEN · first time on this screen; buttons: Giãi bày tâm sự với Cung nữ | Gượng cười, cảm tạRất vữngTố · shots-R2-greedy-4/m-new-177-171.png
+- year 2 · turn 16 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 3: Học lễ nghi cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-178-172.png
+- year 2 · turn 16 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-180.png
+- year 2 · turn 16 · tuần 1 · buổi 1 · rank 0 · .dlg «Chương 3 · Học lễ nghi cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Làm một việc với một | Đi làm: Học một buổi ở mục T | Đi làm: Trò chuyện với cung  · shots-R2-greedy-4/m-new-182-173.png
+- year 2 · turn 17 · tuần 1 · buổi 1 · rank 0 · .dlg «Nghe đồn» · NEW SCREEN · first time on this screen; buttons: Sang gặp Tĩnh quý phi Lương | Cho người tra xem ai tung ti | Mặc kệTốnkhôngĐượcSức +3·giữ · shots-R2-greedy-4/m-new-193-174.png
+- year 2 · turn 17 · tuần 2 · buổi 1 · rank 0 · .dlg «Hội Phượng · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Bế bé lên, dỗ bé nínTốnSức - | Tự đưa bé về cung của nhũ mẫ | Sai Cung nữ thân tín tam đẳn · shots-R2-greedy-4/m-new-198-175.png
+- year 2 · turn 17 · tuần 2 · buổi 3 · rank 0 · .dlg «Lỡ hẹn» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-200.png
+- year 2 · turn 17 · tuần 2 · buổi 3 · rank 0 · .dlg «Hội Phượng · Yến tiệc» · NEW SCREEN · first time on this screen; buttons: Mang lễ sang dựRất vữngTốnBạ | Cáo mệt, không điRất vữngTốn · shots-R2-greedy-4/m-new-200-176.png
+- year 2 · turn 18 · tuần 2 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng sáu · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-202-177.png
+- year 2 · turn 18 · tuần 2 · buổi 2 · rank 0 · .dlg «Lễ tấn phong Tần Tôn Lạc Y» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-R2-greedy-4/m-new-203-178.png
+- year 2 · turn 19 · tuần 0 · buổi 2 · rank 0 · .dlg «Nổi mẩn» · NEW SCREEN · first time on this screen; buttons: Mời thái y kê thuốcRất vữngT | Tự sắc thuốc thảo mộcKhó lườ | Tìm mạng che mặtRất vữngTốnk | Để tự khỏiRất vữngTốnkhôngĐư · shots-R2-greedy-4/m-new-206-179.png
+- year 2 · turn 19 · tuần 1 · buổi 2 · rank 0 · .dlg «Đeo «Trăng soi rèm ngọc»» · NEW SCREEN · first time on this screen; buttons: Thêm SủngTốnkhôngĐượcSủng +1 | Sủng dễ lênTốnkhôngĐượcSủng | Quay lạiTốnkhôngĐượckhôngGhi · shots-R2-greedy-4/m-new-211-180.png
+- year 2 · turn 19 · tuần 1 · buổi 3 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-212-181.png
+- year 2 · turn 19 · tuần 1 · buổi 3 · rank 0 · .dlg «Quẻ Hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-212-182.png
+- year 2 · turn 19 · tuần 2 · buổi 1 · rank 0 · .dlg «Giải bày» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-214-183.png
+- year 2 · turn 20 · tuần 0 · buổi 1 · rank 0 · #modal «Thiên tượng» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-217-184.png
+- year 2 · turn 20 · tuần 0 · buổi 1 · rank 0 · .dlg «Thiên tượng» · NEW SCREEN · first time on this screen; buttons: Đứng ra nói đỡRất vữngTốnkhô | Đổ thêm dầu vào lửaRất vữngT | Im lặngRất vữngTốnkhôngĐượck · shots-R2-greedy-4/m-new-218-185.png
+- year 2 · turn 20 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-220.png
+- year 2 · turn 20 · tuần 1 · buổi 1 · rank 0 · .dlg «Nhật thực, sao chổi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-222-186.png
+- year 2 · turn 20 · tuần 1 · buổi 3 · rank 0 · .dlg «Cung trống» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-224-187.png
+- year 2 · turn 21 · tuần 0 · buổi 1 · rank 0 · .dlg «Thu săn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-229-188.png
+- year 2 · turn 21 · tuần 1 · buổi 2 · rank 0 · .dlg «Quẻ Thượng thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-235-189.png
+- year 2 · turn 21 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-237-190.png
+- year 2 · turn 21 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-240.png
+- year 2 · turn 22 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Hạ · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-241-191.png
+- year 2 · turn 22 · tuần 0 · buổi 2 · rank 0 · .dlg «Phiên vương nhập triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-243-192.png
+- year 2 · turn 22 · tuần 1 · buổi 2 · rank 0 · .dlg «Bộ sưu tập» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-247-193.png
+- year 2 · turn 23 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-260.png
+- year 2 · turn 24 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 4: Thầy giáo trong cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-266-194.png
+- year 2 · turn 24 · tuần 1 · buổi 0 · rank 0 · .dlg «Chương 4 · Thầy giáo trong cung» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-R2-greedy-4/m-new-269-195.png
+- year 3 · turn 25 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-280.png
+- year 3 · turn 25 · tuần 1 · buổi 1 · rank 0 · #modal «Nhờ thái giám tìm thú nuôi» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-282-196.png
+- year 3 · turn 25 · tuần 1 · buổi 1 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · NEW SCREEN · first time on this screen; buttons: Lui | Xem Mèo mướp | Xem Chó nhỏ lông xù | Xem Chim họa mi | Xem Thỏ ngọc | Xem Cá vàng chậu sứ | Xem Mèo tuyết | Xem Sáo nói · shots-R2-greedy-4/m-new-282-197.png
+- year 3 · turn 25 · tuần 1 · buổi 1 · rank 0 · .kshdc «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-282-198.png
+- year 3 · turn 26 · tuần 0 · buổi 1 · rank 0 · .dlg «Tuyển tú» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-289-199.png
+- year 3 · turn 26 · tuần 1 · buổi 1 · rank 0 · .dlg «Tra tin đồn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-294-200.png
+- year 3 · turn 26 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-300.png
+- year 3 · turn 27 · tuần 0 · buổi 1 · rank 0 · .dlg «Ý chỉ tiết kiệm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-301-201.png
+- year 3 · turn 27 · tuần 2 · buổi 3 · rank 0 · .dlg «Quẻ Thượng thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-312-202.png
+- year 3 · turn 28 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-320.png
+- year 3 · turn 28 · tuần 2 · buổi 1 · rank 0 · .dlg «Cầm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-322-203.png
+- year 3 · turn 28 · tuần 2 · buổi 2 · rank 0 · .dlg «Thủy đậu · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-323-204.png
+- year 3 · turn 28 · tuần 2 · buổi 3 · rank 0 · .dlg «Học Cầm: ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Nhạc sư Giáo phườngTốn2 khắc · shots-R2-greedy-4/m-new-324-205.png
+- year 3 · turn 29 · tuần 0 · buổi 3 · rank 0 · #modal «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-328-206.png
+- year 3 · turn 29 · tuần 0 · buổi 3 · rank 0 · .dlg «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm | Làm · shots-R2-greedy-4/m-new-328-207.png
+- year 3 · turn 30 · tuần 0 · buổi 2 · rank 0 · #modal «Đồ thất lạc» · NEW SCREEN · first time on this screen; buttons: Lui | Trân phẩmGấm Tô Châu · shots-R2-greedy-4/m-new-338-208.png
+- year 3 · turn 30 · tuần 0 · buổi 2 · rank 0 · .dlg «Đại án ngoại thích» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-339-209.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-340.png
+- year 3 · turn 30 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Thượng · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-340-210.png
+- year 3 · turn 30 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Hạ hạ · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-341-211.png
+- year 3 · turn 31 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Hạ · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-354-212.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-360.png
+- year 3 · turn 32 · tuần 2 · buổi 1 · rank 0 · .dlg «Quẻ Trung · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-370-213.png
+- year 3 · turn 33 · tuần 0 · buổi 1 · rank 0 · #modal «Nghe đồn» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-373-214.png
+- year 3 · turn 33 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại lễ sắc lập Thái tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-374-215.png
+- year 3 · turn 33 · tuần 1 · buổi 3 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-380.png
+- year 3 · turn 33 · tuần 2 · buổi 0 · rank 0 · .dlg «Quan hệ với» · NEW SCREEN · first time on this screen; buttons: Lui | Ta 1 | Phi tần 16 | Phế phiTa · shots-R2-greedy-4/m-new-381-216.png
+- year 3 · turn 34 · tuần 2 · buổi 1 · rank 0 · .dlg «Xem quan hệ của» · NEW SCREEN · first time on this screen; buttons: Lui | Ta 1 | Chí tôn 2 | Phi tần 16 | Nam nhân 2 | Cung nhân 36 | Hoàng thượng | Thái hậu · shots-R2-greedy-4/m-new-394-217.png
+- year 3 · turn 34 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Danh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-395-218.png
+- year 3 · turn 35 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại lễ tế Giao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-397-219.png
+- year 3 · turn 35 · tuần 0 · buổi 1 · rank 0 · .dlg «Thái hậu bệnh nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-398-220.png
+- year 3 · turn 35 · tuần 0 · buổi 2 · rank 0 · .dlg «Lời nhận xét» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-398-221.png
+- year 3 · turn 35 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-400.png
+- year 3 · turn 35 · tuần 1 · buổi 2 · rank 0 · .dlg «Thời tiết» · NEW SCREEN · first time on this screen; buttons: Cởi áo bông đắp cho nàng taR | Dúi bạc xin lính gác ít than | Lo thân mình trướcRất vữngTố · shots-R2-greedy-4/m-new-402-222.png
+- year 3 · turn 35 · tuần 2 · buổi 0 · rank 0 · page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ14Đức48Danh0 | Bạc5Sức99/99 | Buổi sáng, còn 2 khắc | Chưa điểm trang | mai nở trong tuyết | Quẻ Hạ hạ (Danh) · shots-R2-greedy-4/m-new-405-223.png
+- year 3 · turn 35 · tuần 2 · buổi 1 · rank 0 · #modal «Có thai: Rất thấp» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-406-224.png
+- year 3 · turn 35 · tuần 2 · buổi 1 · rank 0 · .dlg «Có thai: Rất thấp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-406-225.png
+- year 3 · turn 36 · tuần 2 · buổi 2 · rank 0 · .dlg «Bổng lộc tháng mười một · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-411-226.png
+- year 3 · turn 36 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Thượng thượng · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-411-227.png
+- year 3 · turn 37 · tuần 0 · buổi 1 · rank 0 · .dlg «Quẻ Hạ hạ · Hung» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-414-228.png
+- year 3 · turn 37 · tuần 1 · buổi 1 · rank 0 · #modal «Dâng quà lên Thái hậu» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-418-229.png
+- year 3 · turn 37 · tuần 1 · buổi 1 · rank 0 · .dlg «Dâng quà lên Thái hậu» · NEW SCREEN · first time on this screen; buttons: Lui | Trà Long Tĩnh | Trà Long Tĩnh | Trà Long Tĩnh | Trà Long Tĩnh | Trà Long Tĩnh | Váy sa xanh ngọc | Nước bào hoa · shots-R2-greedy-4/m-new-418-230.png
+- year 3 · turn 37 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-420.png
+- year 3 · turn 37 · tuần 1 · buổi 3 · rank 0 · .dlg «Quẻ Hạ hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-420-231.png
+- year 4 · turn 38 · tuần 0 · buổi 1 · rank 0 · .dlg «Quốc tang» · NEW SCREEN · first time on this screen; buttons: Quỳ túc trực, tụng kinhTốnSứ | Thắp nén hương rồi luiTốnkhô · shots-R2-greedy-4/m-new-425-232.png
+- year 4 · turn 39 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-440.png
+- year 4 · turn 40 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Hạ hạ · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-441-233.png
+- year 4 · turn 40 · tuần 0 · buổi 3 · rank 0 · .dlg «Hoàng tự trong cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-444-234.png
+- year 4 · turn 41 · tuần 0 · buổi 2 · rank 0 · .dlg «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-454-235.png
+- year 4 · turn 41 · tuần 1 · buổi 3 · rank 0 · .dlg «Kẻ hầu» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-460.png
+- year 4 · turn 41 · tuần 2 · buổi 2 · rank 0 · #modal «Ngự hoa viên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-463-236.png
+- year 4 · turn 41 · tuần 2 · buổi 3 · rank 0 · #modal «Khúc «Thu thủy»: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-464-237.png
+- year 4 · turn 41 · tuần 2 · buổi 3 · rank 0 · .dlg «Khúc «Thu thủy»: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Khúc «Thu thủy» · giấy thườn | Khúc «Thu thủy» · giấy hoa t · shots-R2-greedy-4/m-new-464-238.png
+- year 4 · turn 41 · tuần 2 · buổi 3 · rank 0 · .dlg «Đeo «Khúc nhạc tri âm»» · NEW SCREEN · first time on this screen; buttons: Thêm SắcTốnkhôngĐượcSắc +1 | Phi tần quý mếnTốnkhôngĐượcP | Để sau · shots-R2-greedy-4/m-new-464-239.png
+- year 4 · turn 42 · tuần 0 · buổi 1 · rank 0 · .dlg «Thiên hạ truyền tin» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-466-240.png
+- year 4 · turn 42 · tuần 0 · buổi 1 · rank 0 · .dlg «Cấm túc 3 tháng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-466-241.png
+- year 4 · turn 42 · tuần 0 · buổi 2 · rank 0 · .dlg «Ngự giá thân chinh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-466-242.png
+- year 4 · turn 43 · tuần 0 · buổi 1 · rank 0 · .dlg «Cấm cung giới nghiêm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-477-243.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-480.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-480-244.png
+- year 4 · turn 43 · tuần 2 · buổi 1 · rank 0 · #modal «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-486-245.png
+- year 4 · turn 43 · tuần 2 · buổi 1 · rank 0 · .dlg «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons: Mời nàng ta vào uống tràTốnS | Xin cho nàng ta được thăm Ho | Nhìn một lát rồi lui vàoTốnĐ · shots-R2-greedy-4/m-new-486-246.png
+- year 4 · turn 44 · tuần 2 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng năm · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-490-247.png
+- year 4 · turn 44 · tuần 2 · buổi 2 · rank 0 · #modal «Kẻ hầu ăn bớt» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-490-248.png
+- year 4 · turn 44 · tuần 2 · buổi 2 · rank 0 · .dlg «Kẻ hầu ăn bớt» · NEW SCREEN · first time on this screen; buttons: Phạt nặngRất vữngTốnkhôngĐượ | Răn dạy rồi thaRất vữngTốnkh | Làm ngơRất vữngTốnkhôngĐượcđ · shots-R2-greedy-4/m-new-491-249.png
+- year 4 · turn 44 · tuần 2 · buổi 2 · rank 0 · .dlg «Lễ tấn phong Trinh quý nhân Điền Thục Nghi» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-R2-greedy-4/m-new-491-250.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · .dlg «Tâm bệnh · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-493-251.png
+- year 4 · turn 45 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-500.png
+- year 4 · turn 45 · tuần 2 · buổi 2 · rank 0 · .dlg «Quý tộc kén rể · kén dâu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-503-252.png
+- year 4 · turn 46 · tuần 1 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-511-253.png
+- year 4 · turn 47 · tuần 0 · buổi 1 · rank 0 · .dlg «Lũ lớn, mất mùa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-517-254.png
+- year 4 · turn 47 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-520.png
+- year 4 · turn 47 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm bệnh · nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-524-255.png
+- year 4 · turn 48 · tuần 0 · buổi 1 · rank 0 · .dlg «Ôn dịch» · NEW SCREEN · first time on this screen; buttons: Vẫn đi lại như thườngTốnkhôn · shots-R2-greedy-4/m-new-529-256.png
+- year 4 · turn 48 · tuần 1 · buổi 2 · rank 0 · .dlg «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-535-257.png
+- year 4 · turn 48 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-540.png
+- year 4 · turn 49 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 4 sắp hết hạn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-541-258.png
+- year 4 · turn 49 · tuần 1 · buổi 1 · rank 0 · .dlg «Lập Hoàng hậu mới» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-545-259.png
+- year 4 · turn 50 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 5: Học trò nhỏ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-554-260.png
+- year 4 · turn 50 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-560.png
+- year 4 · turn 51 · tuần 0 · buổi 1 · rank 0 · .dlg «Quẻ Trung · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-566-261.png
+- year 5 · turn 52 · tuần 0 · buổi 3 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-580.png
+- year 5 · turn 52 · tuần 0 · buổi 3 · rank 0 · .dlg «Chương 5 · Học trò nhỏ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-R2-greedy-4/m-new-580-262.png
+- year 5 · turn 52 · tuần 2 · buổi 2 · rank 0 · #modal «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-587-263.png
+- year 5 · turn 52 · tuần 2 · buổi 3 · rank 0 · .dlg «Phụ tuyến · Vẽ tranh mừng thọ cho cung nữ già · Lờ» · NEW SCREEN · first time on this screen; buttons: Nhận lờiVữngTốnkhôngĐượcđược | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-587-264.png
+- year 5 · turn 53 · tuần 0 · buổi 1 · rank 0 · .dlg «Bổng lộc tháng giêng · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R2-greedy-4/m-new-590-265.png
+- year 5 · turn 53 · tuần 0 · buổi 2 · rank 0 · .dlg «Lễ tấn phong Thuần tần Kiều Nhã Như» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-R2-greedy-4/m-new-591-266.png
+- year 5 · turn 53 · tuần 0 · buổi 2 · rank 0 · #modal «Đại phóng cung nhân» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-591-267.png
+- year 5 · turn 53 · tuần 0 · buổi 2 · rank 0 · .dlg «Đại phóng cung nhân» · NEW SCREEN · first time on this screen; buttons: Góp một món quà cho nàng ta | Khuyên Quý nhân Lâm Thư Nhi | Cùng cười nói chuyện cũTốnSứ | Xin phép rời đi, lòng cũng b · shots-R2-greedy-4/m-new-591-268.png
+- year 5 · turn 53 · tuần 1 · buổi 0 · rank 0 · .dlg «Đường sám hối» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-593-269.png
+- year 5 · turn 53 · tuần 2 · buổi 1 · rank 0 · .dlg «Phụ tuyến · Hoàng quý phi Điền Tố Nga: «Năm đói ở » · NEW SCREEN · first time on this screen; buttons: Nhận lờiRất vữngTốnkhôngĐược | Khéo từ chốiRất vữngTốnkhông · shots-R2-greedy-4/m-new-597-270.png
+- year 5 · turn 53 · tuần 2 · buổi 3 · rank 0 · .dlg «Kẻ hầu» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-600.png
+- year 5 · turn 55 · tuần 2 · buổi 2 · rank 0 · .dlg «Hôn sự» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-615-271.png
+- year 5 · turn 56 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-620.png
+- year 5 · turn 56 · tuần 1 · buổi 2 · rank 0 · .dlg «Quẻ Trung · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-623-272.png
+- year 5 · turn 56 · tuần 2 · buổi 1 · rank 0 · .dlg «Học Công (Nữ công): ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-626-273.png
+- year 5 · turn 56 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-627-274.png
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-640.png
+- year 5 · turn 59 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-660.png
+- year 5 · turn 60 · tuần 1 · buổi 3 · rank 0 · .dlg «Quẻ Trung · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R2-greedy-4/m-new-672-275.png
+- year 5 · turn 61 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-680.png
+- year 5 · turn 62 · tuần 2 · buổi 3 · rank 0 · .dlg «Việc khó xử» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-700.png
+- year 5 · turn 63 · tuần 0 · buổi 0 · rank 0 · page «Ngọc Thanh các · Ở đây còn 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ15Đức27Danh2 | Bạc11Sức90/99 | Buổi sáng, còn 4 khắc | Chưa điểm trang | mai nở trong tuyết | Quẻ Trung (Giao thiệp) · shots-R2-greedy-4/m-new-701-276.png
+- year 5 · turn 63 · tuần 1 · buổi 1 · rank 0 · .dlg «Y phục dự Tiết Đông chí» · NEW SCREEN · first time on this screen; buttons: Cứ thế vào dựRất vữngTốnkhôn | Cáo lỗi, về cung nghỉRất vữn · shots-R2-greedy-4/m-new-705-277.png
+- year 5 · turn 63 · tuần 1 · buổi 1 · rank 0 · .dlg «Tiết Đông chí · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Huých lại, cũng giả vờ bị đẩ | Nói to đòi người đẩy xin lỗi | Lùi một bước nhường lốiTốnDa | Ghi lại trong lòng, lúc khác · shots-R2-greedy-4/m-new-706-278.png
+- year 5 · turn 63 · tuần 1 · buổi 2 · rank 0 · .dlg «Điềm báo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-706-279.png
+- year 5 · turn 63 · tuần 1 · buổi 2 · rank 0 · .dlg «Tiết Đông chí · Đặt cược» · NEW SCREEN · first time on this screen; buttons: Không cược, chỉ xemRất vữngT · shots-R2-greedy-4/m-new-707-280.png
+- year 5 · turn 63 · tuần 1 · buổi 2 · rank 0 · page «Ngọc Thanh các · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc71Tài77Tâm cơ15Đức32Danh0 | Bạc1Sức99/99 | Buổi chiều, còn 4 khắc | Hôm nay mặt mộc | mai nở trong tuyết | Quẻ Thượng thượng (Tài nghệ) · shots-R2-greedy-4/m-new-707-281.png
+- year 5 · turn 63 · tuần 2 · buổi 1 · rank 0 · #modal «Lễ Lạp bát · Lời mời: Thi thêu túi đựng đậu gạo» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-710-282.png
+- year 5 · turn 63 · tuần 2 · buổi 1 · rank 0 · .dlg «Lễ Lạp bát · Lời mời: Thi thêu túi đựng đậu gạo» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi thêuMong manh | Không dựRất vữngTốnkhôngĐược · shots-R2-greedy-4/m-new-710-283.png
+- year 5 · turn 64 · tuần 2 · buổi 1 · rank 0 · .dlg «Khúc «Xuân hiểu»: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Khúc «Xuân hiểu» · giấy thườ | Khúc «Xuân hiểu» · giấy hoa | Khúc «Xuân hiểu» · dây đàn t · shots-R2-greedy-4/m-new-714-284.png
+- year 5 · turn 65 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-720.png
+- year 5 · turn 65 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-721-285.png
+- year 6 · turn 66 · tuần 1 · buổi 2 · rank 0 · #modal «Có người đến» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-734-286.png
+- year 6 · turn 66 · tuần 2 · buổi 1 · rank 0 · #modal «Có người đến an ủi» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-737-287.png
+- year 6 · turn 66 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-740.png
+- year 6 · turn 67 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại tuyển tú nữ» · NEW SCREEN · first time on this screen; buttons: Ra oai phủ đầuTốnkhôngĐượcmộ | Đứng xem rồi vềTốnkhôngĐượck · shots-R2-greedy-4/m-new-741-288.png
+- year 6 · turn 67 · tuần 1 · buổi 1 · rank 0 · #modal «Đại tuyển tú nữ» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-745-289.png
+- year 6 · turn 67 · tuần 2 · buổi 3 · rank 0 · .dlg «Khúc «Nguyệt hạ»: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Khúc «Nguyệt hạ» · giấy thườ | Khúc «Nguyệt hạ» · giấy hoa  · shots-R2-greedy-4/m-new-752-290.png
+- year 6 · turn 68 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 6: Mẹ của học trò» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-755-291.png
+- year 6 · turn 68 · tuần 1 · buổi 3 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-760.png
+- year 6 · turn 69 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 6 · Mẹ của học trò» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-R2-greedy-4/m-new-767-292.png
+- year 6 · turn 70 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-780.png
+- year 6 · turn 71 · tuần 2 · buổi 1 · rank 0 · #modal «Gieo lại quẻ» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-798-293.png
+- year 6 · turn 71 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-800.png
+- year 6 · turn 72 · tuần 0 · buổi 0 · rank 0 · .dlg «Mục lục» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-801-294.png
+- year 6 · turn 73 · tuần 0 · buổi 3 · rank 0 · .dlg «Nhờ thái giám mua đồ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-815-295.png
+- year 6 · turn 73 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-820.png
+- year 6 · turn 75 · tuần 0 · buổi 1 · rank 0 · .dlg «Sớ hặc cha ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-837-296.png
+- year 6 · turn 75 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-840.png
+- year 6 · turn 76 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-860.png
+- year 6 · turn 77 · tuần 1 · buổi 1 · rank 0 · .dlg «Án mất trộm ngự khố» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R2-greedy-4/m-new-865-297.png
+- year 7 · turn 78 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-880.png
+- year 7 · turn 80 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-900.png
+- year 7 · turn 81 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-920.png
+- year 7 · turn 83 · tuần 0 · buổi 2 · rank 0 · #modal «Lập Hoàng hậu mới» · NEW SCREEN · first time on this screen; buttons:  · shots-R2-greedy-4/m-new-935-298.png
+- year 7 · turn 83 · tuần 1 · buổi 1 · rank 0 · .dlg «Hội Phượng · Đặt cược» · NEW SCREEN · first time on this screen; buttons: Không cược, chỉ xemRất vữngT · shots-R2-greedy-4/m-new-938-299.png
+- year 7 · turn 83 · tuần 1 · buổi 2 · rank 0 · .dlg «Hội Phượng · Lời mời: Thi thơ tán dương tay thiện » · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi thơMong manhT | Không dựRất vữngTốnkhôngĐược · shots-R2-greedy-4/m-new-939-300.png
+- year 7 · turn 83 · tuần 1 · buổi 3 · rank 0 · .dlg «Một ánh mắt» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-940.png
+- year 7 · turn 85 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-960.png
+- year 7 · turn 87 · tuần 1 · buổi 3 · rank 0 · .dlg «Một ánh mắt» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-980.png
+- year 7 · turn 89 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1000.png
+- year 7 · turn 91 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1020.png
+- year 8 · turn 93 · tuần 0 · buổi 3 · rank 0 · .dlg «Kẻ hầu» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1040.png
+- year 8 · turn 94 · tuần 2 · buổi 3 · rank 0 · .dlg «Một ánh mắt» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1060.png
+- year 8 · turn 97 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1080.png
+- year 8 · turn 98 · tuần 2 · buổi 3 · rank 0 · .dlg «Chuyện trong cung» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1100.png
+- year 8 · turn 100 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1120.png
+- year 8 · turn 102 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1140.png
+- year 8 · turn 103 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1160.png
+- year 9 · turn 105 · tuần 1 · buổi 3 · rank 0 · .dlg «Chuyện trong cung» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1180.png
+- year 9 · turn 107 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R2-greedy-4/m-look-1200.png
+- year 9 · turn 108 · tuần 2 · buổi 0 · rank 0 · ending · EVENT · life over: Lãnh cung — Phát điên trong lãnh cung · age 28 · buổi 1208 · bugs 0 · stuck 0 · dead buttons 0 · shots-R2-greedy-4/end.png
+
+## Runner's own moments (player view, iPad, persona greedy/min-maxer)
+- y7 b940 · .dlg «Một ánh mắt» · DELIGHTED · Trạng nguyên Thẩm Trác Nhiên sends a hand-copied poem; two equal-value options «Giữ bài thơ, đáp lại» (thêm tình riêng / bài thơ là tang vật nếu bị lục) vs «Đốt đi, làm ngơ» (được tiếng hiền / dứt tình riêng) — a real, fair dilemma, both «Rất vững» (law 2/3 satisfied) · shots-R2-greedy-4/m-look-940.png
+- y9 · end · ODD · «Bổng lộc tháng ba» reward chest again opens OVER the life-end card («Hôn lạc lãnh cung» behind it) — 4th life · shots-R2-greedy-4/end.png
+- y1-y9 · FRUSTRATED (soft) · Danh 4 / Sủng 0 / Bạc 9 at y7: a min-maxer cannot climb out of poverty; rank never leaves 0 in 9 years
+- whole life · DELIGHTED · 0 bugs, 0 stuck, 0 dead buttons over 1208 buổi / 10 071 real taps
