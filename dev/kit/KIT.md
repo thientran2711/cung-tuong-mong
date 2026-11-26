@@ -3033,6 +3033,11 @@ Owner: "Bất kỳ một cái thông báo nào của cái game đều phải vô
 - A choice whose options do NOT roll a chance but change her ending / life carries `warn:1` (Q card `{…, warn:1}` or `kitPanel({…, warn:1})`); the kit draws ONE small line «Cẩn thận khi lựa chọn» (kit red `var(--bad)`, the «!» disc, centred) right above the option list `.opts`, on every dialog path (outer showModal hook, re-checked 120 ms later). Those options carry NO odds word (drop the odds chip at the option builder, VANPHONG §2.7); their Tốn / Được / Mất rows stay (OD 26/11 ~17:55Z).
 - Kit page sample §6.2k. Fixer: FIRSTCARD («Lễ ra mắt» family) + every option builder with ending-changing options (scan per OD 26/11 ~18:25Z (3)).
 
+### 6.2l GOAL LINK + «CÁCH LÀM» PANEL (owner 26/11 ~18:05Z goal links, MAIN REC (1); KK44) — `kitGoalLink(label, how)` / `kitHowPanel(how)` (jopic)
+- Every goal / task line that names a person, place, item or act (chapter goals, Mệnh truyện, NPC requests, notices) wraps that name with `kitGoalLink(label, how)`: ONE look `.kglink` = the text underlined with a gold dotted line (no colour change, keyboard reachable).
+- Tap → the small kit info panel «Cách làm»: the person's painting (subject) + kit rows Ai · Ở đâu (place icon §78 + name) · Giờ mở · Tốn · Ghi chú (empty rows are not drawn: they are data the caller has not got, not gain/cost rows) + ONE option «Đi tới» (`tốn: N khắc` from `how.goK`) running `how.go` (walk her there, or open the Dư đồ with the place pulsing + the person marked).
+- `how = {who: person object | name, where: place key | name, hours, cost, note, go, goK}` — the caller (goal list) supplies the data from BAL / the place table (law 4: no typed numbers); the kit only draws. Kit page sample §6.2l. Fixer: GOAL-LINKS.
+
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
 - The week rolls ONE weather (`S.wx.b`, its flag f drives every rule); the WORDS shown follow the buổi (`S.wx.n = wxAt(S.wx.b, buổi)[0]`, icon
   `[1]`). Night never: nắng, ve kêu, "sớm". Day never: trăng, sao, đom đóm, đêm, dế. "sớm" only in the morning. Every new weather row gives all

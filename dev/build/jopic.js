@@ -435,3 +435,26 @@ window.kitWarnLine=kitWarnLine;window.kitWarnPut=kitWarnPut;
 (function(){const st=document.createElement("style");st.textContent=`#modal .kwarnl{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px auto 6px;padding:2px 10px;font-size:.82rem;line-height:1.3;color:var(--bad);font-weight:600;letter-spacing:.01em;flex:0 0 auto}
 #modal .kwarnl .khap{flex:0 0 auto;margin:0;width:16px;height:16px;line-height:16px;font-size:.72rem;background:var(--bad);color:var(--panel,#fff);animation:none}`;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2k",title:"Dòng cảnh báo «Cẩn thận khi lựa chọn» trên lựa chọn đổi kết cục (không có chữ cơ hội)",html:()=>`<div id="modal" style="position:static"><div id="mb">${kitWarnLine()}<div class="opts kitpg-opts"><button class="opt">Xuất gia<small>đổi kiếp này</small></button><button class="opt">Ở lại<small>giữ nguyên</small></button></div></div></div>`})}catch(e){}
+/* ===== KIT §6.2l GOAL LINK + «CÁCH LÀM» PANEL (owner 26/11 ~18:05Z: «mấy cái dấu gạch hướng dẫn dưới chân của cái dòng đó … bấm vào là để hiện ra cái hướng dẫn, hoặc là hiện ra là đi tới nơi đó»; KK44) =====
+   kitGoalLink(label, how) → an UNDERLINED (dotted) link inside any goal / task / notice text; tap → kitHowPanel(how) = the small kit panel «Cách làm»:
+   who (name + painting), where (place + its open hours), what it costs, + ONE button «Đi tới» (its khắc cost shown) that runs how.go (walk her there /
+   open the Dư đồ with the place pulsing). how = {who: person object | name, where: place key | name, hours: text, cost: text, note: text, go: fn, goK: khắc}.
+   The data comes from the caller (the goal list knows its target); the kit only draws it. One look everywhere (.kglink), registry by id (no inline code). */
+const KGL=window.KGL=window.KGL||{n:0,m:{}};
+function kitGoalLink(label,how){const id="g"+(++KGL.n);KGL.m[id]=how||{};if(KGL.n>400){const ks=Object.keys(KGL.m);ks.slice(0,ks.length-300).forEach(k=>delete KGL.m[k])}
+ return `<span class="kglink" role="button" tabindex="0" data-kglink="${id}">${label}</span>`}
+function kitHowPanel(how){try{how=how||{};const p=how.who&&typeof how.who==="object"?how.who:null;const nm=p?(p.name||""):(how.who||"");
+ const wk=how.where||"";let pl=wk;try{if(wk&&typeof placeName==="function"&&typeof placeOf==="function"&&placeOf(wk))pl=placeName(wk)||wk}catch(e){}
+ const ico=wk&&typeof kitPlaceIcon==="function"?kitPlaceIcon(wk,16):"";
+ const rows=[["Ai",nm?(typeof kitName==="function"&&p?kitName(p):nm):""],["Ở đâu",pl?`<span class="kglwhere">${ico}${pl}</span>`:""],["Giờ mở",how.hours||""],["Tốn",how.cost||""],["Ghi chú",how.note||""]];
+ const html=(typeof kitRows==="function"?kitRows(rows):rows.filter(r=>r[1]).map(r=>`<p><b>${r[0]}:</b> ${r[1]}</p>`).join(""));
+ const opts=[];if(typeof how.go==="function")opts.push({n:"Đi tới",fx:{},x:how.goK!=null?`tốn: ${how.goK} khắc`:"",go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});
+ return typeof kitModal==="function"?kitModal({kind:"info",title:"Cách làm",subject:p||undefined,html,opts:opts.length?opts:undefined,cls:"kgoalhow"}):null}catch(e){console.error("kitHowPanel",e);return null}}
+window.kitGoalLink=kitGoalLink;window.kitHowPanel=kitHowPanel;
+/* window capture: runs before the document-level frame / tap-catcher handlers that take a tap inside an info frame */
+window.addEventListener("click",e=>{const t=e.target&&e.target.closest&&e.target.closest("[data-kglink]");if(!t)return;const h=KGL.m[t.dataset.kglink];if(!h)return;e.stopImmediatePropagation();e.preventDefault();kitHowPanel(h)},true);
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const t=e.target&&e.target.closest&&e.target.closest("[data-kglink]");if(!t)return;e.preventDefault();t.click()});
+(function(){const st=document.createElement("style");st.textContent=`.kglink{text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px;text-decoration-color:var(--gold);color:inherit;cursor:pointer;font-weight:600}
+#modal .kglwhere{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.kglink:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}`;document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2l",title:"Chữ dẫn đường trong mục tiêu (gạch chấm) + khung «Cách làm» với nút «Đi tới»",html:()=>`<p class="kitpg-row">Mua một hộp phấn của ${kitGoalLink("thái giám Nội vụ phủ",{who:"Thái giám Nội vụ phủ",where:"nvp",hours:"buổi sáng, buổi trưa",cost:"Bạc theo món",goK:1,go:()=>{}})} trước rằm.</p>`})}catch(e){}
