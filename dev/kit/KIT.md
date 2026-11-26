@@ -281,6 +281,10 @@ Applies to: act cards (Hành động, servant road), person-card act groups (`.p
 dialog options (`.opt` / `.opts`), priced buttons (`pbtn`, `.btn`, `.rbtn`: court, festival, shop…). Built ONLY through
 `kitParse()` (string → rows) and the frame `kaNorm()` (j63), which rebuilds every such button into the markup below
 (a MutationObserver runs it after any render; `kitFix()` also calls it). Nobody writes this markup by hand.
+Observer rule (F10, 26/11, behaviour only): the j63 observer `kaMO` sorts each wake (`kaSort`): a NEW card (a KA_SEL button without
+`data-ka`, or a node holding one) → the whole-page `kaNorm` pass (≤ `BAL.kobs.kaPass` passes, its own edits taken back with `takeRecords`);
+a node added INSIDE an already normalised card → that card alone (`kaNorm1` + the «???» mask); any other node (loading marks, scroll cues,
+memory marks, words in a span) → nothing. Never re-run the whole page for a change that holds no new card (a 1351-card list took 7 s a pass).
 
 ```
 button.ka [.kdis when disabled]
