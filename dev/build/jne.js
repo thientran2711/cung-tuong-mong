@@ -87,7 +87,7 @@ function preload(src,ms){if(!src)return Promise.resolve();const w=ms||NE.wait;if
 function moodRow(m0,m1,tier){const W=MOODS;const a=W[m0]?W[m0][0]:"",b=W[m1]?W[m1][0]:"";
  return [`${a}${m1!==m0?` → ${b}`:""} · ${TIER[tier].liked}`,m1<m0?"g":m1>m0?"r":"n"]}
 /* kitNightEnd({tier, m0, m1, before, items:[inv entries], line}) — before = the night's rsnap (j75 __nsnap) */
-function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Object.assign({},T0,o.pic?{pic:o.pic}:{});let G=[],B=[],K=[];try{[G,B,K]=kaResultRows(o.before)}catch(e){}
+function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Object.assign({},T0,o.pic?{pic:o.pic}:{});let G=[],B=[],K=[];try{[G,B,K]=kaResultRows(o.before,"",kaAimVerdict(o.before).ok)/* KAWHY-VERDICT: reasons follow the night verdict (read only; closed by kaAimUse below) */}catch(e){}
  const [mv,mc]=moodRow(o.m0,o.m1,o.tier);
  const rows=[["Hoàng thượng",mv,mc]];
  /* KIT 7.3 (OB-VERDICT, owner OD 26/11 ~08:30Z): her pillow talk's verdict + sentence, the target's real change, an NPC's deed on her */
