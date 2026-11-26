@@ -9,7 +9,7 @@ const MEAS=()=>{const sc=document.querySelector('.game.maptab .mapsc');if(!sc)re
  const VL=sr.left+(parseFloat(cs.marginLeft)||0),VR=sr.right-(port?0:(parseFloat(cs.marginRight)||0));const bad={long:[],cut:[]};const tags=[];
  for(const s of sc.querySelectorAll('.mspot')){const k=s.dataset.go||s.dataset.ak||s.dataset.kcgo||s.dataset.zone||'';const lab=(s.querySelector('.mlab')||{}).textContent||'';const m=s.querySelector(':scope>.mmeta');const mt=m?m.textContent.trim():'';
   tags.push({k,lab,mt,cls:s.className});const vis=s.offsetWidth&&getComputedStyle(s).display!=='none';
-  if(!s.classList.contains('here')&&!s.classList.contains('empty')&&!/Ngoại triều|Cổng nhà/.test(lab)&&mt&&!/^(\d+ bóng|vắng)$/.test(mt))bad.long.push(lab+'«'+mt+'»');
+  if(!s.classList.contains('here')&&!s.classList.contains('empty')&&!/Ngoại triều|Cổng nhà/.test(lab)&&mt&&!/^(Nhà ta · )?(\d+ bóng|vắng|Nhà ta)$/.test(mt))bad.long.push(lab+'«'+mt+'»');
   if(vis){const R=[...s.querySelectorAll('.mlab,.mmeta')].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0);if(R.length){const l=Math.min(...R.map(r=>r.left)),r=Math.max(...R.map(r=>r.right));if((l<VL-1&&r>VL+1)||(l<VR-1&&r>VR+1))bad.cut.push(lab)}}}
  return{bad,tags}};
 (async()=>{const b=await chromium.launch();let fail=0;const out=[];
