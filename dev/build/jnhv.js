@@ -262,6 +262,9 @@ function holdOn(srcIn,readyFn){holdOff();try{const hud=document.querySelector("h
   const ready=!up&&(readyFn?readyFn():(CUR&&L&&L.isConnected&&CUR.bgReady&&CUR.D&&CUR.D.H>80&&typeof tab!=="undefined"&&tab==="act"));if(ready||waited>20000){holdOff();return}requestAnimationFrame(tick)};requestAnimationFrame(tick)}catch(e){holdOff()}}
 (function(){const e0=kpmEnter;kpmEnter=function(slot,part){if(slot===SLOT&&on())holdOn();return e0.apply(this,arguments)};window.kpmEnter=kpmEnter;
  const pm=kitPalaceMap;kitPalaceMap=function(o){const h=pm.apply(this,arguments);if(o&&o.slot===SLOT&&on())setTimeout(preloadAreas,0);return h}
+ /* Dư đồ → garden map: the Dư đồ painting stays until the garden map painting is decoded (first open of a mùa × buổi) */
+ const o0=kpmOpenSlot;kpmOpenSlot=function(slot,k){if(slot===SLOT&&on()){try{const u=mapSrc();if(!DONE[u]){const im=document.querySelector("#panel .mapv .mapimg");const cur=im&&(im.currentSrc||im.src);let ok=false;decode(u).then(()=>{ok=true});
+   if(cur)holdOn(cur,()=>{if(!ok)return false;const g=document.querySelector("#panel .nhv-map .mapimg");return !!g&&g.naturalWidth>0})}}catch(e){}}return o0.apply(this,arguments)};window.kpmOpenSlot=kpmOpenSlot;
  /* area → garden map: the area painting stays until the map painting of this mùa × buổi is decoded */
  document.addEventListener("click",e=>{try{const b=e.target.closest&&e.target.closest("#tomap");if(!b||!hall()||!BG)return;const u=mapSrc();let ok=false;decode(u).then(()=>{ok=true});
   const cur=(BG.style.backgroundImage.match(/url\(["']?([^"')]+)/)||[])[1];
