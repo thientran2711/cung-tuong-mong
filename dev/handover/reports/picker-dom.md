@@ -52,4 +52,13 @@ Other chest-sized lists checked: Tư trang bag + dress chest (kitInvGrid, groupe
 - Fold: the confirm button sits below the scrolling box («Kéo xuống») — same on LIVE (F's 15:30Z kipgo note).
 
 ## Gates
-(filled below as they run)
+- coop-e2e (local worker, wrangler dev --local :8799) on 1466caa7 (code sha; later commits = this report only): **143/143 passed**.
+- picker-dom.js: LIVE+fix 16/16 · rv15+fix 32/32 · scan PASS 5/5 (origin/main FAIL 4).
+- Videos (F's s7 save; Biếu quà làm lành 3 roads → «Đồ trong rương» grid → › › → choose a tile (card on demand) → ‹ ‹ → confirm → gift moment + result → Dâng quà › › › → choose), curl 206:
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/picker-dom/picker-dom-fold.mp4 (755x1000@2) ·
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/picker-dom/picker-dom-ipad.mp4 (1180x820@2). Wipe on verdict: `python3 dev/site/cdn_sync.py --wipe-review picker-dom`.
+- Kit law 9: this changes kit part 28.13i → lands only with kit keeper KK47's sign-off (KIT REQUEST K-LIST-PAGE); KK47 / MAIN 164 were not reachable from this account (send_message «not found»), relayed through Foreman D.
+- Merge with review/save-fix-stack-rv15: jgpick conflict resolves to this branch's file (B's twin-tile rule is inside kipList); index.html / sw.js rebuild.
+
+## Handover (if a successor is needed)
+Worktree /home/user/wt/picker-dom (sparse). Save /home/user/wt/s7.json (from handover ref, see picker-dom.js). Remaining: KK47 sign-off, BIG review, land after or with rv15.
