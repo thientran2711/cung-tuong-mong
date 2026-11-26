@@ -1,0 +1,1 @@
+seg14 u4-s17 (U3b-2): stack u4 7959f1b5, harness 5edf09f6 + patch sha 2273c8a1, iPad host / Fold guest, seed 17. Reload buoi 30 OK both. Stuck: host #coopfz x4 (15 min each), guest #title x1 + #modal 'Cung Tuong Mong' x3. Buoi ~70 at 1h53. NOT VALID.
