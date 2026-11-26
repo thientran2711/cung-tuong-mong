@@ -294,6 +294,15 @@ const KIT_GLOSS_ROAD={
   "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và ngươi, còn lại từ những ngày được gần ngài. Còn Ân tình thì thư từ lãnh cung được ngài đọc, xin tha tội dễ thành. Ở đây không gặp được ngài nên Ân tình phai dần."}};
 function kitGlossText(term){const r=kitRoad();const R=r&&KIT_GLOSS_ROAD[r];return R&&R[term]!=null?R[term]:(KIT_GLOSS[term]||"")}
 window.kitRoad=kitRoad;window.kitGlossText=kitGlossText;
+/* KIT §12.2 «Cách giảm» row (K-GLOSS-LOWER, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán ... giảm cái độ nguy hiểm», OB-OAN): every glossary
+   explanation of a stat that can turn against her carries ONE more kit row: the real ways to bring it back. Text = kitLowerText(term) (ONE table, jts.js TS_LOWER,
+   owned by OB-OAN; "" = no row). Label: «Cách giảm» for a stat whose RISE hurts her (Oán, Thù, Ghen, Nguy hiểm…), «Cách tăng» for one whose FALL hurts her
+   (Thiện cảm, Quý, Sủng, Sức khỏe, Danh). Consort road only (the acts named are consort acts). kitLowerRow(term) → [label, text] | null;
+   kitGlossPopHtml(term) = the one glossary popover body (title · meaning · «Cách …» row); the header help panel (HX) adds the same row. */
+const KIT_LOWER_UP={"Thiện cảm":1,"Quý":1,"Sủng":1,"Sức khỏe":1,"Danh":1};const KIT_LOWER_ALIAS={"Sức":"Sức khỏe"};
+function kitLowerRow(term){try{if(kitRoad())return null;let t=String(term||"").trim();t=KIT_LOWER_ALIAS[t]||t;const x=typeof kitLowerText==="function"?kitLowerText(t):"";return x?[KIT_LOWER_UP[t]?"Cách tăng":"Cách giảm",x.charAt(0).toUpperCase()+x.slice(1)]:null}catch(e){return null}}
+function kitGlossPopHtml(term){const r=kitLowerRow(term);return `<div class="kpopt">${term}</div><div class="kpopx">${kitGlossText(term)}</div>`+(r?`<div class="kpopx kplow"><b>${r[0]}:</b> ${r[1]}</div>`:"")}
+window.kitLowerRow=kitLowerRow;window.kitGlossPopHtml=kitGlossPopHtml;
 /* HX (header tap texts) follows the road: rebuilt from kitGlossText when the road changes; the consort texts are kept as they were */
 const KIT_HXMAP={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài",sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức"};let KIT_HX0=null,KIT_HXR="";
 function kitHxRoad(){try{if(typeof HX!=="object")return;const r=kitRoad();if(r===KIT_HXR&&KIT_HX0)return;if(!KIT_HX0){KIT_HX0={};for(const k in KIT_HXMAP)KIT_HX0[k]=HX[k]}KIT_HXR=r;
@@ -310,7 +319,7 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
  let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
 document.addEventListener("click",e=>{const p=document.getElementById("kpop");let od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");/* OWNER-ish rule (MAIN 136 25/11, robot M2/M3 + KIT BUG #2a): a tap ANYWHERE on an option card chooses it — the odds meter / a glossary word inside the card must not steal the tap; the explanation stays on the kit help («!» / legend) */if((od||gl)&&e.target.closest("button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button")&&!e.target.closest(".kopinfo")){od=null;gl=null}/* inside the «!» card overlay (.kopinfo, disabled copy) the meter still opens the ladder: that is where the explanation lives */
- if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else if(gl.dataset.kfx!=null)kpPop(gl,kitFactTipHtml(gl));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
+ if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else if(gl.dataset.kfx!=null)kpPop(gl,kitFactTipHtml(gl));else kpPop(gl,kitGlossPopHtml(gl.dataset.kgl));return}
  if(p&&!p.hidden)p.hidden=true},true);
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
 
@@ -517,6 +526,7 @@ button.ka .kodds .kodm{flex-direction:row}
 .kpop{position:fixed;z-index:9995;/* above the big emotion avatar (.kemo-big, 9990/9991) — rv kit-ghichu-sections: a kit popup is never covered by a picture */background:var(--k-card);border:1px solid var(--gold);border-radius:var(--k-rad);box-shadow:0 0 0 3px #f6ead6,0 10px 30px #2a1a1250;padding:8px 10px;font-size:.82rem;color:var(--ink);/* m-fix-2: a tip never covers its own dialog (robot s5d: a 40-line «Ghi chú» filled the Fold): at most half the screen, scrolls inside */max-height:calc(50*var(--kvh,1dvh) - 16px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
 .kpopt{font-family:var(--display);font-weight:700;color:var(--gold);border-bottom:1px solid var(--k-hair);padding-bottom:3px;margin-bottom:4px}
 .kpopx{line-height:1.4}
+.kpopx.kplow{margin-top:4px;padding-top:4px;border-top:1px dashed var(--k-hair)}
 .kpopr{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:6px;align-items:center;padding:3px 4px;border-radius:5px}.kpopr.on{background:#f0d07055;box-shadow:inset 0 0 0 1px var(--gold)}.kpopr b{font-size:.78rem;white-space:nowrap}.kpopr small{color:var(--dim);font-size:.72rem}
 .kgl{text-decoration:underline dotted #b9a27a;text-underline-offset:2px;cursor:help}.khap.kgnb{text-decoration:none;margin-left:.5em;vertical-align:middle;cursor:pointer;animation:none!important}.kfx{cursor:pointer}.kfxm{color:#8a7a62;font-size:.92em}
 /* Cần row (act card, j63 .kr-why): status chips */
@@ -1105,7 +1115,7 @@ function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||
 const HXNOW={};
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.kit&&!m.opts&&typeof m.h==="string"&&/^<p>[^<]*<\/p>$/.test(m.h)&&typeof HX==="object"){
   const txt=m.h.replace(/<\/?p>/g,"");const k=Object.keys(HX).find(x=>HX[x]===txt);if(k){const lab=kpPlain(m.t);const gl=txt.replace(/^[^:]{1,24}:\s*/,"");const cur=(m.t.match(/(-?\d+)\s*$/)||[])[1];
-   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);const nr=typeof HXNOW==="object"&&HXNOW[k]?HXNOW[k]():null;m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(nr&&nr.length?[{h:"Ngươi đang có",rows:nr}]:now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
+   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);const nr=typeof HXNOW==="object"&&HXNOW[k]?HXNOW[k]():null;const lw=typeof KIT_HXMAP==="object"&&kitLowerRow(KIT_HXMAP[k]);m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]].concat(lw?[[lw[0],lw[1],"t"]]:[])}].concat(nr&&nr.length?[{h:"Ngươi đang có",rows:nr}]:now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
 /* ---- 3. identity card: larger, balanced; tiles beside the portrait; no stale result toast over the buttons ---- */
 (function(){const k0=kpIdentity;kpIdentity=function(M,m){k0.apply(this,arguments);try{const mb=$("mb");const id=mb.querySelector(".kpid"),tl=mb.querySelector(":scope > .kstgrid"),main=id&&id.querySelector(".kpmain");if(main&&tl)main.appendChild(tl);
   const t=$("rtoast");if(t){t.classList.remove("on");t.hidden=true;setTimeout(()=>{t.hidden=false},50)}}catch(e){}try{kpIdFig(M)}catch(e){console.error("kpIdFig",e)}}})();

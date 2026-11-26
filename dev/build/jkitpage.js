@@ -74,6 +74,9 @@ KIT_SAMPLES.push(
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
+/* §12.2 glossary popover with the «Cách giảm» / «Cách tăng» row (K-GLOSS-LOWER): the REAL popover body kitGlossPopHtml, static (no data = no row) */
+KIT_SAMPLES.push({id:"§12.2",title:"Glossary popover: meaning + «Cách giảm» (rise hurts) / «Cách tăng» (fall hurts) row from kitLowerText",html:()=>typeof kitGlossPopHtml!=="function"?"":
+ `<div class="kitpg-row">${["Oán","Sủng","Đức"].map(t=>`<div class="kpop" style="position:static;display:block;max-width:300px">${kitGlossPopHtml(t)}</div>`).join("")}</div>`});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
  `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});
