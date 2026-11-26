@@ -167,7 +167,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
  if(mv){if(L)L.hidden=true}else{if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L)}
  if(!R){R=document.createElement("div");R.id="kshR";R.className="ksh kshR"}const host=mv||st;if(R.parentNode!==host)host.appendChild(R);
- if(!mv)L.hidden=false;R.hidden=false;if(mv){mv.classList.add("kside");k3RW(mv)}else{st.classList.add("k3g");k3RW(st)}
+ if(!mv)L.hidden=false;R.hidden=false;if(mv){mv.classList.add("kside");k3RW(mv);/* IPAD-SIZE (KIT 56.28, review/ipad-size): the map's right column rows scale with the map height like the stage column */if(typeof k3RowH==="function")k3RowH(mv)}else{st.classList.add("k3g");k3RW(st)}
  /* left: time · tư chất · tình trạng */
  const bu=k3hc("buoi"),lot=k3hc("lot"),wx=$$("hud2")&&$$("hud2").querySelector(".kmwx");
  let t="";if(bu){const w=String(BUOI[S.buoi||0]);{const left=typeof used!=="undefined"?Math.max(0,BAL.time.khac-used):BAL.time.khac;t+=`<button type="button" class="k3r k3time" data-k3="buoi" title="Còn ${left} khắc trong buổi" aria-label="${esc(w)}, còn ${left} khắc"><span class="k3l">${esc(w)}</span><span class="k3dots">${[0,1,2,3].map(i=>`<i class="${i<left?"on":""}"></i>`).join("")}</span></button>`}}
@@ -388,7 +388,11 @@ function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";retu
   if(here&&k3Phone())k3ShowPlace();return r}}
  const g0=goTo;goTo=function(k){const fromMap=typeof tab!=="undefined"&&tab==="go";const p0=S&&S.place;const r=g0.apply(this,arguments);
   try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
- const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const t=S&&S.place&&S.place!=="home"?"Về "+k3PlaceName():"Về phòng";const l=rb.querySelector(".kbl");if(l&&l.textContent!==t){l.textContent=t;rb.setAttribute("aria-label",t)}rb.title=t}}catch(e){}return r};window.k3Shell=k3Shell})();
+ const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const t=S&&S.place&&S.place!=="home"?"Về "+k3PlaceName():"Về phòng";const l=rb.querySelector(".kbl");if(l&&l.textContent!==t){l.textContent=t;rb.setAttribute("aria-label",t)}rb.title=t;
+   /* NEVER CUT (owner bug 25/11 k17 iPad «Về Đức…»): when the whole words do not fit the header slot, the same button says it shorter — the place name without its kind
+      word («Về Đức Thọ»), then «Về» alone; the full words stay in the title / aria-label */
+   if(l&&!rb.hidden&&l.offsetWidth){const hd=rb.parentElement,cut=()=>{const a=rb.getBoundingClientRect(),h=hd?hd.getBoundingClientRect():null;return rb.scrollWidth>rb.clientWidth+1||l.scrollWidth>l.clientWidth+1||(h&&a.right>h.right+1)};
+    if(cut()){const t2=t.replace(/\s+(cung|điện|viện|các|phòng|phủ|khố|đường)$/i,"");if(t2!==t){l.textContent=t2;if(cut())l.textContent="Về"}else l.textContent="Về"}}}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
