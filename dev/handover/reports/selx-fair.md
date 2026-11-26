@@ -43,3 +43,8 @@ nc is a hòa thân origin (BAL.selx.hoaThan nc/bd/pf): on this branch (FIRSTCARD
 
 ## SSK 8c56b83e (26/11 ~14:55Z)
 Videos (real UI, forced ban hoa, LIVE aa37de21 vs branch, Fold 755x1000 + iPad 1180x820; LOOKED): CDN img/_review/selx-fair/ branch-{fold,ipad}.mp4 (+ -2x), live-{fold,ipad}.mp4 (+ -2x), stills *-the-dien-tuyen.png (hall odds), *-podium.png (cut in title), *-ket-cuc-rows.png (Điện tuyển row). LIVE: no odds, podium without cut, ending without place/score. BIG rv: session_01D3E3NXxnUhq4h2mLTCtfVe.
+
+## LAND READY (26/11 ~17:05Z)
+BIG rv session_01D3E3NXxnUhq4h2mLTCtfVe PASS c7594222 (reports/selx-fair-review.md). Gates on c7594222: selx-rules/wire/days ALL PASS · npc-purpose PASS 419 · firstcard-scan 0 NOT TOLD · coop-e2e 143/143 · quickcheck only G4 80-dialog-fixed = same on LIVE (pre-existing). Videos: https://ctm-img.victoria-tntt.workers.dev/img/_review/selx-fair/branch-fold.mp4 · branch-ipad.mp4 · live-fold.mp4 · live-ipad.mp4 (+ -2x; stills branch-/live-*-{the-dien-tuyen,podium,ket-cuc-rows}.png, checked 200 now). Side notes from rv (pre-existing, not this job): ban hoa ending «Phẩm cao nhất: Quý nhân» for a tú nữ; CTM_BI change line truncated.
+
+LAND READY review/selx-fair c7594222 (FF from LIVE b881686f)
