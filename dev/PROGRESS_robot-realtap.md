@@ -328,3 +328,21 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   54fa0112 case again. Now: result = kitOvBtn() (the game's own panel test) AND no rules board on screen (no visible «Sẵn sàng» in #ov) — a stale kitOvBtn while a
   rules board is up is not a result, so the back stays off there. Proof LIVE 6b5d3d05: RT_TEST_EXAM=1 Fold s31 / s7 and iPad s12 / s8 → done:true raws [5,5] ×4;
   regression Fold cautious s909 → buổi 71, iPad bold s4242 → buổi 51 (mgReady 1), 0 DEAD, 0 bugs, no give-up.
+
+### FIXER #9 — BOARD PLAY (F #19 08:28Z «Lễ ra mắt» priority + F #20 08:51Z «Bỏ qua» family), 11/26/2026
+- Root: after «Sẵn sàng» the robot had NO way to play a canvas board: random AREA taps on «Múa» (Simon steps) / «Đàn» (timed notes) scored 0 → ban hoa; and on
+  several boards it took the frame's quick option «Bỏ qua · kết quả …» (drag-skip rule fired on non-exam boards) → «Quay lại».
+- Fix (robot-rt.js only, real taps):
+  BOARD PLAY: on #kg82 with KG82.phase «play» the robot waits inside the page (frame by frame) for the game's own test hook KG82.peek() (j82 «KG82.peek for tests»)
+  and makes a REAL touch (iPad: mouse) at that point, checked bare in the same page call. Persona skill (cautious .9, bold/greedy/lover .8, speed .75, rand .55):
+  a miss lets that move pass (no wrong tap). Boards without a peek fall back to the old area taps.
+  NO QUICK OPTION: on a board, #kg82skip / .kquick / «Bỏ qua · kết quả|giữ nguyên», «Để tài nghệ quyết định», «Để trời định», «Học nhanh», «Kết nhanh»,
+  «Thôi, không chơi», «Giao cho người làm» are never a move unless the only one. The drag quick option is kept ONLY for jexam DRAG exam rounds (PROMO-ROOT C1).
+  UNSTICK never taps ✕/«Quay lại» on a board that is not on its result (only a reload may leave it). Every back on a board is logged in R.harness.mgBackWhy.
+  RT_TEST_BOARD=<art> self-test: the game's own playArt opens a «Sẵn sàng | Bỏ qua · kết quả khá | Hướng dẫn | Quay lại» board; testBoard {raw, skipped, ready, peekTaps, …}.
+- Proof LIVE 6b5d3d05: RT_TEST_BOARD=vu (Múa, the «Lễ ra mắt» nc board) Fold raw 9 / 10 / 7, iPad raw 10 / 10 / 9 — never skipped, «Sẵn sàng» tapped, back only on
+  the result. RT_TEST_BOARD=cam (Đàn, timed) iPad raw 4 / Fold raw 0 (see limits). Full lives: every board back in mgBackWhy is on ph «result» (iPad bold s4242
+  buổi 11, iPad cautious s99 buổi 14, peek taps 69 / 458, 0 DEAD, 0 bugs).
+- Limits (open): Đàn timed notes on Fold still score ~0 (touch latency vs the ±90 ms peek window); «Dâng hương» mixing board has no peek → its «chấm độ khớp» button
+  is tapped without mixing (low score). 3 of 6 fresh nc/any lives were ban hoa at buổi 1 after the BOT chose «Cúi đầu chờ xét — không thi» (persona pick, game rule,
+  not a harness fault).
