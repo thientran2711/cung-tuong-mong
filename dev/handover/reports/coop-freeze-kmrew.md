@@ -1,49 +1,42 @@
 # coop-freeze-kmrew — B FIXER report (session_01N1tNP2Ppg85FwQYT2eP9Re, depth 1, START_CTX ~3 %)
-PRIORITY #1 CHECK: brief b-coop-freeze-kmrew.md ('kmrew|page-freeze|SEATHANG': OD 0 | ledger 0 | claims 8 | main 15 | review/* 0) → reused reports/coop-page-freeze.md (4fU4zVDR), hang-grabber #16, coop-e2e helpers, dev/test/lib; `git grep` ResizeObserver/MutationObserver on origin/main + review/coop-week-wait-land: no other branch touches jinv kitInvFit.
+PRIORITY #1 CHECK: brief b-coop-freeze-kmrew.md ('kmrew|page-freeze|SEATHANG': OD 0 | ledger 0 | claims 8 | main 15 | review/* 0) → reused reports/coop-page-freeze.md (4fU4zVDR), hang-grabber #16, coop-e2e helpers, dev/test/lib; `git grep` kitScrollCues / kscue / ResizeObserver on origin/main + review/coop-week-wait-land: jksize + jinv identical on both, no other branch touches them.
 
-## VERDICT
-ROOT (game, real players): dev/build/jinv.js:29 kitInvFit — every rendered bag grid (.kinv .kinvg) got its OWN ResizeObserver that ALSO observed the
-long-lived #panel. #panel kept the observer alive, the observer's callback closure kept the OLD grid (items, pictures, listeners): one whole bag
-leaked per render of any bag (Tư trang, item pickers …). After ~1 h of play ~300 000 Blink nodes / ~19 000 listeners were held off-page (only
-~2 000 attached) and the renderer then wedged inside ONE native call on the next heavy step (main thread 100 % in native code, RSS +2 MB/s,
-Debugger agent never enables = no JS frame reachable). The tap before the wedge is only the straw (Bổng lộc «Bớt lễ nghĩa», «Chương 1 khép lại»
-Lui, kmrew Nhận → Sẵn sàng …).
-FIX = ONE rule (law 11): an observer made for ONE rendered element observes only that element's own subtree (and disconnects when the element is
-gone); a size outside it (#panel) is watched by the ONE shared observer made once (jinv kinvPanelWatch / KINV_RO). Family scan below.
-SECOND HOLDER (robot harness only, not the game): robot-rt.js page.evaluateHandle(...) ×7 with 0 dispose() → the inspector («(Global handles) /
-DevTools console») kept every tapped element + its replaced subtree (u5 heap: 15 174 of 15 759 detached nodes). Told U1d (patch editor):
-patch #25 disposes every handle. Real devices have no inspector → not a game bug, but it made robot rooms reach the wedge sooner.
+## VERDICT (26/11 ~10:15Z) — SSK review/coop-freeze-kmrew c20aaa6e6f5bf410c21d81daf8611b218d2b5c48 (base 5e013076; jksize/jinv unchanged on LIVE 02f564ae and on u4 7959f1b5)
+ROOT (the freeze): dev/build/jksize.js:757-761 kitScrollCues + its per-scroller MutationObserver. A scroller's own «Kéo xuống» cue was found
+with ":scope > .kscue", which ALSO matches the SIBLING strip (.kscue.sib) a SHORT child scroller puts right after itself. An outer short
+scroller (its observer left from an earlier tall pass) removed the child's strip as «its own cue» → the child re-created it → the outer
+observer re-ran the pass → … an endless MICROTASK loop: the page never yields again (page.evaluate hangs, the Debugger cannot attach), every
+lap builds a new strip and re-scans the whole dialog (CPU 100 %, renderer RSS runs away, reload does not free it). Needs nested scrollers both
+< 260 px = the Fold viewport on a few dialogs (Bổng lộc · Lễ nghĩa, chapter / ceremony / bình an mạch cards …) → only Fold seats, either role.
+NAMED BY: V8 CPU-profiler trace read out during the wedge (Tracing ring buffer, samples taken off-thread), 2 of 2 rooms: rr18 bare LIVE
+5e013076 seed 56 Fold host buổi 61 (108k samples) and rr17 u4 + jinv fix seed 66 Fold host buổi 61 (61k samples): ~95 % of samples in
+MutationObserver(childList) → kitScrollCues → its candidate filter / scrollHeight.
+FIX = ONE rule (law 11): a scroller only ever touches ITS OWN cue (":scope > .kscue:not(.sib)" in all 4 places) and an observer callback
+never re-runs the pass inside the same task (kscSoon: ONE coalesced pass per frame).
+SECOND (real) leak, also fixed (ee0824f4, same branch): dev/build/jinv.js:29 kitInvFit — every rendered bag grid's own ResizeObserver also
+observed the long-lived #panel → one leaked bag per render (366 nodes; ~300k after 1 h on LIVE). Made the page heavier, not the wedge root.
+HARNESS-ONLY holder: robot-rt.js evaluateHandle ×7 never disposed → the inspector kept every tapped element + subtree (u5 heap: 15 174 of 15 759
+detached nodes) — told U1d → patch #25 (dispose). Not a game bug.
 
-## EVIDENCE
-| what | base LIVE 5e013076 | fix ee0824f4 |
+## EVIDENCE (c20aaa6e)
+| check | base | fix |
 |---|---|---|
-| seed 56 real 2-seat room (Fold host / iPad guest, realtap 5edf+#16) | Fold host wedged at buổi 61, 3/3 (rr1 00:27Z, rr8 03:21Z, rr11 04:45Z) | buổi 61 passed → buổi 88, 0 SEATHANG, both-seat reload at 5067 s, 152 #kmrew taps |
-| retained Blink nodes after forced GC (seed 56 host) | 37k @b7 · 165k @b38 · 317k @b61 | 25k @b13 · 92k @b28 · 19.9k @b88 (GC reclaims) |
-| dev/test/observer-leak.js (40 bag renders) | FAIL 366 nodes/render (MUTATE) | PASS 19 / 34 / 31 (Fold ×3), -32 (iPad); refit on #panel resize still runs |
-| heap snapshot seed 56 b13 | 5 895 of 15 578 detached nodes under jinv RO closure `g` (next holder < 500) | 62 detached nodes in the test page (image caches) |
-Signature reproduced in isolation: a single long native call (JSON.stringify of a shared-reference DAG) gives exactly «Debugger.pause timed out,
-main thread spins in native, RSS climbs» — so «no JS frame» does not exclude a JS-triggered native wedge.
-Other captures, same family: G93J, Q4XY, KJ2Z, UVVH, YRTC, seg15 (buổi 61, Fold host), 9FVJ / DUMQ / DXT7 / RZZJ (U1d, buổi 73 Fold guest after
-«Chương 1 khép lại»). U1d's RZZJ ran u4 + this jinv diff and still wedged with 85k nodes: its heap (my u5 rr15 snapshot) = harness handles above.
-U3b-2 76JU (reload every ~12 buổi) passed the same steps → accumulated state, not the step.
-
-## FAMILY SCAN (every new ResizeObserver / MutationObserver in dev/build, LIVE)
-| observer | observes | per element? | outside its own subtree? | before | after |
-|---|---|---|---|---|---|
-| jinv:29 g.__kro | grid g, wear column, #panel | yes | YES (#panel) | LEAK | own subtree only + disconnect; #panel → shared KINV_RO |
-| jopic:325 g.__kotRO | g + its own option cards | yes | no | ok | unchanged |
-| jk2b:1172 pcp.__kpfo | pcp itself | yes | no | ok | unchanged |
-| jksize:760 MO per scroller e | e (childList) | yes | no | ok | unchanged |
-| jpromo:90 MO | body, disconnects when its scene is gone | yes | body, self-disconnect | ok | unchanged |
-| jbook:358 ro | host, destroy() disconnects | yes | host, has destroy | ok | unchanged |
-| j19, j59, jk2b:76/119/1017, jk3:244/728, jk4:597, jseal:105, jbd KBD_RO, jht HTRO, j79 kitOdRO, jk4 KIT_OPT_RO / kitPcMoreRO | stage / panel / mb or many targets | no (made once) | – | ok | unchanged |
-
-## GATES (fix ee0824f4)
-observer-leak ×3 Fold + iPad PASS · coop-keymove-unit 12/12 · coop-e2e SWAP=0 143/143 · SWAP=1 143/143 · coop-night: only the cases already failing on
-bare LIVE 5e013076 (4, 4b, 5, 6, 8; FOREMAN_B_STATUS 23:18Z) — no new case · sangbuoi-held ALL PASS alone (1st run under 3 rooms: G1 698 ms > 600, load only) ·
-quickcheck alone: main PASS (260 s, open 2.2 s, old save ok, perf new/live render 238/286 tab 571/646 buổi 3481/4395) · CORE GATES G4 90-button-crawl «Ô lưu · Lui» + FIX-6 FAIL 2 = the SAME on bare 5e013076 (pre-existing, known) · real 2-seat Fold host + iPad guest 88 buổi incl. reward cards + both-seat reload, no freeze ·
-shots Tư trang Fold 755x1000 + iPad 1180x820 @2 (outside git) looked 3×: bag fills as before (54 / 21 cells, identical to base), no overflow.
-## STATUS: ~95 % done (root named + fixed + proven on the deterministic seed) / game playable: long sessions no longer leak a bag per render.
+| dev/test/scroll-cue-loop.js (real kitScrollCues, nested short scrollers in #modal) | FAIL: page hangs, renderer OOM-killed | PASS ×3 Fold 755x1000, PASS iPad 1180x820 |
+| seed 56 real 2-seat room, Fold host / iPad guest | wedged at buổi 61, 4/4 (rr1, rr8, rr11, rr18) + rv QEC5 on ee0824f4 | rr20 (LIVE + fix) passed 61 → 73+, 0 SEATHANG; rr22 = SHARED harness 5edf + #27 (rv recipe incl. #25) passed 61 → 134, 0 SEATHANG, DOM 3–4k |
+| seed 66 Fold host on u4 (+ jinv) | rr17 wedged at 61 | rr19 u4 + fix passed 61 → 65+, 0 SEATHANG |
+| U3b-2 FJDK seed 18 Fold host on u4 + fix, unmitigated | seg15 wedged at 61 | passed 61, 73 → year 2 buổi 132, 0 SEATHANG, DOM 4–9k (saves 3de37fe3 u3br/seg18-FJDK-u5b-verify) |
+| dev/test/observer-leak.js (jinv) | FAIL 366 nodes/render | PASS 19–34 |
+| retained Blink nodes after GC, seed 56 host | 317k @ buổi 61 | 4–9k flat |
+Gates on c20aaa6e: coop-keymove-unit 12/12 · coop-e2e SWAP=0 143/143 · SWAP=1 143/143 · sangbuoi-held ALL PASS (alone; under 2–3 rooms it timed out) ·
+coop-night only the case-8 family already failing on bare LIVE · quickcheck (run on ee0824f4, jksize only adds the cue rule): main PASS,
+core G4 «Ô lưu · Lui» + FIX-6 identical on base (pre-existing) · shots Tư trang Fold + iPad @2 looked 3× (identical to base) · scroll cue still
+shows on long dialogs (scroll-cue-loop setup asserts the strip / cue exist).
+## FIXER ANSWER TO THE REVIEW BELOW
+BLOCKING 1 (ee0824f4 does not fix the freeze): AGREED — fixed by c20aaa6e (root above). The rv trace lead (kitOptFinal → kitOptSig): its
+hangcap-host-trace.txt has 398 of 400 samples with an EMPTY frame and a node table of only 21 nodes (the last-4000-chunks cut dropped the
+profile nodes) — the 2 kitOpt samples are noise. jopic checked for its own observer→mutate loop: kitOptFinal is signature-guarded, its only
+observer (g.__kotRO) defers by setTimeout → none. Proven on the rv's own recipe: rr22 (shared harness #27, seed 56) on c20aaa6e passed 61.
+## STATUS: ~98 % done (root named by trace, fixed as one rule, base FAIL / fix PASS in a seconds-long test and in 5 real rooms) / game playable: Fold long sessions no longer freeze.
 
 ## REVIEW — BIG rv (session_01N1tNP5wTmDBC3yfeLwVTAj, opus, fresh, depth 3, START_CTX ~3 %) · 26/11 ~09:20Z · **FAIL (freeze root not proven); the jinv leak fix itself is good**
 PRIORITY #1 CHECK ('coop-freeze-kmrew'): OD 0 | ledger 0 | claims 7 | main 0 | review/* 1 (this branch) | archive 0 (brief prio1 line); reused fixer test observer-leak.js, play-leak/playperf libs, robot harness 5edf09f6 + shared realtap-B-5edf-patch.diff (#16 + #25), coop-title-leave.js from review/coop-f1-rejoin.
