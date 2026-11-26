@@ -20,4 +20,8 @@
  /* the words (VANPHONG: cổ trang, no %): «Sắc phong 5/32 tuần» · «Đại lễ 5/32 tuần» · «Sắc phong: tạm hoãn» */
  window.hudSacphongText=function(i){i=i||hudSacphongInfo();if(!i)return null;if(i.kind==="hoan")return{l:"Sắc phong",v:"tạm hoãn",s:"Sắc phong: tạm hoãn"};
   const l=i.kind==="dl"?"Đại lễ":"Sắc phong",v=`${i.done}/${i.total} tuần`;return{l,v,s:`${l} ${v}`}};
+
+ /* the slot's tap = the EXISTING promotion info (jts tsPromoPanel: the «Xét phẩm» box, conditions she still lacks); no panel of its own. Same guard as the «Xét phẩm» chip tap (jts) */
+ window.hudSacphongTap=function(e){try{if(e){e.stopPropagation();e.preventDefault()}const md=document.getElementById("modal");if(md&&!md.hidden)return false;
+  if(typeof tsPromoPanel!=="function"||(typeof tsBoxOn==="function"&&!tsBoxOn()))return false;tsPromoPanel(false);return true}catch(x){console.error("hudSacphongTap",x);return false}};
 })();
