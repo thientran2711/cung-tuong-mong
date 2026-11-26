@@ -42,12 +42,12 @@ const ROAD8={
    kc:x -> kc -> "" word by word. Keys: cn / ct = the two stage head-count groups (her household / the people above her) · maid = her personal
    maid's title (kitMaidTitle; no palace rank like «tam đẳng» outside) · sv_maid / sv_eunuch = the role word of other servants of her household. */
 const ROAD8_LAB={"":{aa_t:"Trong cung vừa qua",cn:"Cung nhân",ct:"Chí tôn",t_mus:"Nhạc sư Giáo phường",t_craft:"Ma ma Thượng công cục",t_rite:"Nữ quan Thượng nghi cục",t_vir:"Ma ma giáo tập",t_fee:"nữ quan",tch_cons:"1"},srv:{cn:"Đồng liêu"},
- kc:{aa_t:"Trong phủ vừa qua",cn:"Người hầu",ct:"Trưởng bối",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",
+ kc:{me:"Tiểu thư",aa_t:"Trong phủ vừa qua",cn:"Người hầu",ct:"Trưởng bối",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",
   /* teachers she can have at home (no palace office, no consort): t_mus = music / dance, t_craft = needlework / cooking, t_rite = letters / rites, t_vir = Tứ đức;
      tch_cons = 0: no consort teaches her before she is in the palace (law 6: she cannot reach them) */
   fame3:"Cả phủ nghe danh.",t_mus:"Nhạc sư",t_craft:"Ma ma trong phủ",t_rite:"Nữ sư",t_vir:"Nữ sư",t_fee:"nữ sư",tch_cons:"0"},
- "kc:dan":{aa_t:"Ở nhà vừa qua",fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},dtv:{aa_t:"Ở Dưỡng Tú viện vừa qua",cn:"Tú nữ cùng khóa",ct:"Ma ma giáo dưỡng",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",fame3:"Cả Dưỡng Tú viện nghe danh.",tch_cons:"0"},
- "kc:nc":{aa_t:"Trong cung cố quốc vừa qua",fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
+ "kc:dan":{me:"Thôn nữ",aa_t:"Ở nhà vừa qua",fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},dtv:{me:"Tú nữ",aa_t:"Ở Dưỡng Tú viện vừa qua",cn:"Tú nữ cùng khóa",ct:"Ma ma giáo dưỡng",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",fame3:"Cả Dưỡng Tú viện nghe danh.",tch_cons:"0"},
+ "kc:nc":{me:"Công chúa",aa_t:"Trong cung cố quốc vừa qua",fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
 /* DƯỠNG TÚ VIỆN (MAIN 150/151 order; place key dtv = review/ob-phu jmapz MAPZ_DTV, tú nữ lodging): a girl who lodges there as a tú nữ before phân cung
    (still on her home road, isKc, standing at dtv) is no palace woman and has no household there: cn = the tú nữ of her intake, ct = the ma ma who teach them. */
 function placeCtx(){const r=road8();if(r==="kc"){try{if(S&&S.place==="dtv")return "dtv"}catch(e){}}if(r!=="kc")return r;let d="";try{d=typeof kc2D==="function"?kc2D():(S.kc&&S.kc.kd)||""}catch(e){}
@@ -64,7 +64,10 @@ window.ROAD8_LAB=ROAD8_LAB;window.road8Lab=road8Lab;window.placeCtx=placeCtx;win
    of her: a dialog whose speaker is the emperor, the Thái hậu, a consort or a palace servant (figure rk emp / th / c<rank> / cold / sv<rung>, her own
    maid excepted) is not shown (the palace world goes on; she simply is not there). Her home pools (pid kc…: kcE, kc2Sel, jkc3 …) keep their speakers
    (the «Chiếu tuyển tú» read by the emperor's edict, the selection days). ONE gate: placeEvOk(m), run by showModal before a dialog is drawn. */
-function placeEvOk(m){try{if(!m||road8()!=="kc")return true;if(/^kc/i.test(String(m.pid||"")))return true;if(m.kind==="news"&&/^Tin trong cung/.test(m.t||""))return false;/* the palace's own news sheet of the buổi */const w=m.who;if(!w||typeof w!=="object")return true;
+function placeEvOk(m){try{if(!m||road8()!=="kc")return true;if(/^kc/i.test(String(m.pid||"")))return true;if(m.kind==="news"&&/^Tin trong cung/.test(m.t||""))return false;/* the palace's own news sheet of the buổi */if(m.wwin)return false;/* a palace world-care card (jworldc wcCard «Thế sự trong cung»: palace maids / consorts / the court; its speaker is the role-A face, which may be anyone) */const w=m.who;if(!w||typeof w!=="object")return true;
+ /* HER OWN figure (pMe: w ["me"], rk c0) is never a palace person (RV-OB-NGOAICUNG FAIL 1: the «Tiền truyện» cards vanished); its tag is her home station
+    now (FAIL 2: a figure made before the home road began kept a palace rank) */
+ if(Array.isArray(w.w)&&w.w.includes("me")){try{const t=placeW("me");if(t)w.rw=t}catch(e){}return true}
  const rk=String(w.rk||"");if(!/^(emp|th|c\d|cold|sv)/.test(rk))return true;
  if(S.maid&&/^sv/.test(rk)&&typeof pMaid==="function"&&w.src===pMaid().src)return true;return false}catch(e){return true}}
 window.placeEvOk=placeEvOk;
@@ -176,3 +179,6 @@ window.placePalP=placePalP;
 (function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(t,b){try{if(road8()==="kc"){if(t==="Trong cung vừa qua")t=placeW("aa_t")||t;
  if(b&&b.rel&&typeof relSnap==="function"){const now=relSnap(),rel={},T=String(t||"");for(const v of (typeof rivals!=="undefined"&&rivals)||[]){if(!v||!v.id)continue;
   rel[v.id]=v.name&&T.includes(v.name)&&b.rel[v.id]?b.rel[v.id]:now[v.id]}b=Object.assign({},b,{rel})}}}catch(e){}return r0.apply(this,[t,b].concat([].slice.call(arguments,2)))};window.resultShow=resultShow})();
+/* HER TAG AT HOME (RV-OB-NGOAICUNG FAIL 2, k2 wording family): pMe().rw = her home station from ROAD8_LAB «me» (Tiểu thư / Thôn nữ / Công chúa / Tú nữ),
+   never a palace rank, wherever her figure is drawn (dialogs, cards, stage) */
+(function(){if(typeof pMe!=="function")return;const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(road8()==="kc"&&f&&!S.out){const t=placeW("me");if(t)f.rw=t}}catch(e){}return f};window.pMe=pMe})();
