@@ -61,7 +61,7 @@ function goWhere(x){try{if(!x||!x.tab)return;const b=document.querySelector(`#ta
 /* ---------- chapter detail (kit panel, event frame) ---------- */
 function art(){try{return{src:typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k),label:road()}}catch(e){return null}}
 function nextRows(N){return N.map((x,i)=>[`Việc ${i+1}`,`<b>${esc(x.t)}</b><br><span class="past">${esc(x.why)} · chạm: ${esc(x.where)}</span>`,""])}
-function nextOpts(N){return N.map(x=>({n:`Đi làm: ${x.t}`,fx:{},x:`tới ${x.where}`,go:()=>{setTimeout(()=>goWhere(x),80)}}))}
+function nextOpts(N){return N.map(x=>({n:`Đi làm: ${x.t}`,fx:{},nav:1/* goal-links r2: navigation, no result card (jglink NAV) */,x:`tới ${x.where}`,go:()=>{setTimeout(()=>goWhere(x),80)}}))}
 function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  const sec=[{h:"Mục tiêu chương",rows:[["Chương",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]]}];
  /* the 14-chapter frame of a new life (jst14): which part she is in, chapters left */

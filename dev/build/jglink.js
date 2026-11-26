@@ -16,10 +16,11 @@ const srv=()=>{try{return typeof isSrv==="function"&&isSrv()}catch(e){return fal
 function pedRec(){try{const R=S.roster;if(R&&R.P&&R.P["c:ped"]&&typeof j95kh==="function"){const e=R.P["c:ped"][j95kh()];if(e)return e}}catch(e){}return null}
 /* where the Nội vụ phủ eunuch is NOW (the one ledger, j95); Nội vụ phủ when the ledger is off */
 function pedAt(){const e=pedRec();if(e&&e[0])return e[0];try{if(typeof places==="function"&&places().some(x=>x.k==="nvp"))return "nvp"}catch(e){}return ""}
-function pedPerson(){const c=S&&S.court&&S.court.ped;let kn=true;try{kn=!!(c&&c.name)&&(typeof k61Named!=="function"||k61Named(c))}catch(e){}
- return {kind:"peddler",name:kn?c.name:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:kn?"Thái giám Nội vụ phủ":"chưa biết tên · người bày hàng ở Nội vụ phủ",
-  /* before she knows his name there is no painting of him (the kit stranger silhouette is female-only in kitPanel: KIT REQUEST to KK44); the place picture carries the panel */
-  nofig:!kn}}
+/* r2 (MAIN LOOK: «???» / «chưa biết tên» reached her; owner asked to NAME him): he is a named person from the first day (j61 k61SeedChiTon seeds
+   his name + face), so the panel always shows his name and painting (kit person column) */
+function pedPerson(){const c=S&&S.court&&S.court.ped;return {kind:"peddler",name:c&&c.name?`Thái giám ${c.name}`:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"lo mua đồ ở Nội vụ phủ",
+  /* his painting = the SAME full figure as his shop (jinv kitShopNvp stage, the kit seller form {__fig,__cap,__role}); the kitPanel subject path drew the female stranger silhouette */
+  stage:{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:c&&c.name||"",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}}}
 function hh(){try{return typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0].alive?rivals[0]:null}catch(e){return null}}
 const WHO={
  ped:()=>({p:pedPerson(),k:pedAt(),does:(pedRec()||[])[3]||"bày hàng mua từ ngoài cung",sell:1}),
@@ -68,14 +69,14 @@ function glHow(T){if(!T||!S||S.dead)return;const base=Q[0]&&Q[0].kit&&Q[0].kit.k
  if(T.why)C.push(["Vì sao",esc(T.why)]);if(C.length)sec.push({h:"Cách làm",rows:C});
  const close=()=>{if(base){const i=Q.indexOf(base);if(i>=0)Q.splice(i,1)}};
  const opts=[];
- if(k&&k!==S.place){const kh=walkK(k);opts.push({n:"Đi tới",fx:{},x:`tốn: ${kh} khắc · thành: tới ${placeName(k)}${W&&W.p?`, gặp ${W.p.name}`:""}`,go:()=>{close();setTimeout(()=>glGo(T),60)}});
-  opts.push({n:"Xem Dư đồ",fx:{},x:`${placeName(k)} sáng lên trên Dư đồ`,go:()=>{close();setTimeout(()=>glMap(T),60)}})}
- else if(k&&k===S.place&&W&&W.sell)opts.push({n:"Xem hàng",fx:{},x:`${W.p.name} bày hàng ngay đây`,go:()=>{close();setTimeout(()=>glShop(),60)}});
- else if(T.tab&&typeof kitGoalGo==="function")opts.push({n:"Đi làm",fx:{},x:"mở đúng chỗ bấm",go:()=>{close();setTimeout(()=>kitGoalGo({tab:T.tab,act:T.act,t:T.t}),80)}});
- opts.push({n:"Đóng",fx:{},go:()=>{}});
+ if(k&&k!==S.place){const kh=walkK(k);opts.push({n:"Đi tới",fx:{},nav:1,x:`tốn: ${kh} khắc · thành: tới ${placeName(k)}${W&&W.p?`, gặp ${W.p.name}`:""}`,go:()=>{close();setTimeout(()=>glGo(T),60)}});
+  opts.push({n:"Xem Dư đồ",fx:{},nav:1,x:`${placeName(k)} sáng lên trên Dư đồ`,go:()=>{close();setTimeout(()=>glMap(T),60)}})}
+ else if(k&&k===S.place&&W&&W.sell)opts.push({n:"Xem hàng",fx:{},nav:1,x:`${W.p.name} bày hàng ngay đây`,go:()=>{close();setTimeout(()=>glShop(),60)}});
+ else if(T.tab&&typeof kitGoalGo==="function")opts.push({n:"Đi làm",fx:{},nav:1,x:"mở đúng chỗ bấm",go:()=>{close();setTimeout(()=>kitGoalGo({tab:T.tab,act:T.act,t:T.t}),80)}});
+ opts.push({n:"Đóng",fx:{},nav:1,go:()=>{}});
  /* his painting = the kit panel's person column (spec.subject → kitFace, the same slot every person panel uses) */
  let head;try{if(k&&typeof kitPlaceArt==="function"){const a=kitPlaceArt(k);if(a&&a.src)head={src:a.src,label:placeName(k)}}}catch(e){}/* the place picture in the head band: where she must go */
- kitPanel({kind:"info",look:1,title:"Cách làm",sub:T.t,subject:W&&W.p&&!W.p.nofig?W.p:undefined,headArt:head,sections:sec,opts},true);showModal()}
+ kitPanel({kind:"info",look:1,title:"Cách làm",sub:T.t,subject:W&&W.p&&!W.p.stage?W.p:undefined,stage:W&&W.p&&W.p.stage?[W.p.stage]:undefined,headArt:head,sections:sec,opts},true);showModal()}
 window.glHow=glHow;
 /* his wares: standing at Nội vụ phủ with him there = his own «Để ta xem» (jact talkOpts peddler → kitShopNvp); elsewhere nothing opens (she taps him herself) */
 function glShop(){try{if(Q.length||!S||S.dead)return;const here=S.visit&&S.visit.people&&S.visit.people.some(x=>x.kind==="peddler");if(here&&S.place==="nvp"&&typeof kitShopNvp==="function"){kitShopNvp();render()}}catch(e){console.error("glink shop",e)}}
@@ -92,6 +93,19 @@ function tapGL(e){const a=e.target.closest&&e.target.closest("[data-gl]");if(!a)
 /* window capture: runs before the kit tap-word handler (j79, document capture) so a goal link opens «Cách làm», not the word popover */
 window.addEventListener("click",e=>{try{tapGL(e)}catch(x){}},true);
 window.addEventListener("keydown",e=>{try{if(e.key==="Enter"||e.key===" ")tapGL(e)}catch(x){}},true);
+/* ---------- r2: NAVIGATION IS NOT A CHOICE (MAIN LOOK; KIT REQUEST KK44 option flag `nav`) ----------
+   An option {nav:1} only moves her eye (open a tab, ring a place, walk her there, close): no «KẾT QUẢ … không được gì, cũng không mất gì» card and no
+   «Cách làm: Xem Dư đồ» log line. Interim until KK44 ships the kit flag; whole family = every pure navigation option: this panel (Đi tới / Xem Dư đồ /
+   Xem hàng / Đi làm / Đóng), jgoal «Đi làm: …», jge «Xem bảng vàng». A real act that follows (her arrival bow at a palace, j77) keeps its own card. */
+let NAVH=0;
+if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){let nav=false;try{const c=Q[0]&&Q[0].opts&&Q[0].opts[i];nav=!!(c&&(c.nav||(/^Đóng$/.test(String(c.n||"").trim())&&!(c.fx&&Object.keys(c.fx).length))))/* a bare close button is navigation too (whole family) */}catch(e){}
+  if(!nav)return c0.apply(this,arguments);NAVH++;try{return c0.apply(this,arguments)}finally{setTimeout(()=>{NAVH=Math.max(0,NAVH-1)},0)}};window.chooseM=chooseM}
+if(typeof logChoice==="function"){const l0=logChoice;logChoice=function(m,c){if(c&&c.nav||NAVH)return;return l0.apply(this,arguments)};window.logChoice=logChoice}
+if(typeof resultShow==="function"){const r0=resultShow;resultShow=function(){if(NAVH)return;return r0.apply(this,arguments)};window.resultShow=resultShow}
+/* r2: an old save whose eunuch is called «Tiểu Thái Tử» (= «little crown prince»; «Thái» left the jname pool) gets a fresh eunuch name, once (jname nmNew) */
+function fixEunName(){try{if(!S||typeof nmNew!=="function")return;const L=[S.court&&S.court.ped].concat((S.staff||[]).filter(x=>x&&x.role==="eunuch"));
+ for(const o of L)if(o&&o.name==="Tiểu Thái Tử")o.name=nmNew("eun")}catch(e){}}
+if(typeof normAll==="function"){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);fixEunName();return r};window.normAll=normAll}
 /* ---------- (2) «Mua bán» on the Dư đồ: every place where she can buy NOW — its own tag (level 2 / no zones) and the zone tag holding it (level 1) ---------- */
 function shopKeys(){const s=new Set();try{if(srv())return s;const L=places().map(x=>x.k);if(L.includes("nvp"))s.add("nvp");const k=pedAt();if(k&&k!=="home")s.add(k)}catch(e){}return s}
 window.glShopKeys=()=>[...shopKeys()];
@@ -101,7 +115,9 @@ function markMap(h){try{if(h.indexOf('class="mspot')<0)return h;const K=shopKeys
   const hit=z?(sp.dataset.mzk||"").split(/\s+/).some(x=>K.has(x)):K.has(k);if(!hit||sp.classList.contains("kglban"))continue;
   sp.classList.add("kglban");ch=1;sp.title=(sp.title||"")+" · Mua bán";
   const lab=sp.querySelector(".mlab");if(lab&&icon&&!lab.querySelector('img.kplic[src*="/bac."],img.kplic[src$="bac.webp"]')){if(z||!lab.querySelector(".kplic"))lab.insertAdjacentHTML("afterbegin",icon)}
-  let m=sp.querySelector(":scope>.mmeta");if(!m){m=document.createElement("span");m.className="mmeta";sp.appendChild(m)}if(!/Mua bán/.test(m.textContent))m.textContent=(m.textContent?m.textContent+" · ":"")+"Mua bán"}
+  /* r2 (MAIN LOOK: «· Mua bán» in the grey info row was tiny): the word sits IN the kit paper name slip (.mlab, 13 px ink, §34.1d) as its own line
+     under the name, so it reads like the name; interim until KK44 kitMapMark (its own mark + a visible legend row) */
+  if(lab&&!lab.querySelector(".kglmb"))lab.insertAdjacentHTML("beforeend",'<br class="kglmb">Mua bán')}
  let out=ch?t.innerHTML:h;
  if(icon&&out.indexOf('class="mleg"')>=0&&out.indexOf("kglleg")<0)out=out.replace(/(<span class="mleg">)/,`$1<span class="kglleg">${icon.replace('class="ic kplic"','class="ic"')}Mua bán: ${esc([...K].map(placeName).join(", "))} · </span>`);
  return out}catch(e){console.error("glink map",e);return h}}
