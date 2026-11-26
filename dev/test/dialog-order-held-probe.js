@@ -21,17 +21,17 @@ const ST=`(()=>{const hid=el=>Object.getOwnPropertyDescriptor(HTMLElement.protot
  if(await openMaid()){out.tabs=await p.evaluate(()=>[...document.querySelectorAll('.kfoc button.pct')].map(b=>b.textContent.trim()));
   out.cards={};for(const t of out.tabs){await tab(t);out.cards[t]=await p.evaluate(()=>[...document.querySelectorAll('.kfoc button.kfoc-b')].map(b=>b.textContent.trim().replace(/\s+/g,' ').slice(0,30)))}}
  /* P1: owner case clean */
- if(await openMaid()){await tab('Mưu kế');out.P1=await tapCard('Sai đi dò la');if(SH)await p.screenshot({path:SH+'/P1.png'})}
+ if(await openMaid()){await tab('Mưu kế');out.P1=await tapCard(/[Dd]ò la/);if(SH)await p.screenshot({path:SH+'/P1.png'})}
  /* P2: a GAME card already held behind the view, then her tap on «Sai đi dò la» */
  if(await openMaid()){await p.evaluate(()=>{pushModal({t:'GAMECARD-TEST',h:'x',opts:[{t:'Được',f:()=>''}]});showModal()});await sleep(500);out.P2pre=await p.evaluate(ST);
-  await tab('Mưu kế');out.P2=await tapCard('Sai đi dò la');if(SH)await p.screenshot({path:SH+'/P2.png'});
+  await tab('Mưu kế');out.P2=await tapCard(/[Dd]ò la/);if(SH)await p.screenshot({path:SH+'/P2.png'});
   /* close whatever is on top by its first option, then the view by ✕/back, see the order of the rest */
   const seq=[];for(let k=0;k<6;k++){const s=await p.evaluate(ST);seq.push(s);if(!s.modal&&!s.q.length)break;
    if(s.modal){const o=p.locator('#modal .opt:visible').last();if(await o.count())await o.click().catch(()=>{});else break}
    else{const x=p.locator('.kfoc .kfoc-x, .kfoc button[aria-label="Đóng"], .kfoc .kback').first();if(await x.count())await x.click().catch(()=>{});else{await p.keyboard.press('Escape')}}
    await sleep(900)}out.P2seq=seq}
  /* P3: game card posted WHILE picker open? -> post card after her tap, it must not jump over her picker */
- if(await openMaid()){await tab('Mưu kế');const r=await tapCard('Sai đi dò la');await p.evaluate(()=>{pushModal({t:'GAMECARD-LATE',h:'x',opts:[{t:'Được',f:()=>''}]})});await sleep(600);out.P3={afterTap:r,afterPost:await p.evaluate(ST)}}
+ if(await openMaid()){await tab('Mưu kế');const r=await tapCard(/[Dd]ò la/);await p.evaluate(()=>{pushModal({t:'GAMECARD-LATE',h:'x',opts:[{t:'Được',f:()=>''}]})});await sleep(600);out.P3={afterTap:r,afterPost:await p.evaluate(ST)}}
  /* P4: talk path «Trò chuyện» + other tabs' first enabled card on top */
  if(await openMaid()){out.P4=await tapCard('Trò chuyện');}
  out.pe=pe;console.log(JSON.stringify(out,null,1));await b.close()})();
