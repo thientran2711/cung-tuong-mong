@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f2d4961c+","t":"2026-11-26T10:07Z","c":"Bớt minigame: điểm trang một lần bấm theo Dung (còn nút «Tự tay điểm trang»); tát và né thành một lần gieo; «Học nhanh» lên Tùy duyên; chăm…","b":"644cee39e4f6","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"0f78da43+","t":"2026-11-26T10:16Z","c":"Bớt minigame: điểm trang một lần bấm theo Dung (còn nút «Tự tay điểm trang»); tát và né thành một lần gieo; «Học nhanh» lên Tùy duyên; chăm…","b":"582ede7d40f6","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -30533,7 +30533,9 @@ function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=
  const bgk=g.kind&&typeof KG82_MGBG!=="undefined"?KG82_MGBG[g.kind]:"",bgu=bgk?(typeof IMG_U==="function"?IMG_U(bgk):bgk):"";
  return `<div class="kgfig${an?" kgf-anim":""}${bgu?" kgf-bg":""}" data-kgf="${p===S?"me":"other"}"${bgu?` data-mgbg="${g.kind}" style="--mgbg:url('${bgu}')"`:""}>${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
 function kitGameFigRefresh(p,o){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,Object.assign({cap:false},o&&o.src?{src:o.src}:{}));/* kit-dress-picker: o.src = a preview figure (the dress she is trying on) */if(!f)return;
- const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
+ /* E95: the old figure was named `o` here too — the block-scoped const shadowed the option `o` above (TDZ ReferenceError, swallowed by catch), so this refresh
+    NEVER ran: the game frame's figure column kept the first picture (dress picker preview, any caller). Renamed; errors are logged, not swallowed. */
+ const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,old=c.querySelector(".kesf");if(!n)return;if(old)old.replaceWith(n);else c.prepend(n)}catch(e){console.error("kitGameFigRefresh",e)}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
 function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v);if(k==="score"){KG82.lastScore=v;kitGameMark(v)}if(k==="time"){kitGameClock(v);kitGameMark(KG82.lastScore)}}
 /* KIT §13.9 kitGameMark (review/kit-mark, owner OD 20/11 ~07:15Z): the ONE small «n/10» chip in the title line beside the clock, in EVERY kind (all go through kg82Set -> here).
@@ -33895,7 +33897,8 @@ function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x
         only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it at once;
      3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): NO confirm (OD 24/11 ~08:08Z), straight
         the caller's OWN lose path with 0/10 — during play KG82.quit() (kg82Play / sgEng / j92 / jroute / jtoil end their run with 0), on the rules
-        screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock); «Hướng dẫn» is put back first.
+        screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock).
+     During «Hướng dẫn» none of 0–3 runs (E95, owner OD 26/11 ~01:25Z): the ✕ = «Về luật chơi».
    Callers never draw their own back button;
    kg82Close clears back / quit / xdo. Test: node dev/test/mg-back.js. */
 function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector(".kit-x[data-kitx=kgback]"))return;const h=d.querySelector(".kph");
@@ -33903,6 +33906,9 @@ function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector("
  else{d.insertAdjacentHTML("afterbegin",html);d.firstElementChild.classList.add("kxabs")}
  d.querySelector(".kit-x[data-kitx=kgback]").addEventListener("click",e=>{e.stopPropagation();e.preventDefault();kg82Back()})}catch(e){console.error("kg82BackX",e)}}
 function kg82Back(){if(!kg82El())return;
+ /* E95 (owner OD 26/11 ~01:25Z «bấm vào hướng dẫn … bấm quay lại thì phần thi 0 điểm luôn»): the ✕ «Quay lại» during «Hướng dẫn» = «Về luật chơi» — the guided round
+    ends and the SAME rules screen comes back unchanged (nothing played, nothing scored, nothing charged); it never gives the round up. */
+ if(KG82.tut&&typeof KG82.tut.back==="function"){KG82.tut.back();return}
  if(typeof KG82.backPre==="function"&&KG82.phase!=="play"&&KG82.phase!=="result"){const f=KG82.backPre;KG82.backPre=null;KG82.payOnGo=null;kg82Close();try{f()}catch(e){console.error(e)}
   /* jaudit (b)/(c): the cost it holds pending for this game is dropped — a game closed unplayed costs nothing — so the next act is not blocked */
   window.__aaPend=null;window.__aaTitle=null;try{if(S&&S.mg&&S.mg.cost)S.mg=null;save();render()}catch(e){}return}
@@ -34075,7 +34081,7 @@ function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);cons
  const env={kind:s.kind,lv:ease,tut:1,v:s.v,zw:s.zw,
   hud:o=>{if(!o||o.round==null)return;const m=/(\d+)\s*\/\s*(\d+)/.exec(String(o.round));if(!m)return;const a=+m[1],b=+m[2];if(b>0&&a-1>=Math.max(1,Math.ceil(b*T.part)))setTimeout(finish,500)},
   end:()=>finish()};
- const TU={stop:()=>cleanup()};KG82.tut=TU;KG82.run={stop:()=>cleanup()};/* ✕ / Esc while the guided round runs: kg82Close stops it and nothing is kept */
+ const TU={stop:()=>cleanup(),back:()=>{over=true;restore(false)},el:d};/* E95: TU.back = «Về luật chơi» (kg82Back / kitModalClose / Esc / outside tap during the guided round) */KG82.tut=TU;KG82.run={stop:()=>cleanup()};/* ✕ / Esc while the guided round runs: kg82Close stops it and nothing is kept */
  back.querySelector("button").onclick=()=>{over=true;restore(false)};
  guard=setTimeout(finish,T.ms);
  const loop=now=>{if(dead)return;let p=null,h=null;try{h=KG82.hint?KG82.hint():null;p=h?null:kgTutPt(KG82.peek&&KG82.peek(),now)}catch(e){}
@@ -34089,6 +34095,15 @@ function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);cons
  if(s.kind&&KG82_KIND[s.kind])kg82Preload(s.kind).then(go);else go();
  KG82.tutSteps=()=>steps}
 function kgTutDrop(){if(KG82.tut&&KG82.tut.stop){try{KG82.tut.stop()}catch(e){}}}/* a screen that leaves the rules screen without «Sẵn sàng» (quick roll, redraw, ✕) drops a running guided round */
+/* E95 (owner OD 26/11 ~01:25Z, whole family): while «Hướng dẫn» runs, EVERY kit ✕ of the layer that holds the game — the game frame's «Quay lại», a dialog's
+   panel ✕ (kitXAdd, own close functions included), #mclose — means «Về luật chơi»: caught first (capture), the guided round stops, the same rules screen comes
+   back, nothing played / scored / charged / closed. Esc and a tap outside reach the same TU.back through kitModalClose (jk4). Test: node dev/test/mghelp-back.js */
+document.addEventListener("click",e=>{const t=KG82.tut;if(!t||typeof t.back!=="function"||!t.el||!t.el.isConnected)return;const x=e.target&&e.target.closest&&e.target.closest(".kit-x,#mclose");if(!x)return;
+ const L=x.closest("#modal,#ov")||x.closest(".kgame");if(!L||!(L===t.el||L.contains(t.el)))return;e.preventDefault();e.stopImmediatePropagation();t.back()},true);
+/* the game frame (#ov) during «Hướng dẫn»: Esc and a tap on the dimmed ground outside the frame = «Về luật chơi» too (a dialog's Esc / outside go through kitModalClose) */
+document.addEventListener("keydown",e=>{const t=KG82.tut;if(e.key!=="Escape"||!t||typeof t.back!=="function"||!t.el||!t.el.isConnected)return;const ov=$("ov");if(!ov||ov.hidden||!ov.contains(t.el))return;
+ const M=document.getElementById("modal");if(M&&!M.hidden)return;e.preventDefault();e.stopImmediatePropagation();t.back()},true);
+document.addEventListener("click",e=>{const t=KG82.tut;if(!t||typeof t.back!=="function"||!t.el||!t.el.isConnected)return;const ov=$("ov");if(!ov||e.target!==ov||!ov.contains(t.el))return;e.preventDefault();e.stopImmediatePropagation();t.back()},true);
 window.kgReady=kgReady;window.kgTut=kgTut;window.kgTutDrop=kgTutDrop;window.KG82_DEMO=KG82_DEMO;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7.2",title:"kg82Guide · dòng dẫn một câu trên mọi màn chơi (chờ / chạm ngay / nguy)",where:"mọi trò tài nghệ có một câu dẫn theo trạng thái trên khung vẽ (Bắn cung, Tát, Né, Nấu, Hái sen, Đối, Hoa điền, Thái hậu …): viên thuốc kem viền màu — nâu = chờ, xanh = chạm ngay, đỏ = nguy; chữ tự co cho vừa. Màu lấy từ token, không trò nào tự gõ màu",
  html:()=>{requestAnimationFrame(()=>{try{document.querySelectorAll("canvas[data-kgguide-demo]").forEach(c=>{const W=c.width=Math.min(520,c.parentNode.clientWidth||520),H=c.height=150,g=c.getContext("2d");[["Chờ mũi ngắm vào giữa hồng tâm, rồi chạm","wait"],["Chạm ngay!","go"],["Đòn đang tới · tránh ngay","bad"]].forEach(([t,k],i)=>kg82Guide(g,t,W/2,26+i*44,k,14,W-16))})}catch(e){}});return `<div class="kgbox"><canvas data-kgguide-demo style="width:100%;max-width:520px;display:block;margin:0 auto"></canvas></div>`}})}catch(e){}
@@ -48714,7 +48729,10 @@ function kitModalCloser(){const M=document.getElementById("modal");if(!M||M.hidd
  const m=typeof Q!=="undefined"?Q[0]:null;const onQ=m&&!M.classList.contains("kptitle");
  if(onQ&&m.opts){const i=kitCancelIx(m);if(i>=0)return()=>chooseM(i)}
  return null}
-function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
+function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;
+ /* E95: a guided round «Hướng dẫn» running inside a dialog (Chăm thú, Chăm cây …): the dialog ✕ / Esc / tap outside first puts its rules screen back (never closes or ends the game) */
+ try{const t=typeof KG82!=="undefined"&&KG82.tut;if(t&&typeof t.back==="function"&&t.el&&M.contains(t.el)){t.back();return true}}catch(e){console.error(e)}
+const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
 function kitCloseSync(){try{const M=document.getElementById("modal");if(!M)return;const dlg=M.querySelector(".dlg");if(!dlg)return;
  const f=M.hidden?null:kitModalCloser();M.__kx=f;const kx=f?"1":"0";if(M.dataset.kx!==kx)M.dataset.kx=kx;
  const old=dlg.querySelectorAll(".kit-x[data-kitx=panel]");
@@ -60250,7 +60268,13 @@ function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["shoe","Giày","giayhoa"]];
 function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(w.k),tip:w.n}:null}
  const e=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);if(!e)return null;let a=null;try{a=itemArt(e.k)}catch(x){}return{src:a?a.src:keqArt(e.k),name:itm(e.k).n,grade:a?a.grade|0:0,lux:luxVal(e.k),tip:itm(e.k).n}}
-function toilPorAt(rank){const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"por")}catch(e){return""}finally{figTierOf=f0}}
+/* E95 (owner OD 26/11 ~01:25Z «bấm chọn mà không thấy mặc», whole family = every "her figure at the dress's tier" picture: dress preview kitDressFigSrc,
+   mirror portrait toilPorAt, mirror figure toilFigAt): the stand-in figTierOf answered the raw rank (0–7), but her real figTierOf (j66, with an identity S.pid)
+   answers the 1-based dress TIER (rank+1) — so every preview showed the dress one tier LOWER than the one she wears (a phẩm-2 robe drew as phẩm 1, and a
+   phẩm-1 / phẩm-2 swap did not change the picture). toilTierAt asks her real figTierOf and moves it by the rank difference, so the scale always matches. */
+function toilTierAt(f0,rank){return function(w){const t=f0.apply(this,arguments);if(w!==S)return t;if(t==null||t<0)return t;
+ try{if(typeof isSrv==="function"&&isSrv())return t}catch(e){}const cur=S.rank||0;return Math.max(0,t-Math.min(7,cur)+Math.min(7,rank))}}
+function toilPorAt(rank){const f0=figTierOf;try{figTierOf=toilTierAt(f0,rank);return figFor(S,"por")}catch(e){return""}finally{figTierOf=f0}}
 function toilRankOfFile(f){const m=/-t(\d)(?:[-.]|$)/.exec(String(f||""));return m?+m[1]:0}
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
 function toilDressUI(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;const st=TOIL.st;toilMkPre();
@@ -60264,11 +60288,13 @@ function toilDressUI(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidde
  box.innerHTML=`<div class="toilw toil1">`+kitDressPicker({p:S,rank:por.rank,head:(mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên chỉnh tề, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:""),body:`<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true})})}`+`<div class="toildet">${toilDetHTML(sel,sum)}</div></div>`})+`</div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
  try{kitInvFit()}catch(e){}
- try{kitGameFigRefresh()}catch(e){}
+ /* E95 (owner OD 26/11 ~01:25Z «bấm chọn mà không thấy mặc»): the frame's figure column is the LIVE preview of the dress she has on (kitDressPicker §60.2) —
+    this refresh used to run with no src and put her plain rank figure back over it, so a new dress never showed on her */
+ try{const fs=kitDressFigSrc(S,por.rank);kitGameFigRefresh(S,fs?{src:fs}:undefined)}catch(e){}
  $("toilok").onclick=()=>toilDressDone(false);$("toilkeep").onclick=()=>toilDressDone(true)}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('[data-kinvkey="toil"][data-kinvtab]');if(t)setTimeout(()=>{if(TOIL.st&&!TOIL.st.dv)toilDressUI()},0)},true);
 /* owner 15/11 "Khi bấm vào món đồ không thấy hiện thông tin món đồ": a tap SELECTS the cell (gold ring, KIT §70) and shows its kitItemDetail
-   under the chest with the act button — Cài / Mặc / Đeo for a piece in the chest, Tháo for one she wears. Nothing is worn on a blind tap. */
+   under the chest with the act button — Cài / Mặc / Đeo for a piece in the chest, Tháo for one she wears. (E95, owner OD 26/11 ~01:25Z: a tap on a chest piece now also WEARS it at once — see toilPick.) */
 function toilSlotOf(k){const w=WD_ITEMS[k];if(w)return w.sl;const it=IT[k];return it&&it.sl||null}
 function toilSelFind(items){const s=TOIL.st&&TOIL.st.sel;if(!s)return null;
  if(s.sl){const it=toilWorn(s.sl);return it?{sl:s.sl}:null}
@@ -60280,7 +60306,12 @@ function toilDetHTML(sel,sum){const ref=toilRefOfSel(sel);if(!ref)return typeof 
  let b;if(R.worn){b=sl==="y"?pbtn(`data-toilact="off"`,"Tháo","thành: cất vào rương","y phục chỉ thay: chọn bộ khác trong rương rồi chạm Mặc"):pbtn(`data-toilact="off"`,"Tháo",`thành: cất vào rương, ô ${slN?slN[1]:""} để trống`,"")}
  else{const n=sl==="tram"?"Cài":sl==="y"?"Mặc":"Đeo";b=pbtn(`data-toilact="wear"`,n,`thành: vào ô ${slN?slN[1]:""}${fx?", "+fx:""}`,"")}
  return kinlDetail(R,{key:"toil",sum,acts:[b]})}
-function toilPick(x){try{const g=x&&x.g;if(!g)return;const s=TOIL.st.sel;const same=s&&!s.sl&&s.k===g.k&&!!s.wdSlot===!!g.wdSlot&&(s.wdSlot||!!s.w===!!g.w);
+/* E95 (owner OD 26/11 ~01:25Z «Buổi sáng mặc y phục trong trang điểm không được, bấm chọn mà không thấy mặc»): a tap on a piece IN THE CHEST wears it at once
+   (shown = worn: the «Đang mặc» slot, her figure at the dress's tier, the saved look) and keeps it selected with its detail (owner 15/11: a tap shows the piece's info)
+   — the detail then offers «Tháo». A tap on a piece she already wears only selects it (detail + «Tháo»). The old two-step tap → «Mặc» is gone. */
+function toilPick(x){try{const g=x&&x.g;if(!g)return;const worn=!!g.wdSlot||!!g.w;
+ if(!worn){TOIL.st.sel={k:g.k,wdSlot:null,w:false};toilAct("wear");return}
+ const s=TOIL.st.sel;const same=s&&!s.sl&&s.k===g.k&&!!s.wdSlot===!!g.wdSlot&&(s.wdSlot||!!s.w===!!g.w);
  TOIL.st.sel=same?null:{k:g.k,wdSlot:g.wdSlot||null,w:!!g.w};sfx("tap")}catch(e){console.error(e)}toilDressUI()}
 function toilSlotPick(x){try{const s=TOIL.st.sel;TOIL.st.sel=x.item&&!(s&&s.sl===x.k)?{sl:x.k}:null;sfx("tap")}catch(e){console.error(e)}toilDressUI()}
 function toilAct(a){try{const s=TOIL.st.sel;if(!s)return;let ref=null;
@@ -60288,7 +60319,7 @@ function toilAct(a){try{const s=TOIL.st.sel;if(!s)return;let ref=null;
   const R=ref&&kitItemRef(ref);if(!R)return;const sl=toilSlotOf(R.k);const tsl=sl==="hair"?"tram":sl;
   if(a==="off"){if(R.wd){if(sl==="tram")wdTakeOff(S,"tram")}else{const i=S.inv.indexOf(R.e);if(i>=0&&S.inv[i].w)wear(S,i)}TOIL.st.sel=null}
   else{if(R.wd){const i=S.inv.indexOf(R.e);if(i>=0)wdWear(S,i)}else{const i=S.inv.indexOf(R.e);if(i>=0&&!S.inv[i].w)wear(S,i)}TOIL.st.sel={sl:tsl}}
-  sfx("tap")}catch(e){console.error(e)}toilDressUI()}
+  sfx("tap");try{save()}catch(x){}/* E95: the worn look is saved at once (a reload shows what she put on) */}catch(e){console.error(e)}toilDressUI()}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kg82 [data-toilact]");if(!b)return;e.stopPropagation();if(b.disabled)return;toilAct(b.dataset.toilact)},true);
 function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "giữ đồ hôm qua" after trying things on: the first outfit is put back where it can be */}
  const dr=toilDress(S,st.F);st.dv=dr.v;st.style=dr.style;const good=dr.v==="hopdip"||dr.v==="hoppham";try{sfx(good?"learn-good":"learn-bad")}catch(e){}
@@ -60961,7 +60992,7 @@ const KSWT={reg:{}};
    kitDressPicker({p, rank, head, body}) → HER FULL-BODY FIGURE on the left (a warm mirror-like stand with a floor shadow, name plate under it, NOT the event frame) as a LIVE preview:
    the figure is the one of the rank of the dress she has on right now (rank = the dress's phẩm), so every pick that re-renders the picker changes it; the choices (wear column + bag + detail) are `body` on the right,
    `head` (optional line) above them. A frame narrower than 480 px (a phone; measured, not a viewport breakpoint): no room for the stand — none is built and the picker reads as before (the two target devices are Fold 755 and iPad 1180). Used by: makeup «Trước gương đồng» step 1 (toilDressUI; also the Hội phối đồ theme dress step and the co-op redraw, same function). */
-function kitDressFigSrc(p,rank){if(rank==null||typeof figFor!=="function"||typeof figTierOf!=="function"||p!==S)return"";const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")||""}catch(e){return""}finally{figTierOf=f0}}/* her figure at the tier of the dress she wears (j88 picks by figTierOf); same trick as toilFigAt / toilPorAt below */
+function kitDressFigSrc(p,rank){if(rank==null||typeof figFor!=="function"||typeof figTierOf!=="function"||p!==S)return"";const f0=figTierOf;try{figTierOf=toilTierAt(f0,rank);return figFor(S,"")||""}catch(e){return""}finally{figTierOf=f0}}/* her figure at the tier of the dress she wears (j88 picks by figTierOf); same trick as toilFigAt / toilPorAt below */
 function kitDressPicker(o){o=o||{};const p=o.p||S;let src="";try{src=kitDressFigSrc(p,o.rank)}catch(e){}if(!src)try{src=kitFigOf(p)}catch(e){}
  /* a game frame that already has its own left figure column (.kgfig, wide screens) is THE preview: it is refreshed with the dress she wears now, no second figure; otherwise (Fold) the picker brings its own */
  /* a frame narrower than 480 px (a phone) has no room for a figure beside the wear column + bag (law 12: Fold 755 + iPad first): none there, the picker reads as before (decided by the MEASURED frame width, not by a viewport breakpoint — media-check, KIT §0) */
@@ -60971,8 +61002,9 @@ window.kitDressPicker=kitDressPicker;
 (function(){const st=document.createElement("style");st.id="kdpk-css";st.textContent=`
 .kdpk{display:grid;grid-template-columns:minmax(150px,34%) minmax(0,1fr);gap:12px;align-items:stretch;min-width:0}
 .kdpk:not(:has(>.kdpk-fig)){grid-template-columns:minmax(0,1fr)}
-.kdpk-fig{position:relative;display:flex;align-items:flex-end;justify-content:center;min-height:min(420px,calc(52*var(--kvh,1dvh)));padding:10px 6px 14px;border-radius:14px;overflow:hidden;
+.kdpk-fig{position:sticky;top:0;align-self:start;display:flex;align-items:flex-end;justify-content:center;min-height:min(420px,calc(52*var(--kvh,1dvh)));padding:10px 6px 14px;border-radius:14px;overflow:hidden;
  background:radial-gradient(ellipse 70% 55% at 50% 30%,#fffaf1 0%,#f6e8d0 60%,#ead7b6 100%);box-shadow:inset 0 0 0 1px var(--line,#d6c7a8),inset 0 -26px 30px -18px rgba(120,80,40,.22)}
+/* E95: the stand keeps its own height and stays in view (sticky) — it used to stretch with the right column, so once a tap opened the piece detail the figure sank under the buttons, out of sight */
 .kdpk-fig::after{content:"";position:absolute;left:14%;right:14%;bottom:30px;height:16px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(70,40,20,.28),rgba(70,40,20,0) 70%);pointer-events:none}
 .kdpk-fig .kesf{position:relative;z-index:1;width:100%;flex:1 1 auto}.kdpk-fig .kesfi>.kesimg{max-height:calc(min(calc(52*var(--kvh,1dvh)),460px)*var(--kfr,1))}
 .kdpk-fig .kpsn{max-width:100%;text-align:center;font-size:.8rem}
@@ -61054,7 +61086,7 @@ function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;KG82.set
  box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang độ xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
   `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:(R=>{/* the set note once: under the last set row that has one (makeup-set r3) */let last=-1;R.forEach((r,i)=>{if(r&&r.note)last=i});return R.map((r,i)=>r&&r.note&&i!==last?Object.assign({},r,{note:""}):r)})(lxF(toilPreRows(st.col).concat(toilColRows(st.col)))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
   `<div class="kg82act">${lxN?`${toilRollBtn("toilquick2")}<button class="${kg82Btn(true)}" id="toilgo">Tự tay điểm trang<small>kẻ mày, đánh phấn, chấm son</small></button>`:""}<button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button>${typeof lxRushBtn==="function"?lxRushBtn():""}</div>`;
- try{kitGameFigRefresh()}catch(e){}
+ try{const fs=kitDressFigSrc(S,toilPor().rank);kitGameFigRefresh(S,fs?{src:fs}:undefined)}catch(e){}/* E95: the colour step keeps the dress she chose on the figure (the refresh works now) */
  if($("toilgo"))$("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};if($("toilquick2"))$("toilquick2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish("quick")};if($("lxrush"))$("lxrush").onclick=()=>{lxRush();toilColUI()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
 window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;
 /* leaving the mirror any way (✕, Esc) ends the colour preview */
@@ -61070,7 +61102,7 @@ window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;
 const TOIL_HINT={moc:"Gương mặt mộc: người trọng lễ dễ chê, kẻ ưa giản dị lại thấy thuận mắt.",vung:"Phấn son lem nhem, người gặp hôm nay dễ cười chê.",
  vua:"Vừa mắt, đúng mực, chẳng ai để ý nhiều; dịp lớn thì chưa đủ.",dep:"Tươi tắn mặn mà: người trọng lễ dễ khen, dịp lớn cũng xứng.",tuyet:"Rạng rỡ lung linh, ai gặp cũng ngoái nhìn; kẻ hay ghen thêm ghen."};
 function toilPreName(col){if(!col)return"";const k=toilPreOf(col);const p=TOIL_PRE.find(x=>x[0]===k&&(x[2]==="diem")===(col.want==="diem"));return p?p[1]:"màu tự chọn"}
-function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
+function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=toilTierAt(f0,rank);return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
 /* the dressing-room plate (https://ctm-img.victoria-tntt.workers.dev/img/toil-mirror-room.webp, 1200x800): bx = its CSS background-position-x (.ktrv-plate), gx = the bronze mirror's glass centre across the picture (measured) */
 const TOIL_PLATE={w:1200,h:800,bx:.52,gx:630/1200};/* gx = the mirror axis of symmetry measured on the painting (frame rows 60-470, left half vs flipped right half: x = 629.5-631 of 1200; dev/test/mirror-center.js re-measures it from the picture) */
 /* the face mesh (https://ctm-img.victoria-tntt.workers.dev/img/mk-fit) of a file must be loaded BEFORE its colour layers are built: the layer is baked into the reveal markup and is not redrawn when the mesh arrives
@@ -97842,7 +97874,7 @@ function doorFocus(i,j){const F=DF.F;if(!F||DF.play||typeof dfGame!=="function"|
  if(!R||!F.intro({title:R[0],rows:[["Việc",nm,"t"],["Chạm",R[1],"t"],["Được",R[2],"t"]],go:"Sẵn sàng",sub:"bắt đầu chơi",onGo:()=>{DF.play=null;go()}})){DF.play=null;go()}
  return true}
 /* the door's picture + category = its representative member's (one picture per feature; same rule as jact's shared-door twins) */
-function doorRep(n){const t=doorTxt(n);const r=DOOR.T.find(x=>x.n===t);return r?(r.rep||null):null}
+function doorRep(n){const t=doorTxt(n);const L=DOOR.T.filter(x=>x.n===t);if(!L.length)return null;let k=null;try{const p=popIdx!=null&&curPeople()[popIdx];k=p&&p.kind}catch(e){}/* two jobs may name a door alike for different people (J5b srv «Giao hảo»): the row of the person in front wins */const r=(k&&L.find(x=>!x.kinds||x.kinds.includes(k)))||L[0];return r.rep||null}
 if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){try{const m=doorRep(name);if(m)return k0.call(this,m)}catch(e){}return k0.apply(this,arguments)};window.kitActArt=kitActArt}
 if(typeof kitActCat==="function"){const k0=kitActCat;kitActCat=function(name){try{const m=doorRep(name);if(m)return k0.call(this,m)}catch(e){}return k0.apply(this,arguments)};window.kitActCat=kitActCat}
 /* (4) two-way: the door an NPC act key sits in (her label of that key → DOOR.of) */
@@ -97866,9 +97898,42 @@ DOOR.fold=function(list,rows,o){o=o||{};if(!Array.isArray(list)||!Array.isArray(
   if(o.open&&!d.open)d.open=()=>o.open(r,M);Object.defineProperty(d,"m",{value:M,enumerable:false});made[r.k]=d;out.push(d)});return out};
 DOOR.card=function(t,h,rows,who){const o=(rows||[]).map(r=>Object.assign({},r));o.push({n:"Thôi"});pushDil({t:h||"",o,who:who||null},t||"Chọn việc");
  try{const M=document.getElementById("modal");if(Q.length===1&&M&&M.hidden){const dq=typeof DQ==="object"&&DQ?DQ:null;if(dq)dq.user=(dq.user||0)+1;try{showModal()}finally{if(dq)dq.user--}}}catch(e){}};
-DOOR.flat=list=>Array.isArray(list)?[].concat(...list.map(a=>a&&a.m?a.m:[a])):list;
+DOOR.flat=list=>Array.isArray(list)?[].concat(...list.map(a=>a&&a.ddoor&&Array.isArray(a.ways)?a.ways:a&&a.m?a.m:[a])):list;/* talk / list doors (d.m) and deck doors (J5b: a.ddoor, a.ways) */
 DOOR.find=(list,name)=>(DOOR.flat(list)||[]).find(a=>a&&doorTxt(a.n)===name)||null;
-
+/* ================= DECK doors (act-merge J5, folded into the ONE engine by J5b; generic, any job may DOOR.deck a row) =================
+   Same rule as the talk side, for the cards of a Hành sự DECK: only true duplicates fold, a door shows only when >= 2 members are on the table today, the members are the old
+   cards UNCHANGED (name, khắc, bạc, odds, w / l, once, rep, lock) and run through the SAME act() chain (price, roll, once flags, kcFix, jptime, place walking). No number typed (law 4).
+   The door costs nothing itself (its khắc = the cheapest member's, only the gate «can she do any»); the member pays its own khắc when chosen; «Thôi, để sau» spends nothing.
+   Rows: DOOR.deck({k,n,roads:["srv"|"cold"|"kc"],h,re | key(card,deckList)→door name|null, t?:string|fn(key,ways)→string}). roads: srv = cung nữ Phận sự (not in lãnh cung of the srv),
+   cold = lãnh cung deck (S.out), kc = khuê các decks (isKc). The final deck (deal() outermost wrapper) is folded; the raw members stay reachable: DOOR.flat(deck) / DOOR.run(name). */
+DOOR.D=[];DOOR.deck=function(r){if(r&&r.k&&r.roads&&(r.re||r.key)&&!DOOR.D.some(x=>x.k===r.k))DOOR.D.push(r);return DOOR};
+(function(){let A0=null;const DART={};
+const cc=a=>typeof cardCost==="function"?cardCost(a):(a.k||1);
+const srvOnceNow=w=>!!(w.once&&typeof isSrv==="function"&&isSrv()&&typeof srvOnce==="function"&&srvOnce(w.once,w.onceS));
+const availW=d=>d.ways.filter(w=>!w.done&&!srvOnceNow(w));
+function roadNow(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeof isSrv==="function"&&isSrv())return(S.srv&&S.srv.lau>0)?null:"srv";if(S.out)return"cold"}catch(e){}return null}
+function cardDoor(key,rule,ways){const k=Math.min(...ways.map(cc)),lock=ways.every(w=>w.lock);DART[key]=ways[0].n;
+ const t=typeof rule.t==="function"?rule.t(key,ways):(rule.t||rule.h||"");
+ return{n:key,t:lock?(ways[0].t||t):t,k,c:{},o:100,w:{},l:{},x:"kết quả tùy việc chọn",inner:1,dom:ways[0].dom,ddoor:1,ways,rep:1,lock,g:ways[0].g,who:ways.every(w=>w.who===ways[0].who)?ways[0].who:undefined,done:ways.some(w=>!w.done&&!srvOnceNow(w))?0:1}}
+function deckFold(L,road){const R=DOOR.D.filter(r=>r.roads.includes(road));if(!R.length)return L;const M=new Map(),out=[];
+ for(const a of L){if(!a||a.ddoor){out.push(a);continue}let key=null,rule=null;for(const r of R){const k=r.key?r.key(a,L):(r.re.test(a.n||"")?r.n:null);if(k){key=k;rule=r;break}}
+  if(key==null){out.push(a);continue}let g=M.get(key);if(!g){g={key,rule,ways:[],ix:out.length};M.set(key,g);out.push(null)}g.ways.push(a)}
+ const G=[...M.values()],res=[];out.forEach((a,i)=>{if(a!==null){res.push(a);return}const g=G.find(x=>x.ix===i);if(g.ways.length<2)res.push(...g.ways);else res.push(cardDoor(g.key,g.rule,g.ways))});return res}
+function wayLine(w,tc){let s="";try{s=typeof optLine==="function"?optLine(w):(w.x||"")}catch(e){s=w.x||""}return[`${tc} khắc`,s].filter(Boolean).join(" · ")}
+function wayOpts(ways,okOf,pick){return ways.map(w=>{const tc=cc(w),bad=!!w.lock||!okOf(w,tc);let o=null;try{o=typeof oddsOf==="function"?oddsOf(w):(w.o==null?100:w.o)}catch(e){}
+  const e={n:w.n,x:w.lock?(w.t||""):`${w.t?w.t+" · ":""}${wayLine(w,tc)}`,dom:w.dom,why:w.why,go:()=>pick(w)};if(bad)e.off=true;if(o!=null&&o<100&&!w.lock)e.p=o;return e})}
+function ask(title,text,opts){opts.push({n:"Thôi, để sau",x:"chưa làm gì lúc này",go:()=>{}});Q.push({t:title,ownAct:1,who:typeof pMe==="function"?pMe():null,h:`<p>${text}</p>`,opts});showModal()}
+function pickCard(d,w){if(S.dead||Q.length||!A0)return;deck.push(w);const i=deck.length-1;try{A0.call(window,i)}catch(e){console.error("jdoor deck way",e)}finally{const j=deck.indexOf(w);if(j>=0)deck.splice(j,1)}
+ d.done=availW(d).length?0:1;render()}
+function openCard(d){const L=availW(d);if(!L.length){d.done=1;render();return}if(L.length===1){pickCard(d,L[0]);return}
+ ask(d.n,d.t,wayOpts(L,(w,tc)=>can(tc)&&canPay(w)&&(w.b==null||(S.buoi||0)===w.b),w=>pickCard(d,w)))}
+/* test helpers: flat(list) = the list with every deck door replaced by its members (the old flat names); run(name) = run the member / plain card of that name through the real act() path */
+/* (J1) DOOR.flat is defined once, above: it also opens deck doors (a.ddoor → a.ways) */
+DOOR.run=n=>{const i=deck.findIndex(a=>a&&!a.ddoor&&a.n===n);if(i>=0){act(i);return true}const d=deck.find(a=>a&&a.ddoor&&a.ways.some(w=>w.n===n&&!w.lock));if(!d)return false;pickCard(d,d.ways.find(w=>w.n===n));return true};
+(function(){const a0=act;A0=a0;act=function(i){const d=deck&&deck[i];if(d&&d.ddoor){if(d.done||d.lock||S.dead||Q.length||!can(cc(d)))return;openCard(d);return}return a0.apply(this,arguments)};window.act=act})();
+(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&Array.isArray(deck)){const road=roadNow();if(road)deck=deckFold(deck,road)}}catch(e){console.error("jdoor deck",e)}return r};window.deal=deal})();
+(function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){try{const d=DART[name];if(d){const A=(typeof KIT_ACTS==="object"&&KIT_ACTS.acts)||{};if(!A[name]&&A[d])return k0.call(this,d)}}catch(e){}return k0.apply(this,arguments)};window.kitActArt=kitActArt})();
+})();
 /* ================= jdfg: the ON-FIGURE act games of the Dư đồ focus view (review/duodo-focus; owner OD 21/11 ~06:50Z «bất kỳ một cái action nào … đều sẽ là một cái mini game») =================
    Seven gesture engines played ON the person (act table: dev/handover/reports/duodo-focus.md §PLAN 2):
      swipe «Giáng tay / Hắt / Ngáng»  stroke through the moving target (face, or feet) — speed = strength
@@ -100632,7 +100697,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="644cee39e4f6";window.CTM_BUILD=BUILD;
+const BUILD="582ede7d40f6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
