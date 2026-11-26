@@ -135,3 +135,18 @@ PRIORITY #1 CHECK: OD robot-realtap reviews | main none | review/robot-realtap e
 - N2 OK: quick removed only when nq has a non-back move (`nq.some(x => !isMgBack(x))`); quick + ✕ only → the quick stays the move. Logic only (no live board shows just quick + ✕), as the fixer says.
 - N3 OK: board moves add to areaTaps and boardTaps.
 - Runs (RT_NOSHOT=1): RT_TEST_BOARD=vu iPad s12 raw 9 / Fold s7 raw 9 on 3af7896e, never skipped, backs = result; RT_TEST_EXAM=1 Fold s31 on 6b5d3d05 → done:true [5,5]. 0 dead / 0 stuck / 0 bugs; lint OK, 0 `.click()`. N4 (fading scene) still open, non-blocking.
+
+# REVIEW robot-realtap 2df8f5fa..cbeb334b (BUILD PIN) + robot-audit 782c9fac — BIG REVIEWER #9 for F #21, 26/11 ~11:30Z
+PRIORITY #1 CHECK: OD robot-realtap reviews | main none (harness on review/*) | review/robot-realtap cbeb334b (fixer #9 READY, on 2df8f5fa PASS), handover 782c9fac | claims BIG #9.
+## VERDICT: FAIL robot-realtap cbeb334b (1 item: the recovery tool cannot find merge-built LIVE builds; the gate itself is right)
+### FAIL 1 — rt-serve-build.sh `--b <id>` misses every build made in a STACK LAND merge (= the current LIVE)
+- The lookup is `git log -S'"b":"<id>"' FETCH_HEAD -- index.html`; git log shows no diff for merge commits by default, and every LIVE build since the stack lands is rebuilt IN the merge (3af7896e = merge 6b5d3d05 + 4f377603, b7dcbbd06e03 appears in no parent).
+- Proof: `rt-serve-build.sh --b b7dcbbd06e03 8899` (current LIVE 3af7896e) → «no main commit with build b7dcbbd06e03 in the last 60 main commits», exit 2. `--b 0281bf7bcef6` (LIVE 6b5d3d05) finds only 42e1fd7f (the review-branch parent that happened to carry the same built file), not 6b5d3d05. With `-m --first-parent` the same search returns 3af7896e.
+- Also: the help says «<sha> = the «s» of window.CTM_BI, without «+»», but CTM_BI.s is the PARENT the build was made on (3af7896e's page says s 6b5d3d05+, 6b5d3d05's says bf6dd041+) → `rt-serve-build.sh <s>` serves the build BEFORE the life's build → the gate stops it again. The hard-stop message rightly points to --b, which is the broken path.
+- Fix: find the commit by content on the first-parent main chain, e.g. `for c in $(git rev-list --first-parent -n 60 FETCH_HEAD); do git show $c:index.html | grep -q "\"b\":\"$BID\"" && { SHA=$c; break; }; done` (or `git log -m --first-parent -S…`); fix the help line (s = the build's parent, use --b); re-prove: start on one LIVE, mismatch on the next, `--b` serves the first LIVE (a merge-built one) and the resume goes on.
+### OK
+- buildGate after every load: boot (start / resume / crash restart resume=1; label resume vs reload by ck) and unstick reload; build0 kept in the ckpt; builds[] logged; robot-lint OK; no .click() / dispatchEvent anywhere in robot-rt.js (0 hits).
+- Proof here: iPad bold s4242 started on LIVE 6b5d3d05 file:// (build0 bf6dd041+/0281bf7bcef6) → resume=1 against 3af7896e → «BUILD MISMATCH at resume: … page is 6b5d3d05+ (b7dcbbd06e03) — hard stop», exit 3, results json has buildMismatch + builds [start, resume], ckpt md5 unchanged (d5e15b6a… before and after) ✓.
+- Co-op: robot-rt-coop seats are `Seat(...)` from robot-rt.js → same boot → same gate (process.exit(3) stops both seats = a hard stop, as wanted) ✓ (code read; no co-op run).
+- robot-audit 782c9fac: builds with > 1 b or buildMismatch → INVALID «mixed build (s/b → s/b)» ✓. A mismatch run writes the wrong b into the results json only; the ckpt is clean, so the resumed life overwrites it with one build ✓.
+- Small notes: (a) a later load with NO CTM_BI passes the gate silently (`if (!bi) return true`) — only matters for a pre-CTM_BI build, rare; (b) the fixer's announced follow-up (audit verdict wording) had not landed at this review — fold it into the FAIL fix.
