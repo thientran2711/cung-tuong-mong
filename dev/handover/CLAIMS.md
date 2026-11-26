@@ -531,7 +531,7 @@ REPORT-PDF | reports/owner-bugs | session_01Rc5AsKkt37eTP1GAhJhsdQ | RUNNING | 2
 SOUND-CACHE | review/sound-cache | session_01Rc5AsJ3sh4CYhjzv2Uxe2X | RUNNING | 26/11 18:32Z (MAIN 161)
 FIRSTCARD-3 | review/firstcard-3 | session_01Rc5AsHs5nwj5S6TfrMqH3U | RUNNING | 26/11 18:32Z (MAIN 161)
 save stack rv12 independent check (reviewer-written code) | (read-only) | session_01N1tNP3Zj12NeYMNLEFETxu | RUNNING | 26/11 18:42Z (Foreman B child 4)
-save stack BIG rv r7 (rv12 → rv13 on f573dc94) | review/save-fix-stack-rv13 | session_01N1tNP2rXGixcTVd1GkYr9V | RUNNING | 26/11 18:50Z (Foreman B child 4)
+save stack BIG rv r7 (rv12 → rv13 on f573dc94) | review/save-fix-stack-rv13 | session_01N1tNP2rXGixcTVd1GkYr9V | DONE (rolled → r8) | 26/11 18:50Z (Foreman B child 4)
 FLIGHT2-S9H life (Fold 755x1000 speed, seed 2026112539, LIVE origin/main f573dc94+ served locally + pin=1 fresh profile, harness review/robot-realtap 8ea10d7e) | dev/handover/robot/flight2-s9h.* | session_01UV1SzkxvEe2akvB9Jcft6u | CLAIMED | 2026-11-26T18:48Z (FOREMAN F #24)
 C3-SEALS-RM | review/c3-seals 29462da0 | session_01PEhRbuThfqRgsb1V4EPoSx | DONE (archived) → LAND READY 29462da0 FOR MAIN 161 | 2026-11-26T18:50Z (Foreman C)
 FLIGHT2-S15C life (iPad 1180x820 sensitive, seed 2026112540, LIVE origin/main f573dc94+ served locally + pin=1 fresh profile, harness review/robot-realtap 8ea10d7e) | review/flight2-s15 flight2-s15c.* | session_01UV1Szhk5EbghGNi7oDMvVw | CLAIMED | 2026-11-26T19:00Z (FOREMAN F #24)
@@ -542,3 +542,4 @@ FLIGHT2-S15D life (Fold 755x1000 cautious, seed 2026112541, LIVE origin/main new
 ring-build (RING-BUILD-4) | review/ring-build | session_01Rc5AsLAGTatyNHnR3hq1ar | RUNNING | 2026-11-26T20:42Z
 kit-stage (KIT-STAGE-R5) | review/kit-stage-r4 | session_01Rc5AsMRAw5RECMDAjyTgYV | RUNNING | 2026-11-26T20:43Z
 oan-pace-ghen (OAN-PACE-2) | review/oan-pace-ghen | session_01Rc5AsLW5LU5PeXKJxSXJE7 | RUNNING | 2026-11-26T20:45Z
+save stack BIG rv r8 (rv15 final gates) | review/save-fix-stack-rv15 | <pending> | RUNNING | 26/11 20:50Z (Foreman B child 4)
