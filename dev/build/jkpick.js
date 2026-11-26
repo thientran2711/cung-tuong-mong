@@ -13,7 +13,7 @@
 (function(){try{
 const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:7,two:5,postIn:{kv1:10,kv2:16},postTop:{kv1:176,kv2:120},railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const still=()=>{if(KIT_PLAQUE.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
@@ -29,46 +29,34 @@ function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getEle
  const P={o,host,m,anims:[],open:true,up:null};CUR=P;
  const gs=o.groups&&o.groups.length?o.groups:[{k:"",n:"",acts:o.acts||[]}];P.groups=gs;P.group=o.group||gs[0].k;
  P.obst=obstacles(host);const el=P.el=document.createElement("div");el.className="kpk kpk-"+m+(still()?" kpk-still":"");el.setAttribute("role","group");el.setAttribute("aria-label","Chọn việc");host.appendChild(el);
- build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
- P.lift=id=>lift(P,id);P.setGroup=k=>{if(P.__pg&&!P.groups.some(g=>g.k===k)){const f=P.groups.find(g=>g.pg===k);if(f)k=f.k}if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
+ document.body.classList.add("kpk-open");/* §98.1: the stage HUD under the post yields while a board is open */build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
+ P.lift=id=>lift(P,id);P.setGroup=k=>{if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
  return P}
-function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
- const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,P.cap||K.max),n=acts.length,post=K.post;
- /* the band (tabs + rail + columns + post) goes on the side, tier and height that cover the least: kit parts of the stage (P.obst: right column, rail chips, title, name tags, corner buttons) count HARD, other people (o.avoid) SOFT */
- const ovl=(x0,y0,x1,y1,L)=>{let a=0;L.forEach(o=>{const w=Math.min(x1,o.x+o.w)-Math.max(x0,o.x),hh=Math.min(y1,o.y+o.h)-Math.max(y0,o.y);if(w>0&&hh>0)a+=w*hh});return a};
- const tabsEst=P.groups.length>1?K.tabH+8:0,av=P.o.avoid||[],ob=P.obst||[];
- const fit=s=>{let free=s==="r"?W-(A.x+A.w)-8:A.x-8,minRail=A.y+A.h*K.railMin;const maxB=H-6;
-  /* last resort on a narrow phone: the band may lap the outer 35 % of her BODY (never her face: the rail then starts below the shoulders) */
-  let lap=0;if(free<K.w[m]*.9&&!(P.o.noLap)){lap=Math.round(A.w*.35);free+=lap;minRail=Math.max(minRail,A.y+A.h*K.railLap)}
-    const mk=(cols,comp,narrow)=>{let cw=cols===2?Math.min(K.w[m],Math.floor((free-post-10-K.gx)/2)):Math.min(K.w[m],free-post-6);cw=Math.max(cols===2?K.minW:120,cw);const full=cw;if(narrow&&narrow<cw)cw=narrow;
-   const hh=Math.max(comp?K.hS:K.h[m],P.hx||0),gg=comp?K.cord.gapS:K.cord.gap,bw=cols*cw+(cols-1)*K.gx,x0=s==="r"?A.x+A.w+6-lap:A.x-6-bw-post-4+lap,rows=Math.ceil(n/cols),tot=K.cord.rail+rows*hh+(rows-1)*gg;return {cols,cw,bw,x0,rows,tot,hh,gg,comp:!!comp,pen:(cols===2?K.pen2:0)+(comp?K.penS:0)+(full-cw)*(cols*K.rows0||1)*30}};
-  const two=n>3&&free>=2*K.minW+post+10+K.gx;const V=[mk(1)];if(two)V.push(mk(2));V.push(mk(1,1));if(two)V.push(mk(2,1));[168,150,134].forEach(w=>{V.push(mk(1,0,w));V.push(mk(1,1,w))});
-  let best=null;V.forEach(C=>{const want=A.y+A.h*K.railAt,lo=Math.max(minRail,2+tabsEst),hi=maxB-C.tot,T=[Math.max(minRail,Math.min(want,hi))];for(let t=lo;t<=hi;t+=6)T.push(t);
-   const bx0=s==="r"?C.x0:C.x0-post-4,bx1=s==="r"?C.x0+C.bw+post+4:C.x0+C.bw;
-   T.forEach(top=>{const over=Math.max(0,top+C.tot-maxB),y0=top-tabsEst,hard=ovl(bx0,y0,bx1,top+C.tot,ob),soft=ovl(bx0,y0,bx1,top+C.tot,av);
-    const cost=hard*1000+soft+over*C.bw*200+C.pen+Math.abs(top-want)*.05*C.bw;if(!best||cost<best.cost)best=Object.assign({cost,hard,soft,over,top},C)})});
-  return Object.assign({s,free,ov:best.hard+best.soft,lap},best)};
- let side=P.o.side&&P.o.side!=="auto"?P.o.side:null,F;
- if(side)F=fit(side);else{const r=fit("r"),l=fit("l");F=r.cost!==l.cost?(r.cost<l.cost?r:l):(r.free>=l.free?r:l)}
- let railY=F.top;
- const tabsH=P.groups.length>1?K.tabH+8:0;if(railY-tabsH<2)railY=2+tabsH;
- return {over:F.over,lapped:F.lap>0,comp:F.comp,A,acts,n,side:F.s,cols:F.cols,cw:F.cw,h:F.hh,gap:F.gg,rows:F.rows,railY,bandW:F.bw,x0:F.x0,post,floor:Math.min(A.y+A.h,H-2),tabsH,W,H}}
-/* KK36 (NHV Fold PLAQUE-OFFSTAGE ×2: 6 plaques of 4-line names beside a person at x≈.2 ran below the stage): when NO tier / column / height keeps the
-   whole band inside the stage (geo over > 0), the group is split into PAGES of the largest count that fits (tabs «Việc · 1/2», the kit .pctabs of the groups;
-   same rule as the dialogue answers «Đáp · 1/2», §102.2) — a plaque is never off the stage, never dropped (also > KIT_PLAQUE.max acts). */
-function paginate(P){const K=KIT_PLAQUE;const gs=P.groups0||P.groups;let G=null;
- const fits=per=>{const s=[P.groups,P.cap];P.groups=gs.length>1?gs:gs.concat([{k:"\u0000",n:"",acts:[]}]);/* tabs will show: count their height */P.cap=per;try{G=geo(P)}finally{P.groups=s[0];P.cap=s[1]}return G.over<=0};
- const big=!P.groups0&&gs.some(g=>(g.acts||[]).length>K.max);let cur=null;try{cur=geo(P)}catch(e){return false}if(!(cur.over>0)&&!big)return false;const was=(P.groups.find(g=>g.k===P.group)||{}).pg||P.group;
- const n=Math.max(...gs.map(g=>(g.acts||[]).length));let per=Math.min(n-1,K.max,P.cap?P.cap-1:99);while(per>1&&!fits(per))per--;if(per<1)return false;
- const out=[],map={};gs.forEach(g=>{const A=g.acts||[];if(A.length<=per){out.push(g);map[g.k]=g.k;return}const N=Math.ceil(A.length/per);for(let i=0;i<N;i++){const k=g.k+"#"+(i+1);out.push({k,n:`${g.n||"Việc"} · ${i+1}/${N}`,acts:A.slice(i*per,(i+1)*per),pg:g.k});if(!i)map[g.k]=k}});
- if(P.groups0&&per>=P.cap)return false;P.__pg=1;P.groups0=gs;P.groups=out;P.group=map[was]!=null?map[was]:out[0].k;P.cap=per;return true}
-function build(P,swap){const K=KIT_PLAQUE;paginate(P);const G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
+/* KIT §98.1 PLAQUE POST (owner OD 26/11 ~21:41Z «để cái sự lựa chọn nào nó cũng tới từ một cái cột thôi … lúc thì nằm bên giữa, lúc thì nằm bên phải là sao?»; KK47, canon overwrite of the
+   anchor-relative side/tier search and of the KK36 «Việc · 1/2» pages): EVERY choice board hangs from ONE post at ONE fixed place — the right side of the stage
+   (x = host width − KIT_PLAQUE.postIn), the same top (KIT_PLAQUE.postTop px from the host top) on every board and device. 1–4 plaques = one column hanging LEFT of the post;
+   5–7 = two columns, the second column added on the LEFT (the post never moves). At most KIT_PLAQUE.max (7) plaques, cut at the SOURCE (owner 21:45Z) — no paging.
+   The figure / cluster yields to the post (kitPick.postBox before opening), never the reverse; the kit result card yields too (yieldCard). Group tabs (really different groups) sit in
+   the fixed room above the rail. */
+function postBox(host,n,hx){const K=KIT_PLAQUE,m=kv(),hr=(host||document.getElementById("stage")||document.body).getBoundingClientRect(),W=hr.width,H=hr.height,post=K.post;
+ n=Math.max(1,Math.min(n||1,K.max));const cols=n>=K.two?2:1,xR=Math.round(W-K.postIn[m]-post-4),free=xR-8;
+ const cw=Math.max(cols===2?K.minW:120,Math.min(K.w[m],cols===2?Math.floor((free-K.gx)/2):free)),bw=cols*cw+(cols-1)*K.gx,x0=xR-bw;
+ const top=K.postTop[m],railY=top+K.tabH+8,rows=Math.ceil(n/cols);let hh=Math.max(K.h[m],hx||0),gap=K.cord.gap,comp=false;
+ const tot=()=>K.cord.rail+rows*hh+(rows-1)*gap;if(railY+tot()>H-6&&!hx){hh=K.hS;gap=K.cord.gapS;comp=true}
+ return {x0,x1:xR+post+4,top,railY,bottom:railY+tot(),cols,cw,bw,rows,h:hh,gap,comp,post,W,H}}
+function geo(P){const K=KIT_PLAQUE,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.3,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6};
+ const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],all=gr.acts||[],acts=all.slice(0,K.max),n=acts.length;
+ if(all.length>K.max)console.warn("kitPick: "+all.length+" plaques > "+K.max+" — a source fault (owner 26/11 ~21:45Z: cut at the source)");
+ const B=postBox(P.host,n,P.hx);
+ return {over:Math.max(0,B.bottom-(B.H-2)),lapped:false,comp:B.comp,A,acts,n,side:"l"/* the outer side of a plaque = away from the post (✓ / ✕, widen) */,cols:B.cols,cw:B.cw,h:B.h,gap:B.gap,rows:B.rows,
+  railY:B.railY,bandW:B.bw,x0:B.x0,post:B.post,postTop:B.top,floor:B.H-2,tabsH:P.groups.length>1?K.tabH+8:0,W:B.W,H:B.H}}
+function build(P,swap){const K=KIT_PLAQUE;const G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
  const old=[...el.querySelectorAll(".kpk-n,.kpk-tabs")];old.forEach(x=>x.remove());
  const side=G.side,pw=G.post;
  /* signpost + rail (built once) */
  let post=el.querySelector(".kpk-post"),rail=el.querySelector(".kpk-rail");if(!post){post=document.createElement("i");post.className="kpk-post";rail=document.createElement("i");rail.className="kpk-rail";el.append(post,rail)}
- post.style.cssText=`left:${side==="r"?G.x0+G.bandW+4:G.x0-pw-4}px;top:${G.railY-6}px;width:${pw}px;height:${Math.max(30,G.floor-(G.railY-6))}px`;
- rail.style.cssText=`left:${side==="r"?G.x0-4:G.x0-pw-4}px;top:${G.railY}px;width:${G.bandW+pw+8}px`;
+ /* §98.1 the post stands at its ONE place (right of the band, fixed top) whatever the side value says */post.style.cssText=`left:${G.x0+G.bandW+4}px;top:${G.postTop}px;width:${pw}px;height:${Math.max(30,G.floor-G.postTop)}px`;
+ rail.style.cssText=`left:${G.x0-4}px;top:${G.railY}px;width:${G.bandW+pw+8}px`;
  /* tabs (kit .pctabs/.pct) above the rail when more than one group */
  if(P.groups.length>1){const t=document.createElement("div");t.className="kpk-tabs pctabs";t.innerHTML=P.groups.map(g=>`<button type="button" class="pct${g.k===P.group?" on":""}" data-k="${esc(g.k)}">${esc(g.n||"Việc")}</button>`).join("");
   t.style.cssText=`left:${G.x0}px;top:0;width:${G.bandW}px;visibility:hidden`;t.__fit=1;t.addEventListener("click",e=>{const b=e.target.closest(".pct");if(!b)return;e.stopPropagation();P.setGroup(b.dataset.k)});el.appendChild(t);
@@ -85,7 +73,7 @@ function build(P,swap){const K=KIT_PLAQUE;paginate(P);const G=geo(P),el=P.el,m=P
    const an=n.animate([{opacity:0,transform:`translateY(${dy}px) rotate(${s*9}deg)`},{opacity:1,transform:`translateY(5px) rotate(${-s*6}deg)`,offset:.46},{transform:`translateY(-2px) rotate(${s*3.2}deg)`,offset:.68},{transform:`translateY(0) rotate(${-s*1.4}deg)`,offset:.84},{opacity:1,transform:"none"}],{duration:K.dropMs,delay:(swap?0:60)+i*K.stagger,easing:"cubic-bezier(.3,.7,.4,1)",fill:"backwards"});
    P.anims.push(an);an.onfinish=()=>{n.classList.remove("kpk-drop");const j=P.anims.indexOf(an);if(j>=0)P.anims.splice(j,1)}}
   });
- fitNames(P);try{document.fonts&&document.fonts.ready.then(()=>{if(P.open&&CUR===P)fitNames(P)})}catch(e){}/* a late web font changes the name widths */
+ yieldCard();fitNames(P);try{document.fonts&&document.fonts.ready.then(()=>{if(P.open&&CUR===P)fitNames(P)})}catch(e){}/* a late web font changes the name widths */
  /* KK35: a later name pass (half-known names «Tể tướng ???», NHV tagsFix) rewrites a plaque NAME after this fit → fit again (only when the name texts change; own rebuilds ignored) */
  try{if(!P.__nmo&&window.MutationObserver){const sig=()=>[...P.el.querySelectorAll(".kpk-n .kfoc-t b")].map(b=>b.textContent).join("|");P.__nsig=sig();let q=0;
   P.__nmo=new MutationObserver(()=>{if(q||P.__fitR||!P.open)return;q=1;requestAnimationFrame(()=>{q=0;if(!P.open||P.__fitR)return;const s2=sig();if(s2===P.__nsig)return;P.__nsig=s2;fitNames(P);P.__nsig=sig()})});
@@ -113,10 +101,11 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
  /* beside the plaque on its outer side, centred on it (never over its name); no room → on its outer top corner */let x,y;/* KK36 (NHV: the ✓/✕ of a LEFT-column plaque sat over the RIGHT column's name): with two columns each plaque's outer side is the side away from the other column */
  const sd=G.cols===2?(((n.__x!=null?n.__x:x0)>G.x0+G.cw/2)?"r":"l"):G.side;const hh=n.offsetHeight||G.h;
  /* candidate spots (outer side first, then the outer / inner top corners, then the bottom corners): the one that covers the least of the OTHER plaques' names wins */
- const C=[[sd==="l"?x0-w-6:x0+wd+6,y0+(hh-s)/2],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0-s*.62],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0-s*.62],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0+hh-s*.38],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0+hh-s*.38]];
+ /* §98.1 a plaque against the post (one column, or the right column of two) has no outer room: its ✓ / ✕ stand UPRIGHT on the post, beside its own right edge */const vt=x0+wd>=G.x0+G.bandW-2&&G.postTop!=null,vh=2*s+gap;
+ const C=[...(vt?[[Math.min(G.x0+G.bandW+4+G.post/2-s/2,G.W-3-s),y0+(hh-vh)/2,1]]:[]),[sd==="l"?x0-w-6:x0+wd+6,y0+(hh-s)/2],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0-s*.62],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0-s*.62],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0+hh-s*.38],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0+hh-s*.38]];
  const hr=(n.offsetParent||P.el).getBoundingClientRect(),NB=[...P.el.querySelectorAll(".kpk-n")].filter(o=>o!==n).map(o=>{const b=(o.querySelector(".kfoc-t b")||o).getBoundingClientRect(),r=o.getBoundingClientRect();return {b:[b.left-hr.left,b.top-hr.top,b.right-hr.left,b.bottom-hr.top],r:[r.left-hr.left,r.top-hr.top,r.right-hr.left,r.bottom-hr.top]}});
  const ov=(a,q)=>Math.max(0,Math.min(a[2],q[2])-Math.max(a[0],q[0]))*Math.max(0,Math.min(a[3],q[3])-Math.max(a[1],q[1]));let best=null;
- C.forEach(([cx,cy],i)=>{const off=(cx<2||cx+w>G.W-2||cy<2)?1:0;const a=[cx,cy,cx+w,cy+s];const cost=off*1e9+NB.reduce((z,o)=>z+ov(a,o.b)*100+ov(a,o.r),0)+i;if(!best||cost<best.c)best={c:cost,x:cx,y:cy}});x=best.x;y=best.y;x=Math.max(2,Math.min(G.W-w-2,x));y=Math.max(2,y);
+ C.forEach(([cx,cy,v],i)=>{const cw2=v?s:w,ch2=v?vh:s;const off=(cx<2||cx+cw2>G.W-2||cy<2||cy+ch2>G.H-2)?1:0;const a=[cx,cy,cx+cw2,cy+ch2];const cost=off*1e9+NB.reduce((z,o)=>z+ov(a,o.b)*100+ov(a,o.r),0)+i;if(!best||cost<best.c)best={c:cost,x:cx,y:cy,v:!!v}});x=best.x;y=best.y;x=Math.max(2,Math.min(G.W-(best.v?s:w)-2,x));y=Math.max(2,y);c.classList.toggle("kpk-cv",best.v);
  c.hidden=false;c.style.left=Math.round(x)+"px";c.style.top=Math.round(y)+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitPick conf",e)}}
 function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
@@ -129,8 +118,22 @@ function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${C
  if(!still()&&n.animate){const a=n.animate([{transform:"none"},{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`}],{duration:K.liftMs,easing:"cubic-bezier(.3,.8,.4,1)",fill:"forwards"});P.anims.push(a)}else n.style.transform=`translateY(${K.liftDy}px) scale(${K.liftScale})`}
 function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
  if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
-function destroy(P,fromClose){if(!P)return;P.open=false;try{P.__nmo&&P.__nmo.disconnect()}catch(e){}document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
-window.kitPick={open,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
+function destroy(P,fromClose){if(!P)return;P.open=false;try{P.__nmo&&P.__nmo.disconnect()}catch(e){}document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;document.body.classList.remove("kpk-open");yieldCard();if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
+/* §98.1b RESULT CARD YIELDS TO THE PLAQUE BOARD (owner OD 26/11 ~21:41Z (b) «khung kết quả … che»; KK47): while a board is open, the kit result card (#rtoast, resultShow + kitResultCard)
+   sits in the free span LEFT of the band (bottom unchanged), narrowed to that span when needed; the board never moves for the card. Restored when the board closes. */
+function yieldCard(){try{const t=document.getElementById("rtoast");if(!t)return;const P=CUR,on=t.classList.contains("on");
+ if(!P||!P.open||!on||!P.G){if(t.__ky){t.classList.remove("kres-y");t.style.removeProperty("--kyx");t.style.maxWidth="";t.style.minWidth="";t.__ky=0}return}
+ const hb=P.host.getBoundingClientRect(),G=P.G;t.classList.add("kres-y");t.__ky=1;t.style.setProperty("--kyx","0px");t.style.maxWidth="";t.style.minWidth="";
+ let r=t.getBoundingClientRect();const sc=r.width?t.offsetWidth/r.width:1,bl=hb.left+G.x0-14,br=hb.left+G.x0+G.bandW+G.post+18;/* the wider free span: left of the band, or right of the post (iPad: the stage is the left part of the screen) */
+ const sp=[[8,bl],[br,innerWidth-8]].sort((a,b)=>(b[1]-b[0])-(a[1]-a[0]))[0],L=sp[0],R=sp[1],span=R-L;if(span<=40)return;
+ if(r.width>span){t.style.maxWidth=Math.floor(span*sc)+"px";t.style.minWidth="0";r=t.getBoundingClientRect()}
+ const cx=r.left+r.width/2,want=r.left>=L&&r.right<=R?cx:(L+R)/2;t.style.setProperty("--kyx",Math.round((want-cx)*sc)+"px")}catch(e){console.error("kitPick yieldCard",e)}}
+setTimeout(()=>{for(const f of ["resultShow","kitResultCard"]){const f0=window[f];if(typeof f0!=="function"||f0.__ky)continue;const w=function(){const r=f0.apply(this,arguments);try{yieldCard()}catch(e){}return r};w.__ky=1;window[f]=w;try{if(f==="resultShow")resultShow=w;else kitResultCard=w}catch(e){}}},0);
+window.kitPick={open,postBox,yieldCard,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§98.1",title:"kitPick · cột treo thẻ gỗ MỘT chỗ (1–4 thẻ một cột, 5–7 thẻ hai cột mọc sang trái)",where:"mọi bảng chọn thẻ gỗ: vòng người, vòng nhóm, bảo vật, lời đáp, việc với một người",
+ html:()=>`<div data-kpkdemo style="position:relative;height:440px;border-radius:8px;background:linear-gradient(#efe4cf,#d9c7a4);overflow:hidden"></div><div class="kitpg-row"><button type="button" class="kbtn alt" data-kpkd="2">2 thẻ</button><button type="button" class="kbtn alt" data-kpkd="4">4 thẻ</button><button type="button" class="kbtn alt" data-kpkd="7">7 thẻ</button></div>`});
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpkd]");if(!b)return;e.stopPropagation();const h=document.querySelector("#kitpage [data-kpkdemo]");if(!h)return;
+  const N=["Trò chuyện","Giao hảo","Khiêu khích","Cùng chơi / Thách đấu","Tặng quà","Hỏi han chuyện nhà","Nhờ dò la tin tức"];kitPick.open({host:h,acts:N.slice(0,+b.dataset.kpkd).map((n,i)=>({id:"d"+i,n,pic:"",word:"Vững",ton:"1 khắc",off:false,why:""})),onPick:()=>kitPick.close()})},true)}catch(e){}
 
 /* ---------- kitDim: ONE dim for the people who are not chosen (owner OD 24/11 ~09:05Z + ~15:30Z) ----------
    figure only, never the background, never see-through: a copy of the figure image with a STATIC filter (brightness + saturate from BAL.kdim) cross-fades on top of the figure
@@ -151,6 +154,9 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 /* wood tokens: ONE look. --kpk-img = the slot for Foreman C's painted wood (none until it exists) */
 .kpk{--kpk-w1:#c99a5b;--kpk-w2:#b4813f;--kpk-w3:#97662d;--kpk-line:#5a3a1a;--kpk-ink:#2b1708;--kpk-hi:rgba(255,236,196,.55);--kpk-img:none;position:absolute;left:0;top:0;width:0;height:0;z-index:30;pointer-events:none}
 .kpk>*{pointer-events:auto}
+.rtoast.kres-y{translate:var(--kyx,0px) 0}
+.kpk .khconf.kpk-cv{flex-direction:column}
+body.kpk-open #kshR,body.kpk-open .kshR,body.kpk-open #kpname,body.kpk-open .j59mr{visibility:hidden!important}
 .kpk-post{position:absolute;border-radius:4px 4px 2px 2px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(90deg,var(--kpk-w3),var(--kpk-w2) 45%,var(--kpk-w1) 55%,var(--kpk-w3));box-shadow:2px 3px 5px rgba(0,0,0,.35);pointer-events:none}
 .kpk-post::before{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e7c27a,#a8782f 70%);border:1px solid var(--kpk-line);box-sizing:border-box}
 .kpk-rail{position:absolute;height:8px;border-radius:4px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(var(--kpk-w1),var(--kpk-w2) 55%,var(--kpk-w3));box-shadow:0 3px 5px rgba(0,0,0,.35);pointer-events:none}

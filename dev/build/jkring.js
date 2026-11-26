@@ -168,8 +168,9 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
    the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
    layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
 function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
-function plaqueNeed(m){const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
-function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(m),P=paintX(s),hh=s.__feet-s.__top;
+/* KK47 §98.1 wiring: the band now hangs from the ONE fixed post (kitPick.postBox) — the figure keeps clear of the widest board (7 plaques = 2 columns) + the ✓/✕ room on its left */
+function plaqueNeed(m,R){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,7),cf=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6;return Math.round(B.W-B.x0+cf+10)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
+function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(m,R),P=paintX(s),hh=s.__feet-s.__top;
  let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
  const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
  if(over>0){cx-=Math.min(over,Math.max(0,left()-edge));over=right()+need-g.w}
