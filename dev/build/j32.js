@@ -13,6 +13,8 @@ function deathChain(fate){const L=[];const f=String(fate||"");
  else if(/Ban chết/.test(f)){L.push("Mưu kế bại lộ trước Hoàng thượng.");L.push("Phòng được: sai người tin cẩn, bớt dấu vết, đợi thêm chứng cứ.")}
  else if(/Bệnh|Sức 0/.test(f)){L.push("Sức cạn dần mà không chữa.");L.push("Phòng được: mời thái y sớm, nghỉ ngơi, bớt việc nặng.")}
  else if(/tiên đế băng|Tuẫn táng|Thái phi/.test(f)){L.push("Hoàng thượng băng hà; số phận theo con trai và ngôi vị lúc ấy.")}
+ /* D-SELX-FAIR (law 7, whole family of trials that end the life): the ban hoa ending names her place, score and the cut line (jselx selxCut, ONE record) */
+ else if(/ban hoa/i.test(f)&&S.selx2&&S.selx2.cut&&typeof selxCutRow==="function"){L.push(`Điện tuyển: ${selxCutRow(S.selx2.cut)}`);L.push("Phòng được: dò hỏi các vị chí tôn trọng chữ gì, tập kỹ ở Tiền sảnh, dâng môn sở trường và chơi hết sức.")}
  const foes=liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")||bandVT(v,S)>=2).map(v=>v.name);if(foes.length)L.push(`Kẻ thù còn sống: ${foes.slice(0,4).join(", ")}.`);return L}
 function lifeLog(){const p=store.get("cung-luanhoi")||[];return p}
 function lifeSave(fate){const p=lifeLog();const kids=S.kids.filter(k=>k.alive).length;const maxR=Math.max(S.rank,S.maxRank||0);p.unshift({n:S.name,o:S.origin.n,r:maxR>=7?"Hoàng hậu":RANKS[maxR].n,age:S.age,y:S.year,kids,fc:S.fc||"",f:fate,nm:S.kend||"",foes:liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")).map(v=>v.name).slice(0,3)});store.set("cung-luanhoi",p.slice(0,40))}

@@ -231,7 +231,12 @@ function selxYard(){const Z=S.selx2;if(Z.yk<=0)return selxHall();const T=BAL.tim
   selxRes("Dò hỏi",b,"",tr.length?[`Thái giám nói nhỏ: ${nm} trọng chữ ${tr[0]}.`]:[]);selxYard()},{x:selxX(T,"biết một vị chí tôn trọng chữ gì")}));
  o.push(selxO("Đứng yên giữ sức",()=>{const b=rsnap();step(T);S.suc=cl((S.suc||0)+BAL.selx.rest,0,sucCap(S));selxRes("Giữ sức",b,"Ngươi đứng yên dưới bóng hòe, sức hồi lại.");selxYard()},{x:selxX(T,`Sức +${BAL.selx.rest}`)}));
  selxCard("Sân chờ",`<p>${selxCap(selxNumW(BAL.selx.yard.n))} tú nữ đứng chờ dưới tán hòe, chưa ai được gọi. Người thì thầm, người lặng lẽ chỉnh lại trâm cài.</p>`,selxBare(o))}
-function selxHall(){selxCard("Điện tuyển",`<p>Thái giám xướng: «Tú nữ vào điện!» Ngươi theo hàng bước vào, mắt nhìn xuống nền gạch.</p><p>Người ngồi giữa hẳn là Hoàng thượng; bên trái là Thái hậu; bên phải, một vị nương nương đoan trang, hẳn là Hoàng hậu.</p>`,
+/* D-SELX-FAIR (law 7 + FIRSTCARD §6.2b-END; OD 24/11 ~05:40Z ban hoa ends the life): BEFORE the three tests the hall card tells the rule (top yard.kept of
+   yard.n, the rest ban hoa) and her TRUE chance to be kept if she offers her art at her own level — selxOddsP (the same contest + formula as the result) at
+   entSkipRaw, in the kit odds chip (oddsChip ← word(p), BAL.odds.cut). Words only, no digits (selection cards); the test cards stay bare (§93.7, no hints). */
+function selxHallOdds(){try{const p=selxOddsP(entSkipRaw());if(p==null)return"";const B=BAL.selx.yard;
+ return `<p>Tổng quản dặn: ${selxNumW(B.n)} tú nữ cùng thi ba phần, chỉ ${selxNumW(B.kept)} người phần cao nhất được giữ, người còn lại bị ban hoa, kiếp này dừng. Cơ ngươi được giữ, nếu dâng tài nghệ đúng sức mình: ${oddsChip(word(p))}</p>`}catch(e){console.error("selxHallOdds",e);return""}}
+function selxHall(){selxCard("Điện tuyển",`<p>Thái giám xướng: «Tú nữ vào điện!» Ngươi theo hàng bước vào, mắt nhìn xuống nền gạch.</p><p>Người ngồi giữa hẳn là Hoàng thượng; bên trái là Thái hậu; bên phải, một vị nương nương đoan trang, hẳn là Hoàng hậu.</p>${selxHallOdds()}`,
   [selxO("Quỳ xuống thỉnh an",()=>{selxSpend(BAL.selx.beat.test);const b=rsnap();const me=selxImpRun();if(me&&me.L.length)selxRes("Ba vị nhìn mặt",b,me.L.map(selxImpWhy).join(" "));selxTest("T","doidap",()=>selxMini())},{x:selxX(BAL.selx.beat.test,"ba vị nhìn mặt ngươi lần đầu")})])}
 /* the royal's reaction (the same for her and every girl, law 1): an answer that shows a virtue this royal values = "+", one that clashes = "−" */
 function selxReactR(opt,tok){const tr=selxTrong(tok);const V=opt&&opt.values||[];if(V.some(x=>tr.includes(x)))return"+";const C=BAL.selx.conf;if(V.length&&tr.some(t=>C.some(([a,b])=>a===V[0]&&b===t||b===V[0]&&a===t)))return"−";return""}
@@ -254,7 +259,7 @@ function selxMiniDone(raw){const Z=S.selx2;Z.mk=Object.assign(Z.mk||{},{mini:raw
 function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.find(x=>x.id===(Z.tests&&Z.tests[k]&&Z.tests[k].id));const tok=k=>(selxRoyals().find(x=>x[0]===(Z.tests&&Z.tests[k]&&Z.tests[k].k))||[])[2];
  const K=k=>Z.tests&&Z.tests[k]&&Z.tests[k].k;const TK=k=>{const e=T(k);return e?Object.assign({},e,{__k:K(k)}):e};const t={art:X.art||"",dd:TK("doidap"),hx:TK("hanhxu"),rdd:o=>selxReactR(o,tok("doidap")),rhx:o=>selxReactR(o,tok("hanhxu"))};
  const L=selxRoomCap(selxContest(selxAll(),{marks:Z.mk||{},t}));const me=L.find(x=>x.v===S);X.sc=me.sc;X.kept=me.kept;X.step=me.step;X.place=me.place;
- Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));Z.keptV=L.filter(x=>x.kept&&x.v!==S).map(x=>x.v);Z.keptIds=Z.keptV.map(v=>v.id);
+ Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));Z.cut=selxCut(L);/* D-SELX-FAIR: her place / score / cut, read by the kept card + the ban hoa ending */Z.keptV=L.filter(x=>x.kept&&x.v!==S).map(x=>x.v);Z.keptIds=Z.keptV.map(v=>v.id);
  /* law 1 scan row 20: each girl's answers move HER thiện cảm with the asking royal the same way as hers (selxFav on the same reaction; the mini-game → Hoàng thượng) */
  const M=BAL.selx.npcMatch,rx=m=>m===M.hit?"+":m===M.miss?"−":"";L.forEach(x=>{if(x.v===S)return;const f=x.v.__fav=x.v.__fav||{};const a=K("doidap"),h=K("hanhxu");
   if(a)f[a]=(f[a]||0)+selxFav(rx(x.marks.dd));if(h)f[h]=(f[h]||0)+selxFav(rx(x.marks.hx));f.E=(f.E||0)+selxMiniFav(x.marks.mini)});
@@ -262,7 +267,7 @@ function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.f
  selxNpcOut(L);try{selxPodShow(L)}catch(e){console.error("selx pod",e)}
  if(!me.kept){X.tier=0;X.fx=1;X.why="Bị ban hoa";log("Tuyển chọn: bị ban hoa, xuất cung.");try{kcSnapReset()}catch(e){}selxBanHoa();return}
  selxHuong(S);let hn="túi thơm";try{hn=itm(BAL.selx.huong).n.toLowerCase()}catch(e){}/* RV-SELX13 10 (law 6c): the hương nang is a real item in her chest (BAL.selx.huong) */
- selxCard("Ban hương nang",`<p>Thái giám bưng khay tới trước mặt ngươi: một chiếc hương nang, ${hn} chỉ vàng. Hắn xướng to tên ngươi cho cả điện nghe: «Ban hương nang!» Ngươi cất nó vào rương.</p><p>${Z.keptV.length?`Ngươi cùng ${selxNmL(Z.keptV)} được ở lại ${BAL.selx.lodge.n} chờ chiếu chỉ.`:`Chỉ mình ngươi được ở lại ${BAL.selx.lodge.n} chờ chiếu chỉ.`}</p>`,
+ selxCard("Ban hương nang",`<p>Thái giám bưng khay tới trước mặt ngươi: một chiếc hương nang, ${hn} chỉ vàng. Hắn xướng to tên ngươi cho cả điện nghe: «Ban hương nang!» Ngươi cất nó vào rương.</p><p>${selxCutWords(Z.cut)}</p><p>${Z.keptV.length?`Ngươi cùng ${selxNmL(Z.keptV)} được ở lại ${BAL.selx.lodge.n} chờ chiếu chỉ.`:`Chỉ mình ngươi được ở lại ${BAL.selx.lodge.n} chờ chiếu chỉ.`}</p>`,
   [selxO(`Về ${BAL.selx.lodge.n}`,()=>{Z.kh=Math.min(Z.kh,0);selxNight()})],pMe())}
 /* ================= DAY 3 «Chờ chiếu» ================= */
 function selxD3Teach(){const Z=S.selx2;Z.at=Z.home;

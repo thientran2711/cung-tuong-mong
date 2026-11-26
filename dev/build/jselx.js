@@ -46,6 +46,16 @@ function selxGirls(n){const B=BAL.selx;n=n==null?B.yard.n-1:n;const L=[];for(let
 function selxContest(girls,her){const B=BAL.selx;const L=(girls||[]).map(v=>{const marks=v.__marks||Object.assign(selxNpcMarks(v,her&&her.t||{}),v.__impMk!=null?{imp:v.__impMk}:{});return{v,marks,sc:v.__sc!=null?v.__sc:Math.round(selxScore(v,marks))}});
  if(her)L.push({v:S,marks:her.marks||{},sc:her.sc!=null?her.sc:Math.round(selxScore(S,her.marks||{}))});
  L.sort((a,b)=>b.sc-a.sc||(+b.v.sac||0)-(+a.v.sac||0));L.forEach((x,i)=>{x.place=i+1;const r=selxResult(i+1);x.kept=r.kept;x.step=r.step});return L}
+/* D-SELX-FAIR (laws 1/7/11; owner OD 24/11 ~06:15Z «phải có cái điểm số … 4 cô điểm cao nhất»): ONE result record of a selection contest for HER —
+   place, field size, kept count (BAL.selx.yard.kept), her score and the CUT (the lowest score that was kept). Read by the podium title (selxPodShow),
+   the kept card (jselxday «Ban hương nang») and the ban hoa ending rows (j32 deathChain); stored on S.selx2.cut by both contest roads (days / direct). */
+function selxCut(L){const me=(L||[]).find(x=>x.v===S);if(!me)return null;const K=L.filter(x=>x.kept);return{place:me.place,n:L.length,kept:BAL.selx.yard.kept,kn:K.length,sc:me.sc,cut:K.length?Math.min(...K.map(x=>x.sc)):null,ok:!!me.kept}}
+/* the result line with numbers (kit rows of the ending card, the podium title: numbers allowed there, like «46 phần» on the podium) */
+function selxCutRow(c){return c?`Hạng ${c.place}/${c.n} · giữ ${c.kept} · ${c.sc} phần${c.cut!=null?` · mốc giữ ${c.cut} phần`:""}`:""}
+/* the same line in words (selection cards carry no digits, VANPHONG); ordinal: nhất / nhì / ba / tư / năm … */
+function selxOrdW(n){return n===1?"nhất":n===2?"nhì":n===4?"tư":(typeof selxNumW==="function"?selxNumW(n):String(n))}
+function selxCutWords(c){if(!c)return"";const W=typeof selxNumW==="function"?selxNumW:String;
+ return `Ngươi đứng thứ ${selxOrdW(c.place)} trong ${W(c.n)} người, được ${W(c.sc)} phần; ${c.cut!=null?`mốc được giữ là ${W(c.cut)} phần (người thứ ${selxOrdW(c.kn)}).`:"không ai được giữ."}`}
 /* RV-SELX13 5 (law 6b, LIVE j27 tuyenTu rule): the palace takes a girl only while roomFor("consort") (the one room rule); a kept girl beyond the free rooms is
    not kept (ban hoa), so no girl is ever announced (podium, «Ban hương nang», «Tin sắc phong», phân cung) who does not enter. selxRoomsFree(max) counts
    the free rooms with the one rule (placeholders pushed for the count only, removed at once). Her own place is never touched (she already lives). */
@@ -90,7 +100,7 @@ function selxNpcOut(L){const Z=S.selx2;Z.out=Z.out||[];for(const x of L){if(x.v=
 function selxDay1(){const Z=S.selx2;if(!Z||Z.girls&&Z.girls.length)return;Z.girls=selxGirls();Z.rooms=selxRoomPlan(Z.girls).map(r=>({so:r.so,ids:r.girls.map(v=>v===S?"me":v.id),beds:r.beds.map(b=>b.map(v=>v===S?"me":v.id))}))}
 /* the visible ranking, like the hội thi results: the kit podium (j90 kitPodiumShow), score in «phần», kept / ban hoa under each name */
 function selxPodShow(L){if(typeof kitPodiumShow!=="function"||window.__bot||typeof document==="undefined")return null;
- return kitPodiumShow(L.map(x=>({who:x.v,place:x.place,score:`${x.sc} phần`,sub:x.kept?"ban hương nang":"ban hoa",you:x.v===S?"Ngươi":undefined})),{title:"Điện tuyển",sub:`Giữ ${typeof selxNumW==="function"?selxNumW(BAL.selx.yard.kept):BAL.selx.yard.kept} người điểm cao nhất`,next:"Tiếp",unknown:v=>!(typeof selxMet==="function"?selxMet(v):true)/* KIT 26.4 (kit-batch2 1ba60626, MAIN 117 Q5): NAMED is not MET — a girl not greeted stands as the grey silhouette with her name, no cuMeet */})}
+ return kitPodiumShow(L.map(x=>({who:x.v,place:x.place,score:`${x.sc} phần`,sub:x.kept?"ban hương nang":"ban hoa",you:x.v===S?"Ngươi":undefined})),{title:"Điện tuyển",sub:(()=>{const c=selxCut(L);return `Giữ ${typeof selxNumW==="function"?selxNumW(BAL.selx.yard.kept):BAL.selx.yard.kept} người điểm cao nhất${c&&c.cut!=null?` · mốc giữ ${c.cut} phần`:""}`})()/* D-SELX-FAIR: the cut line under the title */,next:"Tiếp",unknown:v=>!(typeof selxMet==="function"?selxMet(v):true)/* KIT 26.4 (kit-batch2 1ba60626, MAIN 117 Q5): NAMED is not MET — a girl not greeted stands as the grey silhouette with her name, no cuMeet */})}
 /* FIRSTCARD: a princess's audience words (the same words as the hòa thân home road, jkc2 kc2EnterNc) */
 const SELX_WHY_HT={up:"Hoàng thượng thấy dung nhan, phong cao hơn hòa ước",eq:"Được phong đúng như hòa ước",dn:"Lễ ra mắt chưa đủ, phong thấp hơn hòa ước một bậc"};
 const SELX_WHY={up:"Được ban hương nang; được phong cao hơn thân phận",eq:"Được ban hương nang; được phong đúng thân phận",dn:"Được ban hương nang, nhưng phong thấp hơn thân phận một bậc"};
@@ -113,7 +123,7 @@ function selxSelDo(raw){if(S.selx2&&S.selx2.days&&typeof selxMiniDone==="functio
  const ht=selxHoaThan();/* FIRSTCARD: a princess is not in the tú nữ contest (selxHtMe) */
  const girls=Z.girls&&Z.girls.length?Z.girls:(Z.girls=selxGirls());const L=selxRoomCap(selxContest(girls,ht?null:{marks:{mini:raw},t}));const me=ht?selxHtMe(L,{mini:raw}):L.find(x=>x.v===S);
  const res={kept:me.kept,step:me.step};const sc=me.sc;X.sc=sc;X.kept=res.kept;X.step=res.step;X.place=me.place;
- Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));selxNpcOut(L);if(!ht)try{selxPodShow(L)}catch(e){console.error("selx pod",e)}/* FIRSTCARD: the tú nữ podium is not her audience */
+ Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));if(!ht)Z.cut=selxCut(L);/* D-SELX-FAIR */selxNpcOut(L);if(!ht)try{selxPodShow(L)}catch(e){console.error("selx pod",e)}/* FIRSTCARD: the tú nữ podium is not her audience */
  if(!res.kept){X.tier=0;X.fx=1;X.why="Bị ban hoa";log("Tuyển chọn: bị ban hoa, xuất cung.");try{kcSnapReset()}catch(e){}selxBanHoa();return}
  if(!ht)selxHuong(S);X.tier=res.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,res.step);const was=S.rank;S.rank=rank;
  if(rank<was)S.sung=Math.max(0,(S.sung||0)-(was-rank)*BAL.entry.stepSung);S.lastPromo=S.turn;try{palFix()}catch(e){}try{kc2R0()}catch(e){}
@@ -122,4 +132,4 @@ function selxSelDo(raw){if(S.selx2&&S.selx2.days&&typeof selxMiniDone==="functio
   c.h=h0.includes(`phong <b>${RANKS[was].n}</b>`)?h0.replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${nw}</b>`):h0.replace(new RegExp(`(Phong[\\s\\S]*?>)${RANKS[was].n}(<)`),`$1${nw}$2`);
   try{if(typeof oiPut==="function")oiPut(c,X.why)}catch(e){}}
  log(`Tuyển chọn (${KC2SW[X.tier]}): phong ${RANKS[rank].n}.`);try{kcSnapReset()}catch(e){}deal()}
-try{window.selxOddsP=selxOddsP;window.selxLossW=selxLossW;window.selxSelDo=selxSelDo;window.selxScore=selxScore;window.selxResult=selxResult;window.selxRank=selxRank;window.selxContest=selxContest;window.selxGirls=selxGirls;window.selxBanHoa=selxBanHoa;window.selxRoomPlan=selxRoomPlan;window.selxIntake=selxIntake}catch(e){}
+try{window.selxOddsP=selxOddsP;window.selxCut=selxCut;window.selxCutRow=selxCutRow;window.selxCutWords=selxCutWords;window.selxLossW=selxLossW;window.selxSelDo=selxSelDo;window.selxScore=selxScore;window.selxResult=selxResult;window.selxRank=selxRank;window.selxContest=selxContest;window.selxGirls=selxGirls;window.selxBanHoa=selxBanHoa;window.selxRoomPlan=selxRoomPlan;window.selxIntake=selxIntake}catch(e){}

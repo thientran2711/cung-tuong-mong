@@ -1080,6 +1080,8 @@ Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thi
    dienSel = the tiểu thư Điện tuyển keep chance (kcDienSel): base + (score − KC.cut[0])·k, floor lo (cap BAL.kcSelMax), 0 below cut[0] − gap; noise = ± of the score;
    kcCard.quyXinChaWant = the plea bonus when she wants the tuyển tú (kcQuyP). */
 Object.assign(BAL.kc2,{ill:{suc:35,low:20,dieLo:40,dieHi:8},dienSel:{base:45,k:1.2,lo:20,gap:15,noise:4}});BAL.kc2.kcCard.quyXinChaWant=15;
+/* D-SELX-FAIR (law 4): soNeed = how many of the five Sơ tuyển points (dung mạo, khí sắc, tiếng tăm, gia thế, lễ vật; KC.so) pass her (was the typed «sc>=3» in jkc kcSoOk) */
+BAL.kc2.soNeed=3;
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
