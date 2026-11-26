@@ -117,7 +117,7 @@ const STATK=["danh","sung","bac","mat","duc","tai","tamco","sac","th","hh","maid
 function geRank(n){if(!n||(typeof isSrv67==="function"&&isSrv67()))return"";const top=RANKS.length-2;const r0=S.rank;
  if(n>0){if(S.rank>=top)return"";S.rank=Math.min(top,S.rank+n);S.maxRank=Math.max(S.maxRank||0,S.rank);S.lastPromo=S.turn;try{ghenAll(BAL.ghen.rankUp)}catch(e){}}
  else{if(S.rank>=RANKS.length-1)return"";S.rank=Math.max(0,S.rank+n)}
- return S.rank!==r0?`Phẩm vị: ${RANKS[r0].n} → ${RANKS[S.rank].n}`:""}
+ return S.rank!==r0?`Phẩm vị: ${RANKS[r0].n} → ${meRankN()}`:""}
 function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
  if(res.ok){const W=GB().rw[id]||{};const fx={};STATK.forEach(k=>{if(W[k])fx[k]=W[k]});apply(fx);res.fx=fx;
   const rk=geRank(W.rank||0);if(rk)out.push(rk);

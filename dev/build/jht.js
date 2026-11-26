@@ -205,7 +205,7 @@ function kvReasons(x,i,o){const L=[];const k=x.k;
  if(x.dich)L.push(`Đích tử (con Hoàng hậu): lệ lập đích đứng trước mọi hoàng tử khác.`);
  if(x.truong)L.push("Trưởng tử: lớn tuổi nhất trong các hoàng tử.");
  if(!x.dich&&!x.truong&&!k.heir){if(!hienShown(k))L.push(`Còn nhỏ: chỉ xét đích, trưởng và lòng thương của Hoàng thượng (lòng thương: ${x.v?fondWord(k):k.fond}).`);
-  else L.push(x.v?`Lập hiền: Hiền tài ${hienWord(k)} (lời đồn), lòng thương: ${fondWord(k)}, mẹ là ${rkName(x.v)}.`:`Lập hiền: Hiền tài ${ktHien(k)}, Hoàng thượng thương ${k.fond}, mẹ là ${RANKS[S.rank].n}.`)}
+  else L.push(x.v?`Lập hiền: Hiền tài ${hienWord(k)} (lời đồn), lòng thương: ${fondWord(k)}, mẹ là ${rkName(x.v)}.`:`Lập hiền: Hiền tài ${ktHien(k)}, Hoàng thượng thương ${k.fond}, mẹ là ${meRankN()}.`)}
  const b=pkBackOf(k);if(b)L.push(`Nhà vợ chống lưng +${b}.`);
  if(k.age<6)L.push("Chưa đủ 6 tuổi: chưa được xét lập Thái tử.");
  const prev=o[i-1];if(prev&&!k.heir)L.push(`Đứng sau ${prev.k.name}${prev.k.heir?" (Thái tử)":prev.dich&&!x.dich?" (đích tử)":""}.`);return L}

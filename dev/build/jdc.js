@@ -67,7 +67,7 @@ function dcHerOn(){try{return !!(S&&!S.dead&&!S.out&&!S.confined&&!(typeof isSrv
 function dcRefused(p){if(!dcOn())return false;const f=dcFestNow();if(!f)return false;if(p===S)return dcHerOut();const st=dcStat(p,f.k);return!!(st&&st.refused)}
 function dcCutPhan(p){if(!dcOn()||!p)return 0;const f=dcFestNow();if(!f)return 0;const st=dcStat(p,f.k);return st?st.cutPhan:0}
 function dcName(v){if(!v)return"";if(v===S)return"ngươi";const t=v.queen?"Hoàng hậu":(typeof RANKS!=="undefined"&&RANKS[v.rank]?RANKS[v.rank].n:"");return (t?t+" ":"")+v.name}
-function dcRankN(p){try{return p===S?(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):(p.queen?"Hoàng hậu":RANKS[p.rank].n)}catch(e){return""}}
+function dcRankN(p){try{return p===S?(S.rank>=7?"Hoàng hậu":meRankN()):(p.queen?"Hoàng hậu":RANKS[p.rank].n)}catch(e){return""}}
 function dcFamList(L){return L.map(dcFamN).filter(Boolean).join(", ")}
 /* ---------- borrow: the piece really moves (law 6c) ---------- */
 /* co-op: a player's world id (PROTOCOL §3: host 901, guest 902), the same table as jcoopworld me() */

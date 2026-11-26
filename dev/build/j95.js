@@ -43,7 +43,7 @@ function j95kh(){return Math.max(0,Math.min(J95.KH-1,typeof used==="number"?used
 function j95key(){return wk()+"-"+(S.buoi||0)}
 function j95z(){const z=S.j95=S.j95||{};for(const k of ["obs","me","meK","it","wit","owe","hold","seen","told","plant"])z[k]=z[k]||{};z.sec=z.sec||[];z.clue=z.clue||[];return z}
 function j95pn(k){try{return k?placeName(k):"—"}catch(e){return String(k)}}
-function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):p.out?"Phế phi":p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
+function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():S.rank>=7?"Hoàng hậu":meRankN()):p.out?"Phế phi":p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
 function j95acc(p,k){if(!k)return false;try{return palaceOf(p)===k||accessOf(p,k).ok}catch(e){return true}}
 function j95bl(c){return J95.B4[c].toLowerCase()}
 

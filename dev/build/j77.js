@@ -50,7 +50,7 @@ accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} kh�
 accSneak=function(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1))return;const nm=accName(k);const o=accSneakO(k);spend(1);
  if(roll(o)){accGrant(S,k);log(`Lẻn vào ${nm} trót lọt.`);window.__accSilent=0;j77In(k);if(S.place!==k)render();return}
  const P=accSneakPen(k);const r0=S.rank;spend(tc);apply({danh:P.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh ${P.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,P.sev);
- Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh ${P.danh} · ${S.rank<r0?`bị giáng xuống ${RANKS[S.rank].n}`:S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()};
+ Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh ${P.danh} · ${S.rank<r0?`bị giáng xuống ${meRankN()}`:S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()};
 /* an accepted request walks her in at once */
 (function(){const a0=accAsk;accAsk=function(k){const r=a0.apply(this,arguments);try{if(accHas(S,k)&&S.place!==k&&Q.length&&/Được/.test(Q[0].t||"")){const m=Q[0];m.btn="Vào";m.onClose=()=>{setTimeout(()=>{if(!Q.length&&S&&S.place!==k)j77In(k)},0)};showModal()}}catch(e){}return r}})();
 /* the card for a place she cannot enter now */

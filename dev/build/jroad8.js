@@ -56,6 +56,9 @@ function placeCtx(){const r=road8();if(r==="kc"){try{if(S&&S.place==="dtv")retur
 function placeW(k,c){c=c==null?placeCtx():c;const L=[c];if(c.indexOf(":")>0)L.push(c.split(":")[0]);L.push("");
  for(const x of L){const T=ROAD8_LAB[x];if(T&&T[k])return T[k]}return""}
 function road8Lab(k){return placeW(k)}
+/* HER rank word (BIG FAIL r2, law 11, ONE source): every place that prints HER rank reads meRankN(). In the palace = RANKS[S.rank].n (unchanged);
+   before the palace (home road, isKc) = her home station from ROAD8_LAB «me» (Tiểu thư / Thôn nữ / Công chúa / Tú nữ), never a palace rank like «Đáp ứng». */
+function meRankN(){try{if(typeof S!=="undefined"&&S&&!S.out&&road8()==="kc"){const t=placeW("me");if(t)return t}}catch(e){}try{return RANKS[S.rank]?RANKS[S.rank].n:""}catch(e){return""}}
 window.ROAD8_LAB=ROAD8_LAB;window.road8Lab=road8Lab;window.placeCtx=placeCtx;window.placeW=placeW;
 /* outside the palace her maid has no palace rank (kitMaidTitle is the ONE maid title: figure tag, person card, group list, gift, relation rows),
    and the servants of her house are not cung nữ / thái giám (srkName: the ONE servant rank word) */

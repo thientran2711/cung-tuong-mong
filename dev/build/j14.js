@@ -8,7 +8,7 @@ function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.vis
 /* promo-root (whole family): every way she leaves lãnh cung or enters the palace as a consort starts the «Bị bỏ quên» clock (j3 monthTick, S.forgetAt) the same way: restore, the pardon fallback (jagacts), the kỳ tuyển entries (jkc kcEnter, jkc2 kc2Enter), a maid raised to Đáp ứng (j42 srvRise). Number: BAL.danhG.forgetGrace */
 function forgetSafe(p){if(p===S)S.forgetAt=S.turn+1+BAL.danhG.forgetGrace}
 function restore(full,why){S.out=0;forgetSafe(S);/* promo-root: a release is not undone by «Bị bỏ quên» (j3) */S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
- log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
+ log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${meRankN()}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${meRankN()}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
 /* ONE list for her lãnh cung cards and an NPC in the cold palace (AG-ALL-2e, jagacts3 p3Cold): p = the one inside; free / end = what "được tha" / Xuất gia do for her or an NPC */
 function coldActs(){return coldActsOf(S)}
 function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr=others(p).filter(v=>v&&v!==p&&facIn(v)/* cold-faction: the one presence rule */&&aff(v,p)>=netTh(v,"than")),f=facOf(p),
