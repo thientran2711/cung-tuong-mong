@@ -190,3 +190,41 @@ Not a person's chest (left as is): `KMSNAP.inv` (bag snapshot for the new-piece 
 | jwdinv.js:40 | `p` | `p.inv.push(x)` | `invAdd(p,x)` |
 | jdc.js:233 | `v` (local `inv=dcInv(v)`) | `inv.push(w.tram)` | `invAdd(v,w.tram)` |
 | jdc.js:245 | `v` (local `inv=dcInv(v)`) | `inv.push(old)` | `invAdd(v,old)` |
+
+## REVIEW (BIG rv, save + perf; Foreman B ROOT 2 child 3; brief briefs/b-inv-stack-review.md) — PASS
+PRIORITY #1 CHECK ('inv-stack'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 1 (review/inv-stack, this) | archive 0 → reviewed review/inv-stack 20cdb016 as given; no other stacking code.
+Head reviewed: review/inv-stack 20cdb016 → **review/inv-stack-rv 1ffddd68** = 20cdb016 merged on the freeze fix review/coop-freeze-kmrew-rv2 2673733e (merge-tree: only index.html / sw.js / assets.json conflicted → rebuilt) + reviewer fix c6f104b7 + merge of LIVE aa37de21 (home-way-nits: j2/j8/j92/jshelf auto-merged clean; built files rebuilt). Ancestors: origin/main aa37de21 and 2673733e (now in LIVE).
+
+### Reviewer fix (c6f104b7, small, law 6c / feel)
+FOUND: a piece that comes out of her stack (invTop) is a NEW object → j93 kmDiff / jfx kfSeen read it as «new in the chest»: using 1 of 518 candles (or selling / giving one) played **kitGain** (glowing «new item» reveal) for the next candle; a stack with a giver (from: NPC id) would open a «Hộp gấm … tặng» card. Probe A/B on s7: branch `kitGain:alnen0` + `kitLose:fade`, LIVE only `kitLose:fade`.
+FIX: jstack `invSeen` — a piece out of HER stack is pushed into KMSNAP.inv (KMS===S) and kfSeen, so no reveal. After: same as LIVE. Test inv-stack.js (4b) «one piece used → the next out of the stack plays no new-piece reveal» + MUTATE «seen» (invSeen no-op → check FAILS). Caught.
+
+### Checks (brief CHECK 1–7)
+| # | check | result |
+|---|---|---|
+| 1 | law 11 scan re-run (dev/test/inv-stack-scan.py) on rv + on the LIVE aa37de21 merge | RAW 0 · listed 8 (KMSNAP / jdisp F fixtures, not a chest); my own grep of `.inv.push / inv.push / .inv=` over dev/build/j*.js: co-op copies (bagOf, fm.bag replace), rebirth, gifts, shop (jinv / jact), craft (j83 wkNpcMake), stipend noivu (jallot / jstip), servants all via invAdd; only assignments (filter / bagOf copy) left, not adds |
+| 2 | readers on counts | inv-stack.js: bag tile ×518 = total; sell 1 / sell ×5 beyond the real pieces; give 1 to an NPC (hers +1, mine −1); burn 1 candle; Dâng quà / Biếu quà kit badge ×N; save diff (reload totals equal). Per-kind count readers grepped (`.filter(...).length`, find/some/findIndex by k): the only compares are wk (handmade, never stacked) caps; «has one / take one» readers see ≤2 real pieces + top-up each turn/render. Co-op: v.coop entries never fold; coop-e2e SWAP0/1 green. Note (not this branch, LIVE same): jallot/jration kitItemDetailRows «còn N lần dùng» note does not render at all (checked LIVE + rv) — if it is ever wired it must count p.invS too |
+| 3 | migration: 6 old saves (F s7 ls 1,437 + M5 save-latest + s2b stuck-1 + s3f stuck-1 / stuck-4 + s7 stuck-5) | MIGRATION PASS: totals per **k|from|giver|src** equal before/after for her, every NPC and the store (box+bs per why/own); 2nd load (ser → deser) identical counts of real / stacks / store; 0 page errors. s7: 1,437 → 117 real + 39 stacks, NPC stacks 663, store 3,930 + 861 stacks |
+| 4 | law 6c | every stack keeps k + from / giver / src / u / c + n + d / d0, in the holder's own p.invS (owner = holder); 0 stacks without a source (probe noSrc 0 on 6 saves); a dead holder's stacks go to the store as one counted «dead» record; ledger ids of folded pieces dropped from S.il.at (no false «vanished») |
+| 5 | law 4 | new numbers only BAL.stack {on, live:2}; other digits in the diff are pre-existing lines (push → invAdd). Nit: jstip `invTop(p,pr,1e9)` = «all» sentinel, not a game number |
+| 6 | shots Fold 755x1000 + iPad 1180x820 (scratch, outside git, looked 3×) | bag (Tư trang): kit tiles ×83/×87/×154/×510/×151, tab «Tất cả 1438»; Dâng quà + Biếu quà: one kit tile per kind, kit badge ×5 / ×4, no overflow, no cut text. Fixer's harness iPad giftto shot caught the title art (harness only; my own shots fine) |
+| 7 | perf, s7 late save, LIVE 3af7896e vs rv (after forced GC) | Dâng quà DOM **40,883 → 2,976**, open **6.8–7.4 s → 0.6–0.8 s**; live DOM nodes 55k → 4.4k; renderer RSS peak (no GC) 1,749 → 802 MB, after GC 628 → 557 MB; JS heap 64 → 59 MB; save 4,757,569 → 2,801,562 chars; load +~300 ms (one-time fold of the old shape); endTurn on s7 A/B ×2×16: median ~240 ms both (fold ~21 ms + top ~4 ms) |
+
+### Gates (rv c6f104b7 unless noted; LIVE = 3af7896e)
+| gate | rv | LIVE |
+|---|---|---|
+| inv-stack.js base | — | FAIL (no invAdd: waitForFunction timeout; S.inv 1,437) |
+| inv-stack.js fix + MUTATE ×3 (count / drop / seen) | 25/27 ok, the 2 FAIL = gift-picker DOM 2,319 / 2,226 > 2,000 (KIT REQUEST K-LIST-PAGE, known follow-up, Foreman B: land without); on the aa37de21 merge 1ffddd68 same 25/27 | — |
+| coop-e2e SWAP0 / SWAP1 (LIVE Worker) | 143/143 · 143/143 | — |
+| coop-keymove-unit | 12/12 (also on 1ffddd68) | — |
+| save-unseen-lists (from review/save-pid-cards) | 2 PASS / 30 FAIL | 1 / 31 — same cases; rv passes ipadAir nl-4s extra (timing) |
+| save-boundary-reload (same) | fold 13 rows = LIVE set, fold month-0s / year-0s PASS on rv (timing); iPad «day» after «buoi» hangs on a #modal «Hội phối đồ: báo đề» with Q empty (harness cannot close it) | **same hang on LIVE** (serial A/B, both EXIT 124 at the same card) → pre-existing, not this branch |
+| save-death-rebirth (same) | 4/6 | 4/6, same 2 FAIL (identity-card reload, needs the save stack) |
+| quickcheck ALONE | runtime **QUICKCHECK PASS** (open 2,309 ms, old save loads + plays a buổi, perf median new/live render 238/243, tab 577/529, buổi 2,137/1,648, tasks>200 40/34); CORE G4: 80-dialog-fixed 2 FAIL (pre-existing, = LIVE per fixer), 90-button-crawl 1 FAIL «Ô lưu · Lui» (**same on LIVE**, run A/B), 92-look-dedupe FAIL 1 in the bundle → **PASS alone** (flaky) | — |
+Buổi 2,137 vs 1,648 in quickcheck (fixer saw 1,554/1,234): my direct endTurn A/B on the late save is equal (~240 ms median both), fresh-life bags fold almost nothing (≤2 per kind live) → harness/new-life variance, within quickcheck's own PASS; watch on LC.
+
+### LANDING NOTE (important for Foreman B / MAIN / LC)
+review/save-pid-cards (save stack, E-FIX-3 Nội vụ phủ counted stock ilStockTake / ilUsedUp) CONFLICTS in SOURCE with this branch: j29 (svMarketCard), jallot (servant keep → stock), jration (lxGive), jstip (NPC lệ tháng from stock + keep trim), jts (tsLeMeCard). Both touch the same lệ tháng flow (its counted stock vs our S.il.bs / p.invS). Whichever lands SECOND: resolve by hand (its new `.inv.push` → `invAdd`; its stock-take before our invTop keep), then re-run inv-stack-scan.py (must be RAW 0), inv-stack.js, the migration probe and its own save gates.
+
+VERDICT: **PASS** → LAND READY review/inv-stack-rv 1ffddd687461934b822857ff9964596e6e495db1 (FF on LIVE aa37de21; BIG; save + perf; Worker deploy: no). On this merge: inv-stack 25/27 (same 2 known DOM), migration PASS (6 saves), keymove 12/12, coop-e2e SWAP0 143/143 · SWAP1 143/143, scan RAW 0.
+Reviewer: FRESH BIG reviewer (opus) for Foreman B. Probes (scratch, not in git): migprobe.js (6 saves, k|from|giver|src totals + 2nd load), fxprobe.js (new-piece reveal A/B), memprobe.js (DOM / heap / RSS), buoit.js (endTurn A/B), shotprobe.js.
