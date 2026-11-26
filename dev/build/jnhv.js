@@ -233,6 +233,6 @@ addEventListener("resize",()=>{clearTimeout(window.__nhvRz);window.__nhvRz=setTi
 /* arriving in the garden another way (followed someone, an event, a road): she stands in the area with the most people, so the place is never shown unsplit */
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(on()&&k===K&&S.place===K&&!hall()){const P=plan();let best=P.areas[0];P.areas.forEach(a=>{if(count(a)>count(best))best=a});S.hall={k:K,part:best.k,t:kpmStamp(),place:0}}}catch(e){}return r};window.goTo=goTo})();
 
-window.NHV={plan,entries,count,areaOfP,hall,on,mount,unmount,layout,pickGroup,stepOut,openPk,unsel,get cur(){return CUR},get kp(){return KP}};
+window.NHV={plan,entries,count,areaArt,areaOfP,hall,on,mount,unmount,layout,pickGroup,stepOut,openPk,unsel,get cur(){return CUR},get kp(){return KP}};
 try{if(window.KIT_SAMPLES)KIT_SAMPLES.push({id:"§76.nhv",title:"kitPalaceMap · Ngự hoa viên",html:()=>kitPalaceMap({slot:SLOT,k:K})})}catch(e){}
 }catch(e){console.error("jnhv",e)}})();
