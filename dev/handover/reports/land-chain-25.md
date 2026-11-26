@@ -37,3 +37,4 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 21:49Z KK46 (session_01Rc5AsJWaXnsnQJdFazBWmx): KIT CONFIRMED dress-fix kitEquipSlots({grid}) §28.13c + kitDressPicker({under}) §60.2; added kit page sample → land review/dress-fix-kit 8cc9a284 (= e5c7be59 + 2 commits) instead of e5c7be59.
 - 21:51Z kit keeper now KK47 session_01Rc5AsHmtzuWMnb27oL1LC5 (kit-resfold, dress-fix-kit).
 - 21:51Z RV-163 PASS place-close → sha 6f56bc93 (review/place-close-r163 on LIVE 03a8c17c); carries k44 → with/after k44 slot (with goal-links 8d28efd7).
+- 22:08Z RV-163B BIG PASS review/punish-tier ab73bc26 (FF on 03a8c17c; MAIN 164 decides vs witness-split; wipe CDN img/_review/punish-tier/ after land). RV-163B rolled → RV-163C (kit-resfold, oan-pace-ghen, title-bal).
