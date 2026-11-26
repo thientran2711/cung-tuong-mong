@@ -24,3 +24,6 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 07:50Z coordinator is now MAIN CHÍNH 155 session_01V1ZZH2xEpGEfFdnaf8bfYc (all reports there).
 - TAINGHE r5 staged review/lc21-tn 92629a66 = 88bd567f onto HW 56636416 (CHANGE + built files only). Gates gates-tn.sh (chain + dress + home-way + tainghe-info ×5, pcard-overlap, hit-overlap-lc19; QC vs 56636416).
 - DRESS: info-tap-audit exit 1 in chain (known flake) → rerun alone after chain.
+
+## 07:58Z — MAIN 155 fast lane D5 mg-trim c961211e (FF on LIVE)
+- Merge onto DRESS 3af7896e: SOURCE CONFLICT dev/build/jtoil.js toilColUI (1 hunk, ~line 1161): DRESS = old buttons «Trang điểm»+kitQuick «Điểm trang nhanh» + `kitGameFigRefresh(S,{src:kitDressFigSrc(S,toilPor().rank)})` (E95 keeps chosen dress on figure); mg-trim = toilRollBtn + «Tự tay điểm trang» + «Để … mộc» buttons + plain kitGameFigRefresh(). Merge aborted; reported to MAIN 155. Likely resolution = mg-trim's button line + DRESS's figure-refresh line (owner of a branch must do it).
