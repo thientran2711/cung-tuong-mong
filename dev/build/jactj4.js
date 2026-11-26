@@ -5,8 +5,9 @@
 
 /* one door dialog: ways = [{n,x,why,go}] */
 function j4Door(title,h,ways){if(!S||S.dead||Q.length)return;
- const O=ways.map(w=>{const o={n:w.n,fx:w.fx||{},x:w.x||"",go:w.go};if(w.why)kitOff(o,w.why);return o});
- O.push({n:"Thôi",fx:{}});Q.push({act:1,t:title,who:pMe(),h:`<p>${h}</p>`,opts:O});showModal();render()}
+ /* ONE engine draws every door card: DOOR.card (jdoor.js, J1) — rows [{n,x,off:{why},go}]; it also shows the card as her tap inside the Dư đồ person view (jdayq gate c) */
+ const rows=ways.map(w=>{const o={n:w.n,fx:w.fx||{},x:w.x||"",go:w.go};if(w.why)o.off={why:String(w.why),when:""};return o});
+ DOOR.card(title,`<p>${h}</p>`,rows,null);render()}
 /* capture the raw (attrs, name, small, why) of every pbtn a builder makes, so a door can list the same ways without re-deriving a number */
 function j4Capture(fn){const cap=[],p0=pbtn;pbtn=function(at,n,sm,why){cap.push({at,n,sm,why});return p0.apply(this,arguments)};let r;try{r=fn()}finally{pbtn=p0}return{r,cap}}
 const J4DOOR={};/* key -> ways, filled while a tab is drawn */
