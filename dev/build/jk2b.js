@@ -313,25 +313,20 @@ function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.
 /* ODDS WORD RULE (FIRSTCARD-3, owner OD 26/11 ~18:25Z; laws 7/11/14; KIT §6.2b-END): an odds word (Mong manh … Rất vững) shows ONLY on an option that really
    rolls a success chance, and is always the TRUE word — never bent to warn. An option that rolls nothing shows NO odds word (the old sure «Nắm chắc / Rất vững»
    stamp is gone, no toggle). An option that does NOT roll but changes her ending / life (xuất giá, xuất gia, tự vẫn, rời cung, chuyển kiếp, a certain
-   ban hoa …) shows no word either; its choice gets ONE small kit warning line above it, «Cẩn thận khi lựa chọn» (kitChoiceWarn). Result rows stay visible.
+   ban hoa …) shows no word either; its choice gets ONE small kit warning line above it, «Cẩn thận khi lựa chọn» (kitChoiceWarn → the kit line §6.2k). Result rows stay visible.
    kitRiskOpt(o, p, loss, end): a caller whose roll the card cannot see (a contest, a roll inside its go) declares the TRUE chance p (0..100, from the same BAL
    rule the roll uses) + the loss words: the option line then leads with word(p) (kaNorm → kaOdds meter, BAL.odds.cut) and the hint names the loss
    («nhưng nếu hỏng: …» → the kit Mất row, red). end = that loss ends this life (o.end).
    kitLifeOpt(o): the option can change her ending / life (declared end, or its words say so: KIT_END_RE on its name / hint / line). */
 const KIT_END_RE=/kiếp này dừng|kết thúc kiếp này|bị ban hoa|mất mạng|chuyển kiếp|tự vẫn|xuất gia|xuất giá|đi tu\b/i;
-const KIT_WARN_TXT="Cẩn thận khi lựa chọn";
 function kitRiskHint(h,loss){h=String(h||"");return !loss||h.includes(loss)?h:(h?h+"; ":"")+"nhưng "+(/ thì /.test(loss)?"":"nếu hỏng: ")+loss}/* a loss that names its own condition («… thì …») is not prefixed */
 function kitRiskOpt(o,p,loss,end){if(typeof p==="function")try{p=p()}catch(e){p=null}/* FIRSTCARD-2: p may be the roll's own function (one formula for the roll and the word) */if(!o||p==null||isNaN(p))return o;p=oddsCl(Math.round(p));o.oddsP=p;if(end)o.end={p};
  o.j67=[word(p),String(o.j67||"").replace(KIT_ODDS_LEAD,"").replace(/^\s*·\s*/,"")].filter(Boolean).join(" · ");
  if(loss){o.__rkLoss=loss;const h=o.hint;o.hint=typeof h==="function"?(lv=>kitRiskHint(h(lv),loss)):kitRiskHint(h,loss)}return o}/* __rkLoss: a later hint table (jkc KCH) adds its own hint first, then the loss */
 function kitLifeOpt(o){if(!o)return false;if(o.life||o.end)return true;let t="";try{t=[o.n,typeof o.hint==="function"?o.hint(1):o.hint,o.x,o.j67].filter(Boolean).join(" ")}catch(e){}return KIT_END_RE.test(String(t).replace(/<[^>]*>/g,""))}
-/* the warning line: ONE kit part (KIT_REQUESTS K-CHOICE-WARN, kit keeper KK44) — kitWarnLine(text) returns its html; until that part lands this is the stand-in */
-function kitWarnLineHtml(){if(typeof kitWarnLine==="function")return kitWarnLine(KIT_WARN_TXT);return `<div class="kpnote kwarnline" role="note">${KIT_WARN_TXT}</div>`}
-function kitChoiceWarn(m){try{const ops=document.querySelector("#modal .opts");if(!ops||!m||!m.opts||(m.opts.length||0)<2)return;const pre=ops.previousElementSibling;const has=pre&&pre.classList&&(pre.classList.contains("kwarnline")||pre.classList.contains("kwarn"));
- const want=m.opts.some(kitLifeOpt);if(has===want)return;/* idempotent: our own insert must not re-trigger the observer */if(has)pre.remove();if(want)ops.insertAdjacentHTML("beforebegin",kitWarnLineHtml())}catch(e){console.error("kitChoiceWarn",e)}}
-/* the kit panel renders the choice after showModal returns and re-renders it: the line follows every render of #modal (one observer, debounced) */
-(function(){let t=0;const arm=()=>{const M=document.getElementById("modal");if(!M||M.__kwarn)return!!M;M.__kwarn=1;new MutationObserver(()=>{if(t)return;t=setTimeout(()=>{t=0;try{if(typeof Q!=="undefined"&&Q[0]&&!M.hidden)kitChoiceWarn(Q[0])}catch(e){}},30)}).observe(M,{childList:true,subtree:true});return true};
- if(!arm())document.addEventListener("DOMContentLoaded",arm)})();
+/* the warning line is the kit part §6.2k (jopic kitWarnLine / kitWarnPut, KK44): a Q card (or kitPanel spec) carries warn:1 and the kit draws ONE line above .opts.
+   kitChoiceWarn(m) sets it on every choice that holds a life-changing option (before showModal renders it). */
+function kitChoiceWarn(m){try{if(!m||!m.opts||(m.opts.length||0)<2)return;if(m.opts.some(kitLifeOpt))m.warn=1}catch(e){console.error("kitChoiceWarn",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;if(b.classList.contains("kbare"))return;/* KIT §93.7 + §98.16 (K-BARE-HINT): a bare card carries NO «Gợi ý» row (owner: no guidance on selection answers), same guard as kitOptFinal */b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
@@ -360,7 +355,7 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
 const KIT_ACT_PIDS=new Set(["giftpick","plantpick","taintpick","evpick","itarget","shop","plantsv","wkgive","runner","vlget","vlcraft","vlnvp","vlout","htban","h54ban"]);
 function kitIsEventChoice(m){if(!m||!m.opts||!m.opts.length||m.showOut||m.act||m.shop)return false;if(m.pid&&KIT_ACT_PIDS.has(m.pid))return false;
  return !!(m.hideOut||m.ev||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut)))}
-(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;const r=s0.apply(this,arguments);try{kitChoiceWarn(m)}catch(e){}try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
+(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;kitChoiceWarn(m);const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
   document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(o&&o.showOut)return;if(m.hideOut||(o&&o.hideOut)){b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
 /* ACT-LIKE OPTIONS inside a dialog (kit owner #2): every hidden-outcome option keeps its odds meter (owner 19/11 ~01:48Z; the old showOdds
    flag is now the default for all) — an option may carry showOut:true — the full act card (Được / Mất / odds), e.g. "Xin ban", "Mua lén". */

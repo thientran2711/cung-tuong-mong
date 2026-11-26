@@ -432,3 +432,16 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Vi�
 const KIT_ACT_ALIAS={"Nhờ thái giám mua đồ":"mua-hang","Soát đồ":"kiem-tra-ruong","Sai cung nữ thân tín mua lén ngoài cung":"len-mua-ngoai-cung-h","Hối lộ người ở Thái y viện":"mua-chuoc","Chợ đen ở cửa Thần Vũ":"buon-ban-len","Xin đồng minh":"ket-minh"};
 try{const kak0=kitActKey;kitActKey=function(name){try{const a=KIT_ACT_ALIAS[kpPlain(name)];if(a&&!((KIT_ACTS.acts||{})[kpPlain(name)]))return a}catch(e){}return kak0.apply(this,arguments)}}catch(e){}
 try{const ka0=kitActArt;kitActArt=function(name){const r=ka0.apply(this,arguments);try{const n=kpPlain(name),a=KIT_ACT_ALIAS[n];if(a&&r&&!((KIT_ACTS.acts||{})[n]))r.src=`img/act-${a}.webp`}catch(e){}return r};window.kitActArt=kitActArt}catch(e){}
+/* ===== KIT §6.2k «CẨN THẬN KHI LỰA CHỌN» — ONE small warning line above a choice (owner 26/11 ~18:25Z, KK44) =====
+   Options that do NOT roll a chance but change her ending / life (xuất giá, đi tu / xuất gia, tự vẫn, rời cung, chuyển kiếp, «Cúi đầu chờ xét» …) show NO odds word;
+   instead the dialog carries warn:1 (Q card, or kitPanel spec.warn) and the kit draws ONE line «Cẩn thận khi lựa chọn» right above its option list (.opts).
+   The word lives in VANPHONG (KIT_WARN_LINE); one look (.kwarnl: small, the kit red, the «!» disc), every dialog path (j3 cards and kit panels). */
+const KIT_WARN_LINE="Cẩn thận khi lựa chọn";window.KIT_WARN_LINE=KIT_WARN_LINE;
+function kitWarnLine(){return `<div class="kwarnl" role="note"><i class="khap" aria-hidden="true">!</i><span>${KIT_WARN_LINE}</span></div>`}
+function kitWarnPut(){try{const m=Q[0],M=document.getElementById("modal");if(!m||!M||M.hidden)return;const on=!!(m.warn||(m.kit&&m.kit.warn));const o=M.querySelector("#mb .opts");const old=M.querySelectorAll(".kwarnl");
+ if(!on||!o){old.forEach(e=>e.remove());return}if(o.previousElementSibling&&o.previousElementSibling.classList.contains("kwarnl"))return;old.forEach(e=>e.remove());o.insertAdjacentHTML("beforebegin",kitWarnLine())}catch(e){console.error("kitWarnPut",e)}}
+window.kitWarnLine=kitWarnLine;window.kitWarnPut=kitWarnPut;
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitWarnPut();setTimeout(kitWarnPut,120);return r};window.showModal=showModal})();
+(function(){const st=document.createElement("style");st.textContent=`#modal .kwarnl{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px auto 6px;padding:2px 10px;font-size:.82rem;line-height:1.3;color:var(--bad);font-weight:600;letter-spacing:.01em;flex:0 0 auto}
+#modal .kwarnl .khap{flex:0 0 auto;margin:0;width:16px;height:16px;line-height:16px;font-size:.72rem;background:var(--bad);color:var(--panel,#fff);animation:none}`;document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2k",title:"Dòng cảnh báo «Cẩn thận khi lựa chọn» trên lựa chọn đổi kết cục (không có chữ cơ hội)",html:()=>`<div id="modal" style="position:static"><div id="mb">${kitWarnLine()}<div class="opts kitpg-opts"><button class="opt">Xuất gia<small>đổi kiếp này</small></button><button class="opt">Ở lại<small>giữ nguyên</small></button></div></div></div>`})}catch(e){}

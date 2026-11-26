@@ -6,7 +6,7 @@ PRIORITY #1 CHECK ('Cẩn thận khi lựa chọn'): OD 2 | main 0 | review/* 0 
 ## Rule built (owner OD 26/11 ~18:25Z, one place: jk2b)
 1. Odds word only on an option that really rolls, always the TRUE word (`kitRiskOpt` declared p / own odds). The old sure «Nắm chắc / Rất vững» stamp (`kitOptOdds`) is DELETED — no toggle; `kitEndOdds` / `data-ksure` gone (jopic reads «no .kodds = no roll»).
 2. No-roll option that changes her ending / life (`kitLifeOpt`: declared `end`/`life`, or KIT_END_RE on name/hint/line: xuất giá, xuất gia, tự vẫn, đi tu, chuyển kiếp, bị ban hoa, kiếp này dừng, mất mạng) → NO word; its choice gets ONE line «Cẩn thận khi lựa chọn» above the options (`kitChoiceWarn`, MutationObserver on #modal, idempotent, once per choice). Result rows stay visible.
-3. KIT part: K-CHOICE-WARN filed in dev/kit/KIT_REQUESTS.md, KK44 messaged (kitWarnLine); stand-in `.kpnote.kwarnline` meanwhile — swap when KIT READY (`kitWarnLineHtml` already calls `kitWarnLine` if it exists). OB-VERDICT-3 messaged (jk2b kitOptOdds area).
+3. KIT part: K-CHOICE-WARN filed; KIT READY §6.2k (review/kit-k44-parts f179256e) merged in; `kitChoiceWarn` sets `warn:1` on every Q card whose options hold a life-changing option → the kit draws the line (no stand-in left). OB-VERDICT-3 messaged.
 4. Decision for MAIN (judgement call): the tú nữ selection card «Cúi đầu chờ xét» really rolls the contest (kept ≈ 1 in 4), so it keeps its TRUE word (Hiểm) + red Mất row AND the choice gets the line (declared `end`). If sếp wants it wordless, set `selxOddsP` off in `kc2SelRisk`.
 
 ## Scan (dev/test/odds-word-scan.py → firstcard-3-scan.md, 2708 option builders in j*.js)
@@ -17,6 +17,9 @@ BEFORE (LIVE): every dialog option without own odds printed the sure «Rất v�
 - quickcheck: see qc line below.
 
 ## Not done / for MAIN
-- Swap stand-in for kitWarnLine after KK44 KIT READY.
 - The old firstcard-scan.py was replaced by odds-word-scan.py (canon overwrite).
 - firstcard-2's other fixes (princess never ban hoa, home-road declared odds, BAL.kc2.* numbers) ride along unchanged.
+
+## Gates
+- dialog-fixed «(kit-dialog-2 a) no empty Tốn / Được cell» FAILS ON LIVE f573dc94 too (pre-existing, not from this branch). npc-purpose-scan fixed (kcMeet done-text follows the declared roll). quickcheck: see line below.
+- Shots LOOKED Fold + iPad: CDN img/_review/firstcard-3/after-fold-life.png, after-ipad-life.png (wipe after verdict).

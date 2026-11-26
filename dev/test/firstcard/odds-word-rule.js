@@ -10,7 +10,7 @@ const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++};
   for(let t=0;t<6;t++){await p.waitForTimeout(600);const vis=await p.evaluate(()=>{for(let i=0;i<8;i++){const e=typeof dqActEl==='function'&&dqActEl();if(!e)break;e.remove()}document.querySelectorAll('.kmov,.kmrew,[id^="kroul"],.kroul-ov,#kprevov,.kroul').forEach(x=>x.remove());try{showModal()}catch(e){}const M=document.getElementById('modal');return !M.hidden&&M.querySelectorAll('button[data-m]').length>0});if(vis)break}
   for(let t=0;t<40;t++){const l=await p.evaluate(()=>/Sửa soạn nhập cung/.test(document.body.innerText));if(!l)break;await p.waitForTimeout(1000)}
   await p.evaluate(()=>{try{showModal()}catch(e){}});await p.waitForTimeout(1200);
-  return p.evaluate(()=>{const M=document.getElementById('modal');const ops=M.querySelector('.opts');const w=[...M.querySelectorAll('.kwarnline,.kwarn')];
+  return p.evaluate(()=>{const M=document.getElementById('modal');const ops=M.querySelector('.opts');const w=[...M.querySelectorAll('.kwarnl,.kwarnline,.kwarn')];
    return{warn:w.map(x=>x.textContent.trim()),warnAbove:w.length?!!(w[0].compareDocumentPosition(ops)&Node.DOCUMENT_POSITION_FOLLOWING):null,
     opts:[...M.querySelectorAll('button[data-m]')].map(x=>({n:(x.querySelector('.kan')||x).textContent.trim().slice(0,40),odds:((x.querySelector('.kodds')||{}).textContent||'').trim()})),word:BAL.odds.cut.map(c=>word(c)).join('|')}})};
  const build=(life)=>{const nop=()=>{};const o1=kitRiskOpt({n:"Dâng khúc đàn",fx:{},x:"",j67:"tốn: không",hint:"chơi một màn đàn",go:nop},BAL.odds.cut[1],"không lọt vào bốn người đứng đầu thì thôi",false);
@@ -19,7 +19,7 @@ const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++};
  let r=await run('life',true);console.log(dn,JSON.stringify(r));
  ok(r.opts[0].odds&&!/Rất vững/.test(r.opts[0].odds),dn+' rolling option shows its TRUE word ('+r.opts[0].odds+')');
  ok(r.opts.slice(1).every(o=>!o.odds),dn+' no-roll options show NO odds word');
- ok(r.warn.length===1&&r.warn[0]==='Cẩn thận khi lựa chọn'&&r.warnAbove,dn+' ONE warning line above the choice');
+ ok(r.warn.length===1&&r.warn[0].replace('!','')==='Cẩn thận khi lựa chọn'&&r.warnAbove,dn+' ONE warning line above the choice');
  await p.evaluate(()=>{document.querySelectorAll('*').forEach(e=>{if(e.children.length<40&&/Luân hồi xoay vần/.test(e.textContent||'')&&!e.contains(document.getElementById('modal'))&&e.offsetParent&&getComputedStyle(e).position!=='static'&&e.id!=='modal'){e.style.display='none'}})});await p.waitForTimeout(500);
  await p.screenshot({path:path.join(OUT,`after-${dn}-life.png`)});
  r=await run('safe',false);console.log(dn,JSON.stringify(r));
