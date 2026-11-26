@@ -77,7 +77,7 @@ const KIT_OPT_RULES=[
  [/(nhận lỗi|nhận tội|tạ lỗi|tạ tội|xin lỗi|cúi đầu đi qua|nhún nhường|hạ mình|^nhịn)/i,"cui-dau-nhan-loi-h"],
  [/(quỳ xin|khóc lóc xin|xin tha|van xin|dập đầu|xin bà cứu)/i,"quy-xin-tha-h"],
  [/^(thưa|bẩm|kể thật|giải thích|phân trần|thanh minh|biện bạch|tự thú)/i,"opt-thua-trinh"],
- [/^(vâng|vâng chỉ|tuân|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
+ [/^(vâng|vâng chỉ|tuân|cúi đầu (vâng|dạ|tuân|nghe)|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
  /* — gifts / silver — */
  [/(lì xì)/i,"li-xi-h"],
  [/(đút bạc|đưa bạc|bỏ bạc mua|lo lót|hối lộ|mua chuộc|bịt miệng|im miệng)/i,"dut-bac-rut-loi-h"],
@@ -120,6 +120,8 @@ const KIT_OPT_RULES=[
  [/(cầu|hương án|cúng|đèn hoa đăng|giữ chay)/i,"cung-duong-dau-den-h"],
  [/(thái y|thuốc|bắt mạch)/i,"thai-y-khac-bat-mach-h"],
  [/(con ôn bài|kèm .*con|cho con|dạy con|chăm|nhận nuôi)/i,"day-con-hoc"],
+ /* KIT-STAGE-R5 (KK46 review F1, law 11 whole family): every «Cúi đầu …» option without a more specific group above (vâng dạ, im lặng, lui, thưa tên …) = the bowing picture, never the stand-in */
+ [/^cúi đầu/i,"cui-dau-tuan-lenh-h"],
  /* r1: "chàng" alone (any line about him) is the LAST resort — petitions / help for him hit their own group first */
  [/(chàng)/i,"hen-gap"],
 ];

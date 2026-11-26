@@ -88,7 +88,7 @@ function kitHandFlipPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.flip,ip=kitHandW
  const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,cw=parseFloat(getComputedStyle(g).getPropertyValue("--khw"))||B.width,ch=parseFloat(getComputedStyle(g).getPropertyValue("--khh"))||B.height;
  L=L==null?D.left+8:L;R=R==null?D.right-8:R;const w=Math.round(Math.min(R-L,K.maxW[ip],Math.max(K.minW[ip],cw*K.wK)));
  /* the card's resting slot (the lift transition may still run): list box top + its --ky */
- const ky=parseFloat(b.style.getPropertyValue("--ky"))||0,bot=Math.min(D.bottom-4,G.top+ky+ch+2);const s=KIT_HAND.confPx,room=b.disabled?0:Math.round(s*.5);
+ const ky=parseFloat(b.style.getPropertyValue("--ky"))||0,bot=Math.min(D.bottom-4,G.top+ky+ch+2);const s=KIT_HAND.confPx,room=Math.round(s*.5);
  z.style.width=w+"px";z.style.maxHeight="";z.style.height="";z.style.top="auto";const fb=z.querySelector(".khfb");if(fb)fb.style.maxHeight="";
  const top=Math.max(D.top+4,top0==null?D.top+4:top0),maxH=Math.max(120,Math.round(bot-room-top));const nat=Math.max(Math.round(ch),fb?fb.scrollHeight+2:ch);const h=Math.min(maxH,nat);
  z.style.height=h+"px";if(fb)fb.style.maxHeight=h+"px";
@@ -109,9 +109,10 @@ function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg");if(
    §101.10: they sit on the FLIPPED card's lower edge (centred, half over its border), never above the hand. Tapping the flipped card does nothing; tapping another card lifts that one.
    One part for every hand (and the same rule for the thẻ gỗ picker kitPick). Size = KIT_HAND.confPx (kit tap size). */
 function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let c=dl.querySelector(":scope>.khconf");
- if(!b.classList.contains("klift")||b.disabled){if(c)c.hidden=true;return}
+ if(!b.classList.contains("klift")){if(c)c.hidden=true;return}
  if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;dl.appendChild(c)}
- c.hidden=false;const D=dl.getBoundingClientRect(),s=KIT_HAND.confPx,gap=Math.round(s*.6),w=2*s+gap;const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
+ /* a LOCKED card flips too: ✕ alone (same 2-button kit form, no ✓; KK46 review) */const ok=c.querySelector(".khok");if(ok)ok.hidden=!!b.disabled;
+ c.hidden=false;const D=dl.getBoundingClientRect(),s=KIT_HAND.confPx,gap=Math.round(s*.6),w=(b.disabled?1:2)*s+(b.disabled?0:gap);const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
  let x,y;if(Rz){x=Math.round(Rz.l+Rz.w/2-w/2);y=Math.round(Rz.t+Rz.h-s*.5)}else{const B=b.getBoundingClientRect();x=Math.round(B.right-D.left-w+s*.35);y=Math.round(B.top-D.top-s*.55)}
  x=Math.max(4,Math.min(D.width-w-4,x));y=Math.max(4,Math.min(D.height-s-2,y));c.style.left=x+"px";c.style.top=y+"px";c.style.gap=gap+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitHandConf",e)}}
 function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg"),c=dl&&dl.querySelector(":scope>.khconf");if(c){c.hidden=true;c.style.opacity=""}}
@@ -182,7 +183,7 @@ html body #modal#modal#modal#modal .opts.khand.khpre>button.kopt{opacity:0}
 html body #modal#modal#modal#modal .dlg:not(.khmeas) .k3right>.opts.khand,html body #modal#modal#modal#modal .dlg:not(.khmeas) #mb>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0)}/* the hand never scrolls out of view: a long story scrolls under it */
 html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!important}
 #modal .dlg>.khconf,.khconf{position:absolute;z-index:8;display:flex;gap:6px;pointer-events:auto}
-.khconf[hidden]{display:none!important}
+.khconf[hidden],.khconf>button[hidden]{display:none!important}
 #modal .dlg>.khconf>button,.khconf>button{width:var(--khcs,44px);height:var(--khcs,44px);min-width:0;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;font-size:calc(var(--khcs,44px)*.5);font-weight:800;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005;border:2px solid #fffaf0}
 #modal .dlg>.khconf>.khok .kmk,.khconf>.khok .kmk{background:#fff!important;color:#fff!important;width:.95em;height:.95em;margin:0!important;vertical-align:0}
 #modal .dlg>.khconf>.khok,.khconf>.khok{background:#2f8a3e;color:#fff}

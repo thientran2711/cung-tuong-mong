@@ -39,7 +39,7 @@ const DEV=[["fold",755,1000],["ipad",1180,820]];
     Q.push({t:'Yến tiệc ở Ngự hoa viên',h:'<p>Hoàng thượng mở tiệc thưởng hoa, các phi tần đều có mặt. Ngươi được phép sắp chỗ ngồi.</p><p>Ngươi làm thế nào?</p>',who:pEmp(),pid:'rg',
      opts:[{n:'Mời '+tgt.name+' ngồi cạnh',fx:{},j67:'được: '+tgt.name+' quý ngươi hơn · kèm: vài người ghen',go:go(0)},{n:'Một mình dâng rượu',fx:{},j67:'được: bệ hạ để ý · kèm: hậu cung oán',go:go(1)},{n:'Chia đều ân thưởng',fx:{},j67:'được: hậu cung vui lòng',go:go(2)}]});showModal();return R.length});
    await p.waitForTimeout(2800);await shot('dealt');await tapEl('#modal .opts.khand>button.kopt',0);await p.waitForTimeout(1600);await shot('flipped');
-   await tapEl('#modal .dlg>.khconf>.khok');await p.waitForTimeout(2600);await shot('result');
+   await p.evaluate(()=>{window.__bot=0});/* the result card is the player's (bots skip it) */await tapEl('#modal .dlg>.khconf>.khok');await p.waitForTimeout(1300);await shot('result');
    o.res=await p.evaluate(()=>{const t=document.getElementById('rtoast');if(!t||!t.getClientRects().length)return null;const R=t.getBoundingClientRect();const vis=[...t.querySelectorAll('.kb .kitem')].filter(e=>!e.hidden&&e.getClientRects().length&&!e.closest('[hidden]')).map(e=>e.textContent.replace(/\s+/g,' ').trim());return {h:Math.round(R.height),fits:R.bottom<=innerHeight&&R.top>=0&&t.scrollHeight<=t.clientHeight+1,vis,link:(t.querySelector('.kalog')||{}).textContent||''}});
    await p.waitForTimeout(3500)}
   else if(vid==='pcard'){await tapEl('#tokens .tok',0);await p.waitForTimeout(2600);await shot('stage card plaques');o.pw=await p.evaluate(()=>[...document.querySelectorAll('#popw .kpk .kfoc-b')].map(b=>b.textContent.replace(/\s+/g,' ').trim().slice(0,24)));

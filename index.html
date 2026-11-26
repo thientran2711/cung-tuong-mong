@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a78ac6d5+","t":"2026-11-26T21:35Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"7619c25cbdea","h":[]};
+window.CTM_BI={"s":"e738bd70+","t":"2026-11-26T21:48Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"b5c3100db338","h":[]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -39403,6 +39403,7 @@ Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,
 BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
 /* KIT music (KK18 §96): an event track holds this long before the base track returns */
 BAL.kmus={holdMs:6000};
+BAL.shopTray=6;/* KIT §101.11 (owner 26/11 ~21:25Z «mỗi sự kiện maximum 7 lá»): the Nội vụ phủ tray (PEND.shop) offers at most 6 items + «Thôi» = 7 cards */
 /* PUNISH-REASON (review/punish-reason, D1; owner 26/11 ~01:25Z + ~04:15Z): coldMinDays = days (tuần, wk()) in lãnh cung before any release
    (ân xá, đại xá, cầu xin, minh oan — hers and an NPC's); gapDays = no second rank punishment on one person within this many days (it becomes
    cấm túc); fallSung = Sủng lost with a one-rank fall (was the typed 15 in j8 fall); evShow = most evidence lines a notice lists */
@@ -55751,7 +55752,7 @@ function spyPick(refund,ag){const m=ag||whyMaidInit(S.maid),L=spyList();const cu
  const opts=L.map(v=>{const fz=spyRoll(S,v,m);/* the odds printed = the odds rolled after the pay (j9 fzRun) */return{kgt:v,n:`${mdH(pv(v),"xs")}${spyWho(v)}${v===cur?" · đang nhắm":""} · ${chFindWord(S,v,m)}`,x:`${word(fz)} · thành: biết 2 điều thật về nàng, chứng cứ ${balSg(BAL.eff.j78.evN)} nếu tìm ra · hỏng: Thiện cảm ${m.name} -5, nàng đoán ra: ${typeof pvOan==="function"?pvOan(v,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
   why:()=>spyFactors(S,v,m),dom:"Mưu kế",o:spyO(S,v,m),go:()=>{/* review/servant-system: the khắc is paid when a target is chosen (j25 payOnPick: the card is an "open" act); before, nothing was paid and "Thôi" gave 2 khắc back */if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0}const b=rsnap();const ok=fzRun(fz,null,()=>spyMaidRun(v,ag));try{if(S.visit){S.visit.tk=S.visit.tk||{};if(popIdx!=null)S.visit.tk[popIdx]=1}}catch(e){}setTimeout(()=>{try{resultShow(`Sai ${m.name} dò la ${spyWho(v)}`,b,ok)}catch(e){}},0)}}});
  opts.push({n:"Thôi, để sau",x:"không sai đi (khắc vừa tốn được trả lại)",go:()=>{if(S.payOnPick)S.payOnPick=0;else if(refund)used=Math.max(0,used-refund)}});
- Q.push({t:`Sai ${m.name} đi dò la`,ownAct:1,/* dialog-person (owner 21/11): the choice is HERS alone — her own figure stands on the left (jk4 kitStagePeople); `who` stays only to name the servant she sends (no chip of her inside the text) */who:ag&&typeof pServ==="function"?pServ(ag):typeof pMaid==="function"?pMaid():null,h:`<p>Ngươi muốn ${m.name} dò la ai? ${spyHint(m)}</p><p class="past">${chHowTxt(S,m)}</p>`,opts});showModal()}
+ Q.push({t:`Sai ${m.name} đi dò la`,kind:"ring"/* KIT §101.12: the targets are PEOPLE (up to every consort) → vòng người, never a card hand */,ownAct:1,/* dialog-person (owner 21/11): the choice is HERS alone — her own figure stands on the left (jk4 kitStagePeople); `who` stays only to name the servant she sends (no chip of her inside the text) */who:ag&&typeof pServ==="function"?pServ(ag):typeof pMaid==="function"?pMaid():null,h:`<p>Ngươi muốn ${m.name} dò la ai? ${spyHint(m)}</p><p class="past">${chHowTxt(S,m)}</p>`,opts});showModal()}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(!p||p.kind!=="maid"||!S.maid)return A;const i=A.findIndex(a=>a.n==="Sai đi dò la");if(i<0)return A;
  const m=whyMaidInit(S.maid),t=spyTarget();if(!t){A[i]=Object.assign({},A[i],{lock:true,t:"không còn phi tần nào để dò"});return A}
  A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để đổi) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)} nếu tìm ra · ${chFindTxt(S,t,m)}`,/* previews: j78maidSpy */l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
@@ -69767,7 +69768,7 @@ const KIT_OPT_RULES=[
  [/(nhận lỗi|nhận tội|tạ lỗi|tạ tội|xin lỗi|cúi đầu đi qua|nhún nhường|hạ mình|^nhịn)/i,"cui-dau-nhan-loi-h"],
  [/(quỳ xin|khóc lóc xin|xin tha|van xin|dập đầu|xin bà cứu)/i,"quy-xin-tha-h"],
  [/^(thưa|bẩm|kể thật|giải thích|phân trần|thanh minh|biện bạch|tự thú)/i,"opt-thua-trinh"],
- [/^(vâng|vâng chỉ|tuân|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
+ [/^(vâng|vâng chỉ|tuân|cúi đầu (vâng|dạ|tuân|nghe)|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
  /* — gifts / silver — */
  [/(lì xì)/i,"li-xi-h"],
  [/(đút bạc|đưa bạc|bỏ bạc mua|lo lót|hối lộ|mua chuộc|bịt miệng|im miệng)/i,"dut-bac-rut-loi-h"],
@@ -69810,6 +69811,8 @@ const KIT_OPT_RULES=[
  [/(cầu|hương án|cúng|đèn hoa đăng|giữ chay)/i,"cung-duong-dau-den-h"],
  [/(thái y|thuốc|bắt mạch)/i,"thai-y-khac-bat-mach-h"],
  [/(con ôn bài|kèm .*con|cho con|dạy con|chăm|nhận nuôi)/i,"day-con-hoc"],
+ /* KIT-STAGE-R5 (KK46 review F1, law 11 whole family): every «Cúi đầu …» option without a more specific group above (vâng dạ, im lặng, lui, thưa tên …) = the bowing picture, never the stand-in */
+ [/^cúi đầu/i,"cui-dau-tuan-lenh-h"],
  /* r1: "chàng" alone (any line about him) is the LAST resort — petitions / help for him hit their own group first */
  [/(chàng)/i,"hen-gap"],
 ];
@@ -92690,7 +92693,9 @@ Object.assign(BAL,{shelf:{
 /* the Nội vụ phủ tray offers only décor within her rank (reviewer r1 fix (1), kept by builder #2): a BUYING rule — OD 17/11 ~19:50Z lifts only the DISPLAY block (an over-rank piece she owns, from a gift or bought before a demotion, may still stand) */
 /* Nội vụ phủ tray + ngự ban: décor joins without changing the old lists' balance */
 (function(){const P=BAL.shelf.it,has=(k,c)=>!!(P[k]&&!P[k].imp&&!P[k].dead&&(P[k].src||"").includes(c)&&IT[k]);window.SHELF_SRC=c=>Object.keys(P).filter(k=>has(k,c));
- if(typeof restock==="function"){const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.shop))for(const k of shuf(SHELF_SRC("m").filter(k=>(P[k].rk|0)<=(rkOf(S)|0))).slice(0,BAL.shelf.shopN))if(!S.shop.includes(k))S.shop.push(k)}catch(e){console.error("shelf restock",e)}return r};window.restock=restock}
+ if(typeof restock==="function"){const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.shop))for(const k of shuf(SHELF_SRC("m").filter(k=>(P[k].rk|0)<=(rkOf(S)|0))).slice(0,BAL.shelf.shopN))if(!S.shop.includes(k))S.shop.push(k)}catch(e){console.error("shelf restock",e)}
+  /* KIT §101.11 (owner 26/11 ~21:25Z «mỗi sự kiện maximum 7 lá»): the LAST restock wrapper caps the tray at BAL.shopTray items (+ «Thôi» = 7): every source keeps a fair chance (one random draw), the base list does not crowd out the special items */
+  try{const cap=BAL.shopTray||6;if(S&&Array.isArray(S.shop)&&S.shop.length>cap)S.shop=shuf(S.shop.slice()).slice(0,cap)}catch(e){}return r};window.restock=restock}
  if(typeof bestow==="function"){const b0=bestow;bestow=function(p,why){if(!BEST||why==="son"||!roll(BAL.shelf.bestO))return b0.apply(this,arguments);const w=BEST[why]?why:"night",L0=BEST[w];
    BEST[w]=SHELF_SRC("n");try{return b0.apply(this,arguments)}finally{BEST[w]=L0}};window.bestow=bestow}})();
 /* the one luxury number per piece (jlux luxPiece): a new décor piece = the kit formula luxVal on its BAL grade + price */
@@ -99952,7 +99957,7 @@ function kitHandFlipPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.flip,ip=kitHandW
  const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,cw=parseFloat(getComputedStyle(g).getPropertyValue("--khw"))||B.width,ch=parseFloat(getComputedStyle(g).getPropertyValue("--khh"))||B.height;
  L=L==null?D.left+8:L;R=R==null?D.right-8:R;const w=Math.round(Math.min(R-L,K.maxW[ip],Math.max(K.minW[ip],cw*K.wK)));
  /* the card's resting slot (the lift transition may still run): list box top + its --ky */
- const ky=parseFloat(b.style.getPropertyValue("--ky"))||0,bot=Math.min(D.bottom-4,G.top+ky+ch+2);const s=KIT_HAND.confPx,room=b.disabled?0:Math.round(s*.5);
+ const ky=parseFloat(b.style.getPropertyValue("--ky"))||0,bot=Math.min(D.bottom-4,G.top+ky+ch+2);const s=KIT_HAND.confPx,room=Math.round(s*.5);
  z.style.width=w+"px";z.style.maxHeight="";z.style.height="";z.style.top="auto";const fb=z.querySelector(".khfb");if(fb)fb.style.maxHeight="";
  const top=Math.max(D.top+4,top0==null?D.top+4:top0),maxH=Math.max(120,Math.round(bot-room-top));const nat=Math.max(Math.round(ch),fb?fb.scrollHeight+2:ch);const h=Math.min(maxH,nat);
  z.style.height=h+"px";if(fb)fb.style.maxHeight=h+"px";
@@ -99973,9 +99978,10 @@ function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg");if(
    §101.10: they sit on the FLIPPED card's lower edge (centred, half over its border), never above the hand. Tapping the flipped card does nothing; tapping another card lifts that one.
    One part for every hand (and the same rule for the thẻ gỗ picker kitPick). Size = KIT_HAND.confPx (kit tap size). */
 function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let c=dl.querySelector(":scope>.khconf");
- if(!b.classList.contains("klift")||b.disabled){if(c)c.hidden=true;return}
+ if(!b.classList.contains("klift")){if(c)c.hidden=true;return}
  if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;dl.appendChild(c)}
- c.hidden=false;const D=dl.getBoundingClientRect(),s=KIT_HAND.confPx,gap=Math.round(s*.6),w=2*s+gap;const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
+ /* a LOCKED card flips too: ✕ alone (same 2-button kit form, no ✓; KK46 review) */const ok=c.querySelector(".khok");if(ok)ok.hidden=!!b.disabled;
+ c.hidden=false;const D=dl.getBoundingClientRect(),s=KIT_HAND.confPx,gap=Math.round(s*.6),w=(b.disabled?1:2)*s+(b.disabled?0:gap);const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
  let x,y;if(Rz){x=Math.round(Rz.l+Rz.w/2-w/2);y=Math.round(Rz.t+Rz.h-s*.5)}else{const B=b.getBoundingClientRect();x=Math.round(B.right-D.left-w+s*.35);y=Math.round(B.top-D.top-s*.55)}
  x=Math.max(4,Math.min(D.width-w-4,x));y=Math.max(4,Math.min(D.height-s-2,y));c.style.left=x+"px";c.style.top=y+"px";c.style.gap=gap+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitHandConf",e)}}
 function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg"),c=dl&&dl.querySelector(":scope>.khconf");if(c){c.hidden=true;c.style.opacity=""}}
@@ -100046,7 +100052,7 @@ html body #modal#modal#modal#modal .opts.khand.khpre>button.kopt{opacity:0}
 html body #modal#modal#modal#modal .dlg:not(.khmeas) .k3right>.opts.khand,html body #modal#modal#modal#modal .dlg:not(.khmeas) #mb>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0)}/* the hand never scrolls out of view: a long story scrolls under it */
 html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!important}
 #modal .dlg>.khconf,.khconf{position:absolute;z-index:8;display:flex;gap:6px;pointer-events:auto}
-.khconf[hidden]{display:none!important}
+.khconf[hidden],.khconf>button[hidden]{display:none!important}
 #modal .dlg>.khconf>button,.khconf>button{width:var(--khcs,44px);height:var(--khcs,44px);min-width:0;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;font-size:calc(var(--khcs,44px)*.5);font-weight:800;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005;border:2px solid #fffaf0}
 #modal .dlg>.khconf>.khok .kmk,.khconf>.khok .kmk{background:#fff!important;color:#fff!important;width:.95em;height:.95em;margin:0!important;vertical-align:0}
 #modal .dlg>.khconf>.khok,.khconf>.khok{background:#2f8a3e;color:#fff}
@@ -102359,7 +102365,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7619c25cbdea";window.CTM_BUILD=BUILD;
+const BUILD="b5c3100db338";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
