@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"73444d0b+","t":"2026-11-25T23:04Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"45a59accb709","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
+window.CTM_BI={"s":"de4e9fa8+","t":"2026-11-25T23:36Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"5d9e3f22157f","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -43081,8 +43081,11 @@ function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row + the kit odds meter — every hidden-outcome option uses these, nothing private */
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
 /* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
-   roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
-function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
+   roll uses, law 4) stays; a card with NO odds (a certain outcome: nothing is rolled — an exit, a death, a fixed result) shows NO odds word
+   (KK34, MAIN 148 order 25/11 ~23:45Z on robot E «Cha định hôn»: three life-ending cards all «Rất vững»; owner 23/11 ~21:40Z «no ladder word may
+   read as a promise»; overwrites the 19/11 «a sure card shows the top rung» reading, law 14). KIT_ODDS_SURE=true brings the old top-rung meter back. */
+const KIT_ODDS_SURE=false;
+function kitOptOdds(b){try{if(!KIT_ODDS_SURE)return;if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
  kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
@@ -57140,9 +57143,9 @@ KIT_SAMPLES.push(
    game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so the hint comes from the real kitHint and
    the odds meter is the card's own (a certain option: «Nắm chắc»; owner 19/11 ~01:48Z, kitRisk retired). */
 /* KIT §101 sample: a live event frame whose options become a hand (jkhand) */
-function kitPgHand(n){try{const W=o=>word(o);const N=["Gói bánh ú dâng Thái hậu","Xin ân cho gia đình","Theo cha mưu đại sự","Đứng ngoài, giữ mình","Hỏi Hoàng hậu","Dò la Kính sự phòng","Tặng lễ","Cáo bệnh","Chờ xem thêm","Về cung nghỉ"];
+function kitPgHand(n,talk){try{const W=o=>word(o);const N=["Gói bánh ú dâng Thái hậu","Xin ân cho gia đình","Theo cha mưu đại sự","Đứng ngoài, giữ mình","Hỏi Hoàng hậu","Dò la Kính sự phòng","Tặng lễ","Cáo bệnh","Chờ xem thêm","Về cung nghỉ"];
  const o=N.slice(0,n).map((x,i)=>({n:x,fx:{},x:i%3===2?`${W(20)} · thành: danh vọng lên · hỏng: mất sủng`:i%3===1?`${W(55)} · thành: được lòng Thái hậu · hỏng: bị nghi`:`${W(80)} · thành: yên ổn qua buổi`/* words only: the sample types no rule number (one-core guard, law 4) */}));o[n-1].lk=()=>"Chưa đủ Danh";
- Q.push({t:"Mẫu kit · Bàn bài",h:"<p>Tân quân lên ngôi, triều đình chia ba ngả, mỗi phe đều muốn kéo ngươi về phía mình.</p><p>Ngươi theo ai?</p>",opts:o,who:typeof pEmp==="function"?pEmp():null});showModal()}catch(e){console.error("kitPgHand",e)}}
+ Q.push({t:"Mẫu kit · Bàn bài",h:"<p>Tân quân lên ngôi, triều đình chia ba ngả, mỗi phe đều muốn kéo ngươi về phía mình.</p><p>Ngươi theo ai?</p>",opts:o,who:typeof pEmp==="function"?pEmp():null});if(talk){const m=Q[Q.length-1];m.talk=1;m.t="Mẫu kit · Đối thoại";m.h="<p>Hoàng thượng dừng bước bên hồ sen.</p><p>“Mấy hôm nay nàng ít ra ngoài, có điều gì không vui?”</p><p>Ngươi cúi đầu, chưa biết đáp thế nào.</p>";o.forEach(x=>{x.x=""});delete o[n-1].lk}showModal()}catch(e){console.error("kitPgHand",e)}}
 window.kitPgHand=kitPgHand;
 function kitPgEvOpts(){const W=o=>word(o);const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},
   {n:"Xin ân cho gia đình",fx:{},x:`${W(55)} · thành: Danh +3, Bạc +40 · hỏng: Sủng -4`},
@@ -57157,7 +57160,8 @@ KIT_SAMPLES.push(
  {id:"§7",title:"Result card lines: value · short why (one source = Sổ ghi)",html:kitPgWhy},
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
- {id:"§101",title:"kitHand «Bàn bài»: 2–10 event options = a hand of cards (tap = lift + plate, tap again = choose; opens a live frame)",html:()=>`<button class="kbtn" data-kitsample="hand" onclick="kitPgHand(5)">Bàn bài · 5 lá</button> <button class="kbtn" data-kitsample="hand8" onclick="kitPgHand(8)">Bàn bài · 8 lá</button>`},
+ {id:"§102",title:"kitStage «sân khấu không khung»: speaker left, her right, story box, the hand at the foot; §102.2 dialogue = lines one by one, then thẻ gỗ (opens a live frame)",html:()=>`<button class="kbtn" data-kitsample="stage" onclick="kitPgHand(4)">Sân khấu · bàn bài</button> <button class="kbtn" data-kitsample="stagetalk" onclick="kitPgHand(4,1)">Sân khấu · đối thoại</button>`},
+ {id:"§101",title:"kitHand «Bàn bài»: 2–10 event options = a hand of cards (tap = lift + plate + ✓ / ✕, ✓ = choose; opens a live frame)",html:()=>`<button class="kbtn" data-kitsample="hand" onclick="kitPgHand(5)">Bàn bài · 5 lá</button> <button class="kbtn" data-kitsample="hand8" onclick="kitPgHand(8)">Bàn bài · 8 lá</button>`},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
@@ -97315,7 +97319,7 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
    Data / taps are unchanged: the same #modal, the same buttons, the same choose path (chooseM). Numbers: geometry knobs only (KIT_STAGE). */
 const KIT_STAGE={pad:8,fig:[.98,.98]/* figure height share of the room [fold,ipad] */,feetIn:.30/* share of the hand height the feet may stand behind the cards */,
  faceK:.19/* the face band = top share of the painted figure */,midMin:420/* px between the figures for the speech box beside them (else it goes under the faces) */,
- boxMaxW:[720,760],plateW:560,sayW:460/* iPad speech bubble */,sayPer:3/* thẻ gỗ per page (RD5 rec «≤3 thẻ mỗi trang») */,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,bodyK:.45/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
+ boxMaxW:[720,760],plateW:560,sayW:460/* iPad speech bubble */,sayPer:3/* thẻ gỗ per page (RD5 rec «≤3 thẻ mỗi trang») */,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,talkIds:["adStroll","rcvHelp","thbirthday","cmTt","cmTd","vnight"]/* §102.2 the events that are a CONVERSATION (a person speaks to her; MAIN 148 25/11 ~23:45Z): their Q item pid = talk:1 */,bodyK:.45/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
 (function(){try{const st=document.createElement("style");st.id="kit-stage";st.textContent=`
 html body #modal.kstg{background:transparent!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage{position:fixed!important;left:var(--kstL)!important;top:var(--kstT)!important;width:var(--kstW)!important;height:var(--kstH)!important;max-width:none!important;max-height:none!important;min-height:0!important;
@@ -97354,6 +97358,8 @@ html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain.kstg-foot>.fac
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain.kstg-foot>.faces .pfnm,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain.kstg-foot>.faces .pcname,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain.kstg-foot>.faces .kfnm{font-size:.72rem!important;line-height:1.1!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain.kstg-foot .kfacts>.kfact{font-size:.9rem;line-height:1.35;padding-block:1px!important}/* one page «foot»: a slim band — the faces row is one small line, the lines a touch tighter, so a usual story reads without scrolling */
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain{transition:opacity .16s ease-out}
+html body #modal#modal#modal#modal#modal.kstg .dlg.dlg.kstage:has(>.khplate:not([hidden])) .kpmain.kpmain:not(.kstg-foot){max-height:var(--bhL,var(--bh))!important}
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces>figure.kstg-dup{display:none!important}/* the speaker standing on the stage carries his own name tag: his face is not repeated in the story's faces row (KK34, duplicate «Hoàng thượng») */
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage:has(>.khplate:not([hidden])) .kpmain.kstg-foot{opacity:0;visibility:hidden;pointer-events:none}/* one page «foot»: the lifted card's plate takes the band's place (✕ brings the story back) */`;document.head.appendChild(st)}catch(e){}})();
 function kstgWants(dl,g){try{if(!(dl&&dl.matches&&dl.matches("#modal .dlg")&&!dl.closest(".pc,.kpdlg")))return false;if(g)return g.closest(".dlg")===dl&&kitHandWants(g);return !!dl.querySelector(":scope>#mb .opts.khand")}catch(e){return false}}
 function kstgGeo(){try{if(typeof kscnGeo==="function")return kscnGeo()}catch(e){}return{t:0,H:innerHeight,L:0,R:0,w:innerWidth}}
@@ -97399,6 +97405,7 @@ function kstgPlace(dl){try{if(!dl||!dl.classList.contains("kstage"))return;const
   const top=fy+ob.t*fh;el.style.setProperty("--tagy",Math.max(T0+16-fy,Math.round(ob.t*fh-2))+"px");faceBot=Math.max(faceBot,Math.round(top+K.faceK*fh*(ob.b-ob.t)));
   if(side<0)midL=Math.max(midL,Math.round(fx+ob.r*fw)+6);else midR=Math.min(midR,Math.round(fx+ob.l*fw)-6)};
  const pm=mb.querySelector(".kpmain");const fm=document.documentElement.dataset.kstfold||K.fold;
+ try{const nm=e=>((e&&e.textContent)||"").replace(/\s+/g," ").trim();const tags=[sp,me].map(f=>nm(f&&f.querySelector(".kt3"))).filter(Boolean);if(pm)pm.querySelectorAll(":scope>.faces>figure").forEach(f=>{const t=nm(f.querySelector("figcaption"))||nm(f);f.classList.toggle("kstg-dup",!!t&&tags.some(x=>x===t||x.replace(/\s/g,"")===t.replace(/\s/g,"")))})}catch(e){}
  const box=(bx,by,bw,bh)=>{pm.style.setProperty("--bx",bx+"px");pm.style.setProperty("--by",by+"px");pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",bh+"px");dl.__kstBox={bx,by,bw,bh}};
  /* one page, «top»: the slim band goes first under the plaque; the figures stand from under it to the hand (their faces never under the band) */
  if(pm&&!ip&&fm==="top"){const bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8),bx=Math.round((W-bw)/2),cap=Math.round(H*K.topCap);box(bx,T0,bw,cap);const bb=T0+Math.min(cap,pm.offsetHeight)+6;
@@ -97428,7 +97435,9 @@ function kstgIn(dl){try{const still=typeof kitHandStill==="function"&&kitHandSti
 function kstgPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg.kstage");if(!dl)return;const z=dl.querySelector(":scope>.khplate");if(!z||z.hidden)return;
  const W=dl.clientWidth,D=dl.getBoundingClientRect(),B=b.getBoundingClientRect(),G=g.getBoundingClientRect();const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;
  const bottom=Math.min(G.top+lift+2,B.top-6)-D.top-(b.disabled?0:Math.round(((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*.6));const top0=(dl.__kstFace||0)+4;const w=Math.min(KIT_STAGE.plateW,W-16);let x=Math.round(Math.max(8,Math.min(W-8-w,B.left-D.left+B.width/2-w/2)));
- z.style.left=x+"px";z.style.width=w+"px";z.style.bottom=Math.round(D.height-bottom)+"px";z.style.maxHeight=Math.max(80,Math.round(bottom-top0))+"px";z.style.top="auto"}catch(e){console.error("kstgPlate",e)}}
+ z.style.left=x+"px";z.style.width=w+"px";z.style.bottom=Math.round(D.height-bottom)+"px";z.style.maxHeight=Math.max(80,Math.round(bottom-top0))+"px";z.style.top="auto";
+ /* the story box beside the faces (iPad) never runs under the plate: it ends above the plate's top and shows its LAST lines (MAIN 147 look: the plate covered the last story line; KK34) */
+ const pm=dl.querySelector(".kpmain:not(.kstg-foot):not(.ksay)");if(pm&&dl.__kstBox){const pt=bottom-z.offsetHeight-8,bh=Math.max(60,Math.round(pt-dl.__kstBox.by));if(dl.__kstBox.by+pm.offsetHeight>pt){pm.style.setProperty("--bhL",bh+"px");requestAnimationFrame(()=>{pm.scrollTop=pm.scrollHeight})}else pm.style.removeProperty("--bhL")}}catch(e){console.error("kstgPlate",e)}}
 (function(){if(typeof kitHandLay!=="function")return;const L0=kitHandLay;
  kitHandLay=function(g,quiet){let dl=null;try{dl=g&&g.closest&&g.closest(".dlg");if(dl&&kitHandWants(g))kstgOn(dl,g)}catch(e){}
   const r=L0.call(this,g,dl&&dl.classList.contains("kstage")?true:quiet);/* the stage owns the frame: the frame-fit passes (kszEvLaw10 / kszTextFirst3) do not run on it */
@@ -97449,9 +97458,8 @@ function kstgOff(dl){try{dl.classList.remove("kstage");["--kstL","--kstT","--kst
    - after the last line her answers drop as THẺ GỖ TREO (kitPick §98) beside HER, low (waist → feet), at most 3 per page (tabs «Đáp · 1/2/3»);
      tap = lift + line, green ✓ = choose (the frame's own card is chosen: same chooseM path), ✕ = put back.
    The hand cards stay in the DOM (hidden) as the data + choose path; nothing else changes. */
-function kstgTalkWants(dl,g){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.talk===0)return false;if(m&&m.talk===1)return true;
- const bs=typeof kitHandCards==="function"?kitHandCards(g):[];if(!bs.length)return false;if(bs.some(b=>b.querySelector(".kodds")))return false;
- return !!dl.querySelector(".kpmain .kfacts>.kfact")}catch(e){return false}}
+function kstgTalkWants(dl,g){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.talk===0)return false;if(m&&(m.talk===1||KIT_STAGE.talkIds.includes(m.pid)))return true;
+ return false/* only the events MAIN marked (KIT_STAGE.talkIds / Q item talk:1): a card frame with no odds word (certain outcomes, KIT_ODDS_SURE off) stays a hand (KK34) */}catch(e){return false}}
 function kstgTalkOn(dl,g){try{if(!dl.classList.contains("kstage"))return false;const on=kstgTalkWants(dl,g);dl.classList.toggle("kstalk",on);if(!on){if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}return false}
  /* the talk state lives on the Q item (a re-render of the frame makes a new .dlg: the line she reached and the open plaques stay) */
  const m=typeof Q!=="undefined"&&Q[0]||null;if(m){if(!m.__kstT)m.__kstT={i:0,asked:false,P:null};if(dl.__kstT!==m.__kstT){const o=dl.__kstT;dl.__kstT=m.__kstT;if(o&&o.P&&o!==m.__kstT)try{o.P.destroy()}catch(e){}if(dl.__kstT.P&&dl.__kstT.P.host!==dl){try{dl.__kstT.P.destroy()}catch(e){}dl.__kstT.P=null;dl.__kstT.sig=""}}}else if(!dl.__kstT)dl.__kstT={i:0,asked:false,P:null};
@@ -97474,7 +97482,7 @@ function kstgTalkAsk(dl,B){try{if(typeof kitPick==="undefined")return;const T=dl
  if(me){const r=me.getBoundingClientRect(),ob=kstgOb(im)||{l:.1,r:.9,t:.02,b:1};A={x:r.left-D.left+ob.l*r.width,y:r.top-D.top+ob.t*r.height,w:(ob.r-ob.l)*r.width,h:(ob.b-ob.t)*r.height}}else A={x:B.W*.62,y:B.H*.15,w:B.W*.3,h:B.H*.7};
  if(!B.ip){A.h=Math.max(120,Math.min(A.h,B.by-8-A.y))}/* Fold: the plaques hang above the foot subtitle */
  const acts=bs.map((b,i)=>{const kan=b.querySelector(".kan");const kc=kan?kan.cloneNode(true):null;if(kc)kc.querySelectorAll(".kodds,.khnx,small,.kb,.kwhy,.md,img,.kitmk").forEach(e=>e.remove());const n=((kc&&kc.textContent)||"").replace(/\s+/g," ").trim()||kitOptPlain(b.textContent);const im2=b.querySelector(".kaart img");const ton=b.querySelector(".kr-ton .krv");const why=b.querySelector(".kwhy");
-  const ow=b.querySelector(".kodds .kow,.kodds b,.kodds");return {id:String(i),n,word:"",pic:im2&&(im2.getAttribute("src")||""),ton:ton&&!/^(không|—|-)?$/i.test(ton.textContent.trim())?ton.textContent.trim():"",off:!!b.disabled,why:why&&why.textContent.trim()||""}});
+  const ow=b.querySelector(".kodds .kow,.kodds b,.kodds");const wd=((b.querySelector(".kodds")||{}).textContent||"").match(new RegExp(KIT_ODDS.slice().sort((x,y)=>y.length-x.length).join("|")));/* the odds word only on a real roll (a certain answer has no .kodds, KIT_ODDS_SURE off) */return {id:String(i),n,word:wd?wd[0]:"",pic:im2&&(im2.getAttribute("src")||""),ton:ton&&!/^(không|—|-)?$/i.test(ton.textContent.trim())?ton.textContent.trim():"",off:!!b.disabled,why:why&&why.textContent.trim()||""}});
  const per=K_SAYPER(),groups=[];for(let i=0;i<acts.length;i+=per)groups.push({k:"p"+(i/per),n:acts.length>per?`Đáp · ${i/per+1}`:"",acts:acts.slice(i,i+per)});
  const sig=acts.map(a=>a.n).join("|")+"|"+Math.round(A.x)+","+Math.round(A.y)+","+Math.round(A.h);if(T.P&&T.P.open&&T.sig===sig)return;const grp=T.P&&T.P.group;try{T.P&&T.P.destroy()}catch(e){}T.sig=sig;
  const sp=dl.querySelector("#mb>.kstg-sp");const av=[];if(sp){const r=sp.getBoundingClientRect();av.push({x:r.left-D.left,y:r.top-D.top,w:r.width,h:r.height})}
@@ -99474,7 +99482,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="45a59accb709";window.CTM_BUILD=BUILD;
+const BUILD="5d9e3f22157f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
