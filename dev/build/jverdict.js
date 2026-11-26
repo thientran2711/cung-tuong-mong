@@ -59,6 +59,8 @@ if(typeof talk==="function"){const t0=talk;talk=function(oi){let p=null,a=null;t
  const [x,f]=outer(v,"talk:"+v.id,{n:a.n});const q0=Q.slice(),s0=S.logSeq||0;
  F.push(f);let r;try{r=t0.apply(this,arguments)}finally{F.pop()}
  if(x){if((S.logSeq||0)!==s0)st("talk");fin(x,f,q0)}return r}}
+/* servant-mode talk (j42 srvTalk T(…).run): the option rolls itself and prints «thành. » / «hỏng. » first — that roll is the seal */
+if(typeof srvTalk==="function"){const s0=srvTalk;srvTalk=function(){const A=s0.apply(this,arguments);try{for(const a of A||[]){if(!a||typeof a.run!=="function"||a.run.__jv)continue;const r0=a.run;a.run=function(){const r=r0.apply(this,arguments);try{const f=top();const m=kaPlain(r||"");if(f&&f.a===S&&f.ok==null)f.ok=/^thành\./.test(m)?true:/^hỏng\./.test(m)?false:null}catch(e){}return r};a.run.__jv=1}}catch(e){}return A}}
 /* a dialog option of a card about a consort (events j7 «Đổ thêm dầu vào lửa», «Thêm một lời buộc tội», j67 roads, the cards of NPC deeds
    on her …): the consort on the card is the target; her option's own roll gives the seal. The cards of her own pending act (its «Bày mưu»,
    road card, picker) are that act's, not a new one. Also: a pending act whose dialog was closed without its deed is closed here. */
@@ -80,6 +82,8 @@ const accOk=r=>{const h=String(r||"");if(/>thành</.test(h))return true;const t=
 /* a deed the receiver answers (jrcv rcvAsk: Kết giao, Nhờ giúp …): her ask is THÀNH when the receiver's answer is a yes (the option's own {ok}) */
 if(typeof rcvPick==="function"){const p0=rcvPick;rcvPick=function(t,a){const c=p0.apply(this,arguments);try{const f=frameOf(a,t);if(c&&f&&a===S&&typeof c.go==="function"){const g=c.go;return Object.assign({},c,{go:function(){const r=g.apply(this,arguments);try{if(r&&typeof r==="object"&&"ok" in r)f.ok=!!r.ok}catch(e){}return r}})}}catch(e){}return c}}
 if(typeof wdFrameResolve==="function"){const w0=wdFrameResolve;wdFrameResolve=function(a,t){const r=w0.apply(this,arguments);try{const f=frameOf(a,t);if(f&&t!==S&&r)f.ok=/mang tội ăn trộm/.test(kaPlain(r))}catch(e){}return r}}
+/* Vu oan resolved (jtruth frameDef → frameExpose): the framed one clears herself and the framer is exposed = BẠI, whatever the plant roll said */
+if(typeof frameExpose==="function"){const x0=frameExpose;frameExpose=function(a,p){const r=x0.apply(this,arguments);try{const f=frameOf(a,p);if(f)f.ok=false}catch(e){}return r}}
 /* a bribed servant answers (jrcv rcvMaidBribe: «Mua chuộc cung nữ», «Sai cung nữ thân tín lấy lòng»; jagstf2 stf2Bribe: a palace servant):
    she takes the bribe = THÀNH; she refuses (tells her mistress, or keeps quiet) = BẠI */
 if(typeof rcvMaidBribe==="function"){const b0=rcvMaidBribe;rcvMaidBribe=function(a,t){const r=b0.apply(this,arguments);try{const f=frameOf(a,t);if(f&&f.a===S&&r)f.ok=r==="take"}catch(e){}return r}}
@@ -91,7 +95,7 @@ function hookRun(nm,get,set,who,after){let g0=null;try{g0=get()}catch(e){}if(typ
  F.push(f);let r;try{r=g0.apply(this,arguments)}finally{F.pop()}try{if(after)after(f,r)}catch(e){}if(x){if(r===""&&!z.keep)x.used=1;else st(nm)}return r})}
 /* j55 nhà ngoại: dò sổ sách nhà ngoại / dâng chứng cứ tham ô (the verdict = window.__tdOk, set by the deed itself) */
 hookRun("tdProbe",()=>tdProbe,f=>tdProbe=f,(a,t)=>({a,t,n:t===S?"sai người dò nhà ngoại ngươi":"Sai người dò nhà ngoại"}),(f,r)=>{if(r)f.ok=!!window.__tdOk});
-hookRun("tdLeak",()=>tdLeak,f=>tdLeak=f,(a,t)=>({a,t,n:t===S?"dâng chứng cứ cha ngươi tham ô":"Dâng chứng cứ tham ô"}),(f,r)=>{if(r)f.ok=!!window.__tdOk});
+hookRun("tdLeak",()=>tdLeak,f=>tdLeak=f,(a,t)=>({a,t,n:t===S?"dâng chứng cứ cha ngươi tham ô":"Dâng chứng cứ tham ô"}),(f,r)=>{if(r)f.ok=/bị cách chức/.test(kaPlain(r))/* the deed's own outcome: the father removed (ccStep after it may run another court act) */});
 /* j67 / j96 / roads: a consort punished as the outcome of her road */
 hookRun("e67pun",()=>e67pun,f=>e67pun=f,v=>({a:S,t:v,n:"bị phạt"}));
 /* jemoact: the Emperor / Thái hậu / a consort's temper deed on HER → «Ai làm» (the Emperor and Thái hậu are known to all: pub) */
