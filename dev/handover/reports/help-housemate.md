@@ -89,3 +89,20 @@ Family scan **dev/tools/rcv-hint-scan.js**: every option of every card SHE answe
 Gates on 41125250: help-housemate.test ALL PASS · receiver-choice ALL PASS · one-core-guard / text / bind PASS · rcv-hint-scan PASS (1 OPEN) · **coop-e2e 143 ok / 0 FAIL** (co-op first, live Worker).
 Videos re-recorded on 41125250 (same CDN URLs, overwritten): fold-755x1000.webm, ipad-1180x820.webm, frames fold-/ipad-6-loinho.jpg now show «Giúp qua loa» ĐƯỢC «được lòng người» (Fold) / «người ấy có thiện cảm hơn» (iPad). Looked at both.
 Quickcheck on 5ac9c150 stands for the build except jrcv text (one string); play part unaffected.
+
+## 8. DELTA REVIEW (opus BIG, session_01D3E3NbbsVnx5jrHuceQUuf) — PASS 41125250
+41125250 is an FF of LIVE origin/main aa37de21. Delta vs 5ac9c150 = jrcv.js slot-1 text + dev/tools/rcv-hint-scan.js + built files.
+
+| check | result |
+|---|---|
+| B1: slot 1 «được: <asker> quý <receiver> +N» (same shape as slot 0) | ✔ frame ipad-6-loinho: «Giúp qua loa» ĐƯỢC «người ấy có thiện cảm hơn», MẤT «hao bạc, người ấy mất thiện cảm» — gain + loss (law 3) |
+| build: assemble + build_site | index.html identical except CTM_BI ✔ |
+| rcv-hint-scan.js branch / LIVE aa37de21 | RCV-HINT PASS (75 rows) / 2 FAIL (rcvHelp «Giúp qua loa» A + B) ✔ |
+| help-housemate.test.js · receiver-choice.test.js · one-core-guard/-text/-bind | ALL PASS · ALL PASS · PASS ×3 ✔ |
+| coop-e2e | not re-run by me: one player-text string, no co-op path touched; 143/143 on 5ac9c150 (my run) and 143/0 on 41125250 (worker) |
+
+Notes (non-blocking, FOR D):
+- N4: rcv-hint-scan builds no card for 8 kinds (rcvAsk facJoin / facInvite / illAlly / rougeBorrow / pmDuel, rcvJudge xinhh / rougeBeg / trinhhh: «no card built», 16 rows) — they are pre-existing cards that this branch does not reach; extend the scan's setup so the family check covers them.
+- N5: OPEN, pre-existing on LIVE: rcvAsk:mediate «Mách lẻo» when the queen herself mediates reads ĐƯỢC «chẳng được gì» (a missing gain, not wording) → needs a ruling before any change (law 16), FOR D.
+- N1–N3 from §6 stand.
+CDN review folder wiped with this verdict.
