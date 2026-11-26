@@ -380,3 +380,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~22:01Z OWNER: Bạc + Sức stay EXACT on choices (canon overwrite in 21:55Z row; MAIN rec khắc + item counts exact too) → WORDING-MARKS, KK47, R5.
 - ~22:03Z OWNER: «tốn gì vẫn ghi rõ, được mất thì không rõ» → rule by ROW: Tốn exact (anything), Được/Mất marks (everything) — OD row rewritten in place; workers told.
 - ~22:06Z KIT-STAGE-R5 LOOK READY c823342a (paging gone, ≤7 table, kitResFold merged) → MAIN LOOK PASS → result+flip videos SENT to sếp. Rulings: thẻ gỗ no paging; pmLad = info panel; gift grid → D; late-save count of jerr/jptime/j71c/jky.
+- ~22:08Z OWNER: result card empty band; event stage no figure; flip = tap1 enlarge, tap2 flip, back same size → OD row → R5 (2,3) + KK47 (1).
