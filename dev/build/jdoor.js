@@ -90,3 +90,37 @@ if(typeof kitActCat==="function"){const k0=kitActCat;kitActCat=function(name){tr
 /* (4) two-way: the door an NPC act key sits in (her label of that key → DOOR.of) */
 const AGC3DOOR={};try{for(const k in (window.AGC3BTN||{})){const r=DOOR.of(AGC3BTN[k]);if(r)AGC3DOOR[k]=r.n}}catch(e){}
 window.AGC3DOOR=AGC3DOOR;
+/* ================= DECK doors (act-merge J5, folded into the ONE engine by J5b; generic, any job may DOOR.deck a row) =================
+   Same rule as the talk side, for the cards of a Hành sự DECK: only true duplicates fold, a door shows only when >= 2 members are on the table today, the members are the old
+   cards UNCHANGED (name, khắc, bạc, odds, w / l, once, rep, lock) and run through the SAME act() chain (price, roll, once flags, kcFix, jptime, place walking). No number typed (law 4).
+   The door costs nothing itself (its khắc = the cheapest member's, only the gate «can she do any»); the member pays its own khắc when chosen; «Thôi, để sau» spends nothing.
+   Rows: DOOR.deck({k,n,roads:["srv"|"cold"|"kc"],h,re | key(card,deckList)→door name|null, t?:string|fn(key,ways)→string}). roads: srv = cung nữ Phận sự (not in lãnh cung of the srv),
+   cold = lãnh cung deck (S.out), kc = khuê các decks (isKc). The final deck (deal() outermost wrapper) is folded; the raw members stay reachable: DOOR.flat(deck) / DOOR.run(name). */
+DOOR.D=[];DOOR.deck=function(r){if(r&&r.k&&r.roads&&(r.re||r.key)&&!DOOR.D.some(x=>x.k===r.k))DOOR.D.push(r);return DOOR};
+(function(){let A0=null;const DART={};
+const cc=a=>typeof cardCost==="function"?cardCost(a):(a.k||1);
+const srvOnceNow=w=>!!(w.once&&typeof isSrv==="function"&&isSrv()&&typeof srvOnce==="function"&&srvOnce(w.once,w.onceS));
+const availW=d=>d.ways.filter(w=>!w.done&&!srvOnceNow(w));
+function roadNow(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeof isSrv==="function"&&isSrv())return(S.srv&&S.srv.lau>0)?null:"srv";if(S.out)return"cold"}catch(e){}return null}
+function cardDoor(key,rule,ways){const k=Math.min(...ways.map(cc)),lock=ways.every(w=>w.lock);DART[key]=ways[0].n;
+ const t=typeof rule.t==="function"?rule.t(key,ways):(rule.t||rule.h||"");
+ return{n:key,t:lock?(ways[0].t||t):t,k,c:{},o:100,w:{},l:{},x:"kết quả tùy việc chọn",inner:1,dom:ways[0].dom,ddoor:1,ways,rep:1,lock,g:ways[0].g,who:ways.every(w=>w.who===ways[0].who)?ways[0].who:undefined,done:ways.some(w=>!w.done&&!srvOnceNow(w))?0:1}}
+function deckFold(L,road){const R=DOOR.D.filter(r=>r.roads.includes(road));if(!R.length)return L;const M=new Map(),out=[];
+ for(const a of L){if(!a||a.ddoor){out.push(a);continue}let key=null,rule=null;for(const r of R){const k=r.key?r.key(a,L):(r.re.test(a.n||"")?r.n:null);if(k){key=k;rule=r;break}}
+  if(key==null){out.push(a);continue}let g=M.get(key);if(!g){g={key,rule,ways:[],ix:out.length};M.set(key,g);out.push(null)}g.ways.push(a)}
+ const G=[...M.values()],res=[];out.forEach((a,i)=>{if(a!==null){res.push(a);return}const g=G.find(x=>x.ix===i);if(g.ways.length<2)res.push(...g.ways);else res.push(cardDoor(g.key,g.rule,g.ways))});return res}
+function wayLine(w,tc){let s="";try{s=typeof optLine==="function"?optLine(w):(w.x||"")}catch(e){s=w.x||""}return[`${tc} khắc`,s].filter(Boolean).join(" · ")}
+function wayOpts(ways,okOf,pick){return ways.map(w=>{const tc=cc(w),bad=!!w.lock||!okOf(w,tc);let o=null;try{o=typeof oddsOf==="function"?oddsOf(w):(w.o==null?100:w.o)}catch(e){}
+  const e={n:w.n,x:w.lock?(w.t||""):`${w.t?w.t+" · ":""}${wayLine(w,tc)}`,dom:w.dom,why:w.why,go:()=>pick(w)};if(bad)e.off=true;if(o!=null&&o<100&&!w.lock)e.p=o;return e})}
+function ask(title,text,opts){opts.push({n:"Thôi, để sau",x:"chưa làm gì lúc này",go:()=>{}});Q.push({t:title,ownAct:1,who:typeof pMe==="function"?pMe():null,h:`<p>${text}</p>`,opts});showModal()}
+function pickCard(d,w){if(S.dead||Q.length||!A0)return;deck.push(w);const i=deck.length-1;try{A0.call(window,i)}catch(e){console.error("jdoor deck way",e)}finally{const j=deck.indexOf(w);if(j>=0)deck.splice(j,1)}
+ d.done=availW(d).length?0:1;render()}
+function openCard(d){const L=availW(d);if(!L.length){d.done=1;render();return}if(L.length===1){pickCard(d,L[0]);return}
+ ask(d.n,d.t,wayOpts(L,(w,tc)=>can(tc)&&canPay(w)&&(w.b==null||(S.buoi||0)===w.b),w=>pickCard(d,w)))}
+/* test helpers: flat(list) = the list with every deck door replaced by its members (the old flat names); run(name) = run the member / plain card of that name through the real act() path */
+DOOR.flat=L=>(L||[]).flatMap(a=>a&&a.ddoor?a.ways:[a]);
+DOOR.run=n=>{const i=deck.findIndex(a=>a&&!a.ddoor&&a.n===n);if(i>=0){act(i);return true}const d=deck.find(a=>a&&a.ddoor&&a.ways.some(w=>w.n===n&&!w.lock));if(!d)return false;pickCard(d,d.ways.find(w=>w.n===n));return true};
+(function(){const a0=act;A0=a0;act=function(i){const d=deck&&deck[i];if(d&&d.ddoor){if(d.done||d.lock||S.dead||Q.length||!can(cc(d)))return;openCard(d);return}return a0.apply(this,arguments)};window.act=act})();
+(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&Array.isArray(deck)){const road=roadNow();if(road)deck=deckFold(deck,road)}}catch(e){console.error("jdoor deck",e)}return r};window.deal=deal})();
+(function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){try{const d=DART[name];if(d){const A=(typeof KIT_ACTS==="object"&&KIT_ACTS.acts)||{};if(!A[name]&&A[d])return k0.call(this,d)}}catch(e){}return k0.apply(this,arguments)};window.kitActArt=kitActArt})();
+})();
