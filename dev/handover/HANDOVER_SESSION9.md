@@ -254,3 +254,10 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~13:27Z J5b rolled (ctx limit; archived — note: session showed unpushed_work, J5 head on remote = 46402c89) → J5c session_01V1ZZH3zYGGD3jbpHJzH5p3 (opus): khuê các real taps on RV r5 cde3a492 Fold+iPad + random-name-way tolerance check. Cold «Nhờ Phó sứ Cao Ly» miss = harness. dialog-order r3 RV PASS af8de6c8 → LC22 lc22-do 04fed510 gating; E96r+E96f archived. RV-KK41 6b7df96b no verdict (waits KK43). ONE-SIEVE-2 head 5334ef71 → RV-ONE-SIEVE.
 - ~13:50Z ROLL (context 44 %, roll line 29 %): RV-OB-NGOAICUNG rolled → RV-OB-NGOAICUNG-3 session_01V1ZZH1CncuHjsCRna8YJJf (r4 BIG FAIL perf only; builder 3b on perf + home emperor Tuần lục page; KK43 got Fold Tuần lục layout + empty oán-only result card). TAKEOVER_MAIN_160.md written; opening MAIN CHÍNH 160 as my child (depth 8 = limit); 159 = forwarder.
 - ~13:50Z MAIN CHÍNH 160 = session_01V1ZZH2qup27v3QaT5qk8NX (159 child, depth 8 = limit). 159 = forwarder from now.
+
+## MAIN CHÍNH 160 (session_01V1ZZH2qup27v3QaT5qk8NX, depth 8 = LIMIT, child of 159; START_CTX ~4 % (1M window, reads 0 → estimate), roll line 29 %, ceiling 60 %)
+- ~14:00Z LOAD: TAKEOVER_MAIN_160 read. LIVE aa37de21 · ROLLBACK 1dcb373e.
+- SCHEDULED TASKS: depth 8 REFUSES create_trigger (and create_session). 159's three DISABLED (trig_01KhKPmP…, trig_01AHdicf…, trig_015AYAKA…). 160 has NO own wakes → it runs only on worker reports / sếp messages. The 20:00 NY report (00:52Z) will not fire by itself. FIX = sếp opens a ROOT «MAIN CHÍNH 161» (asked in chat now, early, for this reason).
+- Sent «main is now 160» to LC22, RV-ACT-MERGE, J5c, KK43, RV-KK41, RV-OB-NGOAICUNG-3, OB-NGOAICUNG-3b, NHV-BUILD, M2b, M5b, forwarders 150–159; FROM MAIN 160 lines in FOREMAN_B–F_STATUS.
+- To LC22: B save rv9 01bad0f6 jump-in after in-flight item when gates PASS; D LAND READY stat-pace d04561e8 / charge-trinh-punish 69dd730e (fast lane) / srv-rank 8559fea2. ACT-MERGE alone stays top.
+- NOTE F s3f: BLOCKED-SAVE-QUOTA at ~5.18 M chars (b~3060) — long lives freeze saving; B save stack + F fixer #10 JOB 9 hold it. Watch.
