@@ -38,7 +38,20 @@ Not scanned yet (open): arc chapters (ARC67 hồi lines, mostly «Hồi n/N»), 
 `node dev/test/goal-links.js <url> 755x1000,1180x820 [shots]` → **PASS both** (links dotted, buy line names him / masked form, panel rows + Đi tới/Xem Dư đồ, ring on, «Mua bán» mark + legend in DOM, Đi tới → place nvp + eunuch there + shop open, Mệnh truyện tab links, no page errors).
 
 ## LOOK (CDN img/_review/goal-links/, Fold 755x1000 + iPad 1180x820, looked at myself)
-1-goal-links (chapter detail with underlined lines) · 2-cach-lam (panel) · 3-du-do-ring · 4-du-do-muaban · 5-di-toi (arrived, shop open) · 6-menh-truyen.
+1-goal-links (chapter detail with underlined lines) · 2-cach-lam (panel) · 3-du-do-ring · 4-du-do-muaban · 5-di-toi (arrived, shop open) · 6-menh-truyen. Exact URLs:
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/755x1000-1-goal-links.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/1180x820-1-goal-links.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/755x1000-2-cach-lam.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/1180x820-2-cach-lam.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/755x1000-3-du-do-ring.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/1180x820-3-du-do-ring.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/755x1000-4-du-do-muaban.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/1180x820-4-du-do-muaban.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/755x1000-5-di-toi.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/1180x820-5-di-toi.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/755x1000-6-menh-truyen.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links/1180x820-6-menh-truyen.jpg
+
 
 ## Open / honest notes
 - **KIT REQUEST (KK44, sent)**: kitGoLink (link + small «Cách làm» panel) and kitMapMark «Mua bán». Interim uses only existing kit parts (kitTapWord underline, kitPanel, kitCoach, kitPlaceIcon, .mleg).
@@ -47,3 +60,7 @@ Not scanned yet (open): arc chapters (ARC67 hồi lines, mostly «Hồi n/N»), 
 - Choosing «Xem Dư đồ» / «Đi tới» shows the generic kit option-result toast «Cách làm: Xem Dư đồ … không được gì, cũng không mất gì» (same as jgoal «Đi làm»); a navigation option should not make a result card — kit option flag needed.
 - Zone level (map-zones-r7) code path written (data-mzk) but NOT yet seen on a merged build; check when r7 lands (or merge test).
 - Eunuch names from nmNew("eun") can read oddly (seen «Tiểu Thái Tử» = little crown prince) — name pool issue, not changed here.
+
+## MAIN 161 rulings (26/11 ~18:58Z) + ROLLOVER HANDOVER
+Rulings: (a) legend → KIT_REQUESTS row for KK44 (done); (b) navigation options (Đi tới / Xem Dư đồ / jgoal «Đi làm» / every pure navigation button) must NOT show the «không được gì, cũng không mất gì» toast → kit flag `nav` via KK44 (KIT_REQUESTS row done), then apply to the whole family; (c) stranger silhouette sex = KIT FAULT to KK44 (sent), interim no figure; (d) verify zone marks on a merged r7 build once LC24 lands map-zones-r7.
+ROLLOVER (worker context past START+25%): successor continues on review/goal-links 4d71d20a (worktree /home/user/wt/gl, test dev/test/goal-links.js). TODO: (1) scan + link the not-scanned goal groups: ARC67 hồi lines (jchap chapModel arc steps / hint67), «Việc nhờ» (jnrask*), notices (jnotice) — glTarget(line,q) is the one resolver, kitChecks hook only covers checklists, so rows/notice text need a call to window.glWrap(html) at their render site; (2) when KK44 ships `nav` flag + kitGoLink/kitMapMark, swap glHow/markMap to them and apply `nav` to jgoal nextOpts + glHow options; (3) r7 merged LOOK of level-1 zone tag «Nội vụ» with bac icon + «Mua bán».
