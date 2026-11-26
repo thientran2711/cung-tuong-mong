@@ -69,7 +69,9 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
   v.wrongs=[];S.evc={};deedAdd(v,"vp",null,1,"vượt phẩm");deedAdd(v,"poison",w,2,"bỏ độc");evA(S,v,1,"vp");const a1=j95accO(v,"hh",{kind:"plot"});evA(S,v,1,"mh");const a2=j95accO(v,"hh",{kind:"plot"});
   ok(a2>a1,`j95 plot: a mưu hại piece moves the odds (${a1} → ${a2}; mh ${chHave(S,v,'mh')} vp ${chHave(S,v,'vp')} tot ${evG(S,v)}), a vượt phẩm piece does not count`);
   /* vượt phẩm accusation (j8 vpAccuse) = the vp charge's punishment */
-  cp=[];const vi=typeof vpItems==="function"?vpItems(w):[];if(vi.length){win(()=>vpAccuse(S,w));ok(cp.some(x=>x[0]===w.name&&x[1]==="vp"),`Tố vượt phẩm: chPunish ${JSON.stringify(cp)}`)}else o.push([true,'Tố vượt phẩm: no over-rank piece on the sample consort (skipped)']);
+  cp=[];/* successor (owner order (b) vpAccuse runtime case): put a worn piece above her rank on the sample consort, so the case always runs */
+  {const r=rkOf(w);const k=Object.keys(IT).find(k=>{try{const it=itm(k);return it&&it.sl&&it.rk>r}catch(e){return false}});if(k){w.inv=w.inv||[];w.inv.push({k,w:1})}o.push([!!k,`vpAccuse: over-rank piece given (${k||'none'}, rank ${r})`])}
+  const vi=typeof vpItems==="function"?vpItems(w):[];if(vi.length){win(()=>vpAccuse(S,w));ok(cp.some(x=>x[0]===w.name&&x[1]==="vp"),`Tố vượt phẩm: chPunish ${JSON.stringify(cp)}`)}else o.push([true,'Tố vượt phẩm: no over-rank piece on the sample consort (skipped)']);
   chPunish=c0;return o}));
  /* co-op seat (host side, seat a): the friend serves as a bought servant in an NPC's staff → marked → toCanon carries it */
  out.push(...await p.evaluate(()=>{const o=[];const ok=(c,m)=>o.push([!!c,m]);const CW=COOPW;const L=liveRivals(true).filter(x=>!x.queen&&!x.coop);const [v,w]=L;
@@ -103,6 +105,13 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
   const g=liveRivals(true).find(x=>x!==srvM()&&!x.coop);C.P.b=C.P.b||C.P[Object.keys(C.P)[0]];C.P.b.S.coopSrvOut={g:g.name,a:"Phi X (Phi)",ev:"tội mua chuộc người hầu, 2 món chứng",x:"ngươi (người hầu cung Y) nhận bạc mua chuộc, bị đuổi khỏi cung"};
   try{CW.on=true;CW.wkIn=-9;CW.onWeek({week:(C.week||0)+1,state:C})}catch(e){o.push([false,'onWeek threw '+e.message])}finally{Object.assign(CW,sv)}
   ok(S.dead&&/nhận bạc mua chuộc/.test(S.fate||"")&&/Người hầu bị mua/.test(String((Q[0]||{}).h||"")),`co-op week in: her seat's life ends «${S.fate}» with the row «Người hầu bị mua»`);return o}));
+ /* co-op law (host computes): a guest seat never stores lazy world writes on a read — jtruth deedSync (xx / il / vp / ls deeds) and jmgt mgHand */
+ out.push(...await p.evaluate(()=>{const o=[];const ok=(c,m)=>o.push([!!c,m]);const CW=window.COOPW=window.COOPW||{};const sv={on:CW.on,seat:CW.seat};
+  const v=liveRivals(true).find(x=>!x.coop&&!x.queen);const r=rkOf(v);const k=Object.keys(IT).find(k=>{try{const it=itm(k);return it&&it.sl&&it.rk>r}catch(e){return false}});
+  v.inv=(v.inv||[]).concat(k?[{k,w:1}]:[]);v.wrongs=[];v.dkeys=[];v.dw=0;delete v.mgH;delete v.mgHv;
+  try{CW.on=true;CW.seat="b";const c=deedCap(v);const h=mgHand("hoadien",v);ok(!(v.wrongs||[]).length&&!(v.dkeys||[]).length&&!(v.mgH&&v.mgH.hoadien!=null),`guest seat: deedCap / mgHand on a world person write nothing (wrongs ${(v.wrongs||[]).length}, dkeys ${(v.dkeys||[]).length}, mgH ${JSON.stringify(v.mgH||null)})`);
+   CW.seat="a";const c2=deedCap(v);const h2=mgHand("hoadien",v);ok((v.wrongs||[]).some(d=>d.k==="vp")&&v.mgH&&v.mgH.hoadien===h2&&h===h2,`host seat: the same read stores them (vp deed ${(v.wrongs||[]).some(d=>d.k==="vp")}, hand guest ${h} = host ${h2})`)}
+  finally{CW.on=sv.on;CW.seat=sv.seat}return o}));
  let bad=0;for(const [c,m] of out){if(!c)bad++;console.log((c?'PASS ':'FAIL ')+m)}
  console.log(`page errors: ${errs.length} ${JSON.stringify(errs.slice(0,3))}`);if(errs.length)bad++;
  console.log(bad?`charge-trinh-punish: ${bad} FAIL`:'charge-trinh-punish: ALL PASS');await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
