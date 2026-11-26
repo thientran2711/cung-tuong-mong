@@ -122,4 +122,8 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
   if(at>=0&&at!==gi&&X[gi]){const m=X[at].match(/ · (mở «.*)$/);X[at]=X[at].replace(" · "+m[1],"");X[gi]+=" · "+m[1]}
   const a=ARTS.find(x=>x.k===k);if(a&&a.u)a.u=a.u.replace(/^Bậc \d+/,`Bậc ${BAL.deck[k].lv}`)}
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));
+/* tainghe-info (MAIN 148 wording note, VANPHONG «the number stands after its NAME»): an odds bonus never stands bare («thỉnh an +8», «dễ thành hơn (+4)»):
+   it reads «<việc>: phần thắng +N» (the j85 Ghi chú row «Phần thắng» names the same BAL.art.odds ladder); a lật-thẻ weight reads «phần được lật thẻ +N». Every Năm bậc table. */
+ {const W=s=>String(s).replace(/ dễ thành hơn \(\+([\d,]+)\)/g,": phần thắng +$1").replace(/được lật thẻ dễ hơn \(\+([\d,]+)\)/g,"phần được lật thẻ +$1").replace(/(thỉnh an|tố giác) \+(\d+)(?![\d,])/g,"$1: phần thắng +$2");
+  for(const F of [ARTFX,VIRFX])for(const k in F)F[k].forEach((s0,i,arr)=>{const d=Object.getOwnPropertyDescriptor(arr,i);if(d&&d.get){const g=d.get;Object.defineProperty(arr,i,{get:()=>W(g()),enumerable:true,configurable:true})}else arr[i]=W(s0)})}
 }catch(e){console.error("artfx text",e)}})();

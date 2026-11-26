@@ -7,7 +7,13 @@ function saveOpt(){try{localStorage.setItem("hclh-opt",JSON.stringify(OPT))}catc
 /* ---- audio: HTMLAudio, starts after the first tap, missing files fail silently ---- */
 const AU={unlocked:false,cur:null,curName:"",duck:1,cache:{}};
 function auOk(){return AU.unlocked&&OPT.snd&&!OPT.mute&&!document.hidden}
-function mkAudio(n,loop,route){try{const a=new Audio(kmusUrl(n));a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1;kmusFail(n,a)});if(route)auRoute(a);return a}catch(e){return null}}
+/* review/audio-ipad (OD 25/11 ~23:30Z «Trên iPad là không thấy nghe tiếng nhạc»): a CDN track (KMUS_NEW, other origin) played through the AudioContext
+   (auRoute → createMediaElementSource) WITHOUT crossOrigin is a tainted source: WebKit (iPad / iPhone Safari) and Chrome without the service worker
+   output pure silence ("MediaElementAudioSource outputs zeroes due to CORS access restrictions"). The CDN sends Access-Control-Allow-Origin: *, so every
+   element whose file is on another origin is made in CORS mode BEFORE its src is set (auSrc: ONE helper for every <audio> of the game). */
+function auSrc(a,u){try{if(new URL(u,location.href).origin!==location.origin)a.crossOrigin="anonymous"}catch(e){}a.src=u;return a}
+window.auSrc=auSrc;
+function mkAudio(n,loop,route){try{const a=auSrc(new Audio(),kmusUrl(n));a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1;kmusFail(n,a)});if(route)auRoute(a);return a}catch(e){return null}}
 /* ---- iOS / WebAudio layer (review/result-sfx): iPhone ignores element.volume and only unlocks audio on touchend / click / keydown (not a touch pointerdown).
    AU.ctx = one AudioContext, resumed + a silent buffer played on every real gesture (re-armed after the page was hidden or the phone interrupted it).
    Music (and the heartbeat loop) go through a GainNode and expose the same `volume` property, so the slider, mute and ducking work on iPhone; sfx play from decoded
