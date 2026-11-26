@@ -18,3 +18,10 @@ Fix (one line): `o:(typeof originByKey==="function"&&originByKey(d.ok)||{}).n||(
 5. Shots looked at (scratch only, not in git): Fold + iPad Sổ luân hồi — new row sits first, kit row, no overflow/cut text; only the blank origin above is wrong.
 
 ~ delta otherwise sound; one-line fix then re-review.
+
+---
+## Re-review of eca83a5d (OB-M3UI r2) — **SMALL PASS eca83a5d**
+Delta d8dba46c..eca83a5d: o = originByKey(d.ok).n, fallback S.origin.n, in BOTH writers (j6 «Bỏ ngang» and jkiep «Bỏ ngang · Kiếp dở dang»; `d` is in scope in jkiep). Test 3a-yes now asserts name + non-empty origin.
+- Fresh build of eca83a5d, robot M3 save: new row «Con gái nhà buôn muối · Đáp ứng · 3 năm · 0 con · Bỏ ngang», Fold 755x1000 + iPad 1180x820, kit row, no overflow; no page errors. Look at both shots (scratch only).
+- ob-m3ui.js 122 cases: first full run 1 FAIL = «1 meter-tap ksp-card: no meter on the card» on iPad in the random fresh-life part A (not this code); iPad re-run 61/61, 0 FAIL, 3a-yes +1 with origin. Treated as a flake of the random card; MAIN may want it noted.
+- quickcheck: only the pre-existing dialog-fixed «no empty Tốn / Được cell» (same on base 51855c36).
