@@ -39,3 +39,5 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 08:47Z MAIN: NEW SLOT endcard-top-r6 3f38961f right after HW-NITS (gates endcard-top.js Fold+iPad, ending-screens (flake), QC; LIVE pre-existing: quickcheck G4 dialog-fixed ×2, coop-ending-screens guest never joins).
 - 08:50Z MAIN: mg-trim resolved bb0ae651 (FF on LIVE 3af7896e; union with DRESS) → NEXT, before HW-NITS. Staged review/lc21-mt be7e8326 = bb0ae651 + CHANGE line = mg-trim's only (its CHANGE.txt also carried DRESS's sentence) + rebuild. Gates gates-mt.sh (chain + dress + mg-trim, mg-skip-audit, delegate-nomg, mg-skip ×2, coop-thin-f4 local worker; QC vs LIVE 3af7896e). Hold D1/D4 (combined sha later). MAIN rolls to 156 soon.
 - 08:50Z coordinator now MAIN CHÍNH 156 session_01V1ZZH4YYLnxnhwuGEx25zf.
+- 08:53Z SMALL PASS home-way-nits 0e71fdbc → may go READY (after mg-trim; restack onto be7e8326).
+- 08:53Z MAIN 156 queue: mg-trim → HW-NITS → endcard-top 3f38961f → TAINGHE 88bd567f → srvmerit c7f4fc0a → kit-stage 22e318d5 → NHV (new sha) → map-zones 9c8985ab8 → D1+D4 (one sha).
