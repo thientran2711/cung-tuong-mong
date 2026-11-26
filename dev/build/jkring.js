@@ -165,7 +165,7 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
  R.slots.forEach((o,k)=>{if(k===i)return;o.animate([{opacity:1},{opacity:0}],{duration:calm()?1:260,fill:"both"})});
  [R.arL,R.arR,R.tabs].forEach(b=>b.animate([{opacity:1},{opacity:0}],{duration:calm()?1:200,fill:"both"}));
  s.__g.members.forEach(x=>{x.dim.style.opacity="0"});s.classList.remove("kring-front");
- const grp=s.__g.members.length>1,FG=focusGeo(R,s),sc=FG.sc,cx=FG.cx,feet=FG.feet;
+ const grp=s.__g.members.length>1;R.nPk=pkCount(R,s);const FG=focusGeo(R,s),sc=FG.sc,cx=FG.cx,feet=FG.feet;
  R.fT=`translate(${(cx-s.__cx).toFixed(1)}px,${(feet-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;R.fSc=sc;R.fCx=cx;R.fFeet=feet;s.style.zIndex="200";
  await anim(s,R.fT,K.focusMs);yieldCard(R);
  if(R.o.groups)return groupChoose(R,s);if(grp)return groupPick(R);return personPick(R,s.__g.members[0])}finally{R.busy=0}}
@@ -173,17 +173,24 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
    the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
    layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
 function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
-/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: every board hangs from the ONE fixed post (kitPick.band, §98.20) → the focused figure / cluster yields LEFT of the WIDEST board
-   (7 plaques = two columns + the ✓ / ✕ room): the figure keeps ONE place for every board of the focus (acts, talk answers, «Nói với …»), never under a later board. */
-function plaqueNeed(R){const g=geo(R);try{if(window.kitPick&&kitPick.band){const b=kitPick.band((window.KIT_PLAQUE||{}).max||7,R.L,1);return Math.max(0,g.w-b.x0)+12}}catch(e){console.error("kitRing band",e)}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[kv()])||170)+(K.post||8)+30}
-function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(R),P=paintX(s),hh=s.__feet-s.__top;
+/* KK47 §98.1 wiring: the band hangs from the ONE fixed post (kitPick.postBox). RING-BUILD-7 (MAIN LOOK: the Fold group cluster was tiny beside a 1-column board): the figure
+   yields to the board THIS focus really opens — R.nPk plaques (pkCount): a person = her acts (the largest tab);
+   a group = «Đứng nghe» + one «Nói với …» per member; a group-picker slot = its choices. A member who steps out re-yields to her own board (reyield, awaited); a later bigger board (talk answers) re-yields as it opens (pickOpen, grow only). Owner 22:43Z: > 7 is
+   allowed (no paging) → postBox lays the extra columns leftward; the yield follows whatever box it returns. */
+function plaqueNeed(m,R,n){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,n||R.nPk||7),cf=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6;return Math.round(B.W-B.x0+cf+10)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
+function maxActs(G){return Math.max(0,...(G||[]).map(g=>g&&g.acts?g.acts.length:1))}
+function personN(R,x){let n=0;try{if(R.o.acts){const A=R.o.acts(x)||[];n=A.length&&A[0].acts?maxActs(A):A.length}else n=maxActs(acts(R,x))}catch(e){}return Math.max(1,n)}
+function pkCount(R,s){const M=s.__g.members;try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return Math.max(1,A.length&&A[0].acts?maxActs(A):A.length)}}catch(e){return 7}return M.length>1?1+M.length:personN(R,M[0])}
+async function reyield(R,n){const s=R.slots[R.sel];if(!s||n===R.nPk)return;const B0=plaqueNeed(kv(),R,R.nPk),B1=plaqueNeed(kv(),R,n);R.nPk=n;if(Math.abs(B0-B1)<2)return;
+ const FG=focusGeo(R,s);R.fSc=FG.sc;R.fCx=FG.cx;R.fFeet=FG.feet;R.fT=`translate(${(FG.cx-s.__cx).toFixed(1)}px,${(FG.feet-s.__feet).toFixed(1)}px) scale(${FG.sc.toFixed(3)})`;await anim(s,R.fT,360)}
+function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(m,R),P=paintX(s),hh=s.__feet-s.__top;
  let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
  const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
  if(over>0){cx-=Math.min(over,Math.max(0,left()-edge));over=right()+need-g.w}
  if(over>0){sc=Math.max(.3,(g.w-need-edge)/Math.max(1,P.r-P.l));cx=edge+(s.__cx-P.l)*sc}
  /* a group member who steps out grows ×1.06 from her feet: the head line keeps that room */const up=grp?1.08:1;if(feet-hh*sc*up<4)sc=(feet-4)/(hh*up);return{sc,cx,feet}}
 /* every ring picker opens through here: with TWO plaque columns the left column's ✓ / ✕ sits on its outer (left) side = toward the figure → the band moves right by that room */
-function pickOpen(R,o){let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&!G.fixed&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
+function pickOpen(R,o){try{const n=o.groups?maxActs(o.groups):(o.acts||[]).length;if(R.sel>=0&&n&&plaqueNeed(kv(),R,n)>plaqueNeed(kv(),R,R.nPk)+2)reyield(R,n)}catch(e){console.error("kitRing reyield",e)}let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&!G.fixed&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
 /* the union box of every member of the focused slot (layer px): the plaques and the bubble go to the right of the WHOLE cluster, never over a member */
 function unionBox(R){const M=R.slots[R.sel].__g.members.map(y=>boxOf(R,y));const x0=Math.min(...M.map(b=>b.x)),y0=Math.min(...M.map(b=>b.y));return{x:x0,y:y0,w:Math.max(...M.map(b=>b.x+b.w))-x0,h:Math.max(...M.map(b=>b.y+b.h))-y0}}
 /* §104.3 group PICKER mode (open({groups:[{name,line,people}], gacts(gi)→acts|groups, onGroupPick(gi,id)})): the focused group's plaques = the caller's choices for that group */
@@ -233,7 +240,7 @@ function adapter(R,x){const F={get el(){return R.L},get figEl(){return x.el&&x.e
  open(){},close(){if(CUR===R&&R.sel>=0)back(R)},destroy(){closePk(R)}};return F}
 function dfLeave(R){try{if(typeof DF==="object"&&DF&&R.F&&DF.F===R.F){const tk=R.tk;R.F=null;R.tk=null;if(typeof dfClosed==="function")dfClosed(tk)}}catch(e){}if(R.say){R.say.remove();R.say=null}R.saying=0}
 /* group focus: «Đứng nghe» + «Nói với …» per member */
-function groupPick(R){closePk(R);dfLeave(R);R.who=null;const s=R.slots[R.sel],M=s.__g.members;const face=p=>{try{const f=kitFace(p.ref||p);return f&&f.src||""}catch(e){return""}};
+function groupPick(R){closePk(R);dfLeave(R);R.who=null;const s=R.slots[R.sel],M=s.__g.members;if(R.nPk!==1+M.length){reyield(R,1+M.length).then(()=>{if(CUR===R&&R.sel>=0&&!R.who)groupPick(R)});return}const face=p=>{try{const f=kitFace(p.ref||p);return f&&f.src||""}catch(e){return""}};
  const nm=p=>{const q=p.ref||p;try{return typeof kitIsKnown==="function"&&!kitIsKnown(q)&&typeof kitUnkName==="function"?kitUnkName(q):(q.name||p.name)}catch(e){return p.name}};
  const list=[{id:"listen",n:"Đứng nghe",pic:typeof kitActArt==="function"&&(kitActArt("Nghe ngóng")||{}).src||"",word:"",ton:""},...M.map((x,k)=>({id:"m"+k,n:"Nói với "+nm(x.p),pic:face(x.p),word:"",ton:""}))];
  const a=M.map(x=>boxOf(R,x));const all={x:Math.min(...a.map(b=>b.x)),y:Math.min(...a.map(b=>b.y)),w:0,h:0};all.w=Math.max(...a.map(b=>b.x+b.w))-all.x;all.h=Math.max(...a.map(b=>b.y+b.h))-all.y;
@@ -243,7 +250,7 @@ function listen(R){const s=R.slots[R.sel],M=s.__g.members;const nm=p=>{const q=p
 /* a member STEPS OUT of the group toward her: she comes forward, the others dim and draw back */
 async function stepOut(R,x){if(R.busy)return;R.busy=1;try{closePk(R);const s=R.slots[R.sel],M=s.__g.members;
  const ps=[];M.forEach(y=>{if(y===x)return;const t=(y.lift?`translateY(${-y.lift}px) `:"")+`translateX(${(y.cx<x.cx?-1:1)*y.fw*.12}px) scale(.94)`;ps.push(anim(y.el,t,420));if(!calm())y.dim.animate([{opacity:0},{opacity:1}],{duration:420,fill:"forwards"}).onfinish=()=>{y.dim.style.opacity="1"};else y.dim.style.opacity="1"});
- x.el.style.zIndex="9";ps.push(anim(x.el,`scale(1.06)`,460));/* the plaques are placed on the cluster as it ENDS (every member's move done) */await Promise.all(ps);
+ x.el.style.zIndex="9";ps.push(anim(x.el,`scale(1.06)`,460));/* the plaques are placed on the cluster as it ENDS (every member's move done) */await Promise.all(ps);await reyield(R,personN(R,x));
  /* boxOf reads the member box unscaled: correct for the step-out scale */personPickScaled(R,x,1.06);R.repick=()=>personPickScaled(R,x,1.06)}finally{R.busy=0}}
 function personPickScaled(R,x,k){const fw=x.fw,fh=x.fh,l=x.left,lf=x.lift||0;x.left=l-(fw*(k-1))/2;x.lift=lf+fh*(k-1);x.fw=fw*k;x.fh=fh*k;try{personPick(R,x)}finally{x.left=l;x.fw=fw;x.fh=fh;x.lift=lf}}
 /* RING-BUILD-4 WATCH (one 250 ms check while the ring is open):
