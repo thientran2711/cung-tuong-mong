@@ -61,4 +61,12 @@ Grep `unknown-fig | .ksil | j59sil | j59unkSrc(` in dev/build/j*.js:
 - jhaohuu.js (hảo hữu unknown: stage figure = unknown-fig-f), jrank.js (rkFig fallback), j79.js (picker placeholder), jdfv.js / jgreet.js / jfigseal.js (skip or wait on unknown-fig), jph.js + jkit.js + jload.js (load-wait ghost img[data-kwait] .55 + body box), jkitpage.js / jfxkit.js (kit page samples), j61.js + jpm.js (k61SilChip / kpmSil, both return "" = off), jimg.js (asset note), jroute.js.
 → the people tab / Hậu cung lists / encounter (Kỳ ngộ) / home room ghosts come from j59 / j60 / j87 / j90 / jk4 / jreveal / jhaohuu. Kit keeper owns the whole-family switch to painted role figures (the jnhv rule: role figure via figFor({kind:"maid"|"man",ref:{role}}) + own painting softened for strangers).
 
+## r9–r12 — LAND READY review/nhv-areas 5514434d (26/11 ~06:00Z, MAIN 152 look point: code-drawn loading backdrop in transitions)
+- The pastel mint/pink backdrop = the in-between act page / the stage's loading look while a new painting was not yet decoded. WHOLE TRANSITION FAMILY now keeps the previous PAINTING until the new one is decoded (kit-stage rule a):
+  Dư đồ → garden map (Dư đồ painting held), map → area (garden map painting held; the walk's dialogs show above), area → map (area painting held), area → area, buổi turn in the garden (scene keeps its last painting, map keeps its last state, swap when decoded), act end (area painting held while the focus layer closes). The 5 area paintings + map of the mùa × buổi are decoded in the background when the garden map opens.
+- NEW `dev/test/nhv/transition-test.js` (CDP throttled 1.5 Mbit/s 150 ms, Fold + iPad, sample every 80 ms over map→area→map moves incl. a buổi turn): **1020/1020 samples show a painting** (garden map with its image, held painting, dialog, or the area scene with its painting decoded).
+- Videos NEW names nhv12-{fold,ipad}-{1x,2x}.mp4 + 4 fps sheets; automatic scan of every 0.25 s frame: no flat/blank frame and no mint pastel frame (the 2 low-variance frames are the area painting under the walk dialog veil).
+- quickcheck 5514434d: **PASS** (open 2213 ms · old save ok · perf render 257/270, tab 736/656, buổi 3912/5234 ms · core gates PASS). area test 55/55 (r9), art-states 96/96 (r6, art paths unchanged).
+- Seen but outside jnhv: the «Buổi chiều» curtain (LIVE curtain() over the place painting) and kitFocus's blurred backdrop use the place painting `ngu-hoa-vien`, not the area painting (kit family).
+
 ~92% xong / ~80% chơi được (Ngự hoa viên khu vườn).
