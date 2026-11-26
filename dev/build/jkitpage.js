@@ -75,7 +75,7 @@ KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · BỎ DỞ · KẾT QUẢ",html:kitPgSeals},
- {id:"§53",title:"kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)",html:kitPgKem});
+ {id:"§53",title:"kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)",html:kitPgKem},
  {id:"§7.1",title:"Người: đổi bao nhiêu (tổng mới) · kaNT / kitRelW",html:()=>{const D=BAL.kitpage&&BAL.kitpage.demo||{};const a=(D.k||1)*8,t=a*5+2;/* sample numbers from BAL (ONE CORE) */return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv"><span class="ef t">Hoàng hậu:</span> <span class="ef g">${kitRelW("thiện cảm",a,t)}</span></span></span><span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv"><span class="ef t">một vị Phi:</span> <span class="ef r">${kitRelW("oán",a+1,-(a/2))}</span></span></span></span>`}});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
