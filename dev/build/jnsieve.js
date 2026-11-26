@@ -177,7 +177,7 @@ function nsLogApply(P){const q=nsFold(NSV.q).trim(),pn=NSV.p,kd=(typeof KTSUB!==
  close();const L=P.querySelector(".logs");if(!L)return vis;let e=L.querySelector("[data-osnone]");if(!vis){if(!e){e=document.createElement("div");e.dataset.osnone=1;e.textContent="Không có dòng nào khớp.";L.appendChild(e)}e.hidden=false}else if(e)e.hidden=true;return vis}
 function nsLogBar(){const P=document.getElementById("panel");if(!P)return;const L=P.querySelector(".logs");if(!L||P.querySelector(".ksoghi"))return;const rows=nsLogRows(P);
  const cnt={all:0,me:0,hc:0,big:0};for(const r of rows){if(r.dataset.nrh)continue;const k=nsLogKind(r);cnt.all++;cnt[k]++;if(k==="big")cnt.hc++}
- const T=(BAL.news.logTabs||[["all","Tất cả"]]).map(([k,l])=>({k,label:l,n:cnt[k]||0}));const tb=kitSubTabs("soghi",T.map(x=>Object.assign({},x,{doable:x.k==="all"?1:0})));
+ const T=(BAL.news.logTabs||[["all","Tất cả"]]).map(([k,l])=>({k,label:l,n:cnt[k]||0})).filter(x=>x.k==="all"||x.n);/* an empty kind has no tab */const tb=kitSubTabs("soghi",T.map(x=>Object.assign({},x,{doable:x.k==="all"?1:0})));
  const ppl=nsLogPeople(rows);if(NSV.p&&!ppl.some(([n])=>n===NSV.p))NSV.p="";
  const pr=ppl.length?`<div class="pctabs kcattabs" role="tablist" data-osprow="1">${kitTabRowHTML([{k:"",label:"Mọi người"}].concat(ppl.map(([n,c])=>({k:n,label:n,n:c}))),NSV.p,"data-osp")}</div>`:"";
  const box=document.createElement("div");box.className="ksoghi";box.innerHTML=tb.html+pr+kitInput({id:"osq",label:"Tìm trong sổ",placeholder:"tên người hay việc…",value:NSV.q});
@@ -232,14 +232,14 @@ function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)r
  if(!items.length)return {keep,sum:"",fold:[],kemOne};
  const nmOf=v=>{try{return typeof kaNamed==="function"&&kaNamed(v)?kaWho(v):String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m")}catch(e){return v.name}};
  const G=new Map();for(const [g,v] of items){if(!G.has(g))G.set(g,new Set());G.get(g).add(v)}
- const order=["g","b","ghen+","oán+","ghen-","oán-"];const big=(B.big||99),bigN=new Map();for(const it of items)if(Math.abs(it[3]||0)>=big){if(!bigN.has(it[0]))bigN.set(it[0],[]);bigN.get(it[0]).push(it)}
- const parts=order.filter(g=>G.has(g)).map(g=>{const L=(bigN.get(g)||[]).sort((x,y)=>Math.abs(y[3])-Math.abs(x[3])).slice(0,2);/* a big change names its person in the line itself */
+ const order=["g","b","ghen+","oán+","ghen-","oán-"];const keepV=new Set(keep.map(x=>x[4]).filter(Boolean));/* a person already on her own row is not named again in the line */const big=(B.big||99),bigN=new Map();for(const it of items)if(Math.abs(it[3]||0)>=big){if(!bigN.has(it[0]))bigN.set(it[0],[]);bigN.get(it[0]).push(it)}
+ const parts=order.filter(g=>G.has(g)).map(g=>{const L=(bigN.get(g)||[]).filter(it=>!keepV.has(it[1])).sort((x,y)=>Math.abs(y[3])-Math.abs(x[3])).slice(0,2);/* a big change names its person in the line itself */
   return `${G.get(g).size} người ${NS_SUMW[g]}${L.length?` (${L.map(it=>`${nmOf(it[1])} ${kaN(Math.round(it[3]))}`).join(", ")})`:""}`});
  const byV=new Map();for(const [,v,w] of items){if(!byV.has(v))byV.set(v,[]);byV.get(v).push(w)}
  const names=[...byV].map(([v,W])=>`${nmOf(v)}: ${W.join(", ")}`);
  const sum=`<span class="kitem kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">Trong cung: ${parts.join(", ")}</span><span class="kkeml">${names.map(n=>`<span>${n}</span>`).join("<br>")}</span></span>`;
  /* the Sổ ghi keeps every name and number (maskNames at show time: a stranger stays «một vị …») */
- try{const r0=recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name}: ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id)});if(r0)r0.kem=1/* a card's folded changes (not an NPC act: no k) */}catch(e){}
+ try{const r0=recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name} ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id)});if(r0)r0.kem=1/* a card's folded changes (not an NPC act: no k) */}catch(e){}
  NSV.stat.cardFold=(NSV.stat.cardFold||0)+byV.size;
  return {keep,sum,fold:[...byV.keys()].map(v=>v.name),kemOne}}catch(e){console.error("nsCard",e);return null}}
 /* «VÌ SAO» (kitWhy, j63 kaWhyCl): the reasons of a card come from the span's log clauses; a clause that is other people's business only never
