@@ -13,7 +13,7 @@
      empty: html, onClose }
    R = {el, rot, front(), turnTo(i), focus(), back(), refresh(), close()}.  kitRingItem.cur = the open ring.  Wiring (adapters) at the end of this file. */
 /* tw = the FRONT tile size in px (MAIN look note 26/11: front ≈1.5× the old 82 px, more on iPad); side tiles keep the old size curve (side = old kitItem md 72 px) */
-const KIT_RINGI={tw:{fold:124,ipad:150},side:72,frontPow:20,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
+const KIT_RINGI={tw:{fold:124,ipad:150},side:72,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
  openMs:420,focusMs:520,dropMs:360,stagger:26,maxN:24,
  /* a TEXT tile (kit title plate, it.tile): law 10 one size on every device = the plate text at plateRem; depth shrinks it only by plateDepth of the picture curve (side plates stay readable) */plateRem:1.6,plateDepth:.4};
 /* ---------- ring maths = KRING_MATH (§104.1, jkring.js; numbers in BAL.kring) — KK44 ruling 26/11: ONE core, KRING_MATH deleted ---------- */
@@ -96,9 +96,9 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  if(bloom&&!kriCalm()){const N=R.tiles.length;R.tiles.forEach((t,i)=>{const fin=t.style.transform,op=t.style.opacity;t.animate([{transform:`translate(${-g.tw/2}px,${-g.tw*.6}px) scale(.1)`,opacity:0},{transform:fin,opacity:op}],{duration:KIT_RINGI.openMs,delay:i*KIT_RINGI.stagger,easing:"cubic-bezier(.2,1.25,.4,1)"})});
   [R.arL,R.arR,nm,hi].forEach(b=>b.animate([{opacity:0},{opacity:1}],{duration:260,delay:280,fill:"backwards"}))}}
 function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=KRING_MATH.front(R.rot,N);
- R.tiles.forEach((t,i)=>{const m=KRING_MATH.slot(i,R.rot,N);const F=g.tw/(KIT_RINGI.side*1.14);let sc=KIT_RINGI.side*(.42+.72*Math.pow(m.k,1.8))/g.tw*(1+(F-1)*Math.pow(m.k,KIT_RINGI.frontPow));let Rx=g.Rx;if(t.classList.contains("kri-tile")){sc=1-(1-sc)*KIT_RINGI.plateDepth;/* a wide text plate stays inside the stage: the ring narrows by the widest plate (+ the ‹ › room) */const pw=R.plateW||(R.plateW=Math.max(0,...R.tiles.map(x=>{const k=x.querySelector(".kdh");return k?k.offsetWidth:0})));Rx=Math.max(40,Math.min(Rx,g.cx-56-pw/2))}const x=Rx*m.s,y=-g.Ry*m.c;
+ R.tiles.forEach((t,i)=>{const m=KRING_MATH.slot(i,R.rot,N);const T=KRING_MATH.tier(m.a);let sc=T.sc;/* owner 21:45Z: the 3 size tiers of the ring core (BAL.kring), same as vòng người */let Rx=g.Rx;if(t.classList.contains("kri-tile")){sc=1-(1-sc)*KIT_RINGI.plateDepth;/* a wide text plate stays inside the stage: the ring narrows by the widest plate (+ the ‹ › room) */const pw=R.plateW||(R.plateW=Math.max(0,...R.tiles.map(x=>{const k=x.querySelector(".kdh");return k?k.offsetWidth:0})));Rx=Math.max(40,Math.min(Rx,g.cx-56-pw/2))}const x=Rx*m.s,y=-g.Ry*m.c;
   t.style.transform=`translate(${(x-g.tw/2).toFixed(1)}px,${(y-g.tw*.6).toFixed(1)}px) scale(${sc.toFixed(3)})`;
-  const front=Math.abs(m.a)<.5;const op=m.hide?0:front?1:Math.min(1,(KIT_RINGI.dim+.3*Math.pow(m.k,2))*Math.min(1,(KRING_MATH.seats/2-Math.abs(m.a))));t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
+  const front=Math.abs(m.a)<.5;const op=m.hide?0:Math.min(1,(1-T.dim*(1-KIT_RINGI.dim))*Math.min(1,(KRING_MATH.seats/2-Math.abs(m.a))));/* dim tiers: L none, M light, S = KIT_RINGI.dim */t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
   R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */

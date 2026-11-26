@@ -13,7 +13,7 @@
 (function(){try{
 const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:7,col1:4,postAt:{kv1:{r:10,top:.24},kv2:{r:14,top:.22}}/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: r = px from the stage's right edge to the post, top = rail y / stage height */,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const still=()=>{if(KIT_PLAQUE.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
@@ -32,7 +32,19 @@ function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getEle
  build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
  P.lift=id=>lift(P,id);P.setGroup=k=>{if(P.__pg&&!P.groups.some(g=>g.k===k)){const f=P.groups.find(g=>g.pg===k);if(f)k=f.k}if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
  return P}
-function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
+/* OWNER 26/11 ~21:41Z «để cái sự lựa chọn nào nó cũng tới từ một cái cột thôi … lúc thì nằm bên giữa, lúc thì nằm bên phải là sao?» → ONE PLAQUE POST (§98.20, default for every caller):
+   the post stands at ONE fixed place of the STAGE (kscnGeo; KIT_PLAQUE.postAt[mode]: r px from its right edge, rail at top × its height) on every board and device; plaques hang
+   LEFT of it: ≤ col1 (4) = one column, 5–7 = two columns growing LEFTWARD; the post never moves (anchor / side / avoid / noLap are ignored). Names that grow plaques grow DOWN
+   from the fixed rail; past the floor → compact rows. No paging (owner 21:45Z: at most 7 per board, cut at the source; more = console.warn + the first 7). The people yield. */
+function stageBox(host){const hr=host.getBoundingClientRect();let x=0,y=0,w=hr.width,h=hr.height;try{if(typeof kscnGeo==="function"){const g=kscnGeo();if(g&&g.w>50&&g.H>50){x=Math.max(0,g.L-hr.left);y=Math.max(0,g.t-hr.top);w=Math.min(hr.width,g.L+g.w-hr.left)-x;h=Math.min(hr.height,g.t+g.H-hr.top)-y}}}catch(e){}return{x,y,w,h,W:hr.width,H:hr.height}}
+function postGeo(P,nOnly){const K=KIT_PLAQUE,m=P.m,B=stageBox(P.host),pa=K.postAt[m]||K.postAt.kv1,post=K.post,gr=P.groups.find(g=>g.k===P.group)||P.groups[0],all=gr.acts||[];
+ if(all.length>K.max&&!nOnly&&!P.__w7){P.__w7=1;try{console.warn("kitPick >7 (owner 26/11 21:45Z: cut at the source)",all.length,(all||[]).map(a=>a.n).join("|"))}catch(e){}}
+ const acts=all.slice(0,K.max),n=acts.length,cols=n>K.col1?2:1,cw=K.w[m],bw=cols*cw+(cols-1)*K.gx,px=B.x+B.w-pa.r-post,x0=px-4-bw,tabsH=P.groups.length>1?K.tabH+8:0;
+ const railY=Math.max(B.y+2+tabsH,B.y+Math.round(B.h*pa.top)),floor=B.y+B.h-2,rows=Math.max(1,Math.ceil(n/cols));
+ let hh=Math.max(K.h[m],P.hx||0),gg=K.cord.gap,comp=false;const tot=()=>K.cord.rail+rows*hh+(rows-1)*gg;if(railY+tot()>floor){comp=true;gg=K.cord.gapS;hh=Math.max(K.hS,Math.min(hh,Math.floor((floor-railY-K.cord.rail-(rows-1)*gg)/rows)))}
+ const tw=Math.max(bw,2*cw+K.gx);
+ return {over:Math.max(0,railY+tot()-floor),lapped:false,comp,A:P.o.anchor||{x:x0,y:railY,w:0,h:0},acts,n,side:"r",cols,cw,h:hh,gap:gg,rows,railY,bandW:bw,x0,post,floor,tabsH,W:B.W,H:B.H,fixed:1,px,tabX:px-4-tw,tabW:tw,bot:railY+tot()}}
+function geo(P){if(P.o.post!==false)return postGeo(P);const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
  const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,P.cap||K.max),n=acts.length,post=K.post;
  /* the band (tabs + rail + columns + post) goes on the side, tier and height that cover the least: kit parts of the stage (P.obst: right column, rail chips, title, name tags, corner buttons) count HARD, other people (o.avoid) SOFT */
  const ovl=(x0,y0,x1,y1,L)=>{let a=0;L.forEach(o=>{const w=Math.min(x1,o.x+o.w)-Math.max(x0,o.x),hh=Math.min(y1,o.y+o.h)-Math.max(y0,o.y);if(w>0&&hh>0)a+=w*hh});return a};
@@ -56,7 +68,7 @@ function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o
 /* KK36 (NHV Fold PLAQUE-OFFSTAGE ×2: 6 plaques of 4-line names beside a person at x≈.2 ran below the stage): when NO tier / column / height keeps the
    whole band inside the stage (geo over > 0), the group is split into PAGES of the largest count that fits (tabs «Việc · 1/2», the kit .pctabs of the groups;
    same rule as the dialogue answers «Đáp · 1/2», §102.2) — a plaque is never off the stage, never dropped (also > KIT_PLAQUE.max acts). */
-function paginate(P){const K=KIT_PLAQUE;const gs=P.groups0||P.groups;let G=null;
+function paginate(P){if(P.o.post!==false)return false;const K=KIT_PLAQUE;const gs=P.groups0||P.groups;let G=null;
  const fits=per=>{const s=[P.groups,P.cap];P.groups=gs.length>1?gs:gs.concat([{k:"\u0000",n:"",acts:[]}]);/* tabs will show: count their height */P.cap=per;try{G=geo(P)}finally{P.groups=s[0];P.cap=s[1]}return G.over<=0};
  const big=!P.groups0&&gs.some(g=>(g.acts||[]).length>K.max);let cur=null;try{cur=geo(P)}catch(e){return false}if(!(cur.over>0)&&!big)return false;const was=(P.groups.find(g=>g.k===P.group)||{}).pg||P.group;
  const n=Math.max(...gs.map(g=>(g.acts||[]).length));let per=Math.min(n-1,K.max,P.cap?P.cap-1:99);while(per>1&&!fits(per))per--;if(per<1)return false;
@@ -71,7 +83,7 @@ function build(P,swap){const K=KIT_PLAQUE;paginate(P);const G=geo(P),el=P.el,m=P
  rail.style.cssText=`left:${side==="r"?G.x0-4:G.x0-pw-4}px;top:${G.railY}px;width:${G.bandW+pw+8}px`;
  /* tabs (kit .pctabs/.pct) above the rail when more than one group */
  if(P.groups.length>1){const t=document.createElement("div");t.className="kpk-tabs pctabs";t.innerHTML=P.groups.map(g=>`<button type="button" class="pct${g.k===P.group?" on":""}" data-k="${esc(g.k)}">${esc(g.n||"Việc")}</button>`).join("");
-  t.style.cssText=`left:${G.x0}px;top:0;width:${G.bandW}px;visibility:hidden`;t.__fit=1;t.addEventListener("click",e=>{const b=e.target.closest(".pct");if(!b)return;e.stopPropagation();P.setGroup(b.dataset.k)});el.appendChild(t);
+  t.style.cssText=`left:${G.fixed?G.tabX:G.x0}px;top:0;width:${G.fixed?G.tabW:G.bandW}px;visibility:hidden`;t.__fit=1;t.addEventListener("click",e=>{const b=e.target.closest(".pct");if(!b)return;e.stopPropagation();P.setGroup(b.dataset.k)});el.appendChild(t);
   /* ONE row: a label that does not fit its tab steps down (kpk-ts1, kpk-ts2); never a second row, never cut */
   for(const c of ["kpk-ts1","kpk-ts2","kpk-ts3"]){if(![...t.querySelectorAll(".pct")].some(x=>x.scrollWidth>x.clientWidth+1||x.scrollHeight>x.clientHeight+1))break;t.classList.add(c)}
   const th=Math.ceil(t.getBoundingClientRect().height);t.style.top=Math.max(2,G.railY-th-8)+"px";t.style.visibility=""}
@@ -130,7 +142,11 @@ function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${C
 function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
  if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
 function destroy(P,fromClose){if(!P)return;P.open=false;try{P.__nmo&&P.__nmo.disconnect()}catch(e){}document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
-window.kitPick={open,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
+/* §98.20 kitPick.band(n,host,groups?) → the board box {x0,x1,y0,y1} (host px) for n plaques BEFORE it opens: x0 includes the ✓ / ✕ room of the left column (2 columns), so the
+   figure / cluster yields LEFT of x0 (ring focus, kit stage). Same maths as open (postGeo). */
+function band(n,host,ng){host=host||document.getElementById("stage")||document.body;const P={o:{},host,m:kv(),groups:[{k:"",acts:Array.from({length:Math.max(1,n|0)},(_,i)=>({id:i}))}].concat(ng>1?Array.from({length:ng-1},()=>({k:"x",acts:[]})):[])};P.group="";
+ const G=postGeo(P,true),cf=G.cols===2?(((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+6):0;return {x0:Math.min(G.x0-4-cf,G.tabsH?G.tabX:1e9),x1:G.px+G.post,y0:G.railY-G.tabsH,y1:G.bot,cols:G.cols,px:G.px}}
+window.kitPick={open,band,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
 
 /* ---------- kitDim: ONE dim for the people who are not chosen (owner OD 24/11 ~09:05Z + ~15:30Z) ----------
    figure only, never the background, never see-through: a copy of the figure image with a STATIC filter (brightness + saturate from BAL.kdim) cross-fades on top of the figure

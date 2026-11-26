@@ -15,7 +15,7 @@
 (function(){try{
 const KIT_RING=window.KIT_RING=window.KIT_RING||{min:5,wire:true,
  fh:{kv1:.60,kv2:.70}/* front figure height / layer height */,fhF:{kv1:.90,kv2:.95}/* focus figure height */,fx:{kv1:.30,kv2:.27}/* focus centre x / width */,
- rx:{kv1:.36,kv2:.33},ry:{kv1:.10,kv2:.11},floor:.955,back:.48/* scale of the farthest slot */,dimK:1.25,
+ rx:{kv1:.36,kv2:.33},ry:{kv1:.10,kv2:.11},floor:.955,/* slot sizes + dim = the 3 tiers KRING_MATH.tier (BAL.kring) */
  grpFh:1/* group lead = the stage size too (owner 20:27Z); members beside her ×.9 depth */,stdR:{kv1:.747,kv2:.725}/* LIVE stage figure image px / stage px (fallback) */,grpGap:.22/* member spacing / member height (members overlap: one cluster) */,grpW:{kv1:.56,kv2:.50}/* focused group max width / layer width */,
  focusMs:560,arrow:{kv1:42,kv2:46}};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
@@ -26,10 +26,11 @@ const E="cubic-bezier(.2,.75,.25,1)";
 /* §104.1 KRING_MATH — the ONE ring maths of the whole ring kit (vòng người · vòng nhóm · vòng bảo vật): same semantics as MOTION-BUILD's KRI_MATH (jkring-item.js reads
    window.KRING_MATH when present). N > seats: one seat spacing (2π/seats), only the seats around the front show (a scrolling ring of many). */
 const KB=()=>BAL.kring||{};
-const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{get seats(){return KB().seats||12},get decay(){return KB().decay||.93},get stop(){return KB().stop||.0012},get snapMs(){return KB().snapMs||200},get stepMs(){return KB().stepMs||280},get frontK(){return KB().front||1},
- /* front boost: 1 at the front, 1/front at |a| ≥ 1 (the front keeps its size, its neighbours shrink) */
- boost(a){const f=this.frontK;return 1/f+(1-1/f)*Math.max(0,1-Math.abs(a))},
+const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{get seats(){return KB().seats||12},get decay(){return KB().decay||.93},get stop(){return KB().stop||.0012},get snapMs(){return KB().snapMs||200},get stepMs(){return KB().stepMs||280},
  slot(i,rot,N){let a=((i-rot)%N+N)%N;if(a>N/2)a-=N;const n=Math.max(3,Math.min(N,this.seats)),th=a*2*Math.PI/n,c=Math.cos(th),s=Math.sin(th),k=(1+c)/2;return{a,c,s,k,hide:Math.abs(a)>n/2-.5}},
+ /* §104.1 the 3 SIZE TIERS (owner 21:45Z; BAL.kring szL/szM/szS · dimL/dimM/dimS · near): seat distance |a| → {sc, dim, t} (t 0 = L, 1 = M, 2 = S); at rest every slot is exactly one tier */
+ tier(a){const B=KB(),d=Math.abs(a),nr=Math.max(1,B.near||1),L=B.szL||1,M=B.szM||.66,S=B.szS||.46,dL=B.dimL||0,dM=B.dimM!=null?B.dimM:.45,dS=B.dimS!=null?B.dimS:1;
+  const t=d<=1?d:d<=nr?1:d<=nr+1?1+(d-nr):2,mix=(x,y,z)=>t<=1?x+(y-x)*t:y+(z-y)*(t-1);return{t,sc:mix(L,M,S),dim:mix(dL,dM,dS)}},
  front(rot,N){return((Math.round(rot)%N)+N)%N},
  short(i,rot,N){let d=((i-rot)%N+N)%N;if(d>N/2)d-=N;return d},
 };
@@ -105,9 +106,9 @@ function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="k
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
 function geo(R){const m=kv(),K=KIT_RING,L=R.L,w=L.g.w,H=L.g.H;return {w,H,cx:w/2,floor:H*K.floor,Rx:w*K.rx[m],Ry:H*K.ry[m]}}
 function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const q=KRING_MATH.slot(i,R.rot,N),a=q.a,c=q.c,sn=q.s,k=q.k;s.style.visibility=q.hide?"hidden":"";
-  const sc=(KIT_RING.back+(1-KIT_RING.back)*Math.pow(k,1.4))*(N>1?KRING_MATH.boost(a):1),x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
+  const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
-  const st=N>1?Math.abs(a):0,d=Math.min(1,st*KIT_RING.dimK);s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
+  const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
 function stepPx(R){const g=geo(R);return Math.max(60,g.Rx*2*Math.PI/Math.max(3,R.slots.length)*.7)}
 function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){yieldCard(R);res();return false}}))}
@@ -168,15 +169,20 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
    the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
    layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
 function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
-function plaqueNeed(m){const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
-function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(m),P=paintX(s),hh=s.__feet-s.__top;
+/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: the board hangs from the ONE fixed post (kitPick.band, §98.20) → the focused figure / cluster yields LEFT of the board's left edge
+   (the board for THIS slot's plaque count: ≤ 4 one column, 5–7 two columns). need = layer width − band x0 (+ a 12 px gap). */
+function boardN(R,s){try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
+ const M=s.__g.members;if(M.length>1)return{n:1+M.length,ng:1};const x=M[0];if(R.o.acts){const A=R.o.acts(x)||[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
+ const G=acts(R,x);return{n:Math.max(1,...G.map(g=>g.acts.length)),ng:G.length}}catch(e){return{n:7,ng:1}}}
+function plaqueNeed(R,s){const g=geo(R);try{if(window.kitPick&&kitPick.band){const N=boardN(R,s),b=kitPick.band(N.n,R.L,N.ng);return Math.max(0,g.w-b.x0)+12}}catch(e){console.error("kitRing band",e)}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[kv()])||170)+(K.post||8)+30}
+function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(R,s),P=paintX(s),hh=s.__feet-s.__top;
  let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
  const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
  if(over>0){cx-=Math.min(over,Math.max(0,left()-edge));over=right()+need-g.w}
  if(over>0){sc=Math.max(.3,(g.w-need-edge)/Math.max(1,P.r-P.l));cx=edge+(s.__cx-P.l)*sc}
  /* a group member who steps out grows ×1.06 from her feet: the head line keeps that room */const up=grp?1.08:1;if(feet-hh*sc*up<4)sc=(feet-4)/(hh*up);return{sc,cx,feet}}
 /* every ring picker opens through here: with TWO plaque columns the left column's ✓ / ✕ sits on its outer (left) side = toward the figure → the band moves right by that room */
-function pickOpen(R,o){let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
+function pickOpen(R,o){let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&!G.fixed&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
 /* the union box of every member of the focused slot (layer px): the plaques and the bubble go to the right of the WHOLE cluster, never over a member */
 function unionBox(R){const M=R.slots[R.sel].__g.members.map(y=>boxOf(R,y));const x0=Math.min(...M.map(b=>b.x)),y0=Math.min(...M.map(b=>b.y));return{x:x0,y:y0,w:Math.max(...M.map(b=>b.x+b.w))-x0,h:Math.max(...M.map(b=>b.y+b.h))-y0}}
 /* §104.3 group PICKER mode (open({groups:[{name,line,people}], gacts(gi)→acts|groups, onGroupPick(gi,id)})): the focused group's plaques = the caller's choices for that group */

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"393711bf+","t":"2026-11-26T21:49Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"32e61cc2d2c3","h":[{"s":"8d5e3382+","t":"2026-11-26T18:38Z","c":"Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»)."},{"s":"f573dc94+","t":"2026-11-26T17:33Z","c":"Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị)."},{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."}]};
+window.CTM_BI={"s":"34c24a38+","t":"2026-11-26T22:09Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"4e319606b011","h":[]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37083,8 +37083,12 @@ BAL.kdim={b:.7,s:.75,ms:220};
 /* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */
 BAL.kring={dimB:.48,dimS:.6,
  /* §104.1 the ONE ring table read by every ring (vòng người · vòng nhóm · vòng bảo vật; MOTION-BUILD-2 ask 26/11 ~20:12Z): seats = visible seats (N > seats scrolls), decay = fling
-    velocity kept per 60 Hz frame, stop = fling speed (slots/ms) that snaps, snapMs = snap tween, stepMs = one ‹ › step, front = front slot size vs its side neighbours (≈1.5×; the front keeps its size, sides shrink) */
- seats:12,decay:.93,stop:.0012,snapMs:200,stepMs:280,front:1.5};
+    velocity kept per 60 Hz frame, stop = fling speed (slots/ms) that snaps, snapMs = snap tween, stepMs = one ‹ › step */
+ seats:12,decay:.93,stop:.0012,snapMs:200,stepMs:280,
+ /* OWNER 26/11 ~21:45Z «3 size … small là những người ở xa, medium là những người ở gần hơn, large là những người mà tôi đang chọn»: EXACTLY 3 figure sizes in every ring
+    (người · nhóm · bảo vật · danh hiệu · dung mạo): L = the front (the one she is choosing; ×1 = the LIVE stage size), M = the nearer ones (|seat| ≤ near), S = the far ones;
+    dim follows the same tiers (dimL none, dimM light, dimS most = the full dim copy); between seats (while turning) the size/dim slide from one tier to the next */
+ szL:1,szM:.66,szS:.46,near:1,dimL:0,dimM:.45,dimS:1};
 /* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
    hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
    Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
@@ -97519,7 +97523,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§92.4",title:"kit
 (function(){try{
 const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:7,col1:4,postAt:{kv1:{r:10,top:.24},kv2:{r:14,top:.22}}/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: r = px from the stage's right edge to the post, top = rail y / stage height */,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const still=()=>{if(KIT_PLAQUE.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
@@ -97538,7 +97542,19 @@ function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getEle
  build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
  P.lift=id=>lift(P,id);P.setGroup=k=>{if(P.__pg&&!P.groups.some(g=>g.k===k)){const f=P.groups.find(g=>g.pg===k);if(f)k=f.k}if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
  return P}
-function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
+/* OWNER 26/11 ~21:41Z «để cái sự lựa chọn nào nó cũng tới từ một cái cột thôi … lúc thì nằm bên giữa, lúc thì nằm bên phải là sao?» → ONE PLAQUE POST (§98.20, default for every caller):
+   the post stands at ONE fixed place of the STAGE (kscnGeo; KIT_PLAQUE.postAt[mode]: r px from its right edge, rail at top × its height) on every board and device; plaques hang
+   LEFT of it: ≤ col1 (4) = one column, 5–7 = two columns growing LEFTWARD; the post never moves (anchor / side / avoid / noLap are ignored). Names that grow plaques grow DOWN
+   from the fixed rail; past the floor → compact rows. No paging (owner 21:45Z: at most 7 per board, cut at the source; more = console.warn + the first 7). The people yield. */
+function stageBox(host){const hr=host.getBoundingClientRect();let x=0,y=0,w=hr.width,h=hr.height;try{if(typeof kscnGeo==="function"){const g=kscnGeo();if(g&&g.w>50&&g.H>50){x=Math.max(0,g.L-hr.left);y=Math.max(0,g.t-hr.top);w=Math.min(hr.width,g.L+g.w-hr.left)-x;h=Math.min(hr.height,g.t+g.H-hr.top)-y}}}catch(e){}return{x,y,w,h,W:hr.width,H:hr.height}}
+function postGeo(P,nOnly){const K=KIT_PLAQUE,m=P.m,B=stageBox(P.host),pa=K.postAt[m]||K.postAt.kv1,post=K.post,gr=P.groups.find(g=>g.k===P.group)||P.groups[0],all=gr.acts||[];
+ if(all.length>K.max&&!nOnly&&!P.__w7){P.__w7=1;try{console.warn("kitPick >7 (owner 26/11 21:45Z: cut at the source)",all.length,(all||[]).map(a=>a.n).join("|"))}catch(e){}}
+ const acts=all.slice(0,K.max),n=acts.length,cols=n>K.col1?2:1,cw=K.w[m],bw=cols*cw+(cols-1)*K.gx,px=B.x+B.w-pa.r-post,x0=px-4-bw,tabsH=P.groups.length>1?K.tabH+8:0;
+ const railY=Math.max(B.y+2+tabsH,B.y+Math.round(B.h*pa.top)),floor=B.y+B.h-2,rows=Math.max(1,Math.ceil(n/cols));
+ let hh=Math.max(K.h[m],P.hx||0),gg=K.cord.gap,comp=false;const tot=()=>K.cord.rail+rows*hh+(rows-1)*gg;if(railY+tot()>floor){comp=true;gg=K.cord.gapS;hh=Math.max(K.hS,Math.min(hh,Math.floor((floor-railY-K.cord.rail-(rows-1)*gg)/rows)))}
+ const tw=Math.max(bw,2*cw+K.gx);
+ return {over:Math.max(0,railY+tot()-floor),lapped:false,comp,A:P.o.anchor||{x:x0,y:railY,w:0,h:0},acts,n,side:"r",cols,cw,h:hh,gap:gg,rows,railY,bandW:bw,x0,post,floor,tabsH,W:B.W,H:B.H,fixed:1,px,tabX:px-4-tw,tabW:tw,bot:railY+tot()}}
+function geo(P){if(P.o.post!==false)return postGeo(P);const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
  const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,P.cap||K.max),n=acts.length,post=K.post;
  /* the band (tabs + rail + columns + post) goes on the side, tier and height that cover the least: kit parts of the stage (P.obst: right column, rail chips, title, name tags, corner buttons) count HARD, other people (o.avoid) SOFT */
  const ovl=(x0,y0,x1,y1,L)=>{let a=0;L.forEach(o=>{const w=Math.min(x1,o.x+o.w)-Math.max(x0,o.x),hh=Math.min(y1,o.y+o.h)-Math.max(y0,o.y);if(w>0&&hh>0)a+=w*hh});return a};
@@ -97562,7 +97578,7 @@ function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o
 /* KK36 (NHV Fold PLAQUE-OFFSTAGE ×2: 6 plaques of 4-line names beside a person at x≈.2 ran below the stage): when NO tier / column / height keeps the
    whole band inside the stage (geo over > 0), the group is split into PAGES of the largest count that fits (tabs «Việc · 1/2», the kit .pctabs of the groups;
    same rule as the dialogue answers «Đáp · 1/2», §102.2) — a plaque is never off the stage, never dropped (also > KIT_PLAQUE.max acts). */
-function paginate(P){const K=KIT_PLAQUE;const gs=P.groups0||P.groups;let G=null;
+function paginate(P){if(P.o.post!==false)return false;const K=KIT_PLAQUE;const gs=P.groups0||P.groups;let G=null;
  const fits=per=>{const s=[P.groups,P.cap];P.groups=gs.length>1?gs:gs.concat([{k:"\u0000",n:"",acts:[]}]);/* tabs will show: count their height */P.cap=per;try{G=geo(P)}finally{P.groups=s[0];P.cap=s[1]}return G.over<=0};
  const big=!P.groups0&&gs.some(g=>(g.acts||[]).length>K.max);let cur=null;try{cur=geo(P)}catch(e){return false}if(!(cur.over>0)&&!big)return false;const was=(P.groups.find(g=>g.k===P.group)||{}).pg||P.group;
  const n=Math.max(...gs.map(g=>(g.acts||[]).length));let per=Math.min(n-1,K.max,P.cap?P.cap-1:99);while(per>1&&!fits(per))per--;if(per<1)return false;
@@ -97577,7 +97593,7 @@ function build(P,swap){const K=KIT_PLAQUE;paginate(P);const G=geo(P),el=P.el,m=P
  rail.style.cssText=`left:${side==="r"?G.x0-4:G.x0-pw-4}px;top:${G.railY}px;width:${G.bandW+pw+8}px`;
  /* tabs (kit .pctabs/.pct) above the rail when more than one group */
  if(P.groups.length>1){const t=document.createElement("div");t.className="kpk-tabs pctabs";t.innerHTML=P.groups.map(g=>`<button type="button" class="pct${g.k===P.group?" on":""}" data-k="${esc(g.k)}">${esc(g.n||"Việc")}</button>`).join("");
-  t.style.cssText=`left:${G.x0}px;top:0;width:${G.bandW}px;visibility:hidden`;t.__fit=1;t.addEventListener("click",e=>{const b=e.target.closest(".pct");if(!b)return;e.stopPropagation();P.setGroup(b.dataset.k)});el.appendChild(t);
+  t.style.cssText=`left:${G.fixed?G.tabX:G.x0}px;top:0;width:${G.fixed?G.tabW:G.bandW}px;visibility:hidden`;t.__fit=1;t.addEventListener("click",e=>{const b=e.target.closest(".pct");if(!b)return;e.stopPropagation();P.setGroup(b.dataset.k)});el.appendChild(t);
   /* ONE row: a label that does not fit its tab steps down (kpk-ts1, kpk-ts2); never a second row, never cut */
   for(const c of ["kpk-ts1","kpk-ts2","kpk-ts3"]){if(![...t.querySelectorAll(".pct")].some(x=>x.scrollWidth>x.clientWidth+1||x.scrollHeight>x.clientHeight+1))break;t.classList.add(c)}
   const th=Math.ceil(t.getBoundingClientRect().height);t.style.top=Math.max(2,G.railY-th-8)+"px";t.style.visibility=""}
@@ -97636,7 +97652,11 @@ function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${C
 function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
  if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
 function destroy(P,fromClose){if(!P)return;P.open=false;try{P.__nmo&&P.__nmo.disconnect()}catch(e){}document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
-window.kitPick={open,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
+/* §98.20 kitPick.band(n,host,groups?) → the board box {x0,x1,y0,y1} (host px) for n plaques BEFORE it opens: x0 includes the ✓ / ✕ room of the left column (2 columns), so the
+   figure / cluster yields LEFT of x0 (ring focus, kit stage). Same maths as open (postGeo). */
+function band(n,host,ng){host=host||document.getElementById("stage")||document.body;const P={o:{},host,m:kv(),groups:[{k:"",acts:Array.from({length:Math.max(1,n|0)},(_,i)=>({id:i}))}].concat(ng>1?Array.from({length:ng-1},()=>({k:"x",acts:[]})):[])};P.group="";
+ const G=postGeo(P,true),cf=G.cols===2?(((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+6):0;return {x0:Math.min(G.x0-4-cf,G.tabsH?G.tabX:1e9),x1:G.px+G.post,y0:G.railY-G.tabsH,y1:G.bot,cols:G.cols,px:G.px}}
+window.kitPick={open,band,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
 
 /* ---------- kitDim: ONE dim for the people who are not chosen (owner OD 24/11 ~09:05Z + ~15:30Z) ----------
    figure only, never the background, never see-through: a copy of the figure image with a STATIC filter (brightness + saturate from BAL.kdim) cross-fades on top of the figure
@@ -100150,7 +100170,7 @@ function chWinTxt(k,a,t,W){const u=chUse(k,a,t);return u&&k!=="expose"/* tư th�
 (function(){try{
 const KIT_RING=window.KIT_RING=window.KIT_RING||{min:5,wire:true,
  fh:{kv1:.60,kv2:.70}/* front figure height / layer height */,fhF:{kv1:.90,kv2:.95}/* focus figure height */,fx:{kv1:.30,kv2:.27}/* focus centre x / width */,
- rx:{kv1:.36,kv2:.33},ry:{kv1:.10,kv2:.11},floor:.955,back:.48/* scale of the farthest slot */,dimK:1.25,
+ rx:{kv1:.36,kv2:.33},ry:{kv1:.10,kv2:.11},floor:.955,/* slot sizes + dim = the 3 tiers KRING_MATH.tier (BAL.kring) */
  grpFh:1/* group lead = the stage size too (owner 20:27Z); members beside her ×.9 depth */,stdR:{kv1:.747,kv2:.725}/* LIVE stage figure image px / stage px (fallback) */,grpGap:.22/* member spacing / member height (members overlap: one cluster) */,grpW:{kv1:.56,kv2:.50}/* focused group max width / layer width */,
  focusMs:560,arrow:{kv1:42,kv2:46}};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
@@ -100161,10 +100181,11 @@ const E="cubic-bezier(.2,.75,.25,1)";
 /* §104.1 KRING_MATH — the ONE ring maths of the whole ring kit (vòng người · vòng nhóm · vòng bảo vật): same semantics as MOTION-BUILD's KRI_MATH (jkring-item.js reads
    window.KRING_MATH when present). N > seats: one seat spacing (2π/seats), only the seats around the front show (a scrolling ring of many). */
 const KB=()=>BAL.kring||{};
-const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{get seats(){return KB().seats||12},get decay(){return KB().decay||.93},get stop(){return KB().stop||.0012},get snapMs(){return KB().snapMs||200},get stepMs(){return KB().stepMs||280},get frontK(){return KB().front||1},
- /* front boost: 1 at the front, 1/front at |a| ≥ 1 (the front keeps its size, its neighbours shrink) */
- boost(a){const f=this.frontK;return 1/f+(1-1/f)*Math.max(0,1-Math.abs(a))},
+const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{get seats(){return KB().seats||12},get decay(){return KB().decay||.93},get stop(){return KB().stop||.0012},get snapMs(){return KB().snapMs||200},get stepMs(){return KB().stepMs||280},
  slot(i,rot,N){let a=((i-rot)%N+N)%N;if(a>N/2)a-=N;const n=Math.max(3,Math.min(N,this.seats)),th=a*2*Math.PI/n,c=Math.cos(th),s=Math.sin(th),k=(1+c)/2;return{a,c,s,k,hide:Math.abs(a)>n/2-.5}},
+ /* §104.1 the 3 SIZE TIERS (owner 21:45Z; BAL.kring szL/szM/szS · dimL/dimM/dimS · near): seat distance |a| → {sc, dim, t} (t 0 = L, 1 = M, 2 = S); at rest every slot is exactly one tier */
+ tier(a){const B=KB(),d=Math.abs(a),nr=Math.max(1,B.near||1),L=B.szL||1,M=B.szM||.66,S=B.szS||.46,dL=B.dimL||0,dM=B.dimM!=null?B.dimM:.45,dS=B.dimS!=null?B.dimS:1;
+  const t=d<=1?d:d<=nr?1:d<=nr+1?1+(d-nr):2,mix=(x,y,z)=>t<=1?x+(y-x)*t:y+(z-y)*(t-1);return{t,sc:mix(L,M,S),dim:mix(dL,dM,dS)}},
  front(rot,N){return((Math.round(rot)%N)+N)%N},
  short(i,rot,N){let d=((i-rot)%N+N)%N;if(d>N/2)d-=N;return d},
 };
@@ -100240,9 +100261,9 @@ function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="k
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
 function geo(R){const m=kv(),K=KIT_RING,L=R.L,w=L.g.w,H=L.g.H;return {w,H,cx:w/2,floor:H*K.floor,Rx:w*K.rx[m],Ry:H*K.ry[m]}}
 function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const q=KRING_MATH.slot(i,R.rot,N),a=q.a,c=q.c,sn=q.s,k=q.k;s.style.visibility=q.hide?"hidden":"";
-  const sc=(KIT_RING.back+(1-KIT_RING.back)*Math.pow(k,1.4))*(N>1?KRING_MATH.boost(a):1),x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
+  const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
-  const st=N>1?Math.abs(a):0,d=Math.min(1,st*KIT_RING.dimK);s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
+  const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
 function stepPx(R){const g=geo(R);return Math.max(60,g.Rx*2*Math.PI/Math.max(3,R.slots.length)*.7)}
 function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){yieldCard(R);res();return false}}))}
@@ -100303,15 +100324,20 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
    the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
    layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
 function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
-function plaqueNeed(m){const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
-function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(m),P=paintX(s),hh=s.__feet-s.__top;
+/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: the board hangs from the ONE fixed post (kitPick.band, §98.20) → the focused figure / cluster yields LEFT of the board's left edge
+   (the board for THIS slot's plaque count: ≤ 4 one column, 5–7 two columns). need = layer width − band x0 (+ a 12 px gap). */
+function boardN(R,s){try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
+ const M=s.__g.members;if(M.length>1)return{n:1+M.length,ng:1};const x=M[0];if(R.o.acts){const A=R.o.acts(x)||[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
+ const G=acts(R,x);return{n:Math.max(1,...G.map(g=>g.acts.length)),ng:G.length}}catch(e){return{n:7,ng:1}}}
+function plaqueNeed(R,s){const g=geo(R);try{if(window.kitPick&&kitPick.band){const N=boardN(R,s),b=kitPick.band(N.n,R.L,N.ng);return Math.max(0,g.w-b.x0)+12}}catch(e){console.error("kitRing band",e)}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[kv()])||170)+(K.post||8)+30}
+function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(R,s),P=paintX(s),hh=s.__feet-s.__top;
  let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
  const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
  if(over>0){cx-=Math.min(over,Math.max(0,left()-edge));over=right()+need-g.w}
  if(over>0){sc=Math.max(.3,(g.w-need-edge)/Math.max(1,P.r-P.l));cx=edge+(s.__cx-P.l)*sc}
  /* a group member who steps out grows ×1.06 from her feet: the head line keeps that room */const up=grp?1.08:1;if(feet-hh*sc*up<4)sc=(feet-4)/(hh*up);return{sc,cx,feet}}
 /* every ring picker opens through here: with TWO plaque columns the left column's ✓ / ✕ sits on its outer (left) side = toward the figure → the band moves right by that room */
-function pickOpen(R,o){let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
+function pickOpen(R,o){let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&!G.fixed&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
 /* the union box of every member of the focused slot (layer px): the plaques and the bubble go to the right of the WHOLE cluster, never over a member */
 function unionBox(R){const M=R.slots[R.sel].__g.members.map(y=>boxOf(R,y));const x0=Math.min(...M.map(b=>b.x)),y0=Math.min(...M.map(b=>b.y));return{x:x0,y:y0,w:Math.max(...M.map(b=>b.x+b.w))-x0,h:Math.max(...M.map(b=>b.y+b.h))-y0}}
 /* §104.3 group PICKER mode (open({groups:[{name,line,people}], gacts(gi)→acts|groups, onGroupPick(gi,id)})): the focused group's plaques = the caller's choices for that group */
@@ -100526,7 +100552,7 @@ if(typeof facHTML==="function"){const fh0=facHTML;facHTML=window.facHTML=functio
      empty: html, onClose }
    R = {el, rot, front(), turnTo(i), focus(), back(), refresh(), close()}.  kitRingItem.cur = the open ring.  Wiring (adapters) at the end of this file. */
 /* tw = the FRONT tile size in px (MAIN look note 26/11: front ≈1.5× the old 82 px, more on iPad); side tiles keep the old size curve (side = old kitItem md 72 px) */
-const KIT_RINGI={tw:{fold:124,ipad:150},side:72,frontPow:20,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
+const KIT_RINGI={tw:{fold:124,ipad:150},side:72,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
  openMs:420,focusMs:520,dropMs:360,stagger:26,maxN:24,
  /* a TEXT tile (kit title plate, it.tile): law 10 one size on every device = the plate text at plateRem; depth shrinks it only by plateDepth of the picture curve (side plates stay readable) */plateRem:1.6,plateDepth:.4};
 /* ---------- ring maths = KRING_MATH (§104.1, jkring.js; numbers in BAL.kring) — KK44 ruling 26/11: ONE core, KRING_MATH deleted ---------- */
@@ -100609,9 +100635,9 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  if(bloom&&!kriCalm()){const N=R.tiles.length;R.tiles.forEach((t,i)=>{const fin=t.style.transform,op=t.style.opacity;t.animate([{transform:`translate(${-g.tw/2}px,${-g.tw*.6}px) scale(.1)`,opacity:0},{transform:fin,opacity:op}],{duration:KIT_RINGI.openMs,delay:i*KIT_RINGI.stagger,easing:"cubic-bezier(.2,1.25,.4,1)"})});
   [R.arL,R.arR,nm,hi].forEach(b=>b.animate([{opacity:0},{opacity:1}],{duration:260,delay:280,fill:"backwards"}))}}
 function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=KRING_MATH.front(R.rot,N);
- R.tiles.forEach((t,i)=>{const m=KRING_MATH.slot(i,R.rot,N);const F=g.tw/(KIT_RINGI.side*1.14);let sc=KIT_RINGI.side*(.42+.72*Math.pow(m.k,1.8))/g.tw*(1+(F-1)*Math.pow(m.k,KIT_RINGI.frontPow));let Rx=g.Rx;if(t.classList.contains("kri-tile")){sc=1-(1-sc)*KIT_RINGI.plateDepth;/* a wide text plate stays inside the stage: the ring narrows by the widest plate (+ the ‹ › room) */const pw=R.plateW||(R.plateW=Math.max(0,...R.tiles.map(x=>{const k=x.querySelector(".kdh");return k?k.offsetWidth:0})));Rx=Math.max(40,Math.min(Rx,g.cx-56-pw/2))}const x=Rx*m.s,y=-g.Ry*m.c;
+ R.tiles.forEach((t,i)=>{const m=KRING_MATH.slot(i,R.rot,N);const T=KRING_MATH.tier(m.a);let sc=T.sc;/* owner 21:45Z: the 3 size tiers of the ring core (BAL.kring), same as vòng người */let Rx=g.Rx;if(t.classList.contains("kri-tile")){sc=1-(1-sc)*KIT_RINGI.plateDepth;/* a wide text plate stays inside the stage: the ring narrows by the widest plate (+ the ‹ › room) */const pw=R.plateW||(R.plateW=Math.max(0,...R.tiles.map(x=>{const k=x.querySelector(".kdh");return k?k.offsetWidth:0})));Rx=Math.max(40,Math.min(Rx,g.cx-56-pw/2))}const x=Rx*m.s,y=-g.Ry*m.c;
   t.style.transform=`translate(${(x-g.tw/2).toFixed(1)}px,${(y-g.tw*.6).toFixed(1)}px) scale(${sc.toFixed(3)})`;
-  const front=Math.abs(m.a)<.5;const op=m.hide?0:front?1:Math.min(1,(KIT_RINGI.dim+.3*Math.pow(m.k,2))*Math.min(1,(KRING_MATH.seats/2-Math.abs(m.a))));t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
+  const front=Math.abs(m.a)<.5;const op=m.hide?0:Math.min(1,(1-T.dim*(1-KIT_RINGI.dim))*Math.min(1,(KRING_MATH.seats/2-Math.abs(m.a))));/* dim tiers: L none, M light, S = KIT_RINGI.dim */t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
   R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */
@@ -102847,7 +102873,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="32e61cc2d2c3";window.CTM_BUILD=BUILD;
+const BUILD="4e319606b011";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

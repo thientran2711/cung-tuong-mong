@@ -5,8 +5,12 @@ BAL.kdim={b:.7,s:.75,ms:220};
 /* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */
 BAL.kring={dimB:.48,dimS:.6,
  /* §104.1 the ONE ring table read by every ring (vòng người · vòng nhóm · vòng bảo vật; MOTION-BUILD-2 ask 26/11 ~20:12Z): seats = visible seats (N > seats scrolls), decay = fling
-    velocity kept per 60 Hz frame, stop = fling speed (slots/ms) that snaps, snapMs = snap tween, stepMs = one ‹ › step, front = front slot size vs its side neighbours (≈1.5×; the front keeps its size, sides shrink) */
- seats:12,decay:.93,stop:.0012,snapMs:200,stepMs:280,front:1.5};
+    velocity kept per 60 Hz frame, stop = fling speed (slots/ms) that snaps, snapMs = snap tween, stepMs = one ‹ › step */
+ seats:12,decay:.93,stop:.0012,snapMs:200,stepMs:280,
+ /* OWNER 26/11 ~21:45Z «3 size … small là những người ở xa, medium là những người ở gần hơn, large là những người mà tôi đang chọn»: EXACTLY 3 figure sizes in every ring
+    (người · nhóm · bảo vật · danh hiệu · dung mạo): L = the front (the one she is choosing; ×1 = the LIVE stage size), M = the nearer ones (|seat| ≤ near), S = the far ones;
+    dim follows the same tiers (dimL none, dimM light, dimS most = the full dim copy); between seats (while turning) the size/dim slide from one tier to the next */
+ szL:1,szM:.66,szS:.46,near:1,dimL:0,dimM:.45,dimS:1};
 /* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
    hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
    Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
