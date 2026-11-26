@@ -65,4 +65,9 @@ function toilRxOpts(r){const R=toilRx(),L=[];const h=r.host,cons=h&&h!=="th"&&h!
 (function(){const f0=toilFlush;toilFlush=function(){const L=(typeof TOIL_POP!=="undefined"?TOIL_POP.slice():[]).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n)).slice(0,BAL.toil.popMax);const n0=Q.length;
  const r=f0.apply(this,arguments);try{const A=Q.slice(n0).filter(m=>m&&m.toilEv);let first=false;A.forEach((m,i)=>{const x=L[i];if(!x||m.toilEv!==x.k||m.toilRx)return;m.toilRx=1;const E=toilRxOpts(x);if(!E.length)return;m.opts=m.opts.concat(E);if(m===Q[0])first=true});
   if(first)showModal()}catch(e){console.error("toil rx",e)}return r};window.toilFlush=toilFlush})();
+/* save r6 (LAW 11, the «.opts=» family): the four answers above are put on the toilPop card (jtoil, rcpReg) AFTER it was made, so a true reload
+   (rcpMk → the bare generator) showed the card without them. The remake now adds them the same way, from the same reaction record (the
+   generator's own argument: host as id, n, name) — the card comes back with every answer she had */
+(function(){if(typeof QRC!=="object"||typeof QRC.toilPop!=="function")return;const g0=QRC.toilPop;QRC.toilPop=function(r){const m=g0.apply(this,arguments);
+  try{if(RCPRE&&m&&Array.isArray(m.opts)&&!m.toilRx&&r&&m.toilEv===r.k){m.toilRx=1;const E=toilRxOpts(r);if(E.length)m.opts=m.opts.concat(E)}}catch(e){console.error("toil rx remake",e)}return m}})();
 window.toilRxOpts=toilRxOpts;Object.assign(window,{toilTellO,toilAskO,toilRxGrudge,toilRxTell,toilRxGive,toilRxAsk,toilGiveCost});window.toilGrudgeOf=toilGrudgeOf;window.toilTipOn=toilTipOn;

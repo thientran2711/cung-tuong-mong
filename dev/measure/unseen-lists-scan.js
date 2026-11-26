@@ -111,6 +111,18 @@ const CLASS=[/* [file, regex on «enclosing function chain + title», class, rea
  ['jcoopworld.js',/onAct|bribe/,'COOP','the friend\'s act arriving in a co-op room (no slot write)'],
  ['jcoopthin.js',/standIn/,'COOP','co-op thin card stand-in'],
  ['jagent.js',/^ /,'NOTCARD','the AG state object (opts = timing stats)'],
+ /* save r6: «.opts=» sites (options given after the card was made) */
+ ['jeitem.js',/tyRob/,'ROUTE','«Bị giật y phục giữa đường»: the robbery card takes the opts AND rk/ra of eitRobCard (rcpReg eitRob); eitReOpts alone only when title / body are not text',/const eitRobCard=rcpReg\("eitRob"/],
+ ['jptime.js',/stipEvent/,'ROUTE','«Sai <cung nữ> đòi lại» answer: stipEvent runs inside econStipCard (rcpReg stipCard), so the remake makes the same answer',/let ev=null;if\(A\.SK&&typeof stipEvent==="function"\)\{[^\n]*ev=stipEvent\(G,SK\)/],
+ ['jtoilr.js',/toilFlush|QRC\.toilPop/,'ROUTE','the four reaction answers on a toilPop card: added live (toilFlush) and again at the remake (QRC.toilPop hook, same reaction record)',/QRC\.toilPop=function\(r\)/],
+ ['jworld.js',/startCard/,'ROUTE','the world card scene options: startCard runs inside worldCardK (rcpReg world)',/const worldCardK=rcpReg\("world"[^\n]*const m=startCard\(w\)/],
+ ['jselxsc.js',/selxFree/,'ROUTE','«Ra Dư đồ» on the selection-day free card: a pid «selxD» card, rebuilt by PEND.selxD through selxFree',/PEND\.selxD=pp=>/],
+ ['jagknow.js',/knSellCard/,'ROUTE','«Có người bán tin»: knSellCard (the raw builder) runs inside knSellById (rcpReg knSell: seller + news id, the news found again from the live world)',/const knSellById=rcpReg\("knSell"/],
+ ['jact2.js',/AD_HAP_FIRE\.fest|tsPanel/,'ACT','festival light event on HER arrival (adHapArrive from goTo) / her deck card «Thả đèn hoa đăng»'],
+ ['jhaohuu.js',/open/,'PANEL','the «Hảo hữu cùng chơi» sheet she opens (kitPanel)'],
+ ['jstatus.js',/open/,'PANEL','status view panel (view:1, never saved by design)'],
+ ['jcoopthin.js',/D\.vOf/,'COOP','the guest\'s data copy of a host card (options without go)'],
+ ['jnolock.js',/kitNoLock/,'NOTCARD','adds / removes the empty «Rời đi» option (go:()=>{} = data, jqNoop) at render'],
  ['jbancung.js',/^ /,'NOTCARD','BAL.banCung numbers'],
  ['jselxday.js',/selxEvening/,'NOTCARD','parse hit on the PARAMETER list of selxCard(t,h,opts,who) (LIVE f009e1a6 selection-scene); its cards are pid «selxD» (PEND.selxD, data)'],
 ];
@@ -143,10 +155,24 @@ const CEN={sites:0,reg:0,cls:{},un:[]};
    const title=(s.slice(k,k+300).match(/\bt(?:itle)?\s*:\s*[`"']([^`"'\n]{0,36})/)||[])[1]||'';CEN.sites++;
    if(chain.some(n=>reg.has(f+':'+n))){CEN.reg++;continue}
    const key=chain.join('>')+' '+title;let c=CLASS.find(([cf,cr])=>cf===f&&cr.test(key));
-   if(c&&c[3]==='ROUTE'&&c[4]&&!c[4].test(ALL))c=null;
-   if(!c){CEN.un.push(`${f}:${line} ${chain.join('>')||'(table row)'} «${title}»`);continue}CEN.cls[c[2]]=(CEN.cls[c[2]]||0)+1}}
+   if(c&&c[2]==='ROUTE'&&c[4]&&!c[4].test(ALL))c=null;/* save r6: c[2] is the class (c[3] the reason: before, no ROUTE proof was ever checked) */
+   if(!c){CEN.un.push(`${f}:${line} ${chain.join('>')||'(table row)'} «${title}»`);continue}CEN.cls[c[2]]=(CEN.cls[c[2]]||0)+1}
+  /* save r6 (LAW 11, the «.opts=» family; rv9 jeitem «Bị giật y phục giữa đường»): options given to a card AFTER it was made — `x.opts=…`,
+     `x.opts.push / splice / unshift(…)` — are found too (the literal parse above never sees them). Data-only right sides (no function but an
+     empty go, no bare name) are data; every other site must be inside a generator or match a CLASS row, the same as a literal site */
+  const ra=/([\w$.\]\[]*)\.opts\s*(?:=(?![=>])|\.(?:push|splice|unshift)\()/g;let a;
+  while((a=ra.exec(t))){const k=a.index;let e=k+a[0].length,d=a[0].endsWith('(')?1:0;
+   for(;e<t.length;e++){const c=t[e];if(c==='{'||c==='('||c==='[')d++;else if(c==='}'||c===')'||c===']'){if(d===0)break;d--;if(d===0&&a[0].endsWith('('))break}else if(d===0&&(c===';'||c===','||c==='\n'&&/[;}]\s*$/.test(t.slice(k,e))))break}
+   const rhs=t.slice(k+a[0].length,e).trim();const fns=rhs.replace(/go\s*:\s*\(\s*\)\s*=>\s*\{\s*\}/g,'').replace(/\$\{[^}]*\}/g,'');
+   let bare=rhs.replace(/^\[|\]$/g,''),pr;do{pr=bare;bare=bare.replace(/\{[^{}]*\}/g,'')}while(bare!==pr);bare=bare.replace(/^\s*\d+\s*,\s*\d+\s*,?/,'');
+   if(/^\[/.test(rhs)||a[0].endsWith('(')){if(!/\bgo\s*:|=>|function\s*\(/.test(fns)&&!/[A-Za-z_$]/.test(bare))continue}
+   const chain=D.filter(x=>x.a<=k&&k<=x.b).sort((x,y)=>x.a-y.a).map(x=>x.n);const line=s.slice(0,k).split('\n').length;CEN.sites++;CEN.asg=(CEN.asg||0)+1;
+   if(chain.some(n=>reg.has(f+':'+n))){CEN.reg++;continue}
+   const key=chain.join('>')+' .opts';let c=CLASS.find(([cf,cr])=>cf===f&&cr.test(key));
+   if(c&&c[2]==='ROUTE'&&c[4]&&!c[4].test(ALL))c=null;/* save r6: c[2] is the class (c[3] the reason: before, no ROUTE proof was ever checked) */
+   if(!c){CEN.un.push(`${f}:${line} ${chain.join('>')||'(top level)'} «${a[0].trim()} ${rhs.slice(0,40).replace(/\s+/g,' ')}»`);continue}CEN.cls[c[2]]=(CEN.cls[c[2]]||0)+1}}
  CEN.gen=reg.size}
-console.log(`code-card census: ${CEN.sites} sites with code options · ${CEN.reg} inside a registered generator (${CEN.gen} rcpReg) · ${Object.entries(CEN.cls).map(([k,v])=>k+' '+v).join(' · ')} · UNCLASSIFIED ${CEN.un.length}`);
+console.log(`code-card census: ${CEN.sites} sites with code options (${CEN.asg||0} of them «.opts=» after the card was made) · ${CEN.reg} inside a registered generator (${CEN.gen} rcpReg) · ${Object.entries(CEN.cls).map(([k,v])=>k+' '+v).join(' · ')} · UNCLASSIFIED ${CEN.un.length}`);
 for(const u of CEN.un)console.log('  UNCLASSIFIED code card (route it through rcpReg, or add a CLASS row with its reason):',u);
 if(CEN.un.length)fail++;
 console.log(fail?`UNSEEN-LISTS SCAN FAIL ${fail}`:`UNSEEN-LISTS SCAN PASS (${ROWS.length} lists, ${ROWS.filter(r=>r[3]==='UNSEEN').length} unseen-kind covered)`);process.exit(fail?1:0);
