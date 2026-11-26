@@ -3776,3 +3776,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~03:55Z SẾP (147 chat ~03:45Z): merge keeps all outcomes; evidence → accusation by kind; detailed REPORT → E-d.
 - ~03:50Z M2b life over (report ROBOT-PLAYER-REVIEW-M2.md); UX-OPTION-CENTRE ×469 → KK37; M2c after save fix LIVE.
 - ~04:00Z SẾP (~03:50Z): Hành sự ≤20–25 buttons; tiers nhẹ/vừa/nặng, one act per tier → E-d.
+- ~04:05Z SẾP (~03:55Z): khắc budget calc across all places; relationship +change (total) on results → E-d report + mock.
