@@ -61,7 +61,7 @@ function opGvent(a,t){const V=(BAL.oanPace.ghen||{}).vent;if(!V)return 0;const s
    her base fade = BAL.oanCool.ghen.base + pct × pg (the NPC base rule; she has no nết). Rollback: BAL.oanPace.on = 0 (old rise; old fade). */
 function opRelF(gap){const R=BAL.oanPace.ghen.rel;return Math.max(R.min,Math.min(R.max,1+gap/R.span))}
 function opGhenIn(v,n,by){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;const me=by&&typeof by==="object"&&by.coop?by:S;
- n=opStep(v,me,n*opRelF((+me.sung||0)-(+v.sung||0)),"opg",G);v.gLw=opNow()[0];return n}catch(e){return n}}
+ n=opStep(v,me,n*opRelF((+me.sung||0)-(+v.sung||0)),"opg",G);if(!window.opGStand)v.gLw=opNow()[0];return n}catch(e){return n}}
 function opPgIn(v,n){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;n=opStep(S,v,n*opRelF((+v.sung||0)-(+S.sung||0)),"opg",G);v.pLw=opNow()[0];return n}catch(e){return n}}
 function opGfK(lv,gap,lw){try{const G=BAL.oanPace.ghen,C=BAL.oanCool;if(!opOn()||!G)return 1;let k=1;const q=opNow()[0]-(+lw||0)-C.quiet;
  if(q>0)k*=1+C.alone.k*Math.min(q,C.alone.max);if(lv>=G.deep)k*=C.deep.k;const R=G.rel;return k*Math.max(R.fmin,Math.min(R.fmax,1-gap/R.span))}catch(e){return 1}}
