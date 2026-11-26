@@ -1,0 +1,148 @@
+# flight2-s7 — INVALID-env (mixed game build) — stopped alive at year 18 / age 37 / rank Đáp ứng, buổi 2972, 11/26/2026 10:50Z
+Life began on 3762da08+ (2026-11-25T19:34Z); LIVE at stop 6b5d3d05+ (2026-11-26T06:59Z). No death/ending reached. See review/flight2-s7-review.md
+
+# flight2-s7 (real-tap harness ec026335, fold)
+
+| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
+|---|---|---|---|---|---|---|---|---|---|
+| flight2-s7 | HARNESS |  | 2972 |  | 74 | 27 | 60 | — | 65 / 23 (decree 65) |
+
+## Dead buttons
+
+- #dawn «Ô lưu» covered by div.kne.kne-beat in #dawn · dead-fold-1795590473657.png
+- #dawn «Xem bản thân» covered by div.kne.kne-beat in #dawn · dead-fold-1795590480059.png
+- #dawn «Sắc83Tài97Tâm cơ24Đức36Danh10Sủng8» covered by div.kne.kne-beat in #dawn · dead-fold-1795590486423.png
+- #dawn «Bạc75Sức100/100» covered by div.kne.kne-beat in #dawn · dead-fold-1795590492774.png
+- #dawn «Buổi sáng, còn 4 khắc» covered by div.kne.kne-beat in #dawn · dead-fold-1795590499140.png
+- #dawn «Chưa điểm trang» covered by div.kne.kne-beat in #dawn · dead-fold-1795590505490.png
+- #dawn «hoa đào bay» covered by div.kne.kne-beat in #dawn · dead-fold-1795590511857.png
+- #dawn «Quẻ Hạ (Sủng)» covered by div.kne.kne-beat in #dawn · dead-fold-1795590518222.png
+- #dawn «Tâm trạngBình thản+3» covered by div.kne.kne-beat in #dawn · dead-fold-1795590524588.png
+- #dawn «Tin báo: 20 tin mới» covered by div.kne.kne-beat in #dawn · dead-fold-1795590530953.png
+- #dawn «Xuân · còn 4 khắc · đi gần 1 khắc, xa 2 · bóng: ng» covered by div.kne.kne-beat in #dawn · dead-fold-1795590537320.png
+- #dawn «Thu nhỏ» covered by div.kne.kne-beat in #dawn · dead-fold-1795590543687.png
+- #dawn «Phóng to» covered by div.kne.kne-beat in #dawn · dead-fold-1795590550055.png
+- #dawn «Ra vào cung cấm» covered by div.kne.kne-beat in #dawn · dead-fold-1795590556423.png
+- #dawn «Danh sách» covered by div.kne.kne-beat in #dawn · dead-fold-1795590562787.png
+- #dawn «Lịch tháng» covered by div.kne.kne-beat in #dawn · dead-fold-1795590569170.png
+- #dawn «Mục tiêu chương» covered by div.kne.kne-beat in #dawn · dead-fold-1795590575538.png
+- #dawn «Người được sai đi (có mới)» covered by div.kne.kne-beat in #dawn · dead-fold-1795590581884.png
+- #dawn «Cung nhân · chạm để mở danh sách» covered by div.kne.kne-beat in #dawn · dead-fold-1795590588271.png
+- #dawn «Chí tôn · chạm để mở danh sách» covered by div.kne.kne-beat in #dawn · dead-fold-1795590594636.png
+- #dawn «Tai mắt0» covered by div.kne.kne-beat in #dawn · dead-fold-1795590600986.png
+- #dawn «Có thaiRất thấp» covered by div.kne.kne-beat in #dawn · dead-fold-1795590607352.png
+- #dawn «Lật thẻRất thấp» covered by div.kne.kne-beat in #dawn · dead-fold-1795590613716.png
+- #dawn «Ân tình (đêm)8» covered by div.kne.kne-beat in #dawn · dead-fold-1795590620068.png
+- #dawn «Số lần ân thưởng0» covered by div.kne.kne-beat in #dawn · dead-fold-1795590626435.png
+- #dawn «Bổng lộcsau 1 tuần» covered by div.kne.kne-beat in #dawn · dead-fold-1795590632801.png
+- #dawn «Nguy hiểm chung: 0» covered by div.kne.kne-beat in #dawn · dead-fold-1795590639184.png
+- #dawn «Hành sự» covered by div.kne.kne-beat in #dawn · dead-fold-1795590651849.png
+- #dawn «Dư đồ» covered by div.kne.kne-beat in #dawn · dead-fold-1795590658218.png
+- #dawn «Hậu cung» covered by div.kne.kne-beat in #dawn · dead-fold-1795590664598.png
+- #dawn «Giao tình» covered by div.kne.kne-beat in #dawn · dead-fold-1795590670985.png
+- #dawn «Hoàng tự» covered by div.kne.kne-beat in #dawn · dead-fold-1795590677352.png
+- #dawn «Tư trang» covered by div.kne.kne-beat in #dawn · dead-fold-1795590683749.png
+- #dawn «Tài nghệ» covered by button.kbtn.kmend in #dawn · dead-fold-1795590690132.png
+- #dawn «Mệnh truyện» covered by div.kne.kne-beat in #dawn · dead-fold-1795590696500.png
+- #dawn «Sắc83Tài97Tâm cơ24Đức35Danh17Sủng1» covered by div.kne.kne-beat in #dawn · dead-fold-1795590769632.png
+- #dawn «Bạc105Sức100/100» covered by div.kne.kne-beat in #dawn · dead-fold-1795590775997.png
+- #dawn «ve kêu râm ran» covered by div.kne.kne-beat in #dawn · dead-fold-1795590782361.png
+- #dawn «Quẻ Hạ (Sức khỏe)» covered by div.kne.kne-beat in #dawn · dead-fold-1795590788713.png
+- #dawn «Tâm trạngBình thản-6» covered by div.kne.kne-beat in #dawn · dead-fold-1795590795095.png
+- #dawn «Tin báo: 19 tin mới» covered by div.kne.kne-beat in #dawn · dead-fold-1795590801480.png
+- #dawn «Cung nữ thân tín tam đẳngKỳ Nhi» covered by div.kne.kne-beat in #dawn · dead-fold-1795590807846.png
+- #dawn «Chọn chính mình» covered by div.kne.kne-beat in #dawn · dead-fold-1795590814241.png
+- #dawn «1Cung nhân» covered by div.kne.kne-beat in #dawn · dead-fold-1795590820612.png
+- #dawn «3Chí tôn» covered by div.kne.kne-beat in #dawn · dead-fold-1795590826994.png
+- #dawn «Ân tình (đêm)4» covered by div.kne.kne-beat in #dawn · dead-fold-1795590833376.png
+- #dawn «Bổng lộcsau 3 tuần» covered by div.kne.kne-beat in #dawn · dead-fold-1795590839741.png
+- #dawn «Sắc83Tài97Tâm cơ24Đức34Danh17Sủng0» covered by div.kne.kne-beat in #dawn · dead-fold-1795590928557.png
+- #dawn «Bạc95Sức100/100» covered by div.kne.kne-beat in #dawn · dead-fold-1795590934921.png
+- #dawn «nắng sớm oi ả» covered by div.kne.kne-beat in #dawn · dead-fold-1795590941269.png
+- #dawn «Quẻ Hạ (Danh)» covered by div.kne.kne-beat in #dawn · dead-fold-1795590947642.png
+- #dawn «Tâm trạngBình thản-9» covered by div.kne.kne-beat in #dawn · dead-fold-1795590954057.png
+- #dawn «Lật thẻKhông có» covered by div.kne.kne-beat in #dawn · dead-fold-1795590960421.png
+- #dawn «Bổng lộcsau 2 tuần» covered by div.kne.kne-beat in #dawn · dead-fold-1795590966789.png
+- #dawn «?» covered by div.kne.kne-beat in #dawn · dead-fold-1795590973156.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795591731110.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795591737474.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by button.kit-x in #mb · dead-fold-1795591743809.png
+- .mapsc «Tâm trạngBình thản-7» covered by span in #kntchip · dead-fold-1795594140856.png
+- .kmov «?» covered by zero size · dead-fold-1795610034585.png
+- .kfoc «Mưu kế 2/2» covered by img.kfoc-fig in #game · dead-fold-1795612940712.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795624090000.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795624096365.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795624102713.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795634775174.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795634781557.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795634787909.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795653728362.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795653734712.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795653741045.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795653749269.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795654290988.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795660994256.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795662402127.png
+
+## Bugs
+
+- [stuck] ×21 no progress 15 min on .dlg «Tin báo»
+- [stuck] ×2 no progress 15 min on .dlg «Kính sự phòng báo tin»
+- [crash] ×1 tab crashed (Page crashed) at buổi 115
+- [js] ×3 page error: Cannot read properties of undefined (reading 'off')
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Lạc Thọ điện · Ở đây còn 11 ngư»
+- [game] ×1 dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [freeze] ×1 page froze: no harness step for 10 min (page.evaluate hung) at buổi 140
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 4 người»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on #modal «Danh hiệu»
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»
+- [stuck] ×4 no-clock loop: 150 taps without a clock step on .mapsc «»
+- [stuck] ×10 no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Tin báo»
+- [game] ×1 dialog scrolled to the end has no close / next button: #kmrew «»
+- [stuck] ×4 no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng»
+- [game] ×9 softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)
+- [game] ×1 dialog scrolled to the end has no close / next button: #kg82 «»
+- [game] ×1 dialog scrolled to the end has no close / next button: .kmov «»
+- [game] ×1 dialog queue holds 20 copies of «Tâm trạng · Uyển quý phi Hách Hàm Yên» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 17 copies of «Tâm trạng · Uyển quý phi Hách Hàm Yên» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 14 copies of «Tâm trạng · Uyển quý phi Hách Hàm Yên» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 11 copies of «Tâm trạng · Uyển quý phi Hách Hàm Yên» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Uyển quý phi Hách Hàm Yên» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 5 copies of «Tâm trạng · Uyển quý phi Hách Hàm Yên» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 2 copies of «Tâm trạng · Uyển quý phi Hách Hàm Yên» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=17: Lịch tháng / Tin báo / Tin báo / Đã biết về Hoàng hậu Thẩm Nhã Như / Tin báo / Dung · Dung nghi)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Tin báo / Lịch tháng / Chương 3 · Học quy củ trong cung / Chương 3 · Học quy củ trong cung / Lịch tháng)
+- [game] ×1 dialog queue holds 3 copies of «Tâm trạng · Quý nhân Ngụy Mạn Ca» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog scrolled to the end has no close / next button: .mapsc «»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Tin báo / Đã biết về Đáp ứng Triệu Tiễn Thu / Đã biết về Đáp ứng Triệu Tiễn Thu / Chương 3 · Học quy củ trong cung / Chương 3 · Học quy củ trong cung)
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 2 người.»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng»
+- [game] ×1 softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Có người đến)
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 4 ng»
+- [game] ×1 softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Sắc 83)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=12: Tin báo / Đức / Công · Nữ công / Tin báo / Lịch tháng / Chương 4 · Danh hiệu Tài nữ)
+- [game] ×50 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=6: Tin báo / Tin báo / Tin báo / Tin báo / Tin báo / Tin trong cung buổi này)
+- [game] ×1 no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Để ta xemTốnkhôngĐượckhô / Để sau
+- [game] ×1 no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Để ta xemTốnkhôngĐượckhô / Để sauTốnkhôngĐượckhông
+- [game] ×3 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin báo / Tin trong cung buổi này)
+- [harness] ×1 area tap would have landed on a button (it appeared under the point) — blocked: «Thường Phấn gạo Hộp phấn mắt dùng khi điểm trang: »
+- [harness] ×1 area tap would have landed on a button (it appeared under the point) — blocked: «Thường Yên chi giấy Hộp phấn má dùng khi điểm tran»
+- [game] ×1 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Tin báo / Lịch tháng / Tin trong cung buổi này)
+- [game] ×2 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Xét phẩm cuối tháng · Thường tại / Tin trong cung buổi này)
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.»
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=4: Tin báo / Quan hệ với / Chứng cứ về Quý nhân Vu Tử Yên / Tin trong cung buổi này)
+- [stuck] ×3 no-clock loop: 150 taps without a clock step on page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 1 ngườ»
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Tin chờ người sai đi / Tin báo / Dung · Dung nghi / Xét phẩm cuối tháng · Thường tại / Lịch tháng / Tin trong cung buổi này)
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Chương 5 · Lời thơ vượt tường cung»
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=2: Tin báo / Tin trong cung buổi này)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Tin báo / Kỳ / Cầm / Xem quan hệ của / Cầm: các lối / Tin trong cung buổi này)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Quan hệ với / Tin báo / Xét phẩm cuối tháng · Thường tại / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Lịch tháng)
+- [dead] ×4 close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»
+- [stuck] ×1 no progress 15 min on .kmov «»
+- [stuck] ×2 no progress 15 min on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»
+- [stuck] ×1 no progress 15 min on .kfoc «»
+- [harness] ×1 area tap would have landed on a button (it appeared under the point) — blocked: «j59sz»
+- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
