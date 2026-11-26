@@ -21,5 +21,5 @@ BEFORE (LIVE): every dialog option without own odds printed the sure «Rất v�
 - firstcard-2's other fixes (princess never ban hoa, home-road declared odds, BAL.kc2.* numbers) ride along unchanged.
 
 ## Gates
-- dialog-fixed «(kit-dialog-2 a) no empty Tốn / Được cell» FAILS ON LIVE f573dc94 too (pre-existing, not from this branch). npc-purpose-scan fixed (kcMeet done-text follows the declared roll). quickcheck: see line below.
+- kit-k44-parts ed3b8ad9 merged. Per KK44/MAIN 161 (owner OD ~17:55Z keep ALL rows): the `.kfree` no-row card is retired in jopic kitOptFinal (`free=false`), which also fixes dialog-fixed «(kit-dialog-2 a) no empty Tốn / Được cell» (failed on LIVE f573dc94). npc-purpose-scan fixed (kcMeet done-text follows the declared roll). quickcheck: see line below.
 - Shots LOOKED Fold + iPad: CDN img/_review/firstcard-3/after-fold-life.png, after-ipad-life.png (wipe after verdict).
