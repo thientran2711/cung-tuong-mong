@@ -1,0 +1,8 @@
+# E-S2 cautious-2-rr — end-of-life review (robot as player: careful planner, bot=cautious, iPad 1180x820)
+## 1 Summary
+thd / thd_tro seed 1338508058 (R2 cautious kiếp 2 rerun; the original was a cap), iPad, real taps (jsClicks 0), started 07:33Z 25/11, ended ~09:55Z 26/11 (~26 h real, resumed ~10 times across harnesses 496b6b66…4d7a22c6/08a4ff8b; game builds changed at every start). ~20 years (age 37), max rank 1 (years 4–8), ending «Hồng nhan bạc mệnh — Năm 20, Hoàng thượng niên hiệu Khang Định băng hà, thọ 40 tuổi … ban lụa trắng, ép ngươi tuẫn táng» (death, VALID, no exit pick). 3076 buổi, 3 dead buttons, 3 stalls, 10 bugs (3 crashes).
+## 2 Scores (1–10)
+a. First 15 min — 5. b. Loop & pacing — 2 (3076 buổi, the loop never changes; rank lost without notice). c. Buttons & UI — 4: Phụ tuyến «Tân quân lập uy» options clipped below the screen (iPad, known KK29); «Khoa thi Đình» 15-min stall; .kmov with no close; hidden-queue «Sang ngày mới» no-turn ×1; the ending under a long allowance dialog. d. Story — 4: a Thái hậu's «chuyện cũ (khả năng: thấp)» kills me with no scene I could answer. e. Characters — 4. f. Choices — 3. g. Feedback — 3. h. Mini-games — not seen as played. i. Visuals — 6. j. n/a.
+## 3 Loved: –. Hated: 20 years of the same day; the ending hidden under a chest. Replay: no on this road without a rank lever.
+## 4 Bugs: Page crashed ×3 (memory at a 5 MB save); «Tân quân lập uy» clipped; Khoa thi Đình stall; .kmov no close; end card under «Bổng lộc tháng sáu» (~14 of 16 deaths).
+## 5 Suggestions: rank lever + notice on rank loss; show the ending before rewards; cap the allowance list length.
