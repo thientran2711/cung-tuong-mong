@@ -527,3 +527,14 @@ Harness only, no game change; 0 .click()/dispatchEvent in play paths (git grep: 
    (< 10 s is by design: the reward card #kmrew «Nhận» fades in at ~3 s.) The s10g area-tap block on a kemo flicker = JOB 11 (moving button → another point).
    Self-test RT_TEST_NOEXIT=2 RT_TEST_LATE=40000: Fold lt3-f72 + iPad lt2-i «NO-EXIT DIALOG» at 30 s → «LATE BUTTON … «Ta biết rồi» after 34996 / 34204 ms» →
    «NO-EXIT withdrawn», layer closed by a real tap at 42 s.
+17. JOB 17 (F #24, s14 iPad b535 #kdaytc «Đêm không được triệu» «Chạm để bỏ qua», no buttons, «no way out» + ~4 min frozen; .kmov 61 s): the tap-to-skip test was
+   «.kmov/.kne/.kscn or the layer's innerText says chạm …» — a host (#dawn) holding a night beat, the day card #kdaytc, or a hint drawn without innerText did not count,
+   so the NO BUTTON REACHABLE rule (wheel ×9, 20 s → GAME «no way out» + reload) ran first. Now ONE skipLay() (SCAN layer pick + tapSkip): .kmov .kne .kscn #kdaytc,
+   any layer holding .kmhint / .kne / .kne-beat / .kmov, or tap-anywhere text. Such a layer with no hit (and no clipped) button gets a real tap on its centre (a
+   point that hits the layer itself, never a button; if another non-button layer is on top, that one — a person taps what is on top), every round, ≤ 20 taps / 90 s
+   per visit, before any «no way out» / NO-EXIT verdict (harness.skipLayerTaps, trace «SKIP TAP»). A layer with neither a button nor a skip hint keeps the GAME verdicts.
+   Family fix in realtap.BARE_CHECK: a moving button hidden under another layer no longer blocks a point (it cannot reach it).
+   Self-test RT_TEST_SKIPLAYER=<buổi> [RT_TEST_SKIPLAYER_MODE=cover|css]: Fold f72 css closed by skip taps at 7.7 s · iPad closed at 7.8 / 7.6 s (plain / cover with the
+   game's own kitDayTitleShow held) · noWayOut 0, NO-EXIT 0. (The old harness also closed these synthetic layers; the exact s14 screen of build a1d2c8d4 is not
+   on the pinned LIVE build, so the proof is the rule order + layer test, not a replay.) s15b #kdaytc «no reachable button» ~b200 = the same rule on the same layer.
+   Seen once: Fold «late button «Vào cung ngay» 13.5 s after #klife» (pre-life screen) — for MAIN to judge (slow pre-life load or real).
