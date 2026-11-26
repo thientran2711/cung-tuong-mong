@@ -112,7 +112,7 @@ window.mindWho=mindWho;function mindWho(o){if(o.name===S.name||o.me)return S;if(
  try{return allKids().map(x=>x[0]).find(k=>k.name===nm)||(S.court?Object.values(S.court).find(c=>c.name&&(c.name===nm||nm.endsWith(c.name))):null)||(S.men||[]).find(m=>m.name===nm)||allServ().find(s=>s.name===nm)||null}catch(e){return null}}
 (function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){let who=null;try{if(o&&S&&!o.__mind&&!S.dead)who=mindWho(o)}catch(e){}
  if(!who)return p0.apply(this,arguments);
- try{const rows=mindRows(who);const h0=p0.call(this,Object.assign({},o,{__mind:1}));
+ try{const rows=(window.mindRows||mindRows)(who);/* a wrapper (jnsieve: servant «Tính nết») reaches every card */const h0=p0.call(this,Object.assign({},o,{__mind:1}));
   if(who!==S&&!isKid(who)&&/<div class="pcf">/.test(h0)){const kr=kitRows(rows);
    return h0.replace('<div class="pcf">',`<div class="pcf"><div class="kpsec kpno">${kr}</div>`)}/* owner 21/11: one label column, no block heading */
   const L=(o.lines||[]).slice();for(const [k,v,c] of rows)if(c==="t"&&!L.some(x=>new RegExp("^"+k).test(String(x))))L.push(`${k}: <b>${v}</b>`);
