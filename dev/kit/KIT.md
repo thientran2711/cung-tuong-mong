@@ -382,10 +382,19 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   `kitResultSeal(ok)` (renamed by reviewer r7: `kitSeal` is the Trân nữ seal, §39) → {cls: ok | bad | sure, t: THÀNH | BẠI | KẾT QUẢ} (j63; kit sample page). Never
   inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
   "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
-- KÈM (owner 11/15): other people's feelings — the consorts' ghen / oán — are not her gains or losses: one collapsed line
-  "Kèm: 12 phi tần ghen thêm 8" — KIT PART `kitKemRow(K)` (j63, `.kb .kkem`, ranges as "3–8"; kit sample page), a tap opens the
-  names (`.kkem.on`); a person she has not met is "người chưa quen".
-  Their liking FOR HER (quý ngươi hơn / ghét ngươi hơn) and evidence stay in Được / Mất.
+- KÈM = ONE SIEVE (CANON OVERWRITE in place, owner OD 26/11 ~06:50Z (B) «result cards: only rows that changed for HER … the rest in Sổ ghi»; ONE-SIEVE,
+  `nsCard` / `nsSieve` in jnsieve, called by j63 `kaResultRows`; numbers `BAL.news.card`): a person row of someone else (not her act's target —
+  «Người ấy» is OB-VERDICT's —, not her household, not Thái hậu / Hoàng hậu) stays in Được / Mất only when it carries evidence, the change is
+  ≥ `card.big`, or the span's own log names that person in a line about HER; at most `card.rowMax` such rows, largest first. Every other person
+  change (their thiện cảm, every ghen / oán) is ONE Kèm line «Trong cung: 9 người ghen thêm (Hoàng hậu Lục Hương Ngưng +10, …), 2 người nguôi oán»
+  — groups quý ta hơn / bớt quý ta / ghen thêm / thêm oán / bớt ghen / nguôi oán, a change ≥ `card.big` names its person (2 at most per group,
+  not a person already on her own row); the names + «+N (total)» behind the tap (`.kkem.on`, KIT 7.1 `kaNT`); and ONE Sổ ghi record of the card
+  with every name and number (S.hrec, names masked at show time). A single Kèm person who passes the sieve with nothing else folded keeps the
+  kit row «<Tên>: oán +9 (31)». The link reads «Xem đầy đủ trong Sổ ghi». «Vì sao» reasons never come from a clause that is other people's
+  business only (`kaWhyCl` sieved). Test: `node dev/test/one-sieve.test.js dev/index.html 12 <seed>`.
+- SỔ GHI (ONE SIEVE): over the rows, kit parts only — `kitSubTabs("soghi")` kinds `BAL.news.logTabs` (Tất cả · Việc của ta · Chuyện hậu cung ·
+  Mưu hại; an empty kind has no tab), one `kitTabRowHTML` person chip row («Mọi người» + the 12 most named, count = rows), `kitInput` search
+  (accents ignored); filtering hides rows, a date heading with no row left hides too.
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
   "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
