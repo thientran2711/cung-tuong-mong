@@ -27,13 +27,13 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
   if(await pil.count()){await p.evaluate((mode)=>{window.__obvArm=1;if(mode==="soft"){window.__obvAgSoft=agSoft;agSoft=()=>true}},mode);steps.push('PILLOW');await pil.click();
    await p.evaluate(()=>{window.__obvArm=0;if(window.__obvAgSoft){agSoft=window.__obvAgSoft;window.__obvAgSoft=null}});break}
   const o=p.locator('#modal:not([hidden]) .opt:not(:disabled)').first();if(!(await o.count())){steps.push('no opt');break}steps.push((await o.innerText()).split('\n')[0].slice(0,30));await o.click()}
- await p.waitForTimeout(2500);await p.evaluate(()=>{const o=document.getElementById('kneov');if(o){const r=o.querySelector('.kne-cap');if(r)r.click()}});await p.waitForTimeout(1200);const ne=await p.evaluate(()=>{const o=document.getElementById('kneov');return {on:!!o,kne:window.kneLast,txt:o?o.innerText.replace(/\s+/g,' ').slice(0,900):''}});
+ await p.waitForTimeout(2500);await p.evaluate(()=>{const o=document.getElementById('kneov');if(o){const r=o.querySelector('.kne-cap');if(r)r.click()}});await p.waitForTimeout(1200);const ne=await p.evaluate(()=>{const o=document.getElementById('kneov');const K=o?[...o.querySelectorAll('.kr-kem .kitem')]:[];const tops=K.map(e=>Math.round(e.getBoundingClientRect().top));return {on:!!o,kne:window.kneLast,txt:o?o.innerText.replace(/\s+/g,' ').slice(0,900):'',kem:{n:K.length,oneLine:new Set(tops).size===tops.length,txt:K.map(e=>e.innerText.replace(/\s+/g,' ')).slice(0,9)}}});
  if(shot&&ne.on)await p.screenshot({path:shot});
  const post=await p.evaluate((n)=>{const v=rivals.find(x=>x.name===n);return {sung:v.sung,me:S.sung}},pre.v);
  /* the same card text as the kit result card for the checks */
  const c=ne.kne?{on:ne.on,seal:ne.kne.verdict===true?'THÀNH':ne.kne.verdict===false?'BẠI':ne.kne.verdict==='soft'?'BỎ DỞ':null,sen:ne.kne.sen,rows:(ne.kne.tgt||[]).map(x=>'Người ấy: '+x).concat([ne.txt])}:null;
  await p.evaluate(()=>{document.querySelectorAll('#kneov').forEach(e=>{const b=e.querySelector('[data-km-close]');if(b)b.click()})});await p.waitForTimeout(400);
- return {pre,post,steps,card:c,text:ne.txt}}
+ return {pre,post,steps,card:c,text:ne.txt,kem:ne.kem}}
 (async()=>{const b=await chromium.launch();
  const DEV=[['fold',{width:755,height:1000}],['ipad',{width:1180,height:820}]];const OUTJ={night:{},scan:[],two:null,old:null};
  if(!SCAN)for(const [dn,vp] of DEV){const p=await boot(b,vp,3);
@@ -44,7 +44,8 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
    const tg=c&&c.rows.find(x=>x.startsWith('Người ấy'));ok(!!tg&&/NGƯỜI ẤY/i.test(r.text),`${dn} ${m}: «Người ấy» row`,tg);
    ok(r.text&&!/(KẾT CỤC|NGƯỜI ẤY)[^:]*\?\?\?/i.test(r.text),`${dn} ${m}: her chosen target shows its real name (no «???»)`,r.text&&r.text.slice(0,260));
    if(m==='ok')ok(tg&&tg.includes(`Sủng −`)&&tg.includes(`(${r.pre.sung} → ${r.post.sung})`),`${dn} ok: target Sủng a → b`,tg);
-   if(m==='fail')ok(r.text&&/MẤT Sủng/i.test(r.text),`${dn} fail: her Sủng loss in Mất`,r.text);}
+   if(m==='fail')ok(r.text&&/MẤT Sủng/i.test(r.text),`${dn} fail: her Sủng loss in Mất`,r.text);
+   ok(r.kem&&r.kem.oneLine&&!r.kem.txt.some(t=>/:.*:/.test(t)),`${dn} ${m}: night «Kèm» one person per line (MAIN 157)`,r.kem);}
   ok(!p.errs.length,`${dn}: no page errors`,p.errs.slice(0,3));await p.close()}
  /* 2 scan */
  {const p=await boot(b,{width:1180,height:820},5);
@@ -92,7 +93,7 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
    ok(c&&c.on,`${dn} Vu oan via Bày mưu (${m}): the card is shown`,r&&{steps:r.steps,c});
    ok(c&&c.seal===(m==='ok'?'THÀNH':'BẠI'),`${dn} Vu oan via Bày mưu (${m}): seal ${m==='ok'?'THÀNH':'BẠI'}`,c&&{seal:c.seal,lg:r.post.lg.slice(0,200)});
    const tg=c&&c.rows.find(x=>x.startsWith('Người ấy'));ok(tg&&tg.includes(r.pre.v),`${dn} Vu oan via Bày mưu (${m}): «Người ấy» names her target`,tg);
-   if(m==='ok')ok(tg&&/bị cấm túc|Sủng −|Danh −/.test(tg),`${dn} Vu oan thành: the target's real loss`,tg);else ok(tg&&/không hề hấn gì/.test(tg)&&r.post.rank===r.pre.rank,`${dn} Vu oan bị lộ: «không hề hấn gì», her rank unchanged`,{tg,rank:[r.pre.rank,r.post.rank]});
+   if(m==='ok')ok(tg&&/bị cấm túc|Sủng −|Danh −/.test(tg),`${dn} Vu oan thành: the target's real loss`,tg);else ok(c&&/: bị lộ\./.test(c.sen||''),`${dn} Vu oan bị lộ: ONE plain sentence «…: bị lộ.» (RV N4)`,c&&c.sen);if(m!=='ok')ok(tg&&/không hề hấn gì/.test(tg)&&r.post.rank===r.pre.rank,`${dn} Vu oan bị lộ: «không hề hấn gì», her rank unchanged`,{tg,rank:[r.pre.rank,r.post.rank]});
    const sp=await p.evaluate(()=>{const c=document.getElementById('rtoast'),s=c&&c.querySelector('.kmseal');if(!s)return null;const a=c.getBoundingClientRect(),b=s.getBoundingClientRect();return {inside:b.top>=a.top-1&&b.bottom<=a.bottom+1&&b.left>=a.left-1&&b.right<=a.right+1}});ok(sp&&sp.inside,`${dn} ${m}: the stamp sits on the result card only`,sp);
    ok(!p.errs.length,`${dn} ${m} r2 taps: no page errors`,p.errs.slice(0,3));await p.close()}}
  {const p=await boot(b,{width:1180,height:820},11);
