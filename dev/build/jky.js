@@ -175,10 +175,9 @@ function runOpt(c,i){const F=c.F,E=c.E,O=E.o?E.o[i]:E.plain,G=sc(O.g,c.b),C=sc(O
  if(C.relM&&F===S){try{S.tin=cl((S.tin||0)-C.relM,0,100);out.push(`chủ nhân tin ngươi -${C.relM}`)}catch(e){}}
  if(C.seen){if(!roll(seenOd(c))){ap(F,{danh:-KB().seenDanh});out.push(`có người trông thấy, Danh -${KB().seenDanh}`)}}
  const st={};for(const k of ["danh","sung","duc","tamco","th"])if(G[k])st[k]=Math.round(G[k]*(k==="danh"?g:1));if(G.sucR)st.suc=Math.round(KB().sucRest*G.sucR/(KB().V[c.b]||1));
- if(Object.keys(st).length)ap(F,st);
- {const NM={danh:"Danh",sung:"Sủng",duc:"Đức",tamco:"Tâm cơ",th:"Thái hậu thiện cảm",suc:"Sức"};for(const k in st)out.push(`${NM[k]} +${st[k]}`);if(C.suc)out.push(`Sức -${C.suc}`);if(C.bac)out.push(`Bạc -${C.bac}`)}
- if(G.rel&&c.W&&c.W.kind!=="th"&&c.W.kind!=="emp")out.push(`${wName(c.W)||"người ấy"} thiện cảm +${Math.round(G.rel*g)}`);
- if(G.rel)relTo(F,c.W,Math.round(G.rel*g));
+ const st0={};for(const k in st)st0[k]=F[k]||0;if(Object.keys(st).length)ap(F,st);for(const k in st)if(k!=="suc")st[k]=Math.max(0,Math.round((F[k]||0)-st0[k]));/* stat-pace: the result says what was REALLY added (jstatpace) */
+ {const NM={danh:"Danh",sung:"Sủng",duc:"Đức",tamco:"Tâm cơ",th:"Thái hậu thiện cảm",suc:"Sức"};for(const k in st)if(st[k])out.push(`${NM[k]} +${st[k]}`);if(C.suc)out.push(`Sức -${C.suc}`);if(C.bac)out.push(`Bạc -${C.bac}`)}
+ if(G.rel){const rw=Math.round(G.rel*g),rs=F===S&&typeof spSee==="function"?spSee("rel",rw,c.W&&c.W.ref):rw;if(c.W&&c.W.kind!=="th"&&c.W.kind!=="emp"&&rs>0)out.push(`${wName(c.W)||"người ấy"} thiện cảm +${rs}`);relTo(F,c.W,rw)}
  const ak=O.a||null;if(G.art&&ak){try{addArtP(F,ak,G.art);out.push(`${ART_N(ak)} tiến bộ ${G.art} phần`)}catch(e){kerr("art",e)}}
  if(O.s)try{const r=SPEC[O.s](c,O);if(r)out.push(r)}catch(e){kerr("spec "+O.s,e)}
  else if(O.buy)try{const r=SPEC.item(c,O);if(r)out.push(r)}catch(e){kerr("buy",e)}
@@ -225,7 +224,7 @@ const SPEC=KY.SPEC={
 };
 /* ---------- her card ---------- */
 function optX(c,i){const O=c.E.o[i],C=sc(O.c||{},c.b),L=[];if(O.buy||O.s==="item"&&(c.X.box||c.X.rr)){const pr=buyPr(c);if(pr&&!(c.X.box&&i===1))C.bac=(C.bac||0)+pr}if(O.od&&C.seen)L.push(word(seenOd(Object.assign({},c,{oi:i}))));const t=costText(C);if(t)L.push("tốn: "+t);
- const G=sc(O.g,c.b),W=[];if(G.danh)W.push(`Danh +${G.danh}`);if(G.sung)W.push(sgStat(G.sung));if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(`thiện cảm +${G.rel}`);if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
+ const G=sc(O.g,c.b),W=[];const SE=(k,n)=>typeof spSee!=="function"?n:k==="rel"&&c.W&&c.W.kind==="th"?spSee("th",n):k==="rel"&&c.W&&c.W.kind==="emp"?n:spSee(k,n,k==="rel"&&c.W?c.W.ref:null);/* stat-pace: the button shows the REAL rise (jstatpace spSee) */if(G.danh)W.push(`Danh +${SE("danh",G.danh)}`);if(G.sung){const w=sgNow(G.sung),r=SE("sung",w);W.push(r!==w?statTxt("sung",r):sgStat(G.sung))}if(G.th)W.push(`Thái hậu thiện cảm +${SE("th",G.th)}`);if(G.duc)W.push(`Đức +${SE("duc",G.duc)}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(`thiện cảm +${SE("rel",G.rel)}`);if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
  const sw=specW(c,O,i);if(sw)W.push(sw);for(let j=0;j<W.length;j++)W[j]=gW(W[j]);
  if(W.length)L.push("thành: "+W.join(", "));return L.join(" · ")}
 /* the gain words of a special (an option whose gain is a piece / a fact, never "không") */

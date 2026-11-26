@@ -158,7 +158,7 @@ function luxMonthX(p){const B=BAL.lux;let r="";const me=p===S;if(!p||p.alive===f
  if(p.out){if(ratio>B.occ.lanh.hi){if(me){apply({duc:B.lanhDuc});r+=`Ở lãnh cung mà còn ăn vận xa xỉ, người ta chê ngươi không biết hối lỗi. Đức ${B.lanhDuc}. `}else ap(p,{duc:B.lanhDuc})}return r}
  const was=luxXaHoa(p);const rep=luxRepTick(p);
  if(rep>=B.repOn){if(me){apply({danh:B.repDanh});if(!S.thDead)apply({th:B.repTh});r+=`Hậu cung gọi ngươi là người xa hoa${!was?" (tiếng xa hoa mới nổi)":""}. Danh ${B.repDanh}${!S.thDead?`, Thái hậu ${B.repTh}`:""}. `}
-  else{ap(p,{danh:B.repDanh});p.th=cl((p.th||0)+B.repTh,-100,100)}}
+  else{ap(p,{danh:B.repDanh});spAdd(p,"th",B.repTh)}}
  else if(was&&me)r+="Tiếng xa hoa của ngươi đã lắng. ";
  if(luxEdictOn()){const R=luxRange(p,"thinhan");if(ratio>R.hi){if(me){apply({duc:B.edictDuc});if(!S.thDead&&S.luxEdict.by==="th")apply({th:B.edictTh});r+=`<span class="r">Ngươi ăn vận quá lệnh tiết kiệm. Đức ${B.edictDuc}${!S.thDead&&S.luxEdict.by==="th"?`, Thái hậu ${B.edictTh}`:""}.</span> `}else ap(p,{duc:B.edictDuc})}
   else if(x.sc>0&&ratio<=R.fit[1]&&roll(B.plainP)){if(me){apply({duc:B.plainDuc});r+=`Ngươi giữ lệnh tiết kiệm, được khen. Đức +${B.plainDuc}. `}else ap(p,{duc:B.plainDuc})}}
