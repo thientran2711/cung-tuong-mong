@@ -181,3 +181,47 @@ LIVE now starts a life with the «Luân hồi» roulette (#kroul) + daily select
 ### HANDOVER → successor (D opens it): gates ALONE on review/dayq-qsoftlock fac74a68 (or later if LIVE moves: merge main first, take main's built files, `python3 dev/build/assemble.py` + `CTM_CHANGE="$(cat dev/site/CHANGE.txt)" bash dev/site/build_site.sh`, commit)
 1. Fix sangbuoi-held newLife for the new life start (above), test only, push. 2. Chain ALONE (my runner script, rewrite it from this list; run it with `setsid nohup` so a 2 h tool limit does not kill it): sangbuoi-held full A–L Fold+iPad · CASES=A REPEAT=12 branch AND LIVE (same test file; land only if branch fails ≤ LIVE) · CASES=JKL on LIVE (before column) · CASES=K REPEAT=6 branch · dayq-ghost · dayq-hold (UTF-8 server, dev/index.html) · dayq-order · dayq-hold-coop · dayq-break · coop-e2e ×2 (out dir arg) · quickcheck `node dev/tools/quickcheck.js <wt> <live wt>/index.html --out <dir> --runs 5`. 3. FULL videos Fold 755x1000 + iPad 1180x820 of J, K, L (a preload that adds recordVideo to every newContext works: `node -r <preload.js> dev/test/sangbuoi-held.js …` with CASES=JKL, VIDDIR) → CDN img/_review/dayq-qsoftlock/ (python3 dev/site/cdn_sync.py img/_review/dayq-qsoftlock). 4. SSK here + to Foreman D (session_01D3E3NaVk7n7f8KTo2enJna) → ONE opus BIG reviewer (brief «ROLLOVER RV-CRS» above + the SSK). 5. On PASS: «LAND READY review/dayq-qsoftlock <sha> (FF from LIVE)» + video URLs → D.
 Recipe: UTF-8 server (python SimpleHTTPRequestHandler, `.html/.js/.json` → `; charset=utf-8`), one for the branch worktree and one for a LIVE worktree (detached origin/main, run assemble.py there too for dev/index.html). Never run two gates at once. Worktrees /home/user/wt/qs (branch) and /home/user/wt/live are mine; delete when done.
+
+## Q-SOFTLOCK owner #4 (session_01D3E3NbJAdmjXJsLcFEFGGD) — FULL GATE CHAIN DONE on 927412c5, ROLL at context line (16:40Z 26/11)
+PRIORITY #1 CHECK: OD 26/11 rows (Q-SOFTLOCK play-stopper) | main LIVE b881686f (was 6b5d3d05 → 3af7896e → 1dcb373e → aa37de21 → b881686f during this shift) | review/* review/dayq-qsoftlock c1fff00a | claims Q-SOFTLOCK row (me → successor).
+Depth 3 · START_CTX ~3 % · context at handover 29 % (roll line 28 %).
+
+### Branch review/dayq-qsoftlock c1fff00a (pushed)
+= fac74a68 + 0954a8c4 (merge LIVE 6b5d3d05) + 3fa0e7fa (test: newLife for the new life start) + ad2dc11e (merge LIVE 3af7896e) + cc6152e1 (test: newLife stuck-card guard) + 927412c5 (merge LIVE 1dcb373e) + c1fff00a (test: tapAny never taps the cases' own #tstkm).
+Game diff vs LIVE = dev/build/jdayq.js only (+ built index.html/sw.js); everything else is dev/test. Every merge: only built files conflicted → main's built files taken, `python3 dev/build/assemble.py` + `CTM_CHANGE="$(cat dev/site/CHANGE.txt)" bash dev/site/build_site.sh`, main's CHANGE line kept.
+NOT yet merged: LIVE aa37de21 (home-way-nits) and b881686f — merge them first (same recipe).
+
+### (2) test adaptation — why it is test-side, not product
+LIVE ≥ f009e1a6 starts a life with the «Luân hồi» roulette, the jkc road picker on the identity card («Vào cung ngay» / «Ở nhà chờ tuyển tú», data-kcp: a tap only re-picks the road and re-draws the card) and, for a tú nữ, three selection days in buổi 0 (Dưỡng Tú viện, gate scenes «Vào điện», dialogue «Chạm để tiếp ▸»); a hòa thân plays «Lễ ra mắt» and can end in «Duyên cung lỡ hẹn» → «Chuyển kiếp».
+- The OLD test stalls on LIVE 6b5d3d05 exactly as on the branch: probe = tapAny looped on the road button for 45 s (identity card never taken), or returned inside the selection (bk 0.0 + scene) → case B «setup: turn not held».
+- A player gets through: with the new newLife, LIVE 6/6 lives reached a quiet buổi 1 (19–88 s each), branch the same.
+- Test changes (dev/test/sangbuoi-held.js only): roll a life with no selection days and not a servant (selxDaysFit false, origin ≠ cnv, !isSrv — the quickcheck NEWLIFE idiom); take it with «Nhận thân phận» (a cung nữ card keeps the button out of view → in-page click, SETUP only); re-roll a life that ends in its opening / shows a new identity card; wait (NL_MS 300 s) for buổi 1 with nothing queued/on screen and «Sang buổi» enabled; tapAny: Nhận before the road buttons, gate-scene buttons first, the dialogue line box only when on top; setup closes (and logs) a card that stays up through 25 taps (one «Tâm trạng · <name>» look-up card with dead ✕/Lui stalled A×12 once — the robot «Tâm trạng ✕/Lui no effect» row, not this family); tapAny never taps the cases' own #tstkm.
+- K FLAKE ROOT (the open «Fold K FAIL on 9246cfdd» and K×6 iPad 1/6 here: «queued scene never played» with kmGhost 2, KMQ 0): TEST RACE — tapAny tapped the test's own scene button (#tstkmb) between the K loop's checks, the scene closed, the buổi turned, the loop broke with km=0. The fix had released the ghost (kmGhost 2) and the scene HAD played. Fixed in c1fff00a (test only).
+
+### Gate chain ALONE on 927412c5 (game bytes = c1fff00a's; LIVE column = 1dcb373e)
+| gate | branch 927412c5 | LIVE 1dcb373e |
+|---|---|---|
+| sangbuoi-held A–L Fold 755x1000 + iPad 1180x820 | **ALL PASS** (J flip ~11.2 s, L1 8.0 s / L2 2.5 s) | A–I 17/18 PASS (1 «setup: card already painted», iPad D — setup noise) |
+| CASES=JKL | PASS (in the full run) | **J, K, L FAIL both devices** (J «flip never played (queue blocked by a stale job)», K «ghost #kmrew held kmFree», want held, L2 «ghost DF.play held kmFree», actKm 174) |
+| A×12 (stability, same test file) | 24/24 PASS | 24/24 PASS → branch fails ≤ LIVE |
+| K×6 | 11/12 (1 iPad = the test race above, fixed in c1fff00a) | **12/12 FAIL** |
+| dayq-ghost | PASS all | — |
+| dayq-hold | PASS 46 cases | — |
+| dayq-order | PASS | — |
+| dayq-hold-coop | FAIL 4/16 (guest A2×S1 / A3×S4 / A4×S1 «nothing painted inside the activity», «week merged once») | running at roll (see below) |
+| dayq-break (test added on this branch) | FAIL 4 (S.mg + data-coopWait rows, both devices: «after 2×wake disabled false, healed +0, render calls 1») | **identical FAIL 4** → pre-existing on LIVE, not the jdayq heal (healed +0): some other render() re-enables #next in those two artificial states — report to D as a separate finding |
+| coop-e2e ×2 | 143/143 · 143/143 | — |
+| scan dev/test/scan-q-hold.py | family B uncovered 0 of 7 (LIVE 7 of 7) | — |
+| quickcheck --runs 5 | PASS (open 2600 ms, **old save ok**, render 234/241, tab 473/556, buổi 1283/1584, tasks>200ms 33/32) | — |
+Earlier full runs: held A–L ALL PASS on 3fa0e7fa and ad2dc11e too; A×12 24/24 on 3fa0e7fa.
+Chain runner (container-local, rewrite it): one gate at a time, `setsid nohup`, outputs per gate + CHAIN.txt; UTF-8 servers 8801 = branch worktree, 8802 = LIVE worktree (python SimpleHTTPRequestHandler with `.html/.js/.json` → `; charset=utf-8`); assemble.py in both worktrees (dev/index.html).
+
+### A4 nc_vuong «Tâm bệnh · nhẹ» Q=1 softlock (D 07:57Z)
+No dump (harness bac25389, no DQ/qs block) → not traceable; plain Q card (j13 catchIll / jemoact); state = unpainted Q≥1 card, nothing on screen at the night turn = the covered family (H dqWake/dqBring; J/K/L scene-queue holders). Not a new member (reasoning). The 2 «no-clock loop» rows (Trường Môn viện page) = the .mapsc loop routed to F10.
+
+### HANDOVER → successor (D opens it): finish on the FINAL sha
+1. Merge LIVE (b881686f or later) into review/dayq-qsoftlock (recipe above), push.
+2. dayq-hold-coop: run on LIVE (cd <LIVE worktree> && assemble.py && node dev/test/dayq-hold-coop.js) and on the branch, ALONE; land only if branch FAILs ≤ LIVE (co-op seat keeps the old kmFree answer by design — jdayq dqUi). My LIVE run was cut by the roll.
+3. On the final sha ALONE: sangbuoi-held full A–L Fold+iPad, CASES=K REPEAT=6 (with c1fff00a's tapAny), coop-e2e ×1, quickcheck --runs 5.
+4. FULL videos Fold 755x1000 + iPad 1180x820 of J, K, L (preload adding recordVideo to every newContext: `node -r <preload.js> dev/test/sangbuoi-held.js <url>` with CASES=JKL, VIDDIR) → CDN img/_review/dayq-qsoftlock/ (`python3 dev/site/cdn_sync.py img/_review/dayq-qsoftlock`), look at them.
+5. SSK here + to Foreman D (current: session_01D3E3NYYzn179gzKUA3MM7U, depth 7) → ONE opus BIG reviewer (brief «ROLLOVER RV-CRS» above + this section) → on PASS «LAND READY review/dayq-qsoftlock <sha> (FF from LIVE, head==sha)» + video URLs.
