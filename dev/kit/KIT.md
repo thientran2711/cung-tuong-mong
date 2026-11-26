@@ -284,7 +284,9 @@ dialog options (`.opt` / `.opts`), priced buttons (`pbtn`, `.btn`, `.rbtn`: cour
 Observer rule (F10, 26/11, behaviour only): the j63 observer `kaMO` sorts each wake (`kaSort`): a NEW card (a KA_SEL button without
 `data-ka`, or a node holding one) → the whole-page `kaNorm` pass (≤ `BAL.kobs.kaPass` passes, its own edits taken back with `takeRecords`);
 a node added INSIDE an already normalised card → that card alone (`kaNorm1` + the «???» mask); any other node (loading marks, scroll cues,
-memory marks, words in a span) → nothing. Never re-run the whole page for a change that holds no new card (a 1351-card list took 7 s a pass).
+memory marks, words in a span) → nothing. A new card is normalised in the place that holds it (`kaNorm(root)`), never the whole page
+for one new card (a 1351-card list took 7 s a pass). Option fit (jk4, F10 member 4): `kitOptEqual` tiers a dialog's option lists ONCE per
+synchronous pass (`KIT_OPT_EQ`), and the cards the ResizeObserver reports in one frame are fitted in ONE frame callback (`KIT_OPT_ROQ`).
 
 ```
 button.ka [.kdis when disabled]

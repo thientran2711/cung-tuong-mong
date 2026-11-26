@@ -170,26 +170,30 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  b.innerHTML=`<span class="kat"><span class="kan">${titleH||"&nbsp;"}</span>${odds?`<span class="kodds">${odds}</span>`:""}</span>`+(leadH?`<span class="klead">${leadH}</span>`:"")+kaBody(R,dis)+kinfo}
 function kaNorm(root){try{(root||document).querySelectorAll(KA_SEL).forEach(b=>{try{kaNorm1(b);if(typeof kitNoUnkDom==="function")kitNoUnkDom(b,true)}catch(e){console.error("kaNorm",e)}})}catch(e){}}
 /* disabled state can change after build: keep the class honest */
-/* F10 member 3 (26/11, Foreman E E-S1 iPad y13 b2239 «Biếu quà làm lành», 1351 option cards from a long save): the normaliser woke on EVERY
-   added node in the page (a picture's loading mark, a memory mark, a word inside a card …) and each wake re-ran kaNorm over the whole document
-   (7 s with 1386 cards) → the page never idled (watchdog: kitNoUnkDom < kaNorm < kaRun on every sample). A wake now sorts its records:
-   a NEW card (a KA_SEL button with no data-ka yet, or a node holding one) → the whole-page pass as before; a node added INSIDE an already
-   normalised card → that card alone (kaNorm1 + the «???» mask); anything else (not a card) → nothing. */
-let kaQ=false,kaFull=false;const kaTouch=new Set();
+/* F10 member 3 (26/11, Foreman E E-S1 iPad y13 b2239 «Biếu quà làm lành», 1351 option cards from a long save; R1 cnv_ban y16–17): the
+   normaliser woke on EVERY added node in the page (a picture's loading mark, a memory mark, a word inside a card …) and each wake re-ran kaNorm
+   over the WHOLE document (7 s with 1386 cards: every card goes through kpOptArt again) → the page never idled. A wake now sorts its records
+   (kaSort): a NEW card (a KA_SEL button with no data-ka yet) → kaNorm over the place that holds it (the added node, or the card's parent),
+   never the whole page; a node added INSIDE an already normalised card → that card alone (kaNorm1 + the «???» mask); anything else (not a
+   card) → nothing. A card the normaliser still wants anywhere in the page (kaWants) is picked up on the next card wake. */
+let kaQ=false;const kaTouch=new Set(),kaRoots=new Set();
+function kaWants(b){return !b.dataset.ka&&!b.classList.contains("kquick")&&!b.closest(".hud2,#hud2,.tabs,.mapnav")&&(b.classList.contains("kcard")||[...b.children].some(c=>c.tagName==="SMALL"))}/* = what kaNorm1 rebuilds */
+function kaNew(n){if(n.nodeType!==1||!n.isConnected)return null;if(n.matches(KA_SEL)&&!n.dataset.ka)return n.parentElement||n;return n.querySelector(KA_SEL)&&[...n.querySelectorAll(KA_SEL)].some(b=>!b.dataset.ka)?n:null}
 function kaSort(ms){let hit=false;for(const m of ms){if(m.type==="attributes"){const b=m.target;if(b.classList&&b.classList.contains("ka"))b.classList.toggle("kdis",b.disabled);continue}
  if(!m.addedNodes.length)continue;for(const n of m.addedNodes){if(n.nodeType===1&&n.classList&&n.classList.contains("kscue"))continue;/* F10: a scroll cue (jksize) is not a card: it never wakes the normaliser (the two fed each other forever) */
-  if(n.nodeType===1&&(n.matches(KA_SEL)&&!n.dataset.ka||n.querySelector(KA_SEL)&&[...n.querySelectorAll(KA_SEL)].some(b=>!b.dataset.ka))){kaFull=true;hit=true;continue}
-  const t=m.target.nodeType===1?m.target:m.target.parentElement;const c=t&&(t.matches(KA_SEL)?t:t.closest(KA_SEL));if(c){if(c.dataset.ka==="1")kaTouch.add(c);else kaFull=true;hit=true}}}return hit}
+  const r=kaNew(n);if(r){kaRoots.add(r);hit=true;continue}
+  const t=m.target.nodeType===1?m.target:m.target.parentElement;const c=t&&t.isConnected&&(t.matches(KA_SEL)?t:t.closest(KA_SEL));if(c){if(c.dataset.ka==="1")kaTouch.add(c);else kaRoots.add(c.parentElement||c);hit=true}}}return hit}
 const kaMO=new MutationObserver(ms=>{if(kaSort(ms)&&!kaQ){kaQ=true;queueMicrotask(kaRun)}});
 /* F10 (26/11, robots A2 nc_su b703 / R1 / T1d): kaNorm's own DOM edits (kaNorm1 → kpOptArt / kitOptUnify / kitOptFinal rebuilding a card) were
-   records for kaMO → another kaNorm → … a chain that never let the page breathe when one card's rebuild never settles. A pass now takes back
-   the records it made itself; it runs again only for a card that is really new (a KA_SEL button with no data-ka yet), at most BAL.kobs.kaPass
-   passes per wake. */
-function kaRun(){kaQ=false;const T=[...kaTouch];kaTouch.clear();const full=kaFull;kaFull=false;
- if(!full){T.forEach(c=>{if(!c.isConnected)return;try{kaNorm1(c);if(typeof kitNoUnkDom==="function")kitNoUnkDom(c,true)}catch(e){console.error("kaNorm",e)}});kaMO.takeRecords();return}
- const N=BAL.kobs.kaPass;/* ONE CORE: BAL.kobs (jbal2) */for(let i=0;i<N;i++){kaNorm(document);let more=false;
- for(const m of kaMO.takeRecords()){if(m.type!=="childList")continue;for(const n of m.addedNodes){if(n.nodeType!==1||!n.isConnected)continue;if(n.matches&&n.matches(KA_SEL)&&!n.dataset.ka||n.querySelector&&[...n.querySelectorAll(KA_SEL)].some(b=>!b.dataset.ka)){more=true;break}}if(more)break}
- if(!more)break}}
+   records for kaMO → another kaNorm → … a chain that never let the page breathe when one card's rebuild never settles. A pass takes back
+   the records it made itself; it runs again only for a card that is really new, at most BAL.kobs.kaPass passes per wake. */
+function kaRun(){kaQ=false;const N=BAL.kobs.kaPass;/* ONE CORE: BAL.kobs (jbal2) */
+ if(kaRoots.size)document.querySelectorAll(KA_SEL).forEach(b=>{if(kaWants(b))kaRoots.add(b.parentElement||b)});/* a card made outside a record (class set later) */
+ for(let i=0;i<N&&(kaRoots.size||kaTouch.size);i++){const R=[...kaRoots].filter(r=>r.isConnected);kaRoots.clear();const T=[...kaTouch];kaTouch.clear();
+  const top=R.filter(r=>!R.some(o=>o!==r&&o.contains(r)));top.forEach(r=>kaNorm(r===document.documentElement?document:r));
+  T.forEach(c=>{if(!c.isConnected||top.some(r=>r.contains(c)))return;try{kaNorm1(c);if(typeof kitNoUnkDom==="function")kitNoUnkDom(c,true)}catch(e){console.error("kaNorm",e)}});
+  for(const m of kaMO.takeRecords()){if(m.type!=="childList")continue;for(const n of m.addedNodes){const r=kaNew(n);if(r)kaRoots.add(r)}}/* own edits dropped; only a really new card runs again */
+  kaTouch.clear()}}
 kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["disabled"]});
 (function(){const kf=kitFix;kitFix=function(root){kf.apply(this,arguments);kaNorm(root)}})();
 /* ---------- the look (scoped to .ka act cards / options) ---------- */

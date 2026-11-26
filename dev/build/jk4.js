@@ -1076,7 +1076,9 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
    The size is the one the SHORTEST card text allows (no empty space under any text-shortest card); all tall when every text fills the tall picture. */
 /* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
    = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
-function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
+const KIT_OPT_EQ=new Set();
+function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;if(KIT_OPT_EQ.has(r))return;if(!KIT_OPT_EQ.size)queueMicrotask(()=>KIT_OPT_EQ.clear());KIT_OPT_EQ.add(r);const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
+/* F10 member 4 (26/11, R1 cnv_ban y16–17 / E-S1 1351 cards): kitOptFitAll calls kitOptFit → kitOptEqual for EVERY card and each one re-tiered the whole list (n × n layout reads, 1.5–4 s a pass). A dialog's option lists are tiered once per synchronous pass (all its cards give the same answer); the set empties at the next microtask. */
 function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(":is(.pc>.pcr,.kpanec) button.ka:not(.kopt)")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
@@ -1087,10 +1089,10 @@ function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(":is(.pc>.p
  let s=Math.round(Math.max(lo,Math.min(w,m)));E.forEach(x=>kitOptSet(x,s));
  for(let i=0;i<3;i++){m=Math.min(...bhs());const s2=Math.round(Math.max(lo,Math.min(w,m)));if(s2===s)break;s=s2;E.forEach(x=>kitOptSet(x,s))}
  done("sq")}catch(e){console.error("kitOptFit",e)}}
-let KIT_OPT_RO=null;
+let KIT_OPT_RO=null,KIT_OPT_ROT=0;const KIT_OPT_ROQ=new Set();
 function kitOptFitAll(root){try{root=root&&root.querySelectorAll?root:document;const B=[...root.querySelectorAll(KIT_OPT_FIT_SEL)].filter(b=>b.querySelector(":scope > .kaart")&&b.querySelector(":scope > .kabody"));
  if(!KIT_OPT_RO&&typeof ResizeObserver==="function")KIT_OPT_RO=new ResizeObserver(E=>{const seen=new Set();E.forEach(e=>{const b=e.target.closest(KIT_OPT_FIT_SEL);if(!b||seen.has(b))return;seen.add(b);
-  const body=b.querySelector(":scope > .kabody");const key=b.clientWidth+"x"+Math.round(body?body.getBoundingClientRect().height:0);if(b.__kof!==key)requestAnimationFrame(()=>kitOptFit(b))})});
+  const body=b.querySelector(":scope > .kabody");const key=b.clientWidth+"x"+Math.round(body?body.getBoundingClientRect().height:0);if(b.__kof!==key){KIT_OPT_ROQ.add(b);if(!KIT_OPT_ROT)KIT_OPT_ROT=requestAnimationFrame(()=>{KIT_OPT_ROT=0;const L=[...KIT_OPT_ROQ];KIT_OPT_ROQ.clear();L.forEach(x=>kitOptFit(x))})}})});/* F10 member 4: the cards that changed size this frame are fitted in ONE frame callback (was one callback per card: 1351 callbacks, each re-tiering the whole list) */
  B.forEach(b=>{kitOptFit(b);if(KIT_OPT_RO&&!b.__kofro){b.__kofro=1;KIT_OPT_RO.observe(b);const body=b.querySelector(":scope > .kabody");if(body)KIT_OPT_RO.observe(body)}})}catch(e){}}
 window.kitOptFit=kitOptFit;window.kitOptFitAll=kitOptFitAll;window.KIT_OPT_SQ=KIT_OPT_SQ;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
