@@ -34,7 +34,8 @@ Co-op: host computes (NPC agents and helpAsk run on the host); her card is the h
 | quickcheck 5ac9c150 | see §3 | — |
 
 ## 3. Quickcheck
-(filled below when it ends)
+quickcheck 5ac9c150 vs LIVE aa37de21 (run 2, uncapped; run 1 was cut by my 20-min cap in the play part): **QUICKCHECK PASS** play part · open 2477 ms · old save ok · perf median new/live: render 314/289 ms, tab 800/665, buổi 2140/2068, tasks>200ms 44/48.
+CORE GATES: G4 80-dialog-fixed «kit-dialog-2 a no empty Tốn/Được» 755+1180 + 90-button-crawl «Ô lưu · Lui» = the KNOWN LIVE faults (same rows as on LIVE; parity-facfix §7). 92-look-dedupe (3) and 95-next-dead (2) failed once under load → rerun alone: look-dedupe PASS on branch AND LIVE, next-dead FIX-6 PASS on branch AND LIVE = flakes (this branch touches neither look panels nor «Sang buổi»). Time-spill guard PASS.
 
 ## 4. Videos (law 12, real finger taps, both devices) — CDN img/_review/help-housemate/
 - https://ctm-img.victoria-tntt.workers.dev/img/_review/help-housemate/fold-755x1000.webm
