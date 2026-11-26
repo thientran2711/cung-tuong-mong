@@ -24,9 +24,14 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
     kc2SelDo(raw);const X=S.selx,Z=S.selx2||{};const row={og,lab,r0,has2,sc:X.sc,place:X.place,kept:X.kept,step:X.step,rank:S.rank,dead:!!S.dead,cap:selxHoaThan(og)?B.hoaThanCap:B.cap,fate:S.fate||"",why:X.why||""};
     const pod=Z.pod||[];row.pod=pod.length;row.npcIn=liveRivals(true).length-nR;row.out=(Z.out||[]).length;
     /* the contest: yard.n ranked, top yard.kept kept (her by her place), the other kept girls enter the palace, the ban hoa girls stay as records */
-    const podOk=pod.length===B.yard.n&&pod.filter(x=>x.kept).length===B.yard.kept&&pod.every((x,i)=>!i||pod[i-1].sc>=x.sc)&&(X.kept===(X.place<=B.yard.kept));
-    const npcOk=(row.npcIn+(Z.out||[]).filter(x=>x.kept).length)===B.yard.kept-(X.kept?1:0)&&(Z.out||[]).filter(x=>x.ban).length===B.yard.n-B.yard.kept-(X.kept?0:1);
-    row.ok=has2&&podOk&&npcOk&&(X.kept?(!S.dead&&S.rank===selxRank(S,X.step,{k:og,r0})&&Math.abs(S.rank-r0)<=1):(S.dead&&/ban hoa/i.test(row.fate)));out.rows.push(row);close()}}
+    /* FIRSTCARD (OD 23/11 ~22:35Z (3), MAIN 153): a princess (hòa thân) is NOT in the tú nữ contest — the girls compete among themselves (yard.n − 1, top yard.kept kept),
+       she is always kept, her step = the place her score takes among them (below the kept places = the last step), never ban hoa */
+    const ht=selxHoaThan(og);row.ht=ht;
+    const podOk=ht?(pod.length===B.yard.n-1&&!pod.some(x=>x.id==="me")&&pod.filter(x=>x.kept).length===B.yard.kept&&X.kept===true&&X.step===(X.place<=B.yard.kept?B.placeStep[X.place-1]:B.placeStep[B.placeStep.length-1]))
+     :pod.length===B.yard.n&&pod.filter(x=>x.kept).length===B.yard.kept&&pod.every((x,i)=>!i||pod[i-1].sc>=x.sc)&&(X.kept===(X.place<=B.yard.kept));
+    const npcOk=ht?(row.npcIn+(Z.out||[]).filter(x=>x.kept).length)===B.yard.kept&&(Z.out||[]).filter(x=>x.ban).length===B.yard.n-1-B.yard.kept
+     :(row.npcIn+(Z.out||[]).filter(x=>x.kept).length)===B.yard.kept-(X.kept?1:0)&&(Z.out||[]).filter(x=>x.ban).length===B.yard.n-B.yard.kept-(X.kept?0:1);
+    row.ok=has2&&podOk&&npcOk&&(ht&&!X.kept?false:X.kept?(!S.dead&&S.rank===selxRank(S,X.step,{k:og,r0})&&Math.abs(S.rank-r0)<=1):(S.dead&&/ban hoa/i.test(row.fate)));out.rows.push(row);close()}}
   /* old save: S.selx without S.selx2 keeps the ceiling rule */
   for(const og of ["tt","muoi"]){if(!life(og))continue;close();delete S.selx2;S.selx.art="";S.selx.done=1;const top=S.origin.r||0;kc2SelDo(0);out.old.push({og,top,rank:S.rank,dead:!!S.dead,ok:!S.dead&&S.rank<=top&&S.rank>=Math.max(0,top-2)});close()}
   /* hòa thân home road: kc2EnterNc on S.kc.selx2 → selxRank (cap Phi, +1 needs Sắc) */
@@ -36,7 +41,7 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
  for(const x of r.rows)ok(x.ok,`${x.og} ${x.lab}: score ${x.sc}, place ${x.place}/${x.pod} → ${x.kept?`step ${x.step}, ${x.r0}→${x.rank}`:`ban hoa (${x.fate})`} · girls in ${x.npcIn}, records ${x.out}${x.why?` · «${x.why}»`:''}`);
  ok(r.rows.length>=24,`origins × 4 results played (${r.rows.length})`);
  ok(r.rows.some(x=>x.kept&&x.step===1&&x.rank>x.r0),'a good result lifts one rank above the origin');ok(r.rows.some(x=>x.kept&&x.step===-1&&x.rank<x.r0),'a poor result drops one rank');
- ok(r.rows.some(x=>!x.kept&&x.dead),'a very poor result = ban hoa, the life ends');ok(r.rows.filter(x=>x.kept).every(x=>x.rank<=Math.max(x.r0,x.cap)),'no rank above the cap');
+ ok(r.rows.some(x=>!x.kept&&x.dead),'a very poor result = ban hoa, the life ends');ok(r.rows.filter(x=>x.ht).length>=4&&r.rows.filter(x=>x.ht).every(x=>x.kept&&!x.dead),'FIRSTCARD: a princess is never ban hoa at her welcome audience (hòa thân = no tuyển tú)');ok(r.rows.filter(x=>x.kept).every(x=>x.rank<=Math.max(x.r0,x.cap)),'no rank above the cap');
  ok(r.txt.length&&r.txt.every(x=>!x[1]&&x[2]),`selection card: new words, no ceiling words ${JSON.stringify(r.txt.filter(x=>x[1]||!x[2]))}`);
  for(const x of r.old)ok(x.ok,`old save (${x.og}): ceiling rule kept, top ${x.top} → ${x.rank}`);
  ok(r.nc&&r.nc.selx2&&r.nc.rank===r.nc.want,`hòa thân home road on selxRank ${JSON.stringify(r.nc)}`);
