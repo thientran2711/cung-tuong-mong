@@ -138,3 +138,70 @@ Running in MY container when I rolled (results go to D by message if I am still 
 4. Then «LAND READY review/renderer-mem <sha> (FF from LIVE 1dcb373e)» + video URLs here and to Foreman D **session_01D3E3NaM9SCxxy6LNzERgRj** (PLAY-STOPPER).
 Probe tools: RT_PROF=1 (renderer-mem-lib: per-function calls/ms + kaMO wake records → <RT_MEM>.prof.txt), RT_MOB, watchdog. Local sites: worktree root served on a port; LIVE in a sparse detached worktree.
 ~X%: F10 ~95 % done (4 members fixed, BIG PASS + delta PASS; final-sha gates + long-run proof + land open).
+
+## 10. Worker #4 (session_01D3E3NaM6icUduoWSnNLGCU, depth 6, START_CTX ~3 %) — final gates + long run + member 5 (26/11 ~19:30Z)
+PRIORITY #1 CHECK: reused §9 (gates2/long-run tools), the R2 ckpt b653 (handover robot/rerun-cnv-cnv_chu), Seat A's b1658 ckpt + hang samples (CDN), rv §3–§6; git grep origin/main for kitOptUnify/KIT_OPT_* before member 5.
+
+**Branch** `review/renderer-mem` @ **8d5e3382**, FF from LIVE **f573dc94**. History on top of 2b5bbbb3:
+- 4422dda2: merge LIVE aa37de21.
+- eb7ddb99: merge LIVE b881686f.
+- 1d57fe88: **member 5**.
+- 8d5e3382: merge LIVE f573dc94.
+
+In each merge only CHANGE.txt (F10 line kept), index.html, sw.js and assets.json conflicted. They were rebuilt with build_site.sh. No LIVE delta touched jk4, jopic, j63 or jksize, or added MO/RO/rAF/setInterval.
+
+**Member 5 (new, 1d57fe88), found by Seat A nc_gian speed-1.** The run crawled after b1649, and all 14 hang samples showed `kitOptUnify ← kpOptArt ← kaNorm1`.
+- Cause: kpOptArt's wrapper calls kitOptUnify for EVERY card. Each call rebuilt every art-less sibling of the list (data-kopt off/on, then kpOptArt, CompactRows and Final again). That is n×n rebuilds plus mutation records, and it grows with list length, so with life length.
+- Fix in jopic: unify once per list per synchronous pass. A card normalised later in the same pass re-runs it once at the next microtask. A sibling already unified with an unchanged signature is skipped.
+- Family scan: jk4 `kitOptFit0` legacy (non-kopt) path did the same n×n group measure and rewrite per card. It now runs once per group per pass. No other per-card whole-sibling loop was found (grep `parentElement.children` / `[...c.children]` in j*.js).
+- rv §5 PASS. Its minor 6, that the signature misses a same-length text change, is non-blocking and left as is.
+
+**Gates**
+| sha | quickcheck | coop-e2e | rv |
+|---|---|---|---|
+| 4422dda2 | PASS perf (render 204/221, buổi 1413/1997 ms new/live) | 143/143 | §3 PASS |
+| eb7ddb99 | PASS perf (180/197, 1439/1393) | 143/143 | §4 PASS |
+| 1d57fe88 | PASS perf (115/177, 992/1122) | 143/143 | §5 PASS |
+| **8d5e3382** | perf: 1 run FAIL on longTaskMax (2391 vs 1330), re-run FAIL (2472/1404), phase-tagged re-run PASS (1718 vs 2310; render 219/251, buổi 1071/1807) — see note | **143/143** | §6 PASS |
+
+Every quickcheck core-gate FAIL is pre-existing and FAILs the same on LIVE (checked directly):
+- dialog-fixed: «kit-dialog-2 a» empty cell, and the script crashes after the Fold row. The #71 width row varies by which dialog is drawn.
+- crawl: «Ô lưu · Lui».
+- G4 next-dead «B real then Sang buổi» is flaky: LIVE 1dcb373e failed it 1 of 2 runs.
+- coop-e2e's «Thái hậu keeps the face» failed 4 rows once under load, then passed 143/143 on re-run. F10 does not touch S.thO.
+
+**Long run** (Fold, solo, bot bold, resumed from the R2 ckpt b654 to slice b1260, RT_LIGHT, renderer MB, one page process per arm):
+| buổi | LIVE 1dcb373e renderer MB (peak since last mark) | fix 4422dda2 arm 1 renderer MB (peak since last mark) | fix 4422dda2 arm 2 renderer MB (peak since last mark) |
+|---|---|---|---|
+| 700 | 2009 (2013) | 1952 (2024) | 1915 (1934) |
+| 800 | 2056 (2304) | 1672 (2192) | 1967 (2204) |
+| 900 | 2239 (2353) | 2143 (2166) | 2004 (2127) |
+| 1000 | 2804 (2862) | 2126 (2189) | 2123 (2522) |
+| 1100 | 3180 (3235) | 2351 (2770) | 2076 (2372) |
+| 1150 | 2269 (3229) | — | 2411 (2425) |
+| 1200 | 2633 (3229) | — | 2600 (2649) |
+| 1250 | 3294 (3328) | — | 2541 (2783) |
+| 1260 | 3417 (3417) | — | 2871 (2871) |
+- LIVE 1dcb373e: b655→b1260 (607 buổi), max renderer 3417 MB
+- fix 4422dda2 arm 1: b655→b1120 (467 buổi), max renderer 2770 MB
+- fix 4422dda2 arm 2: b655→b1260 (607 buổi), max renderer 2871 MB
+- LIVE **hung at b1244** (rss 3105 MB). Its stack is `kitOptEqual ← kitOptFit0 ← kitOptFitAll`, the field freeze reproduced inside an F10 family member. Its troughs climb from 1.9 to 3.2 GB.
+- fix arm 1: the life ended in play at b1120 («Hồng nhan bạc mệnh»), with 0 hangs.
+- fix arm 2: full 606 buổi, 0 hangs. Troughs are 1.5–1.9 GB to b1100, then 2.1–2.5 GB at b1150–1260. That is mild growth, in line with the save growing (1.8 → 2.5 M chars), against LIVE's 3.2–3.4 GB plus a hang.
+- Arm 2 also logged 3 «Xem <pet>» dead-tile rows and 1 «Lui no effect» row in kitShop «Nhờ thái giám tìm thú nuôi» at ~b1246. kitShop has no kopt/kitOpt cards, so this is not on an F10 path. The shot shows the dialog normal, with the tile detail popover open. This is routed as a robot finding and was not reproduced on LIVE.
+- Both arms ran member 1–4 code. The page loaded 4422dda2 and was never reloaded.
+
+**Seat A crawl replay** (ckpt b1658 from the CDN, Seat A's args, 44 min per arm, at the same time):
+| build | buổi in 44 min | rate | hang samples | renderer MB max |
+|---|---|---|---|---|
+| LIVE b881686f | 8 (1658→1666) | 0.18/min (~5.5 min/buổi) | 33 (kitOptUnify / kitOptEqual / kaNorm) | 1786 |
+| fix 1d57fe88 | 61 (1658→1719) | 1.38/min | 0 | 2407 |
+
+**Look / videos (8d5e3382 vs LIVE f573dc94, Fold 755x1000@2 + iPad 1180x820@2, kscue-shots):** 
+- videos: https://ctm-img.victoria-tntt.workers.dev/img/_review/renderer-mem/f10g-8d5e3382-video-old-fold.webm, https://ctm-img.victoria-tntt.workers.dev/img/_review/renderer-mem/f10g-8d5e3382-video-old-ipad.webm, https://ctm-img.victoria-tntt.workers.dev/img/_review/renderer-mem/f10g-8d5e3382-video-new-fold.webm, https://ctm-img.victoria-tntt.workers.dev/img/_review/renderer-mem/f10g-8d5e3382-video-new-ipad.webm (old = LIVE f573dc94)
+- pairs: https://ctm-img.victoria-tntt.workers.dev/img/_review/renderer-mem/f10g-8d5e3382-pair-fold-evpick-open.jpg, https://ctm-img.victoria-tntt.workers.dev/img/_review/renderer-mem/f10g-8d5e3382-pair-ipad-giftpick-open.jpg (same frame / layout / «Kéo xuống» cue; diff 0.3–1 %; fold-j7c 25 % = a different random scene drawn)
+Earlier sets: f10e-4422dda2-*, f10f-eb7ddb99-*.
+- Fold giftpick shows 3 columns vs 4. This is a random figure draw: a narrower figure gives a wider list. LIVE vs LIVE shows the same split (f10f-live-vs-live-fold-giftpick.jpg).
+
+**LAND READY review/renderer-mem 8d5e3382 (FF from LIVE f573dc94)** — head == sha; every code delta rv PASS (§3–§6, dev/handover/reviews/renderer-mem-review.md); coop-e2e 143/143 on 8d5e3382; Fold/iPad videos above. Coordinator: fast-forward main to 8d5e3382.
+~X%: F10 ~99 % done (5 members fixed, rv PASS on every delta, long-run + crawl proof in).
