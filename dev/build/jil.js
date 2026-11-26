@@ -65,7 +65,7 @@ function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
 const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được",demote:"thu khi giáng phẩm"};
 function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
- if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
+ if(how!=="sell"&&how!=="pawn"&&!o.keep&&!ilDur(e))return null;/* charge-followups (a): o.keep = a seized consumable (poison, forbidden drug) is tang vật, not used up */if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
  const at=how==="sell"||how==="pawn"?"mkt":how==="evid"?"cct":how==="emp"?"emp":how==="th"?"th":how==="pil"||how==="maid"?"srv":"nvp";
@@ -74,6 +74,19 @@ function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(
  if(how==="conf")x.rel=wk()+B.confW;if(how==="fix"||how==="burn")x.rel=wk()+ilRng(B.fixW);
  try{if(typeof dhIsItem==="function"&&dhIsItem(e))x.dh=1}catch(z){}/* sắc phong book / seal: jdh2 owns its road in the store */
  I.box.push(x);ilUid(e);ilLog(e,own,at,how);return x}
+/* charge-followups (a) LAW 6c REAL OBJECTS — the ONE «tịch thu» road: the piece leaves p (chest / worn slot / veil / pawn) and goes where it really
+   goes via ilGone: "conf" → Nội vụ phủ store (atonement road), "evid" → Cung Chính ti as tang vật (o.keep: also a consumable). Every confiscation
+   site calls this (dev/test/seize-scan.py family «seize_unrouted» = 0); the census «net» stays 0 (dev/test/seize-ledger.js). */
+function ilSeize(p,e,how,o){if(!p||!e)return null;ilOut(p,e);return ilGone(p,e,how||"conf",o)}
+/* the over-rank pieces a proven «vượt phẩm» takes = EXACTLY what vpItems(t) lists (worn jewellery above her rank, the WD slots of a Vượt phẩm
+   outfit, a dress of over-rank cloth), each real piece by reference through ilSeize "conf" (vpItems returns copies {k, wd}); a WD slot gets
+   the rank's plain piece back (as j92 wdAccuse). ONE rule for j8 vpAccuse, the Hoàng thượng look (j8 night), jcharge Vượt phẩm xa xỉ. */
+function vpSeize(t){const L=typeof vpItems==="function"?vpItems(t):[];const out=[],used=new Set();
+ for(const x of L){const n=(IT[x.k]||{}).n||"";
+  if(x.dress){t.dress=null;out.push(n);continue}
+  if(x.wd){try{const w=wdOf(t),e=w[x.wd];if(e){w[x.wd]=null;ilGone(t,e,"conf");const k=wdDefault(t,x.wd);if(k)w[x.wd]={k,from:"base"};out.push(n)}}catch(z){console.error(z)}continue}
+  const e=(t.inv||[]).find(z=>z&&!used.has(z)&&z.k===x.k&&z.w&&!z.h);if(e){used.add(e);ilSeize(t,e,"conf");out.push(n)}}
+ return out}
 /* take a piece out of the box into a person's chest */
 function ilTake(x,p,how){const I=ilS();const i=I.box.indexOf(x);if(i<0||!p)return false;I.box.splice(i,1);p.inv=p.inv||[];p.inv.push(x.e);ilLog(x.e,x.at,ilKey(p),how||"về");/* E44g T5: a box piece handed to her entry on the host goes to her seat (one «add», as an NPC gift) */if(p.coop&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend({id:null},x.e,p)}catch(z){console.error(z)}return true}
 /* guard: wrap a game function; whatever durable piece leaves the listed people during the call and is nowhere afterwards is routed by ilGone */

@@ -62,7 +62,7 @@ function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(r
   if(a&&t){const id=((z&&z.n)||0)+1;a.dkeys=a.dkeys||[];a.dkeys.push("pl:j70:"+id);d=deedAdd(a,"plot",t,1,`bày mưu ${deedTxt(k,t)}`)}}catch(e){}
  const p=n0.apply(this,arguments);if(!p&&d)deedUndo(a,d);return p}})();
 (function(){for(const [fn,k] of [["bribeServ","sbribe"],["plantServ","sbribe"],["threatServ","sthreat"]]){const f0=window[fn];if(typeof f0!=="function")continue;
- window[fn]=function(a,x){const t=fn==="plantServ"?x:(typeof ownerOf==="function"?ownerOf(x):null);const d=deedAdd(a,k,null,1,t?`${DEEDX[k].replace(/ của người khác$/,"")} của ${j78who(t)}`:DEEDX[k]);const r=f0.apply(this,arguments);if(!r)deedUndo(a,d);return r}}})();
+ window[fn]=function(a,x){const t=fn==="plantServ"?x:(typeof ownerOf==="function"?ownerOf(x):null);const d=deedAdd(a,k,null,1,t?`${DEEDX[k].replace(/ của người khác$/,"")} của ${j78who(t)}`:DEEDX[k]);/* charge-followups (b): the deed names the servant bought (d.s) and her palace (d.o) — a proven Mua chuộc dismisses THAT servant */if(d){if(t)d.o=key(t);if(fn!=="plantServ"&&x&&x.sid)d.s=x.sid}const r=f0.apply(this,arguments);if(!r)deedUndo(a,d);return r}}})();
 (function(){if(typeof illBuy!=="function")return;const i0=illBuy;illBuy=function(p,r,k){const d=deedAdd(p,"illbuy",null,1,`lén mua ${IT[k]?itm(k).n:"đồ cấm"}`);const x=i0.apply(this,arguments);if(!x)deedUndo(p,d);return x}})();
 
 /* ---------- 2. picking whom a piece of evidence is about: only someone with an unproven wrong ---------- */

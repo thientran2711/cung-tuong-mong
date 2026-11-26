@@ -89,14 +89,34 @@ function chPunTxt(t,c){const C=chC(c);if(!C)return"bị phạt";const m=typeof p
  return C.pun==="light"?`bị phạt bổng ${BAL.charge.fine} lượng`:C.pun==="cam"?`bị cấm túc ${m} tháng`:C.pun==="giang"?`bị giáng một bậc`:rkOf(t)>=5||t.queen?`bị phế vào lãnh cung`:`bị đày vào lãnh cung`}
 function chPunish(t,c,why,by){const C=chC(c);if(!C||!t)return;const W=`${why} (tội ${chName(c).toLowerCase()})`;const a=typeof punWho==="function"?punWho(by):by;
  if(C.pun==="light"){ap(t,{bac:-BAL.charge.fine,danh:BAL.charge.danh});if(typeof ducAdd==="function")ducAdd(t,BAL.charge.duc,chName(c).toLowerCase());
-  if(c==="vp"&&typeof vpItems==="function"){for(const e of vpItems(t)){if(e.dress){t.dress=null;continue}const i=(t.inv||[]).indexOf(e);if(i>=0){t.inv.splice(i,1);try{if(typeof itGone==="function")itGone(e,"tịch thu")}catch(x){}}}}
+  if(c==="vp")vpSeize(t)/* charge-followups (a): the listed pieces really go to the Nội vụ phủ store (was: vpItems copies, nothing taken) */;
   log(`<span class="r">${NMc(t)} bị phạt bổng ${BAL.charge.fine} lượng vì ${punPlain(W)}.</span>`);if(t===S)punNote({kind:"phat",why:W,by:a});return}
- if(C.pun==="cam"){if(c==="il")for(const e of (t.inv||[]).slice()){if(e&&IT[e.k]&&itm(e.k).il&&!((e.by&&e.by!==key(t))||e.gh)){t.inv.splice(t.inv.indexOf(e),1)}}punish(t,W,1);return}
+ if(C.pun==="cam"){if(c==="il")for(const e of (t.inv||[]).slice()){if(e&&IT[e.k]&&itm(e.k).il&&!((e.by&&e.by!==key(t))||e.gh)){ilSeize(t,e,"evid",{keep:1})/* charge-followups (a): đồ cấm → Cung Chính ti as tang vật (was spliced: gone) */}}punish(t,W,1);return}
  if(C.pun==="giang"){if(t===S){if(typeof demote==="function"&&S.rank>0)demote(S,punPlain(W));else punish(S,W,1);return}
   if(rkOf(t)<=0||punTwice(t)){punish(t,W,1);return}const r0=rkOf(t);seatPut(t,punDown(t));punMark(t,r0);log(`<span class="g">${t.name} ${punPlain(W)}, bị giáng xuống ${RANKS[rkOf(t)].n}.</span>`);return}
  /* cold */
  if(t===S){if(!S.out&&!S.dead)cold(`Ngươi ${punPlain(W)}`,a);return}
  if(t.out||t.alive===false)return;if(a&&a!==t)t.coldBy=key(a);if(t.queen){t.queen=false;t.rank=6}t.out=true;t.coldWk=punNow();log(`<span class="g">${t.name} ${punPlain(W)}, bị ${rkOf(t)>=5?"phế":"đày"} vào lãnh cung.</span>`)}
+/* charge-followups (b) — table A extras beside the one punishment (numbers BAL.charge.uhPay / mcFire; NPC and her alike, law 1):
+   Ức hiếp quấy phá → she pays bạc to each person she harmed; Mua chuộc người hầu → the servants she bought are dismissed (asOut "expel").
+   The rows go into her notice (punRows) under the punishment; an NPC's case goes to the log. */
+let CHPX=null;
+function chVictims(t,c){const D=chDeedMap(t)[c];const seen=new Set(),L=[];for(const d of ((D&&D.list)||[])){if(!d||!d.t||seen.has(d.t))continue;seen.add(d.t);let v=null;try{v=byKey(d.t)}catch(e){}if(v&&v!==t&&(v===S?!S.dead:v.alive!==false))L.push(v)}return L}
+function chUhPay(t){const B=chB(),L=chVictims(t,"uh").slice(0,chNeed(t,"uh"));const nm=[];for(const v of L){ap(t,{bac:-B.uhPay});ap(v,{bac:B.uhPay});nm.push(NM(v))}
+ if(!nm.length)return null;const x=`bồi ${B.uhPay} lượng bạc cho ${nm.join(", ")}`;if(t!==S)log(`${NMc(t)} phải ${x}.`);return ["Bồi thường",x]}
+function chBought(t){const k=key(t),D=chDeedMap(t).mc,ds=(D&&D.list)||[];const sids=new Set(ds.map(d=>d&&d.s).filter(Boolean)),own=new Set(ds.map(d=>d&&d.o).filter(Boolean));const L=[];
+ for(const o of [S].concat(rivals||[])){if(!o||o===t||o.coop||(o!==S&&(o.alive===false||o.out)))continue;for(const s of (o.staff||[]))if(s&&s.spyFor===k&&!s.coop)L.push([s,o,(sids.has(s.sid)?2:0)+(own.has(key(o))?1:0)])}
+ return L.sort((a,b)=>b[2]-a[2])}
+function chMcFire(t){const L=chBought(t).slice(0,chB().mcFire);if(!L.length)return null;const nm=[];
+ for(const [s,o] of L){try{asOut(s,"expel")}catch(e){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.out="expel"}s.spyFor=null;nm.push(`${s.name} (người hầu ${o===S?"của ngươi":"cung "+o.name})`);
+  if(o===S&&t!==S)log(`<span class="r">${s.name} nhận bạc của ${NM(t)}, nay tội lộ ra, bị đuổi khỏi cung.</span>`)}
+ const x=`${nm.join(", ")} nhận bạc mua chuộc, bị đuổi khỏi cung`;if(t!==S)log(`${NMc(t)} mua chuộc người hầu: ${x}.`);return ["Người hầu bị mua",x]}
+function chExtras(t,c){const R=[];try{const a=c==="uh"?chUhPay(t):c==="mc"?chMcFire(t):null;if(a)R.push(a)}catch(e){console.error("chExtras",e)}return R}
+(function(){if(typeof punRows!=="function")return;const r0=punRows;punRows=function(o){const R=r0.apply(this,arguments);if(CHPX&&CHPX.length)for(const x of CHPX)R.push([x[0],punEsc(x[1])]);return R}})();
+(function(){const c0=chPunish;chPunish=function(t,c,why,by){if(!t||(c!=="uh"&&c!=="mc"))return c0.apply(this,arguments);const px=CHPX;CHPX=chExtras(t,c);try{return c0.apply(this,arguments)}finally{CHPX=px}}})();
+(function(){const t0=chPunTxt;chPunTxt=function(t,c){const r=t0.apply(this,arguments);return c==="uh"?`${r}, bồi bạc cho người bị hại`:c==="mc"?`${r}, người hầu bị mua bị đuổi khỏi cung`:r}})();
+/* charge-followups (c): «Trình Hoàng hậu» weighs the pieces of the proven charge (BAL.charge.trinh), never the total (jaudit card, j78) */
+function chTrinhO(a,t,q){const B=chB().trinh,c=chReady(a,t);return B.base+aff(q,a)/B.affD+(c?chHave(a,t,c):0)*B.per}
 /* the accusation act itself (j8 «Tố giác»): the full charge only; its pieces are spent, the others kept */
 (function(){const A=ACT.accuse;if(!A)return;const f0=A.f;
  Object.defineProperty(A,"x",{configurable:true,get(){return `cần đủ chứng cứ của một tội (mỗi tội một số chứng riêng: ${chB().order.slice().reverse().map(c=>`${chName(c)} ${chC(c).need}`).join(", ")}; Hoàng hậu thêm ${chB().queenPlus} và phẩm Tần trở lên)`}});

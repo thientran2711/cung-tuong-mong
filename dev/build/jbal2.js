@@ -2287,4 +2287,11 @@ BAL.charge={C:{
      deeds = the «thai không khớp sổ» row of Tư thông (table A, H), bribing Kính sự phòng = Mua chuộc */
   mlpoison:"mh",mlframe:"vo",mlhframe:"vo",mlbeat:"uh",ls:"tt",cyfake:"tt",cylie:"tt",cyforge:"mc"},
  queenPlus:1,tcStep:20,tcCap:2,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:4/* Phi (RANKS[4]) and up = Cung chủ, owner canon «Phi+ −1»; rv: was 5 = Quý phi */,guard:-1,missStep:1,missCap:6,
- fine:20,danh:-3,duc:-3,warnMat:2,accW:15/* Tố giác odds per piece of the proven charge (the j8 accuse weight per piece; rv: was typed in jcharge) */};
+ fine:20,danh:-3,duc:-3,warnMat:2,accW:15/* Tố giác odds per piece of the proven charge (the j8 accuse weight per piece; rv: was typed in jcharge) */,
+ /* charge-followups (b), D4 table A (reports/punish-reason.md): beside the charge's one punishment — Ức hiếp quấy phá: bồi uhPay lượng bạc to each person
+    she harmed (victims of her uh deeds, at most «need» people); Mua chuộc người hầu: the servants she bought (spyFor = her) are dismissed from the palace
+    (jagstaff asOut "expel"), those named by her mc deeds first, at most mcFire. Same for every consort (law 1). */
+ uhPay:20,mcFire:2,
+ /* charge-followups (c): «Trình Hoàng hậu» odds = base + the Hoàng hậu's thiện cảm to the one presenting / affD + per × the pieces of the PROVEN charge
+    (jaudit card + j78 legacy; was 35 + aff/2 + 8 × the TOTAL pieces, typed) — like Tố giác (accW per piece of the proven charge) */
+ trinh:{base:35,affD:2,per:8}};
