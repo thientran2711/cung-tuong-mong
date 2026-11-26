@@ -822,6 +822,44 @@
     "review/rerun-E-S1-E-S1-R1-lazy-3-799284780-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-scholar-2-2284186077",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "scholar",
+   "botHarness": "sens",
+   "kiep": 2,
+   "seed": 2284186077,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "496b6b66 → 8dc395ba → 4d7a22c6 → d2e03d80"
+   },
+   "live": "Build 13f84c70f2a3 → c039fbea2394",
+   "end": "Lãnh cung",
+   "type": "end",
+   "fate": "Phát điên trong lãnh cung",
+   "death": false,
+   "age": 27,
+   "year": 10,
+   "rank": 0,
+   "buoi": 1327,
+   "steps": 38322,
+   "taps": 992,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "game-imposed ending (Phát điên trong lãnh cung)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-scholar-2-2284186077-moments.md",
+    "review/rerun-E-S1-E-S1-R1-scholar-2-2284186077-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
