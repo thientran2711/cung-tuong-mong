@@ -84,3 +84,31 @@ LIVE = origin/main 6b5d3d05 (file://).
 - OPEN, not started: review 08a4ff8b..5c62c2b9 (fixer #9: board play via KG82.peek() + real touch, persona hit rates; quick/auto-result family never picked except jexam drag rounds; unstick never taps ✕/«Quay lại» on a board not showing result; mgBackWhy log; RT_TEST_BOARD). Asked by F #20 session_01UV1SzgwtMTK26QKqkzEVsp 09:41Z. Also queued: review/qc-noise-hygiene when READY.
 - How I tested (reuse): LIVE = repo root index.html of origin/main loaded by file:// (local http server was refused by the auto-mode classifier). Sparse worktree /home/user/wt/rr8 (review branch, dev/test + dev/measure/renderer-mem-lib.js). Old harness for controls: `git archive <sha> dev/test | tar -x -C <dir>` and run from there. Self-tests: RT_TEST_EXAM=1 (on LIVE 6b5d3d05 seeds 31/12 lose the selection at b1 with EXAM=2/3 → use 1), RT_TEST_SKIP=1, RT_TEST_Q72=2:ns_doi, RT_TEST_KID=2; always RT_NOSHOT=1, slice=4–10; rt-optcard-spots.js ONLY=… MAXP=6 for card probe points; synthetic SCAN probes = extract `const SCAN = () => {…\n};` from robot-rt.js and evaluate on a setContent page.
 - For 5c62c2b9 check specially: KG82.peek() must be read-only (grep the game for peek; no state write), every tap still page.mouse/touchscreen; the quick/auto list must not open an exit road; regression RT_TEST_EXAM=1 Fold+iPad must stay done:true [5,5]; plain slices 0 dead.
+
+# REVIEW robot-realtap 08a4ff8b..5c62c2b9 (board play / no quick option / unstick no-back / mgBackWhy / RT_TEST_BOARD) — BIG REVIEWER #9 (session_01UV1SzhG9iG47sywkoL5qVr) for F #20, 26/11 ~10:35Z
+PRIORITY #1 CHECK: OD robot-realtap reviews | main none (harness lives on review/*) | review/robot-realtap 5c62c2b9 (fixer #9, on 08a4ff8b PASS) | claims BIG #8 → #9.
+## VERDICT: PASS robot-realtap 5c62c2b9 (test files only: dev/test/robot-rt.js + PROGRESS)
+LIVE tested: 6b5d3d05 (the fixer's LIVE) and 3af7896e (current origin/main, LIVE 6b + mghelp-dress-r6), both by file://.
+### Code checks
+- Real taps only: board play taps via p.mouse.click (iPad) / p.touchscreen.tap (Fold), or bareTap when the peek point is not bare; 0 `.click()` in robot-rt.js; robot-lint OK.
+- KG82.peek() read-only: every peek in j82 (lines 293/342/376/399/428), j91 (67/119/168/216/283/317) and j92 (462) is a pure lookup (find / compute a client point); no state write. Peeks returning {drag}/{sel}/{hold-only} have no finite x → the robot waits 1.5 s, then after 6 s idle falls back to the old area taps (as claimed).
+- (b) quick family: removed only when another option stays (nq.length && nq.length < b.length); the jexam DRAG exam rule runs BEFORE it and now needs sc.mgExam → quick kept for exam drag rounds only. Labels checked in the game: «Thôi, không chơi» jsmg, «Giao cho người làm» jsgame, «Để trời định» j5/j79/j82, «Kết nhanh» jveil, «Học nhanh» j83, «Để tài nghệ quyết định» j82. None is an exit road.
+- (c) unstick: lvl < 3 on /^#kg\d/ not on «result» → logged «mini-game board: no back», returns; lvl 3 reload still allowed, stall/stuck rules untouched.
+- (d) mgBackWhy logged on every board back (capped 40). (e) RT_TEST_BOARD is stamped in R.harness.testHooks (TEST_HOOKS regex RT_TEST_*) → robot-audit marks such a life INVALID (F1 kept).
+- mgLive(): phase play/intro/tut is never «result» even with a stale kitOvBtn — closes the residual I noted on 08a4ff8b (stale kitOvBtn mid-round).
+### Runs (RT_NOSHOT=1)
+| run | LIVE | result |
+|---|---|---|
+| RT_TEST_BOARD=vu Fold s31 | 6b5d3d05 | done, raw 9, not skipped, Sẵn sàng 1, peek taps 24 / miss 7, back 1 = result; life Ban hoa b1 (game) |
+| RT_TEST_BOARD=vu iPad s12 | 6b5d3d05 | done, raw 10, not skipped, peek 24 / miss 8, back 1 = result |
+| RT_TEST_BOARD=vu Fold s7 | 3af7896e | done, raw 10, peek 29 / miss 9, back = result |
+| RT_TEST_BOARD=cam iPad s8 | 3af7896e | done, raw 2 (Đàn timed: known limit), not skipped, backs = result ×2 |
+| RT_TEST_EXAM=1 Fold s31 / iPad s12 | 6b5d3d05 | done:true raws [5,5] both (dragSkipExam 2) — no regression of 08a4ff8b |
+| plain Fold cautious s909 slice 8 / iPad bold s4242 slice 8 | 6b5d3d05 | buổi 8 / 8, 89 / 94 taps, 0 dead / 0 stuck / 0 bugs |
+| plain iPad cautious s99 slice 8 | 3af7896e | buổi 8, 0 dead / 0 stuck / 0 bugs |
+Every mgBackWhy entry in every run = ph «result», buttons [«Quay lại»]. 0 DEAD, 0 jsClicks everywhere.
+### Notes for the next harness commit (not blocking)
+- N1: the board-play bare check uses `button,[role=button],a,input,select,textarea`, narrower than GUARD_SEL (misses [data-tab], .kcard[data-i], #rtoast, .kkem, .kalog), and a bare hit taps WITHOUT the capture guard. Window = one CDP round trip, board is a canvas → rare, small (worst case a toast closes). Fix: reuse GUARD_SEL in the peek check and set window.__rtBare in the same page call.
+- N2: a board showing ONLY a quick option + ✕/«Quay lại» (no «Sẵn sàng»): quick is removed (✕ counts as «another option»), then the back is filtered → null until the 6-min give-up, which then backs out (0/10) instead of taking the quick. Not seen in any run (every kg82 rules board has «Sẵn sàng»/«Bắt đầu»). Fix: count only non-back options in nq.
+- N3: board moves are traced only as «BOARD n moves» and not counted in areaTaps / taps; fine for audit (real taps), but tap totals undercount boards.
+- Limits as the fixer states: Đàn timed on Fold ~0, «Dâng hương» has no peek.
