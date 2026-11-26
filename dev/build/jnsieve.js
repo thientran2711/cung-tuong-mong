@@ -129,7 +129,10 @@ const ACT_SAY={frame:"vu oan @",plant:"cài đồ vào rương của @",block:"r
  expose:"bóc chuyện tư tình của @",pgift:"tặng @ quà ăn có độc",rumor:"tung tin đồn về @",spy:"dò la @",spyk:"dò la @",trip:"ngáng chân @",uyhiep:"uy hiếp @ đòi bạc",
  banphe:"bán chuyện của @ cho phe khác",tat:"tát @",phatquy:"phạt @ quỳ",rash:"bỏ phấn lạ hại @",batnat:"ép @ nộp của",thaopet:"hại thú nuôi của @",nuoc:"hắt nước vào @",
  tea:"hắt trà vào @",ink:"quạt mực vào @",ally:"kết giao với @",gift:"tặng quà @",steal:"tranh sủng với @",road:"chặn ngự giá trước cung @",tieuhuy:"trả chứng cứ cho @ để lấy lòng",
- bribel:"sai cung nữ lấy lòng @",blockf:"nhờ người quen rút thẻ bài của @",petcare:"giúp @ chăm thú nuôi",pmplay:"cùng @ chơi",pmduel:"thách đấu @"};
+ bribel:"sai cung nữ lấy lòng @",blockf:"nhờ người quen rút thẻ bài của @",petcare:"giúp @ chăm thú nuôi",pmplay:"cùng @ chơi",pmduel:"thách đấu @",
+ /* RV-NEWS-SIEVE-2: the acts only the cause ledger sees (SOC deeds j28, giveTo gifts) */
+ help:"giúp đỡ @",visit:"sang thăm @",warn:"nhắc @ đề phòng",mediate:"giảng hòa cho @",provoke:"buông lời khiêu khích @",humiliate:"hạ nhục @",drop:"lạnh nhạt với @",
+ apologise:"tạ lỗi với @",test:"thử lòng @",feign:"niềm nở với @",muachuoc:"mua chuộc @",doa:"dọa @"};
 /* «A hủy dung B, vì ghen nàng được sủng.» / «A định hủy dung B, vì …, nhưng không thành.» (reason = jmem causeText, the cause ledger) */
 function recSentence(rec,a,t,k){const fail=rec&&rec.r==="fail";const pat=ACT_SAY[k]||`${String(ACT[k]&&ACT[k].n||k).toLowerCase()} với @`;
  let why="";try{why=causeText(rec)||""}catch(e){}if(why&&t&&t.name)why=why.split(t.name).join("nàng");
@@ -146,10 +149,22 @@ if(typeof runAct==="function"){const ra0=runAct;runAct=function(a,t,k){const r=r
     /* the result without the act told again: «A định hủy dung B nhưng không thành, bị lộ dấu vết.» → «bị lộ dấu vết.» */
     const res=res0.split(/(?<=[.!?…])\s+/).map(x=>{if(!(x.includes(a.name)&&x.includes(t.name)))return x;const m=x.match(/nhưng không thành,\s*(.+)$/);return m?m[1]:(/^\S+( \S+)* (định|bày mưu)/.test(x)&&/không thành/.test(x)?"":x)}).filter(Boolean).join(" ").trim();
     const big=bigK(k);
-    const R=recPush({t:`${line}${sent?` Người được sai: ${sent}.`:""}${res?` Kết quả: ${res[0].toUpperCase()+res.slice(1)}`:""}`,ids:[a.id,t.id],big,k});
-    if(R&&big){NSV.stat.big=(NSV.stat.big||0)+1;const tb=maskNames(line,[a.id,t.id]);R.tb=tb;
+    const T2=`${line}${sent?` Người được sai: ${sent}.`:""}${res?` Kết quả: ${res[0].toUpperCase()+res.slice(1)}`:""}`;const I2=[a.id,t.id];try{for(const v of rivals||[])if(v&&v.name&&v.id!=null&&!I2.includes(v.id)&&T2.includes(v.name))I2.push(v.id)}catch(e){}/* RV: a third consort named in the cause / result is masked too (law 6, known names) */
+    const R=recPush({t:T2,ids:I2,big,k});
+    if(R&&big){NSV.stat.big=(NSV.stat.big||0)+1;const tb=maskNames(line,I2);R.tb=tb;
       try{kitKnow({key:"hr:"+R.w+":"+a.id+":"+t.id+":"+k,pri:2,text:tb})}catch(e){}NSV.hr=NSV.hr||[];if(NSV.hr.length<400)NSV.hr.push({w:R.w,k,a:a.id,t:t.id,tb})}
   }finally{NSV.inRec=0}}}catch(e){console.error("nsRec act",e)}return r}}
+/* LAW 11 (RV-NEWS-SIEVE-2): every NPC <-> NPC act the cause ledger (jmem causeAdd) holds reaches S.hrec, whatever path wrote it (runAct above;
+   SOC deeds, giveTo gifts, a silent dò la that told nothing): after each buổi the new ledger records between two consorts not yet written this tuần
+   are written with the ledger's own cause (causeText). S.hrecQ = the last ledger number read (an old save starts from now). */
+function recLedger(){try{if(!recOn()||typeof causeQuery!=="function")return;const ids=new Map((rivals||[]).filter(v=>v&&v!==S&&v.id!=null&&v.name).map(v=>[String(v.id),v]));
+  const L=causeQuery({since:wk()-1});let q0=S.hrecQ;const qm=L.reduce((m,r)=>Math.max(m,r.q||0),q0||0);S.hrecQ=qm;if(q0==null)return;const H=recList();
+  for(const r of L.slice().reverse()){if(!(r.q>q0))continue;const a=ids.get(String(r.by)),t=ids.get(String(r.to));if(!a||!t||a===t)continue;
+   if(H.some(h=>h.w===r.w&&(h.k===r.a||r.a==="spy"&&h.k==="spyk"/* SOC dò la runs runAct spyk */)&&(h.ids||[])[0]===a.id&&(h.ids||[])[1]===t.id))continue;/* runAct wrote it already */
+   const line=recSentence(r,a,t,r.a).replace(/\.$/,"")+(r.a==="gift"&&r.x?`: ${r.x}.`:".");const I2=[a.id,t.id];for(const v of ids.values())if(!I2.includes(v.id)&&line.includes(v.name))I2.push(v.id);
+   recPush({t:line,ids:I2,k:r.a})}}catch(e){console.error("nsLedger",e)}}
+for(const f of ["nextBuoi"]){const g0=window[f];if(typeof g0!=="function")continue;const w=function(){const r=g0.apply(this,arguments);recLedger();return r};window[f]=w;try{nextBuoi=w}catch(e){}}
+NSV.recLedger=recLedger;
 /* the lines the sieve takes out of the feed (newsAdd NPC deeds, kitKnow, the morning card, gossip reports) → the record */
 function recDrop(t,ids){if(!recOn())return;const I=new Set((ids||[]).filter(x=>x!=null));try{for(const v of rivals||[])if(v&&v.name&&String(t).includes(v.name))I.add(v.id)}catch(e){}recPush({t,ids:[...I]})}
 NSV.recDrop=recDrop;
