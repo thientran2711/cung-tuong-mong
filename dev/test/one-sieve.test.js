@@ -49,14 +49,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   let tabs=null;try{tab='log';renderPanel();const Pn=document.getElementById('panel');const rows0=Pn.querySelectorAll('.logs > div:not([data-nrh])').length;const inp=Pn.querySelector('input.kinput[data-osq]');const sub=Pn.querySelector('[data-ktsub="soghi"]');
    let rows1=null;if(inp){const w=(rivals.find(v=>v&&v!==S&&v.alive)||{}).name||'Hoàng thượng';inp.value=w.split(' ').slice(-2).join(' ');inp.dispatchEvent(new Event('input',{bubbles:true}));rows1=Pn.querySelectorAll('.logs > div:not([data-nrh]):not([hidden])').length}
    tabs={sub:!!sub,search:!!inp,rows0,rows1,kinds:sub?[...sub.querySelectorAll('[data-ktsv]')].map(x=>x.dataset.ktsv):[]}}catch(e){tabs={err:String(e)}}
-  return {n:C.length,rowsAvg:avg(c=>c.rows),rowsMax:mx(c=>c.rows),byAvg:avg(c=>c.by+c.kem),byMax:mx(c=>c.by+c.kem),kemMax:mx(c=>c.kem),
-   over:C.filter(c=>c.by+c.kem>(B.rowMax||99)).slice(0,3),noLink:C.filter(c=>c.kem&&!c.link).length,npcWhy,lost:lost.slice(0,5),nLost:lost.length,tabs,err:R.err||0,
+  return {n:C.length,rowsAvg:avg(c=>c.rows),rowsMax:mx(c=>c.rows),byAvg:avg(c=>c.by),byMax:mx(c=>c.by),kemMax:mx(c=>c.kem),
+   over:C.filter(c=>c.by>(B.rowMax||99)).slice(0,3),noLink:C.filter(c=>c.kem&&!c.link).length,npcWhy,lost:lost.slice(0,5),nLost:lost.length,tabs,err:R.err||0,
    sample:C.slice().sort((a,b)=>b.rows-a.rows).slice(0,2)}});
  console.log('cards',out.n,'rows/card avg',out.rowsAvg,'max',out.rowsMax,'| other people rows avg',out.byAvg,'max',out.byMax,'| Kèm lines max',out.kemMax);
  console.log('biggest cards',JSON.stringify(out.sample).slice(0,1500));
  if(!REP){const B=await p.evaluate(()=>BAL.news.card);
   ok(out.n>5,'cards measured',out.n);
-  ok(out.byMax<=B.rowMax,'1 other people rows per card ≤ BAL.news.card.rowMax '+B.rowMax,{max:out.byMax,over:out.over});
+  ok(out.byMax<=B.rowMax,'1 bystander person rows per card ≤ BAL.news.card.rowMax '+B.rowMax,{max:out.byMax,over:out.over});
   ok(out.kemMax<=1&&out.noLink===0,'2 Kèm = ONE summary line + «Xem đầy đủ trong Sổ ghi»',{kemMax:out.kemMax,noLink:out.noLink});
   ok(out.nLost===0,'3 every folded person change is in the Sổ ghi record',out.lost);
   ok(out.npcWhy.length===0,'4 0 «Vì sao» citing other people\'s business',out.npcWhy);

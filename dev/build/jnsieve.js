@@ -184,6 +184,13 @@ function nsLogBar(){const P=document.getElementById("panel");if(!P)return;const 
  L.before(box);const inp=box.querySelector("#osq");if(inp)inp.dataset.osq=1;nsLogApply(P)}
 document.addEventListener("input",e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.osq)return;NSV.q=t.value;const P=document.getElementById("panel");if(P)nsLogApply(P)},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-osp]");if(!b||!b.closest("[data-osprow]"))return;e.stopPropagation();NSV.p=b.dataset.osp===NSV.p?"":b.dataset.osp;try{renderPanel()}catch(x){}},true);
+
+/* ---------- 9. «ĐÃ BIẾT VỀ X» — Hậu cung view (jhc knownCol / relPair) and every person pop-up (kitKnownList, the «Đã biết: N tin» chip): ONE list
+   (jhc knownList); the facts that touch HER (nsSieve: «ngươi», evidence, the night, rank, life …) come first, the rest after in their order.
+   Nothing is dropped (the list is what she knows about that person). ---------- */
+if(typeof knownList==="function"){const kl0=knownList;const kl=function(v){const L=kl0.apply(this,arguments);try{if(!on()||!Array.isArray(L)||L.length<2)return L;
+  const her=[],rest=[];for(const x of L)(nsHerLine(x&&x.f)?her:rest).push(x);return her.concat(rest)}catch(e){return L}};
+ try{knownList=kl}catch(e){}window.kitKnownList=kl}
 /* ---------- 6. NẾT OPEN for servants and children too (MAIN decision OD 26/11 ~06:47Z under the standing rule ~05:55Z; law 6b, nothing hidden):
    every servant's nết (s.kn, j29 strShow / jhouse «Xem người» — that paid look is no longer offered, nothing left to look) and every child's
    learning nết (k.dilK, j53) are known from the start. ---------- */
@@ -220,17 +227,19 @@ function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)r
  rest.sort((a,b)=>Math.abs(b[5]||0)-Math.abs(a[5]||0));for(const x of rest.splice(B.rowMax))fold.push(x);keep.push(...rest);
  const Kk=(K||[]).filter(x=>Math.round(x.d));const kemOne=!fold.length&&Kk.length<=B.kemMax&&Kk.every(x=>nsSieve({v:x.v,d:x.d,why,tgt}));/* one Kèm person she should see and nothing else folded: her own kit row; else everything in the ONE summary */
  const items=[];/* [groupKey, raw name, words] */
- for(const x of fold){const nm=x[4].name||"";if(x[1].length)items.push(["g",x[4],x[1].join(", ")]);if(x[2].length)items.push(["b",x[4],x[2].join(", ")])}
- if(!kemOne)for(const x of Kk)items.push([x.k+(x.d>0?"+":"-"),x.v,`${x.k} ${typeof kaNT==="function"?kaNT(Math.round(x.d),x.t):kaN(Math.round(x.d))}`]);
+ for(const x of fold){const nm=x[4].name||"";if(x[1].length)items.push(["g",x[4],x[1].join(", "),x[5]]);if(x[2].length)items.push(["b",x[4],x[2].join(", "),x[5]])}
+ if(!kemOne)for(const x of Kk)items.push([x.k+(x.d>0?"+":"-"),x.v,`${x.k} ${typeof kaNT==="function"?kaNT(Math.round(x.d),x.t):kaN(Math.round(x.d))}`,x.d]);
  if(!items.length)return {keep,sum:"",fold:[],kemOne};
- const G=new Map();for(const [g,v] of items){if(!G.has(g))G.set(g,new Set());G.get(g).add(v)}
- const order=["g","b","ghen+","oán+","ghen-","oán-"];const parts=order.filter(g=>G.has(g)).map(g=>`${G.get(g).size} người ${NS_SUMW[g]}`);
  const nmOf=v=>{try{return typeof kaNamed==="function"&&kaNamed(v)?kaWho(v):String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m")}catch(e){return v.name}};
+ const G=new Map();for(const [g,v] of items){if(!G.has(g))G.set(g,new Set());G.get(g).add(v)}
+ const order=["g","b","ghen+","oán+","ghen-","oán-"];const big=(B.big||99),bigN=new Map();for(const it of items)if(Math.abs(it[3]||0)>=big){if(!bigN.has(it[0]))bigN.set(it[0],[]);bigN.get(it[0]).push(it)}
+ const parts=order.filter(g=>G.has(g)).map(g=>{const L=(bigN.get(g)||[]).sort((x,y)=>Math.abs(y[3])-Math.abs(x[3])).slice(0,2);/* a big change names its person in the line itself */
+  return `${G.get(g).size} người ${NS_SUMW[g]}${L.length?` (${L.map(it=>`${nmOf(it[1])} ${kaN(Math.round(it[3]))}`).join(", ")})`:""}`});
  const byV=new Map();for(const [,v,w] of items){if(!byV.has(v))byV.set(v,[]);byV.get(v).push(w)}
  const names=[...byV].map(([v,W])=>`${nmOf(v)}: ${W.join(", ")}`);
  const sum=`<span class="kitem kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">Trong cung: ${parts.join(", ")}</span><span class="kkeml">${names.map(n=>`<span>${n}</span>`).join("<br>")}</span></span>`;
  /* the Sổ ghi keeps every name and number (maskNames at show time: a stranger stays «một vị …») */
- try{recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name}: ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id),k:"kem"})}catch(e){}
+ try{const r0=recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name}: ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id)});if(r0)r0.kem=1/* a card's folded changes (not an NPC act: no k) */}catch(e){}
  NSV.stat.cardFold=(NSV.stat.cardFold||0)+byV.size;
  return {keep,sum,fold:[...byV.keys()].map(v=>v.name),kemOne}}catch(e){console.error("nsCard",e);return null}}
 /* «VÌ SAO» (kitWhy, j63 kaWhyCl): the reasons of a card come from the span's log clauses; a clause that is other people's business only never
