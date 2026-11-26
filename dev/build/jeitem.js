@@ -26,7 +26,7 @@ Object.assign(BAL,{eit:{
  reG:{base:50,rk:5,sung:.2,tip:25,cause:15},   /* owner 16/11 s9: re-issue after a RANDOM 1–3 weeks weighted by how Nội vụ phủ regards her (eitRegard 0..100) */
  cool:{bangda:[5,1],bangvun:[2,0]},  /* Sức from one block of ice: [in mùa Hạ, other seasons] (Băng đá, Băng vụn) */
  kcSac:1,                             /* Sắc of a worn girlhood jewel (Ngọc bội khuê các, Vòng bạc hoa mai) */
- re:{waitDanh:[1,1,2,2,3,3,4,4],/* DRESS-FIX (owner OD 26/11 ~18:50Z (6)): the maid road costs the WAIT (jptime «clothes», 2 khắc) + Danh by rank (she stands in her trung y, people stare) — the equal of the silver tip */
+ re:{waitDanh:[1,1,1,2,2,3,3,4],/* DRESS-FIX (owner OD 26/11 ~18:50Z (6)): the maid road costs the WAIT (jptime «clothes», 2 khắc) + Danh by rank (she stands in her trung y, people stare) — the equal of the silver tip */
   tip:[6,8,10,12,15,18,22,26],base:50,rk:5,sungDiv:5,suc:6,altPen:10,maidAdj:5,maidFail:3,famSuc:2,famWk:1,famOk:75,famPoor:40,famCut:30}}});
 /* ---------- items: ice (art img/item-bangda.webp, img/item-bangvun.webp, gpt-2-6, dev/art/ITEM_ART.md §6) + the girlhood pieces of jkc ---------- */
 (function(){const N={

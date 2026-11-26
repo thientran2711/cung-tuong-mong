@@ -129,7 +129,7 @@ function tyWeek(){const T=BAL.ty;let ev="";try{
    that can be found / recognised, law 6a/6c), the target walks in trung y (tyLost, Danh). Two roads of equal value (law 2): Bạc for the hired man, or her
    trusted maid (loyalty cost, harder). Caught (j8 caught): the target holds true evidence. Numbers BAL.ty.act. */
 function tyActOk(a,t){try{if(!t||a===t||t.out||t.alive===false)return false;const e=wdOf(t).y,it=e&&wdItem(e);return !!(it&&!it.nt&&!tyOn(t))}catch(x){return false}}
-function tyActO(a,t,self){return oddsCl(Math.round(odA(a,40+(a.tamco||0)/4+eyes(a)*3-((t.maid&&t.maid.loyal)||50)/5))-(self?(BAL.selfMinus):0))}
+function tyActO(a,t,self){return loStealO(a,t,self)}/* one odds rule for taking a piece from someone (jlost laydo / laydol) */
 function tyActDo(a,t,self){const T=BAL.ty;a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,T.act.duc,"thuê người giật y phục");else ap(a,{duc:T.act.duc});
  if(self){const m=typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid;if(m)m.loyal=cl((m.loyal||0)-(BAL.loyalCost),0,100)}
  const cg=caught(a,t,false,"thuê người giật y phục của "+NM(t));if(cg)return cg;
