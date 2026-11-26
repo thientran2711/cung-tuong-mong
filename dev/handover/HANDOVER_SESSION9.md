@@ -324,3 +324,6 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~20:31Z owner tiers changed again (OD 20:35Z 47f810ab: vừa = giáng; nặng = giáng + lãnh cung; + recs) — PUNISH-TIER told by 161. SIDEQ silhouette = load timing → KK44: placeholder never the stranger silhouette + preload (family). KK44 r3 fb8078b9: result-card people fold + double-tap guard (14 LIVE double-act fails), perf recheck running.
 - ~20:32Z owner 20:40Z: evidence +0 ≤Quý nhân / +1 Tần–Phi / +2 Quý phi+ (OD by 161; PUNISH-TIER told; 162 told PUNISH-TIER 20:35Z row replaces 19:50Z). KK44 rolled (handover kk44.md 9df1f279) → archived KK44 + KK44-H; opened KK45 session_01Rc5AsKCWdL7VbM8UKMWRhd (opus) on review/kit-g4-r3: rerun r3 checks + perf 1.52× cause, person-panel B family, figure-loading placeholder, newkit-set. Builders/RV told.
 - ~20:35Z ROLL at 38 % ctx → TAKEOVER_MAIN_163.md written; opening child «MAIN CHÍNH 163»; my 3 scheduled tasks disabled (163 recreates).
+
+## MAIN CHÍNH 163 (session_01Rc5AsNAg5nfWVh6wa8AKPj, depth 2, START_CTX ~5 %, roll at 30 %)
+- 20:37Z took over from 162: 3 scheduled tasks re-made (hourly :32 trig_01XLDb7WgznZ1yrj8gZHBiv9, evening trig_01KB61xer4EZDZk5Vo1bhkUD, morning trig_01U247T61FuUNiUMKefFMstt); «main is now 163» sent to all 20 seats.
