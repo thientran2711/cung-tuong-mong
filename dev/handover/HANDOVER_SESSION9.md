@@ -145,3 +145,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~08:12Z LOOK PASS map-zones r7 abc1c795 (tiled Fold+iPad videos) → BIG rv session_01V1ZZH1WzF9VpNYw1Q3uuhA; lục cung zones stay (OD row 08:10Z). OB-PHU4 at rollover → fixer only if FAIL. ACT-MERGE archived (45cc9930 r1: ≈165→≈80, ĐỂ RIÊNG kept).
 - ~08:16Z OWNER (154 chat 08:15Z): plan showed numbers only → wants NAMES old → new as a proper PDF; 154 sent a 6-page Vietnamese PDF. LESSON (apply always): every report to sếp lists the NAMES (old → new / what changes), never counts only; J1–J5 reports must carry the name table too.
 - ~08:20Z sếp asked for a PDF with NAMES (old → new buttons): sent dev/handover/reports/act-merge/Bao-cao-gop-nut-26-11.pdf (Vietnamese, 6 pages).
+- ~08:20Z OWNER (154 chat 08:25Z) giảm oán / nguy hiểm: recs (1)(2) → OB-OAN session_01V1ZZH3GxCcQzWNoKy1ARxN (opus, review/ob-oan); rec (3) cool-down + (4) pace → ORDER D.

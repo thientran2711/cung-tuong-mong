@@ -458,3 +458,4 @@ ACT-MERGE J5 roads | review/act-merge-J5 | session_01V1ZZH4ik1qjdX1WApZB5aF | RU
 ACT-MERGE plan worker | review/act-merge 45cc9930 | session_01V1ZZH4kA6w5uudtydsgvjc | DONE 08:01Z, archived | 26/11 (MAIN 155)
 KIT bac-progress (owner UI bug 08:05Z) | review/kit-bac-progress | session_01V1ZZH1KkKyKvFCTKrJjfDi (KK39) | RUNNING | 26/11 08:12Z (MAIN 155)
 BIG RV map-zones r7 abc1c795 | reports/map-zones.md ## REVIEW | session_01V1ZZH1WzF9VpNYw1Q3uuhA | RUNNING | 26/11 08:12Z (MAIN 155)
+OB-OAN giảm oán/nguy hiểm panel + «Cách giảm» rows (owner 08:25Z) | review/ob-oan | session_01V1ZZH3GxCcQzWNoKy1ARxN | RUNNING | 26/11 08:20Z (MAIN 155)
