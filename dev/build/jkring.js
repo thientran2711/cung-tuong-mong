@@ -106,7 +106,8 @@ function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="k
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
 function geo(R){const m=kv(),K=KIT_RING,L=R.L,w=L.g.w,H=L.g.H;return {w,H,cx:w/2,floor:H*K.floor,Rx:w*K.rx[m],Ry:H*K.ry[m]}}
 function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const q=KRING_MATH.slot(i,R.rot,N),a=q.a,c=q.c,sn=q.s,k=q.k;s.style.visibility=q.hide?"hidden":"";
-  const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
+  const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,y=g.floor-g.Ry*(1-c);let x=g.cx+g.Rx*sn;
+  /* RING-BUILD-6: a wide slot (a group cluster at M / L size) stays between the ‹ › arrows (overlap gate: no figure over a tap target) */if(N>1&&!q.hide){const P=s.__px||(s.__px=paintX(s)),aw=(KIT_RING.arrow[kv()]||44)+12,l=x+(P.l-s.__cx)*sc,r=x+(P.r-s.__cx)*sc;if(r-l<g.w-2*aw){if(l<aw)x+=aw-l;else if(r>g.w-aw)x-=r-(g.w-aw)}}
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
   const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
@@ -169,13 +170,10 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
    the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
    layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
 function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
-/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: the board hangs from the ONE fixed post (kitPick.band, §98.20) → the focused figure / cluster yields LEFT of the board's left edge
-   (the board for THIS slot's plaque count: ≤ 4 one column, 5–7 two columns). need = layer width − band x0 (+ a 12 px gap). */
-function boardN(R,s){try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
- const M=s.__g.members;if(M.length>1)return{n:1+M.length,ng:1};const x=M[0];if(R.o.acts){const A=R.o.acts(x)||[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
- const G=acts(R,x);return{n:Math.max(1,...G.map(g=>g.acts.length)),ng:G.length}}catch(e){return{n:7,ng:1}}}
-function plaqueNeed(R,s){const g=geo(R);try{if(window.kitPick&&kitPick.band){const N=boardN(R,s),b=kitPick.band(N.n,R.L,N.ng);return Math.max(0,g.w-b.x0)+12}}catch(e){console.error("kitRing band",e)}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[kv()])||170)+(K.post||8)+30}
-function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(R,s),P=paintX(s),hh=s.__feet-s.__top;
+/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: every board hangs from the ONE fixed post (kitPick.band, §98.20) → the focused figure / cluster yields LEFT of the WIDEST board
+   (7 plaques = two columns + the ✓ / ✕ room): the figure keeps ONE place for every board of the focus (acts, talk answers, «Nói với …»), never under a later board. */
+function plaqueNeed(R){const g=geo(R);try{if(window.kitPick&&kitPick.band){const b=kitPick.band((window.KIT_PLAQUE||{}).max||7,R.L,1);return Math.max(0,g.w-b.x0)+12}}catch(e){console.error("kitRing band",e)}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[kv()])||170)+(K.post||8)+30}
+function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(R),P=paintX(s),hh=s.__feet-s.__top;
  let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
  const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
  if(over>0){cx-=Math.min(over,Math.max(0,left()-edge));over=right()+need-g.w}

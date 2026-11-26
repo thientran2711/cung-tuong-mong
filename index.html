@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"34c24a38+","t":"2026-11-26T22:09Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"4e319606b011","h":[]};
+window.CTM_BI={"s":"bf290579+","t":"2026-11-26T22:23Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"993a50cc131c","h":[]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -97633,9 +97633,9 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
   c.addEventListener("click",e=>{e.stopPropagation();const k=e.target.closest("button");if(!k||!P.up)return;const u=P.up,aa=(P.G.acts||[]).find(x=>String(x.id)===u.dataset.id);if(k.classList.contains("khok")){if(aa)pick(P,aa,u.querySelector(".kpk-b"))}else drop(P)});P.el.appendChild(c)}
  const s=(typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44,gap=6,w=2*s+gap,G=P.G,x0=parseFloat(n.style.left)||n.__x,wd=n.offsetWidth||G.cw,y0=n.offsetTop;
  /* beside the plaque on its outer side, centred on it (never over its name); no room → on its outer top corner */let x,y;/* KK36 (NHV: the ✓/✕ of a LEFT-column plaque sat over the RIGHT column's name): with two columns each plaque's outer side is the side away from the other column */
- const sd=G.cols===2?(((n.__x!=null?n.__x:x0)>G.x0+G.cw/2)?"r":"l"):G.side;const hh=n.offsetHeight||G.h;
+ const sd=G.fixed?"l":G.cols===2?(((n.__x!=null?n.__x:x0)>G.x0+G.cw/2)?"r":"l"):G.side;/* §98.20 post mode: the post is on the right → ✓ / ✕ open LEFT (the board's reserved room) */const hh=n.offsetHeight||G.h;
  /* candidate spots (outer side first, then the outer / inner top corners, then the bottom corners): the one that covers the least of the OTHER plaques' names wins */
- const C=[[sd==="l"?x0-w-6:x0+wd+6,y0+(hh-s)/2],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0-s*.62],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0-s*.62],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0+hh-s*.38],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0+hh-s*.38]];
+ const C=[[sd==="l"?x0-w-6:x0+wd+6,y0+(hh-s)/2],...(G.fixed&&G.cols===2?[[G.x0-w-6,y0+(hh-s)/2]]:[]),[sd==="l"?x0-w*.35:x0+wd-w*.65,y0-s*.62],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0-s*.62],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0+hh-s*.38],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0+hh-s*.38]];
  const hr=(n.offsetParent||P.el).getBoundingClientRect(),NB=[...P.el.querySelectorAll(".kpk-n")].filter(o=>o!==n).map(o=>{const b=(o.querySelector(".kfoc-t b")||o).getBoundingClientRect(),r=o.getBoundingClientRect();return {b:[b.left-hr.left,b.top-hr.top,b.right-hr.left,b.bottom-hr.top],r:[r.left-hr.left,r.top-hr.top,r.right-hr.left,r.bottom-hr.top]}});
  const ov=(a,q)=>Math.max(0,Math.min(a[2],q[2])-Math.max(a[0],q[0]))*Math.max(0,Math.min(a[3],q[3])-Math.max(a[1],q[1]));let best=null;
  C.forEach(([cx,cy],i)=>{const off=(cx<2||cx+w>G.W-2||cy<2)?1:0;const a=[cx,cy,cx+w,cy+s];const cost=off*1e9+NB.reduce((z,o)=>z+ov(a,o.b)*100+ov(a,o.r),0)+i;if(!best||cost<best.c)best={c:cost,x:cx,y:cy}});x=best.x;y=best.y;x=Math.max(2,Math.min(G.W-w-2,x));y=Math.max(2,y);
@@ -97644,7 +97644,7 @@ function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.re
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
 /* RING-DESIGN-5: a lifted plaque grows with its small line: «Vững · Tốn 1 khắc» stays on ONE line, so the plaque widens (towards the outer side, inside the stage) instead of growing a 4th text line */
 function widen(P,n){const G=P.G,sm=n.querySelector(".kfoc-t small"),t=n.querySelector(".kfoc-t");n.classList.remove("kpk-wrap","kpk-sm");n.style.width=G.cw+"px";n.style.left=n.__x+"px";if(!sm||!t)return;let need=Math.ceil(sm.scrollWidth-t.clientWidth);if(need<=0)return;
- const room=(G.side==="r"?G.W-2-(n.__x+G.cw):n.__x-2)-10/* the lift scales the plaque a little */,add=Math.min(need,Math.max(0,room));if(add>0){n.style.width=(G.cw+add)+"px";if(G.side==="l")n.style.left=(n.__x-add)+"px"}if(need>add){/* still too long for the room: the small line steps down once, then (last resort) wraps */n.classList.add("kpk-sm");need=Math.ceil(sm.scrollWidth-(t.clientWidth+add));if(need>0)n.classList.add("kpk-wrap")}return;n.style.width=(G.cw+add)+"px";if(G.side==="l")n.style.left=(n.__x-add)+"px"}
+ const toL=G.fixed||G.side==="l";/* §98.20 post mode: widen LEFT (away from the post, into the board's reserved room) */const room=(toL?n.__x-(G.fixed?Math.max(2,G.x0-100):2):G.W-2-(n.__x+G.cw))-10/* the lift scales the plaque a little */,add=Math.min(need,Math.max(0,room));if(add>0){n.style.width=(G.cw+add)+"px";if(toL)n.style.left=(n.__x-add)+"px"}if(need>add){/* still too long for the room: the small line steps down once, then (last resort) wraps */n.classList.add("kpk-sm");need=Math.ceil(sm.scrollWidth-(t.clientWidth+add));if(need>0)n.classList.add("kpk-wrap")}return;n.style.width=(G.cw+add)+"px";if(G.side==="l")n.style.left=(n.__x-add)+"px"}
 function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${CSS.escape(String(id))}"]`);if(!n)return;
  if(P.up&&P.up!==n)drop(P);
  P.up=n;n.classList.add("kpk-up");widen(P,n);n.querySelector(".kpk-b").setAttribute("aria-pressed","true");conf(P);
@@ -97655,7 +97655,7 @@ function destroy(P,fromClose){if(!P)return;P.open=false;try{P.__nmo&&P.__nmo.dis
 /* §98.20 kitPick.band(n,host,groups?) → the board box {x0,x1,y0,y1} (host px) for n plaques BEFORE it opens: x0 includes the ✓ / ✕ room of the left column (2 columns), so the
    figure / cluster yields LEFT of x0 (ring focus, kit stage). Same maths as open (postGeo). */
 function band(n,host,ng){host=host||document.getElementById("stage")||document.body;const P={o:{},host,m:kv(),groups:[{k:"",acts:Array.from({length:Math.max(1,n|0)},(_,i)=>({id:i}))}].concat(ng>1?Array.from({length:ng-1},()=>({k:"x",acts:[]})):[])};P.group="";
- const G=postGeo(P,true),cf=G.cols===2?(((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+6):0;return {x0:Math.min(G.x0-4-cf,G.tabsH?G.tabX:1e9),x1:G.px+G.post,y0:G.railY-G.tabsH,y1:G.bot,cols:G.cols,px:G.px}}
+ const G=postGeo(P,true),cf=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+6;/* ✓ / ✕ + the lifted plaque's widening open LEFT of the board (1 or 2 columns) */return {x0:Math.min(G.x0-4-cf,G.tabsH?G.tabX:1e9),x1:G.px+G.post,y0:G.railY-G.tabsH,y1:G.bot,cols:G.cols,px:G.px}}
 window.kitPick={open,band,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
 
 /* ---------- kitDim: ONE dim for the people who are not chosen (owner OD 24/11 ~09:05Z + ~15:30Z) ----------
@@ -100261,7 +100261,8 @@ function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="k
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
 function geo(R){const m=kv(),K=KIT_RING,L=R.L,w=L.g.w,H=L.g.H;return {w,H,cx:w/2,floor:H*K.floor,Rx:w*K.rx[m],Ry:H*K.ry[m]}}
 function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const q=KRING_MATH.slot(i,R.rot,N),a=q.a,c=q.c,sn=q.s,k=q.k;s.style.visibility=q.hide?"hidden":"";
-  const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
+  const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,y=g.floor-g.Ry*(1-c);let x=g.cx+g.Rx*sn;
+  /* RING-BUILD-6: a wide slot (a group cluster at M / L size) stays between the ‹ › arrows (overlap gate: no figure over a tap target) */if(N>1&&!q.hide){const P=s.__px||(s.__px=paintX(s)),aw=(KIT_RING.arrow[kv()]||44)+12,l=x+(P.l-s.__cx)*sc,r=x+(P.r-s.__cx)*sc;if(r-l<g.w-2*aw){if(l<aw)x+=aw-l;else if(r>g.w-aw)x-=r-(g.w-aw)}}
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
   const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
@@ -100324,13 +100325,10 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
    the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
    layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
 function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
-/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: the board hangs from the ONE fixed post (kitPick.band, §98.20) → the focused figure / cluster yields LEFT of the board's left edge
-   (the board for THIS slot's plaque count: ≤ 4 one column, 5–7 two columns). need = layer width − band x0 (+ a 12 px gap). */
-function boardN(R,s){try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
- const M=s.__g.members;if(M.length>1)return{n:1+M.length,ng:1};const x=M[0];if(R.o.acts){const A=R.o.acts(x)||[];return A.length&&A[0].acts?{n:Math.max(...A.map(g=>g.acts.length)),ng:A.length}:{n:A.length,ng:1}}
- const G=acts(R,x);return{n:Math.max(1,...G.map(g=>g.acts.length)),ng:G.length}}catch(e){return{n:7,ng:1}}}
-function plaqueNeed(R,s){const g=geo(R);try{if(window.kitPick&&kitPick.band){const N=boardN(R,s),b=kitPick.band(N.n,R.L,N.ng);return Math.max(0,g.w-b.x0)+12}}catch(e){console.error("kitRing band",e)}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[kv()])||170)+(K.post||8)+30}
-function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(R,s),P=paintX(s),hh=s.__feet-s.__top;
+/* OWNER 26/11 ~21:41Z ONE PLAQUE POST: every board hangs from the ONE fixed post (kitPick.band, §98.20) → the focused figure / cluster yields LEFT of the WIDEST board
+   (7 plaques = two columns + the ✓ / ✕ room): the figure keeps ONE place for every board of the focus (acts, talk answers, «Nói với …»), never under a later board. */
+function plaqueNeed(R){const g=geo(R);try{if(window.kitPick&&kitPick.band){const b=kitPick.band((window.KIT_PLAQUE||{}).max||7,R.L,1);return Math.max(0,g.w-b.x0)+12}}catch(e){console.error("kitRing band",e)}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[kv()])||170)+(K.post||8)+30}
+function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(R),P=paintX(s),hh=s.__feet-s.__top;
  let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
  const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
  if(over>0){cx-=Math.min(over,Math.max(0,left()-edge));over=right()+need-g.w}
@@ -102873,7 +102871,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4e319606b011";window.CTM_BUILD=BUILD;
+const BUILD="993a50cc131c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
