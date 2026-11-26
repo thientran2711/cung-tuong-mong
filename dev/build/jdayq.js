@@ -189,8 +189,11 @@ function dqInstall(){
  /* (b) outermost showModal: nothing painted over the title card / book */
  const sm=showModal;showModal=function(){/* DIALOG-ORDER: the card she opened herself from inside the activity is hers — dqPull never takes it back */
   try{if(dqTapOpen()&&dqMineFront())DQ.mine=Q[0]}catch(e){}/* r2: inside her tap, what she queued shows before the cards that were waiting */
-  try{if(dqUiC()&&Q.length&&Q[0]!==DQ.mine){const a=dqActEl();if(a&&dqInside(a))DQ.mine=Q[0]}}catch(e){}
-  if(dqUiC()&&Q.length&&!DQ.user&&!(DQ.mine&&Q[0]===DQ.mine)&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
+  /* r4 (LC22 HOLD, dress-tap FAIL: the «Xong việc» card her 1st Y phục tap queued was painted over Điểm trang at her NEXT tap): only a card THIS tap
+     queued (not in DQ.preQ, the queue when her finger came down) is hers. A card that was already waiting when she tapped inside her own screen
+     (Điểm trang / Tư trang / a shop / a picker / a mini-game / the person view) keeps waiting until she leaves it — never painted mid-flow. */
+  let old=false;try{if(dqUiC()&&Q.length&&Q[0]!==DQ.mine){const a=dqActEl();if(a&&dqInside(a)){if(DQ.preQ&&DQ.preQ.has(Q[0])&&!DQ.user)old=true;else DQ.mine=Q[0]}}}catch(e){}
+  if(dqUiC()&&Q.length&&!DQ.user&&!(DQ.mine&&Q[0]===DQ.mine)&&!(dqUi()&&dqDawn())&&(old||dqActBlocks())){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}const r=sm.apply(this,arguments);try{if(dqUi()&&!Q.length)setTimeout(dqNextSync,0)}catch(e){}return r};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
