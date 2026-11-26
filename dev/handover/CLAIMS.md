@@ -572,3 +572,4 @@ C3-EVIDART evidence-card picture without «Ban chết» stamp (ORDER MAIN 164 22
 C3-EVIDART | evidence-card art | session_01PEhRbtsrhmYSk7xLeLFWWX (sonnet) | RUNNING | 2026-11-26T23:12Z (Foreman C; id for the line above)
 map-r9 | review/map-r8 | session_01Rc5AsK4uULR8sNutZCqjAt | RUNNING | 2026-11-26T23:13Z (MAIN 165)
 C3-EVIDART | evidence art | session_01PEhRbtsrhmYSk7xLeLFWWX | DONE no defect found, 0 cr (archived) | 2026-11-26T23:25Z (Foreman C)
+kit-stage-r7 | review/kit-stage-r4 | session_01Rc5AsN1USbcwua1X1b7211 | RUNNING | 2026-11-26T23:19Z (MAIN 165)
