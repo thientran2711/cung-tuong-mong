@@ -2,7 +2,10 @@
 PRIORITY #1 CHECK: OD L2605–2606 (26/11 ~14:00Z place close + MAIN rec), L2530/2537 (25/11 place-rules), L1930–1931 (ONE NOTICE SYSTEM) | main f573dc94: jstagehere.js stClose/chip/stayRoll, jplrule.js homeWay/homeGo/plHome, j8 punish + BAL.punW (HOME-WAY), jnotice kitNotice | review/home-way-r6 (landed) | claims: KK44 (kit chip states). Reused: kitNotice chip, homeWay/homeGo, BAL.punW lite, accSneakO. Nothing rebuilt.
 
 Branch **review/place-close** from LIVE f573dc94 → **225b6582** (394b2516 logic · c9b75719 tests · 38524cd4 build · 225b6582 look script + kit request).
-STATUS: **LOGIC READY · LOOK BLOCKED on KK44 K-CHIP-PULSE** (pulse / red / hold / chipGo + hold-chip priority). Not LOOK READY.
+STATUS: **LOOK READY 87582478** (r2, rebased onto review/kit-k44-parts 24bfab11 = KIT §42.2a held chip, MAIN 161 order). Land AFTER kit-k44-parts.
+r2: chip spec = KIT §42.2a {sticky, hold, pulse, tone:"red"} (no chipGo: the kit's chip tap opens «Tin báo» with ONE row «Về phòng · N khắc» = homeGo); one notice per fault (plHome msg dropped where the kit notice says it).
+LOOK stills (looked at, both devices): CDN img/_review/place-close/ — sheet-fold.png, sheet-ipadAir.png (+ fold-/ipadAir- 1-last-khac pulsing chip · 2-grace-red · 3-tap-home (panel row → her room, «Về phòng · 2 khắc» result) · 4-penalty-notice (Danh −8 chip, no dialog, no cấm túc)). The iPad grace still caught the chip mid-blink (fainter); it is the pulse.
+Tests r2: place-close.js Fold+iPad PASS, place-close-scan 0 faults, home-way Fold+iPad PASS, stage-stay PASS, place-rules PASS, kit-notice-hold.js index.html 12 ok / 0 FAIL. quickcheck r2: see MAIN message.
 
 ## What changed (canon overwrite of «roll at the buổi turn», jstagehere.js)
 1. Last allowed khắc = the last khắc from which the walk home still fits in this buổi (left ≤ max(1, travel home)), so the chip's tap can take her home. kitNotice line «Nơi này sắp đóng cửa, mời tiểu chủ rời đi», spec state:"pulse", hold, chipGo + go=homeGo, goLabel=homeWay().label («Về phòng · N khắc»). Panel text names the grace (BAL) + light price + odds word.
@@ -31,7 +34,7 @@ Reproduced on LIVE with a seeded talk past closing at Đức Thọ cung: punishm
 - Updated to the grace rule (canon overwrite): home-way.js PASS, stage-stay.js PASS, place-rules.js PASS (Fold).
 - quickcheck: open ok · old save from LIVE ok · perf median of 3, interleaved, new/live: render 227/246 ms, tab 558/545, buổi 1372/1482, tasks>200 ms 34/29 → PASS. Core gate G4 80-dialog-fixed FAIL (kit-dialog-2 «empty Tốn/Được cell»): known, fails on LIVE too (home-way report L149); not touched by this branch.
 
-## LOOK (not uploaded, nothing on CDN to wipe)
+## LOOK r1 (superseded by r2 above)
 Stills taken (dev/test/place-close-look.js, Fold 755x1000 + iPad 1180x820) and looked at: with today's kit the closing chip fades after 5 s, and on the buổi turn the j77 «Sang buổi trưa, ta vẫn ở …» notice takes the one chip slot, so the red chip never shows and a tap opens that notice. Both are kit work → K-CHIP-PULSE (+ hold-chip priority) filed in dev/kit/KIT_REQUESTS.md, KK44 messaged twice. When KK44 lands: rebase, re-run the look script, upload to img/_review/place-close/, LOOK READY to MAIN.
 
 ## Handover
