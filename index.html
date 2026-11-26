@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d5d15861+","t":"2026-11-26T01:57Z","c":"OB-NGOAICUNG: palace summons / challenges / xung danh never reach her notices at home","b":"de7b7fb3795b","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"1ab21b49+","t":"2026-11-26T03:16Z","c":"OB-NGOAICUNG-2: scan k5 ACTS family (home cards + Giao tình naming a palace person, sending into the palace excepted) — 600 steps x 5 roads…","b":"de7d202c7863","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5143,7 +5143,7 @@ function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h
  const c=(k,label,val,cls,ico)=>{cls=(cls||"")+(["buoi","lot","date"].includes(k)?" keep":"");cur[k]=val;const ch=prev[k]!=null&&typeof val==="number"&&prev[k]!==val?val-prev[k]:0;return `<button class="hc ${cls||""}${ch?" flash":""}" data-hx="${k}">${ico?ic(ico,12):""}${label}${val!=null&&val!==""?` <b>${val}</b>`:""}${ch?`<i class="${ch>0?"g":"r"}">${ch>0?"+":""}${ch}</i>`:""}</button>`};
  const st=[S.preg?c("preg",S.hidden?"Giấu thai":"Mang thai",`th.${S.preg}`,"hot","thai"):"",illOf(S)?c("ill",illName(S),"","hot"):"",S.fakeIll?c("fake","Giả bệnh","","hot"):"",S.out?c("out","Lãnh cung","","hot"):"",S.block?c("block","Thẻ bài bị rút",`${S.block} tuần`,"hot"):"",S.doctor?c("doc","Thái y tâm phúc","","ok"):"",S.confined?c("conf","Cấm túc",`${S.confined} tháng`,"hot"):"",S.shield?c("shield","Hoàng hậu che chở","","ok"):"",S.preg>=6&&!S.fake?c("birth","Hiểm sinh nở",chanceLvl(Math.round(birthRisk(S))),birthRisk(S)>5?"hot":""):""];
  let colz=window.__h2c!=null?window.__h2c:true;try{const v=localStorage.getItem("hclh-h2c");if(v!=null)colz=v==="1"}catch(e){}el.classList.toggle("col",colz);el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${colz?"Mở rộng":"Thu gọn"}">${colz?"▾":"▴"}</button>`+c("date",`T${S.month}/${S.year} · ${TUAN[S.tuan]}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${BAL.time.khac-used} khắc`)+(S.lot?c("lot",`Quẻ ${LV[S.lot.lv]}·${S.lot.dom}`,"",LVB[S.lot.lv]<0||S.lot.dom==="Hung"&&S.lot.lv>=3?"hot":LVB[S.lot.lv]>0?"ok":""):"")+
-  c("sac","Sắc",S.sac,"","sac")+c("tai","Tài",S.tai,"","tai")+c("tamco","Tâm cơ",S.tamco,"","tam-co")+c("duc","Đức",S.duc,S.rank<7&&S.duc<50?"hot":"","duc")+c("mat","Tai mắt",S.mat,"","tai-mat")+c("th","Thái hậu quý ngươi",S.th,"","thai-hau")+(queenP()&&queenP()!==S?c("hh","Hoàng hậu quý ngươi",S.hh,S.hh<-20?"hot":S.hh>20?"ok":"","hoang-hau"):"")+c("maid",S.maid.name.split(" ").pop(),S.maid.loyal,S.maid.loyal<BAL.loy.warn?"hot":"")+c("con","Thai",word(conceiveCh()))+c("dem","Lật thẻ",word(nightCh()))+c("an","Ân tình",S.an||0,(S.an||0)>=50?"ok":"")+c("bl","Bổng lộc sau",`${3-S.tuan} tuần`)+c("aw","Ân thưởng",(S.awards||[]).length)+st.join("");
+  c("sac","Sắc",S.sac,"","sac")+c("tai","Tài",S.tai,"","tai")+c("tamco","Tâm cơ",S.tamco,"","tam-co")+c("duc","Đức",S.duc,S.rank<7&&S.duc<50?"hot":"","duc")+c("mat","Tai mắt",S.mat,"","tai-mat")+c("th","Thái hậu quý ngươi",S.th,"","thai-hau")+(queenP()&&queenP()!==S?c("hh","Hoàng hậu quý ngươi",S.hh,S.hh<-20?"hot":S.hh>20?"ok":"","hoang-hau"):"")+(S.maid?c("maid",S.maid.name.split(" ").pop(),S.maid.loyal,S.maid.loyal<BAL.loy.warn?"hot":""):"")+c("con","Thai",word(conceiveCh()))+c("dem","Lật thẻ",word(nightCh()))+c("an","Ân tình",S.an||0,(S.an||0)>=50?"ok":"")+c("bl","Bổng lộc sau",`${3-S.tuan} tuần`)+c("aw","Ân thưởng",(S.awards||[]).length)+st.join("");
  if(colz){const chg=Object.keys(cur).filter(k=>typeof cur[k]==="number"&&prev[k]!=null&&prev[k]!==cur[k]).map(k=>`${(HXN[k]||k)} ${cur[k]-prev[k]>0?"+":""}${cur[k]-prev[k]}`);if(chg.length)el.insertAdjacentHTML("beforeend",`<span class="h2pulse">${chg.join(" · ")}</span>`)}window.__h2p=cur;
  el.onclick=e=>{if(e.target.closest(".h2t")||(el.classList.contains("col")&&e.target.closest(".hc.keep"))){const nv=el.classList.contains("col")?"0":"1";window.__h2c=nv==="1";try{localStorage.setItem("hclh-h2c",nv)}catch(x){}window.__h2p=cur;renderHud2();return}const b=e.target.closest(".hc");if(!b||Q.length||S.dead)return;const k=b.dataset.hx;
   if(k==="lot"&&S.lot){const can1=!S.relot&&S.bac>=BAL.lot.bac&&can(BAL.lot.k);Q.unshift({t:`Quẻ ${LV[S.lot.lv]} · ${S.lot.dom}`,h:lotHTML(S.lot)+`<p class="past">${HX.lot}</p>`+(can1?`<div class="opts"><button class="opt" id="relot2">Gieo lại<small>${kitParse("tốn: Bạc -"+(BAL.lot.bac)+", "+(BAL.lot.k)+" khắc")}</small></button></div>`:"")});showModal();const r=$("relot2");if(r)r.onclick=()=>{Q.shift();showModal();reLot(false)};return}
@@ -96512,10 +96512,11 @@ const ROAD8={
    "k61:ask":{}},
    /* the card's side note on her road (the consort's «phải sai người» / «làm tại chỗ» lines speak of a consort's means) */
    note:{rival:"Gặp mặt: hành lễ thỉnh an; biết chuyện của chủ thì có thể mật báo."}}},
- /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → the Hoàng tự button, Gia tộc → Hậu cung › second,
-    Giao du → Giao tình, Hoàng tự → her letters (Thư từ, the bar shows the KCTABS names: road8TabNames); Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
- kc:{court:{hide:1},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
-  kid:{k:"kid"},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
+ /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → Hậu cung › first sub-tab, Gia tộc → Hậu cung › second,
+    Giao du → Giao tình, Hoàng tự = empty card; Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers. The 8 bottom tabs keep their names on every road
+    (owner OD:L2108 21/11 ~03:15Z «mỗi một cái tab mình để y chang luôn … không có bị lạ khi mà họ thay đổi thân phận»); only the content fits her station. */
+ kc:{court:{k:"kid",l:()=>KCTABS.kid},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
+  kid:{empty:["Hoàng tự","Ngươi chưa vào cung, chưa có con."]},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
   q72:{hide:1},nho:{hide:1},quest:{hide:1},req:{hide:1},log:{hide:1}}};
 /* ROAD8_LAB = the ONE label table of the stage right column groups (owner 21/11 ~03:25Z mark #36: "bất kỳ một cái gì thông tin nào ở bên phi tần có thì bên
    cung nữ đều có, nhưng mà mình có thể linh động đổi tên lại … cung nhân ở bên phi tần thì mình có thể đổi lại là đồng liêu ở bên cung nữ … chủ tử").
@@ -96531,8 +96532,11 @@ const ROAD8_LAB={"":{cn:"Cung nhân",ct:"Chí tôn",t_mus:"Nhạc sư Giáo phư
   /* teachers she can have at home (no palace office, no consort): t_mus = music / dance, t_craft = needlework / cooking, t_rite = letters / rites, t_vir = Tứ đức;
      tch_cons = 0: no consort teaches her before she is in the palace (law 6: she cannot reach them) */
   fame3:"Cả phủ nghe danh.",t_mus:"Nhạc sư",t_craft:"Ma ma trong phủ",t_rite:"Nữ sư",t_vir:"Nữ sư",t_fee:"nữ sư",tch_cons:"0"},
- "kc:dan":{fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},"kc:nc":{fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
-function placeCtx(){const r=road8();if(r!=="kc")return r;let d="";try{d=typeof kc2D==="function"?kc2D():(S.kc&&S.kc.kd)||""}catch(e){}
+ "kc:dan":{fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},dtv:{cn:"Tú nữ cùng khóa",ct:"Ma ma giáo dưỡng",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",fame3:"Cả Dưỡng Tú viện nghe danh.",tch_cons:"0"},
+ "kc:nc":{fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
+/* DƯỠNG TÚ VIỆN (MAIN 150/151 order; place key dtv = review/ob-phu jmapz MAPZ_DTV, tú nữ lodging): a girl who lodges there as a tú nữ before phân cung
+   (still on her home road, isKc, standing at dtv) is no palace woman and has no household there: cn = the tú nữ of her intake, ct = the ma ma who teach them. */
+function placeCtx(){const r=road8();if(r==="kc"){try{if(S&&S.place==="dtv")return "dtv"}catch(e){}}if(r!=="kc")return r;let d="";try{d=typeof kc2D==="function"?kc2D():(S.kc&&S.kc.kd)||""}catch(e){}
  return d==="dan"?"kc:dan":d?"kc:nc":"kc"}
 /* the word of key k in context c (default: where she is now); "" when no context has one */
 function placeW(k,c){c=c==null?placeCtx():c;const L=[c];if(c.indexOf(":")>0)L.push(c.split(":")[0]);L.push("");
@@ -96556,7 +96560,7 @@ function placeSift(){try{if(road8()!=="kc"||!Q.length)return;for(let i=Q.length-
 window.placeSift=placeSift;
 /* the journal at home: palace-world lines that speak as if she lived in the palace or report the inner palace day by day never reach her sổ
    (she has her own news there: letters, rumours bought on her home road). ONE pattern list per place context; a line matching one is not written. */
-const PLACE_LOG_DROP={kc:[/sang cung ngươi/,/ghé chơi cung ngươi/,/tròn năm thứ \d+ trong cung/,/^Tin trong cung ·/,/được Hoàng thượng ban/,
+const PLACE_LOG_DROP={kc:[/sai người sang [^.]*ngươi/,/sang cung ngươi/,/ghé chơi cung ngươi/,/tròn năm thứ \d+ trong cung/,/^Tin trong cung ·/,/được Hoàng thượng ban/,
  /^Trong cung (truyền tai nhau|khi ấy)/,/Trong cung khi ấy —/,/^Đêm nay Hoàng thượng/,/giá đáo!/,/^Có người (đến|tìm đến|bán tin)\b/,/^Tin mua được/,
  /^(Hỏa hoạn lớn|Lễ Phật đản|Sứ đoàn vào triều|Nạn châu chấu|Đại hàn, tuyết lớn|Đại trai đàn|Yến đầy tháng|Tỉnh thân|Thu săn|Đại phóng cung nhân|Đại xá thiên hạ|Lũ lớn, mất mùa|Án mất trộm ngự khố)\b/,
  / dời sang .*(hiên|các|điện|cung)\b/,/ngự tứ/,/ tát vì /,/thưởng bạc cho cung nhân/,/^Sét đánh trúng mái cung/,/mắc phong hàn/,/được Hoàng thượng (triệu|ban)/,/trong cung, .*Bạc −/,/ báo thị vệ:/,
@@ -96571,7 +96575,7 @@ window.placeLogOk=placeLogOk;
 const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài|cho gọi ngươi|thách đấu ngươi|Lời thách đấu|xưng danh|ghé chơi cung/;
 function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;const k=String(sp.kind||"");const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
  /* never at home, whoever acts: the palace tai-mắt feed (tin), lật thẻ (flip), the stay-filler of a new buổi (close) */
- if(k==="tin"||k==="flip"||(k==="close"&&/vẫn ở .*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?$/.test(t)))return false;
+ if(k==="tin"||k==="flip"||/vẫn ở [^.]*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?\s*$/.test(t.trim()))return false;/* the stay filler of a new buổi, whatever kind the feed gave it (OB-NGOAICUNG-2: the iPad stage feed sends it as another kind) */
  /* nor a palace person's summons / challenge / visit / xưng danh (the palace agents also run while one of her cards spends khắc) */
  if(/cho gọi ngươi|thách đấu ngươi|Lời thách đấu|sai người sang|xưng danh|ghé chơi cung|Có khách đến chơi/.test(t))return false;
  if(window.__kcActing>0||sp.own){sp.own=1;return true}
@@ -96606,15 +96610,7 @@ function road8Name(k){try{if(!road8()||road8Hide(k))return"";const g=typeof kgOf
   if(g&&KG[g]){const L=kgKeys(g);if(L.length<2)return KG[g].l;return `${KG[g].l} › ${kgLabel(k)}`}
   const b=document.querySelector(`#tabs [data-tab="${k}"]`);return b?(b.dataset.l0||b.textContent).trim():""}catch(e){return""}}
 window.ROAD8=ROAD8;window.road8=road8;window.road8Hide=road8Hide;window.road8Label=road8Label;window.road8Name=road8Name;
-/* BOTTOM TAB NAMES at home (MAIN 148 from OB-PHU shots; owner 21/11 ~03:25Z «chỉ là những cái thay đổi của cái tên thôi»): the SAME 8 tabs, only the
-   names follow the home tab set KCTABS (jkc / jkc2 variant names): Hành sự → KCTABS.act, Hậu cung → KCTABS.rv, Giao tình → KCTABS.staff (her Giao du
-   panel), Hoàng tự → KCTABS.kid (her letters, no more «chưa có con» card). Back in the palace every button gets its own name again. */
-function road8TabNames(){try{const B=[...document.querySelectorAll("#tabs button[data-tab]")];const kc=road8()==="kc"&&typeof KCTABS==="object";
- const M=kc?{act:KCTABS.act,rv:KCTABS.rv,rel:KCTABS.staff,kid:KCTABS.kid}:{};
- for(const b of B){const k=b.dataset.tab;if(M[k]){if(b.dataset.r8l0==null)b.dataset.r8l0=b.innerHTML;if(b.textContent!==M[k])b.textContent=M[k];b.title=M[k]}
-  else if(b.dataset.r8l0!=null){b.innerHTML=b.dataset.r8l0;delete b.dataset.r8l0;b.removeAttribute("title")}}}catch(e){console.error("road8TabNames",e)}}
-window.road8TabNames=road8TabNames;
-(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);road8TabNames();placeNoteSweep();return x}})();
+(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);placeNoteSweep();return x}})();
 /* a key with no bar button, or one her road leaves out, opens Hành sự (old saves / old links of the old servant and home bars) */
 (function(){const r0=render;render=function(){try{if(road8()){const b=document.querySelector(`#tabs [data-tab="${tab}"]`);if(!b||road8Hide(tab))tab="act"}}catch(e){}return r0.apply(this,arguments)}})();
 (function(){const p0=renderPanel0;renderPanel0=function(){const e=road8E(tab);const el=$("panel");if(!e||e.hide){if(el)el.__r8=null;return p0.apply(this,arguments)}
@@ -96638,6 +96634,26 @@ function road8Acts(o){const r=road8();const T=r&&ROAD8[r]&&ROAD8[r].acts;if(!T||
  const n=T.note&&T.note[o.tabKey];const note=o.note&&/^(Cùng chỗ: làm tại chỗ|Không gặp mặt: phải sai người)/.test(o.note)?(n||""):o.note;
  return Object.assign({},o,{groups,note})}
 window.road8ActKey=road8ActKey;window.road8Acts=road8Acts;
+/* THÔN NỮ HAS NO PERSONAL MAID (law 6 real world; MAIN 150 order, OB-NGOAICUNG open item 1): a village girl's family keeps no maid, so on the cnv home road
+   (isKc && kd "dan") S.maid is null — the head-count shows «Gia đình» only (kgfCount cn = 0). The palace sim must not hand her a maid while she is at home
+   (j8 consorts / maidMonthP give every consort one lazily; at home she is no consort): she is left out of consorts() there. Once she enters the palace
+   (placement: maid / Tân Giả khố / low consort) the palace gives her one again as before (j42 srv start, j8 maidMk). Old cnv saves at home lose the maid. */
+function noHomeMaid(){try{return !!(S&&S.kc&&!S.kc.inPal&&S.kc.kd==="dan")}catch(e){return false}}
+window.noHomeMaid=noHomeMaid;
+(function(){const dropMaid=()=>{if(noHomeMaid()&&S.maid)S.maid=null};
+ if(typeof kc2Init==="function"){const i0=kc2Init;kc2Init=function(){const r=i0.apply(this,arguments);dropMaid();return r}}
+ if(typeof consorts==="function"){const c0=consorts;consorts=function(){if(!noHomeMaid())return c0.apply(this,arguments);const L=c0.apply(this,arguments).filter(p=>p!==S);dropMaid();return L}}
+ if(typeof maidMonthP==="function"){const m0=maidMonthP;maidMonthP=function(p){if(p===S&&noHomeMaid())return"";return m0.apply(this,arguments)}}
+ if(typeof render==="function"){const r0=render;render=function(){dropMaid();return r0.apply(this,arguments)}}})();
+/* PALACE ASKS AT HOME (OB-NGOAICUNG-2, k3/k9 family from the full-life video: «Một vị Phi sai người sang thách đấu ngươi» on her home «Nghỉ ngơi» card):
+   the palace NPC asks (jrcv RCVK: thách đấu, nhờ vả, kết giao, mượn … — rcvAsk, one entry for every kind) never reach her while she is at home
+   from a palace person (a living consort, a palace servant, the emperor / Thái hậu); a queued one (PEND.rcvAsk) made before she left is dropped too.
+   Her own family / home people are not palace people and still reach her. Law 1 holds: at home she cannot reach them either (placeEvOk / gifts). */
+function placePalP(p){try{if(!p||p===S)return false;if(p==="emp"||p==="th"||p===window.EMP)return true;if((typeof liveRivals==="function"?liveRivals(true):[]).includes(p))return true;
+ if(p!==S.maid&&(typeof allServ==="function"?allServ():[]).includes(p))return true;return false}catch(e){return false}}
+window.placePalP=placePalP;
+(function(){if(typeof rcvAsk==="function"){const a0=rcvAsk;rcvAsk=function(k,p,t){if(t===S&&road8()==="kc"&&placePalP(p))return"";return a0.apply(this,arguments)};window.rcvAsk=rcvAsk}
+ if(typeof PEND==="object"&&PEND.rcvAsk){const q0=PEND.rcvAsk;PEND.rcvAsk=function(pp){try{if(road8()==="kc"&&placePalP(byKey(pp.a)))return null}catch(e){}return q0.apply(this,arguments)}}})();
 /* ================= jend: kitEndScreen — THE ENDING SCREEN, full screen (KIT §91; owner marks #48 #50 #51, OD 21/11 ~03:56Z / ~04:03Z / ~04:06Z) =================
    Owner (verbatim, 21/11 ~04:06Z): "bất cứ một cái gì mà kết thúc một cái game, kết thúc một cái kiếp là đều phải có một cái khung đẹp của nó ... thay vì là khung nhỏ
    thì tôi muốn là khung full màn hình luôn ... dưới là có cái nền ... từ cái kết cục cho tới đại kết cục hay là kỳ ngộ gì đó, mỗi một cái nó sẽ có một cái nền khác nhau".
@@ -99018,7 +99034,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="de7b7fb3795b";window.CTM_BUILD=BUILD;
+const BUILD="de7d202c7863";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

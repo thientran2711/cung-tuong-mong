@@ -39,6 +39,8 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   const NP=+(opt('play')||0);if(NP){R.ev=await p.evaluate(async n=>{const out=[];const seen=new Set();const L0=S.logSeq||0;const w=ms=>new Promise(r=>setTimeout(r,ms));
    /* k5 ACTS family (MAIN 150 item 5): every home card (deck) and person-card / Giao tình act she can press at home, checked for a PALACE person
       (a live consort, the emperor, Thái hậu, a palace servant) — her family, her thanh mai (j96 S.tm96.mid, his office title is his own) excepted */
+   /* k3/k9 ASK family: every palace NPC ask (jrcv rcvAsk) that reaches HER while at home */
+   const asks=[];if(typeof rcvAsk==='function'){const a0=rcvAsk;rcvAsk=function(k,p,t){const r=a0.apply(this,arguments);if(t===S&&isKc()&&r)asks.push(k+': '+String(r).slice(0,80));return r}}
    const acts=new Set();const palN=()=>{const N=new Set();const add=x=>{if(x&&x.name&&String(x.name).length>2)N.add(String(x.name))};try{(liveRivals(true)||[]).forEach(add)}catch(e){}
      try{add(typeof EMP==='object'&&EMP);add(S.emp);add(S.th)}catch(e){}try{(typeof allServ==='function'?allServ():[]).forEach(s=>{if(s!==S.maid)add(s)})}catch(e){}
      try{const own=new Set((S.kc&&S.kc.fam||[]).map(m=>m.name));const tm=S.tm96&&S.tm96.mid;(S.kc&&S.kc.fam||[]).forEach(m=>{if(m.id===tm)own.add(m.name)});for(const x of own)N.delete(x)}catch(e){}return N};
@@ -52,8 +54,8 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
      nextBuoi()}catch(e){out.push({t:'ERR',tx:e.message})}}
    try{render()}catch(e){}/* the feed as she sees it after a repaint */
    const nt=(typeof kitNoticeList==='function'?kitNoticeList():[]).map(x=>String((x.line||'')+' | '+(x.text||'')).replace(/<[^>]+>/g,''));
-   const lg=(S.logs||[]).slice(0,Math.min(150,Math.max(0,(S.logSeq||0)-L0))).map(x=>String(x).replace(/<[^>]+>/g,''));return{d:out,log:lg,nt,acts:[...acts],stillKc:isKc(),turn:S.turn}},NP);
-   R.surf['ev-dialogs']=R.ev.d.map(x=>`«${x.t}» [${x.who}] ${x.tx} {${x.opts}}`).join(' ‖ ');R.surf['ev-log']=R.ev.log.join(' ‖ ');R.surf['ev-notice']=R.ev.nt.join(' ‖ ');R.acts=R.ev.acts;if(R.acts.length){bad++;R.fail=(R.fail||[]).concat('acts')}}
+   const lg=(S.logs||[]).slice(0,Math.min(150,Math.max(0,(S.logSeq||0)-L0))).map(x=>String(x).replace(/<[^>]+>/g,''));return{d:out,log:lg,nt,acts:[...acts],asks,stillKc:isKc(),turn:S.turn}},NP);
+   R.surf['ev-dialogs']=R.ev.d.map(x=>`«${x.t}» [${x.who}] ${x.tx} {${x.opts}}`).join(' ‖ ');R.surf['ev-log']=R.ev.log.join(' ‖ ');R.surf['ev-notice']=R.ev.nt.join(' ‖ ');R.acts=R.ev.acts;R.asks=R.ev.asks||[];if(R.asks.length){bad++;R.fail=(R.fail||[]).concat('asks')}if(R.acts.length){bad++;R.fail=(R.fail||[]).concat('acts')}}
   R.rolled=rolled;R.errs=errs.slice(0,5);R.hits={};
   /* tab names are checked by tabsRenamed below (they keep the palace names everywhere, OD:L2108) */
   const strict=['headcount','list-cn','list-ct','tips-cn','tips-ct','maidTitle','maidFigTag','stageTags'];

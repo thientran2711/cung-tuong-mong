@@ -74,7 +74,7 @@ function placeSift(){try{if(road8()!=="kc"||!Q.length)return;for(let i=Q.length-
 window.placeSift=placeSift;
 /* the journal at home: palace-world lines that speak as if she lived in the palace or report the inner palace day by day never reach her sổ
    (she has her own news there: letters, rumours bought on her home road). ONE pattern list per place context; a line matching one is not written. */
-const PLACE_LOG_DROP={kc:[/sang cung ngươi/,/ghé chơi cung ngươi/,/tròn năm thứ \d+ trong cung/,/^Tin trong cung ·/,/được Hoàng thượng ban/,
+const PLACE_LOG_DROP={kc:[/sai người sang [^.]*ngươi/,/sang cung ngươi/,/ghé chơi cung ngươi/,/tròn năm thứ \d+ trong cung/,/^Tin trong cung ·/,/được Hoàng thượng ban/,
  /^Trong cung (truyền tai nhau|khi ấy)/,/Trong cung khi ấy —/,/^Đêm nay Hoàng thượng/,/giá đáo!/,/^Có người (đến|tìm đến|bán tin)\b/,/^Tin mua được/,
  /^(Hỏa hoạn lớn|Lễ Phật đản|Sứ đoàn vào triều|Nạn châu chấu|Đại hàn, tuyết lớn|Đại trai đàn|Yến đầy tháng|Tỉnh thân|Thu săn|Đại phóng cung nhân|Đại xá thiên hạ|Lũ lớn, mất mùa|Án mất trộm ngự khố)\b/,
  / dời sang .*(hiên|các|điện|cung)\b/,/ngự tứ/,/ tát vì /,/thưởng bạc cho cung nhân/,/^Sét đánh trúng mái cung/,/mắc phong hàn/,/được Hoàng thượng (triệu|ban)/,/trong cung, .*Bạc −/,/ báo thị vệ:/,
@@ -89,7 +89,7 @@ window.placeLogOk=placeLogOk;
 const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|Tần|Quý nhân|Đáp ứng|Thường tại|Quý phi)\b|[Cc]ung nữ|[Tt]hái giám|[Nn]gự |thẻ bài|cho gọi ngươi|thách đấu ngươi|Lời thách đấu|xưng danh|ghé chơi cung/;
 function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;const k=String(sp.kind||"");const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
  /* never at home, whoever acts: the palace tai-mắt feed (tin), lật thẻ (flip), the stay-filler of a new buổi (close) */
- if(k==="tin"||k==="flip"||(k==="close"&&/vẫn ở .*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?$/.test(t)))return false;
+ if(k==="tin"||k==="flip"||/vẫn ở [^.]*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?\s*$/.test(t.trim()))return false;/* the stay filler of a new buổi, whatever kind the feed gave it (OB-NGOAICUNG-2: the iPad stage feed sends it as another kind) */
  /* nor a palace person's summons / challenge / visit / xưng danh (the palace agents also run while one of her cards spends khắc) */
  if(/cho gọi ngươi|thách đấu ngươi|Lời thách đấu|sai người sang|xưng danh|ghé chơi cung|Có khách đến chơi/.test(t))return false;
  if(window.__kcActing>0||sp.own){sp.own=1;return true}
@@ -159,3 +159,12 @@ window.noHomeMaid=noHomeMaid;
  if(typeof consorts==="function"){const c0=consorts;consorts=function(){if(!noHomeMaid())return c0.apply(this,arguments);const L=c0.apply(this,arguments).filter(p=>p!==S);dropMaid();return L}}
  if(typeof maidMonthP==="function"){const m0=maidMonthP;maidMonthP=function(p){if(p===S&&noHomeMaid())return"";return m0.apply(this,arguments)}}
  if(typeof render==="function"){const r0=render;render=function(){dropMaid();return r0.apply(this,arguments)}}})();
+/* PALACE ASKS AT HOME (OB-NGOAICUNG-2, k3/k9 family from the full-life video: «Một vị Phi sai người sang thách đấu ngươi» on her home «Nghỉ ngơi» card):
+   the palace NPC asks (jrcv RCVK: thách đấu, nhờ vả, kết giao, mượn … — rcvAsk, one entry for every kind) never reach her while she is at home
+   from a palace person (a living consort, a palace servant, the emperor / Thái hậu); a queued one (PEND.rcvAsk) made before she left is dropped too.
+   Her own family / home people are not palace people and still reach her. Law 1 holds: at home she cannot reach them either (placeEvOk / gifts). */
+function placePalP(p){try{if(!p||p===S)return false;if(p==="emp"||p==="th"||p===window.EMP)return true;if((typeof liveRivals==="function"?liveRivals(true):[]).includes(p))return true;
+ if(p!==S.maid&&(typeof allServ==="function"?allServ():[]).includes(p))return true;return false}catch(e){return false}}
+window.placePalP=placePalP;
+(function(){if(typeof rcvAsk==="function"){const a0=rcvAsk;rcvAsk=function(k,p,t){if(t===S&&road8()==="kc"&&placePalP(p))return"";return a0.apply(this,arguments)};window.rcvAsk=rcvAsk}
+ if(typeof PEND==="object"&&PEND.rcvAsk){const q0=PEND.rcvAsk;PEND.rcvAsk=function(pp){try{if(road8()==="kc"&&placePalP(byKey(pp.a)))return null}catch(e){}return q0.apply(this,arguments)}}})();
