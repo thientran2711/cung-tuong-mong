@@ -408,3 +408,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 22:58Z KK48 kit-resfold-r2 8740785b on LIVE 4cfcda61 (one fold jnsieve, one Sổ ghi record, empty band fixed) → RV-163C (via 164). MAIN LOOK of empty band pending KK48 shot list → then send sếp.
 - 22:59Z LC25: kit-ton-row 6/14 FAIL on LIVE 4cfcda61 (LIVE-known, not blocker) → WORDING-MARKS owns whole Tốn row → 14/14 (law 11). ov3 restack: «Đáp trả sắc sảo» no result card 25/34 → LC25 checking SP interaction vs flake; ov3 READY waits.
 - ~22:59Z (after roll) OWNER: HUD top row «Sắc phong X/Y tuần» → OD row → opened HUD-SACPHONG.
+- 23:00Z KIT-STAGE-R5 rolled (ac95f7e9: KIT_HAND.max 10 + KIT_PLAQUE.max 10, tray cut undone, §101.11 rewritten; kit-hand 116/0) → archived; opened KIT-STAGE-R6 session_01Rc5AsM1W9YBiWMMpMsFQtc (sonnet): remove 67 close-only «Thôi» cards (keep 78 story ones), >10 → KK48, LOOK READY → KK48 → RV-164.
