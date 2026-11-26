@@ -112,6 +112,7 @@ const CLASS=[/* [file, regex on «enclosing function chain + title», class, rea
  ['jcoopthin.js',/standIn/,'COOP','co-op thin card stand-in'],
  ['jagent.js',/^ /,'NOTCARD','the AG state object (opts = timing stats)'],
  ['jbancung.js',/^ /,'NOTCARD','BAL.banCung numbers'],
+ ['jselxday.js',/selxEvening/,'NOTCARD','parse hit on the PARAMETER list of selxCard(t,h,opts,who) (LIVE f009e1a6 selection-scene); its cards are pid «selxD» (PEND.selxD, data)'],
 ];
 const CEN={sites:0,reg:0,cls:{},un:[]};
 {const files=fs.readdirSync(dir).filter(f=>/^j.*\.js$/.test(f)&&f!=='all.js');const reg=new Set();

@@ -38,6 +38,7 @@ const GATES=[
   bad:[/if\(Q\.some\(m=>!jqSaveable\(m\)\)\)\{JQ\.held=1/],badWhy:'held across the STEP that opened the card (stipend / year-end card right after Sang buổi): a reload 0 s after the flip goes back to the buổi before it (robot M4: buổi + year-end stipend lost)'},
  {id:'jspread waiting code card',f:'jspread.js',re:/const sv0=save;save=function\(\)\{if\(!S\|\|quiet\|\|S\.dead\|\|SP13\.off\(\)\)return sv0\.apply/,why:'a code card D13 moved to a later buổi waits unseen',bound:'-',
   bad:[/if\(SP13\.L\.some\(x=>x\.code\)\)\{SP13\.held=1;SP13\.stat\.held\+\+;return\}/],badWhy:'HELD while the card waits UNSEEN (screen free, she plays on): chained over buổi / tuần / the new year → reload goes back to before the step (robot M2 Year 4 → 3)'},
+ {id:'jnotice late notice',f:'jnotice.js',re:/const sv0=save;save=function\(\)\{const n0=typeof SAVE_N/,why:'never holds: it always calls the save below it and only marks which notice list was written (rv5: a notice that arrives after the last write gets one more save at the end of the tick)',bound:'never returns without the inner save',bad:[/const sv0=save;save=function\(\)\{const n0=typeof SAVE_N[^\n]{0,40}return;/],badWhy:'a return before sv0 would drop a save'},
 ];
 const rows=[];let fail=0;
 console.log('## time-advance paths ('+path.relative(process.cwd(),DIR)+')');console.log('| step | where | persisted by |');console.log('|---|---|---|');
