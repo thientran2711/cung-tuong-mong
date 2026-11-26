@@ -429,7 +429,7 @@ RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vb
 | E97 E-d dup-report (opus REPORT; briefs/E97-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWoPgpYzodQxz6rufXQ | REPORT READY a0a1d1a2 (review/dup-report; reports/dup-report.md; design dev/design/HANHSU_MERGE.md) | 26/11 05:10Z |
 KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING | 2026-11-26T04:11Z (MAIN 152)
 | D1+D4 punishment reason / one rank / lãnh cung stay / harm WHO-WHY-EVIDENCE + evidence-per-charge rec (opus; briefs/D-owner-bugs-2611.md) | review/punish-reason + review/charge-evidence | FOREMAN D | session_01D3E3NZG2LWTwaYMqBjHCPL (#4; D1 LAND READY 8351f5ab) | RUNNING | 26/11 04:30Z |
-| D2 daily event cap + STAT PACE (opus; briefs/D-owner-bugs-2611.md) | review/stat-pace | FOREMAN D | session_01D3E3NXn2KvRU5meXSH17rD (#2) | RUNNING | 26/11 04:30Z |
+| D2 daily event cap + STAT PACE (opus; briefs/D-owner-bugs-2611.md) | review/stat-pace | FOREMAN D | session_01D3E3NapjNambTi15A89ezj (D2 #3) (#2) | RUNNING | 26/11 04:30Z |
 | D3 contest first place ⇒ thị tẩm (opus; briefs/D-owner-bugs-2611.md) | review/contest-thitam | FOREMAN D | session_01D3E3NY4u5PWtro3m4FhbDG | RUNNING | 26/11 04:30Z |
 | D5 minigame cut / skill roll / Học nhanh recommendation (opus; briefs/D-owner-bugs-2611.md) | review/mg-trim | FOREMAN D | session_01D3E3NY4dwzUxFsbZXyqSL7 (#2) | RUNNING | 26/11 04:30Z |
 HOME-WAY top-bar Về phòng + home icon + punishment by weight | review/home-way | session_01V1ZZH3KBeUcSLSUiQfAU1w | RUNNING | 2026-11-26T04:18Z (MAIN 152)
