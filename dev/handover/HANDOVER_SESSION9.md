@@ -158,3 +158,7 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~08:47Z HOURLY WAKE. LOAD: main running LC21, KK39, J1–J4, J5b, OB-OAN, OB-VERDICT, OB-M3UI, OB-NGOAICUNG-2, NEWS-SIEVE-2, FIRSTCARD, E96r, 3 rv | B 11/12 | C idle (SEALS frozen) | D busy | E depth limit | F runners | moved: none. D5 mg-trim re-merged bb0ae651 (FF on DRESS) → LC21 NEXT.
 - ~08:55Z ROLL (context ~33 %, roll line 30 %): TAKEOVER_MAIN_156.md written; opening MAIN CHÍNH 156 as my child; 155 = forwarder.
 - ~08:56Z MAIN CHÍNH 156 = session_01V1ZZH4YYLnxnhwuGEx25zf (155 child, depth 4). 155 = forwarder from now.
+
+## MAIN CHÍNH 156 (session_01V1ZZH4YYLnxnhwuGEx25zf, depth 4, child of 155; START_CTX ~5 % (1M window, reads 0 → estimate), roll line 30 %, ceiling 60 %)
+- ~08:53Z TAKEOVER: own tasks (hourly trig_019SFEzNDzx6U6T6grDTkuoW, 08:00 NY trig_01MU37H3Z6rWucLteMSmDemr, 20:00 NY trig_01PitytTV5SSTusJYHo7KtsN); 155's three disabled. Fresh container: worktree /home/user/wt/h156, push script /home/user/wt/hpush156.sh. FROM MAIN 156 lines in FOREMAN_B–F_STATUS; «main is now 156» to every seat + forwarders 150–155.
+- LOAD: main running LC21, KK39, J1–J4, J5b, OB-OAN(+rv), OB-VERDICT, OB-M3UI, OB-NGOAICUNG-2(+rv), NEWS-SIEVE-2, FIRSTCARD, E96r, RV-HW-NITS (owner bugs/UI/go-live) | B 11/12 | C idle (SEALS frozen; 4 old questions) | D busy | E depth limit | F #20 session_01UV1SzgwtMTK26QKqkzEVsp | moved: none.
