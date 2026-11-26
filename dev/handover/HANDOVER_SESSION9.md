@@ -429,3 +429,7 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:22Z MAIN CHÍNH 166 = session_01Rc5AsNFmfoR6xWx1tx5wVP opened; 165 stops. 164 told.
 - ~23:21Z OWNER: Sắc/Tài/Tâm cơ ALSO rescale (palace-wide, rank order kept, lifelong climb) → OD updated; PACE-SPEED + 166 told.
 - ~23:25Z OWNER asked for ONE rec → MAIN rec applied: drop monthly rescale; Sắc/Tài/Tâm cơ get stat-pace slowdown curve (no ceiling, no drops); Danh/Đức/Sủng keep stat-pace → OD; PACE-SPEED + 166.
+
+## MAIN CHÍNH 166 (session_01Rc5AsNFmfoR6xWx1tx5wVP, depth 5, START_CTX ~6 %, roll at 31 %)
+- 23:25Z: took over from 165; tasks recreated (hourly trig_01U2Dpr93J5uLBh4DRgmPJpu :32, evening trig_01DGyF1NVDX1P7z6ZX3TWnWN 00:52Z, morning trig_01M3JQ3qdTjKPixaDWYp5cs2, PDF ping 00:30Z trig_01CaEvhLWAam3Ynak9LNguRk); all seats + 164/161/163 told; worktree h166, push /home/user/wt/hpush166.sh.
+- 23:25Z LOAD: main running ~18 (owner bugs/UI/go-live + kit set) | B save stack rv16 → LAND READY soon | C place glyphs r8 order; «Ban chết» stamp NOT FOUND in art (no paint) | D promo-stack remerge + pbDlNext ORDER 23:12Z, mg-trim-r6 sha asked | E 151/417 VALID robot | F realtap fixer #13 READY 97e55a45 | moved: none. LIVE 4cfcda61 · ROLLBACK 504d2e6a.
