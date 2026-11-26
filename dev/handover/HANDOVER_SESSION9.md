@@ -373,3 +373,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:47Z RV-163 PASS ob-verdict-3 b5213f63 (carries d811a46d) → LC25: land after lc25-os. Queue: os → sp → ob-verdict-3 → wg/wf → dress-fix → k44+goal-links 8d28efd7 → veil 5b4f8c56.
 - ~21:50Z 161 relay: TITLE-BAL RV READY 3f8eb36a → RV-163B; NAME table sent to sếp in chat; FINDING maid Y thuật pace → PACE-SPEED (art pace family).
 - ~21:52Z OAN-PACE-2 RV READY oan-pace-ghen fe3d0888 → RV-163B; replaces oan-pace at LC25 (after sp). MAIN rec applied: keep BAL.oanPace.act 25 (quiet first season OD 18:40Z f). Robot: targetings/day .85 → .37, Ghen m12 97 → 53.
+- ~21:50Z KK46 rolled (kit-resfold 9a2c05f6, dress-fix-kit 8cc9a284 confirmed, R5 flip FAIL) → archived; opened KK47 session_01Rc5AsHmtzuWMnb27oL1LC5 (??? fix + yield, plaque post, R5 re-review, mount, Sang buổi label, refit, Cách làm, KK45 queue).
