@@ -146,3 +146,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~08:16Z OWNER (154 chat 08:15Z): plan showed numbers only → wants NAMES old → new as a proper PDF; 154 sent a 6-page Vietnamese PDF. LESSON (apply always): every report to sếp lists the NAMES (old → new / what changes), never counts only; J1–J5 reports must carry the name table too.
 - ~08:20Z sếp asked for a PDF with NAMES (old → new buttons): sent dev/handover/reports/act-merge/Bao-cao-gop-nut-26-11.pdf (Vietnamese, 6 pages).
 - ~08:20Z OWNER (154 chat 08:25Z) giảm oán / nguy hiểm: recs (1)(2) → OB-OAN session_01V1ZZH3GxCcQzWNoKy1ARxN (opus, review/ob-oan); rec (3) cool-down + (4) pace → ORDER D.
+- ~08:25Z OWNER BUG (154 chat 08:30Z) nói xấu khi thị tẩm: no verdict / no target effect shown → OB-VERDICT session_01V1ZZH2Q8mUpEYyBNTQvhzP (opus, review/ob-verdict): verdict stamp + target row + two-way, every act on a person; one result-card rule with ONE SIEVE (NEWS-SIEVE-2).
