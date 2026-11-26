@@ -448,3 +448,18 @@ Self-tests (LIVE main 1dcb373e served on 8809, BUILD PIN on → 2673733e/a1d2c8d
 RT_TEST_BOARD=vu Fold raw 10 / iPad raw 9, mgBackN 2/1, mgBackQuitN 0 (backs on result) · KIP above · lint OK · rt-choice-scan --unit OK · robot-audit-unit.js 9/9 (old audit 4 FAIL).
 Re-run: RT_TEST_KC=n_c1@2 RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1:8809/ <out> dev=fold origin=pf road=pt_su bot=sens seed=61 slice=4 'pick=^(Ở cố quốc chờ hòa ước|Thưa: con xin đi)'
 (expect RT_TEST_KC took «Thưa: con xin đi», pick.n 2). Without the identity pick a sens life takes «Vào cung ngay» → no Hòa ước card (mkP null).
+4. JOB 4 (F #22 13:00Z, s14 / s9f #2): RESUME on another origin. Root: a life started on a harness without build0 (pre-pin) is restored on LIVE github.io, then the
+   reload's boot() pins it → 127.0.0.1:<port> → the save sits on the old origin → Chọn sổ only «Bắt đầu kiếp mới», «life not (re)opened within 5 min».
+   Fix: restore → reload → boot → if location.origin moved, restore again there → reload; then the save key must hold the ckpt's save (log «RESUME: save restored on
+   <origin> (got of want chars, N keys, ckpt from <origin>)», else a harness bug). ckpt keeps EVERY localStorage key (ctm-arcs / ctm-succ-book / ctm-routes … were lost
+   off-origin) + its origin. Proof (LIVE github.io): pre-pin ckpt (build0 stripped) → pinned 127.0.0.1:8729: Fold 151868/151868, iPad 149339/149339, buổi 6 → 10;
+   same ckpt on the old tip b57ba63b: «stuck life not (re)opened within 5 min on #modal «Chọn sổ»» (the s14 bug). Unpinned-with-build0 → pinned and pinned → pinned: below.
+5. JOB 5 (F #22 13:17Z, s7b iPad ×17): NO-EXIT DIALOG. A dialog judged no-exit (no close / next after scrolling to its end, the picker-stall force with no close, or a
+   layer with NO hit button for 30 s / 10 rounds) is logged once (harness.noExit: screen, selector, why, shot, buttons; bug «NO-EXIT DIALOG …»). Every later visit (layer +
+   title without digits) is unstuck at once by taps, by time on the visit: ≤ 8 s an option (hit, non-exit) or bare taps on the scene · ≤ 12 s backdrop · ≤ 16 s unstick lvl 2
+   (tap outside / safe button) · then lvl 3 reload (same save). No keyboard (Escape soft-locked co-op, owner taps-only rule). Self-test RT_TEST_NOEXIT=<buổi>: a .kmov layer
+   with no button that taps never close, shown 3×.
+   JOB 4/5 proofs (LIVE github.io 1dcb373e+, pin → 127.0.0.1:8729, b 5ab5b80e406e): pinned → pinned Fold Bp-f 162140/162140 buổi 6 → 10 · iPad Pi-103 148158/148158 buổi 6 → 10
+   (iPad seeds 94/96/101/102 ended Ban hoa at buổi 1 = real selection endings, not resume runs). Earlier: unpinned-with-build0 → pinned Fold rs-f / gh-f buổi 6 → 10.
+   RT_TEST_NOEXIT Fold / iPad: visit 1 64 s / 80 s (was 920 s = the 15-min stuck), «NO-EXIT DIALOG» logged once (bugs 1), visits 2–3 42–48 s incl. the reload (≈ 16 s on the
+   dialog, then lvl 3). Tip after JOB 4+5: c10a2a9d (+ this note).
