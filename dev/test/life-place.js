@@ -32,7 +32,7 @@ const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=WT+'.ahcache/
  await ck('cold-new-day',LC,()=>p.evaluate(()=>{/* what j3 does at a new day */S.place='home';placeWhere();if(S.out)coldVisit();S.visit={k:'home',people:homePeople(),talked:false};render()}));
  await ck('cold-reload',LC,async()=>{await p.evaluate(()=>{S.place='lc';S.visit={k:'home',people:homePeople(),talked:false}});await reload()});
  await ck('cold-goTo-home',LC,()=>p.evaluate(()=>{S.place='home';S.visit={k:'home',people:[],talked:false};render()}));
- await ck('cold-restored',{bg:/^tam-cung-dem/},()=>p.evaluate(()=>{restore(true,'Thử');Q.length=0;render()}));
+ await ck('cold-restored',{bg:/^tam-cung-dem/},()=>p.evaluate(()=>{S.coldWk-=BAL.pun.coldMinDays/* punish-reason stay served */;restore(true,'Thử');Q.length=0;render()}));
  await ck('promoted-palace',{bg:/^tam-cung-dem/},()=>p.evaluate(()=>{const n=(typeof PALN!=='undefined'?PALN.length:2);S.pal=((S.pal||0)+1)%n;render()}));
  await fresh('cnv');
  await ck('maid-room',{bg:/^phong-cung-nu/,title:/Phòng cung nữ/},async()=>{});

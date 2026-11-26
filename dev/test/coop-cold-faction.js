@@ -91,7 +91,7 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
   await Y.p.evaluate(()=>{const f=COOPW.friend(),g=facOf(S);if(g&&!g.m.includes(key(f)))g.m.push(key(f));});
   const z=await Y.p.evaluate(()=>{const f=COOPW.friend();const oa=oan(f,S);facAct("gach",{fv:String(f.id)});const g=facOf(S);return{off:!g||!g.m.includes(key(f))}});
   ok(z.off,'other seat strikes '+tag+' off the roll (facAct gach)',z);
-  await X.p.evaluate(()=>{restore(false,"Thử");Q.length=0;render()});await clear(X);
+  await X.p.evaluate(()=>{S.coldWk-=BAL.pun.coldMinDays/* punish-reason stay served */;restore(false,"Thử");Q.length=0;render()});await clear(X);
   {const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);await press(A);await press(B);ok(await weekWait(A,wk)&&await weekWait(B,wk),'week merged ('+tag+' back)');await clear(A);await clear(B)}
   ok(await waitFr(Y,()=>{const f=COOPW.friend();return !!(f&&!f.out)},30000),tag+' back from lãnh cung, seen on the other seat');
   await Y.p.evaluate(()=>{const f=COOPW.friend();S.facs=[];found(S,f);const n=liveRivals(true).find(x=>!x.coop&&!x.queen&&!sameHouse(S,x)&&!facOf(x));if(n)joinFac(n,facOf(S));render()});

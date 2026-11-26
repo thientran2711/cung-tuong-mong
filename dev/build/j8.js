@@ -95,19 +95,22 @@ function punishCut(){return BAL.punW.lite.cut[punTemper()]}
 /* the chance a heavy punishment also demotes (the roll in punish + the warning text aaPunishTxt read this ONE function) */
 function punishDemoP(){return BAL.punW.heavy.demo[punTemper()]}
 function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}if(sev==null)sev=1;
-  if(sev<=0){const c=punishCut();if(c>0){p.cutPay=Math.max(p.cutPay||0,c);p.cutBy=""}log(`<span class="r">${NMc(p)} bị ${c?`khất bổng ${c} tháng`:"cảnh cáo"} vì ${why}.</span>`);return}
-  if(sev>=2&&rkOf(p)>0&&roll(punishDemoP())){seatPut(p,seatDown(p,rkOf(p)-1));log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);return}
-  const m=punishMonths(sev);p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
+  if(sev<=0){const c=punishCut();if(c>0){p.cutPay=Math.max(p.cutPay||0,c);p.cutBy=""}log(`<span class="r">${NMc(p)} bị ${c?`khất bổng ${c} tháng`:"cảnh cáo"} vì ${why}.</span>`);if(p===S)punNote({kind:"nhe",why,c});return}
+  if(sev>=2&&rkOf(p)>0&&!punTwice(p)&&roll(punishDemoP())){const r0=rkOf(p);seatPut(p,punDown(p));punMark(p,r0);log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);if(p===S)punNote({kind:"giang",why,from:r0,to:S.rank});return}
+  const m=punishMonths(sev);p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`);if(p===S)punNote({kind:"camtuc",why,m})}
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
-  if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});if(rkOf(p)>0)seatPut(p,seatDown(p,rkOf(p)-1));p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);return}
+  if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});const r0=rkOf(p);if(r0>0&&!punTwice(p)){seatPut(p,punDown(p));punMark(p,r0)}p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);if(p===S)punNote({kind:rkOf(S)<r0?"giang":"camtuc",why,from:r0,to:S.rank,m:BAL.eff.j8.mercyConfine});return}
   if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);return die(why)}
-  if(has("nhantu")&&npcWhy("empMercy",{p})){p.out=true;if(p.queen)p.queen=false;log(`<span class="r">${p.name}: ${why}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
+  if(has("nhantu")&&npcWhy("empMercy",{p})){p.out=true;p.coldR=coldRankIn(p)/* rank before the fall (jpun; reads rank, not out) */;p.coldWk=punNow();if(p.queen){p.queen=false;p.rank=6}log(`<span class="r">${p.name}: ${why}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
   p.alive=false;if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
 /* a proven crime (accusation with evidence) */
-function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S.rank>=5||R(2)){cold(`Ngươi ${why}`);return}S.rank=seatDown(S,S.rank-2);apply({sung:-15});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);return}
- if(ACTX.a&&ACTX.a!==p)p.coldBy=key(ACTX.a);if(p.queen||p.rank>=5){p.out=true;p.queen=false;log(`<span class="g">${p.name} ${why}, bị phế vào lãnh cung.</span>`)}
- else if(R(2)){p.out=true;log(`<span class="g">${p.name} ${why}, bị đày vào lãnh cung.</span>`)}
- else{p.rank=seatDown(p,p.rank-2);p.sung=cl(p.sung-15,0,100);log(`<span class="g">${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.</span>`)}}
+/* punish-reason (D1): ONE punishment = lãnh cung OR one rank down (never two ranks, never two punishments the same day: punTwice → cấm túc);
+   her notice names who accused, why and which evidence (jpun punNote) */
+function fall(p,why,by){const a=punWho(by);if(p===S){if(S.out||S.dead)return;if(a)S.framedBy=key(a);if(punTwice(S)&&!(S.rank>=5)){punLight(S,why,a);return}if(S.rank>=5||R(2)){cold(`Ngươi ${why}`,a);return}const r0=S.rank;S.rank=punDown(S);punMark(S,r0);apply({sung:-BAL.pun.fallSung});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);punNote({kind:"giang",why,by:a,from:r0,to:S.rank});return}
+ if(p.out||p.alive===false)return;if(a&&a!==p)p.coldBy=key(a);if(punTwice(p)&&!(p.queen||p.rank>=5)){punLight(p,why,a);return}
+ if(p.queen||p.rank>=5){p.coldR=coldRankIn(p);if(p.queen){p.queen=false;p.rank=6}p.out=true;p.coldWk=punNow();log(`<span class="g">${p.name} ${why}, bị phế vào lãnh cung.</span>`)}
+ else if(R(2)){p.coldR=coldRankIn(p);p.out=true;p.coldWk=punNow();log(`<span class="g">${p.name} ${why}, bị đày vào lãnh cung.</span>`)}
+ else{const r0=rkOf(p);p.rank=punDown(p);punMark(p,r0);p.sung=cl(p.sung-BAL.pun.fallSung,0,100);log(`<span class="g">${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.</span>`)}}
 /* a fabricated charge that sticks */
 function framed(p,why){if(ACTX.a&&ACTX.a!==p)p.framedBy=key(ACTX.a);const d=Math.round(BAL.eff.j8.framedDanh*(DG()?1.3:1));ap(p,{danh:-d,sung:-BAL.eff.j8.framedSung});punish(p,why,2);return d}
 /* the target's people notice first: same detection for everyone */
@@ -131,7 +134,7 @@ A("poison","Hạ độc",{c:{duc:-10},ok:()=>true,o:a=>oPoison(a),x:"lộ: ban c
   if(aRoll(oPoison(a),a)){const strong=takeItem(a,"hacdinh");if(useAnti(t)){ap(t,{suc:BAL.eff.j8.sucF});return `${NMc(t)} trúng độc, may có thuốc giải trong rương. Sức ${balSg(BAL.eff.j8.sucF)}. `}
    const H=BAL.rl.j8.hit,d=strong?H.strong:H.lo+R(H.r);if(t===S){apply({suc:-d});return `<span class="r">Ngươi trúng độc, nôn ra máu.</span> Sức -${d}. `}ap(t,{suc:-d});return dieIf(t,"chết sau một bát yến sào")||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span> `}
   const r=`<span class="r">Thuốc độc nhắm vào ${NM(t)} bị phát hiện, tra ra người của ${NM(a)}.</span> `;deathSentence(a,`Bị ban rượu độc vì mưu hại ${NM(t)}`);return r}});
-A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x(){return `cần ${BAL.accNeedEv[0]} chứng cứ (Hoàng hậu: ${BAL.accNeedEv[1]} chứng cứ và phẩm Tần trở lên; tố hụt Hoàng hậu là phạm thượng)`},f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,BAL.ag.ev.all);
+A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x(){return "cần đủ chứng cứ của một tội (jcharge)"},f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,BAL.ag.ev.all);
   if(aRoll(o,a)){econPayWin(a,"accuse",t,0);/* marks the win (j70 Mua lời khai pays now) */const r=`${NMc(a)} tố giác ${NM(t)} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;fall(t,"bị tố giác, chứng cứ rành rành");return r}
   ap(a,{danh:BAL.eff.j8.accuseFailDanh});relAdd(a,t,BAL.eff.j8.f_6);if(rkOf(t)>=7)punish(a,"tố hụt Hoàng hậu, phạm thượng",2);return `${NMc(a)} tố giác ${NM(t)} không thành; chứng cứ bị hủy. `}});
 A("bribe","Mua chuộc cung nữ",{c:{get bac(){return -BAL.actBac.bribe}},ok:(a,t)=>a.bac>=BAL.actBac.bribe,o:(a,t)=>oBribe(a,t),f:(a,t)=>{/* AG-ALL-2f3 (OD 17/11 ~17:10Z): the 40 bạc are paid only when the maid takes them; a refusal costs no bạc (her report + the sent servant's fear stay) */
@@ -182,7 +185,7 @@ function stealNight(a,t,mode){ap(a,stealCost(mode));const o=oSteal(a,mode);
 function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)} theo ${n} chứng cứ. `;evA(q,p,BAL.evWipe);relAdd(q,p,BAL.eff.j8.judge);punish(p,"bị Hoàng hậu xử tội",n>=3?2:1);return r}
 function vpItems(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e.w&&IT[e.k]&&itm(e.k).rk>r);if(p.dress&&p.dress.until>S.turn&&itm(p.dress.k).rk>r)L.push({k:p.dress.k,dress:1});return L}
 function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=>itm(e.k).n).join(", ");
- if(roll(oVP(a))){ilFilter(t,e=>!(e.w&&(IT[e.k]||{}).rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */);relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
+ if(roll(oVP(a))){ap(t,{danh:BAL.eff.j8.danhVpAccuse});chPunish(t,"vp","bị tố vượt phẩm",a)/* STEP 4 rv F2 family: ONE vượt phẩm punishment = the vp charge (chPunish: the listed pieces seized through vpSeize + phạt bổng), was vpSeize + a generic cấm túc */;relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
  ap(a,{danh:BAL.eff.j8.vpFailDanh});relAdd(a,t,BAL.eff.j8.vpAccuse_2);return `${NMc(a)} tố ${NM(t)} vượt phẩm, ${judgeName(t)} bỏ qua. `}
 
 /* ================= ITEMS ================= */
@@ -334,7 +337,7 @@ PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();return{w
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`bậc ${b.l}`,go:()=>pushFront(mkP("night1",{q:1+b.l,vp:0}),"Đêm thị tẩm")},
  {n:"Để mộc, tự nhiên",fx:{},go:()=>pushFront(mkP("night1",{q:1,vp:0}),"Đêm thị tẩm")}]}};
 PEND.night1=p=>{const E=S.emp,mood=BAL.night.mood[E.mood],go=b=>()=>{let s=p.q+b+mood+R(3),ex="";
-  if(p.vp&&roll(BAL.rk.vpTake)){const n=vpItems(S).map(e=>(IT[e.k]||{}).n).join(", ");ilFilter(S,e=>!(e.w&&(IT[e.k]||{}).rk>S.rank),"conf");if(vpItems(S).length)S.dress=null;apply({danh:BAL.rl.j8.danhGo_2});s-=2;ex=`Hoàng thượng nhíu mày nhìn ${n}: “Phẩm vị gì mà dám dùng thứ này?” Đồ bị thu lại. Danh ${balSg(BAL.rl.j8.danhGo_2)}.`;log(ex)}
+  if(p.vp&&roll(BAL.rk.vpTake)){const n=vpItems(S).map(e=>(IT[e.k]||{}).n).join(", ");vpSeize(S);apply({danh:BAL.rl.j8.danhGo_2});s-=2;ex=`Hoàng thượng nhíu mày nhìn ${n}: “Phẩm vị gì mà dám dùng thứ này?” Đồ bị thu lại. Danh ${balSg(BAL.rl.j8.danhGo_2)}.`;log(ex)}
   pushFront(mkP("night2",{s,ex}),"Đêm thị tẩm")};
  return{who:pEmp(),t:`<p>Canh một, thái giám Kính sự phòng cởi xiêm ngoài, cuộn ngươi trong tấm chăn gấm thêu phượng, khiêng vào Dưỡng Hòa điện theo lệ cũ.</p><p>Màn vàng rủ thấp. Hoàng thượng đặt quyển sách xuống${E.mood>=2?", vẻ mệt mỏi":""}, nhìn ngươi.</p>`,o:[
  {n:"Bàn thơ văn, cầm kỳ",fx:{},od:(has("trongtai")?3:S.tai>=60?1:0),x:nx(has("trongtai")?3:S.tai>=60?1:0,has("trongtai")?"ngài trọng tài, rất hợp":"",p),go:go(has("trongtai")?3:S.tai>=60?1:0)},
@@ -490,7 +493,7 @@ function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
   if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-(v.rel>=netTh(v,"than")?3:1),0,100);v.pg=Math.max(0,v.pg-1);
-  if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
+  if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>chOK(v,p)&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(roll(want*4)){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
@@ -515,7 +518,7 @@ function rivalsMonth(){let ev="";
  const qq=queenP();
  for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;
   if(!S.thDead&&p.th>=BAL.ag.th.fondTh&&!(window.agDOn&&agDOn())&&roll(8)){const k=pick(BAL.ag.th.items);/* one list with the NPC Thái hậu (jagacts th:gift) */p.inv.push({k,from:"th"});if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${itm(k).n}</b>.</p><p class="past">${itm(k).d}</p>`});else log(`Thái hậu ban ${itm(k).n} cho ${p.name}.`)}
-  if(qq&&qq!==S&&qq!==p&&p.hh<=-40&&!(window.agDOn&&agDOn())&&roll(10)){const i=p.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(i>=0){const n=iname(p.inv[i]);/* two-way: the same act as hers (empAct conf): unfounded = Danh/Thái hậu cost, relation and regard fall */if(evG(qq,p)<1&&!vpItems(p).length)ap(qq,BAL.tw.confNo);relAdd(qq,p,-BAL.tw.g.conf[0]);p.hh-=BAL.tw.g.conf[1];p.inv.splice(i,1);ev+=p===S?`<span class="r">Hoàng hậu sai người tịch thu ${n} của ngươi, trách ngươi xa xỉ.</span> `:"";if(p!==S)log(`Hoàng hậu tịch thu ${n} của ${p.name}.`)}}
+  if(qq&&qq!==S&&qq!==p&&p.hh<=-40&&!(window.agDOn&&agDOn())&&roll(10)){const i=p.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(i>=0){const n=iname(p.inv[i]);/* two-way: the same act as hers (empAct conf): unfounded = Danh/Thái hậu cost, relation and regard fall */if(evG(qq,p)<1&&!vpItems(p).length)ap(qq,BAL.tw.confNo);relAdd(qq,p,-BAL.tw.g.conf[0]);p.hh-=BAL.tw.g.conf[1];ilSeize(p,p.inv[i],"conf")/* charge-followups (a): to the Nội vụ phủ store */;ev+=p===S?`<span class="r">Hoàng hậu sai người tịch thu ${n} của ngươi, trách ngươi xa xỉ.</span> `:"";if(p!==S)log(`Hoàng hậu tịch thu ${n} của ${p.name}.`)}}
   if(qq&&qq!==S&&qq!==p&&p.hh>=50&&!(window.agDOn&&agDOn())&&roll(6)&&(qq.bac||0)>=-BAL.tw.reward.bac){/* two-way: the same Ban thưởng as hers (empAct reward): her bạc, relation +20, regard +10, Danh +3 */ap(qq,BAL.tw.reward);relAdd(qq,p,BAL.tw.g.reward[0]);p.hh+=BAL.tw.g.reward[1];ap(p,{danh:BAL.tw.g.reward[2]});if(p===S)ev+=`Hoàng hậu ${qq.name} ban thưởng cho ngươi. Danh +${BAL.tw.g.reward[2]}. `}
   if(npcWhy("raid",{p},()=>roll(npw1B("j8").raidGo))){const s=search(p);if(s)ev+=p===S||eyes(S)>=2?s:""}}
  return ev}
@@ -533,10 +536,10 @@ function doAct(i,k){const v=rivals[i],a=ACT[k];const hk=typeof harmK==="function
  const fz=ACTFZ&&ACTFZ.k===k?ACTFZ.o:actOdds(S,v,k);/* the odds she saw, read before the spend (j9 fzRun); from the card game (jsgame sgRun) = its result odds */
  /* parallel time (jptime): a deed done by a SENT servant — she pays the order, the servant goes, the deed lands at the due khắc */if(typeof ptHarmSend==="function"&&ptHarmSend(v,k,fz)){spend(hk);render();return}spend(BAL.time.cost.harm);const r=fzRun(fz,k,()=>runAct(S,v,k));if(r)log(r);render()}
 function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(2);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,BAL.eff.j8.empAct);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
- if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
- else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
+ if(k==="judge"){if(!chOK(S,v))return;r=judge(S,v)}
+ else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);ilSeize(v,v.inv[j],"conf");relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
  else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);v.hh+=BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
- else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
+ else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out&&!coldStayOk(v)){log(`${v.name} mới vào lãnh cung, còn ${coldDaysLeft(v)} ngày nữa mới được ân xá.`);return}if(v.out)coldFree(v);v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
  else return;spend(2);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}
 PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(p.v)||{}).name]]:giftTargets();
