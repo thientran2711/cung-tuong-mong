@@ -24,3 +24,6 @@ STATE at start: LIVE 3af7896e · ROLLBACK 6b5d3d05. Tools = lc21-tools (SP= fixe
 ## 12:00Z — FREEZE READY sent to MAIN 159 (1dcb373e)
 - Chain: all PASS except global-names 1 CLASH (=LIVE), stage-stay flake, mg-back 2/12 Fold+iPad (LIVE rerun same 2/12: FAIL 1 + FAIL 6 both devices). QC PASS old save ok; perf new/live render 254/295, tab 687/613, buổi 2798/1901 (flagged), tasks 40/39.
 - HW-NITS aa37de21 gates start (gates-hw2.sh, QCBASE=wt/fz).
+- 11:54Z MAIN 159: news-sieve slot = review/kawhy-verdict cace0315 (supersedes news-sieve d6e27b01 + news-sieve-rv 82eb2832; contains ob-verdict-rv 5dc1db31) — waits RV-DELTA part 3. kem-row d0c24fa2 after ob-verdict. 22beb8d8 ignored.
+- 11:56Z MAIN 159: A/B before push (×5 interleaved, buổi; new median ≤ LIVE+15% → «AB OK 1dcb373e»; else profile). QC per-run new buổi 1584/1653/4012 (run 2 dropped as playable outlier → median of 2 = 2798). A/B = quickcheck --runs 5 on fz vs live (alternating), HW-NITS gates in parallel (symmetric load).
+- 12:20Z «AB OK 1dcb373e» sent: buổi new [2184,2315,2199,1516,2234] vs live [2340,2067,1563,1434,2353] → raw median 2199/2067 (+6%); gated 2192/2340; render 276/252, tab 661/662, tasks 40/40; QC PASS.
