@@ -138,3 +138,6 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 10:35Z MAIN 157: ob-m3ui slot → ob-m3ui-sololh eca83a5d (SMALL PASS).
 - 10:44Z RV-OB-VERDICT (session_01V1ZZH4KVXLc23oaAiikKLg): BIG+SMALL PASS review/ob-verdict-rv e27c9f9f (FF on LIVE; gate ob-verdict.test.js 81 Fold+iPad+old save). Owner bug → after firstcard (owner bugs first). Pending doc-only KIT.md line (successor sha equivalent). After LAND: wipe CDN img/_review/ob-verdict (tell MAIN).
 - 10:46Z RV-NEWS-SIEVE-2 (session_01V1ZZH3QAYX1bQZ4KysAkM7): BIG PASS news-sieve-rv 82eb2832 (on LIVE) → owner bug, after ob-verdict.
+- 10:47Z MAIN 157: news-sieve after ob-verdict; on its stack rerun news-sieve.test + ob-verdict.test; QC incl perf + old save.
+
+## 10:50Z — B FREEZE FIRST (MAIN 157): coop-freeze-kmrew-rv2 2673733e → review/lc21-fz (+ CHANGE line LC21 «Sửa lỗi treo máy khi chơi lâu (nhất là màn Fold): khung túi đồ và dải «Kéo xuống» không còn chồng dồn.»). HW-NITS gates stopped (restack after). Gates gates-fz.sh (chain + dress + observer-leak, scroll-cue-loop Fold+iPad; QC vs LIVE). MAIN: send READY per item, no batching.
