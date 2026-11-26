@@ -146,7 +146,10 @@ function eitReDialog(){return{ev:1,t:"Xin cấp lại y phục",who:typeof pEunC
 /* the robbery card offers the roads at once (it said "Nội vụ phủ sẽ cấp lại áo sau N tuần") */
 (function(){if(typeof tyRob!=="function")return;const r0=tyRob;tyRob=function(){const r=r0.apply(this,arguments);try{if(r){const m=Q.find(x=>x&&x.t==="Bị giật y phục giữa đường");if(m){
   m.h=m.h.replace(/<p>Nội vụ phủ sẽ cấp lại áo sau \d+ tuần; muốn sớm hơn thì mặc áo khác trong Tư trang\.<\/p>/,`<p>Muốn có áo sớm, phải xin Nội vụ phủ hay nhờ nhà; trong Tư trang có áo khác thì mặc được ngay.</p>`);
-  m.opts=eitReOpts(true)}}}catch(e){console.error("eit rob",e)}return r};window.tyRob=tyRob})();
+  /* save r5 (LAW 11, unseen-card family): the card's options run code (eitReOpts), so it is made by a registered generator (rk) — the sổ carries it and a
+     load makes it again from (title, body); before, the robbery card was LOST-AT-WRITE (probe iPad seed 1, rv9) and a true reload dropped it */
+  const c=eitRobCard(m.t,m.h);if(c){m.opts=c.opts;if(c.rk){m.rk=c.rk;m.ra=c.ra}}else m.opts=eitReOpts(true)}}}catch(e){console.error("eit rob",e)}return r};window.tyRob=tyRob})();
+const eitRobCard=rcpReg("eitRob",(t,h)=>typeof t==="string"&&typeof h==="string"?{t,kind:"notice",act:1,h,opts:eitReOpts(true)}:null);
 /* the family's robe arrives */
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{eitWeek()}catch(e){console.error("eitWeek",e)}return r};window.endTurn=endTurn})();
 function eitWeek(){if(!S||S.dead)return;
