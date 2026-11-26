@@ -110,3 +110,14 @@ VERDICT §4: PASS eb7ddb99 (FF from LIVE b881686f).
   rebuilt (kpOptArt wrapper), so only the placeholder re-unify of that sibling would be skipped. Low risk; a hash of textContent would close it.
 VERDICT §5: PASS 1d57fe88 (FF from LIVE b881686f). The worker's quickcheck and coop-e2e on 1d57fe88 were still running when I wrote this;
 this verdict does not cover them.
+
+## §6 — delta 8d5e3382 (1d57fe88 + merge of LIVE f573dc94) — PASS
+- 8d5e3382 is a fast-forward of LIVE origin/main f573dc94 (checked).
+- `git diff f573dc94 8d5e3382 -- dev/build dev/kit` is line-for-line the F10 diff passed in §5 (`git diff b881686f 1d57fe88`): the +/- lines
+  compared with diff → identical. The LIVE delta b881686f..f573dc94 (49 files) adds no MutationObserver / ResizeObserver /
+  requestAnimationFrame / setInterval (grep: 0). The only F10 file it touches is jbal2.js, and BAL.kobs is intact there.
+- Build: build_site.sh on 8d5e3382 reproduces index.html (only CTM_BI changes). Tests: scroll-cue-loop 755x1000 + 1180x820 PASS;
+  kscue-loop PASS all 4.
+- Worker's evidence (not re-run by me): Seat A ckpt b1658 replay, 44 min each. LIVE b881686f: 8 buổi, 33 hang samples.
+  Fix 1d57fe88: 61 buổi, 0 hangs. Minor 6 (sibling signature) is left as is and noted in the worker report; still non-blocking.
+VERDICT §6: PASS 8d5e3382 (FF from LIVE f573dc94).
