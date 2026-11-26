@@ -1,1 +1,1 @@
-Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.
+Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»).
