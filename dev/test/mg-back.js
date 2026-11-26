@@ -68,7 +68,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    document.querySelector('#kg82 [data-mgcal-k="dan"]').click();await sleep(800);o.rules_x=__x();
    document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(400);o.rules_back=/Tài nghệ các môn/.test(__state().title)&&!__cf();
    document.querySelector('#kg82 [data-mgcal-k="dan"]').click();await sleep(800);document.getElementById('kgrtut').click();await sleep(1200);o.tut_x=__x();
-   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(400);o.tut_back=/Tài nghệ các môn/.test(__state().title)&&!KG82.tut&&!document.querySelector('.kgt-hand');
+   /* E95 (owner OD 26/11 ~01:25Z): ✕ during «Hướng dẫn» = «Về luật chơi» (the same rules screen, nothing ended); a second ✕ on the rules screen → the kind list */
+   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(400);o.tut_rules=__state().rules&&!KG82.tut&&!document.querySelector('.kgt-hand');
+   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(400);o.tut_back=o.tut_rules&&/Tài nghệ các môn/.test(__state().title);
    document.querySelector('#kg82 [data-mgcal-k="dan"]').click();await sleep(800);document.getElementById('kg82go').click();await sleep(2500);o.play_x=__x();o.playing=KG82.phase==='play';
    document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(300);o.play_cf=__cf();__yes();await sleep(500);o.play_back=/Tài nghệ các môn/.test(__state().title)&&!KG82.run;
    /* between rounds: fake the board (the boards are tested elsewhere), play round 1, then ✕ */
@@ -143,7 +145,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  B=bad((l,r)=>!r.cf_play&&r.after_play&&r.after_play.open&&r.after_play.res&&!r.after_play.run);ok(!B.length,'4 play ✕ → no confirm → the caller\'s own result screen, board stopped',B);
  B=bad((l,r)=>{const a=r.after_res2;return a&&(/khảo hạch/.test(l)?(a.open&&/Môn 2/.test(a.title)):!a.open&&(/(Tu đức|Nghiệm thân|mưu kế|Chải chuốt)/.test(l)||a.done.length===1))});ok(!B.length,'4 ✕ on the give-up result = its «Đã hiểu» (frame closes, onDone once; khảo hạch: the next subject)',B);
  B=rows.filter(([l,r])=>r.after_play&&/\d+\/10/.test(r.after_play.resTxt)&&!/(^|\D|Môn \d)0\/10/.test(r.after_play.resTxt)).map(([l,r])=>l+' '+r.after_play.resTxt);ok(!B.length,'4 the give-up result reads 0/10 where the caller shows a score',B);
- ok(!cal.err&&XV(cal.list_x)&&cal.noThoi&&XV(cal.rules_x)&&cal.rules_back&&XV(cal.tut_x)&&cal.tut_back&&XV(cal.play_x)&&cal.playing&&!cal.play_cf&&cal.play_back&&XV(cal.mid_x)&&cal.mid_nx&&cal.mid_back&&!cal.dan0&&!cal.dan1&&cal.list_close,'2 Thử tay: ✕ → kind list from rules / Hướng dẫn / play (no confirm) / between rounds; kind not saved; ✕ closes the list',cal);
+ ok(!cal.err&&XV(cal.list_x)&&cal.noThoi&&XV(cal.rules_x)&&cal.rules_back&&XV(cal.tut_x)&&cal.tut_back&&XV(cal.play_x)&&cal.playing&&!cal.play_cf&&cal.play_back&&XV(cal.mid_x)&&cal.mid_nx&&cal.mid_back&&!cal.dan0&&!cal.dan1&&cal.list_close,'2 Thử tay: ✕ → kind list from rules / Hướng dẫn (via its rules screen) / play (no confirm) / between rounds; kind not saved; ✕ closes the list',cal);
  {const L=Object.keys(pre).filter(k=>typeof pre[k]==='object'&&pre[k]&&'ok' in pre[k]);const B2=L.filter(k=>!pre[k].ok).map(k=>k+' '+JSON.stringify(pre[k]));
   ok(L.length>=9&&!B2.length,'6 before «Sẵn sàng»: ✕ = free back, no confirm, nothing spent (Sức, bạc, phí, khắc, vật liệu identical) — jtd, j83 (dialog + deck card), jrcp, jveil, jsgame pay',B2);
   ok(L.filter(k=>!/jtd|thẻ/.test(k)).every(k=>pre[k].remembered),'6b the charge is only REMEMBERED on the rules screen (nothing spent, spend() never ran, S→rivals refs identical)',L.map(k=>k+':'+pre[k].remembered+'/sp'+pre[k].spends+'/refs'+pre[k].refs));
