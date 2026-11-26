@@ -222,7 +222,7 @@ Object.assign(BAL,{
       accWin:{danh:4}}, /* an accusation that holds: her Danh (a failed one: BAL.tw.g.accFail) */
  m95b:{k:1,             /* khắc to clear a rumour face to face, or to trace who spread it */
       trace:{bac:-10}}, /* silver to have the rumour traced */
- kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */,aim:{sung0:34,sung:-10,loyal:-5}/* KIT 7.3 «Người ấy» sample (jkitpage kitPgWhy) */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
+ kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */,aim:{sung0:34,sung:-10,loyal:-5},kem:{g:8,o:-3,tc1:6,tc2:2,sung:3,tc3:-4,suc:-10}/* §53 kitKemRow + night-card person rows sample (jkitpage kitPgKem) *//* KIT 7.3 «Người ấy» sample (jkitpage kitPgWhy) */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
       wk:2,         /* kit sample page: the demo "· 2 tuần trước" age of a mood cause */
       listen:{duc:1},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
       clock:{left:22000,len:30000}},  /* kit sample page: the timed-choice demo chip (§69 + §32.5c): 22 s left of 30 s */
