@@ -38,6 +38,8 @@ let CUR=null;
 function css(){if(document.getElementById("k-ring"))return;const s=document.createElement("style");s.id="k-ring";s.textContent=`
 .kscn.kring .kscn-bg{filter:none!important}.kscn.kring .kscn-veil{opacity:0!important}
 .kring-band{position:absolute;inset:0;z-index:5;touch-action:none}
+/* RING-BUILD-4 (MAIN LOOK FAIL 26/11): every figure lives in ONE layer UNDER every tap target (✕ ‹ › tabs 60, plaques .kpk 30, bubble 270) — a figure is never drawn over a button */
+.kring-wrap{position:absolute;inset:0;z-index:10;pointer-events:none;will-change:transform}
 .kring-s{position:absolute;left:0;top:0;transform-origin:50% 100%;will-change:transform;pointer-events:none;z-index:10}
 .kring-halo{position:absolute;pointer-events:none;z-index:0;opacity:0;will-change:opacity;background:radial-gradient(ellipse 50% 50% at 50% 55%,rgba(255,228,160,.85),rgba(255,228,160,.4) 50%,rgba(255,228,160,0) 72%)}
 .kring-m{position:absolute;z-index:1;bottom:0;transform-origin:50% 100%}
@@ -108,7 +110,7 @@ function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const 
   const st=N>1?Math.abs(a):0,d=Math.min(1,st*KIT_RING.dimK);s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
 function stepPx(R){const g=geo(R);return Math.max(60,g.Rx*2*Math.PI/Math.max(3,R.slots.length)*.7)}
-function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){res();return false}}))}
+function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){yieldCard(R);res();return false}}))}
 function fling(R,v){R.v=v;if(calm())return snap(R);return new Promise(res=>loop(dt=>{R.rot+=R.v*dt;R.v*=Math.pow(KRING_MATH.decay,dt/16.67);place(R);if(Math.abs(R.v)<KRING_MATH.stop){snap(R).then(res);return false}}))}
 const snap=R=>tween(R,Math.round(R.rot),KRING_MATH.snapMs);
 const front=R=>KRING_MATH.front(R.rot,R.slots.length);
@@ -119,7 +121,7 @@ async function open(o){o=o||{};close(true);css();const m=kv();
  const figs=await Promise.all(ppl.map(x=>loadFig(x.p)));const list=ppl.filter((x,k)=>{x.f=figs[k];return !!x.f});if(!list.length)return null;
  const Sc=kitScene.open({bg:o.bg});const L=Sc.L;L.classList.add("kring");document.body.classList.add("kring-on");L.style.opacity="0";
  const R={Sc,L,list,rot:0,v:0,mode:o.mode||"person",slots:[],sel:-1,busy:0,pk:null,o};CUR=R;
- const band=document.createElement("div");band.className="kring-band";L.appendChild(band);R.band=band;
+ const band=document.createElement("div");band.className="kring-band";L.appendChild(band);R.band=band;const wrap=document.createElement("div");wrap.className="kring-wrap";L.appendChild(wrap);R.W=wrap;
  /* top: kit tabs «Từng người · Từng nhóm» + ✕ */
  const tabs=document.createElement("div");tabs.className="pctabs kring-tabs";tabs.innerHTML=[["person","Từng người"],["group","Từng nhóm"]].map(([k,n])=>`<button type="button" class="pct" data-kr="${k}">${n}</button>`).join("");
  tabs.addEventListener("click",e=>{const b=e.target.closest("[data-kr]");if(b&&!R.busy)setMode(R,b.dataset.kr)});L.appendChild(tabs);R.tabs=tabs;
@@ -128,7 +130,7 @@ async function open(o){o=o||{};close(true);css();const m=kv();
   if(o.title){const tt=document.createElement("div");tt.className="kring-tt";tt.innerHTML=`<span class="kptitle">${esc(o.title)}</span>`+(o.sub?`<small>${esc(o.sub)}</small>`:"");L.appendChild(tt);if(o.tabs&&o.tabs.length)tt.style.top="52px"}}
  const xw=document.createElement("div");xw.className="kring-x";xw.innerHTML=typeof kitXHTML==="function"?kitXHTML("","Lui"):`<button type="button" class="kit-x" aria-label="Lui">✕</button>`;xw.firstElementChild.addEventListener("click",e=>{e.stopPropagation();if(R.busy)return;if(R.sel>=0)return back(R);close();if(o.onClose)try{o.onClose()}catch(x){console.error(x)}});L.appendChild(xw);R.x=xw;
  const mk=(txt,fn)=>{const b=document.createElement("button");b.type="button";b.className="kbtn kring-ui kring-ar";b.textContent=txt;const a=KIT_RING.arrow[m];b.style.cssText+=`width:${a}px;min-height:${a}px;padding:0;font-size:1.4rem`;b.addEventListener("click",e=>{e.stopPropagation();if(!R.busy&&R.sel<0)turnBy(R,txt==="‹"?-1:1)});L.appendChild(b);return b};
- R.arL=mk("‹");R.arR=mk("›");
+ R.arL=mk("‹");R.arR=mk("›");R.ct=0;R.watch=setInterval(()=>watch(R),250);
  /* drag / swipe with inertia; a tap: front slot = focus, a side slot = turn to it */
  let x0=0,last=0,lt=0,drag=0,moved=0;band.addEventListener("pointerdown",e=>{if(R.busy||R.sel>=0)return;drag=1;moved=0;x0=last=e.clientX;lt=performance.now();R.v=0;cancelAnimationFrame(raf);try{band.setPointerCapture(e.pointerId)}catch(_){}});
  band.addEventListener("pointermove",e=>{if(!drag)return;const now=performance.now(),dx=e.clientX-last;if(Math.abs(e.clientX-x0)>6)moved=1;if(!moved)return;R.rot-=dx/stepPx(R);R.v=-(dx/stepPx(R))/Math.max(1,now-lt);last=e.clientX;lt=now;place(R)});
@@ -139,10 +141,11 @@ async function open(o){o=o||{};close(true);css();const m=kv();
  return R}
 async function build(R){R.slots.forEach(s=>s.remove());R.slots=[];const m=kv(),g0=R.L.g;if(R.stdPx==null)R.stdPx=stdImgR()||g0.H*KIT_RING.stdR[m];R.stdR=R.stdPx/g0.H;const fh0=Math.round(R.stdPx);
  const groups=R.o.groups?R.o.groups.map((G,gi)=>({gi,members:R.list.filter(x=>x.gi===gi),line:G.line||G.name||""})).filter(g=>g.members.length):R.mode==="group"?groupsOf(R.list):R.list.map(x=>({members:[x],line:""}));
- R.groups=groups;R.slots=groups.map(g=>{const s=buildSlot(R,g,fh0);R.L.appendChild(s);return s});R.rot=0;
+ R.groups=groups;R.slots=groups.map(g=>{const s=buildSlot(R,g,fh0);R.W.appendChild(s);return s});R.rot=0;
  if(R.o.at!=null){const k=R.o.groups?groups.findIndex(g=>g.gi===R.o.at):R.list.findIndex(x=>x.i===R.o.at);if(k>=0)R.rot=k}place(R);
  if(!R.o.acts)R.tabs.querySelectorAll(".pct").forEach(b=>b.classList.toggle("on",b.dataset.kr===R.mode));
- const g=geo(R),a=KIT_RING.arrow[m],fy=g.floor-g.H*(R.stdR||KIT_RING.stdR[m])*.45;R.arL.style.left="6px";R.arR.style.left=(g.w-a-6)+"px";R.arL.style.top=R.arR.style.top=fy+"px";
+ arrows(R);yieldCard(R)}
+function arrows(R){const m=kv(),g=geo(R),a=KIT_RING.arrow[m],fy=g.floor-g.H*(R.stdR||KIT_RING.stdR[m])*.45;R.arL.style.left="6px";R.arR.style.left=(g.w-a-6)+"px";R.arL.style.top=R.arR.style.top=fy+"px";
  [R.arL,R.arR].forEach(b=>b.style.visibility=R.slots.length>1?"":"hidden")}
 async function setMode(R,m){if(m===R.mode)return;R.busy=1;try{if(R.sel>=0)await back(R,true);const out=R.slots.map(s=>s.animate([{opacity:1},{opacity:0}],{duration:calm()?1:180,fill:"both"}).finished);await Promise.all(out);R.mode=m;await build(R);
  if(!calm())R.slots.forEach((s,i)=>s.animate([{opacity:0,transform:s.style.transform+" scale(.85)"},{opacity:1,transform:s.style.transform}],{duration:300,delay:i*40,easing:E}))}finally{R.busy=0}}
@@ -152,43 +155,64 @@ function tapAt(R,x,y){const s=slotAt(R,x,y);if(!s)return;const i=R.slots.indexOf
 function turnBy(R,d){return tween(R,Math.round(R.rot)+d,KRING_MATH.stepMs)}
 function turnTo(R,i){const N=R.slots.length;const d=KRING_MATH.short(i,R.rot,N);return tween(R,R.rot+d,Math.min(700,KRING_MATH.stepMs+Math.abs(d)*90))}
 /* ---------- focus: the front slot grows to a big full body, slides LEFT; plaques drop on the RIGHT ---------- */
-function anim(el,to,ms){const from=el.style.transform;el.style.transform=to;if(calm()||!from)return Promise.resolve();return el.animate([{transform:from},{transform:to}],{duration:ms,easing:E}).finished.catch(()=>{})}
+function anim(el,to,ms){const from=el.style.transform||"none";el.style.transform=to;if(calm())return Promise.resolve();return el.animate([{transform:from},{transform:to}],{duration:ms,easing:E}).finished.catch(()=>{})}
 async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R);R.sel=i;const s=R.slots[i],m=kv(),g=geo(R),K=KIT_RING;
  R.slots.forEach((o,k)=>{if(k===i)return;o.animate([{opacity:1},{opacity:0}],{duration:calm()?1:260,fill:"both"})});
  [R.arL,R.arR,R.tabs].forEach(b=>b.animate([{opacity:1},{opacity:0}],{duration:calm()?1:200,fill:"both"}));
  s.__g.members.forEach(x=>{x.dim.style.opacity="0"});s.classList.remove("kring-front");
- const fwS=s.offsetWidth,grp=s.__g.members.length>1;let sc=(g.H*K.fhF[m])/(s.__feet-s.__top);if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);const cx=g.w*(grp?K.fx[m]+.03:K.fx[m]),feet=g.H*.995;
+ const grp=s.__g.members.length>1,FG=focusGeo(R,s),sc=FG.sc,cx=FG.cx,feet=FG.feet;
  R.fT=`translate(${(cx-s.__cx).toFixed(1)}px,${(feet-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;R.fSc=sc;R.fCx=cx;R.fFeet=feet;s.style.zIndex="200";
- await anim(s,R.fT,K.focusMs);
+ await anim(s,R.fT,K.focusMs);yieldCard(R);
  if(R.o.groups)return groupChoose(R,s);if(grp)return groupPick(R);return personPick(R,s.__g.members[0])}finally{R.busy=0}}
+/* RING-BUILD-4 focus geometry (owner 26/11 ~20:30Z «Vòng người che nút chọn … mất cả đầu ở trên»; MAIN LOOK FAIL: the figure over the plaques' left column):
+   the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
+   layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
+function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
+function plaqueNeed(m){const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
+function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(m),P=paintX(s),hh=s.__feet-s.__top;
+ let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
+ const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
+ if(over>0){cx-=Math.min(over,Math.max(0,left()-edge));over=right()+need-g.w}
+ if(over>0){sc=Math.max(.3,(g.w-need-edge)/Math.max(1,P.r-P.l));cx=edge+(s.__cx-P.l)*sc}
+ /* a group member who steps out grows ×1.06 from her feet: the head line keeps that room */const up=grp?1.08:1;if(feet-hh*sc*up<4)sc=(feet-4)/(hh*up);return{sc,cx,feet}}
+/* every ring picker opens through here: with TWO plaque columns the left column's ✓ / ✕ sits on its outer (left) side = toward the figure → the band moves right by that room */
+function pickOpen(R,o){let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
+/* the union box of every member of the focused slot (layer px): the plaques and the bubble go to the right of the WHOLE cluster, never over a member */
+function unionBox(R){const M=R.slots[R.sel].__g.members.map(y=>boxOf(R,y));const x0=Math.min(...M.map(b=>b.x)),y0=Math.min(...M.map(b=>b.y));return{x:x0,y:y0,w:Math.max(...M.map(b=>b.x+b.w))-x0,h:Math.max(...M.map(b=>b.y+b.h))-y0}}
 /* §104.3 group PICKER mode (open({groups:[{name,line,people}], gacts(gi)→acts|groups, onGroupPick(gi,id)})): the focused group's plaques = the caller's choices for that group */
 function groupChoose(R,s){closePk(R);const gi=s.__g.gi,M=s.__g.members;let A=[];try{A=R.o.gacts?R.o.gacts(gi)||[]:[]}catch(e){console.error(e)}
  const b=M.map(x=>boxOf(R,x)).reduce((u,q)=>u?{x:Math.min(u.x,q.x),y:Math.min(u.y,q.y),w:Math.max(u.x+u.w,q.x+q.w)-Math.min(u.x,q.x),h:Math.max(u.y+u.h,q.y+q.h)-Math.min(u.y,q.y)}:q,null);
- R.pk=kitPick.open(Object.assign({host:R.L,anchor:b,side:"r",dismiss:false},A.length&&A[0].acts?{groups:A}:{acts:A},{onPick:id=>{const fn=R.o.onGroupPick;close(true);if(fn)try{fn(gi,id)}catch(e){console.error("kitRing gpick",e)}}}));return R.pk}
+ R.repick=()=>groupChoose(R,s);R.pk=pickOpen(R,Object.assign({host:R.L,anchor:b,side:"r",dismiss:false,noLap:true},A.length&&A[0].acts?{groups:A}:{acts:A},{onPick:id=>{const fn=R.o.onGroupPick;close(true);if(fn)try{fn(gi,id)}catch(e){console.error("kitRing gpick",e)}}}));return R.pk}
 /* the painted box of one member of the focused slot, in layer px */
-function boxOf(R,x){const s=R.slots[R.sel],sc=R.fSc,ox=R.fCx-s.__cx*sc,oy=R.fFeet-s.__feet*sc;const left=(x.left||0),top=x.el.offsetTop-(x.lift||0);
+function boxOf(R,x){/* RING-BUILD-4: the painted box as it IS on screen (a stepping-out member's neighbours draw back ±12 % — the old maths missed that and the plaques landed on them) */
+ try{const r=x.el.getBoundingClientRect(),o=x.f.ob;if(r.width>1&&r.height>1){const a=unyield(R,r.left,r.top),b=unyield(R,r.right,r.bottom),W=b.x-a.x,H=b.y-a.y;return {x:a.x+o.l*W,y:a.y+o.t*H,w:(o.r-o.l)*W,h:(o.b-o.t)*H}}}catch(e){}return boxOf0(R,x)}
+/* a screen point → layer px WITHOUT the figure layer's card yield (slide / shrink while a result card shows): plaques, tags and the bubble keep the full-size room, which holds the yielded figure */
+function unyield(R,px,py){const L=R.L.getBoundingClientRect();let x=px-L.left,y=py-L.top;try{const c=getComputedStyle(R.W);if(c.transform&&c.transform!=="none"){const m=new DOMMatrix(c.transform),og=c.transformOrigin.split(" ").map(parseFloat),ox=og[0]||0,oy=og[1]||0;const q=m.inverse().transformPoint(new DOMPoint(x-ox,y-oy));x=q.x+ox;y=q.y+oy}}catch(e){}return{x,y}}
+function boxOf0(R,x){const s=R.slots[R.sel],sc=R.fSc,ox=R.fCx-s.__cx*sc,oy=R.fFeet-s.__feet*sc;const left=(x.left||0),top=x.el.offsetTop-(x.lift||0);
  return {x:ox+(left+x.f.ob.l*x.fw)*sc,y:oy+(top+x.f.ob.t*x.fh)*sc,w:(x.f.ob.r-x.f.ob.l)*x.fw*sc,h:(x.f.ob.b-x.f.ob.t)*x.fh*sc}}
 function closePk(R){if(R.pk){try{R.pk.destroy()}catch(e){}R.pk=null}if(R.ftg){R.ftg.remove();R.ftg=null}}
 function focusTag(R,x){if(R.ftg)R.ftg.remove();const b=boxOf(R,x);const t=tagEl(x.p,"kring-ftg");t.style.left=(b.x+b.w/2)+"px";t.style.top=Math.min(R.L.g.H-30,b.y+b.h+2)+"px";
- /* the big figure's feet reach the floor: the tag sits over the lower legs, never over a face */if(b.y+b.h+30>R.L.g.H)t.style.top=(b.y+b.h*.86)+"px";R.L.appendChild(t);R.ftg=t;if(!calm())t.animate([{opacity:0},{opacity:1}],{duration:220,fill:"both"})}
+ /* the big figure's feet reach the floor: the tag sits over the lower legs, never over a face */if(b.y+b.h+30>R.L.g.H)t.style.top=(b.y+b.h*.86)+"px";R.W.appendChild(t);R.ftg=t;if(!calm())t.animate([{opacity:0},{opacity:1}],{duration:220,fill:"both"})}
 function acts(R,x){let G=[];try{G=dfData(x.i)||[]}catch(e){}return G.filter(g=>g.acts&&g.acts.length).map(g=>({k:g.k,n:g.n,acts:g.acts}))}
 /* the person she talks to = the game's OWN focus-view flow (jdfv: DF.p / DF.F, dfTap → dfRun → dfAfter; an event frame about this person (Q, e.g. «Trò chuyện» topics)
    plays in the same focus: its lines in the kit speech bubble, its answers as thẻ gỗ on the right). The ring is that view's FIGURE + PICKER (adapter F below);
    the old kitFocus figure view is not opened while the ring holds the person (ONE figure on the scene). On-figure mini-games: F.play → null = the plain result (game layer later, KK44). */
 function personPick(R,x,G){closePk(R);R.who=x;focusTag(R,x);
  if(R.o.acts){let A=[];try{A=R.o.acts(x)||[]}catch(e){console.error("kitRing acts",e)}const others=R.slots[R.sel].__g.members.filter(y=>y!==x).map(y=>boxOf(R,y));
-  R.pk=kitPick.open(Object.assign({host:R.L,anchor:boxOf(R,x),avoid:others,side:"r",dismiss:false},A.length&&A[0].acts?{groups:A}:{acts:A},{onPick:id=>{const fn=R.o.onPick;close(true);if(fn)try{fn(x.i,id,x.p)}catch(e){console.error("kitRing pick",e)}}}));return R.pk}
+  R.repick=()=>personPick(R,x);R.pk=pickOpen(R,Object.assign({host:R.L,anchor:unionBox(R),avoid:others,side:"r",dismiss:false,noLap:true},A.length&&A[0].acts?{groups:A}:{acts:A},{onPick:id=>{const fn=R.o.onPick;close(true);if(fn)try{fn(x.i,id,x.p)}catch(e){console.error("kitRing pick",e)}}}));return R.pk}
  try{if(typeof DF==="object"&&DF){if(!R.tk||DF.F!==R.F){const tk={};R.tk=tk;DF.tk=tk}DF.p=x.p;DF.i=x.i;popIdx=x.i;DF.F=R.F=adapter(R,x)}}catch(e){console.error("kitRing DF",e)}
  G=G||acts(R,x);const others=R.slots[R.sel].__g.members.filter(y=>y!==x).map(y=>boxOf(R,y));
  if(!G.length){try{kitResultCard({title:x.p.name,ok:true,rows:[{k:"note",label:"",items:["Lúc này không có việc gì để làm với người này."]}]})}catch(e){}return}
- R.pk=kitPick.open({host:R.L,anchor:boxOf(R,x),avoid:others,side:"r",groups:G.map(g=>({k:g.k,n:g.n,acts:g.acts})),dismiss:false,onPick:(id,a)=>runAct(R,x,id,a)});return R.pk}
+ R.repick=()=>personPick(R,x);R.pk=pickOpen(R,{host:R.L,anchor:unionBox(R),avoid:others,side:"r",noLap:true,groups:G.map(g=>({k:g.k,n:g.n,acts:g.acts})),dismiss:false,onPick:(id,a)=>runAct(R,x,id,a)});return R.pk}
 function showQ(){try{if(typeof Q!=="undefined"&&Q.length&&document.getElementById("modal").hidden){if(typeof render==="function")render();if(Q.length&&document.getElementById("modal").hidden&&typeof showModal==="function")showModal()}}catch(e){console.error("kitRing frame",e)}}
 async function runAct(R,x,id,a){closePk(R);R.last=a&&a.n;try{if(typeof dfTap==="function"&&DF.F===R.F)dfTap(id);else dfRun(x.i,id)}catch(e){console.error("kitRing act",e)}
  /* an event frame the act queued (Q): show it now (the place stage under the ring would have shown it on its next render) */await wait(60);showQ();
  const again=()=>{if(CUR!==R||R.sel<0||R.who!==x)return;if(R.saying||R.pk)return;if(typeof Q!=="undefined"&&Q.length||!document.getElementById("modal").hidden){showQ();setTimeout(again,400);return}personPick(R,x)};setTimeout(again,700)}
 /* the light speech bubble beside the big figure (kit speech look of §102.2 .ksay: soft paper, thin gold edge; no panel) */
-function sayBox(R,x){let b=R.say;if(!b){b=document.createElement("div");b.className="kring-say";R.L.appendChild(b);R.say=b}const m=kv(),B=boxOf(R,x),W=R.L.g.w,H=R.L.g.H;
- const left=Math.min(W-12-Math.min(W*.46,460),B.x+B.w*.72),w=Math.min(W*(m==="kv2"?.40:.46),460);b.style.cssText=`left:${Math.max(8,left)}px;top:${Math.round(H*(m==="kv2"?.12:.10))}px;width:${w}px`;return b}
+function sayBox(R,x){let b=R.say;if(!b){b=document.createElement("div");b.className="kring-say";R.L.appendChild(b);R.say=b}const m=kv(),B=R.sel>=0?unionBox(R):boxOf(R,x),W=R.L.g.w,H=R.L.g.H;
+ /* RING-BUILD-4: the bubble starts right of her painted box (never over her face / body); only a too-narrow room falls back to the old overlap */
+ const wMax=Math.min(W*(m==="kv2"?.40:.46),460),l0=B.x+B.w+14,room=W-12-l0;let left,w;if(room>=Math.min(wMax,220)){left=l0;w=Math.min(wMax,room)}else{w=wMax;left=Math.min(W-12-w,B.x+B.w*.72)}
+ b.style.cssText=`left:${Math.max(8,left)}px;top:${Math.round(H*(m==="kv2"?.12:.10))}px;width:${w}px`;return b}
 function adapter(R,x){const F={get el(){return R.L},get figEl(){return x.el&&x.el.querySelector("img")},figRect(){const b=boxOf(R,x),r=R.L.getBoundingClientRect();return new DOMRect(r.left+b.x,r.top+b.y,b.w,b.h)},
  playing:false,play(){return null},intro(){return false},endPlay(){},hud(){},
  say(lines,o){o=o||{};closePk(R);const L=(lines||[]).filter(l=>l&&l.text);if(!L.length){o.onDone&&o.onDone();return}R.saying=1;const b=sayBox(R,x);let k=0;
@@ -196,7 +220,7 @@ function adapter(R,x){const F={get el(){return R.L},get figEl(){return x.el&&x.e
    R.tl=typeof kitTypeLine==="function"?kitTypeLine(st,l.text):(st.textContent=l.text,{done:true,finish(){}});if(!calm())b.animate([{opacity:0,transform:"translateY(6px)"},{opacity:1,transform:"none"}],{duration:200,fill:"both"})};
   const next=e=>{if(e){e.stopPropagation();e.preventDefault()}if(R.tl&&!R.tl.done){R.tl.finish();return}k++;if(k<L.length){show();return}R.L.removeEventListener("pointerup",next,true);R.saying=0;b.remove();R.say=null;o.onDone&&o.onDone()};
   R.L.addEventListener("pointerup",next,true);show()},
- choices(list,cb){closePk(R);R.pk=kitPick.open({host:R.L,anchor:boxOf(R,x),side:"r",acts:(list||[]).map(a=>({id:a.id,n:a.n,pic:a.pic||"",word:a.word||"",ton:a.ton||"",off:!!a.off,why:a.why||""})),dismiss:false,onPick:id=>{closePk(R);cb&&cb(id);setTimeout(()=>{showQ()},60)}})},
+ choices(list,cb){closePk(R);R.repick=()=>F.choices(list,cb);R.pk=pickOpen(R,{host:R.L,anchor:unionBox(R),side:"r",noLap:true,acts:(list||[]).map(a=>({id:a.id,n:a.n,pic:a.pic||"",word:a.word||"",ton:a.ton||"",off:!!a.off,why:a.why||""})),dismiss:false,onPick:id=>{closePk(R);cb&&cb(id);setTimeout(()=>{showQ()},60)}})},
  setGroups(G){if(CUR!==R||R.sel<0||R.who!==x||R.saying)return;if(typeof Q!=="undefined"&&Q.length)return;personPick(R,x,(G||[]).filter(g=>g.acts&&g.acts.length))},
  react(o){try{const ln=o&&o.line;if(!ln)return;const b=sayBox(R,x);b.innerHTML=`<span class="kring-st">${esc(ln)}</span>`;if(!calm())b.animate([{opacity:0},{opacity:1,offset:.1},{opacity:1,offset:.85},{opacity:0}],{duration:2600,fill:"both"}).onfinish=()=>{if(R.say===b&&!R.saying){b.remove();R.say=null}}}catch(e){}},
  open(){},close(){if(CUR===R&&R.sel>=0)back(R)},destroy(){closePk(R)}};return F}
@@ -206,21 +230,47 @@ function groupPick(R){closePk(R);dfLeave(R);R.who=null;const s=R.slots[R.sel],M=
  const nm=p=>{const q=p.ref||p;try{return typeof kitIsKnown==="function"&&!kitIsKnown(q)&&typeof kitUnkName==="function"?kitUnkName(q):(q.name||p.name)}catch(e){return p.name}};
  const list=[{id:"listen",n:"Đứng nghe",pic:typeof kitActArt==="function"&&(kitActArt("Nghe ngóng")||{}).src||"",word:"",ton:""},...M.map((x,k)=>({id:"m"+k,n:"Nói với "+nm(x.p),pic:face(x.p),word:"",ton:""}))];
  const a=M.map(x=>boxOf(R,x));const all={x:Math.min(...a.map(b=>b.x)),y:Math.min(...a.map(b=>b.y)),w:0,h:0};all.w=Math.max(...a.map(b=>b.x+b.w))-all.x;all.h=Math.max(...a.map(b=>b.y+b.h))-all.y;
- R.pk=kitPick.open({host:R.L,anchor:all,side:"r",acts:list,dismiss:false,onPick:id=>{if(id==="listen")return listen(R);stepOut(R,M[+id.slice(1)])}});return R.pk}
+ R.repick=()=>groupPick(R);R.pk=pickOpen(R,{host:R.L,anchor:all,side:"r",noLap:true,acts:list,dismiss:false,onPick:id=>{if(id==="listen")return listen(R);stepOut(R,M[+id.slice(1)])}});return R.pk}
 function listen(R){const s=R.slots[R.sel],M=s.__g.members;const nm=p=>{const q=p.ref||p;try{return typeof kitIsKnown==="function"&&!kitIsKnown(q)&&typeof kitUnkName==="function"?kitUnkName(q):(q.name||p.name)}catch(e){return p.name}};
- try{kitResultCard({title:s.__g.line,ok:true,rows:[{k:"note",label:"Nghe được",items:M.map(x=>`${esc(nm(x.p))}: ${esc(x.why||"đứng cùng nhóm")}`)}]})}catch(e){console.error(e)}/* a fresh picker (the chosen plaque goes back to the rail) */setTimeout(()=>{if(CUR===R&&R.sel>=0&&!R.who)groupPick(R)},250)}
+ try{kitResultCard({title:s.__g.line,ok:true,rows:[{k:"note",label:"Nghe được",items:M.slice(0,3).map(x=>`${esc(nm(x.p))}: ${esc(x.why||"đứng cùng nhóm")}`).concat(M.length>3?[`và ${M.length-3} người nữa đứng nghe cùng`]:[])}]})}catch(e){console.error(e)}/* a fresh picker (the chosen plaque goes back to the rail) */setTimeout(()=>{if(CUR===R&&R.sel>=0&&!R.who)groupPick(R)},250)}
 /* a member STEPS OUT of the group toward her: she comes forward, the others dim and draw back */
 async function stepOut(R,x){if(R.busy)return;R.busy=1;try{closePk(R);const s=R.slots[R.sel],M=s.__g.members;
- M.forEach(y=>{if(y===x)return;const t=(y.lift?`translateY(${-y.lift}px) `:"")+`translateX(${(y.cx<x.cx?-1:1)*y.fw*.12}px) scale(.94)`;anim(y.el,t,420);if(!calm())y.dim.animate([{opacity:0},{opacity:1}],{duration:420,fill:"forwards"}).onfinish=()=>{y.dim.style.opacity="1"};else y.dim.style.opacity="1"});
- x.el.style.zIndex="9";await anim(x.el,`scale(1.06)`,460);
- /* boxOf reads the member box unscaled: correct for the step-out scale */personPickScaled(R,x,1.06)}finally{R.busy=0}}
+ const ps=[];M.forEach(y=>{if(y===x)return;const t=(y.lift?`translateY(${-y.lift}px) `:"")+`translateX(${(y.cx<x.cx?-1:1)*y.fw*.12}px) scale(.94)`;ps.push(anim(y.el,t,420));if(!calm())y.dim.animate([{opacity:0},{opacity:1}],{duration:420,fill:"forwards"}).onfinish=()=>{y.dim.style.opacity="1"};else y.dim.style.opacity="1"});
+ x.el.style.zIndex="9";ps.push(anim(x.el,`scale(1.06)`,460));/* the plaques are placed on the cluster as it ENDS (every member's move done) */await Promise.all(ps);
+ /* boxOf reads the member box unscaled: correct for the step-out scale */personPickScaled(R,x,1.06);R.repick=()=>personPickScaled(R,x,1.06)}finally{R.busy=0}}
 function personPickScaled(R,x,k){const fw=x.fw,fh=x.fh,l=x.left,lf=x.lift||0;x.left=l-(fw*(k-1))/2;x.lift=lf+fh*(k-1);x.fw=fw*k;x.fh=fh*k;try{personPick(R,x)}finally{x.left=l;x.fw=fw;x.fh=fh;x.lift=lf}}
+/* RING-BUILD-4 WATCH (one 250 ms check while the ring is open):
+   (a) LAYER REFIT — the kit scene layer is sized once at open from kscnGeo() (HUD bottom → bottom bar top); when the bottom bar grows (a 3-line «Sang buổi» label after an act)
+       or the HUD / window changes, the layer took the old height and covered the bottom buttons (owner 20:30Z «Vòng người che nút chọn ở dưới»). Same kit geometry, re-applied;
+       ring / focus / plaques / bubble follow. (KIT REQUEST to KK45: kitScene.refit for every scene — the ring does it for its own layer until then.)
+   (b) RESULT CARD — while the kit result card (#rtoast.on) is over a figure, the figures SLIDE aside (smallest shift clear of the card and of every tap target), else SHRINK
+       (scaled from their head line until the feet clear the card top); back to full size when the card goes. Never over the card, never over a button. */
+function geoSig(){try{const g=kscnGeo();return [g.t,g.H,g.L,g.R,g.w].join(",")}catch(e){return ""}}
+function cardBox(){const t=document.getElementById("rtoast");if(!t||!t.classList.contains("on"))return null;try{const c=getComputedStyle(t);if(c.display==="none"||c.visibility==="hidden"||+c.opacity<.05)return null}catch(e){return null}const r=t.getBoundingClientRect();return r.width>4&&r.height>4?r:null}
+function watch(R){if(CUR!==R){clearInterval(R.watch);return}try{const gs=geoSig();if(gs&&gs!==R.gsig){const first=R.gsig==null;R.gsig=gs;if(!first)refit(R)}
+ const c=cardBox(),cs=c?[c.left,c.top,c.width,c.height].map(Math.round).join(","):"";if((cs!==R.csig||(cs&&++R.ct%4===0))&&!R.busy&&!raf){R.csig=cs;yieldCard(R)}}catch(e){console.error("kitRing watch",e)}}
+function refit(R){if(CUR!==R||typeof kscnGeo!=="function")return;const g=kscnGeo(),L=R.L;L.style.left=g.L+"px";L.style.right=g.R+"px";L.style.top=g.t+"px";L.style.height=g.H+"px";L.g=g;
+ if(R.sel<0){place(R)}else{const s=R.slots[R.sel];s.getAnimations().forEach(a=>{if(a.effect&&a.effect.getKeyframes().some(k=>k.transform))a.cancel()});const FG=focusGeo(R,s);R.fSc=FG.sc;R.fCx=FG.cx;R.fFeet=FG.feet;
+  R.fT=`translate(${(FG.cx-s.__cx).toFixed(1)}px,${(FG.feet-s.__feet).toFixed(1)}px) scale(${FG.sc.toFixed(3)})`;s.style.transform=R.fT;
+  if(R.pk&&R.repick)R.repick();else if(R.ftg&&R.who)focusTag(R,R.who);if(R.say&&R.who)sayBox(R,R.who)}
+ arrows(R);R.csig=null}
+function yieldCard(R){if(CUR!==R||!R.W)return;const W=R.W;W.getAnimations().forEach(a=>a.cancel());const prev=W.style.transform,po=W.style.transformOrigin;W.style.transform="";W.style.transformOrigin="";let to="",org="";
+ try{const c=cardBox();if(c){const L=R.L.getBoundingClientRect();const vis=e=>{for(let n=e;n&&n!==R.L;n=n.parentElement){const k=getComputedStyle(n);if(k.visibility==="hidden"||k.display==="none"||+k.opacity<.05)return false}return true};
+  const F=[];R.slots.forEach(s=>{if(!vis(s))return;s.__g.members.forEach(x=>{if(!vis(x.el))return;const r=x.el.getBoundingClientRect(),o=x.f.ob;F.push({x:r.left+o.l*r.width,y:r.top+o.t*r.height,w:(o.r-o.l)*r.width,h:(o.b-o.t)*r.height})})});
+  const hit=(a,b)=>Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x)>.5&&Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y)>.5;const C={x:c.left-6,y:c.top-6,w:c.width+12,h:c.height+12};
+  if(F.length&&F.some(f=>hit(f,C))){const T=[C];R.L.querySelectorAll(".kring-x button,.kring-ar,.kring-tabs .pct,.kpk .kpk-b,.kpk .kpk-tabs .pct,.kring-say").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.width>4)T.push({x:r.left,y:r.top,w:r.width,h:r.height})});
+   const ux0=Math.min(...F.map(f=>f.x)),ux1=Math.max(...F.map(f=>f.x+f.w)),uy0=Math.min(...F.map(f=>f.y)),uy1=Math.max(...F.map(f=>f.y+f.h));
+   const ok=G=>G.every(f=>f.x>=L.left+2&&f.x+f.w<=L.right-2&&T.every(t=>!hit(f,t)));
+   const sh=[C.x+C.w-ux0,-(ux1-C.x)].filter(d=>R.sel<0||d<0).sort((a,b)=>Math.abs(a)-Math.abs(b)).find(d=>ok(F.map(f=>Object.assign({},f,{x:f.x+d}))));
+   if(sh!=null)to=`translateX(${sh.toFixed(1)}px)`;
+   else{const k=Math.max(.4,Math.min(1,(C.y-2-uy0)/Math.max(1,uy1-uy0))),ox=(ux0+ux1)/2;to=`scale(${k.toFixed(3)})`;org=`${(ox-L.left).toFixed(1)}px ${(uy0-L.top).toFixed(1)}px`}}}}catch(e){console.error("kitRing card",e)}
+ W.style.transformOrigin=org||po||"";W.style.transform=to;if(to!==prev&&!calm())W.animate([{transform:prev||"none",transformOrigin:po||org||"50% 0"},{transform:to||"none",transformOrigin:org||po||"50% 0"}],{duration:260,easing:E});if(!to)W.style.transformOrigin=""}
 /* back to the ring */
 async function back(R,quick){closePk(R);dfLeave(R);const i=R.sel;if(i<0)return;R.busy=1;try{const s=R.slots[i];R.sel=-1;
- s.__g.members.forEach(y=>{y.el.getAnimations().forEach(a=>a.cancel());y.el.style.transform=y.lift?`translateY(${-y.lift}px)`:"";y.el.style.zIndex=""});
+ R.repick=null;s.__g.members.forEach(y=>{y.el.getAnimations().forEach(a=>a.cancel());y.dim.getAnimations().forEach(a=>a.cancel());y.el.style.transform=y.lift?`translateY(${-y.lift}px)`:"";y.el.style.zIndex=""});
  R.slots.forEach(o=>o.getAnimations().forEach(a=>a.cancel()));[R.arL,R.arR,R.tabs].forEach(b=>b.getAnimations().forEach(a=>a.cancel()));
- const from=s.style.transform;place(R);const to=s.style.transform;if(!quick&&!calm()){s.animate([{transform:from},{transform:to}],{duration:420,easing:E});R.slots.forEach((o,k)=>{if(k!==i)o.animate([{opacity:0},{opacity:1}],{duration:320,delay:120,fill:"backwards"})})}}finally{R.busy=0}}
-function close(now){const R=CUR;if(!R)return;CUR=null;document.body.classList.remove("kring-on");cancelAnimationFrame(raf);closePk(R);dfLeave(R);try{if(kitScene.cur&&kitScene.cur.L===R.L)kitScene.close(!!now);else R.L.remove()}catch(e){try{R.L.remove()}catch(_){}}}
+ const from=s.style.transform;place(R);const to=s.style.transform;if(!quick&&!calm()){s.animate([{transform:from},{transform:to}],{duration:420,easing:E});R.slots.forEach((o,k)=>{if(k!==i)o.animate([{opacity:0},{opacity:1}],{duration:320,delay:120,fill:"backwards"})})}yieldCard(R)}finally{R.busy=0}}
+function close(now){const R=CUR;if(!R)return;CUR=null;clearInterval(R.watch);document.body.classList.remove("kring-on");cancelAnimationFrame(raf);closePk(R);dfLeave(R);try{if(kitScene.cur&&kitScene.cur.L===R.L)kitScene.close(!!now);else R.L.remove()}catch(e){try{R.L.remove()}catch(_){}}}
 const kitRing=window.kitRing={open,close,groupsOf,get cur(){return CUR},
  turnBy:d=>CUR&&turnBy(CUR,d),turnTo:i=>CUR&&turnTo(CUR,i),focus:()=>CUR&&focus(CUR),back:()=>CUR&&back(CUR),setMode:m=>CUR&&setMode(CUR,m),pick:i=>{const P=CUR&&CUR.pk;return P},
  front:()=>CUR?front(CUR):-1};

@@ -81,3 +81,78 @@ PRIORITY #1 CHECK: review/ring-build d2ff16cc | ring-build.md ROLLOVER (RING-BUI
 https://ctm-img.victoria-tntt.workers.dev/img/_review/ring-build/ring-a-size-755x1000.mp4 · ring-a-size-1180x820.mp4 (person, 20 s) · ring-b-size-755x1000.mp4 · ring-b-size-1180x820.mp4 (group, 24–26 s).
 ## Open
 Group rows left: j55 court houses (tdAct), rgJoinOpts sides (need the side's people — design), palCeremony (empty palaces: no people → stays a list, KK44), Dư đồ map spots / jmapz (owner ruling). Group: 4 of 9 (stage groups, GIFT tabs ride, relPop tabs ride, factions). Person: staff/q72/rel/kgf/court/fac wired (live-checked: court, crew, staff-open); 4 «check» pickers still unverified.
+
+# RING-BUILD-4 (successor, MAIN CHÍNH 163) — 26/11 ~21:15–22:40Z
+PRIORITY #1 CHECK: OD 26/11 20:27Z+20:30Z+20:45Z rows (ring size, ring overlap/head-cut, Bàn bài flip) | main none (ring not live) | review/ring-build 8ea545fb (mine), review/motion-bao-vat (shared ring core), review/kit-g4-r3 + review/kit-stage-r4 (KK45 / KIT-STAGE-R4 own the flip card §101.10; result card = kit j63/jkitsel, already «Xem đầy đủ trong Sổ ghi») | claims RING-BUILD-3 → RING-BUILD-4.
+## MAIN LOOK FAIL (ring-b-size-1180x820.mp4 ~frame 420) — root causes found in the frames
+1. Figures were drawn ABOVE the plaques (slots z 100–200 vs `.kpk` z 30) and the step-out picker anchored on the ONE stepping-out member: her neighbour (drawn back +12 %) sat under the band → «…uyện», «…ích».
+2. The kit scene layer is sized once at open (kscnGeo); after an act the bottom «Sang buổi» label grows to 3 lines → the bar grows, the layer kept its height → it covered the bottom buttons (owner 20:30Z «Vòng người che nút chọn ở dưới»; measured 46 px on iPad).
+3. Speech bubble sat over the figure (left = 72 % of her box). 4. The kit result card lay over ring figures. 5. After «‹» back from a step-out the members stayed dark (dim animation never cancelled).
+## Fix (whole family, jkring.js only; kit §104.5 in KIT.md)
+- ONE figure layer `.kring-wrap` (z 10) under every tap target; slots + focus tag inside it.
+- focusGeo: plaque band (KIT_PLAQUE one width + post) must fit RIGHT of the WHOLE cluster → slide left, shrink only if needed; head ≥ 4 px (group: ×1.06 step-out room). All ring pickers: anchor = cluster union (painted boxes as on screen, minus the card yield), noLap, and `pickOpen` moves the band right by the ✓/✕ room when it has two columns. Step-out waits for every member's move before the plaques drop.
+- Bubble right of the cluster. Result card: figures slide aside (no tap target hit; focus = left only) else shrink from the head line until the feet clear it; full size when it goes. One 250 ms watch: layer refit on HUD / bar / window change (kscnGeo re-applied; ring, focus, plaques, bubble follow) + card check.
+- back(): dim animations cancelled. Listen result: ≤ 3 named, «và N người nữa đứng nghe cùng».
+- KIT REQUEST → KK45: `kitScene.refit` for every kit scene (the same bar-growth bug hits any scene layer); the ring refits its own layer until then.
+## Measure (law 11): `node dev/measure/ring-overlap.js <url>` — 17 states × Fold 755x1000 / iPad 1180x820 / 1366x1024; figure painted box vs every tap target (✕ ‹ › tabs, plaques, plaque tabs, ✓/✕, bubble, result card, bottom bar, HUD)
+(BEFORE = 8ea545fb build; its fixture had no 3-member group, so the iPad group step-out FAIL is the MAIN video frame 420. AFTER = 4 seeds; groups fixed 2·3·1 from day-plan rows.)
+| device | state | BEFORE overlap px² / headCut / layer-over-bar px | AFTER (seeds 5·11·23·7) max overlap / headCut / layer-over-bar |
+|---|---|---|---|
+| 755x1000 | person-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | person-ring-turned | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | person-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | person-say | 6018 / 0 / 6 | 0 / 0 / 0 (n=4) |
+| 755x1000 | person-after-say | 408 / 0 / 6 | 0 / 0 / 0 (n=4) |
+| 755x1000 | person-plaque-up | 408 / 0 / 6 | 0 / 0 / 0 (n=4) |
+| 755x1000 | person-result | 52385 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | group-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | group-ring-big | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | group-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | group-listen-result | 4708 / 0 / 6 | 0 / 0 / 0 (n=4) |
+| 755x1000 | group-stepout | 408 / 0 / 6 | 0 / 0 / 0 (n=4) |
+| 755x1000 | group-back | 0 / 0 / 6 | 0 / 0 / 0 (n=4) |
+| 755x1000 | picker-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | picker-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 755x1000 | picker-focus-navgrow | 2889 / 0 / 17 | 0 / 0 / 0 (n=4) |
+| 755x1000 | picker-ring-navgrow | 0 / 0 / 17 | 0 / 0 / 0 (n=4) |
+| 1180x820 | person-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | person-ring-turned | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | person-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | person-say | 11007 / 0 / 46 | 0 / 0 / 0 (n=4) |
+| 1180x820 | person-after-say | 7495 / 0 / 46 | 0 / 0 / 0 (n=4) |
+| 1180x820 | person-plaque-up | 7495 / 0 / 46 | 0 / 0 / 0 (n=4) |
+| 1180x820 | person-result | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | group-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | group-ring-big | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | group-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | group-listen-result | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | group-stepout | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | group-stepout-tab | 0 / 0 / 0 | 0 / 0 / 0 (n=3) |
+| 1180x820 | group-back | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | picker-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | picker-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1180x820 | picker-focus-navgrow | 6281 / 0 / 33 | 0 / 0 / 0 (n=4) |
+| 1180x820 | picker-ring-navgrow | 932 / 0 / 33 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | person-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | person-ring-turned | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | person-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | person-say | 6274 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | person-after-say | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | group-ring | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | group-ring-big | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | group-focus | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | group-listen-result | 4694 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | group-stepout | 0 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | group-back | 29144 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | picker-ring | 29341 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | picker-focus | 16908 / 0 / 0 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | picker-focus-navgrow | 26937 / 0 / 33 | 0 / 0 / 0 (n=4) |
+| 1366x1024 | picker-ring-navgrow | 29341 / 0 / 33 | 0 / 0 / 0 (n=4) |
+Front size unchanged (LIVE stage size): ring front Fold ≈557 / iPad 468 / 1366 582 painted px; focus 655 / 575 / 813 (smaller only after a refit / while a card shows).
+## Tests: page errors 0 in every run. kit-ring-wire.js: Fold stage ✔ strip ✔ modal ✔; staff/q72/rel/fac n/a (random fixture: no staff, relCands absent); iPad boot timed out once (fixture) — direct probe: court ring 3 ✔, crew 1 ✔ on both devices.
+## Videos (real taps, cut at the scene start, no boot notice; frames looked at: 4 sheets + end frames)
+https://ctm-img.victoria-tntt.workers.dev/img/_review/ring-build/ring-a-r4-755x1000.mp4 · ring-a-r4-1180x820.mp4 · ring-b-r4-755x1000.mp4 · ring-b-r4-1180x820.mp4
+## Open (handover for the next ring worker)
+- Wire fixture: seed staff / q72 jobs / a faction / relCands in kit-ring-boot.js so kit-ring-wire.js is a clean PASS table (still random per run).
+- Group rows 4/9: j55 court houses (tdAct), rgJoinOpts sides (needs the side's people — design), palCeremony (empty palaces → list, KK44), Dư đồ map spots / jmapz (owner ruling).
+- Core split with KK45 / MOTION-BUILD-2 per BAL.kring (no answer recorded yet).
