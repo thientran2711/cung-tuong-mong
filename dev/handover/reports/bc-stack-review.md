@@ -212,3 +212,16 @@ Scope 496b6b66..8dc395ba: bfa73a6e (EXIT_RE + «nhận lời làm thiếp | theo
 - Robot slices on LIVE 5e013076 (bot=rand, slice=10): Fold buổi 10 · 86 taps · dead 0 · stuck 0 · bugs 0; iPad buổi 10 · 108 taps · dead 0 · stuck 0 · bugs 0.
 - node --check OK on robot-rt.js / realtap.js / rt-optcard-spots.js. Fast-forward on 496b6b66.
 ~X% xong / ~Y% chơi được: harness only, no game change.
+
+## BIG #7 — FAIL review/robot-realtap 54fa0112 (HARNESS FIXER #9: real promo roads, drag-exam skip, NAV/LOW off cards, dialog-stall, cardWay, freeze stack) — 11/26 ~03:05Z
+PRIORITY #1 CHECK: reused FIXER #9 table (dev/PROGRESS_robot-realtap.md §FIXER #9), rt-offer.js / robot-audit.js on the handover branch (9bca8084 is gone after the 83b1392c→0d46353b force-update; both files are there, rt-offer.js identical to the review branch).
+OK:
+- robot-lint OK (7 files); no .click()/dispatchEvent added; the new point taps (stall point-tap, rt-membase) are page.mouse / touchscreen with an elementFromPoint same-label re-check.
+- rt-offer rule 2: robot-audit on flight2-s9b → «promotion roads 0 seen / 0 picked … old word-match count 593» (= table). rt-label-scan on LIVE 5e013076: NAV/LOW on option cards 0. Note: that row is 0 BY CONSTRUCTION (isNav/isLow skip x.card); residual non-card NAV hits (11, e.g. «Xóa nợ, kết ơn», «Giữ sổ, chưa nói») are ge/j67 option labels that render as option cards (s3f evidence class «opt ka kart kopt»), «Xóa sổ trên mây» still NAV — accepted.
+- Freeze stack (CDP Debugger): read-only, every un-asked pause resumed, never a click; no play change seen.
+- LIVE 5e013076 slices: Fold sens s21 buổi 12 / 61 taps, iPad rand s22 buổi 12 / 147 taps, Fold rand s11 buổi 6 / 69, iPad sens s12 buổi 6 / 58 — dead 0, stuck 0, jsClicks 0, bugs 0 (except the self-test line).
+- RT_TEST_STALL (Fold): closed in 65 s, stallForce 1, «picker stalled 120 steps / 60 s … → tapped «Chỉ xem bảng vàng sau rèm»» = PASS.
+FAIL — RT_TEST_EXAM: done:false in 4/4 runs (Fold s31 ×3, iPad s12 ×2 incl. the earlier slice), not the «2/2» claimed. Root (traced with a local debug copy, not pushed):
+- both drag rounds take «Bỏ qua» correctly (dragSkipExam 2), «Môn kế tiếp», «Xem kết quả» — then the exam RESULT screen (jexam result(): kitGameResult + #kg82ok «Đã hiểu») shows #kg82ok display:none (kit: the header ✕ «Quay lại» is the way on, kg82Back → kitOvBtn() presses #kg82ok). SCAN sees ONE button «Quay lại», mgPh '' (jexam never sets KG82.phase="result") → mgOnlyBack → the robot waits MG_GIVEUP_MS 6 min, then taps «Quay lại». The self-test window is 5 min → done:false; in real lives every exam / exam-like result costs a 6-min idle (screenshot: result card «Khảo hạch: Kết quả · thử … Đỗ.» with only ✕).
+- Family fix wanted (law 11): treat a #kg* screen as RESULT when kitOvBtn's target exists in #ov (#kg82ok / #kg92ok / #mgok, connected, even if display:none) — SCAN mgRes = that, and `sc.mgPh === 'result' || sc.mgRes` wherever the result rule is used (isMgBack filter, mgOnlyBack, the kg82 ✕ = way on). Then RT_TEST_EXAM must print done:true raws [5,5] on Fold + iPad, and scan the other kitOvBtn callers (j82 finish/done set phase; jexam, j92 #kg92ok, #mgok) in the before/after table.
+Verdict: FAIL 54fa0112 — exam result screen (hidden «Đã hiểu», ✕ is the way on) idles 6 min; RT_TEST_EXAM done:false 4/4.
