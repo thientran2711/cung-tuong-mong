@@ -513,3 +513,4 @@ C3-SEALS SMALL review | review/c3-seals 4a758f6e | session_01PEhRbwimLhy2Pc9b5C3
 C3-SEALS (all lines above: W1/W1b/W1c/W1d/W1e, W2, W3) | review/c3-seals 4a758f6e | — | DONE → LAND READY for MAIN 160 (art 15×21 LIVE on CDN) | 2026-11-26T15:40Z (Foreman C)
 | Q-SOFTLOCK #5 (owner play-stopper, successor of #4 session_01D3E3NbJAdmjXJsLcFEFGGD) | review/dayq-qsoftlock | FOREMAN D session_01D3E3NYYzn179gzKUA3MM7U / worker #5 session_01D3E3NZbh2fpy8WkxGMhpHR | RUNNING | 26/11 16:44Z |
 | D-ENDRANK end-card «Phẩm cao nhất» family (ban hoa shows Quý nhân; cnv lazy-5 shows Đáp ứng with HUD rank 0) | review/end-maxrank | FOREMAN D session_01D3E3NYYzn179gzKUA3MM7U / worker session_01D3E3NYUsUqaCwQiJyhQgsy | RUNNING | 26/11 17:08Z |
+C3-SEALS-RM re-merge main f573dc94 + rebuild + tests | review/c3-seals | (session in STATUS) | RUNNING | 2026-11-26T18:20Z (Foreman C ROOT 3-1-1-1-1)
