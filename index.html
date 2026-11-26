@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"93754609+","t":"2026-11-26T01:11Z","c":"Thêm hai phụ tuyến: Lời đồn về làng ta và Thang thuốc dâng Thái hậu, đi trọn từ hồi đầu tới kết.","b":"458d2ed534c4","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"946080a1+","t":"2026-11-26T01:37Z","c":"Mỗi phẩm vị nay có gian phòng riêng: tám mươi gian phòng theo phẩm được vẽ lại.","b":"cf32e8f41ae1","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -49159,13 +49159,23 @@ function resPalIdx(k){if(k==null)return null;if(typeof k==="number")return k>=0&
  let i=RES_SLUG.indexOf(String(k).replace(/-cung$/,""));if(i>=0)return i;i=(typeof PALN!=="undefined"?PALN:[]).indexOf(k);return i>=0?i:null}
 /* the west palaces jpal adds (PAL_WEST, the PALN indices past RES_SLUG) have no room paintings yet (ART REQUEST, Foreman C): a stand-in from the 8 painted ones, marked 'tạm' */
 function resTamPal(pal){const i=resPalIdx(pal);return i!=null&&i>=RES_SLUG.length}
-function resBase(pal,part){if(part==="cungnhan")return"cung-nhan";const i=resPalIdx(pal);if(i==null)return null;
+/* RANK ROOMS (owner L2406, C8-RANKROOM): frontal rooms per chủ vị rank × {chính điện, phòng ngủ} + phối phòng ngủ. Table = dev/art/place-rank/rank_rooms.json (script rank_rooms_wire.py rewrites the block below with the WIRED bases).
+   Rank is read from the game's own state (rkOf(head)) and named by RANKS[r].n - no rank number is typed here (law 4). One painting per room (hạ-sáng file), any mùa/buổi. A missing rank room falls back to the old picture. */
+/*@RANK_ROOM*/const RANK_ROOM={"canh-phuc-cung-dong-phoi-ngu":1,"canh-phuc-cung-phi":1,"canh-phuc-cung-phi-ngu":1,"canh-phuc-cung-quyphi":1,"canh-phuc-cung-quyphi-ngu":1,"canh-phuc-cung-tan":1,"canh-phuc-cung-tan-ngu":1,"canh-phuc-cung-tay-phoi-ngu":1,"chung-tu-cung-dong-phoi-ngu":1,"chung-tu-cung-phi":1,"chung-tu-cung-phi-ngu":1,"chung-tu-cung-quyphi":1,"chung-tu-cung-quyphi-ngu":1,"chung-tu-cung-tan":1,"chung-tu-cung-tan-ngu":1,"chung-tu-cung-tay-phoi-ngu":1,"dien-huy-cung-dong-phoi-ngu":1,"dien-huy-cung-phi":1,"dien-huy-cung-phi-ngu":1,"dien-huy-cung-quyphi":1,"dien-huy-cung-quyphi-ngu":1,"dien-huy-cung-tan":1,"dien-huy-cung-tan-ngu":1,"dien-huy-cung-tay-phoi-ngu":1,"ham-an-cung-dong-phoi-ngu":1,"ham-an-cung-phi":1,"ham-an-cung-phi-ngu":1,"ham-an-cung-quyphi":1,"ham-an-cung-quyphi-ngu":1,"ham-an-cung-tan":1,"ham-an-cung-tan-ngu":1,"ham-an-cung-tay-phoi-ngu":1,"khai-tuong-cung-dong-phoi-ngu":1,"khai-tuong-cung-phi":1,"khai-tuong-cung-phi-ngu":1,"khai-tuong-cung-quyphi":1,"khai-tuong-cung-quyphi-ngu":1,"khai-tuong-cung-tan":1,"khai-tuong-cung-tan-ngu":1,"khai-tuong-cung-tay-phoi-ngu":1,"thua-minh-cung-dong-phoi-ngu":1,"thua-minh-cung-phi":1,"thua-minh-cung-phi-ngu":1,"thua-minh-cung-quyphi":1,"thua-minh-cung-quyphi-ngu":1,"thua-minh-cung-tan":1,"thua-minh-cung-tan-ngu":1,"thua-minh-cung-tay-phoi-ngu":1,"truong-xuan-cung-dong-phoi-ngu":1,"truong-xuan-cung-phi":1,"truong-xuan-cung-phi-ngu":1,"truong-xuan-cung-quyphi":1,"truong-xuan-cung-quyphi-ngu":1,"truong-xuan-cung-tan":1,"truong-xuan-cung-tan-ngu":1,"truong-xuan-cung-tay-phoi-ngu":1,"vinh-hoa-cung-dong-phoi-ngu":1,"vinh-hoa-cung-phi":1,"vinh-hoa-cung-phi-ngu":1,"vinh-hoa-cung-quyphi":1,"vinh-hoa-cung-quyphi-ngu":1,"vinh-hoa-cung-tan":1,"vinh-hoa-cung-tan-ngu":1,"vinh-hoa-cung-tay-phoi-ngu":1};/*@END_RANK_ROOM*/
+const RES_RANKSUF={"Tần":"tan","Phi":"phi","Quý phi":"quyphi"};
+function resRankSuf(head){try{if(!head)return"";const r=rkOf(head);return RES_RANKSUF[RANKS[r]&&RANKS[r].n]||""}catch(e){return""}}
+function resBase0(pal,part){if(part==="cungnhan")return"cung-nhan";const i=resPalIdx(pal);if(i==null)return null;
  return RES_SLUG[i%RES_SLUG.length]+"-cung"+(part==="dong"?"-dong-phoi":part==="tay"?"-tay-phoi":"")}
-function resPick(base,se,ti){if(!base)return null;se=se||resSeason();ti=ti||resTime();
+/* resBase(pal,part,head,ngu): the rank/bedroom room when its picture is wired, else the old base. head = the chủ vị of the room; ngu = true at night in her own room */
+function resBase(pal,part,head,ngu){const b=resBase0(pal,part);if(!b||part==="cungnhan")return b;
+ const rk=part==="chinh"||part==null?(resRankSuf(head)?b+"-"+resRankSuf(head):""):"";
+ if(ngu){const n=(rk||b)+"-ngu";if(RANK_ROOM[n])return n}
+ if(rk&&RANK_ROOM[rk])return rk;return b}
+function resPick(base,se,ti){if(!base)return null;if(RANK_ROOM[base])return base+"-ha-sang";se=se||resSeason();ti=ti||resTime();
  const near=(typeof SCN_NEAR!=="undefined"?SCN_NEAR:{})[ti]||[ti];
  for(const s of [se,"xuan"])for(const x of near.concat(ti==="toi"?[]:[])){if(RES_HAVE[`${base}-${s}-${x}`])return`${base}-${s}-${x}`}
  return RES_HAVE[`${base}-xuan-sang`]||!Object.keys(RES_HAVE).length?`${base}-xuan-sang`:null}
-function residenceArt(palaceKey,part,season,time){const n=resPick(resBase(palaceKey,part||"chinh"),season,time);return n?`https://ctm-img.victoria-tntt.workers.dev/img/${n}.webp`:null}
+function residenceArt(palaceKey,part,season,time,head,ngu){const n=resPick(resBase(palaceKey,part||"chinh",head,ngu),season,time);return n?`https://ctm-img.victoria-tntt.workers.dev/img/${n}.webp`:null}
 /* who lives where, now */
 function resAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
 function resHeadOf(p){try{const h=byKey(houseOf(p));return h||null}catch(e){return null}}
@@ -49195,14 +49205,16 @@ function roomResidents(pal,part){const T={pal:resPalIdx(pal),part};return[S].con
 function roomPeople(pal,part){const W=(S&&S.where)||{};return roomResidents(pal,part).filter(p=>p===S?S.place==="home":W[p.id]===palaceOf(p))}
 /* the scene file for a residence (null → keep the old generic one) */
 function resScene(r){if(!r)return null;if(r.part==="ngocthanh"||r.part==="kn"||r.part==="lc")return null;
- return resPick(r.part==="cungnhan"?"cung-nhan":resBase(r.pal,r.part))}
+ return resPick(r.part==="cungnhan"?"cung-nhan":resBase(r.pal,r.part,r.head,resTime()==="toi"))}
 /* floor line + open-floor anchor of each room (read from the paintings; same in every season/buổi) */
 (function(){const F=window.KIT_FLOOR=window.KIT_FLOOR||{},A=window.KIT_FANCHOR=window.KIT_FANCHOR||{};
  const fx={"canh-phuc-cung":.5,"canh-phuc-cung-dong-phoi":.56,"canh-phuc-cung-tay-phoi":.45,"khai-tuong-cung":.46,"khai-tuong-cung-dong-phoi":.5,"khai-tuong-cung-tay-phoi":.36,
   "chung-tu-cung":.55,"chung-tu-cung-dong-phoi":.62,"chung-tu-cung-tay-phoi":.45,"ham-an-cung":.48,"ham-an-cung-dong-phoi":.5,"ham-an-cung-tay-phoi":.5,
   "thua-minh-cung":.5,"thua-minh-cung-dong-phoi":.5,"thua-minh-cung-tay-phoi":.46,"dien-huy-cung":.5,"dien-huy-cung-dong-phoi":.56,"dien-huy-cung-tay-phoi":.42,
   "vinh-hoa-cung":.5,"vinh-hoa-cung-dong-phoi":.36,"vinh-hoa-cung-tay-phoi":.42,"truong-xuan-cung":.5,"truong-xuan-cung-dong-phoi":.5,"truong-xuan-cung-tay-phoi":.5,"cung-nhan":.42};
- for(const k in fx){if(F[k]==null)F[k]=.6;if(!A[k])A[k]={x:fx[k],feet:.9}}})();
+ for(const k in fx){if(F[k]==null)F[k]=.6;if(!A[k])A[k]={x:fx[k],feet:.9}}
+ /* rank rooms: same floor line / open-floor anchor as the palace's chính điện (every picture: the aisle is open, centre of the room) */
+ for(const k in RANK_ROOM)for(const n of [k,k+"-ha-sang"]){if(F[n]==null)F[n]=.6;if(!A[n])A[n]={x:.5,feet:.9}}})();
 /* stage: the room where the place's people really live, recomputed at every render */
 (function(){if(typeof renderStage!=="function"||typeof SCIMG!=="object")return;const HOME0="tam-cung-dem",RV0="phi-tan-cung";
  window.resStageRoom=function(){try{if(!S)return null;if(S.place==="home")return residenceOf(S);
@@ -99372,7 +99384,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="458d2ed534c4";window.CTM_BUILD=BUILD;
+const BUILD="cf32e8f41ae1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
