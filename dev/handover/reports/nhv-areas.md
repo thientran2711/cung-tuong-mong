@@ -38,4 +38,10 @@ Re-run: `KSEED=23 SAVE=<life.json> node dev/test/nhv/mklife.js` once, then `node
 - Area test 51/55: all FAILs kit (kitPick: closed plaque name cut at 3 lines; Fold 6-plaque band last plaque under the stage bottom at Đình cờ; Fold ✓/✕ over the neighbour plaque name) → KK35 session_01V1ZZGzHqCfzpp7k8KRq9QL, merge its sha when sent.
 - quickcheck 26db71bf: open/old save PASS; NEW vs r4: G3 kit-conform FAIL «MIXED … #mb child kstg-fig kstg-sp/kstg-me» on the event dialogs = kitStage classes from the kit-stage merge (not jnhv), and perf tab 679 vs live 512 (limit 666) / buổi 3910 vs 1833 (runs 1705–4059 vs live 1623–5194, noisy). r4 a04a1e75 (before the merge) passed perf (tab 610/584) and kit-conform → both come with kit-stage 979d5ed7; KK35/MAIN to judge. button-crawl «Ô lưu · Lui» pre-existing on LIVE.
 
+## r6 — review/nhv-areas 7f4d653f (26/11 ~01:30Z)
+- MERGED review/kit-stage 3aacdd30 (KK35 kitPick name fit): PLAQUE-CUT gone. Area test 55/57: the 2 left = Fold PLAQUE-OFFSTAGE (4-line plaques push the 6th plaque under the stage bottom: Vườn hoa «Hắt nước», Thủy tạ «Cảnh báo nàng ta») → KK35.
+- NEW `dev/test/nhv/art-states.js`: **96/96 PASS** — garden map 16 + 5 areas × 16, each mùa × buổi loads ITS OWN painting through the game's path functions, no «tạm».
+- quickcheck 7f4d653f: open / old save / perf (render 275/268, tab 596/579, buổi 1878/1795 ms) / kit-conform / button-crawl PASS; **G4 92-look-dedupe FAIL, INTERMITTENT**: «real tap on the mood seal opens «undefined»» (home screen, realtap k:gone). Reruns: my branch 3 PASS / 2 FAIL; LIVE 5e013076 3/3 PASS; kit-stage 3aacdd30 alone 3/3 PASS → tied to this branch (only jnhv.js + BAL.area differ from kit-stage), cause NOT found yet. NOT LAND READY until it is.
+- Videos: nhv5-* (r5) stand (MAIN 150 LOOK PASS); r6 changes only the plaque name fit.
+
 ~85% xong / ~70% chơi được (Ngự hoa viên khu vườn).
