@@ -152,7 +152,9 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
   `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho",tsSrv()?"mọi người trong cung, phi tần hay cung nữ, cùng một cách tính":"mọi phi tần, cùng một cách tính","n"]])}</div>`+
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
  const opts=[...D.top.slice(0,3).map(x=>tsOptMend(x.v)),tsOptGuard(),tsOptGifts(D),tsOptHelp(),tsOptDef(),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
- Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger"});showModal()}
+ /* its own info picture as before (KIT_INFO «nguy hiểm» → info-nguy-hiem): jk4 kitEvArt guesses an event picture from the words when m.art is empty, and a WHY «tung tin đồn» pulled «cat:tin-don» */
+ let art="";try{art=kitInfoArt("Nguy hiểm chung").src||""}catch(e){}
+ Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger",art});showModal()}
 /* an opener card (later: no empty result card «không được gì»): the dialog it queues is shown at once, its act shows its own result */
 function tsOpener(){TSA.pre=null;setTimeout(()=>{try{const M=$("modal");if(Q.length&&(!M||M.hidden))showModal()}catch(e){}},0)}
 /* ---------- OB-OAN: «Cách giảm» — ONE table of the real ways each rising bad stat comes down (names of the existing acts only; no new rule, no number).
@@ -176,7 +178,7 @@ function tsOanTxt(v){const o=Math.round(oan(v,S)||0);try{return `${oanW(o)} ${o}
 /* WHY: the strongest bad memory this person keeps of her (jmem, the real deed she did), else the driver of the danger (j28 danger: ghen / oán / ghét) */
 function tsWhy(v){try{const m=typeof memTop==="function"?memTop(v,S,-1):null;if(m)return `vì ngươi đã ${memPhrase(m,"nàng")} (${memAgo(m.w)})`}catch(e){}
  const H=BAL.net.heat,g=(v.ghen||0)*H.ghenK,o=oan(v,S)||0,h=Math.max(0,-aff(v,S))*H.affK;
- return g>=o&&g>=h?"vì ghen ngươi được sủng":o>=h?"vì oán ngươi (chưa rõ việc gì, dò la để biết)":"vì không ưa ngươi"}
+ return g>=o&&g>=h?"vì ghen ngươi được sủng":o>=h?"vì còn oán ngươi (chưa rõ vì việc gì, dò la để biết)":"vì không ưa ngươi"}
 /* a talk option of the place (talkOpts / topicOpts: the SAME option object, odds, cost and run) as a kit option card; khắc = talkK (one rule) */
 function tsTalkOpt(a,n,need0){if(!a)return null;const k=talkK(a),run=!!a.run,sure=run||a.o==null||a.o>=100;
  const need=[{t:`còn ${k} khắc`,ok:can(k)}].concat(need0||[]);if(a.lock)need.push({t:a.t||"chưa đủ điều kiện",ok:false});else if(!canPay(a))need.push(tsNeedBac(-(a.c&&a.c.bac||0)+payWinBac(a)));

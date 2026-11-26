@@ -22,7 +22,7 @@ PRIORITY #1 CHECK: OD 26/11 ~08:25Z row (+ 'nguy hiểm chung' OD 6) | main j9.j
 
 ## Tests
 `node dev/test/ob-oan.js <newRoot> <oldRoot> <shotDir> 755x1000@1 1180x820@1` → ALL PASS 27 (real taps: box → panel, Làm lành → Nhún nhường lowers oán by BAL.ag.cx.humble.oanDown and spends khắc, deep-oán card closed with reason, Nhờ bề trên, Phòng bị, OLD SAVE from base main build loads + panel opens, no page error). Files served from disk via page.route (a local http server was refused in this container).
-Shots (Fold 755x1000 + iPad 1180x820, stills): CDN img/_review/ob-oan/ — 1-panel, 2-mend, 3b-deep, 4-help (.webp). Videos: not made.
+Shots (Fold 755x1000 + iPad 1180x820, stills): CDN img/_review/ob-oan/ — 1-panel, 2-mend, 3b-deep, 4-help (.webp). Videos: CDN img/_review/ob-oan/ob-oan-fold.mp4 + ob-oan-ipad.mp4 (~20 s: panel → Làm lành → Biếu quà → Lễ bạc → result oán −6 ghen −8). Real-art stills: 755_1000-real-panel.webp, 1180_820-real-mend.webp.
 
 ## Findings for MAIN (not mine to change)
 1. ROOT of «không biết làm cách nào để giảm»: Tạ lỗi / Nhún nhường are refused whenever oán ≥ BAL.net.th.nguoi (base 30, by nết 10..60, clamp BAL.net.thClamp.nguoi). Oán climbs to 100, so at high oán the ONLY lowering acts are Biếu quà làm lành (−BAL.tsGift.oan = 5) and the monthly fade (BAL.oanFade = 2). → Foreman D (rec 3/4 numbers): this is the pace/cool-down issue.
@@ -32,6 +32,12 @@ Shots (Fold 755x1000 + iPad 1180x820, stills): CDN img/_review/ob-oan/ — 1-pan
 
 ## Blockers
 - Part (2) glossary «Cách giảm» row: kit part missing → K-GLOSS-LOWER filed in dev/kit/KIT_REQUESTS.md for KK39 (via MAIN).
-- Videos not made (stills on CDN instead); a local http server was denied by the sandbox, tests serve files via page.route.
+- A local http server was denied by the sandbox; tests serve files via page.route (CDN blocked in tests → «Đang thỉnh tranh…» placeholders are the harness only: with the CDN let through, every portrait loads, 0 waiting).
 
 ~70% xong / panel playable.
+
+## Round 2 (MAIN 155 LOOK notes)
+- (a) «TỐN không»: comes from the kit itself (jopic.js kitOptFinal, KIT §6.2 FINAL: every option card keeps a grey Tốn row). No hide-empty path on LIVE; dropping it in my cards only would be a per-place variant (law 9) → left to KK39's kit-wide OD ~06:50Z (E) change; all my cards follow automatically.
+- (b) «Đang thỉnh tranh…»: harness only (CDN blocked). With the CDN let through: 0 placeholders, every portrait + card picture loads (stills above).
+- found + fixed: my WHY text «tung tin đồn» made jk4 kitEvArt guess the event picture «cat:tin-don» for the panel; the panel now names its own info picture (kitInfoArt «Nguy hiểm chung» = info-nguy-hiem, the same as LIVE).
+- wording: «vì còn oán ngươi (chưa rõ vì việc gì, dò la để biết)».
