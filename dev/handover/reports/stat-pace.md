@@ -181,6 +181,12 @@ load, PASS alone; coop-guest-maid same TypeError on LIVE).
 **Quickcheck fadad0d8**: QUICKCHECK PASS · 511 s · open 2515 ms · old save ok · perf (median of 3, new/live): render 245/267, tab 500/548,
 buổi 2050/1656 ms, tasks>200ms 33/35. Core gates: G4 80-dialog-fixed + 90-button-crawl = pre-existing on LIVE (as in #2); G4 92-look-dedupe
 red once = flaky on LIVE too (look-dedupe.js on LIVE: «opens «undefined»» FAIL 1 of 2 runs; branch PASS 2 of 2).
+**Merged LIVE 1dcb373e** → 4ee2de28 (conflicts only in built files index.html / sw.js / assets.json: rebuilt). After the merge: stat-pace.js 45 d PASS,
+one-core-guard PASS, one-core-text PASS, riseMap 0, coop-e2e 143/143 PASS, QUICKCHECK PASS · 378 s · open 2530 ms · old save ok · perf new/live
+render 250/252, tab 608/486, buổi 1808/1491 ms, tasks>200ms 33/32; core gates G4 80-dialog-fixed + 90-button-crawl (pre-existing) and
+92-look-dedupe: look-dedupe.js «real tap on the mood seal opens «undefined»» red 2/5 on the branch, 0/5 on LIVE 1dcb373e, 1/2 on LIVE 6b5d3d05;
+at the red moment Q = [] and EVCW = [] (debug copy of the test), i.e. the tap opened a non-card panel — no cap card, no held card involved;
+same flake as on LIVE (tap placement on a random home screen), not this branch.
 Videos: no player-visible change in #3 (no new UI, no new words), so #2's Fold 755x1000 + iPad 1180x820 videos stand (URLs above).
 
 ## LAND READY line (after reviewer PASS): «LAND READY review/stat-pace <sha> (FF from LIVE 6b5d3d05) · preset A default, B = one-line switch (BAL.stpPick)»
