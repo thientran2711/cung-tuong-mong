@@ -496,3 +496,4 @@ RV-ONE-SIEVE BIG rv of review/one-sieve fedd27aa | review/one-sieve-rv | session
 | F BIG REVIEWER #10 (robot-realtap + QC-NOISE-HYGIENE re-review; successor of BIG #9) | review/robot-realtap, review/qc-noise-hygiene | FOREMAN F #22 session_01UV1SzhSdVUsfkytrb26tER | session_01UV1Szhak9NE4akDTPc45mF | RUNNING | 26/11 12:47Z |
 KK43 kit keeper (g4-baseline fix + dead-close family + K-PICKER-FIT…) | review/kit-g4-baseline | session_01V1ZZH1gzGfjtfHnKNLwEu2 | RUNNING | 2026-11-26T13:08Z (MAIN 159)
 C3-SEALS cl+cy | assets CDN (+ review/c3-seals later) | session_01PEhRbwHhxovHLfNUUVgQcz | RUNNING | 2026-11-26T13:22Z (W1e, Foreman C; continues C3-SEALS line after W1d)
+| D5 mg-trim #4 (opus; land rv-PASS route review/mg-trim-r6 543ca579 + LIVE merge; successor of #3 session_01D3E3NYZ4jThrhjTN2SsGHJ) | review/mg-trim-r6 | FOREMAN D session_01D3E3NaM9SCxxy6LNzERgRj | session_01D3E3NZkNAuq569W3GDToSh | RUNNING | 26/11 13:25Z |
