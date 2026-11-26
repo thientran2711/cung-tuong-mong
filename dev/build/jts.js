@@ -162,11 +162,11 @@ function tsOpener(){TSA.pre=null;setTimeout(()=>{try{const M=$("modal");if(Q.len
 const TS_LOWER={
  danger:"làm lành từng người (Tạ lỗi, Nhún nhường, Biếu quà làm lành) · Đóng cửa giữ mình · Xin Hoàng hậu che chở · Xin Thái hậu đỡ lời · Phòng bị (giao việc cho kẻ hầu)",
  oan:"Tạ lỗi hoặc Nhún nhường khi trò chuyện với người ấy (oán quá sâu thì bị gạt đi) · Biếu quà làm lành · Giúp đỡ nàng · oán tự nguôi dần mỗi tháng nếu ngươi không gây thêm",
- ghen:"Biếu quà làm lành · Thỉnh an (Hoàng hậu bớt ghen) · Nhận lời kết giao · Phát lì xì trong lễ tấn phong · Nhún nhường đáp lễ hay Khéo lời hóa giải khi bị ghen ra mặt",
- ghet:"Hỏi han sức khỏe, Khen tài nghệ, Tặng quà, Giúp đỡ nàng khi trò chuyện · Kết giao",
- sung:"hầu chuyện Hoàng thượng (Tâng bốc, Nói thật lòng, Phô tài, Dâng hoa) · Đút lót lật thẻ ở Kính sự phòng · được thị tẩm · Ân tình cao thì sủng giữ lâu",
+ ghen:"Biếu quà làm lành · Thỉnh an Hoàng hậu (Hoàng hậu bớt ghen) · Nhận lời kết giao · Phát lì xì hậu hay vừa phải trong lễ tấn phong · Nhún nhường đáp lễ hay Khéo lời hóa giải khi bị ghen ra mặt",
+ ghet:"Hỏi han sức khỏe, Khen tài nghệ nàng, Tặng quà, Giúp đỡ nàng khi trò chuyện · Kết giao",
+ sung:"hầu chuyện Hoàng thượng (Tâng bốc, Nói thật lòng, Phô tài, Cắm hoa dâng Hoàng thượng) · Đút lót lật thẻ ở Kính sự phòng · được thị tẩm · Ân tình cao thì sủng giữ lâu",
  benh:"Xin chữa bệnh ở Thái y viện · Nghỉ ngơi dưỡng sức · Nghỉ ngơi một lát",
- danh:"Thỉnh an Thái hậu, Hoàng hậu (Danh +) · tránh bị bắt quả tang · Xin Thái hậu đỡ lời"};
+ danh:"Thỉnh an Thái hậu, Thỉnh an Hoàng hậu (Danh +) · tránh bị bắt quả tang · Xin Thái hậu đỡ lời"};
 /* the glossary terms whose number rising is bad for her → the TS_LOWER key (KIT_REQUESTS: the kit glossary popup shows «Cách giảm: …» from kitLowerText) */
 const TS_LOWER_TERM={"Oán":"oan","Thù":"oan","Ghen":"ghen","Nguy hiểm":"danger","Nguy hiểm chung":"danger","Thiện cảm":"ghet","Quý":"ghet","Sủng":"sung","Sức khỏe":"benh","Danh":"danh"};
 function kitLowerText(term){const k=TS_LOWER_TERM[term];return k?TS_LOWER[k]:""}
