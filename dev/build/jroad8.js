@@ -26,10 +26,11 @@ const ROAD8={
    "k61:ask":{}},
    /* the card's side note on her road (the consort's «phải sai người» / «làm tại chỗ» lines speak of a consort's means) */
    note:{rival:"Gặp mặt: hành lễ thỉnh an; biết chuyện của chủ thì có thể mật báo."}}},
- /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → the Hoàng tự button, Gia tộc → Hậu cung › second,
-    Giao du → Giao tình, Hoàng tự → her letters (Thư từ, the bar shows the KCTABS names: road8TabNames); Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
- kc:{court:{hide:1},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
-  kid:{k:"kid"},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
+ /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → Hậu cung › first sub-tab, Gia tộc → Hậu cung › second,
+    Giao du → Giao tình, Hoàng tự = empty card; Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers. The 8 bottom tabs keep their names on every road
+    (owner OD:L2108 21/11 ~03:15Z «mỗi một cái tab mình để y chang luôn … không có bị lạ khi mà họ thay đổi thân phận»); only the content fits her station. */
+ kc:{court:{k:"kid",l:()=>KCTABS.kid},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
+  kid:{empty:["Hoàng tự","Ngươi chưa vào cung, chưa có con."]},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
   q72:{hide:1},nho:{hide:1},quest:{hide:1},req:{hide:1},log:{hide:1}}};
 /* ROAD8_LAB = the ONE label table of the stage right column groups (owner 21/11 ~03:25Z mark #36: "bất kỳ một cái gì thông tin nào ở bên phi tần có thì bên
    cung nữ đều có, nhưng mà mình có thể linh động đổi tên lại … cung nhân ở bên phi tần thì mình có thể đổi lại là đồng liêu ở bên cung nữ … chủ tử").
@@ -45,8 +46,11 @@ const ROAD8_LAB={"":{cn:"Cung nhân",ct:"Chí tôn",t_mus:"Nhạc sư Giáo phư
   /* teachers she can have at home (no palace office, no consort): t_mus = music / dance, t_craft = needlework / cooking, t_rite = letters / rites, t_vir = Tứ đức;
      tch_cons = 0: no consort teaches her before she is in the palace (law 6: she cannot reach them) */
   fame3:"Cả phủ nghe danh.",t_mus:"Nhạc sư",t_craft:"Ma ma trong phủ",t_rite:"Nữ sư",t_vir:"Nữ sư",t_fee:"nữ sư",tch_cons:"0"},
- "kc:dan":{fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},"kc:nc":{fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
-function placeCtx(){const r=road8();if(r!=="kc")return r;let d="";try{d=typeof kc2D==="function"?kc2D():(S.kc&&S.kc.kd)||""}catch(e){}
+ "kc:dan":{fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},dtv:{cn:"Tú nữ cùng khóa",ct:"Ma ma giáo dưỡng",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",fame3:"Cả Dưỡng Tú viện nghe danh.",tch_cons:"0"},
+ "kc:nc":{fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
+/* DƯỠNG TÚ VIỆN (MAIN 150/151 order; place key dtv = review/ob-phu jmapz MAPZ_DTV, tú nữ lodging): a girl who lodges there as a tú nữ before phân cung
+   (still on her home road, isKc, standing at dtv) is no palace woman and has no household there: cn = the tú nữ of her intake, ct = the ma ma who teach them. */
+function placeCtx(){const r=road8();if(r==="kc"){try{if(S&&S.place==="dtv")return "dtv"}catch(e){}}if(r!=="kc")return r;let d="";try{d=typeof kc2D==="function"?kc2D():(S.kc&&S.kc.kd)||""}catch(e){}
  return d==="dan"?"kc:dan":d?"kc:nc":"kc"}
 /* the word of key k in context c (default: where she is now); "" when no context has one */
 function placeW(k,c){c=c==null?placeCtx():c;const L=[c];if(c.indexOf(":")>0)L.push(c.split(":")[0]);L.push("");
@@ -120,15 +124,7 @@ function road8Name(k){try{if(!road8()||road8Hide(k))return"";const g=typeof kgOf
   if(g&&KG[g]){const L=kgKeys(g);if(L.length<2)return KG[g].l;return `${KG[g].l} › ${kgLabel(k)}`}
   const b=document.querySelector(`#tabs [data-tab="${k}"]`);return b?(b.dataset.l0||b.textContent).trim():""}catch(e){return""}}
 window.ROAD8=ROAD8;window.road8=road8;window.road8Hide=road8Hide;window.road8Label=road8Label;window.road8Name=road8Name;
-/* BOTTOM TAB NAMES at home (MAIN 148 from OB-PHU shots; owner 21/11 ~03:25Z «chỉ là những cái thay đổi của cái tên thôi»): the SAME 8 tabs, only the
-   names follow the home tab set KCTABS (jkc / jkc2 variant names): Hành sự → KCTABS.act, Hậu cung → KCTABS.rv, Giao tình → KCTABS.staff (her Giao du
-   panel), Hoàng tự → KCTABS.kid (her letters, no more «chưa có con» card). Back in the palace every button gets its own name again. */
-function road8TabNames(){try{const B=[...document.querySelectorAll("#tabs button[data-tab]")];const kc=road8()==="kc"&&typeof KCTABS==="object";
- const M=kc?{act:KCTABS.act,rv:KCTABS.rv,rel:KCTABS.staff,kid:KCTABS.kid}:{};
- for(const b of B){const k=b.dataset.tab;if(M[k]){if(b.dataset.r8l0==null)b.dataset.r8l0=b.innerHTML;if(b.textContent!==M[k])b.textContent=M[k];b.title=M[k]}
-  else if(b.dataset.r8l0!=null){b.innerHTML=b.dataset.r8l0;delete b.dataset.r8l0;b.removeAttribute("title")}}}catch(e){console.error("road8TabNames",e)}}
-window.road8TabNames=road8TabNames;
-(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);road8TabNames();placeNoteSweep();return x}})();
+(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);placeNoteSweep();return x}})();
 /* a key with no bar button, or one her road leaves out, opens Hành sự (old saves / old links of the old servant and home bars) */
 (function(){const r0=render;render=function(){try{if(road8()){const b=document.querySelector(`#tabs [data-tab="${tab}"]`);if(!b||road8Hide(tab))tab="act"}}catch(e){}return r0.apply(this,arguments)}})();
 (function(){const p0=renderPanel0;renderPanel0=function(){const e=road8E(tab);const el=$("panel");if(!e||e.hide){if(el)el.__r8=null;return p0.apply(this,arguments)}
@@ -152,3 +148,14 @@ function road8Acts(o){const r=road8();const T=r&&ROAD8[r]&&ROAD8[r].acts;if(!T||
  const n=T.note&&T.note[o.tabKey];const note=o.note&&/^(Cùng chỗ: làm tại chỗ|Không gặp mặt: phải sai người)/.test(o.note)?(n||""):o.note;
  return Object.assign({},o,{groups,note})}
 window.road8ActKey=road8ActKey;window.road8Acts=road8Acts;
+/* THÔN NỮ HAS NO PERSONAL MAID (law 6 real world; MAIN 150 order, OB-NGOAICUNG open item 1): a village girl's family keeps no maid, so on the cnv home road
+   (isKc && kd "dan") S.maid is null — the head-count shows «Gia đình» only (kgfCount cn = 0). The palace sim must not hand her a maid while she is at home
+   (j8 consorts / maidMonthP give every consort one lazily; at home she is no consort): she is left out of consorts() there. Once she enters the palace
+   (placement: maid / Tân Giả khố / low consort) the palace gives her one again as before (j42 srv start, j8 maidMk). Old cnv saves at home lose the maid. */
+function noHomeMaid(){try{return !!(S&&S.kc&&!S.kc.inPal&&S.kc.kd==="dan")}catch(e){return false}}
+window.noHomeMaid=noHomeMaid;
+(function(){const dropMaid=()=>{if(noHomeMaid()&&S.maid)S.maid=null};
+ if(typeof kc2Init==="function"){const i0=kc2Init;kc2Init=function(){const r=i0.apply(this,arguments);dropMaid();return r}}
+ if(typeof consorts==="function"){const c0=consorts;consorts=function(){if(!noHomeMaid())return c0.apply(this,arguments);const L=c0.apply(this,arguments).filter(p=>p!==S);dropMaid();return L}}
+ if(typeof maidMonthP==="function"){const m0=maidMonthP;maidMonthP=function(p){if(p===S&&noHomeMaid())return"";return m0.apply(this,arguments)}}
+ if(typeof render==="function"){const r0=render;render=function(){dropMaid();return r0.apply(this,arguments)}}})();

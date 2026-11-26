@@ -30,7 +30,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    for(const k of ['cn','ct']){window.__kgfOpen=k;try{k3Stage()}catch(e){}await w(300);const f=document.querySelector('#kshR .kgfopen');put('list-'+k,f?f.innerText:'');
     put('tips-'+k,f?[...f.querySelectorAll('[title]')].map(x=>x.title).join(' | '):'')}
    window.__kgfOpen=null;try{k3Stage()}catch(e){}
-   put('tabs',[...document.querySelectorAll('#tabs button[data-tab]')].filter(x=>x.offsetParent).map(x=>x.textContent.trim()).join(' | '));put('maidTitle',typeof kitMaidTitle==='function'&&S.maid?kitMaidTitle():'');put('maidFigTag',S.maid&&typeof pMaid==='function'?pMaid().rw:'');
+   put('tabs',[...document.querySelectorAll('#tabs button[data-tab]')].filter(x=>x.offsetParent).map(x=>x.textContent.trim()).join(' | '));put('tabsRenamed',[...document.querySelectorAll('#tabs button[data-tab]')].filter(x=>x.offsetParent&&x.dataset.r8l0!=null||x.offsetParent&&typeof KCTABS==='object'&&Object.values(KCTABS).includes(x.textContent.trim())&&!/^(Tư trang|Tài nghệ|Dư đồ|Mệnh truyện)$/.test(x.textContent.trim())).map(x=>x.dataset.tab+'='+x.textContent.trim()).join(' | '));put('maidTitle',typeof kitMaidTitle==='function'&&S.maid?kitMaidTitle():'');put('maidFigTag',S.maid&&typeof pMaid==='function'?pMaid().rw:'');
    put('stageTags',[...document.querySelectorAll('.figtag,.kfigt,.ftag,[class*=figname]')].filter(x=>x.offsetParent).map(x=>x.innerText).join(' | '));
    for(const t of ['act','go','rv','staff','rel','kid','inv','art','story']){tab=t;render();await w(500);const P=document.getElementById('panel');put('tab-'+t,P?P.innerText:'')}
    tab='act';render();return o});
@@ -48,8 +48,11 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    const lg=(S.logs||[]).slice(0,Math.min(150,Math.max(0,(S.logSeq||0)-L0))).map(x=>String(x).replace(/<[^>]+>/g,''));return{d:out,log:lg,nt,stillKc:isKc(),turn:S.turn}},NP);
    R.surf['ev-dialogs']=R.ev.d.map(x=>`«${x.t}» [${x.who}] ${x.tx} {${x.opts}}`).join(' ‖ ');R.surf['ev-log']=R.ev.log.join(' ‖ ');R.surf['ev-notice']=R.ev.nt.join(' ‖ ')}
   R.rolled=rolled;R.errs=errs.slice(0,5);R.hits={};
-  const strict=['tabs','headcount','list-cn','list-ct','tips-cn','tips-ct','maidTitle','maidFigTag','stageTags'];
+  /* tab names are checked by tabsRenamed below (they keep the palace names everywhere, OD:L2108) */
+  const strict=['headcount','list-cn','list-ct','tips-cn','tips-ct','maidTitle','maidFigTag','stageTags'];
   for(const [k,v] of Object.entries(R.surf)){const H2=[];let m;PALACE.lastIndex=0;while((m=PALACE.exec(v)))H2.push(v.slice(Math.max(0,m.index-60),m.index+m[0].length+40));if(H2.length){R.hits[k]=H2.slice(0,k.startsWith('ev')?60:12);if(strict.includes(k)){bad++;R.fail=(R.fail||[]).concat(k)}}}
+  /* owner OD:L2108 (21/11 ~03:15Z): the SAME 8 bottom tabs with the SAME names on every road — a home tab renamed to a KCTABS name is a FAIL */
+  if(R.surf.tabsRenamed){bad++;R.fail=(R.fail||[]).concat('tabsRenamed')}
   if(SH){fs.mkdirSync(SH,{recursive:true});await p.evaluate(()=>{window.__kgfOpen='cn';try{k3Stage()}catch(e){}});await sleep(400);await p.screenshot({path:`${SH}/${ORG}-${wh}.jpg`,type:'jpeg',quality:70})}
   rep[ORG]=R;console.log(ORG,R.isKc,R.kd,'strict-fails:',(R.fail||[]).join(',')||'none');await c.close()}
  fs.writeFileSync(OUT,JSON.stringify(rep,null,1));await b.close();console.log(bad?'SCAN FAIL '+bad:'SCAN PASS');process.exit(bad?1:0)})();
