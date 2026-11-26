@@ -105,7 +105,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
  module.exports = { make, PROBE };
 diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 --- a/dev/test/robot-rt-coop.js	2026-11-25 23:30:30.071817801 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-26 02:47:34.167925804 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-26 05:46:57.008073250 +0000
 @@ -51,14 +51,43 @@
  
  async function seatLoop(ctx, who, dev, other) {
@@ -151,7 +151,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
      if (k >= KIEP && other.done) break;
      if (k >= KIEP && !extra && other.done) break;
      if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
-@@ -66,10 +95,14 @@
+@@ -66,14 +95,18 @@
    return p;
  }
  
@@ -163,10 +163,15 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
    /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
    const ctxs = [];
 -  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' }); ctxs.push(c); return c };
-+  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block', args: process.env.COOP_URL ? ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] : [] }); if (process.env.COOP_URL) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL); ctxs.push(c); return c };
++  /* patch #24: host=fold guest=fold needs two profile dirs */ const mk = async (dev, role) => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev + (A.host && A.host === A.guest ? '-' + role : '')), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block', args: process.env.COOP_URL ? ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] : [] }); if (process.env.COOP_URL) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL); ctxs.push(c); return c };
    const br = { close: () => Promise.all(ctxs.map(c => c.close())) };
    const H = { done: false }, G = { done: false };
    const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
+-  const [hc, gc] = await Promise.all([mk(hDev), mk(gDev)]);
++  const [hc, gc] = await Promise.all([mk(hDev, 'host'), mk(gDev, 'guest')]);
+   await Promise.all([
+     seatLoop(hc, 'host', hDev, G).then(() => { H.done = true }),
+     seatLoop(gc, 'guest', gDev, H).then(() => { G.done = true })]);
 diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 --- a/dev/test/robot-rt.js	2026-11-25 23:30:30.063404399 +0000
 +++ b/dev/test/robot-rt.js	2026-11-26 05:22:18.496169278 +0000
