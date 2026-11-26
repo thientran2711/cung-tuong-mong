@@ -303,3 +303,45 @@ C. selection days (S.selx2) save/reload not covered by these tests (selx-* own t
 2. Stack-rv5: copy the two rv5 test files, commit, push (new commit, no force); run save-death-rebirth, probe Fold seed 2, coop-e2e SWAP0, savegrow-slot on robot saves.
 3. quickcheck ALONE on the stack (`bash dev/tools/quickcheck.sh`), after every other test has stopped.
 4. Then «LAND READY review/save-fix-stack-rv5 <sha> FOR MAIN 153 / LC19 (BIG; save; = save-unseen-lists rv5 + save-growth-r6 — land INSTEAD of both, e-pack-a must then drop its save-growth merge or land after)» at the END of FOREMAN_B_STATUS.md + send_message Foreman B, with the numbers above.
+
+## REVIEW r5 (BIG rv successor, opus, session_01N1tNP3Zg2nHbRc546MNZYM, depth 3, START_CTX ≈ 3 %) — **PASS → LAND READY review/save-fix-stack-rv7 587adc6ba40be12b2b38b27c7ac08f77e2b599ca**
+PRIORITY #1 CHECK ('save-fix-stack' / 'save-unseen-lists' / 'save-growth'): OD 0 | ledger 0 | claims 5NE1WTFo (predecessor, rolled) | main 0 | review/* save-unseen-lists-rv5 deb9859d, save-fix-stack-rv5 0cb4e389, save-growth-r6 ad8955e1 | archive 0 → reused the r4 handover list 1–4, every test of the branch (NOT rebuilt); helper _rvvideo.js rewritten (untracked, from the report text).
+LIVE moved twice during the review: f009e1a6 → 02f564ae (ob-kiep) → 3af7896e (qc-daylife, a9 promo-root, mghelp-dress). Both merges: only index.html / sw.js conflicted (rebuilt by dev/site/build_site.sh); j3 / j42 / jtoil auto-merged (LIVE side = forgetSafe grace + toil text, no save path).
+
+### Branches (pushed, no force)
+| branch | sha | what |
+|---|---|---|
+| review/save-fix-stack-rv6 | 40e3ac5d611d61e215b4ef369ffc7a4a7b0f1473 | stack-rv5 0cb4e389 on LIVE 02f564ae (a0acd111) + the two rv5 test files from deb9859d + test-harness fix (40e3ac5d) |
+| **review/save-fix-stack-rv7** | **587adc6ba40be12b2b38b27c7ac08f77e2b599ca** | rv6 + LIVE 3af7896e (ancestor = current origin/main) — LAND THIS |
+
+### Fault found by this review (test harness only, no game code)
+save-unseen-lists rows on 02f564ae: nl-4s FAIL (the title path «Bắt đầu kiếp mới» ran the 3 selection days → «Duyên cung lỡ hẹn», S.dead, no slot) and drift «sổ none» (it parsed the packed CTMZ sổ as JSON). Fix 40e3ac5d: selection days off on every page open (as save-boundary-reload newLife, rv5 fix 3) + drift reads through slotGet. After: rows 16/16; LIVE still FAILs nl-0s / drift / tinbao.
+
+### Gates (rv6 = 40e3ac5d, rv7 = 587adc6b)
+| check | rv6 | rv7 |
+|---|---|---|
+| save-residue-probe Fold seeds 1,2,3 × 40 | **PASS** 0 lines (1343 / 689 / 716 writes) | seed 2 **PASS** (685 writes) |
+| probe iPad seeds 1,2,3 × 40 | **PASS** 0 lines (1248 / 1009 / 1333) | seed 1 **PASS** (643) |
+| probe LIVE 02f564ae Fold seed 2 (must FAIL) | FAIL SAVE-LAG ×5 ✔ | — |
+| RP_MUTATE=stipCard (must FAIL) | FAIL 3 (2 LOST + dcGate remake) ✔ | — |
+| save-unseen-lists flip Fold+iPad | **16/16** | all cases Fold+iPad **24/24** |
+| rows + family Fold+iPad | **16/16** (after harness fix) | (in the 24/24) |
+| LIVE rows (must FAIL) | tinbao, nl-0s, drift FAIL ✔ (held: LIVE run hung > 1 h, stopped) | — |
+| SUL_MUTATE nt / nl (must FAIL) | FAIL ✔ / FAIL ✔ | — |
+| save-boundary-reload Fold+iPad seeds 1,2 | 23/24 → day re-run PASS = **24/24** | 21/22 → day re-run PASS = **22/22**; LIVE day FAIL (3 moments sổ ≠ screen) ✔ |
+| save-death-rebirth Fold+iPad | **6/6** | **6/6** |
+| notice-late-save | **2/2**, LIVE FAIL 2/2 ✔ | **2/2** |
+| j71day-remake | PASS | PASS |
+| save-quota-repro (year-14 robot sổ 010, 600 k other storage, 24 buổi, true reload) | **PASS** 0 write errors · lag 0 · reload 14.9.2.3 exact · slot 0.40 M | **PASS** same |
+| savegrow-slot (robot sổ 001 / 005 / 010) | **ALL OK** (4.04 M→0.44 M, 0.11 M→0.02 M, 4.35 M→0.49 M; save 27–220 ms) | **ALL OK** (010) |
+| coop-e2e local Worker | SWAP0 **143/143** · SWAP1 **143/143** | SWAP0 **143/143** |
+| spread-e2e (6 viewports + old LIVE save) | A ×6 + B ×2 **PASS**, no page error, no h-overflow; C cannot set up (SP13 never holds a card in 120 buổi — **same on LIVE**, probe `_spc`: max SP13.L 0 on both) | — |
+| scans | unseen-lists PASS (census 157, UNCLASSIFIED 0) · time-advance PASS 10/10 | same |
+| videos true reload (_rvvideo, look 3×) | Fold 755x1000: date / numbers / Tin báo «26 tin mới» identical · iPad 1180x820: «Có người đến» lines kept in Tin báo «15 tin mới», identical after reload; 0 page errors | — |
+| quickcheck ALONE | rv6: build OK, G1–G3 PASS, hooks 80 dialog-fixed + 90 button-crawl FAIL = **identical on LIVE 02f564ae** (pre-existing: empty Tốn/Được cell kit-dialog-2 a; «Ô lưu · Lui» close); 92 look-dedupe FAIL 3–6 = **flaky on LIVE too** (opening card «Ngày thứ nhất — Nhập cung» races the mood-seal tap; rv6 re-run PASS, LIVE re-runs FAIL 6 / 3); old-save timeout → re-run OK; perf live «not measured» = every run a day life (tool, fixed on LIVE by qc-daylife ef903bbe/66e07c03) | **QUICKCHECK PASS part** (build OK, open 2356 ms, old LIVE save loads + plays, perf day-vs-day new/live render 322/273 · tab 679/679 · buổi 2528/1806 · tasks>200 46/38, within ceilings); CORE GATES: the same 3 hooks 80 / 90 / 92 only (pre-existing, see rv6 column), G1–G3 + every other hook PASS |
+
+### Open follow-ups (not blocking, pre-existing, not made worse)
+A. pid «Việc khó xử» cards dropped on load — separate fixer (brief). B. jtsb / j68h opts wrappers + q72o retitle (r4). C. selection days save/reload (selx-* own tests). D. quickcheck hooks 80 dialog-fixed / 90 button-crawl fail on LIVE; 92 look-dedupe harness race with the first-day card. E. spread-e2e case C needs a new setup (SP13 no longer holds data cards in a plain 120-buổi run, LIVE too). F. save-boundary-reload «day» Fold seed 1 sometimes «SCREEN NOT FREE» at 1.3.1.1 under load (LIVE too).
+
+### Gain vs risk
+GAIN: the M2b/M5b save rollback (quota-swallowed writes, sổ lagging the screen by months), lost unseen cards / Tin báo lines on a true reload, and the never-saved new life are all fixed in ONE landing; LIVE fails each of these gates, the stack passes them. RISKS: (1) a later code card outside a generator — có thể, nhỏ; the census + probe FAIL at once. (2) packed sổ (CTMZ) on a browser that cannot decode it — hiếm, vừa; old plain sổ still load, export makes plain CTM2 code (savegrow-slot 4), found by savegrow-slot / quickcheck old-save. (3) save() 150–220 ms on a year-14 sổ — có thể, nhỏ; perf gates show buổi within ceilings. → **Được lớn hơn** (a whole family of real data loss is closed; every risk is small and caught by a gate).
