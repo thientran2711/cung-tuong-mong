@@ -172,3 +172,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~09:14Z KIT READY J0 review/act-merge-J0 52334847 (§7.1 «+6 (1)», kitRelW) → MAIN LOOK PASS → sent to J1–J4, J5b (merge J0, use kitRelW). E96f got the FRONT-of-queue root (pushModal back-queue family). J1 pushed? still no (asked again).
 - ~09:14Z OB-VERDICT at ceiling (pushed 5a282542: RV #4 kit page + #5 seq-based aims done) → archived; successor OB-VERDICT-2 session_01V1ZZH3VrbDxs1F7ghNy88g (with repo) does #1/#2/#3/#6.
 - ~09:15Z KK39 rolled (40 %) → KK40 session_01V1ZZGzpmYVnzJM9qst45q8 (with repo; handover kit-hand.md «KK39 REPORT + HANDOVER»); KK39 archived; RV-KK39, E96f, OB-OAN told.
+- ~09:16Z J1 pushed b3e935e9. J5b: jdoor5.js table OK; DOOR.deck hook written by J5b inside jdoor.js, J1 adopts (J1 owner). J4 head a5d02a23 (J0 merged; no person-number rows).
