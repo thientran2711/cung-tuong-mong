@@ -26,7 +26,7 @@ function X(cap){/* ONE address core (jvoice kAddr, VANPHONG §2): the narrator c
 function ME(){/* the narrator's self word: the ma ma says "ta" to a maid (kAddr, no speaker); a consort's maid says "nô tỳ" */try{return srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).xung:kAddr({srv:"f"},S,{m:"cool"}).xung}catch(e){return srvNow()?"ta":"nô tỳ"}}
 function say(s){return String(s).replace(/\{X\}/g,X(true)).replace(/\{x\}/g,X(false)).replace(/\{m\}/g,ME())}
 /* goal-links (owner OD 26/11 ~18:05Z, law 6b real people): a quest that names the Nội vụ phủ eunuch names HIM (S.court.ped, the real person who stands at Nội vụ phủ, j95 c:ped) */
-function pedN(){/* she knows his name (j61 k61Named: met and named) → "thái giám <name>"; not yet → who he is by what he does (the stage masks unknown names) */try{const c=S&&S.court&&S.court.ped;if(c&&c.name&&(typeof k61Named!=="function"||k61Named(c)))return `thái giám ${c.name}`}catch(e){}return "vị thái giám bày hàng ở đó"}
+function pedN(){/* r2: he is named from the first day (j61 k61SeedChiTon seeds S.court.ped; owner asked to NAME him) → always "thái giám <name>" */try{const c=S&&S.court&&S.court.ped;if(c&&c.name)return `thái giám ${c.name}`}catch(e){}return "thái giám lo mua đồ"}
 function T(s){return String(s==null?"":s).replace(/\{ped\}/g,pedN())}
 window.tq14Ped=pedN;
 /* ---------- the quests: [variant][chapter] → list; need = how many times (BAL.st14.q.need[id] or 1) ---------- */
