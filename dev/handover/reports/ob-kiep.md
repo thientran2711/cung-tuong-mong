@@ -38,3 +38,10 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-kiep/obk-than-phan-befo
 https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-kiep/obk-than-phan-after-fold-ipad.jpg (fix: lists, Mất holds the fallen house, no seal pop)
 singles: obk-than-phan-{before,after}-{755x1000,1180x820}.jpg in the same folder.
 Note: Fold keeps the existing narrow figure-left panel, so each item wraps to 2–3 short lines there (layout untouched, not in scope).
+
+## (3) Fold frame width (MAIN 148 order, law 12) — cb91d5c4
+- Root: `kpIdLay` (j79) sized the Fold figure column by `BAL.figWideRef` .65 → the info frame was ≈307 px; gains wrapped 3–4 words a line, «Đổi thân phận» chip broke into 4 lines.
+- Fix, KIT 56.11 rewritten in place (canon overwrite): the one-page figure-left card keeps the frame ≥ `KPID_PANEL` 66 % of the usable width (≤ 560; Fold ≈ 472 px); the ONE figure body is lowered to the column left, still whole beside the frame (56.7). iPad landscape and 412 cover (figure-above) unchanged. Family: `kpfig` = the identity / opening scene card is the only figure+frame selection layout (roulette = grid, menus = plain panels).
+- LAW 16 FLAG for MAIN: 56.11 (owner 18/11) set the Fold figure = book size 641; on Fold it is now ≈ 430 so the frame has room (MAIN 148: «picture may sit behind/smaller»).
+- Videos (full, looked at frame strips): img/_review/ob-kiep/obk2-than-phan-full-fold-755x1000.mp4 · obk2-than-phan-full-ipad-1180x820.mp4; stills obk2-than-phan-fold-wide-755x1000.jpg · obk2-than-phan-ipad-1180x820.jpg.
+- Quickcheck on cb91d5c4: all core gates PASS except the pre-existing G4 90-button-crawl («Ô lưu · Lui», same on LIVE); old save ok; perf new/live render 240/248, tab 551/645, buổi 1636/2327, tasks>200ms 24/25.
