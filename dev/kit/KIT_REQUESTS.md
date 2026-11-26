@@ -340,4 +340,6 @@ Owner OD 25/11 ~23:20Z: the mirror lost its preset sets (jration lxColRows dropp
   `hold:true` = the chip stays up (no BAL.entryToastMs fade) while the notice exists (dropped by kitNoticeDrop when she leaves / the place opens);
   `chipGo:true` + `go` + `goLabel` = a tap on the chip runs `go` (her way home, homeGo) instead of opening the panel; the chip shows goLabel («Về phòng · N khắc») after the line
   (or as its second half on one line); the box «!» still opens the panel with the full text + the same `go` row. Place: the existing finder (under the top bar, above Dư đồ / stage).
+  PRIORITY (found in the place-close LOOK stills, Fold + iPad): a `hold` chip keeps the ONE chip slot — a later plain notice of the same turn (e.g. j77 «Sang buổi trưa, ta vẫn ở …») goes to the «!» box
+  without taking the chip (or shows, then the hold chip comes back); today the later line wins, so the red «Đã quá giờ…» chip never shows and a tap opens the wrong notice.
   Until KK44 lands it the chip shows plain (5 s, tap = panel); the logic (grace, NHẸ, no dialog) works without it.
