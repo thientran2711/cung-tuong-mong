@@ -356,3 +356,7 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   E-S1 ckpt resume (Fold) → buổi 9, 0 DEAD, no new bug. Ban hoa lives seen by QC (f2/f5/i2) = «Cúi đầu chờ xét — không thi» persona pick, the pre-5c62c2b9 «Bỏ qua
   kết quả khá» quick option (fixed in 5c62c2b9), and a board «Quay lại» on 08a4ff8b (fixed in 5c62c2b9: unstick / picker never back out of a running board).
   #kroul «Bỏ qua» = skip of the identity roulette animation before the life, not a mini-game result; left as is.
+- BIG REVIEWER #9 PASS 5c62c2b9 + non-blocking notes, done here: N1 the board-play bare check uses GUARD_SEL (same set as bareTapOn) and arms the capture guard
+  (window.__rtBare) in the same page call; before the guard exists, bareTapOn takes the tap. N2 the quick option is removed only when another NON-back move is there
+  (a board with only quick + ✕ takes the quick, never the 6-min give-up). N3 board moves count in areaTaps + boardTaps. Proof LIVE 6b5d3d05: RT_TEST_BOARD=vu Fold 9 /
+  iPad 7 (no skip), RT_TEST_EXAM=1 Fold s31 + iPad s12 [5,5], iPad bold s4242 → buổi 14, 0 DEAD, 0 bugs.
