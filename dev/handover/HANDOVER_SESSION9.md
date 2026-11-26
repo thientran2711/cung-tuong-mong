@@ -132,3 +132,8 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~07:50Z WAKE. LOAD: main running LC21, KK39, OB-PHU4, ACT-MERGE, RV-OB-NGOAICUNG-2, E96r/E98r (owner bugs/UI/go-live + E's opens) | B busy (freeze root + inv-stack order) | C K-ICO-HOME done | D busy | E depth limit | F runners | moved: inv-stack → B, bought-servant YES → D (OD 07:50Z), home icon → KK39. RV-OB-NGOAICUNG-2 = session_01V1ZZH29E5itz7L8m4cLTq5.
 - ~07:55Z ROLL (context ~28 %, roll line 30 %): TAKEOVER_MAIN_155.md written; opening MAIN CHÍNH 155 as my child; 154 = forwarder.
 - ~07:57Z MAIN CHÍNH 155 = session_01V1ZZH2xEpGEfFdnaf8bfYc (154 child, depth 3). 154 = forwarder from now.
+
+## MAIN CHÍNH 155 (session_01V1ZZH2xEpGEfFdnaf8bfYc, depth 3, child of 154; START_CTX ~5 %, roll line 30 %, ceiling 60 %)
+- ~08:00Z TAKEOVER: own tasks (hourly trig_01DpZ5b6dXC5n8Au4UWs7KtY, 08:00 NY trig_01SQfzh6vSGL8tyNq4GEEatQ, 20:00 NY trig_01Q6pFjqQUh2N9FjXvnvKCSH); 154's three disabled. Worktree /home/user/wt/h155, push script /home/user/wt/hpush155.sh. «main is now 155» to every seat + forwarders 150–154; FROM MAIN 155 lines in FOREMAN_B–F_STATUS.
+- LOAD: main running LC21, KK39, OB-PHU4, ACT-MERGE, RV-OB-NGOAICUNG-2, OB-NGOAICUNG-2, E96r/E98r, HOME-WAY-NITS, NEWS-SIEVE-2, FIRSTCARD (owner bugs/UI/go-live + E's opens) | B busy (freeze root + inv-stack) | C free-ish (4 old questions) | D busy (D2/D1-D4 rv, cung-quy, kho, G4) | E depth limit (E ROOT paste given to sếp) | F runners + qc-noise-hygiene | moved: none.
+- ~08:00Z D5 mg-trim c961211e LAND READY (owner bug «Sửa gấp», BIG PASS, FF on LIVE) → LC21 fast lane: stage right after DRESS (owner bug first), gate, READY TO PUSH.
