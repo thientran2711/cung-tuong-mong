@@ -60,7 +60,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   reset(15);{const [v,m]=L();const c0=v.coop;v.coop=1;found(v,m);npcCold(v);o.co=[!facIn(v),!p3FacFr(m).includes(v),facRoll(facOf(m)).includes(v),!facMembers(facOf(m)).includes(v)];
    joinFac(S,facOf(m));v.coop=c0}
   /* 11. back from lãnh cung: present again, still a member */
-  reset(16);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const f=facOf(S);goCold();restore(false,"Thử");Q.length=0;o.back=[!herCold(),facMembers(f).includes(S)]}
+  reset(16);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const f=facOf(S);goCold();/* punish-reason: the stay (BAL.pun.coldMinDays) is served first */S.coldWk-=BAL.pun.coldMinDays;restore(false,"Thử");Q.length=0;o.back=[!herCold(),facMembers(f).includes(S)]}
   /* 12. every number from BAL (law 4): the card / button words print the keys */
   reset(17);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const h=facHTML();o.bal=[h.includes("Danh "+balSg(B.fac.sell.danh)),h.includes("oán "+balSg(B.fac.sell.oan)),h.includes(balSg(-B.fac.leave.rel))]}
   /* 13. review (law 3 + law 2): Rời phe of her own will is never cost-only — her tab and an NPC's cx3:facLeave = the letter (Danh + prop.danh);

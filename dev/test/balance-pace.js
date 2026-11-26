@@ -20,8 +20,14 @@ const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad
   /* the tab html */
   let h="";try{h=ktArtSkills().map(c=>kitSkillCard(c)).join("")}catch(e){o.tabErr=String(e)}
   o.has100=/>\s*\d+\/100\s*</.test(h);o.bars=(h.match(/<b>\d+\/\d+<\/b>/g)||[]).slice(0,4);
-  o.words=(h.match(/tiến bộ [^<,·]+phần/g)||[]).slice(0,6);
-  o.typedRange=/tiến bộ \+\d/.test(h);
+  /* act-merge J4: Tự học / Học với thầy / Học với Thái hậu (ma ma) are the ways of ONE «Học» door; their words (crsGainW, BAL range)
+     sit in the door's choice rows, not on the card. Open every «Học» door on every Tài nghệ sub-tab and read its rows. */
+  let dh="";try{tab="art";render();const subs=[...document.querySelectorAll('#panel [data-ktsv]')].map(e=>e.dataset.ktsv);
+   const read=()=>{for(const d of [...document.querySelectorAll('#panel [data-learndoor]')]){Q.length=0;d.click();const q=Q[0];if(q&&q.opts)dh+=q.opts.map(x=>(x.n||"")+" "+(x.x||"")).join(" | ")+" || ";Q.length=0}};
+   read();for(const k of subs){const b=document.querySelector(`#panel [data-ktsv="${k}"]`);if(b){b.click();read()}}}catch(e){o.doorErr=String(e)}
+  o.doors=(dh.match(/\|\|/g)||[]).length;
+  o.words=((h+dh).match(/tiến bộ [^<,·|]+phần/g)||[]).slice(0,6);
+  o.typedRange=/tiến bộ \+\d/.test(h+dh);
   /* NPC lesson through the same rule */
   const v=(rivals||[]).find(x=>x&&x.alive&&!x.out);if(v){vNorm(v);const s0=JSON.stringify([v.arts,v.artp,v.vir,v.virp]);for(let i=0;i<10;i++)npcStudyDo(v);o.npcMoved=JSON.stringify([v.arts,v.artp,v.vir,v.virp])!==s0}
   o.src=String(npcStudyDo).includes('lesG(');return o});
@@ -36,7 +42,8 @@ const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad
  ok(R.pace.poor[4]>R.pace.good[4]*2,`poor play is much slower (${R.pace.poor[4]} vs ${R.pace.good[4]})`);
  ok(!R.tabErr,`Tài nghệ cards build (${R.tabErr||''})`);
  ok(!R.has100,`no course bar «/100» (bars: ${R.bars.join(' ')})`);
- ok(!R.typedRange&&R.words.length>0,`button words from BAL: ${R.words.join(' | ')}`);
+ ok(!R.doorErr&&R.doors>0,`«Học» doors open on the Tài nghệ tab (${R.doors} doors${R.doorErr?', '+R.doorErr:''})`);
+ ok(!R.typedRange&&R.words.length>0,`button words from BAL (card + «Học» door rows): ${R.words.join(' | ')}`);
  ok(R.src&&R.npcMoved,`NPC lesson uses lesG and moves her courses (${R.src}/${R.npcMoved})`);
  ok(!errs.length,`no page errors (${errs.slice(0,3).join(' | ')})`);
  console.log(bad?`balance-pace: ${bad} BAD`:'balance-pace: PASS');await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
