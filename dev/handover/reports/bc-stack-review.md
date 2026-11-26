@@ -225,3 +225,15 @@ FAIL — RT_TEST_EXAM: done:false in 4/4 runs (Fold s31 ×3, iPad s12 ×2 incl. 
 - both drag rounds take «Bỏ qua» correctly (dragSkipExam 2), «Môn kế tiếp», «Xem kết quả» — then the exam RESULT screen (jexam result(): kitGameResult + #kg82ok «Đã hiểu») shows #kg82ok display:none (kit: the header ✕ «Quay lại» is the way on, kg82Back → kitOvBtn() presses #kg82ok). SCAN sees ONE button «Quay lại», mgPh '' (jexam never sets KG82.phase="result") → mgOnlyBack → the robot waits MG_GIVEUP_MS 6 min, then taps «Quay lại». The self-test window is 5 min → done:false; in real lives every exam / exam-like result costs a 6-min idle (screenshot: result card «Khảo hạch: Kết quả · thử … Đỗ.» with only ✕).
 - Family fix wanted (law 11): treat a #kg* screen as RESULT when kitOvBtn's target exists in #ov (#kg82ok / #kg92ok / #mgok, connected, even if display:none) — SCAN mgRes = that, and `sc.mgPh === 'result' || sc.mgRes` wherever the result rule is used (isMgBack filter, mgOnlyBack, the kg82 ✕ = way on). Then RT_TEST_EXAM must print done:true raws [5,5] on Fold + iPad, and scan the other kitOvBtn callers (j82 finish/done set phase; jexam, j92 #kg92ok, #mgok) in the before/after table.
 Verdict: FAIL 54fa0112 — exam result screen (hidden «Đã hiểu», ✕ is the way on) idles 6 min; RT_TEST_EXAM done:false 4/4.
+
+## BIG #7 — PASS review/robot-realtap 4d7a22c6 (stack 073380f9 → 54fa0112 → dfb79f43 → 4d7a22c6, HARNESS FIXER #9) — 11/26 ~03:50Z
+- Fix delta dfb79f43..4d7a22c6: SCAN mgRes / mgPh='result' when the game's own kitOvBtn() (read-only) returns #kg82ok/#kg92ok/#mgok → every result rule follows. robot-lint OK (7 files). Merge into LIVE origin/main 5e013076: clean (merge-tree).
+- dfb79f43 delta (read): skipWay / backdrop = bareTap real taps on bare points only; stall dump qs = getters + jdayq dqActEl/dqDawn/dqFreeScreen (read-only DOM checks); build stamp read-only.
+- LIVE 5e013076 local (GAME BUILD 3762da08+ fa8da73cecdc), 6 runs, all dead 0 / stuck 0 / jsClicks 0 / bugs 0:
+  - RT_TEST_EXAM Fold s31 + iPad s41: done:true raws [5,5], dragSkipExam 2 (was done:false 4/4 on 54fa0112).
+  - RT_TEST_SKIP Fold s42 / iPad s43: card flip gone 24 s / 21 s, «Sổ nguyệt sự» 7 s / 11 s, «MẬT BÁO» backdrop 13 s / 14 s, noCloseVerdicts 0, backdropTaps 1 (skipTaps 0: the flip ended on its own / by area taps — slower than the fixer's 10 s, no verdict).
+  - RT_TEST_DUMP iPad: qs carries Q [], DQ stats, used, buoi, mg, modalHidden, next, dq* — read-only.
+  - slices: Fold sens s44 buổi 12 / 99 taps, iPad rand s45 buổi 12 / 128 taps; exam slices b5 61/62 taps.
+- Earlier on 54fa0112 (still valid): rt-offer s9b 593→0, NAV/LOW cards 0, RT_TEST_STALL 65 s, freeze stack read-only.
+- Not covered: FOREMAN E «Phụ tuyến · Đổi ơn… · Lời nhờ» iPad tap-point stall (8dc395ba family) — separate small review when its fix sha comes.
+Verdict: PASS 4d7a22c6.
