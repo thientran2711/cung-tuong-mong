@@ -40,5 +40,7 @@ has('jptime.js','function ptVoice(','servant voice helper');has('jerr.js','ptRep
 for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f)&&f!=='all.js')){const t=fs.readFileSync(path.join(D,f),'utf8');const re=/pushModal\(\{/g;let m;
  while((m=re.exec(t))){const c=t.slice(m.index,m.index+900);const w=/who:\s*(?:pv\()?([A-Za-z_$][\w$.]*)/.exec(c);if(!w)continue;const v=w[1].replace(/\.$/,'');
   if(c.includes('${'+v+'.name}')){rows.push([f+':'+t.slice(0,m.index).split('\n').length,'pushModal who','body names the shown speaker '+v,'speakerName']);bad(`${f}: dialog shows ${v} (who) and names ${v}.name in its body`)}}}
+/* (5) MAIN 149 look: «Sổ ghi thêm về X:» head and verbless «Ở <nơi> ngày hội.» */
+no('j21.js','Sổ ghi thêm${','Sổ ghi thêm về X: label-colon');has('j21.js','function noteSay(','Sổ notice as one sentence');has('jagknow.js','const KN_WHAT=','happening as a clause');has('jnotice.js','is ONE row','same news told twice = one row');
 if(MD){console.log('| where | builder | text (X = a value) | pattern |\n|---|---|---|---|');for(const r of rows)console.log(`| ${r[0]} | ${r[1]} | ${r[2].replace(/\|/g,'/')} | ${r[3]} |`)}
 console.log(`tinbao-words scan: ${rows.length} rows · ${fail?fail+' FAIL':'PASS'}`);process.exit(fail?1:0);

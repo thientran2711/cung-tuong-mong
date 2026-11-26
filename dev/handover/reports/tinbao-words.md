@@ -69,3 +69,30 @@ Shot k20-ipad-tinchonguoisai-repeat.jpg: «Tin chờ người sai đi» (jerr er
 - 8908b077 added 1 commit over 2608109d (ptRepRows rows composer + result as kit chip; invite runner no doubled line). Merged; conflicts in jptime/jerr resolved by keeping E90r's ptRepRows and adding the speaker voice INSIDE it: ptRepRows(rep,nm,person,shown) → ptVoice on the rows when the person is the one shown. My ptRepVoice removed. index.html/sw.js/assets.json rebuilt.
 - Gates: news-runner-lines.js 0 FAIL · tinbao-words/scan.js PASS · shots.js nameInBody=false Fold+iPad («Nô tỳ nhờ quen người ở Chung Tú cung mà nghe ngóng được chuyện về Tần Thôi Uyển Dung. / Nàng ta thích tác phẩm Thi. [Việc thành chip]»).
 - Shots: tb2511d-{fold,ipad}.jpg, tb2511d-{fold,ipad}-tin.jpg, tb2511d-ipad.webm.
+
+## Round 5 — MAIN 149 look: «Sổ ghi thêm về X:» head + verbless «Ở <nơi> ngày hội.» (whole family)
+- j21 `noteSay(v,t)`: the notice of a new Sổ line is ONE sentence about the person (stored Sổ fragment unchanged): «Nghe nói <X> hay …», «<Nguồn> báo/kể <X> …», «<Nhãn>: <X> …», «Phòng của <Y> bày …», subject-less fragment → «<X> …». jnotice kitSay turns any old «Sổ ghi thêm về X: …» head the same way.
+- jagknow `KN_WHAT`: a happening is a clause with its verb («đang có hội lớn», «có Hoàng thượng đang dạo vườn», «có hai phi tần đang cãi nhau», …) — never the bare title noun → «Ở Đức Thọ cung đang có hội lớn.»
+- jnotice kitNotice: the same news told twice (two ids, same text) is ONE row.
+- jagent origin clause «; nàng vốn xuất thân …». Unicode fix: my regexes use \p{Lu}/\p{Ll} (the À-Ỹ range matched lower case too).
+- patterns.js + labelAbout + bareNoun; scan.js checks the producers.
+
+### NEWS (Tin báo: notices, rendered rows, cards, forced family runs)
+lines collected: before 749 · after 2084
+
+| pattern | before | after | example before | example after |
+|---|---|---|---|---|
+| chain3 | 105 | 20 | Bích Đào báo: Bẩm tiểu chủ, chuyện buổi trước: nô tỳ nghe Huệ Tâm kể: Đường Nhu Gia tự tay làm một tác phẩm. | Hoàng hậu Bạch Nguyệt Thiền gặp kỳ ngộ với Thường tại Tạ Tử Đàn: Áo gấm hoa mai về lại tay Tạ Tử Đàn Bạch Nguyệt Thiền: Danh +15 Tạ Tử Đàn: thiện cảm  |
+| titleTwice | 101 | 26 | Nghe nói Hoàng hậu Nhan Như Ý gặp kỳ ngộ với Uyên Ương: Tần ??? để bụng oán Hoàng hậu Nhan Như Ý; Uyên Ương thành tai mắt của Hoàng hậu Nhan Như Ý tro | Bích Đào nhờ quen người ở thiên điện của Thường tại Mã Ngọc Khê mà nghe ngóng được chuyện về Thường tại Mã Ngọc Khê. Nàng ta đang chạnh lòng, vì ngươi |
+| chain2 | 93 | 49 | Sổ ghi thêm về một vị Thường tại: Phòng của Trình Tử Đàn: bày 1 món, hợp phẩm. | Phi ??? gặp kỳ ngộ với Lão Phong Tử Đường Chỉ Nhược: Danh +3 Lão Phong Tử: thiện cảm +42 |
+| name3x | 80 | 74 | Nghe nói Nhan Như Ý gặp kỳ ngộ với Uyên Ương: Thượng Quan Hàm Hương để bụng oán Nhan Như Ý; Uyên Ương thành tai mắt của Nhan Như Ý trong cung Thượng Q | Nghe nói Giang Như Mặc gặp kỳ ngộ với Yên Chi: Tư Mã Tịch Nhan để bụng oán Giang Như Mặc; Yên Chi thành tai mắt của Giang Như Mặc trong cung Tư Mã Tịc |
+| dotMid | 56 | 0 | Thanh Trúc dò la Trình Tử Đàn trở về · thành. Thanh Trúc nghe lén chuyện của một vị Thường tại: Một vị Thường tại thích tác phẩm Thi. Một vị Thường tạ |  |
+| dotOk | 53 | 0 | Thanh Trúc dò la Trình Tử Đàn trở về · thành. Thanh Trúc nghe lén chuyện của một vị Thường tại: Một vị Thường tại thích tác phẩm Thi. Một vị Thường tạ |  |
+| labelAbout | 38 | 0 | Sổ ghi thêm về một vị Thường tại: Phòng của Trình Tử Đàn: bày 1 món, hợp phẩm. |  |
+| rawNet | 29 | 0 | Thanh Trúc nghe ngóng trở về · thành. Thanh Trúc nghe ngóng trở về: Thanh Trúc nghe ngóng được về Tần ở một thiên điện (chưa quen) (nàng đang được sủn |  |
+| paren2 | 12 | 0 | Thanh Trúc nghe ngóng được về Tần ở một thiên điện (chưa quen) (chuyện nghe được ngoài hành lang): Một vị Tần để bụng Hoàng hậu Nhan Như Ý nhất; mức n |  |
+| bareNoun | 4 | 0 | Ở Đức Thọ cung ngày hội. |  |
+| tonFree | 3 | 0 | Để ta xem TỐN không ĐƯỢC không |  |
+
+- Gates: tinbao-words/scan.js PASS (main 27 FAIL lines) · news-runner-lines.js 0 FAIL · shots.js nameInBody=false Fold+iPad.
+- Shots: tb2511e-{fold,ipad}.jpg, tb2511e-{fold,ipad}-tin.jpg, tb2511e-ipad.webm.

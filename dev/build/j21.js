@@ -1,6 +1,19 @@
 /* ================= WHAT SHE KNOWS: info acts show the facts, keep them, relation view in words ================= */
 function kn(){S.kf=S.kf||{};S.notes=S.notes||{};S.met=S.met||{};return S}
-function noteAdd(id,t,shown){kn();const L=S.notes[id]=S.notes[id]||[];L.unshift(`T${S.month}/${S.year} ${TUAN[S.tuan]}: ${t}`);if(L.length>6)L.length=6;try{/* KNOW-NOTICE (3rd arg `shown` = the act's own card/dialog/log already tells this fact → no second notice): every line written in her Sổ is something she learned: one notice at that moment (a trait / liking line sharing the key gives the richer text) */if(!shown&&typeof kitKnow==="function"&&id!=null){const v=typeof RV==="function"?RV(+id):null;kitKnow({key:"n:"+id,pri:0,text:`Sổ ghi thêm${v?" về "+knowWho(v):""}: ${String(t).replace(/<[^>]+>/g,"").replace(/[\s.]*$/,"")}.`/* tinbao-words: one sentence, closed by its period */})}}catch(e){}}
+/* tinbao-words (MAIN 149 look, owner k16): the notice of a new Sổ line is ONE plain sentence about the person — never «Sổ ghi thêm về X: <nhãn>: …».
+   The stored Sổ line (under her card) stays the short fragment; here: «nghe nói nàng ta hay …» → «Nghe nói <X> hay …»; «<nguồn> báo/kể: …» → «<Nguồn> báo <X> …»;
+   «<nhãn>: …» → «<Nhãn>: <X> …»; a fragment with no subject («để ý chỗ ngươi hay lui tới») → «<X> để ý …»; a whole sentence stays as it is. */
+function noteSay(v,t){let s=String(t==null?"":t).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim().replace(/[\s.]*$/,"");if(!s)return"";
+ const W=v?(typeof knowWho==="function"?knowWho(v):v.name):"";const cap=x=>x?x[0].toUpperCase()+x.slice(1):x;const nang=/^nàng(?: ta)?\s+/;
+ if(!W)return cap(s)+".";
+ let m=/^(nghe nói|nghe lén được|nghe được|biết|chính ngươi bắt gặp|ngươi thấy)\s+nàng(?: ta)?\s+(.+)$/i.exec(s);if(m)return `${cap(m[1])} ${W} ${m[2]}.`;
+ m=/^([^:]{2,40}?):\s+(.+)$/.exec(s);if(m){let lab=m[1].trim(),rest=m[2].trim();rest=nang.test(rest)?W+" "+rest.replace(nang,""):rest;
+  if(/\s\p{Lu}/u.test(lab)&&!/(báo|kể)$/i.test(lab))return `${cap(lab)} ${rest}.`;/* «Phòng của Trình Tử Đàn: bày 1 món» → «Phòng của Trình Tử Đàn bày 1 món» */
+  if(/(báo|kể)$/i.test(lab))return `${cap(lab)} ${rest.indexOf(W)<0&&!/^\p{Lu}/u.test(rest)?W+" ":""}${rest}.`;return `${cap(lab)}: ${rest.indexOf(W)<0&&!/^\p{Lu}/u.test(rest)?W+" ":""}${rest}.`}
+ if(nang.test(s))return `${W} ${s.replace(nang,"")}.`;
+ if(/^\p{Ll}/u.test(s)&&s.indexOf(W)<0)return `${cap(W)} ${s}.`;
+ return cap(s)+"."}
+function noteAdd(id,t,shown){kn();const L=S.notes[id]=S.notes[id]||[];L.unshift(`T${S.month}/${S.year} ${TUAN[S.tuan]}: ${t}`);if(L.length>6)L.length=6;try{/* KNOW-NOTICE (3rd arg `shown` = the act's own card/dialog/log already tells this fact → no second notice): every line written in her Sổ is something she learned: one notice at that moment (a trait / liking line sharing the key gives the richer text) */if(!shown&&typeof kitKnow==="function"&&id!=null){const v=typeof RV==="function"?RV(+id):null;kitKnow({key:"n:"+id,pri:0,text:noteSay(v,t)})}}catch(e){}}
 function agoW(w){const d=wk()-w;return d<=0?"tuần này":d===1?"tuần trước":`${d} tuần trước`}
 /* the favour book: true values; a weak look shows only the top 3 */
 function favorBook(full){kn();const P=consorts().filter(p=>!p.out).sort((a,b)=>b.sung-a.sung);const L=full?P:P.slice(0,3);const m0=S.turn*3;

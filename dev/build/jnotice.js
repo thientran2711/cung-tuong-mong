@@ -56,22 +56,26 @@ try{const r0=render;render=window.render=function(){const r=r0.apply(this,argume
 function kitSay(x){if(typeof x!=="string"||!x)return x;let s=x.replace(/\s+/g," ").trim();
  /* a sentence that is only the head of the next one is said once («X nghe ngóng trở về · thành. X nghe ngóng trở về: …») */
  {const Q=s.split(/(?<=[.!?])\s+/);for(let i=Q.length-2;i>=0;i--){const h=Q[i].replace(/ · (?:thành|hỏng)\b/,"").replace(/[.!?:,\s]+$/,"");if(h.length>6&&Q[i+1].indexOf(h)===0)Q.splice(i,1)}s=Q.join(" ")}
+ /* an old «Sổ ghi thêm về X: …» head (stored notices, other builders) → one sentence about X (j21 noteSay) */
+ s=s.replace(/^Sổ ghi thêm về ([^:]{2,60}): (.+)$/u,(m,w,r)=>{try{if(typeof noteSay==="function")return noteSay({name:w},r)}catch(e){}return `Về ${w}, ${r}`});
  s=s.replace(/ · thành\b(\.?)/g,", việc đã thành$1").replace(/ · hỏng\b(\.?)/g,", việc không thành$1");
  s=s.replace(/ = (?:như )?/g,", coi như ").replace(/\)\s*\(/g,", ");
  /* « · » between two words of one sentence → «, » (a date «Tháng ba · thượng tuần» keeps its dot) */
  s=s.replace(/([\p{L}\p{M}\d)%»”"]) · (?!(?:thượng|trung|hạ) tuần|năm thứ)([\p{L}\p{M}\d(«“"])/gu,"$1, $2");
- s=s.replace(/\bcó nết ([A-ZÀ-Ỹ][\p{L}\p{M}]*(?: [\p{L}\p{M}]+)?)(?=[.,;]|$)/gu,(m,t)=>"vốn tính "+t.toLowerCase());
+ s=s.replace(/\bcó nết (\p{Lu}[\p{L}\p{M}]*(?: [\p{L}\p{M}]+)?)(?=[.,;]|$)/gu,(m,t)=>"vốn tính "+t.toLowerCase());
  /* «a: b: c» chain → the first colon stays, later ones in the same sentence become commas */
  /* «X trở về: X nghe ngóng được …» — the part after the colon names the same subject again → that part alone */
- s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^[A-ZÀ-Ỹ]/.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
+ s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^\p{Lu}/u.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
  /* the same «title + name» printed again in one notice → the bare name after the first (title once; owner: «tên đầy đủ một lần») */
- {const seen=new Set();s=s.replace(/(?<![\p{L}\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:[A-ZÀ-Ỹ][\p{Ll}\p{M}]+ )?(?:phi|tần)|Phi|Tần) )([A-ZÀ-Ỹ][\p{Ll}\p{M}]+(?: [A-ZÀ-Ỹ][\p{Ll}\p{M}]+){1,2})(?![\p{L}\p{M}])/gu,(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
+ {const seen=new Set();s=s.replace(/(?<![\p{L}\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:\p{Lu}[\p{Ll}\p{M}]+ )?(?:phi|tần)|Phi|Tần) )(\p{Lu}[\p{Ll}\p{M}]+(?: \p{Lu}[\p{Ll}\p{M}]+){1,2})(?![\p{L}\p{M}])/gu,(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
  s=s.split(/(?<=[.!?])\s+/).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w,i)=>{const pre=q.slice(0,i);if((pre.match(/\(/g)||[]).length>(pre.match(/\)/g)||[]).length)return m;/* a colon inside «(…)» is not part of the chain */return ++n===1?m:", "+(w?w.toLowerCase():"")})}).join(" ");
  return s}
 window.kitSay=kitSay;
 function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitSay(kitNoUnk(spec.line));if(spec.text)spec.text=kitSay(kitNoUnk(spec.text));if(Array.isArray(spec.items))spec.items=spec.items.map(x=>kitSay(kitNoUnk(x)));
  let line=plain(spec.line||spec.text||"");if(!line)return null;try{if(typeof kShort==="function")line=kShort(line)}catch(e){}
- const id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
+ let id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
+ /* tinbao-words (MAIN 149 look): the SAME news told twice (two ids, one text: «Ở Đức Thọ cung …» from two tellers) is ONE row */
+ {const d=NT.list.find(x=>x.id!==id&&!x.sticky&&x.text===text);if(d&&!NT.list.some(x=>x.id===id))id=d.id}
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
  Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});

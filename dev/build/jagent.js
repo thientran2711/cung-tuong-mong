@@ -215,7 +215,7 @@ window.agPerf=agPerf;
    «vì lo việc của mình»), the origin as its own clause «; vốn xuất thân <gia thế>» (never glued with « · » or «, vốn là»). p.why = agWhy() text. */
 const AGWHY_FILL=/^(tiện tay|lo việc của mình)$/;
 function agWhySay(why){const t=String(why||"").trim();if(!t)return"";const i=t.indexOf(", vốn là ");const w=(i>=0?t.slice(0,i):t).trim(),o=i>=0?t.slice(i+9).trim():"";
- return `${w&&!AGWHY_FILL.test(w)?`, vì ${w}`:""}${o?`; vốn xuất thân ${o}`:""}`}
+ return `${w&&!AGWHY_FILL.test(w)?`, vì ${w}`:""}${o?`; nàng vốn xuất thân ${o}`:""}`}
 function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?/* the deck act's own gain (BAL.deck via j75), ONE CORE */((window.npcEffortKind&&window.npcEffortKind(v))||{}).w||{}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
  for(const n in W){const x=(N[n]||0)*W[n];if(x>bv){bv=x;best=n}}let w=best?AGWHY[best]:"tiện tay";if(best==="spite"&&c.t)w+=` ${c.t===S?"ngươi":c.t.name}`;
  if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w}, vốn là ${o.replace(/ · /g," ")}`/* tinbao-words: a clause, never the « · » glue inside a sentence */:w}

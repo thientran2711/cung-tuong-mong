@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c2faf1b8+","t":"2026-11-25T23:40Z","c":"tinbao-words r3 (on top of E90 2608109d): one clear sentence per news line; speaker-voice reports (ptVoice over PTIME.repFacts); kitSay net…","b":"a3958e8719e4","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"6c348e90+","t":"2026-11-26T00:07Z","c":"E90r r1: invite runner no doubled answer line; result as kit status chip on the sentence row (PTIME.repRows) in ptPanel + errPanel; rebuilt","b":"8678facecc35","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5191,7 +5191,20 @@ function monthPay(){let ev="";payCuts();const l=stipend(S);if(l)log(l);for(const
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.emp&&S.emp.ill&&!S.out&&!S.confined)deck.unshift({n:"Hầu thuốc Hoàng thượng",t:"Long thể bất an. Ngươi sang Dưỡng Hòa điện sắc thuốc, hầu bên giường.",c:{...BAL.ag.cx2.nurse.c},o:od(cx2O(S,"nurse")),w:{...BAL.ag.cx2.nurse.w},l:{...BAL.ag.cx2.nurse.l},x:`được ban thưởng: ${chanceW(BAL.ag.cx2.nurse.best)}`,dom:"Sủng",go:()=>{if(empGive(S,BAL.ag.cx2.nurse.best,"nurse"))bestow(S,"nurse")}})}})();
 /* ================= WHAT SHE KNOWS: info acts show the facts, keep them, relation view in words ================= */
 function kn(){S.kf=S.kf||{};S.notes=S.notes||{};S.met=S.met||{};return S}
-function noteAdd(id,t,shown){kn();const L=S.notes[id]=S.notes[id]||[];L.unshift(`T${S.month}/${S.year} ${TUAN[S.tuan]}: ${t}`);if(L.length>6)L.length=6;try{/* KNOW-NOTICE (3rd arg `shown` = the act's own card/dialog/log already tells this fact → no second notice): every line written in her Sổ is something she learned: one notice at that moment (a trait / liking line sharing the key gives the richer text) */if(!shown&&typeof kitKnow==="function"&&id!=null){const v=typeof RV==="function"?RV(+id):null;kitKnow({key:"n:"+id,pri:0,text:`Sổ ghi thêm${v?" về "+knowWho(v):""}: ${String(t).replace(/<[^>]+>/g,"").replace(/[\s.]*$/,"")}.`/* tinbao-words: one sentence, closed by its period */})}}catch(e){}}
+/* tinbao-words (MAIN 149 look, owner k16): the notice of a new Sổ line is ONE plain sentence about the person — never «Sổ ghi thêm về X: <nhãn>: …».
+   The stored Sổ line (under her card) stays the short fragment; here: «nghe nói nàng ta hay …» → «Nghe nói <X> hay …»; «<nguồn> báo/kể: …» → «<Nguồn> báo <X> …»;
+   «<nhãn>: …» → «<Nhãn>: <X> …»; a fragment with no subject («để ý chỗ ngươi hay lui tới») → «<X> để ý …»; a whole sentence stays as it is. */
+function noteSay(v,t){let s=String(t==null?"":t).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim().replace(/[\s.]*$/,"");if(!s)return"";
+ const W=v?(typeof knowWho==="function"?knowWho(v):v.name):"";const cap=x=>x?x[0].toUpperCase()+x.slice(1):x;const nang=/^nàng(?: ta)?\s+/;
+ if(!W)return cap(s)+".";
+ let m=/^(nghe nói|nghe lén được|nghe được|biết|chính ngươi bắt gặp|ngươi thấy)\s+nàng(?: ta)?\s+(.+)$/i.exec(s);if(m)return `${cap(m[1])} ${W} ${m[2]}.`;
+ m=/^([^:]{2,40}?):\s+(.+)$/.exec(s);if(m){let lab=m[1].trim(),rest=m[2].trim();rest=nang.test(rest)?W+" "+rest.replace(nang,""):rest;
+  if(/\s\p{Lu}/u.test(lab)&&!/(báo|kể)$/i.test(lab))return `${cap(lab)} ${rest}.`;/* «Phòng của Trình Tử Đàn: bày 1 món» → «Phòng của Trình Tử Đàn bày 1 món» */
+  if(/(báo|kể)$/i.test(lab))return `${cap(lab)} ${rest.indexOf(W)<0&&!/^\p{Lu}/u.test(rest)?W+" ":""}${rest}.`;return `${cap(lab)}: ${rest.indexOf(W)<0&&!/^\p{Lu}/u.test(rest)?W+" ":""}${rest}.`}
+ if(nang.test(s))return `${W} ${s.replace(nang,"")}.`;
+ if(/^\p{Ll}/u.test(s)&&s.indexOf(W)<0)return `${cap(W)} ${s}.`;
+ return cap(s)+"."}
+function noteAdd(id,t,shown){kn();const L=S.notes[id]=S.notes[id]||[];L.unshift(`T${S.month}/${S.year} ${TUAN[S.tuan]}: ${t}`);if(L.length>6)L.length=6;try{/* KNOW-NOTICE (3rd arg `shown` = the act's own card/dialog/log already tells this fact → no second notice): every line written in her Sổ is something she learned: one notice at that moment (a trait / liking line sharing the key gives the richer text) */if(!shown&&typeof kitKnow==="function"&&id!=null){const v=typeof RV==="function"?RV(+id):null;kitKnow({key:"n:"+id,pri:0,text:noteSay(v,t)})}}catch(e){}}
 function agoW(w){const d=wk()-w;return d<=0?"tuần này":d===1?"tuần trước":`${d} tuần trước`}
 /* the favour book: true values; a weak look shows only the top 3 */
 function favorBook(full){kn();const P=consorts().filter(p=>!p.out).sort((a,b)=>b.sung-a.sung);const L=full?P:P.slice(0,3);const m0=S.turn*3;
@@ -79285,7 +79298,7 @@ window.agPerf=agPerf;
    «vì lo việc của mình»), the origin as its own clause «; vốn xuất thân <gia thế>» (never glued with « · » or «, vốn là»). p.why = agWhy() text. */
 const AGWHY_FILL=/^(tiện tay|lo việc của mình)$/;
 function agWhySay(why){const t=String(why||"").trim();if(!t)return"";const i=t.indexOf(", vốn là ");const w=(i>=0?t.slice(0,i):t).trim(),o=i>=0?t.slice(i+9).trim():"";
- return `${w&&!AGWHY_FILL.test(w)?`, vì ${w}`:""}${o?`; vốn xuất thân ${o}`:""}`}
+ return `${w&&!AGWHY_FILL.test(w)?`, vì ${w}`:""}${o?`; nàng vốn xuất thân ${o}`:""}`}
 function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?/* the deck act's own gain (BAL.deck via j75), ONE CORE */((window.npcEffortKind&&window.npcEffortKind(v))||{}).w||{}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
  for(const n in W){const x=(N[n]||0)*W[n];if(x>bv){bv=x;best=n}}let w=best?AGWHY[best]:"tiện tay";if(best==="spite"&&c.t)w+=` ${c.t===S?"ngươi":c.t.name}`;
  if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w}, vốn là ${o.replace(/ · /g," ")}`/* tinbao-words: a clause, never the « · » glue inside a sentence */:w}
@@ -85585,7 +85598,9 @@ const KN_POOL={
 function knMood(n){const V=knB().voice;return n>=V.warm?"warm":n>=V.cool?"cool":"cold"}
 function knSpk(s){return {srv:s.role==="eunuch"?"m":"f",name:s.name}}
 function knWhat(h){const p=knPend(h);try{if(p){const v=agDoer?agDoer(p):RV(p.vid);const t=agPerson(p.t);const nm=v&&v.name?v.name:"có người";return `${nm} đang ${p.act}${t?" "+(t===S?"ngươi":t.name||""):""}`.replace(/\s+$/,"")}}catch(e){}
- return String((AD_HAP_T[h.id]||"có chuyện")).toLowerCase()}
+ /* tinbao-words (MAIN 149 look, owner k16 «Ở Đức Thọ cung ngày hội.»): the happening as a CLAUSE with its verb, never the bare title noun */
+ return KN_WHAT[h.id]||(AD_HAP_T[h.id]?"đang có chuyện "+String(AD_HAP_T[h.id]).toLowerCase():"đang có chuyện")}
+const KN_WHAT={emp:"có Hoàng thượng đang dạo vườn",quarrel:"có hai phi tần đang cãi nhau",gossip:"có người đang to nhỏ chuyện riêng",favour:"có người đang tìm người nhờ việc",fest:"đang có hội lớn",cold:"có tiếng khóc vọng ra",deed:"đang có chuyện"};
 function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String(t||"").replace(/\{W\}/g,W).replace(/\{what\}/g,what);
  try{if(r.s){const s=r.s;const sp=knSpk(s);const m=knMood(s.loyal||0);return kSay(sp,S,fill(kLine("tinbao:srv",KN_POOL.srv,{m})),{own:true,close:m==="warm",m})}
   if(r.v){const m=knMood(aff(r.v,S));return kSay(r.v,S,fill(kLine("tinbao:friend",KN_POOL.friend,{m})),{m})}
@@ -93737,22 +93752,26 @@ try{const r0=render;render=window.render=function(){const r=r0.apply(this,argume
 function kitSay(x){if(typeof x!=="string"||!x)return x;let s=x.replace(/\s+/g," ").trim();
  /* a sentence that is only the head of the next one is said once («X nghe ngóng trở về · thành. X nghe ngóng trở về: …») */
  {const Q=s.split(/(?<=[.!?])\s+/);for(let i=Q.length-2;i>=0;i--){const h=Q[i].replace(/ · (?:thành|hỏng)\b/,"").replace(/[.!?:,\s]+$/,"");if(h.length>6&&Q[i+1].indexOf(h)===0)Q.splice(i,1)}s=Q.join(" ")}
+ /* an old «Sổ ghi thêm về X: …» head (stored notices, other builders) → one sentence about X (j21 noteSay) */
+ s=s.replace(/^Sổ ghi thêm về ([^:]{2,60}): (.+)$/u,(m,w,r)=>{try{if(typeof noteSay==="function")return noteSay({name:w},r)}catch(e){}return `Về ${w}, ${r}`});
  s=s.replace(/ · thành\b(\.?)/g,", việc đã thành$1").replace(/ · hỏng\b(\.?)/g,", việc không thành$1");
  s=s.replace(/ = (?:như )?/g,", coi như ").replace(/\)\s*\(/g,", ");
  /* « · » between two words of one sentence → «, » (a date «Tháng ba · thượng tuần» keeps its dot) */
  s=s.replace(/([\p{L}\p{M}\d)%»”"]) · (?!(?:thượng|trung|hạ) tuần|năm thứ)([\p{L}\p{M}\d(«“"])/gu,"$1, $2");
- s=s.replace(/\bcó nết ([A-ZÀ-Ỹ][\p{L}\p{M}]*(?: [\p{L}\p{M}]+)?)(?=[.,;]|$)/gu,(m,t)=>"vốn tính "+t.toLowerCase());
+ s=s.replace(/\bcó nết (\p{Lu}[\p{L}\p{M}]*(?: [\p{L}\p{M}]+)?)(?=[.,;]|$)/gu,(m,t)=>"vốn tính "+t.toLowerCase());
  /* «a: b: c» chain → the first colon stays, later ones in the same sentence become commas */
  /* «X trở về: X nghe ngóng được …» — the part after the colon names the same subject again → that part alone */
- s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^[A-ZÀ-Ỹ]/.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
+ s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^\p{Lu}/u.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
  /* the same «title + name» printed again in one notice → the bare name after the first (title once; owner: «tên đầy đủ một lần») */
- {const seen=new Set();s=s.replace(/(?<![\p{L}\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:[A-ZÀ-Ỹ][\p{Ll}\p{M}]+ )?(?:phi|tần)|Phi|Tần) )([A-ZÀ-Ỹ][\p{Ll}\p{M}]+(?: [A-ZÀ-Ỹ][\p{Ll}\p{M}]+){1,2})(?![\p{L}\p{M}])/gu,(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
+ {const seen=new Set();s=s.replace(/(?<![\p{L}\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:\p{Lu}[\p{Ll}\p{M}]+ )?(?:phi|tần)|Phi|Tần) )(\p{Lu}[\p{Ll}\p{M}]+(?: \p{Lu}[\p{Ll}\p{M}]+){1,2})(?![\p{L}\p{M}])/gu,(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
  s=s.split(/(?<=[.!?])\s+/).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w,i)=>{const pre=q.slice(0,i);if((pre.match(/\(/g)||[]).length>(pre.match(/\)/g)||[]).length)return m;/* a colon inside «(…)» is not part of the chain */return ++n===1?m:", "+(w?w.toLowerCase():"")})}).join(" ");
  return s}
 window.kitSay=kitSay;
 function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitSay(kitNoUnk(spec.line));if(spec.text)spec.text=kitSay(kitNoUnk(spec.text));if(Array.isArray(spec.items))spec.items=spec.items.map(x=>kitSay(kitNoUnk(x)));
  let line=plain(spec.line||spec.text||"");if(!line)return null;try{if(typeof kShort==="function")line=kShort(line)}catch(e){}
- const id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
+ let id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
+ /* tinbao-words (MAIN 149 look): the SAME news told twice (two ids, one text: «Ở Đức Thọ cung …» from two tellers) is ONE row */
+ {const d=NT.list.find(x=>x.id!==id&&!x.sticky&&x.text===text);if(d&&!NT.list.some(x=>x.id===id))id=d.id}
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
  Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
@@ -98992,7 +99011,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a3958e8719e4";window.CTM_BUILD=BUILD;
+const BUILD="8678facecc35";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
