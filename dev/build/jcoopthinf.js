@@ -293,6 +293,10 @@ reg8("kitShopBuy",["v","v","v","v"],{mine:A=>!!KSH[A[0]]&&(A[0]!=="pet"||on(9))/
 reg8("vlBuyNvp",["me","v"],{log:true});
 reg8("vlBuyOut",["me","v"],{log:true});
 reg8("vlAsk",["me","v"],{log:true});
+/* d-followups-1 (law 1): «Hoàng hậu đề cử» by a GUEST who is the Hoàng hậu (jpromob pbHhMeDo): the NPC state is the host's, so her pick is an
+   intent; the host runs pbHhMeDo in her context = the same pbHhMeList rules (cut, maxTo, rows, once per life per queen key hh:<her key>), the
+   same gains / losses (nợ ân, thiện cảm, the passed-over oán); her phone shows the same kit sheet (pbHhMeOpen) and gets her log line back */
+reg8("pbHhMeDo",["who","wl"],{log:true,mine:A=>live()&&!!A[0]&&typeof A[0]==="object"&&!isMe(A[0])&&Array.isArray(A[1]),title:()=>"Hoàng hậu đề cử"});
 /* gifts */
 /* gifts BETWEEN the two players: ONE path, the ASK act "gift" (jcoopworld runAct: her invite card first, then the Quà tặng card; F1-tested).
    Every gift picker (item card Tặng, person card Tặng quà, Dâng / works) called giveTo straight onto the other player's entry: her gift

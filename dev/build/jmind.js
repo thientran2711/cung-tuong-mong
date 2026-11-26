@@ -125,19 +125,56 @@ function bump(who,n){if(who==="th")ap(S,{th:n});else if(loyW(who))who.loyal=Math
 function giftKeys(e){const K=[];if(!e)return K;if(e.wk){K.push("art:"+e.wk.a)}else if(IT[e.k]&&IT[e.k].kd)K.push("kd:"+IT[e.k].kd);return K}
 /* the word of the regard that moves (Thái hậu's is "Thái hậu", a servant's "Lòng", others "thiện cảm") */
 function regW(who){return who==="th"?"Thái hậu":loyW(who)?"Thiện cảm":"thiện cảm"}
-/* a liked gift: a little more regard (everyone but the Emperor, whose likes already work through j2/j83) */
-(function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];let lk=false,dk=null,G0=[];const who=r==="th"?"th":r==="maid"?S.maid:r;
- try{if(e&&!e.h&&who&&who!=="emp"&&r!==S&&a===S){const G=G0=giftKeys(e);lk=G.some(k=>mindLike(who).includes(k))&&!(jdisOwn(who)&&typeof disHit==="function"&&disHit(who,e));
-   if(!jdisOwn(who))dk=G.find(k=>mindDis(who).includes(k)&&!mindLike(who).includes(k))||null}}catch(x){}
- /* gifts TO HER from an NPC: her own likes / dislikes move her mood */
- let her=null;try{if(r===S&&e&&!e.h&&a!==S){const G=giftKeys(e);her=G.some(k=>mindLike(S).includes(k))?"vui":G.some(k=>mindDis(S).includes(k))?"buon":null}}catch(x){}
- const out=g0.apply(this,arguments);if(!out)return out;let add="";
- try{const B=BAL.mind;if(lk){learnLike(who,"Tặng đúng ý");bump(who,B.like);
-   add+=`<span class="g">${pName(who)} vốn thích ${keyName(G0.find(k=>mindLike(who).includes(k))||mindLikeRaw(who))}: ${regW(who)} +${B.like}.</span> `}
-  if(dk){const n=BAL.dis.aff;learnDis(who,dk,"Dâng quà sai ý");bump(who,-n);/* the same penalty number as jdis (BAL.dis.aff), one per effect */
-   add+=`<span class="r">Nhưng ${pName(who)} không ưa ${keyName(dk)}: ${regW(who)} -${n}.</span> `}
-  if(her&&typeof emoSet==="function")emoSet(S,her,B.herMood,her==="vui"?`Được tặng đúng món mình thích`:`Được tặng món mình không ưa`)}catch(x){}
- return out+add}})();
+/* ---------- LAW 1 (two-way) for likes / dislikes / gifts (review/law1-gifts, owner OD 24/11 ~07:55Z (e); scan dev/tools/law1-gift-scan.js) ----------
+   WHAT A GIVER KNOWS of a receiver's tastes. Her: the stores above (S.likK / S.disK via jdis, S.mindK here). Every NPC: ONE store on the person,
+   a.gk[mKey(receiver)] = {l:[like keys], d:[dislike keys]} (saved with the person; old saves start empty). It is filled by the SAME events that teach
+   her: a gift's result (right or wrong, refused), talk (chatMark, BAL.dis.talk) and spying (cx2:maidSpy success) — and it steers the NPC's choice of
+   gift (giftPickIx) the way her gift dialog shows her what she knows (jdis giftEval hook). */
+function gkS(a,p){if(!a||typeof a!=="object")return null;a.gk=a.gk&&typeof a.gk==="object"?a.gk:{};const k=mKey(p);if(!k)return null;return a.gk[k]||(a.gk[k]={l:[],d:[]})}
+function giftKnLikes(a,p){if(a===S){if(!likeKnown(p))return[];if(jdisLikes(p)&&disLikeKeys(p).length)return disLikeKnown(p).slice();return mindLike(p)}const K=gkS(a,p);return K?K.l.filter(k=>mindLike(p).includes(k)):[]}
+function giftKnDis(a,p){if(a===S)return disKnownL(p).slice();const K=gkS(a,p);return K?K.d.filter(k=>mindDis(p).includes(k)):[]}
+/* a giver learns ONE real taste of p (kind "l" like / "d" dislike; k = that key, or null = the first one still unknown). Her: the existing learn functions. */
+function giftLearn(a,p,kind,k,why){if(!a||!p||a===p)return null;
+ if(a===S)return kind==="l"?(learnLike(p,why)?k||mindLikeRaw(p):null):learnDis(p,k,why);
+ const K=gkS(a,p);if(!K)return null;const L=kind==="l"?mindLike(p):mindDis(p),have=K[kind];k=k||L.find(x=>!have.includes(x));if(!k||have.includes(k)||!L.includes(k))return null;have.push(k);return k}
+/* the NPC picks WHICH piece to give t: never one she knows t dislikes, a known like first; else the first giftable (as before). -1 = none fit. */
+function giftPickIx(a,t,ok){const inv=(a&&a.inv)||[];const who=t==="emp"?S.emp:t;let best=-1,bs=-1;const KL=giftKnLikes(a,who),KD=giftKnDis(a,who);
+ inv.forEach((e,i)=>{if(!e||e.h||!(ok?ok(e):(IT[e.k]&&itm(e.k).gv&&!e.t)))return;const G=giftKeys(e);if(G.some(k=>KD.includes(k)))return;const s=G.some(k=>KL.includes(k))?1:0;if(s>bs){bs=s;best=i}});return best}
+/* regard of the receiver toward the GIVER (her: bump above; an NPC giver: the receiver's own line toward that giver) */
+function bumpTo(who,a,n){if(a===S)return bump(who,n);if(!a||typeof a!=="object")return;if(who==="th"){ap(a,{th:n});return}
+ if(who===S){affAdd(S,a,n);return}if(typeof who==="object"&&(who.rl||isRiv(who)))affAdd(who,a,n)}
+function regWTo(who,a){return a===S?regW(who):who==="th"?"Thái hậu":"thiện cảm"}
+/* a liked / disliked gift — ONE rule for every giver a and every receiver r (her included, both sides): regard toward the giver ±, the receiver's
+   mood (vui / buồn, BAL.mind.herMood), the giver learns that taste. Numbers: BAL.mind.like, BAL.dis.aff (the jdis penalty number), BAL.mind.herMood. */
+/* giftTaste(a, r, e[, pre]) — the taste half of ANY gift: giver a (her, an NPC, "emp" / "th" for a bestowal), receiver r, the piece e.
+   pre = the keys read BEFORE the piece moved (giveTo reads them first: a refused / returned piece still counts as sent, like the base relAdd). */
+function giftTastePre(a,r,e){const who=r==="th"?"th":r==="maid"?S.maid:r==="emp"?"emp":r;let lk=null,dk=null,dm=null;
+ try{if(e&&!e.h&&who&&who!=="emp"&&a&&who!==a){const G=giftKeys(e);if(!(jdisOwn(who)&&typeof disHit==="function"&&disHit(who,e)))lk=G.find(k=>mindLike(who).includes(k))||null;
+   if(!jdisOwn(who))dk=G.find(k=>mindDis(who).includes(k)&&!mindLike(who).includes(k))||null;
+   /* a consort / Thái hậu: jdis owns the dislike (penalty, refusal); the MOOD is this rule's, the same as hers */else if(typeof disHit==="function")dm=disHit(who,e)||null}}catch(x){}return{who,lk,dk,dm}}
+function giftTaste(a,r,e,pre){const P=pre||giftTastePre(a,r,e),who=P.who;let add="";
+ try{const B=BAL.mind;const nm=who===S?"ngươi":pName(who);const gv=a==="emp"?S.emp:a==="th"?null:a;/* the giver's own record (Thái hậu: S.thO) */const ga=a==="th"?S.thO:gv;
+  if(P.lk){giftLearnBy(ga,who,"l",P.lk,"Tặng đúng ý");if(typeof ga==="object"&&ga!==S.emp&&ga!==S.thO)bumpTo(who,a,B.like);
+   if(typeof ga==="object"&&ga!==S.emp&&ga!==S.thO)add+=`<span class="g">${nm} vốn thích ${keyName(P.lk)}: ${regWTo(who,a)} +${B.like}.</span> `;
+   if(typeof emoSet==="function"&&who!=="th")emoSet(who,"vui",B.herMood,`Được tặng đúng món mình thích`)}
+  if(P.dk){const n=BAL.dis.aff;giftLearnBy(ga,who,"d",P.dk,"Dâng quà sai ý");if(typeof ga==="object"&&ga!==S.emp&&ga!==S.thO){bumpTo(who,a,-n);/* the same penalty number as jdis (BAL.dis.aff), one per effect */
+    add+=`<span class="r">Nhưng ${nm} không ưa ${keyName(P.dk)}: ${regWTo(who,a)} -${n}.</span> `}
+   if(typeof emoSet==="function"&&who!=="th")emoSet(who,"buon",B.herMood,`Được tặng món mình không ưa`)}
+  else if(P.dm&&typeof emoSet==="function"&&who!=="th"&&typeof who==="object")emoSet(who,"buon",B.herMood,`Được tặng món mình không ưa`)}catch(x){}return add}
+/* the Emperor / Thái hậu learn into their own record too (S.emp.gk / S.thO.gk) */
+function giftLearnBy(ga,p,kind,k,why){if(!ga)return null;return giftLearn(ga,p,kind,k,why)}
+(function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];const P=giftTastePre(a,r,e);
+ const out=g0.apply(this,arguments);if(!out)return out;return out+giftTaste(a,r,e,P)}})();
+/* talk teaches BOTH sides: she learns the consort's tastes (jdis / above); the consort learns hers by the same roll (BAL.dis.talk) */
+(function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&v!==S&&isRiv(v)&&S.chat&&S.chat[v.id]>=1&&roll(BAL.dis.talk)){if(!giftLearn(v,S,"l"))giftLearn(v,S,"d")}}catch(e){}return r}})();
+/* spying: an NPC's successful spy (cx2:maidSpy) brings her one taste of the target, like the "lk" / "dis" facts her own spying brings (jdis j78facts) */
+function giftSpyLearn(a,t){if(!a||!t||a===t)return null;return giftLearn(a,t,"l")||giftLearn(a,t,"d")}
+/* a gift HANDED over in a visit (no carrier card: the event card is the hand-over): a REAL piece from the giver's chest — the one giftPickIx picks — or,
+   with none, one she buys at Nội vụ phủ from the given list with her own bạc (law 6c: never a piece made from nothing). Taste rule: giftTaste. null = none. */
+function giftHand(a,r,buy){if(!a||!r)return null;a.inv=a.inv||[];let i=giftPickIx(a,r,e=>!!IT[e.k]&&!e.t&&!itm(e.k).il);
+ if(i<0&&Array.isArray(buy)){const L=buy.filter(k=>IT[k]&&(a.bac||0)>=itm(k).pr);if(L.length){const k=L[0];ap(a,{bac:-itm(k).pr});a.inv.push({k,from:"nvp"});i=a.inv.length-1}}
+ if(i<0)return null;const P=giftTastePre(a,r,a.inv[i]);const e=a.inv.splice(i,1)[0];const ent=Object.assign({},e,{from:key(a)});(r.inv=r.inv||[]).push(ent);ent.tx=giftTaste(a,r,ent,P);return ent}
+Object.assign(window,{giftKnLikes,giftKnDis,giftLearn,giftPickIx,giftSpyLearn,giftTaste,giftHand});
 /* talking: a chance to learn a like (consorts; jdis already learns dislikes the same way) */
 (function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&!(jdisLikes(v)&&disLikeKeys(v).length)&&!likeKnown(v)&&roll(BAL.mind.learnTalk))learnLike(v,"Chuyện trò")}catch(e){}return r}})();
 /* spying: a "like" fact joins the intel pool */
