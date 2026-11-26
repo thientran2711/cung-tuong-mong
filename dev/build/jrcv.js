@@ -63,7 +63,7 @@ PEND.rcvHelp=pp=>{const p=RV(pp.a);if(!p||!p.alive||p.out)return null;
 /* ---- a gift to an NPC (j8 giveTo): «take» / «check» (nothing found) keep it — giveTo stores it; «back» / «found» are done here. She answers with HER giftin answers (Nhận / Trả lại quà / Đem đến Thái y viện xét nghiệm), the same numbers ---- */
 function rcvGiftIn(f,t,e){if(!t||t===S||t.coop||!e)return null;const it=itm(e.k),hi=rkOf(f)>rkOf(t);const tg=!!e.t;
  const O=[{i:[0,1],id:"take",go:()=>"take"},
-  {i:2,id:"back",go:()=>{if(f===S)S.inv.push(Object.assign({},e));else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(t,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);return"back"}},
+  {i:2,id:"back",go:()=>{if(f===S)invAdd(S,Object.assign({},e));else{f.inv=f.inv||[];invAdd(f,Object.assign({},e))}relAdd(t,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);return"back"}},
   {i:3,id:"check",lk:()=>(t.bac||0)<BAL.rcv.chk,go:()=>{ap(t,{bac:-BAL.rcv.chk});if(tg&&roll(oddsCl(oSee(t,true)+BAL.rcv.chkSee))){evA(t,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(t,Object.assign({},e),"evid",{own:key(f)});return `${t.name} đem ${it.n} của ${NM(f)} đến Thái y viện xét: đồ có vấn đề, nàng nắm ${balAb(BAL.eff.j8.evGo)} chứng cứ. `}
    relAdd(t,f,BAL.eff.j8.go_3);return"check"}}];
  const c=rcvPick(t,f,O,"gift");return c?c.go():null}
@@ -170,7 +170,7 @@ RCVK.blockf={t:"Lời nhờ trả ơn",act:"nhờ trả ơn",kind:"help",ok:(p,v
    yes = she hands it over and holds BAL.eff.j83.evIllBuy chứng cứ of the asker (as before) · qua loa = she lets it go for bạc (the item's price × help.half)
    · no = keeps it, out of đồ cấm · mách = keeps it, the Hoàng hậu holds BAL.ag.ev.one chứng cứ of the asker. She as the holder gets the card (PEND.rcvAsk). */
 const rcvIllE=(t,k)=>(t&&t.inv||[]).find(e=>e.k===k&&!e.h&&!e.t);
-function rcvIllGive(p,t,k){const e=rcvIllE(t,k);if(!e)return false;t.inv.splice(t.inv.indexOf(e),1);(p.inv=p.inv||[]).push({k,from:key(t)});/*evok: the asker has just asked for a forbidden item (illBuy deed)*/evA(t,p,BAL.eff.j83.evIllBuy);return true}
+function rcvIllGive(p,t,k){const e=rcvIllE(t,k);if(!e)return false;t.inv.splice(t.inv.indexOf(e),1);invAdd(p,{k,from:key(t)});/*evok: the asker has just asked for a forbidden item (illBuy deed)*/evA(t,p,BAL.eff.j83.evIllBuy);return true}
 RCVK.illAlly={t:"Xin đồ cấm",act:"xin một món đồ cấm của",kind:"help",ok:(p,t,k)=>!!rcvIllE(t,k),
  line:(p,k)=>`<p>${p.name} sai người lén sang: “Nương nương nhà ta cần ${itm(k).n}, xin người nhường lại.”</p><p class="past">${itm(k).n}: ${(WILL[k]||{}).eff||"đồ cấm"}. Ai đưa đồ cấm cũng nắm chứng cứ của người xin.</p>`,
  opts:(p,t,k)=>{const me=t===S,pn=p===S?"ngươi":p.name,nm=itm(k).n,ev=BAL.eff.j83.evIllBuy,pr=Math.max(0,Math.min(Math.round((itm(k).pr||0)*BAL.rcv.help.half),(p===S?S.bac:p.bac)||0)),one=BAL.ag.ev.one;/* the bạc the asker can really pay (her card dropped the NPC lock: it promised bạc the asker did not have; reviewer #3) */
@@ -231,7 +231,7 @@ RCVJ.rougeBeg={t:"Xin son phấn",ok:a=>lxMiss(a).length>0,say:a=>`${NMc(a)} sai
  line:a=>{const M=lxMiss(a);return `<p>Cung nữ của ${a.name} sang thưa: chủ tử nhà nàng hết ${M[0]?TOIL_COL[M[0]].label.toLowerCase():"son phấn"}, xin nương nương ban cho.</p>`},
  opts:(a,t,q)=>{const me=q===S,B=BAL.ration.beg,P=BAL.rcv.prop,af=BAL.rcv.help.af[0],M=lxMiss(a),part=M[0],tr=BAL.ration.tier[Math.min(7,a.rank||0)],lbl=part?TOIL_COL[part].label.toLowerCase():"son phấn";return[
   {id:"yes",n:"Ban một hộp",fx:{},x:`được: ${a.name} quý ${me?"ngươi":"Hoàng hậu"} ${balSg(af)} · mất: một hộp ${lbl} trong kho cung`,
-   go:()=>{if(!part)return"";affAdd(a,q,af);let n;if(a===S)n=goodsGive(S,lxKey(part,tr),{from:"hh"});else{const e={k:lxKey(part,tr),from:"hh",d:S.turn};(a.inv=a.inv||[]).push(e);n=lxName(e)}lxFix(a);return `${me?"Ngươi":"Hoàng hậu"} ban cho ${lxNm(a)} ${n}.`}},
+   go:()=>{if(!part)return"";affAdd(a,q,af);let n;if(a===S)n=goodsGive(S,lxKey(part,tr),{from:"hh"});else{const e={k:lxKey(part,tr),from:"hh",d:S.turn};invAdd(a,e);n=lxName(e)}lxFix(a);return `${me?"Ngươi":"Hoàng hậu"} ban cho ${lxNm(a)} ${n}.`}},
   {id:"no",n:"Không ban",fx:{danh:P.danh},x:`được: giữ phép, Danh ${balSg(P.danh)} · mất: ${a.name} được lòng ${me?"ngươi":"Hoàng hậu"} ${balSg(B.fail)}`,
    go:()=>{if(!me)ap(q,{danh:P.danh});if(a===S)apply({hh:B.fail});else ap(a,{hh:B.fail});return `${me?"Ngươi":"Hoàng hậu"} cho là ${lxNm(a)} không biết giữ phận.`}}]}};
 function rcvXinPr(a,t){return (typeof econSchemePrice==="function"?econSchemePrice("xinhh",a,t):0)||BAL.actBac.xinhh}

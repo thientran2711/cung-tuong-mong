@@ -101,8 +101,8 @@ function kinvCat(kd){const c=KINV_CATS.find(c=>c[2].includes(kd));return c?c[0]:
 function kinvPlain(o){const N=typeof NAMES==="object"?NAMES:{};return Object.entries(o||{}).filter(([k,v])=>N[k]&&v).map(([k,v])=>statTxt(k,v,N[k])).join(", ")}
 function kinvFrom(f){if(!f||f==="me")return"";if(f==="th")return"Thái hậu ban";if(f==="hh")return"Hoàng hậu ban";if(f==="emp")return"Hoàng thượng ban";
  try{const v=typeof RV==="function"?RV(f):null;if(v&&v.name)return v.name+" tặng"}catch(e){}return""}
-function kinvGroups(){const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]);const G=[];
- for(const [e,i] of vis){/* handmade works (j83 IT.tp, e.wk) are each their own piece: own name, tier, painting */const g=e.wk?null:G.find(x=>x.k===e.k&&!x.wk&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);if(g)g.n++;else G.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,from:e.from,wk:e.wk||null,e})}return G}
+function kinvGroups(){try{if(typeof invTop==="function")invTop(S)}catch(x){}/* inv-stack: real pieces out of the stack first */const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]);const G=[],SEEN=new Set();
+ for(const [e,i] of vis){/* handmade works (j83 IT.tp, e.wk) are each their own piece: own name, tier, painting */const g=e.wk?null:G.find(x=>x.k===e.k&&!x.wk&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);const m=typeof invMoreOnce==="function"?invMoreOnce(S,e,SEEN):0;/* + the stacked ones (jstack) */if(g)g.n+=1+m;else G.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1+m,from:e.from,wk:e.wk||null,e})}return G}
 /* a work: picture of its kind + tier (j98 itemArt(entry)), its own name ("Bát chè hạt sen", "Khăn thêu uyên ương"), grade = its tier (Thường · Khá · Tinh xảo · Tuyệt phẩm) */
 function kinvWork(g){const w=g.wk,a=typeof itemArt==="function"?itemArt(g.e):null,ti=Math.max(0,Math.min(3,w.ti|0)),tn=typeof WTIER!=="undefined"?WTIER[ti]:"";
  return{id:g.i,g,cat:"tap",src:a?a.src:"",src512:a?a.src512:"",name:w.n,grade:ti,gname:tn,qty:1,on:false,onText:"",mark:null,lux:0,tip:`${w.n} · ${tn}`}}
@@ -558,16 +558,16 @@ function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `Sắc +${
    wk:{n,kind,ti…}}, wkName, wkSellVal, wkSell) on review/balance-unified. The shop calls THEM when they exist; until they land, kitShopSellable /
    kitShopPrice below do the same from the inventory: each handmade work is its own tile (wk.n, wkSellVal, sold by wkSell = j83's odds), plus
    ordinary items with a price (half price, j8 sellItem). Group shape: {k, key, name, ix:[inventory indexes], n, crafted, src?, sell?:fn}. */
-function kitShopSellable(p){const g={};(p.inv||[]).forEach((e,i)=>{if(!e||e.h||e.w)return;
+function kitShopSellable(p){try{if(typeof invTop==="function")invTop(p)}catch(x){}const g={},SEEN=new Set();(p.inv||[]).forEach((e,i)=>{if(!e||e.h||e.w)return;
  if(e.wk){const key="wk:"+e.wk.n;(g[key]=g[key]||{k:e.k,key,name:e.wk.n,wk:e.wk,crafted:true,ix:[],n:0}).ix.push(i);g[key].n++;return}
- const it=IT[e.k];if(!it||it.keep||!(it.pr>0))return;const key="it:"+e.k;(g[key]=g[key]||{k:e.k,key,name:it.n,ix:[],n:0}).ix.push(i);g[key].n++});return Object.values(g)}
+ const it=IT[e.k];if(!it||it.keep||!(it.pr>0))return;const key="it:"+e.k;(g[key]=g[key]||{k:e.k,key,name:it.n,ix:[],n:0}).ix.push(i);g[key].n+=1+(typeof invMoreOnce==="function"?invMoreOnce(p,e,SEEN):0)/* + stacked (jstack) */});return Object.values(g)}
 function kitShopPrice(x){if(x&&x.wk&&typeof wkSellVal==="function")return wkSellVal(x.wk);const it=x&&IT[x.k];return it?Math.floor((it.pr||0)/2):0}
 /* review/econ (jecon.js): econSellable(p) → one entry per bag index {ix,k,name,grade,src,price,via:"noivu"|"agent",risk,no}; the Nội vụ phủ tab
    shows the legal ones (via "noivu", 70 % price, no risk) grouped by k+name so equal goods stack; selling one = econSellUI(ix) (her sale),
    else econSell(S,ix). "no" = why it can't be sold now (shown on the greyed button). */
-function kitShopSellList(){try{if(typeof econSellable==="function"){const g={};
+function kitShopSellList(){try{if(typeof econSellable==="function"){try{if(typeof invTop==="function")invTop(S)}catch(x){}/* inv-stack: selling ×N takes the next real piece out of the stack */const g={},SEEN=new Set();
   for(const x of (econSellable(S)||[])){if(!x||(x.via&&x.via!=="noivu"))continue;const key="e:"+x.k+"|"+(x.name||"");
-   const G=g[key]=g[key]||{k:x.k,key,name:x.name,grade:x.grade,src:x.src,price:x.price,no:x.no||"",crafted:x.k==="tp",ix:[],n:0};G.ix.push(x.ix);G.n++}
+   const G=g[key]=g[key]||{k:x.k,key,name:x.name,grade:x.grade,src:x.src,price:x.price,no:x.no||"",crafted:x.k==="tp",ix:[],n:0};G.ix.push(x.ix);G.n+=1+(typeof invMoreOnce==="function"?invMoreOnce(S,S.inv[x.ix],SEEN):0)}
   return Object.values(g).map(G=>Object.assign(G,{sell:()=>{const ix=G.ix[G.ix.length-1];if(typeof econSellUI==="function")return econSellUI(ix);if(typeof econSell==="function")return econSell(S,ix)}}))}}
  catch(e){console.error("econSellable",e)}return kitShopSellable(S)}
 function kitShopSellPrice(x){if(x&&x.price!=null)return x.price;try{if(typeof econPrice==="function"&&x&&x.ix&&x.ix.length){const v=econPrice(S,S.inv[x.ix[0]]);if(v!=null)return v}}catch(e){}return kitShopPrice(x)}
@@ -576,14 +576,14 @@ function kitShopSellItems(){return (kitShopSellList()||[]).map(g=>{const k=g.k,i
   eff:g.crafted?"tự tay làm":kitShopEff(k),rows:!g.crafted&&IT[k]?kitItemRows(k):"",have:()=>((kitShopSellList()||[]).find(y=>y.key===g.key)||{n:0}).n,
   onBuy:(x,q)=>{let got=0,n=0;for(let i=0;i<q;i++){const cur=(kitShopSellList()||[]).find(y=>y.key===g.key);if(!cur||!(cur.n>0))break;const b0=S.bac;
     if(typeof cur.sell==="function")cur.sell();else{const ix=cur.ix[cur.ix.length-1];if(cur.wk&&typeof wkSell==="function"){const r=wkSell(S,ix);if(r)log(r)}else sellItem(S,ix)}got+=S.bac-b0;n++}
-   if(!g.crafted)log(`Bán ${nm}${n>1?` ×${n}`:""}. Bạc +${got}`)}}})}
+   try{if(typeof invTop==="function")invTop(S)}catch(e){}if(!g.crafted)log(`Bán ${nm}${n>1?` ×${n}`:""}. Bạc +${got}`)}}})}
 function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
  /* j61 naming: a eunuch she has not learnt the name of shows "<role> ???" (not "Thái giám Nội vụ phủ / thái giám ???") */
  try{if(nm&&c&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}
  const items=(S.shop||[]).filter((k,i,a)=>IT[k]&&a.indexOf(k)===i).map(k=>{const it=itm(k);const a=typeof itemArt==="function"?itemArt(k):null;
   return{k,cat:kitShopCat(k),src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`${it.kd} · ${KIT_GRADE[a?a.grade|0:0].n}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
-   eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
-   onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
+   eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>invCount(S,e=>e.k===k&&!e.h),
+   onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)invAdd(S,{k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
   info:"",
   stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,

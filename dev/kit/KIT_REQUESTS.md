@@ -333,3 +333,11 @@ Owner OD 25/11 ~23:20Z: the mirror lost its preset sets (jration lxColRows dropp
   top-bar «Về phòng» (#k3room, kitBackBtnHtml kind "home" → `img/kit/ico-home.webp`, 30x30 like ico-room) so her own palace has ONE emblem on the top bar
   AND the Dư đồ. Until painted: the button keeps ico-room and writes her palace's name as its second line (homeWay().hn); Dư đồ keeps «Nhà ta». Painting: KK37 / art (no code art).
 - K-MAP-BANNER (PLACE-RULES, owner OD 25/11 ~23:40Z k17): ONE visible line on the Dư đồ itself for an all-locked state (cấm túc / lãnh cung / hết khắc …) — the leather Dư đồ (jbook) hides the top-row .past/.fest chips. Until the kit part exists, review/place-rules says it once through kitNotice (sticky, id "plban") and writes it into a .fest chip of .maptools (shown on non-leather views); the per-label «đang cấm túc (N tháng)» plates are removed (plMap, jplrule.js).
+
+## 26/11 K-LIST-PAGE — long option/tile lists render only what is on screen (FIXER inv-stack, Foreman B ROOT 2 child 2; MAIN 154 ORDER ~07:50Z part 3)
+After stacking (review/inv-stack) the s7 late save's gift pickers fell from ~37k to ~2.3k DOM nodes, but a picker can still hold ~80 distinct pieces
+(son phấn boxes by colour × uses left, gifts by giver): «Dâng quà» 2,319 nodes (78 tiles), «Biếu quà làm lành» 2,226 (target < 2,000 per list).
+Most of it is the hidden option cards behind the jgpick tile grid (`.opts.kiphas>.opt{display:none}`, ~26 nodes each; kipDetail clones the chosen one).
+Wanted (ONE kit part, every long list): the kip tile grid (and the bag grid kitInvGrid, any kitPanel list) renders only the rows in view (or a page
++ «Xem thêm»), and the hidden option card is built on demand when its tile is chosen (kipDetail) instead of up front. Until then review/inv-stack
+dedupes twin tiles (one tile ×N with the kitItem `qty` badge) and drops their hidden twin cards. Test: dev/test/inv-stack.js (DOM check).
