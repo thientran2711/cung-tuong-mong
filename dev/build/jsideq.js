@@ -46,9 +46,9 @@ function sqQuiet(x,X,line){const q=q72();const i=q.a.indexOf(x);if(i>=0)q.a.spli
  q.h.unshift({tid:x.tid,res:"gone",w:wk(),t:X?q72Title(X):"",n:X?X.A.n:"",pn:X?q72PgN(X.A):"",f:X?X.A.f:null,lg:x.log.slice(-4),end:line,tok:""});if(q.h.length>12)q.h.length=12;log(line)}
 const t0=q72Tick;q72Tick=function(){try{const q=q72();if(q&&q72On()){
  for(const x of q.a.slice()){if(wk()<=x.dl||x.st!==0||x.log.length)continue;const X=q72X(x);if(!X)continue;q72Rel(X.A,B().lateR);
-  sqQuiet(x,X,`${X.A.n} đợi mãi không thấy ngươi bắt tay vào việc (${q72Title(X)}), đã nhờ người khác lo. ${plain(q72Tok(X.A,B().lateR))}.`)}
+  sqQuiet(x,X,`${q72Short(X.A)} đợi mãi không thấy ngươi bắt tay vào việc (${q72Title(X)}), đã nhờ người khác lo.${q72Tok(X.A,B().lateR)?" "+plain(q72Tok(X.A,B().lateR))+".":""}`)}
  const bd=sqBand();if(q.bd!=null&&q.bd!==bd){
-  for(const x of q.a.slice()){const X=q72X(x);if(!X||q72Fit(X.A))continue;sqQuiet(x,X,`Ngươi nay ở ngôi khác, ${X.A.n} không tiện nhờ ngươi nữa: việc «${q72Title(X)}» người ấy tự lo liệu.`)}
+  for(const x of q.a.slice()){const X=q72X(x);if(!X||q72Fit(X.A))continue;sqQuiet(x,X,`Ngươi nay ở ngôi khác, ${q72Short(X.A)} không tiện nhờ ngươi nữa: việc «${q72Title(X)}» người ấy tự lo liệu.`)}
   q.ch=q.ch.filter(c=>{const A=q72A(c.rk,c.ri);return !A||q72Fit(A,T72I[c.tid])})}
  q.bd=bd}}catch(e){console.error(e)}return t0.apply(this,arguments)};
 /* the Việc nhờ gloss (kitInfo) states the rule with BAL numbers (one core): only acquaintances of a fitting rank, how many a month, how many at once */
