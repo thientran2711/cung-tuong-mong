@@ -183,6 +183,27 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover5-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover5-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-scholar3",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 939698734,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "08a4ff8b (resumed from d2e03d80/89f5b956)"
+   },
+   "ending": "Hồng nhan bạc mệnh — Lao phổi nguy kịch (thọ 21)",
+   "age": 21,
+   "buoi": 424,
+   "valid": true,
+   "mgQuit": "4+ (board left via Quay lại on older harness; life ended by illness, not on a quit board)",
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-scholar3-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-scholar3-moments.md"
   }
  ],
  "parked": [
