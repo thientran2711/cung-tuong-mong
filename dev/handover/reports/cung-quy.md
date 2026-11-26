@@ -3,7 +3,7 @@
 Worker session_01D3E3NZyGJdTgPiznVEBfbh (opus) · depth 3 · START_CTX ~5 % · for FOREMAN D (order «(26/11 ~07:10Z) ORDER FROM MAIN 154»; owner OD 26/11 ~06:50Z item (C)).
 PRIORITY #1 CHECK ('cung quy'): OD 2 | ledger 0 | claims 0 | main 15 (existing rank checks — reused: jface fxAuth/tat, jtwoway humil/follow, j8 takeaway/accOK, jgreet greetName, j82 seat game, jemoact Phạm thượng) | review/* 0 | archive 1.
 
-Branch **review/cung-quy** head **77d9a6e4** (FF from main 3af7896e; rv1 fixes below). Expert report (law 8, written first): dev/handover/reports/cung-quy-expert.md (§G = the adopted rule table).
+Branch **review/cung-quy** head **99876fde** (FF from main 3af7896e; rv1 + rv2 fixes below). Expert report (law 8, written first): dev/handover/reports/cung-quy-expert.md (§G = the adopted rule table).
 
 ## What was built
 - **ONE function** `cqRule(a,t,k)` / `cqOK` / `cqAuth` (dev/build/jcq.js), **ONE table** `BAL.cq` (jbal2.js, law 4). Classes up / down / downNB / high / auth / take / accuse / free (expert §G).
@@ -15,7 +15,7 @@ Branch **review/cung-quy** head **77d9a6e4** (FF from main 3af7896e; rv1 fixes b
 - Reused, not rebuilt: greeting order (jgreet greetName, lower names herself first), seating by rank (j82 «Kéo từng người vào ghế» game).
 - Kit: no new UI part (the notice is the standard Q card; warnings are text in existing option rows).
 
-## LAW 11 scan — dev/test/cung-quy-scan.js (PASS, head 77d9a6e4)
+## LAW 11 scan — dev/test/cung-quy-scan.js (PASS, head 99876fde)
 keys 280 · classes {"accuse":8,"auth":15,"down":6,"high":2,"up":8,"downNB":2,"take":1,"free":238} · rank-ruled 42: before checked 14 / unchecked 28 → after checked 42 / unchecked 0 · gift words ban cho / kính dâng / tặng · page errors 0
 
 | # | generator | file | gate after |
@@ -33,6 +33,8 @@ keys 280 · classes {"accuse":8,"auth":15,"down":6,"high":2,"up":8,"downNB":2,"t
 | 11 | her talk options (Khiêu khích / Trút giận) | j2.js | talkOpts ✓ |
 | 12 | her rv act buttons | j6.js | runAct + xw warning ✓ |
 | 13 | giveTo gift words | j8.js | cqGiftVerb ✓ |
+| 14 | shelfNpcAccuse (monthly NPC charge: bày biện xa xỉ / vượt phẩm) | jshelf.js | cqRun (static check) ✓ |
+| 15 | j95accuse / j95 NPC catch-charge (tryst caught) | j95.js | own consequence: punish «vu cáo … không đủ chứng cứ» on any failed charge (no double) ✓ |
 
 | key | registries | class (after) | before (LIVE) | after |
 |---|---|---|---|---|
@@ -348,6 +350,24 @@ keys 280 · classes {"accuse":8,"auth":15,"down":6,"high":2,"up":8,"downNB":2,"t
 | xinhh | j30.js | ✓ |
 | trinhth | j78.js | ✓ |
 | trinhhh | j78.js | ✓ |
+| xx (shelf: bày biện) | jshelf.js | ✓ |
+| vp (shelf: bày đồ) | jshelf.js | ✓ |
+| shelfFalse (tố bừa) | jshelf.js | ✓ |
+| xinhh (jaudit, live f) | jaudit.js | ✓ |
+| trinhhh (jaudit, live f) | jaudit.js | ✓ |
+| xinhh (jrcv Hoàng hậu «no») | jrcv.js | ✓ |
+| trinhhh (jrcv Hoàng hậu «no») | jrcv.js | ✓ |
+
+| open charge (runtime, her Đáp ứng → the highest consort) | forced fail | forced win | ok |
+|---|---|---|---|
+| accuse | vu cáo line | no line | ✓ |
+| tocao | vu cáo line | no line | ✓ |
+| vp | vu cáo line | tố bừa (nothing to find) → vu cáo line | ✓ |
+| xx | vu cáo line | tố bừa (nothing to find) → vu cáo line | ✓ |
+| xinhh | vu cáo line | no line | ✓ |
+| trinhth | vu cáo line | no line | ✓ |
+| trinhhh | vu cáo line | no line | ✓ |
+| expose | — | no line | ✓ |
 
 | her breachable act | class | warning on her row |
 |---|---|---|
@@ -368,6 +388,7 @@ keys 280 · classes {"accuse":8,"auth":15,"down":6,"high":2,"up":8,"downNB":2,"t
 | LIVE 6b5d3d05 (counter injected, gates off) | 60 | 392 | **5** (provoke 4, ink 1) | 0.083 | — |
 | review/cung-quy 63de2af3 | 46 | 388 | **0** | 0 | 15 (provoke 13, batnat 1, nuoc 1) |
 | review/cung-quy b54f367e (rv1) | 60 | 358 | **0** | 0 | 5 (provoke 3, tea 1, nuoc 1) |
+| review/cung-quy 99876fde (rv2) | 60 | 406 | **0** | 0 (1 deliberate breach, provoke, paid) | 13 (provoke 13) |
 Deliberate breaches in the bot runs: 0 (bold NPCs rare; shown by the shot test below).
 
 ## Tests
@@ -391,3 +412,10 @@ Nothing open except review. Worktrees: /home/user/wt/cungquy (branch), /home/use
 3. Structured fail signal: every open charge (accuse, vp, xx, tocao, expose, xinhh, trinhth, trinhhh) calls cqAccFail(a,t) in its fail branch; cqRun charges «vu cáo» only on it, only upward, never on top of the act's own punishment (expose → fall). Probe: her failed trinhth / accuse / tocao against a higher rank all get «Trái cung quy: ngươi vu cáo X, bậc trên mình…». The scan checks each fail branch.
 Also found and fixed: maid/srv:accuse were a FALSE BLOCK (target = the Hoàng hậu as listener) → free; breach lines use the j61 name-mask (unmet consort = «một vị …», second mention «người ấy»), matching the card header «???». Note (pre-existing, not this job): j8 accuse's own line prints the real name of an unmet target («Ngươi tố giác <name> không thành») — name-mask family.
 Shots/videos re-uploaded (same URLs). Old save PASS, scan PASS.
+
+## RV2 (BIG review FAIL 77d9a6e4, review-cung-quy.md §RV1) — fixes in 99876fde
+1. jshelf: shelfFalse («tố bừa») and both wave branches («bỏ qua, chỉ dặn…») mark cqAccFail; scan SRC table covers them.
+2. jshelf shelfNpcAccuse (monthly NPC charge) runs through cqRun: accQ blocks a low rank charging the Hoàng hậu (probe: blocked), a failed charge upward pays «vu cáo» (probe: CQN.br.xx 1), the robot counter sees it. Scan generator table row added. Re-grep of direct callers of accuse bodies: only j8 judge (the Hoàng hậu's own verdict — authority, proper) and j95accuse / j95 NPC catch-charge (already punish every failed charge «vu cáo … không đủ chứng cứ» — own consequence, no double); both listed in the generator table.
+Also found: the LIVE xinhh / trinhhh are jaudit's f + the Hoàng hậu verdict cards (jrcv RCVJ / rcvJudge); their «no» branches now mark the fail; when SHE is the Hoàng hậu the card is answered later (outside the gate), so cqAccFail charges the «vu cáo» itself there (same rule: upward, not vs the Hoàng hậu, gates on).
+Optional done: runtime scan row per open charge (her Đáp ứng → highest consort outside her palace): forced fail → «vu cáo» line for all 7 (expose → own fall), forced win → no line (vp/xx with nothing to find = «tố bừa», correct).
+Tests 99876fde: scan PASS · old save PASS · robot 60 tuần 0 breaks · coop-e2e 143/143 (CDN build).
