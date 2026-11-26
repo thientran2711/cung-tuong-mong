@@ -9,7 +9,7 @@ Ruling (Foreman D, 26/11 03:18Z): the 5 finished lives stay VALID, no replays �
 | nc-nc_gian-lover-1 | Lãnh cung — Phát điên | 23 | 643 | yes | 1a29f470→93812531 (pre-bfa73a6e) |
 | nc-nc_gian-greedy-2 | Hồng nhan bạc mệnh (chronic poison) | 39 | 2881 | yes | 1a29f470→93812531 (pre-bfa73a6e) |
 | nc-nc_gian-lover-2 | Hồng nhan bạc mệnh (illness) | 25 | 760 | yes | 93812531 (pre-bfa73a6e) |
-| nc-nc_gian-cautious-1 | running | – | b3163+ | – | 1a29f470→93812531→54fa0112+F10 hooks |
+| nc-nc_gian-cautious-1 | Lãnh cung — Tuổi xuân qua đi | 40 | 3490 | yes | 1a29f470→93812531→54fa0112+F10 hooks (mixed) |
 | nc-nc_gian-scholar-1 | running | – | b61+ | – | 93812531→54fa0112+F10 hooks |
 | nc-nc_gian-speed-1 / speed-2 / lazy-1 / lazy-1b / lazy-1c / lazy-2 | queued | – | – | – | 54fa0112+F10 hooks |
 Notes: seeds for lazy-1b/lazy-1c (7001, 7002) are my own placeholders (original md-only entries had no seed). Game build per life: <life>.build (written when first seen by the logger; lives begun before 22:12Z have only a resume-time tag fa8da73cecdc). Memory: mem.csv (renderer RSS flat 2.6–3.6 GB through b2779; 6–7 GB freezes at b65–68 were startup spikes with 3 pages).
