@@ -3,7 +3,7 @@
 Worker session_01D3E3NZyGJdTgPiznVEBfbh (opus) · depth 3 · START_CTX ~5 % · for FOREMAN D (order «(26/11 ~07:10Z) ORDER FROM MAIN 154»; owner OD 26/11 ~06:50Z item (C)).
 PRIORITY #1 CHECK ('cung quy'): OD 2 | ledger 0 | claims 0 | main 15 (existing rank checks — reused: jface fxAuth/tat, jtwoway humil/follow, j8 takeaway/accOK, jgreet greetName, j82 seat game, jemoact Phạm thượng) | review/* 0 | archive 1.
 
-Branch **review/cung-quy** head **63de2af3** (rebased, FF from main 3af7896e). Expert report (law 8, written first): dev/handover/reports/cung-quy-expert.md (§G = the adopted rule table).
+Branch **review/cung-quy** head **77d9a6e4** (FF from main 3af7896e; rv1 fixes below). Expert report (law 8, written first): dev/handover/reports/cung-quy-expert.md (§G = the adopted rule table).
 
 ## What was built
 - **ONE function** `cqRule(a,t,k)` / `cqOK` / `cqAuth` (dev/build/jcq.js), **ONE table** `BAL.cq` (jbal2.js, law 4). Classes up / down / downNB / high / auth / take / accuse / free (expert §G).
@@ -15,8 +15,8 @@ Branch **review/cung-quy** head **63de2af3** (rebased, FF from main 3af7896e). E
 - Reused, not rebuilt: greeting order (jgreet greetName, lower names herself first), seating by rank (j82 «Kéo từng người vào ghế» game).
 - Kit: no new UI part (the notice is the standard Q card; warnings are text in existing option rows).
 
-## LAW 11 scan — dev/test/cung-quy-scan.js (PASS)
-keys 280 · classes {"accuse":10,"auth":16,"down":6,"up":8,"downNB":2,"take":1,"high":1,"free":236} · rank-ruled 44: before checked 13 / unchecked 31 → after checked 44 / unchecked 0 · gift words ban cho / kính dâng / tặng · page errors 0
+## LAW 11 scan — dev/test/cung-quy-scan.js (PASS, head 77d9a6e4)
+keys 280 · classes {"accuse":8,"auth":15,"down":6,"high":2,"up":8,"downNB":2,"take":1,"free":238} · rank-ruled 42: before checked 14 / unchecked 28 → after checked 42 / unchecked 0 · gift words ban cho / kính dâng / tặng · page errors 0
 
 | # | generator | file | gate after |
 |---|---|---|---|
@@ -39,7 +39,7 @@ keys 280 · classes {"accuse":10,"auth":16,"down":6,"up":8,"downNB":2,"take":1,"
 | accuse | ACT,H95 | accuse | checked: j8 accOK (Hoàng hậu only) | checked: cqRule accuse (failed charge upward = breach consequence) |
 | admon | TW | auth | checked: jtwoway req Hoàng hậu | checked: cqRule auth (deliberate breach only, own consequence) |
 | ambush | H95 | down | UNCHECKED | checked: cqRule down (deliberate breach only, own consequence) |
-| batnat | ACT,H95 | auth | UNCHECKED | checked: cqRule auth (deliberate breach only, own consequence) |
+| batnat | ACT,H95 | high | checked: jtsb tsbBulOK rkOf(a)>rkOf(t) | checked: cqRule high (deliberate breach only, own consequence) |
 | cx:hhShield | AGRUN | up | UNCHECKED | checked: cqRule up (never breached) |
 | cx:thHelp | AGRUN | up | UNCHECKED | checked: cqRule up (never breached) |
 | cx2:vent | AGRUN | down | UNCHECKED | checked: cqRule down (deliberate breach only, own consequence) |
@@ -58,13 +58,11 @@ keys 280 · classes {"accuse":10,"auth":16,"down":6,"up":8,"downNB":2,"take":1,"
 | humil | TW,AGSOC | downNB | checked: jtwoway req rkOf(a)>=rkOf(t) | checked: cqRule downNB (never breached) |
 | humiliate | SOC | downNB | UNCHECKED | checked: cqRule downNB (never breached) |
 | ink | ACT | down | UNCHECKED | checked: cqRule down (deliberate breach only, own consequence) |
-| maid:accuse | AGRUN | accuse | UNCHECKED | checked: cqRule accuse (failed charge upward = breach consequence) |
 | maid:greet | AGRUN | up | UNCHECKED | checked: cqRule up (never breached) |
 | nuoc | ACT | down | UNCHECKED | checked: cqRule down (deliberate breach only, own consequence) |
 | phatquy | ACT,H95 | auth | checked: jface fxAuth (Hoàng hậu or +3) | checked: cqRule auth (deliberate breach only, own consequence) |
 | provoke | TW,SOC,AGSOC,H95 | down | UNCHECKED | checked: cqRule down (deliberate breach only, own consequence) |
 | serveTH | SOC | up | UNCHECKED | checked: cqRule up (never breached) |
-| srv:accuse | AGRUN | accuse | UNCHECKED | checked: cqRule accuse (failed charge upward = breach consequence) |
 | srv:greet | AGRUN | up | UNCHECKED | checked: cqRule up (never breached) |
 | takeaway | ACT,H95 | take | checked: j8 ok rkOf(a)>rkOf(t)&&rkOf(t)<4 | checked: cqRule take (never breached) |
 | tat | ACT,H95 | high | checked: jface ok rkOf(a)>rkOf(t) | checked: cqRule high (deliberate breach only, own consequence) |
@@ -206,6 +204,7 @@ keys 280 · classes {"accuse":10,"auth":16,"down":6,"up":8,"downNB":2,"take":1,"
 | laydo | ACT,H95 | free | — (no rank rule) | free (no rank rule) |
 | laydol | ACT,H95 | free | — (no rank rule) | free (no rank rule) |
 | lygian | ACT,H95 | free | — (no rank rule) | free (no rank rule) |
+| maid:accuse | AGRUN | free | — (no rank rule) | free (no rank rule) |
 | maid:ask | AGRUN | free | — (no rank rule) | free (no rank rule) |
 | maid:askRec | AGRUN | free | — (no rank rule) | free (no rank rule) |
 | maid:askRew | AGRUN | free | — (no rank rule) | free (no rank rule) |
@@ -269,6 +268,7 @@ keys 280 · classes {"accuse":10,"auth":16,"down":6,"up":8,"downNB":2,"take":1,"
 | slowpoison | ACT,H95 | free | — (no rank rule) | free (no rank rule) |
 | spy | ACT,SOC,H95 | free | — (no rank rule) | free (no rank rule) |
 | spyk | ACT,H95 | free | — (no rank rule) | free (no rank rule) |
+| srv:accuse | AGRUN | free | — (no rank rule) | free (no rank rule) |
 | srv:ask | AGRUN | free | — (no rank rule) | free (no rank rule) |
 | srv:askRec | AGRUN | free | — (no rank rule) | free (no rank rule) |
 | srv:askRew | AGRUN | free | — (no rank rule) | free (no rank rule) |
@@ -338,15 +338,40 @@ keys 280 · classes {"accuse":10,"auth":16,"down":6,"up":8,"downNB":2,"take":1,"
 | NPC low ↔ her high | auth | phatquy | vượt quyền | đúng lễ | ✓ |
 | NPC low ↔ her high | take | takeaway | vượt phận | đúng lễ | ✓ |
 
+| open charge | file | fail branch marked (cqAccFail) |
+|---|---|---|
+| accuse | j8.js | ✓ |
+| vp | j8.js | ✓ |
+| xx | jdress.js | ✓ |
+| tocao | j30.js | ✓ |
+| expose | j30.js | ✓ |
+| xinhh | j30.js | ✓ |
+| trinhth | j78.js | ✓ |
+| trinhhh | j78.js | ✓ |
+
+| her breachable act | class | warning on her row |
+|---|---|---|
+| nuoc | down | yes ✓ |
+| tea | down | yes ✓ |
+| ink | down | yes ✓ |
+| tat | high | yes ✓ |
+| batnat | high | yes ✓ |
+| phatquy | auth | yes ✓ |
+| Dư đồ focus view (jdf dfInPerson rows) | all in-person acts | cqWarn ✓ |
+| talk options Khiêu khích / Trút giận (j2 talkOpts) | down | cqWarn ✓ |
+
+keys 280 · classes {"accuse":8,"auth":15,"down":6,"high":2,"up":8,"downNB":2,"take":1,"free":238} · rank-ruled 42: before checked 14 / unchecked 28 → after checked 42 / unchecked 0 · gift words ban cho / kính dâng / tặng · page errors 0
+
 ## Robot measure — dev/measure/cung-quy-rate.js (NPC acts that break etiquette, bot life, 2 runs)
 | build | tuần | NPC acts counted | breaks (no deliberate breach) | per tuần | stopped by the gate |
 |---|---|---|---|---|---|
 | LIVE 6b5d3d05 (counter injected, gates off) | 60 | 392 | **5** (provoke 4, ink 1) | 0.083 | — |
-| review/cung-quy | 46 | 388 | **0** | 0 | 15 (provoke 13, batnat 1, nuoc 1) |
+| review/cung-quy 63de2af3 | 46 | 388 | **0** | 0 | 15 (provoke 13, batnat 1, nuoc 1) |
+| review/cung-quy b54f367e (rv1) | 60 | 358 | **0** | 0 | 5 (provoke 3, tea 1, nuoc 1) |
 Deliberate breaches in the bot runs: 0 (bold NPCs rare; shown by the shot test below).
 
 ## Tests
-- coop-e2e (CDN build): **143/143 passed** (a first run on an image-less build failed only the 5 «Thái hậu picture» rows: no pictures → environment, not this change).
+- coop-e2e (CDN build): **143/143 passed** (63de2af3 and again on rv1 b54f367e) (a first run on an image-less build failed only the 5 «Thái hậu picture» rows: no pictures → environment, not this change).
 - old save: dev/test/cung-quy-oldsave.js — LIVE save (4 tuần) loads and plays to tuần 9 with gates on, 0 page errors: **PASS**.
 - npc-purpose-scan: PASS (419 rows). two-way-acts: flaky on BOTH builds (random deeds fail by odds each run: branch 1–2 FAIL, LIVE 2–3 FAIL, different rows each run) — not worse.
 - Shots + videos of a breach notice (bold Đáp ứng mocks her): Fold 755x1000@2 / iPad 1180x820@2, looked at:
@@ -359,3 +384,10 @@ Speech-form checks (本宫 / 嫔妾) in story text → text-hygiene job (D); the
 
 ## Handover
 Nothing open except review. Worktrees: /home/user/wt/cungquy (branch), /home/user/wt/cq-live (LIVE build for compare).
+
+## RV1 (BIG review FAIL 63de2af3, dev/handover/reports/review-cung-quy.md) — fixes in b54f367e + 77d9a6e4
+1. Dư đồ focus view (jdf dfInPerson rows) shows cqWarn; the scan now checks every surface she starts a breachable act from (person-card row xw for nuoc/tea/ink/tat/batnat/phatquy, focus view, talk options) — all ✓.
+2. batnat «Ép nộp của» → class high (LIVE tsbBulOK rkOf(a)>rkOf(t)); tsbBulOK reads cqOK; scan BEFORE row fixed (now 14 checked / 28 unchecked before).
+3. Structured fail signal: every open charge (accuse, vp, xx, tocao, expose, xinhh, trinhth, trinhhh) calls cqAccFail(a,t) in its fail branch; cqRun charges «vu cáo» only on it, only upward, never on top of the act's own punishment (expose → fall). Probe: her failed trinhth / accuse / tocao against a higher rank all get «Trái cung quy: ngươi vu cáo X, bậc trên mình…». The scan checks each fail branch.
+Also found and fixed: maid/srv:accuse were a FALSE BLOCK (target = the Hoàng hậu as listener) → free; breach lines use the j61 name-mask (unmet consort = «một vị …», second mention «người ấy»), matching the card header «???». Note (pre-existing, not this job): j8 accuse's own line prints the real name of an unmet target («Ngươi tố giác <name> không thành») — name-mask family.
+Shots/videos re-uploaded (same URLs). Old save PASS, scan PASS.
