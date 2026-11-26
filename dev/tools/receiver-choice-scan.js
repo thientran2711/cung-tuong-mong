@@ -35,9 +35,11 @@ const KINDS={REQ:"help facJoin blockf bribel bribe bribeSrv rougeBorrow illAlly 
  GIFT:"doctor gift reward petcare charity staffUp teachV teachD thHelp hhShield pardon release tqGift tyGift staffChe treat petBuy",
  /* SELF: the doer's own deed (no other person is asked or given anything; when a probe still sees it touch someone it is OK, never a hidden ask) */
  SELF:"face arts book alms sutra maidR rest study buy portrait maidTalk fert dance anthai restLat sell work hire facLeave drug def_canh def_thudoc def_theodoi def_giuchung qin kidCare kidGuard cycFix cycMama illCho illThaiy",COVERT:Object.keys(RCVX).join(" ")+" tieuhuy chest laydo laydol slowpoison petsteal pgift rougeSteal",
+ /* mendGift / mendGo (jmend «Hậu lễ tạ tội» / «Nhờ người đứng giữa»): like apol / humble, the wronged one's answer is her nết roll (mendO: forgive − depth), the same rule
+    when SHE is the wronged one (her own S.ro, her nết) — DONE, no answer card (review/pace-all) */
  DONE:"accuse expose manCut kidGreet kidHeal kidMed test pushp banphe batnat block huydung ink kpoison ksab lygian musk nuoc phatquy phonghoa pond rash rumor spyk tea thathu tocao trip uyhiep vp xx "+
   "apol announce drop catswap kframe steal road giahoa tat thaopet hearMe joinMe hear join judge vent invoke staffPhat staffDoi staffTam threat facSell facDiv "+
-  "flat true show favor court nurse likes old humble search staffHoi staffThuong talkGossip talkHealth talkPraise talkSecret tell use conf cutpay admon check fakeIll fakePreg flaunt follow humil ksp pray provoke thHH thTH warn"};
+  "flat true show favor court nurse likes old humble mendGift mendGo search staffHoi staffThuong talkGossip talkHealth talkPraise talkSecret tell use conf cutpay admon check fakeIll fakePreg flaunt follow humil ksp pray provoke thHH thTH warn"};
 /* STAFF: a servant's own deed (ag maid:* / srv:*, the maid road): those receiver rows live in C-AG's ONE role-parity table (jagstf2 G10 cards) */
 const KIND=k=>{const b=k.replace(/^[a-z0-9]+:/,"").replace(/^[a-z0-9]+:/,"");if(k==="tw:help"||k==="th:gift"||k==="ag:th:gift"||k==="tw:visit")return"GIFT";/* tw:visit «Thăm lúc ốm mệt»: the sick one only gains (thiện cảm, Sức), law 3 — not the Emperor's emp:visit ORDER */if(/^(ag:)?(maid|srv):/.test(k))return"STAFF";
  for(const K in KINDS)if(KINDS[K].split(" ").includes(b))return K;return"NEW"};

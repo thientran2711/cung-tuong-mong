@@ -340,3 +340,19 @@ Owner rule via MAIN 163 + RV-163B: a stat glyph (danh / duc / sung / suc / bac /
 - `place-thu` Cần Chính điện · `place-dtd` Dưỡng Hòa điện · `place-tn` Đức Thọ cung · `place-kn` Càn Ninh cung (queen's palace; note `place-cnh` is a different place) · `place-nvp` Nội vụ phủ · `place-tyv` Thái y viện.
 Same recipe as v3 (gpt-2-6, folder ba4aecfe, transparent, 120 px in 128 px canvas, webp). When a file lands on the CDN, the KIT_PLACE_STAND entry moves into KIT_PLACE_IC as `"place-<key>"`; nothing else changes.
 Unused v3 file: `place-vinhtho` (Vĩnh Thọ is an empty consort palace like the others, so every empty palace uses `place-cungtrong`; MAIN may rule otherwise).
+
+## 26/11 NEWS-SIEVE-2 (session_01V1ZZH2L7SB2YyEATuwgbWi, MAIN 153) — K-FREE-OPT: no «Tốn không / Được không» on a free option (kit keeper KK38)
+Owner OD 25/11 ~23:36Z NEWS WORDING (verbatim row in dev/OWNER_DECISIONS.md): "no «TỐN không / ĐƯỢC không» on a free action". Seen: «Tin báo» panel
+(jnotice kitNoticeOpen, kitPanel kind notice) option cards «Để ta xem» / «Để sau» print the rows «Tốn: không» and «Được: không». Rows come from the
+one row writer (j63 kaRowH / KA_ROWS, j19 kgrid «Tốn … không»), so this is the KIT option-card family, not the news code.
+Wanted (kit keeper only, law 9/11): an option with no cost hides the «Tốn» row, an option with no gain hides the «Được» row (whole family: every
+option / act card that prints «không» in a row: go / later / close / look options of every panel). Not changed on review/news-sieve.
+CONFLICT to settle (canon overwrite, law 14): the quickcheck gate dev/test/dialog-fixed.js (l) «MAIN 88 (a) no empty Được cell: a card with no gain
+says «không»» still demands the «không» rows, and it FAILS on origin/main 02f564ae today (Fold + iPad: card «Mặc kệ» has an EMPTY Tốn and Được
+cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) wins: hide the empty rows and update gate (l) in the same kit change.
+
+## 26/11 OB-VERDICT — result-card ACT PAYLOAD (KIT 7.3) — built by OB-VERDICT on review/ob-verdict, needs KK39 review
+- Owner OD 26/11 ~08:30Z (pillow slander verdict). Additions to the §7 result card (j63), same `.kb` row grid and classes, no new CSS:
+  seal value `kitResultSeal("soft")` → «BỎ DỞ» (grey `.sure`); rows «Người ấy» (`kr-tgt`) and «Ai làm» (`kr-by`); `kaAim` / `kaAimVerdict` / `kaAimUse`;
+  the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
+  Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
