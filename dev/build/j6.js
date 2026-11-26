@@ -86,7 +86,7 @@ $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.new){if(b.dataset.ask==="1"){kitConfirm({title:"Bỏ kiếp trong sổ này?",lines:["Kiếp đang ghi trong sổ này sẽ mất, không lấy lại được."],yes:"Bắt đầu kiếp mới",no:"Thôi",onYes:()=>{setTimeout(()=>{try{b.dataset.ask="2";b.click()}catch(x){console.error(x)}},0)}});return}
   /* OB-M3UI-sololh (law 6c, nothing vanishes): a LIVING life that is already «trọn» (S.kpTron, no nghiệp) and is overwritten here still gets its Sổ luân hồi row «Bỏ ngang»;
      an unfinished life is written by jkiep (with its nghiệp), a dead one was written at death */
-  if(b.dataset.ask==="2"){try{const d=loadSlot(+b.dataset.new),s=d&&d.S;if(s&&!s.dead&&s.kpTron&&typeof lifeLog==="function"){const p=lifeLog();p.unshift({n:s.name,o:(s.origin&&s.origin.n)||"",r:(m=>m>=7?"Hoàng hậu":RANKS[m].n)(Math.max(s.rank||0,s.maxRank||0)),age:s.age,y:s.year,kids:(s.kids||[]).filter(k=>k.alive).length,fc:s.fc||"",f:"Bỏ ngang",foes:[]});store.set("cung-luanhoi",p.slice(0,40))}}catch(x){console.error(x)}}
+  if(b.dataset.ask==="2"){try{const d=loadSlot(+b.dataset.new),s=d&&d.S;if(s&&!s.dead&&s.kpTron&&typeof lifeLog==="function"){const p=lifeLog();p.unshift({n:s.name,o:((typeof originByKey==="function"&&originByKey(d.ok))||{}).n||(s.origin&&s.origin.n)||""/* a save keeps the origin KEY (d.ok), not S.origin */,r:(m=>m>=7?"Hoàng hậu":RANKS[m].n)(Math.max(s.rank||0,s.maxRank||0)),age:s.age,y:s.year,kids:(s.kids||[]).filter(k=>k.alive).length,fc:s.fc||"",f:"Bỏ ngang",foes:[]});store.set("cung-luanhoi",p.slice(0,40))}}catch(x){console.error(x)}}
   SLOT=+b.dataset.new;$("title").hidden=true;start()}};
 
 /* wiring */
