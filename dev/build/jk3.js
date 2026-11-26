@@ -387,11 +387,17 @@ function k3Shell(){try{if(window.COOPW&&COOPW.ctx)return;/* co-op thin: the othe
  /* reviewer stage-pets-r1: the left rail (KIT 33.11) is re-drawn by renderStage while the card page still hides the stage, so closing a person card left the painting WITHOUT the rail (no way back to the map): re-draw it when the card page opens / closes */
  if(wasPop!==gm.classList.contains("k3pop"))try{if(typeof kitStageRail==="object"&&kitStageRail.paint)requestAnimationFrame(()=>kitStageRail.paint())}catch(e){}
  let rb=$$("k3room");const hd=document.querySelector("header.hud");
- if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3Home()});hd.appendChild(rb)}
- /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view keeps it only while away from the room home */
- if(rb)rb.hidden=!alive||(on&&K3SH.home&&!pop);
+ if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3RoomTap()});hd.appendChild(rb)}
+ /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view hides it only on her own room's page
+    (review/home-way, owner OD 26/11 ~04:25Z: away from home, the place painting included, it is ALWAYS there: her way home) */
+ const away=!!(alive&&typeof homeWay==="function"&&(homeWay()||{at:1}).at===0);
+ if(rb){rb.hidden=!alive||(on&&K3SH.home&&!pop&&!away);rb.classList.toggle("hwaway",away)}
  document.querySelectorAll("#tabs [data-tab]").forEach(b=>b.classList.toggle("k3dim",on&&K3SH.home&&!pop))}catch(e){console.error("k3Shell",e)}}
 window.k3Shell=k3Shell;
+/* the top-bar «Về phòng» (review/home-way): away = the walk to HER OWN room (homeWay / homeGo, jplrule: «Về phòng · N khắc»), then her room's page;
+   at home = her room's page (the one-page view's way back from a tab). Never «Về <the place she is at>» (owner OD 26/11 ~04:25Z). */
+function k3RoomTap(){try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at){if(!homeGo())return}}catch(e){console.error("k3RoomTap",e);return}k3Home()}
+window.k3RoomTap=k3RoomTap;
 function k3Home(){K3SH.home=true;try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;if(typeof renderStage==="function")renderStage()}}catch(e){}const pw=$$("popw");if(pw&&pw.children.length)pw.innerHTML="";k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay();typeof kitFloorFit==="function"&&kitFloorFit()}catch(e){}},30)}
 window.k3Home=k3Home;
 /* owner 11/15 06:38Z: tapping the place she is AT on Dư đồ opens that place's stage (scene + the people there), like arriving — on the
@@ -403,7 +409,10 @@ function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";retu
   if(here&&k3Phone())k3ShowPlace();return r}}
  const g0=goTo;goTo=function(k){const fromMap=typeof tab!=="undefined"&&tab==="go";const p0=S&&S.place;const r=g0.apply(this,arguments);
   try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
- const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const t=S&&S.place&&S.place!=="home"?"Về "+k3PlaceName():"Về phòng";const l=rb.querySelector(".kbl");if(l&&l.textContent!==t){l.textContent=t;rb.setAttribute("aria-label",t)}rb.title=t}}catch(e){}return r};window.k3Shell=k3Shell})();
+ /* label = the ONE way-home rule (jplrule homeWay): «Về phòng · N khắc» away, «Về phòng» at home; second line = HER palace's name (the home mark) */
+ const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const w=typeof homeWay==="function"?homeWay():null;const t=w?w.label:"Về phòng",hn=w&&w.hn||"";
+  const l=rb.querySelector(".kbl");const txt=hn?t+"\n"+hn:t;if(l&&l.textContent!==txt){l.textContent=txt;rb.setAttribute("aria-label",hn?`${t}, ${hn}`:t)}rb.title=w?w.title:t;
+  const dis=!!(w&&!w.at&&!w.ok);if(rb.disabled!==dis)rb.disabled=dis}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
@@ -433,11 +442,13 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
 /* KIT §75 painted back button (room / map): icon + short label, no bar */
 .kbackb{display:inline-flex;flex-direction:row;align-items:center;gap:5px;background:none!important;border:0!important;box-shadow:none!important;padding:0 6px!important;font-weight:600;color:var(--gold);white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .kbackb .kbi{width:30px;height:30px;max-width:none;flex:none;object-fit:contain;filter:drop-shadow(0 1px 1px #5a3a2040)}
-.kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:pre-line;text-align:left}
 .kbackb:active .kbi{transform:scale(.94)}
 /* phones < 600 px: icon only (label = tooltip / aria-label, same as the stat cells), sits under the menu button */
 /* kv3:.kv1 */html:where(.kv1) body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
- html:where(.kv1) body header.hud>#k3room.kbackb .kbl{display:none}
+ html:where(.kv1) body header.hud>#k3room.kbackb:not(.hwaway) .kbl{display:none}
+ /* review/home-way: away from home the one-page view shows the cost + her palace too */
+ html:where(.kv1) body header.hud>#k3room.kbackb.hwaway{padding:0 8px 0 2px!important;min-height:36px}
  /* icon missing (CDN 404, img removed by onerror): show the label so the button never becomes invisible */
  html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
  html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}

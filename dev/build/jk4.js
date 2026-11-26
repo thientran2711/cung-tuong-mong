@@ -97,7 +97,11 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv3:.kv1 */
  html:where(.kv1) body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
- html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:not(.hwaway):has(.kbi) .kbl{display:none}
+/* review/home-way (owner OD 26/11 ~04:25Z): away from home the one-page button shows its label under the icon:
+   «Về phòng · N khắc» + her palace's name, small, centred in the menu column */
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:96px;padding:0 2px 2px!important}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:block;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre-line;overflow:visible}
 /* KIT §0 one page (design-scale p2): the time column is ~40 % narrower than on the spread, so its two lines wrapped and the block grew taller
    than her name block (top bar 132 vs 129 px, +12 px with a state chip such as "Có thai"). On the one page the time block flows as ONE
    wrapping row of whole items (time, toilette, weather, quẻ, every K3_STATE chip; an item is never split, the next drops to a new 18 px line),
