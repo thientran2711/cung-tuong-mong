@@ -1050,6 +1050,44 @@
     "review/rerun-E-S1-E-S1-R1-random-2-3215553126-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-scholar-3-1844484030",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "scholar",
+   "botHarness": "sens",
+   "kiep": 3,
+   "seed": 1844484030,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "2df8f5fa"
+   },
+   "live": "GAME BUILD b7dcbbd06e03 (github.io 7bf080fbc625)",
+   "end": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 20,
+   "year": 1,
+   "rank": 0,
+   "buoi": 1,
+   "steps": 224,
+   "taps": 69,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "FRESH rerun; the debut board #kg82 «Dâng Cầm» was PLAYED (Sẵn sàng, 13 moves) → ban hoa at buổi 1 = the game's verdict",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-scholar-3-1844484030-moments.md",
+    "review/rerun-E-S1-E-S1-R1-scholar-3-1844484030-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
@@ -1094,10 +1132,6 @@
   },
   {
    "id": "E-S1-R1-skilled-3-2243047412",
-   "why": "same"
-  },
-  {
-   "id": "E-S1-R1-scholar-3-1844484030",
    "why": "same"
   },
   {
