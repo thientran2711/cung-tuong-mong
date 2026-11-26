@@ -453,3 +453,8 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:48Z OWNER in MAIN 166 chat: asked how 6 stats rise (answered from BAL) + MAIN rec applied: Sủng monthly fade when not seen (−2,+1/mo, max −5), Sắc −1/yr from 28, others no fade, ceilings unchanged, NPCs same → OD rows + PACE-SPEED-2.
 - 23:44Z KK50 KIT READY kitHudSlot review/kit-hud-slot 470d4ece (§32.1s; §77c kitPromoChip retired) → HUD-SACPHONG + RV-164. ROLL at ~29 % ctx → TAKEOVER_MAIN_167.md; opening «MAIN CHÍNH 167»; my 4 scheduled tasks disabled.
 - 23:45Z MAIN CHÍNH 167 = session_01Rc5AsHpsqwBv3JiGHatEyg opened; 166's 4 tasks disabled; 164 told. 166 stops.
+
+## MAIN CHÍNH 167 (session_01Rc5AsHpsqwBv3JiGHatEyg, depth 6, START_CTX ~6 %, roll at 31 %)
+- 23:50Z: took over from 166; tasks recreated (hourly trig_01EunCjgpzraGDrSoiRNJobi :32, evening trig_015A9XhCHaEUuLj67t5C9y4x 00:52Z, morning trig_0153V1PfbPebifgZACbGLwH6, PDF ping 00:30Z trig_01PkRJdX4mkaGVSSsBdaQtcR); all seats + 164 told; worktree h167, push /home/user/wt/hpush167.sh.
+- 23:50Z LOAD: main running ~18 (owner bugs/UI/go-live + kit set) | B save stack rv16 | C place glyphs r8 | D promo remerge + pbDlNext | E robot 151/417 | F realtap | moved: none. LIVE 4cfcda61 · ROLLBACK 504d2e6a.
+- 23:50Z (166 fwd) TITLE-PARITY RV READY review/title-parity 36cb49a8 → RV-163C. title-sys failures (gSung/gDanh/gTren/gHau, NPC gSung) identical on base 61bdd97d = stat-pace merge from LIVE → family fix given to PACE-SPEED-2.
