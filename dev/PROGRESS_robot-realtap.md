@@ -267,3 +267,16 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
 - Self-test RT_TEST_SKIP=3 (Fold + iPad, LIVE 5e013076 local): the game's own card flip (kitCardFlip, «Chạm để bỏ qua») gone in 10 s; «Sổ nguyệt sự» (cyBook kit intel modal) closed in 4 s; a button-less «MẬT BÁO · Sổ nguyệt sự» box that closes on its backdrop closed in 8 s by 1–2 backdrop taps; no-close verdicts 0, stuck 0, jsClicks 0, dead 0. (Before this fix the same box: «stuck no progress 15 min» on both devices.)
 - Q-SOFTLOCK EVIDENCE (FOREMAN D via F #17): every dump (stuck / no-turn / 150-tap / no-hit / optclip) carries qs = {Q titles, DQ (safe copy), used, S.buoi, S.mg, #modal hidden, #next {disabled, text}, dqActEl(), dqDawn(), dqFreeScreen(), build}; each read guarded, read-only (the jdayq checks only read the DOM). Self-test RT_TEST_DUMP=2 shows every field.
 - BUILD STAMP: the page DOES expose its build (window.CTM_BI {s, b, t}, window.CTM_BUILD; LIVE 5e013076 = b fa8da73cecdc, s 3762da08+) → R.harness.build + «GAME BUILD …» line at start, so runners can tell which LIVE they play.
+
+## HARNESS FIXER #9 — BIG #7 FAIL 54fa0112 (exam result idle) fixed
+- ROOT: the jexam result screen hides #kg82ok «Đã hiểu» and leaves only the ✕ «Quay lại», which the kit routes to the result button (jk4 kitOvSync → kitOvBtn); KG82.phase stays '' → the harness read «one back button, not the result» → mgOnlyBack → idled MG_GIVEUP 6 min every exam (RT_TEST_EXAM done:false 4/4 in BIG #7's runs).
+- FIX (law 11, one place feeds every user): SCAN mgPh = 'result' whenever the game's own kitOvBtn() (read-only lookup of #kg82ok / #kg92ok / #mgok in a shown #ov panel) returns a button; + mgRes flag. Every harness rule keyed on mgPh === / !== 'result' now sees it.
+
+| kitOvBtn caller / harness user | before | after |
+|---|---|---|
+| game j82:481 result ✕ press → kitOvBtn().click() | ✕ = «back» to the harness (mgOnlyBack, never tapped) | ✕ = the way on, tapped |
+| game jk4 kitOvSync (hides plain «Đã hiểu», routes the panel ✕) | phase '' → idle 6 min | result → ✕ tapped |
+| game jk4 kitCloseLayer(ov, kitOvBtn) | same | same fix |
+| harness mgOnlyBack (idle on back-only boards) | true on every exam result | false on results |
+| harness sameScr unstick guard / choose MG back filter / drag-skip guard | treated the result as play | result → back allowed / no skip |
+- Proof (LIVE 5e013076 local, RT_TEST_EXAM=2): Fold seed 31 and iPad seed 12 → done:true, raws [5,5], dragSkipExam 2, mgGiveUp 0, jsClicks 0, dead 0, stuck 0.
