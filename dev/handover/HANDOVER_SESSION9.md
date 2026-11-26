@@ -157,3 +157,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~08:50Z E98r PASS endcard-top-r6 3f38961f → MAIN LOOK PASS → LC21 slot after HW-NITS; E98r archived (tell FOREMAN E / E ROOT). OB-VERDICT 3fff2eb0 LOOK: fix «???» target name (her chosen target always named), seal stays BẠI → then BIG rv; J2 told to add kaAim hooks at scheme/minigame results.
 - ~08:47Z HOURLY WAKE. LOAD: main running LC21, KK39, J1–J4, J5b, OB-OAN, OB-VERDICT, OB-M3UI, OB-NGOAICUNG-2, NEWS-SIEVE-2, FIRSTCARD, E96r, 3 rv | B 11/12 | C idle (SEALS frozen) | D busy | E depth limit | F runners | moved: none. D5 mg-trim re-merged bb0ae651 (FF on DRESS) → LC21 NEXT.
 - ~08:55Z ROLL (context ~33 %, roll line 30 %): TAKEOVER_MAIN_156.md written; opening MAIN CHÍNH 156 as my child; 155 = forwarder.
+- ~08:56Z MAIN CHÍNH 156 = session_01V1ZZH4YYLnxnhwuGEx25zf (155 child, depth 4). 155 = forwarder from now.
