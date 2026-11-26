@@ -9,14 +9,13 @@
    6 an NPC slaps her: «Né đòn» shows its odds word; one tap = one roll, no game frame; the result card follows
    7 kept cơ-may games still open their boards (a scheme act game sgPlay exists, Dư đồ class A acts keep their engine)
    8 no page errors
-   9 pet care + plant watering: boards kept by default (BAL.trim.care 0, FOREMAN D ruling 26/11), one tap only behind the switch
+   9 pet care + plant watering (owner OD 26/11 ~05:45Z): boards kept; «Chăm nhanh» on the rules screen like «Học nhanh»; «Giao … chăm» on pets + plants
    usage: node dev/test/mg-trim.js <dev dir or url> [755x1000@2,1180x820@2] */
 const {chromium}=require('playwright');const fs=require('fs'),http=require('http'),path=require('path');let [,,URL,SIZES]=process.argv;URL=URL||'dev';
 function serve(root){const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.css':'text/css'};return new Promise(res=>{const s=http.createServer((q,r)=>{let f=path.join(root,decodeURIComponent(new (require('url').URL)(q.url,'http://x').pathname).replace(/^\/+/,'')||'index.html');
  if(!f.startsWith(root)||!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end('nf')}r.setHeader('Content-Type',T[path.extname(f)]||'application/octet-stream');fs.createReadStream(f).pipe(r)});s.listen(0,'127.0.0.1',()=>res({url:'http://127.0.0.1:'+s.address().port+'/index.html',close:()=>s.close()}))})}
 const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!c)bad++;console.log(`${c?'PASS':'FAIL'} ${n}${x!==undefined?' '+JSON.stringify(x).slice(0,500):''}`)};
 const VID=process.env.VID||'';
-const fs9={};for(const f of ['jpetcare.js','jshelf.js'])fs9[f]=fs.readFileSync(path.join(__dirname,'../build',f),'utf8');
 (async()=>{let SV=null;if(!/^https?:/.test(URL)){SV=await serve(path.resolve(URL));URL=SV.url}const b=await chromium.launch();
  for(const sz of (SIZES||"755x1000@2,1180x820@2").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];console.log('== '+sz);
   const ctx=await b.newContext(Object.assign({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'},VID?{recordVideo:{dir:VID,size:{width:W,height:H}}}:{}));
@@ -76,9 +75,21 @@ const fs9={};for(const f of ['jpetcare.js','jshelf.js'])fs9[f]=fs.readFileSync(p
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
   /* 7 */
   const r7=await p.evaluate(()=>({sg:typeof sgPlay==="function",dfA:Object.keys(DFG.ENG).length,rt:typeof rtNgSleight==="function",dfOn:BAL.df.on}));ok('7 kept cơ-may games: scheme boards, Dư đồ engines, nghiệm thân still there',r7.sg&&r7.dfA===7&&r7.rt&&r7.dfOn===1,r7);
-  /* 9 FOREMAN D ruling 26/11: pet care + plant watering are not in sếp's words → behind ONE switch BAL.trim.care, default 0 = the boards play (laws 16/17) */
-  const r9=await p.evaluate(()=>({care:BAL.trim&&BAL.trim.care}));const src9=['jpetcare.js','jshelf.js'].map(f=>fs9[f]);
-  ok('9 care switch BAL.trim.care = 0 (boards kept); one tap only behind the switch',r9.care===0&&/if\(BAL\.trim\.care&&\(k==="feed"\|\|k==="bath"\|\|k==="play"\)\)[^\n]*return\}\s*if\(k==="feed"\)petcFeed\(\)/.test(src9[0])&&/if\(k==="water"&&BAL\.trim\.care\)[^\n]*return\}\s*if\(k==="water"\)\{/.test(src9[1]),r9);
+  /* 9 owner OD 26/11 ~05:45Z verbatim: "Trò chăm thú cưng và tưới cây giữ như cũ và option chăm nhanh như học nhanh hoặc giao người chăm" — real taps */
+  const pi=await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{kg82Close()}catch(e){}S.khac=Math.max(S.khac||0,8);if(!tsbPets(S).length)petAdd(S,Object.keys(PET)[0],"test");
+   const m=S.maid;if(m)m.loyal=Math.max(m.loyal||0,BAL.loy.close+5);const k=Object.keys(BAL.shelf.it).find(x=>BAL.shelf.it[x].care==="cay");shelfOf(S).g.t9={k,pc:50};delete shelfOf(S).g.t9.pm;petcOpen(0);return{k,maid:!!tsbMaid(S),n:tsbPets(S).length,kp:!!document.getElementById("kpcare"),mh:document.getElementById("modal").hidden,q:Q.map(x=>x.t)}});await sleep(1000);/* a first-time tip (kit «lời dặn lần đầu») may come first: she reads it and taps on */
+  for(let k=0;k<6;k++){if(await p.$('[data-petc="feed"]'))break;await p.evaluate(()=>{const m=document.getElementById('modal');const bt=[...m.querySelectorAll('button')].find(x=>/^(Đã hiểu|Tiếp|Lui)/.test(x.innerText.trim()));if(bt)bt.click()});await sleep(900)}
+  const pg=await p.evaluate(()=>{const g=document.querySelector('[data-petc="maid"]');return{maid:g?g.innerText.replace(/\s+/g,' '):null}});
+  await tap('[data-petc="feed"]');await sleep(800);const pq=await txt('#kpcquick');const board=await p.evaluate(()=>!!document.getElementById('kpcgame'));
+  ok('9 pet care: the board stays (rules screen) + «Chăm nhanh» (Tùy duyên) like «Học nhanh» + «Giao … chăm»',board&&/^Chăm nhanh/.test(pq||"")&&/Tùy duyên/.test(pq||"")&&!!pg.maid&&/^Giao /.test(pg.maid),{pi,pg,pq});
+  await tap('#kpcquick');await sleep(1200);const pr=await p.evaluate(()=>(document.getElementById('kpcare')||{}).innerText||"");ok("9 «Chăm nhanh» = one tap, the result line («Vừa rồi») follows",/Vừa rồi/i.test(pr),pr.slice(0,300));
+  await p.evaluate(()=>{try{petcClose()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;shelfPlantOpen("t9")});await sleep(1000);
+  const gv=await txt('[data-shc="give"]');const pc0=await p.evaluate(()=>shelfOf(S).g.t9.pc);await tap('[data-shc="give"]');await sleep(900);
+  const r9=await p.evaluate(()=>{const e=shelfOf(S).g.t9,b=document.querySelector('[data-shc="give"]');return{pc:e.pc,pm:e.pm===wk(),lock:b?(b.disabled||/đã chăm/.test(b.innerText)):null}});
+  ok('9 plant: «Giao … chăm» = the week\'s servant care now, 0 khắc, once a tuần (no double)',/^Giao /.test(gv||"")&&r9.pc>pc0&&r9.pm&&r9.lock,{gv,pc0,r9});
+  await p.evaluate(()=>{delete shelfOf(S).g.t9.pm;shelfPlantDraw("")});await sleep(500);await tap('[data-shc="water"]');await sleep(800);const wq=await txt('#kshpquick');const wb=await p.evaluate(()=>!!document.getElementById('kshpgame'));
+  ok('9 plant watering: the board stays + «Chăm nhanh» (Tùy duyên)',wb&&/^Chăm nhanh/.test(wq||"")&&/Tùy duyên/.test(wq||""),wq);
+  await p.evaluate(()=>{try{kgTutDrop()}catch(e){}SHPC.game=null;try{closeModal()}catch(e){}});await sleep(800);
   ok('8 no page errors',!errs.length,errs.slice(0,3));
   await ctx.close();if(VID){const f=fs.readdirSync(VID).filter(x=>/\.webm$/.test(x)).map(x=>[x,fs.statSync(path.join(VID,x)).mtimeMs]).sort((a,c)=>c[1]-a[1])[0];if(f)fs.renameSync(path.join(VID,f[0]),path.join(VID,`mg-trim-${W}x${H}.webm`))}}
  await b.close();if(SV)SV.close();console.log(bad?`FAIL ${bad}`:'ALL PASS');process.exit(bad?1:0)})();

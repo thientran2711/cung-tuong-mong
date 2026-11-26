@@ -22,8 +22,8 @@ const G=[
  ['Kết mạng che mặt (jveil craft)','jveil.js',/title:"Kết mạng che mặt"/,/n:"Kết nhanh",sure:1/,'sure','no veil, material back (sure)'],
  ['Điểm trang buổi sáng (jtoil, dress + colour screens)','jtoil.js',/function toilOpen/,/toilRollBtn\("toilquick2?"\)/,'roll: Dung (mg-trim)','one tap = the face table on her hand (Dung, Họa, Sắc, rank, colours, hoa điền); «Tự tay điểm trang» = the mirror game; Để mặt mộc stays'],
  ['Điểm trang before a contest (jmkt → toilColUI)','jmkt.js',/toilColUI\(\)/,null,'roll','same button as jtoil colour screen'],
- ['Chăm thú cưng: cho ăn / tắm / chơi (jpetcare)','jpetcare.js',/function petcGameBox/,/petcGain\(k,BAL\.skip\.raw\/10\)/,'cut: one tap (mg-trim)','the care of a «vừa tay» hand, no game'],
- ['Chăm cây: tưới (jshelf)','jshelf.js',/kshpgame/,/shelfPlantGain\(BAL\.skip\.raw\/10\)/,'cut: one tap (mg-trim)','the care of a «vừa tay» hand, no game'],
+ ['Chăm thú cưng: cho ăn / tắm / chơi (jpetcare)','jpetcare.js',/function petcGameBox/,/id:"kpcquick",n:"Chăm nhanh"/,'roll «Chăm nhanh»','thành: BAL.skip.care of the gain · hỏng: nothing (+ «Giao … chăm»)'],
+ ['Chăm cây: tưới (jshelf)','jshelf.js',/kshpgame/,/id:"kshpquick",n:"Chăm nhanh"/,'roll «Chăm nhanh»','thành: BAL.skip.care of the gain · hỏng: nothing (+ «Giao … chăm»)'],
  ['Hội thi / thi tài (j82 startContest)','j82.js',/function startContest/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap (Khá)'],
  ['Tự luyện / lesson frame default (j82 playArt)','j82.js',/function playArt/,/\$\{kitQuick\(QK\)\}/,'per caller','the caller\'s quick (o.quick), mark capped'],
  ['Tuyển chọn entry round (jentry)','jentry.js',/kg82go/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap (Khá)'],
@@ -41,7 +41,7 @@ for(const [n,f,entry,qm,fam,gives] of G){const s=rd(f);const has=!!s&&entry.test
  if(f==='jmkt.js')q=has&&/toilRollBtn\("toilquick2"\)/.test(rd('jtoil.js'));
  else if(f==='jtds.js')q=has&&/kitQuick\(\{n:"Học nhanh"/.test(rd("jtd.js"));
  else q=has&&qm.test(s);
- const old=!q&&has&&/id="(?:mgskip|kg82skip|kg92skip|tsdskip|sgskip|toilmoc2?)"|Để trời định|Học nhanh/.test(s);
+ const old=!q&&has&&/id="(?:mgskip|kg82skip|kg92skip|tsdskip|sgskip|toilmoc2?)"|Để trời định|Học nhanh|Chăm nhanh/.test(s);
  rows.push([n,f,has?(q?'yes (kit)':old?'own button':'NO'):'not in build',q?fam:'',q?gives:'']);if(has&&!q)fails.push(`no kit quick: ${n} (${f})`)}
 /* 2. discovery: a game frame in a file that never builds the kit quick button */
 const files=fs.readdirSync(B).filter(f=>/^j.*\.js$/.test(f));

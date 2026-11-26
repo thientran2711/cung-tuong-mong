@@ -670,7 +670,7 @@ function kitQuickSub(o){o=o||{};if(o.sub!=null)return o.sub;const w=o.sure?"":wo
 function kitQuickWords(t){return String(t||"").replace(/(?:tính\s+)?(\d+)\/10(\s+phần)?(?:\s*\(\+\d+\))?/g,(m,n)=>{try{return typeof mgWord==="function"?"kết quả "+String(mgWord(+n)).toLowerCase():"kết quả thường"}catch(e){return"kết quả thường"}})}
 /* mg-trim (owner OD 26/11 ~05:10Z, newer than the 24/11 «Bỏ qua» wording): a LEARNING game (lessons, tứ đức, works-as-lesson) names its quick «Học nhanh» — the
    name she asked for; every other game keeps «Bỏ qua». ONE list: KIT_QUICK_NAMES */
-const KIT_QUICK_NAMES=["Học nhanh"];
+const KIT_QUICK_NAMES=["Học nhanh","Chăm nhanh"];/* «Chăm nhanh»: pet care + plant care (owner OD 26/11 ~05:45Z «option chăm nhanh như học nhanh») */
 function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";const nm=KIT_QUICK_NAMES.includes(o.n)?o.n:"Bỏ qua";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>${nm}<small>${sb}</small></button>`}
 function kitQuickRoll(){return roll(od(BAL.skip.od))}
 /* m-fix-1: THE cap of every quick / skip / not-played mark (BAL.skip.cap): a quick result never beats a good own play (owner OD 18/11 ~05:55Z) */

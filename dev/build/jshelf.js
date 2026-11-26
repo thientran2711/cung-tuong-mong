@@ -376,7 +376,10 @@ window.shelfCareOpen=shelfCareOpen;
 function shelfPlantBody(e,msg){const P=BAL.shelf.plant,W=shelfWord(e);const s=shelfSrvBest(S);const t1=whyTime(P.khacSelf);
  return kitStatRow([{cells:[kitStatCell("","Tươi tốt",Math.round(e.pc|0),{bar:Math.round(e.pc|0),title:`Tươi tốt ${Math.round(e.pc|0)}/100`})]}])+
   kitRows([["Mỗi tuần",[`${s?s.name+" chăm hộ":"không ai chăm"}${s?` (${shelfSrvWord(shelfSrvQ(s))})`:""}`],"n"],["Bỏ bê",[`${W.bad} thì phòng kém sang, ai thấy cũng chê; để lâu thì ${W.died}`],"r"]].concat(msg?[["Vừa rồi",[msg],"n"]]:[]))+
-  `<div id="kshpgw"></div><div class="rbtn">${pbtn(`data-shc="water"`,W.act,`tốn: ${P.khacSelf} khắc · thành: Tươi tốt tăng · dừng tay khi vừa đủ (${P.game.rounds} lần)`,t1)}</div>`}
+  `<div id="kshpgw"></div><div class="rbtn">${pbtn(`data-shc="water"`,W.act,`tốn: ${P.khacSelf} khắc · thành: Tươi tốt tăng · dừng tay khi vừa đủ (${P.game.rounds} lần)`,t1)}`+
+  /* «Giao người chăm» (owner OD 26/11 ~05:45Z): the week's servant care (shelfPlantWeek) done NOW, 0 khắc, khéo vụng by her hand (shelfSrvQ); once a tuần and never on top of
+     her own care that tuần (e.pm = wk() → the week tick adds no second servant care): the same care, only earlier — no free gain */
+  (s?pbtn(`data-shc="give"`,`Giao ${s.name} chăm`,`không tốn khắc · thành: Tươi tốt tăng, khéo vụng tùy tay ${s.name} (${shelfSrvWord(shelfSrvQ(s))})`,e.pm===wk()?"tuần này đã chăm":""):"")+`</div>`}
 function shelfPlantOpen(g){const e=shelfOf(S).g[g];if(!shelfIsPlant(e))return;SHPC.g=g;SHPC.game=null;try{if(!document.getElementById("modal").hidden)closeModal()}catch(x){}
  kitModal({kind:"info",title:`Chăm ${shelfNm(e).toLowerCase()}`,sub:shelfGName(shelfSlotG(g)),itemPic:kitItem({src:typeof kitItemSrc==="function"?kitItemSrc(e.k,""):"",name:"",grade:0,size:"lg"}).replace('<span class="kitn"></span>',''),
   html:`<div id="kshp">${shelfPlantBody(e)}</div>`,onClose:()=>{kgTutDrop();SHPC.g=null;SHPC.game=null}})}
@@ -395,16 +398,16 @@ function shelfPlantGain(score){const e=shelfOf(S).g[SHPC.g];if(!e)return;const G
  shelfPlantDraw(msg)}
 /* the open plant screen redrawn (one function: co-op thin F4 replays it on her phone after the host's answer) */
 function shelfPlantDraw(msg){kgTutDrop();const e=shelfOf(S).g[SHPC.g];const box=document.getElementById("kshp");if(box&&e){box.classList.remove("kg-open");box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
-/* "Để trời định" (the quick roll of the care game): one engine */
-function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){shelfPlantGain(BAL.skip.care);return}const msg="Để trời định: chưa thành, không thêm gì.";log(msg);shelfPlantDraw(msg)}
+/* «Chăm nhanh» (owner OD 26/11 ~05:45Z «option chăm nhanh như học nhanh»; was «Để trời định»): the quick roll of the care game, one engine */
+function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){shelfPlantGain(BAL.skip.care);return}const msg="Chăm nhanh: chưa thành, không thêm gì.";log(msg);shelfPlantDraw(msg)}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shc]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.shc;
  if(k==="pet"){try{closeModal()}catch(x){}petcOpen(+b.dataset.i);return}
  if(k==="plant"){shelfPlantOpen(b.dataset.g);return}
- /* mg-trim switch BAL.trim.care (default 0 = the watering board, FOREMAN D ruling 26/11, laws 16/17): 1 = ONE tap, the care of a «vừa tay» hand (BAL.skip.raw of 10), no game */
- if(k==="water"&&BAL.trim.care){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c);shelfPlantGain(BAL.skip.raw/10);return}
+ if(k==="give"){if(SHPC.game||!SHPC.g)return;const e=shelfOf(S).g[SHPC.g],sv=shelfSrvBest(S);if(!e||!sv||e.pm===wk())return;const d=shelfDecay(e);e.pc=cl((e.pc|0)+d*shelfSrvQ(sv),0,100);e.pm=wk();e.pz=0;
+  const msg=`${sv.name} nhận chăm ${shelfNm(e).toLowerCase()} (${shelfSrvWord(shelfSrvQ(sv))}).`;log(msg);shelfPlantDraw(msg);try{save()}catch(x){}return}
  if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
-  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame",kind:"tuoi"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
+  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame",kind:"tuoi"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Chăm nhanh",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
   const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;
   kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",ev:false,timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W,env);
     KG82.hint=()=>{const bt=b.querySelector("[data-shw]");if(!bt)return null;const r=bt.getBoundingClientRect(),lv=SHPC.peek?SHPC.peek():0;return{x:r.left+r.width/2,y:r.top+r.height/2,soon:lv>=G.band[0]-1&&lv<=G.band[1]}};
@@ -413,7 +416,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
   box.querySelector("#kshpgo").addEventListener("click",()=>{if(SHPC.game!=="rules"||SHPC.rdy)return;if(c&&!can(c))return;if(c)spend(c);SHPC.rdy=1;box.classList.remove("kgintro");box.innerHTML="";SHPC.game="water";/* MG11: the ONE result path (mgPlayRes: graded, her hand b learns it, identity offset), then the gain */const env=mgPlayEnv("tuoi",raw=>shelfPlantGain(mgPlayRes("tuoi",raw)/10));SHPC.stop=shelfWaterGame(box,s=>env.end(10*s),W,env)})}},true);
 /* mg-skip-all (KIT §13.6): the quick option of the care game: won = BAL.skip.care of the gain, lost = nothing; the game in the frame stops */
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("#kshpquick");if(!b)return;ev.preventDefault();ev.stopPropagation();if(SHPC.game!=="water"&&SHPC.game!=="rules")return;
- if(!SHPC.rdy){const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
+ if(!SHPC.rdy){const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c)}/* «Chăm nhanh» from the rules screen is a play-through too: same khắc */
  kgTutDrop();try{if(SHPC.stop)SHPC.stop()}catch(x){}SHPC.stop=null;SHPC.game=null;SHPC.rdy=0;const w=document.getElementById("kshpgw");if(w)w.innerHTML="";{const c=document.getElementById("kshp");if(c)c.classList.remove("kg-open")}
  shelfPlantQuick()},true);
 /* Thử tay (calibration, OD 17/11 ~17:10Z (3)): every new minigame registers its entry; the calibration page lists window.MG_CAL */
