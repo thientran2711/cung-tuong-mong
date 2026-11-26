@@ -159,7 +159,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Nói thật lòng",o:od(cx2O(S,"true")),w:{...BAL.ag.cx2.true.w},l:{...BAL.ag.cx2.true.l},x:`biết thêm một điều ngài thích hay không ưa: ${chanceW(BAL.ag.cx2.true.disc)}`,go:()=>{if(roll(BAL.ag.cx2.true.disc))discover()}},
    {n:`Phô tài: ${b.n}`,c:{...BAL.ag.cx2.show.c},o:od(cx2O(S,"show")),w:{sung:BAL.ag.cx2.show.w.sung+b.l,danh:BAL.ag.cx2.show.w.danh},l:{...BAL.ag.cx2.show.l}},
    {n:K.flower?`Dâng ${L.flower}`:"Dâng một cành hoa",c:{bac:-BAL.deck.qf.bac},o:K.flower?100:od(BAL.deck.qf.o),w:{sung:K.flower?BAL.deck.qf.wKnown:BAL.deck.qf.w},l:{}}];
-  if(S.sung>=BAL.ag.cx2.favor.min)A.push({n:"Xin ân điển",o:od(cx2O(S,"favor")),w:{...BAL.ag.cx2.favor.w},l:{...BAL.ag.cx2.favor.l},fail:()=>{if(E.mood===3&&roll(BAL.ag.cx2.favor.angry))punish("làm phiền lúc thánh thượng nổi giận",1)}});
+  if(S.sung>=BAL.ag.cx2.favor.min)A.push({n:"Xin ân điển",o:od(cx2O(S,"favor")),w:{...BAL.ag.cx2.favor.w},l:{...BAL.ag.cx2.favor.l},fail:()=>{if(E.mood===3&&roll(BAL.ag.cx2.favor.angry))punish("làm phiền lúc thánh thượng nổi giận",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */)}});
   if(has("chamchinh"))A.push({n:"Bàn chuyện triều chính",o:od(cx2O(S,"court")),w:{...BAL.ag.cx2.court.w},l:{...BAL.ag.cx2.court.l}});
   return A}
  if(p.kind==="th"){if(false)return[{n:"Xin xăm ở Phật đường",o:100,fix:1,x:"rút hai quẻ, giữ quẻ tốt hơn",run:()=>{reLot(true);return "Ngươi thắp hương, xin một quẻ mới."}},];const t=liveRivals(false).filter(x=>x.ev>0).sort((a,c)=>c.ev-a.ev)[0];return[

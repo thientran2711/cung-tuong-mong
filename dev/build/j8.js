@@ -85,13 +85,19 @@ function oBlock(a){return odA(a,50+a.tamco/5+eyes(a)*3)}
 function oPlant(a,t){return odA(a,40+a.tamco/3+eyes(a)*3-t.maid.loyal/4)}
 function oVP(a){return odA(a,55+a.danh/5)}
 /* punishment by standing: the same for every consort */
-/* months of cấm túc a punishment gives (one source: punish() and every card that names the risk) */
-function punishMonths(){const M=BAL.tw.g.confM;return has("nongnay")?M[1]:has("nhantu")?M[2]:M[0]}
+/* PUNISHMENT BY WEIGHT (review/home-way, owner OD 26/11 ~04:25Z): sev 0 = nhẹ, 1 = vừa (default), 2 = nặng; numbers BAL.punW (jtwoway).
+   punTemper = the column of the Emperor's temper: 0 thường, 1 nóng nảy, 2 nhân từ */
+function punTemper(){return has("nongnay")?1:has("nhantu")?2:0}
+/* months of cấm túc a punishment of weight sev gives (one source: punish() and every card that names the risk); nhẹ = 0 */
+function punishMonths(sev){if(sev==null)sev=1;const W=BAL.punW;return sev<=0?0:sev>=2?W.heavy.m[punTemper()]:W.mid.m[punTemper()]}
+/* months of khất bổng a light punishment gives (0 = a warning only) */
+function punishCut(){return BAL.punW.lite.cut[punTemper()]}
 /* the chance a heavy punishment also demotes (the roll in punish + the warning text aaPunishTxt read this ONE function) */
-function punishDemoP(){return has("nongnay")?100:has("nhantu")?25:50}
-function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}
+function punishDemoP(){return BAL.punW.heavy.demo[punTemper()]}
+function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}if(sev==null)sev=1;
+  if(sev<=0){const c=punishCut();if(c>0){p.cutPay=Math.max(p.cutPay||0,c);p.cutBy=""}log(`<span class="r">${NMc(p)} bị ${c?`khất bổng ${c} tháng`:"cảnh cáo"} vì ${why}.</span>`);return}
   if(sev>=2&&rkOf(p)>0&&roll(punishDemoP())){seatPut(p,seatDown(p,rkOf(p)-1));log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);return}
-  const m=punishMonths();p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
+  const m=punishMonths(sev);p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
   if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});if(rkOf(p)>0)seatPut(p,seatDown(p,rkOf(p)-1));p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);return}
   if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);return die(why)}
@@ -176,7 +182,7 @@ function stealNight(a,t,mode){ap(a,stealCost(mode));const o=oSteal(a,mode);
 function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)} theo ${n} chứng cứ. `;evA(q,p,BAL.evWipe);relAdd(q,p,BAL.eff.j8.judge);punish(p,"bị Hoàng hậu xử tội",n>=3?2:1);return r}
 function vpItems(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e.w&&IT[e.k]&&itm(e.k).rk>r);if(p.dress&&p.dress.until>S.turn&&itm(p.dress.k).rk>r)L.push({k:p.dress.k,dress:1});return L}
 function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=>itm(e.k).n).join(", ");
- if(roll(oVP(a))){ilFilter(t,e=>!(e.w&&(IT[e.k]||{}).rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",1);relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
+ if(roll(oVP(a))){ilFilter(t,e=>!(e.w&&(IT[e.k]||{}).rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */);relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
  ap(a,{danh:BAL.eff.j8.vpFailDanh});relAdd(a,t,BAL.eff.j8.vpAccuse_2);return `${NMc(a)} tố ${NM(t)} vượt phẩm, ${judgeName(t)} bỏ qua. `}
 
 /* ================= ITEMS ================= */
