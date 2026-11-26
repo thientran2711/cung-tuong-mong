@@ -39,3 +39,10 @@ Next: (1) KK45 result-card sha → merge + result video (Fold + iPad, real taps,
 - TABLE sent to MAIN 164: shop tray 11 → 7 (BAL.shopTray 6 + Thôi, cap in the last restock wrapper jshelf) · «Sai … đi dò la» 12–13 → kind ring · evpick/itarget/plantsv already ring · selxD 8 = robot view only (player 6) · gift/plant item grids 19 = not cards · pmLad 9 = OPEN (MAIN call: rec info panel) · rest ≤6. Not reached: jerr/jptime order lists, j71c stances, jky (need a mid/late save).
 - OPEN QUESTION to MAIN 164: does «no paging» cover the thẻ gỗ talk stage (KIT_STAGE.sayPer = 3 per page)?
 HANDOVER next: MAIN's answers (pmLad, thẻ gỗ paging) → implement; count jerr/jptime/j71c/jky from a mid-game save; KK46 re-review; then land path per MAIN.
+
+## UPDATE 22:25Z (MAIN 164 rulings 22:04Z) — head 489cd579
+- thẻ gỗ no paging: talk/pick stage = one group (sayPer gone), KIT_PLAQUE.max 7, speech band = plaque obstacle (7 fit on Fold above it). KIT.md §102.2 in place.
+- pmLad = one kit info panel (no option cards).
+- Honest-limit lists counted from source: event/road/kỳ ngộ data ≤7; j71c 4 stances; orders expire after 2 khắc (no cap needed).
+- Card back marks: inherits WORDING-MARKS (markTxt in kaBody, review/wording-marks 51a0575a) — verify after it lands.
+- KK47 (session_01Rc5AsHmtzuWMnb27oL1LC5) asked to re-review 489cd579; then RV-163.
