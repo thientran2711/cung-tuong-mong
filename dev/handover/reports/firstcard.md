@@ -112,7 +112,7 @@ Note FOR MAIN: cn = «Cung nữ được sủng hạnh» (j1 k:"cn", ex-tea maid
 
 ## (c) non-lethal hidden-roll family (every kcO option whose go rolls a chance the card cannot see)
 Each option now reads ONE function for its roll and its odds word: `((rp)=>kitRiskOpt(kcO(…roll(rp())…),()=>P))(()=>EXPR)` (P = rp(), or 100 − rp() where the roll is the BAD branch: «Dùng thử», «Từ chối, giữ kín» ×2, «Đưa bạc», «Về kể với cha»; a person-guard `x&&roll(…)` → `x?rp():0`; the silver pin shows the detection chance, never the hidden «real»). `kitRiskOpt` accepts p as a function (a missing person → no word, never a crash). No loss words added (not life-ending): the meter alone changes.
-Scan `python3 dev/test/firstcard-scan.py --fail`: 39 hidden-roll options — LIVE 37 sure «Rất vững» (2 jkc3 kc3Ev carry own odds… 1 here) → AFTER declared 38 · own odds 1 · NOT TOLD 0. Life-ending table unchanged (51, 0 not told). Runtime (family.js): Thưa: con đợi kỳ tuyển tú «Có cơ», Thức đêm thêu «Vững», Mua bức thêu «Tùy duyên», phấn ×3 «Tùy duyên», Thức đêm sắc lá «Tùy duyên», Mời thầy cúng «Hiểm», Nhận lời cho êm «Tùy duyên», Quỳ xin cha «Có cơ»; options with no roll keep «Rất vững» (certain).
+Scan `python3 dev/test/firstcard-scan.py --fail`: 39 hidden-roll options — LIVE 38 sure «Rất vững» + 1 own odds (jkc3 kc3Ev) → AFTER declared 38 · own odds 1 · NOT TOLD 0. Life-ending table unchanged (51, 0 not told). Runtime (family.js): Thưa: con đợi kỳ tuyển tú «Có cơ», Thức đêm thêu «Vững», Mua bức thêu «Tùy duyên», phấn ×3 «Tùy duyên», Thức đêm sắc lá «Tùy duyên», Mời thầy cúng «Hiểm», Nhận lời cho êm «Tùy duyên», Quỳ xin cha «Có cơ»; options with no roll keep «Rất vững» (certain).
 
 | file:line | option | LIVE meter | after |
 |---|---|---|---|
