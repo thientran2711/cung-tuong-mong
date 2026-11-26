@@ -64,3 +64,8 @@ Shot k20-ipad-tinchonguoisai-repeat.jpg: «Tin chờ người sai đi» (jerr er
 - Every speaker dialog: scan.js (4) checks every pushModal({who: X …}) body for `${X.name}` → 2 hits fixed (jact / jagharm gossip «ngươi nghe nàng ta to nhỏ…»); main = FAIL. shots.js reads the «Tin chờ người sai đi» body and exits 1 when the speaker's name is in it (after: nameInBody false on Fold + iPad).
 - Shots: tb2511b-{before,after}-{fold,ipad}.jpg (Tin báo), tb2511b-{before,after}-{fold,ipad}-tin.jpg (Tin chờ người sai đi), tb2511b-{before,after}-ipad.webm.
 - jstagehere: PLACE-RULES owns the file (review/place-rules, adds an entry line); I sent them my words for all 3 lines (no «=», «may rủi: X» at the end). On merge their file wins and carries my wording; my jstagehere hunk can be dropped.
+
+## Round 4 — merged E90r PASS 8908b077 (review/news-runner-lines-r1) per MAIN 149
+- 8908b077 added 1 commit over 2608109d (ptRepRows rows composer + result as kit chip; invite runner no doubled line). Merged; conflicts in jptime/jerr resolved by keeping E90r's ptRepRows and adding the speaker voice INSIDE it: ptRepRows(rep,nm,person,shown) → ptVoice on the rows when the person is the one shown. My ptRepVoice removed. index.html/sw.js/assets.json rebuilt.
+- Gates: news-runner-lines.js 0 FAIL · tinbao-words/scan.js PASS · shots.js nameInBody=false Fold+iPad («Nô tỳ nhờ quen người ở Chung Tú cung mà nghe ngóng được chuyện về Tần Thôi Uyển Dung. / Nàng ta thích tác phẩm Thi. [Việc thành chip]»).
+- Shots: tb2511d-{fold,ipad}.jpg, tb2511d-{fold,ipad}-tin.jpg, tb2511d-ipad.webm.

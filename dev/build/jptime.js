@@ -71,7 +71,7 @@ function ptRepFacts(rep,nm){const r=rep||{};nm=String(nm||"");const cl=x=>String
  return{h:dot(h),L:L.map(dot),k:r.ok===true?"Việc thành.":r.ok===false?"Việc hỏng.":""}}
 /* tinbao-words (owner OD 25/11 ~23:54Z, verbatim: "Cái gì mà câu từ nó cứ lặp tới lặp lui không hiểu nổi luôn."): in a dialog that SHOWS the speaker
    (figure + name plate: «Tin chờ người sai đi», servant reports) the body never names her again — her report is said in her own voice («Nô tỳ …» /
-   «Nô tài …»), «ta / ngươi» of the narration become «chủ tử». ptVoice(lines, person) → lines; on top of the E90 composer ptRepFacts (jptime ptPanel + jerr errPanel). */
+   «Nô tài …»), «ta / ngươi» of the narration become «chủ tử». ptVoice(lines, person) → lines; inside the E90r rows composer ptRepRows (jptime ptPanel + jerr errPanel). */
 function ptVoice(L,m){try{if(!m||!m.name)return L;const nm=String(m.name),I=(m.role==="eunuch"||m.role==="eun"||m.male)?"Nô tài":"Nô tỳ";const esc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  const tit="(?:(?:Cung nữ|Thái giám|Tiểu thái giám|Chưởng sự cô cô|Ma ma|Nữ quan)[\\p{L}\\p{M} ]*? )?";
  return (L||[]).map(l=>{let s=String(l==null?"":l);
@@ -79,9 +79,14 @@ function ptVoice(L,m){try{if(!m||!m.name)return L;const nm=String(m.name),I=(m.r
   s=s.replace(new RegExp(`${tit}${esc(nm)}(?![\\p{L}\\p{M}])`,"gu"),I.toLowerCase());
   s=s.replace(/(?<![\p{L}\p{M}])ta chưa quen/gu,"chủ tử chưa quen").replace(/(?<![\p{L}\p{M}])(với|của|về|cho) (ta|ngươi)(?![\p{L}\p{M}])/gu,"$1 chủ tử").replace(/(?<![\p{L}\p{M}])ngươi(?![\p{L}\p{M}])/gu,"chủ tử");
   return s.replace(/\s+/g," ").trim()}).filter(Boolean)}catch(e){return L}}
-/* the panel lines of one report: the E90 composer; when its person is the speaker shown, the lines in her voice and no head (she is the plate) */
-function ptRepVoice(rep,nm,p,shown){const f=ptRepFacts(rep,nm);if(!shown||!p)return f;const L=ptVoice([f.h].concat(f.L).filter(Boolean),p);return{h:L[0]||"",L:L.slice(1),k:f.k}}
 window.ptVoice=ptVoice;
+/* E90r: the rows of one report for kitFacts — each sentence its own row, gains row under the head, the result as the kit status chip (✓ / ✗, kitChip "ok"/"no") on the LAST sentence's row (never an orphan «Việc thành.» row that kitFacts files under a wrong group) */
+function ptRepRows(rep,nm,p,shown){const r=rep||{},f=ptRepFacts(r,nm);let T=[];if(f.h)T.push(f.h);f.L.forEach(l=>{(typeof kpSentences==="function"?kpSentences(l):[l]).forEach(x=>T.push(x))});
+ /* tinbao-words: the speaker shown (subject) → her report in her own voice, her name never in the body */if(shown&&p)T=ptVoice(T,p);
+ const R=T.map(t=>({text:t}));
+ if(f.k){if(R.length&&typeof kitChip==="function")R[R.length-1].chips=[kitChip(f.k.replace(/\.$/,""),r.ok===true?"ok":"no")];else R.push({text:f.k})}
+ if((r.d||[]).length&&typeof kitChips==="function")R.splice(f.h?1:0,0,{text:"Được · mất: "+kitChips(r.d),kind:"me"});
+ return R}
 function ptRepText(rep,nm){const f=ptRepFacts(rep,nm);return[f.h].concat(f.L,[f.k]).filter(Boolean).join(" ")}
 function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&&a.a.run?PT.run[a.a.run]:PT.run[a.kind];/* a.run: the button's own runner when it shares a BAL row (kind) with others */if(!fn){a.rep={t:a.lbl||"Đã về",ok:null,L:[`${a.nm} đã về.`],d:[]};return}
  const me=a.by==="me";const b=me&&typeof rsnap==="function"?rsnap():null;const s0=S.logSeq||0;let r=null;
@@ -115,8 +120,7 @@ function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
 function ptErrOwn(){try{return typeof errIcon==="function"||!!(window.ERR&&typeof window.ERR==="object")||(!ptIconSet&&typeof kitStatusIcon!=="undefined"&&typeof kitStatusIcon.has==="function"&&kitStatusIcon.has("tin"))}catch(e){return false}}
 function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}${o.title&&!/^Lệnh của /.test(o.title)?": "+o.title:""}, trả lời trước ${ptWhen(o.due)}; quá hạn coi như từ chối.`);
- for(const a of N){const r=a.rep||{},pp=ptPerson(a.a||{});if(!subj)subj=pp;const f=ptRepVoice(r,a.nm,pp,!!pp&&pp===subj);if(f.h)facts.push(f.h);
-  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});f.L.forEach(l=>facts.push(l));if(f.k)facts.push(f.k);a.read=1}
+ for(const a of N){const r=a.rep||{},pp=ptPerson(a.a||{});if(!subj)subj=pp;ptRepRows(r,a.nm,pp,!!pp&&pp===subj).forEach(x=>facts.push(x));a.read=1}
  for(const a of W){if(!subj)subj=ptPerson(a.a||{});facts.push(`${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  if(!subj&&OQ.length)try{subj=typeof isSrv==="function"&&isSrv()?srvM():null}catch(e){}
@@ -150,7 +154,7 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
  if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){ptTick();ptLedger()}}catch(e){ptErr("buoi",e)}return r}}
  if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
 }catch(e){ptErr("wire",e)}})();
-window.PTIME={repFacts:ptRepFacts,repText:ptRepText,repVoice:ptRepVoice,on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
+window.PTIME={repRows:ptRepRows,repFacts:ptRepFacts,repText:ptRepText,on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
  /* receiver side (OD 18/11 ~21:15Z): orders to her waiting as notices — for the ONE «tin» panel (MAIN errand-scene r2 lists them; no second panel):
     orders() = [{id, pid, byNm, title, due}], ordWhen(o) = "trả lời trước …", answer(id) = open its answer card (4 answers; Việc chủ sai 3) */
  orders:()=>(S&&Array.isArray(S.ordQ)?S.ordQ.map(o=>({id:o.id,pid:o.pid,byNm:o.byNm,title:o.title,due:o.due})):[]),ordWhen:o=>`trả lời trước ${ptWhen(o.due)}`,
@@ -195,9 +199,10 @@ ptReg("scout",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng�
 /* ---- 4. Mời đến cung ta (j21): the messenger goes, the answer (and the guest) comes at the due khắc ---- */
 function ptInvPend(id){return ptZ().some(a=>a.kind==="invite"&&!a.back&&a.a&&a.a.v===id)}
 ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Người được sai";if(!v||!v.alive||v.out||v.confined){log(`${nm} trở về: ${v?v.name:"nàng"} không thể nhận lời lúc này.`);return{ok:null}}
+ const q0=S.logSeq||0;/* E90r: the guest's own answer (rcvInviteGo logs it) is the line; the runner adds its own only when none was logged */
  /* two-way: the guest answers with the SAME 4 answers as every receiver (receiver-choice jrcv rcvInviteGo, guarded) */if(typeof rcvInviteGo==="function"?rcvInviteGo(S,v):roll(a.a.o)){try{S.where[v.id]="home";seeLoc(v,"home");const R=S.roster;if(R&&R.P&&R.P["v"+v.id]&&typeof j95kh==="function"){for(let i=j95kh();i<R.P["v"+v.id].length;i++)R.P["v"+v.id][i]=[S.out?"lc":"home","visit","me","nhận lời mời sang chơi"];iwBind("v"+v.id,j95kh());if(typeof j95sync==="function")j95sync()}}catch(e){ptErr("inviteLand",e)}
-  log(`${v.name} nhận lời, sang cung ngươi.`);return{ok:true,t:`${nm} mời ${v.name} trở về`}}
- relAdd(S,v,BAL.eff.j21.top);log(`${v.name} từ chối lời mời.`);return{ok:false,t:`${nm} mời ${v.name} trở về`}});
+  if((S.logSeq||0)===q0)log(`${v.name} nhận lời, sang cung ngươi.`);return{ok:true,t:`${nm} mời ${v.name} trở về`}}
+ relAdd(S,v,BAL.eff.j21.top);if((S.logSeq||0)===q0)log(`${v.name} từ chối lời mời.`);return{ok:false,t:`${nm} mời ${v.name} trở về`}});
 /* ---- 4b. HOST-ABSENT RULE (owner OD L1976, 19/11 ~22:00Z) — every invitation, every direction (law 1):
    her invite (j21 / runner above), an NPC host inviting HER (AG cx3:invite2 → rcvAsk), NPC ↔ NPC (p3InvLand). ONE entry: rcvInvAt(h,g), the place
    where every accepted guest is put at the host's place (jrcv). If the host is not there when the guest arrives:

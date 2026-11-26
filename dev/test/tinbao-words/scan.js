@@ -31,12 +31,12 @@ const J=fs.readFileSync(path.join(D,'jnotice.js'),'utf8');const a=J.indexOf('fun
 const has=(f,s,why)=>{const t=fs.readFileSync(path.join(D,f),'utf8');if(!t.includes(s))bad(`${f}: ${why} (missing «${s.slice(0,50)}»)`)};
 const no=(f,s,why)=>{const t=fs.readFileSync(path.join(D,f),'utf8');if(t.includes(s))bad(`${f}: ${why} (still «${s.slice(0,50)}»)`)};
 no('jstagehere.js','Ở lại = như lẻn vào','closing alert «=»');has('jstagehere.js','chẳng khác gì lẻn vào','closing alert sentence');
-no('jptime.js','" · thành":','errand report glue');has('jptime.js','function ptRepFacts(','errand report one sentence (E90 composer)');
+no('jptime.js','" · thành":','errand report glue');has('jptime.js','function ptRepFacts(','errand report one sentence (E90 composer)');has('jptime.js','function ptRepRows(','E90r rows composer');
 no('jwhy.js','(chưa quen)`','spyWho stacked paren');no('jwhy.js','nghe ngóng được về ${spyWho(v)} (${why})','spyNews chain');
 no('j78.js','có nết ${T[0]}','raw trait label');no('jagent.js','`${w} · ${o}`','agWhy dot glue');no('jagent.js','nghe lén: nàng ${p.act} — ${p.why}','nghe lén note chain');no('jagent.js','vì ${p.why}','«vì <filler>» reason');has('jagent.js','function agWhySay(','reason clause helper');
 has('jopic.js','if(free){ton.remove();gain.remove()','free choice card without «không» rows');has('jaudit.js','ONE title per person per block','one title per block');
 /* (4) 2nd owner case (OD ~23:54Z): a dialog that shows the speaker (who: X / subject) never names X in its body; errand panels speak in her voice */
-has('jptime.js','function ptVoice(','servant voice helper');has('jerr.js','ptRepFx(r,t.nm,p,!!p&&p===subj)','errPanel speaker voice');has('jptime.js','ptRepVoice(r,a.nm,pp,','ptPanel speaker voice');
+has('jptime.js','function ptVoice(','servant voice helper');has('jerr.js','ptRepFx(r,t.nm,p,!!p&&p===subj)','errPanel speaker voice');has('jptime.js','ptRepRows(r,a.nm,pp,','ptPanel speaker voice');has('jptime.js','if(shown&&p)T=ptVoice(T,p)','rows composer speaker voice');
 for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f)&&f!=='all.js')){const t=fs.readFileSync(path.join(D,f),'utf8');const re=/pushModal\(\{/g;let m;
  while((m=re.exec(t))){const c=t.slice(m.index,m.index+900);const w=/who:\s*(?:pv\()?([A-Za-z_$][\w$.]*)/.exec(c);if(!w)continue;const v=w[1].replace(/\.$/,'');
   if(c.includes('${'+v+'.name}')){rows.push([f+':'+t.slice(0,m.index).split('\n').length,'pushModal who','body names the shown speaker '+v,'speakerName']);bad(`${f}: dialog shows ${v} (who) and names ${v}.name in its body`)}}}
