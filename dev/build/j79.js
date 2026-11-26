@@ -1342,6 +1342,38 @@ function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><
    o.info (or the old o.stepsAttr) = the attribute that opens it (e.g. data-v85tab="cam"). The «Bậc l/max» steps are never a hidden button. */
 function kitSkillName(o){const a=o.info||o.stepsAttr||"";const n=o.name||"";if(!a||!n)return `<b>${n}</b>`;
  return `<button type="button" class="kskn" ${a} aria-label="Xem luật ${kpPlain?kpPlain(n):n}"><i class="kskni" aria-hidden="true">ⓘ</i><b>${n}</b></button>`}
+/* kitHitGrow(root): see the CSS note «tainghe-info r4». Run debounced on DOM changes + resize. */
+function kitHitGrow(root){try{const MIN=44,T=".kgl,.kskn,button.ladi,.khap:not([role=img])";
+ const vis=r=>r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth;
+ const tg=[...(root||document).querySelectorAll(T)].filter(e=>e.getClientRects().length===1&&vis(e.getBoundingClientRect()));if(!tg.length)return;
+ const CT=[...document.querySelectorAll("button,a[href],[role=button],[onclick],input,select,textarea,.pc,.tok,"+T)].map(e=>({e,r:e.getBoundingClientRect()})).filter(o=>vis(o.r));
+ for(const e of tg){const r=e.getBoundingClientRect();const ex=Math.max(0,(MIN-r.width)/2),ey=Math.max(0,(MIN-r.height)/2);let t=ey,b=ey,l=ex,rr=ex;
+  /* a box it may not leave: the nearest sticky / fixed bar or clip box */
+  let lim={l:-1e9,t:-1e9,r:1e9,b:1e9};for(let a=e.parentElement;a&&a!==document.body;a=a.parentElement){const cs=getComputedStyle(a);if(/sticky|fixed/.test(cs.position)||/(hidden|clip|auto|scroll)/.test(cs.overflowX+cs.overflowY)){const q=a.getBoundingClientRect();lim={l:Math.max(lim.l,q.left),t:Math.max(lim.t,q.top),r:Math.min(lim.r,q.right),b:Math.min(lim.b,q.bottom)};if(/sticky|fixed/.test(cs.position))break}}
+  /* and the largest box around it that holds NO other tap control (its row, its card head …): growing past it could reach a control later (scroll, re-draw) */
+  {const CSEL="button,a[href],[role=button],[onclick],input,select,textarea,.pc,.tok,"+T;let box=null;
+   for(let a=e.parentElement;a&&a!==document.body&&a!==document.documentElement;a=a.parentElement){if(a.matches(CSEL)){box=box||{l:r.left,t:r.top,r:r.right,b:r.bottom};break}
+    if([...a.querySelectorAll(CSEL)].some(c=>c!==e&&!e.contains(c)&&c.getClientRects().length))break;const q=a.getBoundingClientRect();box={l:q.left,t:q.top,r:q.right,b:q.bottom}}
+   if(box)lim={l:Math.max(lim.l,box.l),t:Math.max(lim.t,box.t),r:Math.min(lim.r,box.r),b:Math.min(lim.b,box.b)};else lim={l:r.left,t:r.top,r:r.right,b:r.bottom}}
+  t=Math.max(0,Math.min(t,r.top-lim.t));b=Math.max(0,Math.min(b,lim.b-r.bottom));l=Math.max(0,Math.min(l,r.left-lim.l));rr=Math.max(0,Math.min(rr,lim.r-r.right));
+  let SB=null;for(let a=e.parentElement;a&&a!==document.body;a=a.parentElement)if(/sticky|fixed/.test(getComputedStyle(a).position)){SB=a;break}/* in a sticky / fixed bar: content passing under the bar is not a neighbour (the bar covers it); growth stays inside the bar (lim) */
+  for(const o of CT){if(o.e===e||e.contains(o.e))continue;if(SB&&!SB.contains(o.e)&&!o.e.contains(SB))continue;const q=o.r;
+   if(o.e.contains(e)){/* inside a control (a «!» on a card, «ⓘ» in an act button): its whole area is that control */t=b=l=rr=0;break}
+   const hx=q.right>r.left-l&&q.left<r.right+rr,vy=q.bottom>r.top-t&&q.top<r.bottom+b;
+   if(hx&&q.bottom<=r.top+.5)t=Math.min(t,Math.max(0,r.top-q.bottom-1));if(hx&&q.top>=r.bottom-.5)b=Math.min(b,Math.max(0,q.top-r.bottom-1));
+   if(vy&&q.right<=r.left+.5)l=Math.min(l,Math.max(0,r.left-q.right-1));if(vy&&q.left>=r.right-.5)rr=Math.min(rr,Math.max(0,q.left-r.right-1));
+   if(!(q.right<=r.left+.5||q.left>=r.right-.5||q.bottom<=r.top+.5||q.top>=r.bottom-.5)){t=b=l=rr=0;break}}
+  /* corners: a control diagonal to it that the grown box would reach → pull back the smaller side */
+  for(const o of CT){if(o.e===e||e.contains(o.e)||o.e.contains(e))continue;if(SB&&!SB.contains(o.e))continue;const q=o.r;const g={l:r.left-l,t:r.top-t,r:r.right+rr,b:r.bottom+b};
+   if(q.right<=g.l||q.left>=g.r||q.bottom<=g.t||q.top>=g.b)continue;
+   const dv=q.bottom<=r.top+.5?["t",r.top-q.bottom]:q.top>=r.bottom-.5?["b",q.top-r.bottom]:null,dh=q.right<=r.left+.5?["l",r.left-q.right]:q.left>=r.right-.5?["r",q.left-r.right]:null;
+   const cut=dv&&dh?(dv[1]>=dh[1]?dv:dh):dv||dh;if(!cut)continue;const v=Math.max(0,cut[1]-1);/* r5 (KK37): 1 px gap to a neighbour — exact-edge clamps touched it after sub-pixel rounding (LC19 hit-overlap: header «!» took 1 point of the mood bar) */if(cut[0]==="t")t=Math.min(t,v);else if(cut[0]==="b")b=Math.min(b,v);else if(cut[0]==="l")l=Math.min(l,v);else rr=Math.min(rr,v)}
+  const f=x=>Math.max(0,Math.floor(x))+"px";const sig=[t,b,l,rr].map(f).join(" ");/* no room at all → the part stays exactly as before (static, no hit layer) */if(sig==="0px 0px 0px 0px"){if(e.dataset.khg!=null){delete e.dataset.khg;["--kht","--khb","--khl","--khr"].forEach(k=>e.style.removeProperty(k))}continue}if(e.dataset.khg===sig)continue;e.dataset.khg=sig;
+  e.style.setProperty("--kht",f(t));e.style.setProperty("--khb",f(b));e.style.setProperty("--khl",f(l));e.style.setProperty("--khr",f(rr))}}catch(x){console.error("kitHitGrow",x)}}
+window.kitHitGrow=kitHitGrow;
+(function(){let tm=0;/* throttle, not debounce: a steady stream of DOM changes (timers, chips) must not starve it */const go=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;kitHitGrow(document)},120)};
+ try{new MutationObserver(m=>{const only=x=>x.nodeType===1&&x.classList&&x.classList.contains("kgnb");/* kitInfoOneLine re-draws its row «!» every pass: that alone moves nothing */if(m.some(x=>x.attributeName==="hidden"||(x.type==="childList"&&![...x.addedNodes,...x.removedNodes].every(only))))go()}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}
+ addEventListener("resize",go);addEventListener("scroll",go,true);addEventListener("load",go)})();
 function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
@@ -1383,6 +1415,13 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .kskdo{font-size:.82rem;color:var(--dim);line-height:1.35}.kskx{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.8rem}
 .kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}
 .kskb{height:8px;border-radius:5px;background:#eadfca;overflow:hidden}.kskb u{display:block;height:100%;background:linear-gradient(90deg,#c9a24a,#8f5f0c)}
+/* tainghe-info r4 (LC18 tap-size note + LC19/MAIN 150 overlap FAIL of r3): every kit info target (.kgl dotted word / «ⓘ» link, .khap «!», .kskn skill
+   name, .ladi link) keeps its look; its HIT area grows toward 44 x 44 px ONLY INTO EMPTY SPACE: kitHitGrow (JS, below) measures the free room on each side
+   (never over another tap control, never out of its sticky bar / clip box / the control it sits in) and sets --kht/--khb/--khl/--khr on an invisible ::after.
+   :where() = no specificity, so a part already positioned keeps its position. Tests: info-tap-audit.js (hit ≥ 44 or stops at a neighbour/clip),
+   hit-overlap-lc19.js (0 overlap, 0 steal). */
+:where(.kgl,.kskn,button.ladi,.khap)[data-khg]{position:relative}html.khg-off :where(.kgl,.kskn,button.ladi,.khap)[data-khg]::after{display:none}/* test hook: hit layers off (hit-overlap compares with/without) */
+:where(.kgl,.kskn,button.ladi,.khap)[data-khg]::after{content:"";position:absolute;top:calc(-1*var(--kht,0px));bottom:calc(-1*var(--khb,0px));left:calc(-1*var(--khl,0px));right:calc(-1*var(--khr,0px));background:transparent;z-index:1}
 .kskn{display:inline-flex;align-items:baseline;gap:.3em;border:0;background:none;padding:2px 0;margin:0;font:inherit;color:var(--gold);cursor:pointer;text-align:left;min-height:32px}.kskn>b{border-bottom:1px dotted currentColor}.kskni{font-style:normal;font-size:.9rem;font-weight:600}
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}

@@ -942,7 +942,11 @@ function kitCatchOn(card,close){let c=document.getElementById("kxcatch");if(!c){
   const shut=()=>{if(!c.__close||c.__closing)return;c.__closing=1;try{c.__close()}catch(x){}setTimeout(()=>{c.hidden=true;c.__closing=0;c.__close=null},400)};
   ["pointerdown","touchstart","mousedown","mouseup","contextmenu","click","dblclick"].forEach(t=>c.addEventListener(t,eat,{passive:false}));
   c.addEventListener("pointerup",e=>{eat(e);shut()},{passive:false});c.addEventListener("touchend",e=>{eat(e);shut()},{passive:false})}
- const z=parseInt(getComputedStyle(card).zIndex)||45;c.style.zIndex=String(z-1);c.__close=close;c.__closing=0;c.hidden=false}
+ const z=parseInt(getComputedStyle(card).zIndex)||45;c.style.zIndex=String(z-1);c.__close=close;c.__closing=0;c.hidden=false;
+ /* r5 (KK37, info-tap-audit iPad «Hành sự» tab DEAD under #kxcatch): the catcher lives only while ITS card is on screen — a card removed / hidden by any other
+    path (a re-draw, another layer) takes the catcher with it at once, so no tap is ever spent on closing nothing */
+ c.__card=card;if(c.__mo)c.__mo.disconnect();const gone=()=>!card.isConnected||card.hidden||getComputedStyle(card).display==="none"||getComputedStyle(card).visibility==="hidden";
+ c.__mo=new MutationObserver(()=>{if(c.hidden){c.__mo.disconnect();return}if(c.__card===card&&!c.__closing&&gone()){c.__mo.disconnect();c.hidden=true;c.__close=null}});c.__mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["hidden","class","style"]})}
 function kitCatchOff(){const c=document.getElementById("kxcatch");if(c&&!c.__closing){c.hidden=true;c.__close=null}}
 window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
 (function(){let obs=null;const watch=t=>{if(!t||t.__kxw)return;t.__kxw=1;
@@ -1195,13 +1199,20 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
    kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
 function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv, .pc .pcb > .kb.kpkb > .kr > .krv").forEach(v=>{/* K-INFO-TAP (law 11): the kit-rows info block of a person card body (Hoàng tự / Quý tộc cards: Tuổi · Thứ bậc · Tước vị …) is the same info block */
   if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
-  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
-  if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
+  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.style.display="none";
+  /* tainghe-info r4: measure with the old «!» hidden and KEEP it when it is still needed (it used to be removed and re-made on every pass: ~15 new «!» a second,
+     a tap could land on one that was just thrown away) */
+  /* r5 (KK37, LC19 hit-overlap «Trong cung: Chương 1…» × «!»): the cut text lives in its own block .kone-t that ends BEFORE the «!» lane — overflow:hidden on the row
+     clips at its padding edge, so the hidden rest of the words used to lie under the «!» and take its taps. Made once and kept (no re-make churn); measured on it. */
+  let t=v.querySelector(":scope > .kone-t");if(!t&&v.scrollWidth>v.clientWidth+1){t=document.createElement("span");t.className="kone-t";[...v.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kgnb")))t.appendChild(n)});v.insertBefore(t,v.firstChild)}
+  if(t?t.scrollWidth>t.clientWidth+1:v.scrollWidth>v.clientWidth+1){v.classList.add("kone");if(old){old.style.display="";return}const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}
+  else if(old)old.remove()})}catch(e){console.error("kitInfoOneLine",e)}}
 window.kitInfoOneLine=kitInfoOneLine;
 (function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
 .pc .pcf .kr>.krv,.pc .pcb>.kb.kpkb>.kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .pc .pcf .kr>.krv>*,.pc .pcb>.kb.kpkb>.kr>.krv>*{white-space:nowrap!important}
 .pc .pcf .kr>.krv.kone,.pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:26px}
+.pc .pcf .kr>.krv>.kone-t,.pc .pcb>.kb.kpkb>.kr>.krv>.kone-t{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pc .pcf .kr>.krv>.kgnb,.pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
 /* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
 .pcpop .pc .pcf .kr>.krv.kone,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:72px}
