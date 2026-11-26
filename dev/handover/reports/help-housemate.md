@@ -47,3 +47,30 @@ Script dev/test/help-housemate-video.js. Staging (not the feature): the opening 
 - Law 16: the jaudit loan/tell copy was a private second rule (OD 08:45Z «no silent random target» named the consort she'd tell about); with helpAsk the «kể chuyện» branch still exists inside slot 0 (evGuilty of a third person, named in the result) — the same rule both ways.
 - Law 2/3: her card choices are the existing rcvHelpOpts (gain + cost each); unchanged.
 - Pre-existing, not touched: rcvHelpOpts rows print «Tốn: không» on the NPC-asks-her card (kit wording, all receiver cards).
+
+## 6. REVIEW (opus BIG, session_01D3E3NbbsVnx5jrHuceQUuf) — FAIL 5ac9c150
+START_CTX ≈4 % (own estimate; used_tokens reads 0) · depth 7 (limit 8).
+PRIORITY #1 CHECK: OD law 1 (OD:L33, L1534) + OD:L286 (08:45Z: no player auto-random target; NPCs pick by real motive) + MAIN 159 «FOR D: help-housemate = YES» | main jrcv.js:32/58/60 rcvHelpOpts·helpAsk·PEND.rcvHelp, jagacts3.js:321, jk2b.js:300 (kit hint «chẳng được gì») | review/* none | claims D-HELP-HOUSEMATE (Foreman D).
+
+| check | result |
+|---|---|
+| build: assemble + build_site on 5ac9c150 | index.html identical except CTM_BI ✔ |
+| help-housemate.test.js branch / LIVE aa37de21 | ALL PASS / 5 FAIL (as reported) ✔ |
+| receiver-choice.test.js | ALL PASS ✔ |
+| coop-e2e (live Worker, co-op first) | 143/143 ✔ (incl. single-player + old save load) |
+| one-core-guard / -text / -bind | PASS / PASS / PASS ✔ |
+| law 4 dead keys: BAL.audit.loan, BAL.eff.jaudit.run/evRun | no reader left in dev/build, dev/test, dev/measure ✔ |
+| law 1 + law 11 family scan (every «Nhờ giúp đỡ» site) | j9 card (rival / Cùng cung / hh) → helpAsk; jaudit rewrite gone; j25 lock = netTh; cx2:help may pick her ✔ |
+| law 16 (deleted jaudit copy) | it implemented OD:L286 on a private second rule; the target she «learns about» is now the receiver NPC's pick (evGuilty = real motive) inside the one rule — no owner rule dropped ✔ |
+| rcvHelpWait dedupe | covers S.rcvPend, S.ordQ (parallel time, on by default) and Q (pid kept) ✔ |
+| spam probe (planner draw, agOptsG + mindPick ×300 per NPC, fresh world) | 5 NPCs she likes ≥ «thân»: 0.3 % of NPC deeds ask her; all 10: 2.3 %. One waiting card per asker; unanswered cards end as «Từ chối» at BAL.ptime.ansK. Same rule as NPC↔NPC (law 1). Non-blocking. |
+| quickcheck 5ac9c150 | FAIL: dialog-fixed «kit-dialog-2 a / empty Tốn/Được» + crawl «Ô lưu · Lui» (known LIVE faults); perf longTaskMax 2747 vs 1643 (single-run noise on a loaded box; the change adds no per-frame work) — not counted against this branch |
+| videos / frames on CDN (both devices) | looked at: 2-talk, 6-loinho, 7-answered fold + ipad; kit parts only ✔ — but see B1 |
+
+**BLOCKING**
+- **B1 (law 3, law 11).** Her «Lời nhờ» card (PEND.rcvHelp) was unreachable on LIVE (no path gave helpAsk t===S); this branch makes it reach her for the first time, so its rows are now player-visible. Frames fold-6-loinho / ipad-6-loinho: «Giúp qua loa» reads **ĐƯỢC: chẳng được gì · MẤT: hao bạc, mất lòng người** — a cost-only option on screen. The rule does give a gain (asker's liking +BAL.rcv.help.af[1] when not seen through), but the option text `được: quý ${balSg(R.af[1])}` (jrcv.js:39) has no subject, so the kit hint (jk2b.js:300) drops it. Fix: name who likes whom in slot 1 the way slot 0 does (`${p.name} quý ${me?"ngươi":t.name} +N`), then scan every receiver card option (rcvHelpOpts / rcvNoO / rcvSabO and the other RCVK cards) for a rendered «ĐƯỢC chẳng được gì» and give a before/after table.
+
+**Non-blocking notes**
+- N1: «Tốn: không» on every receiver card while «Mất: hao bạc» (pre-existing kit wording).
+- N2: evGuilty(pick) chooses among guilty people at random (pre-existing, shared with NPCs).
+- N3: no cool-down after she answers (same asker may ask again at its next deed); bounded by the number of NPCs she likes — fine under law 1, flag to Foreman D if the owner finds it busy.
