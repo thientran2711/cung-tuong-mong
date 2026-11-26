@@ -420,3 +420,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:08Z KK49 KIT OK K-LIST-PAGE 1466caa7 (also 303611f2/8f1fd91c) written in FOREMAN_D_STATUS → D BIG rv. KK49 next: R6 kit review.
 - ~23:08Z OWNER: rescale covers all 6 HUD stats (Sắc Tài Tâm cơ Đức Danh Sủng) → OD fixed; PACE-SPEED told.
 - 23:11Z HUD-SACPHONG 51ddb3c7 (on d-stack-lr3; jhudsp.js reads pbNextKy/BAL.promoR.ky only; X passed/Y gap). D asked for pbDlNext() peek. MAIN rec applied: retire stage chip «Kỳ thăng: n tháng» (kitPromoChip) when the HUD slot lands — same fact, one place. Slot placement → KK49.
+- ~23:10Z OWNER asked if Sắc/Tài/Tâm cơ should rescale → MAIN rec NO (own qualities, absolute gates) → OD back to Danh/Đức/Sủng; PACE-SPEED told.
