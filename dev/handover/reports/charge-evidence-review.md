@@ -41,3 +41,23 @@ Find odds vs canon 05:35Z: crime band ✓ · MASTER Tâm cơ vs target ±1 per t
 | reviewer probe (scratch) | – | guard Phi/Tần · map · Trình HH light + NPC→her cold · pieces distinct · old save no-deed / spread · save keeps evc: all PASS (no-deed case: the target's real tryst deed gave tt pieces — correct) · 0 page errors |
 
 Shots / videos in scratch only; CDN folder img/_review/charge-evidence left for the lander.
+
+## DELTA REVIEW (opus, session_01D3E3NXMbdsz2m9Rp34vbV1, depth 3, START_CTX ~4 %) — 2781a25e → 4770054d
+PRIORITY #1 CHECK: OD 26/11 ~05:15Z «D4 A» + ~05:35Z formula | main 02f564ae (LIVE; ancestor of 4770054d → FF OK) | review/charge-evidence 798ec852 merged into review/charge-evidence-rv 4770054d | dup-report §4.1 (handover branch dev/handover/reports/dup-report.md) | claims: worker D1+D4 #3 session_01D3E3Na6fYWKmC7N5t9iRx5.
+Scope: `git diff 2781a25e 4770054d -- dev/build dev/test` = jtruth.js (DEEDW + 8 keys, DEEDX.xx, deedSync «xx» scan) + jbal2.js (BAL.charge.deed: rash→hd, xx→vp, laydo/laydol/tat/phatquy/nuoc/tea/ink→uh, pushp hd→mh, phonghoa hd→uh). Built files only rebuilt.
+
+Checks:
+| check | result |
+|---|---|
+| deed only when the act happens | all 8 acts run only through runAct → ACT[k].f (one call site, j9:116); jtruth hook undoes on "" / throw. Refusals return "" → no deed: same palace (j9), NPC does not know her (j61), no motive (j95), servant still on the road (jptime: the deed is written on landing via ptNpcBack → runAct). An attempt that is caught or misses (rash «không dùng tới», laydo «về tay không», nuoc «né kịp», j70 «định … nhắm vào ngươi») keeps the deed = the attempt really happened, same rule as poison / trip / steal. |
+| no double count with schemes / dws | rash + nuoc/tea/ink + laydo add a.schemes; hook adds dws → deedsOf shows no extra «old» (probe: schemes 1, dws 1, old 0). tat / phatquy add no scheme. |
+| xa xỉ scan | luxOf(p).sc > bud → one «xx» deed per look (dsSig key); 2nd deedSync same look = no new deed; new over-allowance look = +1; within allowance = none. Same luxOf as act xx (Tố xa xỉ); accuser act xx writes no deed (not in DEEDW). |
+| mapping (owner's 8 charges) | rash Hại dung nhan; xa xỉ Vượt phẩm xa xỉ; theft/slap/kneel/splash Ức hiếp quấy phá; pushp Mưu hại tính mạng (can drown, = pond); phonghoa Ức hiếp quấy phá (objects, not body) — closest of the 8, agreed. |
+| law 1 two-way | NPC→NPC (different palaces, landing path): rash w2→hd, tat w1→uh, laydo w1→uh, nuoc w1→uh, cap > 0 each. NPC→her: rash/tat/nuoc/laydo → deed + charge (j70 path and j70 off). Her→NPC tat → deed uh. |
+| law 4 | new charge mapping is BAL.charge.deed. Deed WEIGHTS (DEEDW in jtruth + ~25 literal weights in deedAdd/deedOnce calls across j22/j42/jtsb/jpet/jmline/jcycle/jtruth) are a PRE-EXISTING family outside BAL; the delta only adds rows to the existing table. Not blocking; parked for Foreman D (move DEEDW + literal weights into BAL.charge). |
+| law 6a | the 8 act families now leave real evidence; before, rash/nuoc/tea/ink/laydo fell to the anonymous «old» scheme and tat/phatquy/laydol/xa xỉ left nothing. |
+| old saves | charge-smoke «old save total 4 spread» PASS; old schemes without dws stay «old» (unchanged). |
+
+Tests (file:// build of 4770054d, dev/index.html rebuilt by assemble.py): charge-scan.py all families 0 (deed_unmapped 0) · charge-smoke all PASS, 0 page errors · charge-taps Fold 755x1000 → 3/3 mưu hại, accused, lãnh cung; her notice names charge + accuser · iPad 1180x820 run 1: 2/3 after 14 searches (random rolls), run 2: 3/3 accused, lãnh cung; 0 page errors · punish-reason 755x1000 ALL PASS · NPC probe (scratch, not in git) 22/22 for the delta (one probe-setup miss on NPC→her rash, re-probed separately: deed + hd).
+No fixes needed. No shots taken (logic delta only; img/_review/charge-evidence untouched).
+VERDICT: DELTA PASS review/charge-evidence-rv (FF from LIVE 02f564ae).
