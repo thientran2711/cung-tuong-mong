@@ -83,3 +83,103 @@ OPEN for KK34:
 2. Not done: kit page samples for §102/§102.2 (kitPgHand exists for §101); quickcheck.sh on de4e9fa8 (needs coop/ in sparse checkout, run ALONE); kit-pick.js (ring5 test) not rerun after ✓/✕ — its «tap again = choose» step must change to tap ✓ (same as kit-hand).
 3. Then queue per KK31/KK32: B K-KDTX-BAND, A tap family, D G4 «Ô lưu · Lui», C repick flake.
 TOOLS (this container): /home/user/wt/kk33-shots/st.js (EV / PEND / TALK / TAP / DPR / SETUP / JS env) · rec.js (MODE=cards|talk videos, prints START for ffmpeg trim) · worktree /home/user/wt/kk33 (kit-stage), /home/user/wt/kk33h (handover, sparse dev/handover).
+
+## KK34 REPORT (26/11 ~00:25Z) — kit keeper, coordinator MAIN CHÍNH 148 session_01V1ZZH2sHQhqUaYCB6kPJxt
+PRIORITY #1 CHECK: OD 25/11 ~21:50Z / ~21:55Z / ~22:00Z + 23/11 ~21:40Z (ladder words) + 19/11 ~01:48Z (meter) | main none | review/kit-stage de4e9fa8 (reused) | claims KK34 only.
+LAND READY: review/kit-stage 979d5ed7 (base de4e9fa8).
+- Talks (§102.2): KIT_STAGE.talkIds = adStroll, rcvHelp, thbirthday, cmTt, cmTd, vnight (Q pid); the «no odds on any card ⇒ dialogue» auto rule removed (with certain cards losing their word it would turn most frames into talks). All six fire as dialogue → thẻ gỗ → ✓ on Fold + iPad (video).
+- Odds family (MAIN 147/148): certain cards show NO odds word — ONE source jk2b kitOptOdds, KIT_ODDS_SURE=false (true = old top-rung meter; overwrites the 19/11 MAIN reading «sure = top rung», flag to sếp if she objects). Plaque line keeps the word only on a real roll. Before/after (39 PEND frames, Fold): 72 sure-meter «Rất vững» cards → none; rolled cards unchanged (5 diffs = random stats). Table below.
+  CONTENT FAMILY NOT FIXABLE IN THE KIT: options that roll inside their closure without declaring odds (e.g. jkc «Quỳ xin cha cho đi tuyển tú»: roll() inside kcO, card had «Rất vững», now no word, can still fail). Needs a content lane: declare the odds (`p` / §25) on every hidden-roll option (kcO family first).
+- iPad: story box ends above the lifted plate, shows its last lines. Duplicate «Hoàng thượng»: speaker's own face no longer repeated in the faces row (.kstg-dup). Fold A plate: covers only her skirt (below waist), no face / upper body — left as is.
+- Kit page §102 samples (kitPgHand(4) / kitPgHand(4,1)). kit-pick.js step «tap again» → body tap = nothing, ✕ puts back, ✓ chooses.
+- Tests on 979d5ed7: kit-stage.js PASS, kit-hand.js PASS, kit-pick.js ALL PASS (Fold + iPad).
+- Quickcheck on de4e9fa8 (alone, 789 s): FAIL — G3 kit-conform (frame-size S/M/L/XL checks predate §102 stage), press-keep 8 + q-softlock 2 (expect one tap = choose; now lift + ✓ → tap family item A: update those gates to tap ✓), G4 Ô lưu · Lui (item D), time-spill guard «greeting walk 1+1» (not stage; check live). Not rerun on 979d5ed7.
+- Media (CDN img/_review/kit-stage/): kk34-979d5ed7-full-fold-755x1000.mp4, kk34-979d5ed7-full-ipad-1180x820.mp4 (c2a cards: lift → ✕ → lift → body tap → ✓; then the six talks), kk34-979d5ed7-c2a-lift-{fold,ipad}.png, kk34-979d5ed7-rcvHelp-talk-ipad.png.
+- Seen in the videos: after vnight's choice «Đêm thị tẩm» opens in the OLD panel (not a hand → no stage; its option cards carry person pictures) — family question for MAIN; vnight bg = brown for ~0.5 s before its picture loads.
+- Extra talk candidates (NOT wired, MAIN decides): rcvAsk, rcvJudge (same receiver family as rcvHelp), ch1, ch2, giu, shop.
+- ART LIST (from MAIN, kept): 27 cards on the shared stand-in, 14 frames repeat one picture, thbirthday banquet bg busy on iPad.
+OPEN for successor: tap family (press-keep / q-softlock / button-crawl gates → tap ✓), K-KDTX-BAND, G4 «Ô lưu · Lui», repick flake; quickcheck on 979d5ed7.
+TOOLS: /home/user/wt/kk34-shots/st.js (EV=pids TAP=1 TALK=n), rec.js (SZ, TALKS → one-take webm + MARKS), oddscan.js (SRC OUT, all PEND odds words). Worktrees /home/user/wt/kk34 (kit-stage), /home/user/wt/kk34h (handover reports).
+
+### KK34 odds before/after (changed cards)
+| event pid | card | before (de4e9fa8) | after (KK34) |
+|---|---|---|---|
+| tt1 | Tâu xin cho người của cha | Rất vững (sure meter) | — (no odds word) |
+| tt1 | Viện cớ thoái thác | Rất vững (sure meter) | — (no odds word) |
+| tt2 | Bỏ bạc lo lót triều thần | Rất vững (sure meter) | — (no odds word) |
+| tt2 | Đứng ngoài, giữ mình | Rất vững (sure meter) | — (no odds word) |
+| tt3 | Mật tâu Hoàng thượng | Rất vững (sure meter) | — (no odds word) |
+| nc1 | Trung với cố quốc | Rất vững (sure meter) | — (no odds word) |
+| nc1 | Dâng thư lên Hoàng thượng | Rất vững (sure meter) | — (no odds word) |
+| td1 | Giấu ông ở Tân Giả Khố | Rất vững (sure meter) | — (no odds word) |
+| td1 | Mặc kệ | Rất vững (sure meter) | — (no odds word) |
+| ch1 | Vâng mệnh cô mẫu | Rất vững (sure meter) | — (no odds word) |
+| ch1 | Thoái thác | Rất vững (sure meter) | — (no odds word) |
+| ch2 | Từ chối, tự gây thế lực | Rất vững (sure meter) | — (no odds word) |
+| phoenix | Khiêm nhường chối từ | Rất vững (sure meter) | — (no odds word) |
+| phoenix | Để lời đồn lan xa | Rất vững (sure meter) | — (no odds word) |
+| phoenix | Bịt miệng thầy tướng | Rất vững (sure meter) | — (no odds word) |
+| doanngo | Gói bánh ú dâng Thái hậu | Rất vững (sure meter) | — (no odds word) |
+| doanngo | Đeo túi ngải cho các con | Rất vững (sure meter) | — (no odds word) |
+| trungcuu | Theo ngài lên núi | Rất vững (sure meter) | — (no odds word) |
+| trungcuu | Dâng rượu cúc chúc thọ Thái hậu | Rất vững (sure meter) | — (no odds word) |
+| vulan | Thả đèn cầu siêu | Rất vững (sure meter) | — (no odds word) |
+| vulan | Cúng các phi tần chết oan | Rất vững (sure meter) | — (no odds word) |
+| vulan | Mượn lễ dò hỏi cung nhân | Rất vững (sure meter) | — (no odds word) |
+| dongchi | Xin theo hầu lễ tế | Rất vững (sure meter) | — (no odds word) |
+| dongchi | Nấu chè mừng cả cung | Rất vững (sure meter) | — (no odds word) |
+| dongchi | Ở cung giữ ấm | Rất vững (sure meter) | — (no odds word) |
+| thbirthday | Dâng ngọc Như Ý | Rất vững (sure meter) | — (no odds word) |
+| thbirthday | Lễ mọn cho phải phép | Rất vững (sure meter) | — (no odds word) |
+| j7c | Chỉ thẳng Tần Dư Nguyệt Thiền trước mặt  | Rất vững (sure meter) | — (no odds word) |
+| j7c | Nhờ Thúy Lũ lặng lẽ hỏi thợ kim hoàn xem | Rất vững (sure meter) | — (no odds word) |
+| j7c | Mời Tần Dư Nguyệt Thiền một chén trà, nó | Rất vững (sure meter) | — (no odds word) |
+| j7c | Bảo một vị Đáp ứng xin đổi trâm khác, để | Rất vững (sure meter) | — (no odds word) |
+| ksp | Tắm gội chờ giá | Rất vững (sure meter) | — (no odds word) |
+| ksp | Tiến cử Thúy Lũ hầu thay | Rất vững (sure meter) | — (no odds word) |
+| ksp | Cáo bệnh | Rất vững (sure meter) | — (no odds word) |
+| prep | Tắm cánh hoa, xông hương | Rất vững (sure meter) | — (no odds word) |
+| prep | Điểm trang lộng lẫy | Rất vững (sure meter) | — (no odds word) |
+| prep | Đeo trang sức đẹp nhất | Rất vững (sure meter) | — (no odds word) |
+| prep | Tập trước Vũ | Vững | Rất vững |
+| prep | Để mộc, nghỉ ngơi | Rất vững (sure meter) | — (no odds word) |
+| night1 | Bàn thơ văn, cầm kỳ | Tùy duyên | Có cơ |
+| night2 | Xin tha cho cung nữ bị phạt | Rất vững (sure meter) | — (no odds word) |
+| night2 | Im lặng, tựa vai ngài | Rất vững (sure meter) | — (no odds word) |
+| giu | Cúi đầu tuân lệnh | Rất vững (sure meter) | — (no odds word) |
+| ge1 | Ở lại, giữ trọn phận mình | Rất vững (sure meter) | — (no odds word) |
+| ge1 | Ở lại, nắm lấy quyền bính | Rất vững (sure meter) | — (no odds word) |
+| ge1 | Rời khỏi cung cấm | Rất vững (sure meter) | — (no odds word) |
+| ge1 | Theo người ấy đi | Rất vững (sure meter) | — (no odds word) |
+| cyrep | Báo đúng ngày | Rất vững (sure meter) | — (no odds word) |
+| cyrep | Báo lùi vài hôm | Có cơ | Tùy duyên |
+| cyrep | Báo sớm, nói đã sạch kỳ | Rất vững (sure meter) | — (no odds word) |
+| cyrep | Giấu, không báo | Rất vững (sure meter) | — (no odds word) |
+| adStroll | Đánh đàn chờ ngự giá | Tùy duyên | Có cơ |
+| adStroll | Ra vấn an | Rất vững (sure meter) | — (no odds word) |
+| adStroll | Lánh đi lối khác | Rất vững (sure meter) | — (no odds word) |
+| cmTt | Làm theo lời cha | Rất vững (sure meter) | — (no odds word) |
+| cmTt | Dặn Thúy Lũ chỉ viết chuyện vặt | Rất vững (sure meter) | — (no odds word) |
+| cmLand | Để Cung Chính ti tra hỏi | Rất vững (sure meter) | — (no odds word) |
+| cmLand | Đứng ra bảo lãnh cho nàng ta | Rất vững (sure meter) | — (no odds word) |
+| cmTd | Xin bà về hầu | Rất vững (sure meter) | — (no odds word) |
+| cmTd | Làm như không quen | Rất vững (sure meter) | — (no odds word) |
+| cmSec | Trả nợ thay (30 lượng) | Rất vững (sure meter) | — (no odds word) |
+| cmSec | Mặc kệ | Rất vững (sure meter) | — (no odds word) |
+| vnight | Bàn thơ văn, cầm kỳ | Tùy duyên | Có cơ |
+| nfsum | Tắm gội chờ giá | Rất vững (sure meter) | — (no odds word) |
+| rcvHelp | Giúp hết lòng | Rất vững (sure meter) | — (no odds word) |
+| rcvHelp | Giúp qua loa | Rất vững (sure meter) | — (no odds word) |
+| rcvHelp | Từ chối | Rất vững (sure meter) | — (no odds word) |
+| rcvHelp | Mách lẻo | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Đàn | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Cờ | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Vẽ | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Múa | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Thơ | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Điều hương | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Nấu ăn | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Thêu | Rất vững (sure meter) | — (no odds word) |
+| pmLad | Đầu hồ | Rất vững (sure meter) | — (no odds word) |
+
+77 cards changed in 39 frames shown
