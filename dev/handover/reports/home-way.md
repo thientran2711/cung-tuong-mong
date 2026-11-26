@@ -149,3 +149,13 @@ PRIORITY #1 CHECK: OD 26/11 ~04:25Z/~05:55Z home way | main 02f564ae | review/ho
 - Tests on 0e71fdbc: home-way.js Fold+iPad PASS, stage-stay PASS, place-rules PASS, kit-one-opt-tap 30 taps 0 FAIL, kit-why-scan 0, home-way-label Fold/iPadAir/iPadPro PASS, look-dedupe PASS alone. quickcheck: dialog-fixed + button-crawl FAIL (known, fail on LIVE too); old-save + perf-vs-live FAIL because the LIVE build 02f564ae does not load in this harness — same FAIL with r6 itself (quickcheck.js hwr6 vs live).
 - CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/home-way-nits/ : home-way-nits-fold.mp4, home-way-nits-ipadAir.mp4, fold/ipad-topbar-before/after.jpg, fold/ipad-map-reason.jpg.
 - Wording note: the reason reuses the kit khắc words «không kịp xong trong buổi trưa (cần N khắc)» (j76need, one voice with every act card); change in j76need if a walk-specific verb is wanted.
+
+## REVIEW HOME-WAY-NITS (RV-HW-NITS, small kit reviewer, 26/11) — SMALL PASS 0e71fdbc
+PRIORITY #1 CHECK: OD 06:33Z order | main LIVE 6b5d3d05 | review/home-way-nits 0e71fdbc (on bc822351) | claims HOME-WAY-NITS (archived).
+- Diff vs bc822351 read in full (j19 guessWhy, jk3, jk4, jplrule, KIT.md §75, 2 new tests). Kit-only: no private chip/frame; §75 overwritten in place (ONE BOX + REAL REASON bullets); guessWhy only returns b.dataset.why first when set, every other disabled button falls through to the old branches unchanged; data-why set only on the disabled way-home buttons (j75 lk / jfx already use the attribute).
+- Law 11: kit-why-scan Fold 0 faults / iPad 0 faults (35 rows each). Law 10: home-way-label Fold + iPadAir PASS (no wrap, one width, no top-bar overlap). Law 12: Fold 755x1000 + iPad 1180x820.
+- Also PASS: home-way.js, place-rules.js (Fold+iPad), stage-stay Fold, look-dedupe, kit-one-opt-tap on Fold+iPad (29/30 taps).
+- Flakes, NOT regressions: stage-stay iPad failed once ("free" dDanh -2, random drift) and passed on rerun; kit-one-opt-tap first «ksp-card» centre tap «locked: pop NO» fails intermittently (cold start) — reproduced on the base bc822351 build too (1 of 2 runs FAIL), passes other runs.
+- Wording (VANPHONG): reason = kit khắc words «hết khắc buổi này (cần N)» / «không kịp xong trong buổi trưa (cần N khắc)»; no %, cổ trang ok.
+- Old save: change is render-only (data-why attribute, homeWay().why not saved; no S field touched) → nothing to migrate; LIVE build does not load in this harness (as worker reported), not re-tested.
+- Not done by me: MAIN look pass on shots (MAIN does it). No shots made by me, nothing to wipe.
