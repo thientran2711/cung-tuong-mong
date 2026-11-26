@@ -54,4 +54,11 @@ Re-run: `KSEED=23 SAVE=<life.json> node dev/test/nhv/mklife.js` once, then `node
 - quickcheck c685b0d8: open/old save/perf PASS, core gates PASS except G4 next-dead «Sang buổi» which is FLAKY ON LIVE TOO (paired reruns: mine 3/3 PASS, LIVE 2/3 PASS).
 - Videos NEW names: img/_review/nhv-areas/nhv8-{fold,ipad}-{1x,2x}.mp4 + sheets (looked at every frame: no grey shape on any area scene; the only grey ghosts are LIVE screens outside the garden — the home room stand-in on Fold's first frame, the Kỳ ngộ card figure on iPad → j59 / kitFocus family, not jnhv).
 
+## Whole-family scan for the KIT §59.1 grey stand-in (MAIN 151, law 11) — callers OUTSIDE jnhv on 38da8047 (for the kit keeper; not changed here)
+Grep `unknown-fig | .ksil | j59sil | j59unkSrc(` in dev/build/j*.js:
+- j59.js (15: room/place stage — j59fill stand-in for people with no figure, j59unk strangers, load-wait silhouette in slot, .j59sil/.ksil CSS) — the Fold home-room ghost in the videos.
+- j60.js (scene name tags + figures: strangers as grey silhouettes), j87.js (week book / kitStageFig fallback), j90.js (kitFigOf: role/sex silhouette fallback), jk4.js (kitStageFig error → silhouette), jreveal.js (krv reveal: silhouette until known).
+- jhaohuu.js (hảo hữu unknown: stage figure = unknown-fig-f), jrank.js (rkFig fallback), j79.js (picker placeholder), jdfv.js / jgreet.js / jfigseal.js (skip or wait on unknown-fig), jph.js + jkit.js + jload.js (load-wait ghost img[data-kwait] .55 + body box), jkitpage.js / jfxkit.js (kit page samples), j61.js + jpm.js (k61SilChip / kpmSil, both return "" = off), jimg.js (asset note), jroute.js.
+→ the people tab / Hậu cung lists / encounter (Kỳ ngộ) / home room ghosts come from j59 / j60 / j87 / j90 / jk4 / jreveal / jhaohuu. Kit keeper owns the whole-family switch to painted role figures (the jnhv rule: role figure via figFor({kind:"maid"|"man",ref:{role}}) + own painting softened for strangers).
+
 ~92% xong / ~80% chơi được (Ngự hoa viên khu vườn).
