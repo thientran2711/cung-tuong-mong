@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c757e504+","t":"2026-11-26T08:57Z","c":"Người quanh nàng thấy được nét mặt, cơn giận của nàng; ai hiểu nàng mới đoán đúng lòng nàng.","b":"b65c4cbd842d","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"cfe52de7+","t":"2026-11-26T09:04Z","c":"Người quanh nàng thấy được nét mặt, cơn giận của nàng; ai hiểu nàng mới đoán đúng lòng nàng.","b":"5b799f3d1f4c","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36996,8 +36996,12 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const v of rivals)if(!v.coop&&v.pal!=null&&!(palHeadOK(v)||(v.palLone&&palLive(v)&&rkOf(v)<3))){v.pal=null;v.palLone=0}
  for(const v of rivals)if(!v.coop&&(v.pal==null||rkOf(v)>=3))v.palLone=0;
  const occ={};const heads=all.filter(palHeadOK);
- for(const p of heads.slice().sort((a,b)=>(b.coop?1:0)-(a.coop?1:0)))if(p.pal!=null){if(occ[p.pal]!=null)p.pal=null;else occ[p.pal]=key(p)}
- for(const v of rivals.slice().sort((a,b)=>(b.coop?1:0)-(a.coop?1:0)))if(v.palLone&&v.pal!=null){if(occ[v.pal]!=null){if(!v.coop){v.pal=null;v.palLone=0}}else occ[v.pal]=key(v)}
+ /* SEAT-STABLE tie-break (rv-d-stack-lr4 F1/F2): when the two players clash (same palace / a full side hall), the HOST's person keeps it on
+    BOTH seats and the guest's person moves (on her own phone); the friend entry itself is never moved here. pcPr: 0 keeps first. */
+ const gSeat=(()=>{try{const C=window.COOPW;return !!(C&&C.on&&(C.ctx||C.seat)==="b")}catch(e){return false}})();
+ const pcPr=p=>p===S?(gSeat?1:0):p.coop?(gSeat?0:1):2,pcSort=L=>L.slice().sort((a,b)=>pcPr(a)-pcPr(b));
+ for(const p of pcSort(heads))if(p.pal!=null){if(occ[p.pal]!=null){if(!p.coop)p.pal=null}else occ[p.pal]=key(p)}
+ for(const v of pcSort(rivals))if(v.palLone&&v.pal!=null){if(occ[v.pal]!=null){if(!v.coop){v.pal=null;v.palLone=0}}else occ[v.pal]=key(v)}
  const free=()=>PALN.findIndex((_,i)=>occ[i]==null);const moved=[];
  for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null&&!p.coop){let f=typeof bcGrantIx==="function"?bcGrantIx(p,occ):-1;if(f<0)f=free();/* ban-cung: the decree follows the palace locks + her favour (jbancung), one rule for all */
   if(f<0){const lone=rivals.find(v=>v.palLone&&v.pal!=null&&!v.coop);if(lone){f=lone.pal;lone.pal=null;lone.palLone=0;delete occ[f]}}
@@ -37011,8 +37015,8 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  const mates=h=>all.filter(y=>y!==h&&palLive(y)&&!y.queen&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null)&&!(y===S&&sv));
  const cnt=h=>mates(h).length;
  const hallFix=h=>{const M=mates(h);const n={};for(const x of HL)n[x]=0;const keep=[],redo=[];
-  for(const y of M)if(y.coop&&HL.includes(y.resHall)){n[y.resHall]++;keep.push(y)}
-  for(const y of M){if(y.coop&&HL.includes(y.resHall))continue;if(HL.includes(y.resHall)&&n[y.resHall]<BAL.res.side){n[y.resHall]++;keep.push(y)}else if(!y.coop)redo.push(y)}
+  for(const y of pcSort(M)){if(y.coop&&HL.includes(y.resHall)){n[y.resHall]++;keep.push(y);continue}/* her hall is her phone's: counted, never moved */
+   if(HL.includes(y.resHall)&&n[y.resHall]<BAL.res.side){n[y.resHall]++;keep.push(y)}else if(!y.coop)redo.push(y)}
   for(const y of redo){const f=HL.find(x=>n[x]<BAL.res.side);y.resHall=f||HL[HL.length-1];if(f)n[f]++}};
  /* out of the palace (lãnh cung, dead): her side-hall room is given up, so a consort brought back later (đại xá, ân xá, petition) is housed
     fresh here and never walks back into a room someone else now holds (re-merge 18/11: jworld đại xá ran after the month's palFix) */
@@ -101439,7 +101443,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b65c4cbd842d";window.CTM_BUILD=BUILD;
+const BUILD="5b799f3d1f4c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

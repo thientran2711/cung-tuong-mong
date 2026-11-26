@@ -42,8 +42,12 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const v of rivals)if(!v.coop&&v.pal!=null&&!(palHeadOK(v)||(v.palLone&&palLive(v)&&rkOf(v)<3))){v.pal=null;v.palLone=0}
  for(const v of rivals)if(!v.coop&&(v.pal==null||rkOf(v)>=3))v.palLone=0;
  const occ={};const heads=all.filter(palHeadOK);
- for(const p of heads.slice().sort((a,b)=>(b.coop?1:0)-(a.coop?1:0)))if(p.pal!=null){if(occ[p.pal]!=null)p.pal=null;else occ[p.pal]=key(p)}
- for(const v of rivals.slice().sort((a,b)=>(b.coop?1:0)-(a.coop?1:0)))if(v.palLone&&v.pal!=null){if(occ[v.pal]!=null){if(!v.coop){v.pal=null;v.palLone=0}}else occ[v.pal]=key(v)}
+ /* SEAT-STABLE tie-break (rv-d-stack-lr4 F1/F2): when the two players clash (same palace / a full side hall), the HOST's person keeps it on
+    BOTH seats and the guest's person moves (on her own phone); the friend entry itself is never moved here. pcPr: 0 keeps first. */
+ const gSeat=(()=>{try{const C=window.COOPW;return !!(C&&C.on&&(C.ctx||C.seat)==="b")}catch(e){return false}})();
+ const pcPr=p=>p===S?(gSeat?1:0):p.coop?(gSeat?0:1):2,pcSort=L=>L.slice().sort((a,b)=>pcPr(a)-pcPr(b));
+ for(const p of pcSort(heads))if(p.pal!=null){if(occ[p.pal]!=null){if(!p.coop)p.pal=null}else occ[p.pal]=key(p)}
+ for(const v of pcSort(rivals))if(v.palLone&&v.pal!=null){if(occ[v.pal]!=null){if(!v.coop){v.pal=null;v.palLone=0}}else occ[v.pal]=key(v)}
  const free=()=>PALN.findIndex((_,i)=>occ[i]==null);const moved=[];
  for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null&&!p.coop){let f=typeof bcGrantIx==="function"?bcGrantIx(p,occ):-1;if(f<0)f=free();/* ban-cung: the decree follows the palace locks + her favour (jbancung), one rule for all */
   if(f<0){const lone=rivals.find(v=>v.palLone&&v.pal!=null&&!v.coop);if(lone){f=lone.pal;lone.pal=null;lone.palLone=0;delete occ[f]}}
@@ -57,8 +61,8 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  const mates=h=>all.filter(y=>y!==h&&palLive(y)&&!y.queen&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null)&&!(y===S&&sv));
  const cnt=h=>mates(h).length;
  const hallFix=h=>{const M=mates(h);const n={};for(const x of HL)n[x]=0;const keep=[],redo=[];
-  for(const y of M)if(y.coop&&HL.includes(y.resHall)){n[y.resHall]++;keep.push(y)}
-  for(const y of M){if(y.coop&&HL.includes(y.resHall))continue;if(HL.includes(y.resHall)&&n[y.resHall]<BAL.res.side){n[y.resHall]++;keep.push(y)}else if(!y.coop)redo.push(y)}
+  for(const y of pcSort(M)){if(y.coop&&HL.includes(y.resHall)){n[y.resHall]++;keep.push(y);continue}/* her hall is her phone's: counted, never moved */
+   if(HL.includes(y.resHall)&&n[y.resHall]<BAL.res.side){n[y.resHall]++;keep.push(y)}else if(!y.coop)redo.push(y)}
   for(const y of redo){const f=HL.find(x=>n[x]<BAL.res.side);y.resHall=f||HL[HL.length-1];if(f)n[f]++}};
  /* out of the palace (lãnh cung, dead): her side-hall room is given up, so a consort brought back later (đại xá, ân xá, petition) is housed
     fresh here and never walks back into a room someone else now holds (re-merge 18/11: jworld đại xá ran after the month's palFix) */
