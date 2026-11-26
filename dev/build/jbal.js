@@ -377,11 +377,26 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
              at the door for a secret meeting (jtin watcher, printed by jroute / j22 «… canh cửa (lòng …+, Chủ tin …+)»; review/one-core-dup3).
    rareLv  = rarity word of an origin / event weight (j69 ow69Rare, jk2b kitRare): ≤ [0] Rất hiếm, ≤ [1] Hiếm.
    sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
-   oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
+   oanMend = the two COSTLY roads down from a DEEP grudge (j jmend; owner 26/11 ~08:25Z «làm cách nào để giảm bớt oán», MAIN 155 add-on): when the
+     wronged one's oán ≥ her «nguoi» level (BAL.net.th, netForgive) words (Tạ lỗi / Nhún nhường) are not offered and cost nothing; instead
+     «Hậu lễ tạ tội» (bạc gift.bac + gift.r × the giver's rank, Danh gift.danh) or «Nhờ người đứng giữa» (a person the wronged one likes ≥ than
+     who likes the doer ≥ quen; that person's liking for the doer −go.fav, Danh go.danh). Odds o + kf × (the wronged one's forgive nết − 1)
+     − deep × (oán − her nguoi level) (+ go.stand × (her liking for the go-between − than)); thành: oán − the width of its BAL.oanLv band (one band
+     down, like one quiet season); hỏng: the gift is sent back / the go-between is turned away, nothing is paid; the accepted gift's bạc goes to the receiver (law 6c).
+     ag = an NPC's «safe» weight for these roads = ag × Nhún nhường's (BAL.ag.cx.humble.g). Same roads for every NPC (two-way).
+   oanFade = the OLD flat monthly oán fade (j28 oanMonth), used only when BAL.oanCool.on = 0 (rollback switch); the live fade is BAL.oanCool below.
+   oanCool = OÁN / GHEN COOL-DOWN (review/pace-all, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán»; j28 oanCool, each tuần in rivalsTurn):
+             a grudge nothing new fed for quiet tuần fades by (width of its BAL.oanLv band) ÷ season × the holder's nết (persF forgive:
+             Thù dai ×.3, Rộng lượng ×1.8; me = HER own grudges, she has no nết) → a feud left alone one season drops one band (law 3: time is the cost).
+             floor = band kept while the cause stands (law 6a): mem = a bad deed still remembered (jmem, weight ≥ BAL.mem.faint) → band 1 «Chút oán»;
+             keep = a deed carved for life → band 2 «Oán». ghen = the weekly jealousy fade (j8 rivalsTurn, was typed 3 / 1): than = when she is
+             liked (rel ≥ BAL.net.th.than), base otherwise, + pct × the jealousy itself (a quiet season takes about a third off), × the same nết; her own jealousy (v.pg) keeps its −1 a tuần. npc = share of a jealousy
+             caused by ANOTHER consort that becomes a grudge toward that consort (j1 ghenUp; it no longer raises the score toward her). dm = a jealousy RISE
+             toward her × max(min, 1 − (ghen/100)^pow) (j1 ghenUp: slows near the top, like BAL.stp.dm for the other stats; carry v.gUc).
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    (the youngest adult = BAL.ageMin, with the age bands above) */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5,dm:{pow:3,min:.15}}},oanMend:{o:50,kf:40,deep:.4,gift:{bac:60,r:30,danh:-1},go:{fav:10,danh:-1,stand:.3},ag:2},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
