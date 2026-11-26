@@ -86,9 +86,12 @@ function kstgFig(mb,cls,src,tagHTML){const grey=!!src&&typeof KIT_GREYSRC!=="und
  let f=mb.querySelector(":scope>."+cls);if(f){const im=f.querySelector("img");if(im&&src&&im.getAttribute("src")!==src){f.style.visibility="hidden";f.classList.remove("kstg-nofig");im.src=src;const sh=()=>{if(!(mb.closest(".dlg")||{}).__kstHold)f.style.visibility=""};(im.decode?im.decode().then(sh,()=>f.classList.add("kstg-nofig")):sh())}if(grey){f.remove();return null}return f}if(!src)return null;
  f=document.createElement("div");f.className="kstg-fig "+cls;f.setAttribute("aria-hidden","true");const im=document.createElement("img");im.alt="";im.decoding="async";im.crossOrigin="anonymous";im.src=src;f.appendChild(im);
  if(tagHTML){const tg=document.createElement("div");tg.className="kt3";tg.innerHTML=tagHTML;f.appendChild(tg)}if(mb.closest(".dlg")&&mb.closest(".dlg").__kstHold)f.style.visibility="hidden";mb.appendChild(f);return f}
-function kstgFigs(dl,mb){try{const m=typeof Q!=="undefined"&&Q&&Q[0]||null,who=m&&m.who&&typeof m.who==="object"&&!m.who.src?m.who:null;const old=mb.querySelector(".kszfig");
+function kstgFigs(dl,mb){try{const m=typeof Q!=="undefined"&&Q&&Q[0]||null;let who=m&&m.who&&typeof m.who==="object"?m.who:null;
+ /* KK36 (vlnvp: the speaker slot showed HER): a FACE object (pEunCourt / pMaid style {src,nm}) is resolved to the real person it names (kitWhoPerson, jksize) — his own figure + tag */
+ let own="";if(who&&who.src&&!who.kind){const r=typeof kitWhoPerson==="function"?kitWhoPerson(who):who;if(r&&r!==who&&!(r.src&&!r.kind)){who=r;try{const d=document.createElement("div");d.innerHTML=kszFigHtml(r);const k=d.querySelector(".kt3");own=k?k.innerHTML:""}catch(e){}}else who=null}
+ const old=mb.querySelector(".kszfig");
  let src="";try{if(who&&who!==S&&typeof kitFigOf==="function")src=kitFigOf(who)}catch(e){}if(!src){const im=old&&old.querySelector("img");src=im&&(im.getAttribute("src")||"")||""}
- const tg=old&&old.querySelector(".kt3");kstgFig(mb,"kstg-sp",who===S?"":src,tg?tg.innerHTML:"");
+ const tg=old&&old.querySelector(".kt3");kstgFig(mb,"kstg-sp",who===S?"":src,own||(tg?tg.innerHTML:""));
  let me="";try{me=typeof kitFigOf==="function"?kitFigOf(S):(typeof figFor==="function"?figFor(S):"")}catch(e){}kstgFig(mb,"kstg-me",me,"")}catch(e){console.error("kstgFigs",e)}}
 /* the painted part of a figure picture (opaque box, §93.2 kscnOpaque) — cached per picture */
 const KST_OB=new Map();function kstgOb(im){try{const k=im&&(im.currentSrc||im.src);if(!k)return null;if(KST_OB.has(k))return KST_OB.get(k);if(!im.complete||!im.naturalWidth)return null;const o=typeof kscnOpaque==="function"?kscnOpaque(im):{l:0,r:1,t:0,b:1};KST_OB.set(k,o);return o}catch(e){return null}}
@@ -98,7 +101,7 @@ function kstgOn(dl,g){try{if(!kstgWants(dl,g))return false;const M=document.getE
  if(M)M.classList.add("kstg");document.body.classList.add("kscn-on");if(M&&M.__kstFresh){M.__kstFresh=0;dl.__kstNew=1}/* every open (a reopened dialog keeps its own classes, the layer's are reset on close) */
  if(!dl.classList.contains("kstage")||!dl.querySelector(":scope>.kstg-bg")){dl.classList.add("kstage");
   const bg=document.createElement("div");bg.className="kstg-bg";const v=document.createElement("div");v.className="kstg-veil";dl.prepend(v);dl.prepend(bg);dl.__kstNew=1}
- const bg=dl.querySelector(":scope>.kstg-bg"),pic=kstgPic(dl);if(bg&&pic&&bg.dataset.src!==pic){bg.dataset.src=pic;bg.style.backgroundImage=`url("${pic}")`}
+ const bg=dl.querySelector(":scope>.kstg-bg"),pic=kstgPic(dl);if(bg&&pic&&bg.dataset.src!==pic){bg.dataset.src=pic;const pl=kstgPlacePic();/* KK36: the place painting lies UNDER the event picture — while the event picture is still on its way the stage shows the place she is in, never the flat colour */bg.style.backgroundImage=`url("${pic}")`+(pl&&pl!==pic?`, url("${pl}")`:"")}
  kstgFigs(dl,mb);return true}catch(e){console.error("kstgOn",e);return false}}
 /* place the figures, the speech box and the hand inside the layer (px, layer-local) */
 function kstgPlace(dl){try{if(!dl||!dl.classList.contains("kstage"))return;const K=KIT_STAGE,ip=(()=>{try{return kitView().pages===2?1:0}catch(e){return document.documentElement.classList.contains("kv2")?1:0}})();
