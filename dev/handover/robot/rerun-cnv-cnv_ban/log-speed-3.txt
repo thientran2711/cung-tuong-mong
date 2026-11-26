@@ -119,3 +119,13 @@ page.waitForTimeout: Target page, context or browser has been closed
 RESUME cnv-cnv_ban-speed-3 from 2026-11-26T13:12:30.181Z buổi 2742
 CP buổi 2742 year null save 4381942 chars
 STATUS cnv-cnv_ban-speed-3 · buổi 2760 · year 19 · rank 0 · bugs 1 · stuck 0 · dead buttons 11
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:157:69)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-3 from 2026-11-26T15:12:00.742Z buổi 2783
+CP buổi 2783 year null save 4398122 chars
+STATUS cnv-cnv_ban-speed-3 · buổi 2806 · year 20 · rank 0 · bugs 1 · stuck 0 · dead buttons 11
+BUG crash tab crashed (Page crashed) at buổi 2819
+PAGE CRASHED cnv-cnv_ban-speed-3 at buổi 2819 → exit 3, rerun with resume=1

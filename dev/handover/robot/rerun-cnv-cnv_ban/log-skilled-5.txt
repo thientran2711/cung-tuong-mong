@@ -30,3 +30,24 @@ CP buổi 985 year 8 save 1442983 chars
 STATUS cnv-cnv_ban-skilled-5 · buổi 1018 · year 8 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
 CP buổi 1035 year 8 save 1506375 chars
 CP buổi 1085 year 8 save 1597129 chars
+CP buổi 1135 year 9 save 1593628 chars
+CP buổi 1185 year 9 save 1725838 chars
+CP buổi 1235 year 9 save 1836192 chars
+CP buổi 1285 year 10 save 1926431 chars
+CP buổi 1335 year 10 save 1917587 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:284:13)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-skilled-5 from 2026-11-26T15:13:13.204Z buổi 1334
+CP buổi 1334 year null save 1933445 chars
+CP buổi 1384 year 10 save 1983070 chars
+CP buổi 1434 year 11 save 2145712 chars
+CP buổi 1484 year 11 save 2207849 chars
+CP buổi 1534 year 11 save 2289858 chars
+CP buổi 1584 year 12 save 2363710 chars
+CP buổi 1634 year 12 save 2468803 chars
+STATUS cnv-cnv_ban-skilled-5 · buổi 1669 · year 12 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 1684 year 12 save 2487688 chars
+LIFE DONE cnv-cnv_ban-skilled-5 Xuất cung age 30 · buổi 1702 · taps 2256 · dead buttons 0 · stuck 0 · bugs 0

@@ -1,8 +1,8 @@
-# cnv-cnv_ban-speed-3 (real-tap harness e9803260, fold)
+# cnv-cnv_ban-speed-3 (real-tap harness 1ace0e29, fold)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-speed-3 | running |  | 2767 |  | 11 | 0 | 1 | — |
+| cnv-cnv_ban-speed-3 | running |  | 2819 |  | 11 | 0 | 2 | — |
 
 ## Dead buttons
 
@@ -21,3 +21,4 @@
 ## Bugs
 
 - [dead] ×2 close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»
+- [crash] ×1 tab crashed (Page crashed) at buổi 2819
