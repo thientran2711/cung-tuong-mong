@@ -1,0 +1,45 @@
+== 2026-11-26T01:11:24Z pid 2933
+  PID  PPID   RSS    VSZ %CPU ELAPSED NLWP
+ 2933  2809 7763944 1523524452 68.6 4752 16
+Rss:             7764264 kB
+Pss:             7621071 kB
+Pss_Dirty:       7589383 kB
+Pss_Anon:        7082959 kB
+Pss_File:          31686 kB
+Pss_Shmem:        506424 kB
+Private_Dirty:   7540928 kB
+Anonymous:       7088032 kB
+AnonHugePages:         0 kB
+Swap:                  0 kB
+SwapPss:               0 kB
+-- threads by cpu
+top - 01:11:24 up  1:54,  0 user,  load average: 1.21, 2.10, 2.60
+Threads:  16 total,   1 running,  15 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 36.6 us,  4.9 sy,  0.0 ni, 56.1 id,  0.0 wa,  0.0 hi,  2.4 si,  0.0 st 
+MiB Mem :  16087.2 total,   2334.4 free,   9478.5 used,   5234.9 buff/cache     
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   6608.7 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 2933 root      20   0 1452.9g   7.4g 676232 R  90.0  47.2  39:47.55 chrome-he+
+ 2935 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   0:00.00 PerfettoT+
+ 2936 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   0:27.71 ThreadPoo+
+ 2937 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   5:09.16 ThreadPoo+
+ 2938 root      12  -8 1452.9g   7.4g 676232 S   0.0  47.2   0:00.00 ThreadPoo+
+ 2939 root      12  -8 1452.9g   7.4g 676232 S   0.0  47.2   0:00.00 ThreadPoo+
+ 2940 root      12  -8 1452.9g   7.4g 676232 S   0.0  47.2   0:11.35 Chrome_Ch+
+ 2941 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   4:30.47 ThreadPoo+
+ 2949 root      12  -8 1452.9g   7.4g 676232 S   0.0  47.2   2:33.52 Compositor
+ 2950 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   0:00.00 ThreadPoo+
+ 2956 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   1:16.71 ThreadPoo+
+ 3024 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   0:23.34 ThreadPoo+
+ 3121 root      20   0 1452.9g   7.4g 676232 S   0.0  47.2   0:01.31 ThreadPoo+
+-- cmdline
+/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell.real --type=renderer --gpu-client-id=6 --headless=old --origin-trial-disabled-features=XSLT --no-sandbox --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --disable-lcd-text --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --js-flags=--no-enable-lazy-source-positions --ozone-platform=headless --disable-gpu-compositing --disable-blink-
+
+-- fds
+170
+-- wchan/status
+State:	R (running)
+VmHWM:	 7768268 kB
+VmRSS:	 7768268 kB
+Threads:	16

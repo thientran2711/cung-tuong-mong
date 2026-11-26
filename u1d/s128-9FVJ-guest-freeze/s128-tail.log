@@ -1,0 +1,22 @@
+BUILD OK b0cf6e61f03b
+NAV guest 0s http://127.0.0.1:8080/index.html
+NAV host 0s http://127.0.0.1:8080/index.html
+ROOM CODE 9FVJ
+BUG ktut-no-target tutorial open with no tappable target card; tapped its own «Đã hiểu»
+BUG ktut-no-target tutorial open with no tappable target card; tapped its own «Đã hiểu»
+SCHEDULED RELOAD coop-rt-u4s128-guest-k1 buổi 8
+NAV guest 644s http://127.0.0.1:8080/index.html
+SCHEDULED RELOAD coop-rt-u4s128-host-k1 buổi 8
+NAV host 644s http://127.0.0.1:8080/index.html
+SCHEDULED RELOAD coop-rt-u4s128-guest-k1 buổi 15
+SCHEDULED RELOAD coop-rt-u4s128-host-k1 buổi 15
+NAV guest 1178s http://127.0.0.1:8080/index.html
+NAV host 1179s http://127.0.0.1:8080/index.html
+CP buổi 50 year 1 save 0 chars
+CP buổi 50 year 1 save 0 chars
+BUG dead close button has no effect: .dlg «Tin trong cung buổi này» «Lui»
+STATUS coop-rt-u4s128-host-k1 · buổi 71 · year 1 · rank 1 · bugs 23 · stuck 0 · dead buttons 16
+STATUS coop-rt-u4s128-guest-k1 · buổi 71 · year 1 · rank 0 · bugs 24 · stuck 0 · dead buttons 19
+SEATHANG guest 4055s guest seat: no harness step for 5 min at buổi 73 (stage 1) · page.evaluate hung too
+BUG stuck no progress 15 min on #coopfz «»
+NAV host 4556s http://127.0.0.1:8080/index.html
