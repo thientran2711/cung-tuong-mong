@@ -15,6 +15,9 @@ const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=e
    for(const s of knAllSrv().filter(y=>y&&y.name)){let N=[];try{N=knSellNews(S,s)}catch(e){}
     for(const n of N.slice(0,4)){const m=knSellCard(s,n);if(!m||!m.opts)continue;res.cards++;res.kinds[n.kind]=(res.kinds[n.kind]||0)+1;
      if(!m.rk){res.fail.push('no rk: '+n.kind+' '+n.id);continue}
+     /* r7 (independent check C4): put back the state the remake meets after a reload at a later khắc — S.tb's khắc roll not yet made and the
+        lazy stores not yet there — so a remake that rolls S.tb or makes empty S.intel / S.j95 shows here (mutate: either fix reverted → FAIL) */
+     try{if(S.tb&&S.tb.no)S.tb.no.k=-1;const emp=v=>v&&typeof v==='object'&&!Object.keys(v).length;if(emp(S.intel))delete S.intel;if(S.j95&&typeof S.j95==='object'&&Object.values(S.j95).every(emp))delete S.j95}catch(e){}
      const a=flat(JSON.parse(JSON.stringify(S)),'S',{});let c=null;try{c=rcpMk(JSON.parse(JSON.stringify({rk:m.rk,ra:m.ra,t:m.t})))}catch(e){}
      const b2=flat(JSON.parse(JSON.stringify(S)),'S',{});const d=[];for(const k of new Set([...Object.keys(a),...Object.keys(b2)]))if(a[k]!==b2[k])d.push(k);
      if(!c||!c.opts||!c.opts.length)res.fail.push('remake: '+n.kind+' '+n.id);if(d.length)res.side.push(n.kind+' '+n.id+' → '+d.slice(0,4).join(' '))}}
