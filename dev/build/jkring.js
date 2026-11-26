@@ -16,8 +16,8 @@
 const KIT_RING=window.KIT_RING=window.KIT_RING||{min:5,wire:true,
  fh:{kv1:.60,kv2:.70}/* front figure height / layer height */,fhF:{kv1:.90,kv2:.95}/* focus figure height */,fx:{kv1:.30,kv2:.27}/* focus centre x / width */,
  rx:{kv1:.36,kv2:.33},ry:{kv1:.10,kv2:.11},floor:.955,back:.48/* scale of the farthest slot */,dimK:1.25,
- grpFh:.84/* group slot member height vs a person slot */,grpGap:.22/* member spacing / member height (members overlap: one cluster) */,grpW:{kv1:.56,kv2:.50}/* focused group max width / layer width */,
- turnMs:300,focusMs:560,arrow:{kv1:42,kv2:46}};
+ grpFh:1/* group lead = the stage size too (owner 20:27Z); members beside her ×.9 depth */,stdR:{kv1:.747,kv2:.725}/* LIVE stage figure image px / stage px (fallback) */,grpGap:.22/* member spacing / member height (members overlap: one cluster) */,grpW:{kv1:.56,kv2:.50}/* focused group max width / layer width */,
+ focusMs:560,arrow:{kv1:42,kv2:46}};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const calm=()=>{try{return typeof kscnCalm==="function"&&kscnCalm()}catch(e){return false}};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -25,11 +25,14 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const E="cubic-bezier(.2,.75,.25,1)";
 /* §104.1 KRING_MATH — the ONE ring maths of the whole ring kit (vòng người · vòng nhóm · vòng bảo vật): same semantics as MOTION-BUILD's KRI_MATH (jkring-item.js reads
    window.KRING_MATH when present). N > seats: one seat spacing (2π/seats), only the seats around the front show (a scrolling ring of many). */
-const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{seats:12,
+const KB=()=>BAL.kring||{};
+const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{get seats(){return KB().seats||12},get decay(){return KB().decay||.93},get stop(){return KB().stop||.0012},get snapMs(){return KB().snapMs||200},get stepMs(){return KB().stepMs||280},get frontK(){return KB().front||1},
+ /* front boost: 1 at the front, 1/front at |a| ≥ 1 (the front keeps its size, its neighbours shrink) */
+ boost(a){const f=this.frontK;return 1/f+(1-1/f)*Math.max(0,1-Math.abs(a))},
  slot(i,rot,N){let a=((i-rot)%N+N)%N;if(a>N/2)a-=N;const n=Math.max(3,Math.min(N,this.seats)),th=a*2*Math.PI/n,c=Math.cos(th),s=Math.sin(th),k=(1+c)/2;return{a,c,s,k,hide:Math.abs(a)>n/2-.5}},
  front(rot,N){return((Math.round(rot)%N)+N)%N},
  short(i,rot,N){let d=((i-rot)%N+N)%N;if(d>N/2)d-=N;return d},
- decay:.93,snapMs:200};
+};
 let CUR=null;
 /* ---------- CSS (kit part; tokens from the kit: --kpk-* wood, kscn-tag) ---------- */
 function css(){if(document.getElementById("k-ring"))return;const s=document.createElement("style");s.id="k-ring";s.textContent=`
@@ -77,36 +80,42 @@ function memberEl(x,fh){const d=document.createElement("div");d.className="kring
  const s=esc(x.f.src);d.innerHTML=`<img src="${s}" alt=""><img class="kring-dim" src="${s}" alt="" style="filter:brightness(${(BAL.kring||BAL.kdim).dimB||BAL.kdim.b}) saturate(${(BAL.kring||BAL.kdim).dimS||BAL.kdim.s})">`;x.el=d;x.dim=d.querySelector(".kring-dim");x.fw=fw;x.fh=fh;return d}
 function tagEl(p,cls){const t=document.createElement("div");t.className=cls;try{t.innerHTML=kitNameTagBox(p.ref||p,{})}catch(e){t.innerHTML=`<span class="kscn-tag">${esc(p.name)}</span>`}return t}
 /* ---------- build a slot ---------- */
-function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="kring-s";const M=g.members;
+/* OWNER 26/11 ~20:27Z «kích thước lúc trong vòng quay không to như ban đầu»: the FRONT figure = the LIVE stage figure size, px for px. Read from the place stage under the ring
+   (a visible woman figure: its image px, absolute); no stage → layer px × KIT_RING.stdR (measured LIVE: Fold 541/724, iPad 436/601). Per person × KIT_FIG.fac (men ×1.07, children by age). */
+function stdImgR(){try{const st=document.getElementById("stage");if(st&&st.offsetHeight){const im=[...st.querySelectorAll(".tok.fig .figimg.j59sz,.tok.fig img.j59sz")].find(i=>i.getClientRects().length&&/fig-consort-|fig-maid-/.test(i.src||""));
+ if(im){const f=KIT_FIG.fac(im.src,20)||1;return im.getBoundingClientRect().height/f}}}catch(e){}return null}
+function figH(R,x){let f=1;try{const q=x.p&&x.p.ref||x.p;f=KIT_FIG.fac(x.f.src,q&&typeof q.age==="number"?q.age:20)||1}catch(e){}return Math.round(R.stdPx*f)}
+function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="kring-s";const M=g.members;fh0=figH(R,M[0]);
  if(M.length===1){const x=M[0];const d=memberEl(x,fh0);d.style.left="0px";s.appendChild(d);const W=x.fw;s.style.width=W+"px";s.style.height=fh0+"px";
   s.__cx=(x.f.ob.l+x.f.ob.r)/2*W;s.__feet=x.f.ob.b*fh0;s.__top=x.f.ob.t*fh0;x.dx=0;
   const t=tagEl(x.p,"kring-tg");t.style.top=(s.__feet+2)+"px";t.style.left=s.__cx+"px";s.appendChild(t)}
  else{/* the lead in front, the others beside / behind her by turns (smaller, a little higher = depth on the floor) */
-  const fh=fh0*KIT_RING.grpFh;const els=[];let minL=0,maxR=0;M.forEach((x,k)=>{const side=k===0?0:(k%2?-1:1)*Math.ceil(k/2),dep=k===0?1:.9;const h=fh*dep;const d=memberEl(x,h);
+  const fh=fh0*KIT_RING.grpFh;const els=[];let minL=0,maxR=0;M.forEach((x,k)=>{const side=k===0?0:(k%2?-1:1)*Math.ceil(k/2),dep=k===0?1:.9;const h=(k===0?fh:figH(R,x)*KIT_RING.grpFh)*dep;const d=memberEl(x,h);
    const pc=(x.f.ob.l+x.f.ob.r)/2*x.fw;const cx=side*fh*KIT_RING.grpGap;x.cx=cx;x.left=cx-pc;x.lift=k===0?0:fh*.03;d.style.zIndex=k===0?"3":"2";
    minL=Math.min(minL,x.left+x.f.ob.l*x.fw);maxR=Math.max(maxR,x.left+x.f.ob.r*x.fw);els.push(d)});
   const W=maxR-minL;M.forEach((x,k)=>{x.left-=minL;x.el.style.left=x.left+"px";x.el.style.transform=x.lift?`translateY(${-x.lift}px)`:"";s.appendChild(x.el)});
   const lead=M[0];s.style.width=W+"px";s.style.height=fh0+"px";M.forEach(x=>{x.el.style.top=(fh0-x.fh)+"px";x.el.style.bottom="auto"});
   s.__cx=W/2;s.__feet=fh0-fh*(1-lead.f.ob.b);s.__top=Math.min(...M.map(x=>fh0-x.fh+x.f.ob.t*x.fh-(x.lift||0)));
   const a=document.createElement("div");a.className="kring-act";a.innerHTML=`<span class="kscn-tag">${esc(g.line)}</span>`;a.style.left=(W/2)+"px";a.style.top=Math.max(-30,s.__top-30)+"px";s.appendChild(a);
-  const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${M.map(x=>esc(typeof kitUnkName==="function"?kitUnkName(x.p.ref||x.p):x.p.name)).join(" · ")}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
+  const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${g.gi!=null&&R.o.groups&&R.o.groups[g.gi].name?esc(R.o.groups[g.gi].name):M.map(x=>esc(typeof kitUnkName==="function"?kitUnkName(x.p.ref||x.p):x.p.name)).join(" · ")}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
  /* the warm light behind the slot in front (static gradient, opacity only) */const h=document.createElement("div");h.className="kring-halo";const W0=parseFloat(s.style.width);h.style.cssText=`left:${-W0*.25}px;top:${s.__top-fh0*.04}px;width:${W0*1.5}px;height:${(s.__feet-s.__top)*1.08}px`;s.insertBefore(h,s.firstChild);s.__halo=h;
  s.__g=g;return s}
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
 function geo(R){const m=kv(),K=KIT_RING,L=R.L,w=L.g.w,H=L.g.H;return {w,H,cx:w/2,floor:H*K.floor,Rx:w*K.rx[m],Ry:H*K.ry[m]}}
 function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const q=KRING_MATH.slot(i,R.rot,N),a=q.a,c=q.c,sn=q.s,k=q.k;s.style.visibility=q.hide?"hidden":"";
-  const sc0=1;const sc=KIT_RING.back+(1-KIT_RING.back)*Math.pow(k,1.4),x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
+  const sc=(KIT_RING.back+(1-KIT_RING.back)*Math.pow(k,1.4))*(N>1?KRING_MATH.boost(a):1),x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
   const st=N>1?Math.abs(a):0,d=Math.min(1,st*KIT_RING.dimK);s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
 function stepPx(R){const g=geo(R);return Math.max(60,g.Rx*2*Math.PI/Math.max(3,R.slots.length)*.7)}
 function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){res();return false}}))}
-function fling(R,v){R.v=v;if(calm())return snap(R);return new Promise(res=>loop(dt=>{R.rot+=R.v*dt;R.v*=Math.pow(KRING_MATH.decay,dt/16.67);place(R);if(Math.abs(R.v)<.0012){snap(R).then(res);return false}}))}
+function fling(R,v){R.v=v;if(calm())return snap(R);return new Promise(res=>loop(dt=>{R.rot+=R.v*dt;R.v*=Math.pow(KRING_MATH.decay,dt/16.67);place(R);if(Math.abs(R.v)<KRING_MATH.stop){snap(R).then(res);return false}}))}
 const snap=R=>tween(R,Math.round(R.rot),KRING_MATH.snapMs);
 const front=R=>KRING_MATH.front(R.rot,R.slots.length);
 /* ---------- open ---------- */
 async function open(o){o=o||{};close(true);css();const m=kv();
- const ppl=(o.people||(typeof curPeople==="function"?curPeople():[])).map((p,i)=>({p,i:o.idx?o.idx[i]:i})).filter(x=>x.p&&(o.acts||ringable(x.p)));if(!ppl.length)return null;
+ if(o.groups){o.people=[];o.gi=[];o.groups.forEach((G,gi)=>(G.people||[]).forEach(p=>{o.people.push(p);o.gi.push(gi)}));o.mode="group";o.acts=o.acts||(()=>[])}
+ const ppl=(o.people||(typeof curPeople==="function"?curPeople():[])).map((p,i)=>({p,i:o.idx?o.idx[i]:i,gi:o.gi?o.gi[i]:-1})).filter(x=>x.p&&(o.acts||ringable(x.p)));if(!ppl.length)return null;
  const figs=await Promise.all(ppl.map(x=>loadFig(x.p)));const list=ppl.filter((x,k)=>{x.f=figs[k];return !!x.f});if(!list.length)return null;
  const Sc=kitScene.open({bg:o.bg});const L=Sc.L;L.classList.add("kring");document.body.classList.add("kring-on");L.style.opacity="0";
  const R={Sc,L,list,rot:0,v:0,mode:o.mode||"person",slots:[],sel:-1,busy:0,pk:null,o};CUR=R;
@@ -128,20 +137,20 @@ async function open(o){o=o||{};close(true);css();const m=kv();
  if(calm())L.style.opacity="1";else{L.animate([{opacity:0},{opacity:1}],{duration:320,easing:"ease-out",fill:"both"}).onfinish=()=>{L.style.opacity="1"};
   R.slots.forEach((s,i)=>{const fin=s.style.transform;s.animate([{transform:`translate(${geo(R).cx-s.__cx}px,${geo(R).floor-geo(R).Ry*2-s.__feet}px) scale(.3)`,opacity:0},{transform:fin,opacity:1}],{duration:520,delay:120+i*50,easing:"cubic-bezier(.2,1.1,.4,1)"})})}
  return R}
-async function build(R){R.slots.forEach(s=>s.remove());R.slots=[];const m=kv(),g0=R.L.g,fh0=Math.round(g0.H*KIT_RING.fh[m]);
- const groups=R.mode==="group"?groupsOf(R.list):R.list.map(x=>({members:[x],line:""}));
+async function build(R){R.slots.forEach(s=>s.remove());R.slots=[];const m=kv(),g0=R.L.g;if(R.stdPx==null)R.stdPx=stdImgR()||g0.H*KIT_RING.stdR[m];R.stdR=R.stdPx/g0.H;const fh0=Math.round(R.stdPx);
+ const groups=R.o.groups?R.o.groups.map((G,gi)=>({gi,members:R.list.filter(x=>x.gi===gi),line:G.line||G.name||""})).filter(g=>g.members.length):R.mode==="group"?groupsOf(R.list):R.list.map(x=>({members:[x],line:""}));
  R.groups=groups;R.slots=groups.map(g=>{const s=buildSlot(R,g,fh0);R.L.appendChild(s);return s});R.rot=0;
- if(R.o.at!=null){const k=R.list.findIndex(x=>x.i===R.o.at);if(k>=0)R.rot=k}place(R);
+ if(R.o.at!=null){const k=R.o.groups?groups.findIndex(g=>g.gi===R.o.at):R.list.findIndex(x=>x.i===R.o.at);if(k>=0)R.rot=k}place(R);
  if(!R.o.acts)R.tabs.querySelectorAll(".pct").forEach(b=>b.classList.toggle("on",b.dataset.kr===R.mode));
- const g=geo(R),a=KIT_RING.arrow[m],fy=g.floor-g.H*KIT_RING.fh[m]*.45;R.arL.style.left="6px";R.arR.style.left=(g.w-a-6)+"px";R.arL.style.top=R.arR.style.top=fy+"px";
+ const g=geo(R),a=KIT_RING.arrow[m],fy=g.floor-g.H*(R.stdR||KIT_RING.stdR[m])*.45;R.arL.style.left="6px";R.arR.style.left=(g.w-a-6)+"px";R.arL.style.top=R.arR.style.top=fy+"px";
  [R.arL,R.arR].forEach(b=>b.style.visibility=R.slots.length>1?"":"hidden")}
 async function setMode(R,m){if(m===R.mode)return;R.busy=1;try{if(R.sel>=0)await back(R,true);const out=R.slots.map(s=>s.animate([{opacity:1},{opacity:0}],{duration:calm()?1:180,fill:"both"}).finished);await Promise.all(out);R.mode=m;await build(R);
  if(!calm())R.slots.forEach((s,i)=>s.animate([{opacity:0,transform:s.style.transform+" scale(.85)"},{opacity:1,transform:s.style.transform}],{duration:300,delay:i*40,easing:E}))}finally{R.busy=0}}
 function slotAt(R,x,y){const hit=document.elementsFromPoint(x,y).map(e=>e.closest&&e.closest(".kring-s")).filter(Boolean);if(hit.length)return hit.sort((a,b)=>+b.style.zIndex-+a.style.zIndex)[0];
  /* slots have no pointer events: hit-test the painted boxes in z order */let best=null;R.slots.forEach(s=>{const r=s.getBoundingClientRect();if(x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom&&(!best||+s.style.zIndex>+best.style.zIndex))best=s});return best}
 function tapAt(R,x,y){const s=slotAt(R,x,y);if(!s)return;const i=R.slots.indexOf(s);if(i===front(R)&&Math.abs(R.rot-Math.round(R.rot))<.02)return focus(R);turnTo(R,i)}
-function turnBy(R,d){return tween(R,Math.round(R.rot)+d,KIT_RING.turnMs)}
-function turnTo(R,i){const N=R.slots.length;const d=KRING_MATH.short(i,R.rot,N);return tween(R,R.rot+d,Math.min(700,KIT_RING.turnMs+Math.abs(d)*90))}
+function turnBy(R,d){return tween(R,Math.round(R.rot)+d,KRING_MATH.stepMs)}
+function turnTo(R,i){const N=R.slots.length;const d=KRING_MATH.short(i,R.rot,N);return tween(R,R.rot+d,Math.min(700,KRING_MATH.stepMs+Math.abs(d)*90))}
 /* ---------- focus: the front slot grows to a big full body, slides LEFT; plaques drop on the RIGHT ---------- */
 function anim(el,to,ms){const from=el.style.transform;el.style.transform=to;if(calm()||!from)return Promise.resolve();return el.animate([{transform:from},{transform:to}],{duration:ms,easing:E}).finished.catch(()=>{})}
 async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R);R.sel=i;const s=R.slots[i],m=kv(),g=geo(R),K=KIT_RING;
@@ -151,7 +160,11 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
  const fwS=s.offsetWidth,grp=s.__g.members.length>1;let sc=(g.H*K.fhF[m])/(s.__feet-s.__top);if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);const cx=g.w*(grp?K.fx[m]+.03:K.fx[m]),feet=g.H*.995;
  R.fT=`translate(${(cx-s.__cx).toFixed(1)}px,${(feet-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;R.fSc=sc;R.fCx=cx;R.fFeet=feet;s.style.zIndex="200";
  await anim(s,R.fT,K.focusMs);
- if(grp)return groupPick(R);return personPick(R,s.__g.members[0])}finally{R.busy=0}}
+ if(R.o.groups)return groupChoose(R,s);if(grp)return groupPick(R);return personPick(R,s.__g.members[0])}finally{R.busy=0}}
+/* §104.3 group PICKER mode (open({groups:[{name,line,people}], gacts(gi)→acts|groups, onGroupPick(gi,id)})): the focused group's plaques = the caller's choices for that group */
+function groupChoose(R,s){closePk(R);const gi=s.__g.gi,M=s.__g.members;let A=[];try{A=R.o.gacts?R.o.gacts(gi)||[]:[]}catch(e){console.error(e)}
+ const b=M.map(x=>boxOf(R,x)).reduce((u,q)=>u?{x:Math.min(u.x,q.x),y:Math.min(u.y,q.y),w:Math.max(u.x+u.w,q.x+q.w)-Math.min(u.x,q.x),h:Math.max(u.y+u.h,q.y+q.h)-Math.min(u.y,q.y)}:q,null);
+ R.pk=kitPick.open(Object.assign({host:R.L,anchor:b,side:"r",dismiss:false},A.length&&A[0].acts?{groups:A}:{acts:A},{onPick:id=>{const fn=R.o.onGroupPick;close(true);if(fn)try{fn(gi,id)}catch(e){console.error("kitRing gpick",e)}}}));return R.pk}
 /* the painted box of one member of the focused slot, in layer px */
 function boxOf(R,x){const s=R.slots[R.sel],sc=R.fSc,ox=R.fCx-s.__cx*sc,oy=R.fFeet-s.__feet*sc;const left=(x.left||0),top=x.el.offsetTop-(x.lift||0);
  return {x:ox+(left+x.f.ob.l*x.fw)*sc,y:oy+(top+x.f.ob.t*x.fh)*sc,w:(x.f.ob.r-x.f.ob.l)*x.fw*sc,h:(x.f.ob.b-x.f.ob.t)*x.fh*sc}}
@@ -266,4 +279,50 @@ function stageRing(idx){try{const P=typeof curPeople==="function"?curPeople():[]
 kitRing.stageRing=stageRing;
 /* the stage figure tap enters jdfv's focus view (dfOpen): with the ring wired, the ring holds her instead (ONE figure view) */
 if(typeof dfOpen==="function"){const do0=dfOpen;dfOpen=window.dfOpen=function(i){try{if(KIT_RING.wire&&!window.__bot&&!window.__kringOff&&!CUR&&S&&S.visit&&typeof i==="number"&&stageRing(i))return}catch(e){}return do0.apply(this,arguments)}}
+/* ---------- §104.2 wiring D: Việc nhờ strips (q72 «Đang làm / Đã qua») — the requester as a person object (a record with no living person = a face stand-in: silhouette figure) ---------- */
+window.q72Pp=function(a){try{if(!a)return{name:"?"};if(a.o&&typeof a.o==="object")return a.o;if(a.o==="th"||a.k==="th")return{kind:"th"};if(a.k==="emp")return S.emp;
+ const v=(rivals||[]).find(x=>x.name===a.n);if(v)return v;return{name:a.n||a.pn||"?",f:a.f}}catch(e){return{name:"?"}}};
+/* ---------- §104.2 wiring E: Ân oán person slot (relPopOpen: kit dialog + group tabs + face strip) → vòng người. Group tabs (Ta · Chí tôn · Phi tần · Nam nhân · Cung nhân) ride on
+   the ring; «Chọn» = the slot takes that person (relSel / relYk), exactly as the old strip tap. ---------- */
+const relP=q=>q.k==="me"?S:q.k==="emp"?S.emp:q.k==="th"?{kind:"th"}:q.p;
+function relRing(w,g){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w==="x"?C.X:C.Y;const GR=["Ta","Chí tôn","Phi tần","Nam nhân","Cung nhân"].filter(n=>L.some(x=>x.g===n));
+ g=g||cur.g;const items=L.filter(x=>x.g===g);const at=Math.max(0,items.findIndex(x=>String(x.k)===String(cur.k)));
+ return open({people:items.map(x=>relP(x.q)),title:w==="x"?"Xem quan hệ của":"Quan hệ với",at,tabs:GR.length>1?GR.map(n=>({label:n,on:n===g,fn:()=>relRing(w,n)})):null,
+  acts:x=>[{id:"go",n:"Chọn",word:"",ton:""}],onPick:i=>{const q=items[i];if(!q)return;if(w==="x")relSel=q.k;else relYk=q.k;try{renderPanel()}catch(e){console.error(e)}}})}
+if(typeof relPopOpen==="function"){const rp0=relPopOpen;relPopOpen=window.relPopOpen=function(w){try{if(KIT_RING.wire&&!window.__bot&&!window.__kringOff&&typeof relCands==="function"){relRing(w);return null}}catch(e){console.error("kitRing rel",e)}return rp0.apply(this,arguments)}}
+kitRing.relRing=relRing;
+/* ---------- §104.2 wiring F: the map / stage group buttons «Cung nhân» (Đồng liêu) · «Chí tôn» (kitGroupBtns, rail kgf-*, the #kgfdrop list, #kshR court rows) → vòng người of
+   that group; «Xem» = the old row tap (court → kitCourtOpen(k); household → the Cung nhân tab at that person). ---------- */
+function grpBtnRing(k,at){try{let P=[],go=[],ks=[];
+ if(k==="ct"){(typeof kitCourtRows==="function"?kitCourtRows():[]).forEach(r=>{const p=r.k==="emp"?S.emp:r.k==="th"?{kind:"th"}:r.ref||r.p||r.o;if(!p)return;P.push(p);ks.push(r.k);go.push(()=>kitCourtOpen(r.k))})}
+ else{const tabGo=j=>()=>{if(typeof PG==="object")PG.staff=j;try{if(typeof kgfShut==="function")kgfShut()}catch(e){}const b=document.querySelector('[data-tab="staff"]');if(b)b.click()};
+  if(typeof isSrv==="function"&&isSrv())srvColleagues().forEach((s,j)=>{P.push(s);go.push(tabGo(j))});
+  else{let j=0;if(S.maid){P.push(S.maid);go.push(tabGo(j++))}(S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;P.push(s);go.push(tabGo(j++))})}}
+ if(P.length<1)return false;let title=k;try{title=typeof kgfLab==="function"?kgfLab(k):k}catch(e){}
+ const a0=typeof at==="string"?Math.max(0,ks.indexOf(at)):Math.max(0,Math.min(P.length-1,at|0));open({people:P,title,at:a0,acts:()=>[{id:"see",n:"Xem",word:"",ton:""}],onPick:i=>{try{go[i]&&go[i]()}catch(e){console.error(e)}}});return true}catch(e){console.error("kitRing grp",e);return false}}
+document.addEventListener("click",e=>{try{if(!KIT_RING.wire||window.__bot||window.__kringOff||CUR)return;const b=e.target.closest&&e.target.closest('.kgfbtns [data-kgf],#krail [data-rail^="kgf-"],#kshR [data-kc],#kshR [data-k3go],#kgfdrop [data-k3go]');if(!b)return;
+ const k=b.dataset.kgf||(b.dataset.rail?b.dataset.rail.slice(4,6):b.dataset.kc?"ct":"cn");if(k!=="cn"&&k!=="ct")return;
+ if(b.dataset.kc&&!b.closest("#kshR"))return;
+ if(grpBtnRing(k,b.dataset.kc||+(b.dataset.k3pi||0))){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();window.__kgfOpen=null}}catch(x){}},true);
+kitRing.grpBtnRing=grpBtnRing;
+/* ---------- §104.2 wiring G: Phe phái «Lập phe cùng …» / «Mời …» face buttons (facHTML) → ONE kit button «… · N ›» + vòng người of those consorts; the plaque = the old button
+   (its words, its cost line, locked = its why); pick = the old button's own click (kept in the panel, hidden). ---------- */
+const FA_KINDS=["lap","moi","gach","hop"],FA_LAB={lap:["Lập phe cùng ai","Lập phe"],moi:["Mời người vào phe","Mời vào phe"],gach:["Gạch tên ai","Gạch tên"],hop:["Hợp mưu hạ ai","Hợp mưu"]};
+if(typeof facHTML==="function"){const fh0=facHTML;facHTML=window.facHTML=function(){let h=fh0.apply(this,arguments);try{if(!KIT_RING.wire||window.__bot||window.__kringOff)return h;
+ FA_KINDS.forEach(kind=>{const re=new RegExp(`<button data-fa="${kind}" data-fv="([^"]+)"[^>]*>[\\s\\S]*?<\\/button>`,"g");const n=(h.match(re)||[]).length;if(!n)return;let first=true;
+  h=h.replace(re,(m)=>{const hid=m.replace("<button ","<button hidden data-kring-fh ");if(first){first=false;return `<button type="button" class="kbtn" data-kring-fa="${kind}">${FA_LAB[kind][0]} · ${n} ›</button>`+hid}return hid})});
+ /* §104.3 the faction rows' own acts (Xin vào phe · Ly gián) → ONE kit button «Các phe · N ›» = vòng nhóm of the factions (a slot = the faction's people, her own figure never) */
+ const fre=/<button data-fa="(xin|ly)" data-ff="([^"]+)"[^>]*>[\s\S]*?<\/button>/g;const ff=new Set([...h.matchAll(fre)].map(m=>m[2]));
+ if(ff.size){h=h.replace(fre,m=>m.replace("<button ","<button hidden data-kring-fh "));h=h.replace(/(<\/div>)/,`$1<div class="rbtn"><button type="button" class="kbtn" data-kring-fac="1">Các phe · ${ff.size} ›</button></div>`)}
+ }catch(e){console.error("kitRing fac",e)}return h};
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-fa]");if(!b)return;e.preventDefault();e.stopPropagation();const kind=b.dataset.kringFa;
+  const B=[...document.querySelectorAll(`button[data-kring-fh][data-fa="${kind}"]`)];const P=B.map(x=>{const id=x.dataset.fv;return(rivals||[]).find(v=>String(v.id)===String(id))});
+  const ok=B.filter((x,i)=>P[i]);const PP=P.filter(Boolean);if(!PP.length)return;
+  open({people:PP,title:txt(b).replace(/ · \d+ ›$/,""),at:0,acts:x=>{const o=ok[x.i];const sm=txt(o.querySelector("small"));return [{id:"go",n:FA_LAB[kind][1],word:"",ton:"",info:sm,off:!!o.disabled,why:o.disabled?"Hết khắc buổi này":""}]},
+   onPick:i=>{const o=ok[i];if(o&&!o.disabled)o.click()}})},true);
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-fac]");if(!b)return;e.preventDefault();e.stopPropagation();
+  const F=((S&&S.facs)||[]).filter(f=>document.querySelector(`button[data-kring-fh][data-ff="${f.id}"]`));if(!F.length)return;
+  open({title:"Các phe",groups:F.map(f=>{const l=facLeader(f);return{name:f.name,line:"đứng đầu: "+(l===S?"ngươi":l.name),people:facMembers(f).filter(m=>m&&m!==S)}}),at:0,
+   gacts:gi=>[...document.querySelectorAll(`button[data-kring-fh][data-ff="${F[gi].id}"]`)].map(o=>({id:o.dataset.fa,n:txt(o.firstChild),word:"",ton:"",info:txt(o.querySelector("small")),off:!!o.disabled,why:o.disabled?"Chưa làm được lúc này":""})),
+   onGroupPick:(gi,id)=>{const o=document.querySelector(`button[data-kring-fh][data-ff="${F[gi].id}"][data-fa="${id}"]`);if(o&&!o.disabled)o.click()}})},true)}
 }catch(e){console.error("jkring",e)}})();

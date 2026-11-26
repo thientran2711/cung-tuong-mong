@@ -29,5 +29,20 @@ const tapFront=async p=>{const r=await p.evaluate(()=>{const R=kitRing.cur;if(!R
   res.modal=await p.evaluate(()=>({ring:!!kitRing.cur&&!!kitRing.cur.o.modal,held:document.getElementById('modal').classList.contains('kring-held'),n:kitRing.cur?kitRing.cur.list.length:0,err:window.__spyErr||''}));await sh('A-ring');
   if(res.modal.ring){await tapFront(p);await p.waitForTimeout(1600);res.modal.acts=await p.evaluate(()=>[...document.querySelectorAll('.kpk .kpk-b b')].map(b=>b.textContent).join('|'));await sh('A-focus');
    await tapEl(p,'.kring-x button');await p.waitForTimeout(700);await tapEl(p,'.kring-x button');await p.waitForTimeout(800);res.modal.closed=await p.evaluate(()=>!kitRing.cur)}
+  /* RING-BUILD-3 cases: staff / q72 strips, Ân oán slot, Chí tôn rows (#kshR / group buttons), Phe phái person + group ring */
+  const ringCase=async(name,prep,sel,opt)=>{opt=opt||{};await p.evaluate(()=>{try{kitRing.close(true)}catch(e){}Q.length=0;document.getElementById('modal').hidden=true});await p.evaluate(prep).catch(()=>{});await p.waitForTimeout(800);
+   const vis=await p.evaluate(sel=>{const b=document.querySelector(sel);return b?b.getClientRects().length>0:null},sel);if(!vis){res[name]=vis===null?'n/a here':'hidden';return}
+   await tapEl(p,sel);await p.waitForFunction(()=>kitRing.cur&&kitRing.cur.slots.length,null,{timeout:8000}).catch(()=>{});await p.waitForTimeout(900);const o={open:!!(await p.evaluate(()=>kitRing.cur)),n:await p.evaluate(()=>kitRing.cur?kitRing.cur.slots.length:0)};
+   if(o.open){if(o.n>1){await p.evaluate(()=>kitRing.turnBy(1));await p.waitForTimeout(600)}await tapFront(p);await p.waitForTimeout(1700);o.acts=await p.evaluate(()=>[...document.querySelectorAll('.kpk .kpk-b b')].map(b=>b.textContent).join('|'));await sh(name);
+    if(opt.pick){await tapEl(p,'.kpk .kpk-b');await p.waitForTimeout(500);await tapEl(p,'.kpk-conf .khok');await p.waitForTimeout(900);o.after=await p.evaluate(opt.pick)}
+    else{await tapEl(p,'.kring-x button');await p.waitForTimeout(600);await tapEl(p,'.kring-x button');await p.waitForTimeout(600)}o.closed=await p.evaluate(()=>!kitRing.cur)}
+   res[name]=o};
+  await ringCase('staff',()=>{tab='staff';render()},'[data-kring-pg="staff"]',{pick:()=>({tab,pg:PG.staff})});
+  await ringCase('q72',()=>{tab='q72';render()},'[data-kring-pg="q72"]');
+  await ringCase('rel',()=>{tab='rel';render()},'#panel [data-relslot="x"]',{pick:()=>({relSel:String(relSel)})});
+  await ringCase('court',()=>{tab='act';render();window.__kgfOpen=null},'#kshR [data-kc],.kgfbtns [data-kgf="ct"],#krail [data-rail^="kgf-ct"]',{pick:()=>({modal:!document.getElementById('modal').hidden||!!document.querySelector('.kcourt,.pcpop')})});
+  await ringCase('crew',()=>{tab='act';render();window.__kgfOpen=null},'.kgfbtns [data-kgf="cn"],#krail [data-rail^="kgf-cn"],#kshR [data-k3go]',{pick:()=>({tab})});
+  await ringCase('facP',()=>{tab='fac';render()},'[data-kring-fa]');
+  await ringCase('facG',()=>{tab='fac';render()},'[data-kring-fac]');
   res.errs=errs;console.log(wh,JSON.stringify(res));if(errs.length)fail++;await ctx.close()}
  await b.close();process.exit(fail?1:0)})();
