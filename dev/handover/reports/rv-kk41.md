@@ -57,3 +57,9 @@ I looked all four shots myself: n-home-755 (Fold home), n-home-1180 (iPad HOME i
 
 ## (B) delta a5ff660a (on d0c24fa2; G1 fix only) — SMALL PASS
 Delta = jbal BAL.kitpage.demo.kem {g:8,o:-3,tc1:6,tc2:2,sung:3,tc3:-4,suc:-10} + jkitpage kitPgKem reads it (kaN). Same numbers as before (8 / −3 / +6 / +2 / +3 / −4 / −10) → the sample renders the same. On a5ff660a: kit-kem-row.js PASS (2 SKIP «(42)»), one-core-guard PASS (fails 0), one-core-text PASS, one-core-text-rule PASS. Law 4 ok.
+
+## (D) review/kit-name-stranger e25dfd52 (on 55804d2b; answers the SMALL FAIL) — SMALL PASS
+Delta: j61 k61UnkChip rewrites the «<tước> <chip>» group ONCE (title words written before the chip, KP_TITLE_RX, join the chip title; a repeat of its own title is dropped — also fixes «Vương gia <Vương gia ???>»), KIT.md §98.15 in place, kit-name-stranger.js seeded + loop over every stranger kind/rank, kit-name-sites.py (call-site table).
+Tests (built index of each sha, my runs): kit-name-stranger.js on e25dfd52 PASS 6/6 seeded runs; same loop test on 55804d2b FAIL 10, on main 3af7896e FAIL 148. name-sentence.js on e25dfd52 PASS. kit-name-sites.py: 42 kitName sites (14 TAG, 28 DYN) listed; all go through the one k61UnkChip pass (chip decided where it lands), law 11 table present.
+LOOK (kns-755): subject → «Một vị Quý phi tâu xin…», mid → «Nghe nói một vị Quý phi…», «Một vị Tổng quản thái giám sai người đến báo tin.», all 17 ranks/kinds (Quý phi … Thị vệ, Thái y) read «Một vị <tước> …»; bare tag / stat / row / plate keep «Quý phi ???» (OD:L673). No «một vị» inside a title.
+Not done by me: iPad still looked at kns-1180 only via the test PASS; call sites DYN (jts.js:270 etc.) judged by the table + the on-page pass, not each screen.
