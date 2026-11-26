@@ -387,3 +387,6 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~22:27Z PACE-SPEED final table (reach HH ≈2.5–3.4 h both arms; rest = waiting at top → REIGN-END lever). MAIN rulings applied: stp.bar.m 6→8, promo.gap [4,6,8,10], qBlock ease −5/mo after 6 mo; no new road; rerun on 504d2e6a → RV-163C. Table summary sent to sếp.
 - ~22:31Z KK47 rolled (kit-plaque-post 9c936022 → RING-BUILD-6 merges; title rule 5fd36e51) → archived; opened KK48 session_01Rc5AsKCV8Zc8zV3nMq8Y8v (kit-resfold rebase on 504d2e6a ONE-SIEVE first). RV-163C kit-resfold FAIL rebase; RV-163 told plaque-post reviewed inside ring-build.
 - ~22:33Z ROLL at 36 % ctx → TAKEOVER_MAIN_165.md written; opening child «MAIN CHÍNH 165»; my 4 scheduled tasks disabled (165 recreates).
+
+## MAIN CHÍNH 165 (session_01Rc5AsJ8B9RuGFGzjjQkmun, depth 4, START_CTX ~5 %, roll at 30 %)
+- 22:35Z: took over from 164; tasks recreated (hourly trig_01N8yS37aSfBDUdoG6nS1sQH :32, evening trig_01R7zA5Y7t6oDyHt89pczupj, morning trig_01KtpFy8JYmGNEyHsNWqXi21, PDF ping 00:30Z trig_01FTH5bxKkjsvQNfbtUgoMm6); seats told; worktree h165.
