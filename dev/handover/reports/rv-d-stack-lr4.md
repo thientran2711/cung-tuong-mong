@@ -40,7 +40,7 @@ House cap (resHead count) is fine: S + friend + 1 NPC in a cap-2 house → the N
 | coop-one-world seeds 7 / 3 / 11 | PASS ×3 (+ quickcheck hook 7 / 3 PASS) |
 | quickcheck.sh | own build OK; core gates = only G4 80-dialog-fixed «no empty Tốn / Được cell» Fold + iPad and G4 90-button-crawl «Ô lưu · Lui» (both known); TIME-SPILL GUARD PASS; browser PASS: open 1921 ms, old save from LIVE loads + plays a buổi (0 errors), perf median new/live render 246/218 ms, tab 468/535, buổi 1827/1833, tasks>200 ms 32/34 |
 | old save | quickcheck old-save ok; pal-trim-oldsave PASS (heads / residents / capacity, 0 errors) |
-| same-as-bare check | dialog-fixed on bare 3af7896e: the same 2 FAIL. coop-ban-cung on bare 3af7896e: run 1 23/23, run 2 cung nữ seat FAIL (old test); «Xin» not hit in my bare runs (chance: needs every ask locked) — the delta touches no code that check reads except palFix occupancy, and run 2/3 on cfe52de7 passed it |
+| same-as-bare check | dialog-fixed on bare 3af7896e: the same 2 FAIL. coop-ban-cung on bare 3af7896e: run 1 23/23, run 2 cung nữ seat FAIL ×3 (old test), run 3 the SAME «Xin» cards / dialog drawn ×4 FAIL ({"L":[],"n":1} both seats) → known, not this delta |
 
 Laws touched: 1 (one world) → FAIL items 1-2; 4 one core (BAL.res.side cap, khắc counts) → item 2 cap / merge OK; 7 wording: no new player words; 9 kit: no UI change; 11 whole family: scan above, the tie-break family = the 3 «coop first» sites (:45, :46, :60-61) must take the same seat-stable rule.
 No shots/videos made (logic-only faults); nothing on the CDN to wipe from this review.
