@@ -1,5 +1,7 @@
 PRIORITY #1 CHECK ('kỳ ngộ|thiện cảm|oán|danh|sủng|event cap|người tìm'): OD 254 | ledger 16 | claims 8 | main 15 | review/* 9 | archive 805 — reused: review/balance-pace pace.js harness pattern (it covers lesson/course pace, NOT these five stats; not landed), jspread / j68 evGate / evBusy (existing pacing layers, wrapped, not rebuilt). No other worker on stat pace / daily cap.
 
+**26/11 13:33Z: MAIN 159 ruled CÁCH A (Foreman D relay) — A is the default already; B stays only as the existing one-line switch. coop-e2e on review/stat-pace 055873b9: 143/143 PASS.**
+
 # review/stat-pace — WORKER D2 (Foreman D) — STATUS: #3 FIXED the BIG review FAIL list (1–6), re-review next; preset A default, B = one-line switch (BAL.stpPick)
 #3 = session_01D3E3NapjNambTi15A89ezj · depth 3 · START_CTX ~4 % (estimate; tool read 0).
 #2 = session_01D3E3NXn2KvRU5meXSH17rD · depth 2 · START_CTX ~5 % (estimate) · sếp 05:20Z «Sửa gấp … sau khi đáp máy bay» → Foreman D 05:27Z: make A/B two presets, A default, land.
