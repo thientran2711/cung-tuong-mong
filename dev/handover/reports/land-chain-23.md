@@ -9,3 +9,4 @@ STATE at start: LIVE b881686f · ROLLBACK aa37de21. In flight: «READY TO PUSH f
 - A/B: quickcheck --runs 5 on wt/ctp vs wt/live (alternating), box otherwise idle.
 - 17:50Z audio-ipad rerun here: aa37de21 / LIVE b881686f / ctp f573dc94 ALL PASS → env/CDN in LC22's container; MAIN told (drop).
 - 17:55Z OWNER RULING (MAIN 160 + RV-KK41 via LC22): keep ALL result rows. PULLED (carry §6.7 kitRowNil hide): kit-g4-r2 4dbce886, kit-empty-rows cda34e5e, kit-g4-baseline 6b7df96b — do NOT land. CLEAN: kit-stage-r2 ec2f7c43, kem-row a5ff660a, kit-home-frame f75a3f3c, kit-name-stranger e25dfd52. Queue: ctp (A/B) → save rv9/latest → ob-oan chain.
+- 18:05Z A/B f573dc94 vs b881686f (--runs 5): buổi new [1073,1539,1092,4043,997] live [1634,1390,1418,1613,1523] → median 1092/1523 = 0.72×; gated render 224/230, tab 501/590, buổi 1073/1568, tasks 24/29; QC PASS. «READY TO PUSH f573dc94» re-sent to MAIN 160.
