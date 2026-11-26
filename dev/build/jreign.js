@@ -27,7 +27,7 @@ const RGS={emp:{n:"Hoàng thượng",tag:"theo Hoàng thượng",cls:"g"},th:{n:
 const RGQC="Tể tướng";/* the regent's house (phụ chính đại thần) */
 /* off once the Emperor is dead (review/mortality lifespan death, j3 / j99succ succession epilogue): the struggle ends with him */
 function rgOn(){return !!(S&&S.ps&&S.reign&&!S.dead&&!S.empDead&&!(S.succ&&S.succ.on)&&!(typeof isSrv==="function"&&isSrv()))}
-function rgGuest(){const C=window.COOPW;return !!(C&&C.on&&C.seat&&C.seat!=="a")}
+function rgGuest(){const C=window.COOPW;return !!(window.coopGuest&&coopGuest())}
 function rgB(){return BAL.rg}
 function rgW(){if(!S||!S.reign||typeof trS!=="function")return null;const T=trS();if(!T)return null;
  if(!T.rg)T.rg={p:S.reign.power!=null?S.reign.power:BAL.ps.power0,ch:0,t0:S.reign.t0!=null?S.reign.t0:S.turn,out:"",at:null,n:[]};return T.rg}

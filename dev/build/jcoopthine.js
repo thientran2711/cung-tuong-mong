@@ -176,8 +176,17 @@ COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNigh
    and the host's held draw (jcoopworld cyWait / cyFree) runs once she has answered. Her phone never asks it (cyAsk = false on the guest). */
 CW.herCy=g=>{if(!on()||!host()||CW.ctx||E.cyA===g)return;E.cyA=g;E.stat.cyA=(E.stat.cyA|0)+1;lg(["her-cy",g]);
  D.later(other(),()=>{let asked=false;try{asked=!!(S&&!S.dead&&typeof window.cyAsk==="function"&&window.cyAsk())}catch(e){console.error("thin E cy",e)}
-  if(!asked){D.after(()=>{CW.cyNo=g;try{CW.cyFree()}catch(e){console.error(e)}})}})};
-window.cyHostOwns=()=>on()&&!host()&&!CW.ctx;
+  if(asked)E.cyR=g;else{D.after(()=>{CW.cyNo=g;try{CW.cyFree()}catch(e){console.error(e)}})}})};
+/* coop-thin-g-f1 (F1, permanent week stall at L13): the host's draw waits (cyHold) on her answer, so nothing that ends the wait may be lost.
+   (1) her card can be gone with no answer (her ✕ = pick -1, a stale pick, a card lost with her store): the ask ran (E.cyR), the card is not
+   in her open cards, nothing waits deferred for her seat → ask again (the card comes back on her phone; her maid gone / no cycle = cyNo).
+   (2) her answer is a PICK on the host (her cyb intent is off at eW), which never woke the held draw: jcoopthin pick → cyFree; + a 1 s
+   check in jcoopworld while the draw is held. */
+CW.cyLost=g=>{if(!on()||!host()||CW.ctx||E.cyA!==g||E.cyR!==g)return false;const s=other();if(TH.held(s)||(D.DF[s]||[]).length)return false;
+ let st=null;try{st=TH.seatOf(s)}catch(e){}const q=st&&st.S&&st.S.thq;return !(Array.isArray(q)&&q.some(c=>c&&c.pid==="cyrep"))};
+CW.cyReask=g=>{let st=null;try{st=TH.seatOf(other())}catch(e){}const c=st&&st.S&&st.S.cyb;if(c&&c.df===g)delete c.df;E.cyA=null;E.cyR=null;
+ E.stat.cyRe=(E.stat.cyRe|0)+1;lg(["cy-reask",g])};
+window.cyHostOwns=()=>on()&&((!host()&&!CW.ctx)||!!CW.gWk/* part G: her week end on the host takes her phone's branch (neither asks nor auto-answers); the host's own flip asks it after (cyWait → herCy) */);
 /* in her context on the host her card waits as a part-D card (S.thq), not in Q: it is still open, so her week end must not answer it for her */
 window.cyCardOpen=()=>{try{return on()&&!!CW.ctx&&Array.isArray(S.thq)&&S.thq.some(c=>c&&c.pid==="cyrep")}catch(e){return false}};/* jcycle: her phone neither asks the card nor auto-answers it at her week end (her flags come in the host patch) */
 /* world windows' end() on HER household (ORDER s34 16:22Z, reports/coop-thin-c.md 'For part E'): the host's worldTick ends a window for the

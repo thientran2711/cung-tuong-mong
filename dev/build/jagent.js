@@ -24,7 +24,7 @@
    ===================================================================================================================== */
 const AG={self:0,inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
 function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length>40)AG.errs.shift();console.error("jagent",w,e)}catch(x){}}
-function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
+function agGuest(){try{return !!(window.coopGuest&&coopGuest())}catch(e){return false}}/* coop-thin G seat-guard family: her week end on the host (CW.gWk) counts as her seat */
 function agLive(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff)}catch(e){return false}}
 function agOn(){try{return agLive()&&(!agGuest()||AG.self>0)}catch(e){return false}}
 /* coop-guest-agent r2: agMine() = this seat may run ONLY her own household: a co-op guest's phone, or the host inside her context (TH.withSeat).

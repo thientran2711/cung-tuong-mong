@@ -459,7 +459,7 @@ function ptNpcDeed(a,t,k,run,x){const sv=bestSent(a);if(!sv)return"";/* no free 
  ptSend({who:ptPid(sv,a),nm:sv.name,kind:"harm",by:"v"+a.id,byNm:a.name,place:t===S?(S.out?"lc":"home"):palaceOf(t),tgt:ptTid(t),
   a:Object.assign({run,v:a.id,t:ptTid(t),k,sid:sv.sid!=null?sv.sid:null},x||{}),lbl:`đi ${String(ACT[k].n||"làm việc").toLowerCase()} ${t===S?"ngươi":t.name||""}`.trim()});PT.stat.npc++;return""}
 /* landing: the same servant goes (bestSent returns her while the deed runs), the deed's own function runs, news as every NPC deed */
-function ptNpcBack(a,fn){const v=RV(a.a.v);let t=null;try{t=agPerson(a.a.t)}catch(e){}if(!v||!v.alive||v.out||(a.a.t&&!t))return null;
+function ptNpcBack(a,fn){const v=RV(a.a.v);let t=null;try{t=agPerson(a.a.t)}catch(e){}if(!v||!v.alive||v.out||!t)return null;/* coop-thin G #2: a deed whose target is gone or was never recorded (tgt null) lands nowhere; it threw in its own fn (whereOf(null)) */
  const sv=a.a.sid!=null?(v.staff||[]).find(s=>s&&s.sid===a.a.sid):null;PT.landing=1;PT.sv=sv?{p:v,s:sv}:null;let r="";
  try{r=fn(v,t)||""}catch(e){ptErr("npcDeed "+a.a.k,e)}finally{PT.landing=0;PT.sv=null}
  try{if(r){const me=t===S;if(a.a.tsb&&me&&typeof tsbHit==="function")tsbHit(a.a.k,r);else{newsAdd(v,a.a.k,r,me);if(me)log(r)}}}catch(e){ptErr("npcNews",e)}return null}

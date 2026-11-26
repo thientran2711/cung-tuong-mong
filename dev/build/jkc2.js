@@ -387,9 +387,10 @@ Object.assign(KCE,{
    kc2Br()==="bd"?kc2H(kcO("Bắn cung trước điện",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("ban")),"chơi màn Bắn cung; dung mạo và lễ nghi học ở nhà cộng thêm","có rủi ro"):kc2H(kcO("Dâng khúc đàn cố quốc",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("cam")),"chơi màn Đàn; tài đàn và lễ nghi học ở nhà cộng thêm","có rủi ro"),
    kc2H(kcO("Để sứ thần đọc lời chúc thay",{suc:BAL.kc2.n_ramat_o_suc2},()=>kc2Exam("")),`không thi; tính theo tài nghệ, cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}`,"an toàn")]}}}});
 function kc2Exam(art){const K=S.kc;if(!isKc()||K.ex&&K.ex.done)return;K.ex={art,play:1};
- const fin=raw=>{if(!S.kc||K.ex.done)return;K.ex.done=1;K.ex.raw=raw;try{kc2Enter(raw)}catch(e){console.error("kc2Enter",e)}try{showModal();render()}catch(e){}};
- if(!art){fin(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */const dan=K.kd==="dan";
- kc2Play(art,dan?"Tuyển cung nữ":"Lễ ra mắt",dan?"Điểm màn chơi cộng vào kết quả tuyển":"Điểm màn chơi cộng vào phẩm vị",fin)}
+ if(!art){kc2ExamEnd(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */kc2ExamGame(art)}
+/* co-op thin F6b: the game part (opened on HER phone when the start ran in her context on the host) and the ONE named end (the host runs it) */
+function kc2ExamGame(art){const dan=S.kc&&S.kc.kd==="dan";kc2Play(art,dan?"Tuyển cung nữ":"Lễ ra mắt",dan?"Điểm màn chơi cộng vào kết quả tuyển":"Điểm màn chơi cộng vào phẩm vị",kc2ExamEnd)}
+function kc2ExamEnd(raw){const K=S.kc;if(!K||!K.ex||K.ex.done)return;K.ex.done=1;K.ex.raw=raw;try{kc2Enter(raw)}catch(e){console.error("kc2Enter",e)}try{showModal();render()}catch(e){}}
 /* a stale card (the exam already done) never opens the game twice: jkc's own "Phúc tuyển left without a result" rule, for this round */
 (function(){const e0=kcEndTurn;kcEndTurn=function(){try{if(S&&S.kc&&S.kc.kd&&isKc()&&S.kc.ex&&S.kc.ex.play&&!S.kc.ex.done&&!Q.length){S.kc.ex.done=1;kc2Enter(5)}}catch(e){console.error(e)}return e0.apply(this,arguments)}})();
 /* the score: one rule, the people of this life inside it (lý trưởng's word, the envoy's report, Thái hậu's dislike) */
@@ -516,8 +517,11 @@ PEND.kc2Sel=pp=>{if(!S||S.dead||!S.selx||S.selx.done)return null;const srv=S.ori
  return{who:srv?pMe():pEmp(),t:srv?`<p>Nội vụ phủ chọn cung nữ. Ma ma xem dung mạo, khéo tay, lễ nghi; người tốt được chia về hầu các vị nương nương bậc cao, người kém phải giặt đồ ở Tân Giả khố trước.</p>`
   :(S.origin.r||0)>0?`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`
   :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Ngươi sẽ được phong <b>${top}</b>; buổi hôm nay định Hoàng thượng và Thái hậu nhìn ngươi thế nào.</p>`,o}};
-function kc2SelPlay(art){if(!S.selx||S.selx.done)return;S.selx.art=art;const fin=raw=>{if(!S.selx||S.selx.done)return;S.selx.done=1;S.selx.raw=raw;try{kc2SelDo(raw)}catch(e){console.error("kc2Sel",e)}try{showModal();render()}catch(e){}};
- if(!art){fin(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */kc2Play(art,"Tuyển chọn","Điểm màn chơi quyết định phẩm vị",fin)}
+function kc2SelPlay(art){if(!S.selx||S.selx.done)return;S.selx.art=art;
+ if(!art){kc2SelEnd(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */kc2SelGame(art)}
+/* co-op thin F6b: the game part and the ONE named end, as kc2Exam */
+function kc2SelGame(art){kc2Play(art,"Tuyển chọn","Điểm màn chơi quyết định phẩm vị",kc2SelEnd)}
+function kc2SelEnd(raw){if(!S.selx||S.selx.done)return;S.selx.done=1;S.selx.raw=raw;try{kc2SelDo(raw)}catch(e){console.error("kc2Sel",e)}try{showModal();render()}catch(e){}}
 function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(entScore("dir",raw,g));/* ONE CORE: jentry entScore */const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
  const note=`kỳ tuyển chọn: ${KC2SW[tier]}, màn chơi ${raw}/10`;
  if(S.origin.k==="cnv"){const st=[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac];kc2Place(tier,true);[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac]=st;if(S.srv){if(tier===2)S.tin=cl((S.tin||40)+BAL.eff.jkc2.tinKc2SelDo,0,100);if(tier===0){S.srv.lau=4;S.place="tgk";try{S.visit=srvVisitOf("tgk")}catch(e){}}}

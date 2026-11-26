@@ -17,7 +17,7 @@
 const B=()=>(typeof BAL!=="undefined"&&BAL.staff)||{posts:[]};
 const postOf=id=>B().posts.find(p=>p.id===id)||null;
 const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
-const isGuest=()=>{try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b")}catch(e){return false}};
+const isGuest=()=>{try{return !!(window.coopGuest&&coopGuest())}catch(e){return false}};
 const thH=()=>{if(!S)return null;S.thO=S.thO||{};if(!Array.isArray(S.thO.staff))S.thO.staff=[];return S.thO};
 /* ---------- Thái hậu's household joins the servant model ---------- */
 if(typeof allServ==="function"){const a0=allServ;allServ=function(){const L=a0.apply(this,arguments);try{if(S&&S.thO&&Array.isArray(S.thO.staff))for(const s of S.thO.staff)if(!L.includes(s))L.push(s)}catch(e){}return L}}
@@ -144,11 +144,12 @@ function cardHTML(st){const p=postOf(st.eid);const f=staffFace(st);
 window.staffTalkLine=st=>talkLine(typeof st==="string"?elderBy(st):st);/* palace-voice audit (dev/test/voice-pool-sim.js) */
 window.elderCardHTML=st=>{try{return cardHTML(typeof st==="string"?elderBy(st):st)}catch(e){return""}};
 if(typeof popCard==="function"){const c0=popCard;popCard=function(p){if(p&&p.kind==="elder"&&p.ref)return cardHTML(p.ref);return c0.apply(this,arguments)}}
-function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";const bf=typeof rsnap==="function"?rsnap():null;
+function elderAct(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";const bf=typeof rsnap==="function"?rsnap():null;
  if(a==="bieu"){const g=B().gift||20;if(S.bac<g)return;apply({bac:-g});st.af.me=(st.af.me||0)+(B().giftAf||10);r=`Biếu ${st.call} ${g} lượng: người ấy quý ngươi +${B().giftAf||10}.`}
  if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+BAL.eff.jstaff.meAct;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`}
  if(r){log(r);popMsg=r;render();try{if(bf&&typeof resultShow==="function")resultShow(st.call,bf,null)}catch(e){}/* person-dialog-restore: the result is the bottom result card */}}
-document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-elder]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();act(b.dataset.elder,b.dataset.eid)},true);
+document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-elder]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();window.elderAct(b.dataset.elder,b.dataset.eid)},true);
+window.elderAct=elderAct;/* a named engine (the co-op thin guest sends it as her intent, jcoopthinf F6a) */
 /* ---------- they speak by name in events and the log (LUẬT SỬA CẢ NHÓM: one table for every generic "ma ma" of these offices) ---------- */
 function tx(s){if(!s||typeof s!=="string"||!S)return s;const tn=elderBy("tn"),gt=elderBy("gt");let o=s;
  if(tn&&!S.thDead){o=o.replace(/Ma ma thân tín của Thái hậu/g,`${tn.call}, người thân tín của Thái hậu,`).replace(/Ma ma bên Đức Thọ cung/g,`${tn.call} bên Đức Thọ cung`)

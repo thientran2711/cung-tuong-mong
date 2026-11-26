@@ -13,6 +13,7 @@ const REALL=require('./lib/coop-real.js');async function mk(b,name,vp,want){cons
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
   if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  if(process.env.UISCAN&&name==='host')await ctx.addInitScript(fs.readFileSync(path.join(__dirname,'coop-thin-uiscan.js'),'utf8'));/* hostnull: the host-side UI scan of her runs */
   /* LAG=<ms>: a 4G profile on this phone: every socket message out and in waits LAG ms (order kept) */
   if(+process.env.LAG)await ctx.addInitScript(L=>{const W=window.WebSocket;const P=function(u,p){const s=p===undefined?new W(u):new W(u,p);const snd=s.send.bind(s);
     s.send=d=>setTimeout(()=>{try{if(s.readyState===1)snd(d)}catch(e){}},L);let h=null;Object.defineProperty(s,'onmessage',{configurable:true,get(){return h},set(f){h=f}});
@@ -41,7 +42,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
  await inW();
- for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
+ for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;/* the test's rank is staged, not earned: her rank set counted as seen (jpromo prCheck), else the host gives it at her first act (L13) and the twin differs */S.prSeen={r:3,s:null};S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
  await REALL.realize(H,G,()=>week(H,G,'setup'),ok);
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
@@ -171,6 +172,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    if(A===G){await until(G,()=>!COOPW.thin.F.pend,null,15000);const la=await G.p.evaluate(()=>COOPW.thin.F.lastAns);r.ans=la&&la.r}
    if(k==='gift'){const sm=()=>B.p.evaluate(()=>{try{const m=document.getElementById('modal');if(Q.length&&(!m||m.hidden))showModal()}catch(e){}});await sleep(1500);await sm();r.inv=await tapText(B,/^Nhận/,10000);await sleep(2500);await sm();r.keep=await tapText(B,/^Nhận/,10000)}
    await force(false);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(2000);
+   if(k==='laydo'&&A===H)ok(!r.err&&await H.p.evaluate(()=>!Q.some(q=>q&&q.pid==='giftin')),'F2 host→guest laydo: no «Quà tặng» card of the stolen piece on the host (her mirror of the thief was bridged back: a second piece; review coop-thin-laydo)',await H.p.evaluate(()=>[Q.map(q=>q&&[q.pid||q.t,JSON.stringify(q.pp||{}).slice(0,300)])]));
    const nt=await notes(B);for(let i=0;i<4;i++){await clear(H);await clear(G);await sleep(300)}await sync();
    const a1=await pers(A),t1=await pers(B);const good=!r.err&&chk(t0,t1,a0,a1);
    table.push({dir,k,r,t0,t1,a0,a1,notes:nt});ok(good,`F2 ${dir} ${k} (${what}): the effect on the target's own person + the actor`,{r,t0,t1,a0,a1,notes:nt});
@@ -183,4 +185,5 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
  if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await clear(o);for(let i=0;i<8;i++){if(!await tapText(o,/^(Bỏ qua|Đóng|Lui|Đã hiểu)$/,800))break;await sleep(400)}await o.p.evaluate(()=>{try{closeModal()}catch(e){}try{render()}catch(e){}});await sleep(800);
    const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
+ if(process.env.UISCAN)try{fs.writeFileSync(process.env.UISCAN,JSON.stringify(await H.p.evaluate(()=>window.__uiscan)))}catch(e){console.error('uiscan',e.message)}
  const n=res.filter(x=>x[0]).length;console.log(`coop-thin-f1 L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

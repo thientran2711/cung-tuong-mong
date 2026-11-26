@@ -12,7 +12,7 @@ const BIG = 8000;               // send gzip binary above this many chars (robot
 const STALE = 45000;            // ms of silence before a socket counts as gone
 const IDLE_DAYS = 30;
 const SEATMAX = 3000000;        // chars of one seat's week copy
-const SNAPMAX = 6000000, DOMAX = 20000, THINMAX = 9;   // thin guest (review/coop-thin-a): host snapshot cap, one intent cap, highest part level
+const SNAPMAX = 6000000, DOMAX = 20000, THINMAX = 13;   // thin guest (review/coop-thin-a): host snapshot cap, one intent cap, highest part level
 
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,POST,OPTIONS", "Access-Control-Allow-Headers": "content-type" };
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json", ...CORS } });
@@ -198,6 +198,8 @@ export class Room {
     /* per-seat copy of her week (review/coop-rejoin-xdev): the client's rolling snapshot (jcoopworld CW.snap), so a rejoin from ANOTHER
        device (same pid via Sổ mây) or with cleared storage restores her exact week. Version = server counter m.sv[seat]; a write based on an
        older version than the stored one is refused (a stale device must not overwrite a newer copy). */
+    /* part G: at level >= 13 her week lives on the host: no guest seat copy is kept (nothing to restore it from) */
+    if ((t === "seat" || t === "seatd") && seat !== "a" && (m.thin | 0) >= 13) return this.send(ws, { t: "seatok", sv: (m.sv && m.sv[seat]) || 0 });
     if (t === "seat") {
       const o = msg.o; if (!o || typeof o !== "object" || o.seat !== seat || o.week !== m.week) return this.send(ws, { t: "error", code: "badseat", msg: "tuần " + m.week });
       m.sv = m.sv || {}; const cur = m.sv[seat] || 0;
@@ -272,6 +274,13 @@ export class Room {
     if (t === "end") {
       if (msg.week !== m.week) return this.send(ws, { t: "error", code: "badweek", msg: "tuần " + m.week });
       if (!msg.state || typeof msg.state !== "object") return;
+      /* thin guest part G (level >= 13, review/coop-thin-g): the HOST runs the week end for both seats; his C is the room's next state as it is
+         (no merge3, no sub-b). A guest `end` is refused (old client in a level-13 room: impossible by the build match, answered anyway). */
+      if ((m.thin | 0) >= 13) {
+        if (seat !== "a") return this.send(ws, { t: "error", code: "thinend", week: m.week });
+        m.ended = m.ended || {}; m.ended.a = true; await this.delBig("sub-b");
+        return this.tick(msg.state);
+      }
       await this.putBig("sub-" + seat, msg.state);
       m.ended = m.ended || {}; m.ended[seat] = true; await this.saveMeta();
       const other = seat === "a" ? "b" : "a";
@@ -354,11 +363,14 @@ export class Room {
   async seatCopy(seat) { const o = await this.getBig("seat-" + seat); return o && typeof o === "object" && o.week === this.meta.week ? o : null; }
   async delBig(key) { const n = (await this.ctx.storage.get(key)) || 0; const keys = [key]; for (let i = 0; i < n; i++) keys.push(key + ":" + i); await this.ctx.storage.delete(keys); }
 
-  async tick() {
+  async tick(hostC) {
     const m = this.meta; const base = await this.loadC();
-    const A = await this.getBig("sub-a"), B = await this.getBig("sub-b");
     let F;
-    if (!base) F = A || B; else if (A && B) F = merge3(base, A, B); else F = A || B || base;
+    if (hostC) F = hostC;   /* part G: the host's week, both persons */
+    else {
+      const A = await this.getBig("sub-a"), B = await this.getBig("sub-b");
+      if (!base) F = A || B; else if (A && B) F = merge3(base, A, B); else F = A || B || base;
+    }
     m.week = (m.week || 0) + 1; F.week = m.week; m.ended = {}; m.buoi = 0; m.bended = {}; m.sv = {};
     await this.saveC(F); await this.delBig("sub-a"); await this.delBig("sub-b"); await this.delBig("seat-a"); await this.delBig("seat-b"); await this.saveMeta();
     await this.bcast({ t: "week", week: m.week, state: F });

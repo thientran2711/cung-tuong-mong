@@ -37,7 +37,7 @@ function figxPool(){const M=(typeof FIGIX!=="undefined"&&FIGIX.mama)||{};return 
 function figxHas(k){return !!(k&&FIGIX[k.split(":")[0]]&&FIGIX[k.split(":")[0]][k]&&FIGIX[k.split(":")[0]][k].length)}
 function figxReady(){return !!figxLoad.ok||(figxLoad.fail||0)>=BAL.figxTry}
 function figThPick(){const T=S.thO;if(T.fid&&/^thaihau:/.test(T.fid)){const old=T.fid;T.fid=null;S.fidUsed=figUsed().filter(x=>x!==old)}
- if(T.fid&&figxHas(T.fid))return T.fid;if(window.COOPW&&COOPW.on&&COOPW.seat==="b")return null;/* the guest waits for the host's face */
+ if(T.fid&&figxHas(T.fid))return T.fid;if(window.coopGuest&&coopGuest())return null;/* the guest waits for the host's face */
  if(!figxReady())return null;/* until the rows are in she keeps her old portrait (faceFor "thaihau", j17): never blank, never a wrong face for life */
  const U=new Set(figUsed().concat(S.fidDead||[]));const free=figxPool().filter(k=>!U.has(k));if(!free.length)return null;
  const good=free.filter(k=>FIGXT[k]&&FIGXT[k].th.length);const k=pick(good.length?good:free);T.fid=k;figUsed().push(k);return k}
@@ -46,7 +46,7 @@ function figThPick(){const T=S.thO;if(T.fid&&/^thaihau:/.test(T.fid)){const old=
 /* r2 (review FAIL #2): a save made before this build keeps the dress colour she and everyone already wore (v0) for the reign running when
    it is first loaded: S.emp.figV0 = that reign's era S.emp.era (a world key, written by the host / solo only, so both seats agree). A new life
    (start) is stamped at once and is never pinned; the next reign (another Emperor) wears the colours. */
-function figVPin(){try{if(!S||!S.emp)return false;if(!S.figVStamp){if(!(window.COOPW&&COOPW.on&&COOPW.seat==="b")&&S.emp.figV0==null)S.emp.figV0=String(S.emp.era||"");S.figVStamp=1}
+function figVPin(){try{if(!S||!S.emp)return false;if(!S.figVStamp){if(!(window.coopGuest&&coopGuest())&&S.emp.figV0==null)S.emp.figV0=String(S.emp.era||"");S.figVStamp=1}
   return S.emp.figV0!=null&&S.emp.figV0===String(S.emp.era||"")}catch(e){return false}}
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.figVStamp=1}catch(e){}return r}})();
 /* her colour of the t7/t8 dress */

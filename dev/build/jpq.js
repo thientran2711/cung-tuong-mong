@@ -32,7 +32,7 @@ const PQ_N={emp:"Hoàng thượng",th:"Thái hậu"};
 function pqS(){if(!S.pq)S.pq={alert:0,cd:0,n:{}};S.pq.n=S.pq.n||{};return S.pq}
 function pqCount(k){const n=pqS().n;n[k]=(n[k]||0)+1}
 function pqCo(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
-function pqHost(){try{return !pqCo()||COOPW.seat==="a"}catch(e){return true}}
+function pqHost(){try{return !pqCo()||!(window.coopGuest&&coopGuest())}catch(e){return true}}
 function pqKinds(a){return PQ_K.filter(k=>(a.inv||[]).some(e=>e&&e.k===k&&!e.h))}
 function pqThReg(a){return a===S?(S.th||0):(a.th||0)}
 function pqVg(a){try{const vg=(S.men||[]).find(m=>m.alive&&m.role==="Vương gia");if(!vg)return null;

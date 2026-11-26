@@ -34,7 +34,7 @@ function stealWant(v,t){const M=stModes(v);if(!M.length)return{u:0,p:0,mode:null
  const mode=M[i][0],o=M[i][1];let mind=1;try{if(typeof mindW==="function")mind=mindW(v,"scheme")||1}catch(e){}
  const need=stNeed(v),pers=persW(v,"steal")*mind,rel=stRel(v,t),fear=stFear(v,t);const u=need*pers*rel*fear*o/100;
  return{u,p:Math.min(B().pMax,1-Math.exp(-B().k*u)),mode,o,need,pers,rel,fear}}
-function guestSeat(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}catch(e){return false}}
+function guestSeat(){try{return !!(window.coopGuest&&coopGuest())}catch(e){return false}}
 function trName(v){try{return (traitsOf(v)[0])||"?"}catch(e){return "?"}}
 /* one night: who tries, who wins. live = the played night (dialogs/log); else notice lines only */
 function stealPass(t,opt){opt=opt||{};const live=opt.live!==false;const out={holder:t,lines:[],tries:0};if(!t||S.dead)return out;

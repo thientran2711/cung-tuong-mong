@@ -67,5 +67,5 @@ window.lyDie=function(p,why){if(!p||p.dead)return "";p.dead=1;p.dY=S.year;const 
 /* she exists from the first day (so she ages and rolls a lifespan), on new games and old saves alike */
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&typeof lyFallen==="function")lyFallen();if(typeof j59CourtNames==="function")j59CourtNames();lyNameFix()}catch(e){}return r}})();
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&typeof lyFallen==="function")lyFallen();lyNameFix()}catch(e){}return r}})();
-(function(){const a0=ageYear;ageYear=function(){const r=a0.apply(this,arguments);try{const y=S&&S.lyF;if(y&&!y.dead&&!y.freed&&(!window.COOPW||!COOPW.on||COOPW.seat==="a"))y.age=(y.age||M.ly.age)+1}catch(e){}return r}})();
+(function(){const a0=ageYear;ageYear=function(){const r=a0.apply(this,arguments);try{const y=S&&S.lyF;if(y&&!y.dead&&!y.freed&&!(window.coopGuest&&coopGuest()))y.age=(y.age||M.ly.age)+1}catch(e){}return r}})();
 })();

@@ -48,9 +48,9 @@ for(const f of files){const src=fs.readFileSync(path.join(DIR,f),'utf8');let ast
    const o=own(anc)||'(top)';reads.push({f,line:n.loc.start.line,o,txt:src.split('\n')[n.loc.start.line-1]})}});
 }
 /* roots: the registered engines */
-const thf=fs.readFileSync(path.join(DIR,'jcoopthinf.js'),'utf8');
+const thf=['jcoopthinf.js','jcoopthinf6b.js'/* F6b: reg12 */].filter(f=>fs.existsSync(path.join(DIR,f))).map(f=>fs.readFileSync(path.join(DIR,f),'utf8')).join('\n');
 const roots=new Set();for(const m of thf.matchAll(/F\.reg\("(\w+)"/g))roots.add(m[1]);for(const m of thf.matchAll(/for\(const n of \[([^\]]+)\]\)F\.reg/g))for(const x of m[1].matchAll(/"(\w+)"/g))roots.add(x[1]);
-/* F3 / F4 (reg8 / reg9 helpers and the F3 UI tuple list) */for(const m of thf.matchAll(/\breg\d\("(\w+)"/g))roots.add(m[1]);for(const m of thf.matchAll(/\["(\w+UI)",\[/g))roots.add(m[1]);
+/* F3 / F4 (reg8 / reg9 helpers and the F3 UI tuple list) */for(const m of thf.matchAll(/\breg\d+\("(\w+)"/g)/* F5: reg10 */)roots.add(m[1]);for(const m of thf.matchAll(/\["(\w+UI)",\[/g))roots.add(m[1]);
 roots.add('chooseM');roots.add('nextBuoi');if(process.env.ROOTS){roots.clear();for(const r of process.env.ROOTS.split(','))roots.add(r)}/* ROOTS=a,b: one part's engines only *//* part E: her buổi step (TH.tapRun since F2 r2) */
 /* cut: the names that do nothing inside her context on the host (TH.NOOP + the UICAP list in jcoopthin.js; resultShow runs) */
 const thn=fs.readFileSync(path.join(DIR,'jcoopthin.js'),'utf8');const CUT=new Set();

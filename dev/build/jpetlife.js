@@ -35,7 +35,7 @@ function plCareYear(P,k){const L=BAL.pet.life,c=plDice(k),x=P.lifeX||0;
  if((P.care||0)<L.careLapse&&x>0)return x-1;return x}
 /*}CORE*/
 (function(){if(typeof BAL!=="object"||!BAL.pet||!BAL.pet.life||typeof petWeek!=="function")return;const L=BAL.pet.life;
-const cw=()=>window.COOPW&&COOPW.on,host=()=>!cw()||COOPW.seat==="a";
+const cw=()=>window.COOPW&&COOPW.on,host=()=>!(window.coopGuest&&coopGuest());
 const owners=()=>[S].concat(typeof petNpcs==="function"?petNpcs():liveRivals(true));
 function ageW(P){return Math.max(0,tsbWk()-(P.at||0))}
 function ageY(P){return Math.floor(ageW(P)/L.wY)}

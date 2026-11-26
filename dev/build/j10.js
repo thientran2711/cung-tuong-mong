@@ -38,7 +38,7 @@ function capTrim(p,stay){const gone=[];try{if(!p||!Array.isArray(p.staff)||p.coo
  const keep=s=>(s===stay||s.home?5000:0)+(s.spyFor==="me"?1000:0)+(s.lover?200:0)+(s.loyal||0);
  [["maid",0],["eunuch",1]].forEach(([role,i])=>{while(h[i]>c[i]){const L=p.staff.filter(s=>s&&s.role===role&&!s.eid&&!s.coop).sort((a,b)=>keep(a)-keep(b));if(!L.length)break;
   const x=L[0];p.staff.splice(p.staff.indexOf(x),1);h[i]--;x.spyFor=x.spyFor==="me"?null:x.spyFor;delete x.home;gone.push(x);
-  try{if(x.fid&&typeof figUsed==="function"&&!(window.COOPW&&COOPW.on&&COOPW.seat==="b")){const U=figUsed();const k=U.indexOf(x.fid);if(k>=0)U.splice(k,1)}}catch(e){}}});
+  try{if(x.fid&&typeof figUsed==="function"&&!(window.coopGuest&&coopGuest())){const U=figUsed();const k=U.indexOf(x.fid);if(k>=0)U.splice(k,1)}}catch(e){}}});
  if(p===S&&gone.length)capTell(gone,c);
  for(const s of p.staff){const i=s&&s.role==="maid"?0:1;if(s&&s.home&&h[i]<=c[i])delete s.home}}catch(e){console.error("capTrim",e)}return gone}
 /* the one way she is told that Nội vụ phủ took servants back (capTrim; jstaff fitCap goes through capTrim) */
@@ -58,7 +58,7 @@ function capRoom(p,role){try{const i=role==="maid"?0:1;if(hhHas(p)[i]<capOf(p)[i
 function srvHome(s){if(s&&typeof s==="object")s.home=1;return s}
 /* co-op guest (review/staff-root-r1): her own household is a PERSONAL key (jcoopworld W_KEYS has no staff), so the guest trims HER OWN
    household itself (old save, demotion, cold palace); the NPC households and the face list (fidUsed, a world key) stay the host's */
-function capSweep(){try{if(!S)return;if(window.COOPW&&COOPW.on&&COOPW.seat==="b"){capTrim(S);return}for(const p of [S].concat(typeof rivals!=="undefined"?rivals:[]))if(p&&(p===S||p.alive!==false))capTrim(p)}catch(e){}}
+function capSweep(){try{if(!S)return;if(window.coopGuest&&coopGuest()){capTrim(S);return}for(const p of [S].concat(typeof rivals!=="undefined"?rivals:[]))if(p&&(p===S||p.alive!==false))capTrim(p)}catch(e){}}
 function servAge(role){const age=role==="maid"?16+R(10):BAL.ageMin+R(45);return role==="maid"?{age}:{age,fe:eunBand(age)}}
 function pServ(s){const g=rkOfFace("serv",s);return Object.assign(pServ0(s),{rk:g[0],rw:g[1]})}
 function pServ0(s){const n=s.role==="maid"?6:4,i=(s.face>=0?s.face:0);if(s.role!=="maid")return{src:fsrc(s.fc,`img/face-eunuch-${(s.fe>=0?s.fe:eunBand(s.age||30))+1}.webp`),hue:0,ini:"Hoạn",col:"#8a8aa0"};return{src:fsrc(s.fc,""),hue:0,ini:s.role==="maid"?s.name.split(" ").pop()[0]:"Hoạn",col:s.role==="maid"?"#b9a48a":"#8a8aa0"}}

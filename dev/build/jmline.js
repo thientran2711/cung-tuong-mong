@@ -17,7 +17,7 @@ window.__mlN=window.__mlN||{};
 function mlOn(){return !!(S&&!window.__mloff&&typeof BAL==="object"&&BAL.mline)}
 /* co-op (review/servant-mline-r1): NPC maid events are world state, rolled once on the host (like rivalsTurn/rivalsMonth in jcoopworld);
    the guest rolls only for her own household */
-function mlGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
+function mlGuest(){try{return !!(window.coopGuest&&coopGuest())}catch(e){return false}}
 function mlC(k,n){const N=window.__mlN;N[k]=(N[k]||0)+(n==null?1:n)}
 function mlB(){return BAL.mline}
 function mlMine(p){return p===S}

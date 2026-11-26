@@ -32,7 +32,7 @@ function mortPlotY(k,power){const E=BAL.mort.emp;const w=power<50?1+E.weak*(50-p
 function mortFoil(power){const E=BAL.mort.emp;return Math.max(E.foilLo,Math.min(E.foilHi,E.foil+(power-50)/2))}
 /*}CORE*/
 (function(){if(typeof BAL!=="object"||!BAL.mort)return;const M=BAL.mort;
-const cw=()=>window.COOPW&&COOPW.on,host=()=>!cw()||COOPW.seat==="a";
+const cw=()=>window.COOPW&&COOPW.on,host=()=>!(window.coopGuest&&coopGuest());
 const pw=()=>S&&S.reign&&typeof S.reign.power==="number"?S.reign.power:50;
 ILL.laobenh={n:"Bệnh già",slow:1,die:0};ILL.trongbenh={n:"Trọng bệnh",slow:1,die:0};
 function kidSet(){const K=new Set();try{allKids().forEach(([k])=>K.add(k))}catch(e){}return K}

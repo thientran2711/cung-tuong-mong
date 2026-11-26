@@ -49,7 +49,7 @@ function figPick(who){const roles=figRoles(who);if(!roles.length)return null;con
    per-path code). Held = any fid / pid / fromMaid value reachable from S and the consorts (households, the Thái hậu's women, the court, the
    Nội vụ phủ candidates, records). Consort identities are never freed. The co-op guest never writes the face list (a host world key). */
 const FIG_SERV=["maid","mama","eunuch"];
-function figGC(){try{if(!S||(window.COOPW&&COOPW.on&&COOPW.seat==="b"))return 0;const U=figUsed();const sig=S.turn+"|"+U.length;if(figGC.sig===sig)return 0;
+function figGC(){try{if(!S||(window.coopGuest&&coopGuest()))return 0;const U=figUsed();const sig=S.turn+"|"+U.length;if(figGC.sig===sig)return 0;
  const held=new Set(),seen=new Set();const SKIP={fidUsed:1,fseen:1,usedFaces:1};
  const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>40)return;seen.add(o);if(Array.isArray(o)){for(const x of o)walk(x,d+1);return}
   for(const k in o){if(SKIP[k])continue;const v=o[k];if(typeof v==="string"){if(k==="fid"||k==="pid"||k==="fromMaid")held.add(v)}else if(v&&typeof v==="object")walk(v,d+1)}};

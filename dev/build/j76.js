@@ -121,7 +121,9 @@ function j76stand(){if(!S||S.dead)return[];const A=[{n:"Nghỉ ngơi một lát"
 (function(){const n0=nextBuoi;nextBuoi=function(){const b0=S&&S.buoi;const r=n0.apply(this,arguments);try{if(S&&S.buoi!==b0&&Array.isArray(deck))deck.forEach(a=>{if(a.j76)a.done=0})}catch(e){}return r}})();
 (function(){const cw=cardWhy;cardWhy=function(a){const r=cw.apply(this,arguments);return r==="Đã làm trong buổi này"&&!(a&&a.j76)?"Đã làm hôm nay — mai chia bài mới":r}})();
 /* a loaded game gets them too (the deck is not saved) */
-(function(){const r0=render;let t=0;render=function(){try{if(S&&!S.dead&&Array.isArray(deck)&&deck.length&&!deck.some(a=>a.j76)&&!(typeof isSrv==="function"&&isSrv()))deck.unshift(...j76stand())}catch(e){}return r0.apply(this,arguments)}})();
+/* the standing cards join a hand that has none (one named rule: the render below, and the co-op host for her hand, jcoopthinf F6a) */
+function j76Std(){try{if(S&&!S.dead&&Array.isArray(deck)&&deck.length&&!deck.some(a=>a.j76)&&!(typeof isSrv==="function"&&isSrv()))deck.unshift(...j76stand())}catch(e){}}
+(function(){const r0=render;let t=0;render=function(){j76Std();return r0.apply(this,arguments)}})();
 /* ===== ONE NIGHT-RECOVERY RULE (owner 11/14; folds the j80 hotfix in) =====
    endTurn's old +4 (+1 in harsh weather) stays; on top of it a night's sleep gives +14 (harsh weather +8), +6 more
    when Sức was under 30, +4 with a trusted physician (S.doctor, hers only). Same base rule for every consort.

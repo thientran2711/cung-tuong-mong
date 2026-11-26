@@ -65,8 +65,11 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
     opts:[{n:"Vẫn đi",fx:{},x:`tốn: Danh -${c.danh}${c.duc?` · tốn: Đức -${c.duc}`:""}`,go:()=>{setTimeout(()=>{window.__tyGo=1;try{goTo(k)}finally{window.__tyGo=0}},0)}},
           {n:"Ở lại",fx:{},x:"(thay y phục trong Tư trang: Y phục → Mặc, rồi hãy đi)",go:()=>{}}]});render();return}
   const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r};window.goTo=goTo})();
-/* a visitor at home while she is in trung y */
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&S.place==="home"&&tyOn(S)&&!Q.length)tyCharge("home")}catch(e){}return r}})();
+/* a visitor at home while she is in trung y. ONE named engine (tyHome) so co-op can place it: coop-thin-g-f1 #5 (LAW 11, render-diff family,
+   TRIP swap 1 Danh split host +1 | phone): on the thin guest's phone this ran at every stage paint and took her Danh there only (the host
+   learnt it at her next ready); jcoopthinf RDIFF now runs it on the host as her context closes and keeps it read-only on her phone */
+function tyHome(){try{if(S&&!S.dead&&S.place==="home"&&tyOn(S)&&!Q.length)tyCharge("home")}catch(e){}}
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);tyHome();return r}})();
 /* the map: a red "Mất" line on every place outside her palace while she is in trung y */
 (function(){if(typeof mapHTMLgrid!=="function")return;const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);try{if(!tyOn(S))return h;
   h=h.replace(/(<(?:button|div) class="mtile[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>)/g,(all,open,k)=>k==="home"?all:open+`<span class="mchip">trung y · Danh -${tyCost(k,null).danh}</span>`)}catch(e){}return h}})();

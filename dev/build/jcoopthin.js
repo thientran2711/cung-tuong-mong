@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:9/* F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:13/* G (L13) the week end + her personal month on the host for both seats (jcoopthing.js), F6b (L12) the remaining mini-game ends as score intents (jcoopthinf6b.js), F6a (L11) her deck cards (one hand, dealt on the host), quest steps and other acts as intents (jcoopthinf.js), F5 her mini-game score ends as intents (jcoopthinf.js), F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -122,8 +122,13 @@ TH.seatOf=function(seat){if(ST[seat])return ST[seat];
  const s=J(P.S);const pers={kn:[s.empKnown||{}],cm:s.cmP||{},men:s.menP||{}};
  for(const k of ["empKnown","cmP","menP","cnews","heir"])delete s[k];for(const k of X.W_KEYS)delete s[k];
  const g={};for(const r of REG)g[r[0]]=J(r[3]);g.used=0;g.deck=[];g.Q=[];g.popIdx=null;g.popMsg="";
- return ST[seat]={S:s,ok:P.ok||"tt",pers,g,fresh:true,pid:P.pid}};
-TH.seatDrop=seat=>{delete ST[seat]};
+ /* F6a #3 (law 4, her khắc clock): a dropped store (every room "state", a week, her accept) is rebuilt from the room's person, which does not
+    carry `used` (seat-local, outside S): rebuilt at 0, the host's runs in her context that are NOT her intents (ctxOut mkSync, part-D work,
+    hand refresh) saw no khắc spent → her mood log `left` / walk checks drifted from her phone. Same life + week + buổi → the clock carries */
+ {const K=KEEP[seat];if(K&&K.life===(P.life||0)&&K.w===(COOP.state.week||0)&&K.b===(s.buoi||0))g.used=K.used;delete KEEP[seat]}
+ return ST[seat]={S:s,ok:P.ok||"tt",pers,g,fresh:true,pid:P.pid,life:(P.life||0)}};
+const KEEP={};
+TH.seatDrop=seat=>{const B=ST[seat];if(B&&B.g&&typeof B.g.used==="number"&&B.S)KEEP[seat]={used:B.g.used,life:(B.life||0),w:(COOP.state.week||0),b:(B.S.buoi||0)};delete ST[seat]};
 /* {$r:id} / {$k:name} refs (stored state AND every part-D patch value on her phone, review coop-thin-e: a patch left raw {$r} in her S → pFaceOf/pv crash) */
 function unref(o){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.name===n)||null}catch(e){return null}};
  const fix=o=>{if(!plain(o))return o;if(o.$r!=null&&Object.keys(o).length===1)return rivals.find(v=>v.id===o.$r)||null;if(o.$k!=null&&Object.keys(o).length===1)return kid(o.$k);
@@ -138,6 +143,7 @@ function standIn(PA,mine){if(!PA)return null;try{
  /* the bridge baseline is taken AFTER rstats (its derived numbers are not her acts; S.hh etc. are setters on the host's S) */
  if(v.__b){for(const k of X.STAT)v.__b[k]=v[k];v.__b.rel=v.rel;v.__b.oan=v.oan}
  if(v.queen&&typeof qOn==="function"&&!qOn())rivals.unshift(v);else{if(v.queen){v.queen=false;v.rank=Math.min(v.rank,6)}rivals.push(v)}return v}catch(e){console.error("thin standIn",e);return null}}
+TH.ctxOut=[];
 TH.withSeat=function(seat,fn){
  if(!CW.on||!host())throw new Error("withSeat: host only");
  if(CW.ctx){if(CW.ctx===seat)return fn();throw new Error("withSeat: nested "+CW.ctx+"→"+seat)}
@@ -157,8 +163,15 @@ TH.withSeat=function(seat,fn){
     runs without D's steps (never takeQ on the rolled life) and is logged ("held-run", the tests assert none) */
  const hd=TH.held(seat)&&TH.curDo!=="life";if(hd)D.log.push(["held-run",seat,TH.curDo||"later"]);
  const dW=dOn&&TH.curDo!=="life"&&!hd;
+ /* review r1 (hostnull a, the whole family beyond tap runs): ANY run in her context may write the host's page — her part B life intent wrote the
+    host's open card (#modal: jload lDlgWait klifewait + the kit size attributes of his .dlg, outer showModal wrappers run past the NOOP), a
+    part D pick its #modal class — with no repaint (TH.tapRun sees only tap runs). This net watches every outer run of hers (part D on: the
+    host's after-run exists) and asks the same one repaint (rpAsk) when it wrote his DOM and no tap run inside already asked. */
+ let wso=null;const wpn=TH.paintN;if(dOn&&typeof MutationObserver==="function"&&document.body)try{wso=WSO=WSO||new MutationObserver(()=>{});wso.takeRecords();wso.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){wso=null}
  try{if(B.fresh){fixRefs(S);B.fresh=false}if(dW&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dW&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dW&&!D.noPatch?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
+  /* F6a: what a part does in her context as it closes (her hand of cards brought up to date, her render-diff engines; before takeQ: a card they raise goes out now) */
+  for(const f of TH.ctxOut)try{f(seat,B)}catch(e){console.error("thin ctxOut",e)}
   if(dW)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
   let rvOps=[];if(dOn&&D.cur&&D.cur.rv)try{rvOps=D.rvOut(seat,D.cur.rv)}catch(e){console.error("thin rows",e)}
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
@@ -171,6 +184,7 @@ TH.withSeat=function(seat,fn){
    if(dOn&&Array.isArray(e.inv))for(const x of e.inv)if(x&&x.k&&!x.h&&!(e.__inv0||[]).includes(x))TH.bridgeItems.push(J(x));
    for(const k of X.STAT)if(k!=="hh"&&typeof e[k]==="number"&&e[k]!==b[k]){TH.bridge.push([k,b[k],e[k]]);A.S[k]=e[k]}
    for(const [f,m] of [["rel","rl"],["oan","ro"]])if(e[f]!==b[f]){A.S[m]=A.S[m]||{};A.S[m][PID[seat]]=e[f];TH.bridge.push([m,b[f],e[f]])}}
+  if(wso)try{const R=wso.takeRecords();wso.disconnect();if(R.length&&TH.paintN===wpn){const M=document.getElementById("modal");TH.paintN++;TH.wsPaintN=(TH.wsPaintN|0)+1;rpAsk(!!M&&R.some(x=>x.target===M||M.contains(x.target)))}}catch(e){}/* before the context closes: rpAsk queues in AFTER */
   B.pers=persTake(A.S);swapView(seat,CW.seat,mks,A.S);persPut(A.S,hp);X.pushFriend(L);
   CW.ctx=undefined;TH.outerS=null;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet;
   if(dOn)D.afterRun(seat)}};
@@ -193,23 +207,61 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice","kitKnow"/* know-notice: what SHE learns by her run on the host (k61Know / noteAdd / newsAdd… raise kitKnow, batched later) is captured at the call and shown on HER phone, not the host's *//* review coop-ptime-reds r1 (whole family: her notices raised by her run on the host — jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close: — showed on the HOST's screen, her report text included, and never on hers): captured, shown on HER phone (uiPlay gives the «go» back) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
-for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice","kitKnow"/* know-notice: what SHE learns by her run on the host (k61Know / noteAdd / newsAdd… raise kitKnow, batched later) is captured at the call and shown on HER phone, not the host's *//* review coop-ptime-reds r1 (main): her notices raised by her run on the host (jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close:) shown on HER phone (uiPlay gives the «go» back: noteGo) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
+ "kpmPlay"/* hostnull (d): her act's figure move on the stage (jpres kpmGo: slap / drag / thread …), played on HER stage */,"cfShow"/* hostnull (d): her night card-flip scene (jflip) */,
+ "krvFlip"/* hostnull (b): her face reveal (jreveal krvFlip, raised by k61Know / k61Meet in her run) plays on HER phone, never on the host (below) */]);
+for(const n of UICAP)if(!TH.NOOP.includes(n)&&n!=="kpmPlay")TH.NOOP.push(n);/* kpmPlay: defined below (her stage replays it); in any context its kpmGo is already captured / a no-op, so it needs no wrapper (coop-thin-b NOOP check) */
 TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
-TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
+/* hostnull (a), the whole family (every part F registration — walks, talk, scout, invite, bag, pets … —, every part D pick, every part E
+   step: all of them run through here): an engine her run calls may paint the HOST's own screen with HER state (renderStage / k3Stage / the
+   act cards / the stage figures are not no-ops in her context: their wrappers also write her person, F1/E rely on that). Whatever her run
+   wrote into the host's page is seen here (MutationObserver.takeRecords: synchronous, no list of painters to keep up to date) and the host
+   repaints his own screen from his own state when her context closes (rpAsk below). Her screen gets her own result with the
+   answer (her view → one render). (c) No cap here: every effect her run raised is kept (BAL.coopUi paces them on her phone). */
+let PMO=null,WSO=null;TH.paintN=0;
+TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo=null;
+ if(!u0&&CW.ctx&&host()&&typeof MutationObserver==="function"&&document.body)try{mo=PMO=PMO||new MutationObserver(()=>{});mo.takeRecords();mo.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){mo=null}
+ let r,ui,dirty=false,dm=false;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0;if(mo)try{const R=mo.takeRecords();mo.disconnect();dirty=R.length>0;
+   if(dirty){const M=document.getElementById("modal");dm=!!M&&R.some(x=>x.target===M||M.contains(x.target))}}catch(e){}}
+ if(dirty){TH.paintN++;rpAsk(dm)}
+ return {r,ui:ui&&ui.length?ui:null,dirty}};
+/* hostnull (a) r2, cost + safety: the host repaints in D.afterRun, i.e. in the SAME task right after her context closes, before the page's
+   own observers run (they run at the microtask checkpoint: jreveal krvTick, jsfx, the kit fitters …). A repaint deferred to a later frame
+   was tried and dropped: in that gap the host's observers saw HER painted DOM and acted on it (the host flipped her face, H2 red). Cost =
+   one host render per run that wrote his DOM (measured: ~300 ms at CPU ×4 on a talk; median tap→answer unchanged on 4G). showModal()
+   (rebuilds #modal from Q[0]: his scroll, his open card) only when her run wrote into #modal or other waiting work asks for it; otherwise
+   render() alone. Nothing observes during the repaint (the observer is disconnected): it cannot feed itself, no loop. */
+let RPM=false;TH.rpN=0;TH.rpMs=0;const RPF=()=>{};
+function rpAsk(m){RPM=RPM||m;try{D.after(RPF)}catch(e){}}
+/* guest: what her run on the host captured, played once on her own screen */
+/* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
+   BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
+const UIQ=[];let uiT=0;
 /* a captured notice loses its «go» (a function never travels): given back by its id on her phone, the same go its maker set (a notice had a go iff it has a goLabel) */
 function noteGo(sp){try{if(!sp||typeof sp!=="object"||!sp.goLabel)return sp;const id=String(sp.id||"");let go=null;
  if(/^pt:ord:/.test(id)&&typeof ptOrdQ==="function"&&typeof ptOrdOpen==="function"){const k=id.slice(7);go=()=>{const o=ptOrdQ().find(z=>String(z.id)===k);if(o)setTimeout(()=>ptOrdOpen(o),0)}}
  else if(/^pt:/.test(id)&&typeof ptOpenTin==="function")go=ptOpenTin;else if(/^errand:/.test(id)&&typeof errOpen==="function")go=errOpen;
  else if(/^rcv:/.test(id)&&typeof rcvOpen==="function")go=()=>rcvOpen(id);
  return go?Object.assign({},sp,{go}):Object.assign({},sp,{goLabel:""})}catch(e){return sp}}
-/* guest: what her run on the host captured, played once on her own screen */
-TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0]);
- try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}TH.uiN=(TH.uiN|0)+n;return n};
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<12)try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
+function uiPump(){uiT=0;const B=BAL.coopUi/* one core (law 4): no typed fallback */;let n=0;
+ while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0])/* ptime-reds (main): the notice's «go» given back */;try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
+ TH.uiN=(TH.uiN|0)+n;if(UIQ.length)uiT=setTimeout(uiPump,Math.max(0,B.gapMs|0))}
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;UIQ.push([f,a]);n++}
+ if(n&&!uiT)uiT=setTimeout(uiPump,0)/* after every listener of the same view (her patch + render): an effect reads the state it shows */;return n};
+TH.uiQ=()=>UIQ.length;
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiMiss&&!UICAP.has(n))TH.uiMiss[n]=(TH.uiMiss[n]||0)+1;/* part G: what her runs raise that her phone never replays (sfx attribution) */if(TH.uiCap&&UICAP.has(n))try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
   /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
   if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
+/* hostnull (b): a face reveal her run raises (k61Know / k61Meet → jreveal krvFlip) belongs to HER screen: inside any other seat's context it
+   never touches the host's reveal state (KRV: the host would replay her reveal on a face he already knew, at his next paint); inside her tap
+   run it is captured and plays on her phone with the answer (her own krvFlip: once, the reveal window dedupes the flip her render also finds) */
+/* hostnull (d): a figure move her run raises (jpres kpmGo, gated off inside her context: kpmOn reads screenOff) is captured with the people as
+   references (her = "me", the other player = "f", an NPC = its id) and played on HER stage (kpmPlay finds them in her own world) */
+if(typeof kpmGo==="function"){const kg=kpmGo;const ref=p=>p===S?"me":p&&typeof p==="object"&&p.coop?"f":p&&typeof p==="object"&&p.id!=null?{id:p.id}:null;
+ kpmGo=function(m,p,q){if(CW.ctx){if(TH.uiCap&&typeof m==="string"&&p&&typeof p==="object"&&p.nodeType!==1){const a=ref(p);if(a)TH.uiCap.push(["kpmPlay",[m,a,q?ref(q):null]])}return false}return kg.apply(this,arguments)};
+ window.kpmPlay=function(m,a,b){const res=x=>x==="me"?S:x==="f"?(CW.friend?CW.friend():null):x&&x.id!=null?(rivals||[]).find(v=>v&&v.id===x.id)||null:null;const p=res(a);if(!p)return false;return kpmGo(m,p,b?res(b):null)}}
+if(typeof krvFlip==="function"){const kf=krvFlip;krvFlip=function(k){if(CW.ctx){if(TH.uiCap&&typeof k==="string"&&k)TH.uiCap.push(["krvFlip",[k]]);return}return kf.apply(this,arguments)}}
 
 /* stable text of the host's whole state (the round-trip check) */
 function stable(o){const seen=new WeakSet();return JSON.stringify(o,function(k,v){if(typeof v==="function")return undefined;
@@ -400,7 +452,8 @@ D.after=fn=>{if(CW.ctx)AFTER.push(fn);else try{fn()}catch(e){console.error("thin
 D.afterRun=function(seat){const L=AFTER.splice(0);for(const f of L)try{f()}catch(e){console.error("thin after",e)}
  if(TH.bridgeItems&&TH.bridgeItems.length){const pid=PID[seat];for(const e of TH.bridgeItems.splice(0)){const x=J(e);x.from=pid;if(x.by==="me")x.by=pid;
   try{pushDil(mkP("giftin",{f:pid,e:x}),"Quà tặng")}catch(er){console.error(er)}}}
- if(L.length||AFTER.length)try{showModal();render()}catch(e){}
+ if(L.length||AFTER.length){const rp=L.length&&L.every(f=>f===RPF)&&!AFTER.length,m=RPM;RPM=false;const t=performance.now();
+  try{if(!rp||m)showModal();render()}catch(e){console.error("thin repaint",e)}if(L.includes(RPF)){TH.rpN++;TH.rpMs+=performance.now()-t}}
  try{if(CW.reEnd)CW.reEnd()}catch(e){}};
 /* run fn in her context from the top of the event loop (her cards, her res); rid = a host wait (CW.rpend) released when she has it.
    B r2 (seam, the ONE gate for every D path into her context): while her rolled life is held (TH.held) the work is DEFERRED (D.DF), never
@@ -429,7 +482,7 @@ setInterval(()=>{try{if(!CW.on||!host()||!TH.dOn())return;qsInit();for(const k i
 D.dropPQ=function(seat){for(const x of D.PQ[seat]||[])if(CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=[]};
 /* her card from the host's side: build is called in her context; true when a card was queued */
 D.cardFor=function(seat,build,rid){D.later(seat,()=>{build()},rid)};
-D.patchOut=function(seat,p){D.N[seat]=(D.N[seat]||0)+1;const L=D.PQ[seat]=D.PQ[seat]||[];L.push({n:D.N[seat],p});while(L.length>40)L.shift();
+D.patchOut=function(seat,p){D.N[seat]=(D.N[seat]||0)+1;const L=D.PQ[seat]=D.PQ[seat]||[];L.push({n:D.N[seat],p});/* coop-thin-g-f1 #4: an unacked patch is never dropped (was: kept 40, her phone then skipped the lost one for good: a delta lost = a number split); 400 = memory belt only, logged */while(L.length>400){const z=L.shift();D.drop=(D.drop|0)+1;D.log.push(["pq-drop",seat,z.n])}
  const k="pq"+seat+D.N[seat];if(CW.rpend)CW.rpend[k]=Date.now();D.log.push(["patch",seat,D.N[seat],p.length]);setTimeout(()=>TH.flush(),0)};
 /* an act / NPC event's effect on her (the old `res` message), applied on the host in her context; death / lãnh cung stay on the old path (part B/G) */
 D.resTo=function(seat,m,rid){const g=m.flags||{};if(g.dead||g.cold)return false;D.kind(seat,"res",{m},rid);return true};
@@ -439,12 +492,12 @@ D.K.res=a=>{try{X.resApply(a.m)}catch(e){console.error("thin res",e)}};
    is one no longer) still answers the other side (D.GONE[pid], run in the host's context) */
 TH.onDo("pick",a=>{a=a||{};D.hold(S);const L=S.thq,i=L.findIndex(c=>c&&c.id===a.card);if(i<0)return {gone:1};const c=L.splice(i,1)[0];
  let m=null;if(c.pid){const d=mkP(c.pid,c.pp||{});if(d)m={t:c.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls}}else m={t:c.t,h:c.h,cls:c.cls,btn:c.btn};
- if(!m){D.log.push(["pick-stale",c.pid]);const g=D.GONE[c.pid];if(g)D.after(()=>g(c.pp||{}));return {stale:1}}
+ if(!m){D.log.push(["pick-stale",c.pid]);const g=D.GONE[c.pid];if(g)D.after(()=>g(c.pp||{}));setTimeout(()=>{try{if(CW.cyFree)CW.cyFree()}catch(e){console.error(e)}},0);return {stale:1}}
  Q.unshift(m);const k=+a.i;const nw=window.__kpNoWarn;window.__kpNoWarn=true;/* asked on her phone already (kpGate) */
  /* F2 r2: her pick is her tap: run as solo (TH.tapRun: quiet off, her follow-up cards / numbers reach HER phone) */
  let ui=null;try{if(m.opts){if(k>=0&&m.opts[k])ui=TH.tapRun(()=>chooseM(k)).ui;if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
  else closeModal()}finally{window.__kpNoWarn=nw}
- D.log.push(["pick",c.pid||c.t,k]);const o={ok:1,i:k};if(ui)o.ui=ui;return o});
+ D.log.push(["pick",c.pid||c.t,k]);/* coop-thin-g-f1: her pick may be the answer a held draw waits on (cyHold) */setTimeout(()=>{try{if(CW.cyFree)CW.cyFree()}catch(e){console.error(e)}},0);const o={ok:1,i:k};if(ui)o.ui=ui;return o});
 /* guest: the screen effects of her pick (captured on the host) play once, when its answer lands (dr = that pick's id) */
 COOP.on("thinview",V=>{try{const r=!host()&&V&&V.o&&V.o.dr;if(!r||r.op!=="pick"||!TH.myPick.has(r.id))return;TH.myPick.delete(r.id);if(r.r&&r.r.ui)TH.uiPlay(r.r.ui)}catch(e){console.error("thin pick ui",e)}});
 /* her ack of the patches she applied */
@@ -472,6 +525,12 @@ function gSync(V){if(host()||!TH.dOn()||!V||!V.o||!S)return;
  if(ch||got){try{showModal();render()}catch(e){console.error(e)}}}
 COOP.on("thinview",gSync);TH.gSync=gSync;
 COOP.on("room",()=>SENT.clear());
+/* coop-thin-g r3 (one world, no stall): a card the host holds for her (gHold) must come back to her if it left her Q without a pick
+   that landed (a lost send, a Q cleared by another path). gSync re-adds it only on a thinview, and the host sends none while it waits
+   (trip1 wk 28: host gHold on «Tin đồn», her Q empty, no pick, no traffic → the week never merged). Belt: every 5 s her phone re-reads
+   the last host view (TH.view) — the same gSync, idempotent: a card she answered stays out for 15 s (SENT), then is asked again;
+   a second pick of a card already applied is «pick-stale» on the host (dropped there). No number, no word, no UI. */
+TH.gBelt=0;setInterval(()=>{try{if(host()||!CW.on||!TH.view||!TH.view.o||!TH.dOn())return;TH.gBelt++;gSync(TH.view)}catch(e){console.error("thin gSync belt",e)}},5000);
 /* her tap on a card: never applied here; the host runs it */
 if(typeof chooseM==="function"){const f=chooseM;chooseM=function(i){const m=Q[0];if(m&&m.thin&&!host()){const c=m.opts&&m.opts[i];if(!c||c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;
   if(typeof window.kpGate==="function"&&window.kpGate(i))return;/* her "Kiếp này chưa trọn" warning is asked on her phone; the host never asks it */

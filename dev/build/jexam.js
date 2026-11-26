@@ -201,10 +201,15 @@ try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong|khảo hạch n�
 /* exRun(P, st, done): P = a plan (exPlan / exSrvPlan), st = the state holding .pend (survives a reload: exAbort* finish it at the same level),
    done(r) = the result. P.rk = the rank word, P.passTxt = the verdict line on a pass, P.cdN = months to wait on a fail. */
 function exFinish(P,pd){const raws=pd.raws.slice();while(raws.length<P.rounds.length)raws.push(exSkipRaw(P,P.rounds[raws.length]));return Object.assign(exScore(P,raws),{P,raws})}
+/* the exam's end from its plain result (co-op thin F6b, jcoopthinf6b: her phone plays the môn, the host runs this in her context): the plan is
+   rebuilt from her state now, a môn left to "Để tài nghệ quyết định" (sk) takes exSkipRaw, missing môn too (exFinish) */
+function exEnd(kind,raws,sk){const P=kind==="srv"?exSrvPlan(exSrvS().to):exPlanFull();sk=sk||[];const rw=(raws||[]).slice(0,P.rounds.length).map((x,j)=>sk[j]?exSkipRaw(P,P.rounds[j]):x);
+ const r=exFinish(P,{raws:rw});if(kind==="srv")exSrvDone(r);else exDone(S,r)}
 function exAbort(){const e=exS(S),pd=e.pend;if(!pd)return;exDone(S,exFinish(exPlan(S),pd))}
-function exStart(){const P=exPlan(S);P.rk=exRk(P.to);P.passTxt=P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${P.rk}.`;P.cdN=exCd(P.to);
+function exPlanFull(){const P=exPlan(S);P.rk=exRk(P.to);P.passTxt=P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${P.rk}.`;P.cdN=exCd(P.to);return P}
+function exStart(){const P=exPlanFull();
  if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSimC(S));return}exRun(P,exS(S),r=>exDone(S,r))}
-function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
+function exRun(P,e,done){e.pend={raws:[],sk:[]};const raws=e.pend.raws,sks=e.pend.sk;let i=0;const n=P.rounds.length;
  const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);mgSet(k,{occ:"exam",rank:P.to,lv});/* mg-balance: board ease from the tier; skip keeps her level */try{kg82Preload(k)}catch(x){}
   const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`,pic:kg82Pic(k)});if(!d){e.pend=null;done(exFinish(P,{raws}));return}
   const box=kg82Box();const SK=exSkipRaw(P,k);
@@ -213,7 +218,7 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, tự thi giỏi thì hơn`})}</div>`;
   kgReady(box,{kind:k,win:"thi",ev:"sys:thi-tam"});/* KIT §13.7 */
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
- const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
+ const after=(raw,sk)=>{raws.push(raw);sks.push(!!sk);i++;const last=i>=n;try{save()}catch(x){}
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
   kg82Set("score",`${raw}/10`);kg82Set("round",`${i}/${n}`);$("kg82ok").onclick=()=>{if(last)result();else round()}};
  const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});

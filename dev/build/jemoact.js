@@ -106,7 +106,7 @@ Object.assign(BAL,{ea:{
 const E=()=>BAL.ea;
 window.EA_N={cards:{},play:{},out:{},outT:{},npcAct:{},npcOut:{},npcOutT:{},ext:{},npcExt:{},hitMe:{},hoi:0,hoiMe:0,wk:0,outWk:0};
 const eaOn=()=>!!(typeof S!=="undefined"&&S&&!S.dead&&!window.__eaOff);
-const eaHost=()=>{try{const C=window.COOPW;return !(C&&C.on&&C.seat&&C.seat!=="a")}catch(e){return true}};
+const eaHost=()=>{try{const C=window.COOPW;return !(window.coopGuest&&coopGuest())}catch(e){return true}};
 const W=()=>{try{return wk()}catch(e){return 0}};
 const clp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const cnt=(o,k,n)=>{o[k]=(o[k]||0)+(n||1)};

@@ -54,4 +54,18 @@ socks.push(A);
 clr(); await msg(B, { t: "act", k: "ctm-p2", mode: "x" }); assert(has(A, "act"), "old act relay still works");
 /* 7. pathPut */
 { const x = { a: { b: 1 }, l: [1, 2] }; pathPut(x, "a.c.d", 2); pathPut(x, "a.b", null, true); pathPut(x, "z.q", null, true); assert(x.a.c.d === 2 && !("b" in x.a) && !("z" in x), "pathPut set/del"); }
+/* 8. part G (level 13): the host's end ticks alone with his C (no merge3); a guest end / seat copy is not kept */
+{ const C0 = { v: 1, week: 0, W: { S: { year: 1 }, R: [{ id: 1, sung: 5 }] }, P: { a: { pid: 901, S: { bac: 10 } }, b: { pid: 902, S: { bac: 20 } } } };
+  await R.saveC(C0); R.meta.week = 0; R.meta.ended = {}; await R.saveMeta();
+  await msg(A, { t: "thin", cap: 13, v: "b1", want: 13 }); await msg(B, { t: "thin", cap: 13, v: "b1", want: 0 }); assert(R.meta.thin === 13, "level 13 when both builds have it");
+  clr(); await msg(B, { t: "end", week: 0, state: { v: 1, week: 0, W: C0.W, P: { a: C0.P.a, b: { pid: 902, S: { bac: 99 } } } } });
+  assert(last(B, "error").code === "thinend" && !has(A, "week") && !mem.has("sub-b"), "level 13: the guest's end is refused, nothing stored");
+  clr(); await msg(B, { t: "seat", sv: 0, o: { seat: "b", week: 0, x: 1 } }); assert(last(B, "seatok") && !mem.has("seat-b"), "level 13: no guest seat copy");
+  const H = { v: 1, week: 0, W: { S: { year: 1 }, R: [{ id: 1, sung: 6 }] }, P: { a: { pid: 901, S: { bac: 11 } }, b: { pid: 902, S: { bac: 25 } } } };
+  clr(); await msg(A, { t: "end", week: 0, state: H });
+  const wa = last(A, "week"), wb = last(B, "week"); const C1 = await R.loadC();
+  assert(wa && wb && wa.week === 1 && wb.state.P.b.S.bac === 25 && wb.state.W.R[0].sung === 6 && C1.P.b.S.bac === 25 && C1.week === 1, "level 13: the host's end ticks the week with his C as it is (P.b from the host)");
+  assert(!mem.has("sub-a") && !mem.has("sub-b") && R.meta.week === 1, "no sub copies left");
+  await msg(A, { t: "thin", cap: 12, v: "b1", want: 12 }); assert(R.meta.thin === 12, "level 12 again: old merge path");
+  clr(); await msg(A, { t: "end", week: 1, state: H }); assert(!has(A, "week") && mem.has("sub-a"), "level 12: the host's end waits for the guest (merge3 path unchanged)"); }
 console.log("thin ALL OK");

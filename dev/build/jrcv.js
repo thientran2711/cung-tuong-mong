@@ -92,9 +92,11 @@ function rcvSabO(p,t,o){const H=BAL.road.hp,R=BAL.rcv.help,me=t===S,tq=rcvQ(p,t)
 const RCVK={};
 function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&!D.ok(p,t,x))return"";
  if(t===S){rcvCard("rcvAsk",{k,a:key(p),x:x||null},D.t,p);return `${p.name} sai người sang ${D.act} ngươi. `}
- /* the co-op friend is a PLAYER (law 1): inside her accepted offer (jcoopworld invHer: he already tapped «Nhận» on his own card, COOPW.inv) his
-    answer is that «Nhận» = the first (yes) option, never a roll for him (coop-ptime-reds: coop-thin-d «Kết giao» came back as «mách lẻo») */
- const O=D.opts(p,t,x);const c=t.coop&&window.COOPW&&COOPW.inv?O[0]:rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
+ const O=D.opts(p,t,x);let c=null;
+ if((typeof coopAccepted==="function"&&coopAccepted(t))||(t.coop&&window.COOPW&&COOPW.inv)){/* + coop-ptime-reds (main): inside her accepted offer (COOPW.inv) *//* co-op (law 1 two-way, hostnull e, merged here by review r1): the other PLAYER already said «Nhận» on the
+   co-op ask card (jcoopworld ASK → CW.inv): the yes road (full; half when her Sức is short), never an NPC pick that refuses or tells (mách) after it */
+  const ok=O.filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));c=ok.find(o=>o.id==="full")||ok.find(o=>o.id==="half")||ok.find(o=>o.id==="no")||null}
+ else c=rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
 PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||(p.out&&!D.cold)/* cold-faction: a letter from lãnh cung still waits */||(D.ok&&!D.ok(p,S,pp.x)))return null;
  return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,need:o.need,tsDis:o.tsDis,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;

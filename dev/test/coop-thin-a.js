@@ -59,7 +59,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  /* build-match hold → level off */
  ok(await H.p.evaluate(()=>{const h=COOPW.hold;COOPW.hold=true;const r=COOPW.thin.on(1);COOPW.hold=h;return r===false}),'build-match hold: no part on');
  if(LVL){
-  ok(await until(H,()=>COOPW.thin.lvl===1,null,20000)&&await until(G,()=>COOPW.thin.lvl===1,null,20000),'level 1 on both (same build, host asked)',await both(()=>({lvl:COOPW.thin.lvl,want:COOPW.thin.want(),tx:__tx.filter(t=>t!=='ping'),rx:__rxT.filter(t=>t!=='pong').slice(-12)})));
+  ok(await until(H,x=>COOPW.thin.lvl===x,LVL,20000)&&await until(G,x=>COOPW.thin.lvl===x,LVL,20000),'level '+LVL+' on both (same build, host asked)',await both(()=>({lvl:COOPW.thin.lvl,want:COOPW.thin.want(),tx:__tx.filter(t=>t!=='ping'),rx:__rxT.filter(t=>t!=='pong').slice(-12)})));
   ok(await until(G,()=>COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.P&&COOPW.thin.view.o.P.a,null,20000),'guest received the host snapshot');
   await H.p.evaluate(()=>{S.danh=(S.danh||0)+1;COOPW.thin.flush()});
   const hv=await H.p.evaluate(()=>[COOPW.thin.hv,S.danh]);ok(await until(G,x=>COOPW.thin.view.v===x[0]&&COOPW.thin.view.o.P.a.danh===x[1],hv,20000),'delta: guest view follows the host (version + value)',hv);
@@ -73,6 +73,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  const wk0=await H.p.evaluate(()=>COOP.week);
   const t0=Date.now();while(Date.now()-t0<90000){for(const o of [H,G]){await clear(o,6);await o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled)n.click()}).catch(()=>{})}
   if((await H.p.evaluate(()=>COOP.week))>wk0&&(await G.p.evaluate(()=>COOP.week))>wk0)break;await sleep(300)}
+ if(!((await H.p.evaluate(()=>COOP.week))>wk0&&(await G.p.evaluate(()=>COOP.week))>wk0))for(const o of [H,G])console.log('dbg week '+o.name,JSON.stringify(await o.p.evaluate(()=>{const T=COOPW.thin,G=T.G;let st=null;try{st=T.seatOf('b')}catch(e){}return{wk:wk(),week:COOP.week,b:S.buoi,sent:COOPW.sent,pend:COOPW.pend,ngo:COOPW.ngoW,nrdy:COOPW.nrdy,Q:Q.map(m=>m.t),next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,tr:COOPW.tr.filter(x=>!/^pull/.test(x)).slice(-14),G:G&&{done:G.done,log:G.log.slice(-6)},hold:!!(COOPW.gHold&&COOPW.gHold()),frPz:!!(COOPW.frPz&&COOPW.frPz()),thq:st&&st.S&&(st.S.thq||[]).map(c=>c.t||c.pid),ended:COOP.state.ended}}).catch(e=>e.message)).slice(0,2500));
  ok((await H.p.evaluate(()=>COOP.week))>wk0&&(await G.p.evaluate(()=>COOP.week))>wk0,'a week still ends and merges on both seats');
  const st2=await H.p.evaluate(()=>{COOPW.thin.seatDrop('b');return COOPW.thin.selfTest()});ok(st2.ok,'round trip again after the merged week (seat b rebuilt from the new P.b)',st2.ok?undefined:st2);
  const E=[...H.errs,...G.errs].filter(e=>!/ResizeObserver/.test(e));ok(!E.length,'no page errors',E.slice(0,5));

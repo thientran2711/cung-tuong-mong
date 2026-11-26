@@ -64,7 +64,7 @@ window.nmFix=nmFix;window.NM_FIX=NM_FIX;
    follow). Only behind the host player herself (or an earlier person of the friend) does one of hers give way; the host cannot rename a
    person that lives on her seat, so it writes an ORDER S.nmOrd[her pid] = [{p:path in her S, o:old, n:new}] (n registered at once) and
    her seat applies it (nmOrdApply, after every rebuild and on the host-lag relay); the host drops an order once her blob shows it done. */
-const nmPidF=()=>{try{return window.COOPW.seat==="a"?902:901}catch(e){return 0}},nmPidMe=()=>{try{return window.COOPW.seat==="a"?901:902}catch(e){return 0}};
+/* identity follows the seat whose turn runs (coop-thin-g: her context on the host = 902), as jvisit / jmem myPid */const nmSeat=()=>{const W=window.COOPW;return W.ctx||W.seat};const nmPidF=()=>{try{return nmSeat()==="a"?902:901}catch(e){return 0}},nmPidMe=()=>{try{return nmSeat()==="a"?901:902}catch(e){return 0}};
 function nmAt(s,p){let o=s;if(p==="name")return s;for(const k of String(p).split(".")){if(!o||typeof o!=="object")return null;o=o[k]}return o&&typeof o==="object"?o:null}
 function nmOrder(e){const pid=nmPidF();if(!pid||!e.fp)return;S.nmOrd=S.nmOrd&&typeof S.nmOrd==="object"?S.nmOrd:{};const L=S.nmOrd[pid]=Array.isArray(S.nmOrd[pid])?S.nmOrd[pid]:[];
  const raw=String(e.o[e.f]),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);let x=L.find(z=>z.p===e.fp&&z.o===b);

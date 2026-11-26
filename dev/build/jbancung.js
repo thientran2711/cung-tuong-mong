@@ -82,5 +82,5 @@ function bcNpcAsk(v){const B=BAL.banCung,from=v.pal;if(from==null)return;
  const C=bcChoices(v,from).filter(c=>!c.locked&&bcDanh(c.i)>bcDanh(from)&&oddsLv(c.odds)>=B.npcLv);if(!C.length)return;
  bcAsk(v,C[0].i,from)}
 (function(){const f0=palFix;palFix=function(){const pre={};try{for(const v of rivals||[])pre[v.id]=v.pal}catch(e){}const r=f0.apply(this,arguments);
- try{const cw=!!(window.COOPW&&COOPW.on),hostOK=!cw||COOPW.seat==="a";if(hostOK&&S&&rivals)for(const v of rivals)if(!v.coop&&pre[v.id]==null&&v.pal!=null&&!v.palLone&&palHeadOK(v))bcNpcAsk(v)}catch(e){console.error(e)}
+ try{const cw=!!(window.COOPW&&COOPW.on),hostOK=!cw||!(window.coopGuest&&coopGuest())/* coop-thin G seat-guard: her week end on the host rolls no NPC petition (her phone does not) */;if(hostOK&&S&&rivals)for(const v of rivals)if(!v.coop&&pre[v.id]==null&&v.pal!=null&&!v.palLone&&palHeadOK(v))bcNpcAsk(v)}catch(e){console.error(e)}
  return r}})();

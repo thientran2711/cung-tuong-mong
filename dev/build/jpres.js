@@ -134,7 +134,7 @@ const KPM_ACT={tat:{m:"slap",ok:/./},phatquy:{m:"slap",ok:/./},
  ally:{m:"join",two:1,ok:/thành/,no:/lạnh nhạt/},xinhh:{m:"join",two:1,ok:/thành/,no:/không thành/},banphe:{m:"betray",two:1,ok:/./,no:/không thành|bị phát hiện/}};
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__kpm)return;const w=f(o);w.__kpm=1;window[n]=w;try{(0,eval)(n+"=window."+n)}catch(e){}};
  for(const k in KPM_ACT){const A=typeof ACT==="object"&&ACT[k];if(!A||typeof A.f!=="function"||A.f.__kpm)continue;const D=KPM_ACT[k],F=A.f;
-  A.f=function(a,t){const r=F.apply(this,arguments);try{const s=String(r||"");if(t&&t!=="string"&&typeof t==="object"&&D.ok.test(s)&&!(D.no&&D.no.test(s)))setTimeout(()=>kpmGo(D.m,t,D.two?a:null),typeof kitPace==="function"?kitPace(450):450)}catch(e){}return r};A.f.__kpm=1}
+  A.f=function(a,t){const r=F.apply(this,arguments);try{const s=String(r||"");if(t&&t!=="string"&&typeof t==="object"&&D.ok.test(s)&&!(D.no&&D.no.test(s))){/* co-op thin (hostnull d): an act run in the other player's context on the host is HERS: the move is taken now (jcoopthin captures it for her phone), never later on the host's stage */if(window.COOPW&&COOPW.ctx)kpmGo(D.m,t,D.two?a:null);else setTimeout(()=>kpmGo(D.m,t,D.two?a:null),typeof kitPace==="function"?kitPace(450):450)}}catch(e){}return r};A.f.__kpm=1}
  /* death: an NPC on the stage greys, sinks and fades (kill = illness, ban chết, childbirth, dieIf) */
  for(const n of ["kill","deathSentence","dieIf"])W(n,o=>function(p){const was=p&&typeof p==="object"&&p!==S&&p.alive!==false;const r=o.apply(this,arguments);try{if(was&&p.alive===false)kpmGo("death",p)}catch(e){}return r});
  /* punished / phế: dragged off the stage (NPC, sev 2+ or fall); a light punishment is a flush */

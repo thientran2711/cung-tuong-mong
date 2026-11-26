@@ -17,7 +17,8 @@ const VL={base:[6,10,15,22,35,50,75,110,160],gMul:[1,1.5,2.2,3.2],cover:[2/3,.6,
  mat:[0,6,45],               /* craft material cost: vải sa · dây bạc, trai · kim tuyến, ngọc */
  outX:.8,outRisk:12,outDanh:3, /* mua lén: price factor, % the errand leaks, Danh lost */
  askHH:15,askTH:10,askFail:2, /* xin ban: odds = base + favour/2; favour lost on refusal */
- craftSuc:10,                /* Sức spent on a crafting session (2 khắc) */
+ craftSuc:10,                /* Sức spent on a crafting session (craftK khắc) */
+ craftK:2,                   /* khắc spent on a crafting session */
  npcBuy:45,npcCraft:30,npcAsk:15,giftP:12,empP:35}; /* NPC monthly chances; a friend sends one; a bestowal adds one */
 const VL_NAME=["Mạng sa","Mạng chuỗi bạc lưu ly","Mạng dây lụa hồng kết trai","Mạng bạc chạm hoa","Mạng vàng nhạt kết mã não","Mạng kim hoa ngọc bích","Mạng kim vân trân châu","Mạng kim ty mẫu đơn","Mạng phượng điểm thúy"];
 const VL_COVER=["che được ít","che khá kín","che kín","che rất kín","che kín, lại là ân điển"];
@@ -130,22 +131,26 @@ function vlWhen(c){return whyTime(c)}
 /* one option line in the kit modal: price + gain/loss + odds shown in full (these are acts, not hidden event choices) */
 function vlOpt(o){const fx=String(fmt(o.fx||{})).replace(/<[^>]+>/g,"");let L=o.x||"";if(fx)L=/tốn: /.test(L)?L.replace(/tốn: /,"tốn: "+fx+", "):(L?L.replace(new RegExp("^((?:[^·]*?(?:"+KIT_ODDS_ALT+")) · )?"),"$1tốn: "+fx+" · "):"tốn: "+fx);o.j67=L||"tốn: không tốn gì";return o}
 PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O=[];const ag=vlAgent(S);
- O.push(vlOpt({n:"Tự tay kết mạng",fx:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: trò thêu, chơi càng khéo mạng càng quý`,go:()=>{if(!can(2)||S.suc<VL.craftSuc+5){log("Không đủ khắc hay Sức để tự tay kết mạng.");return}pushDil(mkP("vlcraft"),"Tự tay kết mạng")}}));
+ O.push(vlOpt({n:"Tự tay kết mạng",fx:{},x:`tốn: ${VL.craftK} khắc, Sức -${VL.craftSuc} · thành: trò thêu, chơi càng khéo mạng càng quý`,go:()=>{if(!can(VL.craftK)||S.suc<VL.craftSuc+5){log("Không đủ khắc hay Sức để tự tay kết mạng.");return}pushDil(mkP("vlcraft"),"Tự tay kết mạng")}}));
  O.push(vlOpt({n:"Đặt ở Nội vụ phủ",fx:{},x:`tốn: 1 khắc · thành: mạng đúng phẩm của ngươi, giá theo phẩm`,go:()=>{if(!can(1))return;pushDil(mkP("vlnvp"),"Nội vụ phủ")}}));
  O.push(vlOpt({n:"Sai người mua lén ngoài cung",fx:{},x:ag?`tốn: 1 khắc · thành: rẻ hơn, nhiều kiểu · kèm: chưa rõ phẩm, lộ ra thì Danh -${VL.outDanh}`:"chưa có ma ma, thái giám hay cung nữ tin cẩn để sai",go:()=>{if(!ag||!can(1))return;pushDil(mkP("vlout"),"Mua lén ngoài cung")}}));
  for(const G of vlGivers(S))O.push(vlOpt({n:`Xin ${G.n} ban mạng`,fx:{},x:`${word(G.o)} · tốn: 1 khắc · thành: ${G.n} ban mạng Tinh phẩm đúng phẩm · hỏng: ${G.n} với ngươi -${VL.askFail}`,go:()=>{if(!can(1))return;const fz=G.o;/* the odds on this card (j9 fzRun) */spend(1);log(fzRun(fz,null,()=>vlAsk(S,G.k)));render()}}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>${sc?`Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}. `:""}${S.rash&&typeof rshOf==="function"?`Mặt ngươi nổi mẩn (${rshOf(S).name}): Sắc đang mất ${rshOf(S).lost}. `:""}Mạng che mặt phải tự làm, mua hoặc được ban.</p><p class="past">${vlGivers(S).map(G=>`Xin ${G.n} ban: ${word(G.o)}, hỏng thì ${G.n} quý ngươi -${VL.askFail}.`).join(" ")}${ag?` Mua lén qua ${ag.name}: lộ ra thì Danh -${VL.outDanh}.`:""} Mạng phẩm cao hơn phẩm của ngươi là vượt phẩm (chưa ai biết cho tới khi có người nhận xét).</p>`,o:O}};
-PEND.vlcraft=pp=>{const lv=vlLv(S),a=ARTS.find(x=>x.k===vlArt());const O=[0,1,2].map(m=>vlOpt({n:`Kết bằng ${VL_MATN[m]}`,fx:VL.mat[m]?{bac:-VL.mat[m]}:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: ${vlGradeOdds(S,m)}`,go:()=>vlCraftRun(m)}));
+PEND.vlcraft=pp=>{const lv=vlLv(S),a=ARTS.find(x=>x.k===vlArt());const O=[0,1,2].map(m=>vlOpt({n:`Kết bằng ${VL_MATN[m]}`,fx:VL.mat[m]?{bac:-VL.mat[m]}:{},x:`tốn: ${VL.craftK} khắc, Sức -${VL.craftSuc} · thành: ${vlGradeOdds(S,m)}`,go:()=>vlCraftRun(m)}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>Tự tay kết mạng che mặt bằng trò thêu. Phẩm của mạng là phần chơi, cộng ${a?a.n:"Thêu thùa"} bậc ${lv}, cộng vật liệu: thường thêm 0, tốt thêm 1, quý thêm 2.</p><p class="past">Dưới ${BAL.cut.veil[0]} ra mạng Thường, từ ${BAL.cut.veil[0]} Tinh phẩm, từ ${BAL.cut.veil[1]} Trân phẩm, từ ${BAL.cut.veil[2]} Tuyệt phẩm. Vật liệu quý ra kiểu mạng phẩm cao. Chơi được 5 phần: vải sa ra ${WD_GRADE[vlG({k:vlCraftOut(S,0,5)})]}, dây bạc ra ${WD_GRADE[vlG({k:vlCraftOut(S,1,5)})]}, kim tuyến ra ${WD_GRADE[vlG({k:vlCraftOut(S,2,5)})]}.</p>`,o:O}};
-function vlCraftRun(m){if(!can(2)||S.suc<VL.craftSuc){if(VL.mat[m])apply({bac:VL.mat[m]});return}
- /* KIT §13.9: 2 khắc + Sức are taken on «Sẵn sàng» / «Kết nhanh» (kgDefer); the ✕ before it = free back (the material comes back with jaudit's pending cost) */
- const pay={khac:2,suc:-VL.craftSuc},canDefer=typeof kgDefer==="function"&&typeof playArt==="function";if(!canDefer){spend(2);apply({suc:-VL.craftSuc})}
- const fin=(raw,sk)=>{if(sk&&!window.__bot){/* mg-skip-all: a quick craft makes no work (the works rule, BAL.skip); the paid material comes back */if(VL.mat[m])S.bac+=VL.mat[m];log("Kết nhanh: không ra mạng, vật liệu trả lại.");try{render()}catch(x){}return}raw=cl(Math.round(raw||0),0,10);if(VL.mat[m])S.bac+=VL.mat[m];/* chooseM already paid; vlCraft pays it once */const k=vlCraft(S,m,raw);const it=itm(k);
+function vlCraftRun(m){if(!can(VL.craftK)||S.suc<VL.craftSuc){if(VL.mat[m])apply({bac:VL.mat[m]});return}
+ /* KIT §13.9: the khắc + Sức are taken on «Sẵn sàng» / «Kết nhanh» (kgDefer); the ✕ before it = free back (the material comes back with jaudit's pending cost).
+    co-op thin F6b: a start in her context on the host is captured (vlCraftGame plays on her phone) → kgDefer charges at once there, as before */
+ const pay={khac:VL.craftK,suc:-VL.craftSuc};if(typeof kgDefer==="function"&&typeof playArt==="function"){kgDefer(pay,()=>vlCraftGame(m));return}
+ spend(VL.craftK);apply({suc:-VL.craftSuc});vlCraftGame(m)}
+/* co-op thin F6b: the game part (opened on HER phone when the start ran in her context on the host; mgEnd 12 = her end is the intent) and
+   the ONE named end (the host runs it in her context) */
+function vlCraftGame(m){if(typeof playArt==="function"){try{playArt({art:vlArt(),title:"Kết mạng che mặt",quick:{n:"Kết nhanh",sure:1,win:"không ra mạng, vật liệu trả lại"},mgEnd:12,onDone:(raw,o)=>vlCraftEnd(m,raw,!!(o&&o.skipped))});return}catch(x){console.error(x)}}vlCraftEnd(m,5,true)}
+function vlCraftEnd(m,raw,sk){if(sk&&!window.__bot){/* mg-skip-all: a quick craft makes no work (the works rule, BAL.skip); the paid material comes back */if(VL.mat[m])S.bac+=VL.mat[m];log("Kết nhanh: không ra mạng, vật liệu trả lại.");try{render()}catch(x){}return}raw=cl(Math.round(raw||0),0,10);if(VL.mat[m])S.bac+=VL.mat[m];/* chooseM already paid; vlCraft pays it once */const k=vlCraft(S,m,raw);const it=itm(k);
   const g=vlG({k});log(`<span class="g">Ngươi tự tay kết ${it.n} (${WD_GRADE[g]})</span>: phần chơi ${raw}${sk?" (để trời định)":""} + bậc ${vlLv(S)}${m?` + vật liệu +${m}`:""}. Cất vào rương.`);
-  Q.push({t:"Tự tay kết mạng",who:pMe(),h:`<p style="text-align:center">${typeof kitItem==="function"?kitItem({src:vlSrc(k),name:it.n,grade:g,size:"lg"}):""}</p><p>Ngươi kết xong <b>${it.n}</b> · ${WD_GRADE[g]}.</p><p class="past">Phẩm của mạng: chưa rõ. ${S.scar?"Vào mục Tư trang để đeo.":"Cất vào rương."}</p>`,btn:"Đã hiểu"});try{showModal();render()}catch(x){}};
- if(typeof playArt==="function"){try{const go=()=>playArt({art:vlArt(),title:"Kết mạng che mặt",quick:{n:"Kết nhanh",sure:1,win:"không ra mạng, vật liệu trả lại"},onDone:(raw,o)=>fin(raw,o&&o.skipped)});if(canDefer)kgDefer(pay,go);else go();return}catch(x){console.error(x)}}if(canDefer)kgPayNow(pay);fin(5,true)}
+  Q.push({t:"Tự tay kết mạng",who:pMe(),h:`<p style="text-align:center">${typeof kitItem==="function"?kitItem({src:vlSrc(k),name:it.n,grade:g,size:"lg"}):""}</p><p>Ngươi kết xong <b>${it.n}</b> · ${WD_GRADE[g]}.</p><p class="past">Phẩm của mạng: chưa rõ. ${S.scar?"Vào mục Tư trang để đeo.":"Cất vào rương."}</p>`,btn:"Đã hiểu"});try{showModal();render()}catch(x){}}
 PEND.vlnvp=pp=>{const L=vlNvpList(S);const O=L.map(k=>vlOpt({n:`${itm(k).n} · ${WD_GRADE[vlG({k})]}`,fx:{bac:-itm(k).pr},x:`tốn: 1 khắc · thành: đồ phẩm ${wdPName(+k[2])}, ${VL_COVER[vlG({k})]}`,go:()=>{spend(1);S.bac+=itm(k).pr;log(vlBuyNvp(S,k))}}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});return{who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ dâng sổ mẫu: “Mạng che theo phẩm của "+kSay({srv:"m"},S,"{goi}")+", xin người chọn.”</p>",o:O}};
 PEND.vlout=pp=>{const ag=vlAgent(S);if(!ag)return null;const L=vlOutList(S);const lk=vlLeak(S,ag);

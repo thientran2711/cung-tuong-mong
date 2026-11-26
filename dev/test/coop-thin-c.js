@@ -86,12 +86,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    let out="",err=null;try{out=runAct(S,t,k,extra)}catch(e){err=String(e&&e.stack||e).slice(0,400)}finally{Math.random=nat}
    const aft=JSON.stringify(rivals.find(v=>v.id===id)),same=aft===before;let diff=null;if(!same){const B=JSON.parse(before),A2=JSON.parse(aft);const dd=(x,y,p,o)=>{if(JSON.stringify(x)===JSON.stringify(y))return;if(x&&y&&typeof x==='object'&&typeof y==='object'){for(const f of new Set([...Object.keys(x),...Object.keys(y)]))dd(x[f],y[f],p+'.'+f,o);return}o.push([p,JSON.stringify(x),JSON.stringify(y)].map(z=>String(z).slice(0,120)))};diff=[];dd(B,A2,'',diff)}
    const ops=(C.stat.sent>s0?C.ops:[]).filter(o=>o.id===id||o.t==="add"||o.t==="w");Q.length=0;S.mg=null;try{closeModal()}catch(e){}
-   return {k,id,name:t.name,out:String(out||'').slice(0,90),err,same,ops,diff,staged:sid!=null&&t.id===sid}})()}catch(e){return {k,skip:'EXC '+String(e&&e.stack).slice(0,500)}}},[k,st&&st.id]);
+   return {k,id,tog:(()=>{try{return together(S,t)}catch(e){return 'x'}})(),name:t.name,out:String(out||'').slice(0,90),err,same,ops,diff,staged:sid!=null&&t.id===sid}})()}catch(e){return {k,skip:'EXC '+String(e&&e.stack).slice(0,500)}}},[k,st&&st.id]);
   if(r.skip){const dbg=process.env.DBG&&st?{g:await G.p.evaluate(([id,k])=>{const t=rivals.find(v=>v&&v.id===id);if(!t)return 'gone';let ok=null;try{ok=ACT[k].ok(S,t)}catch(e){ok='EXC '+e.message}
      return {ok,preg:t.preg,hid:t.hidden,kids:(t.kids||[]).map(x=>[x.age,x.alive,x.sex]),inv:(t.inv||[]).length,rank:t.rank,rk:rkOf(t),rkS:rkOf(S),tog:together(S,t),ton:tonightOf()===t,tn:String(S.tonight&&S.tonight.id||S.tonight),sh:sameHouse(S,t),alive:t.alive,out:t.out,pen:t.pen,inS:(S.inv||[]).length,conf:S.confined,vpi:vpItems(t).length,inv0:JSON.stringify((t.inv||[])[0]),it0:(t.inv||[])[0]&&JSON.stringify(itm(t.inv[0].k)).slice(0,160)}},[st.id,k]),
     h:await H.p.evaluate(id=>{const t=rivals.find(v=>v&&v.id===id&&!v.coop);return t?{preg:t.preg,kids:(t.kids||[]).length,inv:(t.inv||[]).length,rank:t.rank,alive:t.alive,out:t.out}:'gone'},st.id)}:undefined;
    table.push({k,skip:r.skip,stage:st,dbg});if(dbg)console.log('skip',k,JSON.stringify(dbg).slice(0,600));continue}
-  if(!r.ops.length){table.push({k,id:r.id,same:r.same,ops:0,out:r.out,err:r.err});if(!r.same)ok(false,'C2 '+k+': no op but her world changed',{diff:r.diff,out:r.out,err:r.err});continue}
+  if(!r.ops.length){table.push({k,id:r.id,tog:r.tog,same:r.same,ops:0,out:r.out,err:r.err});if(!r.same)ok(false,'C2 '+k+': no op but her world changed',{diff:r.diff,out:r.out,err:r.err});continue}
   nAct++;
   /* wait for the host's answer to come back (her view's dr = this intent) and compare */
   const got=await until(G,()=>{const V=COOPW.thin.view;return !!(V&&V.o&&V.o.dr&&V.o.dr.op==='npc'&&V.o.dr.id===COOPW.thin.C.lastId)},null,15000);
@@ -120,7 +120,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
     for(const f of Object.keys(h)){const N=+process.env.TRACE_N||160;console.log('TRACE',k,o.id,f,'b='+String(JSON.stringify(o.b[f])).slice(0,N),'a='+String(JSON.stringify(o.a[f])).slice(0,N),'host='+String(h[f]).slice(0,N),'her='+String(g[f]).slice(0,N))}}
    for(const o of r.ops.filter(x=>x.t!=='npc'))console.log('TRACE',k,'op',o.t,JSON.stringify(o).slice(0,300))}
   if(!good)ok(false,'C2 '+k,{same:r.same,got,chk,hostSame,ops:r.ops.map(o=>o.t+':'+o.id),glog:await G.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.lastId,COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.dr]),hlog:await H.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.stat.applied,COOPW.thin.held&&COOPW.thin.held('b'),(COOPW.thin.D&&COOPW.thin.D.log||[]).slice(-4)])})}
- if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`C2 every ACT kind with an NPC effect: her world untouched by the act, effect applied once by the host and back on her phone (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target, ${table.filter(x=>!x.skip&&!x.ops).length} without an NPC effect)`);
+ /* level >= 6: part C's act frame + `do npc` ops are retired for runAct by design (jcoopthinf header: her act is an F intent, tested by coop-thin-f1):
+    no act needs to give a C op; each one still must leave her world untouched on her phone (the per-act C2 check above) */
+ if(!process.env.NOACT)ok((LVL>=6||nAct>0)&&nAct===nOk,`C2${LVL>=6?' (level '+LVL+': acts are F intents, C ops retired)':''} every ACT kind with an NPC effect: her world untouched by the act, effect applied once by the host and back on her phone (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target, ${table.filter(x=>!x.skip&&!x.ops).length} without an NPC effect)`);
  /* C3: a person she causes */
  await sync();
  const c3=await G.p.evaluate(()=>{const C=COOPW.thin.C;let id=null,name=null;C.frame('act',()=>{const n=newRival(0);try{Object.assign(n,drawFace())}catch(e){}rivals.push(n);id=n.id;name=n.name});return {id,name,inList:rivals.some(v=>v.id===id),tmp:id>=1000}});
@@ -138,7 +140,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.evaluate(()=>{const f=COOP.send;COOP.send=function(m){if(m&&m.t==='end')window.__sentW=JSON.stringify(m.state.W)===JSON.stringify(COOPW.base.W);return f.apply(this,arguments)}});
  const okw=await week(H,G,'C4');
  const c4=await G.p.evaluate(()=>({st:COOPW.thin.C.stat,c0:window.__c0,sentW:window.__sentW}));
- ok(okw&&c4.sentW===true,'C4 her sent week carries the room world unchanged (W from the host only)',{sentW:c4.sentW});
+ /* part G (level >= 13): her phone never runs / sends her week end (jcoopworld sendEnd returns at gG(); the Worker refuses a guest end): no world of hers travels */
+ ok(okw&&(LVL>=13?c4.sentW===null:c4.sentW===true),LVL>=13?'C4 level 13: she sends no week end (the host ran it), no world of hers travels':'C4 her sent week carries the room world unchanged (W from the host only)',{sentW:c4.sentW});
  ok(c4.st.drop>c4.c0.drop,'C4 her week end ran its world loops on the lens (writes dropped)',{drop:[c4.c0.drop,c4.st.drop],dropW:c4.st.dropW});
  await sync();
  const one=await (async()=>{const f=()=>rivals.filter(v=>v&&!v.coop).map(v=>[v.id,v.sung,v.bac,v.danh,v.suc,v.alive,v.rank,!!v.out]).sort((a,b)=>a[0]-b[0]);const [h,g]=await both(f);

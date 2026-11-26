@@ -54,11 +54,12 @@ stealNight=function(a,t,mode){const m=mo(mode);let mine=false;
 /* ---------- her game ---------- */
 /* cb(up, raw, skipped) — up = rungs won (0 on lose / skip). Bots and pages without the kit frame skip at once. */
 function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=mode==="road"?"Chặn ngự giá":"Tranh sủng";
- const fin=(raw,sk)=>{const up=!sk&&raw>=B.win?(B.rung||1):0;stat({w:day(),who:"me",mode,up,by:"mg",raw:sk?null:raw,path:"her"});BUSY=0;
+ const fin=(raw,sk)=>{if(typeof window.__smgEnd==="function"&&window.__smgEnd(mode,raw,sk)){BUSY=0;return}/* co-op thin F6b: her end is the intent (jcoopthinf6b) */const up=!sk&&raw>=B.win?(B.rung||1):0;stat({w:day(),who:"me",mode,up,by:"mg",raw:sk?null:raw,path:"her"});BUSY=0;
   if(up)try{log(`${nm}: ${KG82_KIND[kind].n.toLowerCase()} được ${raw}/10, cơ duyên lần này lên ${word(stealRungUp(o,up))}.`)}catch(e){}
   try{cb(up,raw,sk)}catch(e){console.error(e)}};
  if(typeof window.__smgFake==="function"){BUSY=1;const r=window.__smgFake(mode)||{};if(r.sync)fin(+r.raw||0,!!r.skipped);else setTimeout(()=>fin(+r.raw||0,!!r.skipped),0);return}   /* tests */
  if(!B.on||!kind||topRung(o)||typeof window.__bot!=="undefined"||typeof playArt!=="function"||typeof KG82_KIND!=="object"||!KG82_KIND[kind]){try{cb(0,null,true)}catch(e){console.error(e)}return}
+ if(typeof window.__smgOpen==="function"&&window.__smgOpen(mode,o))return;/* co-op thin F6b: the game opens on HER phone (jcoopthinf6b) */
  BUSY=1;const n1=word(stealRungUp(o,B.rung||1)),n0=word(o),diff=()=>{try{return mgDiffTxt(mgTier(kind,{occ:B.occ}),kind)}catch(e){return ""}};
  const pa=()=>playArt({art:kind,artName:nm,occ:B.occ,rowsHead:"Trước khi ra tay",
   rows:[["Thắng",`cơ duyên lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ duyên giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
@@ -67,7 +68,7 @@ function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=m
   onDone:(raw,x)=>fin(raw,!!(x&&x.skipped))});
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
  const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
-window.stealMgPlay=herGame;
+window.stealMgPlay=herGame;window.stealIsCard=a=>isStealCard(a);window.stealO0=(p,m)=>o0(p,m);
 /* is her steal game really running? (jnf heal, review/fix-evening-softlock): BUSY with no game layer on screen (#kg82 closed without its onDone,
    or a reload: BUSY is not saved) is no game — BUSY drops so the next try can play */
 window.stealMgBusy=function(){if(BUSY&&typeof window.__smgFake!=="function"&&!document.getElementById("kg82"))BUSY=0;return !!(BUSY||PEND)/* PEND: her pick is being recorded inside chooseM, the game opens right after */};

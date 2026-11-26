@@ -129,7 +129,7 @@ function petGive(p,t,from,src){if(petHasFree(p))return petAdd(p,t,from,src);cons
 function petCardQ(pid){return Q.some(m=>m.pid===pid)}
 const PET_SRCN={emp:"Hoàng thượng ban",th:"Thái hậu ban",hh:"Hoàng hậu ban",man:"",hunt:"Thu săn, Hoàng thượng ban",trib:"Cống phẩm, Hoàng thượng ban",buy:"Nhờ thái giám mua"};
 /* co-op (review/coop-pets): NPC pets are part of the shared world, rolled once on the host; the guest runs only her own (else the merge adds the NPC decay / costs twice) */
-function petNpcs(){try{if(window.COOPW&&COOPW.on&&COOPW.seat!=="a")return []}catch(e){}return liveRivals(true)}
+function petNpcs(){try{if(window.coopGuest&&coopGuest())return []}catch(e){}return liveRivals(true)}
 function petLack(p,k){return tsbPets(p).some(P=>P.t===k)?0:1}
 function petThW(p,k){const B=BAL.ag.why.g2pet;if(k==="hac")return B.hac;return (p.th||0)>=B.kyTh&&rkOf(p)>=B.kyRk?(p.th||0)-B.kyTh+B.ky:0}
 function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="function"&&isSrv())&&!S.out,me=[S].concat(petNpcs());

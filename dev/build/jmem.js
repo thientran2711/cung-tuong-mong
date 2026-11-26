@@ -244,7 +244,7 @@ function causeWhy(b,t,s){b=mk(b);t=mk(t);s=s>0?1:-1;try{
 function causeAdd(by,to,a,o){if(off())return null;o=o||{};const b=mk(by),t=mk(to);if(!b||!t||b===t||!isP(b)||!isP(t))return null;
  const s=o.s>0?1:-1;const y=o.y||causeWhy(b,t,s);
  const home=hObj(t)||hObj(b);const Z=home?czOf(home):czMine();const H=hkS();H.cn=(H.cn||0)+1;
- let tag="";try{tag=(window.COOPW&&COOPW.seat)||""}catch(e){}const id="c"+tag+(S.turn||0)+"."+H.cn;
+ let tag="";try{tag=(window.COOPW&&(COOPW.ctx||COOPW.seat))||""}catch(e){}const id="c"+tag+(S.turn||0)+"."+H.cn;
  const r={w:nowW(),dt:dtNow(),q:H.cn,by:b,to:t,a:String(a||""),s,y};if(o.n)r.n=plainT(o.n).slice(0,40);if(o.d&&MEM_DEEDS[o.d])r.d=o.d;if(o.x)r.x=plainT(o.x).slice(0,60);if(o.r)r.r=o.r;
  Z[id]=r;czPrune(Z);return id}
 function causeQuery(f){f=f||{};if(off())return[];const by=f.by!=null?mk(f.by):null,to=f.to!=null?mk(f.to):null,who=f.who!=null?mk(f.who):null;const R=[];

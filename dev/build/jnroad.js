@@ -12,7 +12,7 @@
    State: v.nr = {o origin, r road, n next chapter, k last ending sign, t turn due, h help chapter, hk help kind, hs help state,
    hb help bonus, c rival id ("me" = the player), e last ending tag, x closed, l lives log [n,k]} — saved with the consort (rivals).
    Host-only in co-op (world state; the jreign pattern). window.__nroff switches it off (bot ON/OFF measure). Kit only: j72 card + log. */
-function nrGuest(){const C=window.COOPW;return !!(C&&C.on&&C.seat&&C.seat!=="a")}
+function nrGuest(){const C=window.COOPW;return !!(window.coopGuest&&coopGuest())}
 function nrOn(){return !!(typeof S==="object"&&S&&!S.dead&&!window.__nroff&&typeof ARC67==="object")}
 const nrB=()=>BAL.nroad;
 /* owner priority 16/11 22:00Z (OD:L1477, chapters 1–4 first): while the player is in her learning chapters (Phần đầu, before chapter

@@ -105,7 +105,7 @@ function prCheck(){if(!S||S.dead)return;const srv=prRoad();let z=S.prSeen;
   if(typeof kmOn==="function"&&kmOn())for(const [s,r] of staff)kitPersonReveal({who:s,title:"Nội vụ phủ phụ cấp người hầu",sub:prServSub(s),line:prServLine(s,r)})}
  else if(cur<from)z.r=cur}
 /* ---------- NPC consorts: data only, on the co-op host only ---------- */
-function prHostOK(){try{const W=window.COOPW;return !(W&&W.on&&W.seat!=="a")}catch(e){return true}}
+function prHostOK(){try{const W=window.COOPW;return !(window.coopGuest&&coopGuest())}catch(e){return true}}
 function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||v.coop||v.alive===false)continue;const r=rkOf(v);
   if(v.prSeen==null){v.prSeen=r;continue}if(v.out)continue;if(r>v.prSeen){for(let i=v.prSeen+1;i<=r;i++){prGive(v,prSetFor(i));prStaff(v)}v.prSeen=r;window.__prNpc=(window.__prNpc||0)+1}else if(r<v.prSeen)v.prSeen=r}}
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{prCheck()}catch(e){console.error("promo set",e)}/* a demotion / the cold palace sheds the extra servants at once (j10 capSweep, review/staff-root) */try{if(typeof capSweep==="function")capSweep()}catch(e){}return r}})();

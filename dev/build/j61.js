@@ -39,13 +39,15 @@ function k61WMig(){try{if(!S||!S.known)return;for(const e of k61All())if(e&&type
    key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
    name («Hàn lâm học sĩ ???», rv-hao-huu r2 A). Her people get their own namespace "g…" on BOTH seats; the host's people and the world keep
    the solo keys (old saves, solo and the host change nothing; her own people are always known on her seat, k61Own). */
+/* coop-thin G seat-guard family (law 11): her week end on the host (CW.gWk) counts as her seat, as on her phone (window.coopGuest) */
+const k61Gst=()=>!!(window.coopGuest&&coopGuest());
 function k61GuestOwn(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop)return false;
-  if(W.seat!=="a")return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||!!(S.kc&&(S.kc.fam||[]).includes(e));
+  if(k61Gst())return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||!!(S.kc&&(S.kc.fam||[]).includes(e));
   for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
 /* coop-guest-names r1 (law 1 two-way): the mirror on the GUEST seat — the copies of the HOST player's people on her entry (her children, maid,
    servants) carry keys issued by the host's counter, while this seat's own counter runs from the same shared value (S.kseq) and issues the
    same "x<n>" to its own new records: one key, two people. They get their own namespace "h…" on the guest seat, as hers get "g…" on the host. */
-function k61HostCopy(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop||W.seat==="a")return false;
+function k61HostCopy(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop||!k61Gst())return false;
   for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
 function k61Ent(k){if(!k||!S)return null;if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return S.thO||null;return KREG[k]||null}
 function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="object"&&!L.includes(e))L.push(e)};
@@ -295,13 +297,13 @@ function k61Table(){if(!S||!S.known)return null;const now=Date.now();const rn=(r
    end, between rebuilds — a stand-in {coop,id:pid,name} with her rivals key (a cung nữ: {coop,sid:pid}, her servant key), so she still reads «Hảo hữu của ta» until met) and the copies of
    her people in this seat's list; prot = full names of her people this seat only knows from the room blob (P of the other seat: nmPers) */
 let K61CF=null;
-function k61CoopFr(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P)return null;const P=W.base.P[W.seat==="a"?"b":"a"];if(!P||P.dead||!P.S||P.S.dead||!P.pid)return null;
+function k61CoopFr(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P)return null;const P=W.base.P[k61Gst()?"a":"b"];if(!P||P.dead||!P.S||P.S.dead||!P.pid)return null;
   const nm=String(P.name||P.S.name||"");if(!nm)return null;const sv=!!(P.S.srv&&!P.S.srv.risen)/* she serves as a cung nữ: her entry is a servant {sid:pid} (key "s"+pid) */;
   if(!K61CF||(sv?K61CF.sid:K61CF.id)!==P.pid||K61CF.name!==nm)K61CF=sv?{coop:true,sid:P.pid,name:nm,role:"maid",fr:1}:{coop:true,id:P.pid,name:nm,rank:P.S.rank||0,out:!!P.S.out,fr:1};return K61CF}catch(e){return null}}
 function k61Shared(ents){const o={ents:[],prot:[]};try{const W=window.COOPW;if(!W||!W.on)return o;let f=(rivals||[]).find(v=>v&&v.coop)||ents.find(e=>e&&e.coop)||null;
   if(!f){f=k61CoopFr();if(f){ents.push(f);kOf61(f)}}if(f){o.ents.push(f);for(const x of [f.maid,...(f.staff||[]),...(f.kids||[])])if(x&&ents.includes(x))o.ents.push(x)}
-  if(W.seat!=="a")for(const x of [S.maid,...(S.staff||[]),...(S.kids||[])])if(x&&ents.includes(x)&&!o.ents.includes(x))o.ents.push(x);
-  const P=W.base&&W.base.P&&W.base.P[W.seat==="a"?"b":"a"];if(P&&P.S&&!P.dead&&typeof nmPers==="function"){const have=new Set(o.ents.map(e=>e&&e.name))/* her person's own copy is here: it follows the knowledge rule itself */;
+  if(k61Gst())for(const x of [S.maid,...(S.staff||[]),...(S.kids||[])])if(x&&ents.includes(x)&&!o.ents.includes(x))o.ents.push(x);
+  const P=W.base&&W.base.P&&W.base.P[k61Gst()?"a":"b"];if(P&&P.S&&!P.dead&&typeof nmPers==="function"){const have=new Set(o.ents.map(e=>e&&e.name))/* her person's own copy is here: it follows the knowledge rule itself */;
    for(const x of nmPers(P.S)){const n=x.o&&x.o.name;if(x.fp==="name"||!n||have.has(n))continue;o.prot.push(n)}}}catch(e){}return o}
 window.k61CoopFr=k61CoopFr;window.k61Shared=k61Shared;
 /* the mask for a name she does not know: "<title> ???" (title = what the dress shows), never a descriptor sentence */

@@ -26,6 +26,7 @@ const RAW=Symbol.for("ctm.lens.raw");
 const isMe=a=>!!a&&(a===S||a[RAW]===S||(S&&S[RAW]&&S[RAW]===a));
 const LSK=()=>"ctm-thin-f:"+(COOP.state.room||"");
 const PRE={};/* name → the function below the wrapper (the host runs it) */
+F.PRE=PRE;/* F6b: a later part's host-side wrapper of a registered function goes here (the host runs PRE[name], not window[name]) */
 
 /* ---------- guest ---------- */
 /* reviewer r1 (her act's result card): in solo and below level 6 the caller that snapshots her stats before an act (rsnap: wrapR doAct,
@@ -36,8 +37,9 @@ const PRE={};/* name → the function below the wrapper (the host runs it) */
 let snapV=null;
 if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(CW.ctx&&o&&typeof o==="object")try{Object.defineProperty(o,"__ctx",{value:CW.ctx})}catch(e){}snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
 function cardLater(p,dr){const b=p.bf;if(!b||!dr||!dr.r||dr.r.st!=="ok"||typeof resultShow!=="function")return;
- setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint():null))}}catch(e){console.error("thin F card",e)}},0)}
+ setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n],rs=dr.r.rs;resultShow(p.ttl||(rs&&rs[0])||"",b,p.force?true:(R&&R.okHint?R.okHint(dr):rs?rs[1]:null))/* F5: the hint may read the host's answer */}}catch(e){console.error("thin F card",e)}},0)}
 function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
+F.gOn=lv=>gOn(lv);
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
 function intent(name,args){const R=F.R[name],t00=performance.now();
@@ -98,7 +100,7 @@ const DONE=new Map();
 /* F3 (proven gap: a registered UI function wrapped by wrapR / with its own rsnap → resultShow ran IN her context on the host and opened her
    result card on the HOST's screen): while such a registration runs for her the card is not shown here; it shows on her phone after the
    answer (cardLater, R.snap "soft" = the same wrapR rule as solo) */
-let NORES=0;if(typeof resultShow==="function"){const rs=resultShow;resultShow=function(){if(NORES>0&&CW.ctx)return;return rs.apply(this,arguments)}}
+let NORES=0,RSL=null;if(typeof resultShow==="function"){const rs=resultShow;resultShow=function(){if(NORES>0&&CW.ctx){RSL=[arguments[0],arguments[2]];return}return rs.apply(this,arguments)}}/* F6a: the card her run asked for (title, ok word) rides with the answer (out.rs) */
 function doneLoad(){try{const o=JSON.parse(localStorage.getItem(LSK())||"null");if(o&&Array.isArray(o.d))for(const [k,v] of o.d)DONE.set(k,v)}catch(e){}}
 function doneSave(){try{while(DONE.size>60)DONE.delete(DONE.keys().next().value);localStorage.setItem(LSK(),JSON.stringify({d:[...DONE]}))}catch(e){}}
 let loaded="";
@@ -112,9 +114,9 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
-   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>PRE[a.n].apply(null,args))}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
+   if(R.noRes)NORES++;RSL=null;let T;try{T=TH.tapRun(()=>{if(R.pre)R.pre(args)/* F5: what the host does first in her run (the deferred cost, the host's own rolls) */;return PRE[a.n].apply(null,args)})}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
    const r=T.r,ui=T.ui;if(a.n==="ptTickHer")F.stat.ptRun=(F.stat.ptRun|0)+1;else F.stat.run++;/* her due tasks landing (coop-ptime-reds) is not one of her acts: counted apart */if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
-   if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
+   if(typeof r==="boolean")out.rv=r;if(R.noRes&&RSL){out.rs=[String(RSL[0]==null?"":RSL[0]).replace(/<[^>]+>/g,"").slice(0,160),RSL[1]==null?null:!!RSL[1]];RSL=null}if(ui&&ui.length)out.ui=ui/* hostnull (c): all of them; BAL.coopUi paces them on her phone (was slice(0,4): a 5th effect was lost) */;
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
  catch(e){console.error("thin F run",a.n,e);out={st:"err",e:String(e&&e.message||e).slice(0,200)}}
@@ -327,10 +329,10 @@ function reg9(name,K,o){o=o||{};const R=Object.assign({lv:L9,ctx:CX9,back:BACK8,
  R.mine=A=>live()&&(o.mine?o.mine(A):isMe(A[0]));return F.reg(name,R)}
 /* her care / plant screens draw into the HOST's DOM (petcClose → closeModal = the host's own card queue) when run in her context there:
    captured instead, replayed on her phone with the answer (her pet / plant read from her patched person) */
-const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
+const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
 ["petcDraw","petcClose","shelfPlantDraw"].forEach(UI9);
 try{for(const n of ["petcDraw","petcClose","shelfPlantDraw","petcGrowShow"])TH.UICAP.add(n)}catch(e){}
-if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
+if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
  window.petcGrowShow=i=>{try{const P=tsbPets(S)[+i];if(P)f(P)}catch(e){}}}
 /* pets */
 KSH.pet=()=>petShop();
@@ -343,4 +345,186 @@ reg9("shelfPlantQuick",[],{mine:()=>true});
 reg9("rcpRead",["ix"],{mine:()=>true});
 reg9("rcpAskGo",["v","pm"],{mine:()=>true});
 reg9("tdsRun",["v","v","v"],{mine:A=>A[1]==="prac"});
+/* ---------- F5: her mini-game SCORE ends (level 10; report dev/handover/reports/coop-thin-f5.md step 0) ----------
+   The game itself plays on HER phone (same game, same parameters as solo: law 5); only its end (the score + what she chose before) is ONE
+   intent. Ends = named engines: petcGain / shelfPlantGain (care games), wkLessonEnd (Tài nghệ lessons, Tự học làm tác phẩm, Học lối mới),
+   tdFinish (Tứ đức), tsSummonEnd / tsDenEnd (tsGame: the summons, the lantern). The host checks the score (BAL.mgSc ranges, its tables;
+   outside → refused, nothing applied), rolls every "Để trời định" / "Học nhanh" / "Bỏ qua" itself (her phone never rolls), pays the
+   game's deferred cost (jaudit aaPayMG) ONCE before the gain (solo order), then runs the engine in her context. Her result card: the
+   engine's own (cardLater) or jaudit's one card after the game (aaShowLast, captured) — on her phone only. */
+const L10=10;
+const inR=(x,r)=>typeof x==="number"&&isFinite(x)&&!!r&&x>=r[0]&&x<=r[1];
+const MSC=()=>BAL.mgSc;
+/* guest: an F5 game is open (MGC): the kg82 opening it made (KGN) — a later game, closed or not, never takes its place */
+let KGN=0,MGC=null,AA=null,HAA=null,SKH=0;
+/* Tứ đức (tdPlay: called by name from j85 / jtds pickers that keep their own copy) is known by its own busy flag at its opening */
+if(typeof kg82Open==="function"){const k0=kg82Open;kg82Open=function(){KGN++;try{if(!host()&&!(MGC&&MGC.n===-1)&&typeof TDS==="object"&&TDS.busy&&gOn(L10))MGC={k:"td",o:null,n:KGN}}catch(e){}return k0.apply(this,arguments)}}
+const mgOk=()=>!!MGC&&MGC.n===KGN&&!host()&&gOn(L10);
+const mgOpen=(k,o,fn)=>{const M={k,o,n:-1};MGC=M;const r=fn();if(MGC===M)M.n=KGN;return r};
+if(typeof playArt==="function"){const p0=playArt;playArt=function(o){if(host()||!gOn(L10)||!o||!o.mgEnd){if(!host())MGC=null;return p0.apply(this,arguments)}return mgOpen("pa",o,()=>p0.apply(this,arguments))};window.playArt=playArt}
+if(typeof tsGame==="function"){const t0=tsGame;tsGame=function(o){if(host()||!gOn(L10)||!o){if(!host())MGC=null;return t0.apply(this,arguments)}return mgOpen("ts",o,()=>t0.apply(this,arguments))};window.tsGame=tsGame}
+/* guest: the deferred cost is never paid here: jaudit's call is held with its score (the first one of this end), the cost rides in ctx */
+if(typeof window.aaPayMG==="function"){const a0=window.aaPayMG;window.aaPayMG=function(sc){if(mgOk()){if(!AA){const m=S&&S.mg;AA={c:J((m&&m.cost)||window.__aaPend||null),sc:J(sc||{}),t:window.__aaTitle||null}}F.stat.aaHeld=(F.stat.aaHeld|0)+1;return}return a0.apply(this,arguments)};
+ F.aaLocal=a0}
+/* guest: the quick button of an F5 game: the game's own quick path runs (its words, its onDone chain: the end intent) with the roll left
+   to the host (null), and its result rows are closed at once — the result comes from the host's answer */
+if(typeof kitQuickRoll==="function"){const q0=kitQuickRoll;kitQuickRoll=function(){if(SKH&&!host())return null;return q0.apply(this,arguments)};window.kitQuickRoll=kitQuickRoll}
+if(typeof tsSkipRes==="function"){const r0=tsSkipRes;tsSkipRes=function(odds,risk){if(SKH&&!host())return {raw:0,skipped:true,ok:null,guard:null,risk:risk?1:0};return r0.apply(this,arguments)};window.tsSkipRes=tsSkipRes}
+for(const n of ["sfx","kitSfx","kitResultSfx"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(SKH&&!host())return;return f.apply(this,arguments)}}
+document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("#kg82skip");if(!b||!mgOk()||typeof b.onclick!=="function")return;
+ e.stopImmediatePropagation();e.preventDefault();F.stat.skip=(F.stat.skip|0)+1;SKH=1;try{b.onclick.call(b,e)}finally{SKH=0}
+ const ok=document.getElementById("kg82ok");if(ok&&typeof ok.onclick==="function")ok.onclick.call(ok)},true);
+/* host: her held score + cost (ctx "aa"); the host's own pending cost / title are kept and put back after her run */
+const CXAA=["aa",()=>host()?{h:1,c:window.__aaPend||null,t:window.__aaTitle||null}:AA,v=>{if(!host())return;window.__aaPend=v&&v.c||null;window.__aaTitle=v&&v.t||null;HAA=v&&!v.h&&v.sc?v:null}];
+const CX10=CX9.concat([CXAA,OBJ("tds",()=>({q:TDS.q}))]);
+function payAA(fix){if(!HAA)return;const sc=Object.assign({},HAA.sc);if(fix)fix(sc);const t0=window.aaCardTo;
+ window.aaCardTo=(t,b,ok)=>{F.stat.aaCard=(F.stat.aaCard|0)+1;if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["aaShowLast",[t,J(b||null),ok]])};
+ try{window.aaPayMG(sc);F.stat.aaPaid=(F.stat.aaPaid|0)+1}finally{window.aaCardTo=t0;HAA=null}}
+try{TH.UICAP.add("aaShowLast")}catch(e){}
+function reg10(name,K,o){o=o||{};const R=Object.assign({lv:L10,ctx:CX10,back:BACK8,enc:A=>encA9(K,A),dec:a=>decA9(K,a),done:reDraw,title:()=>""},o);
+ R.mine=A=>live()&&(o.mine?o.mine(A):true);const r=F.reg(name,R);if(!r)return r;
+ /* guest, after the end is sent: the held cost now travels with it (cleared here); an end that ran here after all (refused before sending)
+    pays its held cost here, never lost */
+ const w=window[name];window[name]=function(){const p0=F.pend,a=AA;const r=w.apply(this,arguments);if(!host()){const sent=!!F.pend&&F.pend!==p0;
+  if(a){if(sent){window.__aaPend=null;F.stat.aaSent=(F.stat.aaSent|0)+1}else try{F.aaLocal(a.sc)}catch(e){}AA=null}if(sent||a)MGC=null}return r};return true}
+/* a refused end applies nothing; a lesson's game is over all the same (her S.mg closed, as a game closed unplayed: no cost, no gain) */
+const bad=n=>{F.stat.mgBad=(F.stat.mgBad|0)+1;lg(["mgBad",n]);try{if(n==="wkLessonEnd"&&CW.ctx&&S)S.mg=null}catch(e){}return null};
+/* care games (her open care / plant screen rides in ctx: PETC.i / SHPC.g) */
+reg10("petcGain",["v","v"],{dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;return ["feed","bath","play"].includes(x[0])&&inR(x[1],MSC().unit)?x:bad("petcGain")}});
+reg10("shelfPlantGain",["v"],{dec:a=>{const x=decA9(["v"],a);if(!x)return null;return inR(x[0],MSC().unit)?x:bad("shelfPlantGain")}});
+/* Tài nghệ lessons / practice / Học lối mới: k, the lesson (S.mg as it was), the play, {skipped}; the host rolls a quick lesson (o.ok null) */
+reg10("wkLessonEnd",["v","v","v","v"],{enc:A=>{const m=A[1];if(!m||typeof m!=="object")return null;const c=Object.assign({},m);delete c.cost;return encA9(["v","v","v","v"],[A[0],c,A[2]==null?0:A[2],{skipped:!!(A[3]&&A[3].skipped)}])},
+ dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,m,raw,o]=x;const sk=!!(o&&o.skipped);
+  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0)||!wkSubjOK(m.wk.kind,m.wk.subj)))||(m.hw!=null&&!(m.hw in WK_HOW)))return bad("wkLessonEnd");
+  /* r1: no word of hers travels (her work's subject = one of wkSubj's, her practice's words = WK_HOW by key) */
+  if(!sk&&!inR(raw,MSC().raw))return bad("wkLessonEnd");return [k,m,sk?0:raw,{skipped:sk}]},
+ pre:A=>payAA(sc=>{const sk=!!A[3].skipped;sc.skip=sk;sc.raw=sk?null:cl(Math.round(A[2]||0),0,10);sc.ok=!sk&&sc.raw>=5})});
+/* Tứ đức: tdFinish pays its own cost; a quick play is rolled here (TDS.q, as the game's own quick button) */
+reg10("tdFinish",["v","v","v","v"],{snap:"soft",noRes:true,title:A=>{try{const V=VIR.find(x=>x.k===A[0]);return `${A[1]==="self"?"Tự học":"Học"} ${V?V.n:""}`}catch(e){return ""}},
+ dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,mode,raw,sk]=x;if(!VIR.some(y=>y.k===k)||!(mode in TD_MODE))return bad("tdFinish");
+  if(!sk&&!inR(raw,MSC().raw))return bad("tdFinish");return [k,mode,sk?0:raw,!!sk]},
+ pre:A=>{if(A[3]){const ok=!!kitQuickRoll();A[2]=ok?BAL.skip.raw:0;TDS.q=ok}else TDS.q=null}});
+/* tsGame ends: res {raw, skipped, guard}; the snapshot of her card (b) stays on her phone (her result card = cardLater); a skipped play
+   is rolled here by the ONE rule (tsSkipRes) with her odds of now; hộ giá only when the road has it (tsRebel) */
+const tsRes0=(res,risk)=>{if(!res||typeof res!=="object")return null;if(res.skipped)return {skipped:true,risk:risk&&res.risk?1:0};
+ if(!inR(res.raw,MSC().raw))return null;const g=res.guard==null?null:res.guard;if(g!=null&&(!risk||(g!==0&&g!==1)))return null;return {raw:res.raw,skipped:false,guard:g}};
+const tsEnc=A=>encA9(["v","v"],[A[0],A[1]&&typeof A[1]==="object"?{raw:A[1].raw,skipped:!!A[1].skipped,guard:A[1].guard==null?null:A[1].guard,risk:A[1].risk?1:0}:null]);
+reg10("tsSummonEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:A=>`Hoàng thượng triệu ${({dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"})[A[0]]||""}`,okHint:dr=>!!(dr&&dr.r&&dr.r.ok),
+ dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;const k=x[0];if(!["dan","co","duho"].includes(k))return bad("tsSummonEnd");let rb=0;try{rb=k==="duho"?tsRebel():0}catch(e){}
+  const r=tsRes0(x[1],!!rb);return r?[k,r,null]:bad("tsSummonEnd")},
+ pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsSummonOdds(S,A[0])||50)),A[1].risk)},host:(A,out)=>{out.ok=A[1].raw>=5||A[1].guard===1}});
+reg10("tsDenEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:()=>"Thả đèn hoa đăng",okHint:()=>true,
+ dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;if(![0,1,2].includes(x[0]))return bad("tsDenEnd");const r=tsRes0(x[1],false);return r?[x[0],r,null]:bad("tsDenEnd")},
+ pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsDenOdds(S)||50)),0)}});
+/* ---------- F6a: her deck cards, quest steps and her other acts (level 11; report dev/handover/reports/coop-thin-f6.md step 0) ----------
+   ONE HAND. Her Hành sự hand is dealt by the real step in her context on the host (E: nextBuoi → deal); before F6a her phone dealt a
+   second hand of its own (another shuffle). At level 11 the host's hand is the one: as her context closes (TH.ctxOut) the host brings it
+   up to date the way her own render would (a hand for a new buổi / week, the standing cards j76Std, the mood cards eaSync, feelDeck) and
+   keeps it as PLAIN cards (no closures; `why` read in her context); the view carries it (o.hd); her phone shows exactly that hand.
+   A tap = ONE intent act(i) {i, n}: the host runs act(i) in her context on its own hand (runOpt, every act wrapper, the card's closures).
+   Cards whose GAME or screen opens first (the exam, Điểm trang, the steal cards, the aaMG work cards: __g) are F6b: they stay on the old
+   road (her phone keeps its own card object for them, by name) until F6b moves their game ends.
+   Also: quest steps q72Do / q72Drop / q72Ask / q72Call, empAct (Hoàng hậu powers), servAct (servant buttons), elderAct (the elders),
+   the person-card game jobs sgOver / sgServ; and the render-time derived writers that wrote her person on her phone (read-only there). */
+const L11=11;
+/* RENDER-DIFF ENGINES (the whole family, LUẬT SỬA CẢ NHÓM): game rules that run on every render and write her person — her rank's gift set +
+   servants (jpromo prCheck), the lux / allotment item boxes (jration lxInitAll, jallot alInitAll: items made, law 6c), her rank marks (jmark
+   kmmCheck), the life milestones (j52 pdCheck), the end of a life's span (jkiep kpCheck), the exam window (jexam exTick). In her context on
+   the host render is a no-op, so they run as her context closes; on her phone at level 11 they do not run (kpCheck only reads). */
+/* coop-thin G #5 (f3 B1 L13: her Sổ ghi had "+5 Phúc duyên" and "Kiếp này đã trọn" in the other order): run in SOLO's order = the render
+   wrappers' order (the last-wrapped runs first; prCheck runs after the inner render): jallot, jration, jexam, jmark, jkiep, j52, then jpromo */
+/* coop-thin-g-f1 #5 (same family, scan dev/test/coop-rdiff-scan.py): jty tyHome (a visitor at home while she is in trung y: Danh −BAL.ty.meet,
+   once per buổi by S.tyPaid) ran in renderStage on her phone only → her Danh lower on her phone than in the host's store until her next ready.
+   It paints inside the inner render, so before jpromo */
+const RDIFF=["alInitAll","lxInitAll","exTick","kmmCheck","kpCheck","pdCheck","tyHome","prCheck"];
+/* a card that opens a picker keeps itself in window.__adPend until the pick (jact): per player, swapped with her context */
+try{TH.reg("__adPend",()=>window.__adPend||null,v=>{window.__adPend=v||null})}catch(e){}
+const isSteal=a=>{try{return typeof isStealCard==="function"&&isStealCard(a)}catch(e){return false}};
+/* F6b HOOK (one deck runner): the game-first kinds, ONE table. A kind stays on the old road until F6b lifts it: TH.gLift[kind] = the level
+   its game end became an intent at (e.g. TH.gLift.exam = 12); from that level the card is a plain host card and its tap rides act(i). */
+TH.gKinds=TH.gKinds||{exam:a=>!!a.exam,toil:a=>!!a.toil,aaMG:a=>!!a.aaMG,steal:isSteal};TH.gLift=TH.gLift||{};
+TH.gKind=a=>{if(!a)return null;for(const k of Object.keys(TH.gKinds))try{if(TH.gKinds[k](a))return k}catch(e){}return null};
+const uiFirst=a=>{const k=TH.gKind(a);return !!k&&!(TH.gLift[k]&&on(TH.gLift[k]))};
+const plainCard=a=>{if(!a||typeof a!=="object")return null;const o={};for(const k of Object.keys(a)){const v=a[k];
+  if(typeof v==="function"){if(k==="why")try{o.whyT=String(v()||"")}catch(e){}continue}
+  if(v===undefined)continue;try{o[k]=J(v)}catch(e){}}if(uiFirst(a))o.__g=1;return o};
+const HKEY=()=>`${S.turn||0}:${S.buoi||0}:${S.dead?1:0}:${S.out?1:0}`;
+const hkOf=s=>s?`${s.turn||0}:${s.buoi||0}:${s.dead?1:0}:${s.out?1:0}`:"";
+/* host: a hand dealt in her context records its key (E's step deals it: the close below never deals it twice) */
+let LOC=null,HDK="";
+if(typeof deal==="function"){const d0=deal;deal=function(){
+ if(on(L11)&&!host()&&CW.seat&&!CW.ctx&&S){const r=d0.apply(this,arguments);LOC=Array.isArray(deck)?deck.slice():[];gHand();return r}
+ const r=d0.apply(this,arguments);try{if(on(L11)&&host()&&CW.ctx){const B=TH.seatOf(CW.ctx);if(B&&S)B.hk=HKEY()}}catch(e){}return r}}
+TH.ctxOut.push((seat,B)=>{if(!on(L11)||!host()||seat===CW.seat||!S||TH.held(seat))return;
+ try{if(!S.dead&&!S.mg&&typeof deal==="function"&&(B.hk!==HKEY()||!Array.isArray(deck)||!deck.length)){deal();F.stat.hDeal=(F.stat.hDeal|0)+1}}catch(e){console.error("thin F6 deal",e)}
+ for(const f of ["j76Std","eaSync","feelDeck"])try{if(typeof window[f]==="function")window[f]()}catch(e){}
+ /* her feeling machine's derived cache (S.mood.log `left` = khắc left at the last sync; solo: every render) is brought up to date as her render would */
+ try{if(typeof mkSync==="function")mkSync(S)}catch(e){console.error("thin F6 mkSync",e)}
+ /* the render-diff engines of her person (render is a no-op in her context; ONE list RDIFF, below): run here, once, as her render would */
+ {const q0=quiet,t0=performance.now();quiet=false/* as her own render: its card shows (her Q → her phone) */;const SI=(rivals||[]).filter(e=>e&&e.__b).map(e=>[e,(e.inv||[]).slice(),X.STAT.map(k=>e[k])]);
+  try{for(const f of RDIFF)try{if(typeof window[f]==="function")window[f]()}catch(e){console.error("thin F6 "+f,e)}}finally{quiet=q0;
+   /* F6a #3: the "…All" engines (alInitAll / lxInitAll) also give the HOST's stand-in entry its boxes; the stand-in is the host's own person
+      (his render gives him his own), and the bridge turned each such piece into "her gift" → a stack of «Quà tặng» cards on the host that
+      held the week (coop-cyc L11). The stand-in leaves this step exactly as it came in (law 6c: no piece made out of nothing) */
+   for(const [e,inv,st] of SI){if(Array.isArray(e.inv)){const n=e.inv.filter(x=>!inv.includes(x));if(n.length){F.stat.siFix=(F.stat.siFix|0)+n.length;e.inv=inv}}X.STAT.forEach((k,i)=>{if(e[k]!==st[i])e[k]=st[i]})}const ms=performance.now()-t0;F.stat.rdN=(F.stat.rdN|0)+1;F.stat.rdMs=Math.round(((F.stat.rdMs||0)*9+ms)/10*10)/10}}
+ B.hd=S.dead?[]:(Array.isArray(deck)?deck:[]).map(plainCard).filter(Boolean)});
+/* host: the view carries her hand; a hand left from an older buổi / week (her context not entered since) is brought up to date at once */
+let HREF="";
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);try{if(o&&on(L11)&&host()){const sb=CW.seat==="a"?"b":"a";const B=TH.seatOf(sb);
+  if(B){o.hd=B.hd||null;const k=hkOf(B.S);if(B.S&&!B.S.dead&&B.hk!==k&&HREF!==k&&!TH.held(sb)){HREF=k;setTimeout(()=>{try{if(!CW.ctx&&TH.seatOf(sb))TH.withSeat(sb,()=>{});F.stat.hRef=(F.stat.hRef|0)+1;TH.flush()}catch(e){console.error("thin F6 hand",e)}},0)}}}}catch(e){console.error("thin F6 view",e)}return o}}
+/* guest: her hand = the host's plain cards; an __g card is her own card object of that name (old road until F6b) */
+const fromPlain=o=>{const a=Object.assign({},o);const t=typeof o.whyT==="string"?o.whyT:null;delete a.whyT;if(t!==null)a.why=()=>t;Object.defineProperty(a,"__hd",{value:1});return a};
+/* an __g card the host dealt that her own hand lacks (her phone dealt at another moment): her own card object, built by its own builder */
+const gBuild=o=>{try{if(o.toil&&typeof toilCard==="function")return toilCard();if(o.exam===1&&typeof exCard==="function")return exCard();if(o.aaMG&&typeof wkDeckCard==="function")return wkDeckCard()}catch(e){console.error("thin F6 card",e)}return null};
+function gHand(){if(host()||!on(L11))return false;const V=TH.view,hd=V&&V.o&&V.o.hd;if(!Array.isArray(hd))return false;if(!Array.isArray(LOC))LOC=[];const L=LOC,tk=new Set();
+ deck=hd.map(o=>{if(!o)return null;if(o.__g){let j=L.findIndex((a,x)=>!tk.has(x)&&a&&a.n===o.n);if(j<0&&o.aaMG)j=L.findIndex((a,x)=>!tk.has(x)&&a&&a.aaMG);if(j<0){const b=gBuild(o);if(b){LOC.push(b);j=LOC.length-1;tk.add(j);try{Object.defineProperty(b,"__g",{value:1,configurable:true})}catch(e){}return b}return null}tk.add(j);try{Object.defineProperty(L[j],"__g",{value:1,configurable:true})}catch(e){}return L[j]}return fromPlain(o)}).filter(Boolean);
+ F.stat.gHand=(F.stat.gHand|0)+1;return true}
+const hdMode=()=>on(L11)&&!host()&&!!CW.seat&&!CW.ctx&&!!TH.view&&!!TH.view.o&&Array.isArray(TH.view.o.hd);
+if(typeof render==="function"){const r0=render;render=function(){try{if(hdMode()){const k=JSON.stringify(TH.view.o.hd);if(k!==HDK){HDK=k;gHand()}}}catch(e){console.error("thin F6 hand",e)}return r0.apply(this,arguments)}}
+/* guest: the render-time writers of her hand / her exam window run on the host for her (her context); here they would build a second hand */
+if(typeof eaSync==="function"){const e0=eaSync;eaSync=function(){if(hdMode())return;return e0.apply(this,arguments)};window.eaSync=eaSync}
+if(typeof exTick==="function"){const x0=exTick;exTick=function(){if(hdMode()){/* F6b: the exam game itself is still on her phone: a game left open by a reload is finished here, as before */try{const e=S&&S.ex;if(e&&e.pend&&!document.getElementById("kg82"))exAbort()}catch(x){}return}return x0.apply(this,arguments)}}
+/* the act */
+const cardOk=a=>{try{if(!a||a.done||S.dead||Q.length||(a.b!=null&&(S.buoi||0)!==a.b)||!canPay(a))return false;const r0=window.__restAct,c0=window.__cardSuc;
+  try{window.__restAct=typeof isRestCard==="function"&&isRestCard(a)?1:0;window.__cardSuc=typeof cardSuc==="function"?cardSuc(a):0;return can(cardCost(a))}finally{window.__restAct=r0;window.__cardSuc=c0}}catch(e){return false}};
+function reg11(name,K,o){o=o||{};const R=Object.assign({lv:L11,ctx:CX10,back:BACK8,enc:A=>encA9(K,A),dec:a=>decA9(K,a),done:reDraw,title:()=>""},o);
+ R.mine=A=>live()&&(o.mine?o.mine(A):true);return F.reg(name,R)}
+reg11("act",["v"],{snap:"soft",noRes:true,title:A=>{const a=deck[A[0]];return a?a.n:""},okHint:dr=>dr&&dr.r&&dr.r.ok!=null?!!dr.r.ok:null,
+ mine:A=>{const a=Array.isArray(deck)?deck[A[0]]:null;return !!a&&!!a.__hd&&!a.__g&&cardOk(a)},
+ enc:A=>{const a=deck[A[0]];return a?{i:A[0]|0,n:String(a.n||"")}:null},
+ dec:a=>{if(!a||typeof a.n!=="string"||!Array.isArray(deck))return null;let i=typeof a.i==="number"&&deck[a.i]&&deck[a.i].n===a.n&&!deck[a.i].done?a.i:deck.findIndex(x=>x&&x.n===a.n&&!x.done);
+  if(i<0||uiFirst(deck[i])){F.stat.cardBad=(F.stat.cardBad|0)+1;return null}return [i]},
+ host:(A,out)=>{out.ok=window.__lastOk==null?null:!!window.__lastOk}});
+/* quest steps (j72): plain arguments; their own result card (rsnap → resultShow) shows on her phone with the answer */
+const Q72={snap:"soft",noRes:true};
+reg11("q72Do",["v","v"],Q72);
+reg11("q72Drop",["v"],Q72);
+reg11("q72Ask",[],Q72);
+reg11("q72Call",["v"],Q72);
+/* her other acts: the Hoàng hậu powers (a person index → id), servant buttons, the elders, the person-card game jobs (the game's step: a
+   value sgStep can give, read from the function itself) */
+reg11("empAct",["v","v"],{enc:A=>{const v=(rivals||[])[A[0]];if(!v||v===S||v.id==null||typeof A[1]!=="string")return null;return {id:v.id,k:A[1]}},
+ dec:a=>{if(!a||typeof a.k!=="string")return null;const i=(rivals||[]).findIndex(v=>v&&v.id===a.id&&v!==S);return i<0?null:[i,a.k]}});
+reg11("servAct",["v","v"],{snap:"soft",noRes:true});
+reg11("elderAct",["v","v"],{snap:"soft",noRes:true});
+const stepOk=m=>{if(m==null)return true;if(typeof m!=="object"||typeof sgStep!=="function")return false;const ok=new Set();for(let r=0;r<=10;r++)ok.add(sgStep(r));return ok.has(m.step)};
+reg11("sgOver",["v"],{snap:"soft",noRes:true,dec:a=>{const x=decA9(["v"],a);return x&&stepOk(x[0])?x:null}});
+reg11("sgServ",["v","v"],{snap:"soft",noRes:true,dec:a=>{const x=decA9(["v","v"],a);return x&&stepOk(x[1])?x:null}});
+/* guest: render-time writers of HER person (derived caches the host keeps for her in her context; its patch brings the stored value):
+   the feeling machine's sync (mkSync: expiry by khắc, S.mood / S.emo), the seen-feelings record (emoSee), the one-time feeling migration
+   (feelMig). On her phone at level 11 they do not write her person. (Display strings / net-zero probes stay local: report family 6.) */
+/* (a render is a part-C world frame on her phone: gOn is false there; her own week end / buổi step still on her phone = G / E, left as is) */
+/* coop-thin-g F2 helper (Danh drift #2): nextBuoi is NOT counted here. This wrapper sits OUTSIDE jcoopthine's press wrapper, so her «Sẵn sàng» press
+   (nextBuoi → E: gReady → gSync + render, no step) counted as her own step and let tyHome → tyCharge (Danh −1) run on her phone while the host charged
+   the same buổi in her context (trip1 wk 33: store 20 | phone 19; probe PRESSP: render 7→7, press 7→6). A REAL step of hers on her phone always runs
+   under CW.allow / CW.allowN (E's wrapper lets nothing else through), which rOn already exempts; endTurn / monthTick only run inside such a step. */
+let WKD=0;for(const n of ["endTurn","monthTick"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){WKD++;try{return f.apply(this,arguments)}finally{WKD--}}}
+/* coop-thin-g F2 #11 (Danh drift, one world): a SYNC from the host (CW.inFC: fromCanon at the week, the part-C world apply, the hl sync, nmOrd relay)
+   is no licence to run these engines on her phone: its render ran tyHome → tyCharge (Danh −1, trung y) locally while the host charged the same
+   buổi in her context and patched −1 → her phone paid twice (host store 37 | phone 36 until the week rebuilt her phone). Only her own local
+   runs (inLife throwaway world, allow / allowN = her real step, endTurn / monthTick inside it = WKD) keep them; jcoopone mkSync already stops under inFC the same way. */
+const rOn=()=>on(L11)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.allow&&!CW.allowN&&!WKD;
+for(const [n,me] of [["mkSync",1],["emoSee",0],["feelMig",0]].concat(RDIFF.filter(x=>x!=="exTick").map(x=>[x,0])))if(typeof window[n]==="function"){const f=window[n];window[n]=function(p){if(rOn()&&(!me||isMe(p))){F.stat.ro=(F.stat.ro|0)+1;if(CW.inFC)F.stat.roFC=(F.stat.roFC|0)+1;if(n==="kpCheck")return !!(S&&S.kpTron);return}return f.apply(this,arguments)}}
+/* F6b (jcoopthinf6b, level 12) builds on the F5 helpers: its own registrations go through reg10 with lv 12 + its ctx */
+F.x5={reg10,CX10,payAA,inR,MSC,bad,lg,gOn,host,live,isMe,encA9,decA9,mgOk,get MGC(){return MGC},set MGC(v){MGC=v},get SKH(){return SKH}};
 }catch(e){console.error("jcoopthinf",e)}})();

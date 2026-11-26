@@ -10,7 +10,7 @@
    pEunCourt("ped")), the decree line, the tray = the kit item tags (kitItemTag, KIT §70) of each piece; no per-piece kitLose card (tagged "use").
    An NPC consort loses them the same way (data + news line, co-op host only like every NPC rule). No numbers here: the rank rule is vpItems' own. */
 (function(){
-const npcOK=()=>!(window.COOPW&&COOPW.on&&COOPW.seat!=="a");
+const npcOK=()=>!(window.coopGuest&&coopGuest());
 const pk=p=>p===S?"me":String(p&&p.id);
 const byK=k=>{if(k==="me")return S;try{return (rivals||[]).find(v=>String(v.id)===String(k))||null}catch(e){return null}};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

@@ -246,11 +246,11 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
   return J}
  if(p.j==="over"){const G=SG.K.over,b=40+eyes(S)*6;
   return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evTop)} · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
-   run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=overhear(S.place)||""}finally{SG.mod=null}if(r)log(`Nghe lén câu chuyện: ${r}`);render()}}}
+   run:m=>sgOver(m)}}
  if(p.j==="serv"){const s=servById(p.sid),G=SG.K.serv;if(!s)return null;const o=ownerOf(s),c=sgServCost(s);if(!o||o===S)return null;
   return{gk:"serv",G,t:G.t,v:{maid:s},name:s.name,art:"Mua chuộc",ask:`Mua chuộc ${s.name}, người hầu của ${NM(o)}: tự mặc cả, hay giao cho người làm?`,cost:`${c} bạc`,p0:()=>sgServOdds(s),
    line:w=>`Mua chuộc ${s.name} · ${w} · thành: thành tai mắt của ngươi, tốn ${c} bạc · bại: không mất bạc; nàng có thể mách chủ, kẻ đi đưa lời sợ liên lụy`,/* 2f3: bạc only on success (bribeServ) */
-   pay:Object.assign(()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},{chk:()=>S.bac>=c&&can(BAL.servK)}),run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
+   pay:Object.assign(()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},{chk:()=>S.bac>=c&&can(BAL.servK)}),run:m=>sgServ(s.sid,m)}}
  return null}
 
 /* review r1 (MG11): the round time on the card follows the board (BAL.mgTier.lev.<g>.lim by her rank, law 5 / ONE CORE), not the typed seconds */
@@ -318,6 +318,9 @@ function sgEng(G,v,onEnd){const box=kg82Box();box.innerHTML="";const res=$("kg82
  guard=setTimeout(()=>env.end(0,{}),70000);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>env.end(0,{gaveUp:1});
  kg82Preload(G.g).then(()=>{if(dead||done)return;try{stop=G.eng(box,env)}catch(e){console.error(e);env.end(5,{})}})}
 /* run the act through the normal doAct chain (cost, result card, logs, notes); the step lives only inside this call */
+/* the two non-act jobs' runs as named engines (one body each; the co-op thin guest sends them as her intents, jcoopthinf F6a) */
+function sgOver(m){SG.mod=m&&m.step?m:null;let r="";try{r=overhear(S.place)||""}finally{SG.mod=null}if(r)log(`Nghe lén câu chuyện: ${r}`);render()}
+function sgServ(sid,m){const s=servById(sid);if(!s)return;SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}
 function sgRun(id,k,m){const v=RV(id),i=rivals.indexOf(v);if(i<0)return;SG.mod=m&&m.step?m:null;try{doAct(i,k)}finally{SG.mod=null}}
 
 /* ---------- the temporary step: player only (a === S), only while SG.mod is set; NPCs and skipped games use the plain odds ---------- */

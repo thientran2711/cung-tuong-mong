@@ -123,6 +123,9 @@ Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ks
    readMs = after the buổi ran out, a dialog with no choice (or only one road) is read for her after this long · syncMs = host re-sends the clock ·
    graceMs = after the deadline the screens show "Hết buổi" this long before the step (lag between the two players). */
 Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500,nightMs:30000}});
+/* CO-OP THIN GUEST, her effects (review/coop-thin-hostnull, jcoopthin TH.uiPlay): the floaters / toasts / sounds / face reveals her tap raised
+   on the host play on HER phone at most `batch` at once; the rest wait in order and play `gapMs` later, batch by batch (never dropped). */
+Object.assign(BAL,{coopUi:{batch:4,gapMs:900}});
 /* review/coop-cyhold: the longest the host's week draw waits for the friend's Kỳ nguyệt sự answer (jcoopworld cyHold); after it the draw runs
    with the «no answer» outcome (as when her week end frees it), her card stays open for her (never answered for her) */
 BAL.coop=Object.assign({},BAL.coop||{},{cyWaitMs:90000});
@@ -1743,6 +1746,9 @@ Object.assign(BAL.ag.why,{
    "a quick result never beats a good own play"; robot M4 25/11: an exam skip gave 10/10 Xuất sắc while a skilled own play gave 5/10): the middle
    word Khá (BAL.mgTier.word[1]), like makeup's middle tier — a good own play (Giỏi, word[2], and up) always beats it. Read through kitSkipCap (j79). */
 Object.assign(BAL,{skip:{od:40,raw:5,care:.5,cap:5}});
+/* MINI-GAME SCORE RANGES (co-op thin F5, review/coop-thin-f5): the score a game end can report. unit = the care games (pet care, watering:
+   0..1 of the gain), raw = the kg82 / playArt / Tứ đức / tsGame play (0..10). A score outside its range is refused (the host never applies it). */
+Object.assign(BAL,{mgSc:{unit:[0,1],raw:[0,10]}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});

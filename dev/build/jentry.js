@@ -71,11 +71,11 @@ window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 /* tiểu thư road (jkc): Phúc tuyển offers her best NON-word art and plays it in the same exam frame */
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
- const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;let foul=null;try{foul=kcFoulBack();kcPhucPod()}catch(e){console.error(e)}
-  pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");/* review/podium-wire (OR09, KIT §20.1): the thứ muội + khuê hữu competed under the same rule — the podium first, then Điện tuyển */
-  let ov=null;if(!window.__bot)try{ov=kcPhucShow(k,foul,()=>{try{showModal()}catch(e){}})}catch(e){console.error(e)}if(!ov)try{showModal()}catch(e){}};
- if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():entBotRaw());return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
- try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(entSkipRaw())}};
+ if(skip||window.__bot||typeof kg82Open!=="function"){kcPhucEnd(k,skip?entSkipRaw():entBotRaw(),!!skip);return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
+ kcPhucGame(k)};
+/* the game part alone (co-op thin F6b: opened on HER phone when the start ran in her context on the host) */
+function kcPhucGame(k){try{window.kcEntryExam("kc",raw=>kcPhucEnd(k,raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);kcPhucEnd(k,entSkipRaw())}}
+window.kcPhucGame=kcPhucGame;
 /* review/podium-wire (OR09): the Phúc tuyển podium = the ONE stored result S.kc.tt.pod (jkc kcPhucPod), on the kit podium (KIT §20.1:
    family records carry fig / face / nameH / sub / score); faces through kcFace, never a private frame. */
 function kcPhucPod2List(k,foul){const T=S.kc.tt;const pod=T.pod||kcPhucPod();const A=(typeof ARTS!=="undefined"?ARTS:[]).find(a=>a.k===(k||T.art));

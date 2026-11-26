@@ -45,7 +45,7 @@ const ACTK=[[/^Thỉnh an/,"a_thinh"],[/^Đọc (sách|binh thư)/,"a_doc"],[/^(
 /* ---------- people ---------- */
 const pidOf=p=>p===S?"me":String(p&&p.id);
 function byPid(id){if(id==="me")return S;try{return rivals.find(v=>String(v.id)===id)||null}catch(e){return null}}
-const npcOK=()=>!(window.COOPW&&COOPW.on&&COOPW.seat!=="a");
+const npcOK=()=>!(window.coopGuest&&coopGuest());
 function bag(p){if(!p.dh||typeof p.dh!=="object")p.dh={};return p.dh}
 function cfg(key){return T()[key]||{}}
 function need(key){if(key.startsWith("l_"))return BAL.dh.artLv;return cfg(key).n||BAL.dh.n0}
