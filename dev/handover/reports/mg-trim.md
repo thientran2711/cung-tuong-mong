@@ -256,3 +256,24 @@ mg-craft test 5 «X lower at ease 0 than 5»: bot flake at the 10 ceiling, pre-e
 No UI change since 3385b0f3 → videos stand: https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm
 NEXT: ONE BIG reviewer (opus) on bb0ae651→b581c524 (co-op).
 - (26/11 11:45Z) ETA (D5 #3): fix b581c524 pushed (coop-thin-f4 19/19 ×2 branch + LIVE); BIG delta rv session_01D3E3NZCsLGoJMesaF51jcb running → LAND READY b581c524 ~60–90 min (12:45–13:15Z), lands ALONE. Foreman D = session_01D3E3NZKCLJ7V9VupQyCnr1.
+
+## BIG REVIEW #5 (opus, session_01D3E3NZCsLGoJMesaF51jcb, depth 4, START_CTX ~3 %) — review/mg-trim @ b581c524 / 5e127fee — FAIL · fixed by reviewer → **PASS review/mg-trim-r6 543ca57994f57b45bc9bfa2b4ac256c3184acb97** (FF from LIVE 1dcb373e)
+PRIORITY #1 CHECK: OD 26/11 D5 rows + 05:45Z pet/plant ruling | main LIVE 3af7896e → 1dcb373e | review/coop-reg9-route 5af1ed9f (Foreman B fixer 3un1wpGR, **TEST OK 09:22Z**, not in LIVE) | FOREMAN_B_STATUS L182/L184/L186/L190 «FOR FOREMAN D: merge review/coop-reg9-route 5af1ed9f … re-run f4» | claims D5 row.
+Scope: bb0ae651 → b581c524 (+ D5 #3's merge of LIVE 1dcb373e = 5e127fee: jinv.js, jksize.js, observer-leak.js, scroll-cue-loop.js byte-identical to LIVE; only built files + CHANGE line differ → clean).
+(a) The root cause is correct. A staged rank-3 consort still in her selection days gets sent home (jselxday selxContestRun → «Bị ban hoa») → S.dead → gOn() false → every intent runs local. It happens on LIVE too, not because of mg-trim. Reverting reg9 shelfPlantGive and dropping G2 follows the MAIN 157 / Foreman D order. That leaves only jcoopthinf, so the game build = LIVE + mg-trim.
+FAIL — the harness fix:
+1. Law 13 (Priority #1) / law 14 (one rule, never two versions): this exact fault already had a reviewed fix, review/coop-reg9-route 5af1ed9f (TEST OK 09:22Z), sent to D5 at 09:02Z («merge … re-run f4»). In that fix, lives() waits on both seats until neither is still making her life (coop-clear MAKING: selection days, kit selection scene, S.dead, COOPW.inLife). The waiting uses real player taps, and realize() guards against a life reborn under the set-up. b581c524 instead puts a second, different rule (`S.selx2.days=0`) into one driver. D5 #3's check («no selection-day bypass in review/*») missed it. The two branches CONFLICT in coop-thin-f4.js (git merge-tree, adjacent lines 48/49).
+2. Law 11 (fix the whole group): the spot line covers coop-thin-f4 only. B's fix covers all 26 co-op drivers.
+3. The spot fix is not robust (reproduced). On LIVE 3af7896e with the SAME one-line harness fix: 19/19, then **10/19**. In the failed run P1/P2 were routed (sent 1) but host and guest copies differed: host op log `"=selx2.girls.#.fid=consort:c10"`. Zeroing only `days` leaves the selection state half-ended (girls kept, `done` unset). It also cannot help when she is sent home during the inW wait, before the staging line runs.
+Repro (same machine, local wrangler = LIVE 3af7896e coop/worker, :8791):
+| tree | coop-thin-f4 L9 |
+|---|---|
+| b581c524 (spot fix) | 19/19, 19/19 |
+| LIVE 3af7896e + spot fix | 19/19, **10/19** |
+| b581c524 + merge coop-reg9-route (B's lives(), spot line dropped) | 20/20, 20/20 (lives(): `reborn:[true,true]` / `[true,false]` → she WAS sent home and reborn; waited out properly) |
+| **543ca579** = 5e127fee + merge coop-reg9-route | 20/20, 19/20 (P4 petcMaid: routed sent 1 / ran 1 / st ok / same:true / mk:false. The content-twin check missed, a known roll flake: B report open 2; P4 passed in the 8 other runs), 20/20 |
+FIX (reviewer, review/mg-trim-r6 543ca579): merge of review/coop-reg9-route 5af1ed9f into 5e127fee. The f4 conflict takes B's side (lives() line + the original staging line); `S.selx2.days=0` is dropped; the G2 removal and the reg9 revert are kept. Test-only (26 dev/test files). assemble.py built 17828592 with no change to tracked built files (index.html/sw.js/assets.json = 5e127fee).
+Other tests on the candidate (same product build as b581c524): coop-e2e **143/143** · mg-trim.js Fold 755x1000@2 + iPad 1180x820@2 **ALL PASS**. No UI change since 3385b0f3 → videos stand.
+Laws: 1–7 untouched (no game logic change beyond the ordered revert) · 4 ok · 11/13/14 FAIL on b581c524, fixed in 543ca579 · 16/17 ok.
+Notes: (i) Landing 543ca579 also lands coop-reg9-route (TEST OK, "lands any time"). LC21 should not land coop-reg9-route separately afterwards: it is already an ancestor, so that would be a no-op. Tell Foreman B. (ii) Per Foreman B's report, the G2 row and reg9 shelfPlantGive line would pass with lives(). Bringing them back is Foreman B's decision (BIG rv #2 finding 5), not part of this branch.
+Result: **PASS 543ca57994f57b45bc9bfa2b4ac256c3184acb97** (review/mg-trim-r6, FF from LIVE 1dcb373e). FAIL b581c524 / 5e127fee as pushed.
