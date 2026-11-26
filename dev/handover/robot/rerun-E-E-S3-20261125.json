@@ -34747,6 +34747,698 @@
    "t": {
     "total": 15013389
    }
+  },
+  {
+   "job": {
+    "id": "R2-lazy-2",
+    "origin": "thd",
+    "road": "thd_hoc",
+    "bot": "quiet",
+    "seed": 3161814334,
+    "dev": "ipad",
+    "url": "https://thientran2711.github.io/cung-tuong-mong/"
+   },
+   "harness": {
+    "kind": "realtap",
+    "sha": "4d7a22c6",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "build": {
+     "s": "0a4c8010+",
+     "b": "d402e37a51ed",
+     "t": "2026-11-26T02:21Z"
+    },
+    "areaTaps": 48,
+    "dlgScroll": 10,
+    "scrolls": 10,
+    "dlgClose": 57,
+    "mgDragSkip": 2,
+    "infoTaps": 37,
+    "taps": 734
+   },
+   "life": {
+    "id": "Xuất gia",
+    "type": "death",
+    "fate": "Xuất gia",
+    "death": true,
+    "age": 20,
+    "year": 3,
+    "rank": 0,
+    "text": "Nàng cắt tóc ở chùa Hộ Quốc. Tiếng mõ sớm chiều thay cho tiếng trống tuyển tú. (Tiểu thư ngoài cung · Tiểu thư nhà thầy đồ)",
+    "card": [
+     "Lên kiệu hoa Rất vững TỐN không ĐƯỢC xuất giá, kiếp này dừng",
+     "Cắt tóc xin đi tu Rất vững TỐN không ĐƯỢC xuất gia, kiếp này",
+     "Thắt cổ tự vẫn Rất vững TỐN không ĐƯỢC mất mạng !"
+    ],
+    "duringArea": false,
+    "lastTaps": [
+     "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»",
+     "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»",
+     ".kbk «Tổng lược» «Trang sau»",
+     ".kbk «Tổng lược» «Trang trước»",
+     ".kbk «Tổng lược» «Trang sau»",
+     ".kbk «Tổng lược» «Trang trước»",
+     ".kbk «Tổng lược» «Lui»",
+     ".dlg «Tin trong cung buổi này» «Lui»",
+     "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»",
+     ".dlg «Cha định hôn» «Quỳ xin cha cho đi tuyển túRất vữngTốnSức -10Đượcc»",
+     ".dlg «Án mất trộm ngự khố» «Lui»",
+     ".dlg «Cha định hôn» «Cắt tóc xin đi tuRất vữngTốnkhôngĐượcxuất gia, kiế»"
+    ],
+    "exitPick": {
+     "label": "Cắt tóc xin đi tuRất vữngTốnkhôngĐượcxuất gia, kiếp này dừng ở cửa chùaGợi ýxuất gia, kiếp",
+     "n": 3,
+     "only": true,
+     "at": 1610,
+     "S": {
+      "dead": false,
+      "y": 3,
+      "t": 22,
+      "w": 0,
+      "b": 1,
+      "age": 20,
+      "rank": 0,
+      "name": "Đậu Mạn Nhu"
+     }
+    }
+   },
+   "exitPick": {
+    "label": "Cắt tóc xin đi tuRất vữngTốnkhôngĐượcxuất gia, kiếp này dừng ở cửa chùaGợi ýxuất gia, kiếp",
+    "n": 3,
+    "only": true,
+    "at": 1610,
+    "S": {
+     "dead": false,
+     "y": 3,
+     "t": 22,
+     "w": 0,
+     "b": 1,
+     "age": 20,
+     "rank": 0,
+     "name": "Đậu Mạn Nhu"
+    }
+   },
+   "bugs": [],
+   "dead": [],
+   "buoi": 266,
+   "steps": 2486,
+   "status": [],
+   "_loopAt": 1795670867996,
+   "_snapAt": 1795670841348,
+   "_started": true,
+   "_ckAt": 1795670865576,
+   "_ckB": 266,
+   "rss": [
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1370,
+     "rendererMB": 640,
+     "heapMB": 111,
+     "dom": 2858,
+     "q": 4,
+     "lsK": 4
+    },
+    {
+     "buoi": 6,
+     "y": 1,
+     "totalMB": 1915,
+     "rendererMB": 1034,
+     "heapMB": 111,
+     "dom": 917,
+     "q": 1,
+     "lsK": 169
+    },
+    {
+     "buoi": 11,
+     "y": 1,
+     "totalMB": 1948,
+     "rendererMB": 1063,
+     "heapMB": 111,
+     "dom": 946,
+     "q": 0,
+     "lsK": 213
+    },
+    {
+     "buoi": 16,
+     "y": 1,
+     "totalMB": 1956,
+     "rendererMB": 1068,
+     "heapMB": 111,
+     "dom": 893,
+     "q": 0,
+     "lsK": 269
+    },
+    {
+     "buoi": 21,
+     "y": 1,
+     "totalMB": 2084,
+     "rendererMB": 1157,
+     "heapMB": 111,
+     "dom": 1256,
+     "q": 2,
+     "lsK": 292
+    },
+    {
+     "buoi": 26,
+     "y": 1,
+     "totalMB": 2089,
+     "rendererMB": 1189,
+     "heapMB": 111,
+     "dom": 1006,
+     "q": 1,
+     "lsK": 292
+    },
+    {
+     "buoi": 31,
+     "y": 1,
+     "totalMB": 2067,
+     "rendererMB": 1177,
+     "heapMB": 111,
+     "dom": 996,
+     "q": 0,
+     "lsK": 305
+    },
+    {
+     "buoi": 36,
+     "y": 1,
+     "totalMB": 2083,
+     "rendererMB": 1190,
+     "heapMB": 111,
+     "dom": 973,
+     "q": 0,
+     "lsK": 308
+    },
+    {
+     "buoi": 41,
+     "y": 1,
+     "totalMB": 2169,
+     "rendererMB": 1259,
+     "heapMB": 111,
+     "dom": 1211,
+     "q": 0,
+     "lsK": 334
+    },
+    {
+     "buoi": 46,
+     "y": 1,
+     "totalMB": 2105,
+     "rendererMB": 1244,
+     "heapMB": 111,
+     "dom": 984,
+     "q": 0,
+     "lsK": 329
+    },
+    {
+     "buoi": 51,
+     "y": 1,
+     "totalMB": 2157,
+     "rendererMB": 1281,
+     "heapMB": 111,
+     "dom": 870,
+     "q": 1,
+     "lsK": 364
+    },
+    {
+     "buoi": 56,
+     "y": 1,
+     "totalMB": 2182,
+     "rendererMB": 1303,
+     "heapMB": 111,
+     "dom": 918,
+     "q": 1,
+     "lsK": 384
+    },
+    {
+     "buoi": 61,
+     "y": 1,
+     "totalMB": 2146,
+     "rendererMB": 1234,
+     "heapMB": 111,
+     "dom": 1379,
+     "q": 0,
+     "lsK": 395
+    },
+    {
+     "buoi": 66,
+     "y": 1,
+     "totalMB": 1802,
+     "rendererMB": 911,
+     "heapMB": 111,
+     "dom": 964,
+     "q": 1,
+     "lsK": 385
+    },
+    {
+     "buoi": 71,
+     "y": 1,
+     "totalMB": 1959,
+     "rendererMB": 1068,
+     "heapMB": 111,
+     "dom": 892,
+     "q": 1,
+     "lsK": 394
+    },
+    {
+     "buoi": 76,
+     "y": 1,
+     "totalMB": 2032,
+     "rendererMB": 1136,
+     "heapMB": 111,
+     "dom": 950,
+     "q": 0,
+     "lsK": 435
+    },
+    {
+     "buoi": 81,
+     "y": 1,
+     "totalMB": 2096,
+     "rendererMB": 1180,
+     "heapMB": 111,
+     "dom": 1154,
+     "q": 0,
+     "lsK": 421
+    },
+    {
+     "buoi": 86,
+     "y": 1,
+     "totalMB": 2077,
+     "rendererMB": 1157,
+     "heapMB": 111,
+     "dom": 1032,
+     "q": 1,
+     "lsK": 420
+    },
+    {
+     "buoi": 91,
+     "y": 1,
+     "totalMB": 2032,
+     "rendererMB": 1148,
+     "heapMB": 111,
+     "dom": 916,
+     "q": 0,
+     "lsK": 436
+    },
+    {
+     "buoi": 96,
+     "y": 1,
+     "totalMB": 1864,
+     "rendererMB": 970,
+     "heapMB": 111,
+     "dom": 964,
+     "q": 0,
+     "lsK": 447
+    },
+    {
+     "buoi": 101,
+     "y": 1,
+     "totalMB": 1856,
+     "rendererMB": 948,
+     "heapMB": 111,
+     "dom": 1258,
+     "q": 0,
+     "lsK": 459
+    },
+    {
+     "buoi": 106,
+     "y": 1,
+     "totalMB": 1855,
+     "rendererMB": 968,
+     "heapMB": 111,
+     "dom": 954,
+     "q": 1,
+     "lsK": 445
+    },
+    {
+     "buoi": 111,
+     "y": 1,
+     "totalMB": 1867,
+     "rendererMB": 981,
+     "heapMB": 111,
+     "dom": 963,
+     "q": 0,
+     "lsK": 472
+    },
+    {
+     "buoi": 116,
+     "y": 1,
+     "totalMB": 1916,
+     "rendererMB": 1022,
+     "heapMB": 111,
+     "dom": 980,
+     "q": 0,
+     "lsK": 487
+    },
+    {
+     "buoi": 121,
+     "y": 2,
+     "totalMB": 2066,
+     "rendererMB": 1142,
+     "heapMB": 111,
+     "dom": 1449,
+     "q": 0,
+     "lsK": 512
+    },
+    {
+     "buoi": 126,
+     "y": 2,
+     "totalMB": 2128,
+     "rendererMB": 1187,
+     "heapMB": 111,
+     "dom": 911,
+     "q": 0,
+     "lsK": 507
+    },
+    {
+     "buoi": 131,
+     "y": 2,
+     "totalMB": 2120,
+     "rendererMB": 1214,
+     "heapMB": 111,
+     "dom": 984,
+     "q": 0,
+     "lsK": 520
+    },
+    {
+     "buoi": 136,
+     "y": 2,
+     "totalMB": 2113,
+     "rendererMB": 1220,
+     "heapMB": 111,
+     "dom": 901,
+     "q": 0,
+     "lsK": 545
+    },
+    {
+     "buoi": 141,
+     "y": 2,
+     "totalMB": 1966,
+     "rendererMB": 1041,
+     "heapMB": 111,
+     "dom": 1313,
+     "q": 0,
+     "lsK": 538
+    },
+    {
+     "buoi": 146,
+     "y": 2,
+     "totalMB": 2006,
+     "rendererMB": 1113,
+     "heapMB": 111,
+     "dom": 1005,
+     "q": 1,
+     "lsK": 533
+    },
+    {
+     "buoi": 151,
+     "y": 2,
+     "totalMB": 2004,
+     "rendererMB": 1105,
+     "heapMB": 111,
+     "dom": 911,
+     "q": 0,
+     "lsK": 551
+    },
+    {
+     "buoi": 156,
+     "y": 2,
+     "totalMB": 2009,
+     "rendererMB": 1117,
+     "heapMB": 111,
+     "dom": 917,
+     "q": 0,
+     "lsK": 563
+    },
+    {
+     "buoi": 161,
+     "y": 2,
+     "totalMB": 2139,
+     "rendererMB": 1214,
+     "heapMB": 111,
+     "dom": 1389,
+     "q": 2,
+     "lsK": 564
+    },
+    {
+     "buoi": 166,
+     "y": 2,
+     "totalMB": 2143,
+     "rendererMB": 1241,
+     "heapMB": 111,
+     "dom": 867,
+     "q": 0,
+     "lsK": 562
+    },
+    {
+     "buoi": 171,
+     "y": 2,
+     "totalMB": 2167,
+     "rendererMB": 1279,
+     "heapMB": 111,
+     "dom": 883,
+     "q": 0,
+     "lsK": 589
+    },
+    {
+     "buoi": 176,
+     "y": 2,
+     "totalMB": 2197,
+     "rendererMB": 1303,
+     "heapMB": 111,
+     "dom": 963,
+     "q": 0,
+     "lsK": 602
+    },
+    {
+     "buoi": 181,
+     "y": 2,
+     "totalMB": 2257,
+     "rendererMB": 1326,
+     "heapMB": 111,
+     "dom": 1425,
+     "q": 1,
+     "lsK": 618
+    },
+    {
+     "buoi": 186,
+     "y": 2,
+     "totalMB": 2256,
+     "rendererMB": 1330,
+     "heapMB": 111,
+     "dom": 1028,
+     "q": 0,
+     "lsK": 598
+    },
+    {
+     "buoi": 191,
+     "y": 2,
+     "totalMB": 2184,
+     "rendererMB": 1290,
+     "heapMB": 111,
+     "dom": 1026,
+     "q": 0,
+     "lsK": 604
+    },
+    {
+     "buoi": 196,
+     "y": 2,
+     "totalMB": 2186,
+     "rendererMB": 1291,
+     "heapMB": 111,
+     "dom": 972,
+     "q": 0,
+     "lsK": 629
+    },
+    {
+     "buoi": 201,
+     "y": 2,
+     "totalMB": 2261,
+     "rendererMB": 1340,
+     "heapMB": 111,
+     "dom": 1430,
+     "q": 0,
+     "lsK": 621
+    },
+    {
+     "buoi": 206,
+     "y": 2,
+     "totalMB": 2243,
+     "rendererMB": 1326,
+     "heapMB": 125,
+     "dom": 921,
+     "q": 1,
+     "lsK": 622
+    },
+    {
+     "buoi": 211,
+     "y": 2,
+     "totalMB": 2232,
+     "rendererMB": 1339,
+     "heapMB": 125,
+     "dom": 966,
+     "q": 0,
+     "lsK": 636
+    },
+    {
+     "buoi": 216,
+     "y": 2,
+     "totalMB": 2214,
+     "rendererMB": 1319,
+     "heapMB": 125,
+     "dom": 922,
+     "q": 0,
+     "lsK": 641
+    },
+    {
+     "buoi": 221,
+     "y": 2,
+     "totalMB": 2321,
+     "rendererMB": 1394,
+     "heapMB": 125,
+     "dom": 1765,
+     "q": 2,
+     "lsK": 655
+    },
+    {
+     "buoi": 226,
+     "y": 2,
+     "totalMB": 2299,
+     "rendererMB": 1402,
+     "heapMB": 125,
+     "dom": 911,
+     "q": 1,
+     "lsK": 637
+    },
+    {
+     "buoi": 231,
+     "y": 2,
+     "totalMB": 2266,
+     "rendererMB": 1374,
+     "heapMB": 125,
+     "dom": 989,
+     "q": 2,
+     "lsK": 654
+    },
+    {
+     "buoi": 236,
+     "y": 2,
+     "totalMB": 2287,
+     "rendererMB": 1395,
+     "heapMB": 125,
+     "dom": 879,
+     "q": 0,
+     "lsK": 664
+    },
+    {
+     "buoi": 241,
+     "y": 2,
+     "totalMB": 2391,
+     "rendererMB": 1465,
+     "heapMB": 125,
+     "dom": 1361,
+     "q": 0,
+     "lsK": 671
+    },
+    {
+     "buoi": 246,
+     "y": 2,
+     "totalMB": 2290,
+     "rendererMB": 1404,
+     "heapMB": 125,
+     "dom": 939,
+     "q": 1,
+     "lsK": 655
+    },
+    {
+     "buoi": 251,
+     "y": 2,
+     "totalMB": 2280,
+     "rendererMB": 1395,
+     "heapMB": 125,
+     "dom": 905,
+     "q": 0,
+     "lsK": 665
+    },
+    {
+     "buoi": 256,
+     "y": 2,
+     "totalMB": 2287,
+     "rendererMB": 1402,
+     "heapMB": 125,
+     "dom": 889,
+     "q": 0,
+     "lsK": 686
+    },
+    {
+     "buoi": 261,
+     "y": 2,
+     "totalMB": 2368,
+     "rendererMB": 1449,
+     "heapMB": 125,
+     "dom": 1672,
+     "q": 0,
+     "lsK": 686
+    },
+    {
+     "buoi": 266,
+     "y": 3,
+     "totalMB": 2153,
+     "rendererMB": 1250,
+     "heapMB": 125,
+     "dom": 929,
+     "q": 2,
+     "lsK": 681
+    }
+   ],
+   "promo": {
+    "raw": 0,
+    "real": 0,
+    "picked": 0,
+    "by": {}
+   },
+   "_unsFail": {
+    "#klife|": {},
+    ".dlg|Thân phận kiếp này": {},
+    ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+    "page|Khuê phòng · Ở đây có # người.": {},
+    ".dlg|Hội thơ xuân": {},
+    ".dlg|Có người bán tin": {},
+    "page|Khuê phòng · Không gặp ai.": {},
+    ".dlg|Hội ngắm mẫu đơn": {},
+    ".dlg|Huynh trưởng thua bạc": {},
+    ".dlg|Đêm Thất tịch": {},
+    ".dlg|Cha say rượu": {},
+    ".dlg|Bức thêu mừng thọ": {},
+    ".dlg|Cha bị hặc tội": {},
+    ".dlg|Bà mối đến nhà": {},
+    ".dlg|Nhà trai thử dung mạo": {},
+    ".dlg|Dịch trong kinh thành": {},
+    ".dlg|Chiếu tuyển tú": {},
+    ".dlg|Cha định hôn": {},
+    ".dlg|Tổ mẫu lâm bệnh": {}
+   },
+   "_scrW": {
+    ".dlg|Thân phận kiếp này|871,392": {
+     "left": 313,
+     "n": 1
+    },
+    ".dlg|Yến đầy tháng công chúa|706,567": {
+     "left": 157,
+     "n": 1
+    },
+    ".dlg|Yến đầy tháng công chúa|706,563": {
+     "left": 205,
+     "n": 1
+    }
+   },
+   "t": {
+    "total": 1610909
+   }
   }
  ]
 }
