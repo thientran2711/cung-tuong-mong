@@ -153,7 +153,7 @@ function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="fun
  for(const p of me)petMonthOf(p)}
 function petMonthOf(p){const L=tsbPets(p);if(!L.length)return;const me=p===S;let up=0;
  L.forEach((P,i)=>{const T=petT(P);up+=T.up||0;if(!petOk(P))return;
-  if(T.th){if(me)apply({th:T.th});else p.th=(p.th||0)+T.th}
+  if(T.th){if(me)apply({th:T.th});else spAdd(p,"th",T.th)}
   if(T.omen&&roll(T.omen[0])){if(me){apply({danh:T.omen[1]});if(T.tr>=3)apply({th:1});log(`<span class="g">${T.n} trong cung ngươi được xem là điềm lành (Danh +${T.omen[1]}).</span>`)}else ap(p,{danh:T.omen[1]})}
   if(T.soft){const v=liveRivals(true).filter(x=>x!==p&&oan(x,p)>0).sort((x,y)=>oan(y,p)-oan(x,p))[0];if(v)oanAdd(v,p,-T.soft)}
   if(T.spy&&roll(T.spy)){const v=liveRivals(true).filter(x=>x!==p&&bandVT(x,p)>=1).sort((x,y)=>danger(y,p)-danger(x,p))[0];if(v&&evA(p,v,BAL.eff.jpet.evPetMonthOf)){if(me)log(`<span class="g">${T.n} nhại lại câu ${v.name} lỡ nói khi ghé cung: ngươi nắm thêm ${balAb(BAL.eff.jpet.evPetMonthOf)} chứng cứ của nàng.</span>`)}}

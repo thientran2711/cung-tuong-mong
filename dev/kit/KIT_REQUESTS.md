@@ -347,3 +347,20 @@ kitHand (jkhand.js) only takes `#modal .opts`. The new-kit set (OD 26/11 ~19:00Z
 4 Khuê các decks + Việc groups (jkc.js:632/654, jkc2.js:449) · 5 Tài nghệ / skill act cells `.kpanec` (j79.js kitSkillCard) · 6 empty-tab act (j79.js kitEmptyTab) ·
 7 jactj4 tab doors (DOOR.card) · 8 jflip card row (Lật thẻ bài) — (kpdlg guide buttons jpdlg: MAIN to say if related; default = not a choice hand).
 ASK: a non-modal host for kitHand — `kitHand.mount(container,{cards,onPick,onLift})` (or kitHandOn accepting a marked `.opts.khost` outside #modal) with the same deal / lift / plate / ✓ ✕, the MAIN 162 ruling (a) applied (>10 cards → ≤7 per hand + ‹ › paging, same card size, never shrink), sized for a tab pane (Fold 755x1000 + iPad 1180x820). Then KIT-STAGE wires the 8 rows.
+- ✅ DONE → KIT §12.2 (KK40, review/kit-gloss-lower 233de84d: kitLowerRow / kitGlossPopHtml, «Cách giảm» for a rising-bad stat, «Cách tăng» for a falling-bad one, consort road; text = kitLowerText in jts.js; OB-OAN checked every line names real consort acts, 26/11 ~09:35Z). K-GLOSS-LOWER (OB-OAN, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán ... giảm cái độ nguy hiểm», MAIN rec (2), law 11): the kit glossary popup (j79 `.kgl` tap → kpPop `.kpopt` title + `.kpopx` meaning) needs ONE more line «Cách giảm: …» under the meaning when the term is a stat whose RISE is bad for her. Data is ready on review/ob-oan (jts.js, one table): `kitLowerText(term)` returns the text ("" = no row) for Oán, Thù, Ghen, Nguy hiểm, Nguy hiểm chung, Thiện cảm, Quý, Sủng, Sức khỏe, Danh (names of the existing acts only). Ask: KK39 renders `kitLowerText(gl.dataset.kgl)` as the kit «Cách giảm» row in that popup (every kitGloss surface: kitRel2 rows, stat rows, header cells, person card «Có thể hại ngươi» → «Nguy hiểm»). Until then the «Cách giảm» row shows only in the Nguy hiểm chung panel and the «Làm lành với …» dialog (existing kitRows row). Scan: `python3 dev/test/ob-oan-scan.py`.
+
+## 26/11 NEWS-SIEVE-2 (session_01V1ZZH2L7SB2YyEATuwgbWi, MAIN 153) — K-FREE-OPT: no «Tốn không / Được không» on a free option (kit keeper KK38)
+Owner OD 25/11 ~23:36Z NEWS WORDING (verbatim row in dev/OWNER_DECISIONS.md): "no «TỐN không / ĐƯỢC không» on a free action". Seen: «Tin báo» panel
+(jnotice kitNoticeOpen, kitPanel kind notice) option cards «Để ta xem» / «Để sau» print the rows «Tốn: không» and «Được: không». Rows come from the
+one row writer (j63 kaRowH / KA_ROWS, j19 kgrid «Tốn … không»), so this is the KIT option-card family, not the news code.
+Wanted (kit keeper only, law 9/11): an option with no cost hides the «Tốn» row, an option with no gain hides the «Được» row (whole family: every
+option / act card that prints «không» in a row: go / later / close / look options of every panel). Not changed on review/news-sieve.
+CONFLICT to settle (canon overwrite, law 14): the quickcheck gate dev/test/dialog-fixed.js (l) «MAIN 88 (a) no empty Được cell: a card with no gain
+says «không»» still demands the «không» rows, and it FAILS on origin/main 02f564ae today (Fold + iPad: card «Mặc kệ» has an EMPTY Tốn and Được
+cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) wins: hide the empty rows and update gate (l) in the same kit change.
+
+## 26/11 OB-VERDICT — result-card ACT PAYLOAD (KIT 7.3) — built by OB-VERDICT on review/ob-verdict, needs KK39 review
+- Owner OD 26/11 ~08:30Z (pillow slander verdict). Additions to the §7 result card (j63), same `.kb` row grid and classes, no new CSS:
+  seal value `kitResultSeal("soft")` → «BỎ DỞ» (grey `.sure`); rows «Người ấy» (`kr-tgt`) and «Ai làm» (`kr-by`); `kaAim` / `kaAimVerdict` / `kaAimUse`;
+  the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
+  Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).

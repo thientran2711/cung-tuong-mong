@@ -281,6 +281,12 @@ Applies to: act cards (Hành động, servant road), person-card act groups (`.p
 dialog options (`.opt` / `.opts`), priced buttons (`pbtn`, `.btn`, `.rbtn`: court, festival, shop…). Built ONLY through
 `kitParse()` (string → rows) and the frame `kaNorm()` (j63), which rebuilds every such button into the markup below
 (a MutationObserver runs it after any render; `kitFix()` also calls it). Nobody writes this markup by hand.
+Observer rule (F10, 26/11, behaviour only): the j63 observer `kaMO` sorts each wake (`kaSort`): a NEW card (a KA_SEL button without
+`data-ka`, or a node holding one) → the whole-page `kaNorm` pass (≤ `BAL.kobs.kaPass` passes, its own edits taken back with `takeRecords`);
+a node added INSIDE an already normalised card → that card alone (`kaNorm1` + the «???» mask); any other node (loading marks, scroll cues,
+memory marks, words in a span) → nothing. A new card is normalised in the place that holds it (`kaNorm(root)`), never the whole page
+for one new card (a 1351-card list took 7 s a pass). Option fit (jk4, F10 member 4): `kitOptEqual` tiers a dialog's option lists ONCE per
+synchronous pass (`KIT_OPT_EQ`), and the cards the ResizeObserver reports in one frame are fitted in ONE frame callback (`KIT_OPT_ROQ`).
 
 ```
 button.ka [.kdis when disabled]
@@ -383,16 +389,52 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   `kitResultSeal(ok)` (renamed by reviewer r7: `kitSeal` is the Trân nữ seal, §39) → {cls: ok | bad | sure, t: THÀNH | BẠI | KẾT QUẢ} (j63; kit sample page). Never
   inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
   "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
-- KÈM (owner 11/15): other people's feelings — the consorts' ghen / oán — are not her gains or losses: one collapsed line
-  "Kèm: 12 phi tần ghen thêm 8" — KIT PART `kitKemRow(K)` (j63, `.kb .kkem`, ranges as "3–8"; kit sample page), a tap opens the
-  names (`.kkem.on`); a person she has not met is "người chưa quen".
+- KÈM (owner 11/15; form overwritten by MAIN 157 ruling 26/11 — ONE kit part, OB-VERDICT-2 + KK41, law 14): other people's feelings — the consorts' ghen / oán — are not her gains or losses: KIT PART `kitKemRow(K)` (j63; kit sample page §53) = ONE line per NAMED person «Hoàng hậu Điền Chi Lan: ghen +8» (a person once per feeling), the people she cannot name with the SAME feeling and number grouped «4 vị khác: ghen +8» (one alone: «Một vị Phi: ghen +8», capital at the row start); a named person and a single stranger show the new total «ghen +8 (42)» (`kaNT`, K items carry `t`; a group «N vị khác» none); at most 8 lines, then «… và N người khác» where N also counts `K.more` (people the sieve folded away, jnsieve nsCard); nothing listed but `K.more` → «N người khác trong cung đổi lòng chút ít»; `K.all` truthy (the Sổ ghi «kèm theo» record keeps every name) → no 8-line cap, `K.more` still counted; a card whose only Kèm is `K.more` still shows (resultShow gate); exact numbers, no cause copy. `.krv.kklist > .kitem.kkemi`: every line is its own row in EVERY result card (rtoast, the night card `.kne`, any `.kb`) — never run together (the night card's `.kitem` is the centred item cell otherwise).
+- PERSON ROWS (KK41, same family, law 11): a `kitRows` row whose values are person lines «<Tên>: thiện cảm +6» (`KIT_PLINE`, j79; the night card's Được / Mất) takes the same `.kklist > .kitem.kkemi` form: one line per person or plain value, the name never split from its value, no «·» run-on. `kitLineCap`: a result line that starts a row starts with a capital («Một vị Phi …», rtoast rows too). Test `dev/test/kit-kem-row.js`.
   Their liking FOR HER (quý ngươi hơn / ghét ngươi hơn) and evidence stay in Được / Mất.
+- ONE SIEVE — who reaches a card (CANON OVERWRITE in place, owner OD 26/11 ~06:50Z (B) «result cards: only rows that changed for HER … the rest in Sổ ghi»; ONE-SIEVE,
+  `nsCard` / `nsSieve` in jnsieve, called by j63 `kaResultRows` — every result card incl. the night card jne `kitNightEnd`; numbers `BAL.news.card`):
+  a person row of someone else (not her act's target — «Người ấy» is OB-VERDICT's —, not her household, not Thái hậu / Hoàng hậu) stays in Được / Mất
+  only when it carries evidence, the change is ≥ `card.big`, or the span's own log names that person in a line about HER; at most `card.rowMax` such rows.
+  Kèm (ghen / oán of others) = the ONE `kitKemRow` (form: the KÈM line above, kit keeper's);
+  it gets only the ≤ `card.kemMax` people that pass `nsSieve`; every other changed person is only counted «… và N người khác» (none listed:
+  «N người khác trong cung đổi lòng chút ít») and written with every name and number in ONE Sổ ghi record of the card (S.hrec). The link reads
+  «Xem đầy đủ trong Sổ ghi». «Vì sao» reasons never come from a clause that is other people's business only (`kaWhyCl` sieved).
+  Row look = kit keeper (KK42, review/kit-kem-row-r3). Test: `node dev/test/one-sieve.test.js dev/index.html 12 <seed>`.
+- SỔ GHI (ONE SIEVE): over the rows, kit parts only — `kitSubTabs("soghi")` kinds `BAL.news.logTabs` (Tất cả · Việc của ta · Chuyện hậu cung ·
+  Mưu hại; an empty kind has no tab), one `kitTabRowHTML` person chip row («Mọi người» + the 12 most named, count = rows), `kitInput` search
+  (accents ignored); filtering hides rows, a date heading with no row left hides too. A card's folded-changes record (nsCard, «<title>:» then the «Kèm» row)
+  shows the SAME `kitKemRow` one-per-line form (named once per feeling, «N vị khác»; `K.all` = no 8-line cap: the Sổ ghi keeps every name; MAIN 158).
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
   "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
   a sentence that only repeats the act name is dropped.
 - EVERY line says SHORTLY WHY (owner 18/11 09:03Z): `value · reason` on ONE row, label column left, value next to its label (left-aligned, never a centred floating column), the reason dim after the value: `Sức 56→74 (+18) · nghỉ qua đêm`, `Sủng 26→25 (−1) · lâu không được gặp Hoàng thượng`, `1 vị chưa quen biết: ghét ta hơn · ghé chơi cung ngươi`, KÈM `8 phi tần bớt ghen 1 · lòng ghen nguôi dần theo ngày`. Part `kitWhy` (j63: kaWhyCl / kaWhyStat / kaWhyWho / kaWhyKem / kaWhyHtml `.kwy`): the reason is read from the SAME Sổ ghi lines of the span (clause "lead: … Sức +10" → lead; a person matched by name; strangers stay unnamed), else the act's own title, else a short fixed cause per stat (KA_WHYD); max 44 chars, no colon, no %. Every result card (between-buổi "Trong cung vừa qua", act, event, night, co-op) goes through kaResultRows, so one part changes all. Kit sample page §7.
 - Rows are arrays: one fact per line (`.kitem`), never joined sentences; also exposed as `window.kaLastResult {title, ok, sentence, rows:[{k,label,items[]}]}`.
+- **7.3 ACT PAYLOAD — verdict + target row (OB-VERDICT, owner OD 26/11 ~08:30Z «nói xấu xong ... không biết được là có nói xấu thành công hay không»).**
+  KIT PART `kaAim(v,{ok,n,sen,by,pub,later,outer,open})` (j63): an act aimed at a person registers its target when it STARTS (v's Sủng / Danh / Sức /
+  thiện cảm (servant) / rank / cấm túc / phế / mất are read then); `ok` = the act's OWN roll (may be a function, read when the card is built).
+  `open` = an OUTER act's aim (doAct, talk, a dialog option on a consort, servant / court acts): it belongs to every card until it is closed —
+  by the card that shows it, by a «Thôi» on its own dialog, or by the idle board — so a deed run from its own dialog («Bày mưu» → «Ra tay ngay»,
+  the road card «Làm như thường», a picker) re-enters on the SAME aim and its card keeps the verdict. `pub` = a doer known to all by title
+  (the Emperor, the Thái hậu) for «Ai làm». Hooks in `jverdict.js` (no act logic): runAct (every ACT deed, hers and an NPC's on her), doAct,
+  talk (servant mode: an option naming her mistress is aimed at the mistress), chooseM (a card about a consort), pillowDo, giveTo, servAct, empAct,
+  and the runners outside runAct (j55 tdProbe / tdLeak, j67 e67pun, jemoact eaHitMe) —
+  the verdict comes from the first `aRoll` of the actor in that act, `caught` (bị lộ → BẠI), `oddsSoft` (→ BỎ DỞ), `runOpt`, and the decision
+  points without aRoll: the accuse family (vp / xx: «…: thành» / «bỏ qua» / «tố bừa»), wdFrameResolve (Giá họa), frameExpose (Vu oan cleared → BẠI),
+  rcvPick (the receiver's yes / no), rcvMaidBribe / stf2Bribe (the bribe taken / refused), a servant's refusal («việc không thành» → BỎ DỞ).
+  The card of that span (resultShow AND the night card `kitNightEnd`, jne) then shows, in this order:
+  1. SEAL `kitResultSeal(ok)`: THÀNH / BẠI / **BỎ DỞ** (`"soft"`: a capped act slipped, nothing done) / KẾT QUẢ (no roll). An act with no seal of its own
+     (null / "sure", e.g. the night) takes the carried act's verdict. The night card shows it as a `kitChip(seal)` in a «Kết cục» row.
+  2. the act's own plain sentence (`sen`, e.g. «Gối đầu, ngươi thì thầm nói xấu Lệ phi: ngài nghe lọt tai.»).
+  3. row **«Người ấy»** (`.kr-tgt`), one item per target: «Lệ phi Tô Mạn: Sủng −10 (34 → 24), thiện cảm −5, ghen +14, oán +2» — the target's
+     relation / ghen / oán move HERE (not in Được / Mất / Kèm). A failed / slipped deed with no number moved: «không hề hấn gì»; a stranger or a
+     done deed with nothing she can see yet: «chưa rõ — tai mắt sẽ báo»; a deed handed to a sent servant: «chưa rõ — người được sai về sẽ báo»
+     (law 6: hidden effects stay hidden). The name-mask (`kaNamed`, «???») applies as everywhere.
+  4. row **«Ai làm»** (`.kr-by`, two-way law 1): an NPC's deed on HER — «Tần Vu Uyển Đình: nói xấu ngươi bên gối · thành» — ONLY when the span's
+     Sổ ghi names that person; then her own Được / Mất / Kèm as before.
+  An outer act's aims (`outer:1`: doAct, talk, servAct, empAct) are closed by their wrapper when the act ends; others are shown once.
+  Test: `node dev/test/ob-verdict.test.js index.html <shots>` (real-tap night pillow thành / hỏng / bỏ dở on Fold + iPad, deed + talk scan, two-way, old save).
 - Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
 
 
@@ -582,6 +624,14 @@ Tranh ghế, Tuyển tú, Thế lực, Công lao, Kính sự phòng, Nội vụ 
 (popover, HX). `kitHxRoad()` rebuilds the header tap texts (HX) when the road changes. No consort-only goal (lập Hoàng hậu, mẹ Thái tử,
 thăng bậc, thị tẩm, lật thẻ, bổng lộc, sắc phong) shows on the cung nữ road or in lãnh cung: the Đức "!" badge (jk3 k3Hud) and the
 Ân sủng plaque (jk3 k3AsRows) are consort-road only. Test: `dev/test/small-bugs-2.js` check 1.
+**12.2 «Cách giảm» / «Cách tăng» row (K-GLOSS-LOWER, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán ... giảm cái độ nguy hiểm», OB-OAN, KK40).**
+Every glossary explanation of a stat that can turn against her carries ONE more kit row under the meaning: the real ways to bring it back.
+`kitLowerRow(term)` → `[label, text]` or null; label «Cách giảm» when the stat RISING hurts her (Oán, Thù, Ghen, Nguy hiểm, Nguy hiểm chung),
+«Cách tăng» when it FALLING hurts her (Thiện cảm, Quý, Sủng, Sức khỏe / header «Sức», Danh). Text = `kitLowerText(term)` — ONE table (jts.js `TS_LOWER`,
+owned by OB-OAN; names of existing acts only; "" = no row); the kit never types its own list. Consort road only (`kitRoad()` = "": the acts named are consort acts).
+Surfaces (one code path each, so every caller follows): the glossary popover (`.kgl` tap → `kitGlossPopHtml(term)` = title · meaning · row `.kpopx.kplow`,
+dashed hair line above) — kitRel2 rows, stat rows, person cards, any `kitGloss` word; the header help panel (HX → kit rule panel «Là gì»: second row
+«Cách …»). No data yet (OB-OAN not landed) → no row anywhere. Kit page sample «§12.2». Test `DATA=<TS_LOWER js> node dev/test/kit-gloss-lower.js <index.html>`.
 
 ## 13. MINI-GAME FRAME (j79) — for j82 and the lesson games
 ```js
@@ -2430,7 +2480,7 @@ Code `dev/build/j93.js` (after j86, before j84). Art `img/kit/mo-*.webp` (Magnif
 |---|---|---|---|---|
 | 1 | thị tẩm | `kitFlipTablet(p,{me})` · `kitFlipNote(p)` | wraps `flip()` (week start, after the week panel) | ONLY when the tablet is HERS: full piece — 5 green tablets `mo-tablet-back`; the middle one lifts and flips in 3D (rotateY) to `mo-tablet-front` with rank + name (one word per line); gold glow + sparks; result chip with the face, "Thẻ bài của ngươi được lật". The title "Hoàng thượng lật thẻ bài" sits above the lift height (padding on `.kmtabs`, title on its own layer). Someone else's tablet: NO overlay — `kitFlipNote` shows one short line `.kmnote` (kit chip with face: "Tối nay Hoàng thượng lật thẻ <bậc> <tên>") under the top bar, `pointer-events:none`, fades after ~2.8 s, never asks for a tap. |
 | 2 | quẻ tuần | `kitXamPlay(el,lot)` / `kitXamHTML(lot)` | wraps `dawn()` (Quẻ tuần section) and every modal holding the old `.xam` (Gieo lại, Phật đường, the HUD chip) | `mo-xam-tube` shakes (0.9 s), `mo-xam-stick` jumps out and lands (0.7 s), the lot word pops (green good / red bad / ink neutral); the section rows fade in after. In the week panel it starts after the calendar. |
-| 3 | kết quả | `kitResultFx(card)` | wraps `resultShow` (j63 result card `#rtoast.karesult`) | seal `mo-seal-thanh` (chữ Việt "THÀNH") or `mo-seal-bai` ("BẠI") stamps on the card's corner (scale 2.6→1, card thumps); each changed stat floats up as a pill (green +, red −); every 0–100 stat row gets a thin bar `.kmbar` running from the old to the new value (green up / red down). Existing `.seal` word (THÀNH/HỎNG/BẤT LỢI) stays. |
+| 3 | kết quả | `kitResultFx(card)` | wraps `resultShow` (j63 result card `#rtoast.karesult`) | seal `mo-seal-thanh` (chữ Việt "THÀNH") or `mo-seal-bai` ("BẠI") stamps INSIDE the card's top-right corner (MAIN 157 26/11: on the result card only, never hanging over what is behind; the title + sentence keep that corner free, never on words) (scale 2.6→1, card thumps); each changed stat floats up as a pill (green +, red −); every 0–100 stat row gets a thin bar `.kmbar` running from the old to the new value (green up / red down). Existing `.seal` word (THÀNH/HỎNG/BẤT LỢI) stays. |
 | 4 | thăng phẩm, tấn phong | `kitEdict({who,from,to})` | state diff after `render()`: `S.rank` up (also cung nữ → Đáp ứng when `S.srv.risen`) | closed edict `mo-edict-closed` → unrolls (clip-path) to `mo-edict-open` with "Thánh chỉ · Tấn phong X làm <bậc>" (Hoàng hậu: "Lập … làm Hoàng hậu"); the kit portrait (mdH big) changes from the old rank frame/brocade to the new one under a light sweep; chips old → new (new chip in `RCOL[rank]`, pops with sparks). j11's "Tấn phong" stamp is replaced (sound and haptics kept). |
 | 4b | giáng phẩm, lãnh cung | `kitGloom({title,sub})` | state diff: `S.rank` down, or `S.out` newly set | screen darkens (radial vignette), 14 dry leaves `mo-leaf-dry` fall and sway, grey caption. |
 | 5 | qua buổi | `kitDayShift()` | wraps `buoiShift()` (#curtain) | sky band slides in (b0 morning gold, b1 afternoon amber, b2 night indigo) + an incense stick `mo-incense` beside the buổi label, ember burning down, two smoke wisps. |
@@ -3028,6 +3078,7 @@ Owner: "Bất kỳ một cái thông báo nào của cái game đều phải vô
 - `kitToastKeepRects` / `kitToastCol` (jclose) stay the shared keep-clear list; `kitToastPlace` / `kitToastCollapse` are no longer used by notices (no stage-rail «!» item).
 - Sample: kit page §42.2 (box lit / calm, chip, button that opens the panel). Test: `DEV=fold|ipadAir node dev/test/stage-here.js` (faults `toast-cover`: chip-low / hud-word / kept / person / card; `collapse-no-box`; `float-toast` = any visible `#kupdline`, `#ktbtoast`, floating `.kmnote`, `body > [role=status]` other than the chip), `node dev/test/stage-stay.js` (the closing notice text names the stay odds).
 
+- NEWS SIEVE (owner OD 26/11 ~04:40Z, `dev/build/jnsieve.js`, BAL.news): «Tin báo» know lines and the morning «Tin trong cung» card carry only news that touches HER (her name / «ngươi» / her servants / evidence · the night · rank · birth · death · lãnh cung words); NPC ↔ NPC deeds keep running and reach her as ONE kit news panel per month «Tin trong cung · tổng kết tháng» (`kitPanel({kind:"news", facts:[{who, text, chips:[["Thiện cảm",±n]]}]})`). Consorts' nết are shown from the start (`trKnown`), never «discovered».
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
 - The week rolls ONE weather (`S.wx.b`, its flag f drives every rule); the WORDS shown follow the buổi (`S.wx.n = wxAt(S.wx.b, buổi)[0]`, icon
   `[1]`). Night never: nắng, ve kêu, "sớm". Day never: trăng, sao, đom đóm, đêm, dế. "sớm" only in the morning. Every new weather row gives all
@@ -3459,8 +3510,8 @@ the start, or skips the turn if it is still not ready. A turning sheet never sho
 Index of the shared parts review/opt-render added (number from the coordinator's registry; the rules live where they apply):
 - `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.
 - `kitHint(o, m, lv)` → `{hint}` (pure, bots too), `kitHintLevel()` (Tâm cơ / Tai mắt → vague / plain / sharp): §28.6.
-- `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitOptOdds(b)` (the kit odds meter on every ROLLED option, a certain one shows none (KK34); a rolled option's `p` → `oddsLead`, §25): §28.6.
-- `kitResultSeal(ok)` (THÀNH / BẠI / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
+- `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitOptOdds(b)` (the kit odds meter on every option, certain = «Rất vững»; a rolled option's `p` → `oddsLead`, §25): §28.6.
+- `kitResultSeal(ok)` (THÀNH / BẠI / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.krv.kklist > .kitem.kkemi`, one line per named person, strangers with the same feeling + number grouped «N vị khác»): §7.
 - Samples on the kit page (§47): ids "§53" (chip tones + the 7 odds-meter steps; an event option in cost mode through the real modal markup → kaNorm →
   kitHideOut; kitResultSeal ×3; kitKemRow). Tests: `dev/test/opt-render.js`, `dev/test/opt-scan.py --fail`.
 
@@ -4527,7 +4578,7 @@ Owner: "khi mà một cái nút nào đó nó sẽ có một cái chữ gọi l�
 - Every shown "HỎNG/Hỏng" is now "BẠI/Bại": result seal (kitResultSeal, j19/j25 seals), log "Bại.", quest tag, tutorial, option sample label, kit sample page, VANPHONG.
 - Row classes unchanged (.kr-duoc/.kr-mat/.kr-kem) plus .kb-t / .kb-b / .kb-a; heads .kbh .kbh-t/.kbh-b; empty BẠI row .kr-none. Scan: node dev/measure/thanh-bai-scan.js [json] (deck cards in 5 game states + every labelled source string).
 - (r2, reviewer r1 FAIL 922c7253) Empty THÀNH prints its OWN dim line "Không được gì thêm" (empty BẠI keeps "Tốn công, không được gì"). A no-roll card whose only part is a certain loss (hỏng: only, no thành:) is ONE block (THÀNH, row Mất): "Cáo bệnh, không dự" = THÀNH · Mất Danh -1. A no-roll card with both parts still shows both blocks.
-- (r2) SCROLL CUE (jksize kitScrollCues, ONE place): every modal frame column that scrolls (.k3right, #mb, .body … overflow auto, > 6 px hidden, >= 100 px tall) gets a last-child `.kscue` (sticky bottom): a bottom fade + chip "Kéo xuống" while scrollTop+clientHeight < scrollHeight-6; it goes at the end. Called after every showModal (120 / 700 ms), on scroll, on resize, and a MutationObserver keeps the cue the last child. option-modal-scan flags CUT-NOCUE (an option card cut by a scroll column that shows no cue).
+- (r2) SCROLL CUE (jksize kitScrollCues, ONE place): every modal frame column that scrolls (.k3right, #mb, .body … overflow auto, > 6 px hidden, >= 100 px tall) gets a last-child `.kscue` (sticky bottom): a bottom fade + chip "Kéo xuống" while scrollTop+clientHeight < scrollHeight-6; it goes at the end. Called after every showModal (120 / 700 ms), on scroll, on resize, and a MutationObserver keeps the cue the last child. option-modal-scan flags CUT-NOCUE (an option card cut by a scroll column that shows no cue). OBSERVER RULE (F10 renderer-mem 26/11, review/renderer-mem): a column's OWN cue is `:scope > .kscue:not(.sib)` — a short scroller's strip (`.kscue.sib`, < `BAL.kobs.cueShort` px, placed right after it) can be a direct child of the outer column and is never that column's cue (two "keep-last" cues moved past each other for ever = main thread hung, renderer +280 MB/min, OOM kill: robots R1 b365 / A4 b65 / T1d b77). The column observer ignores records made only of cue nodes and re-checks through `kitScrollCuesSoon` (≤ 1 per frame, never inside the mutation); a button / option card is never a cue column; the card normaliser (j63 kaMO / kaNorm1) leaves cue nodes alone. A scroller keeps its short/tall look until its own height moves by more than `BAL.kobs.cueHyst` px. Test: dev/test/kscue-loop.js (exit 1 = a cue loop / a page that stops answering). No look change.
 - (r4, owner 17/11 ~20:50Z, s36: the THÀNH/BẠI layout made option cards almost twice as tall — COMPACT) (1) NO head rows: the old `.kbh` THÀNH / BẠI heading lines are gone. On a ROLLED card (R.one false) the gain/loss row of each block is itself labelled **THÀNH** (green, replaces ĐƯỢC) and **BẠI** (red, replaces MẤT); the Được+Mất items of one block share that ONE row (item colours stay green/red); **KÈM** keeps its own row right after the block it belongs to. Order: Cần · Tốn · Được ngay · THÀNH · Kèm · BẠI · Kèm · Ghi chú. A SURE card keeps ĐƯỢC / MẤT / KÈM, no heads, no THÀNH/BẠI words. Empty THÀNH row = "Không được gì thêm", empty BẠI row = "Tốn công, không được gì" (cost-mode cards, kitHideOut, still show neither: the outcome is hidden on purpose). Row classes: `.kr-thanh .kb-t`, `.kr-bai .kb-b` (+ `.kr-none` for the empty line); `.kr-duoc/.kr-mat/.kr-kem` stay on sure cards; `kaNorm1` re-reads a thanh/bai row back into duoc/mat by item colour. Consumers updated: j93 (stat deltas), jk3 k3IsLong, jk2b kitHintOf (reads Được|Thành, Mất|Bại). A disabled card hides BẠI and the red items of THÀNH. (2) LABEL LEFT, VALUE RIGHT at EVERY size: the r2 stacked layout (`.kszstk`, label over value on Fold / narrow option columns) is REMOVED; instead the label column is narrow (`fit-content(4.3rem)` in jk4 option cards, 3.4rem j63 base; "Được ngay" may wrap to two lines). (3) "Kéo xuống" chip (jksize `.kscue`): smaller, sits in the SOLID lower part of the bottom fade (fade 36 px, opaque from 42 %), so it never covers readable text. Scan: option-modal-scan EMPTYHEAD now flags any leftover `.kbh` head OR a row whose value is stacked under its label; thanh-bai-scan counts `.kr-thanh/.kr-bai`. Measured: Hành sự card text block (.kb) height Fold 618 px wide: "Nghỉ ngơi một lát" 80 -> 58, "Điểm trang" 157 -> 136, "Thỉnh an Thái hậu" 200 -> 157 (card 264 -> 242); iPad Air 564 px: 80 -> 58, 157 -> 136, 219 -> 176 (card 283 -> 242). Event option card (Hội phối-style, Fold 304 px): 138 -> 111.
 
 ## 87. kitRankList · kitRankRow · kitRankHead · kitRankFoot · THE ranked list (KIT REQUEST A + B of review/rank-port-r2; kit keeper, review/kit-ico-rank) — `dev/build/jkrank.js` (before jrank)

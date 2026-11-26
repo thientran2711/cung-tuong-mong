@@ -166,11 +166,11 @@ function sgRuleArr(a){if(Array.isArray(a))a.forEach((s,i)=>{if(typeof s==="strin
 function sgRuleObj(o,k){const dsc=o&&Object.getOwnPropertyDescriptor(o,k);if(!dsc||dsc.get)return o;/* a getter text (IT.ngocboi) builds itself; reading it here could touch BAL before it loads */const s=dsc.value;if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(o,k,{get:()=>sgRule(s),set:sgRuleSet(o,k),enumerable:true,configurable:true});return o}
 function sgOf(p,v,lbl){return p===S?sgStat(v,lbl):statTxt("sung",v,lbl)}
 function sgRange(a,b,lbl){const x=sgNow(a),y=sgNow(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
-function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{const t=k==="sung"?sgStat(v):statTxt(k,v);if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
+function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{/* stat-pace: a rise shows what it REALLY adds now (jstatpace spSee) */const pv=typeof spSee==="function"&&SP_K[k]&&(v>0||SP_SIGN[k]);if(pv&&k!=="sung")v=spSee(k,v);let t=k==="sung"?sgStat(v):statTxt(k,v);if(pv&&k==="sung"&&v>0){const w=sgNow(v),r=spSee("sung",w);if(r!==w)t=statTxt("sung",r)}if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
-    if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
+    if(k==="sung")v=sg(v);if(typeof spG==="function"&&SP_K[k]){v=spG(k,S,S[k],v,spRk(S));if(!v)continue}/* stat-pace: the one rise rule (jstatpace) */S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
@@ -223,7 +223,16 @@ function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}retur
 /* MOODKNOW step 0 (owner s35 Lượt 41 + OD 17/11 ~18:38Z): ONE way to RAISE the jealousy SCORE v.ghen. It adds n (clamped 0–100) and, for the real
    rise, a short Chạnh lòng FEELING cause (jmoodknow ghenFeel: true why, aimed at the one who caused it 'by', khắc timer BAL.mood2.dur.e.ghenUp).
    Lowering stays a plain write; the feeling ending never touches the score. Returns the real rise. */
-function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
+/* review/pace-all (owner OD 26/11 ~08:25Z «điểm thì nó tăng cao chót vót»; law 6b real people, law 1): v.ghen is a consort's jealousy toward HER (co-op: per
+   player, gp[seat]). A jealousy whose cause is ANOTHER consort (by = an NPC: she danced, stole a night, showed a gift…) used to raise the score toward
+   her too, so every consort sat at Ghen 99 by the second season. Now it stays aimed at that consort: the Chạnh lòng feeling (ghenFeel) is aimed at her
+   as before, and it becomes a grudge between the two (oanAdd v → by, × BAL.oanCool.ghen.npc), which then cools like every grudge. */
+function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;
+ if(by&&typeof by==="object"&&by!==S&&by!==v&&!by.coop&&BAL.oanCool&&BAL.oanCool.on){try{if(typeof ghenFeel==="function")ghenFeel(v,n,why,by)}catch(e){}
+  const k=(BAL.oanCool.ghen||{}).npc||0;if(k>0&&typeof oanAdd==="function")oanAdd(v,by,Math.max(1,Math.round(n*k)));return 0}
+ const g0=+v.ghen||0;{const M=BAL.oanCool&&BAL.oanCool.on&&BAL.oanCool.ghen.dm;if(M){/* review/pace-all: the nearer the top, the less one more slight adds (× max(min, 1 − (ghen/100)^pow)); fractions carry (v.gUc) */
+  const x=(+v.gUc||0)+n*Math.max(M.min,1-Math.pow(g0/100,M.pow));n=Math.floor(x);v.gUc=Math.round((x-n)*1000)/1000;if(!n)return 0}}
+ v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(v,d,why,by===undefined?S:by)}catch(e){}return d}
 /* her own jealousy SCORE toward a consort (v.pg, "Ngươi ghen N") — same family as ghenUp: the ONE way to raise it; the real rise also adds a short
    Chạnh lòng FEELING on her (ghenFeel), aimed at that consort. Lowering stays a plain write; the feeling ending never touches the score. */
