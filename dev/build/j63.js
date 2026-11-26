@@ -241,6 +241,12 @@ const KA_RANKRE=new RegExp("("+RANKS.map(r=>r.n).join("|")+")\\s*$","i");
 function kaWho(v){const r=v&&RANKS[v.rank];return (r&&v!==S?r.n+" ":"")+(v&&v.name||"")}
 function kaTitled(s){for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||!v.name||!s.includes(v.name)||!RANKS[v.rank])continue;const rn=RANKS[v.rank].n;s=s.split(v.name).map((x,i,a)=>i<a.length-1&&!KA_RANKRE.test(x)?x+rn+" ":x).join(v.name)}return s}
 const kaN=n=>(n>0?"+":"−")+Math.abs(n);
+/* KIT §7.1 PERSON NUMBER + NEW TOTAL (owner OD 26/11 ~03:55Z «Hoàng hậu thiện cảm +8 (42)»; ACT-MERGE J0, canon overwrite of the 24/11 «never (…)» line):
+   every person number a result moves reads «<change> (<new total>)»; the bracket holds the NEW TOTAL only (no arrow, no repeated change); a negative total «(−4)».
+   kitRelW(kind, change, total) = the same words for act-card Được / Mất rows (J1–J5 callers), e.g. kitRelW("thiện cảm",6,48) → «thiện cảm +6 (48)». */
+const kaNT=(n,t)=>kaN(n)+(t==null||!isFinite(t)?"":` (${Math.round(t)<0?"−"+Math.abs(Math.round(t)):Math.round(t)})`);
+function kitRelW(kind,d,total){return `${kind} ${kaNT(Math.round(d),total)}`}
+window.kitRelW=kitRelW;window.kaNT=kaNT;
 function kaSentence(before){if(window.__kaSenOvr){const o=window.__kaSenOvr;window.__kaSenOvr=null;return kaTitled(o)}/* review person-dialog-restore: an act that only logs (greet) passes its own line (the oldest span line is the ambient weather line) */const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain((typeof kShort==="function"?kShort(h):String(h)).replace(/<span class="ld">[^<]*<\/span>/,"")));/* the result card = the SHORT form (jvoice kShort, owner 16/11 ~21:05Z) */
  const ok=L.filter(t=>t&&!/→/.test(t)&&!/(thành|hỏng|bại|kèm|tốn|được ngay)\s*:/i.test(t)&&!/\+\d+\.\.\d/.test(t)&&!/^\[/.test(t)&&!/\b(Thành|Hỏng|Bại)\.\s*·/.test(t)&&!/(^|\s)có thể\s/.test(t));
  if(!ok.length)return"";const P=ok[0].split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""));let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
@@ -273,16 +279,16 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
   let da=a-b.a,lo=b.a,hi=a;if(v===q&&q!==S&&before.hh!=null){const dh=(S.hh||0)-before.hh;if(dh){skip.add("hh");if(!da){da=dh;lo=before.hh;hi=S.hh||0}}}
   /* hotfix 11/15: the real before→after, never the bare word "thiện cảm" */
-  if(da)(da>0?gp:bp).push(`thiện cảm ${kaN(da)}`);else if(m!==b.m)(m>b.m?gp:bp).push(`ta quý nàng ${kaN(m-b.m)}`);void lo;void hi;
-  if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
-  if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
-  if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m))}}}
- {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaN(U.d.get(v)||1)}`],[],""]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaN(U.d.get(v)||-1)}`],""])}
+  if(da)(da>0?gp:bp).push(`thiện cảm ${kaNT(da,hi)}`);else if(m!==b.m)(m>b.m?gp:bp).push(`ta quý nàng ${kaNT(m-b.m,m)}`);void lo;
+  if(g!==b.g)K.push({v,k:"ghen",d:g-b.g,t:g});
+  if(o!==b.o)K.push({v,k:"oán",d:o-b.o,t:o});
+  if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaNT(e-b.e,e)}`);
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m));U.t=U.t||new Map();U.t.set(v,da?hi:m)}}}
+ {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");const tt=v=>U.t&&U.t.get(v);for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaNT(U.d.get(v)||1,tt(v))}`],[],""]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaNT(U.d.get(v)||-1,tt(v))}`],""])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
-  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
+  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaNT(d,now)}`]:[],d<0?[`thiện cảm ${kaNT(d,now)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
- if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
+ if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaNT(d,S.maid.loyal)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;
  return [G,B,K]}
@@ -293,7 +299,7 @@ const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen ngu�
 function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
 function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
  const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
-  return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaN(d)}</span></span>`});
+  return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaNT(d,x.t)}</span></span>`});
  if(K.filter(x=>Math.round(x.d)).length>8)L.push(`<span class="kitem"><span class="ef n">… và ${K.filter(x=>Math.round(x.d)).length-8} người khác</span></span>`);
  return L.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${L.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
