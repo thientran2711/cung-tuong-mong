@@ -99,7 +99,11 @@ function stayRoll(k,bk0,noWay){try{if(!S||S.dead||S.out||S.confined||!k||k==="ho
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} · ${(S.cutPay||0)>cut0?`khất bổng ${S.cutPay} tháng`:"bị cảnh cáo"}</p><p class="past">Lỗi nhẹ: không bị cấm túc.</p>`});
  try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
 window.stayRoll=stayRoll;
-if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";let noWay=false;try{const w=typeof homeWay==="function"?homeWay():null;noWay=!!(w&&!w.at&&!w.ok)}catch(e){}const r=nb0.apply(this,arguments);try{stayRoll(k,bk0,noWay)}catch(e){}return r}}
+/* RV-HOME-WAY r6: «no way home» = she NEVER had the khắc to walk home while at this place in this buổi (she arrived with too few).
+   If the «Về phòng» button was enabled at some render and she spent the khắc on something else, staying was her choice: the warned
+   overstay roll stands (else spending every khắc at a closing place would always go unpunished and the closing notice would lie). */
+if(typeof render==="function"){const rn0=render;render=function(){const r=rn0.apply(this,arguments);try{const w=typeof homeWay==="function"?homeWay():null;if(w&&!w.at&&w.ok)window.__hwCan=(typeof bkey==="function"?bkey():"")+"|"+S.place}catch(e){}return r}}
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";let noWay=false;try{const w=typeof homeWay==="function"?homeWay():null;noWay=!!(w&&!w.at&&!w.ok)&&window.__hwCan!==bk0+"|"+k}catch(e){}const r=nb0.apply(this,arguments);try{stayRoll(k,bk0,noWay)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 window.actPendRun=function(){return actPendRun()};
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}

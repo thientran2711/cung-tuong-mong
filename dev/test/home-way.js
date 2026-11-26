@@ -39,7 +39,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
    const mb=document.querySelector('[data-plhome]');const rb=document.querySelector('#k3room .kbl');out.push({k,tc,label:w&&w.label,map:mb?mb.textContent:null,top:rb?rb.textContent.split("\n")[0]:null});tab="act";if(out.length>=14)break}
   return out});
  /* C no khắc: Đức Thọ cung closes after buổi sáng */
- const C=await g.evaluate(async()=>{__reset();await __go("tn");const s0={danh:S.danh,cut:S.cutPay||0};used=BAL.time.khac;render();await new Promise(r=>setTimeout(r,300));
+ const C=await g.evaluate(async()=>{__reset();await __go("tn");const s0={danh:S.danh,cut:S.cutPay||0};used=BAL.time.khac;window.__hwCan=null/* r6: she arrived with no khắc to walk home (never had a way) */;render();await new Promise(r=>setTimeout(r,300));
   const w=homeWay();const rb=document.getElementById('k3room');const lab=rb&&rb.querySelector('.kbl').textContent;const dis=rb&&rb.disabled;
   S.closeSeen=null;try{const k=bkey()+"|tn";S.plWarn=k;S.closeSeen=k}catch(e){}
   const cards=await __turn(0.999);return{w,lab,dis,place:S.place,confined:S.confined,dDanh:S.danh-s0.danh,cut:(S.cutPay||0)-s0.cut,cards}});
@@ -47,14 +47,19 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
  const Dd=await g.evaluate(async()=>{__reset();await __go("tn");render();await new Promise(r=>setTimeout(r,300));used=BAL.time.khac-travel("tn","home");render();await new Promise(r=>setTimeout(r,300));
   const w=homeWay();const s0={danh:S.danh,cut:S.cutPay||0};const cards=await __turn(0.999);
   return{wOk:w&&w.ok,place:S.place,confined:S.confined,dDanh:S.danh-s0.danh,cut:(S.cutPay||0)-s0.cut,cards,want:{danh:-BAL.sneak.danh,cut:BAL.punW.lite.cut[0]}}});
+ /* C2 (RV-HOME-WAY r6): she HAD the khắc to walk home (button enabled) but spent them all at the closing place: a warned overstay, caught = NHẸ */
+ const C2=await g.evaluate(async()=>{__reset();await __go("tn");render();await new Promise(r=>setTimeout(r,300));const had=window.__hwCan;used=BAL.time.khac;render();await new Promise(r=>setTimeout(r,300));
+  S.closeSeen=null;try{const k=bkey()+"|tn";S.plWarn=k;S.closeSeen=k}catch(e){}const s0={danh:S.danh,cut:S.cutPay||0};
+  const cards=await __turn(0.999);return{had,place:S.place,confined:S.confined,dDanh:S.danh-s0.danh,cut:(S.cutPay||0)-s0.cut,cards:cards.map(c=>c.t),want:{danh:-BAL.sneak.danh,cut:BAL.punW.lite.cut[0]}}});
  /* E weights, her and an NPC */
  const E=await g.evaluate(()=>{__reset();const v=rivals.find(x=>x.alive&&!x.out&&x.rank===0)||rivals.find(x=>x.alive&&!x.out);const R0=Math.random;Math.random=()=>0.999;const r={};
   try{for(const sev of [0,1,2]){for(const [who,o] of [["S",S],["npc",v]]){o.confined=0;o.cutPay=0;const rk=o===S?S.rank:o.rank;punish(o,"thử",sev);r[who+sev]={conf:o.confined,cut:o.cutPay||0,rk:(o===S?S.rank:o.rank)-rk}}}}finally{Math.random=R0}
   S.confined=0;v.confined=0;return{r,W:BAL.punW,vpConf:BAL.shelf.acc.vpConf,txt:[aaPunishTxt(0),aaPunishTxt(1),aaPunishTxt(2)]}});
  /* F Dư đồ home mark away */
  const F=await g.evaluate(async()=>{__reset();S.buoi=1;await __go("vuon");tab="go";render();await new Promise(r=>setTimeout(r,500));const labs=[...document.querySelectorAll('.mspot')].map(e=>e.innerText);tab="act";render();return{home:labs.filter(t=>/Nhà ta/.test(t)).length,n:labs.length}});
- const R={A:{A0,Ab,clicked,A1},B:Bv,C,D:Dd,E,F,errs:errs.slice(0,5)};
+ const R={A:{A0,Ab,clicked,A1},B:Bv,C,C2,D:Dd,E,F,errs:errs.slice(0,5)};
  const fail=[];
+ if(!C2.had||C2.place!=="home"||C2.confined||C2.dDanh!==C2.want.danh||C2.cut!==C2.want.cut)fail.push("C2 spent-khắc overstay not light-punished "+JSON.stringify(C2));
  if(!Ab||!Ab.shown)fail.push("A button not shown away");if(Ab&&!new RegExp(`^Về phòng · ${A0.tc} khắc\\n${A0.hn}$`).test(Ab.txt))fail.push("A label "+JSON.stringify(Ab&&Ab.txt));
  if(A1.place!=="home"||A1.visitK!=="home")fail.push("A not home");if(A1.used-A0.used!==A0.tc)fail.push(`A khắc ${A1.used-A0.used}≠${A0.tc}`);
  for(const x of Bv){if(x.tc!==A0.near&&x.tc!==A0.far)fail.push("B cost "+x.k);if(x.label!==`Về phòng · ${x.tc} khắc`||x.map!==x.label||x.top!==x.label)fail.push("B label "+JSON.stringify(x))}
