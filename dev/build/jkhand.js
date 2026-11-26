@@ -75,7 +75,7 @@ function kitHandLongOff(g){try{g.__khLong=kitHandSig(g);g.__khSig="";g.classList
    ✓ / ✕ sit on its lower edge. ✕ / a tap elsewhere = it turns back and shrinks into its card; ✓ = the flipped card flies up, then the frame's own choose path runs.
    ONE part for every hand (kitHand callers + the stage Bàn bài, jkstage kstgPlate uses kitHandFlipPlace). «Cảnh động» off / reduced motion = no motion (kfStill).
    The element keeps the class .khplate (the stage and the tests key on it) + .khflip. Geometry knobs: KIT_HAND.flip. */
-KIT_HAND.flip={wK:2.15,minW:[216,236],maxW:[292,300],ms:420,backMs:260};
+KIT_HAND.flip={wK:2.15,minW:[216,236],maxW:[292,300],ms:420,backMs:260,fs:[28,26,24,22,20,18,17,16,15,14,13]/* back type scale px: the largest that fits the card wins */};
 function kitHandFlipBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
  ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown","khfl");c.classList.add("kopinfo");if(b.disabled)c.classList.add("khlock");c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");c.removeAttribute("aria-pressed");
@@ -91,7 +91,7 @@ function kitHandFlipPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.flip,ip=kitHandW
  const ky=parseFloat(b.style.getPropertyValue("--ky"))||0,bot=Math.min(D.bottom-4,G.top+ky+ch+2);const s=KIT_HAND.confPx,room=Math.round(s*.5);
  z.style.width=w+"px";z.style.maxHeight="";z.style.height="";z.style.top="auto";const fb=z.querySelector(".khfb");if(fb)fb.style.maxHeight="";
  const top=Math.max(D.top+4,top0==null?D.top+4:top0),maxH=Math.max(120,Math.round(bot-room-top));let h=Math.round(w*asp);if(h>maxH){h=maxH;w=Math.round(h/asp)}z.style.width=w+"px";
- z.style.height=h+"px";if(fb)fb.style.maxHeight=h+"px";
+ z.style.height=h+"px";if(fb){fb.style.maxHeight=h+"px";/* fill: the largest step of the kit scale whose content fits the back */const F=K.fs;let i=0;for(;i<F.length;i++){fb.style.setProperty("--khbfs",F[i]+"px");if(fb.scrollHeight<=fb.clientHeight+1)break}if(i>=F.length)fb.style.setProperty("--khbfs",F[F.length-1]+"px")}
  const x=Math.round(Math.max(L,Math.min(R-w,B.left+B.width/2-w/2)));z.style.left=(x-D.left)+"px";z.style.bottom=Math.round(D.bottom-(bot-room))+"px";
  z.__khRect={l:x-D.left,t:bot-room-h-D.top,w,h};kitHandConf(b)}catch(e){console.error("kitHandFlipPlace",e)}}
 /* the 3D turn: the copy starts exactly over the hand card (scale) at 0°, ends at reading size at 180°; back = the reverse */
@@ -199,14 +199,14 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
 #modal .dlg>.khplate .khff{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 6px calc(var(--khcs,44px) * .62);overflow:hidden}/* the name stays above ✓ / ✕ on the lower edge */
 #modal .dlg>.khplate .khff>img{width:100%;flex:1 1 auto;min-height:0;object-fit:cover;border-radius:8px}
 #modal .dlg>.khplate .khff>.khffn{font-weight:700;text-align:center;color:var(--ink,#2a1a12);line-height:1.15}
-#modal .dlg>.khplate .khfb{transform:rotateY(180deg);overflow:auto;overscroll-behavior:contain;padding:6px 6px calc(var(--khcs,44px) * .55)}
-#modal .dlg>.khplate .khfb>button.kopinfo{width:100%;margin:0;box-shadow:none!important;border:0!important;text-align:left;opacity:1!important;filter:none!important;background:transparent!important;color:var(--ink,#2a1a12)!important;cursor:default;pointer-events:none}
+#modal .dlg>.khplate .khfb{transform:rotateY(180deg);overflow:auto;overscroll-behavior:contain;padding:10px 10px calc(var(--khcs,44px) * .62);display:flex;flex-direction:column;justify-content:center;font-size:var(--khbfs,16px)}/* MAIN 165 rec: the back is FILLED — its type from ONE kit scale (KIT_HAND.flip.fs, largest that fits), content centred */
+#modal .dlg>.khplate .khfb>button.kopinfo{font-size:1em!important;width:100%;margin:0;flex:none;box-shadow:none!important;border:0!important;text-align:left;opacity:1!important;filter:none!important;background:transparent!important;color:var(--ink,#2a1a12)!important;cursor:default;pointer-events:none}
 #modal .dlg>.khplate .khfb>button.kopinfo:not(.khlock) .kodds{filter:none!important;opacity:1!important}/* the back is a disabled COPY: its meter keeps the live colours unless the card is locked */
 html body #modal#modal#modal#modal .opts.khand>button.kopt.khfl{opacity:0!important}
 #modal .dlg>.khplate .khfb>button.kopinfo .kabody{display:flex!important;flex-direction:column!important;gap:6px!important;width:100%!important;padding:0!important;transform:none!important}
 #modal .dlg>.khplate .khfb>button.kopinfo .kat{display:flex!important;flex-direction:column!important;align-items:center!important;gap:6px!important;padding:0 0 6px!important;border-bottom:1px solid var(--k-gold,#c9a24a)}
-#modal .dlg>.khplate .khfb>button.kopinfo .kan{font-size:1.08rem!important;font-weight:800!important;line-height:1.2!important;text-align:center!important;color:var(--ink,#2a1a12)!important;opacity:1!important;white-space:normal!important;-webkit-line-clamp:unset!important;display:block!important}
-#modal .dlg>.khplate .khfb>button.kopinfo .kb{display:flex!important;flex-direction:column!important;gap:5px!important;font-size:.95rem!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
+#modal .dlg>.khplate .khfb>button.kopinfo .kan{font-size:1.18em!important;font-weight:800!important;line-height:1.2!important;text-align:center!important;color:var(--ink,#2a1a12)!important;opacity:1!important;white-space:normal!important;-webkit-line-clamp:unset!important;display:block!important}
+#modal .dlg>.khplate .khfb>button.kopinfo .kb{display:flex!important;flex-direction:column!important;gap:.45em!important;font-size:1em!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
 #modal .dlg>.khplate .khfb>button.kopinfo .kb .krl{color:#8a5a1c!important;opacity:1!important;font-weight:700!important}
 #modal .dlg>.khplate .khfb>button.kopinfo .kb .krv,#modal .dlg>.khplate .khfb>button.kopinfo .kb .krv *{color:var(--ink,#2a1a12)!important;opacity:1!important}
 #modal .dlg>.khplate .khfb>button.kopinfo .kwhy{display:block!important;color:#7a2a1c!important;font-weight:700!important;opacity:1!important}/* the hand card under its flipped copy */`;document.head.appendChild(st)})();
