@@ -89,7 +89,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   ok(y1.b===LAST&&y1.date===y0.date&&!y1.pend,tag+': '+Y.name+' untouched in buổi tối',y1);
   ok(await until(Y,()=>COOPW.tm.frReady(),null,10000),tag+': '+Y.name+' sees the friend ready');return x0.w}
  /* ---------- the AFK case ---------- */
- const AFK=process.env.AFK||'g';const X=AFK==='h'?A:B,Y=AFK==='h'?B:A;const NMS=+process.env.NAFMS||8000,MARGIN=45000;
+ const AFK=process.env.AFK||'g';const X=AFK==='h'?A:B,Y=AFK==='h'?B:A;const NMS=+process.env.NAFMS||8000;let MARGIN=45000;
  const lv=await A.p.evaluate(()=>({gW:!!(COOPW.gW&&COOPW.gW()),eW:!!(COOPW.eW&&COOPW.eW()),lv:COOPW.thin&&COOPW.thin.level}));console.log('room level',JSON.stringify(lv),'AFK seat',X.name);
  const RUN=(AFK!=='h'&&lv.gW)?A:X;/* the page that runs the AFK seat's week end: the host at level 13 (part G, her context), else her own phone */
  for(const o of [A,B])await o.p.evaluate(()=>{PEND.afkT=()=>({t:"<p>Một việc cần ngươi tự quyết.</p>",o:[{n:"Nhận lời",fx:{},go:()=>{S.afkT=(S.afkT||0)+1}},{n:"Từ chối",fx:{},go:()=>{S.afkT=(S.afkT||0)+10}}]})});
@@ -97,6 +97,8 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
    const mine=inCtx?!!(COOPW.gWk&&COOPW.ctx):(COOPW.seat===seat&&!COOPW.ctx);if(window.__afkArm&&mine){window.__afkArm=0;window.__afkHit=Date.now();
     Q.push(deserQ([{pid:"afkT",pp:{},t:"Việc khó xử"}])[0]);Q.push({t:"Tin báo",h:"<p>Có tin nhỏ trong cung.</p>"})}}catch(e){window.__afkErr=e.message}return r}},[RUN===A&&X===B,X===A?'a':'b']);
  for(const o of [A,B])await setTm(o,{nightMs:NMS,buoiMs:600000});await reset(A);
+ /* her Kỳ nguyệt sự card (cyrep) has its OWN bound for the host's draw (BAL.coop.cyWaitMs, review/coop-cyhold): when it is out the step may wait on it */
+ const CYW=await A.p.evaluate(()=>+((BAL.coop||{}).cyWaitMs)||0);MARGIN=Math.max(MARGIN,CYW+30000);
  if(await toNight('afk')){const w0=(await D(A)).w;for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
   await RUN.p.evaluate(()=>{window.__afkArm=1});
   ok(await isRd(Y)||await press(Y),'afk: '+Y.name+' presses Sẵn sàng at tối');await clear(X);ok(await isRd(X)||await press(X),'afk: '+X.name+' presses Sẵn sàng at tối, then goes AFK');
@@ -106,7 +108,8 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   ok(!!hit,'afk: her week end queued the test choice + notice ('+X.name+' seat)',await RUN.p.evaluate(()=>window.__afkErr||null));
   const dt=st>0&&hit?st-hit:-1;const a=await D(A),c=await D(B);
   if(st<0)console.log('DUMP afk',JSON.stringify([await DUMP(A),await DUMP(B),await A.p.evaluate(()=>({gh:COOPW.gHold&&COOPW.gHold(),G:COOPW.thin&&COOPW.thin.G&&{done:COOPW.thin.G.done,stat:COOPW.thin.G.stat},thq:(()=>{try{return (COOPW.thin.seatOf('b').S.thq||[]).map(x=>[x.pid||x.t,x.cw])}catch(e){return e.message}})(),naf:COOPW.tm.naf&&COOPW.tm.naf()})).catch(e=>e.message)]));
-  ok(st>0&&dt<NMS+MARGIN,'afk: the room steps to the next week while '+X.name+' is AFK (within nightMs + margin)',{w0,w:[a.w,c.w],ms:dt,bound:NMS});
+  const cyT=await A.p.evaluate(()=>(COOPW.tr||[]).filter(x=>/cyTimeout|cyHold/.test(x)).slice(-3)).catch(()=>null);console.log('host cycle-wait trace',JSON.stringify(cyT));
+  ok(st>0&&dt<NMS+MARGIN,'afk: the room steps to the next week while '+X.name+' is AFK (within nightMs + margin; her Kỳ nguyệt card: its own cyWaitMs)',{w0,w:[a.w,c.w],ms:dt,bound:NMS});
   console.log('host AFK stat',JSON.stringify(await A.p.evaluate(()=>{try{const G=COOPW.thin.G;return {afk:G.stat.afk|0,lapsed:G.stat.afkLap|0,gaf:COOPW.tm.gaf()}}catch(e){return e.message}}).catch(e=>e.message)));
   ok(a.date===c.date,'afk: same date on both seats',[a.date,c.date]);
   /* her choice is CARRIED, not made: still on her seat, not answered */
@@ -114,8 +117,13 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   ok(!xs.afkT,'afk: her choice was never made for her',xs);
   ok(xs.q.includes('afkT')||xs.cq.includes('afkT'),'afk: her choice is kept on her seat (on her screen / carried)',xs);
   /* she comes back and answers it: it runs once */
-  await sleep(1500);const t1=Date.now();while(Date.now()-t1<150000){const r=await X.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Nhận lời/.test(x.textContent)&&x.offsetParent!==null);if(b){b.click();return 1}return 0});if(r)break;await clear(X,1);await sleep(500)}
+  await X.p.evaluate(()=>{window.__cm=[];const f=chooseM;chooseM=function(i){const m=Q[0];const e={t:Date.now(),i,top:m&&(m.pid||m.t),thin:m&&m.thin,q:Q.length,used:typeof used!=='undefined'?used:null,mh:document.getElementById('modal').hidden};let r,err=null;try{r=f.apply(this,arguments)}catch(x){err=x.message}e.after=Q[0]&&(Q[0].pid||Q[0].t);e.q2=Q.length;e.err=err;window.__cm.push(e);if(window.__cm.length>40)window.__cm.shift();if(err)throw new Error(err);return r}});
+  /* she taps like a player: the card that is on top (a kit card ignores a tap in its first moment: tap again), «Nhận lời» on the test card */
+  await sleep(1500);const t1=Date.now();while(Date.now()-t1<150000){if(await X.p.evaluate(()=>S.afkT||0))break;
+   const r=await X.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Nhận lời/.test(x.textContent)&&x.offsetParent!==null);if(b){b.click();return 1}return 0});
+   if(!r)await clear(X,1);await sleep(1200)}
   let got=0;const t2=Date.now();while(Date.now()-t2<30000){got=await X.p.evaluate(()=>S.afkT||0);if(got)break;await sleep(500)}await sleep(3000);got=await X.p.evaluate(()=>S.afkT||0);
+  if(got!==1)console.log('DUMP cm',JSON.stringify(await X.p.evaluate(()=>({cm:window.__cm,dlg:(COOPW.thin&&COOPW.thin.D&&COOPW.thin.D.log||[]).slice(-6),tr:(COOPW.tr||[]).slice(-12)})).catch(e=>e.message)));
   if(got!==1)console.log('DUMP ret',JSON.stringify([await X.p.evaluate(()=>({Q:Q.map(m=>m&&(m.pid||m.t)),mt:(document.getElementById('mt')||{}).textContent,mh:document.getElementById('modal').hidden,ob:[...document.querySelectorAll('#modal button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim().slice(0,20))})).catch(e=>e.message),await A.p.evaluate(()=>{try{const T=COOPW.thin;return {thq:(T.seatOf(COOPW.seat==='a'?'b':'a').S.thq||[]).map(x=>[x.pid||x.t,x.cw,x.id]),dlog:(T.D.log||[]).slice(-14),glog:(T.G&&T.G.log||[]).slice(-8),afk:T.G&&T.G.stat.afk}}catch(e){return e.message}}).catch(e=>e.message),await X.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)]));
   ok(got===1,'afk: on her return she answers it and it runs once («Nhận lời»)',got);
   await shot(A,'afk-host-'+(process.env.COOP_SWAP?'1180x820':'755x1000'));await shot(B,'afk-guest-'+(process.env.COOP_SWAP?'755x1000':'1180x820'));
