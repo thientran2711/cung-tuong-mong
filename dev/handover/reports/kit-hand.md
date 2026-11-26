@@ -201,3 +201,16 @@ Queue status:
 QUESTION sent to MAIN: «Mục tiêu chương» first tab (3 «Đi làm» cards) is a stage + hand, its other tabs are a panel — keep or exclude info panels with shortcut cards.
 Lessons: never run scans / probes beside a quickcheck (load flakes: dialog-fixed hand-off-screen, look-dedupe). Recorder: open «Tin báo» before a night (the day turn-over holds the notice).
 TOOLS (session scratch, may be gone): /home/user/wt/kk35-shots/rec.js (video: Tin báo → c2a → vnight → night2), ev.js (EV=pid PP=json one frame), goal2.js (goal panel tabs hit test), map2.js, tinbao*.js. Worktrees /home/user/wt/kk35 (review/kit-stage), /home/user/wt/kk35b (side build), /home/user/wt/kk35h (this report).
+### KK35 HANDOVER ADD-ON (26/11 ~02:05Z, after reading 16 queued notes) — coordinator is now MAIN 151 session_01V1ZZH32xLDu8LN72LfSaVu
+CORRECTION: look-dedupe is NOT only my CPU load — NHV-BUILD bisected it: kit-stage alone 1/4 FAIL, LIVE 0/10 («real tap on the mood seal» finds it gone, a modal with Q title «undefined» opens). Land gate = look-dedupe ×10 runs, 0 FAIL.
+MAIN 151 LOOK of 893613ee: NOT PASS. Successor queue (in order; each = whole family, law 11):
+ a) stage with no scene picture shows a flat dark-brown colour («Tin báo» Fold) → ALWAYS a painted bg = the place she is in (room / place art); scan every stage caller. (bb85ae17 already makes a person-less frame's .k3mpic the scene — check what is still flat.)
+ b) grey silhouettes: unknown-person hand card («Thì thầm nói xấu … ???») and the Fold opening frame's faded grey figure while loading → painted veiled/back-view portrait for an unknown person; a stage / dialogue / person-card figure appears only when its painting is decoded (throttled-network test). (MAIN 150 figure-wait family.)
+ c) look-dedupe flake (above).
+ d) «Mục tiêu chương» etc.: info panels with shortcut cards are NOT a stage (MAIN 151 accepted): exclude them in kitHandWants/kstgWants (one panel = one look).
+ e) merge review/art-event fb4a63ac (ART-EVENT2, LOOK PASS: KIT_EVBG_PID adStroll/cmTt/rcvHelp/cmLand/cmTd calm bgs) — bb85ae17 has only b498c77e.
+ f) NHV Fold PLAQUE-OFFSTAGE ×2 (6-plaque band beside a person at x≈.2; names now 4 lines): kitPick must fit every plaque count (2 rows / smaller tier); also ✓/✕ of a left-column plaque over the right-column name. Repro KSEED=23 SAVE=<mklife> node dev/test/nhv/area-test.js on review/nhv-areas. Send sha to NHV-BUILD session_01V1ZZH11unC8raKPPDux51Y + MAIN.
+ g) vlnvp dialogue frame shows NO cards/plaques after 3 s (MAIN 149).
+ h) perf tab 679 vs 512 ms on NHV merge (my QC 893613ee: 619 vs 545, passed) — check --runs 5 alone.
+ i) then TAINGHE-INFO r5 (dev/handover/reports/tainghe-info.md HANDOVER section).
+Then fix sha + NEW full videos (new file names) to MAIN 151. bb85ae17 quickcheck result: /home/user/wt/kk35-shots/qc-bb85.log (if the container survives).
