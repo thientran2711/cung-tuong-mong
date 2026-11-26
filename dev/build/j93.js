@@ -304,7 +304,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  else if(a.srv&&!b.srv&&!b.out&&S.srv&&S.srv.risen)kitEdict({from:-1,to:b.rank});
  else if(b.srv){}
  else if(b.rank>a.rank&&!b.out)kitEdict({from:a.rank,to:b.rank});
- else if(b.rank<a.rank&&!b.out)kitGloom({title:`Bị giáng xuống ${kmRankName(b.rank)}`,sub:`Từ ${kmRankName(a.rank)} xuống ${kmRankName(b.rank)}.`,from:a.rank,to:b.rank});
+ else if(b.rank<a.rank&&!b.out)kitGloom({title:`Bị giáng xuống ${kmRankName(b.rank)}`,sub:`${S.punLast&&S.punLast.why&&S.punLast.wk===punNow()?`Vì ${S.punLast.why}${S.punLast.who?` (${S.punLast.who} tố)`:""}. `:""}Từ ${kmRankName(a.rank)} xuống ${kmRankName(b.rank)}.`,from:a.rank,to:b.rank});/* punish-reason: the reason is on the gloom too (jpun S.punLast) */
  if(!a.preg&&b.preg)kitBloom({title:"Có tin vui",sub:"Thái y bắt mạch: ngươi đã mang long thai."});
  if(b.kids>a.kids){const k=S.kids[S.kids.length-1];kitBloom({title:k&&k.sex==="m"?"Hạ sinh hoàng tử":"Hạ sinh công chúa",sub:k&&k.name?`${k.name} chào đời, mẹ tròn con vuông.`:"Mẹ tròn con vuông."})}
  const added=b.inv.filter(x=>!a.inv.includes(x));if(added.length&&added.length<=4){const gifts=added.filter(x=>x.from&&x.from!=="emp"&&x.from!=="me");const bought=added.filter(x=>!x.from);

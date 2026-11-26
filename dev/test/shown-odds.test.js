@@ -51,7 +51,7 @@ const URL='file://'+path.resolve(process.argv[2]||path.join(__dirname,'../index.
     const sv0=JSON.stringify(ser());const row={k,c:c.n,v:v.name,dom:ACTDOM[k]||''};try{row.raw=A.o(S,v)}catch(e){}
     for(let s=1;s<=6;s++){quiet=true;deser(JSON.parse(sv0));quiet=false;Q.length=0;v=rivals.find(x=>x.id===v.id)||v;seed=s*101;
      for(const n in SHOW){try{row[n]=SHOW[n](v,k)}catch(e){row[n]='ERR '+String(e).slice(0,60)}}
-     const i=rivals.indexOf(v);try{row.w15=wordIn(rvGroups(v,i).map(g=>g[1].join('')).join(''),k)}catch(e){row.w15='ERR'}try{row.w6=wordIn(rvButtons(v,i),k)}catch(e){row.w6='ERR'}
+     const i=rivals.indexOf(v);try{/* ACT-MERGE J2: a door member's word is printed on its door option card (jdf doorCardMembers .x = the old button's raw kit line) */const DM=typeof DOOR_M==='object'&&DOOR_M['a:'+k]?doorCardMembers(v,i)['a:'+k]:null;row.w15=wordIn(DM?`<button data-a="${k}">${DM.n}<small>${DM.x}</small></button>`:rvGroups(v,i).map(g=>g[1].join('')).join(''),k)}catch(e){row.w15='ERR'}try{row.w6=wordIn(rvButtons(v,i),k)}catch(e){row.w6='ERR'}
      /* j78 evidence card word (the typed copies removed in this branch) */try{if(typeof evidenceActs==='function'){const e=evidenceActs(v).find(x=>x.k===k);row.w78=e&&e.odds?e.odds:null}}catch(e){row.w78='ERR'}
      const ix=k==='plant'?S.inv.findIndex(e=>!e.h):undefined;cap={o:null,all:[]};try{runAct(S,v,k,ix)}catch(e){row.err=String(e).slice(0,80)}if(cap.o==null&&cap.last!=null)cap.o=cap.last;if(cap.o!=null)break}
     row.all=cap.all.slice(0,6).join(' ');row.rolled=cap.o==null?null:oddsCl(Math.round(Math.min(cap.o,BAL.odds.hi)));row.wr=row.rolled==null?null:word(row.rolled);cap=null;
