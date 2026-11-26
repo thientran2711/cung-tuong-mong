@@ -58,7 +58,23 @@ if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(h
 if(typeof placeWhere==="function"){const f=placeWhere;placeWhere=function(){if(hw&&CW.ctx)return;return f.apply(this,arguments)}}
 function whereIn(o){if(!o||!o.W||!S)return;const W=X.mapMe(J(o.W),false,902);const keep=S.where&&S.where[901];S.where=W;if(keep)S.where[901]=keep;if(o.menW)S.menW=J(o.menW)}
 function whereOut(A){if(!A||!A.where)return null;const W=X.mapMe(J(A.where),true,901);delete W["902"];return {W,menW:A.menW?J(A.menW):null}}
-function herFree(){const st=TH.seatOf(other());if(!st)return true;const q=st.S&&st.S.thq;return !(Array.isArray(q)&&q.length)&&!(CW.frPz&&CW.frPz())}
+/* coop-afk-l13: a card the AFK bound carried this week (c.cw = the week, jcooptimer gAfk) stays on her seat but holds the room no more */
+const herOpen=c=>!!c&&c.cw!==wkR();
+function herFree(){const st=TH.seatOf(other());if(!st)return true;const q=st.S&&st.S.thq;return !(Array.isArray(q)&&q.some(herOpen))&&!(CW.frPz&&CW.frPz())}
+/* coop-afk-l13 (jcooptimer gAfk = the ONE AFK bound, BAL.coopTm.nightMs): the room's committed night waits on HER open cards — at the go
+   (CW.gNight) or for his `end` (CW.gHold). own = the pids with their own clock (never waited out here) */
+function herCards(){let st=null;try{st=TH.seatOf(other())}catch(e){}const q=st&&st.S&&st.S.thq;return Array.isArray(q)?q:[]}
+CW.gWait=function(own){if(!on()||!host()||CW.ctx||!CW.on||!S||S.dead)return false;const w=wkR();if(CW.ngoW!==w||CW.sent===w)return false;
+ if(TH.held&&TH.held(other()))return false;return herCards().some(c=>herOpen(c)&&!(own||[]).includes(c.pid))};
+/* the bound ran out: her open cards with NO ANSWER (jcooptimer's mapping): night = the pids answered «no answer» by no(m) in her context
+   (the card leaves her list, its patch reaches her phone), own = untouched, any other = carried (kept on her seat, unanswered) */
+CW.gAfk=function(own,night,no){if(!on()||!host()||CW.ctx)return 0;const w=wkR(),seat=other(),L=herCards();let car=0,nn=0;
+ for(const c of L){if(!herOpen(c)||(own||[]).includes(c.pid))continue;
+  if(c.pid&&(night||[]).includes(c.pid)){nn++;const id=c.id;D.later(seat,()=>{D.hold(S);const i=S.thq.findIndex(x=>x&&x.id===id);if(i<0)return;const x=S.thq.splice(i,1)[0];
+    let m=null;try{const d=mkP(x.pid,x.pp||{});if(d)m={t:x.t,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}catch(e){console.error(e)}if(m)try{no(m)}catch(e){console.error(e)}});continue}
+  c.cw=w;car++}
+ G.stat.afk=(G.stat.afk|0)+car+nn;lg(["afk",w,car,nn]);try{D.save()}catch(e){}try{TH.flush()}catch(e){}
+ setTimeout(()=>{try{CW.nCheck()}catch(e){}try{CW.soonEnd&&CW.soonEnd()}catch(e){}},0);return car+nn};
 /* the host's stand-in in her context (his entry in her world, withSeat standIn): her week end is a WORLD frame on her phone (part C lens: every
    write into the world, the friend entry included, is dropped at its end), so nothing it does to his entry may reach him through the bridge
    (withSeat's finally copies the stand-in's STAT / rel / oan / new items to the host). Put back before the context closes. */

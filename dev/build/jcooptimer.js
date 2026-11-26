@@ -165,9 +165,7 @@ function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w
  if(!on||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
  if(!m){nafScene();return}
  if(NAF_OWN.includes(m.pid))return;
- if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){const sum=NAF_SUM.includes(m.pid);const dc=sum?nafDecl(m):"";if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN(),dc};
-  const t=sum?`Quá giờ chờ: ngươi chưa đáp lời, kiệu đã quay về. Đêm nay ngươi không hầu giá${dc?`, lỡ hẹn như cáo bệnh: ${dc}`:""}.`:"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
-  try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}try{closeModal()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}return}
+ if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){nafNo(m);try{closeModal()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}return}
  /* carry: off her screen with no answer (no onClose: nothing is decided), back on top after the merged week */
  Q.shift();const e=typeof serM==="function"?serM(m,{lap:1}):null;
  if(e)e.cw=wkN();/* the week it was carried in: it comes back once the room is past that week (the merged week, or a rejoin after it) */
@@ -175,6 +173,26 @@ function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w
  else if(e){CQ().push(e);CW.nacN=(CW.nacN||0)+1}/* a notice: its text */
  if(NA.said!==wkN()){NA.said=wkN();try{kitLine("Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.",5000)}catch(e){}}
  try{showModal();render()}catch(e){console.error(e)}try{if(CW.snapNow)CW.snapNow()}catch(e){}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
+/* «no answer» to a summons / the night itself (the mapping above), on the card m in the CURRENT person's context: her phone (nightAfk) or her
+   context on the host (part G, gAfk below: kitLine is captured there and rides her view) — one rule, two callers */
+function nafNo(m){const sum=NAF_SUM.includes(m.pid);const dc=sum?nafDecl(m):"";if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN(),dc};
+ const t=sum?`Quá giờ chờ: ngươi chưa đáp lời, kiệu đã quay về. Đêm nay ngươi không hầu giá${dc?`, lỡ hẹn như cáo bệnh: ${dc}`:""}.`:"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
+ try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}return t}
+/* coop-afk-l13 (reports/coop-night-wk6.md «## OPEN» 1; brief b-coop-afk-l13.md). LEVEL 13 (part G): her week end runs on the HOST, and the room's
+   night / his `end` wait on HER open cards (jcoopthing CW.gNight / CW.gHold → herFree: her part-D cards S.thq). Her phone at that point is
+   already past her tối (g-go: CW.sent = this week), so her own nafWait above never arms, and a phone put down may not tick at all: the room
+   froze for the host («Chờ hảo hữu…» for ever). The SAME bound covers that wait, timed on the seat that WAITS (the host): from the first tick
+   the room's committed night (CW.ngoW = this week, his end not out) waits on her open cards (CW.gWait), once that wait reaches
+   BAL.coopTm.nightMs her cards are handled with the SAME mapping as above, with NO ANSWER (CW.gAfk, in her context on the host):
+     summons / the night itself (NAF_SUM / NAF_NT): nafNo, the card leaves her list;
+     the flip choice (NAF_OWN): untouched (its own clock);
+     ANY OTHER card (a real choice, a notice, the item reveal): CARRIED = it stays on her seat (her stored S.thq, on her screen, unanswered;
+       she answers it when she returns, rebuilt from its pid in her context then, as carryBack rebuilds a carried card), and the room no
+       longer waits on it this week (c.cw = the week). A card raised after the bound fired, in the same week, is handled at once.
+   No number (BAL.coopTm.nightMs), no word, no UI added. */
+let GA={w0:0,fired:-1};
+function gAfk(){const w=wkN(),on=!HOLD&&!!(CW.gWait&&CW.gWait(NAF_OWN));if(!on){GA.w0=0;return}if(!GA.w0)GA.w0=pnow();
+ if(GA.fired!==w&&pnow()-GA.w0<+BAL.coopTm.nightMs)return;GA.fired=w;try{CW.gAfk(NAF_OWN,NAF_SUM.concat(NAF_NT),nafNo)}catch(e){console.error(e)}}
 /* a kit scene on her screen that waits only for its ONE end button (KIT §81: the flip's «Chuẩn bị thị tẩm» .kmend, the item reveal «Nhận»
    .krevok, a [data-km-close]): no choice, so it is read for her like a one-road dialog (r3 cn2 FORCE4=h DUMP: the AFK host's own flip-end
    scene sat 76 s with Q empty, her night never ran). A scene with more than one button (a choice) is left alone. */
@@ -417,7 +435,7 @@ function word(){const n=$("next");if(!n||!CW.on||n.dataset.coopWait)return;if(n.
 let IV=0,lastPing=0;
 function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(2000,t-lastT):0;lastT=t;
  if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold);if(G&&G.up&&G.key===roomKey()&&due!==G.key)timeUp(G.key)}
- sendSt(false);dueTick();nightAfk();paint(false)}catch(e){console.error("coop clock",e)}}
+ sendSt(false);dueTick();nightAfk();gAfk();paint(false)}catch(e){console.error("coop clock",e)}}
 /* a new viewport: the bar lays itself out again first (its grid / shell change after the resize); the slot is found once that has settled */
 let RZ=0;addEventListener("resize",()=>{RZ=pnow()});
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
@@ -430,4 +448,6 @@ CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign
 CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,lapsed:(CW.nalN||0)+(CW.nacL||0),decl:CW.nafD||0,scene:CW.nasN||0,cq:(S&&Array.isArray(S.cq))?S.cq.length:0,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
 /* review/coop-night-live: her buổi is over by the room clock (time up, or a held buổi step) — jdayq gate (c) stops holding her cards then */
 CW.tm.od=()=>{try{return overdue()}catch(e){return false}};
+/* coop-afk-l13: the level-13 wait on her open cards (host) as the bound sees it */
+CW.tm.gaf=()=>Object.assign({},GA,{on:!!(CW.gWait&&CW.gWait(NAF_OWN))});
 }catch(e){console.error(e)}})();
