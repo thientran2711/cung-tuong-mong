@@ -48,9 +48,9 @@ const CARDSEL='.kfoc button.kfoc-b';
     if(process.env.DBG)console.log('  TAB',tb,JSON.stringify(cards),await p.evaluate(()=>{const w=document.getElementById('popw');return [w&&w.hidden,document.querySelectorAll('#popw .opt').length,document.querySelectorAll('.opt').length,popIdx,!!(window.DF&&DF.F)]}));
     for(const cd of cards){if(cd.dis||!cd.vis)continue;
      if(!await open())break;if(tb){await tabClick(tb);await sleep(300)}
-     if(process.env.HOLD){await p.evaluate(()=>{pushModal({t:'GAMECARD-HELD',h:'x',opts:[{n:'Được',fx:{}}]});showModal()});await sleep(200)}
+     if(process.env.HOLD){await sleep(900)/* past BAL.dayq.mineLook of the tab tap: the card is the GAME's, not hers */;await p.evaluate(()=>{pushModal({t:'GAMECARD-HELD',h:'x',opts:[{n:'Được',fx:{}}]});showModal()});await sleep(200);if(process.env.DBG)console.log('HOLDST',JSON.stringify(await p.evaluate(()=>({m:!document.getElementById('modal').hidden,q:Q.length,kf:!!document.querySelector('.kfoc'),act:!!dqActEl(),fo:DQ.fo,tk:DF.tk,play:!!DF.play,F:!!DF.F,user:DQ.user,top:(()=>{const b=document.querySelector('.kfoc button.kfoc-b');if(!b)return null;const r=b.getBoundingClientRect();const e=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return e&&(e.id+'.'+String(e.className).slice(0,40))})()}))))}
      const el=(await p.$$(CARDSEL))[cd.k];if(!el)continue;
-     try{await el.click({timeout:2500})}catch(e){rows.push({pl,who:who.n,tab:tb,act:cd.n,res:'NOTAP'});continue}
+     try{await el.click({timeout:2500})}catch(e){if(process.env.DBG)console.log('NOTAP',String(e.message).split('\n').slice(0,6).join(' | ').slice(0,600));rows.push({pl,who:who.n,tab:tb,act:cd.n,res:'NOTAP'});continue}
      if(process.env.WHY)await p.evaluate(()=>{if(window.__whyOn)return;window.__whyOn=1;const s0=showModal;showModal=window.showModal=function(){try{const ev=window.event;const a=typeof dqActEl==='function'?dqActEl():null;const L=[];for(let x=ev&&ev.target;x&&L.length<6;x=x.parentElement)L.push(x.tagName+(x.id?'#'+x.id:'')+'.'+String(x.className).slice(0,18));
        window.__why={ev:ev&&ev.type,chain:L.join('<'),act:a&&(a.id||String(a.className).slice(0,24)),stack:new Error().stack.split('\n').slice(2,7).map(x=>x.trim().slice(3,50)).join(' / ')}}catch(e){}return s0.apply(this,arguments)}});
      await p.evaluate(()=>{window.__why=null});
