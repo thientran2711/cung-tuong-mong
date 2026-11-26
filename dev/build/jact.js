@@ -160,7 +160,7 @@ function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fire
  else if(h.id==="quarrel"){const R=liveRivals(true).filter(v=>!v.confined);const here=adPresent(k);const a=here[0]||pick(R);const b=here.find(v=>v!==a)||pick(R.filter(v=>v!==a));
   if(a&&b){const d=mkP("rvquarrel",{a:a.id,b:b.id});if(d){pushDil(d,AD_HAP_T.quarrel);fired=true}}}
  else if(h.id==="gossip"){const here=adPresent(k);const v=here.length?pick(here):null;if(v){let f="";try{f=typeof intelLearn==="function"?intelLearn(v,1,{by:"ngươi",how:"Nghe lỏm"}):""}catch(e){}
-  if(!f){try{f=overhear(k)}catch(e){}}pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe ${v.name} to nhỏ với người bên cạnh.</p><p>${f||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});fired=true}}
+  if(!f){try{f=overhear(k)}catch(e){}}pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe nàng ta to nhỏ với người bên cạnh.</p><p>${f||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});fired=true}}
  else if(h.id==="favour"&&h.x){try{if(q72X(h.x)&&q72CanOffer()){q72().a.push(h.x);fired=q72Offer(h.x,"meet");if(!fired){const q=q72();q.a.splice(q.a.indexOf(h.x),1)}}}catch(e){console.error(e)}}
  return fired}
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */

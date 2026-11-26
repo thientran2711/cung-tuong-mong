@@ -19,7 +19,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
   await new Promise(r=>setTimeout(r,1500));
   const bk=bkey();const card=Q.some(m=>m.t==="Bị bắt");const placeAfter=S.place;const danh1=S.danh;const seen=S.stayRoll;
   Q.length=0;document.getElementById('modal').hidden=true;render();await new Promise(r=>setTimeout(r,200));const again=S.stayRoll;
-  return{force,chip,chipOdds:chip.includes("Ở lại = như lẻn vào: "+want),buoi:S.buoi,placeAfter,dDanh:danh1-danh0,sneakDanh:BAL.sneak.danh,card,seen,rolledOnce:again===seen&&!!seen,err}},force);
+  return{force,chip,chipOdds:chip.includes("lẻn vào, may rủi: "+want)||chip.includes("lẻn vào; may rủi: "+want),buoi:S.buoi,placeAfter,dDanh:danh1-danh0,sneakDanh:BAL.sneak.danh,card,seen,rolledOnce:again===seen&&!!seen,err}},force);
  const caught=await run(0.999),free=await run(0);
  /* own palace at the same hour never rolls */
  const own=await g.evaluate(async()=>{Q.length=0;S.stayRoll=null;S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.buoi=B4L-1;used=BAL.time.khac-1;render();try{nextBuoi()}catch(e){}await new Promise(r=>setTimeout(r,1200));const x=S.stayRoll;Q.length=0;document.getElementById('modal').hidden=true;return{seen:x}});
