@@ -346,3 +346,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:12Z owner 21:10Z witness vs evidence two counts → PUNISH-TIER-2; whole-game split/merge audit → ORDER in FOREMAN_D_STATUS (report first).
 - ~21:14Z RV-163B BIG PASS dress-fix → review/dress-fix-r163b e5c7be59 (needs KK45 OK on kitEquipSlots/kitDressPicker) → LC25 queued after lc25-sp. jty strip plot gate → OAN-PACE-2.
 - ~21:13Z owner 21:20Z: Emperor end = rare natural + nhường ngôi / phế / lật đổ events → PACE-SPEED swaps curve to rare-wide; opened REIGN-END session_01Rc5AsKDTgMubUASiLMBaba (opus) on review/reign-end from pace-speed (reuse j99succ / SUCCESSION_PLAN / reign-road).
+- ~21:15Z PACE-SPEED bc3cb096: Emperor natural death rare-wide {70,18,30,95}; final robot ~22:25Z then RV READY. REIGN-END told to base on bc3cb096.
