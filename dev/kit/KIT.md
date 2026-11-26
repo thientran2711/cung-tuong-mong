@@ -3029,6 +3029,10 @@ Owner: "Bất kỳ một cái thông báo nào của cái game đều phải vô
 - `tone:"red"` — the red state: chip filled `var(--bad)`, text + «!» disc inverted (`.kntred`). Same place, same size.
 - Use with `sticky:1` so the «!» box keeps its light. The place-close fixer (PLACE-CLOSE) calls it: last khắc → `{id:"close-<place>", line:"Nơi này sắp đóng cửa, mời tiểu chủ rời đi", sticky:1, hold:1, pulse:1, go: walk home}`; grace khắc → same id with `line:"Đã quá giờ, mời tiểu chủ rời đi", tone:"red"`; she leaves → `kitNoticeDrop("close-<place>")`.
 - Kit page sample §42.2a (hold / red / drop buttons).
+### 6.2k «CẨN THẬN KHI LỰA CHỌN» WARNING LINE (owner 26/11 ~18:25Z, KK44; placed here beside the notice parts, it belongs to the §6.2 option family) — `kitWarnLine` / `kitWarnPut` / `KIT_WARN_LINE` (jopic)
+- A choice whose options do NOT roll a chance but change her ending / life carries `warn:1` (Q card `{…, warn:1}` or `kitPanel({…, warn:1})`); the kit draws ONE small line «Cẩn thận khi lựa chọn» (kit red `var(--bad)`, the «!» disc, centred) right above the option list `.opts`, on every dialog path (outer showModal hook, re-checked 120 ms later). Those options carry NO odds word (drop the odds chip at the option builder, VANPHONG §2.7); their Tốn / Được / Mất rows stay (OD 26/11 ~17:55Z).
+- Kit page sample §6.2k. Fixer: FIRSTCARD («Lễ ra mắt» family) + every option builder with ending-changing options (scan per OD 26/11 ~18:25Z (3)).
+
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
 - The week rolls ONE weather (`S.wx.b`, its flag f drives every rule); the WORDS shown follow the buổi (`S.wx.n = wxAt(S.wx.b, buổi)[0]`, icon
   `[1]`). Night never: nắng, ve kêu, "sớm". Day never: trăng, sao, đom đóm, đêm, dế. "sớm" only in the morning. Every new weather row gives all
