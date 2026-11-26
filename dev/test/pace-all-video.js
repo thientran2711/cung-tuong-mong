@@ -15,7 +15,7 @@ const OUT=process.argv[2]||'pace-all.mp4';const DEV=process.env.DEV||'fold';
  const cap=async t=>{await p.evaluate(t=>{let c=document.getElementById('pacap');if(!c){c=document.createElement('div');c.id='pacap';c.style.cssText='position:fixed;left:6px;bottom:6px;z-index:2147483647;max-width:46%;background:rgba(20,10,0,.78);color:#ffe9b0;font:600 13px/1.3 sans-serif;padding:5px 8px;border-radius:6px;pointer-events:none';document.body.appendChild(c)}c.textContent='TEST · '+t},t).catch(()=>{})};
  const clr=()=>g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});
  await g.evaluate(()=>{document.getElementById('title').hidden=true;window.__nlInner=1;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv())&&S.ps)break}window.__nlInner=0;Q.length=0;document.getElementById('modal').hidden=true;
-  const s=document.createElement('style');s.textContent='#klife,#kroul,#kload,.kmov,.kmfls,#kpodov,#dawn,.krbox{display:none!important}';document.head.appendChild(s);
+  const s=document.createElement('style');s.textContent='#klife,#kroul,#kload,.kmov,.kmfls,#kpodov,#dawn,.krbox,#kdaytc,#kmrew{display:none!important}';document.head.appendChild(s);
   /* a course at bậc 0 with no progress, Sức and khắc to study (the game's own state otherwise) */const a=VIR.find(x=>x.k!=='cong'&&((S.vir||{})[x.k]||0)===0)||VIR.find(x=>x.k!=='cong');S.vir[a.k]=0;S.virp[a.k]=0;S.suc=Math.max(S.suc,90);S.bac=Math.max(S.bac||0,200);window.__pk=a.k;tab="art";render()});
  await sleep(800);await clr();await g.evaluate(()=>{tab="art";render()});await sleep(500);const tStart=(Date.now()-T0)/1000;
  const card=()=>g.evaluate(()=>{const b=document.querySelector(`[data-vlearn="${window.__pk}"]`);const box=b?b.closest('.kskill')||b.closest('.v85s')||b.parentElement.parentElement:null;if(box)box.scrollIntoView({block:'start'});return box?box.innerText.replace(/\s+/g,' ').slice(0,160):''});
@@ -37,9 +37,9 @@ const OUT=process.argv[2]||'pace-all.mp4';const DEV=process.env.DEV||'fold';
   if(r.q){qk=r.q;await cap(`Trò học nhỏ → bấm «${qk}» (để trời định)`)}else if(r.s){steps.push(r.s);await cap(`Bấm «Tự học» → «${r.s}»`)}}
  for(let i=0;i<4;i++){const n=await g.evaluate(()=>{const m=document.getElementById('modal');if(m.hidden)return 0;const b=m.querySelector('.opt, button.btn');if(!b)return 0;b.click();return 1});if(!n)break;await sleep(700)}await clr();await g.evaluate(()=>{tab="art";render()});await sleep(600);
  };
- while(tries<4){tries++;await lesson();if(await g.evaluate(()=>(S.virp[window.__pk]||0)>0||(S.vir[window.__pk]||0)>0))break;
+ while(tries<8){tries++;await g.evaluate(()=>{used=0;S.suc=Math.max(S.suc,90)});/* test setup between tries: a rested buổi */await lesson();if(await g.evaluate(()=>(S.virp[window.__pk]||0)>0||(S.vir[window.__pk]||0)>0))break;
   await cap(`Lần này «để trời định» hỏng (không tiến bộ) — học lại buổi nữa`);await sleep(2500)}
- const c1=await card();await cap(`Sau một buổi học: ${(c1.match(/Tiến bộ \d+\/\d+/)||['—'])[0]} (bậc đầu cần 10 phần; một buổi học thường = 2 phần)`);await sleep(5000);
+ const c1=await card();await cap(`Sau một buổi học: ${(c1.match(/Tiến bộ \d+\/\d+/)||['—'])[0]} (bậc đầu cần 5 phần; một buổi học thường = 2 phần)`);await sleep(5000);
  /* (2) oán cool-down, shown where she reads it: the real «Nguy hiểm chung» chip of the top bar → «Người nặng lòng nhất» (oán n).
     The consort is one she already knows (tsDangerOf(S,true).top: the panel lists only people she has read); her grudge is set to Oán hận 85, fed by nothing. */
  const nh=async()=>{await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;tab='art';render();const B=[...document.querySelectorAll('button[data-hx="tsnh"]')];const b=B.find(b=>b.getClientRects().length)||B[0];if(b)b.click()});await sleep(1200);
@@ -60,14 +60,21 @@ const OUT=process.argv[2]||'pace-all.mp4';const DEV=process.env.DEV||'fold';
   const rows=topicOpts(v).filter(a=>/Tạ lỗi|Nhún nhường|Hậu lễ|đứng giữa/.test(a.n)).map(a=>a.n+(a.lock?' [khóa: '+(a.t||'')+']':' · '+(a.x||'')));return {n:v.name,ix,fresh,rows,bac:S.bac,oan:v.oan}});
  await sleep(1500);await g.evaluate(()=>{const e=[...document.querySelectorAll('.pcpop *')].filter(e=>e.children.length<3&&/Tạ lỗi/.test(e.textContent||''))[0];if(e)e.scrollIntoView({block:'start'})});
  await sleep(800);await cap(`${m3.fresh?'(đời khác, có phi tần trong phòng) ':''}Oán sâu (${m3.n}, oán ${m3.oan}): «Tạ lỗi», «Nhún nhường» bị khóa, không mất gì — thêm hai đường tốn kém: «Hậu lễ tạ tội», «Nhờ người đứng giữa»`);await sleep(6500);
- await g.evaluate(()=>{const t=[...document.querySelectorAll('button[data-pct="Lễ nghi"]')].find(b=>b.getClientRects().length);if(t)t.click()});await sleep(900);
- await g.evaluate(()=>{const e=[...document.querySelectorAll('button.opt')].find(b=>/Hậu lễ tạ tội/.test(b.textContent)&&b.getClientRects().length);if(e)e.scrollIntoView({block:'center'})});await cap('Thẻ «Lễ nghi» → «Hậu lễ tạ tội»: tốn Bạc, Danh; hỏng thì lễ bị trả về');await sleep(3500);
- const r3=await g.evaluate(()=>{const v=rivals.find(x=>x.id===window.__ov3);{const ix=curPeople().findIndex(p=>p&&p.ref===v);if(popIdx==null&&ix>=0){popIdx=ix;renderStage()}}if(popIdx==null)return{clicked:false,none:1,msg:'',paid:0,oan:v.oan};const i=talkOpts(curPeople()[popIdx]).findIndex(a=>a.n==='Hậu lễ tạ tội');
-  const b=[...document.querySelectorAll('button.opt')].find(b=>/Hậu lễ tạ tội/.test(b.textContent)&&b.getClientRects().length);const b0=S.bac,o0=v.oan;if(b)b.click();else if(i>=0)talk(i);
-  return {clicked:!!b,i,o0,oan:v.oan,w:oanW(v.oan),paid:b0-S.bac,msg:(typeof popMsg==='string'?popMsg:'').replace(/<[^>]+>/g,'')}});
- await sleep(900);await cap(`Bấm «Hậu lễ tạ tội»: ${r3.msg.slice(0,90)||'—'}`);await sleep(5500);
+ /* the real taps: the «Lễ nghi» tab of her talk card, then the «Hậu lễ tạ tội» card (overlays left by start() — #kdaytc / #kmrew — are hidden by the test style) */
+ await g.evaluate(()=>{const t=[...document.querySelectorAll('.kpdlg button.pct, .pcpop button.pct, .kpdlg button[data-pct]')].find(b=>/^Lễ nghi/.test(b.textContent.trim())&&b.getClientRects().length);if(t)t.click()});await sleep(1200);
+ await g.evaluate(()=>{const e=[...document.querySelectorAll('.kpdlg button, .pcpop button')].find(b=>/Hậu lễ tạ tội/.test(b.textContent)&&b.getClientRects().length);if(e)e.scrollIntoView({block:'center'})});await cap('Thẻ «Lễ nghi» → «Hậu lễ tạ tội»: tốn Bạc, Danh; hỏng thì lễ bị trả về');await sleep(3500);
+ const dbg3=0;
+ const b0=await g.evaluate(()=>{const v=rivals.find(x=>x.id===window.__ov3);window.__b0=S.bac;window.__o0=v.oan;const b=[...document.querySelectorAll('.kpdlg button, .pcpop button')].find(b=>/Hậu lễ tạ tội/.test(b.textContent)&&b.getClientRects().length);if(b){b.click();return 1}return 0});
+ /* the talk game («Chạm dấu») → «Bỏ qua» → the result card → ✕ */
+ let r3res='';for(let i=0;i<12;i++){await sleep(1100);
+  if(await g.evaluate(`(()=>{const e=document.getElementById('kg82box-res');return !!(e&&e.getClientRects().length)})()`)){r3res=await g.evaluate(()=>(document.getElementById('kg82box-res').innerText||'').replace(/\s+/g,' ').slice(0,160));await cap(`Kết quả: ${r3res.slice(0,90)}`);await sleep(3500);
+   await g.evaluate(()=>{const x=[...document.querySelectorAll('#ov .kit-x')].find(e=>e.getClientRects().length);if(x)x.click()});await sleep(1200);break}
+  const q=await g.evaluate(()=>{const k=document.getElementById('kg82skip');if(k&&k.getClientRects().length){k.click();return 1}return 0});if(q)await cap('Trò «Chạm dấu» → bấm «Bỏ qua»')}
+ const r3=await g.evaluate(b0=>{const v=rivals.find(x=>x.id===window.__ov3);let i=-1;if(!b0&&popIdx!=null){i=talkOpts(curPeople()[popIdx]).findIndex(a=>a.n==='Hậu lễ tạ tội');if(i>=0)talk(i)}
+  return {clicked:!!b0,i,o0:window.__o0,oan:v.oan,w:oanW(v.oan),paid:window.__b0-S.bac,msg:(typeof popMsg==='string'?popMsg:'').replace(/<[^>]+>/g,'')}},b0);r3.res=r3res;
+ await sleep(900);await cap(`«Hậu lễ tạ tội»: ${(r3.msg||r3.res).slice(0,90)||'—'} (oán ${r3.o0} → ${r3.oan})`);await sleep(5500);
  const pan=await g.evaluate(()=>({vir:S.vir[window.__pk],virp:S.virp[window.__pk],log:(S.logs||S.log||[]).slice?((S.logs||S.log||[]).slice(-3)):null,q:Q.map(m=>m.t),tds:typeof TDS!=='undefined'?JSON.stringify(TDS.q||null).slice(0,80):''}));
  await clr();
  const vpath=await p.video().path();await ctx.close();await b.close();srv.close();
  const ss=Math.max(0,tStart-0.5).toFixed(2);cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',ss,'-i',vpath,'-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart','-crf','28',OUT]);
- console.log(JSON.stringify({dev:DEV,out:OUT,m3,r3,tries,c0,steps,qk,res,c1,o,o2,pan,errs:errs.slice(0,3)}))})().catch(e=>{console.error(e);process.exit(1)});
+ console.log(JSON.stringify({dev:DEV,out:OUT,dbg3,m3,r3,tries,c0,steps,qk,res,c1,o,o2,pan,errs:errs.slice(0,3)}))})().catch(e=>{console.error(e);process.exit(1)});
