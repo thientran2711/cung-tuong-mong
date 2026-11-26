@@ -39,7 +39,7 @@ function doorFold(p,A){if(!p||!Array.isArray(A)||!A.length)return A;
  const out=[],made={};
  A.forEach((a,j)=>{const r=R[j];if(!r||cnt[r.k]<2){out.push(a);return}
   if(!made[r.k]){const M=A.filter((x,i)=>R[i]===r);const free=M.filter(x=>!x.lock);
-   const d={n:r.n,door:r.k,o:100,fix:1,act:M.every(x=>x&&x.act)?1:0,x:`chọn một trong ${M.length} việc: ${M.map(x=>doorTxt(x.n)).join(" · ")}`,
+   const d={n:r.n,door:r.k,o:100,fix:1,act:M.every(x=>x&&x.act)?1:0,x:`chọn một trong ${M.length} việc: ${M.map(x=>doorTxt(x.n)).join(", ")}`,
     open:()=>doorOpen(p,r.k)};
    if(!free.length){d.lock=true;d.t=M[0].t||"chưa làm được"}
    made[r.k]=d;out.push(d)}});
@@ -51,7 +51,8 @@ window.doorFold=doorFold;
 ["directActs","adMaidCards"].forEach(f=>{if(typeof window[f]!=="function")return;const f0=window[f];window[f]=function(){DOOR.raw++;try{return f0.apply(this,arguments)}finally{DOOR.raw--}}});
 /* (2) the door tap: opens the choice card, costs nothing (each member pays its own khắc / bạc when it runs) */
 function doorWho(p){try{const v=p&&p.ref;if((p.kind==="rival"||p.kind==="hh")&&v&&v.id!=null)return["r",v.id];if(p.kind==="emp")return["e"];if(p.kind==="th")return["t"];if(p.kind==="maid")return["m"];if(p.kind==="ty")return["d"]}catch(e){}return null}
-function doorOpen(p,k){const i=curPeople().indexOf(p);const pi=i>=0?i:popIdx;if(pi==null)return;const r=DOOR.byK(k);pushDil(mkP("door",{i:pi,k}),r?r.n:"Chọn việc")}
+function doorOpen(p,k){const i=curPeople().indexOf(p);const pi=i>=0?i:popIdx;if(pi==null)return;const r=DOOR.byK(k);pushDil(mkP("door",{i:pi,k}),r?r.n:"Chọn việc");/* the card shows at once (render shows a queued card only on its own redraw path; the focus scene takes it in-scene, jdfv) *//* a door is HER tap inside the person view (jdayq (c): «a card she opens from inside the activity still shows»; the hidden pop-up button jdf clicks is not inside .kfoc, so the tap is marked as hers, as jdayq's own kitModal wrapper does) */
+ try{const M=document.getElementById("modal");if(Q.length===1&&M&&M.hidden){const dq=typeof DQ==="object"&&DQ?DQ:null;if(dq)dq.user=(dq.user||0)+1;try{showModal()}finally{if(dq)dq.user--}}}catch(e){}}
 window.doorOpen=doorOpen;
 (function(){const t0=talk;talk=function(oi){try{if(typeof oi==="number"&&oi>=0&&popIdx!=null&&S&&S.visit&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
   if(a&&a.door){if(a.lock||(S.visit.tk||{})[popIdx]||S.visit.talked===true)return;a.open();render();return}}}catch(e){console.error("jdoor talk",e)}return t0.apply(this,arguments)}})();
@@ -63,7 +64,8 @@ PEND.door=pp=>{const p=curPeople()[pp.i];const r=DOOR.byK(pp.k);if(!p||!r||!S.vi
   const row={n:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp.i,j)};if(why)row.off={why};o.push(row)});
  if(!o.length)return null;o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
- return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who:doorWho(p)}};
+ const w=doorWho(p);let who=null;try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
+ return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who}};
 /* (3) a picked member: the same road as its old button (talk with the raw key), through the focus game when the focus view is up */
 function doorPick(i,j){if(popIdx==null)popIdx=i;const oi=-1-j;
  try{if(typeof DF==="object"&&DF&&DF.F&&typeof dfViewOn==="function"&&dfViewOn()&&doorFocus(i,j))return}catch(e){console.error("jdoor focus",e)}
