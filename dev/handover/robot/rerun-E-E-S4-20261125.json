@@ -80518,6 +80518,1548 @@
  },
  {
   "job": {
+   "id": "E-S4-R5-random-3-ipad",
+   "origin": "pf",
+   "road": "pt_hai",
+   "bot": "rand",
+   "seed": 2795021456,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [],
+   "slice": null,
+   "build": {
+    "s": "1dcb373e+",
+    "b": "5ab5b80e406e",
+    "t": "2026-11-26T10:49Z"
+   },
+   "areaTaps": 63,
+   "dlgScroll": 4,
+   "scrolls": 7,
+   "taps": 16
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 19,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Dung mạo 21»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 23»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 21»",
+    ".dlg «Thân phận kiếp này» «Dễ»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 982,559",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "saves": [],
+  "buoi": 1,
+  "steps": 100,
+  "status": [],
+  "_loopAt": 1795701636070,
+  "_snapAt": 1795701624969,
+  "trace": [
+   [
+    11,
+    "AREA 962,191"
+   ],
+   [
+    11,
+    "AREA 887,614"
+   ],
+   [
+    11,
+    "AREA 420,598"
+   ],
+   [
+    11,
+    "AREA 241,378"
+   ],
+   [
+    12,
+    "AREA 477,465"
+   ],
+   [
+    12,
+    "AREA 969,648"
+   ],
+   [
+    12,
+    "AREA 477,568"
+   ],
+   [
+    13,
+    "AREA 993,602"
+   ],
+   [
+    13,
+    "AREA 415,388"
+   ],
+   [
+    13,
+    "AREA 502,616"
+   ],
+   [
+    14,
+    "AREA 674,452"
+   ],
+   [
+    14,
+    "AREA 939,608"
+   ],
+   [
+    14,
+    "AREA 974,346"
+   ],
+   [
+    14,
+    "AREA 180,629"
+   ],
+   [
+    15,
+    "AREA 492,228"
+   ],
+   [
+    15,
+    "AREA 959,198"
+   ],
+   [
+    15,
+    "AREA 669,309"
+   ],
+   [
+    15,
+    "AREA 784,575"
+   ],
+   [
+    16,
+    "AREA 856,228"
+   ],
+   [
+    16,
+    "AREA 304,476"
+   ],
+   [
+    16,
+    "AREA 192,344"
+   ],
+   [
+    17,
+    "AREA 614,320"
+   ],
+   [
+    17,
+    "AREA 423,586"
+   ],
+   [
+    17,
+    "AREA 566,276"
+   ],
+   [
+    18,
+    "AREA 902,507"
+   ],
+   [
+    18,
+    "AREA 313,390"
+   ],
+   [
+    18,
+    "AREA 188,612"
+   ],
+   [
+    18,
+    "AREA 470,547"
+   ],
+   [
+    19,
+    "AREA 947,348"
+   ],
+   [
+    19,
+    "AREA 639,536"
+   ],
+   [
+    19,
+    "AREA 835,614"
+   ],
+   [
+    20,
+    "AREA 192,550"
+   ],
+   [
+    20,
+    "AREA 648,318"
+   ],
+   [
+    21,
+    "AREA 944,450"
+   ],
+   [
+    21,
+    "AREA 468,484"
+   ],
+   [
+    21,
+    "AREA 777,408"
+   ],
+   [
+    21,
+    "AREA 421,269"
+   ],
+   [
+    22,
+    "AREA 713,165"
+   ],
+   [
+    22,
+    "AREA 337,186"
+   ],
+   [
+    22,
+    "AREA 855,277"
+   ],
+   [
+    23,
+    "AREA 753,510"
+   ],
+   [
+    23,
+    "AREA 308,222"
+   ],
+   [
+    23,
+    "AREA 268,500"
+   ],
+   [
+    23,
+    "AREA 405,291"
+   ],
+   [
+    24,
+    "AREA 808,425"
+   ],
+   [
+    24,
+    "AREA 340,354"
+   ],
+   [
+    24,
+    "AREA 915,166"
+   ],
+   [
+    25,
+    "AREA 183,447"
+   ],
+   [
+    25,
+    "AREA 865,609"
+   ],
+   [
+    26,
+    "AREA 533,165"
+   ],
+   [
+    26,
+    "AREA 694,551"
+   ],
+   [
+    26,
+    "AREA 927,217"
+   ],
+   [
+    27,
+    "AREA 760,361"
+   ],
+   [
+    27,
+    "AREA 612,324"
+   ],
+   [
+    28,
+    "AREA 466,197"
+   ],
+   [
+    28,
+    "AREA 955,485"
+   ],
+   [
+    28,
+    "AREA 698,385"
+   ],
+   [
+    28,
+    "AREA 471,377"
+   ],
+   [
+    29,
+    "AREA 903,577"
+   ],
+   [
+    29,
+    "AREA 209,570"
+   ],
+   [
+    29,
+    "AREA 296,354"
+   ],
+   [
+    30,
+    "AREA 580,385"
+   ],
+   [
+    30,
+    "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+   ],
+   [
+    31,
+    ".dlg «Chọn sổ» «Bắt đầu kiếp mới»"
+   ],
+   [
+    41,
+    "GONE Vào cung ngay"
+   ],
+   [
+    42,
+    "#kroul «Tiếp»"
+   ],
+   [
+    42,
+    "#kroul «Bỏ qua»"
+   ],
+   [
+    47,
+    ".dlg «Thân phận kiếp này» «Dung mạo 23»"
+   ],
+   [
+    47,
+    ".dlg «Thân phận kiếp này» «Dung mạo 21»"
+   ],
+   [
+    47,
+    ".dlg «Thân phận kiếp này» «Dung mạo 23»"
+   ],
+   [
+    48,
+    ".dlg «Thân phận kiếp này» «Dung mạo 21»"
+   ],
+   [
+    49,
+    ".dlg «Thân phận kiếp này» «Dễ»"
+   ],
+   [
+    51,
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+   ],
+   [
+    58,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»"
+   ],
+   [
+    59,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»"
+   ],
+   [
+    60,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»"
+   ],
+   [
+    62,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»"
+   ],
+   [
+    71,
+    "AREA 982,559"
+   ],
+   [
+    72,
+    ".kmov «Vào điện»"
+   ],
+   [
+    79,
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  ],
+  "_started": true,
+  "_ckAt": 1795701589521,
+  "_ckB": 1,
+  "rss": [
+   {
+    "buoi": 1,
+    "y": 1,
+    "totalMB": 1321,
+    "rendererMB": 587,
+    "heapMB": 117,
+    "dom": 2739,
+    "q": 3,
+    "lsK": 4
+   }
+  ],
+  "promo": {
+   "raw": 0,
+   "real": 0,
+   "picked": 0,
+   "by": {}
+  },
+  "_momSeen": [
+   "#klife|",
+   "#kroul|",
+   ".dlg|Thân phận kiếp này",
+   "#modal|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   "#modal|Lễ ra mắt",
+   ".kmov|",
+   ".dlg|Lễ ra mắt",
+   "#modal|Duyên cung lỡ hẹn"
+  ],
+  "_momRank": 2,
+  "_unsFail": {
+   "#klife|": {},
+   ".dlg|Thân phận kiếp này": {},
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thân · #/#": {},
+   ".dlg|Lễ ra mắt": {}
+  },
+  "_scrW": {
+   ".dlg|Thân phận kiếp này|871,392": {
+    "left": 246,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 3
+   }
+  },
+  "t": {
+   "total": 86669
+  },
+  "_file": "E-S4-R5-random-3-ipad.json"
+ },
+ {
+  "job": {
+   "id": "E-S4-R5-random-4-ipad",
+   "origin": "pf",
+   "road": "pt_hai",
+   "bot": "rand",
+   "seed": 657460705,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [],
+   "slice": null,
+   "build": {
+    "s": "1dcb373e+",
+    "b": "5ab5b80e406e",
+    "t": "2026-11-26T10:49Z"
+   },
+   "areaTaps": 62,
+   "dlgScroll": 9,
+   "scrolls": 12,
+   "taps": 60
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 19,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Khó»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 4»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 8»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 9»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 1»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "saves": [],
+  "buoi": 1,
+  "steps": 147,
+  "status": [],
+  "_loopAt": 1795701769632,
+  "_snapAt": 1795701712067,
+  "trace": [
+   [
+    9,
+    "AREA 974,568"
+   ],
+   [
+    9,
+    "AREA 479,396"
+   ],
+   [
+    9,
+    "AREA 374,243"
+   ],
+   [
+    10,
+    "AREA 315,693"
+   ],
+   [
+    10,
+    "AREA 675,278"
+   ],
+   [
+    10,
+    "AREA 355,262"
+   ],
+   [
+    10,
+    "AREA 849,568"
+   ],
+   [
+    11,
+    "AREA 418,492"
+   ],
+   [
+    11,
+    "AREA 182,583"
+   ],
+   [
+    11,
+    "AREA 200,523"
+   ],
+   [
+    12,
+    "AREA 458,389"
+   ],
+   [
+    12,
+    "AREA 672,559"
+   ],
+   [
+    12,
+    "AREA 320,623"
+   ],
+   [
+    13,
+    "AREA 796,350"
+   ],
+   [
+    13,
+    "AREA 521,541"
+   ],
+   [
+    13,
+    "AREA 528,246"
+   ],
+   [
+    14,
+    "AREA 505,495"
+   ],
+   [
+    14,
+    "AREA 649,407"
+   ],
+   [
+    14,
+    "AREA 876,600"
+   ],
+   [
+    14,
+    "AREA 974,546"
+   ],
+   [
+    15,
+    "AREA 880,384"
+   ],
+   [
+    15,
+    "AREA 716,237"
+   ],
+   [
+    15,
+    "AREA 465,642"
+   ],
+   [
+    16,
+    "AREA 398,566"
+   ],
+   [
+    16,
+    "AREA 586,467"
+   ],
+   [
+    16,
+    "AREA 760,445"
+   ],
+   [
+    17,
+    "AREA 679,504"
+   ],
+   [
+    17,
+    "AREA 485,244"
+   ],
+   [
+    17,
+    "AREA 844,420"
+   ],
+   [
+    18,
+    "AREA 195,478"
+   ],
+   [
+    18,
+    "AREA 289,470"
+   ],
+   [
+    18,
+    "AREA 702,582"
+   ],
+   [
+    18,
+    "AREA 914,373"
+   ],
+   [
+    19,
+    "AREA 386,661"
+   ],
+   [
+    19,
+    "AREA 821,371"
+   ],
+   [
+    19,
+    "AREA 459,608"
+   ],
+   [
+    20,
+    "AREA 320,406"
+   ],
+   [
+    20,
+    "AREA 713,382"
+   ],
+   [
+    20,
+    "AREA 712,235"
+   ],
+   [
+    21,
+    "AREA 742,406"
+   ],
+   [
+    21,
+    "AREA 485,572"
+   ],
+   [
+    21,
+    "AREA 707,665"
+   ],
+   [
+    21,
+    "AREA 267,569"
+   ],
+   [
+    22,
+    "AREA 443,346"
+   ],
+   [
+    22,
+    "AREA 768,659"
+   ],
+   [
+    23,
+    "AREA 499,639"
+   ],
+   [
+    23,
+    "AREA 729,175"
+   ],
+   [
+    23,
+    "AREA 626,617"
+   ],
+   [
+    23,
+    "AREA 442,638"
+   ],
+   [
+    24,
+    "AREA 759,271"
+   ],
+   [
+    24,
+    "AREA 624,405"
+   ],
+   [
+    24,
+    "AREA 866,329"
+   ],
+   [
+    25,
+    "AREA 591,645"
+   ],
+   [
+    25,
+    "AREA 417,467"
+   ],
+   [
+    25,
+    "AREA 701,483"
+   ],
+   [
+    26,
+    "AREA 704,270"
+   ],
+   [
+    26,
+    "AREA 329,613"
+   ],
+   [
+    26,
+    "AREA 251,171"
+   ],
+   [
+    26,
+    "AREA 554,504"
+   ],
+   [
+    27,
+    "AREA 316,549"
+   ],
+   [
+    27,
+    "AREA 392,189"
+   ],
+   [
+    27,
+    "AREA 485,507"
+   ],
+   [
+    28,
+    "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+   ],
+   [
+    29,
+    ".dlg «Chọn sổ» «Bắt đầu kiếp mới»"
+   ],
+   [
+    40,
+    "#klife «Vào cung ngay»"
+   ],
+   [
+    40,
+    "#kroul «Tiếp»"
+   ],
+   [
+    41,
+    "#kroul «Bỏ qua»"
+   ],
+   [
+    49,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 9»"
+   ],
+   [
+    50,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 6»"
+   ],
+   [
+    51,
+    ".dlg «Thân phận kiếp này» «Vừa»"
+   ],
+   [
+    51,
+    ".dlg «Thân phận kiếp này» «Trang trước»"
+   ],
+   [
+    51,
+    ".dlg «Thân phận kiếp này» «Dung mạo 15»"
+   ],
+   [
+    52,
+    ".dlg «Thân phận kiếp này» «Dung mạo 27»"
+   ],
+   [
+    55,
+    ".dlg «Thân phận kiếp này» «Dung mạo 17»"
+   ],
+   [
+    56,
+    ".dlg «Thân phận kiếp này» «Dung mạo 27»"
+   ],
+   [
+    57,
+    ".dlg «Thân phận kiếp này» «Dung mạo 25»"
+   ],
+   [
+    57,
+    ".dlg «Thân phận kiếp này» «Dung mạo 23»"
+   ],
+   [
+    58,
+    ".dlg «Thân phận kiếp này» «Dung mạo 23»"
+   ],
+   [
+    58,
+    ".dlg «Thân phận kiếp này» «Dung mạo 23»"
+   ],
+   [
+    59,
+    ".dlg «Thân phận kiếp này» «Dung mạo 18»"
+   ],
+   [
+    60,
+    ".dlg «Thân phận kiếp này» «Dung mạo 19»"
+   ],
+   [
+    61,
+    ".dlg «Thân phận kiếp này» «Dung mạo 25»"
+   ],
+   [
+    61,
+    ".dlg «Thân phận kiếp này» «Dung mạo 25»"
+   ],
+   [
+    62,
+    ".dlg «Thân phận kiếp này» «Dung mạo 19»"
+   ],
+   [
+    63,
+    ".dlg «Thân phận kiếp này» «Dung mạo 28»"
+   ],
+   [
+    63,
+    ".dlg «Thân phận kiếp này» «Trang trước»"
+   ],
+   [
+    64,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    67,
+    ".dlg «Thân phận kiếp này» «Dung mạo 16»"
+   ],
+   [
+    68,
+    ".dlg «Thân phận kiếp này» «Dung mạo 26»"
+   ],
+   [
+    68,
+    ".dlg «Thân phận kiếp này» «Dung mạo 23»"
+   ],
+   [
+    69,
+    ".dlg «Thân phận kiếp này» «Dung mạo 25»"
+   ],
+   [
+    70,
+    ".dlg «Thân phận kiếp này» «Trang trước»"
+   ],
+   [
+    70,
+    ".dlg «Thân phận kiếp này» «Dung mạo 14»"
+   ],
+   [
+    71,
+    ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+   ],
+   [
+    72,
+    ".dlg «Thân phận kiếp này» «Dung mạo 4»"
+   ],
+   [
+    73,
+    ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+   ],
+   [
+    74,
+    ".dlg «Thân phận kiếp này» «Dung mạo 14»"
+   ],
+   [
+    75,
+    ".dlg «Thân phận kiếp này» «Dung mạo 8»"
+   ],
+   [
+    75,
+    ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+   ],
+   [
+    76,
+    ".dlg «Thân phận kiếp này» «Vừa»"
+   ],
+   [
+    78,
+    ".dlg «Thân phận kiếp này» «Dung mạo 10»"
+   ],
+   [
+    79,
+    ".dlg «Thân phận kiếp này» «Dung mạo 10»"
+   ],
+   [
+    79,
+    ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+   ],
+   [
+    79,
+    ".dlg «Thân phận kiếp này» «Dung mạo 3»"
+   ],
+   [
+    80,
+    ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+   ],
+   [
+    81,
+    ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+   ],
+   [
+    81,
+    ".dlg «Thân phận kiếp này» «Vừa»"
+   ],
+   [
+    81,
+    ".dlg «Thân phận kiếp này» «Dung mạo 5»"
+   ],
+   [
+    83,
+    ".dlg «Thân phận kiếp này» «Dung mạo 4»"
+   ],
+   [
+    83,
+    ".dlg «Thân phận kiếp này» «Trang sau»"
+   ],
+   [
+    84,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    86,
+    ".dlg «Thân phận kiếp này» «Dung mạo 4»"
+   ],
+   [
+    87,
+    ".dlg «Thân phận kiếp này» «Dung mạo 8»"
+   ],
+   [
+    87,
+    ".dlg «Thân phận kiếp này» «Dung mạo 9»"
+   ],
+   [
+    88,
+    ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+   ],
+   [
+    89,
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+   ],
+   [
+    97,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»"
+   ],
+   [
+    100,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»"
+   ],
+   [
+    102,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»"
+   ],
+   [
+    107,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»"
+   ],
+   [
+    117,
+    ".kmov «Vào điện»"
+   ],
+   [
+    124,
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  ],
+  "_started": true,
+  "_ckAt": 1795701676935,
+  "_ckB": 1,
+  "rss": [
+   {
+    "buoi": 1,
+    "y": 1,
+    "totalMB": 1321,
+    "rendererMB": 609,
+    "heapMB": 125,
+    "dom": 2721,
+    "q": 3,
+    "lsK": 4
+   }
+  ],
+  "promo": {
+   "raw": 0,
+   "real": 0,
+   "picked": 0,
+   "by": {}
+  },
+  "_momSeen": [
+   "#klife|",
+   "#kroul|",
+   ".dlg|Thân phận kiếp này",
+   "#modal|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   "#modal|Lễ ra mắt",
+   ".kmov|",
+   ".dlg|Lễ ra mắt",
+   "#modal|Duyên cung lỡ hẹn"
+  ],
+  "_momRank": 2,
+  "_unsFail": {
+   "#klife|": {},
+   ".dlg|Thân phận kiếp này": {},
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thân · #/#": {},
+   ".dlg|Lễ ra mắt": {}
+  },
+  "_scrW": {
+   ".dlg|Thân phận kiếp này|871,392": {
+    "left": 246,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,585": {
+    "left": 133,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 2
+   },
+   ".dlg|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 1
+   }
+  },
+  "t": {
+   "total": 129140
+  },
+  "_file": "E-S4-R5-random-4-ipad.json"
+ },
+ {
+  "job": {
+   "id": "E-S4-R5-random-5-ipad",
+   "origin": "pf",
+   "road": "pt_hai",
+   "bot": "rand",
+   "seed": 217758658,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [],
+   "slice": null,
+   "build": {
+    "s": "1dcb373e+",
+    "b": "5ab5b80e406e",
+    "t": "2026-11-26T10:49Z"
+   },
+   "areaTaps": 62,
+   "dlgScroll": 7,
+   "scrolls": 9,
+   "taps": 23
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 20,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Trang sau»",
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 26»",
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 33»",
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 25»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 250,258",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "saves": [],
+  "buoi": 1,
+  "steps": 106,
+  "status": [],
+  "_loopAt": 1795701862486,
+  "_snapAt": 1795701846617,
+  "trace": [
+   [
+    10,
+    "AREA 318,188"
+   ],
+   [
+    10,
+    "AREA 591,347"
+   ],
+   [
+    10,
+    "AREA 819,180"
+   ],
+   [
+    11,
+    "AREA 969,479"
+   ],
+   [
+    11,
+    "AREA 297,472"
+   ],
+   [
+    11,
+    "AREA 679,407"
+   ],
+   [
+    11,
+    "AREA 383,446"
+   ],
+   [
+    12,
+    "AREA 894,476"
+   ],
+   [
+    12,
+    "AREA 255,258"
+   ],
+   [
+    12,
+    "AREA 303,640"
+   ],
+   [
+    13,
+    "AREA 872,558"
+   ],
+   [
+    13,
+    "AREA 653,654"
+   ],
+   [
+    13,
+    "AREA 445,535"
+   ],
+   [
+    13,
+    "AREA 257,499"
+   ],
+   [
+    14,
+    "AREA 941,650"
+   ],
+   [
+    14,
+    "AREA 522,347"
+   ],
+   [
+    14,
+    "AREA 601,534"
+   ],
+   [
+    15,
+    "AREA 235,533"
+   ],
+   [
+    15,
+    "AREA 374,229"
+   ],
+   [
+    16,
+    "AREA 615,471"
+   ],
+   [
+    16,
+    "AREA 699,330"
+   ],
+   [
+    16,
+    "AREA 274,497"
+   ],
+   [
+    16,
+    "AREA 986,501"
+   ],
+   [
+    17,
+    "AREA 286,340"
+   ],
+   [
+    17,
+    "AREA 347,191"
+   ],
+   [
+    17,
+    "AREA 488,461"
+   ],
+   [
+    18,
+    "AREA 487,230"
+   ],
+   [
+    18,
+    "AREA 972,457"
+   ],
+   [
+    18,
+    "AREA 209,293"
+   ],
+   [
+    18,
+    "AREA 555,379"
+   ],
+   [
+    19,
+    "AREA 631,480"
+   ],
+   [
+    19,
+    "AREA 272,630"
+   ],
+   [
+    19,
+    "AREA 705,287"
+   ],
+   [
+    20,
+    "AREA 690,374"
+   ],
+   [
+    20,
+    "AREA 378,412"
+   ],
+   [
+    20,
+    "AREA 1000,310"
+   ],
+   [
+    21,
+    "AREA 802,653"
+   ],
+   [
+    21,
+    "AREA 325,569"
+   ],
+   [
+    21,
+    "AREA 469,680"
+   ],
+   [
+    21,
+    "AREA 521,475"
+   ],
+   [
+    22,
+    "AREA 770,574"
+   ],
+   [
+    22,
+    "AREA 186,518"
+   ],
+   [
+    22,
+    "AREA 681,431"
+   ],
+   [
+    23,
+    "AREA 535,528"
+   ],
+   [
+    23,
+    "AREA 378,600"
+   ],
+   [
+    24,
+    "AREA 206,298"
+   ],
+   [
+    24,
+    "AREA 951,219"
+   ],
+   [
+    24,
+    "AREA 608,531"
+   ],
+   [
+    24,
+    "AREA 367,520"
+   ],
+   [
+    25,
+    "AREA 676,664"
+   ],
+   [
+    25,
+    "AREA 901,590"
+   ],
+   [
+    25,
+    "AREA 295,562"
+   ],
+   [
+    26,
+    "AREA 892,588"
+   ],
+   [
+    26,
+    "AREA 393,512"
+   ],
+   [
+    26,
+    "AREA 332,560"
+   ],
+   [
+    26,
+    "AREA 982,529"
+   ],
+   [
+    27,
+    "AREA 851,455"
+   ],
+   [
+    27,
+    "AREA 729,603"
+   ],
+   [
+    27,
+    "AREA 711,486"
+   ],
+   [
+    28,
+    "AREA 431,554"
+   ],
+   [
+    28,
+    "AREA 346,206"
+   ],
+   [
+    28,
+    "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+   ],
+   [
+    30,
+    ".dlg «Chọn sổ» «Bắt đầu kiếp mới»"
+   ],
+   [
+    36,
+    "#klife «Vào cung ngay»"
+   ],
+   [
+    38,
+    "#kroul «Tiếp»"
+   ],
+   [
+    38,
+    "#kroul «Bỏ qua»"
+   ],
+   [
+    42,
+    ".dlg «Thân phận kiếp này» «Khó»"
+   ],
+   [
+    45,
+    ".dlg «Thân phận kiếp này» «Vừa»"
+   ],
+   [
+    48,
+    ".dlg «Thân phận kiếp này» «Trang sau»"
+   ],
+   [
+    49,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 16»"
+   ],
+   [
+    50,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 15»"
+   ],
+   [
+    50,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 11»"
+   ],
+   [
+    51,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 22»"
+   ],
+   [
+    51,
+    ".dlg «Thân phận kiếp này» «Trang sau»"
+   ],
+   [
+    52,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 26»"
+   ],
+   [
+    53,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 33»"
+   ],
+   [
+    53,
+    ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 25»"
+   ],
+   [
+    54,
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+   ],
+   [
+    56,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»"
+   ],
+   [
+    57,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»"
+   ],
+   [
+    59,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»"
+   ],
+   [
+    64,
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»"
+   ],
+   [
+    72,
+    "AREA 250,258"
+   ],
+   [
+    73,
+    ".kmov «Vào điện»"
+   ],
+   [
+    84,
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  ],
+  "_started": true,
+  "_ckAt": 1795701810108,
+  "_ckB": 1,
+  "rss": [
+   {
+    "buoi": 1,
+    "y": 1,
+    "totalMB": 1358,
+    "rendererMB": 618,
+    "heapMB": 104,
+    "dom": 2732,
+    "q": 3,
+    "lsK": 4
+   }
+  ],
+  "promo": {
+   "raw": 0,
+   "real": 0,
+   "picked": 0,
+   "by": {}
+  },
+  "_momSeen": [
+   "#klife|",
+   "#kroul|",
+   ".dlg|Thân phận kiếp này",
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   "#modal|Tiền truyện · Công chúa Phù Tang hòa thâ",
+   "#modal|Lễ ra mắt",
+   ".kmov|",
+   ".dlg|Lễ ra mắt",
+   "#modal|Duyên cung lỡ hẹn"
+  ],
+  "_momRank": 2,
+  "_unsFail": {
+   "#klife|": {},
+   ".dlg|Thân phận kiếp này": {},
+   ".dlg|Tiền truyện · Công chúa Phù Tang hòa thân · #/#": {},
+   ".kmov|": {
+    "Vào điện": 1
+   },
+   ".dlg|Lễ ra mắt": {}
+  },
+  "_scrW": {
+   ".dlg|Thân phận kiếp này|871,392": {
+    "left": 246,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,585": {
+    "left": 133,
+    "n": 1
+   },
+   "#modal|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 1
+   },
+   ".dlg|Lễ ra mắt|706,570": {
+    "left": 163,
+    "n": 1
+   }
+  },
+  "t": {
+   "total": 91677
+  },
+  "_file": "E-S4-R5-random-5-ipad.json"
+ },
+ {
+  "job": {
    "id": "E-S4-R5-speed-1-ipad",
    "origin": "pf",
    "road": "pt_hai",
