@@ -62,3 +62,12 @@ Base: https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-color/
 - mg-color-kim-fold-3play.png, mg-color-kim-ipad-3play.png: «Cắt hoa giấy», the sample shows its holes and the wedge shows her cuts
 - mg-color-ve-fold-3play.png, mg-color-ve-ipad-3play.png: «Thủy mặc», motifs drawn in their tint
 Before: dev/handover/refs/owner-2511-kiep/k8-ipad-theu-8-red-spools.jpg (owner's iPad).
+
+## Regression (existing tests)
+dev/test/mg-craft.js on review/mg-color:
+- td_cong: all ok. Every caller opens the new engine, no text in play, the guided round works, the full bot play reaches a result, law 5 holds, the own case passes, an old save loads, no page errors.
+- kim and ve: every check that ran printed ok. That run hit my 600 s timeout before its end, so it is not a full run.
+
+## Not done / for the lander
+- The root index.html is not rebuilt on this branch (dev/build sources only); the landing build rebuilds it.
+- Rollover not needed: the task is finished.
