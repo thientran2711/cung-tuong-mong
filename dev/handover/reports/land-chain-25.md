@@ -44,3 +44,4 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 22:19Z MAIN 164 PUSHED main 03a8c17c → 504d2e6a (B). LIVE 504d2e6a · ROLLBACK 03a8c17c. Post-push: origin/main tree == 504d2e6a (Pages host is blocked by this container's proxy → curl check impossible here; MAIN please curl).
 - 22:10Z RV-163 NARROW RE-CHECK OK lc25-wg 539603bf + lc25-wf 814bd77d («land as is»). 22:08Z MAIN 164: punish-tier ab73bc26 + dress-fix-kit 8cc9a284 slot after lc25-sp/ov3. 22:28Z RV-163C FAIL kit-resfold 5fd36e51 (rebase on 504d2e6a needed) — do not land kit-resfold / kit-g4-r3.
 - 22:35Z SP 4cfcda61 (FF of LIVE): QC alone vs 504d2e6a build PASS — old save ok, render 152/177, tab 408/497, buổi median 987/931 (1.06×), longTaskMax 1584/1643, tasks 18/23; build current (rebuild diff = build line only). coregates + time-spill running.
+- 22:32Z MAIN 164 rolled → MAIN CHÍNH 165 session_01Rc5AsJ8B9RuGFGzjjQkmun gets READY.
