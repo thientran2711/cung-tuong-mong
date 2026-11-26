@@ -569,3 +569,24 @@ Harness only, no game change; 0 .click()/dispatchEvent in play paths (git grep: 
    its buttons keep their words»); the item tiles keep their words only by luck of markup. Shot: iPad dress-open (red button, «●», «Bỏ qua» right). The tap itself
    works (presents). HARNESS part: the board was played blind — Fold presented with 0 pieces placed (tiles tapped, «Đặt vào …» never). Now a pick-then-apply rule:
    an «Đặt vào …» on screen is taken first; «Ra mắt» waits until 4 pieces went in or 16 were looked at. Fold pf 43 / iPad pf 61: placed 4/4, presented, 30 / 37 s.
+
+## HANDOVER — HARNESS FIXER #11 → next fixer (11/26/2026 ~18:10Z; ctx ~30 % est. = START ~5 % + 25 %, rollover line; F #24 is at depth 8 → MAIN / owner opens a ROOT fixer)
+State: review/robot-realtap tip 6677dd13 (jobs 8, 9, 11–19 + BIG #11 fixes). BIG #12 FAILED 6677dd13 (report bf5e865a, handover branch
+dev/handover/reports/robot-realtap-review.md «## REVIEW … — BIG #12» + its handover: read both in full). Audit 74d434fb PASS. Everything else passed. Game for tests = origin/main b881686f (build 4eb0cbfc91b0), main moved since.
+OPEN — two BLOCKING regressions from JOB 17 (bb89b055), both in dev/test/robot-rt.js:
+1. NIGHT CARD STALL. SCAN, line ~139: `if (!btns.some(x => x.p.hit) && !skipLay(lay)) { …fallback to the last hit button's layer… }` — for a skip layer the fallback is skipped.
+   kitNewDay puts .kne.kne-beat inside #dawn; after the first tap button.kmend «Tiếp theo» is added to #dawn OUTSIDE .kne → the robot never sees it → 20–25 skip taps →
+   NO-EXIT → reload (also in real lives: Fold s43 under RT_TEST_QUOTA, 5 reloads on «NOEXIT UNSTICK 3 .kne» = every lonely night). Fix: a real hit button anywhere in the
+   skip layer's host tree (its ancestors' subtree, e.g. #dawn) or any newly visible hit button always beats skip taps: keep the fallback when a hit button exists and
+   its layer contains lay (or lay is inside it); recheck every round. Repro (BIG #12): the game's own window.kitNewDay({host: document.getElementById('dawn'), night: { k: 'lonely' }, …})
+   at b2 → make it RT_TEST_KNE=<buổi>. Expect «#dawn «Tiếp theo»» tapped in ~9 s (947aeec9 did; aece1ff5/6677dd13 63–64 s → NO-EXIT + reload).
+2. SKIP TAPS HIDE A COVERED BUTTON. Main loop line ~422: `if (started && sc.tapSkip && … && !sc.b.some(x => x.hit || x.cl))` — a skip layer whose only button is COVERED
+   by another layer gets skip taps → NO-EXIT → reload, and DEAD BUTTON never fires (BIG #12 cov-steady / leave / anim, 0/4; 947aeec9 «DEAD BUTTON Tiếp cover div#rtR12c»).
+   Fix: skip taps only when the layer has NO button at all (sc.b.length === 0, after the fix-1 fallback); a layer with a covered button goes the normal way (rt.tap → DEAD BUTTON).
+   Make the reviewer's fixtures RT_TEST_SKIPCOV=<buổi> RT_TEST_SKIPCOV_MODE=steady|leave|anim (a skip layer whose «Tiếp» button is covered by a steady / leaving /
+   animated div) → expect DEAD BUTTON.
+NOTES: N1 RT_TEST_OWNCLOSE fixture (line ~ «RT_TEST_OWNCLOSE && started»): make it a full-screen [role=dialog] (the .dlg is capped at 470 px). N2 the skip tap passes the
+   layer SELECTOR (bareTapOn(p, x, y, sc.layer) → realtap BARE_CHECK own = document.querySelector(own)): wrong copy / no id-class → use the element: SCAN can keep
+   window.__rtLay = lay and BARE_CHECK takes own === true → window.__rtLay. Optional N3 (dress board read slot count / «hợp đề»), N4 (tho board 0 moves).
+Proof needed: Fold 755x1000 + iPad 1180x820 (seeds that live past b1: Fold origin=pf road=pt_su bot=sens seed=43, iPad origin=pf road=pt_su bot=sens seed=61, Fold bot=speed
+seed=21), lint OK, rt-bare-unit, 0 .click()/dispatchEvent; rerun RT_TEST_SKIPLAYER (plain/cover/css), RT_TEST_NOEXIT+RT_TEST_LATE, RT_TEST_OWNCLOSE own/dead once (no regressions).
