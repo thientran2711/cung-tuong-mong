@@ -184,3 +184,14 @@ Tests: mg-trim.js 9/9 groups PASS Fold 755x1000@2 + iPad 1180x820@2 (test 9 real
 VIDEOS (FULL, real taps, re-shot): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm
 BIG reviewer session_01D3E3NaqVWXaAetSGcKr7mF re-pointed to cd6eff47.
 Vietnamese for sếp: Chăm thú, tưới cây giữ trò như cũ; trong màn luật có thêm nút «Chăm nhanh» (như Học nhanh, Tùy duyên, kém tự chơi); thú có «Giao cung nữ chăm», cây cũng có «Giao người hầu chăm» (không tốn khắc, mỗi tuần một lần). ~92% xong / ~88% chơi được (chờ người duyệt).
+
+## BIG REVIEW #2 (opus, session_01D3E3NaqVWXaAetSGcKr7mF) — review/mg-trim @ cd6eff47 — **FAIL**
+PRIORITY #1 CHECK: as BIG REVIEW #1 + OD 26/11 ~05:45Z (pet/plant) read verbatim. Base note: LIVE moved to 6b5d3d05 since the build (branch no longer FF; re-stack before landing).
+Tests (reviewer, cd6eff47): assemble clean · mg-trim.js Fold 755x1000@2 + iPad 1180x820@2 **ALL PASS** (incl. test 9 pet/plant real taps) · mg-skip-audit PASS (21/21, od 50). Re-shot videos watched (both devices): pet «Chăm mèo mướp» rules screen with «Chăm nhanh · Tùy duyên» and «Giao … chăm»; plant «Chăm chậu lan quý» with «Giao … chăm» + rules screen «Chăm nhanh»; kit parts only, no cut text.
+Finding 1 (pet/plant, laws 16/17): **FIXED** — BAL.trim.care gone, boards as LIVE, «Chăm nhanh» via KIT_QUICK_NAMES (+ logs), plant «Giao … chăm» = the week's servant care now, 0 khắc, once a tuần; docs carry her 05:45Z words.
+Still open (unchanged code in cd6eff47 — jtoil, jslap, jtds, j5, j83 untouched):
+2. Laws 1/4/5 — `BAL.toil.rkDemand` still missing from her «Tự tay điểm trang» score (toilFinish made path); NPCs + one tap pay it.
+3. Law 1 — `slapNpcDraw` still skips her hand (`a!==S`) now that her slap is the draw; agOn-off fallback `slapNpcTier(S)` still gap 0 (use slapper vs target gap).
+4. Law 11 — «Học nhanh» family: jtds.js:123 log «Để trời định: không ra thành phẩm.»; j5.js:14 + j83.js:141 lesson `#mgskip` still «Bỏ qua» (or prove unreachable + delete); scan + before/after table.
+New:
+5. Law 11 (co-op both seats) — the new plant «Giao … chăm» is an inline click branch (jshelf `k==="give"`) that mutates e.pc/e.pm directly; its siblings `shelfPlantQuick` and `petcMaid` are host-routed through jcoopthinf `reg9`. Fix: move it into one function (e.g. `shelfPlantGive()`) and `reg9("shelfPlantGive",[],{mine:()=>true})` like shelfPlantQuick; one co-op check that a guest's give lands on the host's copy once.
