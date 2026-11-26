@@ -569,3 +569,4 @@ hud-sacphong | review/hud-sacphong | session_01Rc5AsMfzAWwHhtkBmdZG1w | RUNNING 
 ring-build-7 | review/ring-build | session_01Rc5AsL6hQYeeAgiZLwztv4 | RUNNING | 2026-11-26T23:02Z (opened by MAIN 164, owned by MAIN 165)
 kk49 | kit keeper | session_01Rc5AsJHZTVo6v5Ks4SpWbw | RUNNING | 2026-11-26T23:03Z (MAIN 165)
 C3-EVIDART evidence-card picture without «Ban chết» stamp (ORDER MAIN 164 22:10Z) | CDN (same name or new) | (session in STATUS) | RUNNING | 2026-11-26T23:10Z (Foreman C ROOT 3-1-1-1-1)
+C3-EVIDART | evidence-card art | session_01PEhRbtsrhmYSk7xLeLFWWX (sonnet) | RUNNING | 2026-11-26T23:12Z (Foreman C; id for the line above)
