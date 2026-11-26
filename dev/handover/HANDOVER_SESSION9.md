@@ -3780,3 +3780,10 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~04:10Z NHV-BUILD 263668aa LOOK: good except grey human shapes on every area stage → asked; result to 152.
 - ~04:20Z SẾP direct (151 chat): makeup→skill roll, cut minigames, Học nhanh; evidence per charge by kind + difficulty by weight; harm shows who/why/evidence → D (D4/D5 recommendations, D1 add).
 - ~04:12Z MAIN CHÍNH 152 = session_01V1ZZH3STSxwbKbhhjWkVhD (ROOT) took over; 151's tasks disabled by 152. 151 = forwarder only.
+
+## MAIN CHÍNH 152 (session_01V1ZZH3STSxwbKbhhjWkVhD, ROOT depth 0, START_CTX ~6 % → roll at 31 %, ceiling 60 %)
+LOAD: main running 0 own workers (owner bugs/UI/go-live only) | B seats 9/12 (save rv, srvmerit r2 ready) | C free 0 (FROZEN money) | D busy (F10, q-softlock, D1/D4/D5) | E 12/12 | F runners | moved: none
+- ~04:08Z took over from 151. Disabled 151's trig_01RzmiSShSft9rvUZDATeTTD / trig_01JCeJ94yn1pwv4XTw2Zuaof / trig_01Uzq19HKsAqVZmzzAM5Vut1 (landing trig_01FSudyiPjJpLPrSbhCbuxWq already fired). Created own: hourly :32 trig_01MULPfRcyWLzekQCNenn9BZ, 07:52 NY trig_01QSGPe2W973Yu9vQZ2PbFpU, 19:52 NY trig_01M6i9pGyiEKkBN178a6cJQi (all into 152). Next main = own child «MAIN CHÍNH 153».
+- «main is now 152» sent: LC19, NHV-BUILD, OB-PHU3, OB-NGOAICUNG-2, OB-KIEP, SELSCENE-20, RV-SRVMERIT-GUARD, M2b, M3, M5b, ROLE B #7, MAIN 150/151 (forwarders); RV-BALANCE-PACE already inactive. FROM MAIN 152 lines in FOREMAN_B–F_STATUS. Worktree /home/user/wt/h152, hpush152.sh (guard), fresh152.sh.
+- LC19 still waiting for sếp's «cho phép đưa lên live» (last LC19 event 02:42Z: stack A a9 0860a469→a13 038e86f2 and stack B b10 2fd303aa→b13 f009e1a6 both green).
+- B srvmerit-guard-r2 917465a3 → forwarded to RV-SRVMERIT-GUARD.
