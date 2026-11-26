@@ -1,0 +1,1 @@
+seg17 room 9SAR MITIGATED (U3b-2): u4 7959f1b5 + patch 85909494, Fold host / iPad guest, seed 20, RELOAD_AT=8,15,28,40,52,64,76,88,100,112 all OK. 85 min, closed by time buoi 149/148 year 2, stuck 0, no SEATHANG. VALID except DOM leak (MITIGATED). Earlier attempt (title stuck 47 min) was my Worker-not-ready script bug, discarded.
