@@ -12,7 +12,7 @@
    PULSES «Nơi này sắp đóng cửa, mời tiểu chủ rời đi», tap = the way home (homeGo, «Về phòng · N khắc»); (2) GRACE: khắc 1..BAL.placeClose.grace of the
    next buổi = no punishment, the chip turns RED «Đã quá giờ, mời tiểu chủ rời đi»; a talk that spilled over counts inside the grace; (3) still there
    after it → ONE caught roll, caught = NHẸ (punish weight BAL.placeClose.sev, never cấm túc), said in a kit notice: NO thị vệ dialog.
-   Chip states pulse / late / hold / chipGo = kit part (KIT_REQUESTS K-CHIP-PULSE, kit keeper KK44).
+   Chip states = KIT §42.2a kitNotice hold / pulse / tone:"red" (KK44, review/kit-k44-parts).
    Old saves: S.closeSeen / S.stayRoll / S.plGrace are optional. */
 (function(){try{
 const nm=k=>{try{return typeof accName==="function"?accName(k):placeOf(k).n}catch(e){return k}};
@@ -54,8 +54,9 @@ window.stWarned=warned;
    own picture), sticky while it holds; it is dropped when she leaves or the place opens. Was: a stage-rail «!» item + the kitLineToast chip. */
 function chip(c){try{if(typeof kitNotice!=="function")return null;const k=key(c);let pic="";try{const n=SCIMG[placeOf(c.k).sc];pic=n?`img/${n}.webp`:""}catch(e){}
  const w=typeof homeWay==="function"?homeWay():null,way=!!(w&&!w.at&&w.ok)&&!c.lim;
- /* state (kit part K-CHIP-PULSE): next = pulsing chip, now = red chip; hold = the chip stays up while the notice holds; chipGo = a tap on the chip walks her home */
- return kitNotice({id:"close:"+k,kind:"close",line:short(c),text:line(c),pic,sticky:true,state:c.now?"late":c.next?"pulse":"",hold:!c.lim,chipGo:way,go:way?()=>{try{if(typeof homeGo==="function"&&homeGo()&&typeof render==="function")render()}catch(e){}}:null,goLabel:way?w.label:""})}catch(e){return null}}
+ /* KIT §42.2a (KK44): hold = the chip stays up while the notice holds (back after another notice's chip), pulse = blinks, tone red = the grace;
+    the chip's tap opens «Tin báo» with ONE row «Về phòng · N khắc» (go = homeGo) */
+ return kitNotice({id:"close:"+k,kind:"close",line:short(c),text:line(c),pic,sticky:true,hold:!c.lim,pulse:!c.lim,tone:c.now?"red":"",go:way?()=>{try{if(typeof homeGo==="function"&&homeGo()&&typeof render==="function")render()}catch(e){}}:null,goLabel:way?w.label:""})}catch(e){return null}}
 function tick(){try{const c=stClose();const kk=c?key(c):"";
  /* a closing notice that no longer holds (she left, the place opened, a new buổi) leaves the box */
  try{if(typeof kitNoticeList==="function")for(const x of kitNoticeList())if(x.id.indexOf("close:")===0&&x.id!=="close:"+kk)kitNoticeDrop(x.id)}catch(e){}
@@ -118,7 +119,7 @@ function stayPen(k,G){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.pl
  if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
  const n=nm(k),why=(accessOf(S,k)||{}).why||"",w=why?` (${why})`:"";let pic="";try{const q=SCIMG[placeOf(k).sc];pic=q?`img/${q}.webp`:""}catch(e){}
  const noWay=window.__hwCan!==bk+"|"+k;
- if(G.nf||noWay){log(`${n} hết giờ tiếp${w}: cung nhân tiễn ngươi về tẩm cung.`);if(typeof plHome==="function")plHome(`${n} hết giờ tiếp, cung nhân tiễn ngươi về tẩm cung.`);
+ if(G.nf||noWay){log(`${n} hết giờ tiếp${w}: cung nhân tiễn ngươi về tẩm cung.`);if(typeof plHome==="function")plHome("");
   if(typeof kitNotice==="function")kitNotice({id:"closeout:"+bk+"|"+k,kind:"close",line:"Cung nhân tiễn ta về tẩm cung",text:`${n} đã hết giờ tiếp${w}; ${G.nf?"ta chưa được báo trước":"ta không còn khắc để tự về"}, cung nhân tiễn ta về tẩm cung. Không phải lỗi của ta: không ai bắt tội.`,pic});
   try{render()}catch(e){}return}
  if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
@@ -127,7 +128,7 @@ function stayPen(k,G){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.pl
  let sv=PC().sev;try{if(typeof punishMonths==="function"&&punishMonths(sv)>0)sv=0}catch(e){sv=0}
  window.__punQuiet=1;try{punish(S,`ở lại ${n} sau giờ đóng cửa`,sv)}finally{window.__punQuiet=0}
  if((S.confined||0)>c0){console.error("place-close: overstay confined",sv);S.confined=c0}
- if(typeof plHome==="function")plHome(`Bị bắt gặp nán lại ${n} quá giờ, ta phải về tẩm cung.`);
+ if(typeof plHome==="function")plHome("")/* the kit notice below says it: no second line notice */;
  if(typeof kitNotice==="function")kitNotice({id:"closepen:"+bk+"|"+k,kind:"close",line:`Quá giờ ở ${n}: Danh -${BAL.sneak.danh}`,text:`Ta bị bắt gặp nán lại ${n} sau giờ đóng cửa${w}, phải về tẩm cung. Danh -${BAL.sneak.danh}, ${(S.cutPay||0)>cut0?`khất bổng ${S.cutPay} tháng`:"bị cảnh cáo"}. Lỗi nhẹ: không bị cấm túc.`,pic});
  try{render()}catch(e){}}catch(e){console.error("stayPen",e)}}
 window.stayPen=stayPen;
