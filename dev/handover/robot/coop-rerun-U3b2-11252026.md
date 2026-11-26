@@ -9,7 +9,7 @@ Unit U3b, pair 4. START_CTX ~3 %. Rules: real taps; segment = 2 h real-tap OR ye
 | 14 | u4-s17 | u4 7959f1b5 PROVISIONAL | + #15/#17 2273c8a1 | iPad / Fold | 17 | INVALID reload 30 OK; host #coopfz stuck x4, guest #title + «Cung Tường Mộng» modal x3; buoi ~70 (cause: unstick ✕ on #coopfz = leave room, fixed in #20/#21) (u3br/seg14-u4-s17) |
 | 15 | u4-s18 | u4 7959f1b5 | + #21 c2f7cc83 | Fold / iPad | 18 | INVALID host Fold renderer freeze buoi 61 (~42 min) (page.evaluate hangs, pause impossible); freeze fixer repro seed 56 buoi 61; killed ~76 min (u3br/seg15-u4-s18-hang) |
 | 16 | 76JU | u4 7959f1b5 PROVISIONAL | + #22 6ebd0f5d | iPad / Fold | 19 | **VALID — MITIGATED** (RELOAD_AT=8,15,28,40,52,64,76,88,100,112, both seats all OK; 85 min, closed by time at buoi 130, year 2, 0 stuck both seats; valid except the DOM leak) (u3br/seg16-76JU-MITIGATED) |
-| 17 | 9SAR | u4 7959f1b5 PROVISIONAL | + #26-ish 85909494 | Fold / iPad | 20 | **VALID — MITIGATED** (same RELOAD_AT list, all 10 reloads OK both seats; 85 min closed by time at buoi 149/148, year 2, 0 stuck, 0 SEATHANG). Earlier attempt 6OK-less: Worker not ready, 47 min on title = runner script bug, discarded. (u3br/seg17-9SAR-MITIGATED) |
+| 17 | 9SAR | u4 7959f1b5 PROVISIONAL | + patch sha 85909494 | Fold / iPad | 20 | **VALID — MITIGATED** (same RELOAD_AT list, all 10 reloads OK both seats; 85 min closed by time at buoi 149/148, year 2, 0 stuck, 0 SEATHANG). Earlier attempt: Worker not ready, 47 min on title = runner script bug, discarded. (u3br/seg17-9SAR-MITIGATED) |
 | 18 | (running) | u4 7959f1b5 | + f40a56ff | iPad / Fold | 21 | MITIGATED, running |
 
 ## Findings
