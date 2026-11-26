@@ -138,12 +138,19 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
   /* MAIN 130: day lives (tú nữ 3 selection days) are judged alone vs perfgate.json dayLife ceilings; the medians / live comparison use the NON-day runs (all runs when every run is a day life) */
   const dayR=NR.filter(x=>x.day),nonR=NR.filter(x=>!x.day);if(dayR.length)log('perf day lives',dayR.length+'/'+NR.length,'tasks>200',JSON.stringify(dayR.map(x=>x.longTasks200)));
   for(const x of dayR)for(const [k,c] of Object.entries((PG.dayLife||{}).ceilings||{}))if(x[k]>c)fail('perf',`day life ${k} ${x[k]} > day ceiling ${c}`);
-  const N=robust(nonR.length?nonR:NR),O=haveOld?robust(OR.filter(x=>!x.err&&!x.day)):null;const dayOnly=!nonR.length;R.steps.perf=N;R.steps.perfLive=O;R.steps.perfRuns={new:NR.map(brief),live:OR.map(x=>x.err?{err:x.err}:brief(x))};
+  /* LC20 qc-daylife (26/11): since SELSCENE landed the LIVE build has day lives too (often only day lives) → the old «live non-day only» baseline
+     was null and QC failed on LIVE-vs-LIVE. Compare like with like: non-day vs non-day when both builds have one; else day vs day (same metrics,
+     longTasks200 included, day ceiling 72 still per run above); else whatever each build has, with the day-only keys skipped (classes differ). */
+  const LV=OR.filter(x=>!x.err),lvN=LV.filter(x=>!x.day),lvD=LV.filter(x=>x.day);let N,O=null,cls,dayOnly;
+  if(nonR.length&&lvN.length){N=robust(nonR);O=robust(lvN);cls='non-day vs non-day';dayOnly=false}
+  else if(dayR.length&&lvD.length){N=robust(dayR);O=robust(lvD);cls='day vs day';dayOnly=true}
+  else{N=robust(nonR.length?nonR:NR);O=haveOld?robust(LV):null;cls='mixed (day-only keys skipped)';dayOnly=!nonR.length}
+  if(haveOld)log('perf compare',cls);R.steps.perfCompare=cls;const skipDC=cls!=='non-day vs non-day'&&cls!=='day vs day';R.steps.perf=N;R.steps.perfLive=O;R.steps.perfRuns={new:NR.map(brief),live:OR.map(x=>x.err?{err:x.err}:brief(x))};
   log('perf new  runs',JSON.stringify(R.steps.perfRuns.new));if(haveOld)log('perf live runs',JSON.stringify(R.steps.perfRuns.live));
   log('perf new  median',JSON.stringify(brief(N)));if(O)log('perf live median',JSON.stringify(brief(O)));
   const C=PG.ceilings,DC=(PG.dayLife||{}).ceilings||{};for(const k of Object.keys(C))if(!(dayOnly&&k in DC)&&N[k]>C[k])fail('perf',`${k} ${N[k]} > ceiling ${C[k]}`);
   if(haveOld&&!O)fail('perf','the live build could not be measured ('+(OR[0]&&OR[0].err)+')');
-  if(O)for(const [k,g] of Object.entries(PG.gate)){if(dayOnly&&k in DC)continue;const add=g.addMs??g.add;const lim=O[k]+Math.max(add,O[k]*g.ratio);if(N[k]>lim)fail('perf',`${k} ${N[k]} vs live ${O[k]} (limit ${Math.round(lim)})`)}
+  if(O)for(const [k,g] of Object.entries(PG.gate)){if(skipDC&&k in DC)continue;const add=g.addMs??g.add;const lim=O[k]+Math.max(add,O[k]*g.ratio);if(N[k]>lim)fail('perf',`${k} ${N[k]} vs live ${O[k]} (limit ${Math.round(lim)})`)}
   if(!N.buoiMoved)fail('perf','buổi did not advance');if(N.tabsOk<3)fail('perf','fewer than 3 tabs to change');
   const pe=NR.flatMap(x=>x.errors||[]);if(pe.length)fail('perf',pe.length+' page errors: '+pe[0])}catch(e){fail('perf',e.message)}
  await b.close();srv.close();R.totalMs=Date.now()-T0;R.pass=!R.fails.length;fs.writeFileSync(path.join(OUT,'quickcheck.json'),JSON.stringify(R,null,1));
