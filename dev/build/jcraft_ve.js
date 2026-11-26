@@ -25,7 +25,8 @@ function k91VePath(g,t,x,y,s){/* stand-in silhouettes in a ±1 box round (x, y),
  else if(t==="thuyen"){m(-.55,.3);l(.55,.3);l(.38,.52);l(-.38,.52);g.closePath();m(0,-.7);l(0,.24);l(.46,.14);g.closePath();m(-.9,.74);g.quadraticCurveTo(x-.45*s,y+.64*s,x,y+.74*s);g.quadraticCurveTo(x+.45*s,y+.84*s,x+.9*s,y+.74*s);m(-.7,.92);g.quadraticCurveTo(x-.3*s,y+.84*s,x+.1*s,y+.92*s);g.quadraticCurveTo(x+.4*s,y+1*s,x+.7*s,y+.92*s)}
  else if(t==="tung"){m(-.07,.1);l(.07,.1);l(.09,.9);l(-.09,.9);g.closePath();e(0,-.55,.5,.17);e(0,-.28,.66,.2);e(0,.0,.82,.22)}
  else{e(-.34,.1,.3,.13);e(.42,.34,.24,.1);m(-.1,.02);g.quadraticCurveTo(x+.06*s,y-.3*s,x+.1*s,y-.62*s);m(.5,.26);g.quadraticCurveTo(x+.52*s,y,x+.58*s,y-.14*s);m(-.62,.1);l(-.95,.2)}}
-function k91VeDraw(g,t,x,y,s,col,a,line){if(crArt(g,"ve-motif-"+t,x,y,s*2,s*2,{alpha:a},null))return;g.save();g.globalAlpha*=a;k91VePath(g,t,x,y,s);if(line){g.strokeStyle=col;g.lineWidth=1.8;g.setLineDash([3,4]);g.lineJoin="round";g.stroke()}else{g.fillStyle=col;g.fill();g.strokeStyle=col;g.lineWidth=Math.max(1.4,s*.045);g.lineJoin="round";g.lineCap="round";g.stroke()}g.restore()}
+/* review/mg-color: the painted motif in the INK TONE of that layer (the tone is what she matches against the sample); a layer still to paint (line) = a faint ghost */
+function k91VeDraw(g,t,x,y,s,col,a,line){if(crArtTint(g,"ve-motif-"+t,x,y,s*2,s*2,{alpha:line?a*.45:a},col,null))return;g.save();g.globalAlpha*=a;k91VePath(g,t,x,y,s);if(line){g.strokeStyle=col;g.lineWidth=1.8;g.setLineDash([3,4]);g.lineJoin="round";g.stroke()}else{g.fillStyle=col;g.fill();g.strokeStyle=col;g.lineWidth=Math.max(1.4,s*.045);g.lineJoin="round";g.lineCap="round";g.stroke()}g.restore()}
 const k91VeInk=f=>{const [a,b]=K91VE_SZ.tone;return`rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*f)).join(",")})`};
 function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  const Lv=n=>crLev(env,"ve",n),Z=K91VE_SZ;

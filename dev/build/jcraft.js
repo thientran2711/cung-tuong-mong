@@ -33,6 +33,29 @@ const CR_SLOTS=["ve-motif-sonchu","ve-motif-sonkhach","ve-motif-thuyen","ve-moti
 const CR_HAVE=new Set(CR_SLOTS);
 function crArt(g,name,x,y,w,h,o,stand){if(CR_HAVE.has(name)&&kg82Spr(g,name,x,y,w,h,o))return true;
  try{if(typeof kitPhNote==="function")kitPhNote("mg",name,"light","mini-game craft sprite "+name)}catch(e){}if(stand)stand();return false}
+/* review/mg-color (owner OD 25/11 ~23:05Z «cả 8 cuộn chỉ cùng màu một đỏ thì tao biết chọn cái màu gì»): a painted sprite that stands for a CHOICE or a STATE
+   (a thread shade, an ink tone, a cut paper) must show THAT colour / state, never the painter's own colour. crArt alone drew the painted picture INSTEAD of the
+   stand-in, so the stand-in's colour was lost (8 identical red spools; the Vẽ sample's ink tones all black). crArtTint draws the sprite in colour col
+   ("rgb(..)" / "#hex" / [r,g,b]): CR_TINT[name].area = the part of the picture that takes the colour (a path in the sprite's own px; none = the whole
+   silhouette, as ink), .shade = the light drawn over it; the tinted copy is cached per sprite + skin + colour. No sprite yet → the stand-in (as crArt). */
+const CR_TINT={"theu-spool":{/* the wound thread between the two wooden flanges (measured on mg-theu-spool.webp 444x640: x .105–.89, top rim y≈.205–.23, bottom rim arc to .883) */
+ area:(c,w,h)=>{c.moveTo(.105*w,.205*h);c.quadraticCurveTo(.5*w,.25*h,.89*w,.205*h);c.lineTo(.89*w,.8*h);c.quadraticCurveTo(.5*w,.965*h,.105*w,.8*h);c.closePath()},shade:"cyl"}};
+const CR_TC=new Map();
+function crTintImg(name,col){const im=kg82Img(name);if(!(im.complete&&im.naturalWidth))return null;col=Array.isArray(col)?crRGB(col):String(col);
+ const key=name+"|"+(KG82.skin&&KG82.skin.id||"")+"|"+col;let c=CR_TC.get(key);if(c)return c;const w=im.naturalWidth,h=im.naturalHeight,T=CR_TINT[name]||{};
+ c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");x.drawImage(im,0,0,w,h);
+ if(T.area){x.save();x.beginPath();T.area(x,w,h);x.clip();x.fillStyle=col;x.fillRect(0,0,w,h);
+  if(T.shade==="cyl"){/* a round spool: darker at both sides, one soft light streak; thin wound lines. The middle keeps the true shade (the colour she matches) */
+   const gr=x.createLinearGradient(.105*w,0,.89*w,0);[[0,"rgba(0,0,0,.32)"],[.2,"rgba(0,0,0,0)"],[.34,"rgba(255,255,255,.2)"],[.46,"rgba(255,255,255,0)"],[.82,"rgba(0,0,0,.05)"],[1,"rgba(0,0,0,.34)"]].forEach(([o,v])=>gr.addColorStop(o,v));
+   x.fillStyle=gr;x.fillRect(0,0,w,h);x.lineWidth=Math.max(1,h*.004);for(let k=0;k<38;k++){const y=.2*h+k*h*.0175;x.globalAlpha=.13;x.strokeStyle=k%2?"#000":"#fff";x.beginPath();x.moveTo(.1*w,y);x.quadraticCurveTo(.5*w,y+h*.028,.9*w,y+h*.006);x.stroke()}}
+  x.restore()}
+ else{x.globalCompositeOperation="source-in";x.fillStyle=col;x.fillRect(0,0,w,h)}
+ if(CR_TC.size>160)CR_TC.clear();CR_TC.set(key,c);return c}
+function crArtTint(g,name,x,y,w,h,o,col,stand){o=o||{};const c=CR_HAVE.has(name)?crTintImg(name,col):null;
+ if(c){if(w==null)w=h*c.width/c.height;if(h==null)h=w*c.height/c.width;g.save();g.translate(x,y);if(o.rot)g.rotate(o.rot);if(o.alpha!=null)g.globalAlpha*=o.alpha;g.drawImage(c,-w*(o.ax==null?.5:o.ax),-h*(o.ay==null?.5:o.ay),w,h);g.restore();return true}
+ return crArt(g,name,x,y,w,h,o,stand)}
+/* a painted surface used as a TEXTURE inside a shape the engine draws (the cut paper keeps its holes): fills the current path with the sprite (cover), false = not loaded */
+function crTex(g,name,x,y,w,h){if(!CR_HAVE.has(name)||!kg82Ok(name))return false;g.save();g.clip();g.drawImage(kg82Img(name),x,y,w,h);g.restore();return true}
 /* the frame loop on the craft clock (crNow), so a test can run the board faster; returns stop() */
 function crLoop(fn){let stop=false,raf=0;const L=()=>{if(stop)return;fn(crNow());if(!stop)raf=requestAnimationFrame(L)};raf=requestAnimationFrame(L);return()=>{stop=true;cancelAnimationFrame(raf)}}
 /* a timeout on the craft clock */
@@ -48,4 +71,4 @@ function crMix(a,b,t){return a.map((x,i)=>Math.round(x+(b[i]-x)*t))}
 const crRGB=c=>`rgb(${c.join(",")})`;
 /* a small stand-in spool of silk (stitch) / a stand-in shape (kim) is drawn by each engine; a dashed hairline marks a stand-in picture on the board (no word) */
 function crTmp(g,x,y,w,h){g.save();g.setLineDash([3,3]);g.strokeStyle="rgba(143,95,12,.45)";g.lineWidth=1;g.strokeRect(x,y,w,h);g.restore()}
-window.CRAFT=CRAFT;window.crReg=crReg;window.crOn=crOn;window.crLev=crLev;window.crNow=crNow;
+window.crArtTint=crArtTint;window.crTex=crTex;window.CRAFT=CRAFT;window.crReg=crReg;window.crOn=crOn;window.crLev=crLev;window.crNow=crNow;
