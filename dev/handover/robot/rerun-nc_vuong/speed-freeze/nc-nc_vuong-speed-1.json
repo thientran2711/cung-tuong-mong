@@ -1,0 +1,1754 @@
+{
+ "job": {
+  "id": "nc-nc_vuong-speed-1",
+  "origin": "nc",
+  "road": "nc_vuong",
+  "bot": "bold",
+  "seed": 2920246405,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "93812531",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "areaTaps": 88,
+  "scrolls": 23,
+  "infoTaps": 144,
+  "dlgClose": 26,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-26T01:13:50.765Z",
+    "buoi": 16,
+    "from": "2026-11-26T01:12:47.147Z"
+   }
+  ],
+  "freezes": 1
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "type": "freeze",
+   "msg": "page froze: no harness step for 10 min (page.evaluate hung) at buổi 66",
+   "n": 1,
+   "at": "2026-11-26T01:36:21.577Z",
+   "rss": {
+    "totalMB": 6382,
+    "rendererMB": 5705
+   }
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 426914,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 66,
+ "steps": 1420,
+ "status": [],
+ "_loopAt": 1795656369217,
+ "_snapAt": 1795656363353,
+ "trace": [
+  [
+   423,
+   ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »"
+  ],
+  [
+   424,
+   ".dlg «Kỳ ngộ» «Hỏi kỹ từng chuyện nàng ta ngheCó cơTốn1 khắcĐượcb»"
+  ],
+  [
+   425,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   426,
+   ".dlg «Xong việc: Đi một nơi trong cung» «Lui»"
+  ],
+  [
+   428,
+   "page «Dực Khôn cung · Hậu Đức điện · Chính điện. Ở đây c» «Nguy hiểm chung: 24»"
+  ],
+  [
+   429,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   430,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 110 b»"
+  ],
+  [
+   432,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   432,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   432,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   432,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   433,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   433,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   433,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   433,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   434,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   434,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   434,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   435,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   435,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   435,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   435,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   436,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   436,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   436,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   439,
+   "page «Dực Khôn cung · Hậu Đức điện · Chính điện. Ở đây c» «Sang buổi»"
+  ],
+  [
+   440,
+   ".dlg «Nam nhân nơi cấm địa» «Giấu giúpCó cơTốn1 khắcĐượchắn mang ơn, người ấy c»"
+  ],
+  [
+   441,
+   "page «Dực Khôn cung · Hậu Đức điện · Sang buổi tối · ta » «Sang ngày mới»"
+  ],
+  [
+   441,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   444,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   447,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   448,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   448,
+   ".dlg «Lui»"
+  ],
+  [
+   450,
+   "#kmrew «Thường»"
+  ],
+  [
+   450,
+   ".dlg «Lui»"
+  ],
+  [
+   452,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   452,
+   ".dlg «Lui»"
+  ],
+  [
+   453,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   454,
+   ".dlg «Lui»"
+  ],
+  [
+   455,
+   "#kmrew «ThườngPhấn gạoHộp phấn mắt dùng khi điểm trang: dù»"
+  ],
+  [
+   456,
+   ".dlg «Lui»"
+  ],
+  [
+   457,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   457,
+   ".dlg «Lui»"
+  ],
+  [
+   459,
+   "#kmrew «ThườngBăng vụn (hàng kém)Băng vụn Nội vụ phủ phát:»"
+  ],
+  [
+   459,
+   ".dlg «Lui»"
+  ],
+  [
+   461,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   461,
+   ".dlg «Lui»"
+  ],
+  [
+   463,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   463,
+   ".dlg «Lui»"
+  ],
+  [
+   465,
+   "#kmrew «Thường»"
+  ],
+  [
+   465,
+   ".dlg «Lui»"
+  ],
+  [
+   466,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   467,
+   ".dlg «Lui»"
+  ],
+  [
+   468,
+   "#kmrew «Nhận»"
+  ],
+  [
+   469,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   469,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   469,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   469,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   470,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   471,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   473,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   474,
+   ".dlg «Nguy hiểm chung» «Đóng cửa giữ mìnhTốnSủng -2Được2 tuần: mưu hại nhắ»"
+  ],
+  [
+   474,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   475,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   477,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   477,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   479,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   480,
+   ".dlg «Một ánh mắt» «Đốt đi, làm ngơRất vữngTốnkhôngĐượcđược tiếng hiền»"
+  ],
+  [
+   481,
+   ".dlg «Bổng lộc tháng sáu» «Tố lên Thái hậuHiểmTốnkhôngĐượcđược trả lại bạc và»"
+  ],
+  [
+   482,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   482,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   484,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   485,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   487,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   487,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   489,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   490,
+   ".dlg «Thi tài ngày Thất tịch» «Bỏ thiRất vữngTốnkhôngĐượckhôngGợi ýkhông được mất»"
+  ],
+  [
+   491,
+   ".dlg «Y phục dự Tết Thất tịch» «Cáo lỗi, về cung nghỉRất vữngTốnkhôngĐượcvề cung n»"
+  ],
+  [
+   492,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 25»"
+  ],
+  [
+   493,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   494,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 110 b»"
+  ],
+  [
+   495,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   496,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   496,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   496,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   496,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   497,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   497,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   497,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   497,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   498,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   498,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   498,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   499,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   499,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   499,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   499,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   500,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   500,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   503,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   504,
+   ".dlg «Việc của kẻ hầu» «Khen một câuRất vữngTốnkhôngĐượcngười ấy có thiện »"
+  ],
+  [
+   504,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   506,
+   ".dlg «Lễ Vu Lan · Lời mời: Thi vẽ đèn hoa đăng» «Ghi tên dự thi vẽMong manhTốnkhôngĐượcđoạt giải, H»"
+  ],
+  [
+   507,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nguy hiểm chung: 25»"
+  ],
+  [
+   507,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   508,
+   ".dlg «Biếu quà làm lành» «Lễ bạcTốnBạc -12ĐượcPhi Lục Uyển Thanh bớt ghen 8·»"
+  ],
+  [
+   509,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   509,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   511,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nguy hiểm chung: 0»"
+  ],
+  [
+   511,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   513,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Sang ngày mới»"
+  ],
+  [
+   514,
+   ".dlg «Kỳ nguyệt sự» «Báo lùi vài hômTùy duyênTốnkhôngĐượctùy duyên; có »"
+  ],
+  [
+   515,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   517,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   520,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   520,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   521,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   521,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   521,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   522,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   523,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   525,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 42»"
+  ],
+  [
+   525,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   526,
+   ".kfoc «Lui»"
+  ],
+  [
+   528,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 42»"
+  ],
+  [
+   528,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 42»"
+  ],
+  [
+   528,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 42»"
+  ],
+  [
+   528,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 42»"
+  ],
+  [
+   529,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Về Dư đồ»"
+  ],
+  [
+   530,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 110 b»"
+  ],
+  [
+   531,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   531,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   531,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   531,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   532,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   532,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   532,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   533,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   533,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   533,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   533,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   534,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   534,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   534,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   534,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   535,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   535,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   535,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   538,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   539,
+   ".dlg «Lễ Vu Lan · Chuyện bên lề hội» «Cất kín, chờ xem ai nhắc tớiTốnĐức -3·Danh -3ĐượcS»"
+  ],
+  [
+   540,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   541,
+   ".dlg «Lễ Vu Lan · Thi vẽ đèn hoa đăng» «Bỏ thiTốnkhôngĐượckhông»"
+  ],
+  [
+   541,
+   ".dlg «Lễ Vu Lan · Hội thi vẽ: kết quả» «Lui»"
+  ],
+  [
+   543,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   544,
+   ".dlg «Việc khó xử» «Đốt ngay, lần dấu kẻ chônTùy duyênTốnkhôngĐượcnắm »"
+  ],
+  [
+   546,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nguy hiểm chung: 49»"
+  ],
+  [
+   546,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   548,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 110 b»"
+  ],
+  [
+   549,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   549,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   549,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   550,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   550,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   550,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   550,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   551,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   551,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   551,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   551,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   552,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   552,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   552,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   553,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   553,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   553,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   553,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   555,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Sang ngày mới»"
+  ],
+  [
+   556,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   558,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   561,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   562,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   562,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   562,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   562,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   563,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   564,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   566,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Chưa điểm trang»"
+  ],
+  [
+   567,
+   "#kg82 «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   567,
+   "#kg82 «Y phục 1»"
+  ],
+  [
+   567,
+   "#kg82 «Y phục 1»"
+  ],
+  [
+   568,
+   "#kg82 «Áo gấm thêu hải đường · Y phục»"
+  ],
+  [
+   568,
+   "#kg82 «Trang sức 0»"
+  ],
+  [
+   568,
+   "#kg82 «Trâm phỉ thúy hải đường»"
+  ],
+  [
+   569,
+   "#kg82 «Giữ đồ hôm quamặc như cũ»"
+  ],
+  [
+   569,
+   "#kg82 «Để mặt mộc»"
+  ],
+  [
+   569,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   570,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   570,
+   "#kg82 «Đã hiểu»"
+  ],
+  [
+   571,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 63»"
+  ],
+  [
+   571,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   573,
+   ".dlg «Biếu quà làm lành» «Lễ bạcTốnBạc -24ĐượcPhi Lục Uyển Thanh bớt ghen 8·»"
+  ],
+  [
+   573,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 45»"
+  ],
+  [
+   574,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   575,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 110 b»"
+  ],
+  [
+   575,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   576,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   576,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   576,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   577,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   577,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   577,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   577,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   578,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   578,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   578,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   578,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   579,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   579,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   579,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   579,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   580,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   580,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   583,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   585,
+   ".dlg «Tin đồn» «Tìm kẻ tung tinTùy duyênTốnSức -5Đượcthêm thể diện»"
+  ],
+  [
+   586,
+   ".dlg «Lời cảnh báo» «Ghi nhớ, cứ như thườngTốnkhôngĐượcSức +3Kèmkẻ muốn»"
+  ],
+  [
+   587,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Nguy hiểm chung: 48»"
+  ],
+  [
+   588,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   589,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 110 b»"
+  ],
+  [
+   590,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   590,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   591,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   591,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   591,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   592,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   592,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   592,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   592,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   593,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   593,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   593,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   593,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   594,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   594,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   594,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   595,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   595,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   597,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   599,
+   ".dlg «Có người đến» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiền đứcMấtQuý »"
+  ],
+  [
+   601,
+   ".dlg «Phụ tuyến · Tra ai lấy trộm nhân sâm ở Thái y viện» «Nhận lờiVữngTốnkhôngĐượcthêm tai mắt, Thái y Trươn»"
+  ],
+  [
+   602,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 47»"
+  ],
+  [
+   602,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   603,
+   ".dlg «Biếu quà làm lành» «Lễ bạcTốnBạc -12ĐượcPhi Lục Uyển Thanh bớt ghen 8·»"
+  ],
+  [
+   604,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 41»"
+  ],
+  [
+   605,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   606,
+   ".dlg «Biếu quà làm lành» «Lễ bạcTốnBạc -12ĐượcPhi Lục Uyển Thanh bớt ghen 8·»"
+  ],
+  [
+   607,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Nguy hiểm chung: 35»"
+  ],
+  [
+   607,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcPhi Lục Uyển Thanh bớ»"
+  ],
+  [
+   608,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 110 b»"
+  ],
+  [
+   610,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   610,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   610,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   611,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   611,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   611,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   611,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   612,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   612,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   612,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   613,
+   ".dlg «Biếu quà làm lành» «Trà Long Tĩnh»"
+  ],
+  [
+   613,
+   ".dlg «Biếu quà làm lành» «Nến sáp vàng»"
+  ],
+  [
+   613,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   613,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   614,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   614,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   614,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   615,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   617,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 5 người» «Sang buổi»"
+  ],
+  [
+   619,
+   ".dlg «Bị thu hiệu ban» «Lui»"
+  ],
+  [
+   620,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 4 người» «Sang ngày mới»"
+  ],
+  [
+   621,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   622,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   624,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   628,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   628,
+   "#kmrew «Nhận»"
+  ],
+  [
+   629,
+   "#kmrew «Nhận»"
+  ],
+  [
+   629,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   629,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   629,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   630,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   630,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   631,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   633,
+   ".kmov «Đã hiểu»"
+  ],
+  [
+   635,
+   "DEAD Đã hiểu"
+  ],
+  [
+   636,
+   ".mapsc «Ngự hoa viên2 khắc»"
+  ],
+  [
+   636,
+   ".dlg «Chọn người theo hầu» «Cung nữ nhị đẳngNgân HạnhTốnkhôngĐượckhôngGhi chú(»"
+  ],
+  [
+   637,
+   ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »"
+  ],
+  [
+   638,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -2Đượckhông»"
+  ],
+  [
+   639,
+   ".dlg «Kỳ ngộ» «Chỉ cho bé từng nét chữRất vữngTốn2 khắcĐượcngười »"
+  ],
+  [
+   640,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   642,
+   ".dlg «Có người tìm đến» «Không tiếpTốnkhôngĐượcQuý nhân Tạ Thanh Hoan ra về»"
+  ],
+  [
+   642,
+   ".kfoc «Lui»"
+  ],
+  [
+   644,
+   "page «Ngự hoa viên · Hoa nở rộ. Hoàng thượng không ra vư» «Nguy hiểm chung: 32»"
+  ],
+  [
+   644,
+   "page «Ngự hoa viên · Hoa nở rộ. Hoàng thượng không ra vư» «Quẻ Hạ (Con cái)»"
+  ],
+  [
+   645,
+   ".dlg «Ta bắt gặp» «Mặc kệTốnkhôngĐượckhôngGhi chúkhông dính vào chuyệ»"
+  ],
+  [
+   647,
+   "page «Ngự hoa viên · Hoa nở rộ. Hoàng thượng không ra vư» «Sang buổi»"
+  ],
+  [
+   648,
+   ".dlg «Bổng lộc tháng bảy» «Tố lên Hoàng hậuKhó lườngTốnkhôngĐượcđược trả lại »"
+  ],
+  [
+   650,
+   "#kmrew «Thường»"
+  ],
+  [
+   650,
+   ".dlg «Lui»"
+  ],
+  [
+   651,
+   "#kmrew «Thường»"
+  ],
+  [
+   652,
+   ".dlg «Lui»"
+  ],
+  [
+   653,
+   "#kmrew «Thường»"
+  ],
+  [
+   653,
+   ".dlg «Lui»"
+  ],
+  [
+   655,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   655,
+   ".dlg «Lui»"
+  ],
+  [
+   657,
+   "#kmrew «Thường»"
+  ],
+  [
+   657,
+   ".dlg «Lui»"
+  ],
+  [
+   658,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   659,
+   ".dlg «Lui»"
+  ],
+  [
+   660,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   660,
+   ".dlg «Lui»"
+  ],
+  [
+   662,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   662,
+   ".dlg «Lui»"
+  ],
+  [
+   663,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   664,
+   ".dlg «Lui»"
+  ],
+  [
+   665,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   665,
+   ".dlg «Lui»"
+  ],
+  [
+   667,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   667,
+   ".dlg «Lui»"
+  ],
+  [
+   669,
+   "#kmrew «ThườngLụa Hàng ChâuMay áo: áo lụa Hàng Châu vân th»"
+  ],
+  [
+   669,
+   ".dlg «Lui»"
+  ],
+  [
+   670,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   671,
+   ".dlg «Lui»"
+  ],
+  [
+   672,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   672,
+   ".dlg «Lui»"
+  ],
+  [
+   674,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   674,
+   ".dlg «Lui»"
+  ],
+  [
+   676,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   676,
+   ".dlg «Lui»"
+  ],
+  [
+   677,
+   "#kmrew «ThườngLụa Hàng ChâuMay áo: áo lụa Hàng Châu vân th»"
+  ],
+  [
+   678,
+   ".dlg «Lui»"
+  ],
+  [
+   679,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   679,
+   ".dlg «Lui»"
+  ],
+  [
+   681,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   681,
+   ".dlg «Lui»"
+  ],
+  [
+   682,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   683,
+   ".dlg «Lui»"
+  ],
+  [
+   684,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   684,
+   ".dlg «Lui»"
+  ],
+  [
+   686,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   686,
+   ".dlg «Lui»"
+  ],
+  [
+   688,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   688,
+   ".dlg «Lui»"
+  ],
+  [
+   689,
+   "#kmrew «ThườngLụa Hàng ChâuMay áo: áo lụa Hàng Châu vân th»"
+  ],
+  [
+   690,
+   ".dlg «Lui»"
+  ],
+  [
+   691,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   691,
+   ".dlg «Lui»"
+  ],
+  [
+   693,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   693,
+   ".dlg «Lui»"
+  ],
+  [
+   695,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   695,
+   ".dlg «Lui»"
+  ],
+  [
+   696,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   697,
+   ".dlg «Lui»"
+  ],
+  [
+   698,
+   "#kmrew «Nhận»"
+  ],
+  [
+   700,
+   "DEAD Nhận"
+  ],
+  [
+   701,
+   ".dlg «Có người tìm đến» «Tiếp chuyệnTốn1 khắcĐượccùng Tần Hứa Thục Ý trải q»"
+  ],
+  [
+   702,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 6 người» «Sang buổi»"
+  ],
+  [
+   703,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -5Đượckhông»"
+  ],
+  [
+   704,
+   ".dlg «Có người tìm đến» «Không tiếpTốnkhôngĐượcThường tại La Mặc Lan ra về·»"
+  ],
+  [
+   704,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Hành sự»"
+  ],
+  [
+   705,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Về phòng»"
+  ],
+  [
+   706,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «2Cung nhân»"
+  ],
+  [
+   706,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   707,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   707,
+   ".dlg «Kẻ hầu xin» «Từ chốiRất vữngTốnkhôngĐượccó thêm bạcMấtngười ấy »"
+  ],
+  [
+   707,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   709,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   710,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   712,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Dư đồ»"
+  ],
+  [
+   713,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   714,
+   ".dlg «Kỳ nguyệt sự» «Báo lùi vài hômTùy duyênTốnkhôngĐượctùy duyên; có »"
+  ],
+  [
+   714,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   716,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   717,
+   ".dlg «Kính sự phòng» «Chặn ngự giáHiểmTốnkhôngĐượcdựa vào nhan sắc, ân s»"
+  ],
+  [
+   717,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   718,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   720,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   721,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   721,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   722,
+   ".dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»"
+  ],
+  [
+   723,
+   ".dlg «Chuẩn bị thị tẩm» «Tập trước KỳVữngTốnSức -5ĐượcHoàng thượng để mắt h»"
+  ],
+  [
+   724,
+   ".dlg «Đêm thị tẩm» «Bàn thơ văn, cầm kỳKhó lườngTốnkhôngĐượcđêm vui, H»"
+  ],
+  [
+   725,
+   ".dlg «Đêm thị tẩm» «Xin ân cho gia đìnhTùy duyênTốnkhôngĐượcthêm thể d»"
+  ],
+  [
+   728,
+   "DEAD Nguy hiểm chung: 66"
+  ],
+  [
+   730,
+   ".kne «Tiếp tục»"
+  ],
+  [
+   735,
+   "DEAD Tiếp tục"
+  ],
+  [
+   736,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   736,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   737,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   737,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   737,
+   ".kbk «Tổng lược» «Lui»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795656362923,
+ "_ckB": 66,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1163,
+   "rendererMB": 496
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 2048,
+   "rendererMB": 1214
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 2355,
+   "rendererMB": 1460
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2359,
+   "rendererMB": 1465
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 1861,
+   "rendererMB": 1209
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2065,
+   "rendererMB": 1396
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2225,
+   "rendererMB": 1535
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2421,
+   "rendererMB": 1745
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2381,
+   "rendererMB": 1688
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2526,
+   "rendererMB": 1824
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2452,
+   "rendererMB": 1775
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2530,
+   "rendererMB": 1832
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2636,
+   "rendererMB": 1949
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 2733,
+   "rendererMB": 2040
+  }
+ ]
+}

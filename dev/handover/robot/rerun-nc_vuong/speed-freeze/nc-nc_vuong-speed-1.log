@@ -1,0 +1,8 @@
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/a4/dev/test/robot-rt.js:131:249)
+    at async /home/user/wt/a4/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME nc-nc_vuong-speed-1 from 2026-11-26T01:12:47.147Z buổi 16
+CP buổi 50 year 1 save 426914 chars
+PAGE FROZE nc-nc_vuong-speed-1 at buổi 66 (tree 6382 MB, renderer 5705 MB) → exit 3, rerun with resume=1
