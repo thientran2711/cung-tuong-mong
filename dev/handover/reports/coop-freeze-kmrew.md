@@ -87,3 +87,28 @@ Long-lived listeners: solo listener count flat on the fix (1.8k → 1.2k over 60
 2. Re-open the buổi-61 wedge: start from rvk56 dumps (review/robot10-coop-saves d2dff0ad) — kitOptFinal → kitOptSig → cloneNode last JS before native; check jopic kitOptFinal/dupOf/kdup and g.__kotRO for a per-pass subtree growth or a resize→fit→resize loop on «Bổng lộc tháng bảy · Lễ nghĩa» / «Thỉnh bình an mạch» cards on Fold 755x1000 (seed 56, buổi 61). Prove with base FAIL / fix PASS on the SAME seed-56 room ×2.
 3. LIVE observation (not this branch): seed 56 on the merge-on-LIVE build diverged — guest iPad «Ban hoa» at buổi 1 (selection), room then stuck 15 min (host waits at buổi 1, guest k2 in Dưỡng Tú viện). Room HCNN. Unattributed; flag to Foreman B.
 STATUS: review ~100 % done / game: leak fixed, Fold freeze still open.
+
+## REVIEW 2 — BIG rv (session_01N1tNP5wTmDBC3yfeLwVTAj) on head c20aaa6e (jinv + jksize) · 26/11 ~10:35Z · **PASS**
+PRIORITY #1 CHECK: as REVIEW 1 + Foreman B 07:47Z/08:00Z/09:08Z messages (root named by fixer: jksize MutationObserver → kitScrollCues microtask loop); reused scroll-cue-loop.js, observer-leak.js, robot harness 5edf09f6 + shared patch (#16, #25).
+**LAND: review/coop-freeze-kmrew-rv2 2673733e635711cd897185d35af13e3bb74967bb** = c20aaa6e merged onto LIVE 3af7896e (only built files conflicted, rebuilt; jksize auto-merged with LIVE's §98 fit-fast edits, different functions) + one test hardening (below). Parent = LIVE 3af7896e → fast-forward.
+| check | base | fix |
+|---|---|---|
+| seed 56 two-seat room (QEC5 recipe: Fold host / iPad guest, no reload, leak-free harness #25) | ee0824f4: Fold host WEDGED buổi 61 after «Bổng lộc tháng bảy» → «Thỉnh bình an mạch» Lui (REVIEW 1) | c20aaa6e: passed the SAME dialog pair at buổi 61 (09:53:40Z / 09:53:44Z) → host buổi 76, guest 77, 0 SEATHANG, 0 stuck; DOM nodes max 12k, 5.8k at the end |
+| SOLO Fold robot-rt seed 135 (U1d's LIVE wedge seed, buổi 63) | LIVE 5e013076: wedge buổi 63 (U1d e6cd2e040) | c20aaa6e: buổi 111, 0 hang (path differs from U1d's: no «Phong hàn» card here; U1d also 0/3 on fix) |
+| scroll-cue-loop.js Fold 755x1000 / iPad 1180x820 | ee0824f4: HANG / HANG (FAIL) | PASS / PASS (merge on LIVE too) |
+| MUTATE 1: only coalescing kept (own-cue rule reverted) | — | no hang but **46 / 15 passes per 2 s for ever** (per-frame loop). The fixer's test PASSED this → I added «no pass for 2 s once settled» (passesWhenSettled) to dev/test/scroll-cue-loop.js on rv2: now FAIL / FAIL |
+| MUTATE 2: only own-cue rule kept (sync observer back) | — | PASS, 0 passes when settled → the own-cue rule alone cures the root; kscSoon is the safety net |
+| cue on every scroller kind, real #modal frame + real kitScrollCues (A tall column, B short grid, C short grid in tall column, D both short), top → end → top, Fold + iPad @2 (shots outside git, looked 3×) | LIVE 3af7896e: A, B ok; **C hangs the page (Fold and iPad)** | A own cue on→off→on; B sibling strip on→off→on; C column cue + grid strip each right; D 2 strips, no own cue taken from a child — all correct, 0 errors |
+| real dialog cue (bot, Fold, 22 dialogs): «Việc khó xử» long option list shows «Kéo xuống» at the bottom | — | ok, 0 wrong cue states |
+| observer-leak.js (jinv part) on merge | FAIL 359 | PASS 18 |
+| coop-e2e SWAP=0 / SWAP=1 (live Worker, merge) | — | 143/143 · 143/143 |
+| coop-keymove-unit (merge) | — | 12/12 |
+| quickcheck ALONE (merge 2673733e vs LIVE 3af7896e) | — | main PASS 468 s · open 2217 ms · old save ok · perf new/live render 241/252, tab 484/544, buổi 1349/1434, tasks>200 33/34 · CORE GATES: G4 dialog-fixed 2 FAIL (kit-dialog-2 empty Tốn/Được) + button-crawl «Ô lưu · Lui» = the same 3 rows on bare LIVE 02f564ae (REVIEW 1 A/B) → pre-existing |
+Trace question (Foreman B 09:08Z): my QEC5 lead kitOptFinal → kitOptSig → cloneNode sits INSIDE the jksize loop — the cue pass mutates the #modal subtree every microtask, which wakes the option-card passes on #modal (one sampled call), the 398 frameless samples are the microtask churn. Proof: on c20aaa6e (jopic untouched) the same room passes the same dialogs.
+### Law 11 scan — every MutationObserver / ResizeObserver callback that can re-feed what it observes (82 MO sites)
+Static: each callback classed SYNC (runs its pass in the same microtask) or DEFERRED (setTimeout / rAF / flag). The microtask-loop risk = SYNC + mutates its own observed subtree. jksize:766 was the one SYNC + self-mutating + non-idempotent site (two scrollers fighting over one strip) → fixed. The other SYNC sites mutate only idempotently (guards: data-k2 / kaQ / busy / closest(.kfxf|.kfseal|.kmemark) / «if missing then paint» / disconnect), or observe attributes they do not write.
+Dynamic (harness counts every MO/RO callback per creating site, solo bot 30 buổi Fold + 15 iPad on c20aaa6e): busiest site 239 calls in its worst 1 s while playing (body-subtree observers, normal); with the bot PAUSED, max 48 / 28 calls in 3 s (jfigseal / kitFigFx: stage animation style changes, deferred) — no site re-feeds itself. Resize observers: same table as REVIEW 1, plus none writes a size it observes in the same frame.
+### Laws touched
+11 ✓ (one rule each, family scans static + dynamic) · 12 ✓ Fold + iPad · 9/10 ✓ cue look unchanged (same kit .kscue / .kscue.sib) · 4/7 n/a · 6 n/a.
+Not run: sangbuoi-held, coop-title-leave (REVIEW 1: tests fix-7, not on LIVE, flaky on LIVE itself).
+STATUS: review ~100 % done / game: the ~1 h Fold freeze (co-op + solo) and the bag leak fixed.
