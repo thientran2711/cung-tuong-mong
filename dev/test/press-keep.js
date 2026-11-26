@@ -9,6 +9,7 @@
       and the tap chose THAT option (its go() ran, the card left the queue);
    2. the real card of the LIVE fault (cung nữ «Tuyển chọn», jkc2 kc2Sel) chooses «Cúi đầu chờ xét» from a press on its Tốn row;
    3. an open dialog left alone for 2 s writes nothing (no self-triggering observer loop).
+   KIT §101 (owner 25/11 ~21:55Z): on a HAND the press lifts the card and a real tap on its green ✓ chooses (realtap choose); the pressed node must still be in the page.
    usage: node dev/test/press-keep.js <page url>   exit 1 on any failure */
 const {chromium}=require('playwright');const RT=require('./realtap.js');const [,,URL]=process.argv;
 const DEVS={fold:[755,1000],ipad:[1180,820]};
@@ -39,7 +40,9 @@ for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];
   await rt.tap(bt,{screen:'press-keep',label:'(scroll into view only)'}).catch(()=>{});/* first real tap may already choose: rebuild the card for the row-point press below */
   if(await p.evaluate(()=>window.__pick!=null)){await p.evaluate(i=>{window.__pick=null;Q.length=0;const mk=k=>({n:'Thử chọn '+k,fx:{suc:-5},x:`được: Danh +1 · tốn: Sức -5`,go:()=>{window.__pick=k}});Q.push({t:'Thử bấm',hideOut:true,h:'<p>Thẻ thử.</p>',opts:[mk(0),mk(1),mk(2)]});const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}},i);await p.waitForTimeout(1600)}
   const b2=await p.$(`#modal .opts button[data-m="${i}"]`);const pt=b2&&await rowPt(b2);if(!pt||pt.miss){say(false,dev,`option card ${i}`,'row text covered: '+(pt&&pt.miss));continue}
-  await press(pt);await p.waitForTimeout(700);const r=await p.evaluate(()=>({lost:window.__pk.dnLost,clicks:window.__pk.clicks,pick:window.__pick,q:Q.length&&Q[0].t}));
+  await press(pt);await p.waitForTimeout(700);let lost0=await p.evaluate(()=>window.__pk.dnLost);/* KIT §101 hand (owner 25/11 ~21:55Z): the press lifts the card, the green ✓ chooses — a real tap on ✓ */
+  if(await p.$('#modal .opts.khand')){if(await p.evaluate(()=>window.__pick==null))await rt.tap('#modal .dlg>.khconf:not([hidden])>.khok',{screen:'press-keep',label:'✓ card '+i});await p.waitForTimeout(900)}
+  const r=await p.evaluate(l0=>({lost:l0||window.__pk.dnLost,clicks:window.__pk.clicks,pick:window.__pick,q:Q.length&&Q[0].t}),lost0);
   say(!r.lost&&r.pick===i,dev,`option card ${i}: press on its Tốn/Được row`,r.lost?'the pressed node left the page during the press (rows rebuilt under the finger)':r.pick!==i?`option not chosen (click reached: ${r.clicks}, picked ${r.pick})`:'')}
  await clear();await p.waitForTimeout(800);
  /* 1b. the REAL card of the LIVE fault: a cung nữ life's «Tuyển chọn» (jkc2 kc2Sel, person frame + hidden outcomes + «!»), option «Cúi đầu chờ xét» */
@@ -49,7 +52,7 @@ for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];
  if(!okSel)say(false,dev,'«Tuyển chọn» card','not built');else{await p.waitForFunction(()=>{const M=document.getElementById('modal');return M&&!M.hidden&&/Cúi đầu chờ xét/.test(M.innerText)},null,{timeout:10000}).catch(()=>{});await p.waitForTimeout(1500);
   const ix=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button[data-m]')].find(x=>/Cúi đầu chờ xét/.test(x.innerText));return b?b.dataset.m:null});
   const b3=ix!=null&&await p.$(`#modal .opts button[data-m="${ix}"]`);const pt=b3?await rowPt(b3):{miss:'card not shown (option '+ix+')'};
-  if(!pt||pt.miss)say(false,dev,'«Tuyển chọn» · Cúi đầu chờ xét','row text covered: '+(pt&&pt.miss));else{await p.waitForTimeout(2500);await rt.tap(b3,{screen:'Tuyển chọn',label:'Cúi đầu chờ xét'});/* the shared real tap, as the crawler found it */await p.waitForTimeout(900);
+  if(!pt||pt.miss)say(false,dev,'«Tuyển chọn» · Cúi đầu chờ xét','row text covered: '+(pt&&pt.miss));else{await p.waitForTimeout(2500);await rt.choose(b3,{screen:'Tuyển chọn',label:'Cúi đầu chờ xét'});/* the shared real tap, as the crawler found it */await p.waitForTimeout(900);
    const r=await p.evaluate(()=>({lost:window.__pk.dnLost,clicks:window.__pk.clicks,done:!!(S.selx&&S.selx.done),q:Q.length&&Q[0].t}));
    say(!r.lost&&r.done,dev,'«Tuyển chọn» (cung nữ) · Cúi đầu chờ xét: real tap',r.lost?'the pressed node left the page during the press (rows rebuilt under the finger)':!r.done?`option not chosen (click reached: ${r.clicks}; card still ${r.q})`:'')}}
  /* 3. an idle dialog writes nothing */
