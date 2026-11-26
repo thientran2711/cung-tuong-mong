@@ -14,7 +14,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  /* helpers in page */
  await p.evaluate(()=>{window.__setNet=(s,ld)=>{netOf(s);s.net=s.net.slice();s.net[1]=ld;KN.m=null};
-  window.__rig=()=>{delete S.npw;/* npc-purpose G2: fresh cooldowns per rig */const R=liveRivals(true).filter(v=>v.alive&&!v.out&&(v.staff||[]).length>=1);const v=R[0];const s=v.staff[0];
+  window.__rig=()=>{/* stat-pace (review/stat-pace): this test forces several seller cards in ONE game day; the daily big-event cap (BAL.evc, seller = kind visit) would hold the 2nd one for a later day — the cap has its own test dev/test/stat-pace.js, so it is off here */try{BAL.evc.on=0}catch(e){}delete S.npw;/* npc-purpose G2: fresh cooldowns per rig */const R=liveRivals(true).filter(v=>v.alive&&!v.out&&(v.staff||[]).length>=1);const v=R[0];const s=v.staff[0];
    for(const x of allServ()){if(x!==s){x.loyal=95}}s.loyal=10;s.spyFor=null;__setNet(s,"Ham lợi");v.affair=null;v.plan=null;v.inv=[];v.preg=0;v.hidden=false;S.intel={};
    v.preg=2;v.hidden=true;/* a hidden pregnancy: worth BAL.ag.sell.val.preg */return{v,s}}});
  /* 1 who sells */

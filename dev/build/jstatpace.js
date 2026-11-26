@@ -11,7 +11,7 @@ function spCeil(rk){const C=BAL.stp.ceil;return C[Math.max(0,Math.min(C.length-1
    above the rank ceiling a rise still counts at the slow share dm.min, so every gate stays reachable at every rank; law 16) */
 function spTop(k,rk){const f=BAL.stp.floor;return Math.max(spCeil(rk),f&&f[k]||0)}
 const SP_SIGN=Object.fromEntries(["th","hh","rel"].map(k=>[k,true]));/* thiện cảm runs −100..100: dislike growing (below 0) is paced the same way as liking; a fall back toward 0 is not */
-function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||!n||!SP_K[k])return n;
+function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||SP_OFF||!n||!SP_K[k])return n;
  if(n<0){if(!SP_SIGN[k])return n;const c=+now||0,z=Math.min(-n,Math.max(0,c)),rest=-n-z;return -(z+(rest>0?spG(k,h,Math.max(0,-Math.min(0,c)),rest,rk,(ck||k)+"-",peek):0))}
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
  const ce=spCeil(rk),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
@@ -33,4 +33,8 @@ function spSee(k,n,who){try{if(!n||typeof BAL!=="object"||!BAL.stp||!BAL.stp.on)
 function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M=h[map]=h[map]||{},k=map==="ro"?"oan":"rel",now=M[id]||0,
  R=(typeof BAL==="object"&&BAL.linkRange&&BAL.linkRange[map])||(k==="oan"?[0,100]:[-100,100]);
  M[id]=cl(now+spG(k,h,now,n,rk|0,k+":"+id),R[0],R[1]);return M[id]}
+/* START VALUES are not rises (balance-core: «LIVE start = base + origin o»): while a life is made (start: j2 apply(origin o), the first NPCs …)
+   the rule is off, so a new life starts exactly as on LIVE; every rise after that is paced */
+var SP_OFF=0;
+(function(){if(typeof start!=="function")return;const s0=start;start=function(){SP_OFF++;try{return s0.apply(this,arguments)}finally{SP_OFF--}}})();
 

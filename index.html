@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"5abd83e4+","t":"2026-11-26T07:52Z","c":"stat-pace: rollover handover #2 → #3 (reviewer FAIL list as TODO)","b":"c8d65222e017","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"15606eea+","t":"2026-11-26T08:15Z","c":"stat-pace #3: fix BIG review FAIL 1/2/3/6 — stat floors keep every gate reachable, put-off deed aimed at her on a full day, co-op/jts map r…","b":"c925beb2150f","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -7066,7 +7066,7 @@ Object.assign(BAL,{eff:{
  jthaiy:{npcMonth:8,evNpcMonth:1},
  jtin:{loyalTop:1,loyalTop_2:1},
  jtruth:{frameExpose:-20,evN:1,evFrameExpose:2,evGo:-1,bacFx:-10,danhGuilty:-6},
- jts:{leNpc:2/* NPC guests at an NPC rite (tsLeNpc): lì xì → thiện cảm for the host */,denSung:3,denAn:2,dressSung:3,dressDanh:3/* r2 sg-card: hoa đăng «Cầu thánh ân» seen + dress contest winner — were typed on card and in code */,go:3,danhGo:1,danhGo_2:-2,bacGo:6,bacTsBirthReward:20,danhTsBirthReward:3,sungOnDone:4,danhOnDone:3,sungGo:2,sungGo_2:-2,ducGo:1,danhGo_3:-1},
+ jts:{liXiAff:2/* lì xì at a rank rite → each guest's thiện cảm for the host: hers (option «Phát lì xì vừa phải») and an NPC host's (tsLeNpc), one number */,denSung:3,denAn:2,dressSung:3,dressDanh:3/* r2 sg-card: hoa đăng «Cầu thánh ân» seen + dress contest winner — were typed on card and in code */,go:3,danhGo:1,danhGo_2:-2,bacGo:6,bacTsBirthReward:20,danhTsBirthReward:3,sungOnDone:4,danhOnDone:3,sungGo:2,sungGo_2:-2,ducGo:1,danhGo_3:-1},
  jtsb:{loyalNhin:2,loyalDap:2,thCall:3,thCall_2:-3,tsbBulNpc:3,tsbBulNpc_2:10,tsbBulNpc_3:12,tsbBulNpc_4:12,go:10,go_2:10,go_3:15,go_4:8,go_5:5,go_6:8,top:4,go_7:6,go_8:20,go_9:5,go_10:-5,go_11:-15,go_12:5,go_13:-3,evF:1,evF_2:1,evTsbBulNpc:-1,evTsbBulNpc_2:1,evGo:1,evGo_2:-1,evGo_3:-1,evGo_4:1,loyalGo:8,danhTsbBulNpc:-4,bacGo:-10,sucGo:-5,danhGo:-5,danhGo_2:-4,sucGo_2:-5,danhGo_3:-2,danhGo_4:1,danhGo_5:-1,ducGo:1,danhGo_6:1,danhGo_7:3,danhGo_8:-3,danhGo_9:-1,danhGo_10:1,sucGo_3:-5,bacFx:-20,sucTsbBulNpc:-5},
  jtwoway:{run:-2,run_2:-2,run_3:4},
  jweather:{sucSlip:-20},
@@ -65680,7 +65680,7 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
   const n=G.length,hi=8*n,lo=4*n;const s=tsS();s.leN=(s.leN||0)+1;
   tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,who:pMe(),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
    opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách: thiện cảm +4",`Danh ${balSg(BAL.eff.jts.danhGo)}`],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:BAL.eff.jts.danhGo});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
-    tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách: thiện cảm +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
+    tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,`khách: thiện cảm ${balSg(BAL.eff.jts.liXiAff)}`],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,BAL.eff.jts.liXiAff)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
     tsOpt({n:"Không phát",mat:[`Danh ${balSg(BAL.eff.jts.danhGo_2)}`,"người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:BAL.eff.jts.danhGo_2});G.forEach(v=>{if((v.ghen||0)>=40)ghenUp(v,3,"chê ngươi keo kiệt ngày tấn phong",S)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
   return}
  /* an NPC host: the same rite, she is a guest */
@@ -65692,7 +65692,7 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
    tsOpt({n:"Gửi lễ mừng",fx:{bac:-15},need:[tsNeedBac(15)],duoc:["thiện cảm +6"],go:()=>{tsAff(p,6);p.bac=(p.bac||0)+15;log(`Ngươi gửi lễ mừng ${p.name}.`)}}),
    tsOpt({n:"Không đến",duoc:[`Sức +${BAL.cv.rest}`],kem:[`thiện cảm -${BAL.cv.skipAff}`,`oán ta ${balSg(BAL.eff.jts.go)}`],go:()=>{apply({suc:BAL.cv.rest});tsAff(p,-BAL.cv.skipAff);oanAdd(p,S,BAL.eff.jts.go);log(`Ngươi không sang dự lễ tấn phong của ${p.name}.`)}})]})}
 /* other NPC guests at an NPC rite follow the same rule silently: lì xì from a rich host lowers their envy a little */
-function tsLeNpc(p){const G=tsGuests(p).filter(x=>x!==S);if((p.bac||0)<4*G.length)return;p.bac-=4*G.length;for(const v of G){if(v.rl)affAdd(v,p,BAL.eff.jts.leNpc)}}/* stat-pace: the one rise rule (affAdd) */
+function tsLeNpc(p){const G=tsGuests(p).filter(x=>x!==S);if((p.bac||0)<4*G.length)return;p.bac-=4*G.length;for(const v of G){if(v.rl)affAdd(v,p,BAL.eff.jts.liXiAff)}}/* stat-pace: the one rise rule (affAdd); the same lì xì gain as hers (law 1) */
 (function(){const p0=promoteP;promoteP=function(p){const r0=rkOf(p),al=p===S||p.alive;const r=p0.apply(this,arguments);try{if(al&&rkOf(p)>r0&&!quiet&&!(typeof NLP!=="undefined"&&NLP)){if(p===S){if(tsOn()&&!S.out)tsLeHost(S,S.rank)}else{tsLeNpc(p);tsLeHost(p,rkOf(p))}}}catch(e){console.error("tsLe",e)}return r}})();
 
 /* =============== Ý 12 · ÂN THƯỞNG SAU SINH: thưởng theo nguyên nhân thật (con trai / gái, Sủng của mẹ, Thái hậu), không còn hên xui =============== */
@@ -98454,7 +98454,7 @@ function spCeil(rk){const C=BAL.stp.ceil;return C[Math.max(0,Math.min(C.length-1
    above the rank ceiling a rise still counts at the slow share dm.min, so every gate stays reachable at every rank; law 16) */
 function spTop(k,rk){const f=BAL.stp.floor;return Math.max(spCeil(rk),f&&f[k]||0)}
 const SP_SIGN=Object.fromEntries(["th","hh","rel"].map(k=>[k,true]));/* thiện cảm runs −100..100: dislike growing (below 0) is paced the same way as liking; a fall back toward 0 is not */
-function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||!n||!SP_K[k])return n;
+function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||SP_OFF||!n||!SP_K[k])return n;
  if(n<0){if(!SP_SIGN[k])return n;const c=+now||0,z=Math.min(-n,Math.max(0,c)),rest=-n-z;return -(z+(rest>0?spG(k,h,Math.max(0,-Math.min(0,c)),rest,rk,(ck||k)+"-",peek):0))}
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
  const ce=spCeil(rk),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
@@ -98476,6 +98476,10 @@ function spSee(k,n,who){try{if(!n||typeof BAL!=="object"||!BAL.stp||!BAL.stp.on)
 function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M=h[map]=h[map]||{},k=map==="ro"?"oan":"rel",now=M[id]||0,
  R=(typeof BAL==="object"&&BAL.linkRange&&BAL.linkRange[map])||(k==="oan"?[0,100]:[-100,100]);
  M[id]=cl(now+spG(k,h,now,n,rk|0,k+":"+id),R[0],R[1]);return M[id]}
+/* START VALUES are not rises (balance-core: «LIVE start = base + origin o»): while a life is made (start: j2 apply(origin o), the first NPCs …)
+   the rule is off, so a new life starts exactly as on LIVE; every rise after that is paced */
+var SP_OFF=0;
+(function(){if(typeof start!=="function")return;const s0=start;start=function(){SP_OFF++;try{return s0.apply(this,arguments)}finally{SP_OFF--}}})();
 
 /* ================= jevc: DAILY BIG-EVENT CAP (owner OD 26/11 ~01:25Z «1 ngày ấp tới 1 đống sự kiện, lúc thì lễ hội, lúc thì kỳ ngộ, lúc thì người
    này tới tìm, lúc thì người kia hại, quá nhiều trong 1 ngày»; ~04:20Z «sự kiện diễn ra liên tục, người tìm liên tục, quá ngộp»). Numbers: BAL.evc (jbalsp.js).
@@ -100524,7 +100528,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c8d65222e017";window.CTM_BUILD=BUILD;
+const BUILD="c925beb2150f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

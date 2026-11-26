@@ -8,7 +8,7 @@
 const {chromium}=require('playwright');const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
- await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof nfOn==='function',null,{timeout:0});await p.waitForTimeout(2000);
+ /* stat-pace (review/stat-pace): §5 / §6 check the exact BAL Sủng gain of a kept night (keep.gain) at Sủng 50 on a fresh life; the stat-pace rule (BAL.stp, own test dev/test/stat-pace.js) slows a rise above the rank ceiling, so it is off here */await p.addInitScript(()=>addEventListener('DOMContentLoaded',()=>{try{BAL.stp.on=0}catch(e){}}));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof nfOn==='function',null,{timeout:0});await p.waitForTimeout(2000);
  await p.evaluate(()=>{window.T={};
   /* his own visit (jvisit, from main) is not what these cases test: off (cap 0); night-final case 8 tests its order */T.vcap=BAL.visit.cap;BAL.visit.cap=0;
   /* the 10-night ledger (jledger) adds the tuần's other nights at the commit: these cases count the PLAYED tối only, so the ledger is off here; its own cases: dev/test/ledger.js */BAL.nt.on=false;
