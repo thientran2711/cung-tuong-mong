@@ -1,0 +1,4 @@
+chunks 4000 nodes 21 samples 400000 (last 400 below)
+398× 
+1× matches :NaN < kitOptFinal index.html:69227
+1× cloneNode :NaN < kitOptSig index.html:69260 < kitOptFinal index.html:69227
