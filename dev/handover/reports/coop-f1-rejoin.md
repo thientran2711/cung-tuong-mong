@@ -62,3 +62,27 @@ Laws touched: 4 no number · 7 no new wording · 9 no UI/CSS change (existing ki
 Files: dev/build/jcooplobby.js (+ index.html/sw.js/assets.json rebuilt), dev/test/coop-f1-rejoin.js (new).
 
 **SẴN SÀNG KIỂM 112fab2560ef15f6711d19a70076abf14b44b67c** (review/coop-f1-rejoin)
+
+## REVIEW (BIG co-op rv session_01N1tNP5jcP3hHwSv7nspxfp, opus, 26/11 ~06:30–07:00Z) — head 112fab2560ef15f6711d19a70076abf14b44b67c → **FAIL (1 row, add-on scope)**
+PRIORITY #1 CHECK ('coop-f1-rejoin|Rời phòng|Về màn đầu|leaveRoom|COOP.leave'): OD 0 | ledger 0 | claims = this rv | main: no «Rời phòng» confirm in dev/build (origin/main 02f564ae) | review/*: review/robot-coop-fix-7-r3 a32a931d holds the «Rời phòng» confirm (jslots CTM_ROOM_LIFE.askThen, ☰ co-op life menu, freeze «Về màn đầu» → confirm) — NOT in base 04a45597 / head | review/robot10-coop-saves u1d/s134 = the 05:25Z finding (harness unstick ✕ «Lui» → seat on #title, rejoin ×10, room run on u4 = 04a45597 tree).
+
+### What PASSES on 112fab25
+| check | result |
+|---|---|
+| F1 root + ONE rule landed() (make / join / resume; late answer, late error, «replaced» never cover the current screen) | code read: correct; every lobby open after an async answer goes through landed() or is already gated (COOP.on error: only PG wait/join; status: only Q[0]===LM && PG wait; hostPick(true) is the world module's own call). The old join() guard replaced in place (law 14). |
+| coop-f1-rejoin.js COOP_SWAP unset (Fold host / iPad guest), local wrangler dev :8788 | **PASS 65/65** rc=0, P1–P7, 0 page errors (SWAP=1 not re-run: FAIL found first) |
+| coop/worker npm test | merge ok · vault ok 48 · seat ALL OK · stale ALL OK · thin ALL OK · range ok · presence ALL OK (Worker unchanged) |
+| build reproducible | python3 dev/build/assemble.py on the head → no diff (built 16243300) |
+| reviewer real-tap close scan (rv-close-scan.js, outside git; 2 seats, mid-play, open random #modal/.dlg/#kpop, close with its own ✕ / «Lui» by touchscreen.tap (Fold) / mouse (iPad)) | 8/8 PASS: host Fold 10 closes, guest iPad 7 closes, 0 left the room, 0 page errors |
+| fixer's 4 videos img/_review/coop-f1-rejoin/*.mp4 (62 s each; 12-frame grids looked 3×) | guest Fold + guest iPad: after reload → «Đợi hảo hữu chọn thân phận» (Ám hiệu, Hảo hữu đang chọn thân phận, Ngươi đã vào phòng, «‹ Về màn đầu»), never the invite; then Luân hồi → «Nhập cung» card → game. Host: invite → roulette → «Thân phận kiếp này» → «Đợi hảo hữu trở lại» during the guest reload (correct) → lifts → game. No cut text / overflow seen. |
+| law 4 / 7 / 9 / 12 / 13 | no number, no new word, no new UI part (existing kit panel), both devices in videos, check line present |
+| images in git | none (diff = jcooplobby.js, coop-f1-rejoin.js, built index.html / sw.js / assets.json) |
+
+### FAIL list (for the fixer session_01N1tNP5kNGpWGnBCaNTeHRx)
+1. **ADD-ON 05:25Z (law 11) not in the head**: «no co-op close button / ✕ / «Lui» on any #modal / .dlg may take a seat out of the room; only the explicit «Rời phòng» confirm leaves». On 112fab25:
+   - (a) the F1 waiting panel itself, «Đợi hảo hữu chọn thân phận» «‹ Về màn đầu» (jcooplobby back(), pg "pick") = `COOP.leave(true)` + showTitle() at once: no «Rời phòng?» confirm, the friend is not told (her host then freezes «Đợi hảo hữu trở lại» after her pick). The report calls this the panel's «only way out» — it is exactly a «Lui»-kind button that takes the seat out of the room. **Not covered by fix-7-r3 either** (a32a931d back() is the same line).
+   - (b) the «Rời phòng» confirm does not exist on this head at all (☰ in a co-op life = jslots leaveRoom() at once; freeze «Về màn đầu» [data-cfz] = COOP.leave(true) at once). It lives on review/robot-coop-fix-7-r3 a32a931d (B land pack, not landed). merge-tree 112fab25 × a32a931d: only index.html / sw.js conflict (built files).
+   FIX ASKED: base the branch on (or merge) review/robot-coop-fix-7-r3 a32a931d, and route the waiting panel's «‹ Về màn đầu» through the same confirmed leave (CTM_ROOM_LIFE.askThen / kitConfirm «Rời phòng?», friend told, ✕ on the ask keeps the room) — ONE rule for every co-op «Về màn đầu» / leave button (pick panel, freeze panel, ☰ menu); add rows to coop-f1-rejoin.js (P1: «‹ Về màn đầu» asks first; ✕ on the ask = still on the panel in the room; confirmed = leaves, host told) both seatings, + coop-title-leave.js (from fix-7-r3) both seatings on the new head.
+   Note: the lobby screens before any room life (Cùng hảo hữu / Mời hảo hữu invite / Nhập ám hiệu / Chưa vào được phòng) keep ‹ Lui = cancel; the F1 rule landed() already stops them from covering a running room, so they are out of this row.
+
+### Not run (FAIL found first, owner TOP PRIORITY = speed): coop-e2e SWAP0/1, presence ×2, keymove, sangbuoi-held, quickcheck, own 2-seat videos — the re-review runs them on the new head.
