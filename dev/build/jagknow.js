@@ -590,10 +590,14 @@ const knSellCard0=knSellCard;
 const knSellData=n=>{const c={};for(const k in n){const v=n[k];if(typeof v==="function")continue;if(k==="f"&&v&&typeof v==="object"){const f={};for(const q in v)if(typeof v[q]!=="function")f[q]=v[q];c.f=f}else c[k]=v}return c};
 /* the live news with this id, read as the offer was (J78MEMO pass, as knSellTick); S is left as it was (j78facts adds an empty S.intel) */
 const knSellLive=(s,id)=>{/* empty stores the fact readers make lazily (S.intel, S.j95 and its lists) are taken away again: the remake leaves S as it was */
- const emp=v=>v&&typeof v==="object"&&!Object.keys(v).length;const k0=new Set(Object.keys(S)),j0=S.j95?new Set(Object.keys(S.j95)):null;const M0=window.J78MEMO;let N=null;
+   /* S.tb (Tai mắt news) rolls itself forward to the current buổi / khắc on any read (knTb, knNo): the read here is put back as it was —
+      the next real read (render) makes the same roll (owner time only), so nothing is lost or gained (probe rv12 iPad s1 REMAKE-SIDE [S.tb]) */
+ const emp=v=>v&&typeof v==="object"&&!Object.keys(v).length;const k0=new Set(Object.keys(S)),j0=S.j95?new Set(Object.keys(S.j95)):null;const M0=window.J78MEMO;let N=null;const tb=S.tb,tb0=tb?JSON.stringify(tb):null;
  try{window.J78MEMO=M0||new Map();N=knSellNews(S,s).find(q=>q.id===id)||null}catch(e){}
  finally{window.J78MEMO=M0;try{if(S.j95&&j0)for(const k of Object.keys(S.j95))if(!j0.has(k)&&emp(S.j95[k]))delete S.j95[k];
-  for(const k of Object.keys(S))if(!k0.has(k)&&(emp(S[k])||k==="j95"&&Object.values(S[k]).every(emp)))delete S[k]}catch(e){}}return N};
+  for(const k of Object.keys(S))if(!k0.has(k)&&(emp(S[k])||k==="j95"&&Object.values(S[k]).every(emp)))delete S[k];
+  if(!tb&&!k0.has("tb")&&S.tb)delete S.tb;
+  if(tb&&S.tb===tb&&JSON.stringify(tb)!==tb0){const o=JSON.parse(tb0);for(const k of Object.keys(tb))if(!(k in o))delete tb[k];Object.assign(tb,o)}}catch(e){}}return N};
 const knSellById=rcpReg("knSell",(s,n)=>{if(!s||!n||typeof n!=="object")return null;
  /* remade on load: the live news with this id when it is still there (its follow-up kept), else the carried copy (same text and price) */
  const N=RCPRE&&typeof n.id==="string"?knSellLive(s,n.id):null;return knSellCard0(s,N||n)});
