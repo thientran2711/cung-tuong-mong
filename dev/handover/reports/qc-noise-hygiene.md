@@ -88,5 +88,6 @@ dev/build/jbal2.js (BAL.noise), joi.js, j68i.js, j84.js (KK38 hunk); dev/measure
 
 ## Notes for the reviewer / MAIN
 - The gate FAILS on LIVE today (N1 Tin báo 18 > 10, N2 chips 9 > 6, text faults); on the branch the text part PASSES and the noise part fails only on N1/N2 days when a lane meets them. Landing order that keeps go-live green: NEWS-SIEVE-2 (N1, text families 1–4) and D2 stat-pace first, or MAIN lands this with QC_NOISE_* tuned / N2 decided by the kit keeper.
+- Harness used: 08a4ff8b for every measuring life. Gap check vs the fixed harness ec026335 (BIG #9 PASS): only nz-ipad-cautious-21 (branch, kscn-veil DEAD loop from its start → 0 full days, so it adds nothing to table B); no life hit the #kg82 board-play gap. New lives (nightly / gate) take the harness from origin/review/robot-realtap, i.e. ec026335 or later.
 - Harness: lanes re-seed after «Ban hoa» at buổi 1 (3 of 9 first lives ended there); iPad cautious seed 21 looped on a kscn-veil DEAD BUTTON page (sent to HARNESS FIXER #9 with paths). No measuring life hit #kg82 «Bỏ qua».
 - Sampler / preload are read-only; robot-rt.js untouched; harness taken from origin/review/robot-realtap when the kit has no copy (`git show`), or RT_HARNESS.
