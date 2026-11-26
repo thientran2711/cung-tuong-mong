@@ -110,7 +110,8 @@ function kaListCls(k,L){try{if(KA_LIST.skip.has(k)||!L||L.length<2)return"";cons
  if(tot<=KA_LIST.chars&&mx<=KA_LIST.long)return"";return mx<=KA_LIST.col&&L.length>=3?" klist klist2":" klist"}catch(e){return""}}
 /* kaListFix(krv): the same rule for a value cell assembled from copied chips (jopic kitOptFinal: the Mất row of copies, the Được row merged from Thành + Được) */
 function kaListFix(v){try{if(!v)return;const k=((v.parentElement&&[...v.parentElement.classList].find(c=>/^kr-/.test(c)))||"kr-duoc").slice(3);
- const L=[...v.children].filter(e=>!e.classList.contains("ksep")).map(e=>({h:e.textContent}));v.classList.remove("klist","klist2");const c=kaListCls(k,L).trim();if(c)c.split(/\s+/).forEach(x=>v.classList.add(x))}catch(e){}}
+ const L=[...v.children].filter(e=>!e.classList.contains("ksep")).map(e=>({h:e.textContent}));const c=kaListCls(k,L);/* touch the class only when it changes: a no-op class write still wakes every MutationObserver on the dialog */
+ const a=/klist/.test(c),a2=/klist2/.test(c);if(v.classList.contains("klist")!==a)v.classList.toggle("klist",a);if(v.classList.contains("klist2")!==a2)v.classList.toggle("klist2",a2)}catch(e){}}
 window.kaListFix=kaListFix;
 function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv${kaListCls(k,L)}">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
 /* K-EF-UNIT (KIT_REQUESTS 21/11 econ-tamco RE-CHECK #2): a STAT item («Bạc -94», «Tâm cơ -3», «Sủng +2», «2 khắc») is ONE unbreakable unit on every option/act card row — it never splits «Bạc» / «-94» at a line end; items still wrap as wholes. Long word items keep wrapping. */

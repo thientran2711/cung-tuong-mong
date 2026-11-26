@@ -41,8 +41,9 @@ function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}if(el.__lw){
    an emotion seal NEVER leans / pops on a non-play screen = title + its sub-screens (co-op lobby, slots), the Luân hồi roulette, the identity card
    (NLP set or the nl queue item), any kitPicker selection list (.kpick) — whole family, one gate (KIT §38.4 lean.nonPlay). The small seal stays still there. */
 function kesNonPlay(el){try{const L=KIT_EMOSEAL.lean;if(el&&el.closest&&el.closest(L.nonPlay))return true;
- const t=document.getElementById("title");if(t&&!t.hidden&&t.getClientRects().length)return true;
- const kr=document.getElementById("kroul");if(kr&&!kr.hidden&&kr.getClientRects().length)return true;
+ /* no layout read here (kesCan runs for every seal of a render): the title is shown/hidden by its hidden attribute, the roulette exists only while it runs */
+ const t=document.getElementById("title");if(t&&!t.hidden)return true;
+ if(document.getElementById("kroul"))return true;
  if(typeof NLP!=="undefined"&&NLP)return true;const m=typeof Q!=="undefined"&&Q&&Q[0];if(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")))return true;
  return false}catch(e){return false}}
 window.kesNonPlay=kesNonPlay;

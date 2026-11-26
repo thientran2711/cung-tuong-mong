@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"13f75d40+","t":"2026-11-25T23:21Z","c":"OB-KIEP: gain list keeps a stat unit (.kef1) unbreakable inside a list (kit-ef-unit PASS Fold+iPad)","b":"3aabccc66efd","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"66824779+","t":"2026-11-25T23:42Z","c":"OB-KIEP: drop a typed stat example from a CSS comment (one-core typed-text guard)","b":"3f98f4ce77dd","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29186,7 +29186,8 @@ function kaListCls(k,L){try{if(KA_LIST.skip.has(k)||!L||L.length<2)return"";cons
  if(tot<=KA_LIST.chars&&mx<=KA_LIST.long)return"";return mx<=KA_LIST.col&&L.length>=3?" klist klist2":" klist"}catch(e){return""}}
 /* kaListFix(krv): the same rule for a value cell assembled from copied chips (jopic kitOptFinal: the Mất row of copies, the Được row merged from Thành + Được) */
 function kaListFix(v){try{if(!v)return;const k=((v.parentElement&&[...v.parentElement.classList].find(c=>/^kr-/.test(c)))||"kr-duoc").slice(3);
- const L=[...v.children].filter(e=>!e.classList.contains("ksep")).map(e=>({h:e.textContent}));v.classList.remove("klist","klist2");const c=kaListCls(k,L).trim();if(c)c.split(/\s+/).forEach(x=>v.classList.add(x))}catch(e){}}
+ const L=[...v.children].filter(e=>!e.classList.contains("ksep")).map(e=>({h:e.textContent}));const c=kaListCls(k,L);/* touch the class only when it changes: a no-op class write still wakes every MutationObserver on the dialog */
+ const a=/klist/.test(c),a2=/klist2/.test(c);if(v.classList.contains("klist")!==a)v.classList.toggle("klist",a);if(v.classList.contains("klist2")!==a2)v.classList.toggle("klist2",a2)}catch(e){}}
 window.kaListFix=kaListFix;
 function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv${kaListCls(k,L)}">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
 /* K-EF-UNIT (KIT_REQUESTS 21/11 econ-tamco RE-CHECK #2): a STAT item («Bạc -94», «Tâm cơ -3», «Sủng +2», «2 khắc») is ONE unbreakable unit on every option/act card row — it never splits «Bạc» / «-94» at a line end; items still wrap as wholes. Long word items keep wrapping. */
@@ -90884,8 +90885,9 @@ function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}if(el.__lw){
    an emotion seal NEVER leans / pops on a non-play screen = title + its sub-screens (co-op lobby, slots), the Luân hồi roulette, the identity card
    (NLP set or the nl queue item), any kitPicker selection list (.kpick) — whole family, one gate (KIT §38.4 lean.nonPlay). The small seal stays still there. */
 function kesNonPlay(el){try{const L=KIT_EMOSEAL.lean;if(el&&el.closest&&el.closest(L.nonPlay))return true;
- const t=document.getElementById("title");if(t&&!t.hidden&&t.getClientRects().length)return true;
- const kr=document.getElementById("kroul");if(kr&&!kr.hidden&&kr.getClientRects().length)return true;
+ /* no layout read here (kesCan runs for every seal of a render): the title is shown/hidden by its hidden attribute, the roulette exists only while it runs */
+ const t=document.getElementById("title");if(t&&!t.hidden)return true;
+ if(document.getElementById("kroul"))return true;
  if(typeof NLP!=="undefined"&&NLP)return true;const m=typeof Q!=="undefined"&&Q&&Q[0];if(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")))return true;
  return false}catch(e){return false}}
 window.kesNonPlay=kesNonPlay;
@@ -98953,7 +98955,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3aabccc66efd";window.CTM_BUILD=BUILD;
+const BUILD="3f98f4ce77dd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
