@@ -3745,3 +3745,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? (FROZEN 
 - ~01:25Z OB-KIEP FINAL 87bc8942 (QC PASS exc. G4 pre-existing) → ORDER KIT REVIEW to Foreman B; then LC19.
 - ~01:30Z RV-PROMO-ROOT PASS 8169d9da → LC19 a9 staged, HOLD for sếp Q5 (law 16: newcomer grace / «Bị bỏ quên» player-only D1/D2). Nit forgetAt (jagacts.js:71) → PROMO-ROOT. RV archived. KK35: kit-stage G3 MIXED kstg-* + perf tab 679 (from NHV QC) = its land gates.
 - ~01:35Z BALANCE-PACE FINAL 2ddc495d (option A built: good hand 2/12/33 games to bậc 1/3/5; B 24 / C 45; HH ~1 in 4 lives) → RV-BALANCE-PACE session_01V1ZZGzRjxmFutfvYtt8PU7 (opus BIG). Landing Q5: A/B/C + OD:L353 overwrite after her pick.
+- ~01:40Z ROLL: context 30 % (≥ 29 % line). Opened PROMO-ROOT2 session_01V1ZZH26xAYYTTzWtmLpEu3 + RV-SRVMERIT-GUARD session_01V1ZZH1vbp2tNbrLxfyP4t7; PROMO-ROOT archived. TAKEOVER_MAIN_151.md written; opening MAIN CHÍNH 151 (depth 8 = limit); disabling 150's 4 scheduled tasks.

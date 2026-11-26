@@ -1841,3 +1841,5 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 OB-PHU3 (DTV wiring + people tab k7 .krn / Bảng tài nghệ / name link + home place list) | review/ob-phu | session_01V1ZZH3bHXMN184z5yteSVG (MAIN 150) | RUNNING | 2026-11-26T00:56Z
 | E92f titles-daycard FIX r1 (opus; briefs/E92f-titles-daycard-fix.md) | review/titles-daycard 8cdc4b46 | FOREMAN E child6 | session_01DgYSWnoSnKPLiPFcAgkeFc | SSK 8cdc4b46 (reports/titles-daycard.md FIX r1) | 26/11 |
 RV-BALANCE-PACE (BIG review of review/balance-pace 2ddc495d) | review/balance-pace | session_01V1ZZGzRjxmFutfvYtt8PU7 (MAIN 150) | RUNNING | 2026-11-26T01:12Z
+PROMO-ROOT2 (forgetSafe family) | review/promo-root | session_01V1ZZH26xAYYTTzWtmLpEu3 (MAIN 150) | RUNNING | 2026-11-26T01:17Z
+RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vbp2tNbrLxfyP4t7 (MAIN 150) | RUNNING | 2026-11-26T01:17Z
