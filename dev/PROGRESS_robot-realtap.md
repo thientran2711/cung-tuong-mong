@@ -521,3 +521,9 @@ Harness only, no game change; 0 .click()/dispatchEvent in play paths (git grep: 
 14. JOB 14: no CP before the game clock is up (sc.S.y defined) → rs-i first CP after RESUME «CP buổi 7 year 1».
 15. JOB 15 (KK43 / MAIN 160): a close counts toward NO EFFECT only when its OWN layer stays open (the tapped close, or the same close at its spot, still on screen);
    the shop card «Lui» (button.kit-x[data-kshdetx] in .kshdet) closing only the card = harness.closeOwnLayer, not a dead ✕.
+16. LATE BUTTON (F #23 15:11Z, s10g b351 Fold «div.kmov.kcf.km-full» NO-EXIT, stalled 61 s, then «Ta biết rồi» was there): the visit's way out (a close / next / any
+   live non-exit button) is re-scanned every round; one that shows up ≥ 10 s after the dialog opened without one = bug game «late button: «label» shows up only N s
+   after …» + «LATE BUTTON … after N ms» (harness.lateButtons, once per dialog + label), and a NO-EXIT mark on that dialog is withdrawn (harness.noExitCleared).
+   (< 10 s is by design: the reward card #kmrew «Nhận» fades in at ~3 s.) The s10g area-tap block on a kemo flicker = JOB 11 (moving button → another point).
+   Self-test RT_TEST_NOEXIT=2 RT_TEST_LATE=40000: Fold lt3-f72 + iPad lt2-i «NO-EXIT DIALOG» at 30 s → «LATE BUTTON … «Ta biết rồi» after 34996 / 34204 ms» →
+   «NO-EXIT withdrawn», layer closed by a real tap at 42 s.
