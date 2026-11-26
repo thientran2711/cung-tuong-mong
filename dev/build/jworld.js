@@ -212,7 +212,7 @@ EVD.sao={place:w=>"cnh",
    own way out j14 restore() ("chờ ân xá" is already on her cold-palace card), j8 "pardon" rule for NPCs (out=false, rank 0). */
 EVD.xa={place:w=>"lc",
  start(w){const b=B().xa;const F=[];if(S.confined&&!(typeof isSrv==="function"&&isSrv())){S.confined=0;F.push(S)}
-  for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roomFor("consort")&&roll(b.npcP)){v.out=false;v.rank=0;F.push(v)}}
+  for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roomFor("consort")&&coldStayOk(v)&&roll(b.npcP)){coldFree(v);F.push(v)}}
   try{if(F.length&&typeof palFix==="function")palFix()}catch(e){}
   const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);
   return `Chiếu đại xá: miễn thuế một năm, người bị cấm túc được tha${F.length?`: ${nmList(F)}`:""}.`},

@@ -30,10 +30,10 @@ const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);const seedInit=eval(SBR.ma
      try{for(const h of EVHOLD)if(typeof evSer1==='function'&&!evSer1(h.m))add(h.m,'EVHOLD')}catch(e){}
      /* every generator card waiting at this write, made again once from its save form (as on load) */
      try{const W=[...Q,...(typeof SP13!=='undefined'?SP13.L.map(x=>x.m):[]),...(typeof EVHOLD!=='undefined'?EVHOLD.map(h=>h.m):[])].filter(m=>m&&m.rk&&!rem.has(m));
-      for(const m of W){rem.add(m);remN++;const fp=()=>JSON.stringify(S)+'|'+JSON.stringify(typeof NT!=='undefined'?NT.list.map(x=>x.id):[])+'|'+Q.length;const a=fp();let c=null;
+      for(const m of W){rem.add(m);remN++;const fp=()=>JSON.stringify(S)+'|'+JSON.stringify(typeof NT!=='undefined'?NT.list.map(x=>x.id):[])+'|'+Q.length;const a=fp();const sA=JSON.stringify(S);let c=null;
        try{c=rcpMk(JSON.parse(JSON.stringify({rk:m.rk,ra:m.ra,t:m.t})))}catch(e){}const b=fp();
-       if(!c||!c.opts||!c.opts.length){const k='REMAKE-FAIL '+m.rk+': '+T(m);lost[k]=(lost[k]||0)+1}
-       if(a!==b){const k='REMAKE-SIDE '+m.rk+': '+T(m);lost[k]=(lost[k]||0)+1}}}catch(e){const k='REMAKE-ERR '+String(e&&e.message).slice(0,60);lost[k]=(lost[k]||0)+1}}return r};
+       if(!c||!c.opts||!c.opts.length){/* r7: name why (rcpMk's own reason: person gone / no choice now / threw) */let y='';try{const F=window.__rcpFail||[];const z=F[F.length-1];if(z&&z[0]===m.rk)y=' ['+String(z[1]).slice(0,90)+']'}catch(e){}const k='REMAKE-FAIL '+m.rk+': '+T(m)+y;lost[k]=(lost[k]||0)+1}
+       if(a!==b){/* save r6: name what the remake touched (top-level S keys / NT / Q) */let w='';try{const sa=JSON.parse(sA),sb=JSON.parse(JSON.stringify(S));const ks=[...new Set([...Object.keys(sa),...Object.keys(sb)])].filter(q=>JSON.stringify(sa[q])!==JSON.stringify(sb[q]));w=' [S.'+ks.slice(0,4).join(' S.')+(ks.length?'':' NT or Q')+']'}catch(e){}const k='REMAKE-SIDE '+m.rk+': '+T(m)+w;lost[k]=(lost[k]||0)+1}}}catch(e){const k='REMAKE-ERR '+String(e&&e.message).slice(0,60);lost[k]=(lost[k]||0)+1}}return r};
    const rem=new WeakSet();let remN=0;
    const sl=t=>new Promise(r=>setTimeout(r,t));let steps=0;
    /* robot M2b (MAIN 145, reports/m2b-rollback.md): the slot must never lag the screen — after every step (screen free) the sổ's date = the life's date */

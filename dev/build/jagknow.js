@@ -233,7 +233,7 @@ function knErrWhat(k,t){const w=t?spyWho(t):"";return k==="listen"?`đi nghe ng�
 /* the master hears it (now or late): the gain lands only now */
 function knErrGive(s,m,k,t,late){if(!m||(m!==S&&(!m.alive||m.out)))return;let f="";
  if(k==="listen"&&t){if(s.sid!=null)s.intel=(s.intel||[]).concat([t.id]).slice(-3);if(m===S)try{f=typeof intelLearn==="function"?intelLearn(t,1,{by:s.name,how:"Nghe ngóng"}):""}catch(e){}}
- if(k==="scout"&&t){const n=evA(m,t,BAL.ag.ev.one);if(s.sid!=null)s.intel=(s.intel||[]).concat([t.id]).slice(-3);if(m===S){let ff="";try{ff=typeof intelLearn==="function"?intelLearn(t,2,{by:s.name,how:"Tự đi dò la"}):""}catch(e){}f=(n?", nắm được chứng cứ":"")+(ff?": "+ff:"")}}
+ if(k==="scout"&&t){const n=chSearch(m,s,()=>evA(m,t,BAL.ag.ev.one));if(s.sid!=null)s.intel=(s.intel||[]).concat([t.id]).slice(-3);if(m===S){let ff="";try{ff=typeof intelLearn==="function"?intelLearn(t,2,{by:s.name,how:"Tự đi dò la"}):""}catch(e){}f=(n?", nắm được chứng cứ":chMissed()?", chưa tìm ra chứng":"")+(ff?": "+ff:"")}}
  if(m===S)knBao(s,m,knErrWhat(k,t)+(k==="listen"&&f?": "+f:k==="scout"&&f?f:""),t?palaceOf(t):null,late)}
 /* she sells it: the one who bought her hears the truth about her master's errand (the scouted consort learns she is watched) */
 function knErrSell(s,m,k,t){const b=byKey(s.spyFor);if(!b)return;KN.stat.sold=(KN.stat.sold||0)+1;
@@ -263,8 +263,8 @@ function knSrvCards(m){if(!m||!knOn())return[];const X=[];const once=k=>typeof i
  if(!once("listen"))X.push({n:"Nghe ngóng cho chủ",t:`Đi một vòng các cung, nghe xem có chuyện gì đáng bẩm ${m.name}.`,k:SRVA.listen.k,c:{},o:od(SRVA.listen.o(S)),w:SRVA.listen.w,l:{},x:`biết chuyện về một phi tần (để bẩm chủ) · công lao +${SRVA.listen.mp}`,once:"listen",
   go:()=>{const v=knListenPick(m);KN.stat.listen++;if(v){S.srv.intel=(S.srv.intel||[]).concat([v.id]).slice(-3);log(`Ngươi nghe ngóng được chuyện về ${v.name}, chờ dịp bẩm ${m.name}.`)}srvMerit(SRVA.listen.mp)}});
  const t=knScoutT(m);if(t&&!once("scout"))X.push({n:"Tự đi dò la cho chủ",t:`Lén dò la ${t.name}, người đang có chuyện với ${m.name}.`,k:SRVA.scout.k,c:{},o:spyO(m,t,knMeAg()),w:SRVA.scout.w,l:SRVA.scout.l,
-  x:`thành: ${m.name} được ${evSg(BAL.ag.ev.one)} về ${t.name} nếu nàng từng làm điều sai · hỏng: nàng đoán ra, oán ${m.name}`,once:"scout",
-  go:()=>{KN.stat.scout++;KN.stat.scoutOk++;evA(m,t,BAL.ag.ev.one);S.srv.intel=(S.srv.intel||[]).concat([t.id]).slice(-3);srvMerit(SRVA.scout.mp)},fail:()=>{KN.stat.scout++;if(roll(agCap(knB().scout.caught))){affAdd(t,m,-knB().scout.oan);log(`${t.name} bắt gặp ngươi lén dò la, e rằng nàng đã đoán ra.`)}else log(`Ngươi có đi dò la ${t.name} nhưng không dò được gì.`)}});
+  x:`thành: ${m.name} được ${evSg(BAL.ag.ev.one)} về ${t.name} nếu nàng từng làm điều sai và tìm ra (${chFindTxt(m,t,knMeAg())}) · hỏng: nàng đoán ra, oán ${m.name}`,once:"scout",
+  go:()=>{KN.stat.scout++;KN.stat.scoutOk++;chSearch(m,knMeAg(),()=>evA(m,t,BAL.ag.ev.one));S.srv.intel=(S.srv.intel||[]).concat([t.id]).slice(-3);srvMerit(SRVA.scout.mp)},fail:()=>{KN.stat.scout++;if(roll(agCap(knB().scout.caught))){affAdd(t,m,-knB().scout.oan);log(`${t.name} bắt gặp ngươi lén dò la, e rằng nàng đã đoán ra.`)}else log(`Ngươi có đi dò la ${t.name} nhưng không dò được gì.`)}});
  if(!once("watch"))X.push({n:"Canh chừng cung chủ",t:`Ở lại canh cửa cung ${m.name} suốt buổi này.`,k:SRVA.watch.k,c:{},o:100,w:SRVA.watch.w,x:"kẻ nào đến giở trò ở cung chủ buổi này, ngươi đều thấy",once:"watch",
   go:()=>{KN.stat.watch++;S.srv.watch=agKey();srvMerit(SRVA.watch.mp)}});
  return X}
@@ -589,9 +589,31 @@ const knSellCard0=knSellCard;
 /* the news as plain data (its code — a fact's go — left out; people stay people, carried as ids) */
 const knSellData=n=>{const c={};for(const k in n){const v=n[k];if(typeof v==="function")continue;if(k==="f"&&v&&typeof v==="object"){const f={};for(const q in v)if(typeof v[q]!=="function")f[q]=v[q];c.f=f}else c[k]=v}return c};
 /* the live news with this id, read as the offer was (J78MEMO pass, as knSellTick); S is left as it was (j78facts adds an empty S.intel) */
-const knSellLive=(s,id)=>{const had=!!S.intel;const M0=window.J78MEMO;let N=null;try{window.J78MEMO=M0||new Map();N=knSellNews(S,s).find(q=>q.id===id)||null}catch(e){}finally{window.J78MEMO=M0;if(!had&&S.intel&&!Object.keys(S.intel).length)delete S.intel}return N};
+const knSellLive=(s,id)=>{/* empty stores the fact readers make lazily (S.intel, S.j95 and its lists) are taken away again: the remake leaves S as it was */
+   /* S.tb (Tai mắt news) rolls itself forward to the current buổi / khắc on any read (knTb, knNo): the read here is put back as it was —
+      the next real read (render) makes the same roll (owner time only), so nothing is lost or gained (probe rv12 iPad s1 REMAKE-SIDE [S.tb]) */
+ const emp=v=>v&&typeof v==="object"&&!Object.keys(v).length;const k0=new Set(Object.keys(S)),j0=S.j95?new Set(Object.keys(S.j95)):null;const M0=window.J78MEMO;let N=null;const tb=S.tb;
+ /* r7 (independent check C3): S.tb is put back BY REFERENCE (the roll re-assigns top-level stores, e.g. knNo's T.no); only a store changed in place
+    falls back to a JSON copy, and that (or any throw here) is logged + counted in window.__knLive (no silent loss; the probe reads it) */
+ const tbR=tb?Object.assign({},tb):null,tbJ={};if(tb)for(const k of Object.keys(tb))try{tbJ[k]=JSON.stringify(tb[k])}catch(e){tbJ[k]=null}
+ try{window.J78MEMO=M0||new Map();N=knSellNews(S,s).find(q=>q.id===id)||null}catch(e){console.error("knSellLive read",e);knLiveFlag("read")}
+ finally{window.J78MEMO=M0;try{if(S.j95&&j0)for(const k of Object.keys(S.j95))if(!j0.has(k)&&emp(S.j95[k]))delete S.j95[k];
+  for(const k of Object.keys(S))if(!k0.has(k)&&(emp(S[k])||k==="j95"&&Object.values(S[k]).every(emp)))delete S[k];
+  if(!tb&&!k0.has("tb")&&S.tb)delete S.tb;
+  if(tb&&S.tb===tb){for(const k of Object.keys(tb))if(!(k in tbR))delete tb[k];
+   for(const k of Object.keys(tbR)){if(tb[k]!==tbR[k]){tb[k]=tbR[k];continue}let j=null;try{j=JSON.stringify(tb[k])}catch(e){}if(j!==tbJ[k]){if(tbJ[k]==null){knLiveFlag("tb:"+k);continue}tb[k]=JSON.parse(tbJ[k]);console.warn("knSellLive: S.tb."+k+" changed in place, put back as a copy");knLiveFlag("tbcopy:"+k)}}}
+  }catch(e){console.error("knSellLive restore",e);knLiveFlag("restore")}}return N};
+function knLiveFlag(w){const L=window.__knLive=window.__knLive||{};L[w]=(L[w]||0)+1}
+/* r7 (independent check C1): the carried copy has no code, so buying it ran no follow-up (a «Sủng vừa lên/xuống» fact could come again).
+   The follow-up = the live fact with the same key about the same person (its go marks what she now knows: seeLoc, dKnown, onGuard, a trait);
+   for favour (fav / sung, both S.kf) a newer favour fact stands in. No such live fact → nothing to mark (that news is no longer offered either) */
+function knCarryGo(n){try{const o=n&&n.about;const f=n&&n.f;if(!o||!f||!f.k||o===S)return"";const kd=String(f.k).split(":")[0];
+ let F=[];try{F=j78facts(o)}catch(e){}const fv=knFavFact(o);if(fv)F.push(fv);
+ const KF=["fav","sung"];/* both write S.kf (what she last knew of his favour): a newer favour fact stands in for the gone one */
+ const g=F.find(x=>x&&x.k===f.k)||(KF.includes(kd)&&F.find(x=>x&&KF.includes(String(x.k).split(":")[0])));return g&&typeof g.go==="function"?(g.go()||""):""}catch(e){console.error("knCarryGo",e);knLiveFlag("carryGo");return""}}
 const knSellById=rcpReg("knSell",(s,n)=>{if(!s||!n||typeof n!=="object")return null;
  /* remade on load: the live news with this id when it is still there (its follow-up kept), else the carried copy (same text and price) */
- const N=RCPRE&&typeof n.id==="string"?knSellLive(s,n.id):null;return knSellCard0(s,N||n)});
+ const N=RCPRE&&typeof n.id==="string"?knSellLive(s,n.id):null;
+ const C=N||(n.kind==="fact"&&n.f&&typeof n.f==="object"&&typeof n.f.go!=="function"?Object.assign({},n,{f:Object.assign({},n.f,{go:()=>knCarryGo(n)})}):n);return knSellCard0(s,C)});
 /* the live offer: built from the live news; carried as {rk:"knSell", ra:[seller, the news as data]} (the shape rcpReg gives) */
 knSellCard=function(s,n){const m=knSellCard0(s,n);try{if(m&&m.opts&&m.opts.length&&!RCPRE&&n&&typeof n==="object"){const a=rcpEnc([s,knSellData(n)]);if(JSON.stringify(a).length<RCP_MAX){m.rk="knSell";m.ra=a}else m.__rkLen=JSON.stringify(a).length}}catch(e){if(m)m.__rkErr="knSell"}return m};

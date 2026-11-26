@@ -30,11 +30,11 @@ const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad
   /* (1) đại xá inside the real monthTick */
   low();S.out=0;cold("Bị bỏ quên, đưa vào lãnh cung");tick(true);o.amnestyFree=!S.out;
   /* (2) a restore survives the grace months */
-  low();if(!S.out)cold("Bị bỏ quên, đưa vào lãnh cung");restore(false,"Hoàng thượng đọc thư, động lòng");let free=0;for(let k=0;k<G;k++){quiet();if(!S.out)free++}o.graceFree=free;
+  low();if(!S.out)cold("Bị bỏ quên, đưa vào lãnh cung");/* punish-reason (D1): a pardon waits until the lãnh cung stay is served (BAL.pun.coldMinDays, jpun coldStayOk); the stay is served here so restore() IS the release */if(typeof coldStamp==="function"){coldStamp(S);S.coldWk=punNow()-BAL.pun.coldMinDays}restore(false,"Hoàng thượng đọc thư, động lòng");let free=0;for(let k=0;k<G;k++){quiet();if(!S.out)free++}o.graceFree=free;
   /* (4) after the grace she can be forgotten again */
   quiet();o.afterGraceOut=!!S.out;
   /* (3) a newcomer (no forgetAt yet) */
-  if(S.out)restore(false,"x");S.forgetAt=undefined;let n=0;for(let k=0;k<G;k++){quiet();if(!S.out)n++}o.newFree=n;quiet();o.newAfterOut=!!S.out;
+  if(S.out){if(typeof coldStamp==="function"){coldStamp(S);S.coldWk=punNow()-BAL.pun.coldMinDays}restore(false,"x")}S.forgetAt=undefined;let n=0;for(let k=0;k<G;k++){quiet();if(!S.out)n++}o.newFree=n;quiet();o.newAfterOut=!!S.out;
   o.dead=!!S.dead;return o});
  ok(R.amnestyFree,`đại xá in monthTick: free after the month (${R.amnestyFree})`);
  ok(R.graceFree===R.G,`restore: free ${R.graceFree}/${R.G} grace months`);

@@ -39,6 +39,8 @@ const GATES=[
  {id:'jspread waiting code card',f:'jspread.js',re:/const sv0=save;save=function\(\)\{if\(!S\|\|quiet\|\|S\.dead\|\|SP13\.off\(\)\)return sv0\.apply/,why:'a code card D13 moved to a later buổi waits unseen',bound:'-',
   bad:[/if\(SP13\.L\.some\(x=>x\.code\)\)\{SP13\.held=1;SP13\.stat\.held\+\+;return\}/],badWhy:'HELD while the card waits UNSEEN (screen free, she plays on): chained over buổi / tuần / the new year → reload goes back to before the step (robot M2 Year 4 → 3)'},
  {id:'jnotice late notice',f:'jnotice.js',re:/const sv0=save;save=function\(\)\{const n0=typeof SAVE_N/,why:'never holds: it always calls the save below it and only marks which notice list was written (rv5: a notice that arrives after the last write gets one more save at the end of the tick)',bound:'never returns without the inner save',bad:[/const sv0=save;save=function\(\)\{const n0=typeof SAVE_N[^\n]{0,40}return;/],badWhy:'a return before sv0 would drop a save'},
+ {id:'jtsb visitor-card purge',f:'jtsb.js',re:/const s0=save;save=function\(\)\{rcpVisitPurge\(!\$\("modal"\)\.hidden\);return s0\.apply\(this,arguments\)\}/,why:'never holds: withdraws a waiting visitor card whose visitor left the palace (as a reload drops it), then always calls the save below it (save r7)',bound:'never returns without the inner save',
+  bad:[/const s0=save;save=function\(\)\{(?![^}]*return s0\.apply)[^}]*\}/],badWhy:'the purge wrapper no longer always calls the save below it'}
 ];
 const rows=[];let fail=0;
 console.log('## time-advance paths ('+path.relative(process.cwd(),DIR)+')');console.log('| step | where | persisted by |');console.log('|---|---|---|');
