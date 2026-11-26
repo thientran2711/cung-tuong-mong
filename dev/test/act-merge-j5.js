@@ -36,5 +36,23 @@ const src=fs.readFileSync(path.join(ROOT,'dev/test/act-audit.js'),'utf8');const 
  console.log(JSON.stringify(R.cold,null,1));
  ok(!R.cold.err,'cold start');ok((R.cold.doors||[]).length>=3,'lãnh cung doors',(R.cold.doors||[]).map(d=>d.n));
  ok((R.cold.runs||[]).every(r=>!r.err&&!r.miss&&r.found!==false),'every way of every cold door reachable & runs without error');
+
+ /* ---- khuê các (G13): twins + same-result acts; two roads (đại tiểu thư dtq, dân nữ cnv) ---- */
+ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ const skip=async()=>{for(let i=0;i<6;i++){const n=await p.evaluate(()=>{const k=document.getElementById('kload');if(k){k.remove();return 1}const r=document.getElementById('kroul');if(r&&r.isConnected){const x=[...r.querySelectorAll('button')].find(y=>/Bỏ qua/.test(y.textContent));if(x){x.click();return 1}}return 0});if(!n)break;await sleep(700)}};
+ R.kc={};
+ for(const og of ['dtq','cnv']){
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}});
+  await p.evaluate(()=>{const t=document.querySelector('#slots button[data-new="1"]');if(t)t.click()});await sleep(2000);await skip();
+  await p.evaluate(og=>{for(let i=0;i<500&&S.origin.k!==og;i++){try{store.set(NL_KEY,null)}catch(e){}start()}},og);await sleep(600);await skip();
+  await p.evaluate(()=>{const b=document.querySelector('#modal [data-kcp="nha"]');if(b)b.click()});await sleep(700);for(let i=0;i<40&&await p.evaluate(()=>!!document.getElementById('kroul'));i++)await sleep(500);
+  await p.evaluate(()=>{const b=document.querySelector('#modal button[data-nl="ok"]');if(b)b.click()});await sleep(1500);
+  R.kc[og]=await p.evaluate(()=>{const o={runs:[]};try{o.isKc=isKc();AA.hide();const PL=Object.keys(KCPL);const rs=pl=>{S.buoi=0;used=0;S.suc=90;S.bac=500;if(S.kc){S.kc.once={};S.kc.ds=0;S.kc.gift=[];S.kc.le=0;S.kc.early=0;S.kc.g7=-999}Q.length=0;if(pl){S.place=pl;S.kc.fam.forEach(m=>{S.kc.at[m.id]=pl});S.kc.at.ftm=pl}deal()};rs();
+   o.doors=deck.filter(a=>a.j5door).map(a=>({n:a.n,g:a.g,ways:a.j5ways.map(w=>w.n)}));const ids=[];deck.forEach(a=>{if(a.j5door)a.j5ways.forEach(w=>ids.push([a.n,w.n]))});
+   for(const [dn,wn] of ids){try{let di=-1;for(const pl of PL){rs(pl);di=deck.findIndex(a=>a.j5door&&a.n===dn&&!a.lock&&a.j5ways.some(w=>w.n===wn&&!w.lock));if(di>=0)break}if(di<0){o.runs.push({dn,wn,miss:1});continue}const w0=deck[di].j5ways.find(w=>w.n===wn);const u0=used;act(di);const r={dn,wn,opened:Q.length>0&&Q[0].t===dn};if(r.opened){const ix=Q[0].opts.findIndex(x=>x.n===wn);r.found=ix>=0;r.off=ix>=0&&!!Q[0].opts[ix].off;r.k=w0.k;if(ix>=0&&!r.off){chooseM(ix);r.used=used-u0}Q.length=0}else{r.used=used-u0}o.runs.push(r)}catch(e){o.runs.push({dn,wn,err:e.message})}}}catch(e){o.err=e.message}return o});
+  console.log(og,JSON.stringify(R.kc[og].doors));for(const r of R.kc[og].runs)console.log(' ',JSON.stringify(r));
+  ok(R.kc[og].isKc&&!R.kc[og].err,'kc '+og+' start',R.kc[og].err);ok((R.kc[og].doors||[]).length>=3,'kc '+og+' doors',(R.kc[og].doors||[]).map(d=>d.n));
+  ok((R.kc[og].runs||[]).every(r=>!r.err&&!r.miss&&r.found!==false),'kc '+og+': every way reachable & runs');
+  ok((R.kc[og].runs||[]).filter(r=>r.used!=null&&!r.off).every(r=>r.used>=1),'kc '+og+': each way spent its own khắc',(R.kc[og].runs||[]).filter(r=>!(r.used>=1)&&!r.off))}
  ok(perr.length===0,'no page errors',perr);
  fs.writeFileSync(process.env.J5OUT||'/home/user/wt/J5-out/j5.json',JSON.stringify(R,null,1));await b.close();console.log(fails?'FAILED '+fails:'ALL OK');process.exit(fails?1:0)})().catch(e=>{console.error(e);process.exit(1)});

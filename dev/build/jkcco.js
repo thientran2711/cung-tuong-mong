@@ -230,8 +230,9 @@ function wayOpts(ways,tcOf,okOf,pick,why){return ways.map(w=>{const tc=tcOf(w),b
 function ask(title,text,opts){opts.push({n:"Thôi, để sau",x:"chưa làm gì lúc này",go:()=>{}});Q.push({t:title,ownAct:1,who:typeof pMe==="function"?pMe():null,h:`<p>${text}</p>`,opts});showModal()}
 /* ---- cards (Phận sự deck, lãnh cung deck) ---- */
 function cardDoor(key,rule,ways){const k=Math.min(...ways.map(cc)),lock=ways.every(w=>w.lock);DOORART[key]=ways[0].n;
- return{n:key,t:lock?(ways[0].t||rule.t):rule.t,k,c:{},o:100,w:{},l:{},x:`chọn một trong ${ways.length} cách`,dom:ways[0].dom,j5door:1,j5ways:ways,rep:1,lock,ad:0}}
+ return{n:key,t:lock?(ways[0].t||rule.t):rule.t,k,c:{},o:100,w:{},l:{},x:`chọn một trong ${ways.length} cách`,dom:ways[0].dom,j5door:1,j5ways:ways,rep:1,lock,ad:0,g:ways[0].g,who:ways.every(w=>w.who===ways[0].who)?ways[0].who:undefined,done:ways.some(w=>!w.done&&!(w.once&&typeof isSrv==="function"&&isSrv()&&typeof srvOnce==="function"&&srvOnce(w.once,w.onceS)))?0:1}}
 function openCard(d){const L=availW(d);if(!L.length){d.done=1;render();return}
+ if(L.length===1){pickCard(d,L[0]);return}
  ask(d.n,d.t,wayOpts(L,cc,(w,tc)=>can(tc)&&canPay(w)&&(w.b==null||(S.buoi||0)===w.b),w=>pickCard(d,w)))}
 let A0=null;
 function pickCard(d,w){if(S.dead||Q.length||!A0)return;deck.push(w);const i=deck.length-1;try{A0.call(window,i)}catch(e){console.error("j5 way",e)}finally{const j=deck.indexOf(w);if(j>=0)deck.splice(j,1)}
@@ -253,8 +254,34 @@ const COLDG=[
  {n:"Rời cung",t:"Rời hẳn chốn này: chọn đường đi.",re:/^(Xuất gia|Nghĩ cách trốn khỏi cung|Xin phế làm thứ dân)$/},
  /* the same letter by two carriers (thái giám đưa cơm / cung nữ thân tín) = ONE letter card, the carrier is the way */
  {key:a=>{const m=/^(Gửi thư .+?) \(nhờ .+\)$/.exec(a.n||"");return m?m[1]:null},t:"Một bức thư gửi ra ngoài: chọn người đưa thư."}];
+/* khuê các (G13, same rule: only TRUE duplicates). Two kinds of duplicate: (1) a TWIN = the card that already says tw:"<the card it mirrors>" (r2, owner 15/11: the same act paid in
+   bạc or in Sức / khắc / a favour — law 2 equal-value ways of ONE act, kept on every road jkc / jkc2 / jkc3); (2) acts of one purpose with the SAME result,
+   named below. Everything else (a person's own thỉnh an, hầu cha, the places chùa / chợ / trà lâu / thư phường, Gặp riêng, scene cards) stays its own button. */
+const KCR=[
+ [/^(?:Làm vừa lòng|Hầu) (.+?)(?: trọn buổi)?$/,m=>`Hầu ${m[1]}`,"Hầu người nhà: dâng quà, hay ngồi hầu trọn buổi."],
+ [/^(?:Kết thân|Giúp) (.+?)(?: một việc)?$/,m=>`Gần gũi ${m[1]}`,"Gần gũi người nhà: tặng quà nhỏ, hay giúp một việc."],
+ [/^(?:Sai tỳ nữ )?[Nn]gáng chân (.+)$/,m=>`Hại ${m[1]}`,"Ngáng chân kẻ đối đầu: tự tay làm, hay sai tỳ nữ."],
+ [/^(?:Dò la viện|Sai tỳ nữ nghe ngóng viện|Rình viện) (.+?)(?: cả đêm)?$/,m=>`Dò xét viện ${m[1]}`,"Dò xem viện ấy bàn tính gì: chọn cách dò."],
+ [/^(?:Đi lễ chùa|Lên chùa chép kinh)$/,()=>"Lễ chùa","Lên chùa: dâng lễ, hay chép kinh giúp nhà chùa."],
+ [/^(?:Dạo phố chợ|Đi xem chợ, không mua)$/,()=>"Ra chợ","Ra chợ nghe tin: mua sắm, hay chỉ đi xem."],
+ [/^(?:Nghe chuyện ở trà lâu|Nghe lỏm ngoài hiên trà lâu)$/,()=>"Nghe tin ở trà lâu","Nghe khách bàn chuyện cung đình: thuê nhã gian, hay đứng ngoài hiên."],
+ [/^(?:Lựa sách ở thư phường|Đứng đọc ở thư phường)$/,()=>"Thư phường","Đến thư phường: mua sách, hay đứng đọc."],
+ [/^(?:Thăm|Mang bánh nhà làm thăm) (.+)$/,m=>`Đi thăm ${m[1]}`,"Sang phủ thế giao thăm bạn: mang lễ, hay mang bánh nhà làm."],
+ [/^(?:Giả bệnh tránh xem mặt|Nhịn ăn tránh xem mặt|Khéo từ chối nhà .+)$/,()=>"Tránh xem mặt","Bỏ mối xem mặt này: khéo từ chối, giả bệnh, hay nhịn ăn."],
+ [/^(?:Gửi thư cho người ấy|Tự tay đưa thư cho người ấy)$/,()=>"Thư cho người ấy","Gửi thư cho người ấy: nhờ tỳ nữ, hay tự tay đưa."],
+ [/^(?:Viết thư vào cung|Gửi thư theo người đi chợ|Mua tin của thái giám ra cung|Nhờ huynh trưởng dò tin trong cung)$/,()=>"Dò tin trong cung","Biết thêm về các phi tần trong cung: chọn đường."],
+ [/^(?:Gửi quà vào cung cho|Gửi bức thêu tự tay làm cho) (.+)$/,m=>`Gửi lễ cho ${m[1]}`,"Gửi lễ vào cung: mua quà, hay tự tay thêu."],
+ [/^(?:Học lễ nghi cung đình|Tự học lễ nghi theo sách)$/,()=>"Học lễ nghi","Học lễ nghi: theo ma ma xuất cung, hay tự học theo sách."],
+ [/^(?:Mời danh sư|Xin tổ mẫu mời danh sư)$/,()=>"Mời thầy giỏi","Mời thầy giỏi về dạy: dùng bạc, hay nhờ tổ mẫu."],
+ [/^(?:Xin cha dâng sớ tiến cử|Nhờ tổ mẫu khuyên cha dâng sớ)$/,()=>"Xin vào cung sớm","Đưa ngươi vào cung sớm: xin cha, hay nhờ tổ mẫu khuyên cha."]];
+const TWN={"Mua thuốc cho mẹ":"Thuốc cho mẹ","Góp bạc cưới vợ cho huynh trưởng":"Cưới vợ cho huynh trưởng","Trả bớt nợ nhà lý trưởng":"Trả nợ nhà lý trưởng","Biếu quà lý trưởng":"Lễ lý trưởng","Học lễ nghi với bà Tư":"Học lễ nghi bà Tư","Học lễ nghi Đại Hy với ma ma sứ đoàn":"Học lễ nghi Đại Hy","Gửi lễ vật cho sứ thần":"Lễ vật cho sứ thần"};
+function kcRules(D){const tw=new Set(D.filter(a=>a&&a.tw).map(a=>a.tw));
+ return[{key:a=>{for(const [re,f] of KCR){const m=re.exec(a.n||"");if(m)return f(m)}
+   const b=a.tw||(tw.has(a.n)?a.n:null);return b?(TWN[b]||b+" (cách khác)"):null},t:"Một việc, hai đường: chọn cách làm (mỗi cách tốn khác nhau)."}]}
+function kcDoorT(key,rule,ways){const d=cardDoor(key,rule,ways);for(const [re,f,t] of KCR)if(ways.every(w=>re.test(w.n||""))){d.t=t;break}return d}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&Array.isArray(deck)){
-  if(typeof isSrv==="function"&&isSrv()){if(!(S.srv&&S.srv.lau>0))deck=doorize(deck,SRVG,cardDoor)}
+  if(typeof isKc==="function"&&isKc())deck=doorize(deck,kcRules(deck),kcDoorT);
+  else if(typeof isSrv==="function"&&isSrv()){if(!(S.srv&&S.srv.lau>0))deck=doorize(deck,SRVG,cardDoor)}
   else if(S.out)deck=doorize(deck,COLDG,cardDoor)}}catch(e){console.error("j5 doors",e)}return r}})();
 /* ---- pop-up items (cung nữ talk) ---- */
 const POPG=[
