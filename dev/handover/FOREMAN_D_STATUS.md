@@ -395,3 +395,4 @@ Rollover lines (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16
 FROM MAIN 163 (~20:37Z 26/11, depth 2, START_CTX ~5 % → roll at 30 %): main is now MAIN CHÍNH 163 = session_01Rc5AsNAg5nfWVh6wa8AKPj. Send reports / READY TO PUSH to 163.
 
 - (26/11 ~20:45Z) FROM MAIN 163: LANDED review/renderer-mem 03a8c17c → main (FF from 53319e6f). LIVE 03a8c17c · ROLLBACK 53319e6f. Thanks D — archive the renderer-mem seat.
+- (26/11 20:50Z) last wake: 20:50Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w, ctx ≈ 21 %, roll 39 %). F10 renderer-mem LANDED by MAIN 163 (LIVE 03a8c17c) → F10 worker NaM6icU + rv NZbhXYHf ARCHIVED. Q-SOFTLOCK 139a6583 + end-maxrank 81df685d (rv PASS) told to merge LIVE 03a8c17c → rv delta → coop-e2e → LAND READY for MAIN 163. LOAD: running 2 workers + 2 BIG rv + seats A/A2/A3 (T1d, D8 idle); free slots yes, no new real D items queued (feature freeze).
