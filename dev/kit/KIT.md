@@ -1301,15 +1301,19 @@ so stage blocks may stand beside a head or between figures, never over the paint
   (or come from PEND): `python3 dev/test/opt-scan.py --fail` lists every call site and fails on an unclassified one.
 - KIT PART `kitHint(o, m, lv)` → `{hint}` (jk2b; pure, also for bots — review/event-balance). Read from the option's OWN data (fx + its
   x / j67 line as `dilLineRaw` writes it: the odds, people and state of THIS moment), so it is TRUE now and changes with the context — no
-  fixed answer to learn (owner 15:10Z). Words only, no stat number (a count in a story phrase is written in words: "hai mươi trượng").
+  fixed answer to learn (owner 15:10Z). The stat is NAMED with MARKS, never a vague gain word and never its number (WORDING-GAIN, owner OD 26/11 ~18:50Z (7), CANON
+  OVERWRITE of «thêm thể diện» / «để mắt hơn» / «được tiếng hiền đức» / «(nhiều)» / «(chút ít)»): «Sủng ++», «Danh −», «Đức +++», «thái hậu: thiện cảm +», «oán −» (`kitMk`, jk2b: one mark = a little, two = medium,
+  three = a lot, loss − −− −−−; the bands are `BAL.mk` = {lo, hi, big{group}}, ONE CORE; a hostility stat prints its OWN sign: «oán −» is her gain). A count in a story phrase is written in words: "hai mươi trượng".
   Order: the main gain first, the rough chance, the price beyond Tốn ("nhưng …"), what a failure brings ("hỏng thì …"). A story phrase of
   the data keeps its own words ("cha hài lòng", "cả họ bị tru di", "lộ là chết", "lần này không thể có thai"). Never a filler word
   ("chuyện khác", "có cái giá", "có lợi về …").
   · Clarity by her Tâm cơ / Tai mắt (`kitHintLevel`, `BAL.hintMid` 25, `BAL.hintSharp` 45, `BAL.hintMat` 3):
-    0 VAGUE — generic people ("được lòng bề trên", "hạ được đối thủ"), no chance word; a deadly failure is always said ("hỏng thì mất mạng").
-    1 PLAIN — the roles (Thái hậu hài lòng, Hoàng hậu phật ý, bệ hạ để mắt hơn), the size "(nhiều)" / "(chút ít)", a rough chance
+    0 VAGUE — generic people ("Bề trên: thiện cảm +", "Đối thủ: Sủng −"), ONE mark, no chance word; a deadly failure is always said ("hỏng thì mất mạng").
+    1 PLAIN — the roles (Thái hậu: thiện cảm ++, Hoàng hậu: thiện cảm −−, Sủng +), the REAL size in marks (BAL.mk), a rough chance
       ("thường ổn" / "hên xui" / "dễ hỏng") and the failure ("hỏng thì cả họ bị tru di").
-    2 SHARP — names ("Hoa Băng Tâm thất sủng") and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
+    2 SHARP — names ("Hoa Băng Tâm: Sủng −") and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
+  · Static kit lines (the Được / Mất / Kèm text `wx` / `lx` / `kx` of every option, arc, road and event) say a stat change the same way — «Danh −», «oán +», «Chủ tin −», «Lòng −», «Sức −−», «Bạc −»; colour / row rules read a mark as its number (`kMk`, j19: «Danh −−» = «Danh −2»).
+    Scan: `node dev/test/wording-gain-scan.js` (rules dev/test/wording-gain-rules.js) = 0 vague gain lines left.
   · A hand-written override per option: `hint` (string or fn(lv)); it may never lie (must match the data).
   · An option with NO odds word (a decision, no roll) cannot fail: its "Mất:" items are a sure price and read "nhưng …", never "hỏng thì …" (review/pets-fix-r6: ts-b "Nhịn"
     read "hỏng thì mất thể diện").
