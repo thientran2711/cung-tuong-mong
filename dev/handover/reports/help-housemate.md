@@ -74,3 +74,18 @@ PRIORITY #1 CHECK: OD law 1 (OD:L33, L1534) + OD:L286 (08:45Z: no player auto-ra
 - N1: «Tốn: không» on every receiver card while «Mất: hao bạc» (pre-existing kit wording).
 - N2: evGuilty(pick) chooses among guilty people at random (pre-existing, shared with NPCs).
 - N3: no cool-down after she answers (same asker may ask again at its next deed); bounded by the number of NPCs she likes — fine under law 1, flag to Foreman D if the owner finds it busy.
+
+## 7. FIX of rv B1 → head **41125250** (FF from LIVE aa37de21)
+B1 (law 3 + law 11): «Giúp qua loa» on her «Lời nhờ» card read ĐƯỢC «chẳng được gì» — jrcv rcvHelpOpts slot 1 `được: quý +N` had no subject, so the kit hint dropped the gain. Fix: `được: <asker> quý <receiver> +N`, the same shape as slot 0 (jrcv only; numbers unchanged).
+Family scan **dev/tools/rcv-hint-scan.js**: every option of every card SHE answers as receiver (PEND.rcvHelp · rcvAsk × every RCVK key · rcvJudge × every RCVJ key) through kitHint, two passes (A: asker/third person not the queen; B: the Hoàng hậu herself asks) — 75 rows.
+
+| row | LIVE aa37de21 | 41125250 |
+|---|---|---|
+| A rcvHelp · Giúp qua loa | FAIL «chẳng được gì; nhưng hao bạc…» | ok «<asker> có thiện cảm với ta hơn; nhưng hao bạc…» |
+| B rcvHelp · Giúp qua loa | FAIL | ok |
+| B rcvAsk:mediate · Mách lẻo (the queen herself mediates: nobody above to tell; gain only «giữ mối oán») | OPEN | OPEN — pre-existing on LIVE, a MISSING GAIN (law 3), not wording; needs a number/ruling (law 16) → **FOR D** |
+| every other row (A+B, 72) | ok | ok |
+
+Gates on 41125250: help-housemate.test ALL PASS · receiver-choice ALL PASS · one-core-guard / text / bind PASS · rcv-hint-scan PASS (1 OPEN) · **coop-e2e 143 ok / 0 FAIL** (co-op first, live Worker).
+Videos re-recorded on 41125250 (same CDN URLs, overwritten): fold-755x1000.webm, ipad-1180x820.webm, frames fold-/ipad-6-loinho.jpg now show «Giúp qua loa» ĐƯỢC «được lòng người» (Fold) / «người ấy có thiện cảm hơn» (iPad). Looked at both.
+Quickcheck on 5ac9c150 stands for the build except jrcv text (one string); play part unaffected.
