@@ -151,8 +151,9 @@ async function play(p) {
     /* an open info layer (picture zoom #kpzoom, option note #kpinfo, hint #kpop, or the KẾT QUẢ toast #rtoast when it sits over a button) is closed like a person: tap on it (each closes on a tap) */
     { const inf = await p.evaluate(INFO).catch(() => null);
       if (inf) { const n = (infoTry.get(inf.sel) || 0) + 1; infoTry.set(inf.sel, n);
-        if (n <= 3) { const x = inf.x, y = inf.y; if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y); R.harness.infoTaps = (R.harness.infoTaps || 0) + 1; if (process.env.RTV) console.log('TAP info', inf.sel); await p.waitForTimeout(400); continue }
-        if (n === 4) { const shot = path.join(SHOTS, 'info-noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); bug('game', 'NO EFFECT: info layer ' + inf.sel + ' stays open after 3 real taps on it', { shot }) } }
+        const kdv = inf.sel.startsWith('.kdv-box'); /* T1d LOCAL: a scene card can ignore taps for a while (typing / pause): up to 12 taps, 900 ms apart */
+        if (n <= (kdv ? 12 : 3)) { const x = inf.x, y = inf.y; if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y); R.harness.infoTaps = (R.harness.infoTaps || 0) + 1; if (process.env.RTV) console.log('TAP info', inf.sel.slice(0, 60)); await p.waitForTimeout(kdv ? 900 : 400); continue }
+        if (n === (kdv ? 13 : 4)) { const shot = path.join(SHOTS, 'info-noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); bug('game', 'NO EFFECT: info layer ' + inf.sel + ' stays open after 3 real taps on it', { shot }) } }
       else infoTry.clear() }
     if (sc.S && sc.S.name && !sc.S.dead && !started) { started = true; R._started = true; if (C.onStart) C.onStart() }
     /* progress + checkpoints */
