@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"50f8a13b+","t":"2026-11-26T00:34Z","c":"Trò thêu, cắt giấy, vẽ: cuộn chỉ, mực và giấy nay hiện đúng màu để chọn; mẫu cắt giấy thấy rõ các lỗ.","b":"d5a7c31badf7","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"3f3fdfbd+","t":"2026-11-26T00:34Z","c":"Nơi chỉ được ở có giờ nay báo trước ngay khi bước vào và trước khắc đóng cửa; bị cấm túc hay bị giải ra thì được đưa thẳng về tẩm cung; Dư …","b":"5cbd1c4c7efe","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -93302,17 +93302,22 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
  if(typeof accOwn==="function"&&accOwn(S,k))return null;
  const a=accessOf(S,k);if(!a.ok)return{k,now:true,next:false,why:a.why||""};
  const b=S.buoi||0,last=typeof B4L==="number"?B4L:3;if(b>=last)return null;/* the day turn sends her home anyway */
- const left=BAL.time.khac-(typeof used==="number"?used:0);if(left>1)return null;
+ const left=BAL.time.khac-(typeof used==="number"?used:0);
  const b0=S.buoi;let n;try{S.buoi=b+1;n=accessOf(S,k)}finally{S.buoi=b0}
- return n&&!n.ok?{k,now:false,next:true,why:n.why||""}:null}catch(e){return null}}
+ /* place-rules (owner OD 25/11 ~23:33Z): a place that closes at the next buổi warns ON ENTRY too (lim), not only at its last khắc (next) */
+ return n&&!n.ok?{k,now:false,next:left<=1,lim:left>1,b,why:n.why||""}:null}catch(e){return null}}
 window.stClose=stClose;
 function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
-/* tinbao-words (owner OD 25/11 ~23:36Z): ONE plain cổ trang sentence — no «=», the stay odds word said once at its end («may rủi: <word>») */
-function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k);
- if(c.now)return o?`${p} đã đóng cửa${w} mà ta vẫn nán lại, chẳng khác gì lẻn vào; may rủi: ${o}.`:`${p} đã đóng cửa${w} mà ta vẫn nán lại.`;
- return o?`${p} sắp đóng cửa sau khắc này${w}; nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: ${o}.`:`${p} sắp đóng cửa sau khắc này${w}.`}
-function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:0].join("|")}catch(e){return ""}}
-function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ta vẫn nán lại`:`${p} sắp đóng cửa sau khắc này`}
+const bN=b=>{try{return String(BUOI[b]).toLowerCase()}catch(e){return ""}};
+function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k);/* wording TINBAO-WORDS (owner OD 25/11 ~23:36Z: no «=», the odds word once at the end, «ta») */
+ if(c.now)return `${p} đã đóng cửa${w} mà ta vẫn nán lại${o?`, chẳng khác gì lẻn vào; may rủi: ${o}`:""}.`;
+ if(c.lim)return `${p} chỉ được lưu đến hết ${bN(c.b)}${w}${o?`; quá giờ mà còn nán lại thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`;
+ return `${p} sắp đóng cửa sau khắc này${w}${o?`; nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`}
+function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:c.lim?2:0].join("|")}catch(e){return ""}}
+function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ta vẫn nán lại`:c.lim?`${p} chỉ được lưu đến hết ${bN(c.b)}`:`${p} sắp đóng cửa sau khắc này`}
+/* the buổi+place whose limit she has been shown (the closing notice in any of its three lines): stayRoll punishes only after it */
+function warned(bk,k){try{const w=String(S.plWarn||""),c=String(S.closeSeen||"");return w===bk+"|"+k||c.indexOf(bk+"|"+k+"|")===0}catch(e){return false}}
+window.stWarned=warned;
 /* r4 (ONE NOTICE SYSTEM, owner OD 18/11 ~22:10Z): the closing alert is a kitNotice (top-bar «!» box + top chip + «Tin báo» panel with the place's
    own picture), sticky while it holds; it is dropped when she leaves or the place opens. Was: a stage-rail «!» item + the kitLineToast chip. */
 function chip(c){try{if(typeof kitNotice!=="function")return null;const k=key(c);let pic="";try{const n=SCIMG[placeOf(c.k).sc];pic=n?`https://ctm-img.victoria-tntt.workers.dev/img/${n}.webp`:""}catch(e){}
@@ -93321,7 +93326,7 @@ function tick(){try{const c=stClose();const kk=c?key(c):"";
  /* a closing notice that no longer holds (she left, the place opened, a new buổi) leaves the box */
  try{if(typeof kitNoticeList==="function")for(const x of kitNoticeList())if(x.id.indexOf("close:")===0&&x.id!=="close:"+kk)kitNoticeDrop(x.id)}catch(e){}
  if(!c)return;if(S.closeSeen===kk){try{if(typeof kitNoticeList==="function"&&!kitNoticeList().some(x=>x.id==="close:"+kk)){const it=chip(c);if(it)it.seen=true;kitNoticeBox()}}catch(e){}return}/* reload: in the box again, no second chip */
- if(chip(c))S.closeSeen=kk}catch(e){}}
+ if(chip(c)){S.closeSeen=kk;/* the warning BEFORE the limit (on entry / last khắc); the after-the-fact «đã đóng cửa» line never overwrites it */if(!c.now)try{S.plWarn=(typeof bkey==="function"?bkey():"")+"|"+c.k}catch(e){}}}catch(e){}}
 /* r4: no stage-rail «!» item any more — the ONE «!» lives in the top bar (kitNotice box) */
 if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{actPendRun()}catch(e){}try{tick()}catch(e){}return r}}
 /* (3) ACT = A PLACE (owner OD 18/11 ~19:55Z + ~20:00Z): a Hành sự act that means going somewhere really moves her there on Dư đồ (the ONE
@@ -93361,14 +93366,20 @@ if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="
 function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
  const bk=typeof bkey==="function"?bkey():"";if(bk===bk0||S.stayRoll===bk+"|"+k)return;if(typeof accOwn==="function"&&accOwn(S,k))return;
  if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
- const n=nm(k);if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
+ const n=nm(k),why=(accessOf(S,k)||{}).why||"";
+ /* place-rules: no punishment without a warning shown before (the closing notice of the buổi that just ended): unwarned = escorted out, no loss */
+ if(!warned(bk0,k)){log(`${n} hết giờ tiếp${why?` (${why})`:""}: cung nhân tiễn ngươi về tẩm cung.`);if(typeof plHome==="function"){plHome(`${n} hết giờ tiếp, cung nhân tiễn ngươi về tẩm cung.`);try{render()}catch(e){}}
+  Q.push({t:"Hết giờ tiếp",h:`<p>${n} đã hết giờ tiếp${why?` (${why})`:""}. Cung nhân cúi đầu tiễn ngươi ra, đưa về tẩm cung.</p><p class="past">Lần này không ai bắt tội. Lần sau, xem Tin báo: nơi nào chỉ được lưu đến hết một buổi sẽ báo trước.</p>`});try{showModal()}catch(e){}return}
+ if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
  apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);punish(S,`ở lại ${n} sau giờ đóng cửa`,1);
- window.__actPend=null;window.__walkFree=1;try{goTo("home")}catch(e){}finally{window.__walkFree=0}
+ /* place-rules: the guards take her home AT ONCE (goTo("home") refused while a card was open: the stage stayed on the closed place) */
+ if(typeof plHome==="function"){plHome(`Thị vệ giải ngươi rời ${n} về tẩm cung.`);try{render()}catch(e){}}else{window.__actPend=null;window.__walkFree=1;try{goTo("home")}catch(e){}finally{window.__walkFree=0}}
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?` cấm túc ${S.confined} tháng`:" bị phạt"}</p>`});
  try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
 window.stayRoll=stayRoll;
 if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";const r=nb0.apply(this,arguments);try{stayRoll(k,bk0)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
+window.actPendRun=function(){return actPendRun()};
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
 }catch(e){console.error("jstagehere",e)}})();
 /* ---- jplw: two NEW place pictures wired into the existing scene path (j94 season x buổi sets); code hook-up only, no art here.
@@ -97166,6 +97177,100 @@ document.addEventListener("pointerup",e=>{try{const n=e.target&&e.target.closest
   if(Date.now()-DQ.mgw.at>=((BAL.dayq&&BAL.dayq.wake)||2000)){DQ.mgw=null;dqBring()}}catch(e){}},700)})();
 /* the cue: (A) says where the waiting person is (CTM_WAIT.dqRoom, in dqNextCue above); the m-fix-1 cue (dqHeld) stays for every other held card */
 window.dqBring=dqBring;
+/* ================= jplrule: PLACE RULES — one presence truth (owner OD 25/11 ~23:33Z, review/place-rules) =================
+   Owner bug: at Đức Thọ cung past buổi sáng she was «giải ra» under cấm túc 2 tháng, yet the stage still showed Đức Thọ cung; no warning
+   came before the punishment; the Hoàng hậu she was talking with «cũng tới» as a new arrival. LUẬT SỬA CẢ NHÓM — three families:
+   (1) FORCED MOVE = MOVED AT ONCE. Every path that puts her under cấm túc / in lãnh cung / sends her away moves S.place + S.visit at once:
+       · plSweep (before every render / renderStage, beside jsl kitLifePlace which pins lãnh cung + Tân Giả khố): cấm túc ⇒ her own room.
+         Whatever path set S.confined (punish from a sneak, a stay roll, an event, a trial) — one sweep, so no path can leave her elsewhere.
+       · plHome(msg): the ONE forced walk home (no khắc: the guards / the decree take her; never blocked by an open card, unlike goTo).
+       · the door refusals that left her standing inside (j2 goTo: Cần Chính điện «Ngươi phải lui ra», Càn Thanh «Thái giám chặn cửa»)
+         now send her back to her room with the same line.
+       · a summons she answers («… triệu» card, option «Đến…») walks her there (the j41 chooseM pass already existed; now the move too).
+   (2) ONE PRESENCE: a person already with her (on her stage, this place, this khắc) does not "arrive": the AG-MEET card (jgreet gmCard
+       «Có người đến … giá đáo»), the weekly door approach (j24 AP_MK) and the AG deed card (jagent agScene «Có người tìm đến») skip the
+       arrival; the deed card says she is beside her instead of «tìm đến».
+   (3) WARNING BEFORE THE LIMIT: see jstagehere (the closing notice now also shows on entry for a place that closes at the next buổi, and
+       stayRoll never punishes without that warning having been shown: unwarned = escorted out, no loss).
+   Tests: dev/test/place-rules.js. Old saves: nothing new stored except S.plWarn (optional string). */
+(function(){try{
+const PR=window.PR={stat:{sweep:0,door:0,summon:0,dupMeet:0,dupAp:0,dupSeek:0}};
+const nm=k=>{try{return typeof accName==="function"?accName(k):placeOf(k).n}catch(e){return k}};
+const mode=()=>{try{if(typeof isSrv==="function"&&isSrv())return"srv";if(typeof isKc==="function"&&isKc())return"kc"}catch(e){}return""};
+/* the ONE forced walk home: S.place + S.visit (her room's people) + the hall and a pending act trip dropped; msg = the stage line */
+function plHome(msg){try{if(typeof S!=="object"||!S||S.dead||mode())return false;if(S.out){if(typeof coldVisit==="function"&&S.place!=="lc")coldVisit();return false}
+ const from=S.place;if(from==="home"&&S.visit&&S.visit.k==="home"){if(msg)S.visit.msg=msg;return false}
+ S.place="home";try{S.hall=null}catch(e){}window.__actPend=null;S.visit={k:"home",people:homePeople(),talked:false,tk:{}};if(msg)S.visit.msg=msg;return from}catch(e){console.error("plHome",e);return false}}
+window.plHome=plHome;
+/* (1) cấm túc pins her to her own room, whatever path set it */
+function plSweep(){try{if(typeof S!=="object"||!S||S.dead||S.out||mode())return;if(!(S.confined>0))return;if(S.place==="home"&&S.visit&&S.visit.k==="home")return;
+ const from=S.place;const n=from&&from!=="home"?nm(from):"";PR.stat.sweep++;
+ plHome(n?`Thị vệ đưa ngươi rời ${n} về tẩm cung: ngươi đang bị cấm túc.`:"");if(n)log(`Rời ${n}: đang bị cấm túc, thị vệ đưa ngươi về tẩm cung.`)}catch(e){console.error("plSweep",e)}}
+window.plSweep=plSweep;
+if(typeof render==="function"){const r0=render;render=function(){plSweep();return r0.apply(this,arguments)}}
+if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){plSweep();return r1.apply(this,arguments)}}
+/* the door refusals of j2 goTo that left her inside: back to her room with the same line */
+if(typeof goTo==="function"){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(S&&!S.dead&&S.place===k&&S.visit&&S.visit.k===k&&(k==="thu"||k==="dtd")){const m=String(S.visit.msg||"");
+  if(/Ngươi phải lui ra\.|Thái giám chặn cửa/.test(m)){PR.stat.door++;plHome(m.replace("Ngươi phải lui ra.","Ngươi phải lui về cung."));if(typeof render==="function")render()}}}catch(e){console.error("plDoor",e)}return r}}
+/* a summons she answers walks her there (the pass: j41 chooseM) — after the cards close (jstagehere actPendRun) */
+const SUMMON=[[/Thái hậu/,"tn"],[/Hoàng hậu/,"kn"]];
+if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){let k=null;try{const m=Q[0];if(m&&/triệu/i.test(m.t||"")&&m.opts&&m.opts[i]&&/^Đến/.test(m.opts[i].n)&&!S.confined&&!S.out&&!mode()){for(const [re,kk] of SUMMON)if(re.test(m.t)){k=kk;break}if(k==="kn"&&!(typeof qOn==="function"&&qOn()))k=null}}catch(e){}
+  const r=c0.apply(this,arguments);try{if(k&&S&&!S.dead&&S.place!==k){PR.stat.summon++;window.__actPend={k,bk:typeof bkey==="function"?bkey():""};if(!Q.length&&typeof actPendRun==="function")actPendRun()}}catch(e){}return r}}
+/* (2) ONE PRESENCE: is v on her stage now (this place, this khắc)? */
+function plWith(v){try{if(!v||v===S||!S||!S.visit||S.visit.k!==S.place)return false;const L=typeof curPeople==="function"?curPeople():S.visit.people;
+ if(!(L||[]).some(p=>p&&p.kind!=="chest"&&p.ref===v))return false;try{if(typeof whereOf==="function"&&whereOf(v)!==S.place)return false}catch(e){}return true}catch(e){return false}}
+window.plWith=plWith;
+if(typeof gmCard==="function"){const m0=gmCard;gmCard=function(v){if(plWith(v)){PR.stat.dupMeet++;return null}return m0.apply(this,arguments)}}
+try{if(typeof AP_MK==="object"&&AP_MK)for(const k of Object.keys(AP_MK)){const f=AP_MK[k];if(typeof f!=="function")continue;AP_MK[k]=function(o){if(o&&o.who&&plWith(o.who)){PR.stat.dupAp++;return null}return f.apply(this,arguments)}}}catch(e){}
+if(typeof agScene==="function"){const s0=agScene;agScene=function(p,v){const n0=Q.length;const r=s0.apply(this,arguments);try{if(plWith(v)&&Q.length>n0){const m=Q[Q.length-1];
+  if(m&&m.t==="Có người tìm đến"){PR.stat.dupSeek++;m.t="Người bên cạnh";if(typeof m.h==="string")m.h=m.h.replace(/tìm đến ngươi ở ([^:.<]+)/,"đang ở cùng ngươi tại $1, quay sang ngươi").replace(/ ngươi ở ([^.<]+)\./," ngươi ngay tại $1.")}}}catch(e){}return r}}
+/* the ONE gate for every other arrival card (j24 faction ask, j68 «Có người đến» family, any later maker): a card titled as an arrival whose
+   person (who.w = ["r", id]) is already beside her keeps its content (its effects already ran) but loses the arrival: title «Người bên cạnh»,
+   the door / road arrival line (giá đáo · xin cầu kiến · xin ra mắt) dropped */
+const ARR=/^(Có người đến|Có người tìm đến)$/;
+function plArrFix(){try{for(const m of Q){if(!m||m.plDup||!ARR.test(m.t||"")||!m.who||!Array.isArray(m.who.w)||m.who.w[0]!=="r")continue;const v=typeof RV==="function"?RV(m.who.w[1]):null;if(!plWith(v))continue;
+  m.plDup=1;PR.stat.dupGate=(PR.stat.dupGate||0)+1;m.t="Người bên cạnh";if(typeof m.h==="string")m.h=m.h.replace(/<p>[^<]*(giá đáo|xin cầu kiến|xin ra mắt)[^<]*<\/p>/g,"").replace(/tìm đến ngươi ở ([^:.<]+)/,"đang ở cùng ngươi tại $1, quay sang ngươi")}}catch(e){console.error("plArrFix",e)}}
+window.plArrFix=plArrFix;
+if(typeof showModal==="function"){const sm0=showModal;showModal=function(){plArrFix();return sm0.apply(this,arguments)}}
+/* (4) DƯ ĐỒ under an all-locked state (owner OD 25/11 ~23:40Z, k17 shot: «đi đâu nó cũng xám hết … chỗ nào là nhà?»), label/marker layer only:
+   · HER HOME on the plan (her room, or the palace whose phối điện houses her: mapHereK at "home") is never greyed/locked: it is where she lives;
+     its label line starts «Nhà ta» on every map view (painted home icon: KIT_REQUESTS K-ICO-HOME; until then the word).
+   · ONE reason for the whole map: cấm túc / lãnh cung, or any reason that sits on most labels (hết khắc, buổi tối…) is said once in the map's
+     top row (the kit chip of that row, .fest) and dropped from the labels; the lock marks stay.
+   · Away from home: «Về phòng · N khắc» in the map's top row (kit .btn mz), the walk home (goTo("home")). */
+function plHomeK(){try{if(!S)return null;const p0=S.place;let k;try{S.place="home";k=typeof mapHereK==="function"?mapHereK():"home"}finally{S.place=p0}return k||"home"}catch(e){return"home"}}
+window.plHomeK=plHomeK;
+if(typeof accState==="function"){const as0=accState;accState=function(k){try{if(S&&S.place==="home"&&!S.out&&k&&k===plHomeK())return{why:"",here:1}}catch(e){}return as0.apply(this,arguments)}}
+const esc2=t=>String(t).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+function plMap(h){try{if(!S||S.dead||typeof h!=="string"||h.indexOf('class="maptools"')<0)return h;const hk=S.out?null:plHomeK();
+ /* the one reason */
+ let why=S.out?"Đang ở lãnh cung":S.confined>0?`Đang cấm túc, còn ${S.confined} tháng: chỉ ở trong cung mình`:"";const strip=[];
+ if(S.out)strip.push("đang ở lãnh cung");if(S.confined>0)strip.push(`đang cấm túc (${S.confined} tháng)`,`đang cấm túc (còn ${S.confined} tháng)`,`cấm túc ${S.confined} tháng`);
+ if(!why){const C={};let n=0;h.replace(/<span class="mmeta">([^]*?)<\/span>/g,(m,x)=>{n++;const e=x.match(/<em>([^<]+)<\/em>/);if(e)C[e[1]]=(C[e[1]]||0)+1;return m});
+  const top=Object.entries(C).sort((a,b)=>b[1]-a[1])[0];if(top&&top[1]>=5&&top[1]>=n*.6){why=top[0].charAt(0).toUpperCase()+top[0].slice(1);strip.push(top[0])}}
+ if(why){PR.stat.banner=(PR.stat.banner||0)+1;for(const w of strip){const W=esc2(w);
+   h=h.replace(new RegExp(`( · )?<em>${W}</em>`,"g"),"").replace(new RegExp(`<span class="mchip[^"]*">${W}</span>`,"g"),"")}
+  h=h.replace(/<span class="mmeta">\s*<\/span>/g,"");
+  h=h.replace('<div class="maptools">',`<div class="maptools"><span class="fest" data-plban="1">${why}</span>`)}
+ /* her home */
+ if(hk){h=h.replace(new RegExp(`(<(?:button|div) class="mspot[^"]*"[^>]*data-(?:go|ak)="${esc2(hk)}"[^>]*>[^]*?)(<span class="mmeta">|</(?:button|div)>)`),(m,a,b)=>b==='<span class="mmeta">'?`${a}<span class="mmeta">Nhà ta · `:`${a}<span class="mmeta">Nhà ta</span>${b}`)}
+ /* the way home */
+ if(S.place!=="home"&&!S.out&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){let tc=0,ok=true;try{tc=travel(S.place,"home");ok=typeof walkOk==="function"?walkOk(tc):true}catch(e){}
+  const b=`<button class="btn mz" data-plhome="1"${ok?"":" disabled"} title="${ok?`Đi về cung mình: ${tc} khắc`:"Không đủ khắc để về"}">Về phòng · ${tc} khắc</button>`;
+  h=h.replace(/(<div class="maptools">[^]*?<span>)(<button class="btn mz" data-mapz)/,`$1${b}$2`)}
+ return h}catch(e){console.error("plMap",e);return h}}
+window.plMap=plMap;
+/* the Dư đồ «leather» style hides the top row's text chips (jbook): the one reason also goes through the ONE notice system (kitNotice: top chip +
+   «!» box), sticky while the state holds — the chip shows once per buổi on the Dư đồ; dropped when she is free again. (A dedicated map banner part:
+   KIT_REQUESTS K-MAP-BANNER.) */
+function plBanTick(){try{if(typeof kitNotice!=="function"||!S||S.dead)return;const why=S.out?"Đang ở lãnh cung":S.confined>0?`Đang cấm túc, còn ${S.confined} tháng: chỉ ở trong cung mình`:"";
+ if(!why){try{if(typeof kitNoticeDrop==="function")kitNoticeDrop("plban")}catch(e){}return}
+ if(typeof tab==="undefined"||tab!=="go")return;const key=(typeof bkey==="function"?bkey():"")+"|"+why;if(S.plBan===key)return;S.plBan=key;
+ kitNotice({id:"plban",kind:"close",line:why,text:`${why}. Mọi nơi khác trên Dư đồ đều không đi được cho đến khi hết hạn.`,sticky:true})}catch(e){console.error("plBan",e)}}
+if(typeof render==="function"){const rb0=render;render=function(){const r=rb0.apply(this,arguments);plBanTick();return r}}
+if(typeof mapHTML==="function"){const mh0=mapHTML;mapHTML=function(){return plMap(mh0.apply(this,arguments))}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-plhome]");if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.disabled||!S||S.dead||Q.length)return;try{goTo("home")}catch(x){console.error(x)}},true);
+}catch(e){console.error("jplrule",e)}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -99144,7 +99249,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d5a7c31badf7";window.CTM_BUILD=BUILD;
+const BUILD="5cbd1c4c7efe";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
