@@ -1,0 +1,2382 @@
+{
+ "job": {
+  "id": "ES2-R2-lover-5",
+  "origin": "thd",
+  "road": "thd_tro",
+  "bot": "sens",
+  "seed": 2070349630,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "4d7a22c6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "build": {
+   "s": "3762da08+",
+   "b": "fa8da73cecdc",
+   "t": "2026-11-25T19:34Z"
+  },
+  "areaTaps": 181,
+  "dlgScroll": 19,
+  "scrolls": 32,
+  "infoTaps": 83,
+  "dlgClose": 52,
+  "mgDragSkip": 2,
+  "taps": 920
+ },
+ "life": {
+  "id": "Vợ quan thanh liêm",
+  "type": "death",
+  "fate": "Vợ quan thanh liêm",
+  "death": true,
+  "age": 19,
+  "year": 2,
+  "rank": 0,
+  "text": "Nàng làm vợ Thám hoa khoa này. Nhà không giàu, nhưng chồng nàng thương nàng suốt đời. (Tiểu thư ngoài cung · Tiểu thư nhà thầy đồ)",
+  "card": [
+   "Lên kiệu hoa Rất vững TỐN không ĐƯỢC xuất giá, kiếp này dừng",
+   "Cắt tóc xin đi tu Rất vững TỐN không ĐƯỢC xuất gia, kiếp này",
+   "Thắt cổ tự vẫn Rất vững TỐN không ĐƯỢC mất mạng !"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »",
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»",
+   ".dlg «Yến đầy tháng công chúa» «Cáo bệnh không tớiTốnkhôngĐượcSức +3·giữ sức·Hoàng»",
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»",
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»",
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »",
+   ".dlg «Yến đầy tháng công chúa» «Nói đỡ cho Hoàng hậu Liễu Cẩm Sương, lễ nhẹ ý nặng»",
+   ".dlg «Phiên vương nhập triều» «Từ chối khéo, mời nội giám xử lýTốnSủng -3ĐượcDanh»",
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »",
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »",
+   ".dlg «Cha định hôn» «Quỳ xin cha cho đi tuyển túRất vữngTốnSức -10Đượcc»",
+   ".dlg «Cha định hôn» «Lên kiệu hoaRất vữngTốnkhôngĐượcxuất giá, kiếp này»"
+  ],
+  "exitPick": {
+   "label": "Lên kiệu hoaRất vữngTốnkhôngĐượcxuất giá, kiếp này dừng ở ngoài cungGợi ýxuất giá, kiếp nà",
+   "n": 3,
+   "only": true,
+   "at": 4024,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 19,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Thạch Cẩm Tâm"
+   }
+  }
+ },
+ "exitPick": {
+  "label": "Lên kiệu hoaRất vữngTốnkhôngĐượcxuất giá, kiếp này dừng ở ngoài cungGợi ýxuất giá, kiếp nà",
+  "n": 3,
+  "only": true,
+  "at": 4024,
+  "S": {
+   "dead": false,
+   "y": 2,
+   "t": 19,
+   "w": 0,
+   "b": 3,
+   "age": 19,
+   "rank": 0,
+   "name": "Thạch Cẩm Tâm"
+  }
+ },
+ "bugs": [],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 357595,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 437831,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 481893,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 200,
+   "year": 2,
+   "chars": 556690,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 232,
+ "steps": 8120,
+ "status": [
+  "STATUS ES2-R2-lover-5 · buổi 209 · year 2 · rank 0 · bugs 0 · stuck 0 · dead buttons 0"
+ ],
+ "_loopAt": 1795670248541,
+ "_snapAt": 1795670213847,
+ "trace": [
+  [
+   2519,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2519,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2519,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2520,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2521,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2531,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2540,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2547,
+   ".dlg «Yến đầy tháng hoàng tử» «Cáo bệnh không tớiTốnkhôngĐượcSức +3·giữ sứcKèmHoà»"
+  ],
+  [
+   2548,
+   ".dlg «Yến đầy tháng hoàng tử» «Lấy cớ kéo nàng ta đi chỗ khácTốnĐức -3ĐượcDanh +3»"
+  ],
+  [
+   2555,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2565,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   2567,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2576,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2585,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2595,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   2597,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2597,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2597,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2597,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2598,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2601,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2611,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2615,
+   ".dlg «Thứ muội giành mối» «Nói lại với chaRất vữngTốnSức -5Đượccha có thể mắn»"
+  ],
+  [
+   2615,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   2623,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2625,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2634,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2643,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2652,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2656,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2657,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2657,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2657,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2658,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2659,
+   ".dlg «Hội thơ xuân» «Dự hội, làm thơRất vữngTốnSức -15Đượcthơ hay thì n»"
+  ],
+  [
+   2660,
+   "#kg82 «Bỏ quakết quả khá, tự thi giỏi thì hơn»"
+  ],
+  [
+   2660,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   2669,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2679,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2682,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   2690,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2699,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2709,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2718,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2720,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2729,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2734,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2734,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2734,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2735,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2735,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2739,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   2741,
+   ".dlg «Bà mối đến nhà» «Thưa: con đợi kỳ tuyển túRất vữngTốnkhôngĐượccha c»"
+  ],
+  [
+   2742,
+   ".dlg «Kế mẫu» «Nhận phần lỗi, xin tổ mẫu cho yên nhàRất vữngTốnkh»"
+  ],
+  [
+   2742,
+   ".dlg «Kế mẫu» «Lui»"
+  ],
+  [
+   2749,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2758,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2767,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2777,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   2786,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   2789,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   2790,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2791,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2791,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2791,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2792,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2793,
+   ".dlg «Lễ Phật đản» «Chép kinh cầu phúcTốnSức -8ĐượcĐức +2·Thái hậu +2»"
+  ],
+  [
+   2794,
+   ".dlg «Lễ Phật đản» «Ngồi tụng kinh cùng Hoàng hậu Liễu Cẩm SươngTốnSức»"
+  ],
+  [
+   2796,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2806,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2810,
+   ".dlg «Có người bán tin» «Mua tinTốnBạc -35·1 khắcĐượcnghe một tin thật·đáng»"
+  ],
+  [
+   2810,
+   ".dlg «Tin mua được» «Lui»"
+  ],
+  [
+   2817,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2820,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2822,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2831,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2841,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2850,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2854,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2855,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2855,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2855,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2855,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2857,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2859,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   2863,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   2865,
+   ".dlg «Mượn y phục» «Từ chốiRất vữngTốnkhôngĐượcthứ muội mang oánGợi ýt»"
+  ],
+  [
+   2867,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2877,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2886,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2895,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2905,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2914,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2920,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2920,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2920,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2922,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2925,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2935,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   2945,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   2947,
+   ".dlg «Nạn châu chấu» «Quyên bạc mua gạoTốnBạc -20ĐượcDanh +2·Thái hậu +2»"
+  ],
+  [
+   2949,
+   ".dlg «Nạn châu chấu» «Xin nàng ta chia một nửa cho cung taTốnDanh -3Được»"
+  ],
+  [
+   2956,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2958,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   2968,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2977,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2987,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   2991,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2992,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2992,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2993,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2993,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2997,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3006,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3010,
+   ".dlg «Thứ muội giành mối» «Nói lại với chaRất vữngTốnSức -5Đượccha có thể mắn»"
+  ],
+  [
+   3017,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3027,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3037,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3039,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3048,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3051,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3053,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3053,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3053,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3054,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3054,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3058,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3067,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3077,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3086,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3095,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3105,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3114,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3124,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3128,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3128,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3128,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3129,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3129,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3131,
+   ".dlg «Hội ngắm mẫu đơn» «Đi, đánh đàn góp vuiRất vữngTốnSức -15Đượcđàn hay »"
+  ],
+  [
+   3131,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   3131,
+   "AREA 474,264"
+  ],
+  [
+   3132,
+   "AREA 395,516"
+  ],
+  [
+   3132,
+   "AREA 272,305"
+  ],
+  [
+   3133,
+   "AREA 826,275"
+  ],
+  [
+   3134,
+   "AREA 853,587"
+  ],
+  [
+   3134,
+   "AREA 538,411"
+  ],
+  [
+   3134,
+   "AREA 745,511"
+  ],
+  [
+   3134,
+   "AREA 651,496"
+  ],
+  [
+   3135,
+   "AREA 533,354"
+  ],
+  [
+   3135,
+   "AREA 649,256"
+  ],
+  [
+   3135,
+   "AREA 412,505"
+  ],
+  [
+   3136,
+   "AREA 383,464"
+  ],
+  [
+   3136,
+   "AREA 865,533"
+  ],
+  [
+   3137,
+   "AREA 797,422"
+  ],
+  [
+   3137,
+   "AREA 449,422"
+  ],
+  [
+   3137,
+   "AREA 506,319"
+  ],
+  [
+   3137,
+   "AREA 298,450"
+  ],
+  [
+   3138,
+   "AREA 728,433"
+  ],
+  [
+   3138,
+   "AREA 292,474"
+  ],
+  [
+   3139,
+   "AREA 499,585"
+  ],
+  [
+   3139,
+   "AREA 766,396"
+  ],
+  [
+   3139,
+   "AREA 340,366"
+  ],
+  [
+   3140,
+   "AREA 731,465"
+  ],
+  [
+   3140,
+   "AREA 655,384"
+  ],
+  [
+   3140,
+   "AREA 883,587"
+  ],
+  [
+   3141,
+   "AREA 329,417"
+  ],
+  [
+   3141,
+   "AREA 279,267"
+  ],
+  [
+   3141,
+   "AREA 874,344"
+  ],
+  [
+   3141,
+   "AREA 604,466"
+  ],
+  [
+   3142,
+   "AREA 551,496"
+  ],
+  [
+   3142,
+   "AREA 581,484"
+  ],
+  [
+   3142,
+   "AREA 601,329"
+  ],
+  [
+   3143,
+   "AREA 471,399"
+  ],
+  [
+   3143,
+   "AREA 890,461"
+  ],
+  [
+   3143,
+   "AREA 469,538"
+  ],
+  [
+   3144,
+   "AREA 326,545"
+  ],
+  [
+   3144,
+   "AREA 603,340"
+  ],
+  [
+   3144,
+   "AREA 481,414"
+  ],
+  [
+   3145,
+   "AREA 454,494"
+  ],
+  [
+   3145,
+   "AREA 522,515"
+  ],
+  [
+   3145,
+   "AREA 746,361"
+  ],
+  [
+   3146,
+   "AREA 792,510"
+  ],
+  [
+   3146,
+   "AREA 518,466"
+  ],
+  [
+   3146,
+   "AREA 343,537"
+  ],
+  [
+   3147,
+   "AREA 416,502"
+  ],
+  [
+   3147,
+   "AREA 499,421"
+  ],
+  [
+   3147,
+   "AREA 615,456"
+  ],
+  [
+   3148,
+   "AREA 811,329"
+  ],
+  [
+   3148,
+   "AREA 405,353"
+  ],
+  [
+   3149,
+   "AREA 374,336"
+  ],
+  [
+   3149,
+   "AREA 473,418"
+  ],
+  [
+   3149,
+   "AREA 357,338"
+  ],
+  [
+   3149,
+   "AREA 886,344"
+  ],
+  [
+   3150,
+   "AREA 382,388"
+  ],
+  [
+   3150,
+   "AREA 293,299"
+  ],
+  [
+   3150,
+   "AREA 642,307"
+  ],
+  [
+   3151,
+   "AREA 607,523"
+  ],
+  [
+   3151,
+   "AREA 596,310"
+  ],
+  [
+   3151,
+   "AREA 338,457"
+  ],
+  [
+   3151,
+   "AREA 413,539"
+  ],
+  [
+   3152,
+   "AREA 848,571"
+  ],
+  [
+   3152,
+   "AREA 322,286"
+  ],
+  [
+   3152,
+   "AREA 442,457"
+  ],
+  [
+   3153,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   3162,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3172,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3177,
+   ".dlg «Yến đầy tháng hoàng tử» «Quà vừa phảiTốnBạc -15ĐượcTrinh tần Lưu Tuyết Dao »"
+  ],
+  [
+   3177,
+   ".dlg «Sứ đoàn vào triều» «Ngồi yên xem, không can dựTốnDanh -3·Tâm cơ -2Được»"
+  ],
+  [
+   3185,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3194,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3199,
+   ".dlg «Yến đầy tháng hoàng tử» «Ngồi bên khen đứa trẻ giống thiên nhanTốnDanh -3·S»"
+  ],
+  [
+   3199,
+   ".dlg «Nạn châu chấu» «Lui»"
+  ],
+  [
+   3207,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3216,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3221,
+   ".dlg «Sứ đoàn vào triều» «Đứng xem rồi vềTốnkhôngĐượckhông»"
+  ],
+  [
+   3228,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3237,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3247,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3249,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3249,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3250,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3250,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3250,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3254,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3256,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   3258,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   3259,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3261,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3271,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3280,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3289,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3294,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3294,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3295,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3295,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3296,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3300,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3309,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3318,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3327,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3337,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3346,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3355,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3364,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3368,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3369,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3369,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3369,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3369,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3373,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3383,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3385,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3388,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3397,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3399,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3408,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   3410,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3411,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3411,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3411,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3412,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3415,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3425,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3427,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3436,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3446,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3455,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3459,
+   ".dlg «Đêm Thất tịch» «Ngồi xemRất vữngTốnkhôngĐượckhông được gìGợi ýkhôn»"
+  ],
+  [
+   3467,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3476,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3486,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   3487,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3488,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3488,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3488,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   3491,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3493,
+   ".dlg «Có người bán tin» «Mua tinTốnBạc -35·1 khắcĐượcnghe một tin thật·đáng»"
+  ],
+  [
+   3493,
+   ".dlg «Tin mua được» «Lui»"
+  ],
+  [
+   3501,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3510,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3519,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3528,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3538,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3540,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3540,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3540,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3541,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3541,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3545,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3547,
+   ".dlg «Hạn hán, mất mùa» «Làm như không biếtTốnkhôngĐượcSức +3·giữ sức»"
+  ],
+  [
+   3549,
+   ".dlg «Yến đầy tháng hoàng tử» «Cáo bệnh không tớiTốnkhôngĐượcSức +3·giữ sứcKèmHiề»"
+  ],
+  [
+   3551,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3560,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3565,
+   ".dlg «Hạn hán, mất mùa» «Cùng ăn bữa đạm bạc để làm gươngTốnSức -5ĐượcDanh »"
+  ],
+  [
+   3566,
+   ".dlg «Thứ muội giành mối» «Nói lại với chaRất vữngTốnSức -5Đượccha có thể mắn»"
+  ],
+  [
+   3573,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3576,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3578,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3587,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3591,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3592,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3592,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3592,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3592,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3596,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3605,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3610,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   3611,
+   ".dlg «Đại trai đàn cầu phúc» «Chép kinh cầu phúcTốnSức -8ĐượcĐức +2·Thái hậu +2»"
+  ],
+  [
+   3618,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3628,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3632,
+   ".dlg «Đại trai đàn cầu phúc» «Quỳ cùng nàng ta suốt buổiTốnSức -8·Danh -3ĐượcĐức»"
+  ],
+  [
+   3633,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   3640,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3649,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3659,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3661,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3670,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3674,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3675,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3676,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3676,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3676,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3680,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3689,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3693,
+   ".dlg «Đại trai đàn cầu phúc» «Lui»"
+  ],
+  [
+   3700,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3709,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3719,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3728,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3737,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3747,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   3749,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3749,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3750,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3750,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3751,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3754,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3764,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3766,
+   ".dlg «Thu săn» «Đem chỉ vàng dành dụm cho nàng taTốnDanh -2ĐượcĐức»"
+  ],
+  [
+   3767,
+   ".dlg «Mượn y phục» «Cho mượnRất vữngTốnkhôngĐượcthứ muội có thiện cảm »"
+  ],
+  [
+   3769,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3778,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3783,
+   ".dlg «Chiếu tuyển tú» «Xin cha lo cho được miễn tuyểnRất vữngTốnBạc -40Đư»"
+  ],
+  [
+   3783,
+   ".dlg «Hạn hán, mất mùa» «Lui»"
+  ],
+  [
+   3791,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3800,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3810,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3812,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   3813,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3823,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3832,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3834,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3834,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3834,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3834,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3835,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3839,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3841,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3850,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3859,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3868,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3878,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3887,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3889,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3889,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3889,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3890,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3890,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3894,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3903,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3907,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   3914,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3924,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3934,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3936,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3945,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3955,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3956,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3966,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3969,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3970,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3970,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3971,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3971,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3972,
+   ".dlg «Tết Trùng dương» «Đi cùng cả nhàRất vữngTốnSức -10Đượccả nhà có thiệ»"
+  ],
+  [
+   3975,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3985,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3987,
+   ".dlg «Yến đầy tháng công chúa» «Cáo bệnh không tớiTốnkhôngĐượcSức +3·giữ sức·Hoàng»"
+  ],
+  [
+   3988,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»"
+  ],
+  [
+   3995,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4004,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4008,
+   ".dlg «Yến đầy tháng công chúa» «Nói đỡ cho Hoàng hậu Liễu Cẩm Sương, lễ nhẹ ý nặng»"
+  ],
+  [
+   4008,
+   ".dlg «Phiên vương nhập triều» «Từ chối khéo, mời nội giám xử lýTốnSủng -3ĐượcDanh»"
+  ],
+  [
+   4011,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4020,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4024,
+   ".dlg «Cha định hôn» «Quỳ xin cha cho đi tuyển túRất vữngTốnSức -10Đượcc»"
+  ],
+  [
+   4025,
+   ".dlg «Cha định hôn» «Lên kiệu hoaRất vữngTốnkhôngĐượcxuất giá, kiếp này»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795670210580,
+ "_ckB": 230,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1393,
+   "rendererMB": 670,
+   "heapMB": 93,
+   "dom": 2848,
+   "q": 4,
+   "lsK": 4
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1992,
+   "rendererMB": 1098,
+   "heapMB": 93,
+   "dom": 992,
+   "q": 0,
+   "lsK": 165
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 2016,
+   "rendererMB": 1117,
+   "heapMB": 93,
+   "dom": 1020,
+   "q": 0,
+   "lsK": 226
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2113,
+   "rendererMB": 1202,
+   "heapMB": 93,
+   "dom": 857,
+   "q": 0,
+   "lsK": 296
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2201,
+   "rendererMB": 1288,
+   "heapMB": 93,
+   "dom": 1464,
+   "q": 1,
+   "lsK": 324
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2117,
+   "rendererMB": 1227,
+   "heapMB": 93,
+   "dom": 997,
+   "q": 2,
+   "lsK": 345
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2086,
+   "rendererMB": 1182,
+   "heapMB": 93,
+   "dom": 877,
+   "q": 0,
+   "lsK": 350
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2076,
+   "rendererMB": 1173,
+   "heapMB": 93,
+   "dom": 897,
+   "q": 0,
+   "lsK": 369
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2131,
+   "rendererMB": 1201,
+   "heapMB": 93,
+   "dom": 1273,
+   "q": 0,
+   "lsK": 404
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2086,
+   "rendererMB": 1183,
+   "heapMB": 93,
+   "dom": 948,
+   "q": 1,
+   "lsK": 413
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2128,
+   "rendererMB": 1224,
+   "heapMB": 93,
+   "dom": 968,
+   "q": 0,
+   "lsK": 427
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2117,
+   "rendererMB": 1209,
+   "heapMB": 93,
+   "dom": 855,
+   "q": 1,
+   "lsK": 441
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2169,
+   "rendererMB": 1244,
+   "heapMB": 93,
+   "dom": 1431,
+   "q": 0,
+   "lsK": 447
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 2148,
+   "rendererMB": 1250,
+   "heapMB": 93,
+   "dom": 979,
+   "q": 0,
+   "lsK": 434
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "totalMB": 2153,
+   "rendererMB": 1245,
+   "heapMB": 93,
+   "dom": 957,
+   "q": 0,
+   "lsK": 455
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "totalMB": 2150,
+   "rendererMB": 1244,
+   "heapMB": 117,
+   "dom": 922,
+   "q": 0,
+   "lsK": 502
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 2192,
+   "rendererMB": 1261,
+   "heapMB": 117,
+   "dom": 1449,
+   "q": 0,
+   "lsK": 492
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "totalMB": 2147,
+   "rendererMB": 1240,
+   "heapMB": 117,
+   "dom": 987,
+   "q": 1,
+   "lsK": 477
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "totalMB": 2144,
+   "rendererMB": 1242,
+   "heapMB": 117,
+   "dom": 953,
+   "q": 0,
+   "lsK": 491
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "totalMB": 1963,
+   "rendererMB": 1062,
+   "heapMB": 117,
+   "dom": 874,
+   "q": 0,
+   "lsK": 494
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "totalMB": 2102,
+   "rendererMB": 1168,
+   "heapMB": 117,
+   "dom": 1470,
+   "q": 0,
+   "lsK": 502
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "totalMB": 2067,
+   "rendererMB": 1161,
+   "heapMB": 117,
+   "dom": 915,
+   "q": 0,
+   "lsK": 492
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 2106,
+   "rendererMB": 1208,
+   "heapMB": 117,
+   "dom": 959,
+   "q": 0,
+   "lsK": 520
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 2133,
+   "rendererMB": 1229,
+   "heapMB": 117,
+   "dom": 981,
+   "q": 0,
+   "lsK": 536
+  },
+  {
+   "buoi": 121,
+   "y": 2,
+   "totalMB": 2191,
+   "rendererMB": 1264,
+   "heapMB": 117,
+   "dom": 1465,
+   "q": 0,
+   "lsK": 535
+  },
+  {
+   "buoi": 125,
+   "y": 2,
+   "totalMB": 2358,
+   "rendererMB": 1464,
+   "heapMB": 117,
+   "dom": 910,
+   "q": 0,
+   "lsK": 540
+  },
+  {
+   "buoi": 130,
+   "y": 2,
+   "totalMB": 2348,
+   "rendererMB": 1437,
+   "heapMB": 117,
+   "dom": 913,
+   "q": 2,
+   "lsK": 539
+  },
+  {
+   "buoi": 135,
+   "y": 2,
+   "totalMB": 2369,
+   "rendererMB": 1464,
+   "heapMB": 117,
+   "dom": 873,
+   "q": 0,
+   "lsK": 554
+  },
+  {
+   "buoi": 140,
+   "y": 2,
+   "totalMB": 2359,
+   "rendererMB": 1457,
+   "heapMB": 117,
+   "dom": 868,
+   "q": 0,
+   "lsK": 568
+  },
+  {
+   "buoi": 145,
+   "y": 2,
+   "totalMB": 2444,
+   "rendererMB": 1503,
+   "heapMB": 117,
+   "dom": 1497,
+   "q": 1,
+   "lsK": 577
+  },
+  {
+   "buoi": 150,
+   "y": 2,
+   "totalMB": 2416,
+   "rendererMB": 1502,
+   "heapMB": 117,
+   "dom": 922,
+   "q": 2,
+   "lsK": 565
+  },
+  {
+   "buoi": 155,
+   "y": 2,
+   "totalMB": 2424,
+   "rendererMB": 1528,
+   "heapMB": 117,
+   "dom": 912,
+   "q": 0,
+   "lsK": 577
+  },
+  {
+   "buoi": 160,
+   "y": 2,
+   "totalMB": 2232,
+   "rendererMB": 1330,
+   "heapMB": 117,
+   "dom": 880,
+   "q": 0,
+   "lsK": 594
+  },
+  {
+   "buoi": 165,
+   "y": 2,
+   "totalMB": 2025,
+   "rendererMB": 1128,
+   "heapMB": 117,
+   "dom": 1549,
+   "q": 2,
+   "lsK": 596
+  },
+  {
+   "buoi": 170,
+   "y": 2,
+   "totalMB": 2152,
+   "rendererMB": 1248,
+   "heapMB": 117,
+   "dom": 936,
+   "q": 2,
+   "lsK": 612
+  },
+  {
+   "buoi": 175,
+   "y": 2,
+   "totalMB": 2246,
+   "rendererMB": 1347,
+   "heapMB": 117,
+   "dom": 942,
+   "q": 0,
+   "lsK": 627
+  },
+  {
+   "buoi": 180,
+   "y": 2,
+   "totalMB": 2088,
+   "rendererMB": 1185,
+   "heapMB": 117,
+   "dom": 940,
+   "q": 0,
+   "lsK": 641
+  },
+  {
+   "buoi": 185,
+   "y": 2,
+   "totalMB": 2410,
+   "rendererMB": 1472,
+   "heapMB": 117,
+   "dom": 1916,
+   "q": 0,
+   "lsK": 635
+  },
+  {
+   "buoi": 190,
+   "y": 2,
+   "totalMB": 2360,
+   "rendererMB": 1455,
+   "heapMB": 117,
+   "dom": 864,
+   "q": 0,
+   "lsK": 617
+  },
+  {
+   "buoi": 195,
+   "y": 2,
+   "totalMB": 2068,
+   "rendererMB": 1163,
+   "heapMB": 117,
+   "dom": 879,
+   "q": 0,
+   "lsK": 638
+  },
+  {
+   "buoi": 200,
+   "y": 2,
+   "totalMB": 2304,
+   "rendererMB": 1392,
+   "heapMB": 117,
+   "dom": 913,
+   "q": 1,
+   "lsK": 656
+  },
+  {
+   "buoi": 205,
+   "y": 2,
+   "totalMB": 2359,
+   "rendererMB": 1432,
+   "heapMB": 117,
+   "dom": 1431,
+   "q": 0,
+   "lsK": 655
+  },
+  {
+   "buoi": 210,
+   "y": 2,
+   "totalMB": 2368,
+   "rendererMB": 1467,
+   "heapMB": 117,
+   "dom": 926,
+   "q": 2,
+   "lsK": 672
+  },
+  {
+   "buoi": 215,
+   "y": 2,
+   "totalMB": 2412,
+   "rendererMB": 1511,
+   "heapMB": 117,
+   "dom": 879,
+   "q": 0,
+   "lsK": 656
+  },
+  {
+   "buoi": 220,
+   "y": 2,
+   "totalMB": 2405,
+   "rendererMB": 1503,
+   "heapMB": 111,
+   "dom": 889,
+   "q": 1,
+   "lsK": 682
+  },
+  {
+   "buoi": 225,
+   "y": 2,
+   "totalMB": 2458,
+   "rendererMB": 1538,
+   "heapMB": 111,
+   "dom": 1150,
+   "q": 0,
+   "lsK": 668
+  },
+  {
+   "buoi": 230,
+   "y": 2,
+   "totalMB": 2447,
+   "rendererMB": 1536,
+   "heapMB": 111,
+   "dom": 998,
+   "q": 2,
+   "lsK": 689
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  "#kmrew|",
+  "#modal|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  ".dlg|Khuê các",
+  "page|Khuê phòng · Không gặp ai.",
+  ".dlg|Có người đến",
+  "#kxcatch|",
+  "page|Khuê phòng · Ở đây có # người.",
+  ".kbk|Tổng lược",
+  ".dlg|Danh hiệu mới",
+  "#modal|Đeo «Thư hương»",
+  ".dlg|Đeo «Thư hương»",
+  ".dlg|Cha say rượu",
+  ".dlg|Có người bán tin",
+  ".dlg|Tin mua được",
+  ".dlg|Lễ Phật đản",
+  "#modal|Lễ Phật đản",
+  ".dlg|Hội ngắm mẫu đơn",
+  "#kg82|",
+  "#modal|Sứ đoàn vào triều",
+  ".dlg|Sứ đoàn vào triều",
+  ".dlg|Mượn y phục",
+  ".dlg|Tài nữ kinh thành",
+  "#modal|Có người bán tin",
+  ".dlg|Danh hiệu lên bậc",
+  ".dlg|Tin trong cung buổi này",
+  "#modal|Hỏa hoạn lớn",
+  ".dlg|Hỏa hoạn lớn",
+  "#modal|Tài nữ kinh thành",
+  ".dlg|Đêm Thất tịch",
+  "#ov|",
+  "#modal|Mượn y phục",
+  "#modal|Bức thêu mừng thọ",
+  ".dlg|Bức thêu mừng thọ",
+  "#modal|Cha say rượu",
+  ".dlg|Tết Trùng dương",
+  "#modal|Kế mẫu",
+  ".dlg|Kế mẫu",
+  ".dlg|Cha bị hặc tội",
+  "#modal|Bà mối đến nhà",
+  ".dlg|Bà mối đến nhà",
+  ".dlg|Nhà trai thử dung mạo",
+  ".dlg|Án mất trộm ngự khố",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Án mất trộm ngự khố",
+  "#modal|Đại hàn, tuyết lớn",
+  ".dlg|Tết Thượng nguyên",
+  "#modal|Tỉnh thân",
+  ".dlg|Tỉnh thân",
+  "#modal|Yến đầy tháng hoàng tử",
+  ".dlg|Yến đầy tháng hoàng tử",
+  ".dlg|Thứ muội giành mối",
+  ".dlg|Hội thơ xuân",
+  ".dlg|Nạn châu chấu",
+  "#modal|Nạn châu chấu",
+  "#modal|Thứ muội giành mối",
+  "#modal|Đêm Thất tịch",
+  ".dlg|Hạn hán, mất mùa",
+  "#modal|Hạn hán, mất mùa",
+  ".dlg|Đại trai đàn cầu phúc",
+  "#modal|Đại trai đàn cầu phúc",
+  ".dlg|Thu săn",
+  "#modal|Chiếu tuyển tú",
+  ".dlg|Chiếu tuyển tú",
+  "#modal|Thu săn",
+  ".dlg|Yến đầy tháng công chúa",
+  ".dlg|Phiên vương nhập triều",
+  "#modal|Cha định hôn",
+  ".dlg|Cha định hôn",
+  ".kmov|"
+ ],
+ "_momRank": 0,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+  ".dlg|Có người đến": {},
+  "page|Khuê phòng · Không gặp ai.": {},
+  "page|Khuê phòng · Ở đây có # người.": {},
+  ".dlg|Danh hiệu mới": {},
+  ".dlg|Đeo «Thư hương»": {},
+  ".dlg|Cha say rượu": {},
+  ".dlg|Có người bán tin": {},
+  ".dlg|Hội ngắm mẫu đơn": {},
+  ".dlg|Mượn y phục": {},
+  ".dlg|Đêm Thất tịch": {},
+  ".dlg|Bức thêu mừng thọ": {},
+  ".dlg|Tết Trùng dương": {},
+  ".dlg|Cha bị hặc tội": {},
+  ".dlg|Bà mối đến nhà": {},
+  ".dlg|Nhà trai thử dung mạo": {},
+  ".dlg|Tết Thượng nguyên": {},
+  ".dlg|Thứ muội giành mối": {},
+  ".dlg|Hội thơ xuân": {},
+  ".dlg|Chiếu tuyển tú": {},
+  ".dlg|Yến đầy tháng công chúa": {},
+  ".dlg|Phiên vương nhập triều": {},
+  ".dlg|Cha định hôn": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|871,392": {
+   "left": 313,
+   "n": 1
+  },
+  "#modal|Lễ Phật đản|706,563": {
+   "left": 205,
+   "n": 1
+  },
+  "#modal|Án mất trộm ngự khố|706,535": {
+   "left": 144,
+   "n": 1
+  },
+  "#modal|Đại hàn, tuyết lớn|706,563": {
+   "left": 205,
+   "n": 1
+  },
+  "#modal|Đại hàn, tuyết lớn|706,548": {
+   "left": 228,
+   "n": 3
+  },
+  ".dlg|Đại hàn, tuyết lớn|706,548": {
+   "left": 228,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,595": {
+   "left": 100,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,610": {
+   "left": 129,
+   "n": 3
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,610": {
+   "left": 129,
+   "n": 1
+  },
+  "#modal|Nạn châu chấu|706,548": {
+   "left": 228,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,543": {
+   "left": 51,
+   "n": 1
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,600": {
+   "left": 164,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,535": {
+   "left": 143,
+   "n": 1
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,585": {
+   "left": 141,
+   "n": 1
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,571": {
+   "left": 164,
+   "n": 1
+  }
+ },
+ "t": {
+  "total": 4025144
+ }
+}
