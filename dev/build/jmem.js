@@ -234,7 +234,7 @@ function causeWhy(b,t,s){b=mk(b);t=mk(t);s=s>0?1:-1;try{
  if(b==="me")return{k:"chon"};
  const v=mp(b),T=mp(t);if(!v||typeof v!=="object")return{k:"net",x:""};const tr=(traitsOf(v)||[])[0]||"";
  const tObj=T&&typeof T==="object"&&(T===S||T.id!=null);
- if(s>0)return tObj&&aff(v,T)>=BH().czClose?{k:"than"}:{k:"net",x:tr};
+ if(s>0)return tObj&&aff(v,T)>=netTh(v,"than")?{k:"than"}:{k:"net",x:tr};
  if(v.slightAt!=null&&typeof bq==="function"&&bq()-v.slightAt<=BH().czRash)return{k:"nong"};
  if(!tObj)return{k:"net",x:tr};
  const g=T===S?(v.ghen||0):Math.max(0,((T.sung||0)-(v.sung||0))/BH().czGhenDiv),oa=oan(v,T),ha=Math.max(0,-aff(v,T));const mx=Math.max(g,oa,ha);

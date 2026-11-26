@@ -77,11 +77,14 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tiền của người chơi (cửa hàng) | "Ta có N bạc" | Ngươi có N bạc |
 | Kẻ hầu được sai đi làm việc | Người chạy việc: <tên> (chạm: "Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi; chọn theo Lòng và tài"); nút "Đổi ›" | Sai đi: <tên> |
 | Ngày đầu cuộc | Thân phận kiếp này · Nhận thân phận · Nhập cung | — |
+| Tên kết cục (thẻ cuối kiếp, owner 25/11 ~07:40Z «Một kiếp phù sinh») | một tên cổ trang riêng cho từng lối kết, đứng làm tiêu đề thẻ: «Thanh đăng cổ Phật», «Lồng son mở cửa», «Ba thước lụa trắng», «Hoa rụng lúc kết trái»…; dòng sự việc ("Xuất cung", "Khó sinh, băng huyết mà chết") vẫn ở dưới cho rõ. MỘT bảng: `KIT_END.names` + `endName()` (jend.js) — thẻ cuối kiếp, chữ mực khi chết, Sổ luân hồi, dòng Phúc duyên đều đọc ở đó; kiểm: `node dev/test/co-ngu-titles/scan.js` | "Kiếp này" làm tiêu đề, "Chết là hết.", "Sống trong cung", "Chết vì" |
+| Lời khép thẻ cuối kiếp | sống: «Phù sinh nhược mộng, một kiếp đã khép lại.» · chết: «Hương tàn khói lạnh, người đã đi xa.» + «Kiếp sau bắt đầu lại từ đầu…» (`KIT_END.names.close`) | "Kiếp này khép lại.", "Chết là hết." |
 | Chơi chung (sếp 15/11) | Cùng hảo hữu · Mời hảo hữu · hảo hữu (người chơi cùng) · Ám hiệu · Nhập ám hiệu | Chơi cùng bạn, Mời bạn, bạn, tri kỷ, Mã phòng |
 | Sổ tóm tắt tuần | Tuần lục | Sổ tuần |
 | Đồ đang đeo | Bên mình | Đang mang |
 | Bảng xếp hạng | Bảng vàng | Bảng vinh danh, leaderboard |
 | Tab Hoàng thượng + Thái hậu | Chí tôn | Hoàng thượng · Thái hậu, Thánh thượng |
+| Một dòng tin (Tin báo, tin người sai đi về, Sổ ghi thêm, nghe lén, nghe ngóng, báo nơi chốn) (sếp OD 25/11 ~23:36Z «tùm lum chữ lặp tới lặp lui») | MỘT câu rõ: tên đầy đủ (chức + tên) một lần, sau đó «nàng ta» / tên ngắn; người được sai nói kết quả bằng lời («…, việc đã thành.»); lý do là một vế câu; nết viết thành lời («vốn tính nhiều chuyện»); bậc may rủi đứng cuối câu một lần («…chẳng khác gì lẻn vào; may rủi: Khó lường.»); lưới chung `kitSayLine` (jnotice) ở lối vào duy nhất; lớp tô tên `kitRankNamePaint` chỉ gắn chức một lần mỗi dòng. Thẻ chọn không tốn không được gì (Xem tin, Để sau) không có hàng «Tốn: không / Được: không». Kiểm: `node dev/test/tinbao-words/scan.js` | «Ở lại = như lẻn vào: Có cơ.», «X trở về · thành. X trở về: X nghe ngóng được về …», «(chưa quen) (nàng đang được sủng)», «có nết Nhiều chuyện», «Sổ ghi thêm về X: nghe lén: …», «… · con gái thầy đồ nghèo» |
 
 ### Makeup (Điểm trang): the FIVE result levels — owner 17/11 05:03Z / 05:16Z (OD:L1553-1554); 15:35Z (OD L1638, makeup-lux) Diêm dúa dropped as a level, Khuynh thành = the maximum. ONE label source: `TOIL_MK` (jtoil.js; `toilMkW` inside a sentence: a name keeps its capital, only "mặt mộc" is lower case)
 

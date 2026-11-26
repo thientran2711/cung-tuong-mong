@@ -23,7 +23,9 @@ const PRE=__PRE__;
 const IMG='__IMG__';
 let HOSTR=null;  /* {t, r}: the index.html response last given to a top-level host page (network or saved copy) (see the iframe branch in the fetch handler) */
 let MAN=null;
-function man(){if(MAN)return MAN;MAN=caches.open(SHELL).then(c=>c.match('assets.json')).then(r=>r?r:fetch('assets.json',{cache:'no-store'})).then(r=>r.json()).then(j=>{const m=new Map();for(const f of j.files)m.set(f[0],f[1]);return m}).catch(e=>{MAN=null;return new Map()});return MAN}
+/* review/audio-ipad: CDNF = paths outside img/ that live on the CDN (assets.json 5th field "c": the event / festival music) — baseOf keys them on IMG */
+const CDNF=new Set();
+function man(){if(MAN)return MAN;MAN=caches.open(SHELL).then(c=>c.match('assets.json')).then(r=>r?r:fetch('assets.json',{cache:'no-store'})).then(r=>r.json()).then(j=>{const m=new Map();for(const f of j.files){m.set(f[0],f[1]);if(f[4]==='c')CDNF.add(f[0])}return m}).catch(e=>{MAN=null;return new Map()});return MAN}
 self.addEventListener('install',e=>{e.waitUntil(caches.open(SHELL).then(c=>c.addAll(PRE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
  const ks=await caches.keys();const olds=ks.filter(k=>k.startsWith('ctm-shell-')&&k!==SHELL);
@@ -44,14 +46,14 @@ self.addEventListener('activate',e=>{e.waitUntil((async()=>{
    first screen; never retried per fetch. */
 const PRUNE='ctm-prune.json',PRUNE_WAIT=15000;
 let pruned=false,pruneT=0;
-async function prune(){if(pruned)return;pruned=true;try{const sh=await caches.open(SHELL);const r=await sh.match(PRUNE);if(!r)return;const todo=await r.json();const c=await caches.open(ASSETS);
+async function prune(){if(pruned)return;pruned=true;try{await man();const sh=await caches.open(SHELL);const r=await sh.match(PRUNE);if(!r)return;const todo=await r.json();const c=await caches.open(ASSETS);
  for(const [p,h] of todo){try{await c.delete(new URL(p+'?h='+h,baseOf(p)).href)}catch(err){}}
  await sh.delete(PRUNE)}catch(e){}}
 /* a page may ask a waiting worker to take over (swreg.js), or ask which build answers it (tests) */
 self.addEventListener('message',e=>{const d=e.data||{};if(d.ctm==='skip')self.skipWaiting();else if(d.ctm==='v'&&e.source)e.source.postMessage({ctm:'v',v:V})});
 function scopePath(){return new URL(self.registration.scope).pathname}
 function relPath(u){if(IMG&&u.href.startsWith(IMG))return decodeURIComponent(u.pathname.slice(new URL(IMG).pathname.length));if(u.origin!==location.origin)return null;const s=scopePath();return u.pathname.startsWith(s)?decodeURIComponent(u.pathname.slice(s.length)):null}
-function baseOf(p){return IMG&&p.startsWith('img/')?IMG:self.registration.scope}
+function baseOf(p){return IMG&&(p.startsWith('img/')||CDNF.has(p))?IMG:self.registration.scope}
 const CORS={mode:'cors',credentials:'omit'};
 /* Range requests (<audio> elements) get a 206 cut from the cached whole file */
 async function ranged(req,res){const rg=req.headers.get('range');if(!rg||!res||res.status!==200)return res;
@@ -61,6 +63,10 @@ async function ranged(req,res){const rg=req.headers.get('range');if(!rg||!res||r
 /* entry-blank-r3 (review item 6): ONE download per picture. The life gate (jload lWant) and the <img> on screen ask for the same picture at
    the same time; each used to go to the network (twice the bytes on a slow line, so nothing arrived for long). The second waits for the first
    and is answered from the cache. */
+/* offline-fast: a saved copy of a data file when the line is down — the shells first (small, a few hundred keys), the whole-storage walk
+   (ignoreSearch over every cache incl. 'ctm-assets' with up to ~32 000 keys: seconds on a phone) only if no shell has it (offline boot = her flight) */
+async function anyCopy(u){try{for(const k of (await caches.keys()).filter(k=>k.startsWith('ctm-shell-')).sort((a,b)=>(b===SHELL)-(a===SHELL))){const r=await (await caches.open(k)).match(u,{ignoreSearch:true});if(r)return r}}catch(e){}
+ return caches.match(u,{ignoreSearch:true})}
 const INF=new Map();
 async function asset(e,p,h){const key=new URL(p+'?h='+h,baseOf(p)).href,c=await caches.open(ASSETS);
  const r=await c.match(key);if(r)return ranged(e.request,r);
@@ -93,10 +99,14 @@ self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;c
      EVERY open — on a slow line (or when the browser's own HTTP cache was emptied: no 304) they took the line before any picture of the first screen.
      They are precached in this build's shell at install, so the shell copy answers at once and the network copy refreshes it in the background,
      20 s later (one open behind at most). Same-origin JSON (assets.json, audio) stays network first. */
-  if(cdn){e.respondWith(caches.open(SHELL).then(c=>c.match(jk)).then(hit=>{if(!hit)return net().catch(()=>caches.match(jk,{ignoreSearch:true}));
+  if(cdn){e.respondWith(caches.open(SHELL).then(c=>c.match(jk)).then(hit=>{if(!hit)return net().catch(()=>anyCopy(jk));
     e.waitUntil(new Promise(ok=>setTimeout(ok,20000)).then(()=>net()).catch(()=>{}));return hit}));return}
-  e.respondWith(net().catch(()=>caches.match(jk,{ignoreSearch:true})));return}
+  e.respondWith(net().catch(()=>anyCopy(jk)));return}
  e.respondWith((async()=>{const m=await man(),h=m.get(p);
   if(h){try{return await asset(e,p,h)}catch(err){const c=await caches.open(ASSETS);const any=await c.match(new URL(p,baseOf(p)).href,{ignoreSearch:true});return any?ranged(q,any):Response.error()}}
-  const hit=await caches.match(q,{ignoreSearch:true});if(hit)return ranged(q,hit);
-  return fetch(cdn?new Request(q.url,CORS):q)})())});
+  /* offline-fast (owner 24/11 ~18:00Z): a file NOT in assets.json used to be looked up with caches.match(…,{ignoreSearch:true}) over EVERY cache:
+     ignoreSearch cannot use the key index, so it walked all of 'ctm-assets' (10–30 thousand entries; ~5 s at CPU 4× with 11 000) and every other
+     cache read — the music included — waited behind it. Now: the small shell first (same lookup), then the network; the walk over 'ctm-assets' only
+     when the network fails (offline, a legacy copy is better than nothing). */
+  const sh=await (await caches.open(SHELL)).match(q,{ignoreSearch:true});if(sh)return ranged(q,sh);
+  try{return await fetch(cdn?new Request(q.url,CORS):q)}catch(err){const hit=await caches.match(q,{ignoreSearch:true});if(hit)return ranged(q,hit);throw err}})())});

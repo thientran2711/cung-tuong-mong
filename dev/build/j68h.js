@@ -1,7 +1,7 @@
 /* ================= j68h: GROUNDING (owner rule 11/14): every event comes from the simulated world =================
    Preconditions read real state and bind real actors/facts; hearsay is labelled with its source and is either a true fact or that NPC's own lie/false belief,
    and checking it always reports the truth. Also grounds two stock sources that said nothing: the NPC 'rỉ tai' act (j28) and the j24 'kể chuyện trong cung' visit. */
-const band6=v=>{try{return bandOf(danger(v,S))}catch(e){return 0}};
+const band6=v=>{try{return bandVT(v,S)}catch(e){return 0}};
 const spyOther6=s=>!!(s&&s.spyFor&&s.spyFor!=="me");
 const planOnMe6=()=>liveRivals(true).find(v=>v.plan&&v.plan.t===key(S))||null;
 /* a true fact about consort x, as one plain sentence (null if nothing notable) */

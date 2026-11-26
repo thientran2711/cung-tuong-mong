@@ -18,6 +18,19 @@ function crsPush(lv,pt,k,g,up){if(!(g>0))return 0;const T=BAL.art.tier,G=BAL.art
   if(give<room-1e-9){pt[k]=Math.round((have+give)*10)/10;left=0}
   else{left-=room/G[Math.min(l,G.length-1)];if(l>=top){pt[k]=need;left=0}else{pt[k]=0;lv[k]=l+1;n++;if(up)up(l+1)}}}
  return n}
+/* review/balance-pace: the ONE lesson-points rule of one play (her j23 lesson, an NPC's j85 npcStudyDo): pts = the game's points (j83 wkLessonPts 0..3, × the
+   danh sư's 2 for her); mode "self" | "teacher" | other (Thái hậu: the game's points) */
+function lesG(mode,pts){const L=BAL.art.les,gs=Math.max(L.min,Math.round((pts||0)*L.self));return mode==="self"?gs:mode==="teacher"?Math.max(pts||0,gs+(BAL.tchMin||1)):(pts||0)}
+/* the progress shown on a course card, in PHẦN (lesson points, the unit every «tiến bộ … phần» text uses): phần inside the bậc / phần that bậc needs
+   (BAL.art.tier width ÷ BAL.art.gain of the bậc). Was points / 100, read by sếp as «100 to one bậc» (OD 25/11). */
+function crsG(l){const G=BAL.art.gain;return G[Math.max(0,Math.min(l|0,G.length-1))]}
+/* phần a course needs from bậc l to bậc l+1 (rule cards «Năm bậc», the bar) */
+function crsNeedP(l){return Math.ceil(artNeed(l)/crsG(l)-1e-6)}
+function crsProg(lv,pt,k){const T=BAL.art.tier,l=Math.min((lv||{})[k]||0,T.length-1);return [Math.floor(((pt||{})[k]||0)/crsG(l)+1e-6),crsNeedP(l)]}
+/* the phần one play of mode gives (game points 1..3 through lesG / tdPts), as words («một đến ba phần»): every lesson button reads this, never a typed range */
+function crsGainW(mode,l,vir){const f=pts=>Math.max(1,vir?tdPts(mode,pts):lesG(mode,pts));const a=f(1),b=f(3);return typeof kStepW==="function"?kStepW(a,b):`${a}–${b} phần`}
+/* a Tứ đức lesson's points by game points 0..3 (BAL.td.pts; jtd tdPoints reads it through the raw bands BAL.mgTier.lessonPts) */
+function tdPts(mode,pts){const P=BAL.td.pts[mode==="self"?"self":"m"];return P[Math.max(0,Math.min(P.length-1,pts|0))]}
 function crsPts(lv,pt,k){const T=BAL.art.tier;const l=Math.min((lv||{})[k]||0,T.length-1);return Math.min(100,Math.round(T[l]+((pt||{})[k]||0)))}
 function artPts(p,k){return crsPts(p&&p.arts,p&&p.artp,k)}
 function virPts(p,k){return crsPts(p&&p.vir,p&&p.virp,k)}
@@ -99,7 +112,7 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
 (function(){try{const O=BAL.art.odds,side=x=>Math.round(x*BAL.art.side*10)/10;
  const SIDE={ky:[1],vu:[1],y:[1]};/* passive weights: mưu kế (Kỳ 1), lật thẻ (Vũ 1, Y 1) */
  for(const k in ARTFX){ARTFX[k].forEach((s0,i,arr)=>{const l=i+1;const T=s=>{
-  s=s.replace(/^(Tài|Sắc) \+(\d+)/,(m,st,n)=>`${st} +${BAL.art.stUp+(+n-2)}`);
+  /* the leading Tài/Sắc already prints BAL.art.stUp (j85 ARTFX token {n:art.stUp}; Vũ bậc 4 prints stUp + BAL.artB.vu[4]) — typed-stat-bal GROUP A */
   {const re=/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?), Danh \+\d+/;/* the bậc-up Danh (BAL.art.danh) sits on exactly the bậc that give it */
    if(BAL.art.danh[l])s=re.test(s)?s.replace(re,`$1, Danh +${BAL.art.danh[l]}`):s.replace(/^((?:Tài|Sắc) \+\d+(?:, Tâm cơ \+\d+)?)/,`$1, Danh +${BAL.art.danh[l]}`);else s=s.replace(re,"$1")}
   if(k==="vu"&&l===2)s=s.replace(/Múa trong yến tiệc \(mỗi bậc \+\d+\), Chặn ngự giá \(mỗi bậc \+\d+\) dễ thành hơn/,`Múa trong yến tiệc dễ thành hơn (+${O[l]})`);
@@ -122,4 +135,8 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
   if(at>=0&&at!==gi&&X[gi]){const m=X[at].match(/ · (mở «.*)$/);X[at]=X[at].replace(" · "+m[1],"");X[gi]+=" · "+m[1]}
   const a=ARTS.find(x=>x.k===k);if(a&&a.u)a.u=a.u.replace(/^Bậc \d+/,`Bậc ${BAL.deck[k].lv}`)}
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));
+/* tainghe-info (MAIN 148 wording note, VANPHONG «the number stands after its NAME»): an odds bonus never stands bare («thỉnh an +8», «dễ thành hơn (+4)»):
+   it reads «<việc>: phần thắng +N» (the j85 Ghi chú row «Phần thắng» names the same BAL.art.odds ladder); a lật-thẻ weight reads «phần được lật thẻ +N». Every Năm bậc table. */
+ {const W=s=>String(s).replace(/ dễ thành hơn \(\+([\d,]+)\)/g,": phần thắng +$1").replace(/được lật thẻ dễ hơn \(\+([\d,]+)\)/g,"phần được lật thẻ +$1").replace(/(thỉnh an|tố giác) \+(\d+)(?![\d,])/g,"$1: phần thắng +$2");
+  for(const F of [ARTFX,VIRFX])for(const k in F)F[k].forEach((s0,i,arr)=>{const d=Object.getOwnPropertyDescriptor(arr,i);if(d&&d.get){const g=d.get;Object.defineProperty(arr,i,{get:()=>W(g()),enumerable:true,configurable:true})}else arr[i]=W(s0)})}
 }catch(e){console.error("artfx text",e)}})();

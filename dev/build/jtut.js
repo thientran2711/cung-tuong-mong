@@ -60,7 +60,7 @@ function mmFace(){const g=GD();if(g&&g.face){try{const f=g.face;if(typeof f==="o
   if(M&&S){let k=S.tutFid&&M[S.tutFid]?S.tutFid:null;
    if(!k){const used=new Set(typeof figUsed==="function"?figUsed():[]);const ks=Object.keys(M).sort();k=ks.find(x=>!used.has(x))||ks[0];
     if(k&&!coop()){S.tutFid=k;try{if(!used.has(k))figUsed().push(k)}catch(e){}}}
-   const L=M[k]||[];const f=L.find(x=>x.ageBand==="a51")||L.find(x=>x.ageBand==="a36")||L[0];if(f&&f.por)src=figPath(f.por)}}catch(e){}
+   const L=M[k]||[];const f=L.find(x=>x.ageBand===BAL.ageArt[3])||L.find(x=>x.ageBand===BAL.ageArt[2])||L[0];if(f&&f.por)src=figPath(f.por)}}catch(e){}
  return{src,ini:"Quế",col:(typeof kitServCol==="function"?kitServCol("maid",3):"#a0584a"),rw:MMN(),__kr:{role:"mama",rank:3,origin:null,sex:"f",kid:false}}}
 function mmFig(){try{const f=mmFace();const s=String(f.src||"");return s.replace(/\/por-/,"/fig-")}catch(e){return""}}
 
@@ -96,7 +96,7 @@ function rectOf(t){try{const el=typeof t==="function"?t():typeof t==="string"?$q
 function clip(r,pad){const vw=innerWidth,vh=innerHeight;const L=Math.max(4,r.left-pad),Tp=Math.max(4,r.top-pad),R=Math.min(vw-4,r.right+pad),B=Math.min(vh-4,r.bottom+pad);
  return{left:L,top:Tp,right:R,bottom:B,width:Math.max(0,R-L),height:Math.max(0,B-Tp)}}
 function kitCoach(spec){const R0=root();CUR=spec;R0.hidden=false;R0.classList.toggle("ktut-mv",!rm());
- const card=kitPersonDlg({kind:"guide",title:spec.title||MMN(),sub:spec.sub||"",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:null,html:`<div class="ktut-say">${spec.html||""}</div>`,btns:spec.btns,cls:"ktut-card"});
+ const card=kitPersonDlg({kind:"guide",title:spec.title||(spec.person?MMN():""),sub:spec.sub||"",noPerson:!spec.person,p:spec.person?mmFace():null,fig:spec.person?mmFig():"",name:spec.person?`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`:"",pic:spec.pic?{src:spec.pic,lab:""}:null,html:`<div class="ktut-say">${spec.html||""}</div>`,btns:spec.btns,cls:"ktut-card"});
  R0.innerHTML=`${spec.target?"":`<div class="ktut-dim"></div>`}<div class="ktut-hole"${spec.target?"":" hidden"}></div><div class="ktut-blks"></div><div class="ktut-marks"></div>${card}`;
  try{kitPersonDlgFit(R0)}catch(e){}
  R0.querySelectorAll("[data-ktut]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}const k=b.dataset.ktut;if(spec.on)spec.on(k)}));
@@ -160,7 +160,7 @@ let TIPEL=null;
 function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
- el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
+ el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:spec.person?MMN()+" dặn":"Lời dặn",noPerson:!spec.person,p:spec.person?mmFace():null,fig:spec.person?mmFig():"",name:spec.person?`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`:"",pic:spec.pic?{src:spec.pic,lab:""}:((ia(spec.title)||ia("Hành sự"))?{src:ia(spec.title)||ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
  document.body.appendChild(el);TIPEL=el;T.tip=spec.id;tipPlace();try{kitPersonDlgFit(el)}catch(e){}
  el.querySelector("[data-ktut=tip]").addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}tipOff();T.tipGap=Date.now()+1500})}
 function tipOff(){if(TIPEL){TIPEL.remove();TIPEL=null}T.tip=null}
@@ -236,7 +236,7 @@ const INTRO=[
    ["Lãnh cung","bị phế vào lãnh cung là mất phẩm vị; còn sống là còn đường về","r"],
    ["Được",srv()?"được phong vị, có người nâng đỡ, đi tới đâu tùy {x}":"ngôi Hoàng hậu; con lên ngôi thì làm Hoàng thái hậu, buông rèm nhiếp chính, hay tự lên ngôi","g"],
    ["Phúc duyên","kiếp sau không mang theo gì; chỉ Phúc duyên tích được để đổi thân phận"],
-   ["Chơi cùng bạn","hai người một hậu cung, mỗi người một thân phận, một mục tiêu riêng"]])+say(`<p>{X} chạm <b>Tiếp</b> để {m} chỉ qua mấy chỗ trên màn.</p>`)}];
+   ["Cùng hảo hữu","hai người một hậu cung, mỗi người một thân phận, một mục tiêu riêng"]])+say(`<p>{X} chạm <b>Tiếp</b> để {m} chỉ qua mấy chỗ trên màn.</p>`)}];
 function introHTML(i){const P=INTRO[i];return P.h()}
 function introPic(i){try{return INTRO[i].p()||""}catch(e){return""}}
 /* the event picture (RIGHT TOP) of a spotlight step: the tab / topic it is about, else the Hành sự picture (kitInfoArt keys) */
@@ -296,7 +296,7 @@ function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;
  const btns=[{k:"skip",t:"Bỏ qua lời dặn",alt:true}];if(!s.noNext)btns.push({k:"next",t:s.last?"Đã hiểu":"Tiếp"});
  setTimeout(()=>{if(!T.on||STEPS[T.step]!==s)return;if(busy()){T.paused=true;coachOff();return}
   const np=s.pages?s.pages():0,pg=T.page||0;
-  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,pic:np?introPic(pg):stepPic(s),
+  kitCoach({person:true,title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,pic:np?introPic(pg):stepPic(s),
    on(k){if(k==="skip")return tourEnd("skip");if(k==="next"){if(np&&pg<np-1){T.page=pg+1;show(false);return}T.page=0;next()}}})},prep&&s.prep?560:0)}
 /* the trial act: the step ends when the act's result arrives (result card, or the act opened a dialog of its own) */
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;
@@ -329,7 +329,7 @@ const TIPS={
  "tranhghe":{t:"Tranh ghế",h:"Khi một ghế phẩm vị còn trống, các phi tần thi tài nghệ rồi xét đức hạnh. Ai đứng đầu được tấn phong vào ghế ấy."},
  "lanhcung":{t:"Lãnh cung",h:"Vào lãnh cung là mất phẩm vị. Còn sống là còn đường xin phục vị; giữ Sức và chờ dịp."},
  "luanhoi":{t:"Luân hồi",h:"Chết là hết: kiếp này không mang theo gì của kiếp trước, chỉ Phúc duyên tích được mới đổi được thân phận. Kiếp chưa tròn một năm mà chưa lên Quý nhân là kiếp dở dang, không được Phúc duyên."},
- "coop":{t:"Chơi cùng bạn",h:"Hai người cùng một hậu cung, mỗi người một thân phận. Mỗi người làm việc của mình; tuần mới bắt đầu khi cả hai đã qua đêm."}};
+ "coop":{t:"Cùng hảo hữu",h:"Hai người cùng một hậu cung, mỗi người một thân phận. Mỗi người làm việc của mình; tuần mới bắt đầu khi cả hai đã qua đêm."}};
 window.KTUT_TIPS=TIPS;
 function want(id){if(!TIPS[id]||REC.seen[id])return;T.pend[id]=1}
 function showTip(id){const d=TIPS[id];if(!d)return;REC.seen[id]=1;saveRec();delete T.pend[id];kitTip({id,title:d.t,html:`<p>${say(d.h)}</p>`})}
@@ -354,7 +354,7 @@ function veteran(){try{if(lifeLog&&lifeLog().length)return true}catch(e){}
 /* a sổ past its 2nd week (owner task 16/11): no tour, no ask, no tips; Thiết lập or "Xem lại lời dặn" turn them back on */
 function oldSave(){try{return !T.fresh&&S&&((S.turn||0)*3+(S.tuan||0))>=2}catch(e){return false}}
 function askOnce(){T.ask=true;tipOff();
- kitCoach({title:"Lời dặn tân thủ",sub:MMN(),big:true,html:say(`<p>{M} là ${MMN()}, dạy lễ cho người mới vào cung. {X} đã quen lối trong cung, có muốn nghe {m} dặn lại từ đầu?</p><p>Muốn nghe lúc khác: ☰ rồi chọn <b>Xem lại lời dặn</b>. Lời dặn bật tắt trong Thiết lập.</p>`),
+ kitCoach({person:true,title:"Lời dặn tân thủ",sub:MMN(),big:true,html:say(`<p>{M} là ${MMN()}, dạy lễ cho người mới vào cung. {X} đã quen lối trong cung, có muốn nghe {m} dặn lại từ đầu?</p><p>Muốn nghe lúc khác: ☰ rồi chọn <b>Xem lại lời dặn</b>. Lời dặn bật tắt trong Thiết lập.</p>`),
   btns:[{k:"no",t:"Không cần",alt:true},{k:"yes",t:"Nghe ma ma dặn"}],
   on(k){T.ask=false;REC.asked=1;coachOff();if(k==="yes"){saveRec();tourStart()}else{REC.tour="skip";saveRec();try{OPT.tut=false;saveOpt()}catch(e){}try{if(S&&!coop())S.tutTour=1}catch(e){}}}})}
 

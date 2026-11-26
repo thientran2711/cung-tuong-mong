@@ -93,15 +93,25 @@ body:has(.kmov.km-full .kfull) span.kemo-big,body:has(.dawn.kne-day.on) span.kem
    to = the name of the selection she is about to enter (joi.js oiGate passes oiSel().head). A kmStage scene (queued with kmPush, one at a time): a painted gate whose two leaves swing open while the picture
    pushes in, the caption «<cap> · Vào <to>», then ONE kit button (KIT §81, label by kind) — an outside tap only skips to the final frame. Gọn / reduced motion = the final frame at once.
    ART SLOTS (Foreman C paints, nothing is drawn in code): img/kit/entry-gate-bg-<kind>.webp (the scene, 4:3), entry-gate-door-l.webp / entry-gate-door-r.webp (the two leaves, transparent, hinged at the outer edge).
-   A slot not on the CDN yet is listed once for painting (kitPhNote "entry") and the scene stays complete without it: dark gate ground, two plain kit-paper leaves (kind colour), the caption. */
-const KEG={consort:{cap:"Cổng cung",end:"Vào điện",col:"#8f1d1d"},bride:{cap:"Kiệu hoa đến cổng cung",end:"Vào điện",col:"#8f1d1d"},maid:{cap:"Cổng bên của cung nữ",end:"Theo ma ma",col:"#6a4a2a"},corridor:{cap:"Hành lang Càn Thanh",end:"Tiếp theo",col:"#1f2d4a"}};
-function kegPic(n){const s=`${KM_DIR}${n}.webp`;try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("entry",n,"light","Cổng cung · "+n);return""}}catch(e){}return s}
-function kitEntryGate(o){o=o||{};const kind=KEG[o.kind]?o.kind:"consort",K=KEG[kind];const bg=kegPic("entry-gate-bg-"+kind),dl=kind==="corridor"?"":kegPic("entry-gate-door-l"),dr=kind==="corridor"?"":kegPic("entry-gate-door-r");
- const rm=`onerror="this.remove()"`;const to=o.to?kmEsc(String(o.to).replace(/<[^>]+>/g,"").trim()):"";
- const door=(side,src)=>kind==="corridor"?"":src?`<img class="kmeg-d kmeg-d${side}" src="${src}" alt="" draggable="false" ${rm}>`:`<span class="kmeg-d kmeg-d${side} kmeg-dp" aria-hidden="true"></span>`;
- const html=`<div class="kmeg kmeg-${kind}${bg?" kmeg-art":""}" style="--keg:${K.col}">${bg?`<img class="kmeg-bg" src="${bg}" alt="" draggable="false" ${rm}>`:""}<span class="kmeg-glow" aria-hidden="true"></span><div class="kmeg-gate">${door("l",dl)}${door("r",dr)}</div>`+
+   Painted 25/11 (review/art-slots, gpt-2-6 edits of the approved selx-gate scene): the scene shows the gate with an EMPTY doorway; the two painted leaves sit exactly in that doorway
+   (KEG[kind].gate = left/top/right/bottom insets in % of the 4:3 scene, measured on the painting) and swing open while the whole scene (picture + leaves) pushes in.
+   Leaves: entry-gate-door-l/-r (wide, main + bridal gate) · entry-gate-door-side-l/-r (narrow, the maids' side gate) — kegDoors(kind).
+   NOTHING IS DRAWN IN CODE (owner OD 25/11 ~23:15Z): no glow, no kit-paper leaves. The scene is pushed only once its painting has loaded; a scene painting not on the CDN
+   (or failing to load) = the scene is SKIPPED (listed once for painting, kitPhNote "entry"); a missing leaf = that scene plays without leaves. Test: dev/test/art-slots.js. */
+const KEG={consort:{cap:"Cổng cung",end:"Vào điện",col:"#8f1d1d",gate:[38.8,40.9,39.8,32.6],door:"entry-gate-door"},bride:{cap:"Kiệu hoa đến cổng cung",end:"Vào điện",col:"#8f1d1d",gate:[37.8,29.6,39.5,43.9],door:"entry-gate-door"},maid:{cap:"Cổng bên của cung nữ",end:"Theo ma ma",col:"#6a4a2a",gate:[41.5,38.3,42.5,34.6],door:"entry-gate-door-side"},corridor:{cap:"Hành lang Càn Thanh",end:"Tiếp theo",col:"#1f2d4a"}};
+function kegDoors(kind){const K=KEG[kind];return K&&K.door?[K.door+"-l",K.door+"-r"]:[]}window.kegDoors=kegDoors;
+function kegPic(n){const s=`${KM_DIR}${n}.webp`;try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s.replace(/^.*?(?=img\/)/,"")))/* the index keys are «img/…»; the built s is the full CDN url (review/art-slots: the gate was never found) */{if(typeof kitPhNote==="function")kitPhNote("entry",n,"light","Cổng cung · "+n);return""}}catch(e){}return s}
+function kitEntryGate(o){o=o||{};const kind=KEG[o.kind]?o.kind:"consort",K=KEG[kind];const bg=kegPic("entry-gate-bg-"+kind);if(!bg)return;/* no painting → no scene (never a code-drawn gate) */
+ const D=kegDoors(kind).map(kegPic),doors=D.length===2&&D[0]&&D[1]&&K.gate;const to=o.to?kmEsc(String(o.to).replace(/<[^>]+>/g,"").trim()):"";
+ const g=K.gate||[0,0,0,0],gs=`left:${g[0]}%;top:${g[1]}%;right:${g[2]}%;bottom:${g[3]}%`;
+ const html=`<div class="kmeg kmeg-${kind} kmeg-art"><div class="kmeg-scn"><img class="kmeg-bg" src="${bg}" alt="" draggable="false">`+(doors?`<div class="kmeg-gate" style="${gs}"><img class="kmeg-d kmeg-dl" src="${D[0]}" alt="" draggable="false" onerror="this.style.visibility='hidden'"><img class="kmeg-d kmeg-dr" src="${D[1]}" alt="" draggable="false" onerror="this.style.visibility='hidden'"></div>`:"")+`</div>`+
   `<div class="kmeg-cap"><small>${K.cap}</small><b>${to?"Vào "+to:"Nhập cung"}</b></div></div>`;
- kmPush(done=>{kmStage("km-gate km-gate-"+kind,html,{dur:3800,end:o.end||K.end,onEnd:done})})}
+ /* the painting first: queued at once (keeps its place before the selection card), the stage opens only once the scene picture has loaded;
+    a load error or no picture within 4 s = the scene is skipped (done at once), never an empty / code-drawn frame */
+ kmPush(done=>{const im=new Image();let st=0;const T=setTimeout(()=>fail("timeout"),4000);
+  const fail=why=>{if(st)return;st=2;clearTimeout(T);try{if(typeof kitPhNote==="function")kitPhNote("entry","entry-gate-bg-"+kind,"light","Cổng cung · "+why)}catch(e){}done()};
+  const run=()=>{if(st)return;st=1;clearTimeout(T);kmStage("km-gate km-gate-"+kind,html,{dur:3800,end:o.end||K.end,onEnd:done})};
+  im.onload=run;im.onerror=()=>fail("load error");im.src=bg;if(im.complete&&im.naturalWidth)run()})}
 window.kitEntryGate=kitEntryGate;
 /* ---------- stage overlay ---------- */
 function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.createElement("div");ov.className="kmov "+cls+(red?" km-red km-skip":"");
@@ -216,7 +226,10 @@ const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest"
    of it one by one into the spotlight (KIT §54.1 kitRevealHTML: the kit graded frame kitItem "xl", name, grade chip), stays ~1.3 s glowing in its
    grade colour, and settles on the shelf under the box; the silver comes last; then the list (grade chip · name · note) + Nhận.
    Tap during the reveal = skip to the end. Timings BAL.reveal (jbal2). Items arrive lowest grade first, the best one last. */
-function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
+/* KK29 (MAIN 141, E-S5 «reward popup over the ending screen»): while the ENDING card (#modal.end / .kes) is on screen, nothing opens over it: a reward box is not shown (the item is already in her chest, the log keeps the line). ONE rule: kitEndUp(). */
+function kitEndUp(){try{const M=document.getElementById("modal");return !!(M&&!M.hidden&&(M.classList.contains("end")||M.classList.contains("kes")))}catch(e){return false}}
+window.kitEndUp=kitEndUp;
+function kitReward(o){if(kitEndUp())return null;o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
  const seq=items.map(x=>({n:x.n,d:x.d,img:x.img,g:gOf(x.tier),gn:x.gn||"",k:x.k&&typeof kitItemRef==="function"&&kitItemRef({k:x.k})?x.k:""}));
@@ -309,10 +322,10 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
  /* buổi change: the incense curtain was replaced by the painted time-of-day transition (jbuoi.js, KIT §71); kitDayShift stays for old callers */
  /* death: ink spreads, then the Kiếp này / Sổ luân hồi panel underneath */
- W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
+ W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:(S&&S.kend)||h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
-   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(q.pid)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
+   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!kitNoDanger(q)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
  /* the promotion visuals replace j11's stamp (sound and haptics stay) */
  W("feedback",o=>function(k,x){if(k==="promote"&&!kmReduced()){try{if(SFXN[k])sfx(SFXN[k]);vib(k)}catch(e){}return}return o.apply(this,arguments)});
  /* render: state diff + weather chip */
@@ -339,24 +352,20 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
 .km-gate{background:radial-gradient(ellipse at 50% 38%,#3a2418,#150c08 80%)}
-.kmeg{position:relative;width:min(92vw,560px,calc((100dvh - 190px)*4/3));aspect-ratio:4/3;overflow:hidden;border:1px solid var(--gold);border-radius:var(--k-rad,8px);box-shadow:0 0 0 3px #f6ead655,0 14px 40px #000a;background:linear-gradient(#2a1a12,#120a07 70%);perspective:900px;margin:0 auto}
-.kmeg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kmegPush calc(3.4s*var(--pace,1)) ease-out both}
-.kmeg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 52%,#ffe7a8cc 0,#f0b64f66 28%,transparent 62%);opacity:0;animation:kmegGlow calc(1.8s*var(--pace,1)) ease-out calc(.6s*var(--pace,1)) both}
-.kmeg-gate{position:absolute;left:14%;right:14%;top:12%;bottom:12%;display:flex;transform-style:preserve-3d}
-.kmeg-maid .kmeg-gate{left:24%;right:24%;top:18%}
-.kmeg-d{flex:1 1 50%;min-width:0;height:100%;object-fit:contain;display:block;box-sizing:border-box}
+.km-gate .kmst{max-width:none}/* review/art-slots (MAIN 147 look): the painted gate fills the screen on iPad too (≥ 85 % of the shorter side), 4:3 kept, button under it */
+.kmeg{position:relative;width:min(94vw,calc((100dvh - 128px)*4/3));aspect-ratio:4/3;overflow:hidden;border:1px solid var(--gold);border-radius:var(--k-rad,8px);box-shadow:0 0 0 3px #f6ead655,0 14px 40px #000a;background:#120a07;perspective:900px;margin:0 auto}
+.kmeg-scn{position:absolute;inset:0;perspective:900px;transform-origin:50% 60%;animation:kmegPush calc(3.4s*var(--pace,1)) ease-out both}
+.kmeg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kmeg-gate{position:absolute;display:flex;transform-style:preserve-3d}
+.kmeg-d{flex:1 1 50%;min-width:0;width:50%;height:100%;object-fit:fill;display:block;box-sizing:border-box;backface-visibility:hidden}
 .kmeg-dl{transform-origin:0 50%;animation:kmegOpenL calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
 .kmeg-dr{transform-origin:100% 50%;animation:kmegOpenR calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
-.kmeg-dp{background:linear-gradient(90deg,color-mix(in srgb,var(--keg) 80%,#000),var(--keg) 40%,color-mix(in srgb,var(--keg) 70%,#000));border:2px solid var(--trim,#d9b25f);box-shadow:inset 0 0 0 3px #00000040}
-.kmeg-dl.kmeg-dp{border-radius:6px 0 0 6px}.kmeg-dr.kmeg-dp{border-radius:0 6px 6px 0}
-.kmeg-corridor .kmeg-glow{background:radial-gradient(ellipse at 50% 55%,#b9c8ff55 0,#6e86c444 32%,transparent 66%)}
 .kmeg-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;text-align:center;background:linear-gradient(transparent,#0009 60%);color:#fffaf0;animation:kmFade calc(.8s*var(--pace,1)) ease-out calc(1.4s*var(--pace,1)) both}
 .kmeg-cap small{display:block;font-size:.76rem;letter-spacing:.06em;color:#f6ead6c0}.kmeg-cap b{font-family:var(--display);font-size:1.2rem;text-shadow:0 1px 3px #000}
 @keyframes kmegPush{from{transform:scale(1)}to{transform:scale(1.12)}}
-@keyframes kmegGlow{from{opacity:0}to{opacity:1}}
 @keyframes kmegOpenL{from{transform:rotateY(0)}to{transform:rotateY(-84deg)}}
 @keyframes kmegOpenR{from{transform:rotateY(0)}to{transform:rotateY(84deg)}}
-@media (prefers-reduced-motion:reduce){.kmeg *{animation:none!important}.kmeg-dl{transform:rotateY(-84deg)}.kmeg-dr{transform:rotateY(84deg)}.kmeg-glow,.kmeg-cap{opacity:1}.kmeg-bg{transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.kmeg *{animation:none!important}.kmeg-dl{transform:rotateY(-84deg)}.kmeg-dr{transform:rotateY(84deg)}.kmeg-cap{opacity:1}.kmeg-scn{transform:scale(1.12)}}
 .kmov{--kmend-room:calc(68px + env(safe-area-inset-bottom,0px))}
 .kmov.km-endon{box-sizing:border-box;padding-bottom:var(--kmend-room)}
 /* KIT 81b (owner 17/11 toil-reveal bug): a FULL-BLEED scene (its own backdrop fills the screen: .km-full) has NO padding top or bottom, so the backdrop runs edge to edge
@@ -401,7 +410,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmStick{0%{opacity:0;transform:translate(-50%,30px) rotate(0)}45%{opacity:1;transform:translate(-50%,-46px) rotate(8deg)}100%{opacity:1;transform:translate(10px,6px) rotate(64deg)}}
 /* 3 result card: seal, floating numbers, bars */
 .rtoast.karesult{overflow:visible}
-.kmseal{position:absolute;right:6px;top:-18px;width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
+.kmseal{position:absolute;right:6px;top:auto;bottom:calc(100% - 2px);/* KIT stamp placement (owner 24/11, MAIN 129): the stamp sits on the card's TOP EDGE, above the text, never on words */width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
 .km-thump{animation:kmThump calc(.35s*var(--pace)) ease calc(.45s*var(--pace)) both!important}
 .kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
 .kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
@@ -481,6 +490,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmPet{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(0) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(calc(var(--v) * -1)) rotate(120deg) scale(1)}}
 .km-inkov{background:transparent}
 .kmink{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+/* KIT BUG #4 (KK29, robot B1 d-robot-bugs report; MAIN 139): the death-ink banner («Hồng nhan bạc mệnh · Mở Sổ luân hồi») is a full-screen scene drawn ABOVE the ending card, so its words sat on the card rows (text on text). The ending card (#modal.end / .kes, every ending host) is held back while the ink scene plays and shows the moment it goes: ONE rule for every mourning ending. */
+body:has(.kmov.km-inkov:not(.km-out)) :is(#modal.end,#modal.kes){visibility:hidden}
 .kmblot{position:absolute;left:50%;top:46%;width:60vmax;height:auto;transform:translate(-50%,-50%) scale(.05);opacity:0;animation:kmInk calc(1.6s*var(--pace)) cubic-bezier(.3,.6,.3,1) both}
 .kmblot.b2{left:38%;top:58%;animation-delay:.25s;width:50vmax}
 .kmicap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;animation:kmFade calc(.6s*var(--pace)) ease calc(1.1s*var(--pace)) both}

@@ -38,7 +38,7 @@ function egHauWin(){const R=BAL.road.end;try{if(S.rank>=EG_HH()){S.shield=Math.m
 /* ch14 win: her son. No Thái tử yet and he is dear enough to Hoàng thượng → he is set (j1 setHeir); else his weight grows (j67 e67heir). */
 function egKeWin(){const R=BAL.road.end;try{const s=son67();if(!s){apply({danh:R.keDanh});return `Danh +${R.keDanh}: lục cung gọi ngươi là mẹ hiền.`}
  if(egHeirMine())return e67heir(R.keHeir);
- if(egHeirNone()&&(s.fond||0)>=R.keFond&&typeof setHeir==="function"){setHeir(s,null);return `<b class="g">${s.name} được lập làm Thái tử.</b>`}
+ if(egHeirNone()&&(s.fond||0)>=R.keFond&&typeof setHeir==="function"){const d0=S.danh||0;setHeir(s,null);const dd=(S.danh||0)-d0;/* law 4 (review/j51-heir-danh): the Danh the jkidlife setHeir wrap really applied (BAL.kid.heirDanh; 0 when her own son already held it), as j3 / j51 print it */return `<b class="g">${s.name} được lập làm Thái tử.</b>${dd?` Danh ${balSg(dd)}.`:""}`}
  return e67heir(R.keHeir)}catch(e){console.error(e)}return""}
 
 /* ---------- ch12x · noi14 · Người nối dõi (no living child) ---------- */
@@ -83,7 +83,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
   lose:{tag:"Cung vắng tiếng trẻ",t:"Lời bàn tán thắng. Ngươi bị coi là người không có phúc, Hoàng thượng cũng ít ghé cung ngươi."}}};rdFx("noi14",ARC67.noi14);/* ONE CORE: option / ending numbers from BAL.road.fx (jbalroad.js) */
 
 /* ---------- ch13 · hau14 · Tranh ngôi Trung cung ---------- */
-ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi Trung cung",cast(A){try{if(S.st.f14&&S.st.f14.tienloi)A.sc=(A.sc||0)+BAL.road.tienSc}catch(e){}return egSeatRv(A)},
+ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh phượng vị",w:"emp",sj:"ngôi Trung cung",cast(A){try{if(S.st.f14&&S.st.f14.tienloi)A.sc=(A.sc||0)+BAL.road.tienSc}catch(e){}return egSeatRv(A)},
  g:A=>egQueen()?"Ngươi đã ngồi ngôi Trung cung, nhưng ngôi ấy chưa vững: kẻ muốn kéo ngươi xuống vẫn còn. Giữ được ngôi, lục cung mới thật sự phục.":`Ngôi Trung cung là đích cuối của mọi phi tần. Từng bậc phải đủ Sủng, Danh, Đức; lúc bàn lập hậu, Hoàng thượng nhìn hoàng tử, ${egThGone()?"lòng triều thần":"lòng Thái hậu"} và tiếng của nhà ngươi. Chương này đưa ngươi một bước thật về phía ngôi ấy.`,
  p:[["s1","s2","s3","s4"],["c1","c2","G.th","G.emp","G.hh"],["t1"],["x1"]],
  B:{s1:{h:"Ngôi chưa ấm chỗ",w:"v",if:()=>egQueen(),need:["v"],t:"Ngươi ngồi ngôi Trung cung chưa lâu, {v} đã kết bè với mấy nhà quyền thần, rỉ tai rằng ngươi không đủ đức làm mẫu nghi.",o:[
