@@ -509,3 +509,5 @@ C3-SEALS SMALL review | review/c3-seals 4a758f6e | (reviewer session id in STATU
 C3-SEALS SMALL review | review/c3-seals 4a758f6e | session_01PEhRbwimLhy2Pc9b5C32ng (sonnet) | RUNNING | 2026-11-26T15:32Z (Foreman C ROOT 3-1-1-1-1; id for the line above)
 BIG REVIEWER #11 (robot-realtap verdict 8ea10d7e..cebb0213 + audit 74d434fb) | review/robot-realtap | session_01UV1Szjs3UrHr6zeryojcgp | RUNNING | 2026-11-26T15:24Z (FOREMAN F #23)
 FLIGHT2-S11C life (iPad 1180x820 sensitive, seed 2026112538, LIVE origin/main aa37de21 pinned pin=1 fresh profile, harness review/robot-realtap 8ea10d7e) — only if seat ctx ≤30 % else seat archived | dev/handover/robot/flight2-s11c.* | session_01UV1SzkSkmAXjpoMr2FrYPC | RELEASED (seat ctx 34 % > 30 %; F #24 at depth 8 cannot open a fresh seat) | 2026-11-26T15:40Z (FOREMAN F #24)
+C3-SEALS SMALL review | review/c3-seals 4a758f6e | session_01PEhRbwimLhy2Pc9b5C32ng | DONE PASS 4a758f6e (archived) | 2026-11-26T15:40Z (Foreman C)
+C3-SEALS (all lines above: W1/W1b/W1c/W1d/W1e, W2, W3) | review/c3-seals 4a758f6e | — | DONE → LAND READY for MAIN 160 (art 15×21 LIVE on CDN) | 2026-11-26T15:40Z (Foreman C)
