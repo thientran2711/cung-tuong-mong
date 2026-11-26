@@ -1,1 +1,1 @@
-Sửa lỗi treo máy khi chơi lâu (nhất là màn Fold): khung túi đồ và dải «Kéo xuống» không còn chồng dồn.
+Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt.
