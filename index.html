@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c2ea08b4","t":"2026-11-26T04:31Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"a3d9425f40fc","h":[{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"}]};
+window.CTM_BI={"s":"5fd68301","t":"2026-11-26T11:50Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"fa757adacda9","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -57800,15 +57800,17 @@ function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
 const NAF_SUM=["ksp","nfsum","amNight"],NAF_NT=["prep","night1","night2"],NAF_OWN=["nfch"];let NA={w0:0,said:-1};
 /* r4 (Foreman B ruling 2): the carried cards live in her SAVE (S.cq, save form: pid {pid,pp,t} / generator {rk,ra,t}); both seats, a reload keeps them */
 const CQ=()=>(S.cq=Array.isArray(S.cq)?S.cq:[]);
-function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&(S.buoi||0)>=LAST()&&CW.sent!==wkN()&&!CW.pend&&(overdue()||CW.ngoW===wkN())}
+/* coop-afk-l13 (law 11, same family): her week end RAN on her own phone (CW.pend: the committed night went) but her `end` waits on her open
+   dialogs (jcoopworld tryEnd: !Q.length) while the partner's end is already out (level 13: the host — the guest sends none): the same wait,
+   the same bound (THIN 0 AFK=g: «Kỳ nguyệt sự» + two week-end cards held her end, the room never stepped) */
+const nafEnd=()=>{if(!CW.pend||CW.ngoW!==wkN())return false;const e=COOP.state.ended||{};return !!e[other()]||!!(host()&&CW.gW&&CW.gW())};
+function nafWait(){return live()&&!S.dead&&!CW.inLife&&!HOLD&&CW.sent!==wkN()&&(((S.buoi||0)>=LAST()&&!CW.pend&&(overdue()||CW.ngoW===wkN()))||nafEnd())}
 let NAT=[],NAL="";function nafTr(m,on){try{const s=[m&&(m.pid||String(m.t||"").slice(0,20)),on?1:0,overdue()?1:0,CW.ngoW===wkN()?1:0,NA.w0?Math.floor((pnow()-NA.w0)/10000)*10:-1].join(",");if(s!==NAL){NAL=s;NAT.push([Math.round(pnow()),s]);if(NAT.length>60)NAT.shift()}}catch(e){}}
 function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w0=pnow();nafTr(m,on);
  if(!on||pnow()-NA.w0<+BAL.coopTm.nightMs)return;/* one core: the bound lives only in BAL.coopTm.nightMs */
  if(!m){nafScene();return}
  if(NAF_OWN.includes(m.pid))return;
- if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){const sum=NAF_SUM.includes(m.pid);const dc=sum?nafDecl(m):"";if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN(),dc};
-  const t=sum?`Quá giờ chờ: ngươi chưa đáp lời, kiệu đã quay về. Đêm nay ngươi không hầu giá${dc?`, lỡ hẹn như cáo bệnh: ${dc}`:""}.`:"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
-  try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}try{closeModal()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}return}
+ if(NAF_SUM.includes(m.pid)||NAF_NT.includes(m.pid)){nafNo(m);try{closeModal()}catch(e){console.error(e)}try{if(CW.nCheck)CW.nCheck()}catch(e){}return}
  /* carry: off her screen with no answer (no onClose: nothing is decided), back on top after the merged week */
  Q.shift();const e=typeof serM==="function"?serM(m,{lap:1}):null;
  if(e)e.cw=wkN();/* the week it was carried in: it comes back once the room is past that week (the merged week, or a rejoin after it) */
@@ -57816,6 +57818,26 @@ function nightAfk(){const on=nafWait(),m=Q[0];if(!on)NA.w0=0;else if(!NA.w0)NA.w
  else if(e){CQ().push(e);CW.nacN=(CW.nacN||0)+1}/* a notice: its text */
  if(NA.said!==wkN()){NA.said=wkN();try{kitLine("Quá giờ chờ: việc còn dang dở được giữ lại, ngươi trở lại sẽ xem tiếp.",5000)}catch(e){}}
  try{showModal();render()}catch(e){console.error(e)}try{if(CW.snapNow)CW.snapNow()}catch(e){}try{if(CW.nCheck)CW.nCheck()}catch(e){}}
+/* «no answer» to a summons / the night itself (the mapping above), on the card m in the CURRENT person's context: her phone (nightAfk) or her
+   context on the host (part G, gAfk below: kitLine is captured there and rides her view) — one rule, two callers */
+function nafNo(m){const sum=NAF_SUM.includes(m.pid);const dc=sum?nafDecl(m):"";if(sum&&S.tonight==="me")S.tonight=null;CW.nafN=(CW.nafN||0)+1;CW.naf={pid:m.pid,w:wkN(),dc};
+ const t=sum?`Quá giờ chờ: ngươi chưa đáp lời, kiệu đã quay về. Đêm nay ngươi không hầu giá${dc?`, lỡ hẹn như cáo bệnh: ${dc}`:""}.`:"Quá giờ chờ: đêm hầu giá trôi qua lặng lẽ.";
+ try{log(t)}catch(e){}try{kitLine(t,5000)}catch(e){}return t}
+/* coop-afk-l13 (reports/coop-night-wk6.md «## OPEN» 1; brief b-coop-afk-l13.md). LEVEL 13 (part G): her week end runs on the HOST, and the room's
+   night / his `end` wait on HER open cards (jcoopthing CW.gNight / CW.gHold → herFree: her part-D cards S.thq). Her phone at that point is
+   already past her tối (g-go: CW.sent = this week), so her own nafWait above never arms, and a phone put down may not tick at all: the room
+   froze for the host («Chờ hảo hữu…» for ever). The SAME bound covers that wait, timed on the seat that WAITS (the host): from the first tick
+   the room's committed night (CW.ngoW = this week, his end not out) waits on her open cards (CW.gWait), once that wait reaches
+   BAL.coopTm.nightMs her cards are handled with the SAME mapping as above, with NO ANSWER (CW.gAfk, in her context on the host):
+     summons / the night itself (NAF_SUM / NAF_NT): nafNo, the card leaves her list;
+     the flip choice (NAF_OWN): untouched (its own clock);
+     ANY OTHER card (a real choice, a notice, the item reveal): CARRIED = it stays on her seat (her stored S.thq, on her screen, unanswered;
+       she answers it when she returns, rebuilt from its pid in her context then, as carryBack rebuilds a carried card), and the room no
+       longer waits on it this week (c.cw = the week). A card raised after the bound fired, in the same week, is handled at once.
+   No number (BAL.coopTm.nightMs), no word, no UI added. */
+let GA={w0:0,fired:-1};
+function gAfk(){const w=wkN(),on=!HOLD&&!!(CW.gWait&&CW.gWait(NAF_OWN));if(!on){GA.w0=0;return}if(!GA.w0)GA.w0=pnow();
+ if(GA.fired!==w&&pnow()-GA.w0<+BAL.coopTm.nightMs)return;GA.fired=w;try{CW.gAfk(NAF_OWN,NAF_SUM.concat(NAF_NT),nafNo)}catch(e){console.error(e)}}
 /* a kit scene on her screen that waits only for its ONE end button (KIT §81: the flip's «Chuẩn bị thị tẩm» .kmend, the item reveal «Nhận»
    .krevok, a [data-km-close]): no choice, so it is read for her like a one-road dialog (r3 cn2 FORCE4=h DUMP: the AFK host's own flip-end
    scene sat 76 s with Q empty, her night never ran). A scene with more than one button (a choice) is left alone. */
@@ -58058,7 +58080,7 @@ function word(){const n=$("next");if(!n||!CW.on||n.dataset.coopWait)return;if(n.
 let IV=0,lastPing=0;
 function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(2000,t-lastT):0;lastT=t;
  if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold);if(G&&G.up&&G.key===roomKey()&&due!==G.key)timeUp(G.key)}
- sendSt(false);dueTick();nightAfk();paint(false)}catch(e){console.error("coop clock",e)}}
+ sendSt(false);dueTick();nightAfk();gAfk();paint(false)}catch(e){console.error("coop clock",e)}}
 /* a new viewport: the bar lays itself out again first (its grid / shell change after the resize); the slot is found once that has settled */
 let RZ=0;addEventListener("resize",()=>{RZ=pnow()});
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
@@ -58071,6 +58093,8 @@ CW.frInfo=()=>{const o=frInfo();const f=FST[o.st]||FST.work;return Object.assign
 CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT,naf:()=>{const m=Q[0];return {pid:m&&m.pid,buoi:S&&S.buoi,last:LAST(),sent:CW.sent,wk:wkN(),pend:CW.pend,od:overdue(),due,my:myKey(),rk:roomKey(),ngoW:CW.ngoW,hold:HOLD,inLife:CW.inLife,live:live(),wait:nafWait(),w0:NA.w0?Math.round(pnow()-NA.w0):null,n:CW.nafN||0,carried:CW.nacN||0,back:CW.nacB||0,lapsed:(CW.nalN||0)+(CW.nacL||0),decl:CW.nafD||0,scene:CW.nasN||0,cq:(S&&Array.isArray(S.cq))?S.cq.length:0,tr:NAT.slice(-40)}}/* r3 debug: why nightAfk does (not) fire */};
 /* review/coop-night-live: her buổi is over by the room clock (time up, or a held buổi step) — jdayq gate (c) stops holding her cards then */
 CW.tm.od=()=>{try{return overdue()}catch(e){return false}};
+/* coop-afk-l13: the level-13 wait on her open cards (host) as the bound sees it */
+CW.tm.gaf=()=>Object.assign({},GA,{on:!!(CW.gWait&&CW.gWait(NAF_OWN))});
 }catch(e){console.error(e)}})();
 /* ================= jcoopchat: CO-OP CHAT "Thư từ" (owner 16/11, review/coop-chat) — KIT §80 =================
    Co-op only (COOPW.on); single-player never builds anything. Transport = the room's own Worker channel (PROTOCOL §10):
@@ -99366,7 +99390,23 @@ if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(h
 if(typeof placeWhere==="function"){const f=placeWhere;placeWhere=function(){if(hw&&CW.ctx)return;return f.apply(this,arguments)}}
 function whereIn(o){if(!o||!o.W||!S)return;const W=X.mapMe(J(o.W),false,902);const keep=S.where&&S.where[901];S.where=W;if(keep)S.where[901]=keep;if(o.menW)S.menW=J(o.menW)}
 function whereOut(A){if(!A||!A.where)return null;const W=X.mapMe(J(A.where),true,901);delete W["902"];return {W,menW:A.menW?J(A.menW):null}}
-function herFree(){const st=TH.seatOf(other());if(!st)return true;const q=st.S&&st.S.thq;return !(Array.isArray(q)&&q.length)&&!(CW.frPz&&CW.frPz())}
+/* coop-afk-l13: a card the AFK bound carried this week (c.cw = the week, jcooptimer gAfk) stays on her seat but holds the room no more */
+const herOpen=c=>!!c&&c.cw!==wkR();
+function herFree(){const st=TH.seatOf(other());if(!st)return true;const q=st.S&&st.S.thq;return !(Array.isArray(q)&&q.some(herOpen))&&!(CW.frPz&&CW.frPz())}
+/* coop-afk-l13 (jcooptimer gAfk = the ONE AFK bound, BAL.coopTm.nightMs): the room's committed night waits on HER open cards — at the go
+   (CW.gNight) or for his `end` (CW.gHold). own = the pids with their own clock (never waited out here) */
+function herCards(){let st=null;try{st=TH.seatOf(other())}catch(e){}const q=st&&st.S&&st.S.thq;return Array.isArray(q)?q:[]}
+CW.gWait=function(own){if(!on()||!host()||CW.ctx||!CW.on||!S||S.dead)return false;const w=wkR();if(CW.ngoW!==w||CW.sent===w)return false;
+ if(TH.held&&TH.held(other()))return false;return herCards().some(c=>herOpen(c)&&!(own||[]).includes(c.pid))};
+/* the bound ran out: her open cards with NO ANSWER (jcooptimer's mapping): night = the pids answered «no answer» by no(m) in her context
+   (the card leaves her list, its patch reaches her phone), own = untouched, any other = carried (kept on her seat, unanswered) */
+CW.gAfk=function(own,night,no){if(!on()||!host()||CW.ctx)return 0;const w=wkR(),seat=other(),L=herCards();let car=0,nn=0;
+ for(const c of L){if(!herOpen(c)||(own||[]).includes(c.pid))continue;
+  if(c.pid&&(night||[]).includes(c.pid)){nn++;const id=c.id;D.later(seat,()=>{D.hold(S);const i=S.thq.findIndex(x=>x&&x.id===id);if(i<0)return;const x=S.thq.splice(i,1)[0];
+    let m=null;try{const d=mkP(x.pid,x.pp||{});if(d)m={t:x.t,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}catch(e){console.error(e)}if(m)try{no(m)}catch(e){console.error(e)}});continue}
+  c.cw=w;car++}
+ G.stat.afk=(G.stat.afk|0)+car+nn;lg(["afk",w,car,nn]);try{D.save()}catch(e){}try{TH.flush()}catch(e){}
+ setTimeout(()=>{try{CW.nCheck()}catch(e){}try{CW.soonEnd&&CW.soonEnd()}catch(e){}},0);return car+nn};
 /* the host's stand-in in her context (his entry in her world, withSeat standIn): her week end is a WORLD frame on her phone (part C lens: every
    write into the world, the friend entry included, is dropped at its end), so nothing it does to his entry may reach him through the bridge
    (withSeat's finally copies the stand-in's STAT / rel / oan / new items to the host). Put back before the context closes. */
@@ -99894,7 +99934,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a3d9425f40fc";window.CTM_BUILD=BUILD;
+const BUILD="fa757adacda9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
