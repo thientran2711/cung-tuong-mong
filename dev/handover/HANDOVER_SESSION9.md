@@ -369,3 +369,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:40Z PUNISH-TIER-2 RV READY ab73bc26 → RV-163B, rolled → archived. Opened PUNISH-TIER-3 session_01Rc5AsMnybeP3fAzDgPB67Y (witness split, FINAL rule nặng 1 / tử tội 2, nothing else; coop-e2e on ab73bc26 first). 3 extra open items → PARKING_LOT.
 - ~21:42Z OWNER BUG ring plaques not from one post (2 shots) → OD row + MAIN rec (one fixed post, 2-col grows left, no paging tabs, result card yields, Sang buổi label short) → RING-BUILD-5 + KK46.
 - ~21:44Z KK46 KIT READY kitResFold 9a2c05f6 (review/kit-resfold) → MAIN LOOK: layout PASS; FAIL «Yến tiệc mời Đáp ứng ???» placeholder in title → KK46 family fix. Paging §101.11 only on R5's branch → R5 strips.
+- ~21:46Z OWNER: ring 3 sizes S far / M near / L chosen (+ dim follows tiers, name plate overflow) → OD row → RING-BUILD-5.
