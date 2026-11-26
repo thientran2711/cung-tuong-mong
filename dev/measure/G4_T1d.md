@@ -19,7 +19,7 @@ lãnh cung «Bị bỏ quên» at month 3 for a newcomer: j3 monthTick `!S.out &
 ## Handover
 Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg job (resume=1 continues lives from <dir>/<life>.ckpt.json). If the container is gone, restart fresh from this branch's index.html.
 
-## Done slices on LIVE 5e013076 (26/11 06:10Z) — 10/12 settled
+## Done slices on LIVE 5e013076 (26/11 06:36Z) — COMPLETE: 11 settled + hot-2 HANG-BLOCKED
 | life | end | year | rank (max) | Danh | Sủng | lãnh cung | outbursts |
 |---|---|---|---|---|---|---|---|
 | hot-1 | SLICE b400 | 3 | 0 (0) | 1 | 0 | yes | 3 (khac 1, mang 2) |
@@ -31,9 +31,24 @@ Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg jo
 | off-2 | SLICE b400 | 3 | 0 (1) | 98 | 4 | no | 0 |
 | hot-2 | HANG-BLOCKED on LIVE b273 (kitScrollCues); parked (not a game ending). Rerun from the b250 ckpt on review/renderer-mem when D gives the LAND READY sha | 2 | 0 (0) | 5 | 16 | no | 3 (danh, mang, huong) |
 | hot-3 | death b297 «Hồng nhan bạc mệnh» age 20 | 3 | 0 (2) | 0 | 0 | yes | 3 (dapdo, khac, mang) |
+| off-3 | SLICE b400 | 3 | 0 (0) | 0 | 0 | yes | 0 |
+| timid-3 | SLICE b400 | 3 | 0 (1) | 0 | 0 | yes | 2 (huong, tron) |
 | timid-1 | death b162 «Hồng nhan bạc mệnh» (Emperor died at 22 → tuẫn táng) | 2 | 0 (1) | 1 | 0 | yes | 2 (khoc, boan) |
 - Wording note for MAIN: that ending text shows «(khả năng: vừa)» — not one of the 7 odds words.
 - 2nd early-death path for low-rank lives (Emperor death → tuẫn táng, year 2) — listed with the lãnh cung balance candidate, untouched.
+
+## G4 summary (sum, LIVE 5e013076)
+| arm | max rank mean | lãnh cung | outbursts/life | mean Danh at end | early death |
+|---|---|---|---|---|---|
+| even | 0.33 | 0/3 | 0 | 50 | 0/3 |
+| hot | 0.67 | 2/3 | 3 | 2 | 1/3 |
+| off | 0.33 | 2/3 | 0 | 33 | 0/3 |
+| timid | 0.67 | 2/3 | 1.67 | 3 | 1/3 |
+
+Verdict vs off: even, hot and timid PASS (Δ < SE).
+- Rank is flat: no life holds rank > 0 at b400.
+- Lãnh cung in 7/12 lives: the parked newcomer «Bị bỏ quên» rule dominates (untouched).
+- Outbursts follow temper.
 
 ## Renderer HANGS caught by the F10 watchdog (26/11 03:04–04:01Z)
 The page stopped answering, then grew about 180 MB per 40 s, and was killed above 3.5 GB. The lives were hot-2 (about b270), off-3 (b63) and hot-3 (b64).
