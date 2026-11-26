@@ -468,4 +468,4 @@ OB-M3UI 4 robot UI faults (legend soft-lock, lightbox no exit, Chuyển kiếp n
 RV OB-OAN SMALL | reports/ob-oan.md ## REVIEW | session_01V1ZZH1HXNdkkuwpkaRgYjM | RUNNING | 26/11 08:37Z (MAIN 155)
 RV HW-NITS SMALL kit | reports/home-way.md ## REVIEW | session_01V1ZZGzQx5NMH95A8nTD4wd | RUNNING | 26/11 08:25Z (MAIN 155)
 | FIXER inv-stack S.inv unstacked entries (ORDER MAIN 154 07:50Z; opus; briefs/b-inv-stack.md) | review/inv-stack; reports/inv-stack.md | B ROOT 2 child 2 | session_01N1tNP2EMfAg5NhMGDBov8v | RUNNING | 26/11 08:50Z |
-| RV (sonnet, test-only) co-op reg9 review/coop-reg9-route 5af1ed9f (briefs/b-coop-reg9-route-review.md) | review/coop-reg9-route; reports/coop-reg9-route.md ## REVIEW | B ROOT 2 child 2 | (opening) | RUNNING | 26/11 09:05Z |
+| RV (sonnet, test-only) co-op reg9 review/coop-reg9-route 5af1ed9f (briefs/b-coop-reg9-route-review.md) | review/coop-reg9-route; reports/coop-reg9-route.md ## REVIEW | B ROOT 2 child 2 | session_01N1tNP2SWedmyc4LP9ZuA2f | RUNNING | 26/11 09:05Z |
