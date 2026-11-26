@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"73c076ef+","t":"2026-11-26T04:45Z","c":"rv5: scans on LIVE f009e1a6 — census NOTCARD row for jselxday selxCard parameter-list parse hit (its cards are pid selxD); time-advance sca…","b":"ef84c2c77c65","h":[{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"}]};
+window.CTM_BI={"s":"0cb4e389+","t":"2026-11-26T04:54Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn.","b":"971c5b4bf5c1","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1665,9 +1665,17 @@ function kqEnc(x,d){d=d||0;if(d>7)throw 0;if(x==null||typeof x==="number"||typeo
 function kqKit(m){try{if(!m||!m.kit||m.h||m.opts||isLookCard(m))return undefined;const o=kqEnc(m.kit);const j=JSON.stringify(o);return j&&j.length<24000?o:undefined}catch(e){return undefined}}
 function kqDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(kqDec);if("@p" in x){const p=rcpByKey(x["@p"]);return p&&p.alive!==false&&!p.dead?p:null}
  const o={};for(const i in x)o[i]=kqDec(x[i]);return o}
-function serM(m,opt){return isMenuCard(m)||isLookCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.rk?{rk:m.rk,ra:m.ra,t:m.t,cls:m.cls}:m.opts?(opt&&opt.lap?{lap:1,t:m.t}:null):(k=>k?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,kit:k}:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w})(kqKit(m))}
+/* save-pid-cards (LAW 6c + LAW 11, every pid kind; reports/save-pid-cards.md): a pid card was written as {pid,pp,t} only, so whatever its maker or
+   a wrapper put on the card AFTER mkP (q72o chips qtags «Tra xét · Hạn 4 tuần», pushDil's event picture art, the pacing flag opt, the tsb title
+   given by tsbCard's caller…) was lost on a reload: the card came back changed. ONE rule: the card's own plain-data fields (no code, no people,
+   ≤ PIDX_MAX chars each; never h / opts / who: those are made again by mkP against the loaded world) ride along as x and come back where the
+   rebuilt card has no such field; with x, the title she saw is kept (q.__ts: the per-kind deserQ wrappers never retitle it). Old saves (no x) as before. */
+const PIDX_MAX=1500,PIDX_SKIP=new Set(["pid","pp","t","h","opts","who","w","thin"]);
+function pidX(m){const x={};let n=0;for(const k in m){if(PIDX_SKIP.has(k)||k[0]==="_"||k[0]==="$")continue;const v=m[k];if(v==null||typeof v==="function")continue;
+  let j;try{j=JSON.stringify(v)}catch(e){continue}if(j==null||j.length>PIDX_MAX||/"(?:alive|rel|sid)":/.test(j))continue;x[k]=JSON.parse(j);n++}return n?x:1}
+function serM(m,opt){return isMenuCard(m)||isLookCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t,x:pidX(m)}:m.rk?{rk:m.rk,ra:m.ra,t:m.t,cls:m.cls}:m.opts?(opt&&opt.lap?{lap:1,t:m.t}:null):(k=>k?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,kit:k}:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w})(kqKit(m))}
 function serQ(opt){return Q.map(m=>serM(m,opt)).filter(Boolean)}
-function deserQ(L){const out=[],seen=new Set();for(const e of L||[]){try{if(e.lap){rcpLapse(e.t);continue}if(e.rk){const m=rcpMk(e);if(m)out.push(m);else rcpLapse(e.t);continue}if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else if(e.kit){const sp=kqDec(e.kit);if(sp&&typeof sp==="object"){const sub=sp.subject;if(sub==null)delete sp.subject;out.push({t:e.t||sp.title||"",h:"",kit:sp,btn:e.btn||sp.btn,cls:e.cls,who:sub?(sub.src!==undefined?sub:(typeof kitFace==="function"?kitFace(sub):null)):WHO(e.w)})}}
+function deserQ(L){const out=[],seen=new Set();for(const e of L||[]){try{if(e.lap){rcpLapse(e.t);continue}if(e.rk){const m=rcpMk(e);if(m)out.push(m);else rcpLapse(e.t);continue}if(e.pid){const d=mkP(e.pid,e.pp);if(d){const q={t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls};if(d.art)q.art=d.art;/* as pushDil */if(e.x){q.__ts=1;if(typeof e.x==="object")for(const k in e.x)if(q[k]==null)q[k]=e.x[k]}out.push(q)}}else if(e.kit){const sp=kqDec(e.kit);if(sp&&typeof sp==="object"){const sub=sp.subject;if(sub==null)delete sp.subject;out.push({t:e.t||sp.title||"",h:"",kit:sp,btn:e.btn||sp.btn,cls:e.cls,who:sub?(sub.src!==undefined?sub:(typeof kitFace==="function"?kitFace(sub):null)):WHO(e.w)})}}
   else if(!isMenuCard(e)){if(!String(e.h||"").replace(/<[^>]*>/g,"").trim()&&!/\bpcm\b/.test(e.cls||""))continue;/* (3) an empty notice (an old look-up panel or kit card saved without its body) */
    const sig=JSON.stringify([e.t,e.h,e.cls,e.btn]);if(seen.has(sig))continue;seen.add(sig);out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}}catch(x){}}return out}
 /* KIT 32.10: a dialog option that only closes ("Thôi" / "Lui" / "Đóng" / "Đã hiểu", no effect) is never drawn as a button: the dialog
@@ -26262,7 +26270,7 @@ function bk6(){return wk()*B4N+(S.buoi||0)}
 let EVHOLD=[],EVLAST=null;lifeStore("EVHOLD held events",()=>{EVHOLD=[];EVLAST=null});/* was reset by start() only: a slot load released the OLD life's held events into the loaded one */
 function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
 /* dry=1 (D13 jspread, during a buổi change): hold / drop the optional cards exactly as at a real show, but mark nothing as shown */
-function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
+function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length||E68LD)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
  const now=wk();let keepOpt=Q[0]&&Q[0]===EVLAST&&evOptional(Q[0]);const hasMust=Q.some(m=>!evOptional(m)&&!m.__seen);
  for(let i=0;i<Q.length;i++){const m=Q[i];if(m===EVLAST&&i===0)continue;if(!evOptional(m))continue;
   const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
@@ -26308,6 +26316,17 @@ function evSer1(m){try{const q0=Q;Q=[m];try{return (serQ()||[])[0]||null}finally
 
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evRelease()}catch(x){console.error(x)}return r}})();
 (function(){const t0=typeof tdPop==="function"?tdPop:null;if(!t0)return;tdPop=function(){const n=Q.length;const r=t0.apply(this,arguments);if(Q.length>n)Q[Q.length-1].opt=1;return r}})();
+/* save-pid-cards (LAW 6c + LAW 11, every card kind the pacing can hold: pid «Việc khó xử» / j7 ev / e68 / generator rk / data card / notice):
+   EVLAST (the optional card the gate already let onto her screen) was page memory only. After a TRUE reload the card she was looking at came
+   back as Q[0] but the gate saw it as a NEW optional card in a buổi that had already shown one (its own showing, sc.bk) → it was held again or,
+   with the hold full, dropped (silently: a choice card has no notice text) — the on-screen dilemma vanished on reload (save-unseen-lists
+   follow-up A: «4 written, 1 rebuilt, 0 after Tiếp tục»). ONE rule: the sổ writes which card was on screen (evl = its own sổ entry); a load
+   (deser: slot «Tiếp tục», co-op seat restore, snapshot) never gates while it rebuilds, and gives the gate back that same card as already shown.
+   The cards behind it are gated as before (held for a later buổi → evh). A card answered before the save is no longer in Q: never comes back. */
+let E68LD=0;
+(function(){const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&typeof d==="object"){delete d.evl;const m=Q[0];if(m&&m===EVLAST&&evOptional(m)){const e=evSer1(m);if(e)d.evl={pid:e.pid||null,rk:e.rk||null,t:e.t||null}}}}catch(x){console.error("evl ser",x)}return d}})();
+(function(){const d0=deser;deser=function(d){E68LD=1;let r;try{r=d0.apply(this,arguments)}finally{E68LD=0}
+ try{const l=d&&d.evl,m=Q[0];if(l&&m&&(l.pid?m.pid===l.pid:l.rk?m.rk===l.rk:!m.pid&&!m.rk)&&(m.t||null)===(l.t||null)&&evOptional(m)){EVLAST=m;m.__seen=1}}catch(x){console.error("evl deser",x)}return r}})();
 (function(){const s0=start;start=function(){EVHOLD=[];EVLAST=null;return s0.apply(this,arguments)}})();
 /* ================= j68e: common event content, part 1 (đời thường, khách đến, Hoàng thượng) =================
    Every option: a real gain and a real cost or risk; odds by the ladder; outcomes and reports are true (NPCs may believe wrong things, the game never lies). */
@@ -50191,7 +50210,7 @@ try{KIT_CAT["loi-rieng"]=["Lối riêng","#2c6e5a"]}catch(e){}
 function rtPush(id,pp){const d=mkP(id,pp);if(!d)return;Q.push({t:d.ti,h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});if(!window.__bot)try{showModal()}catch(e){}}
 function rtX(o,thanh,hong,kem){const j=t=>String(t||"").split(" · ").join(" — ");return `${o>=100?"":word(o)+" · "}thành: ${thanh}${o<100?` · hỏng: ${j(hong)||"không mất gì"}`:""}${kem?` · kèm: ${kem}`:""}`}
 function rtOpt(n,fx,x,go){return{n,fx:fx||{},x,go,showOut:true}}
-(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^rt/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.t=d.ti;q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true}}})}catch(e){}return out}})();
+(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^rt/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){if(!q.__ts)q.t=d.ti/* save-pid-cards: the title she saw stays */;q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true}}})}catch(e){}return out}})();
 PEND.rtBm=pp=>{const T=S&&S.rt;const v=RV(pp.v);const B=T&&T.bm;if(!v||!v.alive||!B)return null;const m=manById(B.mid);const n=B.n;const ev=typeof evG==="function"?evG(v,S):2;
  const oA=od(BAL.odb.jroute.odOA+S.tamco/3+(evG?evG(S,v)*8:0)-ev*4);
  return{ti:"Bị nắm thóp",t:`<p>${rtVn(v)} cho người gọi ngươi ra sau hành lang: «Chuyện của muội với ${m?m.name:"người kia"}, tỷ biết cả. Mỗi tháng ${n} lượng bạc, tỷ sẽ quên.»</p><p class="past">Nàng nắm ${ev} chứng cứ về ngươi.</p>`,
@@ -54015,7 +54034,7 @@ function tsbLedger(e){if(!S)return;S.tsbLog=S.tsbLog||[];S.tsbLog.unshift(Object
 function tsbShow(){try{if(!tsbBot()&&$("modal").hidden)showModal()}catch(e){}}
 /* one event card (saveable through PEND): full act-card rows on every option (owner 07:15Z), people on the picture, rows layout */
 function tsbCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;Q.push({t:title||d.title||"Việc trong cung",h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,who:d.who&&typeof pv==="function"?pv(d.who):undefined,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});tsbShow();return true}
-(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsb/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true;if(d.title)q.t=d.title;if(d.who&&typeof pv==="function")q.who=pv(d.who)/* reload keeps the speaker face */}}})}catch(e){}return out}})();
+(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsb/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true;if(d.title&&!q.__ts)q.t=d.title/* save-pid-cards: the title she saw stays (j3 x) */;if(d.who&&typeof pv==="function")q.who=pv(d.who)/* reload keeps the speaker face */}}})}catch(e){}return out}})();
 /* the Cần row on dialog options: opt.need=[{t,ok}] -> data-kneed (j63 kaNorm1 reads it) */
 function tsbNeedMark(){try{const m=Q[0];if(!m||!m.opts||!m.opts.some(o=>o&&o.need))return;document.querySelectorAll("#modal .opts button[data-m]").forEach(b=>{if(b.dataset.ka==="1")return;const o=m.opts[+b.dataset.m];if(!o||!o.need||!o.need.length)return;b.dataset.kneed=encodeURIComponent(JSON.stringify(o.need));if(o.need.some(n=>!n.ok))b.disabled=true})}catch(e){}}
 (function(){const f0=kitFix;kitFix=function(root){tsbNeedMark();return f0.apply(this,arguments)}})();
@@ -100615,7 +100634,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ef84c2c77c65";window.CTM_BUILD=BUILD;
+const BUILD="971c5b4bf5c1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

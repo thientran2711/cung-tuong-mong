@@ -51,6 +51,9 @@ const H=`window.__sbr={
   /* TEST SETUP ONLY (r3): j52 nlBegin waits ≤2.5 s for the figure pictures (aborted here) before it makes the life → under CPU load S was not set yet
      when start() returned (TypeError S.name, LIVE too); the pictures count as ready, the identity card logic itself is unchanged */
   if(typeof nlFigsReady==='function')nlFigsReady=()=>true;
+  /* TEST SETUP ONLY (rv5, LIVE f009e1a6 selection-scene): every new life now opens with the 3 selection days (jkc2 kc2SelOn → jselxday); the player helpers
+     answer the first option, she is not kept (ban hoa) and the life ENDS at once. The save cases start after them (those days have their own selx-* tests). */
+  if(typeof kc2SelOn==='function'&&!window.__sbrSelx)kc2SelOn=()=>false;
   for(let i=0;i<80;i++){window.__forceOrigin=origin;start();const want=origin==='cnv';if(!!(typeof isSrv==='function'&&isSrv())===want)break}window.__forceOrigin=null;
   try{if(typeof nlAccept==='function')nlAccept(false)}catch(e){}
   /* the life's opening cards (prologue, entry) are not under test: cleared, as dev/test/spread-e2e.js does */quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
