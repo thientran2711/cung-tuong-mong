@@ -769,6 +769,59 @@
      "n": 1
     }
    ]
+  },
+  {
+   "id": "E-S1-R1-lazy-3-799284780",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "lazy",
+   "botHarness": "quiet",
+   "kiep": 3,
+   "seed": 799284780,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "d2e03d80"
+   },
+   "live": "github.io sw Build ≥ c039fbea2394",
+   "end": "Xuất gia",
+   "type": "death",
+   "fate": "Xuất gia",
+   "death": true,
+   "age": 20,
+   "year": 3,
+   "rank": 0,
+   "buoi": 266,
+   "steps": 1033,
+   "taps": 753,
+   "exitPick": {
+    "label": "Cắt tóc xin đi tuRất vữngTốnkhôngĐượcxuất gia, kiếp này dừng ở cửa chùaGợi ýxuất gia, kiếp",
+    "n": 3,
+    "only": true,
+    "at": 1284,
+    "S": {
+     "dead": false,
+     "y": 3,
+     "t": 22,
+     "w": 0,
+     "b": 1,
+     "age": 20,
+     "rank": 0,
+     "name": "Trưởng Tôn Tú Uyển"
+    }
+   },
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "exit was the only option (3 life-ending cards)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-lazy-3-799284780-moments.md",
+    "review/rerun-E-S1-E-S1-R1-lazy-3-799284780-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
@@ -786,6 +839,16 @@
    "id": "E-S1-R1-cautious-1-3360402025",
    "dev": "ipad",
    "status": "DONE (VALID, Lãnh cung) on LIVE 4763d410aa0d: «Tân quân lập uy Ch.2» no longer stuck"
+  },
+  {
+   "id": "E-S1-R1-random-1-1077992375",
+   "dev": "ipad",
+   "status": "STUCK-gamebug PERF freeze kitNoUnkDom, repro handover 7e9a1c3b; ckpt kept, resume when fixed"
+  },
+  {
+   "id": "E-S1-R1-speed-1-608519237 + E-S1-R1-speed-2-1596011504",
+   "dev": "fold+ipad",
+   "status": "STUCK-harness-gap: scene div.kscn-veil «Chạm để tiếp ▸» (Điện tuyển); wait F READY+PASS; ckpts kept"
   }
  ]
 }
