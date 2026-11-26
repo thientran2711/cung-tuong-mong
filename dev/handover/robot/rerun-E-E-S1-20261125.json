@@ -913,6 +913,44 @@
     "review/rerun-E-S1-E-S1-R1-lazy-4-961860997-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-skilled-2-286280747",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "skilled",
+   "botHarness": "sens",
+   "kiep": 2,
+   "seed": 286280747,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "8dc395ba → 4d7a22c6 → d2e03d80"
+   },
+   "live": "Build 13f84c70f2a3 → c039fbea2394",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 24 tuổi",
+   "death": true,
+   "age": 24,
+   "year": 7,
+   "rank": 0,
+   "buoi": 960,
+   "steps": 25953,
+   "taps": 2514,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "death (Tuổi trời đã tận)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-skilled-2-286280747-moments.md",
+    "review/rerun-E-S1-E-S1-R1-skilled-2-286280747-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
