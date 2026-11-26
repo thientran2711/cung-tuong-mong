@@ -37,7 +37,7 @@ function vlSrc(k,p){const t=vlTier({k},p||S);return `img/veil-${t||"t5"}.png`}
   d:`Đeo khi mặt có vết thương: ${VL_COVER[g]} · ${(typeof WD_GRADE!=="undefined"?WD_GRADE:["Thường","Tinh phẩm","Trân phẩm","Tuyệt phẩm"])[g]}`})}
  IT.mcnt=Object.assign(IT.mcnt||{},{n:"Mạng ngự tứ",kd:"Mạng che mặt",vl:1,pr:0,tg:[],keep:1,nt:1,d:`Đeo khi mặt có vết thương: ${VL_COVER[4]} · Ngự tứ · không bán, không tặng`})})();
 /* kit item picture: the veil painting itself (kitItemSrc falls back to it) */
-(function(){if(typeof kitItemSrc!=="function")return;const k0=kitItemSrc;kitItemSrc=function(k,fb){if(vlIsK(k))return vlSrc(k);return k0.apply(this,arguments)}})();
+(function(){if(typeof kitItemSrc!=="function")return;const k0=kitItemSrc;kitItemSrc=function(k,fb){if(vlIsK(k)){/* review/art-event: the item picture shows the grade (img/veil-t<P>-g<g>.png when painted) — the worn overlay keeps vlSrc */const t=vlTier({k},S),g=k==="mcnt"?0:+k[3];if(g&&/^t\d$/.test(t||"")){const s=`img/veil-${t}-g${g}.png`;if(typeof kitPhOnCdn!=="function"||kitPhOnCdn(s))return s}return vlSrc(k)}return k0.apply(this,arguments)}})();
 
 /* ---------- worn veil <-> p.scar.veil; old saves ---------- */
 /* vlFix (review/newlife-reset, owner bug 17/11): p.vl is ONLY a worn veil entry. The ONE migration of the old voice memory (S.vl -> S.vmem, keyless

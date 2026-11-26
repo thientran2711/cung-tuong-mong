@@ -128,7 +128,13 @@ function kszRankName(p){if(!p)return["",""];if(typeof S!=="undefined"&&p===S)ret
  let n=(S&&(p===S.emp||p===S.thO||p.kind==="th"))?"":(p.name||"");try{if(r&&n)n=kitTitledName(r,n)}catch(e){}/* review r1: a person whose name she does not know yet prints "???" on line 2 (as the 32.7 column does); never the half-masked "Bùi Thị vệ ???" the global name mask made of a bare name */try{if(n&&!(S&&(p===S||p===S.emp||p===S.thO||p.kind==="th"))&&typeof kitKnownName==="function"&&!kitKnownName(p))n="???"}catch(e){}return[r,n]}
 /* owner 21/11 #81: when the left subject is HER, her rank / name tag gets «(ta)» under the name — she does not remember her own name */
 function kszTa(tag,p){try{if(p!==S||!tag)return tag;const t='<small class="knr-ta">(ta)</small>';if(/<\/div><\/div>$/.test(tag))return tag.replace(/<\/div><\/div>$/,t+"</div></div>");if(/<\/div>$/.test(tag))return tag.replace(/<\/div>$/,t+"</div>")}catch(e){}return tag}
-function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|sil/.test(src)))src=kszImg("img/fig-thaihau-h1-a51.webp");
+/* KK36 (MAIN 149/151 look: «vlnvp» stage showed HER as the speaker — Q.who was a FACE object, pEunCourt / pMaid style {src,rw,nm}, not a person):
+   a face object that names a real person (its .ref, a court officer S.court[*], a consort, a servant — by name) stands as THAT person's figure + tag (law 6b real people) */
+function kitWhoPerson(w){try{if(!w||typeof w!=="object"||w===S||!w.src||w.kind)return w;if(w.ref&&typeof w.ref==="object")return w.ref;const nm=w.nm||w.name;if(!nm)return w;
+ if(S&&S.court)for(const k in S.court){const c=S.court[k];if(c&&c.name===nm)return c}
+ const L=[].concat(typeof rivals!=="undefined"&&Array.isArray(rivals)?rivals:[],S&&Array.isArray(S.srvs)?S.srvs:[],S&&S.maid?[S.maid]:[]);const f=L.find(x=>x&&x.name===nm);return f||w}catch(e){return w}}
+try{window.kitWhoPerson=kitWhoPerson}catch(e){}
+function kszFigHtml(p){p=kitWhoPerson(p);let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|sil/.test(src)))src=kszImg("img/fig-thaihau-h1-a51.webp");
  const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
  const tag=kszTa(typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col),p);const age=p&&typeof p.age==="number"?p.age:null;
  return `<div class="kszfig">${tag}<span class="kszfs"><img src="${src}" alt="" crossorigin="anonymous" data-age="${age==null?"":age}"></span></div>`}

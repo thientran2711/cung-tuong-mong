@@ -17,6 +17,16 @@
 /* stand-ins (title → an existing act picture) shown with the 'tạm' chip: Giữ chân Hoàng thượng (night-final flip choice, main s26 23:39Z; ART REQUEST by main) */
 const KIT_OPT_TAM=[[/^Giữ chân Hoàng thượng/,"thap-den-hau-ruou-h"]];
 const KIT_OPT_RULES=[
+ /* review/art-event (ART-EVENT, KK33 ART LIST, owner 25/11 via MAIN «each card's picture must differ and fit its option»): the event hand cards that showed the
+    shared stand-in or a picture another card of the same frame shows. FIRST so they beat the generic rules below. New paintings = opt-ev-*; the rest reuse existing act pictures. */
+ [/^đàn$/i,"opt-wk-cam"],[/^cờ$/i,"opt-wk-ky"],[/^(vẽ|họa)$/i,"opt-wk-hoa"],[/^(múa|vũ)$/i,"opt-wk-vu"],[/^(thơ|thi)$/i,"opt-wk-thi"],[/^điều hương$/i,"tu-hoc-huong-h"],
+ [/^nấu ăn$/i,"opt-wk-nau"],[/^thêu$/i,"opt-wk-theu"],[/^y thuật (&|và) điều hương/i,"opt-wk-y"],[/^đầu hồ$/i,"opt-ev-dau-ho"],
+ [/^ra vấn an/i,"opt-ev-ra-van-an"],[/^lánh đi lối khác/i,"opt-ev-lanh-loi-khac"],[/^để cung chính ti tra hỏi/i,"opt-ev-ccti-tra-hoi"],[/^đứng ra bảo lãnh/i,"opt-ev-bao-lanh"],
+ [/^làm như không quen/i,"opt-ev-nhu-khong-quen"],[/^làm theo lời cha/i,"opt-ev-theo-loi-cha"],[/^dặn .{1,24} chỉ viết chuyện vặt/i,"opt-ev-viet-chuyen-vat"],
+ [/^ở lại, nắm lấy quyền bính/i,"opt-ev-nam-quyen-binh"],[/^rời khỏi cung cấm/i,"opt-ev-roi-cung-cam"],[/^theo người ấy đi/i,"opt-ev-theo-nguoi-ay"],
+ [/^giao việc: canh chừng cung/i,"opt-ev-canh-chung-cung"],[/^giao việc: thử độc/i,"opt-ev-thu-doc"],[/^giao việc: giữ sổ sách/i,"so-sach"],[/^giữ nguyên$/i,"opt-ev-giu-nguyen"],
+ [/^để .{1,24} nhận lỗi thay/i,"opt-ev-nhan-loi-thay"],[/^kêu oan: ta không biết/i,"keu-oan-h"],[/^giúp qua loa/i,"opt-ev-giup-qua-loa"],[/^đeo trang sức đẹp nhất/i,"deo-trang-suc-h"],
+ [/^kết bằng dây bạc/i,"opt-ev-ket-day-bac"],[/^kết bằng kim tuyến/i,"opt-ev-ket-kim-tuyen"],[/^xin thái hậu ban mạng/i,"opt-ev-xin-th-ban-mang"],
  /* review/cycle-art (owner 16/11): the monthly report options (jcycle PEND.cyrep) — before the generic "báo" (tố giác) / "giấu" rules */
  [/^báo đúng ngày/i,"opt-bao-ky-dung"],[/^báo lùi/i,"opt-bao-ky-lui"],[/^báo sớm/i,"opt-bao-ky-som"],[/^giấu, không báo/i,"opt-bao-ky-giau"],
  /* review/placeholder-pics3 (D46b): new main content. "thuê thợ thêu" first so it no longer falls to the padlock rule (opt-canh-giu) further down */
@@ -131,6 +141,9 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  /* kit-size #8 (kit-conform "generic picture on a person option", SRV:night2): an option whose title NAMES a live person shows THAT person's kit portrait (pv: a stranger gives the kit
     silhouette), whatever act / meaning group its words hit. Not inside a person-event frame (the figure column on the left already is that person). Same name test as kit-conform (b). */
  if(t&&b&&b.closest){try{const dl=b.closest(".dlg");if(dl&&!dl.querySelector(".kpsubj.kes,.kszfig")&&typeof liveRivals==="function"&&typeof pv==="function"){const who=liveRivals(true).find(v=>v&&v.name&&v.name.length>3&&t.includes(v.name));const f=who&&pv(who);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who}}}catch(e){}}
+ /* review/art-event: a face-veil option («Mạng … · <phẩm>», jveil vlnvp / vlout) shows that veil's own painting at its grade (kitItemSrc), never the generic «mạng» rule */
+ if(t&&typeof vlIsK==="function"&&typeof IT!=="undefined"&&typeof kitItemSrc==="function"){try{const [nm,gr]=t.split(" · ");const G=typeof WD_GRADE!=="undefined"?WD_GRADE:["Thường","Tinh phẩm","Trân phẩm","Tuyệt phẩm"];const gi=gr?G.indexOf(gr.trim()):-1;
+  const k=Object.keys(IT).find(k=>vlIsK(k)&&IT[k]&&IT[k].n===nm.trim()&&(gi<0||k==="mcnt"||+k[3]===gi));const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}catch(e){}}
  if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
   /* review/pcard-actrow (owner 16/11 "Hình nhân vật đâu?"): an option that is a PERSON (spy target, gift recipient, invite, accuse, visit … any "chọn người"
      — it carries that person's kit portrait chip in its title) shows THAT person's portrait (a stranger: the kit silhouette pv gives), never a meaning-group
@@ -155,10 +168,24 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
+/* KK36 (MAIN 151 look «Thì thầm nói xấu … ???», law 11 = every card / option picture): a picture that would be the grey stand-in (a stranger's kit
+   silhouette) becomes the PAINTED veiled portrait (kitVeilPor) — until that art is on the CDN, the option's own act picture, else the shared stand-in.
+   The face flag / who stay (person pickers are still recognised). */
+{const kop0=kitOptPic;kitOptPic=function(title,b){const r=kop0.apply(this,arguments);try{if(r&&r.src&&KIT_GREYSRC.test(r.src)){const v=kitVeilPor(r.src);if(v)return Object.assign({},r,{src:v,veil:true});
+  /* an option that IS the person (a person picker card: kgp / kgt) keeps her kit stand-in until the veiled art lands — its picture is her, not an act */
+  try{const m=typeof Q!=="undefined"&&Q[0],o=b&&b.dataset&&b.dataset.m!=null&&m&&m.opts&&m.opts[+b.dataset.m];if(o&&(o.kgp||o.kgt))return r}catch(e){}
+  const t=kitOptPlain(title);const k=typeof kitActKey==="function"&&t?kitActKey(t):"";const s=k&&k!=="-"?`img/act-${k}.webp`:"";if(s&&kitOptOnCdn(s))return Object.assign({},r,{src:s,key:k,greyOff:true});
+  if(typeof KIT_PH!=="undefined"){const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";return Object.assign({},r,{src:KIT_PH.act[tone],key:"",greyOff:true,tone})}}}catch(e){}return r};try{window.kitOptPic=kitOptPic}catch(e){}}
+/* KK36 (MAIN 151 look: «Thì thầm nói xấu … ???» hand card = grey silhouette): the grey stand-in (KIT §59.1 img/kit/unknown[-fig]-f|m|k) is NEVER a
+   card / stage picture. An unknown person's card shows the PAINTED veiled portrait (KIT_VEILPOR, art slot for Foreman C — ART REQUEST K-VEIL-POR) once it
+   is on the CDN; until then the card falls back to its own act picture / the shared stand-in like any card without a person. */
+const KIT_GREYSRC=/img\/kit\/unknown(-fig)?-([fmk])\.webp/;const KIT_VEILPOR={f:"img/kit/veil-por-f.webp",m:"img/kit/veil-por-m.webp",k:"img/kit/veil-por-k.webp"};
+function kitVeilPor(src){try{const g=KIT_GREYSRC.exec(String(src||""));if(!g)return src;const v=KIT_VEILPOR[g[2]];const has=typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(v);return has?v:""}catch(e){return""}}
+try{window.KIT_GREYSRC=KIT_GREYSRC;window.KIT_VEILPOR=KIT_VEILPOR;window.kitVeilPor=kitVeilPor}catch(e){}
 function kitOptLead(t){try{const C=[];const m=typeof Q!=="undefined"&&Q[0];
   if(m&&Array.isArray(m.faces))m.faces.forEach(x=>{const w=x&&x[0];if(w&&w.src)C.push([w,[x[1],w.rw].filter(Boolean)])});
   if(typeof pEmp==="function")C.push([pEmp(),["Hoàng thượng","bệ hạ","Bệ hạ"]]);if(typeof pTH==="function"&&!(typeof S!=="undefined"&&S.thDead))C.push([pTH(),["Thái hậu"]]);
-  for(const [w,ns] of C)if(w&&w.src&&ns.some(n=>n&&n.length>2&&kitOptHit(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"i"),t)))return{src:w.src,key:w.rk||"",how:"lead",lead:true}}catch(e){}return null}
+  for(const [w,ns] of C)if(w&&w.src&&ns.some(n=>n&&n.length>2&&kitOptHit(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"i"),t))){const s=kitVeilPor(w.src);if(!s)return null;return{src:s,key:s===w.src?(w.rk||""):"veil",how:"lead",lead:true}}}catch(e){}return null}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
 /* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
 const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */
@@ -377,6 +404,24 @@ ${KIT_OPT_CSS}
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpinfo[hidden]{display:none!important}
 #kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
+/* §6.2e A SHORT PHRASE NEVER BREAKS (KK35; MAIN 149 «Tin báo» Fold: «Để / ta / xem» one word per line beside the big thumbnail; law 11 = every LIST option card,
+   hand cards §101 have their own face): a card name of ≤ 4 words that wraps, or any name broken one word per line, first gets the SMALL thumbnail (.kofit1),
+   still broken → the name goes UNDER the thumbnail row (.kofit2, full card width). Measured after layout (rAF) on every open / re-render / resize. */
+function kitOptNameBad(b){try{const kan=b.querySelector(".kat>.kan");if(!kan||!b.querySelector(":scope>.kaart"))return false;const c=kan.cloneNode(true);c.querySelectorAll(".kodds,.khnx,small,.kb,.kwhy").forEach(e=>e.remove());const t=(c.textContent||"").replace(/\s+/g," ").trim();if(!t)return false;const nw=t.split(" ").length;
+ const lh=parseFloat(getComputedStyle(kan).lineHeight)||(parseFloat(getComputedStyle(kan).fontSize)||14)*1.15;const n=Math.round(kan.getBoundingClientRect().height/lh);return n>1&&(nw<=4||(nw>=2&&n>=nw))}catch(e){return false}}
+/* ONE thumbnail size per option list (law 10): the step a card needs is given to every card of its list */
+function kitOptNameFit(g){try{if(!g||!g.isConnected||g.classList.contains("khand"))return;const bs=[...g.children].filter(b=>b.matches&&b.matches("button.ka.kart.kopt")&&b.getClientRects().length);if(!bs.length)return;
+ bs.forEach(b=>b.classList.remove("kofit1","kofit2"));if(!bs.some(kitOptNameBad))return;bs.forEach(b=>b.classList.add("kofit1"));if(!bs.some(kitOptNameBad))return;bs.forEach(b=>{b.classList.remove("kofit1");b.classList.add("kofit2")})}catch(e){}}
+function kitOptNameFitAll(){try{document.querySelectorAll("#modal:not([hidden]) .opts:not(.khand),.kitpg-opts,.kscn-box .opts:not(.khand)").forEach(kitOptNameFit)}catch(e){}}
+let KONF_T=0;function kitOptNameFitSoon(){if(KONF_T)return;KONF_T=requestAnimationFrame(()=>{KONF_T=0;kitOptNameFitAll()})}
+window.kitOptNameFit=kitOptNameFit;window.kitOptNameFitAll=kitOptNameFitAll;
+(function(){try{const M=document.getElementById("modal");if(M&&typeof MutationObserver==="function")new MutationObserver(ms=>{for(const m of ms){const t=m.target;if(t&&t.closest&&t.closest(".opts")&&!(m.type==="attributes"&&/^kofit/.test(String(t.className||"").split(" ").find(x=>/^kofit/.test(x))||"")&&m.attributeName==="class")){kitOptNameFitSoon();return}}}).observe(M,{subtree:true,childList:true,characterData:true});
+ addEventListener("resize",kitOptNameFitSoon);const s0=window.showModal;if(typeof s0==="function"){window.showModal=showModal=function(){const r=s0.apply(this,arguments);kitOptNameFitSoon();return r}}}catch(e){}})();
+(function(){const st=document.createElement("style");st.id="kit-opt-namefit";const P="html body #modal#modal#modal button.ka.kart.kopt.kopt.kopt";const Q2="html body .kitpg-opts>button.ka.kart.kopt.kopt.kopt";
+ st.textContent=[P,Q2].map(O=>`${O}.kofit1,${O}.kofit2{--ko-pw:40px;--ko-ph:40px}
+${O}.kofit2{flex-wrap:wrap!important;align-content:center!important}
+${O}.kofit2>.kabody{flex:1 0 100%!important;width:100%!important;max-width:none!important}
+${O}.kofit2>.kaart{margin-inline:auto 0}`).join("\n");document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
