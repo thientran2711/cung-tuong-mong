@@ -2301,23 +2301,23 @@ BAL.charge={C:{
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
-/* PUNISH-TIER (review/punish-tier, owner OD 26/11 ~20:35Z + MAIN recs under it, canon overwrite of ~19:05Z / ~19:10Z / ~19:50Z; history note
+/* PUNISH-TIER (review/punish-tier, owner OD 26/11 ~20:35Z + MAIN recs, ~20:40Z, ~21:00Z; canon overwrite of ~19:05Z / ~19:10Z / ~19:50Z; history note
    dev/handover/reports/punish-tier.md): the CRIME decides the penalty, the SAME for every rank; the evidence only decides whether it sticks.
    nhẹ = C[c].lite «bong» phạt bổng (fine, Danh, Đức) / «cam» cấm túc ngắn (punish weight 1), no rank change;
    vừa = giáng 1 bậc (the seat frees); nặng = giáng 1 bậc + lãnh cung (jpun punTier / punCold);
    tu = TỬ TỘI, rare: ban chết, or the Emperor commutes it to phế vị + lãnh cung chung thân (only minh oan opens it) — odds tu.spare:
    base + Sủng / sungD + who pleads (Thái hậu favour ≥ thMin: th; the Hoàng hậu at «thân»: hh; family dad ≥ dadMin: dad).
-   tier[x].need = pieces (C[c].need reads it) + rkPlus[the accused's rank] (owner ~20:40Z); tử tội's 3 = a strong proof + a nhân chứng (pk order).
+   tier[x].need = pieces (C[c].need reads it) + rkPlus[the accused's rank group] — a plain count, no kinds of proof (owner ~21:00Z).
    tuDeed = deeds that make their charge TỬ TỘI (khi quân trọng tội: giả thai, tráo hoàng tự); tuTgt = a mưu hại aimed at these (Hoàng thượng).
    rep: a 3rd nhẹ conviction within win wk() (one year = 12 months × 3 tuần) counts as vừa. conf: tự thú lowers the weight by one step, a lie
    under a proven charge raises it by one. PHẢN TỌA: a failed accusation puts the same weight back on the accuser (jcharge chBack).
    defer: a pregnant consort's vừa / nặng / tử penalty waits until after the birth (待产; jpun punDefer, j8 birthP). */
-BAL.charge.tier={nhe:{n:"nhẹ",need:1},vua:{n:"vừa",need:2},nang:{n:"nặng",need:3},tu:{n:"tử tội",need:3}};
+BAL.charge.tier={nhe:{n:"nhẹ",need:1},vua:{n:"vừa",need:2},nang:{n:"nặng",need:3},tu:{n:"tử tội",need:4}};
 BAL.charge.tierOrd=["nhe","vua","nang","tu"];
 BAL.charge.tuDeed=["cyfake","catswap"];
 BAL.charge.tuTgt=["emp"];
 BAL.charge.tu={spare:{base:10,sungD:4,thMin:60,th:20,hh:15,dadMin:60,dad:10}};
-BAL.charge.rkPlus=[0,0,0,1,1,2,2,2];/* owner 26/11 ~20:40Z «Số chứng cứ cần tăng theo bậc»: extra pieces by the ACCUSED's rank — ≤ Quý nhân +0 · Tần / Phi +1 · Quý phi / Hoàng quý phi / Hoàng hậu +2 (index 7 = Hoàng hậu) */
+BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];/* owner 26/11 ~21:00Z: a plain COUNT by the ACCUSED's rank group — ≤ Quý nhân +0 · Tần / Phi / Quý phi +1 · Hoàng quý phi / Hoàng hậu +2 (index 7 = Hoàng hậu); with tier need: nhẹ 1/2/3 · vừa 2/3/4 · nặng 3/4/5 · tử tội 4/5/6 */
 BAL.charge.rep={n:3,win:36};
 BAL.charge.conf={down:1,up:1};
 for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});

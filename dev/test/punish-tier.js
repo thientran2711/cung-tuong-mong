@@ -20,8 +20,9 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   reset();const A=L[0],B=L[1],C=L[2],D=L[3],E=L[4],G=L[5]||L[0];
   /* 1. need by weight, the same for every rank */
   A.rank=2;C.rank=6;deedAdd(E,"cyfake",null,1,"báo có thai giả");
-  ok(chNeed(A,"vp")===1&&chNeed(A,"hd")===2&&chNeed(A,"mh")===3&&chNeed(A,"tt")===3&&chNeed(E,"tt")===3,`need: nhẹ ${chNeed(A,"vp")} · vừa ${chNeed(A,"hd")} · nặng ${chNeed(A,"mh")} · tử tội ${chNeed(E,"tt")}`);
-  {const P=L[7]||L[1];P.rank=4;ok(chNeed(P,"hd")===3&&chNeed(C,"mh")===5&&chNeed(C,"hd")===4,`rank add-on (owner 20:40Z): vừa on a Phi ${chNeed(P,"hd")} · nặng on a Hoàng quý phi ${chNeed(C,"mh")} · vừa on a Hoàng quý phi ${chNeed(C,"hd")}`);P.rank=2}
+  ok(chNeed(A,"vp")===1&&chNeed(A,"hd")===2&&chNeed(A,"mh")===3&&chNeed(A,"tt")===3&&chNeed(E,"tt")===4,`need: nhẹ ${chNeed(A,"vp")} · vừa ${chNeed(A,"hd")} · nặng ${chNeed(A,"mh")} · tử tội ${chNeed(E,"tt")}`);
+  {const P=L[7]||L[1];const T=[];for(const r of [2,3,4,5,6]){P.rank=r;T.push(`${RANKS[r].n} ${["vp","hd","mh"].map(c=>chNeed(P,c)).join("/")}`)}P.rank=5;const q5=[chNeed(P,"vp"),chNeed(P,"hd"),chNeed(P,"mh")].join();P.rank=6;const q6=[chNeed(P,"vp"),chNeed(P,"hd"),chNeed(P,"mh")].join();P.rank=2;
+   ok(q5==="2,3,4"&&q6==="3,4,5",`count by the accused's group (owner 21:00Z table nhẹ/vừa/nặng): ${T.join(" · ")}`)}
   ok(chTier(E,"tt")==="tu"&&chTierN(E,"tt")==="tử tội"&&chTier(A,"tt")==="nang",'khi quân (giả thai) makes the charge tử tội (tuDeed); suspicion stays nặng');
   {try{CHM.clear()}catch(e){}D.wrongs.push({k:"poison",t:"emp",w:2,at:wk(),x:"mưu hại Hoàng thượng"});D.dw=(D.dw||0)+2;ok(chTier(D,"mh")==="tu",`mưu hại aimed at Hoàng thượng → ${chTier(D,"mh")} (tuTgt)`)}
   /* 2. weight on every evidence line */

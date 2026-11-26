@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;const sleep=t=
   const acc=(a,t,c,k,w,lost)=>{deedAdd(t,k,a===S?L[5]:S,w,"việc "+k);let n=0;try{n=chNeed(t,c)}catch(e){n=3}evA(a,t,n,c);const f=()=>ACT.accuse.f(a,t);return lost?lose(f):win(f)};
   const A=L[0],B=L[1],C=L[2];const row=(k,f)=>{reset();try{O[k]=f()}catch(e){O[k]="ERR "+e.message.slice(0,60)}};
   row("need: vượt phẩm / hại dung nhan / mưu hại / tư thông (on a Quý nhân)",()=>{A.rank=2;return ["vp","hd","mh","tt"].map(c=>chNeed(A,c)).join(" / ")});
-  row("need on a Hoàng quý phi: hại dung nhan / mưu hại",()=>{A.rank=6;return ["hd","mh"].map(c=>chNeed(A,c)).join(" / ")});row("need on a Phi: hại dung nhan / mưu hại",()=>{A.rank=4;return ["hd","mh"].map(c=>chNeed(A,c)).join(" / ")});
+  row("need on a Hoàng quý phi: hại dung nhan / mưu hại",()=>{A.rank=6;return ["hd","mh"].map(c=>chNeed(A,c)).join(" / ")});row("need on a Quý phi: hại dung nhan / mưu hại",()=>{A.rank=5;return ["hd","mh"].map(c=>chNeed(A,c)).join(" / ")});
   row("Tố giác hại dung nhan → a Tần (Tần 3/3 full)",()=>{S.rank=2;tan(A,B,C);acc(S,A,"hd","huydung",1);return `${st(A)}; Tần seat ${seatFree(3)?"free":"full"}`});
   row("Tố giác mưu hại → a Tần (Tần 3/3 full)",()=>{S.rank=2;tan(A,B,C);acc(S,A,"mh","poison",2);return `${st(A)}; Tần seat ${seatFree(3)?"free":"full"}`});
   row("Tố giác mưu hại → a Quý nhân",()=>{A.rank=2;acc(S,A,"mh","poison",2);return st(A)});
