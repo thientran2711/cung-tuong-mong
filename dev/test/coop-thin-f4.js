@@ -3,7 +3,7 @@
    usage: python3 dev/build/assemble.py && node dev/test/coop-thin-f4.js <workerURL> [level=9] [swap=0]   (TRIP=1, OUT=<dir>, LAG=<ms>, CPU=<rate>, SHOTS=<dir>, ROWS=P1,K1)
    level 8 = the old road for these rows (her phone runs them: the BEFORE column of latency + tripwire; rows only check nothing was sent).
    P pets (follow, free, the pet shop, Giao kẻ hầu chăm, "Để trời định" of the care game: her care screen redrawn on HER phone only) ·
-   G her shelf plant ("Để trời định") · K the taste questions (thái y about herself, cung nữ about a person) · R reading a recipe book ·
+   G her shelf plant ("Để trời định" → «Chăm nhanh», G2 «Giao … chăm») · K the taste questions (thái y about herself, cung nữ about a person) · R reading a recipe book ·
    T Tứ đức practice at bậc 5 (the work made) · D1 double tap · law 6c: pets counted, the book read stays traced, the work made is in ONE
    place · "same as solo": rows with twin:true also run on a CLONE of her person with the old road (seeded rolls: Math.random fixed). */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
@@ -136,6 +136,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(pk){await stage(`shelfOf(S).g.f4p={k:${JSON.stringify(pk)},pc:40}`);
    const r=await act('G1 Để trời định on her shelf plant (shelfPlantQuick)',`shelfPlantQuick()`,{pre:`shelfPlantOpen('f4p')`,chk:x=>{const a=/f4p:(\d+)/.exec(x.g0.shelf||''),b=/f4p:(\d+)/.exec(x.g1.shelf||'');/* review r1: the roll really ran on HER plant: won = pc up, lost = the 'chưa thành' log line */return !!a&&!!b&&(+b[1]>+a[1]||/chưa thành/.test(x.g1.log+x.h1.log))},shot:'plant'});
    const ui=await both(()=>!!document.getElementById('kshp'));if(!r.skip)ok(ON?(ui[1]&&!ui[0]):true,'G1 her plant screen on her phone only',ui);await G.p.evaluate(()=>{try{closeModal()}catch(e){}})}
+  /* mg-trim (owner OD 26/11 ~05:45Z «giao người chăm»): her plant «Giao … chăm» = shelfPlantGive, host-routed like G1; the host's copy of HER plant moves */
+  if(pk){await stage(`shelfOf(S).g.f4q={k:${JSON.stringify(pk)},pc:40}`);
+   const r2=await act('G2 Giao người chăm on her shelf plant (shelfPlantGive)',`shelfPlantGive()`,{pre:`shelfPlantOpen('f4q')`,chk:x=>{const a=/f4q:(\d+)/.exec(x.g0.shelf||''),b=/f4q:(\d+)/.exec(x.g1.shelf||'');return !!a&&!!b&&+b[1]>+a[1]},shot:'plant-give'});
+   const ui2=await both(()=>!!document.getElementById('kshp'));if(!r2.skip)ok(ON?(ui2[1]&&!ui2[0]):true,'G2 her plant screen on her phone only',ui2);await G.p.evaluate(()=>{try{closeModal()}catch(e){}})}
   else ok(false,'G1 no shelf plant kind in BAL.shelf.it')}
  /* ---- K: taste questions ---- */
  await act('K1 Hỏi thái y kiêng kỵ về chính mình (rcpAskGo ty, her): same as solo',`rcpAskGo('ty',S)`,{twin:true,chk:x=>x.g1.rcpK!==x.g0.rcpK});

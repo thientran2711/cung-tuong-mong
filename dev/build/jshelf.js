@@ -398,13 +398,16 @@ function shelfPlantGain(score){const e=shelfOf(S).g[SHPC.g];if(!e)return;const G
  shelfPlantDraw(msg)}
 /* the open plant screen redrawn (one function: co-op thin F4 replays it on her phone after the host's answer) */
 function shelfPlantDraw(msg){kgTutDrop();const e=shelfOf(S).g[SHPC.g];const box=document.getElementById("kshp");if(box&&e){box.classList.remove("kg-open");box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
+/* «Giao người chăm» on her open plant (SHPC.g; owner OD 26/11 ~05:45Z): ONE function so co-op routes it to the host like shelfPlantQuick (jcoopthinf reg9) */
+function shelfPlantGive(){const e=shelfOf(S).g[SHPC.g],sv=shelfSrvBest(S);if(!e||!sv||e.pm===wk())return;const d=shelfDecay(e);e.pc=cl((e.pc|0)+d*shelfSrvQ(sv),0,100);e.pm=wk();e.pz=0;
+ const msg=`${sv.name} nhận chăm ${shelfNm(e).toLowerCase()} (${shelfSrvWord(shelfSrvQ(sv))}).`;log(msg);shelfPlantDraw(msg);try{save()}catch(x){}}
+window.shelfPlantGive=shelfPlantGive;
 /* «Chăm nhanh» (owner OD 26/11 ~05:45Z «option chăm nhanh như học nhanh»; was «Để trời định»): the quick roll of the care game, one engine */
 function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){shelfPlantGain(BAL.skip.care);return}const msg="Chăm nhanh: chưa thành, không thêm gì.";log(msg);shelfPlantDraw(msg)}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shc]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.shc;
  if(k==="pet"){try{closeModal()}catch(x){}petcOpen(+b.dataset.i);return}
  if(k==="plant"){shelfPlantOpen(b.dataset.g);return}
- if(k==="give"){if(SHPC.game||!SHPC.g)return;const e=shelfOf(S).g[SHPC.g],sv=shelfSrvBest(S);if(!e||!sv||e.pm===wk())return;const d=shelfDecay(e);e.pc=cl((e.pc|0)+d*shelfSrvQ(sv),0,100);e.pm=wk();e.pz=0;
-  const msg=`${sv.name} nhận chăm ${shelfNm(e).toLowerCase()} (${shelfSrvWord(shelfSrvQ(sv))}).`;log(msg);shelfPlantDraw(msg);try{save()}catch(x){}return}
+ if(k==="give"){if(SHPC.game||!SHPC.g)return;shelfPlantGive();return}
  if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
   const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame",kind:"tuoi"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Chăm nhanh",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
