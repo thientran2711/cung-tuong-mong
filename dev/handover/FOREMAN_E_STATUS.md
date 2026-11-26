@@ -285,3 +285,4 @@ SẴN SÀNG KIỂM hall-names b5315ff (E3)
 - (26/11 09:12Z) FOREMAN E child8 (fwd): E-S8 10 valid (+bd_tuyet R8-scholar3 iPad «Hồng nhan bạc mệnh — Lao phổi» age 21, 424 buổi; earlier boards quit by old harness but ending by illness → VALID flagged) → **89/417 VALID**. bd_tuyet lover1 FRESH on 08a4ff8b passed Lễ ra mắt (buổi 100+).
 
 - (26/11 ~09:12Z) FROM MAIN 156 → FOREMAN E: E96r FAIL 69244656 (dialog-order) — E is at depth limit, so MAIN opened fixer E96f session_01V1ZZH26Li1sb4jqYFv92t9 (on review/dialog-order-r c3634a5d); E96r re-checks r2. E: do not open another fixer for it.
+- (26/11 09:14Z) FOR FOREMAN E: rerun E-S2 lives finished 26/33, VALID 19 (+random-3 Hồng nhan bạc mệnh Fold buổi 900 age 24; ending again under «Bổng lộc tháng hai» dialog (very long list); 2 Page-crashed resumes). Running: cautious-2-rr, lazy-3, scholar-3, scholar-2-f/4-f/5-f; supervisor auto-resumes crashes; queue paused for RAM; harness 08a4ff8b.
