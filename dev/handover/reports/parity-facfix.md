@@ -74,3 +74,28 @@ LIVE moved 3af7896e → 1dcb373e (coop-freeze-kmrew-rv2: jinv.js + jksize.js). M
 | ag-par3 | ALL PASS (36) |
 | role-parity.test | ALL PASS |
 Waiting for reviewer session_01D3E3NYiNpuvC4JKoyQchxo (told to judge 53cc671e).
+
+## 7. REVIEW (opus BIG, session_01D3E3NYiNpuvC4JKoyQchxo) — **PASS 53cc671e**
+PRIORITY #1 CHECK ('facHTML Lập phe'): reused the worker's check (OD 0 | ledger 0 | claims 0 | main 0 | review/* 0); facFrOk is new and has one owner (j10). START_CTX ≈3 %.
+53cc671e = 99ceb658 + merge of LIVE 1dcb373e. Its source diff vs 1dcb373e is byte-identical to 99ceb658 vs 3af7896e (j10, jagacts3, 4 tests). Rebuilt here: only the build-info line (CTM_BI) and the hashes that follow from it differ, so it holds its own build. FF from origin/main 1dcb373e.
+
+**(1) drift2 «Lập phe cùng» LIVE FAIL = test seed fault: confirmed.** Reproduced on 3af7896e (×2, same draw): Độc Cô Tố Ngưng liking −5 → +40 = 35 < netTh «thân» 38 → no button. The game gate is right. The seed fix (at least «thân» from netTh) is honest; fac-parity rows 1/3 have the same fault and get the same fix.
+**(2) Game change: OK on every law it touches.** facFrOk is the one founding rule for her button, the j10 NPC loop and p3FacFr. The NPC side is the same expression as before; her side gains the clan and shared-enemy roads (law 1 two-way, law 11 whole group). Numbers come only from netTh/BAL.net (law 4). clanOf(S) returns "" and never matches an NPC clan, so the clan road can't open by mistake. facAct «lap» → rcvAsk facFound is unchanged (4-answer receiver). Wording is cổ trang with no numbers or % (law 7); the pronoun layer shows «ta». Buttons and kitEmpty are the same kit parts (law 9).
+**(3) ag-par3 test changes are honest.** I ran the BRANCH test against the LIVE html with seed 77: ALL PASS. The LIVE test on LIVE: 7 FAIL. So every row was a stale or drawn probe, not a hidden game fault. Checked each one: searchMaids gates on srk ≥ BAL.srvRk.cs (j14:79) → rk=cs is right. The facFound/invite rows now ASSERT the jrcv answer ⇔ outcome, which is stronger than before. ptLand of jptime-deferred deeds and landing maid errands are right. BAL.seeMaxP=0 really lifts the cap (jbal2:73 wrapper skips on falsy) and is restored. The traitor tolerance is effectively dead code (spyFor staff are filtered out first) but harmless. Picking a non-housemate in r10 is fine.
+**(4) Housemate «Nhờ giúp đỡ» question correctly left for the foreman (law 16/17).** Verified: the jagacts2 cx2:help target list T has no sameHouse filter, and j9:138 locks her housemate menu. Also worth a look in the same ruling: the cx2:help list drops S (`t!==S`), so an NPC never asks HER for help.
+
+| gate | result |
+|---|---|
+| role-parity-drift2-play | 99ceb658 ALL PASS · 53cc671e ALL PASS · LIVE 3af7896e 1 FAIL (seed) |
+| fac-parity-play | 99ceb658 + 53cc671e ALL PASS · LIVE 2 FAIL (seed) |
+| fac-roads-play | 99ceb658 + 53cc671e ALL PASS · LIVE FAIL (no facFrOk) |
+| ag-par3 seeded | 99ceb658 seeds 77/88/99 ALL PASS · 53cc671e seed 12 ALL PASS · branch test on LIVE html seed 77 ALL PASS · LIVE test on LIVE 7 FAIL |
+| ag-par3 unseeded | 99ceb658 ×2 ALL PASS · 53cc671e ×1 ALL PASS |
+| role-parity.test | 99ceb658 ALL PASS ×2 (LIVE run stopped by the 30-min background limit; not needed) |
+| coop-e2e (co-op first, live Worker) | 99ceb658 143/143 · 53cc671e 143/143 |
+| old-save (oldsave-r1, LIVE 3af7896e save → branch, 3 sizes) | 16/16 |
+| quickcheck 99ceb658 | play part PASS (open · old save ok · perf render 289/286, buổi 1847/1805 ms). Core G4 dialog-fixed 2 FAIL «no empty Tốn / Được cell» 755+1180 + crawl «Ô lưu · Lui» = the SAME on LIVE. One LOOK-DEDUPE FAIL («mood seal opens undefined»), then 3/3 PASS on the branch and 3/3 on LIVE when rerun alone = flake (branch doesn't touch the mood seal) |
+| quickcheck 3af7896e (LIVE) | FAIL: the same G4 dialog-fixed 2 rows + the same crawl fault; play part PASS → PRE-EXISTING, for MAIN as a separate item |
+| shots | fac-roads + fac-empty, Fold 755x1000@2 + iPad 1180x820@2, looked at: kit buttons, 3-road line, no overflow or cut text. CDN img/_review/parity-facfix/ wiped (4 objects) |
+Nit (no action): §2 quotes «thân với ta» while the source says «ngươi»; the screen shows «ta» (pronoun layer).
+**VERDICT: PASS 53cc671e** (FF on origin/main 1dcb373e). No reviewer fixes; no -r1 branch.
