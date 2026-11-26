@@ -2,6 +2,7 @@
    Same forced states as the dup-report scan v3 (dev/test/dup-report-scan.js on review/dup-report): base · art lv max · ill · con · pregnant hidden ·
    tâm cơ ≥50 — plus lãnh cung (must be UNCHANGED: J5 owns it). For every state: the Hành sự buttons RENDERED (door cards resolved to their ways),
    so the table shows BEFORE (every way as its own card) → AFTER (one button per feature).
+   Doors = jdoor deck doors (a.ddoor, a.ways) on the rendered Hành sự panel.
    usage: node dev/test/act-merge-j3-deck.js [url] [--json out.json]   (exit 1 if a page error, a way lost, or a door shown in lãnh cung) */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const src=fs.readFileSync(path.join(__dirname,'act-audit.js'),'utf8');const LIB=src.match(/const LIB=String\.raw`([\s\S]*?)`;\n\(async/)[1];
@@ -10,9 +11,9 @@ const A=process.argv.slice(2);const URL=A.find(x=>!x.startsWith('--')&&!x.endsWi
  const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(2500);await p.evaluate(LIB);
  const R=await p.evaluate(()=>{const out={};const nm=b=>{const k=b.querySelector('.kan');return (k?k.textContent:b.textContent).replace(/\s+/g," ").trim()};
-  const shown=()=>{render();const sf=AA.surfaces().find(s=>s.id==="act");AA.show(sf);const L=[];
-   for(const b of document.querySelectorAll('#panel .cards > button')){if(b.dataset.hsd){L.push({n:HSD.find(d=>d.k===b.dataset.hsd).n,door:b.dataset.hsd,ways:b.dataset.hsi.split(",").map(i=>deck[+i].n)})}else if(b.dataset.i!=null)L.push({n:nm(b)})}
-   const dealt=deck.filter(a=>a&&!(typeof AD_OUT!=="undefined"&&AD_OUT.test(a.n||""))).map(a=>a.n);return {L,dealt}};
+  const shown=()=>{render();const sf=AA.surfaces().find(s=>s.id==="act");AA.show(sf);const L=[];const vis=new Set([...document.querySelectorAll('#panel .cards > button[data-i]')].map(b=>+b.dataset.i));
+   deck.forEach((a,i)=>{if(!a||(typeof AD_OUT!=="undefined"&&AD_OUT.test(a.n||""))||!vis.has(i))return;if(a.ddoor)L.push({n:a.n,door:1,ways:a.ways.map(w=>w.n)});else L.push({n:a.n})});
+   const dealt=DOOR.flat(deck).filter(a=>a&&!(typeof AD_OUT!=="undefined"&&AD_OUT.test(a.n||""))).map(a=>a.n);return {L,dealt}};
   const run=(k,fn)=>{try{AA.scen(/^con/.test(k)?"con":"cao");fn();deal();out[k]=shown()}catch(e){out[k]={err:e.message}}};
   run("base",()=>{});
   run("art lv max",()=>{for(const a of ["cam","vu","ky","hoa","y"])S.arts[a]=20});
