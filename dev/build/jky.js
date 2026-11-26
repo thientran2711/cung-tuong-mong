@@ -206,7 +206,7 @@ const SPEC=KY.SPEC={
    const lc=kyLive(L);return lc&&typeof loKeepBy==="function"&&loKeepBy(lc,F,"kyngo: giữ lại")?`${loNm(L.k)} nằm trong rương ${nm(F)}`:""}
   if(c.X.box){const x=kyBox(c.X.box);/* ky-keeper-f2: the piece left the box meanwhile (bought / ransomed / taken by a later card): nothing moves, nothing is paid */if(!x)return kyBack(c,F);if(c.oi===1){ilTake(x,F,"kyngo");const i=F.inv.indexOf(x.e);if(i>=0)F.inv.splice(i,1);ilGone(F,x.e,"th");return `${itm(x.e.k).n} dâng lên Đức Thọ cung`}
    const pr=buyPr(c);if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}ilTake(x,F,"kyngo: chuộc di vật");return `${itm(x.e.k).n} vào rương`}
-  if(c.X.rr){const r=kyRr(c.X.rr),pr=buyPr(c);/* ky-keeper-f2: sold meanwhile (another card / the shop): no second piece made from nothing */if(r.sold)return kyBack(c,F);if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}r.sold=1;const e={k:r.k,from:"nvp",own:key(F),d:S.turn};F.inv=F.inv||[];F.inv.push(e);
+  if(c.X.rr){const r=kyRr(c.X.rr),pr=buyPr(c);/* ky-keeper-f2: sold meanwhile (another card / the shop): no second piece made from nothing */if(r.sold)return kyBack(c,F);if(F!==S){if((F.bac||0)<pr)return"";ap(F,{bac:-pr})}r.sold=1;const e={k:r.k,from:"nvp",own:key(F),d:S.turn};F.inv=F.inv||[];invAdd(F,e);
    try{ilUid(e);ilLog(e,"nvp",key(F),"kyngo: Nội vụ phủ")}catch(x){}
    if(c.oi===1){F.inv.splice(F.inv.indexOf(e),1);ilGone(F,e,"th");return `${itm(r.k).n} dâng lên Đức Thọ cung`}return `${itm(r.k).n} vào rương`}
   return""},
