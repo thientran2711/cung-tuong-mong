@@ -64,3 +64,10 @@ The whole-game `act-inventory.js` re-run was cut for time (the stacked rebuild c
 
 ## STATE
 LAND READY ad3bc9e8 (stack: LIVE 3af7896e → J0 52334847 → J1 c18fe3a5 → J3). Re-stack needed only if J1 moves or mg-trim lands (merge, rebuild, rerun the 3 tests).
+
+## r1 (RV-ACT-MERGE F2(c) + F4) — head f27af4f1
+- F2(c): no third fold. J1 took my display-only model into `jdoor.js` as THE deck-door engine (DOOR.road = hs | srv | cold | kc). `jact2.js` J3 block = the HSD table + `DOOR.deck({k:"hs-…",n,roads:["hs"],h,re})` registration only; my hsdBuild / hsdOpen / chooser / logChoice / kitActArt wrappers DELETED. Deck untouched (AD_DOOR locks, jhc deckFor, jgoal read it as before).
+- F4: the deck door card speaker = her figure (pMe) — J1 4821c522; look test reads Q[0].who = true on Fold + iPad.
+- Stack: LIVE 3af7896e → J0 52334847 → J1 4821c522 → J3 f27af4f1.
+- Tests on this build: deck scan base 29→16 · art 30→16 · ill 25→13 · con 21→13 · pregnant 23→14 · tâm cơ 22→14 · evening 22→13; 0 lost, 0 page errors. Parity 206 way runs 0 differences (one earlier run showed 6 diffs, all the same background rival change, gone on rerun = noise). Fold + iPad real taps (Nghỉ ngơi, Tai mắt) with her figure; videos re-uploaded img/_review/act-merge-J3/.
+LAND READY f27af4f1.
