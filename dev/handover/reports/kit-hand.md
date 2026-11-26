@@ -299,3 +299,22 @@ DONE (all pushed, LOOK/KIT READY sent):
 QUEUE for KK40 (MAIN 156 order): RV-KK39 findings on 1+2 → K-GLOSS-LOWER (glossary popup row «Cách giảm» from kitLowerText(term), data jts.js on review/ob-oan 47066466; OB-OAN session_01V1ZZH3GxCcQzWNoKy1ARxN) → pre-palace portrait frame (Tiểu thư / Thôn nữ / Công chúa: no consort c0 crest; review OB-NGOAICUNG-2 session_01V1ZZH3o5vxwvPJqTBShLgV jksize kszRankName diff) → K-VEIL-POR (check when C's pictures land) → KK35 open (NAMES scan, vnight PEND family). Align meters with FIRSTCARD kitRiskOpt (review/firstcard 9ba83cf0, KIT §6.2b-END). OB-M3UI jk4 kitTopClose/kitBackArm (§32.10): build on them when touching closers.
 Worktrees (this container): /home/user/wt/k39 (kit-empty-rows), /home/user/wt/kb (kit-bac-progress), /home/user/wt/j0 (J0), /home/user/wt/r2, /home/user/wt/live; scratch /home/user/wt/kk39-t (vis.js visitor probe, map.js, tab.js, res.js result popup, gates.sh).
 Lessons: (1) READ NOTIFICATIONS every few steps — I missed 6 MAIN notes for 30 min; (2) run browser tests one at a time: kit-stage / opt-centre gave false FAILs under parallel load; (3) a layout measured at 0.7 s can be transient (frames re-pick later) — measure after ≥ 2 s.
+
+## KK40 REPORT + HANDOVER (26/11 ~10:05Z) — kit keeper session_01V1ZZGzpmYVnzJM9qst45q8; coordinator MAIN CHÍNH 157 session_01V1ZZH1gksN2xtzkM92Peat (156 = forwarder)
+START_CTX ~3 %. Rolled at 28 % (START + 25 %).
+PRIORITY #1 CHECK: OD 26/11 ~08:25Z (giảm oán) / 25/11 ~22:45Z (place words) | main 3af7896e | review/ob-oan(-r6) TS_LOWER, review/ob-ngoaicung 72fb3ff7, review/kit-stage-r2 22e318d5, review/kit-empty-rows cda34e5e | claims KK40.
+DONE:
+1. RV-KK39 item iPad Dư đồ «white band under the map»: NOT reproduced (LIVE = r2 = empty-rows, map painted; banner case = cream side margins). Shots img/_review/kit-empty-rows/kk40-map-ipad-*.png. RV-KK39 SMALL PASS both branches (MAIN).
+2. review/kit-gloss-lower 233de84d — KIT §12.2 kitLowerRow/kitGlossPopHtml (j79): «Cách giảm» (rise hurts) / «Cách tăng» (fall hurts) row from OB-OAN kitLowerText in every .kgl popover + HX header help panel; consort road only; no data → no row. Test kit-gloss-lower.js (DATA=<TS_LOWER js>) LIVE 22 FAIL → 0. MAIN LOOK PASS; SMALL rv RV-GLOSS-LOWER open.
+3. K-FREE-OPT (NEWS-SIEVE-2) = closed by kit-empty-rows cda34e5e (dialog-fixed all pass); NEWS-SIEVE-2 told.
+4. review/kit-home-frame daa31a5e — KIT §4.3a: at home (isKc) her portrait has no rank crest/gem (kitPrePal/kitNoCrest j60, jk2b pcPort, jhcpor headroom); frame by KIT_HOME_FRAME[kc2D()] (nc/bd/pf → frame-princess; tiểu thư/thôn nữ consort-0 until K-FRAME-HOME art, KIT_REQUESTS). Origin medallion (kemb) + mood seal (kemo) kept on purpose. Test kit-home-frame.js LIVE 4 → 0. MAIN 157 first LOOK «not yet» (splash shot, badges, NaN) answered with fresh pairs kk40b-* (NaN = harness only) → LOOK READY again sent, awaiting verdict.
+5. KK35 open NAMES scan (opt-frame-scroll-scan NAMES=1, one device/process): LIVE vs empty-rows: Fold broken 11 → 0; iPad broken 3 → 0 BUT 4 NEW CUT on the branch: PEND:j7c hand faces (option names 14–19 words) clamp at 4 lines (.khn2). LIVE shows them whole as list cards. Reported to MAIN 157.
+QUEUE for KK41 (in order):
+a) MAIN 157 verdict on kit-home-frame daa31a5e; fix if needed.
+b) j7c CUT (r2 lane, jkhand.js kitHandNameFit): after .khn2 still spilling → options: (i) that frame falls back to the list (flag g.__khLong, kitHandWants false, kitHand() cleanup removes khand/khdlg/kstage), or (ii) face shows a short name and the full sentence on the plate. Owner rules: OD:L177 a name is never cut; KK35 «never the old frame» for person pickers — ask MAIN which before building. Repro: NAMES=1 SZ=[[1180,820]] ONLY=j7c node dev/test/opt-frame-scroll-scan.js (script on r2/er) <index.html>.
+c) OB-NGOAICUNG-3b kszRankName/meRankN diff review when it sends LOOK READY (not pushed at 10:00Z); keep kit part independent.
+d) firstcard kitRiskOpt × kit-stage-r2 kitOptOdds (jk2b) union + ONE odds rule in KIT.md — only when LC21 asks.
+e) K-VEIL-POR + frame-home/frame-dan art: 404 on CDN at 09:50Z; wire/check when Foreman C lands them (KIT_HOME_FRAME[""]="home", .dan="dan" + KIT_FRW).
+f) KK35 open: vnight PEND follow-up frame family scan.
+NOTE (MAIN 157): do NOT touch kitScrollCues (D's review/renderer-mem 123a2a9c fixes the Fold freeze); rebase on it if you change jksize.js.
+Worktrees: /home/user/wt/{live,er,r2,kg}; scratch /home/user/wt/kk40-t (map.js, home.js, homenc2.js real Công chúa start, names.log, tslower.js).
