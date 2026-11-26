@@ -14,3 +14,10 @@ Builds played: 0756a05b (M5, M5b start) -> 17dfa64d -> 351122ba -> 5e013076 (MAI
 7. issues.log: ~800 [DEAD BUTTON] candidates (mostly covered-by-popover false positives: DIV#tabs, DIV.kpbar, DIV.kginfo, BUTTON#next.kcwait). Real ones need human-centre tap recheck.
 ## Files
 dev/handover/robot/flight-M5/ (bot.js patched, lib.js, findings-running.md M5, findings-m5b.md M5b); review/M5-dtq-1-moments.md + -review.md. Saves/shots are NOT in git (container-only).
+
+## UPDATE (M5b, build f009e1a6, ~05:00Z) — ENDING CAPTURED
+- The dtq life came back after a reload at turn 190 (REBIRTH NOT PERSISTED: the first death at turn 193 + new life La Lưu Ly were never saved) and DIED AGAIN at turn 195 (age 34, not pregnant at that moment, Sức 94/94, Bạc 63, Sủng 78) on f009e1a6.
+- ENDING screen 1 (black ink): «Hương tiêu ngọc vẫn» / «Mở Sổ luân hồi» (button Tiếp theo). Screen 2 card KIẾP «Hương tiêu ngọc vẫn»: HỒNG NHAN BẠC MỆNH — «Tráo con bị bắt quả tang, tội khi quân.» KẺ THÙ CÒN SỐNG: Hoàng hậu Hoa Ngọc Dao, Thục đáp ứng Thượng Quan Lệ Hoa, Thường tại Đổng Đường Chi Nhi. MỘT KIẾP NHÌN LẠI: Nam Cung Ngưng Sương · Con gái Đại tướng quân; 17 năm · 34 tuổi; phẩm cao nhất Tần; con cái 1 hoàng tử, 0 công chúa; mệnh tận: Tráo con bị bắt quả tang, tội khi quân. Button Chuyển kiếp. Shots: out/shots/0082-dead, 0084-end1, 0085-end2 (container only).
+- Cause: the bot chose the «Giả mang thai» route earlier (fake pregnancy + baby swap); a full ending, not a bug. Review notes: the ending cards read well (cổ trang wording, enemies list, life summary), but the death arrives with no HUD warning (Sức full).
+- Death was NOT deterministic with the same SEED (first run died at 193, replay passed 193 and died at 195).
+- Screenshot-on-death fix works (ENDSHOT).

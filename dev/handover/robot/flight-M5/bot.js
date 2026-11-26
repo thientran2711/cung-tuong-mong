@@ -75,7 +75,7 @@ async function main(){const sv=await serve();
  await p.mouse.move(378,600);await p.mouse.wheel(0,350);await p.waitForTimeout(500);
  const tx=await p.evaluate(()=>{const m=document.querySelector('#modal:not([hidden])')||document;const w=document.createTreeWalker(m,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/^\s*(Đáp ứng|Nhận|Chọn|Đồng ý)\s*$/.test(n.textContent)&&n.parentElement.offsetParent){const r=n.parentElement.getBoundingClientRect();if(r.y>0&&r.y<990)return [r.x+r.width/2,r.y+r.height/2]}}return null});
  log('PICKTEXT',JSON.stringify(tx));if(tx){await p.touchscreen.tap(Math.round(tx[0]),Math.round(tx[1]));await p.waitForTimeout(800);await shot('after-picktext')}}}catch(er){log('modalfallback err',er.message)}}global.__ban=global.__ban||{};if(global.__rep[k]>=4)global.__ban[k]=Date.now()+25e3}if(tap%40===0)global.__rep={}}
-  if(tap%100===0){const f=await shot('t'+tap);log('SHOT',f)}log('TAP',JSON.stringify(e.t),'@'+e.x+','+e.y,why||'');await p.touchscreen.tap(e.x,e.y);await p.waitForTimeout(+process.env.WAIT||700)};
+  if(tap%100===0){const f=await shot('t'+tap);log('SHOT',f)}if(global.__deadMode&&(global.__endN=(global.__endN||0)+1)<=25){const f=await shot('end'+global.__endN);log('ENDSHOT',f,JSON.stringify(e.t).slice(0,60))}log('TAP',JSON.stringify(e.t),'@'+e.x+','+e.y,why||'');await p.touchscreen.tap(e.x,e.y);await p.waitForTimeout(+process.env.WAIT||700)};
  const dead=new Set();
  while(true){
   let s;try{s=await snap(p)}catch(e){log('snap fail',e.message);await p.waitForTimeout(1000);continue}
@@ -86,7 +86,7 @@ async function main(){const sv=await serve();
   if(sig!==lastSig){lastSig=sig;lastProg=Date.now();global.__sc=0}
   if(g&&!g.dead){const yr=Math.floor(g.turn/12);if(lastYear<0)lastYear=yr;if(!global.__flag){global.__flag=1;fs.writeFileSync(FLAG,'1')}}
   if(g){const bs=g.turn+'_'+g.tuan+'_'+g.buoi;if(bs!==lastBuoiSig){lastBuoiSig=bs;buoiN++;global.__act=0;global.__bud=1+Math.floor(rnd()*3);if(buoiN%20===0){const f=await shot('buoi'+buoiN);log('REVIEWSHOT',f)}if(buoiN%25===0)log('STATE',JSON.stringify(g),'buoi#',buoiN,'taps',tap)}}
-  if(g&&g.dead&&!deadSeen[g.turn+g.name]){deadSeen[g.turn+g.name]=1;log('DEAD STATE',JSON.stringify(g));await shot('dead')}
+  if(g&&g.dead&&!deadSeen[g.turn+g.name]){deadSeen[g.turn+g.name]=1;log('DEAD STATE',JSON.stringify(g));await shot('dead');global.__endN=0;global.__deadMode=1}if(g&&!g.dead)global.__deadMode=0;
   if(Date.now()-(global.__lsd||0)>15*60e3&&g&&!global.__reloading){global.__lsd=Date.now();try{const d=await p.evaluate(()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return o});fs.writeFileSync(OUT+'/ls-dump.json',JSON.stringify({at:new Date().toISOString(),state:g,ls:d}));log('LSDUMP',JSON.stringify(d).length,'bytes')}catch(e){log('LSDUMP fail',e.message)}}
   /* hourly progress */
   if(Date.now()-(global.__h||T0)>3600e3){global.__h=Date.now();const l=ts()+' PROGRESS '+JSON.stringify(g)+' buoi#'+buoiN+' taps '+tap;fs.appendFileSync(OUT+'/progress.log',l+'\n')}
