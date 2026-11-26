@@ -201,7 +201,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
  if(process.env.NIGHT_UPTO==='5'){const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed (NIGHT_UPTO 5)`);await b.close();process.exit(bad.length?1:0)}
  /* 6-8 reconnect (owner 16/11): one leaves mid-buổi, the other sees the wait; she comes back → the one who stayed recovers by itself */
  const Ok=o=>o.p.evaluate(()=>{const n=document.getElementById('next');const fz=document.getElementById('coopfz');const h=document.getElementById('kctmh');
-   return {fz:!!fz,hold:!!h,frozen:!!COOP.frozen,dis:n.disabled,next:n.textContent,k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),Q:Q.length,bend:COOPW.bend,pb:!!COOPW.pendBuoi,wk:COOPW.whereKey,tr:(COOPW.tr||[]).slice(-8)}});
+   return {fz:!!fz,hold:!!h,frozen:!!COOP.frozen,dis:n.disabled,next:n.textContent,k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),Q:Q.length,bend:COOPW.bend,pb:!!COOPW.pendBuoi,wk:COOPW.whereKey,ps:COOPW.sent===(COOP.state.week||0)||!!COOPW.pend,tr:(COOPW.tr||[]).slice(-8)}});
  async function rejoinHost(){await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(600);await tapText(A,/^Trở lại phòng/);
    return until(A,()=>COOP.seat==='a'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000)}
  async function leaveBack(X,Y,tag,mid){const k0=await X.p.evaluate(()=>COOPW.tm.myKey());await X.p.close();
@@ -211,7 +211,9 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   for(let i=0;i<3;i++){await clear(X);await sleep(300)}
   const t0=Date.now();let y;while(Date.now()-t0<20000){y=await Ok(Y);if(!y.fz&&!y.frozen&&!y.hold&&y.v&&y.k===y.rk)break;await sleep(400)}
   ok(!y.fz&&!y.frozen&&!y.hold,tag+': '+Y.name+' drops the wait by itself (no reload)',y);
-  const x=await Ok(X);ok(y.v&&x.v&&y.v.key===x.v.key&&y.k===x.k,tag+': same buổi + same clock on both',[x.k,y.k,x.v&&x.v.key,y.v&&y.v.key]);return k0}
+  const x=await Ok(X);/* coop-night-wk6: once the room's night is committed a seat whose week end already ran (sent / pending, thin G: run on the host)
+    is at the new morning, waiting for the other's end (same as without a reload): its buổi is then not the room's; the clock key must still match */
+  ok(y.v&&x.v&&y.v.key===x.v.key&&(y.k===x.k||y.ps||x.ps),tag+': same buổi (unless that seat\'s week end already ran) + same clock on both',[x.k,y.k,x.v&&x.v.key,y.v&&y.v.key,x.ps,y.ps]);return k0}
  async function stepBoth(tag,k){for(let i=0;i<2;i++){await clear(A);await clear(B)}const rd=o=>o.p.evaluate(()=>!!(COOPW.bend||COOPW.nReady()));/* a restored seat may already be ready (its bend survived the rejoin) */
   const a=await rd(A)||await press(A),c=await rd(B)||await press(B);ok(a&&c,tag+': both can press Sẵn sàng',[await Ok(A),await Ok(B)]);
   const ms=await bothPast(A,B,k,30000);ok(ms>=0,tag+': the buổi steps for both',[await Ok(A),await Ok(B)])}
