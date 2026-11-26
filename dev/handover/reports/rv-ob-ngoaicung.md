@@ -156,3 +156,43 @@ do not land it (MAIN: delete it).
   5. `node dev/tools/quickcheck.js <merged root> <LIVE index.html> --out <scratch>` ×3, plus LIVE vs LIVE as the control. coop-e2e:
      `node dev/test/coop-e2e.js <scratch>`.
 - Remote branch review/ob-ngoaicung-r2 (=65348819) is NOT a PASS (deletion refused by the remote); LC22 told not to land it.
+
+## REVIEW r5 (reviewer RV-OB-NGOAICUNG-3 session_01V1ZZH1CncuHjsCRna8YJJf) — target review/ob-ngoaicung 8aaac5ac (OB-NGOAICUNG-3b)
+PRIORITY #1 CHECK: review of an existing branch — nothing rebuilt; r4 FAIL + builder §r5 read; MAIN 160 perf ruling (interleaved L/B ×3, branch median longTaskMax ≤ LIVE ×1.25) applied.
+
+### VERDICT: PASS — **LAND SLOT fe8b928f** (review/ob-ngoaicung-r6; descendant of LIVE f573dc94, fast-forward). Do NOT land review/ob-ngoaicung-r2.
+LIVE moved twice during the review (aa37de21 → b881686f → f573dc94); fe8b928f = 8aaac5ac + reviewer fix 6d385d6e + merge b881686f (ea1c8d10) + merge f573dc94.
+
+Reviewer commits on review/ob-ngoaicung-r6:
+1. 6d385d6e small fix (law 6 + 11): r5's kcInit wrapper kept only «Xin xăm» and so DROPPED her own new-life cost line «Đã đổi thân phận N lần (−X Phúc duyên)»
+   (nlAccept writes it just before kcInit) on every home road — LIVE keeps it. Filter is now /Xin xăm|Đã đổi thân phận/. Repro (S.nlRe=2 then Nhận, home road):
+   before: line gone; after: kept, no Sủng line. Same commit: scan.js forceCard clears kaLastResult + #rtoast before its forced resultShow — it read the
+   PREVIOUS real card (her own «Gửi bức thêu tự tay làm cho Mã Lạc Anh», name in the title, kept by design) as a fail (false positive on tt, 1 of 2 runs).
+2. fe8b928f merge f573dc94: real source conflicts j14 restore / j30 demote / j4 (cha bị xử trảm) / j8 fall — LIVE's charge-trinh-punish code kept whole,
+   only her own rank word RANKS[S.rank].n → meRankN() inside them (the branch's r4 nit; identical in the palace). Built files regenerated.
+
+### PERF (MAIN 160 rule; quickcheck LIVE tool, iPad CPU-slowed; numbers = run median of 3)
+- Gate on fe8b928f vs LIVE f573dc94, order L,B,L,B,L,B — all 6 QUICKCHECK PASS:
+  longTaskMax L 2312 · B 1960 · L 2181 · B 3704 · L 1791 · B 2444 → medians B 2444 / L 2181 (limit ×1.25 = 2726) **PASS**;
+  buổi L 1133 · B 1359 · L 1167 · B 1107 · L 1325 · B 1270 → medians B 1270 / L 1167. No new error / stall (quickcheck fails [] every run).
+- Earlier gate on 8aaac5ac vs LIVE aa37de21, same order: longTaskMax L 2542 · B 2118 · L 1874 · B 1980 · L 1816 · B 1863 → B 1980 / L 1874 PASS; buổi medians B 1260 / L 1511.
+- Controls LIVE aa37de21 vs itself: run 1 FAIL (longTaskMax 3344/1917, one LIVE buổi 4426 ms), run 2 PASS — single 3–4 s spikes happen on LIVE code too (noise).
+
+### FUNCTION (all on fe8b928f unless said)
+- scan.js 600 steps × 5 roads: every road that began at home = strict-fails none incl. new favourLog (tt td cnv nc bd); the bd/cnv start flake (road began
+  in the palace, isKc false) rerun. LIVE b881686f bd: SCAN FAIL (favourLog «Nghỉ ngơi: Thái hậu → ta: thiện cảm …») — the check bites.
+- Real taps Fold 755x1000 tt + iPad 1180x820 bd (touch taps on Sang buổi / Nhận / Tiếp / Vào ngày mới, 18–23 taps, 2 Tuần lục books each, kitBook pages
+  captured): pages = Tuần lục · Tổng lược · Tuần này đến đây là hết only — NO emperor page, no «Sủng −8»; start line «… Danh 33 → 8, Bạc 210 → 80» with NO
+  «Sủng 8 → 0», no «Chương 1». LIVE tt same run: «Sủng 8 → 0 (Hoàng thượng phật ý)», «Hoàng hậu → ta: thiện cảm -10 → -13», «Chương 1: Sơ nhập cung môn»,
+  palace moves, 3 person pages. 0 page errors.
+- Result cards (r4 family kept): forced palace drift at home → no card; own act «Gửi quà vào cung cho <Hoàng hậu>» row shows (both roads); after kcEnter(0)
+  the palace card shows the consort row and a Sủng change writes «Sủng 19 → 24 (Hoàng thượng để mắt)» in the Sổ ghi.
+- coop-e2e 143/143; act-merge-j5-kcscan ALL OK; LIVE ctp tests on the merge: charge-trinh-punish ALL PASS, punish-reason ALL PASS, promo-root PASS,
+  cold-faction ALL PASS 20.
+- Laws: 1 two-way (her gift row shows), 4 one core (filters only, no number typed), 6 real (her cost line kept; palace favour not on a life she lacks),
+  11 whole family (lsSync + kcInit = ONE place each, all 5 roads). No UI / kit / wording change.
+
+### MAIN 160 wider question (favour where she has no palace life)
+Code + runtime: the only playable life without a palace is the home road (road8()==="kc", 5 roads) — covered. Lãnh cung (S.out from j14 cold()) is still a
+palace consort (favour real); the servant road (isSrv) is a palace life; «xuất cung / về quê / ẩn cư» exist only as ending text (j32 etc.), not a playable
+road. Nothing else to fix. «Lối riêng» unlock line is dropped at home too — correct, the «Lối riêng» group never shows on a home Hành sự tab (scan tab-act).
