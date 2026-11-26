@@ -301,3 +301,4 @@ ROOT 3-1-1 ~13:06Z: child FOREMAN C ROOT 3-1-1-1 = session_01PEhRbtvVxc6f1jpKGP7
 FOREMAN C ROOT 3-1-1-1 = session_01PEhRbtvVxc6f1jpKGP7uep; START_CTX ~7 % (1M window, own estimate — used_tokens reads 0; roll at ~32 %, ceiling 60 %); depth 3 (child of ROOT 3-1-1 session_01PEhRbvVFiSVNCtLvEPWNbM). Took over 26/11 ~13:10Z.
 CURRENT FOREMAN C = ROOT 3-1-1-1 session_01PEhRbtvVxc6f1jpKGP7uep (depth 3). Seat: C3-SEALS-W1d session_01PEhRbwgmJUfiQSjuQmcvaz (pt/cl/cy) told my id. FOR MAIN lines → 159.
 ROOT 3-1-1-1 ~13:12Z: hourly wake trig_01QvKJdedayWRq8TMLsdyMx8 (:05, into this session). W1d told my id + ordered to write its handover when push+report are done (past its roll line); I open W1e then.
+ROOT 3-1-1-1 ~13:15Z: W1d state: pt- all 21 painted+looked, cutting/publishing (≈44 100 cr, no redos); cl, cy NOT started (0 cr). W1d writes handover after pt → I open W1e for cl+cy.
