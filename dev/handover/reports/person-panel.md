@@ -53,3 +53,21 @@ B (only one with 0 scroll for all 4 people on both devices; keeps a small tall p
 
 ## Addendum — option D (MAIN 161 request: iPad full width, 2-column acts, name never breaks)
 review/person-panel-d: A + on iPad landscape the stage (scene + Ân sủng box) is hidden while a person card is open, card spans the full width, compact acts in 2 columns; `.pcname` nowrap in all options (a/b/c rebuilt too). Measured (4 people): Fold avatar 7 %, whole buttons 14/14, cards still scrolling 2/4 (left box of long-fact people); iPad 9 %, 14/14, 2/4. Cost: Ân sủng box not visible while card open. Stills PA-D-*.jpg on the CDN folder; PDF updated (16 pages).
+
+## HANDOVER FOR KK44 — owner picked OPTION B (MAIN 161, 26/11 ~20:20Z)
+Branch review/person-panel-b (source: dev/build/jpp.js, constant PP_OPT="b", last module in assemble.py). Playable preview: https://ctm-img.victoria-tntt.workers.dev/img/_review/person-panel/play-b/index.html ; videos vid/B-fold.mp4, vid/B-ipad.mp4 (same folder). Nothing landed.
+WHAT B DOES (to be rebuilt as a real KIT part, not as the jpp.js mock):
+1. Portrait strip: `--kpcw:104px`, `--kpcl:116px` on `.pc.kpwide[data-k2]` (stylesheet !important beats the inline custom props); name nowrap; `.kplscr` (left rows) hidden and its content moved to the right.
+2. Right column = 3 tabs (reuse `.pctabs .pct`, container `.pctabs.ppt`; labels Thông tin · Giao tình · Việc; default Việc, remembered in `window.__ppTab`): Thông tin = `.pcf` rows + `.kpfacts` + `.kwear`; Giao tình = `.pcrows` + `.kpkey` (two-way relation, law 1); Việc = old `.kpstick` (act-group tabs) + `.pcn` + `.pcg` act groups. Views are `.ppv[data-v]`, shown by `pc.dataset.ppv`.
+3. COMPACT ACT BUTTON (NEW kit part, needed): each `button.ka` keeps its markup/handlers; a generated `.ppc` summary (title + odds meter clone + ⓘ + one line «Tốn … · Được …», «Cần: …» only on disabled) is appended and the original children are hidden. ⓘ re-fires the original `.kainfo` (kitActZoom). Line 2 uses ellipsis (full text in ⓘ) — KK44 must rule on «no truncation». Better to make it a real card form in kaNorm instead of a hidden-children hack.
+4. Pitfall fixed: the tab listener must match `.ppt .pct[data-ppv]` only; matching `[data-ppv]` also matched the card (`pc.dataset.ppv`) and swallowed every act click.
+5. Conflicts to settle with the owner/KK44: OD 18/11 «never shrink the figure» (portrait now 104 px, ~20–24 % of screen height); iPad card is still ~420 px tall because the panel is the RIGHT HALF (stage + Ân sủng take the left half) — D (full-width iPad) was the answer to that, owner chose B.
+FAMILY STATUS (every screen that shows a person):
+| screen | status in B |
+|---|---|
+| Hậu cung Chí tôn / Phi tần / Cung nhân | WORKING, taps + acts verified on video (Fold + iPad) |
+| Hậu cung Nam nhân | selector applies (same pcard); day 1 has no man to show (empty message), card not seen |
+| Hoàng tự (kid/kvo/kin/hon), Việc nhờ (q72), Kỳ tuyển tú, thái tử/ward cards | same `pcard` + `.pc.kpwide[data-k2]` selector, so B applies by CSS; NOT seen on screen (no kids / quests on a day-1 life) — reviewer must shoot them with a late-game save |
+| Person dialog (jksize ksz3), pager strip, Sổ ghi | NOT touched (separate path); need the same small-frame rule from KK44 |
+Open risks: mock moves DOM after render (MutationObserver); a real part must build the tabs inside pcard. Cards with `.kpnar` (narrow) not checked.
+~100 % B mock working / ~0 % in game.
