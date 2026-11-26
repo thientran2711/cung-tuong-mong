@@ -60,3 +60,15 @@ E-S1 b2239 replay not re-run (worker's table shows LIVE never idles / fix settle
 Pre-existing (not F10, confirmed on LIVE 3af7896e): dialog-fixed «kit-dialog-2 a» (Fold+iPad); button-crawl «Ô lưu · Lui».
 
 ## VERDICT: PASS 123a2a9c (FF from LIVE 3af7896e) — play-stopper fix proven (LIVE hangs, fix does not), no look change, laws kept.
+
+## §2 — merge delta 82bbe53e (LIVE 1dcb373e merged: coop-freeze-kmrew's parallel scroll-cue fix) — PASS
+- 82bbe53e is a fast-forward of LIVE origin/main 1dcb373e (checked). Delta 123a2a9c→82bbe53e in dev/build: jksize.js (comment only on the
+  fix side) + jinv.js (comes from LIVE, untouched by F10); + LIVE's dev/test/scroll-cue-loop.js and observer-leak.js.
+- jksize vs LIVE 1dcb373e: ONE scroll-cue rule kept = F10's kitScrollCues (own cue `:not(.sib)`, which LIVE also had; kscueOwn; rAF
+  `kitScrollCuesSoon`; BAL.kobs hysteresis; buttons/.ka never cue columns). LIVE's duplicate `kscSoon`/`KSC_RAF` removed; no reference left in
+  dev/build or index.html (git grep). LIVE's explanatory comment kept and reworded to name kitScrollCuesSoon. Nothing of LIVE's rule lost: its two
+  points (own cue only; never re-run inside the same task) are both in F10's code. Built index.html carries kitScrollCuesSoon.
+- Tests on 82bbe53e: `node dev/test/scroll-cue-loop.js index.html 755x1000` PASS (settled, 0 passes when settled), `… 1180x820` PASS;
+  `node dev/test/kscue-loop.js` PASS all 4.
+- minor (doc): dev/test/scroll-cue-loop.js header still names «jksize kscOwn / kscSoon» — now kscueOwn / kitScrollCuesSoon; reword when next touched.
+VERDICT §2: PASS 82bbe53e (FF from LIVE 1dcb373e).
