@@ -1851,7 +1851,7 @@ RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vb
 | FIXER co-op F1 guest reload during «Thân phận kiếp này» stuck (opus BIG; briefs/b-coop-f1-rejoin.md) | review/coop-f1-rejoin; reports/coop-f1-rejoin.md | B ROOT 2 child 1 | session_01N1tNP5kNGpWGnBCaNTeHRx | RUNNING | 26/11 04:00Z |
 | E95 E-a+E-b mghelp-dress (opus; briefs/E95-mghelp-dress.md) | review/mghelp-dress | FOREMAN E child7 | session_01DgYSWkswMaVgErr9xy4z23 | RUNNING | 26/11 04:25Z |
 | E96 E-c+E-e dialog-order (opus; briefs/E96-dialog-order.md) | review/dialog-order | FOREMAN E child7 | session_01DgYSWkVu3mJTZ8LRPwH1Jm | RUNNING | 26/11 04:25Z |
-| E97 E-d dup-report (opus REPORT; briefs/E97-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWoPgpYzodQxz6rufXQ | RUNNING | 26/11 04:25Z |
+| E97 E-d dup-report (opus REPORT; briefs/E97-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWoPgpYzodQxz6rufXQ | REPORT READY a0a1d1a2 (review/dup-report; reports/dup-report.md; design dev/design/HANHSU_MERGE.md) | 26/11 05:10Z |
 KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING | 2026-11-26T04:11Z (MAIN 152)
 | D1+D4 punishment reason / one rank / lãnh cung stay / harm WHO-WHY-EVIDENCE + evidence-per-charge rec (opus; briefs/D-owner-bugs-2611.md) | review/punish-reason | FOREMAN D | session_01D3E3NZVRzGzU2XqyYG8zY4 | RUNNING | 26/11 04:30Z |
 | D2 daily event cap + STAT PACE (opus; briefs/D-owner-bugs-2611.md) | review/stat-pace | FOREMAN D | session_01D3E3Na4s9nsVUDJ4L7XktF | RUNNING | 26/11 04:30Z |
