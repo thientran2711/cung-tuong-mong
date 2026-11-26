@@ -455,3 +455,6 @@ ACT-MERGE J2 harm side | review/act-merge-J2 | session_01V1ZZH3CqezByRAUZudKLCM 
 ACT-MERGE J3 Hanh su 16 | review/act-merge-J3 | session_01V1ZZH2JvFTkAQBPLdCwCti | RUNNING | 26/11 08:15Z (MAIN 155)
 ACT-MERGE J4 tabs | review/act-merge-J4 | session_01V1ZZH4KYkh2QzjisNwGsGc | RUNNING | 26/11 08:15Z (MAIN 155)
 ACT-MERGE J5 roads | review/act-merge-J5 | session_01V1ZZH4ik1qjdX1WApZB5aF | RUNNING | 26/11 08:15Z (MAIN 155)
+ACT-MERGE plan worker | review/act-merge 45cc9930 | session_01V1ZZH4kA6w5uudtydsgvjc | DONE 08:01Z, archived | 26/11 (MAIN 155)
+KIT bac-progress (owner UI bug 08:05Z) | review/kit-bac-progress | session_01V1ZZH1KkKyKvFCTKrJjfDi (KK39) | RUNNING | 26/11 08:12Z (MAIN 155)
+BIG RV map-zones r7 abc1c795 | reports/map-zones.md ## REVIEW | session_01V1ZZH1WzF9VpNYw1Q3uuhA | RUNNING | 26/11 08:12Z (MAIN 155)
