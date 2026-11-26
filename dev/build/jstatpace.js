@@ -44,12 +44,11 @@ function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M
 var SP_OFF=0;
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){SP_OFF++;try{return s0.apply(this,arguments)}finally{SP_OFF--}}})();
 
-/* PACE-SPEED · PROPORTIONAL MONTHLY RESCALE (owner 26/11 ~23:00Z row, overwritten in place, via MAIN 164): once a month, for each of the six HUD palace stats
-   (Sắc · Tài · Tâm cơ · Đức · Danh · Sủng, BAL.stp.scale.keys) and each RANK GROUP (the consorts holding the same rank, her included): if the group's highest value is above T, EVERY value in the group is multiplied by
-   f = T / highest — the order and the ratios stay (80 : 30 stays 8 : 3); else nothing. T = spScaleT: BAL.stp.scale.T[k][rank] for Sắc / Tài / Tâm cơ;
-   else BAL.stp.ceil[rank] × BAL.stp.scale.t, never under the NEXT rank's bar for Sủng / Danh (the leader can still be promoted) nor under BAL.stp.floor for Đức. Lãnh cung, the dead and servants are left out. Co-op: NPC values change
+/* PACE-SPEED · PROPORTIONAL MONTHLY RESCALE (owner 26/11 ~23:00Z row, overwritten in place, via MAIN 164): once a month, for each of Danh / Đức / Sủng
+   (BAL.stp.scale.keys; not Sắc / Tài / Tâm cơ) and each RANK GROUP (the consorts holding the same rank, her included): if the group's highest value is above T, EVERY value in the group is multiplied by
+   f = T / highest — the order and the ratios stay (80 : 30 stays 8 : 3); else nothing. T = spScaleT: BAL.stp.ceil[rank] × BAL.stp.scale.t, never under the NEXT rank's bar for Sủng / Danh (the leader can still be promoted) nor under BAL.stp.floor for Đức. Lãnh cung, the dead and servants are left out. Co-op: NPC values change
    on the host only (world people, jmort rule); her own on her side. One line in the month's news and her Sổ ghi when her own values change. */
-function spScaleT(k,r){const B=BAL.stp,C=B.ceil,X=B.scale.T&&B.scale.T[k];r=Math.max(0,r|0);if(X)return X[Math.min(X.length-1,r)];
+function spScaleT(k,r){const B=BAL.stp,C=B.ceil;r=Math.max(0,r|0);
  let T=C[Math.min(C.length-1,r)]*B.scale.t;const f={sung:"s",danh:"d"}[k];
  if(f&&typeof RANKS==="object"&&r<RANKS.length-1)T=Math.max(T,RANKS[r+1][f]);if(!f&&B.floor&&B.floor[k])T=Math.max(T,B.floor[k]);return T}
 function spScaleMonth(){const B=BAL.stp&&BAL.stp.scale;if(!B||!B.on||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return"";
@@ -58,6 +57,6 @@ function spScaleMonth(){const B=BAL.stp&&BAL.stp.scale;if(!B||!B.on||!S||S.dead|
  const mine=[];
  for(const r in G){const P=G[r];for(const k of B.keys){const hi=Math.max(...P.map(p=>+p[k]||0)),T=spScaleT(k,+r);if(!(hi>T))continue;const f=T/hi;
    for(const p of P){if(p!==S&&!host)continue;const now=+p[k]||0,nv=Math.round(now*f);if(nv===now)continue;p[k]=nv;if(typeof statSet==="function")statSet(p,k,p[k]);if(p===S)mine.push([k,nv-now])}}}
- if(!mine.length)return"";const N={sung:"Sủng",danh:"Danh",duc:"Đức",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ"};
+ if(!mine.length)return"";const N={sung:"Sủng",danh:"Danh",duc:"Đức"};
  const t=`Lục cung xếp lại thứ bậc trong hàng ${RANKS[S.rank|0].n}: ${mine.map(([k,n])=>`${N[k]||k} ${n>0?"+":"−"}${Math.abs(n)}`).join(", ")}.`;log(t);return t+" "}
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{ev+=spScaleMonth()}catch(e){console.error(e)}return ev}})();
