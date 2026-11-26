@@ -65,3 +65,11 @@ Re-review after fault 1: SMALL re-check = run `node dev/test/ob-m3ui.js` + add c
 
 ## FIX r2 (after RV-OB-M3UI SMALL FAIL)
 Back guard is now kept on top ALWAYS: `kitBackArm` at boot, on every pointerdown / key, and re-pushed on every popstate; popstate runs `kitTopClose()` (closes a closable layer, else nothing). New cases in ob-m3ui.js, Fold + iPad: Back on the bare room → stays in the game; Back on a forced event → stays, event still waiting; Back on a card opened by a timer 1.5 s after the last tap → closes it. 50/50 pass, old save continues, 0 page errors. KIT.md 32.10 Back line overwritten in place.
+
+## REVIEW r2 (RV-OB-M3UI) — cb7906f4: **PASS**
+- Fault 1 fixed: guard armed at boot + every pointerdown/key + re-pushed on popstate; popstate → kitTopClose() else nothing. Probe on Fold, goBack: bare room, forced event (stays, still waiting), timer-opened card (closes) — none leaves. dev/test/ob-m3ui.js on r2 build: 0 FAIL / 50 (Fold + iPad), old save continues, 0 page errors.
+- Extra cases MAIN asked for (the worker did not cover them; tested by RV, own probe, Fold 755x1000, touch):
+  - «Kiếp mới» «yes» path (old save, sổ 1 = Mạnh Mi Trang alive): kit confirm → «Bắt đầu kiếp mới» → sổ replaced, new life «Lư Tĩnh Uyển» in play, 0 page errors.
+  - Co-op lobby pages co / wait / join / pick (COOP_LOBBY.open, modal kptitle kcoop): Back never leaves the game; no page error. Back closes only the «co» page (its close-word); wait/join/pick stay open (no close-only button) — nothing required is skipped. A real two-player room could not be run here (no co-op server in the harness): the lobby/room code is not touched by this branch, Back only reaches it through the same #modal/#ov paths.
+  - Mini-game shell running (playArt art co / cam / ky / hoa → #kg82): Back leaves the game running (still open, onDone not fired, game kept), 0 errors. A mini-game has no ✕ while it runs, so Back does nothing — never quits or skips the round; its result card closes through kitOvBtn as before.
+- Residual note for MAIN (owner call, not a fault): with the guard always on, the phone's Back can no longer exit the app from the bare room (history entry kept). That is what the brief asked («never leaves the game»); if she ever wants Back-to-exit from the room, it is one line in kitBackArm.
