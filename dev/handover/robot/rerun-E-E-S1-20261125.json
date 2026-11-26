@@ -1141,6 +1141,44 @@
     "review/rerun-E-S1-E-S1-R1-speed-2-1596011504-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-skilled-4-2405623629",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "skilled",
+   "botHarness": "sens",
+   "kiep": 4,
+   "seed": 2405623629,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "2df8f5fa"
+   },
+   "live": "GAME BUILD b7dcbbd06e03",
+   "end": "Nữ phu tử",
+   "type": "death",
+   "fate": "Nữ phu tử",
+   "death": true,
+   "age": 20,
+   "year": 3,
+   "rank": 0,
+   "buoi": 278,
+   "steps": 1822,
+   "taps": 1462,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "no board skipped (Phúc tuyển «Để tài nghệ quyết định»); ending = all-exit Trả thẻ bài (only option)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-skilled-4-2405623629-moments.md",
+    "review/rerun-E-S1-E-S1-R1-skilled-4-2405623629-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
