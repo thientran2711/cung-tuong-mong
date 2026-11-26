@@ -2251,4 +2251,4 @@ BAL.kmus={holdMs:6000};
 /* PUNISH-REASON (review/punish-reason, D1; owner 26/11 ~01:25Z + ~04:15Z): coldMinDays = days (tuần, wk()) in lãnh cung before any release
    (ân xá, đại xá, cầu xin, minh oan — hers and an NPC's); gapDays = no second rank punishment on one person within this many days (it becomes
    cấm túc); fallSung = Sủng lost with a one-rank fall (was the typed 15 in j8 fall); evShow = most evidence lines a notice lists */
-BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:true/* PENDING OWNER (law 16, asked via MAIN 152): NPC release one rank below the old rank; false = old rule (always Đáp ứng) */};
+BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDING OWNER (law 16, asked via MAIN 152): NPC release one rank below the old rank; false = old rule (always Đáp ứng) */};
