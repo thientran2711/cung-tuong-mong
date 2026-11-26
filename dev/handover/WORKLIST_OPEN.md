@@ -29,3 +29,4 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 25 | GAME FEEL / event animation design study (card draw, rings for items/events, entrances) — mocks for sếp | MOTION-DESIGN | MOCK READY for sếp |
 | 26 | Relationship effects of talking to others' people (servant refuses / talks → suspicion, trust, leaks) + greeting etiquette | D | ordered 07:58Z |
 - (25/11 01:10Z, MAIN 130 20:00 report) No item LIVE since last report (LIVE still 502c48c9; lander LC13 waits sếp's permission). Nothing struck; count stays 28 (incl. owner-bug items 24/11 evening).
+- (26/11 12:53Z, MAIN 159 08:00 report) LIVE since last report: 1dcb373e FREEZE fix (coop-freeze-kmrew-rv2; not a list item). Nothing struck; count stays 28. Lander LC22 queue 24 branches + ACT-MERGE (BIG rv verdict ≈13:05Z, LIVE ≈16:30Z).
