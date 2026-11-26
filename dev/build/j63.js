@@ -330,10 +330,10 @@ function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 12
    the people she cannot name with the SAME feeling and number are one line «4 vị khác: ghen +8» (one alone keeps «một vị <tước>: ghen +8») */
  const R=K.filter(x=>Math.round(x.d));const L=[],U=new Map();
  const line=(nm,k,d)=>`<span class="kitem kkemi"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${k} ${kaN(d)}</span></span>`;
- for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){L.push([0,line(kaWho(x.v),x.k,d)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[]});U.get(key).v.push(x.v)}
- for(const {k,d,v} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^M/,"m"):`${v.length} vị khác`;L.push([1,line(nm,k,d)])}
+ const seen=new Set();for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){const sk=(x.v&&x.v.id||kaWho(x.v))+"|"+x.k;if(seen.has(sk))continue;seen.add(sk);L.push([0,line(kaWho(x.v),x.k,d)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[]});U.get(key).v.push(x.v)}
+ for(const {k,d,v} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^m/,"M")/* KK41: a line that starts its row starts with a capital («Một vị Phi …»; owner 24/11) */:`${v.length} vị khác`;L.push([1,line(nm,k,d)])}
  const out=L.slice(0,8).map(x=>x[1]);if(L.length>8)out.push(`<span class="kitem kkemi"><span class="ef n">… và ${L.length-8} người khác</span></span>`);
- return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${out.join("")}</span></span>`:""}
+ return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv kklist">${out.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
    the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
@@ -375,7 +375,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
  const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!G.length&&!B.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
- const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
+ const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${typeof kitLineCap==="function"?kitLineCap(x):x}</span>`).join("")}</span></span>`;/* KK41: each result line starts its row with a capital */
  t.className="rtoast karesult "+SL.cls;
  t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ ở Nhật ký</span></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000)};
@@ -392,7 +392,11 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 .rtoast.karesult .kwy,.kb .kwy{color:var(--dim);font-weight:400;font-size:.74rem}
 
 .kb .kr-kem .krl{color:var(--dim)}
-.kb .kr-kem .kitem.kkemi{display:block;text-align:left;width:auto;min-width:0;justify-content:flex-start}/* MAIN 157: one person per line in every card that lists people (rtoast, night card) */
+.kb .kr-kem .kitem.kkemi{display:block;text-align:left;width:auto;min-width:0;justify-content:flex-start}
+/* KK41 (one kit part with OB-VERDICT-2): ANY row listing people (Kèm + a kitRows Được / Mất of person lines, j79 KIT_PLINE) = .krv.kklist > .kitem.kkemi, one line each in every container (the night card's .kitem is the centred item cell otherwise) */
+html body .kr>.krv.kklist{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:1px!important;text-align:left!important;min-width:0}
+html body .kr>.krv.kklist>.kitem.kkemi{display:block!important;width:auto!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:0!important;text-align:left!important;white-space:normal!important;border:0!important;background:none!important;box-shadow:none!important;aspect-ratio:auto!important;height:auto!important}
+html body .kr>.krv.kklist>.kitem.kkemi>.ef{display:inline!important;margin:0!important;white-space:normal!important}/* MAIN 157: one person per line in every card that lists people (rtoast, night card) */
 .kb .kkem{display:block;cursor:pointer;color:var(--ink)}
 .kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}
 .kb .kkem .kkeml{display:none;font-size:.76rem;color:var(--dim);line-height:1.35;margin-top:2px}
