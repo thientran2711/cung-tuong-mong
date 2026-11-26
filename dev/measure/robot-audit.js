@@ -72,10 +72,11 @@ function verdict(rec, life) {
   if (h && h.cap && e.k === 'none') why.push('harness had a cap (' + h.cap + ')');
   /* MIXED BUILD (F #20 10:47Z, s7 flight2): robot-rt ≥ 2df8f5fa+ pins the build of a life (harness.build0) and hard-stops on a mismatch; a life whose loads saw more than one
      build (harness.builds), or that hit the stop (harness.buildMismatch), is not one game's play */
-  if (h && (h.buildMismatch || (Array.isArray(h.builds) && new Set(h.builds.map(x => x && x.b)).size > 1))) why.push('mixed build (' + (Array.isArray(h.builds) ? h.builds.map(x => x.s + '/' + x.b).join(' → ') : 'build mismatch') + ')');
+  const mixed = !!(h && (h.buildMismatch || (Array.isArray(h.builds) && new Set(h.builds.map(x => x && x.b)).size > 1))); /* F #21 (F ops rule 10:55Z): its OWN verdict «MIXED-BUILD», counted apart from VALID / INVALID — fine for harness / stall / bug findings, not for single-build game conclusions */
+  if (mixed) why.push('mixed build (' + (Array.isArray(h.builds) ? h.builds.map(x => x.s + '/' + x.b).join(' → ') : 'build mismatch') + ')');
   /* TEST HOOKS (BIG #8 F1, robot-rt ≥ fd9218fe+): a life run with any RT_TEST_* self-test or the RT_COLD probe setup (sent to lãnh cung by cold(), not by play) is not real play */
   if (h && h.testHooks && Object.keys(h.testHooks).length) why.push('test hooks used (' + Object.entries(h.testHooks).map(([k, v]) => k + '=' + v).join(', ') + ')');
-  return { valid: why.length === 0, why, end: e };
+  return { valid: why.length === 0, why, end: e, mixed };
 }
 
 /* ---- readers ---- */
@@ -85,7 +86,7 @@ function ageText(life) { return life && life.age != null ? 'age ' + life.age + (
 
 function fromJson(file, j, out) {
   const round = path.relative(process.cwd(), file);
-  const push = (lifeName, rec, life, extra) => { const v = verdict(rec, life), mq = mgQuitOf(rec, life); const of = Array.isArray(rec.offers) ? rec.offers : []; out.push({ mgQuit: mq.n + mq.giveUp, mgQuitLB: mq.lowerBound, ...(() => { const rc = OFFER ? OFFER.recount(of) : { raw: of.length, real: of.length, picked: of.filter(o => o.picked).length, by: {} }; return { offers: rc.real, offPicked: rc.picked, offRaw: rc.raw, offBy: rc.by } })(), file: round, life: lifeName, end: endText(life), age: ageText(life), valid: v.valid, why: v.why, cls: v.end.k, note: v.end.note || v.end.why || '', sig: [lifeName, endText(life), life && life.years, life && life.age, rec.t && rec.t.total, rec.job && rec.job.seed].join('|'), ...extra }) };
+  const push = (lifeName, rec, life, extra) => { const v = verdict(rec, life), mq = mgQuitOf(rec, life); const of = Array.isArray(rec.offers) ? rec.offers : []; out.push({ mgQuit: mq.n + mq.giveUp, mgQuitLB: mq.lowerBound, ...(() => { const rc = OFFER ? OFFER.recount(of) : { raw: of.length, real: of.length, picked: of.filter(o => o.picked).length, by: {} }; return { offers: rc.real, offPicked: rc.picked, offRaw: rc.raw, offBy: rc.by } })(), file: round, life: lifeName, end: endText(life), age: ageText(life), valid: v.valid, mixed: !!v.mixed, why: v.why, cls: v.end.k, note: v.end.note || v.end.why || '', sig: [lifeName, endText(life), life && life.years, life && life.age, rec.t && rec.t.total, rec.job && rec.job.seed].join('|'), ...extra }) };
   if (Array.isArray(j) && j.length && j[0] && (j[0].job || j[0].life && j[0].bugs)) { for (const r of j) push((r.job && r.job.id) || '?', r, r.life || r.res); return true }
   if (j && Array.isArray(j.pairs)) {
     for (const p of j.pairs) { const ls = p.lives || []; if (!ls.length) out.push({ file: round, life: (p.job && p.job.id) || 'pair?', end: '—', age: '', valid: false, why: ['co-op pair with no finished life' + (p.partial ? ' (partial)' : '')], cls: 'none', note: '', sig: round + (p.job && p.job.id) });
@@ -110,7 +111,7 @@ function fromMd(file, txt, out) {
     if (/^-+$/.test(cells[0].replace(/[:\s]/g, ''))) continue;
     const lifeName = cells.slice(0, hdr.li + 1).join(' · '), endT = cells[hdr.ei] || '';
     const life = mdLife(endT); const v = verdict({}, life); n++;
-    out.push({ file: path.relative(process.cwd(), file), life: lifeName, end: endT.slice(0, 90), age: '', valid: v.valid, why: v.why, cls: v.end.k, note: v.end.why || '', sig: file + lifeName + endT, md: true });
+    out.push({ file: path.relative(process.cwd(), file), life: lifeName, end: endT.slice(0, 90), age: '', valid: v.valid, mixed: !!v.mixed, why: v.why, cls: v.end.k, note: v.end.why || '', sig: file + lifeName + endT, md: true });
   }
   return n > 0
 }
@@ -132,7 +133,7 @@ function fromLog(file, txt, out, files) {
     const [, life, id, age, buoi] = m; if (id === 'SLICE') continue; if (files.includes(path.join(dir, life + '.json'))) continue;
     const L = { id, age: age === '?' ? null : +age, type: /^(\?|HARNESS)$/.test(id) ? (id === '?' ? '?' : 'harness') : '' };
     const v = verdict({ harness: { kind: 'realtap', realtap: true, jsClicks: 0 } }, L);
-    out.push({ file: round, life, end: endText(L), age: ageText(L), valid: v.valid, why: v.why, cls: v.end.k, note: (v.end.note || v.end.why || '') + ' (from LIFE DONE log line, buổi ' + buoi + ')', sig: [life, endText(L), null, L.age, null, null].join('|') }) } }
+    out.push({ file: round, life, end: endText(L), age: ageText(L), valid: v.valid, mixed: !!v.mixed, why: v.why, cls: v.end.k, note: (v.end.note || v.end.why || '') + ' (from LIFE DONE log line, buổi ' + buoi + ')', sig: [life, endText(L), null, L.age, null, null].join('|') }) } }
 function walk(p, acc) { const s = fs.statSync(p); if (s.isDirectory()) { for (const f of fs.readdirSync(p)) if (f !== 'saves' && f !== 'node_modules') walk(path.join(p, f), acc) } else if (/\.(json|md|log)$/.test(p)) acc.push(p); return acc }
 
 function audit(paths, only) {
@@ -152,17 +153,17 @@ function audit(paths, only) {
 }
 
 function counts(lives) {
-  const u = lives.filter(r => !r.dup), c = { total: u.length, valid: 0, invalid: 0, reasons: {} };
-  for (const r of u) { if (r.valid) c.valid++; else { c.invalid++; for (const w of r.why) { const k = w.replace(/ \(.*$/, '').replace(/«.*»/, '«…»').replace(/ with \d+ options/, ''); c.reasons[k] = (c.reasons[k] || 0) + 1 } } }
+  const u = lives.filter(r => !r.dup), c = { total: u.length, valid: 0, invalid: 0, mixed: 0, reasons: {} };
+  for (const r of u) { if (r.valid) c.valid++; else if (r.mixed) c.mixed++; else { c.invalid++; for (const w of r.why) { const k = w.replace(/ \(.*$/, '').replace(/«.*»/, '«…»').replace(/ with \d+ options/, ''); c.reasons[k] = (c.reasons[k] || 0) + 1 } } }
   c.byEnd = {}; for (const r of u) c.byEnd[r.cls] = (c.byEnd[r.cls] || 0) + 1;
   c.offers = u.reduce((a, r) => a + (r.offers || 0), 0); c.offRaw = u.reduce((a, r) => a + (r.offRaw || 0), 0); c.offPicked = u.reduce((a, r) => a + (r.offPicked || 0), 0); /* OFFER LOG (harness ≥ 95718760+): promotion / selection options seen vs taken */
   c.mgQuitLives = u.filter(r => r.mgQuit > 0).length; c.mgQuit = u.reduce((a, r) => a + (r.mgQuit || 0), 0);
   return c;
 }
-function countsLine(c) { return 'COUNTS: lives ' + c.total + ' · VALID ' + c.valid + ' · INVALID ' + c.invalid + ' · ends ' + Object.entries(c.byEnd).map(([k, v]) => k + ' ' + v).join(' / ') + ' · why ' + Object.entries(c.reasons).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(' / ') + ' · mgQuit ' + (c.mgQuit || 0) + ' in ' + (c.mgQuitLives || 0) + ' lives (mini-games quit, not played; life verdict unchanged)' + (c.offRaw ? ' · promotion roads ' + c.offers + ' seen / ' + c.offPicked + ' picked (real exam / decree / review / selection cards, rt-offer.js rule 2; old word-match count ' + c.offRaw + ')' : '') }
+function countsLine(c) { return 'COUNTS: lives ' + c.total + ' · VALID ' + c.valid + ' · INVALID ' + c.invalid + ' · MIXED-BUILD ' + (c.mixed || 0) + ' · ends ' + Object.entries(c.byEnd).map(([k, v]) => k + ' ' + v).join(' / ') + ' · why ' + Object.entries(c.reasons).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(' / ') + ' · mgQuit ' + (c.mgQuit || 0) + ' in ' + (c.mgQuitLives || 0) + ' lives (mini-games quit, not played; life verdict unchanged)' + (c.offRaw ? ' · promotion roads ' + c.offers + ' seen / ' + c.offPicked + ' picked (real exam / decree / review / selection cards, rt-offer.js rule 2; old word-match count ' + c.offRaw + ')' : '') }
 function mdTable(lives) {
   const esc = s => String(s).replace(/\|/g, '/');
-  return ['| round | life | end | valid? | why |', '|---|---|---|---|---|'].concat(lives.map(r => '| ' + esc(r.file.replace(/^dev\/handover\/robot\//, '')) + ' | ' + esc(r.life) + ' | ' + esc(r.end.slice(0, 80)) + (r.age ? ' (' + r.age + ')' : '') + ' | ' + (r.dup ? 'dup' : r.valid ? 'VALID' : 'INVALID') + ' | ' + esc(r.dup ? 'same life as ' + r.dup.replace(/^dev\/handover\/robot\//, '') : (r.why.join('; ') || r.note) + (r.mgQuit ? ' · mg quit ' + r.mgQuit + (r.mgQuitLB ? '+' : '') + ', not played' : '') + (r.offers ? ' · offers ' + r.offers + '/' + r.offPicked + ' picked' : '')) + ' |')).join('\n');
+  return ['| round | life | end | valid? | why |', '|---|---|---|---|---|'].concat(lives.map(r => '| ' + esc(r.file.replace(/^dev\/handover\/robot\//, '')) + ' | ' + esc(r.life) + ' | ' + esc(r.end.slice(0, 80)) + (r.age ? ' (' + r.age + ')' : '') + ' | ' + (r.dup ? 'dup' : r.valid ? 'VALID' : r.mixed ? 'MIXED-BUILD' : 'INVALID') + ' | ' + esc(r.dup ? 'same life as ' + r.dup.replace(/^dev\/handover\/robot\//, '') : (r.why.join('; ') || r.note) + (r.mgQuit ? ' · mg quit ' + r.mgQuit + (r.mgQuitLB ? '+' : '') + ', not played' : '') + (r.offers ? ' · offers ' + r.offers + '/' + r.offPicked + ' picked' : '')) + ' |')).join('\n');
 }
 
 module.exports = { audit, verdict, endClass, counts, countsLine, mdTable, EXIT_IDS };
