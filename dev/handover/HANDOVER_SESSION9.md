@@ -390,3 +390,5 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 
 ## MAIN CHÍNH 165 (session_01Rc5AsJ8B9RuGFGzjjQkmun, depth 4, START_CTX ~5 %, roll at 30 %)
 - 22:35Z: took over from 164; tasks recreated (hourly trig_01N8yS37aSfBDUdoG6nS1sQH :32, evening trig_01R7zA5Y7t6oDyHt89pczupj, morning trig_01KtpFy8JYmGNEyHsNWqXi21, PDF ping 00:30Z trig_01FTH5bxKkjsvQNfbtUgoMm6); seats told; worktree h165.
+- 22:40Z LOAD: main running ~20 (owner bugs/UI/go-live + kit set) | B save stack LIVE 504d2e6a | C art order (Ban chết stamp) | D picker-dom 1466caa7 awaiting KIT OK + audits | E/F robot runs | moved: none. LIVE 504d2e6a · ROLLBACK 03a8c17c.
+- 22:40Z D 22:33Z K-LIST-PAGE kit sign-off → KK48 queue. E 22:20Z #kshR/img.kfr covering map cards (.kmov/.kfoc/.mapsc; open since D 09:17Z) → MAP-R8 as whole family. F #24 at 46 % depth 8 needs ROOT Foreman F (other account) → paste block given to sếp in chat. 164 relay: PUNISH-TIER-3 RV READY b5f3d85e → RV-163C + LC25 queue (after ab73bc26).
