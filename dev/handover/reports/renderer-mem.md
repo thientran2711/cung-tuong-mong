@@ -84,3 +84,43 @@ Branch `review/renderer-mem` @ **60db5f48** (off LIVE 5e013076; site rebuilt; NO
 6. Report «SẴN SÀNG KIỂM <sha>» here + SSK to Foreman D (session_01D3E3NX3vWTRXcmN8Wi8Yxw); D asked the worker to open ONE opus BIG reviewer as its child, then LAND READY to D.
 Tools on the branch: dev/measure/renderer-mem-lib.js (watchdog `watch`, RT_LIGHT, RT_MOB ping-pong recorder, RT_COLD), renderer-mem-{heap,render,bookhang}.js, heap-retainers.js, mo-burst.js; dev/test/kscue-loop.js, kscue-shots.js. Local A/B site: serve a dir with LIVE index.html/sw.js/assets.json (+ links to audio cdn coop docs icons manifest rank dev) on one port and the worktree root on another.
 ~X%: F10 ~80 % done (cause + fix + deterministic proof; gates 1–6 open).
+
+## 8. Worker #3 (session_01D3E3Nah1mvJDWaRpXxvx3R, depth 2, START_CTX ~3 %) — «SẴN SÀNG KIỂM 123a2a9c» (26/11 10:25Z)
+PRIORITY #1 CHECK: OD 0 | main none | review/* review/renderer-mem (mine) | claims D row «F10 renderer-memory hunt».
+Branch `review/renderer-mem` @ **123a2a9c** = fix + LIVE 3af7896e merged (FF from LIVE; merges of f009e1a6 / 6b5d3d05 / 3af7896e conflicted only in index.html/sw.js/assets.json/CHANGE.txt → rebuilt).
+**The F10 family = the kit's DOM observers doing whole-page work on every mutation. Four members, all fixed at their kit source, behaviour only (no look change):**
+1. jksize `kitScrollCues` cue ↔ cue observer ping-pong (`.kscue.sib`) — 60db5f48 (worker #2).
+2. j63 `kaMO` waking itself on kaNorm's own edits — 60db5f48 (`kaRun` + `takeRecords`, ≤ `BAL.kobs.kaPass`).
+3. j63 `kaMO` woke on EVERY added node (loading marks, memory marks, words) and re-ran `kaNorm(document)` → with a long save (Foreman E E-S1 iPad y13 b2239 «Biếu quà làm lành», 1351 option cards) 7 s a pass, page never idles (stack kitNoUnkDom < kaNorm). Fix `kaSort`: a NEW card → `kaNorm` over the place that holds it; a node added inside a normalised card → that card alone; anything else → nothing; `kaWants` sweep for cards made outside a record.
+4. jk4 option fit: `kitOptEqual` re-tiered the whole dialog for EVERY card (n²) and the ResizeObserver queued one rAF per card (1351 callbacks) → once per synchronous pass (`KIT_OPT_EQ`) + one frame callback (`KIT_OPT_ROQ`). Same chain as R1 cnv_ban speed-3/4 (y16–17) and Seat A nc_gian scholar-1 b1510 (kitOptUnify < kpOptArt < kaNorm1).
+Also: ONE CORE — the typed fallbacks `{cueShort:260,cueHyst:24}` / `||3` removed (BAL.kobs only). KIT.md: §6 frame «Observer rule» + option-fit line; scroll-cue entry (worker #2). Test-only probe `RT_PROF=1` in renderer-mem-lib (per-function calls/ms every 3 s + kaMO wake records → <RT_MEM>.prof.txt).
+
+**Gates on the final sha (alone, this box):**
+| gate | LIVE | fix 123a2a9c |
+|---|---|---|
+| quickcheck | — | open/old-save/perf PASS (render 220/202, tab 514/736, buổi 1290/1413 vs live); G1/G2/G3/time-spill PASS; G4 FAILs = dialog-fixed «kit-dialog-2 a empty Tốn/Được» + crawl «Ô lưu · Lui» — **identical FAIL on LIVE f009e1a6 and 6b5d3d05 (pre-existing, not F10)** |
+| kscue-loop.js (card/edge/nested/kaloop) | f009e1a6 + 3af7896e: hangs on «nested» | PASS all 4 |
+| scroll-cue-scan | ALL OK | ALL OK (rows same except random j7c/ge1 draws) |
+| opt-frame-scroll-scan | 0 FAIL | 0 FAIL |
+| kscue-shots Fold 755x1000@2 + iPad 1180x820@2 | | same layout + cue (looked at every pair; j7c content is a random draw on both) |
+| coop-e2e both seats | | 143/143 (008662ef); chain on 123a2a9c below |
+| page-curl2 Fold/iPad, weekbook-entries | | PASS |
+| book-relayout iPad «jumped» | FAIL (same) | FAIL — pre-existing on LIVE |
+| q-softlock | PASS 2/2 | PASS 2/2 (one flaky iPad «person» dead-tap in a quickcheck run) |
+| E-S1 b2239 replay (iPad, 1351 cards) | never idles, watchdog stacks every sample | 60db5f48 also hung → members 3+4; 123a2a9c settles ~40 s after open (one-time normalise of 1351 new cards), kitOpt* 1.5–4 s → ~50 ms a pass, plays b2241→b2262 |
+Robot seats, LIVE vs fix (watchdog RT_LIGHT=1 RT_HANGKILL=3500):
+| seat / lane | LIVE hangs | fix hangs | fix range | fix peak MB |
+|---|---|---|---|---|
+| T1d hot-2 | 2 (b270, b273) | 0 | b273→300 (008662ef) | 1678 |
+| T1d off-3 | 1 (b63) | 0 | b51→150 (008662ef) | 2140 |
+| T1d hot-3 | 1 (b64) | 0 | b46→150 (008662ef) | 2090 |
+| T1d timid-3 | 1 (b65) | 0 | b46→150 (008662ef) | 1952 |
+| A4 nc_vuong rebel-1 | 1 (b77) | 0 | b78→242 (307b3b77) | 2339 |
+| Foreman E E-S1 | 2 (b2239, b2240) | 0 | 123a2a9c | 2641 |
+| R2 cnv_chu speed-k2 b650 | 1 (first pass) | — | LIVE did not re-hang on resume → no gate |
+More LIVE hangs of the same stacks today: R3 cnv_ma b1254, Seat A scholar-1 b1510, R1 cnv_ban speed-3/4, T1d hot-1 b305 on 6b5d3d05.
+Evidence on CDN img/_review/renderer-mem/: f10c-pair-{fold,ipad}-{j7c,evpick,giftpick}-*.webp, f10c-video-{old,new}-{fold,ipad}.webm (LIVE vs fix), f10c-E-S1-b2240-LIVE-hang.json, f10c-E-S1-b2240-60db5f48-hang.json, f10c-E-S1-{60db5f48,fix3}-prof.txt; seat files *-hang.json.
+Pre-existing faults seen (not F10, for the owners of those gates): G4 dialog-fixed kit-dialog-2 a; crawl «Ô lưu · Lui»; book-relayout iPad jump; quickcheck old-save step fails LIVE-vs-LIVE with f009e1a6 as the old build (harness); robot new lives stuck under the selection veil (div.kscn-veil) on LIVE ≥ f009e1a6 (Foreman F); lib buổi probe reads 0 on LIVE builds (T1d note).
+Perf item left (not a hang): kpOptArt/kitOptUnify ~5 ms per card → a 1351-card list costs ~7 s once when it opens.
+«SẴN SÀNG KIỂM 123a2a9c» — ONE opus BIG reviewer opened as my child (see §9 when it reports).
+~X%: F10 ~92 % done (four members fixed + proofs; review + land open).
