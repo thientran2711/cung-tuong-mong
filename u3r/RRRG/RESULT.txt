@@ -1,0 +1,1 @@
+VALID SEGMENT: u4 7959f1b5 BUILD OK b0cf6e61f03b + patch #18 6d43a5a1; Fold host/iPad guest; seed 62; year 2 reached buoi 122 in 72 min real-tap; reload at buoi 20 both seats; stuck 0; jsClicks 0
