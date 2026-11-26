@@ -447,7 +447,7 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
 /* phones < 600 px: icon only (label = tooltip / aria-label, same as the stat cells), sits under the menu button */
 /* kv3:.kv1 */html:where(.kv1) body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
  html:where(.kv1) body header.hud>#k3room.kbackb:not(.hwaway) .kbl{display:none}
- /* review/home-way: away from home the one-page view shows the cost + her palace too (owner: «về phòng 1 khắc») */
+ /* review/home-way: away from home the one-page view shows the cost + her palace too */
  html:where(.kv1) body header.hud>#k3room.kbackb.hwaway{padding:0 8px 0 2px!important;min-height:36px}
  /* icon missing (CDN 404, img removed by onerror): show the label so the button never becomes invisible */
  html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}

@@ -98,7 +98,7 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html:where(.kv1) body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:not(.hwaway):has(.kbi) .kbl{display:none}
-/* review/home-way (owner OD 26/11 ~04:25Z «về phòng 1 khắc»): away from home the one-page button shows its label under the icon:
+/* review/home-way (owner OD 26/11 ~04:25Z): away from home the one-page button shows its label under the icon:
    «Về phòng · N khắc» + her palace's name, small, centred in the menu column */
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:96px;padding:0 2px 2px!important}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:block;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre-line;overflow:visible}
