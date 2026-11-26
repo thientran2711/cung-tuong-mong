@@ -38,6 +38,7 @@ function kitEndClear(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
  KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
  try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
+ try{if(typeof cfDrop==="function")cfDrop()}catch(e){}/* jflip: a night card-flip job already running (waiting on its pictures) builds its scene after the death otherwise */
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly:not(.kmerr-lay),.kmalarm").forEach(e=>e.remove())}catch(e){}
  try{const d=document.getElementById("dawn");if(d&&!d.hidden){d.hidden=true;d.classList.remove("on")}}catch(e){}
  try{if(typeof kitEndToasts==="function")kitEndToasts()}catch(e){}}

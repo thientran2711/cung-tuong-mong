@@ -58,13 +58,13 @@ const ok=[];const rows=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.err
    S.bac=Math.max(S.bac||0,500)});
   const run=code=>p.evaluate(c=>{try{(0,eval)(c);return null}catch(e){return String(e).slice(0,160)}},code);
   /* a player taps through the ending's own ink entrance (mourning endings) — only that scene; anything else stays as found */
-  const settle=async()=>{for(let i=0;i<14;i++){await p.waitForTimeout(500);const k=await p.evaluate(()=>{const o=document.querySelector('.kmov.km-inkov');if(!o)return 0;const e=o.querySelector('.kmend');if(e){e.click();return 1}return 2});if(!k&&i>=3)break}await p.waitForTimeout(700)};
+  const settle=async()=>{for(let i=0;i<14;i++){await p.waitForTimeout(500);const k=await p.evaluate(()=>{const o=document.querySelector('.kmov.km-inkov');if(!o)return 0;const e=o.querySelector('.kmend');if(e){e.click();return 1}return 2});if(!k&&i>=3)break}await p.waitForFunction(()=>!(window.KLIFE&&KLIFE.on),null,{timeout:30000}).catch(()=>{});await p.waitForTimeout(700)};/* KLIFE: the picture-loading cover of the end card (not a popup) */
   const look=()=>p.evaluate(()=>{const M=document.getElementById('modal');const pts=[];for(const fx of [.15,.5,.85])for(const fy of [.2,.5,.8]){const e=document.elementFromPoint(innerWidth*fx,innerHeight*fy);pts.push(e&&e.closest('#modal')?'M':(e?(e.id||e.className||e.tagName).toString().slice(0,40):'-'))}
    const vis=e=>{const r=e.getBoundingClientRect();const cs=getComputedStyle(e);return r.width>0&&r.height>0&&cs.visibility!=='hidden'&&cs.display!=='none'&&+cs.opacity>0.05};
    const extra=[...document.querySelectorAll('.kmov,#kmrew,#kpodov,.kmfly,.kmalarm,.kroul-ov,#rtoast.on,#kupdline,.klearnov,.kcoinfly,.kfgain,#kdaytc')].filter(e=>!e.closest('#modal')&&vis(e)&&!(e.classList.contains('kmerr-lay')&&!e.querySelector('.kmerr-fig'))).map(e=>(e.id||e.className).toString().slice(0,50));
    const dawn=document.getElementById('dawn');
    return {dead:!!(S&&S.dead),hid:M.hidden,end:/\b(end|kes)\b/.test(M.className),q:Q.map(m=>(m.kend?'KEND:':'')+m.t),pts,extra,dawn:!!(dawn&&!dawn.hidden&&vis(dawn)),kmq:KMQ.length}});
-  const good=r=>r.dead&&!r.hid&&r.end&&r.q.length===1&&/^KEND:/.test(r.q[0])&&r.pts.every(x=>x==='M')&&!r.extra.length&&!r.dawn&&!r.kmq;
+  const good=r=>r.dead&&!r.hid&&r.end&&r.q.length>=1&&/^KEND:/.test(r.q[0])/* a card pushed BEHIND the end card with no redraw is never drawn: «Chuyển kiếp» starts the next life (checked below); kesFront drops it on the next draw */&&r.pts.every(x=>x==='M')&&!r.extra.length&&!r.dawn&&!r.kmq;
   const ENDK=Object.keys(ENDS);let ei=0;
   for(const [sn,code] of Object.entries(SRC)){
    for(const when of ['after','before']){const ek=ENDK[(ei++)%ENDK.length];
@@ -83,7 +83,7 @@ const ok=[];const rows=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.err
   await p.evaluate(()=>{const b=document.querySelector('#modal #mclose, #modal .kes-go, #modal button.main');if(b)b.click();else closeModal()});
   await p.waitForFunction(()=>S&&!S.dead&&S.origin,null,{timeout:30000}).catch(()=>{});await p.waitForTimeout(2500);
   await p.evaluate(()=>{try{kmReset()}catch(e){}Q.length=0;showModal();kitReward({kind:'chest',title:'Rương bảo vật',items:[{n:'Ngọc bội'}]})});await p.waitForTimeout(1200);
-  const nl=await p.evaluate(()=>({dead:S.dead,rew:!!document.querySelector('.kmov.km-reward,#kmrew')}));chk(`${tag} new life after «Chuyển kiếp»: popups play again`,!nl.dead&&nl.rew,nl);
+  const nl=await p.evaluate(()=>({dead:S.dead,over:typeof kmLifeOver==='function'?kmLifeOver():null,rew:!!document.querySelector('.kmov.km-reward,#kmrew')||KMQ.length>0/* queued behind the new life's intro (kmFree) = not gated */,oldPay:Q.some(m=>/Bổng lộc/.test(m.t||''))}));chk(`${tag} new life after «Chuyển kiếp»: popups play again, the dead life's pay card is gone`,!nl.dead&&nl.rew&&!nl.oldPay,nl);
   chk(`${tag} no page errors`,!errs.length,errs.slice(0,4));await ctx.close()}
  await b.close();
  console.log('\nSIZE | SOURCE | WHEN | ENDING | RESULT | ERR');for(const r of rows)console.log(r.join(' | '));
