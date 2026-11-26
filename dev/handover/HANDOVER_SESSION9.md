@@ -381,3 +381,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~22:03Z OWNER: «tốn gì vẫn ghi rõ, được mất thì không rõ» → rule by ROW: Tốn exact (anything), Được/Mất marks (everything) — OD row rewritten in place; workers told.
 - ~22:06Z KIT-STAGE-R5 LOOK READY c823342a (paging gone, ≤7 table, kitResFold merged) → MAIN LOOK PASS → result+flip videos SENT to sếp. Rulings: thẻ gỗ no paging; pmLad = info panel; gift grid → D; late-save count of jerr/jptime/j71c/jky.
 - ~22:08Z OWNER: result card empty band; event stage no figure; flip = tap1 enlarge, tap2 flip, back same size → OD row → R5 (2,3) + KK47 (1).
+- ~22:09Z RV-163B: punish-tier ab73bc26 BIG PASS → LC25 land now (wit later); dress-fix-kit 8cc9a284 → LC25; rolled → archived; opened RV-163C session_01Rc5AsLFUVRepsLs2do3jnh (kit-resfold, oan-pace-ghen, title-bal, punish-tier-wit, reign-end, pace-speed). «Ban chết» stamp on evidence art → ORDER Foreman C.

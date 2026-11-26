@@ -558,3 +558,4 @@ SPLIT-MERGE AUDIT (read-only report; «WITNESS/EVIDENCE BUTTONS» section first;
 ITEM-PICKER DOM/PILE-UP (play-stopper; «Biếu quà làm lành» 362→794, 20k-node screen; after lc25-os 504d2e6a LIVE; MAIN 164 order) | review/picker-dom | session_01D3E3Na4LuR5WU2hdNmAMrS | RUNNING | 26/11 21:58Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
 kit keeper (KK47) | review/kit-* | session_01Rc5AsHmtzuWMnb27oL1LC5 | RUNNING | 2026-11-26T21:50Z (MAIN 164; KK46 rolled)
 WORDING-MARKS | review/wording-marks | session_01Rc5AsJzixPTTcuxw6cUjzW | RUNNING | 2026-11-26T22:00Z (MAIN 164; OD 21:55Z marks only)
+RV-163C BIG reviewer | — | session_01Rc5AsLFUVRepsLs2do3jnh | RUNNING | 2026-11-26T22:08Z (MAIN 164; RV-163B archived)
