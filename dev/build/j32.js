@@ -24,7 +24,7 @@ function rankStage(s){s=s||(typeof S!=="undefined"?S:null);if(!s)return"";if(s.k
  const X=s.selx,Z=s.selx2;if(X&&Z&&!(s.origin&&s.origin.k==="cnv")&&!Z.done&&(Z.ban||Z.days||!(X.kept===true||(X.done&&X.tier!=null))))return"tunu";return"rank"}
 function rankHeld(s){return rankStage(s)==="rank"}
 /* {r: RANKS index held (-1 = none), n: the word}; a maid shows the highest maid post she held (S.srv.rk / the board trail S.rk.sr, SRK.maid) */
-function lifeTopRank(s){s=s||S;const st=rankStage(s);if(st==="home")return{r:-1,n:"Chưa vào cung",st};if(st==="tunu")return{r:-1,n:"Tú nữ",st};
+function lifeTopRank(s){s=s||S;const st=rankStage(s);if(st==="home"||st==="tunu"){const W=(typeof BAL!=="undefined"&&BAL.rank&&BAL.rank.preN)||{home:"Chưa vào cung",tunu:"Tú nữ"};return{r:-1,n:W[st],st}}/* words: BAL.rank.preN (rank/worker/src/score.js, the board reads the same) */
  if(st==="srv"){const v=s.srv;const b=Math.max(v.rk|0,s.rk&&s.rk.sr!=null?s.rk.sr|0:-1);const n=v.mama?"Ma ma":b>(v.rk|0)&&SRK.maid[b]?SRK.maid[b]:v.lau>0?"Cung nữ Tân Giả khố":SRK.maid[v.rk|0]||"Cung nữ";return{r:-1,n,st}}
  const r=Math.max(0,Math.min(7,Math.max(s.rank|0,s.maxRank|0,s.queen?7:0)));return{r,n:RANKS[r].n,st}}
 try{window.rankStage=rankStage;window.rankHeld=rankHeld;window.lifeTopRank=lifeTopRank}catch(e){}

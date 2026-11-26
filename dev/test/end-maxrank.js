@@ -42,7 +42,7 @@ console.log(tbl.join('\n'));{const L=SITES.filter(s=>s.core!==null);ok(L.length>
    let cap='';try{const c=d.querySelector('.knr .knr-r')||d.querySelector('.pfwrap .pfrw');cap=c?T(c.textContent):''}catch(e){}return{row:rows["Phẩm cao nhất"],kids:rows["Con cái"],cap,hidden:d.hidden}};
   const rkN=()=>{try{return rkQ().length}catch(e){return -1}};
   const fin=(o,fn)=>{const q0=rkN();try{fn()}catch(e){o.err=String(e).slice(0,200)}const c=card();o.row=c.row;o.cap=c.cap;o.kids=c.kids;const L=(store.get("cung-luanhoi")||[])[0]||{};const K=(store.get("cung-kiep")||[])[0]||{};
-   o.log=L.n===S.name?L.r:'(none)';o.kiep=K.n===S.name?K.r:'(none)';o.board=rkN()>q0;try{const it=rkQ()[rkQ().length-1];o.bmr=o.board&&it&&it.life?it.life.mr:null}catch(e){}o.stage=typeof rankStage==="function"?rankStage(S):'(no core)';out.push(o)};
+   o.log=L.n===S.name?L.r:'(none)';o.kiep=K.n===S.name?K.r:'(none)';o.board=rkN()>q0;try{const it=rkQ()[rkQ().length-1];o.bmr=o.board&&it&&it.life?it.life.mr:null;if(o.board&&it&&it.life){o.bpre=it.life.pre;o.bpham=CTM_RANK.phamName(it.life);o.bscore=CTM_RANK.score(it.life).score;o.bcheck=CTM_RANK.check(it.life)}}catch(e){}o.stage=typeof rankStage==="function"?rankStage(S):'(no core)';out.push(o)};
   /* drive the 3 days (selx-days.js driver); mode ban = lowest marks, keep = top marks */
   const days=(mode,pre)=>{const Z=S.selx2;if(!Z||!Z.days)return"no days";if(mode==="ban"){S.sac=0;S.duc=0;S.tai=0}else{S.sac=S.duc=S.tai=100}
    for(let n=0;n<400&&Q.length&&!S.dead;n++){const m=Q[0];if(pre&&m.t==="Tin sắc phong"&&!pre.done){pre.done=1}
@@ -72,15 +72,15 @@ console.log(tbl.join('\n'));{const L=SITES.filter(s=>s.core!==null);ok(L.length>
   /* (10) old save from LIVE (rerun-cnv-ban speed-3 ckpt: a risen maid, age 39) */
   if(CKS){try{localStorage.setItem('hclh-save-v2-2',CKS);const x=loadSlot(2);SLOT=2;quiet=true;deser(x);quiet=false;Q=[];close();const o={case:"old save LIVE ckpt (risen maid)",og:S.origin&&S.origin.k,want:RANKS[Math.max(S.rank|0,S.maxRank|0)].n};fin(o,()=>die("Bạo bệnh"))}catch(e){out.push({case:"old save",err:String(e).slice(0,200)})}}
   return out},CKS);
- const md=['| case | origin (ceiling) | stage | end-card «Phẩm cao nhất» | portrait caption | Con cái | Sổ luân hồi r | cung-kiep r | sent to board (mr) | expected |','|---|---|---|---|---|---|---|---|---|---|']
-  .concat(R.map(o=>`| ${o.case} | ${o.og||''}${o.ceil?` (${o.ceil})`:''} | ${o.stage||''} | ${o.row||o.err||''} | ${o.cap||''} | ${o.kids||''} | ${o.log||''} | ${o.kiep||''} | ${o.board?`yes (${o.bmr})`:'no'} | ${o.want||''} |`));
+ const md=['| case | origin (ceiling) | stage | end-card «Phẩm cao nhất» | portrait caption | Con cái | Sổ luân hồi r | cung-kiep r | sent to board (mr · Bảng word · Công danh) | expected |','|---|---|---|---|---|---|---|---|---|---|']
+  .concat(R.map(o=>`| ${o.case} | ${o.og||''}${o.ceil?` (${o.ceil})`:''} | ${o.stage||''} | ${o.row||o.err||''} | ${o.cap||''} | ${o.kids||''} | ${o.log||''} | ${o.kiep||''} | ${o.board?`yes (${o.bmr} · ${o.bpham} · ${o.bscore})`:'no'} | ${o.want||''} |`));
  console.log(md.join('\n'));if(MD)fs.writeFileSync(path.join(require('os').tmpdir(),'end-maxrank.md'),md.join('\n'));
  const by=c=>R.filter(o=>o.case===c);
  ok(R.length>=12&&R.every(o=>!o.err),`runtime: ${R.length} lives ran without error`,R.filter(o=>o.err));
  ok(R.every(o=>o.row===o.want),'end card «Phẩm cao nhất» = the rank / post she really held',R.filter(o=>o.row!==o.want).map(o=>[o.case,o.og,o.row,o.want]));
  ok(R.every(o=>o.log===o.want&&o.kiep===o.want),'Sổ luân hồi (cung-luanhoi + cung-kiep) = the same word',R.filter(o=>o.log!==o.want||o.kiep!==o.want).map(o=>[o.case,o.log,o.kiep,o.want]));
  ok(by("ban hoa").length>=4&&by("ban hoa").every(o=>o.cap==="Tú nữ"),'ban hoa: the portrait over her name reads «Tú nữ», not the origin ceiling',by("ban hoa").map(o=>[o.og,o.cap]));
- ok([...by("ban hoa"),...by("home (never entered)")].every(o=>!o.board),'a life that never entered sends no fake standing to the board',R.filter(o=>/ban hoa|home/.test(o.case)&&o.board).map(o=>[o.case,o.og,o.bmr]));
+ ok([...by("ban hoa"),...by("home (never entered)")].every(o=>o.board&&o.bmr===-1&&o.bpre&&o.bpham===o.want&&o.bscore===0&&o.bcheck===null),'a life that never entered goes to the board with its TRUE standing (pre, Công danh 0, accepted by check)',R.filter(o=>/ban hoa|home/.test(o.case)).map(o=>[o.case,o.og,o.bmr,o.bpre,o.bpham,o.bscore,o.bcheck]));
  ok(R.filter(o=>/^maid (never|in)/.test(o.case)).every(o=>o.kids==="không"),'a maid who never rose: «Con cái: không»',R.filter(o=>/^maid/.test(o.case)).map(o=>[o.case,o.kids]));
  ok(R.filter(o=>/^kept/.test(o.case)).every(o=>o.maxR===undefined||o.maxR===null||RANKS_IDX(o)),'kept: after the edict maxRank = the rank given',R.filter(o=>/^kept/.test(o.case)).map(o=>[o.case,o.maxR,o.want]));
  {const N=["Đáp ứng","Thường tại","Quý nhân","Tần","Phi","Quý phi","Hoàng quý phi","Hoàng hậu"];const L=R.filter(o=>o.stage&&o.stage!=="rank");ok(L.length>=10&&L.every(o=>o.cap&&!N.includes(o.cap)),'no life that never held a rank shows a consort rank over her name (home / tú nữ / maid)',L.filter(o=>!o.cap||N.includes(o.cap)).map(o=>[o.case,o.cap]))}
