@@ -7,7 +7,7 @@ Fails (exit 1) if a punish() call still passes a typed sev other than 0/1/2 or a
 usage: python3 dev/test/punish-weight-scan.py [--md]  (from the repo root)"""
 import re,glob,sys
 md='--md' in sys.argv
-BEFORE={'0':'—','1':'cấm túc 2 tháng','2':'cấm túc 2 tháng, or one rank (1 in 2)'}
+BEFORE={'0':'cấm túc 2 tháng (was sev 1)','1':'cấm túc 2 tháng','2':'cấm túc 2 tháng, or one rank (1 in 2)'}
 AFTER={'0':'NHẸ: khất bổng 1 tháng (nhân từ: cảnh cáo)','1':'VỪA: cấm túc 1 tháng (nóng nảy 2)','2':'NẶNG: cấm túc 2 tháng, or one rank (1 in 2) — unchanged'}
 rows=[];bad=[];direct=[]
 for f in sorted(glob.glob('dev/build/j*.js')):
@@ -29,7 +29,7 @@ for f in sorted(glob.glob('dev/build/j*.js')):
                 elif ch==',' and d==0: parts.append(cur.strip());cur=''
                 else: cur+=ch
                 i+=1
-            parts.append(cur.strip())
+            parts.append(cur.strip());parts=[re.sub(r'/\*.*?\*/','',x).strip() for x in parts]
             if parts==['p','why','sev'] or parts==['']: continue
             if len(parts)>=3: sev=parts[-1]
             elif len(parts)==2 and parts[0][:1] in '"`': sev=parts[1]
@@ -44,6 +44,13 @@ for f in sorted(glob.glob('dev/build/j*.js')):
         if 'CN_CAM(' in l and 'const CN_CAM' not in l:
             for m in re.finditer(r'CN_CAM\(([^,]+),([^)]+)\)',l): direct.append((f.split('/')[-1]+':'+str(n),m.group(1),m.group(2)))
 ov=[r for r in rows if r[0].startswith('jstagehere.js') and 'sau giờ đóng cửa' in r[1]]
+# sếp OD 26/11 ~05:55Z «3 lỗi nhẹ ok»: these faults are NHẸ (sev 0), her and NPCs
+for w in ['làm phiền lúc thánh thượng nổi giận','ăn mặc vượt phẩm','"vượt phẩm"']:
+    hit=[r for r in rows if w.strip('"') in r[1] and (w[0]!='"' or r[1]==w)]
+    if not hit: bad.append('NHẸ fault not found: '+w)
+    for r in hit:
+        if r[2] not in ('0','B.vpConf'): bad.append(f'{r[0]} «{w}» is sev {r[2]}, want 0 (NHẸ)')
+if not re.search(r'vpConf:0',open('dev/build/jshelf.js',encoding='utf-8').read()): bad.append('jshelf BAL vpConf is not 0 (NHẸ)')
 if not ov or ov[0][2]!='0': bad.append('overstay (jstagehere stayRoll) is not sev 0 (NHẸ)')
 if md:
     print('| source | why | sev | before | after |\n|---|---|---|---|---|')

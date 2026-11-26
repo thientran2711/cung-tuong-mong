@@ -3,7 +3,7 @@
    B every place: the label's N = BAL.walk.near or BAL.walk.far (+ slow walk 0 here) and the Dư đồ top-row button says the same label (one rule).
    C no khắc left at a place that closes: button disabled «Về phòng · hết khắc»; the buổi turn → escorted home, NO punishment (no cấm túc, no Danh, no khất bổng).
    D warned overstay, caught: NHẸ = Danh -BAL.sneak.danh + khất bổng BAL.punW.lite.cut, never cấm túc.
-   E punish() weights: sev 0 / 1 / 2 → months from BAL.punW, the same for an NPC (law 1).
+   E punish() weights: sev 0 / 1 / 2 → months from BAL.punW, the same for an NPC (law 1); vượt phẩm (BAL.shelf.acc.vpConf) = 0 NHẸ.
    F Dư đồ: her home's label carries «Nhà ta» away from home.
    usage (HOST mode, built root): [DEV=fold|ipadAir] node dev/test/home-way.js → JSON + exit 1 on a fault */
 const {chromium}=require('playwright');const D=require('./lib/device');const path=require('path');const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -50,7 +50,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
  /* E weights, her and an NPC */
  const E=await g.evaluate(()=>{__reset();const v=rivals.find(x=>x.alive&&!x.out&&x.rank===0)||rivals.find(x=>x.alive&&!x.out);const R0=Math.random;Math.random=()=>0.999;const r={};
   try{for(const sev of [0,1,2]){for(const [who,o] of [["S",S],["npc",v]]){o.confined=0;o.cutPay=0;const rk=o===S?S.rank:o.rank;punish(o,"thử",sev);r[who+sev]={conf:o.confined,cut:o.cutPay||0,rk:(o===S?S.rank:o.rank)-rk}}}}finally{Math.random=R0}
-  S.confined=0;v.confined=0;return{r,W:BAL.punW,txt:[aaPunishTxt(0),aaPunishTxt(1),aaPunishTxt(2)]}});
+  S.confined=0;v.confined=0;return{r,W:BAL.punW,vpConf:BAL.shelf.acc.vpConf,txt:[aaPunishTxt(0),aaPunishTxt(1),aaPunishTxt(2)]}});
  /* F Dư đồ home mark away */
  const F=await g.evaluate(async()=>{__reset();S.buoi=1;await __go("vuon");tab="go";render();await new Promise(r=>setTimeout(r,500));const labs=[...document.querySelectorAll('.mspot')].map(e=>e.innerText);tab="act";render();return{home:labs.filter(t=>/Nhà ta/.test(t)).length,n:labs.length}});
  const R={A:{A0,Ab,clicked,A1},B:Bv,C,D:Dd,E,F,errs:errs.slice(0,5)};
@@ -62,5 +62,6 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
  if(!C.dis||!/hết khắc/.test(C.lab||""))fail.push("C button not disabled");if(C.place!=="home"||C.confined||C.dDanh||C.cut)fail.push("C punished without fault");if(!C.cards.some(c=>/Không phải lỗi/.test(c.h)))fail.push("C no-fault card");
  if(!Dd.wOk)fail.push("D had no way home");if(Dd.place!=="home"||Dd.confined)fail.push("D cấm túc on overstay");if(Dd.dDanh!==Dd.want.danh||Dd.cut!==Dd.want.cut)fail.push("D light price "+JSON.stringify([Dd.dDanh,Dd.cut]));
  const W=E.W;for(const w of ["S","npc"]){if(E.r[w+0].conf||E.r[w+0].cut!==W.lite.cut[0])fail.push("E lite "+w);if(E.r[w+1].conf!==W.mid.m[0])fail.push("E mid "+w);if(E.r[w+2].conf!==W.heavy.m[0]&&E.r[w+2].rk>=0)fail.push("E heavy "+w)}
+ if(E.vpConf!==0)fail.push("E vượt phẩm (shelf) not NHẸ");/* sếp OD 26/11 ~05:55Z «3 lỗi nhẹ ok»: call sites checked by punish-weight-scan.py */
  if(!F.home)fail.push("F no Nhà ta");if(errs.length)fail.push("page errors");
  R.fail=fail;console.log(JSON.stringify(R,null,1));await b.close();srv.close();process.exit(fail.length?1:0)})();
