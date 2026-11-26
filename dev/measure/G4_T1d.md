@@ -19,15 +19,22 @@ lãnh cung «Bị bỏ quên» at month 3 for a newcomer: j3 monthTick `!S.out &
 ## Handover
 Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg job (resume=1 continues lives from <dir>/<life>.ckpt.json). If the container is gone, restart fresh from this branch's index.html.
 
-## Done slices on LIVE 5e013076 (26/11 01:58Z) — 4/12
+## Done slices on LIVE 5e013076 (26/11 04:01Z) — 6/12
 | life | end | year | rank (max) | Danh | Sủng | lãnh cung | outbursts |
 |---|---|---|---|---|---|---|---|
 | hot-1 | SLICE b400 | 3 | 0 (0) | 1 | 0 | yes | 3 (khac 1, mang 2) |
 | even-1 | SLICE b400 | 3 | 0 (1) | 73 | 18 | no | 0 |
 | even-2 | SLICE b400 | 3 | 0 (0) | 37 | 13 | no | 0 |
+| off-1 | SLICE b400 | 3 | 0 (0) | 0 | 0 | yes | 0 |
+| timid-2 | SLICE b400 | 3 | 0 (0) | 8 | 10 | no | 1 (tho) |
 | timid-1 | death b162 «Hồng nhan bạc mệnh» (Emperor died at 22 → tuẫn táng) | 2 | 0 (1) | 1 | 0 | yes | 2 (khoc, boan) |
 - Wording note for MAIN: that ending text shows «(khả năng: vừa)» — not one of the 7 odds words.
 - 2nd early-death path for low-rank lives (Emperor death → tuẫn táng, year 2) — listed with the lãnh cung balance candidate, untouched.
+
+## Renderer HANGS caught by the F10 watchdog (26/11 03:04–04:01Z)
+The page stopped answering, then grew about 180 MB per 40 s, and was killed above 3.5 GB. The lives were hot-2 (about b270), off-3 (b63) and hot-3 (b64).
+The stacks are dominated by kitScrollCues ← MutationObserver childList (game.html:80757–80760), plus kaNorm. My suspicion is a self-feeding observer loop.
+Hang files: CDN img/_review/renderer-mem/5e013076-tp-{hot-2,off-3,hot-3}-hang.json (sent to F10 #2 and Foreman D).
 
 ## F10 renderer memory (for the F10 workers)
 - «Page crashed» = memcg OOM kill (dmesg, 7 kills, chrome renderer anon-rss 5.1–9.2 GB). Harness rssTree under-reports (logged 1.7 GB vs ps 8.5 GB).
