@@ -44,4 +44,9 @@ Re-run: `KSEED=23 SAVE=<life.json> node dev/test/nhv/mklife.js` once, then `node
 - quickcheck 7f4d653f: open / old save / perf (render 275/268, tab 596/579, buổi 1878/1795 ms) / kit-conform / button-crawl PASS; **G4 92-look-dedupe FAIL, INTERMITTENT**: «real tap on the mood seal opens «undefined»» (home screen, realtap k:gone). Reruns: my branch 3 PASS / 2 FAIL; LIVE 5e013076 3/3 PASS; kit-stage 3aacdd30 alone 3/3 PASS → first read as this branch. BISECT (same load, paired runs): LIVE 0/10 FAIL; kit-stage 3aacdd30 ALONE 1/4 FAIL; my build with BAL.area.on=0 2/8 FAIL → the flake comes with review/kit-stage, not jnhv (the realtap finds the mood seal «gone» and a modal with no Q title). → KK35 / MAIN. Everything else in quickcheck PASS.
 - Videos: nhv5-* (r5) stand (MAIN 150 LOOK PASS); r6 changes only the plaque name fit.
 
-~85% xong / ~70% chơi được (Ngự hoa viên khu vườn).
+## r7 — LAND READY: review/nhv-areas 263668aa (26/11 ~03:20Z, MAIN 151)
+- MERGED review/kit-stage 006579ae (KK36): look-dedupe flake fixed in the kit (portrait preload re-render), kitPick pages «Việc · 1/2» when no tier fits (no plaque off the Fold stage), ✓/✕ on the outer side.
+- Gates on 263668aa: **QUICKCHECK PASS** (open 2159 ms · old save ok · perf render 255/243, tab 635/607, buổi 1831/2952 ms · core gates PASS incl. kit-conform, button-crawl, look-dedupe) · look-dedupe ×10 under 2× parallel load **10/10 PASS** · **coop-e2e alone 143/143** · **area test 57/57** (Fold=iPad same areas+people, no overlap / see-through / cut text / «???» / off-stage plaque) · **art-states 96/96**.
+- Videos (NEW names, every frame looked at): img/_review/nhv-areas/nhv7-{fold,ipad}-{1x,2x}.mp4 + nhv7-*-sheet.png — https://ctm-img.victoria-tntt.workers.dev/img/_review/nhv-areas/index.html
+
+~92% xong / ~80% chơi được (Ngự hoa viên khu vườn).
