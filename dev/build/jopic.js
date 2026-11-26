@@ -397,6 +397,16 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng · ghi chú: chơi 6 phần ra Khá`],["Thôi, không làm gì","ghi chú: để lần sau"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* kit sample page (§6.2b-END, FIRSTCARD; RV-FIRSTCARD): a LIFE-ENDING option never reads «Rất vững». The button opens a REAL dialog (Q + showModal,
+   the game's own path): (1) a hidden roll declared by the real kitRiskOpt (true chance → word(p) lead + the red Mất row), (2) a certain ending of a
+   real choice → kitEndOdds = word(BAL.odds.lo), (3) a safe option of the same choice keeps the sure meter. */
+function kitEndSample(){try{if(typeof S==="undefined"||!S||typeof Q==="undefined"||Q.length)return false;const pg=document.getElementById("kitpage");const was=!!(pg&&!pg.hidden);const back=()=>{if(was&&pg)pg.hidden=false};if(pg)pg.hidden=true;
+ const nop=()=>setTimeout(back,0);const o1=kitRiskOpt({n:"Dâng khúc đàn",fx:{},x:"",j67:"tốn: không",hint:"chơi một màn đàn",go:nop},BAL.odds.cut[0],"không lọt vào bốn người đứng đầu thì bị ban hoa, kiếp này dừng",true);
+ Q.push({t:"Lễ ra mắt (mẫu kit)",h:"<p>Mẫu §6.2b-END: lựa chọn có thể dừng kiếp này báo đúng cơ hội và cái mất.</p>",pid:"kitpg-end",onClose:back,
+  opts:[o1,{n:"Cắt tóc đi tu",fx:{},x:"",j67:"tốn: không",hint:"thoát khỏi mọi chuyện; nhưng kiếp này dừng",go:nop},{n:"Vâng lời, chờ ngày khác",fx:{},x:"",j67:"tốn: không",go:nop}]});showModal();return true}catch(e){console.error("kitEndSample",e);return false}}
+window.kitEndSample=kitEndSample;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b-END",title:"Thẻ lựa chọn có thể dừng kiếp này: báo đúng cơ hội, không bao giờ «Rất vững» (chạm để mở thẻ thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
+ return `<div class="kitpg-row"><button type="button" class="kbtn alt" onclick="kitEndSample()"${ok?"":" disabled"}>Lễ ra mắt · ban hoa · đi tu</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem thẻ."],{group:false}))}})}catch(e){}
 /* kit sample page (§6.2c): the tall-frame rule, described (the real frames are the modals themselves) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2c",title:"Khung hội thoại: điện thoại, chỉ khung cao (L / XL) kéo đúng tỷ lệ màn hình",html:()=>
  `<div class="kpnote">Điện thoại dọc: chỉ khung hội thoại cao (cỡ L, XL) kéo cao cả trên lẫn dưới, tỷ lệ bằng màn hình. Khung thấp, nhỏ, ngắn (S, M) giữ nguyên.</div>`})}catch(e){}
