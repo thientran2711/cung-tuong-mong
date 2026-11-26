@@ -1843,5 +1843,5 @@ OB-PHU3 (DTV wiring + people tab k7 .krn / Bảng tài nghệ / name link + home
 RV-BALANCE-PACE (BIG review of review/balance-pace 2ddc495d) | review/balance-pace | session_01V1ZZGzRjxmFutfvYtt8PU7 (MAIN 150) | RUNNING | 2026-11-26T01:12Z
 PROMO-ROOT2 (forgetSafe family) | review/promo-root | session_01V1ZZH26xAYYTTzWtmLpEu3 (MAIN 150) | RUNNING | 2026-11-26T01:17Z
 RV-SRVMERIT-GUARD (BIG rv 034b451e) | review/srvmerit-guard | session_01V1ZZH1vbp2tNbrLxfyP4t7 (MAIN 150) | RUNNING | 2026-11-26T01:17Z
-| KIT REVIEW ob-kiep 87bc8942 (ORDER MAIN 150 01:00Z; sonnet, fresh; briefs/b-ob-kiep-kit-review.md) | review/ob-kiep; reports/ob-kiep.md | B ROOT 2 | session_01N1tNP4EdLUs5oEMqzcHrMy | RUNNING | 26/11 01:42Z |
+| KIT REVIEW ob-kiep 87bc8942 (ORDER MAIN 150 01:00Z; sonnet, fresh; briefs/b-ob-kiep-kit-review.md) | review/ob-kiep; reports/ob-kiep.md | B ROOT 2 | session_01N1tNP4EdLUs5oEMqzcHrMy | KIT OK 87bc8942 (archived) | 26/11 01:42Z |
 | E92r2 REVIEW titles-daycard 8cdc4b46 BIG (opus; briefs/E92r2-review-titles-daycard.md) | review/titles-daycard 8cdc4b46 (no push needed) | FOREMAN E child6 | session_01DgYSWoBExdJN41AEUaMfCH | PASS 8cdc4b46 (reports/titles-daycard.md REVIEW r2; FOR MAIN 147: kit start card timing) | 26/11 |
