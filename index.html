@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"67372439+","t":"2026-11-26T00:43Z","c":"ob-phu2: report (parts 4+5, tests, before/after)","b":"cd688f5a3fb4","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"d51cb52b+","t":"2026-11-26T00:55Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"91c7305aed73","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -48309,6 +48309,7 @@ html body .kname .kti{color:var(--rt,inherit)!important;text-shadow:none!importa
 html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
+html body .kplink{text-decoration:underline dotted;text-underline-offset:.16em;text-decoration-thickness:.09em;cursor:pointer;-webkit-tap-highlight-color:transparent}html body .kplink:active{text-decoration-style:solid}
 html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 html body .modal.night .krt[style*="--rb:"],html body .modal.night .knr>.knr-r[style*="--rb:"],html body .modal.night .kpsn .kname .kti[style*="--rb:"],html body .modal.night .kbk-pname .kname .kti[style*="--rb:"],html body .modal.night .kname .kti[style*="--rb:"]{color:var(--rb)!important}
 /* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
@@ -93654,7 +93655,8 @@ PEND.pmLad=pp=>{const v=pp&&pp.v!=null?RV(pp.v):null;
    go:()=>{pushModal({t:`Bảng tài nghệ · ${pmKindN(k)}`,who:top?pv(top):null,h:pmLadHTML(k)});/* the figure = the art's leader */try{showModal()}catch(e){}}}}).concat([{n:"Thôi",fx:{}}])}};
 /* the entry = a VIEW, not an act toward a person (role-parity): one button at the end of her «Tài nghệ» tab (j83 artTabHTML) */
 function pmLadBtn(){if(isSrvSafe()||S.dead)return"";const l=pmLadLine(S);return pbtn(`data-pmlad="-1"`,"Bảng tài nghệ hậu cung",`xem thứ bậc từng môn${l?` · ngươi: ${l}`:""} · không tốn khắc`,"")}
-if(typeof artTabHTML==="function"){const a0=artTabHTML;artTabHTML=function(){const h=a0.apply(this,arguments);try{return h+pmLadBtn()}catch(e){console.error(e);return h}};window.artTabHTML=artTabHTML}
+/* PEOPLE TAB ONLY (owner 25/11 ~23:00Z k7): the ranking of consorts is person info → under Phi tần (the people tab of the palace road), never in the Tài nghệ action tab; not on the home road (no hậu cung there) */
+if(typeof rvTabHTML==="function"){const a0=rvTabHTML;rvTabHTML=function(){const h=a0.apply(this,arguments);try{const b=(typeof isKc==="function"&&isKc())?"":pmLadBtn();return b?(/^\s*<div class="pgwrap">/.test(h)?h.replace(/^(\s*<div class="pgwrap">)/,"$1"+b):b+h):h}catch(e){console.error(e);return h}};window.rvTabHTML=rvTabHTML}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pmlad]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();const id=+b.dataset.pmlad;pushDil(mkP("pmLad",id>=0?{v:id}:{}),"Bảng tài nghệ");try{showModal();render()}catch(x){}}},true);
 /* ---------- memory (jmem): the deeds this act leaves ---------- */
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
@@ -94565,10 +94567,12 @@ function mapzTrimMeta(h){try{if(h.indexOf('class="mspot')<0)return h;const t=doc
 (function(){const m0=mapHTML;mapHTML=function(){return mapzTrimMeta(m0.apply(this,arguments))}})();
 /* ================= Dưỡng Tú viện: a real place (law 6 real world; owner OD 24/11 ~07:55Z name «Dưỡng Tú viện», tú nữ lodging, not a cung; 18/11 ~19:45Z
    "chỗ cho tú nữ học ... bỏ qua chỗ khác cũng được" → no palace of its own: the walled lodging court of long halls south of Tân Giả khố / Nội vụ phủ, in the Nội vụ zone).
-   Picture: STAND-IN (tạm) = the servants' quarters painting (cung-nhan) until Foreman C's c3-dtv set lands (ART REQUEST, report ob-phu.md). Open by day. */
+   Picture: its own painting = the Tiền sảnh hall (Foreman C c3-dtv): img/duong-tu-vien.webp (base, also the fallback) + 12 day variants duong-tu-vien-<xuan|ha|thu|dong>-<sang|trua|chieu>.webp (open by day, no -toi). No stand-in is reachable (owner OD 25/11 ~23:15Z). */
 const MAPZ_DTV={k:"dtv",n:"Dưỡng Tú viện",fn:"nơi tú nữ ở và học quy củ trong kỳ tuyển tú",d:"Mấy dãy nhà dài quanh một khoảng sân; mùa tuyển tú, ma ma giáo dưỡng dạy tú nữ quy củ ở tiền sảnh.",box:{x:.215,y:.61,w:.1,h:.14},anchor:{x:.265,y:.68},pos:[2,-1]};
 (function(){try{const D=MAPZ_DTV;PLNAME[D.k]=[D.n,D.fn];if(typeof MAPH==="object"&&MAPH.places&&!MAPH.places[D.k])MAPH.places[D.k]={box:D.box,anchor:D.anchor};if(typeof ACC_DAY==="object")ACC_DAY[D.k]=1;
- if(typeof SCIMG==="object"&&typeof PLX==="object")SCIMG["plx-"+D.k]=PLX.cnh.img;
+ if(typeof SCIMG==="object")SCIMG["plx-"+D.k]="duong-tu-vien";
+ if(typeof SCN_HAVE==="object")["xuan","ha","thu","dong"].forEach(s=>["sang","trua","chieu"].forEach(t=>{SCN_HAVE["duong-tu-vien-"+s+"-"+t]=1}));
+ {const F=window.KIT_FLOOR=window.KIT_FLOOR||{},A=window.KIT_FANCHOR=window.KIT_FANCHOR||{};if(F["duong-tu-vien"]==null)F["duong-tu-vien"]=.6;if(!A["duong-tu-vien"])A["duong-tu-vien"]={x:.5,feet:.9}}
  const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k===D.k)&&!(typeof adSrv==="function"&&adSrv()))L.push({k:D.k,n:D.n,fn:D.fn,d:D.d,sc:"plx-"+D.k})}catch(e){}return L};
  const m0=mapPos;mapPos=function(k){return k===D.k?D.pos:m0.apply(this,arguments)};
  const s0=mapSpots;mapSpots=function(){const L=s0.apply(this,arguments);try{for(const s of L)if(s&&s.k===D.k){s.small=true;s.fn=D.fn}}catch(e){}return L};
@@ -97139,6 +97143,36 @@ document.addEventListener("pointerup",e=>{try{const n=e.target&&e.target.closest
   if(Date.now()-DQ.mgw.at>=((BAL.dayq&&BAL.dayq.wake)||2000)){DQ.mgw=null;dqBring()}}catch(e){}},700)})();
 /* the cue: (A) says where the waiting person is (CTM_WAIT.dqRoom, in dqNextCue above); the m-fix-1 cue (dqHeld) stays for every other held card */
 window.dqBring=dqBring;
+/* ================= jplink: PERSON NAME LINK in act cards (owner 25/11 ~23:00Z, shot k7; KIT §6.3j "KK34") =================
+   Owner (verbatim): "Tất cả những cái thông tin nào liên quan tới người là phải để vào một cái tab người riêng." Person info lives only in the people tab; an act card
+   about a person only NAMES the person, and tapping that name opens the person in the people tab (link only, the card is never embedded).
+   After each render, in an ACTION tab (act / go / court-less road tabs / art / inv / story / staff-less), every full person name inside a button of #panel
+   becomes <span class="kplink">: tap → the people tab of that kind of person with that person selected:
+     palace: consort (rivals) → Phi tần (rv) · man (S.men) → Nam nhân (men) · servant (S.staff) → Cung nhân (staff);
+     home:   family / teacher / bà mối / suitor (S.kc.fam) → Gia tộc (rv) via kcSel (it knows every list and sub-tab).
+   One kit look (.kplink: dotted underline, pointer); the act itself is NOT fired by a tap on the name (the name is its own tap target). */
+const PLK_ACT=["act","go","art","inv","story","court","rel","q72","log"];
+function plkTable(){const M=new Map();const add=(n,o)=>{n=String(n||"").trim();if(n.split(" ").length>=2&&!/^(Một|Người lạ|Vị )/.test(n)&&!M.has(n))M.set(n,o)};
+ try{if(isKc&&isKc()){(S.kc&&S.kc.fam||[]).forEach(m=>add(m.name,{k:"fam",id:m.id,m}))}
+  else{(typeof rivals!=="undefined"?rivals:[]).forEach(v=>add(v.name,{k:"rv",v}));(S.men||[]).forEach(m=>add(m.name,{k:"men",v:m}));(S.staff||[]).forEach(s=>add(s.name,{k:"staff",v:s}))}}catch(e){}
+ return M}
+function plkRx(M){const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");const L=[...M.keys()].sort((a,b)=>b.length-a.length);return L.length?new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu"):null}
+function plkPaint(){try{if(!S||!PLK_ACT.includes(tab))return 0;const P=document.getElementById("panel");if(!P)return 0;const M=plkTable(),rx=plkRx(M);if(!rx)return 0;
+ const W=document.createTreeWalker(P,NodeFilter.SHOW_TEXT,{acceptNode:n=>{rx.lastIndex=0;if(!rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return p&&p.closest("button,[data-kt],.kact")&&!p.closest(".kplink,.pgwrap,script,style")?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const L=[];while(W.nextNode())L.push(W.currentNode);let c=0;
+ for(const n of L){const v=n.nodeValue;rx.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
+  while((m=rx.exec(v))){if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.className="kplink";sp.setAttribute("role","link");sp.setAttribute("data-plk",m[1]);sp.textContent=m[1];f.appendChild(sp);last=m.index+m[1].length;c++}
+  if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}
+ return c}catch(e){console.error("jplink paint",e);return 0}}
+function plkGo(name){const M=plkTable(),t=M.get(name);if(!t)return false;try{Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true}catch(e){}
+ if(t.k==="fam"){kcSel(t.id);tab="rv";render();return true}
+ tab=t.k;render();const nm=name.split(" ");const want=[nm.slice(-2).join(" "),nm.slice(-1)[0]];
+ const b=[...document.querySelectorAll("#panel [data-pg][data-pi]")].find(x=>x.dataset.pi!=null&&want.some(w=>w&&(x.textContent||"").trim()===w));if(b)b.click();return true}
+window.plkGo=plkGo;window.plkPaint=plkPaint;
+document.addEventListener("click",e=>{const a=e.target&&e.target.closest&&e.target.closest(".kplink");if(!a)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();plkGo(a.dataset.plk)},true);
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{plkPaint()}catch(e){}return r}})();
+(function(){let q=false,P=null;const run=()=>{q=false;plkPaint()};const arm=()=>{const el=document.getElementById("panel");if(!el||el===P)return;P=el;new MutationObserver(()=>{if(q)return;q=true;requestAnimationFrame(run)}).observe(el,{childList:true,subtree:true})};
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",arm);else arm();setTimeout(arm,1500)})();
 /* ================= jplrule: PLACE RULES — one presence truth (owner OD 25/11 ~23:33Z, review/place-rules) =================
    Owner bug: at Đức Thọ cung past buổi sáng she was «giải ra» under cấm túc 2 tháng, yet the stage still showed Đức Thọ cung; no warning
    came before the punishment; the Hoàng hậu she was talking with «cũng tới» as a new arrival. LUẬT SỬA CẢ NHÓM — three families:
@@ -99211,7 +99245,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cd688f5a3fb4";window.CTM_BUILD=BUILD;
+const BUILD="91c7305aed73";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

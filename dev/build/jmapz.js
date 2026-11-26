@@ -23,10 +23,12 @@ function mapzTrimMeta(h){try{if(h.indexOf('class="mspot')<0)return h;const t=doc
 (function(){const m0=mapHTML;mapHTML=function(){return mapzTrimMeta(m0.apply(this,arguments))}})();
 /* ================= Dưỡng Tú viện: a real place (law 6 real world; owner OD 24/11 ~07:55Z name «Dưỡng Tú viện», tú nữ lodging, not a cung; 18/11 ~19:45Z
    "chỗ cho tú nữ học ... bỏ qua chỗ khác cũng được" → no palace of its own: the walled lodging court of long halls south of Tân Giả khố / Nội vụ phủ, in the Nội vụ zone).
-   Picture: STAND-IN (tạm) = the servants' quarters painting (cung-nhan) until Foreman C's c3-dtv set lands (ART REQUEST, report ob-phu.md). Open by day. */
+   Picture: its own painting = the Tiền sảnh hall (Foreman C c3-dtv): img/duong-tu-vien.webp (base, also the fallback) + 12 day variants duong-tu-vien-<xuan|ha|thu|dong>-<sang|trua|chieu>.webp (open by day, no -toi). No stand-in is reachable (owner OD 25/11 ~23:15Z). */
 const MAPZ_DTV={k:"dtv",n:"Dưỡng Tú viện",fn:"nơi tú nữ ở và học quy củ trong kỳ tuyển tú",d:"Mấy dãy nhà dài quanh một khoảng sân; mùa tuyển tú, ma ma giáo dưỡng dạy tú nữ quy củ ở tiền sảnh.",box:{x:.215,y:.61,w:.1,h:.14},anchor:{x:.265,y:.68},pos:[2,-1]};
 (function(){try{const D=MAPZ_DTV;PLNAME[D.k]=[D.n,D.fn];if(typeof MAPH==="object"&&MAPH.places&&!MAPH.places[D.k])MAPH.places[D.k]={box:D.box,anchor:D.anchor};if(typeof ACC_DAY==="object")ACC_DAY[D.k]=1;
- if(typeof SCIMG==="object"&&typeof PLX==="object")SCIMG["plx-"+D.k]=PLX.cnh.img;
+ if(typeof SCIMG==="object")SCIMG["plx-"+D.k]="duong-tu-vien";
+ if(typeof SCN_HAVE==="object")["xuan","ha","thu","dong"].forEach(s=>["sang","trua","chieu"].forEach(t=>{SCN_HAVE["duong-tu-vien-"+s+"-"+t]=1}));
+ {const F=window.KIT_FLOOR=window.KIT_FLOOR||{},A=window.KIT_FANCHOR=window.KIT_FANCHOR||{};if(F["duong-tu-vien"]==null)F["duong-tu-vien"]=.6;if(!A["duong-tu-vien"])A["duong-tu-vien"]={x:.5,feet:.9}}
  const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k===D.k)&&!(typeof adSrv==="function"&&adSrv()))L.push({k:D.k,n:D.n,fn:D.fn,d:D.d,sc:"plx-"+D.k})}catch(e){}return L};
  const m0=mapPos;mapPos=function(k){return k===D.k?D.pos:m0.apply(this,arguments)};
  const s0=mapSpots;mapSpots=function(){const L=s0.apply(this,arguments);try{for(const s of L)if(s&&s.k===D.k){s.small=true;s.fn=D.fn}}catch(e){}return L};
