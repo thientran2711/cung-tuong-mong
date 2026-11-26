@@ -188,3 +188,58 @@ NOT run (verdict FAIL first, CPU): coop-e2e SWAP0/1, save-rt-coop vs LIVE, sprea
 
 ### Gain vs risk of landing AS IS (for MAIN, flight)
 GAIN: LIVE today rolls time back / drifts numbers / loses Tin báo, held cards and the stipend + Lễ nghĩa cards on a true reload (all FAIL on LIVE above) — -rv fixes all of that. RISK: the 5+ families above vanish on a reload in their window (before: time rolled back instead) — có thể xảy ra (≈ 8 cards in 36 buổi sit in such a window; she must reload exactly then), vừa (a contest / ceremony / taunt she never sees; no number lost), not detectable by her → fix list 1–3. Verdict stays FAIL (law 11 + 6c, brief check 2); if MAIN wants the flight stop-gap, land **-rv 9037e5a9** (never the bare head: it carries the KIT-FAILed 7603d689).
+
+## r4 (B FIXER save-unseen-lists r4, opus, session_01N1tNP2LHbhSc8CKS2GvBiM, depth 5) — rv FIX LIST 1–4 DONE + M2b rollback row → SẴN SÀNG KIỂM
+PRIORITY #1 CHECK ('save-unseen-lists'): OD 0 | ledger 0 | claims 8 | main 0 | review/* review/save-unseen-lists 7e01f0f5 (r3) + review/save-unseen-lists-rv 9037e5a9 (rv base) | archive 0 → based on -rv (kit pack-4 7603d689 stays OUT; never 7e01f0f5), reused the rv probe, rcpReg, the flip / family test helpers.
+START_CTX ≈ 3 % (used_tokens read 0; own estimate). Coordinator: Foreman B ROOT 2 session_01N1tNP3oeufPEZL2RqPYKuK (was child 4 / child 5).
+Head **review/save-unseen-lists c6d080264cab60b10ba8b4874af861efa2854ea0** = -rv 9037e5a9 + merge LIVE 351122ba (60f9f6a7, only index/sw conflicted → rebuilt) + r4 commits. `git diff origin/main` = save files only (no kit file).
+
+### ONE rule + whole family (rv FIX 1)
+- **ONE rule (jqsave jqNoop)**: an option whose go does nothing (`go:()=>{}` — the «Tiếp tục» of a card whose effects ran before it was shown: Bị châm chọc, Thái hậu quở trách, Lỡ lời, Điềm báo, Bị giật y phục …) is data: the card is written whole and shown again (before: one empty function made the whole card unsaveable). Covers every such card in the game at once.
+- **Every code card a step makes is now BUILT by a registered generator** (j3 rcpReg; effects before the card, once; a remake only builds). 26 new generators:
+  jts tsWarn «Lời cảnh báo» · tsLeMe «Lễ tấn phong · <bậc>» (gifts into her chest before) · tsLeNpc «Lễ tấn phong <tên>» · tsSummon «Hoàng thượng triệu …» · tsDressAnn «Hội phối đồ: báo đề» · tsDress «Hội phối đồ · <đề>»;
+  jemoact eaHitMine «Cung nữ bị ức hiếp» · eaHoi «… đến hỏi tội» · eaMe «Lòng không giữ được» (+ jfeel feelActFin by name); jmood mbComfort «Có người đến an ủi»; jthaiy thNausea «Trong người khác lạ»;
+  j29 svMarket «Hàng chợ đen»; jbancung banCung + j27 palCer «Ban cung»; j34 j34Between / j34R1 / j34R2 (tranh ghế); j71 j71Fest / j71Day (festival contest cards); j31 festEv (FESTEV rows — jact2 empties FESTEV, kept for parity);
+  j95 j95Caught «Bắt gặp» / j95Bribe «Lời nhờ cậy»; jdc dcAsk «… xin mượn trâm» (the piece is found again, never a copy); j25 facAsk «Có người đến» (faction); jpromsv spLeave «Kẻ hầu xin đi»; jshelf shelfWither «<cây> héo»;
+  jslap slapNpc «Bị tát» + jlooks lkNpc (NPC acts on her: nothing applied until she answers); jtoil toilPop «… chê / khen dung nhan». j3 pushModal hands the card back.
+- **rv FIX 4 (law 6c, Hội phối đồ loans)**: the contest card is a generator from (đề, month, year); the rivals' outfits are drawn when it is judged (tsDressFinish), and tsDressReturn (dcGiveBack of every «ts» loan) runs in finish — a reload while the card waits no longer drops the contest and its loan returns.
+
+### Scan (rv FIX 2) — `node dev/measure/unseen-lists-scan.js [buildDir]`
+New CODE-CARD CENSUS: parses EVERY object with an `opts` key whose options carry a function or come from a variable / call / bare names (`opts:[o1,o2]`, tsPanel / kitPanel / kitModal / pushModal specs, table rows); pid cards and empty-go cards are data. Each site must be inside a registered generator or match a CLASS row with its reason (ROUTE = remade by a named generator, proof regex must hold · ACT = made only by her own tap / act inside a buổi · PANEL = a look-up / view panel she opens · KIT · COOP · NOTCARD). Unclassified = SCAN FAIL.
+| build | sites | in a generator | ROUTE | ACT | PANEL | KIT | COOP | NOTCARD | UNCLASSIFIED |
+|---|---|---|---|---|---|---|---|---|---|
+| -rv 9037e5a9 (before) | 156 | 11 (17 rcpReg) | 60 | 24 | 11 | 16 | 4 | 2 | **28** (every family above + jmood) → SCAN FAIL |
+| head (after) | 156 | 39 (46 rcpReg) | 60 | 24 | 11 | 16 | 4 | 2 | **0** → SCAN PASS (33 lists) |
+The census found jmood «Có người đến an ủi» (opts:[o1,o2]) that the rv probe had not met; fixed in the same family.
+
+### Gate (rv FIX 3) — dev/test/save-residue-probe.js is now a gate (exit 1 on any line)
+At every save that reaches the slot: LOST-AT-WRITE (a waiting card the sổ cannot carry), REMAKE-FAIL / REMAKE-SIDE (every generator card is made again once from its save form, as a load does; S + NT.list + Q must not move), SAVE-LAG (robot M2b: after every step the sổ date must equal the screen date), page errors. RP_MUTATE=<kind> strips one generator's rk (= not registered).
+| run | result |
+|---|---|
+| head Fold seeds 1,2,3 × 40 buổi | **PASS** (660 / 1594 / 338 real writes; 36 / 29 / 37 generator cards remade clean) |
+| head iPad 1180x820 seeds 1,2,3 × 40 | **PASS** (182 / 280 / 1547 writes; 37 / 26 / 23 remade) |
+| r3 7e01f0f5 Fold seed 2 (must FAIL) | FAIL 5: SP13 Hội phối đồ: báo đề · SP13 Hội phối đồ · Thanh nhã · SP13 Lời cảnh báo · Q Lễ tấn phong Tô Mi Trang · Q Lòng không giữ được ✔ |
+| LIVE 351122ba Fold seed 2 (must FAIL) | FAIL: **SAVE-LAG ×26/40 steps** (sổ 1.3.1.0 while the screen is at 1.3.1.1 … 1.3.2.1 = the M2b rollback) ✔ |
+| MUTATE RP_MUTATE=tsLeNpc head Fold seed 2 | FAIL (LOST line) ✔ (the run met «Có người đến an ủi» before it was routed — fixed in 4af55d8f, then the full gate above re-ran on the final head) |
+
+### Robot M2b rollback (MAIN 145, reports/m2b-rollback.md) — answer
+Build f21a1042 = the kit stack on LIVE dbae89eb, BEFORE save-year-rollback: jspread / jqsave held the autosave while a code card waited, so the sổ lagged the screen by buổi → months; each reload restored the old write. Reproduced as the SAVE-LAG row: LIVE lags 26 of 40 steps; head lags 0 of 240 steps (6 runs) — no hold crosses a step, every step writes at once with every waiting card. Second possible cause, NOT covered by this branch: j6 save() swallows a localStorage error (quota) — a very long life whose sổ outgrows the browser limit would keep an older write silently; that is the save-growth family (briefs/E-savegrow.md, review/save-growth), not reachable in 40 buổi (sổ here ≈ 85–220 KB).
+
+### Other tests (head c6d080264cab60b10ba8b4874af861efa2854ea0, final code 4af55d8f)
+| check | command | result |
+|---|---|---|
+| flip set Fold + iPad (16) | `SUL_ONLY=flip SUL_FCS=1,2 node dev/test/save-unseen-lists.js index.html fold,ipadAir 1` | 15/16 PASS; Fold flip-year-3s-s2 once LOST «Y phục dự Tết Nguyên đán» (dcGate lapsed: rcpFail «no choice now» — her dress need was gone) → re-run **PASS** (risk 2 below) |
+| rows + family Fold + iPad (16) | `SUL_ONLY=tinbao,held,nl-0s,nl-card,nl-death,nl-4s,drift,family …` | **PASS 16/16** (family: 19 families made by their generators at an ordinary buổi 1.3.0.3, at-once write in the slot, TRUE reload → every card back, same date; facAsk / dcAsk / shelfWither / j34 «not in this world» there — covered by the probe) |
+| rows LIVE (must FAIL) | `… bare.html fold 1` (tinbao, held, nl-0s, drift) | FAIL 4/4 ✔ |
+| MUTATE rk · rk2 · nt · evh · nl | `SUL_MUTATE=… SUL_ONLY=…` | FAIL 2/2 · 1/1 · 1/1 · 1/1 · 2/2 ✔ (all must FAIL) |
+| save-boundary-reload Fold / iPad (incl. 0-s) | `node dev/test/save-boundary-reload.js index.html bare.html fold 1,2` / `ipadAir` | iPad **12/12**; Fold 11/12 → oldsave FAILed on the OLD build's own held sổ (LIVE lag) → `SBR_ONLY=oldsave` re-run **PASS** |
+| scans | unseen-lists-scan · census | PASS (33 lists) · UNCLASSIFIED 0 (before 28) |
+| coop-e2e local Worker | `node dev/test/coop-e2e.js <out> http://127.0.0.1:8799` / `COOP_SWAP=1` | **142/142 · 142/142** |
+| save-rt-coop (review/robot-coop-savert 71c538df) | head dev/index.html vs LIVE dev/index.html | rows IDENTICAL (12 rows; the 6 FAILs are LIVE's own) |
+| save size | in-page, 16 generator cards waiting | +1,736 chars for 16 cards (40–260 chars each, ≤ RCP_MAX 4,000); ser() 85,001 → 86,737 |
+| touched-file tests (head vs LIVE, same command) | dev/test: ag-mg2 ban-cung dresscode-loans/-ts-loan/.test/-loan-scan feelings18 law4-typed makeup-theme mood-seal-ev odds-no-unknown promote-servants slap-mg temper-outburst toil-react-layers toil-tease ts-a emotion-acts j71c-play shelf-check | every result = LIVE's (pre-existing FAILs identical) except: ag-mg2 2 vs 1 and feelings18 32 vs 33 → re-runs = LIVE (exam / hờn rows are random draws); dresscode-ts-loan 2 FAIL vs LIVE 3 (one better) |
+| quickcheck ALONE (old save) + perf | `bash dev/tools/quickcheck.sh` | QUICKCHECK PASS part: old save loads + plays ✔, open 1850 ms, perf new/live render 244/212 · tab 510/416 · buổi 1252/2161 ms · tasks>200 ms 22/25. CORE GATES: G4 90 button crawl «Ô lưu · Lui» = the pre-existing fault (r3 same, fixed by review/robot-coop-fix-7-r2); **G4 94 q-softlock FAILed on r4 (the view panel «Tin chờ người sai đi» was saved by the empty-go rule) → fixed c6d08026 (jqData never writes a look / view / menu panel) → q-softlock PASS** (LIVE PASS) |
+| after c6d08026 | family Fold+iPad · probe seed 2 Fold+iPad · scan | **PASS 2/2 · PASS (Fold 1567 writes, iPad 278; 0 lost / 0 remake faults / 0 SAVE-LAG) · UNCLASSIFIED 0** |
+
+### Gain vs risk
+GAIN — no card a step makes can vanish on a true reload any more (26 families + every empty-«Tiếp tục» card), the Hội phối đồ contest and its loan return survive, and the sổ never lags the screen (the M2b months-long rollback). RISKS: (1) a NEW code card added later outside a generator → the census FAILs at once (unclassified site) — possible, small, caught by the scan + probe; (2) a lapsing generator (dcGate «Y phục dự Tết»: the need is gone) gives no card after a reload while the live card still showed — rare (1 of 16 flip runs, timing), no cost or object lost, by design («the gate lapses»); (3) approach cards changed after creation by jtsb / j68h wrappers (opts replaced) come back with the base options after a reload — pre-existing since r2, possible, small (a different but valid choice set); fix = route those wrappers through their own generator (follow-up). → **Được lớn hơn.**
