@@ -6,7 +6,7 @@
     D2 reporting a man (jmen menReport) → his oán toward the reporter (her / an NPC consort: the same rule)
     D3 punishing a servant without cause (j24 judgeServ) → her oán toward her mistress; bribe taken (j29 bribeServ, forced roll) → regard toward the giver
     D4 servant ↔ servant (jagstaff chat) and servant → consort keys never collide (sid vs consort id)
-    D5 the oán fade (j28 oanMonth) reaches men and servants (BAL.oanFade)
+    D5 the oán fade reaches men and servants (review/pace-all canon overwrite: the weekly cool-down j28 oanCool, BAL.oanCool; the old flat oanMonth BAL.oanFade only with BAL.oanCool.on = 0)
     D6 old save: m.grudge / s.grudge recorded, no oán number → normAll fills it from BAL.relMS (once)
     U1 Ân oán sub-tabs list Nam nhân + Cung nhân with people; X = a man → rows both ways with the numbers of D1/D2
     U2 X = a servant of hers → Thiện cảm / Oán / Lòng toward Ta
@@ -36,7 +36,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const w=L.find(x=>x!==v&&(x.staff||[]).length)||L.find(x=>x!==v)||v;if(!(w.staff||[]).length){w.staff=w.staff||[];w.staff.push(mkServ("maid"))}const mr=Math.random;Math.random=()=>0.001;O.d3b=0;try{for(const x of L.flatMap(y=>y.staff||[]).filter(y=>y.spyFor==null).slice(0,12)){S.bac=999;x.loyal=0;const b1=aff(x,S);O.bribe=bribeServ(S,x);if(x.spyFor==="me"){O.d3b=aff(x,S)-b1;break}}}finally{Math.random=mr}
    /* D4 */const sA=mkServ("eunuch");S.staff.push(sA);affAdd(sA,v,7);const wrote=JSON.stringify(sA.af);O.d4=[aff(sA,v),sA.af["r"+v.id],sA.af[v.id]===undefined||String(v.id)===String((servById(v.id)||{}).sid)?"ok":"collide"];
    oanAdd(S,sA,9);oanAdd(v,m,11);O.d4b=[oan(S,sA),S.ro["s"+sA.sid],oan(v,m),v.ro[m.id]];
-   /* D5 */const sx=relMSAll().includes(s)?s:sA;if(!oan(sx,S))oanAdd(sx,S,20);const before=[oan(m,S),oan(sx,S)];oanMonth();O.d5=[before,[oan(m,S),oan(sx,S)],BAL.oanFade];
+   /* D5 */const sx=relMSAll().includes(s)?s:sA;if(!oan(sx,S))oanAdd(sx,S,20);const before=[oan(m,S),oan(sx,S)];for(const h of [m,sx]){h.ocq={};h.occ={}}for(let i=0;i<BAL.oanCool.season;i++)oanCool(1,true);O.d5=[before,[oan(m,S),oan(sx,S)],BAL.oanCool.season];
    /* C1 */O.c1=typeof COOPW!=="undefined"?null:null;
    /* expose for UI */window.__rms={m:m.id,v:v.id,s:s.sid,mAff:[Math.round(aff(m,S)),Math.round(aff(S,m))],mOan:[Math.round(oan(m,S)),Math.round(oan(S,m))],sOan:Math.round(oan(s,S)),sAff:Math.round(aff(s,S)),sLoy:s.loyal};
    O.rms=window.__rms;return O});
