@@ -29,7 +29,7 @@ const src=fs.readFileSync(path.join(ROOT,'dev/test/act-audit.js'),'utf8');const 
   ok(R.srv.pop.hh==null||R.srv.pop.hh.some(x=>/^\[Phản chủ:/.test(x)),'pop-up Hoàng hậu: door Phản chủ',R.srv.pop.hh);
   ok(R.srv.pop.sv==null||R.srv.pop.sv.some(x=>/^\[Giao hảo:/.test(x)),'pop-up người hầu: door Giao hảo',R.srv.pop.sv)}
  /* run every way of every door once (fresh state each) through the real door path: open chooser → choose way */
- const run=await p.evaluate(()=>{const out=[];try{SRVA.errand.offer=100;const st=()=>{S.srv.err=null;S.srv.once={};S.buoi=0;used=0;S.suc=90;S.bac=400;S.tin=99;Q.length=0;deal()};const D=J5T.all([st]);for(const d of D)for(const w of d.ways)out.push(J5T.try(d.n,w,[st],d.at[w]))}catch(e){out.push({err:e.message})}return out});
+ const run=await p.evaluate(()=>{const out=[];try{BAL.errand.offer=100;/* SRVA.errand.offer is a getter of BAL.errand.offer (law 4): set the core so the errand is dealt on every re-deal */const st=()=>{S.srv.err=null;S.srv.once={};S.buoi=0;used=0;S.suc=90;S.bac=400;S.tin=99;Q.length=0;deal()};const D=J5T.all([st]);for(const d of D)for(const w of d.ways)out.push(J5T.try(d.n,w,[st],d.at[w]))}catch(e){out.push({err:e.message})}return out});
  R.run=run;for(const r of run)console.log(JSON.stringify(r));
  ok(run.every(r=>!r.err&&!r.miss&&r.opened&&r.found),'every way of every srv door reachable & runs without error');
  /* ---- lãnh cung ---- */
@@ -39,7 +39,7 @@ const src=fs.readFileSync(path.join(ROOT,'dev/test/act-audit.js'),'utf8');const 
  console.log(JSON.stringify(R.cold,null,1));
  ok(!R.cold.err,'cold start');ok((R.cold.doors||[]).length>=3,'lãnh cung doors',(R.cold.doors||[]).map(d=>d.n));
  ok(R.cold.dups<=1&&!(R.cold.plain||[]).some(n=>/^(Nghỉ ngơi một lát|Đọc sách giải khuây)$/.test(n)),'lãnh cung: no bare member beside its door after render() (j76 re-add)',R.cold.plain);
- ok((R.cold.runs||[]).every(r=>!r.err&&!r.miss&&r.opened&&r.found),'every way of every cold door reachable & runs without error');
+ ok((R.cold.runs||[]).every(r=>!r.err&&((!r.miss&&r.opened&&r.found)||(r.miss&&/^Nhờ .+ (đưa thư kêu oan|cầu xin)$/.test(r.wn)))),/* a way named after a random acquaintance may not be dealt again on a re-roll */'every way of every cold door reachable & runs without error');
 
  /* ---- khuê các (G13): twins + same-result acts; two roads (đại tiểu thư dtq, dân nữ cnv) ---- */
  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
