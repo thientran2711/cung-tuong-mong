@@ -194,3 +194,12 @@ c. kit stage answers still page («≤ 3 per page», KIT_STAGE.sayPer, «Đáp �
 d. LAND GATE videos (not done): `node dev/test/kit-ring-record.js file://$PWD/index.html <out> a|b 755x1000 / 1180x820` + titles / face / bảo vật (kit-ring-item.js scenes) → mp4 → CDN img/_review/ring-build/ (python3 dev/site/cdn_sync.py), tiled sheet looked at → «LOOK READY» + URLs to MAIN 164, then RV READY to RV-163.
 e. Group rows (list only, no new mechanics): j55 houses (tdAct), palCeremony, rgJoinOpts sides, Dư đồ spots / jmapz — unchanged from RB-5 (d).
 Tools (not in git): /home/user/wt/rb6/{shot.js (rest+focus PNG), probe*.js, p3/p4.js}.
+
+# RING-BUILD-7 (successor, MAIN CHÍNH 165, opus) — 26/11 ~22:55Z–
+PRIORITY #1 CHECK: OD 26/11 ~21:41Z, ~21:45Z, ~22:43Z rows (verbatim read) | main none (ring not live) | review/ring-build c2922fbd (RB-6) + review/kit-plaque-post 9c936022 (KK47 = THE kit post) | claims RB-6 → RB-7.
+## Done
+1. DUPLICATE RESOLVED (0ddda103): merged review/kit-plaque-post 9c936022 unchanged. RB-6's parallel post (jkpick post mode / postGeo / kitPick.band, KIT §98.20, its kit-pick.js checks) DROPPED: jkpick.js + dev/test/kit-pick.js = KK47's byte for byte. KIT §98.1/§98.1b/§98.1c = KK47's text. Ring keeps only its yield.
+2. LOOK (3) Fold group focus too small → the ring yields to `kitPick.postBox(layer, n)` with n = the board THIS focus opens (`R.nPk`, `pkCount`): person = her largest act tab; group = 1 + members; picker slot = its choices. Step-out = `reyield` (tween 360 ms, awaited) to her own board; `pickOpen` re-yields (grow only) if a later board (talk answers) needs more room. Fold group-focus figure 335 → ~540 px; iPad unchanged. KIT §104 FOCUS line: YIELD sentence (canon overwrite of «yield to the widest board»).
+3. «Thôi» plaque: none in jkring / jkring-item (grep).
+## Waiting
+- KK48 (session_01Rc5AsKCV8Zc8zV3nMq8Y8v) INACTIVE (send failed 26/11 ~23:10Z) → MAIN 165 told. (A) owner 22:43Z no 7-cap: proposal for §98.1 jkpick = drop KIT_PLAQUE.max + warn + slice; cols ≤4→1, 5–7→2, 8–12→3, new columns LEFT, post fixed (ring follows postBox already). (B) name plate draft afa26154 (jkitsel kitNameTagBox {fix:1}, KIT §93.5a) for the kit keeper to adopt / replace. RB-7 does not edit jkpick / jkitsel until MAIN / kit keeper answers.
