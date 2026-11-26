@@ -89,3 +89,10 @@ The fix only adds two comparisons in monthTick and one assignment in restore; no
 READY for review: review/promo-root (code 1623b417, this report on top). No push to main, no PR. Harness for lives: dev/test/promo-root.js (gate), probes used for the numbers kept in the session scratch (probe/hook/replay/trap .js; can be added on request).
 
 ~96% xong / ~90% chơi được
+
+## 8. HANDOVER (PROMO-ROOT rolled at ~52 % context, 26/11 01:20Z) — open nit from RV-PROMO-ROOT PASS 8169d9da (MAIN 150)
+Nit: jagacts.js:71 pardon catch-fallback (`S.out=false;S.confined=0` when restore() throws) frees her without `S.forgetAt`. Whole family = every place that frees her / brings her into the palace, all must set the grace the same way:
+1. j14 restore() — done (`S.forgetAt=S.turn+1+BAL.danhG.forgetGrace`).
+2. jagacts.js:71 catch fallback — add the same line.
+3. jkc.js:578 (`S.out=0;S.pal=null` palace entry from the kc home life) and jkc2.js:400 (`K.inPal=1…S.out=0`) — REAL gap, not only a nit: during the home life monthTick already initialised `S.forgetAt`, so it can be past when she enters the palace → a rank-0 entrant with Sủng 0 / Danh ≤ 5 can be forgotten at once. Set the grace at entry too.
+Plan: one helper in j14 `function forgetSafe(p){if(p===S)S.forgetAt=S.turn+1+BAL.danhG.forgetGrace}` used by all 4 sites (restore keeps it). Scan: `grep -n "S.out=0\|S.out=false" dev/build/j*.js` (4 sites today). Test: extend dev/test/promo-root.js with (5) catch-fallback path (stub restore to throw, call agActs pardon) and (6) kc entry (S.kc home life with forgetAt in the past → enter palace → free for forgetGrace months). Own commit on review/promo-root, then sha to MAIN 150 + LC19.
