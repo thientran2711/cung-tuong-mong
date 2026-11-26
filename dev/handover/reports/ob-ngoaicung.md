@@ -44,12 +44,13 @@ Strict surfaces (head-count, lists, tips, maid title, figure tags): SCAN PASS on
 («Người hầu · 1 — Tỳ nữ thân tín», «3 Trưởng bối», «tạm» bottom-right clear of «Khuê phòng». This life's room had its exact picture, so the shot script
 puts the kit chip on the stage the same way jres does, to show the corner rule.)
 
-## Gates
-- quickcheck vs LIVE: build ✓, old save ✓, open ✓; FAIL G4 button-crawl «Ô lưu · Lui» = PRE-EXISTING (same FAIL on LIVE 5e013076 run side by side);
-  perf longTaskMaxMs 4495 vs 2593 = run was concurrent with my CDN upload — see rerun line below.
-- coop-e2e alone: see line below.
-- selection/opening: `dev/test/outside/route.js --origin=tt` FAILS «did not enter the palace» on LIVE 5e013076 exactly as on this branch (pre-existing, the
-  test's random play stalls before Điện tuyển) — not caused here; the home road start, every home tab, save+reload pass.
+## Gates (final sha bc93314f)
+- quickcheck vs LIVE 5e013076: build ✓ · old save ✓ · open 2197 ms ✓ · perf ✓ (median new/live: render 267/295, tab 601/621, buổi 2015/4827, tasks>200ms 26/28).
+  Only FAIL = G4 button-crawl «Ô lưu · Lui · close did not close» — PRE-EXISTING: the same FAIL on LIVE 5e013076 (crawler run side by side, both FAIL).
+  (Earlier runs: perf flipped run to run under load; kitTamFit then made lighter in bc93314f — scans only the chip's picture box, only when a chip is shown.)
+- coop-e2e alone: 143/143 passed.
+- selection/opening: `dev/test/outside/route.js --origin=tt` FAILS «did not enter the palace» on LIVE 5e013076 exactly as on this branch (pre-existing: its
+  random play stalls before Điện tuyển); home start, every home tab, save + reload pass. Family scan (5 home roads, 600 steps): SCAN PASS, 0 palace speakers.
 
 ## Expert note (law 8)
 Ming–Qing gentry households: a daughter's personal maid is 丫鬟 / 婢女 (Vn nha hoàn / tỳ nữ), the close one 贴身丫鬟 (tỳ nữ thân cận/thân tín); men
