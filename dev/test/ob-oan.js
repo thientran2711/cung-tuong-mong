@@ -22,11 +22,16 @@ const boot=async(p)=>{await p.goto('http://ctm.local/index.html',{waitUntil:'dom
 const seed=async p=>{try{await p.waitForFunction(()=>!document.getElementById('kdaytc'),null,{timeout:20000})}catch(e){}return p.evaluate(()=>{for(const id of ['klife','dawn','kload']){const x=document.getElementById(id);if(x)x.remove()}const C=liveRivals(true).filter(v=>!v.queen&&!persF(v,'harmGate',0)).slice(0,4);S.dKnown=S.dKnown||{};
  C.forEach((v,i)=>{v.oan=i%2?Math.max(70,netTh(v,'nguoi')+5):Math.max(3,netTh(v,'nguoi')-3);v.ghen=i%2?60:95;S.dKnown[v.id]=wk();try{S.met[v.id]=S.met[v.id]??wk()}catch(e){}try{const K=k61S();if(K)K[kOf61(v)]=3}catch(e){}});
  /* the two who really show on her bar (j28 danger × target share): one she can still win back (oán under her forgiving line), one past it */
- const T=tsDangerOf(S,true).top.map(x=>x.v);const L=[T.find(v=>netForgive(v,S)),T.find(v=>!netForgive(v,S))].filter(Boolean);
- try{memAdd(L[0],S,"rumor",{})}catch(e){}used=0;S.suc=Math.max(S.suc,80);S.bac=Math.max(S.bac,200);Q.length=0;render();return L.map(v=>({id:v.id,name:v.name,oan:Math.round(oan(v,S))}))})};
+ const T=tsDangerOf(S,true).top.map(x=>x.v);
+ /* deterministic (rv RV-OB-OAN): L[0] = a SEEDED forgivable one (even index), L[1] = a seeded deep one (odd index), both on her bar */
+ const L=[C.find((v,i)=>i%2===0&&T.includes(v)),C.find((v,i)=>i%2===1&&T.includes(v))].filter(Boolean);
+ try{memAdd(L[0],S,"rumor",{})}catch(e){}
+ /* the memory write may move oán: set it again under her forgiving line (netTh − 3), so «Nhún nhường» is open by design */
+ if(L[0])L[0].oan=Math.max(3,netTh(L[0],'nguoi')-3);used=0;S.suc=Math.max(S.suc,80);S.bac=Math.max(S.bac,200);Q.length=0;render();return L.map(v=>({id:v.id,name:v.name,oan:Math.round(oan(v,S))}))})};
 const openPanel=async p=>{await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();const b=document.querySelector('[data-hx="tsnh"],[data-k3="tsnh"]');if(b)b.click();else tsDangerPanel()});await p.waitForTimeout(500);return p.evaluate(()=>{
  const M=document.getElementById('modal');return{shown:M&&!M.hidden,title:Q[0]&&Q[0].t,txt:M?M.innerText:'',opts:[...document.querySelectorAll('#modal .opt[data-m]')].map(x=>x.innerText.replace(/\s+/g,' ').trim().slice(0,70))}})};
 const tapOpt=(p,re)=>p.evaluate(re=>{const b=[...document.querySelectorAll('#modal .opt[data-m]')].find(x=>new RegExp(re).test(x.innerText));if(!b)return null;b.click();return b.innerText.slice(0,40)},re);
+const settle=async p=>{for(let i=0;i<15;i++){const ok=await p.evaluate(()=>{const M=document.getElementById('modal');return !Q.length||(!M.hidden&&document.getElementById('mt').textContent===Q[0].t)});if(ok)return i;await p.waitForTimeout(200)}return -1};
 const modal=p=>p.evaluate(()=>{const M=document.getElementById('modal');return{shown:M&&!M.hidden,t:Q[0]&&Q[0].t,txt:M?M.innerText:'',opts:[...document.querySelectorAll('#modal .opt[data-m]')].map(x=>x.innerText.replace(/\s+/g,' ').trim().slice(0,70))}});
 const closeRes=async p=>{for(let i=0;i<4;i++){const m=await modal(p);if(!m.shown||/Làm lành|Nguy hiểm|Nhờ bề trên|Phòng bị/.test(m.t||''))return m;await p.evaluate(()=>{const b=document.querySelector('#modal .kpx,#modal [data-kx],#modal .kbtn,#modal button.opt');if(b)b.click()});await p.waitForTimeout(300)}return modal(p)};
 (async()=>{const b=await chromium.launch();const R=[];const ok=(c,n,x)=>{R.push(c);console.log((c?'PASS':'FAIL')+' | '+n+(x==null?'':' | '+JSON.stringify(x).slice(0,500)))};
@@ -43,7 +48,7 @@ const closeRes=async p=>{for(let i=0;i<4;i++){const m=await modal(p);if(!m.shown
   ok(/oán \d+|Oán \d+|Chút oán|Oán sâu|Oán hận/.test(P.txt),sz+' oán level in words + number');
   ok(P.opts.filter(x=>/^Làm lành với/.test(x)).length>=2&&P.opts.some(x=>x.startsWith('Nhờ bề trên che chở'))&&P.opts.some(x=>x.startsWith('Phòng bị')),sz+' direct act cards',P.opts);
   /* 2/3 Làm lành → Nhún nhường */
-  const v0=L[0];await tapOpt(p,'^Làm lành với[^\\n]*'+v0.name);await p.waitForTimeout(400);let M=await modal(p);await shot('2-mend');
+  const v0=L[0];await tapOpt(p,'^Làm lành với[^\\n]*'+v0.name);await p.waitForTimeout(400);const st=await settle(p);if(st)console.log('settle',st);let M=await modal(p);await shot('2-mend');
   ok(/Làm lành/.test(M.t||'')&&['Tạ lỗi','Nhún nhường','Biếu quà làm lành'].every(n=>M.opts.some(x=>x.startsWith(n))),sz+' Làm lành sub-choice = the real acts',{t:M.t,o:M.opts});
   const before=await p.evaluate(id=>({o:Math.round(oan(RV(id),S)),k:used}),v0.id);await tapOpt(p,'^Nhún nhường');await p.waitForTimeout(600);await shot('3-result');
   const after=await p.evaluate(id=>({o:Math.round(oan(RV(id),S)),k:used,log:(S.logs||[]).slice(-3).map(x=>String(x.t||x).replace(/<[^>]+>/g,'')).join(' | ')}),v0.id);
