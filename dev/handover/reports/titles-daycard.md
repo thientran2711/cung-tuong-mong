@@ -112,3 +112,36 @@ Totals: before 24 ok / 16 FAIL → after 40/40 (branch), 41/41 (land combo, + H7
 - LIVE fault G4 «Ô lưu · Lui».
 
 ~ HANDOVER: not needed (done; context well under the line).
+
+## REVIEW r2 (E92r2 BIG, session_01DgYSWoBExdJN41AEUaMfCH, Foreman E child6, 26/11) — **PASS titles-daycard 8cdc4b46**
+PRIORITY #1 CHECK ('kitChapterTitle|kitGoalChapter|kitGoalNow|chapter()'): OD 0 | ledger 0 | claims E92 / E92r / E92f (this file) | main 5e013076 jgoal.js chapter() (the one source) | review/* only review/titles-daycard + review/kit-daytitle-r2 313bdfc6 | archive 0. START_CTX ~3 % (1M window).
+8cdc4b46 is a descendant of origin/main 5e013076 (FF ok). Re-merge 98c175a1 already PASSED in r1, not redone. Land combo = 8cdc4b46 + kit-daytitle-r2 313bdfc6 merged LOCALLY (index/sw rebuilt, not pushed). Rebuild of 8cdc4b46 = committed index.html except the build line (game code identical).
+
+### r1 faults — each checked for the whole family (independent probes, scratch only, not in git)
+| r1 fault | check | result |
+|---|---|---|
+| 1 card line 2 ≠ goal panel (home roads) | diff: chapterInfo now only calls window.kitGoalChapter = jgoal chapter() (exported, nothing else in jgoal touched); no second chapter table left (git grep chapterInfo/kitGoalChapter: 1 source, 1 reader). REAL accept chain probe: every ORIGINS origin × «Ở nhà» / «Vào cung» (button[data-kcp] + nlAccept, 18 lives): hook = kitGoalNow 18/18 (tt/dtq/muoi/td/ch/thd «Chờ kỳ tuyển tú», nc «Chờ ngày hòa thân», cnv «Chờ lệnh tuyển cung nữ», palace «Sơ nhập cung môn» / cnv «Phận tỳ nữ buổi đầu»; cn has no home road = palace, same as goal) | **gone** |
+| 2 old save without M.chap / ch.all | probe: every ARC67 chapter (401) × S.st.ch.n 1/2/3/5, no M.chap → hook n = pos67 = goal kicker = lab67 1604/1604; ch.all → «Chương 12 — Mệnh truyện trọn vẹn» (= goal panel, the one rule); dead → null | **gone** |
+| 3 titles2-unit card-aware | diff: only dev/test/titles2-unit.js (fresh() waits out / removes #kdaytc; CT line follows the goal panel); no game code for it | **ok** |
+| 4 chapter-title-hook vs kitGoalNow | __gp compares with kitGoalNow (not chapterTitle); H8 home roads, H9 old save, H10 ch.all, H6 co-op seat present | **ok** |
+Rebirth / new life: the hook reads the S of the moment (H5 + my 18-life probe). Co-op seat: p!==S → null; seat b = its own goal panel (H6) + coop-e2e below.
+
+### Tests (rerun by me)
+- chapter-title-hook: 40/40 branch · 41/41 combo. titles2-unit combo 69/69. titles2-scan combo: rows 833 · 0 missing/clash/dup/long/bad how.
+- coop-e2e (combo, live Worker, Fold host / iPad guest): 143/143.
+- quickcheck 8cdc4b46 ALONE (bash dev/tools/quickcheck.sh): open 1506 ms 0 errors · old save ok (loads + plays a buổi) · time-spill PASS · G4 ×1 «fold · Ô lưu · Lui · close button did not close its layer» = **identical on bare LIVE 5e013076** (button-crawl --fast on LIVE: FAIL 1, same row) → LIVE fault.
+- perf: buổi FAILed twice (median 3725/1230, then --runs 7 2834/1239, limit ~2740); render/tab/tasks fine. Not counted: (a) the r1→r2 game delta is one export line in jgoal + chapterInfo, which no buổi path calls (git grep: only the kit card / tests call kitChapterTitle/chapterTitle; on the branch alone nothing calls them); (b) buổi is bimodal on BOTH builds (~0.9–1.4 s vs ~3–5 s; LIVE runs 864/4034, 3963), and an A/A run (8cdc4b46 vs ITSELF, --runs 6) gave 1101/2463 = PASS with the same two modes (new 1289/5418/913/879/3497/820, «live» 1141/1908/4658/4513/3017/790) → box noise. E92f's run passed (1280/4631). FOR MAIN: rerun quickcheck once at land.
+- 0 page errors in every run/probe.
+
+### Shots (combo; Fold 755x1000@2 + iPad 1180x820@2; LOOKED at each, 3×; CDN not used: no R2 key → described, scratch only, deleted)
+- Home tt before tuyển tú, real accept chain: card «Ngày 1 / Chương 1 — Chờ kỳ tuyển tú» centred, readable, inside the screen, no overflow, = goal panel «Chương 1 · Chờ kỳ tuyển tú». Both devices.
+- Home nc: iPad card «Chương 1 — Chờ ngày hòa thân» on top of the open goal panel «Chương 1 · Chờ ngày hòa thân — Mệnh truyện: Cố quốc» — side by side, same text. Fold same.
+- Later day (palace life, ARC67 tt_co_5, ch.n 3, real dawn() over the Tuần lục book): «Tháng ba, năm thứ nhất, thượng tuần · mùa xuân / Chương 3 — Môn sinh của cha» = goal panel. Both devices, card on top, inside the screen.
+
+### Laws touched
+4 ONE CORE: no number typed (n from chapter()/pos67). 6/11: card and goal panel name the same real chapter everywhere (scan above). 9 KIT FIRST: no UI in this branch (card = kit §94b of kit-daytitle). 7 wording: titles from game data (fill67 + plainT). 13: reuse of jgoal chapter(), no copy. OK.
+
+### FOR MAIN 147 (kit keeper; not this branch — land kit-daytitle-r2 TOGETHER with 8cdc4b46 only after it)
+- STRONGER than r1's #klife row: in the REAL new-game flow (outer start() → nlBegin → Luân hồi picker / life card) kit-daytitle-r2's jend.js start wrapper shows the start card at start()+600 ms, i.e. BEFORE she picks «Ở nhà / Vào cung» and before nlAccept → kcInit. So on every home road the first card reads «Chương 1 — Sơ nhập cung môn» (cnv «Phận tỳ nữ buổi đầu») and plays under #klife / the Luân hồi cover. The hook is right at that moment (goal panel says the same then); probe: calling kitDayTitleShow() after nlAccept gives «Chờ kỳ tuyển tú» / «Chờ ngày hòa thân» / «Chờ lệnh tuyển cung nữ» = goal panel. Fix in the kit: show the start card after the life is accepted (nlAccept done, #klife / #kroul / life card gone), not on a fixed timer after start(). Whole family: the home dowry chest scene («Rương đồ khuê các») can also sit over #kdaytc.
+- Put the one rule in KIT §94b: «line 2 = the goal panel's Chương N — title; hidden only when the goal panel has none».
+- LIVE 5e013076 fault: G4 «Ô lưu · Lui» (unchanged).
