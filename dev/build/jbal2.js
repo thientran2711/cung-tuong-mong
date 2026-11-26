@@ -2307,7 +2307,7 @@ BAL.charge={C:{
    vừa = giáng 1 bậc (the seat frees); nặng = giáng 1 bậc + lãnh cung (jpun punTier / punCold);
    tu = TỬ TỘI, rare: ban chết, or the Emperor commutes it to phế vị + lãnh cung chung thân (only minh oan opens it) — odds tu.spare:
    base + Sủng / sungD + who pleads (Thái hậu favour ≥ thMin: th; the Hoàng hậu at «thân»: hh; family dad ≥ dadMin: dad).
-   tier[x].need = pieces (C[c].need reads it); tử tội's 3 = a strong proof + a nhân chứng (pk order).
+   tier[x].need = pieces (C[c].need reads it) + rkPlus[the accused's rank] (owner ~20:40Z); tử tội's 3 = a strong proof + a nhân chứng (pk order).
    tuDeed = deeds that make their charge TỬ TỘI (khi quân trọng tội: giả thai, tráo hoàng tự); tuTgt = a mưu hại aimed at these (Hoàng thượng).
    rep: a 3rd nhẹ conviction within win wk() (one year = 12 months × 3 tuần) counts as vừa. conf: tự thú lowers the weight by one step, a lie
    under a proven charge raises it by one. PHẢN TỌA: a failed accusation puts the same weight back on the accuser (jcharge chBack).
@@ -2317,6 +2317,7 @@ BAL.charge.tierOrd=["nhe","vua","nang","tu"];
 BAL.charge.tuDeed=["cyfake","catswap"];
 BAL.charge.tuTgt=["emp"];
 BAL.charge.tu={spare:{base:10,sungD:4,thMin:60,th:20,hh:15,dadMin:60,dad:10}};
+BAL.charge.rkPlus=[0,0,0,1,1,2,2,2];/* owner 26/11 ~20:40Z «Số chứng cứ cần tăng theo bậc»: extra pieces by the ACCUSED's rank — ≤ Quý nhân +0 · Tần / Phi +1 · Quý phi / Hoàng quý phi / Hoàng hậu +2 (index 7 = Hoàng hậu) */
 BAL.charge.rep={n:3,win:36};
 BAL.charge.conf={down:1,up:1};
 for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});

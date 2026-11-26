@@ -17,8 +17,8 @@ function chB(){return BAL.charge}
 function chC(c){return BAL.charge.C[c]||null}
 function chOfDeed(k){return BAL.charge.deed[k]||"uh"}
 function chName(c){const C=chC(c);return C?C.n:"tội khác"}
-/* pieces to accuse t of charge c: the weight's need (BAL.charge.tier, PUNISH-TIER OD 26/11 ~20:35Z: heavier crime, more proof; the same for every rank) */
-function chNeed(t,c){const C=chC(c);if(!C)return 99;return chB().tier[t?chTier(t,c):C.tier].need}
+/* pieces to accuse t of charge c: the weight's need (BAL.charge.tier, OD 26/11 ~20:35Z) + the add-on of t's rank (BAL.charge.rkPlus, owner ~20:40Z) */
+function chNeed(t,c){const C=chC(c);if(!C)return 99;return chB().tier[t?chTier(t,c):C.tier].need+(t?chB().rkPlus[Math.max(0,Math.min(7,rkOf(t)))]||0:0)}
 /* the WEIGHT of charge c on t: its base tier; TỬ TỘI when one of her deeds of that charge is a tuDeed (khi quân trọng tội) or a mưu hại aimed at a tuTgt (Hoàng thượng) */
 function chTier(t,c){const C=chC(c);if(!C)return"nhe";if(t){const D=chDeedMap(t)[c];const B=chB();if(D&&D.list&&D.list.some(d=>d&&(B.tuDeed.includes(d.k)||(c==="mh"&&d.t!=null&&B.tuTgt.includes(d.t)))))return"tu"}return C.tier}
 function chTierN(t,c){return punTierN(chTier(t,c))}
@@ -162,7 +162,7 @@ function chTrinhO(a,t,q){const B=chB().trinh,c=chReady(a,t);return B.base+aff(q,
 /* the accusation act itself (j8 «Tố giác»): the full charge only; its pieces are spent, the others kept */
 (function(){const A=ACT.accuse;if(!A)return;const f0=A.f;
  Object.defineProperty(A,"x",{configurable:true,get(){const B=chB();/* PUNISH-TIER: need by weight, the same for every rank; phản tọa */
-  return `cần đủ chứng cứ của một tội; tội càng nặng càng cần nhiều chứng (${B.tierOrd.map(x=>`${B.tier[x].n} ${B.tier[x].need}`).join(", ")}; tử tội phải có vật chứng và nhân chứng); tố hụt thì bị phản tọa: chịu đúng mức tội đã tố`}});
+  const P=B.rkPlus,up=[3,5].map(r=>`${RANKS[r].n} trở lên +${P[r]}`).join(", ");return `cần đủ chứng cứ của một tội; tội càng nặng càng cần nhiều chứng (${B.tierOrd.map(x=>`${B.tier[x].n} ${B.tier[x].need}`).join(", ")}; tử tội phải có vật chứng và nhân chứng); tố người phẩm cao cần thêm (${up}); tố hụt thì bị phản tọa: chịu đúng mức tội đã tố`}});
  A.f=function(a,t){const c=chReady(a,t);if(!c)return f0.apply(this,arguments);const o=oAccuse(a,t);const n=chHave(a,t,c);const px=CHX;CHX={a,t,c,n};
   try{evA(a,t,-n,c);
    if(aRoll(o,a)){econPayWin(a,"accuse",t,0);const r=`${NMc(a)} tố giác ${NM(t)} tội ${chName(c).toLowerCase()} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;chPunish(t,c,"bị tố giác, chứng cứ rành rành",a);return r}

@@ -21,7 +21,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   /* 1. need by weight, the same for every rank */
   A.rank=2;C.rank=6;deedAdd(E,"cyfake",null,1,"báo có thai giả");
   ok(chNeed(A,"vp")===1&&chNeed(A,"hd")===2&&chNeed(A,"mh")===3&&chNeed(A,"tt")===3&&chNeed(E,"tt")===3,`need: nhẹ ${chNeed(A,"vp")} · vừa ${chNeed(A,"hd")} · nặng ${chNeed(A,"mh")} · tử tội ${chNeed(E,"tt")}`);
-  ok(chNeed(C,"hd")===chNeed(A,"hd")&&chNeed(C,"mh")===chNeed(A,"mh"),`no rank extra: Hoàng quý phi vừa ${chNeed(C,"hd")} = Quý nhân ${chNeed(A,"hd")}`);
+  {const P=L[7]||L[1];P.rank=4;ok(chNeed(P,"hd")===3&&chNeed(C,"mh")===5&&chNeed(C,"hd")===4,`rank add-on (owner 20:40Z): vừa on a Phi ${chNeed(P,"hd")} · nặng on a Hoàng quý phi ${chNeed(C,"mh")} · vừa on a Hoàng quý phi ${chNeed(C,"hd")}`);P.rank=2}
   ok(chTier(E,"tt")==="tu"&&chTierN(E,"tt")==="tử tội"&&chTier(A,"tt")==="nang",'khi quân (giả thai) makes the charge tử tội (tuDeed); suspicion stays nặng');
   {try{CHM.clear()}catch(e){}D.wrongs.push({k:"poison",t:"emp",w:2,at:wk(),x:"mưu hại Hoàng thượng"});D.dw=(D.dw||0)+2;ok(chTier(D,"mh")==="tu",`mưu hại aimed at Hoàng thượng → ${chTier(D,"mh")} (tuTgt)`)}
   /* 2. weight on every evidence line */
@@ -77,7 +77,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   reset();S.rank=2;up(B);B.rank=2;const b0=B.bac=200;deedAdd(S,"vp",null,1,"vượt phẩm");evA(B,S,1,"vp");lose(()=>ACT.accuse.f(B,S));
   ok(B.bac===b0-BAL.charge.fine&&!B.out&&S.rank===2,`NPC phản tọa (nhẹ): ${B.name} fined ${b0-B.bac} lượng, she is untouched`);
   /* 14. the family: Tố tội thật and Bóc chuyện tư tình */
-  reset();S.rank=2;up(C);C.rank=3;deedAdd(C,"vp",null,1,"vượt phẩm");evA(S,C,1,"vp");const cC=chTocao(S,C);Q.length=0;lose(()=>ACT.tocao.f(S,C));
+  reset();S.rank=2;up(C);C.rank=3;deedAdd(C,"vp",null,1,"vượt phẩm");evA(S,C,chNeed(C,"vp"),"vp");const cC=chTocao(S,C);Q.length=0;lose(()=>ACT.tocao.f(S,C));
   ok(cC==="vp"&&!S.out&&S.rank===2&&Q.some(x=>x&&/Phạt/i.test(x.t||"")),`Tố tội thật lost (vượt phẩm, nhẹ): she is fined by phản tọa, rank kept`);
   reset();S.rank=2;up(G);G.rank=3;G.scandal=2;deedAdd(G,"flirt",null,1,"liếc mắt đưa tình");evA(S,G,chNeed(G,"tt"),"tt");const okE=ACT.expose.ok(S,G);win(()=>ACT.expose.f(S,G));
   ok(okE&&G.out&&G.rank===2&&G.coldFrom===3,`Bóc chuyện tư tình won (tư thông nặng): ${G.name} Tần → Quý nhân + lãnh cung`);
