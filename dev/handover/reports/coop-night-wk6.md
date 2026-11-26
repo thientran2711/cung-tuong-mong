@@ -71,3 +71,38 @@ Not done: real-player check at level 0 (no code change there; covered by the 6 T
 Leftovers outside git: uncommitted runner copy dev/test/robot-rt-coop-wk6.js (video + THIN + reload trigger) and coop-night-dbg.js (Q trap) were deleted with the worktree; worktree removed.
 
 DONE → SSK review/coop-night-wk6 4ba6d3723c2db4161b7c64d78eb902359c79ae18 (BIG co-op; on review/coop-thin-g-land ec88b0e256f7b92d078fe81fa2f6fb35d85a059b). Land AFTER the co-op chain (week-wait-land 04a45597 → thin-g-land ec88b0e2); fast-forward on ec88b0e2.
+
+## REVIEW (BIG co-op, FRESH reviewer session_01N1tNP5X3LeddcPyw4J37PL, opus) — PASS review/coop-night-wk6-r6 62ac32c2e8e5ae29d2117fd4b7aa49c2996ea922
+PRIORITY #1 CHECK ('coop-night-wk6|rbuoi|roomB|eRoomB|V.o.buoi'): OD 0 | ledger 0 | claims 6 | main 0 | review/* 1 (this) + coop-freeze-kmrew-rv2 2673733e | reused the fixer's worktree recipe (local wrangler :8797, restarted before every run).
+Head = 4ba6d372 + ec161ff2 (reviewer small fix, law 11) + merge of the Fold freeze fix c20aaa6e (= review/coop-freeze-kmrew-rv2's fix, now in LIVE aa37de21; jksize scroll-cue one rule + jinv), built files rebuilt (build_site.sh), no conflict marker. FF on review/coop-thin-g-land ec88b0e2; lands AFTER the B co-op chain. Merge-tree vs rv2 2673733e: source conflicts are the chain-vs-main ones already on base ec88b0e2 (same 9 files) = the lander's chain merge, not this branch; c20aaa6e alone into this head: only built files (assets.json/index.html/sw.js) → rebuilt.
+CHECK (1) ONE room-buổi rule (law 11), whole-game scan `grep -n "rbuoi|rweek|eRoomB|roomB|V.o.buoi|view.o" dev/build/j*.js`:
+| site | reads | verdict |
+|---|---|---|
+| jcoopworld sendMe / onBuoi catch-up ×2 / nightEnd / badbuoi / forceBend / restore | roomB() | keep (fixer) — level 0 each old condition ≡ roomB (checked one by one: null>n false, typeof/rweek guards inside roomB) |
+| jcooptimer roomKey | CW.roomB() (eRoomB deleted) | keep — eRoomB ≡ roomB's eW branch |
+| jcoopworld rb / COOP.on week | writers of CW.rbuoi/rweek | keep (the rule's source) |
+| jcoopthine gView adopt cap `P.buoi<=V.o.buoi` | own copy of the host-view room buổi | FIXED r6 → CW.roomB() (V===TH.view===CW.thin.view, same week check; null→0 as before) |
+| jcoopthine render-after-mini-game gReady `V.o.buoi>S.buoi` | own copy | FIXED r6 → CW.roomB()>S.buoi |
+| jfe.js:31 comment «jcoopworld CW.rbuoi» | comment | FIXED r6 → CW.roomB |
+| jcooptimer myKey / S.buoi elsewhere | her own buổi (not the room's) | keep |
+(2) both seatings, same rule (law 1): roomB host branch = his own step, guest = host's view; e2e SWAP0/1 + week-wait SWAP0/1 green. (3) AFK bound OD L680 / stepQ carry untouched: diff touches neither nightAfk nor stepQ; roomKey value unchanged at every level (law 16 ✓). (4) case 10 test: BAL.coopTm.nightMs raised to 600 s only inside case 10, restored to 30000 (= jbal2 default) before merged(); cases 4/4h still test the bound; MUTATE (sendMe back on CW.rbuoi) still FAILs with the lift in place → the lift hides no fault. (5) videos looked (frames): R3 fold-host + ipad-guest 51:30–55:30 — after the both-seat reload both «Buổi tối», «Tháng năm · thượng tuần», clocks 4:39/4:39; at 54:30 host at new week «trung tuần» sáng, guest reading Tuần lục of «thượng tuần» (night 6→7 ran for both); R2 13:20 both «Buổi tối», «Tháng ba · trung tuần», 4:43/4:44. Matches the report.
+TESTS (local wrangler dev :8797, one run at a time, worker restarted per run; logs /home/user/wt/nwk6-out):
+| gate | result |
+|---|---|
+| `ONLY=10 THIN=13 node dev/test/coop-night.js <o> $W` base ec88b0e2 (new test file) | FAIL «10: both in the next week» [0,0,0] |
+| same on head | 10 PASS [0,1,1] (case 9 ONLY-mode artefact red on base/fix/mutate alike) |
+| MUTATE (sendMe on CW.rbuoi) | FAIL [0,0,0] ✓ |
+| coop-night full THIN=13 head / base | 126/126 / 125/126 (10 [6,6,6]) |
+| coop-night full THIN=0 head / base | 126/126 / FAIL rows 9–11 (reload family, base) |
+| coop-e2e COOP_SWAP=0 / 1 | 143/143 · 143/143 |
+| coop-week-wait SWAP 0 / 1 | in series 32/34 (A1/A2, the same flake family as the fixer's base) → alone 34/34 · 34/34 |
+| coop-cal-rebirth | in a long series red (also on 4ba6d372 and on ec161ff2, different rows each run = load flake) → alone head 79/79, base 79/79 |
+| dayq-hold-coop (LIVE Worker, as rv) | 23/23 (local Worker: «guest joined seat b» join only) |
+| coop-thin-g L13 (g4) | 24/24 |
+| coop-keymove-unit | 12/12 |
+| sangbuoi-held (built index.html) | ALL PASS |
+| scroll-cue-loop 755x1000 (freeze fix) | PASS |
+| coop/worker npm test | ALL OK |
+| quickcheck ALONE vs LIVE aa37de21 | open 1959 ms, old save ok, time-spill PASS; G4 90 crawl «fold · Ô lưu · Lui» FAIL = PRE-EXISTING (button-crawl on base ec88b0e2: same single row); live build perf not measurable (live timed out 3/3, as the fixer saw) |
+Laws: 1 ✓ 4 ✓ (no number) 6 n/a 7/9/10 no UI/wording ✓ 11 ✓ (scan above, 2 leftover copies folded) 12 ✓ (videos Fold+iPad) 14 ✓ 16 ✓. OPEN 1/2 not this branch.
+CDN img/_review/coop-night-wk6/ = the fixer's videos, left for the lander/foreman (no reviewer shots uploaded).
