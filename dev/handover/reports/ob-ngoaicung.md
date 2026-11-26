@@ -64,3 +64,30 @@ a hired live-in hand is «người ở» (Vietnamese usage) — see question 1.
 2. Bottom tabs at home still read «Hậu cung» / «Hoàng tự» (owner 21/11 ~03:15Z froze the 8 tabs «y chang»; I did not rename).
 3. Gift at home: only her maid is a recipient now (emperor/consorts out of reach). Family as gift recipients needs a design.
 4. outside/route.js is stale on LIVE (see Gates).
+
+## PART 2 (MAIN 146→150 orders, 25/11 22:40Z–00:49Z) — sha 028bcd08 (+ this report)
+- **Home bottom tab names** (MAIN 148): same 8 tabs, names from KCTABS per variant: tiểu thư «Khuê phòng · Dư đồ · Gia tộc · Giao du · Thư từ · Tư trang ·
+  Tài nghệ · Mệnh truyện»; thôn nữ «Nhà tranh · … · Gia đình · Xóm làng · Tin tức …»; công chúa «Tẩm cung · … · Vương tộc · Triều đình · Thư từ …».
+  The Hoàng tự button now opens her letters (was the «chưa có con» card); palace names come back when she enters (road8TabNames, jroad8).
+- **k9 «Có người đến — Tần thiếp Đáp ứng … xin cầu kiến»**: covered by placeEvOk (consort speaker at home → not shown); scan 600 steps × 5 roads: 0.
+- **k10 Tin báo** (MAIN 147): ONE gate in the kit notice feed (jnotice kitNotice asks jroad8 placeNoteOk; placeNoteSweep on render): at home never
+  tin (tai-mắt palace feed), lật thẻ, palace summons / challenges / visits / xưng danh, nor «… vẫn ở X. Không gặp ai.»; «know» lines only from her
+  OWN act (home card or dialog answer: mua tin, nhờ người dò la, thư vào cung — own mark carried through kitKnow), never from time moving on
+  (nextBuoi / kcW run with the act mark off). Real-tap walk videos: Tin báo empty on Fold; iPad shows only «Sang buổi … ngươi vẫn ở Khuê phòng. Ở đây
+  có 1 người.» (home fact, kept). NOTE: the fast random scan (scan.js --play) still lists some palace «know»/filler items in kitNoticeList — not
+  reproduced with real taps (dbg probe 12 steps: feed empty); suspected harness timing (many acts per task). Successor: confirm with real-tap play.
+- **k5 «Gặp riêng Thái y Diệp Cảnh Hoài»** at home: he is her thanh mai (j96); his title is HIS office (Thái y viện officials lived in the capital;
+  a young imperial physician as a childhood friend is plausible — expert note), not a palace word about her → kept; other variant seen «Hàn lâm học sĩ».
+- **Exit-only «Cha định hôn» card (MAIN 148, law 2)**: NOT done — adding a stay road is new content / a design change (dinhhon2 text «Không còn đường
+  lùi» is a designed end); needs MAIN/owner ruling (law 16/18).
+- Videos (NEW names): https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc2-home-walk-fold-755x1000.webm ·
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc2-home-walk-ipad-1180x820.webm (start → home → Người hầu / Trưởng bối →
+  every home tab → 6 buổi of real taps → Tin báo).
+- Gates for part 2: family scan SCAN PASS (strict surfaces incl. tab names); quickcheck NOT re-run after part 2 (part 1 sha bc93314f: build/old save/
+  open/perf ✓, button-crawl «Ô lưu · Lui» pre-existing on LIVE); coop-e2e NOT re-run after part 2. → successor/reviewer: run both on 028bcd08.
+- TINBAO-WORDS (review/tinbao-words) owns HOW news lines read; I only gate WHICH reach her (no edit in jptime / jwhy / jstagehere text). jnotice.js
+  kitNotice + kitKnow got 1-line hooks (gate call + own mark).
+
+## HANDOVER (rollover: context high)
+Next: (1) quickcheck + coop-e2e on 028bcd08; (2) real-tap check of Tin báo over a few in-game weeks at home; (3) Cha định hôn stay-road ruling;
+(4) thôn nữ maid question; (5) gifts to family design. Scripts: dev/test/ob-ngoaicung/{scan,shots,video}.js.
