@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7446cd0c+","t":"2026-11-26T14:17Z","c":"save r5 fix (LAW 11 unseen-card family): «Bị giật y phục giữa đường» — jeitem gave the robbery card code options (eitReOpts) after it was m…","b":"800f887d1169","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"c0219a98+","t":"2026-11-26T14:31Z","c":"save r6 fix (LAW 11, the «.opts=» family): cards given their options AFTER they were made now come back whole from the sổ","b":"34d8151a5f46","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1646,7 +1646,7 @@ function rcpEnc(x,d){d=d||0;if(d>4)throw 0;if(x==null||typeof x==="number"||type
 function rcpDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(rcpDec);
  if("@p" in x){const p=rcpByKey(x["@p"]);if(!p||p.alive===false||p.dead)throw 0;return p}const o={};for(const i in x)o[i]=rcpDec(x[i]);return o}
 /* wrap a card generator: every choice card it returns carries rk (kind) + ra (its arguments, people as ids); RCPRE = 1 while a card is made again */
-function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<RCP_MAX){m.rk=k;m.ra=a}else m.__rkLen=j.length}}catch(e){}return m}}
+function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<RCP_MAX){m.rk=k;m.ra=a}else m.__rkLen=j.length}}catch(e){/* save r6: its arguments are not data (code / a non-person object): mark it, the probe names the generator */try{if(m&&typeof m==="object")m.__rkErr=k}catch(x){}}return m}}
 const QRCF=[];const rcpF=(e,w)=>{QRCF.push([e&&e.rk,w,typeof day==="function"?day():0]);if(QRCF.length>20)QRCF.shift();return null};window.__rcpFail=QRCF;/* debug: why a card could not be made again */
 function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let a;try{a=rcpDec(e.ra||[])}catch(x){return rcpF(e,"person gone "+JSON.stringify(e.ra).slice(0,80))}RCPRE=1;let m=null;const Q0=typeof Q!=="undefined"?Q:null,had=new Set(Q0||[]);try{m=fn.apply(null,a)}catch(x){m=null;rcpF(e,"threw "+(x&&x.message))}finally{RCPRE=0;/* save-unseen-lists r2: a generator that queues its own card (kitPanel) hands it back here, never a second copy in Q */try{if(m&&Q0&&Q===Q0&&!had.has(m)){const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)}}catch(x){}}
  if(!m||!m.opts||!m.opts.length)return rcpF(e,"no choice now");m.rk=e.rk;m.ra=e.ra;if(e.t)m.t=e.t;if(e.cls&&!m.cls)m.cls=e.cls;return m}
@@ -87406,7 +87406,13 @@ function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K
 })();
 Object.assign(window,{knwSee,knwGossip,knwOf});
 /* night-ledger-coop r4: the seller's card is carried as data (j3 rcpReg: seller + news, people as ids) */
-knSellCard=rcpReg("knSell",knSellCard);
+/* save r6 (LAW 11, probe iPad seed 1 rv10 LOST-AT-WRITE «Có người bán tin»): the news object carries code (a fact's go, a happening), so rcpEnc
+   threw and the card had no rk — a code card made at a step, left out of the sổ. The card now carries the seller + the news ID only; the news is
+   found again from the live world (knSellNews, the same list the offer was picked from). An old {rk:"knSell", ra:[s, news]} still works */
+const knSellCard0=knSellCard;
+const knSellById=rcpReg("knSell",(s,n)=>{if(!s)return null;if(n&&typeof n==="object")return knSellCard0(s,n);if(typeof n!=="string")return null;
+ let N=null;try{N=knSellNews(S,s).find(q=>q.id===n)}catch(e){}return N?knSellCard0(s,N):null});
+knSellCard=function(s,n){return n&&typeof n.id==="string"?knSellById(s,n.id):knSellCard0(s,n)};
 /* ================= jnroadhp: QUESTLINE Q2 — the NPC side line as a process + two-way (QUESTLINES_AUDIT.md §3 H-a/H-d, §4 Q2) =================
    Builds on jnroad.js / jnroadm.js (NPC roads + the help hồi) without copying them; every number is in BAL.nroad (jbal2.js: fin, sb, hpMax).
    (a) HELP RECORD H-a: v.nr.hp = [[chapter, sign, turn]] — every help (+1) / betrayal (−1) she gave on that person's road (consorts, maids,
@@ -100818,7 +100824,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="800f887d1169";window.CTM_BUILD=BUILD;
+const BUILD="34d8151a5f46";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

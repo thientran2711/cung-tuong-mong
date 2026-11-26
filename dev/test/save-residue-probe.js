@@ -16,7 +16,7 @@ const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);const seedInit=eval(SBR.ma
   await ctx.route(/\.(webp|png|jpg|jpeg|mp3|ogg|m4a|mp4|webm)(\?|$)/,r=>r.abort());const p=await ctx.newPage();p.setDefaultTimeout(600000);const pe=[];p.on('pageerror',e=>pe.push(e.message.slice(0,120)));
   await D.openDirect(p,url);await p.waitForFunction(()=>typeof deser==='function'&&typeof start==='function'&&document.querySelector('#slots button'));await p.waitForTimeout(1500);await p.evaluate(H);if(process.env.RP_STACK)await p.evaluate(()=>{window.__rpStack=1});if(process.env.RP_MUTATE)await p.evaluate(k=>{window.__rpMut=k},process.env.RP_MUTATE);
   const r=await p.evaluate(async(NB)=>{__sbr.newLife();const seen=new WeakSet();const lost={};const T=m=>String(m&&(m.t||m.pid)||'?').replace(/\d+/g,'#').slice(0,40);
-   const add=(m,src)=>{if(!m||seen.has(m))return;seen.add(m);const k=src+': '+T(m)+(m.__rkLen?' (args too long for the sổ: '+m.__rkLen+' chars)':'')+(m.__rpSt?' @ '+m.__rpSt:'');lost[k]=(lost[k]||0)+1};let writes=0;
+   const add=(m,src)=>{if(!m||seen.has(m))return;seen.add(m);const k=src+': '+T(m)+(m.__rkLen?' (args too long for the sổ: '+m.__rkLen+' chars)':'')+(m.__rkErr?' (generator '+m.__rkErr+': its arguments are not data)':'')+(m.__rpSt?' @ '+m.__rpSt:'');lost[k]=(lost[k]||0)+1};let writes=0;
    /* where each code card was made (env RP_STACK=1): the first game frames of the stack when it entered Q, for the fixer */
    /* RP_MUTATE: a generator «not registered» — its cards lose rk as they enter the queue */
    if(window.__rpMut){const P0=Array.prototype.push,U0=Array.prototype.unshift;const strip=a=>{for(const m of a)if(m&&m.rk===window.__rpMut){delete m.rk;delete m.ra}};

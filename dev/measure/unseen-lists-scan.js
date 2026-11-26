@@ -117,6 +117,7 @@ const CLASS=[/* [file, regex on «enclosing function chain + title», class, rea
  ['jtoilr.js',/toilFlush|QRC\.toilPop/,'ROUTE','the four reaction answers on a toilPop card: added live (toilFlush) and again at the remake (QRC.toilPop hook, same reaction record)',/QRC\.toilPop=function\(r\)/],
  ['jworld.js',/startCard/,'ROUTE','the world card scene options: startCard runs inside worldCardK (rcpReg world)',/const worldCardK=rcpReg\("world"[^\n]*const m=startCard\(w\)/],
  ['jselxsc.js',/selxFree/,'ROUTE','«Ra Dư đồ» on the selection-day free card: a pid «selxD» card, rebuilt by PEND.selxD through selxFree',/PEND\.selxD=pp=>/],
+ ['jagknow.js',/knSellCard/,'ROUTE','«Có người bán tin»: knSellCard (the raw builder) runs inside knSellById (rcpReg knSell: seller + news id, the news found again from the live world)',/const knSellById=rcpReg\("knSell"/],
  ['jact2.js',/AD_HAP_FIRE\.fest|tsPanel/,'ACT','festival light event on HER arrival (adHapArrive from goTo) / her deck card «Thả đèn hoa đăng»'],
  ['jhaohuu.js',/open/,'PANEL','the «Hảo hữu cùng chơi» sheet she opens (kitPanel)'],
  ['jstatus.js',/open/,'PANEL','status view panel (view:1, never saved by design)'],

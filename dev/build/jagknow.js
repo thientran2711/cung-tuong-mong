@@ -582,4 +582,10 @@ function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K
 })();
 Object.assign(window,{knwSee,knwGossip,knwOf});
 /* night-ledger-coop r4: the seller's card is carried as data (j3 rcpReg: seller + news, people as ids) */
-knSellCard=rcpReg("knSell",knSellCard);
+/* save r6 (LAW 11, probe iPad seed 1 rv10 LOST-AT-WRITE «Có người bán tin»): the news object carries code (a fact's go, a happening), so rcpEnc
+   threw and the card had no rk — a code card made at a step, left out of the sổ. The card now carries the seller + the news ID only; the news is
+   found again from the live world (knSellNews, the same list the offer was picked from). An old {rk:"knSell", ra:[s, news]} still works */
+const knSellCard0=knSellCard;
+const knSellById=rcpReg("knSell",(s,n)=>{if(!s)return null;if(n&&typeof n==="object")return knSellCard0(s,n);if(typeof n!=="string")return null;
+ let N=null;try{N=knSellNews(S,s).find(q=>q.id===n)}catch(e){}return N?knSellCard0(s,N):null});
+knSellCard=function(s,n){return n&&typeof n.id==="string"?knSellById(s,n.id):knSellCard0(s,n)};
