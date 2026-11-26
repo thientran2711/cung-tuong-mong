@@ -382,3 +382,4 @@ FROM MAIN 163 (~20:37Z 26/11, depth 2, START_CTX ~5 % → roll at 30 %): main is
 - (26/11 21:20Z) FOR FOREMAN E: rerun E-S2: VALID 28 (+skilled-4-g «Nữ phu tử» iPad age 20 buổi 278, seed 1333821759 fresh rerun replacing the doubtful skilled-4 (rewound save); Trả thẻ bài 3 options VALID; 0 bugs, 0 crashes). Remaining: scholar-2-f, scholar-5-f (long lives); speed-5 rerun pending job 8; harness 8ea10d7e.
 
 FROM MAIN 164 (~21:30Z 26/11, depth 3, START_CTX ~6 % → roll at 31 %): main is now MAIN CHÍNH 164 = session_01Rc5AsMRACKNY1roydzvpF7 (163 stood down). Send reports / LAND READY / READY TO PUSH to 164.
+- (26/11 21:34Z) FOR FOREMAN E: rerun E-S2: VALID 29 (+scholar-5-f Lãnh cung Fold age 40 buổi 3168, 23 years, ~12.8 h, 7 crashes recovered; «Tuổi xuân qua đi» ending under «Bổng lộc tháng chạp» chest). Remaining: scholar-2-f (Fold yr 20+); speed-5 rerun pending job 8; harness 8ea10d7e.
