@@ -1,7 +1,7 @@
 {
  "unit": "E-S5",
  "game": "LIVE github.io",
- "finished": 7,
+ "finished": 8,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -6503,6 +6503,6340 @@
      "type": "game",
      "n": 1,
      "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Lịch tháng / Mục lục / Chương 7 · Lạy hay vái / Chứng cứ về Phế phi Khương Vân Thường / Đã biết về Phế phi Khương Vân Thường / Chương 7 · Lạy hay vái)"
+    }
+   ],
+   "exitPick": null
+  },
+  {
+   "life": "E-S5-R5-greedy-4",
+   "dev": "ipad",
+   "bot": "bold",
+   "seed": 3473878858,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Lãnh cung",
+   "type": "end",
+   "death": false,
+   "age": 40,
+   "buoi": 3311,
+   "harness": {
+    "kind": "realtap",
+    "sha": "594fa1ee",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 4,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [
+     {
+      "at": 688,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+     },
+     {
+      "at": 904,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+     },
+     {
+      "at": 1116,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+     },
+     {
+      "at": 1335,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+     },
+     {
+      "at": 1790,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2017,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2387,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2418,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2422,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2426,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2430,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2435,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2439,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2443,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2447,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2452,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2464,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2468,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2473,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2477,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2482,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2486,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2490,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2495,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2499,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2504,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2508,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2512,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2517,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2521,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2526,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2530,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2534,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2538,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2543,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2547,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2552,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2556,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2561,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2565,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2569,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2574,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2578,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2583,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2587,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2592,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2596,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2601,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2605,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2610,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2615,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2619,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2624,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2628,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2632,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2637,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2641,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2645,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2650,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2654,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2659,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2663,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2668,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2672,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2677,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2682,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2686,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2691,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2695,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2700,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2704,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2708,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2712,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2717,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2721,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2725,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2730,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2734,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2739,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2743,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2747,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2751,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2756,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2760,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2764,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2768,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2772,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2777,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2781,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2785,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2790,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2794,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2799,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2803,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2807,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2812,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2816,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2820,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2824,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2829,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2833,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2837,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2841,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2845,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2849,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2854,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2858,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2863,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2867,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2872,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2876,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2880,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2885,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2889,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2893,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2898,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2902,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2906,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2911,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2915,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2920,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2924,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2928,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2932,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2937,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2941,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2945,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2950,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2954,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2959,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2963,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2967,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2972,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2976,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2980,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2985,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2989,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2993,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2998,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3002,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3006,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3011,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3015,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3020,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3024,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3028,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3032,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3037,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3041,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3045,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3050,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3054,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3058,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3062,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3067,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3071,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3075,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3080,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3084,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3088,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3092,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3097,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3101,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3106,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3110,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3114,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3119,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3123,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3128,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3132,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3136,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3140,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3145,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3149,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3153,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3158,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3163,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3167,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3172,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3176,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3181,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3185,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3189,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3193,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3198,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3202,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3206,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3210,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3215,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3219,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3223,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3228,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3232,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3236,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3241,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3245,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3250,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3254,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3258,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3263,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3267,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3272,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3276,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3280,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3285,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3289,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3294,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3298,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3302,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3307,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3311,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3316,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3320,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3324,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3329,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3333,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3337,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3342,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3347,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3351,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3355,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3360,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3365,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3369,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3374,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3378,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3382,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3386,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3391,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3395,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3400,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3404,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3408,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3413,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3417,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3421,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3425,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3430,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3434,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3438,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3443,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3447,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3451,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3456,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3460,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3464,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3469,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3473,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3478,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3482,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3487,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3491,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3496,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3500,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3504,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3508,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3513,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3518,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3522,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3526,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3531,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3535,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3540,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3544,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3548,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3552,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3557,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3561,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3565,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3570,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3574,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3578,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3583,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3587,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3592,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3596,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3600,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3605,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3610,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3614,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3619,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3623,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3627,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3632,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3636,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3640,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3645,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3650,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3654,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3659,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3663,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3668,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3672,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3677,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3681,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3686,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3690,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3694,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3698,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3703,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3708,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3713,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3717,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3721,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3726,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3730,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3735,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3739,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3743,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3747,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3752,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3756,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3761,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3765,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3770,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3775,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3779,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3784,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3789,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3794,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3799,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3803,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3807,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3812,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3816,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3820,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3825,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3829,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3834,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3838,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3842,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3847,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3851,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3855,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3860,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3864,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3868,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3872,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3877,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3881,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3885,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3889,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3894,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3898,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3902,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3906,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3911,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3915,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3919,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3924,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3928,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3933,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3937,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3941,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3945,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3950,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3954,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3959,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3963,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3968,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3972,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3977,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3981,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3986,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3990,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3994,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3999,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4003,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4008,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4013,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4017,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4021,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4025,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4030,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4034,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4038,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4042,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4047,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4051,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4056,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4060,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4064,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4068,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4073,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4077,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4081,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4085,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4089,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4094,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4098,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4102,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4107,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4111,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4116,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4120,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4125,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4129,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4134,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4139,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4143,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4148,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4152,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4157,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4161,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4165,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4170,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4174,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4178,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4183,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4187,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4192,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4196,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4201,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4205,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4209,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4214,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4218,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4222,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4227,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4231,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4235,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4240,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4244,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4248,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4252,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4257,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4261,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4265,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4270,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4274,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4278,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4282,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4286,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4291,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4295,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4299,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4304,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4308,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4312,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4317,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4321,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4325,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4330,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4334,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4338,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4342,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4347,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4351,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4355,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4360,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4364,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4368,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4373,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4378,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4382,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4386,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4391,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4396,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4400,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4404,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4409,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4413,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4418,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4422,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4426,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4430,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4435,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4439,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4443,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4448,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4452,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4456,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4460,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4465,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4469,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4473,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4477,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4482,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4486,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4490,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4495,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4499,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4503,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4508,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4512,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4517,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4521,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4525,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4529,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4534,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4538,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4542,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4547,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4551,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4555,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4560,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4564,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4568,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4573,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4577,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4582,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4586,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4591,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4595,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4599,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4604,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4608,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4612,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4616,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4621,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4625,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4629,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4634,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4638,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4642,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4647,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4651,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4655,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4660,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4664,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4669,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4673,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4678,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4682,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4686,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4690,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4695,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4699,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4704,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4708,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4713,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4717,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4722,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4726,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4731,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4735,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4740,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4745,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4749,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4753,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4758,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4762,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4767,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4771,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4775,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4780,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4785,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4789,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4793,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4798,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4803,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4807,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4811,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4816,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4820,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4825,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4829,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4834,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4838,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4843,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4847,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4851,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4856,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4860,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4864,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4869,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4873,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4877,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4882,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4886,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4890,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4894,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4899,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4903,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4907,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4912,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4916,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4921,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4925,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4929,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4934,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4938,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4943,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4948,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4953,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4957,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4962,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4966,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4970,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4975,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4980,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4984,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4989,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4993,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4998,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5002,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5007,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5011,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5015,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5020,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5024,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5028,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5033,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5037,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5041,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5046,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5051,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5056,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5060,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5065,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5070,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5074,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5079,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5083,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5087,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5092,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5096,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5100,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5105,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5109,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5113,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5118,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5122,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5126,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5131,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5135,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5139,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5143,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5148,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5152,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5156,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5161,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5165,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5169,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5174,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5178,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5182,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5187,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5192,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5196,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5200,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5204,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5208,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5213,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5217,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5221,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5225,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5229,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5234,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5238,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5242,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5247,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5251,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5255,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5259,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5264,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5268,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5272,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5277,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5281,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5285,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5290,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5294,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5298,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5303,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5307,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5311,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5315,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5320,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5324,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5328,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5333,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5337,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5341,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5346,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5350,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5354,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5359,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5363,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5367,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5371,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5376,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5380,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5384,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5389,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5393,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5397,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5401,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5406,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5410,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5414,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5418,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5423,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5427,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5431,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5436,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5440,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5444,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5449,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5453,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5457,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5461,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5466,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5471,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5475,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5480,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5484,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5489,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5493,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5497,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5501,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5506,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5510,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5515,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5519,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5523,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5528,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5533,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5537,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5541,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5546,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5550,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5555,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5559,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5563,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5567,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5572,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5576,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5580,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5585,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5589,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5594,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5599,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5603,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5608,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5613,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5617,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5622,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5626,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5631,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5635,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5639,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5643,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5648,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5652,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5656,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5661,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5665,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5669,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5673,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5678,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5682,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5687,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5691,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5695,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5700,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5704,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5709,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5714,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5719,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5724,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5728,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5733,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5738,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5742,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5747,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5751,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5756,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5760,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5765,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5769,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5774,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5778,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5783,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5787,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5791,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5796,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5801,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5805,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5810,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5814,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5819,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5824,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5828,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5833,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5837,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5842,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5847,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5851,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5855,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5859,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5864,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5869,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5874,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5878,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5882,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5887,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5892,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5897,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5901,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5905,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5910,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5914,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5918,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5923,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5927,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5932,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5936,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5941,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5945,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5950,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5954,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5959,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5963,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5968,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5972,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5977,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5981,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5986,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5991,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5995,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 5999,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6004,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6008,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6013,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6017,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6022,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6026,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6030,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6035,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6039,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6043,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6048,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6052,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6056,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6060,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6065,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6069,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6073,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6078,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6082,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6087,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6092,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6096,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6100,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6105,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6109,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6114,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6118,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6122,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6127,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6131,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6136,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6140,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6145,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6149,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6154,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6158,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 6162,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 55,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 100,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 152,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 204,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 264,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 319,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 368,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 429,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 483,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 811,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 1041,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1633,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2047,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2260,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2346,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2535,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2929,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3142,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3377,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3494,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3543,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3643,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3688,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3795,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3976,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4115,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4215,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4260,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4302,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4716,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4915,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4996,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 5100,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5188,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5246,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5674,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5834,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5883,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6080,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6568,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6633,
+      "lvl": 3,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 6683,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6819,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6872,
+      "lvl": 3,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 6923,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 7062,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7295,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7372,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7464,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7887,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7932,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 25,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 151,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 332,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 377,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 456,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 703,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 922,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1009,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1074,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1156,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1222,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1337,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1374,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1488,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1629,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1752,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1882,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2012,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2053,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 2056,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 2103,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2220,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 5 người."
+     },
+     {
+      "at": 2789,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2904,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2957,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3051,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3159,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3268,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3504,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3554,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3690,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4040,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4141,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4195,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4262,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4379,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4464,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4984,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5050,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5182,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5309,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5399,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5501,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5563,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5729,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5930,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5991,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6095,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6207,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6272,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6356,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6404,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6570,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 6642,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6867,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 6942,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7245,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 7352,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 7434,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7547,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7663,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7720,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7768,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7872,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8015,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8268,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8332,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8433,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8484,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8548,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8745,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 8860,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9022,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9084,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9282,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 9365,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9464,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9666,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9743,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10127,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10195,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10375,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10432,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10481,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10556,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10723,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10789,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10993,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11179,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 11251,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11434,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11652,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 11729,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11800,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11878,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12113,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12211,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12275,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 653,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Tin trong cung buổi này"
+     },
+     {
+      "at": 653,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin trong cung buổi này"
+     }
+    ],
+    "slice": null,
+    "areaTaps": 4224,
+    "dlgScroll": 388,
+    "scrolls": 831,
+    "dlgClose": 2513,
+    "infoTaps": 1845,
+    "nextNoTurn": 472,
+    "loops": 129,
+    "deadEndUnstick": 861,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-25T16:10:18.204Z",
+      "buoi": 104,
+      "from": "2026-11-25T16:10:02.683Z"
+     },
+     {
+      "at": "2026-11-25T18:23:21.016Z",
+      "buoi": 689,
+      "from": "2026-11-25T18:23:05.455Z"
+     },
+     {
+      "at": "2026-11-25T21:53:34.118Z",
+      "buoi": 1518,
+      "from": "2026-11-25T21:53:20.110Z"
+     },
+     {
+      "at": "2026-11-26T01:54:56.349Z",
+      "buoi": 2619,
+      "from": "2026-11-26T01:53:56.924Z"
+     },
+     {
+      "at": "2026-11-26T03:53:57.174Z",
+      "buoi": 3109,
+      "from": "2026-11-26T03:52:54.825Z"
+     }
+    ],
+    "optClipReload": 9,
+    "nocloseRetract": 1,
+    "kfocVisits": 156,
+    "closeSpent": 1,
+    "build": {
+     "s": "3762da08+",
+     "b": "fa8da73cecdc",
+     "t": "2026-11-25T19:34Z"
+    },
+    "taps": 1586
+   },
+   "bugs": [
+    {
+     "type": "game",
+     "n": 99,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)"
+    },
+    {
+     "type": "js",
+     "n": 1,
+     "msg": "page error: Cannot read properties of undefined (reading 'off')"
+    },
+    {
+     "type": "game",
+     "n": 854,
+     "msg": "dialog scrolled to the end has no close / next button: .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 4 copies of «Tâm trạng · Quý phi Giang Bích Dao» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "dead",
+     "n": 1,
+     "msg": "close button has no effect: .dlg «Tâm trạng · Quý phi Giang Bích Dao» «Lui»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 2 copies of «Tâm trạng · Tể tướng Chung Kính Đình» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 9,
+     "msg": "no close (options clipped below the screen, nothing scrolls): .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» — lost: Theo Hoàng thượngRất vữn / Theo Thái hậuRất vữngTốn / Theo Tể tướng Chung Kính / Đứng ngoài, giữ mìnhRất "
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Lãnh cung)"
+    },
+    {
+     "type": "game",
+     "n": 3,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin báo / Tin trong cung buổi này)"
+    },
+    {
+     "type": "stuck",
+     "n": 19,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=13: Lịch tháng / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Tin báo / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Lịch tháng / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Đã biết về Quý nhân Nghiêm Xảo Nhi / Chương 4 · Quốc thư hai mặt trời / Tin báo)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Lịch tháng / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Tin báo / Chương 4 · Quốc thư hai mặt trời)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Lịch tháng / Tin báo / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời)"
+    },
+    {
+     "type": "game",
+     "n": 4,
+     "msg": "dialog scrolled to the end has no close / next button: .kmov «»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=13: Đức / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Lịch tháng / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Lịch tháng / Chương 5 · Hồi thư / Tin báo / Chương 5 · Hồi thư / Chương 5 · Hồi thư / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Chương 5 · Hồi thư / Chương 5 · Hồi thư / Hôn sự / Quý tộc kén rể · kén dâu / Chương 5 · Hồi thư)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 5 · Hồi thư / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Vũ / Lịch tháng / Nhờ thái giám tìm thú nuôi / Đã biết về Hoàng hậu Ngụy Nhu Gia / Thiên mệnh / Quan hệ với)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Tin báo / Chương 5 · Hồi thư / Chương 5 · Hồi thư / Chương 5 · Hồi thư / Lịch tháng / Chương 5 · Hồi thư)"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 3 người.»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Lịch tháng / Tin báo / Kế vị / Chương 5 · Hồi thư / Hoàng thượng / Chương 5 · Hồi thư)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Lịch tháng / Chương 5 · Hồi thư / Chương 5 · Hồi thư / Tin báo / Chương 5 · Hồi thư / Chương 5 · Hồi thư)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Chương 5 · Hồi thư / Lịch tháng / Chương 5 · Hồi thư / Tin báo / Chương 5 · Hồi thư / Chương 5 · Hồi thư)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Chương 6 · Chỗ ngồi đêm Nguyên đán / Tin báo / Lịch tháng / Chương 6 · Chỗ ngồi đêm Nguyên đán / Chương 6 · Chỗ ngồi đêm Nguyên đán / Chương 6 · Chỗ ngồi đêm Nguyên đán)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Đức / Chương 6 · Chỗ ngồi đêm Nguyên đán / Tin báo / Lịch tháng / Chương 6 · Chỗ ngồi đêm Nguyên đán / Chứng cứ về Thường tại Sử Lạc Yên)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Tin báo / Chứng cứ về Hoàng hậu Tăng Tuyết Dao / Hoàng thượng / Chương 6 · Chỗ ngồi đêm Nguyên đán / Chương 6 · Chỗ ngồi đêm Nguyên đán / Chương 6 · Chỗ ngồi đêm Nguyên đán)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Quan hệ với / Chương 6 · Chỗ ngồi đêm Nguyên đán / Lịch tháng / Chương 6 · Chỗ ngồi đêm Nguyên đán / Tin báo / Chương 6 · Chỗ ngồi đêm Nguyên đán)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Vũ: các lối / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Chương 6 · Chỗ ngồi đêm Nguyên đán / Chương 6 · Chỗ ngồi đêm Nguyên đán / Lịch tháng / Chương 6 · Chỗ ngồi đêm Nguyên đán / Cầm: các lối / Tin báo)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 7 · Lạy hay vái / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Chứng cứ về Phế phi Diệp Hàm Chương / Đã biết về Phế phi Diệp Hàm Chương / Lịch tháng / Chương 7 · Lạy hay vái / Hoàng tự trong cung / Tin báo)"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .mapsc «»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Xem quan hệ của / Tin báo / Chương 7 · Lạy hay vái / Quan hệ với / Lịch tháng / Chương 7 · Lạy hay vái)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Cầm: các lối / Quan hệ với / Tin báo / Lịch tháng / Quý tộc kén rể · kén dâu / Chương 8 · Hồi tứ)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Cầm: các lối / Tin trong cung buổi này)"
+    },
+    {
+     "type": "dead",
+     "n": 1,
+     "msg": "close button has no effect: .dlg «Tin trong cung buổi này» «Lui»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui)"
     }
    ],
    "exitPick": null
