@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3af7896e+","t":"2026-11-26T07:19Z","c":"STACK LAND mghelp-dress-r6 4f377603 onto LIVE 6b5d3d05 (built files only; rebuilt); CHANGE line MAIN 154","b":"980bff247413","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"d56d60c4","t":"2026-11-26T11:15Z","c":"E96f r3: the queue rule only for HER ACT taps (inside the person view she opened / the box she has open) — never «Sang buổi» or other time-…","b":"0d5df2ec5f5a","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -98248,14 +98248,20 @@ function dqMineFront(){try{const pre=DQ.preQ;if(!pre||!dqUi()||Q.length<2)return
   if(dqPlaying()||(window.DF&&DF.F&&Q[0]&&DF.encM===Q[0]))return false;const mine=Q.filter(m=>!pre.has(m)),old=Q.filter(m=>pre.has(m));if(!mine.length||!old.length||Q.every((m,i)=>m===(i<mine.length?mine[i]:old[i-mine.length])))return false;
   /* an ending / death card already waiting keeps its place (nothing is played over the end of her life) */
   if(dqIsEnd(Q[0])&&pre.has(Q[0]))return false;Q.length=0;Q.push(...mine,...old);DQ.stat.mineFront=(DQ.stat.mineFront||0)+1;return true}catch(e){console.error("dayq front",e);return false}}
-function dqTapOpen(){return !!(DQ.preQ&&Date.now()<=DQ.tw)}
-function dqTap(k,e){try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;const now=Date.now();
+/* r3 (E96r REVIEW r2: «Sang buổi» passed the buổi over an unseen card): the rule is for HER ACT taps only — inside the person view she opened
+   (DQ_OWN) or inside the box / panel she has open. A time-passing control (#next «Sang buổi», a Dư đồ move, the top bar «Về phòng», a tab) is
+   never one: there an unseen card still holds the turn and is painted first (M4 rule, dqPaintQ / dqBring), exactly as before. */
+const DQ_ACT=DQ_OWN+",#modal,#panel";
+function dqActTap(t){try{if(!t||t.nodeType!==1||!t.closest)return false;if(t.closest("#next,#tabs,.tabs,#top,.ktop,#map,.mspot"))return false;return !!t.closest(DQ_ACT)}catch(e){return false}}
+function dqTapOpen(){return !!(DQ.preQ&&DQ.actTap&&Date.now()<=DQ.tw)}
+function dqTap(k,e){try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;const now=Date.now();const act=dqActTap(e.target);
   /* the queue as it was when her finger came DOWN (the view's cards act on pointerup, before the click event); a click with no finger before it
      (keyboard / an engine .click()) starts its own tap, a click nested inside her tap (jdfv dfRun clicks the docked card's button) does not */
-  if(k==="pointerdown"||k==="touchstart"||k==="keydown"||(k==="click"&&now-DQ.pdT>1500&&!dqParked())){DQ.preQ=new Set(Q);if(k!=="click")DQ.pdT=now}
+  if(k==="pointerdown"||k==="touchstart"||k==="keydown"||(k==="click"&&now-DQ.pdT>1500&&!dqParked())){DQ.preQ=new Set(Q);DQ.actTap=act;if(k!=="click")DQ.pdT=now}
+  if(!DQ.actTap)return/* not her act tap: nothing set aside, nothing moved (the old gates run as before) */;
   DQ.tw=now+BAL.dayq.mineLook+(k==="pointerdown"||k==="touchstart"?1500:0);
   /* (1) a card nobody can see is set aside while this event's handlers run (not over the new-day host / a mini-game: their own gates) */
-  if(!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
+  if(act&&!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
   if((k==="click"||k==="pointerup"||k==="keydown")&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(dqParked())dqUnpark();
     /* (2) what her tap queued comes first; painted at once when nothing shows it (over the view / in place of the box she tapped in) */
     const M=$("modal"),shown=M&&!dqHidden(M)?Q[0]:null;const moved=dqMineFront();
@@ -100486,7 +100492,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="980bff247413";window.CTM_BUILD=BUILD;
+const BUILD="0d5df2ec5f5a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
