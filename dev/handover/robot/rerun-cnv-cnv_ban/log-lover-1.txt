@@ -1,0 +1,20 @@
+CP buổi 50 year 1 save 333318 chars
+CP buổi 100 year 1 save 432079 chars
+CP buổi 150 year 2 save 515957 chars
+CP buổi 200 year 2 save 587402 chars
+CP buổi 250 year 2 save 618513 chars
+STATUS cnv-cnv_ban-lover-1 · buổi 287 · year 3 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 300 year 3 save 747307 chars
+CP buổi 350 year 3 save 817158 chars
+page.evaluateHandle: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:270:23)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-lover-1 from 2026-11-26T07:12:33.628Z buổi 384
+CP buổi 384 year null save 839767 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kfxon j59sz»
+CP buổi 434 year 4 save 978522 chars
+CP buổi 484 year 4 save 1089335 chars
+CP buổi 534 year 4 save 1151983 chars
+LIFE DONE cnv-cnv_ban-lover-1 Hồng nhan bạc mệnh age 22 · buổi 541 · taps 964 · dead buttons 0 · stuck 0 · bugs 1

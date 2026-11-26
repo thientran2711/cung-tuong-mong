@@ -1,8 +1,8 @@
-# cnv-cnv_ban-speed-3 (real-tap harness d6017f12, fold)
+# cnv-cnv_ban-speed-3 (real-tap harness 8ee776d9, fold)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-speed-3 | HARNESS |  | 1717 |  | 7 | 0 | 2 | — |
+| cnv-cnv_ban-speed-3 | HARNESS |  | 2494 |  | 7 | 0 | 2 | — |
 
 ## Dead buttons
 
@@ -17,4 +17,4 @@
 ## Bugs
 
 - [dead] ×1 close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
+- [harness] ×1 runner error: touchscreen.tap: Target page, context or browser has been closed

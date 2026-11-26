@@ -57,3 +57,38 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-4 from 2026-11-26T05:12:16.956Z buổi 1347
+CP buổi 1347 year null save 2643230 chars
+CP buổi 1397 year 10 save 2718799 chars
+CP buổi 1447 year 10 save 2764026 chars
+CP buổi 1497 year 11 save 2846420 chars
+CP buổi 1547 year 11 save 2924049 chars
+CP buổi 1597 year 11 save 3061907 chars
+CP buổi 1647 year 12 save 3102020 chars
+STATUS cnv-cnv_ban-speed-4 · buổi 1682 · year 12 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+CP buổi 1697 year 12 save 3189409 chars
+CP buổi 1747 year 12 save 3188567 chars
+CP buổi 1797 year 13 save 3229077 chars
+CP buổi 1847 year 13 save 3306957 chars
+CP buổi 1897 year 13 save 3346083 chars
+CP buổi 1947 year 14 save 3406448 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:277:45)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T07:12:54.518Z buổi 1985
+CP buổi 1985 year null save 3450678 chars
+CP buổi 2035 year 14 save 3522344 chars
+CP buổi 2085 year 15 save 3651988 chars
+CP buổi 2135 year 15 save 3777740 chars
+CP buổi 2185 year 15 save 3886371 chars
+CP buổi 2235 year 16 save 3898727 chars
+STATUS cnv-cnv_ban-speed-4 · buổi 2252 · year 16 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+touchscreen.tap: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rerun-ban/dev/test/realtap.js:104:39)
+    at async Object.tap (/home/user/wt/rerun-ban/dev/test/realtap.js:79:46)
+    at async Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:271:16)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:466:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T09:12:30.133Z buổi 2277

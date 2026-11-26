@@ -56,3 +56,11 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-lazy-5 from 2026-11-26T05:12:00.031Z buổi 1502
+CP buổi 1502 year null save 2603738 chars
+CP buổi 1552 year 11 save 2624187 chars
+CP buổi 1602 year 12 save 2816825 chars
+CP buổi 1652 year 12 save 2811189 chars
+CNV EXIT CHOICE buổi 1680 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-lazy-5/cnvexit-1680.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
+CP buổi 1702 year 12 save 2888639 chars
+LIFE DONE cnv-cnv_ban-lazy-5 Xuất cung age 30 · buổi 1706 · taps 1322 · dead buttons 0 · stuck 0 · bugs 0

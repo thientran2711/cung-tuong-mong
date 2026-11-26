@@ -2,11 +2,9 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-lazy-5 | HARNESS |  | 1506 |  | 0 | 0 | 1 | — |
+| cnv-cnv_ban-lazy-5 | Xuất cung — Xuất cung tuổi 30 | 30 | 1706 | 1322 | 0 | 0 | 0 | — |
 
 ## Dead buttons
 
 
 ## Bugs
-
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
