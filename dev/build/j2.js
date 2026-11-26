@@ -166,7 +166,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Thỉnh an, chép kinh",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_6),w:{th:8,danh:2,duc:1},l:{th:-2}},
    {n:"Xin Thái hậu đỡ lời",o:od(BAL.ag.cx.thHelp.o+S.th/BAL.ag.cx.thHelp.div),lock:S.th<BAL.ag.cx.thHelp.min,t:`cần Thái hậu ${BAL.ag.cx.thHelp.min}`,w:{...BAL.ag.cx.thHelp.w},x:"Hoàng hậu nể mặt",l:{...BAL.ag.cx.thHelp.l}},
    P3C.tell(S,t)]}
- if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Chia sẻ bí mật"].includes(a.n)).concat([
+ if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Hậu lễ tạ tội","Nhờ người đứng giữa","Chia sẻ bí mật"].includes(a.n)).concat([
    {n:"Thỉnh an",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_19),w:{hh:4,danh:2,duc:1},l:{hh:-3},go:()=>{v.ghen=cl(v.ghen-5,0,100)}},
    {n:"Xin Hoàng hậu che chở",lock:S.hh<BAL.ag.cx.hhShield.min,t:`cần Hoàng hậu ${BAL.ag.cx.hhShield.min}`,o:od(BAL.ag.cx.hhShield.o+S.hh/BAL.ag.cx.hhShield.div),w:{...BAL.ag.cx.hhShield.w},x:`${BAL.ag.cx.hhShield.sh} tháng phi tần khó hại ngươi`,l:{...BAL.ag.cx.hhShield.l},go:()=>S.shield=BAL.ag.cx.hhShield.sh},
    {n:"Khiêu khích",o:100,w:{danh:2,hh:-15},x:`Hoàng hậu ghen +15, oán ngươi ${balSg(BAL.eff.j2.go)}`,go:()=>{ghenUp(v,15,"bị ngươi khiêu khích",S);oanAdd(v,S,BAL.eff.j2.go)}}])}

@@ -50,8 +50,24 @@ const OUT=process.argv[2]||'pace-all.mp4';const DEV=process.env.DEV||'fold';
  Object.assign(o,await nh());await cap(`«Nguy hiểm chung» → ${o.n}: ${o.w} (oán ${o.o}) với ngươi — không ai gây thêm chuyện`);await sleep(5500);
  await g.evaluate(()=>{for(let i=0;i<BAL.oanCool.season;i++)oanCool(1,true)});
  const o2=await nh();await cap(`Tua nhanh ${await g.evaluate(()=>BAL.oanCool.season)} tuần yên ổn (luật nguội mỗi tuần, BAL.oanCool): ${o.w} ${o.o} → ${o2.w} ${o2.o} — một mùa yên xuống một bậc oán`);await sleep(6500);
+ /* (3) MAIN 155 add-on: a DEEP grudge (oán ≥ her «nguoi» level): her talk card shows Tạ lỗi / Nhún nhường locked with the reason (nothing to pay),
+    and the two costly roads «Hậu lễ tạ tội» / «Nhờ người đứng giữa» (jmend); tap «Hậu lễ tạ tội» → the result line */
+ const m3=await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;S.bac=Math.max(S.bac,300);/* test setup: a fresh buổi (khắc) for the talk */used=0;S.suc=Math.max(S.suc,80);popIdx=null;popMsg="";tab='act';render();try{renderStage()}catch(e){}
+  /* the consort who is really in her room now (the game's own visitor), known to her (test setup: dò la), holding Oán hận 85 toward her */
+  let ix=curPeople().findIndex(p=>p&&p.kind==='rival'&&p.ref);let fresh=0;/* no consort in her room this day: a fresh start (the game's own start()) until one is (test setup, caption says so) */for(let r=0;r<40&&ix<0;r++){window.__nlInner=1;start();window.__nlInner=0;fresh=1;Q.length=0;document.getElementById('modal').hidden=true;used=0;S.bac=Math.max(S.bac,300);S.place='home';popIdx=null;tab='act';render();try{renderStage()}catch(e){}ix=curPeople().findIndex(p=>p&&p.kind==='rival'&&p.ref)}if(ix<0)return{none:1};const v=curPeople()[ix].ref;v.oan=85;v.ocq={};v.occ={};window.__ov3=v.id;
+  S.dKnown=S.dKnown||{};S.dKnown[v.id]=1;/* test setup: they have met (the game's own k61Meet, as after «Chào hỏi») */try{k61Meet(v,'greet',3)}catch(e){}render();try{renderStage()}catch(e){}
+  const t=document.querySelector(`#tokens [data-p="${ix}"]`);if(t)t.click();
+  const rows=topicOpts(v).filter(a=>/Tạ lỗi|Nhún nhường|Hậu lễ|đứng giữa/.test(a.n)).map(a=>a.n+(a.lock?' [khóa: '+(a.t||'')+']':' · '+(a.x||'')));return {n:v.name,ix,fresh,rows,bac:S.bac,oan:v.oan}});
+ await sleep(1500);await g.evaluate(()=>{const e=[...document.querySelectorAll('.pcpop *')].filter(e=>e.children.length<3&&/Tạ lỗi/.test(e.textContent||''))[0];if(e)e.scrollIntoView({block:'start'})});
+ await sleep(800);await cap(`${m3.fresh?'(đời khác, có phi tần trong phòng) ':''}Oán sâu (${m3.n}, oán ${m3.oan}): «Tạ lỗi», «Nhún nhường» bị khóa, không mất gì — thêm hai đường tốn kém: «Hậu lễ tạ tội», «Nhờ người đứng giữa»`);await sleep(6500);
+ await g.evaluate(()=>{const t=[...document.querySelectorAll('button[data-pct="Lễ nghi"]')].find(b=>b.getClientRects().length);if(t)t.click()});await sleep(900);
+ await g.evaluate(()=>{const e=[...document.querySelectorAll('button.opt')].find(b=>/Hậu lễ tạ tội/.test(b.textContent)&&b.getClientRects().length);if(e)e.scrollIntoView({block:'center'})});await cap('Thẻ «Lễ nghi» → «Hậu lễ tạ tội»: tốn Bạc, Danh; hỏng thì lễ bị trả về');await sleep(3500);
+ const r3=await g.evaluate(()=>{const v=rivals.find(x=>x.id===window.__ov3);{const ix=curPeople().findIndex(p=>p&&p.ref===v);if(popIdx==null&&ix>=0){popIdx=ix;renderStage()}}if(popIdx==null)return{clicked:false,none:1,msg:'',paid:0,oan:v.oan};const i=talkOpts(curPeople()[popIdx]).findIndex(a=>a.n==='Hậu lễ tạ tội');
+  const b=[...document.querySelectorAll('button.opt')].find(b=>/Hậu lễ tạ tội/.test(b.textContent)&&b.getClientRects().length);const b0=S.bac,o0=v.oan;if(b)b.click();else if(i>=0)talk(i);
+  return {clicked:!!b,i,o0,oan:v.oan,w:oanW(v.oan),paid:b0-S.bac,msg:(typeof popMsg==='string'?popMsg:'').replace(/<[^>]+>/g,'')}});
+ await sleep(900);await cap(`Bấm «Hậu lễ tạ tội»: ${r3.msg.slice(0,90)||'—'}`);await sleep(5500);
  const pan=await g.evaluate(()=>({vir:S.vir[window.__pk],virp:S.virp[window.__pk],log:(S.logs||S.log||[]).slice?((S.logs||S.log||[]).slice(-3)):null,q:Q.map(m=>m.t),tds:typeof TDS!=='undefined'?JSON.stringify(TDS.q||null).slice(0,80):''}));
  await clr();
  const vpath=await p.video().path();await ctx.close();await b.close();srv.close();
  const ss=Math.max(0,tStart-0.5).toFixed(2);cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',ss,'-i',vpath,'-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart','-crf','28',OUT]);
- console.log(JSON.stringify({dev:DEV,out:OUT,tries,c0,steps,qk,res,c1,o,o2,pan,errs:errs.slice(0,3)}))})().catch(e=>{console.error(e);process.exit(1)});
+ console.log(JSON.stringify({dev:DEV,out:OUT,m3,r3,tries,c0,steps,qk,res,c1,o,o2,pan,errs:errs.slice(0,3)}))})().catch(e=>{console.error(e);process.exit(1)});

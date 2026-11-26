@@ -62,6 +62,27 @@ const PAGE=process.argv[2]||'index.html';
   /* Tạ lỗi / Nhún nhường refused at high oán: the cool-down brings it back under the forgiving line */
   const t=L[2];t.oan=70;t.ocq={};t.occ={};const nf=netTh(t,'nguoi');let wks=0;while(t.oan>=nf&&wks<80){oanCool(1,true);wks++}
   ok('B12 a feud at 70 left alone comes under her forgiving line (Tạ lỗi / Nhún nhường accepted again) in a few seasons',t.oan<nf||t.oan<=BAL.oanLv[1],[nf,wks,t.oan]);
+  /* ---- PART C (MAIN 155 add-on): deep grudge → refused words cost nothing; two costly roads; same for every NPC ---- */
+  {const v=L[3]||L[0];v.oan=85;v.ocq={};v.occ={};const nf=netTh(v,'nguoi');S.bac=Math.max(S.bac,500);
+   const A=topicOpts(v),ta=A.find(a=>a.n==='Tạ lỗi'),nn=A.find(a=>a.n==='Nhún nhường'),hg=A.find(a=>a.n==='Hậu lễ tạ tội'),gb=A.find(a=>a.n==='Nhờ người đứng giữa');
+   ok('C1 oán ≥ her «nguoi» level: Tạ lỗi / Nhún nhường shown locked with the reason, nothing to pay (canPay false)',v.oan>=nf&&ta&&nn&&ta.lock&&nn.lock&&!canPay(ta)&&!canPay(nn)&&/chưa nguôi/.test(ta.t)&&!Object.keys(ta.c||{}).length,[nf,ta&&ta.t]);
+   ok('C2 «Hậu lễ tạ tội» + «Nhờ người đứng giữa» offered; the gift = BAL.oanMend.gift.bac + r × her rank (harder as she climbs)',!!hg&&!!gb&&mendBac(S)===BAL.oanMend.gift.bac+BAL.oanMend.gift.r*S.rank&&hg.c.bac===-mendBac(S)&&hg.c.danh===BAL.oanMend.gift.danh,[hg&&hg.c,hg&&hg.x,gb&&(gb.x||gb.t)]);
+   const b0=S.bac,d0=S.danh,o0=v.oan;mendDo(S,v,'gift',false);ok('C3 refused gift: nothing paid, oán unchanged',S.bac===b0&&S.danh===d0&&v.oan===o0,[S.bac-b0,v.oan]);
+   apply(hg.c);mendDo(S,v,'gift',false,true);ok('C3b her talk card paid the Tốn row first (talk()): a refusal hands bạc + Danh back',S.bac===b0&&S.danh===d0&&v.oan===o0,[S.bac-b0,S.danh-d0]);
+   const w=ocBandW(v.oan);mendDo(S,v,'gift',true);ok('C4 accepted gift: Bạc −mendBac, Danh +gift.danh, oán − one band width',S.bac===b0-mendBac(S)&&v.oan===o0-w,[b0-S.bac,o0-v.oan,w]);
+   /* go-between */
+   const m=L.find(x=>x!==v&&!x.queen&&x!==L[2])||L[1];v.oan=85;const th=netTh(v,'than'),qu=netTh(m,'quen');affAdd(v,m,th+20-aff(v,m));affAdd(m,S,qu+20-aff(m,S));
+   const mm=mendGoOf(v,S),am=aff(m,S),o1=v.oan;mendDo(S,v,'go',true);
+   ok('C5 go-between (liked by her ≥ than, likes ngươi ≥ quen): oán − one band, the go-between quý ngươi −go.fav',mm===m&&v.oan===o1-ocBandW(o1)&&aff(m,S)===am-BAL.oanMend.go.fav,[mm&&mm.name,o1-v.oan,am-aff(m,S)]);
+   /* two-way: an NPC mends HER deep grudge, and another NPC's, by the same function */
+   const x=L[4]||L[1];S.ro=S.ro||{};S.ro[x.id]=85;x.bac=500;const hb=x.bac;const mine=mendDeep(S,x);mendDo(x,S,'gift',true);
+   ok('C6 two-way: an NPC sends HER the hậu lễ (her own oán ≥ her nguoi) → her oán − one band, the NPC pays its own gift',mine&&S.ro[x.id]<85&&x.bac===hb-mendBac(x),[S.ro[x.id],hb-x.bac]);
+   const y=L[5]||L[2];x.ro=x.ro||{};x.ro[y.id]=85;y.bac=500;mendDo(y,x,'gift',true);ok('C7 NPC ↔ NPC: same road',x.ro[y.id]<85,x.ro[y.id]);
+   /* an NPC's refused words are not chosen / not paid */
+   v.oan=85;const dv=S.danh;const tw=TW.apol.req(x,v);x.ro[v.id]=0;v.ro=v.ro||{};v.ro[x.id]=85;const xd=x.danh;AGRUN['cx:humble'](x,v);
+   ok('C8 NPC: Tạ lỗi (TW apol) not offered and Nhún nhường not paid while refused',TW.apol.req(x,v)===false&&x.danh===xd,[TW.apol.req(x,v),x.danh-xd]);
+   let ao=[];try{ao=AGREG.consort.mend(x,(typeof agNeeds==='function'?agNeeds(x):{}),'safe')||[]}catch(e){ao=['err '+e.message]}
+   ok('C9 NPC agent offers the costly roads toward the one who holds the deep grudge',ao.some(o=>o&&/cx:mend/.test(o.k)&&mendDeep(o.t,x)),ao.map(o=>o&&o.k||o))}
   return {out,ka,kc,kd}});
  let fail=0;for(const [n,c,x] of R.out){if(!c)fail++;console.log((c?'ok   ':'FAIL ')+n+(x?'  '+x:''))}
  if(errs.length){fail++;console.log('FAIL page errors',errs.slice(0,3))}
