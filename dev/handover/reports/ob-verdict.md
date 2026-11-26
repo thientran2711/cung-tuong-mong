@@ -84,12 +84,43 @@ Passes: 39/39 on branch + LIVE merge, laws 4/6/1/VANPHONG OK, perf OK. FIX ALL (
 6. Test passes while its scan prints faults 1–2 → add seal asserts for rolled/decided deeds.
 Then r2 + new stills (incl. a Vu oan via Bày mưu) → «LOOK READY <sha>» to MAIN 156; the same reviewer re-checks.
 
-## r2 status + HANDOVER (OB-VERDICT rolled over at the context limit — successor continues here)
-DONE in r2 (uncommitted → committed with this section): #4 kit page (kitPgSeals adds BỎ DỞ; §7 result-card sample gets «Người ấy» + «Ai làm» rows), #5 kaAimsOf = seq + used only (no Date.now).
-TODO for the successor (worktree recipe: sparse worktree of review/ob-verdict, build `bash dev/site/build_site.sh`, test `node dev/test/ob-verdict.test.js index.html <shots> --json out.json`):
-- #1: reproduce with the reviewer's path (doAct k → «Bày mưu» card → chooseM «Ra tay ngay…» → confirm «Làm như thường»). Look at the jverdict doAct/talk wrappers' `x.used=1` and at kaAimUse (aims with `outer:1` are closed by the wrapper; inner runAct aims are closed by the card). Likely fix: never close an aim in the wrapper while ANY dialog/minigame from that act is pending (Q non-empty OR kg82 open OR deferred jaudit card `__aaRS`); close it only after the card that shows it (kaAimUse) — or tie aims to the act frame id instead of `used`. Keep the servant-sent «chưa rõ — người được sai về sẽ báo».
-- #2: ACT deeds deciding without aRoll: find each ACT[k].f decision (wdAccuse / wdFrame in jdress? grep `function wdAccuse`, `function wdFrame`) and set the frame verdict there through a tiny hook (e.g. wrap those functions in jverdict and read their return/outcome), not by editing J2's logic.
-- #3: add hooks for j55 tdProbe/tdLeak (NPC→her: kaAim(S,{by:a,…})), j7 event options aimed at a consort (chooseM option carrying a target), j67 e67pun, jemoact eaHitMe (Emperor/Thái hậu deeds on her → «Ai làm»), j42 servant-mode «Tố cáo <chủ>» (target = the accused, not the listener).
-- #6: test: assert a seal THÀNH/BẠI on every scanned deed whose log shows a roll outcome (bị lộ / bị bắt / thành …), plus a Vu oan via Bày mưu real-tap still; re-upload stills to img/_review/ob-verdict/.
-- Then LOOK READY <sha> to MAIN CHÍNH 156 session_01V1ZZH4YYLnxnhwuGEx25zf; reviewer RV-OB-VERDICT session_01V1ZZH4KVXLc23oaAiikKLg re-checks.
-Standing orders: target of her own act always real name + title (data-k61skip); seal word stays BẠI; Kèm flood = NEWS-SIEVE-2 (do not touch); J2 owns Bày mưu act logic (hooks only from jverdict).
+## r2 — DONE (OB-VERDICT-2, successor of OB-VERDICT; START_CTX ≈ 3 % of the window, ends well under the ceiling)
+PRIORITY #1 CHECK ('ob-verdict'): OD 26/11 ~08:30Z (owner bug «nói xấu» verdict) | ledger 0 | claims OB-VERDICT | main 0 (LIVE 3af7896e) | review/* review/ob-verdict 5a282542 | archive 0.
+Files: `dev/build/jverdict.js` (hooks only), `dev/build/j63.js` (kaAimsOf: open aims; «Ai làm» pub doer), `dev/kit/KIT.md` §7.3, `dev/test/ob-verdict.test.js`, rebuilt index.html / sw.js. No act logic, no BAL number (law 4); J2 act files untouched (ACT-MERGE J2 = hooks only).
+- RV #1 (the owner's symptom): an OUTER act's aim is OPEN (`x.open`) and lives until the card that shows it; a deed re-entered from its own dialog («Bày mưu» → «Ra tay ngay», road card «Làm như thường», picker) runs on the SAME frame/aim (pending until its dialog is answered; its span moves to that card); «Thôi» on its dialog closes it; a finished act with no card is closed when the board is idle. Servant-sent deed: `ptHarmSend` hook marks the frame `sent` → «chưa rõ — người được sai về sẽ báo» (also no longer shown for a deed that simply did not run).
+- RV #2 (decisions without aRoll, whole family): accuse family at the ACT level (vp / xx incl. jshelf's by-value runners: «…: thành» / «bỏ qua» / «tố bừa»), `wdFrameResolve` (Giá họa: found guilty = THÀNH), `frameExpose` (Vu oan: the framed one clears herself = BẠI even after the plant roll), `rcvPick` (Kết giao … receiver's yes/no), `rcvMaidBribe` / `stf2Bribe` (bribe taken / refused), j29 servant refusal «việc không thành» = BỎ DỞ.
+- RV #3 (law 11 runners): j55 `tdProbe` / `tdLeak` (NPC→her «Ai làm», verdict = the deed's own outcome), j7 / j67 / any card about a consort (`chooseM` with `who` = a consort: «Người ấy» + the option's roll), j67 `e67pun`, jemoact `eaHitMe` («Ai làm: Hoàng thượng / Thái hậu: nổi giận với ngươi …», pub doer), j42 servant mode: an option naming her mistress is aimed at the mistress («Tố cáo <chủ> trước Hoàng hậu» → «Người ấy: Thường tại <chủ>: bị phế, ra khỏi cung», seal from the option's own «thành. / hỏng.» roll).
+- RV #6 test: Vu oan via Bày mưu by REAL taps on Fold 755x1000 + iPad 1180x820 (thành → «Người ấy: Sủng −10 (67 → 57), Danh −16 (45 → 29), bị giáng xuống Phi»; bị lộ → BẠI «không hề hấn gì»), Giá họa via the road card, servant-sent Giá họa, «Đổ thêm dầu vào lửa» (Sủng a → b), tdLeak «Ai làm … · thành», Emperor «Ai làm», servant «Tố cáo <chủ>», and ONE assert: every scanned deed whose own outcome line rolled / decided has THÀNH / BẠI / BỎ DỞ, never KẾT QUẢ.
+
+### Scan (law 11) r2 — BEFORE = r1 4a1fe665 (reviewer repro + r1 table) → AFTER = this branch (seeded scan, her own dialogs answered «Ra tay ngay» / «Làm như thường»)
+| act (via) | BEFORE r1 | AFTER r2 |
+|---|---|---|
+| Vu oan (Bày mưu «Ra tay ngay») | KẾT QUẢ (reviewer: «bị lộ», cấm túc, Danh 14→0) | BẠI · Người ấy «không hề hấn gì, thiện cảm −30, oán +13» / THÀNH · «Sủng −10 (67 → 57), Danh −16, bị giáng» (taps) |
+| Giá họa trộm đồ (road «Làm như thường») | KẾT QUẢ («bị bắt, khai ra ngươi») | BẠI · «không hề hấn gì, thiện cảm −20, oán +8» |
+| Giá họa, servant-sent | «chưa rõ — người được sai về sẽ báo» lost | kept (test) |
+| Ly gián / Hạ độc dần / Bỏ phấn lạ / Hủy dung / Tung tin đồn / Rút thẻ bài / Phá việc học (dialogs) | KẾT QUẢ | THÀNH / BẠI + «Người ấy» |
+| Hặc ăn mặc sai phẩm / Tố xa xỉ (false cause) | KẾT QUẢ | BẠI |
+| Kết giao (receiver answers) | KẾT QUẢ | THÀNH / BẠI |
+| Mua chuộc cung nữ / Sai cung nữ thân tín lấy lòng / lấy đồ | KẾT QUẢ | BẠI / THÀNH (bribe taken / refused) |
+| Ép nộp của, Ngáng chân, Sai người lấy trộm đồ | THÀNH/BẠI | same |
+| Tặng quà, Hắt trà, Quạt mực (no roll) | KẾT QUẢ | KẾT QUẢ (law: seal only from a roll / decision) |
+| tdLeak by an NPC on her | Mất only | «Ai làm: Quý phi …: dâng chứng cứ cha ngươi tham ô · thành» |
+| Emperor's anger on her (eaHitMe) | Mất only | «Ai làm: Hoàng thượng: nổi giận với ngươi» |
+| «Đổ thêm dầu vào lửa» (j7 Sao chổi) | no «Người ấy» | «Người ấy: …: Sủng −15 (a → b)» |
+| servant «Tố cáo <chủ> trước Hoàng hậu» | «Người ấy» = Hoàng hậu (listener) | «Người ấy» = the mistress; THÀNH |
+
+### Tests r2
+- `node dev/test/ob-verdict.test.js index.html <shots>` → **ALL 67 OK** on this branch AND on a trial merge with LIVE origin/main 3af7896e (built files taken from main, rebuilt): night thành / hỏng / bỏ dở ×2 devices, Vu oan via Bày mưu thành / bị lộ ×2 devices by real taps, scan, r2 checks, two-way, old save loads + plays a buổi, 0 page errors.
+- Bot (`dev/test/bot-same.js`, 4 steps × 2 builds): 0 page errors.
+- Stills on the CDN (img/_review/ob-verdict/): `after-{fold,ipad}-vuoan-{ok,lo}.png` (new: Vu oan via Bày mưu thành + bị lộ), `after-{fold,ipad}-night-{ok,fail,soft}.png` (refreshed); r1 `before-…` + videos stay.
+Standing orders kept: her target always named (data-k61skip); seal word BẠI; «Kèm» rows = NEWS-SIEVE-2 (untouched); J2 owns Bày mưu act logic (hooks only).
+Open: the card of the intermediate «Bày mưu: Ra tay ngay» choice (before the road card) stays a plain KẾT QUẢ choice card (pre-existing, no deed yet); slap-game deeds (Tát, Hắt nước) show their card after the mini-game (headless scan: no card).
+
+## r3 (MAIN 157 LOOK on 6503999a)
+- (3) the THÀNH / BẠI stamp (kit part kitResultFx, j93 `.kmseal`) hung ABOVE the card (bottom:100%) and landed on the option card behind it (iPad «Nghỉ ngơi một lát»). Now it sits INSIDE the result card's top-right corner (top 8px, 58px); the title row and the sentence reserve that corner (padding-right 66px, min-height so no row runs under it) — never on words. One kit place → every result card. Test assert: the stamp's box lies inside #rtoast (Fold + iPad, thành + bị lộ).
+- (2) vuoan-lo header «Phi Điền Thanh Hoan nay bị giáng xuống Phi» = LEFTOVER of the thành run on the same page (that run demoted her; the notice stayed). The test now boots a fresh life per outcome; the bị lộ still shows no such notice, «Người ấy: Quý phi Điền Thanh Hoan: không hề hấn gì» and an assert that her rank did not change.
+- (1) night card «Kèm» wall: the Kèm block belongs to ONE-SIEVE (MAIN 156 split); asked ONE-SIEVE session_01V1ZZH2fHrCdnudewe1PcfC whether review/one-sieve covers the night card; kit keeper KK41 for a new many-people row if needed.
+- Tests: ALL 73 OK (Fold 755x1000 + iPad 1180x820). Stills re-uploaded (img/_review/ob-verdict/after-{fold,ipad}-vuoan-{ok,lo}.png).
+- r3 (MAIN 157 after RV BIG PASS 6503999a): (a1) «Kèm» kit row kitKemRow (j63): ONE block line per person in every card (rtoast, night card jne/kitRows: `.kr-kem .kitem.kkemi{display:block}`); people she cannot name with the SAME feeling and number = one line «7 vị khác: ghen +8» (a single one keeps «một vị <tước>»); named first; 8 lines max then «… và N người khác». Night card before: «Hoàng hậu …:một vị Quý phi: ghen +8 ghen +8 …» (glued wall) → after: «Hoàng hậu Điền Chỉ Lan: ghen +8 / Tần Dư Tử Yên: ghen +8 / 7 vị khác: ghen +8». NOTE for MAIN: the owner's 24/11 ~21:57Z line says «no group summary»; the «N vị khác» line keeps the exact signed number and groups ONLY unnamed people with the same number (MAIN 157's order) — owner to confirm if she objects.
+  (b) RV N1: idleShut also closes a pending act whose dialog left the board without its deed (scheduled when the act starts waiting). (c) RV N4: her failed deed gets ONE plain sentence «Ngươi vu oan Quý phi Điền Thanh Hoan: bị lộ.» (caught / exposed; else «…: không thành.»), name with title in data-k61skip. N2 (explicit outcome flag): not done — every decision point is now a named hook; a flag would need J2's act code (ACT-MERGE J2 territory).
+  Tests: ALL 81 OK (adds «bị lộ» sentence + night «Kèm» one-per-line asserts, Fold + iPad).

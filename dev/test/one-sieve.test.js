@@ -5,7 +5,7 @@
    Counted per card: rows (every .kitem in .kb, the Kèm summary counts 1), person rows of bystanders (not her target, not her household,
    not Thái hậu / Hoàng hậu), Kèm lines. Checks (fix only; --report prints the table and never fails, for LIVE):
    1 a card shows at most BAL.news.card.rowMax rows of other people (bystanders + Kèm together)
-   2 the Kèm block is ONE summary line when more than BAL.news.card.kemMax people moved, with the «Xem đầy đủ trong Sổ ghi» link
+   2 the Kèm block lists at most BAL.news.card.kemMax people (one per line, the sieve's), the rest counted «… và N người khác», with the «Xem đầy đủ trong Sổ ghi» link
    3 nothing is lost: every folded person change of a card is in the Sổ ghi (S.hrec record of that card names each folded person)
    4 «Vì sao» reasons never cite an NPC-only clause (nsNpcLine) of the span
    5 the Sổ ghi tab has the kind tabs + the search box (kit parts) and a search narrows the rows; old save (no S.hrec / S.osv) loads
@@ -57,7 +57,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  if(!REP){const B=await p.evaluate(()=>BAL.news.card);
   ok(out.n>5,'cards measured',out.n);
   ok(out.byMax<=B.rowMax,'1 bystander person rows per card ≤ BAL.news.card.rowMax '+B.rowMax,{max:out.byMax,over:out.over});
-  ok(out.kemMax<=1&&out.noLink===0,'2 Kèm = ONE summary line + «Xem đầy đủ trong Sổ ghi»',{kemMax:out.kemMax,noLink:out.noLink});
+  ok(out.kemMax<=B.kemMax+1&&out.noLink===0,'2 Kèm ≤ BAL.news.card.kemMax people (one per line) + «… và N người khác» + «Xem đầy đủ trong Sổ ghi»',{kemMax:out.kemMax,noLink:out.noLink});
   ok(out.nLost===0,'3 every folded person change is in the Sổ ghi record',out.lost);
   ok(out.npcWhy.length===0,'4 0 «Vì sao» citing other people\'s business',out.npcWhy);
   ok(out.tabs&&out.tabs.sub&&out.tabs.search&&out.tabs.rows1!=null&&out.tabs.rows1<out.tabs.rows0,'5 Sổ ghi kind tabs + search narrows',out.tabs);

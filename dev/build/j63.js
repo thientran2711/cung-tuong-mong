@@ -285,7 +285,7 @@ const KA_AIMK=[["sung","Sủng"],["danh","Danh"],["suc","Sức"],["loyal","thi�
 function kaAim(v,o){try{if(!S||!v)return null;const b0={};for(const [k] of KA_AIMK)if(typeof v[k]==="number")b0[k]=v[k];b0.rank=v.rank;b0.confined=v.confined||0;b0.out=!!v.out;b0.alive=v.alive!==false;
   const x=Object.assign({seq:S.logSeq||0,t:Date.now(),v,b0},o||{});KA_AIM.push(x);if(KA_AIM.length>40)KA_AIM.splice(0,KA_AIM.length-40);return x}catch(e){return null}}
 function kaAimOk(x){let o=null;try{o=typeof x.ok==="function"?x.ok():x.ok}catch(e){}return o===true||o===1?true:o===false||o===0?false:o==="soft"?"soft":null}
-function kaAimsOf(b){if(!b)return[];/* RV r1 #5: the span is the log seq + «used» only (no wall clock: a card held behind a dialog / minigame may come minutes later) */return KA_AIM.filter(x=>!x.used&&x.seq>=(b.seq||0))}
+function kaAimsOf(b){if(!b)return[];/* RV r1 #5: the span is the log seq + «used» only (no wall clock: a card held behind a dialog / minigame may come minutes later); an OPEN act's aim (x.open: doAct / talk / a dialog option, closed only by its card, its cancel or the idle board — jverdict) belongs to every card until then, even one whose snapshot was taken inside that act */return KA_AIM.filter(x=>!x.used&&(x.open||x.seq>=(b.seq||0)))}
 /* the verdict of HER act carried by this span (the last own aim with a roll) + its sentence; kaAimUse marks the aims shown (once) */
 function kaAimVerdict(b){const AIM=kaAimsOf(b);let ok=null,sen="",n="";for(const x of AIM){if(x.by)continue;const o=kaAimOk(x);if(o!==null){ok=o;n=x.n||"";sen=x.sen?(typeof x.sen==="function"?x.sen(o):x.sen):""}}return {AIM,ok,sen,n}}
 function kaAimUse(L){for(const x of L||[])if(!x.outer)x.used=1}/* an outer act's aim (doAct, talk …) is closed by its wrapper when the act ends: two cards of one act both show it */
@@ -317,7 +317,7 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaNT(d,S.maid.loyal)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
  /* ONE SIEVE (jnsieve nsCard, owner OD 26/11 ~06:50Z (B)): other people's rows that do not touch her fold into ONE «Trong cung: …» line + the Sổ ghi */
- const SV=typeof nsCard==="function"?nsCard(per,K,WC,title,[...TG.keys()]):null;if(SV){per.length=0;per.push(...SV.keep);K.sum=SV.sum;K.fold=SV.fold;K.kemOne=SV.kemOne}
+ const SV=typeof nsCard==="function"?nsCard(per,K,WC,title,[...TG.keys()]):null;if(SV){per.length=0;per.push(...SV.keep);K.length=0;K.push(...SV.kem);K.more=SV.more;K.fold=SV.fold}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;K.tgt=[];K.by=[];
  for(const [v,{x,rel,ran}] of TG){const cons=typeof rivals!=="undefined"&&rivals.includes(v);const named=true/* MAIN 155 (OB-VERDICT LOOK): she CHOSE this person, so she knows the name — the target of her own act always shows its real name (the «???» mask stays for doers she cannot know, law 6) */;const who=`<span data-k61skip>${kaEsc(!cons?(v.name||""):kaWho(v))}</span>`;
@@ -325,20 +325,24 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   const P=named?((okx===false||okx==="soft")&&!P0.length&&rel.length?['<span class="ef n">không hề hấn gì</span>']:P0).concat(rel):[];
   const txt=P.length?P.join(", "):!ran&&(typeof x.later==="function"?x.later():x.later)?`<span class="ef n">chưa rõ — ${typeof x.later==="function"?x.later():x.later}</span>`:!named||okx===true?'<span class="ef n">chưa rõ — tai mắt sẽ báo</span>'/* done, but nothing she can see yet (planted proof, a sent hand) */:okx===false||okx==="soft"?'<span class="ef n">không hề hấn gì</span>':"";/* no number moved on a done deed: the sentence says what happened (a wet robe, a gift) — no empty row */
   if(txt)K.tgt.push(`<span class="ef t">${who}:</span> ${txt}`)}
- {const C=WC.join(" ");const seen=new Set();for(const x of AIM){if(!x.by||x.v!==S||seen.has(x.by)||!x.by.name||!kaNamed(x.by)||!C.includes(x.by.name))continue;seen.add(x.by);const o=kaAimOk(x);
-  K.by.push(`<span class="ef t">${kaWho(x.by)}:</span> ${kaPlain(x.n||"")}${o===true?' · <span class="ef r">thành</span>':o===false?' · <span class="ef g">không thành</span>':o==="soft"?' · <span class="ef n">bỏ dở</span>':""}`);if(K.by.length>=4)break}}
+ {const C=WC.join(" ");const seen=new Set();for(const x of AIM){const bn=x.pub||x.by&&x.by.name;/* pub: the Emperor / Thái hậu, known to all by title */if(!x.by||x.v!==S||seen.has(x.by)||!bn||!(x.pub||kaNamed(x.by))||!C.includes(bn))continue;seen.add(x.by);const o=kaAimOk(x);
+  K.by.push(`<span class="ef t">${x.pub||kaWho(x.by)}:</span> ${kaPlain(x.n||"")}${o===true?' · <span class="ef r">thành</span>':o===false?' · <span class="ef g">không thành</span>':o==="soft"?' · <span class="ef n">bỏ dở</span>':""}`);if(K.by.length>=4)break}}
  return [G,B,K]}
 /* KIT PART kitKemRow(K) (KIT 7 + 28.6, kit sample page): the KÈM line of a result — other people's feelings, one summary per kind and
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
 function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
-function kitKemRow(K){if(K&&K.sum!=null&&!K.kemOne)return K.sum?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${K.sum}</span></span>`:"";/* ONE SIEVE: one summary line, names behind the tap */
- if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
- const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
-  return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaNT(d,x.t)}</span></span>`});
- if(K.filter(x=>Math.round(x.d)).length>8)L.push(`<span class="kitem"><span class="ef n">… và ${K.filter(x=>Math.round(x.d)).length-8} người khác</span></span>`);
- return L.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${L.join("")}</span></span>`:""}
+function kitKemRow(K){if(!K||!K.length&&!K.more)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12»; no group summary, no cause copy.
+   MAIN 157 26/11 (night card wall «Hoàng hậu …:một vị Quý phi: ghen +8 ghen +8 …»): each person is ONE block line (.kkemi, every card: rtoast, night card, kitRows);
+   the people she cannot name with the SAME feeling and number are one line «4 vị khác: ghen +8» (one alone keeps «một vị <tước>: ghen +8») */
+ const R=K.filter(x=>Math.round(x.d));const L=[],U=new Map();
+ const line=(nm,k,d,t)=>`<span class="kitem kkemi"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${k} ${t==null?kaN(d):kaNT(d,t)}</span></span>`;/* KIT 7.1: a named person shows the new total */
+ for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){L.push([0,line(kaWho(x.v),x.k,d,x.t)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[]});U.get(key).v.push(x.v)}
+ for(const {k,d,v} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^M/,"m"):`${v.length} vị khác`;L.push([1,line(nm,k,d)])}
+ const more=Math.max(0,L.length-8)+(K.more||0);/* ONE SIEVE (jnsieve nsCard): the people whose change does not touch her are only counted here; every name and number is in the Sổ ghi */
+ const out=L.slice(0,8).map(x=>x[1]);if(more)out.push(`<span class="kitem kkemi"><span class="ef n">${out.length?`… và ${more} người khác`:`${more} người khác trong cung đổi lòng chút ít`}</span></span>`);
+ return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${out.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
    the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
@@ -374,12 +378,12 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  const ok=okHint===true?true:okHint===false?false:av;const SL=kitResultSeal(ok),seal=SL.t;void failTxt;void netBad;
  /* ODDS CAP: a soft failure changes nothing but still shows its one BẠI line (j63 oddsSoft) */
  if(okHint===false&&window.__oddsSoft&&!sen)sen=window.__oddsSoft;window.__oddsSoft="";
- if(!G.length&&!B.length&&!sen&&!(K&&K.length)&&!(K&&K.sum)&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
+ if(!G.length&&!B.length&&!sen&&!(K&&K.length)&&!(K&&K.more)&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
  const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!G.length&&!B.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
- window.kaLastResult={title,ok,seal,sentence:sen,fold:K.fold||null,kem:K.sum?kaPlain(K.sum):"",rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
+ window.kaLastResult={title,ok,seal,sentence:sen,fold:K.fold||null,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
  t.className="rtoast karesult "+SL.cls;
  t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ trong Sổ ghi</span></div>`;
@@ -397,6 +401,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 .rtoast.karesult .kwy,.kb .kwy{color:var(--dim);font-weight:400;font-size:.74rem}
 
 .kb .kr-kem .krl{color:var(--dim)}
+.kb .kr-kem .kitem.kkemi{display:block;text-align:left;width:auto;min-width:0;justify-content:flex-start}/* MAIN 157: one person per line in every card that lists people (rtoast, night card) */
 .kb .kkem{display:block;cursor:pointer;color:var(--ink)}
 .kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}
 .kb .kkem .kkeml{display:none;font-size:.76rem;color:var(--dim);line-height:1.35;margin-top:2px}

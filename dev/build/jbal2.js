@@ -2194,8 +2194,8 @@ BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,recMax:300,bigBand:2,keep
  mock:["provoke","humiliate","humil","tease","cham","apTaunt"],
  /* ONE SIEVE (owner OD 26/11 ~06:50Z (B), jnsieve nsSieve): on a result card a person row of someone else (not her act's target, not her household,
     not Thái hậu / Hoàng hậu) shows only when the span's own log names that person about HER, or the change is at least `big`; at most `rowMax`
-    such rows; every other person change is ONE summary line «Trong cung: …» (names behind the tap) and a full record in the Sổ ghi. */
- card:{big:5,rowMax:3,kemMax:1},
+    such rows; Kèm (ghen / oán of others) lists at most `kemMax` people who pass the same sieve, one per line; every other person change is only counted («… và N người khác») and fully recorded in the Sổ ghi. */
+ card:{big:5,rowMax:3,kemMax:4},
  /* Sổ ghi kinds (the kind tabs of the Sổ ghi, nsKind): her own lines, the harem record, big harm, rumours heard */
  logTabs:[["all","Tất cả"],["me","Việc của ta"],["hc","Chuyện hậu cung"],["big","Mưu hại"]]};
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */

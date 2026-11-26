@@ -219,29 +219,21 @@ function nsSieve(o){try{if(!o)return true;if(!on())return true;
 /* the result card (j63 kaResultRows calls it): per = [[who, goodParts, badParts, why, v, d, raw]] person rows, K = Kèm [{v,k,d,t}] (ghen / oán of others).
    Keeps the rows nsSieve passes (at most BAL.news.card.rowMax of other people, largest change first); every other change becomes ONE summary
    line «Trong cung: 5 người ghen thêm, 2 người bớt quý ta» (names behind the tap, kit .kkem) and ONE Sổ ghi record with every name and number. */
-const NS_SUMW={g:"quý ta hơn",b:"bớt quý ta","ghen+":"ghen thêm","ghen-":"bớt ghen","oán+":"thêm oán","oán-":"nguôi oán"};
 function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)return null;try{
  const keep=[],fold=[],rest=[];const isP=x=>x&&x[4]&&typeof x[4]==="object"&&x[4]!==S&&!nsHouse(x[4]);
  for(const x of per){if(!isP(x)){keep.push(x);continue}const ev=(x[1].concat(x[2])).some(t=>/chứng cứ/.test(t));
   if(nsSieve({v:x[4],d:x[5],why,tgt,ev}))rest.push(x);else fold.push(x)}
  rest.sort((a,b)=>Math.abs(b[5]||0)-Math.abs(a[5]||0));for(const x of rest.splice(B.rowMax))fold.push(x);keep.push(...rest);
- const Kk=(K||[]).filter(x=>Math.round(x.d));const kemOne=!fold.length&&Kk.length<=B.kemMax&&Kk.every(x=>nsSieve({v:x.v,d:x.d,why,tgt}));/* one Kèm person she should see and nothing else folded: her own kit row; else everything in the ONE summary */
- const items=[];/* [groupKey, raw name, words] */
- for(const x of fold){const nm=x[4].name||"";if(x[1].length)items.push(["g",x[4],x[1].join(", "),x[5]]);if(x[2].length)items.push(["b",x[4],x[2].join(", "),x[5]])}
- if(!kemOne)for(const x of Kk)items.push([x.k+(x.d>0?"+":"-"),x.v,`${x.k} ${typeof kaNT==="function"?kaNT(Math.round(x.d),x.t):kaN(Math.round(x.d))}`,x.d]);
- if(!items.length)return {keep,sum:"",fold:[],kemOne};
- const nmOf=v=>{try{return typeof kaNamed==="function"&&kaNamed(v)?kaWho(v):String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m")}catch(e){return v.name}};
- const G=new Map();for(const [g,v] of items){if(!G.has(g))G.set(g,new Set());G.get(g).add(v)}
- const order=["g","b","ghen+","oán+","ghen-","oán-"];const keepV=new Set(keep.map(x=>x[4]).filter(Boolean));/* a person already on her own row is not named again in the line */const big=(B.big||99),bigN=new Map();for(const it of items)if(Math.abs(it[3]||0)>=big){if(!bigN.has(it[0]))bigN.set(it[0],[]);bigN.get(it[0]).push(it)}
- const parts=order.filter(g=>G.has(g)).map(g=>{const L=(bigN.get(g)||[]).filter(it=>!keepV.has(it[1])).sort((x,y)=>Math.abs(y[3])-Math.abs(x[3])).slice(0,2);/* a big change names its person in the line itself */
-  return `${G.get(g).size} người ${NS_SUMW[g]}${L.length?` (${L.map(it=>`${nmOf(it[1])} ${kaN(Math.round(it[3]))}`).join(", ")})`:""}`});
- const byV=new Map();for(const [,v,w] of items){if(!byV.has(v))byV.set(v,[]);byV.get(v).push(w)}
- const names=[...byV].map(([v,W])=>`${nmOf(v)}: ${W.join(", ")}`);
- const sum=`<span class="kitem kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">Trong cung: ${parts.join(", ")}</span><span class="kkeml">${names.map(n=>`<span>${n}</span>`).join("<br>")}</span></span>`;
+ const Kk=(K||[]).filter(x=>Math.round(x.d));const kem=[],kf=[];
+ for(const x of Kk)(nsSieve({v:x.v,d:x.d,why,tgt})?kem:kf).push(x);kem.sort((a,b)=>Math.abs(b.d)-Math.abs(a.d));for(const x of kem.splice(B.kemMax))kf.push(x);
+ const byV=new Map();const add=(v,w)=>{if(!byV.has(v))byV.set(v,[]);byV.get(v).push(w)};
+ for(const x of fold){if(x[1].length)add(x[4],x[1].join(", "));if(x[2].length)add(x[4],x[2].join(", "))}
+ for(const x of kf)add(x.v,`${x.k} ${typeof kaNT==="function"?kaNT(Math.round(x.d),x.t):kaN(Math.round(x.d))}`);
+ if(!byV.size)return {keep,kem,more:0,fold:[]};
  /* the Sổ ghi keeps every name and number (maskNames at show time: a stranger stays «một vị …») */
  try{const r0=recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name} ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id)});if(r0)r0.kem=1/* a card's folded changes (not an NPC act: no k) */}catch(e){}
  NSV.stat.cardFold=(NSV.stat.cardFold||0)+byV.size;
- return {keep,sum,fold:[...byV.keys()].map(v=>v.name),kemOne}}catch(e){console.error("nsCard",e);return null}}
+ const kv=new Set(kem.map(x=>x.v));return {keep,kem,more:[...byV.keys()].filter(v=>!kv.has(v)).length,fold:[...byV.keys()].map(v=>v.name)}}catch(e){console.error("nsCard",e);return null}}
 /* «VÌ SAO» (kitWhy, j63 kaWhyCl): the reasons of a card come from the span's log clauses; a clause that is other people's business only never
    becomes a reason on her card (it stays in the Sổ ghi) */
 if(typeof kaWhyCl==="function"){const w0=kaWhyCl;kaWhyCl=function(){const L=w0.apply(this,arguments);try{if(on()&&Array.isArray(L))return L.filter(c=>!nsNpcLine(c))}catch(e){}return L}}
