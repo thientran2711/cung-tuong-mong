@@ -19,6 +19,7 @@ Updated 2026-11-26 ~17:20Z. Lives 13/14 finished (scholar-2 running). Harness: r
 | others (scholar-2) | — | running | — | — | — |
 
 ## HARNESS-STUCK
+- scholar-2 b2635 (20:42-20:51Z, ipad): renderer hang in kitOptUnify / kitOptEqual / kitNoUnkDom / k61Scrub, renderer RSS 2.8-3.2 GB (anon 2.1-2.6 GB); watchdog kill + resume from ckpt. Evidence robot/rerun-nc_tuc/stuck/rerun-nc_tuc-scholar-2.hang.json (sent to F10).
 - speed-2 b65 (~09:58Z): renderer hang (kitScrollCues in MutationObserver, RSS 2.2-2.6 GB); watchdog kill + resume from b61. Evidence robot/rerun-nc_tuc/stuck/rerun-nc_tuc-speed-2.hang.json (sent to F10). lover-1 had a 10-min freeze at b65 too.
 - skilled-1 b23 (08:31Z–10:01Z): sole-option card «Tắm gội chờ giá» in «Kính sự phòng báo tin». Evidence robot/rerun-nc_tuc/stuck/. Fixed by 93812531; life resumed from ckpt.
 
