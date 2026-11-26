@@ -463,3 +463,27 @@ Re-run: RT_TEST_KC=n_c1@2 RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1
    (iPad seeds 94/96/101/102 ended Ban hoa at buổi 1 = real selection endings, not resume runs). Earlier: unpinned-with-build0 → pinned Fold rs-f / gh-f buổi 6 → 10.
    RT_TEST_NOEXIT Fold / iPad: visit 1 64 s / 80 s (was 920 s = the 15-min stuck), «NO-EXIT DIALOG» logged once (bugs 1), visits 2–3 42–48 s incl. the reload (≈ 16 s on the
    dialog, then lvl 3). Tip after JOB 4+5: c10a2a9d (+ this note).
+6. JOB 6 (BIG #10 early 1): Chọn sổ is reachable MID-LIFE (j6 ☰ → save(); showTitle()), so a screen name never excuses a tap. exitPick now carries live (the game had a
+   running life at tap time: last scan S.name && !S.dead); an entry tap is excused only when live is false. robot-audit isEntryPick: live:true → never an entry (old records:
+   the trace rule). RT_TEST_MENU=<buổi> (☰ → «Chơi một mình» → «Bắt đầu kiếp mới» by real taps): Fold mn-f + iPad mn-i93 / mn-i95 → exitPick {live:true} recorded; audit on
+   that record + an exit ending → INVALID «bot-chosen exit road». Fresh start pk-f61 / pk-i61 exitPick null; resume Bp-f (pinned, buổi 6 → 13) exitPick null.
+   robot-audit-unit.js 11/11 (+2 cases live:true / live:false).
+7. JOB 7 (BIG #10 early 2): after a pick, the picked option's SIBLINGS (same control kind: class + card / opts row; not confirm «Nhận …» / paging / nav / close) are
+   blocked for that screen + buổi (harness.pickSiblingBlocked). Fold + iPad × 3 seeds (61/64/65), RT_TEST_KC n_c1 'pick=^(Ở cố quốc chờ hòa ước|Thưa: con xin đi)':
+   took «Thưa: con xin đi» 6/6, pick.n 2 each.
+10. JOB 10 (answer): the CP / STATUS «rank» reads S.rank (maid lives: S.srv.rk) = the field the UI shows (RANKS[S.rank], rk(S) = S.rank). s3f save (flight2-s3f-khoathi
+   stuck-4, year 7): S.rank 0, S.maxRank 0 → the game itself holds rank 0: harness field is right → «promotions taken» are offer taps that did not promote (game / offer
+   classification) → MAIN.
+
+## HANDOVER — HARNESS FIXER #10 → next fixer (11/26/2026 ~14:30Z; ctx near START+25 %, F #23 opens the successor)
+State: review/robot-realtap tip = this commit (jobs 1–7 + 10 done, proofs above); audit on the handover branch (robot-audit.js + robot-audit-unit.js 11/11).
+OPEN (not started):
+- JOB 8 (F #22 13:35Z, FOREMAN E 13:16Z/13:23Z): BOARD loop leaves a board after 6 s idle — robot-rt.js «if (started && MG_RE.test(sc.layer) && sc.mgPh === 'play')» loop:
+  `while (Date.now() - t0b < 90e3 && idleMs < 6000)`. Need: stay until the round ends (KG82.phase result / not play, or the board's timer end), never leave on idle, for
+  every persona and all 39 mg kinds (whole family); always log «BOARD <layer> N moves» (+ result raw) even for 0 moves. Proof: E-S1 iPad speed seed 2305435383 FRESH +
+  one Fold seed, speed persona, board played to result. Self-test: RT_TEST_BOARD=<art> (existing).
+- JOB 9 (F #23 13:45Z, s3f b~3010 save 5,213,477 chars hit the localStorage quota, «save N chars» froze 200 buổi): (a) capture console 'error' messages (p.on('console'))
+  next to the existing p.on('pageerror') bug line so QuotaExceededError shows (the game's save() swallows it in try/catch → only a console.error / none: if none, detect by
+  a setItem probe at CP: write+remove a 1-char key, catch the quota error in page and log it); (b) at each CP (the «save N chars» block, R.saves) parse S.buoi/S.year
+  (and turn) from the stored hclh-save-v2-<slot>; if it lags R.buoi by > 20 buổi → bug «SAVE STALE stored b<x> live b<y> chars <n>» once per 100 buổi.
+Re-run patterns: see items 1–7 above (LIVE https://thientran2711.github.io/cung-tuong-mong/ works from this container; pin on by default).
