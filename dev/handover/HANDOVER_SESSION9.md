@@ -370,3 +370,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~21:42Z OWNER BUG ring plaques not from one post (2 shots) → OD row + MAIN rec (one fixed post, 2-col grows left, no paging tabs, result card yields, Sang buổi label short) → RING-BUILD-5 + KK46.
 - ~21:44Z KK46 KIT READY kitResFold 9a2c05f6 (review/kit-resfold) → MAIN LOOK: layout PASS; FAIL «Yến tiệc mời Đáp ứng ???» placeholder in title → KK46 family fix. Paging §101.11 only on R5's branch → R5 strips.
 - ~21:46Z OWNER: ring 3 sizes S far / M near / L chosen (+ dim follows tiers, name plate overflow) → OD row → RING-BUILD-5.
+- ~21:47Z RV-163 PASS ob-verdict-3 b5213f63 (carries d811a46d) → LC25: land after lc25-os. Queue: os → sp → ob-verdict-3 → wg/wf → dress-fix → k44+goal-links 8d28efd7 → veil 5b4f8c56.
