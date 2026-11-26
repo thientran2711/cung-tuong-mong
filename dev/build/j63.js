@@ -253,12 +253,21 @@ function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}
 const KA_WHYD={suc:{"+":"nghỉ ngơi","-":"mệt vì việc trong cung"},sung:{"+":"được Hoàng thượng để mắt","-":"lâu không được gặp Hoàng thượng"},bac:{"+":"bổng lộc và quà tặng","-":"chi tiêu trong cung"},danh:{"+":"tiếng lành đồn xa","-":"tiếng không hay đồn ra"},duc:{"+":"giữ nết tốt","-":"lỡ lời lỡ việc"},sac:{"+":"chăm dưỡng nhan sắc","-":"nhan sắc kém đi"},tai:{"+":"luyện thêm tài nghệ","-":"bỏ bê tài nghệ"},tamco:{"+":"thêm kinh nghiệm cung đình","-":"bớt cảnh giác"},tin:{"+":"được tin cậy","-":"mất lòng tin"}};
 const KA_WHYM="chuyện trong cung";const KA_WHYBAD=/^(thành|hỏng|bại|không thành|thành công|thất bại)[.!]?$/i;
 function kaWhyClip(t){t=String(t||"").replace(/\s+/g," ").replace(/[:：]/g," ").replace(/\s*\([^)]*\)\s*$/,"").replace(/[\s.!?…·,;]+$/,"").trim();if(!t)return"";t=t.charAt(0).toLocaleLowerCase("vi")+t.slice(1);if(t.length>44){t=t.slice(0,44);const i=t.lastIndexOf(" ");t=(i>20?t.slice(0,i):t).replace(/[\s,;]+$/,"")+"…"}return t}
-function kaWhyCl(before){try{const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const out=[];for(const h of S.logs.slice(0,n).reverse()){const t=plain(String(h).replace(/<span class="ld">[^<]*<\/span>/,""));for(const s of t.split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""))){for(const c of s.split(/\s·\s/))if(c.trim())out.push(c.trim())}}return out}catch(e){return[]}}
-function kaWhyLead(c,i){const m=c.match(/^([^:]{3,50}):\s/);return m&&!/^Vì sao/i.test(m[1])&&!/→|\d/.test(m[1])&&!KA_WHYBAD.test(m[1].trim())?m[1]:null}
+/* KAWHY-VERDICT (law 11, OD 26/11): a side roll's sentence (the sent servant caught and confessing, j9 runAct KA_SIDE) is flagged EXPLICITLY:
+   it is the cause of no stat / Kèm row of hers (its own loss is the target's chứng cứ, not her numbers); out.side = those clauses.
+   A sentence also ends at «)» before a capital: «… (sai X đi) Tâm cơ 50 → 52» are two clauses (old saves' glued choice lines, j3 logChoice) */
+const KA_SIDE_RX=/<span class="kwside">([\s\S]*?)<\/span>/g;
+function kaWhyCl(before){try{const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const out=[];out.side=new Set();for(const h of S.logs.slice(0,n).reverse()){const raw=String(h).replace(/<span class="ld">[^<]*<\/span>/,"");const sd=[];raw.replace(KA_SIDE_RX,(m,x)=>{sd.push(plain(x).replace(/\s+/g," ").trim());return m});const t=plain(raw);for(const s of t.split(kRx("(?<=[.!?…)])\\s+(?=[A-ZÀ-Ỹ\"“])",""))){for(const c of s.split(/\s·\s/)){const x=c.trim();if(!x)continue;out.push(x);if(sd.some(d=>d&&(x===d||d.startsWith(x)||x.startsWith(d.replace(/[.\s]+$/,"")))))out.side.add(x)}}}return out}catch(e){return[]}}
+/* the verdict of the card (true THÀNH / false BẠI / else none) filters the leads: on THÀNH a lead that tells a failure (bị bắt, phát giác …) is no
+   cause of a row, on BẠI a lead that tells a success is none either; a flagged side-roll clause (C.side) never is (KAWHY-VERDICT) */
+const KA_WHYFAIL=/bị bắt|bị lộ|phát giác|khai ra|không thành|chặn kịp|từ chối|thoái thác|thất bại|hỏng|bại lộ|bị phạt|không ai tin/i;
+const KA_WHYWIN=/thành công|đắc thủ|được việc|việc thành|mưu thành|như ý|tìm thấy/i;
+function kaWhyLead(c,i,C){const m=c.match(/^([^:]{3,50}):\s/);if(!m||/^Vì sao/i.test(m[1])||/→|\d/.test(m[1])||KA_WHYBAD.test(m[1].trim()))return null;
+ if(C&&C.side&&C.side.has(c))return null;const ok=C?C.ok:undefined;if(ok===true&&KA_WHYFAIL.test(m[1]))return null;if(ok===false&&KA_WHYWIN.test(m[1]))return null;return m[1]}
 /* stat line: the clause of the log that states this stat's change */
 function kaWhyStat(C,nm,d,title,key){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*(?:[+−-]\\s*\\d|\\d+\\s*→)","u");const sg=d>0?"+":"-";
- let c=C.find(x=>re.test(x));let r=c&&kaWhyLead(c);
- if(!r&&key==="bac"){c=C.find(x=>/[+−-]\s*\d+\s*bạc/i.test(x)&&(d>0)===!/[−-]\s*\d+\s*bạc/i.test(x));r=c&&kaWhyLead(c)}
+ let c=C.find(x=>re.test(x));let r=c&&kaWhyLead(c,0,C);
+ if(!r&&key==="bac"){c=C.find(x=>/[+−-]\s*\d+\s*bạc/i.test(x)&&(d>0)===!/[−-]\s*\d+\s*bạc/i.test(x));r=c&&kaWhyLead(c,0,C)}
  /* owner 24/11 ~21:57Z + BIG rv F1: a stat row says only «<stat> ±N»; a cause is printed ONLY when it is a real clause of the log that is NOT the card title (never the title, never a generic filler) */
  void sg;if(!r)return"";const cl=kaWhyClip(r),tn=kaPlain(String(title||"")).toLowerCase(),cn=cl.toLowerCase();if(!cl||!tn||tn.includes(cn)||cn.includes(tn.split(":")[0].trim()))return"";return cl}
 /* person line: "Vì sao: <name>: <why> → …" first, then the log sentence that names her (strangers: "chưa quen biết …"), then the act title */
@@ -267,7 +276,7 @@ function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?n
  }catch(e){}
  return ""}
 function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
-function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
+function kaResultRows(before,title,ok){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);WC.ok=ok===true?true:ok===false?false:null;/* KAWHY-VERDICT: the card's verdict (resultShow okHint) */
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
  const per=[];const U={g:[],b:[],d:new Map()};/* [who, goodParts, badParts] */
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
@@ -290,7 +299,7 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
-function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
+function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c,0,C);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
 function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
  const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
   return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaN(d)}</span></span>`});
@@ -318,7 +327,7 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:{cls:"sure",t:"KẾT QUẢ"}}
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
- const [G,B,K]=kaResultRows(before,title);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
+ const [G,B,K]=kaResultRows(before,title,okHint===true?true:okHint===false?false:null);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
  /* the seal follows the outcome FOR HER (net real changes + what the log says), not which branch fired */
  const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại|không dò ra|không biết gì|cũng không biết|không thấy gì|không tìm ra|chưa duyệt/i.test(why);/* act audit: a failed search/scout read THÀNH */
