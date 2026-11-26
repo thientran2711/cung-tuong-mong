@@ -82,3 +82,12 @@ OPEN (not done): act card → tap person name opens that person in the people ta
 - KIT §85.11: every map waits for its painting + her mark (kit wait cue «Đang thỉnh tranh…», tags/mark invisible meanwhile, fade in); home map waits for its hotspot file instead of flashing the stand-in list (failed file → list; hung picture → shown after 8 s). Test dev/test/map-wait.js PASS Fold+iPad, palace + home.
 - Re-run on cbd94e4d: map-zones-scan PASS, map-labels-scan PASS, map-wait PASS, coop-e2e 143/143.
 - FOUND (not fixed, other family): the home «Danh sách» list (jkc kcMapHTML) lists places of every home road (Nhà tranh, Ruộng nhà, Bến sông, Thọ Xương cung, Tẩm điện của ta …) on the tt road.
+### For OB-PHU3 (26/11 ~00:56Z) — open items from MAIN 150
+- WIRE Dưỡng Tú viện painting (replaces the stand-in; OD 25/11 ~23:15Z no stand-in reachable in play). ART-EVENT2 note, verbatim:
+  "ART REQUEST «c3-dtv» DONE (no reply needed; I read jmapz/jplx/j94 myself). Dưỡng Tú viện place picture = the Tiền sảnh hall (Foreman C's C3-DTV room, where ma ma teach quy củ), live on CDN under NEW keys:
+  - base: img/duong-tu-vien.webp (1620x835; = the approved tiensanh, fallback for tối)
+  - 12 variants img/duong-tu-vien-<xuan|ha|thu|dong>-<sang|trua|chieu>.webp (1344x752, gpt-2-6 edits of the same room; open by day so no -toi)
+  Wiring (jmapz.js, replace the stand-in): SCIMG["plx-dtv"]="duong-tu-vien"; register the 12 in SCN_HAVE (like jplx PLX_NEW: SCN_HAVE["duong-tu-vien-"+s+"-"+t]=1 for s in xuan/ha/thu/dong, t in sang/trua/chieu); KIT_FLOOR["duong-tu-vien"] ≈ .6 and KIT_FANCHOR {x:.5,feet:.9} (check feet on the stone floor); drop the STAND-IN note + update KIT.md §(3) and your report. Tested by injecting exactly that in your build 7fb69c10: Fold+iPad show the hall, figures stand on the floor. Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/art-event2/art-event2-dtv.jpg"
+  Code spot: jmapz.js MAPZ_DTV block, line `if(typeof SCIMG==="object"&&typeof PLX==="object")SCIMG["plx-"+D.k]=PLX.cnh.img;` → the wiring above; KIT.md §85.10 (3) drop "STAND-IN".
+- PEOPLE-tab family (MAIN 150): the first-meeting person card (.krn) that pops up by itself inside Tài nghệ must go (person info only in the people tab, KIT §6.3i); extend people-tab-scan to count .krn.
+- Still open: act-card person-name link → people tab; «Bảng tài nghệ hậu cung» placement; home «Danh sách» lists other roads' places; quickcheck alone on the tip.
