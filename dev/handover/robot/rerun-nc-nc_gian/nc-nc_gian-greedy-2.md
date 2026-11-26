@@ -1,0 +1,113 @@
+# nc-nc_gian-greedy-2 (real-tap harness 93812531, fold)
+
+| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
+|---|---|---|---|---|---|---|---|---|
+| nc-nc_gian-greedy-2 | Hồng nhan bạc mệnh — Trúng độc mãn tính nguy kịch, không qua khỏi | 39 | 2881 | 925 | 53 | 6 | 49 | — |
+
+## Dead buttons
+
+- .dlg «Tin chờ người sai đi» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795604138721.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795604141579.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795605781690.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795606058639.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795606065076.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795606071459.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795608260088.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795608820878.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795609188957.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795609950133.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795610593830.png
+- page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phiTần Uyển Âm» covered by img#mefig.kfxon.j59sz · dead-fold-1795611065827.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795612621495.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795612627844.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795612634192.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795614038702.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795614338058.png
+- .dlg «Đã biết về Quý nhân Quách Uyển Dung» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795616000905.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795620098665.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795620105012.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795620111344.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795623568536.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795625664402.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795625922723.png
+- .kmov «?» covered by zero size · dead-fold-1795626848497.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói» covered by span.kitb in #mb · dead-fold-1795626980777.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Đôi uyên ương» covered by b.kidn in #mb · dead-fold-1795626987154.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá chép gấm» covered by b.kidn in #mb · dead-fold-1795626993485.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795627785643.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795627791987.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795627798320.png
+- .dlg «Công · Nữ công» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795630428880.png
+- .dlg «Danh hiệu» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795632342869.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795634554550.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795634560935.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795634567300.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói» covered by span.kitb in #mb · dead-fold-1795639840555.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Đôi uyên ương» covered by b.kidn in #mb · dead-fold-1795639846941.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá chép gấm» covered by b.kidn in #mb · dead-fold-1795639853327.png
+- .kmov «?» covered by zero size · dead-fold-1795641257038.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Sáo nói» covered by span.kitb in #mb · dead-fold-1795641787130.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Đôi uyên ương» covered by b.kidn in #mb · dead-fold-1795641793510.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá chép gấm» covered by b.kidn in #mb · dead-fold-1795641800187.png
+- .dlg «Công · Nữ công: các lối» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795643158466.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795643937343.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795643943677.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795643950027.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc» covered by span.kitb in #mb · dead-fold-1795645269912.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá vàng chậu sứ» covered by b.kidn in #mb · dead-fold-1795645276273.png
+- .kmov «?» covered by zero size · dead-fold-1795648439026.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» covered by span.kitb in #mb · dead-fold-1795651075607.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» covered by b.kidn in #mb · dead-fold-1795651081940.png
+- .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» covered by b.kidn in #mb · dead-fold-1795651088272.png
+
+## Bugs
+
+- [stuck] ×5 no progress 15 min on .dlg «Tin báo»
+- [dead] ×1 close button has no effect: .dlg «Tin chờ người sai đi» «Lui»
+- [dead] ×12 close button has no effect: .dlg «Tin báo» «Lui»
+- [js] ×2 page error: f.rk.split is not a function
+- [stuck] ×1 no progress 15 min on .dlg «Tử Quyên»
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Uyển tần Giang Lạc Tuyết» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 5 copies of «Tâm trạng · Uyển tần Giang Lạc Tuyết» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 2 copies of «Tâm trạng · Uyển tần Giang Lạc Tuyết» (each close pops one; looks like a dead ✕)
+- [stuck] ×219 no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »
+- [game] ×5 dialog queue holds 8 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [stuck] ×5 no-clock loop: 150 taps without a clock step on .dlg «Nhờ thái giám tìm thú nuôi»
+- [game] ×7 dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [stuck] ×5 no-clock loop: 150 taps without a clock step on .dlg «Tin báo»
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Tần Doãn Cẩm Tâm» (each close pops one; looks like a dead ✕)
+- [game] ×4 dialog queue holds 9 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [stuck] ×5 no-clock loop: 150 taps without a clock step on .dlg «Xem quan hệ của»
+- [game] ×9 dialog queue holds 6 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [game] ×8 dialog queue holds 5 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [game] ×6 dialog queue holds 2 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»
+- [game] ×1 dialog queue holds 3 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)
+- [game] ×15 dialog queue holds 3 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [game] ×7 dialog queue holds 7 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ»
+- [stuck] ×9 no-clock loop: 150 taps without a clock step on .mapsc «»
+- [stuck] ×3 no-clock loop: 150 taps without a clock step on .kshdc «»
+- [stuck] ×3 no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»
+- [dead] ×1 close button has no effect: .dlg «Đã biết về Quý nhân Quách Uyển Dung» «Lui»
+- [game] ×2 dialog queue holds 10 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Hôn sự»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Hoàng tự trong cung»
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on .dlg «Tin trong cung buổi này»
+- [game] ×1 dialog queue holds 26 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 27 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 24 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 21 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 18 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 15 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 12 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 5 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 2 copies of «Tâm trạng · Tần Mã Tinh Diêu» (each close pops one; looks like a dead ✕)
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Vũ: các lối»
+- [dead] ×1 close button has no effect: .dlg «Công · Nữ công» «Lui»
+- [dead] ×1 close button has no effect: .dlg «Danh hiệu» «Lui»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Công · Nữ công»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Công · Nữ công: các lối»
+- [dead] ×1 close button has no effect: .dlg «Công · Nữ công: các lối» «Lui»
+- [stuck] ×3 no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.»
