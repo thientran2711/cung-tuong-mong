@@ -391,10 +391,11 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   it gets only the ≤ `card.kemMax` people that pass `nsSieve`; every other changed person is only counted «… và N người khác» (none listed:
   «N người khác trong cung đổi lòng chút ít») and written with every name and number in ONE Sổ ghi record of the card (S.hrec). The link reads
   «Xem đầy đủ trong Sổ ghi». «Vì sao» reasons never come from a clause that is other people's business only (`kaWhyCl` sieved).
-  Row look = kit keeper (KK41, review/kit-kem-row). Test: `node dev/test/one-sieve.test.js dev/index.html 12 <seed>`.
+  Row look = kit keeper (KK42, review/kit-kem-row-r3). Test: `node dev/test/one-sieve.test.js dev/index.html 12 <seed>`.
 - SỔ GHI (ONE SIEVE): over the rows, kit parts only — `kitSubTabs("soghi")` kinds `BAL.news.logTabs` (Tất cả · Việc của ta · Chuyện hậu cung ·
   Mưu hại; an empty kind has no tab), one `kitTabRowHTML` person chip row («Mọi người» + the 12 most named, count = rows), `kitInput` search
-  (accents ignored); filtering hides rows, a date heading with no row left hides too.
+  (accents ignored); filtering hides rows, a date heading with no row left hides too. A card's folded-changes record (nsCard, «<title> — kèm theo:»)
+  shows the SAME `kitKemRow` one-per-line form (named once per feeling, «N vị khác»; `K.all` = no 8-line cap: the Sổ ghi keeps every name; MAIN 158).
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
   "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;

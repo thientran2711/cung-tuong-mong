@@ -93,7 +93,8 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
    ok(c&&c.on,`${dn} Vu oan via Bày mưu (${m}): the card is shown`,r&&{steps:r.steps,c});
    ok(c&&c.seal===(m==='ok'?'THÀNH':'BẠI'),`${dn} Vu oan via Bày mưu (${m}): seal ${m==='ok'?'THÀNH':'BẠI'}`,c&&{seal:c.seal,lg:r.post.lg.slice(0,200)});
    const tg=c&&c.rows.find(x=>x.startsWith('Người ấy'));ok(tg&&tg.includes(r.pre.v),`${dn} Vu oan via Bày mưu (${m}): «Người ấy» names her target`,tg);
-   if(m==='ok')ok(tg&&/bị cấm túc|Sủng −|Danh −/.test(tg),`${dn} Vu oan thành: the target's real loss`,tg);else ok(c&&/: bị lộ\./.test(c.sen||''),`${dn} Vu oan bị lộ: ONE plain sentence «…: bị lộ.» (RV N4)`,c&&c.sen);if(m!=='ok')ok(tg&&/không hề hấn gì/.test(tg)&&r.post.rank===r.pre.rank,`${dn} Vu oan bị lộ: «không hề hấn gì», her rank unchanged`,{tg,rank:[r.pre.rank,r.post.rank]});
+   if(m==='ok')ok(tg&&/bị cấm túc|Sủng −|Danh −/.test(tg),`${dn} Vu oan thành: the target's real loss`,tg);
+   if(m==='ok')ok(c&&/^Ngươi vu oan .*: thành/.test((c.sen||'').replace(/<[^>]+>/g,'')),`${dn} Vu oan thành: the deed's own sentence (RV N4)`,c&&c.sen);else ok(c&&/: bị lộ\./.test(c.sen||''),`${dn} Vu oan bị lộ: ONE plain sentence «…: bị lộ.» (RV N4)`,c&&c.sen);if(m!=='ok')ok(tg&&/không hề hấn gì/.test(tg)&&r.post.rank===r.pre.rank,`${dn} Vu oan bị lộ: «không hề hấn gì», her rank unchanged`,{tg,rank:[r.pre.rank,r.post.rank]});
    const sp=await p.evaluate(()=>{const c=document.getElementById('rtoast'),s=c&&c.querySelector('.kmseal');if(!s)return null;const a=c.getBoundingClientRect(),b=s.getBoundingClientRect();return {inside:b.top>=a.top-1&&b.bottom<=a.bottom+1&&b.left>=a.left-1&&b.right<=a.right+1}});ok(sp&&sp.inside,`${dn} ${m}: the stamp sits on the result card only`,sp);
    ok(!p.errs.length,`${dn} ${m} r2 taps: no page errors`,p.errs.slice(0,3));await p.close()}}
  {const p=await boot(b,{width:1180,height:820},11);
@@ -111,6 +112,12 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
   /* j7 event option on a consort (Sao chổi «Đổ thêm dầu vào lửa»): «Người ấy» with her Sủng a → b */
   R2.comet=await E(()=>{try{__pre();const L=liveRivals(false);const v=__named(L[0]),a=L[1]||L[0];const s0=v.sung;pushDil(mkP("comet",{me:false,v:v.id,a:a.id,y:""}),"Sao chổi");const j=Q[0]&&Q[0].opts.findIndex(c=>/^Đổ thêm dầu/.test(c.n));if(!(j>=0))return {skip:'no option',q:Q.map(m=>m.t)};chooseM(j);const c=__cardOf();Q.length=0;return Object.assign({v:v.name,s0,s1:v.sung},c)}catch(e){return {err:String(e)}}});
   ok(R2.comet&&R2.comet.rows&&R2.comet.rows.some(x=>x.startsWith('Người ấy')&&x.includes(R2.comet.v)&&x.includes(`(${R2.comet.s0} → ${R2.comet.s1})`)),'event option on a consort («Đổ thêm dầu vào lửa»): «Người ấy» Sủng a → b',R2.comet);
+  /* RV N1: game code clears the queue under her pending «Bày mưu» → the open aim must not leak onto a later card */
+  R2.n1=await E(()=>{try{__pre();const L=liveRivals(false).filter(v=>!sameHouse(S,v));const v=__named(L.find(v=>ACT.frame.ok(S,v))),w=__named(L.find(x=>x!==v));if(!v||!w)return {skip:'targets'};
+   doAct(rivals.indexOf(v),'frame');const q=Q.map(m=>m.t);Q.length=0;try{closeModal()}catch(e){}v.sung=Math.max(0,v.sung-14);
+   if(!S.visit||!curPeople().some(x=>x.ref===w))S.visit={k:S.place,people:[{kind:'rival',ref:w,name:w.name}],tk:{},talked:false};S.visit.tk={};S.visit.talked=false;popIdx=curPeople().findIndex(x=>x.ref===w);used=0;
+   const O=talkOpts(curPeople()[popIdx]);const oi=O.findIndex(a=>!a.open&&!a.lock);window.kaLastResult=null;talk(oi);const c=__cardOf();return Object.assign({q,v:v.name,w:w.name},c)}catch(e){return {err:String(e)}}});
+  ok(R2.n1&&(R2.n1.skip||!(R2.n1.rows||[]).some(x=>x.startsWith('Người ấy')&&x.includes(R2.n1.v))),'RV N1: a pending act whose dialog was cleared does not leak onto a later card',R2.n1);
   /* j55 tdLeak by an NPC on HER, traced in her Sổ ghi → «Ai làm» */
   R2.td=await E(()=>{try{__pre();const v=__named(liveRivals(false)[0]);v.bac=Math.max(v.bac||0,200);try{deA(v,S,3)}catch(e){}const b=rsnap();const r0=window.roll;window.roll=()=>true;const d0=tdDadT;tdDadT=()=>true;let r;try{r=tdLeak(v,S)}finally{window.roll=r0;tdDadT=d0}if(r)log(r);resultShow("Trong cung vừa qua",b,null);const c=__cardOf();return Object.assign({r:plain(r||'').slice(0,160),v:v.name},c)}catch(e){return {err:String(e)}}});
   ok(R2.td&&R2.td.rows&&R2.td.rows.some(x=>/^Ai làm: /.test(x)&&x.includes(R2.td.v)&&/tham ô · thành/.test(x)),'j55 tdLeak on her: «Ai làm … · thành»',R2.td);
