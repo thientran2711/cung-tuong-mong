@@ -327,7 +327,7 @@ if(typeof wearBonus==="function")wearBonus=function(p){const b={sac:0,danh:0};if
  for(const e of p.inv)if(e.w&&!e.h&&IT[e.k]&&itm(e.k).w){const m=itm(e.k).rk>r?1.5:1;for(const s in itm(e.k).w)b[s]=(b[s]||0)+Math.round(itm(e.k).w[s]*m)}
  if(p.dress&&p.dress.until>S.turn&&IT[p.dress.k]){const it=itm(p.dress.k);b.sac+=Math.round(it.dr*(it.rk>r?1.5:1))}return b};
 /* Tư trang: the slots that really exist in the rules (j8): Cài tóc (IT.sl "hair"), Đeo tay (IT.sl "wrist"), Y phục (áo may từ vải: S.dress, 3 tháng) */
-const KEQ_TT=[["hair","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["veil","Khăn che mặt",""],["dress","Y phục","luahang"],["shoe","Giày","giayhoa"]];
+const KEQ_TT=[["hair","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["veil","Khăn che mặt",""],["dress","Y phục","luahang"],["shoe","Giày","giayhoa"]];
 /* ---------- Khăn che mặt (owner 11/15): the hủy dung veil of j70 (`p.scar = {sev, known, veil}`; drawn by KIT_VEIL over every portrait).
    It is not a chest item: she has one once her face was harmed (p.scar exists). Art = KIT_VEIL's own veil for her rank
    (img/veil-t1..t8.png pearl strands for consorts, img/veil-silk-ivory/pink.png silk for cung nữ, ma ma, lãnh cung).
@@ -355,7 +355,7 @@ function keqTT(){const wb=wearBonus(S),vp=vpItems(S);const slots=KEQ_TT.map(([sl
   if(sl==="veil"){if(veilOn(S))item={src:veilSrc(S),name:"Khăn che mặt",grade:veilGrade(S),tip:veilNeed(S)?"Khăn che mặt: che vết trên mặt":"Khăn che mặt: mặt đã lành"}}
   else if(sl==="dress"){if(S.dress&&S.dress.until>S.turn&&IT[S.dress.k]){const it=itm(S.dress.k),a=typeof itemArt==="function"?itemArt(S.dress.k):null;const m=S.dress.until-S.turn;
     item={src:keqRobe(S.dress.k),name:`Áo ${it.n}`,grade:a?a.grade:0,lux:luxVal(S.dress.k),tip:`Áo may từ ${it.n} · còn ${m} tháng`};note=`áo may từ ${it.n} · còn ${m} tháng`}}
-  else{ix=S.inv.findIndex(e=>!e.h&&e.w&&IT[e.k]&&itm(e.k).sl===sl);if(ix>=0){const k=S.inv[ix].k,a=typeof itemArt==="function"?itemArt(k):null;item={src:keqArt(k),name:itm(k).n,grade:a?a.grade:0,lux:luxVal(k),tip:`${label}: ${itm(k).n}`}}}
+  else{ix=S.inv.findIndex(e=>!e.h&&e.w&&IT[e.k]&&itm(e.k).sl&&wearGrp(itm(e.k).sl)===sl);/* DRESS-FIX: Túi thơm worn in Đeo eo */if(ix>=0){const k=S.inv[ix].k,a=typeof itemArt==="function"?itemArt(k):null;item={src:keqArt(k),name:itm(k).n,grade:a?a.grade:0,lux:luxVal(k),tip:`${label}: ${itm(k).n}`}}}
   let mini="";if(item&&sl==="veil")mini=veilNeed(S)?kitChip("Sắc",BAL.itFx.veil.sac):`<span class="keql2"><span class="keqm">mặt đã lành</span><span class="keqw" title="che mặt không cần: dễ bị đồn" aria-label="che mặt không cần: dễ bị đồn">⚠</span></span>`;
   else if(item){const k=sl==="dress"?S.dress.k:S.inv[ix].k,it=itm(k),over=!!(it.rk&&it.rk>S.rank),m=over?1.5:1,N=typeof NAMES==="object"?NAMES:{};
    const fx=sl==="dress"?[["Sắc",Math.round(it.dr*m)]]:Object.entries(it.w||{}).filter(([a,v])=>v).map(([a,v])=>[N[a]||a,Math.round(v*m)]);
@@ -374,7 +374,7 @@ function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=vei
    itemPic:kitItem({src:x.item.src,name:"",grade:x.item.grade,size:"lg",lux:x.item.lux}).replace('<span class="kitn"></span>',''),
    html:`<div class="kinvrows">${kitItemRows(S.dress.k,{dress:1,months:S.dress.until-S.turn})}</div>`,btn:"Lui"});return}
   const it=kinvItems().find(y=>y.g.i===x.ix);if(it)kinvOpen(it);return}
- const L=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]&&(x.k==="dress"?itm(e.k).dr:itm(e.k).sl===x.k));const seen=new Set();
+ const L=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]&&(x.k==="dress"?itm(e.k).dr:!!itm(e.k).sl&&wearGrp(itm(e.k).sl)===x.k));const seen=new Set();
  const T=L.filter(([e])=>{if(seen.has(e.k))return false;seen.add(e.k);return true}).map(([e,i])=>{const it=itm(e.k),a=typeof itemArt==="function"?itemArt(e.k):null;
   const fx=x.k==="dress"?`Sắc +${it.dr}, 3 tháng`:kinvPlain(it.w);return kitItem({src:keqArt(e.k),name:it.n,grade:a?a.grade:0,size:"md",label:[it.rk>S.rank?"vượt phẩm":fx,it.rk>S.rank?"no":"n"],
    data:`data-kid="${e.k}" data-kix="${i}" data-kidpick="${x.k==="dress"?"use":"wear"}" role="button" tabindex="0"`,tip:`${it.n} · ${fx} · chạm để xem`})});
@@ -438,7 +438,7 @@ const KSHOP={reg:{}};
 function kitShopRaw(o){return o.mode==='sell'&&o.sell?(o.sell.items()||[]):(o.items||[])}
 /* review/shop-panel-r3 (owner 18/11 ~18:55Z): ONE row of kit sub-tabs under Mua | Bán, by item KIND, the SAME groups as the Tư trang chest (KINV_CATS; Trang sức split by wear slot = KEQ_TT: Cài tóc, Đeo tay, Đeo eo…). First tab «Tất cả» like the chest; only kinds present in the current list; none when the list has one kind. */
 function kitShopCat(k,crafted){if(crafted)return"tp";const it=IT[k];const W=typeof WD_ITEMS==="object"&&WD_ITEMS[k];if(!it&&!W)return"tap";
- const kd=it?it.kd:(W.sl==="y"?"Y phục":"Trâm cài");let c=kinvCat(kd);if(c==="trang"){let sl=it?it.sl:"hair";if(sl==="tram")sl="hair";if(KEQ_TT.some(t=>t[0]===sl))c="trang:"+sl}return c}
+ const kd=it?it.kd:(W.sl==="y"?"Y phục":"Trâm cài");let c=kinvCat(kd);if(c==="trang"){let sl=it?it.sl:"hair";if(sl==="tram")sl="hair";if(sl==="scent")sl="waist";if(KEQ_TT.some(t=>t[0]===sl))c="trang:"+sl}return c}
 function kitShopKinds(L){const seen={};L.forEach(x=>{const c=x.cat||"tap";seen[c]=(seen[c]||0)+1});const out=[];
  const lab=c=>{if(c.indexOf("trang:")===0){const t=KEQ_TT.find(t=>t[0]===c.slice(6));return t?t[1]:"Trang sức"}const g=KINV_CATS.find(g=>g[0]===c);return g?g[1]:"Tạp vật"};
  const order=[];KINV_CATS.forEach(g=>{if(g[0]==="trang")KEQ_TT.forEach(t=>order.push("trang:"+t[0]));order.push(g[0])});order.push("tap");

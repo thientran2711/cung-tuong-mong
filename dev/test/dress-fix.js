@@ -37,16 +37,18 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   S.inv.push({k:kw});wear(S,S.inv.length-1);S.inv.push({k:ks});wear(S,S.inv.length-1);o.mergeWear=S.inv.filter(e=>e.w&&IT[e.k]&&["waist","scent"].includes(IT[e.k].sl)).length;
   S.inv.forEach(e=>{if(IT[e.k]&&["waist","scent"].includes(IT[e.k].sl))e.w=1});wearMerge(S);o.mergeOld=S.inv.filter(e=>e.w&&IT[e.k]&&["waist","scent"].includes(IT[e.k].sl)).length;
   const v=rivals.find(x=>x&&x.alive!==false);if(v){v.inv=v.inv||[];v.inv.push({k:kw,w:1},{k:ks,w:1});wearMerge(v);o.mergeNpc=v.inv.filter(e=>e.w&&IT[e.k]&&["waist","scent"].includes(IT[e.k].sl)).length}
-  /* (5) rarity */const T=BAL.ty;o.maxThug=T.robThug+T.robNight+T.robLonely;o.maxPlot=T.robPlot+T.robNight+T.robLonely;
-  S.buoi=3;const k0=Object.keys(typeof ACC==="object"?ACC:{}).find(x=>x!=="home")||"nguhoavien";const save0=window.curPeople;window.curPeople=()=>[];o.oddsNight=tyRobOdds(k0,0);
-  /* (5) real loss + no duplicate */let home=0,held=0,dup=0;const own0=new Set();
-  for(let i=0;i<60;i++){S.tyRobW=null;const w=wdOf(S);if(!w.y){const k=earnPlainY(S);w.y={k,src:"nvp",nvp:1}}const lost0=(S.lost||[]).length;const rk=w.y.k;tyRob(k0);
-   const c=(S.lost||[])[(S.lost||[]).length-1];if(!c||c.cause!=="rob"){continue}c.due=wk();loFind(c);if(c.how==="nha")home++;if(c.st==="held")held++;
-   const nk=earnPlainY(S);if((S.inv||[]).some(e=>e&&!e.h&&e.k===nk))dup++;Q.length=0}
-  o.robHome=home;o.robHeld=held;o.reissueDup=dup;o.cdOdds=(S.tyRobW=wk(),tyRobOdds(k0,0));
-  /* (6) maid road */S.tyRobW=null;const O=eitReOpts(true);const m=O.find(x=>/^Sai /.test(x.n));o.maid=m?{fx:m.fx,x:m.x}:null;window.curPeople=save0;return o});
+  /* (5) strip = an enemy's CHOICE only (MAIN 161 ruling ~18:40Z) */S.buoi=3;const k0="ngự hoa viên";const save0=window.curPeople;window.curPeople=()=>[];S.tyOmen=null;o.noPlot=tyRobOdds(k0,0);
+  const en=rivals.find(x=>x&&x.alive!==false&&!x.out);let inEnemy=0,home=0,dup=0;
+  for(let i=0;i<20;i++){const w=wdOf(S);if(!w.y){const k=earnPlainY(S);if((S.inv||[]).some(e=>e&&!e.h&&e.k===k))dup++;w.y={k,src:"nvp",nvp:1}}const rk=w.y.k;S.tyOmen={by:en.id,until:wk()+2};o.plot=tyRobOdds(k0,0);tyRob(k0);
+   if((en.inv||[]).some(e=>e&&e.k===rk))inEnemy++;if((S.inv||[]).some(e=>e&&e.k===rk))home++;Q.length=0}
+  o.inEnemy=inEnemy;o.robHome=home;o.reissueDup=dup;
+  /* two-way: her act */const t=rivals.find(x=>x&&x.alive!==false&&!x.out&&x!==en&&wdOf(x).y)||en;const ty=(wdOf(t).y||{}).k;S.bac=500;const save1=window.caught;window.caught=()=>"";const r0=window.aRoll;window.aRoll=()=>true;
+  o.actOk=!!(ACT.tyrob&&ACT.tyrob.ok(S,t)&&ACT.tyrobl);let txt="";try{txt=ACT.tyrob.f(S,t)}catch(e){txt="ERR "+e}window.caught=save1;window.aRoll=r0;
+  o.act={txt:String(txt).replace(/<[^>]+>/g,""),mine:(S.inv||[]).some(e=>e&&e.k===ty),tTy:tyOn(t),lack:LACK.tyrob(t)};window.curPeople=save0;
+  /* (6) maid road */S.tyRobW=null;S.tyOmen=null;const O=eitReOpts(true);const m=O.find(x=>/^Sai /.test(x.n));o.maid=m?{fx:m.fx,x:m.x}:null;window.curPeople=save0;return o});
  ok(R.mergeWear===1,'(3) wear(): Ngọc bội + Túi thơm = one Đeo eo slot (one worn)',R.mergeWear);ok(R.mergeOld===1,'(3) old save with both worn → one after wearMerge',R.mergeOld);ok(R.mergeNpc===1,'(3) NPC: the same rule',R.mergeNpc);
- ok(R.maxThug<=6&&R.maxPlot<=30,'(5) rare: thug ≤ 6 %, plot ≤ 30 % per walk (was 23 % / 65 %)',[R.maxThug,R.maxPlot,R.oddsNight]);ok(R.cdOdds===0,'(5) no second robbery inside the cooldown',R.cdOdds);
- ok(R.robHome===0,'(5) a robbed robe never drops back into her chest (60 runs)',{home:R.robHome,held:R.robHeld});ok(R.reissueDup===0,'(5) a reissued robe is never a copy of one she owns',R.reissueDup);
+ ok(R.noPlot===0,'(5) no enemy plot → no robbery at night in a lonely place (no random thug)',R.noPlot);ok(R.plot>0,'(5) an enemy who chose it (omen plot) → the risk is real',R.plot);
+ ok(R.inEnemy===20&&R.robHome===0,'(5) the robbed robe goes into THAT enemy\'s chest (20/20), never back into hers',{inEnemy:R.inEnemy,home:R.robHome});ok(R.reissueDup===0,'(5) a reissued robe is never a copy of one she owns',R.reissueDup);
+ ok(R.actOk&&R.act.mine&&R.act.tTy,'(5) two-way: her «Thuê người giật y phục» puts the target\'s robe in HER chest, the target in trung y',R.act);
  ok(R.maid&&R.maid.fx&&R.maid.fx.danh<0&&!R.maid.fx.suc&&/khắc/.test(R.maid.x),'(6) maid road: Danh + 2-khắc wait, no Sức',R.maid);ok(!errs.length,'rules page: no page errors',errs.slice(0,3));
  const n=res.filter(x=>x).length;console.log(res.every(x=>x)?`PASS ${n}`:`FAIL ${res.length-n}/${res.length}`);await b.close()})();
