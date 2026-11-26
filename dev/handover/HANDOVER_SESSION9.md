@@ -428,3 +428,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:21Z ROLL at 34 % ctx → TAKEOVER_MAIN_166.md written; opening child «MAIN CHÍNH 166»; my 4 scheduled tasks disabled (166 recreates).
 - 23:22Z MAIN CHÍNH 166 = session_01Rc5AsNFmfoR6xWx1tx5wVP opened; 165 stops. 164 told.
 - ~23:21Z OWNER: Sắc/Tài/Tâm cơ ALSO rescale (palace-wide, rank order kept, lifelong climb) → OD updated; PACE-SPEED + 166 told.
+- ~23:25Z OWNER asked for ONE rec → MAIN rec applied: drop monthly rescale; Sắc/Tài/Tâm cơ get stat-pace slowdown curve (no ceiling, no drops); Danh/Đức/Sủng keep stat-pace → OD; PACE-SPEED + 166.
