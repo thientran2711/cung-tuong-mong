@@ -56,6 +56,8 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  for(const [k,kc] of RUNS){const tag=k+(kc?'/'+kc:'');
   const life0=await G.p.evaluate(()=>COOPW.life||0);const hn0=await H.p.evaluate(()=>S.name);
   await H.p.evaluate(k=>{window.__forceOrigin=k},k);await G.p.evaluate(([kc,k])=>{window.__kcO=kc||undefined;window.__forceOrigin=k/* the old path (level 1) builds on the guest: same origin there, for a fair before/after */},[kc,k]);
+  /* r2 srvmerit-guard: mark her hand of the old life (test-side mark, so the same check runs on the base) */
+  const old0=await G.p.evaluate(()=>{(deck||[]).forEach(a=>{if(a&&typeof a==='object')a.__old=1});return (deck||[]).length});
   await G.p.evaluate(()=>{try{over('<h3>Thử luân hồi</h3>','thử','Thử luân hồi')}catch(e){console.warn(e)}Q=[];start()});
   let card=null;
   if(LVL>=2){ok(await until(G,()=>COOPW.thin.life.key&&Q[0]&&Q[0].nl&&Q[0].h&&S&&Q[0].h.includes(S.name)&&!S.dead,null,30000),tag+': the card shows the host\'s person');
@@ -66,6 +68,8 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
   {const t0=Date.now();while(Date.now()-t0<30000){await clear(G,4);const d=await G.p.evaluate(l=>!COOPW.inLife&&(COOPW.life||0)===l+1&&COOPW.base.P.b&&COOPW.base.P.b.life===l+1,life0);if(d)break;await sleep(300)}}
   ok(await until(H,([l,n])=>COOPW.base.P.b&&COOPW.base.P.b.life===l+1&&COOPW.base.P.b.name===n,[life0,await G.p.evaluate(()=>S.name)],30000),tag+': the room took her new person (life +1, same name on the host)');
   await sleep(800);
+  /* r2 srvmerit-guard (RV FAIL 1/4): the new face's hand is dealt for the life she lives now (no card of the old life left), by the game's own accept → render */
+  {const r=await G.p.evaluate(()=>({n:(deck||[]).length,old:(deck||[]).filter(a=>a&&a.__old).length,on:Q.length}));ok(r.old===0&&r.n>0,tag+': r2 her hand is dealt for the new life on accept (0 cards of the old life)',Object.assign(r,{old0}))}
   const g=await G.p.evaluate(()=>{const all=[];const add=(o,w)=>{if(o&&o.name)all.push([o.name,w])};rivals.forEach(v=>{add(v,v.coop?'friend':'npc');(v.staff||[]).forEach(x=>add(x,'srv'))});try{allServ().forEach(x=>add(x,'srv'))}catch(e){}try{allKids().forEach(([x])=>add(x,'kid'))}catch(e){}
    const t=n=>String(n).split(' ').slice(-2).join(' ');
    /* other people only (her own maid / kids are hers); objects, not names, are compared */
@@ -109,6 +113,6 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
   if((await H.p.evaluate(()=>COOP.week))>wk0&&(await G.p.evaluate(()=>COOP.week))>wk0)break;await sleep(300)}}
  ok((await H.p.evaluate(()=>COOP.week))>wk0&&(await G.p.evaluate(()=>COOP.week))>wk0,'a week ends and merges on both seats');
  const gn=await G.p.evaluate(()=>S.name);ok(await until(H,n=>COOPW.base.P.b.name===n&&rivals.some(v=>v.coop&&v.name===n),gn,20000)||await H.p.evaluate(n=>COOPW.base.P.b.name===n,gn),'after the merge the host still has her (host-built) person',gn);
- ok(await H.p.evaluate(()=>{const t=COOPW.thin.selfTest();return t.sameA&&t.sameB}),'withSeat round trip after the merged week');
+ {const t=await H.p.evaluate(()=>COOPW.thin.selfTest());ok(t.sameA&&t.sameB,'withSeat round trip after the merged week',t.sameA&&t.sameB?undefined:{paths:t.paths,diffAt:t.diffAt,err:t.err})}
  const E=[...H.errs,...G.errs].filter(e=>!/ResizeObserver/.test(e));ok(!E.length,'no page errors',E.slice(0,5));
  const f=res.filter(r=>!r[0]).length;console.log(`\n${res.length-f}/${res.length} ok`);await b.close();process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});
