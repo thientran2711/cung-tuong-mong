@@ -71,3 +71,10 @@ LIVE = origin/main 6b5d3d05 (file://).
 - (2) «Sẵn sàng» first + back only when it is the ONLY button and (result or mgLong give-up): no new early leave of a board (back is filtered whenever another button exists, also on mgLong). Law «no voluntary exit» kept — except that FAIL 1 turns every exam result into the give-up path.
 - (3) audit 7cbc260e: exit with no exitPick on a realtap harness → VALID (imposed). Sound because the harness logs every tap on an EXIT_RE label into exitPick; residual gap (an exit option whose label is NOT in EXIT_RE) is shared with the picker blacklist — note for the fixer: when a new exit-road label shows up, add it to EXIT_RE (picker + audit both depend on it). mgQuit now counts #kg «Quay lại».
 - Plain Fold s801 slice 10 = 112 taps, 0 dead/0 stuck/0 bugs; robot-lint OK.
+
+# REVIEW robot-realtap 074abe46..08a4ff8b (fix of my FAIL 1) — BIG REVIEWER #8 for F #19, 26/11 ~09:40Z
+## VERDICT: PASS robot-realtap 08a4ff8b (covers 074abe46 items 1–3 as reviewed above + this fix)
+- Diff: mgRes / mgPh = kitOvBtn() (game's own panel test) AND no visible «Sẵn sàng» in #ov (mgRulesUp); the button's own visibility is no longer tested. robot-lint OK.
+- RT_TEST_EXAM=1 on LIVE 6b5d3d05: Fold s31 → done:true raws [5,5]; iPad s12 → done:true raws [5,5] (was done:false ×2 on 074abe46). Both lives then ended at b1 «Ban hoa» (game-imposed). Fold logged 1 «harness area tap would have landed on a button — blocked» = the existing bare-area guard working, not a regression.
+- Plain iPad s902 slice 10 = 52 taps, 0 dead / 0 stuck / 0 bugs.
+- Residual (note, not blocking): a stale kitOvBtn during the PLAY phase with ONLY a back button on screen would read as result → back allowed; with any other board button present the back stays filtered (nb rule), so the window is a board that shows only ✕ mid-round — not seen in any run. The E-S6 stale-panel case is covered by logic (Sẵn sàng visible → not result), not by a replayed save.
