@@ -37,7 +37,7 @@ const KCR=[
  [/^(?:Dạo phố chợ|Đi xem chợ, không mua)$/,()=>"Ra chợ","Ra chợ nghe tin: mua sắm, hay chỉ đi xem."],
  [/^(?:Nghe chuyện ở trà lâu|Nghe lỏm ngoài hiên trà lâu)$/,()=>"Nghe tin ở trà lâu","Nghe khách bàn chuyện cung đình: thuê nhã gian, hay đứng ngoài hiên."],
  [/^(?:Lựa sách ở thư phường|Đứng đọc ở thư phường)$/,()=>"Thư phường","Đến thư phường: mua sách, hay đứng đọc."],
- [/^(?:Thăm|Mang bánh nhà làm thăm) (.+)$/,m=>`Đi thăm ${m[1]}`,"Sang phủ thế giao thăm bạn: mang lễ, hay mang bánh nhà làm."],
+ [/^(?:Thăm (.+)|Mang bánh nhà làm thăm (.+))$/,m=>`Đi thăm ${m[1]||m[2]}`,"Sang phủ thế giao thăm bạn: mang lễ, hay mang bánh nhà làm."],
  [/^(?:Giả bệnh tránh xem mặt|Nhịn ăn tránh xem mặt|Khéo từ chối nhà .+)$/,()=>"Tránh xem mặt","Bỏ mối xem mặt này: khéo từ chối, giả bệnh, hay nhịn ăn."],
  [/^(?:Gửi thư cho người ấy|Tự tay đưa thư cho người ấy)$/,()=>"Thư cho người ấy","Gửi thư cho người ấy: nhờ tỳ nữ, hay tự tay đưa."],
  [/^(?:Viết thư vào cung|Gửi thư theo người đi chợ|Mua tin của thái giám ra cung|Nhờ huynh trưởng dò tin trong cung)$/,()=>"Dò tin trong cung","Biết thêm về các phi tần trong cung: chọn đường."],
@@ -51,7 +51,10 @@ const TWN={"Mua thuốc cho mẹ":"Thuốc cho mẹ","Góp bạc cưới vợ ch
    SRVG → cung nữ Phận sự, COLDG → lãnh cung (+ the letter by name), KCR (one row each, own line) + tw twins → khuê các. `h` = the line on the door's choice card. */
 SRVG.forEach((r,i)=>DOOR.deck({k:"d_srv"+i,n:r.n,roads:["srv"],h:r.t,re:r.re}));
 COLDG.forEach((r,i)=>DOOR.deck(r.key?{k:"d_cold"+i,roads:["cold"],h:r.t,key:r.key}:{k:"d_cold"+i,n:r.n,roads:["cold"],h:r.t,re:r.re}));
-KCR.forEach(([re,f,t],i)=>DOOR.deck({k:"d_kc"+i,roads:["kc"],h:t,key:a=>{const m=re.exec(a.n||"");return m?f(m):null}}));
+/* J5c: TRUE pairs only — a card takes a KCR door key only when another card of a DIFFERENT name on today's deck gets the same key
+   (a lone «Thăm lúc ốm mệt», «Hầu bệnh cả tháng», or two copies of one card never make a door) */
+const kk=(re,f,n)=>{const m=re.exec(n||"");return m?f(m):null};
+KCR.forEach(([re,f,t],i)=>DOOR.deck({k:"d_kc"+i,roads:["kc"],h:t,key:(a,L)=>{const k=kk(re,f,a.n);if(!k)return null;return(L||[]).some(x=>x&&x.n&&x.n!==a.n&&kk(re,f,x.n)===k)?k:null}}));
 DOOR.deck({k:"d_kctw",roads:["kc"],h:"Một việc, hai đường: chọn cách làm (mỗi cách tốn khác nhau).",
  key:(a,L)=>{const tw=new Set(L.filter(x=>x&&x.tw).map(x=>x.tw));const b=a.tw||(tw.has(a.n)?a.n:null);if(!b)return null;
   /* J5c: a twin whose base a KCR row already keys joins THAT door (ngoại quốc: «Dạy <muội> một điệu múa» ⇄ «Kết thân <muội>» → Gần gũi <muội>) */
