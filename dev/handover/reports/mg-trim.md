@@ -255,3 +255,4 @@ Tests @b581c524 (vs LIVE 3af7896e same machine): coop-thin-f4 19/19 ×2 (LIVE 19
 mg-craft test 5 «X lower at ease 0 than 5»: bot flake at the 10 ceiling, pre-existing — full run: branch kim ok / hoa FAIL, LIVE kim ok; rerun kim,hoa: branch both ok, LIVE hoa FAIL. mg-trim touches no craft engine (jcraft*.js untouched; BAL.skip.od is the quick roll only).
 No UI change since 3385b0f3 → videos stand: https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm
 NEXT: ONE BIG reviewer (opus) on bb0ae651→b581c524 (co-op).
+- (26/11 11:45Z) ETA (D5 #3): fix b581c524 pushed (coop-thin-f4 19/19 ×2 branch + LIVE); BIG delta rv session_01D3E3NZCsLGoJMesaF51jcb running → LAND READY b581c524 ~60–90 min (12:45–13:15Z), lands ALONE. Foreman D = session_01D3E3NZKCLJ7V9VupQyCnr1.
