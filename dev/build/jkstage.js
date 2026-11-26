@@ -221,3 +221,16 @@ ${P} .kpmain.ksay.ksay-more::after{content:"▸";position:absolute;right:10px;bo
 @keyframes kstg-blink{from{opacity:.35}to{opacity:1}}
 ${P} .kpk{z-index:9}`;document.head.appendChild(st)}catch(e){}})();
 try{window.KIT_STAGE=KIT_STAGE;window.kstgOn=kstgOn;window.kstgPlace=kstgPlace;window.kstgWants=kstgWants}catch(e){}
+/* KIT §102.6 ROOM PICTURE NEVER EMPTY (KK38, MAIN 153 / RV-OB-NGOAICUNG 26/11 06:17Z: iPad Khuê phòng from buổi chiều showed a FLAT GREY box while the next room
+   picture loaded). Whole family = the one room backdrop #scimg (renderStage is its only writer; the Pixi copy in j11 keeps its old sprite until the new one is drawn)
+   + the event / scene pictures (§102 a: the place painting lies under them). Here: when #scimg gets a picture that is not decoded yet, the PREVIOUS painting stays
+   under it as a second CSS layer until the new one is decoded; then only the new one is left. Readers of #scimg take the FIRST url = the new picture. */
+(function(){try{const im=document.getElementById("scimg");if(!im||typeof MutationObserver!=="function")return;let last="",pend=null;const url=v=>{const m=/url\(["']?([^"')]+)["']?\)/.exec(v||"");return m?m[1]:""},two=v=>/\)\s*,\s*url\(/.test(v||"");
+ const lay=()=>{if(pend)im.style.backgroundImage=`url("${pend.u}"), url("${pend.prev}")`};
+ new MutationObserver(()=>{const v=im.style.backgroundImage||"",u=url(v);if(!u){last="";pend=null;return}
+  if(u===last){if(pend&&pend.u===u&&!two(v))lay();/* a re-render wrote the single picture again while it is still loading */return}
+  const prev=last;last=u;pend=null;if(!prev||two(v))return;
+  const I=new Image();I.src=u;if(I.complete&&I.naturalWidth)return;
+  pend={u,prev};lay();
+  const done=()=>{if(!pend||pend.u!==u)return;pend=null;if(url(im.style.backgroundImage)===u)im.style.backgroundImage=`url("${u}")`};
+  (I.decode?I.decode():Promise.reject()).then(done,()=>{if(I.complete)done();else{I.onload=done;I.onerror=done}})}).observe(im,{attributes:true,attributeFilter:["style"]})}catch(e){console.error("kstgScimgKeep",e)}})();
