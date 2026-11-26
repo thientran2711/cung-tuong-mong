@@ -19,7 +19,7 @@ lãnh cung «Bị bỏ quên» at month 3 for a newcomer: j3 monthTick `!S.out &
 ## Handover
 Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg job (resume=1 continues lives from <dir>/<life>.ckpt.json). If the container is gone, restart fresh from this branch's index.html.
 
-## Done slices on LIVE 5e013076 (26/11 05:01Z) — 8/12
+## Done slices on LIVE 5e013076 (26/11 06:10Z) — 10/12 settled
 | life | end | year | rank (max) | Danh | Sủng | lãnh cung | outbursts |
 |---|---|---|---|---|---|---|---|
 | hot-1 | SLICE b400 | 3 | 0 (0) | 1 | 0 | yes | 3 (khac 1, mang 2) |
@@ -30,6 +30,7 @@ Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg jo
 | even-3 | SLICE b400 | 3 | 0 (0) | 40 | 0 | no | 0 |
 | off-2 | SLICE b400 | 3 | 0 (1) | 98 | 4 | no | 0 |
 | hot-2 | HANG-BLOCKED on LIVE b273 (kitScrollCues); parked (not a game ending). Rerun from the b250 ckpt on review/renderer-mem when D gives the LAND READY sha | 2 | 0 (0) | 5 | 16 | no | 3 (danh, mang, huong) |
+| hot-3 | death b297 «Hồng nhan bạc mệnh» age 20 | 3 | 0 (2) | 0 | 0 | yes | 3 (dapdo, khac, mang) |
 | timid-1 | death b162 «Hồng nhan bạc mệnh» (Emperor died at 22 → tuẫn táng) | 2 | 0 (1) | 1 | 0 | yes | 2 (khoc, boan) |
 - Wording note for MAIN: that ending text shows «(khả năng: vừa)» — not one of the 7 odds words.
 - 2nd early-death path for low-rank lives (Emperor death → tuẫn táng, year 2) — listed with the lãnh cung balance candidate, untouched.
@@ -38,6 +39,13 @@ Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg jo
 The page stopped answering, then grew about 180 MB per 40 s, and was killed above 3.5 GB. The lives were hot-2 (about b270), off-3 (b63) and hot-3 (b64).
 The stacks are dominated by kitScrollCues ← MutationObserver childList (game.html:80757–80760), plus kaNorm. My suspicion is a self-feeding observer loop.
 Hang count per lane on LIVE (05:01Z): hot-2 2 (b270, b273 after resume from the b250 ckpt, so it repeats), off-3 1 (b63), hot-3 1 (b64), timid-3 1 (b65), others 0. F10 #2 and #3 confirm the root cause; the fix is review/renderer-mem 60db5f48.
+FIX ARM (review/renderer-mem 307b3b77 = fix 60db5f48 + LIVE f009e1a6, /home/user/wt/g4fix):
+- hot-2: resumed at the b273 ckpt and ran to b300 with 0 hangs, peak 1577 MB. LIVE on the same state hung 2 of 2.
+- Fresh off-3, hot-3, timid-3: BLOCKED by the f009e1a6 selection-scene opening.
+  - off-3 ended at b1 «Ban hoa».
+  - hot-3 hit 138 dead buttons under div.kscn-veil, then the robot's stuck/softlock detector fired.
+  - Likely a robot gap on the «Chạm để tiếp» scene card; unproven.
+  - Shot: CDN img/_review/temper-g4/f009-selscene-veil-hot3.png. Reported to D and F10 #3.
 Hang files: CDN img/_review/renderer-mem/5e013076-tp-{hot-2,off-3,hot-3}-hang.json (sent to F10 #2 and Foreman D).
 
 ## F10 renderer memory (for the F10 workers)
