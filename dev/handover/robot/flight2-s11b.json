@@ -1,0 +1,6422 @@
+{
+ "job": {
+  "id": "flight2-s11b",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 2026112529,
+  "dev": "ipad",
+  "url": "http://localhost:8812/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "c18e3d7d",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "build": {
+   "s": "bf6dd041+",
+   "b": "0281bf7bcef6",
+   "t": "2026-11-26T06:59Z"
+  },
+  "areaTaps": 957,
+  "dlgScroll": 38,
+  "scrolls": 177,
+  "infoTaps": 1215,
+  "dlgClose": 497,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-26T07:40:33.957Z",
+    "buoi": 56,
+    "from": "2026-11-26T07:40:14.621Z"
+   },
+   {
+    "at": "2026-11-26T08:33:25.318Z",
+    "buoi": 276,
+    "from": "2026-11-26T08:32:13.850Z"
+   },
+   {
+    "at": "2026-11-26T10:18:15.540Z",
+    "buoi": 621,
+    "from": "2026-11-26T10:17:16.638Z"
+   },
+   {
+    "at": "2026-11-26T10:43:03.565Z",
+    "buoi": 696,
+    "from": "2026-11-26T10:42:15.269Z"
+   },
+   {
+    "at": "2026-11-26T10:54:10.396Z",
+    "buoi": 731,
+    "from": "2026-11-26T10:53:53.739Z"
+   },
+   {
+    "at": "2026-11-26T12:28:16.241Z",
+    "buoi": 1031,
+    "from": "2026-11-26T12:26:42.934Z"
+   },
+   {
+    "at": "2026-11-26T12:43:40.843Z",
+    "buoi": 1081,
+    "from": "2026-11-26T12:43:27.826Z"
+   },
+   {
+    "at": "2026-11-26T14:25:34.670Z",
+    "buoi": 1406,
+    "from": "2026-11-26T14:24:51.807Z"
+   },
+   {
+    "at": "2026-11-26T14:42:08.587Z",
+    "buoi": 1456,
+    "from": "2026-11-26T14:41:12.256Z"
+   }
+  ],
+  "nextNoTurn": 2,
+  "kfocVisits": 89,
+  "mgDragSkip": 4,
+  "mgDragSkipExam": 4,
+  "mgReady": 4,
+  "builds": [
+   {
+    "s": "bf6dd041+",
+    "b": "0281bf7bcef6",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "bf6dd041+",
+   "b": "0281bf7bcef6",
+   "t": "2026-11-26T06:59Z",
+   "at": "2026-11-26T12:43:43.253Z"
+  },
+  "resumeRestore": [
+   {
+    "at": "2026-11-26T14:42:15.144Z",
+    "origin": "http://localhost:8812",
+    "from": null,
+    "want": 2371530,
+    "got": 2371530,
+    "keys": 6
+   }
+  ],
+  "taps": 833
+ },
+ "life": {
+  "id": "Hồng nhan bạc mệnh",
+  "type": "death",
+  "fate": "Quỳ phạt đến kiệt sức mà chết",
+  "death": true,
+  "age": 29,
+  "year": 12,
+  "rank": "maid 4",
+  "text": "Quỳ phạt đến kiệt sức mà chết.",
+  "card": [
+   "Cúi đầu nhận lỗi Rất vững TỐN không ĐƯỢC chủ thêm tin dùng k",
+   "Khóc lóc xin tha Tùy duyên TỐN không ĐƯỢC chủ thêm tin dùng ",
+   "Cãi lại Rất vững TỐN không ĐƯỢC thêm thể diện trong cung, đá"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang trước»",
+   ".kbk «Tổng lược» «Lui»",
+   ".dlg «Tin trong cung buổi này» «Lui»",
+   "#kmrew «Nhận»",
+   "page «Tích Cần viện · Hoàng hậu Thôi Ngọc Khê đi vắng, đ» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»",
+   "page «Tích Cần viện · Hoàng hậu Thôi Ngọc Khê đi vắng, đ» «Sang buổi»",
+   ".dlg «Đổi chủ» «Lui»",
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»",
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»",
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»",
+   ".dlg «Đức quý phi Hoa Liễu Nhi quở mắng» «Cãi lạiRất vữngTốnkhôngĐượcthêm thể diện trong cun»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 317720,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 56,
+   "year": null,
+   "chars": 343970,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 106,
+   "year": 1,
+   "chars": 399436,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 156,
+   "year": 2,
+   "chars": 461945,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 206,
+   "year": 2,
+   "chars": 524200,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 256,
+   "year": 2,
+   "chars": 544727,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 276,
+   "year": null,
+   "chars": 573435,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 326,
+   "year": 3,
+   "chars": 726855,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 376,
+   "year": 3,
+   "chars": 813023,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 426,
+   "year": 4,
+   "chars": 895910,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 476,
+   "year": 4,
+   "chars": 928125,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 526,
+   "year": 4,
+   "chars": 1031145,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 576,
+   "year": 5,
+   "chars": 1079011,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 621,
+   "year": null,
+   "chars": 1129613,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 671,
+   "year": 5,
+   "chars": 1188460,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 696,
+   "year": null,
+   "chars": 1192603,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 731,
+   "year": null,
+   "chars": 1316424,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 781,
+   "year": 6,
+   "chars": 1403116,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 831,
+   "year": 6,
+   "chars": 1463222,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 881,
+   "year": 7,
+   "chars": 1503625,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 931,
+   "year": 7,
+   "chars": 1596730,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 981,
+   "year": 7,
+   "chars": 1652898,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1031,
+   "year": 8,
+   "chars": 1716628,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1031,
+   "year": null,
+   "chars": 1716628,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1081,
+   "year": 8,
+   "chars": 1779908,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1081,
+   "year": null,
+   "chars": 1779908,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1131,
+   "year": 8,
+   "chars": 1820593,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1181,
+   "year": 9,
+   "chars": 1958765,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1231,
+   "year": 9,
+   "chars": 2006032,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1281,
+   "year": 10,
+   "chars": 2113144,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1331,
+   "year": 10,
+   "chars": 2222241,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1381,
+   "year": 10,
+   "chars": 2235218,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1406,
+   "year": null,
+   "chars": 2295811,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1456,
+   "year": 11,
+   "chars": 2371530,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1456,
+   "year": null,
+   "chars": 2371530,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1506,
+   "year": 11,
+   "chars": 2424694,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1556,
+   "year": 11,
+   "chars": 2478062,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1606,
+   "year": 12,
+   "chars": 2593796,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 1620,
+ "steps": 50670,
+ "status": [
+  "STATUS flight2-s11b · buổi 475 · year 4 · rank 0 · bugs 0 · stuck 0 · dead buttons 0",
+  "STATUS flight2-s11b · buổi 925 · year 7 · rank 0 · bugs 0 · stuck 0 · dead buttons 0",
+  "STATUS flight2-s11b · buổi 1269 · year 9 · rank maid 4 · bugs 0 · stuck 0 · dead buttons 0"
+ ],
+ "_loopAt": 1795707173717,
+ "_snapAt": 1795707167083,
+ "trace": [
+  [
+   1694,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1695,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1695,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1697,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1698,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1699,
+   ".kmov «Nhận»"
+  ],
+  [
+   1701,
+   "GONE Nhận"
+  ],
+  [
+   1704,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   1708,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1718,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   1720,
+   ".dlg «Chủ thưởng» «Lui»"
+  ],
+  [
+   1721,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   1723,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1733,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1742,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   1744,
+   ".dlg «Thư nhà» «Lui»"
+  ],
+  [
+   1746,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   1748,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1752,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1761,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang ngày mới»"
+  ],
+  [
+   1765,
+   "AREA 826,460"
+  ],
+  [
+   1766,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1766,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1766,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1767,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1767,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1767,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1769,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1773,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1782,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1786,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   1788,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   1790,
+   ".dlg «Đại hàn, tuyết lớn» «Lui»"
+  ],
+  [
+   1794,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1803,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1807,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   1809,
+   ".dlg «Bạc lạ» «Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm b»"
+  ],
+  [
+   1812,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1821,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1831,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»"
+  ],
+  [
+   1833,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   1834,
+   ".kfoc «Bỏ bạc nhờ bếp làm cho người»"
+  ],
+  [
+   1834,
+   ".kfoc «Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 kh»"
+  ],
+  [
+   1837,
+   ".kfoc «Lui»"
+  ],
+  [
+   1840,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1844,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang ngày mới»"
+  ],
+  [
+   1847,
+   "AREA 321,585"
+  ],
+  [
+   1848,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1849,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1849,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1849,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1850,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1850,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1851,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1855,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1865,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1868,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   1870,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1880,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1889,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   1891,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1901,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1910,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   1913,
+   "page «Tích Cần viện · Ở đây còn 12 người.» «Sang ngày mới»"
+  ],
+  [
+   1917,
+   "AREA 387,585"
+  ],
+  [
+   1918,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1919,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1920,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1921,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1923,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1927,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1936,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   1938,
+   ".dlg «Chủ thưởng» «Lui»"
+  ],
+  [
+   1940,
+   ".dlg «Đại hàn, tuyết lớn» «Lui»"
+  ],
+  [
+   1942,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1951,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1955,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1957,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1967,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1970,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   1973,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1982,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   1992,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   1996,
+   "AREA 248,328"
+  ],
+  [
+   1996,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1997,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1997,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1997,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1997,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1998,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1999,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2003,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2013,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2022,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   2026,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2029,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2039,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   2043,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2053,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2062,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   2064,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2074,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   2078,
+   "AREA 678,279"
+  ],
+  [
+   2079,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2079,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2080,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2080,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2080,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2080,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2082,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2086,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2096,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2105,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2107,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2117,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2121,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   2123,
+   ".dlg «Hoàng thượng» «Cúi đầu đúng phépRất vữngTốnkhôngĐượcđược tiếng hi»"
+  ],
+  [
+   2131,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2140,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2150,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   2154,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2164,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2174,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   2178,
+   "AREA 849,661"
+  ],
+  [
+   2179,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2180,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2180,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2180,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2181,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2181,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2183,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2184,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2188,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2192,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2195,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2198,
+   ".dlg «Tin về chủ nhân» «Lui»"
+  ],
+  [
+   2199,
+   ".dlg «Chủ thưởng» «Lui»"
+  ],
+  [
+   2201,
+   "page «Tích Cần viện · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2210,
+   "page «Tích Cần viện · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2214,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   2216,
+   ".dlg «Yến tiệc đầu xuân» «Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin d»"
+  ],
+  [
+   2217,
+   ".dlg «Hạn hán, mất mùa» «Lui»"
+  ],
+  [
+   2221,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2230,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2233,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   2235,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2245,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2254,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang ngày mới»"
+  ],
+  [
+   2258,
+   "AREA 309,232"
+  ],
+  [
+   2259,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2260,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2260,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2260,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2261,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2261,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2262,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2266,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2269,
+   "page «Tích Cần viện · Không gặp ai.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2278,
+   "page «Tích Cần viện · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2288,
+   "page «Tích Cần viện · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2292,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2301,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2311,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   2313,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   2317,
+   "AREA 834,272"
+  ],
+  [
+   2318,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2318,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2318,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2319,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2319,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2319,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2321,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2325,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   2328,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2337,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2339,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   2341,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   2343,
+   "page «Tích Cần viện · Không gặp ai.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2353,
+   "page «Tích Cần viện · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2362,
+   "page «Tích Cần viện · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2365,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2374,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2384,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
+  ],
+  [
+   2388,
+   "AREA 572,250"
+  ],
+  [
+   2389,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2390,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2390,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2390,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2390,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2391,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2392,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2394,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2398,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2407,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2411,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2413,
+   ".dlg «Chủ thưởng» «Lui»"
+  ],
+  [
+   2414,
+   ".dlg «Tuyển tú» «Lui»"
+  ],
+  [
+   2416,
+   "page «Tích Cần viện · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2425,
+   "page «Tích Cần viện · Không gặp ai.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2429,
+   "page «Tích Cần viện · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2431,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   2433,
+   ".dlg «Hạn hán, mất mùa» «Lui»"
+  ],
+  [
+   2435,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2444,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2454,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   2456,
+   ".dlg «Kẻ hầu» «Đút bạc cho quản sựRất vữngTốnBạc -5Đượcdưỡng sức »"
+  ],
+  [
+   2456,
+   ".dlg «Đại tuyển tú nữ» «Lui»"
+  ],
+  [
+   2464,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang ngày mới»"
+  ],
+  [
+   2468,
+   "AREA 945,638"
+  ],
+  [
+   2468,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2469,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2469,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2469,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2469,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2470,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2471,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2473,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2473,
+   ".kfoc «Nhịn»"
+  ],
+  [
+   2474,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   2474,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   2475,
+   ".kfoc «Lui»"
+  ],
+  [
+   2479,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2481,
+   ".dlg «Đại tuyển tú nữ» «Lui»"
+  ],
+  [
+   2483,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   2486,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2496,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   2498,
+   "page «Tích Cần viện · Không gặp ai.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2501,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2502,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2503,
+   ".kfoc «Không tiếp»"
+  ],
+  [
+   2503,
+   ".kfoc «Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 kh»"
+  ],
+  [
+   2506,
+   ".kfoc «Lui»"
+  ],
+  [
+   2514,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   2516,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2526,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2529,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   2533,
+   "AREA 831,502"
+  ],
+  [
+   2533,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2534,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2535,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2535,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2535,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2535,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2537,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2541,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2544,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   2548,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2551,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   2554,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2564,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   2566,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2575,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2578,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   2580,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2590,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2600,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang ngày mới»"
+  ],
+  [
+   2604,
+   "AREA 926,461"
+  ],
+  [
+   2605,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2606,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2606,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2606,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2607,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2607,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2608,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2610,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2614,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2623,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2627,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   2629,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2629,
+   ".kfoc «Cãi lại»"
+  ],
+  [
+   2630,
+   ".kfoc «Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 kh»"
+  ],
+  [
+   2632,
+   ".kfoc «Lui»"
+  ],
+  [
+   2636,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2646,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   2650,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2660,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2669,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   2671,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2681,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Hầu hạHầu hạDâng trà, hầu điểm tâmCó cơPha trà dân»"
+  ],
+  [
+   2691,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   2695,
+   "AREA 739,458"
+  ],
+  [
+   2695,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2695,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2696,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2696,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2696,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2697,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2698,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2702,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2712,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2721,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2723,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2733,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   2735,
+   ".dlg «Kẻ hầu» «Bỏ bạc nhờ bếp làm cho ngườiRất vữngTốnBạc -5Đượcc»"
+  ],
+  [
+   2739,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2748,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2752,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   2754,
+   "page «Tích Cần viện · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2764,
+   "page «Tích Cần viện · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2773,
+   "page «Tích Cần viện · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   2777,
+   "AREA 534,517"
+  ],
+  [
+   2778,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2778,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2778,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2778,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2779,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2779,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2780,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2784,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   2788,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2798,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2807,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2816,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2826,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   2828,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   2830,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2834,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2844,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang ngày mới»"
+  ],
+  [
+   2848,
+   "AREA 591,629"
+  ],
+  [
+   2848,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2849,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2850,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2850,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2850,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2850,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2852,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2854,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2858,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   2860,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2862,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2862,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2863,
+   ".kfoc «Đáp trả sắc sảo»"
+  ],
+  [
+   2863,
+   ".kfoc «Lui»"
+  ],
+  [
+   2867,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2870,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   2873,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2882,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2892,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   2893,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2894,
+   ".kfoc «Cãi lại»"
+  ],
+  [
+   2894,
+   ".kfoc «Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 kh»"
+  ],
+  [
+   2897,
+   ".kfoc «Lui»"
+  ],
+  [
+   2901,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2910,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang ngày mới»"
+  ],
+  [
+   2914,
+   "AREA 723,335"
+  ],
+  [
+   2914,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2915,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2915,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2915,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2915,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2916,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2918,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2919,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   2923,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   2926,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   2928,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2938,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   2940,
+   "page «Tích Cần viện · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   2943,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang ngày mới»"
+  ],
+  [
+   2947,
+   "AREA 588,661"
+  ],
+  [
+   2947,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2948,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2948,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2949,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2949,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2949,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2951,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2955,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   2964,
+   "page «Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, » «Sang buổi»"
+  ],
+  [
+   2966,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   2974,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2984,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   2985,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2985,
+   ".kfoc «Tiếp chuyện»"
+  ],
+  [
+   2990,
+   "POPUP Sang buổi"
+  ],
+  [
+   2993,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   2995,
+   ".dlg «Hoàng thượng» «Lánh vào trongRất vữngTốnkhôngĐượcdưỡng sức, chủ t»"
+  ],
+  [
+   2999,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   3002,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   3005,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   3009,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang ngày mới»"
+  ],
+  [
+   3012,
+   "AREA 313,692"
+  ],
+  [
+   3013,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3014,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3014,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3015,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3015,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3015,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3017,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3018,
+   "#kmrew «Nhận»"
+  ],
+  [
+   3022,
+   "page «Tích Cần viện · Hoàng hậu Thôi Ngọc Khê đi vắng, đ» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   3032,
+   "page «Tích Cần viện · Hoàng hậu Thôi Ngọc Khê đi vắng, đ» «Sang buổi»"
+  ],
+  [
+   3034,
+   ".dlg «Đổi chủ» «Lui»"
+  ],
+  [
+   3036,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạĐốc thúc cung nữ quét dọnRất vữngĐi mộ»"
+  ],
+  [
+   3039,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   3043,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   3045,
+   ".dlg «Đức quý phi Hoa Liễu Nhi quở mắng» «Cãi lạiRất vữngTốnkhôngĐượcthêm thể diện trong cun»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795707123606,
+ "_ckB": 1616,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1326,
+   "rendererMB": 614,
+   "heapMB": 111,
+   "dom": 2088,
+   "q": 3,
+   "lsK": 4
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1849,
+   "rendererMB": 903,
+   "heapMB": 111,
+   "dom": 919,
+   "q": 1,
+   "lsK": 161
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 1775,
+   "rendererMB": 892,
+   "heapMB": 111,
+   "dom": 913,
+   "q": 1,
+   "lsK": 217
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 1923,
+   "rendererMB": 1041,
+   "heapMB": 111,
+   "dom": 895,
+   "q": 0,
+   "lsK": 281
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2013,
+   "rendererMB": 1119,
+   "heapMB": 111,
+   "dom": 1604,
+   "q": 1,
+   "lsK": 305
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 1799,
+   "rendererMB": 911,
+   "heapMB": 111,
+   "dom": 874,
+   "q": 2,
+   "lsK": 324
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 1770,
+   "rendererMB": 906,
+   "heapMB": 111,
+   "dom": 901,
+   "q": 0,
+   "lsK": 332
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 1761,
+   "rendererMB": 889,
+   "heapMB": 111,
+   "dom": 866,
+   "q": 0,
+   "lsK": 345
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 1883,
+   "rendererMB": 975,
+   "heapMB": 111,
+   "dom": 1138,
+   "q": 0,
+   "lsK": 360
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 1786,
+   "rendererMB": 896,
+   "heapMB": 111,
+   "dom": 948,
+   "q": 1,
+   "lsK": 344
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 1749,
+   "rendererMB": 861,
+   "heapMB": 111,
+   "dom": 916,
+   "q": 0,
+   "lsK": 378
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 1864,
+   "rendererMB": 984,
+   "heapMB": 111,
+   "dom": 943,
+   "q": 0,
+   "lsK": 397
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 1408,
+   "rendererMB": 656,
+   "heapMB": 104,
+   "dom": 876,
+   "q": 0,
+   "lsK": 394
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 1677,
+   "rendererMB": 910,
+   "heapMB": 104,
+   "dom": 1260,
+   "q": 0,
+   "lsK": 403
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "totalMB": 1484,
+   "rendererMB": 797,
+   "heapMB": 104,
+   "dom": 915,
+   "q": 0,
+   "lsK": 392
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "totalMB": 1559,
+   "rendererMB": 868,
+   "heapMB": 104,
+   "dom": 901,
+   "q": 1,
+   "lsK": 423
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 1594,
+   "rendererMB": 889,
+   "heapMB": 104,
+   "dom": 879,
+   "q": 0,
+   "lsK": 441
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "totalMB": 1690,
+   "rendererMB": 952,
+   "heapMB": 104,
+   "dom": 1568,
+   "q": 0,
+   "lsK": 451
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "totalMB": 1527,
+   "rendererMB": 834,
+   "heapMB": 104,
+   "dom": 968,
+   "q": 1,
+   "lsK": 437
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "totalMB": 1547,
+   "rendererMB": 849,
+   "heapMB": 104,
+   "dom": 986,
+   "q": 0,
+   "lsK": 447
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "totalMB": 1748,
+   "rendererMB": 1039,
+   "heapMB": 104,
+   "dom": 955,
+   "q": 0,
+   "lsK": 469
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "totalMB": 1834,
+   "rendererMB": 1084,
+   "heapMB": 104,
+   "dom": 1911,
+   "q": 0,
+   "lsK": 464
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 1804,
+   "rendererMB": 1094,
+   "heapMB": 104,
+   "dom": 928,
+   "q": 0,
+   "lsK": 458
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 1739,
+   "rendererMB": 1027,
+   "heapMB": 104,
+   "dom": 967,
+   "q": 0,
+   "lsK": 470
+  },
+  {
+   "buoi": 121,
+   "y": 1,
+   "totalMB": 1558,
+   "rendererMB": 845,
+   "heapMB": 104,
+   "dom": 932,
+   "q": 0,
+   "lsK": 482
+  },
+  {
+   "buoi": 126,
+   "y": 2,
+   "totalMB": 1872,
+   "rendererMB": 1127,
+   "heapMB": 104,
+   "dom": 1362,
+   "q": 0,
+   "lsK": 496
+  },
+  {
+   "buoi": 131,
+   "y": 2,
+   "totalMB": 1601,
+   "rendererMB": 885,
+   "heapMB": 104,
+   "dom": 920,
+   "q": 2,
+   "lsK": 504
+  },
+  {
+   "buoi": 136,
+   "y": 2,
+   "totalMB": 1563,
+   "rendererMB": 846,
+   "heapMB": 104,
+   "dom": 890,
+   "q": 0,
+   "lsK": 521
+  },
+  {
+   "buoi": 141,
+   "y": 2,
+   "totalMB": 1678,
+   "rendererMB": 958,
+   "heapMB": 104,
+   "dom": 901,
+   "q": 0,
+   "lsK": 534
+  },
+  {
+   "buoi": 146,
+   "y": 2,
+   "totalMB": 1829,
+   "rendererMB": 1084,
+   "heapMB": 104,
+   "dom": 1397,
+   "q": 0,
+   "lsK": 541
+  },
+  {
+   "buoi": 151,
+   "y": 2,
+   "totalMB": 1652,
+   "rendererMB": 933,
+   "heapMB": 104,
+   "dom": 930,
+   "q": 0,
+   "lsK": 522
+  },
+  {
+   "buoi": 156,
+   "y": 2,
+   "totalMB": 1690,
+   "rendererMB": 975,
+   "heapMB": 133,
+   "dom": 941,
+   "q": 0,
+   "lsK": 540
+  },
+  {
+   "buoi": 161,
+   "y": 2,
+   "totalMB": 1628,
+   "rendererMB": 908,
+   "heapMB": 133,
+   "dom": 884,
+   "q": 0,
+   "lsK": 573
+  },
+  {
+   "buoi": 166,
+   "y": 2,
+   "totalMB": 1913,
+   "rendererMB": 1162,
+   "heapMB": 133,
+   "dom": 1481,
+   "q": 1,
+   "lsK": 557
+  },
+  {
+   "buoi": 171,
+   "y": 2,
+   "totalMB": 1763,
+   "rendererMB": 1047,
+   "heapMB": 133,
+   "dom": 911,
+   "q": 2,
+   "lsK": 570
+  },
+  {
+   "buoi": 176,
+   "y": 2,
+   "totalMB": 1758,
+   "rendererMB": 1040,
+   "heapMB": 133,
+   "dom": 875,
+   "q": 0,
+   "lsK": 569
+  },
+  {
+   "buoi": 181,
+   "y": 2,
+   "totalMB": 1904,
+   "rendererMB": 1179,
+   "heapMB": 133,
+   "dom": 928,
+   "q": 0,
+   "lsK": 585
+  },
+  {
+   "buoi": 186,
+   "y": 2,
+   "totalMB": 1850,
+   "rendererMB": 1114,
+   "heapMB": 133,
+   "dom": 1135,
+   "q": 1,
+   "lsK": 584
+  },
+  {
+   "buoi": 191,
+   "y": 2,
+   "totalMB": 1750,
+   "rendererMB": 1030,
+   "heapMB": 133,
+   "dom": 997,
+   "q": 0,
+   "lsK": 568
+  },
+  {
+   "buoi": 196,
+   "y": 2,
+   "totalMB": 1850,
+   "rendererMB": 1134,
+   "heapMB": 133,
+   "dom": 922,
+   "q": 1,
+   "lsK": 607
+  },
+  {
+   "buoi": 201,
+   "y": 2,
+   "totalMB": 1867,
+   "rendererMB": 1150,
+   "heapMB": 133,
+   "dom": 903,
+   "q": 0,
+   "lsK": 620
+  },
+  {
+   "buoi": 206,
+   "y": 2,
+   "totalMB": 1826,
+   "rendererMB": 1077,
+   "heapMB": 133,
+   "dom": 1692,
+   "q": 0,
+   "lsK": 615
+  },
+  {
+   "buoi": 211,
+   "y": 2,
+   "totalMB": 1942,
+   "rendererMB": 1221,
+   "heapMB": 133,
+   "dom": 945,
+   "q": 1,
+   "lsK": 599
+  },
+  {
+   "buoi": 216,
+   "y": 2,
+   "totalMB": 1752,
+   "rendererMB": 1038,
+   "heapMB": 133,
+   "dom": 894,
+   "q": 0,
+   "lsK": 607
+  },
+  {
+   "buoi": 221,
+   "y": 2,
+   "totalMB": 1858,
+   "rendererMB": 1143,
+   "heapMB": 133,
+   "dom": 915,
+   "q": 0,
+   "lsK": 625
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 1829,
+   "rendererMB": 1099,
+   "heapMB": 133,
+   "dom": 1189,
+   "q": 0,
+   "lsK": 617
+  },
+  {
+   "buoi": 231,
+   "y": 2,
+   "totalMB": 1783,
+   "rendererMB": 1058,
+   "heapMB": 133,
+   "dom": 975,
+   "q": 2,
+   "lsK": 634
+  },
+  {
+   "buoi": 236,
+   "y": 2,
+   "totalMB": 1851,
+   "rendererMB": 1142,
+   "heapMB": 133,
+   "dom": 908,
+   "q": 0,
+   "lsK": 634
+  },
+  {
+   "buoi": 241,
+   "y": 2,
+   "totalMB": 1826,
+   "rendererMB": 1116,
+   "heapMB": 125,
+   "dom": 910,
+   "q": 0,
+   "lsK": 652
+  },
+  {
+   "buoi": 246,
+   "y": 2,
+   "totalMB": 1893,
+   "rendererMB": 1165,
+   "heapMB": 125,
+   "dom": 1378,
+   "q": 0,
+   "lsK": 646
+  },
+  {
+   "buoi": 251,
+   "y": 2,
+   "totalMB": 1868,
+   "rendererMB": 1159,
+   "heapMB": 125,
+   "dom": 910,
+   "q": 1,
+   "lsK": 656
+  },
+  {
+   "buoi": 256,
+   "y": 2,
+   "totalMB": 1873,
+   "rendererMB": 1164,
+   "heapMB": 125,
+   "dom": 861,
+   "q": 0,
+   "lsK": 644
+  },
+  {
+   "buoi": 261,
+   "y": 2,
+   "totalMB": 2003,
+   "rendererMB": 1296,
+   "heapMB": 125,
+   "dom": 1013,
+   "q": 0,
+   "lsK": 653
+  },
+  {
+   "buoi": 266,
+   "y": 3,
+   "totalMB": 1873,
+   "rendererMB": 1141,
+   "heapMB": 125,
+   "dom": 1277,
+   "q": 0,
+   "lsK": 655
+  },
+  {
+   "buoi": 271,
+   "y": 3,
+   "totalMB": 2053,
+   "rendererMB": 1321,
+   "heapMB": 125,
+   "dom": 1530,
+   "q": 1,
+   "lsK": 649
+  },
+  {
+   "buoi": 276,
+   "y": 3,
+   "totalMB": 2430,
+   "rendererMB": 1694,
+   "heapMB": 125,
+   "dom": 1493,
+   "q": 0,
+   "lsK": 678
+  },
+  {
+   "buoi": 281,
+   "y": 3,
+   "totalMB": 1879,
+   "rendererMB": 1177,
+   "heapMB": 133,
+   "dom": 1540,
+   "q": 2,
+   "lsK": 736
+  },
+  {
+   "buoi": 286,
+   "y": 3,
+   "totalMB": 2013,
+   "rendererMB": 1308,
+   "heapMB": 133,
+   "dom": 1575,
+   "q": 0,
+   "lsK": 746
+  },
+  {
+   "buoi": 291,
+   "y": 3,
+   "totalMB": 2172,
+   "rendererMB": 1449,
+   "heapMB": 133,
+   "dom": 1533,
+   "q": 2,
+   "lsK": 778
+  },
+  {
+   "buoi": 296,
+   "y": 3,
+   "totalMB": 2194,
+   "rendererMB": 1479,
+   "heapMB": 133,
+   "dom": 1527,
+   "q": 0,
+   "lsK": 771
+  },
+  {
+   "buoi": 301,
+   "y": 3,
+   "totalMB": 2223,
+   "rendererMB": 1513,
+   "heapMB": 133,
+   "dom": 1516,
+   "q": 0,
+   "lsK": 788
+  },
+  {
+   "buoi": 306,
+   "y": 3,
+   "totalMB": 2268,
+   "rendererMB": 1552,
+   "heapMB": 133,
+   "dom": 1597,
+   "q": 1,
+   "lsK": 827
+  },
+  {
+   "buoi": 311,
+   "y": 3,
+   "totalMB": 2336,
+   "rendererMB": 1606,
+   "heapMB": 133,
+   "dom": 1525,
+   "q": 2,
+   "lsK": 827
+  },
+  {
+   "buoi": 316,
+   "y": 3,
+   "totalMB": 2376,
+   "rendererMB": 1653,
+   "heapMB": 133,
+   "dom": 1644,
+   "q": 0,
+   "lsK": 843
+  },
+  {
+   "buoi": 321,
+   "y": 3,
+   "totalMB": 2393,
+   "rendererMB": 1675,
+   "heapMB": 133,
+   "dom": 1636,
+   "q": 0,
+   "lsK": 854
+  },
+  {
+   "buoi": 326,
+   "y": 3,
+   "totalMB": 2413,
+   "rendererMB": 1694,
+   "heapMB": 133,
+   "dom": 1623,
+   "q": 0,
+   "lsK": 860
+  },
+  {
+   "buoi": 331,
+   "y": 3,
+   "totalMB": 2468,
+   "rendererMB": 1740,
+   "heapMB": 133,
+   "dom": 1610,
+   "q": 1,
+   "lsK": 890
+  },
+  {
+   "buoi": 336,
+   "y": 3,
+   "totalMB": 2426,
+   "rendererMB": 1711,
+   "heapMB": 133,
+   "dom": 1952,
+   "q": 1,
+   "lsK": 874
+  },
+  {
+   "buoi": 341,
+   "y": 3,
+   "totalMB": 2442,
+   "rendererMB": 1729,
+   "heapMB": 133,
+   "dom": 1557,
+   "q": 0,
+   "lsK": 908
+  },
+  {
+   "buoi": 346,
+   "y": 3,
+   "totalMB": 2437,
+   "rendererMB": 1725,
+   "heapMB": 133,
+   "dom": 1523,
+   "q": 0,
+   "lsK": 910
+  },
+  {
+   "buoi": 351,
+   "y": 3,
+   "totalMB": 2485,
+   "rendererMB": 1759,
+   "heapMB": 133,
+   "dom": 1717,
+   "q": 1,
+   "lsK": 921
+  },
+  {
+   "buoi": 356,
+   "y": 3,
+   "totalMB": 2456,
+   "rendererMB": 1747,
+   "heapMB": 141,
+   "dom": 1561,
+   "q": 1,
+   "lsK": 905
+  },
+  {
+   "buoi": 361,
+   "y": 3,
+   "totalMB": 2444,
+   "rendererMB": 1720,
+   "heapMB": 141,
+   "dom": 1937,
+   "q": 1,
+   "lsK": 918
+  },
+  {
+   "buoi": 366,
+   "y": 3,
+   "totalMB": 2412,
+   "rendererMB": 1710,
+   "heapMB": 141,
+   "dom": 1755,
+   "q": 0,
+   "lsK": 973
+  },
+  {
+   "buoi": 371,
+   "y": 3,
+   "totalMB": 2477,
+   "rendererMB": 1759,
+   "heapMB": 141,
+   "dom": 1909,
+   "q": 1,
+   "lsK": 978
+  },
+  {
+   "buoi": 376,
+   "y": 3,
+   "totalMB": 2501,
+   "rendererMB": 1800,
+   "heapMB": 141,
+   "dom": 1604,
+   "q": 2,
+   "lsK": 966
+  },
+  {
+   "buoi": 381,
+   "y": 3,
+   "totalMB": 2486,
+   "rendererMB": 1784,
+   "heapMB": 141,
+   "dom": 1579,
+   "q": 0,
+   "lsK": 978
+  },
+  {
+   "buoi": 386,
+   "y": 3,
+   "totalMB": 2366,
+   "rendererMB": 1660,
+   "heapMB": 141,
+   "dom": 1694,
+   "q": 0,
+   "lsK": 978
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "totalMB": 2429,
+   "rendererMB": 1714,
+   "heapMB": 141,
+   "dom": 1839,
+   "q": 2,
+   "lsK": 1000
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "totalMB": 2536,
+   "rendererMB": 1826,
+   "heapMB": 141,
+   "dom": 1604,
+   "q": 2,
+   "lsK": 973
+  },
+  {
+   "buoi": 401,
+   "y": 3,
+   "totalMB": 2528,
+   "rendererMB": 1813,
+   "heapMB": 141,
+   "dom": 1746,
+   "q": 2,
+   "lsK": 998
+  },
+  {
+   "buoi": 406,
+   "y": 3,
+   "totalMB": 2525,
+   "rendererMB": 1823,
+   "heapMB": 141,
+   "dom": 1598,
+   "q": 0,
+   "lsK": 1004
+  },
+  {
+   "buoi": 411,
+   "y": 4,
+   "totalMB": 2599,
+   "rendererMB": 1883,
+   "heapMB": 141,
+   "dom": 1782,
+   "q": 2,
+   "lsK": 1028
+  },
+  {
+   "buoi": 416,
+   "y": 4,
+   "totalMB": 2552,
+   "rendererMB": 1839,
+   "heapMB": 141,
+   "dom": 1685,
+   "q": 1,
+   "lsK": 1006
+  },
+  {
+   "buoi": 421,
+   "y": 4,
+   "totalMB": 2527,
+   "rendererMB": 1819,
+   "heapMB": 169,
+   "dom": 1636,
+   "q": 0,
+   "lsK": 1022
+  },
+  {
+   "buoi": 426,
+   "y": 4,
+   "totalMB": 2561,
+   "rendererMB": 1848,
+   "heapMB": 169,
+   "dom": 1605,
+   "q": 0,
+   "lsK": 1067
+  },
+  {
+   "buoi": 431,
+   "y": 4,
+   "totalMB": 2586,
+   "rendererMB": 1866,
+   "heapMB": 169,
+   "dom": 1820,
+   "q": 2,
+   "lsK": 1076
+  },
+  {
+   "buoi": 436,
+   "y": 4,
+   "totalMB": 2528,
+   "rendererMB": 1809,
+   "heapMB": 169,
+   "dom": 1624,
+   "q": 1,
+   "lsK": 1057
+  },
+  {
+   "buoi": 441,
+   "y": 4,
+   "totalMB": 2547,
+   "rendererMB": 1841,
+   "heapMB": 169,
+   "dom": 1608,
+   "q": 0,
+   "lsK": 1059
+  },
+  {
+   "buoi": 446,
+   "y": 4,
+   "totalMB": 2544,
+   "rendererMB": 1834,
+   "heapMB": 169,
+   "dom": 1631,
+   "q": 0,
+   "lsK": 1061
+  },
+  {
+   "buoi": 451,
+   "y": 4,
+   "totalMB": 2626,
+   "rendererMB": 1907,
+   "heapMB": 169,
+   "dom": 1719,
+   "q": 2,
+   "lsK": 1087
+  },
+  {
+   "buoi": 456,
+   "y": 4,
+   "totalMB": 2686,
+   "rendererMB": 1969,
+   "heapMB": 169,
+   "dom": 1683,
+   "q": 2,
+   "lsK": 1060
+  },
+  {
+   "buoi": 461,
+   "y": 4,
+   "totalMB": 2693,
+   "rendererMB": 1976,
+   "heapMB": 169,
+   "dom": 1644,
+   "q": 0,
+   "lsK": 1093
+  },
+  {
+   "buoi": 466,
+   "y": 4,
+   "totalMB": 2726,
+   "rendererMB": 2018,
+   "heapMB": 169,
+   "dom": 1596,
+   "q": 1,
+   "lsK": 1105
+  },
+  {
+   "buoi": 471,
+   "y": 4,
+   "totalMB": 2759,
+   "rendererMB": 2040,
+   "heapMB": 169,
+   "dom": 1695,
+   "q": 1,
+   "lsK": 1138
+  },
+  {
+   "buoi": 476,
+   "y": 4,
+   "totalMB": 2730,
+   "rendererMB": 2012,
+   "heapMB": 169,
+   "dom": 1721,
+   "q": 1,
+   "lsK": 1109
+  },
+  {
+   "buoi": 481,
+   "y": 4,
+   "totalMB": 2571,
+   "rendererMB": 1858,
+   "heapMB": 169,
+   "dom": 1720,
+   "q": 0,
+   "lsK": 1132
+  },
+  {
+   "buoi": 486,
+   "y": 4,
+   "totalMB": 2628,
+   "rendererMB": 1919,
+   "heapMB": 169,
+   "dom": 1659,
+   "q": 0,
+   "lsK": 1144
+  },
+  {
+   "buoi": 491,
+   "y": 4,
+   "totalMB": 2673,
+   "rendererMB": 1952,
+   "heapMB": 150,
+   "dom": 1773,
+   "q": 1,
+   "lsK": 1148
+  },
+  {
+   "buoi": 496,
+   "y": 4,
+   "totalMB": 2644,
+   "rendererMB": 1924,
+   "heapMB": 150,
+   "dom": 1782,
+   "q": 2,
+   "lsK": 1153
+  },
+  {
+   "buoi": 501,
+   "y": 4,
+   "totalMB": 2556,
+   "rendererMB": 1837,
+   "heapMB": 150,
+   "dom": 1748,
+   "q": 0,
+   "lsK": 1167
+  },
+  {
+   "buoi": 506,
+   "y": 4,
+   "totalMB": 2539,
+   "rendererMB": 1834,
+   "heapMB": 150,
+   "dom": 1657,
+   "q": 0,
+   "lsK": 1177
+  },
+  {
+   "buoi": 511,
+   "y": 4,
+   "totalMB": 2611,
+   "rendererMB": 1889,
+   "heapMB": 150,
+   "dom": 1723,
+   "q": 1,
+   "lsK": 1196
+  },
+  {
+   "buoi": 516,
+   "y": 4,
+   "totalMB": 2636,
+   "rendererMB": 1919,
+   "heapMB": 150,
+   "dom": 1669,
+   "q": 2,
+   "lsK": 1183
+  },
+  {
+   "buoi": 521,
+   "y": 4,
+   "totalMB": 2656,
+   "rendererMB": 1943,
+   "heapMB": 150,
+   "dom": 1628,
+   "q": 0,
+   "lsK": 1219
+  },
+  {
+   "buoi": 526,
+   "y": 4,
+   "totalMB": 2635,
+   "rendererMB": 1926,
+   "heapMB": 150,
+   "dom": 1655,
+   "q": 0,
+   "lsK": 1232
+  },
+  {
+   "buoi": 531,
+   "y": 4,
+   "totalMB": 2630,
+   "rendererMB": 1911,
+   "heapMB": 150,
+   "dom": 1762,
+   "q": 0,
+   "lsK": 1250
+  },
+  {
+   "buoi": 536,
+   "y": 4,
+   "totalMB": 2620,
+   "rendererMB": 1896,
+   "heapMB": 150,
+   "dom": 1679,
+   "q": 0,
+   "lsK": 1241
+  },
+  {
+   "buoi": 541,
+   "y": 4,
+   "totalMB": 2645,
+   "rendererMB": 1930,
+   "heapMB": 150,
+   "dom": 1670,
+   "q": 0,
+   "lsK": 1251
+  },
+  {
+   "buoi": 546,
+   "y": 4,
+   "totalMB": 2620,
+   "rendererMB": 1920,
+   "heapMB": 150,
+   "dom": 1648,
+   "q": 0,
+   "lsK": 1276
+  },
+  {
+   "buoi": 551,
+   "y": 4,
+   "totalMB": 2708,
+   "rendererMB": 1979,
+   "heapMB": 150,
+   "dom": 1747,
+   "q": 1,
+   "lsK": 1284
+  },
+  {
+   "buoi": 556,
+   "y": 5,
+   "totalMB": 2674,
+   "rendererMB": 1958,
+   "heapMB": 150,
+   "dom": 1721,
+   "q": 2,
+   "lsK": 1271
+  },
+  {
+   "buoi": 561,
+   "y": 5,
+   "totalMB": 2754,
+   "rendererMB": 2026,
+   "heapMB": 150,
+   "dom": 1660,
+   "q": 0,
+   "lsK": 1288
+  },
+  {
+   "buoi": 566,
+   "y": 5,
+   "totalMB": 2731,
+   "rendererMB": 2014,
+   "heapMB": 133,
+   "dom": 1636,
+   "q": 0,
+   "lsK": 1290
+  },
+  {
+   "buoi": 571,
+   "y": 5,
+   "totalMB": 2781,
+   "rendererMB": 2057,
+   "heapMB": 133,
+   "dom": 1828,
+   "q": 2,
+   "lsK": 1306
+  },
+  {
+   "buoi": 576,
+   "y": 5,
+   "totalMB": 2786,
+   "rendererMB": 2066,
+   "heapMB": 133,
+   "dom": 1648,
+   "q": 1,
+   "lsK": 1293
+  },
+  {
+   "buoi": 581,
+   "y": 5,
+   "totalMB": 2784,
+   "rendererMB": 2062,
+   "heapMB": 133,
+   "dom": 1619,
+   "q": 0,
+   "lsK": 1316
+  },
+  {
+   "buoi": 586,
+   "y": 5,
+   "totalMB": 2784,
+   "rendererMB": 2062,
+   "heapMB": 133,
+   "dom": 1713,
+   "q": 0,
+   "lsK": 1311
+  },
+  {
+   "buoi": 591,
+   "y": 5,
+   "totalMB": 2848,
+   "rendererMB": 2111,
+   "heapMB": 133,
+   "dom": 1734,
+   "q": 1,
+   "lsK": 1329
+  },
+  {
+   "buoi": 596,
+   "y": 5,
+   "totalMB": 2931,
+   "rendererMB": 2202,
+   "heapMB": 133,
+   "dom": 1635,
+   "q": 2,
+   "lsK": 1298
+  },
+  {
+   "buoi": 601,
+   "y": 5,
+   "totalMB": 2907,
+   "rendererMB": 2191,
+   "heapMB": 133,
+   "dom": 1633,
+   "q": 0,
+   "lsK": 1296
+  },
+  {
+   "buoi": 606,
+   "y": 5,
+   "totalMB": 2934,
+   "rendererMB": 2217,
+   "heapMB": 133,
+   "dom": 1729,
+   "q": 0,
+   "lsK": 1334
+  },
+  {
+   "buoi": 611,
+   "y": 5,
+   "totalMB": 2556,
+   "rendererMB": 1829,
+   "heapMB": 133,
+   "dom": 1713,
+   "q": 1,
+   "lsK": 1341
+  },
+  {
+   "buoi": 616,
+   "y": 5,
+   "totalMB": 2865,
+   "rendererMB": 2139,
+   "heapMB": 133,
+   "dom": 1726,
+   "q": 1,
+   "lsK": 1358
+  },
+  {
+   "buoi": 621,
+   "y": 5,
+   "totalMB": 2934,
+   "rendererMB": 2205,
+   "heapMB": 133,
+   "dom": 1674,
+   "q": 0,
+   "lsK": 1356
+  },
+  {
+   "buoi": 626,
+   "y": 5,
+   "totalMB": 1807,
+   "rendererMB": 1071,
+   "heapMB": 117,
+   "dom": 1624,
+   "q": 0,
+   "lsK": 1360
+  },
+  {
+   "buoi": 631,
+   "y": 5,
+   "totalMB": 1963,
+   "rendererMB": 1260,
+   "heapMB": 117,
+   "dom": 1739,
+   "q": 0,
+   "lsK": 1397
+  },
+  {
+   "buoi": 636,
+   "y": 5,
+   "totalMB": 2153,
+   "rendererMB": 1439,
+   "heapMB": 117,
+   "dom": 1829,
+   "q": 1,
+   "lsK": 1388
+  },
+  {
+   "buoi": 641,
+   "y": 5,
+   "totalMB": 2111,
+   "rendererMB": 1404,
+   "heapMB": 117,
+   "dom": 1697,
+   "q": 1,
+   "lsK": 1388
+  },
+  {
+   "buoi": 646,
+   "y": 5,
+   "totalMB": 2154,
+   "rendererMB": 1449,
+   "heapMB": 117,
+   "dom": 1746,
+   "q": 0,
+   "lsK": 1399
+  },
+  {
+   "buoi": 651,
+   "y": 5,
+   "totalMB": 2158,
+   "rendererMB": 1453,
+   "heapMB": 117,
+   "dom": 1757,
+   "q": 0,
+   "lsK": 1405
+  },
+  {
+   "buoi": 656,
+   "y": 5,
+   "totalMB": 2196,
+   "rendererMB": 1502,
+   "heapMB": 117,
+   "dom": 1671,
+   "q": 2,
+   "lsK": 1419
+  },
+  {
+   "buoi": 661,
+   "y": 5,
+   "totalMB": 2219,
+   "rendererMB": 1498,
+   "heapMB": 117,
+   "dom": 1795,
+   "q": 1,
+   "lsK": 1390
+  },
+  {
+   "buoi": 666,
+   "y": 5,
+   "totalMB": 2183,
+   "rendererMB": 1474,
+   "heapMB": 117,
+   "dom": 1594,
+   "q": 0,
+   "lsK": 1410
+  },
+  {
+   "buoi": 671,
+   "y": 5,
+   "totalMB": 2194,
+   "rendererMB": 1482,
+   "heapMB": 117,
+   "dom": 1658,
+   "q": 0,
+   "lsK": 1428
+  },
+  {
+   "buoi": 676,
+   "y": 5,
+   "totalMB": 2280,
+   "rendererMB": 1562,
+   "heapMB": 117,
+   "dom": 1578,
+   "q": 1,
+   "lsK": 1460
+  },
+  {
+   "buoi": 681,
+   "y": 5,
+   "totalMB": 2251,
+   "rendererMB": 1540,
+   "heapMB": 117,
+   "dom": 1623,
+   "q": 0,
+   "lsK": 1445
+  },
+  {
+   "buoi": 686,
+   "y": 5,
+   "totalMB": 2235,
+   "rendererMB": 1528,
+   "heapMB": 150,
+   "dom": 1737,
+   "q": 0,
+   "lsK": 1446
+  },
+  {
+   "buoi": 691,
+   "y": 5,
+   "totalMB": 2266,
+   "rendererMB": 1556,
+   "heapMB": 150,
+   "dom": 1624,
+   "q": 0,
+   "lsK": 1442
+  },
+  {
+   "buoi": 696,
+   "y": 5,
+   "totalMB": 2335,
+   "rendererMB": 1621,
+   "heapMB": 150,
+   "dom": 1623,
+   "q": 2,
+   "lsK": 1434
+  },
+  {
+   "buoi": 701,
+   "y": 6,
+   "totalMB": 1791,
+   "rendererMB": 1000,
+   "heapMB": 141,
+   "dom": 1591,
+   "q": 3,
+   "lsK": 1463
+  },
+  {
+   "buoi": 706,
+   "y": 6,
+   "totalMB": 2064,
+   "rendererMB": 1331,
+   "heapMB": 141,
+   "dom": 1939,
+   "q": 1,
+   "lsK": 1447
+  },
+  {
+   "buoi": 711,
+   "y": 6,
+   "totalMB": 2194,
+   "rendererMB": 1448,
+   "heapMB": 141,
+   "dom": 1613,
+   "q": 0,
+   "lsK": 1462
+  },
+  {
+   "buoi": 716,
+   "y": 6,
+   "totalMB": 2214,
+   "rendererMB": 1461,
+   "heapMB": 141,
+   "dom": 1573,
+   "q": 1,
+   "lsK": 1530
+  },
+  {
+   "buoi": 721,
+   "y": 6,
+   "totalMB": 2269,
+   "rendererMB": 1524,
+   "heapMB": 141,
+   "dom": 1690,
+   "q": 1,
+   "lsK": 1526
+  },
+  {
+   "buoi": 726,
+   "y": 6,
+   "totalMB": 2249,
+   "rendererMB": 1537,
+   "heapMB": 141,
+   "dom": 1715,
+   "q": 2,
+   "lsK": 1579
+  },
+  {
+   "buoi": 731,
+   "y": 6,
+   "totalMB": 2302,
+   "rendererMB": 1570,
+   "heapMB": 141,
+   "dom": 1577,
+   "q": 0,
+   "lsK": 1579
+  },
+  {
+   "buoi": 736,
+   "y": 6,
+   "totalMB": 1774,
+   "rendererMB": 1036,
+   "heapMB": 117,
+   "dom": 1564,
+   "q": 0,
+   "lsK": 1590
+  },
+  {
+   "buoi": 741,
+   "y": 6,
+   "totalMB": 1983,
+   "rendererMB": 1276,
+   "heapMB": 117,
+   "dom": 1649,
+   "q": 0,
+   "lsK": 1628
+  },
+  {
+   "buoi": 746,
+   "y": 6,
+   "totalMB": 2142,
+   "rendererMB": 1424,
+   "heapMB": 117,
+   "dom": 1567,
+   "q": 1,
+   "lsK": 1630
+  },
+  {
+   "buoi": 751,
+   "y": 6,
+   "totalMB": 2239,
+   "rendererMB": 1517,
+   "heapMB": 117,
+   "dom": 1614,
+   "q": 2,
+   "lsK": 1635
+  },
+  {
+   "buoi": 756,
+   "y": 6,
+   "totalMB": 2254,
+   "rendererMB": 1544,
+   "heapMB": 117,
+   "dom": 1673,
+   "q": 0,
+   "lsK": 1650
+  },
+  {
+   "buoi": 761,
+   "y": 6,
+   "totalMB": 2266,
+   "rendererMB": 1547,
+   "heapMB": 117,
+   "dom": 1606,
+   "q": 0,
+   "lsK": 1646
+  },
+  {
+   "buoi": 766,
+   "y": 6,
+   "totalMB": 2357,
+   "rendererMB": 1629,
+   "heapMB": 117,
+   "dom": 1643,
+   "q": 1,
+   "lsK": 1678
+  },
+  {
+   "buoi": 771,
+   "y": 6,
+   "totalMB": 2263,
+   "rendererMB": 1542,
+   "heapMB": 117,
+   "dom": 1636,
+   "q": 0,
+   "lsK": 1640
+  },
+  {
+   "buoi": 776,
+   "y": 6,
+   "totalMB": 2298,
+   "rendererMB": 1581,
+   "heapMB": 117,
+   "dom": 1583,
+   "q": 2,
+   "lsK": 1682
+  },
+  {
+   "buoi": 781,
+   "y": 6,
+   "totalMB": 2319,
+   "rendererMB": 1608,
+   "heapMB": 117,
+   "dom": 1594,
+   "q": 0,
+   "lsK": 1686
+  },
+  {
+   "buoi": 786,
+   "y": 6,
+   "totalMB": 2353,
+   "rendererMB": 1625,
+   "heapMB": 117,
+   "dom": 1684,
+   "q": 3,
+   "lsK": 1701
+  },
+  {
+   "buoi": 791,
+   "y": 6,
+   "totalMB": 2307,
+   "rendererMB": 1613,
+   "heapMB": 117,
+   "dom": 1635,
+   "q": 0,
+   "lsK": 1688
+  },
+  {
+   "buoi": 796,
+   "y": 6,
+   "totalMB": 2348,
+   "rendererMB": 1639,
+   "heapMB": 117,
+   "dom": 1635,
+   "q": 0,
+   "lsK": 1696
+  },
+  {
+   "buoi": 801,
+   "y": 6,
+   "totalMB": 2363,
+   "rendererMB": 1645,
+   "heapMB": 117,
+   "dom": 1593,
+   "q": 0,
+   "lsK": 1746
+  },
+  {
+   "buoi": 806,
+   "y": 6,
+   "totalMB": 2360,
+   "rendererMB": 1650,
+   "heapMB": 133,
+   "dom": 1579,
+   "q": 1,
+   "lsK": 1752
+  },
+  {
+   "buoi": 811,
+   "y": 6,
+   "totalMB": 2414,
+   "rendererMB": 1699,
+   "heapMB": 133,
+   "dom": 1782,
+   "q": 2,
+   "lsK": 1759
+  },
+  {
+   "buoi": 816,
+   "y": 6,
+   "totalMB": 2453,
+   "rendererMB": 1729,
+   "heapMB": 133,
+   "dom": 1946,
+   "q": 1,
+   "lsK": 1761
+  },
+  {
+   "buoi": 821,
+   "y": 6,
+   "totalMB": 2448,
+   "rendererMB": 1734,
+   "heapMB": 133,
+   "dom": 1661,
+   "q": 0,
+   "lsK": 1750
+  },
+  {
+   "buoi": 826,
+   "y": 6,
+   "totalMB": 2545,
+   "rendererMB": 1815,
+   "heapMB": 133,
+   "dom": 1656,
+   "q": 2,
+   "lsK": 1789
+  },
+  {
+   "buoi": 831,
+   "y": 6,
+   "totalMB": 2506,
+   "rendererMB": 1790,
+   "heapMB": 133,
+   "dom": 1700,
+   "q": 0,
+   "lsK": 1761
+  },
+  {
+   "buoi": 836,
+   "y": 6,
+   "totalMB": 2554,
+   "rendererMB": 1830,
+   "heapMB": 133,
+   "dom": 1755,
+   "q": 1,
+   "lsK": 1790
+  },
+  {
+   "buoi": 841,
+   "y": 6,
+   "totalMB": 2517,
+   "rendererMB": 1796,
+   "heapMB": 133,
+   "dom": 1662,
+   "q": 0,
+   "lsK": 1799
+  },
+  {
+   "buoi": 846,
+   "y": 7,
+   "totalMB": 2589,
+   "rendererMB": 1847,
+   "heapMB": 133,
+   "dom": 1673,
+   "q": 2,
+   "lsK": 1805
+  },
+  {
+   "buoi": 851,
+   "y": 7,
+   "totalMB": 2534,
+   "rendererMB": 1813,
+   "heapMB": 133,
+   "dom": 1799,
+   "q": 0,
+   "lsK": 1790
+  },
+  {
+   "buoi": 856,
+   "y": 7,
+   "totalMB": 2530,
+   "rendererMB": 1806,
+   "heapMB": 133,
+   "dom": 1721,
+   "q": 0,
+   "lsK": 1804
+  },
+  {
+   "buoi": 861,
+   "y": 7,
+   "totalMB": 2564,
+   "rendererMB": 1833,
+   "heapMB": 133,
+   "dom": 1629,
+   "q": 0,
+   "lsK": 1817
+  },
+  {
+   "buoi": 866,
+   "y": 7,
+   "totalMB": 2557,
+   "rendererMB": 1823,
+   "heapMB": 133,
+   "dom": 1672,
+   "q": 0,
+   "lsK": 1823
+  },
+  {
+   "buoi": 871,
+   "y": 7,
+   "totalMB": 2617,
+   "rendererMB": 1885,
+   "heapMB": 179,
+   "dom": 1763,
+   "q": 2,
+   "lsK": 1821
+  },
+  {
+   "buoi": 876,
+   "y": 7,
+   "totalMB": 2550,
+   "rendererMB": 1823,
+   "heapMB": 179,
+   "dom": 1698,
+   "q": 0,
+   "lsK": 1813
+  },
+  {
+   "buoi": 881,
+   "y": 7,
+   "totalMB": 2450,
+   "rendererMB": 1728,
+   "heapMB": 179,
+   "dom": 1718,
+   "q": 0,
+   "lsK": 1812
+  },
+  {
+   "buoi": 886,
+   "y": 7,
+   "totalMB": 2363,
+   "rendererMB": 1624,
+   "heapMB": 179,
+   "dom": 1648,
+   "q": 2,
+   "lsK": 1826
+  },
+  {
+   "buoi": 891,
+   "y": 7,
+   "totalMB": 2554,
+   "rendererMB": 1829,
+   "heapMB": 179,
+   "dom": 1649,
+   "q": 1,
+   "lsK": 1809
+  },
+  {
+   "buoi": 896,
+   "y": 7,
+   "totalMB": 2688,
+   "rendererMB": 1960,
+   "heapMB": 179,
+   "dom": 1829,
+   "q": 1,
+   "lsK": 1855
+  },
+  {
+   "buoi": 901,
+   "y": 7,
+   "totalMB": 2724,
+   "rendererMB": 1991,
+   "heapMB": 179,
+   "dom": 1643,
+   "q": 0,
+   "lsK": 1878
+  },
+  {
+   "buoi": 906,
+   "y": 7,
+   "totalMB": 2759,
+   "rendererMB": 2013,
+   "heapMB": 179,
+   "dom": 1624,
+   "q": 3,
+   "lsK": 1900
+  },
+  {
+   "buoi": 911,
+   "y": 7,
+   "totalMB": 2737,
+   "rendererMB": 1997,
+   "heapMB": 179,
+   "dom": 1662,
+   "q": 1,
+   "lsK": 1877
+  },
+  {
+   "buoi": 916,
+   "y": 7,
+   "totalMB": 2736,
+   "rendererMB": 2015,
+   "heapMB": 179,
+   "dom": 1715,
+   "q": 0,
+   "lsK": 1881
+  },
+  {
+   "buoi": 921,
+   "y": 7,
+   "totalMB": 2755,
+   "rendererMB": 2028,
+   "heapMB": 179,
+   "dom": 1585,
+   "q": 0,
+   "lsK": 1902
+  },
+  {
+   "buoi": 926,
+   "y": 7,
+   "totalMB": 2780,
+   "rendererMB": 2041,
+   "heapMB": 179,
+   "dom": 1629,
+   "q": 1,
+   "lsK": 1912
+  },
+  {
+   "buoi": 931,
+   "y": 7,
+   "totalMB": 2646,
+   "rendererMB": 1917,
+   "heapMB": 179,
+   "dom": 1664,
+   "q": 1,
+   "lsK": 1925
+  },
+  {
+   "buoi": 936,
+   "y": 7,
+   "totalMB": 2687,
+   "rendererMB": 1961,
+   "heapMB": 179,
+   "dom": 1735,
+   "q": 1,
+   "lsK": 1933
+  },
+  {
+   "buoi": 941,
+   "y": 7,
+   "totalMB": 2776,
+   "rendererMB": 2051,
+   "heapMB": 179,
+   "dom": 1657,
+   "q": 0,
+   "lsK": 1919
+  },
+  {
+   "buoi": 946,
+   "y": 7,
+   "totalMB": 2885,
+   "rendererMB": 2142,
+   "heapMB": 179,
+   "dom": 1741,
+   "q": 1,
+   "lsK": 1943
+  },
+  {
+   "buoi": 951,
+   "y": 7,
+   "totalMB": 2783,
+   "rendererMB": 2041,
+   "heapMB": 179,
+   "dom": 1633,
+   "q": 1,
+   "lsK": 1924
+  },
+  {
+   "buoi": 956,
+   "y": 7,
+   "totalMB": 2860,
+   "rendererMB": 2118,
+   "heapMB": 179,
+   "dom": 1662,
+   "q": 0,
+   "lsK": 1963
+  },
+  {
+   "buoi": 961,
+   "y": 7,
+   "totalMB": 2651,
+   "rendererMB": 1915,
+   "heapMB": 179,
+   "dom": 1711,
+   "q": 0,
+   "lsK": 1968
+  },
+  {
+   "buoi": 966,
+   "y": 7,
+   "totalMB": 2757,
+   "rendererMB": 2011,
+   "heapMB": 179,
+   "dom": 1621,
+   "q": 1,
+   "lsK": 1990
+  },
+  {
+   "buoi": 971,
+   "y": 7,
+   "totalMB": 2698,
+   "rendererMB": 1958,
+   "heapMB": 179,
+   "dom": 1659,
+   "q": 0,
+   "lsK": 1973
+  },
+  {
+   "buoi": 976,
+   "y": 7,
+   "totalMB": 2351,
+   "rendererMB": 1614,
+   "heapMB": 179,
+   "dom": 1657,
+   "q": 0,
+   "lsK": 1988
+  },
+  {
+   "buoi": 981,
+   "y": 7,
+   "totalMB": 2706,
+   "rendererMB": 1975,
+   "heapMB": 179,
+   "dom": 1700,
+   "q": 1,
+   "lsK": 1996
+  },
+  {
+   "buoi": 986,
+   "y": 7,
+   "totalMB": 2788,
+   "rendererMB": 2041,
+   "heapMB": 179,
+   "dom": 1666,
+   "q": 1,
+   "lsK": 2003
+  },
+  {
+   "buoi": 991,
+   "y": 8,
+   "totalMB": 2849,
+   "rendererMB": 2111,
+   "heapMB": 179,
+   "dom": 1734,
+   "q": 2,
+   "lsK": 2002
+  },
+  {
+   "buoi": 996,
+   "y": 8,
+   "totalMB": 2822,
+   "rendererMB": 2084,
+   "heapMB": 179,
+   "dom": 1810,
+   "q": 0,
+   "lsK": 2014
+  },
+  {
+   "buoi": 1001,
+   "y": 8,
+   "totalMB": 2848,
+   "rendererMB": 2109,
+   "heapMB": 179,
+   "dom": 1644,
+   "q": 0,
+   "lsK": 2008
+  },
+  {
+   "buoi": 1006,
+   "y": 8,
+   "totalMB": 2932,
+   "rendererMB": 2186,
+   "heapMB": 202,
+   "dom": 1741,
+   "q": 1,
+   "lsK": 2036
+  },
+  {
+   "buoi": 1011,
+   "y": 8,
+   "totalMB": 2707,
+   "rendererMB": 1968,
+   "heapMB": 202,
+   "dom": 1606,
+   "q": 1,
+   "lsK": 2013
+  },
+  {
+   "buoi": 1016,
+   "y": 8,
+   "totalMB": 2919,
+   "rendererMB": 2174,
+   "heapMB": 202,
+   "dom": 1650,
+   "q": 0,
+   "lsK": 2058
+  },
+  {
+   "buoi": 1021,
+   "y": 8,
+   "totalMB": 2874,
+   "rendererMB": 2132,
+   "heapMB": 202,
+   "dom": 1678,
+   "q": 0,
+   "lsK": 2068
+  },
+  {
+   "buoi": 1026,
+   "y": 8,
+   "totalMB": 2919,
+   "rendererMB": 2169,
+   "heapMB": 202,
+   "dom": 1652,
+   "q": 3,
+   "lsK": 2085
+  },
+  {
+   "buoi": 1031,
+   "y": 8,
+   "totalMB": 2899,
+   "rendererMB": 2183,
+   "heapMB": 202,
+   "dom": 1635,
+   "q": 0,
+   "lsK": 2075
+  },
+  {
+   "buoi": 1036,
+   "y": 8,
+   "totalMB": 1796,
+   "rendererMB": 1052,
+   "heapMB": 111,
+   "dom": 1795,
+   "q": 2,
+   "lsK": 2076
+  },
+  {
+   "buoi": 1041,
+   "y": 8,
+   "totalMB": 2122,
+   "rendererMB": 1375,
+   "heapMB": 111,
+   "dom": 1823,
+   "q": 0,
+   "lsK": 2108
+  },
+  {
+   "buoi": 1046,
+   "y": 8,
+   "totalMB": 2200,
+   "rendererMB": 1453,
+   "heapMB": 111,
+   "dom": 1723,
+   "q": 1,
+   "lsK": 2110
+  },
+  {
+   "buoi": 1051,
+   "y": 8,
+   "totalMB": 2325,
+   "rendererMB": 1633,
+   "heapMB": 111,
+   "dom": 1707,
+   "q": 2,
+   "lsK": 2127
+  },
+  {
+   "buoi": 1056,
+   "y": 8,
+   "totalMB": 2378,
+   "rendererMB": 1645,
+   "heapMB": 111,
+   "dom": 1746,
+   "q": 1,
+   "lsK": 2107
+  },
+  {
+   "buoi": 1061,
+   "y": 8,
+   "totalMB": 2326,
+   "rendererMB": 1602,
+   "heapMB": 111,
+   "dom": 1721,
+   "q": 0,
+   "lsK": 2123
+  },
+  {
+   "buoi": 1066,
+   "y": 8,
+   "totalMB": 2282,
+   "rendererMB": 1565,
+   "heapMB": 111,
+   "dom": 1880,
+   "q": 0,
+   "lsK": 2139
+  },
+  {
+   "buoi": 1071,
+   "y": 8,
+   "totalMB": 2323,
+   "rendererMB": 1636,
+   "heapMB": 111,
+   "dom": 1809,
+   "q": 2,
+   "lsK": 2146
+  },
+  {
+   "buoi": 1076,
+   "y": 8,
+   "totalMB": 2310,
+   "rendererMB": 1600,
+   "heapMB": 111,
+   "dom": 1764,
+   "q": 2,
+   "lsK": 2145
+  },
+  {
+   "buoi": 1081,
+   "y": 8,
+   "totalMB": 2363,
+   "rendererMB": 1633,
+   "heapMB": 111,
+   "dom": 1643,
+   "q": 0,
+   "lsK": 2154
+  },
+  {
+   "buoi": 1086,
+   "y": 8,
+   "totalMB": 1912,
+   "rendererMB": 1137,
+   "heapMB": 98,
+   "dom": 1644,
+   "q": 0,
+   "lsK": 2144
+  },
+  {
+   "buoi": 1091,
+   "y": 8,
+   "totalMB": 2021,
+   "rendererMB": 1302,
+   "heapMB": 98,
+   "dom": 1798,
+   "q": 0,
+   "lsK": 2178
+  },
+  {
+   "buoi": 1096,
+   "y": 8,
+   "totalMB": 2122,
+   "rendererMB": 1382,
+   "heapMB": 98,
+   "dom": 1655,
+   "q": 1,
+   "lsK": 2176
+  },
+  {
+   "buoi": 1101,
+   "y": 8,
+   "totalMB": 2184,
+   "rendererMB": 1451,
+   "heapMB": 98,
+   "dom": 1846,
+   "q": 2,
+   "lsK": 2175
+  },
+  {
+   "buoi": 1106,
+   "y": 8,
+   "totalMB": 2256,
+   "rendererMB": 1508,
+   "heapMB": 98,
+   "dom": 1640,
+   "q": 0,
+   "lsK": 2187
+  },
+  {
+   "buoi": 1111,
+   "y": 8,
+   "totalMB": 2287,
+   "rendererMB": 1550,
+   "heapMB": 98,
+   "dom": 1739,
+   "q": 0,
+   "lsK": 2180
+  },
+  {
+   "buoi": 1116,
+   "y": 8,
+   "totalMB": 2340,
+   "rendererMB": 1595,
+   "heapMB": 98,
+   "dom": 1760,
+   "q": 2,
+   "lsK": 2194
+  },
+  {
+   "buoi": 1121,
+   "y": 8,
+   "totalMB": 2304,
+   "rendererMB": 1568,
+   "heapMB": 98,
+   "dom": 1750,
+   "q": 0,
+   "lsK": 2177
+  },
+  {
+   "buoi": 1126,
+   "y": 8,
+   "totalMB": 2358,
+   "rendererMB": 1616,
+   "heapMB": 98,
+   "dom": 1820,
+   "q": 0,
+   "lsK": 2201
+  },
+  {
+   "buoi": 1131,
+   "y": 8,
+   "totalMB": 2386,
+   "rendererMB": 1638,
+   "heapMB": 98,
+   "dom": 1690,
+   "q": 0,
+   "lsK": 2204
+  },
+  {
+   "buoi": 1136,
+   "y": 9,
+   "totalMB": 2426,
+   "rendererMB": 1677,
+   "heapMB": 98,
+   "dom": 1814,
+   "q": 2,
+   "lsK": 2234
+  },
+  {
+   "buoi": 1141,
+   "y": 9,
+   "totalMB": 2511,
+   "rendererMB": 1745,
+   "heapMB": 98,
+   "dom": 1739,
+   "q": 0,
+   "lsK": 2213
+  },
+  {
+   "buoi": 1146,
+   "y": 9,
+   "totalMB": 2457,
+   "rendererMB": 1702,
+   "heapMB": 98,
+   "dom": 1691,
+   "q": 0,
+   "lsK": 2215
+  },
+  {
+   "buoi": 1151,
+   "y": 9,
+   "totalMB": 2470,
+   "rendererMB": 1732,
+   "heapMB": 141,
+   "dom": 1676,
+   "q": 0,
+   "lsK": 2267
+  },
+  {
+   "buoi": 1156,
+   "y": 9,
+   "totalMB": 2525,
+   "rendererMB": 1781,
+   "heapMB": 141,
+   "dom": 1719,
+   "q": 1,
+   "lsK": 2285
+  },
+  {
+   "buoi": 1161,
+   "y": 9,
+   "totalMB": 2508,
+   "rendererMB": 1751,
+   "heapMB": 141,
+   "dom": 1794,
+   "q": 2,
+   "lsK": 2314
+  },
+  {
+   "buoi": 1166,
+   "y": 9,
+   "totalMB": 2501,
+   "rendererMB": 1766,
+   "heapMB": 141,
+   "dom": 1744,
+   "q": 0,
+   "lsK": 2342
+  },
+  {
+   "buoi": 1171,
+   "y": 9,
+   "totalMB": 2493,
+   "rendererMB": 1763,
+   "heapMB": 141,
+   "dom": 1708,
+   "q": 0,
+   "lsK": 2343
+  },
+  {
+   "buoi": 1176,
+   "y": 9,
+   "totalMB": 2576,
+   "rendererMB": 1836,
+   "heapMB": 141,
+   "dom": 1846,
+   "q": 2,
+   "lsK": 2380
+  },
+  {
+   "buoi": 1181,
+   "y": 9,
+   "totalMB": 2629,
+   "rendererMB": 1891,
+   "heapMB": 141,
+   "dom": 1753,
+   "q": 0,
+   "lsK": 2367
+  },
+  {
+   "buoi": 1186,
+   "y": 9,
+   "totalMB": 2633,
+   "rendererMB": 1901,
+   "heapMB": 141,
+   "dom": 1734,
+   "q": 0,
+   "lsK": 2399
+  },
+  {
+   "buoi": 1191,
+   "y": 9,
+   "totalMB": 2637,
+   "rendererMB": 1901,
+   "heapMB": 141,
+   "dom": 1708,
+   "q": 0,
+   "lsK": 2408
+  },
+  {
+   "buoi": 1196,
+   "y": 9,
+   "totalMB": 2856,
+   "rendererMB": 2098,
+   "heapMB": 141,
+   "dom": 1813,
+   "q": 1,
+   "lsK": 2419
+  },
+  {
+   "buoi": 1201,
+   "y": 9,
+   "totalMB": 2655,
+   "rendererMB": 1917,
+   "heapMB": 141,
+   "dom": 1763,
+   "q": 2,
+   "lsK": 2394
+  },
+  {
+   "buoi": 1206,
+   "y": 9,
+   "totalMB": 2787,
+   "rendererMB": 2042,
+   "heapMB": 141,
+   "dom": 1703,
+   "q": 0,
+   "lsK": 2403
+  },
+  {
+   "buoi": 1211,
+   "y": 9,
+   "totalMB": 2288,
+   "rendererMB": 1548,
+   "heapMB": 141,
+   "dom": 1676,
+   "q": 0,
+   "lsK": 2438
+  },
+  {
+   "buoi": 1216,
+   "y": 9,
+   "totalMB": 2602,
+   "rendererMB": 1857,
+   "heapMB": 150,
+   "dom": 1689,
+   "q": 1,
+   "lsK": 2433
+  },
+  {
+   "buoi": 1221,
+   "y": 9,
+   "totalMB": 2269,
+   "rendererMB": 1522,
+   "heapMB": 150,
+   "dom": 1688,
+   "q": 2,
+   "lsK": 2427
+  },
+  {
+   "buoi": 1226,
+   "y": 9,
+   "totalMB": 2682,
+   "rendererMB": 1930,
+   "heapMB": 150,
+   "dom": 1789,
+   "q": 0,
+   "lsK": 2423
+  },
+  {
+   "buoi": 1231,
+   "y": 9,
+   "totalMB": 2656,
+   "rendererMB": 1916,
+   "heapMB": 150,
+   "dom": 1698,
+   "q": 0,
+   "lsK": 2428
+  },
+  {
+   "buoi": 1236,
+   "y": 9,
+   "totalMB": 2678,
+   "rendererMB": 1926,
+   "heapMB": 150,
+   "dom": 1691,
+   "q": 2,
+   "lsK": 2464
+  },
+  {
+   "buoi": 1241,
+   "y": 9,
+   "totalMB": 2676,
+   "rendererMB": 1931,
+   "heapMB": 150,
+   "dom": 1834,
+   "q": 1,
+   "lsK": 2468
+  },
+  {
+   "buoi": 1246,
+   "y": 9,
+   "totalMB": 2718,
+   "rendererMB": 1957,
+   "heapMB": 150,
+   "dom": 1817,
+   "q": 2,
+   "lsK": 2496
+  },
+  {
+   "buoi": 1251,
+   "y": 9,
+   "totalMB": 2700,
+   "rendererMB": 1963,
+   "heapMB": 150,
+   "dom": 1666,
+   "q": 0,
+   "lsK": 2496
+  },
+  {
+   "buoi": 1256,
+   "y": 9,
+   "totalMB": 2822,
+   "rendererMB": 2062,
+   "heapMB": 150,
+   "dom": 1724,
+   "q": 1,
+   "lsK": 2520
+  },
+  {
+   "buoi": 1261,
+   "y": 9,
+   "totalMB": 2858,
+   "rendererMB": 2103,
+   "heapMB": 150,
+   "dom": 1717,
+   "q": 2,
+   "lsK": 2507
+  },
+  {
+   "buoi": 1266,
+   "y": 9,
+   "totalMB": 2803,
+   "rendererMB": 2043,
+   "heapMB": 150,
+   "dom": 1727,
+   "q": 0,
+   "lsK": 2523
+  },
+  {
+   "buoi": 1271,
+   "y": 9,
+   "totalMB": 2808,
+   "rendererMB": 2056,
+   "heapMB": 150,
+   "dom": 1679,
+   "q": 0,
+   "lsK": 2547
+  },
+  {
+   "buoi": 1276,
+   "y": 9,
+   "totalMB": 2833,
+   "rendererMB": 2075,
+   "heapMB": 150,
+   "dom": 1769,
+   "q": 2,
+   "lsK": 2541
+  },
+  {
+   "buoi": 1281,
+   "y": 10,
+   "totalMB": 2731,
+   "rendererMB": 1981,
+   "heapMB": 179,
+   "dom": 1769,
+   "q": 2,
+   "lsK": 2559
+  },
+  {
+   "buoi": 1286,
+   "y": 10,
+   "totalMB": 2923,
+   "rendererMB": 2169,
+   "heapMB": 179,
+   "dom": 1734,
+   "q": 0,
+   "lsK": 2562
+  },
+  {
+   "buoi": 1291,
+   "y": 10,
+   "totalMB": 2757,
+   "rendererMB": 2014,
+   "heapMB": 179,
+   "dom": 1669,
+   "q": 0,
+   "lsK": 2564
+  },
+  {
+   "buoi": 1296,
+   "y": 10,
+   "totalMB": 2635,
+   "rendererMB": 1877,
+   "heapMB": 179,
+   "dom": 1749,
+   "q": 1,
+   "lsK": 2588
+  },
+  {
+   "buoi": 1301,
+   "y": 10,
+   "totalMB": 2782,
+   "rendererMB": 2029,
+   "heapMB": 179,
+   "dom": 1660,
+   "q": 0,
+   "lsK": 2572
+  },
+  {
+   "buoi": 1306,
+   "y": 10,
+   "totalMB": 2821,
+   "rendererMB": 2060,
+   "heapMB": 179,
+   "dom": 1770,
+   "q": 1,
+   "lsK": 2609
+  },
+  {
+   "buoi": 1311,
+   "y": 10,
+   "totalMB": 2877,
+   "rendererMB": 2129,
+   "heapMB": 179,
+   "dom": 1754,
+   "q": 0,
+   "lsK": 2625
+  },
+  {
+   "buoi": 1316,
+   "y": 10,
+   "totalMB": 2867,
+   "rendererMB": 2102,
+   "heapMB": 179,
+   "dom": 1740,
+   "q": 1,
+   "lsK": 2635
+  },
+  {
+   "buoi": 1321,
+   "y": 10,
+   "totalMB": 2956,
+   "rendererMB": 2204,
+   "heapMB": 179,
+   "dom": 1603,
+   "q": 1,
+   "lsK": 2621
+  },
+  {
+   "buoi": 1326,
+   "y": 10,
+   "totalMB": 2898,
+   "rendererMB": 2155,
+   "heapMB": 179,
+   "dom": 1686,
+   "q": 0,
+   "lsK": 2634
+  },
+  {
+   "buoi": 1331,
+   "y": 10,
+   "totalMB": 2945,
+   "rendererMB": 2197,
+   "heapMB": 179,
+   "dom": 1773,
+   "q": 1,
+   "lsK": 2689
+  },
+  {
+   "buoi": 1336,
+   "y": 10,
+   "totalMB": 2977,
+   "rendererMB": 2215,
+   "heapMB": 179,
+   "dom": 1792,
+   "q": 2,
+   "lsK": 2685
+  },
+  {
+   "buoi": 1341,
+   "y": 10,
+   "totalMB": 2977,
+   "rendererMB": 2217,
+   "heapMB": 179,
+   "dom": 1734,
+   "q": 2,
+   "lsK": 2662
+  },
+  {
+   "buoi": 1346,
+   "y": 10,
+   "totalMB": 2941,
+   "rendererMB": 2197,
+   "heapMB": 159,
+   "dom": 1702,
+   "q": 0,
+   "lsK": 2677
+  },
+  {
+   "buoi": 1351,
+   "y": 10,
+   "totalMB": 2884,
+   "rendererMB": 2135,
+   "heapMB": 159,
+   "dom": 1718,
+   "q": 0,
+   "lsK": 2686
+  },
+  {
+   "buoi": 1356,
+   "y": 10,
+   "totalMB": 3017,
+   "rendererMB": 2255,
+   "heapMB": 159,
+   "dom": 1838,
+   "q": 1,
+   "lsK": 2709
+  },
+  {
+   "buoi": 1361,
+   "y": 10,
+   "totalMB": 2944,
+   "rendererMB": 2190,
+   "heapMB": 159,
+   "dom": 1693,
+   "q": 0,
+   "lsK": 2674
+  },
+  {
+   "buoi": 1366,
+   "y": 10,
+   "totalMB": 2967,
+   "rendererMB": 2201,
+   "heapMB": 159,
+   "dom": 1650,
+   "q": 2,
+   "lsK": 2704
+  },
+  {
+   "buoi": 1371,
+   "y": 10,
+   "totalMB": 2964,
+   "rendererMB": 2215,
+   "heapMB": 159,
+   "dom": 1698,
+   "q": 0,
+   "lsK": 2707
+  },
+  {
+   "buoi": 1376,
+   "y": 10,
+   "totalMB": 2986,
+   "rendererMB": 2222,
+   "heapMB": 159,
+   "dom": 1770,
+   "q": 2,
+   "lsK": 2731
+  },
+  {
+   "buoi": 1381,
+   "y": 10,
+   "totalMB": 2969,
+   "rendererMB": 2207,
+   "heapMB": 159,
+   "dom": 1725,
+   "q": 1,
+   "lsK": 2711
+  },
+  {
+   "buoi": 1386,
+   "y": 10,
+   "totalMB": 2731,
+   "rendererMB": 1970,
+   "heapMB": 159,
+   "dom": 1728,
+   "q": 0,
+   "lsK": 2724
+  },
+  {
+   "buoi": 1391,
+   "y": 10,
+   "totalMB": 2898,
+   "rendererMB": 2141,
+   "heapMB": 159,
+   "dom": 1882,
+   "q": 0,
+   "lsK": 2758
+  },
+  {
+   "buoi": 1396,
+   "y": 10,
+   "totalMB": 2969,
+   "rendererMB": 2208,
+   "heapMB": 159,
+   "dom": 1716,
+   "q": 1,
+   "lsK": 2761
+  },
+  {
+   "buoi": 1401,
+   "y": 10,
+   "totalMB": 2981,
+   "rendererMB": 2221,
+   "heapMB": 159,
+   "dom": 1703,
+   "q": 2,
+   "lsK": 2774
+  },
+  {
+   "buoi": 1406,
+   "y": 10,
+   "totalMB": 2954,
+   "rendererMB": 2201,
+   "heapMB": 159,
+   "dom": 1640,
+   "q": 0,
+   "lsK": 2782
+  },
+  {
+   "buoi": 1411,
+   "y": 10,
+   "totalMB": 1818,
+   "rendererMB": 1129,
+   "heapMB": 133,
+   "dom": 1615,
+   "q": 0,
+   "lsK": 2776
+  },
+  {
+   "buoi": 1416,
+   "y": 10,
+   "totalMB": 2039,
+   "rendererMB": 1325,
+   "heapMB": 133,
+   "dom": 1744,
+   "q": 0,
+   "lsK": 2799
+  },
+  {
+   "buoi": 1421,
+   "y": 10,
+   "totalMB": 2183,
+   "rendererMB": 1463,
+   "heapMB": 133,
+   "dom": 1695,
+   "q": 1,
+   "lsK": 2804
+  },
+  {
+   "buoi": 1426,
+   "y": 11,
+   "totalMB": 2124,
+   "rendererMB": 1412,
+   "heapMB": 133,
+   "dom": 1826,
+   "q": 2,
+   "lsK": 2805
+  },
+  {
+   "buoi": 1431,
+   "y": 11,
+   "totalMB": 2267,
+   "rendererMB": 1553,
+   "heapMB": 133,
+   "dom": 1732,
+   "q": 0,
+   "lsK": 2813
+  },
+  {
+   "buoi": 1436,
+   "y": 11,
+   "totalMB": 2280,
+   "rendererMB": 1567,
+   "heapMB": 133,
+   "dom": 1827,
+   "q": 1,
+   "lsK": 2813
+  },
+  {
+   "buoi": 1441,
+   "y": 11,
+   "totalMB": 2323,
+   "rendererMB": 1612,
+   "heapMB": 133,
+   "dom": 1795,
+   "q": 1,
+   "lsK": 2836
+  },
+  {
+   "buoi": 1446,
+   "y": 11,
+   "totalMB": 2330,
+   "rendererMB": 1613,
+   "heapMB": 133,
+   "dom": 1694,
+   "q": 0,
+   "lsK": 2807
+  },
+  {
+   "buoi": 1451,
+   "y": 11,
+   "totalMB": 2375,
+   "rendererMB": 1659,
+   "heapMB": 133,
+   "dom": 1642,
+   "q": 1,
+   "lsK": 2861
+  },
+  {
+   "buoi": 1456,
+   "y": 11,
+   "totalMB": 2424,
+   "rendererMB": 1699,
+   "heapMB": 133,
+   "dom": 1776,
+   "q": 0,
+   "lsK": 2875
+  },
+  {
+   "buoi": 1461,
+   "y": 11,
+   "totalMB": 2013,
+   "rendererMB": 1302,
+   "heapMB": 150,
+   "dom": 1773,
+   "q": 0,
+   "lsK": 2862
+  },
+  {
+   "buoi": 1466,
+   "y": 11,
+   "totalMB": 2169,
+   "rendererMB": 1432,
+   "heapMB": 150,
+   "dom": 1665,
+   "q": 3,
+   "lsK": 2899
+  },
+  {
+   "buoi": 1471,
+   "y": 11,
+   "totalMB": 2212,
+   "rendererMB": 1493,
+   "heapMB": 150,
+   "dom": 1684,
+   "q": 1,
+   "lsK": 2892
+  },
+  {
+   "buoi": 1476,
+   "y": 11,
+   "totalMB": 2207,
+   "rendererMB": 1476,
+   "heapMB": 150,
+   "dom": 1735,
+   "q": 0,
+   "lsK": 2910
+  },
+  {
+   "buoi": 1481,
+   "y": 11,
+   "totalMB": 2220,
+   "rendererMB": 1527,
+   "heapMB": 150,
+   "dom": 1824,
+   "q": 0,
+   "lsK": 2916
+  },
+  {
+   "buoi": 1486,
+   "y": 11,
+   "totalMB": 2131,
+   "rendererMB": 1393,
+   "heapMB": 150,
+   "dom": 1805,
+   "q": 3,
+   "lsK": 2925
+  },
+  {
+   "buoi": 1491,
+   "y": 11,
+   "totalMB": 2342,
+   "rendererMB": 1595,
+   "heapMB": 150,
+   "dom": 1702,
+   "q": 0,
+   "lsK": 2902
+  },
+  {
+   "buoi": 1496,
+   "y": 11,
+   "totalMB": 2380,
+   "rendererMB": 1640,
+   "heapMB": 150,
+   "dom": 1762,
+   "q": 0,
+   "lsK": 2912
+  },
+  {
+   "buoi": 1501,
+   "y": 11,
+   "totalMB": 2432,
+   "rendererMB": 1717,
+   "heapMB": 150,
+   "dom": 1740,
+   "q": 0,
+   "lsK": 2937
+  },
+  {
+   "buoi": 1506,
+   "y": 11,
+   "totalMB": 2491,
+   "rendererMB": 1738,
+   "heapMB": 150,
+   "dom": 1773,
+   "q": 1,
+   "lsK": 2940
+  },
+  {
+   "buoi": 1511,
+   "y": 11,
+   "totalMB": 2444,
+   "rendererMB": 1729,
+   "heapMB": 150,
+   "dom": 1704,
+   "q": 2,
+   "lsK": 2935
+  },
+  {
+   "buoi": 1516,
+   "y": 11,
+   "totalMB": 2483,
+   "rendererMB": 1733,
+   "heapMB": 150,
+   "dom": 1691,
+   "q": 0,
+   "lsK": 2944
+  },
+  {
+   "buoi": 1521,
+   "y": 11,
+   "totalMB": 2612,
+   "rendererMB": 1879,
+   "heapMB": 150,
+   "dom": 1790,
+   "q": 0,
+   "lsK": 2946
+  },
+  {
+   "buoi": 1526,
+   "y": 11,
+   "totalMB": 2494,
+   "rendererMB": 1754,
+   "heapMB": 179,
+   "dom": 1703,
+   "q": 2,
+   "lsK": 2986
+  },
+  {
+   "buoi": 1531,
+   "y": 11,
+   "totalMB": 2454,
+   "rendererMB": 1735,
+   "heapMB": 179,
+   "dom": 1687,
+   "q": 0,
+   "lsK": 2970
+  },
+  {
+   "buoi": 1536,
+   "y": 11,
+   "totalMB": 2505,
+   "rendererMB": 1772,
+   "heapMB": 179,
+   "dom": 1740,
+   "q": 2,
+   "lsK": 3007
+  },
+  {
+   "buoi": 1541,
+   "y": 11,
+   "totalMB": 2513,
+   "rendererMB": 1778,
+   "heapMB": 179,
+   "dom": 1678,
+   "q": 0,
+   "lsK": 3007
+  },
+  {
+   "buoi": 1546,
+   "y": 11,
+   "totalMB": 2550,
+   "rendererMB": 1805,
+   "heapMB": 179,
+   "dom": 1705,
+   "q": 1,
+   "lsK": 3037
+  },
+  {
+   "buoi": 1551,
+   "y": 11,
+   "totalMB": 2410,
+   "rendererMB": 1671,
+   "heapMB": 179,
+   "dom": 1717,
+   "q": 2,
+   "lsK": 3004
+  },
+  {
+   "buoi": 1556,
+   "y": 11,
+   "totalMB": 2534,
+   "rendererMB": 1786,
+   "heapMB": 179,
+   "dom": 1700,
+   "q": 0,
+   "lsK": 3009
+  },
+  {
+   "buoi": 1561,
+   "y": 11,
+   "totalMB": 2534,
+   "rendererMB": 1798,
+   "heapMB": 179,
+   "dom": 1685,
+   "q": 0,
+   "lsK": 3035
+  },
+  {
+   "buoi": 1566,
+   "y": 11,
+   "totalMB": 2584,
+   "rendererMB": 1840,
+   "heapMB": 179,
+   "dom": 1789,
+   "q": 2,
+   "lsK": 3044
+  },
+  {
+   "buoi": 1571,
+   "y": 12,
+   "totalMB": 2567,
+   "rendererMB": 1824,
+   "heapMB": 179,
+   "dom": 1694,
+   "q": 2,
+   "lsK": 3054
+  },
+  {
+   "buoi": 1576,
+   "y": 12,
+   "totalMB": 2532,
+   "rendererMB": 1800,
+   "heapMB": 179,
+   "dom": 1685,
+   "q": 0,
+   "lsK": 3051
+  },
+  {
+   "buoi": 1581,
+   "y": 12,
+   "totalMB": 2556,
+   "rendererMB": 1823,
+   "heapMB": 179,
+   "dom": 1720,
+   "q": 0,
+   "lsK": 3039
+  },
+  {
+   "buoi": 1586,
+   "y": 12,
+   "totalMB": 2642,
+   "rendererMB": 1898,
+   "heapMB": 179,
+   "dom": 1630,
+   "q": 2,
+   "lsK": 3055
+  },
+  {
+   "buoi": 1591,
+   "y": 12,
+   "totalMB": 2714,
+   "rendererMB": 1967,
+   "heapMB": 228,
+   "dom": 1660,
+   "q": 0,
+   "lsK": 3048
+  },
+  {
+   "buoi": 1596,
+   "y": 12,
+   "totalMB": 2661,
+   "rendererMB": 1914,
+   "heapMB": 228,
+   "dom": 1651,
+   "q": 0,
+   "lsK": 3112
+  },
+  {
+   "buoi": 1601,
+   "y": 12,
+   "totalMB": 2545,
+   "rendererMB": 1804,
+   "heapMB": 228,
+   "dom": 1699,
+   "q": 0,
+   "lsK": 3120
+  },
+  {
+   "buoi": 1606,
+   "y": 12,
+   "totalMB": 2700,
+   "rendererMB": 1946,
+   "heapMB": 228,
+   "dom": 1615,
+   "q": 2,
+   "lsK": 3146
+  },
+  {
+   "buoi": 1611,
+   "y": 12,
+   "totalMB": 2701,
+   "rendererMB": 1958,
+   "heapMB": 228,
+   "dom": 1691,
+   "q": 0,
+   "lsK": 3115
+  },
+  {
+   "buoi": 1616,
+   "y": 12,
+   "totalMB": 2722,
+   "rendererMB": 1979,
+   "heapMB": 228,
+   "dom": 1760,
+   "q": 1,
+   "lsK": 3138
+  }
+ ],
+ "promo": {
+  "raw": 33,
+  "real": 33,
+  "picked": 25,
+  "by": {
+   "exam": 33
+  }
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Cung nữ tuyển vào cung · #",
+  ".dlg|Thôn quê",
+  "page|Nhà tranh · Ở đây có # người.",
+  ".dlg|sáng · còn",
+  "page|Nhà tranh · Không gặp ai.",
+  "#kdaytc|",
+  ".kbk|Tổng lược",
+  ".dlg|Mẹ trở bệnh",
+  ".dlg|Lái buôn hỏi vải",
+  "#modal|Có người bán tin",
+  ".dlg|Có người bán tin",
+  "#modal|Sắc",
+  ".dlg|Sắc",
+  "#modal|Lễ Phật đản",
+  ".dlg|Lễ Phật đản",
+  "#modal|Hỏa hoạn lớn",
+  ".dlg|Hỏa hoạn lớn",
+  ".dlg|Xuân Đào khóc",
+  "#kxcatch|",
+  ".dlg|Tin trong cung buổi này",
+  ".dlg|Sứ đoàn vào triều",
+  ".dlg|Tin mua được",
+  "#modal|Sứ đoàn vào triều",
+  "#modal|Nước lên",
+  ".dlg|Nước lên",
+  "#modal|Lệnh tuyển cung nữ",
+  ".dlg|Lệnh tuyển cung nữ",
+  ".dlg|Lịch tháng",
+  ".dlg|Bạc",
+  "#modal|Lịch tháng",
+  ".dlg|Thu săn",
+  ".dlg|tối · còn",
+  "#modal|Lái buôn hỏi vải",
+  "#modal|Thuế đinh",
+  ".dlg|Thuế đinh",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Đại phóng cung nhân",
+  ".dlg|Đại phóng cung nhân",
+  "#modal|Tỉnh thân",
+  ".dlg|Tỉnh thân",
+  "#modal|Mẹ trở bệnh",
+  "#modal|Yến đầy tháng hoàng tử",
+  ".dlg|Yến đầy tháng hoàng tử",
+  ".dlg|Chương # · Chờ lệnh tuyển cung nữ",
+  ".dlg|Thiên mệnh",
+  ".dlg|Danh hiệu",
+  "#modal|Đại án ngoại thích",
+  ".dlg|Đại án ngoại thích",
+  ".dlg|Phiên vương nhập triều",
+  "#modal|Phiên vương nhập triều",
+  "#modal|Án mất trộm ngự khố",
+  ".dlg|Án mất trộm ngự khố",
+  "#modal|Ngày tuyển cung nữ",
+  ".dlg|Ngày tuyển cung nữ",
+  "#kg82|",
+  ".kmov|",
+  ".dlg|Nhập cung làm cung nữ",
+  "#kprevov|",
+  ".dlg|Hành trang những năm ở nhà",
+  "page|Tích Cần viện · Quý nhân Phó Nhạn Hồi đi",
+  "page|Tích Cần viện · Ở đây còn # người.",
+  ".dlg|Kỳ ngộ",
+  ".dlg|Xong việc: Làm một việc hầu hạ",
+  ".kne|",
+  "#dawn|",
+  ".dlg|Kẻ hầu",
+  ".dlg|Xong việc: Học lễ nghi với cô cô",
+  "#klearnov|",
+  "#modal|Chủ thưởng",
+  ".dlg|Chủ thưởng",
+  "#kmrew|",
+  ".dlg|Danh hiệu mới",
+  ".dlg|Đeo «Kim vàng chỉ bạc»",
+  ".dlg|Tin về chủ nhân",
+  ".dlg|Chương # khép lại",
+  ".kfoc|",
+  ".dlg|Chương #: Một ánh mắt rồng",
+  ".dlg|Tuyển tú",
+  ".dlg|Đổi chủ",
+  "page|Tích Cần viện · Thục hoàng quý phi Nhâm ",
+  ".dlg|Bạc lạ",
+  "page|Tích Cần viện · Không gặp ai.",
+  ".dlg|Thăng bậc",
+  ".dlg|Hoàng thượng",
+  "#modal|Tin trong cung buổi này",
+  ".dlg|Tiệc Thất tịch",
+  ".dlg|Bộ sưu tập",
+  "page|Tích Cần viện · Hoàng hậu Tào Ngưng Hoa ",
+  ".dlg|Bị tố bày biện xa xỉ",
+  ".dlg|Thái hậu bệnh nặng",
+  ".dlg|Hoàng hậu Tào Ngưng Hoa quở mắng",
+  ".dlg|Danh hiệu lên bậc",
+  ".dlg|Đại lễ tế Giao",
+  "#modal|Đại lễ tế Giao",
+  ".dlg|Chương #: Học lễ nghi cung cấm",
+  ".dlg|Thư nhà",
+  ".dlg|Đồ thất lạc",
+  ".dlg|Yến tiệc đầu xuân",
+  ".dlg|Cung Chính ti xét xử",
+  ".dlg|Bị soát phòng",
+  ".dlg|Đại án vu cổ",
+  ".dlg|Khoa thi Đình",
+  "#modal|Kỳ ngộ",
+  ".dlg|Yến đầy tháng công chúa",
+  ".dlg|Chương #: Ma ma dạy việc",
+  "#modal|Ban gả",
+  ".dlg|Ban gả",
+  ".dlg|Đại lễ sắc lập Thái tử",
+  ".dlg|Nạn châu chấu",
+  ".dlg|Đại xá thiên hạ",
+  ".dlg|Thiên hạ truyền tin",
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương",
+  ".dlg|Tin báo",
+  ".dlg|Quốc tang",
+  ".dlg|Thục hoàng quý phi Nhâm Lang Hoa quở mắn",
+  "#dawn|Tổng lược",
+  ".dlg|Chương #: Bài học thứ nhất",
+  ".dlg|Đại tuyển tú nữ",
+  "#modal|Chính tuyến · Từ cung nữ đi lên · Chương",
+  ".dlg|Người bên cạnh",
+  "page|Tích Cần viện · Thục quý nhân Nhâm Lang ",
+  "#modal|Có người đến",
+  ".dlg|Có người đến",
+  ".dlg|Cấm cung giới nghiêm",
+  "page|Tích Cần viện · Đức phi Hoa Liễu Nhi đi ",
+  ".dlg|Chương #: Sổ sách Nội vụ phủ",
+  ".dlg|Đức phi Hoa Liễu Nhi quở mắng",
+  ".dlg|Chương #: Ma ma bị tố",
+  ".dlg|Lũ lớn, mất mùa",
+  ".dlg|Đại trai đàn cầu phúc",
+  ".dlg|Lập Hoàng hậu mới",
+  ".dlg|Đến tuổi xuất cung",
+  ".dlg|Chương #: Bảo vệ thầy",
+  "page|Tích Cần viện · Đức quý phi Hoa Liễu Nhi",
+  ".dlg|Chương #: Kỳ sát hạch",
+  ".dlg|Đức quý phi Hoa Liễu Nhi quở mắng",
+  ".dlg|Có người đến an ủi",
+  ".dlg|Chương #: Ma ma lâm bệnh",
+  ".dlg|Đại thọ",
+  ".dlg|Chương #: Chưởng sự",
+  ".dlg|Khép nẻo đời: Từ cung nữ đi lên",
+  ".dlg|Chương #: Chim sẻ hóa phượng hoàng",
+  "#kievcatch|",
+  "#modal|Bị tố bày biện xa xỉ",
+  ".dlg|Hạn hán, mất mùa",
+  "page|Tích Cần viện · Hoàng hậu Thôi Ngọc Khê "
+ ],
+ "_momRank": "maid 4",
+ "_unsFail": {
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Cung nữ tuyển vào cung · #/#": {},
+  "page|Nhà tranh · Ở đây có # người.": {},
+  "page|Nhà tranh · Không gặp ai.": {},
+  ".dlg|Mẹ trở bệnh": {},
+  ".dlg|Lái buôn hỏi vải": {},
+  ".dlg|Có người bán tin": {},
+  ".dlg|Xuân Đào khóc": {},
+  ".dlg|Nước lên": {},
+  ".dlg|Lệnh tuyển cung nữ": {},
+  ".dlg|Thuế đinh": {},
+  ".dlg|Chương # · Chờ lệnh tuyển cung nữ": {},
+  ".dlg|Danh hiệu": {},
+  ".dlg|Thiên mệnh": {},
+  ".dlg|Ngày tuyển cung nữ": {},
+  ".dlg|Nhập cung làm cung nữ": {},
+  "page|Tích Cần viện · Ở đây còn # người.": {},
+  "#dawn|": {},
+  ".dlg|Kẻ hầu": {},
+  "page|Tích Cần viện · Quý nhân Phó Nhạn Hồi đi vắng, đan": {},
+  ".dlg|Danh hiệu mới": {},
+  ".dlg|Đeo «Kim vàng chỉ bạc»": {},
+  ".dlg|Bạc lạ": {},
+  "page|Tích Cần viện · Không gặp ai.": {},
+  "page|Tích Cần viện · Thục hoàng quý phi Nhâm Lang Hoa đ": {},
+  ".dlg|Hoàng thượng": {},
+  ".dlg|Tiệc Thất tịch": {},
+  "page|Tích Cần viện · Hoàng hậu Tào Ngưng Hoa đi vắng, đ": {},
+  ".dlg|Hoàng hậu Tào Ngưng Hoa quở mắng": {},
+  ".kmov|": {},
+  ".dlg|Yến tiệc đầu xuân": {},
+  ".dlg|Ban gả": {},
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #": {},
+  ".dlg|Thục hoàng quý phi Nhâm Lang Hoa quở mắng": {},
+  ".dlg|Người bên cạnh": {},
+  ".dlg|Có người đến": {},
+  "page|Tích Cần viện · Đức phi Hoa Liễu Nhi đi vắng, đang": {},
+  ".dlg|Đức phi Hoa Liễu Nhi quở mắng": {},
+  ".dlg|Đến tuổi xuất cung": {},
+  "page|Tích Cần viện · Đức quý phi Hoa Liễu Nhi đi vắng, ": {},
+  ".dlg|Đức quý phi Hoa Liễu Nhi quở mắng": {},
+  ".dlg|Có người đến an ủi": {},
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi ": {},
+  "#dawn|Tổng lược": {},
+  ".kfoc|": {},
+  "page|Tích Cần viện · Hoàng hậu Thôi Ngọc Khê đi vắng, đ": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|871,392": {
+   "left": 316,
+   "n": 1
+  },
+  "#modal|Hỏa hoạn lớn|706,544": {
+   "left": 162,
+   "n": 1
+  },
+  "#modal|Đại phóng cung nhân|706,535": {
+   "left": 143,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,585": {
+   "left": 140,
+   "n": 1
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,571": {
+   "left": 164,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,535": {
+   "left": 143,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,563": {
+   "left": 205,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,548": {
+   "left": 228,
+   "n": 3
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,548": {
+   "left": 228,
+   "n": 1
+  },
+  "#modal|Đại án ngoại thích|706,563": {
+   "left": 21,
+   "n": 1
+  },
+  ".dlg|Đại án ngoại thích|706,562": {
+   "left": 6,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,580": {
+   "left": 183,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,610": {
+   "left": 183,
+   "n": 3
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,610": {
+   "left": 183,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,553": {
+   "left": 187,
+   "n": 1
+  },
+  ".dlg|Nhập cung làm cung nữ|800,374": {
+   "left": 373,
+   "n": 1
+  },
+  ".kbk|Tổng lược|783,428": {
+   "left": 362,
+   "n": 2
+  },
+  "#dawn|Tổng lược|783,428": {
+   "left": 203,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,585": {
+   "left": 154,
+   "n": 1
+  },
+  "#modal|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,596": {
+   "left": 156,
+   "n": 3
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,596": {
+   "left": 156,
+   "n": 3
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,600": {
+   "left": 163,
+   "n": 2
+  },
+  "#modal|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,600": {
+   "left": 163,
+   "n": 3
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,586": {
+   "left": 137,
+   "n": 1
+  },
+  "#modal|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,587": {
+   "left": 138,
+   "n": 3
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,587": {
+   "left": 138,
+   "n": 2
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,590": {
+   "left": 144,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,567": {
+   "left": 156,
+   "n": 1
+  },
+  "#modal|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,578": {
+   "left": 120,
+   "n": 3
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,578": {
+   "left": 120,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi #|706,577": {
+   "left": 119,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi |706,590": {
+   "left": 144,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi |706,600": {
+   "left": 163,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi |706,609": {
+   "left": 182,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi |706,587": {
+   "left": 138,
+   "n": 1
+  },
+  ".dlg|Chính tuyến · Từ cung nữ đi lên · Chương # · Hồi |706,557": {
+   "left": 138,
+   "n": 1
+  }
+ },
+ "offers": [
+  {
+   "buoi": 291,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Thục hoàng quý phi Nhâm Lang Hoa đ»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Không gặp ai.»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Quay lại",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Sẵn sàngtừ lúc này mới tính giờ",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Môn kế tiếp",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Xem kết quả",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 315,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Thục hoàng quý phi Nhâm Lang Hoa đ»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 315,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Quay lại",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 315,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Sẵn sàngtừ lúc này mới tính giờ",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 315,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 315,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 315,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Môn kế tiếp",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 315,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Xem kết quả",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 351,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Thục hoàng quý phi Nhâm Lang Hoa đ»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Thục hoàng quý phi Nhâm Lang Hoa đ»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Quay lại",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Sẵn sàngtừ lúc này mới tính giờ",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Môn kế tiếp",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Xem kết quả",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 387,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Ở đây còn 13 người.»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Hoàng hậu Tào Ngưng Hoa đi vắng, đ»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Quay lại",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Sẵn sàngtừ lúc này mới tính giờ",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Hướng dẫnchơi thử một hồi dễ, không tính phần, thử lại được",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Bỏ quamôn này kết quả khá, tự thi giỏi thì hơn",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Môn kế tiếp",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 391,
+   "y": 3,
+   "rank": 0,
+   "screen": "#kg82 «»",
+   "label": "Xem kết quả",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 992,
+   "y": 8,
+   "rank": 0,
+   "screen": ".dlg «Đến tuổi xuất cung»",
+   "label": "Ở lại làm ma maRất vữngTốnkhôngĐượcthêm thể diện trong cung,",
+   "kind": "exam",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 994,
+   "y": 8,
+   "rank": 0,
+   "screen": "page «Tích Cần viện · Đức phi Hoa Liễu Nhi đi vắng, đang»",
+   "label": "Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nội vụ phủ k",
+   "kind": "exam",
+   "rule": 2,
+   "picked": false
+  }
+ ],
+ "cnvExit": [
+  {
+   "buoi": 508,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-508.json",
+   "opts": [
+    "Tạ ơn, xuất giá",
+    "Xin ở lại hầu chủ"
+   ]
+  },
+  {
+   "buoi": 812,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-812.json",
+   "opts": [
+    "Tạ ơn, xuất giá",
+    "Xin ở lại hầu chủ"
+   ]
+  },
+  {
+   "buoi": 992,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-992.json",
+   "opts": [
+    "Xuất cung về quê",
+    "Ở lại làm ma ma"
+   ]
+  },
+  {
+   "buoi": 1076,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-1076.json",
+   "opts": [
+    "Tạ ơn, xuất giá",
+    "Xin ở lại hầu chủ"
+   ]
+  },
+  {
+   "buoi": 1113,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-1113.json",
+   "opts": [
+    "Tạ ơn, xuất giá",
+    "Xin ở lại hầu chủ"
+   ]
+  },
+  {
+   "buoi": 1379,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-1379.json",
+   "opts": [
+    "Tạ ơn, xuất giá",
+    "Xin ở lại hầu chủ"
+   ]
+  },
+  {
+   "buoi": 1487,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-1487.json",
+   "opts": [
+    "Tạ ơn, xuất giá",
+    "Xin ở lại hầu chủ"
+   ]
+  },
+  {
+   "buoi": 1536,
+   "file": "/home/user/wt/s11b-out/shots-flight2-s11b/cnvexit-1536.json",
+   "opts": [
+    "Tạ ơn, xuất giá",
+    "Xin ở lại hầu chủ"
+   ]
+  }
+ ],
+ "_bootFirst": 1,
+ "choicePts": [
+  {
+   "k": "#dawn|Tổng lược|Trang sau/Trang trước",
+   "screen": "#dawn «Tổng lược»",
+   "opts": [
+    "Trang trước",
+    "Trang sau"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Trang trước": 1,
+    "Trang sau": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".kbk|Tổng lược|Trang sau/Trang trước",
+   "screen": ".kbk «Tổng lược»",
+   "opts": [
+    "Trang trước",
+    "Trang sau"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Trang sau": 60,
+    "Trang trước": 45
+   },
+   "n": 105
+  },
+  {
+   "k": ".dlg|Bạc lạ|Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ/Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ /Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Huệ phi Viên Uy",
+   "screen": ".dlg «Bạc lạ»",
+   "opts": [
+    "Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ",
+    "Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ ",
+    "Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Huệ phi Viên Uy"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ ": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".kfoc||Nhịn/Đáp trả sắc sảo",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Nhịn",
+    "Đáp trả sắc sảo"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Đáp trả sắc sảo": 2,
+    "Nhịn": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".kfoc||Giao thiệp 1/1/Hành lễ thỉnh an · Rất vững · Tốn 1 khắc/Lễ nghi 1/1",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Lễ nghi 1/1",
+    "Giao thiệp 1/1",
+    "Hành lễ thỉnh an · Rất vững · Tốn 1 khắc"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Hành lễ thỉnh an · Rất vững · Tốn 1 khắc": 3
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Hoàng thượng|Cúi đầu đúng phépRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút ít), chủ thêm tin/Lánh vào trongRất vữngTốnkhôngĐượcdưỡng sức, chủ thêm tin dùng kẻ hầuMấtlỡ một d/Ngẩng lên, đáp một câu khéoKhó lườngTốnkhôngĐượcHoàng thượng để ý đến kẻ hầu; dễ",
+   "screen": ".dlg «Hoàng thượng»",
+   "opts": [
+    "Cúi đầu đúng phépRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút ít), chủ thêm tin",
+    "Ngẩng lên, đáp một câu khéoKhó lườngTốnkhôngĐượcHoàng thượng để ý đến kẻ hầu; dễ",
+    "Lánh vào trongRất vữngTốnkhôngĐượcdưỡng sức, chủ thêm tin dùng kẻ hầuMấtlỡ một d"
+   ],
+   "ods": [
+    "Rất vững",
+    "Khó lường",
+    "Rất vững"
+   ],
+   "took": {
+    "Lánh vào trongRất vữngTốnkhôngĐượcdưỡng sức, chủ thêm tin dùng kẻ hầuMấtlỡ một d": 2,
+    "Cúi đầu đúng phépRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút ít), chủ thêm tin": 2
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Bạc lạ|Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ/Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ /Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Quý nhân Lôi Ch",
+   "screen": ".dlg «Bạc lạ»",
+   "opts": [
+    "Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ",
+    "Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ ",
+    "Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Quý nhân Lôi Ch"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Kỳ ngộ|Cho nàng ta ít bạc gửi về nhàRất vữngTốnBạc -60·1 khắcĐượcđược tiếng hiền đức, n/Xin giúp nàng ta một lời với cô côRất vữngTốn2 khắcĐượcthêm thể diện trong cung,",
+   "screen": ".dlg «Kỳ ngộ»",
+   "opts": [
+    "Cho nàng ta ít bạc gửi về nhàRất vữngTốnBạc -60·1 khắcĐượcđược tiếng hiền đức, n",
+    "Xin giúp nàng ta một lời với cô côRất vữngTốn2 khắcĐượcthêm thể diện trong cung,"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Cho nàng ta ít bạc gửi về nhàRất vữngTốnBạc -60·1 khắcĐượcđược tiếng hiền đức, n": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hỏa hoạn lớn|Chỉ huy cung nhân dập lửaRất vữngTốnkhôngĐượcthêm thể diện trong cung, người ấy /Lao vào cứu ngườiKhó lườngTốnSức -25ĐượcThường tại Hách Thư Dao có thiện cảm với/Ngầm tra kẻ phóng hỏaTùy duyênTốnkhôngĐượcbiết ai phóng hỏa, nắm thêm chứng cứ; ",
+   "screen": ".dlg «Hỏa hoạn lớn»",
+   "opts": [
+    "Lao vào cứu ngườiKhó lườngTốnSức -25ĐượcThường tại Hách Thư Dao có thiện cảm với",
+    "Chỉ huy cung nhân dập lửaRất vữngTốnkhôngĐượcthêm thể diện trong cung, người ấy ",
+    "Ngầm tra kẻ phóng hỏaTùy duyênTốnkhôngĐượcbiết ai phóng hỏa, nắm thêm chứng cứ; "
+   ],
+   "ods": [
+    "Khó lường",
+    "Rất vững",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Chỉ huy cung nhân dập lửaRất vữngTốnkhôngĐượcthêm thể diện trong cung, người ấy ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kfoc||Mặc kệ/Nghe lén/Thôi, lui về cung",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Nghe lén",
+    "Mặc kệ",
+    "Thôi, lui về cung"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Mặc kệ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Kẻ hầu|Làm cật lực, không kêu ca (mệt)Rất vữngTốnSức -6Đượcchủ thêm tin dùng kẻ hầu, đư/Tố quản sự lên chủ nhânCó cơTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, thêm thể diện /Đút bạc cho quản sựRất vữngTốnBạc -5Đượcdưỡng sức (nhiều)Gợi ýdưỡng sức (nhiều)!",
+   "screen": ".dlg «Kẻ hầu»",
+   "opts": [
+    "Đút bạc cho quản sựRất vữngTốnBạc -5Đượcdưỡng sức (nhiều)Gợi ýdưỡng sức (nhiều)!",
+    "Làm cật lực, không kêu ca (mệt)Rất vữngTốnSức -6Đượcchủ thêm tin dùng kẻ hầu, đư",
+    "Tố quản sự lên chủ nhânCó cơTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, thêm thể diện "
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Có cơ"
+   ],
+   "took": {
+    "Đút bạc cho quản sựRất vữngTốnBạc -5Đượcdưỡng sức (nhiều)Gợi ýdưỡng sức (nhiều)!": 2,
+    "Làm cật lực, không kêu ca (mệt)Rất vữngTốnSức -6Đượcchủ thêm tin dùng kẻ hầu, đư": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Tiệc Thất tịch|Rót rượu gần ngự tọaTùy duyênTốnkhôngĐượcHoàng thượng để ý đến kẻ hầu; hên xui; /Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầuGợi ýchủ thêm tin dù",
+   "screen": ".dlg «Tiệc Thất tịch»",
+   "opts": [
+    "Rót rượu gần ngự tọaTùy duyênTốnkhôngĐượcHoàng thượng để ý đến kẻ hầu; hên xui; ",
+    "Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầuGợi ýchủ thêm tin dù"
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Rất vững"
+   ],
+   "took": {
+    "Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầuGợi ýchủ thêm tin dù": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kfoc||Bỏ bạc nhờ bếp làm cho người/Dỗ khéo vài câu rồi lui/Thức hầu đến sáng (mệt)",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Thức hầu đến sáng (mệt)",
+    "Dỗ khéo vài câu rồi lui",
+    "Bỏ bạc nhờ bếp làm cho người"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Bỏ bạc nhờ bếp làm cho người": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".kfoc||Ban thưởng 1/1/Giao thiệp 1/2/Hầu hạ 1/2/Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 khắc/Đấm lưng, hầu chuyện · Có cơ · Tốn 1 khắc",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Hầu hạ 1/2",
+    "Ban thưởng 1/1",
+    "Giao thiệp 1/2",
+    "Đấm lưng, hầu chuyện · Có cơ · Tốn 1 khắc",
+    "Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 khắc"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 khắc": 4
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Bạc lạ|Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ/Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ /Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Quý nhân Lương ",
+   "screen": ".dlg «Bạc lạ»",
+   "opts": [
+    "Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ",
+    "Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ ",
+    "Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Quý nhân Lương "
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kfoc||Không tiếp/Tiếp chuyện",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Tiếp chuyện",
+    "Không tiếp"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Tiếp chuyện": 3,
+    "Không tiếp": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".kfoc||Chia sẻ bí mật/Hỏi han sức khỏe/Khen tài nghệ nàng ta/Khéo cáo lui",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Hỏi han sức khỏe",
+    "Chia sẻ bí mật",
+    "Khen tài nghệ nàng ta",
+    "Khéo cáo lui"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Hỏi han sức khỏe": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Người bên cạnh|Chia sẻ bí mậtRất vữngTốnkhôngĐượcThường tại Hách Thư Dao có thiện cảm với ta hơ/Hỏi han sức khỏeRất vữngTốnkhôngĐượcThường tại Hách Thư Dao có thiện cảm với ta /Khen tài nghệ nàng taRất vữngTốnkhôngĐượcThường tại Hách Thư Dao có thiện cảm vớ/Khéo cáo luiRất vữngTốnkhôngĐượckhông thêm lời, giữ hòa khí đôi bênGợi ýkhông th",
+   "screen": ".dlg «Người bên cạnh»",
+   "opts": [
+    "Hỏi han sức khỏeRất vữngTốnkhôngĐượcThường tại Hách Thư Dao có thiện cảm với ta ",
+    "Khen tài nghệ nàng taRất vữngTốnkhôngĐượcThường tại Hách Thư Dao có thiện cảm vớ",
+    "Chia sẻ bí mậtRất vữngTốnkhôngĐượcThường tại Hách Thư Dao có thiện cảm với ta hơ",
+    "Khéo cáo luiRất vữngTốnkhôngĐượckhông thêm lời, giữ hòa khí đôi bênGợi ýkhông th"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Chia sẻ bí mậtRất vữngTốnkhôngĐượcThường tại Hách Thư Dao có thiện cảm với ta hơ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Bạc lạ|Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ/Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ /Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Tần Mộ Dung Lươ",
+   "screen": ".dlg «Bạc lạ»",
+   "opts": [
+    "Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ",
+    "Từ chối, bẩm chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, nắm thêm chứng cứ ",
+    "Từ chối, im lặngRất vữngTốnkhôngĐượctrả lại bạc, giữ hòa khí với Tần Mộ Dung Lươ"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Nhận bạc, làm tai mắtRất vữngTốnkhôngĐượccó thêm bạc, có thêm bạc (chút ít)Mấtmỗ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Yến tiệc đầu xuân|Rót rượu gần ngự tọaTùy duyênTốnkhôngĐượcHoàng thượng để ý đến kẻ hầu; hên xui; /Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầuGợi ýchủ thêm tin dù",
+   "screen": ".dlg «Yến tiệc đầu xuân»",
+   "opts": [
+    "Rót rượu gần ngự tọaTùy duyênTốnkhôngĐượcHoàng thượng để ý đến kẻ hầu; hên xui; ",
+    "Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầuGợi ýchủ thêm tin dù"
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Rất vững"
+   ],
+   "took": {
+    "Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầuGợi ýchủ thêm tin dù": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kfoc||Ban thưởng 1/1/Giao thiệp 1/2/Hầu hạ 1/2/Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 khắc/Đấm lưng, hầu chuyện · Tùy duyên · Tốn 1 khắc",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Hầu hạ 1/2",
+    "Ban thưởng 1/1",
+    "Giao thiệp 1/2",
+    "Đấm lưng, hầu chuyện · Tùy duyên · Tốn 1 khắc",
+    "Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 khắc"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 khắc": 3
+   },
+   "n": 3
+  },
+  {
+   "k": ".kfoc||Cãi lại/Cúi đầu nhận lỗi/Khóc lóc xin tha",
+   "screen": ".kfoc «»",
+   "opts": [
+    "Cúi đầu nhận lỗi",
+    "Cãi lại",
+    "Khóc lóc xin tha"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cãi lại": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Kẻ hầu|Bỏ bạc nhờ bếp làm cho ngườiRất vữngTốnBạc -5Đượcchủ thêm tin dùng kẻ hầu, Đức q/Dỗ khéo vài câu rồi luiCó cơTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, dưỡng sức; hên/Thức hầu đến sáng (mệt)Rất vữngTốnSức -6Đượcchủ thêm tin dùng kẻ hầuGợi ýchủ thê",
+   "screen": ".dlg «Kẻ hầu»",
+   "opts": [
+    "Thức hầu đến sáng (mệt)Rất vữngTốnSức -6Đượcchủ thêm tin dùng kẻ hầuGợi ýchủ thê",
+    "Bỏ bạc nhờ bếp làm cho ngườiRất vữngTốnBạc -5Đượcchủ thêm tin dùng kẻ hầu, Đức q",
+    "Dỗ khéo vài câu rồi luiCó cơTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, dưỡng sức; hên"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Có cơ"
+   ],
+   "took": {
+    "Bỏ bạc nhờ bếp làm cho ngườiRất vữngTốnBạc -5Đượcchủ thêm tin dùng kẻ hầu, Đức q": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đức quý phi Hoa Liễu Nhi quở mắng|Cãi lạiRất vữngTốnkhôngĐượcthêm thể diện trong cung, đám cung nhân nểMấtchủ bớt /Cúi đầu nhận lỗiRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, được tiếng hiền đứ/Khóc lóc xin thaTùy duyênTốnkhôngĐượcchủ thêm tin dùng kẻ hầu; hên xui; hỏng thì",
+   "screen": ".dlg «Đức quý phi Hoa Liễu Nhi quở mắng»",
+   "opts": [
+    "Cúi đầu nhận lỗiRất vữngTốnkhôngĐượcchủ thêm tin dùng kẻ hầu, được tiếng hiền đứ",
+    "Khóc lóc xin thaTùy duyênTốnkhôngĐượcchủ thêm tin dùng kẻ hầu; hên xui; hỏng thì",
+    "Cãi lạiRất vữngTốnkhôngĐượcthêm thể diện trong cung, đám cung nhân nểMấtchủ bớt "
+   ],
+   "ods": [
+    "Rất vững",
+    "Tùy duyên",
+    "Rất vững"
+   ],
+   "took": {
+    "Cãi lạiRất vữngTốnkhôngĐượcthêm thể diện trong cung, đám cung nhân nểMấtchủ bớt ": 1
+   },
+   "n": 1
+  }
+ ],
+ "t": {
+  "total": 3045446
+ }
+}
