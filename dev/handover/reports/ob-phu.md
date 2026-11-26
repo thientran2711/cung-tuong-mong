@@ -63,3 +63,17 @@ Parts 1–3 above are done (cf143155). Queued by MAIN 146/147/148 after the brie
 - iPad: «Về phòng/Về Khuê phòng» button + top bar never cut on Dư đồ (k17).
 - IPAD-SIZE: call k3RowH(mv) next to k3RW(mv) in k3Stage for the map view (KIT 56.28, review/ipad-size 7eb0154b); check dev/test/ipad-size-ratio.js.
 Tools: my shot driver /home/user/wt/obphu-t/home.js (env ORG, DUMP, EXTRA=[[name,js]]) enters the home road on a local build (python3 -m http.server in the worktree).
+
+## OB-PHU2 (successor, 26/11 ~00:40Z) — parts 4 + 5 delivered
+PRIORITY #1 CHECK: OD 25/11 ~22:52/~22:56/~23:00/~23:40/~23:45Z + 18/11 ~19:25Z (L1898), ~19:40Z, ~19:45Z read verbatim | main: no zones (cancelled 18/11, jmapz §85.10 second level only) | review/*: review/map-zones 5692c687 jmapz sections 1-2 (zones/zoom/fog) REUSED, map-zones-r6 = the second level already in main; review/ipad-size 7eb0154b k3RowH (called guarded) | claims: PLACE-RULES session_01V1ZZH3XzLLpDVWarrvHjvA owns the cấm túc banner / home mark (not touched).
+LAND READY: dcf260d3 (part 5 = d734dcf7, part 4 on top). Videos: img/_review/ob-phu/ob2-dudo-people-fold.mp4, ob2-dudo-people-ipad.mp4.
+PART 5 (Dư đồ text, KIT §85.10 rewritten in place + §34.1d/85.2/85.6b):
+- (0) every tag = name + «N bóng» only (walk khắc, «đang cấm túc», «hết khắc», «bái kiến» … gone from tags; still in title + tap card); her place keeps «Ta + N bóng · còn K khắc» (§41.2).
+- (1)(2) zones «Nội vụ» (Nội vụ phủ, Tân Giả khố, Tích Cần viện, Dưỡng Tú viện) and «Hoàng tử sở» (A ca sở, Thượng thư phòng); Đông cung + every consort palace keep own tags; zone = total bóng, grey when all members grey; tap = zoom + fog, back = fog tap / rail back.
+- (3) Dưỡng Tú viện = real place `dtv` (court of long halls south of Nội vụ phủ), open by day; picture STAND-IN cung-nhan → ART REQUEST: land Foreman C's c3-dtv set (img/_review/c3-dtv/duong-tu-*).
+- (4) no tag cut at open: Fold portrait pads the pan by the rail (--kmv-fl 56px) + j38 open-scroll settle (home «Viện di nương / mẫu thân» were cut).
+- «Về …» header button: shortens («Về Đức Thọ», then «Về») instead of being cut; full words in title. k3RowH(mv) beside k3RW(mv) (guarded until ipad-size lands).
+PART 4 (people tab, KIT §6.3i): home Tài nghệ (teacher strip + card) and Giao tình (bà mối / suitor strip + card) → Gia tộc sub-tabs «Thầy dạy», «Người ngoài» (same kit pager + person card; their acts stay in the action tab and in the card «Việc»). Palace action tabs already had 0 person cards/strips.
+BEFORE/AFTER (dev/test/people-tab-scan.js, iPad; LIVE 5e013076 → dcf260d3): home Giao tình strips 1→0, home Tài nghệ strips 1 (all 5 sub-tabs)→0; every other action tab home + palace 0→0.
+TESTS (local build): map-zones-scan Fold+iPad day/night/cấm túc/zone/home PASS · map-labels-scan PASS (zone rule added) · people-tab-scan PASS (LIVE FAIL 2) · coop-e2e 143/143 · quickcheck d734dcf7: build ok, time-spill PASS, open/old save ok; CORE G4 «Ô lưu · Lui» = pre-existing on LIVE; LOOK-DEDUPE flagged under load but PASS alone on this sha and on LIVE; perf not reached (900 s cap while other tests ran) → re-run alone recommended.
+OPEN (not done): act card → tap person name opens that person in the people tab (only kcSel hook added, no chip on the card yet); «Bảng tài nghệ hậu cung» table under Tài nghệ is consort info in an action tab — ask MAIN whether it moves to Phi tần.
