@@ -37,7 +37,7 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
   {const q0=Q.slice();Q.length=0;S.evc=null;const z=evcZ();z.n={};let n=0;const card={ky:{pid:"kyngo",t:"Kỳ ngộ"},visit:{t:"Có người đến"},harm:{pid:"j70",t:"Mưu hại"},opt:{pid:"q72o",t:"Việc nhờ"}};
    for(const k of ["ky","ky","visit","visit","harm","opt","opt"])if(evcOK(k)){Q.push(Object.assign({},card[k]));n++}
    ok(n===Math.min(BAL.evc.cap,4),`cap: ${n} of 7 tries let through (cap ${BAL.evc.cap}, at most ${JSON.stringify(BAL.evc.q)} a kind)`);ok(evcOK("fest"),"a festival is never refused");
-   {Q.length=0;S.evc=null;evcZ().n={};const z=evcZ();z.n={visit:1};const r=BAL.evc.res&&BAL.evc.res.harm||0;ok(r<1||(evcOK("ky")===(1+1+r<=BAL.evc.cap)&&evcOK("harm")),`a slot is kept for harm (res ${r}): after 1 visit Kỳ ngộ ${evcOK("ky")?"comes":"waits"}, harm still comes`);z.n={visit:1,ky:1};ok(r<1||(!evcOK("opt")&&evcOK("harm")),"2 shown + harm not yet come: a third optional card waits, harm still comes");z.n={}}
+   {Q.length=0;S.evc=null;evcZ().n={};const z=evcZ();z.n={visit:1};const r=BAL.evc.res&&BAL.evc.res.harm||0;ok(r<1||(evcOK("ky")===(1+1+r<=BAL.evc.cap)&&evcOK("harm")),`a slot is kept for harm (res ${r}): after 1 visit Kỳ ngộ ${evcOK("ky")?"comes":"waits"}, harm still comes`);z.n={visit:1,ky:1};ok(r<1||BAL.evc.cap<3||(!evcOK("opt")&&evcOK("harm")),"2 shown + harm not yet come: a third optional card waits, harm still comes");z.n={}}
    ok(evcKind({pid:"kyngo"})==="ky"&&evcKind({pid:"j70"})==="harm"&&evcKind({t:"Có người tìm đến"})==="visit"&&evcKind({pid:"e68x"})==="opt","card tags → kind");
    Q.length=0;q0.forEach(m=>Q.push(m))}
   return R});

@@ -13,6 +13,10 @@ BAL.sp={on:1,
  band:{sung:[2,5,8],danh:[2,5,8],duc:[2,5,8],th:[4,8,12],hh:[4,8,12],rel:[4,8,12],oan:[4,8,12]},over:.3,
  ceil:[45,55,65,75,85,92,97,100],
  dm:{pow:3,min:.15}};
+/* sếp's two options (report dev/handover/reports/stat-pace.md «Cách A / Cách B»): ONE switch BAL.spPick. A = recommended (default);
+   B = stricter: lower rank ceilings, steeper slowdown, at most 2 big events a day. */
+BAL.spPre={A:{ceil:[45,55,65,75,85,92,97,100],pow:3,cap:3},B:{ceil:[40,50,60,70,80,90,96,100],pow:2,cap:2}};
+BAL.spPick="A";
 /* evc = ONE cap on the BIG events that reach her in one game day (tuần): festival (fixed date, always kept), harm / plots against her, people
    coming to find her (j24 «Có người đến», jgreet stage visitor), Kỳ ngộ, other optional life events (j68 / j72 / jreign / j71 «Lập công» / Việc khó xử).
    cap = total per day; q = most of one kind per day; pri = priority order (a kind earlier in the list is never refused while the day has room;
@@ -20,3 +24,4 @@ BAL.sp={on:1,
    A refused event is not lost: its own gate keeps its wait / pity, so it comes on a later day; a world card that reaches a full day waits
    (jevc EVCW) and comes on a later day with room, at most wait days, then it is let go. */
 BAL.evc={on:1,cap:3,q:{fest:2,harm:1,visit:1,ky:1,opt:1},pri:["fest","harm","visit","ky","opt"],res:{harm:1},wait:3};/* res: slots kept free each day for a kind that can never wait (a plot's warning / aftermath) until that kind has come that day */
+(function(){const o=BAL.spPre[BAL.spPick]||BAL.spPre.A;BAL.sp.ceil=o.ceil.slice();BAL.sp.dm.pow=o.pow;BAL.evc.cap=o.cap})();
