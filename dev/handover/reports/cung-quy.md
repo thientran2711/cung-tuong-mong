@@ -3,7 +3,7 @@
 Worker session_01D3E3NZyGJdTgPiznVEBfbh (opus) · depth 3 · START_CTX ~5 % · for FOREMAN D (order «(26/11 ~07:10Z) ORDER FROM MAIN 154»; owner OD 26/11 ~06:50Z item (C)).
 PRIORITY #1 CHECK ('cung quy'): OD 2 | ledger 0 | claims 0 | main 15 (existing rank checks — reused: jface fxAuth/tat, jtwoway humil/follow, j8 takeaway/accOK, jgreet greetName, j82 seat game, jemoact Phạm thượng) | review/* 0 | archive 1.
 
-Branch **review/cung-quy** head **0118778f** (FF from LIVE 6b5d3d05). Expert report (law 8, written first): dev/handover/reports/cung-quy-expert.md (§G = the adopted rule table).
+Branch **review/cung-quy** head **63de2af3** (rebased, FF from main 3af7896e). Expert report (law 8, written first): dev/handover/reports/cung-quy-expert.md (§G = the adopted rule table).
 
 ## What was built
 - **ONE function** `cqRule(a,t,k)` / `cqOK` / `cqAuth` (dev/build/jcq.js), **ONE table** `BAL.cq` (jbal2.js, law 4). Classes up / down / downNB / high / auth / take / accuse / free (expert §G).
