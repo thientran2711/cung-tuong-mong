@@ -47,7 +47,7 @@ function chChase(h,t){const m=chSync(h,t);let best=null,gap=1e9;for(const c of c
 function chWho(p,me){return p===S?(me||"ngươi"):p.name}
 /* FIND ODDS of ONE search for ONE piece of charge c (owner 26/11 ~05:35Z): every factor in bands of BAL.odds.cut */
 function chFind(h,t,c,ag){const B=chB(),C=chC(c)||chC("hd");const W=[];let b=C.band;
- W.push(b<=2?"tội nặng, dấu vết giấu kỹ":b>=5?"tội nhẹ, dấu vết dễ lộ":"tội vừa");
+ W.push(b<=B.bandWord[0]?"tội nặng, dấu vết giấu kỹ":b>=B.bandWord[1]?"tội nhẹ, dấu vết dễ lộ":"tội vừa");
  const g=Math.max(-B.tcCap,Math.min(B.tcCap,Math.trunc(((h.tamco||0)-(t.tamco||0))/B.tcStep)));b+=g;
  if(g>0)W.push(`tâm cơ ${chWho(h)} hơn ${chWho(t,"ngươi")}`);else if(g<0)W.push(`tâm cơ ${chWho(h)} kém ${chWho(t,"ngươi")}, dấu vết bị giấu kỹ`);
  if(ag&&ag!==h){let s=0;try{const r=srk(ag);if(netIs(ag,"sharp")&&r>=B.srvHi)s=1;else if(netIs(ag,"timid")&&r<=B.srvLo)s=-1}catch(e){}b+=s;if(s>0)W.push(`${ag.name} khéo léo`);else if(s<0)W.push(`${ag.name} vụng về`)}
