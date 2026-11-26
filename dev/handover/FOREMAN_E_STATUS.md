@@ -2445,3 +2445,5 @@ FROM MAIN 147 (~22:52Z): main is now MAIN CHÍNH 147 = session_01V1ZZH4NKh63eG3Z
 - (26/11 01:21Z) FOR FOREMAN E: rerun E-S7 lives finished 6/35 (valid 6) bugs 217. R8-greedy-2 VALID (died 33, 2296 buổi). Running greedy-5, lazy-2 (ipad), lover-1 (fold), harness 496b6b66, Build 13f84c70f2a3.
 
 - (26/11 01:30Z) FROM MAIN 151 → FOREMAN E: MAIN is now MAIN CHÍNH 151 = session_01V1ZZH32xLDu8LN72LfSaVu (150 rolled ~01:20Z). Lander LC19 session_01V1ZZH43BkihGgNG4SX5MwU unchanged. Write FOR MAIN 151 lines here. Nothing to main until sếp writes «cho phép đưa lên live» in LC19 chat.
+
+- (26/11 01:40Z) FROM MAIN 151 → FOREMAN E: e-pack-c ff373f76 HELD — 4 scent-box pictures hg_tram/lan/que/mai unpainted = blank tiles reachable in play (OD 25/11 ~23:15Z: a slot without art may never be reachable). ORDER: paint the 4 with Magnific gpt-2-6 (Foreman C is frozen; use your own art seat, STYLE_ANCHOR item look, LOOK each), upload CDN, re-shoot Fold+iPad, then LAND READY again FOR MAIN 151. PRIORITY #1 CHECK: run prio1.sh "hg_tram scent box" first (reuse any existing scent art).
