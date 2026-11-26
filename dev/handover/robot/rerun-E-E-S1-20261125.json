@@ -1270,6 +1270,82 @@
     "review/rerun-E-S1-E-S1-R1-skilled-3-2243047412-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-skilled-5-1945133230",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "skilled",
+   "botHarness": "sens",
+   "kiep": 5,
+   "seed": 1945133230,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "8ea10d7e"
+   },
+   "live": "GAME BUILD b7dcbbd06e03",
+   "end": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 20,
+   "year": 1,
+   "rank": 0,
+   "buoi": 1,
+   "steps": 232,
+   "taps": 55,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "real pick «Cúi đầu chờ xét» at «Hoàng thượng» → Ban hoa at buổi 1 (not the unplayed-trial bug; no board)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-skilled-5-1945133230-moments.md",
+    "review/rerun-E-S1-E-S1-R1-skilled-5-1945133230-review.md"
+   ],
+   "bugs": []
+  },
+  {
+   "id": "E-S1-R1-random-4-3513467308",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "random",
+   "botHarness": "rand",
+   "kiep": 4,
+   "seed": 3513467308,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "2df8f5fa"
+   },
+   "live": "GAME BUILD b7dcbbd06e03",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 21 tuổi",
+   "death": true,
+   "age": 21,
+   "year": 4,
+   "rank": 0,
+   "buoi": 423,
+   "steps": 7294,
+   "taps": 1608,
+   "exitPick": null,
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "death by illness at 21 (Hồng nhan bạc mệnh), game-imposed; debut board played (29 moves)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-random-4-3513467308-moments.md",
+    "review/rerun-E-S1-E-S1-R1-random-4-3513467308-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
