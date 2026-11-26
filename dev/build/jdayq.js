@@ -106,14 +106,20 @@ function dqMineFront(){try{const pre=DQ.preQ;if(!pre||!dqUi()||Q.length<2)return
   if(dqPlaying()||(window.DF&&DF.F&&Q[0]&&DF.encM===Q[0]))return false;const mine=Q.filter(m=>!pre.has(m)),old=Q.filter(m=>pre.has(m));if(!mine.length||!old.length||Q.every((m,i)=>m===(i<mine.length?mine[i]:old[i-mine.length])))return false;
   /* an ending / death card already waiting keeps its place (nothing is played over the end of her life) */
   if(dqIsEnd(Q[0])&&pre.has(Q[0]))return false;Q.length=0;Q.push(...mine,...old);DQ.stat.mineFront=(DQ.stat.mineFront||0)+1;return true}catch(e){console.error("dayq front",e);return false}}
-function dqTapOpen(){return !!(DQ.preQ&&Date.now()<=DQ.tw)}
-function dqTap(k,e){try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;const now=Date.now();
+/* r3 (E96r REVIEW r2: «Sang buổi» passed the buổi over an unseen card): the rule is for HER ACT taps only — inside the person view she opened
+   (DQ_OWN) or inside the box / panel she has open. A time-passing control (#next «Sang buổi», a Dư đồ move, the top bar «Về phòng», a tab) is
+   never one: there an unseen card still holds the turn and is painted first (M4 rule, dqPaintQ / dqBring), exactly as before. */
+const DQ_ACT=DQ_OWN+",#modal,#panel";
+function dqActTap(t){try{if(!t||t.nodeType!==1||!t.closest)return false;if(t.closest("#next,#tabs,.tabs,#top,.ktop,#map,.mspot"))return false;return !!t.closest(DQ_ACT)}catch(e){return false}}
+function dqTapOpen(){return !!(DQ.preQ&&DQ.actTap&&Date.now()<=DQ.tw)}
+function dqTap(k,e){try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;const now=Date.now();const act=dqActTap(e.target);
   /* the queue as it was when her finger came DOWN (the view's cards act on pointerup, before the click event); a click with no finger before it
      (keyboard / an engine .click()) starts its own tap, a click nested inside her tap (jdfv dfRun clicks the docked card's button) does not */
-  if(k==="pointerdown"||k==="touchstart"||k==="keydown"||(k==="click"&&now-DQ.pdT>1500&&!dqParked())){DQ.preQ=new Set(Q);if(k!=="click")DQ.pdT=now}
+  if(k==="pointerdown"||k==="touchstart"||k==="keydown"||(k==="click"&&now-DQ.pdT>1500&&!dqParked())){DQ.preQ=new Set(Q);DQ.actTap=act;if(k!=="click")DQ.pdT=now}
+  if(!DQ.actTap)return/* not her act tap: nothing set aside, nothing moved (the old gates run as before) */;
   DQ.tw=now+BAL.dayq.mineLook+(k==="pointerdown"||k==="touchstart"?1500:0);
   /* (1) a card nobody can see is set aside while this event's handlers run (not over the new-day host / a mini-game: their own gates) */
-  if(!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
+  if(act&&!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
   if((k==="click"||k==="pointerup"||k==="keydown")&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(dqParked())dqUnpark();
     /* (2) what her tap queued comes first; painted at once when nothing shows it (over the view / in place of the box she tapped in) */
     const M=$("modal"),shown=M&&!dqHidden(M)?Q[0]:null;const moved=dqMineFront();
