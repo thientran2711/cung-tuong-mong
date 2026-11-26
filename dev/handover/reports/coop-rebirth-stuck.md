@@ -225,3 +225,39 @@ No dump (harness bac25389, no DQ/qs block) → not traceable; plain Q card (j13 
 3. On the final sha ALONE: sangbuoi-held full A–L Fold+iPad, CASES=K REPEAT=6 (with c1fff00a's tapAny), coop-e2e ×1, quickcheck --runs 5.
 4. FULL videos Fold 755x1000 + iPad 1180x820 of J, K, L (preload adding recordVideo to every newContext: `node -r <preload.js> dev/test/sangbuoi-held.js <url>` with CASES=JKL, VIDDIR) → CDN img/_review/dayq-qsoftlock/ (`python3 dev/site/cdn_sync.py img/_review/dayq-qsoftlock`), look at them.
 5. SSK here + to Foreman D (current: session_01D3E3NYYzn179gzKUA3MM7U, depth 7) → ONE opus BIG reviewer (brief «ROLLOVER RV-CRS» above + this section) → on PASS «LAND READY review/dayq-qsoftlock <sha> (FF from LIVE, head==sha)» + video URLs.
+
+## Q-SOFTLOCK owner #5 (session_01D3E3NZbh2fpy8WkxGMhpHR) — SẴN SÀNG KIỂM review/dayq-qsoftlock 2c41e657 (19:25Z 26/11)
+PRIORITY #1 CHECK: OD 26/11 rows (Q-SOFTLOCK play-stopper) | main LIVE b881686f | review/* review/dayq-qsoftlock 2c41e657 (merge of LIVE b881686f; FF from LIVE) | claims Q-SOFTLOCK row (#4 → me).
+Depth 8 (limit) · START_CTX ~5 % · reviewer = D's on-call BIG opus session_01D3E3NXxnUhq4h2mLTCtfVe (D 17:02Z: do not open one).
+
+### Branch 2c41e657
+= c1fff00a + merge LIVE b881686f (aa37de21 + b881686f). Only assets.json / index.html / sw.js conflicted → main's taken, `python3 dev/build/assemble.py` + `CTM_CHANGE="$(cat dev/site/CHANGE.txt)" bash dev/site/build_site.sh`, main's CHANGE line kept. Game diff vs LIVE = dev/build/jdayq.js only (+ built index.html / sw.js); the rest is dev/test (dayq-break, sangbuoi-held, sangbuoi-night, sangbuoi-save-replay, scan-q-hold.py). No code change in this shift.
+
+### Gates ALONE on 2c41e657 (one at a time, UTF-8 server 8801 = branch root index.html)
+| gate | result |
+|---|---|
+| sangbuoi-held A–L Fold 755x1000 + iPad 1180x820 | **ALL PASS** (24/24) |
+| CASES=K REPEAT=6 | **ALL PASS** both devices (0 FAIL lines) |
+| coop-e2e ×1 | **143/143** |
+| quickcheck --runs 5 (vs LIVE b881686f) | **PASS** · open 2290 ms · old save ok · median new/live render 212/186, tab 627/523, buổi 1374/1053, tasks>200ms 30/24 |
+| CASES=JKL video run | ALL PASS both devices |
+| dayq-hold-coop | flaky ON LIVE, see below → branch fails ≤ LIVE |
+
+### dayq-hold-coop (step 2: land only if branch FAILs ≤ LIVE)
+| run | result |
+|---|---|
+| LIVE b881686f #1 | PASS 17/17 |
+| LIVE b881686f #2 | FAIL 7/15 (host+guest A2×S1 «card painted inside», A3×S4 «activity not open at 400», A4×S1; A1 «no toil button» skip; «week merged once») |
+| branch 2c41e657 | FAIL 4/16 (guest rows only, same kinds) |
+| branch with LIVE's jdayq.js (dev/index.html byte-identical to LIVE, 17898205 B) | FAIL 4/16 (host rows, same kinds) |
+| (diagnostic, reverted) branch + dqActEl hidden-.kfoc tweak | FAIL 7/15 → hypothesis wrong, change dropped |
+→ same rows fail on LIVE's own build: NOT a branch regression. Branch ≤ LIVE.
+
+### Videos (FULL, real taps, J/K/L, looked at: contact sheets every 12 s — setup lives, then J/K/L day turns, flip scene, «Buổi chiều» turn, no stuck screen)
+- Fold 755x1000: https://ctm-img.victoria-tntt.workers.dev/img/_review/dayq-qsoftlock/qsoftlock-JKL-fold.mp4 (471 s)
+- iPad 1180x820: https://ctm-img.victoria-tntt.workers.dev/img/_review/dayq-qsoftlock/qsoftlock-JKL-ipad.mp4 (289 s)
+Verdict giver wipes: `python3 dev/site/cdn_sync.py --wipe-review dayq-qsoftlock`.
+
+### SEPARATE FINDINGS for D (no fix here)
+1. dayq-break FAIL 4 identical on LIVE (S.mg + data-coopWait rows, both devices: «after 2×wake disabled false, healed +0, render calls 1») → some other render() re-enables #next in those states; pre-existing.
+2. dayq-hold-coop is unstable on LIVE b881686f (17/17 once, 7/15 once): seats sometimes reach a state where the kit «Nhận» scene / toil button does not open and the room week does not merge. Test setup or co-op flow; needs its own owner.
