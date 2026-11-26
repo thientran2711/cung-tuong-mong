@@ -218,8 +218,8 @@ crReg("td_cong","stitch",tdWrap(crtStitch,"stitch"));/* the stitch board inside 
 
 /* ---------- the study acts (j85 lessonVir): intro (rules) -> game -> result -> progress ---------- */
 const TD_MODE={self:"Tự học",master:"Học với ma ma"};
-function tdPoints(mode,raw){return mode==="self"?(raw>=9?2:1):(raw>=7?3:2)}
-/* mg-skip-all: a quick lesson ("Để trời định", KIT §13.6) won = the progress of a BAL.skip.raw play (tiến bộ một phần), lost = no progress; TDS.q = that roll (null = played / bot) */
+function tdPoints(mode,raw){const P=BAL.mgTier.lessonPts;return tdPts(mode,raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0)}/* review/balance-pace: BAL.td.pts (jbalcore tdPts) */
+/* mg-skip-all: a quick lesson ("Để trời định", KIT §13.6) won = the progress of a BAL.skip.raw play (BAL.td.pts by that raw; review/balance-pace), lost = no progress; TDS.q = that roll (null = played / bot) */
 function tdGain(mode,raw,skipped){return skipped&&TDS.q===false?0:tdPoints(mode,raw)}
 function tdQuality(p){try{const a=(p&&p.vpf&&p.vpf.cong)||[];return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length/10*2):0}catch(e){return 0}}
 (function(){const v0=virtueBonus;virtueBonus=function(p,k){const b=v0.apply(this,arguments);try{if(k==="cong"&&b&&b.q!=null&&p===S)b.q+=tdQuality(p)}catch(e){}return b};window.virtueBonus=virtueBonus})();
@@ -232,12 +232,12 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped,qok)=>{KG82.phase="result";TDS.q=skipped?!!qok:null;const gain=tdGain(mode,raw,skipped),q=k==="cong"?Math.round(raw/10*2):0;
-  kg82ShowRes(kg82Rows([skipped?["Học nhanh",qok?"thành: tiến bộ một phần":"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
+  kg82ShowRes(kg82Rows([skipped?["Học nhanh",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
  KG82.phase="intro";const HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
  /* KIT §13.7 (mg-ready-guide): the step rules + example now sit in the shared rules block EVERY time (was: first time only), «Sẵn sàng» / «Hướng dẫn» */
- box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Học nhanh",win:"tiến bộ một phần",lose:"không tiến bộ"})/* mg-trim: tứ đức lessons are learning → «Học nhanh» */}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
+ box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Học nhanh",win:`tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`,lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
  kgReady(box,{kind,steps:TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"])});
 
  KG82.backPre=cancel;/* KIT §13.9: ✕ before «Sẵn sàng» = its own free «Thôi, để lúc khác» (nothing is charged before tdFinish) */

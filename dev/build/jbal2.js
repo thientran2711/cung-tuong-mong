@@ -350,7 +350,7 @@ Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
-Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,/* promo-root: months after palace entry / leaving lãnh cung before «Bị bỏ quên» can fire */forgetGrace:6,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
@@ -588,7 +588,11 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
+ gain:[2,1.5,1.1,.9,.8] /* review/balance-pace (owner OD 25/11 ~23:52Z «một lần chơi chỉ được cộng có 2 điểm … bao giờ tao mới lên được bậc»): was [1.2,1,.8,.6,.4]
+   (a good self-study = 2.4 points → Tông sư after ~83 good games of ONE course). Now a good game (raw ≥ BAL.mgTier.lessonPts[2]) of self-study = 6 points at bậc 0:
+   Nhập môn after 2 good games, Tông sư after ~35 (teacher ~26); still slower each bậc. Measured dev/measure/pace.js, report dev/handover/reports/balance-pace.md */,
+ les:{self:1,min:1} /* review/balance-pace: lesson points of ONE play (jbalcore lesG, her lessons and an NPC's): self-study = max(min, round(game points × self)) (was × .6:
+   a Xuất sắc game and a poor one both gave 1–2, so the game score barely mattered); a teacher = max(game points, self-study + BAL.tchMin) */,odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,

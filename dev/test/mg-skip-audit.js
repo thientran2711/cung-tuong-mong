@@ -14,10 +14,10 @@ const rd=f=>{try{return fs.readFileSync(path.join(B,f),'utf8')}catch(e){return '
 const Q=/kitQuick\(|kitQuickSub\(/;
 /* [game, file, entry marker, quick marker (regex in that file), rule family, a quick pick gives] */
 const G=[
- ['Tài nghệ lesson, old overlay (Cầm/Kỳ/Họa/Vũ, j5 openMG)','j5.js',/function openMG/,/kitQuickSub\(\{win:"tiến bộ một phần"/,'roll','thành: tiến bộ một phần (1 of 3 pts) · hỏng: 0'],
+ ['Tài nghệ lesson, old overlay (Cầm/Kỳ/Họa/Vũ, j5 openMG)','j5.js',/function openMG/,/kitQuickSub\(\{win:(?:"tiến bộ một phần"|`tiến bộ )/,'roll','thành: tiến bộ một phần (1 of 3 pts) · hỏng: 0'],
  ['Tài nghệ lesson with a work (j83 «Học nhanh», every art)','j83.js',/playArt\(\{art:k,title:`\$\{m\.mode/,/n:"Học nhanh",roll:1/,'roll','thành: tiến bộ một phần, no work · hỏng: 0'],
  ['Tài nghệ practice at bậc 5 (j83 tự học, jrcp học với thầy)','jrcp.js',/title:`Học \$\{an\} với thầy`/,/n:"Học nhanh",sure:1/,'sure','no work (sure, no roll)'],
- ['Tu đức lesson (jtd: Công/Dung/Ngôn/Hạnh games)','jtd.js',/function tdPlay/,/kitQuick\(\{n:"Học nhanh",win:"tiến bộ một phần"/,'roll','thành: progress of a 5/10 play · hỏng: 0'],
+ ['Tu đức lesson (jtd: Công/Dung/Ngôn/Hạnh games)','jtd.js',/function tdPlay/,/kitQuick\(\{n:"Học nhanh",win:(?:"tiến bộ một phần"|`tiến bộ )/,'roll','thành: progress of a 5/10 play · hỏng: 0'],
  ['Tu đức work (jtds, through jtd)','jtds.js',/function tdsFinish/,/TDV\.skip/,'via jtd','no work (the jtd quick button)'],
  ['Kết mạng che mặt (jveil craft)','jveil.js',/title:"Kết mạng che mặt"/,/n:"Kết nhanh",sure:1/,'sure','no veil, material back (sure)'],
  ['Điểm trang buổi sáng (jtoil, dress + colour screens)','jtoil.js',/function toilOpen/,/toilRollBtn\("toilquick2?"\)/,'roll: Dung (mg-trim)','one tap = the face table on her hand (Dung, Họa, Sắc, rank, colours, hoa điền); «Tự tay điểm trang» = the mirror game; Để mặt mộc stays'],
@@ -31,7 +31,7 @@ const G=[
  ['Phúc tuyển / tuyển chọn at home (jkc, jkc2 playArt)','jkc2.js',/playArt\(\{art,title,note/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap'],
  ['Court act games (jts tsGame)','jts.js',/function tsGame/,/id:"kg82skip",n:"Bỏ qua"/,'own: act odds','the act\'s own odds; won = capped mark'],
  ['Phối đồ hội (jts dress)','jts.js',/id="tsdgo"/,/id:"tsdskip"/,'own: maid','the maid picks (by her goodwill)'],
- ['Tát / né (jslap, jlooks, Dư đồ class B)','jslap.js',/function slapGame/,/SLAP\.next=slapNpcTier\(S\)/,'cut: one draw (mg-trim)','her tier = the NPC draw (slapNpcTier); Né = one roll of the card odds'],
+ ['Tát / né (jslap, jlooks, Dư đồ class B)','jslap.js',/function slapGame/,/SLAP\.next=slapNpcTier\(S,v\)/,'cut: one draw (mg-trim)','her tier = the NPC draw (slapNpcTier); Né = one roll of the card odds'],
  ['Nghiệm thân sleight (jroute)','jroute.js',/function rtNgSleight/,/n:"Để Tâm cơ quyết định"/,'own: Tâm cơ odds','the act\'s Tâm cơ odds'],
  ['Mưu kế games (jsgame)','jsgame.js',/kg82Open\(\{art:J\.art/,/id:"sgskip"/,'own: hand off','a helper does it at today\'s odds'],
  ['Chải chuốt (j92 wdGroomUI)','j92.js',/function wdGroomUI/,/id:"kg92skip"/,'own: auto dress','as Tự chọn đồ'],
