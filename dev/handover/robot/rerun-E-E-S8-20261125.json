@@ -103,6 +103,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_san-R7-lover4-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_san-R7-lover4-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-greedy1",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "bold",
+   "seed": 3317510460,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "d2e03d80 (resumed through 4d7a22c6)"
+   },
+   "ending": "Hồng nhan bạc mệnh — thọ 26 tuổi",
+   "age": 26,
+   "buoi": 1010,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-greedy1-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-greedy1-moments.md"
   }
  ],
  "parked": [
