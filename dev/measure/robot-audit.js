@@ -61,14 +61,25 @@ function endClass(life) {
    That is NOT a life-ending exit: the life keeps its verdict (death / game-imposed ending stays VALID); its mini-game results are flagged «mg quit, not played».
    n = «Bỏ cuộc?» «Bỏ cuộc» taps in the kept trace (last 400 taps only → a lower bound) + harness.mgGiveUp (harness ≥ the fix: given up after 6 min with no end), ≥ 1 when exitPick is «Bỏ cuộc». */
 const MGQ_RE = /^bỏ cuộc$/i;
+/* ENTRY TAP (FIXER #10, FOREMAN E 12:12Z): a pre-life / title / new-game entry tap («Bắt đầu kiếp mới» on Chọn sổ, «Chơi một mình», any tap on #title / #kload /
+   #dawn / Chọn sổ / Sổ luân hồi) is never the life's exit pick. robot-rt ≤ 0e0ebe29 logged the entry tap of a resumed / restarted life as an exit candidate
+   (its in-life flag came back from the ckpt before the seat re-entered its sổ). Same test as robot-rt.js ENTRY_TAP; older records have no exitPick.screen →
+   the kept trace is searched for the tap with that label. */
+const ENTRY_LABEL_RE = /^(chơi một mình|cùng hảo hữu|nhận thân phận|tiếp tục kiếp( này)?|vào cung ngay)$/i, ENTRY_SCREEN_RE = /^(#title|#kload|#dawn)\b|«(chọn sổ|sổ luân hồi)»/i;
+function isEntryPick(xp, tr) { if (!xp) return false; const lab = String(xp.label || '').replace(/\s+/g, ' ').trim(); if (ENTRY_LABEL_RE.test(lab)) return true; if (xp.screen != null) return ENTRY_SCREEN_RE.test(String(xp.screen));
+  if (xp.via !== 'tap outside the exit-only branch') return false /* the picker's own exit branch (ch.exit) is never an entry tap */;
+  const hits = (Array.isArray(tr) ? tr : []).filter(t => Array.isArray(t) && String(t[1]).endsWith('«' + lab + '»') && (xp.at == null || Math.abs(+t[0] - +xp.at) <= 5));
+  return hits.length > 0 && hits.every(t => ENTRY_SCREEN_RE.test(String(t[1]))) }
 function mgQuitOf(rec, life) { const xp = rec.exitPick || (life && life.exitPick) || null, h = rec.harness || (life && life.harness) || {}; const tr = Array.isArray(rec.trace) ? rec.trace : [];
   let n = tr.filter(t => Array.isArray(t) && /«bỏ cuộc\?»\s*«bỏ cuộc»\s*$/i.test(String(t[1]))).length; /* a «Quay lại» / ✕ on a board is a quit ONLY before the board's result (F #21 / Foreman E 11:47Z: «Sẵn sàng» → BOARD 13 moves → «Quay lại» = the result close,
     i.e. PLAYED). Harness ≥ 5c62c2b9 logs every back with its phase (harness.mgBackWhy[].ph): a back on ph «result» is the way on. Older traces: a back counts only
     when the tap just before it on that board started or set up the round («Sẵn sàng», a board option) — after board moves / a result button it is the close. */
- if (Array.isArray(h.mgBackWhy)) n += h.mgBackWhy.filter(x => x && x.ph !== 'result' && !x.long).length;
+ if (h.mgBackQuitN != null) n += +h.mgBackQuitN || 0; /* robot-rt ≥ FIXER #10: a FULL count of board backs before the result (mgBackWhy keeps only the last 40 details) */
+ else if (Array.isArray(h.mgBackWhy)) n += h.mgBackWhy.filter(x => x && x.ph !== 'result' && !x.long).length;
  else for (let i = 0; i < tr.length; i++) { const t = tr[i]; if (!Array.isArray(t) || !/^#kg\d+\b.*«quay lại»\s*$/i.test(String(t[1]))) continue; let j = i - 1; while (j >= 0 && !/^(#kg\d|BOARD )/.test(String(tr[j] && tr[j][1]))) j--; const prev = j >= 0 ? String(tr[j][1]) : ''; if (/^BOARD /.test(prev) || /«(đã hiểu|xong|nhận|tiếp)/i.test(prev)) continue; n++ } /* a «Quay lại» on a mini-game board leaves the round unplayed (E-S6/E-S8 «Lễ ra mắt», Foreman E 07:14Z) — counted as a quit too */ if (!n && xp && MGQ_RE.test(String(xp.label || '').trim())) n = 1; return { n, giveUp: +h.mgGiveUp || 0, lowerBound: tr.length >= 400 } }
 function verdict(rec, life) {
   const why = [], e = endClass(life), h = rec.harness || (life && life.harness) || null; let xp = rec.exitPick || (life && life.exitPick) || null; if (xp && MGQ_RE.test(String(xp.label || '').trim())) xp = null; /* a mini-game «Bỏ cuộc» is never the life's exit pick */
+  if (xp && isEntryPick(xp, rec.trace)) xp = null; /* a pre-life entry tap is never the life's exit pick (FIXER #10) */
   const real = !!(h && h.realtap === true && +h.jsClicks === 0);
   if (!real) why.push(h ? 'harness not real-tap (realtap=' + h.realtap + ', jsClicks=' + h.jsClicks + ')' : 'JS-click harness (pre-25/11, no realtap proof)');
   if (e.k === 'none') why.push(e.why);
@@ -100,7 +111,7 @@ function fromJson(file, j, out) {
   /* robot-rt.js solo (review/robot-realtap): ONE life per file { job:{id,...}, harness:{kind:'realtap',...}, life, exitPick, bugs, ... } */
   if (j && !Array.isArray(j) && j.job && j.harness && 'life' in j) { if (j.life && j.life.type === 'slice') return true /* self-test slice, not a life */; const tr = Array.isArray(j.trace) ? j.trace.filter(t => Array.isArray(t) && typeof t[1] === 'string' && !/^DEAD /.test(t[1])) : []; const last = tr.length ? tr[tr.length - 1][1] : null; const lab = last ? (last.match(/«([^»]*)»\s*$/) || [])[1] || last : null;
     /* the last real tap before over(): if it was NOT an exit-road option, the exit ending was imposed by the game (e.g. «Xin ở lại» failed at the age-out) */
-    const rec = Object.assign({}, j); if (!j.exitPick && lab && !EXIT_TAP_RE.test(lab)) rec.lastTap = lab;
+    const rec = Object.assign({}, j); if ((!j.exitPick || isEntryPick(j.exitPick, j.trace)) && lab && !EXIT_TAP_RE.test(lab)) rec.lastTap = lab;
     push(j.job.id || '?', rec, j.life || { id: '?', type: '?' }); return true }
   if (Array.isArray(j) && j.length && j[0] && j[0].seat && j[0].kiep != null) { for (const l of j) push('seat ' + l.seat + ' k' + l.kiep, l, l.life || { id: l.id, age: l.age, year: l.year, type: l.die ? 'death' : '' }); return true }
   return false
@@ -170,7 +181,7 @@ function mdTable(lives) {
   return ['| round | life | end | valid? | why |', '|---|---|---|---|---|'].concat(lives.map(r => '| ' + esc(r.file.replace(/^dev\/handover\/robot\//, '')) + ' | ' + esc(r.life) + ' | ' + esc(r.end.slice(0, 80)) + (r.age ? ' (' + r.age + ')' : '') + ' | ' + (r.dup ? 'dup' : r.valid ? 'VALID' : r.mixed ? 'MIXED-BUILD' : 'INVALID') + ' | ' + esc(r.dup ? 'same life as ' + r.dup.replace(/^dev\/handover\/robot\//, '') : (r.why.join('; ') || r.note) + (r.mgQuit ? ' · mg quit ' + r.mgQuit + (r.mgQuitLB ? '+' : '') + ', not played' : '') + (r.offers ? ' · offers ' + r.offers + '/' + r.offPicked + ' picked' : '')) + ' |')).join('\n');
 }
 
-module.exports = { audit, verdict, endClass, counts, countsLine, mdTable, EXIT_IDS };
+module.exports = { audit, verdict, endClass, counts, countsLine, mdTable, EXIT_IDS, isEntryPick, mgQuitOf };
 
 if (require.main === module) {
   const a = process.argv.slice(2), paths = [], opt = {};
