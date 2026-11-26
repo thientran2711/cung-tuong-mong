@@ -288,3 +288,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~17:58Z **LIVE f573dc94** (charge-trinh-punish D1+D4: who/why/evidence/penalty, one rank per punishment, evidence per charge + act-merge test fix) FF-pushed by MAIN 160 after interleaved A/B ×5 (buổi median 0.72×). ROLLBACK b881686f. audio-ipad = env (all 3 builds PASS in LC23). Save = ONE land rv12 fa4c0945 (B LAND READY ≈19:30Z).
 - ~17:58Z SẾP ANSWERED Mong manh: rejected; no-roll life-changing options = no odds word + «Cẩn thận khi lựa chọn» line; firstcard toggle → this rule (154 told FIRSTCARD).
 - ~18:00Z OWNER UI BUG via 154: Dư đồ place icons tiny → as big as «Ta», above name, all map views → KK44 + map-zones (161). map-zones-r7 to be checked/held.
+- ~18:01Z OWNER UI via 154: veil tint by buổi (one kit token per buổi) → KK44 (161).
