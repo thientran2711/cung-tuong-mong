@@ -581,6 +581,14 @@ Tranh ghế, Tuyển tú, Thế lực, Công lao, Kính sự phòng, Nội vụ 
 (popover, HX). `kitHxRoad()` rebuilds the header tap texts (HX) when the road changes. No consort-only goal (lập Hoàng hậu, mẹ Thái tử,
 thăng bậc, thị tẩm, lật thẻ, bổng lộc, sắc phong) shows on the cung nữ road or in lãnh cung: the Đức "!" badge (jk3 k3Hud) and the
 Ân sủng plaque (jk3 k3AsRows) are consort-road only. Test: `dev/test/small-bugs-2.js` check 1.
+**12.2 «Cách giảm» / «Cách tăng» row (K-GLOSS-LOWER, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán ... giảm cái độ nguy hiểm», OB-OAN, KK40).**
+Every glossary explanation of a stat that can turn against her carries ONE more kit row under the meaning: the real ways to bring it back.
+`kitLowerRow(term)` → `[label, text]` or null; label «Cách giảm» when the stat RISING hurts her (Oán, Thù, Ghen, Nguy hiểm, Nguy hiểm chung),
+«Cách tăng» when it FALLING hurts her (Thiện cảm, Quý, Sủng, Sức khỏe / header «Sức», Danh). Text = `kitLowerText(term)` — ONE table (jts.js `TS_LOWER`,
+owned by OB-OAN; names of existing acts only; "" = no row); the kit never types its own list. Consort road only (`kitRoad()` = "": the acts named are consort acts).
+Surfaces (one code path each, so every caller follows): the glossary popover (`.kgl` tap → `kitGlossPopHtml(term)` = title · meaning · row `.kpopx.kplow`,
+dashed hair line above) — kitRel2 rows, stat rows, person cards, any `kitGloss` word; the header help panel (HX → kit rule panel «Là gì»: second row
+«Cách …»). No data yet (OB-OAN not landed) → no row anywhere. Kit page sample «§12.2». Test `DATA=<TS_LOWER js> node dev/test/kit-gloss-lower.js <index.html>`.
 
 ## 13. MINI-GAME FRAME (j79) — for j82 and the lesson games
 ```js
