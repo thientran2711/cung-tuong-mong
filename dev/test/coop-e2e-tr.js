@@ -47,7 +47,7 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
-async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(k0=>{
+async function press(o,k0){for(let t=0;t<80;t++){await require('./lib/coop-clear.js').lifeWait(o,clear);await clear(o);const r=await o.p.evaluate(k0=>{
    /* a night with the Emperor (jnight) spends the rest of her day: her buổi is already ended through the co-op path (bend / week end) */
    if(k0&&(COOPW.bend||COOPW.pend||__co().waiting||COOPW.nrdy===__co().week))return true;/* … or the room clock already ended her tối (jcooptimer dueTick → nightReady: a slow machine reaches the room's time limit) */
    const b=document.getElementById('next');if(!b||b.disabled)return false;const u0=used,q0=Q.length,mg0=!!S.mg,hm=document.getElementById('modal').hidden;b.click();try{COOPW.tr.push('PRESS u'+u0+'>'+used+' Q'+q0+'>'+Q.length+(hm?'h':'v')+' mg'+mg0+' bend'+COOPW.bend+' nw'+(COOPW.whereKey)+' lz'+(typeof AGD!=='undefined'&&AGD.lz?AGD.lz.L.length+'t'+AGD.lzT:'-')+' kn'+(typeof KN!=='undefined'?KN.q:'-'))}catch(e){}return true},k0||null);if(r)return true;await sleep(250)}

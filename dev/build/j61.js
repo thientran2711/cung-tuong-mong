@@ -21,19 +21,30 @@ function k61S(){if(!S)return null;if(S.known&&!S.kwm){S.kwm=1;k61WMig()}if(!S.kn
    undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
- if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else if(k=k61WKey(e)){if(typeof e.kk==="string"&&S.known&&S.known[k]==null&&S.known[e.kk]!=null)S.known[k]=S.known[e.kk]/* old save: what she knew under the old «x<n>» key */}else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
+ if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else if(k=k61WKey(e)){if(typeof e.kk==="string"&&S.known&&S.known[k]==null&&S.known[e.kk]!=null)S.known[k]=S.known[e.kk]/* old save: what she knew under the old «x<n>» key */}else{if(!e.kk)e.kk=k61NewKey();k=e.kk}
  if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
 /* flight-sid-rebirth (b) (law 6b, one j61 key = one person): a WORLD person (shared by both seats of a co-op room) is keyed from a stable
    world identity, never from the per-seat counter S.kseq: each seat issued «x<n>» lazily from its own counter, so the two seats could give two
    different world men the same «x34» and the world merge carried both (coop-sync-r review, after week 3 / rejoin, both seats).
    Palace men «n<id>» (S.men id, j22/jmen/j96), court officers «o<office>» (S.court), the five house heads «t<i>» (S.trieu.H, CLANS order) and
    the censor «tns» (S.trieu.ns), an NPC consort's child «c<name>» (names are one per person for life, jname/nmReg). «x<n>» stays only for her
-   own people and passing records. Old saves: the level she knew under the old «x<n>» (e.kk) is copied once to the new key (kOf61 + k61WMig). */
+   own people and passing records, issued by k61NewKey below. Old saves: the level she knew under the old «x<n>» (e.kk) is copied once to the new key (kOf61 + k61WMig). */
 function k61WKey(e){try{if(!e||typeof e!=="object"||!S||e.coop)return"";if(e.id!=null&&(S.men||[]).includes(e))return"n"+e.id;
   for(const c in (S.court||{}))if(S.court[c]===e)return"o"+c;
   const T=S.trieu;if(T){if(T.ns===e)return"tns";if(T.H)for(const c in T.H)if(T.H[c]===e){const i=typeof CLANS!=="undefined"?CLANS.indexOf(c):-1;return"t"+(i>=0?i:c)}}
   if(e.name&&"fond" in e)for(const v of rivals||[])if(v&&!v.coop&&(v.kids||[]).includes(e))return"c"+e.name}catch(x){}return""}
 function k61WMig(){try{if(!S||!S.known)return;for(const e of k61All())if(e&&typeof e.kk==="string")kOf61(e);const T=S.trieu;if(T&&T.ns)kOf61(T.ns)}catch(e){console.error("k61WMig",e)}}
+/* ONE j61 KEY = ONE PERSON, the «x<n>» part of the same rule (SELSCENE-12 + SELSCENE-19 merge, law 11/14; world people use k61WKey above): a person with no id / sid / world key keeps the key she was given on herself (.kk)
+   for life, but the counter that issued it lives on HER (S.kseq): (1) a new life in the same world (rebirth, a life ended at the selection — ban hoa,
+   a new co-op player) starts S.kseq at 0 while every world maid / official / child still holds the old life's keys → x34 given twice (coop-e2e a3:
+   «Bích Đào» maid of #15 and «Vân Nhi» maid of #23); (2) the two co-op seats each run a counter, and the merged world carries the host's keys to
+   the guest → her next key = a key the host already gave. Rule: the first key of a life starts above every key any person still holds; a key a
+   registered person holds is never issued again; the guest seat issues its own namespace («x<n>b»; /^x\d/ readers unchanged). Old saves keep
+   every key they hold; solo and the host issue «x<n>» as before. */
+const K61SQ=new WeakSet();
+function k61NewKey(){let sx="";try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")sx=String(W.seat)}catch(x){}
+ if(!K61SQ.has(S)){K61SQ.add(S);let m=+S.kseq||0;try{for(const p of k61All()){const r=/^x(\d+)/.exec(p&&typeof p.kk==="string"?p.kk:"");if(r)m=Math.max(m,+r[1])}}catch(x){}S.kseq=m}
+ let k;do{S.kseq=(+S.kseq||0)+1;k="x"+S.kseq+sx}while(KREG[k]);return k}
 /* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
    GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
    key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
