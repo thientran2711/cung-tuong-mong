@@ -80,3 +80,26 @@ STATE at start: LIVE 3af7896e · ROLLBACK 6b5d3d05. Tools = lc21-tools (SP= fixe
 
 ## 17:30Z — charge-trinh-punish READY sent (f573dc94 = 639455a2 + bd0007fe test-only)
 - 57 gates: all charge/punish/seize/cold tests PASS; LIVE-identical FAILs only (global-names, tainghe, mg-back, audio-ipad CDN bgm-joy also FAIL on LIVE b881686f). balance-pace PASS with bd0007fe. QC PASS: render 229/225, tab 554/516, buổi 1478/1122, tasks 28/26. coop-cold-faction not run.
+
+## LC22 HANDOVER (to LC23; rolled at 36 % context, START_CTX ~5 %)
+### STATE
+LIVE = b881686f (ACT-MERGE) · ROLLBACK aa37de21. Coordinator = MAIN CHÍNH 160 session_01V1ZZH2qup27v3QaT5qk8NX (161 coming; follow forwarders). Kit keeper KK42 session_01V1ZZH3CYo8F1o9jbxCsySG. Send every «READY TO PUSH <sha> on <branch>, parent <sha>, gates …» to MAIN; MAIN FF-pushes; lander never pushes main. After each push: post-push check (curl Pages index.html + sw.js vs the built worktree, CHANGE line) and report.
+MAIN standing rules: one READY per item; owner bugs first; branch with stale/no CHANGE line → write own ≤140-char cổ trang line; SOURCE conflict → stop & report to MAIN (MAIN has OK'd small unions case by case; log «SELF-MERGE LAND»). Doc/built-file conflicts: resolve (built files: --ours then rebuild; docs: keep both).
+### IN FLIGHT
+1. charge-trinh-punish: «READY TO PUSH f573dc94» on review/lc22-ctp sent 17:30Z (parent LIVE b881686f; includes act-merge-ALL-fix bd0007fe test-only). Await MAIN push → post-push check.
+### NEXT (in order)
+2. B save-fix-stack: B said rv9 01bad0f6 "when its gates PASS"; remote now has review/save-fix-stack-rv10/11/12 — wait for B/MAIN's LAND READY sha; jump-in after ctp.
+3. kit-g4-r2 4dbce886 (RV-KK41 SMALL PASS w/ residual; on aa37de21; rebuild built files; gates dialog-fixed, button-crawl, confirm-over-shop, opt-narrow-scan, perf + chain).
+4. ob-oan chain, pre-staged on aa37de21 (restack each onto the new LIVE; built files only except noted):
+   review/lc22-oan 143515c6 (ob-oan-r6 5a9ee386 + kit-gloss-lower 3b765458; gates gates-oan22.sh incl ob-oan-enc) →
+   review/lc22-ov 9cdc4d82 (ob-verdict-rv 5dc1db31; KIT_REQUESTS both blocks; own CHANGE) →
+   review/lc22-km 53e52a1f (kem-row a5ff660a; SELF-MERGE jkitpage KIT_SAMPLES union) →
+   review/lc22-kw 30915038 (kawhy-verdict cace0315; SELF-MERGE j63 kaWhyKem(kawhy)+kitKemRow(kem-row) = one-sieve block) →
+   review/lc22-os fa8efb5c (one-sieve-rv 0ee866bc; SELF-MERGE jkitpage §53 a5ff660a line + §7.1 + §12.2).
+   Restack onto act-merge/ctp may conflict in assemble.py (module-list union, as done for ctp) or j63/jkitpage — report to MAIN.
+5. ob-m3ui-sololh eca83a5d → kit-home-frame f75a3f3c (MAIN OK; daa31a5e retired, 22beb8d8 dead) → endcard-top-r6 3f38961f (CHANGE «Hết kiếp: khung kết thúc luôn ở trên cùng; …» MAIN OK) → firstcard-2-rv de123ff3 + law-16 toggle commit (jk2b.js kitEndOdds → return null; rerun selx-rules/selx-wire/selx-days + firstcard-scan + QC; CHANGE must not mention «Mong manh») → kit-name-stranger e25dfd52 → kit-bac-progress cb221604 → srvmerit r2 c7f4fc0a → kit-stage-r2 ec2f7c43 (stack land; firstcard odds union → KK42) → kit-empty-rows cda34e5e → NHV 50840478 → map-zones-r7 9c8985ab8 → D cung-quy 99876fde → contest-thitam 2c956d97 → d-stack-lr3 cb398c07 (conflict → «FOR D: remerge <branch>» in FOREMAN_D_STATUS) → stat-pace d04561e8, srv-rank 8559fea2 → D mg-trim-r6 543ca579 ALONE → promo-root3 987c3599 (test only, ride along). (D1+D4 likely already inside ctp — confirm with MAIN.)
+Jump-ins on PASS: renderer-mem head 2b5bbbb3 (game build 82bbe53e; memory freeze). dialog-order lc22-do 04fed510 = HOLD (dress-tap regression; fixer via MAIN 161). ob-ngoaicung = FAIL, wait new LAND SLOT.
+### KNOWN (LIVE-identical / flaky)
+global-names 1 CLASH; tainghe-info TypeError (fixed by bac-progress); mg-back 1–2/12 (FAIL 1 always, FAIL 2/6 flips); audio-ipad CDN bgm-joy (fails on LIVE now too); makeup-set/info-tap-audit/stage-stay flake under load → rerun alone; G4 80-dialog-fixed + 90 «Ô lưu · Lui» = LIVE baseline until kit-g4-r2 lands.
+### TOOLS (dev/handover/reports/lc22-tools/)
+gates-*.sh (SP= my scratchpad → fix), srv.py (http server WITH utf-8 charset — python http.server breaks dev/index.html → all dayq/dialog-order probes time out), kpcheck.js (kit page renders samples), dupfn.py (+ dup_live.txt from a LIVE worktree), holog22.sh. Worktrees /home/user/wt/<slot>; QCBASE = LIVE worktree. Container restarted once (13:10Z) and killed a background gate run: use run_in_background + a watcher, check `uptime`.
