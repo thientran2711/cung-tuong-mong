@@ -87,3 +87,33 @@ NEXT JOB (MAIN order 20:10Z, AFTER FLIGHT; start only once LIVE holds r4 + this 
 - Remember: `python3 dev/build/assemble.py` AFTER every edit (it writes dev/index.html; T3b lost a gate round to a stale build).
 - SSK to D (session_01D3E3NYUzBGWQKuxVhNNMNw) + RV-CRS (session_01D3E3NbALbEXx1QFrEeKvCN).
 Facts kept: solo `#next.onclick` = the early-captured nextBuoi (skips every later wrapper), pre-existing, parked for MAIN.
+
+## dayq-one-rule (worker) — SẴN SÀNG KIỂM 9e23088d (01:55Z 26/11)
+PRIORITY #1 CHECK: OD 0 | main dev/build/jdayq.js:95 dqNextSync + :190 dqNextHeal (LIVE 5e013076) | review/* none before this branch | claims D ROOT 2 row 2026-11-25T22:14Z.
+Depth 1 · START_CTX ~4 % · context at SSK ~22 %.
+Branch review/dayq-one-rule off LIVE 5e013076: d7584906 (code) + 5a01452c (build: index.html / sw.js / assets.json; CHANGE line kept; assets.json picked up 5 new CDN «xuân sáng» backgrounds from build_site) + 9e23088d (dev/test/dayq-break.js).
+Change (jdayq.js only, dqNextHeal solo branch): `n.disabled=false;…dqNextCue()` → `if(n.dataset.coopWait)return; dqNextSync(); if(!n.disabled) healed++`. Co-op branch `c.lockNext()` unchanged. The coopWait guard stays (brief: data-coopWait respected).
+Code read: only j6 render() (j6.js:10), jcoopworld lockNext() (:347/:350/:352) and jdayq write #next.disabled (grep `.disabled=`); the heal no longer writes it, so only render() and lockNext() do. dqNextSync = dqUi() && dqNextStale(), and dqNextStale = disabled && !Q.length && !S.mg && !S.dead && #modal hidden → render(), i.e. render()'s rule exactly, plus two narrowings vs the old heal: (1) no heal while #modal is shown, (2) none for bots (dqUi). NOTE: dqWake (every 700 ms) ALREADY calls dqNextSync, so the solo heal is now the same net as dqWake, just on the 2 s tick (law 13: one rule). Behaviour change vs LIVE: the old heal enabled the button with NO render; now render() runs, and when khắc are spent render's own auto-advance (advLock / nextBuoi after 350 ms) can fire.
+
+| gate (ALONE, one at a time) | branch | LIVE 5e013076 |
+|---|---|---|
+| dayq-ghost (coop-serve) | PASS 10/10 | — |
+| dayq-hold (UTF-8 server) | PASS 46 | — |
+| dayq-order | PASS | — |
+| dayq-hold-coop | 17/17 | — |
+| coop-e2e ×2 | 143/143 · 143/143 (heal check ok both) | — |
+| sangbuoi-held full | run 1: Fold A–H all PASS (iPad cut by my 1200 s timeout) · run 2: all PASS except Fold A ×1 | — |
+| sangbuoi-held CASES=A REPEAT=6 | 1/8 · 4/24 · 3/8 (diag copy) FAIL; my change on LIVE's assets.json 2/24 → **10/64 fail** | **0/24** |
+| dayq-break (new) | heal() alone holds Q>0 / S.mg(#ov on) / S.dead / data-coopWait / co-op lockNext (called 3–4×) ✓; control comes back through render (render 1) | same holds; control comes back by direct write (render 0) |
+| dayq-break after 2 × wake | S.mg and solo data-coopWait come back ENABLED | IDENTICAL on LIVE (pre-existing, not the heal) |
+| quickcheck ALONE | G4 «Ô lưu · Lui» (known LIVE row) · perf buổi 3748/1552 FAIL in the 3-run median (runs 3748/1487/5376) → quickcheck.js --runs 5 rerun: **PASS** buổi 4484/4350, render 278/254, tab 662/548, tasks>200 27/28, old save ok | — |
+| shots Fold 755x1000@2 + iPad 1180x820@2 | day turn → «Sang ngày mới» → night → dawn scene «Đêm không được triệu» → day 1-0; 0 page errors both; looked at: normal | — |
+
+sangbuoi-held A reading (NOT settled, per D): every failing dump shows a real game card («Có người tìm đến», Q=1, #modal open, #next disabled correctly) landing after the test's drain loop, or a setup race («setup: next disabled / modal open»). DQ.stat has no `healed` and staleNext 0 in those page lives, so the changed line did not visibly run. But 10/64 vs 0/24 is a real gap. A likely link: render()'s auto-advance now fires from the sync (it did not with the old direct write), so its 350 ms timer clears the test's advLock=true and a game card lands in the setup window. Successor: run LIVE with the same REPEAT count first; if the gap holds, TRACE render callers in case A (copy with a state dump: put `JSON.stringify(await st())+diag()+{advLock,used,#modal text}` into the case-A fail line).
+Break-probe callers (who.js, measured): the solo data-coopWait mark is cleared by dqWake → dqNextSync → render → jcoopworld lockNext (r4 code, already LIVE); the fake S.mg is released after a lifeGate → render. Neither is the heal; left as is (LAW 16), reported.
+
+### HANDOVER dayq-one-rule → Q-SOFTLOCK successor (D ROOT 2 opens it)
+State: review/dayq-one-rule 9e23088d pushed, gates above. No review of one-rule alone (D 01:11Z): one BIG review of the whole jdayq branch (one-rule + r3wip + Q-softlock).
+Next job (MAIN 150 ORDER Q-SOFTLOCK, verbatim in dev/handover/FOREMAN_D_STATUS.md «FROM MAIN 150 → FOREMAN D — ORDER Q-SOFTLOCK» + FAULT/JOB lines): (1) stack review/sangbuoi-held-fix-r3wip 4cf5e9c2 under/with dayq-one-rule; (2) reproduce F's s3f faults on LIVE (a: «Sang ngày mới» ×3, Q=1 «Tin trong cung buổi này»; b: «Có tin đang chờ · xo…» disabled, Q=8 Tin báo / Xét phẩm cuối tháng, 150 taps) — ask Foreman F for the s3f save/dump via FOREMAN_F_STATUS.md; (3) root fix for the whole dqWait / dqShown hold family + scan + before/after table + tests (a)(b) on Fold + iPad; (4) SSK to D.
+Recipe: sparse worktree; `python3 dev/build/assemble.py` after EVERY edit, then `CTM_CHANGE="$(cat dev/site/CHANGE.txt)" bash dev/site/build_site.sh` (without CTM_CHANGE the build line takes the last commit message). UTF-8 server for dayq-hold / dayq-order / sangbuoi-held (python SimpleHTTPRequestHandler with `.html/.js/.json` → `; charset=utf-8`); dayq-ghost / dayq-break / dayq-hold-coop / coop-e2e need no URL. sangbuoi-held is SLOW (~10 min per device; REPEAT=6 needs timeout ≥ 3300 s). Quickcheck ~15 min (button crawl 837 s); the perf «buổi» median is bimodal (1.5 s / 4–5 s) → rerun `node dev/tools/quickcheck.js <wt> <live index.html> --out <dir> --runs 5` before calling it a fault.
+Traps: the handover branch was force-moved during my run (fetch with `+ref`). My shots script snapped the night step on iPad before the flip (1.5 s wait); the dawn scene holding #next (Q=3, «Có tin đang chờ…») is a correct hold, not fault (b).
