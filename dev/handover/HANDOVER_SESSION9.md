@@ -286,3 +286,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~17:51Z OWNER BUG via 154: unclear where to buy / who the chapter's eunuch seller is → «GOAL-LINKS» fixer = 161 first act (goal lines as tap links + Dư đồ «Mua bán» marks + name the seller).
 - ~17:55Z OWNER BUG via 154: visitor scene choices show no result → OB-VERDICT-3 (scope extend) = 161 first act (OB-VERDICT-2 at 45 %).
 - ~17:58Z **LIVE f573dc94** (charge-trinh-punish D1+D4: who/why/evidence/penalty, one rank per punishment, evidence per charge + act-merge test fix) FF-pushed by MAIN 160 after interleaved A/B ×5 (buổi median 0.72×). ROLLBACK b881686f. audio-ipad = env (all 3 builds PASS in LC23). Save = ONE land rv12 fa4c0945 (B LAND READY ≈19:30Z).
+- ~17:58Z SẾP ANSWERED Mong manh: rejected; no-roll life-changing options = no odds word + «Cẩn thận khi lựa chọn» line; firstcard toggle → this rule (154 told FIRSTCARD).
