@@ -32,3 +32,14 @@ KEEP classes (the scan prints counts): «không …» rows (owner 17:55Z, kept) 
 ## Not done / for MAIN
 - Marks in the hint row show a little space between glyphs in the display font («+ +»); cosmetic, same font as the rest.
 - Built root index.html / sw.js not rebuilt here (coordinator rebuilds on land).
+
+## BEFORE (LIVE) vs AFTER pair — same option, both devices (MAIN 161 request)
+CDN `https://ctm-img.victoria-tntt.workers.dev/img/_review/wording-gain/ba-{BEFORE,AFTER}-{vague,sharp,rows}-{fold,ipad}.png` (event «Giữ hay không giữ», Tâm cơ 5 = vague).
+| option | BEFORE (LIVE) | AFTER |
+|---|---|---|
+| Cúi đầu tuân lệnh | Được «được lòng bề trên» · Mất «lỡ phúc con cái» | Được «Bề trên: thiện cảm +» · Mất «Có thai −» |
+| Đút bạc xin giữ | «hỏng thì Thái hậu phật ý» | «hỏng thì Thái hậu: thiện cảm −−» |
+| Cầu xin Hoàng thượng | «hỏng thì bệ hạ lạt lẽo đi» | «hỏng thì Sủng −−» |
+(Earlier `hint-vague-*` shots were the boot cover; superseded by `ba-*`.)
+## Gate notes
+coregates (quickcheck): dialog-fixed «no empty Tốn / Được cell» identical on LIVE base (pre-existing); button crawl «Ô lưu · Lui» not compared on base. Full quickcheck verdict line did not finish in this session.
