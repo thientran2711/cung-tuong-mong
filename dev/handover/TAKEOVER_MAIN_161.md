@@ -22,3 +22,5 @@ FOREMEN (other accounts, STATUS files only): B session_01N1tNP5aForRyuVGCKqGrnC 
 REPORTS PROMISED TO SẾP: act-merge LIVE ≈16:30Z with NAME table; Dư đồ hai tầng LIVE; Tiến bộ per bậc; giảm oán; nói xấu verdict; 20:00 NY report task fires 00:52Z.
 
 ADDED BY 160 (~14:10Z): save-quota data loss (F s3f, ~5.2 M chars at b~3010, silent) → fix = B review/save-fix-stack-rv9 01bad0f6 (save-growth + j6 saveBlocked() sticky notice) = next after ACT-MERGE / in-flight item. D LAND READY stat-pace d04561e8, charge-trinh-punish 69dd730e (fast lane), srv-rank 8559fea2 (told LC22). Read the 160 block for anything after 14:10Z.
+
+ADDED BY 160 (~14:30Z): OPEN KK44 FIRST (KK43 session_01V1ZZH1gzGfjtfHnKNLwEu2 rolled; handover reports/kit-hand.md «KK43 HANDOVER» a3439268). 160 cannot (depth 8). KK44 lane: answers on kit-g4-r2 1e4db52c (MAIN LOOK PASS 14:28Z, RV-KK41 reviewing) → double-tap-spends-twice scan (confirm/buy/give) + iPad dead-close coverage → kitKemRow no-label + jnsieve kemRec, Sổ ghi chip contrast/«???», Tuần lục Fold shift, empty oán result card → K-PICKER-FIT, «Phối đồ» «•», boot cover over chest, KK40/41 leftovers. Then archive KK43.
