@@ -1,0 +1,9 @@
+# Review R2-cautious-2 — E-S3 rerun (thd/thd_hoc, iPad 1180x820, bot cautious=careful planner, seed 2042951765)
+Harness real-tap 1ffae8bb→…→08a4ff8b (resumed same life 5 times at safe checkpoints), LIVE github.io (Builds 4763d410aa0d … dcf5cf143550); real taps in last segment 3479 (counter restarts at each resume; whole life ≈ 20 h real, 25/11 10:31Z → 26/11 09:25Z); jsClicks 0.
+## 1 Summary
+cautious · thd_hoc (Lưu Bích Dao) · 21 years, age 40 · max rank 0 (Đáp ứng → Phế phi) · ending «Xuân tàn lãnh cung — Tuổi xuân qua đi» (game-imposed, VALID, robot-audit VALID) · 3417 buổi · bugs 44 (21 game, 15 stuck, 8 dead), stuck 19, dead buttons 11.
+## 2 Scores
+a First 15 min 5/10 · b Pacing 2/10 (21 years, 3417 buổi, rank 0 — flat for two decades) · c Buttons & UI 4/10 (hidden-queue softlock Q≤15, duplicate Tâm trạng queue, 113-tin list without ✕ on iPad) · d Story 5/10 (beats repeat: Đại án vu cổ, Khoa thi Đình, Chương 4/5 chapter cards) · e Characters 5/10 · f Choices & fairness 3/10 (a careful player cannot climb: no visible lever from Phế phi; law 5 harder as she climbs n/a — she never climbs) · g Rewards 4/10 (salary chest junk; hides end card) · h Mini-games n/a · i Visuals 8/10 · j Co-op n/a.
+## 3 Loved: stable art for 21 years; ending text. Hated: 20-year flat slog; hidden-queue softlock; end card hidden. Again: not this road/persona without a way up.
+## 4 BUGS (counts in JSON, shots in out dir): hidden-queue softlock ×many; Tâm trạng duplicate queue ≤24; «Lui» dead on several dialogs; JS f.rk.split (known); popup over end card (6th life); iPad «Tân quân lập uy»/«Tin báo» no-close (fixed later); page crashes under load (resume ok). Save size 4.7 MB at y19.
+## 5 Suggestions: an exit ramp from lãnh cung (a card with gain/loss) so 20 years are not forced; end the slog by BAL age/lãnh cung limits; badge for hidden queue.
