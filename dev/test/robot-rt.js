@@ -37,7 +37,7 @@ const isNav = x => !x.card && !x.inOpts && NAV_RE.test(x.t); const isLow = x => 
 const ODDS = { 'mong manh': 0, 'hiểm': 1, 'khó lường': 2, 'tùy duyên': 3, 'có cơ': 4, 'vững': 5, 'rất vững': 6, 'liều': 0, 'khó': 1, 'năm ăn năm thua': 3, 'khá chắc': 4, 'chắc': 5, 'rất chắc': 6, 'nắm chắc': 6 };
 
 function Seat(C) {
-const URL0 = C.url, DEV = C.dev || 'fold', BOT = C.bot || 'sens', SEED = +C.seed || 1, LIFE = C.life || ['rt', C.origin || 'any', BOT, DEV, SEED].join('-');
+let URL0 = C.url; const URL_GIVEN = C.url; const DEV = C.dev || 'fold', BOT = C.bot || 'sens', SEED = +C.seed || 1, LIFE = C.life || ['rt', C.origin || 'any', BOT, DEV, SEED].join('-');
 const STUCK_MS = (+C.stuckMin || 15) * 60e3, SLICE = +C.slice || 0, CP = +C.cp || 50, A = { origin: C.origin, road: C.road };
 const OUT = path.resolve(C.out), SHOTS = path.join(OUT, 'shots-' + LIFE); fs.mkdirSync(SHOTS, { recursive: true });
 let rs = SEED >>> 0 || 1; const rnd = () => { rs ^= rs << 13; rs >>>= 0; rs ^= rs >>> 17; rs ^= rs << 5; rs >>>= 0; return rs / 4294967296 };
@@ -184,9 +184,13 @@ async function play(p) {
       return { at: new Date().toISOString(), url: location.href, ls, S: S1, top, qs, coop: { CW: safe(window.CW || null), room: safe(window.CTM_ROOMS && window.CTM_ROOMS.cur ? window.CTM_ROOMS.cur : null), seat: safe(window.COOP || window.CO || null) }, Q: (typeof Q !== 'undefined' && Q) ? Q.length : null } });
       const f = path.join(SHOTS, tag + '-dump.json'); fs.writeFileSync(f, JSON.stringify(d)); const sk = Object.keys(d.ls).find(k => /save/i.test(k)); if (sk) fs.writeFileSync(path.join(SHOTS, tag + '-save.json'), d.ls[sk]); (R.dumps = R.dumps || []).push(f); return f } catch (e) { return null } };
   const boot = async () => {
+    if (PIN && R.harness.build0 && R.harness.build0.b && true) { const u = await pinUrl(R.harness.build0.b, R.harness.build0.t); /* checks the kept server first, re-serves after a container restart */ if (u) { R.harness.pinUrl = u } else console.log('BUILD PIN: could not serve ' + R.harness.build0.b + ' locally — the gate below still stops on a mismatch') }
+    if (R.harness.pinUrl) URL0 = R.harness.pinUrl;
     if (!C.noBoot) await p.goto(URL0, { waitUntil: 'load', timeout: 0 });
     await p.waitForFunction(() => typeof start === 'function' && typeof over === 'function', null, { timeout: 0 });
-    await buildGate(p, R.harness.build0 ? (ck ? 'resume' : 'reload') : 'start');
+    await buildGate(p, !R.harness.build0 ? 'start' : R._bootFirst ? 'reload' : ck ? 'resume' : 'reload'); R._bootFirst = 1;
+    /* first load of a NEW life on a remote / LIVE url: move to the local copy of this very build BEFORE the life starts (the save lives per origin: nothing to carry yet) */
+    if (PIN && !ck && R.harness.build0 && !R.harness.pinUrl && !/^http:\/\/127\.0\.0\.1:8[7-9]\d\d\/$/.test(URL0) /* not already a pin port */) { const u = await pinUrl(R.harness.build0.b, R.harness.build0.t); if (u) { R.harness.pinUrl = u; URL0 = u; console.log('BUILD PIN: life ' + LIFE + ' on ' + R.harness.build0.s + ' ' + R.harness.build0.b + ' served at ' + u); await p.goto(URL0, { waitUntil: 'load', timeout: 0 }); await p.waitForFunction(() => typeof start === 'function' && typeof over === 'function', null, { timeout: 0 }); await buildGate(p, 'pin') } }
     /* pre-life setup (no taps): forced thân phận through the game's own dev hooks + a recording wrapper on over() */
     await p.evaluate(C => {
       if (C.origin) { window.__forceOrigin = C.origin }
@@ -572,14 +576,27 @@ async function unstick(p, rt, sc, lvl, fromPeer) {
    records window.CTM_BI {s, b} in R.harness.build0 (kept in the ckpt); EVERY later load (resume, unstick reload, crash restart → resume=1) must show the same b.
    A different build = HARD STOP «BUILD MISMATCH»: results saved with harness.buildMismatch, the ckpt is left as it was (resume it on the recorded build:
    dev/test/rt-serve-build.sh --b <b> <port>), exit code 3. Never a silent continue. */
+/* SERVE THE LIFE'S BUILD (F #20 10:48Z / F #21: s2f, s3f, A-COOP #2 mixed builds; reuse of s9f #2's local worktree pattern, LAW 13): pin=1 (default) → the life is
+   played on a LOCAL copy of the exact build it started on, from its first load to its end, every resume / restart / co-op seat / rejoin included:
+   port = 8700 + (b mod 250), served by dev/test/rt-serve-build.sh --b <b> (a detached server, kept for the next resume, reused by the co-op friend seat). */
+const PIN = C.pin !== '0' && process.env.RT_PIN !== '0';
+const isLocal = u => /^https?:\/\/(127\.0\.0\.1|localhost)(:|\/)/.test(u || '');
+async function servesBuild(u, b, bt) { try { const r = await fetch(u, { signal: AbortSignal.timeout(4000) }); const x = await r.text(); return x.includes('"b":"' + b + '"') && (!bt || x.includes('"t":"' + bt + '"')) } catch (e) { return false } }
+async function pinUrl(b, t) {
+  const port = 8700 + (parseInt(String(b).slice(0, 6) + String(t || '').replace(/\D/g, '').slice(-4), 16) % 250), u = 'http://127.0.0.1:' + port + '/';
+  if (await servesBuild(u, b, t)) return u;
+  const cp = require('child_process'), sh = path.join(__dirname, 'rt-serve-build.sh');
+  const ch = cp.spawn('bash', [sh, '--b', b].concat(t ? ['--t', t] : []).concat([String(port)]), { detached: true, stdio: 'ignore', cwd: __dirname }); ch.unref();
+  for (let i = 0; i < 120; i++) { await new Promise(r => setTimeout(r, 5000)); if (await servesBuild(u, b, t)) return u }
+  return null }
 async function buildGate(p, where) {
   const bi = await p.evaluate(() => { try { return window.CTM_BI ? { s: window.CTM_BI.s, b: window.CTM_BI.b, t: window.CTM_BI.t } : null } catch (e) { return null } }).catch(() => null);
   (R.harness.builds = R.harness.builds || []); if (bi && !R.harness.builds.some(x => x.b === bi.b)) R.harness.builds.push({ s: bi.s, b: bi.b, where });
   if (!bi) return true;
   if (!R.harness.build0) { R.harness.build0 = { s: bi.s, b: bi.b, t: bi.t, at: new Date().toISOString() }; return true }
-  if (bi.b === R.harness.build0.b) return true;
+  if (bi.b === R.harness.build0.b && (!bi.t || !R.harness.build0.t || bi.t === R.harness.build0.t)) return true; /* b AND t (F #20: a worktree build can stamp the same s for another build) */
   R.harness.buildMismatch = { want: R.harness.build0, got: bi, where, at: new Date().toISOString() };
-  const msg = 'BUILD MISMATCH at ' + where + ': life recorded on ' + R.harness.build0.s + ' (' + R.harness.build0.b + '), page is ' + bi.s + ' (' + bi.b + ') — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b ' + R.harness.build0.b + ' <port>) and resume';
+  const msg = 'BUILD MISMATCH at ' + where + ': life recorded on ' + R.harness.build0.s + ' (' + R.harness.build0.b + ' ' + (R.harness.build0.t || '') + '), page is ' + bi.s + ' (' + bi.b + ' ' + (bi.t || '') + ') via ' + URL0 + ' — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b ' + R.harness.build0.b + ' <port>) and resume';
   console.log(msg); try { bug('harness', msg) } catch (e) {} try { save() } catch (e) {} process.exit(3) }
 function save() { const f = path.join(OUT, LIFE + '.json'); try { R.promo = OFFER.recount(R.offers) /* real promotion roads seen / taken (rt-offer.js rule 2; offers logged by an older harness are re-classified) */ } catch (e) {} fs.writeFileSync(f, JSON.stringify(R, null, 1));
   fs.writeFileSync(path.join(OUT, LIFE + '.md'), ['# ' + LIFE + ' (real-tap harness ' + SHA + ', ' + DEV + ')', '', '| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |', '|---|---|---|---|---|---|---|---|---|---|',

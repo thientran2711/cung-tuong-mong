@@ -372,3 +372,9 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
 - Proof (local): life BP started on LIVE 6b5d3d05 (b 0281bf7bcef6) to buổi 11 → resume against 02f564ae (b dd1ce3d0ffa1) = «BUILD MISMATCH at resume», exit 3, ckpt
   kept at buổi 11 → `rt-serve-build.sh --b 0281bf7bcef6 8811` serves the same b → resume goes on to buổi 27, no mismatch. Audit fixture: 2 builds → INVALID «mixed
   build (3762da08+/fa8da73cecdc → 6b5d3d05+/b7dcbbd06e03)».
+- BUILD PIN part 2 (F #20 10:48Z / F #21: s2f, s3f, A-COOP #2 also mixed; reuse s9f #2's local-worktree pattern, LAW 13): pin=1 (default; pin=0 / RT_PIN=0 off) —
+  the life is PLAYED on a local copy of its own build: after the first load records CTM_BI {s,b,t}, the harness serves that exact build (rt-serve-build.sh --b <b> --t <t>:
+  newest main commit whose index.html carries this b AND this t; same b can sit on several commits with another t) on port 8700 + hash(b,t) mod 250 (detached, kept,
+  reused by the next resume and by the co-op friend seat) and moves there before the life starts; every resume / restart / unstick reload goes to that port (re-served
+  after a container restart). The gate compares b AND t. Co-op: both seats boot through the same Seat → same pin port; the room server is absolute (ctm-coop workers.dev),
+  so a local page plays co-op. Proof: PIN1 on 8809 → pinned to :8907, buổi 51; resume given the OLD url :8810 (dd1ce3d0ffa1) → still :8907, buổi 66, builds = 1.
