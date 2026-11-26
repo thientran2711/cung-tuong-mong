@@ -81,3 +81,27 @@ Before: «Quý nhân» over the name + row «Quý nhân» (ban hoa); maid «Đá
 
 Kit parts only (kitRows / kitNameRank untouched); words per VANPHONG (Tú nữ, Chưa vào cung, Tiểu thư, maid ranks from SRK); no number typed.
 SẴN SÀNG KIỂM review/end-maxrank ef459c0a
+
+## 2. REVIEW (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS ef459c0a
+START_CTX ~4 % · depth 8 (limit). PRIORITY #1 CHECK: worker's line verified (git grep main: no other lifeTopRank/rankStage; review/*: none on best rank).
+LIVE moved f573dc94 → 53319e6f during review (ob-oan / kit-gloss-lower stack): no source overlap; `git merge-tree` conflicts only in built files (CHANGE.txt, index.html, sw.js) → land by STACK with rebuild, no rework.
+
+| check | result |
+|---|---|
+| build (assemble + build_site) | same index.html, only CTM_BI differs |
+| end-maxrank.js on branch | ALL PASS |
+| end-maxrank.js on LIVE f573dc94 | FAIL static 0/9 sites on the core (runtime part times out on LIVE — no lifeTopRank; worker's BEFORE table + before shots stand) |
+| selx-days.js | ALL PASS |
+| one-core-guard / -text / -bind | PASS / PASS / PASS (0 mismatches of 1602) |
+| coop-e2e (own run) | 143/143 — worker's 135/142 flakes not reproduced; not branch-caused |
+| quickcheck | QUICKCHECK PASS (open, old save, perf 227/243 · 612/578 · 1325/1227); CORE GATES FAIL only the known LIVE G4 80-dialog-fixed + 90-button-crawl «Ô lưu · Lui» |
+| shots Fold + iPad, before/after, ban hoa + maid + video | looked at: ban hoa «Tú nữ» plate + row + «Con cái: không»; maid plate = current post, row = best post held; no overflow; art blanks are sandbox-only, same before/after |
+| law 4 one core | PASS — j3 record, j32 card + lifeSave + tracker, jkiep abandon line, jrank rkTrack/rkSummary all read j32 rankStage/lifeTopRank; words from RANKS / SRK.maid |
+| law 11 whole family (own git grep maxRank / «Phẩm cao nhất» / RANKS[max]) | PASS — remaining maxRank uses: jge promo (writer), jkiep kpNow (life-done rule, not a print); jkrank/jrank columns print server mr (now from the core). Current-rank prints (RANKS[S.rank]) are a different family, out of scope |
+| law 7 wording | PASS — Tú nữ, Chưa vào cung, Tiểu thư (= jkc rkName home word), maid posts from SRK |
+| law 9 kit | PASS — kitRows / kit plate untouched, no new UI |
+| co-op / offline / board | PASS — never-entered lives not sent (worker refuses them anyway), no failing request; rankStage reads the seat's own S |
+| old saves | PASS — LIVE ckpt loads, card right; a save made during the days with ceiling maxRank is repaired at the edict (once, S.rkIn) |
+
+NON-BLOCKING notes: (1) an OLD save already PAST the edict whose LIVE tracker stored the ceiling in maxRank keeps that ceiling as «Phẩm cao nhất» (given() only fires on the edict/entry calls; cannot be told apart from a real later demotion) — rare, accept. (2) kszRankName now calls pMe() per own plate; perf numbers show no cost. (3) Board rows for never-entered lives = Foreman D decision (server deploy), as the worker says.
+VERDICT: PASS ef459c0a — no BLOCKING items.
