@@ -214,3 +214,8 @@ Findings 2, 3, 4: **FIXED** (b8ea33be). Tự tay score subtracts BAL.toil.rkDema
 Still open:
 5. Law 11 (co-op, both seats): jshelf.js:406 `k==="give"` is still inline in the click handler (it changes e.pc/e.pm directly). The fix is unchanged from review #2: put it in one function `shelfPlantGive()` and register `reg9("shelfPlantGive",[],{mine:()=>true})` in jcoopthinf beside shelfPlantQuick. The plant redraw already goes through shelfPlantDraw (UI9-captured). Check once that a guest's give lands on the host's copy, once per tuần.
 After 5 is fixed and LIVE is unchanged, I expect PASS; re-review will cover only that change plus the mg-trim test.
+
+## BUILD #5 (worker D5 #2) — BIG rv #2 (32077029) finding 5 — SSK review/mg-trim @ c961211e (FF from LIVE 6b5d3d05)
+Findings 2–4 of rv #2 were fixed in 3385b0f3 (BUILD #4 table). Finding 5 (co-op): the plant «Giao … chăm» is now ONE function `shelfPlantGive()` (jshelf, the click handler only calls it) registered `reg9("shelfPlantGive",[],{mine:()=>true})` beside `shelfPlantQuick` (jcoopthinf); her open plant key SHPC.g rides in CX9 like the sibling.
+Co-op check: dev/test/coop-thin-f4.js new row G2 (2 browsers, host Fold + guest iPad, real coop worker). Result `ROWS=G1,G2`: G2 = the SAME outcome as its sibling G1 on this setup — both "local 1, sent 0" (the level-9 intent runs on her phone, nothing sent) — and G1 fails identically on LIVE 6b5d3d05 (ran there: FAIL G1 local 1 sent 0; D1 FAIL too) → pre-existing level-9 routing state, not this branch; G2's wrapper ran (registered). Her plant screen stays on her phone only (G1/G2 ui ok).
+Tests @c961211e: mg-trim ALL PASS Fold 755x1000@2 + iPad 1180x820@2 · mg-skip-audit PASS. No UI change since 3385b0f3 (videos at the same URLs stand).
