@@ -1,0 +1,20 @@
+/* NHV TRANSITION TEST (MAIN 152, 26/11): map → area and area → map → area under a THROTTLED network (CDP 1.5 Mbit/s, 150 ms) on Fold + iPad.
+   Every 80 ms while she moves: the screen must show either the garden map, the held garden painting (#nhv-hold), a dialog (Q), or the area scene whose painting is DECODED.
+   FAIL = any sample where the page shows something else (the act page / the stage's code-drawn loading backdrop). usage: KSEED=23 SAVE=<life> node dev/test/nhv/transition-test.js */
+const {boot}=require('./boot');let bad=0,tot=0;
+async function run(dev){const o=await boot(dev==='ipad'?'ipadAir':'fold',1,0,{reducedMotion:'no-preference'});const {g,pg}=o;const T=ms=>pg.waitForTimeout(ms);
+ const cdp=await pg.context().newCDPSession(pg);await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:150,downloadThroughput:1.5e6/8,uploadThroughput:1e6/8});
+ await g.evaluate(()=>{window.__nhvS=[];const f=()=>{try{const hold=document.getElementById('nhv-hold');const held=!!hold&&hold.style.visibility!=='hidden';const mapOn=typeof tab!=='undefined'&&tab==='go'&&!!document.querySelector('#panel .mapv');
+   const C=NHV.cur;const scene=typeof tab!=='undefined'&&tab==='act'&&!!document.getElementById('nhv')&&C&&C.bgReady;const dlg=Q.length>0&&!document.getElementById('modal').hidden;
+   window.__nhvS.push(held||mapOn||scene||dlg?0:(typeof tab!=='undefined'?tab:'?')+(document.getElementById('nhv')?'+nhv':'')+(C&&C.bgReady?'+bg':''))}catch(e){window.__nhvS.push('err')}if(window.__nhvRec)setTimeout(f,80)};window.__nhvRec=1;f()});
+ const clearQ=async()=>{for(let j=0;j<8;j++){const n=await g.evaluate(()=>{if(!Q.length)return 0;const m=Q[0];const L=(m.opts||[]);let k=L.findIndex(o=>/một mình/.test(o.n||''));if(k<0)k=Math.max(0,L.findIndex(o=>!o.off));if(L.length&&!L.every(o=>o.off))chooseM(k);else closeModal();return 1});if(!n)break;await T(700)}};
+ const click=s=>g.evaluate(s=>{const e=document.querySelector(s);if(e){e.click();return true}return false},s);
+ await g.evaluate(()=>{window.__nhvRec=0});await clearQ();await g.evaluate(()=>{tab='go';window.__mapList=false;render()});await T(800);
+ for(let k=0;k<4;k++){await clearQ();await click('#panel [data-go="vuon"]');await T(1500);if(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))break}
+ await T(3000);const order=await g.evaluate(()=>[...document.querySelectorAll('#panel .nhv-map .kpm-row')].filter(b=>/\d+ bóng người/.test(b.textContent)).map(b=>b.dataset.kpmpart));
+ await g.evaluate(()=>{window.__nhvS=[];window.__nhvRec=1;(function f(){try{const hold=document.getElementById('nhv-hold');const held=!!hold&&hold.style.visibility!=='hidden';const mapOn=tab==='go'&&!!document.querySelector('#panel .mapv');const C=NHV.cur;const scene=tab==='act'&&!!document.getElementById('nhv')&&C&&C.bgReady;const dlg=Q.length>0&&!document.getElementById('modal').hidden;window.__nhvS.push(held||mapOn||scene||dlg?0:tab+(document.getElementById('nhv')?'+nhv':'')+(C&&C.bgReady?'+bg':''))}catch(e){window.__nhvS.push('err')}if(window.__nhvRec)setTimeout(f,80)})()});
+ for(const k of order.slice(0,4)){await click(`#panel .nhv-map [data-kpmpart="${k}"]`);for(let i=0;i<10;i++){await T(600);await clearQ()}await click('#tomap');await T(2500)}
+ const S=await g.evaluate(()=>{window.__nhvRec=0;return window.__nhvS});const b=S.filter(x=>x);tot+=S.length;bad+=b.length;
+ console.log(`${b.length?'FAIL':'ok  '} ${dev}: ${S.length} samples (every 80 ms over ${order.slice(0,4).length} map→area→map moves, throttled), off-screen states: ${b.length} ${JSON.stringify([...new Set(b)])}`);
+ await o.ctx.close();await o.b.close();o.srv.close()}
+(async()=>{await run('fold');await run('ipad');console.log(`NHV TRANSITION TEST ${bad?'FAIL':'PASS'} · ${tot-bad}/${tot}`);process.exit(bad?1:0)})();
