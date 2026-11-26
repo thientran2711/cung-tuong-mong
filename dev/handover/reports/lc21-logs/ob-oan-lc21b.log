@@ -1,0 +1,29 @@
+PASS | 755x1000@1 panel opens from the Nguy hiểm chung box | "Nguy hiểm chung"
+PASS | 755x1000@1 «Cách giảm» row names the real ways | "CÁCH GIẢM\nlàm lành từng người (Tạ lỗi, Nhún nhường, Biếu quà làm lành) · Đóng cửa giữ mình · Xin Hoàng hậu che chở · Xin Thái hậu đỡ lời · Phòng bị (giao việc cho kẻ hầu)"
+PASS | 755x1000@1 every person who hates her is listed by name | ["Lâm Thanh Hoan","Thạch Tĩnh Thù"]
+PASS | 755x1000@1 WHY from her real memory (rumor deed) | ["vì ta đã tung tin đồn bẩn về nàng ta (mới đây)","vì còn oán ta (chưa rõ vì việc gì, dò la để biết)","vì còn oán ta (chưa rõ vì việc gì, dò la để biết)"]
+PASS | 755x1000@1 oán level in words + number
+PASS | 755x1000@1 direct act cards | ["Làm lành với Quý phi Lâm Thanh Hoan TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·","Làm lành với Phi Thạch Tĩnh Thù TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·Biếu","Làm lành với Quý nhân Uông Nhu Gia TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·B","Đóng cửa giữ mình TỐN Sủng -2 ĐƯỢC 2 tuần: mưu hại nhắm vào ta thành í","Biếu quà làm lành TỐN không ĐƯỢC Quý phi Lâm Thanh Hoan bớt ghen 8 bớt","Nhờ bề trên che chở TỐN không ĐƯỢC Xin Hoàng hậu che chở·Xin Thái hậu ","Phòng bị TỐN không ĐƯỢC giao kẻ hầu canh cung·thử độc·theo d
+ROOM {"dfView":true,"npc":true,"tab":"act","ppl":5,"fig":false,"encOn":true}
+PASS | 755x1000@1 LC21 encounter check: choice shown ONCE (no centre modal over the encounter scene, no empty modal) | {"modalShown":true,"modalTitle":"Làm lành với Quý phi Lâm Thanh Hoan","modalOpts":3,"inScene":false,"sceneBtns":0}
+PASS | 755x1000@1 Làm lành sub-choice = the real acts | {"t":"Làm lành với Quý phi Lâm Thanh Hoan","inScene":false,"o":[{"n":"Tạ lỗi","dis":false},{"n":"Nhún nhường","dis":false},{"n":"Biếu quà làm lành","dis":false},{"n":"Thôi","dis":false}]}
+PASS | 755x1000@1 Nhún nhường ran (modal): oán 17 → 9, khắc spent | {"o":9,"k":1}
+PASS | 755x1000@1 deep oán: Tạ lỗi / Nhún nhường closed with the reason, Biếu quà open | [["Tạ lỗi",true],["Nhún nhường",true],["Biếu quà làm lành",false],["Thôi",false]]
+PASS | 755x1000@1 Nhờ bề trên → the real patron acts | ["Làm lành với Phi Thạch Tĩnh Thù TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·Biếu","Làm lành với Quý phi Lâm Thanh Hoan TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·","Làm lành với Quý nhân Uông Nhu Gia TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·B","Đóng cửa giữ mình TỐN Sủng -2 ĐƯỢC 2 tuần: mưu hại nhắm vào ta thành í","Biếu quà làm lành TỐN không ĐƯỢC Phi Thạch Tĩnh Thù bớt ghen 8 bớt oán","Nhờ bề trên che chở TỐN không ĐƯỢC Xin Hoàng hậu che chở·Xin Thái hậu ","Phòng bị TỐN không ĐƯỢC giao kẻ hầu canh cung·thử độc·theo d
+PASS | 755x1000@1 Phòng bị → the j70 dialog | {"t":"Phòng bị","o":["Giao việc: canh chừng cung Rất vững TỐN không ĐƯỢC giữ được cung: bắt ","Giao việc: thử độc đồ ăn Rất vững TỐN không ĐƯỢC nếm trước mọi món, th","Giao việc: theo dõi một người Rất vững TỐN không ĐƯỢC bám theo một phi"]}
+PASS | 755x1000@1 no page error | []
+PASS | 1180x820@1 panel opens from the Nguy hiểm chung box | "Nguy hiểm chung"
+PASS | 1180x820@1 «Cách giảm» row names the real ways | "CÁCH GIẢM\nlàm lành từng người (Tạ lỗi, Nhún nhường, Biếu quà làm lành) · Đóng cửa giữ mình · Xin Hoàng hậu che chở · Xin Thái hậu đỡ lời · Phòng bị (giao việc cho kẻ hầu)"
+PASS | 1180x820@1 every person who hates her is listed by name | ["Đổng Thái Vi","Vu Kiều Nguyệt"]
+PASS | 1180x820@1 WHY from her real memory (rumor deed) | ["vì còn oán ta (chưa rõ vì việc gì, dò la để biết)","vì còn oán ta (chưa rõ vì việc gì, dò la để biết)","vì ta đã tung tin đồn bẩn về nàng ta (mới đây)","vì ghen ta được sủng"]
+PASS | 1180x820@1 oán level in words + number
+PASS | 1180x820@1 direct act cards | ["Làm lành với Tần Vu Kiều Nguyệt TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·Biếu","Làm lành với Thường tại Lương Chiêu Nghi TỐN không ĐƯỢC Tạ lỗi·Nhún nh","Làm lành với Tần Đổng Thái Vi TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·Biếu q","Đóng cửa giữ mình TỐN Sủng -2 ĐƯỢC 2 tuần: mưu hại nhắm vào ta thành í","Biếu quà làm lành TỐN không ĐƯỢC Tần Vu Kiều Nguyệt bớt ghen 8 bớt oán","Nhờ bề trên che chở TỐN không ĐƯỢC Xin Hoàng hậu che chở·Xin Thái hậu ","Phòng bị TỐN không ĐƯỢC giao kẻ hầu canh cung·thử độc·theo d
+ROOM {"dfView":true,"npc":true,"tab":"act","ppl":3,"fig":false,"encOn":true}
+PASS | 1180x820@1 LC21 encounter check: choice shown ONCE (no centre modal over the encounter scene, no empty modal) | {"modalShown":true,"modalTitle":"Làm lành với Tần Đổng Thái Vi","modalOpts":3,"inScene":false,"sceneBtns":0}
+PASS | 1180x820@1 Làm lành sub-choice = the real acts | {"t":"Làm lành với Tần Đổng Thái Vi","inScene":false,"o":[{"n":"Tạ lỗi","dis":false},{"n":"Nhún nhường","dis":false},{"n":"Biếu quà làm lành","dis":false},{"n":"Thôi","dis":false}]}
+PASS | 1180x820@1 Nhún nhường ran (modal): oán 7 → 0, khắc spent | {"o":0,"k":1}
+PASS | 1180x820@1 deep oán: Tạ lỗi / Nhún nhường closed with the reason, Biếu quà open | [["Tạ lỗi",true],["Nhún nhường",true],["Biếu quà làm lành",false],["Thôi",false]]
+PASS | 1180x820@1 Nhờ bề trên → the real patron acts | ["Làm lành với Tần Vu Kiều Nguyệt TỐN không ĐƯỢC Tạ lỗi·Nhún nhường·Biếu","Làm lành với Thường tại Lương Chiêu Nghi TỐN không ĐƯỢC Tạ lỗi·Nhún nh","Làm lành với Tần Đổng Thái Vi TỐN không ĐƯỢC Biếu quà làm lành !","Đóng cửa giữ mình TỐN Sủng -2 ĐƯỢC 2 tuần: mưu hại nhắm vào ta thành í","Biếu quà làm lành TỐN không ĐƯỢC Tần Vu Kiều Nguyệt bớt ghen 8 bớt oán","Nhờ bề trên che chở TỐN không ĐƯỢC Xin Hoàng hậu che chở·Xin Thái hậu ","Phòng bị TỐN không ĐƯỢC giao kẻ hầu canh cung·thử độc·theo dõi kẻ 
+PASS | 1180x820@1 Phòng bị → the j70 dialog | {"t":"Phòng bị","o":["Giao việc: canh chừng cung Rất vững TỐN không ĐƯỢC giữ được cung: bắt ","Giao việc: thử độc đồ ăn Rất vững TỐN không ĐƯỢC nếm trước mọi món, th","Giao việc: theo dõi một người Rất vững TỐN không ĐƯỢC nắm thêm thóp kẻ"]}
+PASS | 1180x820@1 no page error | []
+ALL PASS 26
