@@ -111,7 +111,7 @@ function cmFact(m,who){const x=evGuilty(S,liveRivals(true).filter(v=>v!==S));if(
 function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  if(!m.src){const k0=S.origin&&S.origin.k;
   if(S.cmaid&&S.cmaid.v){/* a new life that reaches the palace now (tiểu thư road jkc, cung nữ road at her rise): pick, or the origin's maid
-     (a maid who served her at home keeps the loyalty she built there) */if(CM_SRC[k0]==="pick"){if(!S.cmaid.picked){S.cmaid.picked=1;cmAskPick();return""}}else cmInit(m,null,!!m.kcTy)}
+     (a maid who served her at home keeps the loyalty she built there) */if(m.kcTy&&S.kc)cmInit(m,S.kc.kd&&S.kc.kd!=="dan"?"land":"home",true);/* ob-phu §9: the tỳ nữ who served her at home IS her maid in the palace, never a Nội vụ phủ pick */else if(CM_SRC[k0]==="pick"){if(!S.cmaid.picked){S.cmaid.picked=1;cmAskPick();return""}}else cmInit(m,null,!!m.kcTy)}
   else{S.cmaid={};cmInit(m,CM_SRC[k0]==="pick"?"noi":null,true)}/* old save: the maid she has stays, loyalty kept */}
  S.cmaid=S.cmaid||{};let ev="";const T=S.turn||0;S.cmaid=S.cmaid||{};const k=S.origin&&S.origin.k;const cdOk=(S.cmaid.cd||0)<=T;
  const dil=(id,pp)=>{S.cmaid.cd=T+B.dilCd;cmC("dil_"+id);pushDil(mkP(id,pp||{}),"Cung nữ thân tín")};

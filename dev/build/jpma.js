@@ -423,7 +423,8 @@ PEND.pmLad=pp=>{const v=pp&&pp.v!=null?RV(pp.v):null;
    go:()=>{pushModal({t:`Bảng tài nghệ · ${pmKindN(k)}`,who:top?pv(top):null,h:pmLadHTML(k)});/* the figure = the art's leader */try{showModal()}catch(e){}}}}).concat([{n:"Thôi",fx:{}}])}};
 /* the entry = a VIEW, not an act toward a person (role-parity): one button at the end of her «Tài nghệ» tab (j83 artTabHTML) */
 function pmLadBtn(){if(isSrvSafe()||S.dead)return"";const l=pmLadLine(S);return pbtn(`data-pmlad="-1"`,"Bảng tài nghệ hậu cung",`xem thứ bậc từng môn${l?` · ngươi: ${l}`:""} · không tốn khắc`,"")}
-if(typeof artTabHTML==="function"){const a0=artTabHTML;artTabHTML=function(){const h=a0.apply(this,arguments);try{return h+pmLadBtn()}catch(e){console.error(e);return h}};window.artTabHTML=artTabHTML}
+/* PEOPLE TAB ONLY (owner 25/11 ~23:00Z k7): the ranking of consorts is person info → under Phi tần (the people tab of the palace road), never in the Tài nghệ action tab; not on the home road (no hậu cung there) */
+if(typeof rvTabHTML==="function"){const a0=rvTabHTML;rvTabHTML=function(){const h=a0.apply(this,arguments);try{const b=(typeof isKc==="function"&&isKc())?"":pmLadBtn();return b?(/^\s*<div class="pgwrap">/.test(h)?h.replace(/^(\s*<div class="pgwrap">)/,"$1"+b):b+h):h}catch(e){console.error(e);return h}};window.rvTabHTML=rvTabHTML}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pmlad]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();const id=+b.dataset.pmlad;pushDil(mkP("pmLad",id>=0?{v:id}:{}),"Bảng tài nghệ");try{showModal();render()}catch(x){}}},true);
 /* ---------- memory (jmem): the deeds this act leaves ---------- */
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
