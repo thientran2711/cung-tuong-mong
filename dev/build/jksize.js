@@ -765,6 +765,12 @@ function kitAgendaPic(o){const ok=s=>s&&(typeof kitOptOnCdn!=="function"||kitOpt
 function kitAgendaFact(o,text){const p=kitAgendaPic(o);return p?{text:text||o.n,who:p,auto:false}:{text:text||o.n}}
 Object.assign(window,{kitAgendaPic,kitAgendaFact});
 /* ===== kit-thanh-bai r2 (s34/s36): SCROLL CUE for every frame scroll column (reviewer r1 FAIL 1). A column of a modal frame (.k3right, #mb, .body, …) that scrolls and is NOT at its end gets a bottom fade + a small "Kéo xuống" chip (.kscue, sticky at the column's bottom, goes when she reaches the end). One place: kitScrollCues(); called after every showModal / frame pass / resize / scroll. ===== */
+/* coop-freeze-kmrew (26/11, law 11) ONE RULE for the scroll cue: (1) a scroller only ever touches ITS OWN cue — ":scope > .kscue:not(.sib)";
+   the «Kéo xuống» SIBLING strip (.kscue.sib) a short child scroller puts right after itself is never taken for its parent's cue; (2) an
+   observer callback never re-runs the pass inside the same task: kitScrollCuesSoon = ONE coalesced pass per frame (F10 renderer-mem and
+   coop-freeze-kmrew found the same root; one rule, merged 26/11: cue-only records ignored (kscueOwn), BAL.kobs short/tall hysteresis, cards never cue columns). Before, an outer short scroller
+   removed its child's strip as «its own cue», the child re-created it, the outer observer ran the pass again … an endless microtask loop
+   (the ~1 h page freeze on Fold seats, CPU-profiler trace 2/2 rooms: MutationObserver → kitScrollCues). Test dev/test/scroll-cue-loop.js. */
 function kitScrollCues(root){try{const M=root||document.getElementById("modal");if(!M||M.hidden)return;
  const CS=BAL.kobs;/* ONE CORE (law 4): the cue numbers live only in BAL.kobs (jbal2) */
  /* F10: a button / option card is never a cue column — j63 kaNorm1 owns a card's direct children (a cue put there was moved into .kan, the cue's
