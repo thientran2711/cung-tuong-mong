@@ -59,7 +59,10 @@ const SELX_REROLL_MAX=20;let selxRerolls=0;
 const SETTLE_MS=180e3;
 async function settleNew(g,what){for(let k=0;;k++){await within(SETTLE_MS,g.waitForFunction('('+SETTLE.toString()+')()||('+BANHOA.toString()+')()',null,{polling:150,timeout:SETTLE_MS}),what);/* timeout = the within() limit (Playwright's default 30 s fired first: a tú nữ's 3 days under the perf CPU throttle) */
   if(!await g.evaluate(BANHOA))return;if(k>=SELX_REROLL_MAX)throw new Error(what+': '+(k+1)+' new lives in a row ended at the selection (ban hoa) — reroll cap '+SELX_REROLL_MAX+' reached');
-  selxRerolls++;console.log('  selection: life ended in ban hoa → reroll '+(k+1)+'/'+SELX_REROLL_MAX);await g.evaluate(NEWLIFE)}}
+  selxRerolls++;console.log('  selection: life ended in ban hoa → reroll '+(k+1)+'/'+SELX_REROLL_MAX);
+  /* SELSCENE-20: the long tasks of a life that ended in ban hoa are not the measured life's: the perf observer (window.__lt) is emptied at each
+     reroll, so a day life is judged on ITS 3 days + play only (perfgate dayLife 72 = one life's days). Before: 6 rerolls ⇒ 73–75 tasks, 0 ⇒ 33–39. */
+  await g.evaluate(()=>{if(window.__lt)window.__lt.length=0});await g.evaluate(NEWLIFE)}}
 const BUOI=async(mode)=>{let slept=0,cards=0;const sl=t=>{slept+=t;return new Promise(r=>setTimeout(r,t))};
  /* sangbuoi-held r3: buoiMs = the game's work, not this tool's pacing: the sleeps it asks for (40 ms per card it closes, 200 ms per look) are taken out
     (a sleep stretched by a long task still counts — only the asked-for time is removed). The fixed tap runs the whole wrapped turn, which queues the
