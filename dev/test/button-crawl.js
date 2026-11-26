@@ -38,6 +38,7 @@ const FAST=!!opt('fast',false);
 const OUT=path.resolve(opt('out','/home/user/wt/bc-out/run'));
 const DEVS={fold:[755,1000],ipad:[1180,820]};
 const DEV=String(opt('dev',FAST?'fold':'fold,ipad')).split(',').filter(d=>DEVS[d]);
+const EXPAND=opt('expand',false)&&new RegExp(String(opt('expand')),'i'); /* --expand <regex>: only follow screens whose button label / new title matches (deep dive into one branch) */
 const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?80:100000);
 const STARTS=String(opt('start',FAST?'home':'title,home,tour')).split(',');
 const GAME=opt('game',path.join(REPO,'index.html'));
@@ -331,7 +332,7 @@ async function crawlDev(b,URL,dev){
     rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:v,why,shot:v==='FAIL'?shot:''});
     const changed=JSON.stringify(pre)!==JSON.stringify(post);if(changed)dirty=true;
     const newScreen=JSON.stringify(pre.roots)!==JSON.stringify(post.roots)||pre.tab!==post.tab||pre.panel!==post.panel||pre.title!==post.title;
-    if(newScreen&&pathK.length<DEPTH){const tl=post.roots.filter(r=>!r.startsWith('body'));const nk=tl.length?JSON.stringify(tl):JSON.stringify([post.roots.map(r=>r.startsWith('body')?'body':r),post.tab,post.panel,post.title]);if(!seen.has(nk)){const np=pathK.concat([bt.key]);parentOf.set(np.join('>'),pre);queue.push(np)}}
+    if(newScreen&&pathK.length<DEPTH&&(!EXPAND||EXPAND.test(bt.label+' '+(post.title||'')+' '+(post.tab||'')))){const tl=post.roots.filter(r=>!r.startsWith('body'));const nk=tl.length?JSON.stringify(tl):JSON.stringify([post.roots.map(r=>r.startsWith('body')?'body':r),post.tab,post.panel,post.title]);if(!seen.has(nk)){const np=pathK.concat([bt.key]);parentOf.set(np.join('>'),pre);queue.push(np)}}
    }
    fs.writeFileSync(path.join(OUT,`crawl-${dev}.json`),JSON.stringify(rows.filter(r=>r.dev===dev)))}
  }
