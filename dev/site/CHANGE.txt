@@ -1,1 +1,1 @@
-Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt.
+Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên.
