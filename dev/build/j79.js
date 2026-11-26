@@ -64,7 +64,7 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 /* KIT §62.1 NO VISIBLE «Ghi chú» ROW (owner 21/11 ~04:30Z, repeat of OD L1867): a row labelled «Ghi chú» is not drawn; its text goes behind a kit round «!» (.khap.kgnb) at the end of the row it explains (the row just above it),
    tap → the kit pop-up titled «Ghi chú». A Ghi chú with no row above it (first row) stays as a row. Every kitRows caller (dialog info frames, item cards, results, books) gets it from here — no caller changes. */
-function kitNoteBang(text,title){const t=title||"Ghi chú";return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="${kpEsc(t)}" data-kfxt="${kpEsc(t)}" data-kfx="${kpEsc(String(text))}">!</span>`}/* title optional (mini-game intro «Phần của ngươi» …): the ONE «!» part */
+function kitNoteBang(text,title){const t=title||"Ghi chú";return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="${kpEsc(t)}" title="${kpEsc(t)}" data-kfxt="${kpEsc(t)}" data-kfx="${kpEsc(String(text))}">!</span>`}/* title optional (mini-game intro «Phần của ngươi» …): the ONE «!» part */
 function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).forEach(r=>{
   if(/^\s*ghi chú\s*$/i.test(String(r[0]))&&R.length){const v=Array.isArray(r[1])?r[1]:[r[1]];const prev=R[R.length-1];prev.bang=(prev.bang?prev.bang+" · ":"")+v.join(" · ");return}
   R.push({l:r[0],v:r[1],c:r[2]})});
@@ -301,7 +301,7 @@ function kitHxRoad(){try{if(typeof HX!=="object")return;const r=kitRoad();if(r==
 window.kitHxRoad=kitHxRoad;
 /* ---------- popover (odds ladder, glossary): never a modal, never covers the scene for long; any tap closes ---------- */
 function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
- p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();
+ p.innerHTML=html+(typeof kitXHTML==="function"?kitXHTML('data-kitx="kpop"',"Đóng").replace('class="kit-x"','class="kit-x kxpop"'):"");p.hidden=false;const r=anchor.getBoundingClientRect();/* OB-M3UI: the kit ✕ in its corner (also Esc / Back, jk4 kitTopClose); any tap still closes */
  /* o.inside (act-dedupe UI): the pop-up sits ON the tapped card (never below it), so it cannot cover the next card in the list/grid */
  let W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
  /* LINE BREAKS AT THE RIGHT PLACE (KIT §5): the ladder's rows (bar · word · meaning) never wrap while the screen has room — the pop-up widens to its longest row (owner 23/11) */
@@ -309,9 +309,11 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
  let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
-document.addEventListener("click",e=>{const p=document.getElementById("kpop");let od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");/* OWNER-ish rule (MAIN 136 25/11, robot M2/M3 + KIT BUG #2a): a tap ANYWHERE on an option card chooses it — the odds meter / a glossary word inside the card must not steal the tap; the explanation stays on the kit help («!» / legend) */if((od||gl)&&e.target.closest("button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button")&&!e.target.closest(".kopinfo")){od=null;gl=null}/* inside the «!» card overlay (.kopinfo, disabled copy) the meter still opens the ladder: that is where the explanation lives */
+/* OB-M3UI (robot M3 26/11, fault 1 «option-card tap → odds legend soft-lock», whole family): ONE list of option-card shapes whose tap always CHOOSES — dialog options, scene options (.kscn-box), bare scene options (kitBareOpt .kbare); jwhy reads the same list */
+const KIT_OPT_TAP="button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button,.kscn-box .opts>button,button.kbare";window.KIT_OPT_TAP=KIT_OPT_TAP;
+document.addEventListener("click",e=>{const p=document.getElementById("kpop");let od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");/* OWNER-ish rule (MAIN 136 25/11, robot M2/M3 + KIT BUG #2a): a tap ANYWHERE on an option card chooses it — the odds meter / a glossary word inside the card must not steal the tap; the explanation stays on the kit help («!» / legend) */if((od||gl)&&e.target.closest(KIT_OPT_TAP)&&!e.target.closest(".kopinfo")){od=null;gl=null}/* inside the «!» card overlay (.kopinfo, disabled copy) the meter still opens the ladder: that is where the explanation lives */
  if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else if(gl.dataset.kfx!=null)kpPop(gl,kitFactTipHtml(gl));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
- if(p&&!p.hidden)p.hidden=true},true);
+ if(p&&!p.hidden){p.hidden=true;if(e.target.closest&&e.target.closest("#kpop")){e.stopPropagation();e.preventDefault()}}},true);/* OB-M3UI: a tap ON the pop-up (its ✕ included) only closes it; it never reaches what lies under it */
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
 
 /* ---------- the PANEL ---------- */

@@ -82,7 +82,8 @@ function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot
  $("slots").innerHTML=L;T.hidden=false;const f=T.querySelector("button");if(f)f.focus({preventScroll:true})}
 $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;try{if(typeof kmReset==="function")kmReset()}catch(e){}quiet=true;d.tab="act";/* owner 16/11: entering the game always opens her room (Hành sự), never the last tab */deser(d);quiet=false;$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
- if(b.dataset.new){if(b.dataset.ask==="1"){b.dataset.ask="2";b.innerHTML="Chắc chắn?<small>Kiếp đang chơi sẽ mất</small>";return}SLOT=+b.dataset.new;$("title").hidden=true;start()}};
+ /* OB-M3UI (fault 3, SYSTEM act, OD 24/11 ~08:40Z keeps system confirms): a new life over a sổ that holds one = the ONE kit confirm (kitConfirm), not a «Chắc chắn?» second tap */
+ if(b.dataset.new){if(b.dataset.ask==="1"){kitConfirm({title:"Bỏ kiếp trong sổ này?",lines:["Kiếp đang ghi trong sổ này sẽ mất, không lấy lại được."],yes:"Bắt đầu kiếp mới",no:"Thôi",onYes:()=>{setTimeout(()=>{try{b.dataset.ask="2";b.click()}catch(x){console.error(x)}},0)}});return}SLOT=+b.dataset.new;$("title").hidden=true;start()}};
 
 /* wiring */
 $("panel").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const d=b.dataset;

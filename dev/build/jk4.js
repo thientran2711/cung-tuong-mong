@@ -865,12 +865,26 @@ window.kitCloseLayer=kitCloseLayer;
  M.addEventListener("pointerdown",e=>{down=e.target===M&&M.__kx?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
  M.addEventListener("click",e=>{const d=down;down=null;if(!d||e.target!==M)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();kitModalClose()})})();
 /* Esc: the top-most open closable panel (another overlay over the dialog first, then the dialog, then the room person card) */
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented||document.body.classList.contains("kbk-open"))return;
- if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return;
+/* KIT 32.11 ONE WAY OUT (OB-M3UI, robot M3 26/11: a legend / picture / «!» card with no visible way back = a soft-lock; whole family):
+   every closable layer closes the SAME three ways — the kit ✕, a tap outside, Esc / the device Back. kitTopClose() closes the top-most closable
+   thing and says whether it did: the word pop-up #kpop, the «!» card #kpinfo, the picture #kpzoom, kitCloseLayer layers (by pri), the dialog
+   (only when closable: a FORCED event panel never closes this way), the room person card. Back = one history guard entry pushed while something
+   closable is open (kitBackArm); the Back press pops it and kitTopClose runs, so Back never leaves the game while a layer is open. */
+function kitOvOpen(id){const z=document.getElementById(id);return !!z&&!z.hidden&&z.getClientRects().length>0&&z}
+function kitTopClose(dry){try{if(document.body.classList.contains("kbk-open"))return false;
+ for(const id of ["kpop","kpinfo","kpzoom"]){const z=kitOvOpen(id);if(z){if(!dry)z.hidden=true;return true}}
+ if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return false;
  const L=KIT_LAYERS.filter(r=>r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl.box()).sort((a,b)=>b.__kxl.pri-a.__kxl.pri);
- if(L.length){e.preventDefault();L[0].__kxl.close();return}
- if(kitModalClose()){e.preventDefault();return}
- const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+ if(L.length){if(!dry)L[0].__kxl.close();return true}
+ const M=document.getElementById("modal");if(M&&!M.hidden){const f=M.__kx||kitModalCloser();if(!f)return false;if(!dry)f();return true}
+ const px=document.getElementById("popx");if(px&&px.offsetParent){if(!dry)px.click();return true}}catch(x){console.error("kitTopClose",x)}return false}
+window.kitTopClose=kitTopClose;
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented)return;if(kitTopClose())e.preventDefault()},0)});
+function kitBackArm(){try{if(!history.pushState||window.__kbackOff)return;if(kitTopClose(true)&&!(history.state&&history.state.kback))history.pushState({kback:1},"")}catch(x){}}
+window.kitBackArm=kitBackArm;
+(function(){if(typeof window==="undefined"||!window.history)return;
+ document.addEventListener("click",()=>{setTimeout(kitBackArm,80);setTimeout(kitBackArm,700)},true);
+ window.addEventListener("popstate",()=>{try{if(window.__kbackOff)return;if(kitTopClose())setTimeout(kitBackArm,80)}catch(x){}})})();
 /* KIT 8.9 ONE DIALOG STACK (owner 21/11, mark #46: the «Kiếp này» death card opened with a person pop-up still open ON TOP of its bottom part).
    ONE rule for the kit modal layer (#modal / Q), applied from showModal, for every dialog opener (kitModal, kitConfirm, kitPanel, resultShow, over(), events, PEND cards):
    (1) a newer dialog is always the TOP layer: #modal sits above the room pop-up card (#popw) and every second-layer pop-up (kitCloseLayer layers, .kpop) — never under them (CSS below);
