@@ -258,7 +258,7 @@ button.ka.kcard .kinfo{display:none}
 /* kv:(max-width:1199px) */.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
-/* ================= RESULT CARD (kit): after every act/choice — [seal THÀNH/BẠI | act name] · one sentence · Được (green) · Mất (red, grouped per person) · "Xem đầy đủ trong Sổ ghi" =================
+/* ================= RESULT CARD (kit): after every act/choice — [seal THÀNH/BẠI | act name] · one sentence · Được (green) · Mất (red, grouped per person) · "Xem đủ trong Sổ ghi" =================
    Built from REAL deltas (snapshot before → now), never from the option preview: no ranges, no "có thể"; two-way relations merged into one plain phrase. */
 const KA_RANKRE=new RegExp("("+RANKS.map(r=>r.n).join("|")+")\\s*$","i");
 function kaWho(v){const r=v&&RANKS[v.rank];return (r&&v!==S?r.n+" ":"")+(v&&v.name||"")}
@@ -349,7 +349,7 @@ function kaResultRows(before,title,ok){const G=[],B=[];const K=[];const skip=new
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaNT(d,S.maid.loyal)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
  /* ONE SIEVE (jnsieve nsCard, owner OD 26/11 ~06:50Z (B)): other people's rows that do not touch her fold into ONE «Trong cung: …» line + the Sổ ghi */
- const SV=typeof nsCard==="function"?nsCard(per,K,WC,title,[...TG.keys()]):null;if(SV){per.length=0;per.push(...SV.keep);K.length=0;K.push(...SV.kem);K.more=SV.more;K.fold=SV.fold}
+ const SV=typeof nsCard==="function"?nsCard(per,K,WC,title,[...TG.keys()]):null;if(SV){per.length=0;per.push(...SV.keep);K.length=0;K.push(...SV.kem);K.more=SV.more;K.fold=SV.fold;K.sum=SV.sum}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;K.tgt=[];K.by=[];
  for(const [v,{x,rel,ran}] of TG){const cons=typeof rivals!=="undefined"&&rivals.includes(v);const named=true/* MAIN 155 (OB-VERDICT LOOK): she CHOSE this person, so she knows the name — the target of her own act always shows its real name (the «???» mask stays for doers she cannot know, law 6) */;const who=`<span data-k61skip>${kaEsc(!cons?(v.name||""):kaWho(v))}</span>`;
@@ -374,7 +374,10 @@ function kitKemRow(K){if(!K||!K.length&&!K.more)return"";/* K.all (ONE-SIEVE-2 S
  const seen=new Set();for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){const sk=(x.v&&x.v.id||kaWho(x.v))+"|"+x.k;if(seen.has(sk))continue;seen.add(sk);L.push([0,line(kaWho(x.v),x.k,d,x.t)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[],t:[]});U.get(key).v.push(x.v);U.get(key).t.push(x.t)}
  for(const {k,d,v,t} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^m/,"M")/* KK41: a line that starts its row starts with a capital («Một vị Phi …»; owner 24/11) */:`${v.length} vị khác`;L.push([1,line(nm,k,d,v.length===1?t[0]:null)])}
  const more=Math.max(0,L.length-CAP)+(+K.more||0);const out=L.slice(0,CAP).map(x=>x[1]);
- if(more)out.push(`<span class="kitem kkemi"><span class="ef n">${out.length?`… và ${more} người khác`:`${more} người khác trong cung đổi lòng chút ít`}</span></span>`);
+ /* KIT §7.4a (the ONE fold, jnsieve nsCard K.sum): the folded people are ONE line per group «Hậu cung: thiện cảm −4 (10 người) · oán +1 (9 người)» */
+ const SUM=!K.all&&Array.isArray(K.sum)&&K.sum.length?K.sum:null;
+ if(SUM)for(const [g,L2] of SUM)out.push(`<span class="kitem kkemi kresum"><span class="ef t">${g}:</span> <span class="ef n">${L2.map(([k,d,n])=>`${k} ${d?kaN(d):"±0"} (${n} người)`).join(" · ")}</span></span>`);
+ else if(more)out.push(`<span class="kitem kkemi"><span class="ef n">${out.length?`… và ${more} người khác`:`${more} người khác trong cung đổi lòng chút ít`}</span></span>`);
  return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv kklist">${out.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
@@ -420,7 +423,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  window.kaLastResult={title,ok,seal,sentence:sen,fold:K.fold||null,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${typeof kitLineCap==="function"?kitLineCap(x):x}</span>`).join("")}</span></span>`;/* KK41: each result line starts its row with a capital */
  t.className="rtoast karesult "+SL.cls;
- t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ trong Sổ ghi</span></div>`;
+ t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đủ trong Sổ ghi</span></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000)};
 (function(){const st=document.createElement("style");st.id="ka-res-css";st.textContent=`
 .rtoast.karesult{display:block;max-width:min(94vw,520px);width:max-content;min-width:min(94vw,300px);padding:9px 12px 8px}
