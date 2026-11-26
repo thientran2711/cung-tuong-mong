@@ -27,3 +27,10 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 
 ## 07:58Z — MAIN 155 fast lane D5 mg-trim c961211e (FF on LIVE)
 - Merge onto DRESS 3af7896e: SOURCE CONFLICT dev/build/jtoil.js toilColUI (1 hunk, ~line 1161): DRESS = old buttons «Trang điểm»+kitQuick «Điểm trang nhanh» + `kitGameFigRefresh(S,{src:kitDressFigSrc(S,toilPor().rank)})` (E95 keeps chosen dress on figure); mg-trim = toilRollBtn + «Tự tay điểm trang» + «Để … mộc» buttons + plain kitGameFigRefresh(). Merge aborted; reported to MAIN 155. Likely resolution = mg-trim's button line + DRESS's figure-refresh line (owner of a branch must do it).
+- 07:57Z MAIN 155: DRESS → HW → TN as staged; FOREMAN D re-merges mg-trim onto 3af7896e (union); resolved sha slots after whatever is gating next.
+- 08:25Z MAIN 155: HOME-WAY-NITS 0e71fdbc (on bc822351) LOOK PASS → REPLACES the HW slot (HW gates had not started). TN restacks on it.
+- DRESS chain: tainghe-info exit 1 (= LIVE pre-existing TypeError), mg-back Fold FAIL 1+2 / iPad FAIL 1 (MAIN: #1 pre-existing on LIVE) → compare vs LIVE after QC.
+
+## 08:50Z — DRESS READY sent (3af7896e)
+- QC alone vs LIVE PASS: render 310/349, tab 708/738, buổi 2286/1820, tasks>200 47/38. info-tap-audit flaky (chain FAIL iPad «! Dạo này», alone FAIL Fold sub-tab, alone ALL PASS); mg-back Fold 2/12 = LIVE.
+- HW slot = review/lc21-hw 5212024d (HOME-WAY-NITS 0e71fdbc onto 3af7896e, built files only). Gates gates-hw2.sh (+ home-way-label, kit-why-scan Fold/iPad), QC vs 3af7896e. Before it: perf A/B LIVE vs bf6dd041 alone.
