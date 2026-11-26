@@ -392,6 +392,23 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   a sentence that only repeats the act name is dropped.
 - EVERY line says SHORTLY WHY (owner 18/11 09:03Z): `value · reason` on ONE row, label column left, value next to its label (left-aligned, never a centred floating column), the reason dim after the value: `Sức 56→74 (+18) · nghỉ qua đêm`, `Sủng 26→25 (−1) · lâu không được gặp Hoàng thượng`, `1 vị chưa quen biết: ghét ta hơn · ghé chơi cung ngươi`, KÈM `8 phi tần bớt ghen 1 · lòng ghen nguôi dần theo ngày`. Part `kitWhy` (j63: kaWhyCl / kaWhyStat / kaWhyWho / kaWhyKem / kaWhyHtml `.kwy`): the reason is read from the SAME Sổ ghi lines of the span (clause "lead: … Sức +10" → lead; a person matched by name; strangers stay unnamed), else the act's own title, else a short fixed cause per stat (KA_WHYD); max 44 chars, no colon, no %. Every result card (between-buổi "Trong cung vừa qua", act, event, night, co-op) goes through kaResultRows, so one part changes all. Kit sample page §7.
 - Rows are arrays: one fact per line (`.kitem`), never joined sentences; also exposed as `window.kaLastResult {title, ok, sentence, rows:[{k,label,items[]}]}`.
+- **7.3 ACT PAYLOAD — verdict + target row (OB-VERDICT, owner OD 26/11 ~08:30Z «nói xấu xong ... không biết được là có nói xấu thành công hay không»).**
+  KIT PART `kaAim(v,{ok,n,sen,by,later,outer})` (j63): an act aimed at a person registers its target when it STARTS (v's Sủng / Danh / Sức /
+  thiện cảm (servant) / rank / cấm túc / phế / mất are read then); `ok` = the act's OWN roll (may be a function, read when the card is built).
+  Hooks in `jverdict.js` (no act logic): runAct (every ACT deed, hers and an NPC's on her), doAct, talk, pillowDo, giveTo, servAct, empAct —
+  the verdict comes from the first `aRoll` of the actor in that act, `caught` (bị lộ → BẠI), `oddsSoft` (→ BỎ DỞ), `runOpt`.
+  The card of that span (resultShow AND the night card `kitNightEnd`, jne) then shows, in this order:
+  1. SEAL `kitResultSeal(ok)`: THÀNH / BẠI / **BỎ DỞ** (`"soft"`: a capped act slipped, nothing done) / KẾT QUẢ (no roll). An act with no seal of its own
+     (null / "sure", e.g. the night) takes the carried act's verdict. The night card shows it as a `kitChip(seal)` in a «Kết cục» row.
+  2. the act's own plain sentence (`sen`, e.g. «Gối đầu, ngươi thì thầm nói xấu Lệ phi: ngài nghe lọt tai.»).
+  3. row **«Người ấy»** (`.kr-tgt`), one item per target: «Lệ phi Tô Mạn: Sủng −10 (34 → 24), thiện cảm −5, ghen +14, oán +2» — the target's
+     relation / ghen / oán move HERE (not in Được / Mất / Kèm). A failed / slipped deed with no number moved: «không hề hấn gì»; a stranger or a
+     done deed with nothing she can see yet: «chưa rõ — tai mắt sẽ báo»; a deed handed to a sent servant: «chưa rõ — người được sai về sẽ báo»
+     (law 6: hidden effects stay hidden). The name-mask (`kaNamed`, «???») applies as everywhere.
+  4. row **«Ai làm»** (`.kr-by`, two-way law 1): an NPC's deed on HER — «Tần Vu Uyển Đình: nói xấu ngươi bên gối · thành» — ONLY when the span's
+     Sổ ghi names that person; then her own Được / Mất / Kèm as before.
+  An outer act's aims (`outer:1`: doAct, talk, servAct, empAct) are closed by their wrapper when the act ends; others are shown once.
+  Test: `node dev/test/ob-verdict.test.js index.html <shots>` (real-tap night pillow thành / hỏng / bỏ dở on Fold + iPad, deed + talk scan, two-way, old save).
 - Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
 
 
