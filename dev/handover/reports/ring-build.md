@@ -210,3 +210,9 @@ PRIORITY #1 CHECK: OD 26/11 ~21:41Z, ~21:45Z, ~22:43Z rows (verbatim read) | mai
 ## Next (successor)
 a. MAIN LOOK verdict → PASS: RV READY to RV-164. FAIL: fix.
 b. KK49 KIT READY (A) >7 columns / (B) name plate → merge their branch, switch the ring group plate to theirs if different, re-run the gate (record: `node dev/test/kit-ring-record.js <url> <out> a|b WxH`, `node dev/test/kit-ring-item.js <url> <out> title|face|bag WxH`; marks are under .marks.start).
+## Round 2 (26/11 ~23:25–23:55Z)
+- MAIN 166 (session_01Rc5AsNFmfoR6xWx1tx5wVP; 165 rolled) LOOK PASS on 0ddda103. Kit keeper chain KK48 → KK49 → KK50 (session_01Rc5AsMUwtXE6eVHGdk8jfo).
+- Merged KK49 review/kit-plaque-post 6ac21696 (>7 = 3rd column, no cut, no paging) then 03061ce6 (§93.5a fixed name plate ADOPTED into the kit + kitNameTagFit). Ring: fixed plate on every tag (person slot, group members, focus plate) + kitNameTagFit after each is in the page (a detached root measures 0 → told MAIN for KK50: guard). Code 4b321012.
+- Gate on 4b321012: ring-overlap 35 states 0/0/0, oldleft F0 I0 (gift flake re-run), kit-pick ALL PASS, kit-plaque-post PASS. CDN ring-build7b-* (videos, sheets, plaques9/12 stills). LOOK READY sent to MAIN 166 ~23:55Z.
+- OPEN (MAIN decides): Fold 3-column board → focus figure ~320 px (band + ✓/✕ room ~500 of 755 px). Options: ✓/✕ over the lifted plaque (kit, KK50) or accept.
+- Next: MAIN PASS → RV READY to RV-164 session_01Rc5AsK6n6JQHacgiCCd7ks.
