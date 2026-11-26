@@ -118,3 +118,9 @@ Tests on f068313b: charge-trinh-punish ALL PASS (incl. vpAccuse + co-op guest / 
 - quickcheck PASS (perf new/live render 294/271 ms, tab 577/683, buổi 2147/1648, tasks>200 44/40 — within the gate); core gates G1–G3 PASS, G4 only the known LIVE faults 80-dialog-fixed + 90-button-crawl «Ô lưu · Lui».
 - charge-trinh-punish ALL PASS, one-core-guard PASS, scroll-cue-loop PASS on the merge.
 - Videos: the f068313b ones stand (merge touches no D1/D4 file): img/_review/charge-trinh-punish/fold-755x1000-f068313b.webm · ipad-1180x820-f068313b.webm. Lander wipes: python3 dev/site/cdn_sync.py --wipe-review charge-trinh-punish
+
+## LAND READY review/charge-trinh-punish 69dd730e (FF from LIVE aa37de21) — 26/11 ~13:45Z (replaces the ac73cd3c line: LIVE moved)
+- 69dd730e = ac73cd3c + merge origin/main aa37de21 (home-way-nits). One source conflict j8 punish(): main's weights (BAL.punW nhẹ / vừa / nặng) + D1 (punTwice / punDown / punMark, punNote on every weight; new jpun kind «nhe»: Khất bổng n tháng / Cảnh cáo); vpAccuse keeps chPunish vp (light, one punishment). Reviewer MERGE DELTA PASS (handover 16e9ba2b). Nit for Foreman D: two light wordings («phạt bổng N lượng» vs «khất bổng n tháng»).
+- coop-e2e 69dd730e: 143/143. quickcheck PASS (render 326/255, tab 734/578, buổi 2159/2048, tasks>200 45/42); core gates G1–G3 PASS, G4 only the known LIVE faults dialog-fixed + button-crawl «Ô lưu · Lui».
+- Tests: charge-trinh-punish / charge-followups / seize-ledger ALL PASS, charge-smoke 0 FAIL, punish-reason Fold + iPad ALL PASS, home-way fail [], place-rules / stage-stay faults [], punish-weight-scan faults [], one-core-guard PASS.
+- Videos: the f068313b ones (the merge changes the punish wording only for light punishments; the O1 servant road is unchanged): img/_review/charge-trinh-punish/fold-755x1000-f068313b.webm · ipad-1180x820-f068313b.webm. Lander wipes: python3 dev/site/cdn_sync.py --wipe-review charge-trinh-punish
