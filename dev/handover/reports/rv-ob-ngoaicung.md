@@ -108,3 +108,35 @@ Merge onto LIVE 3af7896e DONE: **ca368b86** (pushed to review/ob-ngoaicung, FF o
 - coop-e2e on ca368b86: **143/143 passed**.
 - quickcheck not re-run by me this round (worker: PASS on 6f3cdd5b); run it on the next sha vs LIVE.
 - Kit / VANPHONG on the looked screens (home stage + kit dialogs, Fold + iPad): OK.
+
+## REVIEW r4 (reviewer session_01V1ZZH29E5itz7L8m4cLTq5) — target review/ob-ngoaicung 65348819 (OB-NGOAICUNG-3b)
+PRIORITY #1 CHECK: review of an existing branch — nothing rebuilt; r3 FAIL + worker §r4 read.
+
+### VERDICT: FAIL — perf gate only (quickcheck «buổi» on the merged result). Every function check PASSES.
+LIVE moved to aa37de21 during the review → merged: **ca386345** (pushed to review/ob-ngoaicung, FF; only built files conflicted → regenerated).
+NOTE: `review/ob-ngoaicung-r2` (= 65348819) was pushed by me too early (before LIVE moved) and the remote refused its deletion — it is NOT a PASS;
+do not land it (MAIN: delete it).
+
+1. **BLOCKING — quickcheck perf «buổi» fails on the merged ca386345, 3 of 4 runs** (LIVE dev/tools/quickcheck.js vs LIVE aa37de21):
+   run A FAIL buổi 5510/1575 (new runs 5510 · 1156 · 6362), run B FAIL tab 566/554-limit (buổi 1555/1327, borderline), run C FAIL buổi 3502/1377
+   (new 5366 · 1382 · 1637). Control: **LIVE aa37de21 vs itself PASS** (buổi 1385/1312). Over all my runs this round and r2, the branch's new-build
+   runs have a ~5.4–6.4 s buổi in ~5 of 15 runs; LIVE ~1 of 15 (one 4433). On the older base 3af7896e it passed narrowly (buổi 2898/1479).
+   → Builder: find the slow buổi (quickcheck --runs 5 + a Chrome trace of the slowest nextBuoi). Suspects, all palace-side costs this branch adds
+   to every buổi: placeSift / placeEvOk on showModal, placeNoteSweep on render, the jaudit «time passed» card path, the jroad8 resultShow +
+   whyText wrappers, pMe / meRankN calling road8() (isKc + isSrv) at each of ~80 who:pMe() sites. Then 3 clean quickcheck runs in a row.
+
+### Checks that PASS
+- r3 item FIXED (result-card family): deterministic repro on the 5 home roads (tt td cnv nc bd), merged build: palace consort thiện cảm both ways,
+  a low consort, oán, Hoàng hậu stat hh, Thái hậu stat th → **no card**; reverse (law 11 both ways): «Gửi quà vào cung cho <Hoàng hậu>» still shows
+  «Hoàng hậu …: thiện cảm +N». In the palace (after kcEnter) every row still shows (palace side unchanged).
+- Family scan 600 steps × 5 roads on ca386345: **SCAN PASS first run** (forceCard, drawnTag, meRank, cards 0, acts 0, asks 0, dropped bad 0, errors 0).
+- Real taps Fold 755x1000 tt + iPad 1180x820 bd, 6–8 buổi each: tag «Tiểu thư / Công chúa … (ta)», no palace name in any dialog, 0 page errors.
+- coop-e2e on 65348819: 143/143.
+- Nit done (4 RANKS[Math.min(S.rank,…)].n → meRankN).
+
+### PRE-EXISTING (identical on LIVE aa37de21 / 3af7896e, real taps) — for MAIN, not this branch
+- Tuần lục at home (tt + bd seen): an emperor page «Hoàng thượng → ta · Sủng … Hoàng thượng nhạt lòng với ta. Sủng −8» and the opening line
+  «Kiếp này ta ở nhà chờ tuyển tú … Danh 33 → 8 (bị chê trách), Sủng 8 → 0 (Hoàng thượng phật ý), Bạc 210 → 80 (tốn bạc)» — palace person /
+  palace start values on her home week book (same k3/k10 family, new surface).
+- Tuần lục on Fold 755x1000: the book sits shifted left — left edge cut («háng ba…», figure clipped), right half dark.
+- In the palace an oán-only change opens an empty «Trong cung vừa qua» result card (rows []).
