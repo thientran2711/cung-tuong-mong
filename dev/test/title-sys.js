@@ -45,7 +45,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   dhWear(S,'w_kim');if(!kitTitleWorn(S)||kitTitleWorn(S).name!=='Chức Nữ')F.push('kitTitleWorn(S)');
   if(!kitTitleDef('dh-w_kim@me')||kitTitleDef('dh-w_kim@me').name!=='Chức Nữ')F.push('kitTitleDef id');
   /* NPC by the same rules + contest hook */
-  const L=liveRivals(true).filter(v=>!v.queen),v=L[0],w=L[1];v.dh=undefined;v.nights=nn('nights');dhSync(v);o.npc=v.titleWorn;if(!/^dh-/.test(v.titleWorn||''))F.push('NPC does not wear');
+  const L=liveRivals(true).filter(v=>!v.queen),v=L[0],w=L[1];v.dh=undefined;v.nights=NN('nights')[2];/* RV-163C: top step, so a consort with kids still wears «nights» (auto-wear takes the higher tier) */dhSync(v);o.npc=v.titleWorn;if(!/^dh-/.test(v.titleWorn||''))F.push('NPC does not wear');
   if(!kitTitleWorn(v)||kitTitleWorn(v).id!==`dh-nights@${v.id}`)F.push('NPC kit id');
   w.dh=w.dh||{};w.dh.w_tho={n:nn('w_tho')-1};/* TITLE-BAL: one win short of the BAL bar, so this win opens it */const before=(S.dh.podium||{}).n||0,wb=((w.dh||{}).w_tho||{}).n||0;const e=(q,s)=>({p:q,kind:'tho',t:s,pr:0,lk:0,s});cFin7('trungthu','tho',[e(w,90),e(S,80),e(v,70),e(L[2],10)]);
   if(((S.dh.podium||{}).n||0)!==before+1)F.push('podium not counted');if((((w.dh||{}).w_tho||{}).n||0)!==wb+1)F.push('NPC win not counted');if(!w.titleWorn)F.push('NPC winner not wearing');
