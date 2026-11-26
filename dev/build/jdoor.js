@@ -64,8 +64,8 @@ window.doorOpen=doorOpen;
 PEND.door=pp=>{pp.i=doorIdx(pp);const p=curPeople()[pp.i];const r=DOOR.byK(pp.k);if(!p||!r||!S.visit)return null;let A;try{A=doorRaw(p)}catch(e){return null}
  const o=[];A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
   const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
-  let x="";try{x=optLine(a)}catch(e){}if(typeof r.tier==="function"){const w=r.tier(a);if(w)x=`${w}${x?" · "+x:""}`}/* a tiered door (nhẹ / vừa / nặng) names the tier first */
-  const row={n:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
+  let x="";try{x=optLine(a)}catch(e){}const tw=typeof r.tier==="function"?r.tier(a):"";/* KIT §7.1 (J0): a tier sits in the option TITLE «<việc> · nặng» */
+  const row={n:tw?`${a.n} · ${tw}`:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
  if(!o.length)return null;o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
  const w=doorWho(p);let who=null;try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
