@@ -1088,6 +1088,59 @@
     "review/rerun-E-S1-E-S1-R1-scholar-3-1844484030-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-speed-2-1596011504",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "speed",
+   "botHarness": "bold",
+   "kiep": 2,
+   "seed": 1596011504,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "2df8f5fa"
+   },
+   "live": "GAME BUILD b7dcbbd06e03 (github.io 7bf080fbc625)",
+   "end": "Xuất gia",
+   "type": "death",
+   "fate": "Xuất gia",
+   "death": true,
+   "age": 19,
+   "year": 2,
+   "rank": 0,
+   "buoi": 219,
+   "steps": 2827,
+   "taps": 1486,
+   "exitPick": {
+    "label": "Cắt tóc xin đi tuRất vữngTốnkhôngĐượcxuất gia, kiếp này dừng ở cửa chùaGợi ýxuất gia, kiếp",
+    "n": 3,
+    "only": true,
+    "at": 1971,
+    "S": {
+     "dead": false,
+     "y": 2,
+     "t": 18,
+     "w": 0,
+     "b": 2,
+     "age": 19,
+     "rank": 0,
+     "name": "Tôn Mạn Ca"
+    }
+   },
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "FRESH rerun on 2df8f5fa; home road, no board; ending = all-exit Cha định hôn (only option)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-speed-2-1596011504-moments.md",
+    "review/rerun-E-S1-E-S1-R1-speed-2-1596011504-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
@@ -1121,10 +1174,6 @@
   {
    "id": "E-S1-R1-speed-1-608519237",
    "why": "Ban hoa at buổi 3: debut trial «Lễ ra mắt» not played (89f5b956 board gap, E-S6 erratum) → INVALID, rerun fresh on 08a4ff8b"
-  },
-  {
-   "id": "E-S1-R1-speed-2-1596011504",
-   "why": "same"
   },
   {
    "id": "E-S1-R1-cautious-5-752387021",
