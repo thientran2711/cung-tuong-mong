@@ -108,3 +108,18 @@ Sếp chọn giúp em 4 câu:
 
 ## Handover (if a successor is needed)
 State: recommendation written, waiting for the pick. Nothing built. Scan scripts in dev/handover/reports/mg-trim/ (kinds.js needs an assembled dev/index.html: `python3 dev/build/assemble.py`). Next: after the pick, branch review/mg-trim from LIVE, build §6.
+
+## BUILD (after the pick, OD 26/11 ~05:10Z + MAIN ruling line) — branch review/mg-trim @ 69beb3e2 (from LIVE 02f564ae) — WIP, HANDOVER
+Done (code, all from BAL, kit parts only):
+| item | files | state |
+|---|---|---|
+| BAL.skip.od 40 → 50 Tùy duyên (every quick roll) | jbal2:1794 | done |
+| learning games' quick is named «Học nhanh» (was always «Bỏ qua»: why sếp never saw it); other games keep «Bỏ qua» | j79 kitQuick + KIT_QUICK_NAMES; jtd n:"Học nhanh" | done |
+| Điểm trang one tap = toilRollOf: the NPC face table toilNpcPlay on HER hand (Sắc, Họa, Dung/BAL.toil.dungDiv 10, ma ma), rank demand BAL.toil.rkDemand 2/rank, her colours + own hoa điền; seeded per day; odds words per look on the button; «Tự tay điểm trang» = mirror game; «Để mặt mộc» kept; NPCs read Dung too (toilNpcSk, law 1) | jtoil | done |
+| tát / né CUT, whole family: her slap + throw acts (jlooks Hắt nước/Hắt trà/Quạt mực) tier = slapNpcTier(S); Né = one roll of BAL.slap.dodgeOdds (card odds); Dư đồ class B acts no game | jslap, jlooks, jdf, jdfv | done |
+| pet care (cho ăn/tắm/chơi) + plant watering = one tap, «vừa tay» care (BAL.skip.raw/10) | jpetcare, jshelf | done |
+| KEPT per her rule: scheme boards, 7 Dư đồ engines (class A), nghiệm thân, Emperor summons, Tranh sủng Hát/Múa, Hoa đăng, contests/exams/lessons, works quick = no product | — | untouched |
+| docs | dev/MINIGAMES.md (quick section + mg-trim section) | done |
+Tests: mg-skip.js 17/17 ok (Fold @1) · mg-skip-audit.js PASS (rows updated) · new dev/test/mg-trim.js: 1–4, 7, 8 PASS; 5 + 6 FAIL = TEST BOOT only: after start() a pre-palace «KIẾP · Thân phận kiếp này» carousel card stays in the modal, so no rival is reachable (ACT.tat.ok none) and the NPC-slap card is hidden behind it. Fix the boot (copy a test that reaches the palace with real rivals, e.g. dev/test/delegate-nomg.js or tut-quests.js boot), then re-run.
+NEXT (successor): (1) fix mg-trim.js boot → 5/6 pass on Fold 755x1000@2 + iPad 1180x820@2 with VID=<dir> (videos → CDN img/_review/mg-trim/ via dev/site/cdn_sync.py); (2) run makeup-set.js, mg-back.js, mg-ready-guide.js, duodo-focus-view.js, delegate-nomg.js, ag-mgcal.js, coop quick (coop-e2e if time) + quickcheck; note duodo-focus-view (5c) still tests the jdfv slapGame dodge wrapper, which no game path calls now (dead: remove wrapper + test step, or keep as Thử tay); (3) rebuild + commit dev/index.html / sw.js as other branches do; (4) SSK → ONE opus BIG reviewer child → LAND READY to Foreman D.
+Handover note: worker D5 at ~25 % context (START ~3 % + 25 % rollover rule) — coordinator opens the successor.
