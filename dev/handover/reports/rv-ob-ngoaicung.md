@@ -47,3 +47,35 @@ PRIORITY #1 CHECK: review of an existing branch (review/ob-ngoaicung dc43a3b9, c
 
 ## Not done by me
 - No game code changed (only the merge). Shots / videos are in scratch only (none in git, none on the CDN review folder).
+
+## REVIEW r2 (reviewer session_01V1ZZH29E5itz7L8m4cLTq5) — target review/ob-ngoaicung c33ff595 (code 09358068)
+PRIORITY #1 CHECK: review of an existing branch — nothing rebuilt; START_CORE/WORKER/REVIEWER + rv r1 FAIL + worker report (RV FAIL answers) read.
+
+### VERDICT: FAIL (1 item, = r1 item 2 not fixed on screen)
+Merge onto LIVE 6b5d3d05 DONE: **237db87f** (pushed to review/ob-ngoaicung, fast-forward of c33ff595; main is its ancestor). Conflicts: dev/build/jrcp.js +
+dev/build/jtds.js (teacher lines) → this branch's place words (rcpFeeW / placeW("t_vir") / rcpConsTeach) KEPT together with LIVE's gain words
+(crsGainW("teacher"|"self",…) instead of «+2..3» / «+1..2»); index.html / sw.js / assets.json regenerated (build_site.sh). Worker: build on 237db87f.
+
+1. **BLOCKING — her dialog tag at home still reads a palace rank (r1 item 2 / k2 family).** pMe().rw is now «Tiểu thư / Thôn nữ / Công chúa», but the
+   dialog figure tag is NOT drawn from pMe().rw: jksize.js:127 `kszRankName(p)` returns `RANKS[S.rank].n` when p===S (and kszFigHtml → kitTitleTag3 /
+   kitNameRank draw it). Real taps on the merged build, home road, right after «Nhận thân phận»:
+   - Fold 755x1000 tt: «Tiền truyện · Con gái Tể tướng 1/3», «2/3» and «Khuê các» show **«Đáp ứng · <her name> (ta)»**; only «3/3» shows «Tiểu thư».
+   - iPad 1180x820 cnv: «Tiền truyện 1/3, 2/3», «Thôn quê» → «Đáp ứng … (ta)» (3/3 «Thôn nữ»).
+   - iPad 1180x820 nc: «Tiền truyện 1/3, 2/3», «Công chúa Cao Ly» → «Đáp ứng … (ta)» (3/3 «Công chúa»).
+   Fix at ONE source (law 11): her own rank word for every drawn tag (kszRankName p===S and the other `RANKS[S.rank].n` prints that can reach a home
+   screen — 40 such prints in 30 modules: `git grep -n "RANKS\[S.rank\].n" dev/build`) must read the home station while road8()==="kc".
+   The scan missed it because its meTag surface reads pMe().rw (data), not the drawn tag: add a strict surface that reads the DRAWN `.knr-r` of every
+   home dialog whose figure is hers (and the stage tags) and FAILs on any RANKS name.
+   Note (same family, kit question for MAIN / kit keeper, law 9 — not blocking here): her framed portrait in these home dialogs uses the consort rank-0
+   kit frame / crest / bg (pcp rk-c0: frame-consort-0, crest-consort-0, bg-consort-0) because pMe().rk = c0 at home.
+
+### Checks that PASS (merged 237db87f)
+- r1 item 1 FIXED: the 3 «Tiền truyện» cards + «Khuê các / Thôn quê / Công chúa Cao Ly» show at home on tt, cnv, nc (real taps, Fold + iPad).
+- Family scan `scan.js --play=600`, 5 roads tt td cnv nc bd: SCAN PASS first run — meTag Tiểu thư/Tiểu thư/Thôn nữ/Công chúa/Công chúa; head-count
+  tt/td «1 Người hầu · 3 Trưởng bối», cnv «3 Gia đình», nc/bd «1 Người hầu · 3 Vương tộc»; dropped 4/2/31/1/20, droppedBad 0 (no own-figure dialog
+  dropped); worldcare shown 0; acts 0 · asks 0 · cards 0 · tabsRenamed 0 · page errors 0. (Thin: tt/td/nc runs reached only turn 4/2/1.)
+- quickcheck (LIVE dev/tools/quickcheck.js, qc-daylife) merged vs LIVE 6b5d3d05: **QUICKCHECK PASS** — open 2376 ms, old save ok, perf median new/live
+  render 252/239, tab 593/535, buổi 1286/1957, tasks>200ms 34/40.
+- Real-tap screens Fold 755x1000 + iPad 1180x820 (home stage, Tiền truyện, home intro dialog): kit dialog frame, no horizontal scroll, no page errors,
+  VANPHONG wording OK except item 1.
+- Not run: coop-e2e (verdict already FAIL; run it on the next sha together with the full gates).
