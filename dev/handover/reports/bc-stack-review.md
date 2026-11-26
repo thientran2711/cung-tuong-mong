@@ -202,3 +202,13 @@ Only-option rule untouched by the diff (isExit only filters when siblings exist)
 ## BIG #7 — PASS review/robot-realtap 496b6b66 (EXIT_RE tightened, F #15) — 11/25 ~22:10Z
 Diff vs 0bd2b621: the EXIT_RE tail only, exactly the regex from the FAIL above. node --check OK. Corpus scan (all LIVE 351122ba dev/build/j*.js tag/option/outcome strings, new vs old EXIT_RE): only true elopement texts match (jkc3b.js «đi theo chàng», «bỏ trốn cùng người thương»; jrd_tt result «Nàng bỏ trốn khỏi cung.»); «bỏ trống», fail-outcome «bỏ trốn», «kết: Xuất quân vội vàng» = 0 hits. Fold slice on LIVE (bot=rand, slice=10): buổi 10, 104 taps, dead 0, stuck 0, bugs 0. Fast-forward on b4b181f8 line. Only-option rule unchanged.
 ~X% xong / ~Y% chơi được: harness only, no game change.
+
+## BIG #7 — PASS review/robot-realtap 8dc395ba (option-card tap point + kc2End exits, HARNESS FIXER #8) — 11/26 ~00:55Z
+Scope 496b6b66..8dc395ba: bfa73a6e (EXIT_RE + «nhận lời làm thiếp | theo họ về làm người ở | ở lại quê nhà») and 8dc395ba (realtap PROBE + SCAN probe: on an option card, art / meter / name count as card hits; only «!» .kobang / .kopinfo / legend / help / inputs are no-go; title first, then card centre, then descendants; by-design cover named «under .kshdet» for the s8b «Xem…» false-dead).
+- Matches the LIVE kit: jwhy.js:123 / j79.js:309 «a tap ANYWHERE on an option card chooses it» with the same selector list; jopic.js:334 only «button.ka.kopt > .kobang» opens its own panel. So the CARD_SEL / CARD_NOGO pair is the game's own rule, not a guess.
+- Owner robot rules: no .click()/dispatchEvent added (realtap read-only probe; new test uses realtap.make taps); exit list only grows.
+- Law-11 family: EXIT_RE corpus scan over all LIVE 5e013076 j*.js strings, new vs 496b6b66 → only jkc2 «Nhận lời làm thiếp, trả nợ cho nhà», «Theo họ về làm người ở», «Ở lại quê nhà» (+ jend ending name) = true kc2End endings, 0 false hits.
+- dev/test/rt-optcard-spots.js on LIVE 5e013076, MAXP=25 per size, RTOLD=496b6b66: 202 rows, FAIL 0; Fold 755x1000 1-col 50 chose, iPad 1180x820 2-col 16 + 1-col 34 chose; realtap 50+50 taps, dead 0, jsClicks 0. (Full 389-card run timed out at my 25-min cap when run beside two robots; fixer's full numbers not re-run.)
+- Robot slices on LIVE 5e013076 (bot=rand, slice=10): Fold buổi 10 · 86 taps · dead 0 · stuck 0 · bugs 0; iPad buổi 10 · 108 taps · dead 0 · stuck 0 · bugs 0.
+- node --check OK on robot-rt.js / realtap.js / rt-optcard-spots.js. Fast-forward on 496b6b66.
+~X% xong / ~Y% chơi được: harness only, no game change.
