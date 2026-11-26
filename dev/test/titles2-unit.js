@@ -86,11 +86,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const y2={tid:t,id:999102};q.a.push(y2);try{q72End(y2,'bad')}catch(e){}
    ck(S.dh[`vn_${t}_t`]&&S.dh[`vn_${t}_t`].i>=0&&S.dh[`vn_${t}_a`]&&S.dh[`vn_${t}_a`].i>=0,'F6 a composed chain: ok → its good title, bad (bại lộ) → its bad title');
    const h=C[`vn_${t}_t`]?C[`vn_${t}_t`].how(1):'';ck(h&&!/[{}]/.test(h)&&/^Việc nhờ «/.test(h),`F6 composed chain how text names the seed, no placeholder («${h}»)`)}
-  /* CT (ORDER MAIN 117, OD 24/11 ~07:45Z): read-only chapterTitle(S) → «Chương N — <name>» = the goal line's chapter (milestone / ARC67 road chapter); "" with no story */
+  /* CT (ORDER MAIN 117, OD 24/11 ~07:45Z): read-only chapterTitle(S) → «Chương N — <name>» = the goal panel's chapter (jgoal chapter(): home road / milestone / ARC67 road chapter); "" with no story */
   {const st=S.st,k0={ms:st&&st.ms,M:st&&st.M},g=(st&&st.ms&&MS67[st.ms.id])?`Chương ${st.ch.n} — ${MS67[st.ms.id].t()}`:null;const c1=typeof chapterTitle==='function'?chapterTitle(S):'';
    ck(typeof chapterTitle==='function'&&(!g||c1===g)&&/^Chương \d+ — \S/.test(c1),`CT milestone chapter («${c1}»)`);
    st.ms=null;st.M={a:'tt_co_5',chap:3,act:{}};const c2=chapterTitle(S);ck(c2===`Chương 3 — ${String(ARC67.tt_co_5.t).trim()}`&&!/[{}<]/.test(c2),`CT road chapter (rdDef tt_co_5, «${c2}»)`);
-   st.M=null;ck(chapterTitle(S)===''&&chapterTitle({})==='','CT no open chapter → ""');Object.assign(st,{ms:k0.ms,M:k0.M})}
+   /* E92f (REVIEW r1 fix 2, one rule): with no open chapter the line follows the goal panel (kitGoalNow: «Mệnh truyện trọn vẹn» / old story / none → "") */
+   st.M=null;{const G=typeof kitGoalNow==='function'?kitGoalNow():null,gl=G&&G.C?`${G.kicker} — ${String(G.title).replace(/<[^>]+>/g,'').trim()}`:'',c3=chapterTitle(S);
+   ck(c3===gl&&chapterTitle({})==='',`CT no open chapter → the goal panel's line («${c3}» = «${gl}»), not her S → ""`)}Object.assign(st,{ms:k0.ms,M:k0.M})}
   /* B4 j70 */
   S.dh={};v.dh={};abandon70({a:v.id,t:'me',m:'poison',id:'t1',kt:[]},'exposed');ck(S.dh.mh_vach&&S.dh.mh_vach.i>=0,'B4 exposer → Vạch rõ gian tay');ck(v.dh.mh_doc_lo&&v.dh.mh_doc_lo.i>=0,'B4 exposed schemer → Bàn tay lộ dấu');
   v.dh={};abandon70({a:v.id,t:'me',m:'rumor',id:'t2',kt:[]},'exposed');ck(v.dh.mh_don_lo&&!/độc/.test(C.mh_don_lo.n),'F3 exposed rumour → a rumour name, never a poison word');
