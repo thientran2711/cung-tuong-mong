@@ -11,3 +11,7 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-4 from 2026-11-26T01:12:10.373Z buổi 331
+CP buổi 331 year null save 751794 chars
+PAGE FROZE cnv-cnv_ban-speed-4 at buổi 365 (tree 7915 MB, renderer 7217 MB) → exit 3, rerun with resume=1
+RESUME cnv-cnv_ban-speed-4 from 2026-11-26T01:22:04.357Z buổi 361
+CP buổi 361 year null save 866634 chars

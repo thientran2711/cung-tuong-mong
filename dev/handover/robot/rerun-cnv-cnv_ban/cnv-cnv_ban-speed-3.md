@@ -2,11 +2,9 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-speed-3 | HARNESS |  | 541 |  | 0 | 0 | 1 | — |
+| cnv-cnv_ban-speed-3 | running |  | 841 |  | 0 | 0 | 0 | — |
 
 ## Dead buttons
 
 
 ## Bugs
-
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed

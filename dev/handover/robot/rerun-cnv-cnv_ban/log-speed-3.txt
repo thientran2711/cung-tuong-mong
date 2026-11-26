@@ -15,3 +15,13 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-speed-3 from 2026-11-26T01:12:49.265Z buổi 541
+CP buổi 541 year null save 890295 chars
+CP buổi 591 year 5 save 923372 chars
+CP buổi 641 year 5 save 981914 chars
+CP buổi 691 year 5 save 991139 chars
+CNV EXIT CHOICE buổi 699 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-speed-3/cnvexit-699.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 741 year 6 save 1189891 chars
+CP buổi 791 year 6 save 1313648 chars
+STATUS cnv-cnv_ban-speed-3 · buổi 834 · year 6 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 841 year 6 save 1433291 chars

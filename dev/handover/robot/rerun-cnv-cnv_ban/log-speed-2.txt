@@ -36,3 +36,10 @@ STATUS cnv-cnv_ban-speed-2 · buổi 1259 · year 9 · rank 0 · bugs 0 · stuck
 CP buổi 1266 year 9 save 2101818 chars
 PAGE FROZE cnv-cnv_ban-speed-2 at buổi 1301 (tree 8278 MB, renderer 7594 MB) → exit 3, rerun with resume=1
 RESUME cnv-cnv_ban-speed-2 from 2026-11-26T00:20:13.342Z buổi 1301
+CP buổi 1301 year null save 2245065 chars
+CP buổi 1351 year 10 save 2430500 chars
+CP buổi 1401 year 10 save 2479983 chars
+DEAD BUTTON page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 4 người» «Nguy hiểm chung: 54» cover div#rtoast.rtoast.karesult
+CP buổi 1451 year 11 save 2597626 chars
+STATUS cnv-cnv_ban-speed-2 · buổi 1487 · year 11 · rank 0 · bugs 1 · stuck 0 · dead buttons 1
+CP buổi 1501 year 11 save 2753666 chars

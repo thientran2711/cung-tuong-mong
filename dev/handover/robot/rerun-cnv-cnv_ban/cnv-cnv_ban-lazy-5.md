@@ -1,12 +1,10 @@
-# cnv-cnv_ban-lazy-5 (real-tap harness 8f20a330, fold)
+# cnv-cnv_ban-lazy-5 (real-tap harness f2737ee2, fold)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-lazy-5 | HARNESS |  | 341 |  | 0 | 0 | 1 | — |
+| cnv-cnv_ban-lazy-5 | running |  | 548 |  | 0 | 0 | 0 | — |
 
 ## Dead buttons
 
 
 ## Bugs
-
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed

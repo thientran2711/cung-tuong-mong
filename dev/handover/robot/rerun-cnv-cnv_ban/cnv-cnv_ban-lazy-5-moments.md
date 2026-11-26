@@ -139,3 +139,54 @@ Format: game date · screen · feeling · what happened · shot (relative to the
 - year 3 · turn 27 · tuần 1 · buổi 2 · rank 0 · .dlg «Tai mắt cho người khác» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-330-120.png
 - year 3 · turn 28 · tuần 0 · buổi 1 · rank 0 · .dlg «Tiệc Thất tịch» · NEW SCREEN · first time on this screen; buttons: Rót rượu gần ngự tọaVữngTốnk | Đứng sau hầu chủRất vữngTốnk · shots-cnv-cnv_ban-lazy-5/m-new-336-121.png
 - year 3 · turn 28 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-340.png
+- year 3 · turn 28 · tuần 2 · buổi 1 · rank 0 · .dlg «Thăng bậc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-346-1.png
+- year 3 · turn 29 · tuần 1 · buổi 0 · rank 0 · .dlg «Lương tháng tư bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-353-2.png
+- year 3 · turn 29 · tuần 1 · buổi 2 · rank 0 · page «Diên Huy cung · Kính Ninh điện · Ở đây còn 9 người» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc100Tài91Tâm cơ52Đức44Danh | Bạc52Sức99/100 | Buổi chiều, còn 2 khắc | lá phong rơi | Tâm trạngBình thản-5 | Tin báo: 5 tin mới · shots-cnv-cnv_ban-lazy-5/m-new-355-3.png
+- year 3 · turn 29 · tuần 2 · buổi 1 · rank 0 · .dlg «Xét phẩm cuối tháng · Cung nữ nhất đẳng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-358-4.png
+- year 3 · turn 29 · tuần 2 · buổi 2 · rank 0 · #modal «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-lazy-5/m-new-359-5.png
+- year 3 · turn 29 · tuần 2 · buổi 2 · rank 0 · .dlg «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-359-6.png
+- year 3 · turn 29 · tuần 2 · buổi 3 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-360.png
+- year 3 · turn 30 · tuần 0 · buổi 1 · rank 0 · .dlg «Bị tố bày biện xa xỉ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-362-7.png
+- year 3 · turn 31 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 12 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-380.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · .dlg «Học Công (Nữ công): ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Ma ma giáo tậpTốn2 khắc·Sức  · shots-cnv-cnv_ban-lazy-5/m-new-384-8.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · #modal «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-lazy-5/m-new-384-9.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · .dlg «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm | Học lối này | Học lối này | Làm | Học lối này | Học lối này · shots-cnv-cnv_ban-lazy-5/m-new-384-10.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · #modal «Hà bao uyên ương: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-lazy-5/m-new-384-11.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · .dlg «Hà bao uyên ương: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Hà bao uyên ương · vải, chỉ | Hà bao uyên ương · lụa, chỉ | Hà bao uyên ương · gấm, chỉ  · shots-cnv-cnv_ban-lazy-5/m-new-384-12.png
+- year 3 · turn 32 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại lễ tế Giao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-385-13.png
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · .dlg «Túi thơm thêu sen: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Túi thơm thêu sen · vải, chỉ | Túi thơm thêu sen · lụa, chỉ | Túi thơm thêu sen · gấm, chỉ · shots-cnv-cnv_ban-lazy-5/m-new-396-14.png
+- year 3 · turn 33 · tuần 0 · buổi 0 · rank 0 · .dlg «Ta bắt gặp» · NEW SCREEN · first time on this screen; buttons: Nghe lénKhó lườngTốn1 khắcĐư | Thôi, lui về cungTốn2 khắc đ | Mặc kệTốnkhôngĐượckhôngGhi c · shots-cnv-cnv_ban-lazy-5/m-new-397-15.png
+- year 3 · turn 33 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 3: Học lễ nghi cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-398-16.png
+- year 3 · turn 33 · tuần 0 · buổi 3 · rank 0 · page «Thái y viện · Sang buổi tối · ta vẫn ở Thái y viện» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-400.png
+- year 3 · turn 33 · tuần 1 · buổi 1 · rank 0 · .dlg «Án mất trộm ngự khố» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-401-17.png
+- year 4 · turn 34 · tuần 0 · buổi 2 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-410-18.png
+- year 4 · turn 34 · tuần 1 · buổi 3 · rank 0 · .dlg «Yến tiệc đầu xuân» · NEW SCREEN · first time on this screen; buttons: Rót rượu gần ngự tọaVữngTốnk | Đứng sau hầu chủRất vữngTốnk · shots-cnv-cnv_ban-lazy-5/m-new-415-19.png
+- year 4 · turn 34 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 10 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-420.png
+- year 4 · turn 35 · tuần 0 · buổi 1 · rank 0 · .dlg «Xong việc: Trò chuyện với một đồng liêu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-422-20.png
+- year 4 · turn 36 · tuần 0 · buổi 3 · rank 0 · .dlg «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-435-21.png
+- year 4 · turn 36 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 5 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-440.png
+- year 4 · turn 37 · tuần 0 · buổi 3 · rank 0 · .dlg «Bộ sưu tập» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-448-22.png
+- year 4 · turn 38 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 5 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-460.png
+- year 4 · turn 38 · tuần 1 · buổi 1 · rank 0 · .dlg «Chương 3 · Học lễ nghi cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Biếu quà một đồng li | Đi làm: Luyện thêu thùa, chữ · shots-cnv-cnv_ban-lazy-5/m-new-462-23.png
+- year 4 · turn 38 · tuần 1 · buổi 1 · rank 0 · #ktut «» · NEW SCREEN · first time on this screen; buttons: Tất cả 13/14Hầu hạ 4/5Học tậ | Học tập · Tài nghệHọc tập · | Đã hiểu · shots-cnv-cnv_ban-lazy-5/m-new-462-24.png
+- year 4 · turn 38 · tuần 1 · buổi 1 · rank 0 · .dlg «Xong việc: Luyện thêu thùa, chữ nghĩa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-462-25.png
+- year 4 · turn 38 · tuần 1 · buổi 3 · rank 0 · .dlg «Lương tháng năm bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-464-26.png
+- year 4 · turn 39 · tuần 1 · buổi 1 · rank 0 · .dlg «Đeo «Kim vàng chỉ bạc»» · NEW SCREEN · first time on this screen; buttons: Bạc dư dảTốnkhôngĐượcBạc thu | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-cnv-cnv_ban-lazy-5/m-new-474-27.png
+- year 4 · turn 39 · tuần 2 · buổi 0 · rank 0 · .dlg «Xét phẩm cuối tháng · Chưởng sự cô cô» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-477-28.png
+- year 4 · turn 39 · tuần 2 · buổi 2 · rank 0 · .dlg «Xong việc: Biếu quà một đồng liêu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-479-29.png
+- year 4 · turn 39 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 10 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-480.png
+- year 4 · turn 40 · tuần 0 · buổi 2 · rank 0 · .dlg «Chương 4: Chị em đồng hương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-483-30.png
+- year 4 · turn 40 · tuần 2 · buổi 1 · rank 0 · .dlg «Tin về chủ nhân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-490-31.png
+- year 4 · turn 41 · tuần 0 · buổi 1 · rank 0 · #modal «Chương 4 · Chị em đồng hương» · NEW SCREEN · first time on this screen; buttons:  · shots-cnv-cnv_ban-lazy-5/m-new-494-32.png
+- year 4 · turn 41 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 4 · Chị em đồng hương» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 2/35 | Thiên mệnh | Đi làm: Làm tròn phận sự hầu | Đi làm: Đi làm quen các nơi | Đi làm: Kết thân một người c · shots-cnv-cnv_ban-lazy-5/m-new-494-33.png
+- year 4 · turn 41 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 11 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-500.png
+- year 4 · turn 42 · tuần 0 · buổi 2 · rank 0 · .dlg «Đại lễ sắc lập Thái tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-507-34.png
+- year 4 · turn 43 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại án ngoại thích» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-518-35.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 7 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-520.png
+- year 4 · turn 43 · tuần 2 · buổi 1 · rank 0 · .dlg «Cấm cung giới nghiêm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-526-36.png
+- year 4 · turn 44 · tuần 0 · buổi 1 · rank 0 · .dlg «Danh hiệu lên bậc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-529-37.png
+- year 4 · turn 44 · tuần 0 · buổi 2 · rank 0 · .dlg «Chính tuyến · Từ cung nữ đi lên · Chương 4 · Hồi 1» · NEW SCREEN · first time on this screen; buttons: Rình bắt Thu CúcKhó lườngTốn | Nói thẳng với Thu CúcTùy duy · shots-cnv-cnv_ban-lazy-5/m-new-530-38.png
+- year 4 · turn 44 · tuần 0 · buổi 2 · rank 0 · .dlg «Thiên hạ truyền tin» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-531-39.png
+- year 4 · turn 44 · tuần 2 · buổi 1 · rank 0 · .dlg «Lập Hoàng hậu mới» · NEW SCREEN · first time on this screen; buttons: Lui · shots-cnv-cnv_ban-lazy-5/m-new-538-40.png
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 5 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-cnv-cnv_ban-lazy-5/m-look-540.png
+- year 4 · turn 45 · tuần 0 · buổi 2 · rank 0 · .dlg «Ban gả» · NEW SCREEN · first time on this screen; buttons: Tạ ơn, xuất giáRất vữngTốnkh | Xin ở lại hầu chủRất vữngTốn · shots-cnv-cnv_ban-lazy-5/m-new-542-41.png

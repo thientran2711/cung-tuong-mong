@@ -9,3 +9,11 @@ page.waitForTimeout: Target page, context or browser has been closed
     at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:464:9 {
   log: []
 }
+RESUME cnv-cnv_ban-lazy-5 from 2026-11-26T01:12:52.191Z buổi 341
+CP buổi 341 year null save 909847 chars
+CP buổi 391 year 3 save 988785 chars
+CP buổi 441 year 4 save 1065177 chars
+CP buổi 491 year 4 save 1089820 chars
+CP buổi 541 year 4 save 1215228 chars
+CNV EXIT CHOICE buổi 543 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-lazy-5/cnvexit-543.json opts ["Tạ ơn, xuất giá","Xin ở lại hầu chủ"]
+CNV EXIT CHOICE picked «Xin ở lại hầu chủRất vữngTốnkhôngĐượcchủ»
