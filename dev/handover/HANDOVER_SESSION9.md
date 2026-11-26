@@ -415,3 +415,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~23:01Z (after roll) OWNER: monthly stat adjust toward palace mean → OD row + MAIN rec (25 % drift toward same-rank mean, both ways, no hard reset) → PACE-SPEED + 165.
 - ~23:03Z OWNER: Sắc phong X/Y = X weeks PASSED (not left) → OD row fixed in place; HUD-SACPHONG + 165 told.
 - ~23:06Z OWNER: palace mean by % (proportional) → OD row overwritten: monthly per rank group scale all by f=T/top when top>T (T=ceil×0.85) → PACE-SPEED.
+- 23:12Z GAP FOUND (HUD-SACPHONG prio1 block): kỳ sắc phong on festivals (BAL.promoR.ky, jpromob.js) + đại lễ/quốc tang + promo-build/-2 + kit-promo-hook PASSED 24–26/11 on D branches (d-stack-lr3 cb398c07, d-followups-1-rv cc4fed89) but NEVER LANDED; LIVE still monthly promoGap. → ORDER Foreman D remerge on 4cfcda61 → LAND READY to LC25; HUD-SACPHONG = option A (stack on D's accessors). Told sếp truthfully.
