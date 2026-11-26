@@ -337,3 +337,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~20:50Z OAN-PACE (rolled) RV READY review/oan-pace 7c10f4c0 (replaces pace-all slot) → RV-162 queued; LC25 told slot plan. VN summary sent to sếp. Successor for ghen: none unless RV finds a gap (ghen lever = BAL.oanPace.act / net.heat.ghenK).
 - ~20:45Z OAN-PACE archived (summary: ghen same-rule left open) → opened OAN-PACE-2 session_01Rc5AsLW5LU5PeXKJxSXJE7 (opus) on new review/oan-pace-ghen: ghen follows oán pace rules + 19:20Z relative-favour.
 - ~20:52Z 161 relay: OD lifespan row (Emperor own BAL.mort curve, reign ~14 y) → routed to PACE-SPEED session_01Rc5AsKJ9DLM7DBrbT3Yua3 (BAL + robot table).
+- ~20:58Z NEW ACCOUNT is live: MAIN 161→162→163 (session_01Rc5AsNAg5nfWVh6wa8AKPj) landed renderer-mem 03a8c17c. 160 STANDS DOWN (no more pushes). LC23 told to restack os onto 03a8c17c and report to 163 / hand queue to LC25.
