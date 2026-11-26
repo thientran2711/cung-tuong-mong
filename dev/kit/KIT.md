@@ -4057,8 +4057,12 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
 - Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
   → `<img.kbi>` (img/kit/ico-<kind>.webp, 30 px, gpt-2-6 gouache, transparent, 128 px WebP ~7 KB: ico-room = red-lacquered door under green tiles with a lantern,
   ico-map = palace scroll map) + `<span.kbl>` label; the button class is `.kbackb` (no border / ground in the header; a soft paper pill over the stage art for #tomap).
-- Header `#k3room` (phone shell only, as before): label "Về phòng", or "Về <place>" when she is elsewhere (tooltip + aria-label the same). >= 600 px: icon + label in the
-  right column under the time block, right-aligned, no bar. < 600 px: icon only (label in tooltip, same rule as the stat cells), under the menu button next to the time block.
+- Header `#k3room` = THE WAY HOME (review/home-way, owner OD 26/11 ~04:25Z; canon overwrite of «Về <place>»): ONE rule with the Dư đồ top-row
+  «Về phòng» = `homeWay()` / `homeGo()` (jplrule.js). Away from home it ALWAYS walks her to HER OWN room (goTo("home"), cost travel() =
+  BAL.walk.near / BAL.walk.far), label «Về phòng · N khắc» + second line = her palace's name (the home mark, `homeName()`); no khắc left =
+  disabled, «Về phòng · hết khắc». At home: «Về phòng» + her palace's name, tap = her room's page. Label lines: `.kbl` white-space:pre-line.
+  Spread (>= 600 px): icon + label, right column. One page (kv1): icon only at home (tooltip); AWAY (class `.hwaway`, jk3/jk4) the label
+  shows under the icon (small, centred, menu column) — the button is never hidden away from home, the place painting included.
 - New back buttons to a place MUST use this part (`node dev/test/room-btn-scan.py` fails on a text "‹ <place>" bar). New icon kinds: add `img/kit/ico-<kind>.webp` in the same style.
 - Tests: `node dev/test/room-btn.js <url> <outdir>` (6 viewports). Kit page: sample §75. Number §75 (KIT_NUMBERS.md; was provisional §72).
 ## 69. CO-OP BUỔI CLOCK · kitCoopClock (owner 15/11 ~21:25Z, review/coop-timer) — `dev/build/jcooptimer.js` (after jkitpage)
