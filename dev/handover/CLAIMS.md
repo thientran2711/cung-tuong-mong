@@ -554,5 +554,5 @@ C3-RGART | review/c3-rg-c1b-art ba3bcdf9 + CDN act-opt-cui-dau-vang-da | session
 kit keeper (KK46) | review/kit-* | session_01Rc5AsJWaXnsnQJdFazBWmx | RUNNING | 2026-11-26T21:30Z (MAIN 164; KK45 rolled)
 RING-BUILD-5 | review/ring-build | session_01Rc5AsKZcP5RNFoPVMtneyn | RUNNING | 2026-11-26T21:37Z (MAIN 164; RING-BUILD-4 archived)
 PUNISH-TIER-3 | review/punish-tier-wit | session_01Rc5AsMnybeP3fAzDgPB67Y | RUNNING | 2026-11-26T21:40Z (MAIN 164; PUNISH-TIER-2 archived)
-SPLIT-MERGE AUDIT (read-only report; «WITNESS/EVIDENCE BUTTONS» section first; MAIN 163/164 orders) | dev/handover/reports/split-merge-audit.md | (session id next D STATUS line) | RUNNING | 26/11 21:58Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
-ITEM-PICKER DOM/PILE-UP (play-stopper; «Biếu quà làm lành» 362→794, 20k-node screen; after lc25-os 504d2e6a LIVE; MAIN 164 order) | review/picker-dom | (session id next D STATUS line) | RUNNING | 26/11 21:58Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
+SPLIT-MERGE AUDIT (read-only report; «WITNESS/EVIDENCE BUTTONS» section first; MAIN 163/164 orders) | dev/handover/reports/split-merge-audit.md | session_01D3E3NbNhyXThyLPBaUqqFN | RUNNING | 26/11 21:58Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
+ITEM-PICKER DOM/PILE-UP (play-stopper; «Biếu quà làm lành» 362→794, 20k-node screen; after lc25-os 504d2e6a LIVE; MAIN 164 order) | review/picker-dom | session_01D3E3Na4LuR5WU2hdNmAMrS | RUNNING | 26/11 21:58Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
