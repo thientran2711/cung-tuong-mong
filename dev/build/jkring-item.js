@@ -12,7 +12,8 @@
      acts:(it)=>[{n, main, off:"why", q:{max}, fn:(it,q)=>result}]   result = {ok, title, rows:[{k:"duoc"|"mat"|"note", label, items:[html]}]} | "close" | null,
      empty: html, onClose }
    R = {el, rot, front(), turnTo(i), focus(), back(), refresh(), close()}.  kitRingItem.cur = the open ring.  Wiring (adapters) at the end of this file. */
-const KIT_RINGI={seats:12,tw:{fold:104,ipad:136},big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
+/* tw = the FRONT tile size in px (MAIN look note 26/11: front ≈1.5× the old 82 px, more on iPad); side tiles keep the old size curve (side = old kitItem md 72 px) */
+const KIT_RINGI={seats:12,tw:{fold:124,ipad:150},side:72,frontPow:20,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
  openMs:420,focusMs:520,dropMs:360,stagger:26,snapMs:200,stepMs:280,maxN:24};
 /* ---------- KRI_MATH: the shared ring maths (slot angle, depth, front, inertia) ---------- */
 const KRI_MATH={
@@ -88,7 +89,7 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  if(!R.items.length){const e=document.createElement("div");e.className="kri-empty";e.innerHTML=R.o.empty||"Chưa có món nào.";R.L.appendChild(e);R.emptyEl=e;R.tiles=[];return}
  R.tiles=R.items.map((it,i)=>{const t=document.createElement("div");t.className="kri-t"+(it.lock?" kri-lock":"");t.style.width=g.tw+"px";
   t.innerHTML=typeof kitItem==="function"?kitItem({src:it.src,name:it.name,grade:it.grade,qty:it.qty>1?it.qty:0,lux:it.lux,mark:it.mark,size:"md"}):`<img src="${kriE(it.src)}" alt="">`;
-  ring.appendChild(t);t.__i=i;return t});
+  const ki=t.firstElementChild;if(ki&&ki.classList&&ki.classList.contains("kitem"))ki.style.setProperty("--isz",g.tw+"px");ring.appendChild(t);t.__i=i;return t});
  const mk=(txt,css,fn,lab)=>{const b=document.createElement("button");b.type="button";b.className="kbtn alt kri-ar";b.textContent=txt;b.setAttribute("aria-label",lab);b.style.cssText=css;b.addEventListener("click",e=>{e.stopPropagation();fn()});R.L.appendChild(b);return b};
  const ab=R.ip?46:42,ay=g.cy-ab/2;R.arL=mk("‹",`left:${Math.max(6,g.cx-g.Rx-g.tw*.55-ab)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,-1),"Quay trái");
  R.arR=mk("›",`left:${Math.min(R.w-ab-6,g.cx+g.Rx+g.tw*.55)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,1),"Quay phải");
@@ -98,7 +99,7 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  if(bloom&&!kriCalm()){const N=R.tiles.length;R.tiles.forEach((t,i)=>{const fin=t.style.transform,op=t.style.opacity;t.animate([{transform:`translate(${-g.tw/2}px,${-g.tw*.6}px) scale(.1)`,opacity:0},{transform:fin,opacity:op}],{duration:KIT_RINGI.openMs,delay:i*KIT_RINGI.stagger,easing:"cubic-bezier(.2,1.25,.4,1)"})});
   [R.arL,R.arR,nm,hi].forEach(b=>b.animate([{opacity:0},{opacity:1}],{duration:260,delay:280,fill:"backwards"}))}}
 function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=KRI_MATH.front(R.rot,N);
- R.tiles.forEach((t,i)=>{const m=KRI_MATH.slot(i,R.rot,N);const sc=.42+.72*Math.pow(m.k,1.8),x=g.Rx*m.s,y=-g.Ry*m.c;
+ R.tiles.forEach((t,i)=>{const m=KRI_MATH.slot(i,R.rot,N);const F=g.tw/(KIT_RINGI.side*1.14),sc=KIT_RINGI.side*(.42+.72*Math.pow(m.k,1.8))/g.tw*(1+(F-1)*Math.pow(m.k,KIT_RINGI.frontPow)),x=g.Rx*m.s,y=-g.Ry*m.c;
   t.style.transform=`translate(${(x-g.tw/2).toFixed(1)}px,${(y-g.tw*.6).toFixed(1)}px) scale(${sc.toFixed(3)})`;
   const front=Math.abs(m.a)<.5;const op=m.hide?0:front?1:Math.min(1,(KIT_RINGI.dim+.3*Math.pow(m.k,2))*Math.min(1,(KIT_RINGI.seats/2-Math.abs(m.a))));t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
@@ -151,12 +152,13 @@ function kriActs(R,it){let A=[];try{A=R.o.acts?R.o.acts(it)||[]:[]}catch(e){cons
 function kriResHTML(r){const SL=typeof kitResultSeal==="function"?kitResultSeal(r.ok==null?null:!!r.ok):{cls:"sure",t:"KẾT QUẢ"};
  const rows=(r.rows||[]).filter(Boolean).map(x=>({k:x.k||"note",label:x.label||"",items:(x.items&&x.items.length)?x.items:['<span class="ef n">không</span>']}));
  if(!rows.length)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
- return `<div class="karesult kri-res ${SL.cls}"><div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${kriE(r.title||"")}</span></span>${r.sen?`<span class="ksen">${r.sen}</span>`:""}<span class="kb">${rows.map(x=>`<span class="kr kr-${x.k}"><span class="krl">${x.label}</span><span class="krv">${x.items.map(v=>`<span class="kitem">${v}</span>`).join("")}</span></span>`).join("")}</span></div></div>`}
+ return `<div class="karesult kri-res ${SL.cls}"><div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${kriE(r.title||"")}</span></span>${r.sen?`<span class="ksen">${r.sen}</span>`:""}<span class="kb">${rows.map(x=>`<span class="kr kr-${x.k}"><span class="krl">${x.label}</span><span class="krv">${x.items.map((v,j)=>`${j?'<span class="ksep">·</span>':""}<span class="kitem">${/^<span class="ef /.test(v)?v:`<span class="ef ${x.k==="duoc"?"g":x.k==="mat"?"r":"n"}">${v}</span>`}</span>`).join("")}</span></span>`).join("")}</span></div></div>`}
 async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy)return;R.busy=1;const it=R.items[R.fi];let r=null;
- const logs0=kriLogMark();try{r=await a.fn(it,R.q)}catch(e){console.error("kri act",e)}R.busy=0;
+ const logs0=kriLogMark(),away0=kriAway(),promise=kriPromise(R);try{r=await a.fn(it,R.q)}catch(e){console.error("kri act",e)}R.busy=0;
  if(!kitRingItem.cur||kitRingItem.cur!==R)return;/* the act closed the ring (a dialog of its own opened) */
  if(r==="close"){kitRingItem.close();return}
  if(r==null){const L=kriLogSince(logs0);r={ok:null,title:a.n+" · "+it.name,rows:[{k:"note",label:"Ghi chú",items:L}]}}
+ r=kriPending(r,away0,promise);
  /* the item flies a little (the act happened), then the result rows replace the info, the ring list refreshes behind */
  if(R.big&&!kriCalm())R.big.animate([{transform:R.big.style.transform},{transform:R.big.style.transform+" scale(1.08)"},{transform:R.big.style.transform}],{duration:420,easing:"ease-out"});
  kriPane(R,it,r);try{render()}catch(e){}}
@@ -167,6 +169,15 @@ function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{for(const k in a)
  const nm=e=>{try{return typeof giftName==="function"?giftName(e):(IT[e.k]||{}).n||e.k}catch(x){return e.k}};
  a.__inv.filter(e=>!b.__inv.includes(e)).forEach(e=>M.push(kriE(nm(e))));b.__inv.filter(e=>!a.__inv.includes(e)).forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
  return[{k:"duoc",label:"Được",items:D},{k:"mat",label:"Mất",items:M}]}
+/* SENT-OFF ACTS (MAIN look note 26/11: «THÀNH · Được: không» while the card promised thiện cảm): an act that sends someone on an errand (jptime ptSend:
+   gifts carried by a servant, …) has no result yet. The seal is KẾT QUẢ (not THÀNH), Được = the card's own Được row (what the errand brings when it lands),
+   Ghi chú = who went and when they are back (the ptSend notice words). Whole family: every kitRingItem act runs through kriAct → kriPending. */
+function kriAway(){try{return (S.away||[]).filter(a=>a.by==="me"&&!a.back).map(a=>a.id)}catch(e){return[]}}
+function kriPromise(R){try{const r=R.pane&&R.pane.querySelector(".kr-duoc .krv");return r?[...r.querySelectorAll(":scope > .ef")].map(e=>e.innerHTML):[]}catch(e){return[]}}
+function kriPending(r,away0,promise){try{if(!r||typeof r!=="object"||!Array.isArray(r.rows))return r;const N=(S.away||[]).filter(a=>a.by==="me"&&!a.back&&!away0.includes(a.id));if(!N.length)return r;
+ r.ok=null;const du=r.rows.find(x=>x.k==="duoc");if(du&&!(du.items||[]).length&&promise.length)du.items=promise.map(x=>r.who?x.replace(/^nàng → ta/,kriE(r.who)+" → ta"):x);
+ const W=N.map(a=>`${kriE(a.nm)} đã ${/^đi /.test(a.lbl||"")?kriE(a.lbl):"đi "+kriE(a.lbl||"làm việc")}, về ${typeof ptWhen==="function"?ptWhen(a.due):"sau"}; phần Được đến khi việc xong.`);
+ let no=r.rows.find(x=>x.k==="note");if(!no){no={k:"note",label:"Ghi chú",items:[]};r.rows.push(no)}no.items=W.concat((no.items||[]).filter(x=>!/^Tặng quà:/.test(x)))}catch(e){console.error("kri pending",e)}return r}
 function kriLogMark(){try{return S.logSeq||0}catch(e){return 0}}
 function kriLogSince(n){try{const nw=Math.min(6,(S.logSeq||0)-n);if(nw<=0)return[];const P=typeof plain==="function"?plain:(x=>String(x).replace(/<[^>]+>/g,""));
   return S.logs.slice(0,nw).reverse().map(x=>kriE(P(String(x).replace(/<span class="ld">[^<]*<\/span>/,"")).trim())).filter(Boolean)}catch(e){return[]}}
@@ -201,7 +212,7 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
   acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{const b=ops.querySelector(`.opt[data-m="${it.i}"]`);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
    M.classList.remove("kri-hide");KRI_DLG=null;/* a follow-up dialog of the act → the ring steps aside for it */if(Q.length&&!$("modal").hidden){return"close"}
-   const L=kriLogSince(l0),bad=L.some(x=>/phát hiện|trả lại|từ chối|không nhận/.test(x));return{ok:!bad,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
+   const L=kriLogSince(l0),bad=L.some(x=>/phát hiện|trả lại|từ chối|không nhận/.test(x));return{ok:!bad,who,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
   onClose:()=>{M.classList.remove("kri-hide");if(KRI_DLG===m&&Q[0]===m&&!M.hidden){KRI_DLG=null;const x=M.querySelector(".kit-x");if(x)x.click();else if(typeof closeModal==="function")closeModal()}KRI_DLG=null}})}
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{if(kriOn())kriGiftOpen()}catch(e){console.error("kri gift",e)}return r}})();
 /* the carried-gift flight of the old grid points at a hidden dialog: with the ring its result shows in place instead */

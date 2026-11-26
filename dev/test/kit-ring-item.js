@@ -37,7 +37,7 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
  const meas=()=>p.evaluate(()=>{const R=kitRingItem.cur;if(!R)return{open:false};const T=[...document.querySelectorAll('.kri-t')];const f=document.querySelector('.kri-t.kri-front');const vw=innerWidth,vh=innerHeight;
   const inV=e=>{const r=e.getBoundingClientRect();return r.left>=-1&&r.right<=vw+1&&r.top>=-1&&r.bottom<=vh+1};const pane=document.querySelector('.kri-pane');
   return{open:true,state:R.state,tiles:T.length,front:!!f,frontOp:f?+getComputedStyle(f).opacity:0,dimOp:T.filter(t=>t!==f).map(t=>+getComputedStyle(t).opacity).reduce((a,b)=>Math.max(a,b),0),
-   tilesInView:T.every(inV),pane:pane?{inView:inV(pane),acts:pane.querySelectorAll('[data-kria]').length,res:!!pane.querySelector('.kri-res'),rows:pane.querySelectorAll('.kri-res .kr').length,overflowX:pane.scrollWidth>pane.clientWidth+2}:null,
+   tilesInView:T.every(inV),pane:pane?{inView:inV(pane),acts:pane.querySelectorAll('[data-kria]').length,res:!!pane.querySelector('.kri-res'),rows:pane.querySelectorAll('.kri-res .kr').length,resTxt:(pane.querySelector('.kri-res')||{}).innerText||'',overflowX:pane.scrollWidth>pane.clientWidth+2}:null,
    ovf:document.documentElement.scrollWidth>vw+1}});
  const marks={};const mark=k=>{marks[k]=+((Date.now()-T0)/1000).toFixed(1)};
  const out={sz:W+'x'+H};
