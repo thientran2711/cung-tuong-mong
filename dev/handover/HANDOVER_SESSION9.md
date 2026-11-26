@@ -443,3 +443,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:30Z WORDING-MARKS Tốn verdict = harness gap (14/14 ×3 F+I, review/ton-row = 42cfbac8) → MAIN LOOK: Tốn shows «Bạc -3» → MAIN rec applied: Tốn row prints paid amount WITHOUT minus («Bạc 3», per OD 22:02Z example), whole family + test assert → new sha → RV-164.
 - 23:32Z (164 relay of RV-163C) title-bal PASS 61bdd97d → LC26 queue after wf; oan-pace-ghen fe3d0888 FAIL (law-1 parity, mood-mem 14/16, flakes) → OAN-PACE-2 told; kit-resfold old sha FAIL → RV pointed at 8740785b. 164 answered sếp: no monthly auto-drop of Danh/Đức/Sủng (verified LIVE BAL: only NPC/oán/ghen fades).
 - 23:33Z RV-164 PASS wording-marks 9011e89e → LC26 (42cfbac8 if test-only on top). Tốn no-minus = follow-up branch review/ton-nominus.
+- ~23:36Z OWNER: combine curve + proportional adjust at each PROMOTION → OD; PACE-SPEED + 166. Gave sếp ROOT paste blocks (F; E conditional).
