@@ -21,15 +21,20 @@ const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad
   const low=()=>{S.rank=0;S.sung=0;S.danh=0;S.bac=0;S.an=0;S.confined=0;S.preg=0;S.dead=false;S.suc=100};
   const tick=(forceRoll)=>{const rr=roll,cm=coldMonth;if(forceRoll){coldMonth=function(){roll=()=>true;try{return cm.apply(this,arguments)}finally{roll=rr}}}
    try{low();S.month=1;monthTick()}finally{coldMonth=cm;roll=rr}low()};
+  /* LC20 (26/11, MAIN 153): the «after the grace → forgotten» checks run ONE real monthTick; a random month event (rival, story, servant, kid…) could
+     give her Sủng/Danh that month and rightly keep her out of lãnh cung (8446da67: 2/12 BAD, game correct). quiet() runs those ticks (the grace months
+     too: a random release in a grace month restarts S.forgetAt) with the month's random event steps stubbed to nothing, and her poetry (j3: thi ≥ BAL.tho.lv adds Sủng every month — the bot's earlier steps sometimes trained it) set to 0 for those ticks, so only the «Bị bỏ quên» rule decides. */
+  const QUIET=['maidMonth','pregMonth','itemMonth','anMonth','oanMonth','illMonth','servRanks','servMonth','facMonth','kidsMonth','rivalsMonth','storyMonth','heirMonth'];
+  const quiet=()=>{const keep={},thi=S.arts&&S.arts.thi;for(const f of QUIET)if(typeof window[f]==='function'){keep[f]=window[f];window[f]=()=>''}if(S.arts)S.arts.thi=0;try{tick(false)}finally{for(const f in keep)window[f]=keep[f];if(S.arts)S.arts.thi=thi}};
   const snap=JSON.stringify(S);
   /* (1) đại xá inside the real monthTick */
   low();S.out=0;cold("Bị bỏ quên, đưa vào lãnh cung");tick(true);o.amnestyFree=!S.out;
   /* (2) a restore survives the grace months */
-  low();if(!S.out)cold("Bị bỏ quên, đưa vào lãnh cung");restore(false,"Hoàng thượng đọc thư, động lòng");let free=0;for(let k=0;k<G;k++){tick(false);if(!S.out)free++}o.graceFree=free;
+  low();if(!S.out)cold("Bị bỏ quên, đưa vào lãnh cung");restore(false,"Hoàng thượng đọc thư, động lòng");let free=0;for(let k=0;k<G;k++){quiet();if(!S.out)free++}o.graceFree=free;
   /* (4) after the grace she can be forgotten again */
-  tick(false);o.afterGraceOut=!!S.out;
+  quiet();o.afterGraceOut=!!S.out;
   /* (3) a newcomer (no forgetAt yet) */
-  if(S.out)restore(false,"x");S.forgetAt=undefined;let n=0;for(let k=0;k<G;k++){tick(false);if(!S.out)n++}o.newFree=n;tick(false);o.newAfterOut=!!S.out;
+  if(S.out)restore(false,"x");S.forgetAt=undefined;let n=0;for(let k=0;k<G;k++){quiet();if(!S.out)n++}o.newFree=n;quiet();o.newAfterOut=!!S.out;
   o.dead=!!S.dead;return o});
  ok(R.amnestyFree,`đại xá in monthTick: free after the month (${R.amnestyFree})`);
  ok(R.graceFree===R.G,`restore: free ${R.graceFree}/${R.G} grace months`);
