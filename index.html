@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3f3fdfbd+","t":"2026-11-26T00:34Z","c":"Nơi chỉ được ở có giờ nay báo trước ngay khi bước vào và trước khắc đóng cửa; bị cấm túc hay bị giải ra thì được đưa thẳng về tẩm cung; Dư …","b":"5cbd1c4c7efe","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"9812646a+","t":"2026-11-26T00:35Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn.","b":"06d78aff2a26","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1752,7 +1752,9 @@ function monthTick(){let ev="";
   {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=BAL.ducLv.up)S.th=cl(S.th+dd,-100,100);else if(S.duc<BAL.ducLv.down)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:lsDucWhy()},true)}
   if(S.moreRivals&&!roomFor("consort"))S.moreRivals=0;if(S.moreRivals){S.moreRivals=0;const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Theo lời ngươi tâu, cung tuyển thêm tú nữ: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
-  if(!S.out&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
+  /* promo-root (25/11): «Bị bỏ quên» only after BAL.danhG.forgetGrace months since she entered the palace or last left lãnh cung (S.forgetAt, set by restore j14): before, a release from lãnh cung was undone in the same monthTick (Sủng 0 / Danh 0 / rank 0 after restore) and rank-0 origins were forgotten in month 1–3 */
+  if(S.forgetAt==null)S.forgetAt=S.turn+BAL.danhG.forgetGrace;
+  if(!S.out&&S.turn>=S.forgetAt&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
   const wasQ=S.rank>=7;ev+=promote();if(!wasQ&&S.rank>=7)S.justCrowned=1;
   S.month++;S.tuan=0;
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});
@@ -4702,7 +4704,9 @@ function cold(why){if(S.dead)return;if(S.out)return;S.out=1;S.coldWhy=why;S.cold
  const keep=kp.concat((S.staff||[]).filter(s=>s.coop&&!kp.includes(s))),left=(S.staff||[]).filter(s=>!keep.includes(s));S.staff=keep;
  log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${left.length?`: Nội vụ phủ điều ${left.map(s=>s.name).join(", ")} sang nơi khác`:""}${keep.length?`; chỉ ${keep.map(s=>s.name).join(", ")} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
 function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.visit={k:"lc",people:lcPeople("Phế phi · cùng cảnh ngộ"),talked:false,tk:{},msg:"Gió lùa qua song cửa mục. Ở đây chỉ có những người bị quên lãng."}}
-function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
+/* promo-root (whole family): every way she leaves lãnh cung or enters the palace as a consort starts the «Bị bỏ quên» clock (j3 monthTick, S.forgetAt) the same way: restore, the pardon fallback (jagacts), the kỳ tuyển entries (jkc kcEnter, jkc2 kc2Enter), a maid raised to Đáp ứng (j42 srvRise). Number: BAL.danhG.forgetGrace */
+function forgetSafe(p){if(p===S)S.forgetAt=S.turn+1+BAL.danhG.forgetGrace}
+function restore(full,why){S.out=0;forgetSafe(S);/* promo-root: a release is not undone by «Bị bỏ quên» (j3) */S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
  log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
 /* ONE list for her lãnh cung cards and an NPC in the cold palace (AG-ALL-2e, jagacts3 p3Cold): p = the one inside; free / end = what "được tha" / Xuất gia do for her or an NPC */
 function coldActs(){return coldActsOf(S)}
@@ -8120,7 +8124,7 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
  return{t:`<p>${pp.m===1?"Yến tiệc đầu xuân ở Thái Hòa điện":"Tiệc Thất tịch bên hồ sen"}. Ngươi theo hầu ${m?m.name:"chủ"}.</p>`,who:pMe(),o:cnvPend(S,cnvFestOpts(S,m))}};
 
 /* ---------- rising: she joins the consort game ---------- */
-function srvRise(why){if(!S||(S.age||0)<BAL.ageMin)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* balance-2 fault 9 (only BAL.danhG.srvRise of her servant Danh carries over) lives in riseCore, the same rule for an NPC maid (role-parity-bundle-fix) *//* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
+function srvRise(why){if(!S||(S.age||0)<BAL.ageMin)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;forgetSafe(S);/* promo-root: a raised maid enters as a consort, same «Bị bỏ quên» grace *//* balance-2 fault 9 (only BAL.danhG.srvRise of her servant Danh carries over) lives in riseCore, the same rule for an NPC maid (role-parity-bundle-fix) *//* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
  S.maid=newMaid(nmNew("maid"),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
  if(loyR==null&&m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
@@ -37168,7 +37172,7 @@ Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
-Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,/* promo-root: months after palace entry / leaving lãnh cung before «Bị bỏ quên» can fire */forgetGrace:6,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
@@ -77250,7 +77254,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
  /* r2-r1 (FAIL 3): home dialogs still queued (Phúc tuyển, family events …) never follow her into the palace, and an open mini-game card closes */
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE"&&!(m.pp&&m.pp.e==="dien"))Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
  const CY=BAL.kcg.carry;S.rank=rank=seatDown(S,rank);S.sung=CY.sung[0]+rank*CY.sung[1];S.lastPromo=S.turn;S.danh=Math.min(CY.danhMax,Math.round(S.danh*CY.danhK));S.bac=Math.min(CY.bacMax,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
- S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc.loyalKcEnter,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
+ S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc.loyalKcEnter,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;forgetSafe(S);S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
  const L=[];for(const m of kcRivalsTT()){const raw=kcPhucMark(m);/* review/podium-wire: the same Phúc tuyển mark the podium showed (S.kc.tt.pod) */const sc=kcScore({sac:m.sac,tai:m.tai,duc:m.pduc,danh:m.danh,raw,pow:m.ppow==null?kcPow():m.ppow})+R(9)-4;
@@ -82049,7 +82053,7 @@ function kc2Score(raw){const K=S.kc;const g=(K.ex&&K.ex.art)||"";return entScore
 const KC2CUT=BAL.entry.cut;/* below [0]: two steps under the ceiling; [0]: one step under; [1]: the ceiling */
 function kc2Enter(raw){const K=S.kc;const sc=Math.round(kc2Score(raw));K.ex.sc=sc;const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;K.ex.tier=tier;
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE")Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
- K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;S.pal=null;
+ K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;forgetSafe(S);S.pal=null;
  if(K.kd==="dan")kc2EnterSrv(tier,sc,raw);else kc2EnterNc(tier,sc,raw);
  kc2R0();kcSnapReset();try{kcHook("enter",{rank:S.rank,tier})}catch(e){}tab="act";render()}
 const KC2SW=["kém","khá","tốt"];
@@ -84739,7 +84743,7 @@ function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.nam
  if(k==="judge"){if(evG(a,v)<BAL.ag.ev.judge)return"";return String(judge(a,v)).trim()}
  if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return"";if(evG(a,v)<1&&!vpItems(v).length){if(me)apply(BAL.tw.confNo);else ap(a,BAL.tw.confNo)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(a,v,-BAL.tw.g.conf[0]);v.hh=(v.hh||0)-BAL.tw.g.conf[1];return `${nm} tịch thu ${n} của ${NM(v)}`}
  if(k==="reward"){if((a.bac||0)<-BAL.tw.reward.bac)return"";if(me)apply(BAL.tw.reward);else ap(a,BAL.tw.reward);relAdd(a,v,BAL.tw.g.reward[0]);v.hh=(v.hh||0)+BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});return `${nm} ban thưởng cho ${NM(v)}`}
- if(k==="pardon"){if(!v.confined&&!v.out)return"";if(v===S){try{restore(false,`Hoàng hậu ${a.name} ân xá`)}catch(e){S.out=false;S.confined=0}}else{if(v.out){v.out=false;v.rank=0}v.confined=0}relAdd(a,v,BAL.ag.hh.pardonRel);if(me)apply({duc:BAL.ag.hh.pardonDuc});else ap(a,{duc:BAL.ag.hh.pardonDuc});return `${nm} ân xá cho ${NM(v)}`}
+ if(k==="pardon"){if(!v.confined&&!v.out)return"";if(v===S){try{restore(false,`Hoàng hậu ${a.name} ân xá`)}catch(e){S.out=false;S.confined=0;forgetSafe(S)}}else{if(v.out){v.out=false;v.rank=0}v.confined=0}relAdd(a,v,BAL.ag.hh.pardonRel);if(me)apply({duc:BAL.ag.hh.pardonDuc});else ap(a,{duc:BAL.ag.hh.pardonDuc});return `${nm} ân xá cho ${NM(v)}`}
  return""}
 const AGHH={judge:{act:"xử tội",n:"spite"},conf:{act:"tịch thu trang sức",n:"spite"},reward:{act:"ban thưởng",n:"ally"},pardon:{act:"ân xá",n:"ally"},cutpay:{act:"khất bổng lộc",n:"spite"}};
 /* the gate of each of her buttons (the player-as-Empress sees the same: empAct below) — ONE list read by her options and by her duty need */
@@ -99249,7 +99253,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5cbd1c4c7efe";window.CTM_BUILD=BUILD;
+const BUILD="06d78aff2a26";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

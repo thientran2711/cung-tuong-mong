@@ -397,7 +397,7 @@ function kc2Score(raw){const K=S.kc;const g=(K.ex&&K.ex.art)||"";return entScore
 const KC2CUT=BAL.entry.cut;/* below [0]: two steps under the ceiling; [0]: one step under; [1]: the ceiling */
 function kc2Enter(raw){const K=S.kc;const sc=Math.round(kc2Score(raw));K.ex.sc=sc;const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;K.ex.tier=tier;
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE")Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
- K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;S.pal=null;
+ K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;forgetSafe(S);S.pal=null;
  if(K.kd==="dan")kc2EnterSrv(tier,sc,raw);else kc2EnterNc(tier,sc,raw);
  kc2R0();kcSnapReset();try{kcHook("enter",{rank:S.rank,tier})}catch(e){}tab="act";render()}
 const KC2SW=["kém","khá","tốt"];
