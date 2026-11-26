@@ -279,7 +279,7 @@ const KA_AIMK=[["sung","Sủng"],["danh","Danh"],["suc","Sức"],["loyal","thi�
 function kaAim(v,o){try{if(!S||!v)return null;const b0={};for(const [k] of KA_AIMK)if(typeof v[k]==="number")b0[k]=v[k];b0.rank=v.rank;b0.confined=v.confined||0;b0.out=!!v.out;b0.alive=v.alive!==false;
   const x=Object.assign({seq:S.logSeq||0,t:Date.now(),v,b0},o||{});KA_AIM.push(x);if(KA_AIM.length>40)KA_AIM.splice(0,KA_AIM.length-40);return x}catch(e){return null}}
 function kaAimOk(x){let o=null;try{o=typeof x.ok==="function"?x.ok():x.ok}catch(e){}return o===true||o===1?true:o===false||o===0?false:o==="soft"?"soft":null}
-function kaAimsOf(b){if(!b)return[];const t0=Date.now()-120000;/* an outer act registers its aim just before its inner card snapshot: the span is the log seq, plus «used» once a card showed it */return KA_AIM.filter(x=>!x.used&&x.t>=t0&&x.seq>=(b.seq||0))}
+function kaAimsOf(b){if(!b)return[];/* RV r1 #5: the span is the log seq + «used» only (no wall clock: a card held behind a dialog / minigame may come minutes later) */return KA_AIM.filter(x=>!x.used&&x.seq>=(b.seq||0))}
 /* the verdict of HER act carried by this span (the last own aim with a roll) + its sentence; kaAimUse marks the aims shown (once) */
 function kaAimVerdict(b){const AIM=kaAimsOf(b);let ok=null,sen="",n="";for(const x of AIM){if(x.by)continue;const o=kaAimOk(x);if(o!==null){ok=o;n=x.n||"";sen=x.sen?(typeof x.sen==="function"?x.sen(o):x.sen):""}}return {AIM,ok,sen,n}}
 function kaAimUse(L){for(const x of L||[])if(!x.outer)x.used=1}/* an outer act's aim (doAct, talk …) is closed by its wrapper when the act ends: two cards of one act both show it */

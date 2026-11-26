@@ -73,3 +73,23 @@ scan acts with a card: 36; with a «Người ấy» row after: 19 (the rest: no 
 - Kèm row layout inside the night card wraps unevenly (pre-existing kitKemRow in kitRows; ONE-SIEVE / KK39).
 - KK39 to confirm the two new row labels «Người ấy» / «Ai làm» and the «BỎ DỞ» seal value (KIT_REQUESTS 26/11 OB-VERDICT).
 
+
+## REVIEW (RV-OB-VERDICT session_01V1ZZH4KVXLc23oaAiikKLg) r1 — FAIL (on 4a1fe665; pasted by OB-VERDICT, relayed by MAIN 156)
+Passes: 39/39 on branch + LIVE merge, laws 4/6/1/VANPHONG OK, perf OK. FIX ALL (whole family):
+1. Deeds run from a dialog lose their verdict (the owner's exact symptom): Bày mưu «Ra tay ngay» + confirm «Làm như thường» (Vu oan, Giá họa trộm đồ, Ly gián, Hạ độc dần, Bỏ phấn lạ…). Cause: jverdict doAct wrapper `if(!Q.length)x.used=1` marks the inner aim (holding aRoll/caught) used before chooseM's card reads it → card «KẾT QUẢ», no sentence. Repro LIVE merge seeded: Giá họa «bị bắt, khai ra ngươi» → KẾT QUẢ; Vu oan «bị lộ», cấm túc, Danh 14→0 → KẾT QUẢ. Servant-sent Giá họa loses «chưa rõ — người được sai về sẽ báo».
+2. Acts decided without aRoll show no seal: Tố xa xỉ / Hặc ăn mặc sai phẩm (wdAccuse), Giá họa resolution (wdFrame) → feed f.ok from each ACT[k].f's real decision point + test assert.
+3. Law 11, runners bypassing hooks: j55 tdProbe/tdLeak (NPC→her j55:154/156 no «Ai làm»); j7 event options aimed at a consort (Đổ thêm dầu vào lửa, Thêm một lời buộc tội); j67 e67pun; jemoact Emperor/Thái hậu deeds on her (eaHitMe noi/nghi…); servant mode j42 «Tố cáo <chủ> trước Hoàng hậu» («Người ấy» shows the listener, not the accused).
+4. Law 9: kit page — jkitpage kitPgSeals lacks «BỎ DỞ»; result-card sample (jkitpage.js:70) lacks «Người ấy»/«Ai làm».
+5. kaAimsOf drops aims after 120 s wall-clock (Date.now) → use seq/frame only.
+6. Test passes while its scan prints faults 1–2 → add seal asserts for rolled/decided deeds.
+Then r2 + new stills (incl. a Vu oan via Bày mưu) → «LOOK READY <sha>» to MAIN 156; the same reviewer re-checks.
+
+## r2 status + HANDOVER (OB-VERDICT rolled over at the context limit — successor continues here)
+DONE in r2 (uncommitted → committed with this section): #4 kit page (kitPgSeals adds BỎ DỞ; §7 result-card sample gets «Người ấy» + «Ai làm» rows), #5 kaAimsOf = seq + used only (no Date.now).
+TODO for the successor (worktree recipe: sparse worktree of review/ob-verdict, build `bash dev/site/build_site.sh`, test `node dev/test/ob-verdict.test.js index.html <shots> --json out.json`):
+- #1: reproduce with the reviewer's path (doAct k → «Bày mưu» card → chooseM «Ra tay ngay…» → confirm «Làm như thường»). Look at the jverdict doAct/talk wrappers' `x.used=1` and at kaAimUse (aims with `outer:1` are closed by the wrapper; inner runAct aims are closed by the card). Likely fix: never close an aim in the wrapper while ANY dialog/minigame from that act is pending (Q non-empty OR kg82 open OR deferred jaudit card `__aaRS`); close it only after the card that shows it (kaAimUse) — or tie aims to the act frame id instead of `used`. Keep the servant-sent «chưa rõ — người được sai về sẽ báo».
+- #2: ACT deeds deciding without aRoll: find each ACT[k].f decision (wdAccuse / wdFrame in jdress? grep `function wdAccuse`, `function wdFrame`) and set the frame verdict there through a tiny hook (e.g. wrap those functions in jverdict and read their return/outcome), not by editing J2's logic.
+- #3: add hooks for j55 tdProbe/tdLeak (NPC→her: kaAim(S,{by:a,…})), j7 event options aimed at a consort (chooseM option carrying a target), j67 e67pun, jemoact eaHitMe (Emperor/Thái hậu deeds on her → «Ai làm»), j42 servant-mode «Tố cáo <chủ>» (target = the accused, not the listener).
+- #6: test: assert a seal THÀNH/BẠI on every scanned deed whose log shows a roll outcome (bị lộ / bị bắt / thành …), plus a Vu oan via Bày mưu real-tap still; re-upload stills to img/_review/ob-verdict/.
+- Then LOOK READY <sha> to MAIN CHÍNH 156 session_01V1ZZH4YYLnxnhwuGEx25zf; reviewer RV-OB-VERDICT session_01V1ZZH4KVXLc23oaAiikKLg re-checks.
+Standing orders: target of her own act always real name + title (data-k61skip); seal word stays BẠI; Kèm flood = NEWS-SIEVE-2 (do not touch); J2 owns Bày mưu act logic (hooks only from jverdict).
