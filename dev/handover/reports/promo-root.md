@@ -116,3 +116,16 @@ Tests (worktree, built by dev/site/build_site.sh): dev/test/promo-root.js PASS (
 quickcheck (sha 346da1ae): G4 90-button-crawl FAIL only «Ô lưu · Lui» (pre-existing on LIVE, per brief) · open ok · old save ok · perf gate flips on buổi ms.
 Perf evidence (buổi ms is bimodal ~1.5–2.3 s or ~4.2–6 s on EVERY build; the median of 5 flips by which mode wins): mine 4827/5561/4187 vs live 1913/2216/1820 (runs mine 5065,1641,5030,4187,1954 · live 1649,1820,5411,4653,1674); base e03b8369 2327 vs live 2054 PASS with runs 1494,4513,2230,2327,4886 · live 1755,2054,6028,1452,4844.
 Proof the change is not on the perf path: forgetSafe wrapped with a counter → 0 calls over a new life + 8 months of bot play (it runs only at a lãnh cung exit / palace entry). The 5 code lines are one assignment each. Recommend MAIN treat the buổi flip as gate noise (perfgate bimodal), or rerun quickcheck once.
+
+## PROMO-ROOT2 HANDOVER — «SRVMERIT-FIX r2» (ordered by MAIN 151; scoped, NO code written yet)
+PROMO-ROOT2 rolled at ~START_CTX+25 % right after the forgetSafe delivery. Successor works on review/srvmerit-guard (034b451e, base LIVE 5e013076).
+Read: dev/handover/reports/rv-srvmerit-guard.md (handover branch) FAIL items 1–5; dev/build/jsrvguard.js (branch).
+Sites (branch 034b451e): j2.js:68 `function deal()`; jcoopthinb.js:165 `show(r)` → `CW.fromCanon(C2)` with no deal (used by lifeRes roll :176 and accept :177);
+jcoopthine.js:90 `hand(moved)` deals only on empty deck / moved buổi; jcoopworld begin (~:889) deals only on empty deck; deser paths without the j6 «Tiếp tục» deal.
+Plan (one rule at the source + one gate, all 4 directions: cung nữ↔consort, kc «ở nhà»↔palace):
+1. `lifeKey()` = origin.k + (isSrv()?"srv":"") + (isKc()&&!S.kc.inPal?"kc":"pal") (+ a per-life id if S has one, e.g. born/turn of the new life) — ONE function.
+2. Wrap deal() outermost: after it, `deckLife=lifeKey()` (stamp).
+3. Source: wrap CW.fromCanon and deser: k0=lifeKey() before, if lifeKey()!==k0 after → `deck=[];deal()`; show() goes through fromCanon so the thin-guest accept/roll is covered.
+4. Gate (generalise jsrvguard `stale()`): stale = deckLife!==lifeKey() (legacy decks without a stamp: the srvOnly test, plus «kc card in palace / palace card at home» via the same key). Check it in render() BEFORE the hand shows (deal there), so no tap is ever swallowed; keep act()/runOpt as defence, and if hit there: redeal + render + one kit notice (KIT.md notice part; wording per VANPHONG) — never a silent return.
+5. Tests: extend dev/test/srvmerit-guard.js: 4 directions (deser of another life's sổ with no deal → 0 wrong-life cards before her tap, nothing paid, no throw), the reviewer's probe = «life A hand kept in life B by deser without deal, act each stale card»; + co-op thin-guest new face (coop-e2e harness) hand dealt for the new life on accept.
+6. Re-run alone: coop-e2e, coop-guest-maid / maid-8tabs (= LIVE rows), s8 robot-save replay, quickcheck (G4 «Ô lưu · Lui» pre-existing; perf buổi gate is bimodal noise — see PROMO-ROOT2 above), merge-tree onto lander stack. Send r2 sha to RV-SRVMERIT-GUARD session_01V1ZZH1vbp2tNbrLxfyP4t7 + MAIN 151 session_01V1ZZH32xLDu8LN72LfSaVu.
