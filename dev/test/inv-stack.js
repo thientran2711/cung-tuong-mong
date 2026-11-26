@@ -61,7 +61,7 @@ function s7(){const f=file||process.env.CTM_S7;if(f&&fs.existsSync(f))return {sr
    const v=liveRivals(true).find(x=>x&&!x.coop);const vc0=invCount(v,e=>e.k===k);render();/* a tap = a render (her real pieces out of the stack) */const ix=S.inv.findIndex(e=>e.k===k&&!e.h);const c6=C(k);r.gs=String(giveTo(S,v,ix)).slice(0,120);r.ix=ix;r.v=v.id;r.give=[c6-C(k),invCount(v,e=>e.k===k)-vc0];
    S.buoi=typeof B4L!=='undefined'?B4L:3;const n0=C('alnen0')+C('alnen1')+C('alnen2');const L=alLight(S,'arts');r.burn=[!!L,n0-(C('alnen0')+C('alnen1')+C('alnen2'))];
    render();r.after=S.inv.filter(e=>e.k===k).length;return r});
-  out.unit=u.sellRow&&u.c0-u.c1===1&&u.bac1>0&&u.c1-u.c5===5&&u.give[0]===1&&u.give[1]===1&&u.burn[0]&&u.burn[1]===1;
+  out.unit=u.sellRow&&u.c0-u.c1===1&&u.bac1>0&&u.c1-u.c5===5&&(u.give[0]===1&&u.give[1]===1||/trả lại/.test(u.gs)&&u.give[0]===0&&u.give[1]===0)/* save r6: the receiver may turn the gift down (giveTo «… trả lại …»): then the piece is back in HER stack and she has none (law 6c: never lost) */&&u.burn[0]&&u.burn[1]===1;
   if(!mut)ok(out.unit,`${tag} one unit: sell 1 / sell ×5 / give 1 / burn 1 candle`,u);
   /* (4) a turn: the month's pieces fold, nothing lost */
   const tr=await p.evaluate(()=>{const before=invTotals(S);for(let i=0;i<6;i++)invAdd(S,{k:'tragoi',from:'noivu',d:S.turn});const want=(before.tragoi||0)+6;
