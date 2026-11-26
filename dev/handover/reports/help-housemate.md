@@ -124,3 +124,8 @@ Gates on d007c9ba: help-housemate.test ALL PASS · receiver-choice ALL PASS · o
 coop-e2e: not re-run on an identical tree (143/143 my run on 5ac9c150, 143/0 worker on 41125250 and 3aa87e1b) — the bytes under test are the same.
 Videos re-uploaded (fold-755x1000.webm 3.5 MB, ipad-1180x820.webm 4.4 MB + frames): looked at fold-6-loinho — «Giúp qua loa» ĐƯỢC «được lòng người», MẤT «hao bạc, mất lòng người»; kit card only ✔.
 Open, not this branch: N4 (scan coverage, 8 rcv kinds) and N5 (queen-self «Mách lẻo» gain → FOR MAIN owner question). CDN review folder wiped with this verdict.
+
+## 10. Revert of d007c9ba → head **3aa87e1b** (worker)
+rv FAIL d007c9ba (B2, §9) accepted by Foreman D 15:42Z → `git revert` (no force-push): head **3aa87e1b**, `git diff 41125250 3aa87e1b` = **0 lines** (tree identical to rv PASS 41125250), FF from LIVE aa37de21. N5 (queen-self «Mách lẻo» gain) → open question FOR MAIN (Foreman D).
+coop-e2e on 3aa87e1b: **143 ok / 0 FAIL**. Videos re-uploaded (rv had wiped the folder): img/_review/help-housemate/fold-755x1000.webm, ipad-1180x820.webm + fold-/ipad- 2-talk, 6-loinho, 7-answered .jpg (recorded on the 41125250 build = this tree).
+Gates on this tree (41125250): help-housemate.test ALL PASS · receiver-choice ALL PASS · one-core ×3 PASS · rcv-hint-scan PASS (1 OPEN = N5) · quickcheck (5ac9c150 build; jrcv text only since): play PASS, only known LIVE core faults.
