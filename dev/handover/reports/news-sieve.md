@@ -224,3 +224,43 @@ big harms are kept longest, so «ai rạch mặt ai» survives, but small histor
 lines from the record. (b) names in the monthly summary have no rank title where the Tin báo line has one («Phùng Nghê Thường» vs «Phi Phùng Nghê
 Thường») — knowWho vs kit name chip, pre-existing style.
 VERDICT: PASS review/news-sieve-rv 82eb2832 (ancestor = LIVE 3af7896e).
+
+---
+
+# NEWS-SIEVE-3 — report (worker session_01V1ZZH2nSD6EWY5T3AdDk7A, successor of NEWS-SIEVE-2, coordinator MAIN CHÍNH 157)
+
+PRIORITY #1 CHECK: OD 26/11 ~06:50Z (B) ONE SIEVE + news-sieve rows | main 3af7896e j63 kitWhy (kaWhyCl / kaWhyLead / kaWhyStat / kaWhyKem), j9 runAct confessRisk,
+j3 logChoice + jlogsync lsRest | review/ob-verdict 129a9c51 (kaAim verdict, same result card — coordinated, see below) | review/news-sieve-rv 82eb2832 (RV PASS) | claims NEWS-SIEVE-2 → me.
+
+## (1) RV-NEWS-SIEVE-2: PASS review/news-sieve-rv 82eb2832 (LIVE merge + 3 reviewer fixes) — no faults left to take. Merged into review/news-sieve (c701b06f), rebuilt.
+
+## (2) KAWHY-VERDICT (law 11) — «vì sao» rows match the verdict
+Owner card: THÀNH «Vu oan», «Được: Danh +3 · kẻ được ta sai đi bị bắt, khai ra chủ». Reproduced on LIVE by real taps (person card → Bày mưu → «Ra tay ngay: vu oan», sent servant confesses).
+ROOT CAUSE: a deed run from a dialog option is folded by j3 logChoice into ONE line; the lines were joined with " " and the «Tâm cơ 50 → 52, Danh 8 → 11» summary
+(lsRest) glued after «… khai ra chủ: X nắm thêm 1 chứng cứ. (sai người đi)» — no full stop, so kaWhyCl kept one clause, and kaWhyStat gave the Danh / Tâm cơ / Bạc rows
+the lead of that clause «kẻ được ngươi sai đi bị bắt, khai ra chủ».
+FIX (family):
+- j3 logChoice: every folded line ends its sentence (adds «.» when it does not end in . ! ? … » ” ") — the summary is its own sentence.
+- j9 runAct: the confess side roll sentence is flagged EXPLICITLY (`<span class="kwside">`); j63 kaWhyCl collects flagged clauses (out.side) and also splits a sentence after «)»
+  (old saves' glued lines); kaWhyLead(c,i,C) never takes a side clause as a cause (its own loss is the target's chứng cứ, not her numbers).
+- j63 kaResultRows(before,title,ok): resultShow passes its verdict (okHint); on THÀNH a lead matching KA_WHYFAIL (bị bắt, bị lộ, phát giác, khai ra, không thành, chặn kịp,
+  từ chối, thoái thác, thất bại, hỏng …) is dropped; on BẠI a lead matching KA_WHYWIN (thành công, việc thành, mưu thành, tìm thấy …). No verdict (KẾT QUẢ / night) → only the
+  side flag + split apply. jne kitNightEnd / jselxday unchanged (no verdict there on this branch).
+BEFORE / AFTER (scan: 53 deeds × direct / via dialog choice × THÀNH / BẠI × confess roll on / off × sent / present = 530 cases; gated deeds forced so their sentences are read):
+| deed (THÀNH, sent, confess, via Bày mưu) | LIVE 3af7896e | review/news-sieve d6e27b01 |
+|---|---|---|
+| frame (Vu oan) | Danh +3 · kẻ được ngươi sai đi bị bắt, khai ra chủ ; Tâm cơ +2 · (same) | Danh +3 ; Tâm cơ +2 (no reason) |
+| poison, block, musk, catswap, lygian, slowpoison, huydung, giahoa, rash, laydo, thathu, phonghoa | Bạc −N · kẻ được ngươi sai đi bị bắt, khai ra chủ | Bạc −N (no reason) |
+| uyhiep, batnat | Được: Bạc +N · kẻ được ngươi sai đi bị bắt, khai ra chủ | Bạc +N |
+| all 530 cases: reason against the verdict | 15 deeds (THÀNH rows with a failure reason) | 0 |
+TEST: `node dev/test/kawhy-verdict.test.js index.html <shots>` — LIVE: FAIL 7/25 (2 real-tap + scan + 4 synthetic); this branch: PASS 25/25 (also after the RV merge).
+news-sieve.test.js 36 tuần seed 1: PASS 10/10 after the merge. result-reason.js (old «every line has a why» rule) FAILs identically on LIVE and here — stale vs owner 24/11 ~21:57Z, not touched.
+SHOTS (looked, Fold 755x1000 + iPad 1180x820, before = LIVE, after = this branch): CDN img/_review/news-sieve/kawhy-{before,after}-{fold-755x1000,ipad-1180x820}.png.
+COORDINATION: OB-VERDICT-2 told (same card): its resultShow takes the verdict from kaAim — when the two branches meet, pass that final verdict as kaResultRows' 3rd arg
+(and the kne verdict in kitNightEnd); whoever lands second resolves that one line. On this branch the Bày mưu card seal is «KẾT QUẢ» (ob-verdict gives THÀNH).
+QUICKCHECK d6e27b01 vs LIVE 3af7896e: open 0 errors · OLD SAVE PASS (loads, plays a buổi) · TIME-SPILL PASS · G4 80-dialog-fixed (a) empty Tốn/Được 2 FAIL and
+G4 90-button-crawl «Ô lưu · Lui» 1 FAIL = the same as LIVE (RV-NEWS-SIEVE-2 ran LIVE: identical; K-FREE-OPT / crawl owner) · G4 92-look-dedupe FAIL 1 inside quickcheck
+(box under load) but `node dev/test/look-dedupe.js index.html` PASS 16/16 three runs standalone → flaky, not this change.
+HANDOVER: nothing left on KAWHY-VERDICT. Open for MAIN: the OB-VERDICT merge line above (kaResultRows 3rd arg); stale result-reason.js gate (old rule) for its owner.
+
+## LAND READY review/news-sieve d6e27b01 (NEWS-SIEVE-3: RV PASS 82eb2832 + KAWHY-VERDICT; fast-forward of LIVE 3af7896e)
