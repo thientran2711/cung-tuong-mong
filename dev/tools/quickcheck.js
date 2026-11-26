@@ -101,14 +101,14 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
  /* 2. old save -> new build */
  if(OLD&&fs.existsSync(OLD))try{const t=Date.now();const {ctx,p,errs}=await page(b,'fold');
   await fetch(srv.url+'__ver/old');let g=await within(150e3,open(p,srv.url),'old build open');
-  const name=await g.evaluate(NEWLIFE);await within(60e3,g.waitForFunction(SETTLE,null,{polling:150}),'old build first turn');
+  const name0=await g.evaluate(NEWLIFE);/* LC20 qc-daylife: a tú nữ life plays her 3 selection days first (or ends in ban hoa) — the same settleNew as perf (SETTLE_MS, ban hoa reroll); the bare waitForFunction had Playwright's 30 s default and FAILED «Timeout 30000ms» on LIVE-vs-LIVE */await settleNew(g,'old build first turn');const name=await g.evaluate(()=>S.name)||name0;
   const b1=await within(60e3,g.evaluate(BUOI),'old build buổi');
   const saved=await g.evaluate(()=>{try{localStorage.setItem(SK(3),JSON.stringify(ser()));return {ok:true,name:S.name}}catch(e){return {ok:false,err:e.message}}});
   const oldErr=await errsOf(g,errs);errs.length=0;
   await fetch(srv.url+'__ver/new');g=await within(150e3,open(p,srv.url),'new build open (old save)');await g.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:60000});/* real condition (game script ran to its end), was a 1.5 s timer before loadSlot (review r1) */
   const ld=await g.evaluate(()=>{try{const d=loadSlot(3);if(!d)return{ok:false,err:'NO SAVE'};SLOT=3;document.getElementById('title').hidden=true;deser(d);try{deal()}catch(e){}
    ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});render();return{ok:true,name:S.name}}catch(e){return{ok:false,err:e.message}}});
-  let b2=null;if(ld.ok){await within(60e3,g.waitForFunction(SETTLE,null,{polling:150}),'old save first turn');b2=await within(60e3,g.evaluate(BUOI),'old save buổi')}
+  let b2=null;if(ld.ok){await within(SETTLE_MS,g.waitForFunction(SETTLE,null,{polling:150,timeout:SETTLE_MS}),'old save first turn');b2=await within(60e3,g.evaluate(BUOI),'old save buổi')}
   const e=await errsOf(g,errs);R.steps.old={ms:Date.now()-t,name,oldBuoi:b1,saved,load:ld,newBuoi:b2,oldBuildErrors:oldErr.slice(0,3),errors:e.slice(0,5)};
   log('old save',JSON.stringify({load:ld,buoi:b2&&b2.moved,errors:e.length}));
   if(!ld.ok)fail('old',ld.err);else if(ld.name!==saved.name)fail('old','name changed '+saved.name+' -> '+ld.name);
