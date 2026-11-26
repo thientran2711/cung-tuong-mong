@@ -1,0 +1,2591 @@
+{
+ "job": {
+  "id": "ES2-R2-speed-5",
+  "origin": "thd",
+  "road": "thd_tro",
+  "bot": "bold",
+  "seed": 2807544935,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "08a4ff8b",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 159,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Thân phận kiếp này"
+   }
+  ],
+  "slice": null,
+  "build": {
+   "s": "6b5d3d05+",
+   "b": "b7dcbbd06e03",
+   "t": "2026-11-26T06:59Z"
+  },
+  "areaTaps": 107,
+  "dlgScroll": 34,
+  "scrolls": 54,
+  "dlgClose": 114,
+  "nextNoTurn": 21,
+  "infoTaps": 130,
+  "mgDragSkip": 1,
+  "kfocVisits": 5,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-26T11:56:42.669Z",
+    "buoi": 67,
+    "from": "2026-11-26T11:56:04.472Z"
+   },
+   {
+    "at": "2026-11-26T13:08:14.374Z",
+    "buoi": 172,
+    "from": "2026-11-26T12:16:29.619Z"
+   }
+  ],
+  "mgQuickSkipped": 4,
+  "mgReady": 4,
+  "mgMiss": 7,
+  "mgPeekTaps": 32,
+  "boardTaps": 32,
+  "mgBackWhy": [
+   {
+    "at": 795,
+    "buoi": 126,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   },
+   {
+    "at": 181,
+    "buoi": 184,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   },
+   {
+    "at": 413,
+    "buoi": 203,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   },
+   {
+    "at": 1174,
+    "buoi": 281,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   }
+  ],
+  "crashes": 1,
+  "taps": 679
+ },
+ "life": {
+  "id": "Nữ phu tử",
+  "type": "death",
+  "fate": "Nữ phu tử",
+  "death": true,
+  "age": 20,
+  "year": 3,
+  "rank": 0,
+  "text": "Nàng không lấy chồng. Lớp học của nàng ở ngõ Tây có ba mươi đứa con gái nhà nghèo. (Tiểu thư ngoài cung · Tiểu thư nhà thầy đồ)",
+  "card": [
+   "Gả cho Thám hoa khoa này Rất vững TỐN không ĐƯỢC xuất giá, k",
+   "Xin ở vậy, mở lớp dạy chữ cho con gái Rất vững TỐN không ĐƯỢ",
+   "Cắt tóc đi tu Rất vững TỐN không ĐƯỢC xuất gia, kiếp này dừn"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc23Sức100/100»",
+   ".dlg «Bạc» «Lui»",
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»",
+   ".kmov «Vào điện»",
+   ".dlg «Phúc tuyển» «Dâng KỳRất vữngTốnSức -10Đượctài nghệ dâng lên cộn»",
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+   "BOARD #kg82 5 moves",
+   "#kg82 «Quay lại»",
+   ".kpod «Tiếp»",
+   ".dlg «Tỉnh thân» «Lui»",
+   ".dlg «Điện tuyển» «Đối đáp lanh lợiRất vữngTốnkhôngĐượcTài nặng hơn; »",
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiRất vữngTốnkh»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "crash|tab crashed (Page crashed) at buổi 172",
+   "type": "crash",
+   "msg": "tab crashed (Page crashed) at buổi 172",
+   "n": 1,
+   "at": 1188,
+   "freeMB": 4367,
+   "totalMB": 16087,
+   "load": 22.41
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 317659,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 67,
+   "year": null,
+   "chars": 346482,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 117,
+   "year": 1,
+   "chars": 401062,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 167,
+   "year": 2,
+   "chars": 439611,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 172,
+   "year": null,
+   "chars": 439284,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 222,
+   "year": 2,
+   "chars": 489979,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 272,
+   "year": 3,
+   "chars": 530278,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 281,
+ "steps": 3569,
+ "status": [],
+ "_loopAt": 1795699674646,
+ "_snapAt": 1795699668141,
+ "trace": [
+  [
+   558,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   560,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «lá phong rơi»"
+  ],
+  [
+   562,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Về phòng»"
+  ],
+  [
+   563,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   565,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Chọn chính mình»"
+  ],
+  [
+   565,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hậu cung»"
+  ],
+  [
+   566,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tư trang»"
+  ],
+  [
+   567,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   569,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   569,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   569,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   569,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   570,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   573,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   574,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   577,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   578,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Chọn chính mình»"
+  ],
+  [
+   578,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   580,
+   ".dlg «Cha say rượu» «Thưa: con muốn vào cung, làm rạng danh nhàRất vững»"
+  ],
+  [
+   588,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hậu cung»"
+  ],
+  [
+   588,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Gia thế 0/1»"
+  ],
+  [
+   588,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   588,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   591,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   595,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   597,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Người nhà 0/24»"
+  ],
+  [
+   597,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Nhũ mẫu»"
+  ],
+  [
+   598,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương»"
+  ],
+  [
+   598,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Giữ lòng cha mẹTốnkhôngĐượctới Hậu cung › »"
+  ],
+  [
+   605,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   607,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   608,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   608,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   611,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   612,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tư trang»"
+  ],
+  [
+   613,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tư trang»"
+  ],
+  [
+   614,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   616,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Lễ vật 1»"
+  ],
+  [
+   616,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   616,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   618,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   619,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Thuốc men 0»"
+  ],
+  [
+   620,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Việc»"
+  ],
+  [
+   620,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   622,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Đi lạiĐi lạiSoát đồMong manhTốn2 khắcThànhtìm ra đ»"
+  ],
+  [
+   632,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+  ],
+  [
+   637,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   638,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   639,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   639,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   639,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   643,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Lịch tháng»"
+  ],
+  [
+   643,
+   ".dlg «Lịch tháng» «mồng 8»"
+  ],
+  [
+   644,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   644,
+   ".dlg «Lịch tháng» «ngày 17: Nguyệt tín»"
+  ],
+  [
+   644,
+   ".dlg «Lịch tháng» «Thánh thọ Thái hậu»"
+  ],
+  [
+   647,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   648,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+  ],
+  [
+   658,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+  ],
+  [
+   662,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungCó cơTốnkhôngĐư»"
+  ],
+  [
+   663,
+   ".dlg «Phiên vương nhập triều» «Báo cho nội giám để rănTốnkhôngĐượcSủng +3MấtTần V»"
+  ],
+  [
+   666,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+  ],
+  [
+   675,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc29Sức100/100»"
+  ],
+  [
+   676,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   677,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc29Sức100/100»"
+  ],
+  [
+   677,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   679,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   681,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị »"
+  ],
+  [
+   685,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   687,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo: 10 tin mới»"
+  ],
+  [
+   687,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   690,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   690,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Mục tiêu»"
+  ],
+  [
+   690,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Mục tiêu»"
+  ],
+  [
+   691,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Thiên mệnh»"
+  ],
+  [
+   691,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   691,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Danh hiệu 0/35»"
+  ],
+  [
+   692,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   692,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   692,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   693,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   693,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Lui»"
+  ],
+  [
+   697,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Dư đồ»"
+  ],
+  [
+   698,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   700,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   700,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   701,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   701,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   702,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   705,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Về phòng»"
+  ],
+  [
+   706,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   708,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Lạc MaiRất »"
+  ],
+  [
+   709,
+   ".dlg «Phiên vương nhập triều» «Lui»"
+  ],
+  [
+   712,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tư trang»"
+  ],
+  [
+   713,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Thú cưng»"
+  ],
+  [
+   713,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo: 2 tin mới»"
+  ],
+  [
+   713,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   716,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   718,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Lịch tháng»"
+  ],
+  [
+   718,
+   ".dlg «Lịch tháng» «Tháng sau»"
+  ],
+  [
+   719,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   719,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   719,
+   ".dlg «Lịch tháng» «ngày 16: Nguyệt tín»"
+  ],
+  [
+   719,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   721,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sắc38Tài51Tâm cơ25Đức42Danh5Gia thanh31»"
+  ],
+  [
+   722,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   723,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mệnh truyện»"
+  ],
+  [
+   724,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   727,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   729,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   729,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   729,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   730,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   737,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Dư đồ»"
+  ],
+  [
+   738,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   740,
+   ".dlg «Hộp phấn lạ» «Nhờ đại phu xem thửRất vữngTốnBạc -10Đượccó thể tì»"
+  ],
+  [
+   742,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Phủ thế giaoTốn1 khắcGhi chúngười ở đây: khuê hữu »"
+  ],
+  [
+   744,
+   "page «Phủ thế giao · Ở đây còn 2 người.» «Giao tình»"
+  ],
+  [
+   746,
+   "page «Phủ thế giao · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   748,
+   "page «Phủ thế giao · Ở đây còn 2 người.» «Sắc38Tài51Tâm cơ25Đức42Danh5Gia thanh31»"
+  ],
+  [
+   748,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   750,
+   "page «Phủ thế giao · Ở đây còn 2 người.» «Mục tiêu chương»"
+  ],
+  [
+   751,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Thiên mệnh»"
+  ],
+  [
+   751,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   751,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Danh hiệu 0/35»"
+  ],
+  [
+   752,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   752,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Thiên mệnh»"
+  ],
+  [
+   752,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   753,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   753,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   757,
+   "page «Phủ thế giao · Ở đây còn 2 người.» «Mệnh truyện»"
+  ],
+  [
+   758,
+   "page «Phủ thế giao · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   760,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   762,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   762,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   763,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   763,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   763,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   768,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   768,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Giữ lòng cha mẹTốnkhôngĐượctới Hậu cung › »"
+  ],
+  [
+   775,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Kế mẫu»"
+  ],
+  [
+   776,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   778,
+   ".dlg «Mượn y phục» «Cho mượn bộ khác, giữ bộ đẹpRất vữngTốnkhôngĐượcgi»"
+  ],
+  [
+   786,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Về Dư đồ»"
+  ],
+  [
+   786,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xem bản đồGhi chúKinh thành»"
+  ],
+  [
+   786,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   787,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   789,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   791,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo: 13 tin mới»"
+  ],
+  [
+   791,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   798,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   808,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «1Cung nhân»"
+  ],
+  [
+   808,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương»"
+  ],
+  [
+   809,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   812,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Về phòng»"
+  ],
+  [
+   813,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   816,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   816,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   816,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   817,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   817,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   821,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tuyển túcòn 3 tháng»"
+  ],
+  [
+   822,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sắc38Tài51Tâm cơ26Đức42Danh5Gia thanh31»"
+  ],
+  [
+   822,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   824,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tuyển túcòn 3 tháng»"
+  ],
+  [
+   824,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   826,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàRất vữngTốnSức -15ĐượcĐức »"
+  ],
+  [
+   834,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   834,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   834,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo: 2 tin mới»"
+  ],
+  [
+   835,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   843,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   845,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Danh sách»"
+  ],
+  [
+   845,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   845,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc28Sức85/100»"
+  ],
+  [
+   846,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   850,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tài nghệ»"
+  ],
+  [
+   851,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tư trang»"
+  ],
+  [
+   852,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   852,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   854,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   856,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   857,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   859,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   859,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   859,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   863,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tuyển túcòn 3 tháng»"
+  ],
+  [
+   864,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   873,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   873,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   874,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «1Cung nhân»"
+  ],
+  [
+   874,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   876,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   878,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương»"
+  ],
+  [
+   879,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Thiên mệnh»"
+  ],
+  [
+   879,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   879,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   880,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   880,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   880,
+   ".dlg «Thiên mệnh» «Lui»"
+  ],
+  [
+   888,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tuyển túcòn 3 tháng»"
+  ],
+  [
+   888,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   889,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   891,
+   ".dlg «Có người bán tin» «Không muaGhi chúkhông biết tin ấy!»"
+  ],
+  [
+   898,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Dư đồ»"
+  ],
+  [
+   899,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Kinh thành 21»"
+  ],
+  [
+   899,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   899,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   901,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   906,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   906,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   907,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   907,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   907,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   911,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Nhà bà TưTốn1 khắcGhi chúkhông gặp ai»"
+  ],
+  [
+   911,
+   "page «Nhà bà Tư · Không gặp ai.» «Bạc37Sức100/100»"
+  ],
+  [
+   912,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   913,
+   "page «Nhà bà Tư · Không gặp ai.» «Dư đồ»"
+  ],
+  [
+   914,
+   "page «Nhà bà Tư · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   916,
+   ".dlg «Cha say rượu» «Thưa: con muốn vào cung, làm rạng danh nhàRất vững»"
+  ],
+  [
+   924,
+   "page «Nhà bà Tư · Không gặp ai.» «tuyết nhẹ»"
+  ],
+  [
+   926,
+   "page «Nhà bà Tư · Không gặp ai.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   927,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   927,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   927,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Thiên mệnh»"
+  ],
+  [
+   928,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   928,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   928,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   929,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Danh hiệu 0/35»"
+  ],
+  [
+   929,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   929,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   929,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   930,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   937,
+   "page «Nhà bà Tư · Không gặp ai.» «1Cung nhân»"
+  ],
+  [
+   938,
+   "page «Nhà bà Tư · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   940,
+   "page «Nhà bà Tư · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   944,
+   "page «Nhà bà Tư · Không gặp ai.» «Tuyển túcòn 2 tháng»"
+  ],
+  [
+   944,
+   "page «Nhà bà Tư · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   946,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Lịch tháng»"
+  ],
+  [
+   947,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   947,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   947,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   947,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   948,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   949,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo: 9 tin mới»"
+  ],
+  [
+   950,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   952,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Giao tình»"
+  ],
+  [
+   954,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   956,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   956,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   956,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   957,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   957,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   964,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương»"
+  ],
+  [
+   965,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   965,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   965,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   965,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   966,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Danh hiệu 0/35»"
+  ],
+  [
+   966,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   966,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   967,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   967,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   975,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   977,
+   ".dlg «Dịch trong kinh thành» «Vẫn đi lại như thườngRất vữngTốnkhôngĐượcdễ nhiễm »"
+  ],
+  [
+   984,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   985,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo»"
+  ],
+  [
+   985,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   988,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sắc38Tài51Tâm cơ26Đức44Danh6Gia thanh31»"
+  ],
+  [
+   988,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   990,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   992,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   992,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   994,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Thư phườngTốn1 khắcGhi chúkhông gặp ai»"
+  ],
+  [
+   994,
+   "page «Thư phường · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   994,
+   "page «Thư phường · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   996,
+   "page «Thư phường · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   998,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «đêm u ám»"
+  ],
+  [
+   1001,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1003,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1003,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1004,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1004,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1004,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1008,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Chọn chính mình»"
+  ],
+  [
+   1008,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo: 1 tin mới»"
+  ],
+  [
+   1009,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1010,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1012,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   1013,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   1014,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «mai nở trong tuyết»"
+  ],
+  [
+   1017,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «mai nở trong tuyết»"
+  ],
+  [
+   1019,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1021,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   1022,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Giao tình»"
+  ],
+  [
+   1022,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   1023,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1024,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   1025,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo»"
+  ],
+  [
+   1025,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   1033,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Dư đồ»"
+  ],
+  [
+   1034,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1036,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1037,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1037,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1037,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1038,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1042,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Trà lâuTốn1 khắcGhi chúngười ở đây: người ấy»"
+  ],
+  [
+   1044,
+   "page «Trà lâu · Ở đây còn 1 người.» «Tuyển túđã qua Sơ tuyển»"
+  ],
+  [
+   1044,
+   "page «Trà lâu · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   1044,
+   "page «Trà lâu · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   1048,
+   "page «Trà lâu · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   1050,
+   ".dlg «Hộp phấn lạ» «Thử một chút lên cổ tayRất vữngTốnSức -10Đượcbiết »"
+  ],
+  [
+   1051,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy »"
+  ],
+  [
+   1058,
+   "page «Trà lâu · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   1059,
+   "page «Trà lâu · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   1061,
+   "page «Trà lâu · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1063,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tâm trạngBình thản+2»"
+  ],
+  [
+   1063,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1065,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1067,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1067,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1067,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1068,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1068,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1070,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1074,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   1074,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   1075,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Thiên mệnh»"
+  ],
+  [
+   1075,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   1076,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   1079,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «trời quang»"
+  ],
+  [
+   1082,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Vũ sư»"
+  ],
+  [
+   1083,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1085,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   1085,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc46Sức97/100»"
+  ],
+  [
+   1085,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1087,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   1088,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   1090,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tin báo: 6 tin mới»"
+  ],
+  [
+   1091,
+   ".dlg «Tin báo» «Để ta xem»"
+  ],
+  [
+   1093,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Trong phủ 20Kinh thành 21ⓘ Ra phố cần tỳ nữ đi cùn»"
+  ],
+  [
+   1093,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1095,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc46Sức97/100»"
+  ],
+  [
+   1096,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1097,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tâm trạngBình thản+2»"
+  ],
+  [
+   1098,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1100,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mệnh truyện»"
+  ],
+  [
+   1101,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1103,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1103,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1103,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1104,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1104,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1111,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   1112,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hoàng tự»"
+  ],
+  [
+   1112,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Chọn chính mình»"
+  ],
+  [
+   1112,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1114,
+   ".dlg «Tỉnh thân» «Nhận quà nhà gửi vàoTốnkhôngĐượcBạc +8»"
+  ],
+  [
+   1116,
+   ".dlg «Tỉnh thân» «Chào mẹ nàng ta, mời sang cung ngồiTốnBạc -40·Sức »"
+  ],
+  [
+   1123,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tài nghệ»"
+  ],
+  [
+   1124,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Chọn chính mình»"
+  ],
+  [
+   1124,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Lịch tháng»"
+  ],
+  [
+   1125,
+   ".dlg «Lịch tháng» «Tháng sau»"
+  ],
+  [
+   1125,
+   ".dlg «Lịch tháng» «mồng 4»"
+  ],
+  [
+   1125,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   1126,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1126,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   1132,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1135,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc14Sức92/100»"
+  ],
+  [
+   1137,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1141,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Mục tiêu chương»"
+  ],
+  [
+   1142,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Mục tiêu»"
+  ],
+  [
+   1142,
+   ".dlg «Chương 1 · Chờ kỳ tuyển tú» «Đi làm: Giữ danh tiếng trong sạchTốnkhôngĐượctới D»"
+  ],
+  [
+   1145,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tâm trạngBình thản+9»"
+  ],
+  [
+   1145,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1147,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1149,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «3Chí tôn»"
+  ],
+  [
+   1149,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Hành sự»"
+  ],
+  [
+   1149,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Tâm trạngBình thản+4»"
+  ],
+  [
+   1150,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1151,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   1153,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1154,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1155,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1155,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1155,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1159,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sắc38Tài51Tâm cơ27Đức44Danh9Gia thanh31»"
+  ],
+  [
+   1159,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   1161,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Bạc23Sức100/100»"
+  ],
+  [
+   1161,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1163,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1165,
+   ".kmov «Vào điện»"
+  ],
+  [
+   1167,
+   ".dlg «Phúc tuyển» «Dâng KỳRất vữngTốnSức -10Đượctài nghệ dâng lên cộn»"
+  ],
+  [
+   1168,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   1174,
+   "BOARD #kg82 5 moves"
+  ],
+  [
+   1174,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1176,
+   ".kpod «Tiếp»"
+  ],
+  [
+   1177,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   1179,
+   ".dlg «Điện tuyển» «Đối đáp lanh lợiRất vữngTốnkhôngĐượcTài nặng hơn; »"
+  ],
+  [
+   1180,
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiRất vữngTốnkh»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795699629357,
+ "_ckB": 278,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1419,
+   "rendererMB": 687,
+   "heapMB": 117,
+   "dom": 3174,
+   "q": 4,
+   "lsK": 4
+  },
+  {
+   "buoi": 2,
+   "y": 1,
+   "totalMB": 1499,
+   "rendererMB": 875,
+   "heapMB": 117,
+   "dom": 850,
+   "q": 0,
+   "lsK": 128
+  },
+  {
+   "buoi": 7,
+   "y": 1,
+   "totalMB": 1635,
+   "rendererMB": 1060,
+   "heapMB": 117,
+   "dom": 841,
+   "q": 0,
+   "lsK": 184
+  },
+  {
+   "buoi": 12,
+   "y": 1,
+   "totalMB": 1749,
+   "rendererMB": 1125,
+   "heapMB": 117,
+   "dom": 967,
+   "q": 0,
+   "lsK": 236
+  },
+  {
+   "buoi": 17,
+   "y": 1,
+   "totalMB": 1970,
+   "rendererMB": 1292,
+   "heapMB": 117,
+   "dom": 1167,
+   "q": 2,
+   "lsK": 276
+  },
+  {
+   "buoi": 22,
+   "y": 1,
+   "totalMB": 1855,
+   "rendererMB": 1240,
+   "heapMB": 117,
+   "dom": 899,
+   "q": 0,
+   "lsK": 289
+  },
+  {
+   "buoi": 27,
+   "y": 1,
+   "totalMB": 1815,
+   "rendererMB": 1214,
+   "heapMB": 117,
+   "dom": 862,
+   "q": 0,
+   "lsK": 316
+  },
+  {
+   "buoi": 32,
+   "y": 1,
+   "totalMB": 1905,
+   "rendererMB": 1268,
+   "heapMB": 117,
+   "dom": 1006,
+   "q": 0,
+   "lsK": 329
+  },
+  {
+   "buoi": 37,
+   "y": 1,
+   "totalMB": 2053,
+   "rendererMB": 1350,
+   "heapMB": 117,
+   "dom": 1119,
+   "q": 0,
+   "lsK": 348
+  },
+  {
+   "buoi": 42,
+   "y": 1,
+   "totalMB": 1961,
+   "rendererMB": 1279,
+   "heapMB": 117,
+   "dom": 956,
+   "q": 2,
+   "lsK": 359
+  },
+  {
+   "buoi": 47,
+   "y": 1,
+   "totalMB": 2001,
+   "rendererMB": 1328,
+   "heapMB": 117,
+   "dom": 954,
+   "q": 0,
+   "lsK": 356
+  },
+  {
+   "buoi": 52,
+   "y": 1,
+   "totalMB": 1785,
+   "rendererMB": 1103,
+   "heapMB": 117,
+   "dom": 971,
+   "q": 0,
+   "lsK": 389
+  },
+  {
+   "buoi": 57,
+   "y": 1,
+   "totalMB": 2021,
+   "rendererMB": 1324,
+   "heapMB": 117,
+   "dom": 1074,
+   "q": 0,
+   "lsK": 380
+  },
+  {
+   "buoi": 62,
+   "y": 1,
+   "totalMB": 1908,
+   "rendererMB": 1278,
+   "heapMB": 117,
+   "dom": 943,
+   "q": 2,
+   "lsK": 379
+  },
+  {
+   "buoi": 67,
+   "y": 1,
+   "totalMB": 2000,
+   "rendererMB": 1330,
+   "heapMB": 117,
+   "dom": 921,
+   "q": 0,
+   "lsK": 402
+  },
+  {
+   "buoi": 72,
+   "y": 1,
+   "totalMB": 1473,
+   "rendererMB": 801,
+   "heapMB": 111,
+   "dom": 993,
+   "q": 0,
+   "lsK": 399
+  },
+  {
+   "buoi": 77,
+   "y": 1,
+   "totalMB": 1411,
+   "rendererMB": 743,
+   "heapMB": 111,
+   "dom": 882,
+   "q": 0,
+   "lsK": 437
+  },
+  {
+   "buoi": 82,
+   "y": 1,
+   "totalMB": 1648,
+   "rendererMB": 942,
+   "heapMB": 111,
+   "dom": 2395,
+   "q": 1,
+   "lsK": 439
+  },
+  {
+   "buoi": 87,
+   "y": 1,
+   "totalMB": 1653,
+   "rendererMB": 1078,
+   "heapMB": 111,
+   "dom": 1052,
+   "q": 1,
+   "lsK": 421
+  },
+  {
+   "buoi": 92,
+   "y": 1,
+   "totalMB": 1519,
+   "rendererMB": 1073,
+   "heapMB": 111,
+   "dom": 878,
+   "q": 0,
+   "lsK": 425
+  },
+  {
+   "buoi": 97,
+   "y": 1,
+   "totalMB": 1516,
+   "rendererMB": 1124,
+   "heapMB": 111,
+   "dom": 1015,
+   "q": 0,
+   "lsK": 437
+  },
+  {
+   "buoi": 102,
+   "y": 1,
+   "totalMB": 1694,
+   "rendererMB": 1223,
+   "heapMB": 111,
+   "dom": 1792,
+   "q": 0,
+   "lsK": 446
+  },
+  {
+   "buoi": 107,
+   "y": 1,
+   "totalMB": 1642,
+   "rendererMB": 1179,
+   "heapMB": 111,
+   "dom": 1038,
+   "q": 1,
+   "lsK": 437
+  },
+  {
+   "buoi": 112,
+   "y": 1,
+   "totalMB": 1652,
+   "rendererMB": 1188,
+   "heapMB": 111,
+   "dom": 944,
+   "q": 0,
+   "lsK": 462
+  },
+  {
+   "buoi": 117,
+   "y": 1,
+   "totalMB": 1782,
+   "rendererMB": 1306,
+   "heapMB": 111,
+   "dom": 901,
+   "q": 1,
+   "lsK": 468
+  },
+  {
+   "buoi": 122,
+   "y": 2,
+   "totalMB": 1867,
+   "rendererMB": 1379,
+   "heapMB": 111,
+   "dom": 915,
+   "q": 0,
+   "lsK": 479
+  },
+  {
+   "buoi": 127,
+   "y": 2,
+   "totalMB": 1675,
+   "rendererMB": 1304,
+   "heapMB": 111,
+   "dom": 842,
+   "q": 0,
+   "lsK": 475
+  },
+  {
+   "buoi": 132,
+   "y": 2,
+   "totalMB": 1809,
+   "rendererMB": 1401,
+   "heapMB": 111,
+   "dom": 1384,
+   "q": 0,
+   "lsK": 489
+  },
+  {
+   "buoi": 137,
+   "y": 2,
+   "totalMB": 1872,
+   "rendererMB": 1418,
+   "heapMB": 111,
+   "dom": 717,
+   "q": 2,
+   "lsK": 497
+  },
+  {
+   "buoi": 142,
+   "y": 2,
+   "totalMB": 1910,
+   "rendererMB": 1448,
+   "heapMB": 111,
+   "dom": 1422,
+   "q": 0,
+   "lsK": 495
+  },
+  {
+   "buoi": 147,
+   "y": 2,
+   "totalMB": 1930,
+   "rendererMB": 1456,
+   "heapMB": 111,
+   "dom": 1001,
+   "q": 1,
+   "lsK": 494
+  },
+  {
+   "buoi": 152,
+   "y": 2,
+   "totalMB": 1964,
+   "rendererMB": 1480,
+   "heapMB": 111,
+   "dom": 2163,
+   "q": 0,
+   "lsK": 507
+  },
+  {
+   "buoi": 157,
+   "y": 2,
+   "totalMB": 1963,
+   "rendererMB": 1484,
+   "heapMB": 111,
+   "dom": 1159,
+   "q": 0,
+   "lsK": 511
+  },
+  {
+   "buoi": 162,
+   "y": 2,
+   "totalMB": 2083,
+   "rendererMB": 1571,
+   "heapMB": 111,
+   "dom": 2033,
+   "q": 2,
+   "lsK": 522
+  },
+  {
+   "buoi": 167,
+   "y": 2,
+   "totalMB": 2020,
+   "rendererMB": 1580,
+   "heapMB": 111,
+   "dom": 1356,
+   "q": 2,
+   "lsK": 516
+  },
+  {
+   "buoi": 172,
+   "y": 2,
+   "totalMB": 2033,
+   "rendererMB": 1605,
+   "heapMB": 111,
+   "dom": 1764,
+   "q": 1,
+   "lsK": 517
+  },
+  {
+   "buoi": 173,
+   "y": 2,
+   "totalMB": 1597,
+   "rendererMB": 927,
+   "heapMB": 273,
+   "dom": 805,
+   "q": 0,
+   "lsK": 518
+  },
+  {
+   "buoi": 178,
+   "y": 2,
+   "totalMB": 1699,
+   "rendererMB": 989,
+   "heapMB": 273,
+   "dom": 1354,
+   "q": 0,
+   "lsK": 528
+  },
+  {
+   "buoi": 183,
+   "y": 2,
+   "totalMB": 1762,
+   "rendererMB": 1044,
+   "heapMB": 273,
+   "dom": 890,
+   "q": 0,
+   "lsK": 532
+  },
+  {
+   "buoi": 188,
+   "y": 2,
+   "totalMB": 1892,
+   "rendererMB": 1188,
+   "heapMB": 273,
+   "dom": 1386,
+   "q": 0,
+   "lsK": 552
+  },
+  {
+   "buoi": 193,
+   "y": 2,
+   "totalMB": 1697,
+   "rendererMB": 1247,
+   "heapMB": 273,
+   "dom": 1347,
+   "q": 2,
+   "lsK": 549
+  },
+  {
+   "buoi": 198,
+   "y": 2,
+   "totalMB": 1848,
+   "rendererMB": 1397,
+   "heapMB": 273,
+   "dom": 900,
+   "q": 1,
+   "lsK": 554
+  },
+  {
+   "buoi": 203,
+   "y": 2,
+   "totalMB": 1886,
+   "rendererMB": 1391,
+   "heapMB": 273,
+   "dom": 1823,
+   "q": 1,
+   "lsK": 564
+  },
+  {
+   "buoi": 208,
+   "y": 2,
+   "totalMB": 2027,
+   "rendererMB": 1514,
+   "heapMB": 273,
+   "dom": 1361,
+   "q": 0,
+   "lsK": 569
+  },
+  {
+   "buoi": 213,
+   "y": 2,
+   "totalMB": 1989,
+   "rendererMB": 1502,
+   "heapMB": 273,
+   "dom": 1154,
+   "q": 1,
+   "lsK": 555
+  },
+  {
+   "buoi": 218,
+   "y": 2,
+   "totalMB": 1901,
+   "rendererMB": 1464,
+   "heapMB": 273,
+   "dom": 931,
+   "q": 0,
+   "lsK": 568
+  },
+  {
+   "buoi": 223,
+   "y": 2,
+   "totalMB": 1974,
+   "rendererMB": 1510,
+   "heapMB": 273,
+   "dom": 818,
+   "q": 0,
+   "lsK": 590
+  },
+  {
+   "buoi": 228,
+   "y": 2,
+   "totalMB": 2031,
+   "rendererMB": 1535,
+   "heapMB": 273,
+   "dom": 1291,
+   "q": 0,
+   "lsK": 584
+  },
+  {
+   "buoi": 233,
+   "y": 2,
+   "totalMB": 2054,
+   "rendererMB": 1561,
+   "heapMB": 273,
+   "dom": 1346,
+   "q": 2,
+   "lsK": 589
+  },
+  {
+   "buoi": 238,
+   "y": 2,
+   "totalMB": 2046,
+   "rendererMB": 1550,
+   "heapMB": 273,
+   "dom": 980,
+   "q": 0,
+   "lsK": 593
+  },
+  {
+   "buoi": 243,
+   "y": 2,
+   "totalMB": 2074,
+   "rendererMB": 1570,
+   "heapMB": 273,
+   "dom": 859,
+   "q": 0,
+   "lsK": 598
+  },
+  {
+   "buoi": 248,
+   "y": 2,
+   "totalMB": 2110,
+   "rendererMB": 1590,
+   "heapMB": 273,
+   "dom": 2714,
+   "q": 0,
+   "lsK": 616
+  },
+  {
+   "buoi": 253,
+   "y": 2,
+   "totalMB": 2040,
+   "rendererMB": 1553,
+   "heapMB": 273,
+   "dom": 792,
+   "q": 0,
+   "lsK": 602
+  },
+  {
+   "buoi": 258,
+   "y": 2,
+   "totalMB": 2041,
+   "rendererMB": 1561,
+   "heapMB": 273,
+   "dom": 1100,
+   "q": 0,
+   "lsK": 620
+  },
+  {
+   "buoi": 263,
+   "y": 2,
+   "totalMB": 2095,
+   "rendererMB": 1601,
+   "heapMB": 273,
+   "dom": 810,
+   "q": 0,
+   "lsK": 629
+  },
+  {
+   "buoi": 268,
+   "y": 3,
+   "totalMB": 2121,
+   "rendererMB": 1633,
+   "heapMB": 273,
+   "dom": 1468,
+   "q": 0,
+   "lsK": 629
+  },
+  {
+   "buoi": 273,
+   "y": 3,
+   "totalMB": 2040,
+   "rendererMB": 1581,
+   "heapMB": 273,
+   "dom": 2154,
+   "q": 0,
+   "lsK": 614
+  },
+  {
+   "buoi": 278,
+   "y": 3,
+   "totalMB": 1964,
+   "rendererMB": 1569,
+   "heapMB": 273,
+   "dom": 2171,
+   "q": 0,
+   "lsK": 620
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  "#kmrew|",
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  "#modal|Khuê các",
+  ".dlg|Khuê các",
+  "page|Khuê phòng · Không gặp ai.",
+  "#modal|Thỉnh tranh nhân vật",
+  ".dlg|Thỉnh tranh nhân vật",
+  "#kxcatch|",
+  ".kbk|Tổng lược",
+  "page|Khuê phòng · Ở đây có # người.",
+  ".dlg|Có người bán tin",
+  ".dlg|Tin mua được",
+  ".dlg|chiều · còn",
+  ".dlg|Chương # · Chờ kỳ tuyển tú",
+  ".dlg|Danh hiệu",
+  ".dlg|Thiên mệnh",
+  "#modal|Bạc",
+  ".dlg|Bạc",
+  "#modal|Sắc",
+  ".dlg|Sắc",
+  ".dlg|Hộp phấn lạ",
+  "#modal|Lịch tháng",
+  ".dlg|Lịch tháng",
+  ".dlg|Tâm trạng · Ta",
+  ".dlg|Sứ đoàn vào triều",
+  "#modal|Sứ đoàn vào triều",
+  ".dlg|Tin báo",
+  "#modal|Lễ Phật đản",
+  ".dlg|Lễ Phật đản",
+  "#modal|Tâm trạng · Ta",
+  ".dlg|Hội thơ xuân",
+  "#kg82|",
+  ".dlg|Tài nữ kinh thành",
+  "#modal|Có người bán tin",
+  ".dlg|Vòng ngọc mất tích",
+  ".dlg|tối · còn",
+  "#modal|Chương # · Chờ kỳ tuyển tú",
+  "#modal|Huynh trưởng thua bạc",
+  ".dlg|Huynh trưởng thua bạc",
+  ".kfoc|",
+  "#kdaytc|",
+  ".dlg|sáng · còn",
+  ".dlg|Thu săn",
+  ".dlg|Tin trong cung buổi này",
+  ".dlg|trưa · còn",
+  ".dlg|Đại thọ",
+  "#modal|Đại thọ",
+  ".dlg|Kế mẫu",
+  "page|Chùa Hộ Quốc · Ở đây còn # người.",
+  "page|Chùa Hộ Quốc · Không gặp ai.",
+  "page|Chung Tú cung · Minh Hòa hiên · Không gặ",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Đại hàn, tuyết lớn",
+  "page|Thư phường · Không gặp ai.",
+  ".dlg|Mượn y phục",
+  ".dlg|Hạn hán, mất mùa",
+  "page|Chung Tú cung · Minh Hòa hiên · Ở đây cò",
+  ".dlg|Bà mối đến nhà",
+  ".dlg|Tết Thượng nguyên",
+  "page|Phố chợ · Không gặp ai.",
+  ".dlg|Tỉnh thân",
+  "#modal|Tỉnh thân",
+  "#modal|Thiên tượng",
+  ".dlg|Thiên tượng",
+  "#modal|Đại xá thiên hạ",
+  ".dlg|Đại xá thiên hạ",
+  ".dlg|Nhật thực, sao chổi",
+  ".dlg|Yến đầy tháng hoàng tử",
+  "#modal|Yến đầy tháng hoàng tử",
+  "#modal|Thuở thanh mai",
+  ".dlg|Thuở thanh mai",
+  "#modal|chiều · còn",
+  ".dlg|Thứ muội giành mối",
+  ".dlg|Hội ngắm mẫu đơn",
+  "#modal|Hộp phấn lạ",
+  ".dlg|Phi Lữ Vân Thường xin mượn trâm",
+  ".dlg|Đêm Thất tịch",
+  "page|Đền lửa thánh · Không gặp ai.",
+  ".dlg|Chiếu tuyển tú",
+  ".dlg|Cha say rượu",
+  "#modal|Phiên vương nhập triều",
+  ".dlg|Phiên vương nhập triều",
+  "page|Phủ thế giao · Ở đây còn # người.",
+  ".dlg|Bài vị đổ",
+  "#modal|Tin báo",
+  "page|Nhà bà Tư · Không gặp ai.",
+  ".dlg|Dịch trong kinh thành",
+  "page|Trà lâu · Ở đây còn # người.",
+  ".dlg|Sơ tuyển",
+  "page|Trà lâu · Không gặp ai.",
+  ".kmov|",
+  ".dlg|Phúc tuyển",
+  ".kpod|",
+  ".dlg|Điện tuyển",
+  ".dlg|Trả thẻ bài"
+ ],
+ "_momRank": 0,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+  ".dlg|Thỉnh tranh nhân vật": {},
+  "page|Khuê phòng · Không gặp ai.": {},
+  ".dlg|Có người bán tin": {},
+  ".dlg|Hộp phấn lạ": {},
+  "page|Khuê phòng · Ở đây có # người.": {},
+  ".dlg|Hội thơ xuân": {},
+  ".dlg|Vòng ngọc mất tích": {},
+  ".dlg|Huynh trưởng thua bạc": {},
+  "page|Chùa Hộ Quốc · Không gặp ai.": {},
+  "page|Chung Tú cung · Minh Hòa hiên · Không gặp ai.": {},
+  ".dlg|Mượn y phục": {},
+  "page|Chung Tú cung · Minh Hòa hiên · Ở đây còn # người.": {},
+  ".dlg|Bà mối đến nhà": {},
+  ".dlg|Tết Thượng nguyên": {},
+  ".dlg|Thiên tượng": {},
+  ".dlg|Thứ muội giành mối": {},
+  ".dlg|Hội ngắm mẫu đơn": {},
+  ".dlg|Phi Lữ Vân Thường xin mượn trâm": {},
+  ".dlg|Đêm Thất tịch": {},
+  ".dlg|Chiếu tuyển tú": {},
+  ".dlg|Cha say rượu": {},
+  ".dlg|Chương # · Chờ kỳ tuyển tú": {},
+  ".dlg|Bài vị đổ": {},
+  "page|Nhà bà Tư · Không gặp ai.": {},
+  ".dlg|Thiên mệnh": {},
+  ".dlg|Dịch trong kinh thành": {},
+  ".dlg|Tin báo": {},
+  ".dlg|Sơ tuyển": {},
+  "page|Trà lâu · Ở đây còn # người.": {},
+  ".dlg|Danh hiệu": {},
+  ".dlg|Phúc tuyển": {},
+  ".kpod|": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Trả thẻ bài": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|871,392": {
+   "left": 400,
+   "n": 1
+  },
+  ".dlg|Chương # · Chờ kỳ tuyển tú|590,583": {
+   "left": 240,
+   "n": 3
+  },
+  "#modal|Chương # · Chờ kỳ tuyển tú|590,576": {
+   "left": 240,
+   "n": 1
+  },
+  "#modal|Chương # · Chờ kỳ tuyển tú|590,595": {
+   "left": 216,
+   "n": 2
+  },
+  "#modal|Thiên tượng|706,580": {
+   "left": 125,
+   "n": 3
+  },
+  "#modal|Đại xá thiên hạ|706,548": {
+   "left": 228,
+   "n": 1
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,600": {
+   "left": 164,
+   "n": 2
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,563": {
+   "left": 205,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,548": {
+   "left": 228,
+   "n": 3
+  },
+  ".dlg|Yến đầy tháng hoàng tử|706,548": {
+   "left": 228,
+   "n": 1
+  },
+  "#modal|Lễ Phật đản|706,563": {
+   "left": 205,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|706,600": {
+   "left": 164,
+   "n": 3
+  },
+  "#modal|Chương # · Chờ kỳ tuyển tú|590,583": {
+   "left": 240,
+   "n": 1
+  }
+ },
+ "t": {
+  "total": 1181567
+ }
+}
