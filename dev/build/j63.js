@@ -338,8 +338,8 @@ function kitKemRow(K){if(!K||!K.length&&!K.more)return"";/* owner 24/11 ~21:57Z 
    the people she cannot name with the SAME feeling and number are one line «4 vị khác: ghen +8» (one alone keeps «một vị <tước>: ghen +8») */
  const R=K.filter(x=>Math.round(x.d));const L=[],U=new Map();
  const line=(nm,k,d,t)=>`<span class="kitem kkemi"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${k} ${t==null?kaN(d):kaNT(d,t)}</span></span>`;/* KIT 7.1: a named person shows the new total */
- for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){L.push([0,line(kaWho(x.v),x.k,d,x.t)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[]});U.get(key).v.push(x.v)}
- for(const {k,d,v} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^M/,"m"):`${v.length} vị khác`;L.push([1,line(nm,k,d)])}
+ for(const x of R){const d=Math.round(x.d);if(kaNamed(x.v)){L.push([0,line(kaWho(x.v),x.k,d,x.t)]);continue}const key=x.k+"|"+d;if(!U.has(key))U.set(key,{k:x.k,d,v:[],t:x.t});U.get(key).v.push(x.v)}
+ for(const {k,d,v,t} of U.values()){const nm=v.length===1?String(typeof whyWho==="function"?whyWho(v[0]):"Một vị phi tần").replace(/^M/,"m"):`${v.length} vị khác`;L.push([1,line(nm,k,d,v.length===1?t:null)])}/* one person: her total (KIT 7.1); a group has no one total */
  const more=Math.max(0,L.length-8)+(K.more||0);/* ONE SIEVE (jnsieve nsCard): the people whose change does not touch her are only counted here; every name and number is in the Sổ ghi */
  const out=L.slice(0,8).map(x=>x[1]);if(more)out.push(`<span class="kitem kkemi"><span class="ef n">${out.length?`… và ${more} người khác`:`${more} người khác trong cung đổi lòng chút ít`}</span></span>`);
  return out.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${out.join("")}</span></span>`:""}
