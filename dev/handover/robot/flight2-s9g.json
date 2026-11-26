@@ -1,0 +1,376 @@
+{
+ "job": {
+  "id": "flight2-s9g",
+  "origin": null,
+  "road": null,
+  "pick": null,
+  "bot": "speed",
+  "seed": 2026112538,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8766/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "8ea10d7e",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 123,
+    "lvl": 1,
+    "layer": "#kload",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "mgBackN": 0,
+  "mgBackQuitN": 0,
+  "builds": [
+   {
+    "s": "b881686f+",
+    "b": "cc68dcfd2b1b",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "b881686f+",
+   "b": "cc68dcfd2b1b",
+   "t": "2026-11-26T15:46Z",
+   "at": "2026-11-26T18:43:51.095Z"
+  },
+  "pinUrl": "http://127.0.0.1:8914/",
+  "build": {
+   "s": "b881686f+",
+   "b": "cc68dcfd2b1b",
+   "t": "2026-11-26T15:46Z"
+  },
+  "areaTaps": 19,
+  "kloadEnter": 1,
+  "backdropTaps": 1,
+  "dlgScroll": 2,
+  "scrolls": 2,
+  "taps": 20
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 19,
+  "year": 1,
+  "rank": 1,
+  "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+  "card": [
+   "Pha một chén trà dâng lên Rất vững TỐN Sức -5 ĐƯỢC chơi một ",
+   "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".dlg «Thân phận kiếp này» «Dung mạo 3»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 1»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 9»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 11»",
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 1/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 2/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 3/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 4/4» «Vào cung»",
+   "AREA 383,753",
+   ".kmov «Tiếp theo»",
+   ".dlg «Xét phong danh phận» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [],
+ "buoi": 1,
+ "steps": 104,
+ "status": [],
+ "_loopAt": 1795718776882,
+ "_bootFirst": 1,
+ "_snapAt": 1795718733258,
+ "trace": [
+  [
+   108,
+   "AREA 627,238"
+  ],
+  [
+   108,
+   "AREA 316,789"
+  ],
+  [
+   108,
+   "AREA 214,420"
+  ],
+  [
+   109,
+   "AREA 486,366"
+  ],
+  [
+   109,
+   "AREA 287,208"
+  ],
+  [
+   109,
+   "AREA 352,588"
+  ],
+  [
+   110,
+   "AREA 200,422"
+  ],
+  [
+   110,
+   "AREA 314,251"
+  ],
+  [
+   110,
+   "AREA 294,350"
+  ],
+  [
+   110,
+   "AREA 630,627"
+  ],
+  [
+   111,
+   "AREA 575,808"
+  ],
+  [
+   111,
+   "AREA 182,216"
+  ],
+  [
+   111,
+   "AREA 557,271"
+  ],
+  [
+   111,
+   "AREA 577,459"
+  ],
+  [
+   112,
+   "AREA 623,484"
+  ],
+  [
+   112,
+   "AREA 215,638"
+  ],
+  [
+   132,
+   "#kload «Vào cung ngay»"
+  ],
+  [
+   133,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   133,
+   "#modal «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   136,
+   "AREA 323,350"
+  ],
+  [
+   137,
+   "AREA 378,791"
+  ],
+  [
+   137,
+   "BACKDROP #klife «» tap"
+  ],
+  [
+   137,
+   "#kroul «Tiếp»"
+  ],
+  [
+   138,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   140,
+   ".dlg «Thân phận kiếp này» «Dung mạo 9»"
+  ],
+  [
+   140,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   141,
+   ".dlg «Thân phận kiếp này» «Dung mạo 4»"
+  ],
+  [
+   141,
+   ".dlg «Thân phận kiếp này» «Dung mạo 2»"
+  ],
+  [
+   141,
+   ".dlg «Thân phận kiếp này» «Dung mạo 3»"
+  ],
+  [
+   142,
+   ".dlg «Thân phận kiếp này» «Dung mạo 1»"
+  ],
+  [
+   142,
+   ".dlg «Thân phận kiếp này» «Dung mạo 9»"
+  ],
+  [
+   142,
+   ".dlg «Thân phận kiếp này» «Dung mạo 11»"
+  ],
+  [
+   143,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   143,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 1/4» «Tiếp theo»"
+  ],
+  [
+   144,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 2/4» «Tiếp theo»"
+  ],
+  [
+   144,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 3/4» «Tiếp theo»"
+  ],
+  [
+   145,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 4/4» «Vào cung»"
+  ],
+  [
+   147,
+   "AREA 383,753"
+  ],
+  [
+   147,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   149,
+   ".dlg «Xét phong danh phận» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+  ]
+ ],
+ "_unsFail": {
+  "#kload|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Cung nữ được sủng hạnh · #/#": {},
+  ".dlg|Xét phong danh phận": {}
+ },
+ "_started": true,
+ "_ckAt": 1795718761333,
+ "_ckB": 1,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1163,
+   "rendererMB": 546,
+   "heapMB": 98,
+   "dom": 2266,
+   "q": 3,
+   "lsK": 4
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Cung nữ được sủng hạnh · #",
+  "#modal|Tiền truyện · Cung nữ được sủng hạnh · #",
+  ".kmov|",
+  ".dlg|Xét phong danh phận",
+  ".dlg|Duyên cung lỡ hẹn"
+ ],
+ "_momRank": 1,
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|511,470": {
+   "left": 235,
+   "n": 2
+  }
+ },
+ "choicePts": [
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 2/Dung mạo 3/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dung mạo 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vừa",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Dung mạo 1",
+    "Dung mạo 2",
+    "Dung mạo 3",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 7",
+    "Dung mạo 8",
+    "Dung mạo 9",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 9": 2,
+    "Dễ": 1,
+    "Dung mạo 4": 1,
+    "Dung mạo 2": 1,
+    "Dung mạo 3": 1,
+    "Dung mạo 1": 1,
+    "Dung mạo 11": 1,
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này": 1
+   },
+   "n": 9
+  },
+  {
+   "k": ".dlg|Xét phong danh phận|Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K/Pha một chén trà dâng lênRất vữngTốnSức -5Đượcchơi một màn; làm tốt thì được trọ",
+   "screen": ".dlg «Xét phong danh phận»",
+   "opts": [
+    "Pha một chén trà dâng lênRất vữngTốnSức -5Đượcchơi một màn; làm tốt thì được trọ",
+    "Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tính theo tài nghệ, cao nhất là K": 1
+   },
+   "n": 1
+  }
+ ],
+ "t": {
+  "total": 149840
+ }
+}
