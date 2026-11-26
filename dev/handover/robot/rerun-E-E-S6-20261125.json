@@ -13847,6 +13847,76 @@
   "unit": "E-S6",
   "row": "R6·speed·4:13314017 (rerun on LIVE github.io, fold)",
   "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; one buổi, no resume",
-  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after the Lễ ra mắt mini-game, real taps, github.io) — COUNTED"
+  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after the Lễ ra mắt mini-game, real taps, github.io) — COUNTED — PROVISIONAL: also «Gợi ý» ×4 then «Quay lại» without board taps (not played); same mini-game-quit question"
+ },
+ {
+  "job": {
+   "id": "R6-cautious-1",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 764262748,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "bf6dd041+",
+    "b": "0281bf7bcef6",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 52,
+   "dlgScroll": 2,
+   "scrolls": 2,
+   "taps": 19
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 19,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 513,656",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Quay lại»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 165,
+  "status": [],
+  "t": {
+   "total": 101113
+  },
+  "unit": "E-S6",
+  "row": "R6·cautious·1:764262748 (rerun on LIVE github.io, fold)",
+  "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; one buổi, no resume",
+  "audit": "audit VALID (game-imposed «Bị ban hoa, xuất cung»); COUNTED PROVISIONALLY — the robot left the Lễ ra mắt mini-game board after 4× «Gợi ý» with NO board taps (not played): mini-game-quit question for Foreman E/F"
  }
 ]
