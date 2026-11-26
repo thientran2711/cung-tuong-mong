@@ -51020,6 +51020,5368 @@
    "t": {
     "total": 162377
    }
+  },
+  {
+   "job": {
+    "id": "R2-lover-1",
+    "origin": "thd",
+    "road": "thd_hoc",
+    "bot": "sens",
+    "seed": 2140641391,
+    "dev": "fold",
+    "url": "https://thientran2711.github.io/cung-tuong-mong/"
+   },
+   "harness": {
+    "kind": "realtap",
+    "sha": "4d7a22c6",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 259,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [
+     {
+      "at": 845,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 4 người."
+     },
+     {
+      "at": 1677,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Tây sở · Ở đây có 4 người."
+     }
+    ],
+    "slice": null,
+    "build": {
+     "s": "f009e1a6+",
+     "b": "dd1ce3d0ffa1",
+     "t": "2026-11-26T02:21Z"
+    },
+    "areaTaps": 104,
+    "dlgScroll": 4,
+    "scrolls": 4,
+    "infoTaps": 42,
+    "loops": 2,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-26T07:54:59.159Z",
+      "buoi": 1,
+      "from": "2026-11-26T06:26:19.047Z"
+     }
+    ],
+    "taps": 28
+   },
+   "life": {
+    "id": "Ban hoa",
+    "type": "end",
+    "fate": "Bị ban hoa, xuất cung",
+    "death": false,
+    "age": 20,
+    "year": 1,
+    "rank": 0,
+    "text": "Ngươi về quê, mở một lớp dạy chữ cho con gái trong vùng. Cung cấm chỉ còn là một giấc mộng xa.",
+    "card": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "duringArea": false,
+    "lastTaps": [
+     "AREA 605,531",
+     "AREA 267,397",
+     "AREA 186,677",
+     "AREA 586,401",
+     "AREA 262,650",
+     "AREA 417,414",
+     "AREA 160,575",
+     "AREA 418,406",
+     "AREA 557,665",
+     "#kg82 «Quay lại»",
+     "MOVED Sang buổi",
+     ".dlg «Thái hậu» «Thần thiếp đứng nghiêm, không quay lại nhìn tú nữ »"
+    ]
+   },
+   "exitPick": null,
+   "bugs": [
+    {
+     "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "n": 1,
+     "at": 845,
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/loop-1.png",
+     "dump": "/home/user/wt/out-s3/shots-R2-lover-1/loop-1-dump.json",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     },
+     "buttons": [
+      "Ô lưu",
+      "Xem bản thân",
+      "Sắc53Tài97Tâm cơ22Đức40Danh8Sủng8",
+      "Bạc80Sức80/100",
+      "Buổi sáng, còn 4 khắc",
+      "Chưa điểm trang",
+      "sương sớm",
+      "Quẻ Hạ hạ (Hung)",
+      "Tâm trạngBình thản0",
+      "Tin báo",
+      "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải vóc 0Thuốc men 0Hương liệu 0Lễ vật 0Thư ",
+      "Túi đồ"
+     ],
+     "trace": [
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Dư đồ»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chưa điểm trang»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chưa điểm trang»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «sương sớm»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «sương sớm»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «sương sớm»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «sương sớm»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tâm trạngBình thản0»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «sương sớm»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hoàng tự»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tư trang»"
+     ],
+     "next": {
+      "dis": true,
+      "q": 3,
+      "mg": false,
+      "qt": [
+       "Tin báo",
+       "Tâm trạng · Ngươi",
+       "Dưỡng Tú viện"
+      ],
+      "t": "Sang buổi"
+     }
+    },
+    {
+     "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Dưỡng Tú viện)",
+     "type": "game",
+     "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Dưỡng Tú viện)",
+     "n": 1,
+     "at": 845,
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/loop-1.png",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "n": 1,
+     "at": 1677,
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/loop-2.png",
+     "dump": "/home/user/wt/out-s3/shots-R2-lover-1/loop-2-dump.json",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     },
+     "buttons": [
+      "Ô lưu",
+      "Xem bản thân",
+      "Sắc53Tài97Tâm cơ22Đức40Danh8Sủng8",
+      "Bạc80Sức80/100",
+      "Buổi sáng, còn 4 khắc",
+      "Chưa điểm trang",
+      "sương sớm",
+      "Quẻ Hạ hạ (Hung)",
+      "Tâm trạngBình thản0",
+      "Tin báo",
+      "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải vóc 0Thuốc men 0Hương liệu 0Lễ vật 0Thư ",
+      "Túi đồ"
+     ],
+     "trace": [
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Tài nghệ»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Tin báo»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «sương sớm»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Hậu cung»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Hoàng tự»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Sắc53Tài97Tâm cơ22Đức40Danh8Sủng8»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Hành sự»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Hậu cung»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Tài nghệ»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Hành sự»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Tư trang»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Chưa điểm trang»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Sắc53Tài97Tâm cơ22Đức40Danh8Sủng8»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Hoàng tự»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Tư trang»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Quẻ Hạ hạ (Hung)»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «sương sớm»",
+      "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.» «Chưa điểm trang»"
+     ],
+     "next": {
+      "dis": true,
+      "q": 3,
+      "mg": false,
+      "qt": [
+       "Tin báo",
+       "Tâm trạng · Ngươi",
+       "Tây sở"
+      ],
+      "t": "Sang buổi"
+     }
+    },
+    {
+     "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Tây sở)",
+     "type": "game",
+     "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Tây sở)",
+     "n": 1,
+     "at": 1677,
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/loop-2.png",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    }
+   ],
+   "dead": [
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Người lạ???",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672196728.png",
+     "dev": "fold",
+     "at": 62,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chọn chính mình",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672206152.png",
+     "dev": "fold",
+     "at": 71,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Về Dư đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672214213.png",
+     "dev": "fold",
+     "at": 80,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Lịch tháng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672223298.png",
+     "dev": "fold",
+     "at": 89,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mục tiêu chương (có mới)",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672231459.png",
+     "dev": "fold",
+     "at": 96,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thỉnh tranh nhân vật",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672240201.png",
+     "dev": "fold",
+     "at": 105,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "3Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672248126.png",
+     "dev": "fold",
+     "at": 113,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tai mắt0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672255682.png",
+     "dev": "fold",
+     "at": 120,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Có thaiRất thấp",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672263518.png",
+     "dev": "fold",
+     "at": 129,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Lật thẻKhông có",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672271868.png",
+     "dev": "fold",
+     "at": 137,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Ân tình (đêm)0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672279746.png",
+     "dev": "fold",
+     "at": 145,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Số lần ân thưởng0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672287391.png",
+     "dev": "fold",
+     "at": 152,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Bổng lộcsau 3 tuần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672295540.png",
+     "dev": "fold",
+     "at": 161,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Nguy hiểm chung: 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672305173.png",
+     "dev": "fold",
+     "at": 170,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xét phẩm: thiếu 4",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672314043.png",
+     "dev": "fold",
+     "at": 179,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "?",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672322081.png",
+     "dev": "fold",
+     "at": 187,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672332533.png",
+     "dev": "fold",
+     "at": 197,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tứ đức 9/9",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672338915.png",
+     "dev": "fold",
+     "at": 203,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Cầm kỳ thi họa 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672345398.png",
+     "dev": "fold",
+     "at": 210,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672351879.png",
+     "dev": "fold",
+     "at": 216,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tác phẩm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672358330.png",
+     "dev": "fold",
+     "at": 223,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "ⓘ luật Đức",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672364739.png",
+     "dev": "fold",
+     "at": 229,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xem luật Công · Nữ công",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672371172.png",
+     "dev": "fold",
+     "at": 236,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672386965.png",
+     "dev": "fold",
+     "at": 251,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672393605.png",
+     "dev": "fold",
+     "at": 258,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách ",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672400113.png",
+     "dev": "fold",
+     "at": 265,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672407626.png",
+     "dev": "fold",
+     "at": 272,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Túi đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672414187.png",
+     "dev": "fold",
+     "at": 279,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thú cưng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672420709.png",
+     "dev": "fold",
+     "at": 285,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Việc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672427422.png",
+     "dev": "fold",
+     "at": 292,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tất cả 16",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672433824.png",
+     "dev": "fold",
+     "at": 298,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Y phục 2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672446766.png",
+     "dev": "fold",
+     "at": 311,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Vải vóc 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672453506.png",
+     "dev": "fold",
+     "at": 318,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thuốc men 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672460124.png",
+     "dev": "fold",
+     "at": 325,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hương liệu 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672466705.png",
+     "dev": "fold",
+     "at": 331,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Lễ vật 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672473196.png",
+     "dev": "fold",
+     "at": 338,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thư từ 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672479632.png",
+     "dev": "fold",
+     "at": 344,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tác phẩm 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672486043.png",
+     "dev": "fold",
+     "at": 351,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Cài tóc: Trâm hoa lụa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672492433.png",
+     "dev": "fold",
+     "at": 357,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Y phục: Áo lụa thêu hoa nhỏ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672498826.png",
+     "dev": "fold",
+     "at": 363,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Trâm hoa lụa · Trâm cài",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672505299.png",
+     "dev": "fold",
+     "at": 370,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Áo lụa thêu hoa nhỏ · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672511703.png",
+     "dev": "fold",
+     "at": 376,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Váy sa xanh ngọc · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672518121.png",
+     "dev": "fold",
+     "at": 383,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Nước bào hoa · Dầu chải tóc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672524540.png",
+     "dev": "fold",
+     "at": 389,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Nến mỡ dê ×3 · Nến",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672531122.png",
+     "dev": "fold",
+     "at": 396,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Than liễu ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672537555.png",
+     "dev": "fold",
+     "at": 402,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Son sáp ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672543919.png",
+     "dev": "fold",
+     "at": 408,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Yên chi giấy ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672550328.png",
+     "dev": "fold",
+     "at": 415,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Phấn gạo ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672556838.png",
+     "dev": "fold",
+     "at": 421,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Dấu ấn Đáp ứng · đang dùng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672563233.png",
+     "dev": "fold",
+     "at": 428,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672573042.png",
+     "dev": "fold",
+     "at": 438,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Con của ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672579406.png",
+     "dev": "fold",
+     "at": 444,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Kế vị",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672585800.png",
+     "dev": "fold",
+     "at": 450,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hoàng tự trong cung",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672592190.png",
+     "dev": "fold",
+     "at": 457,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hôn sự",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672598630.png",
+     "dev": "fold",
+     "at": 463,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Quý tộc kén rể · kén dâu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672605013.png",
+     "dev": "fold",
+     "at": 469,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mườ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672615009.png",
+     "dev": "fold",
+     "at": 480,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Đông sở3 bóng người",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672622491.png",
+     "dev": "fold",
+     "at": 487,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tây sở3 bóng ngườitốn: một khắc",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672630368.png",
+     "dev": "fold",
+     "at": 495,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Bắc sở3 bóng ngườitốn: một khắc",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672638098.png",
+     "dev": "fold",
+     "at": 503,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tiền sảnh3 bóng ngườitốn: một khắc",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672645935.png",
+     "dev": "fold",
+     "at": 511,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Cung nhân · chạm để mở danh sách",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672654003.png",
+     "dev": "fold",
+     "at": 519,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chí tôn · chạm để mở danh sách",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672661515.png",
+     "dev": "fold",
+     "at": 526,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672671005.png",
+     "dev": "fold",
+     "at": 535,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672679425.png",
+     "dev": "fold",
+     "at": 544,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Ân oán",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672686235.png",
+     "dev": "fold",
+     "at": 551,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Phe phái",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672692727.png",
+     "dev": "fold",
+     "at": 557,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xem quan hệ của Ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672699173.png",
+     "dev": "fold",
+     "at": 564,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Đổi chỗ hai người",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672705620.png",
+     "dev": "fold",
+     "at": 570,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "với Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672712001.png",
+     "dev": "fold",
+     "at": 577,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672719582.png",
+     "dev": "fold",
+     "at": 584,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672727081.png",
+     "dev": "fold",
+     "at": 592,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Phi tần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672734352.png",
+     "dev": "fold",
+     "at": 599,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Cung nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672748552.png",
+     "dev": "fold",
+     "at": 613,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672755653.png",
+     "dev": "fold",
+     "at": 620,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thái hậu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672762927.png",
+     "dev": "fold",
+     "at": 628,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xem thêm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672770122.png",
+     "dev": "fold",
+     "at": 635,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Gặp ngài ban ngày 2/5",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672777274.png",
+     "dev": "fold",
+     "at": 642,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Việc hôm nay 1/2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672784617.png",
+     "dev": "fold",
+     "at": 650,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Điều ngài thích",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672792221.png",
+     "dev": "fold",
+     "at": 657,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672799610.png",
+     "dev": "fold",
+     "at": 665,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672815716.png",
+     "dev": "fold",
+     "at": 680,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mệnh truyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672822342.png",
+     "dev": "fold",
+     "at": 687,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Việc nhờ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672828761.png",
+     "dev": "fold",
+     "at": 693,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Sổ ghi",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672835214.png",
+     "dev": "fold",
+     "at": 700,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chương này",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672841659.png",
+     "dev": "fold",
+     "at": 706,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Sắc phong",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672848040.png",
+     "dev": "fold",
+     "at": 713,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Đã qua 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672854456.png",
+     "dev": "fold",
+     "at": 719,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Triều cục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672860865.png",
+     "dev": "fold",
+     "at": 725,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tâm nguyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672867210.png",
+     "dev": "fold",
+     "at": 732,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mục lục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672873604.png",
+     "dev": "fold",
+     "at": 738,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Đi làm: Hành sự",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795672880050.png",
+     "dev": "fold",
+     "at": 745,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673017550.png",
+     "dev": "fold",
+     "at": 882,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673024392.png",
+     "dev": "fold",
+     "at": 889,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Ân oán",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673030969.png",
+     "dev": "fold",
+     "at": 895,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Phe phái",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673037329.png",
+     "dev": "fold",
+     "at": 902,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Xem quan hệ của Ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673043735.png",
+     "dev": "fold",
+     "at": 908,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Đổi chỗ hai người",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673050199.png",
+     "dev": "fold",
+     "at": 915,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "với Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673056607.png",
+     "dev": "fold",
+     "at": 921,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673063449.png",
+     "dev": "fold",
+     "at": 928,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Con của ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673070364.png",
+     "dev": "fold",
+     "at": 935,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Kế vị",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673076783.png",
+     "dev": "fold",
+     "at": 941,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Hoàng tự trong cung",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673083140.png",
+     "dev": "fold",
+     "at": 948,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Hôn sự",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673089544.png",
+     "dev": "fold",
+     "at": 954,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Quý tộc kén rể · kén dâu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673095907.png",
+     "dev": "fold",
+     "at": 960,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673103143.png",
+     "dev": "fold",
+     "at": 968,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Túi đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673109587.png",
+     "dev": "fold",
+     "at": 974,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Thú cưng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673116121.png",
+     "dev": "fold",
+     "at": 981,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Việc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673122559.png",
+     "dev": "fold",
+     "at": 987,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tất cả 16",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673129008.png",
+     "dev": "fold",
+     "at": 994,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Trang sức 1",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673135631.png",
+     "dev": "fold",
+     "at": 1000,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Y phục 2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673142096.png",
+     "dev": "fold",
+     "at": 1007,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Vải vóc 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673148680.png",
+     "dev": "fold",
+     "at": 1013,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Thuốc men 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673155244.png",
+     "dev": "fold",
+     "at": 1020,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Hương liệu 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673161729.png",
+     "dev": "fold",
+     "at": 1026,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Lễ vật 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673168154.png",
+     "dev": "fold",
+     "at": 1033,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Thư từ 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673174556.png",
+     "dev": "fold",
+     "at": 1039,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tác phẩm 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673180990.png",
+     "dev": "fold",
+     "at": 1046,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Cài tóc: Trâm hoa lụa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673187476.png",
+     "dev": "fold",
+     "at": 1052,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Hoa tai: trống",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673193860.png",
+     "dev": "fold",
+     "at": 1058,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Y phục: Áo lụa thêu hoa nhỏ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673200310.png",
+     "dev": "fold",
+     "at": 1065,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Trâm hoa lụa · Trâm cài",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673206728.png",
+     "dev": "fold",
+     "at": 1071,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Áo lụa thêu hoa nhỏ · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673213212.png",
+     "dev": "fold",
+     "at": 1078,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Váy sa xanh ngọc · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673219711.png",
+     "dev": "fold",
+     "at": 1084,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Nước bào hoa · Dầu chải tóc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673226140.png",
+     "dev": "fold",
+     "at": 1091,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Nến mỡ dê ×3 · Nến",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673232558.png",
+     "dev": "fold",
+     "at": 1097,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Than liễu ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673239078.png",
+     "dev": "fold",
+     "at": 1104,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Son sáp ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673245571.png",
+     "dev": "fold",
+     "at": 1110,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Yên chi giấy ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673252025.png",
+     "dev": "fold",
+     "at": 1117,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Phấn gạo ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673258420.png",
+     "dev": "fold",
+     "at": 1123,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Dấu ấn Đáp ứng · đang dùng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673264856.png",
+     "dev": "fold",
+     "at": 1129,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673272175.png",
+     "dev": "fold",
+     "at": 1137,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Mệnh truyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673278621.png",
+     "dev": "fold",
+     "at": 1143,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Sổ ghi",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673291350.png",
+     "dev": "fold",
+     "at": 1156,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Chương này",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673297796.png",
+     "dev": "fold",
+     "at": 1162,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Sắc phong",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673304179.png",
+     "dev": "fold",
+     "at": 1169,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Đã qua 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673310673.png",
+     "dev": "fold",
+     "at": 1175,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Triều cục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673317082.png",
+     "dev": "fold",
+     "at": 1182,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tâm nguyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673323464.png",
+     "dev": "fold",
+     "at": 1188,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Mục lục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673329971.png",
+     "dev": "fold",
+     "at": 1195,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Đi làm: Hành sự",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673336456.png",
+     "dev": "fold",
+     "at": 1201,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Người lạ???",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673347956.png",
+     "dev": "fold",
+     "at": 1213,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Chọn chính mình",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673357139.png",
+     "dev": "fold",
+     "at": 1223,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "3Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673366193.png",
+     "dev": "fold",
+     "at": 1231,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tai mắt0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673374678.png",
+     "dev": "fold",
+     "at": 1241,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Có thaiRất thấp",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673383719.png",
+     "dev": "fold",
+     "at": 1248,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Lật thẻKhông có",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673391426.png",
+     "dev": "fold",
+     "at": 1257,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Ân tình (đêm)0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673400740.png",
+     "dev": "fold",
+     "at": 1265,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Số lần ân thưởng0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673409112.png",
+     "dev": "fold",
+     "at": 1275,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Bổng lộcsau 3 tuần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673418445.png",
+     "dev": "fold",
+     "at": 1283,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Nguy hiểm chung: 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673426385.png",
+     "dev": "fold",
+     "at": 1291,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Xét phẩm: thiếu 4",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673435059.png",
+     "dev": "fold",
+     "at": 1300,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673454560.png",
+     "dev": "fold",
+     "at": 1319,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Phi tần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673461738.png",
+     "dev": "fold",
+     "at": 1327,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Nam nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673469294.png",
+     "dev": "fold",
+     "at": 1334,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Cung nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673476624.png",
+     "dev": "fold",
+     "at": 1341,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673486967.png",
+     "dev": "fold",
+     "at": 1352,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Gặp ngài ban ngày 2/5",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673497522.png",
+     "dev": "fold",
+     "at": 1362,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Việc hôm nay 1/2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673505292.png",
+     "dev": "fold",
+     "at": 1370,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Điều ngài thích",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673513099.png",
+     "dev": "fold",
+     "at": 1378,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673521557.png",
+     "dev": "fold",
+     "at": 1386,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Thái hậu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673528813.png",
+     "dev": "fold",
+     "at": 1393,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Xem thêm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673535957.png",
+     "dev": "fold",
+     "at": 1401,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673543275.png",
+     "dev": "fold",
+     "at": 1408,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673551056.png",
+     "dev": "fold",
+     "at": 1416,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tứ đức 9/9",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673557655.png",
+     "dev": "fold",
+     "at": 1422,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Cầm kỳ thi họa 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673564012.png",
+     "dev": "fold",
+     "at": 1429,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673570423.png",
+     "dev": "fold",
+     "at": 1435,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tác phẩm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673576811.png",
+     "dev": "fold",
+     "at": 1441,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "ⓘ luật Đức",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673583245.png",
+     "dev": "fold",
+     "at": 1448,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Xem luật Công · Nữ công",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673589712.png",
+     "dev": "fold",
+     "at": 1454,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673596171.png",
+     "dev": "fold",
+     "at": 1461,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673602627.png",
+     "dev": "fold",
+     "at": 1467,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách ",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673609067.png",
+     "dev": "fold",
+     "at": 1474,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Tây sở · còn bốn ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673619991.png",
+     "dev": "fold",
+     "at": 1485,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Đông sở2 bóng ngườitốn: một khắc",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673627618.png",
+     "dev": "fold",
+     "at": 1493,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tây sở4 bóng người",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673634903.png",
+     "dev": "fold",
+     "at": 1500,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Bắc sở4 bóng ngườitốn: một khắc",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673643003.png",
+     "dev": "fold",
+     "at": 1508,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673650530.png",
+     "dev": "fold",
+     "at": 1515,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Về Dư đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673658039.png",
+     "dev": "fold",
+     "at": 1523,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Lịch tháng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673665753.png",
+     "dev": "fold",
+     "at": 1531,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Mục tiêu chương (có mới)",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673673905.png",
+     "dev": "fold",
+     "at": 1539,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Cung nhân · chạm để mở danh sách",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673681913.png",
+     "dev": "fold",
+     "at": 1547,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 4 người.»",
+     "label": "Chí tôn · chạm để mở danh sách",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673689365.png",
+     "dev": "fold",
+     "at": 1554,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Tâm trạngBình thản0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673828777.png",
+     "dev": "fold",
+     "at": 1694,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Đào Nhạn Hồi",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673836509.png",
+     "dev": "fold",
+     "at": 1701,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Chọn chính mình",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673844362.png",
+     "dev": "fold",
+     "at": 1710,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Về Dư đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673852262.png",
+     "dev": "fold",
+     "at": 1717,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Lịch tháng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673860665.png",
+     "dev": "fold",
+     "at": 1726,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Mục tiêu chương (có mới)",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673869200.png",
+     "dev": "fold",
+     "at": 1734,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "3Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673877816.png",
+     "dev": "fold",
+     "at": 1743,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Tai mắt0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673885647.png",
+     "dev": "fold",
+     "at": 1750,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Có thaiRất thấp",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673893329.png",
+     "dev": "fold",
+     "at": 1758,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Lật thẻKhông có",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673901328.png",
+     "dev": "fold",
+     "at": 1767,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Ân tình (đêm)0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673908918.png",
+     "dev": "fold",
+     "at": 1774,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Số lần ân thưởng0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673917332.png",
+     "dev": "fold",
+     "at": 1782,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Bổng lộcsau 3 tuần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673925309.png",
+     "dev": "fold",
+     "at": 1790,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Nguy hiểm chung: 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673933143.png",
+     "dev": "fold",
+     "at": 1799,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Xét phẩm: thiếu 4",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673941827.png",
+     "dev": "fold",
+     "at": 1807,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "?",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673949928.png",
+     "dev": "fold",
+     "at": 1815,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673958194.png",
+     "dev": "fold",
+     "at": 1823,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Tứ đức 9/9",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673964658.png",
+     "dev": "fold",
+     "at": 1829,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Cầm kỳ thi họa 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673971153.png",
+     "dev": "fold",
+     "at": 1836,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673977617.png",
+     "dev": "fold",
+     "at": 1842,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Tác phẩm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673984208.png",
+     "dev": "fold",
+     "at": 1849,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "ⓘ luật Đức",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673990683.png",
+     "dev": "fold",
+     "at": 1855,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Xem luật Công · Nữ công",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795673997134.png",
+     "dev": "fold",
+     "at": 1862,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674013207.png",
+     "dev": "fold",
+     "at": 1878,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674019766.png",
+     "dev": "fold",
+     "at": 1884,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách ",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674026223.png",
+     "dev": "fold",
+     "at": 1891,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674033438.png",
+     "dev": "fold",
+     "at": 1898,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Con của ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674039861.png",
+     "dev": "fold",
+     "at": 1904,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Kế vị",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674046311.png",
+     "dev": "fold",
+     "at": 1911,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Hoàng tự trong cung",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674052720.png",
+     "dev": "fold",
+     "at": 1917,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Hôn sự",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674059208.png",
+     "dev": "fold",
+     "at": 1924,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Quý tộc kén rể · kén dâu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674065629.png",
+     "dev": "fold",
+     "at": 1930,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674074916.png",
+     "dev": "fold",
+     "at": 1940,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674082099.png",
+     "dev": "fold",
+     "at": 1947,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Phi tần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674089550.png",
+     "dev": "fold",
+     "at": 1954,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Nam nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674097371.png",
+     "dev": "fold",
+     "at": 1962,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Cung nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674104834.png",
+     "dev": "fold",
+     "at": 1970,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674112396.png",
+     "dev": "fold",
+     "at": 1977,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Xem thêm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674123429.png",
+     "dev": "fold",
+     "at": 1988,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Gặp ngài ban ngày 2/5",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674131220.png",
+     "dev": "fold",
+     "at": 1996,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Việc hôm nay 1/2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674139005.png",
+     "dev": "fold",
+     "at": 2004,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Điều ngài thích",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674146665.png",
+     "dev": "fold",
+     "at": 2012,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674154319.png",
+     "dev": "fold",
+     "at": 2019,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674161925.png",
+     "dev": "fold",
+     "at": 2026,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Ân oán",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674168374.png",
+     "dev": "fold",
+     "at": 2033,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Phe phái",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674174789.png",
+     "dev": "fold",
+     "at": 2039,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Xem quan hệ của Ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674181187.png",
+     "dev": "fold",
+     "at": 2046,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Đổi chỗ hai người",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674187636.png",
+     "dev": "fold",
+     "at": 2052,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "với Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674194065.png",
+     "dev": "fold",
+     "at": 2059,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674200950.png",
+     "dev": "fold",
+     "at": 2065,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674223119.png",
+     "dev": "fold",
+     "at": 2088,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Túi đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674229802.png",
+     "dev": "fold",
+     "at": 2094,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Thú cưng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674236189.png",
+     "dev": "fold",
+     "at": 2101,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Việc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674242599.png",
+     "dev": "fold",
+     "at": 2107,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Tất cả 16",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674249068.png",
+     "dev": "fold",
+     "at": 2114,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Trang sức 1",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674255519.png",
+     "dev": "fold",
+     "at": 2120,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Y phục 2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674262040.png",
+     "dev": "fold",
+     "at": 2127,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Vải vóc 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674268444.png",
+     "dev": "fold",
+     "at": 2133,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Thuốc men 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674274853.png",
+     "dev": "fold",
+     "at": 2139,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Hương liệu 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674281363.png",
+     "dev": "fold",
+     "at": 2146,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Lễ vật 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674287767.png",
+     "dev": "fold",
+     "at": 2152,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Thư từ 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674294305.png",
+     "dev": "fold",
+     "at": 2159,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Tác phẩm 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674300761.png",
+     "dev": "fold",
+     "at": 2165,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Cài tóc: Trâm hoa lụa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674307220.png",
+     "dev": "fold",
+     "at": 2172,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Y phục: Áo lụa thêu hoa nhỏ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674313729.png",
+     "dev": "fold",
+     "at": 2178,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Trâm hoa lụa · Trâm cài",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674320238.png",
+     "dev": "fold",
+     "at": 2185,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Áo lụa thêu hoa nhỏ · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674326687.png",
+     "dev": "fold",
+     "at": 2191,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Váy sa xanh ngọc · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674333104.png",
+     "dev": "fold",
+     "at": 2198,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Nước bào hoa · Dầu chải tóc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674339520.png",
+     "dev": "fold",
+     "at": 2204,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Nến mỡ dê ×3 · Nến",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674345961.png",
+     "dev": "fold",
+     "at": 2210,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Than liễu ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674352443.png",
+     "dev": "fold",
+     "at": 2217,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Son sáp ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674358862.png",
+     "dev": "fold",
+     "at": 2223,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Yên chi giấy ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674365446.png",
+     "dev": "fold",
+     "at": 2230,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Phấn gạo ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674371939.png",
+     "dev": "fold",
+     "at": 2236,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Tây sở · Ở đây có 3 người.»",
+     "label": "Dấu ấn Đáp ứng · đang dùng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lover-1/dead-fold-1795674378462.png",
+     "dev": "fold",
+     "at": 2243,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Thạch Thanh Từ"
+     }
+    }
+   ],
+   "buoi": 2,
+   "steps": 547,
+   "status": [],
+   "_loopAt": 1795679906648,
+   "_snapAt": 1795679895835,
+   "_started": true,
+   "_ckAt": 1795679895177,
+   "_ckB": 2,
+   "rss": [
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1282,
+     "rendererMB": 557,
+     "heapMB": 111,
+     "dom": 3145,
+     "q": 4,
+     "lsK": 4
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1587,
+     "rendererMB": 744,
+     "heapMB": 111,
+     "dom": 1342,
+     "q": 2,
+     "lsK": 117
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1503,
+     "rendererMB": 652,
+     "heapMB": 111,
+     "dom": 1319,
+     "q": 2,
+     "lsK": 117
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1729,
+     "rendererMB": 866,
+     "heapMB": 111,
+     "dom": 1283,
+     "q": 3,
+     "lsK": 117
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1591,
+     "rendererMB": 954,
+     "heapMB": 111,
+     "dom": 869,
+     "q": 1,
+     "lsK": 117
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1325,
+     "rendererMB": 638,
+     "heapMB": 111,
+     "dom": 1500,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1488,
+     "rendererMB": 783,
+     "heapMB": 82,
+     "dom": 1436,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1280,
+     "rendererMB": 576,
+     "heapMB": 82,
+     "dom": 1505,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1297,
+     "rendererMB": 593,
+     "heapMB": 82,
+     "dom": 1485,
+     "q": 1,
+     "lsK": 120
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1496,
+     "rendererMB": 790,
+     "heapMB": 82,
+     "dom": 815,
+     "q": 2,
+     "lsK": 120
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1309,
+     "rendererMB": 592,
+     "heapMB": 82,
+     "dom": 1343,
+     "q": 2,
+     "lsK": 120
+    },
+    {
+     "buoi": 2,
+     "y": 1,
+     "totalMB": 1189,
+     "rendererMB": 655,
+     "heapMB": 169,
+     "dom": 949,
+     "q": 1,
+     "lsK": 120
+    },
+    {
+     "buoi": 2,
+     "y": 1,
+     "totalMB": 1487,
+     "rendererMB": 923,
+     "heapMB": 169,
+     "dom": 795,
+     "q": 1,
+     "lsK": 128
+    }
+   ],
+   "promo": {
+    "raw": 0,
+    "real": 0,
+    "picked": 0,
+    "by": {}
+   },
+   "_unsFail": {
+    "#klife|": {},
+    ".dlg|Thân phận kiếp này": {},
+    ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+    ".dlg|Ngày thứ nhất — Nhập cung": {},
+    "page|Dưỡng Tú viện · Đông sở · Ở đây có # người.": {},
+    ".dlg|Dưỡng Tú viện": {},
+    ".dlg|Đông sở": {},
+    ".mapsc|": {},
+    ".dlg|Tây sở": {},
+    "page|Dưỡng Tú viện · Tây sở · Ở đây có # người.": {},
+    ".dlg|Đêm": {},
+    ".dlg|Ngày thứ hai — Điện tuyển": {},
+    ".dlg|Dò hỏi ma ma": {},
+    ".kmov|": {},
+    ".dlg|Sân chờ": {},
+    ".dlg|Điện tuyển": {},
+    ".dlg|Thái hậu": {},
+    ".dlg|Hoàng thượng": {}
+   },
+   "_scrW": {
+    ".dlg|Thân phận kiếp này|511,470": {
+     "left": 321,
+     "n": 1
+    },
+    ".mapsc||378,533": {
+     "left": 100,
+     "n": 1
+    },
+    "#kg82||378,500": {
+     "left": 77,
+     "n": 1
+    }
+   },
+   "t": {
+    "total": 212070
+   }
   }
  ]
 }
