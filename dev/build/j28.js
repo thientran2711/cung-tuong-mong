@@ -60,9 +60,12 @@ function ocStamp(x,y){try{if(!x||!y||typeof x!=="object")return;const k=ocKey(y)
 function ocFloor(h,t){const C=BAL.oanCool,L=BAL.oanLv;try{if(typeof memTop!=="function"||!t)return 0;const m=memTop(h,t,-1);if(!m)return 0;
   if(m.L||m.k)return L[C.floor.keep-1]||0;return m.g>=BAL.mem.faint?(L[C.floor.mem-1]||0):0}catch(e){return 0}}
 /* fade one grudge value v held by h toward t (key k) by w tuần of cool-down; returns the new value */
-function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;const q=h.ocq&&h.ocq[k];if(q!=null&&ocWk()-q<C.quiet)return v;
+/* review/oan-pace (c) (owner OD 26/11 ~18:40Z «giảm quá chậm»): the longer the holder is left alone, the faster (× 1 + alone.k × days quiet past
+   quiet, at most alone.max days; an old save with no stamp = alone the longest); a deep grudge (≥ BAL.oanLv[deep.lv − 1]) slower (× deep.k) */
+function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;const q=h.ocq&&h.ocq[k];const qd=q==null?1e9:ocWk()-q;if(qd<C.quiet)return v;
  const fl=ocFloor(h,t);if(v<=fl)return v;const cc=h.occ=h.occ&&typeof h.occ==="object"?h.occ:{};
- const d=(cc[k]||0)+w*ocBandW(v)/C.season*kf;const n=Math.floor(d);cc[k]=Math.round((d-n)*1000)/1000;if(!n)return v;return Math.max(fl,v-n)}
+ const A=C.alone,Dp=C.deep,m=(1+A.k*Math.min(A.max,qd-C.quiet))*(v>=BAL.oanLv[Dp.lv-1]?Dp.k:1);
+ const d=(cc[k]||0)+w*ocBandW(v)/C.season*kf*m;const n=Math.floor(d);cc[k]=Math.round((d-n)*1000)/1000;if(!n)return v;return Math.max(fl,v-n)}
 function ocPerson(id){try{return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&String(v.id)===String(id))||null}catch(e){return null}}
 /* w tuần of cool-down for every grudge in the world; mine = also HER own grudges (S.ro) */
 function oanCool(w,mine,onlyMine){const C=BAL.oanCool;if(!C||!C.on||!S)return;w=w||1;
