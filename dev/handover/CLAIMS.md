@@ -1857,7 +1857,7 @@ KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING 
 | D1+D4 punishment reason / one rank / lãnh cung stay / harm WHO-WHY-EVIDENCE + evidence-per-charge rec (opus; briefs/D-owner-bugs-2611.md) | review/punish-reason + review/charge-evidence | FOREMAN D | session_01D3E3NYUoFuaWeKkNJXdrZH (#2) | RUNNING | 26/11 04:30Z |
 | D2 daily event cap + STAT PACE (opus; briefs/D-owner-bugs-2611.md) | review/stat-pace | FOREMAN D | session_01D3E3NXn2KvRU5meXSH17rD (#2) | RUNNING | 26/11 04:30Z |
 | D3 contest first place ⇒ thị tẩm (opus; briefs/D-owner-bugs-2611.md) | review/contest-thitam | FOREMAN D | session_01D3E3NY4u5PWtro3m4FhbDG | RUNNING | 26/11 04:30Z |
-| D5 minigame cut / skill roll / Học nhanh recommendation (opus; briefs/D-owner-bugs-2611.md) | review/mg-trim | FOREMAN D | session_01D3E3NaHccBNYdCLfx5BnTi | RUNNING | 26/11 04:30Z |
+| D5 minigame cut / skill roll / Học nhanh recommendation (opus; briefs/D-owner-bugs-2611.md) | review/mg-trim | FOREMAN D | session_01D3E3NY4dwzUxFsbZXyqSL7 (#2) | RUNNING | 26/11 04:30Z |
 HOME-WAY top-bar Về phòng + home icon + punishment by weight | review/home-way | session_01V1ZZH3KBeUcSLSUiQfAU1w | RUNNING | 2026-11-26T04:18Z (MAIN 152)
 | 26/11 04:30Z | F #18 | BIG REVIEWER #8 (opus, F #18 child) | review/robot-realtap 4d7a22c6..ad5e1265 (+ fixer #9 pet-shop commit if it lands) | reports/robot-realtap-review.md | open |
 NEWS-SIEVE Tin trong cung sieve + monthly summary + nết open + rank respect + Tin báo dupes | review/news-sieve | session_01V1ZZH3wzCzJXUyoxYK9v3v | RUNNING | 2026-11-26T04:27Z (MAIN 152)
