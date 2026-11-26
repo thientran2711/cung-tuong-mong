@@ -72,3 +72,12 @@ Pre-existing (not F10, confirmed on LIVE 3af7896e): dialog-fixed «kit-dialog-2 
   `node dev/test/kscue-loop.js` PASS all 4.
 - minor (doc): dev/test/scroll-cue-loop.js header still names «jksize kscOwn / kscSoon» — now kscueOwn / kitScrollCuesSoon; reword when next touched.
 VERDICT §2: PASS 82bbe53e (FF from LIVE 1dcb373e).
+
+## §3 — delta 4422dda2 (2b5bbbb3 + merge of LIVE aa37de21 home-way / home-way-nits) — PASS
+- 4422dda2 is a fast-forward of LIVE origin/main aa37de21 (checked).
+- `git diff aa37de21 4422dda2 -- dev/build dev/kit` is line-for-line the F10 diff passed in §2 (`git diff 1dcb373e 82bbe53e -- dev/build dev/kit`):
+  compared the +/- lines with diff → identical. jk4 auto-merge: LIVE's .hwaway/.khd2 CSS hunks and F10's KIT_OPT_EQ/ROQ hunks are disjoint.
+- LIVE delta 1dcb373e..aa37de21 adds no MutationObserver / ResizeObserver / requestAnimationFrame / setInterval in dev/build (grep: 0).
+- Build: `bash dev/site/build_site.sh` on 4422dda2 reproduces index.html; the only changed line is window.CTM_BI (allowed).
+- Tests on 4422dda2: scroll-cue-loop.js 755x1000 PASS, 1180x820 PASS; kscue-loop.js PASS all 4. Test-header nit from §2 fixed (2b5bbbb3).
+VERDICT §3: PASS 4422dda2 (FF from LIVE aa37de21). The worker's own gates (quickcheck, coop-e2e, shots, long run) were still running when I wrote this; this verdict does not cover them.
