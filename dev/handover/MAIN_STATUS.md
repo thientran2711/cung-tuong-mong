@@ -1,3 +1,13 @@
 # MAIN_STATUS — cross-account mailbox between MAIN and seats (created by MAIN 160, 26/11 ~18:12Z)
 Seats on the OLD account write «- (time) FOR MAIN 161 from <seat> <session>: …». The new-account MAIN writes «- (time) FROM MAIN 161: …». Newest last. English.
 - (26/11 ~18:12Z) FROM MAIN 160: sếp is moving MAIN to another account (MAIN CHÍNH 161, ROOT). Old-account seats: finish the item in hand, write your state + next steps here, then stop. LIVE f573dc94 · ROLLBACK b881686f.
+
+## FOR MAIN 161 — RV-KK41 (small kit reviewer, session_01V1ZZGzpiZzUtYXet9XoAHd) 26/11 ~18:05Z — verdicts + open items (details: dev/handover/reports/rv-kk41.md)
+PRIORITY #1 CHECK: rv-kk41.md, OD 26/11 17:55Z (keep ALL empty result rows → §6.7 kitRowNil void), claims KK41→KK42→KK43→KK44.
+- FOR MAIN 161: (A) review/kit-stage-r2 ec2f7c43 = SMALL PASS (long hand-face name → kit LIST card; NAMES scan cut 0 both devices). STACK LAND needed (50 ahead / 23 behind main at that time). kitRowNil CLEAN.
+- FOR MAIN 161: (B) review/kit-kem-row-r3 a5ff660a = SMALL PASS (on ob-verdict-rv 5dc1db31; ONE kitKemRow; kit-kem-row PASS, ob-verdict 84 OK, one-core gates PASS). Land after ob-verdict-rv. CLEAN.
+- FOR MAIN 161: (C) review/kit-home-frame f75a3f3c = SMALL PASS (replaces daa31a5e; 22beb8d8 dead; kit-tassel-clear + kit-home-frame PASS, all 4 shots looked). CLEAN.
+- FOR MAIN 161: (D) review/kit-name-stranger e25dfd52 = SMALL PASS (seeded loop PASS 6/6, 42-site table). CLEAN.
+- FOR MAIN 161: (E) review/kit-g4-r2 4dbce886 = was SMALL PASS WITH RESIDUAL but VOID for landing (carries §6.7 kitRowNil, owner 17:55Z); also void: kit-empty-rows cda34e5e, kit-g4-baseline 6b7df96b. Waiting for KK44's g4 branch WITHOUT §6.7 — the parts to re-review: j3 closeModal one-copy (risk: drops an identical waiting dialog without running go/onClose, untested for a flow awaiting it), §6.2h kitOptNarrow, kitOptTier kv1 rule, home-way guard in j74; tests to re-run: dialog-fixed, button-crawl --fast, dead-close-scan Fold, opt-narrow-scan main vs branch (one process per device), quickcheck perf ×3.
+- FOR MAIN 161 OPEN: dead-close residual «same dialog after ✕» with Q=1 (reopens after the close; Fold art / inv tabs; LIVE 56 → ≤3 flaky) = KK44 item. «Tổng quản thái giám ???» in Mệnh truyện pair heading = rel-men-servants F2 (LIVE baseline, j61 kitName chip; D fixes the prose case only).
+- FOR MAIN 161 OPEN: viecnho-scan (full person-card family) not run by me for C; opt-frame-scan «broken» count baseline for main not compared. My scratch: nothing in git except rv-kk41.md; this reviewer stops here, 161 opens its own.
