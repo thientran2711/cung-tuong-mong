@@ -66,7 +66,10 @@ function bcChoices(p,from){const B=BAL.banCung;const occ=bcOcc(p);const L=PALN.m
  const nLk=Math.min(lk.length,B.lockMax,Math.max(lk.length?1:0,B.opts-ok.length)),out=ok.slice(0,B.opts-nLk).concat(lk.slice(0,nLk));
  return out.map(i=>({i,locked:bcLocked(p,i),odds:bcLocked(p,i)?0:bcOdds(p,i,from)}))}
 /* THE CEREMONY (replaces j27): the decree's palace, «Nhận» (sure, Đức +), «Xin <cung>» with real odds, or locked with the reason */
-palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.pal;if(from==null)return;const B=BAL.banCung;
+palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.pal;if(from==null)return;bcCard(from);log(`Được ban ${PALN[from]}.`)};
+/* save-unseen-lists r4 (LAW 11 / 6c): «Ban cung» (made at the turn of the tuần) is BUILT by a registered generator from the granted palace (index);
+   the grant (S.pal, S.palCer) is made before, once — written into the sổ and made again on load */
+const bcCard=rcpReg("banCung",from=>{if(!S||from==null||!PALN[from])return null;const B=BAL.banCung;
  const st=i=>bcDanh(i)-bcDanh(from);
  const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[from]}.`)}];
  for(const c of bcChoices(S,from)){const i=c.i;
@@ -75,8 +78,7 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
   const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`${sgStat(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
   opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
- Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});
- log(`Được ban ${PALN[from]}.`)};
+ Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});return Q[Q.length-1]});
 /* NPC parity (law 1): a consort newly made chủ vị may petition the same way (host only in co-op: one roll for the world) */
 function bcNpcAsk(v){const B=BAL.banCung,from=v.pal;if(from==null)return;
  const C=bcChoices(v,from).filter(c=>!c.locked&&bcDanh(c.i)>bcDanh(from)&&oddsLv(c.odds)>=B.npcLv);if(!C.length)return;

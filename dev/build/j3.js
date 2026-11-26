@@ -19,7 +19,7 @@ function mdH(p,cls){return `<span class="md ${cls||""}${kitRkCls(p)}" style="--c
 function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
-function pushModal(m){Q.push(m);}
+function pushModal(m){Q.push(m);return m}/* save-unseen-lists r4: hands the card back (a registered generator returns it) */
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
@@ -32,18 +32,23 @@ const isMenuCard=m=>!!(m&&/\bkptitle\b/.test(m.cls||""));
    it lands in (a save, the co-op week merge that rebuilds S / rivals from JSON, the AFK carry). A person who no longer exists → the card
    LAPSES (no effect, one short log line), never a road whose effect is lost. A choice card with no generator also lapses with the log line
    where the merge / carry would drop it (serQ({lap:1})). The person lookup is the shared one (jemo emoKey / emoByKey). */
-const QRC={};let RCPRE=0;
-function rcpP(x){try{if(!x||typeof x!=="object"||typeof emoKey!=="function")return null;if(!(x===S||(S&&x===S.emp)||(S&&x===S.thO)||x.id!=null||x.sid!=null))return null;
+const QRC={};let RCPRE=0;const RCP_MAX=4000;/* the carried args of one card (chars) */
+/* save-unseen-lists r3: a confidant maid has no id / sid — carried as «maid» (hers) or «maid:<rival id>»; any other person with no key is never
+   copied into ra (a copy is a stranger after a load): rcpEnc throws → the card stays a code card, counted as such */
+function rcpMaid(x){if(!S||!x)return null;if(x===S.maid)return"maid";for(const v of (typeof rivals!=="undefined"&&rivals)||[])if(v&&v.maid===x&&v.id!=null)return"maid:"+v.id;return null}
+function rcpByKey(k){const q=String(k);if(q==="maid")return S.maid||null;if(/^maid:/.test(q))return((typeof rivals!=="undefined"&&rivals||[]).find(v=>String(v.id)===q.slice(5))||{}).maid||null;return typeof emoByKey==="function"?emoByKey(q):null}
+function rcpPerson(x){return typeof x.name==="string"&&("loyal" in x||"net" in x||"role" in x)}
+function rcpP(x){try{if(!x||typeof x!=="object"||typeof emoKey!=="function")return null;const mk=rcpMaid(x);if(mk)return mk;if(!(x===S||(S&&x===S.emp)||(S&&x===S.thO)||x.id!=null||x.sid!=null))return null;
  const k=emoKey(x);if(!k||/^x\d/.test(k))return null;return emoByKey(k)===x?k:null}catch(e){return null}}
 function rcpEnc(x,d){d=d||0;if(d>4)throw 0;if(x==null||typeof x==="number"||typeof x==="string"||typeof x==="boolean")return x;if(typeof x==="function")throw 0;
  const k=rcpP(x);if(k!=null)return {"@p":k};if(Array.isArray(x))return x.map(y=>rcpEnc(y,d+1));
- if(Object.getPrototypeOf(x)!==Object.prototype)throw 0;const o={};for(const i in x)o[i]=rcpEnc(x[i],d+1);return o}
+ if(Object.getPrototypeOf(x)!==Object.prototype||rcpPerson(x))throw 0;const o={};for(const i in x)o[i]=rcpEnc(x[i],d+1);return o}
 function rcpDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(rcpDec);
- if("@p" in x){const p=typeof emoByKey==="function"?emoByKey(String(x["@p"])):null;if(!p||p.alive===false||p.dead)throw 0;return p}const o={};for(const i in x)o[i]=rcpDec(x[i]);return o}
+ if("@p" in x){const p=rcpByKey(x["@p"]);if(!p||p.alive===false||p.dead)throw 0;return p}const o={};for(const i in x)o[i]=rcpDec(x[i]);return o}
 /* wrap a card generator: every choice card it returns carries rk (kind) + ra (its arguments, people as ids); RCPRE = 1 while a card is made again */
-function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<4000){m.rk=k;m.ra=a}}}catch(e){}return m}}
+function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<RCP_MAX){m.rk=k;m.ra=a}else m.__rkLen=j.length}}catch(e){}return m}}
 const QRCF=[];const rcpF=(e,w)=>{QRCF.push([e&&e.rk,w,typeof day==="function"?day():0]);if(QRCF.length>20)QRCF.shift();return null};window.__rcpFail=QRCF;/* debug: why a card could not be made again */
-function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let a;try{a=rcpDec(e.ra||[])}catch(x){return rcpF(e,"person gone "+JSON.stringify(e.ra).slice(0,80))}RCPRE=1;let m=null;try{m=fn.apply(null,a)}catch(x){m=null;rcpF(e,"threw "+(x&&x.message))}finally{RCPRE=0}
+function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let a;try{a=rcpDec(e.ra||[])}catch(x){return rcpF(e,"person gone "+JSON.stringify(e.ra).slice(0,80))}RCPRE=1;let m=null;const Q0=typeof Q!=="undefined"?Q:null,had=new Set(Q0||[]);try{m=fn.apply(null,a)}catch(x){m=null;rcpF(e,"threw "+(x&&x.message))}finally{RCPRE=0;/* save-unseen-lists r2: a generator that queues its own card (kitPanel) hands it back here, never a second copy in Q */try{if(m&&Q0&&Q===Q0&&!had.has(m)){const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)}}catch(x){}}
  if(!m||!m.opts||!m.opts.length)return rcpF(e,"no choice now");m.rk=e.rk;m.ra=e.ra;if(e.t)m.t=e.t;if(e.cls&&!m.cls)m.cls=e.cls;return m}
 const rcpLapse=t=>{try{log(`«${String(t||"Việc khó xử").replace(/</g,"&lt;")}»: việc đã qua, không còn kịp đáp.`)}catch(e){}};
 /* one card in its save form: pid → {pid,pp,t}; a carried generator card → {rk,ra,t,cls}; a notice → its text; a choice with no route → lap (opt.lap) or nothing */
@@ -58,7 +63,7 @@ function kqEnc(x,d){d=d||0;if(d>7)throw 0;if(x==null||typeof x==="number"||typeo
  const k=rcpP(x);if(k!=null)return {"@p":k};if(Array.isArray(x))return x.map(y=>{const v=kqEnc(y,d+1);return v===undefined?null:v});
  if(Object.getPrototypeOf(x)!==Object.prototype)throw 0;const o={};for(const i in x){if(i==="onClose"||i==="opts")continue;const v=kqEnc(x[i],d+1);if(v!==undefined)o[i]=v}return o}
 function kqKit(m){try{if(!m||!m.kit||m.h||m.opts||isLookCard(m))return undefined;const o=kqEnc(m.kit);const j=JSON.stringify(o);return j&&j.length<24000?o:undefined}catch(e){return undefined}}
-function kqDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(kqDec);if("@p" in x){const p=typeof emoByKey==="function"?emoByKey(String(x["@p"])):null;return p&&p.alive!==false&&!p.dead?p:null}
+function kqDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(kqDec);if("@p" in x){const p=rcpByKey(x["@p"]);return p&&p.alive!==false&&!p.dead?p:null}
  const o={};for(const i in x)o[i]=kqDec(x[i]);return o}
 function serM(m,opt){return isMenuCard(m)||isLookCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.rk?{rk:m.rk,ra:m.ra,t:m.t,cls:m.cls}:m.opts?(opt&&opt.lap?{lap:1,t:m.t}:null):(k=>k?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,kit:k}:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w})(kqKit(m))}
 function serQ(opt){return Q.map(m=>serM(m,opt)).filter(Boolean)}

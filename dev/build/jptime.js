@@ -151,7 +151,11 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
 /* ---------- wiring: the clock ---------- */
 (function(){try{
  const sp0=spend;spend=function(){const r=sp0.apply(this,arguments);try{if(ptOn())ptTick()}catch(e){ptErr("spend",e)}return r};
- if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){ptTick();ptLedger()}}catch(e){ptErr("buoi",e)}return r}}
+ /* save-unseen-lists r2 (rv r2 FIX 3, the Danh drift on reload): ptTick runs AFTER the step (and on a nextBuoi that did not move time, e.g. jnight
+   rerun): a late order lands as «Từ chối» (its fx: Danh …) with no write after it, so a reload right then gave the older number. When ptTick
+   changed her numbers, the slot is written at once (the same write a step makes). */
+const PT_FP=()=>{try{return [S.danh,S.sung,S.bac,S.duc,S.tai,S.sac,S.tamco,S.suc,S.th,S.hh,(S.ordQ||[]).length,(S.erra||[]).length].join(",")}catch(e){return ""}};
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){const f0=PT_FP();ptTick();ptLedger();if(PT_FP()!==f0&&S&&!S.dead&&!quiet&&typeof save==="function")save()}}catch(e){ptErr("buoi",e)}return r}}
  if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
 }catch(e){ptErr("wire",e)}})();
 window.PTIME={repRows:ptRepRows,repFacts:ptRepFacts,repText:ptRepText,on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,

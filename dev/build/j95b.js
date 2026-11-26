@@ -214,8 +214,11 @@ function spyOther95b(y){try{return typeof spyIn70==="function"&&spyIn70(S,y)}cat
 function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.heard++;const x=r.x!=null?RV(r.x):null;
  const src=x?`người bên cung ${x.name}`:"có kẻ";const txt=`Nghe đồn ${src} đã rỉ tai ${y.name} rằng ngươi ${r.txt}. Dạo này ${y.name} nhìn ngươi lạnh hẳn đi.`;
  try{noteAdd(y.id,`Nghe đồn: ${src} rỉ tai nàng rằng ngươi ${r.txt} (lời đồn)`,1)}catch(e){}J95B.notes.push(txt);if(J95B.notes.length>100)J95B.notes.splice(0,50);
- Q.push({t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,
-  opts:j95bRumOpts(r,y,x)})}
+ Q.push(j95bRumCard(r.u))}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): «Nghe đồn» is carried by the rumour id (j3 rcpReg) and made again from S.j95b.rum on load */
+const j95bRumCard=rcpReg("j95bRum",u=>{const z=j95bZ();const r=z.rum.find(q=>q.u===u);if(!r||r.cleared)return null;const y=RV(r.y);if(!y||!y.alive)return null;const x=r.x!=null?RV(r.x):null;
+ const src=x?`người bên cung ${x.name}`:"có kẻ";const txt=`Nghe đồn ${src} đã rỉ tai ${y.name} rằng ngươi ${r.txt}. Dạo này ${y.name} nhìn ngươi lạnh hẳn đi.`;
+ return{t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,opts:j95bRumOpts(r,y,x)}});
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
 function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=oddsCl(Math.min(35+eyes(S)*8+(S.tamco||0)/4,90));
  return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
