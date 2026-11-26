@@ -183,3 +183,21 @@ TOOLS: /home/user/wt/kk34-shots/st.js (EV=pids TAP=1 TALK=n), rec.js (SZ, TALKS 
 | pmLad | Đầu hồ | Rất vững (sure meter) | — (no odds word) |
 
 77 cards changed in 39 frames shown
+
+## KK35 REPORT + HANDOVER (26/11 ~01:55Z) — kit keeper, coordinator MAIN CHÍNH 149 session_01V1ZZH2zAQCCznbuVpXJEf9
+START_CTX ~3 % (estimate; context_usage reads 0). Rolled at ~28 % (START + 25 %).
+PRIORITY #1 CHECK: OD 25/11 ~21:50Z/~21:55Z/~22:00Z/~23:40Z | main none | review/kit-stage (mine), review/art-event b498c77e (merged), review/place-rules (K-MAP-BANNER ask), review/button-crawl-fix-10 (K-KDTX-BAND), review/nhv-areas (area test 6) | claims KK35.
+LAND READY sent: review/kit-stage 893613ee (quickcheck: all gates PASS; look-dedupe red only under my concurrent probes, PASS alone on 893613ee + LIVE). Videos img/_review/kit-stage/kk35-893613ee-full-{fold,ipad}.mp4 (LOOKED; 14 real taps, 0 dead, 0 errors).
+Follow-up on top (pushed): 3c51e43d (K-MAP-BANNER §103 kitMapBanner + test; K-KDTX-BAND ×2 jkslide; stage .k3mpic as scene) + bb85ae17 (merge review/art-event b498c77e, reviewed + pictures looked). Quickcheck on bb85ae17 was running at handover (log /home/user/wt/kk35-shots/qc-bb85.log).
+Queue status:
+1 LAND GATES — DONE (realtap rt.choose ONE helper; press-keep / q-softlock use it; kit-conform + dialog-fixed know §102; reused-dialog cleanup; «Ô lưu · Lui» = pre-existing on LIVE, harness NLP cause, crawler fixed).
+2 kitPick fitNames — DONE in kit (4th line + one taller plaque height; re-fit when a later name pass rewrites a name; kit-pick.js «longnames»). NHV-BUILD told (merge 3aacdd30+ / jkpick.js). Hand card faces: 3-line spill → .khn1 → .khn2 (4 lines).
+3 option-card rule — DONE §6.2e kitOptNameFit (list cards: short phrase never breaks; small thumb → name under; one size per list). Fold «Tin báo» is a stage hand now anyway. OPEN: the NAMES scan before/after table (opt-frame-scroll-scan NAMES=1 [NOHAND=1] SZ=[[755,1000]] on LIVE vs branch) was stopped for CPU — run it, one device per process, never beside a quickcheck.
+4 vnight → «Đêm thị tẩm» — DONE: person picker = EVERY card a person; mixed frames stay a hand (person card shows her portrait). OPEN: whole-family scan of follow-up screens (scan PEND frames with ≥1 face card: before non-hand, after hand).
+5 K-KDTX-BAND ×2 — DONE (jkslide scope; «Danh hiệu»/«Thiên mệnh» tabs tappable Fold+iPad). Remove the button-crawl-known.txt line on button-crawl-fix-10 when it lands.
+6 K-MAP-BANNER — KIT READY §103 (PLACE-RULES to wire: replace kitNotice «plban» + .fest chip by kitMapBanner.set({id:'plban',line,home:plHomeK()})).
+7 ART-EVENT — merged (bb85ae17).
+8 extra talk candidates — NOT started (MAIN decides pids).
+QUESTION sent to MAIN: «Mục tiêu chương» first tab (3 «Đi làm» cards) is a stage + hand, its other tabs are a panel — keep or exclude info panels with shortcut cards.
+Lessons: never run scans / probes beside a quickcheck (load flakes: dialog-fixed hand-off-screen, look-dedupe). Recorder: open «Tin báo» before a night (the day turn-over holds the notice).
+TOOLS (session scratch, may be gone): /home/user/wt/kk35-shots/rec.js (video: Tin báo → c2a → vnight → night2), ev.js (EV=pid PP=json one frame), goal2.js (goal panel tabs hit test), map2.js, tinbao*.js. Worktrees /home/user/wt/kk35 (review/kit-stage), /home/user/wt/kk35b (side build), /home/user/wt/kk35h (this report).
