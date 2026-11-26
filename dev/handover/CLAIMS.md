@@ -1860,3 +1860,4 @@ KK37 kit keeper | review/kit-stage | session_01V1ZZH16x8rVajpgG2KwrB5 | RUNNING 
 HOME-WAY top-bar Về phòng + home icon + punishment by weight | review/home-way | session_01V1ZZH3KBeUcSLSUiQfAU1w | RUNNING | 2026-11-26T04:18Z (MAIN 152)
 | E97r BIG REVIEW dup-report a0a1d1a2 (opus; briefs/E97r-review-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWkmQC9riCQ7uwjnLho | RUNNING | 26/11 04:25Z |
 | 26/11 04:30Z | F #18 | BIG REVIEWER #8 (opus, F #18 child) | review/robot-realtap 4d7a22c6..ad5e1265 (+ fixer #9 pet-shop commit if it lands) | reports/robot-realtap-review.md | open |
+NEWS-SIEVE Tin trong cung sieve + monthly summary + nết open + rank respect + Tin báo dupes | review/news-sieve | session_01V1ZZH3wzCzJXUyoxYK9v3v | RUNNING | 2026-11-26T04:27Z (MAIN 152)

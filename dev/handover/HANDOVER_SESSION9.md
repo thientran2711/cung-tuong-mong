@@ -3796,3 +3796,4 @@ LOAD: main running 0 own workers (owner bugs/UI/go-live only) | B seats 9/12 (sa
 - ~04:30Z SẾP STANDING PERMISSION «cho phép đưa lên live, từ nay bản nào qua kiểm thì cứ đưa lên» → OD row; MAIN pushes main itself from lander-staged shas. Told LC20.
 - ~04:32Z SẾP «Q5 A» → OD:L353 overwritten in place; LC20 builds a9 A (c0f41387 + 346da1ae on f009e1a6) → MAIN pushes.
 - ~04:40Z SẾP NEWS SIEVE rule → OD row; NEWS-SIEVE worker opened (see next line).
+- ~04:41Z NEWS-SIEVE = session_01V1ZZH3wzCzJXUyoxYK9v3v (152 child, opus, review/news-sieve): sieve daily feed to her-touching news, monthly NPC summary, nết shown from start, rank respect, + D-routed Tin báo duplicates/«Lui» dead.
