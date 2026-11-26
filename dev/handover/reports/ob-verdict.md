@@ -58,8 +58,11 @@ Branch `review/ob-verdict` on LIVE origin/main 6b5d3d05. Files: `dev/build/j63.j
 
 scan acts with a card: 36; with a «Người ấy» row after: 19 (the rest: no number moved on a no-roll act, or a «Bày mưu» dialog whose deed lands later — see Open)
 
+## r1 (MAIN 155 LOOK)
+- (a) her chosen target always shows its real name + title («Thường tại Tô Nhu Tắc», never «Thường tại ???») in «Kết cục» and «Người ấy» — one place in the kit builder (j63 K.tgt) + the pillow sentence (jverdict), name wrapped in `data-k61skip`; the «???» mask stays for doers she cannot know («Ai làm» still needs her Sổ ghi to name them). Test check added (both devices × 3 outcomes). Seal word stays BẠI (MAIN).
+
 ## Tests (this branch)
-- `node dev/test/ob-verdict.test.js index.html <dir>` → ALL 33 OK: real taps Fold 755x1000 + iPad 1180x820, night pillow thành / hỏng / bỏ dở (seal, sentence, «Người ấy» with Sủng a → b, her Sủng loss in Mất), scan, two-way «Ai làm», old save loads + plays a buổi, 0 page errors.
+- `node dev/test/ob-verdict.test.js index.html <dir>` → ALL 39 OK: real taps Fold 755x1000 + iPad 1180x820, night pillow thành / hỏng / bỏ dở (seal, sentence, «Người ấy» with Sủng a → b, her Sủng loss in Mất), scan, two-way «Ai làm», old save loads + plays a buổi, 0 page errors.
 - Bot life 24 tuần (5 buổi each, first option): 0 page errors; hooks fired (pillowOnHer, runActOnHer).
 - Shots + video on the CDN (https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-verdict/): `after-{fold,ipad}-night-{ok,fail,soft}.png`, `before-…` (same taps on main), `fold-night-taps.webm`, `ipad-night-taps.webm`.
 

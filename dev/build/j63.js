@@ -283,6 +283,7 @@ function kaAimsOf(b){if(!b)return[];const t0=Date.now()-120000;/* an outer act r
 /* the verdict of HER act carried by this span (the last own aim with a roll) + its sentence; kaAimUse marks the aims shown (once) */
 function kaAimVerdict(b){const AIM=kaAimsOf(b);let ok=null,sen="",n="";for(const x of AIM){if(x.by)continue;const o=kaAimOk(x);if(o!==null){ok=o;n=x.n||"";sen=x.sen?(typeof x.sen==="function"?x.sen(o):x.sen):""}}return {AIM,ok,sen,n}}
 function kaAimUse(L){for(const x of L||[])if(!x.outer)x.used=1}/* an outer act's aim (doAct, talk …) is closed by its wrapper when the act ends: two cards of one act both show it */
+function kaEsc(t){return String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function kaAimPart(k,nm,a,b){return `<span class="ef ${b<a?"r":"g"}">${nm} ${kaN(b-a)} (${a} → ${b})</span>`}
 /* the target's own change since the act began: stats, rank, cấm túc, phế, mất (status words VANPHONG) */
 function kaAimStat(x){const v=x.v,b=x.b0||{},P=[];for(const [k,nm] of KA_AIMK){if(b[k]==null||typeof v[k]!=="number")continue;const a=Math.round(b[k]),n=Math.round(v[k]);if(a!==n)P.push(kaAimPart(k,nm,a,n))}
@@ -311,7 +312,7 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;K.tgt=[];K.by=[];
- for(const [v,{x,rel,ran}] of TG){const cons=typeof rivals!=="undefined"&&rivals.includes(v);const named=!cons||kaNamed(v)||String(x.n||"").includes(v.name)/* she picked this person by name */;const who=!cons?(v.name||""):named?kaWho(v):String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");
+ for(const [v,{x,rel,ran}] of TG){const cons=typeof rivals!=="undefined"&&rivals.includes(v);const named=true/* MAIN 155 (OB-VERDICT LOOK): she CHOSE this person, so she knows the name — the target of her own act always shows its real name (the «???» mask stays for doers she cannot know, law 6) */;const who=`<span data-k61skip>${kaEsc(!cons?(v.name||""):kaWho(v))}</span>`;
   const okx=kaAimOk(x);const P0=named?kaAimStat(x):[];/* a failed / slipped deed: say first that nothing hit her, then the feelings that did move */
   const P=named?((okx===false||okx==="soft")&&!P0.length&&rel.length?['<span class="ef n">không hề hấn gì</span>']:P0).concat(rel):[];
   const txt=P.length?P.join(", "):!ran&&(typeof x.later==="function"?x.later():x.later)?`<span class="ef n">chưa rõ — ${typeof x.later==="function"?x.later():x.later}</span>`:!named||okx===true?'<span class="ef n">chưa rõ — tai mắt sẽ báo</span>'/* done, but nothing she can see yet (planted proof, a sent hand) */:okx===false||okx==="soft"?'<span class="ef n">không hề hấn gì</span>':"";/* no number moved on a done deed: the sentence says what happened (a wet robe, a gift) — no empty row */

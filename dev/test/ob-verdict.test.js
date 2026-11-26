@@ -42,6 +42,7 @@ async function night(p,mode,shot){/* mode: ok | fail | soft — the REAL night: 
    ok(c&&c.seal===(m==='ok'?'THÀNH':m==='fail'?'BẠI':'BỎ DỞ'),`${dn} ${m}: seal`,c&&c.seal);
    ok(c&&c.sen&&c.sen.includes(r.pre.v.split(' ').pop()),`${dn} ${m}: sentence names the target`,c&&c.sen);
    const tg=c&&c.rows.find(x=>x.startsWith('Người ấy'));ok(!!tg&&/NGƯỜI ẤY/i.test(r.text),`${dn} ${m}: «Người ấy» row`,tg);
+   ok(r.text&&!/(KẾT CỤC|NGƯỜI ẤY)[^:]*\?\?\?/i.test(r.text),`${dn} ${m}: her chosen target shows its real name (no «???»)`,r.text&&r.text.slice(0,260));
    if(m==='ok')ok(tg&&tg.includes(`Sủng −`)&&tg.includes(`(${r.pre.sung} → ${r.post.sung})`),`${dn} ok: target Sủng a → b`,tg);
    if(m==='fail')ok(r.text&&/MẤT Sủng/i.test(r.text),`${dn} fail: her Sủng loss in Mất`,r.text);}
   ok(!p.errs.length,`${dn}: no page errors`,p.errs.slice(0,3));await p.close()}

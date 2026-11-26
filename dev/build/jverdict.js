@@ -36,9 +36,9 @@ if(typeof talk==="function"){const t0=talk;talk=function(oi){let p=null,a=null;t
  if(x){if((S.logSeq||0)!==q0)st("talk");if(!Q.length)x.used=1}return r}}
 /* pillow slander (j8 night2 «Thì thầm nói xấu» / jagemp pillowNpc): the verdict + ONE plain sentence in her Sổ ghi */
 if(typeof pillowDo==="function"){const p0=pillowDo;pillowDo=function(a,t){if(!S||!a||!t||a===t)return p0.apply(this,arguments);
- const f={a,t,ok:null};const me=a===S;const nm=me?t.name:"";
+ const f={a,t,ok:null};const me=a===S;const nm=me?`<span data-k61skip>${typeof kaWho==="function"?kaWho(t):t.name}</span>`:"";/* her chosen target: real name + title, never «???» */
  const sen=o=>o===true?`Gối đầu, ngươi thì thầm nói xấu ${nm}: ngài nghe lọt tai.`:o===false?`Gối đầu, ngươi thì thầm nói xấu ${nm}: ngài không tin${typeof DG==="function"&&DG()?", lại quay ra nghi ngươi":", còn trách ngươi lắm lời"}.`:o==="soft"?`Ngươi định nói xấu ${nm}, rồi lại thôi không nói.`:"";
- const x=me&&isP(t)?kaAim(t,{ok:()=>f.ok,n:`Thì thầm nói xấu ${nm}`,sen}):t===S&&isP(a)?kaAim(S,{by:a,ok:()=>f.ok,n:"nói xấu ngươi bên gối"}):null;
+ const x=me&&isP(t)?kaAim(t,{ok:()=>f.ok,n:`Thì thầm nói xấu ${t.name}`,sen}):t===S&&isP(a)?kaAim(S,{by:a,ok:()=>f.ok,n:"nói xấu ngươi bên gối"}):null;
  F.push(f);let r;try{r=p0.apply(this,arguments)}finally{F.pop()}
  f.ok=r&&r.ok?true:r&&r.soft?"soft":false;if(me&&f.ok!=="soft"){try{log(sen(f.ok))}catch(e){}}if(x)st(me?"pillow":"pillowOnHer");return r}}
 /* gifts to a person (Tặng quà / giftpick): the target's thiện cảm shows on the «Người ấy» row */
