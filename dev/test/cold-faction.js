@@ -7,7 +7,7 @@ const path=require('path');const {chromium}=require('playwright');const HTML=pro
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(u=>/^https?:/.test(u.href)||/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/.test(u.pathname),r=>r.abort());
- await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ /* stat-pace (review/stat-pace): this test checks its own feature's exact BAL numbers and forces its own cards; the stat-pace rule (BAL.stp) and the daily big-event cap (BAL.evc) are switched off here — they have their own test dev/test/stat-pace.js */await p.addInitScript(()=>addEventListener('DOMContentLoaded',()=>{try{BAL.stp.on=0;BAL.evc.on=0}catch(e){}}));await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{window.__seed=s=>{let sd=s;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646}};__seed(20261121);localStorage.clear();SLOT=4;
   document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{render()}catch(e){}});
  const r=await p.evaluate(()=>{const o={};const B=BAL.ag.par3,LT=B.cold.lt,FD=B.fac.drop,PD=BAL.rcv.prop.danh;

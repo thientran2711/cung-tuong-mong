@@ -1,5 +1,5 @@
 /* stat-pace (owner OD 26/11 ~01:25Z event pile-up + ~04:20Z «1 năm đã full 100»): unit checks of the ONE rise rule (jstatpace spG / spAdd,
-   BAL.sp) and the daily big-event cap (jevc, BAL.evc), on the built page, then simulated bot days (inpage6 «sens» bot) that must never show
+   BAL.stp) and the daily big-event cap (jevc, BAL.evc), on the built page, then simulated bot days (inpage6 «sens» bot) that must never show
    her more big events in one day than BAL.evc.cap (a fixed-date festival day may add its festival).
    usage: node dev/test/stat-pace.js <index.html> [days=45] → ok / FAIL lines, last line PASS / FAIL n; exit 1 on FAIL */
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
@@ -10,7 +10,7 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto('file://'+path.resolve(PAGE),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv())&&S.ps)break}Q.length=0});
- const U=await p.evaluate(()=>{const R=[];const ok=(c,m)=>R.push([!!c,m]);const B=BAL.sp;
+ const U=await p.evaluate(()=>{const R=[];const ok=(c,m)=>R.push([!!c,m]);const B=BAL.stp;
   ok(typeof spG==="function"&&typeof spAdd==="function"&&typeof evcOK==="function","rule + cap loaded");if(typeof spG!=="function")return R;
   /* (1) size band: one change never passes «big»; a fall untouched */
   const h={};ok(spG("rel",h,0,34,7)<=B.band.rel[2],`kỳ ngộ thiện cảm +34 → ${spG("rel",{},0,34,7)} (big band ${B.band.rel[2]})`);
@@ -44,10 +44,10 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
  let fail=0;for(const [g,m] of U){console.log((g?'ok   ':'FAIL ')+m);if(!g)fail++}
  /* (7) simulated days with the real bot: big events she was SHOWN per day (cards by source tag) never pass the cap */
  let src=fs.readFileSync(path.join(__dirname,'..','measure','inpage6.js'),'utf8');await p.evaluate(src);
- await p.evaluate(()=>{window.__bd=[];window.__cur={};window.__cd={};const seen=new WeakSet();const C=typeof evcKind==='function'?m=>evcKind(m)/* the game's own tag rule (jevc) */:m=>{/* LIVE (no jevc): the same tags */const t=String(m.t||'').replace(/<[^>]+>/g,''),pid=String(m.pid||'');
+ await p.evaluate(()=>{window.__bd=[];window.__cur={};window.__cd={};const seen=new WeakMap();const C=typeof evcKind==='function'?m=>evcKind(m)/* the game's own tag rule (jevc) */:m=>{/* LIVE (no jevc): the same tags */const t=String(m.t||'').replace(/<[^>]+>/g,''),pid=String(m.pid||'');
    if(pid==='j70'||/^(Mưu hại|Sau vụ mưu hại|Lời cảnh báo|Tai mắt báo tin)/.test(t))return'harm';if(pid==='kyngo')return'ky';if(/^(Có người đến|Có người tìm đến|Một ánh mắt)/.test(t)||/visit/.test(pid))return'visit';
    if(/^(e68|q72o|rgo?$|j71m)/.test(pid)||/^(Việc khó xử|Phụ tuyến|Lập công)/.test(t))return'opt';if(/^j71[ix]$/.test(pid))return'fest';return null};
-  const sm=showModal;showModal=function(){const r0=sm.apply(this,arguments);/* count what is REALLY on screen after the game's own gates */try{const m=Q[0];if(m&&typeof m==='object'&&!seen.has(m)){seen.add(m);const k=C(m);if(k){/* the day she SEES it (wk() now), not the day endTurn started: morning cards of a new day are painted inside endTurn */const d=wk();if(!window.__cd[d])window.__cd[d]={c:{},f:!!(typeof festToday==='function'&&festToday())};window.__cur=window.__cd[d].c;window.__cur[k]=(window.__cur[k]||0)+1;(window.__cur._=window.__cur._||[]).push(k+':'+(m.pid||'')+':'+String(m.t||'').slice(0,30)+(m.must?':MUST':'')+(m.forced?':FORCED':'')+(m.kend?':END':'')+(m.cls==='end'?':CLS':''))}}}catch(e){}return r0};
+  const sm=showModal;showModal=function(){/* a card already counted today (the game's own day mark) and shown again is not a new event */const m0=Q[0],again=!!(m0&&typeof m0==='object'&&m0.evcN&&m0.evcN===wk()+1);const r0=sm.apply(this,arguments);if(again&&Q[0]===m0)return r0;/* count what is REALLY on screen after the game's own gates */try{const m=Q[0];if(m&&typeof m==='object'&&seen.get(m)!==wk()){seen.set(m,wk());const k=C(m);if(k){/* the day she SEES it (wk() now), not the day endTurn started: morning cards of a new day are painted inside endTurn */const d=wk();if(!window.__cd[d])window.__cd[d]={c:{},f:!!(typeof festToday==='function'&&festToday())};window.__cur=window.__cd[d].c;window.__cur[k]=(window.__cur[k]||0)+1;(window.__cur._=window.__cur._||[]).push(k+':'+(m.pid||'')+':'+String(m.t||'').slice(0,30)+(m.must?':MUST':'')+(m.forced?':FORCED':'')+(m.kend?':END':'')+(m.cls==='end'?':CLS':''))}}}catch(e){}return r0};
   const et=endTurn;endTurn=function(){const k0=wk();const r=et.apply(this,arguments);if(wk()!==k0){const x=window.__cd[k0]||{c:{},f:false};window.__bd.push({d:k0,f:x.f,c:x.c});delete window.__cd[k0]}return r}});
  const t0=Date.now();while(true){const st=await p.evaluate(()=>{window.__bot.step('sens',120);return{n:window.__bd.length,dead:!!(S&&S.dead)}});if(st.dead||st.n>=ND||Date.now()-t0>500e3)break}
  const D=await p.evaluate(()=>({bd:window.__bd,cap:BAL.evc?BAL.evc.cap:3}));let worst=0,over=0,sum=0;const hist={};

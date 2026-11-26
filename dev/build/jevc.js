@@ -22,7 +22,7 @@ function evcOn(){return !!(typeof BAL==="object"&&BAL.evc&&BAL.evc.on&&S&&!S.dea
 /* today's count by kind: shown today + waiting in Q (not yet shown) */
 /* every card still waiting somewhere: Q, jspread's waiting list (SP13.L), j68's held cards (EVHOLD), this cap's own wait list (EVCW) */
 function evcWaiting(){const L=[];try{for(const m of Q)L.push(m)}catch(e){}try{for(const x of SP13.L)L.push(x.m)}catch(e){}try{for(const h of EVHOLD)L.push(h.m)}catch(e){}for(const w of EVCW)L.push(w.m);return L}
-function evcNow(){const z=evcZ(),n=Object.assign({},z?z.n:{});try{for(const m of evcWaiting())if(m&&!m.evcN){const k=evcKind(m);if(k&&k!=="fest")n[k]=(n[k]||0)+1}}catch(e){}let t=0;for(const k in n)t+=n[k];n.t=t;return n}
+function evcNow(){const z=evcZ(),n=Object.assign({},z?z.n:{});try{for(const m of evcWaiting())if(m&&!evcToday(m)){const k=evcKind(m);if(k&&k!=="fest")n[k]=(n[k]||0)+1}}catch(e){}let t=0;for(const k in n)t+=n[k];n.t=t;return n}
 function evcOK(k){if(!evcOn())return true;if(k==="fest")return true;const B=BAL.evc,n=evcNow();if(n.t>=B.cap)return false;if((n[k]||0)>=(B.q[k]==null?B.cap:B.q[k]))return false;
  return n.t+evcKeep(k,n)<B.cap}
 /* slots kept for a kind that never waits (BAL.evc.res, e.g. harm 1) until it has come today; that kind itself does not keep room from itself */
@@ -31,15 +31,16 @@ function evcKeep(k,n){const R=BAL.evc.res;let keep=0;if(R&&typeof R==="object")f
    room; after BAL.evc.wait days it is let go (a plain card goes to the log, like j68 evDropInfo). Harm beats and must / forced / ending cards are
    never held. In memory like EVHOLD (j68). */
 let EVCW=[];
-function evcHoldable(m){return !!(m&&typeof m==="object"&&!m.must&&!m.kend&&!m.evcN&&!m.forced&&m.kind!=="news"&&m.cls!=="end")}
+function evcHoldable(m){return !!(m&&typeof m==="object"&&!m.must&&!m.kend&&!evcToday(m)&&!m.forced&&m.kind!=="news"&&m.cls!=="end")}
 function evcRoom(k){const B=BAL.evc,z=evcZ();let t=0;for(const j in z.n)t+=z.n[j];return t+evcKeep(k,z.n)<B.cap&&(z.n[k]||0)<(B.q[k]==null?B.cap:B.q[k])}
-function evcPaint(){if(!evcOn())return;for(let g=0;g<30&&Q.length;g++){const m=Q[0],k=evcKind(m);if(!k||k==="fest"||m.evcN)return;
+function evcPaint(){if(!evcOn())return;for(let g=0;g<30&&Q.length;g++){const m=Q[0],k=evcKind(m);if(!k||k==="fest"||evcToday(m))return;
   if(k!=="harm"&&evcHoldable(m)&&!evcRoom(k)){Q.shift();EVCW.push({m,at:wk(),k});continue}evcSeen(m);return}}
 function evcRelease(){if(!evcOn()||!EVCW.length||Q.length||S.mg)return;const now=wk();
  EVCW=EVCW.filter(w=>{if(now-w.at>BAL.evc.wait){try{if(typeof evDropInfo==="function")evDropInfo(w.m)}catch(e){}return false}return true});
  const i=EVCW.findIndex(w=>w.at<now&&evcRoom(w.k));if(i<0)return;const w=EVCW.splice(i,1)[0];Q.push(w.m);try{showModal()}catch(e){}}
-/* a big card on screen: counted once, on the day she SEES it */
-function evcSeen(m){try{if(!evcOn()||!m||m.evcN)return;const k=evcKind(m);if(!k||k==="fest")return;m.evcN=1;const z=evcZ();z.n[k]=(z.n[k]||0)+1}catch(e){}}
+/* a big card on screen: counted once per day, on the day she SEES it (m.evcN = that day + 1; a card seen on an earlier day — or a copy of it, e.g. the next step of a Phụ tuyến — shown again today counts again) */
+function evcToday(m){return !!(m&&m.evcN&&m.evcN===wk()+1)}
+function evcSeen(m){try{if(!evcOn()||!m||evcToday(m))return;const k=evcKind(m);if(!k||k==="fest")return;m.evcN=wk()+1;const z=evcZ();z.n[k]=(z.n[k]||0)+1}catch(e){}}
 (function(){
  if(typeof kyArrive==="function"){const k0=kyArrive;kyArrive=function(F){if(F===S&&evcOn()&&!evcOK("ky"))return;return k0.apply(this,arguments)}}
  if(typeof approachOne==="function"){const a0=approachOne;approachOne=function(){if(evcOn()&&!evcOK("visit"))return null;return a0.apply(this,arguments)}}
