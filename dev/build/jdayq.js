@@ -74,12 +74,33 @@ function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(o
 function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
   const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
 /* the call comes from her own tap INSIDE the activity (a card / panel she opens there) */
-function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;return !!(t&&t.nodeType===1&&(a===document.body||a.contains(t)))}catch(e){return false}}
+/* DIALOG-ORDER (owner OD 26/11 ~03:40Z, E96): «Sai đi dò la» in her maid's person view opened NOTHING until ✕ closed the view, then the
+   pick-who dialog appeared («out of order»). Cause: the person view's own act cards (Giao thiệp / Mưu kế tabs) live in its docked person card
+   #popw (j59dock), OUTSIDE .kfoc, so her tap there read as «not inside the activity» and gate (c) held the dialog she had just asked for behind
+   the view. Fix (whole family: every act → dialog of every person card): the activity OWNS its controls — the person view = .kfoc + its docked
+   person card #popw; and «inside» is judged where her tap LANDED (capture phase, before any handler re-renders the card and detaches the
+   target), so a dialog she opens herself is painted ON TOP at once. A card the game posts by itself (no tap, or a tap outside) still waits. */
+const DQ_OWN=".kfoc,#popw,.kfoc-ov,.kfintro";
+function dqTapIn(t){try{return !!(t&&t.nodeType===1&&t.closest&&t.closest(DQ_OWN))}catch(e){return false}}
+try{["pointerdown","pointerup","click","keydown","touchstart"].forEach(k=>document.addEventListener(k,e=>{try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;
+  /* the queue as it was when her finger came DOWN (the view's cards act on pointerup, before the click event) */
+  if(k==="pointerdown"||k==="touchstart"||k==="keydown")DQ.preQ=new Set(Q);
+  /* a dialog her tap QUEUES without painting it (Q.push + render, e.g. «Cài đồ vào rương», «Cùng chơi», «Thách đấu»: the render net armed a
+     painter that then waited on the open view) is hers too: right after her tap inside the person view, a NEW card on top of the queue is
+     painted at once, over the view */
+  if((k==="click"||k==="pointerup"||k==="keydown")&&DQ.tapIn&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(Q.length&&!before.has(Q[0])&&dqQHidden()){DQ.mine=Q[0];DQ.stat.mineTap=(DQ.stat.mineTap||0)+1;showModal();return}
+    /* the act may queue its card a moment later (the view's own act path / a reaction line first): look a few more times (BAL.dayq.mineLook ms) */
+    if(++n<4)setTimeout(look,BAL.dayq.mineLook/3)}catch(x){console.error("dayq mine",x)}};setTimeout(look,0)}}catch(x){}},true))}catch(e){}
+function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;
+  if(t&&t.nodeType===1&&(a===document.body||a.contains(t)))return true;
+  /* the person view owns its docked card: her tap there (recorded when it landed, still the same event) is inside */
+  if(a&&a.classList&&a.classList.contains("kfoc")){if(ev===DQ.tapEv&&DQ.tapIn)return true;if(dqTapIn(t))return true}
+  return false}catch(e){return false}}
 /* the top card is the one already playing in the jdfv stage scene (its own repeated showModal) */
 function dqPlaying(){try{const D=window.DF;return !!(D&&Q[0]&&Q[0].dfSeen&&D.encM===Q[0]&&D.F)}catch(e){return false}}
 function dqActBlocks(){if(dqPlaying())return false;const a=dqActEl();return !!a&&!dqInside(a)}
 /* (c) an activity opened in the same tap as a card that was already painted (spend → card → mini-game): take the card back, unchosen */
-function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl())return;const D=window.DF,m=Q[0];let n=0;
+function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl()||(DQ.mine&&Q[0]===DQ.mine))return;const D=window.DF,m=Q[0];let n=0;
   if(D&&D.F&&D.encM===m&&m&&m.dfSeen&&!D.play){const F=D.F;m.dfSeen=0;D.encM=null;try{F.destroy()}catch(e){try{F.close()}catch(x){}}try{dfClosed(D.tk)}catch(e){}n=1}
   const M=$("modal");if(M&&!dqHidden(M)){DQ_HID.set.call(M,true);n=1}
   if(n){DQ.stat.pulled++;dqArmModal()}}catch(e){console.error("dayq pull",e)}}
@@ -125,7 +146,9 @@ function dqInstall(){
     guard: a click dispatched while her tap is still running (a nested .click()) is dropped — one tap = one turn */
  try{const n=$("next");if(n){const o=n.onclick;let tapIn=0;n.onclick=function(e){if(tapIn){DQ.stat.tapRe++;return}tapIn=1;try{return o?o.call(this,e):nextBuoi()}finally{tapIn=0}}}}catch(e){console.error("dayq next",e)}
  /* (b) outermost showModal: nothing painted over the title card / book */
- const sm=showModal;showModal=function(){if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
+ const sm=showModal;showModal=function(){/* DIALOG-ORDER: the card she opened herself from inside the activity is hers — dqPull never takes it back */
+  try{if(dqUiC()&&Q.length&&Q[0]!==DQ.mine){const a=dqActEl();if(a&&dqInside(a))DQ.mine=Q[0]}}catch(e){}
+  if(dqUiC()&&Q.length&&!DQ.user&&!(DQ.mine&&Q[0]===DQ.mine)&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}const r=sm.apply(this,arguments);try{if(dqUi()&&!Q.length)setTimeout(dqNextSync,0)}catch(e){}return r};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
