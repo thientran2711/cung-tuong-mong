@@ -13,3 +13,7 @@ Roll at ctx >= ~28 %, ceiling 60 %. Main push only on MAIN 149 GO per item + gat
 - RE-STACKED: a6 50f8a13b (review/lc18-a6-tinbao, on a5 e4314b74) → a7 3f3fdfbd (review/lc18-a7-mgcolor) → a8 9812646a (review/lc18-a8-placerules; KIT_REQUESTS/jstagehere/stage-stay = d218392b resolution; tree = old a8 + exactly the r6 delta). a5 fallback run stopped (a5 head: audio-ipad, art-slots, kit-entry-gate, makeup-set+scan, dup-globals PASS).
 - Gate chain on a8 9812646a ($SP/gates8.sh): dup-globals PASS · global-names 0 CLASH · news-runner-lines ok · tinbao scan PASS · …
 - 00:36Z MAIN is now MAIN CHÍNH 150 session_01V1ZZH2YckQXrmUKJjntcTS (GOs from 150).
+- 00:36Z TAINGHE r3b d4a3b38e (≥44 px ::after hit area); small rv PASS + FLAG overlap. RE-STACKED: a5 fe30bfb2 → a6 bc16dee8 → a7 b1eac2f5 → a8 bd2bb548 (tree = 9812646a + r3b delta). 00:41Z MAIN 150 LOOK PASS + GO, asked an overlap gate.
+- hit-overlap gate (lc19-tools/hit-overlap.js) FAIL: new ::after boxes steal taps from button.card/.ka/.k3r/.me corners (vs old a5 e4314b74 baseline). Told MAIN 150 (options: wait TAINGHE r4 / back to e4314b74 stack 9812646a) + TAINGHE. a8 HELD.
+- a8 bd2bb548 gates PASS so far: dup-globals, global-names 0 CLASH, news-runner-lines, tinbao scan, place-rules, stage-stay, mg-color, mg-craft kim/ve, art-slots, makeup-set + scan.
+- MISTAKE: 09d81e31 on handover branch reverted others' files (stale soft reset when adding lc19-tools); restored in e5e743a9 (diff vs 37f1bff4 = only lc19-tools). holog.sh (fetch + reset --hard + cp one file) is the only safe way to write there.
