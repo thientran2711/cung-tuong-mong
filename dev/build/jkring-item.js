@@ -252,3 +252,31 @@ function kriFromGrid(o,x0){const key=o.key||"bag";const tabs=[{k:"all",label:"T�
  if(R&&x0){const i=R.items.findIndex(y=>y.x===x0||y.id===(typeof kinlId==="function"?kinlId(x0):""));if(i>=0){kitRingItem.cur.rot=i;kriPlace(kitRingItem.cur);setTimeout(()=>kriFocus(kitRingItem.cur),kriCalm()?0:180)}}
  return R}
 if(typeof kinlPick==="function"){const kp0=kinlPick;kinlPick=function(o,x){if(o&&kriOn()&&!window.__kriAct&&o.inline&&o.onPick){try{if(kriFromGrid(o,x))return}catch(e){console.error("kri bag",e)}}return kp0.apply(this,arguments)}}
+/* ---- generic: a picker that draws its own kit strip (kinlHTML: .kinlinfo + .kinlacts) for the picked item → the ring pane takes that strip's info + buttons ---- */
+function kriStripParts(html){const t=document.createElement("div");t.innerHTML=html||"";const d=t.querySelector(".kinldet");if(!d)return{info:"",acts:[]};
+ const A=[...d.querySelectorAll(".kinlacts button, .kinvacts button")].map(b=>({b,n:(b.childNodes[0]&&b.childNodes[0].textContent||b.textContent||"").trim(),off:b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):""}));
+ const inf=d.querySelector(".kinlinfo");if(inf){inf.querySelectorAll(".kinvacts,.kinln,.kinlsub").forEach(x=>x.remove())}return{info:inf?inf.innerHTML:"",acts:A}}
+function kriActsFrom(parts,it){return parts.acts.map((a,i)=>({n:a.n,main:i===0,off:a.off,fn:()=>{const s=kriSnap(null),l0=kriLogMark();window.__kriAct=1;try{kriClick(a.b)}finally{window.__kriAct=0}try{render()}catch(e){}
+ const M=$("modal");if((M&&!M.hidden&&Q.length)||document.querySelector("#kg82:not([hidden])"))return"close";const L=kriLogSince(l0);
+ return{ok:L.length?true:null,title:`${a.n} · ${it.name}`,rows:kriDiffRows(s,null).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}))}
+/* ---- (10) veil chest (jveil vlInvHTML, Tư trang): tap a veil → the ring of every veil in the chest; info + Đeo / Tặng / Bán = the veil block's own strip ---- */
+function kriVeilOpen(ix0){if(typeof vlChest!=="function")return false;const strip=ix=>{const p0=window.__vlPick;window.__vlPick=ix;try{return kriStripParts(vlInvHTML())}finally{window.__vlPick=p0}};
+ const R=kitRingItem.open({key:"veil",title:"Mạng che mặt",bg:kriBg(),items:()=>vlChest(S).map(x=>({id:"v"+x.ix,src:vlSrc(x.e.k),name:itm(x.e.k).n,grade:vlG(x.e),sub:vlKnows(S,x.e)?"đồ phẩm "+wdPName(vlP(x.e,S)):"chưa rõ phẩm",ix:x.ix})),
+  info:it=>{it.__p=strip(it.ix);return it.__p.info},acts:it=>kriActsFrom(it.__p||strip(it.ix),it),empty:"Rương chưa có mạng che mặt."});
+ if(!R)return false;const i=kitRingItem.cur.items.findIndex(y=>y.ix===ix0);if(i>=0){kitRingItem.cur.rot=i;kriPlace(kitRingItem.cur);setTimeout(()=>kriFocus(kitRingItem.cur),kriCalm()?0:180)}return true}
+window.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-vlpick]");if(!b||!kriOn()||window.__kriAct)return;try{if(kriVeilOpen(+b.dataset.vlpick)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri veil",e)}},true);
+/* ---- (15) pets (Tư trang › Thú cưng): tap a pet's picture → the ring of her pets; acts = the pet card's own buttons (Chăm / Cho theo hầu / Gửi về) ---- */
+function kriPetOpen(i0){if(typeof tsbPets!=="function")return false;const card=i=>{const t=document.createElement("div");t.innerHTML=petPanelHTML();const c=t.querySelectorAll(".kpetcards > *")[i];return c};
+ const R=kitRingItem.open({key:"pets",title:"Thú cưng",bg:kriBg(),items:()=>tsbPets(S).map((P,i)=>{const T=petT(P);return{id:"p"+i+":"+P.t,src:petPSrc(P),name:T.n,grade:Math.max(0,Math.min(4,T.tr|0)),sub:`${PET_TIER[T.tr]} · ${S.petOn===i?"theo hầu":"ở tẩm cung"}`,i}}),
+  info:it=>{const c=card(it.i);if(!c)return"";const d=c.querySelector(".kskd,.kdesc,.kskdesc")||c;const x=d.cloneNode(true);x.querySelectorAll("button,.kskacts,.rbtn").forEach(e=>e.remove());return x.innerHTML},
+  acts:it=>{const c=card(it.i);const A=c?[...c.querySelectorAll("button[data-pet]")].map(b=>({b,n:(b.childNodes[0]&&b.childNodes[0].textContent||"").trim(),off:b.disabled?"Chưa được":""})):[];return kriActsFrom({acts:A},it)},
+  empty:"Ta chưa nuôi con thú nào."});
+ if(!R)return false;const i=kitRingItem.cur.items.findIndex(y=>y.i===i0);if(i>=0){kitRingItem.cur.rot=i;kriPlace(kitRingItem.cur);setTimeout(()=>kriFocus(kitRingItem.cur),kriCalm()?0:180)}return true}
+window.addEventListener("click",ev=>{const c=ev.target.closest&&ev.target.closest(".kpetcards > *");if(!c||!kriOn()||window.__kriAct||ev.target.closest("button"))return;const L=[...c.parentElement.children];const i=L.indexOf(c);
+ if(i<0||!(typeof tsbPets==="function")||i>=tsbPets(S).length)return;try{if(kriPetOpen(i)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri pet",e)}},true);
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§104",title:"kitRingItem · Vòng bảo vật (món đứng trên vòng xoay, món trước sáng, chạm → phóng to trái, nút thả phải, kết quả tại chỗ)",where:"mọi chỗ chọn món: tặng quà, dâng, cài đồ, mua / bán, Tư trang, mạng che mặt, thú cưng",
+ html:()=>`<div class="kitpg-row"><button type="button" class="kbtn alt" data-kriring="1"${typeof S!=="undefined"&&S?"":" disabled"}>Mở vòng bảo vật (Tư trang)</button></div>`})}catch(e){}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kriring]");if(!b)return;e.stopPropagation();const pg=document.getElementById("kitpage");if(pg)pg.hidden=true;
+ const L=(S.inv||[]).map((e2,ix)=>({e:e2,ix})).filter(x=>x.e&&!x.e.h&&IT[x.e.k]).slice(0,16);
+ kitRingItem.open({title:"Vòng bảo vật",sub:"mẫu kit §104",items:L.map(x=>{const I=typeof kipItem==="function"?kipItem(x.e):{src:kitItemSrc(x.e.k),name:IT[x.e.k].n,grade:0};return{id:x.ix,src:I.src,name:I.name,grade:I.grade,sub:I.kind||"",ref:{e:x.e}}}),
+  acts:it=>[{n:"Xem thử",main:1,fn:()=>({ok:true,title:"Mẫu kit · "+it.name,rows:[{k:"duoc",label:"Được",items:[]},{k:"mat",label:"Mất",items:[]}]})}],onClose:()=>{if(pg)pg.hidden=false}})},true);

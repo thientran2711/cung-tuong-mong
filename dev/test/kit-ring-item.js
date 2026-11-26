@@ -57,6 +57,13 @@ const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
   await p.evaluate(()=>{try{tab='inv'}catch(e){}render()});await w(1200);const c=await at('.kinv[data-kinv="tutrang"] .kinvg [data-kinvi]');out.tile=!!c;if(c){await tapXY(c[0],c[1]);await w(1500)}out.bag=await meas();
   await p.screenshot({path:`${OUT}/${W}x${H}-bag.jpg`,type:'jpeg',quality:60});out.acts=await p.evaluate(()=>[...document.querySelectorAll('.kri-pane [data-kria]')].map(b=>b.textContent.trim()));
   const ok=await tapAct('^(Dùng|Đeo|Mặc)');await w(1200);out.actTapped=ok;out.after=await meas();await p.screenshot({path:`${OUT}/${W}x${H}-bag2.jpg`,type:'jpeg',quality:60});out.errs=errs;console.log(JSON.stringify(out));await b.close();return}
+ if(SC==='perf'){
+  const cdp=await ctx.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});out.base=await p.evaluate(()=>new Promise(r=>{const F=[];let l=performance.now();const f=n=>{F.push(n-l);l=n;if(F.length<90)requestAnimationFrame(f);else{F.shift();const a=F.reduce((x,y)=>x+y,0)/F.length;r({idleFps:+(1000/a).toFixed(1)})}};requestAnimationFrame(f)}));
+  await openShop();await w(2500);out.ringIdle=await p.evaluate(()=>new Promise(r=>{const F=[];let l=performance.now();const f=n=>{F.push(n-l);l=n;if(F.length<60)requestAnimationFrame(f);else{F.shift();const a=F.reduce((x,y)=>x+y,0)/F.length;r({fps:+(1000/a).toFixed(1)})}};requestAnimationFrame(f)}));
+  await p.evaluate(()=>{window.__fr=[];let l=performance.now();const f=n=>{window.__fr.push(n-l);l=n;if(window.__fr.length<400)requestAnimationFrame(f)};requestAnimationFrame(f)});
+  const y=await ringY();await swipe(W*.8,W*.2,y,14);await w(1500);await tap('.kri-ar[aria-label="Quay phải"]');await w(700);const c=await front();await tapXY(c[0],c[1]);await w(1200);await tapAct('‹ Vòng');await w(900);
+  out.perf=await p.evaluate(()=>{const F=window.__fr.slice(2).filter(x=>x<1000);F.sort((a,b)=>a-b);const n=F.length;const avg=F.reduce((a,b)=>a+b,0)/n;return{frames:n,avgMs:+avg.toFixed(1),fps:+(1000/avg).toFixed(1),p95:+F[Math.floor(n*.95)].toFixed(1),over33:F.filter(x=>x>33.4).length}});
+  out.errs=errs;console.log(JSON.stringify(out));await b.close();return}
  if(SC==='gift'){
   await w(400);mark('start');await openGift();await w(2000);const y=(await ringY());
   await swipe(W*.8,W*.25,y,14);await w(1800);await tap('.kri-ar[aria-label="Quay phải"]');await w(900);await tap('.kri-ar[aria-label="Quay phải"]');await w(900);

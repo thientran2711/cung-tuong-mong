@@ -28,6 +28,7 @@ kitRingItem.open({title, sub, bg, tabs, tab, onTab, items:[]|fn, info(it), acts(
 | 9 | wardrobe acts (wdOpen/wdFabOpen) | via bag | covered by #2/#3 |
 | 12 | Trưng bày (jshelf kinvOpen wrapper) | via bag | covered by #2/#3 (shelfOpen dialog itself has no caller) |
 | 7 | j8 invHTML .cards | dead (cut by jinv.js:379) | nothing to move |
+Also wired since: 10 veil chest (tap a veil → ring, acts = the veil strip's own buttons), 15 pets (tap a pet card → ring, acts = Chăm / Cho theo hầu / Gửi về).
 TODO: 4 toilette dress (kitInvGrid toil in #kg82), 10 veil (vlInvHTML), 11 titles (dhPanel, kitTitlePlate), 13 hoa điền (hdStep, real picker; jhd.js:59 hdPick is a random key, not UI), 14 face (fpHTML/kitPicker — portraits, owner: ring?), 15 pets pane. Corrections to the KK44 table: j83 wkUseOpts (j83.js:220) is NPC-only (no UI); jhd hdPick is not a UI.
 
 ## Videos (owner look gate) — CDN img/_review/motion-bao-vat/
@@ -35,8 +36,20 @@ TODO: 4 toilette dress (kitInvGrid toil in #kg82), 10 veil (vlInvHTML), 11 title
 
 ## Tests
 kit-ring-item.js check Fold + iPad: ring open, 24 tiles, front opacity 1 / others ≤ .68, tiles in view, pane in view, act → result rows (gift 3 rows, shop 2), no overflow, 0 page errors. bag Fold: Tư trang tile → ring focused, act list from the item («Tháo trâm»).
-PENDING: 60 fps CPU×4 probe, remaining 6 places, KIT.md + kit page entry, merge with RING-BUILD core.
+KIT.md §104 + kit page sample «§104» (button opens a demo ring) — DONE.
+PERF (kit-ring-item.js perf, CPU×4, headless software raster): LIVE idle stage 8 fps (env floor) · ring idle 11.6 fps · ring spin+focus 10.7 fps → the ring costs nothing above the page's own floor (transform/opacity only, one rAF loop, no filter animation); absolute 60 fps needs a real device (same limit as motion-design-3).
+PENDING: places 4, 11, 13, 14 (see HANDOVER), merge with RING-BUILD core.
 
 ## Open points for MAIN / KK44
 - Law 9: RING-BUILD kitRing (person/group) and kitRingItem must become ONE core. KRI_MATH is isolated for that; I will adapt to whichever API KK44 picks.
 - kitFlyItem (LIVE, owner ok) still plays its box after a shop buy over the ring (as before).
+
+## HANDOVER (rollover at ~28 % ctx; successor = next MOTION-BUILD, opened by MAIN)
+State: review/motion-bao-vat (latest commit in git log). Worktree recipe: sparse worktree from origin/review/motion-bao-vat, `bash dev/site/build_site.sh`, test `node dev/test/kit-ring-item.js file://$PWD/index.html <out> check|bag|perf|gift|shop WxH`.
+Remaining (adapter contracts from the place map):
+1. (4) toilette dress — jtoil.js:350 toilDressUI → kitInvGrid({key:"toil", onPick:toilPick}) inside the #kg82 overlay (not inline). Hook: wrap toilPick or the toil tile tap → kriFromGrid-like ring over #kg82 (kitScene z 57 > modal; check #kg82 z), acts «Mặc» = toilPick(x) / «Tháo» = toilAct("off") (jtoil.js:379-385), then toilDressUI() redraw; #toilok stays.
+2. (11) titles — jdh.js:195 dhPanel / :180 dhPick → kitPanel opts + chooseM; pictures via kitTitlePlate (not kitItem): needs a title-plate tile renderer in the ring (items with `html` instead of src → add `it.tile` html support in kriBuild/kriFocus) — ask KK44 (law 9) if a plate tile is ok; act = the option's chooseM (same pattern as the gift adapter).
+3. (13) hoa điền — the real picker is jhd.js:178 hdStep(ctx) (called from jtoil.js:464) with [data-hdk] buttons → hdBoard drag game; «Không dán» → ctx.done(). Ring item = hdOwned(S) entries (WD_ITEMS[k] {n,g,icon}); act «Dán» = the [data-hdk] onclick.
+4. (14) face (dung mạo) — j86.js:27 fpHTML → j79.js:1421 kitPicker (one caller, new-game card, portraits not items). Owner ruling needed whether a portrait picker joins the item ring or the PERSON ring (RING-BUILD) — ask MAIN.
+5. Merge with RING-BUILD kitRing into ONE core (KRI_MATH isolated) — KK44 decides the API.
+6. After owner video ok: re-run check/bag/perf on both devices, KK44 family scan old-left = 0.
