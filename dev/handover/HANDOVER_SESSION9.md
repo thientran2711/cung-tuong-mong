@@ -427,3 +427,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:19Z KIT-STAGE-R6 rolled cad2cdc2 (Thôi renames + KIT.md words + LIVE merged; kit-hand c2a no hand after merge) → archived; opened KIT-STAGE-R7 session_01Rc5AsN1USbcwua1X1b7211 (opus: merge regression + finish Thôi + LOOK). WORDING-MARKS 9011e89e → RV-164; WORDING-MARKS to decide kit-ton-row real vs harness (review/ton-row).
 - 23:21Z ROLL at 34 % ctx → TAKEOVER_MAIN_166.md written; opening child «MAIN CHÍNH 166»; my 4 scheduled tasks disabled (166 recreates).
 - 23:22Z MAIN CHÍNH 166 = session_01Rc5AsNFmfoR6xWx1tx5wVP opened; 165 stops. 164 told.
+- ~23:21Z OWNER: Sắc/Tài/Tâm cơ ALSO rescale (palace-wide, rank order kept, lifelong climb) → OD updated; PACE-SPEED + 166 told.
