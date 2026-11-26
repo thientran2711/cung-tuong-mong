@@ -119,7 +119,8 @@ function dqTap(k,e){try{DQ.tapEv=e;DQ.tapIn=dqTapIn(e.target);DQ.tapT=e.target;c
   if(!DQ.actTap)return/* not her act tap: nothing set aside, nothing moved (the old gates run as before) */;
   DQ.tw=now+BAL.dayq.mineLook+(k==="pointerdown"||k==="touchstart"?1500:0);
   /* (1) a card nobody can see is set aside while this event's handlers run (not over the new-day host / a mini-game: their own gates) */
-  if(act&&!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
+  /* set aside ONLY for a tap inside the person view she opened (its own act cards / docked card): a panel or box may hold a time-passing control */
+  if(DQ.tapIn&&!DQ.park&&dqUi()&&Q.length&&dqQHidden()&&!dqDawn()){DQ.park=Q.slice();Q.length=0;DQ.stat.park=(DQ.stat.park||0)+1;setTimeout(dqUnpark,0)}
   if((k==="click"||k==="pointerup"||k==="keydown")&&dqUiC()){const before=DQ.preQ||new Set(Q);let n=0;const look=()=>{try{if(dqParked())dqUnpark();
     /* (2) what her tap queued comes first; painted at once when nothing shows it (over the view / in place of the box she tapped in) */
     const M=$("modal"),shown=M&&!dqHidden(M)?Q[0]:null;const moved=dqMineFront();
@@ -173,7 +174,9 @@ function dqArmModal(){if(DQ.mt)return;const tick=DQ.mtf=()=>{clearTimeout(DQ.mt)
   if(dqQHidden()){if((DQ.ra=(DQ.ra||0)+1)<=BAL.dayq.rearm){DQ.stat.rearm++;DQ.mt=setTimeout(tick,dqPoll())}}else DQ.ra=0}catch(e){console.error("dayq modal",e)}};DQ.mt=setTimeout(tick,dqPoll())}
 function dqInstall(){
  /* (a) outermost nextBuoi: hold the turn while the old buổi's big moment is pending */
- const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}
+ const nb=nextBuoi;nextBuoi=function(){/* r3: a turn that starts while her tap has cards set aside (her act spent the last khắc) gets them back FIRST: an unseen card still holds the turn and is painted */
+  try{if(dqParked()){DQ.stat.parkTurn=(DQ.stat.parkTurn||0)+1;dqUnpark()}}catch(e){}
+  if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}
   /* r2: a card an inner wrapper queued WITHOUT painting during the turn (jagent agDrain «Có người tìm đến» runs before j9, which then returns on
      Q.length) is painted after the turn — whichever path ran it (tap, auto-advance, dqWait) */
   const r=nb.apply(this,arguments);try{if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.afterPaint++;dqPaintQ()}}catch(e){}return r};window.nextBuoi=nextBuoi;
