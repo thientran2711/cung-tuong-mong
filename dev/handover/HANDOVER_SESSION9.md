@@ -399,3 +399,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 22:47Z SIDEQ-TRIM rolled (handover review/sideq-race a395ab08) → archived; opened SIDEQ-RACE session_01Rc5AsM8GCMiy4J62EJgPAW (opus, race hunt nrask/j72c).
 - 22:49Z R5 card-back fill e8126d18 (KIT_HAND.flip.fs 28→13 px step-fit, vertical centre) → MAIN LOOK PASS (Fold+iPad stills) → KK48 kit review → RV-163.
 - ~22:41Z (after roll) OWNER: khảo hạch fixed every 3 months + đại lễ extra → OD row → 165 + PACE-SPEED.
+- ~22:44Z (after roll) OWNER: max 7 not hard; keep >7 where needed, no paging; remove every «Thôi» card → OD row → 165, R5, KK48, RING-BUILD-6.
