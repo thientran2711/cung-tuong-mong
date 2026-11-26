@@ -1818,7 +1818,7 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | F BIG REVIEW s3e-display-fix 290b3bf6 (opus) | review/s3e-display-fix | FOREMAN F #16 | session_01UV1Szk5Kuc4NRRabmCRSNx | RUNNING | 2026-11-25T22:35Z |
 | REVIEW c3-farshot 49d7de45 | review/c3-farshot | FOREMAN C ROOT 3 | session_01PEhRbvrqFY7tXWkmrnJhCD | DONE PASS 49d7de45 | 25/11 22:40Z |
 | CO-OP RERUN U1d = ONE PATCH EDITOR (sonnet; successor of U1c 655QXzbU; stack u4 7959f1b5 + #15; briefs/b-coop-rerun-U1d.md) | review/robot-coop-stack-u4 (no code) | B ROOT 2 | session_01N1tNP4mKJ9CMs3b6NsHeqP | RUNNING | 25/11 22:50Z |
-| REVIEW thin-p8-r2 0348e07a (opus BIG, fresh; briefs/b-thin-p8-r2-review.md) | review/thin-p8-r2(-rv); reports/thin.md «## REVIEW thin-p8 r2» | B ROOT 2 | session_01N1tNP3yP4QQnSWk3tnY93B | RUNNING | 25/11 22:54Z |
+| REVIEW thin-p8-r2 0348e07a (opus BIG, fresh; briefs/b-thin-p8-r2-review.md) | review/thin-p8-r2(-rv); reports/thin.md «## REVIEW thin-p8 r2» | B ROOT 2 | session_01N1tNP3yP4QQnSWk3tnY93B | PASS LAND READY 51cc7791 (archived) | 25/11 22:54Z |
 | REVIEW c3-rankroom d8ed8090 (SMALL sonnet; reports/C3-RANKROOM-r1.md; incl. old-save load) | review/c3-rankroom | FOREMAN C ROOT 3 | session_01PEhRbwnGSkRFxgTgGss1yG | RUNNING | 25/11 22:57Z |
 | C3-VIDEO landing videos c3-farshot (Fold+iPad full, MAIN 147) | review/c3-farshot; reports/C3-FARSHOT.md | FOREMAN C ROOT 3 | session_01PEhRbwnAUxjQKRyNRgPhpA | RUNNING | 25/11 22:58Z |
 | E90 news-runner-lines (owner bug «Tịch Nguyệt nghe ngóng trở về · thành.» whole family; sonnet; briefs/E90-news-runner-lines.md) | review/news-runner-lines | FOREMAN E child5 | session_01DgYSWpjzjMSBX9uPhXU2Db | READY 2608109d (shots missing) | 25/11 23:20Z |
