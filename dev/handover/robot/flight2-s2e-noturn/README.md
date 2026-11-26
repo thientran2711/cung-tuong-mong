@@ -1,0 +1,2 @@
+# flight2-s2e «Sang ngày mới» noturn stall dumps (for FOREMAN D)
+6 dumps (noturn-3..8; 1-2 pruned earlier) of the softlock «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (49 occurrences in the life). Keys per dump: at, url, ls, S, top, coop, Q (Q = the dialog queue; no `qs` block exists in these dumps from harness 4d7a22c6). Matching saves (~1.2 MB each, noturn-N-save.json) and PNGs stay on the s2e runner VM only (not in git).
