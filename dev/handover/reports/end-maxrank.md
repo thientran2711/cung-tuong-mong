@@ -105,3 +105,5 @@ LIVE moved f573dc94 → 53319e6f during review (ob-oan / kit-gloss-lower stack):
 
 NON-BLOCKING notes: (1) an OLD save already PAST the edict whose LIVE tracker stored the ceiling in maxRank keeps that ceiling as «Phẩm cao nhất» (given() only fires on the edict/entry calls; cannot be told apart from a real later demotion) — rare, accept. (2) kszRankName now calls pMe() per own plate; perf numbers show no cost. (3) Board rows for never-entered lives = Foreman D decision (server deploy), as the worker says.
 VERDICT: PASS ef459c0a — no BLOCKING items.
+
+ADDENDUM (same reviewer): Foreman D ruled 26/11 ~19:40Z (message reached me after the verdict) that never-entered lives MUST still be sent to Bảng xếp hạng with their true rank («Chưa vào cung» / «Tú nữ»), sorted lowest. ef459c0a drops them → this PASS covers ef459c0a only and is NOT land-ready; the next worker sha (ruling + 53319e6f merge) gets a delta review here before LAND READY.
