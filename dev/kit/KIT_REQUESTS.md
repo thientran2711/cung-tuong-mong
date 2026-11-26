@@ -311,3 +311,6 @@ wording (5 of 12 lines one template sentence, s9) → MAIN. Probe: /home/user/wt
 
 ## 25/11 KK29 — DONE (review/kit-opts-pack-4): «not a danger» flag for selection-day cards (SELSCENE-18 asked via MAIN 140)
 Flag name: **`nodanger:1`** on the queue card (`Q.push({…,pid:"selxD3",nodanger:1})`) or on a kit panel spec (`kitPanel({…,nodanger:1})`). Also silent without a flag: pids starting `selx` / `kc2Sel` (`KIT_NODANGER_PRE`, j11) and every act picker in `KIT_ACT_PIDS`. One function `kitNoDanger(card)` decides the red wash (`kitAlarm`), the heartbeat and the tension music. KIT §93.9; scan table `dev/test/kit-alarm-scan.js`.
+
+- K-MAP-BANNER → KIT READY (KK35, review/kit-stage): KIT §103 `kitMapBanner.set({id,line,home})` / `.clear(id)` (dev/build/jkmapban.js); PLACE-RULES replaces its kitNotice «plban» + .fest chip with it; test dev/test/kit-mapban.js PASS Fold+iPad.
+- K-KDTX-BAND ×2 → FIXED (KK35, review/kit-stage, KIT §32.5b): Fold «Danh hiệu» / «Thiên mệnh» tabs tappable (real elementFromPoint ok, Fold + iPad); «Mục tiêu» tab is a §102 stage (band = background). Remove the button-crawl-known.txt line when this lands.
