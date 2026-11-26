@@ -26,7 +26,7 @@ js+='\n'+cdn('jcoopthine.js',open(d+'build/jcoopthine.js',encoding='utf-8').read
 js+='\n'+cdn('jcoopthinf.js',open(d+'build/jcoopthinf.js',encoding='utf-8').read())
 # coop-host-lag (review/coop-host-lag): the host's world writes after a merged week reach the guest at once (level < 3); after jnamefix + jcoopthinf (wraps nmFix / figPick / figThPick / endTurn outermost)
 js+='\n'+cdn('jcoophl.js',open(d+'build/jcoophl.js',encoding='utf-8').read())
-# jsrvguard (review/srvmerit-guard): the ONE gate for every cung nữ act (srvCards / srvTalk / runOpt), after every module that adds one
+# jsrvguard (review/srvmerit-guard r2): ONE rule, a hand belongs to the life it was dealt for (deal stamps, render / act / runOpt gate); after every module that wraps deal / render / act / runOpt
 js+='\n'+cdn('jsrvguard.js',open(d+'build/jsrvguard.js',encoding='utf-8').read())
 # jnolock (review/hardlock-choice r3): the ONE no-dead-card rule (laws 2/3/14; replaces jdeadcard); the OUTERMOST showModal / chooseM wrappers, so every inner one sees the same roads
 js+='\n'+cdn('jnolock.js',open(d+'build/jnolock.js',encoding='utf-8').read())

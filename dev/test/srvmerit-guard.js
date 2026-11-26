@@ -4,6 +4,7 @@
    usage: node dev/test/srvmerit-guard.js <game url (file:// or http://)>
    (1) STALE HAND: cung nữ life → a consort sổ deserialised with no deal → every act(i) on the hand: no throw, nothing paid, the hand is dealt
        again for the consort life (no cung nữ card left).
+   (r2) the 4 directions of the same root (cung nữ↔consort, kc ở nhà↔palace): gate on render + defence on the tap; see below.
    (2) FAMILY: every cung nữ act (srvCards = the hand, srvTalk = every talk option: chủ, Hoàng thượng, phi tần, đồng liêu) run with S.srv gone:
        no throw; (3) the same acts in her cung nữ life still work (Công lao moves). */
 const {chromium}=require('playwright');const URL=process.argv[2]||process.env.GAME;let bad=0;const ok=(c,t)=>{console.log((c?'ok   ':'BAD  ')+t);if(!c)bad++};
@@ -34,5 +35,33 @@ const {chromium}=require('playwright');const URL=process.argv[2]||process.env.GA
  ok(R2.n>=20,`family: ${R2.n} cung nữ acts collected (hand + talk)`);
  ok(!R2.out.length,`family with S.srv gone: ${R2.out.length} throw (${R2.out.slice(0,3).join(' | ')})`);
  ok(R2.has&&R2.live>0,`in her cung nữ life the acts still work: «Học lễ nghi» Công lao +${R2.live}`);
+ /* r2 (RV-SRVMERIT-GUARD FAIL 1–4): the 4 directions of ONE root — a hand kept across a life swap with no deal (deser of another life's sổ).
+    lives: P = consort «tt» in the palace · V = cung nữ «cnv» · K = kc «ở nhà» (tt + kcInit). Wrong-life cards = names of the old hand that never
+    come in 8 fresh deals of the new life (measured without the fix's own stamp, so the same test runs on the base). (a) GATE: render() → 0 wrong-life
+    cards before she can tap; (b) TAP: act() on every wrong-life card with no render since the swap → no throw, nothing paid, hand dealt again, one
+    kit notice (never a silent swallowed tap); (c) a card of her current life still runs. */
+ const mkLife=async(o,home)=>{await life(o);return p.evaluate(home=>{if(home){S.srv=null;kcInit();Q.length=0;deck=[];deal()}return{sv:JSON.stringify(ser()),o:S.origin.k,srv:!!(S.srv&&!S.srv.risen),kc:!!(S.kc&&!S.kc.inPal),name:S.name}},home)};
+ const LV={P:await mkLife("tt",0),V:await mkLife("cnv",0),K:await mkLife("tt",1)};
+ ok(!LV.P.srv&&!LV.P.kc&&LV.V.srv&&LV.K.kc&&!LV.K.srv,`r2 lives: P ${LV.P.o} palace, V ${LV.V.o} cung nữ, K ${LV.K.o} ở nhà`);
+ for(const [A,B,label] of [["V","P","cung nữ → consort"],["P","V","consort → cung nữ"],["K","P","kc ở nhà → palace"],["P","K","palace → kc ở nhà"]])for(const mode of ["gate","tap"]){
+  const R=await p.evaluate(([a,b,mode])=>{const lv=sv=>{const d=JSON.parse(sv);quiet=true;deser(d);quiet=false;Q.length=0;try{const m=document.getElementById("modal");if(m)m.hidden=true}catch(e){}};
+    lv(b);const bn=new Set();for(let i=0;i<8;i++){deck=[];deal();for(const x of deck)if(x&&x.n)bn.add(x.n)}
+    lv(a);deck=[];deal();const old=deck.slice();const wrong=()=>deck.filter(x=>x&&old.includes(x)&&!bn.has(x.n));
+    lv(b);/* no deal: the old hand stays, as after a co-op new face (show → fromCanon) */const w0=wrong().length,wn=wrong().map(x=>x.n).slice(0,4);
+    const nt0=(typeof kitNoticeList==="function"?kitNoticeList():[]).filter(x=>x.id==="life-redeal").length;window.__nt0=nt0;
+    const k0=JSON.stringify([used,S.buoi,S.suc,S.bac,S.sung,S.danh,S.duc]);let thrown=[],tries=0,ran=0;
+    if(mode==="gate"){try{render()}catch(e){thrown.push(e.message)}}
+    else for(let i=0;i<30&&wrong().length;i++){const j=deck.indexOf(wrong()[0]);tries++;const lg=(S.logs||[]).length;try{act(j)}catch(e){thrown.push(e.message)}if((S.logs||[]).length>lg)ran++;Q.length=0}
+    const nt=(typeof kitNoticeList==="function"?kitNoticeList():[]).filter(x=>x.id==="life-redeal");
+    return{w0,wn,left:wrong().length,n:deck.length,tries,ran,thrown,paid:JSON.stringify([used,S.buoi,S.suc,S.bac,S.sung,S.danh,S.duc])!==k0,note:nt.length>0}},[LV[A].sv,LV[B].sv,mode]);
+  const tg=`r2 ${label} [${mode}]`;
+  ok(R.w0>0,`${tg}: stale hand reproduced: ${R.w0} wrong-life cards (${R.wn.join(", ")})`);
+  ok(!R.thrown.length,`${tg}: no throw (${R.thrown.slice(0,2).join(' | ')})`);
+  ok(R.left===0&&R.n>0,`${tg}: ${R.left} wrong-life cards left, hand of ${R.n} dealt for the life she lives`);
+  ok(!R.paid,`${tg}: nothing paid, nothing run (khắc / buổi / Sức / Bạc / Sủng / Danh / Đức unchanged${mode==="tap"?`; ${R.tries} taps, ${R.ran} ran`:""})`);
+  if(mode==="tap")ok(R.ran===0&&R.note,`${tg}: the refused tap is told by one kit notice (§42.2), not swallowed silently`)}
+ {const R=await p.evaluate(sv=>{const d=JSON.parse(sv);quiet=true;deser(d);quiet=false;Q.length=0;deck=[];deal();render();const i=deck.findIndex(x=>x&&!x.done&&typeof canPay==="function"&&canPay(x)&&cardCost(x)<=1);
+   if(i<0)return{i};const u0=used,lg=(S.logs||[]).length;act(i);return{i,ran:used!==u0||(S.logs||[]).length>lg}},LV.P.sv);
+  ok(R.i>=0&&R.ran,`r2 a card of her current life still runs at once (card ${R.i})`)}
  ok(!errs.length,`no page errors (${errs.slice(0,3).join(' | ')})`);
  console.log(bad?`srvmerit-guard: ${bad} BAD`:'srvmerit-guard: PASS');await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
