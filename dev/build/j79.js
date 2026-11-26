@@ -322,7 +322,11 @@ function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.
     replaces the waiting copy with the fresh one (no pile of «Tâm trạng · X» to close N times; a co-op save held 1998 copies) */
  /* button-crawl-fix-5 (robots s6d/s7/s9: 3× «Tin chờ người sai đi», 4×/7× «Tin báo» waiting in Q): a VIEW panel (spec.view: a status panel built from
     the live state — kitStatusIcon «Tin chờ / Tin báo», the «Tin báo» notice list, «Lịch tháng») is one per title too; the fresh copy replaces the waiting one */
- if((spec.look||spec.view)&&m.t){for(let i=Q.length-1;i>=0;i--){const q=Q[i];if(q&&q.kit&&(q.kit.look||q.kit.view)&&q.t===m.t)Q.splice(i,1)}}
+ /* KK43 dead-close family (robot R2 cnv_chu «Nhờ thái giám tìm thú nuôi» ✕/«Lui» ×3 «no effect»): a dialog SHE opens (kitModal = front: a shop, a look-up, a
+    menu …) is one per title + kind + shop too — a second tap on its opener before the first copy shows (fast taps, a re-render) queued a second identical copy,
+    so the first ✕ «did nothing» (it popped one copy and the same dialog came back). The fresh copy replaces the waiting one. */
+ if(m.t&&(spec.look||spec.view||front)){for(let i=Q.length-1;i>=0;i--){const q=Q[i];if(q&&q.kit&&q.t===m.t&&((spec.look||spec.view)?(q.kit.look||q.kit.view):(q.kit.__front&&(q.kit.kind||"")===(spec.kind||"")&&(q.kit.shop||"")===(spec.shop||""))))Q.splice(i,1)}}
+ if(front)try{spec.__front=1}catch(e){}
  if(front)Q.unshift(m);else Q.push(m);return m}
 /* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
    are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
