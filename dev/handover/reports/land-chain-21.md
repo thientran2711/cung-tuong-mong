@@ -43,3 +43,4 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 08:53Z MAIN 156 queue: mg-trim → HW-NITS → endcard-top 3f38961f → TAINGHE 88bd567f → srvmerit c7f4fc0a → kit-stage 22e318d5 → NHV (new sha) → map-zones 9c8985ab8 → D1+D4 (one sha).
 - 08:54Z NHV-BUILD (session_01V1ZZH11unC8raKPPDux51Y): nhv-areas new head 50840478 (replaces b48425a1; map-labels-scan night fix + jnhv one-liner; transition 1003/1003, area 55/55).
 - 09:05Z A/B 6b5d3d05 vs bf6dd041 (alone): buổi 2139/2169, render 301/289, tab 684/638, tasks>200 47/39 → no regression; reported. mg-trim gates started.
+- Pre-staged: HW-NITS review/lc21-hw 411d411b (0e71fdbc onto mg-trim be7e8326, built files only); endcard-top review/lc21-ec af4dcb7f (3f38961f onto 411d411b, built files only; its CHANGE.txt was stale (a9 line) → LC21 draft «Hết kiếp: khung kết thúc luôn ở trên cùng; không còn rương bổng lộc, tin tức hay thẻ sự kiện nào hiện đè lên.» — MAIN to confirm).
