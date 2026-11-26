@@ -14,7 +14,11 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>R.errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function'&&typeof dhSync==='function');await sleep(2000);
  const fresh=o=>p.evaluate(o=>{const kl=document.getElementById('kload');if(kl)kl.remove();window.__forceOrigin=o||'tt';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;deal();render();
-  try{kmReset()}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},o);
+  try{kmReset()}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},o)
+  /* E92f (REVIEW r1 fix 3): card-aware — with the kit day title card (KIT §94b, kit-daytitle) a new life shows #kdaytc at +600 ms and jdayq dqDawn holds
+     #modal while it is up (game right: the panel opens once the card is gone). Wait the card out, close it, clear what it held, then test. */
+  .then(()=>p.evaluate(()=>typeof kitDayTitleShow==='function')).then(k=>k?sleep(900).then(()=>p.evaluate(()=>{const c=document.getElementById('kdaytc');if(c)c.remove();
+   try{kmReset()}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true})):null);
  await fresh('tt');await sleep(500);
  const out=await p.evaluate(()=>{const F=[],OK=[],ck=(c,m)=>{if(c)OK.push(m);else F.push(m)};const T2=window.TITLES2;
   if(!T2||typeof rpSync!=='function'){F.push('no jdh3 (TITLES2 / rpSync)');return {F,OK}}

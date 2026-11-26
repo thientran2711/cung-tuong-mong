@@ -288,18 +288,19 @@ window.cpMerit7=k=>{try{const m=/^(\w+)_a$/.exec(String(k));if(m){if(LCA[m[1]]&&
 /* the hush money (thamo «Nhận bạc bịt miệng» sets S.j71.brb = the turn): seen on her next turn end */
 function cpMisc(p){try{if(p!==S)return;const j=S.j71;const r=rep(S);if(j&&j.brb!=null&&r.brb!==j.brb){r.brb=j.brb;cpGive(S,"lc_brb")}}catch(e){}}
 /* tests / scan */
-/* ORDER MAIN 117 (05:15Z; OD 24/11 ~07:45Z, DAY TITLE CARD): READ-ONLY hook for KK16's day card on the j79 dawn panel — her CURRENT main-story chapter as
-   «Chương N — <name>», from the SAME source as the goal line (j67 d("goal"): S.st.ch / S.st.M = the open ARC67 chapter (rdDef road chapters included) /
-   S.st.ms = a milestone chapter); no typed text, nothing written. "" when no chapter is open (old v1 story, before the first chapter, co-op friend entry). */
-/* chapterInfo(p) → {n,name} of the same chapter (null when none); chapterTitle(p) = its «Chương N — <name>» line. */
-function chapterInfo(p){try{p=p||S;if(!p||p!==S||!p.st||!p.st.v2||!p.st.ch)return null;const st=p.st;let n,t;
- if(st.ms&&typeof MS67==="object"&&MS67[st.ms.id]){n=st.ch.n;t=MS67[st.ms.id].t()}
- else if(st.M&&ARC67[st.M.a]){n=st.M.chap||1;const a=ARC67[st.M.a];t=typeof fill67==="function"?fill67(a.t,st.M):a.t}else return null;
- t=plainT(t);return t&&n?{n,name:t}:null}catch(e){return null}}
+/* ORDER MAIN 117 (05:15Z; OD 24/11 ~07:45Z, DAY TITLE CARD): READ-ONLY hook for KK16's day card on the j79 dawn panel — her CURRENT chapter as
+   «Chương N — <name>». E92f (REVIEW r1, fixes 1+2): ONE source = jgoal.js chapter() (window.kitGoalChapter, the goal panel's own: kitGoalAlt home roads
+   before the tuyển tú first, then the milestone chapter, then the ARC67 chapter numbered by pos67, then «Mệnh truyện trọn vẹn», then an old v1 story),
+   so the card and the goal panel always name the same chapter; number = that source's n; name = its title (fill67 + plainT for tokens). No typed text,
+   nothing written. null / "" when the goal panel has no chapter (dead, no story, co-op friend entry = not her own S). */
+/* chapterInfo(p) → {n,name} of that chapter (null when none); chapterTitle(p) = its «Chương N — <name>» line. */
+function chapterInfo(p){try{const me=typeof S!=="undefined"?S:null;p=p||me;if(!p||p!==me||p.dead)return null;
+ const C=typeof window.kitGoalChapter==="function"?window.kitGoalChapter():null;if(!C||!C.n)return null;let t=C.t;
+ if(C.kind==="arc"&&p.st&&p.st.M&&typeof fill67==="function")t=fill67(t,p.st.M);t=plainT(t);return t?{n:C.n,name:t}:null}catch(e){return null}}
 function chapterTitle(p){const c=chapterInfo(p);return c?`Chương ${c.n} — ${c.name}`:""}
 window.chapterTitle=chapterTitle;window.chapterInfo=chapterInfo;
 /* KIT §94b DAY TITLE CARD hook (MAIN 117 05:47Z; E92): window.kitChapterTitle() → {n,name} of HER current main-road chapter (every road / origin, milestone or
-   ARC67 road chapter incl. rdDef .t; a new life / rebirth reads the new S; a co-op seat reads its own S), null = no open chapter = line 2 hidden. Installed
+   ARC67 road chapter incl. rdDef .t, home road before the tuyển tú; a new life / rebirth reads the new S; a co-op seat reads its own S), null = no open chapter = line 2 hidden. Installed
    whatever the load order: this module sets it over the j79 stub (j79 before), and j79 only installs its stub when none exists (j79 after). Read-only. */
 window.kitChapterTitle=function(){return chapterInfo(typeof S!=="undefined"?S:null)};window.kitChapterTitle.e92=1;
 window.TITLES2={RP,ROADT,ROADC,ARCT,VNT,VNC,MHT,MHOLD,MG70,MHG,LCT,LCWHY,LCW,LCA,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc,arcKey,chName,vnName};
