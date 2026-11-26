@@ -32,3 +32,8 @@ LIVE = 02f564ae (OB-KIEP; verified byte-identical on the site, boot Fold+iPad 0 
 - Stack recipe: worktree at parent slot, `git merge --no-commit --no-ff <sha>`, checkout --theirs index.html sw.js assets.json, write CHANGE.txt, build_site BEFORE commit (so the build line reads <parent>+), commit, push review/lc20-<slot>. Module-list conflicts in assemble.py: union (python snippet in this log's history: insert each new module after its predecessor).
 - Tools: dev/handover/reports/lc20-tools/ (gates.sh = gates8 + OB-KIEP gates; gates-hw.sh; gates-sm.sh with local wrangler worker at /home/user/wt/wr — copy coop/worker there + npm install first; holog.sh). Edit SP= and the QC line (qc-daylife quickcheck path) for the new container.
 - START_CTX ~5%, rolled at ~28% (context rule).
+
+## 07:20Z — final
+- MAIN 154 pushed bf6dd041 (qc slot) and 6b5d3d05 (a9). LIVE = 6b5d3d05 (site md5 = slot), ROLLBACK bf6dd041.
+- HOME-WAY bdc3ee5b = FAULT: stage-stay.js «chip-odds» still wants the old «…lẻn vào, may rủi» wording; HOME-WAY's chip now says «nán lại quá giờ, bị bắt gặp thì Danh -8, bị cảnh cáo; may rủi: Có cơ.» → HOME-WAY worker updates the test; LC21 reruns gates-hw.sh (rest of the chain was not finished). a9 post-push buổi A/B not run (LC21).
+- LC20 stopped; LC21 = session_01V1ZZH3pV1ng9hG9pEgF3yY.
