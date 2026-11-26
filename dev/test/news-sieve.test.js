@@ -80,17 +80,18 @@ const res=[];let DEATHS=0;const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  '
  const old=await p.evaluate(()=>{try{delete S.nsA;delete S.nsM;const raw=JSON.stringify(S);S=JSON.parse(raw);for(let i=0;i<5;i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){return{err:String(e)}}}Q.length=0;return{ok:true,nsA:!!S.nsA}}catch(e){return{err:String(e)}}});
  /* 8 the Sổ ghi: every NPC ↔ NPC act this life has a record with doer + victim + cause; the tab shows them; a forced hủy dung */
  const so=await p.evaluate(()=>{const o={};const H=(window.__T.oldRec||[]).concat(S.hrec||[]);const W=/, (vì|trả đũa|đáp|theo|trong chuyện)/;
-  const acts=H.filter(x=>x.k);o.acts=acts.length;o.noWhy=acts.filter(x=>!W.test(x.t)).slice(0,3).map(x=>x.t);o.noIds=acts.filter(x=>x.ids.length<2).length;
+  const acts=H.filter(x=>x.k);o.acts=acts.length;o.badWord=H.filter(x=>/@|(?<![\p{L}])T(?![\p{L}\d/])|\p{Ll}\p{Lu}/u.test(x.t)).slice(0,3).map(x=>x.t.slice(0,140));o.noWhy=acts.filter(x=>!W.test(x.t)).slice(0,3).map(x=>x.t);o.noIds=acts.filter(x=>x.ids.length<2).length;
   const L=liveRivals(true).filter(v=>v&&v.alive&&!v.out&&!v.confined);const A=L[0],B=L.find(v=>v!==A&&!sameHouse(A,v));o.pair=A&&B?[A.name,B.name]:null;
   if(A&&B){const n0=(S.hrec||[]).length;let r='';const mo=window.motiveOK;try{delete B.scar;try{npcLearn(A,B)}catch(e){}window.motiveOK=()=>({ok:true});try{motiveOK=window.motiveOK}catch(e){}/* the forced deed: she knows B and wants it */const pl=typeof PT!=='undefined'?PT.landing:0;try{if(typeof PT!=='undefined')PT.landing=1;/* lands now (parallel time sends an NPC deed and lands it later) */r=runAct(A,B,'huydung')}finally{if(typeof PT!=='undefined')PT.landing=pl}}catch(e){o.err=String(e)}finally{window.motiveOK=mo;try{motiveOK=mo}catch(e){}}o.r=String(r).replace(/<[^>]+>/g,'').slice(0,200);
    const x=(S.hrec||[])[0];o.rec=x&&x.k==='huydung'&&x.ids[0]===A.id?x.t:null;o.recOk=!!(x&&x.t.includes(A.name)&&x.t.includes(B.name)&&/hủy dung/.test(x.t)&&W.test(x.t));
    try{kitKnowFlush()}catch(e){}const tb=x&&x.tb;o.tb=tb;const N=(NT&&NT.list||[]).map(i=>String(i.text||''));o.tinbao=!!tb&&N.some(t=>t.includes(tb));
    tab='log';renderPanel();const P=document.getElementById('panel');const rows=[...P.querySelectorAll('.logs > div')].map(d=>d.textContent);o.rows=rows.length;
    const shown=x?nsMask(x.t,x.ids):'';o.shown=shown;o.top=rows.slice(0,3);const why=(shown.match(/, (vì [^,.]*|trả đũa [^,.]*)/)||[])[1]||'@';const NA=x?x.ids.map(id=>{const v=RV(id);return nsMask(v.name,[id])}):[];
-   o.tab=!!shown&&rows.some(t=>NA.every(n=>t.includes(n))&&/hủy dung/.test(t)&&t.includes(why));/* the row (the tab adds each one's title) holds doer, victim, act, cause */o.tabNpc=rows.filter(t=>/, (vì|trả đũa|đáp|theo)/.test(t)).length;tab='act';renderPanel()}
+   const lc=x=>String(x).toLowerCase();o.tab=!!shown&&rows.some(t=>NA.every(n=>lc(t).includes(lc(n)))&&/hủy dung/.test(t)&&lc(t).includes(lc(why)));/* the row (the tab adds each one's title) holds doer, victim, act, cause */o.tabNpc=rows.filter(t=>/, (vì|trả đũa|đáp|theo)/.test(t)).length;tab='act';renderPanel()}
   /* 9 servants / children */
   try{nsOpen();const sv=allServ();o.serv=sv.length;o.servKn=sv.filter(s=>s.kn).length;const K=allKids().map(x=>x[0]).filter(k=>k.dil);o.kids=K.length;o.kidsKn=K.filter(k=>k.dilK).length;
-   const s0=S.staff&&S.staff[0];o.look=s0&&typeof hsvActs==='function'?hsvActs(s0).some(a=>a.n==='Xem người'):null;const ns=mkServ('maid');o.newKn=!!(ns&&ns.kn)}catch(e){o.err9=String(e)}
+   const s0=S.staff&&S.staff[0];o.look=s0&&typeof hsvActs==='function'?hsvActs(s0).some(a=>a.n==='Xem người'):null;const ns=mkServ('maid');o.newKn=!!(ns&&ns.kn);
+   /* the People tab (Cung nhân) card of her first servant shows the «Tính nết» row */Q.length=0;tab='staff';render();const sv0=S.maid||S.staff[0];o.card=!!sv0&&document.getElementById('panel').innerText.includes(netTxt(sv0));tab='act';render()}catch(e){o.err9=String(e)}
   return o});
  out.so=so;
  out.dup=dup;out.old=old;out.errs=errs.slice(0,10);
@@ -105,7 +106,7 @@ const res=[];let DEATHS=0;const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  '
  ok(dup.box===1&&dup.boxAfterLui===0&&(!dup.icon||(dup.iconN===1&&dup.iconAfterLui===0))&&dup.toast<=1,'5 one copy per tapped panel; one «Lui» closes it',dup);
  ok(old.ok&&out.netOpen&&out.netOpen.n>0&&out.netOpen.open===out.netOpen.n,'6 old save plays on; every consort\'s nết shown from the start',{old,netOpen:out.netOpen});
  ok(out.big.events===out.big.tinbao&&out.big.events===out.big.sogi&&out.big.hr===out.big.events,'7 every big NPC ↔ NPC harm: one Tin báo line + one Sổ ghi record',out.big);
- ok(so.acts>=out.allActs*0.9&&so.noWhy.length===0&&so.noIds===0&&so.recOk&&so.tab&&so.tinbao&&so.tabNpc>0,'8 Sổ ghi holds every NPC ↔ NPC act with doer / victim / cause; forced hủy dung in Tin báo + Sổ ghi tab',{acts:so.acts,allActs:out.allActs,noWhy:so.noWhy,shown:so.shown,top:so.top,tb:so.tb,tab:so.tab,tinbao:so.tinbao,tabNpc:so.tabNpc});
- ok(so.serv>0&&so.servKn===so.serv&&so.kidsKn===so.kids&&so.look!==true&&so.newKn,'9 servants\' and children\'s nết open; no paid «Xem người»',{serv:so.serv,servKn:so.servKn,kids:so.kids,kidsKn:so.kidsKn,look:so.look,newKn:so.newKn,err:so.err9});
+ ok(so.acts>=out.allActs*0.9&&so.noWhy.length===0&&so.noIds===0&&!so.badWord.length&&so.recOk&&so.tab&&so.tinbao&&so.tabNpc>0,'8 Sổ ghi holds every NPC ↔ NPC act with doer / victim / cause; forced hủy dung in Tin báo + Sổ ghi tab',{acts:so.acts,allActs:out.allActs,noWhy:so.noWhy,badWord:so.badWord,shown:so.shown,top:so.top,tb:so.tb,tab:so.tab,tinbao:so.tinbao,tabNpc:so.tabNpc});
+ ok(so.serv>0&&so.servKn===so.serv&&so.kidsKn===so.kids&&so.look!==true&&so.newKn&&so.card,'9 servants\' and children\'s nết open; no paid «Xem người»',{serv:so.serv,servKn:so.servKn,kids:so.kids,kidsKn:so.kidsKn,look:so.look,newKn:so.newKn,card:so.card,err:so.err9});
  ok(errs.length===0&&!out.err,'no page errors',errs.slice(0,5));
  await b.close();const fail=res.filter(x=>!x).length;console.log(fail?`NEWS-SIEVE FAIL ${fail}/${res.length}`:`NEWS-SIEVE PASS ${res.length}/${res.length}`);process.exit(fail&&!REP?1:0)})();

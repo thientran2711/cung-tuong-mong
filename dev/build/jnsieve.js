@@ -118,22 +118,22 @@ function recPush(o){try{const L=recList();const t=txtOf(o.t);if(!t)return null;
 function persOf(id){try{return typeof RV==="function"?RV(+id):null}catch(e){return null}}
 /* a stranger's name → her description (k61), capital first letter at the start of a sentence */
 function maskNames(t,ids){let s=String(t);for(const id of ids||[]){const v=persOf(id);if(!v||!v.name)continue;const w=who(v);if(w&&w!==v.name)s=s.split(v.name).join(w)}
- return s.replace(/(^|[.!?…]\s+)(\p{Ll})/gu,(m,a,b)=>a+b.toUpperCase())}
+ return s.replace(/(^|[.!?…:]\s+)(\p{Ll})/gu,(m,a,b)=>a+b.toUpperCase())}
 function bigK(k){try{const b=(BAL.news&&BAL.news.bigBand)||2;return (typeof BANDS!=="undefined"?BANDS:[]).slice(b).some(x=>(x[2]||[]).includes(k))}catch(e){return false}}
-/* the act said as a plain clause about the victim T (NEWS WORDING: one clear sentence; «nàng» stands for T inside the clause) */
-const ACT_SAY={frame:"vu oan T",plant:"cài đồ vào rương của T",block:"rút thẻ bài của T",bribe:"mua chuộc cung nữ của T",accuse:"tố giác T",vp:"hặc T ăn mặc sai phẩm",
- ksab:"phá việc học của con T",takeaway:"xin bế con của T về nuôi",lygian:"ly gián T",tocao:"tố tội thật của T",xinhh:"xin Hoàng hậu giáng T",trinhth:"trình Thái hậu chuyện của T",
- trinhhh:"trình Hoàng hậu chuyện của T",huydung:"hủy dung T",giahoa:"giá họa trộm đồ cho T",laydo:"sai người lấy trộm đồ của T",laydol:"sai cung nữ lấy đồ của T",
- thathu:"thả thú dữ hại dung nhan T",phonghoa:"phóng hỏa kho đồ của T",petsteal:"trộm thú nuôi của T",xx:"tố T xa xỉ",poison:"hạ độc T",kpoison:"hạ độc con của T",
- pond:"đẩy con của T xuống hồ",pushp:"đẩy T xuống hồ sen",musk:"bỏ xạ hương hại T",catswap:"mua chuộc bà đỡ của T",kframe:"vu con của T trù ẻo",slowpoison:"hạ độc dần T",
- expose:"bóc chuyện tư tình của T",pgift:"tặng T quà ăn có độc",rumor:"tung tin đồn về T",spy:"dò la T",spyk:"dò la T",trip:"ngáng chân T",uyhiep:"uy hiếp T đòi bạc",
- banphe:"bán chuyện của T cho phe khác",tat:"tát T",phatquy:"phạt T quỳ",rash:"bỏ phấn lạ hại T",batnat:"ép T nộp của",thaopet:"hại thú nuôi của T",nuoc:"hắt nước vào T",
- tea:"hắt trà vào T",ink:"quạt mực vào T",ally:"kết giao với T",gift:"tặng quà T",steal:"tranh sủng với T",road:"chặn ngự giá trước cung T",tieuhuy:"trả chứng cứ cho T để lấy lòng",
- bribel:"sai cung nữ lấy lòng T",blockf:"nhờ người quen rút thẻ bài của T",petcare:"giúp T chăm thú nuôi",pmplay:"cùng T chơi",pmduel:"thách đấu T"};
+/* the act said as a plain clause about the victim @ (NEWS WORDING: one clear sentence; «nàng» stands for T inside the clause) */
+const ACT_SAY={frame:"vu oan @",plant:"cài đồ vào rương của @",block:"rút thẻ bài của @",bribe:"mua chuộc cung nữ của @",accuse:"tố giác @",vp:"hặc @ ăn mặc sai phẩm",
+ ksab:"phá việc học của con @",takeaway:"xin bế con của @ về nuôi",lygian:"ly gián @",tocao:"tố tội thật của @",xinhh:"xin Hoàng hậu giáng @",trinhth:"trình Thái hậu chuyện của @",
+ trinhhh:"trình Hoàng hậu chuyện của @",huydung:"hủy dung @",giahoa:"giá họa trộm đồ cho @",laydo:"sai người lấy trộm đồ của @",laydol:"sai cung nữ lấy đồ của @",
+ thathu:"thả thú dữ hại dung nhan @",phonghoa:"phóng hỏa kho đồ của @",petsteal:"trộm thú nuôi của @",xx:"tố @ xa xỉ",poison:"hạ độc @",kpoison:"hạ độc con của @",
+ pond:"đẩy con của @ xuống hồ",pushp:"đẩy @ xuống hồ sen",musk:"bỏ xạ hương hại @",catswap:"mua chuộc bà đỡ của @",kframe:"vu con của @ trù ẻo",slowpoison:"hạ độc dần @",
+ expose:"bóc chuyện tư tình của @",pgift:"tặng @ quà ăn có độc",rumor:"tung tin đồn về @",spy:"dò la @",spyk:"dò la @",trip:"ngáng chân @",uyhiep:"uy hiếp @ đòi bạc",
+ banphe:"bán chuyện của @ cho phe khác",tat:"tát @",phatquy:"phạt @ quỳ",rash:"bỏ phấn lạ hại @",batnat:"ép @ nộp của",thaopet:"hại thú nuôi của @",nuoc:"hắt nước vào @",
+ tea:"hắt trà vào @",ink:"quạt mực vào @",ally:"kết giao với @",gift:"tặng quà @",steal:"tranh sủng với @",road:"chặn ngự giá trước cung @",tieuhuy:"trả chứng cứ cho @ để lấy lòng",
+ bribel:"sai cung nữ lấy lòng @",blockf:"nhờ người quen rút thẻ bài của @",petcare:"giúp @ chăm thú nuôi",pmplay:"cùng @ chơi",pmduel:"thách đấu @"};
 /* «A hủy dung B, vì ghen nàng được sủng.» / «A định hủy dung B, vì …, nhưng không thành.» (reason = jmem causeText, the cause ledger) */
-function recSentence(rec,a,t,k){const fail=rec&&rec.r==="fail";const pat=ACT_SAY[k]||`${String(ACT[k]&&ACT[k].n||k).toLowerCase()} với T`;
+function recSentence(rec,a,t,k){const fail=rec&&rec.r==="fail";const pat=ACT_SAY[k]||`${String(ACT[k]&&ACT[k].n||k).toLowerCase()} với @`;
  let why="";try{why=causeText(rec)||""}catch(e){}if(why&&t&&t.name)why=why.split(t.name).join("nàng");
- return `${a.name} ${fail?"định ":""}${pat.replace("T",t.name)}${why?", "+why:""}${fail?", nhưng không thành":""}.`}
+ return `${a.name} ${fail?"định ":""}${pat.replace("@",t.name)}${why?", "+why:""}${fail?", nhưng không thành":""}.`}
 function isNpc(p){return !!p&&p!==S&&p.id!=null&&typeof p==="object"&&(typeof rivals==="undefined"||rivals.includes(p))}
 if(typeof runAct==="function"){const ra0=runAct;runAct=function(a,t,k){const r=ra0.apply(this,arguments);
   try{if(r&&recOn()&&isNpc(a)&&isNpc(t)&&a!==t&&!NSV.inRec){NSV.inRec=1;try{
@@ -166,6 +166,9 @@ if(typeof renderPanel==="function"){const rp=renderPanel;renderPanel=function(){
 function nsOpen(){try{if(!on()||!BAL.news.netOpen)return;for(const s of (typeof allServ==="function"?allServ():S.staff||[])||[])if(s&&!s.kn)s.kn=1;if(S.maid&&!S.maid.kn)S.maid.kn=1;
   for(const [k] of (typeof allKids==="function"?allKids():[]))if(k&&k.dil&&!k.dilK)k.dilK=1}catch(e){}}
 if(typeof mkServ==="function"){const ms=mkServ;mkServ=function(){const s=ms.apply(this,arguments);try{if(on()&&BAL.news.netOpen&&s)s.kn=1}catch(e){}return s}}
+/* the servant's person card (jmind mindRows = the one source of «Sở trường / Thích / Ghét» rows on every person card) gets the same «Tính nết» row as a consort */
+if(typeof mindRows==="function"){const mr=mindRows;window.mindRows=mindRows=function(p){const R=mr.apply(this,arguments);try{if(on()&&BAL.news.netOpen&&p&&typeof p==="object"&&(p.sid!=null||p===S.maid||(typeof allServ==="function"&&allServ().includes(p)))&&typeof netTxt==="function"&&!R.some(r=>r&&r[0]==="Tính nết")){
+  const W=p.kn?String(netTxt(p)||"").split(/\s*,\s*/).filter(Boolean):[];R.unshift(["Tính nết",W.length?W.join(", "):"chưa rõ",W.length?"t":"n"])}}catch(e){}return R}}
 for(const f of ["endTurn","nextBuoi"]){const g0=window[f];if(typeof g0!=="function")continue;const w=function(){const r=g0.apply(this,arguments);nsOpen();return r};window[f]=w;try{if(f==="endTurn")endTurn=w;else nextBuoi=w}catch(e){}}
 Object.assign(window,{nsHerLine,nsNpcLine,nsMonth,nsSieveQ:sieveQ,nsGossipSkip,nsOpen,nsRecMerge:recMerge,nsMask:maskNames});
 })();
