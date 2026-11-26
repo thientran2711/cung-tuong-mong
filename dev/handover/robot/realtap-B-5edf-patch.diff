@@ -105,7 +105,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
  module.exports = { make, PROBE };
 diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 --- a/dev/test/robot-rt-coop.js	2026-11-25 23:30:30.071817801 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-25 23:44:35.656385204 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-26 02:47:34.167925804 +0000
 @@ -51,14 +51,43 @@
  
  async function seatLoop(ctx, who, dev, other) {
@@ -124,7 +124,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 +    let cdp = null; try { cdp = await p.context().newCDPSession(p) } catch (e) {}
 +    const capF = path.join(OUT, 'hangcap-' + who + '.txt'); const capW = t => { try { fs.appendFileSync(capF, '[' + new Date().toISOString() + ' ' + ts() + '] ' + t + '\n') } catch (e) {} };
 +    const rss = () => { try { return require('child_process').execSync("ps -eo rss,pcpu,args | grep -E 'type=renderer|type=gpu' | grep -v grep | awk '{printf \"%dMB %s%% %s\\n\", $1/1024, $2, substr($0, index($0,\"--type=\"), 30)}'", { timeout: 5000 }).toString() } catch (e) { return 'ps err ' + e.message } };
-+    const memT = setInterval(async () => { const h = cdp ? await Promise.race([cdp.send('Runtime.getHeapUsage').catch(e => 'err'), new Promise(r => setTimeout(() => r('TO'), 5000))]) : null; capW('mem buoi ' + s.R.buoi + ' steps ' + s.R.steps + ' heap ' + JSON.stringify(h && h.usedSize ? Math.round(h.usedSize / 1e6) + '/' + Math.round(h.totalSize / 1e6) + 'MB' : h) + ' | ' + rss().replace(/\n/g, ' ; ')) }, 60e3);
++    const memT = setInterval(async () => { /* patch #22 (freeze fixer): Blink node leak — collectGarbage then DOM counters per seat each tick */ let dc = null; if (cdp) { try { await Promise.race([cdp.send('HeapProfiler.collectGarbage'), new Promise(r => setTimeout(r, 8000))]); dc = await Promise.race([cdp.send('Memory.getDOMCounters').catch(e => 'err'), new Promise(r => setTimeout(() => r('TO'), 5000))]) } catch (e) { dc = 'err ' + e.message } } if (dc && dc.nodes != null) capW('domcounters nodes ' + dc.nodes + ' listeners ' + dc.jsEventListeners + ' documents ' + dc.documents); const h = cdp ? await Promise.race([cdp.send('Runtime.getHeapUsage').catch(e => 'err'), new Promise(r => setTimeout(() => r('TO'), 5000))]) : null; capW('mem buoi ' + s.R.buoi + ' steps ' + s.R.steps + ' heap ' + JSON.stringify(h && h.usedSize ? Math.round(h.usedSize / 1e6) + '/' + Math.round(h.totalSize / 1e6) + 'MB' : h) + ' | ' + rss().replace(/\n/g, ' ; ')) }, 60e3);
 +    const grab = async tag => { if (!cdp) return capW(tag + ' no cdp'); capW(tag + ' START rss: ' + rss().replace(/\n/g, ' ; '));
 +      try { const ls = await Promise.race([cdp.send('Runtime.evaluate', { expression: "JSON.stringify(Object.fromEntries(Object.keys(localStorage).filter(k=>/ctm-coop/.test(k)).map(k=>[k,String(localStorage[k]).slice(0,400)])))", returnByValue: true }).catch(e => ({ err: e.message })), new Promise(r => setTimeout(() => r('TO'), 10000))]); capW(tag + ' LS ' + (ls && ls.result ? ls.result.value : JSON.stringify(ls))) } catch (x) { capW(tag + ' LS err ' + x.message) }
 +      try { await Promise.race([cdp.send('Debugger.enable'), new Promise(r => setTimeout(r, 20000))]); const pz = new Promise(r => cdp.once('Debugger.paused', r)); await cdp.send('Debugger.pause').catch(e => capW('pause err ' + e.message));
