@@ -84,6 +84,9 @@ console.log(tbl.join('\n'));{const L=SITES.filter(s=>s.core!==null);ok(L.length>
  ok(R.filter(o=>/^maid (never|in)/.test(o.case)).every(o=>o.kids==="không"),'a maid who never rose: «Con cái: không»',R.filter(o=>/^maid/.test(o.case)).map(o=>[o.case,o.kids]));
  ok(R.filter(o=>/^kept/.test(o.case)).every(o=>o.maxR===undefined||o.maxR===null||RANKS_IDX(o)),'kept: after the edict maxRank = the rank given',R.filter(o=>/^kept/.test(o.case)).map(o=>[o.case,o.maxR,o.want]));
  {const N=["Đáp ứng","Thường tại","Quý nhân","Tần","Phi","Quý phi","Hoàng quý phi","Hoàng hậu"];const L=R.filter(o=>o.stage&&o.stage!=="rank");ok(L.length>=10&&L.every(o=>o.cap&&!N.includes(o.cap)),'no life that never held a rank shows a consort rank over her name (home / tú nữ / maid)',L.filter(o=>!o.cap||N.includes(o.cap)).map(o=>[o.case,o.cap]))}
+ {const z=await p.evaluate(()=>{const W=Object.values(BAL.rank.preN||{});let h='';try{h=JSON.stringify(rkRulesSpec())}catch(e){h='ERR '+e}return{roles:W.map(w=>[w,rkRole(w).role]),spec:W.every(w=>h.includes(w)),n:W.length}});
+  ok(z.n===2&&z.roles.every(r=>r[1]!=='maid'&&r[1]!=='consort'),'board face: «Chưa vào cung» / «Tú nữ» get no maid / consort decor (rkRole)',z.roles);
+  ok(z.spec,'«Cách tính» explains never-entered lives (BAL.rank.preN words)',z)}
  ok(!errs.length,'no page errors',errs);
  await b.close();console.log(bad?`${bad} FAIL`:'ALL PASS');process.exit(bad?1:0)})();
 function RANKS_IDX(o){const N=["Đáp ứng","Thường tại","Quý nhân","Tần","Phi","Quý phi","Hoàng quý phi","Hoàng hậu"];return N[o.maxR|0]===o.want}

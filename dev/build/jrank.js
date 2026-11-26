@@ -100,7 +100,7 @@ rkBase();if(typeof deser==="function")(function(){const d0=deser;deser=function(
 const RK={tab:"lives",data:{},busy:0,err:0,view:"list",lid:"",ends:{},msg:""};
 /* the kit frame of the highest standing of that life (KIT 4.3): consort rank 0–7 → frame-consort-N, servant title → frame-maid-N, Ma ma → frame-mama */
 function rkRole(ph){const R=BAL.rank;ph=String(ph||"");let i=R.consortN.indexOf(ph);if(i>=0)return{role:"consort",rank:i};
- if(ph==="Ma ma")return{role:"mama",rank:3};i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
+ if(ph==="Ma ma")return{role:"mama",rank:3};if(R.preN&&Object.values(R.preN).includes(ph))return{role:"other",rank:null};/* D-ENDRANK: never entered (Chưa vào cung / Tú nữ) = no rank, no maid decor */i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
 const rkImg=v=>v&&typeof IMG_U==="function"?IMG_U(v):v||"";/* stored "img/…" → the picture CDN */
 function rkFace(row){const r=rkRole(row.p);return{src:rkImg(row.por),ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
  __kr:Object.assign({origin:null,sex:"f",kid:false},r)}}
@@ -131,7 +131,7 @@ function rkRulesSpec(){const R=BAL.rank;const n=v=>`<b>${v}</b>`;
  return{kind:"rule",cls:"krkp",title:`Cách tính ${RK_T.unit}`,sub:"điểm của một kiếp, tính lúc kiếp khép lại",sections:[
  {html:`<p class="kpnote">Mỗi kiếp khép lại được chấm một số ${RK_T.unit}: cộng các phần dưới đây. ${RK_T.screen} tự tính lại từ sổ kiếp gửi lên, số tự khai không được nhận.</p>`},
  {h:`${own?"Kiếp vừa rồi của ta":"Ví dụ một kiếp"}: ${who}`,html:`<p class="kpnote">${lifeLine}</p>`+kitRows(sc.parts.map(([k,v])=>[k,`+${v}`,"g"]).concat(sc.partial?[["Kiếp dở dang","chỉ tính một nửa","r"]]:[]).concat([[RK_T.unit,n(sc.score),"t"]]))},
- {h:"Phẩm cao nhất từng đạt",html:kitTiles(R.consortN.map((x,i)=>[x,`${R.consort[i]}`]))+`<p class="kpnote">Cung nữ chưa lên phi tần: ${R.servantN.map((x,i)=>`${x} ${R.servant[i]}`).join(", ")}, Ma ma ${R.servant[3]}. Lấy số cao nhất.</p>`},
+ {h:"Phẩm cao nhất từng đạt",html:kitTiles(R.consortN.map((x,i)=>[x,`${R.consort[i]}`]))+`<p class="kpnote">Cung nữ chưa lên phi tần: ${R.servantN.map((x,i)=>`${x} ${R.servant[i]}`).join(", ")}, Ma ma ${R.servant[3]}. Lấy số cao nhất.</p>${R.preN?`<p class="kpnote">Kiếp chưa vào cung (${Object.values(R.preN).join(", ")}): không có phẩm, ${RK_T.unit} bằng 0, đứng dưới mọi kiếp trong cung.</p>`:""}`},
  {h:"Kết cục",html:kitTiles(E.map(([k,v])=>[k,`${v}`]))+`<p class="kpnote">Kết cục khác (chết, lãnh cung, bị đuổi…) không thêm.</p>`},
  {h:"Cộng thêm",rows:[
   ["Năm trong cung",`${R.year} mỗi năm tròn, nhiều nhất ${R.yearCap} năm`,"t"],["Con cái",`hoàng tử ${R.son}, công chúa ${R.dau}; nhiều nhất ${R.kidCap} người con`,"t"],
