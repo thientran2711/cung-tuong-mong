@@ -410,3 +410,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~22:59Z (after roll) OWNER: HUD top row «Sắc phong X/Y tuần» → OD row → opened HUD-SACPHONG.
 - 23:00Z KIT-STAGE-R5 rolled (ac95f7e9: KIT_HAND.max 10 + KIT_PLAQUE.max 10, tray cut undone, §101.11 rewritten; kit-hand 116/0) → archived; opened KIT-STAGE-R6 session_01Rc5AsM1W9YBiWMMpMsFQtc (sonnet): remove 67 close-only «Thôi» cards (keep 78 story ones), >10 → KK48, LOOK READY → KK48 → RV-164.
 - 23:01Z 164 relay: sếp ~22:58Z HUD «Sắc phong 5/32 tuần» → HUD-SACPHONG session_01Rc5AsMfzAWwHhtkBmdZG1w (opened by 164, owned by 165; KK48 → RV-164). RV-164 ready, waiting shas.
+- 23:02Z 164 relay: RING-BUILD-6 rolled c2922fbd (3 sizes, overlap 0) but drafted own plaque post → archived by 164; RING-BUILD-7 session_01Rc5AsL6hQYeeAgiZLwztv4 (merge kit-plaque-post 9c936022 as THE post, drop draft, name plate → KK48, >7 3rd col/no Thôi) → LOOK READY to 165.
