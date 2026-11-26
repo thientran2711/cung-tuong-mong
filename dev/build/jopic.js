@@ -427,9 +427,9 @@ try{const ka0=kitActArt;kitActArt=function(name){const r=ka0.apply(this,argument
    instead the dialog carries warn:1 (Q card, or kitPanel spec.warn) and the kit draws ONE line «Cẩn thận khi lựa chọn» right above its option list (.opts).
    The word lives in VANPHONG (KIT_WARN_LINE); one look (.kwarnl: small, the kit red, the «!» disc), every dialog path (j3 cards and kit panels). */
 const KIT_WARN_LINE="Cẩn thận khi lựa chọn";window.KIT_WARN_LINE=KIT_WARN_LINE;
-function kitWarnLine(){return `<div class="kwarnl" role="note"><i class="khap" aria-hidden="true">!</i><span>${KIT_WARN_LINE}</span></div>`}
-function kitWarnPut(){try{const m=Q[0],M=document.getElementById("modal");if(!m||!M||M.hidden)return;const on=!!(m.warn||(m.kit&&m.kit.warn));const o=M.querySelector("#mb .opts");const old=M.querySelectorAll(".kwarnl");
- if(!on||!o){old.forEach(e=>e.remove());return}if(o.previousElementSibling&&o.previousElementSibling.classList.contains("kwarnl"))return;old.forEach(e=>e.remove());o.insertAdjacentHTML("beforebegin",kitWarnLine())}catch(e){console.error("kitWarnPut",e)}}
+function kitWarnLine(text){return `<div class="kwarnl" role="note"><i class="khap" aria-hidden="true">!</i><span>${text||KIT_WARN_LINE}</span></div>`}
+function kitWarnPut(){try{const m=Q[0],M=document.getElementById("modal");if(!m||!M||M.hidden)return;const wv=m.warn||(m.kit&&m.kit.warn);const on=!!wv;const o=M.querySelector("#mb .opts");const old=M.querySelectorAll(".kwarnl");
+ if(!on||!o){old.forEach(e=>e.remove());return}if(o.previousElementSibling&&o.previousElementSibling.classList.contains("kwarnl"))return;old.forEach(e=>e.remove());o.insertAdjacentHTML("beforebegin",kitWarnLine(typeof wv==="string"?wv:""))}catch(e){console.error("kitWarnPut",e)}}
 window.kitWarnLine=kitWarnLine;window.kitWarnPut=kitWarnPut;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitWarnPut();setTimeout(kitWarnPut,120);return r};window.showModal=showModal})();
 (function(){const st=document.createElement("style");st.textContent=`#modal .kwarnl{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px auto 6px;padding:2px 10px;font-size:.82rem;line-height:1.3;color:var(--bad);font-weight:600;letter-spacing:.01em;flex:0 0 auto}
@@ -438,7 +438,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2k",title:"Dò
 /* ===== KIT §6.2l GOAL LINK + «CÁCH LÀM» PANEL (owner 26/11 ~18:05Z: «mấy cái dấu gạch hướng dẫn dưới chân của cái dòng đó … bấm vào là để hiện ra cái hướng dẫn, hoặc là hiện ra là đi tới nơi đó»; KK44) =====
    kitGoalLink(label, how) → an UNDERLINED (dotted) link inside any goal / task / notice text; tap → kitHowPanel(how) = the small kit panel «Cách làm»:
    who (name + painting), where (place + its open hours), what it costs, + ONE button «Đi tới» (its khắc cost shown) that runs how.go (walk her there /
-   open the Dư đồ with the place pulsing). how = {who: person object | name, where: place key | name, hours: text, cost: text, note: text, go: fn, goK: khắc}.
+   open the Dư đồ with the place pulsing). how = {who: person object | name, where: place key | name, hours: text, cost: text, note: text, go: fn, goK: khắc, map: fn («Xem Dư đồ»)}.
    The data comes from the caller (the goal list knows its target); the kit only draws it. One look everywhere (.kglink), registry by id (no inline code). */
 const KGL=window.KGL=window.KGL||{n:0,m:{}};
 function kitGoalLink(label,how){const id="g"+(++KGL.n);KGL.m[id]=how||{};if(KGL.n>400){const ks=Object.keys(KGL.m);ks.slice(0,ks.length-300).forEach(k=>delete KGL.m[k])}
@@ -448,7 +448,7 @@ function kitHowPanel(how){try{how=how||{};const p=how.who&&typeof how.who==="obj
  const ico=wk&&typeof kitPlaceIcon==="function"?kitPlaceIcon(wk,16):"";
  const rows=[["Ai",nm?(typeof kitName==="function"&&p?kitName(p):nm):""],["Ở đâu",pl?`<span class="kglwhere">${ico}${pl}</span>`:""],["Giờ mở",how.hours||""],["Tốn",how.cost||""],["Ghi chú",how.note||""]];
  const html=(typeof kitRows==="function"?kitRows(rows):rows.filter(r=>r[1]).map(r=>`<p><b>${r[0]}:</b> ${r[1]}</p>`).join(""));
- const opts=[];if(typeof how.go==="function")opts.push({n:"Đi tới",fx:{},x:how.goK!=null?`tốn: ${how.goK} khắc`:"",go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});
+ const opts=[];if(typeof how.go==="function")opts.push({n:"Đi tới",fx:{},x:how.goK!=null?`tốn: ${how.goK} khắc`:"",go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});if(typeof how.map==="function")opts.push({n:"Xem Dư đồ",fx:{},go:()=>{try{how.map()}catch(e){console.error("kitHowPanel map",e)}}});
  return typeof kitModal==="function"?kitModal({kind:"info",title:"Cách làm",subject:p||undefined,html,opts:opts.length?opts:undefined,cls:"kgoalhow"}):null}catch(e){console.error("kitHowPanel",e);return null}}
 window.kitGoalLink=kitGoalLink;window.kitHowPanel=kitHowPanel;
 /* window capture: runs before the document-level frame / tap-catcher handlers that take a tap inside an info frame */

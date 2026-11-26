@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const path=require('path');const SRC=path
   await p.evaluate(()=>kitNotice({id:'t-close',line:'Nơi này sắp đóng cửa, mời tiểu chủ rời đi',sticky:1,hold:1,pulse:1}));await p.waitForTimeout(400);
   if(SHOT)await p.screenshot({path:`${SHOT}/hold-pulse-${W}.png`});
   const ms=await p.evaluate(()=>BAL.entryToastMs||5000);await p.waitForTimeout(ms+800);const a=await st();
-  chk(`${tag} held chip still up after ${ms} ms, blinking (kntBlink), at the top`,a.up&&/Nơi này sắp đóng cửa/.test(a.txt)&&a.anim==='kntBlink'&&a.y<H*0.25,a);
+  chk(`${tag} held chip still up after ${ms} ms, pulsing (kntPulse), at the top`,a.up&&/Nơi này sắp đóng cửa/.test(a.txt)&&a.anim==='kntPulse'&&a.y<H*0.25,a);
   await p.evaluate(()=>kitNotice('Một tin khác'));await p.waitForTimeout(400);const o=await st();chk(`${tag} another notice shows its own chip`,o.up&&/Một tin khác/.test(o.txt),o);
   await p.waitForTimeout(ms+800);const back=await st();chk(`${tag} after its ${ms} ms the held chip comes back`,back.up&&/sắp đóng cửa/.test(back.txt),back);
   await p.evaluate(()=>kitNotice({id:'t-close',line:'Đã quá giờ, mời tiểu chủ rời đi',sticky:1,hold:1,pulse:1,tone:'red'}));await p.waitForTimeout(500);const r=await st();

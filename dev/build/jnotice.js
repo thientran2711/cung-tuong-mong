@@ -81,7 +81,7 @@ function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object"
  {const d=NT.list.find(x=>x.id!==id&&!x.sticky&&x.text===text);if(d&&!NT.list.some(x=>x.id===id))id=d.id}
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
- Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",hold:!!spec.hold,pulse:!!spec.pulse,tone:spec.tone||"",t:Date.now()});
+ Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",hold:!!spec.hold,pulse:!!spec.pulse||spec.state==="pulse",tone:spec.tone||(spec.state==="late"?"red":""),chipGo:!!spec.chipGo,t:Date.now()});/* state:"pulse"|"late" = PLACE-CLOSE aliases of pulse / tone:"red" */
  if(again)it.seen=false;
  while(NT.list.length>cap()){const i=NT.list.map(x=>!!x.sticky).lastIndexOf(false);NT.list.splice(i>=0?i:NT.list.length-1,1)}
  boxPaint();if(again)chipShow(it);return it}catch(e){console.error("kitNotice",e);return null}}
@@ -122,7 +122,7 @@ function boxPaint(){try{const hud=hudEl();let b=$("kntbox");const L=NT.list,U=un
  return b}catch(e){console.error("kntbox",e);return null}}
 /* ---------- the CHIP ---------- */
 function chipEl(it){let el=$("kntchip");if(!el){el=document.createElement("div");el.id="kntchip";el.className="ktbt kntc";el.setAttribute("role","status");document.body.appendChild(el)}
- el.dataset.id=it.id;el.innerHTML=`<i class="khap" aria-hidden="true">!</i><span>${esc(it.line)}</span>`;el.classList.remove("out");el.classList.toggle("kntpulse",!!it.pulse);el.classList.toggle("kntred",it.tone==="red");el.classList.toggle("knthold",!!it.hold);return el}
+ el.dataset.id=it.id;el.innerHTML=`<i class="khap" aria-hidden="true">!</i><span>${esc(it.line)}${it.chipGo&&it.goLabel?` · <b>${esc(it.goLabel)}</b>`:""}</span>`;el.classList.remove("out");el.classList.toggle("kntpulse",!!it.pulse);el.classList.toggle("kntred",it.tone==="red");el.classList.toggle("knthold",!!it.hold);return el}
 function chipHide(el){el=el||$("kntchip");if(!el)return;el.classList.add("out");clearTimeout(NT.t);setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)}
 function chipPlace(el){try{el.style.transform="none";el.style.maxWidth="none";const c=cal(el);const w=c.w,h=c.h;const hud=hudEl();
  const keep=(typeof kitToastKeepRects==="function"?kitToastKeepRects(el):[]);const box=$("kntbox");
@@ -174,7 +174,9 @@ function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const
 function picSwap(M,it){try{const src=picOf(it);if(!src)return;const im=M.querySelector("#mb figure.ksart img, #mb .ksart img");if(im&&im.getAttribute("src")!==src)im.setAttribute("src",src)}catch(e){}}
 try{const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const it=m&&m.__ntc;if(it){picSwap(M,it);setTimeout(()=>picSwap(M,it),0)}}catch(e){console.error("kntpanel",e)}return r}}catch(e){}/* the kit picture slot of the panel (info art «Tin báo» by default) shows the notice's own picture */
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("#kntbox,#kntchip");if(!t)return;e.stopPropagation();e.preventDefault();
- try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitNoticeOpen(t.id==="kntchip"?t.dataset.id:null)},true);
+ try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}/* §42.2a chipGo: a tap on a held chip runs its go (e.g. «Về phòng · N khắc»), the panel stays for the «!» box */
+ if(t.id==="kntchip"){const it=NT.list.find(x=>x.id===t.dataset.id);if(it&&it.chipGo&&typeof it.go==="function"){try{it.seen=true;it.go()}catch(x){console.error("chipGo",x)}boxPaint();return}}
+ kitNoticeOpen(t.id==="kntchip"?t.dataset.id:null)},true);
 /* ---------- routing of the old notice calls (one entry point) ---------- */
 window.kitLine=kitLine=function(text){return kitNotice({line:text})?$("kntchip"):null};/* §42.2: was a bottom pill (#kupdline) */
 window.kitLineToast=function(text){const it=kitNotice({line:text});return it?$("kntchip"):null};/* jplst place-entry line (was #ktbtoast) */
@@ -205,7 +207,8 @@ const st=document.createElement("style");st.id="kit-notice";st.textContent=`
 #kntchip.kntc{left:0;transform:none;white-space:nowrap;max-width:none;width:max-content}
 #kntchip.kntc .khap{flex:0 0 auto;margin:0;width:16px;height:16px;line-height:16px;font-size:.72rem;vertical-align:0;animation:none}
 body.kdlg-on #kntchip,body.kbk-open #kntchip{visibility:hidden!important}
-#kntchip.kntc.kntpulse{animation:kntBlink calc(1.1s*var(--pace,1)) ease-in-out infinite}
+#kntchip.kntc.kntpulse{animation:kntPulse calc(1.1s*var(--pace,1)) ease-in-out infinite}
+@keyframes kntPulse{0%,100%{box-shadow:0 0 0 0 transparent;filter:none}50%{box-shadow:0 0 0 3px var(--gold),0 0 12px 2px var(--gold);filter:brightness(1.08)}}/* MAIN 161 LOOK: the gold pulse must read in every frame — a glow ring, no fade to near-invisible */
 #kntchip.kntc.kntred{background:var(--bad);border-color:var(--bad);color:var(--panel,#fff)}
 #kntchip.kntc.kntred .khap{background:var(--panel,#fff);color:var(--bad)}
 @media (prefers-reduced-motion:reduce){#kntchip.kntc.kntpulse{animation:none;outline:2px solid currentColor;outline-offset:1px}}`;document.head.appendChild(st);
@@ -225,7 +228,7 @@ Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNot
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.3",title:"kitKnow · «Ta biết thêm N điều» (one kitNotice kind know; same chip, box and Tin báo panel as §42.2)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ta biết thêm 3 điều</span></span><button type="button" class="btn" onclick="kitKnowMany([{key:'a',text:'Ngươi biết tên: đó là Lệ tần Mai thị.'},{key:'b',text:'Ngươi đã thấy mặt một phi tần áo bậc Tần; chưa biết tên.'},{key:'c',text:'Quý phi Đào Cẩm Tâm nay được tấn phong Hoàng quý phi.'}]);kitNoticeOpen()">Mở khung Tin báo</button></div>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2a",title:"kitNotice hold · chip giữ lại, nhấp nháy (sắp đóng cửa) + trạng thái đỏ (quá giờ)",
- html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt kntc kntpulse" id="kitpg-np" style="position:static;transform:none;white-space:nowrap;animation:kntBlink calc(1.1s*var(--pace,1)) ease-in-out infinite"><i class="khap" style="margin:0">!</i><span>Nơi này sắp đóng cửa, mời tiểu chủ rời đi</span></span>`+
+ html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt kntc kntpulse" id="kitpg-np" style="position:static;transform:none;white-space:nowrap;animation:kntPulse calc(1.1s*var(--pace,1)) ease-in-out infinite"><i class="khap" style="margin:0">!</i><span>Nơi này sắp đóng cửa, mời tiểu chủ rời đi</span></span>`+
   `<span class="ktbt kntc kntred" style="position:static;transform:none;white-space:nowrap;background:var(--bad);border-color:var(--bad);color:var(--panel,#fff)"><i class="khap" style="margin:0;background:var(--panel,#fff);color:var(--bad)">!</i><span>Đã quá giờ, mời tiểu chủ rời đi</span></span>`+
   `<button type="button" class="btn" onclick="kitNotice({id:'kitpg-hold',line:'Nơi này sắp đóng cửa, mời tiểu chủ rời đi',sticky:1,hold:1,pulse:1})">Giữ chip</button><button type="button" class="btn" onclick="kitNotice({id:'kitpg-hold',line:'Đã quá giờ, mời tiểu chủ rời đi',sticky:1,hold:1,pulse:1,tone:'red'})">Chip đỏ</button><button type="button" class="btn" onclick="kitNoticeDrop('kitpg-hold')">Bỏ chip</button></div>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2",title:"kitNotice · ô ! trên thanh trên + chip một dòng ở trên + khung Tin báo",
