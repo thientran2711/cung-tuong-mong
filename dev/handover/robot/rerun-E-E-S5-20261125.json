@@ -10,7 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 13,
+ "finished": 14,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -13131,6 +13131,86 @@
    },
    "bugs": [],
    "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": null
+  },
+  {
+   "life": "E-S5-R5-random-1",
+   "dev": "fold",
+   "bot": "rand",
+   "seed": 975131458,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Công chúa ở lại cố quốc",
+   "type": "death",
+   "death": true,
+   "age": 19,
+   "buoi": 123,
+   "harness": {
+    "kind": "realtap",
+    "sha": "08a4ff8b",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [
+     {
+      "at": 19,
+      "lvl": 1,
+      "layer": "#modal",
+      "title": "Chọn sổ"
+     },
+     {
+      "at": 31,
+      "lvl": 1,
+      "layer": "#modal",
+      "title": "Chọn sổ"
+     },
+     {
+      "at": 43,
+      "lvl": 1,
+      "layer": "#modal",
+      "title": "Chọn sổ"
+     },
+     {
+      "at": 81,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Thân phận kiếp này"
+     }
+    ],
+    "slice": null,
+    "build": {
+     "s": "6b5d3d05+",
+     "b": "b7dcbbd06e03",
+     "t": "2026-11-26T06:59Z"
+    },
+    "areaTaps": 46,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-26T11:56:54.874Z",
+      "buoi": 1,
+      "from": "2026-11-26T11:56:19.313Z"
+     }
+    ],
+    "resumeFresh": 1,
+    "dlgScroll": 16,
+    "scrolls": 17,
+    "infoTaps": 83,
+    "dlgClose": 51,
+    "kfocVisits": 2,
+    "nextNoTurn": 2,
+    "taps": 714
+   },
+   "bugs": [],
+   "exitPick": {
+    "label": "Bắt đầu kiếp mới",
+    "only": false,
+    "via": "tap outside the exit-only branch",
+    "at": 54
+   },
    "mgDragSkip": null,
    "mgReady": null
   }

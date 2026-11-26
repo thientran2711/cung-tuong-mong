@@ -1,0 +1,62 @@
+# E-S5-R5-random-1 moment log (bot rand, fold, seed 975131458, real-tap harness 08a4ff8b)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-2-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-E-S5-R5-random-1/m-new-2-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcsan | Ở cố quốc chờ hòa ướcTốnkhôn | Trang trước | Dung mạo 13 | Dung mạo 14 | Dung mạo 15 | Dung mạo 16 | Dung mạo 17 · shots-E-S5-R5-random-1/m-new-2-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · EVENT · rank 2 → 0 · shots-E-S5-R5-random-1/m-rank-2-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-rank-2-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-E-S5-R5-random-1/m-new-2-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Công chúa Phù Tang» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-2-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Công chúa Phù Tang» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-2-7.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Phòng của ta · Ở đây có 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc60Tài73Tâm cơ13Đức30Danh1 | Bạc60Sức100/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | sương sớm | Tâm trạngBình thản0 · shots-E-S5-R5-random-1/m-new-2-8.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Mua tinTốnBạc -35·1 khắcĐược | Không muaGhi chúkhông biết t · shots-E-S5-R5-random-1/m-new-2-9.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Tin mua được» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-3-10.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · page «Phòng của ta · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc60Tài73Tâm cơ13Đức30Danh1 | Bạc25Sức100/100 | Buổi trưa, còn 3 khắc | Ngày lên đườngcòn 22 tháng | hoa đào bay | Tâm trạngBình thản0 · shots-E-S5-R5-random-1/m-new-3-11.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · #kdaytc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc60Tài73Tâm cơ13Đức30Danh1 | Bạc25Sức100/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | trời quang | Tâm trạngBình thản+2 · shots-E-S5-R5-random-1/m-new-5-12.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-E-S5-R5-random-1/m-new-6-13.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-6-14.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-6-15.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-8-16.png
+- year 1 · turn 0 · tuần 2 · buổi 0 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Để ta xem | Để sau · shots-E-S5-R5-random-1/m-new-10-17.png
+- year 1 · turn 0 · tuần 2 · buổi 1 · rank 0 · .dlg «Phụ hoàng ngã bệnh» · NEW SCREEN · first time on this screen; buttons: Ngày đêm hầu thuốcRất vữngTố | Xin sứ đoàn mời thầy thuốc Đ · shots-E-S5-R5-random-1/m-new-10-18.png
+- year 1 · turn 0 · tuần 2 · buổi 3 · rank 0 · .dlg «Chương 1 · Chờ ngày hòa thân» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-13-19.png
+- year 1 · turn 0 · tuần 2 · buổi 3 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-E-S5-R5-random-1/m-new-13-20.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Lễ nghi 1/1 | Giao thiệp 1/1 | Vấn an mẫu hậu · Rất vững · | Lui · shots-E-S5-R5-random-1/m-new-14-21.png
+- year 1 · turn 1 · tuần 0 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-15-22.png
+- year 1 · turn 1 · tuần 0 · buổi 1 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc · Nội | mồng 2 | mồng 3 | mồng 4 | mồng 5 · shots-E-S5-R5-random-1/m-new-15-23.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · #modal «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-18-24.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Chép kinh cầu phúcTốnSức -8Đ | Lễ Phật rồi về · shots-E-S5-R5-random-1/m-new-18-25.png
+- year 1 · turn 1 · tuần 1 · buổi 2 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-random-1/m-look-20.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · #modal «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-21-26.png
+- year 1 · turn 1 · tuần 2 · buổi 1 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-23-27.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Khen lụa đẹp, chúc mừng nàng | Mở khăn lụa nhỏ của ngoại qu | Đổi lụa lấy chiếc khăn với n | Cất khăn vào tay áo, lui vềT · shots-E-S5-R5-random-1/m-new-26-28.png
+- year 1 · turn 3 · tuần 0 · buổi 2 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-random-1/m-look-40.png
+- year 1 · turn 3 · tuần 2 · buổi 2 · rank 0 · #modal «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-48-29.png
+- year 1 · turn 3 · tuần 2 · buổi 2 · rank 0 · .dlg «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons: Tiếp đón nồng hậuRất vữngTốn | Tiếp qua loaRất vữngTốnSức - | Từ chốiRất vữngTốnkhôngĐượct | Tiếp rồi đem chuyện đi kể vớ · shots-E-S5-R5-random-1/m-new-48-30.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · .dlg «Hòa ước» · NEW SCREEN · first time on this screen; buttons: Ra mắt đoan trang, đáp lời b | Ra mắt theo lễ cố quốcRất vữ · shots-E-S5-R5-random-1/m-new-50-31.png
+- year 1 · turn 4 · tuần 0 · buổi 2 · rank 0 · #klearnov «» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-52-32.png
+- year 1 · turn 4 · tuần 0 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-53-33.png
+- year 1 · turn 4 · tuần 1 · buổi 1 · rank 0 · .dlg «Hoàng muội tranh phần» · NEW SCREEN · first time on this screen; buttons: Mặc nàng taRất vữngTốnkhôngĐ | Nói chuyện thẳng với nàngRất | Tâu với phụ thânRất vữngTốnk · shots-E-S5-R5-random-1/m-new-54-34.png
+- year 1 · turn 4 · tuần 1 · buổi 2 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-56-35.png
+- year 1 · turn 4 · tuần 2 · buổi 1 · rank 0 · .dlg «Điều khoản hòa ước» · NEW SCREEN · first time on this screen; buttons: Xin giữ quyền thư từ với cố | Không đòi gì, để hai bên địn · shots-E-S5-R5-random-1/m-new-58-36.png
+- year 1 · turn 4 · tuần 2 · buổi 2 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-random-1/m-look-60.png
+- year 1 · turn 6 · tuần 1 · buổi 2 · rank 0 · page «Phòng của ta · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-random-1/m-look-80.png
+- year 1 · turn 7 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại thọ» · NEW SCREEN · first time on this screen; buttons: Dâng lễ vật quýTốnBạc -60Đượ | Dâng lễ vật vừa phảiTốnBạc - | Tự tay làm lễ vậtVữngTốnSức  · shots-E-S5-R5-random-1/m-new-90-37.png
+- year 1 · turn 7 · tuần 1 · buổi 1 · rank 0 · #modal «Đại thọ» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-91-38.png
+- year 1 · turn 8 · tuần 0 · buổi 2 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-random-1/m-look-100.png
+- year 1 · turn 8 · tuần 2 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-106-39.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · .dlg «Án mất trộm ngự khố» · NEW SCREEN · first time on this screen; buttons: Mở kho cung mình cho kiểmTốn | Tự tra người của mìnhTốnkhôn · shots-E-S5-R5-random-1/m-new-114-40.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Chịu rét cho quaTốnSức -8Đượ · shots-E-S5-R5-random-1/m-new-115-41.png
+- year 1 · turn 9 · tuần 1 · buổi 2 · rank 0 · #modal «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-random-1/m-new-116-42.png
+- year 1 · turn 9 · tuần 1 · buổi 3 · rank 0 · .dlg «Thích khách» · NEW SCREEN · first time on this screen; buttons: Kêu cứuRất vữngTốnkhôngĐượct | Tự mình chống trảRất vữngTốn · shots-E-S5-R5-random-1/m-new-116-43.png
+- year 1 · turn 9 · tuần 1 · buổi 3 · rank 0 · .dlg «Mục lục chương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-random-1/m-new-117-44.png
+- year 1 · turn 9 · tuần 2 · buổi 2 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-random-1/m-look-120.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-E-S5-R5-random-1/m-new-123-45.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · ending · EVENT · life over: Công chúa ở lại cố quốc — Công chúa ở lại cố quốc · age 19 · buổi 123 · bugs 0 · stuck 0 · dead buttons 0 · shots-E-S5-R5-random-1/end.png
+
+## Runner feelings (persona random = casual newcomer, iPad 1180x820, harness 08a4ff8b, Build dcf5cf143550)
+- y1–y2 · Phù Tang princess road · DELIGHTED: easy and calm, 0 bugs in 714 taps.
+- y2 buổi ~120 · «Hòa ước» card · CONFUSED: «Thưa: con xin đi, vì muôn dân» vs «Xin để hoàng muội đi thay (Sức −5)»; as a newcomer I tapped the second (the first sounds like a sacrifice); the card does not say that either choice ends my story.
+- ending «Điền Ngọc Thù đi hòa thân thay nàng …» · ODD: the same sentence as my four other princess lives (sister name differs: Điền Ngọc Thù); the life stops at 19 with «mười năm sau được gả cho một tộc trưởng phương tây» — an offscreen marriage I did not play.
