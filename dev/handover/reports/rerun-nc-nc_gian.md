@@ -11,6 +11,10 @@ Ruling (Foreman D, 26/11 03:18Z): the 5 finished lives stay VALID, no replays �
 | nc-nc_gian-lover-2 | Hồng nhan bạc mệnh (illness) | 25 | 760 | yes | 93812531 (pre-bfa73a6e) |
 | nc-nc_gian-cautious-1 | Lãnh cung — Tuổi xuân qua đi | 40 | 3490 | yes | 1a29f470→93812531→54fa0112+F10 hooks (mixed) |
 | nc-nc_gian-scholar-1 | Lãnh cung — Tuổi xuân qua đi | 40 | 2871 | yes | 93812531→54fa0112+F10 hooks (mixed, 9 resumes; hangs b1510/b1559 replayed) |
-| nc-nc_gian-speed-1 / speed-2 / lazy-1 / lazy-1b / lazy-1c / lazy-2 | queued | – | – | – | 54fa0112+F10 hooks |
+| nc-nc_gian-lazy-1 | Hồng nhan bạc mệnh (illness) | 25 | 781 | yes | 54fa0112+F10 hooks, BUILD 5ab5b80e406e |
+| nc-nc_gian-lazy-1b | Ban hoa — Bị ban hoa, xuất cung | 19 | 1 | SUSPECT (ended at buổi 1 after 14 taps, exit pick null; BUILD cc68dcfd2b1b) | 54fa0112+F10 hooks |
+| nc-nc_gian-lazy-1c | Ban hoa — Bị ban hoa, xuất cung | 20 | 1 | SUSPECT (13 taps, buổi 1; BUILD cc68dcfd2b1b) | 54fa0112+F10 hooks |
+| nc-nc_gian-speed-1 | running | – | b1667 (crawl after b1649, kitOpt* spin, F10 replaying ckpt) | – | 54fa0112+F10 hooks |
+| nc-nc_gian-speed-2 / lazy-2 | running | – | – | – | 54fa0112+F10 hooks |
 Notes: seeds for lazy-1b/lazy-1c (7001, 7002) are my own placeholders (original md-only entries had no seed). Game build per life: <life>.build (written when first seen by the logger; lives begun before 22:12Z have only a resume-time tag fa8da73cecdc). Memory: mem.csv (renderer RSS flat 2.6–3.6 GB through b2779; 6–7 GB freezes at b65–68 were startup spikes with 3 pages).
 Fast-lane bug list sent to Foreman D (dead «Tin báo»/«Lui» + duplicate queue; Trường Môn viện no-clock loop; pet «Xem …» covered; «Danh hiệu» no close; f.rk.split; reward card over end screen).
