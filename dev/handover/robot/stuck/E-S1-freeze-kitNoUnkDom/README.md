@@ -1,0 +1,7 @@
+E-S1 PERF FREEZE (game): the page main thread spins and the renderer grows (1.7–4.7 GB) at a long save.
+Life: thd/thd_tho iPad random seed 1077992375 (E-S1-R1-random-1-1077992375), year 13, buổi 2239–2240, save ~3.7 MB (3 737 014 chars).
+Build: GAME BUILD {s:3762da08+, b:fa8da73cecdc, t:2026-11-25T19:34Z}, github.io sw Build 13f84c70f2a3; harness robot-realtap 4d7a22c6 (real taps, jsClicks 0).
+Reproduced 2×: (1) buổi 2239 on dialog «Biếu quà làm lành»: FREEZE STACK window.kitNoUnkDom @:93669:42 < (anon) @:29233:131 < kaNorm @:29233:69 < kaNorm @:30611:99 < kaNorm @:48796:99; second stack htFitSub @:52892:85 < kgSub < render. (2) after resume from the checkpoint (same state), froze again at buổi 2240 with the same kitNoUnkDom < kaNorm chain (renderer 1.7 GB) — deterministic from this save.
+Earlier freezes of this life (buổi 88/328/353 at 3.9–4.7 GB) and of lover 1915499756 (buổi 607) show the same growth with long saves.
+Files: stuck-16-save.json.gz (snapshot of the save at the stuck, 361 KB raw), ckpt-buoi2239.json.gz (harness checkpoint = harness state + game localStorage save + rng; `node dev/test/robot-rt.js <LIVE> <out> dev=ipad origin=thd road=thd_tho bot=rand seed=1077992375 life=E-S1-R1-random-1-1077992375 resume=1` after gunzip to <out>/<life>.ckpt.json replays it).
+Runner: session_01DgYSWpfx9EuQ7nBDWNiLL4 (E-S1). The life is parked (STUCK-gamebug) with its ckpt until a fix is LIVE; then resume=1.
