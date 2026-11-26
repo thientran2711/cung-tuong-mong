@@ -53,7 +53,7 @@ const PAGE=process.argv[2]||'index.html';
   const ms=relMSAll().filter(h=>h&&typeof h==='object');if(ms.length){const h=ms[0];h.oan=50;h.ocq={};h.occ={};runW(BAL.oanCool.season);ok('B7 men / servants forget by the same rule',h.oan<50,[h.oan])}else ok('B7 men / servants (none in this life: skipped)',true);
   /* monthly: no double fade in solo; the old flat fade only with the switch off */
   a.oan=50;a.ocq={};a.occ={};oanMonth();ok('B8 solo: oanMonth adds no second fade (canon overwrite)',a.oan===50,a.oan);
-  BAL.oanCool.on=0;a.oan=50;oanMonth();const off=a.oan;BAL.oanCool.on=1;ok('B9 switch off (BAL.oanCool.on = 0) → the old monthly BAL.oanFade comes back',off<50,off);
+  BAL.oanCool.on=0;a.oan=50;oanMonth();const off=a.oan;BAL.oanCool.on=1;ok('B9 switch off (BAL.oanCool.on = 0) → the old monthly BAL.oanFade comes back (× her forgive nết, as before)',off===50-Math.round(BAL.oanFade*persF(a,'forgive',1)),[off,persF(a,'forgive',1)]);
   /* co-op guest: rivalsTurn is muted there; her own grudges cool in oanMonth, 3 tuần at once, NPC values untouched */
   const wo=window.worldOn;window.worldOn=()=>false;S.ro[a.id]=60;S.occ={};S.ocq={};a.oan=50;oanMonth();window.worldOn=wo;
   ok('B10 co-op guest: oanMonth cools only HER grudges (3 tuần), NPC rows left to the host',S.ro[a.id]<60&&a.oan===50,[S.ro[a.id],a.oan]);
@@ -71,7 +71,7 @@ const PAGE=process.argv[2]||'index.html';
    apply(hg.c);mendDo(S,v,'gift',false,true);ok('C3b her talk card paid the Tốn row first (talk()): a refusal hands bạc + Danh back',S.bac===b0&&S.danh===d0&&v.oan===o0,[S.bac-b0,S.danh-d0]);
    const w=ocBandW(v.oan);mendDo(S,v,'gift',true);ok('C4 accepted gift: Bạc −mendBac, Danh +gift.danh, oán − one band width',S.bac===b0-mendBac(S)&&v.oan===o0-w,[b0-S.bac,o0-v.oan,w]);
    /* go-between */
-   const m=L.find(x=>x!==v&&!x.queen&&x!==L[2])||L[1];v.oan=85;const th=netTh(v,'than'),qu=netTh(m,'quen');affAdd(v,m,th+20-aff(v,m));affAdd(m,S,qu+20-aff(m,S));
+   const m=L.find(x=>x!==v&&!x.queen&&x!==L[2])||L[1];v.oan=85;const th=netTh(v,'than'),qu=netTh(m,'quen');for(let i=0;i<40&&aff(v,m)<th+5;i++)affAdd(v,m,5);for(let i=0;i<40&&aff(m,S)<qu+5;i++)affAdd(m,S,5);
    const mm=mendGoOf(v,S),am=aff(m,S),o1=v.oan;mendDo(S,v,'go',true);
    ok('C5 go-between (liked by her ≥ than, likes ngươi ≥ quen): oán − one band, the go-between quý ngươi −go.fav',mm===m&&v.oan===o1-ocBandW(o1)&&aff(m,S)===am-BAL.oanMend.go.fav,[mm&&mm.name,o1-v.oan,am-aff(m,S)]);
    /* two-way: an NPC mends HER deep grudge, and another NPC's, by the same function */
@@ -81,8 +81,8 @@ const PAGE=process.argv[2]||'index.html';
    /* an NPC's refused words are not chosen / not paid */
    v.oan=85;const dv=S.danh;const tw=TW.apol.req(x,v);x.ro[v.id]=0;v.ro=v.ro||{};v.ro[x.id]=85;const xd=x.danh;AGRUN['cx:humble'](x,v);
    ok('C8 NPC: Tạ lỗi (TW apol) not offered and Nhún nhường not paid while refused',TW.apol.req(x,v)===false&&x.danh===xd,[TW.apol.req(x,v),x.danh-xd]);
-   let ao=[];try{ao=AGREG.consort.mend(x,(typeof agNeeds==='function'?agNeeds(x):{}),'safe')||[]}catch(e){ao=['err '+e.message]}
-   ok('C9 NPC agent offers the costly roads toward the one who holds the deep grudge',ao.some(o=>o&&/cx:mend/.test(o.k)&&mendDeep(o.t,x)),ao.map(o=>o&&o.k||o))}
+   /* every consort as the doer (utility depends on her nết / needs): at least one offers a road, and every offer aims at a deep grudge it can pay */let ao=[],bad=[];try{for(const d of L){if(d===v)continue;d.bac=Math.max(d.bac||0,500);d.ro=d.ro||{};v.ro[d.id]=85;const r=AGREG.consort.mend(d,(typeof agNeeds==='function'?agNeeds(d):{}),'safe')||[];for(const o of r){ao.push(o);if(!mendDeep(o.t,d)||!mendCan(d,o.t,o.k==='cx:mendGift'?'gift':'go'))bad.push(o.k)}v.ro[d.id]=0}}catch(e){ao=['err '+e.message]}
+   ok('C9 NPC agents offer the costly roads toward the one who holds the deep grudge (only roads they can pay)',ao.some(o=>o&&/cx:mend/.test(o.k))&&!bad.length,[ao.length,bad])}
   return {out,ka,kc,kd}});
  let fail=0;for(const [n,c,x] of R.out){if(!c)fail++;console.log((c?'ok   ':'FAIL ')+n+(x?'  '+x:''))}
  if(errs.length){fail++;console.log('FAIL page errors',errs.slice(0,3))}
