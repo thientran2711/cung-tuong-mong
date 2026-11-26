@@ -278,3 +278,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~16:31Z RV-ACT-MERGE confirmed: «Học» chooser rows carry BAL words («tiến bộ một đến ba phần» …) → balance-pace = stale test; follow-up test fix (read [data-learndoor] chooser rows) owed by RV-ACT-MERGE before archive.
 - ~16:33Z RV-ACT-MERGE real-tapped «Học» on LIVE b881686f Fold+iPad: words shown, 0 page errors. Test fix review/act-merge-ALL-fix bd0007fe (test-only, FF on LIVE) → LC22 may FF anytime. RV-ACT-MERGE done → archive.
 - ~16:53Z kit-g4-r2 4dbce886 SMALL PASS WITH RESIDUAL → LC22 slot. Residual + dropped-copy onClose risk → KK44. KK43 archived.
+- ~17:42Z LC22 READY TO PUSH f573dc94 (ctp + act-merge test fix) → HELD by MAIN for interleaved perf (buổi 1.32× one run) + tainghe-info TypeError origin + audio bgm-joy URL. LC22 rolled → **LC23 session_01V1ZZH17hXgTvCC6BWnvVB6** (questions re-sent there).
