@@ -207,3 +207,8 @@ Earlier sets: f10e-4422dda2-*, f10f-eb7ddb99-*.
 
 **LAND READY review/renderer-mem 8d5e3382 (FF from LIVE f573dc94)** — head == sha; every code delta rv PASS (§3–§6, dev/handover/reviews/renderer-mem-review.md); coop-e2e 143/143 on 8d5e3382; Fold/iPad videos above. Coordinator: fast-forward main to 8d5e3382.
 ~X%: F10 ~99 % done (5 members fixed, rv PASS on every delta, long-run + crawl proof in).
+
+### 10b. Remerge LIVE 53319e6f (26/11 ~20:55Z)
+03a8c17c = 8d5e3382 + merge LIVE 53319e6f (j79/jkitpage/jts; no F10 file, no MO/RO/rAF/interval); rv §7 PASS; coop-e2e 143/143; quickcheck perf PASS (render 206/228, buổi 1146/1048, tasks>200 23/27), only the 2 pre-existing LIVE FAILs; kscue-shots LIVE vs fix: same frame/cue (diff 0.2–1 %; j7c 5–21 % = different random scene). Videos f10h-03a8c17c-video-{old,new}-{fold,ipad}.webm (CDN img/_review/renderer-mem/).
+
+**LAND READY review/renderer-mem 03a8c17c (FF from LIVE 53319e6f)** — supersedes 8d5e3382.
