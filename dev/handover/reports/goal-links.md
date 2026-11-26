@@ -111,3 +111,11 @@ Stills (looked at): https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-l
 - Extra kit note (d): the kit «Xem Dư đồ» option card (no `x`) shows a lone «!» circle top-right with nothing behind it.
 - Stills: https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2c/{755x1000,1180x820}-{1-goal-links,2-cach-lam,3-du-do-ring,4-du-do-muaban,5-di-toi,6-menh-truyen}.jpg. Old CDN folders goal-links-r2 / goal-links-r2b can be wiped.
 - Left for later: re-check stills when KK44 ships nav / kitMapMark legend / head picture / one-painting fixes; r7 merged LOOK after LC24.
+
+### r2d — FINAL for RV: **review/goal-links-r2d @ fa62dee6** (on kit-k44-parts 60599208 = the passed kit; supersedes r2c / r2b / review/goal-links)
+- Kit §6.2m nav:1 shipped → my r2 interim wrappers (chooseM / logChoice / resultShow in jglink) REMOVED; the family carries the kit flag: kit «Cách làm» Đi tới / Xem Dư đồ, jgoal «Đi làm», jge «Xem bảng vàng», every bare «Đóng» (jdh, jge, jgoal, jhaohuu, jload, jstatus — 6/6 found by scan).
+- Kit fixes seen in stills: head picture = Nội vụ phủ; nav cards have no «Được: không»; no lone «!».
+- Tests: goal-links.js PASS 755x1000 + 1180x820; kit-goal-link.js 8 ok / 0 FAIL.
+- New kit note (e) for KK44: iPad 1180x820 — the two nav option cards wrap their label one word per line («Đi / tới · / 2 / khắc», «Xem / Dư / đồ»): text column too narrow beside the picture.
+- Still open kit/art: (c) one person two paintings (panel portrait vs shop tray figure); map legend row + big icon (KK44-H). r7 LOOK after LC24.
+- Stills: https://ctm-img.victoria-tntt.workers.dev/img/_review/goal-links-r2d/{755x1000,1180x820}-{1-goal-links,2-cach-lam,3-du-do-ring,4-du-do-muaban,5-di-toi,6-menh-truyen}.jpg (older folders r2 / r2b / r2c can be wiped).
