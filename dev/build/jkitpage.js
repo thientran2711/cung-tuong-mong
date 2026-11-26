@@ -64,8 +64,10 @@ function kitPgEvOpts(){const W=o=>word(o);const O=[{n:"Gói bánh ú dâng Thái
   {n:"Theo cha mưu đại sự",fx:{},x:`${W(20)} · thành: Hoàng hậu bị phế, Danh +10 · hỏng: cả họ bị tru di`}];
  return `<div class="opts kitpg-ev">${O.map((c,i)=>`<button class="opt" data-m="${i}" data-khide="1" data-kitsample="ev${i}">${c.n}<small>${typeof dilLine==="function"?dilLine(c):c.x}</small></button>`).join("")}</div>`}
 function kitPgSeals(){const s=ok=>{const r=kitResultSeal(ok);return `<span class="rtoast karesult ${r.cls}"><b class="seal">${r.t}</b></span>`};return `<div class="kitpg-row kitpg-seal">${s(true)}${s(false)}${s(null)}</div>`}
-function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,3)}catch(e){}if(!L.length)L=[{name:"Phi tần A"},{name:"Phi tần B"}];
- return `<span class="kb" onclick="const k=event.target.closest('.kkem');if(k)k.classList.toggle('on')">${kitKemRow(L.map((v,i)=>({v,k:"ghen",d:4+i*2})))}</span>`}
+function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,8)}catch(e){}if(!L.length)L=[{name:"Phi tần A"},{name:"Phi tần B"}];
+ /* KK41: named people one line each, the ones she does not know grouped «N vị khác: ghen +8» (oán lines grouped apart) — plus the night-card Được / Mất person rows (kitRows) */
+ const K=L.map((v,i)=>({v,k:i%4===3?"oán":"ghen",d:i%4===3?-3:8}));let night="";try{const P=(n,t,c)=>`<span class="ef t">${n}:</span> <span class="ef ${c}">${t}</span>`;night=kitRows([["Được",[P(L[0]&&kaWho(L[0])||"Phi tần A","thiện cảm +6","g"),P("một vị Phi","thiện cảm +2","g"),'<span class="ef g">Sủng +3</span>'],"g"],["Mất",[P(L[1]&&kaWho(L[1])||"Phi tần B","thiện cảm −4","r"),'<span class="ef r">Sức −10</span>'],"r"]])}catch(e){}
+ return `<span class="kb">${kitKemRow(K)}</span>${night}`}
 function kitPgWhy(){const w=(c,t,r)=>`<span class="kitem"><span class="ef ${c}">${t}</span>${kaWhyHtml(r)}</span>`;
  return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv">${w("g","Sức 56→74 (+18)","nghỉ qua đêm")}</span></span><span class="kr kr-mat"><span class="krl">Mất</span><span class="krv">${w("r","Sủng 26→25 (−1)","lâu không được gặp Hoàng thượng")}${w("r","Bạc 80→65 (−15)","sai tai mắt dò chủ hội")}</span></span></span>`}
 KIT_SAMPLES.push(
@@ -73,7 +75,7 @@ KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
- {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
+ {id:"§53",title:"kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
  `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});

@@ -291,11 +291,24 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
 function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
-function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
- const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
-  return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaN(d)}</span></span>`});
- if(K.filter(x=>Math.round(x.d)).length>8)L.push(`<span class="kitem"><span class="ef n">… và ${K.filter(x=>Math.round(x.d)).length-8} người khác</span></span>`);
- return L.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${L.join("")}</span></span>`:""}
+function kitKemRow(K){if(!K||!K.length)return"";/* KK41 (MAIN 157 ruling 26/11, RV-OB-VERDICT; overwrites the 24/11 «one line per stranger», law 14): ONE line per NAMED person «<Tên>: ghen +8»;
+   the people she does not know by name are GROUPED per feeling and direction «4 vị khác: ghen +8» (one stranger: «Một vị Phi: ghen +8»; no named line above: «4 vị phi tần: …»);
+   every line is its own row in every result card (rtoast, the night card kne, any .kb), never run together; exact numbers (a group whose numbers differ: «+4 đến +8»); no cause copy */
+ const A=K.filter(x=>x&&Math.round(x.d));if(!A.length)return"";const KEM=KIT_KEM;const seen=new Set(),nm=[],un=[];
+ A.forEach(x=>{const named=x.v&&kaNamed(x.v);const key=(x.v&&x.v.id||kaWho(x.v))+"|"+x.k;if(named&&seen.has(key))return;seen.add(key);(named&&nm.length<KEM.named?nm:un).push(x)});
+ const val=(k,ds)=>{const lo=Math.min(...ds),hi=Math.max(...ds),c=lo>0?"r":"g";return `<span class="ef ${c}">${k} ${lo===hi?kaN(lo):(lo>0?kaN(lo)+" đến "+kaN(hi):kaN(hi)+" đến "+kaN(lo))}</span>`};
+ const line=(who,v)=>`<span class="kitem kkl"><span class="ef t">${who}:</span> ${v}</span>`;
+ const L=nm.map(x=>line(kaWho(x.v),val(x.k,[Math.round(x.d)])));
+ const G=new Map();un.forEach(x=>{const d=Math.round(x.d),g=x.k+(d>0?"+":"-");if(!G.has(g))G.set(g,[]);G.get(g).push(x)});
+ [...G.values()].forEach(g=>{const ds=g.map(x=>Math.round(x.d));let who;if(g.length===1){const v=g[0].v;who=kaNamed(v)?kaWho(v):String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^m/,"M")}else who=`${g.length} vị ${nm.length?"khác":"phi tần"}`;L.push(line(who,val(g[0].k,ds)))});
+ return `<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv kklist">${L.join("")}</span></span>`}
+/* KIT_KEM: how many NAMED people get their own Kèm line (the rest join the grouped «N vị khác» lines) — layout knob, not a game number */
+const KIT_KEM={named:6};
+(function(){const st=document.createElement("style");st.id="kit-kem-css";st.textContent=`
+/* KIT §7 Kèm list (KK41): one person / one group per row in EVERY container (the night card's .kitem is the centred item cell otherwise) */
+html body .kr>.krv.kklist{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:1px!important;text-align:left!important;min-width:0}
+html body .kr>.krv.kklist>.kitem.kkl{display:block!important;width:auto!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:0!important;text-align:left!important;white-space:normal!important;border:0!important;background:none!important;box-shadow:none!important;aspect-ratio:auto!important;height:auto!important}
+html body .kr>.krv.kklist>.kitem.kkl>.ef{display:inline!important;margin:0!important;white-space:normal!important}`;document.head.appendChild(st)})();
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
    the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
@@ -335,7 +348,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
  const rows=[];if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!rows.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
- const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
+ const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${typeof kitLineCap==="function"?kitLineCap(x):x}</span>`).join("")}</span></span>`;/* KK41: each result line starts its row with a capital */
  t.className="rtoast karesult "+SL.cls;
  t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ ở Nhật ký</span></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000)};
