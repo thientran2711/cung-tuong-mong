@@ -550,3 +550,4 @@ C3-RGART rg c1b option 1 «Cúi đầu vâng dạ» own act picture (KIT-STAGE-R
 C3-RGART | rg c1b card picture | session_01PEhRbv48cmAjM4J3Mem5N6 (sonnet) | RUNNING | 2026-11-26T21:17Z (Foreman C; id for the line above)
 reign-end (REIGN-END) | review/reign-end | session_01Rc5AsKDTgMubUASiLMBaba | RUNNING | 2026-11-26T21:13Z
 map-r8 (MAP-R8) | review/map-r8 | session_01Rc5AsMBAKsCvMCqPGZy5fi | RUNNING | 2026-11-26T21:18Z
+C3-RGART | review/c3-rg-c1b-art ba3bcdf9 + CDN act-opt-cui-dau-vang-da | session_01PEhRbv48cmAjM4J3Mem5N6 | DONE LOOK PASS (archived) → cherry-pick into kit-stage branch | 2026-11-26T21:25Z (Foreman C)
