@@ -28,7 +28,8 @@ DOOR.add=function(r){if(r&&r.k&&r.re&&!DOOR.T.some(x=>x.k===r.k))DOOR.T.push(r);
 ].forEach(DOOR.add);
 const doorTxt=h=>String(h==null?"":h).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* the door of one act name (her button or an NPC's AGC3BTN label), for a person kind (kind omitted = any) */
-DOOR.of=function(n,kind){const t=doorTxt(n);if(!t)return null;for(const r of DOOR.T)if((!kind||r.kinds.includes(kind))&&r.re.test(t))return r;return null};
+/* a row may carry fields of its owner (J2: cat, tiers, card keys …): DOOR keeps them; the talk fold reads only k, n, kinds (omitted = every kind), re, rep, h, tier */
+DOOR.of=function(n,kind){const t=doorTxt(n);if(!t)return null;for(const r of DOOR.T)if(r.re&&(!kind||!r.kinds||r.kinds.includes(kind))&&r.re.test(t))return r;return null};
 DOOR.byK=k=>DOOR.T.find(r=>r.k===k)||null;
 DOOR.names=new Set();DOOR.T.forEach(r=>DOOR.names.add(r.n));
 /* the raw option list of a person (every member as its own option), the one the fold reads */
@@ -40,7 +41,7 @@ function doorFold(p,A){if(!p||!Array.isArray(A)||!A.length)return A;
  A.forEach((a,j)=>{const r=R[j];if(!r||cnt[r.k]<2){out.push(a);return}
   if(!made[r.k]){const M=A.filter((x,i)=>R[i]===r);const free=M.filter(x=>!x.lock);
    const d={n:r.n,door:r.k,o:100,fix:1,act:M.every(x=>x&&x.act)?1:0,x:`chọn một trong ${M.length} việc: ${M.map(x=>doorTxt(x.n)).join(", ")}`,
-    open:()=>doorOpen(p,r.k)};
+    open:()=>doorOpen(p,r.k)};Object.defineProperty(d,"m",{value:M,enumerable:false});/* its members (tests, DOOR.flat) */
    if(!free.length){d.lock=true;d.t=M[0].t||"chưa làm được"}
    made[r.k]=d;out.push(d)}});
  A.forEach((a,j)=>{out[-1-j]=a});return out}
@@ -51,25 +52,30 @@ window.doorFold=doorFold;
 ["directActs","adMaidCards"].forEach(f=>{if(typeof window[f]!=="function")return;const f0=window[f];window[f]=function(){DOOR.raw++;try{return f0.apply(this,arguments)}finally{DOOR.raw--}}});
 /* (2) the door tap: opens the choice card, costs nothing (each member pays its own khắc / bạc when it runs) */
 function doorWho(p){try{const v=p&&p.ref;if((p.kind==="rival"||p.kind==="hh")&&v&&v.id!=null)return["r",v.id];if(p.kind==="emp")return["e"];if(p.kind==="th")return["t"];if(p.kind==="maid")return["m"];if(p.kind==="ty")return["d"]}catch(e){}return null}
-function doorOpen(p,k){const i=curPeople().indexOf(p);const pi=i>=0?i:popIdx;if(pi==null)return;const r=DOOR.byK(k);pushDil(mkP("door",{i:pi,k}),r?r.n:"Chọn việc");/* the card shows at once (render shows a queued card only on its own redraw path; the focus scene takes it in-scene, jdfv) *//* a door is HER tap inside the person view (jdayq (c): «a card she opens from inside the activity still shows»; the hidden pop-up button jdf clicks is not inside .kfoc, so the tap is marked as hers, as jdayq's own kitModal wrapper does) */
+/* the person of a door card is held by WHO she is (the visit list can shift while the card is up: someone leaves, co-op refreshHere), never by a frozen index */
+function doorPP(p,i,k){return{i,k,kind:p&&p.kind,rid:p&&p.ref&&p.ref.id!=null?p.ref.id:null,nm:p&&p.name||""}}
+function doorIdx(pp){try{const P=curPeople();if(pp.kind==null)return pp.i;const f=x=>x&&x.kind===pp.kind&&(pp.rid!=null?!!x.ref&&x.ref.id===pp.rid:x.name===pp.nm);if(f(P[pp.i]))return pp.i;return P.findIndex(f)}catch(e){return -1}}
+function doorOpen(p,k){const i=curPeople().indexOf(p);const pi=i>=0?i:popIdx;if(pi==null)return;const r=DOOR.byK(k);pushDil(mkP("door",doorPP(curPeople()[pi]||p,pi,k)),r?r.n:"Chọn việc");/* the card shows at once (render shows a queued card only on its own redraw path; the focus scene takes it in-scene, jdfv) *//* a door is HER tap inside the person view (jdayq (c): «a card she opens from inside the activity still shows»; the hidden pop-up button jdf clicks is not inside .kfoc, so the tap is marked as hers, as jdayq's own kitModal wrapper does) */
  try{const M=document.getElementById("modal");if(Q.length===1&&M&&M.hidden){const dq=typeof DQ==="object"&&DQ?DQ:null;if(dq)dq.user=(dq.user||0)+1;try{showModal()}finally{if(dq)dq.user--}}}catch(e){}}
 window.doorOpen=doorOpen;
 (function(){const t0=talk;talk=function(oi){try{if(typeof oi==="number"&&oi>=0&&popIdx!=null&&S&&S.visit&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
   if(a&&a.door){if(a.lock||(S.visit.tk||{})[popIdx]||S.visit.talked===true)return;a.open();render();return}}}catch(e){console.error("jdoor talk",e)}return t0.apply(this,arguments)}})();
 /* the choice card: one row per member, its own line and its own reason when it cannot be done now */
-PEND.door=pp=>{const p=curPeople()[pp.i];const r=DOOR.byK(pp.k);if(!p||!r||!S.visit)return null;let A;try{A=doorRaw(p)}catch(e){return null}
+PEND.door=pp=>{pp.i=doorIdx(pp);const p=curPeople()[pp.i];const r=DOOR.byK(pp.k);if(!p||!r||!S.visit)return null;let A;try{A=doorRaw(p)}catch(e){return null}
  const o=[];A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
   const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
-  let x="";try{x=optLine(a)}catch(e){}
-  const row={n:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp.i,j)};if(why)row.off={why};o.push(row)});
+  let x="";try{x=optLine(a)}catch(e){}if(typeof r.tier==="function"){const w=r.tier(a);if(w)x=`${w}${x?" · "+x:""}`}/* a tiered door (nhẹ / vừa / nặng) names the tier first */
+  const row={n:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
  if(!o.length)return null;o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
  const w=doorWho(p);let who=null;try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
  return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who}};
 /* (3) a picked member: the same road as its old button (talk with the raw key), through the focus game when the focus view is up */
-function doorPick(i,j){if(popIdx==null)popIdx=i;const oi=-1-j;
- try{if(typeof DF==="object"&&DF&&DF.F&&typeof dfViewOn==="function"&&dfViewOn()&&doorFocus(i,j))return}catch(e){console.error("jdoor focus",e)}
- talk(oi)}
+function doorPick(pp,j,n){const i=typeof pp==="object"?doorIdx(pp):pp;if(i<0)return;popIdx=i;/* the raw list can be built in another order on the next call (a random topic / person): the member is found again by its NAME */
+ try{const p=curPeople()[popIdx];const R=p?doorRaw(p):[];if(n!=null&&(!R[j]||R[j].n!==n)){const k=R.findIndex(a=>a&&a.n===n);if(k>=0)j=k}}catch(e){}const oi=-1-j;
+ try{const fv=document.querySelector(".kfoc");if(typeof DF==="object"&&DF&&DF.F&&fv&&fv.getClientRects().length&&(typeof dfSame!=="function"||dfSame(DF.p,curPeople()[i]))&&typeof dfViewOn==="function"&&dfViewOn()&&doorFocus(i,j))return/* only while the person view is ON SCREEN */}catch(e){console.error("jdoor focus",e)}
+ /* a card that arrived while the door card was up (a notice painted with it) waits behind her pick, as it would behind her old button tap */
+ const keep=Q.length?Q.splice(0):[];try{talk(oi)}finally{if(keep.length){Q.push(...keep);try{render()}catch(e){}}}}
 window.doorPick=doorPick;
 function doorFocus(i,j){const F=DF.F;if(!F||DF.play||typeof dfGame!=="function"||typeof dfPlay!=="function")return false;const p=curPeople()[i];if(!p)return false;
  let a=null;try{a=doorRaw(p)[j]}catch(e){}if(!a)return false;const cls=typeof dfCls==="function"?dfCls(a):"C";const eng=typeof dfEng==="function"?dfEng(a.n):"words";
@@ -90,3 +96,24 @@ if(typeof kitActCat==="function"){const k0=kitActCat;kitActCat=function(name){tr
 /* (4) two-way: the door an NPC act key sits in (her label of that key → DOOR.of) */
 const AGC3DOOR={};try{for(const k in (window.AGC3BTN||{})){const r=DOOR.of(AGC3BTN[k]);if(r)AGC3DOOR[k]=r.n}}catch(e){}
 window.AGC3DOOR=AGC3DOOR;
+/* ---------- DECK / LIST HOOK (J5 roads: cung nữ Phận sự, lãnh cung, khuê các decks, srvTalk lists; any other list of act objects) ----------
+   DOOR.fold(list, rows, o): the SAME fold rule on any list of act objects {n, …}: rows [{k, n, re, h, rep}] (regex on the act NAME → door);
+   a door replaces its members where the first one stood when ≥ 2 members are AVAILABLE (not lock / off); a lone available member stays bare
+   (with the locked twins dropped beside it only if o.dropLocked). The door object = o.mk ? o.mk(row, members) : {n, door:k, inner:1, k:cheapest khắc,
+   x:"được: kết quả tùy việc chọn"} + o.extra; its members on d.m (non-enumerable). Opening it = o.open(row, members) (the deck's own pick card, e.g.
+   DOOR.card below); each member then runs through the deck's own act()/runCard chain, paying its own khắc (the door pays nothing).
+   DOOR.card(t, h, rows, who): the standard choice card (pushDil shape, kit option rows, ✕ = Thôi): rows [{n, x, off:{why}, go}] — not saveable (a deck
+   is dealt again on load), use PEND «door» for talk lists.
+   DOOR.flat(list): every door back to its members (tests); DOOR.find(list, name): the member of that name, in a door or bare. */
+DOOR.fold=function(list,rows,o){o=o||{};if(!Array.isArray(list)||!Array.isArray(rows)||!rows.length)return list;const nm=a=>doorTxt(a&&a.n);
+ const R=list.map(a=>{if(!a||a.door)return null;const t=nm(a);for(const r of rows)if(r&&r.re&&r.re.test(t))return r;return null});
+ const ok=a=>!!a&&!a.lock&&!a.off;const cnt={};R.forEach((r,i)=>{if(r&&ok(list[i]))cnt[r.k]=(cnt[r.k]||0)+1});
+ const out=[],made={};list.forEach((a,i)=>{const r=R[i];if(!r||(cnt[r.k]||0)<2){if(r&&o.dropLocked&&!ok(a)&&(cnt[r.k]||0)===1)return;out.push(a);return}
+  if(made[r.k])return;const M=list.filter((x,j)=>R[j]===r);const ks=M.filter(ok).map(x=>typeof x.k==="number"?x.k:null).filter(x=>x!=null);
+  const d=o.mk?o.mk(r,M):Object.assign({n:r.n,door:r.k,inner:1,o:100,x:"được: kết quả tùy việc chọn"},ks.length?{k:Math.min(...ks)}:{},o.extra||{});
+  if(o.open&&!d.open)d.open=()=>o.open(r,M);Object.defineProperty(d,"m",{value:M,enumerable:false});made[r.k]=d;out.push(d)});return out};
+DOOR.card=function(t,h,rows,who){const o=(rows||[]).map(r=>Object.assign({},r));o.push({n:"Thôi"});pushDil({t:h||"",o,who:who||null},t||"Chọn việc");
+ try{const M=document.getElementById("modal");if(Q.length===1&&M&&M.hidden){const dq=typeof DQ==="object"&&DQ?DQ:null;if(dq)dq.user=(dq.user||0)+1;try{showModal()}finally{if(dq)dq.user--}}}catch(e){}};
+DOOR.flat=list=>Array.isArray(list)?[].concat(...list.map(a=>a&&a.m?a.m:[a])):list;
+DOOR.find=(list,name)=>(DOOR.flat(list)||[]).find(a=>a&&doorTxt(a.n)===name)||null;
+
