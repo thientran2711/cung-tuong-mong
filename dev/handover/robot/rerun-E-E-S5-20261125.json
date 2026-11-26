@@ -1,7 +1,7 @@
 {
  "unit": "E-S5",
  "game": "LIVE github.io",
- "finished": 8,
+ "finished": 9,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -12839,6 +12839,53 @@
      "msg": "every close of «Tin trong cung buổi này» was tapped 3× and the dialog stayed (Lui)"
     }
    ],
+   "exitPick": null
+  },
+  {
+   "life": "E-S5-R5-lazy-4",
+   "dev": "ipad",
+   "bot": "quiet",
+   "seed": 4235963764,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Lãnh cung",
+   "type": "end",
+   "death": false,
+   "age": 24,
+   "buoi": 1009,
+   "harness": {
+    "kind": "realtap",
+    "sha": "4d7a22c6",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "build": {
+     "s": "0a4c8010+",
+     "b": "d402e37a51ed",
+     "t": "2026-11-26T02:21Z"
+    },
+    "areaTaps": 1276,
+    "dlgScroll": 164,
+    "scrolls": 230,
+    "dlgClose": 245,
+    "infoTaps": 345,
+    "mgDragSkip": 30,
+    "kfocVisits": 18,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-26T05:53:37.323Z",
+      "buoi": 531,
+      "from": "2026-11-26T05:52:40.721Z"
+     }
+    ],
+    "taps": 2068
+   },
+   "bugs": [],
    "exitPick": null
   }
  ],
