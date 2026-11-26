@@ -1,0 +1,1011 @@
+{
+ "job": {
+  "id": "nc-nc_gian-lazy-1f",
+  "origin": "nc",
+  "road": "nc_gian",
+  "bot": "quiet",
+  "seed": 7005,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "54fa0112",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "areaTaps": 198,
+  "dlgScroll": 6,
+  "scrolls": 6,
+  "taps": 26
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 20,
+  "year": 1,
+  "rank": 3,
+  "text": "Đoàn sứ đưa ngươi về cố quốc. Ngươi sống nốt đời trong cung điện quê nhà, không ai nhắc đến Đại Hy nữa.",
+  "card": [
+   "Dâng điệu múa cố quốc Rất vững TỐN Sức -5 ĐƯỢC chơi một màn;",
+   "Dâng khúc đàn cố quốc Rất vững TỐN Sức -5 ĐƯỢC chơi một màn;",
+   "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".dlg «Thân phận kiếp này» «Dung mạo 12»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 10»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 8»",
+   ".dlg «Thân phận kiếp này» «Dung mạo 3»",
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 1/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 2/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 3/4» «Tiếp theo»",
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 4/4» «Vào cung»",
+   "AREA 358,314",
+   ".kmov «Vào điện»",
+   ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [],
+ "buoi": 1,
+ "steps": 243,
+ "status": [],
+ "_loopAt": 1795720825271,
+ "_snapAt": 1795720784518,
+ "trace": [
+  [
+   9,
+   "AREA 341,644"
+  ],
+  [
+   10,
+   "AREA 137,404"
+  ],
+  [
+   10,
+   "AREA 486,730"
+  ],
+  [
+   10,
+   "AREA 444,304"
+  ],
+  [
+   11,
+   "AREA 617,617"
+  ],
+  [
+   11,
+   "AREA 328,327"
+  ],
+  [
+   11,
+   "AREA 310,536"
+  ],
+  [
+   12,
+   "AREA 486,458"
+  ],
+  [
+   12,
+   "AREA 410,524"
+  ],
+  [
+   12,
+   "AREA 568,269"
+  ],
+  [
+   12,
+   "AREA 529,314"
+  ],
+  [
+   13,
+   "AREA 138,226"
+  ],
+  [
+   13,
+   "AREA 205,570"
+  ],
+  [
+   13,
+   "AREA 331,381"
+  ],
+  [
+   14,
+   "AREA 267,523"
+  ],
+  [
+   14,
+   "AREA 425,804"
+  ],
+  [
+   14,
+   "AREA 592,288"
+  ],
+  [
+   14,
+   "AREA 525,692"
+  ],
+  [
+   15,
+   "AREA 117,410"
+  ],
+  [
+   15,
+   "AREA 591,761"
+  ],
+  [
+   15,
+   "AREA 484,664"
+  ],
+  [
+   16,
+   "AREA 262,743"
+  ],
+  [
+   16,
+   "AREA 249,770"
+  ],
+  [
+   16,
+   "AREA 338,401"
+  ],
+  [
+   16,
+   "AREA 166,617"
+  ],
+  [
+   17,
+   "AREA 564,850"
+  ],
+  [
+   17,
+   "AREA 485,373"
+  ],
+  [
+   17,
+   "AREA 489,815"
+  ],
+  [
+   18,
+   "AREA 189,548"
+  ],
+  [
+   18,
+   "AREA 176,238"
+  ],
+  [
+   18,
+   "AREA 213,552"
+  ],
+  [
+   18,
+   "AREA 239,638"
+  ],
+  [
+   19,
+   "AREA 584,559"
+  ],
+  [
+   19,
+   "AREA 288,748"
+  ],
+  [
+   19,
+   "AREA 209,414"
+  ],
+  [
+   20,
+   "AREA 292,432"
+  ],
+  [
+   20,
+   "AREA 172,453"
+  ],
+  [
+   20,
+   "AREA 196,604"
+  ],
+  [
+   20,
+   "AREA 503,348"
+  ],
+  [
+   21,
+   "AREA 562,408"
+  ],
+  [
+   21,
+   "AREA 537,608"
+  ],
+  [
+   21,
+   "AREA 225,820"
+  ],
+  [
+   22,
+   "AREA 400,754"
+  ],
+  [
+   22,
+   "AREA 518,795"
+  ],
+  [
+   22,
+   "AREA 532,765"
+  ],
+  [
+   23,
+   "AREA 541,299"
+  ],
+  [
+   23,
+   "AREA 301,827"
+  ],
+  [
+   23,
+   "AREA 218,287"
+  ],
+  [
+   23,
+   "AREA 329,323"
+  ],
+  [
+   24,
+   "AREA 227,287"
+  ],
+  [
+   24,
+   "AREA 165,602"
+  ],
+  [
+   24,
+   "AREA 640,250"
+  ],
+  [
+   25,
+   "AREA 558,404"
+  ],
+  [
+   25,
+   "AREA 442,486"
+  ],
+  [
+   25,
+   "AREA 127,240"
+  ],
+  [
+   25,
+   "AREA 366,737"
+  ],
+  [
+   26,
+   "AREA 317,613"
+  ],
+  [
+   26,
+   "AREA 534,714"
+  ],
+  [
+   26,
+   "AREA 283,204"
+  ],
+  [
+   27,
+   "AREA 258,512"
+  ],
+  [
+   27,
+   "AREA 416,575"
+  ],
+  [
+   27,
+   "AREA 548,207"
+  ],
+  [
+   27,
+   "AREA 367,846"
+  ],
+  [
+   28,
+   "AREA 187,560"
+  ],
+  [
+   28,
+   "AREA 440,265"
+  ],
+  [
+   28,
+   "AREA 619,769"
+  ],
+  [
+   29,
+   "AREA 485,778"
+  ],
+  [
+   29,
+   "AREA 548,574"
+  ],
+  [
+   29,
+   "AREA 620,745"
+  ],
+  [
+   30,
+   "AREA 178,495"
+  ],
+  [
+   30,
+   "AREA 533,298"
+  ],
+  [
+   30,
+   "AREA 526,675"
+  ],
+  [
+   30,
+   "AREA 251,549"
+  ],
+  [
+   31,
+   "AREA 202,314"
+  ],
+  [
+   31,
+   "AREA 597,225"
+  ],
+  [
+   31,
+   "AREA 238,629"
+  ],
+  [
+   32,
+   "AREA 496,695"
+  ],
+  [
+   32,
+   "AREA 324,674"
+  ],
+  [
+   32,
+   "AREA 428,772"
+  ],
+  [
+   32,
+   "AREA 441,413"
+  ],
+  [
+   33,
+   "AREA 386,659"
+  ],
+  [
+   33,
+   "AREA 588,566"
+  ],
+  [
+   33,
+   "AREA 339,250"
+  ],
+  [
+   34,
+   "AREA 271,848"
+  ],
+  [
+   34,
+   "AREA 257,482"
+  ],
+  [
+   34,
+   "AREA 122,528"
+  ],
+  [
+   34,
+   "AREA 202,234"
+  ],
+  [
+   35,
+   "AREA 588,436"
+  ],
+  [
+   35,
+   "AREA 542,739"
+  ],
+  [
+   35,
+   "AREA 255,645"
+  ],
+  [
+   36,
+   "AREA 411,395"
+  ],
+  [
+   36,
+   "AREA 560,260"
+  ],
+  [
+   36,
+   "AREA 604,548"
+  ],
+  [
+   36,
+   "AREA 256,428"
+  ],
+  [
+   37,
+   "AREA 254,489"
+  ],
+  [
+   37,
+   "AREA 390,559"
+  ],
+  [
+   37,
+   "AREA 634,331"
+  ],
+  [
+   38,
+   "AREA 392,677"
+  ],
+  [
+   38,
+   "AREA 328,625"
+  ],
+  [
+   38,
+   "AREA 398,577"
+  ],
+  [
+   39,
+   "AREA 167,287"
+  ],
+  [
+   39,
+   "AREA 327,713"
+  ],
+  [
+   39,
+   "AREA 400,295"
+  ],
+  [
+   39,
+   "AREA 196,567"
+  ],
+  [
+   40,
+   "AREA 288,558"
+  ],
+  [
+   40,
+   "AREA 291,281"
+  ],
+  [
+   40,
+   "AREA 168,208"
+  ],
+  [
+   40,
+   "AREA 574,633"
+  ],
+  [
+   41,
+   "AREA 322,301"
+  ],
+  [
+   41,
+   "AREA 591,215"
+  ],
+  [
+   41,
+   "AREA 404,337"
+  ],
+  [
+   42,
+   "AREA 553,666"
+  ],
+  [
+   42,
+   "AREA 220,552"
+  ],
+  [
+   42,
+   "AREA 637,688"
+  ],
+  [
+   43,
+   "AREA 294,570"
+  ],
+  [
+   43,
+   "AREA 381,253"
+  ],
+  [
+   43,
+   "AREA 489,620"
+  ],
+  [
+   43,
+   "AREA 478,496"
+  ],
+  [
+   44,
+   "AREA 549,392"
+  ],
+  [
+   44,
+   "AREA 151,699"
+  ],
+  [
+   44,
+   "AREA 506,358"
+  ],
+  [
+   45,
+   "AREA 173,300"
+  ],
+  [
+   45,
+   "AREA 583,493"
+  ],
+  [
+   45,
+   "AREA 576,672"
+  ],
+  [
+   45,
+   "AREA 291,528"
+  ],
+  [
+   46,
+   "AREA 238,353"
+  ],
+  [
+   46,
+   "AREA 231,587"
+  ],
+  [
+   46,
+   "AREA 345,568"
+  ],
+  [
+   47,
+   "AREA 287,278"
+  ],
+  [
+   47,
+   "AREA 281,227"
+  ],
+  [
+   47,
+   "AREA 334,530"
+  ],
+  [
+   47,
+   "AREA 331,601"
+  ],
+  [
+   48,
+   "AREA 584,371"
+  ],
+  [
+   48,
+   "AREA 383,202"
+  ],
+  [
+   48,
+   "AREA 407,493"
+  ],
+  [
+   49,
+   "AREA 332,491"
+  ],
+  [
+   49,
+   "AREA 412,625"
+  ],
+  [
+   49,
+   "AREA 198,313"
+  ],
+  [
+   49,
+   "AREA 529,549"
+  ],
+  [
+   50,
+   "AREA 173,326"
+  ],
+  [
+   50,
+   "AREA 609,304"
+  ],
+  [
+   50,
+   "AREA 189,848"
+  ],
+  [
+   51,
+   "AREA 221,487"
+  ],
+  [
+   51,
+   "AREA 234,247"
+  ],
+  [
+   51,
+   "AREA 393,673"
+  ],
+  [
+   51,
+   "AREA 519,740"
+  ],
+  [
+   52,
+   "AREA 583,763"
+  ],
+  [
+   52,
+   "AREA 588,761"
+  ],
+  [
+   52,
+   "AREA 491,517"
+  ],
+  [
+   53,
+   "AREA 354,546"
+  ],
+  [
+   53,
+   "AREA 413,426"
+  ],
+  [
+   53,
+   "AREA 598,564"
+  ],
+  [
+   53,
+   "AREA 166,808"
+  ],
+  [
+   54,
+   "AREA 531,840"
+  ],
+  [
+   54,
+   "AREA 446,846"
+  ],
+  [
+   54,
+   "AREA 608,432"
+  ],
+  [
+   55,
+   "AREA 118,391"
+  ],
+  [
+   55,
+   "AREA 431,269"
+  ],
+  [
+   55,
+   "AREA 170,209"
+  ],
+  [
+   55,
+   "AREA 384,637"
+  ],
+  [
+   56,
+   "AREA 639,210"
+  ],
+  [
+   56,
+   "AREA 170,820"
+  ],
+  [
+   56,
+   "AREA 632,541"
+  ],
+  [
+   57,
+   "AREA 225,434"
+  ],
+  [
+   57,
+   "AREA 556,506"
+  ],
+  [
+   57,
+   "AREA 615,756"
+  ],
+  [
+   57,
+   "AREA 611,539"
+  ],
+  [
+   58,
+   "AREA 479,269"
+  ],
+  [
+   58,
+   "AREA 126,760"
+  ],
+  [
+   58,
+   "AREA 538,499"
+  ],
+  [
+   59,
+   "AREA 423,441"
+  ],
+  [
+   59,
+   "AREA 629,445"
+  ],
+  [
+   59,
+   "AREA 535,601"
+  ],
+  [
+   59,
+   "AREA 231,653"
+  ],
+  [
+   60,
+   "AREA 299,418"
+  ],
+  [
+   60,
+   "AREA 204,343"
+  ],
+  [
+   60,
+   "AREA 490,349"
+  ],
+  [
+   61,
+   "AREA 600,812"
+  ],
+  [
+   61,
+   "AREA 449,849"
+  ],
+  [
+   61,
+   "AREA 475,834"
+  ],
+  [
+   62,
+   "AREA 232,646"
+  ],
+  [
+   62,
+   "AREA 373,599"
+  ],
+  [
+   62,
+   "AREA 184,581"
+  ],
+  [
+   62,
+   "AREA 588,697"
+  ],
+  [
+   63,
+   "AREA 146,775"
+  ],
+  [
+   63,
+   "AREA 520,410"
+  ],
+  [
+   63,
+   "AREA 573,307"
+  ],
+  [
+   64,
+   "AREA 266,538"
+  ],
+  [
+   64,
+   "AREA 351,353"
+  ],
+  [
+   64,
+   "AREA 589,461"
+  ],
+  [
+   64,
+   "AREA 616,673"
+  ],
+  [
+   65,
+   "AREA 372,305"
+  ],
+  [
+   65,
+   "AREA 149,433"
+  ],
+  [
+   65,
+   "AREA 529,244"
+  ],
+  [
+   66,
+   "AREA 355,483"
+  ],
+  [
+   66,
+   "AREA 612,361"
+  ],
+  [
+   66,
+   "AREA 127,795"
+  ],
+  [
+   67,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   68,
+   "#modal «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   75,
+   "#klife «Vào cung ngay»"
+  ],
+  [
+   75,
+   "#kroul «Tiếp»"
+  ],
+  [
+   76,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   81,
+   ".dlg «Thân phận kiếp này» «Dung mạo 12»"
+  ],
+  [
+   82,
+   ".dlg «Thân phận kiếp này» «Dung mạo 9»"
+  ],
+  [
+   82,
+   ".dlg «Thân phận kiếp này» «Ở cố quốc chờ hòa ướcTốnkhôngĐượchơn hai năm ở vươ»"
+  ],
+  [
+   84,
+   ".dlg «Thân phận kiếp này» «Dung mạo 7»"
+  ],
+  [
+   85,
+   ".dlg «Thân phận kiếp này» «Vừa»"
+  ],
+  [
+   85,
+   ".dlg «Thân phận kiếp này» «Dung mạo 2»"
+  ],
+  [
+   85,
+   ".dlg «Thân phận kiếp này» «Vừa»"
+  ],
+  [
+   86,
+   ".dlg «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcsang Đại Hy ngay·hòa ước »"
+  ],
+  [
+   87,
+   ".dlg «Thân phận kiếp này» «Dung mạo 9»"
+  ],
+  [
+   88,
+   ".dlg «Thân phận kiếp này» «Dung mạo 3»"
+  ],
+  [
+   88,
+   ".dlg «Thân phận kiếp này» «Dung mạo 12»"
+  ],
+  [
+   88,
+   ".dlg «Thân phận kiếp này» «Dung mạo 10»"
+  ],
+  [
+   89,
+   ".dlg «Thân phận kiếp này» «Dung mạo 8»"
+  ],
+  [
+   89,
+   ".dlg «Thân phận kiếp này» «Dung mạo 3»"
+  ],
+  [
+   90,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   93,
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 1/4» «Tiếp theo»"
+  ],
+  [
+   95,
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 2/4» «Tiếp theo»"
+  ],
+  [
+   98,
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 3/4» «Tiếp theo»"
+  ],
+  [
+   100,
+   ".dlg «Tiền truyện · Công chúa nước Cao Ly hòa thân · 4/4» «Vào cung»"
+  ],
+  [
+   107,
+   "AREA 358,314"
+  ],
+  [
+   108,
+   ".kmov «Vào điện»"
+  ],
+  [
+   110,
+   ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795720784276,
+ "_ckB": 1,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1617,
+   "rendererMB": 541,
+   "heapMB": 98,
+   "dom": 2438,
+   "q": 3,
+   "lsK": 4
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Công chúa nước Cao Ly hòa ",
+  "#modal|Tiền truyện · Công chúa nước Cao Ly hòa ",
+  "#modal|Lễ ra mắt",
+  ".kmov|",
+  ".dlg|Lễ ra mắt",
+  "#modal|Duyên cung lỡ hẹn"
+ ],
+ "_momRank": 3,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Công chúa nước Cao Ly hòa thân · #/#": {},
+  ".dlg|Lễ ra mắt": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|511,470": {
+   "left": 188,
+   "n": 1
+  }
+ },
+ "t": {
+  "total": 113120
+ }
+}
