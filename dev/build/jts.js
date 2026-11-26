@@ -156,7 +156,7 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  let art="";try{art=kitInfoArt("Nguy hiểm chung").src||""}catch(e){}
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger",art});showModal()}
 /* an opener card (later: no empty result card «không được gì»): the dialog it queues is shown at once, its act shows its own result */
-function tsOpener(){TSA.pre=null;setTimeout(()=>{try{const M=$("modal");if(Q.length&&(!M||M.hidden))showModal()}catch(e){}},0)}
+function tsOpener(){TSA.pre=null;setTimeout(()=>{try{const M=$("modal");if(Q.length)showModal()}catch(e){}},0)}
 /* ---------- OB-OAN: «Cách giảm» — ONE table of the real ways each rising bad stat comes down (names of the existing acts only; no new rule, no number).
    Read by the Nguy hiểm chung panel (kit row «Cách giảm») and offered to the kit glossary popup (KIT_REQUESTS: KK39 renders kitLowerText(term) as a row). ---------- */
 const TS_LOWER={
