@@ -77,7 +77,17 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    const W=who==='me'?S:who==='f'?f:N[0];const E=[W].concat([S,f,N[1]||N[0]].filter(x=>x&&x!==W));const L=E.map((p,i)=>({p,kind:'dan',t:9-i,pr:0,lk:0,s:90-i*10}));
    const n0=S.nights||0;cFin7('trungthu','dan',L,true);return{d:wk(),ntk:S.ntk?S.ntk.who:null,fid:f&&f.id,npc:who==='npc'?W.id:null,n0}},who);
  const ST=o=>o.p.evaluate(()=>({ntk:S.ntk&&S.ntk.w===wk()?S.ntk.who:null,ctn:S.ctn||null,card:Q.some(m=>m&&m.t==='Kính sự phòng báo tin'),nights:S.nights||0,d:wk()}));
+ /* set-up only: the intended winner can serve tonight on the HOST (not in her monthly days / ill: nightCh 0 makes the rule refuse, rightly);
+    'me' = the host, 'f' = the friend's entry, 'npc' = the first NPC that can serve (the same one run() picks) */
+ const steer=(who)=>A.p.evaluate(who=>{window.__nc0=window.__nc0||nightCh;const n0=window.__nc0;const f=COOPW.friend();
+   const N=liveRivals(true).filter(v=>v&&!v.coop&&v.alive&&!v.out&&!v.preg&&!v.confined&&n0(v)>0);const W=who==='me'?S:who==='f'?f:N[0];
+   nightCh=function(p){p=p||S;const c=n0.apply(this,arguments);return p===W?Math.max(1,c):c};return W&&(W===S?'me':W.id)},who);
+ const unsteer=()=>A.p.evaluate(()=>{if(window.__nc0){nightCh=window.__nc0;window.__nc0=null}});
+ const NX=o=>o.p.evaluate(()=>{const x=S.nfX||{};const f=COOPW.friend();const t=x.t==="me"?(COOP.seat==='a'?'host':'guest'):(f&&x.t===f.id)?(COOP.seat==='a'?'guest':'host'):x.t;return{d:x.d,t}});
  async function day(tag,seat,who,want){const X=seat==='a'?A:B;const n0={a:(await ST(A)).nights,b:(await ST(B)).nights};
+  await steer(seat==='b'?'f':who);
+  /* the guest seat reads the same «not in her monthly days today» as the host's steer (her own jcycle tray: cyb.lie = this tuần) */
+  if(want==='guest')await B.p.evaluate(()=>{S.cyb=Object.assign(S.cyb||{},{lie:wk()});S.preg=0});
   const r=await run(X,who);await sleep(4000);const sa=await ST(A),sb=await ST(B);
   ok(want==='host'?sa.ntk==='me':want==='guest'?sa.ntk===r.fid||sa.ntk===(await A.p.evaluate(()=>COOPW.friend().id)):sa.ntk===r.npc,tag+': the host keeps tonight for the winner ('+want+')',{r,sa:sa.ntk});
   if(want==='guest')ok(sb.ntk==='me'&&sb.card,tag+': the guest is told (her Kính sự phòng card, her night kept)',sb);
@@ -87,11 +97,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(process.env.DBG)console.log('PRE '+tag,JSON.stringify([await DB(A),await DB(B)]));
   await week(A,B,tag);
   if(process.env.DBG)console.log('POST '+tag,JSON.stringify([await DB(A),await DB(B)]));const rec=NF?await REALL.nightRec(A,B,r.d):null;const ea=(await ST(A)).nights,eb=(await ST(B)).nights;
-  if(NF)ok(rec.same&&rec.a.pick===(want==='npc'?r.npc:want),tag+': the night record of that day on both seats = '+want,rec);
+  await unsteer();const xa=await NX(A),xb=await NX(B);
+  if(NF)ok(xa.d===r.d&&xb.d===r.d&&xa.t===(want==='npc'?r.npc:want)&&xb.t===(want==='npc'?r.npc:want),tag+': that day\'s played tối is held by '+want+' on both seats (jnf nfX), no flip choice',{xa,xb,rec});
   ok(want==='host'?ea-n0.a===1&&eb-n0.b===0:want==='guest'?eb-n0.b===1&&ea-n0.a===0:ea-n0.a===0&&eb-n0.b===0,tag+': exactly the winner\'s seat gets +1 night',{host:ea-n0.a,guest:eb-n0.b});
   await shot(X,'ctn-'+tag)}
  await day('C1','a','me','host');
- if(!process.env.ONLY1){await day('C2','a','f','guest');
+ if(!process.env.ONLY1){await day('C2','a','f','guest');if(process.env.STOP2){console.log('DUMPB',JSON.stringify(await B.p.evaluate(()=>({Q:Q.map(q=>q.pid||q.t),modal:!document.getElementById('modal').hidden&&document.getElementById('mt').textContent,ntk:S.ntk,tonight:S.tonight,nfN:S.nfN,nfX:S.nfX,nfFin:S.nfFin,nfW:S.nfW,wk:wk(),buoi:S.buoi,kmov:[...document.querySelectorAll('.kmov,#kneov')].map(x=>x.id||x.className.slice(0,40)),logs:(S.logs||[]).slice(0,12).map(x=>String(x).replace(/<[^>]+>/g,'').slice(0,120))}))));process.exit(0)}
  await day('C3','b','me','guest');
  await day('C4','a','npc','npc')}
  const fails=res.filter(x=>!x[0]);console.log(`\n${res.length-fails.length}/${res.length} ok`);if(fails.length)console.log('FAILS:',fails.map(x=>x[1]).join(' | '));
