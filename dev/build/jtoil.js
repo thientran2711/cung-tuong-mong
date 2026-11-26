@@ -83,6 +83,9 @@ function toilFOf(host){let fest=false;try{fest=!!(typeof festToday==="function"&
    counted only on a day she placed one (weights are normalised over the parts present, so a day without one scores exactly as before) */
 function toilRaw(P){const W=BAL.toil.w;let s=0,n=0;for(const k in W){const v=P&&P[k];if(typeof v!=="number")continue;s+=W[k]*v;n+=W[k]}return n?Math.round(100*s/n):0}
 Object.assign(BAL.toil,{w:{brow:.4,powder:.3,son:.3,hd:.25},skillShare:10,
+ /* mg-trim (owner OD 26/11 ~05:10Z: makeup by «công dung ngôn hạnh … sự khéo léo»): Dung (tứ đức, 0..5) / dungDiv joins the ONE mirror hand (hers and every NPC's);
+    rkDemand = face points the court expects more per rank (law 5) in the ONE face table toilNpcPlay; rollN = draws that turn her hand into the odds words on the one-tap button */
+ dungDiv:10,rkDemand:2,rollN:240,
  /* brow: tolerance = brow length × (tol + tolSk × skill); a stroke counts for the nearer brow; over = stroke beyond the brow ends;
     messy = spread of the strokes across the line above the brow's own thickness; sym = the two brows at different heights */
  brow:{tol:.11,tolSk:.04,overK:1.2,messyK:.6,symK:.35,smear:30,near:3,slack:.3,end:.6,thk:.6},
@@ -170,8 +173,18 @@ function toilLvRows(){return TOIL_LVS.map(k=>[TOIL_MK[k],toilLvChips(k)])}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
 function toilNpcPlay(sk,h,col,want,style,occ,rk,hq){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
  const q=i=>Math.max(0,Math.min(1,N.q0+N.qSk*sk+(r(i)+r(i+5)-1)*N.spread));const P={brow:q(0),powder:q(1),son:q(2)};if(typeof hq==="number")P.hd=hq;
- const raw=toilRaw(P);const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)));
+ const raw=toilRaw(P);const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)-Math.round((B.rkDemand||0)*Math.max(0,+rk||0))));
  return Object.assign({score,parts:P},toilLookOf(P,score))}
+/* mg-trim: HER one-tap Điểm trang = the SAME face table on her hand (toilSkill: Sắc, Họa, Dung, ma ma), her rank, her colours and her own hoa điền; seeded by her + the day (a reload does not re-roll; co-op seats agree) */
+function toilRollSeed(){return wdHash(String(S.name||"")+":roll:"+toilWk())}
+function toilRollOf(seed){const st=TOIL.st,sk=toilSkill(),col=toilColFix((st&&st.col)||(S.toilette&&S.toilette.col)),HD=typeof hdNpc==="function"?hdNpc(S,seed,sk.sk):null;
+ const occ=st&&st.occ?st.occ.map(o=>o.k):toilOcc().map(o=>o.k),style=st&&st.style||"fit";return Object.assign(toilNpcPlay(sk.sk,seed,col,col.want||"",style,occ,S.rank,HD?HD.q:null),{hd:HD})}
+/* the odds WORDS of her one tap: share of draws reaching Đoan trang / Kiều diễm / Khuynh thành (VANPHONG ladder, no %) */
+function toilRollOdds(){const N=BAL.toil.rollN,T=BAL.toil.tier;let a=0,b=0,c=0;for(let i=0;i<N;i++){const r=toilRollOf("odds:"+i);if(r.look==="vung")continue;if(r.score>=T[0])a++;if(r.score>=T[1])b++;if(r.score>=T[2])c++}
+ return{vua:Math.round(100*a/N),dep:Math.round(100*b/N),tuyet:Math.round(100*c/N)}}
+function toilRollSub(){try{const o=toilRollOdds(),w=x=>word(oddsCl(Math.max(BAL.odds.lo,x)));return [`${TOIL_MK.vua}: ${w(o.vua)}`,o.dep>0?`${TOIL_MK.dep}: ${w(o.dep)}`:"",o.tuyet>0?`${TOIL_MK.tuyet}: ${w(o.tuyet)}`:""].filter(Boolean).join(" · ")}catch(e){return"theo Dung, Họa, Sắc"}}
+/* the one-tap button (kit .kbtn, the same as every start button) + «Tự tay điểm trang» (the mirror game) — owner OD 26/11 ~05:10Z */
+function toilRollBtn(id){return `<button class="${kg82Btn()}" id="${id}">Điểm trang<small>${toilRollSub()}</small></button>`}
 /* ---------- the dress verdict (her clothes NOW, for formality F) ---------- */
 function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")return{v:"tang",style:"showy"};
  let vp=0;try{vp=(vpItems(p)||[]).length}catch(e){}if(st==="over"||vp)return{v:"vuot",style:"showy"};
@@ -180,7 +193,7 @@ function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")
  if(d<=B.under||r<B.rLo)return{v:"giandi",style:"plain"};if(B.showR!=null&&r>B.showR)return{v:"photruong",style:"showy"};
  if(d>=B.fitD&&r>=B.fitR&&(B.fitHi==null||r<=B.fitHi))return{v:"hopdip",style:"fit"};return{v:"hoppham",style:"fit"}}
 /* an NPC's hand at the mirror (0..1): Sắc / sacDiv + Họa / hoaDiv — the player's toilSkill without the ma ma (jagtoil reads the same) */
-function toilNpcSk(v){let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}return Math.max(0,Math.min(1,((v&&v.sac)||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv))}
+function toilNpcSk(v){let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const dg=typeof virLv==="function"?virLv(v,"dung"):0;/* mg-trim: + Dung, the same as her toilSkill (law 1) */return Math.max(0,Math.min(1,((v&&v.sac)||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv+dg/BAL.toil.dungDiv))}
 /* NPC look of the day (data, deterministic per person per day: no save field needed). With the agents on (BAL.ag.toil2, host only) jagtoil makes
    the face part her CHOICE (G11); this stays the fallback (switch off, co-op guest before the host's choice arrives) */
 function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1000)/1000,r2=((h>>>10)%1000)/1000,r3=((h>>>20)%1000)/1000;const T=traitsOf(v);
@@ -307,7 +320,8 @@ window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('
 /* ---------- the mini-games ---------- */
 const TOIL={st:null,geo:null};window.TOIL=TOIL;
 function toilSkill(){const B=BAL.toil;let h=0;try{h=kg82Lv(S,"hoa")||0}catch(e){}let m=null;try{m=wdMama(S)}catch(e){}
- return{sk:Math.max(0,Math.min(1,(S.sac||0)/B.sacDiv+h/B.hoaDiv+(m?B.mama:0))),hoa:h,mama:m}}
+ const dg=typeof virLv==="function"?virLv(S,"dung"):0;
+ return{sk:Math.max(0,Math.min(1,(S.sac||0)/B.sacDiv+h/B.hoaDiv+dg/B.dungDiv+(m?B.mama:0))),hoa:h,mama:m,dung:dg}}
 function toilHUD(o){{const d=document.getElementById("kg82");if(d)d.classList.remove("kg-idle")}for(const k in o)kg82Set(k,o[k])}
 /* bots (dev/measure inpage4, window.__bot) cannot play the overlay: an average sitting — keep the clothes, a face drawn from skill + chance */
 function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();/* the same table as the NPCs (toilNpcPlay), seeded: no Math.random */
@@ -375,7 +389,7 @@ function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "
  const why={hopdip:"Vừa phẩm, vừa dịp: người trọng lễ ưng ý.",hoppham:"Đúng phẩm, chưa thật hợp dịp hôm nay.",giandi:st.F?"Quá giản dị cho dịp gặp bề trên: người trọng lễ coi là thiếu tôn trọng; người chuộng giản dị lại khen.":"Quá giản dị.",
   photruong:"Quá phô trương: phi tần dễ ghen, người chuộng giản dị chê.",vuot:"Có món trên phẩm của ta: dễ bị hặc, bị thu.",tang:"Màu đỏ, vàng trong quốc tang: phạm tang."}[dr.v];
  KG82.setup=1;const box=kg82Box();box.innerHTML=`<div class="kgr">${kitRows([["Y phục",`<span class="ef ${good?"g":"r"}"><b>${TOIL_DV[dr.v][0].toUpperCase()+TOIL_DV[dr.v].slice(1)}</b></span>`],["Ghi chú",[why,`đo theo dịp: ${st.occ.slice().sort((a,b)=>b.F-a.F)[0].n.toLowerCase()}`],"n"]])}</div>`+
-  `<div class="kg82act"><button class="${kg82Btn()}" id="toilmk">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button>${kitQuick({id:"toilquick",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}<button class="${kg82Btn(true)}" id="toilmoc">Để ${toilMkW("moc")}</button></div>`;
+  `<div class="kg82act">${toilRollBtn("toilquick")}<button class="${kg82Btn(true)}" id="toilmk">Tự tay điểm trang<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc">Để ${toilMkW("moc")}</button></div>`;
  $("toilmk").onclick=()=>toilColUI();$("toilquick").onclick=()=>toilFinish("quick");$("toilmoc").onclick=()=>toilFinish(false)}
 
 /* (b) TRANG ĐIỂM — three hồi on her face in the mirror */
@@ -452,7 +466,7 @@ function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML=
   toilHUD({round:`${phase+2}/4`});setBtn()}
  function setBtn(){const a=box.querySelector(".kg82act");
   /* makeup-set: while the glass is still clearing (no face points yet) she chooses herself: wait, Điểm trang nhanh, or Để mặt mộc — never an automatic sitting */
-  if(!ready&&waitBtn){if(a)a.remove();box.insertAdjacentHTML("beforeend",`<div class="kg82act">${kitQuick({id:"toilquick3",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}<button class="${kg82Btn(true)}" id="toilmoc3">Để ${toilMkW("moc")}</button></div>`);
+  if(!ready&&waitBtn){if(a)a.remove();box.insertAdjacentHTML("beforeend",`<div class="kg82act">${toilRollBtn("toilquick3")}<button class="${kg82Btn(true)}" id="toilmoc3">Để ${toilMkW("moc")}</button></div>`);
    const q=$("toilquick3"),m=$("toilmoc3");if(q)q.onclick=()=>{if(stop)return;stop=true;toilFinish("quick")};if(m)m.onclick=()=>{if(stop)return;stop=true;toilFinish(false)};return}
   const h=phase<2?`<div class="kg82act"><button class="${kg82Btn()}" id="toilnx"${ready?"":" disabled"}>${phase===0?"Kẻ xong":"Đánh xong"}</button></div>`:"";if(a)a.remove();if(h){box.insertAdjacentHTML("beforeend",h);$("toilnx").onclick=()=>{if(!stop&&ready)next()}}}
  function pdown(e){if(stop||!ready)return;e.preventDefault();C.__down=true;if(!t0)t0=performance.now();const p=C.at(e);ptr=p;if(phase===0){cur=[p]}else if(phase===2)tapLip(p);else if(phase===1){try{kitSfx("mgPuff")}catch(x){}}try{C.cv.setPointerCapture(e.pointerId)}catch(x){}}
@@ -482,14 +496,14 @@ function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML=
  toilHUD({round:"2/4"});setBtn();raf=requestAnimationFrame(frame);KG82.run={stop:()=>{stop=true;cancelAnimationFrame(raf)}};
  TOIL.test={get I(){return I},get brows(){return brows},get cpts(){return cpts},get lips(){return lips},next,browQ,powQ,sonQ,setPowder:v=>{cpts.forEach(p=>p.c=cheeks.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<=c.r)?v:0);pdirty=true},strokes,dots,get lr(){return lr}}}
 function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
- const sk=toilSkill();let score=0,raw=0,bonus=0;
- /* mg-skip-all (KIT §13.6, BAL.skip): "Điểm trang nhanh" = ONE roll; won = the middle tier (Đoan trang: the lowest score of it, BAL.toil.tier[0]), lost = Vụng về; never more */
- const quick=made==="quick",qok=quick?kitQuickRoll():false;if(quick){score=qok?BAL.toil.tier[0]:0}else if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
+ const sk=toilSkill();let score=0,raw=0,bonus=0,dem=0;
+ /* mg-trim (owner OD 26/11 ~05:10Z): one-tap «Điểm trang» = ONE draw of the face table on her hand (toilRollOf: Sắc, Họa, Dung, her rank, colours, hoa điền) — the same table every NPC and the bot use */
+ const quick=made==="quick",QR=quick?toilRollOf(toilRollSeed()):null,qok=quick?QR.look!=="vung":false;if(quick){score=QR.score}else if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);dem=Math.round((BAL.toil.rkDemand||0)*Math.max(0,+S.rank||0));/* mg-trim (BIG rv 2): the same rank demand as the one tap + every NPC face (toilNpcPlay, law 5) */score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus-dem))}
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
  /* diemtrang-score: vụng = a part that went wrong (or a low total); else by the total, Khuynh thành the most (makeup-lux: no overdone level) */
  const P0=st.parts,occK=st.occ.map(o=>o.k);
- const L=quick?(qok?{look:null}:{look:"vung",slip:"son"}):made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
- S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
+ const L=quick?{look:QR.look,slip:QR.slip}:made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
+ S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(quick&&QR.hd)S.toilette.hd=QR.hd;else if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
  /* jration (PL #5): the face is capped by the cosmetics she has; the sitting spends lượt from each part's box (BAL.ration) */
  if(made&&typeof lxSit==="function")lxSit(S,S.toilette);
  /* makeup-lux: the day's verdict reads the ONE total, now with the face in it (clothes + jewels + makeup level) */
@@ -497,9 +511,9 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG8
  const mk=toilMk(S.toilette);const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&mk==="vung"?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
  log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`dung nhan ${toilMkW(mk)}`:`để ${toilMkW("moc")}`}.`);
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];/* the day's verdict: the ONE total (clothes + jewels + face + pet) */
- if(quick)rows.push(["Điểm trang nhanh",`<span class="ef ${qok?"g":"r"}">${qok?"thành":"hỏng"}</span>`],["Dung nhan",`<span class="ef ${qok?"t":"r"}"><b>${TOIL_MK[mk]}</b></span>`]);
+ if(quick)rows.push(["Điểm trang",`theo Dung bậc ${sk.dung}, Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""}`],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`]);
  else if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],...(typeof P.hd==="number"&&st.hd?[["Dán hoa điền",`<span class="ef t">${Math.round(100*P.hd)}/100</span> · ${WD_ITEMS[st.hd.k]?WD_ITEMS[st.hd.k].n:""}`]]:[]),
-  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
+  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],...(dem?[["Phẩm vị đòi hỏi",kitChip("điểm",-dem,"r")]]:[]),["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
  else rows.push(["Dung nhan",`<span class="ef n">${TOIL_MK.moc}</span>`]);
  /* makeup-lux (OD L1639): the look's xa xỉ word + number (judged only at events, inside the ONE total, never this face alone) */
  rows.push(["Xa xỉ son phấn",toilLvChips(mk)]);/* the TOTAL is shown by MAIN's kit display (it reads luxTotal) */
@@ -1133,7 +1147,7 @@ function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;KG82.set
  TOIL.prev={look:st.col.want==="diem"?"tuyet":"dep",col:st.col};/* makeup-lux: the bold group previews at the top level (Khuynh thành), no overdone level */TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
  box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang độ xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
   `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:(R=>{/* the set note once: under the last set row that has one (makeup-set r3) */let last=-1;R.forEach((r,i)=>{if(r&&r.note)last=i});return R.map((r,i)=>r&&r.note&&i!==last?Object.assign({},r,{note:""}):r)})(lxF(toilPreRows(st.col).concat(toilColRows(st.col)))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
-  `<div class="kg82act">${lxN?`<button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button>${kitQuick({id:"toilquick2",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}`:""}<button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button>${typeof lxRushBtn==="function"?lxRushBtn():""}</div>`;
+  `<div class="kg82act">${lxN?`${toilRollBtn("toilquick2")}<button class="${kg82Btn(true)}" id="toilgo">Tự tay điểm trang<small>kẻ mày, đánh phấn, chấm son</small></button>`:""}<button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button>${typeof lxRushBtn==="function"?lxRushBtn():""}</div>`;
  try{kitGameFigRefresh()}catch(e){}
  if($("toilgo"))$("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};if($("toilquick2"))$("toilquick2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish("quick")};if($("lxrush"))$("lxrush").onclick=()=>{lxRush();toilColUI()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
 window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;

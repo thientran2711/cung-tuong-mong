@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn.","b":"0281bf7bcef6","h":[{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"}]};
+window.CTM_BI={"s":"3385b0f3+","t":"2026-11-26T07:27Z","c":"Bớt minigame: điểm trang một lần bấm theo Dung (còn nút «Tự tay điểm trang»); tát và né thành một lần gieo; «Học nhanh» lên Tùy duyên; chăm…","b":"c2cd5620103a","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1926,7 +1926,7 @@ const MG={
  vu:["Vũ: theo bước múa","Xem các bước sáng lên rồi múa lại đúng thứ tự. 5 lượt, mỗi lượt dài thêm một bước.",gVu]};
 /* review/mg-train (owner 16/11 07:20Z no word games): thi + y lessons and their banks (DOI, YQ) + quiz() removed; the openMG wrapper (j82) puts KG82_MGL thi / y (calli, blend) in MG before every open */
 function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").textContent=h;$("ov").hidden=false;mgDone=false;
- const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Bỏ qua<small>${kitQuickSub({win:`tiến bộ ${kStepW(lesG((S.mg&&S.mg.mode)||"self",1))}`,lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
+ const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Học nhanh<small>${kitQuickSub({win:`tiến bộ ${kStepW(lesG((S.mg&&S.mg.mode)||"self",1))}`,lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
  const fin=(pts,skip)=>{if(mgDone)return;mgDone=true;if(mgStop)mgStop();mgStop=null;sk.hidden=true;const g=pts*(S.master?2:1);
   $("mgb").innerHTML=`<p class="mgres">${skip?(pts?"May mắn":"Không vào"):["","Tạm được","Khá","Xuất sắc"][pts]}</p><p style="text-align:center">Tiến bộ +${g}${S.master&&pts?" (danh sư dạy, gấp đôi)":""}</p><div style="display:flex;justify-content:center"><button class="main" id="mgok">Xong</button></div>`;
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
@@ -30494,7 +30494,10 @@ KP_SEAL.game="TÀI NGHỆ";
 function kitQuickSub(o){o=o||{};if(o.sub!=null)return o.sub;const w=o.sure?"":word(od(BAL.skip.od));return [w,o.win?`thành: ${o.win}`:"",!o.sure&&o.lose?`hỏng: ${o.lose}`:""].filter(Boolean).join(" · ")}
 /* owner 24/11 (MAIN 128): ONE skip wording in every mini-game: «Bỏ qua» + what happens in plain words (numbers-as-text "5/10" become the mark word, jmgt mgWord) */
 function kitQuickWords(t){return String(t||"").replace(/(?:tính\s+)?(\d+)\/10(\s+phần)?(?:\s*\(\+\d+\))?/g,(m,n)=>{try{return typeof mgWord==="function"?"kết quả "+String(mgWord(+n)).toLowerCase():"kết quả thường"}catch(e){return"kết quả thường"}})}
-function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>Bỏ qua<small>${sb}</small></button>`}
+/* mg-trim (owner OD 26/11 ~05:10Z, newer than the 24/11 «Bỏ qua» wording): a LEARNING game (lessons, tứ đức, works-as-lesson) names its quick «Học nhanh» — the
+   name she asked for; every other game keeps «Bỏ qua». ONE list: KIT_QUICK_NAMES */
+const KIT_QUICK_NAMES=["Học nhanh","Chăm nhanh"];/* «Chăm nhanh»: pet care + plant care (owner OD 26/11 ~05:45Z «option chăm nhanh như học nhanh») */
+function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";const nm=KIT_QUICK_NAMES.includes(o.n)?o.n:"Bỏ qua";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>${nm}<small>${sb}</small></button>`}
 function kitQuickRoll(){return roll(od(BAL.skip.od))}
 /* m-fix-1: THE cap of every quick / skip / not-played mark (BAL.skip.cap): a quick result never beats a good own play (owner OD 18/11 ~05:55Z) */
 function kitSkipCap(raw){const c=BAL.skip&&BAL.skip.cap!=null?BAL.skip.cap:5;raw=+raw;return isFinite(raw)?Math.max(0,Math.min(Math.round(raw),c)):c}
@@ -35685,7 +35688,7 @@ function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].
  if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:`tiến bộ ${kStepW(lesG(m.mode,ms))}, không ra thành phẩm`,lose:"không tiến bộ"},onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
    if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}cb(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}});return}catch(x){}}
  const r=o0.call(this,k,lv,cb2);
- try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Bỏ qua<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:`tiến bộ ${kStepW(lesG(m.mode,ms))}, không ra thành phẩm`,lose:"không tiến bộ"}))}</small>`;
+ try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Học nhanh<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:`tiến bộ ${kStepW(lesG(m.mode,ms))}, không ra thành phẩm`,lose:"không tiến bộ"}))}</small>`;
   sk.onclick=()=>{skip=true;os()};const h=$("mgh");if(h)h.textContent+=` Tự tay làm (chơi): ra thành phẩm, ${WK[kind].w.toLowerCase()}: phẩm = phần chơi (từ 0 đến 10) + ${ARTS.find(x=>x.k===k).n} bậc ${wkLv(S,k)}: +${wkLv(S,k)}${WMAT[pick.mat||0]?` + vật liệu: +${WMAT[pick.mat||0]}`:""}.`}catch(x){}
  return r}})();
 /* product dialog in front of every lesson button (and the practice button once an art is mastered) */
@@ -36033,7 +36036,7 @@ bestArt=function(){let b={k:null,n:"giọng hát",l:0,w:0};for(const a of ARTS){
    | Dung · Dung nghi  | Đi đứng giữ bát     | hold LEFT / RIGHT half of the board to keep the bowl upright; each floor mark shows which way the next step leans it |
    | Ngôn · Lời nói    | Nói đúng lúc        | (mg-balance-2, no words) wait for the speaker (and an upset one to calm), then HOLD «Thưa» and let go in the voice band of that listener |
    | Hạnh · Đức hạnh   | Làm phúc            | share the portions among the waiting people (+ / −) so that everyone gets enough of what they need  |
-   Level (S.vir[k] 0..5) only makes it EASIER (wider band, fewer wrong choices, no shortage), never harder; "Để trời định" = the ONE quick roll (KIT §13.6, BAL.skip): won = the progress of a BAL.skip.raw play, lost = none.
+   Level (S.vir[k] 0..5) only makes it EASIER (wider band, fewer wrong choices, no shortage), never harder; «Học nhanh» (mg-trim, was "Để trời định") = the ONE quick roll (KIT §13.6, BAL.skip): won = the progress of a BAL.skip.raw play, lost = none.
    Progress: raw → lesson points (self: 1 or 2; teacher: 2 or 3, the same 1..3 span as before); Công practice also lifts the quality of handmade goods (0..2, S.vpf).
    Boards: the existing painted study rooms (theu / mua / tho / ve -bg-hoc) + existing sprites; dedicated mg-td* paintings are listed in dev/PROGRESS_tuduc-mg.md. */
 const TD_BG={td_cong:"theu-bg-hoc",td_dung:"mua-bg-hoc",td_ngon:"tho-bg-hoc",td_hanh:"ve-bg-hoc"};
@@ -36258,12 +36261,12 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped,qok)=>{KG82.phase="result";TDS.q=skipped?!!qok:null;const gain=tdGain(mode,raw,skipped),q=k==="cong"?Math.round(raw/10*2):0;
-  kg82ShowRes(kg82Rows([skipped?["Để trời định",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
+  kg82ShowRes(kg82Rows([skipped?["Học nhanh",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
  KG82.phase="intro";const HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
  /* KIT §13.7 (mg-ready-guide): the step rules + example now sit in the shared rules block EVERY time (was: first time only), «Sẵn sàng» / «Hướng dẫn» */
- box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Để trời định",win:`tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`,lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
+ box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Học nhanh",win:`tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`,lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
  kgReady(box,{kind,steps:TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"])});
 
  KG82.backPre=cancel;/* KIT §13.9: ✕ before «Sẵn sàng» = its own free «Thôi, để lúc khác» (nothing is charged before tdFinish) */
@@ -38812,7 +38815,7 @@ Object.assign(BAL.ag.why,{
 /* cap = the highest play mark ANY quick / skip / "Để tài nghệ quyết định" / not-played round may count as (m-fix-1, owner OD 18/11 ~05:55Z
    "a quick result never beats a good own play"; robot M4 25/11: an exam skip gave 10/10 Xuất sắc while a skilled own play gave 5/10): the middle
    word Khá (BAL.mgTier.word[1]), like makeup's middle tier — a good own play (Giỏi, word[2], and up) always beats it. Read through kitSkipCap (j79). */
-Object.assign(BAL,{skip:{od:40,raw:5,care:.5,cap:5}});
+Object.assign(BAL,{skip:{od:50/* mg-trim: owner OD 26/11 ~05:10Z «học nhanh cho lên tùy duyên» — the ONE quick roll, was 40 Khó lường */,raw:5,care:.5,cap:5}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
@@ -54538,7 +54541,7 @@ function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPe
 /* the game area: the kit mini-game frame inside the dialog; returns its box */
 function petcGameBox(title,how,kind){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame",kind:kind==="bath"?"thu_tam":kind==="play"?"thu_choi":""})+
   /* mg-skip-all (KIT §13.6): the quick option of every care game: won = BAL.skip.care of the gain (a middling hand), lost = nothing */
-  `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
+  `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Chăm nhanh",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
 /* KIT §13.7 (mg-ui-rest, owner OD:L1981): EVERY care game opens on the kit rules screen (kgReady: luật + picture of the move, «Hướng dẫn» guided round, «Sẵn sàng»);
    NO khắc are spent and nothing runs until «Sẵn sàng»; then the khắc go and run(box) starts the real game. tutor(box, env) = the unscored guided round. */
@@ -54627,12 +54630,12 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  if(k==="maid"){petcMaid(PETC.i);return}
  if(!can(BAL.pet.khac))return;/* KIT §13.7 (mg-ui-rest): the tap opens the RULES screen; the khắc are spent only on «Sẵn sàng» (petcRules) */if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kpcquick");if(!b)return;e.stopPropagation();e.preventDefault();const kind=PETC.kind;if(!kind||!PETC.game)return;
- if(!PETC.rdy){if(!can(BAL.pet.khac))return;spend(BAL.pet.khac)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
+ if(!PETC.rdy){if(!can(BAL.pet.khac))return;spend(BAL.pet.khac)}/* «Chăm nhanh» (owner OD 26/11 ~05:45Z, was «Để trời định») from the rules screen is a play-through too: same khắc */
  kgTutDrop();PETC.game=null;PETC.rdy=0;try{if(PETC.stop)PETC.stop()}catch(x){}PETC.stop=null;/* MG11: the shared engines return their own stop */
  petcQuick(kind)},true);
 /* the engines behind the care buttons (one function each: the tap ends here; co-op thin F4 registers them) */
 function petcMaid(i){const P=tsbPets(S)[i];const m=tsbMaid(S);if(!P||!m)return;P.maidW=tsbWk()+BAL.pet.maidW;petcDraw(`${m.name} nhận chăm ${petT(P).n.toLowerCase()} ${BAL.pet.maidW} tuần.`)}
-function petcQuick(kind){if(kitQuickRoll()){petcGain(kind,BAL.skip.care);return}log("Để trời định: chăm chưa thành, không thêm gì.");petcDraw("Để trời định: chưa thành, không thêm gì.")}
+function petcQuick(kind){if(kitQuickRoll()){petcGain(kind,BAL.skip.care);return}log("Chăm nhanh: chăm chưa thành, không thêm gì.");petcDraw("Chăm nhanh: chưa thành, không thêm gì.")}
 /* "Chăm" on the pet card opens the screen; the card shows stage + effects + next */
 (function(){const d0=petDo;petDo=function(k,b){if(k==="care"){const i=+b.dataset.i;try{closeModal()}catch(e){}petcOpen(i);return}return d0.apply(this,arguments)};window.petDo=petDo})();
 (function(){const r0=petRowsL;petRowsL=function(P,i){const L=r0.apply(this,arguments);try{petcInit(P);const s=petStage(P);return [["Lớn",`<b>${BAL.pet.stages[s]}</b>`],["Đang có",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"],["Chăm",[`No ${Math.round(P.full)} · Sạch ${Math.round(P.clean)} · Vui ${Math.round(P.joy)} · Tình cảm ${Math.round(P.aff)}`],"n"]].concat(L)}catch(e){}return L}})();
@@ -59969,6 +59972,9 @@ function toilFOf(host){let fest=false;try{fest=!!(typeof festToday==="function"&
    counted only on a day she placed one (weights are normalised over the parts present, so a day without one scores exactly as before) */
 function toilRaw(P){const W=BAL.toil.w;let s=0,n=0;for(const k in W){const v=P&&P[k];if(typeof v!=="number")continue;s+=W[k]*v;n+=W[k]}return n?Math.round(100*s/n):0}
 Object.assign(BAL.toil,{w:{brow:.4,powder:.3,son:.3,hd:.25},skillShare:10,
+ /* mg-trim (owner OD 26/11 ~05:10Z: makeup by «công dung ngôn hạnh … sự khéo léo»): Dung (tứ đức, 0..5) / dungDiv joins the ONE mirror hand (hers and every NPC's);
+    rkDemand = face points the court expects more per rank (law 5) in the ONE face table toilNpcPlay; rollN = draws that turn her hand into the odds words on the one-tap button */
+ dungDiv:10,rkDemand:2,rollN:240,
  /* brow: tolerance = brow length × (tol + tolSk × skill); a stroke counts for the nearer brow; over = stroke beyond the brow ends;
     messy = spread of the strokes across the line above the brow's own thickness; sym = the two brows at different heights */
  brow:{tol:.11,tolSk:.04,overK:1.2,messyK:.6,symK:.35,smear:30,near:3,slack:.3,end:.6,thk:.6},
@@ -60056,8 +60062,18 @@ function toilLvRows(){return TOIL_LVS.map(k=>[TOIL_MK[k],toilLvChips(k)])}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
 function toilNpcPlay(sk,h,col,want,style,occ,rk,hq){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
  const q=i=>Math.max(0,Math.min(1,N.q0+N.qSk*sk+(r(i)+r(i+5)-1)*N.spread));const P={brow:q(0),powder:q(1),son:q(2)};if(typeof hq==="number")P.hd=hq;
- const raw=toilRaw(P);const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)));
+ const raw=toilRaw(P);const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)-Math.round((B.rkDemand||0)*Math.max(0,+rk||0))));
  return Object.assign({score,parts:P},toilLookOf(P,score))}
+/* mg-trim: HER one-tap Điểm trang = the SAME face table on her hand (toilSkill: Sắc, Họa, Dung, ma ma), her rank, her colours and her own hoa điền; seeded by her + the day (a reload does not re-roll; co-op seats agree) */
+function toilRollSeed(){return wdHash(String(S.name||"")+":roll:"+toilWk())}
+function toilRollOf(seed){const st=TOIL.st,sk=toilSkill(),col=toilColFix((st&&st.col)||(S.toilette&&S.toilette.col)),HD=typeof hdNpc==="function"?hdNpc(S,seed,sk.sk):null;
+ const occ=st&&st.occ?st.occ.map(o=>o.k):toilOcc().map(o=>o.k),style=st&&st.style||"fit";return Object.assign(toilNpcPlay(sk.sk,seed,col,col.want||"",style,occ,S.rank,HD?HD.q:null),{hd:HD})}
+/* the odds WORDS of her one tap: share of draws reaching Đoan trang / Kiều diễm / Khuynh thành (VANPHONG ladder, no %) */
+function toilRollOdds(){const N=BAL.toil.rollN,T=BAL.toil.tier;let a=0,b=0,c=0;for(let i=0;i<N;i++){const r=toilRollOf("odds:"+i);if(r.look==="vung")continue;if(r.score>=T[0])a++;if(r.score>=T[1])b++;if(r.score>=T[2])c++}
+ return{vua:Math.round(100*a/N),dep:Math.round(100*b/N),tuyet:Math.round(100*c/N)}}
+function toilRollSub(){try{const o=toilRollOdds(),w=x=>word(oddsCl(Math.max(BAL.odds.lo,x)));return [`${TOIL_MK.vua}: ${w(o.vua)}`,o.dep>0?`${TOIL_MK.dep}: ${w(o.dep)}`:"",o.tuyet>0?`${TOIL_MK.tuyet}: ${w(o.tuyet)}`:""].filter(Boolean).join(" · ")}catch(e){return"theo Dung, Họa, Sắc"}}
+/* the one-tap button (kit .kbtn, the same as every start button) + «Tự tay điểm trang» (the mirror game) — owner OD 26/11 ~05:10Z */
+function toilRollBtn(id){return `<button class="${kg82Btn()}" id="${id}">Điểm trang<small>${toilRollSub()}</small></button>`}
 /* ---------- the dress verdict (her clothes NOW, for formality F) ---------- */
 function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")return{v:"tang",style:"showy"};
  let vp=0;try{vp=(vpItems(p)||[]).length}catch(e){}if(st==="over"||vp)return{v:"vuot",style:"showy"};
@@ -60066,7 +60082,7 @@ function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")
  if(d<=B.under||r<B.rLo)return{v:"giandi",style:"plain"};if(B.showR!=null&&r>B.showR)return{v:"photruong",style:"showy"};
  if(d>=B.fitD&&r>=B.fitR&&(B.fitHi==null||r<=B.fitHi))return{v:"hopdip",style:"fit"};return{v:"hoppham",style:"fit"}}
 /* an NPC's hand at the mirror (0..1): Sắc / sacDiv + Họa / hoaDiv — the player's toilSkill without the ma ma (jagtoil reads the same) */
-function toilNpcSk(v){let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}return Math.max(0,Math.min(1,((v&&v.sac)||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv))}
+function toilNpcSk(v){let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const dg=typeof virLv==="function"?virLv(v,"dung"):0;/* mg-trim: + Dung, the same as her toilSkill (law 1) */return Math.max(0,Math.min(1,((v&&v.sac)||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv+dg/BAL.toil.dungDiv))}
 /* NPC look of the day (data, deterministic per person per day: no save field needed). With the agents on (BAL.ag.toil2, host only) jagtoil makes
    the face part her CHOICE (G11); this stays the fallback (switch off, co-op guest before the host's choice arrives) */
 function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1000)/1000,r2=((h>>>10)%1000)/1000,r3=((h>>>20)%1000)/1000;const T=traitsOf(v);
@@ -60193,7 +60209,8 @@ window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('
 /* ---------- the mini-games ---------- */
 const TOIL={st:null,geo:null};window.TOIL=TOIL;
 function toilSkill(){const B=BAL.toil;let h=0;try{h=kg82Lv(S,"hoa")||0}catch(e){}let m=null;try{m=wdMama(S)}catch(e){}
- return{sk:Math.max(0,Math.min(1,(S.sac||0)/B.sacDiv+h/B.hoaDiv+(m?B.mama:0))),hoa:h,mama:m}}
+ const dg=typeof virLv==="function"?virLv(S,"dung"):0;
+ return{sk:Math.max(0,Math.min(1,(S.sac||0)/B.sacDiv+h/B.hoaDiv+dg/B.dungDiv+(m?B.mama:0))),hoa:h,mama:m,dung:dg}}
 function toilHUD(o){{const d=document.getElementById("kg82");if(d)d.classList.remove("kg-idle")}for(const k in o)kg82Set(k,o[k])}
 /* bots (dev/measure inpage4, window.__bot) cannot play the overlay: an average sitting — keep the clothes, a face drawn from skill + chance */
 function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();/* the same table as the NPCs (toilNpcPlay), seeded: no Math.random */
@@ -60261,7 +60278,7 @@ function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "
  const why={hopdip:"Vừa phẩm, vừa dịp: người trọng lễ ưng ý.",hoppham:"Đúng phẩm, chưa thật hợp dịp hôm nay.",giandi:st.F?"Quá giản dị cho dịp gặp bề trên: người trọng lễ coi là thiếu tôn trọng; người chuộng giản dị lại khen.":"Quá giản dị.",
   photruong:"Quá phô trương: phi tần dễ ghen, người chuộng giản dị chê.",vuot:"Có món trên phẩm của ta: dễ bị hặc, bị thu.",tang:"Màu đỏ, vàng trong quốc tang: phạm tang."}[dr.v];
  KG82.setup=1;const box=kg82Box();box.innerHTML=`<div class="kgr">${kitRows([["Y phục",`<span class="ef ${good?"g":"r"}"><b>${TOIL_DV[dr.v][0].toUpperCase()+TOIL_DV[dr.v].slice(1)}</b></span>`],["Ghi chú",[why,`đo theo dịp: ${st.occ.slice().sort((a,b)=>b.F-a.F)[0].n.toLowerCase()}`],"n"]])}</div>`+
-  `<div class="kg82act"><button class="${kg82Btn()}" id="toilmk">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button>${kitQuick({id:"toilquick",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}<button class="${kg82Btn(true)}" id="toilmoc">Để ${toilMkW("moc")}</button></div>`;
+  `<div class="kg82act">${toilRollBtn("toilquick")}<button class="${kg82Btn(true)}" id="toilmk">Tự tay điểm trang<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc">Để ${toilMkW("moc")}</button></div>`;
  $("toilmk").onclick=()=>toilColUI();$("toilquick").onclick=()=>toilFinish("quick");$("toilmoc").onclick=()=>toilFinish(false)}
 
 /* (b) TRANG ĐIỂM — three hồi on her face in the mirror */
@@ -60338,7 +60355,7 @@ function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML=
   toilHUD({round:`${phase+2}/4`});setBtn()}
  function setBtn(){const a=box.querySelector(".kg82act");
   /* makeup-set: while the glass is still clearing (no face points yet) she chooses herself: wait, Điểm trang nhanh, or Để mặt mộc — never an automatic sitting */
-  if(!ready&&waitBtn){if(a)a.remove();box.insertAdjacentHTML("beforeend",`<div class="kg82act">${kitQuick({id:"toilquick3",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}<button class="${kg82Btn(true)}" id="toilmoc3">Để ${toilMkW("moc")}</button></div>`);
+  if(!ready&&waitBtn){if(a)a.remove();box.insertAdjacentHTML("beforeend",`<div class="kg82act">${toilRollBtn("toilquick3")}<button class="${kg82Btn(true)}" id="toilmoc3">Để ${toilMkW("moc")}</button></div>`);
    const q=$("toilquick3"),m=$("toilmoc3");if(q)q.onclick=()=>{if(stop)return;stop=true;toilFinish("quick")};if(m)m.onclick=()=>{if(stop)return;stop=true;toilFinish(false)};return}
   const h=phase<2?`<div class="kg82act"><button class="${kg82Btn()}" id="toilnx"${ready?"":" disabled"}>${phase===0?"Kẻ xong":"Đánh xong"}</button></div>`:"";if(a)a.remove();if(h){box.insertAdjacentHTML("beforeend",h);$("toilnx").onclick=()=>{if(!stop&&ready)next()}}}
  function pdown(e){if(stop||!ready)return;e.preventDefault();C.__down=true;if(!t0)t0=performance.now();const p=C.at(e);ptr=p;if(phase===0){cur=[p]}else if(phase===2)tapLip(p);else if(phase===1){try{kitSfx("mgPuff")}catch(x){}}try{C.cv.setPointerCapture(e.pointerId)}catch(x){}}
@@ -60368,14 +60385,14 @@ function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML=
  toilHUD({round:"2/4"});setBtn();raf=requestAnimationFrame(frame);KG82.run={stop:()=>{stop=true;cancelAnimationFrame(raf)}};
  TOIL.test={get I(){return I},get brows(){return brows},get cpts(){return cpts},get lips(){return lips},next,browQ,powQ,sonQ,setPowder:v=>{cpts.forEach(p=>p.c=cheeks.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<=c.r)?v:0);pdirty=true},strokes,dots,get lr(){return lr}}}
 function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
- const sk=toilSkill();let score=0,raw=0,bonus=0;
- /* mg-skip-all (KIT §13.6, BAL.skip): "Điểm trang nhanh" = ONE roll; won = the middle tier (Đoan trang: the lowest score of it, BAL.toil.tier[0]), lost = Vụng về; never more */
- const quick=made==="quick",qok=quick?kitQuickRoll():false;if(quick){score=qok?BAL.toil.tier[0]:0}else if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
+ const sk=toilSkill();let score=0,raw=0,bonus=0,dem=0;
+ /* mg-trim (owner OD 26/11 ~05:10Z): one-tap «Điểm trang» = ONE draw of the face table on her hand (toilRollOf: Sắc, Họa, Dung, her rank, colours, hoa điền) — the same table every NPC and the bot use */
+ const quick=made==="quick",QR=quick?toilRollOf(toilRollSeed()):null,qok=quick?QR.look!=="vung":false;if(quick){score=QR.score}else if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);dem=Math.round((BAL.toil.rkDemand||0)*Math.max(0,+S.rank||0));/* mg-trim (BIG rv 2): the same rank demand as the one tap + every NPC face (toilNpcPlay, law 5) */score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus-dem))}
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
  /* diemtrang-score: vụng = a part that went wrong (or a low total); else by the total, Khuynh thành the most (makeup-lux: no overdone level) */
  const P0=st.parts,occK=st.occ.map(o=>o.k);
- const L=quick?(qok?{look:null}:{look:"vung",slip:"son"}):made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
- S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
+ const L=quick?{look:QR.look,slip:QR.slip}:made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
+ S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(quick&&QR.hd)S.toilette.hd=QR.hd;else if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
  /* jration (PL #5): the face is capped by the cosmetics she has; the sitting spends lượt from each part's box (BAL.ration) */
  if(made&&typeof lxSit==="function")lxSit(S,S.toilette);
  /* makeup-lux: the day's verdict reads the ONE total, now with the face in it (clothes + jewels + makeup level) */
@@ -60383,9 +60400,9 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG8
  const mk=toilMk(S.toilette);const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&mk==="vung"?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
  log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`dung nhan ${toilMkW(mk)}`:`để ${toilMkW("moc")}`}.`);
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];/* the day's verdict: the ONE total (clothes + jewels + face + pet) */
- if(quick)rows.push(["Điểm trang nhanh",`<span class="ef ${qok?"g":"r"}">${qok?"thành":"hỏng"}</span>`],["Dung nhan",`<span class="ef ${qok?"t":"r"}"><b>${TOIL_MK[mk]}</b></span>`]);
+ if(quick)rows.push(["Điểm trang",`theo Dung bậc ${sk.dung}, Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""}`],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`]);
  else if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],...(typeof P.hd==="number"&&st.hd?[["Dán hoa điền",`<span class="ef t">${Math.round(100*P.hd)}/100</span> · ${WD_ITEMS[st.hd.k]?WD_ITEMS[st.hd.k].n:""}`]]:[]),
-  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
+  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],...(dem?[["Phẩm vị đòi hỏi",kitChip("điểm",-dem,"r")]]:[]),["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
  else rows.push(["Dung nhan",`<span class="ef n">${TOIL_MK.moc}</span>`]);
  /* makeup-lux (OD L1639): the look's xa xỉ word + number (judged only at events, inside the ONE total, never this face alone) */
  rows.push(["Xa xỉ son phấn",toilLvChips(mk)]);/* the TOTAL is shown by MAIN's kit display (it reads luxTotal) */
@@ -61019,7 +61036,7 @@ function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;KG82.set
  TOIL.prev={look:st.col.want==="diem"?"tuyet":"dep",col:st.col};/* makeup-lux: the bold group previews at the top level (Khuynh thành), no overdone level */TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
  box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang độ xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
   `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:(R=>{/* the set note once: under the last set row that has one (makeup-set r3) */let last=-1;R.forEach((r,i)=>{if(r&&r.note)last=i});return R.map((r,i)=>r&&r.note&&i!==last?Object.assign({},r,{note:""}):r)})(lxF(toilPreRows(st.col).concat(toilColRows(st.col)))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
-  `<div class="kg82act">${lxN?`<button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button>${kitQuick({id:"toilquick2",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}`:""}<button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button>${typeof lxRushBtn==="function"?lxRushBtn():""}</div>`;
+  `<div class="kg82act">${lxN?`${toilRollBtn("toilquick2")}<button class="${kg82Btn(true)}" id="toilgo">Tự tay điểm trang<small>kẻ mày, đánh phấn, chấm son</small></button>`:""}<button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button>${typeof lxRushBtn==="function"?lxRushBtn():""}</div>`;
  try{kitGameFigRefresh()}catch(e){}
  if($("toilgo"))$("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};if($("toilquick2"))$("toilquick2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish("quick")};if($("lxrush"))$("lxrush").onclick=()=>{lxRush();toilColUI()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
 window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;
@@ -66155,18 +66172,14 @@ function slapGame(o){const kind=o.dodge?"ne":"tat",skipRes={raw:0,skipped:true};
   $("kg82ok").onclick=()=>{kg82Close();try{o.onDone({raw,skipped:false})}catch(e){console.error(e)}}});
  $("kg82skip").onclick=()=>{kg82Close();try{o.onDone(skipRes)}catch(e){console.error(e)}}}
 window.slapGame=slapGame;
-/* ---------- her slap: the game decides the tier ---------- */
+/* ---------- her slap: ONE draw, the same as an NPC's (mg-trim, owner OD 26/11 ~05:10Z «trò tát hay né thì bỏ»): no power-bar game; the tier is
+   slapNpcTier(S) — the mg2 draw on HER «tat» board (her rank, Vũ / Sức) or the old BAL.slap.npc weights — then the dodge roll of the target (runAct wrapper below) ---------- */
 (function(){const d0=doAct;doAct=function(i,k){
- if(k!=="tat"||SLAPG.busy||typeof window.__bot!=="undefined"||typeof kg82Open!=="function")return d0.apply(this,arguments);
- const v=rivals[i],a=ACT.tat,self=this,args=arguments;if(!v||!a||!can(BAL.actK)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
- const B=BAL.slap;SLAPG.busy=1;
- slapGame({title:"Giáng tay",by:S,go:"Giơ tay",skip:"Tát luôn",skipSub:"không chơi: tay nhẹ",rows:[
-  ["Vùng đỏ",`tay nặng: Đức ${B.duc[3]}, oán sâu, dấu tay đậm sưng đỏ ${B.wk[3]} tuần, dễ bị tố giác, Thái hậu có thể quở`,"r"],
-  ["Vùng vàng",`tay vừa: Đức ${B.duc[2]}, dấu tay đậm ${B.wk[2]} tuần`,"r"],
-  ["Ngoài vùng",`tay nhẹ: Đức ${B.duc[1]}, dấu tay mờ ${B.wk[1]} tuần`,"r"]],
-  onDone:res=>{SLAPG.busy=0;SLAP.next=res.skipped?B.def:slapTierOf(res.raw);try{d0.apply(self,args)}finally{SLAP.next=0}}})}})();
+ if(k!=="tat"||SLAPG.busy)return d0.apply(this,arguments);
+ const v=rivals[i],a=ACT.tat;if(!v||!a||!can(BAL.actK)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
+ SLAP.next=slapNpcTier(S,v);try{return d0.apply(this,arguments)}finally{SLAP.next=0}}})();
 /* ---------- an NPC slaps her: tier rolled, she may dodge ---------- */
-function slapNpcTier(a){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw(a);/* AG-ALL-2b mg2: her game, one draw */const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
+function slapNpcTier(a,t){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw(a);/* AG-ALL-2b mg2: her game, one draw */const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(t||S)/* mg-trim (BIG rv 3): the slapper's rank gap to the TARGET (her own slap: to the rival) */:1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
 window.slapNpcTier=slapNpcTier;
 (function(){const r0=runAct;runAct=function(a,t,k,extra){
  if(k!=="tat"||t!==S||!a||a===S||SLAPG.npcDone)return r0.apply(this,arguments);
@@ -66178,9 +66191,8 @@ window.slapNpcTier=slapNpcTier;
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`});showModal();render()}};
  const nm=a.name||"Nàng";
  pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
-  Object.assign(tsOpt({n:"Né đòn",odds:B.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],kem:[`một ván ngắn chừng ${slapSec(B.dodge.ms)}`],go:()=>{
-    slapGame({dodge:true,by:a,title:"Né đòn",go:"Né",skip:"Chịu đòn",skipSub:"không né",rows:[["Né kịp","cái tát nhẹ đi một bậc; tát nhẹ thì hụt hẳn","g"],["Không né","nhận trọn cái tát","r"]],
-     onDone:res=>show(fin(res.skipped||res.raw<B.raw[3]?sev:sev-1))})}}),{}),
+  /* mg-trim: «Né đòn» = ONE roll of the odds the card shows (BAL.slap.dodgeOdds by the «ne» board tier), no game — the same roll an NPC target makes */
+  (()=>{const dOd=B.dodgeOdds[slapMg(true,a).tier];return tsOpt({n:"Né đòn",odds:dOd,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],go:()=>show(fin(roll(dOd)?sev-1:sev))})})(),
   tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`})}}})]});
  return""}})();
 /* ---------- co-op: the tier of a slap on the friend rides on the existing "res" message ---------- */
@@ -66198,7 +66210,7 @@ function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat
  /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand) — fair spread (OD 20/11 ~01:10Z): the table is the skilled human bot = the middle hand of the band;
     f = where her "tat" hand (+ art / upbringing lift, mgHandEff) sits from the band centre, −1 … +1 at ± 2 sd of the curve (mgBand far): a weaker hand lands the heavy blow less
     (what she misses falls to nhẹ), a stronger hand lands it more (taken from nhẹ) — symmetric */
- {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHandEff==="function"){const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,Bd.far),-1,1);
+ {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&typeof mgHandEff==="function")/* mg-trim (BIG rv 3): her hand too — her slap is the SAME draw as an NPC's (law 1) */{const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,Bd.far),-1,1);
   if(f<0){w[0]+=w[2]*-f;w[2]*=1+f}else{const m=w[0]*f;w[0]-=m;w[2]+=m}}}
  let r=Math.random()*(w[0]+w[1]+w[2]);for(let j=0;j<3;j++){if(r<w[j])return j+1;r-=w[j]}return 1}
 function slapNeOdds(t,a){const D=BAL.slap.dodgeOdds;return D[mgTier("ne",{occ:"ne",p:t,rank:typeof rkOf==="function"?rkOf(a):0}).tier]}
@@ -76421,7 +76433,7 @@ function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
   if(p&&p!==S&&TDS_KIND[k]&&p.alive&&!p.out){p.inv=p.inv||[];if(p.inv.filter(e=>e.wk).length<BAL.tds.npcWkCap&&npcWhy("tdsMake",{p,k},()=>roll(BAL.tds.npcWk)))wkNpcMake(p,k)}/* npc-purpose G2: she makes a piece when her craft plan calls for one (skill to show, bạc to earn, a friend to give it to); npcWk = the success */
  }catch(e){console.error("tds vir",e)}return r}})();
 function tdsFinish(how){const P=TDV.pend,k=P&&P.k;TDV.hit=null;if(!P){return}
- if(TDV.skip){log("Để trời định: không ra thành phẩm.");tdsReset();return}
+ if(TDV.skip){log("Học nhanh: không ra thành phẩm.");tdsReset();return}
  const kind=P.kind,K=WK[kind],raw=TDV.raw!=null?cl(Math.round(TDV.raw),0,10):WAVG;
  if(K.mat[P.mat]){if(S.bac>=K.mat[P.mat])apply({bac:-K.mat[P.mat]});else P.mat=0}
  const st=rcpStOf(kind,P.r);if(P.mode==="master"&&st&&!rcpKnows(S,kind,st[0])){const t=rcpGrant(kind,st[0],TDV.tch?"phi tần dạy":"ma ma dạy");if(t)log(`<span class="g">${t}</span>`)}
@@ -92474,7 +92486,10 @@ window.shelfCareOpen=shelfCareOpen;
 function shelfPlantBody(e,msg){const P=BAL.shelf.plant,W=shelfWord(e);const s=shelfSrvBest(S);const t1=whyTime(P.khacSelf);
  return kitStatRow([{cells:[kitStatCell("","Tươi tốt",Math.round(e.pc|0),{bar:Math.round(e.pc|0),title:`Tươi tốt ${Math.round(e.pc|0)}/100`})]}])+
   kitRows([["Mỗi tuần",[`${s?s.name+" chăm hộ":"không ai chăm"}${s?` (${shelfSrvWord(shelfSrvQ(s))})`:""}`],"n"],["Bỏ bê",[`${W.bad} thì phòng kém sang, ai thấy cũng chê; để lâu thì ${W.died}`],"r"]].concat(msg?[["Vừa rồi",[msg],"n"]]:[]))+
-  `<div id="kshpgw"></div><div class="rbtn">${pbtn(`data-shc="water"`,W.act,`tốn: ${P.khacSelf} khắc · thành: Tươi tốt tăng · dừng tay khi vừa đủ (${P.game.rounds} lần)`,t1)}</div>`}
+  `<div id="kshpgw"></div><div class="rbtn">${pbtn(`data-shc="water"`,W.act,`tốn: ${P.khacSelf} khắc · thành: Tươi tốt tăng · dừng tay khi vừa đủ (${P.game.rounds} lần)`,t1)}`+
+  /* «Giao người chăm» (owner OD 26/11 ~05:45Z): the week's servant care (shelfPlantWeek) done NOW, 0 khắc, khéo vụng by her hand (shelfSrvQ); once a tuần and never on top of
+     her own care that tuần (e.pm = wk() → the week tick adds no second servant care): the same care, only earlier — no free gain */
+  (s?pbtn(`data-shc="give"`,`Giao ${s.name} chăm`,`không tốn khắc · thành: Tươi tốt tăng, khéo vụng tùy tay ${s.name} (${shelfSrvWord(shelfSrvQ(s))})`,e.pm===wk()?"tuần này đã chăm":""):"")+`</div>`}
 function shelfPlantOpen(g){const e=shelfOf(S).g[g];if(!shelfIsPlant(e))return;SHPC.g=g;SHPC.game=null;try{if(!document.getElementById("modal").hidden)closeModal()}catch(x){}
  kitModal({kind:"info",title:`Chăm ${shelfNm(e).toLowerCase()}`,sub:shelfGName(shelfSlotG(g)),itemPic:kitItem({src:typeof kitItemSrc==="function"?kitItemSrc(e.k,""):"",name:"",grade:0,size:"lg"}).replace('<span class="kitn"></span>',''),
   html:`<div id="kshp">${shelfPlantBody(e)}</div>`,onClose:()=>{kgTutDrop();SHPC.g=null;SHPC.game=null}})}
@@ -92493,14 +92508,19 @@ function shelfPlantGain(score){const e=shelfOf(S).g[SHPC.g];if(!e)return;const G
  shelfPlantDraw(msg)}
 /* the open plant screen redrawn (one function: co-op thin F4 replays it on her phone after the host's answer) */
 function shelfPlantDraw(msg){kgTutDrop();const e=shelfOf(S).g[SHPC.g];const box=document.getElementById("kshp");if(box&&e){box.classList.remove("kg-open");box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
-/* "Để trời định" (the quick roll of the care game): one engine */
-function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){shelfPlantGain(BAL.skip.care);return}const msg="Để trời định: chưa thành, không thêm gì.";log(msg);shelfPlantDraw(msg)}
+/* «Giao người chăm» on her open plant (SHPC.g; owner OD 26/11 ~05:45Z): ONE function so co-op routes it to the host like shelfPlantQuick (jcoopthinf reg9) */
+function shelfPlantGive(){const e=shelfOf(S).g[SHPC.g],sv=shelfSrvBest(S);if(!e||!sv||e.pm===wk())return;const d=shelfDecay(e);e.pc=cl((e.pc|0)+d*shelfSrvQ(sv),0,100);e.pm=wk();e.pz=0;
+ const msg=`${sv.name} nhận chăm ${shelfNm(e).toLowerCase()} (${shelfSrvWord(shelfSrvQ(sv))}).`;log(msg);shelfPlantDraw(msg);try{save()}catch(x){}}
+window.shelfPlantGive=shelfPlantGive;
+/* «Chăm nhanh» (owner OD 26/11 ~05:45Z «option chăm nhanh như học nhanh»; was «Để trời định»): the quick roll of the care game, one engine */
+function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){shelfPlantGain(BAL.skip.care);return}const msg="Chăm nhanh: chưa thành, không thêm gì.";log(msg);shelfPlantDraw(msg)}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shc]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.shc;
  if(k==="pet"){try{closeModal()}catch(x){}petcOpen(+b.dataset.i);return}
  if(k==="plant"){shelfPlantOpen(b.dataset.g);return}
+ if(k==="give"){if(SHPC.game||!SHPC.g)return;shelfPlantGive();return}
  if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
-  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame",kind:"tuoi"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
+  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame",kind:"tuoi"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Chăm nhanh",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
   const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;
   kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",ev:false,timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W,env);
     KG82.hint=()=>{const bt=b.querySelector("[data-shw]");if(!bt)return null;const r=bt.getBoundingClientRect(),lv=SHPC.peek?SHPC.peek():0;return{x:r.left+r.width/2,y:r.top+r.height/2,soon:lv>=G.band[0]-1&&lv<=G.band[1]}};
@@ -92509,7 +92529,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
   box.querySelector("#kshpgo").addEventListener("click",()=>{if(SHPC.game!=="rules"||SHPC.rdy)return;if(c&&!can(c))return;if(c)spend(c);SHPC.rdy=1;box.classList.remove("kgintro");box.innerHTML="";SHPC.game="water";/* MG11: the ONE result path (mgPlayRes: graded, her hand b learns it, identity offset), then the gain */const env=mgPlayEnv("tuoi",raw=>shelfPlantGain(mgPlayRes("tuoi",raw)/10));SHPC.stop=shelfWaterGame(box,s=>env.end(10*s),W,env)})}},true);
 /* mg-skip-all (KIT §13.6): the quick option of the care game: won = BAL.skip.care of the gain, lost = nothing; the game in the frame stops */
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("#kshpquick");if(!b)return;ev.preventDefault();ev.stopPropagation();if(SHPC.game!=="water"&&SHPC.game!=="rules")return;
- if(!SHPC.rdy){const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
+ if(!SHPC.rdy){const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c)}/* «Chăm nhanh» from the rules screen is a play-through too: same khắc */
  kgTutDrop();try{if(SHPC.stop)SHPC.stop()}catch(x){}SHPC.stop=null;SHPC.game=null;SHPC.rdy=0;const w=document.getElementById("kshpgw");if(w)w.innerHTML="";{const c=document.getElementById("kshp");if(c)c.classList.remove("kg-open")}
  shelfPlantQuick()},true);
 /* Thử tay (calibration, OD 17/11 ~17:10Z (3)): every new minigame registers its entry; the calibration page lists window.MG_CAL */
@@ -92824,25 +92844,22 @@ for(const k in LK_ACT){const D=LK_ACT[k];
  try{AOUT[k]=[D.x,"nàng biết là ngươi, oán ngươi"];ACTDOM[k]="Mưu kế";J78VERB[k]=D.verb;HARMK[D.n]=k;if(!BANDS[1][2].includes(k))BANDS[1][2].push(k);const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes(k))g[1].push(k)}catch(e){}}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandVT(v,t);
  if(b>=1)for(const k in LK_ACT)if(ACT[k].ok(v,t)){const w=lkB().act[k].w*persW(v,k);if(w>0)O.push([k,w])}}catch(e){}return O}})();
-/* her throw: the bar decides the level (skip = nhẹ) */
+/* her throw: ONE draw, the same as an NPC's (mg-trim, owner OD 26/11 ~05:10Z «trò tát hay né thì bỏ» — the whole slap-bar family): no game, level = slapNpcTier(S) */
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){
- if(!LK_ACT[k]||LKG.busy||typeof window.__bot!=="undefined"||typeof slapGame!=="function"||typeof kg82Open!=="function")return d0.apply(this,arguments);
- const v=rivals[i],a=ACT[k],self=this,args=arguments;if(!v||!a||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
- const D=LK_ACT[k];LKG.busy=1;
- slapGame({title:D.n,art:D.art,by:S,go:D.art,skip:`${D.n} luôn`,skipSub:"không chơi: nhẹ tay",rows:[["Vùng đỏ","trúng đậm: nặng","r"],["Vùng vàng","trúng vừa","r"],["Ngoài vùng","trúng nhẹ","r"]],
-  onDone:res=>{LKG.busy=0;LKG.next=res.skipped?1:slapTierOf(res.raw);try{d0.apply(self,args)}finally{LKG.next=0}}})}})();
+ if(!LK_ACT[k]||LKG.busy||typeof slapNpcTier!=="function")return d0.apply(this,arguments);
+ const v=rivals[i],a=ACT[k];if(!v||!a||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
+ LKG.next=slapNpcTier(S,v);try{return d0.apply(this,arguments)}finally{LKG.next=0}}})();
 /* an NPC throws at her: level rolled (slap rank table), she may dodge (one level less; nhẹ = miss) */
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k,extra){
  if(!LK_ACT[k]||t!==S||!a||a===S||LKG.npcDone)return r0.apply(this,arguments);
  const sev=typeof slapNpcTier==="function"?slapNpcTier(a):1,self=this,D=LK_ACT[k];
  const fin=s=>{let r="";LKG.npcDone=1;LKG.next=s>0?s:-1;try{r=r0.call(self,a,t,k,extra)}finally{LKG.next=0;LKG.npcDone=0}return r};
- const bot=typeof window.__bot!=="undefined"||typeof slapGame!=="function"||typeof kg82Open!=="function"||typeof pushModal!=="function"||typeof tsOpt!=="function";
+ const bot=typeof window.__bot!=="undefined"||typeof pushModal!=="function"||typeof tsOpt!=="function";
  if(bot)return fin(sev);
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`});showModal();render()}};
  pushModal({t:D.n,who,h:`<p>${a.name||"Nàng"} bước tới, định ${D.verb.replace("{t}","ngươi")}. Ngươi có kịp né không?</p>`,opts:[
-  Object.assign(tsOpt({n:"Né",odds:BAL.slap.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["nhẹ đi một bậc","nhẹ thì tránh hẳn"],mat:["dính trọn"],kem:["một ván ngắn"],go:()=>{
-   slapGame({dodge:true,by:a,title:"Né",go:"Né",skip:"Đứng yên",skipSub:"không né",rows:[["Né kịp","nhẹ đi một bậc; nhẹ thì tránh hẳn","g"],["Không né","dính trọn","r"]],
-    onDone:res=>show(fin(res.skipped||res.raw<BAL.slap.raw[3]?sev:sev-1))})}}),{}),
+  /* mg-trim: «Né» = ONE roll of the odds the card shows, no game */
+  (()=>{const dOd=BAL.slap.dodgeOdds[slapMg(true,a).tier];return tsOpt({n:"Né",odds:dOd,duoc:["nhẹ đi một bậc","nhẹ thì tránh hẳn"],mat:["dính trọn"],go:()=>show(fin(roll(dOd)?sev-1:sev))})})(),
   tsOpt({n:"Đứng yên",odds:null,duoc:[`nhẫn nhịn: Đức +${BAL.cv.duc}`],kem:["dính trọn"],go:()=>{apply({duc:BAL.cv.duc});const r=fin(sev);if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`})}}})]});
  return""}})();
 /* ---------- thủy đậu + đậu mùa (j13 rulebook) ---------- */
@@ -97614,7 +97631,7 @@ function dfRun(i,id,res){const p=curPeople()[i];DF.why="";if(!p||S.dead||Q.lengt
   const b=[...host.querySelectorAll("button")].find(x=>dfSig(x)===sig&&dfBtnTitle(x));if(!b||b.disabled){DF.why=b?"locked":"no button "+sig+" in "+[...host.querySelectorAll("button")].map(dfSig).join("|");return false}
   DF.step=dfStep(res);try{b.click()}finally{DF.step=0}return true}
  if(id[0]==="a"){const k=id.slice(1),v=p.ref,ri=rivals.indexOf(v);if(ri<0)return false;
-  const tier=res&&!res.skipped&&res.raw!=null&&typeof slapTierOf==="function"?slapTierOf(res.raw):(BAL.slap?BAL.slap.def:1);
+  const tier=res&&!res.skipped&&res.raw!=null&&typeof slapTierOf==="function"?slapTierOf(res.raw):typeof slapNpcTier==="function"?slapNpcTier(S,v):(BAL.slap?BAL.slap.def:1);/* mg-trim: no game (class B) = ONE draw, the same as an NPC's */
   if(k==="tat"&&typeof SLAPG==="object"&&typeof SLAP==="object"){SLAPG.busy=1;SLAP.next=tier;try{doAct(ri,k)}finally{SLAPG.busy=0;SLAP.next=0}return true}
   if(typeof LKG==="object"&&LKG&&typeof LK_ACT==="object"&&LK_ACT[k]){LKG.busy=1;LKG.next=tier;try{doAct(ri,k)}finally{LKG.busy=0;LKG.next=0}return true}
   doAct(ri,k);return true}
@@ -97776,7 +97793,7 @@ function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id
 function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=dfHere();if(i<0)return;const a=dfFind(i,id);if(!a||a.off)return;
  /* run = the act on HER index at the moment it lands (the game takes seconds; the list may shift meanwhile) */
  const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
- if(a.cls==="D"||a.cls==="E"){run();return}/* E = delegated (jdf dfDlg, owner OD 25/11 ~04:12Z): the one she sends does it, no game: plain odds */
+ if(a.cls==="D"||a.cls==="E"||a.cls==="B"){run();return}/* mg-trim (owner OD 26/11 ~05:10Z «trò tát hay né thì bỏ»): B = the slap-bar family (Tát / Hắt nước / Hắt trà / Quạt mực): no game, the tier is ONE draw (jdf dfRun) *//* E = delegated (jdf dfDlg, owner OD 25/11 ~04:12Z): the one she sends does it, no game: plain odds */
  const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
  const go=()=>{DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});
@@ -99980,6 +99997,7 @@ reg9("petcMaid",["v"],{mine:()=>true});
 reg9("petcQuick",["v"],{mine:()=>true});
 /* garden: her shelf plant */
 reg9("shelfPlantQuick",[],{mine:()=>true});
+reg9("shelfPlantGive",[],{mine:()=>true});/* mg-trim: «Giao … chăm» on her plant (owner OD 26/11 ~05:45Z), host-routed like its sibling */
 /* kitchen / study: recipe books, the taste questions, Tứ đức practice at bậc 5 (no game) */
 reg9("rcpRead",["ix"],{mine:()=>true});
 reg9("rcpAskGo",["v","pm"],{mine:()=>true});
@@ -100387,7 +100405,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0281bf7bcef6";window.CTM_BUILD=BUILD;
+const BUILD="c2cd5620103a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

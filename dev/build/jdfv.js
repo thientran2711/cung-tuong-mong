@@ -49,7 +49,7 @@ function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id
 function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=dfHere();if(i<0)return;const a=dfFind(i,id);if(!a||a.off)return;
  /* run = the act on HER index at the moment it lands (the game takes seconds; the list may shift meanwhile) */
  const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
- if(a.cls==="D"||a.cls==="E"){run();return}/* E = delegated (jdf dfDlg, owner OD 25/11 ~04:12Z): the one she sends does it, no game: plain odds */
+ if(a.cls==="D"||a.cls==="E"||a.cls==="B"){run();return}/* mg-trim (owner OD 26/11 ~05:10Z «trò tát hay né thì bỏ»): B = the slap-bar family (Tát / Hắt nước / Hắt trà / Quạt mực): no game, the tier is ONE draw (jdf dfRun) *//* E = delegated (jdf dfDlg, owner OD 25/11 ~04:12Z): the one she sends does it, no game: plain odds */
  const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
  const go=()=>{DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});

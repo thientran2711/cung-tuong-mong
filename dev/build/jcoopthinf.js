@@ -339,6 +339,7 @@ reg9("petcMaid",["v"],{mine:()=>true});
 reg9("petcQuick",["v"],{mine:()=>true});
 /* garden: her shelf plant */
 reg9("shelfPlantQuick",[],{mine:()=>true});
+reg9("shelfPlantGive",[],{mine:()=>true});/* mg-trim: «Giao … chăm» on her plant (owner OD 26/11 ~05:45Z), host-routed like its sibling */
 /* kitchen / study: recipe books, the taste questions, Tứ đức practice at bậc 5 (no game) */
 reg9("rcpRead",["ix"],{mine:()=>true});
 reg9("rcpAskGo",["v","pm"],{mine:()=>true});
