@@ -1,1 +1,1 @@
-Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»).
+Thẻ cuối đêm và Sổ ghi: người quanh nàng gộp gọn, mỗi người có tên một dòng, còn lại ghi «… và N người khác».
