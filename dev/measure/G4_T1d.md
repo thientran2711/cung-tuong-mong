@@ -95,3 +95,31 @@ The selection-scene block on LIVE ≥ f009e1a6 is a ROBOT GAP, not a game softlo
   - Key per card text, up to 12 taps per key, 900 ms apart: a card can ignore taps for a while.
 - Verified on 6b5d3d05: lanes even-2, hot-2, hot-3 and timid-2 walked the whole selection scene (31–36 card taps each) up to the Điện tuyển result.
 - Please port this into the shared harness.
+
+## G4-a9 on LIVE 6b5d3d05 (a9 forgetSafe grace + BALANCE-PACE A), MAIN 154 via D, done 26/11 13:25Z
+Setup:
+- 4 arms, Fold, slice b400.
+- Harness review/temper-g4 7c0258ab: local scene-card tap (FOR FOREMAN F above).
+- Option (b) per D: extra lives until each arm has 3 settled PALACE lives. Ban hoa (selection contest lost at b1) is listed separately.
+- Pre-fix blocked attempts are in g4a9/blocked-old*, not counted.
+
+| arm | palace lives (end, buổi) | lãnh cung | max rank | outbursts/life | Danh at end (mean) | Ban hoa b1 |
+|---|---|---|---|---|---|---|
+| even | even-1 SLICE b400 · even-3 «Nữ phu tử» b283 · even-4 SLICE b400 | 1/3 | 2, 0, 1 | 1.0 | 28 | 1 (even-2) |
+| hot | hot-1 SLICE · hot-5 SLICE · hot-6 SLICE (all b400) | 0/3 | 2, 1, 0 | 1.33 | 32 | 3 (hot-2, hot-3, hot-4) |
+| off | off-1 «Bỏ trốn» b242 · off-2 «Hồng nhan bạc mệnh» b222 · off-3 «Lãnh cung» b388 | 2/3 | 1, 2, 0 | 0 | 10 | 0 |
+| timid | timid-1 SLICE b400 · timid-3 «Làm thiếp nhà phú hộ» b74 · timid-4 «Bỏ trốn» b256 | 0/3 | 0, 0, 0 | 0 | 25 | 1 (timid-2) |
+
+FOR MAIN: lãnh cung fell from 7/12 to 3/12.
+| arm | old (LIVE 5e013076, 06:36Z) | new (LIVE 6b5d3d05) |
+|---|---|---|
+| even | 0/3 | 1/3 |
+| hot | 2/3 | 0/3 |
+| off | 2/3 | 2/3 |
+| timid | 2/3 | 0/3 |
+| total | 7/12 | 3/12 |
+
+- Mean Danh at end is up for hot (2 → 32) and timid (3 → 25), and down for even (50 → 28) and off (33 → 10).
+- Caveats: n = 3 per arm, so the noise is large. 4 of the 12 palace lives left the palace early by other endings (Bỏ trốn ×2, Nữ phu tử, Làm thiếp), which shortens their exposure to lãnh cung. off-3's lãnh cung ended the life («Lãnh cung» ending, b388).
+- Ban hoa: 5 of 17 fresh lives lost the selection contest at b1 (BAL.selx.yard: 12 girls, 4 kept). The robot lost every contest it entered. Already forwarded to MAIN 158 as a design and balance line.
+- Hangs on 6b5d3d05 (F10 loop, fix not landed): hot-1, even-1, timid-1 and hot-6 at b303–305, off-2 at b65. Every one resumed past its hang point.
