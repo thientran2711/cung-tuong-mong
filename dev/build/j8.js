@@ -434,12 +434,14 @@ function promoGap(r){const G=BAL.promo.gap;return G[Math.max(0,Math.min(G.length
 function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];const me=p===S,qq=queenP();
  if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung} (cần ${nx.s})`],[p.danh>=nx.d,`Danh ${p.danh} (cần ${nx.d})`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo} tháng (cần ${promoGap(r)})`]);
  const qBlock=qq&&qq!==p;
- if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>BAL.qBlockHh||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${BAL.qBlockHh}; hoặc Thái hậu ${BAL.qBlockTh})`]);
+ if(qBlock&&r+1>=2&&r+1<7){const qb=qBlockAt(p);L.push([p.hh>qb||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${qb}; hoặc Thái hậu ${BAL.qBlockTh})`])}
  if(has("hieuthao"))L.push([p.th>=0,`Hoàng thượng hiếu thảo: Thái hậu không được ghét ${me?"ngươi":"nàng"} (Thái hậu quý ${me?"ngươi":"nàng"} ${p.th}, cần từ 0)`]);
  if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử: Thái hậu quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`:`Chưa có hoàng tử: Thái hậu phải hết lòng, quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`],[p.duc>=nd,`Đức ${p.duc} (cần ${nd}${N.heir?", mẹ Thái tử":""})`])}
  else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}
+/* the Hoàng hậu block bar of p now: BAL.qBlockHh, eased by BAL.qBlock.ease per month waited past BAL.qBlock.after since her last decree (same for everyone) */
+function qBlockAt(p){const B=BAL.qBlock,w=S.turn-((p&&p.lastPromo)||0);return BAL.qBlockHh-(B?B.ease*Math.max(0,w-B.after):0)}
 /* the vacant seat is contested: every eligible consort (Quý phi and above) weighs in by favour, Thái hậu, sons and name */
 /* the seat weighs sons, the clan behind her, Thái hậu, name, rank (same for everyone) */
 function seatW(p){const dad=p.dad||40;return 30+Math.min(3,sonsOf(p).length)*15+Math.max(0,p.th||0)/5+(p.danh||0)/6+dad/2+(rkOf(p)>=6?10:0)}
