@@ -12,7 +12,7 @@ const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++};
   await p.evaluate(()=>{try{showModal()}catch(e){}});await p.waitForTimeout(1200);
   return p.evaluate(()=>{const M=document.getElementById('modal');const ops=M.querySelector('.opts');const w=[...M.querySelectorAll('.kwarnl,.kwarnline,.kwarn')];
    return{warn:w.map(x=>x.textContent.trim()),warnAbove:w.length?!!(w[0].compareDocumentPosition(ops)&Node.DOCUMENT_POSITION_FOLLOWING):null,
-    opts:[...M.querySelectorAll('button[data-m]')].map(x=>({n:(x.querySelector('.kan')||x).textContent.trim().slice(0,40),odds:((x.querySelector('.kodds')||{}).textContent||'').trim()})),word:BAL.odds.cut.map(c=>word(c)).join('|')}})};
+    opts:[...M.querySelectorAll('button[data-m]')].map(x=>({n:(x.querySelector('.kan')||x).textContent.trim().slice(0,40),odds:((x.querySelector('.kodds')||{}).textContent||'').trim()})),rows:[...M.querySelectorAll('button[data-m]')].map(x=>[!!x.querySelector('.kr-ton'),!!x.querySelector('.kr-duoc')].join('/')),word:BAL.odds.cut.map(c=>word(c)).join('|')}})};
  const build=(life)=>{const nop=()=>{};const o1=kitRiskOpt({n:"Dâng khúc đàn",fx:{},x:"",j67:"tốn: không",hint:"chơi một màn đàn",go:nop},BAL.odds.cut[1],"không lọt vào bốn người đứng đầu thì thôi",false);
   const opts=[o1,{n:"Vâng lời, chờ ngày khác",fx:{},x:"",j67:"tốn: không",go:nop}];if(life)opts.push({n:"Cắt tóc đi tu",fx:{},x:"",j67:"tốn: không",hint:"thoát khỏi mọi chuyện; nhưng kiếp này dừng",go:nop});
   Q.push({t:life?"Lễ ra mắt (mẫu)":"Việc nhỏ (mẫu)",h:"<p>Mẫu.</p>",pid:"kitpg-"+(life?"life":"safe"),opts});showModal()};
@@ -23,6 +23,7 @@ const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++};
  await p.evaluate(()=>{document.querySelectorAll('*').forEach(e=>{if(e.children.length<40&&/Luân hồi xoay vần/.test(e.textContent||'')&&!e.contains(document.getElementById('modal'))&&e.offsetParent&&getComputedStyle(e).position!=='static'&&e.id!=='modal'){e.style.display='none'}})});await p.waitForTimeout(500);
  await p.screenshot({path:path.join(OUT,`after-${dn}-life.png`)});
  r=await run('safe',false);console.log(dn,JSON.stringify(r));
+ ok(r.rows.every(x=>x==='true/true'),dn+' EVERY option shows Tốn + Được rows '+r.rows);
  ok(r.warn.length===0,dn+' a choice with no life-changing option has no warning line');
  ok(r.opts.slice(1).every(o=>!o.odds),dn+' safe option: no word');
  await p.screenshot({path:path.join(OUT,`after-${dn}-safe.png`)});
