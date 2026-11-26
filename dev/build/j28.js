@@ -66,15 +66,17 @@ function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;cons
 function ocPerson(id){try{return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&String(v.id)===String(id))||null}catch(e){return null}}
 /* w tuần of cool-down for every grudge in the world; mine = also HER own grudges (S.ro) */
 function oanCool(w,mine,onlyMine){const C=BAL.oanCool;if(!C||!C.on||!S)return;w=w||1;
- if(!onlyMine)for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||typeof v!=="object"||v.alive===false)continue;const kf=persF(v,"forgive",1);
+ if(!onlyMine)for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||typeof v!=="object"||v.alive===false)continue;
+  /* co-op (review B1): the friend entry (jcoopworld buildFriend, v.coop) mirrors the OTHER player's own grudges (toCanon writes them back into her S.ro);
+     those cool once, on her own client (oanMonth → oanCool(3,true,true) / her rivalsTurn S.ro pass) — never a second time here */if(v.coop)continue;const kf=persF(v,"forgive",1);
   if(v.oan)v.oan=ocOne(v,S,"me",v.oan,w,kf);if(v.ro&&typeof v.ro==="object")for(const k in v.ro)v.ro[k]=ocOne(v,ocPerson(k),k,v.ro[k],w,kf)}
  if(mine&&S.ro)for(const k in S.ro)S.ro[k]=ocOne(S,ocPerson(k),k,S.ro[k],w,C.me);
  /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
  if(!onlyMine)for(const h of relMSAll()){const kf=persF(h,"forgive",1);if(h.oan)h.oan=ocOne(h,S,"me",h.oan,w,kf);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=ocOne(h,ocPerson(k),k,h.ro[k],w,kf)}}
 /* the weekly jealousy fade of one consort (j8 rivalsTurn): BAL.oanCool.ghen.than when she likes her, .base otherwise, + .pct of the jealousy itself (high jealousy
    cools faster: a quiet season takes about a third off, like one oán band), × her nết; fractions carry (v.gcc) */
-function ghenCool(v){const G=BAL.oanCool.ghen;const b=((+v.rel||0)>=netTh(v,"than")?G.than:G.base)+G.pct*(+v.ghen||0);
- if(!(BAL.oanCool&&BAL.oanCool.on))return b;const d=(+v.gcc||0)+b*persF(v,"forgive",1),n=Math.floor(d);v.gcc=Math.round((d-n)*1000)/1000;return n}
+function ghenCool(v){const G=BAL.oanCool.ghen;const b0=(+v.rel||0)>=netTh(v,"than")?G.than:G.base;/* rollback (BAL.oanCool.on = 0): the old flat «3 : 1» exactly */
+ if(!(BAL.oanCool&&BAL.oanCool.on))return b0;const b=b0+G.pct*(+v.ghen||0);const d=(+v.gcc||0)+b*persF(v,"forgive",1),n=Math.floor(d);v.gcc=Math.round((d-n)*1000)/1000;return n}
 /* the weekly tick: inside rivalsTurn (host only in co-op: jcoopworld mutes it on the guest, whose OWN grudges cool in her oanMonth, 3 tuần at once) */
 (function(){const r0=rivalsTurn;rivalsTurn=function(){const r=r0.apply(this,arguments);try{oanCool(1,true)}catch(e){console.error("oanCool",e)}return r}})();
 /* a new rise restarts the quiet count of that grudge */
