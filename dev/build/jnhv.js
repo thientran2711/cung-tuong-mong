@@ -94,7 +94,10 @@ function syncSpots(){try{const P=plan();KPM_DATA.spots.nhv={};P.areas.forEach(a=
 (function(){
  const pa=kpmParts;kpmParts=function(slot,k,nm){if(slot===SLOT&&on())return plan().areas.map(a=>[a.k,a.n]);return pa.apply(this,arguments)};
  const mu=kpmMulti;kpmMulti=function(slot,k){if(slot===SLOT&&on())return true;return mu.apply(this,arguments)};
- const ar=kpmArt;kpmArt=function(slot){if(slot===SLOT&&on()){syncSpots();return{src:mapSrc(),dir:"nhv",tam:!(AB().art&&AB().art.map)}}return ar.apply(this,arguments)};
+ const ar=kpmArt;kpmArt=function(slot){if(slot===SLOT&&on()){syncSpots();const u=mapSrc();let src=u;
+   /* a new mùa × buổi map painting shows once decoded; until then the map painting she saw last stays (kit rule a), then the map redraws by itself */
+   try{if(typeof DONE==="object"&&!DONE[u]&&window.__nhvLastMap&&DONE[window.__nhvLastMap]){src=window.__nhvLastMap;decode(u).then(ok=>{if(ok&&window.__kpm&&window.__kpm.slot===SLOT&&typeof tab!=="undefined"&&tab==="go")render()})}else if(typeof DONE==="object"){decode(u).then(ok=>{if(ok)window.__nhvLastMap=u})}}catch(e){}
+   return{src,dir:"nhv",tam:!(AB().art&&AB().art.map)}}return ar.apply(this,arguments)};
  const sp=kpmSplit;kpmSplit=function(k){if(k===K&&on()){const O={};plan().areas.forEach(a=>{O[a.k]={ppl:[],n:count(a),res:[]}});["chinh","dong","tay","cungnhan"].forEach(x=>{O[x]=O[x]||{ppl:[],n:0,res:[]}});return O}return sp.apply(this,arguments)};
  const ho=kpmHallOf;kpmHallOf=function(p,k){if(k===K&&on()){try{return areaKeyOfEntry("v"+p.id)||"chinh"}catch(e){}}return ho.apply(this,arguments)};
  const hn=hallName;hallName=function(base,part){if(on()&&isArea(part)){const a=areaByK(part);if(a)return a.n}return hn.apply(this,arguments)};window.hallName=hallName;
@@ -191,7 +194,10 @@ function mount(a){css();const s=st();if(!s)return false;let l=document.getElemen
  if(l&&l.parentNode===s&&CUR&&CUR.key===key){if(!CUR.D||Math.abs(CUR.D.W-s.getBoundingClientRect().width)>2||Math.abs(CUR.D.H-s.getBoundingClientRect().height)>2)layout(true);return false}
  const fresh=!l||!CUR||CUR.a.k!==a.k;if(l)l.remove();closePk(true);SEL=SELM=null;try{kitDim.off()}catch(e){}
  L=l=document.createElement("div");l.id="nhv";l.className=kv();s.appendChild(l);document.documentElement.classList.add("nhvon");
- const G=sceneGroups(a);CUR={a,G,key,D:geo()};BG=document.createElement("div");BG.className="nhv-bg";const bsrc=bgSrc(a);BG.style.backgroundImage=`url("${bsrc}")`;{const C=CUR;decode(bsrc).then(()=>{C.bgReady=true})}l.appendChild(BG);tamPut();G.forEach(g=>{g.ms.forEach(m=>mkFig(m,1));g.fol.forEach(f=>mkFig(f,0))});
+ const G=sceneGroups(a);CUR={a,G,key,D:geo()};BG=document.createElement("div");BG.className="nhv-bg";const bsrc=bgSrc(a);
+ /* the new painting shows only once decoded; until then the painting she saw last (this area at another buổi, or the garden map) stays under (kit rule a) */
+ const under=DONE[bsrc]?bsrc:(LASTBG&&DONE[LASTBG]?LASTBG:(DONE[mapSrc()]?mapSrc():null));if(under){BG.style.backgroundImage=`url("${under}")`;CUR.bgReady=true}
+ {const C=CUR,B=BG;decode(bsrc).then(ok=>{if(ok){B.style.backgroundImage=`url("${bsrc}")`;LASTBG=bsrc}C.bgReady=true})}l.appendChild(BG);tamPut();G.forEach(g=>{g.ms.forEach(m=>mkFig(m,1));g.fol.forEach(f=>mkFig(f,0))});
  l.addEventListener("click",()=>{if(SEL)unsel()});layout();
  if(fresh&&!still()){l.style.transformOrigin="50% 92%";an(l,[{transform:"scale(1.06)"},{transform:"none"}],{duration:AB().enterMs||560});G.forEach(g=>g.capEl&&an(g.capEl,[{opacity:0},{opacity:1}],{duration:260,delay:380}))}
  return true}
@@ -244,17 +250,23 @@ addEventListener("resize",()=>{clearTimeout(window.__nhvRz);window.__nhvRz=setTi
    going map → area (and area → area), the garden map painting she was looking at is held over the page area until the area scene stands with its own painting DECODED,
    so the in-between act page / the stage's loading backdrop is never seen. Dialogs of the walk (Q) show above it (the hold hides while a card is up). The 5 area paintings of
    this mùa × buổi are decoded in the background as soon as the garden map opens. */
-const DEC={};function decode(u){if(!u)return Promise.resolve(false);if(DEC[u])return DEC[u];const im=new Image();im.src=u;DEC[u]=(im.decode?im.decode():new Promise((r,j)=>{im.onload=r;im.onerror=j})).then(()=>true,()=>false);return DEC[u]}
+const DEC={},DONE={};function decode(u){if(!u)return Promise.resolve(false);if(DEC[u])return DEC[u];const im=new Image();im.src=u;DEC[u]=(im.decode?im.decode():new Promise((r,j)=>{im.onload=r;im.onerror=j})).then(()=>{DONE[u]=1;return true},()=>false);return DEC[u]}
+let LASTBG=null;/* the last painting the scene showed (decoded) */
 function preloadAreas(){try{plan().areas.forEach(a=>{const P=areaArt(a.k);if(P)decode(P.src)});decode(mapSrc())}catch(e){}}
 let HOLD=null;
 function holdOff(){if(HOLD){try{HOLD.el.remove()}catch(e){}HOLD=null}}
-function holdOn(){holdOff();try{const hud=document.querySelector("header.hud"),tb=document.getElementById("tabs");const t=hud?hud.getBoundingClientRect().bottom:0,b=tb&&tb.getClientRects().length?tb.getBoundingClientRect().top:innerHeight;
- const im=document.querySelector("#panel .nhv-map .mapimg");const src=im&&(im.currentSrc||im.src)||mapSrc();const d=document.createElement("div");d.id="nhv-hold";
+function holdOn(srcIn,readyFn){holdOff();try{const hud=document.querySelector("header.hud"),tb=document.getElementById("tabs");const t=hud?hud.getBoundingClientRect().bottom:0,b=tb&&tb.getClientRects().length?tb.getBoundingClientRect().top:innerHeight;
+ const im=document.querySelector("#panel .nhv-map .mapimg");const src=srcIn||im&&(im.currentSrc||im.src)||mapSrc();const d=document.createElement("div");d.id="nhv-hold";
  d.style.cssText=`position:fixed;left:0;right:0;top:${t}px;height:${Math.max(0,b-t)}px;z-index:900;background:url("${src}") center/cover no-repeat;pointer-events:none`;document.body.appendChild(d);HOLD={el:d,t0:Date.now()};
  let last=Date.now(),waited=0;const tick=()=>{if(!HOLD||HOLD.el!==d)return;const up=typeof Q!=="undefined"&&Q.length>0;d.style.visibility=up?"hidden":"";const now=Date.now();if(!up)waited+=now-last;last=now;/* only time without a dialog counts toward the safety limit */
-  const ready=!up&&CUR&&L&&L.isConnected&&CUR.bgReady&&CUR.D&&CUR.D.H>80&&typeof tab!=="undefined"&&tab==="act";if(ready||waited>20000){holdOff();return}requestAnimationFrame(tick)};requestAnimationFrame(tick)}catch(e){holdOff()}}
+  const ready=!up&&(readyFn?readyFn():(CUR&&L&&L.isConnected&&CUR.bgReady&&CUR.D&&CUR.D.H>80&&typeof tab!=="undefined"&&tab==="act"));if(ready||waited>20000){holdOff();return}requestAnimationFrame(tick)};requestAnimationFrame(tick)}catch(e){holdOff()}}
 (function(){const e0=kpmEnter;kpmEnter=function(slot,part){if(slot===SLOT&&on())holdOn();return e0.apply(this,arguments)};window.kpmEnter=kpmEnter;
- const pm=kitPalaceMap;kitPalaceMap=function(o){const h=pm.apply(this,arguments);if(o&&o.slot===SLOT&&on())setTimeout(preloadAreas,0);return h}})();
+ const pm=kitPalaceMap;kitPalaceMap=function(o){const h=pm.apply(this,arguments);if(o&&o.slot===SLOT&&on())setTimeout(preloadAreas,0);return h}
+ /* area → garden map: the area painting stays until the map painting of this mùa × buổi is decoded */
+ document.addEventListener("click",e=>{try{const b=e.target.closest&&e.target.closest("#tomap");if(!b||!hall()||!BG)return;const u=mapSrc();let ok=false;decode(u).then(()=>{ok=true});
+  const cur=(BG.style.backgroundImage.match(/url\(["']?([^"')]+)/)||[])[1];
+  holdOn(cur,()=>{if(!ok||typeof tab==="undefined"||tab!=="go")return false;const im=document.querySelector("#panel .nhv-map .mapimg");return !!im&&im.complete&&im.naturalWidth>0})}catch(x){}},true);
+})();
 window.NHV={plan,entries,count,areaArt,areaOfP,hall,on,mount,unmount,layout,pickGroup,stepOut,openPk,unsel,get cur(){return CUR},get kp(){return KP}};
 try{if(window.KIT_SAMPLES)KIT_SAMPLES.push({id:"§76.nhv",title:"kitPalaceMap · Ngự hoa viên",html:()=>kitPalaceMap({slot:SLOT,k:K})})}catch(e){}
 }catch(e){console.error("jnhv",e)}})();
