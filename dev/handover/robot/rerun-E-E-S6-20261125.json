@@ -13777,5 +13777,76 @@
   "row": "R6·speed·2:2881086999 (rerun on LIVE github.io, fold)",
   "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; one buổi, no resume",
   "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after the Lễ ra mắt mini-game played by real taps, github.io) — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-speed-4",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 13314017,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "bf6dd041+",
+    "b": "0281bf7bcef6",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 57,
+   "backdropTaps": 1,
+   "dlgScroll": 2,
+   "scrolls": 2,
+   "taps": 20
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 19,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "ZERO Dâng CầmRất vữngTốnSức -5Đượcchơi một màn; làm tốt",
+    "AREA 616,437",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Dâng KỳRất vữngTốnSức -5Đượcchơi một màn; làm tốt »",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Gợi ý»",
+    "#kg82 «Quay lại»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 173,
+  "status": [],
+  "t": {
+   "total": 104713
+  },
+  "unit": "E-S6",
+  "row": "R6·speed·4:13314017 (rerun on LIVE github.io, fold)",
+  "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; one buổi, no resume",
+  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after the Lễ ra mắt mini-game, real taps, github.io) — COUNTED"
  }
 ]

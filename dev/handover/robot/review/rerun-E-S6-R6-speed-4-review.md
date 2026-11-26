@@ -1,0 +1,3 @@
+# R6-speed-4 (Fold 755x1000, bot=sens, seed 13314017, pf/pt_tang) — end-of-life notes — COUNTED (20 taps)
+Ending **«Bị ban hoa, xuất cung»**, age 19, year 1, **buổi 1**, rank 2, **20 real taps**, 0 JS clicks, 0 bugs. robot-audit VALID (game-imposed; exitPick none). github.io LIVE, GAME BUILD 0281bf7bcef6, harness d2e03d80, no resume. From the result JSON (last taps) and the moment log; I did not open its shots: no score table.
+Last taps inside the Lễ ra mắt mini-game board (#kg82): «Sẵn sàng · từ lúc này mới tính giờ» → «Gợi ý» ×4 → «Quay lại»; the game closed the life at once. A speed player who asks for hints and leaves the board = a one-buổi life. Fourth buổi-1 ending of this unit (random-5, scholar-2, speed-2, speed-4): see the digest.
