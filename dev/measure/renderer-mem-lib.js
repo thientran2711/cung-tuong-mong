@@ -7,8 +7,8 @@ const fs = require('fs');
 function procs() {
   const P = {}; for (const d of fs.readdirSync('/proc')) { if (!/^\d+$/.test(d)) continue; try { const st = fs.readFileSync('/proc/' + d + '/stat', 'utf8'); const ppid = +st.slice(st.lastIndexOf(')') + 2).split(' ')[1]; P[d] = { ppid } } catch (e) { } }
   const mine = new Set([String(process.pid)]); let grew = 1; while (grew) { grew = 0; for (const [p, o] of Object.entries(P)) if (!mine.has(p) && mine.has(String(o.ppid))) { mine.add(p); grew = 1 } }
-  const out = { renderer: 0, gpu: 0, browser: 0, other: 0, rendererMax: 0, n: 0 };
-  for (const p of mine) { if (p === String(process.pid)) continue; try { const cl = fs.readFileSync('/proc/' + p + '/cmdline', 'utf8'); if (!/chrom/i.test(cl)) continue; const m = /VmRSS:\s+(\d+)/.exec(fs.readFileSync('/proc/' + p + '/status', 'utf8')); const mb = m ? +m[1] / 1024 : 0; const t = (/--type=([a-z-]+)/.exec(cl) || [])[1]; const k = !t ? 'browser' : t === 'renderer' ? 'renderer' : t === 'gpu-process' ? 'gpu' : 'other'; out[k] += mb; out.n++; if (k === 'renderer') out.rendererMax = Math.max(out.rendererMax, mb) } catch (e) { } }
+  const out = { renderer: 0, gpu: 0, browser: 0, other: 0, rendererMax: 0, rAnon: 0, rShm: 0, rPid: 0, n: 0 };
+  for (const p of mine) { if (p === String(process.pid)) continue; try { const cl = fs.readFileSync('/proc/' + p + '/cmdline', 'utf8'); if (!/chrom/i.test(cl)) continue; const stt = fs.readFileSync('/proc/' + p + '/status', 'utf8'); const m = /VmRSS:\s+(\d+)/.exec(stt); const mb = m ? +m[1] / 1024 : 0; const an = /RssAnon:\s+(\d+)/.exec(stt), sh = /RssShmem:\s+(\d+)/.exec(stt); const t = (/--type=([a-z-]+)/.exec(cl) || [])[1]; const k = !t ? 'browser' : t === 'renderer' ? 'renderer' : t === 'gpu-process' ? 'gpu' : 'other'; out[k] += mb; out.n++; if (k === 'renderer' && mb > out.rendererMax) { out.rendererMax = mb; out.rAnon = an ? +an[1] / 1024 : 0; out.rShm = sh ? +sh[1] / 1024 : 0; out.rPid = +p } } catch (e) { } }
   for (const k of Object.keys(out)) out[k] = Math.round(out[k]); return out
 }
 /* init script (every frame): WeakRef registry of every <img> whose src is set from JS (new Image(), img.src=…, setAttribute) */
@@ -41,10 +41,19 @@ const SCAN = () => {
 
 /* robot hook: init(ctx) before the first page load; sample(page, R) once per buổi (fire and forget; never throws into the robot) */
 let OUTF = null, PK = 0, PKT = null, BUSY = false;
-async function init(ctx) { OUTF = process.env.RT_MEM; if (!OUTF) return; await ctx.addInitScript(REG); PKT = setInterval(() => { try { const r = procs().rendererMax; if (r > PK) PK = r } catch (e) { } }, 1000); PKT.unref && PKT.unref() }
-async function sample(page, R) { if (!OUTF || BUSY) return; BUSY = true; try { const rs = procs(); const fr = page.frames().find(f => f !== page.mainFrame() && (f.name() === 'krotf' || /[?&]krot=1/.test(f.url()))) || page.mainFrame();
+async function init(ctx) { OUTF = process.env.RT_MEM; if (!OUTF) return; await ctx.addInitScript(REG); PKT = setInterval(() => { try { const r = procs().rendererMax; if (r > PK) PK = r } catch (e) { } }, 1000); PKT.unref && PKT.unref();
+  /* every RT_MIN s (default 60): one row by the clock (a screen loop with no buổi change still shows), RSS read from /proc like ps */
+  const MIN = +(process.env.RT_MIN || 60) * 1000, t0 = Date.now(); MINT = setInterval(() => { try { const r = procs(); fs.appendFileSync(OUTF.replace(/\.jsonl$/, '') + '.min.jsonl', JSON.stringify({ t: Math.round((Date.now() - t0) / 1000), buoi: LASTB, scr: LASTSCR, rss: r }) + '\n') } catch (e) { } }, MIN); MINT.unref && MINT.unref() }
+let MINT = null, LASTB = 0, LASTSCR = '';
+/* RT_COLD=1 (test-only probe setup, F10 lãnh cung loop): at the first buổi row the life is sent to lãnh cung through the game's own cold() */
+let COLDDONE = false;
+async function coldHook(page) { if (!process.env.RT_COLD || COLDDONE) return; COLDDONE = true; try { if (page.frames) page = page.frames().find(f => f !== page.mainFrame() && (f.name() === 'krotf' || /[?&]krot=1/.test(f.url()))) || page.mainFrame(); await page.evaluate(() => { try { cold('Bị vu cáo (thử bộ nhớ)'); if (typeof deal === 'function') deal(); render() } catch (e) { return String(e) } }) } catch (e) { } }
+async function sample(page, R) { if (!OUTF || BUSY) return; LASTB = R.buoi; if (!WD) watch(page);
+  /* RT_LIGHT=1: nothing runs in the page (no SCAN, no tracing dump — both add renderer memory themselves); /proc RSS row + the cold hook only */
+  if (process.env.RT_LIGHT) { BUSY = true; try { if (process.env.RT_COLD && R.buoi >= +process.env.RT_COLD) await coldHook(page); fs.appendFileSync(OUTF, JSON.stringify({ buoi: R.buoi, at: new Date().toISOString(), peak: PK, rss: procs() }) + '\n'); PK = 0 } catch (e) { } BUSY = false; return }
+  BUSY = true; try { const rs = procs(); const fr = page.frames().find(f => f !== page.mainFrame() && (f.name() === 'krotf' || /[?&]krot=1/.test(f.url()))) || page.mainFrame();
   const sc = await Promise.race([fr.evaluate(SCAN), new Promise(r => setTimeout(() => r({ err: 'timeout' }), 15000))]).catch(e => ({ err: String(e).slice(0, 80) }));
-  const row = { buoi: R.buoi, at: new Date().toISOString(), peak: PK, rss: rs, ...sc };
+  const row = { buoi: R.buoi, at: new Date().toISOString(), peak: PK, rss: rs, ...sc }; LASTB = R.buoi; LASTSCR = sc.screen || ''; if (R.buoi >= +(process.env.RT_COLD || 0) && process.env.RT_COLD) await coldHook(fr);
   if (R.buoi % 10 === 0) { try { const s = await page.context().newCDPSession(page); const md = await module.exports.memdump({ newBrowserCDPSession: async () => s }); const Rp = Object.values(md.P).filter(o => /Renderer/.test(o.name || '')).sort((x, y) => (y.alloc.malloc || 0) - (x.alloc.malloc || 0))[0]; if (Rp) row.alloc = Object.fromEntries(Object.entries(Rp.alloc).filter(([k]) => k.split('/').length <= 2 || /^(partition_alloc\/partitions|malloc\/partitions)\//.test(k))); row.objs = Rp.objs } catch (e) { row.allocErr = String(e).slice(0, 80) }
     try { const seen = await fr.evaluate(SEEN); fs.writeFileSync(OUTF.replace(/\.jsonl$/, '') + '.seen.json', JSON.stringify({ buoi: R.buoi, seen })) } catch (e) { } }
   fs.appendFileSync(OUTF, JSON.stringify(row) + '\n'); PK = 0 } catch (e) { } BUSY = false }
@@ -62,3 +71,16 @@ async function memdump(browser) { const s = await browser.newBrowserCDPSession()
     for (const [k, v] of Object.entries(d.allocators || {})) { const sz = v.attrs && v.attrs.size; if (!sz) continue; const mb = parseInt(sz.value, 16) / 1048576; const depth = k.split('/').length; if (/^blink_objects\/[^/]+$/.test(k) && v.attrs.object_count) (o.objs = o.objs || {})[k.slice(14)] = parseInt(v.attrs.object_count.value, 16); if (/^(cc\/image_memory|discardable)\//.test(k)) { (o.img = o.img || []).push([k, Math.round(mb * 100) / 100, Object.fromEntries(Object.entries(v.attrs).filter(([a]) => a !== 'size').map(([a, x]) => [a, x.value]))]) } if (depth <= 2 || /^(cc|skia|gpu|web_cache|partition_alloc\/partitions|malloc\/partitions|v8\/main)\//.test(k) && depth <= 3) o.alloc[k] = Math.round(mb * 10) / 10 } }
   await s.detach().catch(() => { }); return { ok, P } }
 module.exports.memdump = memdump;
+/* HANG WATCHDOG (F10: the OOM-killed lives sat on one screen while the renderer grew ~280 MB/min and the robot stopped answering = the page's
+   main thread was busy). RT_MEM set → every 20 s the page must answer a no-op within 15 s; if not, V8 is paused 5× through CDP and each
+   paused call stack (function, script line:col) is written to <RT_MEM>.hang.json with the renderer RSS; above RT_HANGKILL MB (default 4000)
+   the browser is closed so the box survives. */
+let WD = null;
+async function watch(page) { if (WD || !OUTF) return; WD = { n: 0 }; let cdp = null; try { cdp = await page.context().newCDPSession(page); await cdp.send('Debugger.enable') } catch (e) { return }
+  const out = OUTF.replace(/\.jsonl$/, '') + '.hang.json', H = []; let busy = false;
+  const grab = async () => { const st = []; for (let k = 0; k < 5; k++) { const p = new Promise(r => cdp.once('Debugger.paused', r)); await cdp.send('Debugger.pause').catch(() => { }); const ev = await Promise.race([p, new Promise(r => setTimeout(() => r(null), 10000))]);
+      if (ev) st.push(ev.callFrames.slice(0, 14).map(f => (f.functionName || '(anon)') + ' @' + f.location.lineNumber + ':' + f.location.columnNumber)); await cdp.send('Debugger.resume').catch(() => { }); await new Promise(r => setTimeout(r, 1500)) } return st };
+  const iv = setInterval(async () => { if (busy) return; busy = true; try { const ok = await Promise.race([page.evaluate(() => 1).then(() => true, () => true), new Promise(r => setTimeout(() => r(false), 15000))]);
+      if (!ok) { const r0 = procs(); const st = await grab(); H.push({ at: new Date().toISOString(), buoi: LASTB, rss: r0.rendererMax, anon: Math.round(r0.rAnon), stacks: st }); fs.writeFileSync(out, JSON.stringify(H, null, 1));
+        if (r0.rendererMax > +(process.env.RT_HANGKILL || 4000)) { fs.appendFileSync(out + '.txt', 'KILL at ' + r0.rendererMax + ' MB\n'); try { await page.context().browser().close() } catch (e) { } process.exit(3) } } } catch (e) { } busy = false }, 20000); iv.unref && iv.unref() }
+module.exports.watch = watch;
