@@ -26199,6 +26199,3242 @@
    "t": {
     "total": 705655
    }
+  },
+  {
+   "job": {
+    "id": "R2-greedy-2",
+    "origin": "thd",
+    "road": "thd_hoc",
+    "bot": "bold",
+    "seed": 3865781736,
+    "dev": "ipad",
+    "url": "https://thientran2711.github.io/cung-tuong-mong/"
+   },
+   "harness": {
+    "kind": "realtap",
+    "sha": "496b6b66",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "areaTaps": 124,
+    "dlgScroll": 26,
+    "scrolls": 50,
+    "infoTaps": 130,
+    "dlgClose": 136,
+    "kfocVisits": 21,
+    "nextNoTurn": 18,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-26T01:54:39.268Z",
+      "buoi": 186,
+      "from": "2026-11-26T01:54:22.992Z"
+     }
+    ],
+    "taps": 615
+   },
+   "life": {
+    "id": "Nữ phu tử",
+    "type": "death",
+    "fate": "Nữ phu tử",
+    "death": true,
+    "age": 20,
+    "year": 3,
+    "rank": 0,
+    "text": "Nàng không lấy chồng. Lớp học của nàng ở ngõ Tây có ba mươi đứa con gái nhà nghèo. (Tiểu thư ngoài cung · Tiểu thư nhà thầy đồ)",
+    "card": [
+     "Gả cho đại thương Giang Nam Rất vững TỐN không ĐƯỢC xuất giá",
+     "Xin ở vậy, mở lớp dạy chữ cho con gái Rất vững TỐN không ĐƯỢ",
+     "Cắt tóc đi tu Rất vững TỐN không ĐƯỢC xuất gia, kiếp này dừn"
+    ],
+    "duringArea": false,
+    "lastTaps": [
+     "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»",
+     "page «Khuê phòng · Ở đây có 1 người.» «Trình thị»",
+     ".kfoc «Mưu kế 1/1»",
+     ".kfoc «Mưu kế 1/1»",
+     ".kfoc «Mưu kế 1/1»",
+     ".kfoc «Lui»",
+     "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»",
+     ".kmov «Vào điện»",
+     ".dlg «Phúc tuyển» «Để tài nghệ quyết địnhRất vữngTốnSức -10Đượclấy ph»",
+     ".kpod «Tiếp»",
+     ".dlg «Điện tuyển» «Đối đáp lanh lợiRất vữngTốnkhôngĐượcTài nặng hơn; »",
+     ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiRất vữngTốnkh»"
+    ]
+   },
+   "exitPick": null,
+   "bugs": [],
+   "dead": [],
+   "buoi": 283,
+   "steps": 4036,
+   "status": [],
+   "_loopAt": 1795658928482,
+   "_snapAt": 1795658903904,
+   "_started": true,
+   "_ckAt": 1795658911326,
+   "_ckB": 281,
+   "rss": [
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1319,
+     "rendererMB": 596,
+     "heapMB": 117,
+     "dom": 2846,
+     "q": 4,
+     "lsK": 4
+    },
+    {
+     "buoi": 6,
+     "y": 1,
+     "totalMB": 2024,
+     "rendererMB": 1157,
+     "heapMB": 117,
+     "dom": 939,
+     "q": 0,
+     "lsK": 163
+    },
+    {
+     "buoi": 11,
+     "y": 1,
+     "totalMB": 2143,
+     "rendererMB": 1253,
+     "heapMB": 117,
+     "dom": 980,
+     "q": 0,
+     "lsK": 205
+    },
+    {
+     "buoi": 16,
+     "y": 1,
+     "totalMB": 2220,
+     "rendererMB": 1342,
+     "heapMB": 117,
+     "dom": 866,
+     "q": 0,
+     "lsK": 266
+    },
+    {
+     "buoi": 21,
+     "y": 1,
+     "totalMB": 2335,
+     "rendererMB": 1413,
+     "heapMB": 117,
+     "dom": 1263,
+     "q": 1,
+     "lsK": 294
+    },
+    {
+     "buoi": 26,
+     "y": 1,
+     "totalMB": 2315,
+     "rendererMB": 1403,
+     "heapMB": 117,
+     "dom": 933,
+     "q": 2,
+     "lsK": 317
+    },
+    {
+     "buoi": 31,
+     "y": 1,
+     "totalMB": 2319,
+     "rendererMB": 1416,
+     "heapMB": 117,
+     "dom": 1018,
+     "q": 0,
+     "lsK": 322
+    },
+    {
+     "buoi": 36,
+     "y": 1,
+     "totalMB": 2331,
+     "rendererMB": 1426,
+     "heapMB": 117,
+     "dom": 945,
+     "q": 0,
+     "lsK": 329
+    },
+    {
+     "buoi": 41,
+     "y": 1,
+     "totalMB": 2377,
+     "rendererMB": 1450,
+     "heapMB": 117,
+     "dom": 1467,
+     "q": 0,
+     "lsK": 344
+    },
+    {
+     "buoi": 46,
+     "y": 1,
+     "totalMB": 2330,
+     "rendererMB": 1421,
+     "heapMB": 117,
+     "dom": 991,
+     "q": 1,
+     "lsK": 333
+    },
+    {
+     "buoi": 51,
+     "y": 1,
+     "totalMB": 2322,
+     "rendererMB": 1412,
+     "heapMB": 117,
+     "dom": 965,
+     "q": 0,
+     "lsK": 368
+    },
+    {
+     "buoi": 56,
+     "y": 1,
+     "totalMB": 2367,
+     "rendererMB": 1450,
+     "heapMB": 117,
+     "dom": 948,
+     "q": 1,
+     "lsK": 387
+    },
+    {
+     "buoi": 61,
+     "y": 1,
+     "totalMB": 2406,
+     "rendererMB": 1467,
+     "heapMB": 117,
+     "dom": 2397,
+     "q": 0,
+     "lsK": 401
+    },
+    {
+     "buoi": 66,
+     "y": 1,
+     "totalMB": 2350,
+     "rendererMB": 1469,
+     "heapMB": 117,
+     "dom": 899,
+     "q": 0,
+     "lsK": 388
+    },
+    {
+     "buoi": 71,
+     "y": 1,
+     "totalMB": 2352,
+     "rendererMB": 1454,
+     "heapMB": 117,
+     "dom": 854,
+     "q": 0,
+     "lsK": 404
+    },
+    {
+     "buoi": 76,
+     "y": 1,
+     "totalMB": 2336,
+     "rendererMB": 1446,
+     "heapMB": 117,
+     "dom": 853,
+     "q": 0,
+     "lsK": 451
+    },
+    {
+     "buoi": 81,
+     "y": 1,
+     "totalMB": 2383,
+     "rendererMB": 1477,
+     "heapMB": 117,
+     "dom": 1178,
+     "q": 1,
+     "lsK": 446
+    },
+    {
+     "buoi": 86,
+     "y": 1,
+     "totalMB": 2382,
+     "rendererMB": 1476,
+     "heapMB": 117,
+     "dom": 864,
+     "q": 0,
+     "lsK": 442
+    },
+    {
+     "buoi": 91,
+     "y": 1,
+     "totalMB": 2387,
+     "rendererMB": 1491,
+     "heapMB": 117,
+     "dom": 891,
+     "q": 0,
+     "lsK": 461
+    },
+    {
+     "buoi": 96,
+     "y": 1,
+     "totalMB": 2385,
+     "rendererMB": 1476,
+     "heapMB": 117,
+     "dom": 898,
+     "q": 0,
+     "lsK": 462
+    },
+    {
+     "buoi": 101,
+     "y": 1,
+     "totalMB": 2457,
+     "rendererMB": 1522,
+     "heapMB": 117,
+     "dom": 1359,
+     "q": 0,
+     "lsK": 478
+    },
+    {
+     "buoi": 106,
+     "y": 1,
+     "totalMB": 2421,
+     "rendererMB": 1510,
+     "heapMB": 117,
+     "dom": 916,
+     "q": 0,
+     "lsK": 468
+    },
+    {
+     "buoi": 111,
+     "y": 1,
+     "totalMB": 2440,
+     "rendererMB": 1527,
+     "heapMB": 117,
+     "dom": 943,
+     "q": 0,
+     "lsK": 482
+    },
+    {
+     "buoi": 116,
+     "y": 1,
+     "totalMB": 2445,
+     "rendererMB": 1529,
+     "heapMB": 117,
+     "dom": 973,
+     "q": 0,
+     "lsK": 491
+    },
+    {
+     "buoi": 121,
+     "y": 2,
+     "totalMB": 2541,
+     "rendererMB": 1606,
+     "heapMB": 117,
+     "dom": 1367,
+     "q": 0,
+     "lsK": 496
+    },
+    {
+     "buoi": 126,
+     "y": 2,
+     "totalMB": 2485,
+     "rendererMB": 1581,
+     "heapMB": 117,
+     "dom": 907,
+     "q": 1,
+     "lsK": 489
+    },
+    {
+     "buoi": 131,
+     "y": 2,
+     "totalMB": 2457,
+     "rendererMB": 1557,
+     "heapMB": 117,
+     "dom": 992,
+     "q": 0,
+     "lsK": 515
+    },
+    {
+     "buoi": 136,
+     "y": 2,
+     "totalMB": 2488,
+     "rendererMB": 1589,
+     "heapMB": 117,
+     "dom": 870,
+     "q": 0,
+     "lsK": 555
+    },
+    {
+     "buoi": 141,
+     "y": 2,
+     "totalMB": 2531,
+     "rendererMB": 1612,
+     "heapMB": 133,
+     "dom": 1259,
+     "q": 0,
+     "lsK": 573
+    },
+    {
+     "buoi": 146,
+     "y": 2,
+     "totalMB": 2500,
+     "rendererMB": 1605,
+     "heapMB": 133,
+     "dom": 983,
+     "q": 2,
+     "lsK": 570
+    },
+    {
+     "buoi": 151,
+     "y": 2,
+     "totalMB": 2507,
+     "rendererMB": 1599,
+     "heapMB": 133,
+     "dom": 951,
+     "q": 0,
+     "lsK": 582
+    },
+    {
+     "buoi": 156,
+     "y": 2,
+     "totalMB": 2544,
+     "rendererMB": 1634,
+     "heapMB": 133,
+     "dom": 948,
+     "q": 0,
+     "lsK": 597
+    },
+    {
+     "buoi": 161,
+     "y": 2,
+     "totalMB": 2635,
+     "rendererMB": 1693,
+     "heapMB": 133,
+     "dom": 2926,
+     "q": 2,
+     "lsK": 593
+    },
+    {
+     "buoi": 166,
+     "y": 2,
+     "totalMB": 2633,
+     "rendererMB": 1734,
+     "heapMB": 133,
+     "dom": 895,
+     "q": 2,
+     "lsK": 614
+    },
+    {
+     "buoi": 171,
+     "y": 2,
+     "totalMB": 2641,
+     "rendererMB": 1740,
+     "heapMB": 133,
+     "dom": 965,
+     "q": 0,
+     "lsK": 618
+    },
+    {
+     "buoi": 176,
+     "y": 2,
+     "totalMB": 2627,
+     "rendererMB": 1713,
+     "heapMB": 133,
+     "dom": 881,
+     "q": 0,
+     "lsK": 632
+    },
+    {
+     "buoi": 181,
+     "y": 2,
+     "totalMB": 2709,
+     "rendererMB": 1777,
+     "heapMB": 133,
+     "dom": 1565,
+     "q": 0,
+     "lsK": 631
+    },
+    {
+     "buoi": 186,
+     "y": 2,
+     "totalMB": 2601,
+     "rendererMB": 1701,
+     "heapMB": 133,
+     "dom": 838,
+     "q": 0,
+     "lsK": 612
+    },
+    {
+     "buoi": 191,
+     "y": 2,
+     "totalMB": 1626,
+     "rendererMB": 905,
+     "heapMB": 87,
+     "dom": 910,
+     "q": 0,
+     "lsK": 609
+    },
+    {
+     "buoi": 196,
+     "y": 2,
+     "totalMB": 1676,
+     "rendererMB": 951,
+     "heapMB": 87,
+     "dom": 825,
+     "q": 0,
+     "lsK": 642
+    },
+    {
+     "buoi": 201,
+     "y": 2,
+     "totalMB": 1839,
+     "rendererMB": 1139,
+     "heapMB": 87,
+     "dom": 892,
+     "q": 1,
+     "lsK": 661
+    },
+    {
+     "buoi": 206,
+     "y": 2,
+     "totalMB": 1960,
+     "rendererMB": 1228,
+     "heapMB": 87,
+     "dom": 2170,
+     "q": 0,
+     "lsK": 664
+    },
+    {
+     "buoi": 211,
+     "y": 2,
+     "totalMB": 2008,
+     "rendererMB": 1301,
+     "heapMB": 87,
+     "dom": 935,
+     "q": 1,
+     "lsK": 678
+    },
+    {
+     "buoi": 216,
+     "y": 2,
+     "totalMB": 2041,
+     "rendererMB": 1318,
+     "heapMB": 87,
+     "dom": 2189,
+     "q": 0,
+     "lsK": 665
+    },
+    {
+     "buoi": 221,
+     "y": 2,
+     "totalMB": 2096,
+     "rendererMB": 1378,
+     "heapMB": 87,
+     "dom": 1318,
+     "q": 1,
+     "lsK": 692
+    },
+    {
+     "buoi": 226,
+     "y": 2,
+     "totalMB": 2134,
+     "rendererMB": 1394,
+     "heapMB": 87,
+     "dom": 2332,
+     "q": 0,
+     "lsK": 684
+    },
+    {
+     "buoi": 231,
+     "y": 2,
+     "totalMB": 2163,
+     "rendererMB": 1452,
+     "heapMB": 87,
+     "dom": 1058,
+     "q": 2,
+     "lsK": 708
+    },
+    {
+     "buoi": 236,
+     "y": 2,
+     "totalMB": 2182,
+     "rendererMB": 1474,
+     "heapMB": 87,
+     "dom": 859,
+     "q": 1,
+     "lsK": 714
+    },
+    {
+     "buoi": 241,
+     "y": 2,
+     "totalMB": 2242,
+     "rendererMB": 1528,
+     "heapMB": 87,
+     "dom": 910,
+     "q": 0,
+     "lsK": 727
+    },
+    {
+     "buoi": 246,
+     "y": 2,
+     "totalMB": 2296,
+     "rendererMB": 1551,
+     "heapMB": 87,
+     "dom": 2945,
+     "q": 1,
+     "lsK": 745
+    },
+    {
+     "buoi": 251,
+     "y": 2,
+     "totalMB": 2264,
+     "rendererMB": 1550,
+     "heapMB": 87,
+     "dom": 882,
+     "q": 0,
+     "lsK": 732
+    },
+    {
+     "buoi": 256,
+     "y": 2,
+     "totalMB": 2251,
+     "rendererMB": 1537,
+     "heapMB": 87,
+     "dom": 894,
+     "q": 0,
+     "lsK": 762
+    },
+    {
+     "buoi": 261,
+     "y": 2,
+     "totalMB": 2273,
+     "rendererMB": 1555,
+     "heapMB": 87,
+     "dom": 867,
+     "q": 0,
+     "lsK": 774
+    },
+    {
+     "buoi": 266,
+     "y": 3,
+     "totalMB": 2345,
+     "rendererMB": 1596,
+     "heapMB": 87,
+     "dom": 2735,
+     "q": 1,
+     "lsK": 779
+    },
+    {
+     "buoi": 271,
+     "y": 3,
+     "totalMB": 2269,
+     "rendererMB": 1553,
+     "heapMB": 87,
+     "dom": 875,
+     "q": 2,
+     "lsK": 774
+    },
+    {
+     "buoi": 276,
+     "y": 3,
+     "totalMB": 2359,
+     "rendererMB": 1641,
+     "heapMB": 87,
+     "dom": 1048,
+     "q": 1,
+     "lsK": 818
+    },
+    {
+     "buoi": 281,
+     "y": 3,
+     "totalMB": 2342,
+     "rendererMB": 1651,
+     "heapMB": 87,
+     "dom": 861,
+     "q": 0,
+     "lsK": 843
+    }
+   ],
+   "_unsFail": {
+    "#klife|": {},
+    ".dlg|Thân phận kiếp này": {},
+    ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+    "page|Khuê phòng · Không gặp ai.": {},
+    ".dlg|Thiên mệnh": {},
+    "page|Khuê phòng · Ở đây có # người.": {},
+    ".dlg|Huynh trưởng thua bạc": {},
+    ".dlg|Có người bán tin": {},
+    ".dlg|Hội thơ xuân": {},
+    ".dlg|Cha say rượu": {},
+    ".dlg|Hội ngắm mẫu đơn": {},
+    ".dlg|Đêm Thất tịch": {},
+    "page|Viện mẫu thân · Ở đây có # người.": {},
+    "page|Phòng học · Ở đây có # người.": {},
+    ".dlg|Tết Trùng dương": {},
+    ".dlg|Danh hiệu": {},
+    ".dlg|Bức thêu mừng thọ": {},
+    ".dlg|Bà mối đến nhà": {},
+    ".dlg|Tết Thượng nguyên": {},
+    ".dlg|Tin báo": {},
+    ".dlg|Nhà trai thử dung mạo": {},
+    "page|Từ đường · Không gặp ai.": {},
+    ".dlg|Cha bị hặc tội": {},
+    "#dawn|Tổng lược": {},
+    "page|Từ đường · Ở đây có # người.": {},
+    ".dlg|Mẫu thân lâm bệnh": {},
+    "page|Trà lâu · Không gặp ai.": {},
+    "page|Chung Tú cung · Minh Hòa hiên · Không gặp ai.": {},
+    ".dlg|Chiếu tuyển tú": {},
+    "page|Viện mẫu thân · Không gặp ai.": {},
+    ".dlg|Tặng quà": {},
+    ".dlg|Chương # · Chờ kỳ tuyển tú": {},
+    "page|Chính sảnh · Ở đây có # người.": {},
+    ".dlg|Thiên tượng": {},
+    ".dlg|Cha định hôn": {},
+    ".dlg|Sơ tuyển": {},
+    ".dlg|Phúc tuyển": {},
+    ".kpod|": {},
+    ".dlg|Điện tuyển": {},
+    ".dlg|Trả thẻ bài": {}
+   },
+   "_scrW": {
+    ".dlg|Thân phận kiếp này|871,392": {
+     "left": 313,
+     "n": 1
+    },
+    ".dlg|Chương # · Chờ kỳ tuyển tú|590,583": {
+     "left": 240,
+     "n": 1
+    },
+    ".dlg|Tin báo|656,364": {
+     "left": 1021,
+     "n": 1
+    },
+    ".dlg|Yến đầy tháng hoàng tử|706,600": {
+     "left": 164,
+     "n": 1
+    },
+    "#modal|Yến đầy tháng hoàng tử|706,563": {
+     "left": 205,
+     "n": 1
+    },
+    "#modal|Yến đầy tháng hoàng tử|706,548": {
+     "left": 228,
+     "n": 3
+    },
+    ".dlg|Yến đầy tháng hoàng tử|706,548": {
+     "left": 228,
+     "n": 1
+    },
+    "#modal|Yến đầy tháng hoàng tử|706,610": {
+     "left": 183,
+     "n": 3
+    },
+    ".dlg|Yến đầy tháng hoàng tử|706,610": {
+     "left": 183,
+     "n": 1
+    },
+    "#modal|Tin báo|656,364": {
+     "left": 1157,
+     "n": 1
+    },
+    "#modal|Yến đầy tháng hoàng tử|706,609": {
+     "left": 183,
+     "n": 3
+    },
+    ".dlg|Yến đầy tháng hoàng tử|706,609": {
+     "left": 183,
+     "n": 1
+    },
+    "#modal|Tặng quà|590,444": {
+     "left": 282,
+     "n": 1
+    },
+    "#modal|Thiên tượng|706,580": {
+     "left": 125,
+     "n": 3
+    },
+    ".dlg|Thiên tượng|706,580": {
+     "left": 125,
+     "n": 1
+    },
+    ".dlg|Tặng quà|590,444": {
+     "left": 264,
+     "n": 1
+    }
+   },
+   "offers": [
+    {
+     "buoi": 1,
+     "y": 1,
+     "rank": 0,
+     "screen": ".dlg «Thân phận kiếp này»",
+     "label": "Vào cung ngayTốnkhôngĐượcvào cung ngay·phong Đáp ứng·thêm kh",
+     "picked": false
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "rank": 0,
+     "screen": ".dlg «Thân phận kiếp này»",
+     "label": "Ở nhà chờ tuyển túTốnkhôngĐượchai năm học tài nghệ·nâng Tư c",
+     "picked": true
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 2,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 3,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 4,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 5,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 6,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 7,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 8,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 9,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 10,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 11,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 12,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 23 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 13,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 14,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 15,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 16,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 17,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 18,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 19,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 20,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 21,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 22,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 23,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 24,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 22 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 25,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 26,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 27,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 28,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 29,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 30,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 31,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 32,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 33,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 34,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 35,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 36,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 21 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 37,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 38,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 39,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 40,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 41,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 42,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 43,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 44,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 45,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 46,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 47,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 48,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 20 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 49,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 50,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 51,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 52,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 53,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 54,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 55,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 56,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 57,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 57,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 58,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 58,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 59,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 59,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 60,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 19 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 61,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 62,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 63,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 63,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 64,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 64,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 65,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 65,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 66,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 66,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 67,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 68,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 69,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 70,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 71,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 72,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 18 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 73,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 73,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 74,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 75,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 76,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 77,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 78,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 79,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 80,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 81,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 82,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 82,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 83,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 83,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 84,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 17 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 84,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 85,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 86,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 87,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 88,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 89,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 90,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 91,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 92,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 93,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 94,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 95,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 96,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 16 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 97,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 98,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 99,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 100,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 101,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 102,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 103,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 104,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 105,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 106,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 107,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 108,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 15 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 109,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 110,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 111,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 112,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 113,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 114,
+     "y": 1,
+     "rank": 0,
+     "screen": ".dlg «Đại hàn, tuyết lớn»",
+     "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+     "picked": true
+    },
+    {
+     "buoi": 114,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 115,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 116,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 117,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 118,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 119,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 120,
+     "y": 1,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 14 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 121,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 122,
+     "y": 2,
+     "rank": 0,
+     "screen": ".dlg «Bà mối đến nhà»",
+     "label": "Thưa: con đợi kỳ tuyển túRất vữngTốnkhôngĐượccha có thể đồng",
+     "picked": true
+    },
+    {
+     "buoi": 122,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 123,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 124,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 125,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 126,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 127,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 128,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 129,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 130,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 131,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 132,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 13 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 133,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 134,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 135,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 136,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 137,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 138,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 139,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 140,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 141,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 142,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 143,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 144,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 12 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 145,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 146,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 147,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 148,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 149,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 150,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 151,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 152,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 153,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 154,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 155,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 156,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 11 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 157,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 158,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 159,
+     "y": 2,
+     "rank": 0,
+     "screen": ".dlg «Bà mối đến nhà»",
+     "label": "Thưa: con đợi kỳ tuyển túRất vữngTốnkhôngĐượccha có thể đồng",
+     "picked": false
+    },
+    {
+     "buoi": 159,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 160,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 161,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 162,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 163,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 164,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 165,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 166,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 167,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 168,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 10 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 169,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 170,
+     "y": 2,
+     "rank": 0,
+     "screen": ".dlg «Bà mối đến nhà»",
+     "label": "Thưa: con đợi kỳ tuyển túRất vữngTốnkhôngĐượccha có thể đồng",
+     "picked": true
+    },
+    {
+     "buoi": 170,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 171,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 172,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 173,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 174,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 5 người.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 175,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Phòng học · Ở đây có 6 người.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 176,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 177,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 178,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 179,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 180,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 9 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 181,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 182,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 183,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 184,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 185,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 187,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 188,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 189,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 190,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 191,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 192,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 193,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 8 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 194,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 195,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 196,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 197,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 198,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 198,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 199,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 200,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 200,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 201,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 202,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 203,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 204,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 205,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 7 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 206,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 207,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 208,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 209,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 209,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 210,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Từ đường · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 211,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Trà lâu · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 212,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Trà lâu · Ở đây còn 1 người.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 213,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 214,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 214,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": true
+    },
+    {
+     "buoi": 215,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 215,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 216,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 217,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 6 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 218,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 219,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 220,
+     "y": 2,
+     "rank": 0,
+     "screen": ".dlg «Chiếu tuyển tú»",
+     "label": "Ghi tênRất vữngTốnkhôngĐượcnhà thôi bàn chuyện gả ta, chờ kỳ",
+     "picked": false
+    },
+    {
+     "buoi": 220,
+     "y": 2,
+     "rank": 0,
+     "screen": ".dlg «Chiếu tuyển tú»",
+     "label": "Xin tổ mẫu nói với cha cho miễn tuyểnRất vữngTốnSức -10Đượck",
+     "picked": true
+    },
+    {
+     "buoi": 220,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 220,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "lá phong rơi",
+     "picked": false
+    },
+    {
+     "buoi": 221,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 222,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 223,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 224,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 225,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 226,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 227,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 228,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Không gặp ai.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 229,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 5 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 230,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 231,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 232,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Không gặp ai.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 233,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 234,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 235,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 236,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 237,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 238,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Không gặp ai.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 239,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 240,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 241,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 4 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 242,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 243,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 244,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 245,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 246,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 247,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Không gặp ai.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 248,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 249,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 250,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Không gặp ai.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": true
+    },
+    {
+     "buoi": 251,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 252,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 253,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 3 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 254,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Viện mẫu thân · Không gặp ai.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 255,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 4 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 256,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 257,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 258,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 259,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 3 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 260,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 261,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 262,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Chính sảnh · Ở đây có 2 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 263,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 264,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 265,
+     "y": 2,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 2 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 266,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túđã qua Sơ tuyển",
+     "picked": false
+    },
+    {
+     "buoi": 267,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túđã qua Sơ tuyển",
+     "picked": false
+    },
+    {
+     "buoi": 268,
+     "y": 3,
+     "rank": 0,
+     "screen": ".dlg «Cha định hôn»",
+     "label": "Quỳ xin cha cho đi tuyển túRất vữngTốnSức -10Đượccha có thể ",
+     "picked": true
+    },
+    {
+     "buoi": 268,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 269,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 270,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 271,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 272,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 273,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 274,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 275,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 276,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 277,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túcòn 1 tháng",
+     "picked": false
+    },
+    {
+     "buoi": 278,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túđã qua Sơ tuyển",
+     "picked": false
+    },
+    {
+     "buoi": 279,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túđã qua Sơ tuyển",
+     "picked": false
+    },
+    {
+     "buoi": 280,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túđã qua Sơ tuyển",
+     "picked": true
+    },
+    {
+     "buoi": 281,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Không gặp ai.»",
+     "label": "Tuyển túđã qua Sơ tuyển",
+     "picked": false
+    },
+    {
+     "buoi": 282,
+     "y": 3,
+     "rank": 0,
+     "screen": "page «Khuê phòng · Ở đây có 1 người.»",
+     "label": "Tuyển túđang tuyển",
+     "picked": false
+    },
+    {
+     "buoi": 283,
+     "y": 3,
+     "rank": 0,
+     "screen": ".dlg «Phúc tuyển»",
+     "label": "Dâng HọaRất vữngTốnSức -10Đượctài nghệ dâng lên cộng vào Điệ",
+     "picked": false
+    },
+    {
+     "buoi": 283,
+     "y": 3,
+     "rank": 0,
+     "screen": ".dlg «Phúc tuyển»",
+     "label": "Để tài nghệ quyết địnhRất vữngTốnSức -10Đượclấy phần giữa, c",
+     "picked": true
+    }
+   ],
+   "t": {
+    "total": 849338
+   }
   }
  ]
 }
