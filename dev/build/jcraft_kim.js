@@ -40,18 +40,18 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
   const tray=shapes.map((sh,i)=>({sh,x:(side?W*.42:W*.1)+(i+.5)*((side?W*.56:W*.8)/shapes.length),y:TY}));
   P={f,a,z,T,cuts:[],tray,start:crNow(),ph:"cut",open:0,res:null};phase="play";okb.disabled=false}
  function drawPaper(cx,cy,RR,a0,span,cuts,opts){/* the red paper sector [a0, a0+span] with every cut's mirrored images (panels of angle P.a) */
-  g.save();g.beginPath();g.moveTo(cx,cy);g.arc(cx,cy,RR,a0,a0+span);g.closePath();g.fillStyle=RED;g.fill();g.clip();g.fillStyle=PAPER;
+  g.save();g.beginPath();g.moveTo(cx,cy);g.arc(cx,cy,RR,a0,a0+span);g.closePath();/* review/mg-color: the painted red paper is the TEXTURE of the sheet; the holes stay drawn */if(!crTex(g,"kim-sample",cx-RR,cy-RR,RR*2,RR*2)){g.fillStyle=RED;g.fill()}g.clip();g.fillStyle=PAPER;
   const n=Math.ceil(span/P.a-1e-6);for(let m=0;m<n;m++)for(const c of cuts){const t=m%2===0?a0+m*P.a+c.ph:a0+(m+1)*P.a-c.ph;if(t>a0+span+1e-6)continue;
    const x=cx+Math.cos(t)*c.r*RR,y=cy+Math.sin(t)*c.r*RR;g.fillStyle=opts&&opts.col?opts.col(c):PAPER;crkShape(g,c.sh,x,y,t,P.z*RR)}
   /* creases */g.strokeStyle="rgba(255,255,255,.28)";g.lineWidth=1;for(let m=1;m<n;m++){const t=a0+m*P.a;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(t)*RR,cy+Math.sin(t)*RR);g.stroke()}
   g.restore()}
  function draw(now){kg82Bg(g,W,H,"kim",.12,.6);if(!P)return;const a=P.a,hid=now-P.start>PEEK&&P.ph==="cut";
   /* the sample: the opened window-flower (or its cloth); the gold outline marks the panel that is the folded wedge */
-  crArt(g,"kim-sample",SX,SY,RS*2,RS*2,{},()=>{if(hid){g.save();g.beginPath();g.arc(SX,SY,RS,0,Math.PI*2);g.fillStyle="#c9a77a";g.fill();g.restore()}
+  /* review/mg-color: the sample and the wedge are ALWAYS drawn from the round's pattern (the painted kim-sample / kim-wedge pictures replaced them: a plain red disc with no holes, her cuts invisible); the painted paper is their texture (drawPaper) */{if(hid){g.save();g.beginPath();g.arc(SX,SY,RS,0,Math.PI*2);g.fillStyle="#c9a77a";g.fill();g.restore()}
    else{drawPaper(SX,SY,RS,wA0(a),Math.PI*2,P.T);g.save();g.strokeStyle="rgba(255,226,140,.85)";g.lineWidth=1.6;g.beginPath();g.moveTo(SX,SY);g.arc(SX,SY,RS,wA0(a),wA0(a)+a);g.closePath();g.stroke();g.restore()}
-   crTmp(g,SX-RS,SY-RS,RS*2,RS*2)});
+   if(!kg82Ok("kim-sample"))crTmp(g,SX-RS,SY-RS,RS*2,RS*2)}
   if(P.ph==="cut"){/* the folded wedge with the cuts so far (as cut paper: the holes show), the fold edges darker */
-   crArt(g,"kim-wedge",AX,AY,R*2,R*2,{},()=>{drawPaper(AX,AY,R,wA0(a),a,P.cuts);crTmp(g,AX-R,AY-R,R*2,R)});
+   {drawPaper(AX,AY,R,wA0(a),a,P.cuts);if(!kg82Ok("kim-sample"))crTmp(g,AX-R,AY-R,R*2,R)}
    g.save();g.strokeStyle="#7a1418";g.lineWidth=2.5;g.beginPath();g.moveTo(...toXY(1,0,a));g.lineTo(AX,AY);g.lineTo(...toXY(1,a,a));g.stroke();g.restore();
    if(drag&&drag.c){const c=drag.c;g.save();g.globalAlpha=.85;g.fillStyle=PAPER;const t=Math.atan2(drag.y-AY,drag.x-AX);crkShape(g,c.sh,drag.x,drag.y,t,P.z*R);g.restore()}}
   else{/* opening: the sector grows from the wedge to the full sheet; then the holes are judged */const k=Math.min(1,(now-P.open)/900);const span=a+(Math.PI*2-a)*k*k*(3-2*k);
