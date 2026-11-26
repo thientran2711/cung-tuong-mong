@@ -174,7 +174,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
      seatLoop(gc, 'guest', gDev, H).then(() => { G.done = true })]);
 diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 --- a/dev/test/robot-rt.js	2026-11-25 23:30:30.063404399 +0000
-+++ b/dev/test/robot-rt.js	2026-11-26 05:22:18.496169278 +0000
++++ b/dev/test/robot-rt.js	2026-11-26 05:52:30.010932346 +0000
 @@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
@@ -183,7 +183,11 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
  const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs.find(x => x.k === k); if (b) { b.n++; return b } const n = { k, type, msg, n: 1, at: sec(), ...extra }; R.bugs.push(n); console.log('BUG', type, msg); return n };
  
  /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
-@@ -82,7 +83,7 @@
+@@ -79,10 +80,11 @@
+     S: S0, end: !!window.__rtEnd };
+ };
+ 
++  /* patch #25 (freeze fixer): every element JSHandle the harness takes stays alive as a DevTools remote object (detached DOM held via «Global handles / DevTools console», a fake leak a real player never has) → collect them and dispose at the top of every loop turn */ const HS = []; const EH = (pg, fn, arg) => pg.evaluateHandle(fn, arg).then(h => { HS.push(h); return h }); const flushHS = () => { for (const h of HS.splice(0)) { try { h.dispose().catch(() => {}) } catch (e) {} } };
  async function play(p) {
    p.on('pageerror', e => bug('js', 'page error: ' + e.message.split('\n')[0].slice(0, 160)));
    p.on('crash', () => bug('crash', 'tab crashed'));
@@ -192,7 +196,15 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
    let lastS = null;
    /* stuck evidence: every save / slot / co-op key of localStorage + the co-op state (CW / room) + S summary → <shots>/<tag>-dump.json + -save.json */
    const dumpStuck = async tag => { try { const d = await p.evaluate(() => { const ls = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/hclh|save|slot|ctm|coop|room/i.test(k)) ls[k] = localStorage.getItem(k) }
-@@ -120,6 +121,8 @@
+@@ -110,6 +112,7 @@
+ 
+   for (;;) {
+     R.steps++;
++    flushHS();
+     let sc; try { sc = await p.evaluate(SCAN) } catch (e) { await p.waitForTimeout(1000); continue }
+     lastS = sc.S;
+     if (sc.end || sc.S && sc.S.dead && started) { break }
+@@ -120,6 +123,8 @@
        if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
      if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
      if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
@@ -201,7 +213,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
      if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
      if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
      /* not in the life yet (title / resume splash / loading) for 5 min = stuck too: bug, reload, go again (a resume re-opens its save) */
-@@ -127,25 +130,73 @@
+@@ -127,25 +132,73 @@
      /* stuck: no clock progress for STUCK_MS → bug + shot + save, unstick, SAME life continues */
      if (started && Date.now() - lastProg > STUCK_MS) { R.harness.stuck++; const shot = path.join(SHOTS, 'stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {});
        const svf = await dumpStuck('stuck-' + R.harness.stuck); const sv = !!svf; /* evidence FIRST, then the unstick ladder */
@@ -213,7 +225,8 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
        bug('stuck', 'no progress ' + Math.round(STUCK_MS / 60e3) + ' min on ' + sc.layer + ' «' + sc.title + '»', { shot, save: sv ? svf : null, S: sc.S, buttons: sc.b.map(b => b.t).slice(0, 12) });
        await unstick(p, rt, sc, 3); lastProg = Date.now(); continue }
      /* a layer with nothing to tap (loading / scene / gate): wait like a person, then tap the middle of the screen */
-     if (!sc.b.some(x => x.hit) && sc.b.length && idle === 40) { const h = await p.evaluateHandle(() => window.__rtBtns[0]); await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: sc.b[0].t.slice(0, 50) }) }
+-    if (!sc.b.some(x => x.hit) && sc.b.length && idle === 40) { const h = await p.evaluateHandle(() => window.__rtBtns[0]); await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: sc.b[0].t.slice(0, 50) }) }
++    if (!sc.b.some(x => x.hit) && sc.b.length && idle === 40) { const h = await EH(p, () => window.__rtBtns[0]); await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: sc.b[0].t.slice(0, 50) }) }
      if (!sc.b.some(x => x.hit)) { idle++; if (idle > 4) { /* scene gate / mini-game board without buttons: tap inside it like a person */ const r = sc.lr; for (let k = 0; k < 6; k++) { const x = r.x + r.w * (0.15 + 0.7 * rnd()), y = r.y + r.h * (0.2 + 0.65 * rnd()); /* never land on a button (an exit road could sit there): only bare board / scene area */ const bare = await p.evaluate(([x, y]) => { const t = document.elementFromPoint(x, y); return !!t && !t.closest('button,[role=button],a,input,select,textarea,[data-tab]') }, [x, y]).catch(() => false); if (!bare) continue; if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y); R.harness.areaTaps = (R.harness.areaTaps || 0) + 1; break } } await p.waitForTimeout(idle > 4 ? 250 : 500); continue }
      idle = 0;
 +    /* U1 segment patch (MAIN 139): ≥1 save+reload mid-year (RELOAD_AT, B patch) and once after each year rollover (this trigger): a player closes the tab and reopens the game; harness = the unstick reload path (title → Cùng hảo hữu → back into the room), the state before/after is recorded in harness.midReload */
@@ -231,9 +244,10 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 +            t('card', () => (document.getElementById('ktut').innerText || '').slice(0, 400)); try { o.ls = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); o.ls[k] = localStorage.getItem(k) } } catch (e) {} return JSON.stringify(o) }).catch(() => null);
 +          if (dm) fs.writeFileSync(path.join(SHOTS, 'ktut-' + n + '-dump.json'), dm);
 +          bug('ktut-no-target', 'tutorial open with no tappable target card; tapped its own «Đã hiểu»', { shot, S: sc.S, hole: hl ? hl.t : null, card: sc.title, buttons: sc.b.map(b => b.t).slice(0, 8) }) }
-+        const hh = ok.raw ? await p.evaluateHandle(() => window.__rtKtutOk) : await p.evaluateHandle(i => window.__rtBtns[i], ok.i); R._kn = R._kb === R.buoi ? (R._kn || 0) + 1 : 1; R._kb = R.buoi; await rt.tap(hh, { screen: '#ktut', label: ok.t.slice(0, 50) }); await p.waitForTimeout(800); continue } }
++        const hh = ok.raw ? await EH(p, () => window.__rtKtutOk) : await EH(p, i => window.__rtBtns[i], ok.i); R._kn = R._kb === R.buoi ? (R._kn || 0) + 1 : 1; R._kb = R.buoi; await rt.tap(hh, { screen: '#ktut', label: ok.t.slice(0, 50) }); await p.waitForTimeout(800); continue } }
      /* a button of the top layer, fully on screen, covered by ANOTHER layer → real tap on it → DEAD BUTTON if the cover stays */
-     for (const d of started ? sc.b.filter(x => x.deadSuspect) : []) { const ds = sc.layer + '|' + sc.title + '|' + d.t; if (deadSeen.has(ds)) continue; deadSeen.add(ds); await p.waitForTimeout(3000); const s2 = await p.evaluate(SCAN).catch(() => null); const d2 = s2 && s2.b.find(x => x.t === d.t && x.deadSuspect); if (d2) { const h = await p.evaluateHandle(i => window.__rtBtns[i], d2.i); await rt.tap(h, { screen: s2.layer + (s2.title ? ' «' + s2.title + '»' : ''), label: d.t.slice(0, 50) }) } }
+-    for (const d of started ? sc.b.filter(x => x.deadSuspect) : []) { const ds = sc.layer + '|' + sc.title + '|' + d.t; if (deadSeen.has(ds)) continue; deadSeen.add(ds); await p.waitForTimeout(3000); const s2 = await p.evaluate(SCAN).catch(() => null); const d2 = s2 && s2.b.find(x => x.t === d.t && x.deadSuspect); if (d2) { const h = await p.evaluateHandle(i => window.__rtBtns[i], d2.i); await rt.tap(h, { screen: s2.layer + (s2.title ? ' «' + s2.title + '»' : ''), label: d.t.slice(0, 50) }) } }
++    for (const d of started ? sc.b.filter(x => x.deadSuspect) : []) { const ds = sc.layer + '|' + sc.title + '|' + d.t; if (deadSeen.has(ds)) continue; deadSeen.add(ds); await p.waitForTimeout(3000); const s2 = await p.evaluate(SCAN).catch(() => null); const d2 = s2 && s2.b.find(x => x.t === d.t && x.deadSuspect); if (d2) { const h = await EH(p, i => window.__rtBtns[i], d2.i); await rt.tap(h, { screen: s2.layer + (s2.title ? ' «' + s2.title + '»' : ''), label: d.t.slice(0, 50) }) } }
 +    /* B segment rule (MAIN 139): ONE scheduled save + reload mid-year (env RELOAD_AT = buổi); the seat rejoins its room through the title like a person reopening the app */
 +    const raDue = C.coop && started && (process.env.RELOAD_AT || '').split(',').map(x => +x.trim()).filter(x => x > 0).find(x => R.buoi >= x && !(R.harness.reloads || []).includes(x)); /* RELOAD_AT = one buổi or a list «8,15»: each buổi once */
 +    if (raDue) { (R.harness.reloads = R.harness.reloads || []).push(raDue); R.harness.reloadDone = R.buoi; console.log('SCHEDULED RELOAD', LIFE, 'buổi', R.buoi); await unstick(p, rt, sc, 3); lastProg = Date.now(); continue }
@@ -264,8 +278,9 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
      if (ch.scroll) { await p.mouse.move(ch.scroll.x, ch.scroll.y); await p.mouse.wheel(0, Math.min(400, ch.scroll.left + 20)); await p.waitForTimeout(400); R.harness.scrolls = (R.harness.scrolls || 0) + 1; continue }
      if (ch.noclose) { const shot = path.join(SHOTS, 'noclose-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); bug('game', 'dialog scrolled to the end has no close / next button: ' + sc.layer + ' «' + sc.title + '»', { shot, buttons: sc.b.map(x => x.t).slice(0, 8) }); continue }
      if (ch.exit) { R.exitPick = { label: ch.t, n: ch.n, only: ch.only, at: sec(), S: sc.S }; console.log('EXIT ROAD', ch.only ? '(only option — real ending)' : '', '«' + ch.t + '»') }
-     const h = await p.evaluateHandle(i => window.__rtBtns[i], ch.i);
+-    const h = await p.evaluateHandle(i => window.__rtBtns[i], ch.i);
 -    const ok = await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: ch.t.slice(0, 50), wait: started ? 1500 : 8000, confirm: async () => { const s3 = await p.evaluate(SCAN); return s3.layer === sc.layer && s3.title === sc.title } });
++    const h = await EH(p, i => window.__rtBtns[i], ch.i);
 +    const rkA = sig + '#' + ch.t; const ok = await rt.tap(h, { avoid: chipAvoid.get(rkA), screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: ch.t.slice(0, 50), wait: started ? 1500 : 8000, confirm: async () => { const s3 = await p.evaluate(SCAN); return s3.layer === sc.layer && s3.title === sc.title } });
 +    /* U1b chip trap: the tap on a choice card opened an unrelated one-button modal (a chip / title seal inside the card, e.g. «Trăng soi rèm ngọc») → remember that point for this card, the next tap picks another point; harness.chipTrap counts, bug row names the chip modal */
 +    if (ok && started && ch.i != null && !ch.x && !CLOSE_RE.test(ch.t)) { await p.waitForTimeout(500); const s6 = await p.evaluate(SCAN).catch(() => null), xy = rt.last && rt.last(), kpOpen = await p.evaluate(() => { const k = document.getElementById('kpop'); return !!(k && !k.hidden && getComputedStyle(k).display !== 'none' && k.getBoundingClientRect().width > 2) }).catch(() => false);
@@ -278,7 +293,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
      const rk = sig + '#' + ch.t; repeat.set(rk, (repeat.get(rk) || 0) + (ok ? 1 : 5));
      /* a close (✕ / Lui) tapped for real 3× and the same dialog is still there = button with no effect → bug + shot */
      if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { await p.waitForTimeout(600); const s4 = await p.evaluate(SCAN).catch(() => null); if (s4 && s4.layer === sc.layer && s4.title === sc.title && sc.title) { const k = 'nx|' + sc.layer + '|' + sc.title; noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { const shot = path.join(SHOTS, 'noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); R.dead.push({ k: 'NO EFFECT', screen: sc.layer + ' «' + sc.title + '»', label: ch.t, cover: 'tapped 3× for real, dialog stays', shot, at: sec(), S: sc.S }); bug('dead', 'close button has no effect: ' + sc.layer + ' «' + sc.title + '» «' + ch.t + '»', { shot }) } } }
-@@ -154,7 +205,10 @@
+@@ -154,7 +207,10 @@
      await p.waitForTimeout(ok ? 220 : 400);
  
      function choose(sc, started) {
@@ -290,7 +305,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
        if (!b.length) b = hb;
        const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
        /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
-@@ -169,7 +223,7 @@
+@@ -169,7 +225,7 @@
        const hole = b.find(x => x.hole && !EXIT_RE.test(x.t)); if (hole) return hole; /* tutorial: tap what it points at */
        const nav = x => NAV_RE.test(x.t);
        const close = x => x.x || CLOSE_RE.test(x.t);
@@ -299,7 +314,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
        const nonExit = opts.filter(x => !isExit(x));
        const exits = opts.filter(isExit);
        const isPage = sc.layer === 'page' || sc.b.some(x => x.id === 'next');
-@@ -202,24 +256,31 @@
+@@ -202,24 +258,31 @@
    /* life over → read the ending (the game's own over() args) */
    const end = await p.evaluate(() => window.__rtEnd || null).catch(() => null);
    if (end) { const death = !end.alive; R.life = { id: end.id, type: death ? 'death' : 'end', fate: end.fate, death, age: end.age, year: end.year, rank: end.rank, text: end.text } }
@@ -317,7 +332,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 +/* patch #19 (U3c 9QRN / 3FH8): the light unstick ✕ (lvl 1-2) can LEAVE the co-op room (host lands on bare #title, guest «hảo hữu đang vắng»). Never tap a leave/exit-type ✕ in co-op, and if the seat is on #title after any unstick tap, rejoin like a player: Cùng hảo hữu → Trở lại phòng. Same ladder the lvl-3 reload uses. */
 +const UNSTICK_LEAVE_RE = /rời phòng|thoát phòng|rời khỏi|về sảnh|về trang đầu|trở về trang|đóng phòng|giải tán|bỏ phòng|thoát/i;
 +async function rejoinFromTitle(p, rt) {
-+  for (const re of (C.coop ? [/cùng hảo hữu/i, /trở lại phòng|vào lại phòng|về phòng/i] : [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i])) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); const i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
++  for (const re of (C.coop ? [/cùng hảo hữu/i, /trở lại phòng|vào lại phòng|về phòng/i] : [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i])) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); const i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; if (i >= 0) { const h = await EH(p, i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
 +}
 +async function onTitle(p) { return p.evaluate(() => { const e = document.querySelector('#title'); return !!(e && e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden') }).catch(() => false) }
  /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
@@ -326,7 +341,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 -  await p.keyboard.press('Escape').catch(() => {}); await p.waitForTimeout(500);
 -  if (lvl >= 2) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
 +  await p.waitForTimeout(500); /* U3 no-Esc patch: a keyboard key is not a real tap (owner rule); close with a hit-checked tap on ✕/Lui only */
-+  if (lvl >= 1 && C.coop && /coopfz/.test(String(sc.layer || ''))) { /* patch #20 (U3c 3FH8 + 9QRN, U1d): the ✕ of the #coopfz overlay («Đợi hảo hữu trở lại») LEAVES the co-op room (host → bare #title, then 15 min stuck). A player waits for the partner; the light unstick never taps it. */ R.harness.unstick[R.harness.unstick.length - 1].skipped = 'coopfz ✕ = leave room'; R.harness.unstickSkipCoopfz = (R.harness.unstickSkipCoopfz || 0) + 1 } else if (lvl >= 1) { const i = sc.b.findIndex(b => (b.x || CLOSE_RE.test(b.t)) && !(C.coop && UNSTICK_LEAVE_RE.test(b.t))); if (i >= 0) { const U = R.harness.unstick[R.harness.unstick.length - 1]; U.tapped = String(sc.b[i].t || '').slice(0, 40); await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }); if (C.coop && lvl < 3) { await p.waitForTimeout(1500); if (await onTitle(p)) { U.leftRoom = true; R.harness.unstickLeft = (R.harness.unstickLeft || 0) + 1; console.log('UNSTICK LEFT ROOM → rejoin', LIFE, 'tapped «' + U.tapped + '»'); await rejoinFromTitle(p, rt) } } } }
++  if (lvl >= 1 && C.coop && /coopfz/.test(String(sc.layer || ''))) { /* patch #20 (U3c 3FH8 + 9QRN, U1d): the ✕ of the #coopfz overlay («Đợi hảo hữu trở lại») LEAVES the co-op room (host → bare #title, then 15 min stuck). A player waits for the partner; the light unstick never taps it. */ R.harness.unstick[R.harness.unstick.length - 1].skipped = 'coopfz ✕ = leave room'; R.harness.unstickSkipCoopfz = (R.harness.unstickSkipCoopfz || 0) + 1 } else if (lvl >= 1) { const i = sc.b.findIndex(b => (b.x || CLOSE_RE.test(b.t)) && !(C.coop && UNSTICK_LEAVE_RE.test(b.t))); if (i >= 0) { const U = R.harness.unstick[R.harness.unstick.length - 1]; U.tapped = String(sc.b[i].t || '').slice(0, 40); await p.evaluate(SCAN).catch(() => {}); const h = await EH(p, i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }); if (C.coop && lvl < 3) { await p.waitForTimeout(1500); if (await onTitle(p)) { U.leftRoom = true; R.harness.unstickLeft = (R.harness.unstickLeft || 0) + 1; console.log('UNSTICK LEFT ROOM → rejoin', LIFE, 'tapped «' + U.tapped + '»'); await rejoinFromTitle(p, rt) } } } }
    if (lvl >= 3) {
      await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
      await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
