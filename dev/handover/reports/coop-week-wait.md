@@ -31,3 +31,16 @@ Case 10 judgement: NOT the jdayq union (8e654ee0 alone shows it with the same tr
 VIDEOS (full runs, both seats, outside git, CDN): https://ctm-img.victoria-tntt.workers.dev/img/_review/coop-lands/coop-week-wait-land-04a45597-fold.mp4 + …-ipad.mp4 (11 min each, the 24-buổi LONG run). Shots b05 / after-night / b24 both devices looked 3× (normal play, same date on both seats, no stuck screen).
 Laws: 11 one carry rule + one presence rule ✓ · 1 two-way (both seatings) ✓ · 4 no number added ✓ · 7/9/10 no UI / wording change ✓ · 12 Fold + iPad ✓.
 **VERDICT (3): PASS → LAND READY review/coop-week-wait-land 04a45597.**
+
+### (1) review/coop-presence-reload-land 8d5fa1fd — gates (gate child session_01N1tNP5CiXHNHTUwkUFxdjW)
+| gate | (1) 8d5fa1fd | bare LIVE 5e013076 |
+|---|---|---|
+| Worker npm test | 71 ok (presence ALL OK) | 56 ok (no presence suite) |
+| keymove | 12/12 | – |
+| coop-e2e SWAP0 / SWAP1 | 143/143 · 143/143 | – |
+| coop-night | 71/98 · 63/98 | 70/98 · 70/98 — same cases 4–14 (coop-night-live, pre-existing, flaky) |
+| presence Fold / iPad host | 35/35 · 35/35 | (rv: R7/R8 FAIL) |
+| dayq-hold-coop / sangbuoi-held / dayq-ghost | 17/17 · 16/16 · PASS | – |
+| quickcheck ALONE | only G4 «Ô lưu · Lui» | identical G4 line |
+| video 8-buổi 2-seat + both-seat reloads | 11/11, 0 stuck | – |
+**VERDICT (1): PASS → LAND READY review/coop-presence-reload-land 8d5fa1fd** (Worker deploy). Video …/coop-presence-reload-land-8d5fa1fd-{fold,ipad}.mp4.
