@@ -2021,3 +2021,47 @@ Worker: B #22 EXPRESS (opus) session_01N1tNP6VU7S24E2m8sfegeD, depth 1, START_CT
 Not run (express, named): all 44 roads re-play (r1 played 44/44 on 4d9f748c; the merge touched only assemble.py order + rebuild, so 2 real roads + fixture re-smoked).
 ### Verdict
 **SSK review/thin-p8-r2 0348e07a66c8ca97e42dd804bc50ff7dfd43007d** — P4/P6 already LIVE; P8 ready to land on LIVE 5e013076 (fast-forward from main). Known pre-existing G4 «Ô lưu → Lui» stays until fix-7 lands.
+
+## REVIEW thin-p8 r2 (EXPRESS BIG, opus; session_01N1tNP3yP4QQnSWk3tnY93B; depth 1; START_CTX ≈3 %) — PASS (3 reviewer fix commits)
+PRIORITY #1 CHECK ('thin-p8'): OD 0 | ledger 0 | claims 8 | main 0 (5e013076 has no jroadc) | review/* 3 (thin-p8, thin-p8-r1 c69d6ec9, thin-p8-r2 0348e07a) | archive 0 — reviewed 0348e07a as given; fixes on review/thin-p8-r2-rv.
+Branch **review/thin-p8-r2-rv @e21050b245f0159d4d4ae4350a77582932cd1cc5** = 0348e07a + 3 reviewer commits (3023c6e9, 38f990be, e21050b2); fast-forward of LIVE origin/main 5e013076 (unchanged at verdict).
+
+### Merge check vs LIVE
+`git diff origin/main..0348e07a`: 18 files, only P8 (jroadc.js, jrdcsd.js, jrdcsd_build.py, jbalroad.js +BAL.road.c, j67.js castRv67 !v.coop + halve skip a.rdc, assemble.py +jrdcsd/jroadc after jrd_cnv on LIVE's list incl. jdayq.js, rdseeds_a..d, rdc tests, validator) + index/sw/assets. index.html removed lines = only the old build line + the 2 j67 lines → nothing LIVE lost. Rebuild of 0348e07a reproduces index (game build f2f77be6d35e; only CTM_BI differs).
+
+### Faults found and fixed (whole families, law 11)
+| # | Law | Fault | Fix |
+|---|---|---|---|
+| 1 | 6b / 3 (r1 fault #3 family, roll side) | 77 climax options rolled their odds on Thái hậu (th) / Hoàng hậu (hh) liking when she is not in the option or scene (e.g. rc-tt-x01 «Mời môn sinh thân tín của cha» on th; rc-cnv-x01..x14 «Nhờ ma ma …» on th), 9 «Nhờ Thái hậu …» rolled on hh, 4 the reverse | 9 hh→th, 4 th→hh where she acts; 64 → the stat the act uses (danh/duc/sung/tamco/mat; xs scale equal, ≥3 stats kept); validator rejects the family (83 errors on old rows → 0) — 3023c6e9 |
+| 2 | 6b (gain side) | 9 options about Thái hậu GAINED Hoàng hậu's liking or the reverse (shot: «Dùng lời khóc trước Thái hậu» showed «Hoàng hậu hài lòng»): rc-thd-x01/x04/x06×2/x07, ch_tuyentu×2, rc-ch-x11/x12; rc-tt-c06 rt now shows the hh gain | key swapped; losses of the other one kept where the scene names her (a snub: rc-dtq-c08, rc-ch-t04); validator rule (gain side) — 38f990be |
+| 3 | 6b / wording | «bà» for Hoàng thượng: rc-nc-x03 «Xin bà dạy lại ngươi», «đợi bà nói tiếp», mid tag «Bà chưa kết luận»; rc-nc-x12 rf «bà thấy ngươi vụng» (whole «bà» scan of texts + endings: only these) | «ngài» — 3023c6e9, e21050b2 |
+Fixed rdseeds_a..d copied to this handover branch (8a650ce4). Laws 2/3 unchanged: every option still 2 gain + 2 loss steps.
+
+### Law checks
+- Law 2/3: 671 decisions / 2684 options scanned: all 4 options, Σgain = Σloss = BAL.road.c.st (2), no key both gained and lost; sample of 22 decisions read (12 premise hồi + 10 open/comp/turn/clim, 11 origins): options of equal value, different stat mixes, none clearly better, none cost-only.
+- Law 4: one-core-guard (no --allow-grow) fails 0, one-core-text PASS; numbers = steps × BAL.road.c (rdc-play checks every played option).
+- Law 6b: no named person typed — people via placeholders ({v} {v2} {dad} {maid} {hh} {eun} {foe} {emp} {pv} {mh} {pa} {mis} {man}, all resolved, rdc-play «no {placeholder} left»); capitalised names = places/halls/rites only (Đức Thọ, Hồng Lư tự, Hỏa Tiên từ, lễ Nô Nhụ, làng Lưu Gia…); faults 1–3 above.
+- Law 7: 10,890 player texts: 0 «%», digits only inside placeholders; odds words on cards (Hiểm / Khó lường / Tùy duyên / Có cơ / Rất vững).
+- Reachable from new game (tool /home/user/wt/rvp8tools/reach.js, not in git): 11 origins × 10 fresh lives (empty ctm-arcs): each origin's 4 new premises in the road pool (4/4, pool 8) and new premises rolled as the life's road in every origin; 0 page errors → REACH PASS.
+
+### Gates on final e21050b245f0159d4d4ae4350a77582932cd1cc5 (pasted)
+| Gate | Result |
+|---|---|
+| `node dev/test/one-core-guard.js` | `{"modules":447,...,"fails":0}` / PASS |
+| `node dev/test/one-core-text.js` | PASS |
+| `python3 dev/test/rdseeds_validate.py` / `--min rdseeds_{a,b,c,d}.md` | `RDSEEDS: 627 rows, 0 errors, 0 warnings` ×2 |
+| `node dev/test/undef-scan.js` | PASS (310 names) |
+| `RDC_STOP12=1 node dev/test/rdc-play.js` (fixture, no args) | tt_fixa L1/L2, tt_fixb L1/L2 ch4..11; `RDC PLAY: ALL PASS (59)` |
+| `RDC_STOP12=1 node dev/test/rdc-play.js all.md 1 tt_ruong,pf_co,thd_dich,ch_tuyentu` | 4 roads ch4..11 (fin Phủ bị Ngự sử đài tra / Y ở lại kinh thành / Làng được cứu khỏi dịch / Danh sách bị trả lại); `RDC PLAY: ALL PASS (59)` (nc_kinh also PASS on 3023c6e9) |
+| `node dev/test/rdc-oldsave.js live.html` (LIVE 5e013076) | 3 LIVE saves keep old road + plan, play a buổi, 0 page errors; `RDC OLDSAVE: ALL PASS` |
+| `bash dev/tools/quickcheck.sh` ALONE | `QUICKCHECK PASS · 223 s · open 2038 ms · old save ok · perf new/live render 241/232, tab 494/519, buổi 3749/2934 (noise: previous run 1734/3521), tasks>200ms 28/23`; core gates: only G4 `FAIL fold · Ô lưu · Lui · close button did not close its layer` = known pre-existing LIVE fault (fix-7 r3) |
+| `node dev/test/coop-e2e.js` / `COOP_SWAP=1` | `143/143 passed` / `143/143 passed` |
+| mrfoot-scan | stale 1 = dev/test/kit-nested-exit.js, unchanged vs LIVE (pre-existing, not P8) |
+| Play + shots Fold 755x1000 + iPad 1180x820 (`RDC_ORIGIN=thd/nc node dev/test/rdc-shots.js`: thd_dich_8:x, thd_dich_9:x, nc_kinh_6:s, nc_kinh_7:x) | errors 0; LOOKED 3×: kit k3 dialog, kit option rows TỐN/ĐƯỢC, odds bar + words, title plate, one «Kéo xuống»; fixed texts visible («Xin ngài dạy thêm», «Thái hậu hài lòng»). Shots outside git (/home/user/wt/rvp8shots, wiped). |
+
+### Notes (pre-existing, not P8, not fixed)
+- Kit: ĐƯỢC line can print «hên xui; hên xui» twice (KIT_ODDS_TXT + climax), r1 noted. Fold: a long speaker name in the left plate («Trình Vân Thường») touches the plate edge (kit name plate).
+- API P8 example row (reports/thin.md «## API P8», «Tâu tên người của cha» stat th) taught writers th for non-Thái-hậu acts — validator now blocks it.
+
+### Verdict
+**PASS → LAND READY review/thin-p8-r2-rv e21050b245f0159d4d4ae4350a77582932cd1cc5** (FF on LIVE 5e013076).
