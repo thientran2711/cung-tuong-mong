@@ -39,17 +39,26 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
   /* a player tapping through whatever is on screen (morning panel, scene, card) — real taps */
   const tapAny=async()=>{const sel=await p.evaluate(()=>{const hid=el=>Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').get.call(el);const mark=e=>{document.querySelectorAll('[data-tt]').forEach(x=>x.removeAttribute('data-tt'));e.setAttribute('data-tt','1');return '[data-tt="1"]'};
     const dw=document.getElementById('dawn');if(dw&&!hid(dw)&&dw.classList.contains('on')){const bt=[...dw.querySelectorAll('button')].find(b=>b.offsetParent);if(bt)return mark(bt)}
-    const vc=[...document.querySelectorAll('button')].find(b=>/Vào cung ngay/.test(b.textContent)&&b.offsetParent);if(vc)return mark(vc);
+    /* LIVE ≥ f009e1a6: the identity card «Thân phận kiếp này» carries the road picker (jkc «Vào cung ngay» / «Ở nhà chờ tuyển tú», data-kcp: a tap only
+       re-picks the road and re-draws the card) — take the life with «Nhận thân phận» (data-nl=ok), never loop on the road button */
+    {const nl=document.querySelector('#modal:not([hidden]) [data-nl=ok]');if(nl&&nl.getClientRects().length&&!nl.disabled)return mark(nl)}
+    const vc=[...document.querySelectorAll('button')].find(b=>/Vào cung ngay/.test(b.textContent)&&b.offsetParent&&!b.hasAttribute('data-kcp'));if(vc)return mark(vc);
     /* a person view she opened (jdfv, not an encounter) is an activity: close it (its ✕) */
     if(window.DF&&DF.F&&!DF.encM){const x=document.querySelector('.kfoc .kfoc-x');if(x&&x.getClientRects().length)return mark(x)}
     /* a small open info card with its transparent catcher (jk4 kitCatchOn): the first tap outside only closes it */
     const kx=document.getElementById('kxcatch');if(kx&&!hid(kx)&&kx.getClientRects().length)return mark(kx);
+    /* a gate scene (j93 .kmov.km-gate «Tiếp theo» / «Vào điện», new-life flow on LIVE ≥ f009e1a6) covers the screen it opens (#ov «Xét phong danh
+       phận» under it): its own button first, a tap on what lies under it does nothing */
+    {const g=[...document.querySelectorAll('.kmov.km-gate:not(.km-out)')].find(e=>e.getClientRects().length);if(g){const b=[...g.querySelectorAll('button')].find(b=>b.getClientRects().length&&!b.disabled);if(b)return mark(b)}}
     /* a mini-game screen (#ov: «Tuyển chọn» intro / result): skip it like the robot (Bỏ qua), else its next / close button */
     const ov=document.getElementById('ov');if(ov&&!hid(ov)){const bs=[...ov.querySelectorAll('button')].filter(b=>b.getClientRects().length&&!b.disabled);const b=bs.find(b=>/Bỏ qua/.test(b.textContent))||bs.find(b=>/Nhận|Tiếp|Xong|Đóng|Rời|Về|Thôi/.test(b.textContent))||bs[0];if(b)return mark(b)}
     /* a visitor playing in the jdfv stage scene (encounter): its say box / choice buttons, else its close */
     if(window.DF&&DF.F&&DF.encM){const f=document.querySelector('.kfoc');if(f){const bs=[...f.querySelectorAll('button,[role=button]')].filter(b=>b.getClientRects().length&&!b.disabled&&!b.classList.contains('kfoc-x'));const b=bs.find(b=>/^Thôi/.test(b.textContent.trim()))||bs[0]||f.querySelector('.kfoc-x');if(b)return mark(b);return mark(f)}}
     /* the «Luân hồi» origin roulette (jk2b #kroul, new-life flow on LIVE f009e1a6): skip it like the robot (Bỏ qua), else its next button */
     {const kr=[...document.querySelectorAll('[id^="kroul"],.kroul-ov')].find(e=>e.getClientRects().length);if(kr){const bs=[...kr.querySelectorAll('button')].filter(b=>b.getClientRects().length&&!b.disabled);const b=bs.find(b=>/Bỏ qua/.test(b.textContent))||bs.find(b=>/Tiếp|Nhận|Xong|Vào/.test(b.textContent))||bs[0];if(b)return mark(b)}}
+    /* the selection scenes of a new life (jkitsel kitDialogue, «Chạm để tiếp ▸»): a tap on the line box goes on (only a box on top: a
+       left-over box under the gate scene «Vào điện» is not tapped); its layer ignores button taps */
+    {const top=e=>{const r=e.getBoundingClientRect();if(!r.width||!r.height)return false;const h=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return !!h&&e.contains(h)};const dv=[...document.querySelectorAll('.kdv-box')].find(top);if(dv)return mark(dv)}
     const kc=[...document.querySelectorAll('.kmov:not(.km-out) button,#kpodov button,#kmrew button')].find(b=>b.getClientRects().length&&!b.disabled);if(kc)return mark(kc);
     const ko=document.querySelector('.kmov:not(.km-out)');if(ko&&ko.getClientRects().length)return mark(ko);
     const M=document.getElementById('modal');if(M&&!hid(M)){const o=[...M.querySelectorAll('.opt:not([disabled])')];const th=o.find(b=>/^Thôi/.test(b.textContent.trim()));if(th)return mark(th);if(o.length)return mark(o[0]);
@@ -61,11 +70,31 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
   const BAL_W=await p.evaluate(()=>(BAL.dayq&&BAL.dayq.wake)||2000);
   const IDLE=await p.evaluate(()=>Math.ceil(((BAL.dayq&&BAL.dayq.wake)||2000)/500)+2);
   const drain=async(n=120)=>{let idle=0;for(let i=0;i<n&&idle<IDLE;i++){if(await tapAny()){idle=0;await sleep(350)}else{idle++;await sleep(500)}}};
-  /* a fresh solo life at a quiet Buổi trưa (buổi 1) like the robot: start, accept «Thân phận», tap through, turn to buổi 1 */
-  const newLife=async()=>{await p.evaluate(()=>{try{kmReset()}catch(e){}Q.length=0;SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});
-   await p.waitForFunction(()=>document.querySelector('#modal:not([hidden]) [data-nl=ok]'),null,{timeout:60000});
-   await sleep(600);try{await p.tap('#modal [data-nl=ok]',{timeout:8000})}catch(e){await p.evaluate(()=>{const b=document.querySelector('#modal [data-nl=ok]');b&&b.click()})}await sleep(800);await drain();
-   for(let i=0;i<8;i++){const s=await st();if(s.buoi===1&&!s.Q.length&&!s.modal&&!s.scene&&!s.dawn)break;await p.evaluate(()=>{try{used=BAL.time.khac;render()}catch(e){}});await sleep(900);await drain()}};
+  /* a fresh solo life at a quiet Buổi trưa (buổi 1) like the robot: start, accept «Thân phận», tap through, turn to buổi 1.
+     LIVE ≥ f009e1a6 (selection-scene) starts a life with the «Luân hồi» roulette, the road picker on the identity card and the Dưỡng Tú viện
+     selection scenes inside buổi 0: the old 8 × 900 ms loop returned while those still ran (case B «setup: turn not held» at bk 0.0 with a scene).
+     Now it waits for a normal day (buổi 1, nothing queued or on screen, «Sang buổi» enabled), tapping like a player, up to NL_MS. */
+  const NL_MS=+process.env.NL_MS||300000;
+  /* test-side pick of the life, not a game bypass: re-roll (a new pending life each time, NL_KEY cleared, the quickcheck NEWLIFE idiom) until the
+     life has no tú nữ selection days (jselxday selxDaysFit false: a hòa thân / palace start) and is not a servant life (cnv / isSrv, the quickcheck NEWLIFE rule; a game «Chuyển kiếp» into one is rolled again); these cases build their
+     own buổi states and need a palace consort at a quiet buổi 1, not her 3 selection days (option-0 taps end in ban hoa about half the time). */
+  const roll=async()=>{await p.evaluate(()=>{try{kmReset()}catch(e){}Q.length=0;SLOT=3;document.getElementById('title').hidden=true;
+    for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();const fit=typeof selxDaysFit==='function'&&selxDaysFit();if(!fit&&!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}});
+   /* SETUP only (not a step under test): take the life with «Nhận thân phận». A cung nữ card keeps the button out of view (page.tap: «not visible»),
+      so after one real-tap try the button is clicked in the page; the cases' own taps stay real taps */
+   for(let i=0;i<40;i++){const r=await p.evaluate(()=>{const b=document.querySelector('#modal [data-nl=ok]');if(!b)return Q.some(m=>/^Thân phận/.test(m.t||''))?'wait':'gone';return b.getClientRects().length&&!document.getElementById('modal').hidden?'vis':'hid'});
+    if(r==='gone')break;if(r==='wait'){if(!(await tapAny()))await sleep(500);continue}
+    if(r==='vis'&&i<2){try{await p.tap('#modal [data-nl=ok]',{timeout:3000,force:true})}catch(e){}}else await p.evaluate(()=>{const b=document.querySelector('#modal [data-nl=ok]');b&&b.click()});await sleep(900)}};
+  /* a life that ends in its opening (a hòa thân «Lễ ra mắt» lost → «Duyên cung lỡ hẹn» → the game's own «Chuyển kiếp», or a new identity card) is
+     rolled again the same way instead of being played through */
+  const newLife=async()=>{const t0=Date.now();let quiet=0;await roll();await drain();
+   while(Date.now()-t0<NL_MS){const s=await st();if(s.buoi===1&&!s.Q.length&&!s.modal&&!s.scene&&!s.dawn&&s.next&&!s.want){if(++quiet>=2)return;await sleep(700);continue}quiet=0;
+    if(await p.evaluate(()=>!!(S&&S.dead)||(S&&S.origin&&S.origin.k==='cnv')||!!(window.isSrv&&isSrv())||!!document.querySelector('#modal:not([hidden]) [data-nl=ok]')||Q.some(m=>/^(Duyên cung lỡ hẹn|Thân phận kiếp này)/.test(m.t||'')))){await roll();continue}
+    if(await tapAny()){await sleep(350);continue}
+    /* nothing to tap: spend the khắc and turn like a player (the night / buổi 0 turn waits for her tap) */
+    await p.evaluate(()=>{try{used=BAL.time.khac;render()}catch(e){}});
+    if(s.buoi!==1&&await p.evaluate(()=>{const n=document.getElementById('next');return !n.disabled&&!Q.length})){try{await p.tap('#next',{timeout:2000,force:true})}catch(e){}}await sleep(900)}
+   console.log('newLife: no quiet buổi 1 after '+NL_MS+' ms '+JSON.stringify(await st()))};
   await newLife();
   const diag=()=>p.evaluate(()=>{const a=(()=>{try{const e=dqActEl();return e?(e.id||e.className||e.tagName):null}catch(x){return 'err'}})();
     const n=document.getElementById('next'),r=n.getBoundingClientRect(),e=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
