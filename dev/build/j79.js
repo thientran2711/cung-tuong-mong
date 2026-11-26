@@ -65,7 +65,7 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* KIT §62.1 NO VISIBLE «Ghi chú» ROW (owner 21/11 ~04:30Z, repeat of OD L1867): a row labelled «Ghi chú» is not drawn; its text goes behind a kit round «!» (.khap.kgnb) at the end of the row it explains (the row just above it),
    tap → the kit pop-up titled «Ghi chú». A Ghi chú with no row above it (first row) stays as a row. Every kitRows caller (dialog info frames, item cards, results, books) gets it from here — no caller changes. */
 function kitNoteBang(text,title){const t=title||"Ghi chú";return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="${kpEsc(t)}" data-kfxt="${kpEsc(t)}" data-kfx="${kpEsc(String(text))}">!</span>`}/* title optional (mini-game intro «Phần của ngươi» …): the ONE «!» part */
-function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).forEach(r=>{
+function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)&&!(typeof kitRowNil==="function"&&kitRowNil(r[0],r[1]))/* KIT §6.7 no empty gain/cost row */).forEach(r=>{
   if(/^\s*ghi chú\s*$/i.test(String(r[0]))&&R.length){const v=Array.isArray(r[1])?r[1]:[r[1]];const prev=R[R.length-1];prev.bang=(prev.bang?prev.bang+" · ":"")+v.join(" · ");return}
   R.push({l:r[0],v:r[1],c:r[2]})});
  return `<span class="kb kpkb">`+R.map(({l,v,c,bang})=>{const vals=Array.isArray(v)?v:[v];

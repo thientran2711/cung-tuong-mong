@@ -91,6 +91,8 @@ function kaEfTag(x){x=String(x);return /^\s*<span class="ef [^"]*"/.test(x)&&!/k
  /* an empty Mất row ("không mất gì") is never shown (kit owner #2): sure acts and safe failures simply have no Mất row */
  {const E=KA_NOTHING;R.mat=R.mat.filter(x=>!E.test(kaPlain(x.h).trim()));R.duoc=R.duoc.filter(x=>!E.test(kaPlain(x.h).trim()))}/* owner 11/15 08:00Z: "không được gì" is no loss either */
  if(R.ton.length>1)R.ton=R.ton.filter(x=>!/^không(\s|$)/i.test(kaPlain(x.h)));
+ /* KIT §6.7 (owner OD 26/11 ~06:50Z (E)): an item that says nothing («tốn: không») is never a row of its own */
+ for(const k of ["why","ton","duoc","mat","kem"])R[k]=R[k].filter(x=>!kitRowNil(null,kaPlain(x.h)));
  R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())));
  return R}
 function kaWhyCut(h){return String(h).split(/\s·\s(?=(?:thành|hỏng|kèm|tốn|được)\s*:)/i)[0].replace(/[\s·—-]+$/,"")}
@@ -126,7 +128,9 @@ function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
  else for(const b of ["t","b"]){
   /* kit-thanh-bai r4 (owner 17/11): NO head rows. A rolled card's gain/loss row of each block is labelled THÀNH (green, replaces Được) / BẠI (red, replaces Mất); Được+Mất of one block share that one row; Kèm keeps its own row after it */
   let L=[...R.duoc.filter(x=>x.b===b),...R.mat.filter(x=>x.b===b)];if(dis&&b==="t")L=L.filter(x=>x.c!=="r");
-  h+=L.length?kaRowH(b==="t"?"thanh":"bai",b==="t"?"Thành":"Bại",L,b):`<span class="kr kr-none kr-${b==="t"?"thanh":"bai"} kb-${b}"><span class="krl">${b==="t"?"Thành":"Bại"}</span><span class="krv"><span class="ef n">${b==="t"?"Không được gì thêm":"Tốn công, không được gì"}</span></span></span>`;
+  /* KIT §6.7 (owner OD 26/11 ~06:50Z (E)): an empty THÀNH draws no row (was «Không được gì thêm» = «Được: không»); an empty BẠI keeps its one dim answer
+     «Tốn công, không được gì» (MAIN s34 17/11 ~17:35Z: the owner asked what happens on failure — that line answers it; law 16) */
+  if(L.length)h+=kaRowH(b==="t"?"thanh":"bai",b==="t"?"Thành":"Bại",L,b);else if(b==="b")h+=`<span class="kr kr-none kr-bai kb-b"><span class="krl">Bại</span><span class="krv"><span class="ef n">Tốn công, không được gì</span></span></span>`;
   const K=R.kem.filter(x=>x.b===b);if(K.length)h+=kaRowH("kem","Kèm",K,b)}
  if(R.note.length)h+=kaRowH("note","Ghi chú",R.note);
  return `<small class="kb${dis?" kbdis":""}">`+h+`</small>`}
@@ -151,7 +155,7 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  let M,R,odds="";
  if(/class="kb/.test(bodyHTML)){const t=document.createElement("template");t.innerHTML=bodyHTML;const od=t.content.querySelector(".kodds");odds=od?od.innerHTML:"";
   /* already rows: re-read them (adds a kwhy that was inserted later) */
-  R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:!t.content.querySelector(".kr-bai,.kr-none.kb-b")};
+  R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:!t.content.querySelector(".kr-bai,.kr-thanh,.kr-none.kb-b")/* KIT §6.7: an empty Bại block has no row now; a Thành row alone still marks a rolled (two-block) card */};
   t.content.querySelectorAll(".kr").forEach(r=>{const k0=[...r.classList].find(c=>c.startsWith("kr-")).slice(3);if(k0==="none")return;const tb=k0==="thanh"||k0==="bai";const k=tb?"duoc":k0;if(!R[k])return;const bb=r.classList.contains("kb-b")?"b":r.classList.contains("kb-a")?"a":r.classList.contains("kb-t")?"t":"";r.querySelectorAll(".krv>.ef,.krv>.kwhy").forEach(e=>R[tb&&e.classList.contains("r")?"mat":k].push({b:bb,h:k==="why"?e.innerHTML.replace(/^[✓✗]\s*/,""):e.innerHTML,c:k==="why"?(e.classList.contains("kok")?"g":"r"):e.classList.contains("g")?"g":e.classList.contains("r")?"r":e.classList.contains("t")?"t":"n"}))});
   t.content.querySelectorAll(".kwhy").forEach(w=>{if(!w.closest(".kr-why")){const x=kaPlain(w.innerHTML).replace(/[\s—-]+$/,"");if(x&&!R.why.some(y=>y.h===x))R.why.push({h:x,c:"r"})}});}
  else{M=kaModel(bodyHTML);R=kaRows(M);odds=kaOdds(M)}

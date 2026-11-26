@@ -22,6 +22,13 @@ function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/b�
 /* one effect token -> coloured span; fmt() spans keep their colour */
 function eff(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
  if(/^<b class="r">/.test(t))return `<span class="ef r">${t.replace(/<[^>]+>/g,"")}</span>`;return `<span class="ef ${kcls(t)}">${t}</span>`}
+/* KIT §6.7 NO EMPTY GAIN / COST ROW (owner OD 26/11 ~06:50Z item (E): «ĐƯỢC không / TỐN không» on free acts and gain/cost rows that say nothing → hide empty rows everywhere).
+   kitRowNil(label, value): true when a gain/cost row (Cần · Tốn · Được · Được ngay · Mất · Kèm · Thành; label null = any) says nothing. BẠI keeps its failure answer (MAIN s34 17/11 ~17:35Z, law 16). Every row writer
+   asks it (cardH grid, kaRows / kaBody, kitRows, kitOptFinal): an empty row is not drawn at all. Test: node dev/test/empty-rows.js <index.html> */
+const KIT_ROW_GC=/^(cần|tốn|được|được ngay|mất|kèm|thành)$/i;
+const KIT_ROW_NIL=/^(không|không có|không gì|chưa có|—|-|không (được )?(không )?mất( không được)? gì|không được không mất|không mất không được|không được gì( thêm)?|không mất gì( thêm)?)?\.?$/i;
+function kitRowNil(lab,v){if(lab!=null&&!KIT_ROW_GC.test(String(lab).replace(/<[^>]+>/g,"").trim()))return false;const t=[].concat(v==null?[]:v).map(x=>String(x)).join(" ").replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ").replace(/\s+/g," ").replace(/^[\s·]+|[\s·]+$/g,"").trim();return KIT_ROW_NIL.test(t)}
+window.kitRowNil=kitRowNil;
 function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return kSplitTop(parts,/ · |, /y).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
 function oddsChip(w){if(!w)return"";w=kitOddsNorm(w);/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(kitOddsCanon(k))<0?undefined:KIT_ODDS.indexOf(kitOddsCanon(k));const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
  return `<span class="oc oc${lv==null?2:lv}">${k}</span>${rest?`<span class="ef ${/khó hơn/.test(rest)?"r":/dễ hơn/.test(rest)?"g":"n"}">${rest}</span>`:""}`}
@@ -36,10 +43,11 @@ function kitParse(str){str=String(str||"").trim();if(typeof kitNoUnk==="function
 /* KÈM side effects read red by default, but a value is coloured by its MEANING (owner 15/11 "Tại sao + mà màu đỏ"): an explicit gain ("tiến bộ Thêu thùa +1..2", "Danh +2") stays green, never red because of the row */
 function kemCol(h){return String(h).replace(/<span class="ef ([gn])">([\s\S]*?)<\/span>/g,(m,c,x)=>{const p=x.replace(/<[^>]+>/g,"");return /\+\s?\d/.test(p)&&kcls(p)==="g"?`<span class="ef g">${x}</span>`:`<span class="ef r">${x}</span>`})}
 /* the act card */
+function kgPair(l,v){return kitRowNil(l,v)?"":`<span class="kl">${l}</span><span>${v}</span>`}/* KIT §6.7: no empty grid pair */
 function cardH(a,i){const poor=!a.lock&&!canPay(a),o=oddsOf(a),capd=oddsCapped(a),sft=capd||agSoft(o+lotB(S,a.dom));/* AG soft fail at the cap: one rule with runOpt */const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
  const ow=rolled?(capd?capW():word(optOdds(a))+lotTag(a.dom,o)):"";
  return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
- <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))}</span>`:""}${rolled?`<span class="kl">Bại</span><span>${effList(sft?kitSoftW(a.c):payWinFail(a,failTxt(a))||"không mất gì","r")}</span>`:""}</span></button>`}
+ <span class="kgrid">${kgPair("Tốn",effList([fmt(a.c)||"không",ducWarnTxt(a.c)]))}${kgPair("Thành",effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g"))}${/ · kèm: /.test(a.x||"")?kgPair("Kèm",kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))):""}${rolled?`<span class="kl">Bại</span><span>${effList(sft?kitSoftW(a.c):payWinFail(a,failTxt(a))||"không mất gì","r")}</span>`/* the failure answer stays (MAIN s34 17/11, law 16) */:""}</span></button>`}
 /* route the older line builders through the kit */
 function ducWarnTxt(c){const d=c&&c.duc;if(!d||d>=0||!S||S.rank>=7)return"";const after=S.duc+d,nd=hhNeed(S).duc;return after<nd?`Đức ${S.duc} → ${after}`:""}/* owner 07:05Z: the card shows only "Đức a → b"; the threshold lives in the top-bar Đức chip (jk3), read from BAL */
 let actLineRaw;(function(){const o1=optLine,o2=dilLine,o3=actLine;actLineRaw=o3;optLine=a=>kitParse(o1(a));dilLine=c=>kitParse(o2(c));actLine=(k,w,c)=>kitParse(o3(k,w,c))})();

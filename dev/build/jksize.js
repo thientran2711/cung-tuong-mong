@@ -13,6 +13,8 @@
    (9) narrow long pictures NS / NM / NL (≈ 3.5:1) = the banner of a frame that holds a person + info.
    ONE table (KIT_SIZE) holds every number; ONE function per family picks the size (kitFrameSize, kitBtnSize). Nobody sets a size per screen. */
 const KIT_SIZE={
+ /* 56.4b: px a FILL-grown figure may spread past its column (the iPad L frame's own figure spreads ~39 px); figRefAr = painted width / body (skull→feet) of the widest standard robe (Hoàng hậu, measured .537) */
+ figSpill:40,figRefAr:.54,
  /* frame: width w (design px; kv2 = landscape spread, kv1 = one page), body cap = the most the body may take before the info scrolls,
     pic = portrait picture of a frame without a person, ban = banner of a frame WITH a person (narrow strip, owner (9)), top = long-story picture. */
  frame:{
@@ -142,10 +144,16 @@ function kszFigHtml(p){p=kitWhoPerson(p);let src=kitFigOf(p);if(p&&p.kind==="th"
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
  const v=(typeof kitFigBody==="function"?kitFigBody(im.src,()=>kszFigFit(f)):null)||(typeof kitFigWaitBody==="function"&&kitFigWaitBody(im,()=>kszFigFit(f)));if(!v)return;const age=im.dataset.age===""?null:+im.dataset.age;
  /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): ONE body SKULL TOP -> feet for everybody of this layout (men are NOT taller: no x1.07; a child by age); crowns / robes / sleeves are not measured. */
- const kidf=typeof KIT_FIG==="object"&&age!=null?KIT_FIG.kid(age):1;f.__kszKid=kidf;const body=KIT_SIZE.fig[lay.fig].h*kidf*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-kitFigTop(v));
- const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:v.ar,W=H*ar,cw=im.parentElement.clientWidth||KIT_SIZE.fig[lay.fig].cw;
+ const kidf=typeof KIT_FIG==="object"&&age!=null?KIT_FIG.kid(age):1;f.__kszKid=kidf;const body=KIT_SIZE.fig[lay.fig].h*kidf*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */let H=body/Math.max(.2,v.b-kitFigTop(v));
+ const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:v.ar,cw=im.parentElement.clientWidth||KIT_SIZE.fig[lay.fig].cw;let W=H*ar,bodyC=body;
+ /* KIT 56.4b FIGURE NEVER UNDER THE TEXT (D4 review 26/11, Fold «Người bên cạnh»: the L-frame fill grew the Hoàng hậu ×1.64, 309 px wide in a 162 px column, her face
+    and crown went under the story text and the scene picture). The FILL growth (kszFigFill3 / kszFeetFit __kszShrink > 1) stops where the painting would spread more than
+    KIT_SIZE.figSpill px past its column; the layout's own figure size (×1) is never shrunk by this rule. Scan: node dev/test/fig-spill.js <index.html> */
+ /* ONE size for everybody (OD 21/11 #47, 56.4 «nobody is shrunk for an outlier»): the cap is reckoned on the REFERENCE figure (KIT_SIZE.figRefAr = painted width / body of the
+    widest standard robe, the Hoàng hậu), never on the person shown — every person of that frame and device gets the same capped body */
+ {const sh=f.__kszShrink||1,bmax=(cw+(KIT_SIZE.figSpill||40))/(KIT_SIZE.figRefAr||.54);if(sh>1&&body>bmax){const b2=Math.max(body/sh,bmax);H=H*b2/body;W=H*ar;bodyC=b2}}
  /* nothing is cut: .kszfs is overflow visible; the painted art is centred on the column, a wide robe spreads right under the text (drawn on top, z-index) */
- im.style.height=H+"px";im.style.width=W+"px";im.style.left=kitFullFigX(v,W,cw,kszLimL(im),cw).toFixed(1)+"px";im.style.translate="none";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(body*(1+kszCrown()))+"px"/* the same column height for everybody: skull top -> feet + the room of the tallest Hoàng hậu crown; a taller crown rises into the tag's free space (never cut) */})}
+ im.style.height=H+"px";im.style.width=W+"px";im.style.left=kitFullFigX(v,W,cw,kszLimL(im),cw).toFixed(1)+"px";im.style.translate="none";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(bodyC*(1+kszCrown()))+"px"/* the same column height for everybody: skull top -> feet + the room of the tallest Hoàng hậu crown; a taller crown rises into the tag's free space (never cut) */})}
 /* px the figure column has to its left inside the frame (the figure may spread that far left, never past the frame edge) */
 function kszLimL(im){try{const d=im.closest(".kszf"),c=im.parentElement;return Math.max(0,c.getBoundingClientRect().left-d.getBoundingClientRect().left-(KIT_SIZE.edge||12))}catch(e){return 0}}
 function kszCrown(){return(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131}
