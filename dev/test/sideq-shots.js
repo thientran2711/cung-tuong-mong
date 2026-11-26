@@ -12,7 +12,9 @@ const OUT=process.argv[2]||'/tmp/sideq-shots';const TID0=process.env.TID||'';con
   await p.waitForTimeout(600);
   const offer=async()=>p.evaluate(tid=>{const q=q72();q.lw=null;q.mo={};let x=null;if(tid&&T72I[tid]){for(let i=0;i<40&&!x;i++)x=q72Make(T72I[tid])}for(let i=0;i<40&&!x;i++)x=q72Choose(q72Cands());if(!x)return null;const X=q72X(x);q72Offer(x,"");showModal();
     return{tid:x.tid,k:X.A.k,n:X.A.n,own:X.A.k==="sv"?ownerOf(X.A.o)===S:undefined,rank:X.A.o&&X.A.o.rank,her:S.rank,dl:X.T.dl,dl0:X.T.dl0,steps:X.T.s.length,fit:q72Fit(X.A,X.T)}},process.env.TID||"");
-  const a=await offer();await p.waitForTimeout(900);await p.screenshot({path:path.join(OUT,`${name}-ask.png`)});console.log(name,'ask',JSON.stringify(a));if(!a||!a.fit)bad++;
+  /* wait until every picture in the modal has loaded (a Fold cold-cache figure takes ~0.6–0.9 s: a still taken at 0.9 s showed an own maid as the grey placeholder) */
+  const loaded=async()=>{for(let i=0;i<40;i++){if(await p.evaluate(()=>[...document.querySelectorAll('#modal img')].every(i=>i.complete&&i.naturalWidth>0)))return true;await p.waitForTimeout(250)}return false};
+  const a=await offer();await p.waitForTimeout(400);if(!await loaded()){console.log(name,'modal picture did not load');bad++}await p.screenshot({path:path.join(OUT,`${name}-ask.png`)});console.log(name,'ask',JSON.stringify(a));if(!a||!a.fit)bad++;
   const acc=()=>p.evaluate(()=>{const i=Q.map(m=>m&&m.t).lastIndexOf('Việc nhờ');if(i<0)return false;const m=Q.splice(i,1)[0];m.opts[0].go();return true});
   await acc();await p.waitForTimeout(400);
   process.env.TID="";const a2=await offer();console.log(name,'ask2',JSON.stringify(a2));await acc();await p.waitForTimeout(400);
