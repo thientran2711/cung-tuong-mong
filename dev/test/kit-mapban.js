@@ -22,6 +22,11 @@ for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewpo
  if(W<1100)await p.touchscreen.tap(s.hb[0],s.hb[1]);else await p.mouse.click(s.hb[0],s.hb[1]);await p.waitForTimeout(1200);
  const hv=await p.evaluate(()=>{const h=document.querySelector('.mspot.kmb-home');if(!h)return null;const r=h.getBoundingClientRect(),b=document.querySelector('.kmapban').getBoundingClientRect(),t=document.querySelector('#tabs,nav.bar');const tb=t?t.getBoundingClientRect().top:innerHeight;return {inView:r.top>=b.bottom-4&&r.bottom<=tb+2,r:[Math.round(r.top),Math.round(r.bottom)]}});
  ok(hv&&hv.inView,`${D}: a real tap on «Nhà ta» brings her home spot into view ${JSON.stringify(hv)}`);
+ /* KIT §103 zone fallback (OB-PHU4): her spot hidden inside a zone tag (.mspot.mzone[data-mzk]) → the zone tag carries the home ring */
+ const zf=await p.evaluate(()=>{const h=document.querySelector('.mspot.kmb-home');if(!h)return {err:'no home'};const k=h.dataset.go||h.dataset.ak;h.classList.add('mzh');h.style.display='none';h.classList.remove('kmb-home');
+  const z=document.createElement('div');z.className='mspot mzone';z.dataset.zone='dong';z.dataset.mzk='r99 '+k+' r98';z.style.cssText='position:absolute;left:40%;top:40%;width:90px;height:40px';z.textContent='Đông lục cung';h.parentElement.appendChild(z);kitMapBanner.place();
+  const ok=z.classList.contains('kmb-home');z.remove();h.classList.remove('mzh');h.style.display='';kitMapBanner.place();return {ok,back:h.classList.contains('kmb-home')}});
+ ok(zf.ok&&zf.back,`${D}: zone fallback: the zone tag holding her key carries the home ring, her own spot again when shown ${JSON.stringify(zf)}`);
  await p.evaluate(()=>{tab='act';render()});await p.waitForTimeout(400);ok(!(await p.$('.kmapban')),`${D}: no banner on another tab`);
  await p.evaluate(()=>{tab='go';render()});await p.waitForTimeout(400);ok(!!(await p.$('.kmapban')),`${D}: back on the Dư đồ, banner again`);
  await p.evaluate(()=>kitMapBanner.clear('plban'));await p.waitForTimeout(300);ok(!(await p.$('.kmapban'))&&!(await p.$('.mspot.kmb-home')),`${D}: clear() removes banner + home mark`);

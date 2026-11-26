@@ -8,7 +8,10 @@
    Re-placed after every render (the map is rebuilt by render). Words come from the caller; numbers in them from BAL (law 4). */
 (function(){try{
 const KMB={cur:null};
-function homeSpot(k){if(!k)return null;try{return document.querySelector(`#panel .mapv .mspot[data-go="${CSS.escape(k)}"],#panel .mapv .mspot[data-ak="${CSS.escape(k)}"]`)}catch(e){return null}}
+function homeSpot(k){if(!k)return null;try{const e=document.querySelector(`#panel .mapv .mspot[data-go="${CSS.escape(k)}"],#panel .mapv .mspot[data-ak="${CSS.escape(k)}"]`);
+ /* KIT §103 zone fallback (OB-PHU4 KIT REQUEST 26/11, owner OD 26/11 ~07:05Z): on Dư đồ level 1 her palace can sit inside a ZONE tag (§85.10 .mspot.mzone[data-zone], member keys in data-mzk); when her own spot is missing or hidden the visible zone tag that holds her key carries the home ring / glow */
+ const vis=x=>x&&!x.classList.contains("mzh")&&x.getClientRects().length>0&&getComputedStyle(x).display!=="none";if(vis(e))return e;
+ const z=[...document.querySelectorAll(`#panel .mapv .mspot.mzone[data-mzk~="${CSS.escape(k)}"]`)].find(vis);return z||e}catch(e){return null}}
 function place(){try{const v=document.querySelector("#panel .mapv");const old=document.querySelectorAll(".kmapban");const c=KMB.cur;
  if(!c||!v||typeof tab!=="undefined"&&tab!=="go"){old.forEach(e=>e.remove());document.querySelectorAll("#panel .mapv.kmb-on").forEach(x=>{x.classList.remove("kmb-on","kmb-abs");x.style.removeProperty("--kmbH")});document.querySelectorAll(".mspot.kmb-home").forEach(e=>e.classList.remove("kmb-home"));return}
  let el=v.querySelector(":scope>.kmapban");old.forEach(e=>{if(e!==el)e.remove()});
