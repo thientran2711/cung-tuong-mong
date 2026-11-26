@@ -25,7 +25,7 @@ function oiQueen(){try{return liveRivals(false).some(v=>v.queen)}catch(e){return
    a = panels 1–2 (both roads unless the origin has its own home pair `ha`), d = panels 3–4 of "Vào cung ngay", h = panel 3 of the home road */
 const OI_TXT={
  tt:{a:["Phủ Tể tướng ở phía đông kinh thành, đèn đuốc thâu đêm. Cha ngươi đứng đầu bá quan; một lời của ông, nửa triều đình nghiêng theo.",
-   ()=>`Hoàng thượng ${oiEmp()} mới lên ngôi, triều cục chưa yên. Ai cũng biết: hậu cung sẽ nhìn ngươi như nhìn cái bóng của cha ngươi.`],
+   ()=>`${oiEmp()||"Hoàng thượng"} mới lên ngôi, triều cục chưa yên. Ai cũng biết: hậu cung sẽ nhìn ngươi như nhìn cái bóng của cha ngươi.`],
   d:["Chiếu chỉ gọi con gái các nhà công khanh vào cung. Cha đặt tay lên vai ngươi: “Nhà ta cần một người đứng bên Hoàng thượng.”",
    "Sáng sớm, kiệu rời phủ. Mẹ tiễn tới cổng, không dám khóc. Phía trước là Ngọ môn, và buổi tuyển chọn trước ngày phong."],
   h:"Chiếu tuyển tú ba năm mới có một lần. Cha muốn ngươi ở nhà học thêm, chờ kỳ tới, để vào cung cho xứng với tên nhà."},

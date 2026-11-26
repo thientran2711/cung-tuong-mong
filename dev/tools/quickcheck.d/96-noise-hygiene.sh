@@ -1,0 +1,17 @@
+#!/bin/bash
+# quickcheck hook (qc-noise-hygiene 26/11, owner OD 26/11 ~06:50Z (A) PLAYER-NOISE BUDGET + (D) TEXT HYGIENE): Non-zero = the go-live FAILS.
+#  1. text-hygiene --static: no NEW fault in a string builder of dev/build/j*.js (frozen list dev/test/text-hygiene-known.json may only shrink)
+#  2. vp-doubled (KK38 scan, review/kit-stage-r2 919f6c1b): the screen wording pass never makes «thiện cảm thiện cảm»
+#  3. noise-day: REAL-TAP robot slices (Fold 755x1000 + iPad 1180x820, dev/test/robot-rt.js, the shared harness) with the read-only noise
+#     sampler; every channel per game day inside BAL.noise (+ D2's BAL.evc for big / visit cards); then text-hygiene --runtime on every line
+#     the robot SAW (doubled words, code glue, brackets, English / ids, %, over-long one-line texts).
+#  env QC_NOISE_SLICE (buổi per life, default 9 ≈ 3 game days), QC_NOISE_LIVES (default fold:sens:11,ipad:cautious:21). ~4 min.
+KIT=${QC_KIT:-$(cd "$(dirname "$0")/../../.." && pwd)}; WT=${QC_WT:-$KIT}; OUT=${QC_OUT:-/tmp}/noise-hygiene; mkdir -p "$OUT"; rc=0
+[ -f "$KIT/dev/test/text-hygiene.js" ] || { echo "noise-hygiene: dev/test/text-hygiene.js missing in kit"; exit 1; }
+grep -q 'BAL.noise=' "$WT/dev/build/jbal2.js" || { echo "noise-hygiene: the sha has no BAL.noise (pre qc-noise-hygiene build)"; exit 1; }
+node "$KIT/dev/test/text-hygiene.js" --static --build "$WT/dev/build" > "$OUT/static.log" 2>&1 || rc=1; tail -1 "$OUT/static.log"
+URL=${QC_URL:-file://$WT/index.html}
+( cd "$WT" && node "$KIT/dev/test/vp-doubled.js" "$WT/index.html" ) > "$OUT/vp-doubled.log" 2>&1 || rc=1; tail -1 "$OUT/vp-doubled.log"
+rm -rf "$OUT/lives"; node "$KIT/dev/measure/noise-day.js" run "$URL" "$OUT/lives" lives=${QC_NOISE_LIVES:-fold:sens:11,ipad:cautious:21} slice=${QC_NOISE_SLICE:-9} --build "$WT/dev/build" > "$OUT/noise-day.log" 2>&1 || rc=1; tail -1 "$OUT/noise-day.log"
+node "$KIT/dev/test/text-hygiene.js" --runtime "$OUT/lives" --build "$WT/dev/build" > "$OUT/runtime.log" 2>&1 || rc=1; tail -1 "$OUT/runtime.log"
+exit $rc
