@@ -38,7 +38,10 @@ async function play(b,dev,url,seed,fn){const ctx=await D.newDeviceContext(b,dev,
  await ctx.route(/\.(webp|png|jpg|jpeg|mp3|ogg|m4a|mp4|webm)(\?|$)/,r=>r.abort());
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const pe=[];p.on('pageerror',e=>pe.push(e.message.slice(0,160)));
  const open=async()=>{await D.openDirect(p,url);await p.waitForFunction(()=>typeof deser==='function'&&typeof start==='function'&&document.querySelector('#slots button'));await p.waitForTimeout(1500);await p.evaluate(H);
-  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}});if(MUT&&MUTJS[MUT])await p.evaluate(MUTJS[MUT]);if(DBGD)await p.evaluate(()=>{window.__dbgD=1})};
+  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}
+  /* TEST SETUP ONLY (rv6, as save-boundary-reload newLife): since LIVE f009e1a6 every new life opens with the 3 selection days (jkc2 kc2SelOn); the title
+     path «Bắt đầu kiếp mới» answered them and the life ENDED («Duyên cung lỡ hẹn») inside the 4 s → nl-4s saw no slot. The selection days have their own selx-* tests. */
+  if(typeof kc2SelOn==='function'&&!window.__sbrSelx)kc2SelOn=()=>false});if(MUT&&MUTJS[MUT])await p.evaluate(MUTJS[MUT]);if(DBGD)await p.evaluate(()=>{window.__dbgD=1})};
  try{return await fn(p,open,pe)}finally{await ctx.close()}}
 /* a TRUE reload, then the title: what Sổ 1 offers, and (when it offers it) «Tiếp tục kiếp này» */
 async function reloadTitle(p,open){await p.reload({waitUntil:'domcontentloaded'});await open();
@@ -157,7 +160,7 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
 /* ---------- drift ---------- */
 async function drift(b,dev,url,seed){const one=wait=>play(b,dev,url,seed,async(p,open,pe)=>{await open();
  const r=await p.evaluate(async([v])=>{const V=eval(v);__sbr.newLife('thd');await __sbr.settle();S.month=12;S.tuan=2;S.buoi=B4L-1;used=0;render();await __sbr.settle();
-  const sv=()=>{try{return V(JSON.parse(localStorage.getItem('hclh-save-v2-1')).S)}catch(e){return 'none'}};let mis=0;const L=[];
+  const sv=()=>{try{return V(JSON.parse(window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1')).S)}catch(e){return 'none'}};let mis=0;const L=[];
   const act1=async()=>{const u0=used;for(let i=0;i<(deck||[]).length&&used===u0;i++){const a=deck[i];if(!a||a.done)continue;try{act(i)}catch(e){}if(used!==u0||Q.length){await __sbr.settle();return String(a.n||'').slice(0,20)}}return ''};
   for(let t=0;t<5;t++){const k=__sbr.key();used=BAL.time.khac;const n=document.getElementById('next');n.disabled=false;n.click();await __sbr.after(k);let a=V(S),s=sv();if(a!==s){mis++;L.push('tap ≠ '+a+' | sổ '+s)}
    const an=await act1();a=V(S);s=sv();if(a!==s){mis++;L.push('act «'+an+'» ≠ '+a+' | sổ '+s)}}
