@@ -1,6 +1,6 @@
 PRIORITY #1 CHECK ('thi thố|hạng nhất|thị tẩm|lật thẻ|contest'): OD 77 | ledger 6 | claims 8 | main 15 | review/* 9 | archive 0 (sparse handover worktree; worker's full count: archive 314)
 
-# BIG REVIEW — D3 review/contest-thitam @ fcd5c086 — VERDICT: FAIL (4 findings to fix, 1 advisory)
+# BIG REVIEW — D3 review/contest-thitam — FINAL VERDICT: PASS 2c956d97 (first pass fcd5c086 = FAIL, 4 findings; all fixed)
 
 Reviewer: BIG reviewer (opus) session_01D3E3NXwED3bj8Xfp41CezN · depth 3 · START_CTX ~3 % · child of worker D3 session_01D3E3NY4u5PWtro3m4FhbDG.
 Base: branch fcd5c086 is a fast-forward of LIVE 6b5d3d05 (`git merge-base --is-ancestor origin/main HEAD` = yes). Diff = jctn.js (new) + call sites
@@ -88,3 +88,16 @@ Run 1's C4 failed only because C3's stalled week never merged (seats still on d6
 - #4 order: jctn cardLater waits for the result toast / podium / mini-game board (BAL.ctn.waitMs 1500, cap 60 s), and the toast's Được gets
   «đêm ấy được thị tẩm» (kit item markup). OK in code; must be seen on the new videos.
 - Logic test on ab9e28b0 build: 21/21 (16 + 5 new story rows), 0 page errors.
+
+## FINAL RE-REVIEW — PASS 2c956d97 (D3 #2; FF of LIVE 3af7896e, `merge-base --is-ancestor` = yes)
+- Diff vs LIVE: only the D3 files (assemble, j34, j67, j71, j8, jbal2, jctn, jrd_bd, jrd_thd, jts) + tests/scan/report.
+- New fix 32bdeda4 (jctn tagToast): the KẾT QUẢ toast gets «đêm ấy được thị tẩm» on the card tick after it is painted (data-ctn, no double).
+- Scan on 2c956d97: 27 kinds · 13 should · 13 wired · 0 unknown. Logic test on my own build of 2c956d97: 21/21, 0 page errors.
+- Videos (new, real taps; frames extracted and looked at): Fold 755x1000 — entry card «ĐƯỢC: đêm ấy được thị tẩm, đoạt giải, bệ hạ để mắt hơn»
+  → KẾT QUẢ «Được: đêm ấy được thị tẩm · Sủng +4 · Danh +3» → Kính sự phòng card → night. iPad 1180x820 — card → KẾT QUẢ → bestow chest →
+  Kính sự phòng card. Order right on both (finding 4 closed). jts «Tự tay phối đồ» PNGs, Fold + iPad: «đứng đầu: đêm ấy được thị tẩm» first, kit card, no overflow.
+- 1-year robot (worker's, 16 lives each): her nights/yr LIVE 10.2 vs branch 10.6 (net ≈ +0.4, inside noise); her firsts 1.9/yr, NPC firsts
+  4.4/yr. For sếp: the two-way rule keeps her net gain small; she gains clearly only when she wins more contests.
+- Co-op: worker 27/27 on the merged build; mine C1/C2/C4 PASS + C3 rule PASS on the earlier build. The «Lễ Phật đản ×2» stall is
+  pre-existing (same on bare LIVE, per worker; coop-clear now taps «Bỏ qua» / «Đã hiểu» in the kg82 frame).
+- Gate left to the worker: quickcheck on 1485a122 (running at verdict time); the landing coordinator checks its line.
