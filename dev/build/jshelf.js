@@ -100,7 +100,7 @@ Object.assign(BAL,{shelf:{
  seeDeeds:["call","visit","help","apol","provoke","humil","test","mediate","warn"],
  /* Tố xa xỉ / Tố vượt phẩm, the room cause. Nobody knows the scores (owner (d)): a charge rests on what one SAW, a TIP (rumour) or a GUESS; the inquiry settles the truth.
     guessO: a hostile NPC with nothing seen / heard still accuses on a guess guessO in 100 a month (npcO in 100 with something seen / heard); vp*: a ngự ban piece above rank is allowed, so a proven charge only sends it back to the chest */
- acc:{cdA:48,vpConf:1,/* proven vượt phẩm: a ngự ban piece only goes back to the chest (vpDanhT); any other over-rank piece is confiscated + punish(vượt phẩm, vpConf) */cdT:72,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
+ acc:{cdA:48,vpConf:0,/* = punish weight (BAL.punW): 0 NHẸ (sếp OD 26/11 ~05:55Z, review/home-way). proven vượt phẩm: a ngự ban piece only goes back to the chest (vpDanhT); any other over-rank piece is confiscated + punish(vượt phẩm, vpConf) */cdT:72,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
 
 /* ---------- new décor pieces (IT, kd "Bày biện"): only earned (bought, given, bestowed); names + one line each (player text, VANPHONG) ---------- */
 (function(){const D={

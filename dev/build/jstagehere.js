@@ -24,10 +24,12 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
 window.stClose=stClose;
 function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
 const bN=b=>{try{return String(BUOI[b]).toLowerCase()}catch(e){return ""}};
+/* review/home-way: staying past closing is a LIGHT fault (punish sev 0, BAL.punW.lite): the notice says the light price, never «như lẻn vào» */
+const stayPrice=()=>{try{const c=typeof punishCut==="function"?punishCut():0;return `bị bắt gặp thì Danh -${BAL.sneak.danh}, ${c?`khất bổng ${c} tháng`:"bị cảnh cáo"}`}catch(e){return "bị bắt gặp thì bị phạt nhẹ"}};
 function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k);/* wording TINBAO-WORDS (owner OD 25/11 ~23:36Z: no «=», the odds word once at the end, «ta») */
- if(c.now)return `${p} đã đóng cửa${w} mà ta vẫn nán lại${o?`, chẳng khác gì lẻn vào; may rủi: ${o}`:""}.`;
- if(c.lim)return `${p} chỉ được lưu đến hết ${bN(c.b)}${w}${o?`; quá giờ mà còn nán lại thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`;
- return `${p} sắp đóng cửa sau khắc này${w}${o?`; nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: ${o}`:""}.`}
+ if(c.now)return `${p} đã đóng cửa${w} mà ta vẫn nán lại${o?`; ${stayPrice()}; may rủi: ${o}`:""}.`;
+ if(c.lim)return `${p} chỉ được lưu đến hết ${bN(c.b)}${w}${o?`; quá giờ mà còn nán lại, ${stayPrice()}; may rủi: ${o}`:""}.`;
+ return `${p} sắp đóng cửa sau khắc này${w}${o?`; nán lại quá giờ, ${stayPrice()}; may rủi: ${o}`:""}.`}
 function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:c.lim?2:0].join("|")}catch(e){return ""}}
 function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ta vẫn nán lại`:c.lim?`${p} chỉ được lưu đến hết ${bN(c.b)}`:`${p} sắp đóng cửa sau khắc này`}
 /* the buổi+place whose limit she has been shown (the closing notice in any of its three lines): stayRoll punishes only after it */
@@ -78,21 +80,26 @@ if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="
    now closed to her (accessOf says no; not her own palace), the existing «Lẻn vào» caught row is rolled ONCE for that buổi: j41 accSneakO(k)
    odds (the same number the map's Lẻn vào button shows), caught = BAL.sneak.danh + punish (exactly accSneak's fail branch) and the guards
    walk her home (a caught sneak never stays inside). No new number. Seen key S.stayRoll (optional, old saves fine). */
-function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
+/* review/home-way (owner OD 26/11 ~04:25Z): NO FAULT ⇒ NO PUNISHMENT — noWay = at the end of the buổi she had no way home (the walk home
+   cost more khắc than she had left: the «Về phòng» buttons were disabled, homeWay / jplrule); she is escorted home, no loss.
+   A warned, caught overstay is NHẸ (punish sev 0, BAL.punW.lite: khất bổng / a warning, never cấm túc). */
+function stayRoll(k,bk0,noWay){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
  const bk=typeof bkey==="function"?bkey():"";if(bk===bk0||S.stayRoll===bk+"|"+k)return;if(typeof accOwn==="function"&&accOwn(S,k))return;
  if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
  const n=nm(k),why=(accessOf(S,k)||{}).why||"";
  /* place-rules: no punishment without a warning shown before (the closing notice of the buổi that just ended): unwarned = escorted out, no loss */
+ if(noWay){log(`${n} hết giờ tiếp${why?` (${why})`:""}; ngươi đã hết khắc, không kịp về: cung nhân tiễn ngươi về tẩm cung.`);if(typeof plHome==="function"){plHome(`${n} hết giờ tiếp, cung nhân tiễn ngươi về tẩm cung.`);try{render()}catch(e){}}
+  Q.push({t:"Hết giờ tiếp",h:`<p>${n} đã hết giờ tiếp${why?` (${why})`:""}. Ngươi đã hết khắc trong buổi, không kịp tự về; cung nhân cúi đầu tiễn ngươi về tẩm cung.</p><p class="past">Không phải lỗi của ngươi: không ai bắt tội.</p>`});try{showModal()}catch(e){}return}
  if(!warned(bk0,k)){log(`${n} hết giờ tiếp${why?` (${why})`:""}: cung nhân tiễn ngươi về tẩm cung.`);if(typeof plHome==="function"){plHome(`${n} hết giờ tiếp, cung nhân tiễn ngươi về tẩm cung.`);try{render()}catch(e){}}
   Q.push({t:"Hết giờ tiếp",h:`<p>${n} đã hết giờ tiếp${why?` (${why})`:""}. Cung nhân cúi đầu tiễn ngươi ra, đưa về tẩm cung.</p><p class="past">Lần này không ai bắt tội. Lần sau, xem Tin báo: nơi nào chỉ được lưu đến hết một buổi sẽ báo trước.</p>`});try{showModal()}catch(e){}return}
  if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
- apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);punish(S,`ở lại ${n} sau giờ đóng cửa`,1);
+ apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);const cut0=S.cutPay||0;punish(S,`ở lại ${n} sau giờ đóng cửa`,0);
  /* place-rules: the guards take her home AT ONCE (goTo("home") refused while a card was open: the stage stayed on the closed place) */
  if(typeof plHome==="function"){plHome(`Thị vệ giải ngươi rời ${n} về tẩm cung.`);try{render()}catch(e){}}else{window.__actPend=null;window.__walkFree=1;try{goTo("home")}catch(e){}finally{window.__walkFree=0}}
- Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?` cấm túc ${S.confined} tháng`:" bị phạt"}</p>`});
+ Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} · ${(S.cutPay||0)>cut0?`khất bổng ${S.cutPay} tháng`:"bị cảnh cáo"}</p><p class="past">Lỗi nhẹ: không bị cấm túc.</p>`});
  try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
 window.stayRoll=stayRoll;
-if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";const r=nb0.apply(this,arguments);try{stayRoll(k,bk0)}catch(e){}return r}}
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";let noWay=false;try{const w=typeof homeWay==="function"?homeWay():null;noWay=!!(w&&!w.at&&!w.ok)}catch(e){}const r=nb0.apply(this,arguments);try{stayRoll(k,bk0,noWay)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 window.actPendRun=function(){return actPendRun()};
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
