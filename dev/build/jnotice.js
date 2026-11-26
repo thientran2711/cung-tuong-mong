@@ -207,6 +207,13 @@ function ntDeser(L){const old=new Map(NT.list.map(x=>[x.id,x]));NT.list=L.filter
 try{if(typeof lifeStore==="function")lifeStore("NT.list notices (Tin báo) of that life",()=>{NT.list=[];NT.pend=null;KB.m.clear()})}catch(e){}
 try{const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&typeof d==="object")d.nt=ntSer()}catch(e){console.error("nt ser",e)}return d}}catch(e){}
 try{const d0=deser;deser=function(d){const n0=NT.list.length;const r=d0.apply(this,arguments);try{if(!n0&&d&&Array.isArray(d.nt)&&d.nt.length)ntDeser(d.nt)}catch(e){console.error("nt deser",e)}return r}}catch(e){}/* only into an EMPTY list (a slot load / a fresh page: kmReset emptied it): an in-session rebuild (co-op relens, week merge: ser() → deser() of the same page) keeps the live list and its chip */
+/* rv4 (BIG rv save-unseen-lists, LAW 11 Tin báo family): a notice that arrives AFTER the act's own save (kitKnow batches with setTimeout 0, any
+   later timer / async reply) sat outside the sổ until the next render — a true reload in that window lost the line (video iPad: «know:» notice).
+   ONE rule for every notice: when the list changed after the last write that reached the slot, one more save runs at the end of the tick. */
+let NTV=0,NTW=0,NTT=0;
+{const k0=kitNotice;kitNotice=function(){const n=NT.list.length,top=NT.list[0];const r=k0.apply(this,arguments);
+  try{if(NT.list.length!==n||NT.list[0]!==top){NTV++;if(!NTT)NTT=setTimeout(()=>{NTT=0;try{if(NTV!==NTW&&S&&!S.dead&&!quiet)save()}catch(e){}},0)}}catch(e){}return r}}
+try{const sv0=save;save=function(){const n0=typeof SAVE_N!=="undefined"?SAVE_N:null,v=NTV;const r=sv0.apply(this,arguments);if(n0==null||SAVE_N!==n0)NTW=v;return r}}catch(e){}
 Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNoticeOpen,kitNoticeBox:boxPaint,kitKnow,kitKnowFlush,kitKnowMany});
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.3",title:"kitKnow · «Ta biết thêm N điều» (one kitNotice kind know; same chip, box and Tin báo panel as §42.2)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ta biết thêm 3 điều</span></span><button type="button" class="btn" onclick="kitKnowMany([{key:'a',text:'Ngươi biết tên: đó là Lệ tần Mai thị.'},{key:'b',text:'Ngươi đã thấy mặt một phi tần áo bậc Tần; chưa biết tên.'},{key:'c',text:'Quý phi Đào Cẩm Tâm nay được tấn phong Hoàng quý phi.'}]);kitNoticeOpen()">Mở khung Tin báo</button></div>`})}catch(e){}
