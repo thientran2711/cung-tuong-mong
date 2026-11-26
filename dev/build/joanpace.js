@@ -24,7 +24,7 @@ function opNow(){try{return[wk(),bq()]}catch(e){return[0,0]}}
 /* (b) the bounded rise: n (> 0, after the holder's nết) → what really lands */
 function opUp(x,y,n){return opStep(x,y,n,"opz",BAL.oanPace)}
 /* the same pace for «ghét»: a fall of liking (thiện cảm, j9 affAdd n < 0) — one bounded step per cause / incident, capped per day (BAL.oanPace.ghet) */
-function opDn(x,y,n){return opStep(x,y,n,"opa",BAL.oanPace.ghet)}
+function opDn(x,y,n){try{if(opOn()&&n>0&&x&&typeof x==="object"){const k=opKey(y);if(k!=null){x.agw=x.agw&&typeof x.agw==="object"?x.agw:{};x.agw[k]=opNow()[0]}}}catch(e){}return opStep(x,y,n,"opa",BAL.oanPace.ghet)}/* + stamps the day of the last fall (x.agw) for the ghét fade below */
 function opStep(x,y,n,st,P){if(!opOn()||!(n>0)||!x||typeof x!=="object")return n;try{const k=opKey(y);if(k==null)return n;
  const [w,b]=opNow();const z=x[st]=x[st]&&typeof x[st]==="object"?x[st]:{};
  for(const q in z)if(!Array.isArray(z[q])||z[q][0]<w)delete z[q];
@@ -69,3 +69,15 @@ function opGfK(lv,gap,lw){try{const G=BAL.oanPace.ghen,C=BAL.oanCool;if(!opOn()|
  if(q>0)k*=1+C.alone.k*Math.min(q,C.alone.max);if(lv>=G.deep)k*=C.deep.k;const R=G.rel;return k*Math.max(R.fmin,Math.min(R.fmax,1-gap/R.span))}catch(e){return 1}}
 /* her own jealousy's daily fade (j8 rivalsTurn; was a flat −1): fractions carry (v.pcc) */
 function pgCool(v){try{if(!opOn()||!(BAL.oanCool&&BAL.oanCool.on))return 1;const G=BAL.oanCool.ghen,p=+v.pg||0;const d=(+v.pcc||0)+(G.base+G.pct*p)*BAL.oanCool.me*opGfK(p,(+v.sung||0)-(+S.sung||0),v.pLw),n=Math.floor(d);v.pcc=Math.round((d-n)*1000)/1000;return n}catch(e){return 1}}
+/* ===== GHÉT FADE (review/oan-pace-2; owner OD 26/11 ~18:40Z «cái điểm ghét, điểm oán nó tăng quá nhanh … trong khi nó lại giảm quá chậm»; BAL.oanPace.ghet.fade) =====
+   Every day (one rivalsTurn tick, like the oán fade j28 oanCool) a dislike between her and a consort (thiện cảm < 0, both ways — law 1) eases back
+   toward 0: (fade.base + fade.pct × |thiện cảm|) × the holder's nết forgive (her: BAL.oanCool.me) × (1 + BAL.oanCool.alone.k × the days since the last
+   fall past BAL.oanCool.quiet, at most alone.max) × BAL.oanCool.deep.k when |thiện cảm| ≥ fade.deep. Fractions carry (holder.agc). Never past 0. */
+function opGhetF(lv,lw,kf){const F=BAL.oanPace.ghet.fade,C=BAL.oanCool;const a=Math.abs(lv);let d=(F.base+F.pct*a)*kf;const q=opNow()[0]-(lw==null?-1e9:+lw)-C.quiet;
+ if(q>0)d*=1+C.alone.k*Math.min(q,C.alone.max);if(a>=F.deep)d*=C.deep.k;return d}
+function opGhetStep(h,key,lv,kf){const c=h.agc=h.agc&&typeof h.agc==="object"?h.agc:{};const x=(+c[key]||0)+opGhetF(lv,(h.agw||{})[key],kf);const n=Math.floor(x);c[key]=Math.round((x-n)*1000)/1000;return Math.min(n,-lv)}
+function ghetCool(){try{if(!opOn()||!BAL.oanPace.ghet.fade)return;const L=typeof liveRivals==="function"?liveRivals(true):[];
+ for(const v of L){if(!v||v.coop||v.alive===false||v.out)continue;
+  if((+v.rel||0)<0){const n=opGhetStep(v,"me",+v.rel,persF(v,"forgive",1));if(n>0)v.rel+=n}
+  if(S.rl&&(+S.rl[v.id]||0)<0){const n=opGhetStep(S,String(v.id),+S.rl[v.id],BAL.oanCool.me);if(n>0)S.rl[v.id]+=n}}}catch(e){console.error("ghetCool",e)}}
+(function(){if(typeof rivalsTurn!=="function")return;const r0=rivalsTurn;rivalsTurn=function(){const r=r0.apply(this,arguments);ghetCool();return r};window.rivalsTurn=rivalsTurn})();

@@ -43,6 +43,11 @@ const PAGE=process.argv[2]||'index.html';
   /* (b') ghét: a fall of liking is one bounded step per cause, capped per day */
   clr(e);e.opa={};e.rel=0;S.bqN++;affAdd(e,S,-40);ok('G1 a fall of liking is at most BAL.oanPace.ghet.day a day ('+P.ghet.day+')',aff(e,S)===-P.ghet.day,aff(e,S));
   const a1=aff(e,S);affAdd(e,S,20);ok('G2 a rise of liking is never capped',aff(e,S)===a1+Math.round(20*persF(e,'trust',1)),[a1,aff(e,S)]);
+  /* GHÉT fade (review/oan-pace-2) */
+  {const F=P.ghet.fade;e.rel=-30;e.agw={me:wk()};e.agc={};ghetCool();const r1=e.rel;e.rel=-30;e.agw={me:wk()-20};e.agc={};ghetCool();const r2=e.rel;e.rel=-80;e.agw={me:wk()};e.agc={};ghetCool();const r3=e.rel+80;
+   ok('G3 a dislike toward her eases each day, faster when left alone, deep slower (BAL.oanPace.ghet.fade)',r1>-30&&r1<=0&&r2-(-30)>r1-(-30)&&r3>=0,[r1,r2,r3]);
+   e.rel=-2;e.agw={};e.agc={me:.9};for(let i=0;i<5;i++)ghetCool();ok('G4 the fade never passes 0',e.rel===0,e.rel);
+   S.rl[c.id]=-30;S.agw={};S.agc={};ghetCool();ok('G5 two-way: HER dislike of a consort eases the same way',S.rl[c.id]>-30&&S.rl[c.id]<=0,S.rl[c.id])}
   /* GHEN pace (review/oan-pace-ghen) */
   {const G=P.ghen;const gz=x=>{x.opg={};x.gUc=0;x.ghen=0};const nn=newRival(1);ok('H1 a newcomer starts near 0 jealousy (< BAL.ghenNew '+BAL.ghenNew+')',(nn.ghen||0)<BAL.ghenNew,nn.ghen);
    S.sung=50;a.sung=50;gz(a);S.bqN++;ghenUp(a,30,'t',S);const g1=a.ghen;ok('H2 one cause adds at most the band BAL.oanPace.ghen.band[2] ('+G.band[2]+')',g1>0&&g1<=G.band[2],g1);
