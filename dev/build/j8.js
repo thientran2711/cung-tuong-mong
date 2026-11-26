@@ -73,7 +73,7 @@ function oKFrame(a=S){return odA(a,25+eyes(a)*5+a.tamco/5+(DG()?4:0))}
 /* the sitting Empress is shielded: 3 proofs and a harder hearing, for every accuser alike */
 function accNeed(t){return rkOf(t)>=7?BAL.accNeedEv[1]:BAL.accNeedEv[0]}
 /* only a consort of Tần rank or above may bring a charge against the Empress */
-function accOK(a,t){return evG(a,t)>=accNeed(t)&&(rkOf(t)<7||rkOf(a)>=3)}
+function accOK(a,t){return evG(a,t)>=accNeed(t)&&cqOK(a,t,"accuse")}/* CUNG QUY (jcq): the Hoàng hậu only from BAL.cq.accQ */
 function oAccuse(a,t){return odA(a,40-(rkOf(t)>=7?30:0)+evG(a,t)*15+a.danh/10+a.tai/10+(DG()?5:0)+5*(facN(a)-1))}
 /* 2f3: the ONE betray core for the consort's confidant maid too (jagknow btRaw "tm": nết ± lòng band ± chữ trọng ± mood) + the briber's Tâm cơ; cap BAL.odds */
 function oBribe(a,t){if(typeof btRaw==="function"&&t&&t.maid&&typeof tmOn==="function"&&tmOn()){const B=BAL.ag.bt;return agOdd(odA(a,btRaw(t.maid,t,"tm")+Math.round(((a.tamco||0)-B.tamcoMid)/B.tamcoDiv)))}return odA(a,40+a.tamco/3-t.maid.loyal/3)}
@@ -125,7 +125,7 @@ A("poison","Hạ độc",{c:{duc:-10},ok:()=>true,o:a=>oPoison(a),x:"lộ: ban c
   if(aRoll(oPoison(a),a)){const strong=takeItem(a,"hacdinh");if(useAnti(t)){ap(t,{suc:BAL.eff.j8.sucF});return `${NMc(t)} trúng độc, may có thuốc giải trong rương. Sức ${balSg(BAL.eff.j8.sucF)}. `}
    const H=BAL.rl.j8.hit,d=strong?H.strong:H.lo+R(H.r);if(t===S){apply({suc:-d});return `<span class="r">Ngươi trúng độc, nôn ra máu.</span> Sức -${d}. `}ap(t,{suc:-d});return dieIf(t,"chết sau một bát yến sào")||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span> `}
   const r=`<span class="r">Thuốc độc nhắm vào ${NM(t)} bị phát hiện, tra ra người của ${NM(a)}.</span> `;deathSentence(a,`Bị ban rượu độc vì mưu hại ${NM(t)}`);return r}});
-A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x(){return `cần ${BAL.accNeedEv[0]} chứng cứ (Hoàng hậu: ${BAL.accNeedEv[1]} chứng cứ và phẩm Tần trở lên; tố hụt Hoàng hậu là phạm thượng)`},f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,BAL.ag.ev.all);
+A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x(){return `cần ${BAL.accNeedEv[0]} chứng cứ (Hoàng hậu: ${BAL.accNeedEv[1]} chứng cứ và phẩm ${RANKS[BAL.cq.accQ].n} trở lên; tố hụt Hoàng hậu là phạm thượng)`},f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,BAL.ag.ev.all);
   if(aRoll(o,a)){econPayWin(a,"accuse",t,0);/* marks the win (j70 Mua lời khai pays now) */const r=`${NMc(a)} tố giác ${NM(t)} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;fall(t,"bị tố giác, chứng cứ rành rành");return r}
   ap(a,{danh:BAL.eff.j8.accuseFailDanh});relAdd(a,t,BAL.eff.j8.f_6);if(rkOf(t)>=7)punish(a,"tố hụt Hoàng hậu, phạm thượng",2);return `${NMc(a)} tố giác ${NM(t)} không thành; chứng cứ bị hủy. `}});
 A("bribe","Mua chuộc cung nữ",{c:{get bac(){return -BAL.actBac.bribe}},ok:(a,t)=>a.bac>=BAL.actBac.bribe,o:(a,t)=>oBribe(a,t),f:(a,t)=>{/* AG-ALL-2f3 (OD 17/11 ~17:10Z): the 40 bạc are paid only when the maid takes them; a refusal costs no bạc (her report + the sent servant's fear stay) */
@@ -152,7 +152,7 @@ A("pond","Đẩy con nàng xuống hồ",{c:{get duc(){return BAL.eff.j8.pondCos
 A("kframe","Vu con nàng trù ẻo",{c:{get duc(){return BAL.eff.j8.kframeCost}},kid:1,ok:(a,t)=>sonsOf(t).some(k=>k.age>=BAL.eff.j8.kframeAge),o:a=>oKFrame(a),x:"lộ: ban chết",f:(a,t)=>{const k=sonsOf(t).filter(k=>k.age>=BAL.eff.j8.kframeAge).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return actNone(a);a.schemes=(a.schemes||0)+1;ap(a,{duc:BAL.eff.j8.kframeCost});const c=caught(a,t,false,`chôn hình nhân trù ẻo trong phòng ${k.name}`);if(c)return c;
   if(aRoll(oKFrame(a),a)){econPayWin(a,"kframe",t,0);/* marks the win (j70 Mua chuộc thầy dạy pays now) */k.fond=cl(k.fond-BAL.eff.j8.fondF,0,100);ap(t,{danh:BAL.eff.j8.kframeDanh});let r=`<span class="r">Trong phòng ${k.name} đào được hình nhân trù ẻo Hoàng thượng.</span> Hoàng thượng thương nó -${balAb(BAL.eff.j8.fondF)}. `;if(k.heir){const d0=t.danh||0;deposeHeir(k,t);const dd=(t.danh||0)-d0;/* fix-kframe-heir: the j1 deposeHeir road (mother −BAL.kid.heirDanh in the jkidlife wrap); prints what it applied */r+=`${k.name} bị phế ngôi Thái tử${dd?`, Danh ${NM(t)} ${balSg(dd)}`:""}. `}punish(t,"con trai bị tố trù ẻo",BAL.eff.j8.kframeSev);ap(a,{tamco:BAL.eff.j8.kframeTam});return r}
   const r=`<span class="r">Hình nhân trù ẻo bị lần ra gốc gác: người của ${NM(a)}.</span> `;deathSentence(a,`Bị ban chết vì vu ${k.name} trù ẻo thánh thượng`);return r}});
-A("takeaway","Xin bế con nàng về nuôi",{c:{},kid:1,ok:(a,t)=>rkOf(a)>rkOf(t)&&rkOf(t)<4&&kidsOf(t).some(k=>k.age<6),o:a=>odA(a,40+a.sung/3+rkOf(a)*4),x:"chỉ người phẩm cao hơn",f:(a,t)=>{const k=pick(kidsOf(t).filter(k=>k.age<6));if(!k)return actNone(a);
+A("takeaway","Xin bế con nàng về nuôi",{c:{},kid:1,ok:(a,t)=>cqOK(a,t,"takeaway")&&kidsOf(t).some(k=>k.age<6),o:a=>odA(a,40+a.sung/3+rkOf(a)*4),x:"chỉ người phẩm cao hơn",f:(a,t)=>{const k=pick(kidsOf(t).filter(k=>k.age<6));if(!k)return actNone(a);
   if(!aRoll(odA(a,40+a.sung/3+rkOf(a)*4),a)){relAdd(a,t,BAL.eff.j8.f_8);return `${NMc(a)} xin bế ${k.name} về nuôi; Hoàng thượng chưa chuẩn. `}
   t.kids.splice(t.kids.indexOf(k),1);a.kids.push(k);if(k.heir&&S.heir)S.heir.v=a===S?null:a;relAdd(a,t,BAL.eff.j8.f_9);
   return `<span class="${t===S?"r":"g"}">${a===S?"Ngươi":(a.queen?"Hoàng hậu":a.name)} được chuẩn bế ${k.name} về nuôi, vì phẩm vị ${NM(t)} còn thấp.</span> `}});
@@ -271,14 +271,14 @@ function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint
  if(r==="th"){ap(a,{th:g});return `${NMc(a)} dâng ${it.n} lên Thái hậu. Thái hậu +${g}. `}
  relAdd(a,r,g+3);if(r.queen||(r===S&&S.rank>=7))ap(a,{hh:g});
  const ent={k:e.k,from:key(a)};if(e.iu)ent.iu=e.iu;/* the same piece (item ledger jil) */if(e.t){ent.t=e.t;ent.by=e.by}
- if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
+ if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang ${typeof cqGiftVerb==="function"?cqGiftVerb(a,S):"tặng"} ngươi. `}/* CUNG QUY words: ban cho / kính dâng / tặng */
  /* RECEIVER CHOICE (jrcv rcvGiftIn, OD 18/11 ~21:15Z law 1): the NPC answers with HER giftin answers, the same numbers */
  const ans=typeof rcvGiftIn==="function"?rcvGiftIn(a,r,ent):null;
  if(ans==="back")return `${r.name} trả lại ${it.n} cho ${NM(a)}. `;
  if(ans&&!["take","check"].includes(ans))return ans;/* «found»: the line comes from jrcv (where the rule reads evGo) */
  r.inv.push(ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
  if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
- return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
+ return `${NMc(a)} ${typeof cqGiftLine==="function"?cqGiftLine(a,r,it.n):`tặng ${it.n} cho ${r.name}`}: thiện cảm +${g+3}. `}
 function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";if(typeof ilUid==="function")ilUid(e);a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
  if(!aRoll(oPlant(a,t),a)){/*evok: plant act (runAct deed)*/evA(t,a,BAL.eff.j8.evPlantItem);relAdd(a,t,BAL.eff.j8.plantItem);if(typeof ilGone==="function")ilGone(a,e,"evid");return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ. `}
  t.inv.push({k:e.k,t:e.t,by:key(a),h:1,iu:e.iu});/* the same piece (item ledger jil) */return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}

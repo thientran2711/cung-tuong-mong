@@ -65,11 +65,11 @@ TWD("warn",{n:"Cảnh báo nàng",req:(a,t)=>!!t,run:(a,t)=>{const x=liveRivals(
 /* --- deeds only NPCs had: now one deed for both (player option added below) --- */
 TWD("visit",{n:"Thăm lúc ốm mệt",req:(a,t)=>!!t&&((t.suc||0)<50||!!t.preg),run:(a,t)=>{const g=G().visit;relAdd(a,t,g[0]);twAp(t,{suc:g[1]});return `${twNm(a)} sang thăm ${NM(t)} lúc ốm mệt`}});
 TWD("mediate",{n:"Hòa giải",req:(a,t)=>!!t&&!!twFoeOf(a,t),run:(a,t)=>{const x=twFoeOf(a,t);/* RECEIVER CHOICE (jrcv RCVK.mediate): the one who holds the oán answers */return x?rcvAsk("mediate",a,t,key(x)):""}});
-TWD("humil",{n:"Hạ nhục",req:(a,t)=>!!t&&rkOf(a)>=rkOf(t),run:(a,t)=>{const g=G().humil;oanAdd(t,a,g[0]);twAp(t,{danh:-g[1]});return `${twNm(a)} hạ nhục ${NM(t)} trước mặt cung nhân`}});
+TWD("humil",{n:"Hạ nhục",req:(a,t)=>!!t&&cqOK(a,t,"humil"),run:(a,t)=>{const g=G().humil;oanAdd(t,a,g[0]);twAp(t,{danh:-g[1]});return `${twNm(a)} hạ nhục ${NM(t)} trước mặt cung nhân`}});
 TWD("flaunt",{n:"Khoe quà ngự ban",req:a=>(a.sung||0)>=40,run:a=>{liveRivals(true).forEach(x=>{if(x!==a)ghenUp(x,G().flaunt,`thấy ${twNm(a)} khoe quà ngự ban`,a)});return `${twNm(a)} đi khắp cung khoe quà ngự ban`}});
 TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a,t,ok)=>{affAdd(a,t,ok?G().test[0]:G().test[1]);return `${twNm(a)} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}});
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=netTh(a,"than")&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
-TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
+TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&cqOK(a,t,"follow"),run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
 TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{/* NPC-PURPOSE G3: the talk is about the one the teller resents (her foe, near-best by hostility); no foe → harmless talk */const x=npwPick(liveRivals(true).filter(y=>y!==a&&y!==t),y=>Math.max(0,hostility(a,y)-BAL.ag.why.min));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung${x?` về ${NM(x)}`:""}`}});
 TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{/* 2e4: her "Kiểm tra đồ" detection (j8 inspect: oSee odds per item, trail evidence) */const f=inspect(a);return f.length?`${twNm(a)} cho soát quà, tìm ra: ${f.join("; ")}`:`${twNm(a)} cho soát lại quà được tặng, không thấy gì lạ`}});
 TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<G().admonCd)},
@@ -90,7 +90,7 @@ window.TW=TW;window.twDo=twDo;window.twCost=twCost;
  /* spying and befriending: the player's own ACT (free "Tự đi dò la" / paid "Kết giao"), same odds, same caught rules */
  if(SOC.spy)SOC.spy.run=function(v,t){return strip(ACT.spyk?runAct(v,t,"spyk"):"")};
  if(SOC.ally){const ok0=SOC.ally.ok;SOC.ally.ok=(v,t)=>ACT.ally.ok(v,t)&&ok0(v,t);SOC.ally.run=function(v,t){return strip(runAct(v,t,"ally"))}}})();
-function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);return L.sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
+function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&cqOK(v,x,"follow"));return L.sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
 
 /* ---------- Player side: her options read the same costs; NPC-only deeds become her options ---------- */
 (function(){const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{if(!S||!v)return A;

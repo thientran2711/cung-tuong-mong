@@ -166,7 +166,7 @@ walkSlow=function(p){try{return p&&p.pen&&p.pen.until>wk()?BAL.walk.pen:0}catch(
 (function(){try{const s0=PEND.cnvOrd;if(s0)PEND.cnvOrd=function(){const d=s0.apply(this,arguments);try{const op=d&&d.o&&d.o.find(x=>x.n==="Từ chối");if(op&&op.go){const g=op.go;op.go=function(){const q0=S.suc;const r=g.apply(this,arguments);try{if(S.suc<q0&&!S.dead)penGive(S,"quy","từ chối lệnh chủ")}catch(e){}return r}}}catch(e){}return d}}catch(e){}})();
 (function(){if(typeof srvMoodEvent!=="function")return;const s0=srvMoodEvent;srvMoodEvent=function(){const n=Q.length;const r=s0.apply(this,arguments);try{if(Q.length>n&&Q[Q.length-1]&&Q[Q.length-1].t==="Bị đánh đòn"&&!S.dead)penGive(S,"truong","bị chủ sai đánh")}catch(e){}return r}})();
 /* the acts, two-way (same rules for her and every consort): Tát (higher rank, same place) and Phạt quỳ (Hoàng hậu, or three ranks above) */
-function fxAuth(a,t){try{return !!a&&!!t&&a!==t&&(a.queen||(a===S&&S.rank>=7)||rkOf(a)>=rkOf(t)+3)}catch(e){return false}}
+function fxAuth(a,t){/* CUNG QUY (jcq): the one rank rule — authority, or a deliberate «vượt quyền» breach */try{return !!a&&!!t&&a!==t&&cqOK(a,t,"phatquy")}catch(e){return false}}
 /* Tát, three tiers (owner 16/11): her tier comes from the power-bar game (jslap) or "Tát luôn" = nhẹ; an NPC's tier is rolled (jslap) and her dodge lowers it by one.
    SLAP.next = the tier chosen for the very next tat (consumed here). A harder slap costs more Đức, leaves a deeper grudge and a darker mark that others can report. */
 const SLAP={next:0};window.SLAP=SLAP;
@@ -174,7 +174,7 @@ function slapEvidence(a,t,sev){try{const B=BAL.slap;let r="";if(a!==S&&a.alive==
  if(B.evT[sev]&&roll(B.evT[sev])&&t!==a){evA(t,a,BAL.eff.jface.evSlapEvidence);r+=`${NMc(t)} ghi nhớ cái tát này (chứng cứ về ${NM(a)} ${balSg(BAL.eff.jface.evSlapEvidence)}). `}
  const W=(typeof liveRivals==="function"?liveRivals(true):[]).filter(x=>x!==a&&x!==t);
  if(B.evW[sev]&&W.length&&roll(B.evW[sev])){const w=W[Math.floor(Math.random()*W.length)];evA(w,a,BAL.eff.jface.evSlapEvidence_2);if(a===S)r+="Có kẻ trông thấy, ghi lại chuyện này. "}return r}catch(e){return""}}
-A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"đánh nhẹ, vừa hay nặng tùy tay: nàng in dấu tay trên má, Sắc giảm vài tuần · Đức ngươi giảm theo độ nặng · nàng oán ngươi",f:(a,t)=>{
+A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&cqOK(a,t,"tat")&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"đánh nhẹ, vừa hay nặng tùy tay: nàng in dấu tay trên má, Sắc giảm vài tuần · Đức ngươi giảm theo độ nặng · nàng oán ngươi",f:(a,t)=>{
  const B=BAL.slap;let sev=cl(SLAP.next|0||B.def,1,3);SLAP.next=0;const dc=B.duc[sev];
  if(typeof ducAdd==="function")ducAdd(a,dc,"tát người");else ap(a,{duc:dc});relAdd(t,a,B.rel[sev]);if(B.oan[sev])oanAdd(t,a,B.oan[sev]);slapGive(t,a,"",sev);let r=`${NMc(a)} giáng một cái tát ${B.nm[sev]} lên má ${NM(t)}. `;
  if(sev>=3&&roll(B.thau)){ap(a,{danh:B.thauDanh});r+=`Thái hậu nghe chuyện, quở trách nặng lời (Danh ${a===S?"ngươi":NM(a)} ${B.thauDanh}). `}
@@ -184,8 +184,8 @@ A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&
  if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(t,a,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
  if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FXF.penQuy}, gối đau, đi lại chậm.</span> `}});
 try{AOUT.tat=["nàng in dấu tay trên má, Sắc giảm vài tuần; nàng oán ngươi",""];AOUT.phatquy=[`nàng quỳ phạt: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần; nàng oán ngươi`,""]}catch(e){}
-try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
- LACK.phatquy=t=>!fxAuth(S,t)?"ngươi là Hoàng hậu, hoặc trên nàng ba phẩm":t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
+try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":!cqOK(S,t,"tat")?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
+ LACK.phatquy=t=>!fxAuth(S,t)?`ngươi là Hoàng hậu, chủ vị cung nàng, hoặc trên nàng ${typeof kitNumVi==="function"?kitNumVi(BAL.cq.auth.gap):BAL.cq.auth.gap} phẩm`:t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
 try{ACTDOM.tat="Mưu kế";ACTDOM.phatquy="Mưu kế";J78VERB.tat="tát {t}";J78VERB.phatquy="phạt {t} quỳ";HARMK["Tát"]="tat";HARMK["Phạt quỳ"]="phatquy"}catch(e){}
 try{for(const k of ["tat","phatquy"]){if(!BANDS[1][2].includes(k))BANDS[1][2].push(k);const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes(k))g[1].push(k)}}catch(e){}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!O.length)return O;const b=bandVT(v,t);if(b>=1){

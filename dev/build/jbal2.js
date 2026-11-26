@@ -2252,3 +2252,17 @@ Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,
 BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
 /* KIT music (KK18 §96): an event track holds this long before the base track returns */
 BAL.kmus={holdMs:6000};
+/* CUNG QUY (jcq.js, owner OD 26/11 ~06:50Z (C)): the one rank-etiquette table; rules: dev/handover/reports/cung-quy-expert.md §G */
+Object.assign(BAL,{cq:{on:1,
+ r:{emp:100,th:90,cold:-1,srv:-2},            /* rank scale beyond the consort ladder 0..7 (research §0) */
+ auth:{gap:3,hiep:6},                          /* gap = ranks above that may discipline (was jface fxAuth +3); hiep = Hoàng quý phi holds hiệp lý lục cung while the Hoàng hậu seat is empty */
+ gap:{follow:2},                               /* an "up" deed needs this many ranks (default 1); follow was rkOf(t)>rkOf(a)+1 */
+ take:{max:4},                                 /* xin bế con: only from a mother below Phi (was takeaway rkOf(t)<4) */
+ accQ:3,                                       /* charging the Hoàng hậu needs Tần or above (was accOK rkOf(a)>=3) */
+ bold:{traits:["Kiêu ngạo","Nóng nảy"],sung:60},/* who may breach on purpose: one of these nết and Sủng ≥ sung (cậy sủng); cool-down = BAL.ea.pick.phamCd */
+ fx:{oan:10,danh:2},                           /* breach: the target's oán +oan, the doer's Danh −danh; cấm túc roll = BAL.ea.pick.phamP */
+ k:{up:["thTH","thHH","follow","cx:thHelp","cx:hhShield","maid:greet","srv:greet"],
+    down:["provoke","nuoc","tea","ink","cx2:vent"],downNB:["humil"],high:["tat"],
+    auth:["phatquy","batnat","hh:judge","hh:conf","hh:cutpay","hh:reward","hh:pardon","admon","th:gift","th:admon","th:release","emp:summon","emp:visit","emp:tea","cx3:staffPhat","cx3:staffThuong"],
+    take:["takeaway"],accuse:["accuse","tocao","vp","xx","xinhh","trinhth","trinhhh","expose","maid:accuse","srv:accuse"]},
+ alias:{humiliate:"humil",serveTH:"thTH",apologise:"apol",bribeksp:"ksp",ambush:"provoke"}}});

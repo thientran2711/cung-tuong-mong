@@ -1,0 +1,11 @@
+/* CUNG QUY old save: a save made by LIVE (played 2 weeks of buổi) loads in this build and plays 2 more weeks with the etiquette gates on, no page error.
+   usage: node dev/test/cung-quy-oldsave.js <oldIndex.html> <newIndex.html>   exit 0 = PASS */
+const {chromium}=require('playwright');const path=require('path');const [,,OLD,NEW]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const boot=async(b,f,E)=>{const c=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await c.newPage();p.on('pageerror',e=>E.push(e.message.slice(0,150)));
+ await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.addInitScript(()=>{window.__nlInner=1});await p.goto('file://'+path.resolve(f),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await sleep(2000);return{c,p}};
+const play=n=>{window.__bot=1;const drain=()=>{for(let k=0;k<40&&Q.length;k++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(0);else closeModal()}catch(e){}if(Q[0]===m)Q.shift()}};for(let i=0;i<n&&!S.dead;i++){drain();S.mg=0;try{placeWhere();if(typeof agFlush==='function')agFlush()}catch(e){}drain();try{if((S.buoi||0)>=3)endTurn();else nextBuoi()}catch(e){}drain()}return wk()};
+(async()=>{const b=await chromium.launch();const e1=[],e2=[];
+ const o=await boot(b,OLD,e1);const ls=await o.p.evaluate(`(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;(${play})(24);quiet=false;save();const r={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);r[k]=localStorage.getItem(k)}return r})()`);
+ const n=await boot(b,NEW,e2);await n.p.evaluate(r=>{for(const k in r)localStorage.setItem(k,r[k])},ls);
+ const res=await n.p.evaluate(`(()=>{document.getElementById('title').hidden=true;try{const d=loadSlot(3);SLOT=3;quiet=true;deser(d);quiet=false;Q.length=0;document.getElementById('modal').hidden=true;const w0=wk();const w1=(${play})(24);save();return 'ok tuần '+w0+'→'+w1+' cq.on='+BAL.cq.on+' acts='+CQN.n}catch(e){return 'ERR '+e.message}})()`);
+ console.log(res,'| old errs',e1.length,'| new errs',e2.length,e2.slice(0,3).join(' / '));const ok=/^ok/.test(res)&&!e2.length;console.log(ok?'PASS':'FAIL');await b.close();process.exit(ok?0:1)})();
