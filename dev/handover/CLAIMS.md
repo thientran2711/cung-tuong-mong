@@ -531,3 +531,4 @@ REPORT-PDF | reports/owner-bugs | session_01Rc5AsKkt37eTP1GAhJhsdQ | RUNNING | 2
 SOUND-CACHE | review/sound-cache | session_01Rc5AsJ3sh4CYhjzv2Uxe2X | RUNNING | 26/11 18:32Z (MAIN 161)
 FIRSTCARD-3 | review/firstcard-3 | session_01Rc5AsHs5nwj5S6TfrMqH3U | RUNNING | 26/11 18:32Z (MAIN 161)
 save stack rv12 independent check (reviewer-written code) | (read-only) | session_01N1tNP3Zj12NeYMNLEFETxu | RUNNING | 26/11 18:42Z (Foreman B child 4)
+save stack BIG rv r7 (rv12 → rv13 on f573dc94) | review/save-fix-stack-rv13 | <pending> | RUNNING | 26/11 18:50Z (Foreman B child 4)
