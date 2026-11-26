@@ -1,0 +1,17 @@
+## fold page errors 0
+ serv (Lưu Chu @ home): pop-up tab labels = Giao thiệp 6/6 · Mưu kế 1/1 · Ban thưởng 1/1 · Trừng phạt 2/2
+ elder (Tống ma ma @ thu): pop-up tab labels = (one pane)
+ rival (Vu Lạc Yên @ vuon): pop-up tab labels = Giao thiệp 19/22 · Mưu kế 3/3 · Hại người 4/4 · Trừng phạt 1/1
+ npc (Huệ Tâm @ vuon): pop-up tab labels = (one pane)
+ kid (Công chúa Vinh Hiến @ r2): pop-up tab labels = (one pane)
+ maid (Cẩm Tịch @ dtd): pop-up tab labels = Giao thiệp 3/3 · Mưu kế 1/1
+ ty (Trương Minh Viễn @ tyv): pop-up tab labels = Giao thiệp 1/1 · Y dược 1/3
+ hh (Hoàng hậu Thôi Tố Tuyết @ r3): pop-up tab labels = Hại người 1/1 · Giao thiệp 2/2
+## ipad page errors 0
+ rival (Vương Mạn Châu @ home): pop-up tab labels = Giao thiệp 19/22 · Mưu kế 2/2 · Hại người 4/4 · Trừng phạt 1/1
+ serv (Thải Vân @ home): pop-up tab labels = Giao thiệp 6/6 · Mưu kế 1/1 · Ban thưởng 1/1 · Trừng phạt 2/2
+ npc (Chi Nhi @ home): pop-up tab labels = (one pane)
+ maid (Bích Ngân @ thu): pop-up tab labels = (one pane)
+ elder (Tống ma ma @ home): pop-up tab labels = (one pane)
+ th (Thái hậu @ vuon): pop-up tab labels = Lễ nghi 0/1 · Giao thiệp 1/3
+ kid (Công chúa Thục Tuệ @ r2): pop-up tab labels = (one pane)
