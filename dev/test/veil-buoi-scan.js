@@ -18,6 +18,6 @@ const ORIG={'#modal':'rgba(42, 26, 18, 0.533)','.modal.kload (loading)':'rgba(42
    await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});await sl(300);
    try{await p.evaluate(async()=>{const Sc=kitScene.open({bg:typeof IMG_U==='function'?IMG_U('img/ev-te-le.webp'):'img/ev-te-le.webp',intro:0});const g=Sc.L.g,fh=Math.round(g.H*.8);await Sc.fig(S,{cx:g.w*.5,top:g.H-fh,fh,z:2});Sc.show();window.__sc=Sc});await sl(1200);await p.screenshot({path:`${SHOT}/${W}x${H}-b${bu}-scene.png`});await p.evaluate(()=>{try{window.__sc.close(true)}catch(e){}})}catch(e){console.log('scene err',e.message.slice(0,80))}}
  }
- console.log('| layer | sáng(0) | trưa(1) | chiều(2) | tối(3) | tối = original | 0-2 differ from tối |');
- for(const [n] of LAYERS){const v=[0,1,2,3].map(i=>rows[i][n]);const okT=v[3]===ORIG[n];const okD=[0,1,2].every(i=>v[i]!==v[3]);if(!okT||!okD)fail++;console.log(`| ${n} | ${v.join(' | ')} | ${okT?'ok':'FAIL '+ORIG[n]} | ${okD?'ok':'FAIL'} |`)}
+ console.log('| layer | sáng(0) | trưa(1) | chiều(2) | tối(3) | tối = token, lighter than old | 0-2 differ from tối |');
+ for(const [n] of LAYERS){const v=[0,1,2,3].map(i=>rows[i][n]);const al=x=>parseFloat(x.split(',')[3]);const okT=v[3]==='rgba(42, 26, 18, 0.32)'&&al(v[3])<al(ORIG[n]);const okD=[0,1,2].every(i=>v[i]!==v[3]);if(!okT||!okD)fail++;console.log(`| ${n} | ${v.join(' | ')} | ${okT?'ok':'FAIL '+ORIG[n]} | ${okD?'ok':'FAIL'} |`)}
  console.log(fail?'FAIL '+fail:'PASS');if(errs.length)console.log('pageerrors',errs);await b.close()})();
