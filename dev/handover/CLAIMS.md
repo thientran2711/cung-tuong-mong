@@ -449,3 +449,9 @@ NEWS-SIEVE Tin trong cung sieve + monthly summary + nết open + rank respect + 
 | FIXER save follow-up A pid «Việc khó xử» cards dropped on load (opus; briefs/b-save-pid-cards.md) | review/save-pid-cards; reports/save-pid-cards.md | B ROOT 2 child 2 | session_01N1tNP3tHDZmhEaxQ1fmrKZ | RUNNING | 26/11 06:55Z |
 K-ICO-HOME | img/place-home.webp (CDN, no branch) | session_01PEhRbxricb8su4Cev3MQCY | DONE 07:25Z (was RUNNING) | 26/11 07:18Z (Foreman C ROOT 3-1)
 | FIXER co-op reg9 level-9 host routing gap (Foreman D 07:40Z; opus; briefs/b-coop-reg9-route.md) | review/coop-reg9-route; reports/coop-reg9-route.md | B ROOT 2 child 2 | session_01N1tNP3un1wpGRWEeauvwMp | RUNNING | 26/11 07:50Z |
+ACT-MERGE J0 kit row +8 (42) | review/act-merge-J0 | session_01V1ZZH1KkKyKvFCTKrJjfDi (KK39) | RUNNING | 26/11 08:15Z (MAIN 155)
+ACT-MERGE J1 talk side | review/act-merge-J1 | session_01V1ZZH3t16bcosA8e3k56aF | RUNNING | 26/11 08:15Z (MAIN 155)
+ACT-MERGE J2 harm side | review/act-merge-J2 | session_01V1ZZH3CqezByRAUZudKLCM | RUNNING | 26/11 08:15Z (MAIN 155)
+ACT-MERGE J3 Hanh su 16 | review/act-merge-J3 | session_01V1ZZH2JvFTkAQBPLdCwCti | RUNNING | 26/11 08:15Z (MAIN 155)
+ACT-MERGE J4 tabs | review/act-merge-J4 | session_01V1ZZH4KYkh2QzjisNwGsGc | RUNNING | 26/11 08:15Z (MAIN 155)
+ACT-MERGE J5 roads | review/act-merge-J5 | session_01V1ZZH4ik1qjdX1WApZB5aF | RUNNING | 26/11 08:15Z (MAIN 155)
