@@ -2,7 +2,7 @@
    Ruling: (1) his natural death is RARE on a wide curve (BAL.mort.life.dice.emp, PACE-SPEED, read only here); (2) NHƯỜNG NGÔI — he hands the throne to
    the crown prince when he is old / ill, or when the Thái hậu and the court press him; (3) PHẾ — a court house with enough strength, Sủng and evidence
    deposes him; (4) LẬT ĐỔ — a coup by a house whose power passes the threshold. Reign length = whatever these and the natural curve give.
-   Numbers: BAL.re (jbal2.js), law 4. Her own side is untouched (poison / illness / assassination; the age-40 «Tuổi xuân qua đi» end in j3 is NOT touched).
+   Numbers: BAL.re (jbal2.js), law 4. Her own side: illness / poison / assassination still end her life early (owner ~21:40Z «Giữ bệnh, độc, ám sát»); the age-40 «Tuổi xuân qua đi» end is removed (j3, owner ~21:30Z).
    THE MODEL (one rule for every house, law 6b — the five court houses of j55 are the factions; each acts by its own goals: power, a prince of its blood, greed):
      NHƯỜNG NGÔI pressure S.re.a (0..100): rises each month from the state — a grown crown prince, illness / old age, the reign's length, the living
        Thái hậu pressing, the heir's house strong at court — damped by the throne's grip (jreign rg.p). At BAL.re.abd.warn the court petitions
