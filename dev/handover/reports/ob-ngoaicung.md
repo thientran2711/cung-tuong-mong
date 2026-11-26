@@ -132,3 +132,26 @@ reused: ROAD8 / ROAD8_LAB / placeCtx (jroad8), review/ob-phu jmapz MAPZ_DTV (pla
 Scan (node dev/test/ob-ngoaicung/scan.js <url> out.json --play=600, 5 home roads, iPad): SCAN PASS — head-count tt/td «1 Người hầu · 3 Trưởng bối»,
 cnv «3 Gia đình», nc/bd «1 Người hầu · 3 Vương tộc»; tabsRenamed 0; acts 0; asks 0; dialogs with palace words only the home selection pool
 (Điện tuyển, Lệnh tuyển cung nữ — by design); page errors 0.
+8. **Result cards at home** (found in the thôn nữ Fold video: «KẾT QUẢ · Trong cung vừa qua … Hoàng hậu: ghen +8, Quý phi …, một vị Phi …»):
+   the jaudit «time passed» card and EVERY resultShow at home keep no palace relation drift (before.rel reset to now, except the person her own act
+   names in its title, e.g. «Gửi quà vào cung cho X»); the «time passed» title is by place (ROAD8_LAB aa_t: «Trong phủ vừa qua» / «Ở nhà vừa qua» …).
+   scan.js strict «cards». Underlying (not changed, for MAIN): the palace sim still moves consorts' ghen toward her while she is at home.
+
+## FINAL (OB-NGOAICUNG-2) — sha 1773d3eb (+ this report commit)
+- Family scan, 600 random steps × 5 home roads (tt td cnv nc bd): SCAN PASS — tabsRenamed 0 · acts 0 · asks 0 · cards 0 · page errors 0
+  (one run: td began straight in the palace = harness start flake, isKc false; rerun td alone PASS).
+- outside/route.js --origin=tt: 4/4 PASS.
+- quickcheck 1773d3eb vs LIVE 5e013076: build ✓ · time-spill ✓ · open 2201 ms ✓ · old save ✓ · perf ✓ (median new/live render 256/257, tab 616/633,
+  buổi 1810/5047, tasks>200ms 28/30). Only FAIL = G4 button-crawl «Ô lưu · Lui · close did not close its layer» — the same FAIL OB-NGOAICUNG found
+  on LIVE 5e013076 side by side (pre-existing; not re-run side by side this time).
+- coop-e2e: 143/143 passed.
+- FULL home-life videos (20 buổi of real taps each, all 8 tabs incl. Hoàng tự empty line, Tin báo opened every 5 buổi; dialog list: only home people;
+  Tin báo empty at the end; 0 page errors), LOOKED (frame sheets):
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc3-tt-life-fold-755x1000.webm
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc3-tt-life-ipad-1180x820.webm
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc3-cnv-life-fold-755x1000.webm
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/ob-ngoaicung/ngc3-cnv-life-ipad-1180x820.webm
+- OPEN for MAIN (not decided here, law 16/18): (a) Dưỡng Tú viện: no state puts her there as a tú nữ (row ready, unreached); OB-PHU2 inactive.
+  (b) «Cha định hôn» stay road → parking lot (MAIN 151). (c) gifts to family → parking lot. (d) seen in the cnv video: the thôn nữ's Dư đồ shows
+  the gentry estate map (Viện di nương, Khuê phòng, Từ đường …) — a village home map is likely wanted (art/map owner). (e) palace sim moves consorts'
+  ghen toward her while she is at home (now hidden from her cards; the numbers themselves still move).
