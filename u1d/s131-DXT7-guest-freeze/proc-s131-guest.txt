@@ -1,0 +1,8 @@
+== 2026-11-26T03:50:08Z pid 10446
+  PID   RSS %CPU ELAPSED
+10446 4734376 61.0  3728
+Rss:             4734652 kB
+Anonymous:       4010172 kB
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+10446 root      20   0 1455.1g   4.5g 724480 R  40.0  28.8  24:51.27 chrome-he+
+10448 root      20   0 1455.1g   4.5g 724480 S   0.0  28.8   0:00.00 PerfettoT+
