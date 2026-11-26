@@ -1,0 +1,105 @@
+{
+ "tab": "act",
+ "place": "r2",
+ "stage": {
+  "x": 8,
+  "y": 162.734375,
+  "w": 1164,
+  "h": 601.265625,
+  "cls": "stage sc-kpm-chinh rp3 day hasme j59 j59slot j59fx kown kpn kplfs k3g"
+ },
+ "fo": "0px",
+ "big": [
+  {
+   "tag": "DIV",
+   "id": "scimg",
+   "cls": "scimg",
+   "x": 9,
+   "y": 163.734375,
+   "w": 1162,
+   "h": 599.265625,
+   "bg": "url(\"https://ctm-img.victoria-tntt.workers.dev/img/canh-phuc-cung-xuan-sang.webp\")",
+   "pos": "50% 100%",
+   "size": "cover",
+   "op": "0"
+  },
+  {
+   "tag": "CANVAS",
+   "id": "",
+   "cls": "pxc",
+   "x": 9,
+   "y": 163.734375,
+   "w": 1162,
+   "h": 599,
+   "bg": "none",
+   "pos": "0% 0%",
+   "size": "auto",
+   "op": "1"
+  },
+  {
+   "tag": "CANVAS",
+   "id": "kfxcv",
+   "cls": "",
+   "x": 0,
+   "y": 0,
+   "w": 1180,
+   "h": 820,
+   "bg": "none",
+   "pos": "0% 0%",
+   "size": "auto",
+   "op": "1"
+  }
+ ],
+ "figs": [
+  {
+   "src": "unknown-fig-f.webp",
+   "x": 312.90625,
+   "y": 261.59375,
+   "w": 233.75,
+   "h": 432.296875
+  },
+  {
+   "src": "unknown-fig-f.webp",
+   "x": 546.5,
+   "y": 261.59375,
+   "w": 233.75,
+   "h": 432.296875
+  },
+  {
+   "src": "unknown-fig-f.webp",
+   "x": 780,
+   "y": 261.59375,
+   "w": 233.75,
+   "h": 432.296875
+  },
+  {
+   "src": "fig-consort-c13-t6-a18.webp",
+   "x": 78.484375,
+   "y": 254.3125,
+   "w": 197.40625,
+   "h": 438.6875
+  }
+ ],
+ "pxbg": {
+  "x0": 0,
+  "y0": -175.66666666666674,
+  "dw": 1162,
+  "dh": 774.6666666666667
+ },
+ "tags": [
+  {
+   "y": 696,
+   "h": 14.96875
+  },
+  {
+   "y": 696,
+   "h": 19.1875
+  },
+  {
+   "y": 696,
+   "h": 14.96875
+  }
+ ],
+ "nat": "https://ctm-img.victoria-tntt.workers.dev/img/canh-phuc-cung-xuan-sang.webp",
+ "px": null
+}
