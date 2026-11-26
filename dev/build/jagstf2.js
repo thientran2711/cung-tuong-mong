@@ -43,7 +43,8 @@ function stf2Ord(a,sv,t,k){if(!stf2On()||!sv||sv===S||!a)return null;const K=BAL
   if(s.role==="maid"){let foe=null,fa=0;for(const k in s.af||{}){const v=s.af[k];if(v<fa){const x=servById(+k);if(x&&stfPoisonOk(s,m,x)){fa=v;foe=x}}}
    if(foe){const o=asOpt(s,"poison",SRVA.poison.o(s,m),{t:foe,at:palaceOf(ownerOf(foe)),w:{spite:-fa*K.poison.u},l:{tin:-B.caughtTin,suc:-B.caughtSuc}});o.u=asU(N,o)*B.uMul;if(o.u>0)L.push(o)}}
   /* Xin chủ cho đi: under BAL.sp.leaveLoyal, not again before her cooldown */
-  const LL=BAL.sp.leaveLoyal;if(!s.coop&&(s.loyal||0)<LL&&!((s.lvCd||0)>S.turn)){const o=asOpt(s,"leave",SRVA.leave.o(s,m));o.u=K.leave.u*(LL-(s.loyal||0))/LL*B.uMul;if(o.u>0)L.push(o)}
+  const LL=BAL.sp.leaveLoyal,og=typeof spOutgrown==="function"&&spOutgrown(m,s);/* review/srv-rank: or she outgrew the house (BAL.srvCap, the same rule as the maid player) */
+  if(!s.coop&&((s.loyal||0)<LL||og)&&!((s.lvCd||0)>S.turn)){const o=asOpt(s,"leave",SRVA.leave.o(s,m));o.u=(Math.max(0,K.leave.u*(LL-(s.loyal||0))/LL)+(og?BAL.srvCap.u:0))*B.uMul;if(o.u>0)L.push(o)}
  }catch(e){console.error("jagstf2 opts",e)}return L};
  AS_DO.poison=(s,m,o,ok)=>{const x=o.t,t=x&&ownerOf(x);if(!x||!t||t===m)return"";return mlPoisonDo(m,s,t,x,!ok,1)||""};
  AS_DO.leave=(s,m)=>spAsk(m,s)||"";})();

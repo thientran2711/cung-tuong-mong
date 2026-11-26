@@ -48,6 +48,12 @@ function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i
 /* AG-ALL-2 G6 / G10 (ONE CORE): a servant asks her master o to let her go — the three answers, built once: the player consort's card (spLeaveCard),
    an NPC master's choice (spAsk → mindPick, BAL.ag.stf2.lvW × her nết), and the maid player's own "Xin chủ cho đi hầu cung khác" (s = S). */
 function spLvS(s){return s===S?{role:"maid",rk:S.srv.rk}:s}
+/* review/srv-rank: ONE rule for her and every NPC servant — she has OUTGROWN her house (BAL.srvCap): at her master's cap (srkMax) with full
+   Công lao, and a higher palace with room (spGoTo) exists → the ask to serve elsewhere is open whatever her trust (it was locked for a trusted
+   servant, so a good maid under a low master stood still for years) */
+function spOutgrown(o,s){try{const B=BAL.srvCap;if(!B||!B.open||!o||!s)return false;const x=spLvS(s),rk=srk(x),mp=s===S?(S.srv&&S.srv.mp)||0:s.mp||0;
+ return rk>=srkMax(o,x)&&mp>=srvMpNeed(rk)&&!!spGoTo(o,x)}catch(e){return false}}
+function spLvTrust(s){return s===S?(S.tin||0):(s.loyal||0)}
 function spLvLoy(s,n){if(s===S)apply({tin:n});else s.loyal=cl(s.loyal+n,0,100)}
 function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spGoTo(o,x);const me=o===S,rk=srk(x);const keep=Math.max(B.keepMin,Math.round(dbCost({role:x.role,rk:rk-1})*B.keepMul));
  const others=(o.staff||[]).filter(y=>y!==s);const nm=s===S?"ngươi":s.name;
@@ -62,7 +68,8 @@ function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spGoTo(o,x);const me=o===S
 function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.leave.cd;else s.lvCd=S.turn+BAL.ag.stf2.leave.cd;
  if(o===S){if(!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))spLeaveCard(s);return""}
  if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const v=spGoTo(o,s);if(v)spMove(o,s,v);return""}
- const W=BAL.ag.stf2.lvW,O=spLeaveOpts(o,s).filter(x=>!x.lock);const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
+ const W=Object.assign({},BAL.ag.stf2.lvW),O=spLeaveOpts(o,s).filter(x=>!x.lock);
+ if(spOutgrown(o,s)&&spLvTrust(s)>=BAL.sp.leaveLoyal){W.let=(W.let||0)*BAL.srvCap.letW;W.demote=(W.demote||0)*BAL.srvCap.demW}/* review/srv-rank: a trusted servant who outgrew the house is let go more often, punished less */const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
  const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}
 function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;const v=K.v,keep=K.keep;
  tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
@@ -75,4 +82,4 @@ function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.
  s.loyal=cl(s.loyal-B.proudLoy,0,100);(o.staff||[]).forEach(x=>{if(x!==s)x.loyal=cl(x.loyal-B.bully,0,100)});
  if(s.loyal<B.leaveLoyal&&ag2Ch(s,B.leaveCh*(window.agSelf&&agSelf(o)?1+(B.leaveLoyal-s.loyal)/B.leaveLoyal:1))){const r=spAsk(o,s);if(r&&o!==S&&typeof mlSee==="function"&&mlSee(o))ev+=r}}}return ev}
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);let e2="";try{e2=spMonth()}catch(e){console.error(e)}return (ev||"")+e2}})();
-window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;window.spLeaveOpts=spLeaveOpts;window.spAsk=spAsk;
+window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;window.spLeaveOpts=spLeaveOpts;window.spAsk=spAsk;window.spOutgrown=spOutgrown;
