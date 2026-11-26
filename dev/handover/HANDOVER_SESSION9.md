@@ -277,3 +277,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~16:29Z **LIVE b881686f** (ACT-MERGE: 157 → 85 action names) FF-pushed by MAIN 160 on LC22 gates (QC PASS, buổi 1795/3783). ROLLBACK aa37de21. balance-pace «BAL words» flag = stale test (words inside «Học» chooser) → RV-ACT-MERGE tap-confirms + fixes test (or row text if lost). NAME table sent to sếp. J1–J5c to archive.
 - ~16:31Z RV-ACT-MERGE confirmed: «Học» chooser rows carry BAL words («tiến bộ một đến ba phần» …) → balance-pace = stale test; follow-up test fix (read [data-learndoor] chooser rows) owed by RV-ACT-MERGE before archive.
 - ~16:33Z RV-ACT-MERGE real-tapped «Học» on LIVE b881686f Fold+iPad: words shown, 0 page errors. Test fix review/act-merge-ALL-fix bd0007fe (test-only, FF on LIVE) → LC22 may FF anytime. RV-ACT-MERGE done → archive.
+- ~16:53Z kit-g4-r2 4dbce886 SMALL PASS WITH RESIDUAL → LC22 slot. Residual + dropped-copy onClose risk → KK44. KK43 archived.
