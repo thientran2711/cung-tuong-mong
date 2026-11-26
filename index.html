@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"STACK LAND a9 promo-root «A» 42e1fd7f onto qc slot bf6dd041 (CHANGE/built files only; rebuilt); CHANGE line MAIN 150","b":"ae7781b485be","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"9f6b252f+","t":"2026-11-26T08:34Z","c":"tainghe-info r5: KK38 LAND READY note (x5 10/10, merged LIVE, videos)","b":"c6eff17d591f","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5421,7 +5421,7 @@ function lessonMode(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
  else{if(!can(2)||S.bac<cost)return;c={suc:-BAL.artLes.tch,bac:-cost,tch:k}}
  c.khac=2;/* KIT §13.9 (j82 kgDefer): the lesson's charge is taken on «Sẵn sàng»; the ✕ before it is a free back */
  const open=()=>{S.mg={k,l,mode};save();render();resumeMG()};if(typeof kgDefer==="function")kgDefer(c,open);else{const f={suc:c.suc};if(c.bac)f.bac=c.bac;if(c.th)f.th=c.th;apply(f);if(c.tch)tchPaid(k);spend(2);open()}}
-(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gg=lesG(m.mode,g);/* review/balance-pace: ONE rule (jbalcore lesG, BAL.art.les) */log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
+(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gg=lesG(m.mode,g);/* review/balance-pace: ONE rule (jbalcore lesG, BAL.art.les) */log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg} · ${crsAfterW(S.arts,S.artp,m.k,gg)}.`);addArt(m.k,gg);
   if(m.mode==="teacher"&&roll(30)){if(roll(50)&&discover())log("Thầy dạy kể một sở thích của Hoàng thượng.");else{const t=evGuilty(S,liveRivals(true));if(t&&evA(S,t,BAL.eff.j23.evTop))log(`Thầy dạy buột miệng chuyện của ${t.name}: chứng cứ ${balSg(BAL.eff.j23.evTop)}.`);else log("Thầy dạy kể chuyện trong cung, toàn chuyện vô hại.")}}render()})}})();
 function artTabHTML(){const nx=ARTS.map(a=>S.arts[a.k]);let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Ba cách học, giá trị ngang nhau, tốn thứ khác nhau.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=artFee(l),ms=ARTMS[a.k]||[];const t2=whyTime(2);
@@ -31210,12 +31210,16 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
  const next=o.next!=null?o.next:((o.levels||[])[l]||"");
- const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
+ /* KIT §21.2 ONE BẬC READING (owner OD 26/11 ~08:05Z «để một trong hai thôi, hoặc là bậc, hoặc là tiến bộ … tiến bộ là tiến bộ của cái bậc đó»): a card with a
+    progress bar shows the bậc by its NAME inside the bar label («Thuần thục · Tiến bộ 3/7» = phần inside THIS bậc, full bar = the next bậc) and NO «Bậc l/5» steps
+    beside it; the kicker that only repeated the bậc name is dropped. Cards without a bar (chapters, Lễ nghi «Vòng», a finished course) keep their steps. */
+ const hasBar=!(o.bar===false||!max)&&l<max&&!!need,lvN=hasBar&&o.kicker&&(o.word==null||o.word==="Bậc")?o.kicker:"";
+ const bar=o.bar===false||!max?"":l<max?(need?kitBar(lvN?`${lvN} · Tiến bộ`:"Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
  const acts=(o.acts||[]).filter(Boolean);
  /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
    title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
  return `<div class="kskill${o.can===false?" kdone":""}${o.big?" kbig":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",o.big?{shape:"tall",cap:false,cls:"kbigart"}:{shape:"tall",size:"thumb",cap:false}):""}`+
-  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh">${kitSkillName(o)}${max?kitSteps(l,max,"",o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
+  `<div class="kskinfo">${o.kicker&&!lvN?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh">${kitSkillName(o)}${max&&!hasBar?kitSteps(l,max,"",o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
   `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}${o.body||""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 /* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
@@ -36297,7 +36301,7 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped,qok)=>{KG82.phase="result";TDS.q=skipped?!!qok:null;const gain=tdGain(mode,raw,skipped),q=k==="cong"?Math.round(raw/10*2):0;
-  kg82ShowRes(kg82Rows([skipped?["Để trời định",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
+  kg82ShowRes(kg82Rows([skipped?["Để trời định",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",[kg82Chip(`${V.n} tiến bộ`,gain,"g"),crsAfterW(S.vir,S.virp,k,gain)]]])/* KIT §21.2: «+g · 3/7» inside the bậc */.concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
  KG82.phase="intro";const HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
@@ -36310,8 +36314,8 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
 function tdFinish(k,mode,raw,skipped){if(!S||S.dead)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
  if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
  const b=typeof rsnap==="function"?rsnap():null,g=tdGain(mode,raw,skipped);TDS.q=null;
- if(mode==="self"){apply({suc:-BAL.td.selfSuc});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Tự học ${V.n} (để trời định). Tiến bộ +${g}.`:`Tự học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
- else{apply({suc:-BAL.td.mSuc,bac:-cost});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Học ${V.n} với ma ma giáo tập (để trời định). Tiến bộ +${g}.`:`Học ${V.n} với ma ma giáo tập (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
+ if(mode==="self"){apply({suc:-BAL.td.selfSuc});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Tự học ${V.n} (để trời định). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`:`Tự học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`)}
+ else{apply({suc:-BAL.td.mSuc,bac:-cost});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Học ${V.n} với ma ma giáo tập (để trời định). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`:`Học ${V.n} với ma ma giáo tập (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`)}
  if(k==="cong"){S.vpf=S.vpf||{};S.vpf.cong=(S.vpf.cong||[]).concat(raw).slice(-3)}
  save();render();try{if(b&&typeof resultShow==="function")resultShow(`${mode==="self"?"Tự học":"Học"} ${V.n}`,b,null)}catch(e){}}
 window.lessonVir=tdPlay;window.tdPlay=tdPlay;
@@ -76495,7 +76499,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(BAL.tds.pracK)||(S.suc<BAL.tds.pracMin?`Sức dưới ${BAL.tds.pracMin}`:"");
   const C=VIR.filter(V=>TDS_KIND[V.k]).map(V=>{const k=V.k,l=virLv(S,k),kind=TDS_KIND[k],K=WK[kind],kn=rcpKnown()[kind].length;
    const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`tốn: Sức -${BAL.tds.pracSuc}, ${BAL.tds.pracK} khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
-   return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),info:`data-v85tab="${k}"`,can:!!(acts.length&&!why)}});
+   return{kind:"wk",k,name:`${V.n} · ${V.full}`,kicker:artNm(l),level:l,prog:crsProg(S.vir,S.virp,k)/* KIT §21.2: phần inside the bậc (was raw points over the old l+2 width: «9/3») */,bar:l>=5?false:undefined,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),info:`data-v85tab="${k}"`,can:!!(acts.length&&!why)}});
   const tail=h.indexOf(`data-skill="wk-taste"`);const cards=C.map(kitSkillCard).join("");
   if(tail>0){const i=h.lastIndexOf("<div",tail);h=h.slice(0,i)+cards+h.slice(i)}else h+=cards}catch(e){console.error("tds works",e)}return h}})();
 if(typeof KIT_GLOSS==="object")KIT_GLOSS["Lối Tứ đức"]="Mỗi môn Tứ đức làm ra một loại đồ (Công: đồ kim chỉ; Dung: phấn son tự chế; Ngôn: thư từ, lời chúc; Hạnh: vật cầu phúc, việc thiện), chia bốn lối. Lối đầu biết sẵn; bậc 2, 4, 5 mỗi bậc tự mở thêm một lối; thầy dạy hay sách phổ mở sớm hơn. Mỗi buổi học ra một món, đem tặng, dâng, bán như tác phẩm tài nghệ; quà đúng lối người nhận thích mới được trọn.";
@@ -84041,6 +84045,10 @@ function lesG(mode,pts){const L=BAL.art.les,gs=Math.max(L.min,Math.round((pts||0
 function crsG(l){const G=BAL.art.gain;return G[Math.max(0,Math.min(l|0,G.length-1))]}
 /* phần a course needs from bậc l to bậc l+1 (rule cards «Năm bậc», the bar) */
 function crsNeedP(l){return Math.ceil(artNeed(l)/crsG(l)-1e-6)}
+/* KIT §21.2 (owner OD 26/11 ~08:05Z): a lesson's gain reads «+g · 3/7» = phần inside the bậc AFTER the gain (a pure dry run of crsPush on copies);
+   a bậc gained reads «lên <tên bậc> · 0/9»; the top reads its name only. Every lesson result / log line uses it, never the 0–100 total. */
+function crsAfterW(lv,pt,k,g){try{const L={[k]:(lv||{})[k]||0},P={[k]:(pt||{})[k]||0};const n=crsPush(L,P,k,g||0);const T=BAL.art.tier,top=T.length-1;const [c,nd]=crsProg(L,P,k);
+ return L[k]>=top?artNm(top):(n?`lên ${artNm(L[k])} · `:"")+`${c}/${nd}`}catch(e){return""}}
 function crsProg(lv,pt,k){const T=BAL.art.tier,l=Math.min((lv||{})[k]||0,T.length-1);return [Math.floor(((pt||{})[k]||0)/crsG(l)+1e-6),crsNeedP(l)]}
 /* the phần one play of mode gives (game points 1..3 through lesG / tdPts), as words («một đến ba phần»): every lesson button reads this, never a typed range */
 function crsGainW(mode,l,vir){const f=pts=>Math.max(1,vir?tdPts(mode,pts):lesG(mode,pts));const a=f(1),b=f(3);return typeof kStepW==="function"?kStepW(a,b):`${a}–${b} phần`}
@@ -100437,7 +100445,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ae7781b485be";window.CTM_BUILD=BUILD;
+const BUILD="c6eff17d591f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

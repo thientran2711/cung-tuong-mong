@@ -1384,12 +1384,16 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
  const next=o.next!=null?o.next:((o.levels||[])[l]||"");
- const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
+ /* KIT §21.2 ONE BẬC READING (owner OD 26/11 ~08:05Z «để một trong hai thôi, hoặc là bậc, hoặc là tiến bộ … tiến bộ là tiến bộ của cái bậc đó»): a card with a
+    progress bar shows the bậc by its NAME inside the bar label («Thuần thục · Tiến bộ 3/7» = phần inside THIS bậc, full bar = the next bậc) and NO «Bậc l/5» steps
+    beside it; the kicker that only repeated the bậc name is dropped. Cards without a bar (chapters, Lễ nghi «Vòng», a finished course) keep their steps. */
+ const hasBar=!(o.bar===false||!max)&&l<max&&!!need,lvN=hasBar&&o.kicker&&(o.word==null||o.word==="Bậc")?o.kicker:"";
+ const bar=o.bar===false||!max?"":l<max?(need?kitBar(lvN?`${lvN} · Tiến bộ`:"Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
  const acts=(o.acts||[]).filter(Boolean);
  /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
    title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
  return `<div class="kskill${o.can===false?" kdone":""}${o.big?" kbig":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",o.big?{shape:"tall",cap:false,cls:"kbigart"}:{shape:"tall",size:"thumb",cap:false}):""}`+
-  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh">${kitSkillName(o)}${max?kitSteps(l,max,"",o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
+  `<div class="kskinfo">${o.kicker&&!lvN?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh">${kitSkillName(o)}${max&&!hasBar?kitSteps(l,max,"",o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
   `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}${o.body||""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 /* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
