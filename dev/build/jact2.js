@@ -72,3 +72,56 @@ function as2NgheMark(){if(!S)return;S.adDoor=S.adDoor||{};S.adDoor.__nghe=as2Ngh
 (function(){const t0=talk;talk=function(oi){let a=null;try{const p=S&&curPeople()[popIdx];a=p&&talkOpts(p)[oi]}catch(e){}if(a&&a.n==="Nghe lén câu chuyện"&&a.lock)return;
  const r=t0.apply(this,arguments);try{if(a&&a.n==="Nghe lén câu chuyện")as2NgheMark()}catch(e){}return r}})();
 (function(){const a0=adHapFire1;adHapFire1=function(h,k){const r=a0.apply(this,arguments);try{if(h&&h.id==="gossip"&&r)as2NgheMark()}catch(e){}return r}})();
+/* ================= ACT-MERGE J3 (owner 26/11 ~07:25Z + ~07:32Z, plan review/act-merge §4 row J3 = dup-report HANHSU_MERGE §3.2 H1–H16) =================
+   HÀNH SỰ 38 → 16: ONE FEATURE = ONE BUTTON. A true duplicate (one feature split into several cards) shows as ONE door card; the way is chosen
+   INSIDE through the kit option dialog (Q modal → kitOptFinal option cards). DISPLAY ONLY: the deck keeps every original card object, every way
+   runs the SAME act(i) as before (same khắc, cost, odds, wrappers, results, NPC parity: the NPCs use the same BAL.deck / AGC3BTN tables), so no
+   rule, outcome or number is lost or typed here (law 4). A door shows only while ≥2 of its ways are dealt; one way alone stays its own card.
+   ĐỂ RIÊNG (owner ~07:32Z «những cái cần để riêng thì vẫn cứ để riêng»): Điểm trang (H1), Hối lộ Kính sự phòng (H9 lật thẻ), Cầu tự (H10),
+   Trò chuyện với cung nữ (H12), Phát bạc cứu giúp (H13), Để ý nam nhân (H15), Giả mang thai (H16) — each a feature of its own.
+   Lãnh cung (S.out), the cung nữ road and khuê các keep their own decks here (act-merge J5). Co-op: display only, no shared state. */
+const HSD=[/* door key, door name, line, ways (card names) — H-number = HANHSU_MERGE §3.2 */
+ {k:"nghi",h:"H2",n:"Nghỉ ngơi",t:"Nghỉ một lát, nghỉ dưỡng sức, hay dưỡng nhan.",m:[/^Nghỉ ngơi một lát$/,/^Nghỉ ngơi dưỡng sức$/,/^Dưỡng nhan$/]},
+ {k:"caobenh",h:"H3",n:"Cáo bệnh",t:"Giả bệnh xin thương, hay đóng cửa tĩnh dưỡng.",m:[/^Giả bệnh$/,/^Xin rút thẻ bài, đóng cửa tĩnh dưỡng$/]},
+ {k:"thinhan",h:"H4",n:"Thỉnh an",t:"Sang thỉnh an Thái hậu hay Hoàng hậu.",m:[/^Thỉnh an Thái hậu$/,/^Thỉnh an Hoàng hậu$/]},
+ {k:"thaiy",h:"H5",n:"Bắt mạch, chữa bệnh",t:"Mời thái y tới cung hay tự sang Thái y viện; lúc lâm bệnh thì chữa bệnh.",m:[/^Mời thái y bắt mạch$/,/^Sang Thái y viện xin bắt mạch$/,/^Truyền thái y$/,/^Tự bốc thuốc$/,/^Tĩnh dưỡng$/]},
+ {k:"soksp",h:"H6",n:"Xem sổ Kính sự phòng",t:"Lót tay thái giám, hay lén xem sổ.",m:[/^Xem sổ nguyệt sự$/,/^Xem lén sổ nguyệt sự$/]},
+ {k:"docsach",h:"H7",n:"Đọc sách",t:"Đọc sách giải khuây, hay đọc binh thư sử sách.",m:[/^Đọc sách giải khuây$/,/^Đọc binh thư, sử sách$/]},
+ {k:"tainghe",h:"H8",n:"Dâng tài nghệ",t:"Múa, đàn, cờ, vẽ: mỗi môn một đường.",m:[/^Múa trong yến tiệc$/,/^Kinh hồng vũ$/,/^Đánh cờ với Hoàng thượng$/,/^Đàn khúc Phượng cầu hoàng$/,/^Vẽ chân dung tặng Thái hậu$/]},
+ {k:"taimat",h:"H11",n:"Tai mắt",t:"Sai cung nữ dò la, nghe ngóng chung, hay cài tai mắt.",m:[/^Sai cung nữ đi dò la$/,/^Nghe ngóng chung$/,/^Cài tai mắt$/]},
+ {k:"roicung",h:"H14",n:"Rời cung",t:"Trốn, xuất gia, xin ban hôn, về quê; nhờ Thái hậu nói giúp trước khi xin.",m:[/^Nghĩ cách trốn khỏi cung$/,/^Dâng biểu xin xuất gia$/,/^Xin ban hôn cho /,/^Xin về quê phụng dưỡng cha mẹ$/,/^Nhờ Thái hậu nói giúp$/]},
+ {k:"anthai",h:"(+)",n:"An thai",t:"Uống thuốc an thai, hay báo tin có thai.",m:[/^An thai$/,/^Báo tin có thai$/]}];
+const HSD_ART={};/* door name → the way whose act art the door shows (set at render) */
+function hsdOn(){try{return typeof tab!=="undefined"&&tab==="act"&&!!S&&!S.dead&&!S.out&&!S.kc&&!adSrv()}catch(e){return false}}
+function hsdOf(n){return HSD.find(d=>d.m.some(r=>r.test(n||"")))||null}
+function hsdWhy(a,dis){if(!dis)return"";let w="";try{w=cardWhy(a)}catch(e){}return w||(a.lock&&a.t)||"chưa làm được lúc này"}
+function hsdBuild(){if(!hsdOn())return;const P=$("panel");const G=P&&P.querySelector(".cards");if(!G)return;
+ const cards=[...G.querySelectorAll(":scope > button.kcard[data-i]")];
+ for(const d of HSD){const mem=cards.filter(b=>{const a=deck[+b.dataset.i];return a&&d.m.some(r=>r.test(a.n||""))});if(mem.length<2)continue;
+  const W=mem.map(b=>({i:+b.dataset.i,dis:!!(b.disabled||b.classList.contains("kdis"))}));const ok=W.filter(w=>!w.dis);
+  const lead=deck[(ok[0]||W[0]).i];HSD_ART[d.n]=lead.n;
+  const ks=(ok.length?ok:W).map(w=>cardCost(deck[w.i]));
+  const o={n:d.n,t:d.t,k:Math.min(...ks),c:{},w:{},x:`${W.length} cách, chọn khi làm`,dom:lead.dom,lock:!ok.length,hsDoor:d.k};
+  /* odds chip: when EVERY usable way rolls, the door shows the best way's odds; a door with a sure way keeps the kit's sure look (odds cap) */
+  try{const R=ok.map(w=>deck[w.i]).filter(a=>a.o!=null&&a.o<100);if(ok.length&&R.length===ok.length)o.o=Math.max(...R.map(a=>a.o))}catch(e){}
+  const tp=document.createElement("template");tp.innerHTML=cardH(o,W[0].i).trim();const b=tp.content.querySelector("button");if(!b)continue;
+  b.removeAttribute("data-i");b.dataset.hsd=d.k;b.dataset.hsi=W.map(w=>w.i).join(",");b.dataset.hsx=W.map(w=>w.dis?0:1).join(",");
+  b.querySelectorAll("[data-kinfo]").forEach(e=>e.remove());if(!ok.length)b.disabled=true;
+  mem[0].before(b);mem.forEach(m=>m.remove())}}
+if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){try{if(HSD_ART[name])return k0.call(this,HSD_ART[name])}catch(e){}return k0.apply(this,arguments)}}
+(function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{hsdBuild()}catch(e){console.error("hsdBuild",e)}return r}})();
+/* the door: ONE kit option dialog, one option per way (its own khắc / cost / odds line), «Thôi» = the kit ✕ */
+function hsdOpt(a,why,i){const sp=String(a.x||"").split(/ · kèm: /);const ton=[`${cardCost(a)} khắc`];try{const c=fmt(a.c||{});if(c)ton.push(c)}catch(e){}
+ let gain="";try{gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ")}catch(e){}const P=["tốn: "+ton.join(" · "),"thành: "+(gain||a.t||"")];if(sp[1])P.push("kèm: "+sp[1]);
+ const rolled=a.o!=null&&a.o<100&&!a.lock;const o={n:a.n,x:P.join(" · "),go:()=>act(i)};
+ if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}o.x+=" · hỏng: "+(f||"không mất gì");try{o.p=optOdds(a)}catch(e){}}
+ if(why)o.off={why};return o}
+function hsdOpen(b){if(!S||S.dead||Q.length)return;const d=HSD.find(x=>x.k===b.dataset.hsd);if(!d)return;const I=b.dataset.hsi.split(",").map(Number),X=b.dataset.hsx.split(",").map(Number);
+ const opts=I.map((i,j)=>{const a=deck[i];return a?hsdOpt(a,hsdWhy(a,!X[j]),i):null}).filter(Boolean);
+ opts.push({n:"Thôi"});Q.push({t:d.n,h:`<p>${d.t}</p>`,opts,hsDoor:d.k});showModal()}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#panel button[data-hsd]");if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled)return;try{hsdOpen(b)}catch(x){console.error("hsdOpen",x)}},true);
+document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target.closest("#panel .kcard[disabled][data-hsd]");if(!b||typeof kpPop!=="function"||!S||S.dead)return;
+ const I=b.dataset.hsi.split(",").map(Number);const rows=I.map(i=>{const a=deck[i];return a?`<span class="ef n">${a.n}: ${hsdWhy(a,1)}</span>`:""}).join("");
+ window.__adGreyT=Date.now();window.__adGreyR=b.getBoundingClientRect();kpPop(b,`<div class="kpopt">${b.querySelector(".kan")?b.querySelector(".kan").textContent:""}</div><div class="kpopx">${rows}</div>`,{inside:true})}catch(x){}},true);
+/* the way's own act logs its own line (as when it was a card): the door dialog adds no «Door: way» line of its own */
+(function(){const l0=logChoice;logChoice=function(m){if(m&&m.hsDoor)return;return l0.apply(this,arguments)}})();
