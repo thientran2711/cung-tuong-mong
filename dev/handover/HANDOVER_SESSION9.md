@@ -3762,3 +3762,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~02:06Z KK36 = session_01V1ZZGzxW9HSuBKj9pYyzWf (KK35's child, opus; reports to MAIN 151). KK35 archived. NHV-BUILD to take KK36's fix sha.
 - ~02:10Z OB-PHU3 437d4efc full videos LOOK PASS → kit rv B (new .kplink §6.3j) → LC19.
 - ~02:15Z OB-NGOAICUNG LAND READY 0183c8d2 NOT accepted: KCTABS home tab rename breaks OD:L2108 (same 8 tabs, same names, every road) → successor (its own child; 151 cannot open) reverts rename, does DTV head-count wording, reruns quickcheck+coop-e2e, full home-life videos. «Cha định hôn» → parking lot.
+- ~02:12Z OB-NGOAICUNG-2 = session_01V1ZZH3o5vxwvPJqTBShLgV (its child, opus) on review/ob-ngoaicung c397cb5a; OB-NGOAICUNG archived.
