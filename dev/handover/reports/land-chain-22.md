@@ -103,3 +103,4 @@ Jump-ins on PASS: renderer-mem head 2b5bbbb3 (game build 82bbe53e; memory freeze
 global-names 1 CLASH; tainghe-info TypeError (fixed by bac-progress); mg-back 1–2/12 (FAIL 1 always, FAIL 2/6 flips); audio-ipad CDN bgm-joy (fails on LIVE now too); makeup-set/info-tap-audit/stage-stay flake under load → rerun alone; G4 80-dialog-fixed + 90 «Ô lưu · Lui» = LIVE baseline until kit-g4-r2 lands.
 ### TOOLS (dev/handover/reports/lc22-tools/)
 gates-*.sh (SP= my scratchpad → fix), srv.py (http server WITH utf-8 charset — python http.server breaks dev/index.html → all dayq/dialog-order probes time out), kpcheck.js (kit page renders samples), dupfn.py (+ dup_live.txt from a LIVE worktree), holog22.sh. Worktrees /home/user/wt/<slot>; QCBASE = LIVE worktree. Container restarted once (13:10Z) and killed a background gate run: use run_in_background + a watcher, check `uptime`.
+- 17:41Z ROLLED to LC23 session_01V1ZZH17hXgTvCC6BWnvVB6 (context 36 %); MAIN 160 told.
