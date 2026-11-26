@@ -61,6 +61,15 @@ FIX ARM (review/renderer-mem 307b3b77 = fix 60db5f48 + LIVE f009e1a6, /home/user
   - hot-3 hit 138 dead buttons under div.kscn-veil, then the robot's stuck/softlock detector fired.
   - Likely a robot gap on the «Chạm để tiếp» scene card; unproven.
   - Shot: CDN img/_review/temper-g4/f009-selscene-veil-hot3.png. Reported to D and F10 #3.
+FINAL hangs, LIVE vs fix («fix arm = 60db5f48 (5e013076 base)»; the hot-2 run is the 307b3b77 replay):
+| lane | LIVE hangs (buổi) | fix hangs | fix range | fix peak / last renderer MB |
+|---|---|---|---|---|
+| hot-2 | 2 (b270, b273) | 0 | b273 → 300 | 1577 / 1515 |
+| off-3 | 1 (b63) | 0 | b1 → 150 | 2074 / 1898 |
+| hot-3 | 1 (b64) | 0 | b1 → 150 | 2154 / 2086 |
+| timid-3 | 1 (b65) | 0 | b1 → 150 | 2370 / 2360 |
+Total: 5 LIVE hangs vs 0 on the fix.
+
 Hang files: CDN img/_review/renderer-mem/5e013076-tp-{hot-2,off-3,hot-3}-hang.json (sent to F10 #2 and Foreman D).
 
 ## F10 renderer memory (for the F10 workers)
