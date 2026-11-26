@@ -1,7 +1,7 @@
 {
  "unit": "E-S5",
  "game": "LIVE github.io",
- "finished": 10,
+ "finished": 11,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -12960,6 +12960,43 @@
      }
     ],
     "taps": 2068
+   },
+   "bugs": [],
+   "exitPick": null
+  },
+  {
+   "life": "E-S5-R5-lover-1",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 3108502015,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Công chúa ở lại cố quốc",
+   "type": "death",
+   "death": true,
+   "age": 19,
+   "buoi": 122,
+   "harness": {
+    "kind": "realtap",
+    "sha": "08a4ff8b",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "build": {
+     "s": "6b5d3d05+",
+     "b": "b7dcbbd06e03",
+     "t": "2026-11-26T06:59Z"
+    },
+    "areaTaps": 44,
+    "dlgScroll": 6,
+    "scrolls": 7,
+    "dlgClose": 28,
+    "infoTaps": 22,
+    "taps": 480
    },
    "bugs": [],
    "exitPick": null

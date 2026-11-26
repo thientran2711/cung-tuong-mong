@@ -1,0 +1,55 @@
+# E-S5-R5-lover-1 moment log (bot sens, ipad, seed 3108502015, real-tap harness 08a4ff8b)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-E-S5-R5-lover-1/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcsan | Ở cố quốc chờ hòa ướcTốnkhôn | Trang trước | Dung mạo 15 | Dung mạo 16 | Dung mạo 17 | Dung mạo 18 | Dung mạo 19 · shots-E-S5-R5-lover-1/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · EVENT · rank 2 → 0 · shots-E-S5-R5-lover-1/m-rank-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-rank-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-E-S5-R5-lover-1/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Công chúa Phù Tang» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-lover-1/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Phòng của ta · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc55Tài33Tâm cơ25Đức30Danh1 | Bạc60Sức100/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | sương sớm | Tâm trạngBình thản0 · shots-E-S5-R5-lover-1/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · #modal «Tin báo» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-2-8.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Xem lời nhờGhi chúchọn rồi x | Để sau · shots-E-S5-R5-lover-1/m-new-2-9.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · #modal «Lời thách đấu» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-2-10.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · .dlg «Lời thách đấu» · NEW SCREEN · first time on this screen; buttons: Nhận lời thách đấuRất vữngTố | Nhường bề trênRất vữngTốnkhô | Từ chốiRất vữngTốnkhôngĐượcg · shots-E-S5-R5-lover-1/m-new-2-11.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · page «Phòng của ta · Ở đây có 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc55Tài33Tâm cơ25Đức30Danh1 | Bạc60Sức100/100 | Buổi chiều, còn 4 khắc | Ngày lên đườngcòn 22 tháng | gió lớn | Tâm trạngBình thản0 · shots-E-S5-R5-lover-1/m-new-2-12.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · #kdaytc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc56Tài34Tâm cơ25Đức30Danh1 | Bạc60Sức96/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | trời quang | Tâm trạngBình thản+2 · shots-E-S5-R5-lover-1/m-new-4-13.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-E-S5-R5-lover-1/m-new-5-14.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · #modal «Phụ hoàng ngã bệnh» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-5-15.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Phụ hoàng ngã bệnh» · NEW SCREEN · first time on this screen; buttons: Ngày đêm hầu thuốcRất vữngTố | Xin sứ đoàn mời thầy thuốc Đ · shots-E-S5-R5-lover-1/m-new-6-16.png
+- year 1 · turn 0 · tuần 1 · buổi 2 · rank 0 · #klearnov «» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-7-17.png
+- year 1 · turn 0 · tuần 2 · buổi 2 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc60Tài37Tâm cơ25Đức30Danh1 | Bạc60Sức92/100 | Buổi chiều, còn 0 khắc | Ngày lên đườngcòn 22 tháng | mưa phùn | Tâm trạngBình thản+3 · shots-E-S5-R5-lover-1/m-new-11-18.png
+- year 1 · turn 0 · tuần 2 · buổi 3 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayGhi chúchọn một: Thê | Để sau · shots-E-S5-R5-lover-1/m-new-12-19.png
+- year 1 · turn 0 · tuần 2 · buổi 3 · rank 0 · .dlg «Đeo «Thư hương»» · NEW SCREEN · first time on this screen; buttons: Thêm TàiTốnkhôngĐượcTài +1 | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-E-S5-R5-lover-1/m-new-12-20.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Cúng dường hậu hĩnhTốnBạc -4 | Chép kinh cầu phúcTốnSức -8Đ | Lễ Phật rồi về · shots-E-S5-R5-lover-1/m-new-17-21.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-lover-1/m-look-20.png
+- year 1 · turn 2 · tuần 1 · buổi 2 · rank 0 · .dlg «Đeo «Gót sen lăng ba»» · NEW SCREEN · first time on this screen; buttons: Thêm SắcTốnkhôngĐượcSắc +1 | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-E-S5-R5-lover-1/m-new-31-22.png
+- year 1 · turn 2 · tuần 2 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Mua tinTốnBạc -35·1 khắcĐược | Không muaGhi chúkhông biết t · shots-E-S5-R5-lover-1/m-new-33-23.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · #modal «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-37-24.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Xin thử một tiếng đàn lạTốnS | Khen Tần Thạch Tử Đàn biết n | Cười và hỏi giá món lạTốnDan | Ngồi lặng giữ nét trang trọn · shots-E-S5-R5-lover-1/m-new-38-25.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-lover-1/m-look-40.png
+- year 1 · turn 3 · tuần 2 · buổi 1 · rank 0 · .dlg «Danh hiệu lên bậc» · NEW SCREEN · first time on this screen; buttons: Đeo ngayGhi chúchọn một: Thê | Để sau · shots-E-S5-R5-lover-1/m-new-46-26.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · #modal «Hòa ước» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-49-27.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · .dlg «Hòa ước» · NEW SCREEN · first time on this screen; buttons: Ra mắt đoan trang, đáp lời b | Ra mắt theo lễ cố quốcRất vữ · shots-E-S5-R5-lover-1/m-new-50-28.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-lover-1/m-look-60.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · #modal «Điều khoản hòa ước» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-61-29.png
+- year 1 · turn 5 · tuần 0 · buổi 1 · rank 0 · .dlg «Điều khoản hòa ước» · NEW SCREEN · first time on this screen; buttons: Xin giữ quyền thư từ với cố | Không đòi gì, để hai bên địn · shots-E-S5-R5-lover-1/m-new-62-30.png
+- year 1 · turn 5 · tuần 2 · buổi 1 · rank 0 · #modal «Hoàng muội tranh phần» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-69-31.png
+- year 1 · turn 5 · tuần 2 · buổi 1 · rank 0 · .dlg «Hoàng muội tranh phần» · NEW SCREEN · first time on this screen; buttons: Mặc nàng taRất vữngTốnkhôngĐ | Nói chuyện thẳng với nàngRất | Tâu với phụ thânRất vữngTốnk · shots-E-S5-R5-lover-1/m-new-70-32.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · #modal «Thu săn» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-73-33.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · .dlg «Thu săn» · NEW SCREEN · first time on this screen; buttons: Nhận thêu một nửaTốnSức -5Đư | Chúc nàng ta đi săn bình anT | Nói bận việc, tránh điTốnkhô | Đem chỉ vàng dành dụm cho nà · shots-E-S5-R5-lover-1/m-new-74-34.png
+- year 1 · turn 6 · tuần 1 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-lover-1/m-look-80.png
+- year 1 · turn 7 · tuần 0 · buổi 1 · rank 0 · #modal «Thích khách» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S5-R5-lover-1/m-new-85-35.png
+- year 1 · turn 7 · tuần 0 · buổi 1 · rank 0 · .dlg «Thích khách» · NEW SCREEN · first time on this screen; buttons: Kêu cứuRất vữngTốnkhôngĐượct | Tự mình chống trảRất vữngTốn · shots-E-S5-R5-lover-1/m-new-86-36.png
+- year 1 · turn 8 · tuần 0 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-lover-1/m-look-100.png
+- year 1 · turn 9 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-E-S5-R5-lover-1/m-new-109-37.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Bỏ bạc mua thêm thanTốnBạc - | Chịu rét cho quaTốnSức -8Đượ · shots-E-S5-R5-lover-1/m-new-113-38.png
+- year 1 · turn 9 · tuần 2 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-E-S5-R5-lover-1/m-look-120.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-E-S5-R5-lover-1/m-new-122-39.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · ending · EVENT · life over: Công chúa ở lại cố quốc — Công chúa ở lại cố quốc · age 19 · buổi 122 · bugs 0 · stuck 0 · dead buttons 0 · shots-E-S5-R5-lover-1/end.png
+
+## Runner feelings (persona lover = romance player, iPad 1180x820, harness 08a4ff8b, Build dcf5cf143550)
+- y1–y2 · Phù Tang princess road · DELIGHTED: calm start, no stalls (0 bugs in 480 taps), the sister Nhâm Anh Ninh named in the epilogue.
+- y2 buổi ~120 · «Hòa ước» card · CONFUSED/ODD: «Thưa: con xin đi, vì muôn dân (Rất vững, Tốn …)» vs «Xin để hoàng muội đi thay (Rất vững, Tốn Sức −5, Được có thể ở …)»; as a romance player I want a suitor, not a treaty; both options are equal odds, but only one lists a cost; neither mentions what happens to the sister.
+- ending «Công chúa ở lại cố quốc» · ODD: «Nhâm Anh Ninh đi hòa thân thay nàng» — I chose to send my sister away and the game ends my life there at age 19 with «mười năm sau được gả cho một tộc trưởng phương tây». The life is over before any romance exists.
