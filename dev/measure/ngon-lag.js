@@ -32,7 +32,11 @@ const pct=(a,q)=>{const s=a.slice().sort((x,y)=>x-y);return s.length?s[Math.min(
  /* 2. tap → picker paint: «Sai đi dò la» */
  if(await openMaid()){const tab=p.locator('.kfoc button.pct',{hasText:'Mưu kế'});if(await tab.count())await tab.first().click();await sleep(400);
   const card=p.locator('.kfoc button.kfoc-b',{hasText:'Sai đi dò la'});
-  if(await card.count()){const t0=Date.now();await card.first().click();
+  if(await card.count()){if(process.env.PROF)await cdp.send('Profiler.enable'),await cdp.send('Profiler.start');const t0=Date.now();await card.first().click();
    const ok=await p.waitForFunction(()=>{const M=document.getElementById('modal');return !Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').get.call(M)&&M.getBoundingClientRect().height>0},null,{timeout:6000}).then(()=>true).catch(()=>false);
+   if(process.env.PROF){const {profile}=await cdp.send('Profiler.stop');const self={};const byId={};for(const n of profile.nodes)byId[n.id]=n;
+    const dt=profile.timeDeltas;const cnt={};profile.samples.forEach((id,i)=>{cnt[id]=(cnt[id]||0)+(dt[i]||0)});
+    for(const id in cnt){const n=byId[id];const k=n.callFrame.functionName+'@'+n.callFrame.lineNumber;self[k]=(self[k]||0)+cnt[id]/1000}
+    out.hot=Object.entries(self).sort((a,b)=>b[1]-a[1]).slice(0,25).map(([k,v])=>k+' '+v.toFixed(0)+'ms')}
    out.spyPicker={painted:ok,ms:ok?Date.now()-t0:null,queued:await p.evaluate(()=>Q.map(m=>String(m.t||'').slice(0,40)))}}else out.spyPicker='no card'}
  out.pageErrors=pe;console.log(JSON.stringify(out));await b.close()})();
