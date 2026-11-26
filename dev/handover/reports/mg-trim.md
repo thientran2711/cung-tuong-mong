@@ -207,3 +207,10 @@ LIVE 6b5d3d05 merged (db29521a): conflicts only on the lesson quick lines (LIVE'
 Tests @3385b0f3: mg-trim 10 groups ALL PASS Fold 755x1000@2 + iPad 1180x820@2 (real taps) · mg-skip-audit 21/21 · mg-skip PASS · makeup-set ALL PASS · delegate-nomg PASS · mg-ready-guide 9/9 · ag-mgcal PASS · mg-back 11/12 (#1 = LIVE too).
 VIDEOS re-shot (same URLs): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm
 ~94% xong / ~90% chơi được (chờ người duyệt).
+
+## BIG REVIEW #3 (opus, session_01D3E3NaqVWXaAetSGcKr7mF) — review/mg-trim @ 3385b0f3 (FF from LIVE 6b5d3d05) — **FAIL (1 item)**
+Tests (reviewer, 3385b0f3): assemble clean · mg-trim.js Fold 755x1000@2 + iPad 1180x820@2 ALL PASS (incl. test 10) · mg-skip-audit PASS · mg-skip PASS.
+Findings 2, 3, 4: **FIXED** (b8ea33be). Tự tay score subtracts BAL.toil.rkDemand·rank, with a kit «Phẩm vị đòi hỏi» chip row. slapNpcDraw counts her hand; slapNpcTier(a,t) uses the gap to the target, and jslap/jlooks/jdf pass the target. «Học nhanh» is now on j5/j83 #mgskip and in the jtds log.
+Still open:
+5. Law 11 (co-op, both seats): jshelf.js:406 `k==="give"` is still inline in the click handler (it changes e.pc/e.pm directly). The fix is unchanged from review #2: put it in one function `shelfPlantGive()` and register `reg9("shelfPlantGive",[],{mine:()=>true})` in jcoopthinf beside shelfPlantQuick. The plant redraw already goes through shelfPlantDraw (UI9-captured). Check once that a guest's give lands on the host's copy, once per tuần.
+After 5 is fixed and LIVE is unchanged, I expect PASS; re-review will cover only that change plus the mg-trim test.
