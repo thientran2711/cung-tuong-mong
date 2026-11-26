@@ -1863,3 +1863,4 @@ HOME-WAY top-bar Về phòng + home icon + punishment by weight | review/home-wa
 NEWS-SIEVE Tin trong cung sieve + monthly summary + nết open + rank respect + Tin báo dupes | review/news-sieve | session_01V1ZZH3wzCzJXUyoxYK9v3v | RUNNING | 2026-11-26T04:27Z (MAIN 152)
 | E97r BIG REVIEW dup-report a0a1d1a2 (opus; briefs/E97r-review-dup-report.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWkmQC9riCQ7uwjnLho | FAIL a0a1d1a2 (9 items; reports/dup-report.md REVIEW) | 26/11 05:20Z |
 | E97f FIX r1 dup-report (opus; briefs/E97f-dup-report-fix.md) | review/dup-report | FOREMAN E child7 | session_01DgYSWpmWG8zaQhrwqMuXpM | REPORT READY 12440ec3 (fix r1; reports/dup-report.md FIX r1) | 26/11 06:10Z |
+| E97r2 BIG RE-REVIEW dup-report 12440ec3 (opus; briefs/E97r2-review-dup-report.md) | review/dup-report | FOREMAN E child7 | (opening) | RUNNING | 26/11 06:05Z |
