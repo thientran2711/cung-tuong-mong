@@ -14,7 +14,7 @@ Ruling (Foreman D, 26/11 03:18Z): the 5 finished lives stay VALID, no replays �
 | nc-nc_gian-lazy-1 | Hồng nhan bạc mệnh (illness) | 25 | 781 | yes | 54fa0112+F10 hooks, BUILD 5ab5b80e406e |
 | nc-nc_gian-lazy-1b | Ban hoa — Bị ban hoa, xuất cung | 19 | 1 | VALID-EXIT «failed selection» (Lễ ra mắt, minigame #kg82 «Quay lại»; no life data; BUILD cc68dcfd2b1b) - replaced by lazy-1d | 54fa0112+F10 hooks |
 | nc-nc_gian-lazy-1c | Ban hoa — Bị ban hoa, xuất cung | 20 | 1 | VALID-EXIT «failed selection» (Lễ ra mắt «Cúi đầu chờ xét», no exam; no life data; BUILD cc68dcfd2b1b) - replaced by lazy-1e | 54fa0112+F10 hooks |
-| nc-nc_gian-speed-1 | running | – | b1667 (crawl after b1649, kitOpt* spin, F10 replaying ckpt) | – | 54fa0112+F10 hooks |
+| nc-nc_gian-speed-1 | Lãnh cung — Phát điên trong lãnh cung | 31 | 1780 | yes | 54fa0112+F10 hooks (16 resumes), BUILD fa8da73cecdc; crawl b1649+ (kitOptUnify) |
 | nc-nc_gian-speed-2 | Hồng nhan bạc mệnh (dysentery) | 24 | 726 | yes | 54fa0112+F10 hooks, BUILD b7dcbbd06e03 |
 | nc-nc_gian-lazy-1d (quiet 7003) | Ban hoa (failed selection) | 20 | 1 | VALID-EXIT, no data | cc68dcfd2b1b |
 | nc-nc_gian-lazy-1e (quiet 7004) | Công chúa ở lại cố quốc («Hòa ước» choice «Xin để vương muội đi thay») | 19 | 122 | VALID-EXIT «story ending (stay home)» per Foreman ruling 19:19Z; no life data | |
