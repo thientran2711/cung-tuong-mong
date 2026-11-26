@@ -95,3 +95,10 @@ Phận sự: Lén báo tin cho <người mua chuộc>, pregnancy card, Tân Gi�
 START_CTX ~5 %; at report time ~50 % of the window used (many large file reads). Nothing half-done: branch pushed, tests green. No rollover needed unless MAIN sends a fix round.
 
 ~100% xong phần J5 / ~80% chơi được (đã bấm thật cửa gộp trên Fold + iPad; chờ người duyệt lớn chạy cả bộ J0–J5 và nhìn tranh thật trên CDN).
+
+## ROLLOVER HANDOVER (J5 → successor, MAIN 155 order 08:39Z: ONE door engine)
+State: review/act-merge-J5 c8c9a0d4 is green and complete with a PRIVATE engine (end of dev/build/jkcco.js, section «ACT-MERGE J5»). TODO for the successor:
+1. `git fetch` review/act-merge-J1 (426a7154 or newer) → base the branch on it (+ newest LIVE main). Read dev/build/jdoor.js: `DOOR.add({k,n,kinds,re,rep,h})` folds by option NAME; door tap = PEND «door» choice card; raw list at `DOOR.raw`.
+2. Ask J1 (session_01V1ZZH3t16bcosA8e3k56aF) for a DECK hook (my doors fold the final DECK: srv Phận sự, lãnh cung, khuê các; plus srv pop-up items) — J1 extends jdoor.js, J5 does not.
+3. Replace my engine with DOOR.add calls using my rule tables as-is: SRVG, COLDG (incl. letter key `Gửi thư … (nhờ …)`), POPG, KCR + `tw` twin rule + TWN names (all regex → door name → t text). Keep behaviours: door costs 0 (way pays its own khắc), single-way = no door, `inner:1`-style no fake odds, tests helper `J5DOOR.flat/run` (tests maid-8tabs/ag-stf2 use them → switch to DOOR.raw).
+4. Re-run `node dev/test/act-merge-j5.js` (must stay ALL OK 21), ag-all-b, cold-faction, ag-stf2, role-parity-drift2-play; re-shoot Fold+iPad.
