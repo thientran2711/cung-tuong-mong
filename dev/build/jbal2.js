@@ -2214,9 +2214,9 @@ BAL.area={on:1,
   {k:"dinhco",n:"Đình cờ",acts:["ag_cx3:pmPlay","ag_cx3:pmDuel","wager"],net:["Nóng nảy","Thực tế"],x:.72,hs:{x:.09,y:.5,w:.15,h:.3},cap:"đình tròn có bàn cờ đá"},
   {k:"nonbo",n:"Non bộ",acts:["tryst","spy","scheme","ambush","ag_cx3:talkSecret","changed"],net:["Kín đáo","Xảo quyệt","Thù dai"],x:0,hs:{x:.67,y:.08,w:.24,h:.37},cap:"hòn non bộ khuất sau tùng bách"}],
  near:{ngudao:["vuonhoa","thuyta"],vuonhoa:["ngudao","thuyta"],thuyta:["dinhco","vuonhoa"],dinhco:["thuyta","nonbo"],nonbo:["dinhco","vuonhoa"]},
- /* hs = hotspots on ART-NHV's garden map img/pl2/ngu-hoa-vien-<mùa>-<buổi> (all 16 states, one framing; MAIN 146 / ART-NHV 25/11 22:12Z). art: {s}=mùa {b}=buổi; areaHave = scene states known painted
-    (others: probed at run time, fallback <area>-xuan-<buổi> → <area>-xuan-sang with the kit «tạm» chip); art.x = crop of a painted scene (centre) */
+ /* hs = hotspots on ART-NHV's garden map img/pl2/ngu-hoa-vien-<mùa>-<buổi> (all 16 states, one framing; MAIN 146 / ART-NHV 25/11 22:12Z). art: {s}=mùa {b}=buổi; areaHave = scene states known painted ("*" = all 16, ART-NHV 25/11 22:50Z: 80/80 live)
+    (a list: others probed at run time, fallback <area>-xuan-<buổi> → <area>-xuan-sang with the kit «tạm» chip); art.x = crop of a painted scene (centre) */
  route:["ngudao","vuonhoa","thuyta","dinhco"],bold:{sac:75},grpMax:2,span:4.2,folU:.7,extraName:"Lối đi",extraHs:{x:.26,y:.62,w:.14,h:.2},moveKh:0,
  fol:["follow","ag_follow"],folEmp:["attend","escort","guard"],
- art:{map:"img/pl2/ngu-hoa-vien-{s}-{b}.webp",mapHave:"*",area:{ngudao:"img/nhv/ngu-dao-{s}-{b}.webp",vuonhoa:"img/nhv/vuon-hoa-{s}-{b}.webp",thuyta:"img/nhv/thuy-ta-{s}-{b}.webp",dinhco:"img/nhv/dinh-co-{s}-{b}.webp",nonbo:"img/nhv/non-bo-{s}-{b}.webp"},areaHave:["xuan-sang"],x:.5},
+ art:{map:"img/pl2/ngu-hoa-vien-{s}-{b}.webp",mapHave:"*",area:{ngudao:"img/nhv/ngu-dao-{s}-{b}.webp",vuonhoa:"img/nhv/vuon-hoa-{s}-{b}.webp",thuyta:"img/nhv/thuy-ta-{s}-{b}.webp",dinhco:"img/nhv/dinh-co-{s}-{b}.webp",nonbo:"img/nhv/non-bo-{s}-{b}.webp"},areaHave:"*",x:.5},
  feet:.9,figH:.5,folS:.66,folGap:.05,zoom:{kv1:1,kv2:1.45},enterMs:560,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.2,kv2:.28},band:{kv1:292,kv2:300},folMin:.5,folBack:.02};

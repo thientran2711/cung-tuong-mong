@@ -1,0 +1,23 @@
+/* kit-hand-perf.js — KIT §101 kitHand smoothness (owner 24/11 ~15:40Z «mượt mới làm … làm cho bằng được»): frame times (rAF deltas) while the hand DEALS in,
+   a card LIFTS and the chosen card FLIES, on the real «Tân quân lập uy · Chương 2» frame, Fold 755x1000 + iPad 1180x820, CPU 1x and 4x (CDP throttle, a weaker phone).
+   Long frame = delta > 50 ms (3 missed frames). PASS when no long frame in the animation windows at 1x and at most 1 at 4x.
+   usage: node dev/test/kit-hand-perf.js <index.html> */
+const {chromium}=require('playwright');let KIT_FLY=300;const KH={dealMs:420,dealStep:70,flyMs:260};/* the fly (KIT_HAND.flyMs 260) — the game's own result / board render after the choice is not the hand's animation */const fs=require('fs');const [,,SRC]=process.argv;const SZ=[[755,1000],[1180,820]];
+(async()=>{const b=await chromium.launch();const html=fs.readFileSync(SRC);let fails=0;
+ for(const [W,H] of SZ)for(const cpu of [1,4]){const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot=1});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));const p=await ctx.newPage();await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof pEmp==='function',null,{timeout:120000});
+  await p.evaluate(()=>{localStorage.clear();document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;document.getElementById('modal').hidden=true});await p.waitForTimeout(4000);
+  await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],#kxcatch{display:none!important}'});
+  const cdp=await ctx.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:cpu});
+  const rec=ms=>p.evaluate(ms=>new Promise(res=>{const d=[];let t0=performance.now(),last=t0;const f=t=>{d.push([t,t-last]);last=t;if(t-t0<ms)requestAnimationFrame(f);else res(d)};requestAnimationFrame(f)}),ms);
+  for(let k=0;k<6;k++){const ok=await p.evaluate(()=>{try{while(Q.length){const n=Q.length;closeModal();if(Q.length>=n)break}}catch(e){}Q.length=0;if(!rgFire('c2a')){window.__nlInner=1;start();window.__nlInner=0;Q.length=0;return false}Q.length=1;return true});if(ok)break;await p.waitForTimeout(2000)}
+  /* the frame build itself (one task) is not the animation: show it, then measure from the first deal frame */
+  /* one tap before (her first gesture of the session unlocks audio etc.: not the hand's cost) */const hp0=await p.evaluate(()=>{const e=document.querySelector('.topbar,header,#hud,body');const r=e.getBoundingClientRect();return [Math.min(innerWidth-20,r.left+30),Math.max(10,r.top+10)]});await p.touchscreen.tap(hp0[0],hp0[1]);await p.waitForTimeout(1200);
+  const deal=p.evaluate(()=>{Q[0]=Object.assign({},Q[0]);/* a fresh card object: the deal runs for THIS showing (the frame may have been shown by the game loop already) */showModal()});await deal;const dD=await rec(1100+700);
+  const pos=i=>p.evaluate(i=>{const e=document.querySelectorAll('#modal .opts.khand>button.kopt')[i]||document.querySelector('#modal .opts.khand>button.kopt');if(!e)return [0,0];const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]},i);
+  let [x,y]=await pos(1);const lr=rec(450);await p.touchscreen.tap(x,y);const dL=await lr;[x,y]=await pos(1);const cr=rec(KIT_FLY=300);await p.touchscreen.tap(x,y);const dC=await cr;
+  const st=(d,nm,from,len)=>{let s=d.slice(1).filter(([t])=>from==null||t>=from&&t<=from+len).map(x=>x[1]);const long=s.filter(v=>v>50).length,mx=Math.max(...s);return {nm,frames:s.length,max:Math.round(mx),p95:Math.round(s.sort((a,b)=>a-b)[Math.floor(s.length*.95)]),long}};
+  const TT=await p.evaluate(()=>({d:window.__khDealT,f:window.__khFlyT,n:document.querySelectorAll('#modal .opts.khand>button.kopt').length}));if(process.env.DBG)console.log('TT',JSON.stringify(TT),Math.round(dD[0][0]),Math.round(dD[dD.length-1][0]));const R=[st(dD,'deal',TT.d,KH.dealMs+KH.dealStep*8),st(dL,'lift'),st(dC,'choose',TT.f,KH.flyMs)];const lim=cpu===1?0:1;const bad=R.filter(r=>r.long>lim);if(bad.length)fails++;
+  console.log(`${W}x${H} cpu${cpu}x`,R.map(r=>`${r.nm}: ${r.frames}f max ${r.max}ms p95 ${r.p95}ms long ${r.long}`).join(' | '),bad.length?'FAIL':'ok');await ctx.close()}
+ await b.close();console.log(fails?`KIT-HAND-PERF FAIL ${fails}`:'KIT-HAND-PERF PASS');process.exit(fails?1:0)})();

@@ -88,7 +88,7 @@ const fill=(p,s,b)=>p.replace("{s}",s).replace("{b}",b);
 const HAVE={};function probe(u){if(u in HAVE)return HAVE[u];HAVE[u]=null;try{const im=new Image();im.onload=()=>{HAVE[u]=true;try{if(CUR&&BG&&CUR.want===u){BG.style.backgroundImage=`url("${u}")`;CUR.tam=false;tamPut()}}catch(e){}};im.onerror=()=>{HAVE[u]=false};im.src=u}catch(e){HAVE[u]=false}return null}
 function mapSrc(){const B=AB(),A=B.art||{};if(A.map){const {s,b}=sb();return fill(A.map,s,b)}try{return "img/"+SCIMG.vuon+".webp"}catch(e){return "img/ngu-hoa-vien.webp"}}
 function areaArt(k){const A=AB().art||{},p=A.area&&A.area[k];if(!p)return null;const {s,b}=sb(),have=A.areaHave||[];const L=[s+"-"+b,"xuan-"+b,"xuan-sang"].filter((x,i,a)=>a.indexOf(x)===i);
- const exact=fill(p,s,b);let use=null;for(const st of L){const u=fill(p,...st.split("-"));if(have.includes(st)||HAVE[u]===true){use=u;break}}if(!use)use=fill(p,"xuan","sang");
+ const exact=fill(p,s,b);let use=null;for(const st of L){const u=fill(p,...st.split("-"));if(have==="*"||have.includes(st)||HAVE[u]===true){use=u;break}}if(!use)use=fill(p,"xuan","sang");
  if(use!==exact&&HAVE[exact]!==false)probe(exact);return{src:use,want:exact,tam:use!==exact}}
 function syncSpots(){try{const P=plan();KPM_DATA.spots.nhv={};P.areas.forEach(a=>{KPM_DATA.spots.nhv[a.k]=a.hs});KPM_HALLS.nhv=P.areas.map(a=>a.k)}catch(e){}}
 (function(){
