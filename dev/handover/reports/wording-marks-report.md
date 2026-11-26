@@ -30,3 +30,8 @@ Root cause was the HARNESS, not the Tốn rows: the boot left the new-life intro
 Tốn is exact on every card kind incl. hidden-outcome: markTxt(text,"ton") returns the text unchanged, and the test asserts the price in all 21+14 cases.
 ## endTurn coverage
 marks-choice-scan.js boot fixed the same way; PEND/act: 257 dialogs, 1882 row texts, 0 stat numbers left outside Tốn. A forced endTurn() in-page runs once (buổi 0→3 = the night) and then returns at once (night scene pending), so weekly events were still not reached — kaBody choke point + grep remain the coverage there.
+
+## TỐN row without the minus (MAIN 166, OD 26/11 ~22:02Z «Tốn: Bạc 20 · Sức 5 · 1 khắc»)
+markTxt(text,"ton") now prints the price without the sign: «Bạc -3» → «Bạc 3», «Sức -3» → «Sức 3» (jk2b; the hidden-outcome card's own-price compare uses the same form). Colour is unchanged (decided before the print). Before / after (Fold + iPad stills looked at, CDN img/_review/ton-row/): open fx Bạc, hidden «tốn: Bạc», hidden ton:{suc}: «TỐN Bạc -3 / Bạc -3 / Sức -3» → «TỐN Bạc 3 / Bạc 3 / Sức 3»; choice card «Bạc -10 · 2 khắc» → «Bạc 10 · 2 khắc».
+Asserts: kit-ton-row asserts the price present AND no «-» digit in any Tốn cell (PASS 14/14 ×2); marks-choice-scan fails on a minus in any .kr-ton item (257 dialogs, 0). kit-e-rows 26, kit-cost-rows-home 15.
+Open (not a blocker): weekly endTurn events not reached by the headless probe (night scene blocks) — covered by kaBody choke point + grep.

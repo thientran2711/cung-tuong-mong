@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9047c283","t":"2026-11-26T22:36Z","c":"Mỗi lựa chọn ghi gọn được – mất theo chỉ số (Sủng +, Bạc −…), không còn lời mơ hồ; may rủi ghi bằng lời.","b":"e95cdd29036d","h":[{"s":"8d5e3382+","t":"2026-11-26T18:38Z","c":"Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»)."},{"s":"f573dc94+","t":"2026-11-26T17:33Z","c":"Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị)."},{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."}]};
+window.CTM_BI={"s":"42cfbac8+","t":"2026-11-26T23:25Z","c":"Mỗi lựa chọn ghi gọn được – mất theo chỉ số (Sủng +, Bạc −…), không còn lời mơ hồ; may rủi ghi bằng lời.","b":"e9cc50caf686","h":[]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -43655,7 +43655,7 @@ function kitMk(sgn,p,lv){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];let
 /* THE ONE CHOICE FORMATTER (owner OD 26/11 ~21:55Z, law 4 + 11): every CHOICE surface says a stat change as marks «Danh ++» / «Sủng −» (table BAL.mark.cut, kitMk); the TỐN row (row==='ton') and counts with a unit (khắc, người…) keep their exact number; the result card + Sổ ghi never call it. Idempotent (marks hold no digit). Text in, text out (HTML spans pass through). */
 const MARK_NUM=/([+\-−])\s?(\d+)(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|\s?%)/g;
 const MARK_UNIT=/^\s?(khắc|lượng|người|việc|món|lần|ngày|tuần|tháng|năm|tuổi|buổi|lá|thẻ|cái|vị)(?![\p{L}])/u;
-function markTxt(h,row){h=String(h==null?"":h);if(row==="ton")return h;/* TỐN row = what she pays: exact */if(/\d\s?→\s?\d/.test(h))h=h.replace(/([\p{L}][\p{L} ]*?) (\d+)\s?→\s?(\d+)(?:\s?\(([+\-−]\d+)\))?/gu,(m,L,a,b,d)=>+a===+b?m:L+" "+(+b>+a?"+":"-")+Math.abs(+b-+a));/* «Đức 40 → 38» = a change of −2 */
+function markTxt(h,row){h=String(h==null?"":h);if(row==="ton")return h.replace(/([\p{L}])\s[-−]\s?(?=\d)/gu,"$1 ");/* TỐN row = what she PAYS: the exact amount, no minus sign («Bạc 3», owner OD 26/11 ~22:02Z «Tốn: Bạc 20 · Sức 5 · 1 khắc») */if(/\d\s?→\s?\d/.test(h))h=h.replace(/([\p{L}][\p{L} ]*?) (\d+)\s?→\s?(\d+)(?:\s?\(([+\-−]\d+)\))?/gu,(m,L,a,b,d)=>+a===+b?m:L+" "+(+b>+a?"+":"-")+Math.abs(+b-+a));/* «Đức 40 → 38» = a change of −2 */
  if(!/[+\-−]\s?\d/.test(h))return h;
  return h.replace(MARK_NUM,(m,sg,a,b,off,str)=>{const pre=str.slice(Math.max(0,off-40),off),post=str.slice(off+m.length);
   const lab=pre.replace(/<[^>]*>/g,"").match(/([\p{L}][\p{L}\s]*?)\s*$/u);if(!lab||!/\s$/.test(pre.replace(/<[^>]*>$/,"").slice(-2)+" ")&&!/\s$/.test(pre))return m;
@@ -43743,7 +43743,7 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
  /* kit-ton-row: a price the OPTION itself names — its `ton:{…}` field or a «tốn: …» part of its line — is known up front and stays in the Tốn row whatever the stat (Tâm cơ / Đức / Danh / Sủng …); a plain fx consequence («ngay:») of a hidden-outcome card still goes */
  let ownP=[];try{const ob=(typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null)?Q[0].opts[+b.dataset.m]:null;if(ob){if(ob.ton)ownP=ownP.concat(String(fmt(ob.ton)).split(/<\/span>\s*·\s*<span[^>]*>/).map(kaPlain));ownP=ownP.concat(kitOptModel(ob).items.filter(i=>i.l==="tốn").map(i=>kaPlain(i.p)))}}catch(e){}
  /* kit-ton-row-2 (MAIN CHÍNH 83 decision, per the hint rule «words only, no stat numbers» for relations): the keep-rule covers ECONOMIC stats only (khắc / Sức / Bạc / Hồi môn / Tâm cơ / Đức / Danh / Sủng); a relation / liking price («thiện cảm -3», «quý ngươi -3», Ân tình …) stays words only in a hidden-outcome card («mất lòng bề trên») */
- ownP=ownP.filter(p=>p&&/khắc|(^|\s)(Sức|Bạc|Hồi môn|Tâm cơ|Đức|Danh|Sủng)\s*[-−]\s?\d/i.test(p));
+ ownP=ownP.filter(p=>p&&/khắc|(^|\s)(Sức|Bạc|Hồi môn|Tâm cơ|Đức|Danh|Sủng)\s*[-−]\s?\d/i.test(p)).map(p=>markTxt(p,"ton"));/* the Tốn row prints the price without the minus (markTxt ton): compare against that form */
  let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;const et=kaPlain(e.textContent);if(!KIT_COSTRE.test(e.textContent)&&!ownP.some(p=>p&&(et===p||et.includes(p)||p.includes(et))))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
@@ -102272,7 +102272,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e95cdd29036d";window.CTM_BUILD=BUILD;
+const BUILD="e9cc50caf686";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
