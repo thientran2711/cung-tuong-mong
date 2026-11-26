@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"78200514+","t":"2026-11-26T11:13Z","c":"act-merge J1: ONE deck-door path in jdoor.js (RV-ACT-MERGE F2): DOOR.deck rows for every road (hs Hành sự / srv / cold / kc, DOOR.road), di…","b":"c9a06e2c9157","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"545315e9+","t":"2026-11-26T11:26Z","c":"act-merge J1 deck test: uses the deck jobs' real rows when registered (first match wins, key rows too); sample rows get names of their own …","b":"b69596dc84d3","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -97799,11 +97799,14 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
   let gain="";try{gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ")}catch(e){}const P=["tốn: "+ton.join(" · "),"thành: "+(gain||doorTxt(a.t)||"")];if(sp[1])P.push("kèm: "+sp[1]);
   const rolled=a.o!=null&&a.o<100&&!a.lock;if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}P.push("hỏng: "+(f||"không mất gì"))}return P.join(" · ")}
  function whyOf(a,dis){if(!dis)return"";let w="";try{w=cardWhy(a)}catch(e){}return doorTxt(w)||doorTxt(a.lock&&a.t)||"chưa làm được lúc này"}
- function build(){const road=DOOR.road();if(!road||typeof tab==="undefined"||tab!=="act"||!S||S.dead)return;const R=DOOR.D.filter(r=>r.roads.includes(road));if(!R.length)return;
-  const P=document.getElementById("panel");const G=P&&P.querySelector(".cards");if(!G||!Array.isArray(deck))return;
-  const cards=[...G.querySelectorAll(":scope > button.kcard[data-i]")];const grp=new Map();
-  for(const b of cards){const a=deck[+b.dataset.i];if(!a)continue;const kr=keyOf(a,deck,R);if(!kr)continue;const [k,r]=kr;if(!grp.has(k))grp.set(k,{k,r,mem:[]});grp.get(k).mem.push(b)}
-  for(const g of grp.values()){if(g.mem.length<2)continue;
+ function build(){const road=DOOR.road();if(!road||typeof tab==="undefined"||!S||S.dead)return;const R=DOOR.D.filter(r=>r.roads.includes(road));if(!R.length)return;
+  const P=document.getElementById("panel");if(!P||!Array.isArray(deck))return;
+  /* every deck card drawn on the panel (cardH: button.kcard[data-i]) — the Hành sự grid, and on the khuê các road the cards a family / friend / letter section
+     lists on its own tab (J5b G13); ways fold only with siblings of the SAME list (one door per list) */
+  const grp=new Map();
+  for(const b of P.querySelectorAll("button.kcard[data-i]")){const a=deck[+b.dataset.i];if(!a||b.closest("[data-ddoor]"))continue;const kr=keyOf(a,deck,R);if(!kr)continue;const [k,r]=kr;
+   const host=b.parentElement;let hm=grp.get(host);if(!hm){hm=new Map();grp.set(host,hm)}if(!hm.has(k))hm.set(k,{k,r,mem:[]});hm.get(k).mem.push(b)}
+  for(const hm of grp.values())for(const g of hm.values()){if(g.mem.length<2)continue;
    const W=g.mem.map(b=>({i:+b.dataset.i,dis:!!(b.disabled||b.classList.contains("kdis"))}));const ok=W.filter(w=>!w.dis);const lead=deck[(ok[0]||W[0]).i];DART[g.k]=lead.n;
    const o={n:g.k,t:g.r.h||"",k:Math.min(...(ok.length?ok:W).map(w=>cardCost(deck[w.i]))),c:{},w:{},x:W.map(w=>String(deck[w.i].n).split(", ")[0]).join(" · "),dom:lead.dom,lock:!ok.length};
    try{const Ro=ok.map(w=>deck[w.i]).filter(a=>a.o!=null&&a.o<100);if(ok.length&&Ro.length===ok.length)o.o=Math.max(...Ro.map(a=>a.o))}catch(e){}/* every usable way rolls: the best way's odds; a sure way keeps the sure look */
@@ -100589,7 +100592,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c9a06e2c9157";window.CTM_BUILD=BUILD;
+const BUILD="b69596dc84d3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

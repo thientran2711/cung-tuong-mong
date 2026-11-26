@@ -133,11 +133,14 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
   let gain="";try{gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ")}catch(e){}const P=["tốn: "+ton.join(" · "),"thành: "+(gain||doorTxt(a.t)||"")];if(sp[1])P.push("kèm: "+sp[1]);
   const rolled=a.o!=null&&a.o<100&&!a.lock;if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}P.push("hỏng: "+(f||"không mất gì"))}return P.join(" · ")}
  function whyOf(a,dis){if(!dis)return"";let w="";try{w=cardWhy(a)}catch(e){}return doorTxt(w)||doorTxt(a.lock&&a.t)||"chưa làm được lúc này"}
- function build(){const road=DOOR.road();if(!road||typeof tab==="undefined"||tab!=="act"||!S||S.dead)return;const R=DOOR.D.filter(r=>r.roads.includes(road));if(!R.length)return;
-  const P=document.getElementById("panel");const G=P&&P.querySelector(".cards");if(!G||!Array.isArray(deck))return;
-  const cards=[...G.querySelectorAll(":scope > button.kcard[data-i]")];const grp=new Map();
-  for(const b of cards){const a=deck[+b.dataset.i];if(!a)continue;const kr=keyOf(a,deck,R);if(!kr)continue;const [k,r]=kr;if(!grp.has(k))grp.set(k,{k,r,mem:[]});grp.get(k).mem.push(b)}
-  for(const g of grp.values()){if(g.mem.length<2)continue;
+ function build(){const road=DOOR.road();if(!road||typeof tab==="undefined"||!S||S.dead)return;const R=DOOR.D.filter(r=>r.roads.includes(road));if(!R.length)return;
+  const P=document.getElementById("panel");if(!P||!Array.isArray(deck))return;
+  /* every deck card drawn on the panel (cardH: button.kcard[data-i]) — the Hành sự grid, and on the khuê các road the cards a family / friend / letter section
+     lists on its own tab (J5b G13); ways fold only with siblings of the SAME list (one door per list) */
+  const grp=new Map();
+  for(const b of P.querySelectorAll("button.kcard[data-i]")){const a=deck[+b.dataset.i];if(!a||b.closest("[data-ddoor]"))continue;const kr=keyOf(a,deck,R);if(!kr)continue;const [k,r]=kr;
+   const host=b.parentElement;let hm=grp.get(host);if(!hm){hm=new Map();grp.set(host,hm)}if(!hm.has(k))hm.set(k,{k,r,mem:[]});hm.get(k).mem.push(b)}
+  for(const hm of grp.values())for(const g of hm.values()){if(g.mem.length<2)continue;
    const W=g.mem.map(b=>({i:+b.dataset.i,dis:!!(b.disabled||b.classList.contains("kdis"))}));const ok=W.filter(w=>!w.dis);const lead=deck[(ok[0]||W[0]).i];DART[g.k]=lead.n;
    const o={n:g.k,t:g.r.h||"",k:Math.min(...(ok.length?ok:W).map(w=>cardCost(deck[w.i]))),c:{},w:{},x:W.map(w=>String(deck[w.i].n).split(", ")[0]).join(" · "),dom:lead.dom,lock:!ok.length};
    try{const Ro=ok.map(w=>deck[w.i]).filter(a=>a.o!=null&&a.o<100);if(ok.length&&Ro.length===ok.length)o.o=Math.max(...Ro.map(a=>a.o))}catch(e){}/* every usable way rolls: the best way's odds; a sure way keeps the sure look */
