@@ -143,3 +143,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - ~08:08Z OWNER (154 chat) tài nghệ pace: LIVE since 6b5d3d05; wider rec ORDER D pace-all (every progress bar) + OD row.
 - ~08:12Z OWNER UI bug (154 chat 08:05Z) «Tiến bộ» per bậc only → KK39 review/kit-bac-progress (first) + D order corrected. Sếp picked A for khuê các (154 chat 08:08Z) = same as applied.
 - ~08:12Z LOOK PASS map-zones r7 abc1c795 (tiled Fold+iPad videos) → BIG rv session_01V1ZZH1WzF9VpNYw1Q3uuhA; lục cung zones stay (OD row 08:10Z). OB-PHU4 at rollover → fixer only if FAIL. ACT-MERGE archived (45cc9930 r1: ≈165→≈80, ĐỂ RIÊNG kept).
+- ~08:16Z OWNER (154 chat 08:15Z): plan showed numbers only → wants NAMES old → new as a proper PDF; 154 sent a 6-page Vietnamese PDF. LESSON (apply always): every report to sếp lists the NAMES (old → new / what changes), never counts only; J1–J5 reports must carry the name table too.
