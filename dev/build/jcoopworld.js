@@ -1008,7 +1008,7 @@ function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.wher
  try{if(!S.dead&&m.week===wk()){const me=CW.seat;
   if(!eW()&&CW.bend&&m.buoi===(S.buoi||0)&&m.bended&&!m.bended[me]){T("rebend "+m.week+"."+m.buoi);CW.bend=false;bend()}
   if(CW.sent===wk()&&m.ended&&!m.ended[me]&&!gG()){T("re-end "+m.week);CW.sent=-1;CW.pend=true;soonEnd()}}}catch(e){console.error(e)}
- if(CW.p2&&!eW()&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&!CW.pend/* OPEN 2: a pending week end is past every buổi of the week (restored after a reload) */&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}/* a dialog open: onBuoi keeps the step as pendBuoi (stepped when it closes) — before, nothing caught her up and her next bend was refused (badbuoi): stuck */
+ if(CW.p2&&!eW()&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&!CW.pend&&!(()=>{const rd=CW.roomDate();return !!(rd&&CAL.some(k=>S[k]!==rd[k]))})()/* OPEN 2: a pending week end / a date past the room's (her week end ran: restored after a reload) is past every buổi of the week */&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}/* a dialog open: onBuoi keeps the step as pendBuoi (stepped when it closes) — before, nothing caught her up and her next bend was refused (badbuoi): stuck */
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
 COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.week+"."+m.buoi+" sent "+CW.sent+" in "+CW.wkIn);if(!CW.on||!m.state)return;const C=m.state;
  /* review/coop-week-stall: the Worker builds the snapshot across awaits (acceptWebSocket → loadC → chat …); a week merge that lands in
@@ -1620,15 +1620,22 @@ CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base||CW.inLife)return null;let d;try{d=
    phone runs nothing, gG) keeps her waiting for the host's week instead of a fresh week start. */
 CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk())return false;const c=o.c||{},own=o.dev===DEV&&o.room===COOP.state.room,ended=!!(COOP.state.ended||{})[CW.seat];
  /* level 13 = the room's level or, before the level message arrived after a reload, the copy's own (thl), as the buổi check below */
- const g13=gW()||(c.thl|0)>=13;const pk=own&&!!c.pend&&c.sent!==wk()&&!ended,gk=own&&g13&&!host()&&!c.pend&&c.sent===wk();
- if((c.pend&&!pk)||(c.sent===wk()&&!gk))return false;
- if(!pk&&((()=>{const rd=CW.roomDate(),dS=o.d&&o.d.S;if(rd&&dS&&CW.CAL.some(k=>dS[k]!==rd[k])){T("restore: date ahead");return true}return false})()||(!(eW()||(c.thl|0)>=5)&&roomB()!=null&&roomB()<o.buoi)))return false;
+ const g13=gW()||(c.thl|0)>=13,gst=g13&&!host();
+ /* law 11, same family: MY end sent but never reached the server (socket down, then the reload: the room says not ended) = still my pending end
+    (sent again, as syncRoom's re-end does); only when the room's ended list is known */
+ const lost=own&&!c.pend&&c.sent===wk()&&!gst&&!!COOP.state.ended&&typeof COOP.state.ended==="object"&&!ended;
+ const ahead=(()=>{const rd=CW.roomDate(),dS=o.d&&o.d.S;return !!(rd&&dS&&CW.CAL.some(k=>dS[k]!==rd[k]))})();
+ /* her phone at 13 runs no week end: a copy past the go (sent) or ahead of the room's date (her week end's patches from the host) is HER week end as
+    the host ran it — kept (before: refused → the room's week start on her screen until the host's week; coop-afk-l13 RELOAD=g THIN 13) */
+ const pk=own&&!ended&&((!!c.pend&&c.sent!==wk())||lost),gk=own&&gst&&!c.pend&&(c.sent===wk()||ahead);
+ if((c.pend&&!pk)||(c.sent===wk()&&!gk&&!lost))return false;
+ if(!pk&&!gk&&((ahead&&(T("restore: date ahead"),true))||(!(eW()||(c.thl|0)>=5)&&roomB()!=null&&roomB()<o.buoi)))return false;
  const gb=own&&g13&&host()&&CW.gBack?CW.gBack(o.week):null;if(pk&&g13&&host()&&!gb){T("restore: pend without her week end");return false}
  quiet=true;try{if(o.d)o.d.tab="act";/* owner 16/11: rejoin opens her room (Hành sự) */deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
  Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
  /* her "Sẵn sàng" of this buổi survives too: the room still holds her bend (the night's ready is re-sent by nResync) */
  {const rm=CW.roomMsg;if(rm&&rm.week===wk()&&rm.buoi===(S.buoi||0)&&rm.bended&&rm.bended[CW.seat])CW.bend=true}
- if(gb)try{gb()}catch(e){console.error("restore her week end",e)}if(pk)T("restore: own pend "+o.week);
+ if(lost){CW.sent=-1;CW.pend=true}if(gb)try{gb()}catch(e){console.error("restore her week end",e)}if(pk)T("restore: own pend "+o.week+(lost?" (lost end)":""));
  try{keepFriendPos();refreshHere()}catch(e){}syncRoom(CW.roomMsg);try{$("title").hidden=true}catch(e){}
  if(Q.length)showModal();render();lockNext();if(CW.pend)soonEnd();return true};
 
