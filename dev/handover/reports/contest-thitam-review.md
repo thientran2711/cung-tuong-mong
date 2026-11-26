@@ -69,6 +69,22 @@ phần thưởng hiện tại, còn được thị tẩm đêm đó" → ruling 
 python3 dev/build/assemble.py (branch + LIVE) · node dev/test/contest-thitam.js file://…/dev/index.html (and LEDGER=1) ·
 python3 dev/tools/contest-thitam-scan.py <root> (branch 8/8, LIVE 0/8 — but see finding 1) · node dev/test/coop-contest-thitam.js (+ C4FIRST=1).
 
-## Co-op re-run (LIVE Worker, 2 browsers: host Fold 755x1000@2 / guest iPad 1180x820@2)
-Running at push time (room set-up OK: both seats in, each has the other as a consort entry). Results C1–C4 (and C4FIRST=1) are appended
-here in a follow-up commit; the FAIL above does not depend on them.
+## Co-op re-run (LIVE Worker, 2 browsers: host Fold 755x1000@2 / guest iPad 1180x820@2) — reviewer's own runs
+| case | result |
+|---|---|
+| C1 host first | PASS: host keeps tonight (ntk me) + her card · played tối = host on both seats, no flip choice · host +1, guest 0 |
+| C2 friend's entry first (host's contest) | PASS: host keeps it for entry 902 · guest gets ok relay + her card · played tối = guest on both seats · guest +1, host 0 |
+| C3 guest first on her own seat (relay) | rule PASS: relay → guest card + ntk · played tối (d6) = guest on both seats · guest +1, host 0. Harness: «week merged once» FAIL (host + guest queues hold «Lễ Phật đản» twice = the stall the worker reported) |
+| C4 NPC first (C4FIRST=1, on build ab9e28b0) | PASS: host keeps it for NPC 1 · played tối (d4) = NPC 1 on both seats · neither seat +1 |
+Run 1's C4 failed only because C3's stalled week never merged (seats still on d6); the C4FIRST run proves the case.
+
+## RE-CHECK of the fixes (ab9e28b0, worker D3 «RV-FIX»), code + logic only — final PASS waits for D3 #2's sha + new videos + 1-year count
+- #1 whole family: jrd_thd thd_tho_7 round (her :110 + {v} :112) and thd_tho_10 board (her :209 + {v} :211) wired; jrd_bd bd_san_9 only on her own
+  shot (option f:"ctnself" → E.win checks A.f.ctnself; prince's shot → no night). Scan widened: 27 kinds · 13 should · 13 wired · 0 unknown; the
+  excluded kinds are listed with reasons. OK.
+- #2 card: ctnF() puts «đêm ấy được thị tẩm» FIRST. Probe at hint level 0/1/2 → «đêm ấy được thị tẩm, đoạt giải, …»; feast card the same. OK in
+  code; the jts «Tự tay phối đồ» card must be checked on the real screen (my probe could not build its card shape).
+- #3 wording: «đêm ấy» on every entry card. OK.
+- #4 order: jctn cardLater waits for the result toast / podium / mini-game board (BAL.ctn.waitMs 1500, cap 60 s), and the toast's Được gets
+  «đêm ấy được thị tẩm» (kit item markup). OK in code; must be seen on the new videos.
+- Logic test on ab9e28b0 build: 21/21 (16 + 5 new story rows), 0 page errors.
