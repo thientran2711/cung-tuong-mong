@@ -414,3 +414,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:03Z KK48 result-card shots kit-resfold-r2 8740785b → MAIN LOOK PASS (height = content, Fold+iPad long+short) → sheet SENT to sếp (pending RV-163C). KK48 rolled (handover kk48.md; archive showed unpushed_work=true — KK49 to verify kit-resfold-r2 branch tip) → archived; opened KK49 session_01Rc5AsJHZTVo6v5Ks4SpWbw (opus): K-LIST-PAGE → R6 kit review → >7 layout + name plate + HUD-SACPHONG → mount/refit. R6, RING-BUILD-7, HUD-SACPHONG told.
 - ~23:01Z (after roll) OWNER: monthly stat adjust toward palace mean → OD row + MAIN rec (25 % drift toward same-rank mean, both ways, no hard reset) → PACE-SPEED + 165.
 - ~23:03Z OWNER: Sắc phong X/Y = X weeks PASSED (not left) → OD row fixed in place; HUD-SACPHONG + 165 told.
+- ~23:06Z OWNER: palace mean by % (proportional) → OD row overwritten: monthly per rank group scale all by f=T/top when top>T (T=ceil×0.85) → PACE-SPEED.
