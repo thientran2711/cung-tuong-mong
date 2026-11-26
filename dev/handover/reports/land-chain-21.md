@@ -68,3 +68,64 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 ## 10:10Z — mg-trim HOLD (coop-thin-f4), HW-NITS on LIVE
 - mg-trim be7e8326: chain PASS except coop-thin-f4 0/11 (alone 1/11) vs LIVE 8/10 (same local worker) → HOLD, reported to MAIN 157. mg-craft 1/25 «kim lower at ease 0» (e0=e5=[10,10]) → rerun alone. QC PASS (buổi 1795/2083).
 - HW-NITS restaged on LIVE: review/lc21-hw d4618564 (0e71fdbc onto 3af7896e). Gates gates-hw2.sh, QC vs LIVE.
+- mg-craft rerun alone on mg-trim PASS → flake.
+
+### mg-trim HOLD — coop-thin-f4 logs (local wrangler worker = LIVE coop/worker, port 8791)
+- MAIN 157: NO waive; mg-trim dropped from slot, routed to FOREMAN D; comes back as a new sha.
+- run 1 (in chain, be7e8326):
+  ok F0  err=?
+  FAIL P1 "now":{"pend":true,"next":true,"same":true} err=null
+  FAIL P2 "now":{"pend":false,"next":true,"same":true} err=null
+  FAIL P3 "now":{"pend":false,"next":true,"same":true} err=null
+  FAIL P4 "now":{"pend":false,"next":true,"same":false} err=null
+  FAIL P5 "now":{"pend":false,"next":true,"same":false} err=null
+  ok P5  err=?
+  FAIL G1 "now":{"pend":false,"next":true,"same":false} err=null
+  ok G1  err=?
+  FAIL G2 "now":{"pend":false,"next":true,"same":false} err=null
+  ok G2  err=?
+  FAIL K1 "now":{"pend":false,"next":true,"same":false} err=null
+  FAIL K2 "now":{"pend":false,"next":true,"same":false} err=null
+  FAIL R1 "now":{"pend":false,"next":true,"same":true} err=null
+  FAIL T1 "now":{"pend":false,"next":true,"same":true} err=null
+  ok C1  err=?
+  FAIL D1  err=?
+  ok F8  err=?
+- run 2 (alone, be7e8326):
+  ok F0  err=?
+  ok P1  err=?
+  FAIL P2 "now":{"pend":false,"next":true,"same":true} err=null
+  FAIL P3 "now":{"pend":false,"next":true,"same":true} err=null
+  FAIL P4 "now":{"pend":false,"next":true,"same":false} err=null
+  FAIL P5 "now":{"pend":false,"next":true,"same":false} err=null
+  ok P5  err=?
+  FAIL G1 "now":{"pend":false,"next":true,"same":false} err=null
+  ok G1  err=?
+  FAIL G2 "now":{"pend":false,"next":true,"same":false} err=null
+  ok G2  err=?
+  FAIL K1 "now":{"pend":false,"next":true,"same":false} err=null
+  FAIL K2 "now":{"pend":false,"next":true,"same":false} err=null
+  FAIL R1 "now":{"pend":false,"next":true,"same":true} err=null
+  FAIL T1 "now":{"pend":false,"next":true,"same":true} err=null
+  ok C1  err=?
+  FAIL D1  err=?
+  ok F8  err=?
+- LIVE 3af7896e (same harness):
+  ok F0  err=?
+  FAIL P1 "now":{"pend":true,"next":true,"same":true} err=null
+  ok P2  err=?
+  FAIL P3 "now":{"pend":true,"next":true,"same":true} err=null
+  ok P4  err=?
+  ok P5  err=?
+  ok P5  err=?
+  ok G1  err=?
+  ok G1  err=?
+  ok K1  err=?
+  ok K2  err=?
+  ok R1  err=?
+  ok T1  err=?
+  ok C1  err=?
+  ok D1  err=?
+  ok F8  err=?
+- Note: on mg-trim the failing rows show now.pend:false (intent never held pending → not routed through the host), on LIVE the 2 failures show pend:true. Full raw logs: dev/handover/reports/lc21-logs/coop-thin-f4-{mt-chain,mt-alone,live}.log.
+- 10:20Z MAIN 157: ob-m3ui → d8dba46c instead of 51855c36 if RV-OB-M3UI-SOLOLH (session_01V1ZZH2SEXGiuMDGZGgiENr) posts SMALL PASS first. ob-oan head 5d663810 (tsTalkL = doorRaw when jdoor.js present, else talkOpts). promo-root3 987c3599 (test only) rides with any slot at the end. Kit keeper KK41 session_01V1ZZH1ZpR1p4UkhoUWozbE (firstcard × kit-stage odds union → KK41). B freeze c20aaa6e jumps first when posted.
