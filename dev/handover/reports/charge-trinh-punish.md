@@ -57,3 +57,30 @@ Videos (real game page, accusation by the game's Tố giác, wheel scroll + real
 ## STATUS (26/11 ~10:00Z)
 - -rv c3e1b8fd pushed (FF from LIVE 3af7896e); coop-e2e on it running → then «LAND READY review/charge-followups-rv c3e1b8fd» to Foreman D.
 - STEP 4 review/charge-trinh-punish c59bae19 pushed → coop-e2e + ONE BIG reviewer (opus child).
+
+## BIG review 1 (session_01D3E3NXbek1mcjhNBkMvvT4): FAIL c59bae19 — F1–F3 (O1 + O2 core + -rv delta + LIVE merge PASS). Fix round → a43aa413
+| # | fix (a43aa413) | test (charge-trinh-punish.js ALL PASS) |
+|---|---|---|
+| F1 | her jtsb «Báo lên Hoàng hậu / Thái hậu»: gate + spend = ức hiếp pieces (need row «chứng cứ tội ức hiếp quấy phá (có n/need)»), chPunish "uh" with CHX, card prints «Chứng cứ −n (tội …)» + chPunTxt; ONE odds helper tsbRepO(v,a) for her and the NPC road jtsb:100 (which now rolls the same odds, law 1); typed 12/12/6 → BAL.odb.jtsb.orPer/orWit/orDanhD; witness = odds factor | locked with 0 pieces; open + won → chPunish uh, pieces 2→0 |
+| F2 | j71 tomuu: pieces of mưu hại gate the «Trình…» options (pp picks chOK(S,v,"mh")), win spends them → chPunish "mh"; ev*12, danh/5, th/3 → BAL.odb.j71.evPer/evDanhD/evThD. j95 caught in the act: listed as eyewitness road, odds + spend = pieces of the matching charge (tryst→tt, else mh; BAL.m95.accPer), NPC mirror j95:456 odds = her tư thông pieces. j8 Tố vượt phẩm → chPunish "vp" (one vượt phẩm punishment; AOUT vp prints chPunTxt). charge-scan proof_generic now statement-wide (1500-char window before each punish / demote / fall / deathSentence), 55 sites listed with a reason, 0 GENERIC | tomuu: no «Trình» at 1/3, offered at 3/3, win → chPunish mh, pieces 0; j95 a mh piece moves the odds, a vp piece does not; vpAccuse test SKIPPED (no over-rank piece on the sample consort) |
+| F3 | one helper jcharge chUse / chUseTxt / chWinTxt (accuse / trinhhh / judge = chReady, tocao = chTocao, expose = tt) read by j78 actLineRaw (person card), AOUT accuse / tocao, and evidenceActs (accuse / tocao / expose / trinhhh / judge) | person card = evidence card «Chứng cứ −2 (tội ức hiếp quấy phá)»; Tố giác «thành» = cấm túc + bồi bạc (no «phế hoặc giáng») |
+Regression on a43aa413: charge-followups ALL PASS · charge-smoke 0 FAIL · seize-ledger ALL PASS · punish-reason Fold/iPad ALL PASS · charge-scan all 0 · punish-scan npc_zero 0 · cold-faction 20/20. NOT RUN on a43aa413: coop-e2e, quickcheck/coregates, new videos (the O1 videos of c59bae19 still show the O1 road unchanged).
+
+## coop-e2e record (live Worker)
+| build | result |
+|---|---|
+| LIVE 3af7896e | 143/143 |
+| -rv c3e1b8fd run 1 | 141/143 — «same world» R#*.mgH.hoadien / mgHv.hoadien on seat B only (jhd hdNpc → mgHand lazy write) |
+| -rv c3e1b8fd run 2 | 137/143 — «Thái hậu keeps her face» ×4 + «same world» R#7.inv.19 / R#9.wrongs.0.k "xx" + dkeys "xx:mk:…" on seat B only |
+| STEP 4 c59bae19 (reviewer's run) | 143/143 |
+Different keys each run → looks flaky, but R#9.wrongs "xx" / dkeys "xx:mk" are jtruth deed writes (D4 area) on the guest only — the successor must check whether a deed written on the guest's world copy (deedAdd / deedOnce on an NPC) reaches the host or is a guest-local write (coop-host-lag family), before LAND READY -rv.
+
+## HANDOVER (worker D1+D4 #5 session_01D3E3NbLPKdQmHXFEQ4xkHv, depth 3, START_CTX ~3 %, rolled at ~34 % on 26/11 ~11:05Z)
+State:
+- review/charge-followups-rv c3e1b8fd pushed (FF from LIVE 3af7896e). BIG reviewer: -rv delta ad31b084→c3e1b8fd + LIVE merge PASS. Core gates on c3e1b8fd PASS except the pre-existing dialog-fixed + button-crawl. LAND READY NOT sent: coop-e2e on c3e1b8fd 141/143 then 137/143 (table above).
+- review/charge-trinh-punish a43aa413 pushed (= c3e1b8fd + STEP 4 + rv fixes F1–F3), unreviewed since the FAIL.
+- Worktrees on this box (successor gets a fresh box): /home/user/wt/ctp (STEP 4), /home/user/wt/cfrv (-rv), /home/user/wt/live3af (LIVE), /home/user/wt/ctp-ho (handover).
+TODO for the successor:
+1. -rv c3e1b8fd: investigate the guest-only world writes in coop-e2e (wrongs "xx" / dkeys "xx:mk" on R#9; mgH.hoadien; Thái hậu face) — compare with a second LIVE run; if pre-existing/flaky on LIVE → coop-e2e green run + «LAND READY review/charge-followups-rv c3e1b8fd» to Foreman D (re-merge if LIVE moved).
+2. STEP 4 a43aa413: coop-e2e + coregates (quickcheck) on it; vpAccuse runtime test (give a consort an over-rank piece); re-ask the BIG reviewer session_01D3E3NXbek1mcjhNBkMvvT4 (DELTA c59bae19→a43aa413); on PASS «LAND READY review/charge-trinh-punish <sha>» + video URLs (img/_review/charge-trinh-punish/ fold-755x1000.webm, ipad-1180x820.webm).
+3. Foreman D routed to MAIN: servant end card shows «Đáp ứng» + consort portrait (pre-existing). Reviewer nit N1: a servant accusing her own briber is dismissed too («Ai tố: ngươi») — warning line if such a road is offered.
