@@ -5,7 +5,11 @@
      HELD   = a card sits in Q but #modal is hidden (waits behind the open view)  <- the bug
      DIRECT = no dialog (the act ran in place: line / reaction / grey reason)
    usage: node dev/test/dialog-order-scan.js <baseURL> <path> [W H] [maxPlaces]   e.g. http://127.0.0.1:8796 dev/index.html 755 1000
-   exit 1 when any HELD row (or a page error) is found. */
+   exit 1 when any HELD row (or a page error) is found.
+   HOLD=1 (E96f r2, E96r FAIL 1 held-card variant): before EVERY tap a card the GAME posted (GAMECARD-HELD) already waits hidden behind the view
+   (gate (c) holds it, dayq-hold A4) -- __D.clean() no longer hides that case. Extra results: DEAD = nothing of hers on screen and nothing of hers
+   queued (only the game card) / GAMEFIRST = the game card shows before hers / LOST = the game card is gone / HELD = hers queued but hidden.
+   Join with a plain run (same SEED) by act: a TOP act there must be TOP here. exit 1 on HELD / LOST / GAMEFIRST / page error. */
 const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const [,,BASE,PATH,W,H,MAXP]=process.argv;
 const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv()))break}
@@ -44,13 +48,16 @@ const CARDSEL='.kfoc button.kfoc-b';
     if(process.env.DBG)console.log('  TAB',tb,JSON.stringify(cards),await p.evaluate(()=>{const w=document.getElementById('popw');return [w&&w.hidden,document.querySelectorAll('#popw .opt').length,document.querySelectorAll('.opt').length,popIdx,!!(window.DF&&DF.F)]}));
     for(const cd of cards){if(cd.dis||!cd.vis)continue;
      if(!await open())break;if(tb){await tabClick(tb);await sleep(300)}
+     if(process.env.HOLD){await p.evaluate(()=>{pushModal({t:'GAMECARD-HELD',h:'x',opts:[{n:'Được',fx:{}}]});showModal()});await sleep(200)}
      const el=(await p.$$(CARDSEL))[cd.k];if(!el)continue;
      try{await el.click({timeout:2500})}catch(e){rows.push({pl,who:who.n,tab:tb,act:cd.n,res:'NOTAP'});continue}
      if(process.env.WHY)await p.evaluate(()=>{if(window.__whyOn)return;window.__whyOn=1;const s0=showModal;showModal=window.showModal=function(){try{const ev=window.event;const a=typeof dqActEl==='function'?dqActEl():null;const L=[];for(let x=ev&&ev.target;x&&L.length<6;x=x.parentElement)L.push(x.tagName+(x.id?'#'+x.id:'')+'.'+String(x.className).slice(0,18));
        window.__why={ev:ev&&ev.type,chain:L.join('<'),act:a&&(a.id||String(a.className).slice(0,24)),stack:new Error().stack.split('\n').slice(2,7).map(x=>x.trim().slice(3,50)).join(' / ')}}catch(e){}return s0.apply(this,arguments)}});
      await p.evaluate(()=>{window.__why=null});
      await sleep(900);const s=await p.evaluate(()=>__D.state());
-     const res=(s.modal||s.ov||s.scene||s.play||s.intro)?'TOP':(s.q?'HELD':'DIRECT');
+     let res=(s.modal||s.ov||s.scene||s.play||s.intro)?'TOP':(s.q?'HELD':'DIRECT');
+     if(process.env.HOLD){const h=await p.evaluate(()=>{const i=Q.findIndex(m=>m.t==='GAMECARD-HELD');return {i,n:Q.length}});
+      res=h.i<0?'LOST':(s.modal&&h.i===0)?(h.n>1?'GAMEFIRST':'DEAD'):(s.modal||s.ov||s.scene||s.play||s.intro)?'TOP':h.n>1?'HELD':'DEAD'}
      rows.push({pl,who:who.n,tab:tb,act:cd.n,res,q:s.qt||''});if(process.env.SHOT&&(res==='HELD'||(process.env.SHOTD&&res==='DIRECT'&&cd.n.includes(process.env.SHOTD))))await p.screenshot({path:process.env.SHOT+'/held-'+rows.length+'.png'});if(process.env.WHY&&res==='HELD')console.log('WHY',cd.n,JSON.stringify(await p.evaluate(()=>({why:window.__why,mg:S.mg&&(S.mg.k||S.mg.kind||1),tapIn:DQ.tapIn,mine:!!DQ.mine,st:DQ.stat,kfoc:!!document.querySelector('.kfoc'),popw:!document.getElementById('popw').hidden,q0:Q[0]&&{t:Q[0].t,pid:Q[0].pid},fn:typeof dqTapIn,pre:DQ.preQ&&DQ.preQ.size,inPre:!!(DQ.preQ&&DQ.preQ.has(Q[0])),qh:dqQHidden(),qn:Q.length,enc:!!(DF.encM&&DF.encM===Q[0]),dfw:Q[0]&&Q[0].__dfWait,dfs:Q[0]&&Q[0].dfSeen,play:dqPlaying(),ev:DQ.tapEv&&DQ.tapEv.type}))));
     }
    }
@@ -60,4 +67,4 @@ const CARDSEL='.kfoc button.kfoc-b';
  const cnt={};rows.forEach(r=>cnt[r.res]=(cnt[r.res]||0)+1);
  console.log('| place | person | tab | act | result | dialog |');console.log('|---|---|---|---|---|---|');
  for(const r of rows)console.log(`| ${r.pl} | ${r.who} | ${r.tab||''} | ${r.act} | ${r.res} | ${r.q||''} |`);
- console.log('SUMMARY',JSON.stringify(cnt),'pageErrors',pe.length,JSON.stringify(pe.slice(0,3)));await b.close();process.exit((cnt.HELD||0)||pe.length?1:0)})();
+ console.log('SUMMARY',JSON.stringify(cnt),'pageErrors',pe.length,JSON.stringify(pe.slice(0,3)));await b.close();process.exit((cnt.HELD||0)||(cnt.LOST||0)||(cnt.GAMEFIRST||0)||pe.length?1:0)})();
