@@ -82,3 +82,9 @@ Tools: state/hh_state.json (all creation ids: Araw/Aflat/Braw/OUT/LOOP), tools/g
 Note: B images need no re-upload (already green); A images do (flatten). Prompts: tools/swap.py <g> → prompts.json.
 ## HANDOVER W1c → successor (rolled at ~28 %)
 NEXT: (1) fix the 7 disc cases of hh and publish; (2) sets pt, cl, cy (same recipe, prompts via swap.py, ref vQzzg4ja47); keep ≤5 Seedance in flight; (3) wiring/review on review/c3-seals.
+
+## SET 1 HH+HQP (hh-) DONE — W1d (26/11 ~12:50Z) · 21/21 LIVE · fix cost 0 cr
+PRIORITY #1 CHECK: OD MAIN 157 | main none | review/c3-seals c0c35eb1 | claims Foreman C.
+The 7 held seals (binh muu ghen buon so chan tutin) are LIVE (img/kit/emo-anim/hh-act-<k>{,-out,-back}.webp + img/kit/emo-hh-act-<k>.webp; review copies + sheet img/_review/c3-seals/hh/hh-act-sheet-binh.png, 7 rows: OUT rest|OUT peak|LOOP start|LOOP mid|BACK mid). Clips re-downloaded by id from hh_state.json (0 cr), re-cut, disc re-measured.
+ROOT CAUSE: the old tracker used ONE rest radius for out+loop+back and locked onto halo/robe/fan circles; raw Seedance disc size differs between clips (A disc vs B disc, 86–104 px) and has a glow ring just outside the gold rim. FIX = tools/meas_raw3.py: static camera → disc centre fixed (OUT rest circle); per frame only the radius = innermost strong ring of the alpha-edge distance histogram (halo peaks outside are ignored); LOOP = constant median, OUT/BACK median+box 9. Check = tools/meas_after3.py (fixed centre C0): rest 0.995–0.999, peak 1.12–1.14, LOOP 1.114–1.134, back_end 0.995–0.999, dev from spec ≤0.023 (chan out 0.023, muu 0.021, rest ≤0.014). Looked at the 5-col sheet + 8-frame loop sheets with the 1.12 ring: same disc size, no pulsing. Use `meas_raw3.py` instead of meas_raw.py for ALL next sets (pt cl cy); then apply.py, meas_after3.py.
+NEXT: Foreman C asked for a GO before pt/cl/cy spend (SEALS spend over the planned line) — waiting.
