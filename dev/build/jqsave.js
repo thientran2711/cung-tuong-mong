@@ -14,6 +14,8 @@ const JQ={held:0,stat:{full:0,held:0,flushed:0}};
    whole and shown again on load (JSON leaves the empty go out; chooseM runs an option without go as fx only, the same as before) */
 const jqNoop=f=>/^(?:\(\s*\)|[\w$]+)\s*=>\s*\{\s*\}$|^function\s*[\w$]*\s*\(\s*\)\s*\{\s*\}$/.test(String(f).trim());
 function jqData(m){/* the card as plain data, or null when an option (or the card) carries code */try{if(!m||m.pid||!m.opts)return null;
+  /* a look-up / view panel (status icon «Tin chờ người sai đi», Tâm trạng · X …) or a menu is never saved (j3 serM), even when its only option is an empty «Đóng» (q-softlock) */
+  if((typeof isLookCard==="function"&&isLookCard(m))||(typeof isMenuCard==="function"&&isMenuCard(m)))return null;
   for(const o of m.opts)for(const k in o)if(typeof o[k]==="function"&&!(k==="go"&&jqNoop(o[k])))return null;for(const k in m)if(k!=="who"&&typeof m[k]==="function")return null;
   const c=JSON.parse(JSON.stringify(m,(k,v)=>k==="who"||k==="__b95"||k==="__c95"||k==="__aud95"?undefined:v));c.w=m.who&&m.who.w;c.$full=1;return c}catch(e){return null}}
 /* save-unseen-lists r2 (rv r2 FIX 1): a generator card (rk + ra, j3 rcpReg) is written as {rk,ra} and made again on load: saveable, never held / left out */
