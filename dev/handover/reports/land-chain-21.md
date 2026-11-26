@@ -50,3 +50,5 @@ Order: [HOME-WAY by LC20] → DRESS → TAINGHE r5 review/tainghe-info-r5 88bd56
 - 09:03Z MAIN 156: endcard + ob-oan CHANGE drafts OK. Standing: branch without CHANGE → write own ≤140 cổ trang line, don't ask.
 - 09:16Z OB-OAN (session_01V1ZZH3GxCcQzWNoKy1ARxN): ob-oan-r6 head c1aac955 (+2 test-only commits to ob-oan.js) → use at restack.
 - 09:17Z MAIN 156: ob-oan extra CHECK — stage ENCOUNTER scene (hater visit → Làm lành): choice shows once in-scene, tsOpener showModal must not pop a centre modal over it (no double/empty). If double → hold ob-oan, tell MAIN.
+- 09:25Z RV-OB-M3UI (session_01V1ZZH4TRGnDYHjdSSB6nj1): SMALL PASS review/ob-m3ui cb7906f4 (head 68a1c68d = + report). Waiting MAIN for its place in the queue.
+- 09:25Z MAIN 156: ob-m3ui 68a1c68d after ob-oan (gates ob-m3ui.js Fold+iPad 50/50, kit-opt-art-tap, kit-close, old save, QC; own CHANGE ≤140). Order: mg-trim → HW-NITS → ob-oan c1aac955 → ob-m3ui → endcard → (firstcard/ob-verdict on PASS) → TAINGHE …
