@@ -26,6 +26,7 @@ const H=`window.__spc={
    if(typeof EVI!=='undefined'&&EVI[id]&&EVI[id].pp){pp=null;for(let i=0;i<40&&!pp;i++){try{pp=EVI[id].pp()}catch(e){err=String(e.message).slice(0,40)}}if(!pp){/* the maker found no reason this life (npc agency rvWhy): the same shape of pp from the world's own people */const L=(typeof liveRivals==='function'?liveRivals(false):[]).filter(Boolean);
      if(L.length>=2){pp={v:L[0].id,a:L[0].id,b:L[1].id,f:L[0].id,y:'',o:50};try{let d0=this.mk(id,pp,1);if(!d0||!d0.o){pp=null}}catch(e){pp=null}}
      if(!pp){out.push({id,skip:err?'pp:'+err:'pp:null'});continue}syn=1}}
+   if(typeof e68Fits==='function'&&!e68Fits({pid:id})){out.push({id,skip:'season (e68Fits: not drawn this month; dropped on load by design)'});continue}
    let d=null;try{d=this.mk(id,pp,syn)}catch(e){out.push({id,skip:'mk:'+String(e.message).slice(0,40)});continue}if(!d||!d.o||!d.o.length){out.push({id,skip:'nocard'});continue}out.push({id,syn,pp:JSON.parse(JSON.stringify(d.pp||{}))})}return out},
  /* TEST SETUP ONLY: a synthetic pp (syn) is built past the j95b actor gate the way a LOAD builds it (J95C.loading: «they passed the gate when made») */
  mk(id,pp,syn){if(!syn||typeof J95C==='undefined')return mkP(id,pp);const l=J95C.loading;J95C.loading=1;try{return mkP(id,pp)}finally{J95C.loading=l}},
