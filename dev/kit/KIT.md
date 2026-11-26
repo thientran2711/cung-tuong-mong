@@ -383,15 +383,15 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
   "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
 - KÈM = ONE SIEVE (CANON OVERWRITE in place, owner OD 26/11 ~06:50Z (B) «result cards: only rows that changed for HER … the rest in Sổ ghi»; ONE-SIEVE,
-  `nsCard` / `nsSieve` in jnsieve, called by j63 `kaResultRows`; numbers `BAL.news.card`): a person row of someone else (not her act's target —
-  «Người ấy» is OB-VERDICT's —, not her household, not Thái hậu / Hoàng hậu) stays in Được / Mất only when it carries evidence, the change is
-  ≥ `card.big`, or the span's own log names that person in a line about HER; at most `card.rowMax` such rows, largest first. Every other person
-  change (their thiện cảm, every ghen / oán) is ONE Kèm line «Trong cung: 9 người ghen thêm (Hoàng hậu Lục Hương Ngưng +10, …), 2 người nguôi oán»
-  — groups quý ta hơn / bớt quý ta / ghen thêm / thêm oán / bớt ghen / nguôi oán, a change ≥ `card.big` names its person (2 at most per group,
-  not a person already on her own row); the names + «+N (total)» behind the tap (`.kkem.on`, KIT 7.1 `kaNT`); and ONE Sổ ghi record of the card
-  with every name and number (S.hrec, names masked at show time). A single Kèm person who passes the sieve with nothing else folded keeps the
-  kit row «<Tên>: oán +9 (31)». The link reads «Xem đầy đủ trong Sổ ghi». «Vì sao» reasons never come from a clause that is other people's
-  business only (`kaWhyCl` sieved). Test: `node dev/test/one-sieve.test.js dev/index.html 12 <seed>`.
+  `nsCard` / `nsSieve` in jnsieve, called by j63 `kaResultRows` — every result card incl. the night card jne `kitNightEnd`; numbers `BAL.news.card`):
+  a person row of someone else (not her act's target — «Người ấy» is OB-VERDICT's —, not her household, not Thái hậu / Hoàng hậu) stays in Được / Mất
+  only when it carries evidence, the change is ≥ `card.big`, or the span's own log names that person in a line about HER; at most `card.rowMax` such rows.
+  Kèm (ghen / oán of others) = the ONE `kitKemRow` (MAIN 157, OB-VERDICT r3): one person per line «<Tên>: ghen +8 (42)», a single unnamed person
+  «một vị Phi: oán +10 (31)», unnamed people with the same feeling and number grouped «3 vị khác: ghen +8» (no total), named first, 8 lines max;
+  it gets only the ≤ `card.kemMax` people that pass `nsSieve`; every other changed person is only counted «… và N người khác» (none listed:
+  «N người khác trong cung đổi lòng chút ít») and written with every name and number in ONE Sổ ghi record of the card (S.hrec). The link reads
+  «Xem đầy đủ trong Sổ ghi». «Vì sao» reasons never come from a clause that is other people's business only (`kaWhyCl` sieved).
+  Row look = kit keeper (KK41, review/kit-kem-row). Test: `node dev/test/one-sieve.test.js dev/index.html 12 <seed>`.
 - SỔ GHI (ONE SIEVE): over the rows, kit parts only — `kitSubTabs("soghi")` kinds `BAL.news.logTabs` (Tất cả · Việc của ta · Chuyện hậu cung ·
   Mưu hại; an empty kind has no tab), one `kitTabRowHTML` person chip row («Mọi người» + the 12 most named, count = rows), `kitInput` search
   (accents ignored); filtering hides rows, a date heading with no row left hides too.
