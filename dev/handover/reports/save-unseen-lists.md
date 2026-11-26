@@ -362,3 +362,51 @@ FAMILY SCAN still TO DO (the census parses only object literals, not `x.opts=` r
 2. Re-run on the final head: probe Fold s1,2 + iPad s1,2 (`node dev/test/save-residue-probe.js index.html ipadAir 1,2 40`), RP_MUTATE=eitRob on the seed that meets it (must FAIL), save-unseen-lists all (`SUL_FCS=1 node dev/test/save-unseen-lists.js index.html fold,ipadAir 1`), sbr (`… save-boundary-reload.js index.html bare.html fold,ipadAir 1`; bare.html = `git show origin/main:index.html`), death-rebirth, notice-late, scroll-cue-loop, coop-e2e SWAP0 (local Worker), quickcheck ALONE (known: hooks 80 / 90 same FAIL on LIVE, 92 flaky on LIVE).
 3. Then «LAND READY review/save-fix-stack-rv9(or rv10) <sha> FOR MAIN 158 / LC21 (BIG; save; = save-unseen-lists rv5 + save-growth-r6 — land INSTEAD of both; e-pack-a must drop its save-growth merge or land after)» at END of FOREMAN_B_STATUS + send_message Foreman B (child 3 = session_01N1tNP5aForRyuVGCKqGrnC). Ask LC21 to land it NEXT so it stops chasing LIVE.
 Helpers (untracked, write again if needed): scratch run.sh (`<name> <cmd…>` → out/<name>.txt + EXIT line), _rvvideo.js (in the r5 text above: real life N buổi, last cards left unseen, Tin báo box, true reload, same Q / NT check + 5 shots).
+
+## REVIEW r6 (BIG rv successor, opus, session_01N1tNP3nNXSbTQpu7VdwCzq, depth 4, START_CTX ≈ 3 %) — PARTIAL (gates ~90 %) + HANDOVER (rolled at ctx ≈ 35 % > START + 25 %)
+PRIORITY #1 CHECK ('save-fix-stack' / '.opts=' / 'knSell' / 'inv-stack'): OD 0 | ledger 0 | claims rv r5 3Zg2nHbR (rolled) | main 0 | review/* save-fix-stack-rv9 7446cd0c, inv-stack-rv 1ffddd68 | archive 0 → continued the r5 handover list exactly; reused every test of the branch.
+**Verdict so far: no blocking fault left on rv12 25d67e01 that a gate shows; 4 save faults found and FIXED by me (below). Not LAND READY yet: LIVE moved to f573dc94 → rv13 merge + last gates left.**
+
+### Branches (all pushed, no force)
+| branch | sha | what |
+|---|---|---|
+| review/save-fix-stack-rv10 | 290f24534c397d84c3b16589038c854b3dfd6270 | rv9 + «.opts=» family fixes (c0219a98) + knSell fixes 1–2 |
+| review/save-fix-stack-rv11 | 8108dfe1… (first parent of rv12) | rv10 + review/inv-stack-rv 1ffddd68 (5e04c538; 5 source conflicts by hand, every new .inv.push → invAdd) + inv-stack test give-return fix |
+| **review/save-fix-stack-rv12** | **25d67e01ce11004766f8abe37f88d4164f485394** | rv11 + LIVE b881686f ACT-MERGE (fa4c0945: assemble.py UNION jstack + jactj4/jdoor/jdoor5) + knSell remake-side fixes 3–4. FF on b881686f, NOT on f573dc94 |
+
+### Faults found by this review and fixed (LAW 11, whole family; before/after)
+| family | sites | before (rv9) | after |
+|---|---|---|---|
+| `.opts=` given after the card was made (census never parsed it) | 18 sites scanned: j75 pregFind, jtsb ×5 (approachOne wrappers), jtoilr ×2 → FIXED; jecon / jptime / jworld / jeitem inside a generator; jselxsc pid; j77 / jact2 her act; jhaohuu / jstatus panel; jcoopthin co-op copy; jnolock noop | census + new rule: 8 UNCLASSIFIED; opts-asg-remake FAIL 6/6 («Thái y bắt mạch» LOST at the week flip; jtsb answers / Thái hậu triệu / servant defect came back as j24's plain card; jtoilr 4 answers missing) | UNCLASSIFIED 0; opts-asg-remake PASS 7/7 (rcpReg pregFind, rcpReg tsbAp, QRC.toilPop remake hook) |
+| census scanner itself | unseen-lists-scan CLASS check read c[3] (the reason) as the class → no ROUTE proof was ever checked | — | c[2]; every ROUTE proof now holds |
+| generator arguments not data («Có người bán tin», jagknow knSell: news object carries code) | probe iPad s1 rv10 LOST-AT-WRITE | rcpEnc threw silently → no rk → left out of the step write | card carries seller + news AS DATA (code left out); remake reads the live news by id (keeps the follow-up), else the carried copy; rcpReg now marks `m.__rkErr` and the probe names such a generator |
+| knSell remake side | probe Fold s2 / iPad s1 REMAKE-SIDE | live read rolled S.tb (knTb / knNo roll on read) and made empty lazy stores (S.intel, S.j95 lists) | put back as they were (25d67e01); new test dev/test/knsell-remake.js (30 buổi real life, every seller × news remade, S diff): PASS 19 / 21 cards, 0 touched |
+
+### Gates (rv11 = 5e04c538/8108dfe1, rv12 = fa4c0945 → 6c4ff6b5 → 25d67e01)
+| check | result |
+|---|---|
+| unseen-lists scan / census | PASS (33 lists; 181 sites, 18 «.opts=», UNCLASSIFIED 0) — rv9 build with the new rule FAILs 8 ✔ |
+| time-advance scan | PASS 10/10 |
+| inv-stack-scan.py | RAW 0 (rv11, rv12) |
+| inv-stack.js (s7 robot save, year 18, 1,437 inv) | rv11 / rv12: 25/27 — the 2 FAILs = DOM «Biếu quà làm lành» 2226 nodes (K-LIST-PAGE) = **identical on plain inv-stack-rv 1ffddd68** (A/B same box); save 4,757,978 → 401,324 chars, totals + store equal after reload. Fixer 3tHDZmhE's 3rd row (give 1 refused «trả lại») = test → hardened (8108dfe1) |
+| save-residue-probe | rv11: Fold s1,2 **0 lines**; iPad s1 REMAKE-SIDE knSell ×1 (fixed) · rv12 6c4ff6b5 iPad s1 REMAKE-SIDE knSell [S.tb] (fixed in 25d67e01) · **25d67e01 Fold s1,2 + iPad s1,2 RUNNING at handover** (out: scratch o12/probeF.txt, probeI.txt) |
+| save-unseen-lists all (Fold+iPad) | rv10 (killed half-way, Fold 12/12) · **rv12 24/24** |
+| save-boundary-reload Fold+iPad (bare = LIVE) | **rv12 22/22** |
+| save-death-rebirth | rv10 6/6 · rv12 6/6 |
+| notice-late-save | rv10 2/2 · rv12 2/2 |
+| scroll-cue-loop / j71day-remake | PASS / PASS (rv10, rv12) |
+| opts-asg-remake (new) | rv9 FAIL 6/6 · rv10–rv12 PASS 7/7 |
+| coop-e2e SWAP0 local Worker | **rv12 143/143** |
+| quickcheck ALONE | NOT run yet |
+
+### LEFT for the successor
+1. Read the probe result on 25d67e01 (if the container lives: /tmp/claude-0/…/scratchpad/o12/probe{F,I}.txt, else run again: `node dev/test/save-residue-probe.js index.html fold 1,2 40` and `… ipadAir 1,2 40`, worktree from review/save-fix-stack-rv12). Any new line → same LAW 11 fix + before/after.
+2. LIVE = f573dc94 (charge-trinh-punish restacked on b881686f + test-only bd0007fe). Merge it → review/save-fix-stack-rv13. Foreman B merge-tree: SOURCE conflicts dev/build/j8.js, jil.js, jtsb.js + assemble.py (+ index/sw). Keep BOTH: my jtsb tsbApCard generator (rcpReg tsbAp; the two approachOne wrappers only pick who comes and Object.assign the generator card) + ctp's deed / punish / «Báo lên Hoàng hậu» needs; if ctp changed the answers inside the old `m.opts=[…]` blocks, move its change INTO tsbApCard. assemble.py = UNION of module lists (each new file after its predecessor). Rebuild (bash dev/site/build_site.sh), never while a test reads index.html.
+3. On rv13: unseen-lists scan + census, inv-stack-scan, opts-asg-remake, knsell-remake, save-unseen-lists all, sbr (bare = LIVE f573dc94 index), death, notice, probe Fold s1 + iPad s1, coop SWAP0 (`cd coop/worker && npm install && npx wrangler dev --local --port 8799`, then `node dev/test/coop-e2e.js <out> http://localhost:8799`), inv-stack.js (expect the 2 K-LIST-PAGE rows), then quickcheck ALONE (`bash dev/tools/quickcheck.sh`; known pre-existing: hooks 80 / 90 FAIL on LIVE, 92 flaky).
+4. Then «LAND READY review/save-fix-stack-rv13 <sha> FOR MAIN 161 / LC24 (BIG; save; = save-unseen-lists rv5 + save-growth-r6 + inv-stack-rv 1ffddd68 — land INSTEAD of all three; supersedes rv9 7446cd0c / rv10–rv12; covers F's ~5.2 M-char silent save-write failure: packed sổ, s7 4.76 M → 0.40 M, full store → sticky «saveBlocked» notice; inv-stack.js 2 FAIL = K-LIST-PAGE gift picker DOM, same on plain inv-stack-rv; FF onto LIVE f573dc94; Worker deploy: no)» at END of FOREMAN_B_STATUS.md + «## REVIEW r7» here + send_message Foreman B (child 4 = session_01N1tNP6QLnHwEWxnwvUVvhp) + tell the save-pid-cards fixer session_01N1tNP3tHDZmhEaxQ1fmrKZ the final sha.
+
+### Open follow-ups (not blocking)
+A–F of r5 unchanged. G. knSell: a habit news (j95 random habit pick) is often not found by id at the remake → the carried copy is used: the text and price are the same, but buying it after a reload does not mark the habit «told» (follow-up only; hiếm, nhỏ). H. inv-stack K-LIST-PAGE gift picker DOM > 2,000 nodes (its own branch's open item).
+
+### Gain vs risk
+GAIN: four more ways a waiting card was lost or changed by a reload are closed (pregnancy choice, visitor answers, reaction answers, news seller), and the census can no longer miss a `.opts=` card or a ROUTE row whose proof is gone. RISKS: (1) a generator whose args are not data — có thể, nhỏ; rcpReg marks it, the probe names it at once. (2) S.tb put back after the live read — hiếm, nhỏ; the next render makes the same roll; knsell-remake + probe check S. → **Được lớn hơn**.
