@@ -332,7 +332,11 @@ function balAb(n){return String(Math.abs(n))}
 /* a printed count as a word («một chứng cứ»): balWord(balAb(BAL…)) — the number word of VP.num (j84, loads later; called only when the text is built) */
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
 /* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
-function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
+function balOan(n,m){return balOanUp(Math.abs(n)*BAL.relOan[m])}
+/* review/oan-pace: the SHOWN size of one cause = what really lands (joanpace opUp / opDn: one cause ≤ BAL.oanPace.step for an oán rise,
+   ≤ BAL.oanPace.ghet.step for a fall of liking); a fall of oán / a rise of liking is shown as typed */
+function balOanUp(n){n=Math.round(Math.abs(n));const P=BAL.oanPace;return String(P&&P.on?Math.min(n,P.step):n)}
+function balGhet(n){const P=BAL.oanPace;if(!(n<0)||!P||!P.on)return balSg(n);return balSg(-Math.min(Math.round(-n),P.ghet.step))}
 /* ONE CORE age bands (owner 24/11 ~00:25Z "Cập nhật tuổi game là 18, 28, 39, 51, 64": 18–27 / 28–38 / 39–50 / 51–63 / 64+, for everyone,
    every rank/role; review/ageband): ageMin = the first band and the youngest adult (owner OD:L104 18+; jage lifts every adult below it);
    band i starts at ageBand[i-1] (band 0 at ageMin). ageArt[i] = the file tag of band i's painted art on the CDN (img/*-a18.webp …): a tag is
