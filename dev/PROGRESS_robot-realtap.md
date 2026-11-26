@@ -300,3 +300,12 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
 - BIG #8 F1 (non-blocking, on fd9218fe): every RT_TEST_* self-test and RT_COLD (renderer-mem-lib coldHook → game cold()) in use is stamped into
   R.harness.testHooks {NAME: value} (merged across resume; RT_COLD=0 / empty = off). dev/measure/robot-audit.js (handover branch) marks such a life INVALID
   «test hooks used (…)». Check: RT_TEST_SKIP=3 life → testHooks {RT_TEST_SKIP:'3'} → audit INVALID; the E-S1 resume life (no hooks) stays VALID.
+
+### FIXER #9 — s9f «Nghỉ ngơi» DEAD under #rtoast (F #19, 11/26/2026)
+- Verdict: HARNESS GAP. #rtoast is the KẾT QUẢ result card (j19/j25/j42/j63): by design a tap on it closes it (t.onclick removes «on»), and it hides on its own
+  timer unless KÈM is open. A button under it is not dead. The harness's dead test treated «span.kitem in #rtoast» as a foreign cover.
+- Fix (robot-rt.js only): `rtoast` added to realtap ignoreCover (a tap there is logged as a popup dismissal, not a DEAD); the INFO closer now also counts option
+  cards / focus buttons (.kfoc-b/.kopt/.opt) as things the toast can block, and taps the bare THÀNH/BẠI seal first when the rows are all item chips.
+- Regression: Fold rand fresh life on LIVE 02f564ae, lint OK.
+- Seen in that regression, NOT from this change (open, to classify): 2 DEAD «#kg82 «?» / «Áo lụa thêu hoa nhỏ» cover div.kscn-veil» at Điện tuyển
+  (dress-up exam while a «Sân chờ» kit scene is up, z 57 over #kg82). Did not repeat on a rerun; no shot (RT_NOSHOT). Watch runners for the same line.
