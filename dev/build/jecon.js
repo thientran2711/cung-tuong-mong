@@ -120,9 +120,9 @@ window.econSellBtn=econSellBtn;
 
 /* ---------- Tư trang: each work is its own bag item (tab Tác phẩm) with its own panel ---------- */
 try{if(!KINV_CATS.some(c=>c[0]==="tp"))KINV_CATS.push(["tp","Tác phẩm",["Tác phẩm"]])}catch(e){}
-kinvGroups=function(){const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]);const G=[];
+kinvGroups=function(){try{if(typeof invTop==="function")invTop(S)}catch(x){}const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]);const G=[],SEEN=new Set();
  for(const [e,i] of vis){const g=!e.wk&&G.find(x=>x.k===e.k&&!x.wk&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w&&econGiver(S.inv[x.i])===econGiver(e));
-  if(g)g.n++;else G.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,from:e.from,wk:e.wk||null})}return G};
+  const m=typeof invMoreOnce==="function"?invMoreOnce(S,e,SEEN):0;/* + the stacked ones (jstack) */if(g)g.n+=1+m;else G.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1+m,from:e.from,wk:e.wk||null})}return G};
 (function(){const k0=kinvItems;kinvItems=function(){return k0.apply(this,arguments).map(x=>{const e=x.g&&x.g.i>=0?S.inv[x.g.i]:null;if(!e||!e.wk)return x;const w=e.wk;let a=null;try{a=itemArt(e)}catch(y){}
   return Object.assign(x,{cat:"tp",name:w.n,grade:econWkGrade(w),src:a?a.src:x.src,src512:a?(a.src512||a.src):x.src512,tip:`${w.n} · ${KIT_GRADE[econWkGrade(w)].n}`})})}})();
 function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a);const gr=KIT_GRADE[econWkGrade(w)];const t1=whyTime(1),t2=whyTime(2);

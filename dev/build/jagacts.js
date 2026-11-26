@@ -109,7 +109,7 @@ agReg("th","acts",(th,N,need)=>{const T=BAL.ag.th;const O=[];const u=(n)=>(N[n]|
  if((!need||need==="order")&&N.order){const f=favNow();if(f&&!(f.p.admonWk!=null&&wk()-f.p.admonWk<BAL.tw.g.admonCd))O.push({k:"th:admon",t:f.p,u:u("order"),tag:"greet",act:"khuyên Hoàng thượng mưa móc đều khắp",at:kh=>agEmpAt(kh)||"dtd"})}
  if((!need||need==="mercy")&&N.mercy){const L=consorts().filter(p=>p.out&&(p.th||0)>=T.mercyTh&&(p===S||p.alive));/* G3: mercy goes to the one she regards most (Thái hậu favour), near-best */const t=npwPick(L,x=>1+Math.max(0,x.th||0));if(t)O.push({k:"th:release",t,u:u("mercy"),tag:"help",act:"mở lòng từ bi, tha khỏi lãnh cung",at:()=>"tn"})}
  return O});
-agRunReg("th:gift",(th,p)=>{if(!p||S.thDead)return"";/* G3: what the favoured one does not have yet */const k=npwPick(BAL.ag.th.items,x=>100/(1+(p.inv||[]).filter(e=>e&&e.k===x).length));p.inv.push({k,from:"th"});p.thGiftWk=wk();
+agRunReg("th:gift",(th,p)=>{if(!p||S.thDead)return"";/* G3: what the favoured one does not have yet */const k=npwPick(BAL.ag.th.items,x=>100/(1+invCount(p,e=>e&&e.k===x))/* inv-stack: stacked ones count */);invAdd(p,{k,from:"th"});p.thGiftWk=wk();
  if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${itm(k).n}</b>.</p><p class="past">${itm(k).d}</p>`});return `Thái hậu ban ${itm(k).n} cho ${NM(p)}`});
 agRunReg("th:admon",(th,p)=>{if(!p||S.thDead)return"";const me=p===S;const b=p.sung;ap(p,{sung:-BAL.tw.g.admon});p.admonWk=wk();
  const t=`Thái hậu khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name}. ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}.`:""}`;if(me)Q.push({t:"Mưa móc đều khắp",who:pTH(),h:`<p>${t}</p>`});return t.trim()});

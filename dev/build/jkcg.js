@@ -79,10 +79,10 @@ function kcgMom(){if(!kcgPal()||S.kc.tdFall)return null;return kcR("me")||kcR("t
 function kcgMail(){S.kc.mail=S.kc.mail||[];return S.kc.mail}
 function palRecvFromKc(kind,pl,from){if(!kcgPal())return"";const nm=from?`${from.t} ${from.name}`:pl&&pl.who||"Người nhà";let rows=[],h="";
  if(kind==="letter"){const L=shuf(liveRivals(true).filter(v=>!S.kc.intel.includes(v.id)));const v=pl&&pl.v!=null?RV(pl.v):L[0];
-  const e={k:"thunha",from:from?"kc:"+from.id:"kc"};S.inv.push(e);try{lgr(e,from?"kc:"+from.id:"kc","me","thư nhà")}catch(x){}
+  const e={k:"thunha",from:from?"kc:"+from.id:"kc"};invAdd(S,e);try{lgr(e,from?"kc:"+from.id:"kc","me","thư nhà")}catch(x){}
   if(v){kcIntel1(v,BAL.kcg.home.know);rows.push(["Tin trong thư",`${v.name}: ${RANKS[v.rank].n}, ${v.trait||"tính chưa rõ"}`,"t"])}
   h=`<p>Thư của ${nm} gửi vào cung.</p>`;kcgMail().unshift({m:S.month,y:S.year,who:nm,what:v?`tin về ${v.name}`:"thư hỏi thăm"})}
- else if(kind==="gift"){const k=pl&&pl.k&&IT[pl.k]?pl.k:pick(BAL.kcg.home.gifts.filter(x=>IT[x]));if(!k)return"";const e={k,from:from?"kc:"+from.id:"kc"};S.inv.push(e);try{lgr(e,from?"kc:"+from.id:"kc","me","quà nhà")}catch(x){}
+ else if(kind==="gift"){const k=pl&&pl.k&&IT[pl.k]?pl.k:pick(BAL.kcg.home.gifts.filter(x=>IT[x]));if(!k)return"";const e={k,from:from?"kc:"+from.id:"kc"};invAdd(S,e);try{lgr(e,from?"kc:"+from.id:"kc","me","quà nhà")}catch(x){}
   h=`<p>${nm} gửi vào cung một gói đồ nhà.</p>`;rows.push(["Nhận",itm(k).n,"g"]);kcgMail().unshift({m:S.month,y:S.year,who:nm,what:itm(k).n})}
  else return"";
  if(kcgMail().length>BAL.kcg.home.keep)kcgMail().length=BAL.kcg.home.keep;

@@ -308,7 +308,7 @@ ptReg("harm",a=>{const v=RV(a.a.v),k=a.a.k;const s=ptPerson(a.a);const nm=s?s.na
   d.t=(d.t||"")+`<p class="past">${s.name} đi · tốn ${ptRow("plant").o} khắc, ${ptWaitTxt("plant")}</p>`;
   d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const fz=actOdds(S,v,"plant");const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
    ptSend({who:ptPid(s),nm:s.name,kind:"plant",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e,fz},lbl:`lẻn vào cung ${v.name}`});spend(ptRow("plant").o)}}))}catch(e){ptErr("plantpick",e)}return d}}catch(e){ptErr("plant wire",e)}})();
-ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);/* the item is real (law 6c): back in her chest, then used */
+ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)invAdd(S,e);/* the item is real (law 6c): back in her chest, then used */
  if(!e)return{ok:null};if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
  const i=S.inv.indexOf(e);let r="";fzRun(a.a.fz,"plant",()=>{r=runAct(S,v,"plant",i)});if(r)log(r);return{t:`${nm} lẻn vào cung ${v.name} trở về`}});
 /* ---- 8. Tặng quà by hand (PEND.giftpick from her card, not together): a servant carries the gift ---- */
@@ -317,7 +317,7 @@ ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Ng�
   d.t=(d.t||"")+`<p class="past">${s.name} mang quà đi · tốn ${ptRow("gift").o} khắc, ${ptWaitTxt("gift")}</p>`;
   d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
    ptSend({who:ptPid(s),nm:s.name,kind:"gift",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e},lbl:`mang quà sang cung ${v.name}`});spend(ptRow("gift").o)}}))}catch(e){ptErr("giftpick",e)}return d}}catch(e){ptErr("gift wire",e)}})();
-ptReg("gift",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);if(!e)return{ok:null};
+ptReg("gift",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)invAdd(S,e);if(!e)return{ok:null};
  if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
  const r=giveTo(S,v,S.inv.indexOf(e));if(r)log(r);return{t:`${nm} mang quà sang cung ${v.name} trở về`}});
 /* ---- 9. Sai cung nữ thân tín mua lén ngoài cung (j83 IROUTE.maid): she leaves by the Thần Vũ gate; caught or not is known when she is back
@@ -504,7 +504,7 @@ ptReg("npcMind",a=>ptNpcBack(a,(v,t)=>mindRun(v,t,a.a.k,a.a.err)));
   const tsb=typeof TSB!=="undefined"&&TSB.now?1:0;/* jtsb's planned harm: still its own week + omen first; the servant goes when it is due */
   let it=null;if(k==="plant"&&a.inv&&extra!=null&&a.inv[extra]){it=a.inv[extra];a.inv.splice(extra,1)}/* the item is carried (law 6c) */
   return ptNpcDeed(a,t,k,"npcAct",{tsb,item:it})}}catch(e){ptErr("runAct wire",e)}})();
-ptReg("npcAct",a=>ptNpcBack(a,(v,t)=>{let ix;if(a.a.item){v.inv=v.inv||[];v.inv.push(a.a.item);ix=v.inv.indexOf(a.a.item)}
+ptReg("npcAct",a=>ptNpcBack(a,(v,t)=>{let ix;if(a.a.item){v.inv=v.inv||[];invAdd(v,a.a.item);ix=v.inv.indexOf(a.a.item)}
  const T0=typeof TSB!=="undefined"?TSB.now:0;if(a.a.tsb&&typeof TSB!=="undefined")TSB.now=1;try{return runAct(v,t,a.a.k,ix)}finally{if(typeof TSB!=="undefined")TSB.now=T0}}));
 /* an NPC's trusted maid away on an errand (mm:<vid>) is away for EVERY deed of her mistress, not only the same deed sent again */
 function ptMaidOut(v){return !!v&&v!==S&&!v.coop&&v.id!=null&&ptOn()&&ptBusy("mm:"+v.id)}

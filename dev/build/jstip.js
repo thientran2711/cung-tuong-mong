@@ -100,8 +100,8 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
  const L=stipList(rkOf(p),!!p.out,stipWinter(),stipSummer());const D=BAL.stip.down;const hit=SK&&SK.items?stipPickLines(L,SK.items===true?99:SK.items):new Set();
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
   if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
-  const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}G.push(g)}
- if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
+  const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};invAdd(p,e);g.E.push(e)}G.push(g)}
+ if(p!==S){/* inv-stack: her stacked lệ tháng counts toward the keep too (the real pieces come out first, then the oldest are used up as before) */try{const pr=st=>st.from==="noivu"&&!(typeof lxOf==="function"&&lxOf(st.k));if(typeof invTop==="function"&&(p.invS||[]).some(pr))invTop(p,pr,1e9)}catch(x){}const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
 /* Nội vụ phủ buys its own issue back cheaply */
@@ -114,7 +114,7 @@ function stipReveal(entries,o){try{if(screenOff()||typeof kitReward!=="function"
  if(typeof kmOn==="function"&&!kmOn())return;kitReward({kind:o.kind||"gift",title:o.title||"Hộp gấm",from:o.sub||"",items:entries.map(e=>stipRevItem(e.k)),bac:o.bac||0})}catch(e){console.error("stipReveal",e)}}
 const STIP_FROM={emp:["royal","Ngự tứ","Hoàng thượng ban"],th:["tray","Mâm thưởng","Thái hậu ban"],hh:["tray","Mâm thưởng","Hoàng hậu ban"],noivu:["chest","Rương bảo vật","Nội vụ phủ phát"],story:["gift","Hộp gấm",""]};
 function goodsGive(p,keys,o){o=o||{};p=p||S;const L=(Array.isArray(keys)?keys:[keys]).filter(k=>IT[k]);if(!L.length||!p)return"";p.inv=p.inv||[];
- const from=o.from||"story";const E=L.map(k=>{const e={k,from,d:S.turn};if(o.who)e.giver=o.who;p.inv.push(e);return e});
+ const from=o.from||"story";const E=L.map(k=>{const e={k,from,d:S.turn};if(o.who)e.giver=o.who;invAdd(p,e);return e});
  if(p===S){const F=STIP_FROM[from]||STIP_FROM.story;stipReveal(E,{kind:o.kind||F[0],title:o.title||F[1],sub:o.sub||F[2]||(o.who?`${o.who} tặng`:"")})}
  const cnt={};L.forEach(k=>cnt[k]=(cnt[k]||0)+1);return Object.keys(cnt).map(k=>`${itm(k).n}${cnt[k]>1?" ×"+cnt[k]:""}`).join(", ")}
 window.goodsGive=goodsGive;
@@ -123,7 +123,7 @@ function stipShow(G,net,SK,merged){const E=[];(G||[]).forEach(g=>E.push(...g.E))
  if(E.length||net>0)stipReveal(E,{kind:"chest",title:`Bổng lộc tháng ${typeof econMonthName==="function"?econMonthName():S.month}`,sub:SK?"Nội vụ phủ phát · bị cắt xén":"Nội vụ phủ phát",bac:Math.max(0,net)});
  if(SK&&!merged)Q.push(stipEvent(G,SK))/* review/bongloc-options: jecon puts the answers on the month frame itself (merged) */}
 function stipRestore(p,G,full){let n=0;for(const g of G||[]){if(!g.kem)continue;g.E.forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)});g.E=[];
-  for(let i=0;i<g.n0;i++){const e={k:g.k0,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}g.k=g.k0;g.n=g.n0;g.kem=false;g.lost=false;n++}
+  for(let i=0;i<g.n0;i++){const e={k:g.k0,from:"noivu",d:S.turn};invAdd(p,e);g.E.push(e)}g.k=g.k0;g.n=g.n0;g.kem=false;g.lost=false;n++}
  if(p===S&&n)stipReveal([].concat(...G.map(g=>g.E)),{kind:"chest",title:"Nội vụ phủ phát bù",sub:"đồ tốt thay hàng kém"});return n}
 function stipReportTo(SK){const q=queenP();const hhBehind=q&&q!==S&&SK.sup===q;const thOk=!S.thDead;
  if(q&&q!==S&&!hhBehind&&rel(q,S)>netTh(q,"ghet"))return{k:"hh",n:"Hoàng hậu",v:q};if(thOk)return{k:"th",n:"Thái hậu",v:null};return q&&q!==S?{k:"hh",n:"Hoàng hậu",v:q,risky:1}:null}

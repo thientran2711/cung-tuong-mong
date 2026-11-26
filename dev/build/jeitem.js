@@ -57,7 +57,7 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  if(p!==S){eitPilNpc(X);return X}
  const P=BAL.eit.pil;const see=oddsCl(P.see+eyes(S)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0));
  if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
-function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];p.inv.push(e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
+function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];invAdd(p,e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
 function eitIsMaid(s){return s===S.maid}
 /* how likely her master notices a pilfered piece (the NPC rule; the maid player's "Lén giữ đồ" card reads it as 100 − this) */
 function eitPilSee(p){const P=BAL.eit.pil;return oddsCl(P.see+((p&&p.tamco)|0)/4)}
@@ -127,7 +127,7 @@ function eitAlt(bac,r){const R=BAL.eit.re;try{if(typeof altCost==="function")ret
  const T=BAL.bacTuan,K=BAL.altK;/* jstory (loads earlier) */const k=Math.abs(bac||0)*16/T[Math.max(0,Math.min(T.length-1,r|0))];
  return{suc:Math.max(R.suc,Math.min(K.sucMax,Math.round(k*K.suc))),pen:Math.max(R.altPen,Math.min(K.penMax,Math.round(k*K.pen)))}}
 function eitIssue(src,giver){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(!k||!WD_ITEMS[k])return null;const e={k,src,nvp:src==="nvp"?1:0,giver,d:typeof wdWhen==="function"?wdWhen():""};
- try{earnK(S,k)}catch(x){}if(!(wdOf(S)||{}).y){try{wdWearEntry(S,e)}catch(x){S.inv.push(e)}}else S.inv.push(e);S.tyNvp=null;
+ try{earnK(S,k)}catch(x){}if(!(wdOf(S)||{}).y){try{wdWearEntry(S,e)}catch(x){invAdd(S,e)}}else invAdd(S,e);S.tyNvp=null;
  try{if(typeof kitReward==="function"&&!window.__bot)kitReward({kind:"gift",title:src==="nha"?"Nhà gửi y phục":"Nội vụ phủ cấp y phục",from:giver,items:[{n:WD_ITEMS[k].n,d:"Y phục · đã mặc",img:WD_ITEMS[k].icon,tier:WD_ITEMS[k].g|0}]})}catch(x){}
  return WD_ITEMS[k].n}
 function eitReOpts(withWait){const R=BAL.eit.re,o=eitReOdds();const O=[];const wkL=Math.max(0,(S.tyNvp!=null?S.tyNvp:wk()+eitReWk(S))-wk());
@@ -149,7 +149,7 @@ function eitReDialog(){return{ev:1,t:"Xin cấp lại y phục",who:typeof pEunC
 function eitWeek(){if(!S||S.dead)return;
  if(S.tyFam&&wk()>=S.tyFam.w){const F=S.tyFam;S.tyFam=null;if(F.ok){const nm=eitIssue("nha",S.origin?`Nhà ${S.origin.n||""}`.trim():"Nhà");if(nm)log(`Nhà gửi vào cung ${nm}.`)}else log("Thư nhà đến: nhà không gửi được áo vào cung.")}
  /* NPCs: every consort keeps one girlhood robe in her chest (fallback outfit) */
- for(const v of liveRivals(true)){if(!v||v.girl||v.out)continue;v.girl=1;try{const k=typeof wdPickAt==="function"?wdPickAt(1,"y",0):null;if(k&&WD_ITEMS[k]){v.inv=v.inv||[];v.inv.push({k,from:"kc",src:"kc"})}}catch(e){}}}
+ for(const v of liveRivals(true)){if(!v||v.girl||v.out)continue;v.girl=1;try{const k=typeof wdPickAt==="function"?wdPickAt(1,"y",0):null;if(k&&WD_ITEMS[k]){v.inv=v.inv||[];invAdd(v,{k,from:"kc",src:"kc"})}}catch(e){}}}
 /* Tư trang → Việc: "Xin cấp lại y phục" while she is in trung y */
 (function(){if(typeof invHTML!=="function")return;const h0=invHTML;invHTML=function(){let h=h0.apply(this,arguments);try{if(!eitReNeed())return h;
   const b=pbtn(`data-eitre="1"`,"Xin cấp lại y phục",`thành: lót tay, sai cung nữ đi xin hay viết thư về nhà`,Q.length?"đang có việc":"");
@@ -160,11 +160,11 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function girlChest(p,o){o=o||{};p=p||S;const L=[];const who=o.who||"Mẫu thân";p.inv=p.inv||[];
  try{wdOf(p)}catch(e){}/* jearn: the court's starting kit first */
  /* o.wear (the home road, jkc kcChest): she wears all of it; else (palace road) the court issue stays worn and the robe + hairpin go in the bag */
- try{if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}
-  const yk=(o.wear&&typeof wdDefault==="function"?wdDefault(p,"y"):null)||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
+ try{if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else invAdd(p,e);L.push(e)}
+  const yk=(o.wear&&typeof wdDefault==="function"?wdDefault(p,"y"):null)||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else invAdd(p,e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
  for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=itm(k).sl;if(o.wear)p.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&itm(x.k).sl===sl)delete x.w});
-  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);const e={k,from:"kc",giver:who};if(!busy)e.w=1;p.inv.push(e);L.push(e)}
- if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};p.inv.push(e);L.push(e)}
+  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);const e={k,from:"kc",giver:who};if(!busy)e.w=1;invAdd(p,e);L.push(e)}
+ if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};invAdd(p,e);L.push(e)}
  p.girl=L.map(e=>e.k);return{who,L}}
 function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof kitReward!=="function")return;
  const it=e=>{if(WD_ITEMS[e.k]&&!IT[e.k]){const w=WD_ITEMS[e.k];return{n:w.n,d:w.sl==="y"?"Y phục · cất trong Tư trang":"Cài tóc · cất trong Tư trang",img:w.icon,tier:w.g|0}}

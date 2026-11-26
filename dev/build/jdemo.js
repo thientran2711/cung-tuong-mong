@@ -53,7 +53,7 @@ window.demoSeize=demoSeize;window.demoAbove=above;
 /* home again: weekly, an owner who is out of lãnh cung and stands high enough gets each piece back (jewellery: rank; wardrobe: phẩm) */
 function worthy(p,e){if(p.out)return false;const w=typeof wdItem==="function"?wdItem(e):null;if(w)return wdP(e,p)<=wdPOf(p);const it=IT[e.k];return !it||!it.sl||it.rk<=rkOf(p)}
 function demoReturn(){const B=box();for(const x of B.slice()){if(x.why!=="demote")continue;const o=byK(x.own);if(!o||!alive(o)||(o!==S&&!npcOK()))continue;if(!worthy(o,x.e))continue;
- B.splice(B.indexOf(x),1);o.inv=o.inv||[];o.inv.push(x.e);
+ B.splice(B.indexOf(x),1);o.inv=o.inv||[];invAdd(o,x.e);
  if(o===S){log(`Nội vụ phủ trả lại ${nameOf(x.e)}.`);Q.push({t:"Nội vụ phủ trả đồ",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h:`${tag(x.e)}<p>Ngươi đã đủ phẩm, Nội vụ phủ sai người đem <b>${esc(nameOf(x.e))}</b> trả về rương.</p>`})}}}
 window.demoReturn=demoReturn;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=S&&wk();const r=e0.apply(this,arguments);

@@ -52,7 +52,7 @@ function selxContest(girls,her){const B=BAL.selx;const L=(girls||[]).map(v=>{con
 function selxRoomsFree(max){if(typeof roomFor!=="function")return max;let n=0;const P=[];try{while(n<max&&roomFor("consort")){const d={alive:true,__ph:1};P.push(d);rivals.push(d);n++}}finally{for(const d of P){const i=rivals.indexOf(d);if(i>=0)rivals.splice(i,1)}}return n}
 function selxRoomCap(L){let F=selxRoomsFree(BAL.selx.yard.kept);for(const x of L){if(x.v===S||!x.kept)continue;if(F>0){F--;continue}x.kept=false;x.step=null;x.noRoom=1}return L}
 /* the hương nang (RV-SELX13 10, law 6c): a real item (BAL.selx.huong) in the kept girl's chest, her included — once */
-function selxHuong(p){try{p.inv=p.inv||[];if(!p.inv.some(e=>e&&e.from==="selx"))p.inv.push({k:BAL.selx.huong,from:"selx"})}catch(e){}}
+function selxHuong(p){try{p.inv=p.inv||[];if(!p.inv.some(e=>e&&e.from==="selx"))invAdd(p,{k:BAL.selx.huong,from:"selx"})}catch(e){}}
 function selxIntake(){const I=BAL.selx.intake;return I.min+R(I.max-I.min+1)}
 /* lodging plan: rooms of perRoom girls (her room first), beds of perBed (OD 24/11 ~05:35Z: 1 room, 2 beds, 2 girls per bed) */
 function selxRoomPlan(girls){const P=BAL.selx.room,L=[S,...(girls||[]).filter(v=>v!==S)],rooms=[];for(let i=0;i<L.length;i+=P.perRoom){const g=L.slice(i,i+P.perRoom);const beds=[];for(let j=0;j<g.length;j+=P.perBed)beds.push(g.slice(j,j+P.perBed));const V=(BAL.selx.lodge&&BAL.selx.lodge.so)||[];const vi=V[rooms.length];rooms.push({girls:g,beds,so:vi?vi[0]:"",soN:vi?vi[1]:""})}return rooms}

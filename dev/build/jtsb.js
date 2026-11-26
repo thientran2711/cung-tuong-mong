@@ -92,7 +92,7 @@ A("batnat","Ép nộp của",{c:{},ok:(a,t)=>tsbBulOK(a,t),o:(a,t)=>tsbBulO(a,t)
  f:(a,t)=>tsbBulNpc(a,t,"batnat")});
 AOUT.batnat=[`nàng nộp bạc hoặc một món quý; nàng oán ngươi ${balSg(BAL.eff.jtsb.tsbBulNpc_2)}`,`nàng không nộp, kể khắp nơi: Danh ${balSg(BAL.eff.jtsb.danhBulRefuse)}, nàng oán ${balSg(BAL.eff.jtsb.tsbBulNpc_4)}, nàng nắm ${balAb(BAL.eff.jtsb.evTsbBulNpc_2)} chứng cứ`];
 try{ACTDOM.batnat="Mưu kế"}catch(e){}
-function tsbTake(a,t,want,kind){/* real transfer + ledger */if(want){const ix=t.inv.indexOf(want);if(ix<0)return"";const e=t.inv.splice(ix,1)[0];e.w=0;a.inv=a.inv||[];e.tsbFrom=key(t);a.inv.push(e);const n=tsbItemN(e);if(t===S)tsbLedger({what:n,how:"bị lấy",who:a.id,by:tsbNm(a)});return n}
+function tsbTake(a,t,want,kind){/* real transfer + ledger */if(want){const ix=t.inv.indexOf(want);if(ix<0)return"";const e=t.inv.splice(ix,1)[0];e.w=0;a.inv=a.inv||[];e.tsbFrom=key(t);invAdd(a,e);const n=tsbItemN(e);if(t===S)tsbLedger({what:n,how:"bị lấy",who:a.id,by:tsbNm(a)});return n}
  const g=tsbBulPay(a,t);ap(t,{bac:-g});ap(a,{bac:g});if(t===S)tsbLedger({what:`${g} lượng bạc`,how:"bị lấy",who:a.id,by:tsbNm(a)});return `${g} lượng bạc`}
 function tsbBulRec(a,t){t.tsbBul=t.tsbBul||{};const r=t.tsbBul[key(a)]=t.tsbBul[key(a)]||{n:0,calm:0,stop:0};r.n++;r.last=tsbWk();return r}
 function tsbBulNpc(a,t,kind){/* an NPC target decides by the same odds (NPC rule) */const od=tsbBulO(a,t,kind==="uyhiep");/* success odds of the deed (BAL), allowed */const want=kind==="uyhiep"?null:((npcWhy("bulWant",{a,t})||{}).place||null);const want2=want&&want[0];const r=tsbBulRec(a,t);
@@ -148,7 +148,7 @@ PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;
   if(evG(S,a)>=1){const ou=odA(S,45+evG(S,a)*8-(typeof witOf==="function"?witOf(a)/5:0));O.push({n:"Dùng chứng cứ đáp trả",fx:{},x:`${word(ou)} · thành: nàng sợ chuyện của nàng lộ, thôi đòi, trả lại của đã lấy · hỏng: Danh ${balSg(BAL.eff.jtsb.danhEvFail)} · kèm: nàng oán ngươi ${balSg(BAL.eff.jtsb.go_3)} · (dùng ${balAb(BAL.eff.jtsb.evGo_3)} chứng cứ)`,need:[{t:`chứng cứ về nàng (có ${evG(S,a)})`,ok:true}],
    go:()=>{oanAdd(a,S,BAL.eff.jtsb.go_3);if(roll(ou)){const back=tsbGiveBack(a);S.tsbBul[key(a)].stop=tsbWk()+18;log(`<span class="g">Ngươi nhắc khéo chuyện của ${a.name}; nàng tái mặt, thôi đòi${back?`, trả lại ${back}`:""}.</span>`)}else{evA(S,a,BAL.eff.jtsb.evGo_3);apply({danh:BAL.eff.jtsb.danhEvFail});log(`${a.name} không sợ, còn đi kể ngươi dọa nàng.`)}}})}}
  return{t:`<p>${why}</p>${tile}${rep}`,o:O,stage:[a],headArt:tsbFitArt("hoi-lo"),title:ev?"Bị uy hiếp đòi của":"Bị ép nộp của"}};
-function tsbGiveBack(a){const L=(S.tsbLog||[]).filter(x=>x.how==="bị lấy"&&x.who===a.id&&!x.back);for(const x of L){const ix=(a.inv||[]).findIndex(e=>e.tsbFrom==="me"&&tsbItemN(e)===x.what);if(ix>=0){const e=a.inv.splice(ix,1)[0];delete e.tsbFrom;S.inv.push(e);x.back=1;return x.what}
+function tsbGiveBack(a){const L=(S.tsbLog||[]).filter(x=>x.how==="bị lấy"&&x.who===a.id&&!x.back);for(const x of L){const ix=(a.inv||[]).findIndex(e=>e.tsbFrom==="me"&&tsbItemN(e)===x.what);if(ix>=0){const e=a.inv.splice(ix,1)[0];delete e.tsbFrom;invAdd(S,e);x.back=1;return x.what}
   const m=String(x.what).match(/^(\d+) lượng/);if(m){const g=Math.min(+m[1],a.bac||0);ap(a,{bac:-g});apply({bac:g});x.back=1;return `${g} lượng bạc`}}return""}
 function tsbProtector(a){if(!S.thDead&&(S.th||0)>=40)return{n:"Thái hậu"};const L=liveRivals(true).filter(v=>v!==a&&aff(v,S)>=netTh(v,"than")&&rkOf(v)>rkOf(a));return L.length?{n:tsbNm(L[0]),v:L[0]}:null}
 
