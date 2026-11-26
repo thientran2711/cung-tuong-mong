@@ -1,7 +1,7 @@
 {
  "unit": "E-S5",
  "game": "LIVE github.io",
- "finished": 5,
+ "finished": 6,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -485,6 +485,2587 @@
     "taps": 5649
    },
    "bugs": [],
+   "exitPick": null
+  },
+  {
+   "life": "E-S5-R5-cautious-5",
+   "dev": "ipad",
+   "bot": "cautious",
+   "seed": 1600557612,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "death": true,
+   "age": 31,
+   "buoi": 2194,
+   "harness": {
+    "kind": "realtap",
+    "sha": "1ffae8bb",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 1,
+    "cap": null,
+    "stuck": 9,
+    "unstick": [
+     {
+      "at": 3608,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3620,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3631,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3643,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3654,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3665,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3677,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3688,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3699,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3711,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3722,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3734,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3745,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3756,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3768,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3779,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3791,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3802,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3814,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3825,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3836,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3848,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3859,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3870,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3882,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3893,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3905,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3917,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3928,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3939,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3951,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3962,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3973,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3985,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3996,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4008,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4019,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4030,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4042,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4053,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4065,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4076,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4087,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4099,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4110,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4122,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4133,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4145,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4156,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4168,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4179,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4190,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4202,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4214,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4225,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4237,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4248,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4259,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4271,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4282,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4294,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4305,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4317,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4328,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4339,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4351,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4362,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4374,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4385,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4397,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4408,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4419,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4431,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4443,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4455,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4466,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4478,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 4483,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 371,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 378,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 384,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 391,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 398,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 404,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 479,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 486,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 493,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 499,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 506,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 512,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 737,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 846,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 956,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 1065,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 1175,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 1286,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 1396,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 1487,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 1658,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 1771,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Tể tướng Tiết Hoài Cẩn"
+     },
+     {
+      "at": 1885,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 1996,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 2108,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Hoàng thượng"
+     },
+     {
+      "at": 2222,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thái hậu"
+     },
+     {
+      "at": 2334,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 2406,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2584,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thái hậu"
+     },
+     {
+      "at": 2701,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Tể tướng Tiết Hoài Cẩn"
+     },
+     {
+      "at": 2818,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thái hậu"
+     },
+     {
+      "at": 2937,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thái hậu"
+     },
+     {
+      "at": 3054,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thái hậu"
+     },
+     {
+      "at": 3174,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 3296,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Hoàng thượng"
+     },
+     {
+      "at": 3324,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3818,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3825,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3831,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3838,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3844,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3851,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 4497,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 5 ngườ"
+     },
+     {
+      "at": 4504,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 5 ngườ"
+     },
+     {
+      "at": 4510,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 5 ngườ"
+     },
+     {
+      "at": 4517,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 5 ngườ"
+     },
+     {
+      "at": 4523,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 5 ngườ"
+     },
+     {
+      "at": 4528,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 5 ngườ"
+     },
+     {
+      "at": 4721,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 1 người."
+     },
+     {
+      "at": 4728,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 1 người."
+     },
+     {
+      "at": 4734,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 1 người."
+     },
+     {
+      "at": 4741,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 1 người."
+     },
+     {
+      "at": 4748,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 1 người."
+     },
+     {
+      "at": 4753,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 1 người."
+     },
+     {
+      "at": 4924,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Ngụy Ngữ Yên"
+     },
+     {
+      "at": 5032,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Đậu Thuần Nguyên"
+     },
+     {
+      "at": 5142,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Cao Ngọc Dao"
+     },
+     {
+      "at": 5251,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Tần Đường Diệu Hoa"
+     },
+     {
+      "at": 5358,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Ngụy Ngữ Yên"
+     },
+     {
+      "at": 5466,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Đậu Thuần Nguyên"
+     },
+     {
+      "at": 5571,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Đậu Thuần Nguyên"
+     },
+     {
+      "at": 5666,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 5847,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 2 người."
+     },
+     {
+      "at": 5853,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 2 người."
+     },
+     {
+      "at": 5860,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 2 người."
+     },
+     {
+      "at": 5866,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 2 người."
+     },
+     {
+      "at": 5873,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 2 người."
+     },
+     {
+      "at": 5879,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 2 người."
+     },
+     {
+      "at": 6053,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 6060,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 6066,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 6073,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 6079,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 6085,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 6184,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 6191,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 6197,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 6204,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 6211,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 6216,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 6387,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 6501,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 6609,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 6719,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 6828,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 6936,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 7046,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 7127,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 7289,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Hách Uyển Nhi"
+     },
+     {
+      "at": 7402,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Phi Khổng Nhạn Hồi"
+     },
+     {
+      "at": 7511,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Tiêu Thục Ý"
+     },
+     {
+      "at": 7621,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Diệp Ngưng Hoa"
+     },
+     {
+      "at": 7728,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Đậu Thuần Nguyên"
+     },
+     {
+      "at": 7835,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Tiêu Thục Ý"
+     },
+     {
+      "at": 7942,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Tiêu Thục Ý"
+     },
+     {
+      "at": 8034,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Phi Khổng Nhạn Hồi"
+     },
+     {
+      "at": 8197,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Tiêu Thục Ý"
+     },
+     {
+      "at": 8309,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Tiêu Thục Ý"
+     },
+     {
+      "at": 8420,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Hiền tần Đường Diệu Hoa"
+     },
+     {
+      "at": 8528,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 8635,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 8743,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Đậu Thuần Nguyên"
+     },
+     {
+      "at": 8852,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Hách Uyển Nhi"
+     },
+     {
+      "at": 8943,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 9106,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thường tại Tiêu Thục Ý"
+     },
+     {
+      "at": 9211,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Phi Khổng Nhạn Hồi"
+     },
+     {
+      "at": 9320,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Diệp Ngưng Hoa"
+     },
+     {
+      "at": 9426,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Diệp Ngưng Hoa"
+     },
+     {
+      "at": 9533,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Phú Sát Vãn Tình"
+     },
+     {
+      "at": 9638,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Hiền tần Đường Diệu Hoa"
+     },
+     {
+      "at": 9744,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Tần Phú Sát Trân Châu"
+     },
+     {
+      "at": 9850,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Quý nhân Đậu Thuần Nguyên"
+     },
+     {
+      "at": 47,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Sổ nguyệt sự"
+     },
+     {
+      "at": 195,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 235,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 276,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 316,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 335,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 1 người."
+     },
+     {
+      "at": 359,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 4 ngườ"
+     },
+     {
+      "at": 553,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 875,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Kính sự phòng · Ở đây còn 3 người."
+     },
+     {
+      "at": 1050,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1090,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1130,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1171,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1529,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1569,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1609,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1650,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1690,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1731,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 1970,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2010,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2051,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2092,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2152,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2192,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2232,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2273,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2313,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2353,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2638,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2679,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2720,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2760,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2800,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 2924,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 2966,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2972,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2979,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2982,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2985,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2987,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2987,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2989,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 2992,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N"
+     },
+     {
+      "at": 3068,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3108,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3148,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3189,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3230,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3270,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3411,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3451,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3492,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3532,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3572,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3690,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3730,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3771,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3811,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3852,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 3959,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 4109,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 4495,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 4535,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 4578,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 4648,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 4689,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 4729,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 4769,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 4938,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5142,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5183,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5223,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5264,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5304,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5381,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5551,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5591,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5631,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5672,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5764,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5804,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5845,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5885,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5925,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 5956,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 6095,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 6135,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 6176,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 6216,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 6256,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 6409,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 7081,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7121,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7162,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7202,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7242,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7371,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7411,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7451,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7492,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7532,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7777,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 7909,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7949,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 7989,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8030,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8070,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8110,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8323,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8363,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8404,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8444,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8691,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8731,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8771,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8811,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8852,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 8936,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 9067,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9107,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9148,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9188,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9228,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9328,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9368,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9408,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9449,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9489,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9655,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9695,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9736,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9776,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9955,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 9995,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 10036,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 10076,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 10116,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 10461,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 10709,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10908,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 10948,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 10988,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 11029,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 11069,
+      "lvl": 1,
+      "layer": ".kfoc",
+      "title": ""
+     },
+     {
+      "at": 11153,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 11203,
+      "lvl": 3,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 11246,
+      "lvl": 3,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 11335,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 11344,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 11697,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 12686,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 12982,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 13046,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+     },
+     {
+      "at": 13210,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 158,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 304,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 447,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 1792,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 2478,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 2823,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 3223,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 3757,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 3938,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 3971,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 3973,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 3976,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 4600,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+     },
+     {
+      "at": 4971,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 5049,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 5591,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 5674,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 5820,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 5888,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 6089,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 6217,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Hàm An cung · Tuy Phúc hiên · Ở đây còn 3 người."
+     },
+     {
+      "at": 6659,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Hàm An cung · Tuy Phúc hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 6925,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 7475,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 7997,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 8616,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 8680,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 8916,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 9025,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 9068,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 9123,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 9258,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 9333,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 9616,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Hàm An cung · Tuy Phúc hiên · Ở đây còn 1 người."
+     },
+     {
+      "at": 9782,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 9983,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10635,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 10690,
+      "lvl": 2,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 10842,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 3 ngư"
+     },
+     {
+      "at": 11195,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư"
+     },
+     {
+      "at": 11329,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư"
+     },
+     {
+      "at": 11891,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư"
+     },
+     {
+      "at": 12174,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+     },
+     {
+      "at": 12363,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 2 ngư"
+     }
+    ],
+    "slice": null,
+    "areaTaps": 27640,
+    "dlgClose": 4343,
+    "scrolls": 3960,
+    "infoTaps": 1830,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-25T11:53:58.101Z",
+      "buoi": 308,
+      "from": "2026-11-25T11:51:42.185Z"
+     },
+     {
+      "at": "2026-11-25T14:40:10.490Z",
+      "buoi": 424,
+      "from": "2026-11-25T14:38:10.259Z"
+     },
+     {
+      "at": "2026-11-25T18:23:21.010Z",
+      "buoi": 813,
+      "from": "2026-11-25T18:22:33.949Z"
+     },
+     {
+      "at": "2026-11-25T21:53:34.145Z",
+      "buoi": 1424,
+      "from": "2026-11-25T21:52:06.399Z"
+     },
+     {
+      "at": "2026-11-26T01:54:48.231Z",
+      "buoi": 2149,
+      "from": "2026-11-26T01:54:13.689Z"
+     }
+    ],
+    "loops": 123,
+    "dlgScroll": 1119,
+    "deadEndUnstick": 17,
+    "nocloseRetract": 3120,
+    "nextNoTurn": 184,
+    "kfocVisits": 225,
+    "taps": 284
+   },
+   "bugs": [
+    {
+     "type": "stuck",
+     "n": 4,
+     "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»"
+    },
+    {
+     "type": "stuck",
+     "n": 4,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ»"
+    },
+    {
+     "type": "game",
+     "n": 8,
+     "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 3,
+     "msg": "dialog queue holds 2 copies of «Tâm trạng · Tể tướng Tiết Hoài Cẩn» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "stuck",
+     "n": 7,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»"
+    },
+    {
+     "type": "stuck",
+     "n": 7,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Ta»"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Tể tướng Tiết Hoài Cẩn»"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Hoàng thượng»"
+    },
+    {
+     "type": "stuck",
+     "n": 5,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thái hậu»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 5 ngườ»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Kính sự phòng · Ở đây còn 1 người.»"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Quý nhân Ngụy Ngữ Yên»"
+    },
+    {
+     "type": "game",
+     "n": 3,
+     "msg": "dialog queue holds 2 copies of «Tâm trạng · Thường tại Cao Ngọc Dao» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "stuck",
+     "n": 6,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Quý nhân Đậu Thuần Nguyên»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thường tại Cao Ngọc Dao»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Tần Đường Diệu Hoa»"
+    },
+    {
+     "type": "stuck",
+     "n": 3,
+     "msg": "no progress 15 min on .dlg «Sổ nguyệt sự»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Kính sự phòng · Ở đây còn 2 người.»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ»"
+    },
+    {
+     "type": "stuck",
+     "n": 7,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Sổ nguyệt sự»"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thường tại Hách Uyển Nhi»"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Phi Khổng Nhạn Hồi»"
+    },
+    {
+     "type": "stuck",
+     "n": 6,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thường tại Tiêu Thục Ý»"
+    },
+    {
+     "type": "stuck",
+     "n": 3,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Quý nhân Diệp Ngưng Hoa»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no progress 15 min on .dlg «Tâm trạng · Phi Khổng Nhạn Hồi»"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Hiền tần Đường Diệu Hoa»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Quý nhân Phú Sát Vãn Tình»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Tần Phú Sát Trân Châu»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog scrolled to the end has no close / next button: .dlg «Sổ nguyệt sự»"
+    },
+    {
+     "type": "game",
+     "n": 56,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang buổi» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Có người đến)"
+    },
+    {
+     "type": "game",
+     "n": 6,
+     "msg": "dialog scrolled to the end has no close / next button: .dlg «Phụ tuyến · Che chở con gái nhà Hộ bộ thượng thư N»"
+    },
+    {
+     "type": "game",
+     "n": 6,
+     "msg": "dialog scrolled to the end has no close / next button: .kmov «»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Tin báo / Hoàng thượng / Lịch tháng / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Tin chờ người sai đi)"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no progress 15 min on .dlg «Tin báo»"
+    }
+   ],
    "exitPick": null
   },
   {
