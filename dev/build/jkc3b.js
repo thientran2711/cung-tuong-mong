@@ -100,8 +100,8 @@ kc3Reg("tm96z",{t:"Thuở thanh mai",w:"tm",g:"{tmN} là người ngươi hẹn 
  x1:{h:"Lời rủ trốn đi",w:"tm",if:kc3TmOk,t:"{tmN} gửi thư: đêm mười lăm, thuyền đợi ở bến sông. Nếu nàng đến, hai người đi về phương Nam, không bao giờ trở lại.",o:[
   {n:"Giữ tín vật, hồi thư hẹn kiếp sau",e:["win","lose"],wx:"lời hẹn còn nguyên",lx:"thư lọt vào tay cha",rt:"Ngươi viết một dòng: kiếp này không thành, xin hẹn kiếp sau.",rf:"Phong thư rơi vào tay gia nhân, đến tay cha."},
   {n:"Đốt thư, gửi trả tín vật",e:"mid",wx:"dứt được, không ai nói được gì",lx:"chàng hiểu ngươi đã buông tay",rt:"Ngươi đốt thư trước đèn.",go:(A,ok,G)=>{kc3Tm(-G[0])}},
-  {n:"Đến bến sông",e:"lose",wx:"đi theo chàng",lx:"bị bắt lại thì mất hết",rt:"Ngươi khoác áo tối, lẻn ra cửa sau.",go:A=>{kcElope(false);if(S.dead)A.done=1}},
-  {n:"✦ Theo chàng đi, có tỳ nữ lo liệu đường đi",if:()=>kcR1Ok()&&kcRare("kcR1",BAL.kc3.rare.r1.p),e:"win",wx:"bỏ trốn cùng người thương",lx:"rời bỏ nhà và kỳ tuyển",rt:"Thuyền rời bến trước khi trống canh tư điểm.",go:A=>{A.done=1;kcElope(true)}}]}},
+  {n:"Đến bến sông",e:"lose",wx:"đi theo chàng",lx:"bị đuổi kịp thì có thể chết đuối, kiếp này dừng",rt:"Ngươi khoác áo tối, lẻn ra cửa sau.",go:A=>{kcElope(false);if(S.dead)A.done=1}},
+  {n:"✦ Theo chàng đi, có tỳ nữ lo liệu đường đi",if:()=>kcR1Ok()&&kcRare("kcR1",BAL.kc3.rare.r1.p),e:"win",wx:"bỏ trốn cùng người thương",lx:"rời bỏ nhà và kỳ tuyển, kiếp này dừng ngoài cung",rt:"Thuyền rời bến trước khi trống canh tư điểm.",go:A=>{A.done=1;kcElope(true)}}]}},
  E:{
  win:{tag:"Hẹn kiếp sau",t:"Ngươi vẫn giữ {tmTok} và lời hẹn với {tmN}. Vào cung rồi, đó là thứ ngươi phải giấu kỹ nhất.",go:()=>{kc3EndZ(1,1,"Ngày kiệu hoa đến cổng, {tmN} đứng ở đầu ngõ; hai người đã hẹn nhau kiếp sau.")}},
  mid:{tag:"Buông tay",t:"Ngươi gửi trả {tmTok}, dặn {tmN} lập công danh và quên mình.",go:()=>{kc3EndZ(0,0,"Ngươi tự tay gửi trả tín vật, dặn chàng lập công danh và quên mình.")}},
