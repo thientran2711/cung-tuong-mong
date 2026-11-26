@@ -47002,6 +47002,4024 @@
    "t": {
     "total": 1313582
    }
+  },
+  {
+   "job": {
+    "id": "R2-lazy-5",
+    "origin": "thd",
+    "road": "thd_hoc",
+    "bot": "quiet",
+    "seed": 3629708731,
+    "dev": "ipad",
+    "url": "https://thientran2711.github.io/cung-tuong-mong/"
+   },
+   "harness": {
+    "kind": "realtap",
+    "sha": "4d7a22c6",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 177,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [
+     {
+      "at": 841,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 4 người."
+     },
+     {
+      "at": 1008,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 4 người."
+     },
+     {
+      "at": 1837,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2020,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2200,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2215,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2231,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2246,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2263,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2279,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2294,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2309,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2325,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2339,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2352,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2365,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2379,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2393,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2406,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2418,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2431,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2447,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2464,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2478,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2493,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2509,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2524,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2537,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2550,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2563,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2579,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2594,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     },
+     {
+      "at": 2607,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Dưỡng Tú viện · Đông sở · Ở đây có 3 người."
+     }
+    ],
+    "slice": null,
+    "build": {
+     "s": "f009e1a6+",
+     "b": "dd1ce3d0ffa1",
+     "t": "2026-11-26T02:21Z"
+    },
+    "areaTaps": 97,
+    "dlgScroll": 9,
+    "scrolls": 9,
+    "infoTaps": 80,
+    "loops": 4,
+    "backdropTaps": 1,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-26T07:54:58.548Z",
+      "buoi": 1,
+      "from": "2026-11-26T06:24:08.010Z"
+     }
+    ],
+    "dlgClose": 1,
+    "taps": 39
+   },
+   "life": {
+    "id": "Ban hoa",
+    "type": "end",
+    "fate": "Bị ban hoa, xuất cung",
+    "death": false,
+    "age": 20,
+    "year": 1,
+    "rank": 0,
+    "text": "Ngươi về quê, mở một lớp dạy chữ cho con gái trong vùng. Cung cấm chỉ còn là một giấc mộng xa.",
+    "card": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "duringArea": false,
+    "lastTaps": [
+     "AREA 266,315",
+     "AREA 891,325",
+     "AREA 351,483",
+     "AREA 757,395",
+     "AREA 523,463",
+     "AREA 813,341",
+     "AREA 652,255",
+     "AREA 739,431",
+     "AREA 733,292",
+     "#kg82 «Quay lại»",
+     "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sang buổi»",
+     ".dlg «Thái hậu» «Thần thiếp đứng yên, không chạy theo khăn giữa sản»"
+    ]
+   },
+   "exitPick": null,
+   "bugs": [
+    {
+     "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "n": 2,
+     "at": 841,
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/loop-1.png",
+     "dump": "/home/user/wt/out-s3/shots-R2-lazy-5/loop-1-dump.json",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     },
+     "buttons": [
+      "Ô lưu",
+      "Xem bản thân",
+      "Sắc68Tài76Tâm cơ26Đức40Danh8Sủng8",
+      "Bạc80Sức80/100",
+      "Buổi sáng, còn 4 khắc",
+      "Chưa điểm trang",
+      "sương sớm",
+      "Quẻ Thượng (Giao thiệp)",
+      "Tâm trạngBình thản0",
+      "Tin báo",
+      "Người lạ???",
+      "Chọn chính mình"
+     ],
+     "trace": [
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hậu cung»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tài nghệ»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Quẻ Thượng (Giao thiệp)»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Dư đồ»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hậu cung»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bạc80Sức80/100»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hành sự»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tài nghệ»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hậu cung»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bạc80Sức80/100»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bạc80Sức80/100»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Quẻ Thượng (Giao thiệp)»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tài nghệ»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Dư đồ»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Mệnh truyện»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tâm trạngBình thản0»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tài nghệ»"
+     ],
+     "next": {
+      "dis": true,
+      "q": 3,
+      "mg": false,
+      "qt": [
+       "Tâm trạng · Ngươi",
+       "Tin báo",
+       "Dưỡng Tú viện"
+      ],
+      "t": "Sang buổi"
+     }
+    },
+    {
+     "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Dưỡng Tú viện)",
+     "type": "game",
+     "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Dưỡng Tú viện)",
+     "n": 1,
+     "at": 841,
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/loop-1.png",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Đông sở)",
+     "type": "game",
+     "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tin báo / Tâm trạng · Ngươi / Đông sở)",
+     "n": 1,
+     "at": 1008,
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/loop-2.png",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "n": 2,
+     "at": 1837,
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/loop-3.png",
+     "dump": "/home/user/wt/out-s3/shots-R2-lazy-5/loop-3-dump.json",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     },
+     "buttons": [
+      "Ô lưu",
+      "Xem bản thân",
+      "Sắc68Tài76Tâm cơ26Đức41Danh8Sủng8",
+      "Bạc80Sức80/100",
+      "Buổi sáng, còn 4 khắc",
+      "Chưa điểm trang",
+      "sương sớm",
+      "Quẻ Thượng (Giao thiệp)",
+      "Tâm trạngBình thản0",
+      "Tạ Cẩm Tâm",
+      "Chọn chính mình",
+      "Về Dư đồ"
+     ],
+     "trace": [
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Hành sự»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Sắc68Tài76Tâm cơ26Đức41Danh8Sủng8»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Giao tình»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Chưa điểm trang»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Hoàng tự»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Hậu cung»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Hành sự»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Tài nghệ»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Sắc68Tài76Tâm cơ26Đức41Danh8Sủng8»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Bạc80Sức80/100»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Bạc80Sức80/100»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Sắc68Tài76Tâm cơ26Đức41Danh8Sủng8»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Quẻ Thượng (Giao thiệp)»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Tư trang»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Tư trang»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Mệnh truyện»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Hậu cung»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Bạc80Sức80/100»",
+      "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Hoàng tự»"
+     ],
+     "next": {
+      "dis": true,
+      "q": 1,
+      "mg": false,
+      "qt": [
+       "Đông sở"
+      ],
+      "t": "Sang buổi"
+     }
+    },
+    {
+     "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Đông sở)",
+     "type": "game",
+     "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Đông sở)",
+     "n": 2,
+     "at": 1837,
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/loop-3.png",
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    }
+   ],
+   "dead": [
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Người lạ???",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671680009.png",
+     "dev": "ipad",
+     "at": 47,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chọn chính mình",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671687500.png",
+     "dev": "ipad",
+     "at": 55,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Về Dư đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671695784.png",
+     "dev": "ipad",
+     "at": 63,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Lịch tháng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671703454.png",
+     "dev": "ipad",
+     "at": 71,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mục tiêu chương (có mới)",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671710744.png",
+     "dev": "ipad",
+     "at": 78,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thỉnh tranh nhân vật",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671717523.png",
+     "dev": "ipad",
+     "at": 85,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "3Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671725118.png",
+     "dev": "ipad",
+     "at": 92,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tai mắt0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671732066.png",
+     "dev": "ipad",
+     "at": 99,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Có thaiRất thấp",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671739261.png",
+     "dev": "ipad",
+     "at": 106,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Lật thẻRất thấp",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671746421.png",
+     "dev": "ipad",
+     "at": 114,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Ân tình (đêm)0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671752962.png",
+     "dev": "ipad",
+     "at": 120,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Số lần ân thưởng0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671760535.png",
+     "dev": "ipad",
+     "at": 128,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Bổng lộcsau 3 tuần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671767667.png",
+     "dev": "ipad",
+     "at": 135,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Nguy hiểm chung: 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671775186.png",
+     "dev": "ipad",
+     "at": 142,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xét phẩm: thiếu 4",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671782682.png",
+     "dev": "ipad",
+     "at": 150,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671789761.png",
+     "dev": "ipad",
+     "at": 157,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "?",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671796627.png",
+     "dev": "ipad",
+     "at": 164,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671804678.png",
+     "dev": "ipad",
+     "at": 172,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mệnh truyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671811796.png",
+     "dev": "ipad",
+     "at": 179,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Việc nhờ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671819087.png",
+     "dev": "ipad",
+     "at": 186,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Sổ ghi",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671826750.png",
+     "dev": "ipad",
+     "at": 194,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chương này",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671834109.png",
+     "dev": "ipad",
+     "at": 201,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Sắc phong",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671841957.png",
+     "dev": "ipad",
+     "at": 209,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Đã qua 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671849270.png",
+     "dev": "ipad",
+     "at": 216,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Triều cục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671856359.png",
+     "dev": "ipad",
+     "at": 223,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tâm nguyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671863198.png",
+     "dev": "ipad",
+     "at": 230,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Mục lục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671870661.png",
+     "dev": "ipad",
+     "at": 238,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671878503.png",
+     "dev": "ipad",
+     "at": 246,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Ân oán",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671885581.png",
+     "dev": "ipad",
+     "at": 253,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Phe phái",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671892913.png",
+     "dev": "ipad",
+     "at": 260,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xem quan hệ của Ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671900345.png",
+     "dev": "ipad",
+     "at": 268,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Đổi chỗ hai người",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671907764.png",
+     "dev": "ipad",
+     "at": 275,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "với Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671914779.png",
+     "dev": "ipad",
+     "at": 282,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mườ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671923317.png",
+     "dev": "ipad",
+     "at": 290,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Đông sở3 bóng người",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671930553.png",
+     "dev": "ipad",
+     "at": 298,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Bắc sở3 bóng ngườitốn: một khắc",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671943039.png",
+     "dev": "ipad",
+     "at": 310,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tiền sảnh3 bóng ngườitốn: một khắc",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671950004.png",
+     "dev": "ipad",
+     "at": 317,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "1Cung nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671957107.png",
+     "dev": "ipad",
+     "at": 325,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671968651.png",
+     "dev": "ipad",
+     "at": 336,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tứ đức 9/9",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671976301.png",
+     "dev": "ipad",
+     "at": 344,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Cầm kỳ thi họa 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671983526.png",
+     "dev": "ipad",
+     "at": 351,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671990981.png",
+     "dev": "ipad",
+     "at": 358,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tác phẩm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795671997789.png",
+     "dev": "ipad",
+     "at": 365,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "ⓘ luật Đức",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672004974.png",
+     "dev": "ipad",
+     "at": 372,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xem luật Công · Nữ công",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672011888.png",
+     "dev": "ipad",
+     "at": 379,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672019268.png",
+     "dev": "ipad",
+     "at": 386,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672028466.png",
+     "dev": "ipad",
+     "at": 396,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672036493.png",
+     "dev": "ipad",
+     "at": 404,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Phi tần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672045082.png",
+     "dev": "ipad",
+     "at": 413,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Nam nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672053362.png",
+     "dev": "ipad",
+     "at": 421,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Cung nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672061247.png",
+     "dev": "ipad",
+     "at": 429,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672070067.png",
+     "dev": "ipad",
+     "at": 438,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thái hậu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672078649.png",
+     "dev": "ipad",
+     "at": 446,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Xem thêm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672086418.png",
+     "dev": "ipad",
+     "at": 454,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Gặp ngài ban ngày 2/5",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672094265.png",
+     "dev": "ipad",
+     "at": 461,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Việc hôm nay",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672101449.png",
+     "dev": "ipad",
+     "at": 469,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Điều ngài thích",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672109575.png",
+     "dev": "ipad",
+     "at": 477,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+     "cover": "div.kph",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672121565.png",
+     "dev": "ipad",
+     "at": 489,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672148241.png",
+     "dev": "ipad",
+     "at": 516,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Con của ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672155696.png",
+     "dev": "ipad",
+     "at": 523,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Kế vị",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672163169.png",
+     "dev": "ipad",
+     "at": 530,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hoàng tự trong cung",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672170513.png",
+     "dev": "ipad",
+     "at": 538,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hôn sự",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672177732.png",
+     "dev": "ipad",
+     "at": 545,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Quý tộc kén rể · kén dâu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672184917.png",
+     "dev": "ipad",
+     "at": 552,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672229521.png",
+     "dev": "ipad",
+     "at": 597,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thú cưng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672243891.png",
+     "dev": "ipad",
+     "at": 611,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Việc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672251459.png",
+     "dev": "ipad",
+     "at": 619,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tất cả 16",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672258966.png",
+     "dev": "ipad",
+     "at": 626,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Trang sức 1",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672266700.png",
+     "dev": "ipad",
+     "at": 634,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Y phục 2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672273840.png",
+     "dev": "ipad",
+     "at": 641,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Vải vóc 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672281673.png",
+     "dev": "ipad",
+     "at": 649,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Thuốc men 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672288869.png",
+     "dev": "ipad",
+     "at": 656,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Hương liệu 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672296130.png",
+     "dev": "ipad",
+     "at": 663,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Lễ vật 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672303916.png",
+     "dev": "ipad",
+     "at": 671,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Cài tóc: Trâm hoa lụa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672311570.png",
+     "dev": "ipad",
+     "at": 679,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Y phục: Áo lụa thêu hoa nhỏ",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672319176.png",
+     "dev": "ipad",
+     "at": 687,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Trâm hoa lụa · Trâm cài",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672326564.png",
+     "dev": "ipad",
+     "at": 694,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Áo lụa thêu hoa nhỏ · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672333587.png",
+     "dev": "ipad",
+     "at": 701,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Váy sa xanh ngọc · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672340957.png",
+     "dev": "ipad",
+     "at": 708,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Nước bào hoa · Dầu chải tóc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672348068.png",
+     "dev": "ipad",
+     "at": 715,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Nến mỡ dê ×3 · Nến",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672354803.png",
+     "dev": "ipad",
+     "at": 722,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Than liễu ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672361760.png",
+     "dev": "ipad",
+     "at": 729,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Son sáp ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672368611.png",
+     "dev": "ipad",
+     "at": 736,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Yên chi giấy ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672376282.png",
+     "dev": "ipad",
+     "at": 743,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Phấn gạo ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672383116.png",
+     "dev": "ipad",
+     "at": 750,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Dấu ấn Đáp ứng · đang dùng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672389832.png",
+     "dev": "ipad",
+     "at": 757,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tạ Cẩm Tâm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672505747.png",
+     "dev": "ipad",
+     "at": 873,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn bốn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672536634.png",
+     "dev": "ipad",
+     "at": 904,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Bắc sở4 bóng ngườitốn: một khắc",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672543696.png",
+     "dev": "ipad",
+     "at": 911,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+     "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672550835.png",
+     "dev": "ipad",
+     "at": 918,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tâm trạngBình thản0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672658637.png",
+     "dev": "ipad",
+     "at": 1026,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tạ Cẩm Tâm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672668297.png",
+     "dev": "ipad",
+     "at": 1036,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Chọn chính mình",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672675613.png",
+     "dev": "ipad",
+     "at": 1043,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Về Dư đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672682880.png",
+     "dev": "ipad",
+     "at": 1050,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Lịch tháng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672690183.png",
+     "dev": "ipad",
+     "at": 1057,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Mục tiêu chương (có mới)",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672697292.png",
+     "dev": "ipad",
+     "at": 1065,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "3Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672704772.png",
+     "dev": "ipad",
+     "at": 1072,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tai mắt0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672711469.png",
+     "dev": "ipad",
+     "at": 1079,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Có thaiRất thấp",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672719394.png",
+     "dev": "ipad",
+     "at": 1087,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Lật thẻRất thấp",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672727113.png",
+     "dev": "ipad",
+     "at": 1095,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Ân tình (đêm)0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672734297.png",
+     "dev": "ipad",
+     "at": 1102,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Số lần ân thưởng0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672741833.png",
+     "dev": "ipad",
+     "at": 1109,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Bổng lộcsau 3 tuần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672749630.png",
+     "dev": "ipad",
+     "at": 1117,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Nguy hiểm chung: 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672757166.png",
+     "dev": "ipad",
+     "at": 1125,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Xét phẩm: thiếu 4",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672764644.png",
+     "dev": "ipad",
+     "at": 1132,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "?",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672771958.png",
+     "dev": "ipad",
+     "at": 1139,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672780761.png",
+     "dev": "ipad",
+     "at": 1148,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Con của ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672788949.png",
+     "dev": "ipad",
+     "at": 1156,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Kế vị",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672797133.png",
+     "dev": "ipad",
+     "at": 1164,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Hoàng tự trong cung",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672804524.png",
+     "dev": "ipad",
+     "at": 1172,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Hôn sự",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672812027.png",
+     "dev": "ipad",
+     "at": 1179,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Quý tộc kén rể · kén dâu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672819355.png",
+     "dev": "ipad",
+     "at": 1187,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn bốn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672827465.png",
+     "dev": "ipad",
+     "at": 1195,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Đông sở3 bóng người",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672834645.png",
+     "dev": "ipad",
+     "at": 1202,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tây sở3 bóng ngườitốn: một khắc",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672841910.png",
+     "dev": "ipad",
+     "at": 1209,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Bắc sở4 bóng ngườitốn: một khắc",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672849103.png",
+     "dev": "ipad",
+     "at": 1216,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+     "cover": "div.kscn-col",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672856259.png",
+     "dev": "ipad",
+     "at": 1224,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "1Cung nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672863358.png",
+     "dev": "ipad",
+     "at": 1230,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672879243.png",
+     "dev": "ipad",
+     "at": 1246,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Ân oán",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672885969.png",
+     "dev": "ipad",
+     "at": 1253,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Phe phái",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672893523.png",
+     "dev": "ipad",
+     "at": 1261,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Xem quan hệ của Ta",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672901602.png",
+     "dev": "ipad",
+     "at": 1269,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Đổi chỗ hai người",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672909960.png",
+     "dev": "ipad",
+     "at": 1277,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "với Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672917229.png",
+     "dev": "ipad",
+     "at": 1284,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672925962.png",
+     "dev": "ipad",
+     "at": 1294,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672936865.png",
+     "dev": "ipad",
+     "at": 1304,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Túi đồ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672944090.png",
+     "dev": "ipad",
+     "at": 1311,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Thú cưng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672951266.png",
+     "dev": "ipad",
+     "at": 1319,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Việc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672959018.png",
+     "dev": "ipad",
+     "at": 1327,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tất cả 16",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672967521.png",
+     "dev": "ipad",
+     "at": 1335,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Trang sức 1",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672975599.png",
+     "dev": "ipad",
+     "at": 1343,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Y phục 2",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672983367.png",
+     "dev": "ipad",
+     "at": 1351,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Vải vóc 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672991402.png",
+     "dev": "ipad",
+     "at": 1359,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Thuốc men 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795672999636.png",
+     "dev": "ipad",
+     "at": 1367,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Hương liệu 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673007651.png",
+     "dev": "ipad",
+     "at": 1375,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Lễ vật 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673014952.png",
+     "dev": "ipad",
+     "at": 1382,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Cài tóc: Trâm hoa lụa",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673022471.png",
+     "dev": "ipad",
+     "at": 1390,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Y phục: Áo lụa thêu hoa nhỏ",
+     "cover": "span.kdw.on",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673029628.png",
+     "dev": "ipad",
+     "at": 1397,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Trâm hoa lụa · Trâm cài",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673036346.png",
+     "dev": "ipad",
+     "at": 1404,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Áo lụa thêu hoa nhỏ · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673043833.png",
+     "dev": "ipad",
+     "at": 1411,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Váy sa xanh ngọc · Y phục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673051028.png",
+     "dev": "ipad",
+     "at": 1418,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Nước bào hoa · Dầu chải tóc",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673058033.png",
+     "dev": "ipad",
+     "at": 1425,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Nến mỡ dê ×3 · Nến",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673065617.png",
+     "dev": "ipad",
+     "at": 1433,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Than liễu ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673072579.png",
+     "dev": "ipad",
+     "at": 1440,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Son sáp ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673079961.png",
+     "dev": "ipad",
+     "at": 1447,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Yên chi giấy ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673087063.png",
+     "dev": "ipad",
+     "at": 1454,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Phấn gạo ×2 · Son phấn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673093875.png",
+     "dev": "ipad",
+     "at": 1461,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Dấu ấn Đáp ứng · đang dùng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673100724.png",
+     "dev": "ipad",
+     "at": 1468,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673115822.png",
+     "dev": "ipad",
+     "at": 1483,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tứ đức 9/9",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673123433.png",
+     "dev": "ipad",
+     "at": 1491,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Cầm kỳ thi họa 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673130653.png",
+     "dev": "ipad",
+     "at": 1498,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Vũ · Y · Nữ công 8/12",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673137819.png",
+     "dev": "ipad",
+     "at": 1505,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tác phẩm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673145411.png",
+     "dev": "ipad",
+     "at": 1513,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "ⓘ luật Đức",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673152380.png",
+     "dev": "ipad",
+     "at": 1520,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Xem luật Công · Nữ công",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673159762.png",
+     "dev": "ipad",
+     "at": 1527,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673166630.png",
+     "dev": "ipad",
+     "at": 1534,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673184306.png",
+     "dev": "ipad",
+     "at": 1552,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Chí tôn",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673192751.png",
+     "dev": "ipad",
+     "at": 1560,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Phi tần",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673200645.png",
+     "dev": "ipad",
+     "at": 1568,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Nam nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673208805.png",
+     "dev": "ipad",
+     "at": 1576,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Cung nhân",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673217776.png",
+     "dev": "ipad",
+     "at": 1585,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Hoàng thượng",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673225420.png",
+     "dev": "ipad",
+     "at": 1593,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Thái hậu",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673233821.png",
+     "dev": "ipad",
+     "at": 1601,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Xem thêm",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673241494.png",
+     "dev": "ipad",
+     "at": 1609,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Việc hôm nay",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673253171.png",
+     "dev": "ipad",
+     "at": 1621,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Điều ngài thích",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673260652.png",
+     "dev": "ipad",
+     "at": 1628,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+     "cover": "div.kph",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673268458.png",
+     "dev": "ipad",
+     "at": 1636,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673280513.png",
+     "dev": "ipad",
+     "at": 1648,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Mệnh truyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673287871.png",
+     "dev": "ipad",
+     "at": 1655,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Việc nhờ",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673294840.png",
+     "dev": "ipad",
+     "at": 1662,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Sổ ghi",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673301823.png",
+     "dev": "ipad",
+     "at": 1669,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Chương này",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673308535.png",
+     "dev": "ipad",
+     "at": 1676,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Sắc phong",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673315494.png",
+     "dev": "ipad",
+     "at": 1683,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Đã qua 0",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673322454.png",
+     "dev": "ipad",
+     "at": 1690,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Triều cục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673329764.png",
+     "dev": "ipad",
+     "at": 1697,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Tâm nguyện",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673336504.png",
+     "dev": "ipad",
+     "at": 1704,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    },
+    {
+     "k": "DEAD BUTTON",
+     "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.»",
+     "label": "Mục lục",
+     "cover": "div.kscn-veil",
+     "shot": "/home/user/wt/out-s3/shots-R2-lazy-5/dead-ipad-1795673345007.png",
+     "dev": "ipad",
+     "at": 1712,
+     "S": {
+      "dead": false,
+      "y": 1,
+      "t": 0,
+      "w": 0,
+      "b": 0,
+      "age": 20,
+      "rank": 0,
+      "name": "Giang Ngọc Dao"
+     }
+    }
+   ],
+   "buoi": 2,
+   "steps": 1770,
+   "status": [],
+   "_loopAt": 1795679853205,
+   "_snapAt": 1795679831834,
+   "_started": true,
+   "_ckAt": 1795679715214,
+   "_ckB": 2,
+   "rss": [
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1346,
+     "rendererMB": 619,
+     "heapMB": 104,
+     "dom": 2839,
+     "q": 4,
+     "lsK": 4
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1643,
+     "rendererMB": 795,
+     "heapMB": 104,
+     "dom": 884,
+     "q": 1,
+     "lsK": 116
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1762,
+     "rendererMB": 887,
+     "heapMB": 104,
+     "dom": 1199,
+     "q": 1,
+     "lsK": 117
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1567,
+     "rendererMB": 683,
+     "heapMB": 104,
+     "dom": 868,
+     "q": 3,
+     "lsK": 117
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1505,
+     "rendererMB": 794,
+     "heapMB": 104,
+     "dom": 855,
+     "q": 3,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1357,
+     "rendererMB": 657,
+     "heapMB": 104,
+     "dom": 947,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1347,
+     "rendererMB": 624,
+     "heapMB": 78,
+     "dom": 969,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1346,
+     "rendererMB": 623,
+     "heapMB": 78,
+     "dom": 982,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1537,
+     "rendererMB": 842,
+     "heapMB": 78,
+     "dom": 931,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1660,
+     "rendererMB": 955,
+     "heapMB": 78,
+     "dom": 973,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1635,
+     "rendererMB": 935,
+     "heapMB": 78,
+     "dom": 945,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1370,
+     "rendererMB": 672,
+     "heapMB": 78,
+     "dom": 945,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 1,
+     "y": 1,
+     "totalMB": 1264,
+     "rendererMB": 565,
+     "heapMB": 78,
+     "dom": 945,
+     "q": 1,
+     "lsK": 119
+    },
+    {
+     "buoi": 2,
+     "y": 1,
+     "totalMB": 1237,
+     "rendererMB": 689,
+     "heapMB": 190,
+     "dom": 950,
+     "q": 1,
+     "lsK": 119
+    }
+   ],
+   "promo": {
+    "raw": 0,
+    "real": 0,
+    "picked": 0,
+    "by": {}
+   },
+   "_unsFail": {
+    ".dlg|Thân phận kiếp này": {},
+    ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+    ".dlg|Ngày thứ nhất — Nhập cung": {},
+    "page|Dưỡng Tú viện · Đông sở · Ở đây có # người.": {},
+    "#klife|": {},
+    ".dlg|Dưỡng Tú viện": {},
+    ".dlg|Đông sở": {},
+    ".dlg|Đêm": {},
+    ".dlg|Ngày thứ hai — Điện tuyển": {},
+    ".kmov|": {},
+    ".dlg|Sân chờ": {},
+    ".dlg|Điện tuyển": {},
+    ".dlg|Thái hậu": {},
+    ".dlg|Hoàng thượng": {}
+   },
+   "_scrW": {
+    ".dlg|Thân phận kiếp này|871,392": {
+     "left": 400,
+     "n": 1
+    },
+    ".dlg|Dưỡng Tú viện|706,589": {
+     "left": 142,
+     "n": 1
+    },
+    ".dlg|Đông sở|706,540": {
+     "left": 175,
+     "n": 3
+    },
+    "#kg82||727,425": {
+     "left": 247,
+     "n": 2
+    }
+   },
+   "t": {
+    "total": 162377
+   }
   }
  ]
 }
