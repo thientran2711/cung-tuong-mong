@@ -3021,6 +3021,7 @@ Owner: "Bất kỳ một cái thông báo nào của cái game đều phải vô
 - `kitToastKeepRects` / `kitToastCol` (jclose) stay the shared keep-clear list; `kitToastPlace` / `kitToastCollapse` are no longer used by notices (no stage-rail «!» item).
 - Sample: kit page §42.2 (box lit / calm, chip, button that opens the panel). Test: `DEV=fold|ipadAir node dev/test/stage-here.js` (faults `toast-cover`: chip-low / hud-word / kept / person / card; `collapse-no-box`; `float-toast` = any visible `#kupdline`, `#ktbtoast`, floating `.kmnote`, `body > [role=status]` other than the chip), `node dev/test/stage-stay.js` (the closing notice text names the stay odds).
 
+- NEWS SIEVE (owner OD 26/11 ~04:40Z, `dev/build/jnsieve.js`, BAL.news): «Tin báo» know lines and the morning «Tin trong cung» card carry only news that touches HER (her name / «ngươi» / her servants / evidence · the night · rank · birth · death · lãnh cung words); NPC ↔ NPC deeds keep running and reach her as ONE kit news panel per month «Tin trong cung · tổng kết tháng» (`kitPanel({kind:"news", facts:[{who, text, chips:[["Thiện cảm",±n]]}]})`). Consorts' nết are shown from the start (`trKnown`), never «discovered».
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
 - The week rolls ONE weather (`S.wx.b`, its flag f drives every rule); the WORDS shown follow the buổi (`S.wx.n = wxAt(S.wx.b, buổi)[0]`, icon
   `[1]`). Night never: nắng, ve kêu, "sớm". Day never: trăng, sao, đom đóm, đêm, dế. "sớm" only in the morning. Every new weather row gives all

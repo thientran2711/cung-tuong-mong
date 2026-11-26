@@ -330,3 +330,13 @@ Flag name: **`nodanger:1`** on the queue card (`Q.push({…,pid:"selxD3",nodange
 Owner OD 25/11 ~23:20Z: the mirror lost its preset sets (jration lxColRows dropped every set she did not fully own). Needed in KIT §60 kitSwatches: a set item = 4 swatches side by side + name; a greyed item with why; a note line under a row. Built INSIDE the one kit part (jtoil kitSwatches + #kswt-css, KIT.md §60), no private copy; for the kit keeper's review on review/makeup-set.
 - K-ICO-HOME (PLACE-RULES, owner OD 25/11 ~23:40Z k17 «phải có một cái biểu tượng gì đó chứ»): a painted small «nhà» (home) icon for her own room / the palace that houses her on every Dư đồ view (label layer, same size as the place icon .kplic). Until painted, review/place-rules writes «Nhà ta» at the start of that label's line (plMap in jplrule.js) — swap the word for the icon when it exists. Painting: Foreman C / art (no code art).
 - K-MAP-BANNER (PLACE-RULES, owner OD 25/11 ~23:40Z k17): ONE visible line on the Dư đồ itself for an all-locked state (cấm túc / lãnh cung / hết khắc …) — the leather Dư đồ (jbook) hides the top-row .past/.fest chips. Until the kit part exists, review/place-rules says it once through kitNotice (sticky, id "plban") and writes it into a .fest chip of .maptools (shown on non-leather views); the per-label «đang cấm túc (N tháng)» plates are removed (plMap, jplrule.js).
+
+## 26/11 NEWS-SIEVE-2 (session_01V1ZZH2L7SB2YyEATuwgbWi, MAIN 153) — K-FREE-OPT: no «Tốn không / Được không» on a free option (kit keeper KK38)
+Owner OD 25/11 ~23:36Z NEWS WORDING (verbatim row in dev/OWNER_DECISIONS.md): "no «TỐN không / ĐƯỢC không» on a free action". Seen: «Tin báo» panel
+(jnotice kitNoticeOpen, kitPanel kind notice) option cards «Để ta xem» / «Để sau» print the rows «Tốn: không» and «Được: không». Rows come from the
+one row writer (j63 kaRowH / KA_ROWS, j19 kgrid «Tốn … không»), so this is the KIT option-card family, not the news code.
+Wanted (kit keeper only, law 9/11): an option with no cost hides the «Tốn» row, an option with no gain hides the «Được» row (whole family: every
+option / act card that prints «không» in a row: go / later / close / look options of every panel). Not changed on review/news-sieve.
+CONFLICT to settle (canon overwrite, law 14): the quickcheck gate dev/test/dialog-fixed.js (l) «MAIN 88 (a) no empty Được cell: a card with no gain
+says «không»» still demands the «không» rows, and it FAILS on origin/main 02f564ae today (Fold + iPad: card «Mặc kệ» has an EMPTY Tốn and Được
+cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) wins: hide the empty rows and update gate (l) in the same kit change.
