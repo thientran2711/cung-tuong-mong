@@ -28,3 +28,47 @@ PRIORITY #1 CHECK ('TITLES2|titles2' + 'day title|daytitle|title card|kitChapter
 LC17: kit-daytitle-r2 313bdfc6 is NOT land-ready anywhere; land it TOGETHER with the hook c39be532 (review/titles-daycard = review/titles2-r3m head, which also carries the TITLES2 re-merge 98c175a1 on LIVE 5e013076). Before landing, KK fixes the new-life card hidden under #klife (above). LIVE fault seen by quickcheck G4: «Ô lưu · Lui does not close its layer» (fold) on 5e013076 itself.
 
 ~ HANDOVER: not needed (done).
+
+## REVIEW r1 (E92r BIG, session_01DgYSWqAJU4v2sXYANjRjyQ, 26/11) — **FAIL c39be532 4**
+PRIORITY #1 CHECK ('TITLES2' + 'day title' + 'kitChapterTitle|kitGoalAlt|kitGoalNow|chapter()'): OD 24/11 ~07:45Z + ~18:15Z | claims E92 SSK c39be532 | main 5e013076: jgoal.js:23 chapter() (= the ONE "current chapter" source of the goal panel, kitGoalAlt home roads first, n from pos67), jdayq.js:49 dqDawn counts #kdaytc | review/titles-daycard = review/titles2-r3m c39be532, review/kit-daytitle-r2 313bdfc6 | KIT_REQUESTS: no #klife row (added now).
+Tested on origin/main 5e013076 (newest); c39be532 is a descendant of it (FF ok). Land combo = c39be532 + kit-daytitle-r2 313bdfc6 merged locally (ac09835c, index/sw rebuilt, NOT pushed).
+
+### (a) Re-merge 98c175a1 — OK
+- dev/build + dev/test + content patch of (5e013076→98c175a1) = patch of the reviewed (fd85907a→3292e7a2), line for line, except the assemble list line; j71/j72sd/jdh2/jdh3/jdh3n byte-identical to 3292e7a2, jbal2/jdh differ only by LIVE's own lines.
+- assemble list = LIVE's 445 entries in the same order + jdh3n.js, jdh3.js (after jge.js), nothing else. No other game-code change. Hook commit c39be532 touches only jdh3.js (+14/−6), the new test, index.html/sw.js.
+
+### (b) Hook kitChapterTitle() — FAIL (1–3)
+Independent probes (scratch scripts, not in git), checked against the goal panel kitGoalNow() and pos67/lab67, not against chapterTitle (the worker's H3 compares the hook with chapterTitle, its own twin, so it can't catch these):
+| case | hook (card line 2) | goal panel / chapter book | verdict |
+|---|---|---|---|
+| new life in the palace, 11 origins | «Chương 1 — Sơ nhập cung môn» (cnv «Phận tỳ nữ buổi đầu») | same | ok |
+| «Ở nhà chờ tuyển tú» (kcInit) tt/dtq/muoi/td/ch/thd | «Chương 1 — Sơ nhập cung môn» | «Chương 1 — Chờ kỳ tuyển tú» [Khuê các] | **WRONG** |
+| same, nc (kc2) | «Chương 1 — Sơ nhập cung môn» | «Chương 1 — Chờ ngày hòa thân» [Cố quốc] | **WRONG** |
+| same, cnv (kc2) | «Chương 1 — Phận tỳ nữ buổi đầu» | «Chương 1 — Chờ lệnh tuyển cung nữ» [Thôn quê] | **WRONG** |
+| old save, ARC67 chapter with no M.chap, S.st.ch.n=3 | «Chương 1 — Môn sinh của cha» | «Chương 3» (pos67, lab67 «Chương 3 · Hồi 1/3», jgoal) | **WRONG number** |
+| M.chap=4 | Chương 4 | Chương 4 | ok |
+| story complete (ch.all) | null (line hidden) | «Chương 12 — Mệnh truyện trọn vẹn» | differs |
+| unknown arc/ms, no S.st, v1, non-S object | null | — | ok |
+- Law 6 (REAL-WORLD) + Law 11: while she is still at home, the card names a palace chapter she hasn't started, and it contradicts the goal panel. The game already has ONE "current chapter" source, jgoal.js chapter() (kitGoalAlt home roads → milestone → ARC67 with pos67 → all). GATE ZERO/reuse: the hook must read THAT source (or the same order of checks), not a second copy that leaves out the home roads and pos67.
+
+### (c) Tests
+- chapter-title-hook.js on the land combo: PASS 22/22 (it misses the cases above, see fix 4).
+- titles2-unit on c39be532 alone: PASS 69/69. **On the land combo: FAIL 5/72, stable across 2 runs** (C2 old-save titles; panel no «Danh tiếng» / «Chính truyện» / two-tone plates; info card wording). Cause: fresh() → start() → the kit's start card #kdaytc shows at +600 ms; LIVE jdayq dqDawn() counts #kdaytc as the new-day host, so it holds #modal ("Danh hiệu" waits in Q) while the test reads the panel. My probe shows the game is right: the panel stays held while the card is up and opens by itself once the card is gone. So it's a test fault, but the suite must pass on the combo that lands (fix 3).
+- titles2-scan (combo): rows 833 · 0 missing/clash/dup/long/bad how.
+- quickcheck c39be532: open 1653 ms 0 errors · old save ok (loads + plays a buổi) · time-spill PASS · G4 button-crawl FAIL ×1 «fold · Ô lưu · Lui · close button did not close its layer» — **proved on bare LIVE 5e013076**: button-crawl --fast on LIVE gives the identical single FAIL → LIVE fault, not this branch. Perf buổi 3236/1365 ms FAILed, but both sides were bimodal (new 3387/3236/910, live 925/1365/3715) and my LIVE crawl ran at the same time → box noise, not counted; rerun alone on r2.
+- coop-e2e (live Worker) not run: the verdict is already FAIL; run it on r2 (Fold host). The hook reads only S of the device (p!==S → null), so seat a and seat b each read their own life; H6 only sets COOPW flags.
+- 0 page errors in every probe.
+
+### (d) Shots with kit-daytitle-r2 merged (Fold 755x1000@2, iPad 1180x820@2; looked at; CDN key missing → described, scratch only, deleted)
+- Later day (real dawn() chain over the Tuần lục book, wk 7): card centred and on top (elementFromPoint = card), box 430x79, inside the screen, no horizontal overflow; «Tháng tư, năm thứ nhất, trung tuần · mùa hạ» / «Chương 1 — Sơ nhập cung môn». OK on both devices.
+- New life: **confirmed** — #klife z 2147483500 sits on top of #kdaytc z 12000 for ~2 s of the card's 2.8 s (center point = klife at +0.5…2.0 s, card only from ~2.5 s). Kit fault in kit-daytitle-r2, not this branch → FOR MAIN 147 + KIT_REQUESTS row (added).
+
+### FIX LIST for the worker (review/titles-daycard)
+1. chapterInfo/kitChapterTitle (+ chapterTitle) read the ONE current-chapter source = jgoal.js chapter() (or exactly its order): kitGoalAlt home roads (Khuê các / Cố quốc / Thôn quê, kc2 + kc3) first, then milestone, then ARC67. Name = that source's title (keep fill67+plainT for tokens), no typed text.
+2. Chapter number = pos67 (old save without M.chap → S.st.ch.n), same as jgoal/lab67/the chapter book. Story complete (ch.all): either follow the goal panel («Mệnh truyện trọn vẹn») or say in the report why line 2 is hidden — one rule, written in KIT §94b.
+3. titles2-unit (and every suite you run) must PASS on c39be532 + kit-daytitle-r2: in fresh(), remove #kdaytc / wait it out (as chapter-title-hook does) before reading #modal.
+4. chapter-title-hook.js: check the hook against kitGoalNow() (independent), add home-road lives (kcPick «nha» → kcInit, every origin with kcOk incl. kc2 nc/cnv and kc3), an old save without M.chap, and ch.all; then run coop-e2e (Fold host) + quickcheck alone (perf) on the new sha.
+
+### FOR MAIN 147
+- KIT (kit keeper): kit-daytitle-r2 313bdfc6 new-life card plays under #klife (z 2147483500 > 12000) for ~2 of 2.8 s on Fold + iPad → show it after #klife closes (whole family: any cover over #kdaytc). KIT_REQUESTS row added 26/11. Land kit-daytitle-r2 only TOGETHER with the hook's r2 sha.
+- LIVE 5e013076 fault: quickcheck G4 «fold · Ô lưu · Lui · close button did not close its layer» (proved on bare LIVE).
