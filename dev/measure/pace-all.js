@@ -52,8 +52,13 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
    /* weekly oán record (toward her, and hers toward others) */
    window.__ow=[];const ow=()=>{try{const R=rivals.filter(v=>v&&v.alive!==false&&!v.out&&!v.coop);const a=R.map(v=>+v.oan||0),g=R.map(v=>+v.ghen||0),mine=Object.values(S.ro||{}).map(x=>+x||0);
      const L=BAL.oanLv;window.__ow.push({w:S.turn*3+S.tuan,rank:S.rank,mx:a.length?Math.max(...a):0,mean:a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):0,deep:a.filter(x=>x>=L[2]).length,hate:a.filter(x=>x>=L[3]).length,n:a.length,
-      gmx:g.length?Math.max(...g):0,gmean:g.length?Math.round(g.reduce((x,y)=>x+y,0)/g.length):0,my:mine.length?Math.max(...mine):0,sung:Math.round(S.sung),danh:Math.round(S.danh),duc:Math.round(S.duc||0),th:Math.round(S.th||0)})}catch(e){}};
+      gmx:g.length?Math.max(...g):0,gmean:g.length?Math.round(g.reduce((x,y)=>x+y,0)/g.length):0,my:mine.length?Math.max(...mine):0,dg:(()=>{try{return tsDangerOf(S).n}catch(e){return null}})(),sung:Math.round(S.sung),danh:Math.round(S.danh),duc:Math.round(S.duc||0),th:Math.round(S.th||0)})}catch(e){}};
    const et2=endTurn;endTurn=function(){const k0=S.turn*3+S.tuan;const r=et2.apply(this,arguments);if(S.turn*3+S.tuan!==k0)ow();return r};
+   /* rise sources of ghen / oán toward her (caller names from the stack): {kind:{caller:[n, sum, max]}} */
+   const W=window.__src={};const who=()=>{const L=String(new Error().stack).split('\n').slice(3).map(l=>(l.match(/at (?:Object\.|window\.)?([\w$.]+)/)||[])[1]||'?').filter(f=>!/^(ghenUp|ghenAll|oanAdd|affAdd|tally|who|Array|eval|Function|o0|a0|n0|g0|f0|r0)$/.test(f)&&!/^(Array|Object)\./.test(f));return L.slice(0,2).join('<')};
+   const tally=(k,n)=>{if(!(n>0))return;const z=W[k]=W[k]||{};const w=who();const e=z[w]=z[w]||[0,0,0];e[0]++;e[1]+=n;e[2]=Math.max(e[2],n)};
+   const gu=ghenUp;ghenUp=function(v,n){const r=gu.apply(this,arguments);try{tally('ghen',r)}catch(e){}return r};
+   const oa=oanAdd;oanAdd=function(x,y,n){try{if(y===S&&x!==S&&n>0)tally('oan',n)}catch(e){}return oa.apply(this,arguments)};
    /* every bot act: close the previous act's window */
    const bs=window.__bot.step;window.__bot.step=function(m,n){const r=[];for(let i=0;i<n;i++){const a0=window.__actN;bs.call(this,m,1);if(window.__actN!==a0)diff()}return r};
   });
@@ -61,6 +66,6 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
   while(true){const st=await p.evaluate(m=>{const n0=window.__res.length;window.__bot.step(m,120);return{t:S.turn,dead:window.__res.length>n0}},'sens');
    if(st.dead){end='died';break}
    if(st.t>=MONTHS)break;if(Date.now()-t0>(+process.env.CAP||1500)*1e3){end='cap';break}}
-  const out=await p.evaluate(()=>({ev:window.__ev,ow:window.__ow,acts:window.__acts,rank:S.rank,turn:S.turn,srv:!!(typeof isSrv==='function'&&isSrv())}));
+  const out=await p.evaluate(()=>({src:window.__src,ev:window.__ev,ow:window.__ow,acts:window.__acts,rank:S.rank,turn:S.turn,srv:!!(typeof isSrv==='function'&&isSrv())}));
   console.log(JSON.stringify(Object.assign({seed:si,mode,end,errs:errs.slice(0,3)},out)));await ctx.close()};
  const q=jobs.slice();await Promise.all(Array.from({length:PAR},async()=>{while(q.length)await run(q.shift())}));await b.close()})().catch(e=>{console.error(e);process.exit(2)});

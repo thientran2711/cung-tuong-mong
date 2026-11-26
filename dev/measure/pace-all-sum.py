@@ -23,11 +23,11 @@ for key in sorted(acts):
   print(f"| {key[0]} | {key[1]} | {s:g} | {len(G)} | {m:g} | {q1:g}–{q3:g} | 1/{(1/sh) if sh else 0:.1f} | {(s/m) if m else 0:.1f} | {fl} |")
 print("\nticks (not acts): "+", ".join(f"{k[0]}{k[1]}:{v:g}/{tickn[k]}" for k,v in sorted(ticks.items())))
 # oán toward her, by season (9 tuần)
-print("\n| season | rank (median) | oán max (median of lives) | oán mean | in Oán sâu+ (mean count) | in Oán hận | ghen max | ghen mean | her own oán max |")
-print("|---|---|---|---|---|---|---|---|---|")
+print("\n| season | rank (median) | oán max (median of lives) | oán mean | in Oán sâu+ (mean count) | in Oán hận | ghen max | ghen mean | her own oán max | Nguy hiểm chung |")
+print("|---|---|---|---|---|---|---|---|---|---|")
 S=defaultdict(list)
 for L in lives:
   for r in L['ow']:S[r['w']//9].append(r)
 for s in sorted(S):
   R=S[s];md=lambda k:st.median([r[k] for r in R])
-  print(f"| {s+1} | {md('rank'):g} | {md('mx'):g} | {md('mean'):g} | {st.mean([r['deep'] for r in R]):.1f} | {st.mean([r['hate'] for r in R]):.1f} | {md('gmx'):g} | {md('gmean'):g} | {md('my'):g} |")
+  print(f"| {s+1} | {md('rank'):g} | {md('mx'):g} | {md('mean'):g} | {st.mean([r['deep'] for r in R]):.1f} | {st.mean([r['hate'] for r in R]):.1f} | {md('gmx'):g} | {md('gmean'):g} | {md('my'):g} | {(st.median([r['dg'] for r in R if r.get('dg') is not None]) if any(r.get('dg') is not None for r in R) else '–')} |")

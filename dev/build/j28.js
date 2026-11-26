@@ -58,7 +58,7 @@ function ocKey(p){return p===S?"me":p&&p.id!=null?String(p.id):null}
 function ocWk(){try{return wk()}catch(e){return 0}}
 function ocStamp(x,y){try{if(!x||!y||typeof x!=="object")return;const k=ocKey(y);if(k==null)return;(x.ocq=x.ocq&&typeof x.ocq==="object"?x.ocq:{})[k]=ocWk()}catch(e){}}
 function ocFloor(h,t){const C=BAL.oanCool,L=BAL.oanLv;try{if(typeof memTop!=="function"||!t)return 0;const m=memTop(h,t,-1);if(!m)return 0;
-  if(m.L||m.k)return L[C.floor.keep-1]||0;return m.g>=((BAL.mem&&BAL.mem.faint)||15)?(L[C.floor.mem-1]||0):0}catch(e){return 0}}
+  if(m.L||m.k)return L[C.floor.keep-1]||0;return m.g>=BAL.mem.faint?(L[C.floor.mem-1]||0):0}catch(e){return 0}}
 /* fade one grudge value v held by h toward t (key k) by w tuần of cool-down; returns the new value */
 function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;const q=h.ocq&&h.ocq[k];if(q!=null&&ocWk()-q<C.quiet)return v;
  const fl=ocFloor(h,t);if(v<=fl)return v;const cc=h.occ=h.occ&&typeof h.occ==="object"?h.occ:{};
@@ -71,8 +71,9 @@ function oanCool(w,mine,onlyMine){const C=BAL.oanCool;if(!C||!C.on||!S)return;w=
  if(mine&&S.ro)for(const k in S.ro)S.ro[k]=ocOne(S,ocPerson(k),k,S.ro[k],w,C.me);
  /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
  if(!onlyMine)for(const h of relMSAll()){const kf=persF(h,"forgive",1);if(h.oan)h.oan=ocOne(h,S,"me",h.oan,w,kf);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=ocOne(h,ocPerson(k),k,h.ro[k],w,kf)}}
-/* the weekly jealousy fade of one consort (j8 rivalsTurn): BAL.oanCool.ghen.than when she likes her, .base otherwise, × her nết; fractions carry (v.gcc) */
-function ghenCool(v){const G=(BAL.oanCool&&BAL.oanCool.ghen)||{base:1,than:3};const b=(+v.rel||0)>=netTh(v,"than")?G.than:G.base;
+/* the weekly jealousy fade of one consort (j8 rivalsTurn): BAL.oanCool.ghen.than when she likes her, .base otherwise, + .pct of the jealousy itself (high jealousy
+   cools faster: a quiet season takes about a third off, like one oán band), × her nết; fractions carry (v.gcc) */
+function ghenCool(v){const G=BAL.oanCool.ghen;const b=((+v.rel||0)>=netTh(v,"than")?G.than:G.base)+G.pct*(+v.ghen||0);
  if(!(BAL.oanCool&&BAL.oanCool.on))return b;const d=(+v.gcc||0)+b*persF(v,"forgive",1),n=Math.floor(d);v.gcc=Math.round((d-n)*1000)/1000;return n}
 /* the weekly tick: inside rivalsTurn (host only in co-op: jcoopworld mutes it on the guest, whose OWN grudges cool in her oanMonth, 3 tuần at once) */
 (function(){const r0=rivalsTurn;rivalsTurn=function(){const r=r0.apply(this,arguments);try{oanCool(1,true)}catch(e){console.error("oanCool",e)}return r}})();

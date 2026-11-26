@@ -223,7 +223,14 @@ function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}retur
 /* MOODKNOW step 0 (owner s35 Lượt 41 + OD 17/11 ~18:38Z): ONE way to RAISE the jealousy SCORE v.ghen. It adds n (clamped 0–100) and, for the real
    rise, a short Chạnh lòng FEELING cause (jmoodknow ghenFeel: true why, aimed at the one who caused it 'by', khắc timer BAL.mood2.dur.e.ghenUp).
    Lowering stays a plain write; the feeling ending never touches the score. Returns the real rise. */
-function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
+/* review/pace-all (owner OD 26/11 ~08:25Z «điểm thì nó tăng cao chót vót»; law 6b real people, law 1): v.ghen is a consort's jealousy toward HER (co-op: per
+   player, gp[seat]). A jealousy whose cause is ANOTHER consort (by = an NPC: she danced, stole a night, showed a gift…) used to raise the score toward
+   her too, so every consort sat at Ghen 99 by the second season. Now it stays aimed at that consort: the Chạnh lòng feeling (ghenFeel) is aimed at her
+   as before, and it becomes a grudge between the two (oanAdd v → by, × BAL.oanCool.ghen.npc), which then cools like every grudge. */
+function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;
+ if(by&&typeof by==="object"&&by!==S&&by!==v&&!by.coop&&BAL.oanCool&&BAL.oanCool.on){try{if(typeof ghenFeel==="function")ghenFeel(v,n,why,by)}catch(e){}
+  const k=(BAL.oanCool.ghen||{}).npc||0;if(k>0&&typeof oanAdd==="function")oanAdd(v,by,Math.max(1,Math.round(n*k)));return 0}
+ const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
  if(d>0&&typeof ghenFeel==="function")try{ghenFeel(v,d,why,by===undefined?S:by)}catch(e){}return d}
 /* her own jealousy SCORE toward a consort (v.pg, "Ngươi ghen N") — same family as ghenUp: the ONE way to raise it; the real rise also adds a short
    Chạnh lòng FEELING on her (ghenFeel), aimed at that consort. Lowering stays a plain write; the feeling ending never touches the score. */
