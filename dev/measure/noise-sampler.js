@@ -1,8 +1,8 @@
 /* noise-sampler.js — IN-PAGE, READ-ONLY sampler of every channel that interrupts the player (owner OD 26/11 ~06:50Z (A) PLAYER-NOISE BUDGET,
    (D) TEXT HYGIENE). Installed by dev/measure/noise-preload.js as a context init script; it never taps, never calls a game function that
-   changes state, never writes S. It only READS (S, Q, kitNoticeList, tinBaoList, kaLastResult, the DOM) every SAMPLE_MS and counts:
+   changes state, never writes S, never calls Math.random. It only READS (S, S.tb, Q, kitNoticeList, wk, kaLastResult, the DOM) every SAMPLE_MS and counts:
      tinbao   new rows in the Tin báo box (kitNoticeList: a new id, or the same id with a new line = shown again)
-     tinag    new world news items (tinBaoList ids, jagknow) — what feeds the box from the living world
+     tinag    new world news items (S.tb.K / S.tb.R ids, jagknow — read directly, never through tinBaoList) — what feeds the box from the living world
      chip     toast chips (#kntchip shown with a new text) — the small pop-up that slides in
      result   result cards (#rtoast «KẾT QUẢ» shown: kaLastResult changed), rows = its Được/Mất/Ghi chú items
      dlg      dialogs / cards she is shown (#modal open with a new Q[0]) — counted per buổi AND per day
@@ -26,7 +26,17 @@ module.exports = function nzSampler(cfg) {
     if (pid === 'j70' || /^(Mưu hại|Sau vụ mưu hại|Lời cảnh báo|Tai mắt báo tin)/.test(t)) return 'harm'; if (pid === 'kyngo') return 'ky';
     if (VIS.test(t) || /visit/.test(pid)) return 'visit'; if (/^(e68|q72o|rgo?$|j71m)/.test(pid) || /^(Việc khó xử|Phụ tuyến|Lập công)/.test(t)) return 'opt';
     if (/^j71[ix]$/.test(pid)) return 'fest'; return null };
-  const sid = Math.random().toString(36).slice(2, 8); let base = false, day = null, buoi = null, cur = null, lastFlush = Date.now();
+  /* BIG #9 FAIL 1 (whole family): NO game function that writes is ever called. The world news are read straight from S.tb (K = this buổi's
+     items, R = today's late reports, the same two lists tinBaoList() returns) — tinBaoList itself is NOT pure (adHapNow writes S.adHap, knTb
+     writes S.tb + knCarryTick delivers carried news and fires KN.cb, knEnd rewrites expired lines via kLine → Math.random + S.vmem). The game
+     keeps S.tb fresh by itself (knTb at every buổi turn, knScan, knBao, knSellTick). Every other read is a pure getter: wk() (j8: S.turn*3+
+     S.tuan), kitNoticeList() (jnotice: NT.list.slice()), evcKind(m) (jevc, stat-pace builds: string tests only), BAL / Q / kaLastResult / the
+     DOM (read only). The sampler's own id does not use Math.random (a seeded life's stream must not move). */
+  const tbRead = s => { const T = s && s.tb; if (!T || typeof T !== 'object') return []; const out = [];
+    for (const it of Object.values(T.K || {})) if (it && it.id != null) out.push({ id: it.id, line: it.line });
+    for (const it of (Array.isArray(T.R) ? T.R : [])) if (it && it.id != null) out.push({ id: it.id, line: it.line });
+    return out };
+  const sid = (Date.now() % 2176782336).toString(36) + (performance.now() | 0).toString(36).slice(-2); let base = false, day = null, buoi = null, cur = null, lastFlush = Date.now();
   const seenN = new Map(), seenAg = new Set(), seenTxt = new Set(), seenQ = new WeakSet(); let lastChip = '', lastRes = null;
   const z = () => ({ tinbao: 0, tinag: 0, chip: 0, result: 0, resRowsMax: 0, resRows: 0, dlg: 0, visit: 0, big: 0, seal: 0, kinds: {}, buoiDlg: {}, ex: {} });
   const ex = (c, s) => { const e = cur.ex; e[c] = e[c] || []; if (e[c].length < 6) e[c].push(String(s).replace(/\s+/g, ' ').slice(0, 120)) };
@@ -49,7 +59,7 @@ module.exports = function nzSampler(cfg) {
     /* Tin báo rows */
     let NL = []; try { if (typeof kitNoticeList === 'function') NL = kitNoticeList() } catch (e) {}
     for (const x of NL) { const k = x.id, v = x.line || ''; if (seenN.get(k) === v) continue; seenN.set(k, v); if (base) { cur.tinbao++; ex('tinbao', v) } addTxt('tinbao', v) }
-    let AL = []; try { if (typeof tinBaoList === 'function') AL = tinBaoList() } catch (e) {}
+    let AL = []; try { AL = tbRead(s) } catch (e) {}
     for (const x of AL) { if (seenAg.has(x.id)) continue; seenAg.add(x.id); if (base) cur.tinag++; addTxt('tinbao', x.line) }
     /* toast chip */
     const ch = document.getElementById('kntchip'); if (ch && vis(ch)) { const t = (ch.innerText || '').trim(); if (t && t !== lastChip) { lastChip = t; if (base) { cur.chip++; ex('chip', t) } addTxt('chip', t) } } else lastChip = '';
