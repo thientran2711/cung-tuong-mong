@@ -198,11 +198,11 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
 const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b|Hồi môn/i;/* kit-cost-rows-home: a dowry spent is a price like bạc */
 /* ---------- 6b. KIT HINT + ODDS METER (owner 11/15 15:05Z / 15:10Z, 19/11 ~01:48Z, KIT 28.6 — shared kit parts kitHint / kitHintRow / kitOptOdds) ----------
    kitHint(o, m, lv) → {hint}: read from the option's OWN data (fx + its x / j67 text: the odds, people and state of THIS moment), so it is
-   true now and changes with the context (no fixed answer to learn). Words only: stat numbers never appear (a count in a story phrase is
-   written in words: "hai mươi trượng"). It names the main gain FIRST, then the price beyond Tốn, then what a failure brings.
+   true now and changes with the context (no fixed answer to learn). A stat is NAMED with marks («Sủng ++», «Danh −», WORDING-GAIN OD 26/11 ~18:50Z (7),
+   BAL.mk): its number never appears and no vague gain word is used (a count in a story phrase is written in words: "hai mươi trượng"). It names the main gain FIRST, then the price beyond Tốn, then what a failure brings.
    Clarity lv (kitHintLevel: her Tâm cơ / Tai mắt, BAL.hint*):
-     0 vague — generic people ("bề trên", "đối thủ"), no chance word; a deadly failure is always said ("hỏng thì mất mạng").
-     1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), a rough chance (thường ổn / hên xui / dễ hỏng) and the failure.
+     0 vague — generic people ("Bề trên: thiện cảm +", "Đối thủ: Sủng −"), one mark, no chance word; a deadly failure is always said ("hỏng thì mất mạng").
+     1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), the chance as the odds-ladder word of the card (Mong manh … Rất vững) and the failure.
      2 sharp — names (the rival by name) and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
    ODDS (owner 19/11 ~01:48Z, canon overwrite of the 14/11 15:05Z «an toàn / có rủi ro / liều» risk chip, kitRisk RETIRED): the card shows the
    kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows «Nắm chắc».
@@ -237,60 +237,65 @@ function kitHintSign(p,l){if(/^(không (mất|được|tốn)[^,]*gì|không đ�
  let c="n";try{c=kaSent(p,"n")}catch(e){}if(c==="g")return 1;if(c==="r")return -1;
  if(/(^|\s)(hài lòng|thoát nạn|vui|hợp ý|thương|tin cậy|giữ được|được giữ|được dời|dọn sang|tạ ơn)(\s|$|,)/i.test(p))return 1;return l==="hỏng"?-1:l==="kèm"?-1:1}
 const KIT_DEADLY=/(tru di|ban chết|mất mạng|lộ là chết|là chết|bị chết|xử tử|xử trảm|\bchết\b)/i;
-/* one effect phrase → [vague, plain, sharp] words (numbers dropped), or null when it is only a cost */
-function kitHintPhrase(p,sg,nm,lv){const who=nm||"\u0001";
+/* one effect phrase → [vague, plain, sharp] hint texts, or null when it is only a cost.
+   WORDING-GAIN (owner OD 26/11 ~18:50Z (7), canon overwrite of the vague words «thêm thể diện» / «để mắt hơn» / «được tiếng hiền đức» / «có lợi cho con»):
+   a hint never says a vague gain word. It names the STAT and the size in marks: «Sủng ++», «Danh −», «Đức +++» (one mark = a little, two = medium, three = a lot;
+   a loss −, −−, −−−; the size bands are BAL.mk, ONE CORE). Clarity: lv 0 = name + one mark; lv 1 = name + the real size; lv 2 = also the person by name. */
+const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nhà/i,"hon"],[/Hồi môn/i,"hoi"],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,"rel"],[/được ưa/i,"uu"],[/Sủng/i,"sung"],[/Danh|Đức|Ân tình/i,"dan"],[/Bạc/i,"bac"],[/Sức/i,"suc"],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,"cc"]];
+/* the marks of a change: n = the amount in the phrase (null = none named), sgn = +1 / −1 the stat's OWN direction, lv = clarity */
+function kitMk(sgn,p,lv){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];let m=1;if(n&&lv>=1){const v=+n;const g=(KIT_HINT_MAG.find(r=>r[0].test(p))||[0,"cc"])[1];const big=BAL.mk.big[g];m=v>=big*BAL.mk.hi?3:v<=Math.max(1,Math.floor(big*BAL.mk.lo))?1:2}return (sgn>0?"+":"−").repeat(m)}
+function kitHintPhrase(p,sg,nm,lv){const who=nm||"";
  const story=()=>{const t=p.replace(/\s*\([^()]*\d[^()]*\)/g,"").replace(/(\d+)/g,(m,d)=>kitNumVi(d)).replace(/\s*\(\s*\)/g,"").trim();return [t,t,t]};
  if(KIT_DEADLY.test(p))return lv===0?["mất mạng","mất mạng","mất mạng"]:story();
  if(/^(Sức|Bạc)\s*[-−]\s*\d+$/.test(p)||/^\d+\s*khắc$/.test(p)||/^an toàn$/i.test(p))return null;
  if(/(kẻ hầu|cung nhân) khác/i.test(p))return story();/* "kẻ hầu khác giữ kỷ cương (lòng +1)": the others, in the story's words */
- const T=[/* [re, up, down, flags]: flags "i" hostility (her side is the reverse), "w" may match a phrase without a number */
-  [/chứng cứ/i,["nắm thêm thóp kẻ khác","nắm thêm chứng cứ",`nắm thêm chứng cứ về ${who}`],["mất một chứng cứ","mất chứng cứ trong tay","mất chứng cứ trong tay"],"w"],
-  [/long thai|có thai|mang thai|\bthai\b/i,["có phúc con cái","giữ được long thai","giữ được long thai"],["lỡ phúc con cái","lần này không thể có thai","lần này không thể có thai"],"w"],
-  [/Thái hậu/i,["được lòng bề trên","Thái hậu hài lòng","Thái hậu hài lòng"],["mất lòng bề trên","Thái hậu phật ý","Thái hậu để bụng"]],
-  [/Hoàng hậu/i,["được lòng bề trên","Hoàng hậu hài lòng","Hoàng hậu hài lòng"],["mất lòng bề trên","Hoàng hậu phật ý","Hoàng hậu để bụng"]],
-  [/^(nàng|hắn|con nàng)\s+(Sủng|Danh)|Sủng của|bớt sủng/i,["hạ được đối thủ","đối thủ thất thế",`${who} thất sủng`],["đối thủ được lợi","đối thủ được lợi",`${who} được lợi`]],
-  [/phi tần.*ghen|ghen.*phi tần/i,["chuốc lòng ghen","các phi tần ghen ghét","các phi tần ghen ghét"],["bớt người ghen","các phi tần bớt ghen","các phi tần bớt ghen"],"i"],
-  [/ghen|oán|ghét/i,["kết thêm oán","có người ghen ghét",`${who} sinh oán`],["bớt người oán","có người nguôi giận",`${who} nguôi giận`],"i"],
-  [/tình ý/i,["thêm tình riêng","người ấy thêm tình ý",`${who} thêm tình ý`],["dứt tình riêng","người ấy nguội lòng",`${who} nguội lòng`]],
-  [/thế lực nhà\s*[+−-]\s?\d/i,["nhà ngươi thêm vững thế","thế lực nhà ngươi thêm vững","thế lực nhà ngươi thêm vững"],["nhà ngươi sút thế","thế lực nhà ngươi sút giảm","thế lực nhà ngươi sút giảm"]],/* kit-e-rows «KR thế lực nhà» (E25b, E28): HER OWN house only — E28's wording is «thế lực nhà −N»; another house («nhà Hộ bộ thế lực +6», «nhà nàng thế lực −6», j55) has the name BEFORE «thế lực» and must never read as hers (law 6a) */
-  [/(^|[^\p{L}])thế lực\s*[+−-]\s?\d/iu,["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"],["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"]],/* another house (j55): named in the line, not hers — a neutral phrase, the sign is not hers to read */
-  [/quý nhau/i,["hai bên thêm thân thiết","hai bên quý nhau hơn","hai bên quý nhau hơn"],["hai bên sinh xa cách","hai bên bớt quý nhau","hai bên bớt quý nhau"]],/* kit-cost-rows-home «quý nhau» (a decline that costs the liking of both sides) */
-  [/Chủ tin/i,["chủ thêm tin dùng","chủ thêm tin dùng kẻ hầu","chủ thêm tin dùng kẻ hầu"],["chủ bớt tin dùng","chủ bớt tin dùng kẻ hầu","chủ bớt tin dùng kẻ hầu"]],/* KIT REQUEST «Chủ tin» (E31r, or20-j68q): the servant stat NAMES.tin */
-  [/Hoàng thượng để ý/i,["Hoàng thượng để ý đến kẻ hầu","Hoàng thượng để ý đến kẻ hầu","Hoàng thượng để ý đến kẻ hầu"],["Hoàng thượng bớt để ý đến kẻ hầu","Hoàng thượng bớt để ý đến kẻ hầu","Hoàng thượng bớt để ý đến kẻ hầu"]],/* KIT REQUEST «Hoàng thượng để ý» (NAMES.nt) */
-  [/Gia thanh/i,["thêm danh giá gia môn","gia môn thêm danh giá","gia môn thêm danh giá"],["tổn danh giá gia môn","gia môn sút danh giá","gia môn sút danh giá"]],
-  [/Áp lực hôn sự/i,["thêm sức ép hôn sự","hôn sự bị thúc ép hơn","hôn sự bị thúc ép hơn"],["đỡ sức ép hôn sự","hôn sự bớt bị thúc ép","hôn sự bớt bị thúc ép"],"i"],
-  [/Lời đồn/i,["thêm lời ra tiếng vào","người ngoài xì xào thêm","người ngoài xì xào thêm"],["lời đồn lắng xuống","người ngoài bớt xì xào","người ngoài bớt xì xào"],"i"],
-  [/Hồi môn/i,["thêm của hồi môn","thêm của hồi môn","thêm của hồi môn"],["hao của hồi môn","hao của hồi môn","hao của hồi môn"]],
-  [/thân\b|thiện cảm|quý ngươi|quý ta/i,["được lòng người","người ấy có thiện cảm hơn",`${who} có thiện cảm với ta hơn`],["mất lòng người","người ấy mất thiện cảm",`${who} mất thiện cảm với ta`]],
-  [/(^|\s|\()(lòng|Lòng)\s/,["được lòng kẻ hầu","kẻ hầu một lòng theo ta",`${who} một lòng theo ta`],["mất lòng kẻ hầu","kẻ hầu sinh oán",`${who} sinh oán`]],
-  [/thương con|hoàng tử|công chúa|các con/i,["có lợi cho con","con được thương","Hoàng thượng thương con hơn"],["con thiệt","con bị lạnh nhạt","con bị lạnh nhạt"]],
-  [/nghi ngươi|nghi ta|đa nghi|quở|cấm túc|giáng/i,["được tin","bệ hạ thêm tin","Hoàng thượng thêm tin"],["dễ bị nghi, bị phạt","có thể bị nghi, bị phạt","Hoàng thượng có thể sinh nghi, trách phạt"],"w"],
-  [/Ân tình/i,["thêm tình nghĩa","thêm tình nghĩa với bệ hạ","thêm tình nghĩa với Hoàng thượng"],["sứt mẻ tình nghĩa","sứt mẻ tình nghĩa với bệ hạ","sứt mẻ tình nghĩa với Hoàng thượng"]],
-  [/Sủng|được ưa|đêm vui/i,["được để mắt","bệ hạ để mắt hơn","Hoàng thượng để mắt hơn"],["bị lạt lẽo","bệ hạ lạt lẽo đi","Hoàng thượng lạt lẽo đi"]],
-  [/Danh/i,["thêm thể diện","thêm thể diện trong cung","thêm thể diện trong cung"],["mất thể diện","mất thể diện trước lục cung","mất thể diện trước lục cung"]],
-  [/Đức/i,["được tiếng hiền","được tiếng hiền đức","được tiếng hiền đức"],["mang tiếng ác","mang tiếng thất đức","mang tiếng thất đức"]],
-  [/Bạc|lì xì/i,["có thêm bạc","có thêm bạc","có thêm bạc"],["hao bạc","hao bạc","hao bạc"]],
-  [/Sức/i,["dưỡng sức","dưỡng sức","dưỡng sức"],["hao sức","hao sức","hao sức"]],
-  [/Tai mắt/i,["thêm tai mắt","thêm tai mắt","thêm tai mắt"],["mất tai mắt","mất tai mắt","mất tai mắt"]],
-  [/Tâm cơ/i,["thêm mưu trí","thêm tâm cơ","thêm tâm cơ"],["kém mưu trí","sút tâm cơ","sút tâm cơ"]],
-  [/Sắc|Tài\b|tài nghệ/i,["bản thân khá lên","bản thân khá lên","bản thân khá lên"],["bản thân sút đi","bản thân sút đi","bản thân sút đi"]],
-  [/Thái y|thuốc|bệnh|ốm/i,["giữ được thân thể","thân thể được giữ","thân thể được giữ"],["thân thể bị hại","thân thể bị hại","thân thể bị hại"],"w"]];
+ const T=[/* [re, label(who), flags]: "w" may match a phrase without a number; "i" = the stat moves AGAINST her side (hostility, pressure, a rival's rise: her gain is the stat falling) */
+  [/chứng cứ/i,w=>w?`Chứng cứ về ${w}`:"Chứng cứ","w"],
+  [/long thai|có thai|mang thai|\bthai\b/i,()=>"Có thai","w"],
+  [/Thái hậu/i,(w,l)=>l>=1?"Thái hậu: thiện cảm":"Bề trên: thiện cảm"],
+  [/Hoàng hậu/i,(w,l)=>l>=1?"Hoàng hậu: thiện cảm":"Bề trên: thiện cảm"],
+  [/^(nàng|hắn|con nàng)\s+(Sủng|Danh)|Sủng của|bớt sủng/i,(w,l,p)=>`${w||"Đối thủ"}: ${/Danh/.test(p)?"Danh":"Sủng"}`,"i"],
+  [/phi tần.*ghen|ghen.*phi tần/i,()=>"Phi tần ghen","i"],
+  [/ghen|oán|ghét/i,w=>w?`${w}: oán`:"oán","i"],
+  [/tình ý/i,w=>w?`${w}: tình ý`:"tình ý"],
+  [/thế lực nhà\s*[+−-]\s?\d/i,()=>"Thế lực nhà"],/* kit-e-rows «KR thế lực nhà» (E25b, E28): HER OWN house only */
+  [/(^|[^\p{L}])thế lực\s*[+−-]\s?\d/iu,()=>"thế các nhà quyền thần đổi thay","n"],/* another house's thế lực: no gain side for her, so no marks (flag n) */
+  [/quý nhau/i,()=>"thiện cảm hai bên"],/* kit-cost-rows-home «quý nhau» */
+  [/Chủ tin/i,()=>"Chủ tin"],/* KIT REQUEST «Chủ tin» (E31r, or20-j68q): the servant stat NAMES.tin */
+  [/Hoàng thượng để ý/i,()=>"Hoàng thượng để ý"],
+  [/Gia thanh/i,()=>"Gia thanh"],
+  [/Áp lực hôn sự/i,()=>"Áp lực hôn sự","i"],
+  [/Lời đồn/i,()=>"Lời đồn","i"],
+  [/Hồi môn/i,()=>"Hồi môn"],
+  [/thân\b|thiện cảm|quý ngươi|quý ta/i,w=>w?`${w}: thiện cảm`:"thiện cảm"],
+  [/(^|\s|\()(lòng|Lòng)\s/,w=>w?`${w}: lòng`:"Lòng"],
+  [/thương con|hoàng tử|công chúa|các con/i,()=>"Hoàng thượng thương con"],
+  [/nghi ngươi|nghi ta|đa nghi|quở|cấm túc|giáng/i,(w,l,p)=>/nghi/.test(p)?"Hoàng thượng nghi":"Bị phạt","iw"],
+  [/Ân tình/i,()=>"Ân tình"],
+  [/Sủng|được ưa|đêm vui/i,()=>"Sủng"],
+  [/Danh/i,()=>"Danh"],
+  [/Đức/i,()=>"Đức"],
+  [/Bạc|lì xì/i,()=>"Bạc"],
+  [/Sức/i,()=>"Sức"],
+  [/Tai mắt/i,()=>"Tai mắt"],
+  [/Tâm cơ/i,()=>"Tâm cơ"],
+  [/Sắc|Tài\b|tài nghệ/i,(w,l,p)=>/Sắc/.test(p)?"Sắc":"Tài"],
+  [/Thái y|thuốc|bệnh|ốm/i,()=>"Thân thể","w"]];
  const num=/\d/.test(p)||/^(nàng|hắn|con nàng)\s/.test(p);
- for(const [re,U,Dn,fl] of T)if(re.test(p)&&(num||/w/.test(fl||""))){/* hostility: "+" is bad for her — the sign already says which; the words follow her side */
-   const L=/i/.test(fl||"")?(sg>0?Dn:U):(sg>0?U:Dn);if(!num){const s=story();return [L[0],s[1],s[2]]}/* a story phrase keeps its own words */
-   return L[2].includes("\u0001")?[L[0],L[1],L[1]]:L}
+ for(const [re,lab,fl] of T)if(re.test(p)&&(num||/w/.test(fl||""))){/* the sign printed is the stat's OWN: hostility «oán +» is bad for her, «oán −» is her gain */
+   const sgn=/i/.test(fl||"")?-sg:sg;const L=l=>/n/.test(fl||"")?lab(l>=2?who:"",l,p):`${lab(l>=2?who:"",l,p)} ${kitMk(sgn,p,l)}`;
+   if(!num){const s=story();return [L(0),s[1],s[2]]}/* a story phrase keeps its own words */
+   return [L(0),L(1),L(2)]}
  if(/[+−-]\s?\d/.test(p))return null;/* an unknown stat line: never guessed */return story()}
 function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(true):[]).concat((typeof S!=="undefined"&&S&&S.men)||[],(typeof S!=="undefined"&&S&&S.staff)||[]);
  for(const v of L)if(v&&v.name&&p.includes(v.name))return v.name;
  if(!/^(nàng|hắn|con nàng)\s/.test(p))return"";const w=m&&m.who;if(w&&w.w&&w.w[0]==="r"){const v=typeof RV==="function"?RV(w.w[1]):null;if(v)return v.name}if(w&&w.nm)return w.nm}catch(e){}return""}
 /* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
-const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nhà/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
-function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
 function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
  if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h}}
  const M=kitOptModel(o);const od=M.odds||"";const uniq=a=>[...new Set(a.filter(Boolean))];
  const sure=[],win=[],fail=[],side=[];let deadly=false;
- for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv]+(lv>=1&&!KIT_DEADLY.test(it.p)?kitHintMag(it.p):"");
+ for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv];/* WORDING-GAIN: the marks are inside the phrase (kitMk), no «(nhiều)» / «(chút ít)» */
   const isFail=it.l==="hỏng";if(KIT_DEADLY.test(it.p)&&(isFail||it.l==="kèm"||sg<0))deadly=true;
   if(it.l==="kèm"){side.push([w,sg]);continue}
   if(isFail&&!M.odds){if(sg<0)sure.push([w,sg]);continue}/* a CERTAIN option cannot fail: its "Mất:" is a sure price ("nhưng …"), never "hỏng thì …" (review pets-fix r6) */
@@ -298,7 +303,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
   (od?win:sure).push([w,sg])}
  const good=uniq(sure.concat(win).filter(x=>x[1]>0).map(x=>x[0])).slice(0,2),bad=uniq(sure.concat(side).filter(x=>x[1]<0).map(x=>x[0])).slice(0,2),sideGood=uniq(side.filter(x=>x[1]>0).map(x=>x[0])).slice(0,1);
  const parts=[];parts.push(good.length?good.concat(sideGood).join(", "):sideGood.length?sideGood.join(", "):bad.length||fail.length?"chẳng được gì":"không được mất gì");
- if(od&&lv>=1)parts.push(kitOddsIdx(od)>=5?"thường ổn":kitOddsIdx(od)<=2?"dễ hỏng":"hên xui");
+ if(od&&lv>=1)parts.push(od);/* WORDING-GAIN: the chance is the card's own odds ladder word (BAL.odds.cut), not a private 3-word map */
  if(bad.length)parts.push("nhưng "+bad.join(", "));
  const fl=uniq(fail).slice(0,2);if(fl.length&&(lv>=1||deadly))parts.push("hỏng thì "+(lv===0?(deadly?"mất mạng":fl[0]):fl.join(", ")));
  if(lv===2&&M.notes.length){const n=uniq(M.notes.filter(x=>!/^an toàn$/i.test(x))).slice(0,1);if(n.length)parts.push(n[0])}
