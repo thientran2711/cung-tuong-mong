@@ -400,3 +400,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 22:49Z R5 card-back fill e8126d18 (KIT_HAND.flip.fs 28→13 px step-fit, vertical centre) → MAIN LOOK PASS (Fold+iPad stills) → KK48 kit review → RV-163.
 - ~22:41Z (after roll) OWNER: khảo hạch fixed every 3 months + đại lễ extra → OD row → 165 + PACE-SPEED.
 - ~22:44Z (after roll) OWNER: max 7 not hard; keep >7 where needed, no paging; remove every «Thôi» card → OD row → 165, R5, KK48, RING-BUILD-6.
+- 22:55Z 164 relays (sếp wrote in 164 chat): ~22:40Z khảo hạch fixed every 3 mo + đại lễ extra → PACE-SPEED; ~22:43Z NO hard 7 cap (keep >7 where needed), still no paging, remove every «Thôi» card game-wide → R5 + KK48 + RING-BUILD-6 (OD rows by 164).
