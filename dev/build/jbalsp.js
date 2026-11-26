@@ -26,9 +26,9 @@ BAL.stp={on:1,
  bar:{sung:{f:"s",m:8,x:0,top:100},danh:{f:"d",m:8,x:0,top:100}}};/* m 6 → 8 (MAIN 164 ruling 26/11 ~22:25Z: with m 6 any fall dropped her under the bar = the #1 stall) */
 /* sếp's two options (report dev/handover/reports/stat-pace.md «Cách A / Cách B»): ONE switch BAL.stpPick. A = recommended (default);
    B = stricter: lower rank ceilings, steeper slowdown, at most 2 big events a day. */
-/* mean = the monthly drift of Danh / Đức / Sủng toward the mean of the consorts at the same rank (owner 26/11 ~23:00Z via MAIN 164; jstatpace spMeanMonth):
-   k = share of the gap closed each month (25 %), keys = the stats that drift. */
-BAL.stp.mean={on:1,k:.25,keys:["danh","duc","sung"]};
+/* scale = the monthly PROPORTIONAL rescale of Danh / Đức / Sủng per rank group (owner 26/11 ~23:00Z row via MAIN 164; jstatpace spScaleMonth):
+   t = share of the rank ceiling BAL.stp.ceil[rank] the group's highest value may hold (T, never under the next rank's bar for Sủng / Danh); keys = the stats. */
+BAL.stp.scale={on:1,t:.85,keys:["danh","duc","sung"]};
 BAL.stpPre={A:{ceil:[45,55,65,75,85,92,97,100],pow:3,cap:3},B:{ceil:[40,50,60,70,80,90,96,100],pow:2,cap:2}};
 BAL.stpPick="A";
 /* evc = ONE cap on the BIG events that reach her in one game day (tuần): festival (fixed date, always kept), harm / plots against her, people

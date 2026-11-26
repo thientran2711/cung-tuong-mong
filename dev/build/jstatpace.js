@@ -44,20 +44,19 @@ function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M
 var SP_OFF=0;
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){SP_OFF++;try{return s0.apply(this,arguments)}finally{SP_OFF--}}})();
 
-/* PACE-SPEED · DRIFT TO THE RANK MEAN (owner 26/11 ~23:00Z via MAIN 164, MAIN rec): once a month Danh / Đức / Sủng of her AND every consort move toward the
-   mean of the consorts holding the SAME rank: the gap above / below that mean shrinks by BAL.stp.mean.k (a share; no hard reset); a person alone at her
-   rank does not move. A rise stops at spTop (the rank ceiling rule above); the fraction carries per person (p.spc «mean:k»). Lãnh cung, the dead and
-   servants are left out. Co-op: NPCs move on the host only (world people, jmort rule); her own values move on her side. One line in the month's news
-   and her Sổ ghi when her own values move. Numbers BAL.stp.mean (jbalsp). */
-function spMeanMonth(){const B=BAL.stp&&BAL.stp.mean;if(!B||!B.on||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return"";
- const host=!(window.COOPW&&COOPW.on)||COOPW.seat==="a";const L=consorts().filter(p=>p&&!p.out&&p.alive!==false&&!(p===S&&S.dead));
+/* PACE-SPEED · PROPORTIONAL MONTHLY RESCALE (owner 26/11 ~23:00Z row, overwritten in place, via MAIN 164): once a month, for each of Danh / Đức / Sủng and
+   each RANK GROUP (the consorts holding the same rank, her included): if the group's highest value is above T, EVERY value in the group is multiplied by
+   f = T / highest — the order and the ratios stay (80 : 30 stays 8 : 3); else nothing. T = BAL.stp.ceil[rank] × BAL.stp.scale.t, but never under the NEXT
+   rank's bar for Sủng / Danh (RANKS.s / .d), so the leader can still be promoted. Lãnh cung, the dead and servants are left out. Co-op: NPC values change
+   on the host only (world people, jmort rule); her own on her side. One line in the month's news and her Sổ ghi when her own values change. */
+function spScaleT(k,r){const B=BAL.stp,C=B.ceil;let T=C[Math.max(0,Math.min(C.length-1,r|0))]*B.scale.t;const f={sung:"s",danh:"d"}[k];
+ if(f&&typeof RANKS==="object"&&(r|0)<RANKS.length-1)T=Math.max(T,RANKS[(r|0)+1][f]);return T}
+function spScaleMonth(){const B=BAL.stp&&BAL.stp.scale;if(!B||!B.on||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return"";
+ const host=!(window.COOPW&&COOPW.on)||COOPW.seat==="a";const L=consorts().filter(p=>p&&!p.out&&p.alive!==false);
  const G={};for(const p of L){const r=p===S?(S.rank|0):rkOf(p);(G[r]=G[r]||[]).push(p)}
  const mine=[];
- for(const r in G){const P=G[r];if(P.length<2)continue;
-  for(const k of B.keys){const m=P.reduce((a,p)=>a+(+p[k]||0),0)/P.length;
-   for(const p of P){if(p!==S&&!host)continue;const now=+p[k]||0,cc=p.spc||(p.spc={}),key="mean:"+k;let d=(m-now)*B.k+(+cc[key]||0);const di=Math.trunc(d);cc[key]=Math.round((d-di)*1000)/1000;
-    if(!di)continue;let n=di;if(n>0){const top=spTop(k,+r);n=Math.max(0,Math.min(n,top-now))}if(!n)continue;
-    p[k]=now+n;if(typeof statSet==="function")statSet(p,k,p[k]);else p[k]=cl(p[k],0,100);if(p===S)mine.push([k,n])}}}
+ for(const r in G){const P=G[r];for(const k of B.keys){const hi=Math.max(...P.map(p=>+p[k]||0)),T=spScaleT(k,+r);if(!(hi>T))continue;const f=T/hi;
+   for(const p of P){if(p!==S&&!host)continue;const now=+p[k]||0,nv=Math.round(now*f);if(nv===now)continue;p[k]=nv;if(typeof statSet==="function")statSet(p,k,p[k]);if(p===S)mine.push([k,nv-now])}}}
  if(!mine.length)return"";const N={sung:"Sủng",danh:"Danh",duc:"Đức"};
- const t=`Cả cung đem ngươi ra so với các ${RANKS[S.rank|0].n} khác: ${mine.map(([k,n])=>`${N[k]||k} ${n>0?"+":"−"}${Math.abs(n)}`).join(", ")}.`;log(t);return t+" "}
-(function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{ev+=spMeanMonth()}catch(e){console.error(e)}return ev}})();
+ const t=`Lục cung xếp lại thứ bậc trong hàng ${RANKS[S.rank|0].n}: ${mine.map(([k,n])=>`${N[k]||k} ${n>0?"+":"−"}${Math.abs(n)}`).join(", ")}.`;log(t);return t+" "}
+(function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{ev+=spScaleMonth()}catch(e){console.error(e)}return ev}})();

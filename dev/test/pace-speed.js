@@ -1,4 +1,4 @@
-/* pace-speed (owner OD 26/11 ~19:10Z rulings (A)+(D); MAIN 164 rulings 22:25Z; owner 21:20Z rare Emperor natural death):
+/* pace-speed (owner OD 26/11 ~19:10Z rulings (A)+(D); MAIN 164 rulings 22:25Z; owner 21:20Z rare Emperor natural death; owner 23:00Z monthly proportional rescale per rank group):
    unit checks on the built page — BAL.promo.gap read by promoGap, the Hoàng hậu block easing (qBlockAt), the Emperor's own lifespan curve. (Bar-tied stat ceilings: dev/test/stat-pace.js.)
    usage: node dev/test/pace-speed.js <index.html> → ok / FAIL lines, last line PASS / FAIL n; exit 1 on FAIL */
 const {chromium}=require('playwright');const path=require('path');
@@ -15,14 +15,14 @@ const {chromium}=require('playwright');const path=require('path');
   S.lastPromo=S.turn-B.after;ok(qBlockAt(S)===BAL.qBlockHh,`after ${B.after} months still ${BAL.qBlockHh}`);
   S.lastPromo=S.turn-B.after-4;ok(qBlockAt(S)===BAL.qBlockHh-4*B.ease,`4 months later eased by ${4*B.ease} → ${qBlockAt(S)}`);
   {const v=liveRivals(false)[0];if(v){v.lastPromo=S.turn-B.after-2;ok(qBlockAt(v)===BAL.qBlockHh-2*B.ease,"same easing for an NPC (law 1)")}}
-  /* drift to the rank mean (owner 26/11 ~23:00Z) */
-  {const M=BAL.stp.mean;const P=consorts().filter(p=>!p.out&&p.alive!==false);const r=S.rank|0;const same=P.filter(p=>p!==S&&rkOf(p)===r);
-   if(!same.length){const v=liveRivals(false)[0];v.rank=r;same.push(v)}
-   for(const v of same){v.danh=20;v.spc={}}S.danh=4;S.spc={};const m=[S].concat(same).reduce((a,p)=>a+p.danh,0)/(same.length+1);const s0=S.danh;
-   const t=spMeanMonth();const exp=(m-s0)*M.k;ok(Math.abs((S.danh-s0)-Math.min(exp,spTop("danh",r)-s0))<=1,`her Danh ${s0} → ${S.danh} toward the rank mean ${m.toFixed(1)} (k ${M.k})`);
-   ok(/so với các/.test(t),`one news line: «${t.trim()}»`);
-   const v=same[0];ok(v.danh<20,`an NPC above the mean moves down too (20 → ${v.danh})`);
-   const keep=S.danh;M.on=0;spMeanMonth();ok(S.danh===keep,"switch off → no drift");M.on=1}
+  /* proportional rescale per rank group (owner 26/11 ~23:00Z) */
+  {const C=BAL.stp.scale;const r=S.rank|0;let same=liveRivals(false).filter(v=>!v.out&&rkOf(v)===r);if(!same.length){const v=liveRivals(false)[0];v.rank=r;same=[v]}
+   const T=spScaleT("duc",r);const others=liveRivals(true).filter(v=>!v.out&&rkOf(v)===r);for(const v of others)v.duc=10;same[0].duc=80;S.duc=30;
+   const t=spScaleMonth();const f=T/80;ok(same[0].duc===Math.round(80*f)&&S.duc===Math.round(30*f),`group leader 80 → ${same[0].duc}, her 30 → ${S.duc} (T ${T.toFixed(1)}, ratio kept)`);
+   ok(/xếp lại thứ bậc/.test(t),`one news line: «${t.trim()}»`);
+   for(const v of others)v.duc=10;same[0].duc=Math.floor(T)-1;S.duc=20;const k0=S.duc;spScaleMonth();ok(S.duc===k0,"highest under T → nothing moves");
+   for(let rr=0;rr<7;rr++)ok(spScaleT("sung",rr)>=RANKS[rr+1].s&&spScaleT("danh",rr)>=RANKS[rr+1].d,`rank ${rr}: T Sủng ${spScaleT("sung",rr).toFixed(1)} / Danh ${spScaleT("danh",rr).toFixed(1)} ≥ next bar ${RANKS[rr+1].s} / ${RANKS[rr+1].d}`);
+   S.duc=99;same[0].duc=50;C.on=0;spScaleMonth();ok(S.duc===99,"switch off → nothing");C.on=1}
   /* Emperor curve */
   const D=BAL.mort.life.dice;ok(D.emp&&typeof D.emp==="object"&&D.emp.mean>D.adult.mean&&D.emp.sd>=D.adult.sd,`Emperor natural death rare + wide: ${JSON.stringify(D.emp)} (adult ${JSON.stringify(D.adult)})`);
   return R});
