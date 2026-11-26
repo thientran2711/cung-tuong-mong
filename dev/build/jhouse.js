@@ -53,12 +53,11 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  A.push(Object.assign({n:"Tiến cử",dom:"Sai bảo",o:100,c:{bac:-H.upBac,danh:-H.upDanh},x:"công lao lên bậc +5"},S.bac<H.upBac?{lock:true,t:`cần ${H.upBac} bạc`}:{},{open:()=>{const bf=rsnap();recommend(s.sid);pay(H.k);hsvDone("Tiến cử",bf,true)}}));
  A.push(Object.assign({n:"Đổi người",dom:"Sai bảo",o:100,fix:1,c:{bac:-H.swapBac,danh:-H.swapDanh},x:`trả ${nm.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ`,risk:`đuổi 2 người trong nửa năm: Danh -${H.swapTwiceDanh}${typeof servSellO==="function"&&servSellO(S,s)>0?` · ${he} đem chuyện của ngươi bán cho kẻ thù: ${chanceW(servSellO(S,s))}`:""}`},S.bac<H.swapBac?{lock:true,t:`thiếu bạc (cần ${H.swapBac})`}:{},{open:()=>{const bf=rsnap();servAct("doi",s.sid);pay(H.k);hsvDone("Đổi người",bf,true)}}));
  return A}
-/* ACT-MERGE J4: Thưởng · Phạt · Tha lỗi · Đổi người are ONE act «Thưởng phạt» on the stage too (same door as the Cung nhân card: j4ServDoor, jactj4.js).
-   Tra khảo and Che chở stay (evidence / rescue, shown only in their situation). The Dư đồ person view is closed first (jdayq gate c takes back a centre dialog painted inside it). */
-function hsvJudgeDoor(s,A){if(typeof j4ServDoor!=="function"||typeof j4FoldList!=="function")return A;/* ONE DOOR ENGINE: DOOR.fold (talk-list rule, via j4FoldList) + the same DOOR.card */
- return j4FoldList(A,{k:"sj",n:"Thưởng phạt",re:/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/},()=>({n:"Thưởng phạt",door:"sj",inner:1,dom:"Thưởng phạt",o:100,x:"chọn cách xử: thưởng / phạt / tha lỗi / đề bạt / đổi người"}),
-  ()=>{try{if(window.DF&&DF.F&&typeof dfGone==="function")dfGone()}catch(e){}j4ServDoor(s)})}
-(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{return hsvOn()?hsvJudgeDoor(p.ref,hsvActs(p.ref)):[]}catch(e){console.error(e);return[]}}
+/* ACT-MERGE J4: Thưởng · Phạt · Tha lỗi · Đổi người are ONE door «Thưởng phạt» on the stage — a row of J1's ONE DOOR ENGINE (jdoor.js DOOR.add; its talkOpts
+   fold, PEND «door» card and talk(-1-j) member path; each member keeps its own cost, lock and result). Tra khảo and Che chở stay (evidence / rescue).
+   jdoor.js loads after this file, so the row is added on the first servant list (before the outer fold reads it). */
+function hsvDoorRow(){try{const D=window.DOOR;if(D&&D.add&&!D.byK("sj"))D.add({k:"sj",n:"Thưởng phạt",kinds:["serv"],rep:null,h:"Chọn cách xử kẻ hầu này.",re:/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/})}catch(e){}}
+(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{hsvDoorRow();return hsvOn()?hsvActs(p.ref):[]}catch(e){console.error(e);return[]}}
   const A=t0.apply(this,arguments);
   /* family fix: her trusted maid's stage card gets the tab's "Giao việc phòng bị" too */
   try{if(p&&p.kind==="maid"&&S.maid&&hsvOn()&&Array.isArray(A)&&typeof def70m==="function"&&!A.some(a=>a&&/việc phòng bị/.test(a.n))){let od=null;try{od=ordOf70("maid")}catch(e){}

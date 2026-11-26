@@ -33,8 +33,10 @@ r=await E(()=>{AA.scen('cao');AA.restore(1);AA.show(AA.surfaces().find(s=>s.id==
  const d=document.querySelector('[data-ill="door"]');d.click();const o=Q[0].opts.map(x=>x.n+(x.off?'|off':''));const i=Q[0].opts.findIndex(x=>/Thái y viện/.test(x.n)&&!x.off);if(i>=0)chooseM(i);return {bs,o,next:Q[0]&&Q[0].t}});
 ok(r.bs.filter(x=>/Mua đồ/.test(x)).length===1&&!r.bs.some(x=>/Sai cung nữ|Hối lộ|Chợ đen/.test(x)),'Tư trang: one «Mua đồ»: '+r.bs.join(' | '));
 ok(/Thái y viện/.test(r.next||''),'way «Hối lộ người ở Thái y viện» opens the old item dialog: '+r.next);
-r=await E(()=>{AA.scen('cao');AA.restore(1);const s=S.staff[0];const A=talkOpts({kind:'serv',ref:s,sid:s.sid}).map(a=>a.n);const t=talkOpts({kind:'serv',ref:s,sid:s.sid}).find(a=>a.n==='Thưởng phạt');t.open();return {A,q:Q[0]&&Q[0].t}});
-ok(r.A.includes('Thưởng phạt')&&!r.A.some(x=>/^(Thưởng vô|Phạt vô|Đổi người)/.test(x)),'servant stage pop-up: one Thưởng phạt: '+r.A.join(' | '));ok(r.q==='Thưởng phạt','pop-up door opens the dialog');
+r=await E(()=>{AA.scen('cao');AA.restore(1);const s=S.staff[0];const L=talkOpts({kind:'serv',ref:s,sid:s.sid});const A=L.map(a=>a.n);const d=L.find(a=>a.n==='Thưởng phạt');
+ const row=DOOR.byK('sj');const M=d&&d.m?d.m.map(a=>a.n):[];return {A,door:d&&d.door,row:!!row&&row.n,M}});
+ok(r.A.includes('Thưởng phạt')&&!r.A.some(x=>/^(Thưởng vô|Phạt vô|Đổi người)/.test(x)),'servant stage pop-up: one Thưởng phạt: '+r.A.join(' | '));
+ok(r.door==='sj'&&r.row==='Thưởng phạt'&&r.M.length>=2,'stage door is a row of J1\'s engine (DOOR.byK sj), members: '+r.M.join(' / '));
 r=await E(()=>({priv:typeof j4Door,door:typeof DOOR==='object'&&typeof DOOR.card==='function'}));ok(r.priv==='undefined'&&r.door,'ONE DOOR ENGINE: no private runner j4Door, cards come from DOOR.card');
 r=await E(()=>{AA.scen('cao');AA.restore(1);AA.show(AA.surfaces().find(s=>s.id==='inv'));Q.length=0;document.querySelector('[data-ill="door"]').click();return {act:Q[0]&&Q[0].act,last:Q[0]&&Q[0].opts[Q[0].opts.length-1].n}});ok(r.act===1&&r.last==='Thôi','door card = act picker (act flag) with ✕ Thôi row');
 ok(perr.length===0,'0 page errors '+JSON.stringify(perr));

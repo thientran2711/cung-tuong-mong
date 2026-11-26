@@ -12,9 +12,6 @@ const j4Row=(c,go)=>Object.assign({n:c.n,x:c.sm||c.x||"",go},c.why?{off:{why:Str
 /* J1's fold through DOOR.fold, with the rule of J1's person talk lists (doorFold): a door when ≥ 2 ways are PRESENT; it is locked when none can be
    used now (its reason = the first way's); fewer than 2 ways: the old buttons stay as they were. Members are counted as present, not as usable. */
 function j4Fold(key,name,ways){const D=window.DOOR;if(!D||!D.fold)return false;const F=D.fold(ways.map(w=>({n:w.n})),[{k:key,n:name,re:/[\s\S]/}]);return F.some(a=>a&&a.door)}
-function j4FoldList(A,row,mk,open){const D=window.DOOR;if(!D||!D.fold||!Array.isArray(A))return A;
- const P=A.map(a=>a&&!a.door&&row.re.test(String(a.n||""))?{n:a.n,_a:a}:a);
- return D.fold(P,[row],{mk:(r,M)=>{const d=mk(r,M);const real=M.map(x=>x._a);if(real.every(x=>x.lock)){d.lock=true;d.t=real[0].t||"chưa làm được"}return d},open})}
 const j4Why=W=>W.every(w=>w.why)?String(W[0].why):"";
 /* capture the raw (attrs, name, small, why) of every pbtn a builder makes, so a door can list the same ways without re-deriving a number */
 function j4Capture(fn){const cap=[],p0=pbtn;pbtn=function(at,n,sm,why){cap.push({at,n,sm,why});return p0.apply(this,arguments)};let r;try{r=fn()}finally{pbtn=p0}return{r,cap}}
@@ -87,9 +84,4 @@ j4Merge("kidCard",[
 /* the new door names borrow the picture of the meaning group they fold (owner 15/11: one picture per meaning group); ACTS.json wins when it gains the same title */
 try{Object.assign(KIT_ACT_ALIAS,{"Học":"luyen-cam-ky","Dạy con":"day-con-hoc","Chăm con":"chua-benh-con","Thêm người":"chon-nguoi"})}catch(e){}
 
-/* ---- entry point for the servant STAGE pop-up (J2's dfActs / jhouse hsvActs): the SAME «Thưởng phạt» door as the Cung nhân card.
-   j4ServDoor(s) opens the dialog for servant s (Thưởng · Phạt · Tha lỗi · Đề bạt · Đổi người; only the ways that exist for her now). ---- */
-function j4ServDoor(s){if(!s||!S||S.dead||Q.length)return;const{cap}=j4Capture(()=>{try{servJudgeBtns(s)}catch(e){}pbtn(`data-sv="doi" data-sid="${s.sid}"`,"Đổi người",`tốn: Bạc -${BAL.house.swapBac}`,S.bac<BAL.house.swapBac?"thiếu bạc":"")});
- const W=cap.filter(c=>/^(?:data-sj="(?:thuong|phat|tha)"|data-sv="doi") data-sid=|^data-dbsv=/.test(c.at));if(!W.length)return;
- j4Card("Thưởng phạt","Chọn cách xử kẻ hầu này.",W.map(c=>j4Row(c,()=>j4Tap(c.at,c.n))))}
-window.j4ServDoor=j4ServDoor;
+/* the servant STAGE pop-up: its «Thưởng phạt» is a row of J1's engine (jhouse.js hsvDoorRow → DOOR.add), not a door of this file. */

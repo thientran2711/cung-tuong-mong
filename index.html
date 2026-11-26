@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"88bf13b9+","t":"2026-11-26T10:00Z","c":"Bớt minigame: điểm trang một lần bấm theo Dung (còn nút «Tự tay điểm trang»); tát và né thành một lần gieo; «Học nhanh» lên Tùy duyên; chăm…","b":"6a31442fe84c","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"f2d4961c+","t":"2026-11-26T10:07Z","c":"Bớt minigame: điểm trang một lần bấm theo Dung (còn nút «Tự tay điểm trang»); tát và né thành một lần gieo; «Học nhanh» lên Tùy duyên; chăm…","b":"644cee39e4f6","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -77854,12 +77854,11 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  A.push(Object.assign({n:"Tiến cử",dom:"Sai bảo",o:100,c:{bac:-H.upBac,danh:-H.upDanh},x:"công lao lên bậc +5"},S.bac<H.upBac?{lock:true,t:`cần ${H.upBac} bạc`}:{},{open:()=>{const bf=rsnap();recommend(s.sid);pay(H.k);hsvDone("Tiến cử",bf,true)}}));
  A.push(Object.assign({n:"Đổi người",dom:"Sai bảo",o:100,fix:1,c:{bac:-H.swapBac,danh:-H.swapDanh},x:`trả ${nm.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ`,risk:`đuổi 2 người trong nửa năm: Danh -${H.swapTwiceDanh}${typeof servSellO==="function"&&servSellO(S,s)>0?` · ${he} đem chuyện của ngươi bán cho kẻ thù: ${chanceW(servSellO(S,s))}`:""}`},S.bac<H.swapBac?{lock:true,t:`thiếu bạc (cần ${H.swapBac})`}:{},{open:()=>{const bf=rsnap();servAct("doi",s.sid);pay(H.k);hsvDone("Đổi người",bf,true)}}));
  return A}
-/* ACT-MERGE J4: Thưởng · Phạt · Tha lỗi · Đổi người are ONE act «Thưởng phạt» on the stage too (same door as the Cung nhân card: j4ServDoor, jactj4.js).
-   Tra khảo and Che chở stay (evidence / rescue, shown only in their situation). The Dư đồ person view is closed first (jdayq gate c takes back a centre dialog painted inside it). */
-function hsvJudgeDoor(s,A){if(typeof j4ServDoor!=="function"||typeof j4FoldList!=="function")return A;/* ONE DOOR ENGINE: DOOR.fold (talk-list rule, via j4FoldList) + the same DOOR.card */
- return j4FoldList(A,{k:"sj",n:"Thưởng phạt",re:/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/},()=>({n:"Thưởng phạt",door:"sj",inner:1,dom:"Thưởng phạt",o:100,x:"chọn cách xử: thưởng / phạt / tha lỗi / đề bạt / đổi người"}),
-  ()=>{try{if(window.DF&&DF.F&&typeof dfGone==="function")dfGone()}catch(e){}j4ServDoor(s)})}
-(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{return hsvOn()?hsvJudgeDoor(p.ref,hsvActs(p.ref)):[]}catch(e){console.error(e);return[]}}
+/* ACT-MERGE J4: Thưởng · Phạt · Tha lỗi · Đổi người are ONE door «Thưởng phạt» on the stage — a row of J1's ONE DOOR ENGINE (jdoor.js DOOR.add; its talkOpts
+   fold, PEND «door» card and talk(-1-j) member path; each member keeps its own cost, lock and result). Tra khảo and Che chở stay (evidence / rescue).
+   jdoor.js loads after this file, so the row is added on the first servant list (before the outer fold reads it). */
+function hsvDoorRow(){try{const D=window.DOOR;if(D&&D.add&&!D.byK("sj"))D.add({k:"sj",n:"Thưởng phạt",kinds:["serv"],rep:null,h:"Chọn cách xử kẻ hầu này.",re:/^(Thưởng|Phạt|Tha lỗi|Đổi người$)/})}catch(e){}}
+(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{hsvDoorRow();return hsvOn()?hsvActs(p.ref):[]}catch(e){console.error(e);return[]}}
   const A=t0.apply(this,arguments);
   /* family fix: her trusted maid's stage card gets the tab's "Giao việc phòng bị" too */
   try{if(p&&p.kind==="maid"&&S.maid&&hsvOn()&&Array.isArray(A)&&typeof def70m==="function"&&!A.some(a=>a&&/việc phòng bị/.test(a.n))){let od=null;try{od=ordOf70("maid")}catch(e){}
@@ -92676,9 +92675,6 @@ const j4Row=(c,go)=>Object.assign({n:c.n,x:c.sm||c.x||"",go},c.why?{off:{why:Str
 /* J1's fold through DOOR.fold, with the rule of J1's person talk lists (doorFold): a door when ≥ 2 ways are PRESENT; it is locked when none can be
    used now (its reason = the first way's); fewer than 2 ways: the old buttons stay as they were. Members are counted as present, not as usable. */
 function j4Fold(key,name,ways){const D=window.DOOR;if(!D||!D.fold)return false;const F=D.fold(ways.map(w=>({n:w.n})),[{k:key,n:name,re:/[\s\S]/}]);return F.some(a=>a&&a.door)}
-function j4FoldList(A,row,mk,open){const D=window.DOOR;if(!D||!D.fold||!Array.isArray(A))return A;
- const P=A.map(a=>a&&!a.door&&row.re.test(String(a.n||""))?{n:a.n,_a:a}:a);
- return D.fold(P,[row],{mk:(r,M)=>{const d=mk(r,M);const real=M.map(x=>x._a);if(real.every(x=>x.lock)){d.lock=true;d.t=real[0].t||"chưa làm được"}return d},open})}
 const j4Why=W=>W.every(w=>w.why)?String(W[0].why):"";
 /* capture the raw (attrs, name, small, why) of every pbtn a builder makes, so a door can list the same ways without re-deriving a number */
 function j4Capture(fn){const cap=[],p0=pbtn;pbtn=function(at,n,sm,why){cap.push({at,n,sm,why});return p0.apply(this,arguments)};let r;try{r=fn()}finally{pbtn=p0}return{r,cap}}
@@ -92751,12 +92747,7 @@ j4Merge("kidCard",[
 /* the new door names borrow the picture of the meaning group they fold (owner 15/11: one picture per meaning group); ACTS.json wins when it gains the same title */
 try{Object.assign(KIT_ACT_ALIAS,{"Học":"luyen-cam-ky","Dạy con":"day-con-hoc","Chăm con":"chua-benh-con","Thêm người":"chon-nguoi"})}catch(e){}
 
-/* ---- entry point for the servant STAGE pop-up (J2's dfActs / jhouse hsvActs): the SAME «Thưởng phạt» door as the Cung nhân card.
-   j4ServDoor(s) opens the dialog for servant s (Thưởng · Phạt · Tha lỗi · Đề bạt · Đổi người; only the ways that exist for her now). ---- */
-function j4ServDoor(s){if(!s||!S||S.dead||Q.length)return;const{cap}=j4Capture(()=>{try{servJudgeBtns(s)}catch(e){}pbtn(`data-sv="doi" data-sid="${s.sid}"`,"Đổi người",`tốn: Bạc -${BAL.house.swapBac}`,S.bac<BAL.house.swapBac?"thiếu bạc":"")});
- const W=cap.filter(c=>/^(?:data-sj="(?:thuong|phat|tha)"|data-sv="doi") data-sid=|^data-dbsv=/.test(c.at));if(!W.length)return;
- j4Card("Thưởng phạt","Chọn cách xử kẻ hầu này.",W.map(c=>j4Row(c,()=>j4Tap(c.at,c.n))))}
-window.j4ServDoor=j4ServDoor;
+/* the servant STAGE pop-up: its «Thưởng phạt» is a row of J1's engine (jhouse.js hsvDoorRow → DOOR.add), not a door of this file. */
 /* jmgx — GAP MG11 · THE MINI-GAMES OUTSIDE KG82_KIND JOIN «THỬ TAY» (owner OD 20/11 ~08:40Z scan, ~08:45Z makeup held; ORDER MAIN ROOT-79 16:25Z:
    "put the mini-games outside KG82_KIND (mưu kế boards, real Cờ j5 gKy, jkc2 envoy chess, pet care, plant care) into Thử tay so they feed hand b like the other kinds").
    ★ 18 LAWS (dev/rules/START_CORE.md). Numbers: BAL.mgTier.lev.<kind> (jbal2.js) only. Scan table + reasons: dev/handover/reports/mg11-thutay.md.
@@ -100641,7 +100632,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6a31442fe84c";window.CTM_BUILD=BUILD;
+const BUILD="644cee39e4f6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
