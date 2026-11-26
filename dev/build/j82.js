@@ -465,7 +465,8 @@ function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x
         only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it at once;
      3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): NO confirm (OD 24/11 ~08:08Z), straight
         the caller's OWN lose path with 0/10 — during play KG82.quit() (kg82Play / sgEng / j92 / jroute / jtoil end their run with 0), on the rules
-        screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock); «Hướng dẫn» is put back first.
+        screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock).
+     During «Hướng dẫn» none of 0–3 runs (E95, owner OD 26/11 ~01:25Z): the ✕ = «Về luật chơi».
    Callers never draw their own back button;
    kg82Close clears back / quit / xdo. Test: node dev/test/mg-back.js. */
 function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector(".kit-x[data-kitx=kgback]"))return;const h=d.querySelector(".kph");
