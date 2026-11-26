@@ -19,10 +19,10 @@ const {chromium}=require('playwright');const path=require('path');const F=path.r
  ok(info.kc,`${D}: the life starts at home (isKc)`);const me=info.frames.filter(x=>x.where==='me-p');ok(me.length&&me.every(x=>!x.crest&&!x.gem),`${D}: header portrait at home: no crest, no gem ${JSON.stringify(me)}`);
  if(SH)await p.screenshot({path:`${SH}/home-${W}.png`});
  await p.evaluate(()=>{const e=document.getElementById('me-p');if(e)e.click()});await sleep(2500);
- const id=await p.evaluate(()=>{const M=document.getElementById('modal');return {open:!M.hidden,fr:[...M.querySelectorAll('img.kfr')].filter(f=>/consort/.test(f.src)).map(f=>({crest:!!f.parentElement.querySelector('.kcrest'),gem:!!f.parentElement.querySelector('.kgem')}))}});
+ const id=await p.evaluate(()=>{const M=document.getElementById('modal');return {open:!M.hidden,fr:[...M.querySelectorAll('img.kfr')].filter(f=>/frame-(consort|home|dan|princess)/.test(f.src)).map(f=>({crest:!!f.parentElement.querySelector('.kcrest'),gem:!!f.parentElement.querySelector('.kgem')}))}});
  ok(id.open&&id.fr.length&&id.fr.every(x=>!x.crest&&!x.gem),`${D}: identity card at home: her frame has no crest, no gem ${JSON.stringify(id)}`);if(SH)await p.screenshot({path:`${SH}/home-id-${W}.png`});
- /* home kinds (KIT_HOME_FRAME by kc2D): a foreign princess at her own court → frame-princess; thôn nữ → plain consort-0; never a crest / gem */
- for(const [kd,want] of [["nc","frame-princess"],["dan","frame-consort-0"],["","frame-consort-0"]]){const r=await p.evaluate(kd=>{for(let i=0;i<6&&Q.length;i++)closeModal();const M=document.getElementById('modal');if(M)M.hidden=true;const k0=S.kc.kd;S.kc.kd=kd;render();
+ /* home kinds (KIT_HOME_FRAME by kc2D): a foreign princess at her own court → frame-princess; thôn nữ → frame-dan, tiểu thư → frame-home (K-FRAME-HOME, KK41); never a crest / gem */
+ for(const [kd,want] of [["nc","frame-princess"],["dan","frame-dan"],["","frame-home"]]){const r=await p.evaluate(kd=>{for(let i=0;i<6&&Q.length;i++)closeModal();const M=document.getElementById('modal');if(M)M.hidden=true;const k0=S.kc.kd;S.kc.kd=kd;render();
    const e=document.getElementById('me-p');const f=e&&e.querySelector('img.kfr');const o={fr:f&&f.src.split('/').pop(),crest:!!(e&&e.querySelector('.kcrest')),gem:!!(e&&e.querySelector('.kgem'))};S.kc.kd=k0;return o},kd);
   ok(r.fr===want+'.webp'&&!r.crest&&!r.gem,`${D}: home kind «${kd||'tiểu thư'}» → ${want}, no crest/gem ${JSON.stringify(r)}`)}
  await p.evaluate(()=>{for(let i=0;i<6&&Q.length;i++)closeModal();const M=document.getElementById('modal');if(M)M.hidden=true;window.__kcdbg=JSON.stringify(Object.keys(S.kc||{})).slice(0,80)+' isKc='+isKc();if(S.kc)S.kc.inPal=true;render()});await sleep(1500);
