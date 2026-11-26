@@ -101,10 +101,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(NF)ok(xa.d===r.d&&xb.d===r.d&&xa.t===(want==='npc'?r.npc:want)&&xb.t===(want==='npc'?r.npc:want),tag+': that day\'s played tối is held by '+want+' on both seats (jnf nfX), no flip choice',{xa,xb,rec});
   ok(want==='host'?ea-n0.a===1&&eb-n0.b===0:want==='guest'?eb-n0.b===1&&ea-n0.a===0:ea-n0.a===0&&eb-n0.b===0,tag+': exactly the winner\'s seat gets +1 night',{host:ea-n0.a,guest:eb-n0.b});
   await shot(X,'ctn-'+tag)}
+ if(process.env.C4FIRST)await day('C4','a','npc','npc');
  await day('C1','a','me','host');
  if(!process.env.ONLY1){await day('C2','a','f','guest');if(process.env.STOP2){console.log('DUMPB',JSON.stringify(await B.p.evaluate(()=>({Q:Q.map(q=>q.pid||q.t),modal:!document.getElementById('modal').hidden&&document.getElementById('mt').textContent,ntk:S.ntk,tonight:S.tonight,nfN:S.nfN,nfX:S.nfX,nfFin:S.nfFin,nfW:S.nfW,wk:wk(),buoi:S.buoi,kmov:[...document.querySelectorAll('.kmov,#kneov')].map(x=>x.id||x.className.slice(0,40)),logs:(S.logs||[]).slice(0,12).map(x=>String(x).replace(/<[^>]+>/g,'').slice(0,120))}))));process.exit(0)}
  await day('C3','b','me','guest');
- await day('C4','a','npc','npc')}
+ if(!process.env.C4FIRST)await day('C4','a','npc','npc')}
  const fails=res.filter(x=>!x[0]);console.log(`\n${res.length-fails.length}/${res.length} ok`);if(fails.length)console.log('FAILS:',fails.map(x=>x[1]).join(' | '));
  console.log('page errors:',JSON.stringify({host:A.errs.slice(0,5),guest:B.errs.slice(0,5)}));
  await b.close();process.exit(fails.length?1:0)})();
