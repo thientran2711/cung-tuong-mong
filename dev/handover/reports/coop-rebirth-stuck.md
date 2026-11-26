@@ -261,3 +261,8 @@ Verdict giver wipes: `python3 dev/site/cdn_sync.py --wipe-review dayq-qsoftlock`
 ### SEPARATE FINDINGS for D (no fix here)
 1. dayq-break FAIL 4 identical on LIVE (S.mg + data-coopWait rows, both devices: «after 2×wake disabled false, healed +0, render calls 1») → some other render() re-enables #next in those states; pre-existing.
 2. dayq-hold-coop is unstable on LIVE b881686f (17/17 once, 7/15 once): seats sometimes reach a state where the kit «Nhận» scene / toil button does not open and the room week does not merge. Test setup or co-op flow; needs its own owner.
+
+### #5 update (21:55Z) — LIVE moved 3× during the chain; FINAL = 8acabdd1, BIG rv PASS
+- 886c1c1b = merge LIVE f573dc94; 139a6583 = merge LIVE 53319e6f (both built files only). Chain ALONE on 139a6583: hold-coop 4/16 (same guest rows as LIVE f573dc94 4/16), held A–L 0 FAIL, K×6 ALL PASS, coop-e2e 143/143, quickcheck PASS (open 1918 ms, old save ok, render 199/190, tab 495/513, buổi 1461/967, tasks>200 24/23), J/K/L video run ALL PASS; videos re-recorded on 139a6583 (same URLs; looked at: Bổng lộc · Nhận, «Buổi tối» flip, «Sang ngày mới» enabled at the end).
+- RV merged LIVE 03a8c17c (renderer-mem) = **8acabdd1** (built files only) and re-ran held A–L / coop-e2e ×2 / quickcheck on it: **PASS 8acabdd1** (dev/handover/reports/dayq-qsoftlock-review.md). Verified: head == 8acabdd1, LIVE 03a8c17c is ancestor (FF), contains 139a6583.
+- **LAND READY review/dayq-qsoftlock 8acabdd1** written into MAIN_STATUS + FOREMAN_D_STATUS (for MAIN 164).
