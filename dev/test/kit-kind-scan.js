@@ -26,7 +26,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    ['palCeremony',`(()=>{S.palCer=1;S.pal=0;try{palCeremony()}catch(e){}showModal()})()`],
    ['hireCard',`(()=>{try{npool().maid=[0,1,2].map(i=>({name:["Lan","Cúc","Mai"][i],age:16+i,org:"Giang Nam",imp:"hiền",sid:900+i}));hireCard("maid")}catch(e){console.log(e)}showModal()})()`],
    ['eaScoldPick',`(()=>{const L=(S.staff||[]).filter(s=>s.role==="maid");try{eaScoldPick(L.length>=2?L:[{name:"Lan",loyal:50,role:"maid",sid:901},{name:"Cúc",loyal:40,role:"maid",sid:902}],{mood:5,loy:3})}catch(e){console.log(String(e))}showModal()})()`],
-   ['rg c2a (join a side)',`(()=>{if(rgFire('c2a')){Q.length=1;showModal()}})()`],['rg c1b (court choice)',`(()=>{if(rgFire('c1b')){Q.length=1;showModal()}})()`]];
+   ['rg c2a (join a side)',`(()=>{if(rgFire('c2a')){Q.length=1;showModal()}})()`],['rg c1b (court choice)',`(()=>{if((()=>{try{S.evc=null;EVCW.length=0}catch(e){}/* clean day: LIVE jevc daily cap */return rgFire('c1b')})()){Q.length=1;showModal()}})()`]];
   for(const [nm,js] of B){await p.evaluate(()=>{try{deser(JSON.parse(window.__covSnap))}catch(e){}Q.length=0});await p.evaluate(js).catch(()=>{});await probe(nm);await close()}
   await ctx.close()}
  await b.close();let bad=0;

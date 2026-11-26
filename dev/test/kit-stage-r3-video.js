@@ -19,7 +19,7 @@ const DEV=[["fold",755,1000],["ipad",1180,820]];
   await p.waitForFunction(()=>!/Sửa soạn nhập cung/.test(document.body.innerText),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2000);
   await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],#kxcatch,.kmov,#kroulw,#kdaytc,#klife{display:none!important}'});
   const o={};
-  if(vid==='banbai'){o.fired=await p.evaluate(()=>{for(let k=0;k<4;k++){Q.length=0;document.getElementById('modal').hidden=true;if(rgFire('c1b')){Q.length=1;showModal();return true}}return false});
+  if(vid==='banbai'){o.fired=await p.evaluate(()=>{for(let k=0;k<4;k++){Q.length=0;document.getElementById('modal').hidden=true;if((()=>{try{S.evc=null;EVCW.length=0}catch(e){}/* clean day: LIVE jevc daily cap */return rgFire('c1b')})()){Q.length=1;showModal();return true}}return false});
    await p.waitForTimeout(2600);await shot('dealt');o.figs=await p.evaluate(()=>[...document.querySelectorAll('#modal .kstg-fig')].map(f=>f.className.replace('kstg-fig ','')).join('+'));
    await tapEl('#modal .opts.khand>button.kopt',0);await p.waitForTimeout(1600);await shot('lift 1');o.lift1=await p.evaluate(()=>!!document.querySelector('#modal .opts.khand>button.klift'));
    await tapEl('#modal .dlg>.khconf>.khx');await p.waitForTimeout(1000);await shot('put back');
