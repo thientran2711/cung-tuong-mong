@@ -308,3 +308,19 @@ Scope: merge delta only (543ca579 content already PASSED, not re-reviewed).
 Laws touched by a merge: 4 ok (vpConf stays a BAL key) · 11 ok (no side dropped, no spot edit) · 13 ok (merge of LIVE, reuses both reviewed sides) · 14 ok (one version of each rule/function).
 Result: **PASS a332cd89c4418979d8d74b309da5a65c51872ce7** (review/mg-trim-r6, FF from LIVE aa37de21). No code changed by the reviewer.
 Delta 2 (test-only, asked by D5 #4): **PASS 4ecc3ce6** = a332cd89 + dev/test/next-dead.js L66 (part B leaves the restored lesson by /^(Bỏ qua|Học nhanh)/: the gate's missed member of mg-trim's «Học nhanh» rename). Only that file changed; index.html/sw.js/assets.json = a332cd89; still FF from LIVE aa37de21. Group scan of dev/test, dev/tools, dev/measure: the other «Bỏ qua» taps are roulette / tour / intro skips; sangbuoi-held.js #ov picker falls back to the next/close button / bs[0], so it does not hang (not a miss). Run on 4ecc3ce6 built root: next-dead.js fold + ipad → B 4/4 each, errs [], FIX-6 PASS (A skipped without NEXT_SAVE, as in the worker's run). Laws 11/13/14 ok. Shots deleted.
+
+## LAND READY review/mg-trim-r6 4ecc3ce612b44ee7a840cd06bf4c5a1e48c7c781 (FF from LIVE aa37de21) — worker D5 #4, 26/11 ~15:00Z
+- Route = BIG rv #5 PASS 543ca579 (Foreman D: NOT b49f190e). No harness rule of my own was added.
+- a332cd89 = merge of LIVE aa37de21 (jshelf union; CHANGE.txt = mg-trim line; built files rebuilt) → **MERGE DELTA rv PASS** (session_01D3E3NYAK26TBdFwfWFcrij).
+- 4ecc3ce6 = test-only, dev/test/next-dead.js L66. Quickcheck gate 95 part B left the restored lesson by «Bỏ qua»; mg-trim renamed a learning game's quick to «Học nhanh · Tùy duyên», so on the branch the gate FAILed Fold+iPad (LIVE passes). The regex is now /^(Bỏ qua|Học nhanh)/ — the member missed from the rename group (mg-skip / mg-skip-audit / delegate-nomg were already done). Group scan of dev/test, dev/tools, dev/measure: no other hits. **Delta rv PASS 4ecc3ce6**. Build unchanged from a332cd89.
+- Foreman B's review/coop-reg9-route 5af1ed9f rides inside (ancestor via 543ca579) — it must NOT land separately.
+Tests (local wrangler :8791 = LIVE coop/worker, same machine):
+| test | branch (a332cd89 build = 4ecc3ce6 build) | LIVE aa37de21 |
+|---|---|---|
+| coop-e2e | **143/143** | — |
+| coop-thin-f4 L9 (same harness = branch's, incl. B's lives()) | 20/20 · 19/20 | 20/20 · 20/20 |
+| next-dead (gate 95) | FIX-6 PASS ×3 (after 4ecc3ce6) | FIX-6 PASS |
+| mg-trim.js Fold 755x1000@2 + iPad 1180x820@2 | 38/38 ×3 (1 earlier run: iPad test 6 behind a «Mệnh truyện kiếp này» card = known harness flake, as in BUILD #7) | — |
+| quickcheck 4ecc3ce6 | open 2285 ms 0 errors · old save ok · perf new/live render 237/302, buổi 1725/1965 · gates FAIL only on the known LIVE faults: dialog-fixed «kit-dialog-2 a» + crawl «Ô lưu · Lui» | (known LIVE) |
+- f4 branch 19/20: the only FAIL = «no page errors», host console «jptime ordCard TypeError … reading 'n' at places» (RANKS[v.rank] undefined). This is pre-existing on LIVE (coop-reg9-route report OPEN 3: places/rkName «reading 'n'»); mg-trim does not touch j2.js. P1–P3 did not flip in these 4 runs on either tree (no flips to show).
+Videos (fresh, 4ecc3ce6 build, clean 38/38 run): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-755x1000.webm · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-trim/mg-trim-1180x820.webm
