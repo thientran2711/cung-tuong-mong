@@ -33,6 +33,19 @@ Known difference (law 6c holds): a road that picks «a random piece» of a perso
 | «Dâng quà» / «Biếu quà làm lành» DOM | ~37k (one hidden card per entry) | 2,319 / 2,226 (KIT REQUEST K-LIST-PAGE for < 2k) |
 | page DOM (bag open) | 43,526 (F) | ~4.1k |
 
+## Gates (sha of this report's commit; runs on this box, Fold 755x1000 + iPad 1180x820)
+| gate | result | main 6b5d3d05 (LIVE) baseline |
+|---|---|---|
+| dev/test/inv-stack.js (s7 save, F's robot) | 22/24 ok — the 2 FAIL = gift-picker DOM 2,319 / 2,226 > 2,000 (was ~37k, −94 %; KIT REQUEST K-LIST-PAGE, Foreman B: land without it, follow-up wiring) | — |
+| inv-stack MUTATE (count ignored / fold drops a piece) | both caught | — |
+| dev/test/inv-stack-scan.py | RAW sites 0 · listed 8 (not a chest) | 115 raw |
+| coop-e2e SWAP0 (Fold host) / SWAP1 (iPad host), LIVE Worker | 143/143 · 143/143 | — |
+| save-unseen-lists (from review/save-pid-cards, run on this build) | FAIL 30/32 | FAIL 30/32, same cases (gate needs the save-pid-cards stack) |
+| save-boundary-reload (same) | FAIL 16/24 | FAIL 16/24; only iPad day-0s / year-0s swap pass/fail between runs (0 s reload timing, flaky on both) |
+| quickcheck ALONE | runtime PASS (open 1,990 ms, old save loads + plays a buổi, perf new/live render 239/251 ms, tab 508/486, buổi 1,554/1,234, tasks>200 ms 31/31); CORE GATE G4 80-dialog-fixed FAIL 2 | G4 dialog-fixed FAIL 2 on LIVE too, same 2 checks («kit-dialog-2 a: no empty Tốn / Được cell», Fold + iPad): pre-existing, not this branch |
+Shots (outside git, looked at 3×): bag Fold + iPad — candles «×518», cloth / tea / coal tiles ×N, tab counts «Tất cả 1438»; gift pickers — one tile per kind with the kit ×N badge. Not this branch's: the dialog's «Đáp ứng Cố Tuyết Kiến» figure label wraps word by word on Fold/iPad in «Biếu quà» (same on LIVE).
+Risks: (1) a wrapper that compares S.inv.length across a call that renders could see a piece come out of the stack as «added» (invTop only refills after a piece left; none found in the scan of the 20 length-delta wrappers acting on render); (2) random-pick roads pick among real pieces (see above). Rollback: BAL.stack.on=false stops folding; stacks already made still count and still come out.
+
 ## Readers of S.inv / p.inv (law 11 scan: 927 `inv` reads in dev/build, `/home` list from `grep -n '\binv\b' dev/build/j*.js`)
 Per-piece readers (find / splice / indexOf / some / iterate one piece: use, give, gift, sell one, steal, confiscate, plant, wear, ledger census + guards, co-op fam/b4 ops, lost cases …) work on the REAL pieces and are unchanged by design — the stack keeps ≤ live real pieces out (invTop at the start/end of every turn, before every render, before every list below), so «has one / take one» behaves as before. Readers that COUNT or list per piece were changed:
 | site | before | after |
