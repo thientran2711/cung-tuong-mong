@@ -120,6 +120,17 @@ CW.gBlob=function(){if(!on()||!host())return null;const seat=other();let st=null
  s.thpn=(D.N&&D.N[seat])||0;
  const p=st.pers||{};s.empKnown=(p.kn&&p.kn[0])||{};s.cmP=J(p.cm||{});s.menP=J(p.men||{});G.stat.blob++;
  return {pid:902,ok:st.ok||(s.origin&&s.origin.k)||"tt",name:s.name,rank:s.rank,dead:!!s.dead,srv:!!(s.srv&&!s.srv.risen),life:st.life||0,S:s}};
+/* coop-afk-l13 OPEN 2 (MAIN 159 «NO replay»): her week end ran HERE (G.done) and lives only in this page's memory (her store ST): a host reload
+   before his `end` lost it, so the restored host either replayed the week (pend copy refused) or ran her week end a second time on the room's
+   week-start person (her cards and patches twice, law 6c). Kept beside his own week copy (same snapSave moment, this device only, never in the
+   seat copy): her store as his toCanon writes it (CW.gBlob). CW.gBack(week) = the way to put it back (jcoopworld CW.restore, own copy only). */
+const GK="ctm-coop-gwk";
+{const f=CW.snap;if(typeof f==="function")CW.snap=function(){const o=f.apply(this,arguments);try{if(o&&on()&&host()&&!CW.ctx){const w=wkR();
+  if(G.done[w]){const b=CW.gBlob();if(b)localStorage.setItem(GK,JSON.stringify({room:COOP.state.room,week:w,b}))}}}catch(e){}return o}}
+CW.gBack=function(w){if(!host())return null;/* not on(): right after a reload the room's level may not have arrived yet (the copy's thl says 13) */let o=null;try{o=JSON.parse(localStorage.getItem(GK)||"null")}catch(e){}const seat=other();
+ if(!o||!o.b||!o.b.S||o.room!==COOP.state.room||o.week!==w||(o.b.life||0)!==TH.lifeOf(seat))return null;
+ return ()=>{const P=CW.base&&CW.base.P;if(!P)return;const b=J(o.b);if(P[seat]&&P[seat].pid)b.pid=P[seat].pid;P[seat]=b;try{TH.seatDrop(seat)}catch(e){}
+  G.done[w]=true;G.stat.back=(G.stat.back|0)+1;lg(["back",w,b.S.tuan,b.S.month])}};
 /* jcoopworld onWeek (host, before his own reign ending): her reign ending, her seat-cap check, her places = his. The store is rebuilt from the
    new C first; what this run changes is written into CW.base.P.b too (a later rebuild of the store keeps it) */
 CW.gEmp=function(){if(!on()||!host()||CW.ctx||!CW.base||!CW.base.P||!CW.base.P[other()])return;const seat=other();
