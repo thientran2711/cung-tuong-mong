@@ -44,3 +44,17 @@ House cap (resHead count) is fine: S + friend + 1 NPC in a cap-2 house → the N
 
 Laws touched: 1 (one world) → FAIL items 1-2; 4 one core (BAL.res.side cap, khắc counts) → item 2 cap / merge OK; 7 wording: no new player words; 9 kit: no UI change; 11 whole family: scan above, the tie-break family = the 3 «coop first» sites (:45, :46, :60-61) must take the same seat-stable rule.
 No shots/videos made (logic-only faults); nothing on the CDN to wipe from this review.
+
+## RE-REVIEW cb398c07 (one commit on cfe52de7, FF from LIVE 3af7896e) — **DELTA PASS cb398c07**
+PRIORITY #1 CHECK: OD 0 new | main LIVE 3af7896e | review/d-stack-lr3 cb398c07 | claims D WORKLIST lead row (session_01D3E3Nb7sG6zYcKgPdneqfh); Foreman D now session_01D3E3NXsh9NaF7WkES325hr.
+Fix read (jpal.js:45-51 + hallFix :64-65): pcPr = S 0 / friend 1 / NPC 2 on the host seat, friend 0 / S 1 / NPC 2 on the guest seat (COOPW.on && (ctx||seat)==="b"); the friend entry is never nulled (`if(!p.coop)`), her hall counted first on the guest seat; solo (COOPW off) = S first as before. COOPW.on/seat are the real co-op flags (jcoopworld:894). F1 + F2 closed.
+| check | result |
+|---|---|
+| dev/test/coop-house-clash.js (new, gating) | PASS |
+| my two-seat probe with COOPW seats a/b + pcMark baseline | palace: host stays 3, guest moves once (3→0) with ONE «Ban cung», stable rounds 2-4, host no dialog; hall: host «dong», guest «tay», stable, no panel |
+| ban-cung 33 · palace-distance 27/27 · pal-trim-oldsave · coop-one-world seeds 7/3/11 | PASS (solo unchanged) |
+| coop-ban-cung | 26/26; COOP_B_ORIGIN=cnv (both seats cung nữ, servant branch both ways ok) 22/26 = only the known «Xin» ×4 |
+| coop-e2e cb398c07 | serial 143/143, 140/143 (R#3.inv.0.iu A=48 B=10000058 = jil item-id flake, jil untouched by the delta), 143/143; one run parallel with quickcheck 137/143 (load) |
+| coop-e2e bare 3af7896e (same window, serial) | 142/143 («friend starts as Người lạ»), 143/143, 142/143 («week after rebirth advances») → LIVE flakes too |
+| quickcheck cb398c07 | own build ok, TIME-SPILL PASS, old save ok + buổi, perf render 292/218 tab 537/460 buổi 3107/2660 (run under e2e load); G4 = known dialog-fixed + «Ô lưu · Lui»; G4 92-look-dedupe FAIL once under load → look-dedupe.js alone on cb398c07 PASS ×2, bare PASS |
+No shots / CDN. Verdict: DELTA PASS cb398c07.
