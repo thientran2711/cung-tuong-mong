@@ -87,7 +87,7 @@ function tsbWant(a,t){/* the most valuable thing t really owns that a would want
   .map(([e,i])=>{const it=IT[e.k];let v=e.wk?[20,30,45,70][e.wk.ti||0]:it.pr;if(it&&it.rk>rkOf(a)+1)v*=.4;if(vain&&it&&it.kd==="Trang sức")v*=1.4;if(e.w)v*=1.1;return [e,i,v]}).sort((x,y)=>y[2]-x[2]);return L[0]||null}
 function tsbBulPay(a,t){return Math.min(50,Math.max(0,Math.floor((t===S?S.bac:(t.bac||0))*.4)))}
 function tsbBulO(a,t,ev){return oddsCl(Math.min(Math.round(odA(a,42+(rkOf(a)-rkOf(t))*7+(a.tamco||0)/6+(a.danh||0)/10+(ev?evG(a,t)*6:0)-(typeof witOf==="function"?witOf(t)/6:0)-(t===S&&S.shield?12:0))),92))}
-function tsbBulOK(a,t){return rkOf(a)>rkOf(t)&&!t.out&&(tsbBulPay(a,t)>=10||!!tsbWant(a,t))}
+function tsbBulOK(a,t){return cqOK(a,t,"batnat")/* CUNG QUY (jcq): strictly higher, or a deliberate «vượt phận» on an equal */&&!t.out&&(tsbBulPay(a,t)>=10||!!tsbWant(a,t))}
 A("batnat","Ép nộp của",{c:{},ok:(a,t)=>tsbBulOK(a,t),o:(a,t)=>tsbBulO(a,t),x:"cậy phẩm cao đòi bạc hoặc một món quý nàng đang có",
  f:(a,t)=>tsbBulNpc(a,t,"batnat")});
 AOUT.batnat=[`nàng nộp bạc hoặc một món quý; nàng oán ngươi ${balSg(BAL.eff.jtsb.tsbBulNpc_2)}`,`nàng không nộp, kể khắp nơi: Danh ${balSg(BAL.eff.jtsb.danhBulRefuse)}, nàng oán ${balSg(BAL.eff.jtsb.tsbBulNpc_4)}, nàng nắm ${balAb(BAL.eff.jtsb.evTsbBulNpc_2)} chứng cứ`];

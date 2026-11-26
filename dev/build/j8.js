@@ -127,7 +127,7 @@ A("poison","Hạ độc",{c:{duc:-10},ok:()=>true,o:a=>oPoison(a),x:"lộ: ban c
   const r=`<span class="r">Thuốc độc nhắm vào ${NM(t)} bị phát hiện, tra ra người của ${NM(a)}.</span> `;deathSentence(a,`Bị ban rượu độc vì mưu hại ${NM(t)}`);return r}});
 A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x(){return `cần ${BAL.accNeedEv[0]} chứng cứ (Hoàng hậu: ${BAL.accNeedEv[1]} chứng cứ và phẩm ${RANKS[BAL.cq.accQ].n} trở lên; tố hụt Hoàng hậu là phạm thượng)`},f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,BAL.ag.ev.all);
   if(aRoll(o,a)){econPayWin(a,"accuse",t,0);/* marks the win (j70 Mua lời khai pays now) */const r=`${NMc(a)} tố giác ${NM(t)} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;fall(t,"bị tố giác, chứng cứ rành rành");return r}
-  ap(a,{danh:BAL.eff.j8.accuseFailDanh});relAdd(a,t,BAL.eff.j8.f_6);if(rkOf(t)>=7)punish(a,"tố hụt Hoàng hậu, phạm thượng",2);return `${NMc(a)} tố giác ${NM(t)} không thành; chứng cứ bị hủy. `}});
+  ap(a,{danh:BAL.eff.j8.accuseFailDanh});typeof cqAccFail==="function"&&cqAccFail(a,t);relAdd(a,t,BAL.eff.j8.f_6);if(rkOf(t)>=7)punish(a,"tố hụt Hoàng hậu, phạm thượng",2);return `${NMc(a)} tố giác ${NM(t)} không thành; chứng cứ bị hủy. `}});
 A("bribe","Mua chuộc cung nữ",{c:{get bac(){return -BAL.actBac.bribe}},ok:(a,t)=>a.bac>=BAL.actBac.bribe,o:(a,t)=>oBribe(a,t),f:(a,t)=>{/* AG-ALL-2f3 (OD 17/11 ~17:10Z): the 40 bạc are paid only when the maid takes them; a refusal costs no bạc (her report + the sent servant's fear stay) */
   /* RECEIVER CHOICE (jrcv rcvMaidBribe over jagstf2 stf2BribeW, G10): the maid chooses (her own maid too) among the maid player's cnvBribeOpts
      take / tell / quiet with ITS numbers (the pay goes to the maid, she becomes the briber's tai mắt; tell = Chủ tin +, the master's chứng cứ) */
@@ -177,7 +177,7 @@ function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"
 function vpItems(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e.w&&IT[e.k]&&itm(e.k).rk>r);if(p.dress&&p.dress.until>S.turn&&itm(p.dress.k).rk>r)L.push({k:p.dress.k,dress:1});return L}
 function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=>itm(e.k).n).join(", ");
  if(roll(oVP(a))){ilFilter(t,e=>!(e.w&&(IT[e.k]||{}).rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",1);relAdd(a,t,BAL.eff.j8.vpAccuse);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh ${balSg(BAL.eff.j8.danhVpAccuse)}. `}
- ap(a,{danh:BAL.eff.j8.vpFailDanh});relAdd(a,t,BAL.eff.j8.vpAccuse_2);return `${NMc(a)} tố ${NM(t)} vượt phẩm, ${judgeName(t)} bỏ qua. `}
+ ap(a,{danh:BAL.eff.j8.vpFailDanh});typeof cqAccFail==="function"&&cqAccFail(a,t);relAdd(a,t,BAL.eff.j8.vpAccuse_2);return `${NMc(a)} tố ${NM(t)} vượt phẩm, ${judgeName(t)} bỏ qua. `}
 
 /* ================= ITEMS ================= */
 const IT={

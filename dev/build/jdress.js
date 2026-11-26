@@ -86,9 +86,9 @@ function xxStrip(t){const C=[];for(const e of (t.inv||[]))if(e&&e.w&&!e.h&&IT[e.
 function xxAccuse(a,t){const B=BAL.lux.xx;const c=xxCause(a,t);let x;try{x=luxOf(t)}catch(e){x={sc:0,bud:1}}const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);
  for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}/* the inquiry makes it public */
  const lux=`Xa xỉ ${x.sc}${BAL.lux.xx.showBud?`, mức của ${t===S?"ngươi":"nàng"} ${x.bud}`:""}`;
- if(x.sc<=x.bud){ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});relAdd(a,t,B.falseRel);
+ if(x.sc<=x.bud){typeof cqAccFail==="function"&&cqAccFail(a,t);ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});relAdd(a,t,B.falseRel);
   return `${A0} tố ${T0} ăn mặc xa xỉ; <span class="${a===S?"r":"g"}">tra xét ra ${T0} không quá mức</span> (${lux}), ${a===S?"ngươi":wdNm(a)} bị quở vì tố bừa. Danh ${B.falseDanhA}, ${T0} Danh +${B.falseDanhT}. `}
- if(!aRoll(oVP(a),a)){ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} ăn mặc xa xỉ (${lux}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
+ if(!aRoll(oVP(a),a)){typeof cqAccFail==="function"&&cqAccFail(a,t);ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} ăn mặc xa xỉ (${lux}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
  relAdd(a,t,B.rel);ap(a,{danh:B.danhA});const off=xxStrip(t);ap(t,{duc:B.ducT,danh:B.danhT});
  try{t.luxRep=Math.min(BAL.lux.repMax,(t.luxRep||0)+B.repT)}catch(e){}
  return `${A0} tố ${T0} ăn mặc xa xỉ (${lux}): <span class="${t===S?"r":"g"}">thành</span>. ${off?off+" phải tháo ra. ":""}${wdNmC(t)} Đức ${B.ducT}, Danh ${B.danhT}. `}

@@ -2262,7 +2262,7 @@ Object.assign(BAL,{cq:{on:1,
  bold:{traits:["Kiêu ngạo","Nóng nảy"],sung:60},/* who may breach on purpose: one of these nết and Sủng ≥ sung (cậy sủng); cool-down = BAL.ea.pick.phamCd */
  fx:{oan:10,danh:2},                           /* breach: the target's oán +oan, the doer's Danh −danh; cấm túc roll = BAL.ea.pick.phamP */
  k:{up:["thTH","thHH","follow","cx:thHelp","cx:hhShield","maid:greet","srv:greet"],
-    down:["provoke","nuoc","tea","ink","cx2:vent"],downNB:["humil"],high:["tat"],
-    auth:["phatquy","batnat","hh:judge","hh:conf","hh:cutpay","hh:reward","hh:pardon","admon","th:gift","th:admon","th:release","emp:summon","emp:visit","emp:tea","cx3:staffPhat","cx3:staffThuong"],
-    take:["takeaway"],accuse:["accuse","tocao","vp","xx","xinhh","trinhth","trinhhh","expose","maid:accuse","srv:accuse"]},
+    down:["provoke","nuoc","tea","ink","cx2:vent"],downNB:["humil"],high:["tat","batnat"],
+    auth:["phatquy","hh:judge","hh:conf","hh:cutpay","hh:reward","hh:pardon","admon","th:gift","th:admon","th:release","emp:summon","emp:visit","emp:tea","cx3:staffPhat","cx3:staffThuong"],
+    take:["takeaway"],accuse:["accuse","tocao","vp","xx","xinhh","trinhth","trinhhh","expose"]},/* maid/srv:accuse = a servant reporting her own mistress TO the Hoàng hậu (the target is the listener): no rank rule */
  alias:{humiliate:"humil",serveTH:"thTH",apologise:"apol",bribeksp:"ksp",ambush:"provoke"}}});

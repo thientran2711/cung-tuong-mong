@@ -50,21 +50,25 @@ function cqOK(a,t,k){const r=cqRule(a,t,k);return !r||(r.br&&cqBold(a))}
 function cqWarn(a,t,k){const r=cqRule(a,t,k);return r&&r.br?`trái cung quy (${r.w}): nàng oán ${balSg(BAL.cq.fx.oan)}, Danh ngươi ${balSg(-BAL.cq.fx.danh)}, bị cấm túc: ${oddsWord(BAL.ea.pick.phamP)}`:""}
 function oddsWord(p){try{return typeof word==="function"?word(oddsCl(p)):"có thể"}catch(e){return"có thể"}}
 function cqPer(p){return p&&(p===S||(typeof p==="object"&&p.rel!=null))}
-function cqNm(t){return t===S?"ngươi":cqQueen(t)?"Hoàng hậu":NM(t)}
+function cqNm(t){if(t===S)return"ngươi";if(cqQueen(t))return"Hoàng hậu";try{/* name-mask (j61): an unmet consort is «một vị <tước> chưa quen biết», as j78who */if(typeof kitKnownName==="function"&&typeof k61Mask==="function"&&t&&t.rank!=null&&!kitKnownName(t))return k61Mask(t,"",true)}catch(e){}return NM(t)}
 /* the consequence of a deliberate breach (one rule; research §3 以下犯上 / 惇妃 1778: favour softens, never cancels) */
 function cqBreach(a,t,r){try{if(!r||!cqPer(a))return"";const F=BAL.cq.fx;a.cqB=wk();if(cqPer(t))oanAdd(t,a,F.oan);if(a===S)apply({danh:-F.danh});else ap(a,{danh:-F.danh});
  const pun=roll(BAL.ea.pick.phamP);if(pun)punish(a,`${r.w} với ${cqNm(t)}`,1);
- const txt=`Trái cung quy: ${a===S?"ngươi":(cqQueen(a)?"Hoàng hậu":a.name)} ${r.w} với ${cqNm(t)}. ${cqPer(t)?`${t===S?"Ngươi":cqNm(t).replace(/^./,c=>c.toUpperCase())} oán ${balSg(F.oan)}, `:""}Danh ${a===S?"ngươi":a.name} ${balSg(-F.danh)}${pun?", bị cấm túc":""}. `;
+ const up=x=>x.replace(/^./,c=>c.toUpperCase()),na=cqNm(a),nt=cqNm(t);const txt=`Trái cung quy: ${r.cls==="accuse"?`${na} vu cáo ${nt}, bậc trên mình`:`${na} ${r.w} với ${nt}`}. ${cqPer(t)?`${up(nt)} oán ${balSg(F.oan)}, `:""}Danh ${na} ${balSg(-F.danh)}${pun?", bị cấm túc":""}. `;
  if(a!==S){CQN.br[r.k]=(CQN.br[r.k]||0)+1;if(t===S){try{Q.push({t:"Phạm thượng",who:pv(a),h:`<p>${txt}</p>`})}catch(e){}}else try{newsAdd(a,"cq",txt.trim(),false)}catch(e){}}
  return txt}catch(e){console.error("jcq",e);return""}}
 function cqCount(a,t,k,res){if(a===S||!res)return;const r=cqRule(a,t,k);CQN.n++;if(r&&!(r.br&&a.cqB===wk()))CQN.bad[r.k]=(CQN.bad[r.k]||0)+1}
 /* the wrapper of one act runner: gate (on), deed, breach consequence (outermost wrapper only: CQ.d) */
 function cqRun(a,t,k,f,blkTxt){if(CQ.d>0)return f();const r=cqRule(a,t,k),on=BAL.cq.on;
  if(on&&r&&!(r.br&&cqBold(a))&&!(r.cls==="accuse"&&!cqQueen(t))){if(a!==S)CQN.blk[r.k]=(CQN.blk[r.k]||0)+1;return a===S?(blkTxt||""):""}
+ const acc=cqCls(k)==="accuse",pst=p=>p&&typeof p==="object"?[p.confined||0,cqR(p),!!p.out,p.alive!==false,!!(S&&S.dead)].join():"";const st0=acc?pst(a):"";if(acc)CQ.af=null;
  CQ.d++;let res;try{res=f()}finally{CQ.d--}
  try{if(on&&res){if(r&&r.cls!=="accuse"){const b=cqBreach(a,t,r);if(b)res=cqEnd(res)+b}
-  else if(cqCls(k)==="accuse"&&!cqQueen(t)&&cqR(a)<cqR(t)&&/không thành|bị bác|không đủ|vu cáo/.test(String(res)))res=cqEnd(res)+cqBreach(a,t,{k,cls:"accuse",br:1,w:"vu cáo bề trên"})}
+  /* a FAILED open charge against a higher rank (the act marks its own fail branch: cqAccFail) = «vu cáo bề trên»; not when the act already punished the accuser itself (expose → fall) */
+  else if(acc&&CQ.af&&CQ.af.a===a&&CQ.af.t===t&&!cqQueen(t)&&cqR(a)<cqR(t)&&pst(a)===st0)res=cqEnd(res)+cqBreach(a,t,{k,cls:"accuse",br:1,w:"vu cáo bề trên"})}
   cqCount(a,t,k,res)}catch(e){console.error("jcq",e)}return res}
+/* the fail branch of every open charge (accuse, vp, xx, tocao, expose, xinhh, trinhth, trinhhh) calls this: the structured fail signal */
+function cqAccFail(a,t){CQ.af={a,t}}
 function cqEnd(x){x=String(x).replace(/\s+$/,"");return /[.!?]$/.test(x.replace(/<[^>]+>$/,""))?x+" ":x+". "}
 const CQ_NO="Theo cung quy, ngươi không thể làm việc này với nàng. ";
 (function(){
@@ -94,4 +98,4 @@ const CQ_NO="Theo cung quy, ngươi không thể làm việc này với nàng. "
 /* gift words by rank (research §6 赏 / 孝敬): downward «ban cho», upward «kính dâng», equal «tặng» */
 function cqGiftVerb(a,t){try{const A=cqR(a),T=cqR(t);return A>T?"ban cho":A<T?"kính dâng":"tặng"}catch(e){return"tặng"}}
 function cqGiftLine(a,t,n){const v=cqGiftVerb(a,t),nm=t===S?"ngươi":t.name;return v==="ban cho"?`ban ${n} cho ${nm}`:v==="kính dâng"?`kính dâng ${n} lên ${nm}`:`tặng ${n} cho ${nm}`}
-window.cqGiftLine=cqGiftLine;window.cqRule=cqRule;window.cqOK=cqOK;window.cqAuth=cqAuth;window.cqR=cqR;window.cqBreach=cqBreach;window.cqGiftVerb=cqGiftVerb;window.cqCls=cqCls;
+window.cqGiftLine=cqGiftLine;window.cqAccFail=cqAccFail;window.cqRule=cqRule;window.cqOK=cqOK;window.cqAuth=cqAuth;window.cqR=cqR;window.cqBreach=cqBreach;window.cqGiftVerb=cqGiftVerb;window.cqCls=cqCls;

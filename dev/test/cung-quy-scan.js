@@ -7,7 +7,7 @@
 const {chromium}=require('playwright');const path=require('path'),fs=require('fs');
 const A=process.argv.slice(2);const GAME=A.find(x=>x.endsWith('.html'))||path.join(__dirname,'..','index.html');const GAMEP=path.resolve(GAME);const mi=A.indexOf('--md');
 /* BEFORE = the inline rank checks found on LIVE 6b5d3d05 (git grep rkOf / fxAuth in the ok / req of each deed) */
-const BEFORE={tat:"jface ok rkOf(a)>rkOf(t)",phatquy:"jface fxAuth (Hoàng hậu or +3)",humil:"jtwoway req rkOf(a)>=rkOf(t)",follow:"jtwoway req rkOf(t)>rkOf(a)+1",
+const BEFORE={batnat:"jtsb tsbBulOK rkOf(a)>rkOf(t)",tat:"jface ok rkOf(a)>rkOf(t)",phatquy:"jface fxAuth (Hoàng hậu or +3)",humil:"jtwoway req rkOf(a)>=rkOf(t)",follow:"jtwoway req rkOf(t)>rkOf(a)+1",
  takeaway:"j8 ok rkOf(a)>rkOf(t)&&rkOf(t)<4",accuse:"j8 accOK (Hoàng hậu only)",admon:"jtwoway req Hoàng hậu",thHH:"jtwoway req q!==a","hh:judge":"agReg hh group (Hoàng hậu)",
  "hh:conf":"agReg hh group","hh:cutpay":"agReg hh group","hh:reward":"agReg hh group","hh:pardon":"agReg hh group"};
 const GENS=[["npcAct (harm menu)","j28.js","runAct"],["npcSocial (social menu, agent off)","j28.js","twDo"],["rivalsTurn judge (Hoàng hậu)","j8.js","hh rule (queen)"],
@@ -34,7 +34,10 @@ const GENS=[["npcAct (harm menu)","j28.js","runAct"],["npcSocial (social menu, a
     const ok=c==="up"?(!r1&&!!r2):(!!r1&&!r2);out.both.push({w,c,k,low_to_high:r1?r1.w:"đúng lễ",high_to_low:r2?r2.w:"đúng lễ",ok});if(!ok)out.bad.push("rule "+c+" "+w)}};
   if(lo&&hi&&hi.rank-lo.rank>=BAL.cq.auth.gap){T(lo,hi,"NPC low ↔ NPC high");S.rank=0;T(S,hi,"her low ↔ NPC high");S.rank=Math.min(6,lo.rank+BAL.cq.auth.gap);T(lo,S,"NPC low ↔ her high")}
   else out.bad.push("no pair of consorts "+BAL.cq.auth.gap+" ranks apart on the save");S.rank=sr;
-  out.gift=[cqGiftVerb(hi,lo),cqGiftVerb(lo,hi),cqGiftVerb(lo,lo)];return out});
+  out.gift=[cqGiftVerb(hi,lo),cqGiftVerb(lo,hi),cqGiftVerb(lo,lo)];
+  /* (5) every surface where SHE starts a breachable ACT shows the warning (person-card row j6 xw; the Dư đồ focus view jdf reads the same cqWarn, checked statically below) */
+  out.surf=[];{const v=hi,sr0=S.rank;for(const c of ["down","high","auth"])for(const k of BAL.cq.k[c]){if(!ACT[k])continue;S.rank=c==="down"?Math.max(0,v.rank-1):v.rank;const w=ACT[k].xw?ACT[k].xw(S,v):"";const exp=!!(cqRule(S,v,k)&&cqRule(S,v,k).br);const ok=!exp||/trái cung quy/.test(w);out.surf.push({k,c,warn:w?"yes":"no",ok});if(!ok)out.bad.push("no breach warning on her row: "+k)}S.rank=sr0}
+  out.keysAcc=BAL.cq.k.accuse.slice();return out});
  const rows=Object.entries(R.keys).sort((x,y)=>(x[1].cls==="free")-(y[1].cls==="free")||x[0].localeCompare(y[0]));
  const md=[];md.push("| # | generator | file | gate after |","|---|---|---|---|");GENS.forEach((g,i)=>md.push(`| ${i+1} | ${g[0]} | ${g[1]} | ${g[2]} ${R.gate[g[2].split(" ")[0]]===false?"MISSING":"✓"} |`));
  md.push("","| key | registries | class (after) | before (LIVE) | after |","|---|---|---|---|---|");
@@ -42,5 +45,11 @@ const GENS=[["npcAct (harm menu)","j28.js","runAct"],["npcSocial (social menu, a
  md.push("","| pair | class | key | lower → higher | higher → lower | ok |","|---|---|---|---|---|---|");for(const x of R.both)md.push(`| ${x.w} | ${x.c} | ${x.k} | ${x.low_to_high} | ${x.high_to_low} | ${x.ok?"✓":"FAIL"} |`);
  const n={};for(const [,v] of rows)n[v.cls]=(n[v.cls]||0)+1;const nb=rows.filter(([k,v])=>v.cls!=="free"&&!BEFORE[k]).length,nc=rows.filter(([k,v])=>v.cls!=="free").length;
  const sum=`keys ${rows.length} · classes ${JSON.stringify(n)} · rank-ruled ${nc}: before checked ${nc-nb} / unchecked ${nb} → after checked ${nc} / unchecked 0 · gift words ${R.gift.join(" / ")} · page errors ${errs.length}`;
- if(mi>=0)fs.writeFileSync(A[mi+1],md.join("\n")+"\n\n"+sum+"\n");else console.log(md.join("\n"));
+
+ {/* static: (6) every open charge marks its fail branch (cqAccFail = the structured fail signal); (7) the focus view warns */const src=f=>fs.readFileSync(path.join(__dirname,'../build',f),'utf8');const SRC={accuse:["j8.js",'A("accuse"'],vp:["j8.js","function vpAccuse"],xx:["jdress.js","function xxAccuse"],tocao:["j30.js",'A("tocao"'],expose:["j30.js",'A("expose"'],xinhh:["j30.js",'A("xinhh"'],trinhth:["j78.js",'A("trinhth"'],trinhhh:["j78.js",'A("trinhhh"']};
+  md.push("","| open charge | file | fail branch marked (cqAccFail) |","|---|---|---|");for(const k in SRC){const t=src(SRC[k][0]);const i=t.indexOf(SRC[k][1]);const body=i<0?"":t.slice(i,t.indexOf("\nA(",i+5)>0?t.indexOf("\nA(",i+5):i+3000);const ok=/cqAccFail\(a,t\)/.test(body);md.push(`| ${k} | ${SRC[k][0]} | ${ok?"✓":"MISSING"} |`);if(!ok)R.bad.push("accuse fail not marked: "+k)}
+  for(const k of (R.keysAcc||[]))if(!SRC[k])R.bad.push("accuse key without a fail-signal row: "+k);
+  if(!/cqWarn\(S,rivals\[x\.i\],x\.k\)/.test(src("jdf.js")))R.bad.push("jdf focus view has no cqWarn");
+  md.push("","| her breachable act | class | warning on her row |","|---|---|---|");for(const x of R.surf)md.push(`| ${x.k} | ${x.c} | ${x.warn}${x.ok?" ✓":" FAIL"} |`);md.push("| Dư đồ focus view (jdf dfInPerson rows) | all in-person acts | cqWarn ✓ |","| talk options Khiêu khích / Trút giận (j2 talkOpts) | down | cqWarn ✓ |")}
+ if(mi>=0)fs.writeFileSync(A[mi+1],md.join("\n")+"\n\n"+sum+"\n");
  console.log(sum);if(errs.length)console.log("ERR",errs.slice(0,3));const fail=R.bad.concat(errs.length?["page errors"]:[]);console.log(fail.length?"FAIL "+fail.join("; "):"PASS");await b.close();process.exit(fail.length?1:0)})();

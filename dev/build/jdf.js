@@ -67,7 +67,7 @@ function dfActs(i){const p=curPeople()[i],d=dfCard(i);if(!p||!d)return null;let 
  if(!done)for(const x of dfInPerson(p)){const a=x.a,hk=typeof harmK==="function"?harmK(rivals[x.i],x.k):BAL.time.cost.harm;const why=can(hk)?"":dfTxt(whyTime(hk))||"hết khắc buổi này";
   const c=(()=>{try{return (typeof kitActCat==="function"&&kitActCat(a.n))||""}catch(e){return""}})(),cn=typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:"";
   let G=out.find(g=>g.n===cn)||(!cn&&out[0]);if(!G){G={k:"x"+c,n:cn,acts:[]};out.push(G)}
-  G.acts.push({id:"a"+x.k,n:a.n,cls:x.k==="phatquy"?"C":"B",eng:dfEng(a.n),word:"",ton:[hk+" khắc",typeof fmt==="function"?dfTxt(fmt(a.c||{})):""].filter(Boolean).join(" · "),off:!!why,why,info:"",small:"",pic:dfPic(a.n)})}
+  G.acts.push({id:"a"+x.k,n:a.n,cls:x.k==="phatquy"?"C":"B",eng:dfEng(a.n),word:"",ton:[hk+" khắc",typeof fmt==="function"?dfTxt(fmt(a.c||{})):""].filter(Boolean).join(" · "),off:!!why,why,info:(typeof cqWarn==="function"?cqWarn(S,rivals[x.i],x.k):""),small:"",pic:dfPic(a.n)})}/* CUNG QUY: the breach warning, as on the person-card row (j6 xw) */
  return out.filter(g=>g.acts.length).map(g=>Object.assign(g,{can:g.acts.filter(a=>!a.off).length,tot:g.acts.length}))}
 /* (2) run one act. res = {raw, skipped} from the on-figure game (undefined = no game played: plain odds) */
 function dfStep(res){if(!res||res.skipped||res.raw==null)return 0;return typeof sgStep==="function"?sgStep(res.raw):0}
