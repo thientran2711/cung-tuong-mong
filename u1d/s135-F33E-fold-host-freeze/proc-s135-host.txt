@@ -1,0 +1,11 @@
+== 2026-11-26T06:48:35Z pid 19161
+  PID   RSS %CPU ELAPSED
+19161 4178816 85.0  2384
+Rss:             4178816 kB
+Pss_Shmem:        573546 kB
+Anonymous:       3428416 kB
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+19161 root      20   0 1453.0g   4.0g 750400 R  99.9  25.4  22:32.27 chrome-he+
+19176 root      12  -8 1453.0g   4.0g 750400 R  10.0  25.4   1:55.44 Compositor
+19162 root      20   0 1453.0g   4.0g 750400 S   0.0  25.4   0:00.00 PerfettoT+
+185
