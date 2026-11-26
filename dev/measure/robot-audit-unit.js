@@ -21,6 +21,11 @@ const real2 = { harness: H, exitPick: { label: 'Bắt đầu kiếp mới', only
 ok(!A.isEntryPick(real2.exitPick, real2.trace), 'old record: «Bắt đầu kiếp mới» tapped on an in-life page stays an exit (new-life shortcut)');
 const pk = { harness: H, exitPick: { label: 'Bắt đầu kiếp mới', n: 3, only: false, at: 7 }, trace: [[7, '.dlg «Chọn sổ» «Bắt đầu kiếp mới»']] };
 ok(!A.isEntryPick(pk.exitPick, pk.trace), 'the picker exit branch (no via) is never treated as an entry tap');
+/* 3b. JOB 6: Chọn sổ reached MID-LIFE (☰) → «Bắt đầu kiếp mới» with a live life = exit road, even on the «Chọn sổ» screen */
+const mid = { harness: H, exitPick: { label: 'Bắt đầu kiếp mới', screen: '.dlg «Chọn sổ»', live: true, only: false, via: 'tap outside the exit-only branch', at: 500 } };
+ok(!A.isEntryPick(mid.exitPick, []) && !A.verdict(mid, ban).valid, 'mid-life ☰ → Chọn sổ → «Bắt đầu kiếp mới» (live:true) = bot exit → INVALID');
+const pre = { harness: H, exitPick: { label: 'Bắt đầu kiếp mới', screen: '.dlg «Chọn sổ»', live: false, only: false, via: 'tap outside the exit-only branch', at: 5 } };
+ok(A.isEntryPick(pre.exitPick, []) && A.verdict(pre, ban).valid, 'pre-life «Bắt đầu kiếp mới» (live:false) = entry → VALID');
 /* 4. mini-game backs: full counter wins over the 40-detail list */
 const why = Array.from({ length: 40 }, () => ({ ph: 'play', long: false }));
 ok(A.mgQuitOf({ harness: Object.assign({}, H, { mgBackWhy: why, mgBackQuitN: 57 }) }, null).n === 57, 'mgBackQuitN 57 with 40 details → 57 quits (not 40)');

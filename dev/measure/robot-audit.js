@@ -66,7 +66,7 @@ const MGQ_RE = /^bỏ cuộc$/i;
    (its in-life flag came back from the ckpt before the seat re-entered its sổ). Same test as robot-rt.js ENTRY_TAP; older records have no exitPick.screen →
    the kept trace is searched for the tap with that label. */
 const ENTRY_LABEL_RE = /^(chơi một mình|cùng hảo hữu|nhận thân phận|tiếp tục kiếp( này)?|vào cung ngay)$/i, ENTRY_SCREEN_RE = /^(#title|#kload|#dawn)\b|«(chọn sổ|sổ luân hồi)»/i;
-function isEntryPick(xp, tr) { if (!xp) return false; const lab = String(xp.label || '').replace(/\s+/g, ' ').trim(); if (ENTRY_LABEL_RE.test(lab)) return true; if (xp.screen != null) return ENTRY_SCREEN_RE.test(String(xp.screen));
+function isEntryPick(xp, tr) { if (!xp) return false; if (xp.live === true) return false; /* JOB 6 (BIG #10): robot-rt ≥ FIXER #10 stamps whether the game had a RUNNING life at the tap — ☰ → Chọn sổ → «Bắt đầu kiếp mới» mid-life is a new-life shortcut (exit road), never an entry */ const lab = String(xp.label || '').replace(/\s+/g, ' ').trim(); if (ENTRY_LABEL_RE.test(lab)) return true; if (xp.screen != null) return ENTRY_SCREEN_RE.test(String(xp.screen));
   if (xp.via !== 'tap outside the exit-only branch') return false /* the picker's own exit branch (ch.exit) is never an entry tap */;
   const hits = (Array.isArray(tr) ? tr : []).filter(t => Array.isArray(t) && String(t[1]).endsWith('«' + lab + '»') && (xp.at == null || Math.abs(+t[0] - +xp.at) <= 5));
   return hits.length > 0 && hits.every(t => ENTRY_SCREEN_RE.test(String(t[1]))) }
