@@ -109,13 +109,34 @@ function chUhPay(t){const B=chB(),L=chVictims(t,"uh").slice(0,chNeed(t,"uh"));co
 function chBought(t){const k=key(t),D=chDeedMap(t).mc,ds=(D&&D.list)||[];const sids=new Set(ds.map(d=>d&&d.s).filter(Boolean)),own=new Set(ds.map(d=>d&&d.o).filter(Boolean));const L=[];
  for(const o of [S].concat(rivals||[])){if(!o||o===t||o.coop||(o!==S&&(o.alive===false||o.out)))continue;for(const s of (o.staff||[]))if(s&&s.spyFor===k&&!s.coop)L.push([s,o,(sids.has(s.sid)?2:0)+(own.has(key(o))?1:0)])}
  return L.sort((a,b)=>b[2]-a[2])}
-function chMcFire(t){const L=chBought(t).slice(0,chB().mcFire);if(!L.length)return null;const nm=[];
- for(const [s,o] of L){try{asOut(s,"expel")}catch(e){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.out="expel"}s.spyFor=null;nm.push(`${s.name} (người hầu ${o===S?"của ngươi":"cung "+o.name})`);
+function chMcFire(t){const L=chBought(t);
+ /* STEP 4 O1 (OD 26/11 ~07:50Z, law 1): SHE as the bought servant (servant life, S.srv.spyFor = the guilty one) and the friend's seat as a bought
+    servant (co-op buildFriendSrv, coop) are dismissed like any bought servant — the deed of her taking the bạc names her (rank 2, as d.s) */
+ if(chSrvMe(t))L.push([S,srvM(),2,"me"]);
+ for(const o of [S].concat(rivals||[])){if(!o||o===t||(o!==S&&(o.alive===false||o.out)))continue;for(const s of (o.staff||[]))if(s&&s.coop&&!s.coopMcOut&&s.spyFor!=null&&String(s.spyFor)===String(key(t)))L.push([s,o,2,"fr"])}
+ L.sort((a,b)=>b[2]-a[2]);const K=L.slice(0,chB().mcFire);if(!K.length)return null;const nm=[];let mine=false;const fr=[];
+ for(const [s,o,,w] of K){const pal=o===S?"của ngươi":o?"cung "+o.name:"";
+  if(w==="me"){nm.push(`ngươi (người hầu ${pal})`);mine=true;continue}
+  if(w==="fr"){fr.push(s);nm.push(`${s.name} (người hầu ${pal})`);continue}
+  try{asOut(s,"expel")}catch(e){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.out="expel"}s.spyFor=null;nm.push(`${s.name} (người hầu ${pal})`);
   if(o===S&&t!==S)log(`<span class="r">${s.name} nhận bạc của ${NM(t)}, nay tội lộ ra, bị đuổi khỏi cung.</span>`)}
- const x=`${nm.join(", ")} nhận bạc mua chuộc, bị đuổi khỏi cung`;if(t!==S)log(`${NMc(t)} mua chuộc người hầu: ${x}.`);return ["Người hầu bị mua",x]}
+ const x=`${nm.join(", ")} nhận bạc mua chuộc, bị đuổi khỏi cung`;if(t!==S)log(`${NMc(t)} mua chuộc người hầu: ${x}.`);const row=["Người hầu bị mua",x];
+ if(mine||fr.length){const o=chSrvOut(t,row);if(mine)CHSRV=o;for(const s of fr)s.coopMcOut=o/* jcoopworld toCanon carries it to her seat (S.coopSrvOut) */}
+ return row}
+/* her dismissal: the end card «Bị đuổi khỏi cung» (the j42 servant-life road) with the rows of a punishment notice (Ai tố / Vì sao / Chứng cứ /
+   Hình phạt / Người hầu bị mua) — plain data, so the co-op friend's seat ends her life from the same record (host-computed, the friend continues) */
+let CHSRV=null;
+function chSrvMe(t){return !!(t&&t!==S&&typeof isSrv==="function"&&isSrv()&&!S.dead&&S.srv.spyFor!=null&&String(S.srv.spyFor)===String(t.id))}
+function chSrvOut(t,row){const a=CHX&&CHX.t===t?CHX.a:null;const w=a&&a!==S?punWhoTxt(a):a===S?"ngươi":"";let ev="";try{ev=a?punEvTxt(a,t):""}catch(e){}
+ return {g:t.name,a:w,ev,x:row[1]}}
+function chSrvEnd(o){if(!o||typeof isSrv!=="function"||!isSrv()||S.dead)return;S.srv.spyFor=null;S.srvMcEnd=o;
+ over("Bị đuổi khỏi cung",`Tội mua chuộc người hầu của ${o.g} bị phơi ra; ngươi là kẻ nhận bạc làm tai mắt. Cung Chính ti tước tên ngươi khỏi sổ cung nhân, đuổi ra cửa Thần Vũ.`,"Bị đuổi khỏi cung vì nhận bạc mua chuộc",true)}
+(function(){if(typeof deathChain!=="function")return;const d0=deathChain;deathChain=function(f){const L=d0.apply(this,arguments);const o=S&&S.srvMcEnd;
+ if(!o||!/nhận bạc mua chuộc/.test(String(f||"")))return L;const R=[o.a?`Ai tố: ${o.a}`:"Ai xử: Cung Chính ti, theo cung quy",`Vì sao: nhận bạc của ${o.g}, làm tai mắt cho nàng`];
+ if(o.ev)R.push(`Chứng cứ: ${o.g} bị tố ${o.ev}`);R.push("Hình phạt: Đuổi khỏi cung",`Người hầu bị mua: ${o.x}`);return R.concat(L)}})();
 function chExtras(t,c){const R=[];try{const a=c==="uh"?chUhPay(t):c==="mc"?chMcFire(t):null;if(a)R.push(a)}catch(e){console.error("chExtras",e)}return R}
 (function(){if(typeof punRows!=="function")return;const r0=punRows;punRows=function(o){const R=r0.apply(this,arguments);if(CHPX&&CHPX.length)for(const x of CHPX)R.push([x[0],punEsc(x[1])]);return R}})();
-(function(){const c0=chPunish;chPunish=function(t,c,why,by){if(!t||(c!=="uh"&&c!=="mc"))return c0.apply(this,arguments);const px=CHPX;CHPX=chExtras(t,c);try{return c0.apply(this,arguments)}finally{CHPX=px}}})();
+(function(){const c0=chPunish;chPunish=function(t,c,why,by){if(!t||(c!=="uh"&&c!=="mc"))return c0.apply(this,arguments);const px=CHPX,sx=CHSRV;CHSRV=null;CHPX=chExtras(t,c);let me=null;try{return c0.apply(this,arguments)}finally{CHPX=px;me=CHSRV;CHSRV=sx;if(me)chSrvEnd(me)/* O1: her ending after the guilty one's punishment is written */}}})();
 (function(){const t0=chPunTxt;chPunTxt=function(t,c){const r=t0.apply(this,arguments);return c==="uh"?`${r}, bồi bạc cho người bị hại`:c==="mc"?`${r}, người hầu bị mua bị đuổi khỏi cung`:r}})();
 /* charge-followups (c): «Trình Hoàng hậu» weighs the pieces of the proven charge (BAL.charge.trinh), never the total (jaudit card, j78) */
 function chTrinhO(a,t,q){const B=chB().trinh,c=chReady(a,t);return B.base+aff(q,a)/B.affD+(c?chHave(a,t,c):0)*B.per}
@@ -164,3 +185,9 @@ function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là m
  const PK=(chC(CHLASTC.c)||{}).pk||[];const i=Math.max(0,chHave(S,v,CHLASTC.c)-1);const kd=PK.length?` · ${PK[i%PK.length]}`:"";/* rv: each piece names its kind (table A rule 4), never the same line twice */
  const have=new Set((S.evd[v.id]||[]).map(e=>e.ref).filter(Boolean));for(const d of (D&&D.list)||[]){const ref="td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));if(!have.has(ref))return{proves:`${j78Who(v)} ${d.x}${kd}`,ref,aim:d.t}}
  const d=D&&D.list[0];if(d)return{proves:`${j78Who(v)} ${d.x}${kd}`,ref:"tc:"+CHLASTC.c+":"+((S.evd[v.id]||[]).length),aim:d.t}}}catch(e){}return p0.apply(this,arguments)}})();
+/* STEP 4 family (her notice WHO / EVIDENCE on every charge): chPunish's cấm túc («cam») and giáng roads end in the generic punish / demote,
+   whose punNote had no accuser — «Ai tố» fell back to the one acting (ACTX) or to «Ai xử: Hoàng thượng», and the «Chứng cứ» row vanished
+   (jtsb trình Hoàng hậu, a Tố giác by a third person). The accuser chPunish was given now reaches her notice. */
+let CHBY=null;
+(function(){const c0=chPunish;chPunish=function(t,c,why,by){const px=CHBY;CHBY=t===S&&by&&by!==S?{a:by}:null;try{return c0.apply(this,arguments)}finally{CHBY=px}}})();
+(function(){if(typeof punNote!=="function")return;const n0=punNote;punNote=function(o){if(CHBY&&o&&!o.by)o=Object.assign({},o,{by:CHBY.a});return n0.call(this,o)}})();

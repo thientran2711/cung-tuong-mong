@@ -5,7 +5,7 @@ text built from the total bar · search_noroll = a search road that adds evidenc
 result that says «không ... sai trái» with no miss branch (she did wrong but the search missed) · deed_literal_w (charge-followups d) = a deed weight typed at the call or in a DEEDW table, not BAL.charge.actW / w · deed_unmapped (rv) = a deed key some road writes
 (deedAdd / deedOnce / cyDeed / mlCaught «ml»+k / DEEDW / DEEDX) with no BAL.charge.deed entry (it would fall to the Ức hiếp default)."""
 import re,subprocess,sys,glob
-ref=sys.argv[1] if len(sys.argv)>1 else None
+A=[x for x in sys.argv[1:] if x!='-v'];ref=A[0] if A else None
 def files():
     if ref:
         L=subprocess.run(['git','ls-tree','--name-only',ref,'dev/build/'],capture_output=True,text=True).stdout.split()
@@ -53,5 +53,25 @@ R['deed_literal_w']=[]
 for f,src in F.items():
     for mm in re.finditer(r'(?:deedAdd\([^,()]+,[^,]+?,[^,]+?,|deedOnce\([^,()]+,[^,]+?,[^,]+?,|mlCaught\([^,()]+,[^,]+?,[^,]+?,)(\d+)\s*,|const DEEDW=\{',src):
         R['deed_literal_w'].append(f'{f.split("/")[-1]}:{src.count(chr(10),0,mm.start())+1}')
+# (charge-trinh-punish O2 family) proof_generic = a punish / demote / fall of the ACCUSED on a line that uses evidence (evG / evA / chOK /
+# «chứng cứ») without going through chPunish (the proven charge's punishment). Every other site is listed with the reason it is not a proven charge.
+PG_OK={'bị đồng đảng tố giác':'faction sell-out roll, no pieces','vu oan':'false-accusation / failed road (the accuser is punished)','vu khống':'false accusation','vu cáo':'false accusation','tố hụt':'failed accusation',
+ 'giá họa':'false accusation','lật tẩy':'false accusation','tư thông bị phát giác':'Bóc chuyện tư tình: the tư thông charge\'s own table-A road (chOK "tt")','bị cung nữ tố giác, chứng cứ rành rành':'servant life: the maid\'s known secrets (SRVA.accuse.sec), not charge pieces',
+ 'bị bắt quả tang':'caught in the act (j70 trap)','bị Hoàng hậu xét tội theo chứng cứ':'routed: jcharge punish wrapper (p.chTr) → chPunish (runtime test charge-trinh-punish.js); j78 f is replaced by jaudit T.f',
+ 'bị tố giác, chứng cứ rành rành':'j8 Tố giác fallback, only when no charge is ready (jcharge A.f)','bị Hoàng hậu xử tội':'j8 judge fallback (callers gate chOK; jcharge judge wrapper)','bị cung nữ tố giác mưu kế':'a bought maid leaks schemes (no pieces)',
+ 'lấy trộm đồ':'lost-item hearing, its own bar (loEmpEv)','dâng đồ làm':'a gift made someone ill, not an accusation'}
+R['proof_generic']=[];PGL=[]
+for f,src in F.items():
+    if f.endswith('jcharge.js'): continue
+    for i,l in enumerate(src.split('\n'),1):
+        if not (re.search(r'\b(punish|demote|fall)\(',l) and re.search(r'evG\(|evA\(|chứng cứ|chOK\(|chReady\(',l)): continue
+        for m in re.finditer(r'\b(punish|demote|fall)\(([^,()]+),\s*([`"][^`"]*[`"])',l):
+            w=m.group(3);site=f'{f.split("/")[-1]}:{i}'
+            if 'chPunish(' in l[:m.start()]: PGL.append((site,w,'routed (chPunish on the same road)'));continue
+            why=next((v for k,v in PG_OK.items() if k in w),None)
+            if why: PGL.append((site,w,why))
+            else: R['proof_generic'].append(site);PGL.append((site,w,'GENERIC'))
+if '-v' in sys.argv:
+    for x in PGL: print(' | '.join(x))
 print('family | count | sites');
 for k,v in R.items(): print(f'{k} | {len(v)} | {" ".join(v[:14])}')

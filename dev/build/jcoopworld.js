@@ -154,7 +154,9 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{rfYi
    if(v.rank!==b.rank&&!v.out){s.rank=v.rank}
    if(b.fx)for(const x of FXL)if(!fxEq(v[x],b.fx[x]))s[x]=v[x]==null?null:J(v[x]);/* a face mark put on her on this seat (tea, ink, slap, rash…) goes back to her (review/looks-2) */
    if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
-  P[fs()]=fP}
+  /* STEP 4 O1: the friend's seat as a bought servant was dismissed here (jcharge chMcFire marks her entry coopMcOut) → her client ends that life */
+ {const sv=L.find(x=>x[0]<0&&x[1]&&x[1].coopMcOut);if(sv&&fP.S)fP.S.coopSrvOut=J(sv[1].coopMcOut)}
+ P[fs()]=fP}
  if(!host()&&CW.base&&CW.base.W){try{keepFaces(WS,CW.base.W.S||{},0);keepFaces(R,CW.base.W.R||[],0)}catch(e){console.error("keepFaces",e)}}
  const out={v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P};
  /* thin guest part C (jcoopthinc): in a C room the guest's week carries the room's world unchanged (W comes from the host only) */
@@ -871,6 +873,7 @@ function onWeek(m){T("week "+m.week+" in "+CW.wkIn);if(!CW.on||!m.state)return;i
  const P=C.P[CW.seat];
  if(!wasDead&&S.dead){S.dead=false;try{die(P.S.coopWhy||"Bị hại trong cung")}catch(e){console.error(e)}return}
  if(S.coopCold){S.coopCold=0;if(!S.out)try{cold("Bị đày vào lãnh cung")}catch(e){console.error(e)}}
+ if(S.coopSrvOut){const o=S.coopSrvOut;S.coopSrvOut=null;try{if(typeof chSrvEnd==="function"){chSrvEnd(o);if(S.dead)return}}catch(e){console.error(e)}}/* STEP 4 O1: dismissed as a bought servant (the other seat proved the charge) */
  /* jkc: the friend passed the tuyển tú this week and entered the palace */
  const fP=C.P[fs()];if(fP&&!fP.dead){const home=friendHome(fP);if(CW.fWasHome&&!home&&fP.S&&fP.S.kc&&fP.S.kc.inPal)pushModal({t:"Hảo hữu nhập cung",h:`<p>Hảo hữu ngươi qua kỳ tuyển tú, nay vào cung, phong ${esc(RANKS[fP.rank]?RANKS[fP.rank].n:"")}. Mặt mũi, tên tuổi ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});CW.fWasHome=home}
  try{if(CW.empWeek()){showModal();render();lockNext();return}}catch(e){console.error(e)}
@@ -1154,7 +1157,7 @@ if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){if(CW.ctx)return f.
 if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){if(CW.ctx)return f.apply(this,arguments);const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;if(CW.holdMe)CW.heldMe=true;else sendMe()}}catch(e){console.error(e)}return r};}
 /* a start() that bypasses Luân hồi (window.__nlInner): attach + send at once */
 (function(){const f=start;start=function(){if(CW.ctx)return f.apply(this,arguments);if(CW.on&&window.__nlInner&&!CW.inLife)CW.inLife=true;/* same: her throwaway world never counts as hers */const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
-CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendEnd;
+CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendEnd;CW.onWeek=onWeek;/* test hook (charge-trinh-punish O1: dev/test/charge-followups.js co-op seat case) */
 /* co-op buổi clock (jcooptimer, KIT §69): read-only views + the one forced step it may take. forceBend = "Sẵn sàng" pressed for her when
    the buổi ran out: sends `bend` even with a dialog / mini game open (the room's step then waits for it: CW.pendBuoi, nothing is cut);
    only for the day buổi (tối ends through nextBuoi → endTurn → end), only when her buổi is the room's buổi and not already ended. */
