@@ -82,6 +82,22 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
    const bangs=await p.evaluate(()=>{const o=[];for(const e of document.querySelectorAll('body *')){if(e.children.length)continue;if((e.textContent||'').trim()!=='!')continue;if(!e.getClientRects().length)continue;
      let el=e,nm='';for(let i=0;i<3&&el;i++,el=el.parentElement){nm=el.getAttribute('aria-label')||el.getAttribute('title')||'';if(nm)break}o.push({cls:String(e.className).slice(0,30),nm})}return o});
    for(const x of bangs)ok(dev,'4 «!» '+x.cls,x.nm?'name «'+x.nm+'»':'NO NAME',!!x.nm);
+   /* (C) MAIN 156 r2: every mini-game shell, one by one (each art's lesson → kind picker → rules screen before «Sẵn sàng» = a FREE back):
+      Back must do what Esc does there (close the game, nothing spent), never leave the page; during a live round Back does nothing (never a give-up) */
+   const arts=await p.evaluate(()=>[...ARTS.map(a=>a.k+':self'),...ARTS.map(a=>a.k+':free')]);const ESC={};
+   for(const km of arts)for(const how of ['esc','back']){const [k,md]=km.split(':');await clear();
+    const r0=await p.evaluate(async ([k,md])=>{const W=t=>new Promise(r=>setTimeout(r,t));const ov=document.getElementById('ov');S.suc=100;S.bac=900;S.th=80;S.mg=null;S.arts[k]=Math.min(S.arts[k]||0,3);
+     try{lessonMode(k,'self')}catch(e){return {err:String(e)}}await W(400);
+     for(let st=0;st<3&&ov.hidden&&!document.getElementById('modal').hidden;st++){const g=[...document.querySelectorAll('#modal button.kshgo')].find(b=>b.offsetParent&&!b.disabled&&/^Làm/.test(b.innerText.trim()));
+      if(g)g.click();else if(Q.length&&Q[0].opts&&/làm gì\?|vật liệu gì\?/.test(Q[0].t||''))chooseM(0);else break;await W(400)}
+     if(md==='free'&&!ov.hidden&&!KG82.backPre)KG82.backPre=()=>{};/* a paid opener's FREE back before «Sẵn sàng» (kgDefer) */
+     return {open:!ov.hidden,x:!!ov.querySelector('[data-kitx="kgback"]'),free:!!(KG82.backPre||KG82.back),bac:S.bac,suc:S.suc}},[k,md]);
+    if(r0.err||!r0.open){ok(dev,`C game ${km} ${how}`,'n/a '+(r0.err||'no game opened'),true);continue}
+    let lf=false;if(how==='esc')await p.keyboard.press('Escape');else lf=await back();await p.waitForTimeout(500);
+    const r1=lf?{}:await p.evaluate(()=>({open:!document.getElementById('ov').hidden,bac:S.bac,suc:S.suc,mg:!!S.mg}));
+    if(!lf)await p.evaluate(()=>{try{if(!document.getElementById('ov').hidden&&typeof kg82Close==='function')kg82Close()}catch(e){}document.getElementById('ov').hidden=true;S.mg=null});
+    const out=lf?'LEFT':(r1.open?'stays':'closed');if(how==='esc')ESC[km]=out;
+    ok(dev,`C game ${km} ${how}`,lf?'LEFT THE GAME':`rules screen (free back ${r0.free}) → ${r1.open?'stays (Esc: nothing; ✕ = give up)':'closed'} · spent ${r0.bac-r1.bac} bạc ${r0.suc-r1.suc} sức${how==='back'?' · same as Esc '+(ESC[km]===out):''}`,!lf&&r0.bac===r1.bac&&r0.suc===r1.suc&&(how==='esc'||ESC[km]===out)&&(r0.free?!r1.open:true))}
    ok(dev,'A page errors',errs.length?errs.slice(0,2).join(' | '):'none',!errs.length);
    await ctx.close()}
   /* ---------- B: the robot's OLD save (Kiếp thứ hai, alive) ---------- */
@@ -100,6 +116,19 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
    await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal:not([hidden]) .opts>button, #modal:not([hidden]) #mr>button')].find(x=>/Tiếp tục|Vào/.test(x.textContent));if(b)b.click()});
    await p.waitForTimeout(6000);const st=await p.evaluate(()=>({name:S&&S.name,dead:S&&S.dead,title:!document.getElementById('title').hidden}));
    ok(dev,'B old save continues',`${cont?'«Tiếp tục kiếp này»':'no continue button'} → ${st.name||'?'} ${st.title?'(still on title)':'in play'}`,cont&&!!st.name&&!st.title);
+   /* (B2) title sub-pages (Thiết lập, Cùng hảo hữu = co-op rooms page): Back = Esc = back to the title home, page kept */
+   for(const [nm,sel] of [['Thiết lập','button[data-tgo="opt"]'],['Cùng hảo hữu (co-op)','button[data-cstab="coop"]'],['Sổ luân hồi','button[data-tgo="past"]']]){
+    await p.evaluate(()=>{try{showTitle()}catch(e){}});await p.waitForTimeout(900);const t=await tapSel(p,'#modal:not([hidden]) '+sel);await p.waitForTimeout(900);
+    const sub0=await p.evaluate(()=>!document.querySelector('#modal:not([hidden]) button[data-tgo="opt"]'));
+    await p.goBack().catch(()=>{});await p.waitForTimeout(800);const left=!p.url().includes('ctm.test')||!(await p.evaluate(()=>typeof Q!=='undefined').catch(()=>false));
+    const home=!left&&await p.evaluate(()=>!!document.querySelector('#modal:not([hidden]) button[data-tgo="opt"]'));
+    ok(dev,'B2 Back on title page '+nm,left?'LEFT THE GAME':`${t&&sub0?'page open':'page not opened'} → ${home?'title home':'NOT HOME'}`,!left&&t&&sub0&&home)}
+   /* (3a-yes) the «yes» path of the system confirm: a new life starts in that sổ */
+   {await p.evaluate(()=>{try{showTitle()}catch(e){}});await p.waitForTimeout(900);await tapSel(p,'#modal:not([hidden]) button[data-tgo="slots"]');await p.waitForTimeout(1200);
+    const n0=await p.evaluate(()=>{const s=loadSlot(1);return s&&s.S&&s.S.name});const L0=await p.evaluate(()=>(lifeLog()||[]).length);
+    await tapSel(p,'#slots button[data-new="1"][data-ask]');await p.waitForTimeout(900);const cf=await tapSel(p,'#modal:not([hidden]) [data-kcf-yes]');await p.waitForTimeout(5000);
+    const r=await p.evaluate(()=>({title:!document.getElementById('title').hidden,name:S&&S.name,dead:S&&S.dead,id:/Thân phận|thân phận/.test((document.getElementById('modal')||{}).innerText||'')}));const L1=await p.evaluate(()=>(lifeLog()||[]).length);
+    ok(dev,'3a-yes «Bắt đầu kiếp mới» / «Bỏ ngang»',cf?`yes tapped → ${r.title?'STILL ON TITLE':'new life ('+(r.id?'identity card':r.name)+')'} · old «${n0}» → Sổ luân hồi +${L1-L0}`:'NO YES BUTTON',cf&&!r.title)}
    ok(dev,'B page errors',errs.length?errs.slice(0,2).join(' | '):'none',!errs.length);
    await ctx.close()}}
  async function clear2(p){await p.evaluate(()=>{try{const M=document.getElementById('modal');if(M&&!M.hidden&&typeof closeModal==='function')closeModal()}catch(e){}})}

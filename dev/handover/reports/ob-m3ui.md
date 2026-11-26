@@ -65,3 +65,8 @@ Re-review after fault 1: SMALL re-check = run `node dev/test/ob-m3ui.js` + add c
 
 ## FIX r2 (after RV-OB-M3UI SMALL FAIL)
 Back guard is now kept on top ALWAYS: `kitBackArm` at boot, on every pointerdown / key, and re-pushed on every popstate; popstate runs `kitTopClose()` (closes a closable layer, else nothing). New cases in ob-m3ui.js, Fold + iPad: Back on the bare room → stays in the game; Back on a forced event → stays, event still waiting; Back on a card opened by a timer 1.5 s after the last tap → closes it. 50/50 pass, old save continues, 0 page errors. KIT.md 32.10 Back line overwritten in place.
+
+## FIX r3 (MAIN 156 addendum)
+- Back = Esc by construction: popstate re-pushes the guard and sends ONE Escape key event to the focused element, so every layer's own Esc handler answers Back the same way. `kitTopClose` also closes the co-op letters panel (#kchatp ✕) and a mini-game shell only while its back is free (KG82.backPre / KG82.back); in a round with stakes Back does nothing (the ✕ there = give up, so Back never gives up for her).
+- Scan, Fold + iPad (dev/test/ob-m3ui.js, 122/122 pass): every mini-game shell via each art's lesson (cầm, kỳ, thi, họa, vũ, y, thêu, nấu) on the rules screen: Back = Esc (no free back: stays; free back: closes), 0 bạc / 0 sức spent, never leaves; title pages Thiết lập / Cùng hảo hữu (co-op rooms page) / Sổ luân hồi: Back → title home like Esc; «Kiếp mới» confirm YES path: new life starts (identity card) in that sổ.
+- Not testable here: a LIVE co-op room (needs the relay + a second player). Code path: Back only runs local closers (no COOP send), the room lobby is a kit modal (Back = its ✕), the letters panel closes by its ✕.
