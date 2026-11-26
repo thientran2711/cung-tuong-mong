@@ -18,3 +18,17 @@ lãnh cung «Bị bỏ quên» at month 3 for a newcomer: j3 monthTick `!S.out &
 
 ## Handover
 Successor: copy nothing; resume = run /home/user/wt/g4live.sh in a tracked bg job (resume=1 continues lives from <dir>/<life>.ckpt.json). If the container is gone, restart fresh from this branch's index.html.
+
+## Done slices on LIVE 5e013076 (26/11 01:58Z) — 4/12
+| life | end | year | rank (max) | Danh | Sủng | lãnh cung | outbursts |
+|---|---|---|---|---|---|---|---|
+| hot-1 | SLICE b400 | 3 | 0 (0) | 1 | 0 | yes | 3 (khac 1, mang 2) |
+| even-1 | SLICE b400 | 3 | 0 (1) | 73 | 18 | no | 0 |
+| even-2 | SLICE b400 | 3 | 0 (0) | 37 | 13 | no | 0 |
+| timid-1 | death b162 «Hồng nhan bạc mệnh» (Emperor died at 22 → tuẫn táng) | 2 | 0 (1) | 1 | 0 | yes | 2 (khoc, boan) |
+- Wording note for MAIN: that ending text shows «(khả năng: vừa)» — not one of the 7 odds words.
+- 2nd early-death path for low-rank lives (Emperor death → tuẫn táng, year 2) — listed with the lãnh cung balance candidate, untouched.
+
+## F10 renderer memory (for the F10 workers)
+- «Page crashed» = memcg OOM kill (dmesg, 7 kills, chrome renderer anon-rss 5.1–9.2 GB). Harness rssTree under-reports (logged 1.7 GB vs ps 8.5 GB).
+- Leak signature: page stuck/idle on one screen, renderer +~280 MB/min until killed (timid-2 b77 01:08–01:35Z after «Chương 2: Sơ thừa ân sủng» card; off-1 b286). Normal play 1.3–2.5 GB. Sampler: /home/user/wt/rsslog.sh -> rsslog.txt. Evidence CDN img/_review/renderer-mem/.
