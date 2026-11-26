@@ -50,3 +50,6 @@ B (only one with 0 scroll for all 4 people on both devices; keeps a small tall p
 - Conflicts with OD 18/11 "never shrink the figure" and the "no truncation" kit rule: needs her word + KK44.
 - Harness note: first shots were polluted by the random «Luân hồi» roulette overlay; fixed (kitRoulette stub) and ALL final shots retaken.
 ~90 % this task done (look-only) / ~0 % playable (nothing landed).
+
+## Addendum — option D (MAIN 161 request: iPad full width, 2-column acts, name never breaks)
+review/person-panel-d: A + on iPad landscape the stage (scene + Ân sủng box) is hidden while a person card is open, card spans the full width, compact acts in 2 columns; `.pcname` nowrap in all options (a/b/c rebuilt too). Measured (4 people): Fold avatar 7 %, whole buttons 14/14, cards still scrolling 2/4 (left box of long-fact people); iPad 9 %, 14/14, 2/4. Cost: Ân sủng box not visible while card open. Stills PA-D-*.jpg on the CDN folder; PDF updated (16 pages).
