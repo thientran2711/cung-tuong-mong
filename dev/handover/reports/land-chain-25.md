@@ -46,3 +46,4 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 22:35Z SP 4cfcda61 (FF of LIVE): QC alone vs 504d2e6a build PASS — old save ok, render 152/177, tab 408/497, buổi median 987/931 (1.06×), longTaskMax 1584/1643, tasks 18/23; build current (rebuild diff = build line only). coregates + time-spill running.
 - 22:32Z MAIN 164 rolled → MAIN CHÍNH 165 session_01Rc5AsJ8B9RuGFGzjjQkmun gets READY.
 - 22:35Z MAIN 165 queue add: punish-tier-wit b5f3d85e after RV-163C PASS, after punish-tier ab73bc26.
+- 22:37Z RV-163 PASS dialog-order-r4 → sha 4594ec2b (review/dialog-order-r4-r163 on 03a8c17c; CHANGE both lines → fix to ONE at restack). Slot per MAIN 165.
