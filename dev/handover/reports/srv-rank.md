@@ -1,0 +1,6 @@
+# D-SRV-RANK — report (review/srv-rank)
+
+PRIORITY #1 CHECK ('srv.rk|maid rank|promo'): OD 65 | ledger 13 | claims 8 | main 15 | review/* 10 | archive 513 — key hits: OD:L1149 (servant rank capped by master rank: j14 srkMax ≥7→Nữ quan, ≥4→Chưởng sự cô cô, else Đại cung nữ), OD:L1940 (maid-ladder-6), OD ~08:00Z 26/11 ONE PACE TABLE (dev/measure/pace.js); main j42 srvMonth/srvMax, j14 srkMax, jbal.js:445 BAL.srvRk, jbal2 BAL.srvMp; review/promo-root3 (rank-0 = harness metric, not game), review/robot-realtap 7767c6fc (RANK METRIC srv.rk), dev/measure/cnv-promo-sim.js (maid road sim, reused); claims: none for srv-rank (D 12:15Z).
+
+- (26/11 12:30Z) START: D-SRV-RANK worker session_01D3E3NbVRYoHioc81tQJMxN, child of Foreman D session_01D3E3NZKCLJ7V9VupQyCnr1. depth 5. START_CTX ≈ 7 % (get_session used_tokens reads 0; own estimate, 1M window) → roll at ≥ 32 %, ceiling 60 %. LIVE = 1dcb373e. Worktree /home/user/wt/srvrk (sparse), branch review/srv-rank from LIVE.
+- First read: s11b srv.rk 4 = Chưởng sự cô cô = srkMax cap when the mistress is rank 4–6 (OD:L1149 rule, by design). Open question = whether the exits from the cap (buy-out to a higher house, emperor pick, ma ma at 25, mistress rising) fire at a sane pace. Measuring with cnv-promo-sim.js next.
