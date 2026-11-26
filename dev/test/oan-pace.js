@@ -47,8 +47,8 @@ const PAGE=process.argv[2]||'index.html';
   {const v=e;const keep=[v.oan,v.ghen,v.rel];v.oan=0;v.ghen=0;v.rel=-100;const A=tyEnemies(S).includes(v);v.oan=0;v.ghen=0;v.rel=-10;const B2=tyEnemies(S).includes(v);[v.oan,v.ghen,v.rel]=keep;
    ok('T1 the strip plot (jty tyEnemies) needs the grudge heat BAL.oanPace.act',!B2,[A,B2])}
   /* GHÉT fade (review/oan-pace-2) */
-  {const F=P.ghet.fade;e.rel=-30;e.agw={me:wk()};e.agc={};ghetCool();const r1=e.rel;e.rel=-30;e.agw={me:wk()-20};e.agc={};ghetCool();const r2=e.rel;e.rel=-80;e.agw={me:wk()};e.agc={};ghetCool();const r3=e.rel+80;
-   ok('G3 a dislike toward her eases each day, faster when left alone, deep slower (BAL.oanPace.ghet.fade)',r1>-30&&r1<=0&&r2-(-30)>r1-(-30)&&r3>=0,[r1,r2,r3]);
+  {const w=wk();e.rel=-30;e.agw={me:w};e.agc={me:.99};ghetCool();const r1=e.rel;const fa=opGhetF(-30,w,1),fb=opGhetF(-30,w-20,1),fd=opGhetF(-80,w,1)/(P.ghet.fade.base+P.ghet.fade.pct*80);
+   ok('G3 a dislike toward her eases each day (ghetCool), faster when left alone, deep slower (BAL.oanPace.ghet.fade)',r1>-30&&r1<=0&&fb>fa&&fd<1,[r1,fa,fb,fd]);
    e.rel=-2;e.agw={};e.agc={me:.9};for(let i=0;i<5;i++)ghetCool();ok('G4 the fade never passes 0',e.rel===0,e.rel);
    S.rl[c.id]=-30;S.agw={};S.agc={};ghetCool();ok('G5 two-way: HER dislike of a consort eases the same way',S.rl[c.id]>-30&&S.rl[c.id]<=0,S.rl[c.id])}
   /* GHEN pace (review/oan-pace-ghen) */

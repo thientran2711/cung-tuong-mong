@@ -36,7 +36,12 @@ function opHeat(a,t){const H=BAL.net.heat;return Math.max(oan(a,t),t===S?(+a.ghe
 function opHeatOK(a,t){try{return !opOn()||a===S||opHeat(a,t)>=BAL.oanPace.act||opEx(a,t)}catch(e){return true}}
 /* an outside reason that still opens a hostile choice: coerced by proof / a faction leader's order (j95except). A rumour she believes is NOT one here:
    its oán already landed (one bounded step), and letting it open the gate made every believer a new liar (a chain of lies from day one, robot 26/11) */
-function opEx(a,t){const r=a.j95rum;try{if(r)a.j95rum=null;return !!j95except(a,t)}catch(e){return false}finally{if(r)a.j95rum=r}}
+function opEx(a,t){const r=a.j95rum;try{if(r)a.j95rum=null;if(!j95except(a,t))return false;
+ /* review/oan-pace-2: the one who PUSHES (holds proof and coerces, or the faction leader who orders) must pass the same grudge-heat gate toward t —
+    else one angry leader turned every follower into a liar with no grudge of her own (robot 26/11: most second-half lie rumours came from tellers at heat 0–10) */
+ for(const h of liveRivals(true)){if(h===a||h===t)continue;if(chOK(h,a)&&hostility(h,t)>=netTh(h,"host")&&(h===S||opHeat(h,t)>=BAL.oanPace.act))return true}
+ const f=facOf(a);const L=f&&facLeader(f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=netThK(L,"host","hostHi")&&aff(a,L)>=netTh(a,"than")&&opHeat(L,t)>=BAL.oanPace.act)return true;
+ return false}catch(e){return false}finally{if(r)a.j95rum=r}}
 (function(){const g0=motiveOK;motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!opOn()||!g||!g.ok||!a||!t||a===S||a===t||typeof a!=="object"||a.rel==null||!H95.has(kind))return g;
   const h=Math.round(opHeat(a,t));if(h>=BAL.oanPace.act)return g;if(opEx(a,t))return g;
   return{ok:false,why:`chưa đủ oán với ${t===S?"ngươi":t.name} (${h}, cần ${BAL.oanPace.act})`}}catch(e){return g}};window.motiveOK=motiveOK})();
