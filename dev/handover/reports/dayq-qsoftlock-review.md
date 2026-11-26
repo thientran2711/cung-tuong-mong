@@ -36,3 +36,6 @@ Worker FULL real-tap videos looked at (contact sheet every 8 s): qsoftlock-JKL-f
 3. quickcheck G4 80-dialog-fixed «no empty Tốn / Được cell» on LIVE.
 
 LAND READY review/dayq-qsoftlock 8acabdd1 (FF from LIVE 03a8c17c)
+
+## ADDENDUM (26/11 ~23:55Z): LIVE moved to 4cfcda61 → reviewer merge 25828054 (built files only; jdayq.js byte-identical to 8acabdd1; scan A/B identical). Gates ALONE on 25828054: held A–L Fold+iPad ALL PASS · coop-e2e 143/143 · quickcheck --runs 5 PASS (old save ok); core gates only pre-existing G4.
+LAND READY review/dayq-qsoftlock 25828054 (FF from LIVE 4cfcda61)
