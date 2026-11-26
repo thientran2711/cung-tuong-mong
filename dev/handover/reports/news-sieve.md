@@ -104,4 +104,83 @@ Result: NEWS-SIEVE PASS 7/7 on seeds 1, 2, 3 (threshold: average ≤ 12 lines pe
 3. «Tin báo» panel option cards «Để ta xem / Để sau» still show «TỐN không · ĐƯỢC không» (kit option card; KK37 family, not changed here).
 4. Home (Khuê các): only the Tai mắt palace Tin báo is gated here; the k61 «xưng danh / quen biết» lines she gets at home (OD 25/11 ~23:10Z shot) come from the meeting code, not the news sinks — another job.
 
-## LAND READY review/news-sieve c7a3302d (ask MAIN 152 for a BIG reviewer)
+## LAND READY review/news-sieve c7a3302d (ask MAIN 152 for a BIG reviewer) — superseded by NEWS-SIEVE-2 below
+
+---
+
+# NEWS-SIEVE-2 — report (worker session_01V1ZZH2L7SB2YyEATuwgbWi, coordinator MAIN CHÍNH 153)
+
+depth 2 · START_CTX ≈ 3 % (get_session reads 0; own estimate) · roll at ≈ 28 %
+
+PRIORITY #1 CHECK: OD 26/11 ~04:40Z NEWS SIEVE + ~05:05Z refinement + ~06:47Z MAIN decisions (verbatim, read) | main 02f564ae: jmem CAUSE LEDGER
+(causeAdd / causeWhy / causeText / causeLine — every act between two people already recorded with its REASON, "hidden from her") — REUSED as the
+cause of every Sổ ghi record, nothing rebuilt; j1 log() / S.logs = the Sổ ghi; j24 BANDS = harm bands; jptime parallel time lands NPC deeds later
+| review/news-sieve c7a3302d (predecessor, continued) | claims: NEWS-SIEVE (this session).
+
+## RESULT — branch `review/news-sieve` (merged origin/main 02f564ae). LAND READY sha: last line of this section.
+
+### Merge of main 02f564ae (7 source conflicts)
+- j28 SOC provoke / humiliate, jagwhy1 apTaunt, jemoact cham: main's net-build thresholds (netThK / bandVT / eaRival) AND the rank-respect gate mockOK.
+- j28 trKnown / trLearned split kept over main's new wording («Ngươi biết X vốn tính …»).
+- jbal2: BAL.news kept beside main's net-build block.
+- jnotice / jstatus: main's button-crawl-fix-5 (`view:1`, one copy per title in Q) does what kitPanelOnce did → kitPanelOnce and its KIT.md line REMOVED (one mechanism, law 14). The test «5 taps → 1 copy, one Lui → 0» still passes.
+
+### 1 · Owner 05:05Z: «ai mưu hại ai» stays in Tin báo; the Sổ ghi keeps the FULL harem record (doer, victim, cause)
+Found on c7a3302d (and LIVE): an NPC ↔ NPC deed reached her only through `seenNPC` (j8): a chance roll; a BAD deed seen gave silent evidence and NO line at all;
+S.news (cap 40) is not the Sổ ghi; the cause ledger (jmem) knew doer / victim / reason but was hidden. So «ai rạch mặt ai, vì sao» was nowhere she could read.
+Fix (jnsieve §5, BAL.news.recMax / bigBand):
+- every act between two other consorts (runAct, caught at the moment it LANDS — parallel time sends it first) → one record in `S.hrec`:
+  «A hủy dung B, vì ghen nàng được sủng. Người được sai: X. Kết quả: …» — the reason is jmem `causeText` (trả đũa / ghen / oán / ghét / nóng giận / nết …);
+  failed or not = the act's own first sentence;
+- every line the sieve takes out of the daily feed (newsAdd NPC deeds, NPC-only know lines, morning-card sentences, gossip reports) → `S.hrec` too: nothing lost;
+- the Sổ ghi tab (Mệnh truyện › Sổ ghi, j6 «log») shows S.hrec merged by time with her own lines; S.logs itself untouched (Tuần lục, kitWhy, jlogsync read it);
+- a BIG harm (BANDS band ≥ 2: vu oan, tố giác, hủy dung, hạ độc, đẩy xuống hồ, xin bế con, rút thẻ bài, trộm thú nuôi …) is also ONE «Tin báo» line
+  «A định vu oan B, vì oán nàng từ trước, nhưng không thành.»; none while she is at home in Khuê các (OD 25/11 ~23:10Z);
+- names through knowWho at show time (a stranger stays «một vị Quý phi»; her name appears once she learns it); cap 300, the oldest heard line goes first, a big harm last.
+- whole family (law 11): the kitKnow sieve now takes EVERY know line about other people only (not just the «Sổ ghi thêm …» / nết patterns): e.g. j92 overheard
+  dress remarks «(lời của X, chưa chắc đúng)», jration «X lấy được … trong rương Y»; her own name / rank knowledge (id: / rk:) and the big-harm lines stay.
+
+### 2 · MAIN decisions (OD ~06:47Z)
+(a) monthly summary fires at each GAME month end (monthTick, 3 tuần) — already so on c7a3302d, kept. (b) NẾT OPEN for servants and children:
+`s.kn = 1` for every servant (hers and others', new ones at mkServ, old saves at the next buổi) and `k.dilK = 1` for every child with a learning nết (j53).
+«Xem người» (Bạc −15, jhouse + j15 card button) is no longer offered (it showed only while !s.kn).
+The People tab servant card (Cung nhân) had NO nết row at all (neither before nor after): it now gets the same «Tính nết» row as a consort, through
+jmind mindRows (the one source of «Sở trường / Thích / Ghét» rows on every person card; jmind line 115 now reads window.mindRows so the jnsieve row reaches it). LAW 16 list for MAIN (logic that read "nết unknown"):
+1. jhouse «Hỏi chuyện» odds: 70 instead of 40 with a talkative servant now that her nết is known (`netIs(s,"talk")&&s.kn`) — consequence, no number changed;
+2. jagknow knLoyK: a Tai mắt's firmness is shown for every servant of hers (gated on s.kn);
+3. j29 servLearn / svSpy reveal, j80 servPolicy «look first», j53 ktReveal «Thầy dạy tâu riêng / Dạy con, ngươi thấy» now find nothing to reveal (no act removed).
+
+### 3 · «TỐN không / ĐƯỢC không» on a free option = KIT family → KIT REQUEST K-FREE-OPT (dev/kit/KIT_REQUESTS.md) for KK38. Not touched here.
+Note: the quickcheck gate dev/test/dialog-fixed.js (l) («MAIN 88: a card with no gain says «không»») FAILS on origin/main 02f564ae too (card «Mặc kệ» shows
+EMPTY Tốn / Được cells) — the owner's newer rule says hide them; KK38 must settle rule + gate together (written in the request).
+
+## TESTS
+`node dev/test/news-sieve.test.js dev/index.html 36 <seed>` (1 palace life = 36 tuần, bot; new checks 7–9):
+| check (1 year) | c7a3302d (before) | review/news-sieve (after) seed 1 / 2 / 3 |
+|---|---|---|
+| big NPC ↔ NPC harm events (test's own runAct wrapper, at landing) | — | 1 / 4 / 4 (+1 forced hủy dung each) |
+| … of them in «Tin báo» | 0 by design («NPC-only → 0»); only a lucky «Tai mắt thấy» for a non-bad deed | **1 / 4 / 4** |
+| … of them in the Sổ ghi with doer + victim + cause | none (no record; bad deeds seen = silent evidence) | **1 / 4 / 4** |
+| every NPC ↔ NPC act in the Sổ ghi (records / acts) | 0 / n | 9/9 · 18/18 · 35/35 (no record without a cause, none without both people) |
+| harem record lines kept per year (acts + lines taken out of the feed) | 0 | 1228 / 1239 / 1195 (cap 300 kept, small first out) |
+| forced hủy dung A → B: Tin báo line + Sổ ghi tab row (A, B, «hủy dung», cause) | — | yes / yes / yes |
+| NPC-only lines in the daily feed | 0 | 0 / 0 / 0 |
+| lines per tuần avg / worst | 8.7–10.4 / 26–36 | 7.9 / 8.1 / 6.6 · 22 / 27 / 22 |
+| monthly summaries | 12 / 11 / 12 | 12 / 11 / 12 (a death: the new life takes its baseline first) |
+| lower rank openly mocks a higher one | 0 | 0 / 0 / 0 |
+| servants with nết open / children with nết open / «Xem người» offered | 0 / 0 / yes | 27/27 · 29/29 · 29/29 / 3/3 · 4/4 · 4/4 / no |
+| one copy per tapped panel | 1 → 0 | 1 → 0 |
+| page errors | 0 | 0 |
+Result: NEWS-SIEVE PASS 10/10 on seeds 1, 2, 3.
+Test fixes (independent checks kept): «hạ nhục nàng» told by a SERVANT about herself is not a rank breach (servants are not ranked); «bị bắt khi …» = evidence kept (OD rule 1).
+QUICKCHECK (bash dev/tools/quickcheck.sh): open ok, core G1–G3 PASS, G4 80-dialog-fixed FAIL = (l) «no empty Tốn / Được cell» — the SAME 2 FAIL on origin/main 02f564ae
+(run here on main's build) → KIT REQUEST K-FREE-OPT; «old save» FAIL 2 of 2 runs = the OLD build (origin/main) selection life ends in ban hoa («Duyên cung lỡ hẹn»,
+S.dead) during «old build first turn» — the old-save step has no reroll (the perf step has); traced with a debug copy: when the old build gets past it, the old
+save loads and plays a buổi on THIS build 3 of 3 (0 errors); main vs main passed once by luck. «perf: live build could not be measured (undefined)» also on main vs main here.
+→ for MAIN / the quickcheck owner: give the old-save step the same ban-hoa reroll as the perf step.
+
+VIDEOS + stills (looked at every frame first; built site, HOST mode): CDN img/_review/news-sieve/ — news-sieve-fold-755x1000.webm, news-sieve-ipadAir-1180x820.webm, fold-1-tinbao.png / ipadAir-1-tinbao.png (Tin báo, first line = the hủy dung), fold-2b-soghi.png / ipadAir-2b-soghi.png (Sổ ghi record: doer, victim, cause, servant sent, result), fold-3-tongket.png (monthly summary), fold-5-cungnhan-net.png / ipadAir-5-cungnhan-net.png (servant card «Tính nết»). Note: a «Kết quả · Trong cung vừa qua» popup left by the bot sits over part of the Fold Sổ ghi shot (not part of this change).
+OPEN FOR MAIN: (1) names in the Sổ ghi / Tin báo follow knowWho: a consort she has not met reads «một vị Quý phi» (law of known names); if sếp wants the real names always («ai rạch mặt ai đầy đủ»), it is one switch in jnsieve maskNames. (2) quickcheck old-save step needs the ban-hoa reroll (see above). (3) K-FREE-OPT for KK38.
+HANDOVER: nothing left on this job; follow-on ONE SIEVE (MAIN 154 order) not started — it goes on review/one-sieve from this branch.
+
+## LAND READY review/news-sieve 2a24d4db (NEWS-SIEVE-2)
