@@ -187,7 +187,9 @@ function tsTalkOpt(a,n,need0){if(!a)return null;const k=talkK(a),run=!!a.run,sur
   go:()=>{spend(k);/* fx (a.c) is paid by the card; the act runs without paying it again */const b=Object.assign({},a,{c:null});
    if(run){const r=oddsCapped(b)&&!roll(BAL.odds.hi)?oddsSoft(b.n,a.c):b.run();if(r)log(`${a.n}: ${r}`)}else runOpt(b)}})}
 /* one person: «Làm lành với <phẩm tên>» → her real ways with that person (Tạ lỗi, Nhún nhường, Thỉnh an for the Hoàng hậu, Biếu quà làm lành for her alone) */
-function tsMendL(v){const p=v&&v.queen&&rivals[0]===v?{kind:"hh",ref:v}:{kind:"rival",ref:v};let A=[];try{A=talkOpts(p)}catch(e){}
+/* the raw talk options of a person (J1 ACT-MERGE jdoor: talkOpts returns the «Trò chuyện» door list; doorRaw = the same option objects as before) */
+function tsTalkL(p){return typeof doorRaw==="function"?doorRaw(p):talkOpts(p)}
+function tsMendL(v){const p=v&&v.queen&&rivals[0]===v?{kind:"hh",ref:v}:{kind:"rival",ref:v};let A=[];try{A=tsTalkL(p)}catch(e){}
  return ["Tạ lỗi","Nhún nhường","Thỉnh an"].map(n=>A.find(a=>a.n===n)).filter(Boolean)}
 function tsOptMend(v){if(!v)return null;const L=tsMendL(v),G=BAL.tsGift;const can0=L.length>0||S.bac>=G.bac;
  return tsOpt({n:`Làm lành với ${tsNm(v)}`,need:can0?[]:[{t:`Bạc ${G.bac} để biếu quà (có ${S.bac})`,ok:false}],duoc:[L.map(a=>a.n).concat(["Biếu quà làm lành"]).join(", ")],kem:[`${tsOanTxt(v)} · ghen ${v.ghen||0}`],
@@ -201,8 +203,8 @@ PEND.tsmend=p=>{const v=RV(p.v);if(!v||v.alive===false||v.out)return null;const 
  o.push({n:"Thôi",fx:{}});
  return{who:pv(v),t:`<p>${tsNm(v)}: ${tsOanTxt(v)} · ghen ${v.ghen||0} · ${tsWhy(v)}.</p>${tsRows([["Cách giảm",tsLowerTxt("oan"),"n"]].concat(fg?[]:[["Lưu ý",`oán còn quá sâu (từ ${th} trở lên), lời tạ lỗi bị gạt đi: biếu quà làm lành cho nguôi bớt trước`,"r"]]))}`,o}};
 /* the patrons (Xin Hoàng hậu che chở / Xin Thái hậu đỡ lời: the same talkOpts options, odds and gates) */
-function tsHelpL(){const A=[];try{if(typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0]!==S){const h=talkOpts({kind:"hh",ref:rivals[0]}).find(a=>a.n==="Xin Hoàng hậu che chở");if(h)A.push(h)}}catch(e){}
- try{if(!S.thDead){const t=talkOpts({kind:"th"}).find(a=>a.n==="Xin Thái hậu đỡ lời");if(t)A.push(t)}}catch(e){}return A}
+function tsHelpL(){const A=[];try{if(typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0]!==S){const h=tsTalkL({kind:"hh",ref:rivals[0]}).find(a=>a.n==="Xin Hoàng hậu che chở");if(h)A.push(h)}}catch(e){}
+ try{if(!S.thDead){const t=tsTalkL({kind:"th"}).find(a=>a.n==="Xin Thái hậu đỡ lời");if(t)A.push(t)}}catch(e){}return A}
 function tsOptHelp(){if(tsSrv())return null;const L=tsHelpL();if(!L.length)return null;
  return tsOpt({n:"Nhờ bề trên che chở",need:[{t:L.filter(a=>!a.lock).length?"có người để nhờ":L.map(a=>a.t).join("; "),ok:L.some(a=>!a.lock)}],duoc:[L.map(a=>a.n).join(", ")],later:1,go:()=>{tsOpener();/* an opener: the act it opens shows its own result */pushDil(mkP("tshelp",{}),"Nhờ bề trên che chở")}})}
 PEND.tshelp=()=>{const L=tsHelpL();if(!L.length)return null;return{t:`<p>Nhờ bề trên đứng ra che chở, kẻ muốn hại ngươi phải dè chừng.</p>`,o:L.map(a=>tsTalkOpt(a)).concat([{n:"Thôi",fx:{}}])}};
