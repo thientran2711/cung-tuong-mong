@@ -13557,5 +13557,79 @@
   "row": "R6·random·5:3552077722 (rerun on LIVE github.io, fold)",
   "game": "github.io LIVE, GAME BUILD {s:f009e1a6+, b:dd1ce3d0ffa1, t:2026-11-26T02:21Z}; harness d2e03d80; one buổi, no resume",
   "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after the Lễ ra mắt · Môn thi · Đàn trial, real taps, github.io) — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-scholar-2",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 365032886,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "f009e1a6+",
+    "b": "dd1ce3d0ffa1",
+    "t": "2026-11-26T02:21Z"
+   },
+   "areaTaps": 47,
+   "dlgScroll": 6,
+   "scrolls": 6,
+   "taps": 19
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 19,
+   "year": 1,
+   "rank": 2,
+   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
+   "card": [
+    "Dâng Cầm Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì ",
+    "Dâng Kỳ Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; làm tốt thì đ",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Dung mạo 3»",
+    ".dlg «Thân phận kiếp này» «Vừa»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 2»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 4»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 4/4» «Vào cung»",
+    "AREA 237,616",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 1,
+  "steps": 88,
+  "status": [],
+  "t": {
+   "total": 48780
+  },
+  "unit": "E-S6",
+  "row": "R6·scholar·2:365032886 (rerun on LIVE github.io, fold)",
+  "game": "github.io LIVE (GAME BUILD in R6-scholar-2.log), harness d2e03d80; one buổi, no resume",
+  "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after picking «Cúi đầu chờ xét» at «Lễ ra mắt», real taps, github.io) — COUNTED; fairness note"
  }
 ]

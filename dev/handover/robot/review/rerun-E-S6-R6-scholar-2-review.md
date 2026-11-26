@@ -1,0 +1,8 @@
+# R6-scholar-2 (Fold 755x1000, bot=sens, seed 365032886, pf/pt_tang) — end-of-life notes — COUNTED (shortest life: 19 taps)
+Ending **«Bị ban hoa, xuất cung»** (card «Duyên cung lỡ hẹn»; «Thuyền đưa ngươi về Phù Tang»), age 19, year 1, **buổi 1**, rank 2, **19 real taps**, 0 JS clicks, 0 bugs. robot-audit VALID (game-imposed; exitPick none). github.io LIVE, harness d2e03d80, no resume. Read from the result JSON (last 12 taps + last card) and the moment log; I did not open its shots: no score table.
+## What happened (from the tap log)
+«Thân phận kiếp này» (picked Dung mạo / «Vừa» / «Nhận thân phận») → «Tiền truyện · Công chúa Phù Tang hòa thân 1/4…4/4» («Vào cung») → one area tap → «Vào điện» → dialog **«Lễ ra mắt»** with three options, all rated «Rất vững»: «Dâng Cầm» (Sức -5, play one stage; do well → …), «Dâng Kỳ» (same), **«Cúi đầu chờ xét»** (Sức -5, «không thi; tính theo …»). The robot picked «Cúi đầu chờ xét» and the life closed straight away with the princess sent home.
+## Findings (balance / fairness — for the expert and MAIN, not asserted as bugs)
+1. FAIRNESS (laws 2, 3, 6): all three options read «Rất vững», yet the no-exam option ends the whole life in the first buổi (and R6-random-5 ended the same way after playing the Đàn trial at «Mong manh»). Two of the first four counted LIVE-build lives of pt_tang ended at buổi 1: the first buổi of this road is a coin-flip for the whole life, with no warning on the card that failing/skipping means «xuất cung». As a newcomer (scholar persona) it reads as a trap.
+2. ODD: «Phẩm cao nhất: Quý nhân» on a one-buổi life (rank granted before the result?), same as R6-random-5.
+3. For the digest: 19 taps = a «life» under a minute; suggests a soft landing / a visible warning on «Lễ ra mắt».
