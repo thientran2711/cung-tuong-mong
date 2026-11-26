@@ -1,7 +1,7 @@
 {
  "unit": "E-S5",
  "game": "LIVE github.io",
- "finished": 5,
+ "finished": 4,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -449,40 +449,6 @@
     "dlgClose": 23,
     "infoTaps": 8,
     "taps": 439
-   },
-   "bugs": [],
-   "exitPick": null
-  },
-  {
-   "life": "E-S5-R5-cautious-4",
-   "dev": "fold",
-   "bot": "cautious",
-   "seed": 1770537827,
-   "origin": "pf",
-   "road": "pt_su",
-   "ending": "Lãnh cung",
-   "type": "end",
-   "death": false,
-   "age": 24,
-   "buoi": 964,
-   "harness": {
-    "kind": "realtap",
-    "sha": "b4b181f8",
-    "realtap": true,
-    "jsClicks": 0,
-    "deadButtons": 0,
-    "cap": null,
-    "stuck": 0,
-    "unstick": [],
-    "slice": null,
-    "areaTaps": 2943,
-    "dlgScroll": 119,
-    "scrolls": 170,
-    "infoTaps": 740,
-    "dlgClose": 379,
-    "nextNoTurn": 56,
-    "kfocVisits": 27,
-    "taps": 5649
    },
    "bugs": [],
    "exitPick": null
