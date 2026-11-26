@@ -59,7 +59,7 @@ async function seatLoop(ctx, who, dev, other) {
   const p = await ctx.newPage(); const st = {}; let k = 0;
   for (;;) {
     k++; const extra = k > KIEP;
-    const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
+    const s = Seat({ pin: A.pin, url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
       origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, resume: RESUME && k === 1, noBoot: k > 1, coop: true, roomCode: () => code, coopLink: { me: LINK[who], other: LINK[who === 'host' ? 'guest' : 'host'] }, pre: (k === 1 && !RESUME) ? (who === 'host' ? hostPre(st) : guestPre(st)) : (k === 1 && RESUME ? resumePre : null) });
     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });

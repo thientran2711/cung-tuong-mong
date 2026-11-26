@@ -392,3 +392,9 @@ Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No 
   Re-proof on merge-built LIVE 3af7896e (b7dcbbd06e03): new life MB pinned → build-3af7896e… served :8745, buổi 16; pin server killed (container restart) + resume given
   the OLD url :8810 (dd1ce3d0ffa1) → re-served, buổi 17, builds = 1, no mismatch. A load without window.CTM_BI is now a [harness] note (buildUnknown), not silent.
   robot-audit (handover): builds > 1 / buildMismatch = its OWN verdict «MIXED-BUILD», counted apart (COUNTS … · MIXED-BUILD n), not plain INVALID (F #21, F ops 10:55Z).
+- BIG #9 FAIL 8366c261: (1) pinUrl listens to the server script's exit: a build not on main (exit 2) or no git checkout → «BUILD PIN: rt-serve-build.sh exited N … no
+  pin, the given url is used, the gate still stops a mismatch» at once (was a 10-min wait + PAGE FROZE); the loop clock is kept alive while a slow first fetch runs
+  (≤ 6 min). (2) pin=0 on the CLI reaches the Seat (robot-rt main + robot-rt-coop seats); a wrong «already a pin port» regex that skipped every 127.0.0.1:87xx–89xx
+  url is gone. (3) RT_TEST_KIP judges only after the picker was SEEN (pushDil queues it; «never shown» after 30 s). Note: «no item can be given now» (every confirm
+  disabled, e.g. khắc cost) is a [note], not a [game] fault. Proof: fake build deadbeef0000 on :8820 → exit 2 logged, life plays on; pin=0 → no pin, buổi 41;
+  Fold s43 pinned :8745, RT_TEST_KIP shown:true, closed after 19 s (all confirms disabled → note + ✕).
