@@ -1,0 +1,130 @@
+[
+ {
+  "k": "game|softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+  "type": "game",
+  "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+  "n": 19,
+  "at": 4089,
+  "shot": "/home/user/wt/out3f/shots-flight2-s3f/noturn-1.png",
+  "dump": "/home/user/wt/out3f/shots-flight2-s3f/noturn-1-dump.json",
+  "S": {
+   "dead": false,
+   "y": 3,
+   "t": 27,
+   "w": 2,
+   "b": 3,
+   "age": 20,
+   "rank": 0,
+   "name": "Diệp Tương Quân"
+  },
+  "trace": [
+   "#dawn «Tiếp theo»",
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang trước»",
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Lui»",
+   ".dlg «Tin trong cung buổi này» «Lui»",
+   ".dlg «Sắp tới: Thi tài ngày Thất tịch» «Lui»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang buổi»",
+   ".kfoc «Tiếp ▸»",
+   ".kfoc «Tiếp ▸»",
+   ".kfoc «Tiếp ▸»",
+   ".kfoc «Lui»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Sang buổi»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Không gặp ai.» «Sang buổi»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»"
+  ]
+ },
+ {
+  "k": "stuck|no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.»",
+  "type": "stuck",
+  "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.»",
+  "n": 1,
+  "at": 5708,
+  "shot": "/home/user/wt/out3f/shots-flight2-s3f/loop-10.png",
+  "dump": null,
+  "S": {
+   "dead": false,
+   "y": 3,
+   "t": 32,
+   "w": 2,
+   "b": 3,
+   "age": 20,
+   "rank": 0,
+   "name": "Diệp Tương Quân"
+  },
+  "buttons": [
+   "Ô lưu",
+   "Xem bản thân",
+   "Sắc100Tài100Tâm cơ38Đức82Danh94Sủng3",
+   "Bạc98Sức100/100",
+   "Buổi tối, còn 2 khắc",
+   "Giả bệnh",
+   "Cấm túc1 tháng",
+   "Hôm nay mặt mộc",
+   "mai nở trong tuyết",
+   "Quẻ Hạ hạ (Mưu kế)",
+   "Tâm trạngBình thản+14",
+   "Về phòng"
+  ],
+  "trace": [
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giả bệnh»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Khăn che mặt»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Dư đồ»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sắc100Tài100Tâm cơ38Đức82Danh94Sủng3»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cấm túc1 tháng»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «3Chí tôn»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng thượngGiận»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Có thaiRất thấp»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Chọn chính mình»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «1Cung nhân»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Số lần ân thưởng0»",
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cấm túc1 tháng»"
+  ],
+  "next": {
+   "dis": true,
+   "q": 8,
+   "mg": false,
+   "qt": [
+    "Tin báo",
+    "Xét phẩm cuối tháng · Thường tại",
+    "Xét phẩm cuối tháng · Thường tại",
+    "Chương 2 · Sơ thừa ân sủng",
+    "Lịch tháng",
+    "Nhờ thái giám tìm thú nuôi"
+   ],
+   "t": "Có tin đang chờ · xo"
+  }
+ },
+ {
+  "k": "game|softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Xét phẩm cuối tháng · Thường tại / Xét phẩm cuối tháng · Thường tại / Chương 2 · Sơ thừa ân sủng / Lịch tháng / Nhờ thái giám tìm thú nuôi)",
+  "type": "game",
+  "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Xét phẩm cuối tháng · Thường tại / Xét phẩm cuối tháng · Thường tại / Chương 2 · Sơ thừa ân sủng / Lịch tháng / Nhờ thái giám tìm thú nuôi)",
+  "n": 1,
+  "at": 5708,
+  "shot": "/home/user/wt/out3f/shots-flight2-s3f/loop-10.png",
+  "S": {
+   "dead": false,
+   "y": 3,
+   "t": 32,
+   "w": 2,
+   "b": 3,
+   "age": 20,
+   "rank": 0,
+   "name": "Diệp Tương Quân"
+  }
+ }
+]
