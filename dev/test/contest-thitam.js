@@ -13,13 +13,15 @@ const HELP=H.replace(/\);\s*$/,'');/* "()=>{window.T=…}" */
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof nfOn==='function'&&typeof cRun7==='function',null,{timeout:0});await p.waitForTimeout(2000);
  await p.evaluate(`(${HELP})()`);
+ /* LEDGER=1: the live 10-night ledger ON (night-final's helpers turn it off): the played tối + the tuần's other nights (jledger) */
+ if(process.env.LEDGER)await p.evaluate(()=>{BAL.nt.on=true});
  await p.evaluate(()=>{
   /* one day around a contest: run(L) makes the contest happen in the morning (winner = W), then the day ends with the tablet steered to A */
   T.day=(pick,run)=>{const L=T.fresh();const un=T.noNpc();const A=L[0],B=L[1];const W=pick(A,B);const d=wk();const b=T.recs(L);const sg0=W===S?S.sung:W.sung,dn0=W===S?S.danh:W.danh;
    const q0=Q.length;let err="";try{run(W,A,B,L)}catch(e){err=String(e&&e.message||e)}
    const a={err,ntk:S.ntk&&S.ntk.w===d?S.ntk.who:null,meKey:W===S?"me":W.id,card:Q.some(m=>m&&m.t==="Kính sự phòng báo tin"),dSung:(W===S?S.sung:W.sung)-sg0,dDanh:(W===S?S.danh:W.danh)-dn0};
    T.drain();T.seen=[];T.toEvening();T.flipTo(A);T.drain();T.endDay();un();const e=T.recs(L);
-   a.wNight=W===S?e.me-b.me:e["r"+L.indexOf(W)]-b["r"+L.indexOf(W)];a.aNight=e.r0-b.r0;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);a.choice=T.seen.length;a.next=wk()===d+1;return a};
+   a.ld=S.ledger?{wk:S.ledger.wk,p:S.ledger.p,st:S.ledger.st,n:(S.ledger.days||[]).filter(x=>x.w!=null).length,y:(S.ledger.days||[]).map(x=>x.y).join(",")}:null;a.wNight=W===S?e.me-b.me:e["r"+L.indexOf(W)]-b["r"+L.indexOf(W)];a.aNight=e.r0-b.r0;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);a.choice=T.seen.length;a.next=wk()===d+1;return a};
   /* contest kinds (scan: dev/tools/contest-thitam-scan.py) */
   /* the contest formula itself is pinned for the call (SC7[kind].f = 999 for the winner, 0 for the rest): W places first whatever the luck draw */
   T.pin=(W,kinds,f)=>{const o={};for(const k of kinds){o[k]=SC7[k].f;SC7[k].f=p=>p===W?999:0}try{return f()}finally{for(const k of kinds)SC7[k].f=o[k]}};
