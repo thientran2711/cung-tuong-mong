@@ -268,9 +268,19 @@ function illAsk(r){const R0=IROUTE[r];if(S.dead||Q.length||!can(R0.k)||R0.need(S
  O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:R0.n,who:pMe(),h:`<p>${R0.n}. Tốn ${R0.k} khắc.</p><p class="past">${Object.keys(WILL).map(k=>`${itm(k).n}: ${WILL[k].eff}; ${WILL[k].tr}`).join("<br>")}</p>`,opts:O});showModal();render()}
 if(typeof wrapR==="function")wrapR("illAsk",r=>IROUTE[r]?IROUTE[r].n:"");
-function illHTML(){return `<div class="ph"><span>Đồ cấm: độc dược không bán công khai. Bị lộ là có người nắm chứng cứ của ngươi.</span></div><div class="rbtn" style="margin-bottom:6px">`+Object.entries(IROUTE).map(([r,R0])=>{const nd=R0.need(S);const lo=Math.min(...R0.ks.map(R0.cost)),hi=Math.max(...R0.ks.map(R0.cost));
- return pbtn(`data-ill="${r}"`,R0.n,r==="ally"?`tốn: ${R0.k} khắc · tùy đồng minh: đưa, nhường lại lấy bạc, từ chối hoặc đem đi mách · đưa: nàng nắm ${balAb(BAL.eff.j83.evIllBuy)} chứng cứ của ngươi`:`${word(R0.o(S))} · tốn: ${R0.k} khắc, Bạc -${lo} đến -${hi} · thành: có độc dược, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức ${balSg(BAL.rl.j83.ducIllBuy)}`,whyTime(R0.k)||nd)}).join("")+`</div>`}
+/* ACT-MERGE J4: «Mua đồ» = ONE button; the three buying roads (nhờ cung nữ · Thái y viện · chợ đen) are ways inside its option dialog, each keeps its own odds, price, failure and Đức -3.
+   «Xin đồng minh» stays its own button (a favour from a friend, answered by her, not a purchase). */
+const ILL_WAYS=()=>Object.keys(IROUTE).filter(r=>r!=="ally");
+function illWayLine(r){const R0=IROUTE[r],lo=Math.min(...R0.ks.map(R0.cost)),hi=Math.max(...R0.ks.map(R0.cost));return `${word(R0.o(S))} · tốn: ${R0.k} khắc, Bạc -${lo} đến -${hi} · thành: có độc dược, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức ${balSg(BAL.rl.j83.ducIllBuy)}`}
+function illDoor(){if(S.dead||Q.length)return;/* ONE DOOR ENGINE: rows only, the card is DOOR.card via j4Card (jactj4.js) */
+ const O=[{n:"Nhờ thái giám mua đồ",x:"thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ",go:()=>invAct("shop")}];
+ for(const r of ILL_WAYS()){const R0=IROUTE[r],why=whyTime(R0.k)||R0.need(S);O.push(Object.assign({n:R0.n,x:illWayLine(r),go:()=>illAsk(r)},why?{off:{why:String(why)}}:{}))}
+ j4Card("Mua đồ","Chọn đường mua. Ba đường lén mua đồ cấm (độc dược không bán công khai): bị lộ là có người nắm chứng cứ của ngươi.",O)}
+function illHTML(){const W=ILL_WAYS(),kk=W.map(r=>IROUTE[r].k),all=W.flatMap(r=>IROUTE[r].ks.map(IROUTE[r].cost)),A=IROUTE.ally,nd=A.need(S);
+ return `<div class="ph"><span>Đồ cấm: độc dược không bán công khai. Bị lộ là có người nắm chứng cứ của ngươi.</span></div><div class="rbtn" style="margin-bottom:6px">`
+ +pbtn(`data-ill="door"`,"Mua đồ",`chọn đường mua: Nội vụ phủ (công khai) / nhờ cung nữ / Thái y viện / chợ đen (đồ cấm: mỗi đường có thành bại riêng; tốn ${Math.min(...kk)} đến ${Math.max(...kk)} khắc, Bạc -${Math.min(...all)} đến -${Math.max(...all)})`,"")
+ +pbtn(`data-ill="ally"`,A.n,`tốn: ${A.k} khắc · tùy đồng minh: đưa, nhường lại lấy bạc, từ chối hoặc đem đi mách · đưa: nàng nắm ${balAb(BAL.eff.j83.evIllBuy)} chứng cứ của ngươi`,whyTime(A.k)||nd)+`</div>`}
 (function(){const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);const j=h.indexOf('</div>',h.indexOf('class="rbtn"'));return j<0?h+illHTML():h.slice(0,j+6)+illHTML()+h.slice(j+6)}})();
-document.addEventListener("click",ev=>{const b=ev.target.closest("[data-ill]");if(!b||b.disabled)return;ev.stopPropagation();illAsk(b.dataset.ill)},true);
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-ill]");if(!b||b.disabled)return;ev.stopPropagation();(b.dataset.ill==="door"?illDoor():illAsk(b.dataset.ill))},true);
 /* NPCs: the malicious look for poison by the same routes — no longer a monthly dice (malice > 60, roll 8): an NPC consort CHOOSES a route in her
    day plan (jagacts4 cx4:ill<route>, role-parity part 2, canon overwrite) with the same need / cost / odds / failure (IROUTE + illBuy). */
