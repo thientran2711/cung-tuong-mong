@@ -44,6 +44,14 @@ const GAME=opt('game',path.join(REPO,'index.html'));
 /* pictures load as she sees them (layout depends on them; --noimg blocks them for speed); sound/video are blocked */
 const BLOCK=opt('noimg',false)?/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i:/\.(mp3|ogg|m4a|mp4|webm)(\?|$)/i;
 const NOISE=/Failed to load resource|net::ERR_|Fetch API cannot load|ERR_FAILED|ERR_ABORTED/;
+/* OUT-OF-ORDER probe (owner 26/11 ~03:40Z, oo-sweep): a tap whose dialog is queued behind another open box shows nothing; after ✕ the dialog appears.
+   Page-side: the visible layers, whether each one's centre is really on top (elementFromPoint inside it), and the length of the dialog queue Q. */
+const OO=()=>{const vis=e=>{if(!e||e.hidden)return false;const r=e.getBoundingClientRect(),cs=getComputedStyle(e);return r.width>8&&r.height>8&&cs.visibility!=='hidden'&&cs.display!=='none'&&+cs.opacity>0.05};
+ const L=[...document.querySelectorAll('#modal,#ov,.kmov,#kprevov,#kroul,#klife,#kload,#ktut,#kpop')].filter(vis);
+ const lay=L.map(e=>{const r=e.getBoundingClientRect();const x=Math.min(innerWidth-2,Math.max(2,r.left+r.width/2)),y=Math.min(innerHeight-2,Math.max(2,r.top+Math.min(r.height,innerHeight)/2));const t=document.elementFromPoint(x,y);
+  return{id:(e.id||e.className.toString().split(' ')[0]),title:(e.querySelector('h1,h2,h3,.kptitle,.kttl,b')||e).innerText.replace(/\s+/g,' ').trim().slice(0,40),onTop:!!t&&(e===t||e.contains(t)),cover:t&&!(e===t||e.contains(t))?(t.id||t.className.toString().slice(0,30)):''}});
+ let q=0,qt='';try{q=(typeof Q!=='undefined'&&Q||[]).length;qt=(Q||[]).map(x=>String(x&&(x.t||x.title||x.pid||x.id||'?')).slice(0,24)).join(' | ')}catch(e){}
+ return{lay,q,qt}};
 if(opt('report',false))return report(path.resolve(opt('report')));
 fs.mkdirSync(path.join(OUT,'shots'),{recursive:true});
 function serve(file){const http=require('http');const root=path.dirname(path.resolve(file)),idx=path.basename(file);
@@ -293,6 +301,7 @@ async function crawlDev(b,URL,dev){
     if(dirty){const g2=await goto(pathK);if(g2){rows.push({dev,start:st,path:pathK,screen,label:bt.label,verdict:'SKIP',why:g2});continue}dirty=false}
     await settle(p);await p.evaluate(()=>__bc.list());
     const pre=await p.evaluate(()=>__bc.sig());errs=[];
+    const oo0=await p.evaluate(OO).catch(()=>null);
     const h=await p.evaluateHandle(k=>__bc.find(k),bt.key);const el=h.asElement();
     if(!el){if(process.env.BCDBG){const now=await p.evaluate(()=>__bc.list().map(x=>x.key));console.log('GONE',bt.key,'\n NOW',now.filter(k=>!L.some(x=>x.key===k)).join(' ;; '));await p.screenshot({path:path.join(OUT,'gone.jpg')})}
      rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,verdict:'SKIP',why:'button gone before its tap'});continue}
@@ -312,6 +321,11 @@ async function crawlDev(b,URL,dev){
     if(post.nav){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:'WARN',why:'page reloaded/navigated'});dirty=true;await open().catch(()=>{});await startState[st]();continue}
     const self1=await el.evaluate(e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone').catch(()=>'gone');
     if(self1!==self0)post.self=1;
+    let ooWhy='';try{await p.waitForTimeout(900);const oo1=await p.evaluate(OO);
+     if(oo0&&oo1){const cov=oo1.lay.filter(l=>!l.onTop&&!/ktut|kpop/.test(l.id));
+      if(cov.length)ooWhy='box BEHIND another layer: '+cov.map(l=>l.id+'«'+l.title+'» under '+l.cover).join('; ');
+      else if(oo1.q>oo0.q&&oo1.lay.length<=oo0.lay.length&&!closedOwn&&!bt.x)ooWhy='dialog queued but NOT shown (Q '+oo0.q+'→'+oo1.q+': '+oo1.qt+'); shown: '+oo1.lay.map(l=>l.id+'«'+l.title+'»').join(', ')}}catch(e){}
+    if(ooWhy){const sh=path.join(OUT,'shots',`oo-${dev}-${String(rows.length).padStart(4,'0')}.jpg`);await p.screenshot({path:sh,type:'jpeg',quality:55}).catch(()=>{});rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:'WARN',oo:1,why:'OUT OF ORDER — '+ooWhy,shot:sh})}
     const [v,why]=verdict(bt,strip(pre),strip(post),errs,closedOwn,par);
     if(v==='FAIL')await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});
     rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:v,why,shot:v==='FAIL'?shot:''});
