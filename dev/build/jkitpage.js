@@ -75,7 +75,8 @@ KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · BỎ DỞ · KẾT QUẢ",html:kitPgSeals},
- {id:"§53",title:"kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)",html:kitPgKem});
+ {id:"§53",title:"kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)",html:kitPgKem},
+ {id:"§7.1",title:"Người: đổi bao nhiêu (tổng mới) · kaNT / kitRelW",html:()=>{const D=BAL.kitpage&&BAL.kitpage.demo||{};const a=(D.k||1)*8,t=a*5+2;/* sample numbers from BAL (ONE CORE) */return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv"><span class="ef t">Hoàng hậu:</span> <span class="ef g">${kitRelW("thiện cảm",a,t)}</span></span></span><span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv"><span class="ef t">một vị Phi:</span> <span class="ef r">${kitRelW("oán",a+1,-(a/2))}</span></span></span></span>`}});
 /* §12.2 glossary popover with the «Cách giảm» / «Cách tăng» row (K-GLOSS-LOWER): the REAL popover body kitGlossPopHtml, static (no data = no row) */
 KIT_SAMPLES.push({id:"§12.2",title:"Glossary popover: meaning + «Cách giảm» (rise hurts) / «Cách tăng» (fall hurts) row from kitLowerText",html:()=>typeof kitGlossPopHtml!=="function"?"":
  `<div class="kitpg-row">${["Oán","Sủng","Đức"].map(t=>`<div class="kpop" style="position:static;display:block;max-width:300px">${kitGlossPopHtml(t)}</div>`).join("")}</div>`});

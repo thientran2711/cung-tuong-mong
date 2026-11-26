@@ -62,7 +62,7 @@ const vuTap=async(p,mode,shot)=>{/* Vu oan by real taps: the person-card deed �
   /* 3 synthetic */
   const sy=await p.evaluate(()=>{const R=[];const run=(lines,ok)=>{const bf=rsnap();S.danh=(S.danh||0)+3;for(const l of lines)log(l);const [G,B]=kaResultRows(bf,'Thử',ok);return G.concat(B).map(kaPlain).join(' | ')};
    R.push(['fail lead on THÀNH dropped',!/bị bắt/.test(run([`Người của nàng bị bắt khi đưa thư: Danh +3.`],true))]);
-   R.push(['fail lead kept with no verdict',/bị bắt/.test(run([`Người của nàng bị bắt khi đưa thư: Danh +3.`],null))]);
+   R.push(['fail lead kept with no verdict',/bị bắt/.test(run([`Người của ngươi bị bắt khi đưa thư: Danh +3.`],null))]);
    R.push(['win lead on BẠI dropped',!/thành công/.test(run([`Mưu kế thành công vang dội: Danh +3.`],false))]);
    R.push(['kwside clause never a cause',!/ra mặt/.test(run([`<span class="kwside">Kẻ hầu ra mặt thay chủ: Danh +3.</span>`],null))]);
    R.push(['glued (sai X đi) summary split',!/khai ra/.test(run([`Kẻ được ngươi sai đi bị bắt, khai ra chủ: X nắm thêm 1 chứng cứ. (sai người đi) Danh 8 → 11.`],null))]);
