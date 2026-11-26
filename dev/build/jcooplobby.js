@@ -66,7 +66,12 @@ function open(pg){PG=pg;if(T.hidden)return;if(pg==="wait"&&!WT0)WT0=Date.now();i
  const s=M.querySelector(".dlg > .kph .kpseal");if(s)s.remove();
  const mr=$("mr");if(mr)mr.innerHTML=pg==="pick"?"":`<button class="kbtn alt" data-coop="back">‹ Lui</button>`;
  const c=$("coop-code");if(c){c.setAttribute("autocapitalize","characters");c.setAttribute("autocomplete","off");c.maxLength=8}}
-function back(){const pg=PG;PG="";drop();if(pg==="pick"){COOP.leave(true);try{showTitle()}catch(e){}return}if(pg==="wait"||pg==="join"||pg==="err")COOP.leave();
+/* review/coop-f1-rejoin (family of robot-coop-fix-7, law 11): the waiting panel's «‹ Về màn đầu» leaves a room she is IN = the same
+   confirmed «Rời phòng» that tells the friend (jslots CTM_ROOM_LIFE); «Thôi» = back on the waiting panel. While the confirm is up PG is
+   "pickask", so the host's pick still lifts the title (hostPick) and the confirm then sits over her game. */
+function back(){const pg=PG;PG="";drop();
+ if(pg==="pick"&&window.CTM_ROOM_LIFE&&COOP.state.status==="open"){PG="pickask";CTM_ROOM_LIFE.askThen(()=>{if(PG==="pickask")PG="";try{showTitle()}catch(e){}},()=>{if(PG==="pickask"&&!T.hidden){PG="";LM=null;open("pick")}});return}
+ if(pg==="pick"){COOP.leave(true);try{showTitle()}catch(e){}return}if(pg==="wait"||pg==="join"||pg==="err")COOP.leave();
  if(pg&&pg!=="co"){open("co");return}
  try{showTitle()}catch(e){}}
 function toast(msg){try{const n=document.querySelector("#modal.kcoop .kpnote");if(n)n.textContent=msg}catch(e){}}
@@ -100,7 +105,7 @@ function copy(txt,b,msg){const done=()=>{b.innerHTML=msg;b.classList.add("kdone"
  try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,old);else old()}catch(x){old()}}
 $("modal").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&e.target.id==="coop-code"){e.preventDefault();join(e.target.value)}});
 /* title home: add the co-op button under the single-player menu */
-function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".kco"))return;
+function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".kco")||m.dataset.coopLife)return;/* a co-op life's own menu (jslots CTM_ROOM_LIFE) keeps the room: no solo / new-room buttons on it */
  /* owner 14/11: the title offers "Chơi một mình" / "Chơi cùng bạn". The single-player button keeps its action (Tiếp tục = last sổ,
     Bắt đầu = Chọn sổ), only its words say which way of playing it is; "Kiếp mới" stays beside it. */
  const k=m.querySelector(".kbtn.k1");if(k&&!k.dataset.solo){k.dataset.solo="1";const sm=k.querySelector("small");const was=k.firstChild&&k.firstChild.nodeType===3?k.firstChild.textContent.trim():"";
@@ -116,16 +121,24 @@ COOP.on("both",()=>{if(!LM)return;window.__cuxBoth=PG;if(PG==="wait"){try{if(typ
 let FZ=null;
 const FZT={me:["Đợi hảo hữu trở lại",CTM_WAIT.coopCutMe],peer:["Đợi hảo hữu trở lại","Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; hậu cung dừng lại cho đến lúc ấy."],
  moved:["Cuộc chơi đã sang máy khác","Ngươi vừa vào phòng này từ một máy khác; cuộc chơi đi theo máy ấy, ở đây dừng lại. Muốn chơi tiếp ở máy này: Về màn đầu, Cùng hảo hữu, Trở lại phòng."],
- week:["Đợi hảo hữu xong tuần","Ngươi đã sang ngày mới. Khi hảo hữu cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
+ week:["Đợi hảo hữu xong tuần","Ngươi đã sang ngày mới. Khi hảo hữu cũng xong tuần, tuần mới bắt đầu cho cả hai."],
+ left:["Hảo hữu đã rời phòng","Hảo hữu chọn rời phòng. Hảo hữu vào lại bằng Cùng hảo hữu, Trở lại phòng là cuộc chơi đi tiếp; hậu cung dừng lại cho đến lúc ấy."]};
+/* robot-coop-fix-7: the friend left by «Rời phòng» (jslots CTM_ROOM_LIFE sends a "say" line before closing): say so, not «đang vắng» */
+let LEFT=false;COOP.on("said",m=>{try{if(m&&m.text===window.CTM_ROOM_BYE){LEFT=true;check()}}catch(e){}});
+COOP.on("peer",on=>{if(on)LEFT=false});COOP.on("stop",()=>{LEFT=false});
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();
  if(!FZ){FZ=document.createElement("div");FZ.id="coopfz";FZ.className="modal kpscene";FZ.setAttribute("role","alertdialog");document.body.appendChild(FZ)}
- FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Ám hiệu",esc(COOP.state.room||""),"t"],["Hảo hữu",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":COOP.state.status==="moved"?"đang ở máy khác":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div>${why==="peer"?`<div class="kpnote" style="margin:4px 12px 0">Gửi lại đường dẫn cho hảo hữu: hảo hữu chạm vào là trở lại đúng chỗ cũ, không mất gì.</div>`:""}<div class="row" id="mrz">${why==="peer"?`<button class="kbtn" data-coop="fzcopy">Chép đường dẫn</button>`:""}<button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
+ FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Ám hiệu",esc(COOP.state.room||""),"t"],["Hảo hữu",why==="week"?"chưa xong tuần":why==="left"?"đã rời phòng":pw[0],why==="week"?"n":why==="left"?"r":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":COOP.state.status==="moved"?"đang ở máy khác":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div>${why==="peer"||why==="left"?`<div class="kpnote" style="margin:4px 12px 0">Gửi lại đường dẫn cho hảo hữu: hảo hữu chạm vào là trở lại đúng chỗ cũ, không mất gì.</div>`:""}<div class="row" id="mrz">${why==="peer"||why==="left"?`<button class="kbtn" data-coop="fzcopy">Chép đường dẫn</button>`:""}<button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
  const s=FZ.querySelector(".kpseal");if(s)s.remove()}
-document.addEventListener("click",e=>{const c=e.target.closest("#coopfz [data-coop]");if(c){e.stopPropagation();copy(link(COOP.state.room||CODE),c,"Đã chép đường dẫn");return}const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();fz(false);COOP.leave(true);try{showTitle()}catch(x){}},true);
-function check(){const s=COOP.state;if(!s.playing){fz(false);return}
+document.addEventListener("click",e=>{const c=e.target.closest("#coopfz [data-coop]");if(c){e.stopPropagation();copy(link(COOP.state.room||CODE),c,"Đã chép đường dẫn");return}const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();
+ /* robot-coop-fix-7: «Về màn đầu» leaves the room = the same confirmed «Rời phòng» that tells the friend (jslots); the panel stays until she confirms */
+ if(window.CTM_ROOM_LIFE&&COOP.state.status==="open"){HOLD=true;fz(false);CTM_ROOM_LIFE.askThen(()=>{HOLD=false;fz(false);try{showTitle()}catch(x){}},()=>{HOLD=false;check()});return}
+ fz(false);COOP.leave(true);try{showTitle()}catch(x){}},true);
+let HOLD=false;/* the «Rời phòng?» confirm (kitConfirm, #modal) is up: the freeze panel (z 9500) waits under it */
+function check(){const s=COOP.state;if(!s.playing||HOLD){fz(false);return}
  const x=COOP.other(),e=s.ended||{};
- if(s.status==="moved")fz(true,"moved");else if(s.status!=="open")fz(true,"me");else if(!s.peerOnline)fz(true,"peer");else if(e[s.you]&&!e[x])fz(true,"week");else fz(false)}
+ if(s.status==="moved")fz(true,"moved");else if(s.status!=="open")fz(true,"me");else if(!s.peerOnline)fz(true,LEFT?"left":"peer");else if(e[s.you]&&!e[x])fz(true,"week");else fz(false)}
 COOP.on("status",check);
 COOP.on("start",()=>{COOP.state.playing=true;COOP.live();check()});
 COOP.on("week",()=>setTimeout(check,0));
@@ -136,6 +149,6 @@ COOP.on("week",()=>setTimeout(check,0));
 /* review/coop-f1-rejoin: the waiting panel has no way out but its own «‹ Về màn đầu» (room kept): Esc (iPad / Fold keyboard) does not
    send her to the title home (j74 Esc → home) while she sits in the room waiting for the host's pick */
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&PG==="pick"&&LM&&!T.hidden){e.preventDefault();e.stopImmediatePropagation()}},true);
-function hostPick(on){if(on){try{T.hidden=false}catch(e){}LM=null;open("pick")}else if(PG==="pick"){PG="";drop();try{T.hidden=true}catch(e){}}}
+function hostPick(on){if(on){try{T.hidden=false}catch(e){}LM=null;open("pick")}else if(PG==="pick"||PG==="pickask"){const ask=PG==="pickask";PG="";if(!ask)drop();try{T.hidden=true}catch(e){}if(ask)try{showModal()}catch(e){}}}
 window.COOP_LOBBY={open,fz,check,hostPick};
 }catch(e){console.error(e)}})();

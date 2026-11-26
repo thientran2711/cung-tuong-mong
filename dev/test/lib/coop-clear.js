@@ -19,6 +19,12 @@
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
 const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
+ /* 1a. the PICTURE-WAIT covers (full-screen, over ☰ and every card; a player waits): the roulette's wait #kroulw (jk2b kitRoulette ≤ 8 s, no button),
+    the life gate #klife (jload lifeGate ≤ 25 s; «Vào cung ngay» [data-klife] after 6 s) and the first-run screen #kload («Vào cung ngay» [data-kl]).
+    Its go button is tapped when offered (as a player may), else 'x' keeps the bot's clear() polling — the bot's next tap never lands on the cover
+    (coop-title-leave guest ☰ race: menu «empty» + ✕ fail on r4+B eda56acc / B-alone, SANGBUOI r4 e5453580 + fix-7 r3 #klife; same waits as lib/roulette.js) */
+ if(document.getElementById('kroulw'))return'x';
+ for(const c of document.querySelectorAll('#klife:not(.out),#kload:not(.out)')){const g=c.querySelector('[data-klife="go"],[data-kl="go"]');if(vis(g)){g.click();return'x'}return'x'}
  /* 1b. a podium on screen (j90 kitPodiumShow: her contest's «Hội phối đồ» / mini-game dais): its «Tiếp» (.kpod-next), as a player does —
     since review/day-queue-2 (owner 24/11 ~22:02Z) the cards of the room wait while she is on the dais, so a bot that never taps it holds the room night for ever */
  const kp=document.querySelector('#kpodov .kpod-next');if(kp&&kp.offsetParent!==null&&!kp.disabled){kp.click();return'x'}

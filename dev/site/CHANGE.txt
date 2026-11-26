@@ -1,1 +1,2 @@
+Phòng chơi chung: rời phòng hay vào lại luôn có lối về màn chính, không còn kẹt «Ô lưu · Lui».
 Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.

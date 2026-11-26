@@ -13,6 +13,8 @@
      P4 host reload while on the card (the guest waits on the panel) → host back on the card, guest still on the panel; host picks → both in
      P5 both reload while the host is on the card
      P6 guest reload after the host picked (control: straight back into the game)
+     P8 «‹ Về màn đầu» on the waiting panel asks «Rời phòng?» first; «Thôi» keeps the room
+     P9 every close met in co-op play (kit ✕ / ‹ Lui / Thôi / Đóng / Esc, ☰ → ✕) over 3 buổi never leaves the room (owner 26/11: only «Rời phòng», confirmed)
      P7 guest reload, «Trở lại phòng» then at once «Vào phòng» on the connecting screen (the first tap's answer comes back «replaced») → still the waiting panel
    After every row: the room advances one buổi for both. Exit 1 on any FAIL. */
 const {chromium}=require('playwright');
@@ -101,6 +103,25 @@ const ROWS={
   const h=await settle(A,hostCard,60000,3000,true);ok(h.ok,'P5 host on her card',h.ok?undefined:{A:await dbg(A)});const g=await settle(B,onPanel,30000,5000);ok(g.ok,'P5 guest on the waiting panel',g.ok?undefined:{B:await dbg(B)});await after('P5',A,B)},
  P7:async(A,B)=>{ok(await reload(B,true)>=0,'P7 guest back after reload: «Trở lại phòng», then «Vào phòng» on the connecting screen at once (a second tap)');const d=await B.p.evaluate(()=>window.__f1dbl).catch(()=>'');ok(d==='go','P7 set-up: the second tap really hit «Vào phòng»',d);const s=await settle(B,onPanel,30000,8000);
   ok(s.ok,'P7 waiting panel (no «Chưa vào được phòng» from the first tap), stays 8 s',s.ok?undefined:{B:await dbg(B)});await after('P7',A,B)},
+ P8:async(A,B)=>{/* «‹ Về màn đầu» on the waiting panel = the confirmed «Rời phòng» (jslots CTM_ROOM_LIFE); «Thôi» keeps her on the panel */
+  const t=await B.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal button[data-coop="back"]')].find(x=>x.offsetParent!==null);if(!b)return'';b.click();return'ok'}).catch(()=>'');ok(t==='ok','P8 guest taps «‹ Về màn đầu» on the waiting panel');
+  await sleep(800);const c=await B.p.evaluate(()=>({t:document.getElementById('modal').textContent.slice(0,200),co:__co()})).catch(e=>({err:e.message}));
+  ok(/Rời phòng\?/.test(c.t||'')&&c.co.st==='open'&&c.co.room===B.code,'P8 a «Rời phòng?» confirm asks first, the seat is still in the room',c);
+  const th=await B.p.evaluate(()=>{const v=x=>x&&x.getClientRects().length>0;const x=[...document.querySelectorAll('#modal .kit-x')].find(v);if(x){x.click();return'✕'}const b=[...document.querySelectorAll('#modal button')].find(y=>v(y)&&/^Thôi/.test(y.textContent.trim()));if(b){b.click();return'Thôi'}return''}).catch(()=>'');ok(th,'P8 guest says no to the confirm (its kit ✕ = «Thôi», KIT 32.10)',th);const s=await settle(B,onPanel,15000,3000);ok(s.ok,'P8 back on the waiting panel, room kept',s.ok?undefined:{B:await dbg(B)});
+  await after('P8',A,B)},
+ P9:async(A,B)=>{/* every close met in co-op play never leaves the room: for 3 buổi, every #modal with a close (kit ✕ / ‹ Lui / Thôi / Đóng / Esc)
+     is closed that way instead of answered; ☰ opens the co-op life menu, its ✕ goes back to the game. After each: both seats open, same room. */
+  await after('P9 set-up',A,B);const seen=[];let bad=null;
+  const closeOne=o=>o.p.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;const t=((M.querySelector('.kptitle')||{}).textContent||(typeof Q!=='undefined'&&Q[0]&&Q[0].t)||'').trim().slice(0,40);
+    const vis=x=>x&&x.getClientRects().length>0&&!x.disabled;const x=[...M.querySelectorAll('.kit-x')].find(vis);if(x){x.click();return{t,how:'✕'}}
+    const b=[...M.querySelectorAll('#mr button,.opts button')].find(y=>vis(y)&&/^(‹\s*)?(Lui|Thôi|Đóng)$/.test(y.textContent.trim()));if(b){b.click();return{t,how:b.textContent.trim()}}return{t,how:''}}).catch(()=>null);
+  const kept=async()=>{const a=await co(A),c=await co(B);return a.st==='open'&&c.st==='open'&&a.room===A.code&&c.room===B.code?null:{a,c}};
+  for(let k=0;k<3&&!bad;k++){for(let i=0;i<30&&!bad;i++){for(const o of [A,B]){const r=await closeOne(o);if(r&&r.how){seen.push(o.name+':'+r.t+'·'+r.how);await sleep(500);bad=await kept();if(bad){bad.at=r;break}}
+     else if(r&&!r.how){await o.p.keyboard.press('Escape').catch(()=>{});await sleep(300);bad=await kept();if(bad){bad.at={t:r.t,how:'Esc'};break}await clear(o)}}await sleep(150)}
+   if(!bad){for(const o of [A,B]){const m=await o.p.evaluate(()=>{const b=document.getElementById('menu');if(!b||b.offsetParent===null)return'';b.click();return'menu'}).catch(()=>'');if(m){await sleep(800);const r=await closeOne(o);seen.push(o.name+':☰ '+(r&&r.t)+'·'+(r&&r.how));await sleep(800);bad=await kept();if(bad){bad.at={t:'☰',how:r&&r.how};break}const v=await co(o);if(v.title){bad={at:'☰ close left the title up',v};break}}}}
+   if(!bad&&!await advance(A,B))bad={at:'advance '+k}}
+  ok(!bad,'P9 every close (✕ / Lui / Thôi / Đóng / Esc, ☰ → ✕) over 3 buổi keeps both seats in the room ('+seen.length+' closes)',bad?{bad,seen:seen.slice(-12)}:undefined);
+  console.log('P9 closes: '+JSON.stringify(seen).slice(0,1500))},
  P6:async(A,B)=>{await after('P6 set-up',A,B);ok(await reload(B)>=0,'P6 guest back after reload');const s=await settle(B,inGame,60000,5000,'all');ok(s.ok,'P6 guest straight back in the game',s.ok?undefined:{B:await dbg(B)});
   for(let i=0;i<20;i++){await clear(A);await clear(B);await sleep(200)}ok(await advance(A,B),'P6 the room advances one buổi after')}};
 (async()=>{const b=await chromium.launch({args:['--disable-web-security','--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']});
