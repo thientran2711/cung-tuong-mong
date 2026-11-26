@@ -63,6 +63,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_san-R7-skilled1-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_san-R7-skilled1-moments.md"
+  },
+  {
+   "life": "E-S8-bd_san-R7-scholar5",
+   "origin": "bd",
+   "road": "bd_san",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 3449750405,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "d2e03d80 (resumed through 64d62d9b…4d7a22c6)"
+   },
+   "ending": "Xuất gia — Xuất gia làm ni cô (game-imposed: Hoàng thượng băng hà năm 12, thọ 31)",
+   "age": 31,
+   "buoi": 2095,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_san-R7-scholar5-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_san-R7-scholar5-moments.md"
   }
  ],
  "parked": [
