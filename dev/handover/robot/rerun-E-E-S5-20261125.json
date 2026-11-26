@@ -1,7 +1,7 @@
 {
  "unit": "E-S5",
  "game": "LIVE github.io",
- "finished": 6,
+ "finished": 7,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -4107,6 +4107,2402 @@
      "type": "game",
      "n": 1,
      "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Điền Thanh Diên» (each close pops one; looks like a dead ✕)"
+    }
+   ],
+   "exitPick": null
+  },
+  {
+   "life": "E-S5-R5-greedy-3",
+   "dev": "ipad",
+   "bot": "bold",
+   "seed": 4097038015,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Lãnh cung",
+   "type": "end",
+   "death": false,
+   "age": 40,
+   "buoi": 3126,
+   "harness": {
+    "kind": "realtap",
+    "sha": "69e41729",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 2,
+    "cap": null,
+    "stuck": 6,
+    "unstick": [
+     {
+      "at": 611,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 617,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 624,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 630,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 637,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 643,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 1354,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1360,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1367,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1373,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1380,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1386,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1393,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1399,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1406,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1412,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1414,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1421,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1777,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1784,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1790,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1797,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1803,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1808,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1811,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1817,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1824,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1830,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1837,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1838,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 1844,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 2121,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 2231,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Tể tướng Tiết Quân Diệc"
+     },
+     {
+      "at": 2341,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Ta"
+     },
+     {
+      "at": 2451,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Tể tướng Tiết Quân Diệc"
+     },
+     {
+      "at": 2562,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Tể tướng Tiết Quân Diệc"
+     },
+     {
+      "at": 2671,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thái hậu"
+     },
+     {
+      "at": 2782,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Tâm trạng · Thái hậu"
+     },
+     {
+      "at": 2871,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 2901,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+     },
+     {
+      "at": 3768,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3974,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3980,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3987,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 3993,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 4000,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 4006,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 4392,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Lạc Thọ điện · Phi Tăng Uyển Hề"
+     },
+     {
+      "at": 4399,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Lạc Thọ điện · Phi Tăng Uyển Hề"
+     },
+     {
+      "at": 4406,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Lạc Thọ điện · Phi Tăng Uyển Hề"
+     },
+     {
+      "at": 4412,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Lạc Thọ điện · Phi Tăng Uyển Hề"
+     },
+     {
+      "at": 4419,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Lạc Thọ điện · Phi Tăng Uyển Hề"
+     },
+     {
+      "at": 4424,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Xuân cung · Lạc Thọ điện · Phi Tăng Uyển Hề"
+     },
+     {
+      "at": 4775,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 5029,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5142,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5151,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5160,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5168,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5177,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5183,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ"
+     },
+     {
+      "at": 5239,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 5253,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 5266,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 5268,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ"
+     },
+     {
+      "at": 6673,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 6883,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6890,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6896,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6903,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6909,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6915,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7052,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7059,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7067,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7074,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7081,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7089,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7178,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7301,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7308,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7315,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7321,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7328,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7332,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7335,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7341,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7348,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7354,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7361,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 8100,
+      "lvl": 1,
+      "layer": "#modal",
+      "title": "Trăng soi rèm ngọc"
+     },
+     {
+      "at": 8190,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 8382,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8388,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8395,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8401,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8408,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8413,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8792,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8799,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8806,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8813,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8820,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8825,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9270,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9276,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9283,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9290,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9296,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9300,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9374,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9381,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9388,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9394,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9401,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9406,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9563,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9701,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9708,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9715,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9721,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9728,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9734,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9860,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 9867,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 9873,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 9880,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 9887,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 9893,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 10039,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10046,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10052,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10059,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10065,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10070,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10193,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 10413,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10420,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10426,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10433,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10439,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10444,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10520,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10635,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10641,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10648,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10654,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10661,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10666,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10710,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10716,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10723,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10730,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10736,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10742,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10849,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10855,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10862,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10868,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10875,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10880,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 10913,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10973,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 10988,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11002,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11004,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11259,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11309,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11315,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11322,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11328,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11335,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11340,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11430,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11524,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11531,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11538,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11544,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11551,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11557,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11641,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11648,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11655,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11661,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11668,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11671,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11754,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11759,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11921,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11929,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11936,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11944,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11952,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11960,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12247,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12254,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12261,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12284,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12360,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 12393,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12540,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12546,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12553,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12559,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12566,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12571,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12679,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12685,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12692,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12699,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12705,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 12711,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 13160,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 13166,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 13172,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 13179,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 13186,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 13190,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 13389,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 13395,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 13402,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 13408,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 13415,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 13420,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 14427,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 14813,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 14819,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 14826,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 14832,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 14839,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 14843,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 16019,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 16205,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 16281,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 16293,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 16313,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 17636,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 18267,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18273,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18280,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18286,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18293,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18294,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18338,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18353,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18363,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18622,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 18629,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 18636,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 18642,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 18649,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 18654,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 18806,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18813,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18819,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18826,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18833,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18838,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 18913,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19271,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19278,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19285,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19291,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19298,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19303,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19364,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19384,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19622,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 19908,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19915,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19921,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 19946,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 20083,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 20086,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 113,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 202,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 270,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 402,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 513,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 598,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 766,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 919,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 997,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1035,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1250,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1362,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1490,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 1611,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1754,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1956,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 2159,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2309,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2372,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2497,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 2642,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 2768,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3084,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 4057,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4614,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4687,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4751,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4880,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 4928,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5046,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5131,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 5292,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6273,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6408,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6573,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6713,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6776,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 6866,
+      "lvl": 1,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 7020,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7082,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7214,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7464,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7536,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7646,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7722,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7774,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 7858,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8078,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8138,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8248,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8492,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8611,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8659,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8769,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8835,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 8967,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9180,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9238,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9392,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9452,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9662,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 9829,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 11017,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 12051,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     }
+    ],
+    "slice": null,
+    "areaTaps": 18311,
+    "scrolls": 2395,
+    "infoTaps": 1550,
+    "dlgClose": 2158,
+    "loops": 128,
+    "dlgScroll": 73,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-25T18:23:21.015Z",
+      "buoi": 740,
+      "from": "2026-11-25T18:23:12.970Z"
+     },
+     {
+      "at": "2026-11-25T21:53:34.133Z",
+      "buoi": 1343,
+      "from": "2026-11-25T21:53:26.391Z"
+     },
+     {
+      "at": "2026-11-26T01:54:39.994Z",
+      "buoi": 2564,
+      "from": "2026-11-26T01:53:33.793Z"
+     },
+     {
+      "at": "2026-11-26T03:53:48.440Z",
+      "buoi": 3104,
+      "from": "2026-11-26T03:53:23.413Z"
+     }
+    ],
+    "nextNoTurn": 263,
+    "kfocVisits": 145,
+    "noHitScroll": 11,
+    "noHitReload": 1,
+    "build": {
+     "s": "3762da08+",
+     "b": "fa8da73cecdc",
+     "t": "2026-11-25T19:34Z"
+    },
+    "backdropTaps": 1,
+    "taps": 170
+   },
+   "bugs": [
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»"
+    },
+    {
+     "type": "game",
+     "n": 33,
+     "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)"
+    },
+    {
+     "type": "js",
+     "n": 2,
+     "msg": "page error: Cannot read properties of undefined (reading 'off')"
+    },
+    {
+     "type": "stuck",
+     "n": 9,
+     "msg": "no-clock loop: 150 taps without a clock step on .mapsc «»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 2 copies of «Tâm trạng · Tể tướng Tiết Quân Diệc» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Ta»"
+    },
+    {
+     "type": "stuck",
+     "n": 3,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Tể tướng Tiết Quân Diệc»"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thái hậu»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»"
+    },
+    {
+     "type": "stuck",
+     "n": 3,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Lạc Thọ điện · Phi Tăng Uyển Hề»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=9: Lịch tháng / Mục lục / Chương 2 · Lần đầu được sủng / Chương 2 · Lần đầu được sủng / Tin báo / Công · Nữ công: các lối)"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 3 ngườ»"
+    },
+    {
+     "type": "game",
+     "n": 2,
+     "msg": "softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Có người đến)"
+    },
+    {
+     "type": "stuck",
+     "n": 5,
+     "msg": "no progress 15 min on .dlg «Tin báo»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 6 copies of «Tâm trạng · Quý phi Khâu Sương Hoa» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý phi Khâu Sương Hoa» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "dead",
+     "n": 1,
+     "msg": "close button has no effect: .dlg «Tâm trạng · Quý nhân Khương Vân Thường» «Lui»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 7 copies of «Tâm trạng · Tần Phó Kính Nghi» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "stuck",
+     "n": 47,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Chương 2 · Lần đầu được sủng / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=18: Lịch tháng / Chứng cứ về Phế phi La Ninh Hương / Chương 2 · Lần đầu được sủng / Đã biết về Phế phi La Ninh Hương / Cầm / Lịch tháng)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 19 copies of «Tâm trạng · Trinh tần Phú Sát Mạn Ca» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 16 copies of «Tâm trạng · Trinh tần Phú Sát Mạn Ca» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 13 copies of «Tâm trạng · Trinh tần Phú Sát Mạn Ca» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=19: Chương 4 · Quốc thư hai mặt trời / Tin báo / Tin báo / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Chứng cứ về Thường tại Khâu Chi Nhi)"
+    },
+    {
+     "type": "stuck",
+     "n": 5,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.»"
+    },
+    {
+     "type": "dead",
+     "n": 1,
+     "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 2 người.»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Chương 4 · Quốc thư hai mặt trời / Lịch tháng / Tin báo / Tin báo / Tin báo / Chương 4 · Quốc thư hai mặt trời)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=11: Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Quý tộc kén rể · kén dâu / Lịch tháng / Tin báo / Lịch tháng)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 9 copies of «Tâm trạng · Quý nhân Thiệu Thuần Nguyên» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Tin báo / Lịch tháng / Tin báo / Lịch tháng / Lịch tháng / Thiên mệnh)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=19: Chương 4 · Quốc thư hai mặt trời / Lịch tháng / Lịch tháng / Công · Nữ công / Chương 4 · Quốc thư hai mặt trời / Tin báo)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Danh hiệu)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=5: Chương 4 · Quốc thư hai mặt trời / Tin báo / Lịch tháng / Chương 4 · Quốc thư hai mặt trời / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=35: Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Chương 4 · Quốc thư hai mặt trời / Tin báo / Lịch tháng / Lịch tháng)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 8 copies of «Tâm trạng · Đáp ứng Khương Vân Thường» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 5 copies of «Tâm trạng · Đáp ứng Khương Vân Thường» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "dialog queue holds 2 copies of «Tâm trạng · Hiền quý nhân Tăng Ngọc Dao» (each close pops one; looks like a dead ✕)"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 3 người.»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Tin báo / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Tin chờ người sai đi / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Nhờ thái giám tìm thú nuôi / Lịch tháng / Chương 5 · Hồi thư / Nhờ thái giám tìm thú nuôi / Chương 5 · Hồi thư / Chương 5 · Hồi thư)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chương 5 · Hồi thư / Tin báo / Chương 5 · Hồi thư / Lịch tháng / Đã biết về Thường tại Khương Vân Thường / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 49,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Chứng cứ về Phế phi Phó Kính Nghi / Chương 5 · Hồi thư / Kế vị / Chương 5 · Hồi thư / Lịch tháng)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Nhờ thái giám tìm thú nuôi / Tin trong cung buổi này)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Để ta xemTốnkhôngĐượckhô / Để sauTốnkhôngĐượckhông"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Tin báo / Lịch tháng / Danh hiệu / Danh hiệu / Đã biết về Phế phi Hứa Tuyết Kiến / Nhờ thái giám tìm thú nuôi)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Xem quan hệ của / Lịch tháng / Tin báo / Chương 6 · Chỗ ngồi đêm Nguyên đán / Công · Nữ công: các lối / Chương 6 · Chỗ ngồi đêm Nguyên đán)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Đã biết về Phế phi Thạch Lạc Tuyết / Lịch tháng / Chương 6 · Chỗ ngồi đêm Nguyên đán / Kế vị / Tin báo / Chương 6 · Chỗ ngồi đêm Nguyên đán)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Lịch tháng / Chương 6 · Chỗ ngồi đêm Nguyên đán / Chương 6 · Chỗ ngồi đêm Nguyên đán / Đã biết về Phế phi Thạch Lạc Tuyết / Chứng cứ về Phế phi Thạch Lạc Tuyết)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Lịch tháng / Kế vị / Công · Nữ công: các lối / Chương 6 · Chỗ ngồi đêm Nguyên đán / Chương 6 · Chỗ ngồi đêm Nguyên đán)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=13: Lịch tháng / Đã biết về Phế phi Hứa Tuyết Kiến / Đã biết về Phế phi Thạch Lạc Tuyết / Chương 7 · Lạy hay vái / Chứng cứ về Phế phi Thạch Lạc Tuyết / Đức)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Lịch tháng / Cầm / Cầm / Chương 7 · Lạy hay vái / Chương 7 · Lạy hay vái)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Đã biết về Phế phi Thạch Lạc Tuyết / Chương 7 · Lạy hay vái / Chương 7 · Lạy hay vái / Lịch tháng / Chương 7 · Lạy hay vái / Tin báo)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Lịch tháng / Mục lục / Chương 7 · Lạy hay vái / Chứng cứ về Phế phi Khương Vân Thường / Đã biết về Phế phi Khương Vân Thường / Chương 7 · Lạy hay vái)"
     }
    ],
    "exitPick": null
