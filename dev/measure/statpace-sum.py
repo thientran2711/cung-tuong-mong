@@ -8,4 +8,5 @@ for mo in [1,2,3,4,6,9,12,18,24]:
   med={k:st.median([x[k] for x in rows]) for k in K}
   mx={k:max(x[k] for x in rows) for k in ['sung','danh','duc','th','hh','relX','oanX']}
   n100=sum(1 for x in rows for k in ['sung','danh','duc','th','hh','relX','oanX'] if x[k]>=99)
-  print(f"mo{mo:>3} n{len(rows)} "+' '.join(f"{k}{med[k]:g}" for k in K)+" | max "+' '.join(f"{k}{v}" for k,v in mx.items())+f" | at100 {n100}")
+  lc=sum(1 for x in rows if x.get('out'));rk=sorted(x['rank'] for x in rows)
+  print(f"mo{mo:>3} n{len(rows)} lc{lc} ranks{rk} "+' '.join(f"{k}{med[k]:g}" for k in K)+" | max "+' '.join(f"{k}{v}" for k,v in mx.items())+f" | at100 {n100}")
