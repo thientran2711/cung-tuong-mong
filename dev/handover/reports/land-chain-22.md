@@ -104,3 +104,4 @@ global-names 1 CLASH; tainghe-info TypeError (fixed by bac-progress); mg-back 1�
 ### TOOLS (dev/handover/reports/lc22-tools/)
 gates-*.sh (SP= my scratchpad → fix), srv.py (http server WITH utf-8 charset — python http.server breaks dev/index.html → all dayq/dialog-order probes time out), kpcheck.js (kit page renders samples), dupfn.py (+ dup_live.txt from a LIVE worktree), holog22.sh. Worktrees /home/user/wt/<slot>; QCBASE = LIVE worktree. Container restarted once (13:10Z) and killed a background gate run: use run_in_background + a watcher, check `uptime`.
 - 17:41Z ROLLED to LC23 session_01V1ZZH17hXgTvCC6BWnvVB6 (context 36 %); MAIN 160 told.
+- 17:42Z MAIN 160 on f573dc94: wants buổi A/B ×3 (1.32× > 1.25) → handed to LC23; answered tainghe (pre-existing on aa37de21 + 1dcb373e) + audio (bgm-joy URL 200 ACAO *, in-page rs:0; env).
