@@ -236,7 +236,7 @@ window.eaCards=eaCards;
 function eaScoldOne(m,c){loyAdd(m,-c.loy);const d=ventMe(c.mood,`mắng ${m.name}`,c.emo);try{if(typeof emoEv==="function")emoEv(m,"loyalDown",`bị chủ nhân quát mắng`)}catch(e){}
  log(`Ngươi quát mắng ${m.name} một trận; cơn giận nguôi đi (tâm trạng ${sgn(d||c.mood)}), ${m.name} cúi đầu chịu mắng (thiện cảm −${c.loy}).`)}
 function eaScoldPick(L,c){if(L.length===1)return eaScoldOne(L[0],c);
- Q.push({ev:1,t:"Mắng cung nữ",emoSeal:{k:"gian",who:"me"},art:"img/act-phat-vo-co-h.webp",h:`<p>Cơn giận chưa nguôi. Ngươi gọi cung nữ vào.</p><p>Mắng ai?</p>`,
+ Q.push({ev:1,kind:"ring"/* KIT §101.9: which servant = vòng người */,t:"Mắng cung nữ",emoSeal:{k:"gian",who:"me"},art:"img/act-phat-vo-co-h.webp",h:`<p>Cơn giận chưa nguôi. Ngươi gọi cung nữ vào.</p><p>Mắng ai?</p>`,
   opts:L.map(m=>({n:`Mắng ${m.name}`,risk:"an toàn",hint:`hả giận; ${m.name} buồn lòng`,x:`thành: tâm trạng +${c.mood} · kèm: thiện cảm ${m.name} −${c.loy} (nay ${m.loyal||0})`,fx:{},go:()=>eaScoldOne(m,c)}))})}
 /* the cards sit after the standing cards (j76), are rebuilt from the live mood on every deal / render, and never on the servant road */
 function eaSync(){try{if(!eaOn()||!Array.isArray(deck)||(typeof isSrv==="function"&&isSrv()))return;const want=eaCards();const keys=want.map(a=>a.ea).join(",");
