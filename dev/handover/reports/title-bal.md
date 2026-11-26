@@ -1,3 +1,5 @@
+depth 1 · START_CTX ~8 %
+
 # TITLE-BAL — every «Danh hiệu» rebalanced (owner OD 26/11 ~18:20Z «TITLE REBALANCE», ~18:50Z (8))
 
 PRIORITY #1 CHECK ('title-bal|danh hiệu'): OD 20 | claims 2 | main 15 | archive 40 — reused: BAL.dh (jbal2.js) + jdh.js (the one title system), jkcg «Khuê các» titles,
@@ -80,4 +82,14 @@ Phần thưởng khi đeo (mỗi bậc): bậc 2 rõ hơn bậc 1, bậc đỉnh
 - dev/test/title-bal.js (new): PASS — bars from BAL, ≤ 3 steps, rising; quality gate; streak; condition titles; one panel per buổi; bonuses never smaller on a harder step; how texts print BAL; old save.
 - dev/test/title-sys.js: fails = the same 3 as LIVE f573dc94 before this change («no dialog», «place/festival style name», «thai») — pre-existing; the bars now come from BAL.
 - dev/test/title-sys2.js: 1 fail «loss dialog: no item frame» = pre-existing on LIVE (LIVE had 2).
-- quickcheck: QUICKCHECK_PLACEHOLDER
+- quickcheck (93098bf2): build own = OK, open + old save + buổi OK; CORE GATES FAIL on 2 UI gates, neither touched by this branch:
+  (a) G4 80-dialog-fixed «kit-dialog-2 a: no empty Tốn / Được cell» (Fold + iPad) — reproduced on LIVE f573dc94 with the same test (pre-existing);
+  (b) G4 90-button-crawl «fold · Ô lưu · Lui · close button did not close its layer» (title-screen save-slot dialog) — could not re-run on LIVE here
+  (the crawler times out on a file:// page in this box); this branch changes no dialog / save-slot code (jbal2 BAL.dh/kcg, jdh, jdh2 kinhN, jkcg only).
+  The perf step did not start (browser.newContext target closed — box memory, the robots were running).
+
+## Status
+
+RV READY to MAIN: `review/title-bal` (from LIVE f573dc94). Files: dev/build/jbal2.js (BAL.dh, BAL.kcg.title), jdh.js, jdh2.js (kinhN), jkcg.js, index.html (built),
+dev/test/title-bal.js (new), title-sys.js + title-sys2.js (bars from BAL), dev/measure/title-bal-bot.js + title-bal-sum.py (new), this report.
+Open for MAIN: the cnv art-pace finding above; the 2 UI gate fails (pre-existing / unrelated); quickcheck perf step to re-run on a quiet box.
