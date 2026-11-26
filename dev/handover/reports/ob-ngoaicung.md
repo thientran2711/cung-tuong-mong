@@ -155,3 +155,16 @@ cnv «3 Gia đình», nc/bd «1 Người hầu · 3 Vương tộc»; tabsRenamed
   (b) «Cha định hôn» stay road → parking lot (MAIN 151). (c) gifts to family → parking lot. (d) seen in the cnv video: the thôn nữ's Dư đồ shows
   the gentry estate map (Viện di nương, Khuê phòng, Từ đường …) — a village home map is likely wanted (art/map owner). (e) palace sim moves consorts'
   ghen toward her while she is at home (now hidden from her cards; the numbers themselves still move).
+
+## RV-OB-NGOAICUNG FAIL answers (OB-NGOAICUNG-2, on the reviewer's merge 1facbb84 → 09358068)
+1. (blocking) her own figure dropped at home → FIXED at the gate: placeEvOk keeps any speaker whose figure is HERS (w.w includes "me"; pMe rk c0) and
+   re-tags it with her home station. The 3 «Tiền truyện» cards + «Khuê các» now show after «Nhận thân phận» (probe: Q = Tiền truyện 1/3..3/3 [Tiểu thư]).
+   scan.js: «dropped» = title + speaker of every dialog the gate removes at home; strict: only palace speakers (emp/th/c<n>/cold/sv), the palace news
+   sheet, or palace world-care cards — never her own figure. 5 roads: bad 0.
+   Same family, found by the new list: palace WORLD-CARE cards (jworldc wcCard, m.wwin «Thế sự trong cung», e.g. jwsd wc-sao-002 «cung nữ đồn điềm
+   xấu») could reach her at home because their speaker is the role-A face → dropped at home (m.wwin); scan strict «worldcare» (shown 0).
+2. k2 her tag → pMe().rw at home = ROAD8_LAB «me»: Tiểu thư / Thôn nữ / Công chúa (Tú nữ for dtv); strict scan surface meTag.
+Gates on 09358068: family scan 600 steps × 5 roads PASS (meTag Tiểu thư/Thôn nữ/Công chúa; tabsRenamed/acts/asks/cards/worldcare 0; dropped bad 0;
+errors 0; nc re-run alone after a start flake). coop-e2e 143/143. quickcheck: build/old save/open 2817 ms/perf ✓ (buổi 2102 vs 3961 ms); FAILs =
+G4 80-dialog-fixed «kit-dialog-2 a no empty Tốn / Được cell» (Fold + iPad) and G4 button-crawl «Ô lưu · Lui» — BOTH reproduced identically on
+LIVE main 6b5d3d05 (dialog-fixed.js run twice on its index.html) → pre-existing, not this branch.
