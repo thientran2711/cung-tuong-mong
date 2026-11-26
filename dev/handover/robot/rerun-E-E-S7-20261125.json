@@ -52201,5 +52201,117 @@
   "t": {
    "total": 2046019
   }
+ },
+ {
+  "job": {
+   "id": "R8-lover-5",
+   "origin": "bd",
+   "road": "bd_hen",
+   "bot": "sens",
+   "seed": 2190474431,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "d2e03d80",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [],
+   "slice": null,
+   "build": {
+    "s": "f009e1a6+",
+    "b": "dd1ce3d0ffa1",
+    "t": "2026-11-26T02:21Z"
+   },
+   "areaTaps": 46,
+   "dlgScroll": 2,
+   "scrolls": 2,
+   "taps": 20
+  },
+  "life": {
+   "id": "Ban hoa",
+   "type": "end",
+   "fate": "Bị ban hoa, xuất cung",
+   "death": false,
+   "age": 19,
+   "year": 1,
+   "rank": 2,
+   "text": "Ngươi theo đoàn sứ về thảo nguyên. Gió bắc thổi tan dần ký ức về cung thành.",
+   "card": [
+    "Dâng điệu múa Ba Tư Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; l",
+    "Bắn cung trước điện Rất vững TỐN Sức -5 ĐƯỢC chơi một màn; l",
+    "Cúi đầu chờ xét Rất vững TỐN Sức -5 ĐƯỢC không thi; tính the"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Thân phận kiếp này» «Dung mạo 12»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 12»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 8»",
+    ".dlg «Thân phận kiếp này» «Dung mạo 12»",
+    ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»",
+    ".dlg «Tiền truyện · Công chúa Ba Tư hòa thân · 1/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Ba Tư hòa thân · 2/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Ba Tư hòa thân · 3/4» «Tiếp theo»",
+    ".dlg «Tiền truyện · Công chúa Ba Tư hòa thân · 4/4» «Vào cung»",
+    "AREA 841,259",
+    ".kmov «Vào điện»",
+    ".dlg «Lễ ra mắt» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "saves": [],
+  "buoi": 1,
+  "steps": 80,
+  "status": [],
+  "_started": true,
+  "rss": [
+   {
+    "buoi": 1,
+    "y": 1,
+    "totalMB": 1327,
+    "rendererMB": 612,
+    "heapMB": 117,
+    "dom": 2741,
+    "q": 3,
+    "lsK": 4
+   }
+  ],
+  "promo": {
+   "raw": 0,
+   "real": 0,
+   "picked": 0,
+   "by": {}
+  },
+  "_momSeen": [
+   "#klife|",
+   "#kroul|",
+   ".dlg|Thân phận kiếp này",
+   ".dlg|Tiền truyện · Công chúa Ba Tư hòa thân ·",
+   "#modal|Lễ ra mắt",
+   ".kmov|",
+   ".dlg|Lễ ra mắt",
+   ".dlg|Duyên cung lỡ hẹn"
+  ],
+  "_momRank": 2,
+  "_unsFail": {
+   ".dlg|Thân phận kiếp này": {},
+   ".dlg|Tiền truyện · Công chúa Ba Tư hòa thân · #/#": {},
+   ".dlg|Lễ ra mắt": {}
+  },
+  "_scrW": {
+   ".dlg|Thân phận kiếp này|871,392": {
+    "left": 359,
+    "n": 1
+   }
+  },
+  "t": {
+   "total": 43760
+  }
  }
 ]
