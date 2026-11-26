@@ -3764,3 +3764,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? (kit rv ob-kiep owe
 - ~02:15Z OB-NGOAICUNG LAND READY 0183c8d2 NOT accepted: KCTABS home tab rename breaks OD:L2108 (same 8 tabs, same names, every road) → successor (its own child; 151 cannot open) reverts rename, does DTV head-count wording, reruns quickcheck+coop-e2e, full home-life videos. «Cha định hôn» → parking lot.
 - ~02:12Z OB-NGOAICUNG-2 = session_01V1ZZH3o5vxwvPJqTBShLgV (its child, opus) on review/ob-ngoaicung c397cb5a; OB-NGOAICUNG archived.
 - ~02:20Z M2b SAVE ROLLBACK #2 on LIVE (~12 months lost; save stuck after year rollover) → B save fixer BLOCKING order (7e01f0f5 not in LIVE). Landing pack: tell sếp.
+- ~02:28Z PROMO-ROOT2 forgetSafe 346da1ae (promo-root 8/8, coop 143) → LC19 re-stage a9 (A stack); stack (B) without a9 also prepared. PROMO-ROOT2 now on SRVMERIT-FIX r2. LC19 a10–a13 LAND READY (946080a1/27b78563/4ead655b/0dd38efb).
