@@ -1,0 +1,14 @@
+/* FIRSTCARD card shots (Fold 755x1000 + iPad 1180x820): the family cards as the player sees them. usage: WT=<site root> node cardshots.js <out> <tag> */
+const {open}=require('./lib.js');const path=require('path'),fs=require('fs');const [,,OUT,TAG]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const CASES=(process.env.CASES?JSON.parse(process.env.CASES):[["bd","sel",null],["tt","kcE",{e:"dinhhon2"}],["tt","kcE",{e:"dien"}],["bd","exam",null]]);
+(async()=>{for(const [dn,vp] of [["fold",{width:755,height:1000}],["ipad",{width:1180,height:820}]]){const {b,p}=await open(vp,{ctx:{deviceScaleFactor:1}});
+ for(const [og,kind,pp] of CASES){await p.goto('http://localhost:8813/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof selxDay==='function',null,{timeout:240000});
+  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:60000});
+  const r=await p.evaluate(([og,kind,pp])=>{for(let i=0;i<900;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S&&S.origin&&S.origin.k===og)break}if(S.origin.k!==og)return "no origin";
+   if(kind==="kcE"){window.__kcO="nha";S.kcPick="nha";nlAccept();if(!S.kc)return "no kc";S.kc.suit=S.kc.suit&&S.kc.suit.length?S.kc.suit:[kcSuitor()];S.kc.tt=S.kc.tt||{raw:5};Q.length=0;const d=mkP("kcE",pp);if(!d)return "no card";Q.unshift({t:d.t0||({dinhhon2:"Cha định hôn",dien:"Điện tuyển"})[pp.e],h:d.t,opts:d.o,who:d.who,pid:"kcE",pp});return "ok"}
+   S.kcPick="cung";nlAccept();const m=Q.find(x=>x.pid==="kc2Sel");if(!m)return "no sel";Q.length=0;Q.unshift(m);if(kind==="exam"){Q.length=0;S.selx.art="mua";setTimeout(()=>kc2Play("mua","Tuyển chọn","",()=>{}),50)}return "ok"},[og,kind,pp]);
+  if(r!=="ok"){console.log(dn,og,kind,r);continue}
+  for(let t=0;t<8;t++){await p.waitForTimeout(700);await p.evaluate(kind=>{for(let i=0;i<8;i++){const e=typeof dqActEl==='function'&&dqActEl();if(!e||e.id==='kg82')break;e.remove()}document.querySelectorAll('.kmov,.kmrew,[id^="kroul"],.kroul-ov,#kprevov').forEach(x=>x.remove());if(kind!=="exam")try{showModal()}catch(e){}},kind)}
+  for(let t=0;t<10;t++){const c=await p.evaluate(()=>{const b=[...document.querySelectorAll('button')].find(x=>x.offsetParent&&/^Vào cung ngay$/.test(x.textContent.trim()));if(b){b.click();return 1}return 0});if(!c)break;await p.waitForTimeout(1500)}
+  await p.waitForTimeout(900);const f=path.join(OUT,`${TAG}-${dn}-${og}-${kind}${pp?'-'+pp.e:''}.png`);await p.screenshot({path:f});console.log('shot',f)}
+ console.log(dn,'errors',p.errs.slice(0,4));await b.close()}})();

@@ -312,8 +312,23 @@ function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
 /* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
    roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
+/* FIRSTCARD (MAIN 153, laws 2/3/7/11; KIT §6.2b-END): THE ONE odds rule of an option whose outcome can END the life or take her out of the palace
+   (ban hoa, xuất giá, xuất gia, tự vẫn, chết…). A «Rất vững» sure meter is never printed on such an option.
+   kitRiskOpt(o, p, loss, end): a caller whose chance the card cannot see (a contest, a roll inside its go) declares the TRUE chance p (0..100, from the
+   same BAL rule the roll uses) + the loss words: the option line then leads with word(p) (kaNorm → kaOdds meter, BAL.odds.cut) and the hint names the
+   loss («nhưng nếu hỏng: …» → the kit Mất row, red). end = that loss ends this life (o.end).
+   kitEndOdds(o, n): the meter word of an option the kit would stamp SURE (no odds of its own): a declared p → word(p); an option of a real choice
+   (n ≥ 2 options) whose words say this life ends (KIT_END_RE) → word(BAL.odds.lo) = the chance of keeping this life; else null (the sure meter). */
+const KIT_END_RE=/kiếp này dừng|kết thúc kiếp này|bị ban hoa|mất mạng/;
+function kitRiskHint(h,loss){h=String(h||"");return !loss||h.includes(loss)?h:(h?h+"; ":"")+"nhưng "+(/ thì /.test(loss)?"":"nếu hỏng: ")+loss}/* a loss that names its own condition («… thì …») is not prefixed */
+function kitRiskOpt(o,p,loss,end){if(!o||p==null||isNaN(p))return o;p=oddsCl(Math.round(p));o.oddsP=p;if(end)o.end={p};
+ o.j67=[word(p),String(o.j67||"").replace(KIT_ODDS_LEAD,"").replace(/^\s*·\s*/,"")].filter(Boolean).join(" · ");
+ if(loss){o.__rkLoss=loss;const h=o.hint;o.hint=typeof h==="function"?(lv=>kitRiskHint(h(lv),loss)):kitRiskHint(h,loss)}return o}/* __rkLoss: a later hint table (jkc KCH) adds its own hint first, then the loss */
+function kitEndOdds(o,n){if(!o)return null;if(o.oddsP!=null)return word(o.oddsP);if(o.end)return word(o.end.p!=null?o.end.p:BAL.odds.lo);if((n||0)<2)return null;
+ let t="";try{t=[typeof o.hint==="function"?o.hint(1):o.hint,o.x,o.j67].filter(Boolean).join(" ")}catch(e){}return KIT_END_RE.test(t)?word(BAL.odds.lo):null}
 function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
- kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
+ let w=KIT_ODDS[KIT_ODDS.length-1],sure=1;try{const M=b.closest("#modal");const m=M&&typeof Q!=="undefined"?Q[0]:null;const o=m&&m.opts&&b.dataset.m!=null?m.opts[+b.dataset.m]:null;const e=kitEndOdds(o,m&&m.opts?m.opts.length:0);if(e){w=e;sure=0}}catch(e){}/* FIRSTCARD: never «Rất vững» on a life-ending pick */
+ kat.insertAdjacentHTML("beforeend",`<span class="kodds"${sure?' data-ksure="1"':""}>${oddsChip(w)}</span>`)}catch(e){console.error("kitOptOdds",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;if(b.classList.contains("kbare"))return;/* KIT §93.7 + §98.16 (K-BARE-HINT): a bare card carries NO «Gợi ý» row (owner: no guidance on selection answers), same guard as kitOptOdds / kitOptFinal */b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}

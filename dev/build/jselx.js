@@ -91,17 +91,35 @@ function selxDay1(){const Z=S.selx2;if(!Z||Z.girls&&Z.girls.length)return;Z.girl
 /* the visible ranking, like the hội thi results: the kit podium (j90 kitPodiumShow), score in «phần», kept / ban hoa under each name */
 function selxPodShow(L){if(typeof kitPodiumShow!=="function"||window.__bot||typeof document==="undefined")return null;
  return kitPodiumShow(L.map(x=>({who:x.v,place:x.place,score:`${x.sc} phần`,sub:x.kept?"ban hương nang":"ban hoa",you:x.v===S?"Ngươi":undefined})),{title:"Điện tuyển",sub:`Giữ ${typeof selxNumW==="function"?selxNumW(BAL.selx.yard.kept):BAL.selx.yard.kept} người điểm cao nhất`,next:"Tiếp",unknown:v=>!(typeof selxMet==="function"?selxMet(v):true)/* KIT 26.4 (kit-batch2 1ba60626, MAIN 117 Q5): NAMED is not MET — a girl not greeted stands as the grey silhouette with her name, no cuMeet */})}
+/* FIRSTCARD: a princess's audience words (the same words as the hòa thân home road, jkc2 kc2EnterNc) */
+const SELX_WHY_HT={up:"Hoàng thượng thấy dung nhan, phong cao hơn hòa ước",eq:"Được phong đúng như hòa ước",dn:"Lễ ra mắt chưa đủ, phong thấp hơn hòa ước một bậc"};
 const SELX_WHY={up:"Được ban hương nang; được phong cao hơn thân phận",eq:"Được ban hương nang; được phong đúng thân phận",dn:"Được ban hương nang, nhưng phong thấp hơn thân phận một bậc"};
+/* FIRSTCARD (MAIN 153, laws 2/3/7; OD 23/11 ~22:35Z (3) «hòa thân (nc/bd/pf) = the only road with NO tuyển tú … feeds the ±1 cap Phi + Sắc rule»):
+   a princess is never in the tú nữ contest, so never ban hoa at her welcome audience. The girls of the intake compete among themselves (law 6b: they
+   stay real); her step = the place her score would take among them (selxResult / BAL.selx.placeStep; below the kept places = the last step, −1). */
+function selxHtMe(L,marks){const sc=Math.round(selxScore(S,marks));const place=1+L.filter(x=>x.v!==S&&(x.sc>sc||x.sc===sc&&(+x.v.sac||0)>(+S.sac||0))).length;
+ const r=selxResult(place);const PS=BAL.selx.placeStep;return{v:S,sc,place,kept:true,step:r.kept?r.step:PS[PS.length-1]}}
+/* FIRSTCARD (law 7, ONE CORE): the TRUE chance (0..100, for word()) of the selection's good outcome at mini mark raw: BAL.odds.simN contests of the SAME
+   girls by the SAME formula (selxScore noise + each girl's own marks drawn every time); a tú nữ = kept (not ban hoa), a princess = not set a step under
+   her origin (step ≥ 0). On a private generator: the game's Math.random is never consumed, so a seeded life plays the same with or without the meter. */
+function selxOddsP(raw,art){try{const Z=S&&S.selx2;if(!Z)return null;const girls=Z.days&&typeof selxAll==="function"?selxAll():(Z.girls&&Z.girls.length?Z.girls:null);if(!girls)return null;
+ const ht=selxHoaThan(),N=BAL.odds.simN,kept=BAL.selx.yard.kept;const mk=Object.assign({},Z.mk||{},{mini:raw});const t={art:art||(S.selx&&S.selx.art)||(()=>{try{return entKind(entBest())}catch(e){return""}})()};/* the board every girl is judged on = selxSelDo's own t */
+ const r0=Math.random;let q=((S.turn||0)*7919+(raw|0)*104729+girls.length*31+(S.sac|0))>>>0;Math.random=()=>{q=(Math.imul(q,1664525)+1013904223)>>>0;return q/4294967296};
+ let ok=0;try{for(let i=0;i<N;i++){if(ht){const L=selxContest(girls,null);if(selxHtMe(L,mk).step>=0)ok++}else{const L=selxContest(girls,{marks:mk,t});const me=L.find(x=>x.v===S);if(me&&me.place<=kept)ok++}}}finally{Math.random=r0}
+ return Math.round(ok*100/N)}catch(e){console.error("selxOddsP",e);return null}}
+/* the loss words of the selection (VANPHONG cổ trang, no numbers): what «hỏng» means on her road */
+function selxLossW(){if(selxHoaThan())return "bị phong thấp hơn hòa ước một bậc";const n=BAL.selx.yard.kept;return `không lọt vào ${typeof selxNumW==="function"?selxNumW(n):n} người đứng đầu thì bị ban hoa, kiếp này dừng`}
 function selxSelDo(raw){if(S.selx2&&S.selx2.days&&typeof selxMiniDone==="function")return selxMiniDone(raw);/* SELSCENE-4: the 3 days — the mini-game is Hoàng thượng's test of DAY 2 (jselxday) */const X=S.selx;const Z=S.selx2=S.selx2||{v:SELX_V};const t={art:X.art||(()=>{try{return entKind(entBest())}catch(e){return""}})()};/* a skipped round: everyone on her own best board kind, the same board for all */
- const girls=Z.girls&&Z.girls.length?Z.girls:(Z.girls=selxGirls());const L=selxRoomCap(selxContest(girls,{marks:{mini:raw},t}));const me=L.find(x=>x.v===S);
+ const ht=selxHoaThan();/* FIRSTCARD: a princess is not in the tú nữ contest (selxHtMe) */
+ const girls=Z.girls&&Z.girls.length?Z.girls:(Z.girls=selxGirls());const L=selxRoomCap(selxContest(girls,ht?null:{marks:{mini:raw},t}));const me=ht?selxHtMe(L,{mini:raw}):L.find(x=>x.v===S);
  const res={kept:me.kept,step:me.step};const sc=me.sc;X.sc=sc;X.kept=res.kept;X.step=res.step;X.place=me.place;
- Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));selxNpcOut(L);try{selxPodShow(L)}catch(e){console.error("selx pod",e)}
+ Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));selxNpcOut(L);if(!ht)try{selxPodShow(L)}catch(e){console.error("selx pod",e)}/* FIRSTCARD: the tú nữ podium is not her audience */
  if(!res.kept){X.tier=0;X.fx=1;X.why="Bị ban hoa";log("Tuyển chọn: bị ban hoa, xuất cung.");try{kcSnapReset()}catch(e){}selxBanHoa();return}
- selxHuong(S);X.tier=res.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,res.step);const was=S.rank;S.rank=rank;
+ if(!ht)selxHuong(S);X.tier=res.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,res.step);const was=S.rank;S.rank=rank;
  if(rank<was)S.sung=Math.max(0,(S.sung||0)-(was-rank)*BAL.entry.stepSung);S.lastPromo=S.turn;try{palFix()}catch(e){}try{kc2R0()}catch(e){}
- X.why=rank>r0?SELX_WHY.up:rank<r0?SELX_WHY.dn:SELX_WHY.eq;
- const c=Q.find(m=>m.t==="Nhập cung");if(c){const h0=String(c.h),nw=`${RANKS[rank].n} (kỳ tuyển chọn: ${KC2SW[X.tier]})`;
+ const W=ht?SELX_WHY_HT:SELX_WHY;X.why=rank>r0?W.up:rank<r0?W.dn:W.eq;
+ const c=Q.find(m=>m.t==="Nhập cung");if(c){const h0=String(c.h),nw=`${RANKS[rank].n} (${ht?"lễ ra mắt":"kỳ tuyển chọn"}: ${KC2SW[X.tier]})`;
   c.h=h0.includes(`phong <b>${RANKS[was].n}</b>`)?h0.replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${nw}</b>`):h0.replace(new RegExp(`(Phong[\\s\\S]*?>)${RANKS[was].n}(<)`),`$1${nw}$2`);
   try{if(typeof oiPut==="function")oiPut(c,X.why)}catch(e){}}
  log(`Tuyển chọn (${KC2SW[X.tier]}): phong ${RANKS[rank].n}.`);try{kcSnapReset()}catch(e){}deal()}
-try{window.selxSelDo=selxSelDo;window.selxScore=selxScore;window.selxResult=selxResult;window.selxRank=selxRank;window.selxContest=selxContest;window.selxGirls=selxGirls;window.selxBanHoa=selxBanHoa;window.selxRoomPlan=selxRoomPlan;window.selxIntake=selxIntake}catch(e){}
+try{window.selxOddsP=selxOddsP;window.selxLossW=selxLossW;window.selxSelDo=selxSelDo;window.selxScore=selxScore;window.selxResult=selxResult;window.selxRank=selxRank;window.selxContest=selxContest;window.selxGirls=selxGirls;window.selxBanHoa=selxBanHoa;window.selxRoomPlan=selxRoomPlan;window.selxIntake=selxIntake}catch(e){}
