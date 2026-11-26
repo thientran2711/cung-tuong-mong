@@ -1,0 +1,2964 @@
+{
+ "job": {
+  "id": "coop-rt-U3c2s66fix-host-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 761,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8733/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "7959f1b5",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 12,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 152,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 163,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 595,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 677,
+    "lvl": 3,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 1077,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 1107,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 2007,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 2210,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 2564,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 2834,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 2858,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 2951,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 3092,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 3242,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 3365,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 3389,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 3663,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 3722,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 4075,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 4235,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 4307,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 4432,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 4644,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 4666,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 4677,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 4688,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 4699,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": "",
+    "skipped": "coopfz ✕ = leave room"
+   },
+   {
+    "at": 5070,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 5474,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   },
+   {
+    "at": 5666,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Cung Tường Mộng",
+    "tapped": "Lui",
+    "leftRoom": true
+   }
+  ],
+  "slice": null,
+  "areaTaps": 1054,
+  "kpopTrap": 74,
+  "popClose": 86,
+  "unstickSkipCoopfz": 12,
+  "noFreeSkip": 2,
+  "chipTrap": 5,
+  "reloads": [
+   20
+  ],
+  "reloadDone": 20,
+  "unstickLeft": 18,
+  "lockedSkip": 12,
+  "taps": 3387,
+  "noFreePoint": 11,
+  "reachFocus": 11,
+  "reachRows": [
+   {
+    "screen": "#kg82",
+    "label": "Trước khi ra tay",
+    "top": 524,
+    "top0": 524,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Tin báo",
+    "top": 9,
+    "top0": 9,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 436,
+    "top0": 436,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": ".dlg",
+    "label": "Ghi chú",
+    "top": 456,
+    "top0": 456,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "tuyết nhẹ",
+    "top": 11,
+    "top0": 11,
+    "vh": 1000,
+    "wheelMoved": false,
+    "clip": false,
+    "sc": null
+   }
+  ],
+  "chipCover": [
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Tâm trạngBình thản-22",
+    "chip": "span",
+    "pct": 35,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Tâm trạngBình thản-22",
+    "chip": "b.kname",
+    "pct": 18,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Tâm trạngBình thản-23",
+    "chip": "div#kntchip.ktbt.kntc",
+    "pct": 20,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Tâm trạngHờn tủi-33",
+    "chip": "span",
+    "pct": 23,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "chip": "button.krailb.kctmf",
+    "pct": 30,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "mưa thu",
+    "chip": "button.krailb.kctmf",
+    "pct": 48,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "nắng vàng",
+    "chip": "button.krailb.kctmf",
+    "pct": 33,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "nắng vàng",
+    "chip": "button.krailb.kctmf",
+    "pct": 33,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "Tất cả 9/10Nghỉ ngơi 0/1Học tập · Tài ng",
+    "chip": "button.card.kcard.ka",
+    "pct": 31,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Đeo «Trăng soi rèm ngọc»»",
+    "label": "Thêm SủngTốnkhôngĐượcSủng +1",
+    "chip": "span.kaart",
+    "pct": 13,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "tuyết nhẹ",
+    "chip": "button.krailb.kctmf",
+    "pct": 43,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   },
+   {
+    "screen": ".dlg «Danh hiệu»",
+    "label": "Danh hiệu 1/35",
+    "chip": "img",
+    "pct": 96,
+    "vw": 755
+   }
+  ]
+ },
+ "life": {
+  "id": "SEGMENT",
+  "type": "segment",
+  "fate": "segment closed: {\"why\":\"year\",\"min\":98,\"buoi\":123,\"year\":2}"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|tap on option «Tuyển chọn trước ngày phong» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tuyển chọn trước ngày phong» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 1,
+   "at": 38,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «hoa đào bay» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «hoa đào bay» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 75,
+   "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời quang» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 189,
+   "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Tự chọn đồRất vữngTốn0 khắcThà» opened a hint popup (#kpop) — trigger class span.ef.t.kef1 sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tự chọn đồRất vữngTốn0 khắcThà» opened a hint popup (#kpop) — trigger class span.ef.t.kef1 sits on the card body",
+   "n": 3,
+   "at": 194,
+   "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «trời trong, sao sáng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời trong, sao sáng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 244,
+   "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa phùn» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 293,
+   "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Hôm nay mặt mộc» opened a hint popup (#kpop) — trigger class span.k3l sits on the card body",
+   "n": 2,
+   "at": 324,
+   "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Trước khi ra tay» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 3,
+   "at": 366,
+   "screen": "#kg82 «»"
+  },
+  {
+   "k": "game|tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Ghi chú» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 9,
+   "at": 397,
+   "screen": ".dlg «»"
+  },
+  {
+   "k": "game|tap on option «Học tập · Tài nghệHọc tập · Tà» opened chip modal «Cầm: các lối» (chip class button.ka.kart overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Học tập · Tài nghệHọc tập · Tà» opened chip modal «Cầm: các lối» (chip class button.ka.kart overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 654,
+   "screen": "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người»"
+  },
+  {
+   "k": "game|tap on option «trời trong mát» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trời trong mát» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 1065,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Tết Đoan ngọ» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tết Đoan ngọ» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 5,
+   "at": 1190,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «mồng 5: Tết Đoan ngọ» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mồng 5: Tết Đoan ngọ» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 1522,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Vì sao» opened a hint popup (#kpop) — trigger class span.khap.kgl.kfx sits on the card body",
+   "n": 7,
+   "at": 1650,
+   "screen": ".dlg «Bổng lộc tháng năm»"
+  },
+  {
+   "k": "game|tap on option «chiều lộng gió» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «chiều lộng gió» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 1730,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «ve kêu râm ran» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «ve kêu râm ran» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 1996,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Hội Phượng» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Hội Phượng» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 1,
+   "at": 2136,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «gió heo may» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 4,
+   "at": 2246,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «trăng rằm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trăng rằm» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 2539,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Cách tính» opened chip modal «Cách tính Công danh» (chip class button.kbtn.alt overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Cách tính» opened chip modal «Cách tính Công danh» (chip class button.kbtn.alt overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 3,
+   "at": 2811,
+   "screen": ".kpod «»"
+  },
+  {
+   "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 2939,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «lá phong rơi» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 3081,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «mưa thu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mưa thu» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 3195,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 2,
+   "at": 3230,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «trăng thu» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 3278,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «nắng vàng» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 2,
+   "at": 3411,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Tết Trùng cửu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Tết Trùng cửu» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 2,
+   "at": 3469,
+   "screen": ".dlg «Lịch tháng»"
+  },
+  {
+   "k": "game|tap on option «đêm u ám» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «đêm u ám» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 4175,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «mai nở trong tuyết» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 4,
+   "at": 4295,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «đêm sương giá» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «đêm sương giá» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 5,
+   "at": 4366,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «đêm sương giá» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «đêm sương giá» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 4373,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «gió bấc» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «gió bấc» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 1,
+   "at": 5137,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "type": "game",
+   "msg": "tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class img sits on the card body",
+   "n": 1,
+   "at": 5295,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Bạc34Sức94/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "type": "game",
+   "msg": "tap on option «Bạc34Sức94/100» opened chip modal «Bạc» (chip class div#hud-bac.kst overlaps the card body; 2nd tap on the same card also opened a modal)",
+   "n": 1,
+   "at": 5324,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "type": "game",
+   "msg": "tap on option «tuyết nhẹ» opened a hint popup (#kpop) — trigger class button.k3r.k3wx.kmwx sits on the card body",
+   "n": 3,
+   "at": 5589,
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+  },
+  {
+   "k": "game|tap on option «Đêm Giao thừa» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "type": "game",
+   "msg": "tap on option «Đêm Giao thừa» opened a hint popup (#kpop) — trigger class span.kmc-lk sits on the card body",
+   "n": 1,
+   "at": 5714,
+   "screen": ".dlg «Lịch tháng»"
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#kg82",
+   "label": "Trước khi ra tay",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795680485806.png",
+   "dev": "fold",
+   "at": 379,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795680516668.png",
+   "dev": "fold",
+   "at": 410,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795680546997.png",
+   "dev": "fold",
+   "at": 440,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795680557212.png",
+   "dev": "fold",
+   "at": 450,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795681051711.png",
+   "dev": "fold",
+   "at": 944,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795681077038.png",
+   "dev": "fold",
+   "at": 970,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795681085124.png",
+   "dev": "fold",
+   "at": 978,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Tin báo",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795681227578.png",
+   "dev": "fold",
+   "at": 1120,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795681743034.png",
+   "dev": "fold",
+   "at": 1636,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg",
+   "label": "Ghi chú",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795682293698.png",
+   "dev": "fold",
+   "at": 2187,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh",
+   "cover": "zero size",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795683507114.png",
+   "dev": "fold",
+   "at": 3400,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "label": "tuyết nhẹ",
+   "cover": "noFreePoint: every probe point on the option is a chip/trigger (kit hit-area bug)",
+   "shot": "/home/user/wt/out66b/shots-coop-rt-U3c2s66fix-host-k1/dead-fold-1795685716671.png",
+   "dev": "fold",
+   "at": 5610,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Thượng Quan Thanh Uyển"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 123,
+ "steps": 7625,
+ "status": [
+  "STATUS coop-rt-U3c2s66fix-host-k1 · buổi 79 · year 1 · rank 0 · bugs 27 · stuck 0 · dead buttons 11"
+ ],
+ "_snapAt": 1795685900203,
+ "_un": 0,
+ "_lkB": 122,
+ "trace": [
+  [
+   5091,
+   ".dlg «Quẻ Thượng thượng · Sủng» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5092,
+   ".dlg «Quẻ Thượng thượng · Sủng» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5092,
+   ".dlg «Quẻ Thượng thượng · Sủng» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5093,
+   ".dlg «Quẻ Thượng thượng · Sủng» «Lui»"
+  ],
+  [
+   5094,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5095,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5104,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5113,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5114,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   5115,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Trăng soi rèm ngọcPhế phi · lãnh cungĐường Chỉ Như»"
+  ],
+  [
+   5116,
+   ".kfoc «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 bạc»"
+  ],
+  [
+   5116,
+   ".kfoc «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 bạc»"
+  ],
+  [
+   5117,
+   ".kfoc «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 bạc»"
+  ],
+  [
+   5118,
+   ".kfoc «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 bạc»"
+  ],
+  [
+   5119,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5119,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5120,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5121,
+   ".kfoc «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   5122,
+   ".kfoc «Lui»"
+  ],
+  [
+   5122,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5123,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5124,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5125,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5126,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-4»"
+  ],
+  [
+   5127,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5127,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   5128,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   5129,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5130,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   5131,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-4»"
+  ],
+  [
+   5132,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5133,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Việc»"
+  ],
+  [
+   5134,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5135,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5135,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5136,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «gió bấc»"
+  ],
+  [
+   5138,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5139,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5148,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5157,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5166,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tất cả 8/10»"
+  ],
+  [
+   5167,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5169,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5170,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5174,
+   "DEAD Đường Chỉ Nhược: Đã sẵn sàng"
+  ],
+  [
+   5175,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản+17»"
+  ],
+  [
+   5179,
+   "DEAD Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT"
+  ],
+  [
+   5182,
+   "DEAD Bậc 0 trên 5"
+  ],
+  [
+   5183,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản+17»"
+  ],
+  [
+   5187,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5189,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5191,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «đêm sương giá»"
+  ],
+  [
+   5194,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5198,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   5201,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   5202,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5203,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc83Tài77Tâm cơ14Đức59Danh0Sủng0»"
+  ],
+  [
+   5205,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   5206,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5207,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   5209,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản+17»"
+  ],
+  [
+   5210,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5211,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5213,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5214,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5216,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc27Sức100/100»"
+  ],
+  [
+   5217,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   5219,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5221,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   5223,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5225,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 17 tin mới»"
+  ],
+  [
+   5229,
+   "DEAD Tứ đức 8/9"
+  ],
+  [
+   5232,
+   "DEAD Học tập · Tài nghệHọc tập · Tài nghệTự họcⓘTốn2 kh"
+  ],
+  [
+   5234,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»"
+  ],
+  [
+   5237,
+   "DEAD Tác phẩm"
+  ],
+  [
+   5238,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   5241,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5244,
+   "DEAD Xem bản đồ hoàng cungGhi chútoàn cảnh"
+  ],
+  [
+   5245,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   5253,
+   "DEAD Mệnh truyện"
+  ],
+  [
+   5256,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5257,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5258,
+   ".dlg «Bổng lộc tháng mười một» «Vì sao»"
+  ],
+  [
+   5269,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5270,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   5271,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   5272,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5273,
+   ".dlg «Quẻ Hạ hạ · Hung» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5274,
+   ".dlg «Quẻ Hạ hạ · Hung» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5274,
+   ".dlg «Quẻ Hạ hạ · Hung» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5275,
+   ".dlg «Quẻ Hạ hạ · Hung» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5276,
+   ".dlg «Quẻ Hạ hạ · Hung» «Lui»"
+  ],
+  [
+   5277,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5278,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5278,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5279,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5280,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5281,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5282,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5282,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5283,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5284,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5285,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5285,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5286,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5287,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5288,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5289,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5289,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5290,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5291,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5292,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5292,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5293,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5294,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5295,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «tuyết nhẹ»"
+  ],
+  [
+   5297,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   5297,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5298,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5299,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5308,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5309,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5310,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   5311,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi trưa, còn 3 khắc»"
+  ],
+  [
+   5312,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   5313,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc34Sức94/100»"
+  ],
+  [
+   5313,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5314,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5315,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc34Sức94/100»"
+  ],
+  [
+   5316,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5317,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5318,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5318,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   5319,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự trong cung»"
+  ],
+  [
+   5320,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Cảnh»"
+  ],
+  [
+   5321,
+   ".dlg «Tâm trạng · Hoàng tử Vĩnh Cảnh» «Lui»"
+  ],
+  [
+   5322,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc34Sức94/100»"
+  ],
+  [
+   5323,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5323,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc34Sức94/100»"
+  ],
+  [
+   5324,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5326,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5327,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5327,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5328,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5329,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   5330,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc34Sức94/100»"
+  ],
+  [
+   5331,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5332,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đường Chỉ Nhược: Đang làm việc»"
+  ],
+  [
+   5333,
+   ".dlg «Tâm trạng · Phế phi Đường Chỉ Nhược» «Lui»"
+  ],
+  [
+   5333,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5334,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 5 tin mới»"
+  ],
+  [
+   5335,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   5336,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Xem quan hệ của Hoàng thượng»"
+  ],
+  [
+   5337,
+   ".dlg «Xem quan hệ của» «Chí tôn 2»"
+  ],
+  [
+   5337,
+   ".dlg «Xem quan hệ của» «Hoàng thượng»"
+  ],
+  [
+   5338,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng (Tài nghệ)»"
+  ],
+  [
+   5339,
+   ".dlg «Quẻ Thượng · Tài nghệ» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   5340,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   5341,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức94/100»"
+  ],
+  [
+   5342,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5343,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5344,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức94/100»"
+  ],
+  [
+   5344,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5345,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc83Tài77Tâm cơ14Đức59Danh1Sủng0»"
+  ],
+  [
+   5346,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   5347,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   5348,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   5349,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   5350,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   5351,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5352,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   5353,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5354,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   5355,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5356,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   5357,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5358,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   5359,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»"
+  ],
+  [
+   5360,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   5360,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   5361,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5362,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   5363,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   5364,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   5365,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   5366,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   5367,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   5368,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   5369,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»"
+  ],
+  [
+   5370,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   5371,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   5372,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   5372,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»"
+  ],
+  [
+   5373,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   5374,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   5375,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   5376,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   5383,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5384,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5387,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5390,
+   "DEAD Nam nhân"
+  ],
+  [
+   5391,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   5395,
+   "DEAD Thú cưng"
+  ],
+  [
+   5396,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «đêm sương giá»"
+  ],
+  [
+   5474,
+   "#modal «unstick ✕»"
+  ],
+  [
+   5476,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   5477,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ],
+  [
+   5482,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5483,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5484,
+   ".dlg «Đại hàn, tuyết lớn» «Lui»"
+  ],
+  [
+   5492,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5493,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5494,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5494,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5495,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5496,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5497,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5497,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5498,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5499,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5500,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5501,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5501,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5502,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5503,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5504,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5504,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5505,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5506,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5507,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5507,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5508,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5509,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5510,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5511,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5511,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5512,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5522,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5524,
+   ".dlg «Việc khó xử» «Đứng về phía Lôi Doanh NguyệtRất vữngTốnkhôngĐượcđ»"
+  ],
+  [
+   5531,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5532,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức100/100»"
+  ],
+  [
+   5533,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5534,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5535,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «3Chí tôn»"
+  ],
+  [
+   5535,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   5536,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5537,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức100/100»"
+  ],
+  [
+   5538,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5539,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc83Tài77Tâm cơ14Đức59Danh1Sủng0»"
+  ],
+  [
+   5539,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5540,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nam nhân»"
+  ],
+  [
+   5541,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5542,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5543,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Thiếu Lăng»"
+  ],
+  [
+   5544,
+   ".dlg «Tâm trạng · Họa sư Lôi Thiếu Lăng» «Lui»"
+  ],
+  [
+   5545,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Cung nhân»"
+  ],
+  [
+   5545,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5546,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5547,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5556,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5566,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5575,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tất cả 8/10»"
+  ],
+  [
+   5576,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5577,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5581,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   5582,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5583,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   5585,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 7 tin mới»"
+  ],
+  [
+   5586,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   5588,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «tuyết nhẹ»"
+  ],
+  [
+   5591,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5593,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5594,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   5597,
+   "DEAD Trăng soi rèm ngọcPhế phi · lãnh cungĐường Chỉ Như"
+  ],
+  [
+   5609,
+   "DEAD tuyết nhẹ"
+  ],
+  [
+   5610,
+   "DEAD tuyết nhẹ"
+  ],
+  [
+   5612,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5615,
+   "DEAD Tác phẩm"
+  ],
+  [
+   5616,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản+5»"
+  ],
+  [
+   5620,
+   "DEAD Tứ đức 8/9"
+  ],
+  [
+   5622,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản+5»"
+  ],
+  [
+   5624,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5628,
+   "DEAD Túi thơm"
+  ],
+  [
+   5630,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   5631,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức100/100»"
+  ],
+  [
+   5634,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Túi đồThú cưngViệcTất cả 49Trang sức 0Y phục 2Vải »"
+  ],
+  [
+   5635,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức100/100»"
+  ],
+  [
+   5638,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   5640,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5644,
+   "DEAD Cầm kỳ thi họa 8/12"
+  ],
+  [
+   5645,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «tuyết nhẹ»"
+  ],
+  [
+   5667,
+   "#modal «unstick ✕»"
+  ],
+  [
+   5668,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   5670,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ],
+  [
+   5674,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5675,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5676,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   5677,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5678,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   5679,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5680,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5681,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5681,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5682,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5683,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5684,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5684,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5685,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5686,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5687,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5687,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5688,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5689,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5690,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5690,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5691,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5692,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5693,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5694,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5703,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi sáng, còn 3 khắc»"
+  ],
+  [
+   5703,
+   ".dlg «sáng · còn» «Lui»"
+  ],
+  [
+   5704,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5706,
+   ".dlg «Kẻ hầu» «Giữ người ấy lại, không cho liềuRất vữngTốnkhôngĐư»"
+  ],
+  [
+   5713,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   5714,
+   ".dlg «Lịch tháng» «Đêm Giao thừa»"
+  ],
+  [
+   5716,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5716,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5717,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «tuyết nhẹ»"
+  ],
+  [
+   5719,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   5720,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản+5»"
+  ],
+  [
+   5720,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   5722,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT»"
+  ],
+  [
+   5722,
+   ".dlg «Học Vũ: ai dạy?» «Trăng soi rèm ngọcQuý nhânLôi Doanh NguyệtTốn2 khắ»"
+  ],
+  [
+   5723,
+   ".dlg «Học Vũ: làm gì?» «Làm»"
+  ],
+  [
+   5724,
+   ".dlg «Điệu «Thải liên»: dùng vật liệu gì?» «Xem thêm»"
+  ],
+  [
+   5728,
+   ".dlg «Điệu «Thải liên»: dùng vật liệu gì?» «Điệu «Thải liên» · tập chayTốnkhôngĐượckhôngGhi ch»"
+  ],
+  [
+   5728,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   5729,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   5730,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   5740,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tác phẩm»"
+  ],
+  [
+   5740,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc83Tài77Tâm cơ14Đức59Danh1Sủng0»"
+  ],
+  [
+   5741,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5742,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   5743,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5744,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5753,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   5763,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»"
+  ],
+  [
+   5764,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5764,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Liên»"
+  ],
+  [
+   5765,
+   ".dlg «Tâm trạng · Cung nữ thân tín tam đẳng Tuyết Liên» «Lui»"
+  ],
+  [
+   5766,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   5767,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyệnViệc nhờSổ ghiĐang làm 1/4Tìm việc Nợ â»"
+  ],
+  [
+   5768,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   5769,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đường Chỉ Nhược: Đang làm việc»"
+  ],
+  [
+   5769,
+   ".dlg «Tâm trạng · Phế phi Đường Chỉ Nhược» «Lui»"
+  ],
+  [
+   5770,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   5771,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Thuận»"
+  ],
+  [
+   5774,
+   "DEAD Thuận"
+  ],
+  [
+   5777,
+   "DEAD Hoàng tự trong cung"
+  ],
+  [
+   5780,
+   "DEAD Kỳ"
+  ],
+  [
+   5782,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ (Giao thiệp)»"
+  ],
+  [
+   5784,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   5785,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   5786,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5788,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   5789,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   5792,
+   "DEAD 1Cung nhân"
+  ],
+  [
+   5795,
+   "DEAD Tuyết LiênThiện cảm 15"
+  ],
+  [
+   5798,
+   "DEAD Cung nhân · 1‹"
+  ],
+  [
+   5799,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc83Tài77Tâm cơ14Đức59Danh1Sủng0»"
+  ],
+  [
+   5800,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức100/100»"
+  ],
+  [
+   5803,
+   "DEAD Đường Chỉ Nhược: Đã sẵn sàng"
+  ],
+  [
+   5804,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   5806,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5809,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   5810,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   5812,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   5814,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   5816,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5817,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5819,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   5820,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Thư từ»"
+  ],
+  [
+   5822,
+   ".dlg «Gửi»"
+  ],
+  [
+   5823,
+   ".dlg «Gửi»"
+  ],
+  [
+   5824,
+   ".dlg «Gửi»"
+  ],
+  [
+   5825,
+   ".dlg «Gửi»"
+  ],
+  [
+   5827,
+   ".dlg «Lui»"
+  ],
+  [
+   5828,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   5829,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   5831,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   5833,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5834,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc24Sức100/100»"
+  ],
+  [
+   5837,
+   "DEAD ⓘ Ra vào cung cấmĐượcai được vào đâuGhi chúlúc nào"
+  ],
+  [
+   5839,
+   "DEAD Đường Chỉ Nhược: Đã sẵn sàng"
+  ],
+  [
+   5840,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 6 tin mới»"
+  ],
+  [
+   5843,
+   "DEAD Xem bản đồ hoàng cungGhi chútoàn cảnh"
+  ],
+  [
+   5844,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   5848,
+   "DEAD Hoa tai"
+  ],
+  [
+   5850,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   5853,
+   "DEAD đang ở đâyđang ở lãnh cungTrường Môn viện · đang ở"
+  ]
+ ],
+ "_ckAt": 1795685908493,
+ "_ckB": 122,
+ "_nfp": 11,
+ "titleBack": 468,
+ "sliced": true,
+ "segment": {
+  "why": "year",
+  "min": 98,
+  "buoi": 123,
+  "year": 2
+ },
+ "t": {
+  "total": 5853781
+ }
+}
