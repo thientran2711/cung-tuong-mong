@@ -171,3 +171,18 @@ PRIORITY #1 CHECK: OD robot-realtap reviews | main none | review/robot-realtap 8
 - Real taps only: kip tiles / kipgo / ✕ via rt.tap, scroll via mouse.wheel; 0 .click() / dispatchEvent; robot-lint OK.
 - Co-op: not exercised live here. The gate and pin go through the same Seat boot (code) → not blocking for the gate; the shared pin port for the friend seat is unproven — run one co-op room after FAIL 1–3.
 - Audit: robot-audit.js (handover) still says «mixed build» inside the INVALID reasons; there is no separate «MIXED-BUILD» verdict yet → REQUIRED FOLLOW-UP (non-blocking for runners): a distinct verdict/label so mixed-build lives are counted apart from other INVALID ones.
+
+# RE-REVIEW robot-realtap 8366c261..0e0ebe29 + robot-audit 851bc8c0 + 359716b8 — BIG REVIEWER #9 for F #21, 26/11 ~12:55Z (ONE verdict)
+PRIORITY #1 CHECK: OD robot-realtap reviews | main none | review/robot-realtap 0e0ebe29 (7767c6fc + 0e0ebe29 on my 8366c261 FAIL) + handover 851bc8c0 / 359716b8 | claims BIG #9.
+## VERDICT: PASS robot-realtap 0e0ebe29 (test files only) + robot-audit 851bc8c0 + 359716b8 — the tip carries every verdict 08a4ff8b..0e0ebe29
+### My FAILs on 8366c261 — fixed
+- FAIL 1 (pin stall): pinUrl now listens to the child's exit/error, caps the wait at 72 × 5 s and keeps R._loopAt fresh (the freeze watchdog reads it). Proof: 3af7896e page with a non-main b (fffffff00000), file:// from a git worktree → «BUILD PIN: rt-serve-build.sh exited 2 … no pin, the given url is used, the gate still stops a mismatch» at once, harness.pinFail {code 2}, life played to buổi 2, 171 s, builds = 1 (was 601 s «PAGE FROZE», 0 buổi) ✓.
+- FAIL 2 (pin=0): Seat gets `pin: A.pin` in robot-rt.js and robot-rt-coop.js; the wrong 127.0.0.1:87xx–89xx skip regex is gone. Proof: `pin=0` iPad bold s4242 → no pinUrl, buổi 2, 87 s ✓.
+- FAIL 3 (RT_TEST_KIP): judged only after the picker was SEEN, else «never shown» at 30 s ✓ (honest now). But on my seeds it is never shown: Fold s43 on 3af7896e AND on 6b5d3d05, iPad s12 → {"shown":false,…}; the fixer's Fold s43 shown:true is not reproduced here. Not blocking (self-test only; it no longer claims a pass): the grid play itself was seen in real play on 8366c261 (iPad s42 buổi 3–4: every confirm off → logged, ✕, no stall), same code in 0e0ebe29.
+- «no item can be given now» is now [note], not [game] ✓. Help line: «use --b, CTM_BI.s = the parent» ✓ (7767c6fc). A load without CTM_BI = one [harness] bug + harness.buildUnknown ✓.
+### Audit (handover)
+- 851bc8c0 MIXED-BUILD: builds with > 1 b or buildMismatch → own verdict MIXED-BUILD, counted apart from VALID / INVALID in COUNTS and the table ✓.
+- 359716b8 board quit: a board back is a quit only before the result (harness ≥ 5c62c2b9: mgBackWhy ph ≠ result and not a give-up; older traces: not after BOARD moves or a Đã hiểu / Xong / Nhận / Tiếp button); «Bỏ cuộc?» still a quit ✓. Note: mgBackWhy keeps the last 40 entries → a very long life can undercount quits (raise the cap or count in a counter).
+### Notes (non-blocking)
+- RT_TEST_KIP opens pushDil(mkP('giftpick')) but on Fold s43 / iPad s12 the picker never reaches the screen within 30 s — find why (queue behind another card, item rules) so the self-test can prove the scroll + confirm path.
+- Co-op room still not run live (pin port shared via the same Seat — code read only).
