@@ -20,7 +20,7 @@ const DEV={fold:{width:755,height:1000,mob:true},ipad:{width:1180,height:820,mob
   await p.waitForTimeout(600);if(!r){facts[dn]={err:"no door "+DOOR,list};await ctx.close();continue}
   await p.screenshot({path:`${OUT}/${dn}-2-door.png`});
   await p.mouse.click(r.x,r.y);await p.waitForTimeout(1200);
-  const dlg=await p.evaluate(()=>{const m=document.getElementById('modal');return {open:!m.hidden,t:Q[0]&&Q[0].t,door:Q[0]&&Q[0].hsDoor,opts:[...m.querySelectorAll('.opts button.opt')].map(o=>({n:(o.querySelector('.kan')||o).textContent.replace(/\s+/g," ").trim().slice(0,40),off:o.disabled||o.classList.contains('kdis')}))}});
+  const dlg=await p.evaluate(()=>{const m=document.getElementById('modal');return {open:!m.hidden,t:Q[0]&&Q[0].t,door:Q[0]&&(Q[0].opts||[]).map(o=>o.hsd).find(Boolean),opts:[...m.querySelectorAll('.opts button.opt')].map(o=>({n:(o.querySelector('.kan')||o).textContent.replace(/\s+/g," ").trim().slice(0,40),off:o.disabled||o.classList.contains('kdis')}))}});
   await p.screenshot({path:`${OUT}/${dn}-3-dialog.png`});
   const o=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button.opt')].find(x=>!x.disabled&&!x.classList.contains('kdis'));if(!b)return null;b.scrollIntoView({block:"center"});const q=b.getBoundingClientRect();return {x:q.x+q.width/2,y:q.y+q.height/2,n:(b.querySelector('.kan')||b).textContent.trim().slice(0,40),u:used}});
   if(o){await p.mouse.click(o.x,o.y);await p.waitForTimeout(1800)}

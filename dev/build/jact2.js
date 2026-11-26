@@ -76,7 +76,7 @@ function as2NgheMark(){if(!S)return;S.adDoor=S.adDoor||{};S.adDoor.__nghe=as2Ngh
    HÀNH SỰ 38 → 16: ONE FEATURE = ONE BUTTON. A true duplicate (one feature split into several cards) shows as ONE door card; the way is chosen
    INSIDE through the kit option dialog (Q modal → kitOptFinal option cards). DISPLAY ONLY: the deck keeps every original card object, every way
    runs the SAME act(i) as before (same khắc, cost, odds, wrappers, results, NPC parity: the NPCs use the same BAL.deck / AGC3BTN tables), so no
-   rule, outcome or number is lost or typed here (law 4). A door shows whenever one of its ways is dealt (the same button name every day; the dialog lists the ways open today).
+   rule, outcome or number is lost or typed here (law 4). ONE ENGINE (J1 dev/build/jdoor.js): the rows are registered in DOOR (DOOR.add, kind «hs» = Hành sự, so DOOR.of(name,"hs") names the door; NPC keys AGC3DOOR unchanged), the door follows the jdoor DECK rule (deckFold: ≥2 ways dealt, a lone way stays bare) and opens the standard DOOR.card choice card.
    ĐỂ RIÊNG (owner ~07:32Z «những cái cần để riêng thì vẫn cứ để riêng»): Điểm trang (H1), Hối lộ Kính sự phòng (H9 lật thẻ), Cầu tự (H10),
    Trò chuyện với cung nữ (H12), Phát bạc cứu giúp (H13), Để ý nam nhân (H15), Giả mang thai (H16) — each a feature of its own.
    Lãnh cung (S.out), the cung nữ road and khuê các keep their own decks here (act-merge J5). Co-op: display only, no shared state. */
@@ -97,7 +97,7 @@ function hsdOf(n){return HSD.find(d=>d.m.some(r=>r.test(n||"")))||null}
 function hsdWhy(a,dis){if(!dis)return"";let w="";try{w=cardWhy(a)}catch(e){}return w||(a.lock&&a.t)||"chưa làm được lúc này"}
 function hsdBuild(){if(!hsdOn())return;const P=$("panel");const G=P&&P.querySelector(".cards");if(!G)return;
  const cards=[...G.querySelectorAll(":scope > button.kcard[data-i]")];
- for(const d of HSD){const mem=cards.filter(b=>{const a=deck[+b.dataset.i];return a&&d.m.some(r=>r.test(a.n||""))});if(!mem.length||(mem.length===1&&deck[+mem[0].dataset.i].n===d.n))continue;/* one button per feature, the SAME name every day: a lone way shows under its door too */
+ for(const d of HSD){const mem=cards.filter(b=>{const a=deck[+b.dataset.i];return a&&d.m.some(r=>r.test(a.n||""))});if(mem.length<2)continue;/* the ONE deck-door rule (jdoor deckFold, J5b): a door when ≥2 ways are dealt today (greyed ways show greyed inside, with their reason); a lone way stays its own card */
   const W=mem.map(b=>({i:+b.dataset.i,dis:!!(b.disabled||b.classList.contains("kdis"))}));const ok=W.filter(w=>!w.dis);
   const lead=deck[(ok[0]||W[0]).i];HSD_ART[d.n]=lead.n;
   const ks=(ok.length?ok:W).map(w=>cardCost(deck[w.i]));
@@ -109,19 +109,20 @@ function hsdBuild(){if(!hsdOn())return;const P=$("panel");const G=P&&P.querySele
   b.querySelectorAll("[data-kinfo]").forEach(e=>e.remove());if(!ok.length)b.disabled=true;
   mem[0].before(b);mem.forEach(m=>m.remove())}}
 if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){try{if(HSD_ART[name])return k0.call(this,HSD_ART[name])}catch(e){}return k0.apply(this,arguments)}}
-(function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{hsdBuild()}catch(e){console.error("hsdBuild",e)}return r}})();
+(function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{hsdReg();hsdBuild()}catch(e){console.error("hsdBuild",e)}return r}})();
 /* the door: ONE kit option dialog, one option per way (its own khắc / cost / odds line), «Thôi» = the kit ✕ */
 function hsdOpt(a,why,i){const sp=String(a.x||"").split(/ · kèm: /);const ton=[`${cardCost(a)} khắc`];try{const c=fmt(a.c||{});if(c)ton.push(c)}catch(e){}
  let gain="";try{gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ")}catch(e){}const P=["tốn: "+ton.join(" · "),"thành: "+(gain||a.t||"")];if(sp[1])P.push("kèm: "+sp[1]);
  const rolled=a.o!=null&&a.o<100&&!a.lock;const o={n:a.n,x:P.join(" · "),go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("hsd act",e)}},0)}};/* the way runs in its OWN task, exactly like a tap on its old card: no dialog-choice context (j78 evidence «how», j85 deed, co-op pick text) wraps it */
  if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}o.x+=" · hỏng: "+(f||"không mất gì");try{o.p=optOdds(a)}catch(e){}}
  if(why)o.off={why};return o}
-function hsdOpen(b){if(!S||S.dead||Q.length)return;const d=HSD.find(x=>x.k===b.dataset.hsd);if(!d)return;const I=b.dataset.hsi.split(",").map(Number),X=b.dataset.hsx.split(",").map(Number);
- const opts=I.map((i,j)=>{const a=deck[i];return a?hsdOpt(a,hsdWhy(a,!X[j]),i):null}).filter(Boolean);
- opts.push({n:"Thôi"});Q.push({t:d.n,h:`<p>${d.t}</p>`,opts,hsDoor:d.k});showModal()}
+function hsdReg(){try{if(window.DOOR&&DOOR.add&&!DOOR.byK("hs-nghi"))HSD.forEach(d=>DOOR.add({k:"hs-"+d.k,n:d.n,kinds:["hs"],re:new RegExp(d.m.map(r=>r.source).join("|")),h:d.t,hs:d.h}))}catch(e){}}
+function hsdOpen(b){if(!S||S.dead||Q.length)return;hsdReg();const d=HSD.find(x=>x.k===b.dataset.hsd);if(!d)return;const I=b.dataset.hsi.split(",").map(Number),X=b.dataset.hsx.split(",").map(Number);
+ const rows=I.map((i,j)=>{const a=deck[i];if(!a)return null;const o=hsdOpt(a,hsdWhy(a,!X[j]),i);o.hsd=d.k;return o}).filter(Boolean);
+ if(window.DOOR&&DOOR.card)DOOR.card(d.n,d.t,rows,null);else{rows.push({n:"Thôi"});Q.push({t:d.n,h:`<p>${d.t}</p>`,opts:rows});showModal()}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#panel button[data-hsd]");if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled)return;try{hsdOpen(b)}catch(x){console.error("hsdOpen",x)}},true);
 document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target.closest("#panel .kcard[disabled][data-hsd]");if(!b||typeof kpPop!=="function"||!S||S.dead)return;
  const I=b.dataset.hsi.split(",").map(Number);const rows=I.map(i=>{const a=deck[i];return a?`<span class="ef n">${a.n}: ${hsdWhy(a,1)}</span>`:""}).join("");
  window.__adGreyT=Date.now();window.__adGreyR=b.getBoundingClientRect();kpPop(b,`<div class="kpopt">${b.querySelector(".kan")?b.querySelector(".kan").textContent:""}</div><div class="kpopx">${rows}</div>`,{inside:true})}catch(x){}},true);
 /* the way's own act logs its own line (as when it was a card): the door dialog adds no «Door: way» line of its own */
-(function(){const l0=logChoice;logChoice=function(m){if(m&&m.hsDoor)return;return l0.apply(this,arguments)}})();
+(function(){const l0=logChoice;logChoice=function(m){if(m&&m.opts&&m.opts.some(o=>o&&o.hsd))return;return l0.apply(this,arguments)}})();
