@@ -75,6 +75,9 @@ KIT_SAMPLES.push(
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem},
  {id:"§7.1",title:"Người: đổi bao nhiêu (tổng mới) · kaNT / kitRelW",html:()=>{const D=BAL.kitpage&&BAL.kitpage.demo||{};const a=(D.k||1)*8,t=a*5+2;/* sample numbers from BAL (ONE CORE) */return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv"><span class="ef t">Hoàng hậu:</span> <span class="ef g">${kitRelW("thiện cảm",a,t)}</span></span></span><span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv"><span class="ef t">một vị Phi:</span> <span class="ef r">${kitRelW("oán",a+1,-(a/2))}</span></span></span></span>`}});
+/* §12.2 glossary popover with the «Cách giảm» / «Cách tăng» row (K-GLOSS-LOWER): the REAL popover body kitGlossPopHtml, static (no data = no row) */
+KIT_SAMPLES.push({id:"§12.2",title:"Glossary popover: meaning + «Cách giảm» (rise hurts) / «Cách tăng» (fall hurts) row from kitLowerText",html:()=>typeof kitGlossPopHtml!=="function"?"":
+ `<div class="kitpg-row">${["Oán","Sủng","Đức"].map(t=>`<div class="kpop" style="position:static;display:block;max-width:300px">${kitGlossPopHtml(t)}</div>`).join("")}</div>`});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
  `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});

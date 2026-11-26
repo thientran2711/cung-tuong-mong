@@ -37,7 +37,7 @@ kc3Reg("kc_muoi",{t:"Sổ muối",w:"cha",g:"Nhà buôn muối giàu nứt vách
  p:[["s1"],["c1","c2","c3"],["t1"],["x1"]],
  B:{
  s1:{h:"Một tước vị cho nhà buôn",w:"cha",t:"Cha muốn bỏ nửa gia sản dâng quốc khố để xin một tước vị, để nhà buôn thành nhà có tước trước kỳ tuyển tú.",o:[
-  {n:"Ủng hộ cha",f:"obey",wx:"nhà có tước, Gia thanh +",lx:"Bạc −−",rt:"Cha cười lớn, sai người khiêng bạc lên Hộ bộ.",go:(A,ok,G)=>{S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);kc3Af("cha",G[1])}},
+  {n:"Ủng hộ cha",f:"obey",wx:"nhà có tước, Gia thanh +",lx:"Gia tư −−",rt:"Cha cười lớn, sai người khiêng bạc lên Hộ bộ.",go:(A,ok,G)=>{S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);kc3Af("cha",G[1])}},
   {n:"Khuyên cha giữ bạc",f:"own",wx:"nhà còn của làm vốn",lx:"cha chê ngươi đầu óc nhà buôn",rt:"Cha lắc đầu, cất sổ vào rương.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Xin cha dâng một phần, giữ một phần",wx:"được tước mà không cạn của",lx:"cha thấy ngươi so đo",rt:"Cha nghĩ một đêm rồi nghe theo.",rf:"Quan Hộ bộ chê ít, đòi đủ số.",go:(A,ok,G)=>{if(ok){S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);S.kgt+=G[1]}else kc3Af("cha",G[2])}}]},
  c1:{h:"Sổ muối có chỗ thiếu",w:"cha",t:"Sổ muối có chỗ thiếu: người của quan Hộ bộ đòi chia phần.",o:[

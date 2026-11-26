@@ -580,7 +580,7 @@ rdDef("muoi_doi",8,{t:"Phát chẩn",w:"emp",sj:"đợt phát chẩn mùa giáp 
  c2:{h:"Gạo mốc trong kho chẩn",w:"maid",t:"Người nhà báo về: gạo Hộ bộ trộn với gạo nhà ngươi có nửa phần mốc. Nếu phát ra, dân sẽ chửi tên in trên bao.",o:[
   {n:"Bỏ bạc đổi gạo mới",wx:"bao gạo nào cũng thơm",lx:"bạc đi, kẻ tráo gạo vẫn ẩn",rt:"Gạo mốc được đổ ra sông, gạo mới chất vào kho."},
   {n:"Báo Hoàng thượng có kẻ tráo gạo",f:"tip",wx:"ngài cho tra kẻ tráo",lx:"bị cho là đổ lỗi cho Hộ bộ",rt:"Hoàng thượng sai Ngự sử tra kho chẩn.",rf:"Hộ bộ tâu ngược: gạo mốc là gạo của nhà buôn."},
-  {n:"Tách gạo mốc ra, phát phần tốt",wx:"không Bạc −",lx:"dân nhận ít hơn lời hứa",rt:"Mỗi người nhận bớt nửa đấu."}]},
+  {n:"Tách gạo mốc ra, phát phần tốt",wx:"không tốn thêm bạc",lx:"dân nhận ít hơn lời hứa",rt:"Mỗi người nhận bớt nửa đấu."}]},
  c3:{h:"{v} xin góp chung",w:"v",need:["v"],t:"{v} đến cung ngươi, dịu giọng xin góp một phần bạc, để tên nhà ngoại nàng đứng cạnh tên nhà ngươi trên bao gạo.",o:[
   {n:"Nhận, kéo {v} về một phía",wx:"bớt một kẻ thù",lx:"nhà nàng ăn ké tiếng nhà ngươi",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nắm tay ngươi cảm tạ."},
   {n:"Từ chối khéo",wx:"tiếng nhà là của nhà",lx:"tự gánh phần bạc nàng định góp; {v} ghi thêm một mối",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} cười nhạt, ra về."},

@@ -95,7 +95,7 @@ rdDef("cnv_chu",5,{t:"Gói thuốc",w:"doc",sj:"gói thuốc của {mis}",cast(A
  B:{s1:{h:"Chìa khóa rương thuốc",w:"mis",if:()=>rdPrev()==="win",t:CHU_T("Từ đêm ấy {mis} coi ngươi là tâm phúc. Nàng giao ngươi giữ chìa khóa rương thuốc, dặn: “Gói giấy dầu ở đáy rương, không ai được đụng, kể cả ngươi.”","Ngươi đã rời cung {mis}, nhưng nàng vẫn coi ngươi là người duy nhất biết chuyện. Nàng sai người lén đưa sang chìa khóa rương thuốc: “Giữ hộ ta. Cung ta không còn ai đáng tin.”"),o:[
   {n:"Giữ chìa khóa, không mở rương",wx:"{mis}: Chủ tin +",lx:"người ta bảo ngươi giữ của mà không biết của gì, Danh −",go:(_A,_ok,G)=>CHU_MIS(G[0]),rt:"Ngươi đeo chìa khóa vào cổ, chưa từng tra vào ổ."},
   {n:"Mở rương xem gói giấy dầu",f:"know",wx:"biết gói thuốc ghi tên cung nào",lx:"{mis} thấy dấu niêm bị động, giận ngươi; Danh −",go:(A,ok,G)=>{if(!ok)CHU_MIS(G[0])},rt:"Giấy dầu có dấu đỏ của Thái y viện, ghi «xuất cho cung {v}».",rf:"Dấu niêm rách một góc. Hôm sau {mis} nhìn ngươi khác hẳn."},
-  {n:"Xin {mis} cho biết thật",wx:"nghe từ chính miệng nàng",lx:"{mis} cho là ngươi tò mò, Chủ tin −; Sức −−",go:(A,ok,G)=>CHU_MIS(ok?G[0]:G[1]),rt:"{mis} chỉ nói: “Thứ này không phải của ta. Ta giữ nó để nó không đến tay người khác.”",rf:"{mis} lạnh giọng: “Giữ chìa khóa là đủ.”"}]},
+  {n:"Xin {mis} cho biết thật",wx:"nghe từ chính miệng nàng",lx:"{mis} cho là ngươi tò mò, Chủ tin −; ngươi mệt mà không được gì",go:(A,ok,G)=>CHU_MIS(ok?G[0]:G[1]),rt:"{mis} chỉ nói: “Thứ này không phải của ta. Ta giữ nó để nó không đến tay người khác.”",rf:"{mis} lạnh giọng: “Giữ chìa khóa là đủ.”"}]},
  s2:{h:"Kẻ đã nói",w:"mis",if:()=>rdPrev()==="win2",t:CHU_T("Ngươi đã trình chuyện lên trên, nhưng không đủ chứng cứ để động đến {mis}. Nội vụ phủ trả ngươi về hầu nàng như cũ, và nàng biết chính ngươi đã nói.","Ngươi đã trình chuyện lên trên. Nay ngươi là tiểu chủ, còn {mis}, chủ cũ của ngươi, gặp ngươi ở đâu cũng quay mặt đi."),o:[
   {n:"Quỳ xin {mis} tha lỗi",wx:"{mis} nguôi một phần",lx:"quỳ đến rã gối vẫn bị cho là kẻ hai lòng, {mis} Chủ tin −, Danh −",go:(A,ok,G)=>CHU_MIS(ok?G[0]:G[1]),rt:"{mis} im rất lâu rồi nói: “Ngươi nói vì ngươi sợ. Ta hiểu sợ là gì.”",rf:"{mis} bước qua, không nhìn."},
   {n:"Lặng lẽ tìm thêm chứng cứ",f:"know",wx:"có manh mối về gói thuốc",lx:"{mis} biết ngươi dò, nàng giận; bạc bỏ ra mất trắng",go:(A,ok,G)=>{if(!ok)CHU_MIS(G[0])},rt:"Một y đồng nói gói xạ hương ấy xuất kho dưới tên cung {v}.",rf:CHU_T("{mis} bắt gặp ngươi lục rương.","{mis} biết ngươi cho người dò quanh cung nàng.")},
@@ -235,7 +235,7 @@ rdDef("cnv_chu",9,{t:"Giữ hay nói",w:"hh",sj:"lời khai về {mis}",cast(A){
   {n:"Nhắn lại: phải nói cả hai",wx:"{mis} nghĩ lại",lx:"{mis} cho là ngươi đã ngả, Chủ tin −; Danh −",go:(A,ok,G)=>CHU_MIS(ok?G[0]:G[1]),rt:"{mis} nhắn: “Vậy thì nói, nhưng chờ Ôn thái y.”",rf:"{mis} không nhắn lại nữa."},
   {n:"Tìm cách vào gặp nàng",wx:"nghe tận miệng nàng",lx:"bị bắt vì vào nơi cấm, Danh −; bạc mất trắng",rt:"Ngươi vào được nửa canh giờ.",rf:"Thị vệ giữ ngươi ở cửa."}]},
  c1:{h:"Ôn thái y muốn đi",w:"doc",t:"Ôn thái y xin cáo bệnh về quê, đi trước rằm. Nếu ông đi, không ai còn nói được gói thuốc ra khỏi viện thế nào.",o:[
-  {n:"Đến xin ông ở lại",f:"doc",wx:"ông ở lại thêm ít ngày",lx:"ông sợ, vẫn đi; Lòng − (vì giữ không nổi ông)",rt:"Ông thở dài: “Thêm mười ngày. Không hơn.”",rf:"Ông đã thu xếp hòm xiểng."},
+  {n:"Đến xin ông ở lại",f:"doc",wx:"ông ở lại thêm ít ngày",lx:"ông sợ, vẫn đi; lòng ngươi áy náy vì giữ không nổi ông",rt:"Ông thở dài: “Thêm mười ngày. Không hơn.”",rf:"Ông đã thu xếp hòm xiểng."},
   {n:"Xin ông viết lời khai trước khi đi",f:"know",wx:"có lời khai trên giấy",lx:"ông không dám ký tên, đồn ra ngươi ép ông, Danh −; bạc mất trắng",rt:"Ông viết, ký, đóng dấu riêng.",rf:"Ông viết nhưng không ký."},
   {n:"Để ông đi",wx:"ông giữ được mạng",lx:"mất người làm chứng, người ta bảo ngươi bỏ người tốt, Danh −",rt:"Ngươi tiễn ông đến cửa Tây."}]},
  c2:{h:"Hộp trâm của {v}",w:"v",need:["v"],t:"{v} gửi ngươi một hộp trâm vàng: “Chuyện ở cung {mis} chẳng liên quan đến cung ta, phải không?”",o:[
@@ -265,7 +265,7 @@ rdDef("cnv_chu",10,{t:"Đêm tra hỏi",w:"eun",sj:"đêm tra hỏi ở Thận h
   {n:"Không lo lót gì",wx:"không ai bắt được lỗi",lx:"chẳng ai nể, người ta bảo ngươi không biết điều, Danh −",rt:CHU_T("Ngươi ngồi chờ trong lạnh đến canh ba.","Ngươi ngồi chờ tin đến canh ba.")}]},
  s2:{h:"Gọi tên đầu tiên",w:"eun",if:RDW(0),t:CHU_T("Từ sau lời khai đêm trước, ai cũng tránh ngươi. Đêm nay Thận hình ty gọi tên ngươi đầu tiên.","Từ sau lời khai đêm trước, ai cũng tránh ngươi. Đêm nay câu hỏi đầu tiên của Thận hình ty được mang đến cung ngươi, và tỳ nữ thân cận của ngươi bị gọi đi hỏi trước."),o:[
   {n:"Đáp ngay, giữ bình tĩnh",wx:"không để lộ sợ hãi",lx:"đáp trước là bị soi kỹ nhất, Sức −−",rt:CHU_T("Ngươi bước vào, quỳ xuống, chờ.","Ngươi đáp từng câu qua người mang lời, không chậm một khắc.")},
-  {n:"Xin {mis} gửi người làm chứng",wx:"có người làm chứng cho ngươi",lx:"{mis} không dám, ngươi thấy mình bị bỏ,, Lòng −",go:(A,ok,G)=>{if(ok)CHU_MIS(G[0])},rt:CHU_T("{mis} gửi một ma ma già đi theo.","{mis} gửi một ma ma già đến đứng nghe cùng."),rf:"{mis} im lặng."},
+  {n:"Xin {mis} gửi người làm chứng",wx:"có người làm chứng cho ngươi",lx:"{mis} không dám, ngươi thấy mình bị bỏ, Lòng −",go:(A,ok,G)=>{if(ok)CHU_MIS(G[0])},rt:CHU_T("{mis} gửi một ma ma già đi theo.","{mis} gửi một ma ma già đến đứng nghe cùng."),rf:"{mis} im lặng."},
   {n:"Dúi bạc để được hỏi sau",wx:"biết người khác khai gì trước",lx:"bị ghi là lo lót, Danh −; bạc mất trắng",rt:"Tên ngươi bị dời xuống cuối.",rf:"Thái giám nhận bạc rồi vẫn gọi ngươi."}]},
  c1:{h:"Cung nữ áo xanh khai",w:"maid",t:"Cung nữ áo xanh của cung {v} khai: đêm ấy nàng thấy ngươi cầm gói thuốc đi về phía bếp một phi tần khác.",o:[
   {n:"Bác lời nàng bằng giờ trực",wx:"lời khai của nàng sai giờ",lx:"giờ trực bị sửa, ngươi thành kẻ nói dối, Danh −−",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Sổ trực ghi giờ ấy ngươi đang ở phòng {mis}.",rf:"Trang sổ trực đêm ấy đã bị xé."},
@@ -381,7 +381,7 @@ rdDef("cnv_ban",6,{t:"Kẻ vu",w:"v",sj:"kẻ đứng sau Thu Cúc",cast(A){retu
  B:{s1:{h:"Lời Thu Cúc",w:"maid",if:RDW(1),t:"Thu Cúc bị phạt quỳ. Lúc ngươi đi ngang, nàng ngẩng lên: “Ngươi tưởng ta làm một mình sao? Ngươi chưa biết mình đắc tội ai đâu.”",o:[
   {n:"Đến gặp Thu Cúc lúc nàng bị phạt",wx:"nàng hé ra một cái tên",lx:"nàng chửi ngươi to tiếng trước mọi người, Danh −; Sức −−",rt:"Thu Cúc nói khẽ: “Cung {v}. Giờ thì ngươi vui chưa?”",rf:"Thu Cúc nhổ nước bọt xuống chân ngươi."},
   {n:"Hỏi {mis} Thu Cúc từng qua lại cung nào",if:CNV_MOK,wx:"{mis} nhớ ra vài chuyện",lx:"{mis} không muốn nghĩ xấu người cũ, Chủ tin −; Lòng − (vì nghi người)",go:(A,ok,G)=>{if(!ok)BAN_MIS(G[0])},rt:"{mis} nhớ Thu Cúc hay xin đi đưa lễ sang cung {v}.",rf:"{mis} nói: “Đừng moi móc nữa.”"},
-  {n:"Để Thu Cúc tự chịu",wx:"không oán +",lx:"kẻ đứng sau còn trong bóng tối, người ta bảo ngươi đứng nhìn, Danh −",rt:"Ngươi đi qua, không nhìn."}]},
+  {n:"Để Thu Cúc tự chịu",wx:"không thêm oán",lx:"kẻ đứng sau còn trong bóng tối, người ta bảo ngươi đứng nhìn, Danh −",rt:"Ngươi đi qua, không nhìn."}]},
  s2:{h:"Bọc nhỏ mỗi tối",w:"maid",if:RDW(0),t:CNV_MT("Thu Cúc vẫn được {mis} sai việc như cũ. Mỗi tối nàng mang một bọc nhỏ ra cửa sau, quay về tay không.","Cung {mis} vắng chủ, Thu Cúc được Nội vụ phủ giữ lại coi đồ cũ. Mỗi tối nàng mang một bọc nhỏ ra cửa sau, quay về tay không."),o:[
   {n:"Theo Thu Cúc",f:"fence",wx:"thấy nàng giao bọc cho ai",lx:"bị nàng phát hiện, đi đồn ngươi rình người, Danh −; Sức −−",rt:"Nàng giao bọc cho Phúc An; Phúc An đưa lại một gói bạc có dấu cung {v}.",rf:"Thu Cúc rẽ vào nhà xí, ngươi mất dấu."},
   {n:"Lén mở bọc",wx:"biết nàng mang gì ra",lx:"bị bắt quả tang lục đồ người khác, Danh −",rt:"Trong bọc là đôi bông tai của {mis}.",rf:"Thu Cúc bắt gặp, la toáng lên."},
@@ -396,7 +396,7 @@ rdDef("cnv_ban",6,{t:"Kẻ vu",w:"v",sj:"kẻ đứng sau Thu Cúc",cast(A){retu
   {n:"Tự đến cảm ơn {v} thay Xuân Đào",wx:"{v} tưởng hai chị em đã yên phận",lx:"{v} nhìn thấu, sinh ghét; quà biếu mất trắng",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lễ, nói Xuân Đào có phúc.",rf:"{v} nói: “Ta không cần người đến cảm ơn thay.”"}]},
  t1:{h:"Sổ nợ của Thu Cúc",w:"me",t:"Ngươi biết được: Thu Cúc nợ Phúc An một món bạc lớn vì đánh bạc ở cửa sau. Người trả nợ thay nàng là cung {v}, đổi lại nàng phải làm theo lệnh.",o:[
   {n:"Trả nợ cho Thu Cúc để kéo nàng về",f:"turn",wx:"Thu Cúc thoát khỏi tay cung {v}",lx:"Thu Cúc nhận bạc mà không đổi lòng, Lòng − (vì đã mua người); bạc mất trắng",rt:"Thu Cúc cầm bạc, khóc: “Sao ngươi lại giúp ta?”",rf:"Thu Cúc cầm bạc, quay đi không nói."},
-  {n:"Nói chuyện nợ với {mis}",if:CNV_MOK,wx:"{mis} biết Thu Cúc bị nắm thóp",lx:"chạy việc đến rã người; Thu Cúc biết ngươi mách, thù +",go:(_A,_ok,G)=>BAN_MIS(G[0]),rt:"{mis} lặng người: “Tám năm. Vậy mà ta không biết.”"},
+  {n:"Nói chuyện nợ với {mis}",if:CNV_MOK,wx:"{mis} biết Thu Cúc bị nắm thóp",lx:"chạy việc đến rã người; Thu Cúc biết ngươi mách, oán +",go:(_A,_ok,G)=>BAN_MIS(G[0]),rt:"{mis} lặng người: “Tám năm. Vậy mà ta không biết.”"},
   {n:"Giữ làm lá bài",wx:"nắm được thóp Thu Cúc",lx:"chưa ai được cứu, Lòng − (vì giữ bí mật làm vốn)",rt:"Ngươi ghi số nợ vào sổ riêng."}]},
  x1:{h:"Đêm Thu Cúc đến cung {v}",w:"v",t:"Đêm nay Thu Cúc lẻn đến cung {v} lần cuối, mang theo bạc. Chặn đường nàng, theo đến tận cửa, hay để nàng đi?",o:[
   {n:"Chặn Thu Cúc giữa đường, ép nàng khai",e:["win","lose"],rt:"Thu Cúc quỳ xuống: “Là {v} sai. Ta khai.”",rf:"Thu Cúc la lên. Thị vệ cung {v} chạy ra."},
@@ -455,7 +455,7 @@ rdDef("cnv_ban",8,{t:"Lời làm chứng",w:"mis",sj:"phiên làm chứng vụ v
  s2:{h:"Xuân Đào không dám",w:"maid",if:RDW(0),t:"Xuân Đào trốn mặt mọi người. Khi ngươi nhắc đến phiên chứng, nàng khóc: “Muội không dám. Lần sau họ giết muội mất.”",o:[
   {n:"Ôm nàng, không ép",wx:"nàng biết ngươi thương",lx:"mất lời của nhân chứng chính, người ta bảo ngươi mềm lòng, Danh −",rt:"Nàng khóc đến ngủ thiếp."},
   {n:"Hứa bảo vệ nàng đến cùng",f:"wit",wx:"nàng chịu nói",lx:"nàng hứa rồi lại sợ, Lòng − (vì đã hứa suông); Sức −−",rt:"Nàng lau nước mắt: “Vì tỷ.”",rf:"Nàng gật đầu, nhưng hôm sau trốn đi."},
-  {n:"Tìm nhân chứng khác",wx:"có người khác thay Xuân Đào",lx:"người ấy nhận bạc rồi cáo ốm, đòi Bạc −",rt:"Cung nữ giặt áo năm trước nhận sẽ nói.",rf:"Người ấy nhận bạc rồi cáo ốm."}]},
+  {n:"Tìm nhân chứng khác",wx:"có người khác thay Xuân Đào",lx:"người ấy nhận bạc rồi cáo ốm, đòi thêm, Bạc −",rt:"Cung nữ giặt áo năm trước nhận sẽ nói.",rf:"Người ấy nhận bạc rồi cáo ốm."}]},
  c1:{h:"Phúc An đổi lời",w:"me",t:"Phúc An được ai đó lo lót, nay chối hết: hắn chưa từng chở vòng ngọc, chưa từng biết Thu Cúc.",o:[
   {n:"Đưa ra lời khai hắn đã viết",wx:"hắn cứng họng",lx:"lời khai bị nói là ép viết, Danh −",rt:"Dấu điểm chỉ của hắn còn đỏ trên giấy.",rf:"Hắn nói bị ép, Nội vụ phủ gạt tờ giấy."},
   {n:"Dọa hắn bằng sổ cầm đồ",wx:"hắn sợ, khai lại",lx:"hắn báo cung {v}, đồn ngươi dọa người, Danh −; bạc mất trắng",rt:"Phúc An tái mặt, xin khai lại.",rf:"Hắn cười: “Sổ ấy ai chứng?”"},
@@ -546,7 +546,7 @@ rdDef("cnv_ban",11,{t:"Đồng hương",w:"maid",sj:"số phận của Xuân Đ�
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Túi thơm hoa đào",w:"maid",if:RDW(1),t:BAN_T("Sổ đã lên ngự án. Tối ấy Xuân Đào ngồi bên cửa sổ phòng kẻ hầu, khâu cho ngươi chiếc túi thơm thêu hoa đào quê nhà.","Sổ đã lên ngự án. Tối ấy Xuân Đào sang cung ngươi, khâu cho ngươi chiếc túi thơm thêu hoa đào quê nhà."),o:[
   {n:"Ngồi khâu cùng nàng",f:"stay",wx:"hai chị em gần nhau như thuở mới vào",lx:"một đêm không làm gì khác, người ta bảo ngươi lơ là, Danh −",rt:"Hai chị em hát khẽ bài hát làng."},
-  {n:"Hỏi nàng muốn gì sau này",wx:"biết lòng nàng",lx:"câu trả lời làm ngươi buồn,, Lòng −",rt:"Xuân Đào cười: “Muội chưa dám nghĩ.”"},
+  {n:"Hỏi nàng muốn gì sau này",wx:"biết lòng nàng",lx:"câu trả lời làm ngươi buồn, Lòng −",rt:"Xuân Đào cười: “Muội chưa dám nghĩ.”"},
   {n:"Tặng nàng một món bạc",f:"home",wx:"nàng có vốn phòng thân",lx:"Bạc −",rt:"Xuân Đào không nhận, ngươi phải nhét vào tay nàng."}]},
  s2:{h:"Xuân Đào gầy đi",w:"maid",if:RDW(0),t:"Sự thật chưa ra ánh sáng. Xuân Đào gầy đi từng ngày, còn cung {v} vẫn sai người đi qua cửa phòng nàng mỗi tối.",o:[
   {n:"Đổi chỗ ngủ cho nàng",wx:"nàng ngủ yên hơn",lx:"lo dời chỗ đến rã người; người của {v} sẽ tìm ra",rt:"Xuân Đào ngủ được một đêm trọn."},

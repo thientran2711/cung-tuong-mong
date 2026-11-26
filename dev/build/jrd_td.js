@@ -951,7 +951,7 @@ rdDef("td_tha",8,{t:"Cha nàng",w:"maid",sj:"lời mặc cả của {foed}",cast
   {n:"Từ chối, bảo ông viết thư",f:"proof",wx:"có chữ ông",lx:"ông không dại viết",rt:"Ông viết một bức thư dài, có tên.",rf:"Ông không viết."},
   {n:"Không đáp",wx:"không dính",lx:"ông tìm đường khác",rt:"Phu nhân về tay không."}]},
  c1:{h:"Rương bạc",w:"maid",t:"Một thái giám ăn bạc phủ {foed} khiêng đến cửa sau cung ngươi một rương bạc, nói là lễ mừng thọ, không cần đáp.",o:[
-  {n:"Nhận rương",wx:"Bạc +",lx:"nhận bạc nhà kẻ thù, ông sẽ đem rương ấy ra tố ngươi",go:()=>{RD_FL("td_tha.bribe",1)},rt:"Rương bạc vào kho."},
+  {n:"Nhận rương",wx:"giàu lên",lx:"nhận bạc nhà kẻ thù, ông sẽ đem rương ấy ra tố ngươi",go:()=>{RD_FL("td_tha.bribe",1)},rt:"Rương bạc vào kho."},
   {n:"Trả rương, có người làm chứng",f:"proof",wx:"cả cung biết ngươi không nhận",lx:"{foed} biết không mua được ngươi",rt:"Rương bạc được khiêng trả trước mắt mọi người."},
   {n:"Nhận, đem nộp Nội vụ phủ",f:"proof",wx:"bạc thành chứng",lx:"Nội vụ phủ hỏi vặn",rt:"Nội vụ phủ ghi: bạc biếu của phủ {foed}.",rf:"Nội vụ phủ không nhận."}]},
  c2:{h:"{foe} bị cha ép",w:"foe",if:A=>!!rv67(A,"foe"),t:"{foed} gửi thư cho con gái: nếu nàng không lấy lại tờ lời khai, mẹ nàng sẽ bị đưa về quê ngoại, không bao giờ gặp lại.",o:[

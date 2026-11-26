@@ -80,7 +80,7 @@ rdDef("nc_gian",6,{t:"Tấm lộ dẫn",w:"maid",sj:"rương hàng của lão {k
   {n:"Gửi bạc để lão lo lót",wx:"có người lo việc ở cửa thành",lx:"bạc của ngươi nằm trong tay lão",rt:"Lão {kha} nhận bạc, lính gác hoãn mở rương."},
   {n:"Cắt đứt với lão",wx:"không dính thêm",lx:"rương mở thì không ai đỡ ngươi",rt:"Ngươi không hồi âm."}]},
  c1:{h:"Lộ dẫn của bộ Lễ",w:"emp",t:"Lộ dẫn cho đoàn buôn ngoại quốc do bộ Lễ cấp. Một chủ sự nói được việc, nhưng y muốn có người đứng tên bảo lãnh.",o:[
-  {n:"Gửi bạc qua lão {kha} mua lộ dẫn",f:"pass",wx:"có giấy trước rằm",lx:"chủ sự đòi Bạc −, và giữ tên ngươi trong sổ",rt:"Chủ sự đóng dấu, không hỏi thêm.",rf:"Chủ sự nhận bạc rồi đòi thêm."},
+  {n:"Gửi bạc qua lão {kha} mua lộ dẫn",f:"pass",wx:"có giấy trước rằm",lx:"chủ sự đòi thêm, Bạc −, và giữ tên ngươi trong sổ",rt:"Chủ sự đóng dấu, không hỏi thêm.",rf:"Chủ sự nhận bạc rồi đòi thêm."},
   {n:"Xin Hoàng thượng ân cho thương nhân quê nhà",f:"pass",wx:"lộ dẫn đến từ ân vua",lx:"Hoàng thượng nhớ tên đoàn buôn này",rt:"Hoàng thượng phẩy bút: “Cho họ đi lại dễ hơn.”",rf:"Hoàng thượng bảo: “Việc của bộ Lễ, nàng đừng xen.”"},
   {n:"Không đứng tên ai",wx:"không để lại dấu",lx:"không có giấy",rt:"Ngươi để mặc bộ Lễ."}]},
  c2:{h:"Viên quan giữ cửa",w:"v",need:["v"],t:"Viên quan giữ cửa Chính Dương là anh họ của {v}. Hắn đã báo về cung nàng ta: rương thứ ba của đoàn buôn {land} có mùi mực mới.",o:[
@@ -793,13 +793,13 @@ rdDef("nc_vuong",5,{t:"Ấn sách phong",w:"emp",sj:"ấn sách phong cho tân {
  s3:{h:"Mười con ngựa quý",w:"emp",if:BDW(1),t:"Như lời ngươi tâu, trướng vàng {land} đã có chủ và Đại Hy đứng sau. Tân {quan} gửi tặng mười con ngựa quý, xin Đại Hy sớm ban ấn sách phong để các bộ lạc thôi xì xào.",o:[
   {n:"Dâng cả mười con ngựa lên Hoàng thượng",f:"loyal",wx:"ngài thấy ngươi không giữ riêng",lx:"tân {quan} hỏi sao quà của mình lại vào chuồng ngựa vua",rt:"Hoàng thượng chọn một con, cưỡi thử quanh Ngự uyển."},
   {n:"Xin Hoàng thượng phong cho sớm",f:"fast",wx:"cố quốc biết ơn ngươi",lx:"ngài cho là ngươi lo cho nước mình trước",rt:"Hoàng thượng gật đầu.",rf:"Hoàng thượng đáp: “Việc của Lễ bộ.”"},
-  {n:"Giữ ngựa, chờ Lễ bộ",wx:"Bạc +",lx:"có người bảo ngươi nhận quà riêng",rt:"Mười con ngựa vào tàu ngựa cung ngươi."}]},
+  {n:"Giữ ngựa, chờ Lễ bộ",wx:"có thêm của",lx:"có người bảo ngươi nhận quà riêng",rt:"Mười con ngựa vào tàu ngựa cung ngươi."}]},
  s4:{h:"Sứ giả không ghé",w:"maid",if:BDW(0),t:"Ngôi {quan} đã có chủ, nhưng chủ mới không nhớ ơn ngươi; thư nhà về mỗi lúc một thưa. Nay sứ của tân {quan} đến xin ấn sách phong, đi thẳng vào Lễ bộ, không ghé cung ngươi.",o:[
   {n:"Sai người mang trà sữa ra sứ quán",f:"mercy",wx:"sứ giả nhớ ra còn ngươi",lx:"trà bị trả về",rt:"Sứ giả uống cạn, nhờ người nhắn lời cảm tạ.",rf:"Trà nguội trên bàn sứ quán."},
   {n:"Dò xem tân {quan} cần gì ở Đại Hy",f:"know",wx:"biết lá bài trong tay mình",lx:"người đi dò bị đuổi",rt:"Tân {quan} cần ấn sách phong trước mùa hội các bộ lạc.",rf:"Không ai chịu nói."},
   {n:"Không hỏi đến",wx:"không cầu cạnh ai",lx:"cố quốc quên ngươi thêm một chút",rt:"Ngươi đóng cửa cung."}]},
  c1:{h:"Sứ phe thua ngôi",w:"maid",t:"Một thái giám lo việc mua bán ngoài cung lén mang vào cung ngươi một rương vàng và lá thư của phe thua ngôi, xin Đại Hy hoãn ấn sách phong.",o:[
-  {n:"Nhận vàng, hứa nói giúp",f:"loser",go:()=>{RD_FL("nc_vuong.loser",1)},wx:"Bạc +; phe thua nhớ lời hứa",lx:"lộ ra thì cả hai nước đều trách; về sau khó trở mặt với phe thua",rt:"Rương vàng được khiêng vào kho trong đêm."},
+  {n:"Nhận vàng, hứa nói giúp",f:"loser",go:()=>{RD_FL("nc_vuong.loser",1)},wx:"giàu thêm; phe thua nhớ lời hứa",lx:"lộ ra thì cả hai nước đều trách; về sau khó trở mặt với phe thua",rt:"Rương vàng được khiêng vào kho trong đêm."},
   {n:"Bắt hắn nộp Hoàng thượng",f:"loyal",wx:"ngài thấy ngươi một lòng",lx:"phe thua ngôi coi ngươi là kẻ thù",rt:"Thái giám bị trói giải đến Thận hình ty, khai ra kẻ gửi vàng; Hoàng thượng đọc lời khai.",rf:"Hắn kịp nhắn ra ngoài; phe thua ngôi kể khắp nơi rằng ngươi bán đứng người cùng nước."},
   {n:"Trả vàng, đọc hết lá thư",f:"know",wx:"biết phe thua còn bao nhiêu sức",lx:"phe thua kể khắp nơi rằng ngươi đã đọc thư",rt:"Thư viết rõ: phe thua ngôi còn ba vạn quân ở biên, và không định buông."}]},
  c2:{h:"Lễ bộ chần chừ",w:"v",need:["v"],t:"Thị lang Lễ bộ giữ việc sách phong là anh họ của {v}. Hắn để hồ sơ nằm yên, chờ xem cung ngươi trả giá gì.",o:[
@@ -955,7 +955,7 @@ rdDef("nc_vuong",10,{t:"Lời quyết",w:"emp",sj:"lời quyết của ngươi v
   {n:"Gửi thư hỏi {mh}",f:"peace",wx:"nghe lời người trong cuộc",lx:"thư qua tay Nội vụ phủ",rt:"Thư đi, mất nửa tháng mới về."}]},
  c1:{h:"Điều kiện của phe thua ngôi",w:"maid",t:"Sứ phe thua ngôi đưa thêm một điều riêng cho ngươi: nếu ngươi nói giúp, họ thả hết người thân của ngươi đang bị giữ, và dâng ngươi một trang ấp ở biên.",o:[
   {n:"Đòi thả người trước, rồi mới nói",f:"hard",wx:"người thân về trước",lx:"sứ bảo ngươi mặc cả như lái buôn",rt:"Ba ngày sau, tin về: phe thua đã thả mấy người thân của ngươi.",rf:"Sứ bỏ về."},
-  {n:"Nhận trang ấp",f:"bought",go:()=>{RD_FL("nc_vuong.bought",1)},wx:"Bạc +",lx:"nhận của phe thua là tự trói tay: khó khuyên dẹp hay buộc họ quy thuận",rt:"Văn tự trang ấp nằm trong hộp trang sức."},
+  {n:"Nhận trang ấp",f:"bought",go:()=>{RD_FL("nc_vuong.bought",1)},wx:"giàu thêm",lx:"nhận của phe thua là tự trói tay: khó khuyên dẹp hay buộc họ quy thuận",rt:"Văn tự trang ấp nằm trong hộp trang sức."},
   {n:"Từ chối mọi điều riêng",f:"peace",wx:"lời ngươi sạch",lx:"người thân còn bị giữ",rt:"Sứ cúi chào, có phần nể."}]},
  c2:{h:"Binh bộ muốn rửa nhục",w:"v",need:["v"],t:"Sau trận thua ở hẻm núi, Binh bộ muốn Đại Hy đánh tiếp để rửa nhục, và nhà {v} đứng sau Binh bộ: có công mới thì chẳng ai nhắc lỗi cũ.",o:[
   {n:"Nhắc Hoàng thượng ai thua trận ấy",wx:"lời Binh bộ nhẹ đi",lx:"ngài không thích chuyện cũ bị khơi",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Hoàng thượng gật đầu: “Phải, rửa nhục bằng xác lính thì không đáng.”",rf:"Hoàng thượng gắt: “Trẫm nhớ, không cần nhắc.”"},

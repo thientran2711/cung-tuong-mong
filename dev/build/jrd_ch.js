@@ -777,7 +777,7 @@ rdDef("ch_ho",8,{t:"Nhà ngoại",w:"th",sj:"nhà ngoại chọn người cháu"
   {n:"Nhờ {v} cùng nói",wx:"hai cháu cùng ơn",lx:"{v} nhận hết công",go:(A,ok,G)=>{if(ok)rdRel(A,"v",G[0]);else rdOan(A,"v",G[1])},rt:"{v} đồng ý, hai người cùng ký thư về nhà.",rf:"{v} tự đi nói, rồi báo về nhà là công nàng."}]},
  c2:{h:"{v} hứa gả em gái",w:"v",need:["v"],t:"Nghe nói {v} hứa với nhà ngoại: em gái nàng sẽ gả cho con trưởng phủ Quốc cữu, nối hai nhánh họ làm một.",o:[
   {n:"Viết thư cho phụ thân can",wx:"phụ thân lùi lại",lx:"phụ thân cho là con ghen",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Phụ thân hồi: “Hôn sự để sau.”",rf:"Phụ thân hồi: “Việc nhà, cha lo.”"},
-  {n:"Mừng cho cuộc hôn nhân",wx:"hai nhánh một nhà, ngươi cũng có phần",lx:"{v}: thế +",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Ngươi gửi lễ mừng. {v} ngỡ ngàng."},
+  {n:"Mừng cho cuộc hôn nhân",wx:"hai nhánh một nhà, ngươi cũng có phần",lx:"{v}: thế lực +",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Ngươi gửi lễ mừng. {v} ngỡ ngàng."},
   {n:"Tìm hiểu em gái {v}",wx:"biết người biết ta",lx:"bị nói là dò nhà người",rt:"Em gái {v} thật lòng thương con trưởng phủ Quốc cữu.",rf:"Không ai chịu nói."}]},
  t1:{h:"Phụ thân hỏi",w:"maid",t:"Thư phụ thân: “Nhà ta nên dồn cho con hay cho {v}? Cha hỏi con thật, không hỏi như Quốc cữu hỏi phi tần.”",o:[
   {n:"Thưa: dồn cho con",f:"self",wx:"phụ thân biết con muốn",lx:"phụ thân lo con tranh quá",rt:"Phụ thân hồi: “Cha hiểu.”"},
@@ -1136,7 +1136,7 @@ rdDef("ch_bi",11,{t:"Bí mật được chôn",w:"th",sj:"bí mật năm xưa c�
   {n:"Gửi bạc lo hậu sự cho mẹ hắn",wx:"tròn một chữ nghĩa",lx:"tốn bạc, cái tên của Lâm thị vẫn chưa được trả",f:"amend",rt:"Mẹ Lâm Khải được lo chu đáo."},
   {n:"Không trả lời",wx:"không để lại dấu",lx:"Lâm Khải nhớ ngươi im lặng",f:"power",rt:"Thư nằm trong ngăn kéo."}]},
  c2:{h:"{v} cầu hòa",w:"v",need:["v"],t:"{v} đến, không mang gì theo: “Chuyện cũ, muội thua. Muội chỉ xin tỷ đừng đem những gì tỷ biết về muội ra.”",o:[
-  {n:"Hứa không đem ra",wx:"{v}: thù −",lx:"nàng còn đó, và nàng nhớ",f:"bury",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} cúi đầu thật thấp."},
+  {n:"Hứa không đem ra",wx:"{v}: oán −",lx:"nàng còn đó, và nàng nhớ",f:"bury",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} cúi đầu thật thấp."},
   {n:"Giữ thóp, bắt nàng theo ngươi",f:"power",wx:"thêm một người phải nghe ngươi",lx:"người bị ép thì chờ ngày phản",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} gật đầu, mắt không nhìn lên."},
   {n:"Bảo nàng đi xin lỗi Thái hậu",need:["th"],wx:"Thái hậu được một lời xin lỗi",lx:"{v} không chịu, Thái hậu phật ý",go:(A,ok,G)=>{if(ok)rdRel(A,"v",G[0]);else rdOan(A,"v",G[1])},rt:"{v} quỳ trước Đức Thọ cung nửa ngày.",rf:"{v} nói: “Tỷ đừng ép quá.”"}]},
  t1:{h:"Lá thư gốc",w:"th",need:["th"],t:"Chỉ còn một thứ: lá thư gốc, hoặc trang chép cuối, đang ở trong tay ngươi. Thái hậu biết. Bà không đòi nữa, bà chờ ngươi tự quyết.",o:[

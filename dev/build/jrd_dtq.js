@@ -1013,7 +1013,7 @@ rdDef("dtq_huynh",11,{t:"Huynh muội",w:"dad",sj:"đường đi của huynh tr�
   {n:"Im lặng, để triều tự nhớ",wx:"không ai nói nhà ngươi chen",lx:"triều quên huynh",rt:"Ngươi chép kinh cầu an cho biên ải."}]},
  c2:{h:"{v} giơ tay",w:"v",need:["v"],t:"{v} đến cung ngươi, mang theo hộp trà: “Cha muội mệt rồi. Huynh trưởng của muội nằm lại Hắc Thủy. Muội không muốn thêm một người nằm lại nữa.”",o:[
   {n:"Nhận trà, làm hòa",wx:"phe đánh thôi chặn đường huynh",lx:"có người bảo ngươi bắt tay kẻ đã hại nhà mình",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} ngồi lại, hai người uống hết ấm trà.",rf:"{v} ngồi được một lúc rồi đứng dậy, vẫn còn khoảng cách."},
-  {n:"Đòi {v} xin lỗi huynh trước",wx:"tiếng nhà ngươi được rửa",lx:"{v} bỏ về, thù ++",go:(A,ok,G)=>{if(ok)rdRel(A,"v",G[0]);else rdOan(A,"v",G[1])},rt:"{v} cắn môi, rồi gật đầu.",rf:"{v} đặt hộp trà xuống, đi thẳng."},
+  {n:"Đòi {v} xin lỗi huynh trước",wx:"tiếng nhà ngươi được rửa",lx:"{v} bỏ về, oán ++",go:(A,ok,G)=>{if(ok)rdRel(A,"v",G[0]);else rdOan(A,"v",G[1])},rt:"{v} cắn môi, rồi gật đầu.",rf:"{v} đặt hộp trà xuống, đi thẳng."},
   {n:"Từ chối gặp",wx:"không mắc nợ ai",lx:"đường hòa bị đóng, Sức −",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{maid} ra cửa trả hộp trà."}]},
  c3:{h:"Thân binh xin theo huynh",w:"maid",t:"Trăm thân binh, kẻ còn người mất, gửi vào cung ngươi một lá thư chung: “Tướng quân đi đâu, chúng thần theo đó.”",o:[
   {n:"Dâng thư lên Hoàng thượng",wx:"vua thấy lòng lính với huynh",lx:"vua nghe ra “quân riêng”",rt:"Hoàng thượng đọc, gật: “Tướng như thế mới đáng dùng.”",rf:"Hoàng thượng nói: “Lính theo tướng, không theo vua?”"},

@@ -317,7 +317,7 @@ rdDef("tt_oan",7,{t:"Ai được lợi",w:"v",sj:"nhà được lợi từ cái 
   {n:"Kể khổ, không nêu tên",wx:"Hoàng hậu thương",lx:"chẳng được gì",rt:"Hoàng hậu thưởng ngươi một hộp yến.",rf:"Hoàng hậu cho là ngươi than vãn."}]},
  t1:{h:"{v} đề nghị",w:"v",t:"{v} gặp riêng ngươi: “Nhà ta trả lại kho muối, nhà ngươi thôi truy. Hai bên coi như không có gì.”",o:[
   {n:"Nhận",wx:"cha có lại một phần",lx:"kẻ đứng sau thoát; nhận đền là bán cái oan của cha",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Nhà {v} trả lại kho muối Giang Bắc."},
-  {n:"Từ chối",wx:"đi đến cùng",lx:"đi đến cùng thì Sức −, thù ++",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} đứng dậy: “Vậy thì đi đến cùng.”"},
+  {n:"Từ chối",wx:"đi đến cùng",lx:"đi đến cùng thì Sức −, oán ++",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} đứng dậy: “Vậy thì đi đến cùng.”"},
   {n:"Đòi thêm: nói ra kẻ đứng trên",wx:"có tên kẻ đứng trên",lx:"{v} giận",rt:"{v} cắn môi, nói một cái tên.",rf:"{v} bỏ đi."}]},
  x1:{h:"Trình lên",w:"emp",t:"Ngươi có thư sai khiến, lời khai Triệu, sổ thưởng nhà {v}. Trình ngay, hay chờ thêm.",o:[
   {n:"Trình lên Hoàng thượng",e:["win","lose"],rt:"Hoàng thượng đọc, sai Đại Lý tự tra nhà {v}.",rf:"Hoàng thượng thấy chứng cứ chưa đủ, trách ngươi gây rối."},

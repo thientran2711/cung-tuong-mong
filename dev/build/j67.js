@@ -642,7 +642,7 @@ ARC67.cn_chu=arcFx("cn_chu",{o:"cn",t:"Chủ cũ",w:"v",sj:"chuyện ngươi t�
  B:{
  s1:{h:"Chén trà trước mặt mọi người",w:"v",need:["v"],t:"{v} bắt ngươi quỳ dâng trà trước mặt các phi tần: “Tay nghề cũ chắc chưa quên chứ?”",o:[
   {n:"Quỳ dâng trà, mỉm cười",f:"kind",wx:"người khác thấy ngươi độ lượng",rt:"Có người thì thầm khen ngươi biết nhẫn."},
-  {n:"Đứng dậy đáp sắc sảo",f:"hard",wx:"{v} bẽ mặt",lx:"{v} thù ++",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)oanAdd(v,S,G[0])},rt:"Cả phòng im phăng phắc.",rf:"Lời ngươi lạc giọng, người ta cười."},
+  {n:"Đứng dậy đáp sắc sảo",f:"hard",wx:"{v} bẽ mặt",lx:"{v} oán ++",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)oanAdd(v,S,G[0])},rt:"Cả phòng im phăng phắc.",rf:"Lời ngươi lạc giọng, người ta cười."},
   {n:"Viện cớ có chỉ triệu, lui ra",wx:"tránh được nhục",rt:"Ngươi lui ra êm thấm.",rf:"Ai cũng biết ngươi bịa cớ."}]},
  s2:{h:"Kẻ hầu cũ biết chuyện",w:"maid",t:"Một cung nữ cùng hầu {v} với ngươi năm xưa nay vẫn ở đó. Nàng lén gửi lời: chủ cũ đang tìm chuyện xưa của ngươi.",o:[
   {n:"Gửi bạc kết thân",wx:"có tai mắt trong cung {v}",rt:"Cung nữ ấy thành tai mắt của ngươi."},
@@ -858,7 +858,7 @@ ARC67.nc_vuong=arcFx("nc_vuong",{o:"nc",t:"Ngai vàng cố quốc",w:"emp",sj:"c
   {n:"Đọc kỹ, dò xem ai được lòng dân",f:"know",wx:"biết phe nào mạnh",lx:"dò không ra",rt:"Thế tử huynh được lòng dân, Vương thúc nắm quân.",rf:"Tin về rối rắm."},
   {n:"Trình cả hai thư lên Hoàng thượng",f:"court",wx:"ngài tin ngươi",lx:"ngươi mất quyền chọn",rt:"Hoàng thượng khen ngươi thẳng thắn."}]},
  c1:{h:"Vương thúc gửi lễ",w:"maid",t:"Sứ của Vương thúc mang ba rương vàng vào cung ngươi.",o:[
-  {n:"Nhận vàng",f:"uncle",wx:"Bạc +",lx:"bị coi là đã chọn phe",rt:"Ba rương vàng vào kho."},
+  {n:"Nhận vàng",f:"uncle",wx:"giàu lên",lx:"bị coi là đã chọn phe",rt:"Ba rương vàng vào kho."},
   {n:"Trả lại",f:"bro",wx:"giữ tay sạch",lx:"Vương thúc giận",rt:"Sứ của Vương thúc mặt sa sầm."}]},
  c2:{h:"Triều đình chia phe",w:"emp",t:"Triều thần Đại Hy chia phe: Binh bộ muốn theo Vương thúc lấy ba thành bên sông Áp Lục, Lễ bộ muốn theo thế tử huynh cho chính danh.",o:[
   {n:"Vận động Lễ bộ",f:"bro",wx:"phe thế tử huynh mạnh lên",rt:"Lễ bộ dâng sớ ủng hộ thế tử huynh."},
@@ -981,7 +981,7 @@ ARC67.td_tha=arcFx("td_tha",{o:"td",t:"Thù hay tha",w:"foe",sj:"mối thù vớ
   {n:"Giữ thư làm chứng",f:"hate",wx:"có chứng cứ",lx:"{foe} mất thư, sẽ lo",rt:"Bức thư nằm trong tráp của ngươi."},
   {n:"Trả thư cho {foe}",f:"mercy",wx:"{foe} nợ ngươi",lx:"mất chứng cứ",rt:"{foe} cầm thư, nhìn ngươi rất lâu."}]},
  c3:{h:"{foe} có thai",w:"foe",t:"{foe} có thai. Nếu sinh hoàng tử, nhà {foed} sẽ càng vững.",o:[
-  {n:"Gửi lễ mừng",f:"mercy",wx:"giữ lễ",lx:"nhà kẻ thù: thế +",rt:"{foe} nhận lễ, có chút bối rối."},
+  {n:"Gửi lễ mừng",f:"mercy",wx:"giữ lễ",lx:"nhà kẻ thù: thế lực +",rt:"{foe} nhận lễ, có chút bối rối."},
   {n:"Lạnh nhạt",f:"hate",wx:"không giúp kẻ thù",lx:"mang tiếng hẹp hòi",rt:"Ngươi không đến chúc mừng."}]},
  t1:{h:"{foe} biết ngươi là ai",w:"foe",t:"{foe} đến cung ngươi một mình: “Ta biết ngươi là con gái nhà ấy. Ta không biết phải nói gì.”",o:[
   {n:"Nói hết nỗi đau",f:"mercy",wx:"{foe} đứng về phía ngươi",lx:"{foe} sợ, báo cha",rt:"{foe} quỳ xuống thay cha xin lỗi.",rf:"{foe} hoảng hốt, chạy đi báo cha."},

@@ -69,7 +69,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
  t1:{h:"Chọn đường cho mình",w:"me",t:"Đêm ấy ngươi ngồi một mình. Không con, thì lấy gì mà đứng? Lấy đức, lấy người, hay cứ chờ trời?",o:[
   {n:"Lấy đức làm gốc",wx:"tiếng hiền đức",lx:"đức không thay được Sủng",rt:"Từ đó cung ngươi mở cửa cho người cần giúp."},
   {n:"Kết thân một bà mẹ có hoàng tử",if:A=>egSon(rv67(A,"v")),wx:"có một đồng minh có con",lx:"bị coi là đi cửa sau",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lễ, hẹn từ nay có nhau.",rf:"{v} lạnh nhạt nhận lễ, không hứa gì."},
-  {n:"Kiên trì cầu con",wx:"dễ thụ thai hơn",lx:"tốn bạc,, Lòng −",go:()=>{S.fert=Math.max(S.fert||0,BAL.road.end.fertM)},rt:"Ngươi lại nhờ thái y kê đơn."}]},
+  {n:"Kiên trì cầu con",wx:"dễ thụ thai hơn",lx:"tốn bạc, Lòng −",go:()=>{S.fert=Math.max(S.fert||0,BAL.road.end.fertM)},rt:"Ngươi lại nhờ thái y kê đơn."}]},
  x1:{h:"Hương hỏa",w:"th",need:["th"],t:"Thái hậu cho gọi ngươi: “Ai gia không trách ngươi chuyện con cái. Ai gia chỉ hỏi: không có con, ngươi lấy gì để lục cung nể?”",o:[
   {n:"Thưa: lấy lòng đối đãi với mọi đứa trẻ",e:["win","mid"],rt:"Thái hậu nắm tay ngươi rất lâu.",rf:"Thái hậu gật đầu, nhưng không nói gì thêm."},
   {n:"Thưa: lấy tài trị việc",e:["win","lose"],rt:"Thái hậu giao ngươi coi sổ lễ một mùa.",rf:"Thái hậu cười nhạt: tài thì ai chẳng có."},
@@ -93,7 +93,7 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh phượng vị",w:"emp",sj:"ngôi T
  s4:{h:"Lục cung chờ xem",w:"me",if:A=>egQueen()&&!rv67(A,"v"),t:"Ngươi ngồi ngôi Trung cung chưa lâu. Lục cung cung kính, nhưng ai cũng chờ xem ngươi trị việc ra sao, có thiên vị ai không.",o:[
   {n:"Định lại lệ lục cung",wx:"lục cung nề nếp",lx:"lệ mới làm nhiều người phật ý",rt:"Lệ mới được chép thành sổ, ai cũng theo.",rf:"Mấy cung than phiền, lệ mới bỏ dở."},
   {n:"Giữ lệ cũ, ban ơn đều tay",wx:"lục cung yên",lx:"tốn bạc",rt:"Lục cung khen ngươi công bằng."},
-  {n:"Nhờ Thái hậu chỉ bảo",need:["th"],wx:"Thái hậu vui",lx:"Danh −: bị coi là chưa tự đứng được",rt:"Thái hậu dạy ngươi từng việc."}]},
+  {n:"Nhờ Thái hậu chỉ bảo",need:["th"],wx:"Thái hậu vui",lx:"Danh giảm: bị coi là chưa tự đứng được",rt:"Thái hậu dạy ngươi từng việc."}]},
  s2:{h:"Trung cung lung lay",w:"hh",if:()=>!egQueen()&&qOn(),t:"Trong triều có người dâng sớ chê việc lục cung dưới tay Hoàng hậu {hh} bê trễ, xin chọn người phụ việc Trung cung.",o:[
   {n:"Xin vào giúp Hoàng hậu",wx:"Hoàng hậu thấy ngươi trung hậu",lx:"mất nhiều ngày làm việc không công",rt:"Hoàng hậu nắm tay ngươi: “Muội có lòng.”"},
   {n:"Xin phụ việc lục cung",wx:"tay nắm việc lục cung",lx:"bị nói là nhòm ngó ngôi Trung cung",rt:"Hoàng thượng giao ngươi coi sổ lục cung một mùa.",rf:"Hoàng thượng chọn {v}."},
@@ -101,7 +101,7 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh phượng vị",w:"emp",sj:"ngôi T
  s3:{h:"Ngôi Trung cung bỏ trống",w:"emp",if:()=>!egQueen()&&!qOn(),t:()=>"Ngôi Trung cung đã trống. Triều đình chia phe: phe muốn lập người có hoàng tử, phe muốn lập người nhà thế gia"+(S.thDead?", phe chờ thánh ý.":", phe chờ ý Thái hậu."),o:[
   {n:"Nhờ nhà mình vận động triều thần",wx:"có tiếng nói trong triều",lx:"Hoàng thượng ghét hậu cung kết bè ngoài triều",rt:"Mấy vị Thượng thư dâng sớ nhắc tên ngươi.",rf:"Ngự sử hặc nhà ngươi kết bè."},
   {n:"Thỉnh an Thái hậu mỗi sáng",need:["th"],wx:"Thái hậu nhớ đến ngươi",lx:"không có thời gian cho việc khác",rt:"Thái hậu khen ngươi biết lễ."},
-  {n:"Không động tĩnh gì",wx:"tiếng không tham ngôi",lx:"Danh −: không ai nhắc tên ngươi",rt:"Ngươi vẫn sống như mọi ngày."}]},
+  {n:"Không động tĩnh gì",wx:"tiếng không tham ngôi",lx:"Danh giảm: không ai nhắc tên ngươi",rt:"Ngươi vẫn sống như mọi ngày."}]},
  c1:{h:"{v} tung lời đồn",w:"v",need:["v"],t:"Khắp lục cung râm ran: nhà ngươi từng nhận hối lộ, ngươi không đủ đức làm mẫu nghi. Ai cũng biết lời ấy từ cung {v} mà ra.",o:[
   {n:"Tìm kẻ tung tin",wx:"rửa được tiếng",lx:"không tìm ra, tiếng càng xấu",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Cung nữ tung tin khai ra cung {v}.",rf:"Kẻ tung tin trốn mất."},
   {n:"Lấy việc thiện mà đáp",wx:"việc thiện át lời đồn",lx:"tốn bạc, lời đồn vẫn còn",rt:"Ngươi phát gạo cho cung nhân già, lời đồn tự lặng."},

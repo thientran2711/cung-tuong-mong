@@ -12,13 +12,12 @@
 | j67.js:369 | wx | cc | thêm chứng cứ về mật ước | Chứng cứ về mật ước + |
 | j67.js:520 | wx | bac | có thêm bạc và tai mắt | Bạc +, Tai mắt + |
 | j67.js:598 | wx | bac | cha vui, bạc nhiều | cha vui, Bạc ++ |
-| j67.js:645 | lx | oan | {v} thù sâu hơn | {v} thù ++ |
+| j67.js:645 | lx | oan | {v} thù sâu hơn | {v} oán ++ |
 | j67.js:746 | wx | cc | có thêm chứng nhân | Chứng cứ + |
 | j67.js:812 | wx | rel | hai nước thêm thân | hai nước: thiện cảm + |
-| j67.js:861 | wx | bac | giàu lên | Bạc + |
 | j67.js:899 | wx | sung | gần ngài hơn | Sủng ++ |
 | j67.js:916 | wx | cc | có thêm manh mối | Manh mối + |
-| j67.js:984 | lx | oan | nhà kẻ thù mạnh lên | nhà kẻ thù: thế + |
+| j67.js:984 | lx | oan | nhà kẻ thù mạnh lên | nhà kẻ thù: thế lực + |
 | j67.js:1015 | wx | rel | cô mẫu tin ngươi hơn | cô mẫu: thiện cảm + |
 | j67.js:1188 | wx | cc | chứng cứ chắc hơn | Chứng cứ + |
 | j67.js:1252 | wx | chutin | chủ tin hơn | Chủ tin + |
@@ -29,10 +28,8 @@
 | jend14.js:51 | wx | long | lòng yên, không tốn bạc | Lòng +, không tốn bạc |
 | jend14.js:52 | wx | long | lòng yên, không tốn bạc | Lòng +, không tốn bạc |
 | jend14.js:63 | lx | rel | Thái hậu quý ngươi bớt đi | Thái hậu: thiện cảm − |
-| jend14.js:72 | lx | long | tốn bạc, lòng nặng | tốn bạc,, Lòng − |
-| jend14.js:96 | lx | danh | Danh giảm: bị coi là chưa tự đứng được | Danh −: bị coi là chưa tự đứng được |
+| jend14.js:72 | lx | long | tốn bạc, lòng nặng | tốn bạc, Lòng − |
 | jend14.js:100 | lx | danh | Danh giảm: người khác nhanh chân hơn | Danh −: người khác nhanh chân hơn |
-| jend14.js:104 | lx | danh | Danh giảm: không ai nhắc tên ngươi | Danh −: không ai nhắc tên ngươi |
 | jend14.js:112 | lx | rel | {v} lấy được lòng Thái hậu, Thái hậu quý ngươi bớt đi | {v} lấy được lòng Thái hậu, Thái hậu: thiện cảm − |
 | jend14.js:116 | lx | sung | Sủng giảm: phe kia nói nhiều hơn | Sủng −: phe kia nói nhiều hơn |
 | jend14.js:136 | lx | sung | Hoàng thượng bớt để ý con | Hoàng thượng thương con − |
@@ -45,7 +42,7 @@
 | jkc3a.js:11 | lx | bac | bạc riêng vơi đi | Bạc − |
 | jkc3a.js:25 | lx | bac | bạc riêng vơi đi | Bạc − |
 | jkc3a.js:40 | wx | danh | nhà có tước, Gia thanh lên | nhà có tước, Gia thanh + |
-| jkc3a.js:40 | lx | bac | gia tư vơi một nửa | Bạc −− |
+| jkc3a.js:40 | lx | bac | gia tư vơi một nửa | Gia tư −− |
 | jkc3a.js:46 | lx | bac | bạc riêng vơi đi | Bạc − |
 | jkc3a.js:52 | lx | bac | bạc riêng vơi đi | Bạc − |
 | jkc3a.js:54 | wx | oan | nhà vẫn có lời, dân bớt oán | nhà vẫn có lời, dân: oán − |
@@ -84,7 +81,6 @@
 | jrd_bd.js:575 | lx | oan | {v} thêm oán | {v}: oán + |
 | jrd_bd.js:607 | wx | danh | Nê Niết Sư có thêm tiếng | Nê Niết Sư: Danh + |
 | jrd_bd2.js:64 | wx | bac | Đại Hy có thêm bạc {land} | Đại Hy Bạc + {land} |
-| jrd_bd2.js:149 | wx | bac | ngươi có thêm của | Bạc + |
 | jrd_bd2.js:367 | lx | long | lòng ngươi nặng | Lòng − |
 | jrd_ch.js:167 | wx | rel | {v} bớt nghi ngươi | {v}: nghi − |
 | jrd_ch.js:181 | wx | long | lòng nhẹ | Lòng + |
@@ -101,13 +97,13 @@
 | jrd_ch.js:704 | lx | bac | tốn nhiều bạc, phải xong trước thọ yến | Bạc −−, phải xong trước thọ yến |
 | jrd_ch.js:717 | lx | suc | bảy ngày, mệt rã | bảy ngày, Sức −− |
 | jrd_ch.js:738 | lx | don | lời đồn lan thêm | Lời đồn + |
-| jrd_ch.js:780 | lx | oan | {v} thêm chỗ dựa | {v}: thế + |
+| jrd_ch.js:780 | lx | oan | {v} thêm chỗ dựa | {v}: thế lực + |
 | jrd_ch.js:903 | wx | rel | bà bớt nghi | bà: nghi − |
 | jrd_ch.js:973 | wx | long | lòng nhẹ | Lòng + |
 | jrd_ch.js:1081 | wx | long | lòng yên | Lòng + |
 | jrd_ch.js:1115 | wx | long | lòng yên | Lòng + |
 | jrd_ch.js:1119 | wx | long | lòng nhẹ | Lòng + |
-| jrd_ch.js:1139 | wx | oan | {v} bớt một mối thù | {v}: thù − |
+| jrd_ch.js:1139 | wx | oan | {v} bớt một mối thù | {v}: oán − |
 | jrd_cn.js:67 | lx | suc | sức kiệt trước ngày tiệc | Sức −− (ngày tiệc) |
 | jrd_cn.js:82 | wx | rel | thêm người tin được | người tin được + |
 | jrd_cn.js:100 | lx | bac | mất dịp cài người, bớt tai mắt | mất dịp cài người, Tai mắt − |
@@ -119,21 +115,19 @@
 | jrd_cn.js:527 | lx | suc | thức đêm dò sổ, hao sức; {v} còn thời gian xóa dấu | thức đêm dò sổ, Sức −; {v} còn thời gian xóa dấu |
 | jrd_cn.js:546 | lx | suc | ngươi mệt rã, sáng ra hầu giá vụng về | Sức −−, sáng ra hầu giá vụng về |
 | jrd_cn.js:548 | lx | suc | ngươi lo đến hao sức; kẻ kia kịp chuẩn bị | ngươi lo đến Sức −; kẻ kia kịp chuẩn bị |
-| jrd_cn.js:555 | lx | rel | Hoàng hậu không tin, thiện cảm với ngươi giảm | Hoàng hậu: thiện cảm − |
+| jrd_cn.js:555 | lx | rel | Hoàng hậu không tin, thiện cảm với ngươi giảm | Hoàng hậu không tin, thiện cảm − |
 | jrd_cn.js:559 | lx | long | chứng cứ thành tro, lòng ngươi cắn rứt | chứng cứ thành tro, Lòng − |
 | jrd_cn.js:562 | lx | long | Tố Nga sống trong nguy hiểm thêm, lòng ngươi áy náy | Tố Nga sống trong nguy hiểm thêm, Lòng − |
-| jrd_cn.js:621 | lx | suc | Tố Nga mệt thêm | Tố Nga Sức − |
 | jrd_cn.js:624 | lx | suc | ngươi kiệt sức | Sức −− |
 | jrd_cn.js:650 | lx | oan | {v} biết bị lừa, giận hơn | {v} biết bị lừa, oán + |
 | jrd_cn.js:698 | lx | long | nàng không về được quê, lòng ngươi áy náy | nàng không về được quê, Lòng − |
-| jrd_cn.js:704 | lx | oan | mối thù sâu thêm, {v} rêu rao ngươi cứng đầu | thù ++, {v} rêu rao ngươi cứng đầu |
+| jrd_cn.js:704 | lx | oan | mối thù sâu thêm, {v} rêu rao ngươi cứng đầu | oán ++, {v} rêu rao ngươi cứng đầu |
 | jrd_cn.js:739 | lx | long | nói dối trước đông người, lòng áy náy; phải lấy bọc vải gấp hơn | nói dối trước đông người, Lòng −; phải lấy bọc vải gấp hơn |
 | jrd_cn.js:748 | wx | long | lòng ngươi nhẹ đi | Lòng + |
 | jrd_cn.js:774 | lx | bac | bạc của ngươi vơi | Bạc − |
 | jrd_cn.js:781 | lx | long | bỏ người bệnh, lòng ngươi áy náy | bỏ người bệnh, Lòng − |
 | jrd_cn.js:813 | lx | bac | bạc của ngươi vơi | Bạc − |
 | jrd_cn.js:862 | wx | long | lòng bớt nóng | Lòng + |
-| jrd_cn.js:888 | lx | suc | đường xa làm lão kiệt sức | đường xa làm lão Sức −− |
 | jrd_cn.js:892 | lx | suc | đếm ngày đến hao người; chứng cứ có thể mất | đếm ngày đến Sức −; chứng cứ có thể mất |
 | jrd_cn.js:903 | lx | suc | ngươi mệt rã | Sức −− |
 | jrd_cn.js:904 | lx | long | lão mất sức trước giờ xét, ngươi áy náy vì ép lão | lão mất sức trước giờ xét, Lòng − (vì ép lão) |
@@ -142,7 +136,7 @@
 | jrd_cnv.js:96 | wx | chutin | {mis} thêm tin ngươi | {mis}: Chủ tin + |
 | jrd_cnv.js:96 | lx | danh | người ta bảo ngươi giữ của mà không biết của gì, tiếng ngươi sút | người ta bảo ngươi giữ của mà không biết của gì, Danh − |
 | jrd_cnv.js:97 | lx | danh | {mis} thấy dấu niêm bị động, giận ngươi; tiếng ngươi sút | {mis} thấy dấu niêm bị động, giận ngươi; Danh − |
-| jrd_cnv.js:98 | lx | chutin+suc | {mis} cho là ngươi tò mò, bớt tin ngươi; ngươi mệt mà không được gì | {mis} cho là ngươi tò mò, Chủ tin −; Sức −− |
+| jrd_cnv.js:98 | lx | chutin | {mis} cho là ngươi tò mò, bớt tin ngươi; ngươi mệt mà không được gì | {mis} cho là ngươi tò mò, Chủ tin −; ngươi mệt mà không được gì |
 | jrd_cnv.js:100 | lx | danh+chutin | quỳ đến rã gối vẫn bị cho là kẻ hai lòng, {mis} bớt tin, tiếng ngươi sút | quỳ đến rã gối vẫn bị cho là kẻ hai lòng, {mis} Chủ tin −, Danh − |
 | jrd_cnv.js:102 | lx | long | {mis} coi ngươi là kẻ phản; lòng ngươi áy náy | {mis} coi ngươi là kẻ phản; Lòng − |
 | jrd_cnv.js:104 | lx | danh | kẻ viết vẫn rình, người ta bảo ngươi nhát, tiếng ngươi sút | kẻ viết vẫn rình, người ta bảo ngươi nhát, Danh − |
@@ -209,7 +203,6 @@
 | jrd_cnv.js:234 | lx | danh | chỉ nói được nửa sự thật, người ta nghi ngươi giấu, tiếng sút | chỉ nói được nửa sự thật, người ta nghi ngươi giấu, Danh − |
 | jrd_cnv.js:235 | lx | danh+chutin | {mis} cho là ngươi đã ngả, bớt tin; tiếng ngươi sút | {mis} cho là ngươi đã ngả, Chủ tin −; Danh − |
 | jrd_cnv.js:236 | lx | danh | bị bắt vì vào nơi cấm, tiếng ngươi sút; bạc mất trắng | bị bắt vì vào nơi cấm, Danh −; bạc mất trắng |
-| jrd_cnv.js:238 | lx | long | ông sợ, vẫn đi; lòng ngươi áy náy vì giữ không nổi ông | ông sợ, vẫn đi; Lòng − (vì giữ không nổi ông) |
 | jrd_cnv.js:239 | lx | danh | ông không dám ký tên, đồn ra ngươi ép ông, tiếng sút; bạc mất trắng | ông không dám ký tên, đồn ra ngươi ép ông, Danh −; bạc mất trắng |
 | jrd_cnv.js:240 | lx | danh | mất người làm chứng, người ta bảo ngươi bỏ người tốt, tiếng sút | mất người làm chứng, người ta bảo ngươi bỏ người tốt, Danh − |
 | jrd_cnv.js:242 | lx | long | cầm của {v} là mắc nợ {v}, lòng ngươi áy náy | cầm của {v} là mắc nợ {v}, Lòng − |
@@ -224,7 +217,7 @@
 | jrd_cnv.js:264 | lx | bac | bạc trong hộp vơi đi một khoản | Bạc − |
 | jrd_cnv.js:265 | lx | danh | chẳng ai nể, người ta bảo ngươi không biết điều, tiếng ngươi sút | chẳng ai nể, người ta bảo ngươi không biết điều, Danh − |
 | jrd_cnv.js:267 | lx | suc | đáp trước là bị soi kỹ nhất, ngươi kiệt sức | đáp trước là bị soi kỹ nhất, Sức −− |
-| jrd_cnv.js:268 | lx | long | {mis} không dám, ngươi thấy mình bị bỏ, lòng nặng trĩu | {mis} không dám, ngươi thấy mình bị bỏ,, Lòng − |
+| jrd_cnv.js:268 | lx | long | {mis} không dám, ngươi thấy mình bị bỏ, lòng nặng trĩu | {mis} không dám, ngươi thấy mình bị bỏ, Lòng − |
 | jrd_cnv.js:269 | lx | danh | bị ghi là lo lót, tiếng ngươi sút; bạc mất trắng | bị ghi là lo lót, Danh −; bạc mất trắng |
 | jrd_cnv.js:271 | lx | danh | giờ trực bị sửa, ngươi thành kẻ nói dối, tiếng sút nặng | giờ trực bị sửa, ngươi thành kẻ nói dối, Danh −− |
 | jrd_cnv.js:272 | lx | danh | bị cho là ép nhân chứng, tiếng ngươi sút | bị cho là ép nhân chứng, Danh − |
@@ -268,7 +261,6 @@
 | jrd_cnv.js:372 | lx | danh | Xuân Đào còn mang tiếng thêm ít lâu, người ta bảo ngươi bỏ tỷ muội, tiếng sút; vụ chỉ dừng ở giữa | Xuân Đào còn mang tiếng thêm ít lâu, người ta bảo ngươi bỏ tỷ muội, Danh −; vụ chỉ dừng ở giữa |
 | jrd_cnv.js:382 | lx | danh+suc | nàng chửi ngươi to tiếng trước mọi người, tiếng sút; ngươi mệt rã | nàng chửi ngươi to tiếng trước mọi người, Danh −; Sức −− |
 | jrd_cnv.js:383 | lx | chutin+long | {mis} không muốn nghĩ xấu người cũ, bớt tin ngươi; ngươi áy náy vì nghi người | {mis} không muốn nghĩ xấu người cũ, Chủ tin −; Lòng − (vì nghi người) |
-| jrd_cnv.js:384 | wx | oan | không thêm oán | không oán + |
 | jrd_cnv.js:384 | lx | danh | kẻ đứng sau còn trong bóng tối, người ta bảo ngươi đứng nhìn, tiếng sút | kẻ đứng sau còn trong bóng tối, người ta bảo ngươi đứng nhìn, Danh − |
 | jrd_cnv.js:386 | lx | danh+suc | bị nàng phát hiện, đi đồn ngươi rình người, tiếng sút; ngươi mệt rã | bị nàng phát hiện, đi đồn ngươi rình người, Danh −; Sức −− |
 | jrd_cnv.js:387 | lx | danh | bị bắt quả tang lục đồ người khác, tiếng ngươi sút | bị bắt quả tang lục đồ người khác, Danh − |
@@ -279,7 +271,7 @@
 | jrd_cnv.js:394 | lx | long | Xuân Đào vào hang cọp, lòng ngươi cắn rứt | Xuân Đào vào hang cọp, Lòng − |
 | jrd_cnv.js:395 | lx | danh+oan | {v} phật ý, thêm oán; mất lòng người, tiếng sút | {v} phật ý, oán +; mất lòng người, Danh − |
 | jrd_cnv.js:398 | lx | long | Thu Cúc nhận bạc mà không đổi lòng, ngươi áy náy vì đã mua người; bạc mất trắng | Thu Cúc nhận bạc mà không đổi lòng, Lòng − (vì đã mua người); bạc mất trắng |
-| jrd_cnv.js:399 | lx | oan | chạy việc đến rã người; Thu Cúc biết ngươi mách, thù ngươi thêm | chạy việc đến rã người; Thu Cúc biết ngươi mách, thù + |
+| jrd_cnv.js:399 | lx | oan | chạy việc đến rã người; Thu Cúc biết ngươi mách, thù ngươi thêm | chạy việc đến rã người; Thu Cúc biết ngươi mách, oán + |
 | jrd_cnv.js:400 | lx | long | chưa ai được cứu, lòng ngươi áy náy vì giữ bí mật làm vốn | chưa ai được cứu, Lòng − (vì giữ bí mật làm vốn) |
 | jrd_cnv.js:413 | lx | danh | bị cho là đồng bọn, tiếng ngươi sút | bị cho là đồng bọn, Danh − |
 | jrd_cnv.js:414 | lx | danh | cả lục cung biết ngươi bênh kẻ chịu phạt, tiếng sút; bạc lo lót mất trắng | cả lục cung biết ngươi bênh kẻ chịu phạt, Danh −; bạc lo lót mất trắng |
@@ -303,7 +295,7 @@
 | jrd_cnv.js:453 | lx | long | nàng rối, quên nửa, lòng ngươi áy náy vì ép nàng tập | nàng rối, quên nửa, Lòng − (vì ép nàng tập) |
 | jrd_cnv.js:456 | lx | danh | mất lời của nhân chứng chính, người ta bảo ngươi mềm lòng, tiếng sút | mất lời của nhân chứng chính, người ta bảo ngươi mềm lòng, Danh − |
 | jrd_cnv.js:457 | lx | suc+long | nàng hứa rồi lại sợ, ngươi áy náy vì đã hứa suông; ngươi mệt rã | nàng hứa rồi lại sợ, Lòng − (vì đã hứa suông); Sức −− |
-| jrd_cnv.js:458 | lx | bac | người ấy nhận bạc rồi cáo ốm, đòi thêm bạc | người ấy nhận bạc rồi cáo ốm, đòi Bạc − |
+| jrd_cnv.js:458 | lx | bac | người ấy nhận bạc rồi cáo ốm, đòi thêm bạc | người ấy nhận bạc rồi cáo ốm, đòi thêm, Bạc − |
 | jrd_cnv.js:460 | lx | danh | lời khai bị nói là ép viết, tiếng ngươi sút | lời khai bị nói là ép viết, Danh − |
 | jrd_cnv.js:461 | lx | danh | hắn báo cung {v}, đồn ngươi dọa người, tiếng sút; bạc mất trắng | hắn báo cung {v}, đồn ngươi dọa người, Danh −; bạc mất trắng |
 | jrd_cnv.js:462 | lx | danh | mất một mắt xích, người ta bảo ngươi thiếu chứng, tiếng sút | mất một mắt xích, người ta bảo ngươi thiếu chứng, Danh − |
@@ -347,7 +339,7 @@
 | jrd_cnv.js:537 | lx | suc | dâng sổ đến kiệt sức; hỏng thì đắc tội cả Nội vụ phủ, cuốn sổ bị đốt | dâng sổ, Sức −−; hỏng thì đắc tội cả Nội vụ phủ, cuốn sổ bị đốt |
 | jrd_cnv.js:538 | lx | long | cung {v} không bị đụng đến, ngươi đổi lẽ phải lấy yên ổn, lòng áy náy; vụ chỉ dừng ở giữa | cung {v} không bị đụng đến, ngươi đổi lẽ phải lấy yên ổn, Lòng −; vụ chỉ dừng ở giữa |
 | jrd_cnv.js:548 | lx | danh | một đêm không làm gì khác, người ta bảo ngươi lơ là, tiếng sút | một đêm không làm gì khác, người ta bảo ngươi lơ là, Danh − |
-| jrd_cnv.js:549 | lx | long | câu trả lời làm ngươi buồn, lòng nặng trĩu | câu trả lời làm ngươi buồn,, Lòng − |
+| jrd_cnv.js:549 | lx | long | câu trả lời làm ngươi buồn, lòng nặng trĩu | câu trả lời làm ngươi buồn, Lòng − |
 | jrd_cnv.js:550 | lx | bac | bạc trong hộp vơi đi một khoản | Bạc − |
 | jrd_cnv.js:553 | lx | danh+oan | {v} thêm oán, tiếng ngươi sút | {v}: oán +, Danh − |
 | jrd_cnv.js:554 | lx | long | {mis} không muốn dính, lòng ngươi áy náy vì làm phiền chủ | {mis} không muốn dính, Lòng − (vì làm phiền chủ) |
@@ -651,7 +643,7 @@
 | jrd_dtq.js:984 | lx | suc | huynh mất người làm chứng, ngươi lo nghĩ hao sức | huynh mất người làm chứng, Sức − |
 | jrd_dtq.js:1005 | lx | suc | huynh thấy muội không tin mình, ngươi lo nghĩ hao sức | huynh thấy muội không tin mình, Sức − |
 | jrd_dtq.js:1009 | lx | suc | thư không thay được người, ngươi lo nghĩ hao sức | thư không thay được người, Sức − |
-| jrd_dtq.js:1016 | lx | oan | {v} bỏ về, thù cũ thêm sâu | {v} bỏ về, thù ++ |
+| jrd_dtq.js:1016 | lx | oan | {v} bỏ về, thù cũ thêm sâu | {v} bỏ về, oán ++ |
 | jrd_dtq.js:1017 | lx | suc | đường hòa bị đóng, ngươi lo nghĩ hao sức | đường hòa bị đóng, Sức − |
 | jrd_dtq.js:1023 | lx | suc | không có gì thêm để vua quyết, ngươi lo nghĩ hao sức | không có gì thêm để vua quyết, Sức − |
 | jrd_muoi.js:102 | lx | long | lòng thêm nặng, mất ngủ mà chẳng gỡ được gì | Lòng −, mất ngủ mà chẳng gỡ được gì |
@@ -666,7 +658,6 @@
 | jrd_muoi.js:483 | lx | bac | cha giận, cắt bớt bạc gửi vào cung | cha giận, Bạc − |
 | jrd_muoi.js:549 | lx | don | lời đồn lan thêm vài tháng | Lời đồn + |
 | jrd_muoi.js:571 | lx | suc | ngươi kiệt sức, việc vẫn rối | Sức −−, việc vẫn rối |
-| jrd_muoi.js:583 | wx | bac | không tốn thêm bạc | không Bạc − |
 | jrd_muoi.js:668 | lx | bac | bạc nhà vơi một góc | Bạc − |
 | jrd_muoi.js:680 | lx | sung | ngài nhớ việc xấu hơn | Sủng − |
 | jrd_muoi.js:716 | lx | suc | gánh thêm lời hứa, lo nghĩ hao sức | gánh thêm lời hứa, Sức − |
@@ -678,28 +669,25 @@
 | jrd_nc.js:40 | wx | rel | Hoàng thượng bớt nghi | Hoàng thượng: nghi − |
 | jrd_nc.js:42 | lx | rel | chữ lạ bị chặn thì càng thêm nghi | chữ lạ bị chặn thì nghi + |
 | jrd_nc.js:50 | lx | rel | chữ lạ bị chặn thì càng thêm nghi | chữ lạ bị chặn thì nghi + |
-| jrd_nc.js:83 | lx | bac | chủ sự đòi thêm bạc, và giữ tên ngươi trong sổ | chủ sự đòi Bạc −, và giữ tên ngươi trong sổ |
+| jrd_nc.js:83 | lx | bac | chủ sự đòi thêm bạc, và giữ tên ngươi trong sổ | chủ sự đòi thêm, Bạc −, và giữ tên ngươi trong sổ |
 | jrd_nc.js:143 | wx | long | lòng yên | Lòng + |
 | jrd_nc.js:288 | wx | rel | {pa} bớt nghi | {pa}: nghi − |
 | jrd_nc.js:334 | lx | bac | bạc nhiều, và thêm người biết chuyện | Bạc ++, và thêm người biết chuyện |
-| jrd_nc.js:796 | wx | bac | có thêm của | Bạc + |
-| jrd_nc.js:802 | wx | bac | giàu thêm; phe thua nhớ lời hứa | Bạc +; phe thua nhớ lời hứa |
 | jrd_nc.js:861 | wx | bac | có thêm bạc | Bạc + |
 | jrd_nc.js:866 | wx | bac | đỡ tốn | Bạc + |
 | jrd_nc.js:888 | lx | don | tin đồn mạnh lên | Lời đồn + |
-| jrd_nc.js:958 | wx | bac | giàu thêm | Bạc + |
 | jrd_pt.js:507 | wx | bac | Hộ bộ đỡ lỗ | Hộ bộ Bạc + |
 | jrd_pt2.js:171 | lx | oan | {v} mất mặt, thêm oán | {v} mất mặt, oán + |
 | jrd_pt2.js:202 | wx | oan | dân chúng bớt giận | dân chúng: oán − |
 | jrd_pt2.js:240 | lx | oan | {v} thêm oán | {v}: oán + |
-| jrd_pt2.js:274 | lx | oan | thù hai nhà sâu thêm | thù ++ |
+| jrd_pt2.js:274 | lx | oan | thù hai nhà sâu thêm | oán ++ |
 | jrd_pt2.js:329 | lx | oan | {v} thêm oán | {v}: oán + |
 | jrd_pt2.js:364 | lx | bac | bạc ra nhiều | Bạc −− |
 | jrd_pt2.js:393 | lx | bac | bạc ra nhiều | Bạc −− |
 | jrd_pt2.js:427 | wx | oan | dân bến bớt oán | dân bến: oán − |
-| jrd_pt2.js:500 | lx | oan | thù hai nhà sâu thêm | thù ++ |
+| jrd_pt2.js:500 | lx | oan | thù hai nhà sâu thêm | oán ++ |
 | jrd_pt2.js:501 | lx | oan | {v} thêm oán | {v}: oán + |
-| jrd_pt2.js:582 | lx | oan | thù hai nhà sâu thêm | thù ++ |
+| jrd_pt2.js:582 | lx | oan | thù hai nhà sâu thêm | oán ++ |
 | jrd_td.js:194 | lx | oan | {foe} oán thêm | {foe}: oán + |
 | jrd_td.js:253 | wx | long | lòng yên | Lòng + |
 | jrd_td.js:263 | lx | oan | phe kia bớt sợ | phe kia: oán − |
@@ -707,7 +695,6 @@
 | jrd_td.js:504 | wx | cc | thêm lời khai từ người trong nhà hắn | Chứng cứ + |
 | jrd_td.js:550 | lx | bac | bạc đi nhiều thì dễ bị dò | Bạc −− thì dễ bị dò |
 | jrd_td.js:552 | wx | rel | em ít bị để mắt | em: bị để mắt − |
-| jrd_td.js:954 | wx | bac | giàu lên | Bạc + |
 | jrd_thd.js:19 | lx | danh | người ta bảo Tài nữ tham danh, tiếng tăm sứt mẻ | người ta bảo Tài nữ tham danh, Danh −− |
 | jrd_thd.js:20 | lx | suc | đêm thức chép tên cha lên từng tờ, hao sức; thơ in sai chữ cứ thế truyền đi | đêm thức chép tên cha lên từng tờ, Sức −; thơ in sai chữ cứ thế truyền đi |
 | jrd_thd.js:23 | lx | danh | cái tên dính theo ngươi, tiếng tăm sứt mẻ | cái tên dính theo ngươi, Danh −− |
@@ -1025,7 +1012,7 @@
 | jrd_tt.js:176 | wx | long | lòng yên | Lòng + |
 | jrd_tt.js:215 | lx | danh | phủ hứng sớ, tiếng nhà ngươi sứt mẻ | phủ hứng sớ, Danh −− |
 | jrd_tt.js:219 | wx | long | lòng nhẹ | Lòng + |
-| jrd_tt.js:320 | lx | oan+suc | đi đến cùng thì hao sức, thù sâu thêm | đi đến cùng thì Sức −, thù ++ |
+| jrd_tt.js:320 | lx | oan+suc | đi đến cùng thì hao sức, thù sâu thêm | đi đến cùng thì Sức −, oán ++ |
 | jrd_tt.js:352 | wx | suc+bac | đỡ tốn bạc, đỡ tốn sức | Bạc +, Sức + |
 | jrd_tt.js:398 | wx | long | ngài lòng nhẹ | ngài Lòng + |
 | jrd_tt.js:398 | lx | long | tiếng đàn buồn, ngài thấy nặng lòng | tiếng đàn buồn, ngài: Lòng − |
