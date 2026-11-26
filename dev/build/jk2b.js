@@ -975,8 +975,10 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
 document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closest(".pc.kpnar .pcl > .pcp.kpsheet");if(!pp)return;e.stopPropagation();
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
+/* person-panel option 1 (look-only): ONE portrait-cell width rule [min,max,share of the panel width,min left column] */
+const KPC_W=[100,138,.21,150];
 function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
- let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w){const kw=Math.round(Math.max(150,Math.min(240,w*.36)));pc.dataset.kpcw0=kw;pc.style.setProperty("--kpcw",kw+"px");pc.style.setProperty("--kpcl",Math.max(kw,172)+"px")}
+ let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w){const kw=Math.round(Math.max(KPC_W[0],Math.min(KPC_W[1],w*KPC_W[2])));pc.dataset.kpcw0=kw;pc.style.setProperty("--kpcw",kw+"px");pc.style.setProperty("--kpcl",Math.max(kw,KPC_W[3])+"px")}
  /* KIT §0: no short-landscape card any more — every screen shows the 1180x820 spread or the 590x820 page (design-scale p3) */
  return w?w>=440:true}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
