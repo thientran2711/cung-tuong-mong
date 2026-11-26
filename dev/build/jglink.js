@@ -64,7 +64,14 @@ function glSpec(T){const W=T.who;const k=T.k;const H=k?hours(k):{h:"",why:""};co
  if(k&&k!==S.place){go=()=>{closeInfo();setTimeout(()=>glGo(T),60)};goK=kh}
  else if(k&&W&&W.sell)go=()=>{closeInfo();setTimeout(()=>glShop(),60)};
  else if(T.tab&&typeof kitGoalGo==="function")go=()=>{closeInfo();setTimeout(()=>kitGoalGo({tab:T.tab,act:T.act,t:T.t}),80)};
- return {who,where:k||"",hours:H.h,cost,note:note.join(". "),go,goK}}
+ /* «Xem Dư đồ» (kit §6.2l how.map, ed3b8ad9): the Dư đồ tab with the place (or the zone tag holding it) ringed by the kit guide ring (jtut kitCoach) */
+ const map=k&&k!==S.place?()=>{closeInfo();setTimeout(()=>glMap(T),60)}:null;
+ return {who,where:k||"",hours:H.h,cost,note:note.join(". "),go,goK,map}}
+function glMap(T){try{if(!S||S.dead)return;const b=document.querySelector('#tabs [data-tab="go"]');if(typeof tab!=="undefined"&&tab!=="go"){if(b&&b.offsetParent)b.click();else{tab="go";render()}}
+ const find=()=>document.querySelector(`#panel .mspot[data-go="${T.k}"]`)||[...document.querySelectorAll("#panel .mspot.mzone")].find(z=>(" "+(z.dataset.mzk||"")+" ").includes(" "+T.k+" "))||null;
+ setTimeout(()=>{const el=find();if(!el||typeof kitCoach!=="function")return;const w=T.who&&T.who.p?`<p>${esc(T.who.p.name)} ở đây: ${esc(T.who.does||"")}.</p>`:"";
+  kitCoach({title:placeName(T.k),sub:"Cách làm · nơi cần đến",html:`${w}<p>Chạm vào nơi đang sáng để đi tới.</p>`,target:find,pad:4,interact:true,btns:[{k:"ok",t:"Đã hiểu"}],on(){kitCoachOff()}});
+  const off=e=>{if(e.target.closest&&e.target.closest("#panel .mspot")){document.removeEventListener("click",off,true);try{kitCoachOff()}catch(x){}}};document.addEventListener("click",off,true)},420)}catch(e){console.error("glink map",e)}}
 function glWrap(html,q){const T=glTarget(html,q);if(!T||typeof kitGoalLink!=="function")return html;return kitGoalLink(html,glSpec(T))}
 window.glWrap=glWrap;window.glHow=T=>typeof kitHowPanel==="function"?kitHowPanel(glSpec(T)):null;
 if(typeof kitChecks==="function"){const c0=kitChecks;kitChecks=function(list){try{if(Array.isArray(list)&&S&&!S.dead&&S.st)list=list.map(x=>{if(!Array.isArray(x)||x[0]||!x[1]||/data-kglink=/.test(x[1]))return x;

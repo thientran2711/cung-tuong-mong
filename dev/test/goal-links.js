@@ -28,17 +28,18 @@ const [,,URL,SIZES,OUT]=process.argv;const fs=require('fs');if(OUT)fs.mkdirSync(
   const how=await p.evaluate(()=>{const m=document.getElementById('modal');return {title:(m.querySelector('.kptitle')||{}).textContent,text:m.innerText.replace(/\s+/g,' ').slice(0,600),opts:[...m.querySelectorAll('.opt,button.ka,.kopt')].filter(e=>e.offsetParent).map(e=>e.innerText.split('\n')[0]).slice(0,6),face:!!m.querySelector('.kpl img, .kpl .md, .kpl [style*="background"]'),kit:/kgoalhow/.test(Q[0]&&Q[0].cls||'')}});
   if(/\?\?\?|chưa biết tên|một vị thái giám|vị thái giám bày hàng/.test(how.text))F('unnamed in panel '+how.text);
   if(how.title!=='Cách làm'||!how.text.includes(ped.name)||!/Nội vụ phủ/.test(how.text)||!/Giờ mở/i.test(how.text)||!/khắc/.test(how.text))F('how panel '+JSON.stringify(how));
-  if(!how.opts.some(o=>/Đi tới/.test(o)))F('how opts '+JSON.stringify(how.opts));if(!how.kit)F('panel is not the kit §6.2l kgoalhow');
+  if(!how.opts.some(o=>/Đi tới/.test(o))||!how.opts.some(o=>/Xem Dư đồ/.test(o)))F('how opts '+JSON.stringify(how.opts));if(!how.kit)F('panel is not the kit §6.2l kgoalhow');
   await shot('2-cach-lam');
-  /* (2a) the Dư đồ (kit §6.2l has ONE button «Đi tới»; «Xem Dư đồ» left with the private panel): close, open the map tab */
-  await p.evaluate(()=>{Q.length=0;showModal();const b=document.querySelector('#tabs [data-tab="go"]');if(b&&b.offsetParent)b.click();else{tab='go';render()}});await p.waitForTimeout(1600);
   const toastOn=()=>p.evaluate(()=>{const t=document.getElementById('rtoast');return !!(t&&t.classList.contains('on')&&t.offsetParent!==null)});
+  /* (2a) the Dư đồ «Xem Dư đồ» (kit how.map) → map tab + ring */
+  await p.evaluate(()=>{const o=[...document.querySelectorAll('#modal .opt,#modal button')].find(e=>e.offsetParent&&/^Xem Dư đồ/.test(e.innerText.trim()));o.click()});await p.waitForTimeout(1600);
+  if(await toastOn())F('Xem Dư đồ made a result card');
   const navLog=()=>p.evaluate(()=>(S.logs||[]).slice(0,3).map(x=>String(x).replace(/<[^>]+>/g,'')).filter(x=>/Cách làm|Đi làm|: Đóng/.test(x)));
   
   const nvpLab=await p.evaluate(()=>{const e=document.querySelector('#panel .mspot[data-go="nvp"] .mlab')||[...document.querySelectorAll('#panel .mspot.mzone')].find(z=>/nvp/.test(z.dataset.mzk||''));return e?{t:e.innerText.replace(/\s+/g,' '),mb:!!e.querySelector('.kglmb'),fs:getComputedStyle(e).fontSize}:null});
   if(!nvpLab||!nvpLab.mb||!/Mua bán/.test(nvpLab.t))F('Mua bán not in the name slip '+JSON.stringify(nvpLab));
   const ring=await p.evaluate(()=>({tab,coach:!!document.querySelector('.ktut:not([hidden]), #ktut:not([hidden])'),q:Q.length,mark:[...document.querySelectorAll('#panel .mspot.kglban')].map(e=>e.dataset.go||e.dataset.zone),leg:(document.querySelector('#panel .kglleg')||{}).textContent||''}));
-  if(ring.tab!=='go')F('map '+JSON.stringify(ring));if(!ring.mark.length||!/Mua bán/.test(ring.leg))F('mua bán marks '+JSON.stringify(ring));
+  if(ring.tab!=='go'||!ring.coach)F('map ring '+JSON.stringify(ring));if(!ring.mark.length||!/Mua bán/.test(ring.leg))F('mua bán marks '+JSON.stringify(ring));
   await shot('3-du-do-ring');
   await p.evaluate(()=>{try{kitCoachOff()}catch(e){}});await p.waitForTimeout(300);await shot('4-du-do-muaban');
   /* (2b) Đi tới from the link → arrives, shop opens */
