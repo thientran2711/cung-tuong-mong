@@ -3,6 +3,14 @@ PRIORITY #1 CHECK (successor #2, 'Tạ lỗi|Nhún nhường|hòa giải|làm l�
 # review/pace-all — SUCCESSOR #2 (session_01D3E3NXTnDZUXLbRTbkjsZy · depth 3 · START_CTX ~3 % estimate, tool reads 0)
 Head: **review/pace-all afa89339** (FF from LIVE 3af7896e: LIVE merged at 207c39b4, built files rebuilt; CHANGE line = pace-all).
 
+## ROUND 2 — BIG review FAIL afa89339/3942eafe (reports/pace-all-review.md) → fixed at **review/pace-all 6e64445f** (FF from LIVE aa37de21; LIVE 1dcb373e + aa37de21 merged, built files only)
+- B1 co-op double fade: j28 oanCool skips the friend entry (v.coop) → one cool per grudge, on its owner's client (oanMonth / her S.ro pass); test B13.
+- B2 law 16: art pace back to sếp's «Q5 A» EXACTLY — BAL.art.gain [2,1.5,1.1,.9,.8] line and jbalcore crsPush (0.1 grid) byte-identical to LIVE → days per bậc ~2/5/12/21/33 (teacher 2/4/9/16/25) unchanged by construction. The per-bậc display «Tiến bộ n/need» (owner 08:05Z) already existed on LIVE (crsNeedP / crsProg) and reads 5·10·19·28·38. SUPERSEDES part A1 above (the 10·12·16·20·24 change is gone). Công lao (BAL.srvMpN, whole merits) stays (no owner pick on it).
+- S2 jemoact «Tạ lỗi, đền bạc» refused → Danh handed back (bạc stays with the maid as compensation, thiện cảm +); S3 a card-paid road no longer possible → refund; S4 an accepted hậu lễ's bạc goes to the receiver (law 6c; tests C4, C6b); N1 locked rows show no odds word; N3 BAL.oanMend.ag; N4 jbal2 canon comment; N5 rollback ghenCool = old 3 : 1. N2 (refund shows as +chips) and N6 (the recording cannot real-tap the talk dialog's tab: its buttons report no client rect at that moment; the row runs through talk(i), the card's own function) = notes.
+- Tests on 6e64445f: pace-all ALL PASS 32 (×4 stable), coop-e2e 143/143, one-core PASS, net-build PASS; quickcheck on 3942eafe: app PASS (open, old save, perf parity), core gates = only the known LIVE G4 fails; re-run on 6e64445f in progress.
+- Videos (re-recorded, same URLs): Fold part 1 «Tiến bộ 0/5 → 2/5», part 2 Oán hận 85 → Oán sâu, part 3 hậu lễ refused (nothing paid); iPad part 3 accepted (oán 85 → 60, Bạc −60, Danh −1).
+- Rolling-over note: this worker is near its context budget; if more rounds are needed the COORDINATOR opens the successor (TODO = whatever the re-judge of 6e64445f lists).
+
 ## Done by #2
 1. Merged LIVE 3af7896e (conflicts only in built index.html / sw.js → rebuilt).
 2. Video script fixed (dev/test/pace-all-video.js), 3 parts, all real taps in the page (page.evaluate clicks):
