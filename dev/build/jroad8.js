@@ -86,6 +86,8 @@ const PLACE_NOTE_RE=/\bcung\b|Hoàng (hậu|thượng)|Thái (hậu|y)\b|\b(Phi|
 function placeNoteOk(sp){try{if(!sp||road8()!=="kc")return true;const k=String(sp.kind||"");const t=String((sp.line||"")+" "+(sp.text||"")).replace(/<[^>]+>/g,"");
  /* never at home, whoever acts: the palace tai-mắt feed (tin), lật thẻ (flip), the stay-filler of a new buổi (close) */
  if(k==="tin"||k==="flip"||(k==="close"&&/vẫn ở .*\.\s*(Không gặp ai|Ở đây (có|còn) \d+ người)\.?$/.test(t)))return false;
+ /* nor a palace person's summons / challenge / visit / xưng danh (the palace agents also run while one of her cards spends khắc) */
+ if(/cho gọi ngươi|thách đấu ngươi|Lời thách đấu|sai người sang|xưng danh|ghé chơi cung|Có khách đến chơi/.test(t))return false;
  if(window.__kcActing>0||sp.own){sp.own=1;return true}
  if(k==="know")return false;return !PLACE_NOTE_RE.test(t)}catch(e){return true}}
 window.placeNoteOk=placeNoteOk;
