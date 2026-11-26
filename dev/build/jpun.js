@@ -56,7 +56,7 @@ function punDay(){if(!S||S.dead)return;try{for(const v of (rivals||[]))if(v&&v.a
  if(S.out&&S.coldPend&&coldStayOk(S)){const P=S.coldPend;S.coldPend=null;restore(P.full,P.why)}else if(!S.out)S.coldPend=null}catch(e){console.error("punDay",e)}}
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{punDay()}catch(e){console.error("punDay",e)}return r}})();
 /* an NPC leaves lãnh cung (every NPC release road): one rank below the rank she held when she went in, never Đáp ứng from any height */
-function coldFree(v){v.out=false;v.rank=Math.max(0,Math.min(6,(v.rank|0)-1));v.coldWk=null;return v.rank}
+function coldFree(v){v.out=false;v.rank=BAL.pun.npcOneBelow?Math.max(0,Math.min(6,(v.rank|0)-1)):0/* PENDING OWNER (law 16): false = the old rule, an NPC always comes back as Đáp ứng */;v.coldWk=null;return v.rank}
 /* WHY an ally pardons her (Hoàng hậu «Ân xá», law 1 same words for an NPC): her standing with the one who pardons, read from the one relation core */
 function punAllyWhy(a,p){let n=0;try{n=Math.round(aff(a,p))}catch(e){}return `nàng quý ${p===S?"ngươi":p.name} (thiện cảm ${n})`}
 /* ONE RANK: the seat cap never pushes the punished one further (jseat settle). While she sits on the rank she was punished to, the settle
