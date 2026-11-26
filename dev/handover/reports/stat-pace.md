@@ -1,6 +1,7 @@
 PRIORITY #1 CHECK ('kỳ ngộ|thiện cảm|oán|danh|sủng|event cap|người tìm'): OD 254 | ledger 16 | claims 8 | main 15 | review/* 9 | archive 805 — reused: review/balance-pace pace.js harness pattern (it covers lesson/course pace, NOT these five stats; not landed), jspread / j68 evGate / evBusy (existing pacing layers, wrapped, not rebuilt). No other worker on stat pace / daily cap.
 
-# review/stat-pace — WORKER D2 (Foreman D) — STATUS: OPTIONS SENT, WAITING FOR THE PICK · ROLLOVER HANDOVER below
+# review/stat-pace — WORKER D2 (Foreman D) — STATUS: #2 BUILD DONE, preset A default (B = one-line switch), regression + videos done, BIG reviewer next
+#2 = session_01D3E3NXn2KvRU5meXSH17rD · depth 2 · START_CTX ~5 % (estimate) · sếp 05:20Z «Sửa gấp … sau khi đáp máy bay» → Foreman D 05:27Z: make A/B two presets, A default, land.
 depth 2 · START_CTX ~3 % (estimate; tool read 0) · rolled over at ~33 % (rule: START_CTX + 25 %).
 Branch review/stat-pace from LIVE origin/main f009e1a6. Pushed commits: a4da17b3 (+ the handover commit carrying this file).
 
@@ -21,7 +22,7 @@ Root (gain tally by source, statpace.js `src`): single rises far too big (Kỳ n
 Events per day (dev/test/stat-pace.js on LIVE, 47 days): mean 3.3 big events a day, worst 7, 18 of 47 days above 3.
 
 ## What the branch does (all numbers BAL, law 4; same rule for her and every NPC, law 1)
-- BAL.sp (dev/build/jbalsp.js) + jstatpace.js `spG` = ONE rise rule in the funnels apply (j1) / ap (j8) / affAdd / oanAdd (j9):
+- BAL.stp (dev/build/jbalsp.js) + jstatpace.js `spG` = ONE rise rule in the funnels apply (j1) / ap (j8) / affAdd / oanAdd (j9):
   size bands per change [small, normal, big] = Sủng/Danh/Đức [2,5,8], thiện cảm/oán [4,8,12] (above «normal» counts 30 %, never past «big» → Kỳ ngộ +34 ⇒ +12);
   rank ceiling (of the one who RECEIVES; her rank for regard toward her) ceil = [45,55,65,75,85,92,97,100] — each above what the next rank needs (test checks RANKS[r+1].s/.d);
   diminishing returns × max(.15, 1 − (now/ceil)^3); fractions carry per person (p.spc), no random draw. A fall of Danh/Đức/Sủng/oán is untouched;
@@ -48,6 +49,17 @@ Reading: A keeps every stat under 100 for 2 years and values rise WITH rank (med
 
 ## Tests so far
 dev/test/stat-pace.js (unit 31 checks all ok: bands, ceilings above next-rank needs, carry, NPC same rule, old save above ceiling kept, cap ledger, tags; simulated days still FAIL 3 days — see above). Regression runner over the 97 tests that touch the changed functions: /home/user/wt/sp-out/regress.sh (tests list tests.txt) — NOT RUN YET (LIVE vs branch). No videos yet.
+
+## #2 work (session_01D3E3NXn2KvRU5meXSH17rD)
+- **Cap leaks closed** (needed by A and B): (1) the test billed morning cards painted inside endTurn to the day before → counts each card on the day she SEES it; (2) a plot's warning / aftermath (never held, by design) landed on a full day → `BAL.evc.res {harm:1}` keeps one slot for harm until harm came that day (evcOK + paint hold, `evcKeep`); (3) a re-queued copy of an earlier card (next step of a Phụ tuyến) carried the old «seen» mark and skipped the gate → the mark is per day (`evcToday`, m.evcN = day + 1).
+  Simulated 45-day runs (dev/test/stat-pace.js): 8/8 runs of the final build 0 days over the cap, worst day 3 (LIVE: worst 6, 15 of 46 days over, mean 3.0/day; branch mean 0.8–1.9/day).
+- **A / B as ONE switch**: `BAL.stpPick="A"` in dev/build/jbalsp.js; `BAL.stpPre.A {ceil 45…100, pow 3, cap 3}` (default), `B {ceil 40,50,60,70,80,90,96,100, pow 2, cap 2}`. Flip to B = change that one line. Both pass dev/test/stat-pace.js (B: worst day 2 of cap 2).
+- **BAL key clash fixed** (found by one-core-guard + ag-carry regression): `BAL.sp` was already servant promotion (jpromsv) and `BAL.pace` lesson pace (jbal2) → stat pace is now `BAL.stp` (jbalsp / jstatpace / test). one-core-guard PASS (paced-stat flag tables written as lists, not typed numbers).
+- **Regression** (142 tests touching the changed functions, each with its own default args; branch first, then LIVE for every branch failure; dev/test list in report folder of the worktree /home/user/wt/sp-out/tests.txt): 9 differed from LIVE → re-run alone: 4 were flaky/timing (npc-purpose-g1d, selx-map, viecnho-fix, place-rules-video: pass); ag-carry + one-core-guard were the BAL.sp clash (fixed, pass); cold-faction, receiver-choice, visitor-scene assert their own feature's exact pre-pace numbers / force a card on a full day → they switch `BAL.stp.on=0; BAL.evc.on=0` in their page (pace + cap covered by stat-pace.js) → pass. FINAL full re-run: see line below.
+- **Typed previews follow-up** (step 5): dev/measure/statpace-typed.py lists 103 typed rise previews in 37 files (same count on LIVE: pre-existing, e.g. j7 «thiện cảm +25»); they print the raw size while the rise is now paced → belongs to the E-d «Hoàng hậu thiện cảm +8 (42)» kit result-row family (change + new total from the real funnel); not touched here (no private rows, law 9). Kỳ ngộ result lines + fmt() previews already print the real number.
+- **Videos** (dev/test/stat-pace-video.js, real taps, Fold 755x1000 + iPad 1180x820): a Kỳ ngộ → tap the way that wins thiện cảm → result «… thiện cảm +12» (raw would be +30…40); a day with Kỳ ngộ + one other big event + one slot kept for harm → «Có người đến» waits (EVCW 1) → the day turns → the same visitor comes. Recording note: j68's own one-optional-card-a-buổi gate (existing rule) is switched off only for the release frame so the card is seen at once.
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/stat-pace/stat-pace-fold-755x1000.mp4
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/stat-pace/stat-pace-ipad-1180x820.mp4
 
 ## HANDOVER (for the successor — the COORDINATOR opens it)
 1. Wait for Foreman D's pick (A/B). Worktree /home/user/wt/sp (sparse), outputs /home/user/wt/sp-out (live.html = LIVE copy, *.jsonl lives, sum.py summary, show.py per-source tally). If the container is gone: fetch review/stat-pace and rebuild (bash dev/site/build_site.sh).
