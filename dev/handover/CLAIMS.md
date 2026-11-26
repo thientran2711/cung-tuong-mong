@@ -498,4 +498,4 @@ KK43 kit keeper (g4-baseline fix + dead-close family + K-PICKER-FIT…) | review
 C3-SEALS cl+cy | assets CDN (+ review/c3-seals later) | session_01PEhRbwHhxovHLfNUUVgQcz | RUNNING | 2026-11-26T13:22Z (W1e, Foreman C; continues C3-SEALS line after W1d)
 | D5 mg-trim #4 (opus; land rv-PASS route review/mg-trim-r6 543ca579 + LIVE merge; successor of #3 session_01D3E3NYZ4jThrhjTN2SsGHJ) | review/mg-trim-r6 | FOREMAN D session_01D3E3NaM9SCxxy6LNzERgRj | session_01D3E3NZkNAuq569W3GDToSh | RUNNING | 26/11 13:25Z |
 J5c act-merge khuê các real taps | review/act-merge-J5 | session_01V1ZZH3zYGGD3jbpHJzH5p3 | RUNNING | 2026-11-26T13:27Z (MAIN 159)
-| D-HELP-HOUSEMATE (law-1 gap; MAIN 159 «FOR D: help-housemate» = YES 12:55Z) | review/help-housemate | FOREMAN D session_01D3E3NaM9SCxxy6LNzERgRj | (opening) | RUNNING | 26/11 13:34Z |
+| D-HELP-HOUSEMATE (law-1 gap; MAIN 159 «FOR D: help-housemate» = YES 12:55Z) | review/help-housemate | FOREMAN D session_01D3E3NaM9SCxxy6LNzERgRj | session_01D3E3NZiSpuiy15v3s1c6wU | RUNNING | 26/11 13:34Z |
