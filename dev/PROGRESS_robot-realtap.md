@@ -590,3 +590,56 @@ NOTES: N1 RT_TEST_OWNCLOSE fixture (line ~ «RT_TEST_OWNCLOSE && started»): mak
    window.__rtLay = lay and BARE_CHECK takes own === true → window.__rtLay. Optional N3 (dress board read slot count / «hợp đề»), N4 (tho board 0 moves).
 Proof needed: Fold 755x1000 + iPad 1180x820 (seeds that live past b1: Fold origin=pf road=pt_su bot=sens seed=43, iPad origin=pf road=pt_su bot=sens seed=61, Fold bot=speed
 seed=21), lint OK, rt-bare-unit, 0 .click()/dispatchEvent; rerun RT_TEST_SKIPLAYER (plain/cover/css), RT_TEST_NOEXIT+RT_TEST_LATE, RT_TEST_OWNCLOSE own/dead once (no regressions).
+
+## HARNESS FIXER #12 (11/26/2026, worker of F #24; START_CTX ~5 %) — BIG #12 FAIL 6677dd13 (report bf5e865a) fixed on top of a64d799b
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | main dev/test/robot-rt* (old copy) | review/robot-realtap 8ea10d7e PASS → 6677dd13 FAIL by BIG #12 (report bf5e865a) → a64d799b handover of FIXER #11 | claims: FIXER #11 rolled, this job is its successor.
+Tests: LIVE origin/main f573dc94 (fetched fresh; build cc68dcfd2b1b) by git archive, served 127.0.0.1:8851, RT_PIN=0 RT_NOSHOT=1 (RELOAD+DRIFT with the pin on), harness from a git worktree of this tip.
+21. BLOCKING 1 — NIGHT CARD STALL (SCAN «no hit button → other layer» fallback). For a skip layer the fallback was skipped, so the game's kitNewDay night card
+   (.kne.kne-beat in host #dawn) never let the robot see button.kmend «Tiếp theo» (kitSceneEnd appends it to #dawn OUTSIDE .kne) → 20–25 skip taps → NO-EXIT → reload.
+   Rule now (rechecked every SCAN): a real hit button beats skip taps when it is (a) in the skip layer's HOST tree (its layer encloses the skip layer: #dawn around
+   .kne) or (b) NEW since this skip layer came up (window.__rtSkipBase = the hit buttons at its first scan, keyed by label + spot so a page re-render is not «new»).
+   Old page buttons beside a .kscn scene (tab bar) still do not pull the scan off the scene. Self-test RT_TEST_KNE=<buổi> (the game's own window.kitNewDay({host:#dawn,
+   night:{k:'lonely'}, …})): Fold pf/pt_su sens 43 → {closedAfterS 7.3, by «#dawn «Tiếp theo»», skipTaps 1, noExit 0, unstick 0} · iPad pf/pt_su sens 61 → {1.5 s, «#dawn
+   «Tiếp theo»», skipTaps 1, noExit 0, unstick 0} · Fold speed 21 → {11.8 s, same}. (6677dd13: 63–64 s, NO-EXIT + reload — BIG #12.)
+22. BLOCKING 2 — SKIP TAPS HID A COVERED BUTTON. ONE rule in SCAN, sc.skipFree: skip taps are the way only when the skip layer has NO button a person could tap:
+   none hit, none clipped below the fold, none of ITS OWN buttons covered by an element outside the button's layer (probe cvOut). A button under the layer's OWN
+   surface (veil of a #kdaytc-like card) is not a button a person sees (keeps RT_TEST_SKIPLAYER). A covered button → the DEAD BUTTON check (now one function
+   deadCheck(): as before for layers with hit buttons, and for a layer with NO hit button whose own buttons are covered from outside) + the normal «no way out» path.
+   The NO-EXIT reason says «no reachable button (N there, none can be tapped: «Tiếp» under div#…)» when the layer has buttons, «no button at all» only when it has none.
+   Self-test RT_TEST_SKIPCOV=<buổi> RT_TEST_SKIPCOV_MODE=steady|leave|anim|mix-steady|mix-leave|mix-anim (role=dialog «Chạm để bỏ qua» layer, «Tiếp» under a separate
+   fixed div#rtTestSc; mix-* adds a live «Xem thêm»):
+   steady Fold 43 / Fold 21 / iPad 61 (×2) · leave Fold 43 / Fold 21 / iPad 61 · anim Fold 43 / Fold 21 / iPad 61 → every one «DEAD BUTTON «Tiếp» cover div#rtTestSc»,
+   skipTaps 0, noExit 0. mix-steady Fold 21, mix-anim Fold 43, mix-leave iPad 61 → DEAD BUTTON «Tiếp» cover div#rtTestSc, then «Xem thêm» taken (closedBy more).
+23. N1 RT_TEST_OWNCLOSE fixture is a full-screen [role=dialog] (no .dlg, which the game caps at 470 px): own → Fold 43 {closeOwnLayer 1, noEffect 0, «Đóng» 8 s},
+   Fold 21 {1, 0, 12 s}, iPad 61 {1, 0, 9 s}; dead → Fold 21 {noEffect 1}, iPad 61 {noEffect 1}.
+   N2 the skip tap passes own=true → realtap BARE_CHECK takes window.__rtLay (the element SCAN chose), not document.querySelector(name); a selector string still works.
+24. FAMILY SCAN (law 11) — every place that decides «skip layer vs button»:
+   | place | before | after |
+   | SCAN fallback (no hit button → layer of another hit button) | skipped for every skip layer | host-tree / new hit button beats skip (21) |
+   | SCAN tapSkip | layer kind only | + skipFree / skipWin (the one rule) |
+   | main loop skip-tap block | no hit and no clipped button (covered = «none») | sc.skipFree |
+   | NO-EXIT exemption while skip taps run | any tapSkip layer | only while sc.skipFree |
+   | NO-EXIT reason text | «no button at all» always | «no reachable button (…)» when the layer has buttons |
+   | no-hit backdrop rule | !tapSkip | !skipFree |
+   | DEAD BUTTON check | only when some button was hit | deadCheck() also for no-hit layers with own covered buttons |
+   | choose() skipWay (3 sites) / areaFirst | — | unchanged: reached only after cardWay (any live non-exit option first) and on a round whose dead check already ran |
+   | realtap BARE_CHECK own | querySelector(name) | the scanned element (N2) |
+   | robot-rt-coop.js | uses Seat() of robot-rt.js | same code, nothing separate |
+   Found on the way: the first cut of skipFree counted PAGE buttons covered by a full-screen non-LAYER card (the big-panel rule adds them) → RT_TEST_SKIPLAYER took
+   150–235 s with 23–56 false DEAD BUTTONs; fixed (only the layer's own buttons count; deadCheck(sc, ownOnly)) → plain Fold 21 7.9 s / iPad 61 8.4 s, cover iPad 61
+   8.3 s, css Fold 43 7.7 s / Fold 21 8.9 + 9.9 s, noWayOut 0, NO-EXIT 0, dead 0.
+REGRESSION (old RT_TEST_* modes, this tip): B1 OWNCLOSE above ✓ · B2 RT_TEST_QUOTA=2 RT_TEST_RELOAD=8 cp=5 slice=30: Fold speed 21 + iPad pf 61 «SAVE REWIND … from b8 to
+   the stored b2 (6 buổi lost)» + «SAVE STALE stored b2 live b25 … QuotaExceededError» ✓ · LATE (RT_TEST_NOEXIT=2 RT_TEST_LATE=40000): Fold 21 33071 ms, iPad 61 32478 ms
+   «LATE BUTTON … «Ta biết rồi»» ✓ · SKIPLAYER above ✓ · DRESS: Fold 43 placed 4 / 83 s; iPad 61 placed 0, 4, 3 (3 runs; control a64d799b iPad 4, 4) — the iPad 0 is the
+   known N3 (tiles picked at random, «Ra mắt» after 16 looks), not this change · RELOAD+DRIFT (pin on, RT_TEST_RELOAD=3 RT_TEST_DRIFT=:8851): Fold 43 + iPad 61 «BUILD PIN:
+   unstick reload — the tab was on :8851, back to the pinned :8914 (carrying 5 localStorage keys …)», pinReturn 1 ✓. robot-lint OK · rt-bare-unit 20/20 · 0 new
+   .click( / dispatchEvent (fixture listeners are their own test layers, tapped for real).
+LIVE slices (no test hooks, game = origin/main f573dc94, slice 12, two copies each): Fold speed 21 a/b 12/12 buổi · Fold pf/pt_su sens 43 a/b 12/12 · iPad pf/pt_su sens 61
+   a/b 12/12 · iPad cautious 72 a 12, b «Ban hoa» at buổi 1 → jsClicks 0, dead 0, NO-EXIT 0, stuck 0 in all 8; skip taps 1–7 per slice (.kscn / .kmov / #kdaytc), one
+   game «late button «Ta biết rồi» 11.8 s after .kmov» (Fold 43a, real late button, for MAIN).
+Note: on the local serve a «co» board stayed «in play» 6 min with 0 moves (/dev/vendor/pixi-8.5.2.min.js 404 locally) — local-serve artefact, judge on github.io.
+
+## HANDOVER — HARNESS FIXER #12 (11/26/2026)
+State: review/robot-realtap tip = this commit (items 21–24 + proofs above) → ONE re-review 6677dd13..tip for BIG #13 (recipe: RT_TEST_KNE=2 Fold pf/pt_su sens 43 + iPad pf 61
+→ «#dawn «Tiếp theo»» ≤ 15 s, NO-EXIT 0; RT_TEST_SKIPCOV=2 MODE steady|leave|anim on both devices → DEAD BUTTON «Tiếp» cover div#rtTestSc; mix-* still DEAD; RT_TEST_SKIPLAYER
+plain/cover/css ≤ 10 s). Seeds die «Ban hoa» at buổi 1 now and then: run 2 copies. Open (not blocking): N3 dress board reads no theme / slot count; N4 tho board 0 moves.
