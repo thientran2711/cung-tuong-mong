@@ -1,0 +1,9 @@
+# R6-lazy-4 (Fold 755x1000, bot=sens, seed 987981584, pf/pt_tang) — end-of-life notes — COUNTED
+Ending **Lãnh cung — «Tuổi xuân qua đi»** (natural: «sống cô quạnh nơi thâm cung»), age 40, year 23, rank 0, **3453 buổi** (the longest life of this unit), 0 JS clicks, 0 dead buttons, 0 stuck episodes. robot-audit VALID (game-imposed ending). From the result JSON + moment log; I did not play it by eye: no score table.
+Builds / harness: github.io LIVE only; started on Build 4763d410aa0d (≈ 19:55Z), the site moved to 0dc642a71578, 13f84c70f2a3 (21:53Z) and c039fbea2394 while it ran (page reloads at resumes); harness b4b181f8 → 8dc395ba (resume at buổi 2395) → 4d7a22c6 (resume at buổi 3110), same life, saves kept.
+## Fix-family evidence
+All 34 «Sang ngày mới» no-turn rows (33 × Q=1 «Tin trong cung buổi này», 1 × Q=2 «Lịch tháng»/«Tin trong cung buổi này») sit in year 3 (turns 22–33), i.e. on the older Build; from year 4 (≈ buổi 300) to the end at buổi 3453 NO softlock, stuck episode or no-button dialog was logged — including after Build 13f84c70f2a3 (≈ buổi 1000). Consistent with R6-lazy-1 (0 softlocks on 13f84c70f2a3).
+## Bugs / notes
+1. GAME (older Build, year 3): «Sang ngày mới» no-turn softlock ×34 (see above).
+2. HARNESS (blocked by the guard, not a game bug): area tap would have landed on a button that appeared under the point: «Môn kế tiếp» (exam), «j59sz», «Dò la Đáp ứng Phùng Vân Nhi».
+3. DESIGN (player review): rank 2 → 0 on «Tiền truyện · Công chúa Phù Tang hòa thân», back to 2 at year 3 (buổi 265) and then 0 for the remaining ~20 years; 486 offers seen, 38 picked; the life ends with 17 uneventful years as a Lãnh cung resident (age 23-40): a lazy player has nothing to do for hours (BORED), the game does not close the life earlier (cf. owner 25/11 07:15Z «a life may end with a story closure»).
