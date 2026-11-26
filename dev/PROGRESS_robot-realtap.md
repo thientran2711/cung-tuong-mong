@@ -554,3 +554,18 @@ Harness only, no game change; 0 .click()/dispatchEvent in play paths (git grep: 
    Found on the way (JOB 17 family): the night beat .kne-beat over animated page buttons got «no free point» (BARE_CHECK refused every point) → NO-EXIT → reload.
    The skip tap now asks BARE_CHECK for a point ON the layer (its own top element, never a button; what lies under it cannot take the tap): natural Fold speed 21 /
    iPad pf 61 8 buổi: NO-EXIT 0, «SKIP TAP #kdaytc tap», bareBlocked 0. rt-bare-unit 20/20 (+ I/J), lint OK, 0 JS clicks.
+19. JOB 19 BUILD PIN on every reload (F #24, FOREMAN E 17:02Z/17:23Z: E-S5 lover-4 iPad b1202 / greedy-5 Fold b2222 «BUILD MISMATCH at unstick reload»).
+   Root (two parts): (a) the unstick (and pre-life stuck) reload reloaded whatever URL the tab held; (b) two lives of one build started together raced on
+   rt-serve-build.sh «git worktree add» → one exited 1 → that life ran unpinned on LIVE github.io, and a LIVE update later hard-stopped it (reproduced here: Fold
+   «rt-serve-build.sh exited 1 for 4eb0cbfc91b0 — no pin»). Fix (law 11, every page.goto / reload scanned: boot goto = pinned URL0 · resume reload → boot → pinned ·
+   crash → resume · unstick + pre-life reload → reloadPinned): reloadPinned() re-checks / re-serves the life's build and, when the tab is elsewhere, goes back to it
+   carrying localStorage (the save lives per origin); rt-serve-build.sh makes the checkout under a per-directory flock; pinUrl() waits ≤ 60 s for a twin's server
+   when the script exits ≠ 2. Self-test RT_TEST_RELOAD=3 RT_TEST_DRIFT=<other build url> (tab sent to build 5ab5b80e406e on :8999 before the reload): new Fold
+   pf/pt_su sens 43 + iPad pf 61 «BUILD PIN: unstick reload — the tab was on :8999, back to the pinned :8767 (carrying … keys)», life goes on; old aece1ff5 iPad
+   «BUILD MISMATCH at unstick reload … page is 1dcb373e+ (5ab5b80e406e)» hard stop.
+20. JOB 18 dress board «Phối đồ» (E-S4 iPad «Đề: Cổ phong» 15 min). RT_TEST_DRESS=<buổi> opens the game's own tsDressGame with a few fitting pieces.
+   GAME/KIT BUG (for MAIN): the big red primary IS «Ra mắt» (#tsdgo, jts.js tsDressGame) — the KIT §13.x NO-TEXT pass (j82 kg82Signs) turns it into a bare «●»
+   because the dress screen is a pre-play screen that does not set KG82.setup=1 (j82: «KG82.setup=1 marks a screen that is NOT the running board (dress / pre-play …):
+   its buttons keep their words»); the item tiles keep their words only by luck of markup. Shot: iPad dress-open (red button, «●», «Bỏ qua» right). The tap itself
+   works (presents). HARNESS part: the board was played blind — Fold presented with 0 pieces placed (tiles tapped, «Đặt vào …» never). Now a pick-then-apply rule:
+   an «Đặt vào …» on screen is taken first; «Ra mắt» waits until 4 pieces went in or 16 were looked at. Fold pf 43 / iPad pf 61: placed 4/4, presented, 30 / 37 s.

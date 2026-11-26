@@ -17,6 +17,9 @@ if [ "${1:-}" = "--b" ]; then # --b <build id> <port>: the main commit whose bui
   set -- "$SHA" "$@"
 fi
 SHA="${1:?sha}"; PORT="${2:?port}"; DIR="${3:-/home/user/wt/build-$SHA}"
+# JOB 19 (FIXER #11): two lives of the same build started together raced on «git worktree add» (one exits 1 → that life ran unpinned on LIVE github.io,
+# then a LIVE update hard-stopped it «BUILD MISMATCH at unstick reload»). The checkout is made under a per-directory lock; the loser finds it done.
+exec 9>"$DIR.lock"; flock 9
 if [ ! -e "$DIR/index.html" ]; then
   ( flock /home/user/wt/fetch.lock git -C "$REPO" fetch -q --depth=30 origin main ) || true
   git -C "$REPO" cat-file -e "$SHA^{commit}" 2>/dev/null || ( flock /home/user/wt/fetch.lock git -C "$REPO" fetch -q --depth=1 origin "$SHA" )
@@ -24,5 +27,6 @@ if [ ! -e "$DIR/index.html" ]; then
   git -C "$DIR" sparse-checkout set --no-cone '/*.html' '/*.js' '/*.json' '/*.webmanifest' '/coop/'
   git -C "$DIR" checkout -q
 fi
+flock -u 9
 cd "$DIR"; echo "serving $(git log --oneline -1 | cut -c1-60) on http://127.0.0.1:$PORT/"
 exec python3 -m http.server "$PORT" --bind 127.0.0.1
