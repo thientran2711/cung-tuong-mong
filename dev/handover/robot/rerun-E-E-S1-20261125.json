@@ -616,13 +616,166 @@
     "review/rerun-E-S1-E-S1-R1-lover-2-928007489-review.md"
    ],
    "bugs": []
+  },
+  {
+   "id": "E-S1-R1-skilled-1-795064746",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "skilled",
+   "botHarness": "sens",
+   "kiep": 1,
+   "seed": 795064746,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "d417d3bb → b4b181f8 → 496b6b66 → 8dc395ba"
+   },
+   "live": "Build 79050fbf5464 → 13f84c70f2a3 (from buổi 1182)",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Lao phổi nguy kịch, không qua khỏi",
+   "death": true,
+   "age": 35,
+   "year": 18,
+   "rank": 0,
+   "buoi": 2813,
+   "steps": 37820,
+   "taps": 1221,
+   "exitPick": null,
+   "bugCounts": {
+    "game": 15,
+    "stuck": 6,
+    "harness": 1
+   },
+   "valid": "VALID",
+   "validWhy": "death (Lao phổi nguy kịch)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-skilled-1-795064746-moments.md",
+    "review/rerun-E-S1-E-S1-R1-skilled-1-795064746-review.md"
+   ],
+   "bugs": [
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+     "n": 76
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 4 ngườ»",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Công · Nữ công: các lối / Cầm / Xem quan hệ của / Xem quan hệ của / Cầm: các lối / Lịch tháng)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 1 · Sơ nhập cung môn / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ»",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Tin báo / Chương 2 · Sơ thừa ân sủng / Tin chờ người sai đi / Hoàng thượng / Hoàng thượng / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ»",
+     "n": 3
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Tin báo / Ngân Hạnh / Ngân Hạnh / Tin chờ người sai đi / Lịch tháng / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Xem tinTốnkhôngĐượckhông / Để sauTốnkhôngĐượckhông",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Để ta xemTốnkhôngĐượckhô / Để sauTốnkhôngĐượckhông",
+     "n": 1
+    },
+    {
+     "type": "stuck",
+     "msg": "no progress 15 min on .dlg «Tin báo»",
+     "n": 1
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+     "n": 6
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chứng cứ về Hoàng hậu Khương Ngưng Hoa / Cầm / Tin báo / Kỳ / Lịch tháng / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chứng cứ về Thường tại Triệu Tinh Diêu / Tin chờ người sai đi / Xét phẩm cuối tháng · Thường tại / Chứng cứ về Hoàng hậu Khương Ngưng Hoa / Tin báo / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on .mapsc «»",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=5: Tin báo / Xét phẩm cuối tháng · Thường tại / Xét phẩm cuối tháng · Thường tại / Lịch tháng / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=5: Tin báo / Đã biết về Phế phi Tống Tiểu Điệp / Chứng cứ về Phế phi Tống Tiểu Điệp / Chứng cứ về Hiền thường tại Nhâm Mặc Lan / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Nhận»",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Mục lục / Tin báo / Y thuật & điều hương / Công · Nữ công / Công · Nữ công / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=4: Tin báo / Công · Nữ công / Đức / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=5: Tin báo / Lịch tháng / Chứng cứ về Phế phi Tống Tiểu Điệp / Chứng cứ về Ý phi Trình Linh Vận / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=12: Kỳ / Tin báo / Tin chờ người sai đi / Lịch tháng / Đã biết về Phế phi Tống Tiểu Điệp / Công · Nữ công: các lối)",
+     "n": 1
+    }
+   ]
   }
  ],
  "parked": [
   {
    "id": "E-S1-R1-skilled-1-795064746",
    "dev": "fold",
-   "status": "RERUN on LIVE 79050fbf5464 (old build STUCK-gamebug «Kính sự phòng báo tin» not seen again, buổi 486+)"
+   "status": "DONE (VALID, death age 35, buổi 2813) on LIVE 79050fbf5464→13f84c70f2a3: «Kính sự phòng báo tin» not seen again"
   },
   {
    "id": "E-S1-R1-greedy-1-372282412",
