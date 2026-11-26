@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"11c08eef+","t":"2026-11-26T10:25Z","c":"act-merge J3: one door per feature every day (a lone way shows under its door), door Thành row names the ways, the way runs in its own task…","b":"a755bff722fd","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"c18fe3a5+","t":"2026-11-26T10:09Z","c":"act-merge J1 test: pop-up path with the person view off; talked mark read at the person's current index; diagnostics","b":"63e337c38ca9","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -77013,60 +77013,6 @@ function as2NgheMark(){if(!S)return;S.adDoor=S.adDoor||{};S.adDoor.__nghe=as2Ngh
 (function(){const t0=talk;talk=function(oi){let a=null;try{const p=S&&curPeople()[popIdx];a=p&&talkOpts(p)[oi]}catch(e){}if(a&&a.n==="Nghe lén câu chuyện"&&a.lock)return;
  const r=t0.apply(this,arguments);try{if(a&&a.n==="Nghe lén câu chuyện")as2NgheMark()}catch(e){}return r}})();
 (function(){const a0=adHapFire1;adHapFire1=function(h,k){const r=a0.apply(this,arguments);try{if(h&&h.id==="gossip"&&r)as2NgheMark()}catch(e){}return r}})();
-/* ================= ACT-MERGE J3 (owner 26/11 ~07:25Z + ~07:32Z, plan review/act-merge §4 row J3 = dup-report HANHSU_MERGE §3.2 H1–H16) =================
-   HÀNH SỰ 38 → 16: ONE FEATURE = ONE BUTTON. A true duplicate (one feature split into several cards) shows as ONE door card; the way is chosen
-   INSIDE through the kit option dialog (Q modal → kitOptFinal option cards). DISPLAY ONLY: the deck keeps every original card object, every way
-   runs the SAME act(i) as before (same khắc, cost, odds, wrappers, results, NPC parity: the NPCs use the same BAL.deck / AGC3BTN tables), so no
-   rule, outcome or number is lost or typed here (law 4). ONE ENGINE (J1 dev/build/jdoor.js): the rows are registered in DOOR (DOOR.add, kind «hs» = Hành sự, so DOOR.of(name,"hs") names the door; NPC keys AGC3DOOR unchanged), the door follows the jdoor DECK rule (deckFold: ≥2 ways dealt, a lone way stays bare) and opens the standard DOOR.card choice card.
-   ĐỂ RIÊNG (owner ~07:32Z «những cái cần để riêng thì vẫn cứ để riêng»): Điểm trang (H1), Hối lộ Kính sự phòng (H9 lật thẻ), Cầu tự (H10),
-   Trò chuyện với cung nữ (H12), Phát bạc cứu giúp (H13), Để ý nam nhân (H15), Giả mang thai (H16) — each a feature of its own.
-   Lãnh cung (S.out), the cung nữ road and khuê các keep their own decks here (act-merge J5). Co-op: display only, no shared state. */
-const HSD=[/* door key, door name, line, ways (card names) — H-number = HANHSU_MERGE §3.2 */
- {k:"nghi",h:"H2",n:"Nghỉ ngơi",t:"Nghỉ một lát, nghỉ dưỡng sức, hay dưỡng nhan.",m:[/^Nghỉ ngơi một lát$/,/^Nghỉ ngơi dưỡng sức$/,/^Dưỡng nhan$/]},
- {k:"caobenh",h:"H3",n:"Cáo bệnh",t:"Giả bệnh xin thương, hay đóng cửa tĩnh dưỡng.",m:[/^Giả bệnh$/,/^Xin rút thẻ bài, đóng cửa tĩnh dưỡng$/]},
- {k:"thinhan",h:"H4",n:"Thỉnh an",t:"Sang thỉnh an Thái hậu hay Hoàng hậu.",m:[/^Thỉnh an Thái hậu$/,/^Thỉnh an Hoàng hậu$/]},
- {k:"thaiy",h:"H5",n:"Bắt mạch, chữa bệnh",t:"Mời thái y tới cung hay tự sang Thái y viện; lúc lâm bệnh thì chữa bệnh.",m:[/^Mời thái y bắt mạch$/,/^Sang Thái y viện xin bắt mạch$/,/^Truyền thái y$/,/^Tự bốc thuốc$/,/^Tĩnh dưỡng$/]},
- {k:"soksp",h:"H6",n:"Xem sổ Kính sự phòng",t:"Lót tay thái giám, hay lén xem sổ.",m:[/^Xem sổ nguyệt sự$/,/^Xem lén sổ nguyệt sự$/]},
- {k:"docsach",h:"H7",n:"Đọc sách",t:"Đọc sách giải khuây, hay đọc binh thư sử sách.",m:[/^Đọc sách giải khuây$/,/^Đọc binh thư, sử sách$/]},
- {k:"tainghe",h:"H8",n:"Dâng tài nghệ",t:"Múa, đàn, cờ, vẽ: mỗi môn một đường.",m:[/^Múa trong yến tiệc$/,/^Kinh hồng vũ$/,/^Đánh cờ với Hoàng thượng$/,/^Đàn khúc Phượng cầu hoàng$/,/^Vẽ chân dung tặng Thái hậu$/]},
- {k:"taimat",h:"H11",n:"Tai mắt",t:"Sai cung nữ dò la, nghe ngóng chung, hay cài tai mắt.",m:[/^Sai cung nữ đi dò la$/,/^Nghe ngóng chung$/,/^Cài tai mắt$/]},
- {k:"roicung",h:"H14",n:"Rời cung",t:"Trốn, xuất gia, xin ban hôn, về quê; nhờ Thái hậu nói giúp trước khi xin.",m:[/^Nghĩ cách trốn khỏi cung$/,/^Dâng biểu xin xuất gia$/,/^Xin ban hôn cho /,/^Xin về quê phụng dưỡng cha mẹ$/,/^Nhờ Thái hậu nói giúp$/]},
- {k:"anthai",h:"(+)",n:"An thai",t:"Uống thuốc an thai, hay báo tin có thai.",m:[/^An thai$/,/^Báo tin có thai$/]}];
-const HSD_ART={};/* door name → the way whose act art the door shows (set at render) */
-function hsdOn(){try{return typeof tab!=="undefined"&&tab==="act"&&!!S&&!S.dead&&!S.out&&!S.kc&&!adSrv()}catch(e){return false}}
-function hsdOf(n){return HSD.find(d=>d.m.some(r=>r.test(n||"")))||null}
-function hsdWhy(a,dis){if(!dis)return"";let w="";try{w=cardWhy(a)}catch(e){}return w||(a.lock&&a.t)||"chưa làm được lúc này"}
-function hsdBuild(){if(!hsdOn())return;const P=$("panel");const G=P&&P.querySelector(".cards");if(!G)return;
- const cards=[...G.querySelectorAll(":scope > button.kcard[data-i]")];
- for(const d of HSD){const mem=cards.filter(b=>{const a=deck[+b.dataset.i];return a&&d.m.some(r=>r.test(a.n||""))});if(mem.length<2)continue;/* the ONE deck-door rule (jdoor deckFold, J5b): a door when ≥2 ways are dealt today (greyed ways show greyed inside, with their reason); a lone way stays its own card */
-  const W=mem.map(b=>({i:+b.dataset.i,dis:!!(b.disabled||b.classList.contains("kdis"))}));const ok=W.filter(w=>!w.dis);
-  const lead=deck[(ok[0]||W[0]).i];HSD_ART[d.n]=lead.n;
-  const ks=(ok.length?ok:W).map(w=>cardCost(deck[w.i]));
-  const o={n:d.n,t:d.t,k:Math.min(...ks),c:{},w:{},x:W.map(w=>String(deck[w.i].n).split(", ")[0]).join(" · ")/* the Thành row names the ways (short name: the part before a comma, the kit splits rows on commas) */,dom:lead.dom,lock:!ok.length,hsDoor:d.k};
-  /* odds chip: when EVERY usable way rolls, the door shows the best way's odds; a door with a sure way keeps the kit's sure look (odds cap) */
-  try{const R=ok.map(w=>deck[w.i]).filter(a=>a.o!=null&&a.o<100);if(ok.length&&R.length===ok.length)o.o=Math.max(...R.map(a=>a.o))}catch(e){}
-  const tp=document.createElement("template");tp.innerHTML=cardH(o,W[0].i).trim();const b=tp.content.querySelector("button");if(!b)continue;
-  b.removeAttribute("data-i");b.dataset.hsd=d.k;b.dataset.hsi=W.map(w=>w.i).join(",");b.dataset.hsx=W.map(w=>w.dis?0:1).join(",");
-  b.querySelectorAll("[data-kinfo]").forEach(e=>e.remove());if(!ok.length)b.disabled=true;
-  mem[0].before(b);mem.forEach(m=>m.remove())}}
-if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){try{if(HSD_ART[name])return k0.call(this,HSD_ART[name])}catch(e){}return k0.apply(this,arguments)}}
-(function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{hsdReg();hsdBuild()}catch(e){console.error("hsdBuild",e)}return r}})();
-/* the door: ONE kit option dialog, one option per way (its own khắc / cost / odds line), «Thôi» = the kit ✕ */
-function hsdOpt(a,why,i){const sp=String(a.x||"").split(/ · kèm: /);const ton=[`${cardCost(a)} khắc`];try{const c=fmt(a.c||{});if(c)ton.push(c)}catch(e){}
- let gain="";try{gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ")}catch(e){}const P=["tốn: "+ton.join(" · "),"thành: "+(gain||a.t||"")];if(sp[1])P.push("kèm: "+sp[1]);
- const rolled=a.o!=null&&a.o<100&&!a.lock;const o={n:a.n,x:P.join(" · "),go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("hsd act",e)}},0)}};/* the way runs in its OWN task, exactly like a tap on its old card: no dialog-choice context (j78 evidence «how», j85 deed, co-op pick text) wraps it */
- if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}o.x+=" · hỏng: "+(f||"không mất gì");try{o.p=optOdds(a)}catch(e){}}
- if(why)o.off={why};return o}
-function hsdReg(){try{if(window.DOOR&&DOOR.add&&!DOOR.byK("hs-nghi"))HSD.forEach(d=>DOOR.add({k:"hs-"+d.k,n:d.n,kinds:["hs"],re:new RegExp(d.m.map(r=>r.source).join("|")),h:d.t,hs:d.h}))}catch(e){}}
-function hsdOpen(b){if(!S||S.dead||Q.length)return;hsdReg();const d=HSD.find(x=>x.k===b.dataset.hsd);if(!d)return;const I=b.dataset.hsi.split(",").map(Number),X=b.dataset.hsx.split(",").map(Number);
- const rows=I.map((i,j)=>{const a=deck[i];if(!a)return null;const o=hsdOpt(a,hsdWhy(a,!X[j]),i);o.hsd=d.k;return o}).filter(Boolean);
- if(window.DOOR&&DOOR.card)DOOR.card(d.n,d.t,rows,null);else{rows.push({n:"Thôi"});Q.push({t:d.n,h:`<p>${d.t}</p>`,opts:rows});showModal()}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#panel button[data-hsd]");if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled)return;try{hsdOpen(b)}catch(x){console.error("hsdOpen",x)}},true);
-document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target.closest("#panel .kcard[disabled][data-hsd]");if(!b||typeof kpPop!=="function"||!S||S.dead)return;
- const I=b.dataset.hsi.split(",").map(Number);const rows=I.map(i=>{const a=deck[i];return a?`<span class="ef n">${a.n}: ${hsdWhy(a,1)}</span>`:""}).join("");
- window.__adGreyT=Date.now();window.__adGreyR=b.getBoundingClientRect();kpPop(b,`<div class="kpopt">${b.querySelector(".kan")?b.querySelector(".kan").textContent:""}</div><div class="kpopx">${rows}</div>`,{inside:true})}catch(x){}},true);
-/* the way's own act logs its own line (as when it was a card): the door dialog adds no «Door: way» line of its own */
-(function(){const l0=logChoice;logChoice=function(m){if(m&&m.opts&&m.opts.some(o=>o&&o.hsd))return;return l0.apply(this,arguments)}})();
 /* ================= jkc: TIỂU THƯ NGOÀI CUNG (owner 11/14 20:15Z; plan dev/OUTSIDE_PLAN.md, approved) =================
    A second road into the same life: on the identity card (and at every rebirth) she picks "Vào cung ngay" or
    "Ở nhà chờ tuyển tú". The home road: she is 18, at home in her father's house, from the first month of the game until the
@@ -97784,8 +97730,8 @@ window.doorOpen=doorOpen;
 PEND.door=pp=>{pp.i=doorIdx(pp);const p=curPeople()[pp.i];const r=DOOR.byK(pp.k);if(!p||!r||!S.visit)return null;let A;try{A=doorRaw(p)}catch(e){return null}
  const o=[];A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
   const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
-  let x="";try{x=optLine(a)}catch(e){}if(typeof r.tier==="function"){const w=r.tier(a);if(w)x=`${w}${x?" · "+x:""}`}/* a tiered door (nhẹ / vừa / nặng) names the tier first */
-  const row={n:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
+  let x="";try{x=optLine(a)}catch(e){}const tw=typeof r.tier==="function"?r.tier(a):"";/* KIT §7.1 (J0): a tier sits in the option TITLE «<việc> · nặng» */
+  const row={n:tw?`${a.n} · ${tw}`:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
  if(!o.length)return null;o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
  const w=doorWho(p);let who=null;try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
@@ -100632,7 +100578,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a755bff722fd";window.CTM_BUILD=BUILD;
+const BUILD="63e337c38ca9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
