@@ -50,3 +50,11 @@ PRIORITY #1 CHECK: F #18 05:56Z order | review/robot-realtap ff4a99a4 (F10 rende
 - Diff = 5 lines in robot-rt.js before play starts: TEST_HOOKS = env keys matching ^RT_(TEST_*|COLD)$ (not '' / '0') → R.harness.testHooks, merged after the ckpt resume (a ckpt's hooks survive a resume without env via Object.assign(R, ck.R)). No play-path change; robot-lint OK 0 findings.
 - Stamp run: RT_TEST_SKIP=99 Fold seed 601 slice 1 → results harness.testHooks = {RT_TEST_SKIP: '99'}.
 - Audit 41f6e99c: E-S1 resumed life (no hooks, ending «Ban hoa» game-imposed) → VALID; same JSON with testHooks {RT_COLD: '3'} → INVALID «test hooks used (RT_COLD=3)». F1 closed.
+
+# REVIEW robot-realtap c18e3d7d..89f5b956 (#rtoast) — BIG REVIEWER #8 for F #19, 26/11 ~08:05Z
+## VERDICT: PASS robot-realtap 89f5b956
+- Diff: ignoreCover gains /rtoast/; INFO's #rtoast closer counts option cards (.kfoc-b/.kopt/.opt) as blocked targets and taps the bare THÀNH/BẠI .seal first (skips .kalog/.kkem/.kitem/buttons). robot-lint OK; 0 non-mouse .click.
+- Game check: #rtoast is created in j19/j25/j42/j63 with onclick → remove «on» (j63's handler keeps KÈM as the pin); no other id/class contains «rtoast» (68 hits, all #rtoast) → the regex cannot match another layer.
+- No real dead button hidden (synthetic realtap probe, button under 4 covers): span.kitem in #rtoast → popup; div#rtoast.on → popup; span.kitem in #kfoo (any other layer) → DEAD BUTTON; a child with its own id inside #rtoast → DEAD BUTTON (conservative, not hidden). The ignored refusal does not tap the button; the INFO closer must close the toast first, and if it never closes, the stall / 150-tap / 15-min stuck rules still report it.
+- INFO closer: #rtoast.on (seal + kitem rows) over a .kfoc-b card → NEW returns the seal point (80,270), a real mouse tap closes it (on removed); OLD c18e3d7d returned null (the card was not counted as blocked) = the s9f gap.
+- Plain slices on 89f5b956: Fold seed 701 slice 8 = 76 taps 0 dead/0 stuck/0 bugs; iPad seed 702 = 48 taps, game-imposed «Ban hoa» b1, 0/0/0.
