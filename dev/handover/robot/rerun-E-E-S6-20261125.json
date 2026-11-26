@@ -22363,5 +22363,80 @@
   "row": "R6·speed·3:2150874768 (rerun on LIVE github.io, ipad)",
   "game": "github.io LIVE, GAME BUILD {6b5d3d05+, b7dcbbd06e03}; harness 2df8f5fa; ipad; one buổi, no resume",
   "audit": "VALID (game-imposed «Bị ban hoa, xuất cung» after picking «Cúi đầu chờ xét» (no exam, rated «Rất vững») at «Lễ ra mắt»; real taps, github.io) — COUNTED"
+ },
+ {
+  "job": {
+   "id": "R6-speed-1",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 702892102,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "6b5d3d05+",
+    "b": "b7dcbbd06e03",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 47,
+   "dlgScroll": 12,
+   "scrolls": 13,
+   "dlgClose": 28,
+   "infoTaps": 23,
+   "taps": 449
+  },
+  "life": {
+   "id": "Công chúa ở lại cố quốc",
+   "type": "death",
+   "fate": "Công chúa ở lại cố quốc",
+   "death": true,
+   "age": 19,
+   "year": 2,
+   "rank": 0,
+   "text": "Viên Thái Vi đi hòa thân thay nàng. Nàng ở lại cung Thiên hoàng ở Nại Lương, mười năm sau được gả cho một tộc trưởng phương tây. (Công chúa chờ hòa thân · Công chúa Phù Tang)",
+   "card": [
+    "Thưa: con xin đi, vì muôn dân Rất vững TỐN không ĐƯỢC hòa ướ",
+    "Xin để hoàng muội đi thay Rất vững TỐN Sức -5 ĐƯỢC có thể ở "
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang trước»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Lui»",
+    "page «Phòng của ta · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách Đại H»",
+    "page «Phòng của ta · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệViết chữ trên »",
+    ".dlg «Hạn hán, mất mùa» «Bớt chi dùng trong cungTốnkhôngĐượcĐức +1»",
+    ".dlg «Hạn hán, mất mùa» «Nói đỡ cả hai, đề nghị cùng bớtTốnSức -8·Danh -3Đư»",
+    "page «Phòng của ta · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách Đại H»",
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»",
+    ".dlg «Hòa ước» «Xin để hoàng muội đi thayRất vữngTốnSức -5Đượccó t»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 123,
+  "steps": 4041,
+  "status": [],
+  "t": {
+   "total": 1846802
+  },
+  "unit": "E-S6",
+  "row": "R6·speed·1:702892102 (rerun on LIVE github.io, ipad)",
+  "game": "github.io LIVE, GAME BUILD {6b5d3d05+, b7dcbbd06e03, t:2026-11-26T06:59Z}; harness 2df8f5fa; ipad; no resume",
+  "audit": "VALID (game-imposed story ending «Công chúa ở lại cố quốc» after «Hòa ước» → «Xin để hoàng muội đi thay» (non-exit option), age 19 year 2, real taps, github.io) — COUNTED"
  }
 ]
