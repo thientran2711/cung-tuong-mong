@@ -16,3 +16,4 @@ STATE at start: LIVE 53319e6f · ROLLBACK f573dc94. READY 23b0b3d3 (review/lc24-
 - 20:44Z MAIN 163: review/oan-pace 7c10f4c0 (RV pending, RV-162) replaces pace-all slot. B first. If oan-pace RV PASS before lc25-sp gates finish → rebuild slot as oan-pace + stat-pace on B; else land lc25-sp and stack oan-pace after (delta = oán/ghét pace only).
 - 20:56Z RV-162 PASS review/wording-gain-b573 e2d6f281 (SMALL, base f573dc94, dev/ only; rebuild index/sw at land; quickcheck perf PASS by RV). Queued with firstcard-3 after lc24-st (MAIN 163 places).
 - 20:57Z MAIN 163: RV-162 rolled → RV-163 session_01Rc5AsMzJjd5aqRkTRTAbkK (veil, goal-links, ob-verdict-3, place-close, dialog-order-r4, sideq-trim) + RV-163B session_01Rc5AsHo4hJGJQAnoeB8h8c (oan-pace, dress-fix, kit-g4-r3, map stack); both send PASS to LC25.
+- 21:07Z MAIN 163: oan-pace 7c10f4c0 RV FAIL; plan FIXED: land lc25-sp as staged; OAN-PACE-2 rebases on lc25-sp later. No slot swap.
