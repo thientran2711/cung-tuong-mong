@@ -43,7 +43,7 @@ function s7(){const f=file||process.env.CTM_S7;if(f&&fs.existsSync(f))return {sr
    ok(out.npc,`${tag} every NPC's totals equal`,eqR(pre.R,A.R).slice(0,6));ok(out.box,`${tag} ledger store totals equal (box ${A.box} records + stacks)`,eq(pre.B,A.B).slice(0,6))}
   /* (2) the bag grid + the two gift pickers */
   const ui=await p.evaluate(async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const big=Object.entries(invTotals(S)).sort((a,b)=>b[1]-a[1])[0];const it=IT[big[0]];
-   try{KINV.cur.tutrang=kinvCat(it.kd);localStorage.setItem('hclh-kinv-tutrang',kinvCat(it.kd))}catch(e){}while(Q.length)Q.shift();tab='inv';render();await w(400);
+   try{KINV_SUB='tui';KINV.cur.tutrang=kinvCat(it.kd);localStorage.setItem('hclh-kinv-tutrang',kinvCat(it.kd))}catch(e){}while(Q.length)Q.shift();tab='inv';render();await w(400);
    const tiles=[...document.querySelectorAll('#panel .kitem')];const t=tiles.find(x=>(x.getAttribute('title')||x.textContent||'').includes(it.n));
    const q=t?((t.querySelector('.kitq')||{}).textContent||''):'';const bag=document.querySelectorAll('#panel *').length;
    while(Q.length)Q.shift();closeModal();pushDil(mkP('giftto',{t:'emp'}),'Dâng quà');showModal();await w(400);const g1=document.querySelectorAll('#modal *').length;const g1t=document.querySelectorAll('#modal .kipc').length;
@@ -73,9 +73,9 @@ function s7(){const f=file||process.env.CTM_S7;if(f&&fs.existsSync(f))return {sr
    const df=[];for(const k of new Set(Object.keys(T0).concat(Object.keys(T1))))if((T0[k]||0)!==(T1[k]||0))df.push(k);return{df,b:[B0,boxCount()],n:S.inv.length,len:localStorage.getItem(SK(SLOT)).length}});
   out.reload=rl.df.length===0&&rl.b[0]===rl.b[1]&&rl.n<=200;
   if(!mut)ok(out.reload,`${tag} save → reload: totals + store equal, save ${pre.len} → ${rl.len} chars`,rl);
-  if(SHOTS&&!mut){fs.mkdirSync(SHOTS,{recursive:true});await p.evaluate(()=>{tab='inv';render()});await p.waitForTimeout(500);await p.screenshot({path:`${SHOTS}/bag-${vw}x${vh}.png`});
-   await p.evaluate(()=>{while(Q.length)Q.shift();closeModal();pushDil(mkP('giftto',{t:'emp'}),'Dâng quà');showModal()});await p.waitForTimeout(600);await p.screenshot({path:`${SHOTS}/giftto-${vw}x${vh}.png`});
-   await p.evaluate(()=>{while(Q.length)Q.shift();closeModal();const v=liveRivals(true)[0];pushDil(mkP('tsgiftpick',{v:v.id,k:'it'}),'Biếu quà');showModal()});await p.waitForTimeout(600);await p.screenshot({path:`${SHOTS}/tsgift-${vw}x${vh}.png`})}
+  if(SHOTS&&!mut){fs.mkdirSync(SHOTS,{recursive:true});await p.evaluate(()=>{document.querySelectorAll('#klife,.kroul,.kmov,#dawn').forEach(e=>e.remove());while(Q.length)Q.shift();try{closeModal()}catch(e){}try{KINV_SUB='tui';const bk=Object.entries(invTotals(S)).sort((a,b)=>b[1]-a[1])[0][0];KINV.cur.tutrang=kinvCat(itm(bk).kd)}catch(e){}tab='inv';render();document.querySelectorAll('.kres,.kresult').forEach(e=>e.remove())});await p.waitForTimeout(1500);await p.screenshot({path:`${SHOTS}/bag-${vw}x${vh}.png`});
+   await p.evaluate(()=>{while(Q.length)Q.shift();closeModal();tab='act';render();pushDil(mkP('giftto',{t:'emp'}),'Dâng quà');showModal();document.querySelectorAll('#klife,.kroul,.kmov,#dawn').forEach(e=>e.remove());const M=document.getElementById('modal');M.hidden=false;M.style.display='';/* shot only: a held-card wrapper keeps the dialog for the next tap */});await p.waitForTimeout(900);console.log('shot modal',await p.evaluate(()=>{const M=document.getElementById('modal');return [M.hidden,getComputedStyle(M).display,Q[0]&&Q[0].pid,M.querySelectorAll('.kipc').length]}));await p.screenshot({path:`${SHOTS}/giftto-${vw}x${vh}.png`});
+   await p.evaluate(()=>{while(Q.length)Q.shift();closeModal();const v=liveRivals(true)[0];pushDil(mkP('tsgiftpick',{v:v.id,k:'it'}),'Biếu quà');showModal();document.querySelectorAll('#klife,.kroul,.kmov,#dawn').forEach(e=>e.remove());const M=document.getElementById('modal');M.hidden=false;M.style.display='';/* shot only: a held-card wrapper keeps the dialog for the next tap */});await p.waitForTimeout(900);await p.screenshot({path:`${SHOTS}/tsgift-${vw}x${vh}.png`})}
   if(!mut)ok(errs.length===0,`${tag} no page errors`,errs.slice(0,4));
   await ctx.close();return out};
  for(const [w,h] of [[755,1000],[1180,820]])await run(w,h,null);
