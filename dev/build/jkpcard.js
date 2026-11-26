@@ -1,4 +1,4 @@
-/* ================= jkpcard: PERSON-CARD ACTS = THẺ GỖ TREO (KIT §98.12; KIT-STAGE-R4; OD 26/11 ~19:00Z «khi mình bỏ vào là mình phải thay toàn bộ những cái cũ đi»;
+/* ================= jkpcard: PERSON-CARD ACTS = THẺ GỖ TREO (KIT §98.20; KIT-STAGE-R4; OD 26/11 ~19:00Z «khi mình bỏ vào là mình phải thay toàn bộ những cái cũ đi»;
    KK44 §2 rows: j6 renderStage #popw ← j15 popCard (stage pop-up person card, incl. the home servants of jhouse talkOpts serv) · j15 pcard acts of the Hậu cung tab
    person cards (rvCard / kidCard / empCard / thCard / manCard / staff cards)).
    ONE wiring for every person card (.pc) that shows act buttons: the act rows of the card (.pcb buttons, the kit opt/ka act cards) are no longer shown as rows;
@@ -38,7 +38,7 @@ function hang(pc,k=0){if(!pc.isConnected)return;try{if(pc.__kp){pc.__kp.destroy(
  pc.__kp=kitPick.open({host,anchor:A,side:"r",acts,dismiss:false,noLap:true,
   onPick:id=>{const b=btns[+id];if(!b||!b.isConnected||b.disabled)return;b.click()},
   onOff:a=>{try{const pb=host.querySelector(`.kpk .kfoc-b[data-id="${a.id}"]`);if(typeof kpPop==="function")kpPop(pb,`<div class="kpopt">${(a.why||"Chưa làm được").replace(/</g,"&lt;")}</div>`,{})}catch(x){}}})}
-/* KIT §98.13 ENTRY-LINE BUTTONS = THẺ GỖ (KK44 §2 row j6 #sc-t buttons / jplst .kmnote.kmslot «… vừa rời đi [Theo đến]», j21 goSee / follow lines):
+/* KIT §98.21 ENTRY-LINE BUTTONS = THẺ GỖ (KK44 §2 row j6 #sc-t buttons / jplst .kmnote.kmslot «… vừa rời đi [Theo đến]», j21 goSee / follow lines):
    j6 renderStage puts the buttons of the visit line (S.visit.msg) / place text after the title in #sc-t, which jplst hides (the line itself is the toast) — so those
    buttons were never on screen (found by KIT-STAGE-R4, Fold + iPad: «Theo đến» invisible). They now hang as plaques on the stage, top middle, away from the
    people (soft avoid) and the stage columns (kitPick hard obstacles); ✓ = a real click on that same button (data-follow / data-see paths unchanged). */
@@ -58,7 +58,7 @@ const obs=()=>{["popw","panel","stage"].forEach(id=>{const e=document.getElement
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",obs);else obs();
 window.kitPcard={scan,on,wire};
 const css=document.createElement("style");css.textContent=`
-/* the card's own act rows / tabs: kept as the click path, never shown while the plaques hang (KIT §98.12) */
+/* the card's own act rows / tabs: kept as the click path, never shown while the plaques hang (KIT §98.20) */
 .pc.kpc-pick .kpc-src{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;pointer-events:none!important}
 .pc.kpc-pick .kpc-host{position:relative;width:100%;margin:4px 0 6px;overflow:visible}
 `;document.head.appendChild(css);
