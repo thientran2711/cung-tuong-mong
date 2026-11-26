@@ -112,3 +112,19 @@ Every mgBackWhy entry in every run = ph «result», buttons [«Quay lại»]. 0 
 - N2: a board showing ONLY a quick option + ✕/«Quay lại» (no «Sẵn sàng»): quick is removed (✕ counts as «another option»), then the back is filtered → null until the 6-min give-up, which then backs out (0/10) instead of taking the quick. Not seen in any run (every kg82 rules board has «Sẵn sàng»/«Bắt đầu»). Fix: count only non-back options in nq.
 - N3: board moves are traced only as «BOARD n moves» and not counted in areaTaps / taps; fine for audit (real taps), but tap totals undercount boards.
 - Limits as the fixer states: Đàn timed on Fold ~0, «Dâng hương» has no peek.
+
+# REVIEW robot-realtap 5c62c2b9..ec026335 (kscn-veil family part 3) — BIG REVIEWER #9 for F #20, 26/11 ~11:30Z — ONE verdict for 08a4ff8b..ec026335
+PRIORITY #1 CHECK: OD robot-realtap reviews | main none | review/robot-realtap ec026335 (on 5c62c2b9 PASS above) + review/temper-g4 bb86d9ac (reused .kdv-next tap) | claims BIG #9.
+## VERDICT: PASS robot-realtap ec026335 (test files only; = 5c62c2b9 PASS above + ec026335)
+- Diff: SCAN takes any visible .kscn (visibility ≠ hidden, ≥ 20 % of the screen, on top at its OWN centre) as the layer when the screen middle is not on a scene; new sc.kdvNext = point 40 px above the visible .kdv-next in the layer; an «area» choice taps it first through bareTap (guarded, real tap), else the old area taps. robot-lint OK, 0 `.click()`. Matches Foreman D's local patch bb86d9ac (same .kdv-next cue).
+- Synthetic SCAN probe (iPad 1180x820, extract of SCAN on setContent pages): scene 540x820 at the right, off the screen middle, page buttons under it → NEW .kscn + kdv point inside the card / OLD 5c62c2b9 «page» with «Túi đồ | Sang buổi» (= the 25-min DEAD case). Scene < 20 % → page (both). visibility:hidden scene → page (both). A dialog on top at the scene's centre → not taken by the scene (both). So the new rule only adds the off-middle case.
+- #kroul «Bỏ qua» confirmed: jk2b kitRoulette .krskip → end() (same end as the spin; the roll is dealt) = animation skip before the life, not a result skip; #kroul is not a #kg layer, so the board quick filter never sees it. Keep as is.
+- Runs (RT_NOSHOT=1, NEW ec026335 vs CONTROL 5c62c2b9, same seed):
+| run | LIVE | NEW | CONTROL |
+|---|---|---|---|
+| iPad cautious s21 slice 26 | 6b5d3d05 | buổi 26, 136 taps, 0 dead / 0 stuck / 0 bugs | buổi 26, 0 dead |
+| iPad cautious s21 slice 26 | 3af7896e | buổi 26, 0 dead / 0 stuck / 0 bugs | buổi 26, 0 dead |
+| iPad cautious s15 slice 6 | 3af7896e | buổi 6, 0 dead | through «Dưỡng Tú viện · Đông sở», 0 dead, Ban hoa b1 (game) |
+| Fold cautious s15 slice 17 | 3af7896e | through «Dưỡng Tú viện» → «Đông sở» (map, night scene), 0 dead / 0 stuck / 0 bugs, Ban hoa b1 (game) | — |
+- Gap (honest): on these LIVEs no run reproduced the QC 25-min «cover div.kscn-veil» DEAD case (controls 0 dead too; s21 on this harness does not pass through Đông sở on iPad), so the fix is proven by the synthetic probe + the fixer's lives, not by a replayed QC life. No regression seen.
+- N1–N3 from the 5c62c2b9 review sent to fixer #9 directly (still open, non-blocking). New N4: the off-middle rule checks visibility:hidden but not opacity 0 / pointer-events; a fading-out scene still hit at its centre would be taken as the layer for a moment — rare, small, self-heals when it is removed.
