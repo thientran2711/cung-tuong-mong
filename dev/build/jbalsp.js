@@ -21,8 +21,8 @@ BAL.stp={on:1,
  floor:{duc:80,danh:80,sung:75,th:60,hh:60,rel:80,oan:80},
  /* PACE-SPEED (owner OD 26/11 ~19:10Z ruling (A): stats rise moderately and land JUST AT the next rank's bar, no overshoot far above it):
     bar[k] = a stat tied to the rank bars: f = the RANKS field (s Sủng / d Danh), m = margin above the NEXT rank's bar = this stat's ceiling at that
-    rank (it replaces ceil[] and floor[] for this stat: a rise slows toward it); top = the ceiling at the top rank (Hoàng hậu); */
-    x = how far above that ceiling a rise may still creep at the slow share dm.min before it stops (0 = stops at the ceiling).
+    rank (it replaces ceil[] and floor[] for this stat: a rise slows toward it); top = the ceiling at the top rank (Hoàng hậu);
+    x = how far above that ceiling a rise may still creep at the slow share dm.min before it stops (0 = stops at the ceiling). */
  bar:{sung:{f:"s",m:6,x:0,top:100},danh:{f:"d",m:6,x:0,top:100}}};
 /* sếp's two options (report dev/handover/reports/stat-pace.md «Cách A / Cách B»): ONE switch BAL.stpPick. A = recommended (default);
    B = stricter: lower rank ceilings, steeper slowdown, at most 2 big events a day. */
@@ -36,3 +36,6 @@ BAL.stpPick="A";
    (jevc EVCW) and comes on a later day with room, at most wait days, then it is let go. */
 BAL.evc={on:1,cap:3,q:{fest:2,harm:1,visit:1,ky:1,opt:1},pri:["fest","harm","visit","ky","opt"],res:{harm:1},wait:3};/* res: slots kept free each day for a kind that can never wait (a plot's warning / aftermath) until that kind has come that day */
 (function(){const o=BAL.stpPre[BAL.stpPick]||BAL.stpPre.A;BAL.stp.ceil=o.ceil.slice();BAL.stp.dm.pow=o.pow;BAL.evc.cap=o.cap})();
+/* PACE-SPEED safe trim (jtrim; MAIN 162 ruling 26/11 ~20:12Z under owner OD 26/11 ~19:10Z (A)): a zero-choice card whose every sentence is already
+   in her log is not painted. kind = card kinds it may skip ("" = a plain card with no kind); look = newest log lines searched; min = shortest sentence compared. */
+BAL.trim={on:1,kind:["","notice","news","info"],look:40,min:12};
