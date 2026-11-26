@@ -26,7 +26,7 @@ Object.assign(BAL,{tw:{
  cold:{suc:-10},         /* petition to leave lãnh cung (j14 'Tìm chứng cứ minh oan'; NPC release attempt pays it too) */
  accBestow:40,            /* Tố giác thành: chance of a reward from the throne (was 100 for NPCs, 40 for her) */
  /* gains (one source, read by both sides and by the option text) */
- g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,illCatch:15,illDanh:6,confM:[2,3,1],preg:[6,5,-5],ann:[6,5,6],
+ g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,illCatch:15,illDanh:6,confM:[2,3,1]/* = BAL.punW.heavy.m (one array) */,preg:[6,5,-5],ann:[6,5,6],
     provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10,admon:5,admonCd:6,
     accFail:[8,25,20],vu:[10,5,4],ky:[3,1],conf:[20,15],reward:[20,10,3],
     /* pillow slander at night (her night2 option and an NPC's night, two-way row 24, AG2): odds = o[0] + Ân tình / o[1] + night score × o[2]
@@ -115,3 +115,12 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   if(p.kind==="th"&&a.n==="Thỉnh an, chép kinh"){a.c=twCost("thTH");a.o=od(g.thTHo);a.w={th:g.thTH[0],danh:g.thTH[1],duc:g.thTH[2]};a.l={th:g.thTH[3]}}
   if(p.kind==="hh"&&a.n==="Thỉnh an"){a.c=twCost("thHH");a.o=od(g.thHHo);a.w={hh:g.thHH[0],danh:g.thHH[1],duc:g.thHH[2]};a.l={hh:g.thHH[3]}}}}
   if(p&&p.kind==="ksp")for(const a of A)if(a.n==="Đút lót lật thẻ"){a.c=twCost("ksp");a.go=()=>{S.tablet=G().ksp}}}catch(e){}return A}})();
+
+/* PUNISHMENT BY WEIGHT (owner OD 26/11 ~04:25Z, review/home-way: «tùy thuộc vào cái mức độ nặng nhẹ mà mình cho nó cấm túc»; law 2/3/4):
+   punish(p, why, sev) (j8), the same for her and every NPC (law 1). Each array = [Hoàng thượng thường, nóng nảy, nhân từ].
+   lite  (sev 0, NHẸ: a place / etiquette slip, e.g. staying past closing): no cấm túc; cut = months of khất bổng (Nội vụ phủ holds back
+         3 phần 10 of the next stipend, j20 cutPay); 0 = a warning only.
+   mid   (sev 1, VỪA: the common fault): m = months of cấm túc; S.confined counts down at each new month (j3 monthTick), so 1 = the rest of
+         the current month (a few days to 4 weeks).
+   heavy (sev 2, NẶNG: grave crimes): demo = chance (in 100) of losing one rank instead; else m months of cấm túc (= BAL.tw.g.confM). */
+try{BAL.punW={lite:{cut:[1,1,0]},mid:{m:[1,2,1]},heavy:{m:BAL.tw.g.confM,demo:[50,100,25]}}}catch(e){console.error("punW",e)}
